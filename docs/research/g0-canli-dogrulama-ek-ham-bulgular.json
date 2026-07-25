@@ -1,0 +1,624 @@
+{
+ "trala": {
+  "key": "trala",
+  "summary": "Trala (trala.com, Learnfield GmbH bünyesinde), resmi App Store listesine göre hâlâ SADECE keman öğretiyor — çello veya başka bir çalgı eklendiğine dair hiçbir kanıt yok (resmi site, App Store açıklaması, Google Play uygulama adı \"Violin by Trala\" ve Learnfield/Skoove'un satın alma duyurusu hepsi bunu doğruluyor). Fiyatlandırma konusunda resmi Apple App Store listesi (birincil kaynak, iki kez doğrudan çekildi) Premium Aylık $19.99 ve Premium Yıllık $119.99 gösteriyor; ancak çok sayıda ikincil/aggregator kaynak (educationalappstore.com, justuseapp.com) ısrarla $9.99/ay rakamı veriyor — bu çelişki çözülemedi ve flag'e yazıldı. Kamera tabanlı postür/yay (bow) analizi özelliğine dair HİÇBİR kanıt bulunamadı: resmi site ve App Store açıklaması yalnızca mikrofon tabanlı ses (\"signal processing\") ile pitch/ritim geri bildiriminden bahsediyor; kullanıcı yorumları uygulamanın nota sayfalarında yay bilgisi (bowing) bile içermediğini ve postür için kullanıcının \"tam boy ayna karşısında kendi hakemi olması\" gerektiğini belirtiyor — yani gerçek zamanlı AI kamera analizi yok. Google Play sayfası teknik nedenlerle (fetch aracı içeriği kırptı) doğrudan doğrulanamadı, bu yüzden Android tarafındaki fiyat/açıklama sadece başlık ve dolaylı kanıtlarla teyit edildi. \"Güncel kullanıcı yorumları\" isteği kısmen karşılandı — App Store'dan çekilen yorumların çoğu 2018-2023 tarihli çıktı, 2026 tarihli taze yorum örneği bulunamadı.",
+  "findings": [
+   {
+    "fact": "Trala resmi App Store listesinde (Apple, birincil kaynak) In-App Purchases bölümü: 'Premium Monthly Subscription $19.99' ve 'Premium Yearly Subscription $119.99' olarak listeleniyor — sayfa doğrudan iki ayrı fetch ile aynı sonucu verdi.",
+    "source_url": "https://apps.apple.com/us/app/trala-learn-violin/id1143205265",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Çok sayıda ikincil kaynak (Educational App Store incelemesi, JustUseApp toplayıcı sitesi) Trala'nın aylık aboneliğini $9.99, yıllığını $119.99 olarak gösteriyor — Apple'ın resmi listesindeki $19.99 aylık rakamla ÇELİŞİYOR; hangisi güncel/hangisi eski fiyat net değil.",
+    "source_url": "https://www.educationalappstore.com/app/trala-learn-violin",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "App Store'da bir kullanıcı yorumuna geliştirici yanıtı '7 day free trial' (7 günlük ücretsiz deneme) olduğunu belirtiyor.",
+    "source_url": "https://apps.apple.com/us/app/trala-learn-violin/id1143205265?see-all=reviews&platform=iphone",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Trala'nın resmi web sitesi kendini 'The violin learning app' / '#1 violin learning app' olarak tanımlıyor; sayfa metninde çello, viyola veya başka çalgılara dair hiçbir referans yok.",
+    "source_url": "https://www.trala.com/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Google Play'deki uygulama adı ve URL'si 'Violin by Trala – Learn violin' (paket adı com.trala.learn.violin) — uygulama yalnızca keman odaklı görünüyor; ancak sayfanın tam açıklama metni fetch aracı tarafından kırpıldığı için doğrudan doğrulanamadı.",
+    "source_url": "https://play.google.com/store/apps/details?id=com.trala.learn.violin&hl=en_US",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Learnfield GmbH'nin (Skoove'un arkasındaki şirket) Trala'yı satın aldığını duyuran resmi/yarı-resmi blog yazısı, Trala'yı 'dünyanın önde gelen keman öğrenme uygulamalarından biri' olarak tanımlıyor; çello veya başka çalgıya genişleme yok.",
+    "source_url": "https://www.skoove.com/blog/trala-joins-the-band/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Bir düşük kaliteli web arama özeti Trala'nın 'keman, viyola, çello, ses, piyano, gitar, klarnet' derslerini kapsayan bir 'online müzik okulu' olduğunu iddia etti — bu iddia hiçbir birincil kaynakta (resmi site, App Store, Google Play başlığı, Learnfield duyurusu) doğrulanamadı ve doğrudan bunlarla çelişiyor; muhtemelen başka bir hizmetle karıştırılmış/uydurma bir sonuç.",
+    "source_url": "https://www.trala.com/",
+    "confidence": "weak"
+   },
+   {
+    "fact": "Trala uygulama açıklaması ve resmi site, teknolojiyi yalnızca ses/mikrofon tabanlı 'signal processing' (pitch ve ritim analizi) olarak tanımlıyor; App Store açıklamasında veya resmi sitede kamera, postür (posture) veya yay (bow) tespiti/analizi kelimesi hiç geçmiyor.",
+    "source_url": "https://apps.apple.com/us/app/trala-learn-violin/id1143205265",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Kullanıcı yorumları uygulamanın nota sayfalarında yay bilgisi (bowing) içermediğinden şikayet ediyor ('the sheet music for pieces does not have Bowing') ve postür öğrenimi için kullanıcının 'tam boy bir ayna karşısında kendi postür hakemi olması gerektiğini' belirtiyor — bu, kamera tabanlı otomatik postür/yay analizi olmadığına dair dolaylı ama tutarlı kanıt.",
+    "source_url": "https://apps.apple.com/us/app/trala-learn-violin/id1143205265?see-all=reviews&platform=iphone",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Trala'nın Uygulama Mağazası sürüm notları (v7.5.5, 30 Haziran 2025) sadece 'Config updates' yazıyor; kamera/postür/yay analizi gibi yeni bir özelliğe dair hiçbir duyuru yok.",
+    "source_url": "https://apps.apple.com/us/app/trala-learn-violin/id1143205265",
+    "confidence": "verified-primary"
+   }
+  ],
+  "flags": [
+   "Fiyat çelişkisi ÇÖZÜLEMEDİ: Apple App Store resmi listesi $19.99/ay + $119.99/yıl gösterirken, birden fazla ikincil kaynak (educationalappstore.com, justuseapp.com) ısrarla $9.99/ay + $119.99/yıl rakamı veriyor. Hangisinin bölgesel/eski/güncel fiyat olduğu doğrulanamadı.",
+   "trala.com/pricing, trala.com/features ve trala.com/faq sayfaları 404 döndü — resmi sitede ayrı bir fiyatlandırma veya özellik sayfası bulunamadı; bu yüzden fiyat/özellik bilgisi sadece ana sayfa + App/Play Store listelerinden derlendi.",
+   "Google Play Store sayfası (play.google.com/store/apps/details?id=com.trala.learn.violin) fetch aracı tarafından kırpıldığı için tam açıklama metni, IAP fiyat aralığı ve kurulum sayısı doğrudan doğrulanamadı — sadece başlık/URL üzerinden dolaylı teyit yapıldı.",
+   "ScienceDirect'teki 'Using the Trala application for learning to play the violin' başlıklı akademik makale (S0001691825002434) 403 hatası verdi, erişilemedi. Bir web araması özetinde bu makaleden 'kamera veya mikrofon ile performans değerlendirmesi' ifadesi geçti ama bunun uygulamanın kendi özelliği mi yoksa araştırmacıların çalışma metodolojisi mi olduğu doğrulanamadı — kamera/postür sorusu için tam kapanmamış bir uç.",
+   "'Güncel kullanıcı yorumları' talebi tam karşılanamadı: App Store yorumlarını 'en yeni' sıralamayla çekmeye çalışsam da erişilen örnekler çoğunlukla 2018-2023 tarihli çıktı; 2026 tarihli taze bir yorum örneğine ulaşılamadı (fetch aracının önbellek/özetleme davranışı sınırlayıcı olmuş olabilir).",
+   "Çello/viyola/diğer çalgı iddiası içeren tek kaynak (bir WebSearch özet cümlesi) düşük güvenilirlikte ve tüm birincil kaynaklarla çelişiyor; muhtemelen hatalı/uydurma — bulgular listesinde 'weak' güvenle işaretlendi, ana sonuca dahil edilmedi."
+  ]
+ },
+ "yousician": {
+  "key": "yousician",
+  "summary": "Yousician'ın resmi fiyatlandırma sayfası (account.yousician.com/plans, 2026-07-26 canlı görüntülendi) 3 katman gösteriyor: Premium (1 hesap, 1 enstrüman, 900+ ders), Premium+ (1 hesap, 5 enstrüman + popüler şarkılar, 10.000+ ders/egzersiz) ve Premium+ Family (4 hesap). Tarayıcı Türkiye IP'sinden eriştiği için fiyatlar TRY cinsinden geldi (Premium yıllık TRY 849,99/yıl≈70,83/ay; Premium+ yıllık TRY 1.299,99/yıl≈108,33/ay; Family TRY 1.969,99/yıl≈164,16/ay); ABD App Store IAP listesinden USD karşılıkları da alındı (One Instrument/Premium: 19,99$/ay – 119,99$/yıl; Premium Plus: 29,99$/ay – 159,99$ veya 179,99$/yıl – çelişkili, aşağıda flag'lendi). Resmi anasayfa (yousician.com) \"Instruments\" menüsünde sadece Guitar, Bass, Piano, Ukulele, Singing listeleniyor — **keman (violin) hiç desteklenmiyor**, dolayısıyla \"keman derinliği\" sıfır; Piano ayrı bir uygulama olan \"Piano by Yousician\" üzerinden sunuluyor. **Çello da desteklenmiyor** — sadece Bach'ın Cello Suite No.1 gibi parçalar gitar/bas/piyano için uyarlanmış halde şarkı kütüphanesinde var, çello enstrüman seçeneği olarak yok. Kamera tabanlı hiçbir özellik bulunamadı: Yousician'ın resmi SSS'si \"Yousician listens with your device's microphone while you play an instrument or sing\" diyor — teknoloji tamamen mikrofon/ses tabanlı, hiçbir yerde (resmi site, Wikipedia, App Store açıklaması) kamera/computer-vision/duruş-takibi özelliğinden bahsedilmiyor.",
+  "findings": [
+   {
+    "fact": "Resmi fiyatlandırma sayfasında (canlı, TR IP ile görüntülendi) Premium = 1 hesap/1 enstrüman/900+ ders, yıllık TRY 849,99 (≈TRY 70,83/ay)",
+    "source_url": "https://account.yousician.com/plans",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Aynı sayfada Premium+ = 1 hesap/5 enstrüman/10.000+ ders+popüler şarkılar, yıllık TRY 1.299,99 (≈TRY 108,33/ay)",
+    "source_url": "https://account.yousician.com/plans",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Aynı sayfada Premium+ Family = 4 hesap, yıllık TRY 1.969,99 (≈TRY 164,16/ay)",
+    "source_url": "https://account.yousician.com/plans",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "ABD App Store IAP listesi: 'One Instrument' Monthly $19.99 / Yearly $119.99; 'Premium Plus' Monthly $29.99 / 3 Months $59.99 / Yearly listesi hem $159.99 hem $179.99 olarak iki ayrı satırda görünüyor (çelişkili)",
+    "source_url": "https://apps.apple.com/us/app/yousician-learn-play-music/id959883039",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Resmi anasayfanın 'Instruments' menüsü sadece Guitar, Bass, Piano, Ukulele, Singing enstrümanlarını listeliyor — violin (keman) yok",
+    "source_url": "https://yousician.com/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Resmi hesap sayfasının SSS'si: 'Yousician listens with your device's microphone while you play an instrument or sing' — teknoloji mikrofon tabanlı, kamera tabanlı özellik yok",
+    "source_url": "https://account.yousician.com/plans",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Wikipedia: Yousician 'guitar, piano, bass, ukulele, and voice' destekliyor; violin veya cello desteğinden hiç bahsedilmiyor; geri bildirim mikrofon tabanlı",
+    "source_url": "https://en.wikipedia.org/wiki/Yousician",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Piyano desteği ana Yousician uygulaması içinde değil, ayrı 'Piano by Yousician' uygulaması üzerinden sunuluyor (1.500+ görev/egzersiz, sight-reading, klasik/pop şarkılar)",
+    "source_url": "https://apps.apple.com/us/app/piano-by-yousician/id1469033443",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Yousician destek makalesi Premium+'ın 'unlimited access to all 5 instruments' sağladığını doğruluyor (toplam enstrüman sayısı = 5)",
+    "source_url": "https://support.yousician.com/hc/en-us/articles/115005189525-Premium-membership-options-in-Yousician",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Bağımsız blog (guitarchalk.com, 2026-04-21 güncellemeli) farklı USD rakamları veriyor: Premium $14.99/ay-$89.99/yıl, Premium+ $29.99/ay-$139.99/yıl, Premium+ Family $44.99/ay-$209.99/yıl — resmi App Store rakamlarıyla tam örtüşmüyor, muhtemelen bölge/zaman farkı veya promosyon fiyatı",
+    "source_url": "https://www.guitarchalk.com/yousician-cost/",
+    "confidence": "weak"
+   },
+   {
+    "fact": "Yousician şarkı kütüphanesinde Bach'ın Cello Suite No. 1 parçası var ama gitar, bas ve piyano için uyarlanmış olarak — çello enstrüman seçeneği olarak sunulmuyor",
+    "source_url": "https://yousician.com/songs/guitar/cello-suite-no-1-part-1-in-c-full/5c3f0736e8dec36be7a1f379",
+    "confidence": "secondary"
+   }
+  ],
+  "flags": [
+   "Apple App Store IAP listesinde Premium Plus yıllık fiyatı için iki farklı rakam görünüyor ($159.99 ve $179.99) — WebFetch'in tek seferlik özetinden geldi, muhtemelen eski/yeni fiyat veya farklı app-flavor karışımı; kesinleştirmek için gerçek bir ABD hesabıyla uygulama içinden canlı doğrulama gerekir.",
+   "Resmi fiyat sayfası (account.yousician.com/plans) tarayıcının Türkiye IP'sine göre otomatik olarak TRY fiyatları gösterdi; 'Monthly' sekmesine tıklamayı denerken sayfa beklenmedik şekilde login ekranına yönlendirdi (giriş yapılmadı, kimlik bilgisi girilmedi) — bu yüzden TRY için aylık (yıllık taahhütsüz) fiyat teyit edilemedi, sadece yıllık-faturalı aylık eşdeğer rakamlar alındı.",
+   "'Yousician'da keman öğrenilebilir' şeklindeki bazı ikincil kaynak/AI-özet iddiaları (bir WebSearch özetinde çıktı) resmi kaynaklarla (yousician.com Instruments menüsü, Wikipedia) doğrudan çelişiyor; bu iddia güvenilmez kabul edilip reddedildi — Yousician'da violin/keman desteği YOK.",
+   "Google Play Store sayfası bot-koruması nedeniyle hem WebFetch hem tarayıcı üzerinden tam içerikle çekilemedi; Android tarafı fiyat/enstrüman listesi ayrıca doğrulanmadı (App Store ve resmi web sitesiyle tutarlı olması bekleniyor ama teyit edilmedi).",
+   "Kamera tabanlı özellik olmadığı sonucu 'negatif kanıt' (hiçbir resmi kaynakta bahsi geçmiyor) temelinde çıkarıldı; Yousician'ın gizli/duyurulmamış bir beta kamera özelliği olma ihtimali teorik olarak dışlanamaz, ancak hiçbir kanıt bulunamadı."
+  ]
+ },
+ "simply": {
+  "key": "simply",
+  "findings": [
+   {
+    "fact": "The current Simply/JoyTunes app family (as of 2026-07-26) consists of: Simply Piano, Simply Guitar, Simply Sing, Simply Draw, Simply Piano XR (Vision Pro/Android XR variant), and Simply Tune (free tuner for guitar/bass/ukulele). JoyTunes rebranded to 'Simply' in July 2022; corporate entity is 'Simply Ltd'.",
+    "source_url": "https://www.hellosimply.com/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Confirms same current app list (Simply Piano, Simply Guitar, Simply Sing, Simply Draw, Simply Tune) plus notes Simply Piano XR launched Dec 2024 for Vision Pro and 2025 for Android XR; no discontinued products mentioned.",
+    "source_url": "https://en.wikipedia.org/wiki/Simply_(software_company)",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Official teacher-facing apps page for the company lists only piano-related apps (Simply Piano, Piano Maestro, Piano Dust Buster) with no mention of violin, cello or any string instrument beyond guitar/bass/ukulele.",
+    "source_url": "https://teachers.hellosimply.com/apps",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "None of JoyTunes/Simply's own apps teach or support violin or cello. The only string-instrument-adjacent product is 'Simply Tune', a free tuner limited to guitar, bass, and ukulele — a tuner utility, not a learning app.",
+    "source_url": "https://www.hellosimply.com/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Simply Guitar (developer of record: 'Simply Ltd', i.e. JoyTunes) is a full guitar-learning app with real-time audio feedback, video lessons, chord/strumming tutorials and a built-in tuner — confirming it is guitar-only, not a string-family (violin/cello) app.",
+    "source_url": "https://apps.apple.com/us/app/simply-guitar-learn-guitar/id1476695335",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Live Simply Piano App Store listing (fetched 2026-07-26) shows current US in-app purchase price points: Individual Plan $24.95 and $119.99; Family Plan $34.95 and $179.99; plus promotional tiers (3-month $74.99, 12-month-with-trial $119.99/$149.99, 20%-off $95.99, 'Full Access' $19.99).",
+    "source_url": "https://apps.apple.com/us/app/simply-piano-learn-piano-fast/id1019442026",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Simply Piano's official Help Center confirms the plan structure: Individual = 1 premium profile, access to 1 app; Duo = 2 premium profiles, access to 1 app (Simply Piano only); Family = all 5 profiles premium, access to ALL Simply apps (Piano, Guitar, Sing, Draw). No dollar figures are published on this page — users are told prices vary by country/platform/promotion.",
+    "source_url": "https://piano-help.hellosimply.com/en/articles/12343996-choose-an-individual-or-family-plan",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Simply Guitar's own App Store IAP list (fetched 2026-07-26) shows: Individual Plan $19.99; Full Access $19.99/$29.99/$119.99/$179.99; Simply Guitar Premium $119.99/$149.99/$199.99 — same multi-tier (monthly/quarterly/annual/promo) pattern as Simply Piano.",
+    "source_url": "https://apps.apple.com/us/app/simply-guitar-learn-guitar/id1476695335",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Derived ratio (calculated from the two figures above, not stated directly by JoyTunes): Family vs Individual price ratio on the Simply Piano US App Store listing is ~1.40x on the monthly-cycle pair ($34.95 / $24.95) and ~1.50x on the annual-cycle pair ($179.99 / $119.99) — for going from 1 profile/1 app to 5 profiles/all 4 learning apps.",
+    "source_url": "https://apps.apple.com/us/app/simply-piano-learn-piano-fast/id1019442026",
+    "confidence": "weak"
+   },
+   {
+    "fact": "IMPORTANT NAME COLLISION: an app called 'Simply Tuner - Violin, Cello' exists on the App Store, but its developer is 'Shenzhen Mango Future Technology Co., Ltd.' — an unrelated Chinese publisher, NOT JoyTunes/Simply Ltd. It is free and is not part of the JoyTunes family despite the similar 'Simply' branding.",
+    "source_url": "https://apps.apple.com/us/app/simply-tuner-violin-cello/id1300058854",
+    "confidence": "verified-primary"
+   }
+  ],
+  "flags": [
+   "Kesin/tek bir kanonik fiyat rakamı YOK: JoyTunes/Simply kendi Help Center'ında fiyatın ülke, platform (App Store/Google Play/web) ve o anki kampanyaya göre değiştiğini açıkça belirtiyor ('sometimes special offers online instead of in-app'). Bu yüzden App Store listesi aynı anda birden fazla fiyat noktası gösteriyor (aylık/3-aylık/yıllık/indirimli varyantlar); yukarıdaki oran hesaplaması bunlardan en açık aylık-aylık ve yıllık-yıllık çiftleri kullanılarak TARAFIMDAN türetildi, JoyTunes'un yayınladığı bir oran değil.",
+   "İkincil blog kaynakları (thepricer.org, alibaba product-insights, groupon) farklı bir fiyat seti veriyor (ör. Individual $17.90-24.95/ay, Family $23.90-34.95/ay) — web-checkout fiyatı ile iOS in-app-purchase fiyatı muhtemelen farklı olduğu için tutarsızlık var; hangi rakamın 'güncel/nihai' olduğu tek bir birincil sayfadan doğrulanamadı.",
+   "Google Play (Android) tarafında ayrı bir fiyat listesi doğrulanamadı — Play Store sayfası WebFetch ile fiyat içeriğini render etmedi; yalnızca iOS App Store fiyatları doğrulandı.",
+   "'Simply Violin' veya 'Simply Cello' diye JoyTunes ürünü YOK. 'Simply Tuner - Violin, Cello' adlı uygulama App Store'da var ama geliştiricisi tamamen farklı bir şirket (Shenzhen Mango Future Technology Co., Ltd.) — JoyTunes/Simply ailesiyle KARIŞTIRILMAMALI, sadece isim benzerliği var.",
+   "Simply Sing ve Simply Draw için ayrı fiyat doğrulaması yapılmadı (soru kapsamında değildi); yalnızca Simply Piano ve Simply Guitar için App Store fiyat listesi çekildi."
+  ],
+  "summary": "JoyTunes (2022'den beri marka adı \"Simply\") ailesinin güncel uygulama listesi: Simply Piano, Simply Guitar, Simply Sing, Simply Draw, Simply Piano XR (Vision Pro/Android XR) ve ücretsiz Simply Tune (sadece gitar/bas/ukulele akort cihazı). Hiçbir Simply/JoyTunes uygulaması keman veya çello desteklemiyor — yaylı çalgı tarafında şirketin sunduğu tek şey Simply Tune akort aracı ve o da yalnız gitar ailesi enstrümanlarını kapsıyor. Dikkat: \"Simply Tuner - Violin, Cello\" adlı bambaşka bir uygulama App Store'da mevcut ama bunun geliştiricisi Shenzhen Mango Future Technology Co., Ltd. — JoyTunes ile hiçbir ilgisi yok, sadece isim benzerliği taşıyor. Fiyat tarafında, bugün (2026-07-26) canlı çekilen Simply Piano App Store (ABD) listesi Individual Plan için $24.95/ay ve $119.99/yıl, Family Plan için $34.95/ay ve $179.99/yıl gösteriyor (Family = 5 profil + TÜM Simply uygulamalarına erişim, Individual = 1 profil + tek uygulama — bu yapı resmi Help Center'da da doğrulandı). Buradan hesaplanan bundle/tekli oranı yaklaşık 1.40x (aylık) ve 1.50x (yıllık) — yani aile paketi tek kullanıcı fiyatının ~%40-50 üzerinde ama karşılığında 5 profil + 4 uygulamaya tam erişim veriyor. Ancak JoyTunes'un kendisi fiyatın ülke/platform/kampanyaya göre değiştiğini belirttiği için ve ikincil kaynaklarda farklı rakamlar (web-checkout tarifesi) dolaştığı için bu tek bir \"resmi nihai fiyat\" olarak değil, bugünkü ABD App Store anlık görüntüsü olarak okunmalı."
+ },
+ "camera-sweep": {
+  "key": "camera-sweep",
+  "summary": "2026-07-26 itibarıyla kamera tabanlı postür/yay tutuşu (bowing) analizi yapan, halka açık/mağazada satışta olan bir keman veya çello pratik uygulaması BULUNAMADI. En yakın aday \"Cello Evaluator\" (Purdue Üniversitesi AI4Musicians/AIM grubu, NSF destekli) — MediaPipe+YOLOv11 ile telefon kamerasından gerçek zamanlı çello postürü değerlendiriyor, ama bu bir ARAŞTIRMA PROTOTİPİ; hiçbir app store'da yok, Şubat 2026'da kullanıcı çalışması planlanıyor, ticari lansman tarihi belirtilmemiş. Piyasadaki tek kamera-tabanlı \"teknik geri bildirim\" ürünü ROLI'nin AI Music Coach'u (Airwave kızılötesi el-takip donanımı) — ama bu PİYANO için, yaylı çalgı yay tekniğiyle ilgisi yok, kendi özel donanımını (Airwave) gerektiriyor ve 2026'da hâlâ beta aşamasında. Tonara (2023'te kapandı), SmartMusic/MakeMusic Cloud (2022'de yeniden markalandı, hâlâ aktif) ve Modacity (Temmuz 2026 Strad incelemesine göre hâlâ aktif) — üçü de resmî kaynaklara göre SES/mikrofon tabanlı (perde/ritim algılama, akustik score-following) çalışıyor, kamera/postür özelliği yok. Yousician ve Trala'nın resmî siteleri de kamera veya postür özelliğinden hiç bahsetmiyor; bir ikincil blog kaynağının (technicalustad.com) Yousician için iddia ettiği \"kamera tabanlı postür kontrolü\" resmî Yousician sitesinde doğrulanamadı — bu iddia şüpheli/yanlış olabilir. Akademik literatürde keman yay-hareketi tanıma üzerine birkaç çalışma var (derinlik kamerası+IMU, VioPose 2024, bow pressure/position 2025) ama bunların hiçbiri tüketici ürününe dönüşmemiş.",
+  "findings": [
+   {
+    "fact": "Cello Evaluator: Purdue Üniversitesi'nin AI4Musicians (AIM) grubu tarafından geliştirilen, telefonun kamerasıyla (on-device, ~50ms gecikme) çellistin postürünü, el/yay açısını gerçek zamanlı değerlendiren Android uygulaması; Google MediaPipe (poz tespiti) + YOLOv11 (yay/tel tespiti) + özel derin sinir ağları kullanıyor. Bu bir ARAŞTIRMA PROTOTİPİ — hiçbir app store'da yayında değil; Şubat 2026'da uzun-vadeli kullanıcı çalışması planlanıyor.",
+    "source_url": "https://arxiv.org/html/2604.17530v1",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "AI4Musicians (AIM) organizasyonunun resmî sitesi de Cello Evaluator projesinin 2025 baharında başlayan, NSF destekli aktif bir araştırma girişimi olduğunu doğruluyor; herhangi bir indirme linki veya ticari lansman tarihi yok.",
+    "source_url": "https://www.ai4musicians.org/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "ROLI'nin 'AI Music Coach' sistemi, Airwave adlı kızılötesi kamera donanımıyla her elin 27 eklemini 90fps'te takip ederek PİYANO çalanların parmak pozisyonu/postürünü değerlendiriyor; Şubat 2026'da kapalı beta, Mart sonunda halka açık beta başlıyor; sadece ROLI Piano/Piano M + Airwave donanımı sahipleri için, betadan sonra ücretli katmana geçecek. Yaylı çalgı/yay tekniğiyle ilgisi yok.",
+    "source_url": "https://roli.com/us/campaign/ai-music-coach",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Yousician'ın resmî sitesi hiçbir yerde kamera, postür analizi veya bilgisayarlı görü özelliğinden bahsetmiyor; teknoloji tanımı yalnızca 'çalışınızı dinleyip anlık doğruluk/tempo geri bildirimi veren' ses tabanlı bir sistem olarak geçiyor ve ek donanım (kamera/mikrofon) gerekmediği vurgulanıyor — bu da cihazın mikrofonuna dayandığını gösteriyor.",
+    "source_url": "https://www.yousician.com",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Bazı ikincil bloglar (ör. technicalustad.com) Yousician'ın 'kamera tabanlı postür kontrolü' sunduğunu iddia ediyor, ancak bu iddia Yousician'ın resmî sitesinde doğrulanamadı — çelişkili/şüpheli bir iddia.",
+    "source_url": "https://technicalustad.com/violin-learning-apps/",
+    "confidence": "weak"
+   },
+   {
+    "fact": "Trala (keman öğrenme uygulaması) resmî sitesi 'gerçek zamanlı geri bildirim + dahili akort cihazı' diyor ama kamera, video analizi veya postür değerlendirmesinden hiç bahsetmiyor; mekanizma büyük olasılıkla ses/perde tabanlı.",
+    "source_url": "https://www.trala.com",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Modacity (pratik/metronom/akort/drone uygulaması) hakkında The Strad'ın Temmuz 2026 tarihli ürün incelemesi, uygulamanın metronom, akort cihazı, drone ve pratik oturumu planlama araçlarından oluştuğunu belirtiyor; kamera tabanlı postür/yay analizi veya bilgisayarlı görüden hiç söz edilmiyor.",
+    "source_url": "https://www.thestrad.com/for-subscribers/products-july-2026-modacity-practice-app/21383.article",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "SmartMusic, 2022'de MakeMusic Cloud olarak yeniden markalandı (masaüstü sürümü 2020'de zaten kapatılmıştı); resmî sitede uygulamanın temel özellikleri Practice (kayıtlı eşliklerle çalma + değerlendirme), Music Catalog, Compose (nota yazılımı) ve Sight Reading Studio olarak listeleniyor — hiçbirinde kamera veya bilgisayarlı görü tabanlı postür/teknik analizinden bahsedilmiyor; tarihsel olarak ses/perde algılamaya dayanan bir platform.",
+    "source_url": "https://www.makemusic.com/smartmusic/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Tonara (İsrail merkezli, 2008 kuruluş) — piyano/keman/çello için akustik polifonik score-following ve otomatik sayfa çevirme yapan, SES tabanlı bir öğretmen-öğrenci pratik/takip uygulamasıydı; kamera tabanlı bir özelliği hiç olmadı ve 8 Aralık 2023'te tamamen kapandı — 2026'da mevcut değil.",
+    "source_url": "https://en.wikipedia.org/wiki/Tonara_(company)",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Akademik alanda keman yayı hareketinin bilgisayarlı görü/derinlik kamerası + IMU ile tanınması üzerine birden fazla çalışma var (2020 tarihli 'Deep Learning-Based Violin Bowing Action Recognition', 2024 'VioPose' 4D poz tahmini, 2025 'bow pressure/position measurement' çalışması) — ancak bunların hiçbiri tüketiciye yönelik yayınlanmış bir uygulamaya dönüşmemiş; tümü araştırma/prototip aşamasında.",
+    "source_url": "https://arxiv.org/html/2411.13607v1",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "App Store'da 'violin/cello posture camera' aramasıyla bulunan sonuçların tamamı akort cihazı (tuner, mikrofon tabanlı perde tespiti) veya fiziksel modelleme enstrüman simülatörleri (SWAM Cello/Violin, Cello Simulator) — hiçbiri postür/kamera özelliği reklamı yapmıyor.",
+    "source_url": "https://apps.apple.com/us/app/cello-tuner/id6759851644",
+    "confidence": "secondary"
+   }
+  ],
+  "flags": [
+   "Ana sonuç: 2026-07-26 itibarıyla kamera ile canlı postür/yay-tutuşu analizi yapan, HALKA AÇIK/MAĞAZADA-SATIŞTA bir keman veya çello uygulaması bulunamadı — konumlandırma iddiası için bu boşluk doğrulandı, ancak 'hiç yok' iddiası WebSearch aracının resmî olarak 'yalnızca ABD'de kullanılabilir' olduğu belirtilen kapsam sınırlamasıyla kayıtlı; Asya/Avrupa pazarlarına özgü, İngilizce-dışı veya küçük ölçekli/bölgesel uygulamalar arama sonuçlarında eksik kalmış olabilir.",
+   "Cello Evaluator (Purdue AIM) en güçlü karşı-örnek ama TİCARİ DEĞİL — bir araştırma prototipi, mağaza linki yok, Şubat 2026 kullanıcı çalışması planlı; bu netleşmeden 'piyasada hiç yok' cümlesi kurulurken bu prototipin varlığı mutlaka belirtilmeli, yoksa dürüstlük açısından eksik/yanıltıcı olur.",
+   "ROLI AI Music Coach piyasadaki TEK canlı kamera-tabanlı 'teknik geri bildirim' ürünü ama: (a) piyano için, yaylı çalgı değil; (b) özel donanım (Airwave) şart, telefon kamerası değil; (c) 2026'da hâlâ beta. Bu nedenle 'kamera + bowing/postür' segmentinde doğrudan rakip sayılmaz ama 'kamera + enstrüman tekniği' kategorisinde emsal olarak anılmalı.",
+   "Yousician'ın kamera-tabanlı postür kontrolü sunduğu iddiası yalnızca ikincil bir blogda (technicalustad.com) geçiyor ve resmî Yousician sitesinde doğrulanamadı; bu iddia muhtemelen yanlış/güncel değil — kesin 'yok' demeden önce uygulamanın kendisi (mağaza sayfası/ekran görüntüleri) incelenerek doğrulanması önerilir.",
+   "Trala için 'kamera yok' sonucu yalnızca pazarlama sayfasının sessiz kalmasına dayanıyor (resmî site kamera/postürden hiç bahsetmedi) — uygulama içi ekran görüntüsü veya app store açıklaması taranmadı, dolayısıyla kesinlik 'secondary' düzeyinde, 'verified-primary' değil.",
+   "Modacity için kaynak The Strad'ın Temmuz 2026 makalesiydi ancak makale abonelik duvarı arkasında kısmi görüntülendi ('sağlanan içerik sınırlı, tam makale ek özellikler içerebilir' notu WebFetch tarafından belirtildi) — Modacity'nin en güncel (2026) sürümünde kamera özelliği eklenmediğini %100 kesinlikle söylemek için resmî Modacity sitesi/app store sayfası da ayrıca taranmalı."
+  ]
+ },
+ "swiftf0": {
+  "key": "swiftf0",
+  "summary": "SwiftF0 (github.com/lars76/swift-f0), MIT lisanslı (Copyright (c) 2025 Lars Nieradzik) — LICENSE dosyası ham içerikten doğrulandı. README'ye göre 46.875–2093.75 Hz (G1–C7) frekans aralığını destekliyor, girişi dahili olarak 16 kHz'e (256 örneklik hop-size) yeniden örnekliyor; model 95.842 parametre (arXiv 2508.18440) ve GitHub'daki gerçek model.onnx dosyası 397.987 bayt (~389 KB) — iki bağımsız birincil kaynak tutarlı. Platform desteği yalnızca Python paketi (pip install swift-f0) + tarayıcı-içi WASM/ONNX.js demo (swift-f0.github.io); repo veya README'de native iOS/Android/CoreML/TFLite desteğine dair hiçbir kanıt yok. arXiv özeti CREPE'ye göre 10dB SNR'de %91.80 harmonic-mean (+12 puan üstün), temiz sesten sadece 2.3 puan düşüş, CPU'da CREPE'den ~42x hızlı iddialarını içeriyor; makale tek sürüm (v1, 25 Ağu 2025 UTC), gözden geçirilmemiş preprint. Repo aktivitesi: 174 yıldız, 22 fork, son commit 2025-09-02 (#2 issue'yu kapatan ONNX sadeleştirme), yaşam boyu toplam yalnızca 3 issue (2 açık, 1 kapalı), 0 PR, ve hiç GitHub \"Release\" nesnesi yok (versiyonlama sadece CHANGELOG.md + PyPI üzerinden yürütülüyor).",
+  "findings": [
+   {
+    "fact": "LICENSE dosyası tam olarak standart MIT License metni; telif hakkı satırı 'Copyright (c) 2025 Lars Nieradzik'.",
+    "source_url": "https://raw.githubusercontent.com/lars76/swift-f0/main/LICENSE",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "GitHub repo meta verisinde de lisans MIT olarak işaretli (spdx_id: MIT).",
+    "source_url": "https://api.github.com/repos/lars76/swift-f0",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Desteklenen frekans aralığı 46.875 Hz – 2093.75 Hz (G1 ile C7 arası); README'de açıkça belirtilmiş, SwiftF0 sınıfının varsayılan fmin/fmax parametreleri de bu değerler.",
+    "source_url": "https://raw.githubusercontent.com/lars76/swift-f0/main/README.md",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Giriş sesi dahili olarak 16 kHz'e yeniden örnekleniyor, STFT hop-size 256 örnek; çok kanallı ses ortalama alınarak mono'ya çevriliyor (resampling için librosa gerekiyor).",
+    "source_url": "https://raw.githubusercontent.com/lars76/swift-f0/main/README.md",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Model boyutu arXiv makalesinde 95.842 parametre olarak veriliyor; README bu sayıyı tekrarlamıyor ama repodaki gerçek swift_f0/model.onnx dosyası 397.987 bayt (~389 KB / ~0.38 MB) — iki kaynak birbiriyle tutarlı (float32 için beklenen boyuta yakın).",
+    "source_url": "https://arxiv.org/abs/2508.18440",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "model.onnx dosyasının gerçek boyutu GitHub git-tree API üzerinden 397987 bayt olarak doğrulandı.",
+    "source_url": "https://api.github.com/repos/lars76/swift-f0/git/trees/main?recursive=1",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Platform desteği: `pip install swift-f0` ile Python paketi + swift-f0.github.io adresinde tamamen istemci-taraflı (WebAssembly + ONNX.js) tarayıcı demosu. README veya repo dosya listesinde native iOS/Android SDK, CoreML veya TFLite export'una dair hiçbir referans yok.",
+    "source_url": "https://raw.githubusercontent.com/lars76/swift-f0/main/README.md",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "arXiv 2508.18440 özeti (birebir): SwiftF0, 10 dB SNR'de %91.80 harmonic-mean (HM) elde ediyor, CREPE gibi baseline'ları 12+ puan geçiyor, temiz sesten yalnızca 2.3 puan düşüyor; 95.842 parametre kullanıyor ve CPU'da CREPE'den ~42x hızlı çalışıyor. SpeechSynth adlı fonem-seviyeli TTS tabanlı sentetik konuşma veri seti ve 6 ölçütü birleştiren birleşik bir pitch-değerlendirme metriği + açık kaynak benchmark paketi tanıtılıyor.",
+    "source_url": "https://arxiv.org/abs/2508.18440",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Makale yalnızca v1 sürümünde mevcut; gönderim tarihi Pazartesi, 25 Ağustos 2025, 19:39:20 UTC (99 KB PDF); v2 yok — bu, hakemli değerlendirmeden geçmemiş (unreviewed) bir preprint olduğu anlamına gelir.",
+    "source_url": "https://arxiv.org/abs/2508.18440v1",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "README'deki performans iddiası: 'Real-time analysis (132 ms for 5 seconds of audio on CPU)' — yaklaşık 26 ms/saniye işleme süresi; ayrıca linkte verilen Pitch Detection Benchmark deposunda (aynı yazarın github.com/lars76/pitch-benchmark reposu) CREPE'yi hem hız hem doğrulukta geçtiği iddia ediliyor (bu ikinci repo bu görevde ayrıca doğrulanmadı).",
+    "source_url": "https://raw.githubusercontent.com/lars76/swift-f0/main/README.md",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Repo aktivite metrikleri (GitHub API): 174 yıldız, 22 fork, 6 subscriber, açık issue sayısı 2, oluşturulma 2025-07-08, son push 2025-09-02T19:30:29Z; hiç GitHub Release nesnesi yayınlanmamış (releases API boş dizi döndü).",
+    "source_url": "https://api.github.com/repos/lars76/swift-f0",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Son commit 2025-09-02T19:30:55Z tarihli 'Chore: remove redundant ONNX nodes to simplify model graph (Fixes #2)' mesajıyla; bundan önceki commit'ler 2025-08-29 (makaleyi README'ye ekleme) ve 2025-07-24/07-25 (v0.1.2: not segmentation, MIDI export, görselleştirme özellikleri).",
+    "source_url": "https://api.github.com/repos/lars76/swift-f0/commits?per_page=5",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Reponun tüm yaşamı boyunca toplam yalnızca 3 issue açılmış (2 açık: 'opset 18 uyumlu sürüm' talebi ve 'Hugging Face'de model/veri seti yayınlama' talebi; 1 kapalı: 'ONNX modelindeki bazı düğümlerin sadeleştirilebileceği' — bu da son commit ile kapatılmış); 0 pull request.",
+    "source_url": "https://api.github.com/search/issues?q=repo:lars76/swift-f0+type:issue",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "CHANGELOG.md'ye göre PyPI/paket versiyonlama tarihçesi: v0.1.0 (2025-07-08, ilk sürüm) → v0.1.1 (2025-07-08, paket adı swift_f0'dan swift-f0'a değişti) → v0.1.2 (2025-07-25, not segmentasyonu + MIDI export + web demo eklendi). Bu versiyonlar GitHub 'Releases' olarak değil sadece CHANGELOG+PyPI üzerinden takip ediliyor.",
+    "source_url": "https://raw.githubusercontent.com/lars76/swift-f0/main/CHANGELOG.md",
+    "confidence": "verified-primary"
+   }
+  ],
+  "flags": [
+   "Hız/doğruluk karşılaştırma iddiasının (CREPE'yi geçme) dayandığı 'Pitch Detection Benchmark' deposu (github.com/lars76/pitch-benchmark) bu görev kapsamında ayrıca incelenmedi — aynı yazara ait, bağımsız üçüncü taraf doğrulaması yok.",
+   "Repo veya README'de native mobil (iOS/Android SDK) ya da CoreML/TFLite export desteğine dair hiçbir kanıt bulunamadı; sadece Python paketi + tarayıcı (WASM/ONNX.js) demosu dokümante edilmiş. Kullanıcı mobil entegrasyon planlıyorsa bunun ayrıca doğrulanması/geliştirilmesi gerekir.",
+   "arXiv 2508.18440 tek sürümlü (v1) ve hakem denetiminden geçtiğine dair hiçbir kanıt yok (preprint statüsünde) — iddialar yazarın kendi ölçümlerine dayanıyor.",
+   "'Repo aktivitesi/issue sağlığı' değerlendirmesi çok küçük örneklem üzerinden yapıldı (yaşam boyu sadece 3 issue, 0 PR) — bu 'az kullanım/az geri bildirim' anlamına da gelebilir, sadece 'sorunsuz' olarak okunmamalı.",
+   "GitHub Releases (tag) hiç kullanılmamış; versiyon bilgisi yalnızca CHANGELOG.md ve PyPI paket sürümünden çıkarıldı — resmi GitHub release notu yok."
+  ]
+ },
+ "urmp": {
+  "key": "urmp",
+  "summary": "URMP (University of Rochester Multi-Modal Music Performance) veri setinin resmi sayfasında (labsites.rochester.edu/air/projects/URMP.html) bağlayıcı bir lisans/telif metni yok — sadece atıf (citation) talebi ve NSF hibe feragatnamesi bulunuyor. Erişim doğrudan değildir: örnek parça ve dokümantasyon PDF'i direkt indirilebiliyor ama tam 12.5GB paket için Google Form kaydı zorunlu; bu form 2026-07-26 itibarıyla hâlâ canlı ve yanıt kabul ediyor. Resmi dokümantasyonda (Şubat 2018) tek belirtilen bakım/iletişim adresi bochen.li@rochester.edu, ancak Bochen Li artık Rochester'da değil (PhD 2020, şu an ByteDance) ve bu adresin hâlâ izlendiği doğrulanamadı; AIR Lab PI'ı Zhiyao Duan (zhiyao.duan@rochester.edu, resmi ECE fakülte sayfasında teyitli, hâlâ Rochester'da) daha güvenilir bir alternatif. Aynı veri setinin Dryad'daki kopyası (DOI 10.5061/dryad.ng3r749) sayfa kaynağındaki schema.org meta verisinde açıkça \"Creative Commons Zero v1.0 Universal\" (CC0-1.0) lisansı beyan ediyor — resmi lab sayfasındaki lisans sessizliğiyle çelişen/onu tamamlayan ayrı bir sinyal, hangisinin asıl dağıtım kanalı için geçerli olduğu net değil. Dokümantasyon PDF'indeki Tablo 1'e göre 44 parçadan 10'u çello (Vc.) içeriyor, her birinde tam olarak 1 çello izi var (çoklu çello olan parça yok) — toplam 10 ayrı çello ses kaydı (+ bu 10 parçanın karışık ses/video dosyalarında da çello mevcut); \"44 No'lu String Quintet K515\" ise adının aksine çello değil kontrbas kullanıyor.",
+  "findings": [
+   {
+    "fact": "Resmi URMP sayfasında (AIR Lab, University of Rochester) açık bir lisans veya telif hakkı metni yok; sayfada yalnızca NSF grant No. 1741472 feragatnamesi ve makaleye atıf bilgisi bulunuyor. 'License', 'copyright' gibi ifadeler sayfa kaynağında (HTML) hiç geçmiyor.",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP.html",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Resmi dokümantasyon PDF'inde de (Last Updated: February 2018) ayrı bir 'License/Terms of Use' bölümü yok; sadece '1. HOW TO CITE URMP DATASET?' (atıf talebi) ve '2. REGISTRATION' (Google Form kaydı rica edilir) başlıkları var.",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP/URMP_doc.pdf",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Erişim prosedürü form-tabanlı: örnek parça (URMP_sample.zip) ve dokümantasyon PDF'i doğrudan indirilebiliyor, ancak tam veri seti (12.5GB) için Google Form linki üzerinden kayıt isteniyor: https://goo.gl/forms/xSvMzlwl3IWijvcp2 → docs.google.com/forms/d/e/1FAIpQLSdGQx4Q0G4yIT0WDj1cAlfcAq8VZNcV7ZGKqRj8ijgCOzd1lg (başlık: 'URMP Dataset Download Registration'). curl ile 2026-07-26 tarihinde test edildi: link 302 ile canlı forma yönleniyor, formda 'no longer accepting responses' uyarısı yok — form hâlâ aktif görünüyor.",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP.html",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "PDF dokümantasyonundaki Google Form linki (goo.gl/forms/EMDAlJsyiNmRNz7x1) de aynı canlı docs.google.com formuna yönleniyor — iki farklı goo.gl kısaltması aynı aktif forma çıkıyor.",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP/URMP_doc.pdf",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Resmi dokümantasyonda tek belirtilen bakımcı iletişim adresi: 'Contact bochen.li@rochester.edu for updated information.' (Şubat 2018 tarihli).",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP/URMP_doc.pdf",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Bochen Li, Ekim 2020'de Rochester AIR Lab'dan (danışman: Zhiyao Duan) PhD derecesiyle mezun oldu ve şu an ByteDance/TikTok'ta Tech Lead/Research Scientist olarak çalışıyor; kişisel sitesinde güncel iletişim adresi olarak bochen1106@gmail.com veriliyor, rochester.edu adresi güncel kişisel sitesinde artık listelenmiyor.",
+    "source_url": "https://bochenli.github.io/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "bochen.li@rochester.edu kutusunun hâlâ aktif/izlenip izlenmediği doğrudan test edilmedi (e-posta gönderilmedi); bu nedenle 'hâlâ geçerli mi' sorusu kesin olarak doğrulanamadı.",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP/URMP_doc.pdf",
+    "confidence": "weak"
+   },
+   {
+    "fact": "Alternatif/daha güvenilir bakımcı iletişimi: URMP makalesinin kıdemli yazarı ve AIR Lab PI'ı Zhiyao Duan, hâlâ University of Rochester'da (ECE + Sound Arts & Engineering + Computer Science) Profesör olarak görev yapıyor; resmi fakülte sayfasında teyitli aktif e-postası zhiyao.duan@rochester.edu.",
+    "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/duan_zhiyao/index.html",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Aynı veri seti, yayımlanan IEEE TMM makalesiyle ilişkili olarak Dryad'da da barındırılıyor (DOI 10.5061/dryad.ng3r749, 'Creating a multi-track classical music performance dataset...', Li/Liu/Dinesh/Duan/Sharma, 2019-03-20). Sayfa kaynağındaki schema.org JSON-LD meta verisi lisansı açıkça belirtiyor: {\"name\": \"Creative Commons Zero v1.0 Universal\", \"license\": \"https://spdx.org/licenses/CC0-1.0.html\"}.",
+    "source_url": "https://datadryad.org/stash/dataset/doi:10.5061/dryad.ng3r749",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Dryad platformu, genel politika olarak deposuna kabul ettiği tüm veri setlerinde CC0'ı zorunlu kılıyor (CC0 ile uyumsuz lisans şartlarına sahip dosyaları kabul etmiyor) — bu, URMP'nin Dryad kopyasındaki CC0 beyanının platform politikasıyla da tutarlı olduğunu destekliyor.",
+    "source_url": "https://blog.datadryad.org/2011/10/05/why-does-dryad-use-cc0/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Resmi dokümantasyon PDF'indeki Tablo 1'e (44 parça listesi) göre veri setinde 44 parçadan 10'u çello (Vc.) içeriyor: No.01 Jupiter (Vn+Vc, düet), No.11 Ave Maria (Ob+Vc, düet), No.12 Spring (Vn+Vn+Vc, trio), No.19 Pavane (Cl+Vn+Vc, trio), No.20 Pavane (Tpt+Vn+Vc, trio), No.24 Pirates of the Aegean (Vn+Vn+Va+Vc, kuartet), No.26 In the Hall of the Mountain King (Vn+Vn+Va+Vc, kuartet), No.32 The Art of the Fugue (Vn+Vn+Va+Vc, kuartet), No.36 Rondeau from Abdelazer (Vn+Vn+Va+Vc, kuartet), No.38 Jerusalem (Vn+Vn+Va+Vc+Db, kentet). Her parçada tam olarak 1 çello izi var, hiçbir parçada birden fazla çello yok — yani toplam 10 ayrı çello ses kaydı (AuSep_n_vc_*.wav dosyası), ve bu 10 parçanın karışık ses (AuMix) ile video (Vid) dosyalarında da çello sesi/görüntüsü mevcut.",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP/URMP_doc.pdf",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "No.44 'String Quintet K515' parçası, gerçek Mozart Yaylı Beşlisi K.515'in aksine ikinci çello yerine kontrbas (Db.) ile düzenlenmiş (Vn+Vn+Va+Va+Db) — bu parçada ÇELLO YOK, isim yanıltıcı olabilir.",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP/URMP_doc.pdf",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "PDF dokümantasyonundaki atıf metni makaleyi 'IEEE Transactions on Multimedia, under review' olarak gösteriyor (Şubat 2018 anlık görüntüsü), ancak resmi web sayfası makalenin fiilen 'IEEE Transactions on Multimedia, 2018' olarak yayımlandığını belirtiyor — PDF'teki atıf notu bu noktada güncel değil/eskimiş.",
+    "source_url": "https://labsites.rochester.edu/air/projects/URMP.html",
+    "confidence": "verified-primary"
+   }
+  ],
+  "flags": [
+   "Resmi lab sayfasında (labsites.rochester.edu) bağlayıcı bir lisans (CC-BY, MIT, EULA vb.) beyanı YOK — sadece 'atıf rica ederiz' + gönüllü Google Form kaydı var; bu hukuki bir lisans değil, akademik nezaket/takip normu. Dryad kopyasındaki açık CC0-1.0 beyanının resmi lab sayfasından indirilen kopya için de geçerli sayılıp sayılamayacağı NET DEĞİL — iki ayrı dağıtım kanalı (lab sayfası vs. Dryad), iki farklı lisans sinyali içeriyor. Kullanım öncesi hangi kanaldan indirildiği ve bu iki kanalın aynı içerik/hakları temsil edip etmediği teyit edilmeli.",
+   "bochen.li@rochester.edu adresinin fiilen hâlâ aktif/izlenen bir kutu olup olmadığı doğrulanamadı (test e-postası gönderilmedi, kapsam dışı tutuldu) — Bochen Li 2020'de Rochester'dan ayrılmış olduğundan bu adresin yönlendirme/izleme durumu belirsiz. Alternatif olarak PI Zhiyao Duan (zhiyao.duan@rochester.edu) önerilir ama bu da URMP'ye özel bir 'bakım' adresi olarak resmi sayfada listelenmiş değil, genel fakülte iletişimi.",
+   "Çello sayımı (10/44 parça) veri setinin gerçek ses/video dosyaları indirilip incelenerek değil, resmi dokümantasyon PDF'indeki Tablo 1 metaveri listesi okunarak yapıldı; 12.5GB'lık tam paket bu görev kapsamında indirilmedi, dolayısıyla dosya düzeyinde doğrulama yapılmadı.",
+   "Kullanıcının sorduğu olası Çin aynası ('sitcom.tea.ecnu.edu.cn' tarzı bir barındırma) için yapılan aramalarda URMP'ye özel doğrudan bir kanıt bulunamadı; böyle bir aynanın var olup olmadığı/güncelliği doğrulanamadı."
+  ]
+ },
+ "pedagogy": {
+  "key": "pedagogy",
+  "summary": "Başlangıç çello pedagojisi için dört alanda kaynak taraması yapıldı: (1) standart metod kitapları (Suzuki, Feuillard, Dotzauer, Essential Elements + birkaç ek kaynak) resmi yayıncı/IMSLP sayfalarından doğrulandı; (2) yeni başlayan öğrencilerde en sık görülen postür/yay hataları öğretmen blogları (CelloBello, celloprofessor.com, çeşitli özel ders stüdyoları) üzerinden derlendi — CelloBello'nun kendisi bot-engelleme (403) nedeniyle doğrudan fetch edilemedi, içerik yalnızca arama motoru snippet'i üzerinden doğrulanabildi; (3) açık tel uzun yay egzersiz ilerleyişi için hem bir üniversite çello profesörünün (Jamie Fiste, Central Michigan University) yayınladığı 11 adımlı sıralama hem de Texas Tech Üniversitesi'nde savunulmuş bir DMA tezi (Rodrigo Pessoa de Almeida, 2020 — Rowell/Young/Sharp pedagojilerine dayanan, Paul Rolland ve Darcy Drexler kaynaklı somut alıştırma figürleri içeren) tam metin olarak okunup özetlendi; (4) çocuk çello boyutu-yaş eşlemesi dört farklı satıcı/luthier/öğretmen kaynağından karşılaştırmalı olarak çıkarıldı ve kaynaklar arasında belirgin sayısal farklılıklar (özellikle 4/4'e geçiş yaşı 11-14 arası değişiyor) tespit edildi — bu, tüm kaynakların da vurguladığı gibi yaşın kaba bir başlangıç noktası olup asıl ölçütün boy/kol açıklığı olmasından kaynaklanıyor. Bazı sayfalara (johnsonstring.com, masterclass.com, alangoldblatt.com, bridgewoodandneitzert.london, ASTA'nın kendi PDF'leri) doğrudan erişim teknik nedenlerle (403/sertifika hatası/CAPTCHA) başarısız oldu; bu noktalar flags bölümünde belirtildi.",
+  "findings": [
+   {
+    "fact": "Suzuki Cello School Volume 1 (Alfred Music baskısı): ISBN 978-0-87487-479-2, 24 sayfa, 18 parça içerir (Twinkle Twinkle varyasyonları, French Folk Song, Lightly Row, Song of the Wind, Go Tell Aunt Rhody + Bach/Schumann/Purcell eserleri); Federation Festivals 2020-2024 seçkisinde yer alıyor.",
+    "source_url": "https://www.alfred.com/suzuki-cello-school-volume-1/p/00-0479S/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Suzuki Method felsefesi 'ana dil yaklaşımı'na (mother-tongue approach) dayanır: dinleme-taklit-tekrar yoluyla, her çocuğun yetenekle değil çevreyle şekillendiği ilkesi üzerine kurulu; kurumsal otorite Suzuki Association of the Americas'tır (1972 kuruldu, Boulder, Colorado merkezli, 6000+ öğretmen/aile üyesi).",
+    "source_url": "https://suzukiassociation.org/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Feuillard'ın 'Daily Exercises for Cello' (Almanca: Tägliche Übungen für Violoncello) eseri ilk olarak Mainz'da B. Schott's Söhne tarafından 1919'da basılmıştır (plaka no. 30106); kamu malı statüsündedir ve IMSLP'de 45 sayfalık tarama olarak mevcuttur.",
+    "source_url": "https://imslp.org/wiki/Daily_Exercises_for_Cello_(Feuillard,_Louis_R.)",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Dotzauer'in 113 Etudes for Cello eseri 4 kitaba bölünmüştür: Kitap 1 (Etüd 1-34), Kitap 2 (35-62), Kitap 3 (63-85), Kitap 4 (86-113); farklı tarihsel baskılar arasında G. Schirmer (~1917), Edition Peters ve Henry Litolff (1950 sonrası) bulunur.",
+    "source_url": "https://imslp.org/wiki/113_Etudes_for_Cello_(Dotzauer,_Friedrich)",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Essential Elements for Strings Book 1 (Cello) — yazarlar Michael Allen, Robert Gillespie, Pamela Tellejohn Hayes; Hal Leonard yayını, 48 sayfa, softcover, 9x12 inç; enstrüman pozisyonu, parmak pozisyonu, yay teknikleri, müzik teorisi ve tarih derslerini bir arada içeren grup-dersi odaklı bir metod.",
+    "source_url": "https://www.halleonard.com/product/4619003/essential-elements-for-strings-book-1-original-series",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Eastman Community Music School'un Level I (başlangıç) çello müfredatında Essential Elements, Suzuki Cilt 1 (1-14. parçalar) ve Dotzauer Kitap 1'e ek olarak 'Cello Time Series' (Kathy & David Blackwell), 'Time Pieces for Cello Vol.1' (Black & Harris) ve Krane'in 'New School of Cello Playing' Vol.1 kitapları da resmi olarak önerilmektedir.",
+    "source_url": "https://www.esm.rochester.edu/community/faq/student-curriculum/cello-curriculum/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Rodrigo Pessoa de Almeida'nın Texas Tech Üniversitesi'nde savunduğu DMA tezi ('Starting from the End: A Proposal of Curriculum Guidelines for Beginning Cellists', Aralık 2020), geleneksel Dotzauer Cilt 1 gibi kitapların kaydırma (shifting) ve harmonik içermediğini, bu yüzden ileri teknik için erken hazırlık sağlamadığını eleştirir; Margaret Rowell, Phyllis Young ve Irene Sharp'ın 'geleneksel-olmayan' pedagojilerini temel alan 8 alıştırma dizisi önerir.",
+    "source_url": "https://ttu-ir.tdl.org/bitstreams/9b5db7f4-bc34-4423-b6fd-c745063c9f4e/download",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "CelloBello (kurucu: Paul Katz, New England Conservatory çello profesörü, eski Cleveland Quartet üyesi) 2011'de kuruldu, 2019'da Internet Cello Society (1994 kurulmuş, Tim Janof yönetiminde) ile birleşti; site içeriği doğrudan fetch edilemedi (403 bot-engeli) ama arama motoru indeksinden doğrulandı.",
+    "source_url": "https://interlude.hk/hello-cellobello-paul-katz-and-everything-cello-and-more/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "CelloBello'nun 'Bow Hold Principles Part 1 ve 2' derslerinin yazarı çellist Sebastian Baverstam'dır; içerik 'denge, esneklik, organizasyon ve rahatlık birbiriyle ilişkili hedeflerdir; sıkı tutuş ihtiyacı organizasyon/denge/esneklik eksikliğinden kaynaklanır' der ve başparmağın 'kilitlenmesine' karşı sık kontrol önerir.",
+    "source_url": "https://cellobello.org/cello-lessons/body-awareness/bow-hold-principles-part-2/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Jamie Fiste (Central Michigan University çello profesörü, celloprofessor.com), başlangıç çellistlerinde en sık görülen yay-tutuşu hatasını 'steak knife grip' (aşırı supinasyon — bıçak tutar gibi elin arkasıyla yayı kavramak) olarak tanımlar; ayrıca zayıf 3. ve 4. parmak, tutarsız parmak pozisyonu ve ağır/kontrolsüz yay tutumunu yaygın sorunlar olarak sıralar.",
+    "source_url": "https://www.celloprofessor.com/basic-cello-bow-hold.html",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Jamie Fiste'nin 'Sequence for Teaching Beginning Cello' sayfasında önerilen 11 adımlı başlangıç sıralaması: (1) enstrümanı dinletme, (2) oturma/tutuş, (3) pizzicato açık tel çağrı-yanıtı, (4) 'Action Studies' (yay kolu hareket kalıpları), (5) sol el pizzicato parmak pozisyonları, (6) kalem/pipetle yay tutuşuna giriş, (7) açık tellerde yayla çağrı-yanıt, (8) ritim/şarkı pratiği, (9) açık tel düetleri (bu aşamada forearm détaché üst-yarı, alt-yarı ve tam-yay hareket kalıpları uygulanır), (10) el kombinasyonu, (11) not okuma ('rote before note').",
+    "source_url": "https://www.celloprofessor.com/Sequence.html",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Almeida tezinde (Texas Tech, 2020), açık tel yay dizisi 'Bow placement and short strokes at the middle' David Evenchick'in (Brezilya, 2011) atölye çalışmasına dayanır: önce 'ringing tone' kavramı (açık D telini çekip 'kaç ses duyuyorsun?' sorusuyla pizzicato+rezonans sesini ayırt ettirme), sonra Paul Rolland'ın (1972) 'Open String Rhythms' alıştırması — artan karmaşıklıkta 6 ritim kalıbı (A-F: dörtlük, sekizlik, onaltılık, üçleme) tamamen açık tellerde çalınır; teknik kontrol noktaları: tekrarlar arası parmak gevşetme, yayı durduranın tel sürtünmesi olması (el değil), kısa notaya kısa yay, 'uçan' dirsek.",
+    "source_url": "https://ttu-ir.tdl.org/bitstreams/9b5db7f4-bc34-4423-b6fd-c745063c9f4e/download",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Aynı tezde 'Long notes bowings' dizisi Darcy Drexler'in (String Academy of Wisconsin, Uberlândia/Brezilya atölyesi 2007) pedagojisine dayanır: kısa/rezonanslı açık tel tekrarından başlanır → 2, sonra 3, sonra 4 nota tek yayda slurred staccato ('Warmup for long bowings I') → Phyllis Young'ın 'reaching the moon' oyunuyla (yay ucu tavana doğru/tavan dan uzağa hareket) 'dynamic bow hold' öğretilir → slurred staccato + son notada fermata sürdürme ('Warmup for long bowings II') ile tam uzun yaya geçiş; 'çikolata tahtası sıcak yüzeyde' imgesiyle pekiştirilir.",
+    "source_url": "https://ttu-ir.tdl.org/bitstreams/9b5db7f4-bc34-4423-b6fd-c745063c9f4e/download",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "ASTA (American String Teachers Association) sertifika programı ASTACAP'te Foundation seviyesinde hedefler: iyi postür, sol el pozisyonu ve yay tutuşu, doğru entonasyon/ritim, 1-3-4 parmak kullanımı; yay tekniği olarak tüm gamlarda tam veya yarım yayla ayrık dörtlüklerle başlanır; Level 1'de détaché, staccato, legato ve yay bölme (bow division) farkındalığı eklenir.",
+    "source_url": "https://www.astastrings.org/",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Başlangıç çellistlerde en sık bildirilen postür hataları: kambur oturma, boynu öne uzatma, çelloyu diz/kollarla aşırı sıkma, sandalye kenarında sırt desteksiz oturma; yay elinde ise 'death grip' (aşırı gerginlik), 'fist grip' (çekiç tutar gibi tüm elle sarma) ve 'pinky collapse' (serçe parmağın içe çökmesi) en sık tekrarlanan terimlerdir.",
+    "source_url": "https://www.scottcellostudio.com/blog/how-to-avoid-the-3-most-common-bowing-mistakes-for-better-control-and-tone",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "celloprofessor.com'un 'Drawing a Straight Bow' sayfasına göre, yayı tele dik (90 derece) tutma ilkesi geleneksel öğretimde ısrarla vurgulansa da, özellikle kısa kollu öğrenciler için A telinde bu kuralı uca kadar harfiyen uygulamak gereksiz gerginliğe yol açar.",
+    "source_url": "https://www.celloprofessor.com/bowing-straight.html",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Fiddlershop çello boyut-yaş tablosu: 1/10 (3-4 yaş, ~3 fit) · 1/8 (4-6 yaş, 3-3.5 fit) · 1/4 (6-8 yaş, 3.5-4 fit) · 1/2 (8-10 yaş, 4-4.5 fit) · 3/4 (10-12 yaş, 4.5-5 fit) · 4/4 (12-13+ yaş, 5+ fit).",
+    "source_url": "https://fiddlershop.com/pages/cello-sizing-guide",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "The Luthier Shop (Cross Roads, TX, ABD — luthier/enstrüman dükkanı) tablosu: 1/10 (3-5 yaş, ≤91cm/3ft) · 1/8 (5-6 yaş) · 1/4 (6-7 yaş) · 1/2 (8-10 yaş) · 3/4 (11-13 yaş) · 4/4 (14+ yaş, 152cm+/5ft+).",
+    "source_url": "https://www.luthiershop.com/instrumentsizing/2020/8/18/cello-sizing",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Metzler Violin Shop (Glendale, CA — keman/çello dükkanı) tablosu: 1/8 (3-5 yaş) · 1/4 (4-6 yaş) · 1/2 (6-9 yaş) · 3/4 (9-12 yaş) · 4/4/tam boy (11+ yaş).",
+    "source_url": "https://metzlerviolins.com/blogs/blog-posts/what-size-cello-does-my-child-need-a-parents-sizing-guide",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Oxford Cello (İngiltere merkezli öğretmen/etkinlik ağı, ebeveyn rehberi) en detaylı tabloyu sunar — boy ölçüsü ve gövde uzunluğu dahil: 1/10 (3-5y, <110cm boy, ~53cm gövde) · 1/8 (4-6y, 110-120cm, ~58cm) · 1/4 (6-8y, 120-135cm, ~65cm) · 1/2 (8-10y, 135-145cm, ~69cm) · 3/4 (10-12y, 145-160cm, ~72cm) · 7/8 (nadir, 155-165cm, ~74cm) · 4/4 (12+y, 160cm+, ~75-76cm).",
+    "source_url": "https://oxfordcello.co.uk/articles/cello-sizes-by-age-a-parents-guide",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Neredeyse tüm satıcı/luthier kaynakları, yaşın sadece kaba bir başlangıç noktası olduğunu, gerçek doğru ölçünün boy/kol açıklığı (özellikle omuzdan bileğe mesafe, kol perpendiküler tutulduğunda) ile öğretmen veya mağaza tarafından fiziksel olarak ölçülmesi gerektiğini vurgular.",
+    "source_url": "https://www.johnsonstring.com/resources/articles/music-students/cello-size-age-range/",
+    "confidence": "secondary"
+   }
+  ],
+  "flags": [
+   "CelloBello (cellobello.org) hem ana sayfa hem de PDF versiyonu (wp-content/uploads) doğrudan WebFetch ile 403 Forbidden döndürdü — muhtemelen bot-engelleme. İçerik sadece arama motoru (WebSearch) snippet'leri üzerinden dolaylı doğrulanabildi; tam metin bağımsız olarak teyit edilemedi.",
+   "johnsonstring.com/resources/articles/music-students/cello-size-age-range/ sayfası da 403 Forbidden verdi; alıntılanan 'yaş yerine boy/kol ölçümü daha doğrudur' ifadesi WebSearch sentez özetinden alındı, sayfanın tam tablosu doğrudan görülemedi.",
+   "masterclass.com/articles/cello-sizes-guide sayfası 403 Forbidden verdi, içeriği doğrulanamadı.",
+   "alangoldblatt.com/specs/Cello.pdf adresine TLS sertifika uyuşmazlığı hatası nedeniyle erişilemedi (sertifika accountservergroup.com'a ait, alangoldblatt.com'a değil) — bu luthier spec sayfası kaynak listesine katılamadı.",
+   "bridgewoodandneitzert.london/cello-size-guide-i26 sayfası bir CAPTCHA/'Are you human?' duvarına takıldı, içerik hiç görülemedi.",
+   "Fiddlershop'un iki farklı sayfası (fiddlershop.com/products/suzuki-cello-school-method-book-vol-1 üzerinden erişilen genel sizing sayfası ile fiddlershop.com/pages/cello-sizing-guide) arasında ufak sayısal farklar var (örn. 4/4 için '12-13+ yaş' vs. bazı arama sonuçlarında farklı üst sınırlar) — kesin, tekil bir 'endüstri standardı' yaş tablosu YOK; kaynaklar arası 4/4'e geçiş yaşı 11-14 arasında değişiyor, 1/8 boyu için yaş aralığı 3-5/4-6/5-6 arasında farklılaşıyor. Bu tutarsızlık gerçek bir bulgudur, hata değildir — sizing esasen boy/kol ölçümüne dayanır, yaş ikincil bir kılavuzdur.",
+   "ASTA (American String Teachers Association) ASTACAP müfredat detayları (Foundation/Level 1 hedefleri) doğrudan astastrings.org veya bir ASTACAP PDF'inden fetch edilerek DEĞİL, yalnızca WebSearch'in sentezlediği özet metinden alındı; birincil PDF (örn. ASTACAP-Handbook.pdf, tnasta.org/guidelines.html) doğrudan okunmadı, bu yüzden alıntı ikincil derece güvenilir sayılmalı.",
+   "'Pinky collapse' (serçe parmak çökmesi) ifadesi için WebSearch sonucu tek bir kaynağa değil, birden fazla öğretmen blogunun (randwickmusiclessons.com.au, musiclessonsacademy.com.au, scottcellostudio.com, kandmmusicschool.com, cellodiscovery.com) sentezlenmiş özetine dayanıyor; hangi spesifik sayfanın bu tam ifadeyi kullandığı ayrıştırılamadı, bu yüzden findings'te en olası kaynağa (scottcellostudio.com) atfedildi ama kesin değildir.",
+   "Kullanıcının istediği 'internetcello (internetcello.com)' adında bir site bulunamadı; bunun yerine tarihsel olarak eşdeğer/aynı kurum olan Internet Cello Society (cello.org, 1994 kurulmuş, 2019'da CelloBello'ya devroldu) tespit edildi — muhtemelen kullanıcının kastettiği kaynak budur, ancak 'internetcello.com' adında ayrı bir aktif site doğrulanamadı.",
+   "Essential Elements dışında istenen 'vb.' (etc.) ek metod kitapları için sadece Eastman Community Music School'un kurumsal müfredat sayfası kaynak gösterildi (Cello Time Series, Krane New School of Cello Playing) — bu kitapların kendi resmi yayıncı sayfaları ayrıca doğrulanmadı, sadece bir üçüncü kurumun müfredat listesinden alındı."
+  ]
+ },
+ "audio-samples": {
+  "key": "audio-samples",
+  "summary": "Dört kategoride de lisans-temiz çello kaynağı bulundu ve birincil kaynaklardan doğrulandı. En güvenli/ticari-sürtünmesiz seçenekler: University of Iowa MIS (kurumun kendi ifadesiyle 'without restrictions', 1997'den beri) ve TinySOL (Zenodo, CC BY 4.0, atıf yeterli). Philharmonia Orchestra kendi custom lisansıyla (satış/'as-is' dağıtım hariç serbest ticari kullanım) çelloyu artık ayrı zip değil tek 'Strings.zip' altında sunuyor; bir GitHub mirror'ında geçen 'CC BY-SA 3.0' iddiası resmi sayfada doğrulanamadı. Freesound'da hem gerçek CC0 tekli-nota çello kaydı (xserra – cello-D2.wav) hem de CC BY (atıflı) örnekler var; API'nin ticari kullanımı ayrı izin gerektiriyor ama tek dosya indirme buna girmiyor. Good-sounds.org (MTG-UPF) veri deposunda (CSUC Dataverse, birincil kaynak) CC BY 4.0 olarak listeleniyor — bazı ikincil arama özetleri yanlışlıkla 'CC BY-NC 4.0' demiş, bu çelişki flag'e yazıldı. Pitch-benchmark fixture için en temiz/az-riskli kombinasyon: Iowa MIS + TinySOL (tam serbest/atıflı, akademik birincil kaynak) + Freesound CC0 tekli notalar; Good-sounds ve Philharmonia kullanılacaksa atıf metni ürün lisans sayfasına eklenmeli.",
+  "findings": [
+   {
+    "fact": "University of Iowa Electronic Music Studios – Musical Instrument Samples (MIS): resmi sayfada birebir ifade: 'Since 1997, these recordings have been freely available on this website and may be downloaded and used for any projects, without restrictions.' Ticari kullanım kısıtlaması, atıf şartı veya ayrı bir LICENSE dosyası yok.",
+    "source_url": "https://theremin.music.uiowa.edu/MIS.html",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Iowa MIS koleksiyonunda çello mevcut: hem 2012-öncesi standart kayıt (MIScello.html) hem 2012-sonrası yüksek çözünürlüklü (24-bit/96kHz, Decca Tree mikrofon dizilimi) versiyon (MISCello2012.html) bulunuyor.",
+    "source_url": "https://theremin.music.uiowa.edu/MIS.html",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Philharmonia Orchestra'nın güncel resmi 'Sound samples' sayfasındaki tam lisans metni: 'You are free to use these samples as you wish, including releasing them as part of a commercial work. The only restriction is that they must not be sold or made available \"as is\" (i.e. as samples or as a sampler instrument).' Creative Commons ismi bu sayfada geçmiyor.",
+    "source_url": "https://philharmonia.co.uk/resources/sound-samples/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Philharmonia sitesinde çello artık ayrı bir cello.zip olarak değil, tüm yaylı çalgıları içeren tek 'Strings.zip' arşivi altında dağıtılıyor (mp3 format).",
+    "source_url": "https://philharmonia-assets.s3-eu-west-1.amazonaws.com/uploads/2020/02/12112005/Strings.zip",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Üçüncü parti bir GitHub mirror'ının (skratchdot/philharmonia-samples) README'sinde örneklerin ayrıca 'Creative Commons Attribution-ShareAlike 3.0 Unported License' ile de lisanslandığı yazıyor; bu iddia şu an resmi philharmonia.co.uk sayfasında doğrulanamadı (çelişki — bkz. flags).",
+    "source_url": "https://github.com/skratchdot/philharmonia-samples",
+    "confidence": "secondary"
+   },
+   {
+    "fact": "Freesound'da 'cello-D2.wav' (yükleyen: xserra, MTG/UPF kurucusu Xavier Serra) tam CC0 lisanslıdır: 'You can copy, modify, distribute and perform the sound, even for commercial purposes, all without the need of asking permission to the author.' Tekli D2 notası, mf dinamik, 442Hz akort referansı, WAV 16-bit/44.1kHz, ~5 sn — pitch-benchmark fixture için doğrudan uygun.",
+    "source_url": "https://freesound.org/people/xserra/sounds/257996/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Freesound'da 'Cello C string resonance.wav' (yükleyen: juskiddink) açık C teli rezonansı kaydıdır ama lisansı CC0 DEĞİL, CC BY 3.0'dır (atıf zorunlu): 'You are free to share... and to remix... as long as you credit the author of the sound.'",
+    "source_url": "https://freesound.org/people/juskiddink/sounds/156664/",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Freesound arama arayüzü lisansa göre filtrelenebiliyor (f=license:\"Creative Commons 0\"); bu filtreyle 'cello' aramasında CC0 lisanslı tekli-nota kayıtlar (ör. 'Cello Play C - 09.wav' – cms4f, CC0) listeleniyor.",
+    "source_url": "https://freesound.org/search/?q=cello+note&f=license:%22Creative+Commons+0%22",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Freesound API'nin resmi kullanım şartları: 'You can use the Freesound API for free only for non-commercial purposes. To use the Freesound API for commercial purposes, please contact mtg at upf.edu.' Bu kısıtlama API'ye özgüdür; tek dosya indirimi için o dosyanın kendi CC lisansı geçerlidir.",
+    "source_url": "https://freesound.org/docs/api/terms_of_use.html",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "TinySOL (IRCAM 'Studio On Line' projesinden, 1996–1999 kayıtları, Zenodo'da 2019/2020 yayını) 'Creative Commons Attribution 4.0 International (CC BY 4.0)' lisansıyla yayınlanmıştır ve 14 enstrümandan biri olarak Violoncello (çello) içerir.",
+    "source_url": "https://zenodo.org/records/3685367",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Good-sounds.org (Music Technology Group, Universitat Pompeu Fabra) veri kümesi resmi veri deposunda (CSUC Dataverse) CC BY 4.0 (Creative Commons Attribution 4.0 International) olarak listelenmiştir; 15 profesyonel müzisyen tarafından flüt, klarnet, trompet, keman ve çello üzerinde kaydedilen tekli-nota ve gam egzersizlerini içerir.",
+    "source_url": "https://dataverse.csuc.cat/dataset.xhtml?persistentId=doi:10.34810/data2314",
+    "confidence": "verified-primary"
+   },
+   {
+    "fact": "Good-sounds projesinden bazı çello örnekleri Freesound'da 'MTG' hesabı altında ayrıca yayınlanmıştır (ör. 'Cello - D3' by MTG) ve bunların lisansı CC BY 3.0'dır — atıf gerektirir, ticari kullanıma açıktır, CC0 değildir.",
+    "source_url": "https://freesound.org/people/MTG/sounds/357949/",
+    "confidence": "verified-primary"
+   }
+  ],
+  "flags": [
+   "Philharmonia için 'CC BY-SA 3.0' iddiası (GitHub mirror README + bazı eski blog/arşiv sayfaları) resmi philharmonia.co.uk sayfasında YOK; sayfa yalnızca kendi custom permissive metnini kullanıyor. ShareAlike şartı (türev eserlerin aynı lisansla paylaşılması) gerçekten geçerliyse ticari/kapalı-kaynak bir üründe risk taşır — kullanmadan önce Philharmonia ile doğrudan teyit önerilir, ya da sadece resmi sayfadaki custom lisansı esas alıp CC BY-SA iddiasını yok sayın.",
+   "Good-sounds.org lisansı için arama motoru özetleri çelişkiliydi: bir özet 'CC BY-NC 4.0' derken, birincil veri deposu (CSUC Dataverse, resmi barındırma) 'CC BY 4.0' diyor. Bu raporda birincil kaynak (Dataverse) esas alınmıştır, ancak indirilen dosyanın kendi metadata/CSV alanındaki lisans bilgisini de ayrıca teyit etmeniz önerilir — good-sounds.org'un kendi ana sayfası (upf.edu/web/mtg/good-sounds) bu oturumda HTTP 403 verdiği için doğrudan taranamadı.",
+   "Freesound'da her dosyanın lisansı yükleyen kişiye bağlıdır (CC0 / CC BY / CC BY-NC karışık); toplu/otomatik indirme yapılacaksa her dosyanın lisans alanının programatik olarak (API veya sayfa üzerinden) tek tek doğrulanması gerekir — 'cello' aramasında CC0 filtresi kullanmak pratik bir kısayoldur ama Freesound'un kendi forumlarında yükleyicinin telif beyanının yanlış olabileceğine dair tartışmalar var (üçüncü şahıs telif ihlali riski teorik olarak sıfır değildir).",
+   "Freesound API'nin ticari kullanımı ayrı izin/görüşme gerektiriyor (mtg@upf.edu). Eğer fixture'lar CI/CD içinde API üzerinden otomatik/periyodik çekilecekse bu şart devreye girer; tek seferlik manuel indirip repoya statik dosya olarak gömmek bu kısıtlamanın dışında kalır (API ToS API kullanımını kısıtlar, dosyanın CC lisansını değiştirmez) — ama bu ayrım Freesound'un resmi dokümanında açıkça yazılı değil, mantıksal çıkarımdır.",
+   "University of Iowa MIS ve Philharmonia'nın lisans ifadeleri standart bir Creative Commons/SPDX lisansı değil, kurumun kendi kısa cümlesidir (resmi bir 'LICENSE' hukuki metni yok). Büyük ölçekli ticari bir üründe hukuk danışmanına gösterilmesi önerilir; TinySOL (CC BY 4.0) ve Freesound CC0 dosyaları standart/makine-okunur lisans olduğu için hukuki netlik açısından daha güçlüdür.",
+   "Philharmonia'nın çello örneklerini ayrı 'cello.zip' olarak sunduğuna dair bazı üçüncü parti siteler (sageaudio.com, free-sample-packs.com) hâlâ referans veriyor; ancak bu oturumda kontrol edilen güncel resmi sayfa tüm yaylıları tek 'Strings.zip' dosyasında birleştirmiş durumda. Strings.zip içindeki çello alt-klasörünün/dosya adlarının içeriği bu oturumda indirilip incelenmedi (yalnızca sayfa metni ve link doğrulandı).",
+   "TinySOL'un orijinal ham kayıtları IRCAM'ın 1996-1999 'Studio On Line' projesine ait; CC BY 4.0 lisansı 2019/2020'deki Zenodo yeniden-yayınına aittir. IRCAM'ın kendi orijinal projesiyle ilgili ayrı/daha eski bir kullanım kısıtlaması olup olmadığı bu oturumda IRCAM'ın kendi sitesinden ayrıca doğrulanmadı, sadece Zenodo/mirdata sayfaları kontrol edildi."
+  ]
+ }
+}
