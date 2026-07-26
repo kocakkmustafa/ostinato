@@ -1,0 +1,1042 @@
+{
+ "schemaVersion": "ostinato-harvest-1",
+ "kind": "cello-video-triage",
+ "harvestDate": "2026-07-26",
+ "method": "6-ajan web toplama + thumbnail kontakt-föy görsel triyajı (57/57)",
+ "caveat": "Thumbnail ≠ video karesi; nihai kullanılabilirlik çıkarım anında kare-düzeyinde teyit edilir",
+ "counts": {
+  "A-aday": 4,
+  "şartlı": 27,
+  "kullanılamaz": 14,
+  "belirsiz": 12,
+  "toplam": 57
+ },
+ "candidates": [
+  {
+   "title": "The Right Way And The Wrong Way To Play The Cello (ft. Amit Peled)",
+   "pageUrl": "https://www.youtube.com/watch?v=ef1lq9bgMsc",
+   "platform": "youtube",
+   "videoId": "ef1lq9bgMsc",
+   "instructor": "Amit Peled",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "9:58 — Doğru/yanlış postür kıyaslaması, 'cello tongue/cello lungs' eklemleri; eğitmen bizzat çalarak gösteriyor. En açık postür-gösterim videosu.",
+   "key": "tonebase",
+   "idx": 1,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Using The Body For Effortless Cello Playing (ft. Richard Aaron)",
+   "pageUrl": "https://www.youtube.com/watch?v=k_T_t9MRUy0",
+   "platform": "youtube",
+   "videoId": "k_T_t9MRUy0",
+   "instructor": "Richard Aaron",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "16:40 — Vücut kullanımı/postür üzerine uzun-format ders.",
+   "key": "tonebase",
+   "idx": 2,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "The Surprisingly Practical Fix for Better Posture #cello #shorts",
+   "pageUrl": "https://www.youtube.com/watch?v=7Eds3-u_qYY",
+   "platform": "youtube",
+   "videoId": "7Eds3-u_qYY",
+   "instructor": "Sara (soyadı sayfada belirtilmemiş)",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "0:54 kısa klip — diz/kalça/sandalye yüksekliğinin postüre etkisi. Doğrudan 'postür' anahtar kelimesiyle eşleşen tek video.",
+   "key": "tonebase",
+   "idx": 3,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Bow leverage is a simple science (ft. Richard Aaron)",
+   "pageUrl": "https://www.youtube.com/watch?v=20FEXVEDZI4",
+   "platform": "youtube",
+   "videoId": "20FEXVEDZI4",
+   "instructor": "Richard Aaron",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "5:47 — Yay kaldıracı, omuzdan güç, dirsek açıları; 0:00 Bow leverage / 2:17 Elbow angles bölümleri var.",
+   "key": "tonebase",
+   "idx": 4,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Solving The Mysteries of A Cellist's Bow Arm",
+   "pageUrl": "https://www.youtube.com/watch?v=dUSBwur07Lw",
+   "platform": "youtube",
+   "videoId": "dUSBwur07Lw",
+   "instructor": "Richard Aaron",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "8:48 — Yay kolu hareketinin mekaniği üzerine ders.",
+   "key": "tonebase",
+   "idx": 5,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Richard Aaron On Cello Bow Math",
+   "pageUrl": "https://www.youtube.com/watch?v=YD-3w8ZkRC8",
+   "platform": "youtube",
+   "videoId": "YD-3w8ZkRC8",
+   "instructor": "Richard Aaron",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "4:49 — Yay kontrolü ve frazlama için 'bow math' konsepti.",
+   "key": "tonebase",
+   "idx": 6,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Your Bow Technique Exposed in Just 4 Notes #cello #shorts",
+   "pageUrl": "https://www.youtube.com/watch?v=hcMUmEjv0ss",
+   "platform": "youtube",
+   "videoId": "hcMUmEjv0ss",
+   "instructor": "Belirtilmemiş",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "1:13 — Vibratosuz, tek yayda dört eşit nota; saf ton/temel uzun yay egzersizi. Eğitmen adı açıklamada geçmiyor.",
+   "key": "tonebase",
+   "idx": 7,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Don't Do THIS With Your Wrist #cello #shorts",
+   "pageUrl": "https://www.youtube.com/watch?v=jw1UUEWPK_8",
+   "platform": "youtube",
+   "videoId": "jw1UUEWPK_8",
+   "instructor": "Jan Vogler",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "0:57 — Yay eli/bilek pozisyonu üzerine kısa gösterim.",
+   "key": "tonebase",
+   "idx": 8,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Perfect Bow Angle… Without Thinking #cello #shorts",
+   "pageUrl": "https://www.youtube.com/watch?v=lK5Y5KtduUo",
+   "platform": "youtube",
+   "videoId": "lK5Y5KtduUo",
+   "instructor": "Belirtilmemiş",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "0:52 — Düz yay/yay açısı için 'yay kılını yassılt' ipucu. Eğitmen adı açıklamada geçmiyor.",
+   "key": "tonebase",
+   "idx": 9,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Stop Fighting String Crossings (The Bow Arm Secret for Smoothness)",
+   "pageUrl": "https://www.youtube.com/watch?v=HejVk6MQZcQ",
+   "platform": "youtube",
+   "videoId": "HejVk6MQZcQ",
+   "instructor": "Camden Shaw",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "11:49 — Tel geçişlerinde yay kolu tekniği; Dvorak Piyano Beşlisi alıntısı üzerinden.",
+   "key": "tonebase",
+   "idx": 10,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Up Bow & Down Bow -- Do They Even Exist? #shorts",
+   "pageUrl": "https://www.youtube.com/watch?v=yA3HE5KWVV0",
+   "platform": "youtube",
+   "videoId": "yA3HE5KWVV0",
+   "instructor": "Camden Shaw",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "1:00 — Sağ kol manipülasyonu, yukarı/aşağı yay farkı.",
+   "key": "tonebase",
+   "idx": 11,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Try Stopping At Bow Changes #shorts",
+   "pageUrl": "https://www.youtube.com/watch?v=QXqf7m1p0uk",
+   "platform": "youtube",
+   "videoId": "QXqf7m1p0uk",
+   "instructor": "Camden Shaw",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "0:53 — Yay değişimlerinde durma egzersizi, temel yay kontrolü.",
+   "key": "tonebase",
+   "idx": 12,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "STOP the Bow Whip #cello #shorts",
+   "pageUrl": "https://www.youtube.com/watch?v=mtXIwCKsJVE",
+   "platform": "youtube",
+   "videoId": "mtXIwCKsJVE",
+   "instructor": "Belirtilmemiş",
+   "channel": "tonebase Cello (@tonebasecello)",
+   "notes": "0:53 — Yay değişiminde 'kırbaç' hareketini önleme egzersizi. Eğitmen adı açıklamada geçmiyor.",
+   "key": "tonebase",
+   "idx": 13,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Bow Hold Principles – Part 1",
+   "pageUrl": "https://cellobello.org/cello-lessons/body-awareness/bow-hold-principles-part-1/",
+   "platform": "youtube",
+   "videoId": "9f2AABUxrsQ",
+   "channel": "CelloBello",
+   "instructor": "Sebastian Baverstam",
+   "notes": "Yay tutuşu (bow hold) — parmak yerleşimi, denge/esneklik üzerine temel ders. Kadraj/açı doğrudan teyit edilemedi (sayfa 403, video izlenmedi); başlık ve CelloBello'nun tipik ders formatına göre eğitmenin çello ile gösterim yaptığı varsayılıyor.",
+   "key": "cellobello",
+   "idx": 14,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Bow Hold Principles – Part 2",
+   "pageUrl": "https://cellobello.org/cello-lessons/body-awareness/bow-hold-principles-part-2/",
+   "platform": "youtube",
+   "videoId": "wECCcnrLU48",
+   "channel": "CelloBello",
+   "instructor": "Sebastian Baverstam",
+   "notes": "Yay tutuşu (bow hold) devamı — esneklik/kontrol, başparmak pozisyonu. Part 1 ile aynı seri.",
+   "key": "cellobello",
+   "idx": 15,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Sitting: Chair, Feet, Power at Tip",
+   "pageUrl": "https://www.cellobello.org/cello-lessons/right-hand/sitting-chair-feet-power-at-tip/",
+   "platform": "youtube",
+   "videoId": "SEPPlEFI1iI",
+   "channel": "CelloBello",
+   "instructor": "Paul Katz",
+   "notes": "Oturuş/postür — ayak yerleşimi, sandalyede ağırlık kaydırma ve uca (tip) güç aktarımı. Yay kullanımıyla da bağlantılı (uzun yay/crescendo).",
+   "key": "cellobello",
+   "idx": 16,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Healthy Sitting Position (Sitting Posture)",
+   "pageUrl": "https://cellobello.org/cello-lessons/body-awareness/healthy-sitting-position/",
+   "platform": "youtube",
+   "videoId": "h3mV0PR3iOU",
+   "channel": "CelloBello",
+   "instructor": "Paul Katz, Matt McManus",
+   "notes": "Postür — nötr omurga, kalça/diz açısı, sandalye seçimi. Matt McManus fizyoterapist olarak eşlik ediyor olabilir; sahnenin çello çalarak mı yoksa anlatarak mı ilerlediği doğrulanamadı, düşük-orta öncelik.",
+   "key": "cellobello",
+   "idx": 17,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Right Arm Power",
+   "pageUrl": "https://cellobello.org/cello-lessons/body-awareness/right-arm-power/",
+   "platform": "youtube",
+   "videoId": "OUipBa0Sqd8",
+   "channel": "CelloBello",
+   "instructor": "Sebastian Baverstam",
+   "notes": "Yay kolu ağırlığı/uzun yay ile ilişkili — kolun tam ağırlığını tele bırakma, büyük ses için teknik. Doğrudan 'uzun yay' başlıklı değil ama içerik örtüşüyor.",
+   "key": "cellobello",
+   "idx": 18,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Softness is Strength",
+   "pageUrl": "https://cellobello.org/cello-lessons/right-hand/softness-is-strength/",
+   "platform": "youtube",
+   "videoId": "mgEkvmMtA_E",
+   "channel": "CelloBello",
+   "instructor": "Paul Katz",
+   "notes": "Yay tutuşu ile ilgili — sağ/sol başparmakta gerginliği azaltma, gevşek/esnek tutuş. 'Soft power' (Tai Chi) kavramı üzerinden anlatım.",
+   "key": "cellobello",
+   "idx": 19,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Alisa Weilerstein Interview: Bow Grip & Arm Weight",
+   "pageUrl": "https://www.cellobello.org/cello-lessons/right-hand/alisa-weilerstein-interview-bow-grip-arm-weight/",
+   "platform": "youtube",
+   "videoId": "WyV8b6Dw1Cw",
+   "channel": "CelloBello",
+   "instructor": "Alisa Weilerstein (Paul Katz ile röportaj)",
+   "notes": "Yay tutuşu/kol ağırlığı — ancak 'interview' formatında; konuşma ağırlıklı olabilir, çalma gösterimi oranı belirsiz. DÜŞÜK ÖNCELİK (konuşan-kafa riski).",
+   "key": "cellobello",
+   "idx": 20,
+   "triage": {
+    "verdict": "A-aday",
+    "reason": "sağ-ön çapraz görünümlü + tam üst-gövde+yay",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Sound Production Mastery: Principles",
+   "pageUrl": "https://cellobello.org/cello-lessons/right-hand/sound-production-principles/",
+   "platform": "youtube",
+   "videoId": "LZDo4zsyC5M",
+   "channel": "CelloBello",
+   "instructor": "Lev Mamuya",
+   "notes": "Yay/ses üretimi — temas noktası, ağırlık, hız (uzun yay tekniğiyle örtüşen temel ilkeler). 'Açık tel' odaklı değil ama başlangıç yay tekniği için ilgili.",
+   "key": "cellobello",
+   "idx": 21,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "For Teachers: Engaging Back Muscles",
+   "pageUrl": "https://cellobello.org/cello-lessons/for-teachers/engaging-back-muscles/",
+   "platform": "youtube",
+   "videoId": "Feip5zM9cF4",
+   "channel": "CelloBello",
+   "instructor": "Matt McManus (Paul Katz ile)",
+   "notes": "Postür/sırt kasları — 'For Teachers' serisi, fizyoterapist eşliğinde vücut mekaniği anlatımı. Eğitmenin çello çalma sahnesi oranı doğrulanamadı, ORTA-DÜŞÜK öncelik.",
+   "key": "cellobello",
+   "idx": 22,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "For Teachers: Balancing the Head",
+   "pageUrl": "https://www.cellobello.org/cello-lessons/for-teachers/balancing-the-head/",
+   "platform": "youtube",
+   "videoId": "v_NxowCAFsw",
+   "channel": "CelloBello",
+   "instructor": "Matt McManus (Paul Katz ile)",
+   "notes": "Postür — baş/boyun dengesi. Aynı 'For Teachers' serisinden, fizyoterapist odaklı; ORTA-DÜŞÜK öncelik.",
+   "key": "cellobello",
+   "idx": 23,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Open String Bow Hand Exercises | Part I",
+   "pageUrl": "https://www.youtube.com/watch?v=Ffo5n4OWkCU",
+   "platform": "youtube",
+   "videoId": "Ffo5n4OWkCU",
+   "channel": "The Cello Doll (@CelloDoll)",
+   "instructor": "Cello Doll (kanal sahibi)",
+   "notes": "Açık tel + yay eli egzersizi (Bölüm I); eğitmen enstrümanı bizzat çalarak gösteriyor, başlangıç seviyesi.",
+   "key": "yt-en-1",
+   "idx": 24,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Bowing Open Strings Cello",
+   "pageUrl": "https://www.youtube.com/watch?v=eY-__licBng",
+   "platform": "youtube",
+   "videoId": "eY-__licBng",
+   "channel": "Kate F. (@mskatefrancis)",
+   "instructor": "Kate F.",
+   "notes": "Açık tel yaylama gösterimi; kısa, doğrudan çalma videosu.",
+   "key": "yt-en-1",
+   "idx": 25,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Beginner Lesson: Easy Rhythms & Bow Control",
+   "pageUrl": "https://www.youtube.com/watch?v=Og3pM8cpcM4",
+   "platform": "youtube",
+   "videoId": "Og3pM8cpcM4",
+   "channel": "Cellopedia (@Cellopedia)",
+   "instructor": "Cellopedia eğitmeni (isim doğrulanamadı)",
+   "notes": "Ücretsiz başlangıç ders serisinin 3. bölümü — açık tel tonuna basit ritimler ekleyip yay kontrolü; eğitmen çalarak gösteriyor.",
+   "key": "yt-en-1",
+   "idx": 26,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Bow Control Exercises with Kirin McElwain",
+   "pageUrl": "https://www.youtube.com/watch?v=13t_QwbCSeo",
+   "platform": "youtube",
+   "videoId": "13t_QwbCSeo",
+   "channel": "Lessonface (@LessonFace)",
+   "instructor": "Kirin McElwain",
+   "notes": "Profesyonel eğitmenle yay kontrol egzersizleri; Lessonface prodüksiyonu, çalarak gösterim.",
+   "key": "yt-en-1",
+   "idx": 27,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Lesson: A Relaxed Bow Hold--Tension Be Gone!",
+   "pageUrl": "https://www.youtube.com/watch?v=xNgo_wjhlo4",
+   "platform": "youtube",
+   "videoId": "xNgo_wjhlo4",
+   "channel": "Interlochen Center for the Arts (@InterlochenArts)",
+   "instructor": "Doğrulanamadı",
+   "notes": "Gevşek/rahat yay tutuşu üzerine ders; kurumsal sanat merkezi prodüksiyonu, gösterim ağırlıklı görünüyor.",
+   "key": "yt-en-1",
+   "idx": 28,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Straight Bowing Focus Exercise on Open Strings",
+   "pageUrl": "https://www.youtube.com/watch?v=is8Wvei5TwE",
+   "platform": "youtube",
+   "videoId": "is8Wvei5TwE",
+   "channel": "Jonathan Humphries / CelloCoach (@CelloCoach)",
+   "instructor": "Jonathan Humphries",
+   "notes": "Açık tellerde düz yay çekme odaklı egzersiz; sol el görsel referans olarak kullanılıyor, çalarak gösterim.",
+   "key": "yt-en-1",
+   "idx": 29,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Learn how to BOW STRAIGHT Cello Lesson | Basics of Cello",
+   "pageUrl": "https://www.youtube.com/watch?v=bOvsEQU-RVY",
+   "platform": "youtube",
+   "videoId": "bOvsEQU-RVY",
+   "channel": "Jonathan Humphries / CelloCoach (@CelloCoach)",
+   "instructor": "Jonathan Humphries",
+   "notes": "'Basics of Cello' serisi — düz yay çekme öğretimi, başlangıç seviyesi, çalarak gösterim.",
+   "key": "yt-en-1",
+   "idx": 30,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Tina Guo Cello Tutorial - BOWING TECHNIQUE (Episode 2)",
+   "pageUrl": "https://www.youtube.com/watch?v=j9JCmxk_t4I",
+   "platform": "youtube",
+   "videoId": "j9JCmxk_t4I",
+   "channel": "Tina Guo (@tinaguo)",
+   "instructor": "Tina Guo",
+   "notes": "Profesyonel solo çellistin yaylama tekniği dersi; kendisi çalarak gösteriyor. İçerik profesyonel odaklı olabilir — başlangıç hedefine göre orta öncelik.",
+   "key": "yt-en-1",
+   "idx": 31,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "What a Long Bow Taught Me About Cello Technique (Full video coming soon!) David Feldman, cello",
+   "pageUrl": "https://www.youtube.com/watch?v=rCneJoth44Q",
+   "platform": "youtube",
+   "videoId": "rCneJoth44Q",
+   "channel": "The Worship Cellist (@TheWorshipCellist)",
+   "instructor": "David Feldman",
+   "notes": "Uzun yay tekniği üzerine gösterim/ders. Başlıkta 'Full video coming soon!' ibaresi var — kısa teaser/taslak olabilir, tam ders garantisi yok.",
+   "key": "yt-en-1",
+   "idx": 32,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Bow Arm Technique Explained (Part 1) | Cello Professor Jamie Fiste",
+   "pageUrl": "https://www.youtube.com/watch?v=M7c0G-fLqmo",
+   "platform": "youtube",
+   "videoId": "M7c0G-fLqmo",
+   "channel": "CelloProfessor (@CelloProfessor)",
+   "instructor": "Jamie Fiste (Central Michigan University)",
+   "notes": "Yay kolu biyomekaniği anlatımı (Bölüm 1); anlatım + gösterim karışık, konuşan-kafa oranı orta olabilir.",
+   "key": "yt-en-1",
+   "idx": 33,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "6 Fun Cello Bow Techniques (Practice Tips & Exercises)",
+   "pageUrl": "https://www.youtube.com/watch?v=IlLvN-oNWwA",
+   "platform": "youtube",
+   "videoId": "IlLvN-oNWwA",
+   "channel": "Wendy Law (@WendyLaw)",
+   "instructor": "Wendy Law",
+   "notes": "Profesyonel çellist 6 farklı yay tekniğini pratik ipuçlarıyla anlatıyor; kendisi çalarak gösteriyor.",
+   "key": "yt-en-1",
+   "idx": 34,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Bow Hold Guide for Beginners (adult learners)",
+   "pageUrl": "https://www.youtube.com/watch?v=756oYsXruao",
+   "platform": "youtube",
+   "videoId": "756oYsXruao",
+   "channel": "AdultCello (@adultcello)",
+   "instructor": "AdultCello eğitmeni (isim doğrulanamadı)",
+   "notes": "Yetişkin başlangıç öğrencileri için yay tutuşu rehberi; çalarak gösterim ağırlıklı.",
+   "key": "yt-en-1",
+   "idx": 35,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Bow Hold Explained with Exercises",
+   "pageUrl": "https://www.youtube.com/watch?v=uOzUaaH8CXg",
+   "platform": "youtube",
+   "videoId": "uOzUaaH8CXg",
+   "channel": "Aristides Rivas (@AristidesRivas)",
+   "instructor": "Aristides Rivas",
+   "notes": "Yay tutuşu egzersizlerle açıklanıyor; başlangıç/tekrar seviyesi için uygun.",
+   "key": "yt-en-1",
+   "idx": 36,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Holding the Cello Bow | Beginner Suzuki Cello Lessons Part 3",
+   "pageUrl": "https://www.youtube.com/watch?v=Kt7emzd6TRY",
+   "platform": "youtube",
+   "videoId": "Kt7emzd6TRY",
+   "channel": "21st Century Preparatory School Music (@21stcenturyprepmusic)",
+   "instructor": "Doğrulanamadı (Suzuki metodu öğretmeni)",
+   "notes": "Suzuki metodu başlangıç ders serisinin 3. bölümü — yay tutuşu; okul müzik programı prodüksiyonu.",
+   "key": "yt-en-1",
+   "idx": 37,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "How to Hold the Cello Bow for Beginners!",
+   "pageUrl": "https://www.youtube.com/watch?v=doSC4C5hx4c",
+   "platform": "youtube",
+   "videoId": "doSC4C5hx4c",
+   "channel": "Wendy Law (@WendyLaw)",
+   "instructor": "Wendy Law",
+   "notes": "Başlangıç seviyesi yay tutuşu dersi; kendisi çalarak/göstererek anlatıyor.",
+   "key": "yt-en-1",
+   "idx": 38,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "How to HOLD a CELLO BOW PROPERLY - a beginner cello Lesson | Basics of Cello",
+   "pageUrl": "https://www.youtube.com/watch?v=QGvO45fgYvo",
+   "platform": "youtube",
+   "videoId": "QGvO45fgYvo",
+   "channel": "Jonathan Humphries / CelloCoach (@CelloCoach)",
+   "instructor": "Jonathan Humphries",
+   "notes": "'Basics of Cello' serisi — doğru yay tutuşu, başlangıç dersi, çalarak gösterim.",
+   "key": "yt-en-1",
+   "idx": 39,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "How to hold the cello bow, demonstration and trouble shooting | Adult Cello",
+   "pageUrl": "https://www.youtube.com/watch?v=omDtTuWTNAA",
+   "platform": "youtube",
+   "videoId": "omDtTuWTNAA",
+   "channel": "AdultCello (@adultcello)",
+   "instructor": "AdultCello eğitmeni (isim doğrulanamadı)",
+   "notes": "Başlıkta açıkça 'demonstration' vurgusu var; yay tutuşu gösterimi + yaygın hataların giderilmesi.",
+   "key": "yt-en-1",
+   "idx": 40,
+   "triage": {
+    "verdict": "A-aday",
+    "reason": "sağ-ön çapraz görünümlü + tam üst-gövde+yay",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "How to Hold the Cello & Bow – Cello Beginner Lesson 1 (Posture & Setup)",
+   "pageUrl": "https://www.youtube.com/watch?v=3xk2eXK_meE",
+   "platform": "youtube",
+   "videoId": "3xk2eXK_meE",
+   "channel": "Cellopedia (@Cellopedia)",
+   "instructor": "Cellopedia eğitmeni (isim doğrulanamadı)",
+   "notes": "Başlangıç dersi 1 — oturuş, çello ve yay tutuşu (postür & kurulum); seri formatında, çalarak gösterim.",
+   "key": "yt-en-1",
+   "idx": 41,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Basics 04: How to Hold the Bow | Ailbhe McDonagh",
+   "pageUrl": "https://www.youtube.com/watch?v=goB7AADtmFI",
+   "platform": "youtube",
+   "videoId": "goB7AADtmFI",
+   "channel": "Ailbhe McDonagh (@AilbheMcDonagh)",
+   "instructor": "Ailbhe McDonagh",
+   "notes": "Adım adım 'Cello Basics' serisinin 4. bölümü — yay tutuşu; eğitmen kendisi çalarak gösteriyor.",
+   "key": "yt-en-1",
+   "idx": 42,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Posture for Frustrated Beginners",
+   "pageUrl": "https://www.youtube.com/watch?v=DdPltAu5VLI",
+   "platform": "youtube",
+   "videoId": "DdPltAu5VLI",
+   "channel": "the cello online (@thecelloonline)",
+   "instructor": "Doğrulanamadı",
+   "notes": "Postür/oturuş odaklı başlangıç videosu; 'frustrated beginners' hedef kitlesi vurgulu.",
+   "key": "yt-en-1",
+   "idx": 43,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Instruction with Kayson Brown: Natural Cello Posture",
+   "pageUrl": "https://www.youtube.com/watch?v=D58DRwwQGo0",
+   "platform": "youtube",
+   "videoId": "D58DRwwQGo0",
+   "channel": "Learn2playCello",
+   "instructor": "Kayson Brown",
+   "notes": "Doğal postür/duruş konusu; başlık bazlı, temel duruş gösterimi bekleniyor.",
+   "key": "yt-en-2-tr",
+   "idx": 44,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Playing on the Open Strings | Beginner Suzuki Cello Lessons Part 4",
+   "pageUrl": "https://www.youtube.com/watch?v=uitYhiqWWmo",
+   "platform": "youtube",
+   "videoId": "uitYhiqWWmo",
+   "channel": "21st Century Preparatory School Music",
+   "instructor": "Mrs. Hill (arama özetine göre)",
+   "notes": "Suzuki metodu, açık tel çalışması; eğitmen kendi sınıfından çalarak gösteriyor (arama sonucu özetine göre).",
+   "key": "yt-en-2-tr",
+   "idx": 45,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Cello Basics 06: Open Strings & Pizzicato | Ailbhe McDonagh",
+   "pageUrl": "https://www.youtube.com/watch?v=292Wzu4mdLg",
+   "platform": "youtube",
+   "videoId": "292Wzu4mdLg",
+   "channel": "Ailbhe McDonagh",
+   "instructor": "Ailbhe McDonagh",
+   "notes": "Açık tel + pizzicato gösterimi; eğitmenin kendi kanalı, kendisi çalarak anlatıyor.",
+   "key": "yt-en-2-tr",
+   "idx": 46,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Beginner Lesson no.1: How to sit with the cello",
+   "pageUrl": "https://www.youtube.com/watch?v=TxBPsppdDxM",
+   "platform": "youtube",
+   "videoId": "TxBPsppdDxM",
+   "channel": "CELLOJUNKIE",
+   "instructor": "Belirtilmemiş (CELLOJUNKIE kanalı)",
+   "notes": "Oturuş/postür konulu, ilk ders serisinin 1. bölümü.",
+   "key": "yt-en-2-tr",
+   "idx": 47,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Online Cello Lessons - 2 - How to Hold and Sit With the Cello",
+   "pageUrl": "https://www.youtube.com/watch?v=37WtvwyTZXY",
+   "platform": "youtube",
+   "videoId": "37WtvwyTZXY",
+   "channel": "CelloJoy - Professional Cellist & Online Lessons",
+   "instructor": "Olga Celli (olası, kanal sahibi)",
+   "notes": "Postür + tutuş, online ders serisinin 2. bölümü.",
+   "key": "yt-en-2-tr",
+   "idx": 48,
+   "triage": {
+    "verdict": "A-aday",
+    "reason": "sağ-ön çapraz görünümlü + tam üst-gövde+yay",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "How to Hold Your Cello Bow - Open Strings - Beginner Basics - Lesson 7",
+   "pageUrl": "https://www.youtube.com/watch?v=aqW1qDCXgZ0",
+   "platform": "youtube",
+   "videoId": "aqW1qDCXgZ0",
+   "channel": "cello.unlocked",
+   "instructor": "Belirtilmemiş (cello.unlocked kanalı)",
+   "notes": "Yay tutuşu + açık tel birlikte, başlangıç serisinin 7. dersi.",
+   "key": "yt-en-2-tr",
+   "idx": 49,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Çello Dersleri 1 (Başlangıç) - Yay Tutma, Yay Çekme",
+   "pageUrl": "https://www.youtube.com/watch?v=r5QDKfI6rlk",
+   "platform": "youtube",
+   "videoId": "r5QDKfI6rlk",
+   "channel": "Bora Erdogan",
+   "instructor": "Bora Erdoğan",
+   "notes": "Yay tutuşu + yay çekme (uzun yay çalışması dahil); serinin 1. dersi, eğitmen kendisi çalarak gösteriyor.",
+   "key": "yt-en-2-tr",
+   "idx": 50,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Çello Dersleri 2 - (Başlangıç) Yay çekme, Metronom ve Vuruşlar",
+   "pageUrl": "https://www.youtube.com/watch?v=ZrZ9BuokS0Q",
+   "platform": "youtube",
+   "videoId": "ZrZ9BuokS0Q",
+   "channel": "Bora Erdogan",
+   "instructor": "Bora Erdoğan",
+   "notes": "Yay çekme çalışması + metronomla vuruşlar; serinin devamı (uzun yay pratiği içeriyor olabilir).",
+   "key": "yt-en-2-tr",
+   "idx": 51,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "ÇELLO DERSİ 9 - ÇELLO DERSLERİ, SUZUKİYE DEVAM",
+   "pageUrl": "https://www.youtube.com/watch?v=ZDw9GCZ3aD4",
+   "platform": "youtube",
+   "videoId": "ZDw9GCZ3aD4",
+   "channel": "Bora Erdogan",
+   "instructor": "Bora Erdoğan",
+   "notes": "Suzuki metoduna devam; serinin ileri dersi, temel teknik (yay/postür) odağı daha azalmış olabilir.",
+   "key": "yt-en-2-tr",
+   "idx": 52,
+   "triage": {
+    "verdict": "belirsiz",
+    "reason": "thumbnail başlık-kartı — video-içi kadraj bilinmiyor; çıkarım öncesi kare kontrolü şart",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Çelloda Arşe Tutuşu - Çelloda Yay - Çello Dersi",
+   "pageUrl": "https://www.youtube.com/watch?v=_ecHtGk38kA",
+   "platform": "youtube",
+   "videoId": "_ecHtGk38kA",
+   "channel": "Erturgut Sanat",
+   "instructor": "Belirtilmemiş (Erturgut Sanat kanalı)",
+   "notes": "Arşe/yay tutuşu odaklı gösterim videosu.",
+   "key": "yt-en-2-tr",
+   "idx": 53,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Çello Nasıl Tutulur - Çello Dersi",
+   "pageUrl": "https://www.youtube.com/watch?v=J72RB_vbN7Y",
+   "platform": "youtube",
+   "videoId": "J72RB_vbN7Y",
+   "channel": "Erturgut Sanat",
+   "instructor": "Belirtilmemiş (Erturgut Sanat kanalı)",
+   "notes": "Enstrümanı tutuş/postür gösterimi (oturuş dahil olabilir).",
+   "key": "yt-en-2-tr",
+   "idx": 54,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "YAY / ARŞE NASIL TUTULUR ?",
+   "pageUrl": "https://www.youtube.com/watch?v=9YtR0iyBRKg",
+   "platform": "youtube",
+   "videoId": "9YtR0iyBRKg",
+   "channel": "Latif Öz sanat eğitim",
+   "instructor": "Latif Öz (olası, kanal adından)",
+   "notes": "Yay/arşe tutuşu odaklı kısa ders videosu.",
+   "key": "yt-en-2-tr",
+   "idx": 55,
+   "triage": {
+    "verdict": "kullanılamaz",
+    "reason": "dar kadraj / baş kırpık / el yakın-çekimi / dikey-shorts",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Yeni Başlayanlar İçin Çello Dersi",
+   "pageUrl": "https://www.youtube.com/watch?v=NOjAhoEluQw",
+   "platform": "youtube",
+   "videoId": "NOjAhoEluQw",
+   "channel": "Rapsodi Sanat",
+   "instructor": "Belirtilmemiş (Rapsodi Sanat kanalı)",
+   "notes": "Genel başlangıç dersi; postür/yay/açık tel içeriği başlıktan çıkarılıyor, video izlenerek doğrulanmadı.",
+   "key": "yt-en-2-tr",
+   "idx": 56,
+   "triage": {
+    "verdict": "A-aday",
+    "reason": "sağ-ön çapraz görünümlü + tam üst-gövde+yay",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  },
+  {
+   "title": "Nasıl Viyolonsel Çalınır? Ders #7 - Ücretsiz Cello Dersi",
+   "pageUrl": "https://www.youtube.com/watch?v=X-L1tNILUSs",
+   "platform": "youtube",
+   "videoId": "X-L1tNILUSs",
+   "channel": "CelloStones Academy",
+   "instructor": "Belirtilmemiş (CelloStones Academy kanalı)",
+   "notes": "Ücretsiz başlangıç serisinin 7. dersi, temel çalım gösterimi.",
+   "key": "yt-en-2-tr",
+   "idx": 57,
+   "triage": {
+    "verdict": "şartlı",
+    "reason": "kadraj tam; açı ön/sol-ön (B/C) — açı-duyarlılık kolu + postür referansı adayı",
+    "method": "thumbnail-only (mqdefault)",
+    "triageDate": "2026-07-26",
+    "triagedBy": "ostinato-session-visual"
+   }
+  }
+ ]
+}

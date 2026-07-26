@@ -1,0 +1,240 @@
+{
+ "cello-channels": {
+  "key": "cello-channels",
+  "channels": [
+   {
+    "name": "tonebase Cello",
+    "url": "https://www.youtube.com/channel/UC_a-NweaRJlzqairIaibYqA",
+    "instrument": "cello",
+    "whySuitable": "Dünyanın önde gelen çellistlerinden (Mischa Maisky, Pablo Ferrández, Tina Guo vb.) teknik ve repertuvar dersleri barındıran, çello pedagojisine özel kurulmuş büyük ölçekli bir eğitim platformunun resmi kanalı; kanalda ücretsiz tanıtım dersleri ve haftalık canlı atölye klipleri düzenli olarak yayınlanıyor. Platformun kendisi '100'den fazla kurs' vaat ediyor.",
+    "scale": "Kardeş kanal tonebase Piano'da 545 video / 243K abone bulundu; tonebase Cello kanalının kendi YouTube video/abone sayısı bu oturumda bağımsız doğrulanamadı (flags'e bakınız) — platform tanıtımına göre yüksek hacim (yüzlerce video) tahmin ediliyor."
+   },
+   {
+    "name": "CelloBello",
+    "url": "https://www.youtube.com/channel/UCCM5ZPixzZmXpSbxLE1Njng",
+    "instrument": "cello",
+    "whySuitable": "Colburn School çıkışlı, doğrudan 'çello pedagojisine adanmış, dünya çapında erişilebilir ücretsiz platform' olarak konumlanıyor; tanınmış çello eğitmenlerinden masterclass ve video dersler sunuyor, amaç coğrafya/gelir farkı gözetmeksizin herkese kaliteli çello eğitimi ulaştırmak.",
+    "scale": "~18K-25K abone (kaynaklar arasında küçük fark var); yıllar içinde birikmiş çok sayıda masterclass/ders videosu, kesin toplam video sayısı bu oturumda doğrulanamadı."
+   },
+   {
+    "name": "Cellopedia (Dr. Maxim Kozlov)",
+    "url": "https://www.youtube.com/channel/UCuemKmh33E3ah_q8-WA0JcA",
+    "instrument": "cello",
+    "whySuitable": "Hedef içerikle doğrudan örtüşüyor: kanalın 'How to Hold the Cello & Bow – Cello Beginner Lesson 1 (Posture & Setup)' videosunda (doğrulanmış URL: https://www.youtube.com/watch?v=3xk2eXK_meE) eğitmen Kozlov oturuş, enstrüman konumlandırma ve yay tutuşunu bizzat çalarak gösteriyor. Genel kanal içeriği de gam/etüt ağırlıklı, icra-odaklı (konuşan-kafa değil).",
+    "scale": "68,6K abone; kaynaklara göre 'yüzlerce video' (gam, etüt, çeşitli eserler, çoğunda yavaş-tempo alternatifi dahil)."
+   },
+   {
+    "name": "The Cello Doll (Carolyn Regula)",
+    "url": "https://www.youtube.com/c/TheCelloDoll",
+    "instrument": "cello",
+    "whySuitable": "'Open Strings October' adlı ücretsiz 27 günlük müfredat serisi tam olarak istenen hedef içerik: sol el/parmak konusuna hiç girmeden, salt yay eli-kol kurulumu, ton kalitesi ve yay kontrolü üzerine, eğitmenin bizzat açık tellerde çaldığı gösterim videoları. Ayrıca 'Vibrato Bootcamp' gibi haftalık ikinci bir dedike seri daha var.",
+    "scale": "İki tekrarlayan ücretsiz seri: 'Open Strings October' (~6 günde bir yeni video, 27 gün) ve 'Vibrato Bootcamp' (4 hafta, haftalık video) + kanalın genel yıllar içi birikimi — onlarca dedike ders videosu."
+   },
+   {
+    "name": "The Cello Corner (Susanne Beer Cello Corner Foundation)",
+    "url": "https://www.youtube.com/channel/UCDBcySlVLnmK6W_wXOJ8Wkg",
+    "instrument": "cello",
+    "whySuitable": "Londra Filarmoni'nin eski yardımcı baş çellisti Susanne Beer'in kurduğu özel öğretim stüdyosunun kanalı; Suzuki metoduna göre kademeli düzenlenmiş, eğitmenin öğrenciyle birlikte bizzat çaldığı ders/icra videoları içeriyor.",
+    "scale": "~20,3K abone; Suzuki kitap 2-7 seviyelerine göre organize edilmiş çok sayıda oynatma listesi ve ders videosu (kesin toplam sayı doğrulanamadı)."
+   },
+   {
+    "name": "Cello Discovery (Carolyn Hagler)",
+    "url": "https://www.youtube.com/channel/UCRvd0wrqhkAvQHBmj8iuaCQ",
+    "instrument": "cello",
+    "whySuitable": "Özellikle yetişkin/geç-başlayan çellistlere yönelik; 'Cello 101 – Let's Get Started' modülünde ekipman seçimi, oturuş, temel kurulum gibi tam başlangıç konularını eğitmenin kendisi bizzat çalarak/gösterek anlatıyor.",
+    "scale": "14,3K abone; başlangıç modülü + düzenli yayınlanan yetişkin-başlangıç dersleri ve icra videoları (onlarca video, kesin sayı doğrulanamadı)."
+   },
+   {
+    "name": "Emily Wright Cello",
+    "url": "https://www.youtube.com/@EmilyWrightCello",
+    "instrument": "cello",
+    "whySuitable": "Profesyonel çellist-öğretmen Emily Wright'ın kanalı ağırlıklı olarak çello tekniği videolarından oluşuyor; kendisi stüdyosunda 16 yaş üstü başlangıç seviyesi öğrencilere de özel ders veriyor, bu da kanal içeriğinin temel teknik gösterimlerle örtüştüğünü düşündürüyor.",
+    "scale": "Abone/video sayısı bu oturumda doğrulanamadı (flags); orta ölçekli, teknik-odaklı bir eğitim kanalı olarak görünüyor."
+   },
+   {
+    "name": "Suzuki Strings World (Rebekah Hood-Sava)",
+    "url": "https://www.youtube.com/channel/UC9QEGqkkB1sVJHZ4MWDzb2w",
+    "instrument": "cello",
+    "whySuitable": "25 yıllık Suzuki keman/viyola/çello öğretmenliği deneyimine dayanıyor; çello için tam 10 kitaplık Suzuki müfredatını kapsayan, eğitmenin bizzat çaldığı şarkı-eşlikli ve pratik-ipucu videoları sunuyor. Not: kanal sadece çelloya adanmış değil, çok-enstrümanlı (keman/viyola/çello).",
+    "scale": "Çello (10 kitap) + keman (8 kitap) + viyola (4 kitap) müfredatına dayanan çok sayıda video; abone/video sayısı bu oturumda doğrulanamadı."
+   },
+   {
+    "name": "Ebrulyce Paylaşımlar — 'Viyolonsel Nasıl Çalınır?' serisi (TR)",
+    "url": "https://www.youtube.com/watch?v=HauCn7HcMWg",
+    "instrument": "cello",
+    "whySuitable": "Türkçe dilinde, bire bir çello dersi veren ve konservatuvar hazırlık öğrencileri yetiştiren bir eğitmenin numaralandırılmış başlangıç serisi; enstrümanın tanıtımı, akort ve temel teknik konularını bizzat çalarak anlatıyor — TR dil ihtiyacını karşılayan az sayıdaki dedike çello kanalından biri.",
+    "scale": "Doğrulanan en az 8+ 'Ders' videosu (Ders #1, #2, #5, #7, #8) artı enstrüman tanıtımı/akort/tarihçe videoları — küçük-orta ölçekli ama tamamen çelloya adanmış bir seri."
+   },
+   {
+    "name": "Jokerstore Müzik Dersleri (TR)",
+    "url": "https://www.youtube.com/channel/UCnfKqQwX4PgwiwWEx_Mfr3A",
+    "instrument": "cello",
+    "whySuitable": "İstanbul Beyoğlu merkezli müzik okulunun kanalında eğitmen Tansu Eğiinlioğlu'nun bizzat çaldığı çello dersi/kurs videoları yer alıyor; Türkçe içerik ihtiyacına ikinci bir seçenek sağlıyor. Not: kanal çelloya özel değil, çok-enstrümanlı bir okul kanalı (keman, piyano vb. dersler de var).",
+    "scale": "Çok-enstrümanlı okul kanalı içinde bir alt-küme olarak çello dersleri; çello-özel video sayısı ve kanal geneli abone sayısı bu oturumda doğrulanamadı."
+   }
+  ],
+  "flags": [
+   "tonebase Cello: YouTube kanalının kendi video/abone sayısı bu oturumda bağımsız doğrulanamadı; sadece kardeş kanal tonebase Piano (545 video/243K abone) ve genel platform tanıtım metni (100+ kurs, 25.000+ aktif üye) bulundu.",
+   "CelloBello: Kaynaklar arasında abone sayısı çelişkili (bir kaynak 18K, Feedspot listesi 24,8K diyor); kesin toplam video sayısı doğrulanamadı.",
+   "Emily Wright Cello: Abone sayısı ve toplam video sayısı bu oturumda doğrulanamadı; bazı videoların 'konuşan kafa' formatında olma ihtimali var, bu yüzden görev tanımındaki düşük-öncelik kuralına göre değerlendirilmeli.",
+   "Suzuki Strings World (Rebekah Hood-Sava): Kanal sadece çelloya adanmış değil, keman/viyola/çello karışık içerik barındırıyor; abone ve video sayıları doğrulanamadı.",
+   "Ebrulyce Paylaşımlar: Kanalın tam youtube.com/@handle veya youtube.com/channel/... adresi bu oturumda bağımsız/kesin doğrulanamadı (arama sonuçları kanal adını 'ebrulyce paylaşımlar' olarak veriyor ama net URL eşleşmesi teyit edilemedi); bu yüzden listede kanal URL'si UYDURULMADI, bunun yerine gerçekliği doğrulanmış tekil bir video URL'si (Ders #1) temsilci olarak kullanıldı. Ayrıca en az Ders #1,#2,#5,#7,#8 var olduğu doğrulandı ama serinin tam uzunluğu (toplam kaç ders) doğrulanamadı.",
+   "Jokerstore Müzik Dersleri: Kanal çelloya özel değil (çok enstrümanlı okul kanalı); çello-özel video sayısı ve kanal geneli abone sayısı doğrulanamadı.",
+   "Cello Akademie Rutesheim (Feedspot'ta önerilen, ~22,5K abone) değerlendirildi ama listeye alınmadı: içerik ağırlıklı yıllık masterclass/konser kayıtları olduğu için 'başlangıç açık tel/yay tutuşu/oturuş' hedef içeriğiyle daha az örtüşüyor.",
+   "Genel yöntem notu: WebFetch, YouTube'un JS-render edilen kanal/video sayfalarından canlı abone/video istatistiklerini çekemedi (footer/navigasyon dışında veri dönmedi); bu yüzden tüm sayısal 'hacim' tahminleri WebSearch sonuç özetlerine dayanıyor, resmi YouTube Analytics ile teyit edilmedi — rakamlar günceli tam yansıtmayabilir."
+  ]
+ },
+ "broad-anchors": {
+  "key": "broad-anchors",
+  "channels": [
+   {
+    "name": "Violin Lounge TV (Zlata Brouwer)",
+    "url": "https://www.youtube.com/channel/UCwjzHRbVSCE6_m3x3qR__sA",
+    "instrument": "violin",
+    "whySuitable": "Profesyonel kemancı Zlata Brouwer'ın kanalı; ağırlık yay tekniği, ses üretimi ve serbest hareket üzerine — kamerada bizzat çalarak gösteriyor, konuşan-kafa formatı değil. violinlounge.com'un kendi 'en iyi 20' derlemesinde de referans kanal.",
+    "scale": "500+ ücretsiz ders videosu, 2013'ten beri düzenli yayın"
+   },
+   {
+    "name": "Violin Tutor Pro (Michael Sanchez)",
+    "url": "https://www.youtube.com/@violintutorpro",
+    "instrument": "violin",
+    "whySuitable": "10+ yıldır YouTube'da; başlangıç seviyesine özel açık tel, yay tutuşu ve postür videoları dahil geniş müfredat. Eğitmen neredeyse her videoda kemanı elinde tutup gösterim yapıyor.",
+    "scale": "1000'den fazla ders videosu"
+   },
+   {
+    "name": "Professor V (Todd Ehle)",
+    "url": "https://www.youtube.com/user/professorV",
+    "instrument": "violin",
+    "whySuitable": "Del Mar College'da keman öğretim üyesi Todd Ehle; YouTube'daki ilk keman eğitmenlerinden. 'Yay tutuşu (bow hold)', 'sol el parmak yerleşimi' gibi videolar tamamen yakın çekim teknik gösterim.",
+    "scale": "Yüzlerce ders videosu, 2008'den beri"
+   },
+   {
+    "name": "Fiddlerman (Pierre Holstein)",
+    "url": "https://www.youtube.com/channel/UC9SqCwMa4IWH2xiUDuatO8A",
+    "instrument": "violin",
+    "whySuitable": "30+ yıl profesyonel orkestra deneyimi olan konzertmeister; fiddlerman.com ekosistemiyle birlikte açık tel/duruş/yay egzersizlerini bizzat çalarak anlatıyor. 84.000+ kişilik topluluğu var.",
+    "scale": "Yüzlerce ücretsiz ders"
+   },
+   {
+    "name": "Violin Lab (Beth Blackerby)",
+    "url": "https://www.youtube.com/channel/UCUtcQUlim-wN2MYApfccvzA",
+    "instrument": "violin",
+    "whySuitable": "2008'den beri yetişkin başlangıç öğrencilerine odaklı; klasik eğitimli eğitmen tekniği adım adım kamerada gösteriyor. 20.000+ öğrenciye ulaştığı belgelenmiş.",
+    "scale": "Yüzlerce ders videosu"
+   },
+   {
+    "name": "Violinspiration",
+    "url": "https://www.youtube.com/@Violinspiration",
+    "instrument": "violin",
+    "whySuitable": "Başlangıç seviyesine yönelik haftalık yeni tutoriallar; duruş, yay tutuşu ve açık tel egzersizleri gösterim ağırlıklı. violinlounge.com ve violinspiration.com listelerinde tavsiye ediliyor.",
+    "scale": "175K+ abone, haftalık yeni içerik, 2015'ten beri"
+   },
+   {
+    "name": "iClassical Academy",
+    "url": "https://www.youtube.com/channel/UCtv6yHMfBRjbN8846DZf0sA",
+    "instrument": "violin",
+    "whySuitable": "Leonidas Kavakos, Natalia Lomeiko gibi konser sanatçılarının masterclass'larını yayınlıyor; ileri düzey olsa da teknik gösterim yoğunluğu çok yüksek (canlı çalım + yakın çekim el/yay analizi).",
+    "scale": "100+ masterclass videosu"
+   },
+   {
+    "name": "Nathan Cole",
+    "url": "https://www.youtube.com/channel/UCfjm1xhA-XT4nCxs75KwNSQ",
+    "instrument": "violin",
+    "whySuitable": "LA Philharmonic Birinci Yardımcı Konzertmeister'i; teknik ve orkestra pasajı videolarında kemanı bizzat çalarak analiz ediyor — pedagojik itibarı çok yüksek.",
+    "scale": "Onlarca teknik/pratik videosu"
+   },
+   {
+    "name": "JustinGuitar (Justin Sandercoe)",
+    "url": "https://www.youtube.com/@justinguitar",
+    "instrument": "guitar",
+    "whySuitable": "2006'dan beri internet gitar eğitiminin öncülerinden; yapılandırılmış başlangıç müfredatında akor/pena/parmak tekniği neredeyse her videoda bizzat çalınarak gösteriliyor. Guitar World, MakeUseOf gibi kaynaklarda tutarlı biçimde 'en iyi' listelenir.",
+    "scale": "1300+ ücretsiz ders videosu"
+   },
+   {
+    "name": "Marty Music (Marty Schwartz)",
+    "url": "https://www.youtube.com/channel/UCmnlTWVJysjWPFiZhQ5uudg",
+    "instrument": "guitar",
+    "whySuitable": "YouTube'un en uzun soluklu gitar eğitmenlerinden; riff/solo tekniklerini basitleştirip kamerada birebir çalarak öğretiyor. CNBC dahil basında 'YouTube gitar dersleriyle kariyer yaptı' diye anlatılıyor.",
+    "scale": "Binlerce video, 2006'dan beri"
+   },
+   {
+    "name": "Paul Davids",
+    "url": "https://www.youtube.com/@PaulDavids",
+    "instrument": "guitar",
+    "whySuitable": "Yüksek prodüksiyonlu kanalda teknik karşılaştırma, aranjman ve teknik ders videolarının tamamında kendisi çalıyor; Guitar.com'un 'dünyanın en büyük gitar YouTuber'ları' listesine dahil.",
+    "scale": "Yüzlerce video, haftalık düzen"
+   },
+   {
+    "name": "Andy Guitar (Andy Crowley)",
+    "url": "https://www.youtube.com/@andycrowley",
+    "instrument": "guitar",
+    "whySuitable": "andyguitar.co.uk ile entegre yapılandırılmış başlangıç kursu; her ders elinde gitarla teknik gösterim (akor geçişleri, ritim eli) içeriyor.",
+    "scale": "Binlerce video (site+kanal)"
+   },
+   {
+    "name": "GuitarZoom (Steve Stine)",
+    "url": "https://www.youtube.com/@stinemusiclessons",
+    "instrument": "guitar",
+    "whySuitable": "GuitarZoom'un baş eğitmeni; başlangıç tekniği, pena tutuşu ve akor geçişlerini kamerada çalarak anlatan geniş bir katalog sunuyor.",
+    "scale": "Yüzlerce-binlerce video"
+   },
+   {
+    "name": "Nate Savage",
+    "url": "https://www.youtube.com/@natesguitar1",
+    "instrument": "guitar",
+    "whySuitable": "10+ yıl çevrimiçi gitar öğretmenliği geçmişi (eski GuitarLessons365 bağlantılı); başlangıç teknik derslerinde bizzat çalarak gösterim yapıyor.",
+    "scale": "Yüzlerce video"
+   },
+   {
+    "name": "Hoffman Academy (Joseph Hoffman)",
+    "url": "https://www.youtube.com/@Hoffmanacademy",
+    "instrument": "piano",
+    "whySuitable": "Sıfırdan başlayanlar için adım adım yöntem; el/parmak pozisyonu ve duruş her derste yakın çekim klavye görüntüsüyle gösteriliyor. 291K abone ile en çok önerilen başlangıç kanallarından.",
+    "scale": "300+ ücretsiz ders videosu"
+   },
+   {
+    "name": "Creative Piano Academy",
+    "url": "https://www.youtube.com/c/Creativepianoacademy",
+    "instrument": "piano",
+    "whySuitable": "Kuşbakışı klavye görünümü + nota + tuş vurgulama birlikte sunuluyor; parmak pozisyonu ve teknik egzersizler tamamen gösterim ağırlıklı, ücretli kurslardaki formatı ücretsiz sağlıyor.",
+    "scale": "100+ video ders"
+   },
+   {
+    "name": "Piano Lessons on the Web (Tim)",
+    "url": "https://www.youtube.com/channel/UCAh-jIhQPq0XVuu3RN4zGaw",
+    "instrument": "piano",
+    "whySuitable": "Başlangıç seviyesi teori, nota okuma ve çalma tekniği üzerine uzun soluklu kanal; eğitmen düzenli olarak piyanoda gösterim yapıyor.",
+    "scale": "Yüzlerce video"
+   },
+   {
+    "name": "PianoTV (Allysia Jensen)",
+    "url": "https://www.youtube.com/channel/UCz0PmHG0RvQHazlEsFU-4uQ",
+    "instrument": "piano",
+    "whySuitable": "Kanada'lı piyano eğitmeni; başlangıç teknik ipuçlarını (el pozisyonu, parmak numaralama) kamerada bizzat çalarak anlatan uzun süredir aktif kanal.",
+    "scale": "Yüzlerce video, 2013'ten beri"
+   },
+   {
+    "name": "Pianote (Lisa Witt)",
+    "url": "https://www.youtube.com/channel/UC_DmCvOP5Q_eBMRDvqqRXjg",
+    "instrument": "piano",
+    "whySuitable": "Yüksek prodüksiyonlu, düzenli yayın yapan ekip; el/parmak yakın çekimleriyle teknik gösterim öne çıkıyor, Lisa Witt'in viral olan derslerinde çalma tekniği merkezde.",
+    "scale": "Yüzlerce video, haftalık yeni içerik"
+   },
+   {
+    "name": "Josh Wright Piano",
+    "url": "https://www.youtube.com/channel/UCp4DtLatjb5dBNHHYcvVXCw",
+    "instrument": "piano",
+    "whySuitable": "Konser piyanisti; teknik ve pratik yöntemi videolarında kendisi çalarak gösteriyor — ileri teknik gösterim kalitesi başlangıç postür/el pozisyonu anlatımına da yansıyor.",
+    "scale": "Yüzlerce video"
+   }
+  ],
+  "flags": [
+   "Görev talimatında 'Hedef içerik: BAŞLANGIÇ çello tekniği GÖSTERİMİ' ifadesi geçiyor, ancak istenen enstrümanlar keman/gitar/piyano (KEMAN/GİTAR/PİYANO) — çello hiç istenmemiş. Bu muhtemelen başka bir görevden (çello) kopyalanmış şablon metni. Kararı: talimatın 'BAŞLANGIÇ teknik gösterimi, eğitmenin bizzat çaldığı, konuşan-kafa değil' ruhunu keman/gitar/piyano için analog kriterlere (açık tel/yay tutuşu→keman; akor/pena tekniği→gitar; el-parmak pozisyonu/duruş→piyano) uygulayarak devam edildi. Bu çelişki orkestratöre bildirilmeli.",
+   "Tomo Fujita (gitar, Berklee) ve Griff Hamlin (Blues Guitar Unleashed) araştırıldı ama tam doğrulanmış resmi YouTube kanal URL'si bulunamadı (birden fazla çelişkili/otomatik-oluşturulmuş 'Topic' kanalı veya isim benzeri kanallar çıktı) — uydurma URL yazmamak için listeye DAHİL EDİLMEDİ.",
+   "Nate Savage kanalı (@natesguitar1) ile eski 'GuitarLessons365' markası arasındaki devamlılık kaynaklarda net değil (kanalın yeniden markalandığına dair çelişkili bilgiler var) — URL doğrulandı (kanal adı 'Nate Savage' olarak teyit edildi) ama marka-tarihçesi ilişkisi %100 kesin değil.",
+   "Violinspiration kanalının kimin tarafından yönetildiği kaynaklar arasında çelişkili: bazı kaynaklar Zlata Brouwer'a (Violin Lounge ile aynı kişi), bazıları 'Julia' isimli ayrı bir eğitmene atfediyor. Kanal URL'si (@Violinspiration) doğrulandı, eğitmen kimliği teyit edilemedi.",
+   "Scale (ders/video hacmi) alanlarındaki rakamlar ikincil kaynaklardan (liste makaleleri, 2024-2025 tarihli) alınmıştır; 2026-07-26 itibarıyla canlı YouTube abone/video sayıları tek tek doğrulanmadı — kaba yaklaşık değerler olarak okunmalı.",
+   "Creative Piano Academy ve Piano Lessons on the Web URL'leri tek bir üçüncü taraf makalesinden (teds-list.com) alındı; ikinci bir bağımsız kaynakla çapraz doğrulanmadı."
+  ]
+ }
+}
