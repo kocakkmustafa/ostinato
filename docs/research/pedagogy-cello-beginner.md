@@ -119,5 +119,5 @@ Kaynaklar arasında belirgin varyans var (4/4'e geçiş 11-14 yaş arası deği�
 ## 6. Bilinen boşluklar
 
 - CelloBello içeriği yalnız arama-snippet'lerinden (403 bot-engeli) — tam ders metinleri elle taranmalı (kurucu veya tarayıcı oturumu).
-- TR pedagoji kaynağı taranmadı (kaynaklar EN-ağırlıklı); TR öğretmen görüşmeleri terminoloji farkını kapatır.
+- ~~TR pedagoji kaynağı taranmadı~~ ✅ 2026-07-26: `pedagogy-tr-kaynaklar.md` (İSMEK müfredatı + Suzuki TR + terminoloji sözlüğü + 5 somut görüşme adayı + fiyat gerçekliği).
 - Vibrato/shifting/ton üretimi bilinçli KAPSAM DIŞI (V1-dışı; plan §8).

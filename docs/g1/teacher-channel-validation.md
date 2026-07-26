@@ -9,7 +9,7 @@
 ## 1. Görüşme hedef profili ve tedarik
 
 - **Hedef karışım (5-10 kişi):** ≥3 özel ders ağırlıklı bireysel öğretmen · ≥2 müzik okulu/kurum öğretmeni · ≥1 çocuk-ağırlıklı (Suzuki vb.) öğretmen · mümkünse 1 online-ders ağırlıklı öğretmen. TR ağırlıklı başla (erişim kolay), ≥2 EN-pazar görüşmesi hedefle (fiyat algısı farkı için).
-- **Tedarik kanalları:** yerel müzik okulları + konservatuvar hazırlık hocaları (tanıdık zinciri) · Instagram/YouTube'da aktif çello öğretmenleri · italki/Preply/Superprof online çello öğretmenleri (EN bacağı için) · belediye konservatuvarları.
+- **Tedarik kanalları:** yerel müzik okulları + konservatuvar hazırlık hocaları (tanıdık zinciri) · Instagram/YouTube'da aktif çello öğretmenleri · italki/Preply/Superprof online çello öğretmenleri (EN bacağı için) · belediye konservatuvarları. **TR somut aday listesi (5 isim/kurum, öncelik sıralı + erişim yolları): `../research/pedagogy-tr-kaynaklar.md §3`.** Görüşmede TR terminoloji sözlüğü (aynı doküman §2) kullanılır; tel-adlandırma pratiği görüşmede sorulur.
 - **Davet mesajı taslağı (TR):**
   > Merhaba [Ad] Hocam, müzik öğrencilerinin ders DIŞI pratik saatleriyle ilgili kısa bir araştırma yapıyorum — bir şey satmıyorum, öğretmenlerin bu konudaki gerçek deneyimini anlamaya çalışıyorum. 25-30 dakikalık bir görüşme için uygun olur musunuz? [tarih önerileri]
   (Ürün adı/tarifi davette YOK — anket etkisi yaratmamak için.)
