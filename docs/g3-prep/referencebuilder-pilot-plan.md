@@ -14,7 +14,7 @@ Pilot TEK teknikle sınırlı: **açık tel (D) uzun yay** — V1'in çekirdek e
 - Kadraj: gövde+sağ kol tam görünür; kamera sabit; tek kişi.
 - Çeşitlilik: farklı vücut tipleri/cinsiyet; en az 1 farklı öğretim geleneği (Suzuki-tarzı + konservatuvar-tarzı).
 - Kayıt: her video için `kaynak-URL + eğitmen + açı-sınıfı + fps + kesit timestamp'leri` tablosu (provenance, M-F-07).
-- Aday havuz başlangıcı (G0 pedagoji korpusundan): CelloBello/Baverstam dersleri · celloprofessor.com (Fiste) videoları · Bora Erdoğan serisi (TR) · Suzuki tanıtım dersleri — nihai seçim izleme ile.
+- **Girdi listesi BAĞLANDI (2026-07-26):** triyaj raporu `../g1/kamera-aci-triyaji.md` — A-aday 4 video (#20 Weilerstein · #40 AdultCello · #48 Olga Celli · #56 Rapsodi Sanat) + belirsiz-terfi adayları (Bora Erdoğan 1-2 kare-kontrollü) + B4 kolu için şartlı-sınıftan seçki. Provenance: `../data/harvest/cello-triage.v1.json`.
 
 ## 3. Boru hattı (hepsi mevcut kanonik araçlarla — yeni core kodu YOK)
 
@@ -31,7 +31,7 @@ Pilot TEK teknikle sınırlı: **açık tel (D) uzun yay** — V1'in çekirdek e
 | B1 | Kullanılabilir take oranı | ≥3 bağımsız eğitmenden ≥1'er temiz take (StructuralValidator geçer + açı kapısı geçer) |
 | B2 | Aynalama konsensüsü | `resolveMirroring` TEK atamada uzlaşır (çözümsüzlük = FAIL — sistematik ters öğretme riski) |
 | B3 | Varyans makullüğü | Konsensüs eklemlerinde (dirsek yörüngesi, yay-kolu faz süreleri) eğitmenler-arası band, taksonomideki "hata" büyüklüklerinden DAR (band ≥ hata büyüklüğü ise referans hata ayıramaz = FAIL) |
-| B4 | Açı-duyarlılık raporu | A-sınıfı ↔ B/C-sınıfı videolardan çıkan açı dizileri farkı ölçülür ve raporlanır (eşik yok; C-açısı kullanılabilir mi kararının verisi) |
+| B4 | Açı-duyarlılık raporu — **ANA KOL (2026-07-26 triyaj bulgusuyla terfi):** sıkı-A oranı yalnız %7 (4/57) çıktı → kamu-video stratejisinin çello verimi B/C-açı normalizasyon toleransına bağlı. Metrik-BAŞINA ayrıştırılır: postür metrikleri (açı-toleranslı beklenir) vs yay-paralellik (en duyarlı) | A↔B/C farkı metrik-başına raporlanır; "hangi metrik hangi açı sınıfından beslenebilir" tablosu pilot çıktısıdır |
 | B5 | Faz tespiti | ≥%90 strokta DOWN/UP/CHANGE zamanları elle işaretlemeyle ±1 kare uyumlu |
 
 **Sonuç yolları:** B1-B3+B5 geçer → bowing referans hattı = kamu-video (protokoldeki sahnelenmiş-doğru klipler tamamen düşer). B2 veya B3 FAIL → geri-dönüş: işbirlikçi öğretmenle KENDİ referans çekimlerimiz (G1-B'den çıkan öğretmen; §6.0'a istisna GEREKMEZ — karar "kamu videosu birincil" der, fizibilite raporuyla Ostinato-özel sapma kurucuya sunulur, motion-core DEFTER'ine M-O kaydıyla).
