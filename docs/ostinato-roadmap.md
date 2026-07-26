@@ -4,6 +4,8 @@
 **Hiyerarşi:** `00-AILE-MIMARISI.md` (D3: 3-5× efor sınıfı; B2B sinyalsiz derin yatırım YOK) > `20-URETIM-SURECI.md` > `10-ARAC-KATALOGU.md` > bu dosya > `ostinato-plan.md`.
 **Ürün dili: İNGİLİZCE.** Aile sırası **4** — V0'ı KOD DEĞİL: veri protokolü + öğretmen kanalı doğrulaması.
 
+> ⚡ **REVİZYON 2026-07-26 (kurucu direktifi — KURUCUSUZ VERİ FABRİKASI + GENİŞ KÜTÜPHANE, M-F-13..16):** Bu haritadaki "kurucu çekimi / fixture çekim listesi kurucuya" varsayımları KALDIRILDI — kurucu çekim YAPMAZ. Birincil veri = kamu-video hasadı + sentetik + gerekirse ücretli klip (katalog §6.2); doğrulama = §6.3 merdiveni; öğretim görselleri = §6.4 katmanlı AI-eğitmen hattı (T1 = iskelet-sürümlü uygulama-içi avatar, $0 ve form-garantili). Kurucudan yalnız cihaz-benchmark'ı + onay/kapı kararları beklenir. **Geniş kütüphane:** Çello derin + keman/gitar/piyano ön-hasadı; İLK ADIM kamera-açı triyajı (CelloBello+tonebase-free'den 30-50 aday video elle etiketle); pilot çekim yerine kamu-video pilotu (ReferenceBuilder); nesne-algılama EĞİTİM verisi OK-8 rejiminde kalır (öğretmen-pilot gönüllüleri; kurucu çekimi değil); cihaz-benchmark kurucuda. Sorularını bu çerçevede kendin karara bağla — kurucuya soru YOK.
+
 ## 1. Kimlik ve Kuzey Yıldızı
 
 **Ostinato: Music Practice** — öğretmenin yanında olmadığı pratik saatlerinde kamera+mikrofon seni izlesin: postür, yay tekniği, zamanlama; kısa düzeltme versin; ilerlemeni öğretmenle paylaşılabilir yapsın. **Marka TÜM çalgılara açık (§1.1); V1 motoru çello** — mimari enstrüman-bağımsız (pose+hand+audio+öğretmen akışı ortak; çello modülü tak-çıkar).
