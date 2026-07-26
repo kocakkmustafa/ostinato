@@ -1,6 +1,11 @@
-# Ostinato G1-A — Çello+Yay Algılama Veri Toplama Protokolü (v1)
+# Ostinato G1-A — Çello+Yay Algılama Veri Toplama Protokolü (v1.1)
 
-**Tarih:** 2026-07-26 · **Statü:** TASARIM — kurucu onayı bekliyor (D3 kapı çıktısının A parçası)
+**Tarih:** 2026-07-26 (v1.1: kurucu Referans-Kaynağı kararı §6.0 işlendi) · **Statü:** TASARIM — kurucu onayı bekliyor (D3 kapı çıktısının A parçası)
+
+> ⚠️ **v1.1 KAPSAM REVİZYONU (katalog §6.0 / M-C-01..04, kurucu kararı — bağlayıcı):** Bu protokolün amacı netleştirildi — iki ayrı veri ihtiyacı vardır ve §6.0 yalnız birini değiştirir:
+> 1. **Nesne-algılama EĞİTİM verisi** (çello/yay/el bbox+keypoint): §6.0 kapsamı DIŞINDA (skorlama referansı değil, model eğitim verisi). **Kendi çekimlerimiz + rıza rejimi AYNEN gerekli** — kamuya açık video kareleriyle ship-edilen detector EĞİTİLMEZ (katalog §0 veri-lisansı kuralı; kurucunun §6.0'da kabul ettiği risk açı-dizisi çıkarımıdır, kare-bazlı model eğitimi değil — sessizce genişletilmedi, OK-8).
+> 2. **Bowing SKORLAMA referansları** (doğru teknik açı dizileri): artık kamuya açık gerçek çello eğitmen videolarından, ≥3 eğitmen konsensüsüyle (`ReferenceBuilder`) çıkarılır; **sahnelenmiş "doğru teknik" klip ihtiyacı azalır**, hatalı örneklerin çoğu referansın kontrollü bozulmasından üretilir (M-C-03, etiket bedava). ⚠️ Ostinato'ya özgü kapı: §6.0 kalite kapılarından "kamera açısı uygunluğu" bizde SERT — eğitmen videoları V1 standart açımızda değil; çıkarım fizibilitesi G3'te ölçülür (DEFTER O-012). Az sayıda gerçek sahnelenmiş-hata klibi, "kontrollü bozulma gerçekçi mi" kontrolü için korunur.
+> Aşağıdaki çeşitlilik matrisi hedefleri bu ayrıma göre G3 başında yeniden dengelenir (detector-eğitim hücreleri aynen; doğru-teknik/sahnelenmiş-hata klipleri ↓).
 **Bağlayıcı girdiler:** `ostinato-plan.md` §12 (çeşitlilik) + §13 (gizlilik/çocuk rejimi) · motion-core `10-ARAC-KATALOGU.md` §3 (2-keypoint yay kararı) + §6 (fixture şeması) · roadmap G1-A.
 **Amaç:** MediaPipe Object Detector + Model Maker transfer-learning turlarını besleyecek, lisansı %100 bize ait, çeşitlilik-kontrollü, rıza-temiz çello+yay görüntü veri seti üretme reçetesi. **Bu doküman kod içermez; kabulünden sonra çekimler kurucu koordinasyonuyla başlar.**
 

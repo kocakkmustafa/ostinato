@@ -3,7 +3,8 @@
 **Tarih:** 2026-07-26 · **Statü:** TASLAK — G2'de (B2B sinyali onaylıysa) ADR olarak mühürlenir; şimdilik tasarım-hazırlık (kapıya bağımlı olmayan iş).
 **Bağlayıcı:** 00-AILE-MIMARISI §1.1 (Ostinato TÜM çalgılara açık; çello ilk motor) + §2 (nesne algılama + ses analizi OSTINATO'ya aittir, core'a sızmaz — aile bunlarsuz yaşar) · 20-URETIM-SURECI §2.6 (ileriye-dönük mimari: alan-bağımsız motorlar, içerik=paket).
 
-> ⚠️ **KOORDİNASYON ŞERHİ (2026-07-26 gece):** motion-core şu anda M-017 (P0) altında — eşzamanlı oturumlar çekirdeği paralel üretmiş (commit'siz Dart `packages/motion_core` + Lissom'un `mocore` Python ölçüm hattı + JabLab ölçüm araçları); hangisinin kanonik olduğu KURUCU KARARI bekliyor. Bu ADR'nin §2.1 motion-core sorumluluk listesi 00-AILE §2'den türetilmiştir ve karar sonrası KANONİK ÇEKİRDEĞE KARŞI YENİDEN DOĞRULANMALIDIR (özellikle: state-machine çatısı, replay harness, tek-saat sözleşmesinin gerçek konumu). Ostinato bu oturumda motion-core reposuna BİLEREK dokunmadı.
+> ✅ **KOORDİNASYON GÜNCELLEMESİ (2026-07-26 sabah):** M-017 ana kararı VERİLDİ — **Dart `packages/motion_core` KANONİK** (Choreia oturumu kurdu; 84/84 test + ReferenceBuilder ile 94/94); Python hatları yalnız video→fixture çıkarma aracı. §2.1 listesi artık SOMUT bileşenlere karşı doğrulanacak: `StructuralValidator` (M-019 — Ostinato'nun eğik-gövde senaryosu dahil), `ConfidenceGate.forVariant` (M-018), `PoseModelVariant`, `ReferenceBuilder`/`CanonicalReference.toleranceAt` (§6.0 skorlama referansları — bowing referansları da bununla kurulur), `Dtw.warpPenalty` (M-C-05). Revalidasyon G2'de yapılır (O-010). Kalan M-017 artığı: JabLab Python araçları ↔ fixture_pipeline birleştirmesi (kurucu).
+> Ayrıca §2.2'ye bağlayıcı ekleme: bowing skorlama referans hattı `ReferenceBuilder` TÜKETİR (çekirdekten), kendi konsensüs/aynalama çözücüsünü YAZMAZ (L-019 dersinin Ostinato karşılığı).
 
 ---
 

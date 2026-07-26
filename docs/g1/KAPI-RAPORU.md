@@ -22,7 +22,8 @@ Mağazada kamera+postür yapan müzik pratik uygulaması YOK (8-ajanlık canlı 
 5. **URMP izin maili** gönderimi (taslak: `urmp-permission-email.md`; muhatap Zhiyao Duan).
 6. **Git push onayı**: `feat/g0-g1-kickoff` (3 yerel commit) + main'deki roadmap commit'i (`cf5a9f5`).
 7. (Eski gündem) Domain: getostinato.app — M-006.
-8. **⚠️ AİLE-DÜZEYİ: M-017 (P0) kararı** — motion-core'da eşzamanlı oturumlar çekirdeği paralel üretti (Dart çekirdek + iki Python ölçüm hattı); hangi hat kanonik + yabancı çekirdeği kim commit'ler + 2 kırık test kimde. Ostinato'nun G4 motoru ve ADR-001 bu karara bağımlı (detay: `motion-core/workspace/DEFTER.md` M-017).
+8. ~~M-017 ana kararı~~ ✅ VERİLDİ (2026-07-26): **Dart `motion_core` kanonik** (84/84 test; StructuralValidator + ReferenceBuilder dahil); Python hatları yalnız video→fixture aracı. Ostinato'ya işlendi: ADR-001 güncellendi, O-010 daraldı, OK-8 yorumu deftere yazıldı. Kalan artık: JabLab Python araçları birleştirmesi (aile listesinde).
+9. **YENİ — OK-8 retrospektif onayı:** §6.0'ın Ostinato uygulaması — bowing skorlama referansları kamu eğitmen videolarından (≥3, ReferenceBuilder); **detector eğitim verisi kendi çekimlerimizde KALDI** (§6.0 kapsam dışı sayıldı — kamu-video kareleriyle ship-edilen model eğitilmez). Bu ayrımı onaylıyor musun, yoksa detector eğitiminde de kamu videosu kullanımını hukuk görüşüne mi taşıyalım?
 
 ## Kapı hükmü
 G1 **kurucu-bacağı beklemede**: teknik ön-koşullar yeşil; karar verisi (öğretmen görüşmeleri) sahadan gelecek. Görüşmeler bitince skorları derleyip kapı değerlendirmesini birlikte yaparız — **derin yatırım kararı o toplantının çıktısı** (O-001 kapanış yolu). Beklerken oturum kapıya-bağımlı-olmayan hattan ilerliyor (ses fixture tasarımı ✅, sınır-çizgisi ADR taslağı ✅, TR pedagoji taraması koşuyor).

@@ -59,6 +59,13 @@
 3. Motor koduna dokunan her değişiklik ses seti koşar (kamera setinden bağımsız — hızlı kalır, <30sn hedef).
 4. Fixture EKLEME serbest, DEĞİŞTİRME şema-versiyon artırımı ister (geriye-uyum: eski motor eski setle yeşil kalmalı).
 
+## 4.1 Aile dersleri — bu kütüphaneye bağlayıcı (2026-07-26 gece oturumlarından)
+
+- **M-C-06 (fixture > tolerans):** her sentetik fixture'ın sapma genliği, sınadığı tolerans bandından BÜYÜK olmalı (Choreia'da 15°'lik fixture 12°'lik banda sığıp testleri anlamsızlaştırdı). Ses karşılığı: cent-sapma fixture'ları tolerans bandının ≥1.5×'i; onset-kayma fixture'ları `onsetMs` toleransının ≥1.5×'i. Ayrıca simetrik desenler hizalamayı ucuzlatır → metronom fixture'larında asimetrik ritim frazları kullanılır.
+- **M-C-07 (kapanış payı):** eşikler filtrelenmiş sinyale göre yazılır; her kayıt-fixture'ın sonuna ≥0.5sn sönüş/sessizlik payı bırakılır (sustain-bitti/nota-bitti eşikleri filtre gecikmesi yüzünden hiç ateşlenmeyebilir).
+- **M-C-05 analoğu (hizalama park etmesi):** metronom hizalayıcı "en yakın click'e eşleme" yaparken hareketsiz/sessiz kullanıcıyı ödüllendirmemeli — L3 negatif fixture'lara "hiç çalmayan kullanıcı + metronom" senaryosu eklendi; beklenen çıktı: hüküm YOK (skor değil).
+- **M-L-05 (ölü-metrik yasağı):** ses metrik tanımları da yükleme anında "hiçbir bozucuya tepki vermiyor mu" testinden geçer; fixture koşum raporuna A9-tarzı ölü-metrik kriteri eklendi (§4 koşum sözleşmesine 5. madde sayılır).
+
 ## 5. Sonraki adımlar (kuyruk)
 
 - [ ] G3 açılınca: L1 üreticisini fixture-üretici olarak yaz (bench_pitch.py'den türet) + L2 segment/etiket çıkarımı + L3 kayıtları.
