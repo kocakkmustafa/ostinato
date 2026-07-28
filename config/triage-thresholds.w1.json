@@ -1,61 +1,85 @@
 {
-  "schemaVersion": "ostinato-triage-1",
-  "version": "1.0.0",
-  "generated": "2026-07-29",
-  "consumes": "motion-core tools/harvest_rig/triage.py — TriageThresholds",
-  "storage": "~/motion-harvest/ostinato/ (M-F-26: ham hasat repoya GİRMEZ; repoya yalnız türev + provenance özeti)",
-
-  "rationale": "Çello triyajında (57 aday, 2026-07-26) ölçülen gerçek: öğretim videolarının %25'i shorts/el-yakın-çekim formatında ve sıkı sağ-ön-çapraz açı yalnız %7. Yani müzik pedagojisi videoları, spor videolarından FARKLI olarak enstrümana yakın çekim yapmayı sever. Eşikler bu gerçeğe göre ayarlandı: kadraj testi SERT (üst gövde yoksa referans çıkmaz), süre testi GEVŞEK (iyi bir teknik gösterimi 90 saniyeden kısa olabilir).",
-
-  "profiles": {
-    "default": {
-      "min_duration_s": 60.0,
-      "require_landscape": true,
-      "max_cuts_per_min": 12.0,
-      "min_sharpness": 40.0,
-      "min_upper_body_ratio": 0.6,
-      "cut_probe_fps": 2.0,
-      "pose_probe_frames": 12,
-      "note": "Rig varsayılanına göre tek sapma: süre 90→60 sn. Gerekçe: bir 'doğru duruş' gösterimi 70 saniyede biter; 90 sn eşiği çelloda iyi adayları eledi."
-    },
-
-    "voice": {
-      "min_duration_s": 60.0,
-      "min_upper_body_ratio": 0.75,
-      "min_sharpness": 40.0,
-      "max_cuts_per_min": 12.0,
-      "note": "Şanda ölçtüğümüz her şey üst gövdede (baş-omuz hizası, çene, omuz yükselmesi). Kadraj oranı en sert burada: üst gövde kararsızsa video referans olamaz."
-    },
-
-    "piano": {
-      "min_duration_s": 45.0,
-      "min_upper_body_ratio": 0.5,
-      "min_sharpness": 50.0,
-      "max_cuts_per_min": 15.0,
-      "note": "Piyano öğretiminde iki farklı kadraj var ve İKİSİ DE işimize yarar: üstten el çekimi (bilek/parmak metrikleri; üst-gövde oranı doğal olarak düşük → 0.5) ve yandan tam gövde (oturuş/dirsek). Bu yüzden üst-gövde eşiği gevşetildi ama netlik yükseltildi — el detayı bulanık karede ölçülemez. Triyaj çıktısında kadraj sınıfı ELLE etiketlenir (hand-cam / full-body), iki havuz ayrı tutulur."
-    },
-
-    "guitar": {
-      "min_duration_s": 45.0,
-      "min_upper_body_ratio": 0.6,
-      "min_sharpness": 50.0,
-      "max_cuts_per_min": 15.0,
-      "note": "Gitarda fretboard yakın çekimi çok yaygın; akor ŞEKLİ için değerli ama duruş için işe yaramaz. Piyanodaki gibi iki havuz: fretboard-cam / full-body."
-    }
+ "schemaVersion": "ostinato-triage-1",
+ "version": "1.0.0",
+ "generated": "2026-07-29",
+ "consumes": "motion-core tools/harvest_rig/triage.py — TriageThresholds",
+ "storage": "~/motion-harvest/ostinato/ (M-F-26: ham hasat repoya GİRMEZ; repoya yalnız türev + provenance özeti)",
+ "rationale": "Çello triyajında (57 aday, 2026-07-26) ölçülen gerçek: öğretim videolarının %25'i shorts/el-yakın-çekim formatında ve sıkı sağ-ön-çapraz açı yalnız %7. Yani müzik pedagojisi videoları, spor videolarından FARKLI olarak enstrümana yakın çekim yapmayı sever. Eşikler bu gerçeğe göre ayarlandı: kadraj testi SERT (üst gövde yoksa referans çıkmaz), süre testi GEVŞEK (iyi bir teknik gösterimi 90 saniyeden kısa olabilir).",
+ "profiles": {
+  "default": {
+   "min_duration_s": 60.0,
+   "require_landscape": true,
+   "max_cuts_per_min": 12.0,
+   "min_sharpness": 40.0,
+   "min_upper_body_ratio": 0.6,
+   "cut_probe_fps": 2.0,
+   "pose_probe_frames": 12,
+   "note": "Rig varsayılanına göre tek sapma: süre 90→60 sn. Gerekçe: bir 'doğru duruş' gösterimi 70 saniyede biter; 90 sn eşiği çelloda iyi adayları eledi."
   },
-
-  "manualLabels": {
-    "purpose": "Rig'in otomatik kapıları kadrajın TÜRÜNÜ bilmez; bunu triyaj sonrası elle etiketliyoruz (çello deseni, OK-9).",
-    "frameClass": ["full_body", "upper_body", "hand_cam", "fretboard_cam", "unusable"],
-    "angleClass": ["A_right_front_diagonal", "B_side_profile", "C_frontal", "D_other"],
-    "rule": "Duruş/postür referansı YALNIZ full_body|upper_body'den; el/parmak referansı hand_cam|fretboard_cam'den de çıkarılabilir. Metrik-başına hangi sınıftan beslendiği provenance'a yazılır (B4 açı-duyarlılık pilotunun girdisi)."
+  "voice": {
+   "min_duration_s": 60.0,
+   "min_upper_body_ratio": 0.75,
+   "min_sharpness": 40.0,
+   "max_cuts_per_min": 12.0,
+   "note": "Şanda ölçtüğümüz her şey üst gövdede (baş-omuz hizası, çene, omuz yükselmesi). Kadraj oranı en sert burada: üst gövde kararsızsa video referans olamaz. PİLOT: 666s/828s videolar süre-kesme kapılarını rahat geçti; darboğaz netlik+kadraj."
   },
-
-  "acceptanceTargets": {
-    "note": "Ölçümden ÖNCE yazıldı (O-007 disiplini).",
-    "min_accepted_per_instrument": 12,
-    "min_independent_instructors_correct_technique": 3,
-    "min_independent_sources_per_error_code": 2,
-    "action_if_below": "Havuzu genişlet (yeni kanal/arama terimi) — eşik GEVŞETİLMEZ. İki tur sonunda hâlâ altındaysa o çalgı için 'referans yetersiz' kaydı DEFTER'e ve o metrik V1'de kapalı kalır."
+  "piano": {
+   "min_duration_s": 45.0,
+   "min_upper_body_ratio": 0.5,
+   "min_sharpness": 50.0,
+   "max_cuts_per_min": 15.0,
+   "note": "Piyano öğretiminde iki farklı kadraj var ve İKİSİ DE işimize yarar: üstten el çekimi (bilek/parmak metrikleri; üst-gövde oranı doğal olarak düşük → 0.5) ve yandan tam gövde (oturuş/dirsek). Bu yüzden üst-gövde eşiği gevşetildi ama netlik yükseltildi — el detayı bulanık karede ölçülemez. Triyaj çıktısında kadraj sınıfı ELLE etiketlenir (hand-cam / full-body), iki havuz ayrı tutulur."
+  },
+  "guitar": {
+   "min_duration_s": 45.0,
+   "min_upper_body_ratio": 0.6,
+   "min_sharpness": 50.0,
+   "max_cuts_per_min": 15.0,
+   "note": "Gitarda fretboard yakın çekimi çok yaygın; akor ŞEKLİ için değerli ama duruş için işe yaramaz. Piyanodaki gibi iki havuz: fretboard-cam / full-body."
+  },
+  "piano_hands": {
+   "min_duration_s": 45.0,
+   "min_sharpness": 60.0,
+   "max_cuts_per_min": 15.0,
+   "note": "EL HAVUZU (K-T1, pilot ölçümüyle türetildi): üstten el çekimi videoları duruş havuzundan elenir (E8Do4oxTJ1k üst-gövde 0.42) ama el/bilek/parmak metrikleri için DEĞERLİDİR. Üst-gövde eşiği YOK; netlik 60'a yükseltildi çünkü el detayı bulanık karede ölçülemez."
+  },
+  "guitar_hands": {
+   "min_duration_s": 45.0,
+   "min_sharpness": 60.0,
+   "max_cuts_per_min": 15.0,
+   "note": "EL/FRETBOARD HAVUZU (K-T1): akor şekli için fretboard yakın çekimi değerli, duruş için değersiz. Üst-gövde eşiği YOK; netlik 60."
   }
+ },
+ "manualLabels": {
+  "purpose": "Rig'in otomatik kapıları kadrajın TÜRÜNÜ bilmez; bunu triyaj sonrası elle etiketliyoruz (çello deseni, OK-9).",
+  "frameClass": [
+   "full_body",
+   "upper_body",
+   "hand_cam",
+   "fretboard_cam",
+   "unusable"
+  ],
+  "angleClass": [
+   "A_right_front_diagonal",
+   "B_side_profile",
+   "C_frontal",
+   "D_other"
+  ],
+  "rule": "Duruş/postür referansı YALNIZ full_body|upper_body'den; el/parmak referansı hand_cam|fretboard_cam'den de çıkarılabilir. Metrik-başına hangi sınıftan beslendiği provenance'a yazılır (B4 açı-duyarlılık pilotunun girdisi)."
+ },
+ "acceptanceTargets": {
+  "note": "Ölçümden ÖNCE yazıldı (O-007 disiplini).",
+  "min_accepted_per_instrument": 12,
+  "min_independent_instructors_correct_technique": 3,
+  "min_independent_sources_per_error_code": 2,
+  "action_if_below": "Havuzu genişlet (yeni kanal/arama terimi) — eşik GEVŞETİLMEZ. İki tur sonunda hâlâ altındaysa o çalgı için 'referans yetersiz' kaydı DEFTER'e ve o metrik V1'de kapalı kalır."
+ },
+ "pilotFindings": {
+  "date": "2026-07-29",
+  "sampleSize": 5,
+  "accepted": 2,
+  "acceptanceRate": 0.4,
+  "topRejectReason": "netlik (3 redden 2'si)",
+  "note": "Küçük örneklem — eğilim işareti, kapı kararı değil. Eşik GEVŞETİLMEZ (K-T2); havuz genişletilir (K-T3)."
+ }
 }

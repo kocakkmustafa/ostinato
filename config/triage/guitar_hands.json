@@ -1,0 +1,10 @@
+{
+ "_generated_from": "config/triage-thresholds.w1.json (tek kaynak); ELLE DÜZENLEME — orayı düzenle, bunu yeniden üret",
+ "_profile": "guitar_hands",
+ "_rationale": "EL/FRETBOARD HAVUZU (K-T1): akor şekli için fretboard yakın çekimi değerli, duruş için değersiz. Üst-gövde eşiği YOK; netlik 60.",
+ "thresholds": {
+  "min_duration_s": 45.0,
+  "min_sharpness": 60.0,
+  "max_cuts_per_min": 15.0
+ }
+}
