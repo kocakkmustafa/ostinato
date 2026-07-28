@@ -2,7 +2,7 @@
 
 **Tarih:** 2026-07-29 · **Statü:** YÜRÜRLÜKTE (oturum kararıyla; standart §4 md.6 — kurucuya soru yok)
 **Kapsam otoritesi:** `OSTINATO-BLUEPRINT.md` (42 çalgı, 7 dalga) + motion-core `30-URUN-BLUEPRINT-STANDARDI.md` (IA + oturum sözleşmesi). Çelişkide blueprint kazanır.
-**Çekirdek:** `motion_core-v0.1.0` (pinli). Ses analizi bize ait (`packages/ostinato_audio`), saat/gecikme/kalibrasyon çekirdeğe ait.
+**Çekirdek:** `motion_core-v0.2.1` (tag-pinli; yükseltmede 34/34 sözleşme testi yeşil kaldı). Ses analizi bize ait (`packages/ostinato_audio`), saat/gecikme/kalibrasyon çekirdeğe ait.
 
 ---
 
