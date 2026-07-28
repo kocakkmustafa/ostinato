@@ -1,0 +1,929 @@
+{
+ "schemaVersion": "ostinato-demo-pool-1",
+ "version": "1.0.0",
+ "generated": "2026-07-29",
+ "purpose": "Doğru-teknik referans çıkarımı için aday havuzu (≥3 BAĞIMSIZ eğitmen/çalgı — M-C-01/04). Triyaj (config/triage-thresholds.w1.json) bu havuz üzerinde koşar; kabul edilenler ReferenceBuilder'a gider.",
+ "storageNote": "Ham video ~/motion-harvest/ostinato/ altına iner, repoya GİRMEZ (M-F-26).",
+ "instruments": {
+  "voice": {
+   "candidates": [
+    {
+     "videoId": "jog-nfLldRI",
+     "title": "Your FIRST Singing Lesson (Beginner Lesson from a REAL Vocal Coach)",
+     "channel": "Ramsey Voice Studio",
+     "instructor": null,
+     "technique": "Giriş dersi: doğru duruş (\"tall posture\") + temel nefes farkındalığı — yeni başlayan için ilk ders formatında",
+     "framingHint": "Başlık \"beginner lesson\" formatı — muhtemelen tek sabit kamera, eğitmen bel/göğüsten yukarı kadrajda duruşu gösteriyor (thumbnail/başlık üzerinden tahmin, video izlenerek teyit edilmedi)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "MHUaLy57dao",
+     "title": "Singing Lessons for Beginners (Best Vocal Warm Up to Improve Your Voice Fast)",
+     "channel": "Marie-Laurence Vocal Coach",
+     "instructor": "Marie-Laurence",
+     "technique": "Başlangıç seviyesi ısınma rutini içinde duruş kurulumu ve nefes hazırlığı gösterimi",
+     "framingHint": "Vlog-tarzı eğitmen kanalı — muhtemelen sabit kamera, üst-gövde kadraj (tahmini, doğrulanmadı)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "jncS5Yceu48",
+     "title": "Best Beginner Vocal Warm-Up (5 Min)",
+     "channel": "Singeo",
+     "instructor": null,
+     "technique": "Kısa (5 dk) rehberli ısınma — duruş ve nefes temelli giriş egzersizleri",
+     "framingHint": "Kısa format eğitim videosu — muhtemelen sabit kamera, baş-göğüs kadrajı (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "RlkfOY1xjj4",
+     "title": "Learn to Sing with these Vocal Warmups and Vocal Exercises for Beginners",
+     "channel": "KHansenMusic (@VocalWarmupsWithKathleen)",
+     "instructor": "Kathleen",
+     "technique": "Başlangıç seviyesi vokal ısınma dizisi, duruş+nefes temelleriyle",
+     "framingHint": "Vokal ısınma kanalı formatı — muhtemelen sabit kamera, üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "k47X8kmVWQs",
+     "title": "Day 1: Vocal Re-Boot - Vocal warmups focus on BREATHING",
+     "channel": "KHansenMusic (@VocalWarmupsWithKathleen)",
+     "instructor": "Kathleen",
+     "technique": "Nefes odaklı ısınma serisinin 1. günü — diyafram nefesi gösterimi",
+     "framingHint": "Seri formatı \"Day 1\" — muhtemelen sabit kamera, göğüsten yukarı kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "7KdbUwSYjdA",
+     "title": "BREATH SUPPORT FOR SINGING (Lesson 1): Posture and Inhalation",
+     "channel": "singwise",
+     "instructor": null,
+     "technique": "Ders 1: duruş ve doğru nefes alma (inhalation) — nefes desteğinin temeli",
+     "framingHint": "Açıkça \"Lesson 1\" yapılandırılmış ders formatı — muhtemelen sabit kamera, tam üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "vixAehcj-5Y",
+     "title": "Singing Basics Part 1: Breathing & Posture Techniques Every Beginner Must Know",
+     "channel": "Sarah Bishop (@singwithbish)",
+     "instructor": "Sarah Bishop",
+     "technique": "Bölüm 1: yeni başlayanlar için nefes ve duruş teknikleri",
+     "framingHint": "\"Basics Part 1\" ders formatı — muhtemelen sabit kamera, üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "thQ4n8cHkZc",
+     "title": "Fundamentals of Singing, Part 1: Posture and Breathing",
+     "channel": "Saint Joseph Abbey (@SJASC)",
+     "instructor": null,
+     "technique": "Temel eğitim serisi Bölüm 1: duruş ve nefes — kurumsal ses eğitimi formatı",
+     "framingHint": "Kurumsal/akademik eğitim videosu formatı — muhtemelen sabit kamera, sınıf/stüdyo ortamında üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "RzSpxcj9gZc",
+     "title": "Breath Support Made Simple - Appoggio for Beginner Singers",
+     "channel": "Aussie Vocal Coach",
+     "instructor": null,
+     "technique": "Appoggio nefes desteği tekniğinin basitleştirilmiş anlatımı — başlangıç seviyesi",
+     "framingHint": "Tek eğitmen kanalı formatı — muhtemelen sabit kamera, üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "Ds8GKSp5GwE",
+     "title": "Breath Support Sequence - Singing Exercises for Breath Control",
+     "channel": "The Weekly Warmup - Vocal Exercises for Singers",
+     "instructor": null,
+     "technique": "Nefes kontrolü için adım adım egzersiz dizisi gösterimi",
+     "framingHint": "Haftalık ısınma serisi formatı — muhtemelen sabit kamera, göğüsten yukarı kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "TUArZ1L1zms",
+     "title": "4 Tips for Singing Vocal Control - UNLOCK Your Breath, Posture, and Power!",
+     "channel": "Angie's Vocals",
+     "instructor": "Angie",
+     "technique": "Nefes, duruş ve güç arasındaki ilişkiyi 4 ipucuyla gösterme",
+     "framingHint": "Kişisel vokal koçu kanalı — muhtemelen sabit kamera, üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "pwIO71FhP9g",
+     "title": "Breath Support APPLIED Properly - 2 Simple Exercises",
+     "channel": "Healthy Vocal Technique (@Victoria-Victorious)",
+     "instructor": "Victoria",
+     "technique": "Nefes desteğinin doğru uygulanması — 2 basit egzersiz gösterimi",
+     "framingHint": "\"Healthy Vocal Technique\" eğitim kanalı formatı — muhtemelen sabit kamera, üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "GiHZrYCAIas",
+     "title": "Breath Support APPLIED TO SINGING - 7 Exercises!",
+     "channel": "Healthy Vocal Technique (@Victoria-Victorious)",
+     "instructor": "Victoria",
+     "technique": "Şarkı söylerken nefes desteğinin uygulanması — 7 egzersizli genişletilmiş gösterim",
+     "framingHint": "Aynı kanalın genişletilmiş versiyonu — muhtemelen sabit kamera, üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "7fmcjT4nAT0",
+     "title": "5 Best Breathing Exercises for Beginner Singers",
+     "channel": "TheHitMusicStudio",
+     "instructor": null,
+     "technique": "Başlangıç seviyesi şarkıcılar için 5 nefes egzersizi gösterimi",
+     "framingHint": "Stüdyo/koçluk kanalı formatı — muhtemelen sabit kamera, üst-gövde kadraj (tahmini)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    }
+   ],
+   "counts": {
+    "videos": 14,
+    "independentChannels": 12
+   },
+   "meetsInstructorMinimum": true
+  },
+  "piano": {
+   "candidates": [
+    {
+     "videoId": "fe57D8HxuvU",
+     "title": "Beginner Piano Lesson: Piano Posture",
+     "channel": "ArtistWorks (Christie Peery)",
+     "instructor": "Christie Peery",
+     "technique": "Oturuş — bench yüksekliği/mesafesi, sırt duruşu",
+     "framingHint": "Muhtemelen tam gövde + yakın: konu doğrudan 'nasıl oturulur, tuşlara mesafe' olduğu için geniş açı bekleniyor (teyit edilmedi, izlenerek doğrulanmalı)",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "E8Do4oxTJ1k",
+     "title": "Proper Posture At The Piano",
+     "channel": "Pianote",
+     "instructor": "Lisa Witt",
+     "technique": "Oturuş / genel duruş",
+     "framingHint": "Pianote'nin tipik formatı geniş (tam gövde) + gerektiğinde el yakın planı karışımı; bu videoda oran teyit edilmedi",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "2mxlG5bzcyQ",
+     "title": "First thing on piano: proper body and hand postures",
+     "channel": "Doğrulanamadı (Alfred's Group Piano for Adults müfredatına referans veriyor)",
+     "instructor": null,
+     "technique": "Oturuş + el postürü birlikte",
+     "framingHint": "Başlıkta hem 'body' hem 'hand' geçiyor — muhtemelen tam gövdeden başlayıp ele yakınlaşan çekim, ama teyit edilemedi",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "rZznie6UU_o",
+     "title": "Proper Hand Posture At The Piano",
+     "channel": "Doğrulanamadı",
+     "instructor": null,
+     "technique": "El postürü",
+     "framingHint": "Belirsiz; başlık el-odaklı, muhtemelen el/klavye yakın çekim",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "p_6y7MPW_Ek",
+     "title": "Basics of Playing the Piano: Hand Shape and Hand Position (2)",
+     "channel": "Pianist Magazine dizisi",
+     "instructor": "Tim Stein",
+     "technique": "El şekli ve el pozisyonu",
+     "framingHint": "Tim Stein serisi genelde klavye+el yakın çekim üzerinden anlatım (tam teyit edilmedi)",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "cBuC89ApQtM",
+     "title": "Hand Position at the Piano: 5 Foundations of Piano Technique, Part 1",
+     "channel": "muhtemelen tonebase Piano (orta güvenilirlik, doğrudan teyit edilemedi)",
+     "instructor": null,
+     "technique": "El pozisyonunun 5 temel ilkesi",
+     "framingHint": "tonebase formatında genelde el/klavye yakın çekim + bazen tam gövde; bu video özelinde doğrulanmadı",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "N7IIVWvSyRQ",
+     "title": "Proper Hand Position (Beginner Piano Lessons: 3)",
+     "channel": "Doğrulanamadı (numaralı 'Beginner Piano Lessons' serisi — PianoTV/Allysia serisiyle örtüşebilir ama kanıtlanamadı)",
+     "instructor": null,
+     "technique": "El pozisyonu (başlangıç serisi 3. ders)",
+     "framingHint": "Belirsiz",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "e-USjrHOL8s",
+     "title": "Piano Fundamentals. Hand Position. Wrist and Fingers. 5 Initial Exercises.",
+     "channel": "Doğrulanamadı",
+     "instructor": null,
+     "technique": "El pozisyonu + bilek + 5 başlangıç egzersizi",
+     "framingHint": "Başlıkta 'wrist and fingers' vurgusu — muhtemelen el/bilek yakın çekim",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "INvXw8zIi6M",
+     "title": "Wrist Technique For Piano (the DO's and DON'Ts)",
+     "channel": "Doğrulanamadı",
+     "instructor": null,
+     "technique": "Bilek tekniği — doğru/yanlış karşılaştırması",
+     "framingHint": "DO/DON'T formatı genelde el+bilek yakın çekim gerektirir",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "Kp2EU8SNBZw",
+     "title": "Proper Wrist Technique for Great Piano Playing (with just 1 minute a day)",
+     "channel": "Doğrulanamadı",
+     "instructor": null,
+     "technique": "Bilek tekniği — kısa günlük egzersiz",
+     "framingHint": "Kısa egzersiz formatı, muhtemelen el/bilek yakın çekim",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "CQ8_Mn8sQa0",
+     "title": "Basic Piano Chords For Beginners Lessons 1 to 6 - How To Play Easy Piano Chords Full Video",
+     "channel": "Doğrulanamadı",
+     "instructor": null,
+     "technique": "İlk akorlar — C, D, E, F, G, A majör dizileri",
+     "framingHint": "'Full video' (6 ders birleşik) formatı; muhtemelen klavye üstten çekim + ekran üstü nota/akor grafiği",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "2mPS-2guHVo",
+     "title": "Piano Chords for Beginners (Play Any Chord)",
+     "channel": "muhtemelen Pianote (orta güvenilirlik)",
+     "instructor": null,
+     "technique": "İlk akorlar — majör/minör temel akor mantığı",
+     "framingHint": "Pianote formatı tam gövde + el yakın plan karışımı olabilir; bu video özelinde doğrulanmadı",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "IXsTK20UKJk",
+     "title": "Piano Chords: Beginner to Pro in 10 Simple Steps",
+     "channel": "Doğrulanamadı",
+     "instructor": null,
+     "technique": "İlk akorlar — adım adım ilerleme",
+     "framingHint": "Belirsiz; başlıktan adım-adım ekran+el çekimi beklenebilir",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "8jbvOgGxk5c",
+     "title": "Piano Technique Tutorial: Wrist Circles and Arm Motion [Feat. Beethoven, Chopin, Brahms]",
+     "channel": "The Piano Prof | Kate Boyd",
+     "instructor": "Kate Boyd",
+     "technique": "Bilek çemberleri ve kol hareketi — klasik repertuvar örnekleriyle bilek gevşekliği",
+     "framingHint": "Kol hareketini göstermek için muhtemelen geniş/tam gövde kadraj; teyit edilmedi (görsel izleme gerekir)",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "c76LPWPdFsI",
+     "title": "4 SECRETS to Correct Piano Hand Position",
+     "channel": "Learn Piano with Emma Blair",
+     "instructor": "Emma Blair",
+     "technique": "Doğru el pozisyonu için 4 ilke (el, bilek, ön kol hizalaması)",
+     "framingHint": "Muhtemelen yakın el çekimi ağırlıklı, ara sıra üst gövde kesitleri; teyit edilmedi",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "U4mU0uu-0Aw",
+     "title": "Good Hand Placement Is A GAME CHANGER For Beginners | Easy Lesson",
+     "channel": "Piano From Scratch",
+     "instructor": "Piano From Scratch eğitmeni (kişi adı sayfada teyit edilemedi)",
+     "technique": "Yeni başlayanlar için doğru el yerleşimi, pratik ve sade anlatım",
+     "framingHint": "Muhtemelen el yakın çekimi ağırlıklı + kısmi üst gövde; teyit edilmedi",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "a_kVafB-0C4",
+     "title": "How to start playing piano or keyboard // Complete beginner tutorial - basic technique and exercises",
+     "channel": "Piano From Scratch",
+     "instructor": "Piano From Scratch eğitmeni (kişi adı teyit edilemedi)",
+     "technique": "Komple başlangıç: oturuş, el pozisyonu ve temel teknik egzersizler bir arada",
+     "framingHint": "Kapsamlı 'complete beginner' formatı; muhtemelen tam gövde (oturuş dahil) + el detay kesitleri, teyit edilmedi",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "F8fKXmcL7ao",
+     "title": "The Only Piano Hand Position Video You'll Ever Need (5-Minute Fix)",
+     "channel": "South Shore Piano School",
+     "instructor": "South Shore Piano School eğitmeni (kişi adı teyit edilemedi)",
+     "technique": "'Parmakları kavislendir' klişesinin ötesinde el pozisyonu düzeltme, 5 dakikalık odaklı ders",
+     "framingHint": "Muhtemelen çoklu kamera (tam gövde + el yakın çekim); teyit edilmedi",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "827jmswqnEA",
+     "title": "Piano Lessons for Beginners: Part 1 - Getting Started! Learn some simple chords",
+     "channel": "MangoldProject",
+     "instructor": "Mangold Project eğitmeni (kişi adı teyit edilemedi)",
+     "technique": "İlk basit akorlar — başlangıç serisinin giriş bölümü (oturuş+el temelinden akorlara geçiş)",
+     "framingHint": "Ders serisi formatı; muhtemelen tam gövde + klavyeye yandan/üstten bakan ek çekim, teyit edilmedi",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    }
+   ],
+   "counts": {
+    "videos": 19,
+    "independentChannels": 13
+   },
+   "meetsInstructorMinimum": true
+  },
+  "guitar": {
+   "candidates": [
+    {
+     "videoId": "apXCNMckvuY",
+     "title": "How To Hold Your Guitar In Playing Position",
+     "channel": "Musician's Addition",
+     "instructor": "Musician's Addition",
+     "technique": "Genel duruş/tutuş — gitarı çalma pozisyonunda doğru tutma",
+     "framingHint": "Tam gövde çekim, oturma pozisyonu ve gitar açısı gösterimi",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "gld10I5NhCE",
+     "title": "How to Hold a Guitar (Sitting and Standing) | Easy Beginner Guide",
+     "channel": "Conor Rocks",
+     "instructor": "Conor Rocks",
+     "technique": "Oturarak ve ayakta gitar tutuşu karşılaştırması",
+     "framingHint": "Tam gövde, oturma ve ayakta duruş arasında geçişli çekim",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "bQvBNgI_x5s",
+     "title": "How To Hold The Guitar When Seated",
+     "channel": "Martin Guitar",
+     "instructor": "Martin Guitar (resmi marka kanalı)",
+     "technique": "Oturarak gitar tutuşu — üretici marka rehberi",
+     "framingHint": "Tam gövde orta-yakın çekim, bacak/gövde açısı vurgulu",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "r59-OKDBfSA",
+     "title": "3 Tips For Improving Guitar Posture (How To Hold A Guitar Properly)",
+     "channel": "Good Guitarist",
+     "instructor": "Good Guitarist",
+     "technique": "Duruş düzeltme — 3 pratik ipucu (sırt, omuz, gitar açısı)",
+     "framingHint": "Tam gövde çekim + belirli düzeltmeler için yakın detay kesitleri",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "ayqO1Yyemxs",
+     "title": "Fretting - Guitar Hand Positions & Exercises - Beginners",
+     "channel": "Guitar Coach Magazine",
+     "instructor": "Guitar Coach Magazine",
+     "technique": "Sol el (perdeleme eli) pozisyonu ve temel egzersizler",
+     "framingHint": "Klavye (fretboard) yakın çekim, parmak yerleşimi vurgulu",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "jZuRb4fnBoA",
+     "title": "Guitar basics tutorial: fret hand position",
+     "channel": "Nashville Guitar Guru",
+     "instructor": "Nashville Guitar Guru",
+     "technique": "Sol el perdeleme pozisyonu temelleri",
+     "framingHint": "Klavye yakın çekim, bilek/parmak açısı gösterimi",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "BENDFj4Nh90",
+     "title": "Proper Fretting Hand Alignment",
+     "channel": "Levels For Guitar",
+     "instructor": "Levels For Guitar",
+     "technique": "Sol el/perdeleme eli hizalanması ve başparmak konumu",
+     "framingHint": "Klavye + bilek yakın çekim",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "rTlb70x8qWA",
+     "title": "One Trick for Perfect Hand Positioning",
+     "channel": "GuitarLessons365",
+     "instructor": "Nate Savage",
+     "technique": "Sol el pozisyonu için pratik düzeltme ipucu",
+     "framingHint": "Klavye yakın çekim, tek elin izole gösterimi",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "lRJ_d3PqPIQ",
+     "title": "8 Open Chords That You Should Know! | Guitar for Beginners",
+     "channel": "JustinGuitar",
+     "instructor": "Justin Sandercoe",
+     "technique": "Temel açık akorlar (8 temel açık akor) tanıtımı",
+     "framingHint": "Klavye yakın çekim + ekranda akor diyagramı overlay",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "sLSFOCyNC8Q",
+     "title": "Beginners First Guitar Lesson - The EASIEST 2 Chords On Guitar",
+     "channel": "Andy Guitar",
+     "instructor": "Andy Crowley",
+     "technique": "İlk 2 kolay açık akor ile başlangıç",
+     "framingHint": "Tam gövde girişten klavye yakın çekime geçiş",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "4EVT2VNMcpA",
+     "title": "FIRST Chord to learn on guitar - E major chord - Beginners Lesson 1",
+     "channel": "Andy Guitar",
+     "instructor": "Andy Crowley",
+     "technique": "İlk akor (Mi majör) adım adım parmak yerleşimi",
+     "framingHint": "Klavye yakın çekim, parmak numaralandırma overlay",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "n45PDizCRLw",
+     "title": "Your FIRST Strumming Pattern EVER! | Guitar for Beginners",
+     "channel": "JustinGuitar",
+     "instructor": "Justin Sandercoe",
+     "technique": "İlk strumming (tarama) paterni ve tempo/sayma",
+     "framingHint": "Tam gövde (sağ kol/strumming eli vurgulu) + yakın çekim geçişleri",
+     "runs": [
+      "run1",
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "oamDIl34DY4",
+     "title": "Strum with Perfect Timing and Feel",
+     "channel": "Mark TheGuitarGuy",
+     "instructor": "Mark TheGuitarGuy",
+     "technique": "Strumming ritim/tempo hissi geliştirme",
+     "framingHint": "Tam gövde + sağ el (strumming) yakın çekim",
+     "runs": [
+      "run1"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "NfC0R-KWhwQ",
+     "title": "Beginner Guitar Lesson: Sitting Position",
+     "channel": "Guitar Compass",
+     "instructor": "Guitar Compass (kanal eğitmeni)",
+     "technique": "Doğru oturuş pozisyonu (gitarı bacaklar üzerinde dengede tutma)",
+     "framingHint": "Muhtemelen tam gövde çekim — oturuş duruşunu bütünüyle göstermek için",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "8xFzcSieBXY",
+     "title": "Guitar Sitting Position, Posture & Parts (Guitar Tutorials #2)",
+     "channel": "Andrew Keeping",
+     "instructor": "Andrew Keeping",
+     "technique": "Oturuş pozisyonu, genel duruş ve gitar parçalarının tanıtımı",
+     "framingHint": "Tam gövde çekim + gitar parçaları için ara sıra yakın çekim",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "q-2BVSms8Nw",
+     "title": "3 Best Ways To Sit With Guitar (Posture)",
+     "channel": "David Chiriboga Music",
+     "instructor": "David Chiriboga",
+     "technique": "3 farklı oturuş stili (klasik bacak-üstü, ayaklık destekli, casual)",
+     "framingHint": "Tam gövde, farklı açılardan karşılaştırmalı çekim",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "0PiMjMeNEQQ",
+     "title": "This MATTERS! [Correct Fret Hand Position]",
+     "channel": "Acoustic Guitar Lessons",
+     "instructor": "Acoustic Guitar Lessons (kanal eğitmeni)",
+     "technique": "Doğru sol el (perde/fret) pozisyonu ve başparmak yerleşimi",
+     "framingHint": "Yakın çekim — sol el ve klavye (fretboard) odaklı",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "7_U1aETkbgQ",
+     "title": "Fretting Hand Technique - How to Position Your Hand (Guitar Lesson) Beginner Guitar",
+     "channel": "Yourguitarguide",
+     "instructor": "Yourguitarguide (kanal eğitmeni)",
+     "technique": "Sol el tekniği: bilek açısı, parmak ucu kullanımı, başparmak konumu",
+     "framingHint": "Yakın çekim el+klavye, açıklama sırasında ara sıra tam gövde",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "rTMN8rCBWkw",
+     "title": "(Part1) 11 Basic Guitar Chords that every Beginner Guitarist should know ~ Open Major & Minor Chords",
+     "channel": "Piku Attri",
+     "instructor": "Piku Attri",
+     "technique": "Temel açık majör/minör akorlar (E, A, D, G, C, Am, Em vb.)",
+     "framingHint": "Yakın çekim sol el akor şekli, tam gövde ile karışık olabilir",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "1a_U1I118Gw",
+     "title": "How to Play Open Chords - Guitar Basics",
+     "channel": "Guitar World",
+     "instructor": "Guitar World (yayın kanalı, eğitmen adı video içinde belirtiliyor olabilir)",
+     "technique": "Açık akorların temel çalınışı",
+     "framingHint": "Yakın çekim, sol el/klavye odaklı",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "6C2WFkVESBk",
+     "title": "3 Essential Strumming Patterns - Beginner Guitar Lessons",
+     "channel": "Good Guitarist",
+     "instructor": "Good Guitarist (kanal eğitmeni)",
+     "technique": "3 temel strumming (tarama) ritim kalıbı",
+     "framingHint": "Orta/tam gövde çekim — her iki el (akor eli + tarama eli) görünür şekilde",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    },
+    {
+     "videoId": "NCV9IgeSYuU",
+     "title": "Beginner Guitar Strumming Patterns You MUST Know!",
+     "channel": "Marty Music",
+     "instructor": "Marty Schwartz (Marty Music)",
+     "technique": "Temel strumming kalıpları ve tempo tutma",
+     "framingHint": "Orta/tam gövde çekim, tarama eli hareketini gösterecek şekilde",
+     "runs": [
+      "run2"
+     ],
+     "triage": {
+      "status": "pending",
+      "frameClass": null,
+      "angleClass": null
+     }
+    }
+   ],
+   "counts": {
+    "videos": 22,
+    "independentChannels": 19
+   },
+   "meetsInstructorMinimum": true
+  }
+ }
+}
