@@ -1,0 +1,14 @@
+{
+ "_generated_from": "config/triage-thresholds.w1.json (tek kaynak); ELLE DÜZENLEME — orayı düzenle, bunu yeniden üret",
+ "_profile": "default",
+ "_rationale": "Rig varsayılanına göre tek sapma: süre 90→60 sn. Gerekçe: bir 'doğru duruş' gösterimi 70 saniyede biter; 90 sn eşiği çelloda iyi adayları eledi.",
+ "thresholds": {
+  "min_duration_s": 60.0,
+  "require_landscape": true,
+  "max_cuts_per_min": 12.0,
+  "min_sharpness": 40.0,
+  "min_upper_body_ratio": 0.6,
+  "cut_probe_fps": 2.0,
+  "pose_probe_frames": 12
+ }
+}

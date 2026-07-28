@@ -1,0 +1,11 @@
+{
+ "_generated_from": "config/triage-thresholds.w1.json (tek kaynak); ELLE DÜZENLEME — orayı düzenle, bunu yeniden üret",
+ "_profile": "voice",
+ "_rationale": "Şanda ölçtüğümüz her şey üst gövdede (baş-omuz hizası, çene, omuz yükselmesi). Kadraj oranı en sert burada: üst gövde kararsızsa video referans olamaz.",
+ "thresholds": {
+  "min_duration_s": 60.0,
+  "min_upper_body_ratio": 0.75,
+  "min_sharpness": 40.0,
+  "max_cuts_per_min": 12.0
+ }
+}
