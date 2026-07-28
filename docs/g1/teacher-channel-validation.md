@@ -1,4 +1,6 @@
-# Ostinato G1-B — Öğretmen/B2B Kanal Doğrulama Paketi (v1)
+# Ostinato G1-B — Öğretmen/B2B Kanal Doğrulama Paketi (v1) — 📦 ARŞİV
+
+> ⚡ **M-F-19 (2026-07-28): BU PAKET ARTIK KAPI DEĞİL.** Kurucu kararıyla D3'ün öğretmen-görüşmesi/B2B doğrulama bacağı kaldırıldı; Ostinato B2C-first, öğretmen-paylaşım bir özellik. Pedagoji/hata-taksonomisi/tolerans artık kamu eğitmen videolarından (≥3 konsensüs + "common mistakes" hasadı, hata başına ≥2 bağımsız kaynak). **Bu paket hiçbir şeyi bloklamaz;** B2B kanalı lansman-sonrası fırsat olarak DEFTER O-006'da durur ve o gün bu paket hazır beklerdir. Görüşme kılavuzunun soru seti (özellikle B bölümü: gerçek hata vakaları) opsiyonel uzman turunda da kullanılabilir.
 
 **Tarih:** 2026-07-26 · **Statü:** HAZIR — görüşmeleri kurucu yürütür (D3 kapı çıktısının B parçası)
 **Amaç:** 5-10 çello öğretmeni görüşmesiyle iki soruya kanıt: (1) "öğretmensiz pratik saatleri" gerçek ve para eden bir problem mi, (2) öğretmen kanalı dağıtım+savunma hattı olarak çalışır mı. **Derin yatırım kararı bu sinyale bağlıdır (D3).**

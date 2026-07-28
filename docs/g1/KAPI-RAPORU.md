@@ -1,6 +1,8 @@
 # 🚪 Ostinato G1/D3 Kapı Raporu — Kurucu Tek-Sayfa
 
-**Tarih:** 2026-07-26 (gece oturumu) · **Kapı tanımı:** D3 — V0 = veri protokolü + öğretmen/B2B kanal doğrulaması, KOD DEĞİL. **Derin yatırım kararı B2B sinyaline bağlı** (00-AILE §3-D3).
+> ⚡ **SÜPERSEDE EDİLDİ (M-F-19, 2026-07-28).** Bu raporun **B2B bacağı yürürlükte değil:** öğretmen görüşmeleri artık kapı DEĞİL, hiçbir şeyi bloklamıyor (Ostinato B2C-first; öğretmen-paylaşım = özellik). Çello-dedektör derin yatırımı **veri-güdümlü kapıya** taşındı (W3; ölçüt: W1-W2 çekişi + yaylı-sayfa ilgi sinyali — DEFTER OK-3-rev). Ayrıca cihaz-benchmark G8'e ertelendi (M-F-17). **Belge tarihsel kayıt olarak korunur;** güncel kapsam otoritesi `../OSTINATO-BLUEPRINT.md`, güncel kuyruk `workspace/LOOP.md` W0. Aşağıdaki teknik bulgular (ses ön-ölçümü, triyaj, beyaz alan) GEÇERLİDİR.
+
+**Tarih:** 2026-07-26 (gece oturumu) · **Kapı tanımı (o günkü):** D3 — V0 = veri protokolü + öğretmen/B2B kanal doğrulaması, KOD DEĞİL.
 
 ## Durum özeti
 

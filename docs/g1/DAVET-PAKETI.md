@@ -1,4 +1,6 @@
-# Ostinato G1-B — Öğretmen Görüşmesi DAVET PAKETİ (kurucuya teslim, v1)
+# Ostinato G1-B — Öğretmen Görüşmesi DAVET PAKETİ (v1) — 📦 ARŞİV
+
+> ⚡ **M-F-19 (2026-07-28): gönderim BEKLEMEDE, kapı değil.** Öğretmen görüşmeleri artık hiçbir fazı bloklamıyor (B2C-first). Paket hazır durur: B2B fırsatı lansman-sonrası gündeme gelirse veya kurucu opsiyonel uzman turu isterse doğrudan kullanılır. Eşik tablosu (§5) artık yürürlükte değil — yerine DEFTER **OK-3-rev** veri-güdümlü kapı metriği geçerlidir.
 
 **Tarih:** 2026-07-26 · **Statü:** GÖNDERİME HAZIR — eşikler kurucu onaylı ve KİLİTLİ (M-F-01/OK-3: ≥%60 S1+S2 & ≥3 pilot & ≥1 B2B = GÜÇLÜ; altı = PARK; görüşme sırasında değişmez).
 **Kullanım:** Bu TEK dosya gönderim için yeter: sıra → kişiye özel mesaj → takvim → görüşme-günü akışı. Tam kılavuz: `teacher-channel-validation.md` (soru seti §2, skor kartı §4). **Mom-Test kuralı: davette ürün adı/tarifi YOK** — kişiselleştirme onların işine atıfla yapılır, bizimkine değil.
