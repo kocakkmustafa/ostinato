@@ -22,7 +22,7 @@
 
 **W1 (çekirdek motorlar + en yüksek talep):** **Şan/Vokal** (✅ en temiz; vibrato metriği = Yousician'ın itiraf edilmiş boşluğu) · **Piyano/Klavye** ("akor-sınıfı+postür" dürüst kapsam + **MIDI modu**) · **Gitar** (akustik+elektro; akor şekli el-landmark + akor-sınıfı). Bu üçü ABD ders talebinin ~%87'si.
 **W2 (neredeyse bedava eklemeler):** Ukulele · Bas gitar · **Banjo · Mandolin** (gitar fretboard-modülü konfigleri).
-**W3 (yaylılar):** Keman → Çello (D3/B2B kapısı burada) → **Viyola** (keman konfigi) → **Kontrbas** (⚠️ yalnız kadraj-mesafe yönergesi).
+**W3 (yaylılar):** Keman → Çello (dedektör derin-yatırımı VERİ-GÜDÜMLÜ kapıyla — M-F-19; görüşme yok) → **Viyola** (keman konfigi) → **Kontrbas** (⚠️ yalnız kadraj-mesafe yönergesi).
 **W4 (nefesliler):** Flüt → Sax → Klarnet → Trompet → **Trombon** (slide-pozisyon = kameraya EN görünür brass!) → **Obua · Fagot · Blokflüt (okul pazarı!) · Tin whistle** (konfig) → **Korno ⚠️** (el-çanda blind-spot — sınırlı vaatle: yalnız duruş+pitch+ritim, el-tekniği İDDİASIZ).
 **W5 (perküsyon):** Davul kiti (V1 tek-pad/trampet rudiment; PAS 40) → **Cajon · Djembe · Bongo/Conga** (onset konfigleri) → **Tabla** (pitch-bükümlü bol uzantısı; Hindistan pazarı).
 **W6 (yeni modül, yüksek ROI):** **Guzheng + Koto** (paylaşımlı zither modülü — Çin'de ~10M guzheng öğrencisi iddiası: pazarlama öncesi birincil-kaynak teyidi şart, mühendislik için yeterli sinyal) · **Akordeon** (çift-el+körük modülü) · **Harp** (genişlik-kadraj yönergesi) · **Pipa** (tremolo/lunzhi uzantısı) · Mızıka (bend-dedektörü).
