@@ -32,4 +32,4 @@
 
 - `faster-whisper` kurulu değil → transkript aşaması "skipped"; koçluk-dili madenciliği şimdilik yok (hasadın diğer aşamalarını etkilemiyor).
 - **Düzeltme (aynı gün):** `apXCNMckvuY` ilk koşumda Traceback verip manifest bırakmamıştı; ilk yorumum "rig garantisinin dışına düşen durum" idi. **Yeniden koşumda sorunsuz geçti** (netlik 213.8, üst-gövde 1.00 → kabul). Yani hata GEÇİCİydi (büyük olasılıkla indirme kaynaklı), rig'de yapısal bir boşluk değil — koordinatöre bildirilecek bir şey yok. Ders: tek koşumluk hatadan mimari sonuç çıkarma; önce tekrarla.
-- Örneklem 5 video: oranlar yön gösterir, karar vermez.
+- Örneklem 6 video: oranlar yön gösterir, karar vermez.
