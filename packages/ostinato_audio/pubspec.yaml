@@ -1,0 +1,11 @@
+name: ostinato_audio
+description: Instrument-independent musical audio analysis core for Ostinato — normative reference for native ports.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^4.0.0
