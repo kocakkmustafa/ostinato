@@ -12,8 +12,9 @@
 | `E8Do4oxTJ1k` | piyano | 1920×1080 | 130s | 8.4 | 94.5 | **0.42** | ❌ üst-gövde 0.42 < 0.50 |
 | `MHUaLy57dao` | şan | 1920×1080 | 828s | 0.1 | **39.5** | — | ❌ netlik 39.5 < 40 |
 | `gld10I5NhCE` | gitar | 1920×1080 | 255s | 8.8 | **36.9** | — | ❌ netlik 36.9 < 50 |
+| `apXCNMckvuY` | gitar | 1920×1080 | 214s | — | 213.8 | **1.00** | ✅ kabul → fixture |
 
-**Kabul oranı: 2/5 (%40).** Örneklem küçük — bu bir eğilim işareti, kapı kararı değil.
+**Kabul oranı: 3/6 (%50).** Örneklem küçük — bu bir eğilim işareti, kapı kararı değil. (İlk yazımda 2/5 idi; hata veren gitar adayı yeniden koşumda geçince güncellendi.)
 
 ## 2. Ne öğrendik (eşiklerin gerçekle teması)
 
@@ -25,10 +26,10 @@
 
 - **K-T1 — İki havuz, tek profil yetmiyor:** piyano/gitar için `posture` (üst-gövde ≥0.5-0.6) ve `hands` (üst-gövde eşiği YOK, netlik ≥60) diye iki ayrı profil üretilecek. Aynı video iki havuza farklı sonuçla girebilir; hangi metriğin hangi havuzdan beslendiği provenance'a yazılır (J-028'in `measurementSpace` beyanının kardeşi).
 - **K-T2 — Netlik eşiği düşürülmeyecek:** kabul oranını yükseltmek için eşik gevşetmek, `triage-thresholds.w1.json` §acceptanceTargets'ta yazdığım kuralın ("altında kalırsa eşik gevşetilmez, havuz genişletilir") ihlali olur. Bulanık kaynaktan çıkarılan landmark, sessizce gürültülü referans üretir.
-- **K-T3 — Havuz genişletme gerekli:** 55 adayın %40'ı kabul edilirse çalgı başına ~7 kabul çıkar; hedef ≥12. Kalan adaylar koşulduktan sonra açık kalırsa arama terimlerini genişletirim (kanal-başına ≤2 kuralı korunarak).
+- **K-T3 — Havuz genişletme muhtemelen gerekli:** 55 adayın %50'si kabul edilirse çalgı başına ~9 kabul çıkar; hedef ≥12. Kalan adaylar koşulduktan sonra açık kalırsa arama terimlerini genişletirim (kanal-başına ≤2 kuralı korunarak).
 
 ## 4. Bilinen sınırlar
 
 - `faster-whisper` kurulu değil → transkript aşaması "skipped"; koçluk-dili madenciliği şimdilik yok (hasadın diğer aşamalarını etkilemiyor).
-- Bir gitar adayı (`apXCNMckvuY`) pull/triyaj sırasında hata verdi; manifest bırakmadı — yeniden koşumda incelenecek (rig'in "reddedilen de manifest bırakır" garantisinin dışına düşen bir durum, koordinatöre bildirilecek).
+- **Düzeltme (aynı gün):** `apXCNMckvuY` ilk koşumda Traceback verip manifest bırakmamıştı; ilk yorumum "rig garantisinin dışına düşen durum" idi. **Yeniden koşumda sorunsuz geçti** (netlik 213.8, üst-gövde 1.00 → kabul). Yani hata GEÇİCİydi (büyük olasılıkla indirme kaynaklı), rig'de yapısal bir boşluk değil — koordinatöre bildirilecek bir şey yok. Ders: tek koşumluk hatadan mimari sonuç çıkarma; önce tekrarla.
 - Örneklem 5 video: oranlar yön gösterir, karar vermez.
