@@ -1,0 +1,511 @@
+{
+ "schemaVersion": "ostinato-error-taxonomy-1",
+ "version": "0.1.0",
+ "generated": "2026-07-29",
+ "rule": "Her hata kodu için ≥2 BAĞIMSIZ öğretmen kaynağı (farklı kanal) — M-F-19. cameraObservable:invisible olanlar ÜRÜN KAPSAMINA GİRMEZ; dürüstlük kutusu + 'Neden yok?' girdisi olurlar.",
+ "pending": [
+  "voice (ajan limitte düştü, yeniden koşuyor)"
+ ],
+ "instruments": {
+  "piano": {
+   "errors": [
+    {
+     "code": "P-SETUP-BENCH-HEIGHT",
+     "name": "Bench Height Mismatch (Wrong Bench/Seat Height)",
+     "description": "Tabure çok alçak ya da çok yüksek ayarlandığında bilekler klavyenin altına düşer veya omuzlar yukarı kalkar; kol-bilek-el hizası bozulur, tuşe kontrolü zayıflar ve zamanla bilek/omuz/sırt ağrısı riski artar. Başlangıç seviyesinde en sık gözden kaçan kurulum hatalarından biridir.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Classical Squeak",
+       "url": "https://www.youtube.com/watch?v=M_Z5QIFQEC0",
+       "videoId": "M_Z5QIFQEC0"
+      },
+      {
+       "channel": "TopMusicCo (Tim Topham)",
+       "url": "https://www.youtube.com/watch?v=dc8PNOTTUlg",
+       "videoId": "dc8PNOTTUlg"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Kanal/başlık YouTube oEmbed API ile doğrulandı; iki kaynak da doğrudan tabure yüksekliği konusunu işliyor."
+    },
+    {
+     "code": "P-WRIST-COLLAPSE",
+     "name": "Wrist Collapse / Wrist Hyperextension (\"The Kink\")",
+     "description": "Çalarken bilek aşağı çöker ya da tepe gibi yukarı kalkar; ideal olan dirsek-bilek-parmak ekleminin oluşturduğu düz bir çizgidir. Bozuk bilek açısı hız ve tuşe netliğini sınırlar, uzun pratikte gerilim ve ağrıya yol açar.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "South Shore Piano School",
+       "url": "https://www.youtube.com/watch?v=QHV_z9I-kBc",
+       "videoId": "QHV_z9I-kBc"
+      },
+      {
+       "channel": "Ashlee Young Piano Studio",
+       "url": "https://www.youtube.com/watch?v=INvXw8zIi6M",
+       "videoId": "INvXw8zIi6M"
+      }
+     ],
+     "independentSources": 2,
+     "notes": null
+    },
+    {
+     "code": "P-FINGER-FLAT",
+     "name": "Flat / Collapsed Finger Joints",
+     "description": "Parmak ucundaki en dıştaki eklem çalarken çökerse parmak yuvarlaklığını kaybedip düzleşir; bu durum hız gelişimini ve tuşe netliğini azaltır çünkü parmak ucu tuşla sağlam/hızlı temas kuramaz. Kendi kendine öğrenen başlangıç seviyesi öğrencilerde çok sık görülür.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Piano By Sina",
+       "url": "https://www.youtube.com/watch?v=_XsS3STRNhg",
+       "videoId": "_XsS3STRNhg"
+      },
+      {
+       "channel": "Piano & Voice with Phillip (Phillip Fullerton)",
+       "url": "https://www.youtube.com/watch?v=9q9oq_l8vXI",
+       "videoId": "9q9oq_l8vXI"
+      },
+      {
+       "channel": "Jane Trotter's Accelerando Piano",
+       "url": "https://www.youtube.com/watch?v=pR7CljmyANk",
+       "videoId": "pR7CljmyANk"
+      }
+     ],
+     "independentSources": 3,
+     "notes": null
+    },
+    {
+     "code": "P-POST-SHOULDER-TENSION",
+     "name": "Shoulder Tension / Hunching",
+     "description": "Omuzlar kulaklara doğru yükselip kambur oturmak kol ağırlığının doğal akışını keser; bu gerginlik uzun pratik seanslarında fark edilmeden yerleşir ve yorgunluk/ağrıya yol açan gizli bir sorundur.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Helen Aun",
+       "url": "https://www.youtube.com/shorts/EnbexCCarok",
+       "videoId": "EnbexCCarok"
+      },
+      {
+       "channel": "PianoCareer",
+       "url": "https://www.youtube.com/watch?v=tf2rbCjOpfA",
+       "videoId": "tf2rbCjOpfA"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "PianoCareer videosu omuzla birlikte el/bilek/dirsek/sırt gerginliğini genel olarak ele alıyor, konuya özel değil ama omuz gerginliğini açıkça kapsıyor."
+    },
+    {
+     "code": "P-ELBOW-ANGLE",
+     "name": "Incorrect Elbow Angle",
+     "description": "Gövdeye çok yakın oturunca dirsekler içeri sıkışır, çok uzakta oturunca dışa açılır; ideal olan hafif açılı, gövdenin biraz önünde duran dirsektir. Yanlış açı bilek yüksekliğini bozar ve kol ağırlığının tuşlara aktarımını engeller.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "PianoCareer",
+       "url": "https://www.youtube.com/watch?v=InqmH-o1cX0",
+       "videoId": "InqmH-o1cX0"
+      },
+      {
+       "channel": "The PianoWell System",
+       "url": "https://www.youtube.com/watch?v=6qqQ9H3pRK0",
+       "videoId": "6qqQ9H3pRK0"
+      }
+     ],
+     "independentSources": 2,
+     "notes": null
+    },
+    {
+     "code": "P-TEMPO-DRIFT",
+     "name": "Tempo Inconsistency (Rushing & Dragging)",
+     "description": "Kolay pasajlarda bilinçsizce hızlanıp zor pasajlarda yavaşlamak, dinleyici için düzensiz ve rahatsız edici bir akış yaratır; kök neden genelde metronomsuz çalışma ve iç nabız/sayma alışkanlığının eksikliğidir.",
+     "observable": "audio",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Pianote",
+       "url": "https://www.youtube.com/watch?v=XGKdMYSitAY",
+       "videoId": "XGKdMYSitAY"
+      },
+      {
+       "channel": "Digital Piano School",
+       "url": "https://www.youtube.com/watch?v=st7pabkIMZQ",
+       "videoId": "st7pabkIMZQ"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Orta güven: bulunan videolar doğrudan metronomla sabit tempo eğitimi içeriyor; tam transkript teyit edilemediği için 'hata' çerçevesi ikincil makale kaynaklarıyla desteklendi."
+    },
+    {
+     "code": "P-HAND-BALANCE",
+     "name": "Uneven Hand Balance (Uneven Touch Between Hands)",
+     "description": "Melodiyi taşıyan el ile eşlik eden el arasında ses şiddeti dengesi kurulamayınca melodi eşliğin altında kaybolur; iki elin bağımsız ağırlık/dinamik kontrolü gerektiren, çoğu başlangıç seviyesinde ihmal edilen bir beceridir.",
+     "observable": "audio",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Learn Piano with Jazer Lee",
+       "url": "https://www.youtube.com/watch?v=9VKRnY8kZts",
+       "videoId": "9VKRnY8kZts"
+      },
+      {
+       "channel": "LivingPianosVideos",
+       "url": "https://www.youtube.com/watch?v=ubHpSP-YGdQ",
+       "videoId": "ubHpSP-YGdQ"
+      }
+     ],
+     "independentSources": 2,
+     "notes": null
+    },
+    {
+     "code": "P-PEDAL-BLUR",
+     "name": "Pedal Blur (Muddy Sustain Pedal Use)",
+     "description": "Pedal doğru zamanda kaldırılıp yeniden basılmadığında (senkron pedal yerine sürekli basılı tutma) önceki notalar/akorlar birbirine karışır ve armoni bulanıklaşıp 'çamurlaşır'.",
+     "observable": "audio",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Learn Piano with Jazer Lee",
+       "url": "https://www.youtube.com/watch?v=lzbgr6H3BE0",
+       "videoId": "lzbgr6H3BE0"
+      },
+      {
+       "channel": "Pianote",
+       "url": "https://www.youtube.com/watch?v=koJVelJdnZE",
+       "videoId": "koJVelJdnZE"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Orta güven: videolar genel pedal tekniği eğitimi; 'bulanıklık hatası' çerçevesi ikincil kaynaklarla (musicalbri.com vb.) desteklendi."
+    },
+    {
+     "code": "P-DEATH-GRIP",
+     "name": "Death Grip / Finger Gripping Tension",
+     "description": "Öğrenci daha güçlü/iyi çalmak isterken tuşları avuç içi gerginliğiyle sıkıca kavrar; bu hem elde görünen kasılı/pençe biçimli bir duruş yaratır hem de kulakla duyulan ince, sert ve zorlanmış bir ton üretir — kol ağırlığı yerine kas gücü kullanıldığının işaretidir. Hem görsel hem işitsel sinyal birlikte değerlendirilince güvenilir şekilde ayırt edilebilir.",
+     "observable": "fusion",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Pianote",
+       "url": "https://www.youtube.com/watch?v=gt_iNZObDI0",
+       "videoId": "gt_iNZObDI0"
+      },
+      {
+       "channel": "Piano Roadmap",
+       "url": "https://www.youtube.com/watch?v=JJYtrZqKI68",
+       "videoId": "JJYtrZqKI68"
+      }
+     ],
+     "independentSources": 2,
+     "notes": null
+    },
+    {
+     "code": "P-EYES-ON-HANDS",
+     "name": "Looking at Hands Too Much (No Tactile Independence)",
+     "description": "Başlangıç seviyesinde sürekli ellere bakma alışkanlığı nota okumayı yavaşlatır, baş sürekli aşağı-yukarı hareket eder ve klavyede dokunsal (proprioseptif) farkındalık gelişemez. Kafa/gövde duruşu üzerinden kamerayla izlenebilir bir davranıştır.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Pianote",
+       "url": "https://www.youtube.com/watch?v=4d8rlEwqEVI",
+       "videoId": "4d8rlEwqEVI"
+      },
+      {
+       "channel": "Piano with Rebecca Bogart",
+       "url": "https://www.youtube.com/shorts/DjidsM8uxHY",
+       "videoId": "DjidsM8uxHY"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Sınırda karar: sistem sadece el/vücut iskeleti izliyorsa kamera geçerli; baş/bakış yönü izlenmiyorsa bu hata görünmez sınıfına kayabilir."
+    },
+    {
+     "code": "P-PRACTICE-WHOLE-PIECE",
+     "name": "Whole-Piece Practice Instead of Isolating Trouble Spots",
+     "description": "Her hata yapıldığında parçanın başına dönüp yeniden baştan çalmak, zor bölümlerin asla yeterli tekrarı almamasına yol açar ve hataları pekiştirir. Bu bir pratik stratejisi/alışkanlık hatasıdır; tek bir çalma anını kamera veya sesle izleyerek tespit edilemez, yalnızca öğrencinin çalışma yöntemi gözlemlenerek anlaşılır.",
+     "observable": "invisible",
+     "inV1Scope": false,
+     "sources": [
+      {
+       "channel": "Learn Piano with Jazer Lee",
+       "url": "https://www.youtube.com/watch?v=rEd1ICHvq3M",
+       "videoId": "rEd1ICHvq3M"
+      },
+      {
+       "channel": "The Piano Prof | Kate Boyd",
+       "url": "https://www.youtube.com/watch?v=FjwVYVewyJ8",
+       "videoId": "FjwVYVewyJ8"
+      }
+     ],
+     "independentSources": 2,
+     "notes": null
+    },
+    {
+     "code": "P-READING-ROTE",
+     "name": "Letter-Name/Rote Reliance Instead of True Note Reading",
+     "description": "Öğrenci notayı satır/aralık ilişkisiyle okumak yerine harf isimlerine ya da kulaktan ezbere bağımlı kalır; bu, nota okuma becerisinin gerçekten gelişip gelişmediğini gösteren bilişsel/yöntemsel bir eksikliktir ve tek bir performans anından kamera veya sesle anlaşılamaz.",
+     "observable": "invisible",
+     "inV1Scope": false,
+     "sources": [
+      {
+       "channel": "Musiah AI Piano Lessons",
+       "url": "https://www.youtube.com/shorts/ZWL-9Wmb9sU",
+       "videoId": "ZWL-9Wmb9sU"
+      },
+      {
+       "channel": "Piano With Corey",
+       "url": "https://www.youtube.com/watch?v=rM24uhrGmVY",
+       "videoId": "rM24uhrGmVY"
+      }
+     ],
+     "independentSources": 2,
+     "notes": null
+    }
+   ],
+   "counts": {
+    "total": 12,
+    "inScope": 10,
+    "invisible": 2
+   }
+  },
+  "guitar": {
+   "errors": [
+    {
+     "code": "G-THUMB-OVER-NECK",
+     "name": "Thumb Wrapped Over the Top of the Neck",
+     "description": "Baş parmağın sapın arkasında değil üst kenarında, sapa paralel biçimde durmasıdır. Bu pozisyonda avuç içi sapın alt tarafına doğru döner, perdeleme parmaklarının açılma mesafesi ve hareket serbestliği ciddi biçimde daralır; sonuç olarak akor geçişleri yavaşlar, parmaklar sapa \"kenetlenir\". Doğrusu baş parmağın sapın arkasında, yukarı doğru (sapa dik) durmasıdır.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "JustinGuitar",
+       "url": "https://www.youtube.com/watch?v=zQuHqY83mD0",
+       "videoId": "zQuHqY83mD0"
+      },
+      {
+       "channel": "Andre Tonelli",
+       "url": "https://www.youtube.com/watch?v=6V-X-FJw7yQ",
+       "videoId": "6V-X-FJw7yQ"
+      },
+      {
+       "channel": "Colchester_Guitar_Teacher (Paul Burke)",
+       "url": "https://www.youtube.com/watch?v=80LSk5_A5LE",
+       "videoId": "80LSk5_A5LE"
+      }
+     ],
+     "independentSources": 3,
+     "notes": "El/parmak iskelet landmarkıyla doğrudan görülebilir; baş parmağın sap üzerindeki konumu ve avuç açısı net biçimde tespit edilebilir."
+    },
+    {
+     "code": "G-WRIST-BENT",
+     "name": "Bent / Twisted Fretting-Hand Wrist",
+     "description": "Perdeleme bileğinin keskin açıyla bükülmesi; genelde sapın çok alçak tutulmasından ya da yanlış baş parmak pozisyonundan kaynaklanır. Bilek ve önkolun düz bir hat oluşturması gerekirken sürekli bükülü tutulması tendonlarda gerilim, zamanla ağrı/tendinit riski ve parmaklarda hareket kısıtlılığı yaratır.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "First Fret Lessons",
+       "url": "https://www.youtube.com/shorts/I3LuR6Gz0yM",
+       "videoId": "I3LuR6Gz0yM"
+      },
+      {
+       "channel": "Acoustic Guitar Lessons",
+       "url": "https://www.youtube.com/shorts/0PiMjMeNEQQ",
+       "videoId": "0PiMjMeNEQQ"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Bilek açısı el/kol iskelet noktalarından doğrudan ölçülebilir bir geometri hatasıdır."
+    },
+    {
+     "code": "G-DEATH-GRIP",
+     "name": "\"Death Grip\" — Squeezing the Neck Too Hard",
+     "description": "Öğrencinin ton üretebilmek için gereğinden fazla kuvvetle sapı sıkıca kavraması. Bu hem elde/önkolda hızlı yorgunluk ve gerginliğe yol açar hem de basılan notanın perdeye göre keskinleşmesine (sharp/pitch bozulması) veya sert, kontrolsüz bir tona neden olabilir.",
+     "observable": "fusion",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "MusicTheoryForGuitar",
+       "url": "https://www.youtube.com/watch?v=7IXCvJT2iSQ",
+       "videoId": "7IXCvJT2iSQ"
+      },
+      {
+       "channel": "The Guitar Dojo",
+       "url": "https://www.youtube.com/watch?v=9tSTZTHUPiA",
+       "videoId": "9tSTZTHUPiA"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Kamerada parmak eklemlerinde/bilekte beyazlama-gerginlik görülür; seste notanın perdeden keskinleşmesi (pitch bükülmesi) veya sert tonlama duyulabilir."
+    },
+    {
+     "code": "G-FINGER-PLACEMENT-BUZZ",
+     "name": "Flat / Too-Far-From-Fret Fingers Causing Buzz or Muted Strings",
+     "description": "İki yakın alt-hata birlikte öğretilir: (a) parmak ucu yerine parmağın düz kısmının komşu tele değip onu susturması (mute), (b) parmağın perde teline yeterince yakın basılmaması sonucu telin tırlaması (fret buzz). İkisi de akor netliğini bozan, başlangıç seviyesinde en sık rastlanan teknik hatalardandır; çözüm parmakları kavisli tutup uçla basmak ve perde teline yakın konumlanmaktır.",
+     "observable": "fusion",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Song Notes by David Pots",
+       "url": "https://www.youtube.com/watch?v=EBXJf-5bH-0",
+       "videoId": "EBXJf-5bH-0"
+      },
+      {
+       "channel": "Good Guitarist",
+       "url": "https://www.youtube.com/watch?v=n8ebr5NOwDw",
+       "videoId": "n8ebr5NOwDw"
+      },
+      {
+       "channel": "DwaynesGuitarLessons",
+       "url": "https://www.youtube.com/watch?v=u98ZSsOjWow",
+       "videoId": "u98ZSsOjWow"
+      }
+     ],
+     "independentSources": 3,
+     "notes": "Kamerada parmağın düzlüğü/eğriliği ve perde teline mesafesi görülür; seste mute (sağır/kesik nota) veya buzz (tırlama) sesi duyulur — klasik füzyon hatası."
+    },
+    {
+     "code": "G-POST-SLOUCH",
+     "name": "Poor Sitting Posture / Slouching Over the Guitar",
+     "description": "Öğrencinin sapı ve perdeleri görebilmek için öne eğilmesi, omuzların çökmesi, sırtın kamburlaşması. Bu duruş sırt/boyun ağrısına, bileklerde ekstra gerilime yol açar ve uzun vadede dayanıklılığı/rahatlığı azaltır. Doğru duruşta gövde dik, gitar vücuda destekli biçimde konumlanır.",
+     "observable": "camera",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "JustinGuitar",
+       "url": "https://www.youtube.com/watch?v=cqEhj5C0gf8",
+       "videoId": "cqEhj5C0gf8"
+      },
+      {
+       "channel": "Kevin O'Shaughnessy",
+       "url": "https://www.youtube.com/watch?v=NNVRTAB3i-c",
+       "videoId": "NNVRTAB3i-c"
+      },
+      {
+       "channel": "Good Guitarist",
+       "url": "https://www.youtube.com/watch?v=r59-OKDBfSA",
+       "videoId": "r59-OKDBfSA"
+      }
+     ],
+     "independentSources": 3,
+     "notes": "Gövde/omuz/baş iskelet noktalarından duruş açısı doğrudan tespit edilebilir."
+    },
+    {
+     "code": "G-PICK-GRIP-TENSE",
+     "name": "Tense / Overly Tight Pick Grip While Strumming",
+     "description": "Penanın çok sıkı tutulması strumming elini ve önkolu gerginleştirir; bu hem hız ve akıcılığı sınırlar hem de sert, kontrolsüz bir tonlamaya yol açar. Gevşek bir pena tutuşu daha yumuşak, tutarlı ve rahat bir tını sağlar.",
+     "observable": "fusion",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "HowToPracticeGuitar",
+       "url": "https://www.youtube.com/watch?v=rSKBMCLUddc",
+       "videoId": "rSKBMCLUddc"
+      },
+      {
+       "channel": "Leigh Fuge",
+       "url": "https://www.youtube.com/shorts/x2RMsV4dMo4",
+       "videoId": "x2RMsV4dMo4"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Kamerada el/önkol gerginliği ve pena tutuş açısı görülür; seste sert/tutarsız veya \"gıcırtılı\" tonlama duyulur."
+    },
+    {
+     "code": "G-TEMPO-DRIFT",
+     "name": "Rushing or Dragging the Strumming Tempo",
+     "description": "Metronom olmadan çalışan başlangıç seviyesindeki gitaristlerin ritmi fark etmeden hızlandırması (rushing) ya da yavaşlatması (dragging); özellikle akor değişimi anlarında tempo bozulur. Bu, parçanın bütünlüğünü ve bir eşlik/backing track ile uyumu bozan saf işitsel bir hatadır.",
+     "observable": "audio",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "La Guitare avec Alexandre",
+       "url": "https://www.youtube.com/watch?v=KM7znJY4NQg",
+       "videoId": "KM7znJY4NQg"
+      },
+      {
+       "channel": "Riff Ninja Productions",
+       "url": "https://www.youtube.com/watch?v=qpR6mzN45kk",
+       "videoId": "qpR6mzN45kk"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Tempo tutarlılığı yalnızca ses/vuruş analiziyle (beat-tracking) tespit edilir; el hareketi görüntüsü tek başına tempo sapmasını kanıtlamaz."
+    },
+    {
+     "code": "G-CHORD-CHANGE-HESITATION",
+     "name": "Hesitating During Chord Changes, Breaking the Rhythm",
+     "description": "Akor değişimi sırasında parmakların yavaş/emin olmayan biçimde hareket etmesi, öğrencinin strumming'i durdurması veya yavaşlatması; bu ritmi kırar ve şarkının akışını bozar. Çözüm, ritmi korurken (gerekirse strumming'i sürdürerek) parmakların verimli ve paralel hareket etmesidir.",
+     "observable": "fusion",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Marty Music",
+       "url": "https://www.youtube.com/watch?v=94bp9XLN5kw",
+       "videoId": "94bp9XLN5kw"
+      },
+      {
+       "channel": "JustinGuitar",
+       "url": "https://www.youtube.com/watch?v=mAgc7hr44WM",
+       "videoId": "mAgc7hr44WM"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Kamerada parmakların gecikmeli/dağınık geçiş hareketi görülür; seste ritmin kesilmesi veya duraksaması duyulur."
+    },
+    {
+     "code": "G-NOT-TUNED",
+     "name": "Neglecting to Tune Before Playing",
+     "description": "Her çalışma oturumundan önce akort kontrolü yapılmaması. Sıcaklık değişimi ve yeni telin gerilmesi yüzünden gitar hızla akordan çıkar; başlangıç seviyesindeki öğrenci çoğu zaman bunun farkına varmaz ve yanlış perde/kulak referansıyla çalışır, bu da kulak eğitimini de olumsuz etkiler.",
+     "observable": "audio",
+     "inV1Scope": true,
+     "sources": [
+      {
+       "channel": "Jo Bywater Guitar Tuition",
+       "url": "https://www.youtube.com/watch?v=BOlR89xnd7M",
+       "videoId": "BOlR89xnd7M"
+      },
+      {
+       "channel": "JustinGuitar",
+       "url": "https://www.youtube.com/watch?v=X2EmpWr9vUc",
+       "videoId": "X2EmpWr9vUc"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Yalnızca perde/frekans analiziyle (pitch detection) tespit edilebilir; kamerada görülecek bir hareket yoktur."
+    },
+    {
+     "code": "G-PRACTICE-NO-ISOLATION",
+     "name": "Practicing Through Mistakes Instead of Slow, Deliberate Practice",
+     "description": "Öğrencinin bir pasajı hatalarla birlikte tam hızda tekrar tekrar çalması; bu, doğru hareketi değil hatalı hareketi kas hafızasına yerleştirir (\"pratik mükemmelleştirmez, kalıcı kılar\"). Doğru yaklaşım, pasajı hatasız çalınabilecek kadar yavaşlatıp kademeli olarak hızlandırmaktır. Bu bir tekil hareket ya da ses anındaki hata değil, çalışma davranışı/stratejisi örüntüsüdür.",
+     "observable": "invisible",
+     "inV1Scope": false,
+     "sources": [
+      {
+       "channel": "Tony Polecastro (@tacguitar)",
+       "url": "https://www.youtube.com/watch?v=L4bitlIn-NU",
+       "videoId": "L4bitlIn-NU"
+      },
+      {
+       "channel": "guitarmastery",
+       "url": "https://www.youtube.com/shorts/zb21X2CNx4k",
+       "videoId": "zb21X2CNx4k"
+      }
+     ],
+     "independentSources": 2,
+     "notes": "Tek bir kare veya ses anından ölçülemez; yalnızca zaman içindeki tekrar/çalışma stratejisi örüntüsünden (meta-analiz) çıkarılabilecek davranışsal bir hatadır — anlık kamera+ses sistemi bunu doğrudan yakalayamaz."
+    }
+   ],
+   "counts": {
+    "total": 10,
+    "inScope": 9,
+    "invisible": 1
+   }
+  }
+ }
+}
