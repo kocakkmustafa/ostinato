@@ -64,6 +64,17 @@ CONCEPTS = {
  },
 }
 
+# J-028 / M-F-30 (P0 aile kuralı): ham normalize koordinatta mesafe ve açı,
+# en-boy oranı kadar bozuktur (1080p dikeyde ~1,78×). Sentetik testler bunu
+# YAKALAYAMAZ çünkü sentetik iskelet zaten kare bir uzayda üretilir — hata
+# ancak gerçek karede görünür. Bu yüzden kamera/füzyon gören her hata kodu,
+# metriğinin hangi uzayda hesaplandığını BEYAN ETMEK ZORUNDA; ham normalize
+# uzay yasak, ve kod ship edilmeden önce en az bir gerçek-kare regresyonu ister.
+MEASUREMENT_SPACE_ALLOWED = {"world", "pixel_scaled"}
+MEASUREMENT_SPACE_BANNED = {"normalized_raw"}
+#: varsayılan: iskelet geometrisi world uzayında yapılır (metrik, en-boy bağımsız)
+DEFAULT_SPACE = "world"
+
 # observable precedence: if runs disagree, the more conservative wins.
 # invisible > audio/camera/fusion is NOT the rule — "we cannot see it" must win
 # over "we can", because claiming observability we do not have is the failure
@@ -78,6 +89,7 @@ out = {"schemaVersion": "ostinato-error-taxonomy-2", "version": "1.0.0", "genera
                  "ajanların adlandırması kanıttır, kimlik değil. İki koşumda da çıkan kavram = "
                  "koşumlar-arası yakınsama (bu hasadın ürettiği en güçlü sinyal).",
        "rules": {"minIndependentSourcesPerError": 2,
+                 "measurementSpace": "J-028/M-F-30: kamera+fuzyon metrikleri world uzayinda (veya piksel-olcekli) hesaplanir; HAM NORMALIZE uzay YASAK (en-boy orani kadar bozar, ~1.78x@1080p dikey). Her kod ship oncesi >=1 gercek-kare regresyonu ister; sentetik fixture bu hatayi yakalayamaz.",
                  "invisibleInProductScope": False,
                  "observableConflict": "Çelişkide DAHA TEMKİNLİ sınıf kazanır (görebildiğimizi iddia etmek, görememekten daha zararlı)."},
        "instruments": {}}
@@ -106,8 +118,11 @@ for inst, concepts in CONCEPTS.items():
         if len(channels) < 2:
             problems.append(f"{inst}/{code}: <2 bağımsız kanal ({len(channels)})")
         observable = min(obs, key=lambda o: PRECEDENCE[o])
+        needs_space = observable in ("camera", "fusion")
         items.append({
             "code": code,
+            "measurementSpace": DEFAULT_SPACE if needs_space else None,
+            "realFrameRegression": "required" if needs_space else "n/a",
             "names": sorted({n for n in names if n in r1 or n in r2}),
             "description": max(descs, key=len),
             "observable": observable,
@@ -126,6 +141,18 @@ for inst, concepts in CONCEPTS.items():
                    "byObservable": {k: sum(1 for i in items if i["observable"] == k)
                                     for k in ("camera", "audio", "fusion", "invisible")}},
     }
+
+# J-028 denetimi: kamera/füzyon kodları uzay beyanı taşımalı ve yasak uzayda olmamalı
+for inst, d in out["instruments"].items():
+    for e in d["errors"]:
+        if e["observable"] in ("camera", "fusion"):
+            sp = e.get("measurementSpace")
+            if sp in MEASUREMENT_SPACE_BANNED or sp not in MEASUREMENT_SPACE_ALLOWED:
+                problems.append(f"{inst}/{e['code']}: gecersiz olcum uzayi {sp!r} (J-028)")
+            if e.get("realFrameRegression") != "required":
+                problems.append(f"{inst}/{e['code']}: gercek-kare regresyonu isaretlenmemis (J-028)")
+        elif e.get("measurementSpace") is not None:
+            problems.append(f"{inst}/{e['code']}: ses/invisible kodda olcum uzayi olmamali")
 
 # every name the agents produced must be mapped — otherwise we silently drop findings
 for inst in CONCEPTS:

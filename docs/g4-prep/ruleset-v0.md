@@ -10,6 +10,13 @@
   "version": "0.1.0-draft",
   "provenanceRequired": ["modelVariant", "modelSha256", "rulesetVersion", "metricsConfigVersion", "calibrationProfileId"],
 
+  "measurementSpace": {
+    "policy": "world",
+    "allowed": ["world", "pixel_scaled"],
+    "banned": ["normalized_raw"],
+    "note": "J-028/M-F-30: ham normalize koordinatta mesafe/açı en-boy oranı kadar bozuk (~1.78x@1080p dikey). Sentetik fixture YAKALAYAMAZ — her kamera/füzyon kuralı >=1 gerçek-kare regresyonu ister."
+  },
+
   "setupGate": {
     "hardInModes": ["assessment", "technique_drill"],
     "advisoryInModes": ["guided_practice"],

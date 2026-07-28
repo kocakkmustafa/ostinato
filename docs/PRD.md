@@ -60,6 +60,18 @@ SharedReport (iskelet-render + metrik özeti)
 - Metronom raporu: medyan + **yayılım** + bias (sürekli erken ≠ dağınık) + coverage (kaçan vuruş "mükemmel" sayılmaz).
 - **`CueGate`:** koç konuşurken analiz zaman-kapısı (AEC'ye güvenilmez — konuşma için ayarlıdır, müziği bozar).
 
+## 5b. Ölçüm uzayı — J-028 / M-F-30 (P0 aile kuralı)
+
+**Ham normalize landmark koordinatında mesafe ve açı, en-boy oranı kadar bozuktur** (1080p dikeyde ~1,78×). JabLab bunu gerçek karede yakaladı; **sentetik fixture bu hatayı YAKALAYAMAZ**, çünkü sentetik iskelet zaten kare bir uzayda üretilir — yani "testlerim yeşil" bu hataya karşı hiçbir şey söylemez.
+
+Ostinato'daki durum, kanıtla: **ses hattı etkilenmiyor** (`packages/ostinato_audio` içinde landmark/koordinat matematiği yok — grep'le doğrulandı; oradaki "normalize" geçişleri YIN'in kümülatif ortalaması ve dalga genliği). Risk **gelecekteki postür/Setup Check modülünde**.
+
+Bağlayıcı kurallar:
+1. İskelet geometrisi **world uzayında** (metrik, en-boy bağımsız) veya **piksel-ölçekli** hesaplanır. **Ham normalize uzay YASAK.**
+2. Kamera/füzyon gören her hata kodu, metriğinin uzayını **beyan eder** — `config/error-taxonomy.w1.json` içinde `measurementSpace` alanı (20 kod).
+3. Her kamera/füzyon kodu ship öncesi **≥1 gerçek-kare regresyonu** ister (`realFrameRegression: required`).
+4. Kural **makine-denetimli**: `tools/build_taxonomy.py` uzay beyanı eksik/yasak olanı reddeder — negatif testle doğrulandı (kasten `normalized_raw` verildiğinde 20 ihlali yakalayıp exit=1).
+
 ## 6. Çalgı modülü sözleşmesi (ADR-001 revizesi)
 
 Çekirdek "çello" bilmez; **çalgı modülü** yükler: `{aile, modüller[], frekans aralığı + akort referansı, kamera açısı şablonu, postür şablonu, hata taksonomisi + tolerans profilleri, egzersiz paketi, dürüstlük kutusu}`. Yeni çalgı = konfig + içerik; motor değişmez. Doğrulaması: **"keman testi"** — keman eklerken değişen her şey modül paketinde mi? (Setup Check'in "oturuş" varsayımı bile config'ten gelir.)

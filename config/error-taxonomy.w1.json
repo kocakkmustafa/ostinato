@@ -5,6 +5,7 @@
  "method": "İki BAĞIMSIZ hasat koşumunun kavram-düzeyinde birleşimi. Kodlar bizim ve kalıcı; ajanların adlandırması kanıttır, kimlik değil. İki koşumda da çıkan kavram = koşumlar-arası yakınsama (bu hasadın ürettiği en güçlü sinyal).",
  "rules": {
   "minIndependentSourcesPerError": 2,
+  "measurementSpace": "J-028/M-F-30: kamera+fuzyon metrikleri world uzayinda (veya piksel-olcekli) hesaplanir; HAM NORMALIZE uzay YASAK (en-boy orani kadar bozar, ~1.78x@1080p dikey). Her kod ship oncesi >=1 gercek-kare regresyonu ister; sentetik fixture bu hatayi yakalayamaz.",
   "invisibleInProductScope": false,
   "observableConflict": "Çelişkide DAHA TEMKİNLİ sınıf kazanır (görebildiğimizi iddia etmek, görememekten daha zararlı)."
  },
@@ -13,6 +14,8 @@
    "errors": [
     {
      "code": "V-BREATH-CLAVICULAR",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Clavicular / Shoulder Breathing"
      ],
@@ -39,6 +42,8 @@
     },
     {
      "code": "V-POST-LOCKED-KNEES",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Locked Knees / Rigid Standing Posture"
      ],
@@ -65,6 +70,8 @@
     },
     {
      "code": "V-HEAD-CHIN-LIFT",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Chin Lifting / Head Tilting Back on High Notes"
      ],
@@ -91,6 +98,8 @@
     },
     {
      "code": "V-JAW-TENSION",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Jaw Tension / Clenching"
      ],
@@ -117,6 +126,8 @@
     },
     {
      "code": "V-PULLED-CHEST",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Pulling Chest Voice / Yelling Instead of Transitioning"
      ],
@@ -143,6 +154,8 @@
     },
     {
      "code": "V-BREATHY-TONE",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Breathy Tone (Incomplete Vocal Fold Closure)"
      ],
@@ -169,6 +182,8 @@
     },
     {
      "code": "V-NASALITY",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Nasality (Excessive Nasal Resonance)"
      ],
@@ -195,6 +210,8 @@
     },
     {
      "code": "V-PITCH-DRIFT",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Flat or Sharp Pitch (Intonation Drift)"
      ],
@@ -221,6 +238,8 @@
     },
     {
      "code": "V-MOUTH-CLOSED",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Insufficient Mouth Opening / Closed Vowel Shaping"
      ],
@@ -247,6 +266,8 @@
     },
     {
      "code": "V-LARYNX-HIGH",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "High Larynx Position / Throat Tension"
      ],
@@ -273,6 +294,8 @@
     },
     {
      "code": "V-TONGUE-ROOT",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Tongue Root Tension (Retracted/Bunched Tongue)"
      ],
@@ -299,6 +322,8 @@
     },
     {
      "code": "V-CATCH-BREATH",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Catch-Breath / Audible Gasping Between Phrases"
      ],
@@ -341,6 +366,8 @@
    "errors": [
     {
      "code": "P-SETUP-BENCH-HEIGHT",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Bench Height Mismatch (Wrong Bench/Seat Height)",
       "Wrong Bench/Seat Height"
@@ -380,6 +407,8 @@
     },
     {
      "code": "P-WRIST-COLLAPSE",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Collapsed / Overly Raised Wrist",
       "Wrist Collapse / Wrist Hyperextension (\"The Kink\")"
@@ -425,6 +454,8 @@
     },
     {
      "code": "P-FINGER-FLAT",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Flat / Collapsed Finger Joints"
      ],
@@ -469,6 +500,8 @@
     },
     {
      "code": "P-POST-SHOULDER-TENSION",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Shoulder Tension / Hunching"
      ],
@@ -513,6 +546,8 @@
     },
     {
      "code": "P-ELBOW-ANGLE",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Incorrect Elbow Angle"
      ],
@@ -551,6 +586,8 @@
     },
     {
      "code": "P-TEMPO-DRIFT",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Inconsistent Tempo (No Metronome Practice)",
       "Tempo Inconsistency (Rushing & Dragging)"
@@ -590,6 +627,8 @@
     },
     {
      "code": "P-TOUCH-UNEVEN",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Uneven Hand Balance (Uneven Touch Between Hands)",
       "Uneven Touch Between Fingers (Weak Pinky)"
@@ -629,6 +668,8 @@
     },
     {
      "code": "P-PEDAL-BLUR",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Early/Late Pedaling (Blurred Sound)",
       "Pedal Blur (Muddy Sustain Pedal Use)"
@@ -668,6 +709,8 @@
     },
     {
      "code": "P-DEATH-GRIP",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Death Grip / Finger Gripping Tension"
      ],
@@ -694,6 +737,8 @@
     },
     {
      "code": "P-EYES-ON-HANDS",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Looking at Hands Too Much (No Tactile Independence)"
      ],
@@ -720,6 +765,8 @@
     },
     {
      "code": "P-LEGATO-GAP",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Legato Gaps from Early Finger-Lift / Thumb-Under Fumble"
      ],
@@ -746,6 +793,8 @@
     },
     {
      "code": "P-PRACTICE-WHOLE-PIECE",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Whole-Piece Practice Instead of Isolating Trouble Spots"
      ],
@@ -772,6 +821,8 @@
     },
     {
      "code": "P-READING-ROTE",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Letter-Name/Rote Reliance Instead of True Note Reading",
       "Skipping Note-Reading (Learning Purely by Ear)"
@@ -827,6 +878,8 @@
    "errors": [
     {
      "code": "G-THUMB-OVER-NECK",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Baseball Grip (Thumb-Over-the-Neck)",
       "Thumb Wrapped Over the Top of the Neck"
@@ -872,6 +925,8 @@
     },
     {
      "code": "G-WRIST-BENT",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Bent / Twisted Fretting-Hand Wrist",
       "Bent Wrist (\"Waiter's Pose\")"
@@ -911,6 +966,8 @@
     },
     {
      "code": "G-DEATH-GRIP",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "\"Death Grip\" — Squeezing the Neck Too Hard",
       "Death Grip"
@@ -950,6 +1007,8 @@
     },
     {
      "code": "G-FINGER-PLACEMENT-BUZZ",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Flat / Too-Far-From-Fret Fingers Causing Buzz or Muted Strings",
       "Flat / Uncurled Fingers Muting Adjacent Strings",
@@ -1011,6 +1070,8 @@
     },
     {
      "code": "G-POST-SLOUCH",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Kambur Oturuş / Kötü Genel Postür",
       "Poor Sitting Posture / Slouching Over the Guitar"
@@ -1056,6 +1117,8 @@
     },
     {
      "code": "G-PICK-GRIP-TENSE",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Tense / Overly Tight Pick Grip While Strumming",
       "Yanlış Pena Tutuşu (çok sıkı / çok fazla pena dışarıda)"
@@ -1098,6 +1161,8 @@
     },
     {
      "code": "G-TEMPO-DRIFT",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Metronomsuz Çalışma / Tempo Kayması",
       "Rushing or Dragging the Strumming Tempo"
@@ -1137,6 +1202,8 @@
     },
     {
      "code": "G-CHORD-CHANGE-HESITATION",
+     "measurementSpace": "normalized_raw",
+     "realFrameRegression": "required",
      "names": [
       "Hesitating During Chord Changes, Breaking the Rhythm",
       "Yavaş/Kesik Akor Geçişleri (parmakları teker teker kaldırıp tek tek koymak)"
@@ -1176,6 +1243,8 @@
     },
     {
      "code": "G-NOT-TUNED",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Neglecting to Tune Before Playing"
      ],
@@ -1202,6 +1271,8 @@
     },
     {
      "code": "G-PRACTICE-NO-ISOLATION",
+     "measurementSpace": null,
+     "realFrameRegression": "n/a",
      "names": [
       "Kaynak/Öğretmen Değiştirip Durma, Temelleri Atlayıp İleri Şarkılara Geçme",
       "Practicing Through Mistakes Instead of Slow, Deliberate Practice"
