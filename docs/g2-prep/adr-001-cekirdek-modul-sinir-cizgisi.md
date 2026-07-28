@@ -3,8 +3,20 @@
 **Tarih:** 2026-07-26 · **Statü:** TASLAK — G2'de (B2B sinyali onaylıysa) ADR olarak mühürlenir; şimdilik tasarım-hazırlık (kapıya bağımlı olmayan iş).
 **Bağlayıcı:** 00-AILE-MIMARISI §1.1 (Ostinato TÜM çalgılara açık; çello ilk motor) + §2 (nesne algılama + ses analizi OSTINATO'ya aittir, core'a sızmaz — aile bunlarsuz yaşar) · 20-URETIM-SURECI §2.6 (ileriye-dönük mimari: alan-bağımsız motorlar, içerik=paket).
 
-> ✅ **KOORDİNASYON GÜNCELLEMESİ (2026-07-26 sabah):** M-017 ana kararı VERİLDİ — **Dart `packages/motion_core` KANONİK** (Choreia oturumu kurdu; 84/84 test + ReferenceBuilder ile 94/94); Python hatları yalnız video→fixture çıkarma aracı. §2.1 listesi artık SOMUT bileşenlere karşı doğrulanacak: `StructuralValidator` (M-019 — Ostinato'nun eğik-gövde senaryosu dahil), `ConfidenceGate.forVariant` (M-018), `PoseModelVariant`, `ReferenceBuilder`/`CanonicalReference.toleranceAt` (§6.0 skorlama referansları — bowing referansları da bununla kurulur), `Dtw.warpPenalty` (M-C-05). Revalidasyon G2'de yapılır (O-010). Kalan M-017 artığı: JabLab Python araçları ↔ fixture_pipeline birleştirmesi (kurucu).
-> Ayrıca §2.2'ye bağlayıcı ekleme: bowing skorlama referans hattı `ReferenceBuilder` TÜKETİR (çekirdekten), kendi konsensüs/aynalama çözücüsünü YAZMAZ (L-019 dersinin Ostinato karşılığı).
+> ✅ **HİZALANDI (2026-07-29, M-F-23 yanıtıyla — O-010 KAPANDI).** Çekirdek `motion_core-v0.1.0` tag'ine pinlenir. §2.1'in soyut maddeleri artık GERÇEK konumlara bağlı:
+> | Bu ADR'de yazan | Çekirdekteki gerçek yeri |
+> |---|---|
+> | state-machine çatısı | `engine/phase_state_machine.dart` (`PhaseStateMachine` / `AttemptRun`) |
+> | replay/fixture harness | `fixture/replay.dart` (fixture şeması v2) |
+> | **tek-saat sözleşmesi** | **`engine/motion_clock.dart` (`MotionClock`)** — audio+motion AYNI kaynaktan damgalanır; kendi saatimizi yazmayız |
+> | ses-gecikme kalibrasyonu (M-F-08) | `LatencyCalibrationStore` + `TapTestCalibrator` (route-başına) |
+> | koç sesi ↔ mikrofon çakışması | **`CueGate`** — cue sırasında analiz zaman-kapısı + ring-out; `playAndRecord` bileşik oturumun core sözleşmesi (oturum yönetiminin kendisi app/platform işi) |
+> | güven/yapısal denetim | `ConfidenceGate.forVariant` (M-018) · `StructuralValidator` (M-019) |
+> | referans konsensüsü | `ReferenceBuilder` / `CanonicalReference.toleranceAt` |
+> | provenance | `AttemptProvenance` (M-F-07) — her deneme/skor kaydına girer |
+>
+> **Sınır dedektörü teyit edildi:** çekirdekte nota/pitch/yay kelimesi YOK; yeni modüller enstrüman-bilmez. **`ostinato-audiofix-1` ses fixture şeması app'te KALIR** (00-AILE §2: ses analizi core'a girmez); hizalama şartları: zaman alanları core'la konuşurken monotonic **Us**'a çevrilir (`MotionClock` çapası) · provenance alan adları fixture-v2 `provenance` bloğuyla eşlenir (`sourceUrl`/`license`/`retrievedAt`/`toolVersions`) · **`shouldJudge:false` negatif sınıfı KORUNUR** · metronom-hiza alt-seti ileride RhythmEngine onset-event arayüzüne akar (M-F-21).
+> Bağlayıcı: bowing referans hattı `ReferenceBuilder` TÜKETİR, kendi konsensüs/aynalama çözücüsünü YAZMAZ (L-019'un Ostinato karşılığı).
 
 ---
 
