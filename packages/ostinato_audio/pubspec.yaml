@@ -9,3 +9,17 @@ environment:
 dev_dependencies:
   test: ^1.25.0
   lints: ^4.0.0
+  # Pinned to the released core tag, never to a path.
+  #
+  # A path dependency into the shared motion-core tree would silently change
+  # meaning whenever that tree sits on a different branch — the exact class of
+  # accident that produced M-O-03. A tag cannot drift. This is a dev dependency
+  # on purpose: the audio package itself stays free of core so it can be tested
+  # standalone; the dependency exists to prove the clock contract holds
+  # (test/core_contract_test.dart) and will move to the app's own pubspec when
+  # the Flutter layer consumes both.
+  motion_core:
+    git:
+      url: https://github.com/kocakkmustafa/motion-core.git
+      ref: motion_core-v0.1.0
+      path: packages/motion_core
