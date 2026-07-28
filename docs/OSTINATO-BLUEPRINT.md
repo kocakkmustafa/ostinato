@@ -1,6 +1,6 @@
 # OSTINATO — Tam Kapsam Blueprint (oturumun kapsam otoritesi)
 
-**Tarih:** 2026-07-28 · **Statü:** KURUCU-ONAYLI (revizyonlu: "daha fazla çalgı" direktifiyle **~35 çalgıya** genişletildi). Ortak omurga: motion-core `docs/30-URUN-BLUEPRINT-STANDARDI.md` (ÖNCE onu oku). D3 hükmü (B2B sinyalsiz derin yatırım yok) çello-derinliği için geçerli kalır; modül-mimarisinin kendisi çok-çalgı hedefiyle kurulur.
+**Tarih:** 2026-07-28 · **Statü:** KURUCU-ONAYLI (revizyonlu: "daha fazla çalgı" direktifiyle **~35 çalgıya** genişletildi). Ortak omurga: motion-core `docs/30-URUN-BLUEPRINT-STANDARDI.md` (ÖNCE onu oku). **D3 REVİZE (kurucu 2026-07-28): öğretmen-görüşmesi/B2B bacağı KALDIRILDI** — Ostinato B2C-first; pedagoji/hata-taksonomisi/toleranslar kamu eğitmen videolarından (aşağıda §5b); çello-dedektör derin yatırım kapısı VERİ-GÜDÜMLÜ (Wave 1-2 çekişi + yaylı-sayfa ilgisi), görüşme-kapılı değil.
 **Nihai ürün:** "Music Practice" — kamera(postür/teknik)+ses(pitch/ritim) birleşik pratik koçu; **her çalgı kendi sayfasında** kurslarıyla; modül-tabanlı mimari sayesinde yeni çalgı = çoğunlukla KONFİG, yeni motor değil.
 
 ---
@@ -42,10 +42,11 @@ Kütüphane → **Çalgı aileleri** (Klavyeli · Telli-mızraplı · Yaylı · 
 7. Zither/akordeon/tabla modülleri (W6 kapısında; her biri kendi mini-spike'ıyla).
 
 ## 5. İçerik hattı
+**(b) Öğretmen bilgisi YouTube'dan (kurucu kararı):** (1) doğru teknik = ≥3 eğitmen konsensüsü (M-C-01/04); (2) **hata-taksonomisi = "common mistakes/beginner errors" video türünün hasadı — her hata kodu için ≥2 BAĞIMSIZ öğretmen kaynağı + provenance**; (3) tolerans = eğitmenler-arası varyans; (4) movement-science-advisor ilk-geçişi her çalgı-ailesi kural-setinde; (5) canlı uzman turu = OPSİYONEL kalite yükseltmesi (manuel-sona, hiçbir dalgayı bloklamaz).
 Çalgı-başına ≥3 eğitmen kamu-video konsensüsü (kamera-açı triyajı ilk adım — çello pilotu deseni her çalgıya) + ABRSM/Trinity/RCM/Suzuki/PAS yapıları YALNIZ yapısal esin (müfredat metinleri telifli — orijinal yazım) + method-book gelenekleri referans. Ses referansları: kendi ürettiğimiz egzersiz sesleri (metronom+nota — telif yok). Voice-pack: müziği bozmayan az-ve-öz replikler. Çocuk-verisi rejimi tüm çalgılarda (plan §13).
 
 ## 6. Görev backlog'u
-**W0:** D3/G1 kapı paketleri (öğretmen görüşmeleri kurucu-bacağı sürüyor — BLOKLAMAZ) + IA çatısı (~35 çalgı sayfası "yakında" durumlu) + platform katmanı + ses çekirdeği.
+**W0:** IA çatısı (D3 görüşme bacağı KALDIRILDI — hiçbir kurucu-bacağı beklenmez) (~35 çalgı sayfası "yakında" durumlu) + platform katmanı + ses çekirdeği.
 **W1→W7:** dalga içerikleri; her çalgı: kamera-açı triyajı → referans hasadı → config → kurslar → sweep → DEFTER → vault. W6 öncesi zither/akordeon fizibilite spike'ları (kamera-doğrulama — mimari yargı yetmez, gerçek MediaPipe oturumu).
 **Kapanış:** kapsam-tamamlama turu + çalgı-başına dürüstlük kutusu denetimi.
 
@@ -56,4 +57,4 @@ Kütüphane → **Çalgı aileleri** (Klavyeli · Telli-mızraplı · Yaylı · 
 Nota-nota polifonik transkripsiyon İDDİASI YOK ("akor doğrulama") · embouchure YOK · korno el-tekniği YOK · "3-6 ayda çello" tarzı beklenti-şişirme dili YASAK (O-011) · guzheng/erhu pazar rakamları birincil-kaynak teyidi öncesi pazarlamada kullanılmaz · çocuk-verisi rejimi tavizsiz · ton-kalitesi öznel hükmü verilmez.
 
 ## 9. Manuel-sona listesi (kurucu)
-Çello öğretmeni görüşmeleri (D3 — paket hazır) · çalgı-aile uzman turları (dalga-sonu) · URMP maili · cihaz-benchmark (G8) · fiyat onayı · voice-pack bütçesi · submission.
+(Opsiyonel) çalgı-aile canlı uzman turu / async öğretmen anketi — bloklamaz · URMP maili · cihaz-benchmark (G8) · fiyat onayı · voice-pack bütçesi · submission.
