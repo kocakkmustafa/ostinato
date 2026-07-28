@@ -33,7 +33,25 @@
 - **Çocuk verisi rejimi (bağlayıcı, plan §13):** ebeveyn izni, saklamama varsayılanı, model-eğitimi ayrı rıza, yüz-tanıma yok, silme+saklama-süresi görünür. Tasarım her fazda privacy-first.
 - Öğretmen katmanı V1: **shareable session report** (panel sonraki faz).
 
+## 3b. DALGA PLANI (blueprint devri — 2026-07-29; standart §4 md.1 gereği işlendi)
+
+**Kapsam otoritesi `OSTINATO-BLUEPRINT.md`; bu bölüm onun yürütme takvimidir.** Envanter: `config/instruments.v1.json` (42 çalgı · 7 aile · 8 modül — şema doğrulaması temiz). G-fazları artık **dalga-bazlı** koşar: platform katmanı BİR KEZ (W0/G5), her dalga için G3→G6 içerik/motor döngüsü (standart §4 md.2).
+
+| Dalga | Çalgılar | Yeni modül maliyeti | G-fazı odağı |
+|---|---|---|---|
+| **W0** | — (temel) | IA çatısı + platform katmanı + ses çekirdeği | G2 PRD · G4 ses motoru · G5 iskelet |
+| **W1** | Şan · Piyano(+MIDI) · Gitar | `chord_class` (Basic Pitch dönüşüm spike'ı) + `midi_input` spike | G3-G6 tam döngü; ilk ship edilebilir kütüphane |
+| **W2** | Ukulele · Bas · Banjo · Mandolin | ~0 (gitar/mono konfigleri) | G6 içerik ağırlıklı |
+| **W3** | Keman → **Çello** → Viyola → Kontrbas | `bowed` modülü + yay 2-keypoint dedektörü | **Dedektör derin yatırımı VERİ-GÜDÜMLÜ kapıyla** (OK-3-rev) |
+| **W4** | 10 nefesli (trombon = kameranın en görünür brass'ı) | `wind` modülü | G3-G6; korno SINIRLI vaat |
+| **W5** | Davul · Cajon · Djembe · Bongo/Conga · Tabla | `percussive_onset` | G4 onset motoru |
+| **W6** | Guzheng · Koto · Akordeon · Harp · Pipa · Mızıka | `plucked_zither` (+ fizibilite spike'ları) | Spike-önce kural |
+| **W7** | 10 bölgesel (bağlama · erhu · oud · sitar…) | Erhu = YENİ FSM (dikey/perdesiz) | Kanıtlanmış talep gelince |
+
+**W1 gerekçesi (blueprint §2):** Şan+Piyano+Gitar = ABD ders talebinin ~%87'si ve üçü de **dedektörsüz** — kamera yalnız postür/el için, ağır nesne-algılama yatırımı yok. Çello (eski V1) W3'e taşındı; hazır çello varlıkları W3 malzemesi + tüm çalgılara uygulanacak DESEN (OK-9).
+
 ## 4. Faz planı
+> ⚠️ **Aşağıdaki G0-G10 tanımları 2026-07-26 tarihli ÇELLO-MERKEZLİ kurgunun kaydıdır.** G1'in B2B bacağı M-F-19 ile kaldırıldı (bkz. §3b + DEFTER O-015); G2+ artık blueprint kapsamıyla ve dalga-bazlı koşar. Teknik içerik (ses hattı, fixture disiplini, kapı kanıt kuralları) geçerlidir.
 
 ### G0 — Derin araştırma & bilgi kütüphanesi
 1. `audio-dsp` danışmanını YARAT (önce-katalog; pitch/onset/tempo + mobil DSP) → ROSTER/AGENTS güncelle.
