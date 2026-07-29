@@ -27,7 +27,7 @@ import os
 import sys
 from pathlib import Path
 
-RIG = Path("/Users/mustafakaankocak/Documents/YULAlab-AI/ventures/motion-core/lib/tools/harvest_rig")
+RIG = Path("/Users/mustafakaankocak/motion-worktrees/ostinato-hold-isolator/tools/harvest_rig")  # M-F-22: paylaşılan ağaç başka dalda; izole worktree
 sys.path.insert(0, str(RIG))
 from rom_mode import classify  # noqa: E402  (yol enjeksiyonundan sonra)
 
