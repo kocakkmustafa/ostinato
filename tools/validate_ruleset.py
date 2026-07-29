@@ -112,6 +112,15 @@ def check(doc, name):
         coached = set(rc.get("coached_only", []))
         if bar is None:
             p.append(f"{name}: referenceConsumption.scoringBarDeg eksik (M-F-46 k.1)")
+        # scored/coached_only'daki her ad metrik sözlüğünde TANIMLI olmalı.
+        # Bu kural, fixture_check'in yakaladığı gerçek bir kusurdan doğdu:
+        # şan config'i 'left_shoulder' skorluyordu ama sözlüğünde öyle bir
+        # metrik yoktu (adı 'shoulder_rise_norm'du). Sarkan atıf, ürün
+        # tarafında sessizce "o eklem hiç skorlanmaz"a dönüşür.
+        for mid in sorted(scored | coached):
+            if mid not in metrics:
+                p.append(f"{name}: referenceConsumption'da tanımsız metrik {mid!r} "
+                         f"(sözlükte yok — sarkan atıf)")
         if scored & coached:
             p.append(f"{name}: bir metrik hem scored hem coached_only: {scored & coached}")
         if coached and not rc.get("userExplanation"):
@@ -165,6 +174,9 @@ challenge: mut for challenge, mut in [
         ("yabancı hata kodu (alan kayması)", lambda d: (
             d.update(module="guitar"), d.update(errors=[{"code":"V-PITCH-DRIFT","evaluateAt":"A",
             "condition":{"kind":"metric","metric":"m"}}]))),
+        ("sarkan referenceConsumption atfı", lambda d: d.update(
+            referenceConsumption={"scoringBarDeg":14,"scored":["yok_boyle_metrik"],
+                                  "coached_only":[],"userExplanation":"x"})),
         ("yabancı metrik (alan kayması)", lambda d: (
             d.update(module="guitar"), d["metrics"].update(vibrato_rate_hz={"unit":"Hz",
             "range":[0,12],"noiseBand":0.5,"baseline":0}))),
@@ -181,7 +193,7 @@ challenge: mut for challenge, mut in [
         d = copy.deepcopy(base); mut(d)
         if not check(d, "neg"):
             print(f"❌ SELF-TEST: '{label}' YAKALANMADI"); ok = False
-    print("✅ self-test: 15/15 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
+    print("✅ self-test: 16/16 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
     return 0 if ok else 1
 
 if __name__ == "__main__":

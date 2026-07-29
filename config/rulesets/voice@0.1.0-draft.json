@@ -70,57 +70,113 @@
       "expertPending": true,
       "_note": "W1'in ayırt edici metriği (rakiplerin itiraf edilmiş boşluğu). Hedef aralık uzman turundan gelecek — şimdilik yalnız ÖLÇÜLÜR, HÜKÜM VERİLMEZ."
     },
-    "shoulder_rise_norm": {
-      "id": "shoulder_rise_norm",
-      "unit": "ratio",
-      "range": [
-        -0.5,
-        0.5
-      ],
-      "noiseBand": 0.02,
-      "baseline": 0,
-      "expertPending": true,
-      "measurementSpace": "world",
-      "_space_why": "J-028/M-F-30: ham normalize koordinatta mesafe/açı en-boy oranı kadar bozuk. Bu metrik world uzayında hesaplanır ve ship öncesi ≥1 GERÇEK-KARE regresyonu ister (sentetik fixture bu hatayı yakalayamaz)."
-    },
-    "head_chin_angle_deg": {
-      "id": "head_chin_angle_deg",
+    "trunk_tilt": {
       "unit": "deg",
       "range": [
-        -60,
-        60
+        -180,
+        180
       ],
       "noiseBand": 2,
       "baseline": 0,
-      "expertPending": true,
-      "measurementSpace": "world"
-    },
-    "trunk_tilt_deg": {
-      "id": "trunk_tilt_deg",
-      "unit": "deg",
-      "range": [
-        -45,
-        45
-      ],
-      "noiseBand": 6,
-      "_noiseBand_why": "Ölçüm n=18: şan trunk_tilt 2,5°. Diğer çalgılar: gitar 3,6° · piyano 5,1°. Bant en kötü ölçülen varyansın (5,1°) üstünde tutuluyor — tek çalgının en iyi sayısına göre daraltmak, aynı metriği piyanoda yanlış kalibre eder.",
-      "baseline": 0,
-      "_baseline_why": "Dik gövde = 0° sapma. M-F-34: taban beyan edilmezse tolerans anlamsız.",
       "measurementSpace": "world",
-      "_space_why": "J-028 + M-O-08: piksel-ölçekli düzeltme açılı denekte yetersiz kaldı (en kötü vaka %62→%74 kötüleşti); world zorunlu.",
-      "_toleranceSource": "veri-türevli, ÖRNEKLEM-DUYARLI — havuz büyüdükçe yeniden ölçülür"
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 2.6° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
     },
-    "left_elbow_deg": {
-      "id": "left_elbow_deg",
+    "left_shoulder": {
       "unit": "deg",
       "range": [
-        0,
+        -180,
         180
       ],
-      "noiseBand": 35,
-      "baseline": null,
-      "_excluded_why": "ÖLÇÜMLE KAPSAM DIŞI (B4, M-F-41): şanda 5 eğitmen arası sapma 35-51°. Havuzu büyütmek bunu düzeltmez — şanda kolun 'doğru yeri' YOKTUR (şarkıcı jest yapar, nota tutar). Taksonomimizin 12 şan hata kodundan hiçbiri dirsek/önkol hakkında değil: veri ile pedagoji aynı şeyi söylüyor. 'Referans yetersiz' değil, 'teknik böyle bir şey içermiyor' vakası → dürüstlük kutusuna girer.",
-      "inV1Scope": false
+      "noiseBand": 2,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 6.1° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "right_shoulder": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 4,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 9.2° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "left_upper_arm": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 2,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 5.0° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "right_upper_arm": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 3,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 8.3° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "left_elbow": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 19,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 48.0° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "right_elbow": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 18,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 43.8° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "left_forearm": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 32,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 80.6° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "right_forearm": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 45,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 113.7° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
     },
     "setup_complete": {
       "id": "setup_complete",
@@ -206,7 +262,7 @@
               "value": 0.7,
               "expertPending": true
             },
-            "trunk_tilt_deg": {
+            "trunk_tilt": {
               "op": "lte",
               "value": 15,
               "_why": "DÜZELTİLDİ: eski eşik 8° idi ve 1,5° varyansın ~5 katıydı. Gerçek en-kötü varyans 5,1° çıkınca 8° yalnız 1,6 katı kaldı — eğitmen farkını hata saymaya başlardı. 15° ≈ 5,1°'ın 3 katı: doğal farkı geçiriyor, belirgin eğilmeyi yakalıyor."
@@ -255,7 +311,7 @@
       "evaluateAt": "ANY",
       "condition": {
         "kind": "metric",
-        "metric": "shoulder_rise_norm",
+        "metric": "right_shoulder",
         "op": "gt",
         "value": 0.1
       },
@@ -297,7 +353,7 @@
     "_measured": "B4 pilotu, motion_core-v0.5.0. Şan 18 take → M-F-47 anlaşma kapısı 7'sini DIŞLADI (adlarıyla) → küme 11 take.",
     "scoringBarDeg": 14.0,
     "scored": [
-      "trunk_tilt_deg",
+      "trunk_tilt",
       "left_shoulder",
       "right_shoulder",
       "left_upper_arm",
@@ -337,5 +393,6 @@
       ],
       "_why": "DİKKAT: bu dispersiyonlar TÜM eğitmenlerin değil, anlaşma kapısını geçen KÜMENİN sayıları. %39 dışlama oranı yüksek. Meşru (M-F-47: 23° ile 112°'yi ortalamak anlamsız bir orta üretir) ve dışlananlar ADLARIYLA kayıtlı — sessiz ortalama değil. Ama okuma farkı önemli: 'eğitmenler hemfikir' değil, 'hemfikir olan alt-küme hemfikir'. Dışlama oranı izlenmeli; artarsa referansın temsil gücü sorgulanır."
     }
-  }
+  },
+  "_namingNote": "Metrik adları üç çalgıda ORTAK (trunk_tilt, left_shoulder, ...). Şanda önce 'trunk_tilt_deg'/'shoulder_rise_norm' kullanılmıştı; fixture_check sarkan atıfları yakaladı (scored listesi sözlükte olmayan adlara işaret ediyordu). Ortak sözlük, çalgılar arası karşılaştırmayı da mümkün kılıyor."
 }
