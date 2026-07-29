@@ -415,7 +415,7 @@
   "_measurementProvenance": {
    "status": "ATTESTED — ILK VOICE REFERANSI",
    "artifact": "config/references/voice-posture-setup.v1.json",
-   "contributingTakes": 4,
+   "contributingTakes": 6,
    "agreementGateJoints": [
     "trunk_tilt"
    ],

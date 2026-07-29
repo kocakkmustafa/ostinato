@@ -415,18 +415,30 @@
   },
   "measuredDispersionDeg": {
    "trunk_tilt": "floor-bound (dispersiyon gurultu tabaninin altinda)",
-   "_note": "5 take, agreementGateJoints=[trunk_tilt], bar 14.0, excludedOutlier YOK"
+   "_note": "7 take, agreementGateJoints=[trunk_tilt], bar 14.0, excludedOutlier YOK"
   },
   "_measuredDispersionDegWhy": "Kanonik CLI artefaktının `frames.dispersionRad` medyanı (deg'e çevrilmiş), M-O-46'nın eklem-başına-sapma tablosuyla (build() hatasıyla birebir doğrulanmış) tutarlı.",
   "_mirrorGapProvenance": "MEASURED (motion_core 0.8.4, gapMeasured:true) — sayısal gap artefaktta yok (yalnız confident/gapMeasured bool'ları), M-F-46 şeffaflık alanı",
   "_qualityRemoved": "Tutulan metriklerin quality eşikleri kaldırıldı (M-F-46 k.3: coached_only metrik kapı olamaz). Metrikler ÖLÇÜLMEYE devam eder, hüküm/kapı üretmez — 'göster ama puanlama' ayrımı.",
   "_measurementProvenance": {
-   "status": "ATTESTED — İLK ÇALGI REFERANSI",
+   "status": "ATTESTED — ILK CALGI REFERANSI",
    "eligibleSources": 3,
    "totalSources": 21,
    "why": "M-F-43 kaynak-uygunluk kapısı: bu artefaktı besleyen 3 kaynağın 3'ü de `referenceEligible:true` (attested). Toplam havuz 21 kaynaktan yalnız 6'sı uygun; 3'ü hold-window bulundurdu VE kanonik güven-kapısından %100 geçti.",
    "whatThisMeans": "Sayılar referans-DIŞI kaynaktan gelmiyor — tolerans/eşik kaynağı sayılır (M-C-01). Ama örneklem küçük (tam minTakes=3): havuz büyüdükçe (cooldown-sonrası hedefli hasat, M-F-95) yeniden ölçülecek.",
-   "notALoophole": "movementRomPolicy'de `posture_setup` KASITLI olarak passiveExecutionPossible=True bırakıldı — bu veri muafiyetle geçmedi, kanıtla geçti (transkript ACTIVE_MARKERS isabeti)."
+   "notALoophole": "movementRomPolicy'de `posture_setup` KASITLI olarak passiveExecutionPossible=True bırakıldı — bu veri muafiyetle geçmedi, kanıtla geçti (transkript ACTIVE_MARKERS isabeti).",
+   "contributingTakes": 7,
+   "unreliableJoints": [
+    "left_elbow",
+    "right_elbow",
+    "left_forearm",
+    "right_forearm"
+   ],
+   "artifact": "config/references/guitar-posture-setup.v1.json",
+   "agreementGateJoints": [
+    "trunk_tilt"
+   ],
+   "clusterToleranceDeg": 14.0
   }
  },
  "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı."

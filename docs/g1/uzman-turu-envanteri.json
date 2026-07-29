@@ -25,7 +25,7 @@
    "evaluateAt": "PLAY",
    "observable": "camera",
    "sources": "4 bağımsız kanal",
-   "threshold": "level_above_room_floor_db gt 15",
+   "threshold": "None None None",
    "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
   },
   {
