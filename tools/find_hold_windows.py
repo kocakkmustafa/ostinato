@@ -70,13 +70,17 @@ def main() -> int:
                   for fr in doc.get("frames", [])]
         cands = candidate_times(vid)
 
+        # M-O-43: kapsam upperBody'e daraltıldı — bizim referans setimiz
+        # (StandardJoints.upperBody) diz/ayak bileğine hiç bakmıyor; o
+        # landmark'ların görünürlük+enerji+drift'e karışması bel-üstü
+        # çekimleri (bu havuzun TİPİK formatı) sebepsiz reddediyordu.
         used_drift = DEFAULT_MAX_DRIFT
         windows = find_hold_windows(frames, fps=float(fps), candidate_times_s=cands,
-                                     max_drift=DEFAULT_MAX_DRIFT)
+                                     max_drift=DEFAULT_MAX_DRIFT, scope="upperBody")
         if not windows:
             used_drift = FALLBACK_MAX_DRIFT
             windows = find_hold_windows(frames, fps=float(fps), candidate_times_s=cands,
-                                         max_drift=FALLBACK_MAX_DRIFT)
+                                         max_drift=FALLBACK_MAX_DRIFT, scope="upperBody")
 
         row = {"videoId": vid, "candidateTimesS": cands, "fps": fps}
         if windows:
