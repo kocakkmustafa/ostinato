@@ -76,11 +76,37 @@
   },
   "pilotFindings": {
     "date": "2026-07-29",
-    "sampleSize": 6,
-    "accepted": 3,
-    "acceptanceRate": 0.5,
-    "topRejectReason": "netlik (3 redden 2'si)",
-    "note": "Küçük örneklem — eğilim işareti, kapı kararı değil. Eşik GEVŞETİLMEZ (K-T2); havuz genişletilir (K-T3).",
-    "correction": "İlk rapor 2/5 idi; Traceback veren gitar adayı yeniden koşumda geçti (hata GEÇİCİ, rig boşluğu değil). Ders: tek koşumluk hatadan mimari sonuç çıkarma."
+    "round": 1,
+    "candidates": 55,
+    "manifests": 50,
+    "accepted": 30,
+    "acceptanceRate": 0.6,
+    "perInstrument": {
+      "guitar": {
+        "n": 15,
+        "target": 12,
+        "met": true
+      },
+      "piano": {
+        "n": 10,
+        "target": 12,
+        "met": false,
+        "short": 2
+      },
+      "voice": {
+        "n": 5,
+        "target": 12,
+        "met": false,
+        "short": 7
+      }
+    },
+    "topRejectReasons": {
+      "upper_body_ratio": 5,
+      "sharpness": 4,
+      "vertical_format": 2,
+      "other": 9
+    },
+    "decision": "Eşik GEVŞETİLMEDİ (kendi acceptanceTargets kuralım). Şan + piyano 2. tura giriyor. Şanın en düşük oranı (%36) benim en sert eşiğimin (upper_body 0.75) en küçük havuza uygulanmasının sonucu — gerekçe hâlâ geçerli, çözüm havuz genişletme.",
+    "handPoolFinding": "piano_hands/guitar_hands ikinci geçişi YENİ KABUL ÜRETMEDİ: üst-gövdeden elenen klipler el havuzunun netlik eşiğini (60) de geçemedi. El-yakın çekimler hem dar kadrajlı hem düşük çözünürlüklü olma eğiliminde → el metriklerinin veri temeli sanılandan zayıf."
   }
 }
