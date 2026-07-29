@@ -2,7 +2,7 @@
  "schema": "motion-core/reference@1",
  "technique": "guitar_posture_setup",
  "measurementProvenance": "ATTESTED",
- "generatedAt": "2026-07-29T23:18:07.063668Z",
+ "generatedAt": "2026-07-29T23:21:50.869852Z",
  "gates": {
   "minTakes": 3,
   "minSources": 3,
@@ -105,6 +105,45 @@
    "periodUnmeasured": "periodicity 0.14 below 0.5 — repetition too weak to assert a period"
   }
  ],
+ "evidenceThickness": {
+  "takes": {
+   "8xFzcSieBXY": {
+    "frames": 231,
+    "durationS": 9.2,
+    "alignedDistinctShare": 1.0
+   },
+   "NCV9IgeSYuU": {
+    "frames": 181,
+    "durationS": 7.5075,
+    "alignedDistinctShare": 1.0
+   },
+   "NfC0R-KWhwQ": {
+    "frames": 103,
+    "durationS": 3.4034,
+    "alignedDistinctShare": 0.569060773480663
+   },
+   "Rpalo0sbpj4": {
+    "frames": 111,
+    "durationS": 4.4,
+    "alignedDistinctShare": 0.6132596685082873
+   },
+   "oamDIl34DY4": {
+    "frames": 75,
+    "durationS": 2.96,
+    "alignedDistinctShare": 0.4143646408839779
+   },
+   "qtZ7EUrsnR8": {
+    "frames": 103,
+    "durationS": 3.4034,
+    "alignedDistinctShare": 0.569060773480663
+   },
+   "v3nfqNOBAPc": {
+    "frames": 132,
+    "durationS": 4.36667,
+    "alignedDistinctShare": 0.7292817679558011
+   }
+  }
+ },
  "result": {
   "contributingTakes": 7,
   "sources": [

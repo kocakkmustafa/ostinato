@@ -2,7 +2,7 @@
  "schema": "motion-core/reference@1",
  "technique": "five_finger_drill",
  "measurementProvenance": "ATTESTED",
- "generatedAt": "2026-07-29T23:18:13.357378Z",
+ "generatedAt": "2026-07-29T23:21:56.185407Z",
  "gates": {
   "minTakes": 3,
   "minSources": 3,
@@ -57,6 +57,25 @@
    "periodUnmeasured": "periodicity 0.19 below 0.5 — repetition too weak to assert a period"
   }
  ],
+ "evidenceThickness": {
+  "takes": {
+   "2mxlG5bzcyQ": {
+    "frames": 145,
+    "durationS": 4.8048,
+    "alignedDistinctShare": 1.0
+   },
+   "cBuC89ApQtM": {
+    "frames": 159,
+    "durationS": 5.27193,
+    "alignedDistinctShare": 1.0
+   },
+   "e-USjrHOL8s": {
+    "frames": 103,
+    "durationS": 3.4034,
+    "alignedDistinctShare": 0.7103448275862069
+   }
+  }
+ },
  "result": {
   "contributingTakes": 3,
   "sources": [
