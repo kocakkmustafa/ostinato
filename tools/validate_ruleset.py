@@ -33,6 +33,22 @@ def check(doc, name):
     if "signalConditioning" not in doc:
         p.append(f"{name}: signalConditioning bloğu yok (kural #4 — filtre+eşik ayrılmaz)")
 
+    # Alan-tutarlılık: bir çalgı config'i BAŞKA çalgının içeriğini taşımamalı.
+    # Bu kontrol, gitar/piyano config'lerini şan dosyasından kopyalarken
+    # yaptığım gerçek hatadan doğdu: yapı doğruydu, ALAN yanlıştı ve
+    # doğrulayıcı geçirdi. Yapısal denetim semantik kaymayı görmez.
+    mod = doc.get("module")
+    PREFIX = {"voice": "V-", "piano": "P-", "guitar": "G-"}
+    if mod in PREFIX:
+        for e in doc.get("errors", []):
+            code = e.get("code", "")
+            if code[:2] in set(PREFIX.values()) and not code.startswith(PREFIX[mod]):
+                p.append(f"{name}: '{mod}' config'inde yabancı hata kodu {code!r} "
+                         f"(beklenen önek {PREFIX[mod]}) — alan kayması")
+        for foreign, marker in (("voice", "vibrato"), ("guitar", "strum"), ("piano", "pedal")):
+            if foreign != mod and any(marker in k for k in doc.get("metrics", {})):
+                p.append(f"{name}: '{mod}' config'inde '{foreign}' metriği ({marker}) — alan kayması")
+
     for t in doc.get("techniques", []):
         tid = t.get("id","?")
         # D4: taraf çözümü zorunlu + LEFT_/RIGHT_ yasağı (M-F-06)
@@ -146,6 +162,12 @@ challenge: mut for challenge, mut in [
             d["techniques"][0]["phases"][0].update(quality={"m":1}))),
         ("coached_only açıklamasız", lambda d: d.update(
             referenceConsumption={"scoringBarDeg":14,"scored":[],"coached_only":["m"]})),
+        ("yabancı hata kodu (alan kayması)", lambda d: (
+            d.update(module="guitar"), d.update(errors=[{"code":"V-PITCH-DRIFT","evaluateAt":"A",
+            "condition":{"kind":"metric","metric":"m"}}]))),
+        ("yabancı metrik (alan kayması)", lambda d: (
+            d.update(module="guitar"), d["metrics"].update(vibrato_rate_hz={"unit":"Hz",
+            "range":[0,12],"noiseBand":0.5,"baseline":0}))),
     ]}
     ok = True
     # yanlış-pozitif testi: yorum alanında geçen yasak desen ihlal SAYILMAMALI
@@ -159,7 +181,7 @@ challenge: mut for challenge, mut in [
         d = copy.deepcopy(base); mut(d)
         if not check(d, "neg"):
             print(f"❌ SELF-TEST: '{label}' YAKALANMADI"); ok = False
-    print("✅ self-test: 13/13 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
+    print("✅ self-test: 15/15 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
     return 0 if ok else 1
 
 if __name__ == "__main__":
