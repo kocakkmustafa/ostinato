@@ -84,6 +84,29 @@
     { "code": "E-LH-THUMB-SQUEEZE", "v1": false, "reason": "başparmak çello arkasında — görünmez (✗)" }
   ],
 
+  "signalConditioning": {
+    "_why": "M-C-07/J-027 + M-F-35 B2: filtre ve eşik AYRILMAZ. YIN eşiğinin (0.15) anlamı pencere boyuna bağlıdır; pencereyi değiştirip eşiği sabit bırakmak sessizce başka bir dedektör yapar. Biri değişirse SÜRÜM ARTAR.",
+    "sampleRate": 44100,
+    "windowSamples": 4096,
+    "hopSamples": 1024,
+    "yinThreshold": 0.15,
+    "onsetFrameSize": 1024,
+    "onsetHopSize": 256,
+    "onsetMedianWindow": 11
+  },
+
+  "baselineDeclaration": {
+    "_why": "G-024/M-F-34: toleranslar TABAN-göreli yorumlanır; taban sıfır sanılıyorsa ölçülmemiş demektir.",
+    "pitch": "beklenen nota (expectedHzPrior) — sıfır DEĞİL; cent zaten oransal ölçü",
+    "timing": "beat grid'in DUYULAN zamanı (çıkış gecikmesi düzeltilmiş) — planlanan zaman değil"
+  },
+
+  "deltaUnits": {
+    "_why": "L-069/L-070: kare-başına delta hem genlik hem fps duyarlı. Ses hattı zaten pencere+Us tabanlı (grep temiz); kural gelecekteki postür metrikleri için bağlayıcı.",
+    "policy": "perSecond",
+    "banned": "perFrame"
+  },
+
   "audio": {
     "pitchSource": "abstracted (PitchSource: YIN-native | SwiftF0-ONNX — G4 kararı, G1-C: ikisi de eşik-içi)",
     "expectedNotePrior": true,
