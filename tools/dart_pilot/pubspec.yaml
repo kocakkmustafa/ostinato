@@ -5,6 +5,8 @@ publish_to: none
 environment:
   sdk: ^3.5.0
 dependencies:
+  ostinato_audio:
+    path: ../../packages/ostinato_audio
   motion_core:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git

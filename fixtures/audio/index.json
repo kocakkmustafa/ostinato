@@ -1,0 +1,55 @@
+{
+ "schemaVersion": "ostinato-audiofix-index-1",
+ "$why": "A minimal audio set so audio-gated phases can be exercised by replay (the coverage gap M-F-56 named). Negative fixtures are mandatory: the engine staying quiet is tested as hard as it speaking.",
+ "roomFloorDb": -60.0,
+ "fixtures": [
+  {
+   "fixtureId": "AF-001-clean-sustained-a4",
+   "kind": "synthetic",
+   "shouldJudge": true,
+   "judgedFraction": 1.0,
+   "onsets": 0,
+   "ok": true
+  },
+  {
+   "fixtureId": "AF-002-room-noise-only",
+   "kind": "synthetic-negative",
+   "shouldJudge": false,
+   "judgedFraction": 0.0,
+   "onsets": 0,
+   "ok": true
+  },
+  {
+   "fixtureId": "AF-003-scale-with-metronome",
+   "kind": "synthetic",
+   "shouldJudge": true,
+   "judgedFraction": 0.537,
+   "onsets": 5,
+   "ok": true
+  },
+  {
+   "fixtureId": "AF-004-quiet-playing",
+   "kind": "synthetic-negative",
+   "shouldJudge": false,
+   "judgedFraction": 0.0,
+   "onsets": 0,
+   "ok": true
+  },
+  {
+   "fixtureId": "AF-005-cello-c2-phone-mic",
+   "kind": "synthetic",
+   "shouldJudge": true,
+   "judgedFraction": 1.0,
+   "onsets": 0,
+   "ok": true
+  },
+  {
+   "fixtureId": "AF-006-noisy-10db",
+   "kind": "synthetic",
+   "shouldJudge": true,
+   "judgedFraction": 0.952,
+   "onsets": 1,
+   "ok": true
+  }
+ ]
+}
