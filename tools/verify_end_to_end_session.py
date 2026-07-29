@@ -15,6 +15,16 @@ gerçek `PhaseStateMachine`i DEĞİL, `replay_check.py`nin AYNI `evaluate()`
 mantığı kullanılıyor (JSON ruleset semantiğinin Python yansıması). READY
 fazı `setup_complete` motoruna bağlı ve o motor YOK (aspirational,
 fixture_check'te de böyle işaretli) — bu adım STUB'lanır, gizlenmez.
+
+M-F-116 kapanışı: `chord_correctness` artık M-O-35'in test-içi sonucundan
+ALINTI değil — `AF-007-open-chord-E-major.json` (ham-örnekli, GERÇEK
+`ChordDetector`/kromagramdan ÖLÇÜLMÜŞ, kalıcı fixture) her pencereden
+OKUNUYOR. Kalan (kapatılmayan) sınır `audio_windows()`in kendi başlığında
+zaten yazılı olanla AYNI SINIFTAN: seviye-tetiği (AF-003) ile akor-kalitesi
+(AF-007) İKİ BAĞIMSIZ kayıttan geliyor — biri "ne zaman PLAY'e girildiği"ni,
+diğeri "PLAY içindeyken akor doğru mu"yu, gerçek ama ayrı ölçümlerle
+kanıtlıyor. Kurucunun gerçek kaydı gelince AYNI iskelet (make_chord_fixture.dart)
+o kaydı işleyip TEK kaynaktan iki metriği de üretecek.
 """
 import json
 import sys
@@ -38,6 +48,15 @@ def load_posture_window():
             and t0 <= fr["t"] / 1000.0 < t1]
 
 
+def load_chord_windows(fixture_id="AF-007-open-chord-E-major"):
+    """GERÇEK kromagram pencereleri — `make_chord_fixture.dart`nın ölçtüğü,
+    kalıcı fixture'a yazdığı (uydurulmamış) `score` (ratio, [0,1]) dizisi.
+    M-F-116: bu betikteki `chord_correctness`in TEK kaynağı budur, artık
+    hiçbir yerde 1.0 sabit değeri YOK."""
+    d = json.loads((Path("fixtures/audio") / f"{fixture_id}.json").read_text(encoding="utf-8"))
+    return d["measured"]["windows"]
+
+
 def main():
     cfg = json.load(open("config/rulesets/guitar@0.2.0-draft.json", encoding="utf-8"))
     technique = next(t for t in cfg["techniques"] if t["id"] == "open_chord_drill")
@@ -49,29 +68,30 @@ def main():
     playing_raw = audio_windows("AF-003-scale-with-metronome")
     # AF-003 tek-nota (monofonik) fixture'ı — silence lead-in + ayrık notalar
     # arasında boşluklar taşır (skala egzersizi, kromagram/akor testi için
-    # tasarlanmadı). Sürdürülen bir akor SESİNİ modellemek için o fixture'ın
-    # İÇİNDEN gerçekten "çalıyor" olan TEK bir pencereyi (yüksek seviye+
-    # periyodiklik) seçip SABİT tutuyoruz — postürü sabit tuttuğumuz gibi.
-    sustained_play = next(w for w in playing_raw if w["level_above_room_floor_db"] > 20)
-    # chord_correctness: BU fixture ham örnek taşımıyor (yalnız önceden
-    # hesaplanmış level/periodicity/f0) — kromagram akor tanıma Dart
-    # tarafında (ostinato_audio) ve TEK-NOTA fixture'ından hesaplanamaz.
-    # Değer chord_detector_test.dart'ın ZATEN KANITLANMIŞ sonucundan
-    # ALINIYOR (E majör, skor 1.0, M-O-35 — 8/8 gerçek MIDI/kromagram
-    # testi) — burada YENİDEN HESAPLANMIYOR. Dürüst sınır: ses örneklerini
-    # tek geçişte hem kromagrama hem faz-zincirine sokan TAM entegre test
-    # henüz YOK (ham-örnekli akor fixture'ı gerekir) — bu turun kapsamı
-    # DEĞİL, sıradaki iş kalemi olarak DEFTER'e yazılıyor.
-    sustained_play = {**sustained_play, "chord_correctness": 1.0}
+    # tasarlanmadı). PLAY fazının SES-SEVİYESİ tetiğini (seviye kapıda TEK
+    # rolü) modellemek için o fixture'ın İÇİNDEN gerçekten "çalıyor" olan TEK
+    # bir pencereyi (yüksek seviye+periyodiklik) seçip SABİT tutuyoruz.
+    level_trigger = next(w for w in playing_raw if w["level_above_room_floor_db"] > 20)
+    # chord_correctness: AF-007-open-chord-E-major.json'dan — GERÇEK
+    # `ChordDetector` (kromagram) tarafından, ham-sentezlenmiş bir E majör
+    # akor sinyali üzerinde ÖLÇÜLMÜŞ, kalıcı fixture'a yazılmış `score`
+    # dizisi (M-F-116). Sabit 1.0 YOK; pencere pencere gerçek dalgalanma
+    # (~0.89-0.94) kullanılıyor.
+    chord_windows = load_chord_windows()
 
     # Senaryo: ilk yarı OTURDU-AMA-ÇALMIYOR (postür kapısı sınanır),
-    # ikinci yarı ÇALIYOR (akor kapısı sınanır, SABİT sürdürülen ses).
-    # Poz AYNI (gerçek iyi postür) — yalnız ses değişiyor, tam da
-    # kullanıcının yaptığı şey.
+    # ikinci yarı ÇALIYOR (akor kapısı sınanır, ses seviyesi SABİT sürdürülen
+    # tetikte, chord_correctness GERÇEK pencere dizisinde döner). Poz AYNI
+    # (gerçek iyi postür) — yalnız ses değişiyor, tam da kullanıcının yaptığı şey.
     n = len(pose_frames)
+
+    def playing_frame(k):
+        cw = chord_windows[k % len(chord_windows)]
+        return {**level_trigger, "chord_correctness": cw["score"]}
+
     timeline = (
         [("SESSİZLİK", pose_frames[i], silent[i % len(silent)]) for i in range(n // 2)] +
-        [("ÇALIYOR", pose_frames[i], sustained_play) for i in range(n // 2, n)]
+        [("ÇALIYOR", pose_frames[i], playing_frame(i - n // 2)) for i in range(n // 2, n)]
     )
 
     current = order[0]  # POSTURE_CHECK

@@ -1,0 +1,297 @@
+{
+ "schemaVersion": "ostinato-audiofix-chord-1",
+ "fixtureId": "AF-007-open-chord-E-major",
+ "kind": "synthetic",
+ "$what": "Open E major chord (strummed, harmonic-rich partials, realistic voicing — SyntheticTone.chord). Real engine (ChordDetector/kromagram) measured, not authored. Placeholder for the founder's real guitar recording (M-O-35 kurucu-bekleyen) — same pipeline, different input.",
+ "recordingMeta": {
+  "source": "generated",
+  "sampleRate": 44100,
+  "windowSamples": 8820,
+  "hopSamples": 4410,
+  "license": "generated",
+  "$note": "Synthetic — ground truth exact by construction. NOT proof on a real instrument (string buzz, dead strings, ringing neighbours are absent, M-O-35 caveat unchanged)."
+ },
+ "engineVersions": {
+  "chord": "ChordDetector (ostinato_audio, kromagram/template — M-O-35)"
+ },
+ "expected": {
+  "chord": "E",
+  "midiNotes": [
+   40,
+   47,
+   52,
+   56,
+   59,
+   64
+  ],
+  "shouldJudge": true,
+  "minJudgedFraction": 0.9
+ },
+ "measured": {
+  "windows": [
+   {
+    "tStartUs": 0,
+    "tEndUs": 200000,
+    "chordName": "E",
+    "score": 0.899,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1448,
+    "correct": true
+   },
+   {
+    "tStartUs": 100000,
+    "tEndUs": 300000,
+    "chordName": "E",
+    "score": 0.909,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1975,
+    "correct": true
+   },
+   {
+    "tStartUs": 200000,
+    "tEndUs": 400000,
+    "chordName": "E",
+    "score": 0.9382,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.241,
+    "correct": true
+   },
+   {
+    "tStartUs": 300000,
+    "tEndUs": 500000,
+    "chordName": "E",
+    "score": 0.9185,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2114,
+    "correct": true
+   },
+   {
+    "tStartUs": 400000,
+    "tEndUs": 600000,
+    "chordName": "E",
+    "score": 0.9048,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1765,
+    "correct": true
+   },
+   {
+    "tStartUs": 500000,
+    "tEndUs": 700000,
+    "chordName": "E",
+    "score": 0.9088,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1996,
+    "correct": true
+   },
+   {
+    "tStartUs": 600000,
+    "tEndUs": 800000,
+    "chordName": "E",
+    "score": 0.9087,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1923,
+    "correct": true
+   },
+   {
+    "tStartUs": 700000,
+    "tEndUs": 900000,
+    "chordName": "E",
+    "score": 0.895,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1709,
+    "correct": true
+   },
+   {
+    "tStartUs": 800000,
+    "tEndUs": 1000000,
+    "chordName": "E",
+    "score": 0.918,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2071,
+    "correct": true
+   },
+   {
+    "tStartUs": 900000,
+    "tEndUs": 1100000,
+    "chordName": "E",
+    "score": 0.9292,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2222,
+    "correct": true
+   },
+   {
+    "tStartUs": 1000000,
+    "tEndUs": 1200000,
+    "chordName": "E",
+    "score": 0.9177,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2144,
+    "correct": true
+   },
+   {
+    "tStartUs": 1100000,
+    "tEndUs": 1300000,
+    "chordName": "E",
+    "score": 0.9357,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2536,
+    "correct": true
+   },
+   {
+    "tStartUs": 1200000,
+    "tEndUs": 1400000,
+    "chordName": "E",
+    "score": 0.9274,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2552,
+    "correct": true
+   },
+   {
+    "tStartUs": 1300000,
+    "tEndUs": 1500000,
+    "chordName": "E",
+    "score": 0.929,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.225,
+    "correct": true
+   },
+   {
+    "tStartUs": 1400000,
+    "tEndUs": 1600000,
+    "chordName": "E",
+    "score": 0.9254,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2342,
+    "correct": true
+   },
+   {
+    "tStartUs": 1500000,
+    "tEndUs": 1700000,
+    "chordName": "E",
+    "score": 0.9376,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2466,
+    "correct": true
+   },
+   {
+    "tStartUs": 1600000,
+    "tEndUs": 1800000,
+    "chordName": "E",
+    "score": 0.9225,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2147,
+    "correct": true
+   },
+   {
+    "tStartUs": 1700000,
+    "tEndUs": 1900000,
+    "chordName": "E",
+    "score": 0.924,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2182,
+    "correct": true
+   },
+   {
+    "tStartUs": 1800000,
+    "tEndUs": 2000000,
+    "chordName": "E",
+    "score": 0.938,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2421,
+    "correct": true
+   },
+   {
+    "tStartUs": 1900000,
+    "tEndUs": 2100000,
+    "chordName": "E",
+    "score": 0.9188,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2134,
+    "correct": true
+   },
+   {
+    "tStartUs": 2000000,
+    "tEndUs": 2200000,
+    "chordName": "E",
+    "score": 0.9276,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.2132,
+    "correct": true
+   },
+   {
+    "tStartUs": 2100000,
+    "tEndUs": 2300000,
+    "chordName": "E",
+    "score": 0.9228,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.222,
+    "correct": true
+   },
+   {
+    "tStartUs": 2200000,
+    "tEndUs": 2400000,
+    "chordName": "E",
+    "score": 0.9046,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1816,
+    "correct": true
+   },
+   {
+    "tStartUs": 2300000,
+    "tEndUs": 2500000,
+    "chordName": "E",
+    "score": 0.8869,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1653,
+    "correct": true
+   },
+   {
+    "tStartUs": 2400000,
+    "tEndUs": 2600000,
+    "chordName": "E",
+    "score": 0.9021,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1927,
+    "correct": true
+   },
+   {
+    "tStartUs": 2500000,
+    "tEndUs": 2700000,
+    "chordName": "E",
+    "score": 0.889,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1686,
+    "correct": true
+   },
+   {
+    "tStartUs": 2600000,
+    "tEndUs": 2800000,
+    "chordName": "E",
+    "score": 0.8863,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.1632,
+    "correct": true
+   },
+   {
+    "tStartUs": 2700000,
+    "tEndUs": 2900000,
+    "chordName": "E",
+    "score": 0.9223,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.214,
+    "correct": true
+   },
+   {
+    "tStartUs": 2800000,
+    "tEndUs": 3000000,
+    "chordName": "E",
+    "score": 0.913,
+    "runnerUp": "Em",
+    "runnerUpMargin": 0.201,
+    "correct": true
+   }
+  ],
+  "judgedWindows": 29,
+  "judgedFraction": 1.0
+ }
+}

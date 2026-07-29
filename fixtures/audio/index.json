@@ -50,6 +50,15 @@
    "judgedFraction": 0.952,
    "onsets": 1,
    "ok": true
+  },
+  {
+   "fixtureId": "AF-007-open-chord-E-major",
+   "kind": "synthetic",
+   "$why": "M-F-116: ham-örnekli akor fixture'ı — chord_correctness'ın GERÇEKTEN kromagram'dan geldiği ilk fixture (önceki uçtan-uca senaryo M-O-35'in test-içi sonucundan alıntılıyordu, kalıcı fixture'a hiç yazılmamıştı). Kurucunun gerçek gitar kaydı geldiğinde AYNI iskelet (make_chord_fixture.dart) o kaydı işleyecek — kod değişmez, girdi değişir.",
+   "shouldJudge": true,
+   "judgedFraction": 1.0,
+   "chord": "E",
+   "ok": true
   }
  ]
 }
