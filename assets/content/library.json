@@ -110,7 +110,7 @@
    "wave": "W1",
    "rulesetId": "voice",
    "blurb": "Sing along and get feedback on pitch, sustain and posture.",
-   "comingSoonReason": "Posture reference needs 3 independent teachers agreeing on a real hold-window; current pool has 1 usable window (M-F-95 cooldown, material-class question open — singers stand and move, a 'hold' may not be the right target, see presence-window spec).",
+   "comingSoonReason": "Posture reference needs 3 independent teachers agreeing. The pool grew to 9 eligible sources with 3-4 usable hold-windows, so 'not enough footage' is no longer the reason — the takes disagree (deviations 42.0 / 33.0 / 20.5 / 37.7 degrees, no cluster). Singers also move structurally more than seated players, and a second window-finder built for sustained poses could read only 3 of 9 sources. We will not grade your singing posture against a reference we could not build honestly.",
    "honesty": {
     "measured": [],
     "notMeasured": [
@@ -125,11 +125,12 @@
    "wave": "W1",
    "rulesetId": "piano",
    "blurb": "Practice five-finger patterns and chords with posture and hand feedback.",
-   "comingSoonReason": "Posture reference needs 3 independent teachers agreeing on a real hold-window; current pool material is hand/keyboard-framed (camera excludes the torso) — a structural camera-angle problem, not a data-volume problem (M-F-82: new search terms required before harvesting again).",
+   "comingSoonReason": "Posture reference needs 3 independent teachers agreeing. The pool is no longer the problem: after re-classification it holds 8 eligible sources and 3 hold-windows — enough takes. They simply do NOT agree (deviations 16.2 / 46.4 / 27.3 degrees; no cluster even at a relaxed bar). Two rescue routes were measured and both failed: harvesting with new search terms (7 fresh candidates, 0 new windows) and a second window-finder built for sustained-pose clips (readable in only 2 of 8 piano sources, fewer than the tool we already use). We will not grade your piano posture against teachers who disagree with each other.",
    "honesty": {
     "measured": [],
     "notMeasured": [
-     "Everything — nothing is live yet. Pitch and periodicity motors exist (ostinato_audio, engine status) but no posture reference has passed the agreement gate; existing footage is structurally hand/keyboard-framed, not torso-visible."
+     "Everything — nothing is live yet. Pitch and periodicity motors exist and are tested, but no posture reference has passed the agreement gate.",
+     "Why it is stuck is now measured, not guessed: enough usable takes exist, they disagree with each other. More footage does not fix disagreement."
     ]
    }
   }

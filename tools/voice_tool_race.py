@@ -67,13 +67,16 @@ MIN_HOLD_S = 2.0  # presence'ın kendi jest-tuzağı savunması (L-151): kısa
 #: "2sn tut" senaryosuyla AYNI büyüklük sınıfı — icat değil, emsal.
 
 
-def eligible_voice_sources():
-    """`find_hold_windows.py`nin AYNI filtresi — kaynak listesi icat edilmiyor."""
+def eligible_sources(instrument):
+    """`find_hold_windows.py`nin AYNI filtresi — kaynak listesi icat edilmiyor.
+
+    M-F-129 kapı-(ii): piyano da AYNI yarıştan geçirilir — "piyano postürü
+    hold-sınıfıdır" varsayımının kendisi sınanmamıştı."""
     imap = json.loads(Path("config/fixture-instrument-map.json").read_text())
     out = []
     for f in sorted((LIB / "landmarks").glob("*.json")):
         vid = f.name.split(".")[0]
-        if imap.get(vid) != "voice":
+        if imap.get(vid) != instrument:
             continue
         doc = json.loads(f.read_text(encoding="utf-8"))
         if doc.get("provenance", {}).get("referenceEligible") is not True:
@@ -203,8 +206,9 @@ def overlap_seconds(hold_windows, presence_windows):
 
 
 def main():
-    sources = eligible_voice_sources()
-    print(f"=== Şan araç-yarışı iskeleti — {len(sources)} uygun kaynak ===\n")
+    instrument = sys.argv[1] if len(sys.argv) > 1 else "voice"
+    sources = eligible_sources(instrument)
+    print(f"=== Araç-yarışı: {instrument} — {len(sources)} uygun kaynak ===\n")
     report = []
     for vid, doc in sources:
         fps = doc.get("recordingMeta", {}).get("fps")
@@ -260,11 +264,16 @@ def main():
         if all(flags):
             print(f"  · presence[{name}]: TÜM okunabilir kaynaklarda ~90°'de "
                   f"çakılı + dar yayılım → ANATOMİK SABİT, eşik dayanamaz")
-    print("  · Kök sebep ikisinde de AYNI: 3/4 şan kaynağında landmark "
-          "okunabilirliği %0-6 — araç seçimi bu duvarın ARKASINDA kalıyor.")
+    unreadable = len(report) - len(readable)
+    print(f"  · Sürücüsü OKUNAMAYAN kaynak: {unreadable}/{len(report)} — araç "
+          f"seçimi bu duvarın ARKASINDA kalıyor.")
+    if len(hold_found) > len(readable):
+        print(f"  · HOLD, presence'ın OKUYABİLDİĞİNDEN daha çok kaynakta pencere "
+              f"buluyor ({len(hold_found)} > {len(readable)}) → presence bu "
+              f"malzemeyi KURTARMIYOR.")
     print("=" * 62)
 
-    out = LIB / "voice-tool-race.json"
+    out = LIB / f"{instrument}-tool-race.json"
     out.write_text(json.dumps({
         "$why": "M-F-118 iskeleti — presence_isolator merge olunca run_presence_trunk() "
                 "TEK yerde değişir, geri kalan koşum AYNI kalır. Bugün yalnız hold "
