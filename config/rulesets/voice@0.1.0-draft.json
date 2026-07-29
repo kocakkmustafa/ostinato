@@ -121,6 +121,17 @@
       "baseline": null,
       "_excluded_why": "ÖLÇÜMLE KAPSAM DIŞI (B4, M-F-41): şanda 5 eğitmen arası sapma 35-51°. Havuzu büyütmek bunu düzeltmez — şanda kolun 'doğru yeri' YOKTUR (şarkıcı jest yapar, nota tutar). Taksonomimizin 12 şan hata kodundan hiçbiri dirsek/önkol hakkında değil: veri ile pedagoji aynı şeyi söylüyor. 'Referans yetersiz' değil, 'teknik böyle bir şey içermiyor' vakası → dürüstlük kutusuna girer.",
       "inV1Scope": false
+    },
+    "setup_complete": {
+      "id": "setup_complete",
+      "unit": "bool",
+      "range": [
+        0,
+        1
+      ],
+      "noiseBand": 0,
+      "baseline": 0,
+      "_why": "Setup Check kapısının sonucu. Çekirdek linter'ı yakaladı: bayrak da bir METRİKTİR ve sözlükte tanımlı olmalı — tanımsız metriğe eşik yazılamaz (Gravita kuralı). Benim doğrulayıcım flag türünü muaf tutuyordu, o muafiyet YANLIŞTI (M-O-10)."
     }
   },
   "techniques": [
@@ -214,7 +225,13 @@
         },
         {
           "id": "COMPLETE",
-          "terminal": true
+          "terminal": true,
+          "enter": {
+            "kind": "timeInPhase",
+            "op": "gte",
+            "ms": 0
+          },
+          "_enter_why": "Okuyucu terminal fazda da `enter` istiyor ve haklı: 'ne zaman tamamlandı sayılır' beyan edilmeli. Burada SUSTAIN'in exit'i buraya taşır; koşul aşikâr ama YAZILI olması, sessiz varsayımı önlüyor."
         }
       ]
     }

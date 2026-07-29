@@ -78,7 +78,10 @@ def check(doc, name):
             for slot in ("enter","exit","abort"):
                 c = f.get(slot) or {}
                 mid = c.get("metric")
-                if mid and mid not in metrics and c.get("kind") not in ("flag","category"):
+                # flag/category muafiyeti KALDIRILDI: çekirdek linter'ı
+                # `setup_complete`i yakaladı, benimki kaçırdı. Bayrak da bir
+                # metriktir ve sözlükte tanımlı olmalı (M-O-10).
+                if mid and mid not in metrics:
                     p.append(f"{name}/{tid}/{fid}: tanımsız metrik {mid!r} (kural #8)")
             for mid in (f.get("quality") or {}):
                 if mid not in metrics:
@@ -104,6 +107,8 @@ challenge: mut for challenge, mut in [
         ("noiseBand eksik", lambda d: d["metrics"]["m"].pop("noiseBand")),
         ("sideResolution eksik", lambda d: d["techniques"][0].pop("sideResolution")),
         ("tanımsız metrik", lambda d: d["techniques"][0]["phases"][0]["enter"].update(metric="yok")),
+        ("tanımsız FLAG metriği", lambda d: d["techniques"][0]["phases"][0].update(
+            enter={"kind":"flag","metric":"tanimsiz_bayrak","is":True})),
         ("bilinmeyen koşul", lambda d: d["techniques"][0]["phases"][0]["enter"].update(kind="uydurma")),
         ("yasak uzay", lambda d: d["metrics"]["m"].update(measurementSpace="normalized_raw")),
         ("LEFT_ kullanımı", lambda d: d["techniques"][0].update(limb="LEFT_SHOULDER")),
@@ -124,7 +129,7 @@ challenge: mut for challenge, mut in [
         d = copy.deepcopy(base); mut(d)
         if not check(d, "neg"):
             print(f"❌ SELF-TEST: '{label}' YAKALANMADI"); ok = False
-    print("✅ self-test: 10/10 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
+    print("✅ self-test: 11/11 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
     return 0 if ok else 1
 
 if __name__ == "__main__":
