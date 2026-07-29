@@ -21,6 +21,21 @@ def technique_ids(ruleset_path):
     return {t["id"] for t in cfg.get("techniques", [])}
 
 
+def error_metric_map(ruleset_path):
+    """Hata kodu -> koşulunun bağlandığı metrik. Kural 7'nin dayanağı."""
+    if not Path(ruleset_path).exists():
+        return {}
+    cfg = load(ruleset_path)
+    return {e["code"]: e.get("condition", {}).get("metric")
+            for e in cfg.get("errors", [])}
+
+
+def scored_metrics(ruleset_path):
+    if not Path(ruleset_path).exists():
+        return set()
+    return set(load(ruleset_path).get("referenceConsumption", {}).get("scored", []))
+
+
 def main():
     lib_path = "assets/content/library.json"
     lib = load(lib_path)
@@ -43,6 +58,8 @@ def main():
 
         rs_path = f"config/rulesets/{d['rulesetId']}@0.2.0-draft.json"
         techs = technique_ids(rs_path)
+        err_metric = error_metric_map(rs_path)
+        scored = scored_metrics(rs_path)
 
         for c in d.get("courses", []):
             # Kural 2: her kursun en az 1 dersi olmalı.
@@ -64,6 +81,28 @@ def main():
                 if l.get("status") != "locked" and l.get("lockedReason"):
                     violations.append(f"{lid}: lockedReason var ama status=locked değil "
                                        f"(tutarsız beyan)")
+                # Kural 7 (M-O-53): AÇIK bir ders yalnız GERÇEKTEN skorlanan bir
+                # metriğe bağlı hata kodunu öne çıkarabilir. Gerekçe ölçüldü:
+                # gitar ruleset'indeki 5 hata kodunun 4'ü taslak olarak
+                # `level_above_room_floor_db > 15`e bağlı — yani "başparmak
+                # sapta" uyarısı SES YÜKSEKLİĞİNDE ateşlerdi. `expertPending`
+                # bayrağı bunu engellemiyor: hiçbir kod/araç o bayrağı OKUMUYOR
+                # (beşinci canlılık sorusu — bayrak var, tüketicisi yok).
+                # Bu kural, o tuzağın kullanıcıya AÇIK ders olarak ulaşmasını
+                # mekanik olarak keser; ruleset'in kendi düzeltmesi ayrı iş
+                # (koordinatör hükmü bekliyor — eşik/eşleme TASARIM kararı).
+                if l.get("status") != "locked":
+                    for code in l.get("errorFocus", []):
+                        if code not in err_metric:
+                            violations.append(
+                                f"{lid}: var olmayan hata koduna atıf: '{code}'")
+                        elif err_metric[code] not in scored:
+                            violations.append(
+                                f"{lid}: AÇIK ders '{code}' hata kodunu öne "
+                                f"çıkarıyor ama o kod skorlanmayan bir metriğe "
+                                f"bağlı ({err_metric[code]!r}; skorlananlar: "
+                                f"{sorted(scored)}) — kullanıcıya ölçülmeyen "
+                                f"bir hüküm vaat edilirdi")
 
         # Kural 6: comingSoonInThisDiscipline maddeleri gerekçesiz olamaz
         # (canlı disiplinin İÇİNDEKİ kapsam-dışı maddeler — ayrı listedeki

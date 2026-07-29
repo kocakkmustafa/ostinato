@@ -38,9 +38,17 @@
      "id": "guitar.foundations",
      "displayName": "Foundations",
      "level": "beginner",
-     "goal": "Sit correctly and learn to hear when you're playing the right open chord.",
-     "estimatedMinutes": 20,
+     "goal": "Set up your space, sit correctly, and learn to hear when you're playing the right open chord.",
+     "estimatedMinutes": 30,
      "lessons": [
+      {
+       "id": "guitar.foundations.camera_space",
+       "displayName": "Camera and space",
+       "techniques": [],
+       "focus": "setup",
+       "minutes": 3,
+       "_why_unlocked": "OLCUM IDDIASI YOK — saf yonerge dersi (JabLab 'Camera and space' deseni, J-038). Hicbir metrige, referansa veya kapiya bagli degil; bu yuzden acilmasi bir olcume dayanmiyor, dayanmasi da gerekmiyor."
+      },
       {
        "id": "guitar.foundations.posture",
        "displayName": "Sitting posture",
@@ -51,6 +59,35 @@
        ],
        "minutes": 5,
        "_why_unlocked": "trunk_tilt referansi ATTESTED (3 bagimsiz egitmen, M-O-47) ve tuketicisi CANLI oldugu kanitlandi (M-O-48) — bu ders yalniz o olcumu kullanir, chord_correctness'a bagli DEGIL."
+      },
+      {
+       "id": "guitar.foundations.posture_under_play",
+       "displayName": "Staying upright while you play",
+       "techniques": [],
+       "focus": "posture",
+       "errorFocus": [
+        "G-POST-SLOUCH"
+       ],
+       "minutes": 7,
+       "_why_unlocked": "Ikinci olcum DEGIL, AYNI olculerin farkli ani: PLAY fazina giris ses SEVIYESINE bagli (level_above_room_floor_db >= 6, AF-003 ile kanitli) ve slouch hatasi trunk_tilt'e bagli (ATTESTED). Ikisi de gercek; akor TANIMASI GEREKMIYOR — ne calindigi degil, calarken durusun bozulup bozulmadigi sorusu. Uctan-uca senaryoda bu zincir zaten kosuldu (M-O-52: POSTURE_CHECK 116/116 -> PLAY 115/115)."
+      },
+      {
+       "id": "guitar.foundations.holding_the_guitar",
+       "displayName": "Holding the guitar",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 5,
+       "status": "locked",
+       "lockedReason": "We can see your arms but we deliberately do not grade them. The three teachers we measured hold the guitar 11-18 degrees apart from each other — that is style, not error, so there is no honest 'correct' to score you against. This lesson opens only if a measurement is found that separates style from mistake."
+      },
+      {
+       "id": "guitar.foundations.foot_support",
+       "displayName": "Foot support and instrument tilt",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 5,
+       "status": "locked",
+       "lockedReason": "Nothing below your hips is measured. Our posture reference is built from upper-body landmarks only, because guitar teaching footage is filmed waist-up — knees and ankles are usually not in frame at all. Without leg landmarks we cannot tell a footstool from a crossed leg."
       },
       {
        "id": "guitar.foundations.open_chords",
