@@ -1,0 +1,104 @@
+{
+ "$comment": [
+  "IA icerik catisi — JabLab library.json desenini uyarlar (M-F-103/108).",
+  "Kutuphane -> Calgi sayfasi -> Kurs -> Ders. Her calgi KENDI sayfasi.",
+  "DURUSTLUK KURALLARI (mekanik olarak test edilir, tools/validate_library.py):",
+  "  1. status=coming_soon olan calgida KURS OLAMAZ (sahte kurs listelenmez).",
+  "  2. Her kursun en az 1 dersi olmak zorunda (bos kurs listelenmez).",
+  "  3. Ders, ruleset'te BULUNMAYAN teknige atif yapamaz.",
+  "  4. Her calgida honesty bloku ZORUNLU (neler olculur / neler OLCULMEZ).",
+  "  5. status=locked olan her ders lockedReason tasimak zorunda (esik degeri DEGIL, EKSIK OLCUMUN adi).",
+  "  6. Kapsam-disi (comingSoonInThisDiscipline) her madde gerekce tasimak zorunda."
+ ],
+ "schemaVersion": 1,
+ "productName": "Ostinato — Music Practice",
+ "language": "en",
+ "disciplines": [
+  {
+   "id": "guitar",
+   "displayName": "Guitar",
+   "status": "live",
+   "wave": "W1",
+   "rulesetId": "guitar",
+   "blurb": "Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit, and listen for the chords you play.",
+   "honesty": {
+    "measured": [
+     "Trunk alignment while sitting (checked against 3 independent guitar teachers, M-O-47/48)",
+     "Chord class for 8 open chords — E A D G C Am Em Dm (kromagram/template matching, M-O-35)"
+    ],
+    "notMeasured": [
+     "Arm and hand position while holding the guitar — teachers disagree about this by style (11-18 degrees apart), we show it but do not grade it (M-O-46)",
+     "Finger placement or fretting technique — camera cannot see fingers well enough to grade them yet",
+     "Strum timing quality judgement — measured, not yet graded (expertPending)",
+     "Full note-by-note transcription — we recognise the chord class, not every note played"
+    ]
+   },
+   "courses": [
+    {
+     "id": "guitar.foundations",
+     "displayName": "Foundations",
+     "level": "beginner",
+     "goal": "Sit correctly and learn to hear when you're playing the right open chord.",
+     "estimatedMinutes": 20,
+     "lessons": [
+      {
+       "id": "guitar.foundations.posture",
+       "displayName": "Sitting posture",
+       "techniques": [],
+       "focus": "posture",
+       "errorFocus": [
+        "G-POST-SLOUCH"
+       ],
+       "minutes": 5,
+       "_why_unlocked": "trunk_tilt referansi ATTESTED (3 bagimsiz egitmen, M-O-47) ve tuketicisi CANLI oldugu kanitlandi (M-O-48) — bu ders yalniz o olcumu kullanir, chord_correctness'a bagli DEGIL."
+      },
+      {
+       "id": "guitar.foundations.open_chords",
+       "displayName": "Open chords",
+       "techniques": [
+        "open_chord_drill"
+       ],
+       "minutes": 15,
+       "status": "locked",
+       "lockedReason": "Chord recognition has only been proven on synthetic audio (8/8 chords, zero false judgements) — it hasn't been tested on a real guitar recording yet. We won't grade you against a measurement we haven't confirmed on a real instrument."
+      }
+     ]
+    }
+   ],
+   "comingSoonInThisDiscipline": [
+    "Strum timing as a graded skill — measured but not yet gated (expertPending, quality bar unset)",
+    "Arm/hand posture as a graded skill — teachers disagree by style, this may never become gradeable (see honesty box)"
+   ]
+  },
+  {
+   "id": "voice",
+   "displayName": "Voice",
+   "status": "coming_soon",
+   "wave": "W1",
+   "rulesetId": "voice",
+   "blurb": "Sing along and get feedback on pitch, sustain and posture.",
+   "comingSoonReason": "Posture reference needs 3 independent teachers agreeing on a real hold-window; current pool has 1 usable window (M-F-95 cooldown, material-class question open — singers stand and move, a 'hold' may not be the right target, see presence-window spec).",
+   "honesty": {
+    "measured": [],
+    "notMeasured": [
+     "Everything — nothing is live yet. Pitch and periodicity motors exist (ostinato_audio, engine status) but no posture reference has passed the agreement gate."
+    ]
+   }
+  },
+  {
+   "id": "piano",
+   "displayName": "Piano",
+   "status": "coming_soon",
+   "wave": "W1",
+   "rulesetId": "piano",
+   "blurb": "Practice five-finger patterns and chords with posture and hand feedback.",
+   "comingSoonReason": "Posture reference needs 3 independent teachers agreeing on a real hold-window; current pool material is hand/keyboard-framed (camera excludes the torso) — a structural camera-angle problem, not a data-volume problem (M-F-82: new search terms required before harvesting again).",
+   "honesty": {
+    "measured": [],
+    "notMeasured": [
+     "Everything — nothing is live yet. Pitch and periodicity motors exist (ostinato_audio, engine status) but no posture reference has passed the agreement gate; existing footage is structurally hand/keyboard-framed, not torso-visible."
+    ]
+   }
+  }
+ ]
+}

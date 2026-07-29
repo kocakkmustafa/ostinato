@@ -44,7 +44,8 @@
    "noiseBand": 0.05,
    "baseline": 1.0,
    "interval": true,
-   "_why": "Akor-SINIFI doğrulama (Basic Pitch). Nota-nota transkripsiyon İDDİA EDİLMEZ (blueprint §8)."
+   "_why": "Akor-SINIFI doğrulama. Nota-nota transkripsiyon İDDİA EDİLMEZ (blueprint §8). Motor: kromagram+şablon eşleştirme (M-O-35/36/37) — Basic Pitch DEĞİL, lisans zinciri sorusu (M-O-33) bu yüzden hiç açılmadı (M-F-64).",
+   "_inputSourceWhy": "M-F-103/111: varsayılan girdi MİKROFON (kromagram). MIDI-girişli alternatif (`MidiChordDetector`, ostinato_audio) OPSİYONEL bir hassasiyet yolu — yalnız MIDI-pickup'lı gitarı olan (Fishman TriplePlay/Roland GK, ~$200-400 köprü-monte donanım) ileri kullanıcı için. `open_chord_drill`in hedef kitlesi (açık akor öğrenen YENİ BAŞLAYAN) bu donanıma sahip DEĞİL — pazarlanmaz, varsayılan akış değiştirilmez (M-O-49)."
   },
   "strum_timing_ms": {
    "unit": "ms",
