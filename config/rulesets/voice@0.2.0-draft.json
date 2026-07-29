@@ -427,7 +427,15 @@
    "_why": "DİKKAT: bu dispersiyonlar TÜM eğitmenlerin değil, anlaşma kapısını geçen KÜMENİN sayıları. %39 dışlama oranı yüksek. Meşru (M-F-47: 23° ile 112°'yi ortalamak anlamsız bir orta üretir) ve dışlananlar ADLARIYLA kayıtlı — sessiz ortalama değil. Ama okuma farkı önemli: 'eğitmenler hemfikir' değil, 'hemfikir olan alt-küme hemfikir'. Dışlama oranı izlenmeli; artarsa referansın temsil gücü sorgulanır."
   },
   "_mirrorGapProvenance": "MEASURED (motion_core 0.7.1, gapMeasured:true) — runnerUpGap 0.00068",
-  "_qualityRemoved": "Tutulan metriklerin quality eşikleri kaldırıldı (M-F-46 k.3: coached_only metrik kapı olamaz). Metrikler ÖLÇÜLMEYE devam eder, hüküm/kapı üretmez — 'göster ama puanlama' ayrımı."
+  "_qualityRemoved": "Tutulan metriklerin quality eşikleri kaldırıldı (M-F-46 k.3: coached_only metrik kapı olamaz). Metrikler ÖLÇÜLMEYE devam eder, hüküm/kapı üretmez — 'göster ama puanlama' ayrımı.",
+  "_measurementProvenance": {
+   "status": "PROVISIONAL — referans-dışı kaynak",
+   "eligibleSources": 3,
+   "totalSources": 18,
+   "why": "M-F-43 kaynak-uygunluk kapısı (O-022): bu config'in dağılım/tolerans sayıları 18 kaynaktan hesaplandı ama yalnız 3'i `referenceEligible`. Sebep zinciri: hasadı --no-transcribe koşturdum → sınıflandırıcı kararını kaynağın ANLATISINDAN verir (rom_mode.py) → elinde yalnız başlık/açıklama kaldı → fail-closed gereği neredeyse hepsi `unknown`. Ayrıca B4 pilotu bu bayrağı HİÇ OKUMUYORDU: hasat hattı 'bu kaynak referansa giremez' diyordu, pilot yine referans kuruyordu.",
+   "whatThisMeans": "Sayılar SİLİNMEDİ ama tolerans/eşik kaynağı SAYILMAZ (M-C-01: skorlama referansı DOĞRU olmalı). Eksik transkriptler geri dolduruluyor; yeniden sınıflandırma sonrası uygun kaynak sayısı ≥3 olan çalgılarda ölçüm YENİLENECEK.",
+   "notALoophole": "movementRomPolicy'de `posture_setup` KASITLI olarak passiveExecutionPossible=True bırakıldı — yani bu veriyi muafiyetle geçirmiyorum. Öğretmenin öğrencinin bileğini yerleştirmesi gerçek bir öğretim hamlesi ve öyle üretilen duruş ulaşılamaz hedef olabilir; kaynak kanıtla geçmeli."
+  }
  },
  "_namingNote": "Metrik adları üç çalgıda ORTAK (trunk_tilt, left_shoulder, ...). Şanda önce 'trunk_tilt_deg'/'shoulder_rise_norm' kullanılmıştı; fixture_check sarkan atıfları yakaladı (scored listesi sözlükte olmayan adlara işaret ediyordu). Ortak sözlük, çalgılar arası karşılaştırmayı da mümkün kılıyor.",
  "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı."

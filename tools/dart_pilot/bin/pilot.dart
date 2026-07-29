@@ -46,10 +46,19 @@ void main(List<String> args) {
   const extractor = JointAngleExtractor(specs: StandardJoints.upperBody);
   final takes = <ReferenceTake>[];
   final angleClassOf = <String, String>{};
+  // M-F-43 kaynak-uygunluk kapısı. Rig her fixture'a `referenceEligible`
+  // yazıyor ve bu pilot onu OKUMUYORDU — yani hasat hattı "bu kaynak referansa
+  // giremez" diyordu, ben yine de referans kuruyordum. Sentinel olayının aynısı:
+  // var olan bir dürüstlük kapısına hiç sorulmaması.
+  final eligibility = <String, bool?>{};
+  final romModeOf = <String, String?>{};
 
   for (final f in files) {
     final doc = jsonDecode(f.readAsStringSync()) as Map<String, dynamic>;
     final id = f.uri.pathSegments.last.split('.').first;
+    final prov = (doc['provenance'] as Map<String, dynamic>?) ?? const {};
+    eligibility[id] = prov['referenceEligible'] as bool?;
+    romModeOf[id] = prov['romMode'] as String?;
     final frames = (doc['frames'] as List).cast<Map<String, dynamic>>();
 
     // Durağan pencere: hareketin en az olduğu 3 saniye. Öğretim videosunda
@@ -115,6 +124,35 @@ void main(List<String> args) {
   stdout.writeln('take: ${takes.length}');
   for (final t in takes) {
     stdout.writeln('  ${t.id}  ${angleClassOf[t.id]}');
+  }
+  // Uygunluk sayımı: kapının ne dediğini ÖNCE söyle, sonra ölçümü göster.
+  final eligible = takes.where((t) => eligibility[t.id] == true).toList();
+  final refused = takes.where((t) => eligibility[t.id] == false).toList();
+  final unclassified = takes.where((t) => eligibility[t.id] == null).toList();
+  stdout.writeln('\n=== Kaynak uygunluğu (M-F-43, FAIL-CLOSED) ===');
+  stdout.writeln('  referenceEligible=true : ${eligible.length}');
+  stdout.writeln('  referenceEligible=false: ${refused.length} '
+      '(romMode: ${refused.map((t) => romModeOf[t.id]).toSet().join(", ")})');
+  stdout.writeln('  sınıflandırılmamış     : ${unclassified.length} '
+      '(alan yok — kapıdan ÖNCE hasat edilmiş)');
+
+  // Fail-closed'ın anlamı: "işaret bulamadım" asla "uygun" sayılmaz. Pasif
+  // gösterimden kurulan referans kullanıcıya ULAŞILAMAZ hedef koyar ve bu hata
+  // örneklem büyüdükçe DÜZELMEZ, derinleşir (rom_mode.py). Sınıflandırılmamış
+  // kaynak da bu yüzden geçemez: alanın yokluğu, kaynağın masum olduğunu
+  // göstermez.
+  final allowIneligible = args.contains('--allow-ineligible');
+  if (eligible.length < 3 && !allowIneligible) {
+    stderr.writeln('\n⛔ KAPI: referansa uygun take ${eligible.length} < 3 — referans KURULMAZ.\n'
+        '   Bu ölçümler tolerans/eşik kaynağı OLAMAZ (M-C-01: skorlama referansı DOĞRU olmalı).\n'
+        '   Sebep: hasat --no-transcribe ile koştu → sınıflandırıcı anlatıyı göremedi;\n'
+        '   ayrıca ${unclassified.length} kaynak kapı eklenmeden önce hasat edilmiş.\n'
+        '   Çözüm: transkriptli yeniden hasat. Yalnız KEŞİF amaçlı görmek için: --allow-ineligible');
+    exit(2);
+  }
+  if (allowIneligible && eligible.length < takes.length) {
+    stdout.writeln('  ⚠️ --allow-ineligible: aşağıdaki ölçümler KEŞİF amaçlıdır, '
+        'referans/tolerans kaynağı DEĞİLDİR (${takes.length - eligible.length} uygunsuz take dahil).');
   }
   if (takes.length < 3) {
     stderr.writeln('minTakes=3 karşılanmadı');

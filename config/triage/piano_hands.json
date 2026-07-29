@@ -1,10 +1,17 @@
 {
- "_generated_from": "config/triage-thresholds.w1.json (tek kaynak); ELLE DÜZENLEME — orayı düzenle, bunu yeniden üret",
+ "_generated_from": "config/triage-thresholds.w1.json (tek kaynak) — bu dosyayı ELLE DÜZENLEME; kaynağı düzenle ve `tools/gen_triage_profiles.py` koş",
  "_profile": "piano_hands",
  "_rationale": "EL HAVUZU (K-T1, pilot ölçümüyle türetildi): üstten el çekimi videoları duruş havuzundan elenir (E8Do4oxTJ1k üst-gövde 0.42) ama el/bilek/parmak metrikleri için DEĞERLİDİR. Üst-gövde eşiği YOK; netlik 60'a yükseltildi çünkü el detayı bulanık karede ölçülemez.",
  "thresholds": {
   "min_duration_s": 45.0,
   "min_sharpness": 60.0,
   "max_cuts_per_min": 15.0
- }
+ },
+ "movementRomPolicy": {
+  "sustained_note_drill": false,
+  "five_finger_drill": false,
+  "open_chord_drill": false,
+  "posture_setup": true
+ },
+ "_movementRomPolicyWhy": "M-F-45: bu harekette pasif icra BİYOMEKANİK olarak mümkün mü? Mümkün değilse M-F-43'ün koruduğu tehdit yapısal olarak yoktur ve `unknown` kaynak referansa girebilir. Mümkünse fail-closed sürer. Bu alan bir GEVŞETME düğmesi DEĞİL — her hareket için ayrı gerekçe ister ve yanlış beyan, ulaşılamaz hedefi sessizce referansa sokar."
 }
