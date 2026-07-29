@@ -137,6 +137,18 @@ void main(List<String> args) {
     stdout.writeln('  ${specs[j].id.padRight(20)} medyan sapma ${sds[sds.length ~/ 2].toStringAsFixed(1)}°');
   }
 
+  // M-F-48: aynalama/yön uzlaşması global problem. Eğitmenler izleyiciye göre
+  // aynalar; yanlış çözülen bir take, sol/sağ metriklerini ŞİŞİRİR. Gitarın
+  // 4 katlık sol/sağ asimetrisi (left_forearm 80° vs right 18°) kısmen bunun
+  // artefaktı olabilir — ölçmeden bilinmez.
+  stdout.writeln('\n=== Aynalama çözümü (M-F-48) ===');
+  stdout.writeln('  aynalanmış take: ${ref.mirroredTakeIds.length}/${takes.length}'
+      '${ref.mirroredTakeIds.isEmpty ? "" : "  → ${ref.mirroredTakeIds.join(", ")}"}');
+  if (ref.mirroredTakeIds.length > takes.length / 2) {
+    stdout.writeln('  ⚠️ take\'lerin yarısından fazlası çevrildi — medoid ters '
+        'seçilmiş olabilir; sol/sağ metrikleri şüpheli.');
+  }
+
   final unreliable = ref.unreliableJoints();
   stdout.writeln('\nGÜVENİLMEZ eklemler (sapma >35°): '
       '${unreliable.isEmpty ? "yok" : unreliable.join(", ")}');
