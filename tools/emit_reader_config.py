@@ -8,10 +8,15 @@ bu betik farkı GÖRÜNÜR kılar — sessizce kırpmaz, düşürdüğü her ala
 import json, sys, pathlib
 
 READER_TECHNIQUE = {"id","sideResolution","phases","limb","cyclic","repCompletedOn",
-                    "resetBetweenReps","fallback","requiredLandmarks","requiredSignals","errors","$doc"}
+                    "resetBetweenReps","fallback","requiredLandmarks","requiredSignals",
+                    # v0.4.1: şema kazandı — okuyucu bu üçünü artık tanıyor
+                    "requires","verdictGates",
+                    "errors","$doc"}
 READER_PHASE = {"id","enter","quality","exit","abort","abortCode","timeoutMs","minDurationMs",
                 "measureHere","terminal","checkpoint","skippableIn","requiredLandmarks","requiredSignals","$doc"}
-READER_METRIC = {"unit","range","noiseBand","baseline","interval","cutoffHz","$doc"}
+READER_METRIC = {"unit","range","noiseBand","baseline","interval","cutoffHz",
+                 "measurementSpace",  # v0.4.1 (M-O-08 kararı beyan edilebilir)
+                 "$doc"}
 READER_ERROR = {"code","evaluateAt","condition","priority","perturbation","cooldownMs",
                 "maxPerRound","suppressesJudgement","drillId","$doc"}
 
@@ -49,14 +54,11 @@ def main(src, dst):
     for t in d["techniques"]:
         tt = strip(t, READER_TECHNIQUE | {"verdictGates","requires"}, f"technique.{t['id']}", dropped)
         # şema `requires:{signals}` diyor; okuyucu düz `requiredSignals` istiyor
-        req = tt.pop("requires", None)
-        if req and req.get("signals"):
-            tt["requiredSignals"] = [s["signal"] for s in req["signals"]]
-            notes.append(f"technique {t['id']}: requires.signals -> requiredSignals'e düzleştirildi "
-                         f"(op/value KAYBOLDU — okuyucu yalnız ad listesi alıyor)")
-        vg = tt.pop("verdictGates", None)
-        if vg:
-            notes.append(f"technique {t['id']}: verdictGates DÜŞÜRÜLDÜ ({len(vg)} kapı) — okuyucu tanımıyor")
+        # v0.4.1'den beri requires/verdictGates olduğu gibi geçiyor (düzleştirme
+        # ve düşürme kaldırıldı); yorum anahtarları yine temizleniyor.
+        if isinstance(tt.get("verdictGates"), list):
+            tt["verdictGates"] = [{k: v for k, v in g.items() if not k.startswith("_")}
+                                  for g in tt["verdictGates"]]
         tt["phases"] = [strip(p, READER_PHASE, f"technique.{t['id']}.phase.{p['id']}", dropped)
                         for p in t["phases"]]
         for p in tt["phases"]:

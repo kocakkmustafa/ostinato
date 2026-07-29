@@ -1,5 +1,5 @@
 {
-  "_schema": "motion-core docs/40-FAZ-CONFIG-SEMASI-TASLAK.md v3.0 MÜHÜRLÜ (M-F-35/36/37) — DOĞRUDAN YAZIM",
+  "_schema": "motion-core v3.0 MÜHÜRLÜ şema · okuyucu motion_core-v0.4.1",
   "_why_direct": "Ostinato'nun kalibre edilmiş çalışan motoru yok; ruleset-v0 taslaktı ve tüm eşikleri expertPending. Bu yüzden çevirici katmanı yazmıyoruz — mühürlenecek şemaya doğrudan yazıyoruz (M-F-35 §7 göç yolu).",
   "_status": "TASLAK — hiçbir sayısal eşik nihai değil (expertPending). Şema mühürlenmeden önce alan adları değişebilir; çelişkide ÇEKİRDEK KAZANIR.",
   "module": "voice",
@@ -161,13 +161,13 @@
           "onEvent": "onset",
           "holdMs": 100,
           "effect": "collectNoVerdict",
-          "_why": "O-A3: nota atağının ilk ~100 ms'i doğası gereği aperiyodiktir. Veri GEÇERLİ (topla) ama hüküm verilmez — aksi hâlde her nota başlangıcında bir düzeltme üretirdik."
+          "_why": "O-A3: nota atağının ilk ~100ms'i aperiyodik. Veri GEÇERLİ (topla), hüküm verilmez."
         },
         {
           "onEvent": "coachCue",
           "holdMs": 0,
           "effect": "discardWindow",
-          "_why": "M-O-07 (v3'te çözüldü): koç konuşurken mikrofon FİİLEN koçu duyar — veri KİRLİ, toplanmaz. Atak penceresinden farkı bu: orada veri geçerli ama aperiyodik (topla, hüküm verme); burada veri kirli (topla-ma). Kirli pencereyi arşive toplayan config, sonraki analize temiz görünür."
+          "_why": "M-O-07: koç konuşurken mikrofon koçu duyar — veri KİRLİ, toplanmaz. Kirli pencereyi arşive toplayan config sonraki analize temiz görünür."
         }
       ],
       "phases": [
