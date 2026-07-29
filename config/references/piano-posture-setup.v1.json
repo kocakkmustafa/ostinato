@@ -2,7 +2,7 @@
  "schema": "motion-core/reference@1",
  "technique": "five_finger_drill",
  "measurementProvenance": "ATTESTED",
- "generatedAt": "2026-07-29T23:12:48.371736Z",
+ "generatedAt": "2026-07-29T23:18:13.357378Z",
  "gates": {
   "minTakes": 3,
   "minSources": 3,

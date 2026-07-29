@@ -2,7 +2,7 @@
  "schema": "motion-core/reference@1",
  "technique": "guitar_posture_setup",
  "measurementProvenance": "ATTESTED",
- "generatedAt": "2026-07-29T23:12:40.443134Z",
+ "generatedAt": "2026-07-29T23:18:07.063668Z",
  "gates": {
   "minTakes": 3,
   "minSources": 3,
