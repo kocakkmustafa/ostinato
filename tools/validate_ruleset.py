@@ -8,6 +8,7 @@ bir iddiadır.
 """
 import json, sys, pathlib
 
+EFFECTS = {"collectNoVerdict","discardWindow"}
 COND_KINDS = {"metric","delta","timeInPhase","confidence","all","any",
               "localMax","localMin","flag","category","intervalOverlap"}
 SPACE_OK = {"world","pixel_scaled"}
@@ -51,6 +52,14 @@ def check(doc, name):
         blob = json.dumps(_payload(t))
         if "LEFT_" in blob or "RIGHT_" in blob:
             p.append(f"{name}/{tid}: config'te LEFT_/RIGHT_ YASAK (M-F-06)")
+
+        # v3: hüküm-penceresi etkisi enum'da olmalı; kirli/geçerli ayrımı
+        # sessizce kaybolursa arşive kirli veri sızar (M-O-07).
+        for g in t.get("verdictGates", []):
+            if g.get("effect") not in EFFECTS:
+                p.append(f"{name}/{tid}: geçersiz verdictGates.effect {g.get('effect')!r}")
+            if "onEvent" not in g or "holdMs" not in g:
+                p.append(f"{name}/{tid}: verdictGates onEvent/holdMs eksik")
 
         phases = t.get("phases", [])
         ids = [f.get("id") for f in phases]
@@ -98,6 +107,10 @@ challenge: mut for challenge, mut in [
         ("bilinmeyen koşul", lambda d: d["techniques"][0]["phases"][0]["enter"].update(kind="uydurma")),
         ("yasak uzay", lambda d: d["metrics"]["m"].update(measurementSpace="normalized_raw")),
         ("LEFT_ kullanımı", lambda d: d["techniques"][0].update(limb="LEFT_SHOULDER")),
+        ("geçersiz verdictGates.effect", lambda d: d["techniques"][0].update(
+            verdictGates=[{"onEvent":"onset","holdMs":100,"effect":"uydurma"}])),
+        ("verdictGates alanı eksik", lambda d: d["techniques"][0].update(
+            verdictGates=[{"effect":"discardWindow"}])),
     ]}
     ok = True
     # yanlış-pozitif testi: yorum alanında geçen yasak desen ihlal SAYILMAMALI
@@ -111,7 +124,7 @@ challenge: mut for challenge, mut in [
         d = copy.deepcopy(base); mut(d)
         if not check(d, "neg"):
             print(f"❌ SELF-TEST: '{label}' YAKALANMADI"); ok = False
-    print("✅ self-test: 8/8 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
+    print("✅ self-test: 10/10 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
     return 0 if ok else 1
 
 if __name__ == "__main__":

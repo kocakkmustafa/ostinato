@@ -1,5 +1,5 @@
 {
-  "_schema": "motion-core docs/40-FAZ-CONFIG-SEMASI-TASLAK.md v2 (M-F-35/36) — DOĞRUDAN YAZIM",
+  "_schema": "motion-core docs/40-FAZ-CONFIG-SEMASI-TASLAK.md v3 (M-F-35/36/37) — DOĞRUDAN YAZIM",
   "_why_direct": "Ostinato'nun kalibre edilmiş çalışan motoru yok; ruleset-v0 taslaktı ve tüm eşikleri expertPending. Bu yüzden çevirici katmanı yazmıyoruz — mühürlenecek şemaya doğrudan yazıyoruz (M-F-35 §7 göç yolu).",
   "_status": "TASLAK — hiçbir sayısal eşik nihai değil (expertPending). Şema mühürlenmeden önce alan adları değişebilir; çelişkide ÇEKİRDEK KAZANIR.",
   "module": "voice",
@@ -81,8 +81,8 @@
         {
           "onEvent": "coachCue",
           "holdMs": 0,
-          "effect": "collectNoVerdict",
-          "_PÜRÜZ": "M-O-07: burada aslında 'discardWindow' gerekiyor. Koç konuşurken mikrofon FİİLEN koçu duyar — veri kirli, toplamak zararlı (sonraki analiz onu temiz sanar). Şemanın enum'unda tek etki değeri olduğu için geçici olarak collectNoVerdict yazıldı; enum genişlerse düzeltilecek. Kodda ayrım ZATEN var (coachSpeaking→unreliable, attack→transition)."
+          "effect": "discardWindow",
+          "_why": "M-O-07 (v3'te çözüldü): koç konuşurken mikrofon FİİLEN koçu duyar — veri KİRLİ, toplanmaz. Atak penceresinden farkı bu: orada veri geçerli ama aperiyodik (topla, hüküm verme); burada veri kirli (topla-ma). Kirli pencereyi arşive toplayan config, sonraki analize temiz görünür."
         }
       ],
 
@@ -145,6 +145,6 @@
   "_openItems": [
     "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",
     "shoulder_rise_norm + head_chin_angle_deg: ship öncesi ≥1 gerçek-kare regresyonu (J-028)",
-    "verdictGates coachCue etkisi: M-O-07 yanıtına bağlı"
+    "(kapandı) verdictGates coachCue → discardWindow, v3"
   ]
 }
