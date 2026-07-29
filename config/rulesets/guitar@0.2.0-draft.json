@@ -378,8 +378,8 @@
  "referenceConsumption": {
   "_contract": "motion-core docs/50-REFERANS-TUKETIM-SOZLESMESI.md (M-F-46)",
   "_measured": "AİLENİN İLK ÇALGI REFERANSI (M-F-98, M-O-45/46 yanıtı). Kanonik `ReferenceCli.buildArtifact`, motion_core-v0.8.4 (J-056 görünürlük-kapısı sonrası) — pilot kopyası DEĞİL. Take'ler `hold_isolator@57b3ccd` (scope=upperBody, enerji+drift+görünürlük hepsi üst-vücut landmark setine daraltılmış) ile TAM VİDEODAN kesilmiş 3-9sn'lik statik-tutuş pencereleri; tam-video ölçümü (M-O-40/45) sulanma yüzünden atılmıştı. 3 bağımsız eğitmen (Andrew Keeping · Marty Music · David Chiriboga Music), üçü de kanonik güven-kapısından %100 (231/231, 181/181, 132/132 kare) geçti. Artefakt: `config/references/guitar-posture-setup.v1.json`.",
-  "scoringBarDeg": 22.0,
-  "_scoringBarDegWhy": "clusterToleranceDeg=22 — M-F-51 stance emsalinin oranı: ölçülen max take-medyanı 18,1° (0.8.4/J-056-sonrası) + ~%20, stil-ağır statik sınıf gerekçesiyle (M-F-98). Bu kaba 'aynı poz mu' kapısı; asıl yetki eklem-düzeyinde (aşağıda).",
+  "scoringBarDeg": 14.0,
+  "_scoringBarDegWhy": "M-F-143: 22 OZEL BARI OLDU, varsayilan 14'e donuldu. Eski 22'nin gerekcesi (M-F-51 orani: olculen max take-medyani 18,1 + ~%20) aslinda KOL GURULTUSUNE tahammul payiydi — cunku M-F-47 kapisi TUM-EKLEM medyanina bakiyordu ve 9 eklemin 8'i koldu (M-O-56 dorduncu sinif). Kapi artik gateJoints=[trunk_tilt] ile URUNUN SKORLADIGI eklemde anlasma ariyor; trunk_tilt sapmalari 0,3-5,9 olculdugu icin 14 rahatca gecildi. Havuz 3->5 take. Ozel bara gerek KALMADI.",
   "scored": [
    "trunk_tilt"
   ],
@@ -414,15 +414,8 @@
    "_why": "clusterToleranceDeg=22 ile 3/3 take kümeye girdi (M-F-47 kapısı GEÇİLDİ — önceki 14° denemesinde 8xFzcSieBXY/v3nfqNOBAPc dışarıda kalmıştı, M-O-45)."
   },
   "measuredDispersionDeg": {
-   "trunk_tilt": 0.54,
-   "left_shoulder": 5.43,
-   "right_shoulder": 20.94,
-   "left_upper_arm": 5.85,
-   "right_upper_arm": 21.13,
-   "left_elbow": 49.49,
-   "right_elbow": 12.05,
-   "left_forearm": 62.41,
-   "right_forearm": 8.9
+   "trunk_tilt": "floor-bound (dispersiyon gurultu tabaninin altinda)",
+   "_note": "5 take, agreementGateJoints=[trunk_tilt], bar 14.0, excludedOutlier YOK"
   },
   "_measuredDispersionDegWhy": "Kanonik CLI artefaktının `frames.dispersionRad` medyanı (deg'e çevrilmiş), M-O-46'nın eklem-başına-sapma tablosuyla (build() hatasıyla birebir doğrulanmış) tutarlı.",
   "_mirrorGapProvenance": "MEASURED (motion_core 0.8.4, gapMeasured:true) — sayısal gap artefaktta yok (yalnız confident/gapMeasured bool'ları), M-F-46 şeffaflık alanı",

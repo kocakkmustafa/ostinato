@@ -428,12 +428,18 @@
   },
   "_mirrorGapProvenance": "MEASURED (motion_core 0.7.1, gapMeasured:true) — runnerUpGap 0.00181",
   "_measurementProvenance": {
-   "status": "PROVISIONAL — referans-dışı kaynak",
-   "eligibleSources": 0,
-   "totalSources": 10,
-   "why": "M-F-43 kaynak-uygunluk kapısı (O-022): bu config'in dağılım/tolerans sayıları 10 kaynaktan hesaplandı ama yalnız 0'i `referenceEligible`. Sebep zinciri: hasadı --no-transcribe koşturdum → sınıflandırıcı kararını kaynağın ANLATISINDAN verir (rom_mode.py) → elinde yalnız başlık/açıklama kaldı → fail-closed gereği neredeyse hepsi `unknown`. Ayrıca B4 pilotu bu bayrağı HİÇ OKUMUYORDU: hasat hattı 'bu kaynak referansa giremez' diyordu, pilot yine referans kuruyordu.",
-   "whatThisMeans": "Sayılar SİLİNMEDİ ama tolerans/eşik kaynağı SAYILMAZ (M-C-01: skorlama referansı DOĞRU olmalı). Eksik transkriptler geri dolduruluyor; yeniden sınıflandırma sonrası uygun kaynak sayısı ≥3 olan çalgılarda ölçüm YENİLENECEK.",
-   "notALoophole": "movementRomPolicy'de `posture_setup` KASITLI olarak passiveExecutionPossible=True bırakıldı — yani bu veriyi muafiyetle geçirmiyorum. Öğretmenin öğrencinin bileğini yerleştirmesi gerçek bir öğretim hamlesi ve öyle üretilen duruş ulaşılamaz hedef olabilir; kaynak kanıtla geçmeli."
+   "status": "ATTESTED — ILK PIANO REFERANSI",
+   "artifact": "config/references/piano-posture-setup.v1.json",
+   "contributingTakes": 3,
+   "agreementGateJoints": [
+    "trunk_tilt"
+   ],
+   "clusterToleranceDeg": 14.0,
+   "why": "M-F-143: beyan-edilen kapi-eklem-kumesi ile ilk kez kuruldu. ONCEKI RED'in sebebi kaynak yoklugu DEGILDI (M-O-56): kapi tum-eklem medyanina bakiyordu, medyani da SKORLANMAYAN kol zinciri belirliyordu. trunk_tilt sapmalari zaten uyusuyordu (san 0,4-4,4 / piyano 1,9-2,8 take-medyani). Kapi urunun tukettigi kumeye alininca 14 varsayilan barinda gecti, excludedOutlier YOK.",
+   "unreliableJoints": [
+    "left_elbow",
+    "left_forearm"
+   ]
   }
  },
  "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı."

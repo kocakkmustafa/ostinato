@@ -110,13 +110,15 @@
    "wave": "W1",
    "rulesetId": "voice",
    "blurb": "Sing along and get feedback on pitch, sustain and posture.",
-   "comingSoonReason": "Posture reference needs 3 independent teachers agreeing. The pool grew to 9 eligible sources with 3-4 usable hold-windows, so 'not enough footage' is no longer the reason — the takes disagree (deviations 42.0 / 33.0 / 20.5 / 37.7 degrees, no cluster). Singers also move structurally more than seated players, and a second window-finder built for sustained poses could read only 3 of 9 sources. We will not grade your singing posture against a reference we could not build honestly.",
+   "comingSoonReason": "The posture reference now EXISTS: 4 independent teachers, measured and agreeing, built through a declared agreement gate. What is missing is no longer the reference — it is the rest of the lesson: this instrument's own drills, its error coaching, and a verified end-to-end run like the one guitar has. We open a discipline when the whole path works, not when one measurement lands.",
    "honesty": {
     "measured": [],
     "notMeasured": [
-     "Everything — nothing is live yet. Pitch and periodicity motors exist (ostinato_audio, engine status) but no posture reference has passed the agreement gate."
+     "Posture IS now measured — reference built from 4 agreeing teachers (see config/references/voice-posture-setup.v1.json).",
+     "Not yet built: this instrument's drills, its error coaching, and the end-to-end verification that proves the whole lesson path works. That is why it is still marked coming soon."
     ]
-   }
+   },
+   "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi."
   },
   {
    "id": "piano",
@@ -125,14 +127,15 @@
    "wave": "W1",
    "rulesetId": "piano",
    "blurb": "Practice five-finger patterns and chords with posture and hand feedback.",
-   "comingSoonReason": "Posture reference needs 3 independent teachers agreeing. The pool is no longer the problem: after re-classification it holds 8 eligible sources and 3 hold-windows — enough takes. They simply do NOT agree (deviations 16.2 / 46.4 / 27.3 degrees; no cluster even at a relaxed bar). Two rescue routes were measured and both failed: harvesting with new search terms (7 fresh candidates, 0 new windows) and a second window-finder built for sustained-pose clips (readable in only 2 of 8 piano sources, fewer than the tool we already use). We will not grade your piano posture against teachers who disagree with each other.",
+   "comingSoonReason": "The posture reference now EXISTS: 3 independent teachers, measured and agreeing, built through a declared agreement gate. What is missing is no longer the reference — it is the rest of the lesson: this instrument's own drills, its error coaching, and a verified end-to-end run like the one guitar has. We open a discipline when the whole path works, not when one measurement lands.",
    "honesty": {
     "measured": [],
     "notMeasured": [
-     "Everything — nothing is live yet. Pitch and periodicity motors exist and are tested, but no posture reference has passed the agreement gate.",
-     "Why it is stuck is now measured, not guessed: enough usable takes exist, they disagree with each other. More footage does not fix disagreement."
+     "Posture IS now measured — reference built from 3 agreeing teachers (see config/references/piano-posture-setup.v1.json).",
+     "Not yet built: this instrument's drills, its error coaching, and the end-to-end verification that proves the whole lesson path works. That is why it is still marked coming soon."
     ]
-   }
+   },
+   "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi."
   }
  ]
 }

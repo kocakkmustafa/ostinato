@@ -10,5 +10,9 @@ dependencies:
   motion_core:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
-      ref: motion_core-v0.8.4
+      # M-F-143 GEÇİCİ SHA PİNİ: gateJoints/gateBasis çekirdek main'de
+      # (101ed95) ama HENÜZ TAG'Lİ DEĞİL (pubspec hâlâ 0.8.4 diyor).
+      # Aile sözleşmesi tag'li sürüm tüketmeyi söylüyor — koordinatörden
+      # 0.8.5 tag'i istendi; geldiğinde bu iki satır tek hamlede geri döner.
+      ref: 101ed95
       path: packages/motion_core

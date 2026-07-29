@@ -15,8 +15,22 @@ import 'package:motion_core/motion_core.dart';
 /// clusterToleranceDeg=22: M-F-51 stance emsalinin oranı — ölçülen max
 /// take-medyanı (18,1°, 0.8.4/J-056-sonrası) + ~%20, stil-ağır statik
 /// sınıf gerekçesiyle. Kaba "aynı poz mu" kapısı; asıl yetki eklemde.
-void main() async {
-  const want = 'guitar';
+/// M-F-143: ÇALGI-PARAMETRELİ. Üç çalgı da AYNI beyanlı kapıdan geçer —
+/// ayrı kopya yazmak, üç ayrı gerekçenin sessizce ayrışması demekti
+/// (M-O-39'un kanonik-vs-kopya dersi, bu sefer önceden).
+const _techniqueByInstrument = {
+  'guitar': 'guitar_posture_setup',
+  'voice': 'sustained_note_drill',
+  'piano': 'five_finger_drill',
+};
+
+void main(List<String> args) async {
+  final want = args.isEmpty ? 'guitar' : args.first;
+  final technique = _techniqueByInstrument[want];
+  if (technique == null) {
+    stderr.writeln('kullanım: build_guitar_reference.dart <guitar|voice|piano>');
+    exit(64);
+  }
   final manifestFile =
       File('${Platform.environment['HOME']}/motion-harvest/ostinato/hold-windows-$want.json');
   final manifest = jsonDecode(manifestFile.readAsStringSync()) as Map<String, dynamic>;
@@ -44,13 +58,26 @@ void main() async {
       'defaultMaxDrift=${manifest['defaultMaxDrift']}, fallbackMaxDrift=${manifest['fallbackMaxDrift']}');
   stdout.writeln('kaynaklar: ${fixturesById.keys.join(", ")}');
 
+  // M-F-143: kapı-eklem-kümesi artık BEYAN EDİLEN parametre. 22° özel-barı
+  // ÖLDÜ — o bar aslında "kol gürültüsüne ne kadar tahammül edelim"
+  // sorusuna verilmiş bir cevaptı (M-O-56 dördüncü sınıf teşhisi). Kapı
+  // artık ÜRÜNÜN SKORLADIĞI eklemde anlaşma arıyor ve bar VARSAYILAN 14'e
+  // geri döndü: trunk_tilt sapmaları 0,3-5,9° ölçüldüğü için geçmesi
+  // gereken bu. `gateBasis` ZORUNLU — daraltma gerekçesiz yapılamaz.
   const cli = ReferenceCli(
     specs: StandardJoints.upperBody,
-    clusterToleranceDeg: 22,
+    gateJoints: ['trunk_tilt'],
+    gateBasis: 'M-O-47/M-F-98 eklem-yetkisi kararı: postür referansının '
+        'SKORLADIĞI metrik trunk_tilt; kol zinciri çalgıyı TUTUYOR '
+        '(işlevsel/stil) ve ÖLÇÜLEREK coached_only ilan edildi. M-O-56: '
+        'tam-küme kapısı 9 eklemin 8i kol olduğu için medyanı kollarla '
+        'belirliyor ve SKORLANAN metriği mükemmel uyan take leri reddediyor '
+        '(Rpalo0sbpj4: trunk 0,3° / kol-medyanı 42,9°). Kapı, urunun '
+        'tukettigi kumede anlasma aramali.',
   );
 
   final artifact = cli.buildArtifact(
-    technique: 'guitar_posture_setup',
+    technique: technique,
     fixturesById: fixturesById,
   );
 
@@ -74,16 +101,18 @@ void main() async {
         'belirsizliğinin artefaktı olabilir. coached_only olduğu için '
         'kullanıcıya PUAN vermiyor ama gösterim/koçlamada taraf-bazlı DEĞİL, '
         'birleşik-kol (sol+sağ) okuması önerilir.',
-    'clusterToleranceDegBasis': 'M-F-51 stance emsali oranı: ölçülen max '
-        'take-medyanı 18,1° (0.8.4/J-056-sonrası) + ~%20 — stil-ağır statik '
-        'sınıf gerekçesiyle. Kaba kapı; asıl yetki bu bloktadır, eklem-kapısı '
-        'DEĞİL.',
+    'clusterToleranceDegBasis': 'M-F-143: 22° ÖZEL BARI KALDIRILDI, '
+        'VARSAYILAN 14° kullanılıyor. Eski 22 gerekçesi (M-F-51 oranı, '
+        'ölçülen max take-medyanı 18,1° + ~%20) aslında KOL gürültüsüne '
+        'tahammül payıydı — çünkü kapı tüm-eklem medyanına bakıyordu. Kapı '
+        'artık gateJoints=[trunk_tilt] ile ÜRÜNÜN SKORLADIĞI eklemde '
+        'anlaşma arıyor, o yüzden özel bara gerek kalmadı.',
   };
 
   final outDir = Directory(
       '/Users/mustafakaankocak/Documents/YULAlab-AI/ventures/ostinato/app/config/references');
   outDir.createSync(recursive: true);
-  final outFile = File('${outDir.path}/guitar-posture-setup.v1.json');
+  final outFile = File('${outDir.path}/$want-posture-setup.v1.json');
   outFile.writeAsStringSync(
       const JsonEncoder.withIndent(' ').convert(artifact) + '\n');
 
