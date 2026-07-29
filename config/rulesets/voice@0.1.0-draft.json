@@ -1,0 +1,150 @@
+{
+  "_schema": "motion-core docs/40-FAZ-CONFIG-SEMASI-TASLAK.md v2 (M-F-35/36) — DOĞRUDAN YAZIM",
+  "_why_direct": "Ostinato'nun kalibre edilmiş çalışan motoru yok; ruleset-v0 taslaktı ve tüm eşikleri expertPending. Bu yüzden çevirici katmanı yazmıyoruz — mühürlenecek şemaya doğrudan yazıyoruz (M-F-35 §7 göç yolu).",
+  "_status": "TASLAK — hiçbir sayısal eşik nihai değil (expertPending). Şema mühürlenmeden önce alan adları değişebilir; çelişkide ÇEKİRDEK KAZANIR.",
+  "module": "voice",
+  "version": "0.1.0-draft",
+
+  "signalConditioning": {
+    "_why": "Kural #4 (M-C-07/J-027): filtre ve eşik AYRILMAZ. YIN eşiğinin anlamı pencere boyuna bağlıdır — pencereyi değiştirip eşiği sabit bırakmak sessizce başka bir dedektör yapar. Biri değişirse SÜRÜM ARTAR.",
+    "sampleRate": 44100,
+    "windowSamples": 4096,
+    "hopSamples": 1024,
+    "yinThreshold": 0.15,
+    "onsetFrameSize": 1024,
+    "onsetHopSize": 256,
+    "onsetMedianWindow": 11
+  },
+
+  "metrics": {
+    "pitch_deviation_cents": {
+      "id": "pitch_deviation_cents",
+      "unit": "cents",
+      "range": [-1200, 1200],
+      "noiseBand": 20,
+      "_noiseBand_why": "ÖLÇÜLMÜŞ değer, tahmin değil: G1-C'de gerçek çello kaydında üç bağımsız kestirici (YIN/pYIN/SwiftF0) medyan 13-19 cent hata verdi. 20 centin altındaki fark bizim ölçüm gürültümüzden ayırt edilemez → hüküm üretmez.",
+      "baseline": { "ref": "exercise.expectedNoteHz" },
+      "_baseline_why": "M-F-34 + O uyarlaması: ses tarafında taban SABİT DEĞİL referanstır — 'doğru perde' egzersizin istediği notadır. Tabanı sıfır sanmak burada anlamsız olur (cent zaten oransal ölçü).",
+      "interval": true,
+      "_interval_why": "O-A1: pitch bir PENCEREYE aittir. C2'de periyot ~15,3 ms, iki periyot şartıyla pencere 46-93 ms. Değer tStartUs/tEndUs taşır."
+    },
+    "periodicity": {
+      "id": "periodicity", "unit": "ratio", "range": [0, 1],
+      "noiseBand": 0.05, "baseline": 1.0, "interval": true,
+      "_note": "YIN'in kendi kuşkusu (1 - aperiodicity) — sonradan uydurduğumuz bir skor değil."
+    },
+    "level_above_room_floor_db": {
+      "id": "level_above_room_floor_db", "unit": "dB", "range": [-40, 60],
+      "noiseBand": 2, "baseline": { "ref": "setup.roomFloorDb" }, "interval": true,
+      "_baseline_why": "Mutlak dBFS eşiği telefon mikrofonu çeşitliliğinde yaşamaz; Setup Check odayı ÖLÇER, her şey ona görelidir."
+    },
+    "vibrato_rate_hz": {
+      "id": "vibrato_rate_hz", "unit": "Hz", "range": [0, 12],
+      "noiseBand": 0.5, "baseline": 0, "interval": true, "expertPending": true,
+      "_note": "W1'in ayırt edici metriği (rakiplerin itiraf edilmiş boşluğu). Hedef aralık uzman turundan gelecek — şimdilik yalnız ÖLÇÜLÜR, HÜKÜM VERİLMEZ."
+    },
+    "shoulder_rise_norm": {
+      "id": "shoulder_rise_norm", "unit": "ratio", "range": [-0.5, 0.5],
+      "noiseBand": 0.02, "baseline": 0, "expertPending": true,
+      "measurementSpace": "world",
+      "_space_why": "J-028/M-F-30: ham normalize koordinatta mesafe/açı en-boy oranı kadar bozuk. Bu metrik world uzayında hesaplanır ve ship öncesi ≥1 GERÇEK-KARE regresyonu ister (sentetik fixture bu hatayı yakalayamaz)."
+    },
+    "head_chin_angle_deg": {
+      "id": "head_chin_angle_deg", "unit": "deg", "range": [-60, 60],
+      "noiseBand": 2, "baseline": 0, "expertPending": true,
+      "measurementSpace": "world"
+    }
+  },
+
+  "techniques": [
+    {
+      "id": "sustained_note_drill",
+      "_what": "Tek nota tut: perde kararlılığı + sustain + duruş. W1'in en temiz egzersizi.",
+      "sideResolution": "calibrated",
+      "_sideResolution_why": "M-F-06: config'te LEFT_*/RIGHT_* yasak. Şanda taraf ölçümü omuz simetrisi için gerekir ve kalibrasyon pozunda geometrik kurulur.",
+      "cyclic": false,
+      "requires": {
+        "signals": [
+          { "signal": "level_above_room_floor_db", "op": "gte", "value": 6 },
+          { "signal": "periodicity", "op": "gte", "value": 0.55 }
+        ]
+      },
+      "_requires_why": "O-A2: bu tekniğin ön-koşulu landmark varlığı değil SİNYAL KALİTESİ. v2 öncesinde bunu şema dışında tutmak zorundaydık; artık doğrulayıcının görüş alanında.",
+
+      "verdictGates": [
+        {
+          "onEvent": "onset",
+          "holdMs": 100,
+          "effect": "collectNoVerdict",
+          "_why": "O-A3: nota atağının ilk ~100 ms'i doğası gereği aperiyodiktir. Veri GEÇERLİ (topla) ama hüküm verilmez — aksi hâlde her nota başlangıcında bir düzeltme üretirdik."
+        },
+        {
+          "onEvent": "coachCue",
+          "holdMs": 0,
+          "effect": "collectNoVerdict",
+          "_PÜRÜZ": "M-O-07: burada aslında 'discardWindow' gerekiyor. Koç konuşurken mikrofon FİİLEN koçu duyar — veri kirli, toplamak zararlı (sonraki analiz onu temiz sanar). Şemanın enum'unda tek etki değeri olduğu için geçici olarak collectNoVerdict yazıldı; enum genişlerse düzeltilecek. Kodda ayrım ZATEN var (coachSpeaking→unreliable, attack→transition)."
+        }
+      ],
+
+      "phases": [
+        {
+          "id": "READY",
+          "enter": { "kind": "flag", "metric": "setup_complete", "is": true },
+          "exit": { "kind": "metric", "metric": "level_above_room_floor_db", "op": "gte", "value": 6 },
+          "timeoutMs": 30000,
+          "_timeout_why": "Kural #2: terminal olmayan fazda timeout ZORUNLU. Öğrenci hiç çalmazsa seans askıda kalmamalı."
+        },
+        {
+          "id": "SUSTAIN",
+          "enter": { "kind": "metric", "metric": "periodicity", "op": "gte", "value": 0.55 },
+          "quality": {
+            "pitch_deviation_cents": { "op": "lte", "value": 25, "expertPending": true },
+            "periodicity": { "op": "gte", "value": 0.7, "expertPending": true }
+          },
+          "_quality_why": "D2 ayrımı: 'bu faza girdim mi' (enter) ile 'iyi yaptım mı' (quality) FARKLI sorular. Girişi periodicity 0.55 açar; hüküm 0.7 ister.",
+          "exit": { "kind": "metric", "metric": "level_above_room_floor_db", "op": "lt", "value": 6 },
+          "timeoutMs": 20000,
+          "minDurationMs": 800,
+          "measureHere": true
+        },
+        { "id": "COMPLETE", "terminal": true }
+      ]
+    }
+  ],
+
+  "errors": [
+    {
+      "code": "V-PITCH-DRIFT",
+      "evaluateAt": "SUSTAIN",
+      "condition": { "kind": "metric", "metric": "pitch_deviation_cents", "op": "gt", "value": 25 },
+      "cooldownMs": 20000,
+      "expertPending": true,
+      "_sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json"
+    },
+    {
+      "code": "V-POST-SHOULDER-RISE",
+      "evaluateAt": "ANY",
+      "condition": { "kind": "metric", "metric": "shoulder_rise_norm", "op": "gt", "value": 0.1 },
+      "cooldownMs": 30000,
+      "expertPending": true,
+      "_riskClass": "1_if_sustained"
+    }
+  ],
+
+  "feedbackPolicy": {
+    "maxConcurrentCues": 1,
+    "suppression": { "consecutiveOutOfBandBeforeCue": 3, "expertPending": true },
+    "fading": { "enabled": true, "_why": "guidance hypothesis: aşırı sık geri bildirim bağımlılık yaratıp kalıcı öğrenmeyi bozar" },
+    "scoreDisplay": {
+      "numericScoresEnabled": false,
+      "_why": "K8/M-F-04: kalibrasyon kapısı geçilmeden SAYISAL skor gösterilmez; V1 = bant + eğri.",
+      "bands": ["steady", "improving", "needs_focus"]
+    }
+  },
+
+  "_openItems": [
+    "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",
+    "shoulder_rise_norm + head_chin_angle_deg: ship öncesi ≥1 gerçek-kare regresyonu (J-028)",
+    "verdictGates coachCue etkisi: M-O-07 yanıtına bağlı"
+  ]
+}

@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+"""Faz-config v2 şema değişmezlerini ruleset dosyalarında denetle.
+
+Çekirdek yorumlayıcısı henüz yazılmadı; bu betik o gelene kadar aynı
+değişmezleri app tarafında zorlar. Amaç "yeşil görünsün" değil: her kontrolün
+negatif testi vardır (bkz. --self-test), yoksa denetim kendini doğrulayan boş
+bir iddiadır.
+"""
+import json, sys, pathlib
+
+COND_KINDS = {"metric","delta","timeInPhase","confidence","all","any",
+              "localMax","localMin","flag","category","intervalOverlap"}
+SPACE_OK = {"world","pixel_scaled"}
+
+def check(doc, name):
+    p = []
+    metrics = doc.get("metrics", {})
+
+    # §2: metrik sözlüğü zorunlu alanları (D5 + M-F-34)
+    for mid, m in metrics.items():
+        for field in ("unit","range","noiseBand","baseline"):
+            if field not in m:
+                p.append(f"{name}/{mid}: '{field}' eksik (§2 zorunlu)")
+        r = m.get("range")
+        if isinstance(r, list) and len(r) == 2 and r[0] >= r[1]:
+            p.append(f"{name}/{mid}: range ters/boş {r}")
+        # J-028: kamera metriği uzay beyan etmeli
+        if "measurementSpace" in m and m["measurementSpace"] not in SPACE_OK:
+            p.append(f"{name}/{mid}: geçersiz measurementSpace {m['measurementSpace']!r} (J-028)")
+
+    # kural #4: filtre+eşik birlikte
+    if "signalConditioning" not in doc:
+        p.append(f"{name}: signalConditioning bloğu yok (kural #4 — filtre+eşik ayrılmaz)")
+
+    for t in doc.get("techniques", []):
+        tid = t.get("id","?")
+        # D4: taraf çözümü zorunlu + LEFT_/RIGHT_ yasağı (M-F-06)
+        if "sideResolution" not in t:
+            p.append(f"{name}/{tid}: sideResolution eksik (D4 zorunlu)")
+        # Yalnız ANLAMLI alanlarda ara. İlk sürüm ham json.dumps(t) üzerinde
+        # arıyordu ve kendi açıklama metnimizi ("LEFT_*/RIGHT_* yasak") ihlal
+        # sandı — yanlış pozitif, ve yanlış pozitif denetime olan güveni
+        # gerçek bir kaçaktan daha hızlı öldürür. `_` ile başlayan anahtarlar
+        # bizim yorum sözleşmemiz; taranmazlar.
+        def _payload(o):
+            if isinstance(o, dict):
+                return {k: _payload(v) for k, v in o.items() if not k.startswith("_")}
+            if isinstance(o, list):
+                return [_payload(v) for v in o]
+            return o
+        blob = json.dumps(_payload(t))
+        if "LEFT_" in blob or "RIGHT_" in blob:
+            p.append(f"{name}/{tid}: config'te LEFT_/RIGHT_ YASAK (M-F-06)")
+
+        phases = t.get("phases", [])
+        ids = [f.get("id") for f in phases]
+        if len(ids) != len(set(ids)):
+            p.append(f"{name}/{tid}: mükerrer faz id")
+        for f in phases:
+            fid = f.get("id","?")
+            # değişmez #1: terminal olmayan fazda timeout ZORUNLU
+            if not f.get("terminal") and "timeoutMs" not in f:
+                p.append(f"{name}/{tid}/{fid}: timeoutMs yok (değişmez #1)")
+            for slot in ("enter","exit","abort"):
+                c = f.get(slot)
+                if c and c.get("kind") not in COND_KINDS:
+                    p.append(f"{name}/{tid}/{fid}: bilinmeyen koşul türü {c.get('kind')!r} (kural #8)")
+            # kural #8: bilinmeyen metriğe atıf = sert hata
+            for slot in ("enter","exit","abort"):
+                c = f.get(slot) or {}
+                mid = c.get("metric")
+                if mid and mid not in metrics and c.get("kind") not in ("flag","category"):
+                    p.append(f"{name}/{tid}/{fid}: tanımsız metrik {mid!r} (kural #8)")
+            for mid in (f.get("quality") or {}):
+                if mid not in metrics:
+                    p.append(f"{name}/{tid}/{fid}: quality'de tanımsız metrik {mid!r}")
+
+    for e in doc.get("errors", []):
+        mid = (e.get("condition") or {}).get("metric")
+        if mid and mid not in metrics:
+            p.append(f"{name}/{e.get('code')}: tanımsız metrik {mid!r}")
+    return p
+
+def self_test():
+    """Her kontrolün gerçekten yakaladığını kanıtla."""
+    base = {"signalConditioning":{}, "metrics":{"m":{"unit":"x","range":[0,1],"noiseBand":0.1,"baseline":0}},
+            "techniques":[{"id":"t","sideResolution":"visible",
+                           "phases":[{"id":"A","timeoutMs":1,"enter":{"kind":"metric","metric":"m"}},
+                                     {"id":"Z","terminal":True}]}]}
+    import copy
+    cases = {
+challenge: mut for challenge, mut in [
+        ("timeout eksik", lambda d: d["techniques"][0]["phases"][0].pop("timeoutMs")),
+        ("signalConditioning eksik", lambda d: d.pop("signalConditioning")),
+        ("noiseBand eksik", lambda d: d["metrics"]["m"].pop("noiseBand")),
+        ("sideResolution eksik", lambda d: d["techniques"][0].pop("sideResolution")),
+        ("tanımsız metrik", lambda d: d["techniques"][0]["phases"][0]["enter"].update(metric="yok")),
+        ("bilinmeyen koşul", lambda d: d["techniques"][0]["phases"][0]["enter"].update(kind="uydurma")),
+        ("yasak uzay", lambda d: d["metrics"]["m"].update(measurementSpace="normalized_raw")),
+        ("LEFT_ kullanımı", lambda d: d["techniques"][0].update(limb="LEFT_SHOULDER")),
+    ]}
+    ok = True
+    # yanlış-pozitif testi: yorum alanında geçen yasak desen ihlal SAYILMAMALI
+    commented = copy.deepcopy(base)
+    commented["techniques"][0]["_why"] = "M-F-06: config'te LEFT_*/RIGHT_* yasaktır"
+    if check(commented, "yorum"):
+        print("❌ SELF-TEST: yorum metnindeki 'LEFT_' yanlış pozitif üretti"); ok = False
+    if check(copy.deepcopy(base), "temiz"):
+        print("❌ SELF-TEST: temiz doküman hata verdi"); ok = False
+    for label, mut in cases.items():
+        d = copy.deepcopy(base); mut(d)
+        if not check(d, "neg"):
+            print(f"❌ SELF-TEST: '{label}' YAKALANMADI"); ok = False
+    print("✅ self-test: 8/8 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
+    return 0 if ok else 1
+
+if __name__ == "__main__":
+    if "--self-test" in sys.argv:
+        sys.exit(self_test())
+    problems = []
+    for f in sorted(pathlib.Path("config/rulesets").glob("*.json")):
+        problems += check(json.loads(f.read_text(encoding="utf-8")), f.name)
+    print("✅ ruleset denetimi TEMİZ" if not problems else "SORUN:")
+    for x in problems: print("  -", x)
+    sys.exit(1 if problems else 0)
