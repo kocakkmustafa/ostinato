@@ -103,7 +103,7 @@
         45
       ],
       "noiseBand": 6,
-      "_noiseBand_why": "DÜZELTİLDİ (2026-07-29, havuz 11→26 fixture). Önceki değer 2° idi ve 5 şan take'inden ölçülen 1,5°'a dayanıyordu. Havuz büyüyünce aynı metrik piyanoda 2,7°→5,1°, gitarda 3,8° çıktı — yani 2° yalnız EN İYİ çalgının EN KÜÇÜK örnekleminde doğruydu. Gürültü bandı en kötü ölçülen varyansın (5,1°) üstünde olmalı; aksi hâlde eğitmenlerin kendi aralarında ayrıştığı kadarını kullanıcıya 'hata' diye okuruz. Ölçüm: şan 1,5° (n=5) · gitar 3,8° (n=13) · piyano 5,1° (n=10).",
+      "_noiseBand_why": "Ölçüm n=18: şan trunk_tilt 2,5°. Diğer çalgılar: gitar 3,6° · piyano 5,1°. Bant en kötü ölçülen varyansın (5,1°) üstünde tutuluyor — tek çalgının en iyi sayısına göre daraltmak, aynı metriği piyanoda yanlış kalibre eder.",
       "baseline": 0,
       "_baseline_why": "Dik gövde = 0° sapma. M-F-34: taban beyan edilmezse tolerans anlamsız.",
       "measurementSpace": "world",
@@ -294,12 +294,12 @@
   ],
   "referenceConsumption": {
     "_contract": "motion-core docs/50-REFERANS-TUKETIM-SOZLESMESI.md (M-F-46)",
-    "_measured": "B4 pilotu, şan n=5 take",
+    "_measured": "B4 pilotu, şan n=18 take (T2 hasadı sonrası; önceki n=5)",
     "scoringBarDeg": 14.0,
     "scored": [
       "trunk_tilt_deg"
     ],
-    "_scored_why": "Kural 1: skorlama yetkisi ANATOMİK SEZGİDEN değil ÖLÇÜMDEN gelir. Şanda ölçülen tek ≤14° eklem trunk_tilt (1,5°).",
+    "_scored_why": "Kural 1: skorlama yetkisi ölçümden. n=18'de çıtanın (14°) altına inen ÜÇ eklem var — trunk_tilt 2,5° · left_shoulder 10,4° · left_upper_arm 10,5°. Ama skorlamaya yalnız trunk_tilt alındı; gerekçe aşağıda (sideDependencyHold).",
     "coached_only": [
       "left_shoulder",
       "right_shoulder",
@@ -313,12 +313,19 @@
     "_coached_why": "Kural 3: dispersiyonu çıtanın üstünde olan eklem GÖSTERİLİR ve SÖYLENİR ama PUANLANMAZ. Şanda omuzlar 15,8-16,0° — sezgiyle 'omuz gerginliği ölçeriz' derdim, ölçüm izin vermiyor.",
     "userExplanation": "Experienced voice teachers disagree about these, so we point them out but do not grade them.",
     "_explanation_why": "Kural 3: açıklamasız puan-yokluğu kullanıcıya 'sistem bozuk' okunur.",
-    "provisional": true,
-    "_provisional_why": "Kural 6: contributingTakes=5 (sınırda). Tolerans muhafazakâr yazıldı; havuz T2 ile büyüyünce yeniden hesaplanacak — bu bayrak o günü kendisi hatırlatıyor.",
-    "provisionalConstraints": [
-      "'ustalaştın' sınıfı hüküm YOK",
-      "tolerans muhafazakâr",
-      "taraf-bağımlı hüküm için ayna-marjı teyidi gerekir (kural 7)"
-    ]
+    "provisional": false,
+    "_provisional_why": "KALDIRILDI: n=18 ≥ 5 (kural 6 eşiği). Önceki n=5'te işaretliydi. Not: provisional kalkması toleransların nihai olduğu anlamına gelmez — M-O-12 gereği havuz büyüdükçe yeniden ölçülür; nitekim kollar bu turda DAHA DA kötüleşti.",
+    "sideDependencyHold": {
+      "metrics": [
+        "left_shoulder",
+        "left_upper_arm"
+      ],
+      "measuredDispersionDeg": [
+        10.4,
+        10.5
+      ],
+      "_why": "Kural 7: düşük ayna-marjlı take'in yön kaydı kesin değildir. Bu havuzda take'lerin **4/18'i (%22)** aynalandı ve marjları ayrı ayrı doğrulanmadı. left_* metrikleri TARAF-BAĞIMLI: aynalama kısmen yanlışsa sol/sağ ayrımı kirlenir ve sol tarafın 'sıkı' görünmesi artefakt olabilir. Nitekim asimetri şüphe uyandırıyor: sol 10,4° vs sağ 16,6°. Çıtayı geçmiş olmaları YETMİYOR — taraf-bağımlı hüküm için ayna-marjı teyidi şart. O yapılana dek coached_only kalıyorlar.",
+      "unblockedBy": "take-başına ayna marjı raporu (ReferenceBuilder mirrorMargin) + asimetrinin bağımsız doğrulaması"
+    }
   }
 }
