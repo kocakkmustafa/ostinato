@@ -50,14 +50,20 @@ void main(List<String> args) {
   // yazıyor ve bu pilot onu OKUMUYORDU — yani hasat hattı "bu kaynak referansa
   // giremez" diyordu, ben yine de referans kuruyordum. Sentinel olayının aynısı:
   // var olan bir dürüstlük kapısına hiç sorulmaması.
-  final eligibility = <String, bool?>{};
+  // 0.7.2'de bu sınıflandırma ÇEKİRDEĞE girdi (M-F-62). Kendi bool kopyamı
+  // bırakıyorum: dört durumu ikiye indiriyordu ve `unattested` (hasat edilmiş
+  // ama beyansız) ile `ineligible` (açıkça reddedilmiş) aynı torbaya giriyordu.
+  // Benim `--allow-ineligible` bayrağım açıkça reddedilmiş kaynağı da içeri
+  // alabilirdi; çekirdeğin `allowUnattested`i ALAMAZ. Eşik/kural kopyalamanın
+  // nasıl bittiğini bu oturumda iki kez gördüm (M-O-25, M-O-26).
+  final eligibility = <String, TakeEligibility>{};
   final romModeOf = <String, String?>{};
 
   for (final f in files) {
     final doc = jsonDecode(f.readAsStringSync()) as Map<String, dynamic>;
     final id = f.uri.pathSegments.last.split('.').first;
     final prov = (doc['provenance'] as Map<String, dynamic>?) ?? const {};
-    eligibility[id] = prov['referenceEligible'] as bool?;
+    eligibility[id] = ReferenceCli.eligibilityOf(Fixture.fromJson(doc));
     romModeOf[id] = prov['romMode'] as String?;
     final frames = (doc['frames'] as List).cast<Map<String, dynamic>>();
 
@@ -126,33 +132,47 @@ void main(List<String> args) {
     stdout.writeln('  ${t.id}  ${angleClassOf[t.id]}');
   }
   // Uygunluk sayımı: kapının ne dediğini ÖNCE söyle, sonra ölçümü göster.
-  final eligible = takes.where((t) => eligibility[t.id] == true).toList();
-  final refused = takes.where((t) => eligibility[t.id] == false).toList();
-  final unclassified = takes.where((t) => eligibility[t.id] == null).toList();
-  stdout.writeln('\n=== Kaynak uygunluğu (M-F-43, FAIL-CLOSED) ===');
-  stdout.writeln('  referenceEligible=true : ${eligible.length}');
-  stdout.writeln('  referenceEligible=false: ${refused.length} '
-      '(romMode: ${refused.map((t) => romModeOf[t.id]).toSet().join(", ")})');
-  stdout.writeln('  sınıflandırılmamış     : ${unclassified.length} '
-      '(alan yok — kapıdan ÖNCE hasat edilmiş)');
+  List<ReferenceTake> withState(TakeEligibility e) =>
+      takes.where((ReferenceTake t) => eligibility[t.id] == e).toList();
+  final eligible = withState(TakeEligibility.attested);
+  final refused = withState(TakeEligibility.ineligible);
+  final unattested = withState(TakeEligibility.unattested);
+  final firstParty = withState(TakeEligibility.firstParty);
+  stdout.writeln('\n=== Kaynak uygunluğu (M-F-43 / M-F-62, FAIL-CLOSED) ===');
+  stdout.writeln('  attested   : ${eligible.length}  (rig uygun dedi)');
+  stdout.writeln('  ineligible : ${refused.length}  (rig UYGUN DEĞİL dedi'
+      '${refused.isEmpty ? "" : " — romMode: ${refused.map((ReferenceTake t) => romModeOf[t.id]).toSet().join(", ")}"})');
+  stdout.writeln('  unattested : ${unattested.length}  (hasat edilmiş ama beyan YOK — '
+      'sınıflandırma kanıtsız koştu)');
+  stdout.writeln('  firstParty : ${firstParty.length}  (hasat dışı; uygunluk rig dışında kurulur)');
 
   // Fail-closed'ın anlamı: "işaret bulamadım" asla "uygun" sayılmaz. Pasif
   // gösterimden kurulan referans kullanıcıya ULAŞILAMAZ hedef koyar ve bu hata
   // örneklem büyüdükçe DÜZELMEZ, derinleşir (rom_mode.py). Sınıflandırılmamış
   // kaynak da bu yüzden geçemez: alanın yokluğu, kaynağın masum olduğunu
   // göstermez.
-  final allowIneligible = args.contains('--allow-ineligible');
-  if (eligible.length < 3 && !allowIneligible) {
-    stderr.writeln('\n⛔ KAPI: referansa uygun take ${eligible.length} < 3 — referans KURULMAZ.\n'
+  // `ineligible` HİÇBİR bayrakla içeri girmez — yalnız `unattested` için
+  // istisna var ve artefaktı PROVISIONAL damgalar.
+  final allowUnattested = args.contains('--allow-unattested');
+  final admitted = allowUnattested
+      ? <ReferenceTake>[...eligible, ...unattested, ...firstParty]
+      : <ReferenceTake>[...eligible, ...firstParty];
+  if (refused.isNotEmpty) {
+    stdout.writeln('  ⛔ daima dışarıda (isimle): '
+        '${refused.map((ReferenceTake t) => t.id).join(", ")}');
+  }
+  if (admitted.length < 3) {
+    stderr.writeln('\n⛔ KAPI: kabul edilen take ${admitted.length} < 3 — referans KURULMAZ.\n'
         '   Bu ölçümler tolerans/eşik kaynağı OLAMAZ (M-C-01: skorlama referansı DOĞRU olmalı).\n'
         '   Sebep: hasat --no-transcribe ile koştu → sınıflandırıcı anlatıyı göremedi;\n'
-        '   ayrıca ${unclassified.length} kaynak kapı eklenmeden önce hasat edilmiş.\n'
-        '   Çözüm: transkriptli yeniden hasat. Yalnız KEŞİF amaçlı görmek için: --allow-ineligible');
+        '   ${unattested.length} kaynak beyansız (kapı eklenmeden önce hasat edilmiş).\n'
+        '   Çözüm: transkriptli yeniden hasat. Yalnız KEŞİF amaçlı: --allow-unattested\n'
+        '   (bu bayrak bile `ineligible` kaynağı İÇERİ ALMAZ — o karar geri alınamaz).');
     exit(2);
   }
-  if (allowIneligible && eligible.length < takes.length) {
-    stdout.writeln('  ⚠️ --allow-ineligible: aşağıdaki ölçümler KEŞİF amaçlıdır, '
-        'referans/tolerans kaynağı DEĞİLDİR (${takes.length - eligible.length} uygunsuz take dahil).');
+  if (allowUnattested && unattested.isNotEmpty) {
+    stdout.writeln('  ⚠️ measurementProvenance: PROVISIONAL — ${unattested.length} beyansız '
+        'take dahil edildi. Sayılar var ama TOLERANS İDDİASI KAPATAMAZ (M-C-01).');
   }
   if (takes.length < 3) {
     stderr.writeln('minTakes=3 karşılanmadı');

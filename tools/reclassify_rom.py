@@ -101,6 +101,33 @@ def main():
         "sources": rows,
     }, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
+    # Sidecar tek başına YETMEZ: pilot (ve çekirdeğin `eligibilityOf`u)
+    # kararı fixture'ın KENDİ provenance'ından okur. Sidecar'da bırakırsam
+    # yeniden sınıflandırma hiçbir tüketiciye ulaşmaz — "kapıya soran var mı"
+    # sorusunun bir başka hâli. `--write` kararı kaynağa geri yazar; rig
+    # transkriptle koşsaydı zaten oraya yazacaktı, aynı sınıflandırıcı, aynı
+    # politika. Yeniden yazıldığı GÖRÜNÜR kalsın diye damga da düşülür.
+    if "--write" in sys.argv:
+        for r in rows:
+            f = next((LIB / "landmarks").glob(f"{r['videoId']}.*json"), None)
+            if not f:
+                continue
+            doc = json.loads(f.read_text(encoding="utf-8"))
+            prov = doc.setdefault("provenance", {})
+            prov["referenceEligible"] = r["referenceEligible"]
+            prov["romMode"] = r["romMode"]
+            prov["romReclassified"] = {
+                "by": "tools/reclassify_rom.py",
+                "movement": MOVEMENT,
+                "passiveExecutionPossible": pep,
+                "evidence": r["sourcesSeen"],
+                "activeHits": r["activeHits"],
+                "passiveHits": r["passiveHits"],
+                "why": "ilk hasat --no-transcribe koştu; sınıflandırıcı anlatıyı görmemişti",
+            }
+            f.write_text(json.dumps(doc, ensure_ascii=False), encoding="utf-8")
+        print(f"↻ {len(rows)} fixture provenance'ı güncellendi (--write)")
+
     elig = [r for r in rows if r["referenceEligible"]]
     from collections import Counter
     print(f"kaynak: {len(rows)} · transkriptli: {sum(r['hasTranscript'] for r in rows)} "
