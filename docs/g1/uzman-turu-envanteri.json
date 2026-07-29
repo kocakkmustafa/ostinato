@@ -36,15 +36,6 @@
    "sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json",
    "threshold": "pitch_deviation_cents gt 25",
    "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
-  },
-  {
-   "module": "voice",
-   "code": "V-POST-SHOULDER-RISE",
-   "evaluateAt": "ANY",
-   "observable": null,
-   "sources": null,
-   "threshold": "right_shoulder gt 0.1",
-   "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
   }
  ],
  "aspirational_engineeringDebt_notForExpert": [

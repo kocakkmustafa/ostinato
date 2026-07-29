@@ -158,6 +158,18 @@ def check(doc, name):
         # gösterir ve (ölçtüğümüz gibi) yanlış metriğe bağlanıp yanlış
         # ateşler. Eksik aletin ADI zorunlu: "yakında" demek yetmez, NEYİN
         # eksik olduğu isimle yazılır (uzman-turu envanteri bundan üretilir).
+        # M-F-140: ÜÇÜNCÜ sınıf — ALET var, İSTATİSTİK yok. `aspirational`dan
+        # ayrı tutulur çünkü uzmana sorulacak şey FARKLI: orada "alet yok"
+        # (mühendislik borcu), burada "eşiği nereden alacağız" (ölçüm borcu).
+        # İkisini aynı kovaya atmak, üretilen envanteri yanıltır.
+        if e.get("status") == "thresholdPending":
+            if e.get("condition"):
+                p.append(f"{name}/{e.get('code')}: status=thresholdPending ama koşul "
+                         f"TAŞIYOR — eşiği olmayan kod koşula bağlanamaz (M-F-140)")
+            if not e.get("blockedByStatistic"):
+                p.append(f"{name}/{e.get('code')}: status=thresholdPending ama "
+                         f"blockedByStatistic yok — eşiğin HANGİ istatistikten "
+                         f"geleceği isimle yazılır (M-F-140)")
         if e.get("status") == "aspirational":
             if e.get("condition"):
                 p.append(f"{name}/{e.get('code')}: status=aspirational ama koşul TAŞIYOR — "
@@ -212,6 +224,11 @@ challenge: mut for challenge, mut in [
         ("sarkan referenceConsumption atfı", lambda d: d.update(
             referenceConsumption={"scoringBarDeg":14,"scored":["yok_boyle_metrik"],
                                   "coached_only":[],"userExplanation":"x"})),
+        ("thresholdPending ama koşul taşıyor (M-F-140)", lambda d: d.update(
+            errors=[{"code": "X-3", "evaluateAt": "A", "status": "thresholdPending",
+                     "blockedByStatistic": "ref", "condition": {"kind": "metric", "metric": "m"}}])),
+        ("thresholdPending ama istatistik isimsiz (M-F-140)", lambda d: d.update(
+            errors=[{"code": "X-4", "evaluateAt": "A", "status": "thresholdPending"}])),
         ("aspirational ama koşul taşıyor (M-O-53)", lambda d: d.update(
             errors=[{"code": "X-1", "evaluateAt": "A", "status": "aspirational",
                      "blockedByTool": "hand-landmarks",

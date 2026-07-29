@@ -338,22 +338,6 @@
    "cooldownMs": 20000,
    "expertPending": true,
    "_sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json"
-  },
-  {
-   "code": "V-POST-SHOULDER-RISE",
-   "evaluateAt": "ANY",
-   "condition": {
-    "kind": "metric",
-    "metric": "right_shoulder",
-    "op": "gt",
-    "value": 0.1
-   },
-   "cooldownMs": 30000,
-   "expertPending": true,
-   "_riskClass": "1_if_sustained",
-   "suppressesJudgement": false,
-   "_coached_only": true,
-   "_why": "Sözleşme kural 3 (M-F-46): omuz dispersiyonu 15,8-16,0° > 14° çıtası → bu kod KOÇLANIR (kullanıcıya söylenir) ama PUANLANMAZ. Ölçüm, sezgimin aksine omuz-tabanlı skorlamaya yetki vermiyor."
   }
  ],
  "feedbackPolicy": {
@@ -438,5 +422,19 @@
   }
  },
  "_namingNote": "Metrik adları üç çalgıda ORTAK (trunk_tilt, left_shoulder, ...). Şanda önce 'trunk_tilt_deg'/'shoulder_rise_norm' kullanılmıştı; fixture_check sarkan atıfları yakaladı (scored listesi sözlükte olmayan adlara işaret ediyordu). Ortak sözlük, çalgılar arası karşılaştırmayı da mümkün kılıyor.",
- "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı."
+ "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı.",
+ "_removedErrors": [
+  {
+   "code": "V-POST-SHOULDER-RISE",
+   "removedAt": "2026-07-30",
+   "ruling": "M-F-140 hukmu (koordinator)",
+   "removedCondition": {
+    "kind": "metric",
+    "metric": "right_shoulder",
+    "op": "gt",
+    "value": 0.1
+   },
+   "_why": "BOYUT KARISIKLIGI: `right_shoulder` DERECE cinsinden bir metrik, esik ise 0.1 idi — 0,1 derece absurt dar; normalize-birim (0-1) bir taslak dereceye sizmis. Uc kardesiyle (P-WRIST-COLLAPSE/P-FINGER-FLAT/P-TEMPO-DRIFT) ayni taslak sinifi. Farki: OLCUM ALETI VAR (omuz acisi pose'dan olculebilir) — eksik olan REFERANS ISTATISTIGI. Bu yuzden aspirational DEGIL, tamamen kaldirildi: omuz-yukselmesi onemliyse san referansi dogdugunda KENDI istatistigiyle geri girer (uydurma esikle degil)."
+  }
+ ]
 }
