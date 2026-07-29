@@ -261,7 +261,10 @@
       },
       "cooldownMs": 30000,
       "expertPending": true,
-      "_riskClass": "1_if_sustained"
+      "_riskClass": "1_if_sustained",
+      "suppressesJudgement": false,
+      "_coached_only": true,
+      "_why": "Sözleşme kural 3 (M-F-46): omuz dispersiyonu 15,8-16,0° > 14° çıtası → bu kod KOÇLANIR (kullanıcıya söylenir) ama PUANLANMAZ. Ölçüm, sezgimin aksine omuz-tabanlı skorlamaya yetki vermiyor."
     }
   ],
   "feedbackPolicy": {
@@ -288,5 +291,34 @@
     "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",
     "shoulder_rise_norm + head_chin_angle_deg: ship öncesi ≥1 gerçek-kare regresyonu (J-028)",
     "Gitar havuzu 1 fixture — minTakes=3 altında, B4 koşulamadı (hasat sürüyor)"
-  ]
+  ],
+  "referenceConsumption": {
+    "_contract": "motion-core docs/50-REFERANS-TUKETIM-SOZLESMESI.md (M-F-46)",
+    "_measured": "B4 pilotu, şan n=5 take",
+    "scoringBarDeg": 14.0,
+    "scored": [
+      "trunk_tilt_deg"
+    ],
+    "_scored_why": "Kural 1: skorlama yetkisi ANATOMİK SEZGİDEN değil ÖLÇÜMDEN gelir. Şanda ölçülen tek ≤14° eklem trunk_tilt (1,5°).",
+    "coached_only": [
+      "left_shoulder",
+      "right_shoulder",
+      "left_upper_arm",
+      "right_upper_arm",
+      "left_elbow",
+      "right_elbow",
+      "left_forearm",
+      "right_forearm"
+    ],
+    "_coached_why": "Kural 3: dispersiyonu çıtanın üstünde olan eklem GÖSTERİLİR ve SÖYLENİR ama PUANLANMAZ. Şanda omuzlar 15,8-16,0° — sezgiyle 'omuz gerginliği ölçeriz' derdim, ölçüm izin vermiyor.",
+    "userExplanation": "Experienced voice teachers disagree about these, so we point them out but do not grade them.",
+    "_explanation_why": "Kural 3: açıklamasız puan-yokluğu kullanıcıya 'sistem bozuk' okunur.",
+    "provisional": true,
+    "_provisional_why": "Kural 6: contributingTakes=5 (sınırda). Tolerans muhafazakâr yazıldı; havuz T2 ile büyüyünce yeniden hesaplanacak — bu bayrak o günü kendisi hatırlatıyor.",
+    "provisionalConstraints": [
+      "'ustalaştın' sınıfı hüküm YOK",
+      "tolerans muhafazakâr",
+      "taraf-bağımlı hüküm için ayna-marjı teyidi gerekir (kural 7)"
+    ]
+  }
 }

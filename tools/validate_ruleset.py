@@ -87,6 +87,30 @@ def check(doc, name):
                 if mid not in metrics:
                     p.append(f"{name}/{tid}/{fid}: quality'de tanımsız metrik {mid!r}")
 
+    # M-F-46 kural 1/3: skorlanan her metrik ölçülmüş dispersiyon çıtasının
+    # altında olmalı; üstündekiler coached_only listesinde YER ALMALI.
+    rc = doc.get("referenceConsumption")
+    if rc:
+        bar = rc.get("scoringBarDeg")
+        scored = set(rc.get("scored", []))
+        coached = set(rc.get("coached_only", []))
+        if bar is None:
+            p.append(f"{name}: referenceConsumption.scoringBarDeg eksik (M-F-46 k.1)")
+        if scored & coached:
+            p.append(f"{name}: bir metrik hem scored hem coached_only: {scored & coached}")
+        if coached and not rc.get("userExplanation"):
+            p.append(f"{name}: coached_only var ama userExplanation yok (M-F-46 k.3 — "
+                     f"açıklamasız puan-yokluğu 'sistem bozuk' okunur)")
+        if rc.get("provisional") and not rc.get("provisionalConstraints"):
+            p.append(f"{name}: provisional işaretli ama kısıtları yazılmamış (M-F-46 k.6)")
+        # quality eşiği yalnız SKORLANAN metriğe yazılabilir
+        for t in doc.get("techniques", []):
+            for f in t.get("phases", []):
+                for mid in (f.get("quality") or {}):
+                    if mid in coached:
+                        p.append(f"{name}/{t['id']}/{f['id']}: coached_only metriğe quality "
+                                 f"eşiği yazılamaz: {mid} (M-F-46 k.3)")
+
     for e in doc.get("errors", []):
         mid = (e.get("condition") or {}).get("metric")
         if mid and mid not in metrics:
@@ -116,6 +140,12 @@ challenge: mut for challenge, mut in [
             verdictGates=[{"onEvent":"onset","holdMs":100,"effect":"uydurma"}])),
         ("verdictGates alanı eksik", lambda d: d["techniques"][0].update(
             verdictGates=[{"effect":"discardWindow"}])),
+        ("coached_only metriğe quality eşiği", lambda d: (
+            d.update(referenceConsumption={"scoringBarDeg":14,"scored":[],
+                     "coached_only":["m"],"userExplanation":"x"}),
+            d["techniques"][0]["phases"][0].update(quality={"m":1}))),
+        ("coached_only açıklamasız", lambda d: d.update(
+            referenceConsumption={"scoringBarDeg":14,"scored":[],"coached_only":["m"]})),
     ]}
     ok = True
     # yanlış-pozitif testi: yorum alanında geçen yasak desen ihlal SAYILMAMALI
@@ -129,7 +159,7 @@ challenge: mut for challenge, mut in [
         d = copy.deepcopy(base); mut(d)
         if not check(d, "neg"):
             print(f"❌ SELF-TEST: '{label}' YAKALANMADI"); ok = False
-    print("✅ self-test: 11/11 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
+    print("✅ self-test: 13/13 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
     return 0 if ok else 1
 
 if __name__ == "__main__":
