@@ -16,8 +16,28 @@ import 'package:motion_core/motion_core.dart';
 /// cezalandırmak dürüstlük ihlali" kuralının sayısal hâli.
 void main(List<String> args) {
   final dir = Directory('${Platform.environment['HOME']}/motion-harvest/ostinato/landmarks');
-  final files = dir.listSync().whereType<File>().where((f) => f.path.endsWith('.json')).toList()
+  var files = dir.listSync().whereType<File>().where((f) => f.path.endsWith('.json')).toList()
     ..sort((a, b) => a.path.compareTo(b.path));
+
+  // M-F-41: havuz ÇALGI-BAŞINA bölünür. İlk pilot karışık havuzda koştu ve
+  // kol açıları 40-60° saçıldı — çünkü şan ayakta, piyano oturarak, gitar
+  // kucakta çalınır. O saçılma "eğitmenler anlaşamıyor" değil "farklı şeyler
+  // ölçüyoruz" demekti. Anlaşmazlık YAPISAL nedenliyse havuz bölünür,
+  // tolerans uydurulmaz.
+  final instFile = File('${Directory.current.path}/../../config/fixture-instrument-map.json');
+  final instMap = instFile.existsSync()
+      ? (jsonDecode(instFile.readAsStringSync()) as Map<String, dynamic>)
+          .map((k, v) => MapEntry(k, v as String))
+      : <String, String>{};
+  final want = args.isEmpty ? null : args.first;
+  if (want != null) {
+    files = files
+        .where((f) => instMap[f.uri.pathSegments.last.split('.').first] == want)
+        .toList();
+    stdout.writeln('ÇALGI: $want');
+  } else {
+    stdout.writeln('ÇALGI: (karışık havuz — yalnız karşılaştırma için)');
+  }
   if (files.length < 3) {
     stderr.writeln('en az 3 fixture gerekir, ${files.length} var');
     exit(1);
