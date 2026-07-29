@@ -122,6 +122,10 @@ void main(List<String> args) {
   }
 
   const builder = ReferenceBuilder();
+  // Aynalama çözümünü AYRI çağırıyoruz: runnerUpGap yalnız MirrorResolution'da
+  // (CanonicalReference kararı taşıyor, marjı değil). Kural 7'yi uygulamak için
+  // marj lazım — kararın kendisi yetmiyor.
+  final mirror = builder.resolveMirroring(takes);
   final ref = builder.build(takes);
 
   stdout.writeln('\n=== Eğitmenler arası dağılım (= toleransın kaynağı) ===');
@@ -141,13 +145,19 @@ void main(List<String> args) {
   // aynalar; yanlış çözülen bir take, sol/sağ metriklerini ŞİŞİRİR. Gitarın
   // 4 katlık sol/sağ asimetrisi (left_forearm 80° vs right 18°) kısmen bunun
   // artefaktı olabilir — ölçmeden bilinmez.
-  stdout.writeln('\n=== Aynalama çözümü (M-F-48) ===');
-  stdout.writeln('  aynalanmış take: ${ref.mirroredTakeIds.length}/${takes.length}'
-      '${ref.mirroredTakeIds.isEmpty ? "" : "  → ${ref.mirroredTakeIds.join(", ")}"}');
-  if (ref.mirroredTakeIds.length > takes.length / 2) {
-    stdout.writeln('  ⚠️ take\'lerin yarısından fazlası çevrildi — medoid ters '
-        'seçilmiş olabilir; sol/sağ metrikleri şüpheli.');
-  }
+  stdout.writeln('\n=== Aynalama çözümü (M-F-48 / kural 7) ===');
+  stdout.writeln('  aynalanmış take : ${ref.mirroredTakeIds.length}/${takes.length}');
+  stdout.writeln('  mirrorConfident : ${ref.mirrorConfident} (resolution: ${mirror.confident})');
+  stdout.writeln('  runnerUpGap     : ${mirror.runnerUpGap.toStringAsFixed(5)}');
+  stdout.writeln('  dışlanan (M-F-47): ${ref.excludedOutlierIds.isEmpty ? "yok" : ref.excludedOutlierIds.join(", ")}');
+  stdout.writeln('  prior çelişkisi : ${ref.priorDisagreements.isEmpty ? "yok (prior verilmedi)" : ref.priorDisagreements.join(", ")}');
+  // Kural 7'nin kapısı: taraf-bağımlı hüküm ancak çözüm KESİN ise verilir.
+  // Simetrik bir etkinlikte (şan duruşu) çevirmenin maliyeti neredeyse sıfırdır,
+  // yani "en iyi" atama gürültüyle belirlenir — bu belirsizliği ölçmeden
+  // sol/sağ farkına anlam yüklemek, artefaktı bulgu sanmaktır.
+  stdout.writeln(ref.mirrorConfident
+      ? '  → taraf-bağımlı metrikler DEĞERLENDİRİLEBİLİR (çözüm kesin)'
+      : '  → ⚠️ taraf-bağımlı metrikler TUTULUR (kural 7: çözüm kesin değil)');
 
   final unreliable = ref.unreliableJoints();
   stdout.writeln('\nGÜVENİLMEZ eklemler (sapma >35°): '
