@@ -297,32 +297,22 @@
   {
    "code": "G-THUMB-OVER-NECK",
    "evaluateAt": "PLAY",
-   "condition": {
-    "kind": "metric",
-    "metric": "level_above_room_floor_db",
-    "op": "gt",
-    "value": 15
-   },
-   "cooldownMs": 30000,
-   "expertPending": true,
+   "status": "aspirational",
+   "blockedByTool": "hand-landmarks",
+   "_why": "Basparmagin sap uzerindeki konumu EL landmark'i ister; pose modelinde parmak YOK. Alet gelmeden kosul yazilamaz.",
    "_observable": "camera",
    "_sources": "4 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_removedCondition": "M-F-125/M-O-53: kosul `level_above_room_floor_db > 15` idi — yani SES YUKSEKLIGINDE atesleyen bir taslak. Koordinator hukmu: REMAP DEGIL SIL (yanlis atesleyen taslak, yokluktan kotudur). Dogru eslemenin kendisi yok, cunku olcum ALETI yok — eksik aletin adi `blockedByTool`da."
   },
   {
    "code": "G-WRIST-BENT",
    "evaluateAt": "PLAY",
-   "condition": {
-    "kind": "metric",
-    "metric": "level_above_room_floor_db",
-    "op": "gt",
-    "value": 15
-   },
-   "cooldownMs": 30000,
-   "expertPending": true,
+   "status": "aspirational",
+   "blockedByTool": "hand-landmarks",
+   "_why": "Bilek acisi el landmark'i ister (bilek-el hizasi); pose modeli bilegi tek nokta olarak verir, el duzlemi yok.",
    "_observable": "camera",
    "_sources": "4 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_removedCondition": "M-F-125/M-O-53: kosul `level_above_room_floor_db > 15` idi — yani SES YUKSEKLIGINDE atesleyen bir taslak. Koordinator hukmu: REMAP DEGIL SIL (yanlis atesleyen taslak, yokluktan kotudur). Dogru eslemenin kendisi yok, cunku olcum ALETI yok — eksik aletin adi `blockedByTool`da."
   },
   {
    "code": "G-POST-SLOUCH",
@@ -342,32 +332,22 @@
   {
    "code": "G-TEMPO-DRIFT",
    "evaluateAt": "PLAY",
-   "condition": {
-    "kind": "metric",
-    "metric": "level_above_room_floor_db",
-    "op": "gt",
-    "value": 15
-   },
-   "cooldownMs": 30000,
-   "expertPending": true,
+   "status": "aspirational",
+   "blockedByTool": "rhythm-grid",
+   "_why": "Tempo kaymasi ritim-izgarasi ister (RhythmEngine onset->beat-grid API'si henuz bitmedi). Onset var, izgara yok.",
    "_observable": "audio",
    "_sources": "4 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_removedCondition": "M-F-125/M-O-53: kosul `level_above_room_floor_db > 15` idi — yani SES YUKSEKLIGINDE atesleyen bir taslak. Koordinator hukmu: REMAP DEGIL SIL (yanlis atesleyen taslak, yokluktan kotudur). Dogru eslemenin kendisi yok, cunku olcum ALETI yok — eksik aletin adi `blockedByTool`da."
   },
   {
    "code": "G-FINGER-PLACEMENT-BUZZ",
    "evaluateAt": "PLAY",
-   "condition": {
-    "kind": "metric",
-    "metric": "level_above_room_floor_db",
-    "op": "gt",
-    "value": 15
-   },
-   "cooldownMs": 30000,
-   "expertPending": true,
+   "status": "aspirational",
+   "blockedByTool": "buzz-DSP",
+   "_why": "Tel vizlamasi ses-imzasi DSP'si ister; bu olcum HIC yapilmadi (ne fixture ne motor).",
    "_observable": "audio",
    "_sources": "6 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_removedCondition": "M-F-125/M-O-53: kosul `level_above_room_floor_db > 15` idi — yani SES YUKSEKLIGINDE atesleyen bir taslak. Koordinator hukmu: REMAP DEGIL SIL (yanlis atesleyen taslak, yokluktan kotudur). Dogru eslemenin kendisi yok, cunku olcum ALETI yok — eksik aletin adi `blockedByTool`da."
   }
  ],
  "feedbackPolicy": {

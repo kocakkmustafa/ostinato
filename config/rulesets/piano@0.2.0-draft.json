@@ -290,32 +290,22 @@
   {
    "code": "P-WRIST-COLLAPSE",
    "evaluateAt": "PLAY",
-   "condition": {
-    "kind": "metric",
-    "metric": "level_above_room_floor_db",
-    "op": "gt",
-    "value": 15
-   },
-   "cooldownMs": 30000,
-   "expertPending": true,
+   "status": "aspirational",
+   "blockedByTool": "hand-landmarks",
+   "_why": "Bilek cokmesi el landmark'i ister (bilek-el duzlemi); pose modeli bilegi TEK NOKTA verir.",
    "_observable": "camera",
    "_sources": "4 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu."
   },
   {
    "code": "P-FINGER-FLAT",
    "evaluateAt": "PLAY",
-   "condition": {
-    "kind": "metric",
-    "metric": "level_above_room_floor_db",
-    "op": "gt",
-    "value": 15
-   },
-   "cooldownMs": 30000,
-   "expertPending": true,
+   "status": "aspirational",
+   "blockedByTool": "hand-landmarks",
+   "_why": "Duz parmak parmak landmark'i ister; pose modelinde parmak YOK.",
    "_observable": "camera",
    "_sources": "5 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu."
   },
   {
    "code": "P-POST-SHOULDER-TENSION",
@@ -350,17 +340,12 @@
   {
    "code": "P-TEMPO-DRIFT",
    "evaluateAt": "PLAY",
-   "condition": {
-    "kind": "metric",
-    "metric": "level_above_room_floor_db",
-    "op": "gt",
-    "value": 15
-   },
-   "cooldownMs": 30000,
-   "expertPending": true,
+   "status": "aspirational",
+   "blockedByTool": "rhythm-grid",
+   "_why": "Tempo kaymasi ritim-izgarasi ister (RhythmEngine onset->beat-grid API'si bitmedi).",
    "_observable": "audio",
    "_sources": "4 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu."
   }
  ],
  "feedbackPolicy": {

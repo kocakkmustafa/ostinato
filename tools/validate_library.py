@@ -30,6 +30,15 @@ def error_metric_map(ruleset_path):
             for e in cfg.get("errors", [])}
 
 
+def error_flags(ruleset_path):
+    """Hata kodu -> (expertPending, status). M-F-125 okuyucu-(i)nin dayanağı."""
+    if not Path(ruleset_path).exists():
+        return {}
+    cfg = load(ruleset_path)
+    return {e["code"]: (bool(e.get("expertPending")), e.get("status"))
+            for e in cfg.get("errors", [])}
+
+
 def scored_metrics(ruleset_path):
     if not Path(ruleset_path).exists():
         return set()
@@ -59,6 +68,7 @@ def main():
         rs_path = f"config/rulesets/{d['rulesetId']}@0.2.0-draft.json"
         techs = technique_ids(rs_path)
         err_metric = error_metric_map(rs_path)
+        err_flags = error_flags(rs_path)
         scored = scored_metrics(rs_path)
 
         for c in d.get("courses", []):
@@ -96,6 +106,22 @@ def main():
                         if code not in err_metric:
                             violations.append(
                                 f"{lid}: var olmayan hata koduna atıf: '{code}'")
+                        # M-F-125 okuyucu-(i): `expertPending` artık KAPI.
+                        # Uzman onayı beklenen bir kod AÇIK derste anılamaz —
+                        # metrik ölçülebilir olsa bile EŞİĞİ uzman-doğrulamalı
+                        # değildir; "sırtın eğik" demek, hak etmediğimiz bir
+                        # hükümdür. Ders KAPANMAZ (postür ölçümü ATTESTED,
+                        # referansa göre skorlanır) — yalnız doğrulanmamış
+                        # hata kodunu REKLAM ETMEZ.
+                        elif err_flags.get(code, (False, None))[0]:
+                            violations.append(
+                                f"{lid}: AÇIK ders '{code}' kodunu anıyor ama o kod "
+                                f"expertPending — uzman-doğrulanmamış eşik canlı "
+                                f"yüzeye çıkamaz (M-F-125)")
+                        elif err_flags.get(code, (False, None))[1] == "aspirational":
+                            violations.append(
+                                f"{lid}: AÇIK ders '{code}' kodunu anıyor ama o kod "
+                                f"aspirational (ölçüm aleti yok)")
                         elif err_metric[code] not in scored:
                             violations.append(
                                 f"{lid}: AÇIK ders '{code}' hata kodunu öne "

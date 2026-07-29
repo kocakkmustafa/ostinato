@@ -1,0 +1,116 @@
+{
+ "$why": "ÜRETİLEN envanter — elle düzenleme, `tools/gen_expert_inventory.py` koş. Kaynak: config/rulesets/*.json bayrakları (M-F-125 okuyucu-ii).",
+ "expertPending": [
+  {
+   "module": "guitar",
+   "code": "G-POST-SLOUCH",
+   "evaluateAt": "PLAY",
+   "observable": "camera",
+   "sources": "5 bağımsız kanal",
+   "threshold": "trunk_tilt gt 15",
+   "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
+  },
+  {
+   "module": "piano",
+   "code": "P-POST-SHOULDER-TENSION",
+   "evaluateAt": "PLAY",
+   "observable": "camera",
+   "sources": "5 bağımsız kanal",
+   "threshold": "trunk_tilt gt 15",
+   "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
+  },
+  {
+   "module": "piano",
+   "code": "P-ELBOW-ANGLE",
+   "evaluateAt": "PLAY",
+   "observable": "camera",
+   "sources": "4 bağımsız kanal",
+   "threshold": "level_above_room_floor_db gt 15",
+   "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
+  },
+  {
+   "module": "voice",
+   "code": "V-PITCH-DRIFT",
+   "evaluateAt": "SUSTAIN",
+   "observable": null,
+   "sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json",
+   "threshold": "pitch_deviation_cents gt 25",
+   "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
+  },
+  {
+   "module": "voice",
+   "code": "V-POST-SHOULDER-RISE",
+   "evaluateAt": "ANY",
+   "observable": null,
+   "sources": null,
+   "threshold": "right_shoulder gt 0.1",
+   "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
+  }
+ ],
+ "aspirational_engineeringDebt_notForExpert": [
+  {
+   "module": "guitar",
+   "code": "G-THUMB-OVER-NECK",
+   "evaluateAt": "PLAY",
+   "observable": "camera",
+   "sources": "4 bağımsız kanal",
+   "blockedByTool": "hand-landmarks",
+   "why": "Basparmagin sap uzerindeki konumu EL landmark'i ister; pose modelinde parmak YOK. Alet gelmeden kosul yazilamaz."
+  },
+  {
+   "module": "guitar",
+   "code": "G-WRIST-BENT",
+   "evaluateAt": "PLAY",
+   "observable": "camera",
+   "sources": "4 bağımsız kanal",
+   "blockedByTool": "hand-landmarks",
+   "why": "Bilek acisi el landmark'i ister (bilek-el hizasi); pose modeli bilegi tek nokta olarak verir, el duzlemi yok."
+  },
+  {
+   "module": "guitar",
+   "code": "G-TEMPO-DRIFT",
+   "evaluateAt": "PLAY",
+   "observable": "audio",
+   "sources": "4 bağımsız kanal",
+   "blockedByTool": "rhythm-grid",
+   "why": "Tempo kaymasi ritim-izgarasi ister (RhythmEngine onset->beat-grid API'si henuz bitmedi). Onset var, izgara yok."
+  },
+  {
+   "module": "guitar",
+   "code": "G-FINGER-PLACEMENT-BUZZ",
+   "evaluateAt": "PLAY",
+   "observable": "audio",
+   "sources": "6 bağımsız kanal",
+   "blockedByTool": "buzz-DSP",
+   "why": "Tel vizlamasi ses-imzasi DSP'si ister; bu olcum HIC yapilmadi (ne fixture ne motor)."
+  },
+  {
+   "module": "piano",
+   "code": "P-WRIST-COLLAPSE",
+   "evaluateAt": "PLAY",
+   "observable": "camera",
+   "sources": "4 bağımsız kanal",
+   "blockedByTool": "hand-landmarks",
+   "why": "Bilek cokmesi el landmark'i ister (bilek-el duzlemi); pose modeli bilegi TEK NOKTA verir."
+  },
+  {
+   "module": "piano",
+   "code": "P-FINGER-FLAT",
+   "evaluateAt": "PLAY",
+   "observable": "camera",
+   "sources": "5 bağımsız kanal",
+   "blockedByTool": "hand-landmarks",
+   "why": "Duz parmak parmak landmark'i ister; pose modelinde parmak YOK."
+  },
+  {
+   "module": "piano",
+   "code": "P-TEMPO-DRIFT",
+   "evaluateAt": "PLAY",
+   "observable": "audio",
+   "sources": "4 bağımsız kanal",
+   "blockedByTool": "rhythm-grid",
+   "why": "Tempo kaymasi ritim-izgarasi ister (RhythmEngine onset->beat-grid API'si bitmedi)."
+  }
+ ],
+ "settledCount": 0
+}

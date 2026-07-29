@@ -54,22 +54,18 @@
        "displayName": "Sitting posture",
        "techniques": [],
        "focus": "posture",
-       "errorFocus": [
-        "G-POST-SLOUCH"
-       ],
        "minutes": 5,
-       "_why_unlocked": "trunk_tilt referansi ATTESTED (3 bagimsiz egitmen, M-O-47) ve tuketicisi CANLI oldugu kanitlandi (M-O-48) — bu ders yalniz o olcumu kullanir, chord_correctness'a bagli DEGIL."
+       "_why_unlocked": "trunk_tilt referansi ATTESTED (3 bagimsiz egitmen, M-O-47) ve tuketicisi CANLI oldugu kanitlandi (M-O-48) — bu ders yalniz o olcumu kullanir, chord_correctness'a bagli DEGIL.",
+       "_why_no_errorFocus": "M-F-125: bu ders G-POST-SLOUCH kodunu ANMIYOR cunku o kod expertPending — 15 derecelik slouch esigi uzman-dogrulamali DEGIL. Ders yine de ACIK ve postur SKORLANIYOR: skorlama ATTESTED referansa ve scoringBarDeg=22'ye dayaniyor (M-O-47/48), dogrulanmamis bir hata esigine degil. Fark: olctugumuz seyi soyluyoruz, hak etmedigimiz hukmu reklam etmiyoruz."
       },
       {
        "id": "guitar.foundations.posture_under_play",
        "displayName": "Staying upright while you play",
        "techniques": [],
        "focus": "posture",
-       "errorFocus": [
-        "G-POST-SLOUCH"
-       ],
        "minutes": 7,
-       "_why_unlocked": "Ikinci olcum DEGIL, AYNI olculerin farkli ani: PLAY fazina giris ses SEVIYESINE bagli (level_above_room_floor_db >= 6, AF-003 ile kanitli) ve slouch hatasi trunk_tilt'e bagli (ATTESTED). Ikisi de gercek; akor TANIMASI GEREKMIYOR — ne calindigi degil, calarken durusun bozulup bozulmadigi sorusu. Uctan-uca senaryoda bu zincir zaten kosuldu (M-O-52: POSTURE_CHECK 116/116 -> PLAY 115/115)."
+       "_why_unlocked": "Ikinci olcum DEGIL, AYNI olculerin farkli ani: PLAY fazina giris ses SEVIYESINE bagli (level_above_room_floor_db >= 6, AF-003 ile kanitli) ve slouch hatasi trunk_tilt'e bagli (ATTESTED). Ikisi de gercek; akor TANIMASI GEREKMIYOR — ne calindigi degil, calarken durusun bozulup bozulmadigi sorusu. Uctan-uca senaryoda bu zincir zaten kosuldu (M-O-52: POSTURE_CHECK 116/116 -> PLAY 115/115).",
+       "_why_no_errorFocus": "M-F-125: bu ders G-POST-SLOUCH kodunu ANMIYOR cunku o kod expertPending — 15 derecelik slouch esigi uzman-dogrulamali DEGIL. Ders yine de ACIK ve postur SKORLANIYOR: skorlama ATTESTED referansa ve scoringBarDeg=22'ye dayaniyor (M-O-47/48), dogrulanmamis bir hata esigine degil. Fark: olctugumuz seyi soyluyoruz, hak etmedigimiz hukmu reklam etmiyoruz."
       },
       {
        "id": "guitar.foundations.holding_the_guitar",

@@ -153,6 +153,25 @@ def check(doc, name):
         mid = (e.get("condition") or {}).get("metric")
         if mid and mid not in metrics:
             p.append(f"{name}/{e.get('code')}: tanımsız metrik {mid!r}")
+        # M-F-125/M-O-53: `aspirational` = ölçüm ALETİ yok. Böyle bir kodun
+        # KOŞULU OLAMAZ — koşul yazmak, olmayan bir ölçümü varmış gibi
+        # gösterir ve (ölçtüğümüz gibi) yanlış metriğe bağlanıp yanlış
+        # ateşler. Eksik aletin ADI zorunlu: "yakında" demek yetmez, NEYİN
+        # eksik olduğu isimle yazılır (uzman-turu envanteri bundan üretilir).
+        if e.get("status") == "aspirational":
+            if e.get("condition"):
+                p.append(f"{name}/{e.get('code')}: status=aspirational ama koşul TAŞIYOR — "
+                         f"aleti olmayan ölçüm koşula bağlanamaz (M-O-53)")
+            if not e.get("blockedByTool"):
+                p.append(f"{name}/{e.get('code')}: status=aspirational ama blockedByTool yok — "
+                         f"eksik ALETİN adı zorunlu (envanter bundan üretilir)")
+        # NOT: `expertPending ⇒ canlı yüzeye bağlanamaz` (M-F-125 okuyucu-i)
+        # kasten BURADA DEĞİL, `validate_library.py` kural 7'de. Sebep
+        # ölçüldü: burada "skorlanan metriğe bağlanamaz" diye uygularsam
+        # kural 7 ("açık ders YALNIZ skorlanan metriğe bağlı kodu anabilir")
+        # ile ÇAKIŞIR ve hiçbir kod hiçbir açık derste anılamaz hâle gelir.
+        # Ayrım: METRİK bağı ölçülebilirlik sorusu (buranın işi), YÜZEY bağı
+        # "kullanıcıya hüküm olarak ulaşıyor mu" sorusu (kütüphanenin işi).
     return p
 
 def self_test():
@@ -193,6 +212,12 @@ challenge: mut for challenge, mut in [
         ("sarkan referenceConsumption atfı", lambda d: d.update(
             referenceConsumption={"scoringBarDeg":14,"scored":["yok_boyle_metrik"],
                                   "coached_only":[],"userExplanation":"x"})),
+        ("aspirational ama koşul taşıyor (M-O-53)", lambda d: d.update(
+            errors=[{"code": "X-1", "evaluateAt": "A", "status": "aspirational",
+                     "blockedByTool": "hand-landmarks",
+                     "condition": {"kind": "metric", "metric": "m"}}])),
+        ("aspirational ama eksik alet isimsiz (M-O-53)", lambda d: d.update(
+            errors=[{"code": "X-2", "evaluateAt": "A", "status": "aspirational"}])),
         ("yabancı metrik (alan kayması)", lambda d: (
             d.update(module="guitar"), d["metrics"].update(vibrato_rate_hz={"unit":"Hz",
             "range":[0,12],"noiseBand":0.5,"baseline":0}))),
