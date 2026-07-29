@@ -63,10 +63,10 @@
     -180,
     180
    ],
-   "noiseBand": 2,
+   "noiseBand": 8,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 4.5° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (kanonik ReferenceCli, motion_core-v0.8.4, hold-window+scope=upperBody, 3 bağımsız eğitmen): medyan dispersiyon yalnız 0.54° — floor-bound (`perJointSource: floor`), yani gerçek eğitmen-varyansı ölçüm gürültü tabanının (8°) ALTINDA; bant floor değerine sabitlendi, ham 0.54°'yi kullanmak sahte-hassasiyet olurdu. İLK ÇALGI REFERANSI (M-F-98).",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "left_shoulder": {
@@ -75,10 +75,10 @@
     -180,
     180
    ],
-   "noiseBand": 4,
+   "noiseBand": 8,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 9.7° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (aynı referans): medyan 5.4° — floor-bound, bant floor değeri (8°).",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "right_shoulder": {
@@ -87,10 +87,10 @@
     -180,
     180
    ],
-   "noiseBand": 6,
+   "noiseBand": 8,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 16.2° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (aynı referans): medyan 20.9° — variance-bound. Bant ~%40'ı. coached_only (bkz. referenceConsumption): gösterilir, puanlanmaz.",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "left_upper_arm": {
@@ -99,10 +99,10 @@
     -180,
     180
    ],
-   "noiseBand": 4,
+   "noiseBand": 8,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 9.9° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (aynı referans): medyan 5.9° — floor-bound, bant floor değeri (8°). coached_only.",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "right_upper_arm": {
@@ -111,10 +111,10 @@
     -180,
     180
    ],
-   "noiseBand": 7,
+   "noiseBand": 8,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 18.2° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (aynı referans): medyan 21.1° — variance-bound. Bant ~%40'ı. coached_only.",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "left_elbow": {
@@ -123,10 +123,10 @@
     -180,
     180
    ],
-   "noiseBand": 16,
+   "noiseBand": 20,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 40.0° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (aynı referans): medyan 49.5° — variance-bound, `unreliableJoints`te (>35°). Bant ~%40'ı. coached_only; mirror-belirsizliği notu referenceConsumption'da.",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "right_elbow": {
@@ -135,10 +135,10 @@
     -180,
     180
    ],
-   "noiseBand": 6,
+   "noiseBand": 5,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 14.8° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (aynı referans): medyan 12.1° — variance-bound. Bant ~%40'ı. coached_only.",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "left_forearm": {
@@ -150,7 +150,7 @@
    "noiseBand": 25,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 63.5° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (aynı referans): medyan 62.4° — variance-bound, `unreliableJoints`te (>35°). Bant ~%40'ı. coached_only; mirror-belirsizliği notu referenceConsumption'da.",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "right_forearm": {
@@ -162,7 +162,7 @@
    "noiseBand": 4,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 10.9° (B4 pilotu). Bant bunun ~%40'ı.",
+   "_noiseBand_why": "ÖLÇÜLDÜ (aynı referans): medyan 8.9° — variance-bound. Bant ~%40'ı. coached_only.",
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
   },
   "setup_complete": {
@@ -220,8 +220,9 @@
      "quality": {
       "trunk_tilt": {
        "op": "lte",
-       "value": 5,
-       "expertPending": true
+       "value": 8,
+       "expertPending": true,
+       "_why": "M-F-98: eski 5° değeri artık ölçülen noiseBand'ın (8°, floor-bound — bkz. metrics.trunk_tilt) ALTINDAYDI, yani ölçüm gürültüsünden ince bir çizgi çekmeye çalışıyordu. 8'e hizalandı; expertPending kalıyor (movement-science turu henüz yok, yalnız istatistiksel taban)."
       }
      },
      "exit": {
@@ -391,72 +392,67 @@
  "_openItems": [
   "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",
   "shoulder_rise_norm + head_chin_angle_deg: ship öncesi ≥1 gerçek-kare regresyonu (J-028)",
-  "Gitar havuzu 1 fixture — minTakes=3 altında, B4 koşulamadı (hasat sürüyor)"
+  "Kol-zinciri metrikleri coached_only'de kilitli kalıyor — havuz büyüyüp mirrorConfident:true olursa yeniden değerlendirilir (M-O-12)"
  ],
  "referenceConsumption": {
   "_contract": "motion-core docs/50-REFERANS-TUKETIM-SOZLESMESI.md (M-F-46)",
-  "_measured": "B4 pilotu, motion_core-v0.5.0. guitar 15 take → M-F-47 kapısı 7 dışladı → küme 8.",
-  "scoringBarDeg": 14.0,
+  "_measured": "AİLENİN İLK ÇALGI REFERANSI (M-F-98, M-O-45/46 yanıtı). Kanonik `ReferenceCli.buildArtifact`, motion_core-v0.8.4 (J-056 görünürlük-kapısı sonrası) — pilot kopyası DEĞİL. Take'ler `hold_isolator@57b3ccd` (scope=upperBody, enerji+drift+görünürlük hepsi üst-vücut landmark setine daraltılmış) ile TAM VİDEODAN kesilmiş 3-9sn'lik statik-tutuş pencereleri; tam-video ölçümü (M-O-40/45) sulanma yüzünden atılmıştı. 3 bağımsız eğitmen (Andrew Keeping · Marty Music · David Chiriboga Music), üçü de kanonik güven-kapısından %100 (231/231, 181/181, 132/132 kare) geçti. Artefakt: `config/references/guitar-posture-setup.v1.json`.",
+  "scoringBarDeg": 22.0,
+  "_scoringBarDegWhy": "clusterToleranceDeg=22 — M-F-51 stance emsalinin oranı: ölçülen max take-medyanı 18,1° (0.8.4/J-056-sonrası) + ~%20, stil-ağır statik sınıf gerekçesiyle (M-F-98). Bu kaba 'aynı poz mu' kapısı; asıl yetki eklem-düzeyinde (aşağıda).",
   "scored": [
    "trunk_tilt"
   ],
-  "_scored_why": "Yalnız taraf-BAĞIMSIZ metrik puanlanır (trunk_tilt). Taraf-bağımlı metrikler coached_only: aynalama çözümü KESİN DEĞİL — ölçülen runnerUpGap 0.00466 < marj 0.020 (kural 7, M-F-46). Bu artık ÖLÇÜM: 0.7.1 öncesi çekirdek n>12'de gap'i uyduruyordu (sabit 0.04 = mirrorMargin×2) ve o kurgu değer bu çalgıda gerçeğin 9 KATIYDI — yani yalnız 'ölçülmemiş' değil, izin veren yönde çarpıtılmıştı. 0.7.1 tükenmeli arama sınırını 18'e çıkarıp gerçek farkı ölçtü (M-O-25 kapandı); sonuç: üç çalgıda da eşiğin altında → taraf-bağımlı metrikler TUTULUYOR. Simetrik duruşta çevirmenin maliyeti neredeyse sıfır olduğundan 'en iyi' atama gürültüyle belirleniyor; sol/sağ farkına anlam yüklemek artefaktı bulgu sanmak olurdu.",
+  "_scored_why": "M-F-98 (M-O-46 eklem-başına sapma tablosu yanıtı): postür referansının skorladığı gövde duruşudur. `trunk_tilt` medyan dispersiyon 0,54° — 3 bağımsız eğitmenin NEREDEYSE MÜKEMMEL uzlaşısı (floor-bound, 8° tabanın altında) — VE taraf-bağımsız (mirrorConfident=false/kural-7 çekincesi bu eklemi HİÇ etkilemiyor, temiz). Kol zinciri (8/9 eklem) 5-21° ile 62°'ye varan sapma taşıyor: çalgıyı TUTUYOR — işlevsel/stil, postür DEĞİL. B4'ün 'çalgı-bağımsız kol referansı reddi' bulgusuyla birebir tutarlı: çalgı-İÇİ veride bile kollar anlaşmıyor.",
   "coached_only": [
+   "left_shoulder",
    "right_shoulder",
+   "left_upper_arm",
    "right_upper_arm",
    "left_elbow",
    "right_elbow",
    "left_forearm",
-   "left_shoulder",
-   "left_upper_arm",
    "right_forearm"
   ],
-  "_coached_why": "Kural 3: çıta üstü (right_shoulder, right_upper_arm, left_elbow, right_elbow, left_forearm) + kural 7 nedeniyle tutulan (—). Gösterilir, söylenir, PUANLANMAZ.",
-  "userExplanation": "Experienced guitar teachers disagree about these, so we point them out but do not grade them.",
+  "_coached_why": "Kural 3: kol-zinciri işlevsel (çalgıyı tutma stili), postür-referans malzemesi DEĞİL — eklem-yetkisi ürün-skorlama ilgisine göre çizildi, eklem SAYISINA göre değil (8/9 eklem coached_only olsa da tek 'anatomik sınıf'). Gösterilir, söylenir, PUANLANMAZ.",
+  "mirrorAmbiguityNote": "mirrorConfident=false (gapMeasured=true — ölçülü ama kesin değil, kural 7). Sol-taraf kol sayıları (left_elbow 49,5° · left_forearm 62,4°, `unreliableJoints`te) sağdan (right_elbow 12,1° · right_forearm 8,9°) 4-7× büyük — bu asimetri KISMEN aynalama belirsizliğinin artefaktı olabilir. coached_only olduğu için kullanıcıya puan vermiyor, ama gösterim/koçlamada taraf-bazlı DEĞİL, birleşik-kol (sol+sağ) okuması önerilir.",
+  "userExplanation": "Experienced guitar teachers disagree about arm position while sitting — how you hold the instrument varies by style. We show you the reference posture, but only grade your trunk alignment.",
   "_explanation_why": "Kural 3: açıklamasız puan-yokluğu kullanıcıya 'sistem bozuk' okunur.",
   "provisional": false,
-  "_provisional_why": "KALDIRILDI: n=18 ≥ 5 (kural 6 eşiği). Önceki n=5'te işaretliydi. Not: provisional kalkması toleransların nihai olduğu anlamına gelmez — M-O-12 gereği havuz büyüdükçe yeniden ölçülür; nitekim kollar bu turda DAHA DA kötüleşti.",
+  "_provisional_why": "Artefakt ATTESTED (measurementProvenance) — 3/3 take `referenceEligible:true`, unattested admisyonu yok. Not: küçük örneklem — TAM minTakes/minSources eşiğinde (3/3), fazla marj yok; havuz büyüdükçe yeniden ölçülecek (M-O-12 dersi, kollar bile büyüdükçe kötüleşebilir tarihçesi var).",
   "sideDependencyResolved": {
-   "mirrorConfident": true,
-   "runnerUpGap": 0.04,
-   "mirrorMargin": 0.02,
-   "flippedTakes": "1/15"
+   "mirrorConfident": false,
+   "gapMeasured": true,
+   "flippedTakes": "0/3",
+   "_why": "Kural 7: çözüm KESİN DEĞİL (ölçülü, uydurma değil) — taraf-bağımlı hiçbir metrik zaten skorlanmıyor, bu alan yalnız şeffaflık için."
   },
   "agreementGateCaveat": {
-   "excludedTakes": 7,
-   "totalTakes": 15,
-   "exclusionRate": 0.47,
-   "excludedIds": [
-    "4EVT2VNMcpA",
-    "7_U1aETkbgQ",
-    "8xFzcSieBXY",
-    "NCV9IgeSYuU",
-    "NfC0R-KWhwQ",
-    "ayqO1Yyemxs",
-    "jZuRb4fnBoA"
-   ],
-   "_why": "M-F-52: dışlama oranı SAĞLIK METRİĞİ. Bu sayılar 'eğitmenler hemfikir' değil 'hemfikir olan alt-küme hemfikir' demek."
+   "excludedTakes": 0,
+   "totalTakes": 3,
+   "exclusionRate": 0.0,
+   "excludedIds": [],
+   "_why": "clusterToleranceDeg=22 ile 3/3 take kümeye girdi (M-F-47 kapısı GEÇİLDİ — önceki 14° denemesinde 8xFzcSieBXY/v3nfqNOBAPc dışarıda kalmıştı, M-O-45)."
   },
   "measuredDispersionDeg": {
-   "trunk_tilt": 4.5,
-   "left_shoulder": 9.7,
-   "right_shoulder": 16.2,
-   "left_upper_arm": 9.9,
-   "right_upper_arm": 18.2,
-   "left_elbow": 40.0,
-   "right_elbow": 14.8,
-   "left_forearm": 63.5,
-   "right_forearm": 10.9
+   "trunk_tilt": 0.54,
+   "left_shoulder": 5.43,
+   "right_shoulder": 20.94,
+   "left_upper_arm": 5.85,
+   "right_upper_arm": 21.13,
+   "left_elbow": 49.49,
+   "right_elbow": 12.05,
+   "left_forearm": 62.41,
+   "right_forearm": 8.9
   },
-  "_mirrorGapProvenance": "MEASURED (motion_core 0.7.1, gapMeasured:true) — runnerUpGap 0.00466",
+  "_measuredDispersionDegWhy": "Kanonik CLI artefaktının `frames.dispersionRad` medyanı (deg'e çevrilmiş), M-O-46'nın eklem-başına-sapma tablosuyla (build() hatasıyla birebir doğrulanmış) tutarlı.",
+  "_mirrorGapProvenance": "MEASURED (motion_core 0.8.4, gapMeasured:true) — sayısal gap artefaktta yok (yalnız confident/gapMeasured bool'ları), M-F-46 şeffaflık alanı",
   "_qualityRemoved": "Tutulan metriklerin quality eşikleri kaldırıldı (M-F-46 k.3: coached_only metrik kapı olamaz). Metrikler ÖLÇÜLMEYE devam eder, hüküm/kapı üretmez — 'göster ama puanlama' ayrımı.",
   "_measurementProvenance": {
-   "status": "PROVISIONAL — referans-dışı kaynak",
-   "eligibleSources": 0,
-   "totalSources": 15,
-   "why": "M-F-43 kaynak-uygunluk kapısı (O-022): bu config'in dağılım/tolerans sayıları 15 kaynaktan hesaplandı ama yalnız 0'i `referenceEligible`. Sebep zinciri: hasadı --no-transcribe koşturdum → sınıflandırıcı kararını kaynağın ANLATISINDAN verir (rom_mode.py) → elinde yalnız başlık/açıklama kaldı → fail-closed gereği neredeyse hepsi `unknown`. Ayrıca B4 pilotu bu bayrağı HİÇ OKUMUYORDU: hasat hattı 'bu kaynak referansa giremez' diyordu, pilot yine referans kuruyordu.",
-   "whatThisMeans": "Sayılar SİLİNMEDİ ama tolerans/eşik kaynağı SAYILMAZ (M-C-01: skorlama referansı DOĞRU olmalı). Eksik transkriptler geri dolduruluyor; yeniden sınıflandırma sonrası uygun kaynak sayısı ≥3 olan çalgılarda ölçüm YENİLENECEK.",
-   "notALoophole": "movementRomPolicy'de `posture_setup` KASITLI olarak passiveExecutionPossible=True bırakıldı — yani bu veriyi muafiyetle geçirmiyorum. Öğretmenin öğrencinin bileğini yerleştirmesi gerçek bir öğretim hamlesi ve öyle üretilen duruş ulaşılamaz hedef olabilir; kaynak kanıtla geçmeli."
+   "status": "ATTESTED — İLK ÇALGI REFERANSI",
+   "eligibleSources": 3,
+   "totalSources": 21,
+   "why": "M-F-43 kaynak-uygunluk kapısı: bu artefaktı besleyen 3 kaynağın 3'ü de `referenceEligible:true` (attested). Toplam havuz 21 kaynaktan yalnız 6'sı uygun; 3'ü hold-window bulundurdu VE kanonik güven-kapısından %100 geçti.",
+   "whatThisMeans": "Sayılar referans-DIŞI kaynaktan gelmiyor — tolerans/eşik kaynağı sayılır (M-C-01). Ama örneklem küçük (tam minTakes=3): havuz büyüdükçe (cooldown-sonrası hedefli hasat, M-F-95) yeniden ölçülecek.",
+   "notALoophole": "movementRomPolicy'de `posture_setup` KASITLI olarak passiveExecutionPossible=True bırakıldı — bu veri muafiyetle geçmedi, kanıtla geçti (transkript ACTIVE_MARKERS isabeti)."
   }
  },
  "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı."
