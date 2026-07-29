@@ -327,8 +327,8 @@
    "evaluateAt": "PLAY",
    "status": "thresholdPending",
    "expertPending": true,
-   "blockedByStatistic": "piano posture reference (M-F-47 anlasma kapisi henuz gecilmedi)",
-   "_why": "M-F-140: SILINMEZ — uc kardesinden FARKLI sinif. Olcum ALETI VAR (dirsek acisi pose'dan hesaplanabiliyor, replay_check POSE sozlugunde zaten var). Eksik olan ESIK: referans istatistiginden ya da uzmandan gelmek ZORUNDA. Piyano referansi yokken AKTIVE EDILEMEZ. Sahte kosul (level_above_room_floor_db>15 — ses yuksekliginde atesleyen dirsek uyarisi) KALDIRILDI: yanlis atesleyen taslak, yokluktan kotudur.",
+   "blockedByStatistic": "piano referansi ARTIK VAR ama dirsek istatistigi ESIK TASIMIYOR (olculdu 2026-07-30): left_elbow dispersiyonu 77,2 derece ve UNRELIABLE isaretli; right_elbow 20,8 derece. Uc take'ten gelen 20-77 derecelik dagilimdan hata esigi turetmek, gurultuyu esik diye satmak olurdu. Ayrica dirsekler bu config'te coached_only — M-F-46 k.3 gereigi quality esigi YALNIZ skorlanan metrige yazilabilir (skorlanan: trunk_tilt, dispersiyon 1,1 derece). AKTIVE EDILEBILMESI icin gereken: dirsegin SKORLANAN kumeye girmesi + dispersiyonun tolerans tabanina (8 derece) yaklasmasi — ikisi de daha cok ve daha tutarli piyano kaynagi ister.",
+   "_why": "M-F-140: SILINMEZ — uc kardesinden FARKLI sinif. Olcum ALETI VAR (dirsek acisi pose'dan hesaplanabiliyor, replay_check POSE sozlugunde zaten var). Eksik olan ESIK: referans istatistiginden ya da uzmandan gelmek ZORUNDA. Piyano referansi yokken AKTIVE EDILEMEZ. Sahte kosul (level_above_room_floor_db>15 — ses yuksekliginde atesleyen dirsek uyarisi) KALDIRILDI: yanlis atesleyen taslak, yokluktan kotudur. 2026-07-30 GUNCELLEME: M-F-147 'piyano referansi dogunca aktive edilebilir' beklentisi OLCULDU ve KARSILANMADI — referans dogdu, dirsek istatistigi esik tasimiyor. expertPending KALIYOR.",
    "_observable": "camera",
    "_sources": "4 bağımsız kanal",
    "_removedCondition": {
