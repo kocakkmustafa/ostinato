@@ -32,6 +32,19 @@ def check(doc, name):
     # kural #4: filtre+eşik birlikte
     if "signalConditioning" not in doc:
         p.append(f"{name}: signalConditioning bloğu yok (kural #4 — filtre+eşik ayrılmaz)")
+    else:
+        # M-O-23 / 60-DSP-SOZLESMESI §1: analiz parametreleri SÜRE ve FREKANS
+        # cinsinden olmalı. Örnek cinsinden bir pencere, örtük bir sampleRate
+        # varsayımıdır: 44.1 kHz fixture'da doğru, 48 kHz cihazda (çoğu Android)
+        # sessizce BAŞKA bir dedektör. Motoru düzeltip config'i unutmak gerçek
+        # bir kaçaktı — koordinatörün denetimi yakaladı, bu kapı tekrarını önler.
+        sc = doc["signalConditioning"]
+        for k in sc:
+            if k.startswith("_"):
+                continue
+            if k == "sampleRate" or k.endswith(("Samples", "FrameSize", "HopSize")):
+                p.append(f"{name}: signalConditioning.{k} ÖRNEK cinsinden — "
+                         f"süre (ms) ya da frekans (Hz) cinsine çevir (M-O-23)")
 
     # Alan-tutarlılık: bir çalgı config'i BAŞKA çalgının içeriğini taşımamalı.
     # Bu kontrol, gitar/piyano config'lerini şan dosyasından kopyalarken
@@ -153,6 +166,9 @@ def self_test():
 challenge: mut for challenge, mut in [
         ("timeout eksik", lambda d: d["techniques"][0]["phases"][0].pop("timeoutMs")),
         ("signalConditioning eksik", lambda d: d.pop("signalConditioning")),
+        ("örnek-cinsinden pencere", lambda d: d["signalConditioning"].update({"windowSamples": 4096})),
+        ("örnek-cinsinden onset çerçevesi", lambda d: d["signalConditioning"].update({"onsetFrameSize": 1024})),
+        ("config'te sampleRate mühürlü", lambda d: d["signalConditioning"].update({"sampleRate": 44100})),
         ("noiseBand eksik", lambda d: d["metrics"]["m"].pop("noiseBand")),
         ("sideResolution eksik", lambda d: d["techniques"][0].pop("sideResolution")),
         ("tanımsız metrik", lambda d: d["techniques"][0]["phases"][0]["enter"].update(metric="yok")),
@@ -193,7 +209,11 @@ challenge: mut for challenge, mut in [
         d = copy.deepcopy(base); mut(d)
         if not check(d, "neg"):
             print(f"❌ SELF-TEST: '{label}' YAKALANMADI"); ok = False
-    print("✅ self-test: 16/16 ihlal yakalandı + temiz doküman geçti + yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
+    # Sayı ELLE yazılmamalı: sabit "16/16" metni, vaka listesinden bir test
+    # düşse bile aynı kalırdı — kendini doğrulayan boş rapor tam olarak bu
+    # denetimin engellemek için var olduğu şey.
+    print(f"✅ self-test: {len(cases)}/{len(cases)} ihlal yakalandı + temiz doküman geçti "
+          f"+ yorum yanlış-pozitif üretmedi" if ok else "SELF-TEST BAŞARISIZ")
     return 0 if ok else 1
 
 if __name__ == "__main__":

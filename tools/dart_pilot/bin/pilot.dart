@@ -165,12 +165,16 @@ void main(List<String> args) {
   // Acı ironi: çalgı başına ≥12 kabul hedefi BİZİM kalite kuralımız ve tam da
   // bu kontrolün kapandığı tarafa itiyor. Havuz büyüdükçe sistem daha emin
   // konuşuyor, üstelik yanlış sebeple.
-  const exhaustiveLimit = 12;
-  final fabricatedGap = takes.length > exhaustiveLimit;
+  // 0.7.1 (M-O-25 düzeltmesi) `gapMeasured` alanını getirdi: dayanağı artık
+  // n'e bakarak TAHMİN etmiyoruz, çekirdeğe SORUYORUZ. Kendi eşik kopyamı
+  // tutmak, çekirdek sınırı değiştiğinde (12→18 oldu) sessizce yanlış olurdu —
+  // bayrağın dayanağını taşıması tam da bunun için.
+  final fabricatedGap = !mirror.gapMeasured;
   if (fabricatedGap) {
-    stdout.writeln('  ⚠️ GAP ÖLÇÜLMEDİ: n=${takes.length} > $exhaustiveLimit → çekirdek '
-        'fallback yolunda; runnerUpGap=${mirror.runnerUpGap.toStringAsFixed(5)} '
-        'kurgu değer (mirrorMargin×2), gerçek fark BİLİNMİYOR.');
+    stdout.writeln('  ⚠️ GAP ÖLÇÜLMEDİ (gapMeasured:false, n=${takes.length}) → '
+        'çekirdek fallback yolunda; gerçek fark BİLİNMİYOR (0.7.1\'de NaN).');
+  } else {
+    stdout.writeln('  gapMeasured    : true (tükenmeli arama — dayanak ÖLÇÜM)');
   }
   stdout.writeln(ref.mirrorConfident && !fabricatedGap
       ? '  → taraf-bağımlı metrikler DEĞERLENDİRİLEBİLİR (çözüm kesin, gap ÖLÇÜLDÜ)'
