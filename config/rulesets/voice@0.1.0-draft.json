@@ -1,445 +1,428 @@
 {
-  "_schema": "motion-core v3.0 MÜHÜRLÜ şema · okuyucu motion_core-v0.4.1",
-  "_why_direct": "Ostinato'nun kalibre edilmiş çalışan motoru yok; ruleset-v0 taslaktı ve tüm eşikleri expertPending. Bu yüzden çevirici katmanı yazmıyoruz — mühürlenecek şemaya doğrudan yazıyoruz (M-F-35 §7 göç yolu).",
-  "_status": "TASLAK — hiçbir sayısal eşik nihai değil (expertPending). Şema mühürlenmeden önce alan adları değişebilir; çelişkide ÇEKİRDEK KAZANIR.",
-  "module": "voice",
-  "version": "0.1.0-draft",
-  "signalConditioning": {
-    "_why": "Kural #4 (M-C-07/J-027): filtre ve eşik AYRILMAZ. YIN eşiğinin anlamı pencere boyuna bağlıdır — pencereyi değiştirip eşiği sabit bırakmak sessizce başka bir dedektör yapar. Biri değişirse SÜRÜM ARTAR.",
-    "sampleRate": 44100,
-    "windowSamples": 4096,
-    "hopSamples": 1024,
-    "yinThreshold": 0.15,
-    "onsetFrameSize": 1024,
-    "onsetHopSize": 256,
-    "onsetMedianWindow": 11
+ "_schema": "motion-core v3.0 MÜHÜRLÜ şema · okuyucu motion_core-v0.4.1",
+ "_why_direct": "Ostinato'nun kalibre edilmiş çalışan motoru yok; ruleset-v0 taslaktı ve tüm eşikleri expertPending. Bu yüzden çevirici katmanı yazmıyoruz — mühürlenecek şemaya doğrudan yazıyoruz (M-F-35 §7 göç yolu).",
+ "_status": "TASLAK — hiçbir sayısal eşik nihai değil (expertPending). Şema mühürlenmeden önce alan adları değişebilir; çelişkide ÇEKİRDEK KAZANIR.",
+ "module": "voice",
+ "version": "0.1.0-draft",
+ "signalConditioning": {
+  "_why": "Kural #4 (M-C-07/J-027): filtre ve eşik AYRILMAZ. YIN eşiğinin anlamı pencere boyuna bağlıdır — pencereyi değiştirip eşiği sabit bırakmak sessizce başka bir dedektör yapar. Biri değişirse SÜRÜM ARTAR.",
+  "sampleRate": 44100,
+  "windowSamples": 4096,
+  "hopSamples": 1024,
+  "yinThreshold": 0.15,
+  "onsetFrameSize": 1024,
+  "onsetHopSize": 256,
+  "onsetMedianWindow": 11
+ },
+ "metrics": {
+  "pitch_deviation_cents": {
+   "id": "pitch_deviation_cents",
+   "unit": "cents",
+   "range": [
+    -1200,
+    1200
+   ],
+   "noiseBand": 20,
+   "_noiseBand_why": "ÖLÇÜLMÜŞ değer, tahmin değil: G1-C'de gerçek çello kaydında üç bağımsız kestirici (YIN/pYIN/SwiftF0) medyan 13-19 cent hata verdi. 20 centin altındaki fark bizim ölçüm gürültümüzden ayırt edilemez → hüküm üretmez.",
+   "baseline": {
+    "ref": "exercise.expectedNoteHz"
+   },
+   "_baseline_why": "M-F-34 + O uyarlaması: ses tarafında taban SABİT DEĞİL referanstır — 'doğru perde' egzersizin istediği notadır. Tabanı sıfır sanmak burada anlamsız olur (cent zaten oransal ölçü).",
+   "interval": true,
+   "_interval_why": "O-A1: pitch bir PENCEREYE aittir. C2'de periyot ~15,3 ms, iki periyot şartıyla pencere 46-93 ms. Değer tStartUs/tEndUs taşır."
   },
-  "metrics": {
-    "pitch_deviation_cents": {
-      "id": "pitch_deviation_cents",
-      "unit": "cents",
-      "range": [
-        -1200,
-        1200
-      ],
-      "noiseBand": 20,
-      "_noiseBand_why": "ÖLÇÜLMÜŞ değer, tahmin değil: G1-C'de gerçek çello kaydında üç bağımsız kestirici (YIN/pYIN/SwiftF0) medyan 13-19 cent hata verdi. 20 centin altındaki fark bizim ölçüm gürültümüzden ayırt edilemez → hüküm üretmez.",
-      "baseline": {
-        "ref": "exercise.expectedNoteHz"
-      },
-      "_baseline_why": "M-F-34 + O uyarlaması: ses tarafında taban SABİT DEĞİL referanstır — 'doğru perde' egzersizin istediği notadır. Tabanı sıfır sanmak burada anlamsız olur (cent zaten oransal ölçü).",
-      "interval": true,
-      "_interval_why": "O-A1: pitch bir PENCEREYE aittir. C2'de periyot ~15,3 ms, iki periyot şartıyla pencere 46-93 ms. Değer tStartUs/tEndUs taşır."
-    },
-    "periodicity": {
-      "id": "periodicity",
-      "unit": "ratio",
-      "range": [
-        0,
-        1
-      ],
-      "noiseBand": 0.05,
-      "baseline": 1.0,
-      "interval": true,
-      "_note": "YIN'in kendi kuşkusu (1 - aperiodicity) — sonradan uydurduğumuz bir skor değil."
-    },
-    "level_above_room_floor_db": {
-      "id": "level_above_room_floor_db",
-      "unit": "dB",
-      "range": [
-        -40,
-        60
-      ],
-      "noiseBand": 2,
-      "baseline": {
-        "ref": "setup.roomFloorDb"
-      },
-      "interval": true,
-      "_baseline_why": "Mutlak dBFS eşiği telefon mikrofonu çeşitliliğinde yaşamaz; Setup Check odayı ÖLÇER, her şey ona görelidir."
-    },
-    "vibrato_rate_hz": {
-      "id": "vibrato_rate_hz",
-      "unit": "Hz",
-      "range": [
-        0,
-        12
-      ],
-      "noiseBand": 0.5,
-      "baseline": 0,
-      "interval": true,
-      "expertPending": true,
-      "_note": "W1'in ayırt edici metriği (rakiplerin itiraf edilmiş boşluğu). Hedef aralık uzman turundan gelecek — şimdilik yalnız ÖLÇÜLÜR, HÜKÜM VERİLMEZ."
-    },
-    "trunk_tilt": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 2,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 2.6° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "left_shoulder": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 2,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 6.1° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "right_shoulder": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 4,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 9.2° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "left_upper_arm": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 2,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 5.0° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "right_upper_arm": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 3,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 8.3° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "left_elbow": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 19,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 48.0° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "right_elbow": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 18,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 43.8° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "left_forearm": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 32,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 80.6° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "right_forearm": {
-      "unit": "deg",
-      "range": [
-        -180,
-        180
-      ],
-      "noiseBand": 45,
-      "baseline": 0,
-      "measurementSpace": "world",
-      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 113.7° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-    },
-    "setup_complete": {
-      "id": "setup_complete",
-      "unit": "bool",
-      "range": [
-        0,
-        1
-      ],
-      "noiseBand": 0,
-      "baseline": 0,
-      "_why": "Setup Check kapısının sonucu. Çekirdek linter'ı yakaladı: bayrak da bir METRİKTİR ve sözlükte tanımlı olmalı — tanımsız metriğe eşik yazılamaz (Gravita kuralı). Benim doğrulayıcım flag türünü muaf tutuyordu, o muafiyet YANLIŞTI (M-O-10)."
-    }
+  "periodicity": {
+   "id": "periodicity",
+   "unit": "ratio",
+   "range": [
+    0,
+    1
+   ],
+   "noiseBand": 0.05,
+   "baseline": 1.0,
+   "interval": true,
+   "_note": "YIN'in kendi kuşkusu (1 - aperiodicity) — sonradan uydurduğumuz bir skor değil."
   },
-  "techniques": [
+  "level_above_room_floor_db": {
+   "id": "level_above_room_floor_db",
+   "unit": "dB",
+   "range": [
+    -40,
+    60
+   ],
+   "noiseBand": 2,
+   "baseline": {
+    "ref": "setup.roomFloorDb"
+   },
+   "interval": true,
+   "_baseline_why": "Mutlak dBFS eşiği telefon mikrofonu çeşitliliğinde yaşamaz; Setup Check odayı ÖLÇER, her şey ona görelidir."
+  },
+  "vibrato_rate_hz": {
+   "id": "vibrato_rate_hz",
+   "unit": "Hz",
+   "range": [
+    0,
+    12
+   ],
+   "noiseBand": 0.5,
+   "baseline": 0,
+   "interval": true,
+   "expertPending": true,
+   "_note": "W1'in ayırt edici metriği (rakiplerin itiraf edilmiş boşluğu). Hedef aralık uzman turundan gelecek — şimdilik yalnız ÖLÇÜLÜR, HÜKÜM VERİLMEZ."
+  },
+  "trunk_tilt": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 2,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 2.6° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "left_shoulder": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 2,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 6.1° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "right_shoulder": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 4,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 9.2° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "left_upper_arm": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 2,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 5.0° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "right_upper_arm": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 3,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 8.3° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "left_elbow": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 19,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 48.0° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "right_elbow": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 18,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 43.8° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "left_forearm": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 32,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 80.6° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "right_forearm": {
+   "unit": "deg",
+   "range": [
+    -180,
+    180
+   ],
+   "noiseBand": 45,
+   "baseline": 0,
+   "measurementSpace": "world",
+   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 113.7° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+  },
+  "setup_complete": {
+   "id": "setup_complete",
+   "unit": "bool",
+   "range": [
+    0,
+    1
+   ],
+   "noiseBand": 0,
+   "baseline": 0,
+   "_why": "Setup Check kapısının sonucu. Çekirdek linter'ı yakaladı: bayrak da bir METRİKTİR ve sözlükte tanımlı olmalı — tanımsız metriğe eşik yazılamaz (Gravita kuralı). Benim doğrulayıcım flag türünü muaf tutuyordu, o muafiyet YANLIŞTI (M-O-10)."
+  }
+ },
+ "techniques": [
+  {
+   "id": "sustained_note_drill",
+   "_what": "Tek nota tut: perde kararlılığı + sustain + duruş. W1'in en temiz egzersizi.",
+   "sideResolution": "calibrated",
+   "_sideResolution_why": "M-F-06: config'te LEFT_*/RIGHT_* yasak. Şanda taraf ölçümü omuz simetrisi için gerekir ve kalibrasyon pozunda geometrik kurulur.",
+   "cyclic": false,
+   "requires": {
+    "signals": [
+     {
+      "signal": "level_above_room_floor_db",
+      "op": "gte",
+      "value": 6
+     },
+     {
+      "signal": "periodicity",
+      "op": "gte",
+      "value": 0.55
+     }
+    ]
+   },
+   "_requires_why": "O-A2: bu tekniğin ön-koşulu landmark varlığı değil SİNYAL KALİTESİ. v2 öncesinde bunu şema dışında tutmak zorundaydık; artık doğrulayıcının görüş alanında.",
+   "verdictGates": [
     {
-      "id": "sustained_note_drill",
-      "_what": "Tek nota tut: perde kararlılığı + sustain + duruş. W1'in en temiz egzersizi.",
-      "sideResolution": "calibrated",
-      "_sideResolution_why": "M-F-06: config'te LEFT_*/RIGHT_* yasak. Şanda taraf ölçümü omuz simetrisi için gerekir ve kalibrasyon pozunda geometrik kurulur.",
-      "cyclic": false,
-      "requires": {
-        "signals": [
-          {
-            "signal": "level_above_room_floor_db",
-            "op": "gte",
-            "value": 6
-          },
-          {
-            "signal": "periodicity",
-            "op": "gte",
-            "value": 0.55
-          }
-        ]
-      },
-      "_requires_why": "O-A2: bu tekniğin ön-koşulu landmark varlığı değil SİNYAL KALİTESİ. v2 öncesinde bunu şema dışında tutmak zorundaydık; artık doğrulayıcının görüş alanında.",
-      "verdictGates": [
-        {
-          "onEvent": "onset",
-          "holdMs": 100,
-          "effect": "collectNoVerdict",
-          "_why": "O-A3: nota atağının ilk ~100ms'i aperiyodik. Veri GEÇERLİ (topla), hüküm verilmez."
-        },
-        {
-          "onEvent": "coachCue",
-          "holdMs": 0,
-          "effect": "discardWindow",
-          "_why": "M-O-07: koç konuşurken mikrofon koçu duyar — veri KİRLİ, toplanmaz. Kirli pencereyi arşive toplayan config sonraki analize temiz görünür."
-        }
-      ],
-      "phases": [
-        {
-          "id": "POSTURE_CHECK",
-          "_what": "Çalmadan ÖNCE duruş değerlendirmesi. Setup Check'in ölçüm ayağı.",
-          "_why_pose_gated": "Replay kanıtı: ses-kapılı fazlar pose-only fixture'da HİÇ ateşlenmiyordu (3 çalgı × ~5500 kare, 0 giriş). Ama asıl mesele test değil ÜRÜN: kullanıcı henüz çalmadan duruşunu düzeltebilmeli — postür metriklerini ses kapısının arkasına koymak Setup Check'in amacını iptal ediyordu.",
-          "enter": {
-            "kind": "metric",
-            "metric": "trunk_tilt",
-            "op": "gte",
-            "value": 0
-          },
-          "quality": {
-            "trunk_tilt": {
-              "op": "lte",
-              "value": 5,
-              "expertPending": true
-            },
-            "left_shoulder": {
-              "op": "lte",
-              "value": 5,
-              "expertPending": true
-            },
-            "right_shoulder": {
-              "op": "lte",
-              "value": 10,
-              "expertPending": true
-            },
-            "left_upper_arm": {
-              "op": "lte",
-              "value": 5,
-              "expertPending": true
-            },
-            "right_upper_arm": {
-              "op": "lte",
-              "value": 8,
-              "expertPending": true
-            }
-          },
-          "exit": {
-            "kind": "metric",
-            "metric": "level_above_room_floor_db",
-            "op": "gte",
-            "value": 6
-          },
-          "_exit_why": "Ses gelince oynama fazına devredilir; postür fazı sesi BEKLEMEZ ama sesle biter.",
-          "timeoutMs": 60000,
-          "measureHere": true
-        },
-        {
-          "id": "READY",
-          "enter": {
-            "kind": "flag",
-            "metric": "setup_complete",
-            "is": true
-          },
-          "exit": {
-            "kind": "metric",
-            "metric": "level_above_room_floor_db",
-            "op": "gte",
-            "value": 6
-          },
-          "timeoutMs": 30000,
-          "_timeout_why": "Kural #2: terminal olmayan fazda timeout ZORUNLU. Öğrenci hiç çalmazsa seans askıda kalmamalı."
-        },
-        {
-          "id": "SUSTAIN",
-          "enter": {
-            "kind": "metric",
-            "metric": "periodicity",
-            "op": "gte",
-            "value": 0.55
-          },
-          "quality": {
-            "pitch_deviation_cents": {
-              "op": "lte",
-              "value": 25,
-              "expertPending": true
-            },
-            "periodicity": {
-              "op": "gte",
-              "value": 0.7,
-              "expertPending": true
-            },
-            "trunk_tilt": {
-              "op": "lte",
-              "value": 15,
-              "_why": "DÜZELTİLDİ: eski eşik 8° idi ve 1,5° varyansın ~5 katıydı. Gerçek en-kötü varyans 5,1° çıkınca 8° yalnız 1,6 katı kaldı — eğitmen farkını hata saymaya başlardı. 15° ≈ 5,1°'ın 3 katı: doğal farkı geçiriyor, belirgin eğilmeyi yakalıyor."
-            }
-          },
-          "_quality_why": "D2 ayrımı: 'bu faza girdim mi' (enter) ile 'iyi yaptım mı' (quality) FARKLI sorular. Girişi periodicity 0.55 açar; hüküm 0.7 ister.",
-          "exit": {
-            "kind": "metric",
-            "metric": "level_above_room_floor_db",
-            "op": "lt",
-            "value": 6
-          },
-          "timeoutMs": 20000,
-          "minDurationMs": 800,
-          "measureHere": true
-        },
-        {
-          "id": "COMPLETE",
-          "terminal": true,
-          "enter": {
-            "kind": "timeInPhase",
-            "op": "gte",
-            "ms": 0
-          },
-          "_enter_why": "Okuyucu terminal fazda da `enter` istiyor ve haklı: 'ne zaman tamamlandı sayılır' beyan edilmeli. Burada SUSTAIN'in exit'i buraya taşır; koşul aşikâr ama YAZILI olması, sessiz varsayımı önlüyor."
-        }
-      ]
-    }
-  ],
-  "errors": [
-    {
-      "code": "V-PITCH-DRIFT",
-      "evaluateAt": "SUSTAIN",
-      "condition": {
-        "kind": "metric",
-        "metric": "pitch_deviation_cents",
-        "op": "gt",
-        "value": 25
-      },
-      "cooldownMs": 20000,
-      "expertPending": true,
-      "_sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json"
+     "onEvent": "onset",
+     "holdMs": 100,
+     "effect": "collectNoVerdict",
+     "_why": "O-A3: nota atağının ilk ~100ms'i aperiyodik. Veri GEÇERLİ (topla), hüküm verilmez."
     },
     {
-      "code": "V-POST-SHOULDER-RISE",
-      "evaluateAt": "ANY",
-      "condition": {
-        "kind": "metric",
-        "metric": "right_shoulder",
-        "op": "gt",
-        "value": 0.1
+     "onEvent": "coachCue",
+     "holdMs": 0,
+     "effect": "discardWindow",
+     "_why": "M-O-07: koç konuşurken mikrofon koçu duyar — veri KİRLİ, toplanmaz. Kirli pencereyi arşive toplayan config sonraki analize temiz görünür."
+    }
+   ],
+   "phases": [
+    {
+     "id": "POSTURE_CHECK",
+     "_what": "Çalmadan ÖNCE duruş değerlendirmesi. Setup Check'in ölçüm ayağı.",
+     "_why_pose_gated": "Replay kanıtı: ses-kapılı fazlar pose-only fixture'da HİÇ ateşlenmiyordu (3 çalgı × ~5500 kare, 0 giriş). Ama asıl mesele test değil ÜRÜN: kullanıcı henüz çalmadan duruşunu düzeltebilmeli — postür metriklerini ses kapısının arkasına koymak Setup Check'in amacını iptal ediyordu.",
+     "enter": {
+      "kind": "metric",
+      "metric": "trunk_tilt",
+      "op": "gte",
+      "value": 0
+     },
+     "quality": {
+      "trunk_tilt": {
+       "op": "lte",
+       "value": 5,
+       "expertPending": true
+      }
+     },
+     "exit": {
+      "kind": "metric",
+      "metric": "level_above_room_floor_db",
+      "op": "gte",
+      "value": 6
+     },
+     "_exit_why": "Ses gelince oynama fazına devredilir; postür fazı sesi BEKLEMEZ ama sesle biter.",
+     "timeoutMs": 60000,
+     "measureHere": true
+    },
+    {
+     "id": "READY",
+     "enter": {
+      "kind": "flag",
+      "metric": "setup_complete",
+      "is": true
+     },
+     "exit": {
+      "kind": "metric",
+      "metric": "level_above_room_floor_db",
+      "op": "gte",
+      "value": 6
+     },
+     "timeoutMs": 30000,
+     "_timeout_why": "Kural #2: terminal olmayan fazda timeout ZORUNLU. Öğrenci hiç çalmazsa seans askıda kalmamalı."
+    },
+    {
+     "id": "SUSTAIN",
+     "enter": {
+      "kind": "metric",
+      "metric": "periodicity",
+      "op": "gte",
+      "value": 0.55
+     },
+     "quality": {
+      "pitch_deviation_cents": {
+       "op": "lte",
+       "value": 25,
+       "expertPending": true
       },
-      "cooldownMs": 30000,
-      "expertPending": true,
-      "_riskClass": "1_if_sustained",
-      "suppressesJudgement": false,
-      "_coached_only": true,
-      "_why": "Sözleşme kural 3 (M-F-46): omuz dispersiyonu 15,8-16,0° > 14° çıtası → bu kod KOÇLANIR (kullanıcıya söylenir) ama PUANLANMAZ. Ölçüm, sezgimin aksine omuz-tabanlı skorlamaya yetki vermiyor."
-    }
-  ],
-  "feedbackPolicy": {
-    "maxConcurrentCues": 1,
-    "suppression": {
-      "consecutiveOutOfBandBeforeCue": 3,
-      "expertPending": true
+      "periodicity": {
+       "op": "gte",
+       "value": 0.7,
+       "expertPending": true
+      },
+      "trunk_tilt": {
+       "op": "lte",
+       "value": 15,
+       "_why": "DÜZELTİLDİ: eski eşik 8° idi ve 1,5° varyansın ~5 katıydı. Gerçek en-kötü varyans 5,1° çıkınca 8° yalnız 1,6 katı kaldı — eğitmen farkını hata saymaya başlardı. 15° ≈ 5,1°'ın 3 katı: doğal farkı geçiriyor, belirgin eğilmeyi yakalıyor."
+      }
+     },
+     "_quality_why": "D2 ayrımı: 'bu faza girdim mi' (enter) ile 'iyi yaptım mı' (quality) FARKLI sorular. Girişi periodicity 0.55 açar; hüküm 0.7 ister.",
+     "exit": {
+      "kind": "metric",
+      "metric": "level_above_room_floor_db",
+      "op": "lt",
+      "value": 6
+     },
+     "timeoutMs": 20000,
+     "minDurationMs": 800,
+     "measureHere": true
     },
-    "fading": {
-      "enabled": true,
-      "_why": "guidance hypothesis: aşırı sık geri bildirim bağımlılık yaratıp kalıcı öğrenmeyi bozar"
-    },
-    "scoreDisplay": {
-      "numericScoresEnabled": false,
-      "_why": "K8/M-F-04: kalibrasyon kapısı geçilmeden SAYISAL skor gösterilmez; V1 = bant + eğri.",
-      "bands": [
-        "steady",
-        "improving",
-        "needs_focus"
-      ]
+    {
+     "id": "COMPLETE",
+     "terminal": true,
+     "enter": {
+      "kind": "timeInPhase",
+      "op": "gte",
+      "ms": 0
+     },
+     "_enter_why": "Okuyucu terminal fazda da `enter` istiyor ve haklı: 'ne zaman tamamlandı sayılır' beyan edilmeli. Burada SUSTAIN'in exit'i buraya taşır; koşul aşikâr ama YAZILI olması, sessiz varsayımı önlüyor."
     }
+   ]
+  }
+ ],
+ "errors": [
+  {
+   "code": "V-PITCH-DRIFT",
+   "evaluateAt": "SUSTAIN",
+   "condition": {
+    "kind": "metric",
+    "metric": "pitch_deviation_cents",
+    "op": "gt",
+    "value": 25
+   },
+   "cooldownMs": 20000,
+   "expertPending": true,
+   "_sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json"
   },
-  "_openItems": [
-    "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",
-    "shoulder_rise_norm + head_chin_angle_deg: ship öncesi ≥1 gerçek-kare regresyonu (J-028)",
-    "Gitar havuzu 1 fixture — minTakes=3 altında, B4 koşulamadı (hasat sürüyor)"
-  ],
-  "referenceConsumption": {
-    "_contract": "motion-core docs/50-REFERANS-TUKETIM-SOZLESMESI.md (M-F-46)",
-    "_measured": "B4 pilotu, motion_core-v0.5.0. Şan 18 take → M-F-47 anlaşma kapısı 7'sini DIŞLADI (adlarıyla) → küme 11 take.",
-    "scoringBarDeg": 14.0,
-    "scored": [
-      "trunk_tilt",
-      "left_shoulder",
-      "right_shoulder",
-      "left_upper_arm",
-      "right_upper_arm"
-    ],
-    "_scored_why": "Kural 1 + kural 7 BİRLİKTE karşılandı. Küme dispersiyonları: trunk_tilt 2,6° · left_shoulder 6,1° · right_shoulder 9,2° · left_upper_arm 5,0° · right_upper_arm 8,3° — hepsi 14° çıtasının altında. Taraf-bağımlı olanlar için ek şart: aynalama çözümü KESİN (mirrorConfident=true, runnerUpGap 0,040 > marj 0,020). Bir önceki turda tuttuğum sideDependencyHold bu ölçümle AÇILDI.",
-    "coached_only": [
-      "left_elbow",
-      "right_elbow",
-      "left_forearm",
-      "right_forearm"
-    ],
-    "_coached_why": "Kural 3: küme içinde bile 43,8-113,7° — şanda kolun doğru yeri yok (M-O-09, iki kez sınandı ve ayakta). Gösterilir, söylenir, PUANLANMAZ.",
-    "userExplanation": "Experienced voice teachers disagree about these, so we point them out but do not grade them.",
-    "_explanation_why": "Kural 3: açıklamasız puan-yokluğu kullanıcıya 'sistem bozuk' okunur.",
-    "provisional": false,
-    "_provisional_why": "KALDIRILDI: n=18 ≥ 5 (kural 6 eşiği). Önceki n=5'te işaretliydi. Not: provisional kalkması toleransların nihai olduğu anlamına gelmez — M-O-12 gereği havuz büyüdükçe yeniden ölçülür; nitekim kollar bu turda DAHA DA kötüleşti.",
-    "sideDependencyResolved": {
-      "mirrorConfident": true,
-      "runnerUpGap": 0.04,
-      "mirrorMargin": 0.02,
-      "flippedTakes": "4/18",
-      "_why": "Kural 7 kapısı ölçümle geçildi; taraf-bağımlı metrikler artık değerlendirilebilir."
-    },
-    "agreementGateCaveat": {
-      "excludedTakes": 7,
-      "totalTakes": 18,
-      "exclusionRate": 0.39,
-      "excludedIds": [
-        "-NveytXRN3Q",
-        "Ds8GKSp5GwE",
-        "II2b3gs31SU",
-        "RlkfOY1xjj4",
-        "pwIO71FhP9g",
-        "qJJJ1HxD49c",
-        "xm1NdA4cmEs"
-      ],
-      "_why": "DİKKAT: bu dispersiyonlar TÜM eğitmenlerin değil, anlaşma kapısını geçen KÜMENİN sayıları. %39 dışlama oranı yüksek. Meşru (M-F-47: 23° ile 112°'yi ortalamak anlamsız bir orta üretir) ve dışlananlar ADLARIYLA kayıtlı — sessiz ortalama değil. Ama okuma farkı önemli: 'eğitmenler hemfikir' değil, 'hemfikir olan alt-küme hemfikir'. Dışlama oranı izlenmeli; artarsa referansın temsil gücü sorgulanır."
-    }
+  {
+   "code": "V-POST-SHOULDER-RISE",
+   "evaluateAt": "ANY",
+   "condition": {
+    "kind": "metric",
+    "metric": "right_shoulder",
+    "op": "gt",
+    "value": 0.1
+   },
+   "cooldownMs": 30000,
+   "expertPending": true,
+   "_riskClass": "1_if_sustained",
+   "suppressesJudgement": false,
+   "_coached_only": true,
+   "_why": "Sözleşme kural 3 (M-F-46): omuz dispersiyonu 15,8-16,0° > 14° çıtası → bu kod KOÇLANIR (kullanıcıya söylenir) ama PUANLANMAZ. Ölçüm, sezgimin aksine omuz-tabanlı skorlamaya yetki vermiyor."
+  }
+ ],
+ "feedbackPolicy": {
+  "maxConcurrentCues": 1,
+  "suppression": {
+   "consecutiveOutOfBandBeforeCue": 3,
+   "expertPending": true
   },
-  "_namingNote": "Metrik adları üç çalgıda ORTAK (trunk_tilt, left_shoulder, ...). Şanda önce 'trunk_tilt_deg'/'shoulder_rise_norm' kullanılmıştı; fixture_check sarkan atıfları yakaladı (scored listesi sözlükte olmayan adlara işaret ediyordu). Ortak sözlük, çalgılar arası karşılaştırmayı da mümkün kılıyor."
+  "fading": {
+   "enabled": true,
+   "_why": "guidance hypothesis: aşırı sık geri bildirim bağımlılık yaratıp kalıcı öğrenmeyi bozar"
+  },
+  "scoreDisplay": {
+   "numericScoresEnabled": false,
+   "_why": "K8/M-F-04: kalibrasyon kapısı geçilmeden SAYISAL skor gösterilmez; V1 = bant + eğri.",
+   "bands": [
+    "steady",
+    "improving",
+    "needs_focus"
+   ]
+  }
+ },
+ "_openItems": [
+  "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",
+  "shoulder_rise_norm + head_chin_angle_deg: ship öncesi ≥1 gerçek-kare regresyonu (J-028)",
+  "Gitar havuzu 1 fixture — minTakes=3 altında, B4 koşulamadı (hasat sürüyor)"
+ ],
+ "referenceConsumption": {
+  "_contract": "motion-core docs/50-REFERANS-TUKETIM-SOZLESMESI.md (M-F-46)",
+  "_measured": "B4 pilotu, motion_core-v0.5.0. Şan 18 take → M-F-47 anlaşma kapısı 7'sini DIŞLADI (adlarıyla) → küme 11 take.",
+  "scoringBarDeg": 14.0,
+  "scored": [
+   "trunk_tilt"
+  ],
+  "_scored_why": "Yalnız taraf-BAĞIMSIZ metrik puanlanır (trunk_tilt). Taraf-bağımlı 4 metrik coached_only'ye alındı: KURAL 7 GERİ ALINDI (2026-07-29, O-021): bu metrikleri serbest bırakan runnerUpGap=0.04 ÖLÇÜM DEĞİL, çekirdeğin nöbetçi değeri. reference_builder.dart n>12'de tükenmeli aramayı bırakıp runnerUpGap'i 'mirrorMargin*2' olarak UYDURUYOR (satır 478, '// unknown gap'); bu yapısı gereği marjın üstünde olduğundan o yolda confident DAİMA true döner. Şan 18 / gitar 15 take, ikisi de n>12 → güven ölçülmedi, kurgulandı. Bilinmeyen fark = belirsiz çözüm → kural 7 gereği taraf-bağımlı metrikler TUTULUR. Çekirdek düzeltilip gerçek gap ölçülünce yeniden değerlendirilecek. İroni kayda değer: çalgı başına >=12 kabul hedefi benim kalite kuralımdı ve tam da dürüstlük kontrolünün kapandığı tarafa itiyor — piyano n=10 ile ALTINDA kaldığı için gerçek ölçüm (0.00181) alıp doğru şekilde TUTUYOR.",
+  "coached_only": [
+   "left_elbow",
+   "right_elbow",
+   "left_forearm",
+   "right_forearm",
+   "left_shoulder",
+   "right_shoulder",
+   "left_upper_arm",
+   "right_upper_arm"
+  ],
+  "_coached_why": "Kural 3: küme içinde bile 43,8-113,7° — şanda kolun doğru yeri yok (M-O-09, iki kez sınandı ve ayakta). Gösterilir, söylenir, PUANLANMAZ.",
+  "userExplanation": "Experienced voice teachers disagree about these, so we point them out but do not grade them.",
+  "_explanation_why": "Kural 3: açıklamasız puan-yokluğu kullanıcıya 'sistem bozuk' okunur.",
+  "provisional": false,
+  "_provisional_why": "KALDIRILDI: n=18 ≥ 5 (kural 6 eşiği). Önceki n=5'te işaretliydi. Not: provisional kalkması toleransların nihai olduğu anlamına gelmez — M-O-12 gereği havuz büyüdükçe yeniden ölçülür; nitekim kollar bu turda DAHA DA kötüleşti.",
+  "sideDependencyResolved": {
+   "mirrorConfident": true,
+   "runnerUpGap": 0.04,
+   "mirrorMargin": 0.02,
+   "flippedTakes": "4/18",
+   "_why": "Kural 7 kapısı ölçümle geçildi; taraf-bağımlı metrikler artık değerlendirilebilir."
+  },
+  "agreementGateCaveat": {
+   "excludedTakes": 7,
+   "totalTakes": 18,
+   "exclusionRate": 0.39,
+   "excludedIds": [
+    "-NveytXRN3Q",
+    "Ds8GKSp5GwE",
+    "II2b3gs31SU",
+    "RlkfOY1xjj4",
+    "pwIO71FhP9g",
+    "qJJJ1HxD49c",
+    "xm1NdA4cmEs"
+   ],
+   "_why": "DİKKAT: bu dispersiyonlar TÜM eğitmenlerin değil, anlaşma kapısını geçen KÜMENİN sayıları. %39 dışlama oranı yüksek. Meşru (M-F-47: 23° ile 112°'yi ortalamak anlamsız bir orta üretir) ve dışlananlar ADLARIYLA kayıtlı — sessiz ortalama değil. Ama okuma farkı önemli: 'eğitmenler hemfikir' değil, 'hemfikir olan alt-küme hemfikir'. Dışlama oranı izlenmeli; artarsa referansın temsil gücü sorgulanır."
+  },
+  "_scored_why_previous": "Kural 1 + kural 7 BİRLİKTE karşılandı. Küme dispersiyonları: trunk_tilt 2,6° · left_shoulder 6,1° · right_shoulder 9,2° · left_upper_arm 5,0° · right_upper_arm 8,3° — hepsi 14° çıtasının altında. Taraf-bağımlı olanlar için ek şart: aynalama çözümü KESİN (mirrorConfident=true, runnerUpGap 0,040 > marj 0,020). Bir önceki turda tuttuğum sideDependencyHold bu ölçümle AÇILDI.",
+  "_mirrorGapProvenance": "FABRICATED (core n>12 fallback) — ölçülmüş değil",
+  "_qualityRemoved": "Tutulan metriklerin quality eşikleri kaldırıldı (M-F-46 k.3: coached_only metrik kapı olamaz). Metrikler ÖLÇÜLMEYE devam eder, hüküm/kapı üretmez — 'göster ama puanlama' ayrımı."
+ },
+ "_namingNote": "Metrik adları üç çalgıda ORTAK (trunk_tilt, left_shoulder, ...). Şanda önce 'trunk_tilt_deg'/'shoulder_rise_norm' kullanılmıştı; fixture_check sarkan atıfları yakaladı (scored listesi sözlükte olmayan adlara işaret ediyordu). Ortak sözlük, çalgılar arası karşılaştırmayı da mümkün kılıyor."
 }

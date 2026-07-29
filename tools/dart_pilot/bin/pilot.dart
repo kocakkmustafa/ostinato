@@ -155,9 +155,28 @@ void main(List<String> args) {
   // Simetrik bir etkinlikte (şan duruşu) çevirmenin maliyeti neredeyse sıfırdır,
   // yani "en iyi" atama gürültüyle belirlenir — bu belirsizliği ölçmeden
   // sol/sağ farkına anlam yüklemek, artefaktı bulgu sanmaktır.
-  stdout.writeln(ref.mirrorConfident
-      ? '  → taraf-bağımlı metrikler DEĞERLENDİRİLEBİLİR (çözüm kesin)'
-      : '  → ⚠️ taraf-bağımlı metrikler TUTULUR (kural 7: çözüm kesin değil)');
+  // O-021: `mirrorConfident`i olduğu gibi kabul etmek YETMİYOR — bayrağın
+  // DAYANAĞINI da sormak gerekiyor. Çekirdek n>12'de tükenmeli aramayı bırakıp
+  // runnerUpGap'i `mirrorMargin*2` olarak UYDURUYOR (reference_builder.dart
+  // "// unknown gap"); bu yapısı gereği marjın üstünde olduğundan o yolda
+  // confident DAİMA true döner. Yani "kesin" hükmü, ölçüm yapılamadığı için
+  // veriliyor olabilir — dürüstlük kapısının tam tersi.
+  //
+  // Acı ironi: çalgı başına ≥12 kabul hedefi BİZİM kalite kuralımız ve tam da
+  // bu kontrolün kapandığı tarafa itiyor. Havuz büyüdükçe sistem daha emin
+  // konuşuyor, üstelik yanlış sebeple.
+  const exhaustiveLimit = 12;
+  final fabricatedGap = takes.length > exhaustiveLimit;
+  if (fabricatedGap) {
+    stdout.writeln('  ⚠️ GAP ÖLÇÜLMEDİ: n=${takes.length} > $exhaustiveLimit → çekirdek '
+        'fallback yolunda; runnerUpGap=${mirror.runnerUpGap.toStringAsFixed(5)} '
+        'kurgu değer (mirrorMargin×2), gerçek fark BİLİNMİYOR.');
+  }
+  stdout.writeln(ref.mirrorConfident && !fabricatedGap
+      ? '  → taraf-bağımlı metrikler DEĞERLENDİRİLEBİLİR (çözüm kesin, gap ÖLÇÜLDÜ)'
+      : fabricatedGap
+          ? '  → ⚠️ taraf-bağımlı metrikler TUTULUR (kural 7: bilinmeyen fark = belirsiz çözüm)'
+          : '  → ⚠️ taraf-bağımlı metrikler TUTULUR (kural 7: çözüm kesin değil)');
 
   final unreliable = ref.unreliableJoints();
   stdout.writeln('\nGÜVENİLMEZ eklemler (sapma >35°): '
