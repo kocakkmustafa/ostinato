@@ -180,11 +180,20 @@ void main(List<String> args) {
   }
 
   const builder = ReferenceBuilder();
+  // O-023 (bu turda bulundu): `admitted` şimdiye dek yalnız kapı SAYIMI için
+  // kullanılıyordu ("admitted.length < 3" kontrolü) — ölçümün kendisi hâlâ
+  // filtrelenmemiş `takes`ten (ineligible + unattested dahil TÜMÜ) kuruluyordu.
+  // Rapor "⛔ daima dışarıda" diyordu, matematik içeri alıyordu. Kanonik
+  // ReferenceCli.buildArtifact() (core reference_cli.dart) tam bunun için var:
+  // ineligible/unattested `builder.build()`a GİRMEDEN ayıklanıyor. Aynı deseni
+  // burada uyguluyoruz — aksi hâlde "ölçümü yeniledik" iddiası kendi kapımızın
+  // ölçmediği kaynaklardan geçer.
+  //
   // Aynalama çözümünü AYRI çağırıyoruz: runnerUpGap yalnız MirrorResolution'da
   // (CanonicalReference kararı taşıyor, marjı değil). Kural 7'yi uygulamak için
   // marj lazım — kararın kendisi yetmiyor.
-  final mirror = builder.resolveMirroring(takes);
-  final ref = builder.build(takes);
+  final mirror = builder.resolveMirroring(admitted);
+  final ref = builder.build(admitted);
 
   stdout.writeln('\n=== Eğitmenler arası dağılım (= toleransın kaynağı) ===');
   final specs = StandardJoints.upperBody;
@@ -204,7 +213,7 @@ void main(List<String> args) {
   // 4 katlık sol/sağ asimetrisi (left_forearm 80° vs right 18°) kısmen bunun
   // artefaktı olabilir — ölçmeden bilinmez.
   stdout.writeln('\n=== Aynalama çözümü (M-F-48 / kural 7) ===');
-  stdout.writeln('  aynalanmış take : ${ref.mirroredTakeIds.length}/${takes.length}');
+  stdout.writeln('  aynalanmış take : ${ref.mirroredTakeIds.length}/${admitted.length}');
   stdout.writeln('  mirrorConfident : ${ref.mirrorConfident} (resolution: ${mirror.confident})');
   stdout.writeln('  runnerUpGap     : ${mirror.runnerUpGap.toStringAsFixed(5)}');
   stdout.writeln('  dışlanan (M-F-47): ${ref.excludedOutlierIds.isEmpty ? "yok" : ref.excludedOutlierIds.join(", ")}');
@@ -229,7 +238,7 @@ void main(List<String> args) {
   // bayrağın dayanağını taşıması tam da bunun için.
   final fabricatedGap = !mirror.gapMeasured;
   if (fabricatedGap) {
-    stdout.writeln('  ⚠️ GAP ÖLÇÜLMEDİ (gapMeasured:false, n=${takes.length}) → '
+    stdout.writeln('  ⚠️ GAP ÖLÇÜLMEDİ (gapMeasured:false, n=${admitted.length}) → '
         'çekirdek fallback yolunda; gerçek fark BİLİNMİYOR (0.7.1\'de NaN).');
   } else {
     stdout.writeln('  gapMeasured    : true (tükenmeli arama — dayanak ÖLÇÜM)');
