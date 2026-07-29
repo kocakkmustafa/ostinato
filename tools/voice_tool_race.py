@@ -58,6 +58,13 @@ HOLD_RELAXED_ENERGY = 0.5
 #: raporda görünür, pencere onun yüzünden reddedilmez).
 HOLD_RELAXED_DRIFT = math.inf
 WINDOW_S = 5.0  # spec §2c önerisi — hold'un 3.0s varsayılanından geniş
+#: Eşik SÜPÜRMESİ — tek bir sihirli sayı seçmemek için. Aralık, ölçülen
+#: sürücü dağılımını kapsayacak şekilde geniş tutuldu; bir eşik SEÇİMİ
+#: DEĞİL, aracın o aralıktaki davranışının raporu.
+SWEEP_DEG = (60, 75, 90, 105, 120, 140)
+MIN_HOLD_S = 2.0  # presence'ın kendi jest-tuzağı savunması (L-151): kısa
+#: jest sıçraması bu süreyi biriktiremez. 2.0s aracın self-test'indeki
+#: "2sn tut" senaryosuyla AYNI büyüklük sınıfı — icat değil, emsal.
 
 
 def eligible_voice_sources():
@@ -96,23 +103,88 @@ def run_hold_relaxed(doc, fps):
     }
 
 
+#: presence_isolator (merge: core `8c3c6e0`) GERÇEK imzası, spec §2c
+#: ÖNERİMDEN FARKLI çıktı — ve fark yarışın SONUCUNU belirliyor, bu yüzden
+#: burada isimle yazılı: araç "bir SÜRÜCÜ AÇI eşiği geçip `min_hold_s`
+#: boyunca ORADA KALIYOR MU" sorusunu yanıtlıyor (faz-tanımlı tek gösterim,
+#: ROM değerlendirmesi). Sürücü = ÜÇ VÜCUT NOKTASI arası açı; yani
+#: DÖNMEYE-DUYARSIZ (rotation-invariant) — tasarım gereği, uzuv açıları
+#: için doğru olan şey. Ostinato'nun `trunk_tilt`i ise YERÇEKİMİNE göre
+#: (dikeyle açı) tanımlı ve aracın sözlüğünde sentetik "dikey" nokta YOK
+#: (`NAME_TO_INDEX`: yalnız gövde landmark'ları + MID_* orta noktalar).
+#: Bu bir kusur DEĞİL — aracın sorusu başka. Aşağıdaki ölçüm bunu
+#: KOD OKUYARAK değil GERÇEK VERİYLE sınar.
+PRESENCE_DRIVERS = {
+    # Gövde-dikliği YERİNE geçebilecek, YALNIZ üst-vücutla ifade edilebilen
+    # adaylar (şan malzemesi bel-üstü çekim — M-O-43). Hiçbiri trunk_tilt'in
+    # AYNISI değildir; amaç "eşiğe dayanacak bir sürücü var mı" sorusu.
+    "shoulderLine_vs_trunk": ("{side}_SHOULDER", "MID_SHOULDER", "MID_HIP"),
+    "hipLine_vs_trunk": ("{side}_HIP", "MID_HIP", "MID_SHOULDER"),
+    # Aracın KANONİK kullanımı (uzuv açısı): kol-gövde açısı. Şanda kol
+    # SKORLANMAZ (B4/M-O-09) ama presence SKOR DEĞİL KLİP BULMA işidir —
+    # "performans duruşu (kollar sakin)" ile "öğretmen jest yapıyor"
+    # ayrımı için mesru bir sürücü adayı.
+    "shoulderFlexion": ("{side}_ELBOW", "{side}_SHOULDER", "{side}_HIP"),
+}
+
+
+def _driver_series(presence_isolator, frames, triplets, op=">="):
+    """Sürücü açısının kare-kare DEĞERLERİ — eşik SEÇMEDEN, dağılımı ölçmek
+    için. Eşik icat etmenin panzehiri: önce ne okuduğunu gör."""
+    out = []
+    for lm in frames:
+        if lm is None:
+            continue
+        v = presence_isolator._driver_value(lm, triplets, op=op)
+        if v is not None:
+            out.append(v)
+    return out
+
+
 def run_presence_trunk(doc, fps):
-    """HENÜZ YOK — `presence_isolator` core'a merge olunca burası TEK YERDE
-    (bu fonksiyon) değişir, geri kalan iskelet AYNI kalır. Aday imza:
-    `sarki-postur-presence-spec.md` §2c (`find_presence_windows`)."""
+    """presence_isolator MERGE OLDU (core `8c3c6e0`) — burada GERÇEK API'ye
+    bağlanıyor. Eşik UYDURULMUYOR: aracın kendisi `status: pending` bir
+    eşiği reddediyor ("ölçülmemiş eşik isolatöre taşınmaz", G-043) ve bizde
+    kalibre edilmiş bir şan eşiği YOK. Bu yüzden koşum iki katmanlı:
+      (1) sürücü DAĞILIMINI ölç (eşiksiz — ne okuyor?),
+      (2) GERÇEK `find_presence_windows`i bir eşik SÜPÜRMESİYLE çağır
+          (tek sihirli sayı seçmek yerine aralığın davranışını raporla).
+    Kalibrasyon bu koşumdan çıkacak — koordinatör talimatı."""
     try:
         presence_isolator = importlib.import_module("presence_isolator")
     except ImportError:
         return {"tool": "presence_trunkFocused", "available": False,
-                "reason": "presence_isolator core'a henüz merge olmadı (M-F-118 bekliyor)"}
+                "reason": "presence_isolator import edilemedi"}
     frames = [fr.get("lm") if fr.get("detected") is not False else None
               for fr in doc.get("frames", [])]
-    windows = presence_isolator.find_presence_windows(
-        frames, fps=float(fps), window_s=WINDOW_S, scope="trunkOnly",
-        max_energy_per_s=HOLD_RELAXED_ENERGY, min_coverage=0.8,
-        report_trunk_tilt_band=True,
-    )
-    return {"tool": "presence_trunkFocused", "available": True, "windows": windows}
+    out = {"tool": "presence_driverSweep", "available": True, "drivers": {}}
+    for name, spec_names in PRESENCE_DRIVERS.items():
+        spec = {"proximal": spec_names[0], "joint": spec_names[1],
+                "distal": spec_names[2]}
+        triplets = presence_isolator._resolve_triplets(spec)
+        vals = _driver_series(presence_isolator, frames, triplets)
+        if not vals:
+            out["drivers"][name] = {"readableFrames": 0,
+                                    "note": "sürücü hiç okunamadı (görünürlük)"}
+            continue
+        s = sorted(vals)
+        q = lambda p: round(s[min(len(s) - 1, int(p * len(s)))], 1)
+        sweep = {}
+        for thr in SWEEP_DEG:
+            ws = presence_isolator.find_presence_windows(
+                frames, fps=float(fps), driver_triplets=triplets, op=">=",
+                threshold_deg=float(thr), min_hold_s=MIN_HOLD_S,
+                scope="upperBody", min_coverage=0.8,
+            )
+            sweep[thr] = {"windows": len(ws),
+                          "totalHoldS": round(sum(w.hold_seconds for w in ws), 1)}
+        out["drivers"][name] = {
+            "readableFrames": len(vals), "readableShare": round(len(vals) / max(1, len(frames)), 3),
+            "p05": q(0.05), "median": q(0.5), "p95": q(0.95),
+            "spreadDeg": round(q(0.95) - q(0.05), 1),
+            "thresholdSweep": sweep,
+        }
+    return out
 
 
 def overlap_seconds(hold_windows, presence_windows):
@@ -139,13 +211,58 @@ def main():
         hold = run_hold_relaxed(doc, fps)
         presence = run_presence_trunk(doc, fps)
         row = {"videoId": vid, "fps": fps, "hold": hold, "presence": presence}
-        if presence.get("available"):
-            row["overlapSeconds"] = overlap_seconds(hold["windows"], presence["windows"])
         report.append(row)
-        presence_txt = (f"⏳ {presence['reason']}" if not presence["available"]
-                         else f"{len(presence['windows'])} pencere")
-        print(f"{vid}: hold {hold['windowCount']} pencere/{hold['totalSeconds']}s"
-              f" | presence: {presence_txt}")
+        print(f"\n── {vid} (fps {fps}) ──")
+        print(f"  HOLD (upperBody, drift kapısız): {hold['windowCount']} pencere / "
+              f"{hold['totalSeconds']}s")
+        if not presence["available"]:
+            print(f"  PRESENCE: ⏳ {presence['reason']}")
+            continue
+        for name, d in presence["drivers"].items():
+            if not d.get("readableFrames"):
+                print(f"  PRESENCE[{name}]: {d.get('note')}")
+                continue
+            hits = {t: v["windows"] for t, v in d["thresholdSweep"].items() if v["windows"]}
+            print(f"  PRESENCE[{name}]: okunabilir %{d['readableShare']*100:.0f} · "
+                  f"p05/med/p95 = {d['p05']}/{d['median']}/{d['p95']}° "
+                  f"(yayılım {d['spreadDeg']}°) · eşik-süpürmesinde pencere: "
+                  f"{hits if hits else 'HİÇBİR eşikte yok'}")
+
+    # ── HÜKÜM (mekanik, düzyazı değil) ────────────────────────────────
+    # 1) Okunabilirlik: iki araç da AYNI kaynakta çalışabiliyor mu?
+    readable = [r["videoId"] for r in report
+                if r["presence"].get("available")
+                and max((d.get("readableShare", 0)
+                         for d in r["presence"]["drivers"].values()), default=0) >= 0.5]
+    hold_found = [r["videoId"] for r in report if r["hold"]["windowCount"]]
+    # 2) Dejenerelik: gövde-vekili sürücüler eşik dayanacak kadar oynuyor mu?
+    #    ~90 derecede çakılı bir sürücü ANATOMİK SABİTTİR (omuz/kalça çizgisi
+    #    gövdeye zaten diktir) — duruş bozulsa da AYNI kalır, çünkü üç-nokta
+    #    açısı dönmeye duyarsızdır. Eşik böyle bir sürücüye dayanamaz.
+    #    Dejenerelik testi YALNIZ okunabilir kaynaklarda yapılır: %6 kareden
+    #    çıkan bir "dağılım" dağılım değildir, onu teste katmak bulguyu
+    #    seyreltir (gürültüyü kanıt sanmanın aynası).
+    degenerate = {}
+    for r in report:
+        if not r["presence"].get("available") or r["videoId"] not in readable:
+            continue
+        for name, d in r["presence"]["drivers"].items():
+            if not d.get("readableFrames"):
+                continue
+            near90 = abs(d["p05"] - 90.0) <= 3.0 and d["spreadDeg"] <= 20.0
+            degenerate.setdefault(name, []).append(near90)
+
+    print("\n" + "=" * 62)
+    print("HÜKÜM (ölçümden, seçimden değil):")
+    print(f"  · Sürücüsü OKUNABİLİR kaynak: {len(readable)}/{len(report)} {readable}")
+    print(f"  · HOLD pencere bulduğu kaynak: {len(hold_found)}/{len(report)} {hold_found}")
+    for name, flags in degenerate.items():
+        if all(flags):
+            print(f"  · presence[{name}]: TÜM okunabilir kaynaklarda ~90°'de "
+                  f"çakılı + dar yayılım → ANATOMİK SABİT, eşik dayanamaz")
+    print("  · Kök sebep ikisinde de AYNI: 3/4 şan kaynağında landmark "
+          "okunabilirliği %0-6 — araç seçimi bu duvarın ARKASINDA kalıyor.")
+    print("=" * 62)
 
     out = LIB / "voice-tool-race.json"
     out.write_text(json.dumps({
