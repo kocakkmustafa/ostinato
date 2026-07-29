@@ -202,6 +202,43 @@
       ],
       "phases": [
         {
+          "id": "POSTURE_CHECK",
+          "_what": "Çalmadan ÖNCE duruş değerlendirmesi. Setup Check'in ölçüm ayağı.",
+          "_why_pose_gated": "Replay kanıtı: ses-kapılı fazlar pose-only fixture'da HİÇ ateşlenmiyordu (3 çalgı × ~5500 kare, 0 giriş). Ama asıl mesele test değil ÜRÜN: kullanıcı henüz çalmadan duruşunu düzeltebilmeli — postür metriklerini ses kapısının arkasına koymak Setup Check'in amacını iptal ediyordu.",
+          "enter": {
+            "kind": "metric",
+            "metric": "trunk_tilt",
+            "op": "gte",
+            "value": 0
+          },
+          "quality": {
+            "trunk_tilt": {
+              "op": "lte",
+              "value": 5,
+              "expertPending": true
+            },
+            "left_shoulder": {
+              "op": "lte",
+              "value": 10,
+              "expertPending": true
+            },
+            "left_upper_arm": {
+              "op": "lte",
+              "value": 10,
+              "expertPending": true
+            }
+          },
+          "exit": {
+            "kind": "metric",
+            "metric": "level_above_room_floor_db",
+            "op": "gte",
+            "value": 6
+          },
+          "_exit_why": "Ses gelince oynama fazına devredilir; postür fazı sesi BEKLEMEZ ama sesle biter.",
+          "timeoutMs": 60000,
+          "measureHere": true
+        },
+        {
           "id": "READY",
           "enter": {
             "kind": "flag",
