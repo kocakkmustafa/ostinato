@@ -102,13 +102,13 @@
         -45,
         45
       ],
-      "noiseBand": 2,
-      "_noiseBand_why": "ÖLÇÜLDÜ (B4 pilotu, 5 bağımsız şan eğitmeni): eğitmenler arası medyan sapma 1,5°. Gürültü bandı bunun altına inemez — eğitmenlerin kendi aralarında ayrıştığı kadarını kullanıcıya hata diye okumak dürüstlük ihlali olur. 2° = ölçülen varyansın hemen üstü.",
+      "noiseBand": 6,
+      "_noiseBand_why": "DÜZELTİLDİ (2026-07-29, havuz 11→26 fixture). Önceki değer 2° idi ve 5 şan take'inden ölçülen 1,5°'a dayanıyordu. Havuz büyüyünce aynı metrik piyanoda 2,7°→5,1°, gitarda 3,8° çıktı — yani 2° yalnız EN İYİ çalgının EN KÜÇÜK örnekleminde doğruydu. Gürültü bandı en kötü ölçülen varyansın (5,1°) üstünde olmalı; aksi hâlde eğitmenlerin kendi aralarında ayrıştığı kadarını kullanıcıya 'hata' diye okuruz. Ölçüm: şan 1,5° (n=5) · gitar 3,8° (n=13) · piyano 5,1° (n=10).",
       "baseline": 0,
       "_baseline_why": "Dik gövde = 0° sapma. M-F-34: taban beyan edilmezse tolerans anlamsız.",
       "measurementSpace": "world",
       "_space_why": "J-028 + M-O-08: piksel-ölçekli düzeltme açılı denekte yetersiz kaldı (en kötü vaka %62→%74 kötüleşti); world zorunlu.",
-      "_toleranceSource": "veri-türevli (B4 pilotu) — expertPending DEĞİL"
+      "_toleranceSource": "veri-türevli, ÖRNEKLEM-DUYARLI — havuz büyüdükçe yeniden ölçülür"
     },
     "left_elbow_deg": {
       "id": "left_elbow_deg",
@@ -208,8 +208,8 @@
             },
             "trunk_tilt_deg": {
               "op": "lte",
-              "value": 8,
-              "_why": "Eşik ölçülen varyansın (1,5°) ~5 katı: eğitmenler arası doğal farkı hata saymayız, ama belirgin öne/yana eğilmeyi yakalarız. expertPending değil çünkü tabanı ölçüme dayanıyor; uzman turu gelirse rafine edilir."
+              "value": 15,
+              "_why": "DÜZELTİLDİ: eski eşik 8° idi ve 1,5° varyansın ~5 katıydı. Gerçek en-kötü varyans 5,1° çıkınca 8° yalnız 1,6 katı kaldı — eğitmen farkını hata saymaya başlardı. 15° ≈ 5,1°'ın 3 katı: doğal farkı geçiriyor, belirgin eğilmeyi yakalıyor."
             }
           },
           "_quality_why": "D2 ayrımı: 'bu faza girdim mi' (enter) ile 'iyi yaptım mı' (quality) FARKLI sorular. Girişi periodicity 0.55 açar; hüküm 0.7 ister.",
