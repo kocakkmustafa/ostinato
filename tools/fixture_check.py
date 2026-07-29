@@ -33,10 +33,13 @@ POSE = {
 }
 # kodu var, testli — ama girdisi ses; video fixture'ında yok
 AUDIO_ENGINE = {"pitch_deviation_cents", "periodicity", "level_above_room_floor_db",
-                "vibrato_rate_hz"}
+                "vibrato_rate_hz",
+                # 2026-07-29: kromagram+şablon dedektörü yazıldı (lisans zinciri
+                # olmayan yol, M-O-33). Motoru VAR ve testli — ama "live" DEĞİL:
+                # sentetik akorda 8/8, gerçek gitarda ölçülmedi.
+                "chord_correctness"}
 # motoru henüz yok
-NO_ENGINE_HINT = {"chord_correctness": "Basic Pitch TFLite/CoreML dönüşüm spike'ı bekliyor (W1)",
-                  "strum_timing_ms": "onset motoru var ama akor-vuruş eşlemesi yok",
+NO_ENGINE_HINT = {"strum_timing_ms": "onset motoru var ama akor-vuruş eşlemesi yok",
                   "note_timing_ms": "MIDI modu spike'ı bekliyor (flutter_midi_command)",
                   "setup_complete": "Setup Check akışı henüz yazılmadı (platform katmanı, M-F-25 erteli)",
                   "shoulder_rise_norm": "türetilmiş metrik; tanımı henüz yok",

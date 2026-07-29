@@ -1,0 +1,663 @@
+{
+ "schemaVersion": "ostinato-audiofix-1",
+ "fixtureId": "AF-005-cello-c2-phone-mic",
+ "kind": "synthetic",
+ "$what": "Cello C2 through a simulated phone microphone (120 Hz highpass). The hardest case: the fundamental is attenuated and the engine has to find the period from the harmonics. This fixture is what exposed O-019.",
+ "recordingMeta": {
+  "source": "generated",
+  "sampleRate": 44100,
+  "windowSamples": 4096,
+  "hopSamples": 2048,
+  "roomFloorDb": -60.0,
+  "license": "generated",
+  "$note": "Synthetic, so the ground truth is exact. Real-recording fixtures are a separate track (the G1-A protocol). This set pins engine BEHAVIOUR, not real-world accuracy."
+ },
+ "engineVersions": {
+  "pitch": "YinPitchSource (ostinato_audio 0.1.0)",
+  "onset": "OnsetDetector (spectral flux over log-spaced bands)",
+  "gate": "AudioConfidenceGate"
+ },
+ "expected": {
+  "f0Hz": 65.406,
+  "onsets": 0,
+  "shouldJudge": true,
+  "minJudgedFraction": 0.6
+ },
+ "measured": {
+  "onsetsUs": [],
+  "windows": [
+   {
+    "tStartUs": 0,
+    "tEndUs": 92880,
+    "f0Hz": 65.41965135986096,
+    "periodicity": 0.9588,
+    "rmsDb": -18.4,
+    "levelAboveFloorDb": 41.6,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 46440,
+    "tEndUs": 139320,
+    "f0Hz": 65.40195596074696,
+    "periodicity": 0.99,
+    "rmsDb": -13.77,
+    "levelAboveFloorDb": 46.23,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 92880,
+    "tEndUs": 185760,
+    "f0Hz": 65.4084356140442,
+    "periodicity": 0.9982,
+    "rmsDb": -12.06,
+    "levelAboveFloorDb": 47.94,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 139320,
+    "tEndUs": 232200,
+    "f0Hz": 65.4057877776772,
+    "periodicity": 0.9997,
+    "rmsDb": -11.82,
+    "levelAboveFloorDb": 48.18,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 185760,
+    "tEndUs": 278640,
+    "f0Hz": 65.40610709415218,
+    "periodicity": 0.9997,
+    "rmsDb": -11.82,
+    "levelAboveFloorDb": 48.18,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 232200,
+    "tEndUs": 325080,
+    "f0Hz": 65.40560435870307,
+    "periodicity": 0.9997,
+    "rmsDb": -11.85,
+    "levelAboveFloorDb": 48.15,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 278639,
+    "tEndUs": 371519,
+    "f0Hz": 65.4071552676134,
+    "periodicity": 0.9997,
+    "rmsDb": -11.88,
+    "levelAboveFloorDb": 48.12,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 325079,
+    "tEndUs": 417959,
+    "f0Hz": 65.40680096839817,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 371519,
+    "tEndUs": 464399,
+    "f0Hz": 65.40645206109355,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 417959,
+    "tEndUs": 510839,
+    "f0Hz": 65.4062783276522,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 464399,
+    "tEndUs": 557279,
+    "f0Hz": 65.40563770914957,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 510839,
+    "tEndUs": 603719,
+    "f0Hz": 65.40575973865903,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 557279,
+    "tEndUs": 650159,
+    "f0Hz": 65.40578861058181,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 603719,
+    "tEndUs": 696599,
+    "f0Hz": 65.4072333381749,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 650159,
+    "tEndUs": 743039,
+    "f0Hz": 65.40649899785863,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 696599,
+    "tEndUs": 789479,
+    "f0Hz": 65.40492515937919,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 743039,
+    "tEndUs": 835919,
+    "f0Hz": 65.40639691382653,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 789478,
+    "tEndUs": 882358,
+    "f0Hz": 65.40489989781263,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 835918,
+    "tEndUs": 928798,
+    "f0Hz": 65.40591285606746,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 882358,
+    "tEndUs": 975238,
+    "f0Hz": 65.40573079944659,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 928798,
+    "tEndUs": 1021678,
+    "f0Hz": 65.40599388113539,
+    "periodicity": 0.9997,
+    "rmsDb": -11.89,
+    "levelAboveFloorDb": 48.11,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 975238,
+    "tEndUs": 1068118,
+    "f0Hz": 65.4065759804671,
+    "periodicity": 0.9997,
+    "rmsDb": -11.88,
+    "levelAboveFloorDb": 48.12,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1021678,
+    "tEndUs": 1114558,
+    "f0Hz": 65.40697368483464,
+    "periodicity": 0.9997,
+    "rmsDb": -11.88,
+    "levelAboveFloorDb": 48.12,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1068118,
+    "tEndUs": 1160998,
+    "f0Hz": 65.4065115946914,
+    "periodicity": 0.9997,
+    "rmsDb": -11.87,
+    "levelAboveFloorDb": 48.13,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1114558,
+    "tEndUs": 1207438,
+    "f0Hz": 65.40556410041327,
+    "periodicity": 0.9997,
+    "rmsDb": -11.87,
+    "levelAboveFloorDb": 48.13,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1160998,
+    "tEndUs": 1253878,
+    "f0Hz": 65.40573895429559,
+    "periodicity": 0.9997,
+    "rmsDb": -11.75,
+    "levelAboveFloorDb": 48.25,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1207438,
+    "tEndUs": 1300318,
+    "f0Hz": 65.4068095865579,
+    "periodicity": 0.9997,
+    "rmsDb": -11.49,
+    "levelAboveFloorDb": 48.51,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1253878,
+    "tEndUs": 1346758,
+    "f0Hz": 65.40610017355188,
+    "periodicity": 0.9997,
+    "rmsDb": -11.56,
+    "levelAboveFloorDb": 48.44,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1300317,
+    "tEndUs": 1393197,
+    "f0Hz": 65.4064240050244,
+    "periodicity": 0.9997,
+    "rmsDb": -11.81,
+    "levelAboveFloorDb": 48.19,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1346757,
+    "tEndUs": 1439637,
+    "f0Hz": 65.40546741101329,
+    "periodicity": 0.9997,
+    "rmsDb": -11.84,
+    "levelAboveFloorDb": 48.16,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1393197,
+    "tEndUs": 1486077,
+    "f0Hz": 65.40479109639759,
+    "periodicity": 0.9997,
+    "rmsDb": -11.82,
+    "levelAboveFloorDb": 48.18,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1439637,
+    "tEndUs": 1532517,
+    "f0Hz": 65.40607425931127,
+    "periodicity": 0.9997,
+    "rmsDb": -11.83,
+    "levelAboveFloorDb": 48.17,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1486077,
+    "tEndUs": 1578957,
+    "f0Hz": 65.40650931068896,
+    "periodicity": 0.9997,
+    "rmsDb": -11.85,
+    "levelAboveFloorDb": 48.15,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1532517,
+    "tEndUs": 1625397,
+    "f0Hz": 65.40602574065788,
+    "periodicity": 0.9997,
+    "rmsDb": -11.89,
+    "levelAboveFloorDb": 48.11,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1578957,
+    "tEndUs": 1671837,
+    "f0Hz": 65.40623021761353,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1625397,
+    "tEndUs": 1718277,
+    "f0Hz": 65.40631502930334,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1671837,
+    "tEndUs": 1764717,
+    "f0Hz": 65.4058731724042,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1718277,
+    "tEndUs": 1811157,
+    "f0Hz": 65.40592641571803,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1764717,
+    "tEndUs": 1857597,
+    "f0Hz": 65.40669529022799,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1811156,
+    "tEndUs": 1904036,
+    "f0Hz": 65.40592332923376,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1857596,
+    "tEndUs": 1950476,
+    "f0Hz": 65.40607913537647,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1904036,
+    "tEndUs": 1996916,
+    "f0Hz": 65.40611848624691,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1950476,
+    "tEndUs": 2043356,
+    "f0Hz": 65.40605113282442,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 1996916,
+    "tEndUs": 2089796,
+    "f0Hz": 65.40537958885344,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2043356,
+    "tEndUs": 2136236,
+    "f0Hz": 65.4064643707912,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2089796,
+    "tEndUs": 2182676,
+    "f0Hz": 65.4058186660016,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2136236,
+    "tEndUs": 2229116,
+    "f0Hz": 65.40506366899642,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2182676,
+    "tEndUs": 2275556,
+    "f0Hz": 65.40562953349863,
+    "periodicity": 0.9997,
+    "rmsDb": -11.89,
+    "levelAboveFloorDb": 48.11,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2229116,
+    "tEndUs": 2321996,
+    "f0Hz": 65.40529779410045,
+    "periodicity": 0.9997,
+    "rmsDb": -11.88,
+    "levelAboveFloorDb": 48.12,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2275556,
+    "tEndUs": 2368436,
+    "f0Hz": 65.40534075987746,
+    "periodicity": 0.9997,
+    "rmsDb": -11.88,
+    "levelAboveFloorDb": 48.12,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2321995,
+    "tEndUs": 2414875,
+    "f0Hz": 65.40587605824524,
+    "periodicity": 0.9997,
+    "rmsDb": -11.87,
+    "levelAboveFloorDb": 48.13,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2368435,
+    "tEndUs": 2461315,
+    "f0Hz": 65.4058099451414,
+    "periodicity": 0.9997,
+    "rmsDb": -11.86,
+    "levelAboveFloorDb": 48.14,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2414875,
+    "tEndUs": 2507755,
+    "f0Hz": 65.40659654146216,
+    "periodicity": 0.9997,
+    "rmsDb": -11.66,
+    "levelAboveFloorDb": 48.34,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2461315,
+    "tEndUs": 2554195,
+    "f0Hz": 65.40567760730166,
+    "periodicity": 0.9997,
+    "rmsDb": -11.46,
+    "levelAboveFloorDb": 48.54,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2507755,
+    "tEndUs": 2600635,
+    "f0Hz": 65.40626485130262,
+    "periodicity": 0.9997,
+    "rmsDb": -11.64,
+    "levelAboveFloorDb": 48.36,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2554195,
+    "tEndUs": 2647075,
+    "f0Hz": 65.40590147676625,
+    "periodicity": 0.9997,
+    "rmsDb": -11.84,
+    "levelAboveFloorDb": 48.16,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2600635,
+    "tEndUs": 2693515,
+    "f0Hz": 65.40686597928931,
+    "periodicity": 0.9997,
+    "rmsDb": -11.82,
+    "levelAboveFloorDb": 48.18,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2647075,
+    "tEndUs": 2739955,
+    "f0Hz": 65.40646183076994,
+    "periodicity": 0.9997,
+    "rmsDb": -11.82,
+    "levelAboveFloorDb": 48.18,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2693515,
+    "tEndUs": 2786395,
+    "f0Hz": 65.4061774785536,
+    "periodicity": 0.9997,
+    "rmsDb": -11.84,
+    "levelAboveFloorDb": 48.16,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2739955,
+    "tEndUs": 2832835,
+    "f0Hz": 65.40605771963904,
+    "periodicity": 0.9997,
+    "rmsDb": -11.86,
+    "levelAboveFloorDb": 48.14,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2786395,
+    "tEndUs": 2879275,
+    "f0Hz": 65.4061072178177,
+    "periodicity": 0.9997,
+    "rmsDb": -11.89,
+    "levelAboveFloorDb": 48.11,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2832834,
+    "tEndUs": 2925714,
+    "f0Hz": 65.4063936603951,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   },
+   {
+    "tStartUs": 2879274,
+    "tEndUs": 2972154,
+    "f0Hz": 65.40539518801265,
+    "periodicity": 0.9997,
+    "rmsDb": -11.9,
+    "levelAboveFloorDb": 48.1,
+    "verdict": "reliable",
+    "reason": "ok"
+   }
+  ],
+  "judgedWindows": 63,
+  "judgedFraction": 1.0
+ }
+}

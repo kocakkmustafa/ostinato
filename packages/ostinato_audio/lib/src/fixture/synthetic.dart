@@ -52,6 +52,55 @@ final class SyntheticTone {
     return _normalize(out);
   }
 
+  /// A strummed chord: every string its own harmonic-rich tone, summed.
+  ///
+  /// Not a stack of pure sines, because the thing that makes chord recognition
+  /// hard is precisely the partials — a low E's third harmonic lands on B, so
+  /// a chromagram sees notes nobody fretted. A fixture without partials would
+  /// flatter the detector and prove nothing about a real guitar.
+  ///
+  /// [strumSpreadSeconds] staggers the string onsets the way a downstroke
+  /// does; set it to 0 for a piano-style simultaneous attack.
+  static List<double> chord({
+    required List<int> midiNotes,
+    required int sampleRate,
+    required double seconds,
+    double strumSpreadSeconds = 0.025,
+    int seed = 42,
+  }) {
+    final n = (sampleRate * seconds).round();
+    final out = List<double>.filled(n, 0);
+    for (var s = 0; s < midiNotes.length; s++) {
+      final delay = (strumSpreadSeconds * s * sampleRate).round();
+      if (delay >= n) break;
+      final voice = harmonic(
+        f0Hz: 440.0 * math.pow(2, (midiNotes[s] - 69) / 12.0),
+        sampleRate: sampleRate,
+        seconds: (n - delay) / sampleRate,
+        seed: seed + s,
+      );
+      for (var i = 0; i < voice.length; i++) {
+        out[delay + i] += voice[i];
+      }
+    }
+    return _normalize(out);
+  }
+
+  /// The open-position shapes `open_chord_drill` teaches, as the actual pitches
+  /// a guitar sounds — not textbook triads. Voicing matters: an open E doubles
+  /// its root across three octaves, and that doubling is what a chromagram
+  /// sees.
+  static const openGuitarChords = <String, List<int>>{
+    'E': [40, 47, 52, 56, 59, 64],
+    'A': [45, 52, 57, 61, 64],
+    'D': [50, 57, 62, 66],
+    'G': [43, 47, 50, 55, 59, 67],
+    'C': [48, 52, 55, 60, 64],
+    'Am': [45, 52, 57, 60, 64],
+    'Em': [40, 47, 52, 55, 59, 64],
+    'Dm': [50, 57, 62, 65],
+  };
+
   /// Silence with a little room noise — the negative fixture. The engine must
   /// answer "I could not hear that", never a number.
   static List<double> roomNoise({

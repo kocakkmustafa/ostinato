@@ -10,7 +10,8 @@ final class Onset {
   final double strength;
 }
 
-/// Spectral-flux onset detector with an adaptive median threshold.
+/// Spectral-flux onset detector over log-spaced bands, with an adaptive median
+/// threshold.
 ///
 /// Energy-based detection is the obvious choice and the wrong one for the
 /// instruments we start with: a legato bow change or a slurred vocal note can
@@ -23,16 +24,33 @@ final class Onset {
 /// count, and why the camera (which sees the bow reverse unambiguously) is the
 /// senior partner in fusion findings.
 final class OnsetDetector {
-  OnsetDetector({
-    this.frameSize = 1024,
-    this.hopSize = 256,
+  const OnsetDetector({
+    this.frameMs = 46,
+    this.hopMs = 6,
     this.medianWindow = 11,
     this.deltaAboveMedian = 0.08,
     this.minIntervalUs = 50000,
+    this.bandCount = 24,
+    this.minAnalysisHz = 40,
+    this.maxAnalysisHz = 4000,
   });
 
-  final int frameSize;
-  final int hopSize;
+  /// Analysis window length **in milliseconds**, not samples.
+  ///
+  /// Frequency resolution is `1 / duration`, so a window fixed at N samples
+  /// resolves differently on a 44.1 kHz fixture than on the 48 kHz stream most
+  /// Android devices actually deliver. Held at 2048 samples, this detector was
+  /// clean on the test fixtures and reported 17 attacks for a 3-note cello
+  /// phrase at 48 kHz — a defect that would have looked like "works on my
+  /// machine, broken on half the devices".
+  ///
+  /// 46 ms is the shortest window measured to hold a cello C2 steady. Shorter
+  /// windows tick faster but wobble in the bass; longer ones smear the attack
+  /// and blunt the very timing this detector exists to report.
+  final double frameMs;
+
+  /// Step between windows. This, not [frameMs], sets timing granularity.
+  final double hopMs;
 
   /// Frames used for the running median. Wider = calmer threshold = fewer
   /// spurious onsets in a noisy room, at the cost of reacting later to a real
@@ -43,8 +61,26 @@ final class OnsetDetector {
   /// Refractory period. Two "onsets" 10 ms apart are one onset and a wobble.
   final int minIntervalUs;
 
+  /// Log-spaced analysis bands. See [_bandMagnitudes] for why bands rather than
+  /// raw DFT bins, and why this count is independent of the window length.
+  final int bandCount;
+
+  /// Analysed range. The low edge sits below the lowest fundamental we claim to
+  /// support (cello C2 ≈ 65 Hz); the high edge keeps enough harmonic detail to
+  /// see a bright attack without paying for bins nobody listens to.
+  final double minAnalysisHz;
+  final double maxAnalysisHz;
+
+  /// Window length in samples at a given rate. Same duration everywhere, so the
+  /// same music is analysed identically on a 44.1 kHz fixture and a 48 kHz phone.
+  int frameSizeFor(int sampleRate) => (frameMs * sampleRate / 1000).round();
+
+  int hopSizeFor(int sampleRate) => (hopMs * sampleRate / 1000).round();
+
   List<Onset> detect(List<double> samples, {required int sampleRate, required int tStartUs}) {
-    final flux = _spectralFlux(samples);
+    final frameSize = frameSizeFor(sampleRate);
+    final hopSize = hopSizeFor(sampleRate);
+    final flux = _spectralFlux(samples, sampleRate);
     if (flux.isEmpty) return const [];
 
     final onsets = <Onset>[];
@@ -58,7 +94,13 @@ final class OnsetDetector {
           (i == flux.length - 1 || flux[i] >= flux[i + 1]);
       if (!isPeak) continue;
 
-      final tUs = tStartUs + (i * hopSize * 1000000 / sampleRate).round();
+      // A frame stands for the middle of the window it analysed, not its first
+      // sample. Timestamping at the start reported every onset early by roughly
+      // half a window — 13 ms at the old frame length, 31 ms at this one — a
+      // systematic bias that would have been silently absorbed into every
+      // rhythm measurement built on top of it.
+      final centreSample = i * hopSize + frameSize / 2;
+      final tUs = tStartUs + (centreSample * 1000000 / sampleRate).round();
       if (tUs - lastTUs < minIntervalUs) continue;
 
       onsets.add(Onset(tUs: tUs, strength: flux[i] - threshold));
@@ -67,11 +109,14 @@ final class OnsetDetector {
     return onsets;
   }
 
-  /// Half-wave rectified difference of log magnitude spectra between frames.
-  List<double> _spectralFlux(List<double> x) {
+  /// Half-wave rectified difference of band magnitudes between frames.
+  List<double> _spectralFlux(List<double> x, int sampleRate) {
+    final edges = bandEdges(sampleRate);
+    final frameSize = frameSizeFor(sampleRate);
+    final hopSize = hopSizeFor(sampleRate);
     final frames = <List<double>>[];
     for (var start = 0; start + frameSize <= x.length; start += hopSize) {
-      frames.add(_logMagnitude(x, start));
+      frames.add(_bandMagnitudes(x, start, edges, frameSize));
     }
     if (frames.length < 2) return const [];
 
@@ -87,31 +132,68 @@ final class OnsetDetector {
     return flux;
   }
 
-  /// Magnitude spectrum of one Hann-windowed frame, in log domain.
+  /// Log-compressed magnitude per band for one Hann-windowed frame.
   ///
-  /// A direct DFT at a coarse bin count: onset timing needs temporal precision,
-  /// not frequency precision, and this keeps the reference implementation
-  /// readable. Native ports are free to use an FFT — they are validated against
-  /// this by fixture replay, not by sharing code.
-  List<double> _logMagnitude(List<double> x, int start) {
-    const bins = 64;
-    final out = List<double>.filled(bins, 0);
-    for (var k = 1; k <= bins; k++) {
-      var re = 0.0;
-      var im = 0.0;
-      final omega = 2 * math.pi * k / frameSize;
-      for (var n = 0; n < frameSize; n++) {
-        // Hann window suppresses the spectral splatter that would otherwise
-        // look like flux at every frame boundary.
-        final w = 0.5 - 0.5 * math.cos(2 * math.pi * n / (frameSize - 1));
-        final s = x[start + n] * w;
-        re += s * math.cos(omega * n);
-        im -= s * math.sin(omega * n);
+  /// Bands, not raw bins, and the reason is a defect the audio fixture set
+  /// caught (O-019). Linear DFT bins are `sampleRate / frameSize` apart — 43 Hz
+  /// at a 23 ms window. A cello C2 (65 Hz) therefore falls *between* bins 1
+  /// and 2, and its leakage pattern shifts every frame as the tone's phase
+  /// advances against the window. The magnitude vector wobbles, flux reads that
+  /// wobble as change, and a perfectly sustained note is reported as ~13 note
+  /// attacks per second. Measured: phantom onsets below ~147 Hz, none above.
+  ///
+  /// Lengthening the frame fixes the bass and breaks the treble, because a
+  /// fixed *bin count* silently makes frame length set the analysed bandwidth
+  /// too (64 bins × 10.8 Hz = a 690 Hz ceiling at frameSize 4096, which puts a
+  /// C5's harmonics outside the analysis entirely). Resolution and bandwidth
+  /// were one knob; they need to be two.
+  ///
+  /// Summing energy across a band wider than the leakage makes the magnitude
+  /// phase-stable wherever the partial happens to sit, and log spacing puts the
+  /// narrow bands where pitch actually lives. Temporal precision — the thing
+  /// onset detection genuinely needs — is set by the hop, not by this.
+  List<double> _bandMagnitudes(List<double> x, int start, List<int> edges, int frameSize) {
+    final out = List<double>.filled(edges.length - 1, 0);
+    for (var b = 0; b < out.length; b++) {
+      var energy = 0.0;
+      for (var k = edges[b]; k < edges[b + 1]; k++) {
+        var re = 0.0;
+        var im = 0.0;
+        final omega = 2 * math.pi * k / frameSize;
+        for (var n = 0; n < frameSize; n++) {
+          // Hann window suppresses the spectral splatter that would otherwise
+          // look like flux at every frame boundary.
+          final w = 0.5 - 0.5 * math.cos(2 * math.pi * n / (frameSize - 1));
+          final s = x[start + n] * w;
+          re += s * math.cos(omega * n);
+          im -= s * math.sin(omega * n);
+        }
+        energy += (re * re + im * im) / (frameSize * frameSize);
       }
-      final mag = math.sqrt(re * re + im * im) / frameSize;
-      out[k - 1] = math.log(1 + 1000 * mag);
+      out[b] = math.log(1 + 1000 * math.sqrt(energy));
     }
     return out;
+  }
+
+  /// Linear-bin indices delimiting each log-spaced band.
+  ///
+  /// Derived from the sample rate given at analysis time rather than cached on
+  /// the instance: a detector reused across a 44.1 kHz fixture and a 48 kHz
+  /// device stream would otherwise analyse the second one at silently wrong
+  /// frequencies. Bands that would collapse into the same linear bin are
+  /// merged — an empty band contributes no energy and only dilutes the flux
+  /// average.
+  List<int> bandEdges(int sampleRate) {
+    final frameSize = frameSizeFor(sampleRate);
+    final binHz = sampleRate / frameSize;
+    final nyquistBin = frameSize ~/ 2;
+    final edges = <int>[];
+    for (var b = 0; b <= bandCount; b++) {
+      final hz = minAnalysisHz * math.pow(maxAnalysisHz / minAnalysisHz, b / bandCount);
+      final bin = math.min(nyquistBin, math.max(1, (hz / binHz).round()));
+      if (edges.isEmpty || bin > edges.last) edges.add(bin);
+    }
+    return edges;
   }
 
   double _localMedian(List<double> v, int i) {

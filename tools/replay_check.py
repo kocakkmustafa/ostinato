@@ -12,9 +12,15 @@ gösterir. "Hiç ateşlenmeyen faz" = kullanıcı doğru yapsa bile hüküm çı
 
 Üç sonuç ayrılır ve karıştırılmaz:
   ✅ ateşlendi
-  ◻️ kanal dışı — koşul yalnız bu fixture türünde bulunmayan girdilere dayanıyor
-     (ses). Kapsama boşluğu; config kusuru değil, ama SAYILIR.
+  ◻️ kanal dışı — koşul, motoru henüz yazılmamış bir metriğe dayanıyor.
+     Kapsama boşluğu; config kusuru değil, ama SAYILIR.
   ⛔ ölü faz — girdiler mevcuttu, koşul yine de hiç sağlanmadı. GERÇEK kusur.
+  ⚠️ kapısız faz — çalarken de sessizlikte de ateşleniyor. Ses koşulu yazılmış
+     ama iş görmüyor; ölü fazın aynadaki hâli ve linter'ın göremediği sınıf.
+
+Ses kanalı `fixtures/audio/` (ostinato-audiofix-1) üzerinden beslenir. Poz ve ses
+kayıtları bağımsızdır: buradaki hüküm ULAŞILABİLİRLİK kanıtıdır, eşzamanlılık
+kanıtı değil.
 """
 import json, glob, math, os, sys
 from statistics import median
@@ -53,12 +59,44 @@ POSE = {
     "left_forearm": lambda w: _seg(w[L_EL], w[L_WR]),
     "right_forearm": lambda w: _seg(w[R_EL], w[R_WR]),
 }
-#: Bu fixture türünde (pose-only video) BULUNMAYAN girdi sınıfı. Bir fazın
-#: koşulu yalnız bunlara dayanıyorsa "ölü faz" DEĞİL "kanal dışı" demektir —
-#: ikisini aynı işaretle raporlamak, gerçek ölü fazı gürültüde kaybeder.
-OUT_OF_CHANNEL = {"level_above_room_floor_db", "periodicity", "pitch_deviation_cents",
-                  "vibrato_rate_hz", "chord_correctness", "strum_timing_ms",
+#: Hiçbir fixture türünde BULUNMAYAN girdi sınıfı — motoru henüz yazılmamış
+#: metrikler. Bir fazın koşulu yalnız bunlara dayanıyorsa "ölü faz" DEĞİL
+#: "kanal dışı" demektir; ikisini aynı işaretle raporlamak gerçek ölü fazı
+#: gürültüde kaybeder.
+#:
+#: Ses metrikleri 2026-07-29'da bu listeden ÇIKTI: `ostinato-audiofix-1` seti
+#: üretildi, artık gerçek ölçülmüş değerlerle besleniyorlar (M-F-56 kapsama
+#: boşluğu kapandı). Kalanlar fixture_check'in "aspirational" sınıfı.
+OUT_OF_CHANNEL = {"vibrato_rate_hz", "chord_correctness", "strum_timing_ms",
                   "note_timing_ms", "setup_complete"}
+
+#: Ses fixture'ından türetilen metrikler. Poz kareleriyle ZAMAN-HİZALI DEĞİL:
+#: iki kayıt bağımsız. Bu yüzden buradaki "ateşlendi" hükmü ULAŞILABİLİRLİK
+#: kanıtıdır ("bu koşul sağlanabiliyor"), eşzamanlı gerçek kullanımda ateşlendiği
+#: kanıtı değil. Liveness kapısının sorusu zaten budur.
+def audio_windows(fixture_id):
+    path = f"fixtures/audio/{fixture_id}.json"
+    d = json.load(open(path, encoding="utf-8"))
+    expected = d["expected"].get("f0Hz")
+    out = []
+    for w in d["measured"]["windows"]:
+        vals = {"level_above_room_floor_db": w["levelAboveFloorDb"],
+                "periodicity": w["periodicity"]}
+        if w["f0Hz"] and expected:
+            vals["pitch_deviation_cents"] = abs(1200 * math.log(w["f0Hz"] / expected, 2))
+        out.append(vals)
+    return out
+
+
+#: Her çalgı için: çalınan bir fixture + çalınmayan bir fixture. İkincisi kapının
+#: NEGATİF yönünü sınar — ses-kapılı bir faz sessizlikte de ateşleniyorsa o faz
+#: "canlı" değil, sadece koşulsuz.
+AUDIO_BY_INSTRUMENT = {"voice": "AF-001-clean-sustained-a4",
+                       "guitar": "AF-003-scale-with-metronome",
+                       "piano": "AF-003-scale-with-metronome"}
+SILENT_FIXTURE = "AF-002-room-noise-only"
+
+AUDIO_METRICS = {"level_above_room_floor_db", "periodicity", "pitch_deviation_cents"}
 
 OPS = {"lt": lambda a, b: a < b, "gt": lambda a, b: a > b,
        "lte": lambda a, b: a <= b, "gte": lambda a, b: a >= b, "eq": lambda a, b: a == b}
@@ -110,8 +148,12 @@ def main():
         if not files:
             print("  fixture yok"); continue
 
+        playing = audio_windows(AUDIO_BY_INSTRUMENT.get(inst, "AF-001-clean-sustained-a4"))
+        silent = audio_windows(SILENT_FIXTURE)
+
         for t in cfg["techniques"]:
             fired = {p["id"]: 0 for p in t["phases"]}
+            fired_silent = {p["id"]: 0 for p in t["phases"]}
             undecidable = {p["id"]: 0 for p in t["phases"]}
             frames = 0
             for f in files:
@@ -128,11 +170,15 @@ def main():
                                 if not math.isnan(v): vals[mid] = v
                             except Exception:
                                 pass
+                    a_play = playing[frames % len(playing)]
+                    a_mute = silent[frames % len(silent)]
                     frames += 1
                     for p in t["phases"]:
-                        r = evaluate(p.get("enter", {}), vals)
+                        r = evaluate(p.get("enter", {}), {**vals, **a_play})
                         if r is None: undecidable[p["id"]] += 1
                         elif r: fired[p["id"]] += 1
+                        if evaluate(p.get("enter", {}), {**vals, **a_mute}) is True:
+                            fired_silent[p["id"]] += 1
 
             print(f"  teknik {t['id']} — {frames} kare")
             for p in t["phases"]:
@@ -142,7 +188,8 @@ def main():
                 if f_ == 0 and u_ > 0 and needed and needed <= OUT_OF_CHANNEL:
                     # Kusur DEĞİL: bu faz ses kanalına bağlı, fixture pose-only.
                     print(f"    ◻️ {pid:10} kanal dışı — koşulu {', '.join(sorted(needed))} "
-                          f"gerektiriyor; ses fixture'ı yok (kapsama boşluğu, config kusuru değil)")
+                          f"gerektiriyor; bu metriğin MOTORU henüz yok "
+                          f"(fixture_check'te 'aspirational'; kapsama boşluğu, config kusuru değil)")
                 elif f_ == 0 and u_ > 0:
                     print(f"    ⛔ {pid:10} HİÇ ATEŞLENMEDİ — {u_} karede koşul DEĞERLENDİRİLEMEDİ "
                           f"(gereken metrikler: {', '.join(sorted(needed))})")
@@ -151,8 +198,19 @@ def main():
                     print(f"    ⛔ {pid:10} HİÇ ATEŞLENMEDİ — koşul {frames} karede hep yanlış")
                     rc = 1
                 else:
-                    print(f"    ✅ {pid:10} {f_}/{frames} karede giriş koşulu sağlandı "
-                          f"(%{100*f_/frames:.0f})")
+                    needs_audio = needed & AUDIO_METRICS
+                    mute = fired_silent[pid]
+                    if needs_audio and mute > 0:
+                        # Sessizlikte de ateşleniyor: koşul sesi gerçekten
+                        # kapı olarak kullanmıyor. Ölü fazın aynadaki hâli.
+                        print(f"    ⚠️ {pid:10} {f_}/{frames} çalarken ateşlendi AMA "
+                              f"{mute}/{frames} SESSİZLİKTE de ateşlendi — "
+                              f"ses koşulu ({', '.join(sorted(needs_audio))}) kapı görevi görmüyor")
+                        rc = 1
+                    else:
+                        tag = " · sessizlikte 0 ✓" if needs_audio else ""
+                        print(f"    ✅ {pid:10} {f_}/{frames} karede giriş koşulu sağlandı "
+                              f"(%{100*f_/frames:.0f}){tag}")
     return rc
 
 

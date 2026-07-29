@@ -15,6 +15,8 @@ library;
 
 export 'src/fixture/synthetic.dart';
 export 'src/gate/audio_confidence_gate.dart';
+export 'src/harmony/chord_detector.dart';
+export 'src/harmony/chroma.dart';
 export 'src/onset/onset_detector.dart';
 export 'src/pitch/pitch_source.dart';
 export 'src/pitch/yin.dart';

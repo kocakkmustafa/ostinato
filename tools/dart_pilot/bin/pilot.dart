@@ -46,10 +46,25 @@ void main(List<String> args) {
   const extractor = JointAngleExtractor(specs: StandardJoints.upperBody);
   final takes = <ReferenceTake>[];
   final angleClassOf = <String, String>{};
+  // M-F-43 kaynak-uygunluk kapısı. Rig her fixture'a `referenceEligible`
+  // yazıyor ve bu pilot onu OKUMUYORDU — yani hasat hattı "bu kaynak referansa
+  // giremez" diyordu, ben yine de referans kuruyordum. Sentinel olayının aynısı:
+  // var olan bir dürüstlük kapısına hiç sorulmaması.
+  // 0.7.2'de bu sınıflandırma ÇEKİRDEĞE girdi (M-F-62). Kendi bool kopyamı
+  // bırakıyorum: dört durumu ikiye indiriyordu ve `unattested` (hasat edilmiş
+  // ama beyansız) ile `ineligible` (açıkça reddedilmiş) aynı torbaya giriyordu.
+  // Benim `--allow-ineligible` bayrağım açıkça reddedilmiş kaynağı da içeri
+  // alabilirdi; çekirdeğin `allowUnattested`i ALAMAZ. Eşik/kural kopyalamanın
+  // nasıl bittiğini bu oturumda iki kez gördüm (M-O-25, M-O-26).
+  final eligibility = <String, TakeEligibility>{};
+  final romModeOf = <String, String?>{};
 
   for (final f in files) {
     final doc = jsonDecode(f.readAsStringSync()) as Map<String, dynamic>;
     final id = f.uri.pathSegments.last.split('.').first;
+    final prov = (doc['provenance'] as Map<String, dynamic>?) ?? const {};
+    eligibility[id] = ReferenceCli.eligibilityOf(Fixture.fromJson(doc));
+    romModeOf[id] = prov['romMode'] as String?;
     final frames = (doc['frames'] as List).cast<Map<String, dynamic>>();
 
     // Durağan pencere: hareketin en az olduğu 3 saniye. Öğretim videosunda
@@ -116,6 +131,49 @@ void main(List<String> args) {
   for (final t in takes) {
     stdout.writeln('  ${t.id}  ${angleClassOf[t.id]}');
   }
+  // Uygunluk sayımı: kapının ne dediğini ÖNCE söyle, sonra ölçümü göster.
+  List<ReferenceTake> withState(TakeEligibility e) =>
+      takes.where((ReferenceTake t) => eligibility[t.id] == e).toList();
+  final eligible = withState(TakeEligibility.attested);
+  final refused = withState(TakeEligibility.ineligible);
+  final unattested = withState(TakeEligibility.unattested);
+  final firstParty = withState(TakeEligibility.firstParty);
+  stdout.writeln('\n=== Kaynak uygunluğu (M-F-43 / M-F-62, FAIL-CLOSED) ===');
+  stdout.writeln('  attested   : ${eligible.length}  (rig uygun dedi)');
+  stdout.writeln('  ineligible : ${refused.length}  (rig UYGUN DEĞİL dedi'
+      '${refused.isEmpty ? "" : " — romMode: ${refused.map((ReferenceTake t) => romModeOf[t.id]).toSet().join(", ")}"})');
+  stdout.writeln('  unattested : ${unattested.length}  (hasat edilmiş ama beyan YOK — '
+      'sınıflandırma kanıtsız koştu)');
+  stdout.writeln('  firstParty : ${firstParty.length}  (hasat dışı; uygunluk rig dışında kurulur)');
+
+  // Fail-closed'ın anlamı: "işaret bulamadım" asla "uygun" sayılmaz. Pasif
+  // gösterimden kurulan referans kullanıcıya ULAŞILAMAZ hedef koyar ve bu hata
+  // örneklem büyüdükçe DÜZELMEZ, derinleşir (rom_mode.py). Sınıflandırılmamış
+  // kaynak da bu yüzden geçemez: alanın yokluğu, kaynağın masum olduğunu
+  // göstermez.
+  // `ineligible` HİÇBİR bayrakla içeri girmez — yalnız `unattested` için
+  // istisna var ve artefaktı PROVISIONAL damgalar.
+  final allowUnattested = args.contains('--allow-unattested');
+  final admitted = allowUnattested
+      ? <ReferenceTake>[...eligible, ...unattested, ...firstParty]
+      : <ReferenceTake>[...eligible, ...firstParty];
+  if (refused.isNotEmpty) {
+    stdout.writeln('  ⛔ daima dışarıda (isimle): '
+        '${refused.map((ReferenceTake t) => t.id).join(", ")}');
+  }
+  if (admitted.length < 3) {
+    stderr.writeln('\n⛔ KAPI: kabul edilen take ${admitted.length} < 3 — referans KURULMAZ.\n'
+        '   Bu ölçümler tolerans/eşik kaynağı OLAMAZ (M-C-01: skorlama referansı DOĞRU olmalı).\n'
+        '   Sebep: hasat --no-transcribe ile koştu → sınıflandırıcı anlatıyı göremedi;\n'
+        '   ${unattested.length} kaynak beyansız (kapı eklenmeden önce hasat edilmiş).\n'
+        '   Çözüm: transkriptli yeniden hasat. Yalnız KEŞİF amaçlı: --allow-unattested\n'
+        '   (bu bayrak bile `ineligible` kaynağı İÇERİ ALMAZ — o karar geri alınamaz).');
+    exit(2);
+  }
+  if (allowUnattested && unattested.isNotEmpty) {
+    stdout.writeln('  ⚠️ measurementProvenance: PROVISIONAL — ${unattested.length} beyansız '
+        'take dahil edildi. Sayılar var ama TOLERANS İDDİASI KAPATAMAZ (M-C-01).');
+  }
   if (takes.length < 3) {
     stderr.writeln('minTakes=3 karşılanmadı');
     exit(1);
@@ -155,9 +213,32 @@ void main(List<String> args) {
   // Simetrik bir etkinlikte (şan duruşu) çevirmenin maliyeti neredeyse sıfırdır,
   // yani "en iyi" atama gürültüyle belirlenir — bu belirsizliği ölçmeden
   // sol/sağ farkına anlam yüklemek, artefaktı bulgu sanmaktır.
-  stdout.writeln(ref.mirrorConfident
-      ? '  → taraf-bağımlı metrikler DEĞERLENDİRİLEBİLİR (çözüm kesin)'
-      : '  → ⚠️ taraf-bağımlı metrikler TUTULUR (kural 7: çözüm kesin değil)');
+  // O-021: `mirrorConfident`i olduğu gibi kabul etmek YETMİYOR — bayrağın
+  // DAYANAĞINI da sormak gerekiyor. Çekirdek n>12'de tükenmeli aramayı bırakıp
+  // runnerUpGap'i `mirrorMargin*2` olarak UYDURUYOR (reference_builder.dart
+  // "// unknown gap"); bu yapısı gereği marjın üstünde olduğundan o yolda
+  // confident DAİMA true döner. Yani "kesin" hükmü, ölçüm yapılamadığı için
+  // veriliyor olabilir — dürüstlük kapısının tam tersi.
+  //
+  // Acı ironi: çalgı başına ≥12 kabul hedefi BİZİM kalite kuralımız ve tam da
+  // bu kontrolün kapandığı tarafa itiyor. Havuz büyüdükçe sistem daha emin
+  // konuşuyor, üstelik yanlış sebeple.
+  // 0.7.1 (M-O-25 düzeltmesi) `gapMeasured` alanını getirdi: dayanağı artık
+  // n'e bakarak TAHMİN etmiyoruz, çekirdeğe SORUYORUZ. Kendi eşik kopyamı
+  // tutmak, çekirdek sınırı değiştiğinde (12→18 oldu) sessizce yanlış olurdu —
+  // bayrağın dayanağını taşıması tam da bunun için.
+  final fabricatedGap = !mirror.gapMeasured;
+  if (fabricatedGap) {
+    stdout.writeln('  ⚠️ GAP ÖLÇÜLMEDİ (gapMeasured:false, n=${takes.length}) → '
+        'çekirdek fallback yolunda; gerçek fark BİLİNMİYOR (0.7.1\'de NaN).');
+  } else {
+    stdout.writeln('  gapMeasured    : true (tükenmeli arama — dayanak ÖLÇÜM)');
+  }
+  stdout.writeln(ref.mirrorConfident && !fabricatedGap
+      ? '  → taraf-bağımlı metrikler DEĞERLENDİRİLEBİLİR (çözüm kesin, gap ÖLÇÜLDÜ)'
+      : fabricatedGap
+          ? '  → ⚠️ taraf-bağımlı metrikler TUTULUR (kural 7: bilinmeyen fark = belirsiz çözüm)'
+          : '  → ⚠️ taraf-bağımlı metrikler TUTULUR (kural 7: çözüm kesin değil)');
 
   final unreliable = ref.unreliableJoints();
   stdout.writeln('\nGÜVENİLMEZ eklemler (sapma >35°): '
