@@ -1,8 +1,8 @@
 {
  "schema": "motion-core/reference@1",
- "technique": "guitar_posture_setup",
+ "technique": "open_chord_drill",
  "measurementProvenance": "ATTESTED",
- "generatedAt": "2026-07-29T23:21:50.869852Z",
+ "generatedAt": "2026-08-04T20:22:12.889086Z",
  "gates": {
   "minTakes": 3,
   "minSources": 3,

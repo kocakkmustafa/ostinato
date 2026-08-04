@@ -72,7 +72,7 @@
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu.",
    "_derivedFrom": {
     "artifact": "config/references/piano-posture-setup.v1.json",
-    "generatedAt": "2026-07-29T23:21:56.185407Z",
+    "generatedAt": "2026-08-04T20:22:16.704266Z",
     "contributingTakes": 3,
     "dispersionMedianDeg": 1.09,
     "toleranceSource": "floor",
