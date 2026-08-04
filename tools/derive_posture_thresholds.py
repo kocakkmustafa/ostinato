@@ -157,6 +157,27 @@ def check_ruleset(d):
             problems.append(
                 f"metrics.{metric}.noiseBand={m.get('noiseBand')} != türetilen "
                 f"scoringToleranceDeg={lad['scoringToleranceDeg']}")
+        # DAYANAK da bayatlayabilir — üstelik değer doğruyken. Gitarın
+        # gerekçesi '3 eğitmen, 0.54°' derken artefakt 7 take/2.24°'ye
+        # büyümüştü ve noiseBand=8 her iki durumda da doğru olduğu için
+        # değer kapısı bunu GEÇİRİYORDU. `_derivedFrom` o düzyazının
+        # makine-okunur ikizi; burada artefaktla karşılaştırılır.
+        prov = m.get("_derivedFrom")
+        if prov is None:
+            problems.append(f"metrics.{metric}._derivedFrom YOK — gerekçe "
+                            f"makine-okunur ikiz taşımıyor, bayatlığı sınanamaz")
+        else:
+            pj = d["perJoint"][metric]
+            for key, want in (("contributingTakes", d["contributingTakes"]),
+                              ("generatedAt", d["generatedAt"]),
+                              ("dispersionMedianDeg", pj["dispersionMedianDeg"]),
+                              ("floorBoundShare", None)):
+                if key == "floorBoundShare":
+                    continue
+                if prov.get(key) != want:
+                    problems.append(
+                        f"metrics.{metric}._derivedFrom.{key}={prov.get(key)!r} != "
+                        f"artefakt {want!r} — GEREKÇE BAYAT (değer doğru olsa bile)")
         # Faz quality barları toleransın altına inemez.
         for tech in cfg.get("techniques", []):
             for ph in tech.get("phases", []):

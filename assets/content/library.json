@@ -29,7 +29,7 @@
     "notMeasured": [
      "Arm and hand position while holding the guitar — teachers disagree about this by style (11-18 degrees apart), we show it but do not grade it (M-O-46)",
      "Finger placement or fretting technique — camera cannot see fingers well enough to grade them yet",
-     "Strum timing quality judgement — measured, not yet graded (expertPending)",
+     "Strum timing — NOT measured. We can hear individual note attacks, but a strum is one gesture producing six near-simultaneous ones, and the step that maps those onto a chord does not exist yet. Until 2026-08-04 this line said 'measured, not yet graded'; that was wrong and the config carried a matching dead gate.",
      "Full note-by-note transcription — we recognise the chord class, not every note played"
     ]
    },
@@ -99,8 +99,9 @@
     }
    ],
    "comingSoonInThisDiscipline": [
-    "Strum timing as a graded skill — measured but not yet gated (expertPending, quality bar unset)",
-    "Arm/hand posture as a graded skill — teachers disagree by style, this may never become gradeable (see honesty box)"
+    "Strum timing as a graded skill — blocked twice over: the strum-to-chord alignment step is not built, and no teacher data exists on how far off the beat counts as a mistake",
+    "Arm/hand posture as a graded skill — the seven teachers we measured hold the guitar 39 to 105 degrees apart at the elbows and forearms. That is style and camera angle, not error; this may never become gradeable.",
+    "Named posture coaching (the 'you are slouching' cue) — the threshold is now derived from the reference (14 degrees, the spread inside which two teachers count as sitting the same way), but we have not yet decided whether a measurement can be spoken as a correction without a movement-science review."
    ]
   },
   {

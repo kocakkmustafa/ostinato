@@ -67,8 +67,17 @@
    "noiseBand": 8,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ (kanonik ReferenceCli, motion_core-v0.8.4, hold-window+scope=upperBody, 3 bağımsız eğitmen): medyan dispersiyon yalnız 0.54° — floor-bound (`perJointSource: floor`), yani gerçek eğitmen-varyansı ölçüm gürültü tabanının (8°) ALTINDA; bant floor değerine sabitlendi, ham 0.54°'yi kullanmak sahte-hassasiyet olurdu. İLK ÇALGI REFERANSI (M-F-98).",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+   "_noiseBand_why": "TÜRETİLDİ, ARTEFAKTTAN (tools/derive_posture_thresholds.py --check her koşumda doğrular). ATTESTED gitar referansı (7 bağımsız eğitmen, 181 hizalı kare): trunk_tilt dispersiyon medyanı 2.24°. Çekirdeğin tolerans kuralı bu değeri KULLANMIYOR, serbest tabana (freeFloorDeg 8.0) kıstırıyor — artefakt bunu kendi etiketiyle beyan ediyor (perJointSource: floor, floorBoundShare: 1.0). Ham 2.24°'yi bant diye kullanmak sahte-hassasiyet olurdu. 2026-08-04 DÜZELTMESİ: değer (8) doğruydu ama GEREKÇE BAYATTI — eski metin 'motion_core-v0.8.4, 3 bağımsız eğitmen, medyan 0.54°' diyordu; havuz o zamandan beri 3→7 take büyüdü ve dispersiyon 4 katına çıktı. Doğru sayının arkasında yaşayan bayat gerekçe, en zor görülen sınıf: değer kapısı onu geçirir. Panzehir: _derivedFrom bloğu (makine-okunur ikiz, --check ile artefakta karşı sınanır).",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu.",
+   "_derivedFrom": {
+    "artifact": "config/references/guitar-posture-setup.v1.json",
+    "generatedAt": "2026-07-29T23:21:50.869852Z",
+    "contributingTakes": 7,
+    "dispersionMedianDeg": 2.24,
+    "toleranceSource": "floor",
+    "floorBoundShare": 1.0,
+    "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz."
+   }
   },
   "left_shoulder": {
    "unit": "deg",
@@ -264,11 +273,6 @@
        "op": "gte",
        "value": 0.8,
        "expertPending": true
-      },
-      "strum_timing_ms": {
-       "op": "lte",
-       "value": 60,
-       "expertPending": true
       }
      },
      "exit": {
@@ -279,7 +283,17 @@
      },
      "timeoutMs": 20000,
      "minDurationMs": 800,
-     "measureHere": true
+     "measureHere": true,
+     "_quality_removed": {
+      "was": {
+       "strum_timing_ms": {
+        "op": "lte",
+        "value": 60,
+        "expertPending": true
+       }
+      },
+      "_why": "2026-08-04 (M-O-65, piyanonun note_timing_ms'iyle AYNI SINIF — bu sefer CANLI disiplinde): kapı ÖLÜYDÜ ve ÜÇ bağımsız okuma bunu söylüyordu. (1) Metriği hiçbir motor üretmiyor — fixture_check zaten 'onset motoru var ama akor-vuruş eşlemesi yok' diye etiketliyordu; (2) uçtan-uca senaryoda kapı HİÇ değerlendirilmedi (yalnız trunk_tilt ve chord_correctness verdict verdi); (3) kütüphanenin dürüstlük kutusu kullanıcıya ZATEN 'not yet graded' diyordu — yani config, ürünün kendi verdiği sözle ÇELİŞİYORDU. 60 ms barı ayrıca uydurmaydı: onu türetecek hiçbir referans istatistiği yok (postür referansı EKLEM ölçer, vuruş zamanlaması ölçmez). Kapı indirildi; metrik sözlükte KALIYOR — ölçülebilir olduğunda kendi istatistiğiyle geri girer."
+     }
     },
     {
      "id": "COMPLETE",
