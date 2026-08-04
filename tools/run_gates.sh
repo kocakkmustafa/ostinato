@@ -29,6 +29,7 @@ run "kütüphane dürüstlük kuralları"  python3 tools/validate_library.py
 run "eşik türetimi (artefakt↔config)" python3 tools/derive_posture_thresholds.py --check
 run "gözlem işareti sözleşmesi"     python3 tools/validate_observation_cues.py
 run "uzman-bekleyen envanteri"        python3 tools/gen_expert_inventory.py
+run "pozitif-ikiz denetimi"        python3 tools/positive_twin_audit.py
 run "fixture envanteri"               python3 tools/fixture_check.py
 run "replay (3 çalgı)"                python3 tools/replay_check.py
 run "uçtan-uca oturum (3 çalgı)"      python3 tools/verify_end_to_end_session.py

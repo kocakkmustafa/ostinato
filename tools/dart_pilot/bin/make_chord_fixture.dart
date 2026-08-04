@@ -39,12 +39,14 @@ void main(List<String> args) {
     'Em': (4, ChordQuality.minor),
     'Dm': (2, ChordQuality.minor),
   };
-  final templates = [
-    for (final e in openChordSpecs.entries)
-      ChordTemplate(e.value.$1, e.value.$2,
-          e.value.$2 == ChordQuality.major ? const [0, 4, 7] : const [0, 3, 7]),
-  ];
-  final detector = ChordDetector(templates: templates);
+  // AÇIK KÜME (M-O-67, 2026-08-04): aday = 24 şablonun TAMAMI, kabul = dersin
+  // 8 akoru. Önceki sürüm aday kümesini 8'e daraltıyordu ve o daraltma
+  // sözlük-dışı her akoru en yakın komşusuna GÜVENLE etiketletiyordu
+  // (ölçüldü: Bb 28/29 pencerede "Dm"). Fixture, ürünün GERÇEKTEN koştuğu
+  // yapılandırmayla üretilmeli — yoksa fixture ürünü değil, eski bir kusuru
+  // belgeler.
+  final detector = ChordDetector(
+      templates: ChordTemplate.all(), acceptedNames: openChordSpecs.keys.toSet());
 
   // Bugünün kapsamı: E majör — verify_end_to_end_session.py'nin bugüne dek
   // M-O-35'ten ALINTILADIĞI değerin YERİNE geçecek fixture. Diğer 7 akor

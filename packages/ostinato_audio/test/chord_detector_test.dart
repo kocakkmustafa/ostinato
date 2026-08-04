@@ -111,4 +111,66 @@ void main() {
         reason: 'every chord reported an identical margin — that is a '
             'synthesised constant, not a measurement');
   });
+
+  _openSetTests();
 }
+
+/// Reçete adım 4 (M-F-184): "sözlük-dışı girdi FALLBACK'e DÜŞMELİ, en yakın
+/// sınıfa TAMAMLANMAMALI." İki beklenti BİRLİKTE — yalnız birincisi
+/// mekanizma A'yı kaçırır, yalnız ikincisi B'yi başarı sayar.
+void _openSetTests() {
+  const drill = {'E', 'A', 'D', 'G', 'C', 'Am', 'Em', 'Dm'};
+  const sampleRate = 44100;
+  const windowSamples = 8820;
+
+  List<double> chordOf(List<int> midi) => SyntheticTone.chord(
+      midiNotes: midi, sampleRate: sampleRate, seconds: 1.0,
+      strumSpreadSeconds: 0.025);
+
+  // Sözlük DIŞI akorlar — Bb ve Bm ölçülmüş kurbanlar (M-O-67):
+  // kapalı kümede Bb 28/29 pencerede "Dm" diye etiketleniyordu.
+  const outOfVocabulary = <String, List<int>>{
+    'F': [41, 45, 48, 53, 57, 65],
+    'Bm': [47, 54, 59, 62, 66],
+    'Bb': [46, 53, 58, 62, 65],
+    'F#m': [42, 49, 54, 57, 61],
+  };
+
+  group('açık küme: aday geniş, kabul dar', () {
+    final detector = ChordDetector(
+        templates: ChordTemplate.all(), acceptedNames: drill);
+
+    for (final e in outOfVocabulary.entries) {
+      test('${e.key} sözlük dışı → REDDEDİLİR, en yakın akora tamamlanmaz', () {
+        final s = chordOf(e.value);
+        for (var i = 0; i + windowSamples <= s.length; i += windowSamples ~/ 2) {
+          final r = detector.detect(s.sublist(i, i + windowSamples),
+              sampleRate: sampleRate);
+          expect(r, isNull,
+              reason: '${e.key} "${r?.chord.name}" olarak TAMAMLANDI — '
+                  'mekanizma A (yanlış-sınıflama)');
+        }
+      });
+    }
+
+    // POZİTİF İKİZ (M-F-194): hep-null dönen bir dedektör yukarıdaki
+    // testlerin HEPSİNİ geçerdi. Sözlük İÇİ akorlar tanınmaya devam etmeli.
+    for (final e in SyntheticTone.openGuitarChords.entries) {
+      test('${e.key} sözlükte → hâlâ TANINIR (ikiz)', () {
+        final s = chordOf(e.value);
+        var recognised = 0, windows = 0;
+        for (var i = 0; i + windowSamples <= s.length; i += windowSamples ~/ 2) {
+          windows++;
+          final r = detector.detect(s.sublist(i, i + windowSamples),
+              sampleRate: sampleRate);
+          if (r?.chord.name == e.key) recognised++;
+        }
+        expect(recognised, greaterThan(0),
+            reason: 'hiç tanınmadı — açık küme tanımayı ÖLDÜRMÜŞ olurdu');
+        expect(recognised / windows, greaterThan(0.8),
+            reason: 'tanıma oranı düştü: $recognised/$windows');
+      });
+    }
+  });
+}
+

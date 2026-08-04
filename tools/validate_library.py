@@ -6,6 +6,7 @@ gerekçeyle) Python'da uygular (M-F-103/108, kilitli-ders paketi).
 İhlal = kullanıcıya verilmiş somut bir sözün çiğnenmesi — uyarı değil hata.
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -164,6 +165,64 @@ def main():
                     violations.append(
                         f"{lid}: KİLİTLİ ders gözlem işareti gösteremez — "
                         f"kilitli ders hiçbir hüküm yüzeyi taşımaz")
+
+        # Kural 9 (MUT-A bulgusu, 2026-08-04): KULLANICIYA GÖRÜNEN SAYI
+        # ARTEFAKTA BAĞLI OLMAK ZORUNDA.
+        #
+        # Mutasyon süpürmesi şunu ölçtü: piyanonun dürüstlük kutusundaki
+        # "3 independent piano teachers" ifadesini "30 independent ... agree
+        # to within 0.01 degrees" diye değiştirdiğimde HİÇBİR kapı kırmızı
+        # yanmadı. Yani ürünün en görünür dürüstlük yüzeyi, ölçümle bağı
+        # OLMAYAN serbest metindi — config'teki her sayıyı üç kapıyla
+        # koruyup vitrindeki cümleyi korumasız bırakmışız.
+        #
+        # Kural: honesty.measured içindeki "N independent ..." kalıbı
+        # artefaktın `contributingTakes` değerine EŞİT olmalı. Kalıp hiç
+        # yoksa da ihlal — sayı taşımayan bir iddia denetlenemez, ve
+        # denetlenemeyen iddia tam da bu kuralın kapattığı boşluktur.
+        ref_path = f"config/references/{did}-posture-setup.v1.json"
+        if Path(ref_path).exists():
+            expected_n = load(ref_path)["result"]["contributingTakes"]
+            claims = [s for s in d.get("honesty", {}).get("measured", [])
+                      if re.search(r"\b\d+\s+independent\b", s)]
+            if not claims:
+                violations.append(
+                    f"{did}: honesty.measured hiçbir '<N> independent ...' "
+                    f"iddiası taşımıyor — kaynak sayısı kullanıcıya söylenmeli "
+                    f"ve denetlenebilir olmalı (kural 9)")
+            for s in claims:
+                n = int(re.search(r"\b(\d+)\s+independent\b", s).group(1))
+                if n != expected_n:
+                    violations.append(
+                        f"{did}: dürüstlük kutusu '{n} independent' diyor ama "
+                        f"artefakt {expected_n} take ile kurulmuş — kullanıcıya "
+                        f"gösterilen sayı ÖLÇÜMLE ÇELİŞİYOR (kural 9)")
+
+        # Kural 10 (MUT-A bulgusu): VARLIK kapısı → ÖZ kapısı.
+        #
+        # Mutasyon: her `lockedReason`ı "x"e, her `notMeasured` maddesini
+        # "-"e indirdim; kapılar yeşil kaldı. Kural 4 ve 5 yalnız ALANIN
+        # DOLU olduğuna bakıyordu — yani "boş bırakma" diyordu, "bir şey
+        # söyle" demiyordu. Bir gerekçe alanının varlığı, gerekçenin
+        # kendisi değildir.
+        #
+        # Eşik bir VEKİL, ve öyle olduğu yazılı: uzun bir cümle iyi bir
+        # gerekçe garantisi vermez, ama "x" kesinlikle gerekçe değildir.
+        # Bugünkü meşru metinlerin en kısası ~90 karakter; 40 tabanı
+        # meşruları rahat geçirip yer-tutucuyu keser.
+        for c in d.get("courses", []):
+            for l in c.get("lessons", []):
+                lr = l.get("lockedReason")
+                if lr is not None and len(lr.strip()) < 40:
+                    violations.append(
+                        f"{l['id']}: lockedReason yer-tutucu görünüyor "
+                        f"({len(lr.strip())} karakter) — kural 5 EKSİK ÖLÇÜMÜN "
+                        f"ADINI ister, dolu bir alan değil (kural 10)")
+        for item in d.get("honesty", {}).get("notMeasured", []):
+            if len(str(item).strip()) < 40:
+                violations.append(
+                    f"{did}: honesty.notMeasured maddesi yer-tutucu görünüyor: "
+                    f"'{item}' (kural 10)")
 
         # Kural 6: comingSoonInThisDiscipline maddeleri gerekçesiz olamaz
         # (canlı disiplinin İÇİNDEKİ kapsam-dışı maddeler — ayrı listedeki

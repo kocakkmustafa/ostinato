@@ -84,7 +84,28 @@
  },
  "derived": {
   "engineFloorMs": 8.29,
-  "$why": "Kusursuz ızgarada ölçülen sapma. `note_timing_ms` için hiçbir kapı bu değerin altına yazılamaz — yazılırsa tam zamanında çalan öğrenciye \"geç kaldın\" der. Bu bir PEDAGOJİK eşik DEĞİL, ölçüm tabanıdır: hangi zamanlama farkının öğretmence \"hata\" sayıldığı referans hasadından gelmek zorunda ve o hasat YOK."
+  "$why": "Kusursuz ızgarada ölçülen sapma. `note_timing_ms` için hiçbir kapı bu değerin altına yazılamaz — yazılırsa tam zamanında çalan öğrenciye \"geç kaldın\" der. Bu bir PEDAGOJİK eşik DEĞİL, ölçüm tabanıdır: hangi zamanlama farkının öğretmence \"hata\" sayıldığı referans hasadından gelmek zorunda ve o hasat YOK.",
+  "rootCause": {
+   "measuredAt": "2026-08-04 (O-025 kaynak ayrımı)",
+   "question": "8,29 ms erkenlik PENCERE geometrisi mi, TESPİT gecikmesi mi?",
+   "experiment": "frameMs süpürüldü (23/32/46/64/92 ms × hop 3/6). Sabit bir gecikme frameMs'ten BAĞIMSIZ olurdu.",
+   "measurement": {
+    "23ms": -0.75,
+    "32ms": -3.28,
+    "46ms": -8.29,
+    "64ms": -15.06,
+    "92ms": -26.34
+   },
+   "verdict": "GEOMETRİ. Sapma frameMs ile ÖLÇEKLENİYOR (23→0,75 · 92→26,34 ms), sabit değil — yani dedektörün kendi gecikmesi DEĞİL, analiz penceresinin ve uyarlamalı eşik penceresinin (medianWindow × hop) geometrisi. Sonuç: sapma ÖNGÖRÜLEBİLİR ve KALİBRE EDİLEBİLİR.",
+   "correctionProven": {
+    "asymmetryRawMs": 18.05,
+    "asymmetryCalibratedMs": 1.47,
+    "perfectRawMs": 8.29,
+    "perfectCalibratedMs": 1.25,
+    "_how": "Kusursuz ızgaradan ÖLÇÜLEN sapma onset damgalarına eklendi. Sabit uydurulmadı — ölçüldü."
+   },
+   "_notApplied": "Motora UYGULANMADI. Düzeltmenin NEREDE yaşayacağı (aligner mı, onset dedektörü mü, signalConditioning'in yanında ölçülen bir kalibrasyon alanı mı) MİMARİ bir karar ve her signalConditioning kombinasyonu için yeniden ölçülmesi gerekir. O-025 kapı-şartı duruyor: zamanlama hiçbir çalgıda derecelendirilmiyor, bu yüzden bugün zarar yok."
+  }
  },
  "ok": true
 }

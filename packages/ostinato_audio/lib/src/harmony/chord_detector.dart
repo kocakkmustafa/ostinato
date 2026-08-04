@@ -80,6 +80,7 @@ final class ChordDetector {
     this.minScore = 0.55,
     this.minRunnerUpMargin = 0.06,
     this.templates,
+    this.acceptedNames,
   });
 
   final ChromaAnalyzer analyzer;
@@ -97,9 +98,30 @@ final class ChordDetector {
   /// than saying nothing — the student corrects a mistake they did not make.
   final double minRunnerUpMargin;
 
-  /// Restrict recognition to a known set (e.g. the six chords a drill covers).
-  /// Narrowing the field is the cheapest accuracy gain available.
+  /// The hypotheses the chromagram is scored against.
+  ///
+  /// Keep this WIDE. Narrowing it looks like free accuracy — an earlier
+  /// version of this comment said exactly that — and it is, but only for
+  /// telling known chords apart. For *rejecting* an unknown one it is
+  /// actively harmful: delete the hypothesis that would have won and the
+  /// argmax is forced onto the nearest survivor, confidently.
+  ///
+  /// Measured (2026-08-04, `measure_fallback_liveness.dart`): with the eight
+  /// open chords as the candidate set, a played Bb was reported as Dm in 28
+  /// of 29 windows and Bm as D in 22 of 29. Raising [minRunnerUpMargin] does
+  /// not fix it — halving the mislabelling costs 61% of correct recognitions.
+  /// Widening the candidates to all 24 templates and filtering with
+  /// [acceptedNames] instead drops mislabelling to zero at no cost to
+  /// recognition (0.9% either way).
   final List<ChordTemplate>? templates;
+
+  /// Which winners the caller is willing to act on, by chord name.
+  ///
+  /// This is where a drill narrows its world — *after* the evidence has been
+  /// weighed, not before. A chord outside this set is a refusal (`null`),
+  /// which is the honest answer: "that is not one of the chords this lesson
+  /// covers", rather than the name of the nearest one that is.
+  final Set<String>? acceptedNames;
 
   /// Returns null when the window is unusable or the evidence is too close to
   /// call. Both refusals are deliberate.
@@ -130,6 +152,11 @@ final class ChordDetector {
 
     final margin = bestScore - secondScore;
     if (bestScore < minScore || margin < minRunnerUpMargin) return null;
+    // Kabul kapısı EN SONDA: kanıt önce TÜM hipotezlere karşı tartılır,
+    // dersin kapsamı ancak ondan sonra uygulanır. Sıra tersine dönerse
+    // (aday kümesini daraltmak) sözlük-dışı her akor en yakın komşusuna
+    // GÜVENLE etiketlenir — ölçüldü: %65,5.
+    if (acceptedNames != null && !acceptedNames!.contains(best.name)) return null;
     return ChordReading(
       chord: best,
       score: bestScore,

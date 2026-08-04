@@ -75,6 +75,47 @@ def tolerance_of(dispersion_deg, params):
     return min(max(dispersion_deg, params["freeFloorDeg"]), params["freeCeilingDeg"])
 
 
+#: Aile varsayılanı (M-F-143: 22° ÖZEL BARI KALDIRILDI, varsayılan 14.0 kullanılır).
+#: ÜÇÜNCÜ ÇAPA — MUT-A bulgusu: artefaktın barını ve ona bağlı tüm config
+#: değerlerini BİRLİKTE gevşetmek (14→30) hiçbir çelişki kapısına takılmıyordu,
+#: çünkü her kaynak diğeriyle tutarlı kalıyor. Karşılaştırılacak bir DIŞ sabit
+#: olmadan "eşik artefakttan geliyor" cümlesi, artefaktı düzenleyen herkese açık.
+FAMILY_CLUSTER_TOLERANCE_DEG = 14.0
+
+
+def verify_artifact_internals(ref):
+    """Artefaktın KENDİ İÇİNDE tutarlı olduğunu sına — ÜÇÜNCÜ ÇAPA.
+
+    MUT-A bulgusu: `result.contributingTakes` ile config'in `_derivedFrom`u
+    BİRLİKTE şişirilince (6→40) çelişki kapısı susuyordu. Ama artefakt bu
+    sayının ham malzemesini de taşıyor: `takes` dizisi ve `sources` listesi.
+    Özet sayı, saydığı şeyle uyuşmak zorunda."""
+    problems = []
+    n_takes = len(ref.get("takes", []))
+    if ref["result"]["contributingTakes"] != n_takes:
+        problems.append(
+            f"artefakt İÇ ÇELİŞKİ: result.contributingTakes="
+            f"{ref['result']['contributingTakes']} ama takes dizisi {n_takes} öğe")
+    n_sources = len(set(ref["result"].get("sources", [])))
+    if ref["result"].get("distinctSources") != n_sources:
+        problems.append(
+            f"artefakt İÇ ÇELİŞKİ: result.distinctSources="
+            f"{ref['result'].get('distinctSources')} ama sources listesinde "
+            f"{n_sources} benzersiz ad")
+    bar = ref["gates"]["clusterToleranceDeg"]
+    if abs(bar - FAMILY_CLUSTER_TOLERANCE_DEG) > 1e-6 and not ref["gates"].get("clusterToleranceOverride"):
+        problems.append(
+            f"gates.clusterToleranceDeg={bar} aile varsayılanı "
+            f"{FAMILY_CLUSTER_TOLERANCE_DEG}'dan farklı ve gerekçeli override "
+            f"(`clusterToleranceOverride`) taşımıyor — M-F-143: özel bar "
+            f"gerekçesiz kullanılamaz")
+    thick = ref.get("evidenceThickness", {}).get("takes", {})
+    missing = {t["id"] for t in ref.get("takes", [])} - set(thick)
+    if missing:
+        problems.append(f"evidenceThickness eksik take taşıyor: {sorted(missing)}")
+    return problems
+
+
 def verify_tolerance_model(ref, joints, disp_deg):
     """Modelimiz artefaktın kendi etiketlerini üretiyor mu? Dokuz eklemde sına."""
     params = ref["tolerance"]["params"]
@@ -104,6 +145,7 @@ def derive(instrument):
     scored = ref["jointAuthority"]["scored"]
 
     model_problems = verify_tolerance_model(ref, joints, disp_deg)
+    model_problems += verify_artifact_internals(ref)
 
     per_joint = {}
     for j, name in enumerate(joints):

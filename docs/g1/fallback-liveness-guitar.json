@@ -1,0 +1,187 @@
+{
+ "measuredAt": "motion_core-v0.8.6 / ostinato_audio 0.1.0",
+ "recipe": "FALLBACK-CANLILIK-RECETESI.md (M-F-184)",
+ "inputKind": "synthetic",
+ "$limit": "Gerçek gitar kaydı yok — \"sentetikte tetiklendi\" olarak okunur (reçete §3.2).",
+ "vocabulary": [
+  "E",
+  "A",
+  "D",
+  "G",
+  "C",
+  "Am",
+  "Em",
+  "Dm"
+ ],
+ "fallbackClass": "ChordDetector.detect() -> null (minScore 0.55 / minRunnerUpMargin 0.06)",
+ "outOfVocabulary": [
+  {
+   "label": "F (barre, sözlük dışı)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 16,
+   "fallbackShare": 0.552,
+   "refusalReason": {
+    "lowScore": 0,
+    "lowMargin": 16,
+    "unusable": 0
+   },
+   "modelled": {
+    "Am": 12,
+    "Dm": 1
+   },
+   "modelledTotal": 13
+  },
+  {
+   "label": "Bm (barre, sözlük dışı)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 6,
+   "fallbackShare": 0.207,
+   "refusalReason": {
+    "lowScore": 1,
+    "lowMargin": 5,
+    "unusable": 0
+   },
+   "modelled": {
+    "D": 22,
+    "G": 1
+   },
+   "modelledTotal": 23
+  },
+  {
+   "label": "Bb (sözlük dışı)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 1,
+   "fallbackShare": 0.034,
+   "refusalReason": {
+    "lowScore": 1,
+    "lowMargin": 0,
+    "unusable": 0
+   },
+   "modelled": {
+    "Dm": 28
+   },
+   "modelledTotal": 28
+  },
+  {
+   "label": "F#m (sözlük dışı)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 17,
+   "fallbackShare": 0.586,
+   "refusalReason": {
+    "lowScore": 0,
+    "lowMargin": 17,
+    "unusable": 0
+   },
+   "modelled": {
+    "A": 12
+   },
+   "modelledTotal": 12
+  },
+  {
+   "label": "tek nota A4 (akor DEĞİL)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 29,
+   "fallbackShare": 1.0,
+   "refusalReason": {
+    "lowScore": 0,
+    "lowMargin": 29,
+    "unusable": 0
+   },
+   "modelled": {},
+   "modelledTotal": 0
+  },
+  {
+   "label": "oda gürültüsü (ses DEĞİL)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 24,
+   "fallbackShare": 0.828,
+   "refusalReason": {
+    "lowScore": 9,
+    "lowMargin": 15,
+    "unusable": 0
+   },
+   "modelled": {
+    "C": 1,
+    "D": 1,
+    "Am": 3
+   },
+   "modelledTotal": 5
+  }
+ ],
+ "control": [
+  {
+   "label": "E (sözlükte)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 0,
+   "fallbackShare": 0.0,
+   "refusalReason": {
+    "lowScore": 0,
+    "lowMargin": 0,
+    "unusable": 0
+   },
+   "modelled": {
+    "E": 29
+   },
+   "modelledTotal": 29
+  },
+  {
+   "label": "Am (sözlükte)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 0,
+   "fallbackShare": 0.0,
+   "refusalReason": {
+    "lowScore": 0,
+    "lowMargin": 0,
+    "unusable": 0
+   },
+   "modelled": {
+    "Am": 29
+   },
+   "modelledTotal": 29
+  },
+  {
+   "label": "G (sözlükte)",
+   "windows": 29,
+   "durationS": 3.0,
+   "windowsPerSecond": 9.67,
+   "fallback": 0,
+   "fallbackShare": 0.0,
+   "refusalReason": {
+    "lowScore": 0,
+    "lowMargin": 0,
+    "unusable": 0
+   },
+   "modelled": {
+    "G": 29
+   },
+   "modelledTotal": 29
+  }
+ ],
+ "mechanismA": [
+  "Bm (barre, sözlük dışı) → D olarak 22/29 pencere (%76), fallback yalnız 6",
+  "Bb (sözlük dışı) → Dm olarak 28/29 pencere (%97), fallback yalnız 1"
+ ],
+ "summary": {
+  "oovFallbackShare": 0.534,
+  "controlFallbackShare": 0.0,
+  "oovModelledTotal": 81,
+  "controlModelledTotal": 87,
+  "verdict": "🔴 MEKANİZMA A — GİRDİ BAŞINA: 2/6 sözlük-dışı girdi, fallback'e düşmek yerine en yakın MODELLENMİŞ akora tamamlanıyor. Toplam oran (%53 vs kontrol %0) bunu GİZLİYOR."
+ }
+}

@@ -106,6 +106,11 @@ def reference_window_frames(instrument):
 
 
 def main():
+    # --fast: tüm-video taraması (240k kare) atlanır; hold-penceresi kontrolü
+    # (şart 6b, asıl yanlış-pozitif sınavı) KALIR. Mutasyon süpürmesi bu kapıyı
+    # 13 kez koşuyor — ağır taramayı orada tekrarlamak ölçüm değil, bekleme
+    # üretir. Tam tarama run_gates'te bir kez koşar.
+    fast = "--fast" in sys.argv
     golden = load(GOLDEN)
     problems = []
 
@@ -201,7 +206,11 @@ def main():
                                     f"şeridinin kapısını açmış olabilir")
 
             # ŞART 6 — pozitif ikiz, GERÇEK karelerle: içeride sussun, dışarıda görünsün.
-            vals = real_frames(inst)
+            vals = [] if fast else real_frames(inst)
+            if fast:
+                # Hızlı modda "dışarıda görünür" ikizini hold-penceresi
+                # DIŞINDAKİ tek bir take'ten al — ucuz ama gerçek.
+                vals = _trunk_values(ref["takes"][0]["id"])
             if not vals:
                 problems.append(f"ŞART 6: {tag} için gerçek kare bulunamadı")
                 continue

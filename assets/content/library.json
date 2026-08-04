@@ -23,14 +23,15 @@
    "blurb": "Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit, and listen for the chords you play.",
    "honesty": {
     "measured": [
-     "Trunk alignment while sitting (checked against 3 independent guitar teachers, M-O-47/48)",
-     "Chord class for 8 open chords — E A D G C Am Em Dm (kromagram/template matching, M-O-35)"
+     "Trunk alignment while sitting — checked against 7 independent guitar teachers who agree to within 2.24 degrees of each other (config/references/guitar-posture-setup.v1.json, ATTESTED)",
+     "Chord class for the 8 open chords this course covers — E A D G C Am Em Dm. A chord outside those 8 is refused by name ('not one of the chords this lesson covers'), not reported as the nearest one that is."
     ],
     "notMeasured": [
      "Arm and hand position while holding the guitar — teachers disagree about this by style (11-18 degrees apart), we show it but do not grade it (M-O-46)",
      "Finger placement or fretting technique — camera cannot see fingers well enough to grade them yet",
      "Strum timing — NOT measured. We can hear individual note attacks, but a strum is one gesture producing six near-simultaneous ones, and the step that maps those onto a chord does not exist yet. Until 2026-08-04 this line said 'measured, not yet graded'; that was wrong and the config carried a matching dead gate.",
-     "Full note-by-note transcription — we recognise the chord class, not every note played"
+     "Full note-by-note transcription — we recognise the chord class, not every note played",
+     "Chords beyond those 8 — we do not name them. Until 2026-08-04 we did something worse than not naming them: a played Bb was reported as 'Dm' in 28 of 29 windows, confidently, because the engine was only allowed to consider the 8 chords of the drill. It now weighs all 24 chords and refuses when the winner is not one this lesson teaches."
     ]
    },
    "courses": [
@@ -110,7 +111,9 @@
     "Strum timing as a graded skill — blocked twice over: the strum-to-chord alignment step is not built, and no teacher data exists on how far off the beat counts as a mistake",
     "Arm/hand posture as a graded skill — the seven teachers we measured hold the guitar 39 to 105 degrees apart at the elbows and forearms. That is style and camera angle, not error; this may never become gradeable.",
     "Named posture coaching (the 'you are slouching' cue) — the threshold is now derived from the reference (14 degrees, the spread inside which two teachers count as sitting the same way), but we have not yet decided whether a measurement can be spoken as a correction without a movement-science review."
-   ]
+   ],
+   "_honestyStaleFix": "2026-08-04 (MUT-A kural 9): kutu kullanıcıya '3 independent guitar teachers' diyordu; havuz 2026-07-30'da 3→5→7'ye büyümüş, VİTRİN METNİ güncellenmemişti. Bayat-gerekçe sınıfının (O-024) EN GÖRÜNÜR hâli: config'teki her sayıyı üç kapıyla koruyup kullanıcının okuduğu cümleyi korumasız bırakmışız. Kural 9 artık bu sayıyı artefakta bağlıyor; mutasyon süpürmesi olmasa bulunmazdı.",
+   "_openSetFix": "2026-08-04 (M-O-67, fallback-canlılık reçetesi M-F-184 adım 5): ölçüm mekanizma A buldu — sözlük-dışı akorlar en yakın modellenmiş akora GÜVENLE tamamlanıyordu (Bb→Dm %97, Bm→D %76). Eşik oynatmak çözmüyordu: yanlış-etiketi yarıya indirmek gerçek akorların %61'ini kaybettiriyordu. Kök neden ADAY KÜMESİNİN daraltılmasıydı — kazanacak hipotez (Bb) listede yoktu, motor en yakınını seçmek zorundaydı. Düzeltme bedelsiz çıktı: aday 24, kabul 8 → yanlış-etiket %65,5→%0,0, tanıma kaybı değişmedi (%0,9). 'Open chords' dersi zaten kilitliydi, bu yüzden kusur kullanıcıya ULAŞMADI — ama dürüstlük kutusu canlıydı ve bu satırı taşımıyordu."
   },
   {
    "id": "voice",
