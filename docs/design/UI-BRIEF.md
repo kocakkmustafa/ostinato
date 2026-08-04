@@ -133,6 +133,14 @@ BEKLENEN yollar.
 
 ## EK — 2026-08-04: gözlem işareti yüzeyi + 5 açık ders (tasarım turu girdisi)
 
+> 🔴 **2026-08-05 ŞERHİ — bu bölümü okurken:** gözlem işaretinin config bağı
+> ve şablon sözleşmesi geçerlidir, ama **çalışan uygulamada göründüğü
+> KANITLANMADI** (O-032). Değerlendirici işareti üretiyor (ölçüldü) ve widget
+> onu çiziyor (3 test), fakat canlı uygulamada aralık-dışı pencerenin
+> ortasında da görünmedi; yakalama zamanlaması elendi. Bu ek "işaret canlı
+> çalışıyor" DEMEZ — tasarım turu, O-032 kapandıktan sonra bu bölümün
+> ekran karşılığıyla birlikte okunmalı.
+
 Bu ek, kurucu-manuel tasarım turu için hazırlandı. Aşağıdaki her şey BUGÜN
 ölçülüyor; hiçbiri gelecek vaadi değil.
 
@@ -145,7 +153,7 @@ gerekiyor** — karıştırılırlarsa şeridi ayıran bütün yapı boşa gider
 |---|---|---|
 | ne der | "duruşun yanlış / şöyle otur" | "ölçtüğümüz 7 eğitmenin hiçbiri bu kadar eğilmiyor; sen 17°'desin" |
 | dayanağı | uzman doğrulaması (movement-science turu) | ATTESTED referans + artefakttan türetilmiş 14,0° eşik |
-| durumu | `expertPending` — hiçbir derste görünmüyor | 5 açık postür dersinde görünüyor |
+| durumu | `expertPending` — hiçbir derste görünmüyor | 5 açık postür dersine BAĞLI (config) — canlı uygulamada görünürlüğü **O-032 ile AÇIK**, aşağıya bak |
 
 **Tasarım şartları (config'te mekanik olarak zorlanıyor, UI bunları bozamaz):**
 - Metin SABİT şablondan gelir (`config/observation-cue-templates.golden.json`).
