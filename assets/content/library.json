@@ -56,7 +56,11 @@
        "focus": "posture",
        "minutes": 5,
        "_why_unlocked": "trunk_tilt referansi ATTESTED (3 bagimsiz egitmen, M-O-47) ve tuketicisi CANLI oldugu kanitlandi (M-O-48) — bu ders yalniz o olcumu kullanir, chord_correctness'a bagli DEGIL.",
-       "_why_no_errorFocus": "M-F-125: bu ders G-POST-SLOUCH kodunu ANMIYOR cunku o kod expertPending — 15 derecelik slouch esigi uzman-dogrulamali DEGIL. Ders yine de ACIK ve postur SKORLANIYOR: skorlama ATTESTED referansa ve scoringBarDeg=22'ye dayaniyor (M-O-47/48), dogrulanmamis bir hata esigine degil. Fark: olctugumuz seyi soyluyoruz, hak etmedigimiz hukmu reklam etmiyoruz."
+       "_why_no_errorFocus": "M-F-125: bu ders G-POST-SLOUCH kodunu ANMIYOR cunku o kod expertPending — 15 derecelik slouch esigi uzman-dogrulamali DEGIL. Ders yine de ACIK ve postur SKORLANIYOR: skorlama ATTESTED referansa ve scoringBarDeg=22'ye dayaniyor (M-O-47/48), dogrulanmamis bir hata esigine degil. Fark: olctugumuz seyi soyluyoruz, hak etmedigimiz hukmu reklam etmiyoruz.",
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
       },
       {
        "id": "guitar.foundations.posture_under_play",
@@ -65,7 +69,11 @@
        "focus": "posture",
        "minutes": 7,
        "_why_unlocked": "Ikinci olcum DEGIL, AYNI olculerin farkli ani: PLAY fazina giris ses SEVIYESINE bagli (level_above_room_floor_db >= 6, AF-003 ile kanitli) ve slouch hatasi trunk_tilt'e bagli (ATTESTED). Ikisi de gercek; akor TANIMASI GEREKMIYOR — ne calindigi degil, calarken durusun bozulup bozulmadigi sorusu. Uctan-uca senaryoda bu zincir zaten kosuldu (M-O-52: POSTURE_CHECK 116/116 -> PLAY 115/115).",
-       "_why_no_errorFocus": "M-F-125: bu ders G-POST-SLOUCH kodunu ANMIYOR cunku o kod expertPending — 15 derecelik slouch esigi uzman-dogrulamali DEGIL. Ders yine de ACIK ve postur SKORLANIYOR: skorlama ATTESTED referansa ve scoringBarDeg=22'ye dayaniyor (M-O-47/48), dogrulanmamis bir hata esigine degil. Fark: olctugumuz seyi soyluyoruz, hak etmedigimiz hukmu reklam etmiyoruz."
+       "_why_no_errorFocus": "M-F-125: bu ders G-POST-SLOUCH kodunu ANMIYOR cunku o kod expertPending — 15 derecelik slouch esigi uzman-dogrulamali DEGIL. Ders yine de ACIK ve postur SKORLANIYOR: skorlama ATTESTED referansa ve scoringBarDeg=22'ye dayaniyor (M-O-47/48), dogrulanmamis bir hata esigine degil. Fark: olctugumuz seyi soyluyoruz, hak etmedigimiz hukmu reklam etmiyoruz.",
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
       },
       {
        "id": "guitar.foundations.holding_the_guitar",
@@ -148,7 +156,11 @@
        "focus": "posture",
        "minutes": 5,
        "_why_unlocked": "trunk_tilt referansi ATTESTED (6 bagimsiz egitmen, dispersiyon medyani 1.35 derece — uc calginin en KALIN kanitli referansi: 6/6 take alignedDistinctShare=1.00, gitarda bu oran 2/7). Skorlama bari artefaktan turetildi (8.0 derece, tools/derive_posture_thresholds.py --check dogrular).",
-       "_why_no_errorFocus": "M-O-64 (2026-08-04): SAN POSTURU SKORLANIR AMA ADLANDIRILMIS HATA TASIYAMAZ — bu bir eksiklik degil, OLCULMUS bir sonuc. Taksonomideki 12 san kodunun kamerayla gorulebilir postur kodlari (V-POST-LOCKED-KNEES diz ister, V-HEAD-CHIN-LIFT bas/cene acisi ister) referansin 9 ekleminde KARSILIGI OLMAYAN seyleri olcer. Olcebildigimiz metrige en yakin kodu iliştirmek, M-F-125'in oldurdugu siniftir. Ders yine de ACIK ve postur SKORLANIYOR — bant geri bildirimi verir, hak etmedigi ismi vermez."
+       "_why_no_errorFocus": "M-O-64 (2026-08-04): SAN POSTURU SKORLANIR AMA ADLANDIRILMIS HATA TASIYAMAZ — bu bir eksiklik degil, OLCULMUS bir sonuc. Taksonomideki 12 san kodunun kamerayla gorulebilir postur kodlari (V-POST-LOCKED-KNEES diz ister, V-HEAD-CHIN-LIFT bas/cene acisi ister) referansin 9 ekleminde KARSILIGI OLMAYAN seyleri olcer. Olcebildigimiz metrige en yakin kodu iliştirmek, M-F-125'in oldurdugu siniftir. Ders yine de ACIK ve postur SKORLANIYOR — bant geri bildirimi verir, hak etmedigi ismi vermez.",
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
       },
       {
        "id": "voice.foundations.posture_under_sing",
@@ -157,7 +169,11 @@
        "focus": "posture",
        "minutes": 6,
        "_why_unlocked": "Ikinci olcum DEGIL, AYNI olcunun ikinci ani: trunk_tilt kapisi SUSTAIN fazinda da kosuyor ve uctan-uca senaryoda GERCEKTEN kosuldu (2026-08-04: POSTURE_CHECK 101 kare + SUSTAIN 100 kare, trunk_tilt PASS=201/201). Sarki soylerken barin gevsemesi gerektigini soyleyen bir olcum YOK, o yuzden ayni bar (8.0) kullaniliyor.",
-       "_why_no_errorFocus": "Ayni gerekce (M-O-64)."
+       "_why_no_errorFocus": "Ayni gerekce (M-O-64).",
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
       },
       {
        "id": "voice.foundations.sustained_note",
@@ -226,7 +242,11 @@
        "minutes": 5,
        "_why_unlocked": "trunk_tilt referansi ATTESTED (3 bagimsiz egitmen, dispersiyon medyani 1.09 derece — uc calginin en DAR anlasmasi). Skorlama bari artefaktan turetildi (8.0 derece).",
        "_why_thin_base": "DURUST SINIR: 3 take, minTakes esiginin TAM USTUNDE (gitar 7, san 6). Kanit kalinligi 3 take'in 2'sinde 1.00. Referans gecerli ama havuzun en incesi — yeni piyano kaynagi geldiginde ilk yeniden-olculecek olan bu.",
-       "_why_no_errorFocus": "M-O-64: piyanonun kamerayla gorulebilir postur kodlarindan HICBIRI trunk_tilt'e karsilik gelmiyor. P-POST-SHOULDER-TENSION omuz YUKSEKLIGINI anlatir (elimizdeki omuz metrigi bir ACI, ustelik coached_only ve sol/sag 5 kat asimetrik); P-ELBOW-ANGLE dirsek istatistigi tasimiyor (20-77 derece). Kodun kosulu bu turda trunk_tilt'ten SOKULDU — yanlis metrige bagliydi."
+       "_why_no_errorFocus": "M-O-64: piyanonun kamerayla gorulebilir postur kodlarindan HICBIRI trunk_tilt'e karsilik gelmiyor. P-POST-SHOULDER-TENSION omuz YUKSEKLIGINI anlatir (elimizdeki omuz metrigi bir ACI, ustelik coached_only ve sol/sag 5 kat asimetrik); P-ELBOW-ANGLE dirsek istatistigi tasimiyor (20-77 derece). Kodun kosulu bu turda trunk_tilt'ten SOKULDU — yanlis metrige bagliydi.",
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
       },
       {
        "id": "piano.foundations.five_finger",
