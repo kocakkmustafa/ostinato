@@ -2,7 +2,7 @@
  "schema": "motion-core/reference@1",
  "technique": "sustained_note_drill",
  "measurementProvenance": "ATTESTED",
- "generatedAt": "2026-08-04T20:22:14.702670Z",
+ "generatedAt": "2026-08-04T21:33:52.307308Z",
  "gates": {
   "minTakes": 3,
   "minSources": 3,
@@ -98,32 +98,38 @@
    "BkZj5dJiw3E": {
     "frames": 165,
     "durationS": 5.46667,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "DpYMuhG_Sjc": {
     "frames": 103,
     "durationS": 3.4034,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "GwFdntVDQn0": {
     "frames": 201,
     "durationS": 6.67334,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "WrZOeKdKRiE": {
     "frames": 68,
     "durationS": 2.79445,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "xm1NdA4cmEs": {
     "frames": 105,
     "durationS": 3.46667,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "ySuO_XQgoh8": {
     "frames": 84,
     "durationS": 3.45833,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    }
   }
  },
@@ -139,6 +145,7 @@
   ],
   "distinctSources": 6,
   "mirroredTakeIds": [],
+  "medoidTakeId": "WrZOeKdKRiE",
   "mirrorConfident": false,
   "mirrorGapMeasured": true,
   "mirrorSearchDecisive": false,

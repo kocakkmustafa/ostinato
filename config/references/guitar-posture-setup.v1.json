@@ -2,7 +2,7 @@
  "schema": "motion-core/reference@1",
  "technique": "open_chord_drill",
  "measurementProvenance": "ATTESTED",
- "generatedAt": "2026-08-04T20:22:12.889086Z",
+ "generatedAt": "2026-08-04T21:33:50.393795Z",
  "gates": {
   "minTakes": 3,
   "minSources": 3,
@@ -110,37 +110,44 @@
    "8xFzcSieBXY": {
     "frames": 231,
     "durationS": 9.2,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "NCV9IgeSYuU": {
     "frames": 181,
     "durationS": 7.5075,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "NfC0R-KWhwQ": {
     "frames": 103,
     "durationS": 3.4034,
-    "alignedDistinctShare": 0.569060773480663
+    "alignedDistinctShare": 0.569060773480663,
+    "capFillShare": 1.0
    },
    "Rpalo0sbpj4": {
     "frames": 111,
     "durationS": 4.4,
-    "alignedDistinctShare": 0.6132596685082873
+    "alignedDistinctShare": 0.6132596685082873,
+    "capFillShare": 1.0
    },
    "oamDIl34DY4": {
     "frames": 75,
     "durationS": 2.96,
-    "alignedDistinctShare": 0.4143646408839779
+    "alignedDistinctShare": 0.4143646408839779,
+    "capFillShare": 1.0
    },
    "qtZ7EUrsnR8": {
     "frames": 103,
     "durationS": 3.4034,
-    "alignedDistinctShare": 0.569060773480663
+    "alignedDistinctShare": 0.569060773480663,
+    "capFillShare": 1.0
    },
    "v3nfqNOBAPc": {
     "frames": 132,
     "durationS": 4.36667,
-    "alignedDistinctShare": 0.7292817679558011
+    "alignedDistinctShare": 0.7292817679558011,
+    "capFillShare": 1.0
    }
   }
  },
@@ -157,6 +164,7 @@
   ],
   "distinctSources": 7,
   "mirroredTakeIds": [],
+  "medoidTakeId": "NCV9IgeSYuU",
   "mirrorConfident": false,
   "mirrorGapMeasured": true,
   "mirrorSearchDecisive": false,
