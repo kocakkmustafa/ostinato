@@ -55,7 +55,9 @@
    "noiseBand": 25,
    "baseline": 0,
    "interval": true,
-   "_why": "Nota zamanlaması; MIDI bağlıysa doğrudan, değilse onset'ten."
+   "_why": "Nota zamanlaması; MIDI bağlıysa doğrudan, değilse onset'ten.",
+   "_measurement": "ÖLÇÜLDÜ 2026-08-04, fixtures/audio/AF-008-five-note-timing.json — GERÇEK OnsetDetector -> MetronomeAligner zinciri, piyano signalConditioning'iyle. Motor tabanı 8,29 ms (kusursuz ızgarada bile ölçülen sapma: STFT penceresinin çözünürlüğü). ÖLÇÜLEN ASİMETRİ: aynı büyüklükteki hata, acele edende geç kalandan ~18 ms daha ağır raporlanıyor (40 ms erken -> 49,33 ms · 40 ms geç -> 31,28 ms), çünkü motorun kendi erkenliği hükme sızıyor. Tek 'kusursuz' varyantlı bir fixture bunu gösteremezdi. Bu asimetri düzeltilmeden zamanlama DERECELENDİRİLEMEZ.",
+   "_grading": "measuredNotGraded"
   },
   "trunk_tilt": {
    "unit": "deg",
@@ -63,11 +65,20 @@
     -180,
     180
    ],
-   "noiseBand": 2,
+   "noiseBand": 8,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 5.4° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+   "_noiseBand_why": "TÜRETİLDİ, ARTEFAKTTAN (tools/derive_posture_thresholds.py --check her koşumda doğrular). ATTESTED piyano referansı (3 bağımsız eğitmen, 145 hizalı kare): trunk_tilt eğitmenler-arası dispersiyon medyanı yalnız 1.09° — üç çalgının en dar anlaşması. Çekirdeğin tolerans kuralı bu değeri KULLANMIYOR, serbest tabana (freeFloorDeg 8.0) kıstırıyor; artefakt bunu KENDİ etiketiyle beyan ediyor (perJointSource: floor, floorBoundShare: 1.0 — 145 karenin 145'i). Yani bant dispersiyon DEĞERİNDEN değil, 'dispersiyonun tabana çarptığı ÖLÇÜMÜNDEN' geliyor (M-O-63). ESKİ DEĞER 2 BAYATTI: gerekçesi ölü B4 pilotuna (5.4°) dayanıyordu ve M-F-98 düzeltmesi yalnız gitara uygulanmıştı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu.",
+   "_derivedFrom": {
+    "artifact": "config/references/piano-posture-setup.v1.json",
+    "generatedAt": "2026-07-29T23:21:56.185407Z",
+    "contributingTakes": 3,
+    "dispersionMedianDeg": 1.09,
+    "toleranceSource": "floor",
+    "floorBoundShare": 1.0,
+    "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz."
+   }
   },
   "left_shoulder": {
    "unit": "deg",
@@ -220,8 +231,9 @@
      "quality": {
       "trunk_tilt": {
        "op": "lte",
-       "value": 5,
-       "expertPending": true
+       "value": 8,
+       "thresholdProvenance": "reference-derived",
+       "_why": "5 → 8. Eski 5 değeri ölçüm bandının (8°) ALTINDAYDI: çekirdeğin kendi toleransının içinden hüküm çıkarmaya çalışıyordu — M-F-98'in gitarda düzelttiği kusurun aynısı, piyanoda düzeltilmeden kalmıştı. Yeni değer skorlama toleransının kendisi: 'referansa göre bandın içinde misin'."
       }
      },
      "exit": {
@@ -257,12 +269,16 @@
       "op": "gte",
       "value": 6
      },
-     "quality": {
-      "note_timing_ms": {
-       "op": "lte",
-       "value": 50,
-       "expertPending": true
-      }
+     "_quality_removed": {
+      "was": {
+       "note_timing_ms": {
+        "op": "lte",
+        "value": 50,
+        "expertPending": true
+       }
+      },
+      "_why": "2026-08-04 (M-O-65): KAPI İNDİRİLDİ, metrik KALDI. İki ayrı kusur üst üste binmişti. (1) Kapı, ÜRETİLMEYEN bir metriğe bakıyordu: `MetronomeAligner` kodu ve birim testleri vardı ama hiçbir fixture'a bağlı değildi, `replay_check.audio_windows()` bu metriği hiç döndürmüyor — yani kapı sessizce hiç değerlendirilmiyordu ('kod var, tüketicisi yok', M-O-53'ün ölçüm tarafındaki kardeşi). (2) Bar UYDURMAYDI: 50 ms'i türetecek hiçbir referans istatistiği yok — postür referansı EKLEM ölçer, zamanlama ölçmez; zamanlama için eğitmen hasadı hiç yapılmadı. Şimdi AF-008 ile metrik GERÇEKTEN ölçülüyor (motor tabanı 8,29 ms), ama ölçülebilir olmak DERECELENDİRİLEBİLİR olmak değildir — kolların coached_only olmasıyla aynı ayrım (M-F-46 k.3). Gösterilir, söylenir, PUANLANMAZ.",
+      "_whatWouldChangeThis": "Zamanlama hata-kodları için eğitmen hasadı (hangi sapma 'hata' sayılıyor) VEYA movement-science/uzman turu. Motor tabanının (8,29 ms) altına hiçbir bar yazılamaz — yazılırsa tam zamanında çalan öğrenciye 'geç kaldın' der."
      },
      "exit": {
       "kind": "metric",
@@ -310,17 +326,19 @@
   {
    "code": "P-POST-SHOULDER-TENSION",
    "evaluateAt": "PLAY",
-   "condition": {
+   "status": "thresholdPending",
+   "expertPending": true,
+   "blockedByStatistic": "Kod OMUZ YÜKSELMESİNİ tarif ediyor ('omuzlar yukarı çekilip kulaklara yaklaşır', taksonomide 5 bağımsız kanal) ama piyano referansında omuzlar coached_only ve dağılımları ÖLÇÜLDÜ: left_shoulder 24,2° · right_shoulder 5,1° — aynı eklem çiftinde 5 KATLIK asimetri, 3 take'ten. M-F-46 k.3 gereği coached_only metriğe eşik yazılamaz. Ölçüm ALETİ de tartışmalı: 'kulaklara yaklaşma' bir YÜKSEKLİK/oran ölçüsüdür, elimizdeki `*_shoulder` ise bir AÇI — V-POST-SHOULDER-RISE'ı öldüren boyut karışıklığının (M-F-140) aynı kapısı. Aktive edilebilmesi için gereken: normalize omuz-yükseklik metriği (shoulder_rise_norm) + onun referans istatistiği; ikisi de yok.",
+   "_observable": "camera",
+   "_sources": "5 bağımsız kanal",
+   "_removedCondition": {
     "kind": "metric",
     "metric": "trunk_tilt",
     "op": "gt",
     "value": 15
    },
-   "cooldownMs": 30000,
-   "expertPending": true,
-   "_observable": "camera",
-   "_sources": "5 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_why": "2026-08-04 (M-O-64): KOŞUL YANLIŞ METRİĞE BAĞLIYDI ve bu, sayı düzeltilerek kapatılamazdı. `trunk_tilt` GÖVDE EĞİMİDİR; bu kod OMUZ yüksekliğini anlatır. Yani 'omuzların gergin' uyarısı, öne eğilen ama omuzları gevşek bir öğrencide ATEŞLER; omuzları kulaklarına yapışmış ama dik oturan öğrencide SUSARDI. M-F-125'in öldürdüğü sınıfın aynısı (yanlış ateşleyen taslak, yokluktan kötüdür) — tek farkı, oradaki bağ ses yüksekliğineydi, burada bir BAŞKA postür metriğine, bu yüzden gözden kaçtı. Eşiği 15→14 diye 'türetilmiş' göstermek yanlış eşlemeyi CİLALAMAK olurdu. Piyano coming_soon olduğu için kullanıcıya hiç ulaşmadı.",
+   "_note": "P-ELBOW-ANGLE ile AYNI SINIF: eksik olan isimli, kod SİLİNMEDİ — karşılığı ölçülebilir olduğunda kendi istatistiğiyle geri girer."
   },
   {
    "code": "P-ELBOW-ANGLE",

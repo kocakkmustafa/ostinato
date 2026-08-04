@@ -82,11 +82,20 @@
     -180,
     180
    ],
-   "noiseBand": 2,
+   "noiseBand": 8,
    "baseline": 0,
    "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 2.6° (B4 pilotu, n=18→küme 11). Bant ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+   "_noiseBand_why": "TÜRETİLDİ, ARTEFAKTTAN (tools/derive_posture_thresholds.py --check her koşumda doğrular). ATTESTED şan referansı (6 bağımsız eğitmen, 68 hizalı kare): trunk_tilt eğitmenler-arası dispersiyon medyanı yalnız 1.35°. Çekirdeğin tolerans kuralı bu değeri KULLANMIYOR — serbest tabana (freeFloorDeg 8.0) kıstırıyor ve artefakt bunu KENDİ etiketiyle beyan ediyor (perJointSource: floor, floorBoundShare: 1.0, yani 68 karenin 68'inde). Yani bant dispersiyon DEĞERİNDEN değil, 'dispersiyonun tabana çarptığı ÖLÇÜMÜNDEN' geliyor (M-O-63). ESKİ DEĞER 2 BAYATTI: gerekçesi ölü B4 pilotuna (n=18→küme 11, 2.6°) dayanıyordu; o havuz ATTESTED referansla değişti ve M-F-98 düzeltmesi yalnız gitara uygulanmıştı — şan/piyano geride kalmıştı.",
+   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu.",
+   "_derivedFrom": {
+    "artifact": "config/references/voice-posture-setup.v1.json",
+    "generatedAt": "2026-07-29T23:21:53.302319Z",
+    "contributingTakes": 6,
+    "dispersionMedianDeg": 1.35,
+    "toleranceSource": "floor",
+    "floorBoundShare": 1.0,
+    "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz."
+   }
   },
   "left_shoulder": {
    "unit": "deg",
@@ -246,8 +255,9 @@
      "quality": {
       "trunk_tilt": {
        "op": "lte",
-       "value": 5,
-       "expertPending": true
+       "value": 8,
+       "thresholdProvenance": "reference-derived",
+       "_why": "5 → 8. Eski 5 değeri ölçüm bandının (8°) ALTINDAYDI: çekirdeğin kendi toleransının içinden hüküm çıkarmaya çalışıyordu — M-F-98'in gitarda düzelttiği kusurun aynısı, şanda düzeltilmeden kalmıştı. Yeni değer skorlama toleransının kendisi: 'referansa göre bandın içinde misin'."
       }
      },
      "exit": {
@@ -297,8 +307,9 @@
       },
       "trunk_tilt": {
        "op": "lte",
-       "value": 15,
-       "_why": "DÜZELTİLDİ: eski eşik 8° idi ve 1,5° varyansın ~5 katıydı. Gerçek en-kötü varyans 5,1° çıkınca 8° yalnız 1,6 katı kaldı — eğitmen farkını hata saymaya başlardı. 15° ≈ 5,1°'ın 3 katı: doğal farkı geçiriyor, belirgin eğilmeyi yakalıyor."
+       "value": 8,
+       "thresholdProvenance": "reference-derived",
+       "_why": "15 → 8. Eski 15 iki kez yanlıştı. (a) Gerekçesi ölü: '5,1°'ın 3 katı' hesabı B4 pilotunun havuzuna aitti; ATTESTED şan referansında dispersiyon 1,35° ve tolerans tabanı 8°. (b) Merdiven sırası bozuktu: 15 > hata eşiği 14 — yani 14-15° arasında hata ATEŞLERKEN kalite GEÇİYORDU (aynı karede hem 'iyi' hem 'hatalı'). POSTURE_CHECK ile aynı bar kullanılıyor çünkü ŞARKI SÖYLERKEN toleransın gevşemesi gerektiğini söyleyen bir ölçüm YOK — performans-fazı referansı ayrı bir hasat işi. Gevşetmek için sebep yoksa gevşetilmez."
       }
      },
      "_quality_why": "D2 ayrımı: 'bu faza girdim mi' (enter) ile 'iyi yaptım mı' (quality) FARKLI sorular. Girişi periodicity 0.55 açar; hüküm 0.7 ister.",
@@ -359,6 +370,14 @@
     "needs_focus"
    ]
   }
+ },
+ "_postureErrorCoachingAudit": {
+  "_verdict": "ŞAN POSTÜRÜ SKORLANIR AMA ADLANDIRILMIŞ HATA KOÇLUĞU TAŞIYAMAZ — ölçüldü, uydurulmadı (2026-08-04, M-O-64).",
+  "_method": "config/error-taxonomy.w1.json'daki 12 şan kodu, referansın SKORLADIĞI tek metrikle (trunk_tilt) eşleştirilmeye çalışıldı. Kural: kod ancak KENDİ kavramının karşılığı olan metriğe bağlanabilir; 'ölçebildiğim metriğe en yakın kodu iliştirmek' M-F-125'in öldürdüğü sınıftır (başparmak uyarısının ses yüksekliğine bağlanması).",
+  "_result": "Kamera ile gözlenebilir şan postür kodlarının HİÇBİRİ trunk_tilt'e karşılık gelmiyor: V-POST-LOCKED-KNEES kalça ALTINDAKİ eklemleri ister (referans yalnız üst-gövde — eğitmen videoları bel-üstü çekiliyor, diz kadrajda yok) · V-HEAD-CHIN-LIFT baş/çene açısı ister (9-eklemli referansta baş yok) · V-JAW-TENSION çene, V-LARYNX-HIGH larinks (invisible, kapsam dışı).",
+  "_consequence": "Şan dersi postürü SKORLAR (bant geri bildirimi: steady/improving/needs_focus, ATTESTED referansa göre) ama 'şunu yanlış yapıyorsun' diye ADLANDIRILMIŞ hata SÖYLEMEZ. Gitarın 'Sitting posture' dersiyle aynı dürüstlük duruşu (M-F-125 _why_no_errorFocus).",
+  "_whatWouldChangeThis": "(a) alt-gövde landmark'ı taşıyan şan kaynağı hasadı → V-POST-LOCKED-KNEES ölçülebilir olur; (b) baş/çene açısının referansa girmesi → V-HEAD-CHIN-LIFT. İkisi de yeni hasat işi, eşik icadıyla kapatılamaz.",
+  "_shoulderRiseClosure": "M-F-140 'omuz-yükselmesi önemliyse şan referansı doğduğunda KENDİ istatistiğiyle geri girer' beklentisi ÖLÇÜLDÜ ve KARŞILANMADI: referans doğdu, right_shoulder dispersiyonu 43,4° ve unreliableJoints'te; omuzlar coached_only (M-F-46 k.3 gereği eşik yazılamaz). V-POST-SHOULDER-RISE geri GİRMİYOR — bu sefer sebebi kaynak yokluğu değil, ÖLÇÜLEN dağılım. (P-ELBOW-ANGLE'ın M-F-147'deki sonucuyla aynı sınıf.)"
  },
  "_openItems": [
   "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",

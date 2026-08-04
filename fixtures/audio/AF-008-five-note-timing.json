@@ -1,0 +1,90 @@
+{
+ "schemaVersion": "ostinato-audiofix-timing-1",
+ "fixtureId": "AF-008-five-note-timing",
+ "kind": "synthetic",
+ "$what": "Five notes on a 120 bpm grid, played three ways: on the grid, 40 ms early, 40 ms late. Real engine (OnsetDetector -> MetronomeAligner) measured, not authored. This is the first persisted record of `note_timing_ms` — before it, the piano ruleset gated on a metric no engine produced.",
+ "recordingMeta": {
+  "source": "generated",
+  "sampleRate": 44100,
+  "license": "generated",
+  "$note": "Synthetic — the grid is exact by construction, so the deviation measured on the `perfect` variant is the ENGINE floor, not a performance. NOT proof on a real piano (pedal blur, key noise, uneven touch are absent)."
+ },
+ "engineVersions": {
+  "onset": "OnsetDetector (spectral flux, log-spaced bands) @ piano signalConditioning (frame 46 ms / hop 6 ms / 24 bands / 40-4000 Hz)",
+  "timing": "MetronomeAligner (median + IQR spread + signed bias)"
+ },
+ "expected": {
+  "beatTimesUs": [
+   500000,
+   1000000,
+   1500000,
+   2000000,
+   2500000
+  ],
+  "variants": {
+   "perfect": 0,
+   "rushing": -40,
+   "dragging": 40
+  },
+  "allBeatsMustMatch": true,
+  "biasMustDiscriminate": true
+ },
+ "measured": {
+  "perfect": {
+   "offsetAppliedMs": 0,
+   "onsetsDetected": 5,
+   "matchedBeats": 5,
+   "totalBeats": 5,
+   "coverage": 1.0,
+   "noteTimingMs": 8.29,
+   "spreadMs": 2.27,
+   "bias": "centred",
+   "deviationsMs": [
+    -8.29,
+    -9.54,
+    -10.78,
+    -6.02,
+    -7.27
+   ]
+  },
+  "rushing": {
+   "offsetAppliedMs": -40,
+   "onsetsDetected": 5,
+   "matchedBeats": 5,
+   "totalBeats": 5,
+   "coverage": 1.0,
+   "noteTimingMs": 49.33,
+   "spreadMs": 2.27,
+   "bias": "rushing",
+   "deviationsMs": [
+    -50.35,
+    -51.6,
+    -46.84,
+    -48.08,
+    -49.33
+   ]
+  },
+  "dragging": {
+   "offsetAppliedMs": 40,
+   "onsetsDetected": 5,
+   "matchedBeats": 5,
+   "totalBeats": 5,
+   "coverage": 1.0,
+   "noteTimingMs": 31.28,
+   "spreadMs": 2.49,
+   "bias": "dragging",
+   "deviationsMs": [
+    33.78,
+    32.53,
+    31.28,
+    30.03,
+    28.79
+   ]
+  }
+ },
+ "derived": {
+  "engineFloorMs": 8.29,
+  "$why": "Kusursuz ızgarada ölçülen sapma. `note_timing_ms` için hiçbir kapı bu değerin altına yazılamaz — yazılırsa tam zamanında çalan öğrenciye \"geç kaldın\" der. Bu bir PEDAGOJİK eşik DEĞİL, ölçüm tabanıdır: hangi zamanlama farkının öğretmence \"hata\" sayıldığı referans hasadından gelmek zorunda ve o hasat YOK."
+ },
+ "ok": true
+}
