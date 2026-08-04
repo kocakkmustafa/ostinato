@@ -59,6 +59,19 @@
    "judgedFraction": 1.0,
    "chord": "E",
    "ok": true
+  },
+  {
+   "fixtureId": "AF-008-five-note-timing",
+   "kind": "synthetic",
+   "$why": "`note_timing_ms` metriğinin İLK kalıcı ölçümü. Öncesinde piyano ruleset'i bu metriğe quality kapısı yazıyordu ama onu üreten hiçbir kayıt yoktu (MetronomeAligner kodu vardı, hiçbir fixture'a bağlı değildi). Üç varyant (tam ızgara / 40 ms erken / 40 ms geç) ölçümü bir AYIRT ETME testine çevirir: tek kusursuz varyant, align() her zaman 0 dönse de geçerdi.",
+   "shouldJudge": true,
+   "variants": [
+    "perfect",
+    "rushing",
+    "dragging"
+   ],
+   "engineFloorMs": 8.29,
+   "ok": true
   }
  ]
 }

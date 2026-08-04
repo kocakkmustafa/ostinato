@@ -321,13 +321,15 @@
     "kind": "metric",
     "metric": "trunk_tilt",
     "op": "gt",
-    "value": 15
+    "value": 14.0
    },
    "cooldownMs": 30000,
    "expertPending": true,
+   "thresholdProvenance": "reference-derived",
    "_observable": "camera",
    "_sources": "5 bağımsız kanal",
-   "_note": "Koşul TASLAK: metrik eşlemesi uzman turu + akor-koşullu referans sonrası netleşir."
+   "_threshold_why": "15 → 14.0 (2026-08-04). Sayı küçük değişti, DAYANAĞI tamamen değişti: 15 uydurmaydı ('koşul TASLAK' diye kayıtlıydı), 14.0 ise ATTESTED gitar referansının `gates.clusterToleranceDeg` değeri — iki take'in 'aynı duruş' sayılması için anlaşma kapısının izin verdiği fark. Anlamı kullanıcı diliyle söylenebilir hâle geldi: 'ölçtüğümüz eğitmenlerin hemfikir sayıldığı aralığın DIŞINDASIN'. Merdiven (tools/derive_posture_thresholds.py): anlaşma-tabanı 2,24° (eğitmenlerin kendi aralarındaki fark) < skorlama-toleransı 8,0° (quality barı) < hata-eşiği 14,0°. Bu kodun metrik eşlemesi DOĞRU: taksonomi tarifi 'öne eğilme / sırtın kamburlaşması' = gövde eğimi (kardeşi P-POST-SHOULDER-TENSION'ın aksine, M-O-64).",
+   "_expertPending_why": "expertPending KALKMADI. İki ayrı soru artık ayrıştı: (1) sayı savunulabilir mi → EVET, artefakttan türedi (thresholdProvenance); (2) bu hükmü PEDAGOJİK dille söyleyebilir miyiz ('kamburun sırtına zarar verir') → HAYIR, movement-science turu yok. Ölçüm-dili serbest, reçete dili değil."
   },
   {
    "code": "G-TEMPO-DRIFT",

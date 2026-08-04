@@ -106,36 +106,148 @@
   {
    "id": "voice",
    "displayName": "Voice",
-   "status": "coming_soon",
+   "status": "live",
    "wave": "W1",
    "rulesetId": "voice",
-   "blurb": "Sing along and get feedback on pitch, sustain and posture.",
-   "comingSoonReason": "The posture reference now EXISTS: 6 independent teachers, measured and agreeing, built through a declared agreement gate. What is missing is no longer the reference — it is the rest of the lesson: this instrument's own drills, its error coaching, and a verified end-to-end run like the one guitar has. We open a discipline when the whole path works, not when one measurement lands.",
+   "blurb": "Put your phone where it can see you from the waist up. We check how you hold yourself against six independent singing teachers — before you sing and while you sing.",
+   "_blurbRevised": "2026-08-04: onceki blurb 'get feedback on pitch, sustain and posture' diyordu. Perde ve sustain motorlari GERCEK ve olculuyor, ama GERCEK BIR INSAN SESI kaydinda hic dogrulanmadi (bkz. sustained_note dersi, locked). Canli bir disiplinde blurb bir SOZDUR — kilitli olani vaat edemez.",
    "honesty": {
-    "measured": [],
+    "measured": [
+     "Trunk alignment, before you sing and while you sing — checked against 6 independent voice teachers who agree to within 1.35 degrees of each other (config/references/voice-posture-setup.v1.json, ATTESTED)",
+     "Whether the room is quiet enough and your voice is loud enough to judge at all (the gate refuses rather than guesses)"
+    ],
     "notMeasured": [
-     "Posture IS now measured — reference built from 6 agreeing teachers (see config/references/voice-posture-setup.v1.json).",
-     "Not yet built: this instrument's drills, its error coaching, and the end-to-end verification that proves the whole lesson path works. That is why it is still marked coming soon."
+     "Pitch accuracy and steadiness while singing — the engine works and is measured, but it has only been confirmed on real CELLO audio, never on a real singing voice. Locked until it is (see the Sustained note lesson).",
+     "Vibrato — measured, never judged. We have no teacher data on what rate is 'right', and inventing one would be a guess dressed as a measurement.",
+     "Arm, shoulder and elbow position — the six teachers disagree with each other by 43 to 88 degrees on these. That is style and framing, not error, so we show them and never grade them.",
+     "Anything below your hips, and your head and jaw — voice teaching footage is filmed waist-up, so knees are usually not in frame, and our posture reference carries no head landmark. This is why we cannot name the posture mistakes teachers actually talk about (locked knees, lifted chin).",
+     "Breath support, larynx position, tongue root — not visible to a camera at all. They are in our error library and deliberately out of product scope."
     ]
    },
-   "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi."
+   "courses": [
+    {
+     "id": "voice.foundations",
+     "displayName": "Foundations",
+     "level": "beginner",
+     "goal": "Set up your space and learn to hold yourself the way experienced singing teachers do — standing and singing.",
+     "estimatedMinutes": 20,
+     "lessons": [
+      {
+       "id": "voice.foundations.camera_space",
+       "displayName": "Camera and space",
+       "techniques": [],
+       "focus": "setup",
+       "minutes": 3,
+       "_why_unlocked": "OLCUM IDDIASI YOK — saf yonerge dersi (J-038 / gitar deseni). Hicbir metrige, referansa veya kapiya bagli degil."
+      },
+      {
+       "id": "voice.foundations.posture",
+       "displayName": "How you stand before you sing",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 5,
+       "_why_unlocked": "trunk_tilt referansi ATTESTED (6 bagimsiz egitmen, dispersiyon medyani 1.35 derece — uc calginin en KALIN kanitli referansi: 6/6 take alignedDistinctShare=1.00, gitarda bu oran 2/7). Skorlama bari artefaktan turetildi (8.0 derece, tools/derive_posture_thresholds.py --check dogrular).",
+       "_why_no_errorFocus": "M-O-64 (2026-08-04): SAN POSTURU SKORLANIR AMA ADLANDIRILMIS HATA TASIYAMAZ — bu bir eksiklik degil, OLCULMUS bir sonuc. Taksonomideki 12 san kodunun kamerayla gorulebilir postur kodlari (V-POST-LOCKED-KNEES diz ister, V-HEAD-CHIN-LIFT bas/cene acisi ister) referansin 9 ekleminde KARSILIGI OLMAYAN seyleri olcer. Olcebildigimiz metrige en yakin kodu iliştirmek, M-F-125'in oldurdugu siniftir. Ders yine de ACIK ve postur SKORLANIYOR — bant geri bildirimi verir, hak etmedigi ismi vermez."
+      },
+      {
+       "id": "voice.foundations.posture_under_sing",
+       "displayName": "Staying open while you sing",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 6,
+       "_why_unlocked": "Ikinci olcum DEGIL, AYNI olcunun ikinci ani: trunk_tilt kapisi SUSTAIN fazinda da kosuyor ve uctan-uca senaryoda GERCEKTEN kosuldu (2026-08-04: POSTURE_CHECK 101 kare + SUSTAIN 100 kare, trunk_tilt PASS=201/201). Sarki soylerken barin gevsemesi gerektigini soyleyen bir olcum YOK, o yuzden ayni bar (8.0) kullaniliyor.",
+       "_why_no_errorFocus": "Ayni gerekce (M-O-64)."
+      },
+      {
+       "id": "voice.foundations.sustained_note",
+       "displayName": "Sustained note",
+       "techniques": [
+        "sustained_note_drill"
+       ],
+       "minutes": 10,
+       "status": "locked",
+       "lockedReason": "The pitch engine is real and we can show you exactly what it measures — but it has only been confirmed on real cello recordings (48 segments, median error under 19 cents), never on a real singing voice. A voice is not a cello: vibrato, breath and formants are exactly the things that would break it. We will not grade your singing against a measurement we have not confirmed on singing. One real vocal recording through the same pipeline opens this lesson.",
+       "_why_locked_detail": "Fixture AF-001-clean-sustained-a4 SENTETIK. Motor gercek (YIN), olcum gercek, dogrulama gercek — ama girdi sentetik. Gitarin 'Open chords' dersiyle AYNI standart, ayni sekilde uygulandi. Fark: akor dedektorunun HIC gercek-ses dogrulamasi yok, perde kestiricinin BASKA bir calgida var."
+      }
+     ]
+    }
+   ],
+   "comingSoonInThisDiscipline": [
+    "Named posture coaching (locked knees, lifted chin) — the teachers' own mistake vocabulary needs knee and head landmarks our reference does not carry; new harvest, not a new threshold",
+    "Vibrato as a graded skill — measured today, but no teacher data exists on what rate is correct, so it stays unjudged",
+    "Pitch and sustain grading — engine ready, waiting only on one real vocal recording (see the Sustained note lesson)"
+   ],
+   "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi.",
+   "_openedAt": "2026-08-04: coming_soon -> live. Onceki gerekce uc sey istiyordu — 'bu calginin kendi drill'leri, hata koclugu, ve gitarinki gibi dogrulanmis uctan-uca kosum'. Sonuc: uctan-uca DOGRULANDI (3 gercek quality kapisi, POSTURE_CHECK->SUSTAIN zinciri); drill yolu KURULDU (titular drill gitarinki gibi kilitli, ayni gercek-kayit standardi); hata koclugu OLCULDU ve NEGATIF cikti (M-O-64) — eksik olan esik degil, esleseecek kod."
   },
   {
    "id": "piano",
    "displayName": "Piano",
-   "status": "coming_soon",
+   "status": "live",
    "wave": "W1",
    "rulesetId": "piano",
-   "blurb": "Practice five-finger patterns and chords with posture and hand feedback.",
-   "comingSoonReason": "The posture reference now EXISTS: 3 independent teachers, measured and agreeing, built through a declared agreement gate. What is missing is no longer the reference — it is the rest of the lesson: this instrument's own drills, its error coaching, and a verified end-to-end run like the one guitar has. We open a discipline when the whole path works, not when one measurement lands.",
+   "blurb": "Put your phone where it can see you at the keyboard from the waist up. We check how you sit against three independent piano teachers, and we time your notes against the beat.",
+   "_blurbRevised": "2026-08-04: onceki blurb 'chords with posture and hand feedback' diyordu. EL GERI BILDIRIMI DIYE BIR SEY YOK — el/parmak landmark'i hic yok (P-WRIST-COLLAPSE ve P-FINGER-FLAT bu yuzden blockedByTool). Canli bir disiplinde var olmayan bir yetenegi vaat etmek, kullanicinin dogrulayamayacagi tek satirdir.",
    "honesty": {
-    "measured": [],
+    "measured": [
+     "Trunk alignment while you sit — checked against 3 independent piano teachers who agree to within 1.09 degrees of each other, the tightest agreement of any instrument we have measured (config/references/piano-posture-setup.v1.json, ATTESTED)",
+     "Note timing against the beat — measured and shown to you, never graded (see below)"
+    ],
     "notMeasured": [
-     "Posture IS now measured — reference built from 3 agreeing teachers (see config/references/piano-posture-setup.v1.json).",
-     "Not yet built: this instrument's drills, its error coaching, and the end-to-end verification that proves the whole lesson path works. That is why it is still marked coming soon."
+     "Note timing as a GRADE. We now measure it for real (AF-008-five-note-timing), and that measurement immediately showed why it cannot be graded yet: the engine reads a perfectly-on-beat note as 8.3 ms early, and that bias falls unevenly — the same 40 ms error reads as 49 ms when you rush and 31 ms when you drag. Grading on that would punish rushing harder than dragging for no musical reason.",
+     "Wrists, fingers and hand shape — we have no hand or finger landmarks at all, only body joints. Every hand-related mistake in our error library is blocked on that missing tool, not on a missing threshold.",
+     "Shoulder tension — the mistake teachers name most often for piano (5 independent channels). We can see shoulders but the three teachers' shoulder angles differ by 24 vs 5 degrees between left and right, and 'shoulders rising toward the ears' is a height, not the angle we hold. Naming it would be guessing.",
+     "Elbow distance from the body — measured, but the three teachers' elbow angles spread across 20 to 77 degrees. That is noise, not a threshold.",
+     "Bench height, pedalling, evenness of touch, note reading — either blocked on the same missing tools or outside what a camera can see."
     ]
    },
-   "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi."
+   "courses": [
+    {
+     "id": "piano.foundations",
+     "displayName": "Foundations",
+     "level": "beginner",
+     "goal": "Set up your space and learn to sit at the keyboard the way experienced teachers sit.",
+     "estimatedMinutes": 15,
+     "lessons": [
+      {
+       "id": "piano.foundations.camera_space",
+       "displayName": "Camera and space",
+       "techniques": [],
+       "focus": "setup",
+       "minutes": 3,
+       "_why_unlocked": "OLCUM IDDIASI YOK — saf yonerge dersi (J-038 / gitar deseni)."
+      },
+      {
+       "id": "piano.foundations.posture",
+       "displayName": "How you sit at the keyboard",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 5,
+       "_why_unlocked": "trunk_tilt referansi ATTESTED (3 bagimsiz egitmen, dispersiyon medyani 1.09 derece — uc calginin en DAR anlasmasi). Skorlama bari artefaktan turetildi (8.0 derece).",
+       "_why_thin_base": "DURUST SINIR: 3 take, minTakes esiginin TAM USTUNDE (gitar 7, san 6). Kanit kalinligi 3 take'in 2'sinde 1.00. Referans gecerli ama havuzun en incesi — yeni piyano kaynagi geldiginde ilk yeniden-olculecek olan bu.",
+       "_why_no_errorFocus": "M-O-64: piyanonun kamerayla gorulebilir postur kodlarindan HICBIRI trunk_tilt'e karsilik gelmiyor. P-POST-SHOULDER-TENSION omuz YUKSEKLIGINI anlatir (elimizdeki omuz metrigi bir ACI, ustelik coached_only ve sol/sag 5 kat asimetrik); P-ELBOW-ANGLE dirsek istatistigi tasimiyor (20-77 derece). Kodun kosulu bu turda trunk_tilt'ten SOKULDU — yanlis metrige bagliydi."
+      },
+      {
+       "id": "piano.foundations.five_finger",
+       "displayName": "Five-finger patterns",
+       "techniques": [
+        "five_finger_drill"
+       ],
+       "minutes": 10,
+       "status": "locked",
+       "lockedReason": "We can hear every note you play and time it against the beat — you will see those numbers. What we cannot do is turn them into a mark. No piano teacher data exists on how far off the beat counts as a mistake, and our own timing engine reads a perfect note as 8.3 ms early with a bias that falls harder on rushing than on dragging. A grade built on that would be arithmetic, not teaching.",
+       "_why_locked_detail": "M-O-65: PLAY fazinin note_timing_ms quality kapisi INDIRILDI. Iki kusur ust usteydi — (1) kapi URETILMEYEN bir metrige bakiyordu (MetronomeAligner koduna hicbir fixture bagli degildi), (2) bar (50 ms) UYDURMAYDI. Simdi metrik gercekten olculuyor (AF-008) ama bar hala yok: postur referansi EKLEM olcer, zamanlama olcmez."
+      }
+     ]
+    }
+   ],
+   "comingSoonInThisDiscipline": [
+    "Note timing as a graded skill — measured today, blocked on two things: teacher data about what counts as off-beat, and a fix for the engine's asymmetric bias",
+    "Everything involving hands and fingers (wrist collapse, flat fingers, hand shape) — blocked on hand landmarks, a missing measurement tool rather than a missing threshold",
+    "Shoulder tension, the mistake piano teachers name most — needs a shoulder-height metric we do not have, plus its own reference statistic"
+   ],
+   "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi.",
+   "_openedAt": "2026-08-04: coming_soon -> live. Uctan-uca DOGRULANDI (POSTURE_CHECK->PLAY, trunk_tilt 80/80 PASS); drill yolu kuruldu (titular drill kilitli, gerekce olculdu); hata koclugu OLCULDU ve NEGATIF cikti + yanlis-eslesmis bir kod (P-POST-SHOULDER-TENSION) bu turda sokuldu. Disiplin ACILIYOR ama vitrini POSTURDUR — blurb ve honesty kutusu bunu soyluyor."
   }
  ]
 }
