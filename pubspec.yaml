@@ -32,6 +32,11 @@ dependencies:
     sdk: flutter
   ostinato_posture:
     path: packages/ostinato_posture
+  motion_camera:
+    git:
+      url: https://github.com/kocakkmustafa/motion-core.git
+      ref: f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d
+      path: packages/motion_camera
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

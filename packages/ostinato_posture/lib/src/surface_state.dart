@@ -17,9 +17,25 @@ final class Starting extends SurfaceState {
   const Starting();
 }
 
-/// İzin verilmedi (ya da geri alındı). Tek eylem: ayarlara yönlendir.
-final class PermissionDenied extends SurfaceState {
+/// İzin verilmedi. **KALICI mı GEÇİCİ mi, ayrı hâller** (zeyil-3, JabLab
+/// deseni): sunulan EYLEM farklı olduğu için ayrımı TİP taşır.
+///
+/// Tek bir "izin yok" hâli kullanıcıya yanlış düğmeyi gösterir: kalıcı redde
+/// "tekrar dene" hiçbir şey yapmaz (sistem artık sormaz) — dokun, hiçbir şey
+/// olmaz. Çıkmaz sokağın en sinsi hâli: düğme VAR, işlevi YOK.
+sealed class PermissionDenied extends SurfaceState {
   const PermissionDenied();
+}
+
+/// Sistem henüz sorabilir — "tekrar dene" GERÇEKTEN bir şey yapar.
+final class PermissionDeniedRetriable extends PermissionDenied {
+  const PermissionDeniedRetriable();
+}
+
+/// Kalıcı ret: sistem BİR DAHA sormaz. Tek anlamlı eylem ayarlara
+/// yönlendirmek; "tekrar dene" GÖSTERİLMEZ.
+final class PermissionDeniedPermanent extends PermissionDenied {
+  const PermissionDeniedPermanent();
 }
 
 /// Kamera açılamadı — cihazda yok, model yüklenemedi, ya da oturum reddedildi.
@@ -27,6 +43,20 @@ final class PermissionDenied extends SurfaceState {
 /// platform istisnası metni DEĞİL.
 final class CameraUnavailable extends SurfaceState {
   const CameraUnavailable(this.reason);
+  final String reason;
+}
+
+/// Kurulum HİÇ BAŞLAMADI ya da patladı — ama ekran yine de AÇILIR.
+///
+/// ÇIKMAZ-SOKAK YASAĞI (zeyil-3): kamera kurulumu patlarsa ders açılmamazlık
+/// EDEMEZ. "Dokun → hiçbir şey olmaz" sessiz ölümdür; kullanıcı uygulamanın mı
+/// bozuk olduğunu yoksa kendi mi yanlış yaptığını bilemez. Kurulum hatası
+/// seansın DIŞINDA bir boşluk değil, İÇİNDE tipli bir hâldir: ekran açılır,
+/// analiz-yokluğu BEYAN EDİLİR.
+final class SetupFailed extends SurfaceState {
+  const SetupFailed(this.reason);
+
+  /// İSİMLİ sebep (`CameraFailure` adı gibi) — ham istisna metni DEĞİL.
   final String reason;
 }
 

@@ -14,19 +14,33 @@ Cihaz: iPhone 17 Pro Max simülatörü · debug build · `motion_core 0.11.0 @ f
 | `03-no-person.png` | Kişi görünmeyince AYRI ekran: *"We cannot see you yet… This is not an error"*. Kadraj dışı bir kullanıcı ile bozuk bir hat aynı ekrana düşmüyor | kamera gerçekten kişi kaybettiğinde aynı yola girdiği (tur-2) |
 | `04-outside-range.png` | 22,0°: **"Outside the range we measure against"**, işaretçi bandın dışında | — |
 
-## ⚠️ ALINAMAYAN KANIT — isimle
+## 🔴 AÇIK ŞÜPHE — gözlem işareti ÇALIŞAN UYGULAMADA görünmedi (O-032)
 
-**Gözlem işaretinin (cue) ekran görüntüsü YOK.** İki sebep, ikisi de gerçek:
-1. İşaret 3 ardışık sapmadan sonra doğar ve **30 sn cooldown**'a girer — yani
-   döngü başına ~1,3 sn görünür. Bu doğru ürün davranışı (sürekli konuşan bir
-   gözlem, gözlem değil arka plan gürültüsüdür), ama yakalama penceresi dar.
-2. Simülatör **paylaşımlı** ve tur sırasında kardeş bir oturumun uygulaması
-   öne geçti. Cihaz çekişmesine girilmedi (koordinatör talimatı).
+**Bunu "ekran görüntüsü alınamadı" diye yazmıyorum, çünkü öyle değil.**
 
-**İşaretin kendisi DETERMİNİSTİK olarak kanıtlı** — `test/widget_test.dart`:
-`İKİZ: sürdürülen sapmada işaret GÖRÜNÜR ve KAYNAĞINI taşır` (cümlede
-"None of the 7 guitar teachers…") · `işaretteki sayı BAŞLIKTAKİ sayıyla aynı
-kalır` · `banda dönünce işaret SUSAR`. Ekran görüntüsü tasarım turuna devredildi.
+Ölçülen üç şey:
+1. **Değerlendirici işareti ÜRETİYOR.** Demo senaryosu doğrudan
+   `PostureEvaluator`dan geçirildi: index 15'te `cue=true` (3. ardışık sapma),
+   sonrasında cooldown'la bastırılıyor — tasarlandığı gibi.
+2. **Widget işareti ÇİZİYOR.** Üç widget testi geçiyor: işaret görünüyor,
+   cümlede "None of the 7 guitar teachers…" var, sayısı başlıktakiyle
+   senkron, banda dönünce siliniyor.
+3. **Çalışan uygulamada GÖRÜNMEDİ.** Aralık-dışı pencerenin ortasında
+   (21,0° · 3. sapmadan çok sonra) defalarca yakalandı; işaret kutusu YOK.
+
+Yani parçalar ayrı ayrı kanıtlı, **BİRLEŞİK CANLI HÂL kanıtlanmadı** — ve bu
+tam olarak bu hattın kendi dersi: *"bağlandı ≠ canlı"*. Testlerin geçmesi,
+çalışan uygulamanın üçüncü bir şey olduğu gerçeğini değiştirmiyor.
+
+**Şüphe sınıfı (kanıtlanmadı, tahmin):** ekran ile sahte kaynak arasındaki
+kablolama — muhtemelen `Timer.periodic` altındaki dinleyici/`setState`
+yolunda, senkron `pushOne()` kullanan testlerin uğramadığı bir fark.
+Yakalama zamanlaması ELENDİ: aralık-dışı pencere 7→15 kareye uzatıldı ve
+pencerenin ortasında da işaret çıkmadı.
+
+Kalan iş tur-2'ye devredildi ve isimli: **gerçek kamera bağlanmadan ÖNCE bu
+şüphe kapatılır** — kamerayı, canlı yolu kanıtlanmamış bir yüzeye bağlamak
+iki belirsizliği üst üste koyar.
 
 ## Bu tur ekran kanıtının YAKALADIĞI İKİ KUSUR
 

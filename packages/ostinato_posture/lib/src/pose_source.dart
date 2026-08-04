@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'surface_state.dart';
+
 /// Bir karede ölçülen postür — kaynak (kamera / fixture / sahte) ne olursa
 /// olsun yüzeyin gördüğü TEK tür.
 final class PoseFrame {
@@ -21,6 +23,16 @@ final class PoseFrame {
 /// farklıdır — ikisi ayrı cümle, ayrı kanıt sınıfı.
 abstract interface class PoseSource {
   Stream<PoseFrame> get frames;
+
+  /// Kaynağın KENDİ yaşam-döngüsü hâlleri: açılıyor · izin reddi (kalıcı/
+  /// geçici) · kurulum patladı.
+  ///
+  /// Neden ölçümden AYRI akış: bunlar postür hakkında bir şey söylemez, HATTIN
+  /// kendisi hakkında söyler. Değerlendiriciye taşımak, ölçüm mantığını izin
+  /// diyalogları hakkında bilgi sahibi yapardı. Kamera bu akışı doldurur;
+  /// sahte kaynak yalnız `Starting` yayar.
+  Stream<SurfaceState> get status;
+
   Future<void> start();
   Future<void> stop();
 }
@@ -37,6 +49,7 @@ final class FakePoseSource implements PoseSource {
   final int stepUs;
 
   final _controller = StreamController<PoseFrame>.broadcast();
+  final _status = StreamController<SurfaceState>.broadcast();
 
   /// Senaryodaki konum — başa sarar.
   int _i = 0;
@@ -58,6 +71,9 @@ final class FakePoseSource implements PoseSource {
 
   @override
   Stream<PoseFrame> get frames => _controller.stream;
+
+  @override
+  Stream<SurfaceState> get status => _status.stream;
 
   @override
   Future<void> start() async {
@@ -85,5 +101,37 @@ final class FakePoseSource implements PoseSource {
     _tick++;
   }
 
-  Future<void> dispose() => _controller.close();
+  Future<void> dispose() async {
+    await _controller.close();
+    await _status.close();
+  }
+}
+
+/// Yalnız bir yaşam-döngüsü hâli yayan, hiç kare üretmeyen kaynak.
+///
+/// Kurulum/izin yollarını GERÇEK kamera olmadan yüzeyde sınamak için —
+/// tur-2'de kamera adaptörü aynı hâlleri yayacak, yüzey değişmeyecek.
+final class StaticStatusSource implements PoseSource {
+  StaticStatusSource(this.state);
+
+  final SurfaceState state;
+  final _frames = StreamController<PoseFrame>.broadcast();
+  final _status = StreamController<SurfaceState>.broadcast();
+
+  @override
+  Stream<PoseFrame> get frames => _frames.stream;
+
+  @override
+  Stream<SurfaceState> get status => _status.stream;
+
+  @override
+  Future<void> start() async => _status.add(state);
+
+  @override
+  Future<void> stop() async {}
+
+  Future<void> dispose() async {
+    await _frames.close();
+    await _status.close();
+  }
 }

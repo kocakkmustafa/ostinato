@@ -54,6 +54,15 @@ class _PostureScreenState extends State<PostureScreen> {
   @override
   void initState() {
     super.initState();
+    // Yaşam-döngüsü hâlleri ölçümü EZER: izin yoksa ya da kurulum patladıysa
+    // ekranda bir postür sayısı olamaz.
+    widget.source.status.listen((SurfaceState s) {
+      if (!mounted) return;
+      setState(() {
+        _state = s;
+        _cue = null;
+      });
+    });
     widget.source.frames.listen((PoseFrame f) {
       final SurfaceState s = _evaluator.evaluate(f);
       if (!mounted) return;
@@ -106,11 +115,27 @@ class _PostureScreenState extends State<PostureScreen> {
           key: Key('state-starting'),
           title: 'Getting the camera ready',
           body: 'This takes a moment. Nothing is being recorded.'),
-      PermissionDenied() => const _Notice(
-          key: Key('state-permission-denied'),
+      // İki izin hâli AYRI ekran: sunulan eylem farklı. Kalıcı redde
+      // "tekrar dene" GÖSTERİLMEZ — sistem bir daha sormaz, düğme yalan olur.
+      PermissionDeniedRetriable() => const _Notice(
+          key: Key('state-permission-retriable'),
           title: 'Camera access is off',
           body: 'Ostinato needs the camera to see how you sit. Video never '
-              'leaves your phone. You can turn access on in Settings.'),
+              'leaves your phone. Tap Try again to allow it.',
+          action: 'Try again'),
+      PermissionDeniedPermanent() => const _Notice(
+          key: Key('state-permission-permanent'),
+          title: 'Camera access is off',
+          body: 'You have turned camera access off for Ostinato and the '
+              'system will not ask again. Open Settings to change it. '
+              'Video never leaves your phone.',
+          action: 'Open Settings'),
+      SetupFailed(:final String reason) => _Notice(
+          key: const Key('state-setup-failed'),
+          title: 'This lesson opened, but nothing is being measured',
+          body: 'The camera did not start ($reason), so there is no posture '
+              'reading. The lesson is still here — we simply are not '
+              'analysing anything right now.'),
       CameraUnavailable(:final String reason) => _Notice(
           key: const Key('state-camera-unavailable'),
           title: 'The camera did not open',
@@ -246,9 +271,19 @@ class _BandStrip extends StatelessWidget {
 }
 
 class _Notice extends StatelessWidget {
-  const _Notice({super.key, required this.title, required this.body});
+  const _Notice({
+    super.key,
+    required this.title,
+    required this.body,
+    this.action,
+  });
+
   final String title;
   final String body;
+
+  /// Eylem etiketi — YALNIZ gerçekten bir şey yapabilecekse verilir.
+  /// İşlevsiz bir düğme, olmayan bir düğmeden KÖTÜDÜR.
+  final String? action;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -257,6 +292,13 @@ class _Notice extends StatelessWidget {
           Text(title, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           Text(body),
+          if (action != null) ...<Widget>[
+            const SizedBox(height: 16),
+            FilledButton(
+                key: const Key('notice-action'),
+                onPressed: () {},
+                child: Text(action!)),
+          ],
         ],
       );
 }

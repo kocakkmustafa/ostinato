@@ -130,6 +130,51 @@ void main() {
     });
   });
 
+
+  group('çıkmaz-sokak yasağı + izin ayrımı (zeyil-3)', () {
+    /// Hâli DOĞRUDAN dayatan minik kaynak: kurulum yollarını, gerçek kamera
+    /// olmadan, yüzeyde sınamak için.
+    Future<void> pumpState(WidgetTester t, SurfaceState forced) async {
+      await t.pumpWidget(MaterialApp(
+        home: PostureScreen(
+          discipline: repo.disciplines.firstWhere((Discipline x) => x.id == 'guitar'),
+          contract: repo.contractFor('guitar'),
+          cueText: cueText,
+          source: StaticStatusSource(forced),
+          sourceLabel: 'TEST',
+        ),
+      ));
+      await t.pump(); // teslim
+      await t.pump(); // çizim
+    }
+
+    testWidgets('kurulum patlasa da EKRAN AÇILIR ve analiz-yokluğu BEYAN EDİLİR',
+        (WidgetTester t) async {
+      await pumpState(t, const SetupFailed('camera-permission-denied'));
+      expect(find.byKey(const Key('state-setup-failed')), findsOneWidget,
+          reason: 'kurulum hatası ekranı yok — "dokun, hiçbir şey olmaz" '
+              'sessiz ölümü');
+      expect(find.textContaining('not analysing anything'), findsOneWidget);
+      // Ham detay sızmasın: sebep İSİMLİ, yığın izi değil.
+      expect(find.textContaining('Exception'), findsNothing);
+    });
+
+    testWidgets('GEÇİCİ redde "tekrar dene" VAR', (WidgetTester t) async {
+      await pumpState(t, const PermissionDeniedRetriable());
+      expect(find.byKey(const Key('state-permission-retriable')), findsOneWidget);
+      expect(find.text('Try again'), findsOneWidget);
+    });
+
+    testWidgets('KALICI redde "tekrar dene" YOK — işlevsiz düğme gösterilmez',
+        (WidgetTester t) async {
+      await pumpState(t, const PermissionDeniedPermanent());
+      expect(find.byKey(const Key('state-permission-permanent')), findsOneWidget);
+      expect(find.text('Try again'), findsNothing,
+          reason: 'sistem bir daha sormaz — "tekrar dene" yalan bir düğme olur');
+      expect(find.text('Open Settings'), findsOneWidget);
+    });
+  });
+
   testWidgets('K8: ekranda YÜZDE/PUAN yok', (WidgetTester t) async {
     final FakePoseSource src = await pump(t, <double?>[3.0]);
     await feed(t, src);

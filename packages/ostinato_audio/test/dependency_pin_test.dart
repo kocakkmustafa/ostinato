@@ -15,7 +15,16 @@ import 'package:test/test.dart';
 /// `motion_camera-v0.1.2` AYRI commit'lerde durur ama pin TEKTİR — ikisini de
 /// içeren `f13bdc9`. Doğrulandı: v0.11.0 -> 2018469, v0.1.2 -> f13bdc9, ve
 /// f13bdc9 her ikisini de içeriyor (merge-base ataları).
-const String _mandatedRef = 'f13bdc9';
+///
+/// **REF TAM 40-SHA OLMAK ZORUNDA** (M-F-263 zeyil-2, Choreia+Gravita ölçtü —
+/// ve burada da ÖLÇÜLDÜ): pub, git ref'lerini ÇÖZMEZ, STRING olarak
+/// karşılaştırır.  kendi pubspec'inde tam SHA ile pinliyor;
+/// bizimki kısaltılmışken pub ikisini AYRI KAYNAK sayıp
+/// "motion_camera from git is incompatible with ostinato_posture from path"
+/// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
+/// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
+/// anlaşma, ancak iki taraf varken sınanabilir.)
+const String _mandatedRef = 'f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d';
 const String _mandatedVersion = '0.11.0';
 
 void main() {
