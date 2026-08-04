@@ -156,13 +156,13 @@ void main(List<String> args) {
   }));
 
   stdout.writeln('$fixtureId:');
-  for (final e in (measured as Map<String, dynamic>).entries) {
+  for (final e in measured.entries) {
     final m = e.value as Map<String, dynamic>;
     stdout.writeln('  ${e.key.padRight(9)} note_timing_ms=${m['noteTimingMs']}'
         '  spread=${m['spreadMs']}  bias=${m['bias']}'
         '  eşleşen=${m['matchedBeats']}/${m['totalBeats']}');
   }
-  stdout.writeln('  motor tabanı (kusursuz çalış): ${floorMs} ms');
+  stdout.writeln('  motor tabanı (kusursuz çalış): \$floorMs ms');
   if (!ok) {
     for (final p in problems) {
       stdout.writeln('  ⛔ $p');

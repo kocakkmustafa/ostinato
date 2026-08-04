@@ -1,0 +1,17 @@
+name: ostinato_posture
+description: >-
+  Canlı postür yüzeyinin KARAR katmanı — bant durumu, gözlem işareti yükü ve
+  dürüst hâller. Flutter'a bağımlı DEĞİL: kabuk yalnız kablolama olsun diye
+  (Gravita G-100 "motor/kabuk ayrımı" deseni), bütün hüküm burada ve testte.
+version: 0.1.0
+publish_to: none
+environment:
+  sdk: ^3.5.0
+dependencies:
+  motion_core:
+    git:
+      url: https://github.com/kocakkmustafa/motion-core.git
+      ref: f13bdc9
+      path: packages/motion_core
+dev_dependencies:
+  test: ^1.25.0
