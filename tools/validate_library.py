@@ -39,6 +39,14 @@ def error_flags(ruleset_path):
             for e in cfg.get("errors", [])}
 
 
+def observation_cues(ruleset_path):
+    """Gözlem işareti kodu -> bağlı olduğu metrik (M-F-232 kural 8'in dayanağı)."""
+    if not Path(ruleset_path).exists():
+        return {}
+    cfg = load(ruleset_path)
+    return {c["id"]: c.get("metric") for c in cfg.get("observationCues", [])}
+
+
 def scored_metrics(ruleset_path):
     if not Path(ruleset_path).exists():
         return set()
@@ -70,6 +78,7 @@ def main():
         err_metric = error_metric_map(rs_path)
         err_flags = error_flags(rs_path)
         scored = scored_metrics(rs_path)
+        obs_cues = observation_cues(rs_path)
 
         for c in d.get("courses", []):
             # Kural 2: her kursun en az 1 dersi olmalı.
@@ -129,6 +138,32 @@ def main():
                                 f"bağlı ({err_metric[code]!r}; skorlananlar: "
                                 f"{sorted(scored)}) — kullanıcıya ölçülmeyen "
                                 f"bir hüküm vaat edilirdi")
+
+                # Kural 8 (M-F-232): GÖZLEM ŞERİDİ — açık ders bir
+                # `observationCue` gösterebilir, ama ŞERİTLER KARIŞAMAZ.
+                # Kural 7/M-F-125 aynen duruyor: öğüt (hata kodu) kapalı.
+                # Buradaki tehlike, gözlem şeridinin öğüt için ARKA KAPI
+                # olması — bir hata kodunu `observationCues` listesine yazıp
+                # expertPending kapısını atlamak. Üç kontrol bunu keser.
+                for code in l.get("observationCues", []):
+                    if code not in obs_cues:
+                        violations.append(
+                            f"{lid}: var olmayan gözlem işaretine atıf: '{code}'")
+                    elif code in err_metric:
+                        violations.append(
+                            f"{lid}: '{code}' HEM hata kodu HEM gözlem işareti — "
+                            f"şeritler ayrı olmalı (M-F-232 şart 1)")
+                    elif obs_cues[code] not in scored:
+                        violations.append(
+                            f"{lid}: gözlem işareti '{code}' skorlanmayan bir "
+                            f"metriğe bağlı ({obs_cues[code]!r})")
+                if set(l.get("observationCues", [])) & set(l.get("errorFocus", [])):
+                    violations.append(
+                        f"{lid}: aynı kod hem errorFocus hem observationCues'ta")
+                if l.get("status") == "locked" and l.get("observationCues"):
+                    violations.append(
+                        f"{lid}: KİLİTLİ ders gözlem işareti gösteremez — "
+                        f"kilitli ders hiçbir hüküm yüzeyi taşımaz")
 
         # Kural 6: comingSoonInThisDiscipline maddeleri gerekçesiz olamaz
         # (canlı disiplinin İÇİNDEKİ kapsam-dışı maddeler — ayrı listedeki

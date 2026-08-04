@@ -460,5 +460,49 @@
    ]
   }
  },
- "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı."
+ "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı.",
+ "observationCues": [
+  {
+   "id": "OBS-TRUNK-RANGE",
+   "_class": "observation",
+   "_whyNotAnErrorCode": "Şart 1 (M-F-232): bu bir HATA KODU DEĞİL ve G-/V-/P- ad-alanını TAŞIYAMAZ. İki iddia sınıfı ayrı: ÖĞÜT ('formun yanlış') uzman doğrulaması ister ve hata kodları expertPending'de KALIR; GÖZLEM ('ölçtüğümüz eğitmenlerin hiçbiri bu kadar eğilmiyor') ölçüm geçerliliği ister ve o kanıt zaten var. Bu şerit, expertPending bayrağını TÜKETMEZ ve KAPATMAZ — uzman turu geldiğinde öğüt şeridi AYRICA açılır, gözlem kalkmaz.",
+   "metric": "trunk_tilt",
+   "evaluateAt": [
+    "POSTURE_CHECK",
+    "PLAY"
+   ],
+   "condition": {
+    "kind": "metric",
+    "metric": "trunk_tilt",
+    "op": "gt",
+    "value": 14.0
+   },
+   "silentWhen": {
+    "kind": "metric",
+    "metric": "trunk_tilt",
+    "op": "lte",
+    "value": 14.0
+   },
+   "_silentWhen_why": "Şart 6 (pozitif ikiz): aralık İÇİNDEYKEN SUSMAK, dışındayken görünmek kadar sözleşmenin parçası. Sürekli konuşan bir 'gözlem' işareti gözlem değil, arka plan gürültüsüdür — ve kullanıcı onu ölçüm sanır. İki yön AYRI ve BİRLİKTE test edilir.",
+   "cooldownMs": 30000,
+   "template": "OBS_TRUNK_OUTSIDE_RANGE",
+   "templateData": {
+    "n": 3,
+    "sourceClass": "piano teachers",
+    "thresholdDeg": 14.0
+   },
+   "_templateData_why": "Şart 3: N ve kaynak sınıfı CÜMLENİN İÇİNDE. Sayı dayanağını taşımadan görünmüyor — '14 dereceyi aştın' değil, 'kaydettiğimiz N eğitmenin hiçbiri bu kadar eğilmiyor'. measuredDeg'i motor çalışma zamanında doldurur; metin app'te, motor kullanıcı metni ÜRETMEZ (şart 2).",
+   "_derivedFrom": {
+    "artifact": "config/references/piano-posture-setup.v1.json",
+    "generatedAt": "2026-07-29T23:21:56.185407Z",
+    "contributingTakes": 3,
+    "dispersionMedianDeg": 1.09,
+    "toleranceSource": "floor",
+    "floorBoundShare": 1.0,
+    "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz."
+   },
+   "_thresholdIsFloorBound": "Şart 7 (M-O-63 şeffaflığı): 14,0° `gates.clusterToleranceDeg` — anlaşma kapısının barı. Bu eşiğin ALTINDAKİ skorlama toleransı (8,0°) dispersiyondan DEĞİL, dispersiyonun tolerans tabanına ÇARPMASINDAN geliyor (ölçülen dispersiyon 1.09°, floorBoundShare 1.0). İDDİA ile SAYI ÖRTÜŞÜK olmalı: cue 'aralığın dışındasın' der, 'hatalısın' DEMEZ — çünkü elimizdeki kanıt eğitmenlerin işgal ettiği aralıktır, doğru/yanlış hükmü değil.",
+   "_eligibility": "Şart 4: yalnız ATTESTED referans + `_derivedFrom` damgalı eşik taşıyan metrik-çalgı çiftinde ve `derive_posture_thresholds.py --check` YEŞİLKEN geçerli. Uygunluk `tools/validate_observation_cues.py` tarafından mekanik sınanır."
+  }
+ ]
 }

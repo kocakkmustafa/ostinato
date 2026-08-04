@@ -1,0 +1,42 @@
+{
+ "$what": [
+  "GÖZLEM İŞARETİ metin kataloğu — DONMUŞ (golden). M-F-232 (M-F-125 zeyli) şart 2:",
+  "'şablon-tek-yol — motor VERİ üretir, app şablonu doldurur; motor kullanıcı metni ÜRETMEZ.'",
+  "",
+  "Neden golden: bu metinler ürünün kullanıcıya söylediği TEK postür cümlesi. Bir kelime",
+  "kayarsa iddia sınıfı da kayar — 'aralığın dışındasın' (gözlem, ölçümle örtüşük) ile",
+  "'yanlış oturuyorsun' (öğüt, uzman-doğrulaması ister) arasındaki fark tek fiildir.",
+  "Bu dosya `tools/validate_observation_cues.py` tarafından hem ruleset'lerle karşılaştırılır",
+  "hem YASAK-DİL taramasından geçirilir; değiştirmek BİLİNÇLİ bir golden güncellemesi ister."
+ ],
+ "schemaVersion": 1,
+ "language": "en",
+ "templates": {
+  "OBS_TRUNK_OUTSIDE_RANGE": {
+   "text": "None of the {n} {sourceClass} we recorded leaned more than {thresholdDeg}° from upright. You are at {measuredDeg}° right now.",
+   "slots": ["n", "sourceClass", "thresholdDeg", "measuredDeg"],
+   "_claimClass": "observation",
+   "_whyThisWording": [
+    "İki cümlenin ikisi de ÖLÇÜM BEYANI: birincisi referansın ne olduğunu, ikincisi ölçülenin ne olduğunu söylüyor.",
+    "Aradaki hükmü kullanıcı kuruyor — biz 'yanlış' demiyoruz, iki sayıyı yan yana koyuyoruz.",
+    "'from upright' oturan (gitar/piyano) ve ayakta duran (şan) öğrenci için de doğru; çalgıya göre fiil değişmiyor.",
+    "N ve kaynak sınıfı CÜMLENİN İÇİNDE (şart 3): sayı dayanağını taşımadan görünmez."
+   ]
+  }
+ },
+ "forbidden": {
+  "$why": "Şart 2'nin dişleri. Bu listeler şablon metnine kelime-sınırıyla uygulanır; eşleşme = kapı kırmızı.",
+  "imperative": ["sit", "stand", "straighten", "lift", "lower", "keep", "try", "correct", "fix",
+                 "adjust", "relax", "avoid", "stop", "start", "hold", "push", "pull", "should",
+                 "must", "need", "let", "make", "remember", "focus"],
+  "causal": ["because", "since", "causes", "cause", "leads", "results", "so", "therefore",
+             "which", "thus", "hence", "prevents", "improves", "helps"],
+  "bodyOutcome": ["pain", "painful", "injury", "injure", "strain", "hurt", "damage", "tension",
+                  "tense", "fatigue", "healthy", "unhealthy", "harm", "risk", "wrong", "bad", "poor"]
+ },
+ "_notForbidden": [
+  "'leaned' / 'upright' / 'recorded' — betimleyici, emir değil.",
+  "'None' — nicelik beyanı.",
+  "Yasak listeler ŞABLON metnine uygulanır, bu dosyanın açıklama alanlarına değil."
+ ]
+}
