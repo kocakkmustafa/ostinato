@@ -1,0 +1,44 @@
+{
+ "guitar": {
+  "scoringToleranceDeg": 8,
+  "cueThresholdDeg": 14.0,
+  "teacherCount": 7,
+  "sourceClass": "guitar teachers",
+  "bandLowDeg": 0.4,
+  "bandHighDeg": 6.4,
+  "cueTemplateId": "OBS_TRUNK_OUTSIDE_RANGE",
+  "dispersionMedianDeg": 2.24,
+  "_derivedFrom": {
+   "artifact": "config/references/guitar-posture-setup.v1.json",
+   "generatedAt": "2026-08-04T21:33:50.393795Z"
+  }
+ },
+ "voice": {
+  "scoringToleranceDeg": 8,
+  "cueThresholdDeg": 14.0,
+  "teacherCount": 6,
+  "sourceClass": "voice teachers",
+  "bandLowDeg": 0.4,
+  "bandHighDeg": 4.4,
+  "cueTemplateId": "OBS_TRUNK_OUTSIDE_RANGE",
+  "dispersionMedianDeg": 1.35,
+  "_derivedFrom": {
+   "artifact": "config/references/voice-posture-setup.v1.json",
+   "generatedAt": "2026-08-04T21:33:52.307308Z"
+  }
+ },
+ "piano": {
+  "scoringToleranceDeg": 8,
+  "cueThresholdDeg": 14.0,
+  "teacherCount": 3,
+  "sourceClass": "piano teachers",
+  "bandLowDeg": 1.9,
+  "bandHighDeg": 2.8,
+  "cueTemplateId": "OBS_TRUNK_OUTSIDE_RANGE",
+  "dispersionMedianDeg": 1.09,
+  "_derivedFrom": {
+   "artifact": "config/references/piano-posture-setup.v1.json",
+   "generatedAt": "2026-08-04T21:33:54.578506Z"
+  }
+ }
+}

@@ -1,0 +1,33 @@
+PODS:
+  - Flutter (1.0.0)
+  - MediaPipeTasksCommon (0.10.21)
+  - MediaPipeTasksVision (0.10.21):
+    - MediaPipeTasksCommon (= 0.10.21)
+  - motion_camera (0.1.0):
+    - Flutter
+    - MediaPipeTasksVision (= 0.10.21)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - motion_camera (from `.symlinks/plugins/motion_camera/ios`)
+
+SPEC REPOS:
+  trunk:
+    - MediaPipeTasksCommon
+    - MediaPipeTasksVision
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  motion_camera:
+    :path: ".symlinks/plugins/motion_camera/ios"
+
+SPEC CHECKSUMS:
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  MediaPipeTasksCommon: 6cfa29170d4900f04d250ad95ec058f14a741f38
+  MediaPipeTasksVision: 7b1c0f5a5820e87e9d96926f5e65d8cd3744fac2
+  motion_camera: a751ce7af204db2e85af604e080e9d570b82687e
+
+PODFILE CHECKSUM: ffe9e6bad3c7265a7bf391f5c2903a87b9b64685
+
+COCOAPODS: 1.16.2

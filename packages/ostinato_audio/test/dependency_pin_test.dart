@@ -11,7 +11,44 @@ import 'package:test/test.dart';
 /// hiçbir test bunu yakalamıyordu). Bu test o günü beklemeden kırar: iki
 /// `pubspec.lock`'un `motion_core` için çözdüğü `resolved-ref` birebir
 /// aynı olmalı.
+/// Direktifle MÜHÜRLENEN tek ref (M-F-263): `motion_core-v0.11.0` ve
+/// `motion_camera-v0.1.2` AYRI commit'lerde durur ama pin TEKTİR — ikisini de
+/// içeren `f13bdc9`. Doğrulandı: v0.11.0 -> 2018469, v0.1.2 -> f13bdc9, ve
+/// f13bdc9 her ikisini de içeriyor (merge-base ataları).
+///
+/// **REF TAM 40-SHA OLMAK ZORUNDA** (M-F-263 zeyil-2, Choreia+Gravita ölçtü —
+/// ve burada da ÖLÇÜLDÜ): pub, git ref'lerini ÇÖZMEZ, STRING olarak
+/// karşılaştırır.  kendi pubspec'inde tam SHA ile pinliyor;
+/// bizimki kısaltılmışken pub ikisini AYRI KAYNAK sayıp
+/// "motion_camera from git is incompatible with ostinato_posture from path"
+/// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
+/// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
+/// anlaşma, ancak iki taraf varken sınanabilir.)
+const String _mandatedRef = 'f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d';
+const String _mandatedVersion = '0.11.0';
+
 void main() {
+  test('pin MÜHÜRLENEN refte — "ikisi aynı" yetmez, DOĞRU şeyde aynı olmalı', () {
+    // ÜÇÜNCÜ ÇAPA (MUT-A dersi, O-029 sınıfı): eşitlik kapısı iki kaynağı
+    // KARŞILAŞTIRIR; ikisini BİRLİKTE başka bir ref'e taşıyan bir düzenleme
+    // sessizce geçer. Karşılaştırılacak bir DIŞ sabit olmadan "pin mühürlü"
+    // cümlesi, pubspec'leri düzenleyen herkese açıktır.
+    const Map<String, String> specs = {
+      'ostinato_audio': 'pubspec.yaml',
+      'dart_pilot': '../../tools/dart_pilot/pubspec.yaml',
+    };
+    for (final MapEntry<String, String> e in specs.entries) {
+      final String yaml = File(e.value).readAsStringSync();
+      expect(yaml, contains('ref: $_mandatedRef'),
+          reason: '${e.key} pubspec.yaml mühürlenen refi ($_mandatedRef) '
+              'taşımıyor — M-F-263 tek-pin şartı');
+    }
+    final String lock = File('pubspec.lock').readAsStringSync();
+    expect(_resolvedVersion(lock), _mandatedVersion,
+        reason: 'kilit $_mandatedVersion çözmüyor — tagin işaret ettiği sürüm '
+            'ile refin çözdüğü sürüm ayrışmış olabilir');
+  });
+
   test('ostinato_audio ve dart_pilot AYNI motion_core sürümünü çözüyor', () {
     final String? audioRef =
         _resolvedRef(File('pubspec.lock').readAsStringSync());
@@ -33,9 +70,14 @@ void main() {
   });
 }
 
+/// `<indent>motion_core:` bloğundaki `version:` değerini döner.
+String? _resolvedVersion(String lockYaml) => _fieldOf(lockYaml, 'version');
+
 /// `<indent>motion_core:` bloğundaki `resolved-ref:` değerini döner.
 /// Blok, aynı girintide yeni bir üst-seviye anahtar görülünce biter.
-String? _resolvedRef(String lockYaml) {
+String? _resolvedRef(String lockYaml) => _fieldOf(lockYaml, 'resolved-ref');
+
+String? _fieldOf(String lockYaml, String field) {
   final List<String> lines = lockYaml.split('\n');
   int i = 0;
   while (i < lines.length && lines[i] != '  motion_core:') {
@@ -45,7 +87,7 @@ String? _resolvedRef(String lockYaml) {
   for (int j = i + 1; j < lines.length; j++) {
     final String line = lines[j];
     if (RegExp(r'^  \S').hasMatch(line)) break; // yeni üst-seviye anahtar
-    final Match? m = RegExp(r'^\s*resolved-ref:\s*(\S+)').firstMatch(line);
+    final Match? m = RegExp('^\\s*$field:\\s*"?([^"\\s]+)"?').firstMatch(line);
     if (m != null) return m.group(1);
   }
   return null;

@@ -89,12 +89,13 @@
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu.",
    "_derivedFrom": {
     "artifact": "config/references/voice-posture-setup.v1.json",
-    "generatedAt": "2026-08-04T20:22:14.702670Z",
+    "generatedAt": "2026-08-04T21:33:52.307308Z",
     "contributingTakes": 6,
     "dispersionMedianDeg": 1.35,
     "toleranceSource": "floor",
     "floorBoundShare": 1.0,
-    "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz."
+    "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz.",
+    "_coreVersion": "motion_core 0.11.0 @ f13bdc9 (M-F-263 tek-pin). 0.8.6→0.11.0 atlamasında artefakt BİT-BİT aynı çıktı: frames hash (dispersionRad+meanRad) üç çalgıda da değişmedi, frameBasis deltası YOK."
    }
   },
   "left_shoulder": {

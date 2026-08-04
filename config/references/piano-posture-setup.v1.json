@@ -2,7 +2,7 @@
  "schema": "motion-core/reference@1",
  "technique": "five_finger_drill",
  "measurementProvenance": "ATTESTED",
- "generatedAt": "2026-08-04T20:22:16.704266Z",
+ "generatedAt": "2026-08-04T21:33:54.578506Z",
  "gates": {
   "minTakes": 3,
   "minSources": 3,
@@ -62,17 +62,20 @@
    "2mxlG5bzcyQ": {
     "frames": 145,
     "durationS": 4.8048,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "cBuC89ApQtM": {
     "frames": 159,
     "durationS": 5.27193,
-    "alignedDistinctShare": 1.0
+    "alignedDistinctShare": 1.0,
+    "capFillShare": 1.0
    },
    "e-USjrHOL8s": {
     "frames": 103,
     "durationS": 3.4034,
-    "alignedDistinctShare": 0.7103448275862069
+    "alignedDistinctShare": 0.7103448275862069,
+    "capFillShare": 1.0
    }
   }
  },
@@ -87,6 +90,7 @@
   "mirroredTakeIds": [
    "cBuC89ApQtM"
   ],
+  "medoidTakeId": "2mxlG5bzcyQ",
   "mirrorConfident": true,
   "mirrorGapMeasured": true,
   "mirrorSearchDecisive": true,
