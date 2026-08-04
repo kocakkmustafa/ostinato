@@ -71,7 +71,7 @@
    "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu.",
    "_derivedFrom": {
     "artifact": "config/references/guitar-posture-setup.v1.json",
-    "generatedAt": "2026-07-29T23:21:50.869852Z",
+    "generatedAt": "2026-08-04T20:22:12.889086Z",
     "contributingTakes": 7,
     "dispersionMedianDeg": 2.24,
     "toleranceSource": "floor",
@@ -455,13 +455,12 @@
     "trunk_tilt"
    ],
    "clusterToleranceDeg": 14.0,
-   "_pendingRegen": {
-    "field": "artifact.technique",
-    "current": "guitar_posture_setup",
-    "expected": "open_chord_drill",
-    "reason": "M-O-70: artefakt, ruleset'te BULUNMAYAN bir teknik adı taşıyor. Kaynağı `build_guitar_reference.dart`in eşleme tablosuydu; TABLO DÜZELTİLDİ ama artefakt yeniden üretilmedi — aile regen'i KOORDİNATÖRDE (2026-08-04 hükmü). Elle düzenlemek artefaktın 'ölçülür, yazılmaz' ilkesini çiğnerdi.",
-    "resolvedBy": "aile regen (koordinatör) — regen sonrası bu blok KALKAR",
-    "declaredAt": "2026-08-04"
+   "_regenResolved": {
+    "resolvedAt": "2026-08-04",
+    "was": "guitar_posture_setup",
+    "now": "open_chord_drill",
+    "trigger": "MOCORE flip duyurusu (M-F-258, aile main 4204272)",
+    "_why": "O-030 kapandı. Beyan KALDIRILDI çünkü ters-yön kapısı (validate_references) çözülmüş bir _pendingRegen'i BAYAT sayıp kırmızı yakıyor — beyanın unutulup kalması yapısal olarak imkânsız. Artefakt elle düzenlenmedi: builder düzeltilmişti, regen onu artefakta işledi."
    }
   }
  },
