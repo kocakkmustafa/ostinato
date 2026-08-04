@@ -40,7 +40,7 @@
      "displayName": "Foundations",
      "level": "beginner",
      "goal": "Set up your space, sit correctly, and learn to hear when you're playing the right open chord.",
-     "estimatedMinutes": 30,
+     "estimatedMinutes": 43,
      "lessons": [
       {
        "id": "guitar.foundations.camera_space",
@@ -64,6 +64,19 @@
        "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
       },
       {
+       "id": "guitar.foundations.teacher_range",
+       "displayName": "How much teachers actually differ",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 4,
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_unlocked": "OLCULEN ICERIK, ICAT YOK: 7 guitar teachers hold-penceresinde trunk_tilt medyanlari 0.4° ile 6.4° arasinda (6.0° genislik). Ders bu banti gosterir — yeni bir metrik ya da yeni bir esik GEREKTIRMEZ, ayni ATTESTED referansin zaten tasidigi dagilimi okur. Icerik referansin kendi kaydindan turetildi (Choreia uydurmama emsali).",
+       "_why_it_matters": "Urunun en kolay yanlis anlasilan yani: 'dogru durus' bir NOKTA degil BANT. Kullanici 3° egikse ve bunu hata sanip duzeltmeye calisirsa, olctugumuz egitmenlerin yarisindan uzaklasmis olur.",
+       "_why_observationCue": "Ayni gozlem isareti (M-F-232 uclu standardi): bant ICINDE SUSAR, disinda gorunur ve cumle kaynagini tasir."
+      },
+      {
        "id": "guitar.foundations.posture_under_play",
        "displayName": "Staying upright while you play",
        "techniques": [],
@@ -77,13 +90,23 @@
        "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
       },
       {
-       "id": "guitar.foundations.holding_the_guitar",
-       "displayName": "Holding the guitar",
+       "id": "guitar.foundations.arms",
+       "displayName": "Holding the guitar — measured, never graded",
        "techniques": [],
        "focus": "posture",
-       "minutes": 5,
-       "status": "locked",
-       "lockedReason": "We can see your arms but we deliberately do not grade them. The three teachers we measured hold the guitar 11-18 degrees apart from each other — that is style, not error, so there is no honest 'correct' to score you against. This lesson opens only if a measurement is found that separates style from mistake."
+       "minutes": 4,
+       "status": "demoOnly",
+       "demoOnlyClass": "structural-circular",
+       "demoOnlyReason": "You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against.",
+       "promotionPath": {
+        "blockedBy": "The elbows and forearms of the teachers in our reference spread across 39 to 105 degrees. A tolerance built from that spread would call almost nothing an error, and a tighter one would call ordinary style an error.",
+        "unblockedBy": "A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.",
+        "ifItStaysBlocked": "The lesson stays exactly as it is: measurement shown, no mark. That is a legitimate permanent resting state, not a failure — but we do not declare it permanent, because the camera CAN see these joints. What is missing is consensus, not sight."
+       },
+       "_why_not_permanent": "M-F-245 sozlugu: `permanent` KAMERANIN GOREMEDIGI kalite boyutu icindir. Kol acilarini kamera GORUYOR ve olcuyoruz — eksik olan uzlasi. Bunu `permanent` ilan etmek, olcum bosluguyla kategori farkini karistirmak olurdu (kamera-korlugu != uzlasi-yoklugu).",
+       "_why_not_locked": "Kilitli ders hicbir yuzey tasimaz; oysa bu olcum GERCEKTEN yapiliyor ve durustluk kutusu kullaniciya zaten 'gosteriyoruz ama puanlamiyoruz' diyor. Kilitlemek, yaptigimiz olcumu saklamak olurdu.",
+       "_supersedes": "2026-08-04: bu ders KILITLIYDI. lockedReason'i zaten dogru seyi soyluyordu ('11-18 derece ayri tutuyorlar, bu stil, puanlanacak dogru yok') ama KILIT yanlis araci: olcum gercekten yapiliyor ve durustluk kutusu kullaniciya 'gosteriyoruz, puanlamiyoruz' diyor. demoOnly/structural-circular tam bu durum.",
+       "_priorLockedReason": "We can see your arms but we deliberately do not grade them. The three teachers we measured hold the guitar 11-18 degrees apart from each other — that is style, not error, so there is no honest 'correct' to score you against. This lesson opens only if a measurement is found that separates style from mistake."
       },
       {
        "id": "guitar.foundations.foot_support",
@@ -142,7 +165,7 @@
      "displayName": "Foundations",
      "level": "beginner",
      "goal": "Set up your space and learn to hold yourself the way experienced singing teachers do — standing and singing.",
-     "estimatedMinutes": 20,
+     "estimatedMinutes": 32,
      "lessons": [
       {
        "id": "voice.foundations.camera_space",
@@ -164,6 +187,19 @@
         "OBS-TRUNK-RANGE"
        ],
        "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
+      },
+      {
+       "id": "voice.foundations.teacher_range",
+       "displayName": "How much teachers actually differ",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 4,
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_unlocked": "OLCULEN ICERIK, ICAT YOK: 6 voice teachers hold-penceresinde trunk_tilt medyanlari 0.4° ile 4.4° arasinda (4.0° genislik). Ders bu banti gosterir — yeni bir metrik ya da yeni bir esik GEREKTIRMEZ, ayni ATTESTED referansin zaten tasidigi dagilimi okur. Icerik referansin kendi kaydindan turetildi (Choreia uydurmama emsali).",
+       "_why_it_matters": "Urunun en kolay yanlis anlasilan yani: 'dogru durus' bir NOKTA degil BANT. Kullanici 3° egikse ve bunu hata sanip duzeltmeye calisirsa, olctugumuz egitmenlerin yarisindan uzaklasmis olur.",
+       "_why_observationCue": "Ayni gozlem isareti (M-F-232 uclu standardi): bant ICINDE SUSAR, disinda gorunur ve cumle kaynagini tasir."
       },
       {
        "id": "voice.foundations.posture_under_sing",
@@ -188,6 +224,23 @@
        "status": "locked",
        "lockedReason": "The pitch engine is real and we can show you exactly what it measures — but it has only been confirmed on real cello recordings (48 segments, median error under 19 cents), never on a real singing voice. A voice is not a cello: vibrato, breath and formants are exactly the things that would break it. We will not grade your singing against a measurement we have not confirmed on singing. One real vocal recording through the same pipeline opens this lesson.",
        "_why_locked_detail": "Fixture AF-001-clean-sustained-a4 SENTETIK. Motor gercek (YIN), olcum gercek, dogrulama gercek — ama girdi sentetik. Gitarin 'Open chords' dersiyle AYNI standart, ayni sekilde uygulandi. Fark: akor dedektorunun HIC gercek-ses dogrulamasi yok, perde kestiricinin BASKA bir calgida var."
+      },
+      {
+       "id": "voice.foundations.arms",
+       "displayName": "Your arms — measured, never graded",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 4,
+       "status": "demoOnly",
+       "demoOnlyClass": "structural-circular",
+       "demoOnlyReason": "You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against.",
+       "promotionPath": {
+        "blockedBy": "The elbows and forearms of the teachers in our reference spread across 43 to 88 degrees. A tolerance built from that spread would call almost nothing an error, and a tighter one would call ordinary style an error.",
+        "unblockedBy": "A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.",
+        "ifItStaysBlocked": "The lesson stays exactly as it is: measurement shown, no mark. That is a legitimate permanent resting state, not a failure — but we do not declare it permanent, because the camera CAN see these joints. What is missing is consensus, not sight."
+       },
+       "_why_not_permanent": "M-F-245 sozlugu: `permanent` KAMERANIN GOREMEDIGI kalite boyutu icindir. Kol acilarini kamera GORUYOR ve olcuyoruz — eksik olan uzlasi. Bunu `permanent` ilan etmek, olcum bosluguyla kategori farkini karistirmak olurdu (kamera-korlugu != uzlasi-yoklugu).",
+       "_why_not_locked": "Kilitli ders hicbir yuzey tasimaz; oysa bu olcum GERCEKTEN yapiliyor ve durustluk kutusu kullaniciya zaten 'gosteriyoruz ama puanlamiyoruz' diyor. Kilitlemek, yaptigimiz olcumu saklamak olurdu."
       }
      ]
     }
@@ -227,7 +280,7 @@
      "displayName": "Foundations",
      "level": "beginner",
      "goal": "Set up your space and learn to sit at the keyboard the way experienced teachers sit.",
-     "estimatedMinutes": 15,
+     "estimatedMinutes": 32,
      "lessons": [
       {
        "id": "piano.foundations.camera_space",
@@ -252,6 +305,32 @@
        "_why_observationCue": "M-F-232 (M-F-125 zeyli, 2026-08-04): bu ders bir GÖZLEM İŞARETİ gösterir, hata kodu DEĞİL. Ayrım iddia sınıfında: 'ölçtüğümüz N eğitmenin hiçbiri bu kadar eğilmiyor, sen şu andasın' bir ÖLÇÜM BEYANIDIR ve kanıtı elimizde (ATTESTED referans + artefakttan türetilmiş 14,0° eşik + _derivedFrom damgası). 'Şöyle otur / duruşun yanlış' ise bir ÖĞÜTTÜR ve movement-science doğrulaması ister — o şerit expertPending'de KAPALI kalıyor. İşaret aralığın İÇİNDEYKEN SUSAR ve referansı KURAN eğitmen karelerinin hiçbirinde ateşlemez (ölçüldü: gitar 0/939 · şan 0/729 · piyano 0/407)."
       },
       {
+       "id": "piano.foundations.teacher_range",
+       "displayName": "How much teachers actually differ",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 4,
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_unlocked": "OLCULEN ICERIK, ICAT YOK: 3 piano teachers hold-penceresinde trunk_tilt medyanlari 1.9° ile 2.8° arasinda (0.9° genislik). Ders bu banti gosterir — yeni bir metrik ya da yeni bir esik GEREKTIRMEZ, ayni ATTESTED referansin zaten tasidigi dagilimi okur. Icerik referansin kendi kaydindan turetildi (Choreia uydurmama emsali). This is also the thinnest evidence we have: 3 teachers is the floor our agreement gate accepts, and a narrow band from few sources is partly a small-sample effect, not proof that piano posture varies less.",
+       "_why_it_matters": "Urunun en kolay yanlis anlasilan yani: 'dogru durus' bir NOKTA degil BANT. Kullanici 3° egikse ve bunu hata sanip duzeltmeye calisirsa, olctugumuz egitmenlerin yarisindan uzaklasmis olur.",
+       "_why_observationCue": "Ayni gozlem isareti (M-F-232 uclu standardi): bant ICINDE SUSAR, disinda gorunur ve cumle kaynagini tasir."
+      },
+      {
+       "id": "piano.foundations.posture_under_play",
+       "displayName": "Staying settled while you play",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 6,
+       "observationCues": [
+        "OBS-TRUNK-RANGE"
+       ],
+       "_why_unlocked": "Ikinci olcum DEGIL, AYNI olcunun ikinci ani — gitar ve sanda zaten olan dersin piyano karsiligi. trunk_tilt kapisi PLAY fazinda da kosuyor ve uctan-uca senaryoda GERCEKTEN kosuldu (2026-08-04: POSTURE_CHECK 80 kare + PLAY 79 kare, trunk_tilt PASS 80/80). Yeni esik YOK: ayni turetilmis merdiven (bar 8,0°).",
+       "_why_it_was_missing": "Gitar ve sanda vardi, piyanoda yoktu — ayni kanit uc calgida da gecerliyken ders yolu ikisinde kurulmustu. Eksiklik olcumde degil ICERIKTEYDI.",
+       "_why_no_errorFocus": "M-O-64 aynen: piyanonun hicbir postur kodu trunk_tilt'e karsilik gelmiyor."
+      },
+      {
        "id": "piano.foundations.five_finger",
        "displayName": "Five-finger patterns",
        "techniques": [
@@ -261,6 +340,23 @@
        "status": "locked",
        "lockedReason": "We can hear every note you play and time it against the beat — you will see those numbers. What we cannot do is turn them into a mark. No piano teacher data exists on how far off the beat counts as a mistake, and our own timing engine reads a perfect note as 8.3 ms early with a bias that falls harder on rushing than on dragging. A grade built on that would be arithmetic, not teaching.",
        "_why_locked_detail": "M-O-65: PLAY fazinin note_timing_ms quality kapisi INDIRILDI. Iki kusur ust usteydi — (1) kapi URETILMEYEN bir metrige bakiyordu (MetronomeAligner koduna hicbir fixture bagli degildi), (2) bar (50 ms) UYDURMAYDI. Simdi metrik gercekten olculuyor (AF-008) ama bar hala yok: postur referansi EKLEM olcer, zamanlama olcmez."
+      },
+      {
+       "id": "piano.foundations.arms",
+       "displayName": "Your arms — measured, never graded",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 4,
+       "status": "demoOnly",
+       "demoOnlyClass": "structural-circular",
+       "demoOnlyReason": "You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against.",
+       "promotionPath": {
+        "blockedBy": "The elbows and forearms of the teachers in our reference spread across 20 to 77 degrees. A tolerance built from that spread would call almost nothing an error, and a tighter one would call ordinary style an error.",
+        "unblockedBy": "A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.",
+        "ifItStaysBlocked": "The lesson stays exactly as it is: measurement shown, no mark. That is a legitimate permanent resting state, not a failure — but we do not declare it permanent, because the camera CAN see these joints. What is missing is consensus, not sight."
+       },
+       "_why_not_permanent": "M-F-245 sozlugu: `permanent` KAMERANIN GOREMEDIGI kalite boyutu icindir. Kol acilarini kamera GORUYOR ve olcuyoruz — eksik olan uzlasi. Bunu `permanent` ilan etmek, olcum bosluguyla kategori farkini karistirmak olurdu (kamera-korlugu != uzlasi-yoklugu).",
+       "_why_not_locked": "Kilitli ders hicbir yuzey tasimaz; oysa bu olcum GERCEKTEN yapiliyor ve durustluk kutusu kullaniciya zaten 'gosteriyoruz ama puanlamiyoruz' diyor. Kilitlemek, yaptigimiz olcumu saklamak olurdu."
       }
      ]
     }

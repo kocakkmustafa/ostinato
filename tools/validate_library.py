@@ -140,6 +140,57 @@ def main():
                                 f"{sorted(scored)}) — kullanıcıya ölçülmeyen "
                                 f"bir hüküm vaat edilirdi")
 
+                # Kural 11 (M-F-245): demoOnlyClass SÖZLEŞMESİ — varsayılan YOK.
+                #
+                # Sessiz varsayılan bir İDDİADIR: sınıfı yazılmamış bir
+                # demoOnly ders, okuyana "geçici olsa gerek" dedirtir. Sözlük
+                # KAPALI ve iki dallı, ikisi de ZORUNLU beyanla:
+                #   structural-circular (ölçülür ama skorlanamaz)
+                #        ⇒ promotionPath ZORUNLU (üç alanıyla)
+                #   permanent (kamera o kalite boyutunu GÖREMEZ)
+                #        ⇒ whyPermanent ZORUNLU ∧ promotionPath YASAK
+                #
+                # TERS YÖN asıl kapı: `permanent`a yol yazmak eksiklik değil
+                # ÇELİŞKİDİR — ya sınıf yanlış ya yol sahte. Sessiz geçmek,
+                # var olmayan bir gelecek vaat eder.
+                #
+                # "Yazılmamış adım" ASLA demoOnly değildir → locked.
+                if l.get("status") == "demoOnly":
+                    klass = l.get("demoOnlyClass")
+                    if klass not in ("structural-circular", "permanent"):
+                        violations.append(
+                            f"{lid}: status=demoOnly ama demoOnlyClass "
+                            f"{klass!r} — kapalı sözlük: structural-circular | "
+                            f"permanent (varsayılan YOK, M-F-245)")
+                    if not l.get("demoOnlyReason"):
+                        violations.append(
+                            f"{lid}: demoOnlyReason yok — 'ne alırsın' beyanı zorunlu")
+                    path = l.get("promotionPath")
+                    if klass == "structural-circular":
+                        if not path:
+                            violations.append(
+                                f"{lid}: structural-circular ama promotionPath YOK — "
+                                f"isimsiz çıkış çıkış değildir")
+                        else:
+                            for k in ("blockedBy", "unblockedBy", "ifItStaysBlocked"):
+                                if not str(path.get(k, "")).strip():
+                                    violations.append(
+                                        f"{lid}: promotionPath.{k} eksik/boş")
+                    elif klass == "permanent":
+                        if path:
+                            violations.append(
+                                f"{lid}: permanent AMA promotionPath VAR — bu bir "
+                                f"eksiklik değil ÇELİŞKİ: ya sınıf yanlış ya yol "
+                                f"sahte (M-F-248 ters-yön kapısı)")
+                        if not str(l.get("whyPermanent", "")).strip():
+                            violations.append(
+                                f"{lid}: permanent ama whyPermanent yok — "
+                                f"'ve bu DEĞİŞMEYECEK çünkü' beyanı zorunlu")
+                if l.get("demoOnlyClass") and l.get("status") != "demoOnly":
+                    violations.append(
+                        f"{lid}: demoOnlyClass var ama status={l.get('status')!r} — "
+                        f"sınıf, taşımadığı bir durumu nitelendiriyor")
+
                 # Kural 8 (M-F-232): GÖZLEM ŞERİDİ — açık ders bir
                 # `observationCue` gösterebilir, ama ŞERİTLER KARIŞAMAZ.
                 # Kural 7/M-F-125 aynen duruyor: öğüt (hata kodu) kapalı.

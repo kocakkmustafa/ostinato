@@ -18,8 +18,16 @@ import 'package:motion_core/motion_core.dart';
 /// M-F-143: ÇALGI-PARAMETRELİ. Üç çalgı da AYNI beyanlı kapıdan geçer —
 /// ayrı kopya yazmak, üç ayrı gerekçenin sessizce ayrışması demekti
 /// (M-O-39'un kanonik-vs-kopya dersi, bu sefer önceden).
+/// 2026-08-04 (M-O-70): gitar satırı `guitar_posture_setup` idi ve ruleset'te
+/// ÖYLE BİR TEKNİK YOKTU — kardeşleri gerçek drill id'si taşırken gitar eski
+/// bir etiketi taşıyordu. Atıf süpürmesi (M-F-248) yakaladı.
+///
+/// Ders, konsolidasyonun kendisiyle ilgili: M-F-143'te üç kopya tek kanonik
+/// yola indirildi (doğru hamle) ama kopyalar arasındaki FARKLAR incelenmeden
+/// bir tabloya taşındı. Tablo tek tip görünüyor — iki satırı drill id'si,
+/// biri eski etiket. Konsolidasyon, bitirmesi gereken ayrışmayı KORUDU.
 const _techniqueByInstrument = {
-  'guitar': 'guitar_posture_setup',
+  'guitar': 'open_chord_drill',
   'voice': 'sustained_note_drill',
   'piano': 'five_finger_drill',
 };

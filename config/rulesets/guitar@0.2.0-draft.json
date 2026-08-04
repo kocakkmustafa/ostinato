@@ -454,7 +454,15 @@
    "agreementGateJoints": [
     "trunk_tilt"
    ],
-   "clusterToleranceDeg": 14.0
+   "clusterToleranceDeg": 14.0,
+   "_pendingRegen": {
+    "field": "artifact.technique",
+    "current": "guitar_posture_setup",
+    "expected": "open_chord_drill",
+    "reason": "M-O-70: artefakt, ruleset'te BULUNMAYAN bir teknik adı taşıyor. Kaynağı `build_guitar_reference.dart`in eşleme tablosuydu; TABLO DÜZELTİLDİ ama artefakt yeniden üretilmedi — aile regen'i KOORDİNATÖRDE (2026-08-04 hükmü). Elle düzenlemek artefaktın 'ölçülür, yazılmaz' ilkesini çiğnerdi.",
+    "resolvedBy": "aile regen (koordinatör) — regen sonrası bu blok KALKAR",
+    "declaredAt": "2026-08-04"
+   }
   }
  },
  "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı.",

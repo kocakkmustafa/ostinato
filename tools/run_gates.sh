@@ -26,6 +26,7 @@ run() {
 
 run "ruleset şeması + linter"        python3 tools/validate_ruleset.py
 run "kütüphane dürüstlük kuralları"  python3 tools/validate_library.py
+run "içerik-atıf süpürmesi"        python3 tools/validate_references.py
 run "eşik türetimi (artefakt↔config)" python3 tools/derive_posture_thresholds.py --check
 run "gözlem işareti sözleşmesi"     python3 tools/validate_observation_cues.py
 run "uzman-bekleyen envanteri"        python3 tools/gen_expert_inventory.py
