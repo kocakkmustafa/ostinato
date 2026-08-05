@@ -14,6 +14,23 @@ import 'surface_state.dart';
 /// işaret üretmez. Gerekçe ölçümden: eğitmenlerin kendi kayıtlarında bile
 /// kare-kare oynama var; anlık bir sıçramayı "gözlem" diye sunmak, işareti
 /// arka plan gürültüsüne çevirir ve o an sözleşmeyi bozar.
+///
+/// Cooldown (`cooldownUs`, 30 sn): ardışık ateşlemeler arası bekleme.
+/// **Dayanak kardeşi kadar sağlam DEĞİL — isimle kayıtlı (koordinatör
+/// denetimi, 2026-08-05, O-036).** `PostureContract`ta bu alan YOK —
+/// kardeşinin aksine hiçbir üretilen artefakta bağlı değil, çıplak Dart
+/// sabiti. Sayıca `config/rulesets/<çalgı>@0.2.0-draft.json`daki
+/// `G-POST-SLOUCH.cooldownMs` (30000) ile EŞİT, ama bu koddan o ruleset
+/// alanına DOĞRUDAN bir kablo YOK — ikisi ayrı sistemdir: bu, CANLI gözlem
+/// işareti (ÖLÇÜM beyanı); `G-POST-SLOUCH` ise "öğüt"-sınıfı bir hata kodu,
+/// hiç ateşlemeden `expertPending`de kapalı duruyor (`assets/content/
+/// library.json`). `docs/g4-prep/ruleset-v0.md:41`de özgün değer **20**
+/// sn'ydi (`"cooldownSec": {"value": 20, "expertPending": true}`); 30'a NE
+/// ZAMAN/NEDEN değiştiği KAYITSIZ — uydurma gerekçe yazılmadı (O-024
+/// dersi). Ruleset'teki eşleniği hâlâ `expertPending: true` taşıyor; bu
+/// varsayılan da AYNI ihtiyatla okunmalı: movement-science turu (ya da
+/// "görünürlük oranı doğru mu" design kararı) gelmeden nihai sayılmaz.
+/// Değer BURADA DEĞİŞTİRİLMEDİ — yalnız dayanağı görünür kılındı.
 final class PostureEvaluator {
   PostureEvaluator({
     required this.contract,

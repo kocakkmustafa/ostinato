@@ -32,16 +32,28 @@ sarmalayıcısı). **Canlı `flutter run` teşhisi** (cold-launch, iPhone 17 Pro
 Max, geçici print-diagnostiği) evaluator çıktısını ve widget render'ını ayrı
 ayrı logladı: işaret **5/5 ölçülen pencerede doğru ateşlendi ve doğru render
 edildi** — tUs = 2.700.000 / 32.760.000 / 66.060.000 / 96.120.000 /
-129.420.000, yani ~30,06 saniyede bir, `cooldownUs=30_000_000` sabitiyle
-birebir tutarlı.
+129.420.000.
 
-**Gerçek açıklama:** 30 saniyelik cooldown yüzünden işaret her ~30sn'lik
-pencerenin yalnız **~%8'inde (≈2,34sn)** görünür kalıyor — aralık-dışı olmak
-(lap'ın ~%47'si) çok daha yaygınken, işaretin *görünüyor olması* nadir. Bu
-hattaki (ve önceki turlardaki) TÜM manuel/screenshot-tabanlı repro denemeleri
-zamanlaması kontrol edilmeden rastgele bir ana denk geldi ve neredeyse hep
-"cooldown aktif" penceresini örnekleyip bunu "işaret hiç doğmuyor" sandı.
-Mekanizma — evaluator, widget, route — baştan beri doğru çalışıyordu.
+**Düzeltme (koordinatör denetimi, 2026-08-05):** ilk yazımda bu dört aralık
+"~30,06 saniyede bir" diye TEK bir periyot olarak özetlenmişti — YANLIŞ,
+vitrin sayısı kendi dayanağını taşımıyordu. Gerçek aralıklar
+**30,06 / 33,30 / 30,06 / 33,30 sn** (ALTERNATİF, ortalama **31,68 sn**).
+Neden alternatif: cooldown tam 30.000.000 µs = 166,67 kare (180 ms/kare) —
+tamsayı DEĞİL. "+167 kare" sıçraması demo senaryosunun 32 karelik turunda
+İKİ farklı faza düşüyor: `i=15`ten +167 → `i=22` (hâlâ aralık-dışı → ANINDA
+ateşler, 30,06 sn) · `i=22`den +167 → `i=29` (banda dönülmüş → sayaç
+sıfırlanır, sıradaki aralık-dışı pencerenin 3. karesine dek 18 kare daha
+beklenir, 33,30 sn) · bu ikisi sonsuza dek dönüşümlü tekrarlanır — jitter
+DEĞİL, deterministik.
+
+**Gerçek açıklama:** 30 saniyelik cooldown yüzünden işaret her ~31,68sn'lik
+pencerenin yalnız **~%7,4'ünde (2,34sn / 31,68sn)** görünür kalıyor —
+aralık-dışı olmak (lap'ın ~%47'si) çok daha yaygınken, işaretin *görünüyor
+olması* nadir. Bu hattaki (ve önceki turlardaki) TÜM manuel/screenshot-tabanlı
+repro denemeleri zamanlaması kontrol edilmeden rastgele bir ana denk geldi ve
+neredeyse hep "cooldown aktif" penceresini örnekleyip bunu "işaret hiç
+doğmuyor" sandı. Mekanizma — evaluator, widget, route — baştan beri doğru
+çalışıyordu.
 
 **Kod DEĞİŞMEDİ.** Kalıcı kanıt iki yeni testte: `test/route_path_test.dart`
 (route elendi) ve `test/cue_cooldown_visibility_test.dart` (gerçek 30sn
