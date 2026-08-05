@@ -32,11 +32,30 @@ Yani parçalar ayrı ayrı kanıtlı, **BİRLEŞİK CANLI HÂL kanıtlanmadı** 
 tam olarak bu hattın kendi dersi: *"bağlandı ≠ canlı"*. Testlerin geçmesi,
 çalışan uygulamanın üçüncü bir şey olduğu gerçeğini değiştirmiyor.
 
-**Şüphe sınıfı (kanıtlanmadı, tahmin):** ekran ile sahte kaynak arasındaki
-kablolama — muhtemelen `Timer.periodic` altındaki dinleyici/`setState`
-yolunda, senkron `pushOne()` kullanan testlerin uğramadığı bir fark.
-Yakalama zamanlaması ELENDİ: aralık-dışı pencere 7→15 kareye uzatıldı ve
-pencerenin ortasında da işaret çıkmadı.
+### 2026-08-05 teşhis turu — ŞÜPHE ÇÜRÜTÜLDÜ, dört aday ELENDİ
+
+İlk şüphem `Timer.periodic` altındaki dinleyici/`setState` yoluydu. **Ölçüldü
+ve YANLIŞ çıktı** (`test/timer_path_test.dart`, iki test, ikisi de yeşil):
+
+| ölçüm | sonuç |
+|---|---|
+| Gerçek zamanlayıcıyla (`t.pump(Duration)`) sürdürülen sapma | işaret **DOĞUYOR** |
+| Uygulamanın **TAM** demo senaryosu (null kareler dahil), gerçek zamanlayıcı | işaret **DOĞUYOR** |
+
+Yani ELENEN adaylar: `PostureEvaluator` · widget çizimi · zamanlayıcı/akış
+yolu · demo senaryosunun kendisi (null kareler dahil). Dördü de temiz.
+
+**Kalan aday (daraltıldı, kanıtlanmadı):** navigasyon/route sarmalayıcısı —
+`MaterialPageRoute` builder'ı her yeniden-çizimde YENİ bir `FakePoseSource`
+üretiyor; State ise `initState`te BAĞLANDIĞI kaynağı dinliyor. Testlerde
+route yok, ekran doğrudan kuruluyor — testlerin uğramadığı tek fark bu.
+
+⚠️ **Bu da bir TAHMİN.** Kural aynen: teşhis doğrulanmadan üzerine kod
+yazılmaz. Sıradaki adım: route'suz vs route'lu aynı ekranı karşılaştıran bir
+test, ya da `flutter run` ile canlı log.
+
+Yakalama zamanlaması zaten ELENMİŞTİ (pencere 7→15 kareye uzatıldı, ortasında
+da çıkmadı); temiz kurulum (`uninstall`→`install`) da denendi.
 
 Kalan iş tur-2'ye devredildi ve isimli: **gerçek kamera bağlanmadan ÖNCE bu
 şüphe kapatılır** — kamerayı, canlı yolu kanıtlanmamış bir yüzeye bağlamak
