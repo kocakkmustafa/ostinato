@@ -69,3 +69,28 @@ Testler yeşilken ekrana bakmasaydım ikisi de kaçardı:
    bunu göremezdi (orada döngü hiç dönmüyor).
 
 İkisi de regresyon testine bağlandı.
+
+## 🎥 Tur-2 kanıtı — gerçek kamera BAĞLANDI (2026-08-05)
+
+**Kanıt sınıfı, iddiadan ÖNCE (tur-1'in aynı disiplini):** bu ekran "kamera
+çalışıyor" demez. iOS simülatöründe kamera DONANIMI yok — söylediği şu:
+*plumbing gerçek, izin akışı gerçek, çıkmaz-sokak yok; postürün GERÇEKTEN
+ölçüldüğü kanıtı cihaz-günü release-gate'tedir.* Bağlandı ≠ canlı.
+
+| dosya | ne KANITLIYOR | ne kanıtlamıyor |
+|---|---|---|
+| `06-tur2-camera-permission-honest-state.png` | Cold-launch → Guitar dersine dokun → **gerçek** `Permission.camera.request()` → `MotionCameraController.start()` zinciri koştu; sim'de izin `permanentlyDenied` döndü ve ekran **PermissionDeniedPermanent** hâlini doğru çizdi ("Open Settings", "tekrar dene" YOK). Banner artık **"LIVE CAMERA"** diyor — SAHTE değil. Çıkmaz-sokak YOK: ekran çöküp asılı kalmadı, tipli bir hâl doğdu | gerçek görüntüden postür ölçümü, izin VERİLDİĞİNDE akan yol (sim'de izin asla verilemiyor — donanım yok) |
+
+**Katman katman kanıt:**
+- `packages/ostinato_posture/test/camera_posture_adapter_test.dart` (5 test): motion_core'un aile-geneli `StandardJoints.trunkTilt` tanımı + izotropik düzeltme (M-F-30/J-028) + gövde-yalnız güven kapısı (G-038 `xExtent` tuzağı dahil) — sentetik landmarklarla, kamerasız, deterministik.
+- `flutter build ios --simulator --debug` ve `flutter build apk --debug`: iki platform da temiz derleniyor (MediaPipe pod'ları tur-1'den + `permission_handler`/`path_provider` bu turdan).
+- Canlı sim koşumu (yukarıdaki ekran): gerçek `Navigator.push` → gerçek izin isteği → gerçek `CameraFailure` çevirisi → tipli ekran. Hiçbir `flutter:` istisnası loglanmadı.
+- `./tools/run_gates.sh`: **16/16 yeşil**, yeni test dosyası dahil.
+
+**İsimli, henüz cihazda sınanmamış sınırlar (release-gate borcu):**
+1. **Ön kamera seçimi** (`CameraLens.front`) — Gravita'nın arka-kamera kararından farklı; kullanıcı telefonu kendine bakacak şekilde (ayna kurulumu) yerleştirir varsayımı, gerçek kullanımla sınanmadı.
+2. **M-O-08 açılı-oturuş sınırı** (motion_core `normalization.dart`'ın kendi ölçülü kaydı): izotropik düzeltme yalnız 2B izdüşümü düzeltir; gitar/piyano diyagonal oturuşta 3B eksen derinlikte kısalabilir. `trunk_tilt` düzlemsel olduğu için doğrudan etkilenmeyebilir ama gerçek etkisi CİHAZDA ölçülmeden kapatılmış sayılmaz.
+3. **Gerçek MediaPipe çıkarımı** hiç çalışmadı (sim'de kamera yok) — `judgedRatio`, gerçek güven dağılımı, gerçek gecikme (`infUs`) hiçbiri bilinmiyor; hepsi "cihazda doğrulanacak" etiketli.
+
+Yüzey (sealed hâller, bant çizimi, gözlem işareti mantığı) **HİÇ DEĞİŞMEDİ** —
+yalnız kaynak sahte'den gerçeğe geçti, tur-1'in taahhüt ettiği gibi.

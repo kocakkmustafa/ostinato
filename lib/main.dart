@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ostinato_posture/ostinato_posture.dart';
 
+import 'app/camera_pose_source.dart';
 import 'app/content.dart';
 import 'app/cue_text.dart';
 import 'app/posture_screen.dart';
@@ -84,13 +84,15 @@ class _LibraryScreen extends StatelessWidget {
                               discipline: d,
                               contract: repo.contractFor(d.id),
                               cueText: cueText,
-                              // TUR-1: kaynak SAHTE ve ekranda öyle yazıyor.
-                              // Gerçek kamera tur-2'de bağlanır; şimdi canlı
-                              // YOLU kanıtlıyoruz, kamerayı değil.
-                              source: FakePoseSource(_demoScript, stepUs: 180000),
-                              sourceLabel: 'DEMO SOURCE — synthetic pose data, '
-                                  'not a camera. The live path is real; the '
-                                  'camera is not connected yet.',
+                              // TUR-2: gerçek kamera bağlandı. Yüzey
+                              // DEĞİŞMEDİ — kaynak yalnız status/frames
+                              // akışlarını doldurur. Sim'de kamera donanımı
+                              // yok: dürüst hâller (izin/kurulum) beklenir,
+                              // "cihazda kanıtlı" iddiası YOK (M-F-263).
+                              source: CameraPoseSource(),
+                              sourceLabel: 'LIVE CAMERA — measuring your '
+                                  'posture in real time. Video stays on '
+                                  'this device and is never uploaded.',
                             ),
                           ),
                         ),
@@ -101,20 +103,3 @@ class _LibraryScreen extends StatelessWidget {
     );
   }
 }
-
-/// Sahte akış: bant içinde başla → kadraj dışına çık → belirgin eğil.
-/// Adım 180 ms: her hâl gözle görülecek kadar durur (tasarım turu ve
-/// ekran-kanıtı için; 33 ms'te üç hâl tek göz kırpmasına sığıyordu).
-/// Üç hâlin de ekranda GÖRÜLEBİLMESİ için; sayılar sözleşmeden bağımsız
-/// bir "senaryo"dur, hüküm üretmez.
-const List<double?> _demoScript = <double?>[
-  2.0, 2.4, 3.1, 2.8, 3.4, 2.2, 2.9, 3.3, 2.5, 3.0,
-  null, null, null,
-  // Eğik bölüm UZUN: işaret 3. sapmada doğar ve 30 sn cooldown'a girer, yani
-  // döngü başına yalnız bir kez görünür. Kısa bir bölümde hem tasarım turunda
-  // hem ekran-kanıtında yakalanamıyordu — ürün mantığı değil DEMO SENARYOSU
-  // uzatıldı (eşik, bastırma ve cooldown aynen).
-  16.0, 18.0, 19.5, 21.0, 22.0, 20.5, 19.0, 20.0, 21.5, 22.5,
-  21.0, 19.5, 18.5, 20.0, 21.0,
-  6.0, 4.5, 3.2, 2.6,
-];

@@ -13,6 +13,7 @@
 ///     okunur (`PostureContract.fromJson`), kodda sabit yoktur.
 library;
 
+export 'src/camera_posture_adapter.dart';
 export 'src/contract.dart';
 export 'src/evaluator.dart';
 export 'src/pose_source.dart';

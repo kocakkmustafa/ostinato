@@ -32,11 +32,28 @@ dependencies:
     sdk: flutter
   ostinato_posture:
     path: packages/ostinato_posture
+  # motion_core PATH ile çekiliyor; pub onun transitif core'unu ÇÖZÜLMÜŞ SHA,
+  # buradaki pini TAG ADI olarak görür ve aynı commit olsalar bile
+  # descriptor'ları FARKLI sayar ("incompatible with ... from path" — Choreia
+  # pub-tuzağı, M-F-265). f13bdc9 == motion_core-v0.11.0 VE
+  # motion_camera-v0.1.2 (tek commit, M-F-260); tag'ler ayrı commit'lerde
+  # durur, f13bdc9 İKİSİNİ birden taşır. DEĞİŞTİRME.
+  motion_core:
+    git:
+      url: https://github.com/kocakkmustafa/motion-core.git
+      path: packages/motion_core
+      ref: f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d
   motion_camera:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       ref: f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d
       path: packages/motion_camera
+
+  permission_handler: ^12.0.3
+
+  # YALNIZ poz modelini uygulama-özel bir dosyaya yazmak için (plugin bundle
+  # değil YOL ister) — depolama BİÇİMİ yok, kablolama katmanında kalıyor.
+  path_provider: ^2.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -69,6 +86,7 @@ flutter:
     - assets/config/posture-contract.json
     - assets/content/library.json
     - config/observation-cue-templates.golden.json
+    - assets/models/pose_landmarker_full.v1.task
 
   # To add assets to your application, add an assets section, like this:
   # assets:

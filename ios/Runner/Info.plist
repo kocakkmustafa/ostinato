@@ -18,6 +18,8 @@
 	<string>ostinato</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Ostinato watches your sitting posture while you practice, comparing it to how real teachers sit. Video stays on this device and is never uploaded — the app only keeps the body angles it measures.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>

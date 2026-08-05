@@ -6,10 +6,13 @@ PODS:
   - motion_camera (0.1.0):
     - Flutter
     - MediaPipeTasksVision (= 0.10.21)
+  - permission_handler_apple (9.4.8):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - motion_camera (from `.symlinks/plugins/motion_camera/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 SPEC REPOS:
   trunk:
@@ -21,12 +24,15 @@ EXTERNAL SOURCES:
     :path: Flutter
   motion_camera:
     :path: ".symlinks/plugins/motion_camera/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   MediaPipeTasksCommon: 6cfa29170d4900f04d250ad95ec058f14a741f38
   MediaPipeTasksVision: 7b1c0f5a5820e87e9d96926f5e65d8cd3744fac2
   motion_camera: a751ce7af204db2e85af604e080e9d570b82687e
+  permission_handler_apple: 92d754bbaa7361d436db2d6c3c1c2a0fdcec462e
 
 PODFILE CHECKSUM: ffe9e6bad3c7265a7bf391f5c2903a87b9b64685
 
