@@ -70,6 +70,30 @@ CAPABILITY_RULES = [
     },
 ]
 
+# ── C: OLUMLU iddia yüzeyleri yalnız BU BUILD'in yapabildiğini söyler ───────
+# Kural B "microphone" KELİMESİNİ arar. Ölçüldü (2026-08-07): asıl iddialar o
+# kelimeyi hiç kullanmıyordu — «Note timing against the beat — measured and
+# shown to you», «Whether the room is quiet enough and your voice is loud
+# enough», «listen for the chords you play». Üçü de `honesty.measured` ve
+# `blurb` içindeydi, yani ürünün EN GÜÇLÜ iddia yüzeyinde.
+#
+# Bu kural KELİMEYİ değil ALANI hedefler: bu iki yol OLUMLU iddiadır ("bunu
+# ölçüyoruz"), ses alanına ait bir kavram anmaları ancak canlı bir ses girişi
+# varsa meşrudur. `notMeasured` ve `comingSoonInThisDiscipline` KAPSAM DIŞI —
+# onlar zaten yokluğu anlatır, ses kavramlarını serbestçe anmalıdırlar.
+AFFIRMATIVE_JSON_PATHS = [
+    re.compile(r"\.disciplines\[\d+\]\.honesty\.measured\[\d+\]$"),
+    re.compile(r"\.disciplines\[\d+\]\.blurb$"),
+]
+AUDIO_CONCEPTS = re.compile(
+    r"\b(chord|chords|pitch|note timing|onset|beat|loudness|loud enough|"
+    r"room (?:is )?quiet|noise floor|microphone|audio|listen|listens|"
+    r"hear|hears|sound)\b", re.IGNORECASE)
+# Yokluğu söyleyen cümle geçer (kural B ile aynı mantık).
+AUDIO_ABSENCE = re.compile(
+    r"no microphone input|hears nothing|never listen|"
+    r"not wired in this build|no audio permission", re.IGNORECASE)
+
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
 
@@ -227,6 +251,26 @@ def main() -> int:
                     f"«{sentence.strip()[:110]}»"
                 )
 
+    # ── Kural C ──
+    audio_declared = ios_declares("NSMicrophoneUsageDescription") or \
+        android_declares("android.permission.RECORD_AUDIO")
+    checked_affirmative = 0
+    if not audio_declared:
+        for path, text in json_surface_strings():
+            if not any(p.search(path) for p in AFFIRMATIVE_JSON_PATHS):
+                continue
+            checked_affirmative += 1
+            if AUDIO_ABSENCE.search(text):
+                continue
+            hit = AUDIO_CONCEPTS.search(text)
+            if hit:
+                violations.append(
+                    f"[olumlu ses iddiası] {path}: '{hit.group(0)}' — bu alan "
+                    f"OLUMLU bir ölçüm iddiasıdır ama canlı ses girişi beyan "
+                    f"edilmemiş ve cümle yokluğu söylemiyor — "
+                    f"«{text.strip()[:110]}»"
+                )
+
     if violations:
         print(f"⛔ {len(violations)} YÜZEY DÜRÜSTLÜĞÜ İHLALİ:")
         for v in violations:
@@ -235,7 +279,8 @@ def main() -> int:
 
     print(f"✅ yüzey dürüstlüğü TEMİZ — {len(surfaces)} kullanıcı-yüzeyi metni "
           f"tarandı ({len(PROMISE_PATTERNS)} vaat deseni + "
-          f"{len(CAPABILITY_RULES)} yetenek kuralı)")
+          f"{len(CAPABILITY_RULES)} yetenek kuralı + "
+          f"{checked_affirmative} olumlu iddia alanı)")
     return 0
 
 
