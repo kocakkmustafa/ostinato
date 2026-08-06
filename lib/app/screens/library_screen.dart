@@ -88,10 +88,22 @@ class LibraryScreen extends StatelessWidget {
                             height: 1.35),
                       ),
                       const SizedBox(height: 7),
+                      // DÜZELTME (2026-08-07): önceki cümle "the microphone
+                      // listens to what you play" diyordu. Bu build'de
+                      // mikrofon GİRİŞİ YOK — `Info.plist`te
+                      // `NSMicrophoneUsageDescription`, manifest'te
+                      // `RECORD_AUDIO` yok, hiçbir kod yolu ses yakalamıyor.
+                      // Kurulum Kontrolü bunu zaten doğru söylüyordu
+                      // (`setup-room-gap-body`); giriş ekranı onu
+                      // yalanlıyordu. Ürünün TEK CÜMLESİ (UI-BRIEF §0)
+                      // mikrofonu içeriyor — o ÜRÜNÜN cümlesi; bu ekran
+                      // BU BUILD'i anlatır.
                       Text(
                         'Put your phone where it can see you. The camera '
-                        'watches how you sit; the microphone listens to '
-                        'what you play.',
+                        'reads nine upper-body points while you practise. '
+                        'There is no live microphone input in this build — '
+                        'the chord and note work described in the lessons '
+                        'was measured on recordings, not in your room.',
                         style: hankenText(
                             size: 13, color: OstinatoColors.textMuted),
                       ),

@@ -33,12 +33,33 @@ class SettingsScreen extends StatelessWidget {
                   style: hankenText(
                       size: 28, weight: FontWeight.w600, height: 1.1)),
               const SizedBox(height: 22),
+              // DÜZELTME (2026-08-07): tek kart "Camera and microphone"
+              // deyip "the microphone reads level and pitch" diyordu — bu
+              // build'de mikrofon giriş yolu YOK (`NSMicrophoneUsageDescription`
+              // ve `RECORD_AUDIO` ikisi de yok, tek bir yakalama çağrısı da
+              // yok). "Neither stream is uploaded" cümlesi VAR OLMAYAN bir
+              // akış için güvence veriyordu; var olmayan bir riski güvenceye
+              // almak, riski var gibi göstermenin sessiz hâli.
+              //
+              // İKİYE AYRILDI: yokluk, var olanın kartındaki bir yan cümle
+              // değil KENDİ kartıdır (dürüst hâller birinci sınıf ekran).
+              // Yan cümle hâlinde `validate_surface_honesty.py` de onu
+              // göremiyordu — başlık "mikrofon" diyor, gerekçe gövdedeydi.
               const _SettingsCard(
-                title: 'Camera and microphone',
-                body: 'Both run on your phone. The camera reads nine '
-                    'upper-body points; the microphone reads level and '
-                    'pitch. Neither stream is uploaded, and neither runs '
-                    'outside a lesson.',
+                title: 'Camera',
+                body: 'It runs on your phone and reads nine upper-body '
+                    'points. It only runs inside a lesson, and the video is '
+                    'never uploaded — only the body angles we measure are '
+                    'kept.',
+              ),
+              const SizedBox(height: 14),
+              const _SettingsCard(
+                title: 'Microphone — not wired in this build',
+                body: 'No audio permission is requested and nothing you play '
+                    'is captured. The chord and note-attack work the lessons '
+                    'describe was measured on recordings, not in your room. '
+                    'Until an input is wired, every judgement this app makes '
+                    'comes from the camera.',
               ),
               const SizedBox(height: 14),
               const _SettingsCard(

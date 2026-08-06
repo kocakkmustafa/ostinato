@@ -28,8 +28,8 @@
     ],
     "notMeasured": [
      "Arm and hand position while holding the guitar — teachers disagree about this by style (11-18 degrees apart), we show it but do not grade it (M-O-46)",
-     "Finger placement or fretting technique — camera cannot see fingers well enough to grade them yet",
-     "Strum timing — NOT measured. We can hear individual note attacks, but a strum is one gesture producing six near-simultaneous ones, and the step that maps those onto a chord does not exist yet. Until 2026-08-04 this line said 'measured, not yet graded'; that was wrong and the config carried a matching dead gate.",
+     "Finger placement or fretting technique — the camera does not resolve fingers well enough to grade them. At the distance that keeps your hips in frame, a fingertip is a few pixels wide, so there is nothing stable to measure.",
+     "Strum timing — NOT measured. We can hear individual note attacks, but a strum is one gesture producing six near-simultaneous ones, and the step that maps those onto a chord does not exist. Until 2026-08-04 this line claimed the timing was measured and merely ungraded; that was wrong, and the config carried a matching dead gate.",
      "Full note-by-note transcription — we recognise the chord class, not every note played",
      "Chords beyond those 8 — we do not name them. Until 2026-08-04 we did something worse than not naming them: a played Bb was reported as 'Dm' in 28 of 29 windows, confidently, because the engine was only allowed to consider the 8 chords of the drill. It now weighs all 24 chords and refuses when the winner is not one this lesson teaches."
     ]
@@ -125,7 +125,7 @@
        ],
        "minutes": 15,
        "status": "locked",
-       "lockedReason": "Chord recognition has only been proven on synthetic audio (8/8 chords, zero false judgements) — it hasn't been tested on a real guitar recording yet. We won't grade you against a measurement we haven't confirmed on a real instrument."
+       "lockedReason": "Chord recognition has only been proven on synthetic audio (8/8 chords, zero false judgements) — it has never been tested on a real guitar recording. Synthetic tones have no body resonance, no string buzz and no overlapping decay, which are exactly the things that break a chord classifier. We won't grade you against a measurement we haven't confirmed on a real instrument."
       }
      ]
     }
@@ -133,7 +133,7 @@
    "comingSoonInThisDiscipline": [
     "Strum timing as a graded skill — blocked twice over: the strum-to-chord alignment step is not built, and no teacher data exists on how far off the beat counts as a mistake",
     "Arm/hand posture as a graded skill — the seven teachers we measured hold the guitar 39 to 105 degrees apart at the elbows and forearms. That is style and camera angle, not error; this may never become gradeable.",
-    "Named posture coaching (the 'you are slouching' cue) — the threshold is now derived from the reference (14 degrees, the spread inside which two teachers count as sitting the same way), but we have not yet decided whether a measurement can be spoken as a correction without a movement-science review."
+    "Named posture coaching (the 'you are slouching' cue) — the threshold is derived from the reference (14 degrees, the spread inside which two teachers count as sitting the same way), but the question of whether a measurement may be spoken as a correction is open, and it is not ours to close: it needs a movement-science review we have not commissioned."
    ],
    "_honestyStaleFix": "2026-08-04 (MUT-A kural 9): kutu kullanıcıya '3 independent guitar teachers' diyordu; havuz 2026-07-30'da 3→5→7'ye büyümüş, VİTRİN METNİ güncellenmemişti. Bayat-gerekçe sınıfının (O-024) EN GÖRÜNÜR hâli: config'teki her sayıyı üç kapıyla koruyup kullanıcının okuduğu cümleyi korumasız bırakmışız. Kural 9 artık bu sayıyı artefakta bağlıyor; mutasyon süpürmesi olmasa bulunmazdı.",
    "_openSetFix": "2026-08-04 (M-O-67, fallback-canlılık reçetesi M-F-184 adım 5): ölçüm mekanizma A buldu — sözlük-dışı akorlar en yakın modellenmiş akora GÜVENLE tamamlanıyordu (Bb→Dm %97, Bm→D %76). Eşik oynatmak çözmüyordu: yanlış-etiketi yarıya indirmek gerçek akorların %61'ini kaybettiriyordu. Kök neden ADAY KÜMESİNİN daraltılmasıydı — kazanacak hipotez (Bb) listede yoktu, motor en yakınını seçmek zorundaydı. Düzeltme bedelsiz çıktı: aday 24, kabul 8 → yanlış-etiket %65,5→%0,0, tanıma kaybı değişmedi (%0,9). 'Open chords' dersi zaten kilitliydi, bu yüzden kusur kullanıcıya ULAŞMADI — ama dürüstlük kutusu canlıydı ve bu satırı taşımıyordu."
@@ -267,7 +267,7 @@
      "Note timing against the beat — measured and shown to you, never graded (see below)"
     ],
     "notMeasured": [
-     "Note timing as a GRADE. We now measure it for real (AF-008-five-note-timing), and that measurement immediately showed why it cannot be graded yet: the engine reads a perfectly-on-beat note as 8.3 ms early, and that bias falls unevenly — the same 40 ms error reads as 49 ms when you rush and 31 ms when you drag. Grading on that would punish rushing harder than dragging for no musical reason.",
+     "Note timing as a GRADE. We measure it for real (AF-008-five-note-timing), and that measurement is exactly what rules out grading it: the engine reads a perfectly-on-beat note as 8.3 ms early, and that bias falls unevenly — the same 40 ms error reads as 49 ms when you rush and 31 ms when you drag. Grading on that would punish rushing harder than dragging for no musical reason.",
      "Wrists, fingers and hand shape — we have no hand or finger landmarks at all, only body joints. Every hand-related mistake in our error library is blocked on that missing tool, not on a missing threshold.",
      "Shoulder tension — the mistake teachers name most often for piano (5 independent channels). We can see shoulders but the three teachers' shoulder angles differ by 24 vs 5 degrees between left and right, and 'shoulders rising toward the ears' is a height, not the angle we hold. Naming it would be guessing.",
      "Elbow distance from the body — measured, but the three teachers' elbow angles spread across 20 to 77 degrees. That is noise, not a threshold.",
