@@ -76,6 +76,12 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
 
+  # tools/evidence/flutter_test_config.dart'ın google_fonts ön-ısınması için —
+  # TRANSITIVE bağımlılıktı (path_provider üzerinden), doğrudan import
+  # edildiği için burada AÇIKÇA listelendi (depend_on_referenced_packages).
+  # JabLab'ın AYNI kök-nedenle bulduğu AYNI çözüm (2026-08-07).
+  path_provider_platform_interface: ^2.1.2
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

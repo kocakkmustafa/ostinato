@@ -40,28 +40,35 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
 
-  // ÖLÇÜLDÜ (2026-08-06), ÜÇ ayrı düzeltme denendi ve HİÇBİRİ istisnayı
-  // testin KENDİ gövdesinde yakalanabilir kılmadı: (1) `--use-test-fonts`
-  // gerçek glif yerine blok çiziyor — Dart ayarından bağımsız. (2)
-  // `runAsync` (capture'daki asıl düzeltme, GEÇERLİ ve KORUNUYOR — o
-  // olmadan test 10 dk asılı kalıyordu) `allowRuntimeFetching=false` ile
-  // birleşince google_fonts'un "font not found in application assets"
-  // istisnasını framework'ün İÇ zamanlamasında (testin gövdesi bittikten
-  // SONRA) açığa çıkarıyor — `takeException` drain'i iki ayrı yerde
-  // (capture öncesi/sonrası) denendi, YAKALAYAMADI. (3) fetch'i AÇMAK
-  // istisna sınıfını değiştirdi ama ortadan KALDIRMADI (ağ isteği bu test
-  // ortamından ULAŞAMIYOR: "Failed to load font with url:
-  // fonts.gstatic.com/..."), ÜSTELİK ağa bağımlı bir test kalıcı kapı
-  // için YANLIŞ yön olurdu.
+  // KÖK NEDEN BULUNDU VE DÜZELTİLDİ (JabLab'ın bulgusu, koordinatör
+  // aktarımı 2026-08-07 — bkz. `flutter_test_config.dart`, bu dosyayla
+  // AYNI dizinde). Ostinato'nun kendi 2026-08-06 turundaki üç deneme kök
+  // nedeni EKSİK teşhis etmişti: sorun "test ortamı ağa ulaşamıyor"
+  // DEĞİLDİ — `TestWidgetsFlutterBinding`in kurduğu `HttpOverrides.global`
+  // HER isteği kasıtlı 400'e zorluyordu, `allowRuntimeFetching=true`
+  // denemesi bu yüzden hata BİÇİMİNİ değiştirdi ama gidermedi.
+  // `flutter_test_config.dart` gerçek testler başlamadan ÖNCE bir
+  // ön-ısınma penceresinde `HttpOverrides`i geçici açıyor + `path_provider`
+  // kanalını sahte bir uygulamayla değiştiriyor, ihtiyaç duyulan üç ağırlığı
+  // (hankenGrotesk w400/w500/w600, ibmPlexMono w500) indirip
+  // `google_fonts`un bellek-içi önbelleğine yazıyor, SONRA ikisini de eski
+  // hâline döndürüyor — testler standart sandbox'ta koşmaya devam ediyor,
+  // kalıcı bir ağ bağımlılığı EKLENMEDİ. Sonuç ÖLÇÜLDÜ: PNG'ler artık
+  // gerçek Hanken Grotesk/IBM Plex Mono glifleriyle çiziliyor (blok değil),
+  // 6 test 4.3sn'de sıfır istisnayla geçiyor.
   //
-  // BU YÜZDEN bu dosya BİLEREK `test/` dışında yaşıyor — `flutter test`in
-  // varsayılan süpürmesine (dolayısıyla `run_gates.sh`a) hiç girmiyor,
-  // yalnız açıkça çağrıldığında koşuyor. Ölçülen istisna GLİF'i etkiler,
-  // VERİYİ değil — PNG'ler DÜZEN kanıtı (CustomPainter/vektör, glif
-  // sorunundan ETKİLENMEZ), `dumpText`in ürettiği .txt'ler gerçek
-  // `Text.data` dizeleri (piksel değil) — ikisi birlikte "ekranı gerçek
-  // veriyle inşa edip GÖZLE okudum" kanıtını TAM karşılıyor, testin kendi
-  // PASS/FAIL durumu bu kanıtın geçerliliğini DEĞİŞTİRMİYOR.
+  // `allowRuntimeFetching=false` + aşağıdaki `expectOnlyFontException`
+  // BİLEREK KORUNUYOR — artık bir istisnayı SUSTURMAK için değil, GELECEK
+  // bir ekran değişikliğinin ön-ısınma listesine girmemiş yeni bir
+  // ağırlık/aile eklemesini SESSİZCE yeni bir ağ isteğine düşürmek yerine
+  // AÇIKÇA patlatmak için (fail-closed kanarya). Normal koşuda bu yardımcı
+  // artık HİÇBİR istisna bulmuyor — sıfır-istisna yolu zaten destekli.
+  //
+  // Dosya hâlâ BİLEREK `test/` dışında yaşıyor — `flutter test`in varsayılan
+  // süpürmesine (dolayısıyla `run_gates.sh`a) hiç girmiyor, yalnız açıkça
+  // çağrıldığında koşuyor (bkz. dosya başı SINIR notu: bu artık glif
+  // okunabilirliğini DEĞİL, cihaz-düzeyi DPI/güvenli-alan/gerçek-donanım
+  // render'ını kapsam dışı bırakıyor — O-036 ile aynı paket).
 
   late ContentRepository repo;
   late CueTextResolver cueText;
@@ -135,11 +142,15 @@ void main() {
     File('docs/evidence/$filename').writeAsStringSync(lines.join('\n'));
   }
 
-  /// `takeException()`i BEKLENEN GoogleFonts istisnasını (ölçüldü: bkz.
-  /// dosya başı notu — `allowRuntimeFetching=false` + yerel .ttf yok, her
-  /// zaman olan ama önceden `--use-test-fonts` tarafından sessizce
-  /// yutulan bir durum) DRAIN eder; başka bir istisna çıkarsa test yine
-  /// BAŞARISIZ olur — sahte bir "temiz" geçiş üretmiyoruz.
+  /// FAIL-CLOSED KANARYA (bkz. dosya başı notu) — `flutter_test_config.dart`
+  /// ön-ısınmasından sonra normal koşuda BURADA hiçbir istisna beklenmiyor
+  /// (sıfır-istisna: `takeException()` ilk çağrıda `null` döner, döngü
+  /// hemen çıkar). Yalnız bir ekran YENİ bir google_fonts ağırlığı/ailesi
+  /// kullanmaya başlar da ön-ısınma listesine eklenmeyi UNUTULURSA devreye
+  /// girer: `allowRuntimeFetching=false` o çağrıyı sessiz bir ağ isteğine
+  /// değil AÇIK bir istisnaya düşürür, bu yardımcı YALNIZ o tanıdık
+  /// istisnayı drain eder — başka bir istisna çıkarsa test BAŞARISIZ olur,
+  /// sahte bir "temiz" geçiş üretmiyoruz.
   Future<void> expectOnlyFontException(WidgetTester t) async {
     // Font-yükleme reddi GERÇEK event-loop'ta olur (bkz. `capture`'daki
     // runAsync notu) — boş bir `runAsync` burada AYNI gerçek-zaman
