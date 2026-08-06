@@ -155,7 +155,12 @@ class InstrumentScreenRoute extends StatelessWidget {
                       ),
                     if (discipline.comingSoon.isNotEmpty) ...<Widget>[
                       const SizedBox(height: 12),
-                      kicker('Not here yet — and why'),
+                      // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
+                      // çıkarıldı. Bu başlığın altındaki liste KAPSAM-DIŞI
+                      // kalemler (`comingSoon`) — kapsam-dışı bir şey için
+                      // "henüz" demek, gelmeyecek olana geleceğini vaat
+                      // etmek olurdu.
+                      kicker('Not here — and why'),
                       const SizedBox(height: 10),
                       for (final String c in discipline.comingSoon)
                         Container(

@@ -49,7 +49,9 @@ final class Discipline {
   /// DEĞİL: ürünün en somut iddiası bu listede duruyor.
   final List<String> notMeasured;
 
-  /// "Not here yet — and why" — kapsam-dışı ama isimli-gerekçeli kalemler.
+  /// "Not here — and why" — kapsam-dışı ama isimli-gerekçeli kalemler.
+  /// (DÜZELTME 2026-08-07, M-F-186: "yet" çıkarıldı — bu liste zaten
+  /// KAPSAM-DIŞI, "henüz" demek gelmeyecek olana vaat verirdi.)
   final List<String> comingSoon;
 
   final List<Course> courses;

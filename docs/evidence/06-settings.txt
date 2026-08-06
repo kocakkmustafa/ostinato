@@ -5,7 +5,7 @@ Both run on your phone. The camera reads nine upper-body points; the microphone 
 SHARING
 Raw video never leaves this device. There is no setting that changes that.
 ABOUT THIS BUILD
-Three instruments are live: guitar, voice, piano. Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware yet.
+Three instruments are live: guitar, voice, piano. Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware.
 [RichText] ‹
 [RichText] Settings
 [RichText] CAMERA AND MICROPHONE
@@ -13,4 +13,4 @@ Three instruments are live: guitar, voice, piano. Every posture reference is bui
 [RichText] SHARING
 [RichText] Raw video never leaves this device. There is no setting that changes that.
 [RichText] ABOUT THIS BUILD
-[RichText] Three instruments are live: guitar, voice, piano. Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware yet.
+[RichText] Three instruments are live: guitar, voice, piano. Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware.

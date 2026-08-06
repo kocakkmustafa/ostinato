@@ -381,9 +381,12 @@ class _RoomGapNotice extends StatelessWidget {
                     key: const Key('setup-room-gap-title'),
                     style: hankenText(size: 19, weight: FontWeight.w500)),
                 const SizedBox(height: 8),
+                // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
+                // çıkarıldı. Gerekçenin varlığı "yet"i affetmiyor —
+                // `lesson_demo_screen.dart`ın düzeltilen hâliyle aynı sınıf.
                 Text(
                   'The design calls for four seconds of quiet to measure '
-                  'the room before you play. That capture is not wired yet '
+                  'the room before you play. That capture is not wired '
                   '— there is no microphone input in this build, so we are '
                   'not showing a fake progress bar for it. Camera setup is '
                   'real; this step is a named gap.',
@@ -426,9 +429,12 @@ class _PassedStage extends StatelessWidget {
                     key: const Key('setup-stage-passed'),
                     style: hankenText(size: 19.5, weight: FontWeight.w500)),
                 const SizedBox(height: 8),
+                // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
+                // çıkarıldı — gerekçe zaten `_RoomGapNotice`de var, burası
+                // yalnız kısa bir sonuç notu.
                 const Text(
                   'Your frame and the light. Room noise is not part of '
-                  'this check yet, so nothing about your sound was '
+                  'this check, so nothing about your sound was '
                   'measured or saved.',
                   style: TextStyle(height: 1.5),
                 ),

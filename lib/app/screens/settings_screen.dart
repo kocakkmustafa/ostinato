@@ -49,11 +49,15 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: 14),
               const _SettingsCard(
                 title: 'About this build',
+                // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
+                // çıkarıldı — bir zaman taahhüdüydü, üstelik bu cümlenin
+                // gerekçesi bile yoktu (en çıplak örnek). Kalan cümle
+                // bugünün OLGUSUNU söylüyor.
                 body: 'Three instruments are live: guitar, voice, piano. '
                     'Every posture reference is built from teaching footage '
                     'filmed waist-up, which is why nothing below your hips '
                     'is read. Nothing here has been verified on real '
-                    'hardware yet.',
+                    'hardware.',
               ),
             ],
           ),
