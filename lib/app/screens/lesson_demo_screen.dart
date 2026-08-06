@@ -7,6 +7,13 @@ import '../design/widgets.dart';
 /// ⭐ Üçüncü görsel sınıf — "ölçülür ama puanlanmaz" (§4/⑧). "Bilgi" tonu,
 /// "hata" tonu DEĞİL: aynı camsı kart dili, aynı bütünlük.
 ///
+/// 📌 İSİMLİ SEÇİM (koordinatör hükmü, 2026-08-06): tasarımın iki paralel
+/// "Explorations" çatalından (`demoTreatment` A/B) **Treatment A seçildi**
+/// — rozet-başlık + TEK renkli kart + 3-bölümlü beyaz kart (WHY NO MARK /
+/// WHAT WOULD CHANGE IT / IF IT NEVER DOES), Treatment B'nin "iki eşit kart"
+/// simetrisi DENENMEDİ. Tek sadakatsizlik: A'nın 52px canlı-sayı öğesi
+/// burada yok — bkz. aşağıdaki İSİMLİ SINIR.
+///
 /// ⚠️ İSİMLİ SINIR (giydirme turu, 2026-08-05): tasarımın canlı kol/önkol
 /// açısı okuması (`armLive`) burada YOK. `CameraPostureAdapter` bugün yalnız
 /// `trunk_tilt` hesaplıyor — dirsek açısı için motion_core'da

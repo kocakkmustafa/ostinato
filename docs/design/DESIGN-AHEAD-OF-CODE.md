@@ -220,11 +220,18 @@ Explorations değişkeni olduğu hiç fark edilmedi, bu yüzden koordinatöre
 "A mı B mi" diye hiç sorulmadı; kod sessizce bir üçüncü, isimsiz hibrit
 inşa etti.
 
-**İnşa edilirse neye dokunur:** iki yön var — (a) mevcut hibridi Treatment
-A'ya TAM sadakatle tamamlamak (canlı sayı gelince, bkz §1.1/§1.4), ya da (b)
-`CueTreatment` deseniyle AYNI şekilde bir `DemoTreatment` enum'u eklemek ve
-DEĞERİ koordinatöre bırakmak (gözlem işaretiyle aynı §8 yetkisi). Karar
-verilmedi — bu belge yalnız çatalın VARLIĞINI kayda geçiriyor.
+**KARAR (koordinatör hükmü, 2026-08-06):** "isimsiz çıkış çıkış değildir" —
+hibrit isimsiz kalamaz. **Treatment A seçildi**, geriye dönük olarak
+isimlendirildi (`lesson_demo_screen.dart` başlık yorumu): kod zaten A'nın
+iskeletine (rozet-başlık, TEK renkli kart, 3-bölümlü beyaz kart) sadıktı,
+TEK sapma A'nın 52px canlı-sayı öğesiydi — bu bir tasarım tercihi değil,
+veri kısıtı (§1.1/§1.4). Treatment B'nin "iki eşit kart" simetrisi hiç
+denenmedi, DENENMEYECEK (A seçildiği için). Kod DEĞİŞMEDİ, yalnız kayıt
+eklendi (DEFTER OK-13).
+
+**İnşa edilirse neye dokunur:** canlı dirsek verisi gelirse (§1.1/§1.4),
+A'nın 52px canlı-sayı öğesi eklenir — bu YENİ bir tasarım kararı GEREKTİRMEZ,
+zaten seçilmiş Treatment A'nın eksik parçasını tamamlar.
 
 ### 2.4 Kilitli-ders yüzeyi — tasarımda VAR, kodda VAR, TAM eşleşme (koordinatörün adayı doğrulandı, açık bulunmadı)
 
@@ -304,7 +311,7 @@ kapatabilir.
 | 1.5 | Review paylaşım/consent | tasarım>kod (zaten dürüstçe ele alındı) | flow | evet, ileride | rapor formatı + gönderim kanalı |
 | 2.1 | Review "4 şey" içeriği | kod<tasarım (içerik eksik) | data | hayır (mevcut ekrana içerik) | çalgıya-özel 4. kalem + per-gap süre verisi |
 | 2.2 | Setup silence/noisy | kod<tasarım (durum eksik) | flow (PLACEHOLDER kaydında zaten var) | hayır (mevcut ekrana durum) | gerçek mikrofon girdisi |
-| 2.3 | demoTreatment A/B çatalı | kod≠tasarım (isimsiz hibrit) | karar gerekli | hayır | DEĞER kararı (A'yı tamamla / B'yi dene) |
+| 2.3 | demoTreatment A/B çatalı | **karar VERİLDİ: Treatment A** (2026-08-06) | — | hayır | canlı dirsek verisi gelince A'nın sayı-öğesi tamamlanır |
 | 2.4 | Kilitli-ders yüzeyi | **eşleşme — açık YOK** | — | — | — |
 | 2.5 | Live durum-uzayı zenginliği | kod>tasarım, zararsız | — | — | — |
 | 2.6 | Çocuk rejimi | **karşılıklı yok — açık YOK** | — | — | — |
