@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'package:motion_camera/motion_camera.dart';
 import 'package:motion_core/motion_core.dart' as core;
 import 'package:ostinato_posture/ostinato_posture.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
+import 'camera_session.dart';
 import 'pose_model.dart';
 
 /// Gerçek kamera → `PoseSource` adaptörü (tur-2).
@@ -47,75 +44,28 @@ final class CameraPoseSource implements PoseSource {
   @override
   Stream<SurfaceState> get status => _status.stream;
 
-  /// Asset'i uygulama-özel bir dosyaya yazar — plugin bundle DEĞİL bir YOL
-  /// ister (Gravita `_modelPath()` deseni). Dosya zaten varsa yeniden
-  /// yazılmaz.
-  Future<String> _modelPath() async {
-    final Directory dir = await getApplicationSupportDirectory();
-    final File f =
-        File('${dir.path}/${PoseModelPin.assetPath.split('/').last}');
-    if (!await f.exists()) {
-      final ByteData data = await rootBundle.load(PoseModelPin.assetPath);
-      await f.writeAsBytes(data.buffer.asUint8List(), flush: true);
-    }
-    return f.path;
-  }
-
-  /// İzni kalıcı/geçici ayrımına çevirir (zeyil-3 deseni, JabLab emsali):
-  /// sunulan eylem farklı olduğu için ayrım TİP taşır — "tekrar dene"
-  /// kalıcı redde işlevsiz bir düğme olurdu.
-  SurfaceState _permissionState(PermissionStatus perm) {
-    if (perm.isPermanentlyDenied || perm.isRestricted) {
-      return const PermissionDeniedPermanent();
-    }
-    return const PermissionDeniedRetriable();
-  }
-
-  /// `CameraFailure`ı yüzeyin sealed hâline çevirir. Eşleme HAZIR (tur-2
-  /// devir promptu): `permissionDenied` → izin hâli, geri kalan HER kod →
-  /// `SetupFailed(reason)`. ÇIKMAZ-SOKAK YASAĞI: hiçbir dal yakalanmadan
-  /// geçmez, ders her zaman AÇILIR.
-  SurfaceState _failureState(CameraFailure failure) {
-    if (failure == CameraFailure.permissionDenied) {
-      return const PermissionDeniedRetriable();
-    }
-    return SetupFailed(failure.code);
-  }
-
   @override
   Future<void> start() async {
-    try {
-      // İzin ÖNCE ve AÇIKÇA (Gravita deseni): plugin izin İSTEMEZ — sorması
-      // gereken app'tir; reddedilirse adı olan bir hâl doğar, boş ekran DEĞİL.
-      final PermissionStatus perm = await Permission.camera.request();
-      if (!perm.isGranted) {
-        _status.add(_permissionState(perm));
+    final CameraStartResult result = await requestAndStartCamera(
+      _camera,
+      modelPath: await PoseModelPin.resolveFilePath(),
+      modelId: PoseModelPin.modelId,
+    );
+    switch (result) {
+      case CameraStartFailed(:final SurfaceState state):
+        _status.add(state);
         return;
-      }
-
-      final CameraSessionInfo info = await _camera.start(
-        modelPath: await _modelPath(),
-        modelId: PoseModelPin.modelId,
-        lens: CameraLens.front,
-        initialPlan: PassPlan.uprightOnly,
-      );
-      _running = true;
-      final core.FrameSize size = core.FrameSize(info.width, info.height);
-
-      _sub = _camera.frames().listen(
-        (CameraFrameEnvelope e) => _onEnvelope(e, size),
-        onError: (Object err) {
-          _status.add(err is CameraException
-              ? _failureState(err.failure)
-              : SetupFailed('unexpected: $err'));
-        },
-      );
-    } on CameraException catch (e) {
-      _status.add(_failureState(e.failure));
-    } on Object catch (e) {
-      // Bilinmeyen istisna da tipli bir hâle döner: ders çıkmaz-sokağa
-      // düşmez, ham metin yüzeye sızmaz (İSİMLİ sebep: "unexpected: ...").
-      _status.add(SetupFailed('unexpected: $e'));
+      case CameraStarted(:final CameraSessionInfo info):
+        _running = true;
+        final core.FrameSize size = core.FrameSize(info.width, info.height);
+        _sub = _camera.frames().listen(
+          (CameraFrameEnvelope e) => _onEnvelope(e, size),
+          onError: (Object err) {
+            _status.add(err is CameraException
+                ? cameraFailureState(err.failure)
+                : SetupFailed('unexpected: $err'));
+          },
+        );
     }
   }
 

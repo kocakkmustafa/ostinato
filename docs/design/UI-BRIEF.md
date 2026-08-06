@@ -108,16 +108,36 @@ BEKLENEN yollar.
 
 ## 4. Bugün GERÇEKTEN canlı olan (tasarım bunun üstüne kurulur)
 
-- **Gitar / oturuş duruşu:** `trunk_tilt` — 3 bağımsız eğitmen konsensüsü,
-  ATTESTED referans (M-O-47), tüketicisi canlı doğrulandı (M-O-48).
+> ⚠️ **SÜPERSEDE — koordinatör ölçümü 2026-08-05 (design orkestrasyonu).** Aşağıdaki
+> liste yazıldığı gün doğruydu; sonraki hasat turları onu sessizce yanlışladı
+> (M-F-273 sınıfı). **GÜNCEL GERÇEK — `assets/content/library.json`dan ölçüldü:**
+>
+> **ÜÇ ÇALGI DA `live`** — her birinin ATTESTED postür referansı var:
+> · **Gitar** `status: live` — 7 ders · referans **7 eğitmen**, 2,24° içinde anlaşıyor
+> · **Şan** `status: live` — 6 ders · referans **6 eğitmen**, 1,35° içinde anlaşıyor
+> · **Piyano** `status: live` — 6 ders · referans **3 eğitmen**, 1,09° içinde anlaşıyor
+>   (ailenin ölçtüğü **en sıkı** anlaşma)
+>
+> **4 kilitli ders** (her biri EKSİK ÖLÇÜMÜN ADIYLA gerekçeli):
+> `guitar.foundations.foot_support` · `guitar.foundations.open_chords` ·
+> `voice.foundations.sustained_note` · `piano.foundations.five_finger`
+>
+> **3 demoOnly ders:** her çalgının `arms` dersi — *"ölçülür ama puanlanmaz"*.
+>
+> Yani **"Şan/Piyano yakında, kurs YOK" satırı ARTIK YANLIŞ.** Tasarım üç canlı
+> çalgı üzerine kurulur.
+
+- **Gitar / oturuş duruşu:** `trunk_tilt` — ATTESTED referans (M-O-47),
+  tüketicisi canlı doğrulandı (M-O-48). *(Eğitmen sayısı yukarıda güncellendi.)*
 - **Gitar / çalarken duruş:** ses seviyesi tetiği + slouch hatası — ikisi de
   kanıtlı (M-O-52 uçtan-uca zincir).
 - **Akor sınıfı (8 açık akor):** motor çalışıyor ve ölçülü (M-O-35/52) ama
   **gerçek gitar kaydında doğrulanmadı** → ders KİLİTLİ.
-- **Kollar/eller:** ölçülüyor ama **skorlanmıyor** (eğitmenler 11-18° ayrışıyor)
-  → gösterilebilir, hüküm verilemez. Tasarımda "bilgi" tonu, "hata" tonu DEĞİL.
-- **Şan / Piyano:** hiçbir postür referansı anlaşma kapısını geçmedi → çalgı
-  sayfaları "yakında", kurs YOK.
+- **Kollar/eller:** ölçülüyor ama **skorlanmıyor** (eğitmenler ayrışıyor —
+  gitar 11-18°, şan 43-88°) → gösterilebilir, hüküm verilemez. Tasarımda
+  "bilgi" tonu, "hata" tonu DEĞİL.
+- ~~**Şan / Piyano:** hiçbir postür referansı anlaşma kapısını geçmedi~~
+  **⚠️ SÜPERSEDE — ikisi de ATTESTED ve canlı** (yukarıdaki bloka bak).
 
 ## 5. Tasarım oturumuna açık sorular (karar tasarımda/koordinatörde)
 

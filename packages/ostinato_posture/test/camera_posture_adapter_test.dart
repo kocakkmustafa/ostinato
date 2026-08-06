@@ -102,4 +102,47 @@ void main() {
       expect(a.trunkTiltDeg(f, _size), isNotNull);
     });
   });
+
+  group('frameQuality — Kurulum Kontrolü kadraj/ışık ayrımı', () {
+    test('kalça kadraj dışına çıkınca outOfFrame döner', () {
+      final CameraPostureAdapter a = CameraPostureAdapter();
+      final core.PoseFrame f = _frame(<int, core.PoseLandmark>{
+        core.Lm.leftShoulder: const core.PoseLandmark(0.45, 0.3, 0, 0.9),
+        core.Lm.rightShoulder: const core.PoseLandmark(0.55, 0.3, 0, 0.9),
+        // Kalça x=1.3 — izotropik genişlik (aspect≈1.78) içinde ama
+        // frameMargin (.02) dışında değil; asıl dışarı taşımak için y kullan.
+        core.Lm.leftHip: const core.PoseLandmark(0.45, 1.3, 0, 0.9),
+        core.Lm.rightHip: const core.PoseLandmark(0.55, 1.3, 0, 0.9),
+      });
+      final core.FrameQuality q = a.frameQuality(f, _size);
+      expect(q.judgeable, isFalse);
+      expect(q.issue, core.QualityIssue.outOfFrame,
+          reason: 'Kurulum Kontrolü bunu "kadraj hatası" diye göstermeli');
+    });
+
+    test('gövde düşük güvende (karanlık) iken torsoUnreliable döner', () {
+      final CameraPostureAdapter a = CameraPostureAdapter();
+      final core.PoseFrame f = _frame(<int, core.PoseLandmark>{
+        core.Lm.leftShoulder: const core.PoseLandmark(0.45, 0.3, 0, 0.35),
+        core.Lm.rightShoulder: const core.PoseLandmark(0.55, 0.3, 0, 0.35),
+        core.Lm.leftHip: const core.PoseLandmark(0.45, 0.6, 0, 0.35),
+        core.Lm.rightHip: const core.PoseLandmark(0.55, 0.6, 0, 0.35),
+      });
+      final core.FrameQuality q = a.frameQuality(f, _size);
+      expect(q.judgeable, isFalse);
+      expect(q.issue, core.QualityIssue.torsoUnreliable,
+          reason: 'Kurulum Kontrolü bunu "ışık yetersiz" diye göstermeli');
+    });
+
+    test('kadraj+ışık iyiyken judgeable=true (kapı geçer)', () {
+      final CameraPostureAdapter a = CameraPostureAdapter();
+      final core.PoseFrame f = _frame(<int, core.PoseLandmark>{
+        core.Lm.leftShoulder: const core.PoseLandmark(0.45, 0.3, 0, 0.9),
+        core.Lm.rightShoulder: const core.PoseLandmark(0.55, 0.3, 0, 0.9),
+        core.Lm.leftHip: const core.PoseLandmark(0.45, 0.6, 0, 0.9),
+        core.Lm.rightHip: const core.PoseLandmark(0.55, 0.6, 0, 0.9),
+      });
+      expect(a.frameQuality(f, _size).judgeable, isTrue);
+    });
+  });
 }

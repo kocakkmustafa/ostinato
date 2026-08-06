@@ -11,6 +11,12 @@
 /// Boyut değişmediği için fark gözden kaçar; sürüm segmenti bu yüzden pinli.
 library;
 
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
+
 final class PoseModelPin {
   const PoseModelPin._();
 
@@ -26,4 +32,18 @@ final class PoseModelPin {
   /// Kanonik hash (varyant `full`, sürüm `1`) — fetch betiğiyle AYNI.
   static const String sha256 =
       '5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1';
+
+  /// Asset'i uygulama-özel bir dosyaya yazar — plugin bundle DEĞİL bir YOL
+  /// ister (Gravita `_modelPath()` deseni). Dosya zaten varsa yeniden
+  /// yazılmaz. TEK yer: `CameraPoseSource` + Kurulum Kontrolü kamera probu
+  /// bunu paylaşır, ikisi ayrı ayrı yazmaz.
+  static Future<String> resolveFilePath() async {
+    final Directory dir = await getApplicationSupportDirectory();
+    final File f = File('${dir.path}/${assetPath.split('/').last}');
+    if (!await f.exists()) {
+      final ByteData data = await rootBundle.load(assetPath);
+      await f.writeAsBytes(data.buffer.asUint8List(), flush: true);
+    }
+    return f.path;
+  }
 }

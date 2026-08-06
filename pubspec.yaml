@@ -51,6 +51,12 @@ dependencies:
 
   permission_handler: ^12.0.3
 
+  # Tasarım paneli tipografisi (Hanken Grotesk + IBM Plex Mono) — DESIGN-PANEL-
+  # PROMPT.md §1. Dosya font gömmez; ilk açılışta indirir ve cihazda önbelleğe
+  # alır (yazı tipi statik varlıktır, "ham video cihazdan çıkmaz" kuralının
+  # kapsamındaki kullanıcı verisi DEĞİL).
+  google_fonts: ^6.2.1
+
   # YALNIZ poz modelini uygulama-özel bir dosyaya yazmak için (plugin bundle
   # değil YOL ister) — depolama BİÇİMİ yok, kablolama katmanında kalıyor.
   path_provider: ^2.1.0

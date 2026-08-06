@@ -41,16 +41,21 @@ final class CameraPostureAdapter {
   /// ikisi de `ostinato_posture.PoseFrame(trunkTiltDeg: null)` → evaluator
   /// bunu `NoPersonVisible`e çevirir. Uydurma sayı ASLA üretilmez.
   double? trunkTiltDeg(core.PoseFrame raw, core.FrameSize size) {
-    final core.PoseFrame iso = raw.toIsotropic(size);
-    final core.FrameQuality quality = _gate.evaluate(
-      iso,
-      required: core.LmRegion.torso,
-      xExtent: size.aspect,
-    );
+    final core.FrameQuality quality = frameQuality(raw, size);
     if (!quality.judgeable) return null;
 
-    final core.NormalizedPose pose = _normalizer.normalize(iso);
+    final core.NormalizedPose pose =
+        _normalizer.normalize(raw.toIsotropic(size));
     return _extractor.extract(pose).degreesById('trunk_tilt');
+  }
+
+  /// Ham güven-kapısı sonucu — Kurulum Kontrolü'nün kadraj/ışık ayrımı için
+  /// (`QualityIssue.outOfFrame` → "kadraj hatası", `torsoUnreliable`/
+  /// `lowTrackingConfidence` → "ışık yetersiz"). `trunkTiltDeg` de AYNI
+  /// kapıyı kullanır — iki farklı eşik icat edilmedi.
+  core.FrameQuality frameQuality(core.PoseFrame raw, core.FrameSize size) {
+    final core.PoseFrame iso = raw.toIsotropic(size);
+    return _gate.evaluate(iso, required: core.LmRegion.torso, xExtent: size.aspect);
   }
 
   /// Oturumlar/take'ler arası çağrılır — ölçek EMA'sını sıfırlar

@@ -1,62 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
-import 'package:ostinato/app/posture_screen.dart';
+import 'package:ostinato/app/design/app_scope.dart';
+import 'package:ostinato/app/design/ostinato_theme.dart';
+import 'package:ostinato/app/screens/live_screen.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
 
-/// O-032 TEŞHİS TESTİ — uygulamanın GERÇEK yolu.
+/// O-032 TEŞHİS TESTİ — uygulamanın GERÇEK yolu (regresyon kalıcı kanıtı).
 ///
-/// Mevcut widget testleri `pushOne()` ile SENKRON kare itiyor. Çalışan
-/// uygulama ise `Timer.periodic` kullanıyor ve kareler akıştan ASENKRON
-/// geliyor. İşaret testlerde görünüp uygulamada görünmüyorsa, fark tam da
-/// bu yolda olmalı — burada `t.pump(Duration(...))` ile zamanlayıcıyı
-/// GERÇEKTEN ilerletiyoruz.
-///
-/// Bu test bir DÜZELTME değil, bir ÖLÇÜMDÜR: kırmızı yanarsa arıza
-/// zamanlayıcı yolunda; yeşil geçerse arıza başka yerde (ve o zaman
-/// şüphe sınıfım yanlıştı).
+/// O-032 kapandı (2026-08-05): bu test artık aktif teşhis değil, kalıcı
+/// regresyon kapısı. `Timer.periodic`/`setState` yolu bir kez şüpheliydi,
+/// ölçülüp YANLIŞ çıktı — bu test o ölçümün donmuş hâli.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  GoogleFonts.config.allowRuntimeFetching = false;
 
-  // Varlıklar setUpAll'da yüklenir. Test GÖVDESİNDE `rootBundle.loadString`
-  // çağırmak ikinci testte asıyor — bu tuzağa widget_test.dart'ta bir kez
-  // düşülüp düzeltilmişti, yeni dosyada tekrarlandı. Kayda geçsin.
   late ContentRepository repo;
   late CueTextResolver cueText;
+  late Discipline guitar;
+  late Lesson postureLesson;
   setUpAll(() async {
     repo = await ContentRepository.load();
     cueText = await CueTextResolver.load();
+    guitar = repo.disciplines.firstWhere((Discipline d) => d.id == 'guitar');
+    postureLesson = guitar.lessons
+        .firstWhere((Lesson l) => l.id == 'guitar.foundations.posture');
   });
+
+  Widget harness(FakePoseSource src) => ContentRepositoryScope(
+        repo: repo,
+        cueText: cueText,
+        child: MaterialApp(
+          home: LiveScreenRoute(
+            discipline: guitar,
+            lesson: postureLesson,
+            hue: InstrumentHues.guitar,
+            source: src,
+            skipCountdown: true,
+          ),
+        ),
+      );
 
   testWidgets('GERÇEK zamanlayıcıyla: sürdürülen sapmada işaret GÖRÜNÜR mü?',
       (WidgetTester t) async {
-    // Uygulamadaki demo senaryosunun aralık-dışı kısmıyla aynı şekil.
     final FakePoseSource src = FakePoseSource(
       <double?>[2.0, 2.5, 16.0, 18.0, 19.5, 21.0, 22.0, 20.5],
       stepUs: 180000,
     );
+    await t.pumpWidget(harness(src));
 
-    await t.pumpWidget(MaterialApp(
-      home: PostureScreen(
-        discipline: repo.disciplines.firstWhere((Discipline d) => d.id == 'guitar'),
-        contract: repo.contractFor('guitar'),
-        cueText: cueText,
-        source: src,
-        sourceLabel: 'TEST — gerçek zamanlayıcı',
-      ),
-    ));
-
-    // Zamanlayıcıyı 8 kare ilerlet (180 ms × 8 = 1,44 sn).
     for (int i = 0; i < 8; i++) {
       await t.pump(const Duration(milliseconds: 180));
     }
 
-    expect(find.byKey(const Key('state-measuring')), findsOneWidget,
+    expect(find.byKey(const Key('live-measuring')), findsOneWidget,
         reason: 'zamanlayıcı yolunda ölçüm ekranına hiç gelinmedi');
     expect(find.byKey(const Key('observation-cue')), findsOneWidget,
-        reason: 'O-032 REPRODÜKSİYONU: gerçek zamanlayıcıyla işaret DOĞMADI '
-            '— arıza zamanlayıcı/akış yolunda');
+        reason: 'O-032 REGRESYONU: gerçek zamanlayıcıyla işaret DOĞMADI');
 
     await src.stop();
     await src.dispose();
@@ -64,7 +66,6 @@ void main() {
 
   testWidgets('UYGULAMANIN TAM senaryosu (null kareler dahil), gerçek zamanlayıcı',
       (WidgetTester t) async {
-    // lib/main.dart'taki _demoScript ile BİREBİR aynı.
     final FakePoseSource src = FakePoseSource(<double?>[
       2.0, 2.4, 3.1, 2.8, 3.4, 2.2, 2.9, 3.3, 2.5, 3.0,
       null, null, null,
@@ -73,17 +74,8 @@ void main() {
       6.0, 4.5, 3.2, 2.6,
     ], stepUs: 180000);
 
-    await t.pumpWidget(MaterialApp(
-      home: PostureScreen(
-        discipline: repo.disciplines.firstWhere((Discipline d) => d.id == 'guitar'),
-        contract: repo.contractFor('guitar'),
-        cueText: cueText,
-        source: src,
-        sourceLabel: 'TEST — tam senaryo',
-      ),
-    ));
+    await t.pumpWidget(harness(src));
 
-    // 16 kare: 13 in-band/null + aralık-dışının ilk 3'ü → işaret DOĞMALI.
     for (int i = 0; i < 16; i++) {
       await t.pump(const Duration(milliseconds: 180));
     }
