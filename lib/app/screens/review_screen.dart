@@ -23,13 +23,22 @@ final class SessionSummary {
   double get insideShare =>
       sampleCount == 0 ? 1 : 1 - outCount / sampleCount;
 
-  /// Sunum-katmanı özeti — ÖLÇÜM eşiği değil, ekranda üç bant arasında
-  /// seçim yapan bir kural. Değerler (0.66 / 0.6°) tasarım panelinin kendi
-  /// seçimiyle AYNI; istenirse koordinatör kararıyla değişir.
+  /// Sunum-katmanı özeti — ÖLÇÜM eşiği değil, ekranda üç betimleyici
+  /// arasında seçim yapan bir kural. Değerler (0.66 / 0.6°) tasarım
+  /// panelinin kendi seçimiyle AYNI.
+  ///
+  /// KARAR (koordinatör, 2026-08-06, HÜKÜM 2b): üçüncü kelime önce
+  /// "Needs focus." idi — TÜRETİLMEMİŞ bir kesme noktasının kullanıcıya
+  /// HÜKÜM CÜMLESİ üretmesiydi ve ailenin ton kuralını ("öğretmen gibi,
+  /// hakem gibi değil") ihlal ediyordu: "Steady." ÖLÇÜLEN OLGUYU betimler
+  /// (kabul edildi), "Needs focus." KİŞİYİ yargılar (hakem dili). Eşik
+  /// KALDI (üç betimleyici arasında seçim yapan sunum kuralı olarak), yalnız
+  /// kelime OLGUYA döndü: bandın DIŞINDA geçirilen süre, kullanıcının neye
+  /// "ihtiyacı" olduğuna dair bir hüküm DEĞİL.
   String get verdict {
     if (insideShare > 0.66) return 'Steady.';
     if (_improving()) return 'Improving.';
-    return 'Needs focus.';
+    return 'Mostly outside the band.';
   }
 
   bool _improving() {
