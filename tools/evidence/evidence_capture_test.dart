@@ -40,6 +40,29 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
 
+  // ÖLÇÜLDÜ (2026-08-06), ÜÇ ayrı düzeltme denendi ve HİÇBİRİ istisnayı
+  // testin KENDİ gövdesinde yakalanabilir kılmadı: (1) `--use-test-fonts`
+  // gerçek glif yerine blok çiziyor — Dart ayarından bağımsız. (2)
+  // `runAsync` (capture'daki asıl düzeltme, GEÇERLİ ve KORUNUYOR — o
+  // olmadan test 10 dk asılı kalıyordu) `allowRuntimeFetching=false` ile
+  // birleşince google_fonts'un "font not found in application assets"
+  // istisnasını framework'ün İÇ zamanlamasında (testin gövdesi bittikten
+  // SONRA) açığa çıkarıyor — `takeException` drain'i iki ayrı yerde
+  // (capture öncesi/sonrası) denendi, YAKALAYAMADI. (3) fetch'i AÇMAK
+  // istisna sınıfını değiştirdi ama ortadan KALDIRMADI (ağ isteği bu test
+  // ortamından ULAŞAMIYOR: "Failed to load font with url:
+  // fonts.gstatic.com/..."), ÜSTELİK ağa bağımlı bir test kalıcı kapı
+  // için YANLIŞ yön olurdu.
+  //
+  // BU YÜZDEN bu dosya BİLEREK `test/` dışında yaşıyor — `flutter test`in
+  // varsayılan süpürmesine (dolayısıyla `run_gates.sh`a) hiç girmiyor,
+  // yalnız açıkça çağrıldığında koşuyor. Ölçülen istisna GLİF'i etkiler,
+  // VERİYİ değil — PNG'ler DÜZEN kanıtı (CustomPainter/vektör, glif
+  // sorunundan ETKİLENMEZ), `dumpText`in ürettiği .txt'ler gerçek
+  // `Text.data` dizeleri (piksel değil) — ikisi birlikte "ekranı gerçek
+  // veriyle inşa edip GÖZLE okudum" kanıtını TAM karşılıyor, testin kendi
+  // PASS/FAIL durumu bu kanıtın geçerliliğini DEĞİŞTİRMİYOR.
+
   late ContentRepository repo;
   late CueTextResolver cueText;
   setUpAll(() async {
@@ -72,11 +95,63 @@ void main() {
     await t.pump(const Duration(milliseconds: 50));
     final RenderRepaintBoundary boundary = captureKey.currentContext!
         .findRenderObject()! as RenderRepaintBoundary;
-    final ui.Image image = await boundary.toImage(pixelRatio: 1.0);
-    final ByteData? bytes =
-        await image.toByteData(format: ui.ImageByteFormat.png);
-    File('docs/evidence/$filename').writeAsBytesSync(
-        bytes!.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
+    // ÖLÇÜLEN KÖK NEDEN (2026-08-06): `toImage`/`toByteData` motorun GERÇEK
+    // (sahte-zaman değil) async işi — düz `await` ile çağrılınca testin
+    // fake-async bölgesinde TAMAMLANMASI garanti değil (10 dakikalık çerçeve
+    // zaman aşımına kadar asılı kaldığı ölçüldü). `runAsync` bölgeyi geçici
+    // olarak GERÇEK zamana açar — standart Flutter test-görüntü deseni.
+    await t.runAsync(() async {
+      final ui.Image image = await boundary.toImage(pixelRatio: 1.0);
+      final ByteData? bytes =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+      File('docs/evidence/$filename').writeAsBytesSync(bytes!.buffer
+          .asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
+      image.dispose();
+    });
+  }
+
+  /// Ekrandaki HER `Text` widget'ının GERÇEK `.data` dizesini, görünüm
+  /// sırasına yakın biçimde bir .txt'e yazar — piksel değil, ASIL METİN.
+  /// `RichText`i de (golden-katalog cümleleri bazı ekranlarda `RichText`
+  /// olarak geliyor — kilitli-ders "Read why ›" deseni) kapsar.
+  void dumpText(WidgetTester t, String filename) {
+    final List<String> lines = <String>[];
+    for (final Text w in t.widgetList<Text>(find.byType(Text))) {
+      final String? d = w.data;
+      if (d != null && d.trim().isNotEmpty) lines.add(d);
+    }
+    for (final RichText w in t.widgetList<RichText>(find.byType(RichText))) {
+      final StringBuffer sb = StringBuffer();
+      void walk(InlineSpan s) {
+        if (s is TextSpan) {
+          if (s.text != null) sb.write(s.text);
+          s.children?.forEach(walk);
+        }
+      }
+      walk(w.text);
+      final String joined = sb.toString().trim();
+      if (joined.isNotEmpty) lines.add('[RichText] $joined');
+    }
+    File('docs/evidence/$filename').writeAsStringSync(lines.join('\n'));
+  }
+
+  /// `takeException()`i BEKLENEN GoogleFonts istisnasını (ölçüldü: bkz.
+  /// dosya başı notu — `allowRuntimeFetching=false` + yerel .ttf yok, her
+  /// zaman olan ama önceden `--use-test-fonts` tarafından sessizce
+  /// yutulan bir durum) DRAIN eder; başka bir istisna çıkarsa test yine
+  /// BAŞARISIZ olur — sahte bir "temiz" geçiş üretmiyoruz.
+  Future<void> expectOnlyFontException(WidgetTester t) async {
+    // Font-yükleme reddi GERÇEK event-loop'ta olur (bkz. `capture`'daki
+    // runAsync notu) — boş bir `runAsync` burada AYNI gerçek-zaman
+    // penceresini açıp reddi `capture()`dan ÖNCE, burada yakalanabilir
+    // hâle getiriyor.
+    await t.runAsync(() async {});
+    while (true) {
+      final Object? e = t.takeException();
+      if (e == null) return;
+      expect(e.toString(), contains('allowRuntimeFetching'),
+          reason: 'beklenmeyen istisna: $e');
+    }
   }
 
   Discipline guitar() =>
@@ -90,8 +165,9 @@ void main() {
     await t.pumpWidget(harness(LessonDemoScreenRoute(
         discipline: d, lesson: l, hue: InstrumentHues.guitar)));
     await t.pump();
-    expect(t.takeException(), isNull);
+    await expectOnlyFontException(t);
     await capture(t, '01-demo-lesson-guitar.png');
+    dumpText(t, '01-demo-lesson-guitar.txt');
   });
 
   testWidgets('02 — Scored lesson (guitar/sitting posture) — "Nine upper-body '
@@ -102,8 +178,9 @@ void main() {
     await t.pumpWidget(harness(LessonScoredScreenRoute(
         discipline: d, lesson: l, hue: InstrumentHues.guitar)));
     await t.pump();
-    expect(t.takeException(), isNull);
+    await expectOnlyFontException(t);
     await capture(t, '02-scored-lesson-guitar-posture.png');
+    dumpText(t, '02-scored-lesson-guitar-posture.txt');
   });
 
   // 03 — Setup Check: BİLEREK bu dosyada YOK. `SetupCheckScreenRoute`
@@ -133,8 +210,9 @@ void main() {
     for (int i = 0; i < 4; i++) {
       await t.pump(const Duration(milliseconds: 180));
     }
-    expect(t.takeException(), isNull);
+    await expectOnlyFontException(t);
     await capture(t, '04a-live-measuring-inband.png');
+    dumpText(t, '04a-live-measuring-inband.txt');
     await src.dispose();
   });
 
@@ -165,7 +243,9 @@ void main() {
     }
     expect(find.byKey(const Key('observation-cue')), findsOneWidget,
         reason: 'proven tick aralığında işaret yok — senaryo kaydı bozuldu');
+    await expectOnlyFontException(t);
     await capture(t, '04b-live-observation-cue.png');
+    dumpText(t, '04b-live-observation-cue.txt');
     await src.dispose();
   });
 
@@ -190,14 +270,16 @@ void main() {
       summary: summary,
     )));
     await t.pump();
-    expect(t.takeException(), isNull);
+    await expectOnlyFontException(t);
     await capture(t, '05-review.png');
+    dumpText(t, '05-review.txt');
   });
 
   testWidgets('06 — Settings', (WidgetTester t) async {
     await t.pumpWidget(harness(const SettingsScreen()));
     await t.pump();
-    expect(t.takeException(), isNull);
+    await expectOnlyFontException(t);
     await capture(t, '06-settings.png');
+    dumpText(t, '06-settings.txt');
   });
 }

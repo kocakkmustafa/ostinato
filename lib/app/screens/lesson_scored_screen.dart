@@ -89,6 +89,18 @@ class LessonScoredScreenRoute extends StatelessWidget {
                         style: hankenText(
                             size: 12.5, color: OstinatoColors.textMuted),
                       ),
+                      const SizedBox(height: 4),
+                      // İSİMLİ NETLEŞTİRME (koordinatör, 2026-08-06, M-F-287
+                      // ikizi): "dokuz" sayısı figürün SOLID (canlı, kalça+
+                      // omuz+boyun) beş noktasıyla YAN YANA okununca dar
+                      // görünebilirdi — dört tanesi (dirsek/bilek) neden
+                      // KESİKLİ olduğunu bu cümle olmadan açıklamıyordu.
+                      Text(
+                        'The solid points are what this figure tracks; the '
+                        'dashed arms are shown for shape, not tracked yet.',
+                        style: hankenText(
+                            size: 11.5, color: OstinatoColors.textFaint),
+                      ),
                     ],
                   ),
                 ),

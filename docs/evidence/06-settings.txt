@@ -1,0 +1,16 @@
+‹
+Settings
+CAMERA AND MICROPHONE
+Both run on your phone. The camera reads nine upper-body points; the microphone reads level and pitch. Neither stream is uploaded, and neither runs outside a lesson.
+SHARING
+Raw video never leaves this device. There is no setting that changes that.
+ABOUT THIS BUILD
+Three instruments are live: guitar, voice, piano. Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware yet.
+[RichText] ‹
+[RichText] Settings
+[RichText] CAMERA AND MICROPHONE
+[RichText] Both run on your phone. The camera reads nine upper-body points; the microphone reads level and pitch. Neither stream is uploaded, and neither runs outside a lesson.
+[RichText] SHARING
+[RichText] Raw video never leaves this device. There is no setting that changes that.
+[RichText] ABOUT THIS BUILD
+[RichText] Three instruments are live: guitar, voice, piano. Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware yet.

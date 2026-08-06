@@ -14,7 +14,7 @@ _Kayıtlı kalem yok._
 
 ## data — içerik/ölçüm (8)
 
-- **`lib/app/screens/lesson_demo_screen.dart:136`**
+- **`lib/app/screens/lesson_demo_screen.dart:143`**
   bu kart canlı dirsek/önkol açısı GÖSTERMEZ, yalnız statik ArmRangeHint (öğretmen aralığı) gösterir — unblocked by: motion_core'daki StandardJoints.leftElbow/rightElbow CameraPostureAdapter'a bağlanıp gerçek zamanlı bir açı üretilince (aynı sınır: widgets.dart içindeki SkeletonFigurePainter dirsek/bilek noktaları).
 - **`library.json: guitar.foundations.arms`**
   You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against. unblocked by: A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.

@@ -1,0 +1,33 @@
+‹
+MEASURED · NOT MARKED
+Holding the guitar — measured, never graded
+4 MIN · GUITAR
+YOUR ELBOW ANGLE, WHEN THIS IS LIVE
+0°
+39–105°
+120°
+You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against.
+WHY THERE IS NO MARK
+The elbows and forearms of the teachers in our reference spread across 39 to 105 degrees. A tolerance built from that spread would call almost nothing an error, and a tighter one would call ordinary style an error.
+WHAT WOULD CHANGE IT
+A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.
+IF IT NEVER DOES
+The lesson stays exactly as it is: measurement shown, no mark. That is a legitimate permanent resting state, not a failure — but we do not declare it permanent, because the camera CAN see these joints. What is missing is consensus, not sight.
+Elbow tracking is not wired into this build yet — only trunk posture measures live today. The text above is real; the live number is not, so we are not showing one.
+[RichText] ‹
+[RichText] MEASURED · NOT MARKED
+[RichText] Holding the guitar — measured, never graded
+[RichText] 4 MIN · GUITAR
+[RichText] YOUR ELBOW ANGLE, WHEN THIS IS LIVE
+[RichText] 0°
+[RichText] 39–105°
+[RichText] 120°
+[RichText] You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against.
+[RichText] WHY THERE IS NO MARK
+[RichText] The elbows and forearms of the teachers in our reference spread across 39 to 105 degrees. A tolerance built from that spread would call almost nothing an error, and a tighter one would call ordinary style an error.
+[RichText] WHAT WOULD CHANGE IT
+[RichText] A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.
+[RichText] IF IT NEVER DOES
+[RichText] The lesson stays exactly as it is: measurement shown, no mark. That is a legitimate permanent resting state, not a failure — but we do not declare it permanent, because the camera CAN see these joints. What is missing is consensus, not sight.
+[RichText] 
+[RichText] Elbow tracking is not wired into this build yet — only trunk posture measures live today. The text above is real; the live number is not, so we are not showing one.
