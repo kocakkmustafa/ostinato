@@ -217,12 +217,21 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
                       icon: '✕',
                       semanticLabel: 'Stop session',
                       onTap: _stop),
-                  Column(children: <Widget>[
-                    Text(widget.lesson.displayName,
-                        style: hankenText(size: 13.5, weight: FontWeight.w500)),
-                    const SizedBox(height: 3),
-                    Text(_clock(), style: monoText()),
-                  ]),
+                  // `lesson.displayName` GERÇEK içerikte 34 karaktere kadar
+                  // çıkıyor ("How much teachers actually differ") — Expanded
+                  // olmadan sabit-genişlikli iki komşusu arasında RenderFlex
+                  // taştı (375pt'te ölçüldü, test/real_content_overflow_test.dart).
+                  Expanded(
+                    child: Column(children: <Widget>[
+                      Text(widget.lesson.displayName,
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: hankenText(size: 13.5, weight: FontWeight.w500)),
+                      const SizedBox(height: 3),
+                      Text(_clock(), style: monoText()),
+                    ]),
+                  ),
                   const SizedBox(width: 38, height: 38),
                 ],
               ),

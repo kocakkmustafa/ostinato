@@ -6,6 +6,11 @@ import '../design/widgets.dart';
 /// Ayarlar — statik dürüstlük beyanları. Çocuk rejimi BİLEREK YOK:
 /// kurucu kararı gelmedi, tasarım paneli de bunu KASITLI kapsam-dışı
 /// bıraktı (§17 "sorulursa koordinatöre gelir" — burada icat edilmedi).
+// PLACEHOLDER(flow): çocuk rejimi (ayrı akış/izin/UI) bu ekranda YOK —
+// unblocked by: kurucu ürün kararı (tasarlanıp tasarlanmayacağı bile
+// henüz KARARLAŞTIRILMADI, bu yüzden burada bir toggle/iskele de YOK —
+// var olmayan bir karara sahte bir yer tutucu inşa etmek kendisi bir
+// taklit olurdu).
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 

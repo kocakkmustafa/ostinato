@@ -122,10 +122,16 @@ class InstrumentScreenRoute extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Text(c.displayName,
-                                          style: hankenText(
-                                              size: 19,
-                                              weight: FontWeight.w600)),
+                                      // Bugün "Foundations" (kısa) ama sabit
+                                      // genişlikli chevron'un yanında Expanded
+                                      // olmadan aynı taşma sınıfı bekliyor
+                                      // (bkz. live_screen.dart başlık düzeltmesi).
+                                      Expanded(
+                                        child: Text(c.displayName,
+                                            style: hankenText(
+                                                size: 19,
+                                                weight: FontWeight.w600)),
+                                      ),
                                       const Icon(Icons.chevron_right,
                                           color: OstinatoColors.textFaint),
                                     ],

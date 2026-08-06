@@ -356,6 +356,12 @@ class _Skeleton extends StatelessWidget {
       );
 }
 
+// PLACEHOLDER(flow): oda gürültü-tabanı yakalama adımı KAPALI — tasarım
+// 3-5sn sessizlik ölçen bir kalibrasyon gösterir, bu ekran onun yerine
+// dürüst bir "henüz yok" kartı gösterir (aşağıda). unblocked by: gerçek
+// bir mikrofon-giriş eklentisi `ostinato_audio`nun var olan
+// `AudioConfidenceGate`ine bağlanıp bu ekranın state machine'ine
+// (_Stage.room) gerçek bir örnekleme/geri-sayım aşaması eklenince.
 class _RoomGapNotice extends StatelessWidget {
   const _RoomGapNotice({required this.onContinue});
   final VoidCallback onContinue;

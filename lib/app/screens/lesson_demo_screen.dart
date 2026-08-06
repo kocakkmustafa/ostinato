@@ -133,6 +133,13 @@ class LessonDemoScreenRoute extends StatelessWidget {
                   color: const Color(0x0D2A2533),
                   borderRadius: BorderRadius.circular(16),
                 ),
+                // PLACEHOLDER(data): bu kart canlı dirsek/önkol açısı
+                // GÖSTERMEZ, yalnız statik ArmRangeHint (öğretmen aralığı)
+                // gösterir — unblocked by: motion_core'daki
+                // StandardJoints.leftElbow/rightElbow CameraPostureAdapter'a
+                // bağlanıp gerçek zamanlı bir açı üretilince (aynı sınır:
+                // widgets.dart içindeki SkeletonFigurePainter dirsek/bilek
+                // noktaları).
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[

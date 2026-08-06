@@ -144,9 +144,14 @@ class _InstrumentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(discipline.displayName,
-                      style: hankenText(
-                          size: 22, weight: FontWeight.w600, color: hue.ink)),
+                  // Bugün "Guitar/Voice/Piano" (kısa) ama sabit genişlikli
+                  // chevron'un yanında Expanded olmadan aynı taşma sınıfı
+                  // bekliyor (bkz. live_screen.dart başlık düzeltmesi).
+                  Expanded(
+                    child: Text(discipline.displayName,
+                        style: hankenText(
+                            size: 22, weight: FontWeight.w600, color: hue.ink)),
+                  ),
                   Icon(Icons.chevron_right, color: hue.ink.withValues(alpha: .6)),
                 ],
               ),

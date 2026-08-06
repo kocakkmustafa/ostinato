@@ -140,6 +140,12 @@ class SkeletonFigurePainter extends CustomPainter {
     const Offset neck = Offset(100, 78);
     const Offset ls = Offset(72, 92), rs = Offset(128, 92);
     Offset lh = const Offset(82, 200), rh = const Offset(118, 200);
+    // PLACEHOLDER(asset): dirsek/bilek noktaları SABİT — yalnız gövdeyle
+    // birlikte rijit döner (tiltDeg), kendi açılarıyla POZLANMAZ. Motor
+    // dirsek açısını GERÇEKTEN ölçüyor (bkz. lesson_demo_screen.dart aynı
+    // sınır) ama bu render'a hiç bağlanmadı — unblocked by: motion_core
+    // StandardJoints.leftElbow/rightElbow canlı zincire bağlanıp bu iki
+    // nokta tiltDeg'den bağımsız kendi ölçülen açısıyla döndürülünce.
     const Offset le = Offset(56, 142), re = Offset(144, 142);
     const Offset lw = Offset(76, 180), rw = Offset(124, 180);
 
