@@ -154,8 +154,11 @@ class LessonDemoScreenRoute extends StatelessWidget {
                         size: 18, color: OstinatoColors.textMuted),
                     const SizedBox(width: 10),
                     Expanded(
+                      // DÜZELTME (koordinatör, 2026-08-06, M-F-186): "yet"
+                      // çıkarıldı — bir zaman taahhüdüydü. Kalan cümle
+                      // bugünün OLGUSUNU söylüyor, gelecek vaat etmiyor.
                       child: Text(
-                        'Elbow tracking is not wired into this build yet — '
+                        'Elbow tracking is not wired into this build — '
                         'only trunk posture measures live today. The text '
                         'above is real; the live number is not, so we are '
                         'not showing one.',

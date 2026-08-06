@@ -95,9 +95,17 @@ class LessonScoredScreenRoute extends StatelessWidget {
                       // omuz+boyun) beş noktasıyla YAN YANA okununca dar
                       // görünebilirdi — dört tanesi (dirsek/bilek) neden
                       // KESİKLİ olduğunu bu cümle olmadan açıklamıyordu.
+                      //
+                      // DÜZELTME (koordinatör, 2026-08-06): ilk metin "not
+                      // tracked YET" diyordu — M-F-186 vaat dili ihlali
+                      // ("yet" bir zaman taahhüdü) VE yanlış: kollar
+                      // ÖLÇÜLÜYOR (demoOnly ders gösteriyor), izlenmeyen
+                      // ölçüm değil bu FİGÜR. "Şu an" olguyu söylüyor,
+                      // gelecek zaman kipi yok.
                       Text(
                         'The solid points are what this figure tracks; the '
-                        'dashed arms are shown for shape, not tracked yet.',
+                        'dashed arms are shown for shape — this figure '
+                        'follows your trunk.',
                         style: hankenText(
                             size: 11.5, color: OstinatoColors.textFaint),
                       ),

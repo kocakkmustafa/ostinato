@@ -13,7 +13,7 @@ WHAT WOULD CHANGE IT
 A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.
 IF IT NEVER DOES
 The lesson stays exactly as it is: measurement shown, no mark. That is a legitimate permanent resting state, not a failure — but we do not declare it permanent, because the camera CAN see these joints. What is missing is consensus, not sight.
-Elbow tracking is not wired into this build yet — only trunk posture measures live today. The text above is real; the live number is not, so we are not showing one.
+Elbow tracking is not wired into this build — only trunk posture measures live today. The text above is real; the live number is not, so we are not showing one.
 [RichText] ‹
 [RichText] MEASURED · NOT MARKED
 [RichText] Holding the guitar — measured, never graded
@@ -30,4 +30,4 @@ Elbow tracking is not wired into this build yet — only trunk posture measures 
 [RichText] IF IT NEVER DOES
 [RichText] The lesson stays exactly as it is: measurement shown, no mark. That is a legitimate permanent resting state, not a failure — but we do not declare it permanent, because the camera CAN see these joints. What is missing is consensus, not sight.
 [RichText] 
-[RichText] Elbow tracking is not wired into this build yet — only trunk posture measures live today. The text above is real; the live number is not, so we are not showing one.
+[RichText] Elbow tracking is not wired into this build — only trunk posture measures live today. The text above is real; the live number is not, so we are not showing one.

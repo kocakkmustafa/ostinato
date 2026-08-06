@@ -206,10 +206,13 @@ class ReviewScreenRoute extends StatelessWidget {
                   color: const Color(0x0D2A2533),
                   borderRadius: BorderRadius.circular(16),
                 ),
+                // DÜZELTME (koordinatör, 2026-08-06, M-F-186): "yet"
+                // çıkarıldı — bir zaman taahhüdüydü. Kalan cümle bugünün
+                // OLGUSUNU söylüyor, gelecek vaat etmiyor.
                 child: Text(
                   'Sharing a skeleton-render report is not wired in this '
                   'build. Raw video never leaves this device either way — '
-                  'there is simply no report to send yet.',
+                  'there is simply no report to send.',
                   key: const Key('review-sharing-gap-note'),
                   style: hankenText(size: 12.5, color: OstinatoColors.textMuted),
                 ),
