@@ -41,7 +41,7 @@
      "displayName": "Foundations",
      "level": "beginner",
      "goal": "Set up your space, sit correctly, and learn to hear when you're playing the right open chord.",
-     "estimatedMinutes": 43,
+     "estimatedMinutes": 61,
      "lessons": [
       {
        "id": "guitar.foundations.camera_space",
@@ -127,6 +127,34 @@
        "minutes": 15,
        "status": "locked",
        "lockedReason": "Chord recognition has only been proven on synthetic audio (8/8 chords, zero false judgements) — it has never been tested on a real guitar recording. Synthetic tones have no body resonance, no string buzz and no overlapping decay, which are exactly the things that break a chord classifier. We won't grade you against a measurement we haven't confirmed on a real instrument."
+      },
+      {
+       "id": "guitar.foundations.light_and_frame",
+       "displayName": "Light, distance, and when we refuse",
+       "techniques": [],
+       "focus": "setup",
+       "minutes": 4,
+       "_why_unlocked": "OLCUM IDDIASI YOK — saf yonerge dersi (camera_space ile ayni sinif). Hicbir metrige, referansa veya kapiya bagli degil. Icerigi UYDURULMADI: setup_check_screen.dart'in GERCEK asamalarini (framingError · lowLight · ok) ve onlarin ekranda yazili gerekcelerini anlatir — yani kullanicinin zaten karsilasacagi davranisin izahi."
+      },
+      {
+       "id": "guitar.foundations.strum_timing",
+       "displayName": "Strumming in time",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 8,
+       "status": "locked",
+       "lockedReason": "Blocked twice over, and either block alone would be enough. First: a strum is one gesture that produces six near-simultaneous note attacks, and the step that maps those attacks onto a single chord event does not exist. Second: even with that step built, we have no teacher data on how far off the beat counts as a mistake for strumming — so there would be nothing to compare you against. We will not open this on a number we invented.",
+       "_why_locked_source": "guitar.comingSoonInThisDiscipline[0] + honesty.notMeasured (strum timing). Bu ders YENI bir iddia getirmiyor, var olan iki adli engeli kendi sayfasina cikariyor."
+      },
+      {
+       "id": "guitar.foundations.chords_beyond_eight",
+       "displayName": "Chords outside the eight",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 6,
+       "status": "locked",
+       "lockedReason": "This course teaches eight open chords, and the engine now refuses anything else by name. It did not always. Until 2026-08-04 a played Bb came back as 'Dm' in 28 of 29 windows — confidently — because the engine was only allowed to consider the eight chords of the drill, so the nearest of the eight always won. It now weighs all 24 and refuses when the winner is not one this lesson teaches. Opening a lesson on the other sixteen would mean grading you against a recogniser we have not measured on them.",
+       "_why_locked_source": "guitar.honesty.notMeasured (Bb->Dm, 28/29 pencere). Sayilar SATIRDAN alindi, yeniden olculmedi."
       }
      ]
     }
@@ -167,7 +195,7 @@
      "displayName": "Foundations",
      "level": "beginner",
      "goal": "Set up your space and learn to hold yourself the way experienced singing teachers do — standing and singing.",
-     "estimatedMinutes": 32,
+     "estimatedMinutes": 47,
      "lessons": [
       {
        "id": "voice.foundations.camera_space",
@@ -243,6 +271,34 @@
        },
        "_why_not_permanent": "M-F-245 sozlugu: `permanent` KAMERANIN GOREMEDIGI kalite boyutu icindir. Kol acilarini kamera GORUYOR ve olcuyoruz — eksik olan uzlasi. Bunu `permanent` ilan etmek, olcum bosluguyla kategori farkini karistirmak olurdu (kamera-korlugu != uzlasi-yoklugu).",
        "_why_not_locked": "Kilitli ders hicbir yuzey tasimaz; oysa bu olcum GERCEKTEN yapiliyor ve durustluk kutusu kullaniciya zaten 'gosteriyoruz ama puanlamiyoruz' diyor. Kilitlemek, yaptigimiz olcumu saklamak olurdu."
+      },
+      {
+       "id": "voice.foundations.light_and_frame",
+       "displayName": "Light, distance, and when we refuse",
+       "techniques": [],
+       "focus": "setup",
+       "minutes": 4,
+       "_why_unlocked": "OLCUM IDDIASI YOK — saf yonerge dersi (camera_space ile ayni sinif). Hicbir metrige, referansa veya kapiya bagli degil. Icerigi UYDURULMADI: setup_check_screen.dart'in GERCEK asamalarini (framingError · lowLight · ok) ve onlarin ekranda yazili gerekcelerini anlatir — yani kullanicinin zaten karsilasacagi davranisin izahi."
+      },
+      {
+       "id": "voice.foundations.vibrato",
+       "displayName": "Vibrato",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 6,
+       "status": "locked",
+       "lockedReason": "Vibrato is measured and never judged, and the reason is not a missing tool. We have no teacher data on what rate is 'right'. Inventing a number here would be a guess dressed as a measurement — the one thing this app is built not to do. The lesson opens when a reference exists, not when the engine improves.",
+       "_why_locked_source": "voice.honesty.notMeasured (vibrato) + comingSoonInThisDiscipline[1]. Ikisi de ayni engeli soyluyor: eksik olan ALET degil REFERANS."
+      },
+      {
+       "id": "voice.foundations.knees_and_chin",
+       "displayName": "Locked knees and a lifted chin",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 5,
+       "status": "locked",
+       "lockedReason": "These are the two posture mistakes singing teachers actually name, and we cannot see either one. Our reference is built from teaching footage filmed waist-up: it carries no head landmark and knees are usually not in frame at all. So a lifted chin has nothing to be lifted relative to, and locked knees are outside the picture. This is blocked on a new harvest — footage that includes those landmarks — not on a new threshold.",
+       "_why_locked_source": "voice.honesty.notMeasured (waist-up, no head landmark) + comingSoonInThisDiscipline[0] ('new harvest, not a new threshold')."
       }
      ]
     }
@@ -283,7 +339,7 @@
      "displayName": "Foundations",
      "level": "beginner",
      "goal": "Set up your space and learn to sit at the keyboard the way experienced teachers sit.",
-     "estimatedMinutes": 32,
+     "estimatedMinutes": 47,
      "lessons": [
       {
        "id": "piano.foundations.camera_space",
@@ -360,6 +416,34 @@
        },
        "_why_not_permanent": "M-F-245 sozlugu: `permanent` KAMERANIN GOREMEDIGI kalite boyutu icindir. Kol acilarini kamera GORUYOR ve olcuyoruz — eksik olan uzlasi. Bunu `permanent` ilan etmek, olcum bosluguyla kategori farkini karistirmak olurdu (kamera-korlugu != uzlasi-yoklugu).",
        "_why_not_locked": "Kilitli ders hicbir yuzey tasimaz; oysa bu olcum GERCEKTEN yapiliyor ve durustluk kutusu kullaniciya zaten 'gosteriyoruz ama puanlamiyoruz' diyor. Kilitlemek, yaptigimiz olcumu saklamak olurdu."
+      },
+      {
+       "id": "piano.foundations.light_and_frame",
+       "displayName": "Light, distance, and when we refuse",
+       "techniques": [],
+       "focus": "setup",
+       "minutes": 4,
+       "_why_unlocked": "OLCUM IDDIASI YOK — saf yonerge dersi (camera_space ile ayni sinif). Hicbir metrige, referansa veya kapiya bagli degil. Icerigi UYDURULMADI: setup_check_screen.dart'in GERCEK asamalarini (framingError · lowLight · ok) ve onlarin ekranda yazili gerekcelerini anlatir — yani kullanicinin zaten karsilasacagi davranisin izahi."
+      },
+      {
+       "id": "piano.foundations.shoulder_tension",
+       "displayName": "Shoulder tension",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 5,
+       "status": "locked",
+       "lockedReason": "This is the mistake piano teachers name most often — five independent channels raise it. We can see your shoulders, and that is exactly why we will not judge them: 'shoulders rising toward the ears' is a HEIGHT, and what we measure is an ANGLE. On top of that our three teachers' own shoulder angles differ by 24 degrees on one side and 5 on the other, so there is no agreed position to compare you to. Naming it would be guessing with a measurement in hand.",
+       "_why_locked_source": "piano.honesty.notMeasured (shoulder tension, 5 kanal, 24 vs 5 derece) + comingSoonInThisDiscipline[2] ('needs a shoulder-height metric we do not have')."
+      },
+      {
+       "id": "piano.foundations.hands_and_wrists",
+       "displayName": "Wrists, fingers, hand shape",
+       "techniques": [],
+       "focus": "posture",
+       "minutes": 6,
+       "status": "locked",
+       "lockedReason": "We have no hand or finger landmarks at all — only body joints. Every hand-related mistake in our error library is blocked on that missing tool, not on a missing threshold, and the difference matters: a threshold can be measured from teachers, a missing landmark cannot. Until the model reads hands, a collapsed wrist and a good one look identical to this app.",
+       "_why_locked_source": "piano.honesty.notMeasured (wrists/fingers, 'blocked on that missing tool') + comingSoonInThisDiscipline[1]."
       }
      ]
     }
