@@ -2,12 +2,11 @@
 
 `python3 tools/gen_placeholder_register.py` ile üretilir. Kaynak: `lib/**/*.dart`taki `PLACEHOLDER(kategori): ... — unblocked by: ...` işaretleri + `assets/content/library.json`daki `locked`/`demoOnly` dersler. Bu dosyayı ELLE DÜZENLEME — kaynağı düzenle, betiği koş.
 
-**Toplam: 11 kalem.**
+**Toplam: 10 kalem.**
 
-## asset — görsel/foto (1)
+## asset — görsel/foto (0)
 
-- **`lib/app/design/widgets.dart:143`**
-  dirsek/bilek noktaları SABİT — yalnız gövdeyle birlikte rijit döner (tiltDeg), kendi açılarıyla POZLANMAZ. Motor dirsek açısını GERÇEKTEN ölçüyor (bkz. lesson_demo_screen.dart aynı sınır) ama bu render'a hiç bağlanmadı — unblocked by: motion_core StandardJoints.leftElbow/rightElbow canlı zincire bağlanıp bu iki nokta tiltDeg'den bağımsız kendi ölçülen açısıyla döndürülünce.
+_Kayıtlı kalem yok._
 
 ## copy — metin (0)
 

@@ -137,25 +137,50 @@ class SkeletonFigurePainter extends CustomPainter {
     void line(Offset a, Offset b, Paint p) => canvas.drawLine(a, b, p);
     void dot(Offset c, double r, Paint p) => canvas.drawCircle(c, r, p);
 
+    // Kesikli çizgi — yalnız kol segmentleri için (aşağıya bkz.). Düz
+    // `drawLine`dan BİLEREK farklı bir çizgi STİLİ, yalnız daha soluk bir
+    // ton değil: "izleniyor" ile "izlenmiyor" arasındaki fark opaklıkla
+    // karışabilir, çizgi TÜRÜyle karışmaz.
+    void dashedLine(Offset a, Offset b, Paint p,
+        {double dash = 3.4, double gap = 3}) {
+      final double total = (b - a).distance;
+      if (total == 0) return;
+      final Offset dir = (b - a) / total;
+      double covered = 0;
+      while (covered < total) {
+        final double segEnd = math.min(covered + dash, total);
+        canvas.drawLine(a + dir * covered, a + dir * segEnd, p);
+        covered = segEnd + gap;
+      }
+    }
+
     const Offset neck = Offset(100, 78);
     const Offset ls = Offset(72, 92), rs = Offset(128, 92);
     Offset lh = const Offset(82, 200), rh = const Offset(118, 200);
-    // PLACEHOLDER(asset): dirsek/bilek noktaları SABİT — yalnız gövdeyle
-    // birlikte rijit döner (tiltDeg), kendi açılarıyla POZLANMAZ. Motor
-    // dirsek açısını GERÇEKTEN ölçüyor (bkz. lesson_demo_screen.dart aynı
-    // sınır) ama bu render'a hiç bağlanmadı — unblocked by: motion_core
-    // StandardJoints.leftElbow/rightElbow canlı zincire bağlanıp bu iki
-    // nokta tiltDeg'den bağımsız kendi ölçülen açısıyla döndürülünce.
+    // Dirsek/bilek noktaları — koordinatör hükmü (2026-08-06): gövde
+    // ÇİZGİSİ (hipMid→neck, omuz-omuz, kalça-kalça) `tiltDeg` ile CANLI
+    // döner; bu dört nokta İSE motor tarafından hiç ölçülmez, yalnız
+    // gövdeyle birlikte RİJİT taşınır. Kullanıcı gövdenin canlı döndüğünü
+    // görünce figürün TAMAMINI canlı okur — kollar SESSİZCE donuk kalırsa
+    // bu, ailenin "yokluk kendi anlatısını taşır" kuralının ihlalidir
+    // (kısmi canlılık, tam sahtelikten daha ikna edici olduğu için daha
+    // tehlikelidir). Çözüm B uygulandı: kollar KESİKLİ çizilir ve
+    // eklem-noktası (dot) TAŞIMAZ — dot bu figürde "bulunan gerçek
+    // landmark" anlamına gelir (kalça/boyun/omuz), kollar bunu hak
+    // etmiyor. Canlı dirsek-açısı ölçümü hâlâ YOK (bkz.
+    // lesson_demo_screen.dart aynı sınır, `data` kaydı) — o gelirse Çözüm
+    // A'ya (gerçek açıyla pozlamak) geçilir; o güne dek bu render kendi
+    // yokluğunu SÖYLER, gizlemez.
     const Offset le = Offset(56, 142), re = Offset(144, 142);
     const Offset lw = Offset(76, 180), rw = Offset(124, 180);
 
     line(_hipMid, neck, limb);
     line(ls, rs, limb);
     line(lh, rh, limb);
-    line(ls, le, limbFaint);
-    line(le, lw, limbFaint);
-    line(rs, re, limbFaint);
-    line(re, rw, limbFaint);
+    dashedLine(ls, le, limbFaint);
+    dashedLine(le, lw, limbFaint);
+    dashedLine(rs, re, limbFaint);
+    dashedLine(re, rw, limbFaint);
 
     final Paint hipPaint = dim
         ? (Paint()
@@ -174,10 +199,9 @@ class SkeletonFigurePainter extends CustomPainter {
     dot(neck, 4.4, Paint()..color = color);
     dot(ls, 4.4, Paint()..color = color);
     dot(rs, 4.4, Paint()..color = color);
-    dot(le, 3.6, Paint()..color = color.withValues(alpha: .55));
-    dot(re, 3.6, Paint()..color = color.withValues(alpha: .55));
-    dot(lw, 3.6, Paint()..color = color.withValues(alpha: .55));
-    dot(rw, 3.6, Paint()..color = color.withValues(alpha: .55));
+    // Dirsek/bilek landmark NOKTASI taşımaz (bkz. yukarıdaki şerh) — bir
+    // dot bu figürde "burada gerçek bir nokta bulundu" der, kollar için
+    // bu doğru değil.
 
     canvas.restore();
   }
