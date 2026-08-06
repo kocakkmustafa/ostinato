@@ -2,7 +2,7 @@
 
 `python3 tools/gen_placeholder_register.py` ile üretilir. Kaynak: `lib/**/*.dart`taki `PLACEHOLDER(kategori): ... — unblocked by: ...` işaretleri + `assets/content/library.json`daki `locked`/`demoOnly` dersler. Bu dosyayı ELLE DÜZENLEME — kaynağı düzenle, betiği koş.
 
-**Toplam: 10 kalem.**
+**Toplam: 11 kalem.**
 
 ## asset — görsel/foto (0)
 
@@ -31,8 +31,10 @@ _Kayıtlı kalem yok._
 - **`library.json: piano.foundations.arms`**
   You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against. unblocked by: A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.
 
-## flow — kapalı adım (2)
+## flow — kapalı adım (3)
 
+- **`lib/app/screens/onboarding_screen.dart:33`**
+  yaş bandı / vasi onayı (O4) — bu akışta YOK. unblocked by: çocuk rejiminin tasarlanıp tasarlanmayacağına dair kurucu kararı; karar "evet" olursa kapı BURAYA girer (karşılamadan sonra, kütüphaneden önce), çünkü akışı durdurabilecek tek nokta burasıdır.
 - **`lib/app/screens/settings_screen.dart:9`**
   çocuk rejimi (ayrı akış/izin/UI) bu ekranda YOK — unblocked by: kurucu ürün kararı (tasarlanıp tasarlanmayacağı bile henüz KARARLAŞTIRILMADI, bu yüzden burada bir toggle/iskele de YOK — var olmayan bir karara sahte bir yer tutucu inşa etmek kendisi bir taklit olurdu).
 - **`lib/app/screens/setup_check_screen.dart:359`**

@@ -1,0 +1,438 @@
+import 'package:flutter/material.dart';
+
+import '../content.dart';
+import '../design/ostinato_theme.dart';
+import '../design/widgets.dart';
+import '../onboarding_store.dart';
+
+/// İlk açılış — UI-BRIEF §2.1'den TÜRETİLDİ (icat edilmedi).
+///
+/// Brief dört adım tarif eder (O1 karşılama · O2 çalgı seçimi · O3 izinler ·
+/// O4 yaş/vasi). Bu ekran ÜÇ taşır ve ikisini bilerek başka türlü çözer:
+///
+/// • **O2 (çalgı seçimi) burada YOK.** Brief onu "3 canlı + 39 çalgı yakında"
+///   diye tarif ediyordu; o satırın kendisi süperseded (UI-BRIEF §4 uyarısı) ve
+///   "39 çalgı yakında" bugün doğrudan M-F-186 ihlali olurdu. Üstelik seçim
+///   ZATEN var: Kütüphane ekranı üç canlı çalgıyı kart olarak gösteriyor.
+///   İlk açılışta bir seçim DAYATMAK, kullanıcıyı henüz okumadığı bir şey
+///   hakkında karar vermeye zorlar ve arkasından aynı listeyi bir kez daha
+///   gösterir. Karşılama BİTER, kütüphane AÇILIR — seçim orada.
+///
+/// • **O4 (yaş bandı / vasi onayı) burada YOK — adlı boşluk.** Çocuk rejiminin
+///   TASARLANIP tasarlanmayacağı bile kurucu kararı değil bir açık soru
+///   (`settings_screen.dart` aynı sınırı taşıyor). Var olmayan bir karara
+///   yaş kapısı inşa etmek, kararı sessizce vermek olurdu.
+///
+/// • **İzin BURADA İSTENMEZ, burada AÇIKLANIR.** Gerekçe: kamerayı gerçekten
+///   isteyen tek yer Kurulum Kontrolü'dür (`requestAndStartCamera`), ve o
+///   istek zaten orada. İlk açılışta ikinci bir istek yolu açmak (a) iki
+///   yolun zamanla ayrışacağı bir çatal yaratır, (b) kullanıcı reddederse onu
+///   kütüphaneyi HİÇ görmeden bir çıkmaz sokağa oturtur. Bu ekran "neden
+///   isteyeceğiz"i sistem diyaloğundan ÖNCE söyler — brief'in istediği de
+///   buydu ("NEDEN gerektiği tek cümle, izin isteğinden ÖNCE").
+// PLACEHOLDER(flow): yaş bandı / vasi onayı (O4) — bu akışta YOK. unblocked
+// by: çocuk rejiminin tasarlanıp tasarlanmayacağına dair kurucu kararı;
+// karar "evet" olursa kapı BURAYA girer (karşılamadan sonra, kütüphaneden
+// önce), çünkü akışı durdurabilecek tek nokta burasıdır.
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({
+    super.key,
+    required this.repo,
+    required this.store,
+    required this.onFinished,
+  });
+
+  final ContentRepository repo;
+  final OnboardingStore store;
+  final VoidCallback onFinished;
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _pages = PageController();
+  int _index = 0;
+
+  static const int _stepCount = 3;
+
+  @override
+  void dispose() {
+    _pages.dispose();
+    super.dispose();
+  }
+
+  void _next() {
+    if (_index < _stepCount - 1) {
+      _pages.animateToPage(
+        _index + 1,
+        duration: const Duration(milliseconds: 320),
+        curve: Curves.easeOutCubic,
+      );
+    } else {
+      _finish();
+    }
+  }
+
+  Future<void> _finish() async {
+    await widget.store.markComplete();
+    if (!mounted) return;
+    widget.onFinished();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final _LibraryFacts facts = _LibraryFacts.from(widget.repo);
+    return Scaffold(
+      backgroundColor: OstinatoColors.shell,
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: RadialGradient(
+            center: Alignment(-0.7, -1),
+            radius: 1.2,
+            colors: <Color>[Color(0x8CDACDF6), Colors.transparent],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 12),
+              _MetronomeProgress(index: _index, count: _stepCount),
+              Expanded(
+                child: PageView(
+                  controller: _pages,
+                  onPageChanged: (int i) => setState(() => _index = i),
+                  children: <Widget>[
+                    const _WelcomeStep(),
+                    _ScopeStep(facts: facts),
+                    const _SensorsStep(),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 6, 20, 18),
+                child: PrimaryButton(
+                  key: const Key('onboarding-primary'),
+                  label: _index == _stepCount - 1
+                      ? 'Open the library'
+                      : 'Continue',
+                  onPressed: _next,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Kütüphaneden OKUNAN sayılar — bu ekranda elle yazılmış TEK bir içerik
+/// sayısı yoktur. Bir ders eklendiğinde/kilitlendiğinde karşılama ekranı
+/// kendiliğinden doğru kalır; elle yazsaydık ilk içerik turunda bayatlardı
+/// (O-029'un "vitrin korumasızdı" sınıfı).
+final class _LibraryFacts {
+  const _LibraryFacts({
+    required this.instruments,
+    required this.lessons,
+    required this.locked,
+    required this.demoOnly,
+  });
+
+  final int instruments;
+  final int lessons;
+  final int locked;
+  final int demoOnly;
+
+  static _LibraryFacts from(ContentRepository repo) {
+    final List<Discipline> live =
+        repo.disciplines.where((Discipline d) => d.status == 'live').toList();
+    final List<Lesson> all =
+        <Lesson>[for (final Discipline d in live) ...d.lessons];
+    return _LibraryFacts(
+      instruments: live.length,
+      lessons: all.length,
+      locked: all.where((Lesson l) => l.kind == LessonKind.locked).length,
+      demoOnly: all.where((Lesson l) => l.kind == LessonKind.demoOnly).length,
+    );
+  }
+}
+
+/// Metronomik ilerleme — üç kısa dikey çubuk, aktif olan uzun. Sayı
+/// göstermez: bu bir ölçüm değil, bir konum.
+class _MetronomeProgress extends StatelessWidget {
+  const _MetronomeProgress({required this.index, required this.count});
+  final int index;
+  final int count;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+        label: 'Step ${index + 1} of $count',
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            for (int i = 0; i < count; i++) ...<Widget>[
+              if (i > 0) const SizedBox(width: 7),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 280),
+                curve: Curves.easeOutCubic,
+                width: 3,
+                height: i == index ? 18 : 9,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  color: i <= index
+                      ? OstinatoColors.ink
+                      : const Color(0x2E2A2533),
+                ),
+              ),
+            ],
+          ],
+        ),
+      );
+}
+
+/// Ortak sayfa iskeleti — içerik HER ZAMAN kaydırılabilir.
+///
+/// Bu bir stil tercihi değil, aile dersi #3'ün yapısal hâli: gerçek metin
+/// fixture'dan uzun ve `flutter_test` varsayılan yüzeyi gerçek telefonun iki
+/// katı. Sabit yükseklikli bir sayfa 375×812'de taşar ve taşma en dar cihazda
+/// görülür. Kaydırılabilir bir sayfa TAŞAMAZ — punto ayarlayarak değil, taşma
+/// sınıfını kaldırarak çözülür (ders #7).
+class _Step extends StatelessWidget {
+  const _Step({required this.children, this.top});
+  final List<Widget> children;
+  final Widget? top;
+
+  @override
+  Widget build(BuildContext context) => SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(20, 18, 20, 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            if (top != null) ...<Widget>[top!, const SizedBox(height: 22)],
+            ...children,
+          ],
+        ),
+      );
+}
+
+class _WelcomeStep extends StatelessWidget {
+  const _WelcomeStep();
+
+  @override
+  Widget build(BuildContext context) => _Step(
+        top: Center(
+          child: SizedBox(
+            width: 150,
+            height: 178,
+            // Karşılamanın görseli bir ikon DEĞİL, ürünün asıl iddiası:
+            // arkadaki kama eğitmen BANDI, kesik çizgi bir konum. "Bant,
+            // nokta değil" cümlesi burada çiziliyor. Açılar temsilîdir ve
+            // hüküm taşımaz — bu yüzden yanında bir sayı yoktur.
+            child: CustomPaint(
+              painter: SkeletonFigurePainter(
+                bandLowDeg: -7,
+                bandHighDeg: 7,
+                bandColor: const Color(0x385F4CA0),
+                markerDeg: 3.5,
+              ),
+            ),
+          ),
+        ),
+        children: <Widget>[
+          kicker('Welcome'),
+          const SizedBox(height: 10),
+          Text('Measured, not chosen.',
+              key: const Key('onboarding-welcome-title'),
+              style: hankenText(size: 30, weight: FontWeight.w600, height: 1.1)),
+          const SizedBox(height: 12),
+          Text(
+            'Put your phone where it can see you. Ostinato compares how you '
+            'sit to how real teachers sit — and shows you where you land '
+            'inside the spread they agree on.',
+            style: hankenText(
+                size: 15, height: 1.55, color: OstinatoColors.textBody),
+          ),
+          const SizedBox(height: 14),
+          GlassCard(
+            borderRadius: 18,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Text(
+              'Correct posture is a band, not a point. That is why you will '
+              'never see a score out of ten here: we can tell you where you '
+              'are inside the teachers’ range, and we cannot honestly turn '
+              'that into a number.',
+              style: hankenText(
+                  size: 13.5, height: 1.55, color: OstinatoColors.textBody),
+            ),
+          ),
+        ],
+      );
+}
+
+class _ScopeStep extends StatelessWidget {
+  const _ScopeStep({required this.facts});
+  final _LibraryFacts facts;
+
+  @override
+  Widget build(BuildContext context) => _Step(
+        children: <Widget>[
+          kicker('What is here'),
+          const SizedBox(height: 10),
+          Text('Small, and honest about it.',
+              key: const Key('onboarding-scope-title'),
+              style: hankenText(size: 28, weight: FontWeight.w600, height: 1.12)),
+          const SizedBox(height: 14),
+          _FactRow(
+            key: const Key('onboarding-fact-instruments'),
+            value: '${facts.instruments}',
+            label: 'instruments, each built on posture footage from real '
+                'teachers who agree with each other',
+          ),
+          _FactRow(
+            key: const Key('onboarding-fact-lessons'),
+            value: '${facts.lessons}',
+            label: 'lessons across them',
+          ),
+          _FactRow(
+            key: const Key('onboarding-fact-locked'),
+            value: '${facts.locked}',
+            label: 'of those are locked. You can open every one of them and '
+                'read exactly which measurement it is waiting on',
+          ),
+          _FactRow(
+            key: const Key('onboarding-fact-demo'),
+            value: '${facts.demoOnly}',
+            label: 'are measured but never graded — the teachers disagree '
+                'too much for a judgement to mean anything',
+          ),
+          const SizedBox(height: 8),
+          GlassCard(
+            borderRadius: 18,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Text(
+              'Every instrument page carries the full list of what we measure '
+              'and what we do not, with the reason next to each line. It is '
+              'the first thing on the page, not a footnote.',
+              style: hankenText(
+                  size: 13.5, height: 1.55, color: OstinatoColors.textBody),
+            ),
+          ),
+        ],
+      );
+}
+
+class _FactRow extends StatelessWidget {
+  const _FactRow({super.key, required this.value, required this.label});
+  final String value;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(bottom: 14),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              width: 42,
+              child: Text(value,
+                  style: hankenText(
+                      size: 26, weight: FontWeight.w600, height: 1)),
+            ),
+            const SizedBox(width: 10),
+            // Expanded ŞART: sayı sabit genişlikte, etiket gerçek metinle
+            // uzuyor. Bu satır sınıfı bu kod tabanında daha önce taştı
+            // (`library_screen.dart` başlığı, `live_screen.dart` başlığı).
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 3),
+                child: Text(label,
+                    style: hankenText(
+                        size: 13.5,
+                        height: 1.5,
+                        color: OstinatoColors.textBody)),
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+class _SensorsStep extends StatelessWidget {
+  const _SensorsStep();
+
+  @override
+  Widget build(BuildContext context) => _Step(
+        children: <Widget>[
+          kicker('Sensors and your data'),
+          const SizedBox(height: 10),
+          Text('What we will ask for.',
+              key: const Key('onboarding-sensors-title'),
+              style: hankenText(size: 28, weight: FontWeight.w600, height: 1.12)),
+          const SizedBox(height: 14),
+          const _SensorCard(
+            title: 'The camera',
+            key: Key('onboarding-camera-card'),
+            body: 'It reads nine upper-body points — hips, shoulders, neck. '
+                'No face: our teacher references were filmed waist-up, so we '
+                'have nothing to compare a head against. Ostinato asks for '
+                'camera access when your first setup check starts, not now, '
+                'because there is nothing to look at until then.',
+          ),
+          const SizedBox(height: 12),
+          const _SensorCard(
+            title: 'The microphone is not wired',
+            key: Key('onboarding-microphone-card'),
+            body: 'There is no microphone input in this build. No audio '
+                'permission is requested and nothing you play is captured. '
+                'Everything Ostinato judges, it judges from the camera.',
+          ),
+          const SizedBox(height: 12),
+          const _SensorCard(
+            title: 'Your video',
+            key: Key('onboarding-video-card'),
+            body: 'Raw video never leaves this device — there is no setting '
+                'that changes that. What we keep is the body angles we '
+                'measured, and the camera only runs inside a lesson.',
+          ),
+          const SizedBox(height: 12),
+          const _SensorCard(
+            title: 'Not a medical tool',
+            key: Key('onboarding-wellness-card'),
+            body: 'Ostinato describes how you are sitting compared to a set '
+                'of teachers. It does not diagnose anything, it does not '
+                'treat anything, and nothing it says is health advice. If '
+                'something hurts, that is a question for a person, not an '
+                'app.',
+          ),
+        ],
+      );
+}
+
+class _SensorCard extends StatelessWidget {
+  const _SensorCard({super.key, required this.title, required this.body});
+  final String title;
+  final String body;
+
+  @override
+  Widget build(BuildContext context) => Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: .62),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: Colors.white.withValues(alpha: .75)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            kicker(title),
+            const SizedBox(height: 9),
+            Text(body,
+                style: hankenText(
+                    size: 13.5, height: 1.55, color: OstinatoColors.textBody)),
+          ],
+        ),
+      );
+}

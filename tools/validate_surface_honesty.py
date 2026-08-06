@@ -115,6 +115,13 @@ def strip_dart_comments(src: str) -> str:
 
 STRING_LITERAL = re.compile(r"'((?:[^'\\\n]|\\.)*)'|\"((?:[^\"\\\n]|\\.)*)\"")
 
+# Widget `Key`leri, asset yolları, paket adları… — boşluksuz ve yalnız
+# tanımlayıcı karakterlerinden oluşan bir string PROZA DEĞİLDİR, kimse onu
+# okumaz. Bu bir kaçamak deliği açmaz: kullanıcıya gösterilen her cümlede
+# boşluk vardır. (Ölçüldü: `Key('onboarding-microphone-card')` yetenek
+# kuralını tetikliyordu — kural haklıydı, hedefi yanlıştı.)
+IDENTIFIER_LIKE = re.compile(r"^[A-Za-z0-9_\-./:]+$")
+
 
 def dart_surface_strings():
     """(dosya, satır, metin) — yorumlar SÖKÜLDÜKTEN sonraki string literalleri.
@@ -189,6 +196,7 @@ def main() -> int:
 
     surfaces = [(f"{f}:{ln}", t) for f, ln, t in dart_surface_strings()]
     surfaces += [(p, t) for p, t in json_surface_strings()]
+    surfaces = [(w, t) for w, t in surfaces if not IDENTIFIER_LIKE.match(t)]
 
     # ── Kural A ──
     for where, text in surfaces:
