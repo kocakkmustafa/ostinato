@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'app/content.dart';
 import 'app/cue_text.dart';
@@ -35,11 +34,9 @@ class _OstinatoAppState extends State<OstinatoApp> {
         await widget.store.isComplete(),
       ))();
 
-  static final ThemeData _theme = ThemeData(
-    colorSchemeSeed: const Color(0xFF5F4CA0),
-    scaffoldBackgroundColor: OstinatoColors.shell,
-    textTheme: GoogleFonts.hankenGroteskTextTheme(),
-  );
+  // Tema `ostinato_theme.dart`ta — kanıt üreteci de AYNI nesneyi kuruyor
+  // (O-052: temasız kanıt koşumu ham `TextStyle`ları blok glif çiziyordu).
+  static final ThemeData _theme = ostinatoTheme();
 
   @override
   Widget build(BuildContext context) {

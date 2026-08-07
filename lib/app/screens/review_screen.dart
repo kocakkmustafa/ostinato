@@ -171,9 +171,11 @@ class ReviewScreenRoute extends StatelessWidget {
                     // görünen bir sayının saydığı şeye bağlı OLMAMASI.
                     Text('${_countWord(gaps.length)} things, by name.',
                         key: const Key('review-gap-headline'),
-                        style: const TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w600,
+                        // hankenText() — ham `TextStyle` tipografi
+                        // yardımcısını ATLIYORDU (O-052).
+                        style: hankenText(
+                            size: 25,
+                            weight: FontWeight.w600,
                             color: OstinatoColors.ink)),
                     const SizedBox(height: 14),
                     for (final String g in gaps)

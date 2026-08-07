@@ -115,6 +115,10 @@ void main() {
         repo: repo,
         cueText: cueText,
         child: MaterialApp(
+          // GERÇEK tema (O-052) — temasız kurulum ham `TextStyle`ları
+          // varsayılan test yazı tipine düşürüp BLOK GLİF çiziyordu, yani
+          // kanıt karesi uygulamadan FARKLI bir şey gösteriyordu.
+          theme: ostinatoTheme(),
           home: RepaintBoundary(key: captureKey, child: child),
         ),
       );

@@ -157,6 +157,24 @@ TextStyle monoText({
       letterSpacing: letterSpacing,
     );
 
+/// Uygulamanın TEK `ThemeData`sı.
+///
+/// `main.dart`ta private bir statik olarak duruyordu ve kanıt üreteci
+/// (`tools/evidence/`) kendi `MaterialApp`ini TEMASIZ kuruyordu. Sonuç
+/// ÖLÇÜLDÜ (2026-08-07, O-052): ham `TextStyle` kullanan metin gerçek
+/// uygulamada `textTheme`den Hanken alıyor, kanıt karesinde ise varsayılan
+/// test yazı tipine düşüp BLOK GLİF olarak çiziliyordu. Yani kanıt aracı
+/// tipografide SADIK DEĞİLDİ — ve bir kanıt aracının verdiği güven,
+/// sadakati kadardır.
+///
+/// Buraya taşındı ki iki yer AYNI nesneyi kullansın; elle kopyalanan bir
+/// tema, ilk değişiklikte sessizce ayrışır.
+ThemeData ostinatoTheme() => ThemeData(
+      colorSchemeSeed: const Color(0xFF5F4CA0),
+      scaffoldBackgroundColor: OstinatoColors.shell,
+      textTheme: GoogleFonts.hankenGroteskTextTheme(),
+    );
+
 /// Bölüm başlığı — "SCREENS" / "YOUR INSTRUMENTS" tarzı mono kicker.
 Widget kicker(String text, {Color? color}) => Text(
       text.toUpperCase(),

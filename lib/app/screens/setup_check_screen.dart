@@ -432,11 +432,12 @@ class _PassedStage extends StatelessWidget {
                 // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
                 // çıkarıldı — gerekçe zaten `_RoomGapNotice`de var, burası
                 // yalnız kısa bir sonuç notu.
-                const Text(
+                Text(
                   'Your frame and the light. Room noise is not part of '
                   'this check, so nothing about your sound was '
                   'measured or saved.',
-                  style: TextStyle(height: 1.5),
+                  // O-052: ham `TextStyle` yerine tipografi yardımcısı.
+                  style: hankenText(size: 13.5, height: 1.5),
                 ),
               ],
             ),

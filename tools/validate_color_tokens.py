@@ -82,6 +82,14 @@ def strip_comments(src: str) -> str:
     return "".join(out)
 
 
+#: Ham `TextStyle(...)` — tipografi yardımcısını (`hankenText`/`monoText`)
+#: ATLAYAN kaçış yolu. Ölçüldü (O-052): iki yerde vardı ve ikisi de gerçek
+#: uygulamada `textTheme`den font alıyordu, kanıt karesinde ise varsayılana
+#: düşüyordu — yani ekranda GÖRÜNEN ile KANITLANAN ayrışıyordu. Renk için
+#: kapı kurulmuştu, tipografi için yoktu; aynı sınıf, eksik yarısı.
+RAW_TEXTSTYLE = re.compile(r"style:\s*(?:const\s+)?TextStyle\s*\(")
+
+
 def main() -> int:
     violations = []
     checked = 0
@@ -105,13 +113,26 @@ def main() -> int:
                     f"(O-049: tam olarak bu oldu). `OstinatoColors.*` kullan."
                 )
 
+    # ── Tipografi: ham TextStyle yasak (yardımcıdan geç).
+    for path in sorted(LIB.rglob("*.dart")):
+        src = strip_comments(path.read_text(encoding="utf-8"))
+        for m in RAW_TEXTSTYLE.finditer(src):
+            line = src.count("\n", 0, m.start()) + 1
+            violations.append(
+                f"{path}:{line}: ham `TextStyle(` — `hankenText()`/`monoText()` "
+                f"yardımcısını atlıyor. Yardımcıdan geçmeyen metin, temanın "
+                f"`textTheme`ine düşer: gerçek uygulamada Hanken, temasız bir "
+                f"koşumda VARSAYILAN font — yani ekranda görünen ile "
+                f"kanıtlanan ayrışır (O-052)."
+            )
+
     if violations:
-        print(f"⛔ {len(violations)} TOKEN-ATLAYAN METİN RENGİ:")
+        print(f"⛔ {len(violations)} TOKEN/TİPOGRAFİ İHLALİ:")
         for v in violations:
             print(f"   - {v}")
         return 1
-    print(f"✅ renk token kapısı TEMİZ — {checked} metin-rengi çağrısı tarandı, "
-          f"hepsi token'dan ya da çalgı kimliğinden geliyor")
+    print(f"✅ renk+tipografi token kapısı TEMİZ — {checked} metin-rengi "
+          f"çağrısı token'dan geliyor, ham `TextStyle` yok")
     return 0
 
 
