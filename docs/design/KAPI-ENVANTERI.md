@@ -51,10 +51,10 @@ Kapsam **6 → 13** olumlu alan. Ayrıca kural D **canlılık eksenine** genişl
 
 ## Envanter
 
-### 1. `validate_surface_honesty.py` — beş kural
+### 1. `validate_surface_honesty.py` — ALTI kural
 **Ölçtüğü:** kullanıcının okuduğu her metin (`lib/**.dart` literalleri + kabuğa
 giden 3 JSON varlığı) × vaat dili · yetenek↔izin · olumlu iddia ↔ ses ·
-skor/canlılık ekseni · saklama iddiası.
+skor/canlılık ekseni · saklama iddiası · **dil (F)**.
 
 | ÖLÇMEDİĞİ | kanıt (nasıl biliyorum) | sınıf |
 |---|---|---|
@@ -62,7 +62,7 @@ skor/canlılık ekseni · saklama iddiası.
 | **Tanımlayıcı-biçimli string'ler** (`Key`, asset yolu) | `IDENTIFIER_LIKE`; ölçüldü: `Key('onboarding-microphone-card')` kuralı tetikliyordu, hedefi yanlıştı | kapsam-dışı **karar** |
 | **Cümlenin DOĞRULUĞU** — yalnız SINIFINI ölçer | kural B "microphone" der, cümlenin gerçekten doğru olduğunu bilmez | **yöntem** |
 | **`packages/` içindeki metin** | `DART_ROOTS = ["lib"]`. ÖLÇÜLDÜ (2026-08-07): `packages/*/lib`de kullanıcı-cümlesi biçiminde string YOK — ama bu bugünün olgusu, kapı onu KOLLAMIYOR: yarın eklenirse sessizce kapsam dışı kalır | **kod** ⚠️ |
-| **Türkçe sızıntı** (genel) | bu gece İKİ kez oldu (`unblockedBy` · `gen_out_of_scope` çıktısı), ikisi de BAŞKA kurallarla ya da elle yakalandı — **dil kuralı YOK** | **kod** ⚠️ |
+| ~~Türkçe sızıntı~~ | **KAPANDI (kural F, aynı tur):** beyan edilen dil `library.json`ın `language` alanından OKUNUR (sabitlenmedi — TR yerelleştirmesi gelince kural kendini uyarlar). 241 metin kontrol ediliyor. TANI metni (`assert`/`throw`) muaf: release'te sökülür ya da framework yüzeyine düşer, `Text()`e girmez | ✅ |
 | Negatif ikiz | MUT-1/2/3 · J · N/O · Q — **6 mutasyon, hepsi ısırdı** | ✅ |
 
 ### 2. `validate_color_tokens.py` — renk + tipografi
@@ -126,9 +126,11 @@ muafiyetler kendi canlılık iddiasını ispat ediyor (O-045).
 
 ## Açık kalan kapı boşlukları (isimli)
 
-1. **Dil kuralı yok** — Türkçe metin kullanıcı yüzeyine iki kez sızdı bu gece.
-   Kapatılabilir (`kod`): kabuğa giden JSON'daki proza alanlarında Türkçeye
-   özgü harf taraması. **Yapılmadı.**
+1. ~~Dil kuralı yok~~ → **KAPANDI aynı tur (kural F).** ⚠️ Muafiyet İKİ KEZ
+   yanlış çalıştı yazılırken: karakter-konumlu geri bakış önce çok-satırlı
+   `throw`u kaçırdı, düzeltince tek-satırlık `assert`in kendi `;`sine takıldı.
+   Satır penceresine geçildi. *Muafiyet, kuralın kendisi kadar sınanmalı —
+   sessizce yarım çalışan bir muafiyet, olmayan bir kapıdır.*
 2. **`packages/` metin taraması** — bugün kullanıcı metni YOK (ölçüldü), ama
    kapı orayı kollamıyor: yarın eklenen bir cümle sessizce kapsam dışı kalır.
 3. **Metin-dışı kontrast (1.4.11)** — bant çubuğu, iskelet çizgileri, ayraçlar

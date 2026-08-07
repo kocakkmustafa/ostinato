@@ -218,6 +218,39 @@ RETENTION_WRITERS = re.compile(
     r"\.insert\(|openDatabase")
 RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
 
+# ── F: kullanıcı yüzeyi TEK DİLDİR (bugün: İngilizce) ─────────────────────
+# Bu gece İKİ kez sızdı ve ikisi de BAŞKA bir kuralın yan etkisiyle ya da
+# elle yakalandı, yani şans eseri:
+#   · `promotionPath.unblockedBy` — mikrofon şerhini Türkçe bırakmıştım
+#     (kural B "mikrofon" kelimesini gördüğü için tesadüfen çıktı)
+#   · `gen_out_of_scope.py` çıktısı — taksonominin `names[0]`ı Türkçeydi
+#     (gözle görüldü, hiçbir kapı bakmıyordu)
+# Kütüphane baştan sona İngilizce (`library.json` `language` alanı da öyle
+# diyor). Türkçe bir cümle İngilizce konuşan kullanıcıya GİDER ve hiçbir
+# testi kırmaz — sessiz, ama kullanıcı için en görünür kusur sınıfı.
+#
+# ⚠️ Bu kural DİL DEĞİŞTİĞİ gün güncellenmeli: TR yerelleştirmesi geldiğinde
+# yüzey artık tek dilli olmayacak. O yüzden hangi dil olduğu `library.json`ın
+# `language` alanından OKUNUYOR, buraya sabitlenmedi.
+TURKISH_CHARS = set("ğĞşŞıİçÇ")   # ö/ü/â Fransızca-Almanca alıntılarda da geçer
+#: TANI metni — `assert(...)` ve fırlatılan hata mesajları. Bunlar hiçbir
+#: zaman `Text()`e girmez: assert release'te SÖKÜLÜR, `StateError` ise
+#: framework hata yüzeyine düşer. Bu ekip tanı metnini TÜRKÇE yazıyor ve bu
+#: DOĞRU — kural yalnız kullanıcı yüzeyini kolluyor.
+#: ⚠️ Muafiyet YALNIZ kural F için: bir tanı metninin Türkçe olması meşru,
+#: ama içinde vaat dili ya da yanlış yetenek iddiası olması yine de ölçülür.
+#: Bir literal TANI metni midir? Literalin kendi satırı ve ondan ÖNCEKİ iki
+#: satır bir tanı yapısı içeriyorsa evet. Karakter-konumlu geri bakış İKİ KEZ
+#: yanlış çalıştı (önce çok-satırlı `throw`u, sonra tek-satırlık `assert`in
+#: kendi `;`sini) — satır penceresi hem daha basit hem açıklanabilir.
+DIAGNOSTIC_LINE = re.compile(
+    r"\bassert\s*\(|\bthrow\b|\bStateError\s*\(|\bArgumentError\s*\(|"
+    r"\bUnsupportedError\s*\(|\bException\s*\(")
+
+TURKISH_WORDS = re.compile(
+    r"\b(ve|ile|için|değil|yok|var|bu|şu|olan|bir|daha|çok|gibi|ama)\b",
+    re.IGNORECASE)
+
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
 PUBSPEC = "pubspec.yaml"
@@ -383,7 +416,8 @@ def sentences(text: str):
 def main() -> int:
     violations = []
 
-    surfaces = [(f"{f}:{ln}", t) for f, ln, t in dart_surface_strings()]
+    dart_raw = list(dart_surface_strings())
+    surfaces = [(f"{f}:{ln}", t) for f, ln, t in dart_raw]
     surfaces += [(p, t) for p, t in json_surface_strings()]
     surfaces = [(w, t) for w, t in surfaces if not IDENTIFIER_LIKE.match(t)]
 
@@ -501,6 +535,36 @@ def main() -> int:
                     f"söylüyor ama kabukta ölçüm saklayan bir kod yolu YOK — "
                     f"«{sentence.strip()[:110]}»")
 
+    # ── Kural F ──
+    declared_lang = json.loads(
+        Path(LIBRARY_JSON).read_text(encoding="utf-8")).get("language", "en")
+    checked_f = 0
+    if declared_lang.startswith("en"):
+        # Tanı bağlamında duran literalleri ATLA (dosya-satır ile eşlenir).
+        diagnostic = set()
+        for f, ln, t in dart_raw:
+            src = strip_dart_comments(Path(f).read_text(encoding="utf-8"))
+            # ⚠️ `src.find(t)` KULLANILAMAZ: `t` BİTİŞİK literallerin
+            # birleşmiş hâli ve kaynakta o hâliyle geçmiyor (aradaki tırnak
+            # ve satır sonları yüzünden). Ölçüldü: `assert` tek satırlık
+            # olduğu için yakalanıyordu, çok satırlı `throw StateError(...)`
+            # kaçıyordu — muafiyet SESSİZCE yarım çalışıyordu.
+            # Konum SATIR NUMARASINDAN kuruluyor (zaten elimizde).
+            lines = src.splitlines()
+            window = "\n".join(lines[max(0, ln - 3):ln])
+            if DIAGNOSTIC_LINE.search(window):
+                diagnostic.add(f"{f}:{ln}")
+        for where, text in surfaces:
+            if " " not in text or where in diagnostic:
+                continue
+            checked_f += 1
+            if set(text) & TURKISH_CHARS or TURKISH_WORDS.search(text):
+                violations.append(
+                    f"[dil] {where}: kullanıcı yüzeyi TÜRKÇE görünüyor ama "
+                    f"beyan edilen dil {declared_lang!r} — İngilizce konuşan "
+                    f"kullanıcıya gider ve hiçbir test bunu kırmaz — "
+                    f"«{text.strip()[:100]}»")
+
     if violations:
         print(f"⛔ {len(violations)} YÜZEY DÜRÜSTLÜĞÜ İHLALİ:")
         for v in violations:
@@ -512,7 +576,7 @@ def main() -> int:
           f"tarandı ({len(PROMISE_PATTERNS)} vaat deseni + "
           f"{len(CAPABILITY_RULES)} yetenek kuralı + "
           f"{checked_affirmative} olumlu iddia alanı + "
-          f"{checked_d} skor-ekseni iddiası)")
+          f"{checked_d} skor-ekseni iddiası + {checked_f} dil kontrolü)")
     # KAPSAM her koşumda YAZILIR: taranmayan bir yer 'temiz' sanılamasın diye
     # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
     print(f"   kapsam: {DART_ROOTS} + kabuğa giden {len(shipped_json_assets())} "
