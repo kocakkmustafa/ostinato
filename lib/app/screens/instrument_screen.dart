@@ -153,7 +153,8 @@ class InstrumentScreenRoute extends StatelessWidget {
                           ),
                         ),
                       ),
-                    if (discipline.comingSoon.isNotEmpty) ...<Widget>[
+                    if (discipline.comingSoon.isNotEmpty ||
+                        discipline.outOfScopeDerived.isNotEmpty) ...<Widget>[
                       const SizedBox(height: 12),
                       // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
                       // çıkarıldı. Bu başlığın altındaki liste KAPSAM-DIŞI
@@ -162,7 +163,15 @@ class InstrumentScreenRoute extends StatelessWidget {
                       // etmek olurdu.
                       kicker('Not here — and why'),
                       const SizedBox(height: 10),
-                      for (final String c in discipline.comingSoon)
+                      for (final String c in <String>[
+                        ...discipline.comingSoon,
+                        // TÜRETİLEN kalemler elle yazılanlardan SONRA gelir:
+                        // ikisi ayrı sınıf ama kullanıcı için aynı soru
+                        // ("burada ne yok ve neden"), o yüzden tek başlık
+                        // altında tek liste — ayrım KAYITTA, yüzeyde bir
+                        // ayraç gürültüsü değil.
+                        ...discipline.outOfScopeDerived,
+                      ])
                         Container(
                           margin: const EdgeInsets.only(bottom: 8),
                           padding: const EdgeInsets.symmetric(

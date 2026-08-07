@@ -35,6 +35,24 @@ import 'package:ostinato_posture/ostinato_posture.dart';
 /// değil; aynı zamanda `real_content_overflow_test.dart`ın kanıtladığı
 /// genişlikle BİREBİR aynı.
 ///
+/// ⚠️ **BİR TESTTE BİR CANLI AŞAMA** (aile dersi #9'un dördüncü maddesi,
+/// JabLab J-119 yan-ürünü, koordinatör aktarımı 2026-08-07). `Timer.periodic`
+/// koşarken ikinci bir `runAsync` İLERLEMEZ; JabLab'da bu üç farklı yüzeyde
+/// üç farklı bulucuyu düşürdü ve üç kez BULUCU suçlandı. Kök neden testin
+/// koşum yapısıydı, çözüm testi BÖLMEK oldu: *"kurulumu ikinci kez yazmak,
+/// onu ikinci kez yanlış yazmaktı."*
+///
+/// Ostinato'da ÖLÇÜLDÜ (aynı gün) ve tuzak CANLI DEĞİL — ama iki bağımsız
+/// TEAMÜL sayesinde, kural sayesinde değil: (1) 04a ve 04b AYRI
+/// `testWidgets`, her birinde tek canlı aşama var; (2) her canlı pump
+/// `skipCountdown: true` kullanıyor, yani geri sayım `Timer.periodic`i
+/// testte hiç koşmuyor. `runAsync` de yalnız ortak yardımcılarda, test
+/// başına bir kez.
+///
+/// **Bu iki teamülü bozma:** tek bir `testWidgets` içinde ikinci bir canlı
+/// aşama açarsan ya da `skipCountdown`ı kaldırırsan tuzak geri gelir, ve
+/// düşen ilk şey bulucu olur — bulucuyu suçlamadan ÖNCE bu şerhi hatırla.
+///
 /// M-F-281 disiplini (Live): gözlem işareti PERİYODİK (~%7.4 görünür).
 /// Tek rastgele kare YETMEZ — burada `cue_cooldown_visibility_test.dart`ın
 /// PROVEN tick-15 ilk-ateşleme senaryosu AYNEN tekrarlanıyor (zamanı

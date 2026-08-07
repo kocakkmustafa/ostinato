@@ -35,7 +35,11 @@
     ],
     "_audioClaimsMoved": "2026-08-07: bu disiplinin measured listesindeki SES iddiası notMeasured'a taşındı ve blurb'ü düzeltildi. Sebep ölçüldü: Info.plist'te NSMicrophoneUsageDescription, AndroidManifest'te RECORD_AUDIO YOK ve kabukta tek bir ses yakalama çağrısı yok — motor gerçek ve fixture üzerinde ölçülü, ama kullanıcının ODASINDA hiç koşmuyor. \"Ölçüyoruz\" listesi ürünün en güçlü iddia yüzeyidir; oradaki yanlış bir satır en pahalı olanıdır. Tek bir olgu KAYBEDİLMEDİ, yalnız MEKÂNI doğru yazıldı (kayıtta ölçüldü ≠ odanda ölçülüyor). tools/validate_surface_honesty.py kural C bunu artık mekanik olarak kolluyor ve izin beyan edilince kendini emekliye ayırır.",
     "instrumentSpecificGap": "Your fingers on the fretboard, and everything below your hips. At the distance that keeps your hips in frame a fingertip is a few pixels wide, and the teaching footage our reference comes from is filmed waist-up.",
-    "_instrumentSpecificGap_source": "2026-08-07 (O-044): Review ekraninin 4. 'neyi olcemedik' kalemi. Kaynak: honesty.notMeasured — 'Finger placement or fretting technique' + 'foot_support' kilit gerekcesi (waist-up referans). ICAT DEGIL kisaltma — secim EKRAN KODUNDA degil VERIDE duruyor ki gozden gecirilebilsin."
+    "_instrumentSpecificGap_source": "2026-08-07 (O-044): Review ekraninin 4. 'neyi olcemedik' kalemi. Kaynak: honesty.notMeasured — 'Finger placement or fretting technique' + 'foot_support' kilit gerekcesi (waist-up referans). ICAT DEGIL kisaltma — secim EKRAN KODUNDA degil VERIDE duruyor ki gozden gecirilebilsin.",
+    "outOfScopeDerived": [
+     "Practicing Through Mistakes Instead of Slow, Deliberate Practice — deliberately out of scope. 4 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it."
+    ],
+    "_outOfScopeDerived_source": "URETILDI: tools/gen_out_of_scope.py <- config/error-taxonomy.w1.json (inV1Scope=false olan hatalar: G-PRACTICE-NO-ISOLATION). ELLE DUZENLEME. comingSoonInThisDiscipline AYRI ve elle yazilir: o liste 'olcemedigimiz icin yok', bu liste 'kapsam disi biraktigimiz icin yok' — iki ayri gerekce, tek listede toplanmaz."
    },
    "courses": [
     {
@@ -204,7 +208,12 @@
     "_audioClaimsMoved": "2026-08-07: bu disiplinin measured listesindeki SES iddiası notMeasured'a taşındı ve blurb'ü düzeltildi. Sebep ölçüldü: Info.plist'te NSMicrophoneUsageDescription, AndroidManifest'te RECORD_AUDIO YOK ve kabukta tek bir ses yakalama çağrısı yok — motor gerçek ve fixture üzerinde ölçülü, ama kullanıcının ODASINDA hiç koşmuyor. \"Ölçüyoruz\" listesi ürünün en güçlü iddia yüzeyidir; oradaki yanlış bir satır en pahalı olanıdır. Tek bir olgu KAYBEDİLMEDİ, yalnız MEKÂNI doğru yazıldı (kayıtta ölçüldü ≠ odanda ölçülüyor). tools/validate_surface_honesty.py kural C bunu artık mekanik olarak kolluyor ve izin beyan edilince kendini emekliye ayırır.",
     "instrumentSpecificGap": "Pitch and sustain. The engine ran and was measured, but only ever on real cello audio — never on a real singing voice, and never live in your room.",
     "_instrumentSpecificGap_source": "2026-08-07 (O-044): Review ekraninin 4. 'neyi olcemedik' kalemi. Kaynak: honesty.notMeasured — 'Pitch accuracy and steadiness while singing' + O-040 ile eklenen canli-giris satiri. ICAT DEGIL kisaltma — secim EKRAN KODUNDA degil VERIDE duruyor ki gozden gecirilebilsin.",
-    "_phaseClaimFixed": "2026-08-07 (O-047, JabLab J-113 aktarimi — SKOR ekseni): onceki satir 'before you sing and WHILE YOU SING' diyordu. Olculdu: voice ruleset'inde SUSTAIN fazi periodicity>=0.55 ile aciliyor, yani SES metrigi — mikrofon girisi olmadan o pencereler HIC olusamaz. Iddia trunk_tilt'in olculdugu ANLARIN yarisini kapsiyordu ve o yari erisilemezdi. O-040'in altinci ornegi, bu kez 'ne olculuyor' degil 'NE ZAMAN olculuyor' ekseninde."
+    "_phaseClaimFixed": "2026-08-07 (O-047, JabLab J-113 aktarimi — SKOR ekseni): onceki satir 'before you sing and WHILE YOU SING' diyordu. Olculdu: voice ruleset'inde SUSTAIN fazi periodicity>=0.55 ile aciliyor, yani SES metrigi — mikrofon girisi olmadan o pencereler HIC olusamaz. Iddia trunk_tilt'in olculdugu ANLARIN yarisini kapsiyordu ve o yari erisilemezdi. O-040'in altinci ornegi, bu kez 'ne olculuyor' degil 'NE ZAMAN olculuyor' ekseninde.",
+    "outOfScopeDerived": [
+     "High Larynx Position / Throat Tension — deliberately out of scope. 2 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it.",
+     "Tongue Root Tension (Retracted/Bunched Tongue) — deliberately out of scope. 2 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it."
+    ],
+    "_outOfScopeDerived_source": "URETILDI: tools/gen_out_of_scope.py <- config/error-taxonomy.w1.json (inV1Scope=false olan hatalar: V-LARYNX-HIGH, V-TONGUE-ROOT). ELLE DUZENLEME. comingSoonInThisDiscipline AYRI ve elle yazilir: o liste 'olcemedigimiz icin yok', bu liste 'kapsam disi biraktigimiz icin yok' — iki ayri gerekce, tek listede toplanmaz."
    },
    "courses": [
     {
@@ -359,7 +368,12 @@
     ],
     "_audioClaimsMoved": "2026-08-07: bu disiplinin measured listesindeki SES iddiası notMeasured'a taşındı ve blurb'ü düzeltildi. Sebep ölçüldü: Info.plist'te NSMicrophoneUsageDescription, AndroidManifest'te RECORD_AUDIO YOK ve kabukta tek bir ses yakalama çağrısı yok — motor gerçek ve fixture üzerinde ölçülü, ama kullanıcının ODASINDA hiç koşmuyor. \"Ölçüyoruz\" listesi ürünün en güçlü iddia yüzeyidir; oradaki yanlış bir satır en pahalı olanıdır. Tek bir olgu KAYBEDİLMEDİ, yalnız MEKÂNI doğru yazıldı (kayıtta ölçüldü ≠ odanda ölçülüyor). tools/validate_surface_honesty.py kural C bunu artık mekanik olarak kolluyor ve izin beyan edilince kendini emekliye ayırır.",
     "instrumentSpecificGap": "Wrists, fingers and hand shape. We have no hand or finger landmarks at all, only body joints — a collapsed wrist and a good one look identical to this app.",
-    "_instrumentSpecificGap_source": "2026-08-07 (O-044): Review ekraninin 4. 'neyi olcemedik' kalemi. Kaynak: honesty.notMeasured — 'Wrists, fingers and hand shape'. ICAT DEGIL kisaltma — secim EKRAN KODUNDA degil VERIDE duruyor ki gozden gecirilebilsin."
+    "_instrumentSpecificGap_source": "2026-08-07 (O-044): Review ekraninin 4. 'neyi olcemedik' kalemi. Kaynak: honesty.notMeasured — 'Wrists, fingers and hand shape'. ICAT DEGIL kisaltma — secim EKRAN KODUNDA degil VERIDE duruyor ki gozden gecirilebilsin.",
+    "outOfScopeDerived": [
+     "Letter-Name/Rote Reliance Instead of True Note Reading — deliberately out of scope. 4 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it.",
+     "Whole-Piece Practice Instead of Isolating Trouble Spots — deliberately out of scope. 2 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it."
+    ],
+    "_outOfScopeDerived_source": "URETILDI: tools/gen_out_of_scope.py <- config/error-taxonomy.w1.json (inV1Scope=false olan hatalar: P-PRACTICE-WHOLE-PIECE, P-READING-ROTE). ELLE DUZENLEME. comingSoonInThisDiscipline AYRI ve elle yazilir: o liste 'olcemedigimiz icin yok', bu liste 'kapsam disi biraktigimiz icin yok' — iki ayri gerekce, tek listede toplanmaz."
    },
    "courses": [
     {

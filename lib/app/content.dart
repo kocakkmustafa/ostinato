@@ -38,7 +38,7 @@ final class ContentRepository {
 final class Discipline {
   const Discipline._(this.id, this.displayName, this.status, this.blurb,
       this.measured, this.notMeasured, this.instrumentSpecificGap,
-      this.comingSoon, this.courses);
+      this.outOfScopeDerived, this.comingSoon, this.courses);
 
   final String id;
   final String displayName;
@@ -56,6 +56,14 @@ final class Discipline {
   /// SEÇİMDİR, ve seçim ekran kodunda gömülü olsaydı gözden geçirilemezdi.
   /// Kaynağı `_instrumentSpecificGap_source` alanında.
   final String instrumentSpecificGap;
+
+  /// ÜRETİLEN kapsam-dışı liste — `tools/gen_out_of_scope.py` hata
+  /// taksonomisinin `inV1Scope: false` kalemlerinden türetir. [comingSoon]
+  /// ile AYNI başlık altında ama AYRI SINIF: bu liste "kapsam dışı
+  /// bıraktığımız için yok", [comingSoon] ise "ölçemediğimiz için yok".
+  /// İkisini tek listede toplamak iki farklı gerekçeyi tek gerekçe gibi
+  /// gösterirdi. Elle DÜZENLENMEZ (kapı: `--check`).
+  final List<String> outOfScopeDerived;
 
   /// "Not here — and why" — kapsam-dışı ama isimli-gerekçeli kalemler.
   /// (DÜZELTME 2026-08-07, M-F-186: "yet" çıkarıldı — bu liste zaten
@@ -82,6 +90,8 @@ final class Discipline {
       List<String>.from(honesty['measured'] as List<dynamic>? ?? <dynamic>[]),
       List<String>.from(honesty['notMeasured'] as List<dynamic>? ?? <dynamic>[]),
       honesty['instrumentSpecificGap'] as String? ?? '',
+      List<String>.from(
+          honesty['outOfScopeDerived'] as List<dynamic>? ?? <dynamic>[]),
       List<String>.from(
           m['comingSoonInThisDiscipline'] as List<dynamic>? ?? <dynamic>[]),
       courses,
