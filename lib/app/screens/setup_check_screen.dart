@@ -108,7 +108,8 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
   void _stopCamera() {
     unawaited(_sub?.cancel());
     _sub = null;
-    unawaited(_camera.stop().catchError((Object _) {}));
+    // O-076: kapanış artık İZLENİYOR — sıradaki `start` onu bekler.
+    releaseCamera(_camera);
   }
 
   @override

@@ -91,6 +91,10 @@ final class CameraPoseSource implements PoseSource {
     if (_running) {
       _running = false;
       try {
+        // O-076: süreç-geneli kapanış kilidine kaydet (bu yol `await`
+        // edebiliyor, ama kayıt yine de gerekli — `dispose()` yolundan
+        // gelen çağrı bekleyemiyor).
+        releaseCamera(_camera);
         await _camera.stop();
       } on Object {
         // Durdurmada arıza kullanıcıyı ilgilendirmez: oturum zaten bitiyor
