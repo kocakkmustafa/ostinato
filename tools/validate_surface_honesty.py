@@ -306,6 +306,35 @@ REQUIRED_DISCLOSURES = [
     },
 ]
 
+# ── H: VÜCUT-TARAF YÖNERGESİ YASAK (ellik bilinmiyor) ─────────────────────
+#
+# (O-063 · JabLab J-142'nin müzik karşılığı. Orada canlı koçluk repliği
+# "Right hand home." diyordu ve SOUTHPAW duruşta arka el SOL eldir — solak
+# kullanıcıya YANLIŞ eli söylüyordu.)
+#
+# Ostinato'da bu DAHA keskin: **solak gitaristler gitarı TERS tutar** — sol
+# el mızrap, sağ el perde. Bir gitar dersinde "your right hand" demek, solak
+# bir öğrenciye yanlış eli söylemektir.
+#
+# ÖLÇÜLDÜ (2026-08-07): sevk edilen yüzeyde vücut-taraf sözcüğü **SIFIR**, ve
+# canlı ölçüm ayna-güvenli (`trunkTiltDeg.abs()` — işaret atılıyor). Ayrıca
+# uygulama kullanıcının ELLİĞİNİ hiç bilmiyor (`handed`/`dominant hand` diye
+# bir girdi YOK) ve ruleset'ler bunu zaten beyan ediyor:
+# `sideDependencyResolved.mirrorConfident` gitar **false** · piyano **false**.
+# Yani bugün temiz — ama TEAMÜLLE temiz, kapıyla değil. Yeni bir ders
+# "sağ elini şöyle koy" diyebilir ve hiçbir şey durdurmaz.
+#
+# ⚠️ KAPI TARAF SÖZCÜĞÜNE DEĞİL, TARAF+VÜCUT eşleşmesine bakar. Düz bir
+# `left`/`right` yasağı yanlış olurdu: "Where you left off" · "the right
+# move" · "right now" hepsi doğru İngilizce ve hepsi masum. *Aynı sözcük,
+# zıt sınıflar.*
+BODY_SIDE = re.compile(
+    r"\b(left|right)[- ](hand|hands|wrist|wrists|arm|arms|elbow|elbows|"
+    r"shoulder|shoulders|foot|feet|leg|legs|side|thumb|finger|fingers)\b",
+    re.IGNORECASE)
+#: Anatomik ÖLÇÜM adları (metrik kimliği) yönerge değildir — muaf.
+BODY_SIDE_METRIC = re.compile(r"left_|right_", re.IGNORECASE)
+
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
 PUBSPEC = "pubspec.yaml"
@@ -532,6 +561,7 @@ SELFTEST_SAMPLES = [
     ("zorunlu beyan G", REQUIRED_DISCLOSURES[0]["pattern"].pattern,
      "there is no microphone input in this build"),
     ("tanımlayıcı", IDENTIFIER_LIKE.pattern, "onboarding-microphone-card"),
+    ("vücut-taraf H", BODY_SIDE.pattern, "rest your right hand here"),
 ]
 
 
@@ -751,6 +781,21 @@ def main() -> int:
                 f"cümlenin SİLİNMESİNİ de geçerli sayarsa dürüstlüğü değil "
                 f"SESSİZLİĞİ korur")
 
+    # ── Kural H ──
+    checked_h = 0
+    for where, text in surfaces:
+        for sentence in sentences(text):
+            if BODY_SIDE_METRIC.search(sentence):
+                continue          # `left_elbow` gibi metrik adı — ölçüm, yönerge değil
+            checked_h += 1
+            m = BODY_SIDE.search(sentence)
+            if m:
+                violations.append(
+                    f"[vücut-taraf] {where}: '{m.group(0)}' — uygulama "
+                    f"kullanıcının ELLİĞİNİ bilmiyor (ellik girdisi YOK) ve "
+                    f"solak gitarist gitarı TERS tutar; bu yönerge ona YANLIŞ "
+                    f"eli söyler — «{sentence.strip()[:90]}»")
+
     if len(surfaces) < 150:
         violations.append(
             f"VAKUM: yalnız {len(surfaces)} kullanıcı-yüzeyi metni tarandı "
@@ -773,7 +818,8 @@ def main() -> int:
           f"tarandı ({len(PROMISE_PATTERNS)} vaat deseni + "
           f"{len(CAPABILITY_RULES)} yetenek kuralı + "
           f"{checked_affirmative} olumlu iddia alanı + "
-          f"{checked_d} skor-ekseni iddiası + {checked_f} dil kontrolü)")
+          f"{checked_d} skor-ekseni + {checked_f} dil + "
+          f"{checked_h} vücut-taraf)")
     # KAPSAM her koşumda YAZILIR: taranmayan bir yer 'temiz' sanılamasın diye
     # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
     print(f"   kapsam: {DART_ROOTS} + kabuğa giden {len(shipped_json_assets())} "

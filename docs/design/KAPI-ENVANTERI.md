@@ -214,6 +214,33 @@ pozitif ikizli (ör. `'Try again'` hem `findsOneWidget` hem `findsNothing`
 ile sınanıyor — bulucunun çalıştığı ispatlı). **Test tarafı bugün temiz;
 kapı tarafı bu turda kapandı.**
 
+## 🖐️ VÜCUT-TARAF — bugün temizdi, ama TEAMÜLLE (O-063)
+
+JabLab J-142'nin (southpaw'a *"Right hand home."*) müzik karşılığı:
+**solak gitaristler gitarı TERS tutar** — sol el mızrap, sağ el perde.
+
+**ÖLÇÜM — sevk edilen yüzey bugün TEMİZ, ve üç bağımsız sebeple:**
+| kanıt | değer |
+|---|---|
+| `lib/` + `library.json` + golden katalogda vücut-taraf sözcüğü | **0** |
+| canlı ölçüm ayna-güvenli | `trunkTiltDeg.abs()` — işaret atılıyor |
+| ruleset'lerin kendi beyanı | `mirrorConfident` gitar **false** · piyano **false** · *"taraf-bağımlı hiçbir metrik zaten skorlanmıyor"* |
+| kullanıcının elliği biliniyor mu | **HAYIR** — `handed`/`dominant hand` diye girdi YOK |
+
+Koordinatörün işaret ettiği iki eşleşme **kullanıcı yüzeyi değildi**:
+`RIGHT HAND IN BELL` → `config/instruments.v1.json`, **pubspec'te YOK** (sevk
+edilmiyor) ve bir **korno tekniği adı** · `left_hand` → hasat bbox etiketi ·
+`left_elbow`/`left_forearm` → **anatomik metrik**, meşru sınıf.
+
+**Kural H** teamülü kapıya çevirdi. ⚠️ Taraf sözcüğüne DEĞİL, **taraf+vücut**
+eşleşmesine bakıyor — pozitif ikizle iki yönde de kanıtlı:
+`"where you left off"` · `"the right move"` · `"right now"` **geçiyor**,
+`"right hand"` **yakalanıyor**.
+
+**Bir sınır BEYAN EDİLMEDİ, bilerek:** *"bu dersler sağlak tutuşa göre
+yazıldı"* demek YANLIŞ olurdu — dersler ellik VARSAYMIYOR (ölçüm taraf-agnostik).
+Olmayan bir sınırı beyan etmek dürüstlük değil gürültüdür.
+
 ## Açık kalan kapı boşlukları (isimli)
 
 1. ~~Dil kuralı yok~~ → **KAPANDI aynı tur (kural F).** ⚠️ Muafiyet İKİ KEZ
