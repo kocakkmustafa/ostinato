@@ -45,6 +45,20 @@ void main() {
     final Set<String> reached = <String>{};
     final List<String> log = <String>[];
 
+    /// ⚠️ ULAŞMAK ≠ ÇALIŞMAK (Choreia: *"açabilir ama dans edemez"*).
+    /// Bir ekrana varmak, onun ÇALIŞTIĞINI göstermez — kabuk çizilip içerik
+    /// boş kalabilir. Bu yüzden her varışta ekranın KENDİ ÖZÜNDEN bir
+    /// cümle aranıyor: ders gerekçesi, dürüstlük kutusu, ölçüm iddiası…
+    /// Gezilebilirlik sayısı bir ÜST SINIRDIR; bu kontrol onu daraltır.
+    void requireSubstance(WidgetTester t, String where, Pattern must) {
+      final Iterable<String> texts = t
+          .widgetList<Text>(find.byType(Text))
+          .map((Text w) => w.data ?? '');
+      expect(texts.any((String x) => x.contains(must)), isTrue,
+          reason: '$where ekranına ULAŞILDI ama ÖZÜ yok — kabuk çizilmiş, '
+              'içerik boş (ulaşmak ≠ çalışmak)');
+    }
+
     void note(WidgetTester t, String where) {
       final String name = t
           .widget<Scaffold>(find.byType(Scaffold).first)
@@ -99,10 +113,12 @@ void main() {
       await tapIfPossible(t, find.byKey(const Key('onboarding-primary')));
     }
     note(t, '2 Library');
+    requireSubstance(t, 'Library', 'Measured, not chosen');
 
     // Ayarlar
     if (await tapIfPossible(t, find.text('⚙'))) {
       note(t, '3 Settings');
+      requireSubstance(t, 'Settings', 'instruments are live');
       await tapIfPossible(t, find.text('‹'));
       await t.pump(const Duration(milliseconds: 400));
     }
@@ -110,10 +126,12 @@ void main() {
     // Çalgı → Kurs → Ders sınıfları
     if (await tapIfPossible(t, find.text('Guitar'))) {
       note(t, '4 Instrument');
+      requireSubstance(t, 'Instrument', 'not all the same kind of gap');
       final Discipline g =
           repo.disciplines.firstWhere((Discipline d) => d.id == 'guitar');
       if (await tapIfPossible(t, find.text(g.courses.first.displayName))) {
         note(t, '5 Course');
+        requireSubstance(t, 'Course', g.courses.first.goal.split('.').first);
         for (final MapEntry<LessonKind, String> e
             in <LessonKind, String>{
           LessonKind.guide: '6 Lesson/guide→scored',
@@ -126,6 +144,12 @@ void main() {
           if (match.isEmpty) continue;
           if (await tapIfPossible(t, find.text(match.first.displayName))) {
             note(t, e.value);
+            // Ders ekranının ÖZÜ: kilitli ise gerekçesi, açık ise neye
+            // karşı ölçüldüğü. İkisi de yoksa ekran boş kabuktur.
+            requireSubstance(t, e.value,
+                match.first.kind == LessonKind.locked
+                    ? match.first.lockedReason!.split('.').first
+                    : match.first.displayName);
             // ⚠️ `t.pageBack()` KULLANILAMAZ: geri düğmesi standart
             // `BackButton` değil, `GlassIconButton` (metin glifi) — yani
             // ÜRÜNÜN kendi kontrolü. Kullanıcı ona basar; test de basmalı.
