@@ -93,10 +93,41 @@ CAPABILITY_RULES = [
 # ölçüyoruz"), ses alanına ait bir kavram anmaları ancak canlı bir ses girişi
 # varsa meşrudur. `notMeasured` ve `comingSoonInThisDiscipline` KAPSAM DIŞI —
 # onlar zaten yokluğu anlatır, ses kavramlarını serbestçe anmalıdırlar.
-AFFIRMATIVE_JSON_PATHS = [
-    re.compile(r"\.disciplines\[\d+\]\.honesty\.measured\[\d+\]$"),
-    re.compile(r"\.disciplines\[\d+\]\.blurb$"),
+# ⚠️ KAPSAM TERS ÇEVRİLDİ (2026-08-07, O-055 — JabLab J-126 dersi).
+#
+# İlk hâli OLUMLU yolları SAYIYORDU (`honesty.measured` + `blurb`). Ölçüldü:
+# `library.json`da 14 kullanıcı-yüzeyi proza alanı var, kural İKİSİNİ
+# kolluyordu — ve ÜÇÜNÜ bu kural yazıldıktan SONRA ben ekledim
+# (`instrumentSpecificGap` · `outOfScopeDerived` · `promotionPath.unblockedBy`).
+# **Kapsam beyanı, altındaki yapı değişince bayatlar.** Kapı yeşil kaldı ve o
+# alanlarda kimse bakmadı: *yeşil bir kapı, bakılmayan bir alan üretir.*
+#
+# Denetlenmeyen kapsamda ÜÇ CANLI İHLAL vardı (hepsi düzeltildi):
+#   · `courses[].goal` gitar  — "learn to HEAR when you're playing the right
+#     open chord" (canlı ses iddiası, mikrofon yok)
+#   · `courses[].goal` şan    — "standing and SINGING" (faz ses-tetikli)
+#   · `demoOnlyReason` ×3     — "You see your own elbow and forearm angles,
+#     LIVE" — canlı dirsek ölçümü YOK; ekran bunu doğru söylüyordu ("when
+#     this is live"), İÇERİK söylemiyordu.
+#
+# Şimdi VARSAYILAN OLUMLU: yokluk anlatan yollar İSİMLE muaf, geri kalan HER
+# proza alanı denetlenir. Yeni bir alan eklendiğinde kapsam KENDİLİĞİNDEN
+# genişler — muafiyet istiyorsa buraya yazılması GEREKİR, ve o yazım bir
+# gözden geçirme anıdır.
+ABSENCE_JSON_PATHS = [
+    # "ölçmediklerimiz" — zaten yokluk anlatır
+    re.compile(r"\.honesty\.notMeasured\[\d+\]$"),
+    re.compile(r"\.honesty\.instrumentSpecificGap$"),
+    re.compile(r"\.honesty\.outOfScopeDerived\[\d+\]$"),
+    re.compile(r"\.comingSoonInThisDiscipline\[\d+\]$"),
+    # kilit/engel gerekçeleri — hepsi "neden YOK"u anlatır
+    re.compile(r"\.lockedReason$"),
+    re.compile(r"\.promotionPath\.(?:blockedBy|unblockedBy|ifItStaysBlocked)$"),
+    # ad/etiket alanları — cümle değil (kısa, iddia taşımaz)
+    re.compile(r"\.displayName$"),
+    re.compile(r"^[^.]*\.productName$"),
 ]
+
 AUDIO_CONCEPTS = re.compile(
     r"\b(chord|chords|pitch|note timing|onset|beat|loudness|loud enough|"
     r"room (?:is )?quiet|noise floor|microphone|audio|listen|listens|"
@@ -130,9 +161,26 @@ JOINT_WORDS = {
     "forearm": r"\bforearms?\b",
 }
 # "ölçülür ama puanlanmaz" DİYEN cümle meşrudur — iddia zaten sınırlı.
+#: CANLILIK iddiası — "şu anda, canlı olarak görüyorsun". `coached_only`
+#: eklemlerin canlı ölçümü YOK (kaynak şerhi: `lesson_demo_screen.dart`
+#: "canlı kol/önkol açısı okuması burada YOK", ve figür kolları tam bu
+#: yüzden KESİKLİ çiziliyor). Ölçüldü (O-055): `demoOnlyReason` üç derste de
+#: "You see your own elbow and forearm angles, LIVE" diyordu — ekran doğruyu
+#: söylüyordu ("when this is live"), İÇERİK söylemiyordu.
+LIVE_CLAIM = re.compile(r"\blive\b|\bright now\b|\bas you (?:sit|play|sing)\b",
+                        re.IGNORECASE)
+#: Canlılığın YOKLUĞUNU söyleyen ifadeler.
+NOT_LIVE = re.compile(
+    r"no live |not see your own|do not see|when this is live|"
+    r"is not measured live|dashed", re.IGNORECASE)
+
 NOT_GRADED = re.compile(
     r"never graded|not graded|never marked|do not grade|"
-    r"never judged|not judged|show(?:n)? .{0,20}never", re.IGNORECASE)
+    r"never judged|not judged|show(?:n)? .{0,20}never|"
+    # O-055: dürüst metin "you would not get a mark, because there is
+    # nothing honest to mark you against" diyor — aynı hükmü kuran ama
+    # sözlükte olmayan üç kalıp. Kural gevşemedi, sözlüğü tamamlandı.
+    r"not get a mark|nothing honest to mark|no mark\b", re.IGNORECASE)
 
 
 def coached_only_joints(instrument):
@@ -374,7 +422,10 @@ def main() -> int:
     checked_affirmative = 0
     if not audio_declared:
         for path, text in json_surface_strings([LIBRARY_JSON]):
-            if not any(p.search(path) for p in AFFIRMATIVE_JSON_PATHS):
+            # VARSAYILAN OLUMLU — muaf yollar dışındaki her proza denetlenir.
+            if any(a.search(path) for a in ABSENCE_JSON_PATHS):
+                continue
+            if " " not in text:      # tek sözcük: ad/kimlik, cümle değil
                 continue
             checked_affirmative += 1
             if AUDIO_ABSENCE.search(text):
@@ -399,8 +450,23 @@ def main() -> int:
         # Kovadaki eklem ADLARINDAN hangi kelimelerin yasak olduğunu TÜRET.
         banned = {w: rx for w, rx in JOINT_WORDS.items()
                   if any(w in j for j in joints)}
-        for claim in disc.get("honesty", {}).get("measured", []):
+        # KAPSAM GENİŞLETİLDİ (O-055): yalnız `honesty.measured` değil, kural
+        # C ile AYNI olumlu yüzeylerin tamamı. Dar kapsam, `demoOnlyReason`
+        # içindeki canlı-dirsek iddiasını göremiyordu.
+        claims = [t for pth, t in json_surface_strings([LIBRARY_JSON])
+                  if f".disciplines[{lib_json['disciplines'].index(disc)}]" in pth
+                  and not any(a.search(pth) for a in ABSENCE_JSON_PATHS)
+                  and " " in t]
+        for claim in claims:
             checked_d += 1
+            # CANLILIK ekseni: canlı okuma iddiası + koçlanan eklem.
+            if LIVE_CLAIM.search(claim) and not NOT_LIVE.search(claim):
+                for word, rx in banned.items():
+                    if re.search(rx, claim, re.IGNORECASE):
+                        violations.append(
+                            f"[canlılık ekseni] {disc['id']}: '{word}' CANLI "
+                            f"okunuyormuş gibi anlatılıyor ama o eklemin canlı "
+                            f"ölçümü YOK (`coached_only`) — «{claim.strip()[:100]}»")
             if NOT_GRADED.search(claim):
                 continue
             for word, rx in banned.items():

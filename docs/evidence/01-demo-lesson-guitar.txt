@@ -6,7 +6,7 @@ YOUR ELBOW ANGLE, WHEN THIS IS LIVE
 0°
 39–105°
 120°
-You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against.
+You see the range the teachers we recorded occupy for elbows and forearms, next to a figure of your own trunk. What you do NOT see is your own elbow angle: there is no live elbow measurement in this build, which is also why the arms in that figure are drawn as dashed lines and carry no joint dots. And even with it you would not get a mark, because there is nothing honest to mark you against.
 WHY THERE IS NO MARK
 The elbows and forearms of the teachers in our reference spread across 39 to 105 degrees. A tolerance built from that spread would call almost nothing an error, and a tighter one would call ordinary style an error.
 WHAT WOULD CHANGE IT
@@ -22,7 +22,7 @@ Elbow tracking is not wired into this build — only trunk posture measures live
 [RichText] 0°
 [RichText] 39–105°
 [RichText] 120°
-[RichText] You see your own elbow and forearm angles, live, next to the range the teachers we recorded occupy. What you do not get is a mark, because there is nothing honest to mark you against.
+[RichText] You see the range the teachers we recorded occupy for elbows and forearms, next to a figure of your own trunk. What you do NOT see is your own elbow angle: there is no live elbow measurement in this build, which is also why the arms in that figure are drawn as dashed lines and carry no joint dots. And even with it you would not get a mark, because there is nothing honest to mark you against.
 [RichText] WHY THERE IS NO MARK
 [RichText] The elbows and forearms of the teachers in our reference spread across 39 to 105 degrees. A tolerance built from that spread would call almost nothing an error, and a tighter one would call ordinary style an error.
 [RichText] WHAT WOULD CHANGE IT
