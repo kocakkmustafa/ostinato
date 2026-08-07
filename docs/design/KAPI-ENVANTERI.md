@@ -49,6 +49,35 @@ Kapsam **6 → 13** olumlu alan. Ayrıca kural D **canlılık eksenine** genişl
 
 ---
 
+## 🧭 KATMAN TABLOSU — "hangi kelimeler" değil, "hangi KATMANLAR"
+
+> **Kapı yazarken ilk soru:** *"hangi kelimeler"* değil, ***"hangi katmanlar"***.
+> (JabLab: beş kapı kusurunun beşi de KATMAN kapsamıydı, kelime kapsamı değil.)
+
+| katman | proza alanı | yüzey dürüstlüğü (A–F) | öksüz anahtar | not |
+|---|---|---|---|---|
+| `lib/**.dart` | — | ✅ (yorumlar sökülür) | — | |
+| `assets/content/library.json` | 92 | ✅ | ✅ | ana içerik |
+| `config/observation-cue-templates.golden.json` | 1 | ✅ | ⛔ | canlı cümle |
+| `assets/config/posture-contract.json` | 0 | ✅ | ⛔ | üretilen |
+| `config/rulesets/*.json` ×3 | 3 | 🟡 **yalnız `userExplanation`** | ⛔ | O-058 |
+| `config/error-taxonomy.w1.json` | **91** | ⛔ **HİÇ** | ⛔ | ⚠️ en büyük taranmayan katman |
+| `config/references/*.json` ×3 | 11 | ⛔ | ⛔ | artefakt |
+| `packages/*/lib` ×2 | 0 (ölçüldü) | ⛔ | — | bugün metin yok |
+
+**Ruleset katmanı iki kez yanlış ayarlandı, ikisi de ölçümle çıktı (O-058):**
+① tamamı tarandı → üç Türkçe **mühendislik** kaydı ihlal sayıldı (yanlış-pozitif);
+② dar tutulunca regex `[^.]+` dosya adındaki noktayı (`guitar@0.2.0-draft.json`)
+geçemedi ve **hiçbir şey eşleşmedi — ama kapsam satırı "3 ruleset taranıyor"
+YAZIYORDU.** *Yalan söyleyen bir kapsam satırı, hiç olmayandan kötüdür:
+okuyan kişi orayı denetlenmiş sanar.* MUT-V yakaladı.
+
+**Katman kapsamı İKİ YÖNDE de yanlış olabilir:** dar → kör nokta ·
+geniş → yanlış-pozitif, ve ikincisi kapıyı güvenilmez kılıp susturulmasına yol
+açar.
+
+---
+
 ## Envanter
 
 ### 1. `validate_surface_honesty.py` — ALTI kural

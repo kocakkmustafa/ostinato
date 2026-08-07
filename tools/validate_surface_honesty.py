@@ -256,6 +256,35 @@ LIBRARY_JSON = "assets/content/library.json"
 PUBSPEC = "pubspec.yaml"
 
 
+#: KABUĞA GİTMEYEN ama KULLANICI METNİ ETİKETİ taşıyan katman: ruleset'lerin
+#: `referenceConsumption.userExplanation` alanı. `validate_ruleset.py` kural 3
+#: onu ZORUNLU kılıyor ve gerekçesi açıkça kullanıcıya dair ("açıklamasız
+#: puan-yokluğu kullanıcıya 'sistem bozuk' okunur") — ama ÖLÇÜLDÜ (O-058):
+#: kabukta okuyucusu **0**. Yani metin kullanıcı için yazılıyor, kullanıcıya
+#: hiç ulaşmıyor.
+#:
+#: Bu kapı onu ÇÖZMÜYOR (render kararı koordinatörde) ama artık DENETLİYOR:
+#: kullanıcı metni etiketi taşıyan bir alan, kullanıcı metni standardını
+#: karşılamalı — bir gün render edilirse ölçülmemiş bir cümle canlıya çıkmaz.
+#:
+#: ⚠️ KAPSAM DAR TUTULDU, ve bu ölçümle öğrenildi. İlk denemede ruleset'in
+#: TAMAMI tarandı ve üç Türkçe MÜHENDİSLİK kaydı (`mirrorAmbiguityNote` ·
+#: `blockedByStatistic` ×2) ihlal sayıldı — oysa onlar kullanıcı metni değil,
+#: bu ekip mühendislik notunu Türkçe yazıyor ve bu DOĞRU.
+#: **Katman kapsamı İKİ YÖNDE de yanlış olabilir:** dar tutmak kör nokta
+#: üretir, geniş tutmak yanlış-pozitif üretir ve ikincisi kapıyı
+#: güvenilmez kılıp susturulmasına yol açar. Bu yüzden ruleset katmanında
+#: TEK alan taranıyor: kullanıcı ETİKETİ taşıyan `userExplanation`.
+#: ⚠️ `[^.]+` KULLANMA: dosya adı nokta İÇERİYOR (`guitar@0.2.0-draft.json`).
+#: İlk hâli hiçbir şeyle eşleşmiyordu ve kapı kapsam satırında "3 ruleset
+#: taranıyor" YAZIYORDU — sıfır alan tararken. **Yalan söyleyen bir kapsam
+#: satırı, hiç olmayandan kötüdür:** okuyan kişi orayı denetlenmiş sanar.
+#: MUT-V bunu yakaladı (mutasyon geçti, kapı sustu).
+RULESET_USER_TEXT_PATH = re.compile(
+    r"\.referenceConsumption\.userExplanation$")
+RULESET_TEXT_GLOB = "config/rulesets/*.json"
+
+
 def shipped_json_assets():
     """Kabuğa GİDEN her JSON varlığı — liste `pubspec.yaml`dan TÜRER.
 
@@ -389,12 +418,16 @@ def json_surface_strings(files=None):
         elif isinstance(node, str):
             results.append((path, node))
 
-    for f in (files if files is not None else shipped_json_assets()):
+    scan = files if files is not None else (
+        shipped_json_assets() + sorted(str(x) for x in Path(".").glob(RULESET_TEXT_GLOB)))
+    for f in scan:
         p = Path(f)
         if not p.exists():
             continue
         walk(json.loads(p.read_text(encoding="utf-8")), f)
-    return results
+    # Ruleset katmanında YALNIZ kullanıcı-etiketli alan kalır (yukarıdaki şerh).
+    return [(pth, t) for pth, t in results
+            if "config/rulesets/" not in pth or RULESET_USER_TEXT_PATH.search(pth)]
 
 
 def ios_declares(key: str) -> bool:
@@ -571,6 +604,7 @@ def main() -> int:
             print(f"   - {v}")
         return 1
 
+    ruleset_files = sorted(str(x) for x in Path(".").glob(RULESET_TEXT_GLOB))
     scanned = ", ".join(shipped_json_assets())
     print(f"✅ yüzey dürüstlüğü TEMİZ — {len(surfaces)} kullanıcı-yüzeyi metni "
           f"tarandı ({len(PROMISE_PATTERNS)} vaat deseni + "
@@ -580,7 +614,8 @@ def main() -> int:
     # KAPSAM her koşumda YAZILIR: taranmayan bir yer 'temiz' sanılamasın diye
     # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
     print(f"   kapsam: {DART_ROOTS} + kabuğa giden {len(shipped_json_assets())} "
-          f"JSON varlığı ({scanned})")
+          f"JSON varlığı ({scanned}) + {len(ruleset_files)} ruleset "
+          f"(userExplanation katmanı, O-058)")
     return 0
 
 
