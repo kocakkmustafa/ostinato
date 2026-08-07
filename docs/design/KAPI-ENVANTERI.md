@@ -279,6 +279,40 @@ string, **kapının KENDİ yöntemiyle (yorumlar sökülü) 0**. ⚠️ Ham grep
 buluyordu — ikisi de Türkçe doc-yorum parçasıydı; *ölçüm aracı kapıdan daha
 kaba olduğunda sahte bulgu üretir.*
 
+## 🎯 `landmarks` ↔ `worldLandmarks` — Ostinato'yu ETKİLEMİYOR (O-067)
+
+Lissom L-187: `motion_camera`'nın iki native eklentisi de `result.landmarks`
+kullanıyor, `worldLandmarks` değil — yani Dart'a ulaşan **z metrik dünya
+koordinatı DEĞİL**.
+
+**Ostinato'da ölçüldü, çekirdek KAYNAĞINDAN (şerhe güvenilmedi):**
+
+| katman | bulgu |
+|---|---|
+| `lib/` + `ostinato_posture` | `.z` kullanımı **0** (bulucu pozitif ikizle sınandı) |
+| `normalization.dart:182` | `torsoAxisAngle = atan2(torsoAxis.y, torsoAxis.x)` — **yalnız x,y** |
+| `joint_angles.dart:231` | `trunkTilt = wrapPi(rawTorsoAxisAngle + π/2)` — o 2B açıdan |
+
+**Sonuç: tek skorlanan metrik (`trunk_tilt`) DÜZLEMSEL. z'nin ne olduğu
+sayıyı değiştirmiyor.**
+
+Ve boru hattı zaten `landmarks` varsayımı üzerine kurulu: `landmarks` en-boy
+oranına göre **anizotropik** normalize ve bu **açıyı bozar** — bu yüzden
+`CameraPostureAdapter` **izotropik düzeltme** uyguluyor (`xExtent: size.aspect`,
+M-F-30/J-028/G-038). Lissom'un bulduğu şey bende **adlandırılmış ve telafi
+edilmiş**.
+
+⚠️ **Etkilenmeyen ama AÇIK kalan sınır (M-O-08):** izotropik düzeltme yalnız
+2B izdüşümü düzeltir; kullanıcı kameraya AÇILI oturursa (gitar/piyano
+diyagonal) 3B eksen derinlikte kısalır ve düzlem-içi ölçek bunu kurtaramaz.
+`trunk_tilt` z gerektirmiyor, ama açılı-oturuşun gerçek etkisi **cihazda
+ölçülmeden** kapatılmış sayılmaz — O-036 borcu.
+
+📌 Not: adaptörün şerhi bunu zaten yazıyordu. **İddiaya güvenmek yerine
+çekirdek kaynağından doğruladım** — bu gecenin *"yanlış bir kayıt, bir
+sonraki turun eline verilmiş silme talimatıdır"* dersinin tersi yönü: kayıt
+DOĞRUYDU, ve doğruluğu artık ölçülü.
+
 ## Açık kalan kapı boşlukları (isimli)
 
 1. ~~Dil kuralı yok~~ → **KAPANDI aynı tur (kural F).** ⚠️ Muafiyet İKİ KEZ
