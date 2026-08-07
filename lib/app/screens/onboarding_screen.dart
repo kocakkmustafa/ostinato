@@ -205,16 +205,24 @@ class _Step extends StatelessWidget {
   final Widget? top;
 
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 18, 20, 10),
-        child: Column(
+  Widget build(BuildContext context) => LayoutBuilder(
+      builder: (BuildContext ctx, BoxConstraints c) => SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
+        // Kısa adımda içerik dikeyde ortalanır, uzun adımda normal akar
+        // (ekran kanıtı O-046: adım 1-2'de kartla düğme arasında ~200px ölü
+        // boşluk vardı, adım 3'te ise taşma — aynı ekranda iki zıt kusur).
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: c.maxHeight - 46),
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (top != null) ...<Widget>[top!, const SizedBox(height: 22)],
             ...children,
           ],
         ),
-      );
+        ),
+      ));
 }
 
 class _WelcomeStep extends StatelessWidget {
@@ -231,11 +239,16 @@ class _WelcomeStep extends StatelessWidget {
             // nokta değil" cümlesi burada çiziliyor. Açılar temsilîdir ve
             // hüküm taşımaz — bu yüzden yanında bir sayı yoktur.
             child: CustomPaint(
+              // Kama GENİŞLETİLDİ ve KOYULAŞTIRILDI (ekran kanıtı O-046):
+              // ±7° bu ölçekte ince bir dilim olarak çıkıyordu ve görselin
+              // tek işi olan cümleyi — "band, not a point" — tam TERSİNDEN
+              // söylüyordu. Açı hüküm taşımıyor (bu figürün yanında sayı
+              // YOK, ölçüm iddiası YOK), o yüzden tek ölçüt OKUNABİLİRLİK.
               painter: SkeletonFigurePainter(
-                bandLowDeg: -7,
-                bandHighDeg: 7,
-                bandColor: const Color(0x385F4CA0),
-                markerDeg: 3.5,
+                bandLowDeg: -15,
+                bandHighDeg: 15,
+                bandColor: const Color(0x4D5F4CA0),
+                markerDeg: 6,
               ),
             ),
           ),
@@ -381,6 +394,21 @@ class _SensorsStep extends StatelessWidget {
                 'because there is nothing to look at until then.',
           ),
           const SizedBox(height: 12),
+          // Sıra DEĞİŞTİ (2026-08-07, ekran kanıtı O-046): bu kart en sondaydı
+          // ve 375×812'de görüntü kenarında CÜMLE ORTASINDA kesiliyordu —
+          // "it does not treat anything," diye. Metin VARDI ve DOĞRUYDU,
+          // yani hiçbir test bunu göremezdi (Lissom'un M-F-296 sınıfı:
+          // okunabilirlik `find.textContaining` ile ölçülemez). Uygulamanın
+          // etik olarak en yüklü cümlesi, kaydırmaya bağlı olmamalı.
+          const _SensorCard(
+            title: 'Not a medical tool',
+            key: Key('onboarding-wellness-card'),
+            body: 'Ostinato describes how you are sitting compared to a set '
+                'of teachers. It does not diagnose anything and nothing it '
+                'says is health advice. If something hurts, that is a '
+                'question for a person, not an app.',
+          ),
+          const SizedBox(height: 12),
           const _SensorCard(
             title: 'The microphone is not wired',
             key: Key('onboarding-microphone-card'),
@@ -395,16 +423,6 @@ class _SensorsStep extends StatelessWidget {
             body: 'Raw video never leaves this device — there is no setting '
                 'that changes that. What we keep is the body angles we '
                 'measured, and the camera only runs inside a lesson.',
-          ),
-          const SizedBox(height: 12),
-          const _SensorCard(
-            title: 'Not a medical tool',
-            key: Key('onboarding-wellness-card'),
-            body: 'Ostinato describes how you are sitting compared to a set '
-                'of teachers. It does not diagnose anything, it does not '
-                'treat anything, and nothing it says is health advice. If '
-                'something hurts, that is a question for a person, not an '
-                'app.',
           ),
         ],
       );

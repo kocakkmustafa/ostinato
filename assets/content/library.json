@@ -118,7 +118,10 @@
        "focus": "posture",
        "minutes": 5,
        "status": "locked",
-       "lockedReason": "Nothing below your hips is measured. Our posture reference is built from upper-body landmarks only, because guitar teaching footage is filmed waist-up — knees and ankles are usually not in frame at all. Without leg landmarks we cannot tell a footstool from a crossed leg."
+       "lockedReason": "Nothing below your hips is measured. Our posture reference is built from upper-body landmarks only, because guitar teaching footage is filmed waist-up — knees and ankles are usually not in frame at all. Without leg landmarks we cannot tell a footstool from a crossed leg.",
+       "promotionPath": {
+        "unblockedBy": "A posture reference harvested from footage that actually includes legs. Ours is built waist-up because that is how guitar teaching is filmed, so this is a new harvest — not a threshold we could derive from what we already have."
+       }
       },
       {
        "id": "guitar.foundations.open_chords",
@@ -128,7 +131,10 @@
        ],
        "minutes": 15,
        "status": "locked",
-       "lockedReason": "Chord recognition has only been proven on synthetic audio (8/8 chords, zero false judgements) — it has never been tested on a real guitar recording. Synthetic tones have no body resonance, no string buzz and no overlapping decay, which are exactly the things that break a chord classifier. We won't grade you against a measurement we haven't confirmed on a real instrument."
+       "lockedReason": "Chord recognition has only been proven on synthetic audio (8/8 chords, zero false judgements) — it has never been tested on a real guitar recording. Synthetic tones have no body resonance, no string buzz and no overlapping decay, which are exactly the things that break a chord classifier. We won't grade you against a measurement we haven't confirmed on a real instrument.",
+       "promotionPath": {
+        "unblockedBy": "One real guitar recording, measured the same way the synthetic set was — and a way to listen to you at all. The engine is finished; what is missing is proof on a real instrument.\n\nThere is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
+       }
       },
       {
        "id": "guitar.foundations.light_and_frame",
@@ -146,7 +152,10 @@
        "minutes": 8,
        "status": "locked",
        "lockedReason": "Blocked twice over, and either block alone would be enough. First: a strum is one gesture that produces six near-simultaneous note attacks, and the step that maps those attacks onto a single chord event does not exist. Second: even with that step built, we have no teacher data on how far off the beat counts as a mistake for strumming — so there would be nothing to compare you against. We will not open this on a number we invented.",
-       "_why_locked_source": "guitar.comingSoonInThisDiscipline[0] + honesty.notMeasured (strum timing). Bu ders YENI bir iddia getirmiyor, var olan iki adli engeli kendi sayfasina cikariyor."
+       "_why_locked_source": "guitar.comingSoonInThisDiscipline[0] + honesty.notMeasured (strum timing). Bu ders YENI bir iddia getirmiyor, var olan iki adli engeli kendi sayfasina cikariyor.",
+       "promotionPath": {
+        "unblockedBy": "Two separate things, and both are needed: the step that maps six near-simultaneous attacks onto one chord event, and teacher data on how far off the beat counts as a mistake when strumming. Building only the first would give us a number with nothing to compare it to.\n\nThere is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
+       }
       },
       {
        "id": "guitar.foundations.chords_beyond_eight",
@@ -156,7 +165,10 @@
        "minutes": 6,
        "status": "locked",
        "lockedReason": "This course teaches eight open chords, and the engine now refuses anything else by name. It did not always. Until 2026-08-04 a played Bb came back as 'Dm' in 28 of 29 windows — confidently — because the engine was only allowed to consider the eight chords of the drill, so the nearest of the eight always won. It now weighs all 24 and refuses when the winner is not one this lesson teaches. Opening a lesson on the other sixteen would mean grading you against a recogniser we have not measured on them.",
-       "_why_locked_source": "guitar.honesty.notMeasured (Bb->Dm, 28/29 pencere). Sayilar SATIRDAN alindi, yeniden olculmedi."
+       "_why_locked_source": "guitar.honesty.notMeasured (Bb->Dm, 28/29 pencere). Sayilar SATIRDAN alindi, yeniden olculmedi.",
+       "promotionPath": {
+        "unblockedBy": "Measuring the recogniser on the other sixteen chords the way we measured these eight — per chord, counting false names, not an overall accuracy figure. An average would hide exactly the failure we already fixed once.\n\nThere is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
+       }
       }
      ]
     }
@@ -257,7 +269,10 @@
        "minutes": 10,
        "status": "locked",
        "lockedReason": "The pitch engine is real and we can show you exactly what it measures — but it has only been confirmed on real cello recordings (48 segments, median error under 19 cents), never on a real singing voice. A voice is not a cello: vibrato, breath and formants are exactly the things that would break it. We will not grade your singing against a measurement we have not confirmed on singing. One real vocal recording through the same pipeline opens this lesson.",
-       "_why_locked_detail": "Fixture AF-001-clean-sustained-a4 SENTETIK. Motor gercek (YIN), olcum gercek, dogrulama gercek — ama girdi sentetik. Gitarin 'Open chords' dersiyle AYNI standart, ayni sekilde uygulandi. Fark: akor dedektorunun HIC gercek-ses dogrulamasi yok, perde kestiricinin BASKA bir calgida var."
+       "_why_locked_detail": "Fixture AF-001-clean-sustained-a4 SENTETIK. Motor gercek (YIN), olcum gercek, dogrulama gercek — ama girdi sentetik. Gitarin 'Open chords' dersiyle AYNI standart, ayni sekilde uygulandi. Fark: akor dedektorunun HIC gercek-ses dogrulamasi yok, perde kestiricinin BASKA bir calgida var.",
+       "promotionPath": {
+        "unblockedBy": "One real singing recording with a known pitch, measured the way the cello set was. The engine is finished and its error is already known on cello; what is missing is the same measurement on a voice.\n\nThere is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
+       }
       },
       {
        "id": "voice.foundations.arms",
@@ -292,7 +307,10 @@
        "minutes": 6,
        "status": "locked",
        "lockedReason": "Vibrato is measured and never judged, and the reason is not a missing tool. We have no teacher data on what rate is 'right'. Inventing a number here would be a guess dressed as a measurement — the one thing this app is built not to do. The lesson opens when a reference exists, not when the engine improves.",
-       "_why_locked_source": "voice.honesty.notMeasured (vibrato) + comingSoonInThisDiscipline[1]. Ikisi de ayni engeli soyluyor: eksik olan ALET degil REFERANS."
+       "_why_locked_source": "voice.honesty.notMeasured (vibrato) + comingSoonInThisDiscipline[1]. Ikisi de ayni engeli soyluyor: eksik olan ALET degil REFERANS.",
+       "promotionPath": {
+        "unblockedBy": "Teacher data on vibrato rate — enough independent singing teachers, measured, agreeing closely enough that a range means something. The engine already measures rate; there is simply nothing to compare it to.\n\nThere is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
+       }
       },
       {
        "id": "voice.foundations.knees_and_chin",
@@ -302,7 +320,10 @@
        "minutes": 5,
        "status": "locked",
        "lockedReason": "These are the two posture mistakes singing teachers actually name, and we cannot see either one. Our reference is built from teaching footage filmed waist-up: it carries no head landmark and knees are usually not in frame at all. So a lifted chin has nothing to be lifted relative to, and locked knees are outside the picture. This is blocked on a new harvest — footage that includes those landmarks — not on a new threshold.",
-       "_why_locked_source": "voice.honesty.notMeasured (waist-up, no head landmark) + comingSoonInThisDiscipline[0] ('new harvest, not a new threshold')."
+       "_why_locked_source": "voice.honesty.notMeasured (waist-up, no head landmark) + comingSoonInThisDiscipline[0] ('new harvest, not a new threshold').",
+       "promotionPath": {
+        "unblockedBy": "A new harvest: teaching footage framed to include knees and the head, so the reference carries the landmarks these two mistakes are made of. This is a camera and framing problem, not a threshold problem."
+       }
       }
      ]
     }
@@ -403,8 +424,12 @@
        ],
        "minutes": 10,
        "status": "locked",
-       "lockedReason": "We can hear every note you play and time it against the beat — you will see those numbers. What we cannot do is turn them into a mark. No piano teacher data exists on how far off the beat counts as a mistake, and our own timing engine reads a perfect note as 8.3 ms early with a bias that falls harder on rushing than on dragging. A grade built on that would be arithmetic, not teaching.",
-       "_why_locked_detail": "M-O-65: PLAY fazinin note_timing_ms quality kapisi INDIRILDI. Iki kusur ust usteydi — (1) kapi URETILMEYEN bir metrige bakiyordu (MetronomeAligner koduna hicbir fixture bagli degildi), (2) bar (50 ms) UYDURMAYDI. Simdi metrik gercekten olculuyor (AF-008) ama bar hala yok: postur referansi EKLEM olcer, zamanlama olcmez."
+       "lockedReason": "On a recording we can pick out every note and time it against the beat. In your room we cannot: there is no microphone input in this build. Even with one, we could not turn those numbers into a mark — no piano teacher data exists on how far off the beat counts as a mistake, and our own timing engine reads a perfect note as 8.3 ms early with a bias that falls harder on rushing than on dragging.",
+       "_why_locked_detail": "M-O-65: PLAY fazinin note_timing_ms quality kapisi INDIRILDI. Iki kusur ust usteydi — (1) kapi URETILMEYEN bir metrige bakiyordu (MetronomeAligner koduna hicbir fixture bagli degildi), (2) bar (50 ms) UYDURMAYDI. Simdi metrik gercekten olculuyor (AF-008) ama bar hala yok: postur referansi EKLEM olcer, zamanlama olcmez.",
+       "_audioClaimFixed": "2026-08-07 (O-046): onceki metin 'We can hear every note you play — you will see those numbers' diyordu. O-040'in BESINCI ornegi: lockedReason da OLUMLU bir yetenek iddiasi tasiyabiliyor ve kural C yalnizca measured+blurb bakiyordu. Olgu korundu, MEKAN duzeltildi.",
+       "promotionPath": {
+        "unblockedBy": "Teacher data on what counts as off the beat, and a fix for the engine's asymmetric bias (it reads a perfect note 8.3 ms early, and unevenly). Both are measurement work, not opinions we could settle ourselves.\n\nThere is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
+       }
       },
       {
        "id": "piano.foundations.arms",
@@ -439,7 +464,10 @@
        "minutes": 5,
        "status": "locked",
        "lockedReason": "This is the mistake piano teachers name most often — five independent channels raise it. We can see your shoulders, and that is exactly why we will not judge them: 'shoulders rising toward the ears' is a HEIGHT, and what we measure is an ANGLE. On top of that our three teachers' own shoulder angles differ by 24 degrees on one side and 5 on the other, so there is no agreed position to compare you to. Naming it would be guessing with a measurement in hand.",
-       "_why_locked_source": "piano.honesty.notMeasured (shoulder tension, 5 kanal, 24 vs 5 derece) + comingSoonInThisDiscipline[2] ('needs a shoulder-height metric we do not have')."
+       "_why_locked_source": "piano.honesty.notMeasured (shoulder tension, 5 kanal, 24 vs 5 derece) + comingSoonInThisDiscipline[2] ('needs a shoulder-height metric we do not have').",
+       "promotionPath": {
+        "unblockedBy": "A shoulder-HEIGHT metric — we only measure angles today — and its own reference statistic across teachers. Both are missing; neither is a number we could pick."
+       }
       },
       {
        "id": "piano.foundations.hands_and_wrists",
@@ -449,7 +477,10 @@
        "minutes": 6,
        "status": "locked",
        "lockedReason": "We have no hand or finger landmarks at all — only body joints. Every hand-related mistake in our error library is blocked on that missing tool, not on a missing threshold, and the difference matters: a threshold can be measured from teachers, a missing landmark cannot. Until the model reads hands, a collapsed wrist and a good one look identical to this app.",
-       "_why_locked_source": "piano.honesty.notMeasured (wrists/fingers, 'blocked on that missing tool') + comingSoonInThisDiscipline[1]."
+       "_why_locked_source": "piano.honesty.notMeasured (wrists/fingers, 'blocked on that missing tool') + comingSoonInThisDiscipline[1].",
+       "promotionPath": {
+        "unblockedBy": "Hand and finger landmarks in the pose model. This is a missing measurement TOOL, not a missing threshold: no amount of teacher data would help until the model can see a wrist at all."
+       }
       }
      ]
     }

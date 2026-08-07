@@ -59,24 +59,36 @@ class LessonLockedScreenRoute extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  gradient: hue.softGradient,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white.withValues(alpha: .75)),
+              // BOŞ ETİKETLİ KART ÇİZİLMEZ (O-046, ekran kanıtı).
+              // Ölçüldü: 10 kilitli dersin 10'unda da `promotionPath` YOKTU,
+              // yani bu kart "WHAT WOULD OPEN IT" başlığıyla BOŞ bir gövde
+              // çiziyordu — canlı bir boş kabuk, üstelik ürünün en içerikli
+              // ekran sınıfında. Hiçbir test göremezdi: taşma yok, istisna
+              // yok, metin "var" (boş string de bir string). Yalnız BAKINCA
+              // görüldü. İçerik on derse de yazıldı; bu koruma ise
+              // gerekçesiz bir kartın bir daha ÇİZİLEMEYECEĞİNİ garanti
+              // ediyor — düzeltmek değil, imkânsız kılmak (aile dersi #7).
+              if ((lesson.unblockedBy ?? '').trim().isNotEmpty) ...<Widget>[
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    gradient: hue.softGradient,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withValues(alpha: .75)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      kicker('What would open it', color: hue.ink),
+                      const SizedBox(height: 9),
+                      Text(lesson.unblockedBy!,
+                          key: const Key('locked-what-would-open-it'),
+                          style: hankenText(size: 14.5, height: 1.55)),
+                    ],
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    kicker('What would open it', color: hue.ink),
-                    const SizedBox(height: 9),
-                    Text(lesson.unblockedBy ?? '',
-                        style: hankenText(size: 14.5, height: 1.55)),
-                  ],
-                ),
-              ),
+              ],
               const SizedBox(height: 16),
               Text(
                 'There is nothing to try here and no way to unlock it from '

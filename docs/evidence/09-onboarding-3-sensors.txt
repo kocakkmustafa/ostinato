@@ -1,0 +1,22 @@
+SENSORS AND YOUR DATA
+What we will ask for.
+THE CAMERA
+It reads nine upper-body points — hips, shoulders, neck. No face: our teacher references were filmed waist-up, so we have nothing to compare a head against. Ostinato asks for camera access when your first setup check starts, not now, because there is nothing to look at until then.
+NOT A MEDICAL TOOL
+Ostinato describes how you are sitting compared to a set of teachers. It does not diagnose anything and nothing it says is health advice. If something hurts, that is a question for a person, not an app.
+THE MICROPHONE IS NOT WIRED
+There is no microphone input in this build. No audio permission is requested and nothing you play is captured. Everything Ostinato judges, it judges from the camera.
+YOUR VIDEO
+Raw video never leaves this device — there is no setting that changes that. What we keep is the body angles we measured, and the camera only runs inside a lesson.
+Open the library
+[RichText] SENSORS AND YOUR DATA
+[RichText] What we will ask for.
+[RichText] THE CAMERA
+[RichText] It reads nine upper-body points — hips, shoulders, neck. No face: our teacher references were filmed waist-up, so we have nothing to compare a head against. Ostinato asks for camera access when your first setup check starts, not now, because there is nothing to look at until then.
+[RichText] NOT A MEDICAL TOOL
+[RichText] Ostinato describes how you are sitting compared to a set of teachers. It does not diagnose anything and nothing it says is health advice. If something hurts, that is a question for a person, not an app.
+[RichText] THE MICROPHONE IS NOT WIRED
+[RichText] There is no microphone input in this build. No audio permission is requested and nothing you play is captured. Everything Ostinato judges, it judges from the camera.
+[RichText] YOUR VIDEO
+[RichText] Raw video never leaves this device — there is no setting that changes that. What we keep is the body angles we measured, and the camera only runs inside a lesson.
+[RichText] Open the library

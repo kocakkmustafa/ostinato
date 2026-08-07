@@ -1,0 +1,24 @@
+‹
+LOCKED
+Chords outside the eight
+6 MIN · POSTURE · GUITAR
+WHY IT IS LOCKED
+This course teaches eight open chords, and the engine now refuses anything else by name. It did not always. Until 2026-08-04 a played Bb came back as 'Dm' in 28 of 29 windows — confidently — because the engine was only allowed to consider the eight chords of the drill, so the nearest of the eight always won. It now weighs all 24 and refuses when the winner is not one this lesson teaches. Opening a lesson on the other sixteen would mean grading you against a recogniser we have not measured on them.
+WHAT WOULD OPEN IT
+Measuring the recogniser on the other sixteen chords the way we measured these eight — per chord, counting false names, not an overall accuracy figure. An average would hide exactly the failure we already fixed once.
+
+There is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were.
+There is nothing to try here and no way to unlock it from your side. It opens when the measurement is confirmed, and you will see it change.
+Back to Foundations
+[RichText] ‹
+[RichText] LOCKED
+[RichText] Chords outside the eight
+[RichText] 6 MIN · POSTURE · GUITAR
+[RichText] WHY IT IS LOCKED
+[RichText] This course teaches eight open chords, and the engine now refuses anything else by name. It did not always. Until 2026-08-04 a played Bb came back as 'Dm' in 28 of 29 windows — confidently — because the engine was only allowed to consider the eight chords of the drill, so the nearest of the eight always won. It now weighs all 24 and refuses when the winner is not one this lesson teaches. Opening a lesson on the other sixteen would mean grading you against a recogniser we have not measured on them.
+[RichText] WHAT WOULD OPEN IT
+[RichText] Measuring the recogniser on the other sixteen chords the way we measured these eight — per chord, counting false names, not an overall accuracy figure. An average would hide exactly the failure we already fixed once.
+
+There is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were.
+[RichText] There is nothing to try here and no way to unlock it from your side. It opens when the measurement is confirmed, and you will see it change.
+[RichText] Back to Foundations

@@ -140,6 +140,25 @@ def main():
                                 f"{sorted(scored)}) — kullanıcıya ölçülmeyen "
                                 f"bir hüküm vaat edilirdi")
 
+                # Kural 12 (O-046, ekran kanıtı bulgusu): KİLİTLİ ders
+                # `promotionPath.unblockedBy` taşımak ZORUNDA.
+                #
+                # Ölçüldü: 10 kilitli dersin 10'unda da bu alan YOKTU ve
+                # `lesson_locked_screen.dart` "WHAT WOULD OPEN IT" başlıklı
+                # kartı BOŞ gövdeyle çiziyordu. Hiçbir kapı görmedi: kural 5
+                # `lockedReason`ı (NEDEN kapalı) kolluyordu, NE AÇAR sorusunu
+                # kimse kollamıyordu. İkisi ayrı bilgi ve ikincisi olmadan
+                # kilit bir çıkmaz sokak gibi okunur — oysa bu ailenin en
+                # güçlü içeriği tam da "bunu ne açar" cümlesidir.
+                if l.get("status") == "locked":
+                    ub = (l.get("promotionPath") or {}).get("unblockedBy", "")
+                    if len(str(ub).strip()) < 60:
+                        violations.append(
+                            f"{lid}: KİLİTLİ ama promotionPath.unblockedBy yok "
+                            f"ya da yer-tutucu ({len(str(ub).strip())} karakter) "
+                            f"— 'neden kapalı' yazılıp 'ne açar' yazılmazsa "
+                            f"ekranda BOŞ bir kart çizilir (kural 12)")
+
                 # Kural 11 (M-F-245): demoOnlyClass SÖZLEŞMESİ — varsayılan YOK.
                 #
                 # Sessiz varsayılan bir İDDİADIR: sınıfı yazılmamış bir

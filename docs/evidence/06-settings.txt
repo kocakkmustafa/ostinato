@@ -1,15 +1,19 @@
 ‹
 Settings
-CAMERA AND MICROPHONE
-Both run on your phone. The camera reads nine upper-body points; the microphone reads level and pitch. Neither stream is uploaded, and neither runs outside a lesson.
+CAMERA
+It runs on your phone and reads nine upper-body points. It only runs inside a lesson, and the video is never uploaded — only the body angles we measure are kept.
+MICROPHONE — NOT WIRED IN THIS BUILD
+No audio permission is requested and nothing you play is captured. The chord and note-attack work the lessons describe was measured on recordings, not in your room. Until an input is wired, every judgement this app makes comes from the camera.
 SHARING
 Raw video never leaves this device. There is no setting that changes that.
 ABOUT THIS BUILD
 Three instruments are live: guitar, voice, piano. Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware.
 [RichText] ‹
 [RichText] Settings
-[RichText] CAMERA AND MICROPHONE
-[RichText] Both run on your phone. The camera reads nine upper-body points; the microphone reads level and pitch. Neither stream is uploaded, and neither runs outside a lesson.
+[RichText] CAMERA
+[RichText] It runs on your phone and reads nine upper-body points. It only runs inside a lesson, and the video is never uploaded — only the body angles we measure are kept.
+[RichText] MICROPHONE — NOT WIRED IN THIS BUILD
+[RichText] No audio permission is requested and nothing you play is captured. The chord and note-attack work the lessons describe was measured on recordings, not in your room. Until an input is wired, every judgement this app makes comes from the camera.
 [RichText] SHARING
 [RichText] Raw video never leaves this device. There is no setting that changes that.
 [RichText] ABOUT THIS BUILD

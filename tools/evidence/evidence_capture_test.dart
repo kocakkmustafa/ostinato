@@ -10,7 +10,10 @@ import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/design/ostinato_theme.dart';
+import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/screens/lesson_demo_screen.dart';
+import 'package:ostinato/app/screens/lesson_locked_screen.dart';
+import 'package:ostinato/app/screens/onboarding_screen.dart';
 import 'package:ostinato/app/screens/lesson_scored_screen.dart';
 import 'package:ostinato/app/screens/live_screen.dart';
 import 'package:ostinato/app/screens/review_screen.dart';
@@ -292,5 +295,67 @@ void main() {
     await expectOnlyFontException(t);
     await capture(t, '06-settings.png');
     dumpText(t, '06-settings.txt');
+  });
+
+  // ── 07/08/09 — KARŞILAMA (O-039). Bu üç ekran hiç GÖRÜLMEDİ: kod bu gece
+  // yazıldı, kanıtı yoktu. Koordinatörün aktarımı (2026-08-07): bu gece
+  // ailede ekran kanıtının yakaladığı kusur sayısı Gravita 2 + Lissom 4 ve
+  // hiçbirini test yakalayamazdı — "okunabilirlik `find.textContaining` ile
+  // ölçülebilen bir şey değil".
+  //
+  // İlerleme testin KENDİSİ tarafından sürülüyor (gerçek `PageView` +
+  // gerçek düğme dokunuşu), sabit bir index'e atlanmıyor: atlanmış bir
+  // sayfanın düzeni gerçekten oraya GİDİLDİĞİNDEKİ düzenle aynı olmayabilir.
+  Future<void> onboardingAt(WidgetTester t, int step) async {
+    await t.pumpWidget(harness(OnboardingScreen(
+      repo: repo,
+      store: InMemoryOnboardingStore(),
+      onFinished: () {},
+    )));
+    await t.pump();
+    for (int i = 0; i < step; i++) {
+      await t.tap(find.byKey(const Key('onboarding-primary')));
+      await t.pump();
+      await t.pump(const Duration(milliseconds: 400));
+    }
+    await expectOnlyFontException(t);
+  }
+
+  testWidgets('07 — Karşılama 1/3 (bant kaması + "Measured, not chosen.")',
+      (WidgetTester t) async {
+    await onboardingAt(t, 0);
+    await capture(t, '07-onboarding-1-welcome.png');
+    dumpText(t, '07-onboarding-1-welcome.txt');
+  });
+
+  testWidgets('08 — Karşılama 2/3 (kapsam sayıları — library.json TÜRETİMİ)',
+      (WidgetTester t) async {
+    await onboardingAt(t, 1);
+    await capture(t, '08-onboarding-2-scope.png');
+    dumpText(t, '08-onboarding-2-scope.txt');
+  });
+
+  testWidgets('09 — Karşılama 3/3 (kamera · mikrofon YOKLUĞU · video · '
+      'tıbbi-değil) — dört kart, en uzun metin', (WidgetTester t) async {
+    await onboardingAt(t, 2);
+    await capture(t, '09-onboarding-3-sensors.png');
+    dumpText(t, '09-onboarding-3-sensors.txt');
+  });
+
+  // ── 10 — YENİ kilitli ders (O-041). Altı yeni kilitli dersin gerekçeleri
+  // bu ailenin en güçlü içeriği; hiçbiri ekranda görülmedi. Gitarın
+  // "Chords outside the eight"i seçildi çünkü EN UZUN gerekçe o (bir kusuru
+  // itiraf ederek öğreten metin) — taşma en uzun metinde görünür.
+  testWidgets('10 — Yeni kilitli ders (guitar/chords_beyond_eight, EN UZUN '
+      'gerekçe)', (WidgetTester t) async {
+    final Discipline d = guitar();
+    final Lesson l = d.lessons.firstWhere(
+        (Lesson x) => x.id == 'guitar.foundations.chords_beyond_eight');
+    await t.pumpWidget(harness(LessonLockedScreenRoute(
+        discipline: d, lesson: l, hue: InstrumentHues.guitar)));
+    await t.pump();
+    await expectOnlyFontException(t);
+    await capture(t, '10-locked-lesson-chords-beyond-eight.png');
+    dumpText(t, '10-locked-lesson-chords-beyond-eight.txt');
   });
 }
