@@ -241,6 +241,44 @@ eşleşmesine bakıyor — pozitif ikizle iki yönde de kanıtlı:
 yazıldı"* demek YANLIŞ olurdu — dersler ellik VARSAYMIYOR (ölçüm taraf-agnostik).
 Olmayan bir sınırı beyan etmek dürüstlük değil gürültüdür.
 
+## 🔢 KAÇ SÜİT? — "testler yeşil" EKSİK bir cümledir (O-064)
+
+> JabLab J-145: kırk kez *"kapılar N/N yeşil"* yazmış, o **app süitiydi**;
+> motor süiti J-104'ten beri **kırmızıydı**.
+> ***Bir kapının yeşili, o kapının KAPSADIĞI kadar geçerlidir.***
+
+**Ostinato ailede en parçalı: 4 ayrı koşum.** Taze ölçüm (2026-08-07 09:40):
+
+| süit | test | durum |
+|---|---|---|
+| kabuk (`flutter test`) | **52** | ✅ |
+| `packages/ostinato_posture` | **19** | ✅ |
+| `packages/ostinato_audio` | **81** | ✅ |
+| **TOPLAM** | **152** | ✅ |
+| MUT-A mutasyon süiti | 13/13 | ✅ |
+| python kapıları | 18 | ✅ |
+
+**KIRMIZI YOK — JabLab'ın P0'ı bende yok.** Sebebi tesadüf değil:
+`run_gates.sh` üç Dart süitini de koşuyor (satır 44-46), yani gece boyunca
+verdiğim **"22/22 kapı yeşil"** iddiası üç süiti de kapsıyordu.
+
+**⚠️ AMA RAPORLAMAM EKSİKTİ:** gece boyunca *"51 test"* / *"52 test"* dedim —
+o **yalnız kabuk süiti**. Ağaçta **152** test var. Kapı iddiası tamdı, SAYI
+eksikti. Bu tam olarak *"eksik cümle"* sınıfı, bu kez benim raporumda.
+
+**İKİ DÜZELTME:**
+① `gate_mutation_test.py` (MUT-A 13/13 — kapılarımın ısırdığını KANITLAYAN
+   süit) **`run_gates.sh`ta YOKTU**, yalnız hatırlayan koşuyordu. Bağlandı.
+② `run_gates.sh` artık **KAPSAMINI ÇIKTIDA YAZIYOR**: hangi süitler, kaç
+   python kapısı, ve **kapsam DIŞI ne var**. Bir daha "yeşil" demek, neyin
+   yeşil olduğunu söylemeden mümkün olmasın.
+
+**`packages/` kapsam sorusu (koordinatörün ince sorusu) — ölçüldü:** kural
+C/F `DART_ROOTS = ["lib"]`. `packages/*/lib`de kullanıcı-cümlesi biçimli
+string, **kapının KENDİ yöntemiyle (yorumlar sökülü) 0**. ⚠️ Ham grep 2 tane
+buluyordu — ikisi de Türkçe doc-yorum parçasıydı; *ölçüm aracı kapıdan daha
+kaba olduğunda sahte bulgu üretir.*
+
 ## Açık kalan kapı boşlukları (isimli)
 
 1. ~~Dil kuralı yok~~ → **KAPANDI aynı tur (kural F).** ⚠️ Muafiyet İKİ KEZ

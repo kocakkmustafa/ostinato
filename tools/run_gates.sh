@@ -27,6 +27,7 @@ run() {
 run "ruleset şeması + linter"        python3 tools/validate_ruleset.py
 run "kütüphane dürüstlük kuralları"  python3 tools/validate_library.py
 run "içerik-atıf süpürmesi"        python3 tools/validate_references.py
+run "MUT-A (kapılar ısırıyor mu)"     python3 tools/gate_mutation_test.py
 run "pozitif ikiz (kapı desenleri)"   bash -c 'python3 tools/validate_surface_honesty.py --selftest && python3 tools/validate_color_tokens.py --selftest'
 run "yüzey dürüstlüğü (vaat+yetenek)" python3 tools/validate_surface_honesty.py
 run "renk token kapısı"               python3 tools/validate_color_tokens.py
@@ -47,6 +48,10 @@ run "ostinato_audio testleri"         bash -c 'cd packages/ostinato_audio && dar
 run "dart analyze (audio+postür)"  bash -c 'cd packages/ostinato_audio && dart analyze && cd ../ostinato_posture && dart analyze'
 run "flutter analyze (kabuk)"      flutter analyze lib test
 
+printf '\n──── KAPSAM (bu koşum neyi kapsadı)\n'
+printf '   3 Dart süiti: kabuk (flutter test) · ostinato_posture · ostinato_audio\n'
+printf '   %s python kapisi · MUT-A mutasyon suiti · pozitif ikiz\n' "$(grep -c '^run .*python3' "$0")"
+printf '   KAPSAM DISI: tools/evidence (elle tazelenir) · cihaz-duzeyi render (O-036)\n'
 printf '\n════════════════════════════════════\n'
 if [ "$fail" -eq 0 ]; then
   printf '✅ TÜM KAPILAR YEŞİL\n'
