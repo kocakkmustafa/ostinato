@@ -2,6 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/screens/review_screen.dart';
 
 /// Sıfır-ölçüm hâli — O-070 (render probu turu, koordinatör kova ①).
+/// ⚠️ Eğrinin BOŞ geçmişte hiçbir şey çizmediği (O-071) BURADA sınanmıyor:
+/// `_CurvePainter` private ve bir Canvas probu ona erişemiyor. O iddia
+/// RENDER PROBUYLA doğrulandı — `docs/evidence/14-review-nothing-readable.png`
+/// gözle okundu, eğri alanı BOŞ. Sınırın sınıfı: *kapsam-dışı karar, eksik
+/// değil* — bir görsel yokluğu widget ağacından ölçmek, ölçtüğünü sandığın
+/// şeyi ölçmemenin kolay yoludur.
 void main() {
   test('oran YOK, sıfır DEĞİL — "bilinmiyor ↔ sıfır" ayrımı', () {
     const SessionSummary none = SessionSummary(
@@ -27,4 +33,5 @@ void main() {
         reason: 'sıfır ölçümle OLUMLU hüküm — kamera hiç okunamamışken '
             '"Steady." demek, ölçmediğimiz şeye not vermektir');
   });
+
 }

@@ -59,6 +59,14 @@ final class SessionSummary {
   }
 
   bool _improving() {
+    // ⚠️ Bu da bir savunma ve bir HÜKME besleniyor (O-071 taraması):
+    // 8 kareden az geçmişte "iyileşiyor mu" sorusu cevaplanamaz, `false`
+    // dönülür ve verdict "Mostly outside the band."a düşer. Yani AZ veriyle
+    // olumsuz bir hükme varılabiliyor. O-070'in tersi yönü ve daha hafifi:
+    // orada sıfır veri OLUMLU hüküm üretiyordu, burada az veri OLUMSUZ
+    // hükmü elemiyor. Sıfır hâli artık `nothingReadable` ile kesiliyor;
+    // 1-8 kare arası hâlâ hüküm alıyor — İSİMLİ SINIR, koordinatöre
+    // taşındı (eşik kararı: kaç kare bir hükmü hak eder?).
     if (history.length <= 8) return false;
     final int half = history.length ~/ 2;
     double avg(List<double> a) => a.isEmpty
@@ -303,7 +311,19 @@ class _CurvePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final List<double> h = history.isEmpty ? const <double>[3, 3.4, 3.1] : history;
+    // 🔴 O-071: burada `history.isEmpty ? const <double>[3, 3.4, 3.1] : history`
+    // vardı — geçmiş BOŞKEN UYDURMA üç değer çizdiriyordu ve makul görünen
+    // bir eğri üretiyordu. O-070'te "tek kare okuyamadık" cümlesini yazdım,
+    // ve tam üstünde bu eğri çizilmeye devam ediyordu.
+    //
+    // Ailenin EN SERT kuralı: sahte veri YOK. Ve bu, O-070'in verdict
+    // kusuruyla AYNI `? :` savunma deseninden doğdu — *aynı eksik yapı, iki
+    // farklı kusur sınıfı* (koordinatör, J-156 sınıfı): biri ölçülmemişi
+    // HÜKME çevirdi, öteki ölçülmemişi ÇİZGİYE çevirdi.
+    //
+    // Boş geçmiş artık HİÇBİR ŞEY çizmez. Yokluğun görseli boşluktur.
+    if (history.isEmpty) return;
+    final List<double> h = history;
     final double maxAbs = h.map((double v) => v.abs()).fold(1.0, (double a, double b) => a > b ? a : b);
     final Path path = Path();
     for (int i = 0; i < h.length; i++) {
