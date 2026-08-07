@@ -231,22 +231,26 @@ class HorizontalBandTrack extends StatelessWidget {
     required this.lowDeg,
     required this.highDeg,
     required this.maxDeg,
-    required this.youDeg,
+    this.youDeg,
     required this.color,
+    this.height = 12,
   });
 
   final double lowDeg;
   final double highDeg;
   final double maxDeg;
-  final double youDeg;
+  /// "Sen" imleyicisi — NULL olabilir. Kütüphane kartında canlı bir ölçüm
+  /// YOKTUR; oraya bir imleyici çizmek, olmayan bir ölçümü ima ederdi.
+  final double? youDeg;
   final Color color;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (BuildContext ctx, BoxConstraints c) {
       double x(double deg) => (deg.clamp(0, maxDeg) / maxDeg) * c.maxWidth;
       return SizedBox(
-        height: 12,
+        height: height,
         child: Stack(children: <Widget>[
           Positioned.fill(
             child: DecoratedBox(
@@ -269,19 +273,20 @@ class HorizontalBandTrack extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            key: const Key('you-marker'),
-            left: (x(youDeg) - 1.5).clamp(0, c.maxWidth - 3),
-            top: -4,
-            bottom: -4,
-            width: 3,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: OstinatoColors.ink,
-                borderRadius: BorderRadius.circular(3),
+          if (youDeg != null)
+            Positioned(
+              key: const Key('you-marker'),
+              left: (x(youDeg!) - 1.5).clamp(0, c.maxWidth - 3),
+              top: -4,
+              bottom: -4,
+              width: 3,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: OstinatoColors.ink,
+                  borderRadius: BorderRadius.circular(3),
+                ),
               ),
             ),
-          ),
         ]),
       );
     });

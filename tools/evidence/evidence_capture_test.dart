@@ -12,6 +12,7 @@ import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/design/ostinato_theme.dart';
 import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/screens/lesson_demo_screen.dart';
+import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/lesson_locked_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
 import 'package:ostinato/app/screens/lesson_scored_screen.dart';
@@ -34,6 +35,18 @@ import 'package:ostinato_posture/ostinato_posture.dart';
 /// 375×812 (Lissom standardı, iPhone 13 mini sınıfı) — dar cihaz, geniş
 /// değil; aynı zamanda `real_content_overflow_test.dart`ın kanıtladığı
 /// genişlikle BİREBİR aynı.
+///
+/// ⚠️ **KANITIN SINIRI — İKONLAR VE EMOJİ KANITLANMAZ.** (Ölçüldü
+/// 2026-08-07, `11-library` karesinde.) `Icons.chevron_right` ve
+/// `GlassIconButton`ın emoji karakterleri (⚙ ✕ ‹) bu karelerde BOŞ KARE
+/// çıkıyor: Material Icons ve sistem emoji fontu test koşumunda yüklü
+/// değil. Gerçek uygulamada ikisi de var (`uses-material-design: true` +
+/// platformun emoji fontu), yani bu bir ÜRÜN kusuru DEĞİL.
+/// **Ama bu bir kanıt BOŞLUĞUDUR ve isimlendirildi:** bu karelere bakan
+/// biri "ikonlar kırık" diye okuyabilir ya da daha kötüsü, GERÇEK bir ikon
+/// kusurunu "yine o bilinen boş kare" sanıp geçebilir. İkon/emoji
+/// doğrulaması cihaz gününe (O-036) aittir; metin ve düzen burada kanıtlı,
+/// ikon DEĞİL.
 ///
 /// ⚠️ **BİR TESTTE BİR CANLI AŞAMA** (aile dersi #9'un dördüncü maddesi,
 /// JabLab J-119 yan-ürünü, koordinatör aktarımı 2026-08-07). `Timer.periodic`
@@ -379,5 +392,14 @@ void main() {
     await expectOnlyFontException(t);
     await capture(t, '10-locked-lesson-chords-beyond-eight.png');
     dumpText(t, '10-locked-lesson-chords-beyond-eight.txt');
+  });
+
+  testWidgets('11 — Library (0-24° paylaşılan bant çubuğu, DESIGN-AHEAD §1.3)',
+      (WidgetTester t) async {
+    await t.pumpWidget(harness(LibraryScreen(repo: repo, cueText: cueText)));
+    await t.pump();
+    await expectOnlyFontException(t);
+    await capture(t, '11-library-shared-band-scale.png');
+    dumpText(t, '11-library-shared-band-scale.txt');
   });
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ostinato_posture/ostinato_posture.dart';
 
 import '../content.dart';
 import '../cue_text.dart';
@@ -114,9 +115,27 @@ class LibraryScreen extends StatelessWidget {
                 kicker('Your instruments'),
                 const SizedBox(height: 11),
                 for (final Discipline d in live) ...<Widget>[
-                  _InstrumentCard(discipline: d),
+                  _InstrumentCard(
+                      discipline: d, contract: repo.contractOrNull(d.id)),
                   const SizedBox(height: 11),
                 ],
+                // 0-24° PAYLAŞILAN ölçek açıklaması (DESIGN-AHEAD §1.3).
+                // Tasarımın taslak cümlesi piyanonun dar bandını "üç
+                // eğitmen en ince kanıt" diye AÇIKLIYORDU — o cümle
+                // yazılmadı: bant genişliği ölçülen ARALIKTAN gelir, kaynak
+                // SAYISINDAN değil, ve ikisini nedensel bağlamak
+                // ölçmediğimiz bir ilişkiyi iddia etmek olurdu. Sayılar
+                // yan yana duruyor; bağı kuran cümle KURULMADI.
+                const SizedBox(height: 6),
+                Text(
+                  'The bar on each card is the range those teachers actually '
+                  'occupy, drawn on one shared 0–24° scale so the three can '
+                  'be compared. It is a range, not a target: no point inside '
+                  'it is more correct than another.',
+                  key: const Key('library-band-scale-note'),
+                  style: hankenText(
+                      size: 12, height: 1.5, color: OstinatoColors.textMuted),
+                ),
               ],
             ),
           ),
@@ -126,9 +145,21 @@ class LibraryScreen extends StatelessWidget {
   }
 }
 
+/// PAYLAŞILAN ölçeğin üst ucu (DESIGN-AHEAD §1.3). Bir EŞİK DEĞİL, bir
+/// ÇİZİM ölçeği: hiçbir hüküm bu sayıdan türemiyor, yalnız üç çalgının
+/// bandı AYNI eksende karşılaştırılabilsin diye sabit. Tasarımın verdiği
+/// 24° korundu; bugünkü en geniş bant 6.4° ve gözlem eşiği 14° — ikisi de
+/// ölçeğin içinde kalıyor, yani ölçek ölçümü kırpmıyor.
+const double _sharedScaleMaxDeg = 24;
+
 class _InstrumentCard extends StatelessWidget {
-  const _InstrumentCard({required this.discipline});
+  const _InstrumentCard({required this.discipline, required this.contract});
   final Discipline discipline;
+
+  /// Sözleşme YOKSA çubuk ÇİZİLMEZ. Boş bir ölçek çubuğu "bandı yok" değil
+  /// "bandı sıfır" diye okunur — yokluğu yanlış anlatan bir görsel,
+  /// yokluğu hiç göstermemekten kötüdür.
+  final PostureContract? contract;
 
   @override
   Widget build(BuildContext context) {
@@ -168,6 +199,27 @@ class _InstrumentCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 6),
+              if (contract != null) ...<Widget>[
+                const SizedBox(height: 10),
+                HorizontalBandTrack(
+                  key: Key('band-scale-${discipline.id}'),
+                  lowDeg: contract!.bandLowDeg,
+                  highDeg: contract!.bandHighDeg,
+                  maxDeg: _sharedScaleMaxDeg,
+                  color: hue.ink,
+                  height: 8,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  '${contract!.teacherCount} ${contract!.sourceClass} · '
+                  '${contract!.bandLowDeg.toStringAsFixed(1)}–'
+                  '${contract!.bandHighDeg.toStringAsFixed(1)}° of '
+                  '${_sharedScaleMaxDeg.toStringAsFixed(0)}°',
+                  style: monoText(size: 8.5, color: hue.ink.withValues(alpha: .85)),
+                ),
+                const SizedBox(height: 10),
+              ] else
+                const SizedBox(height: 6),
               Text(discipline.blurb,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
