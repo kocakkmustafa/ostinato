@@ -27,6 +27,7 @@ run() {
 run "ruleset şeması + linter"        python3 tools/validate_ruleset.py
 run "kütüphane dürüstlük kuralları"  python3 tools/validate_library.py
 run "içerik-atıf süpürmesi"        python3 tools/validate_references.py
+run "koşum envanteri (kapsam)"       python3 tools/validate_runner_inventory.py
 run "MUT-A (kapılar ısırıyor mu)"     python3 tools/gate_mutation_test.py
 run "pozitif ikiz (kapı desenleri)"   bash -c 'python3 tools/validate_surface_honesty.py --selftest && python3 tools/validate_color_tokens.py --selftest'
 run "yüzey dürüstlüğü (vaat+yetenek)" python3 tools/validate_surface_honesty.py

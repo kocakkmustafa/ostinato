@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -211,7 +213,30 @@ void main() {
       // yokluğunu söylemek için meşrudur. `tools/validate_surface_honesty.py`
       // bunu tüm yüzeyde mekanik olarak kolluyor; buradaki kontrol o kapının
       // TAM BU KARTTA canlı olduğunu gösterir.
-      expect(mic, contains('no microphone input in this build'));
+      //
+      // ⚠️ BU TEST KENDİ SINIRINI TAŞIR (O-066 · JabLab J-144 sınıfının
+      // GELECEKTEKİ hâli). Bugün doğru bir cümleyi koruyor. Ama mikrofon
+      // kablolandığı gün o cümle YANLIŞ olacak, doğru hamle onu SİLMEK
+      // olacak — ve bu test tam o anda kırmızı yanıp **düzeltmeye
+      // direnecek**. Kusuru bugün sabitlemiyor; YARIN sabitleyecek.
+      //
+      // Bu yüzden iddia, kapının kullandığı AYNI çapaya bağlandı: izin
+      // beyanı. İzin geldiği gün test kendini emekliye ayırır ve yerini
+      // kural B/C'nin TERS YÖNÜ alır (O-059) — o da eski cümleyi zaten
+      // kırmızı yakacak. İki katman, tek çapa, çelişki yok.
+      final bool micDeclared =
+          File('ios/Runner/Info.plist').readAsStringSync()
+                  .contains('NSMicrophoneUsageDescription') ||
+              File('android/app/src/main/AndroidManifest.xml')
+                  .readAsStringSync()
+                  .contains('android.permission.RECORD_AUDIO');
+      if (micDeclared) {
+        expect(mic, isNot(contains('no microphone input in this build')),
+            reason: 'mikrofon artık BEYAN EDİLMİŞ — yokluk cümlesi bugün '
+                'yanlış, kart güncellenmeli');
+      } else {
+        expect(mic, contains('no microphone input in this build'));
+      }
       expect(mic.toLowerCase(), isNot(contains('listens')));
     });
 
