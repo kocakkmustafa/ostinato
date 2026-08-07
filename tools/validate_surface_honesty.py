@@ -272,6 +272,40 @@ ABSENCE_ASSERTIONS = re.compile(
 RETENTION_ABSENCE_ASSERTIONS = re.compile(
     r"nothing is stored|none to delete|no history here", re.IGNORECASE)
 
+# ── G: YOKLUK BEYANI EKRANDA DURMALI (varlık ikizi) ───────────────────────
+#
+# (O-060 · JabLab dersi: *bir dürüstlük kapısı, koruduğu cümlenin SİLİNMESİNİ
+# de geçerli sayarsa dürüstlüğü değil SESSİZLİĞİ korur.*)
+#
+# ÖLÇÜLDÜ (2026-08-07): karşılamadaki "The microphone is not wired" kartının
+# TAMAMINI sildim — dosyada sıfır anma kaldı — ve kapı "TEMİZ" dedi.
+# Kullanıcı mikrofonun kablolu olmadığını hiç öğrenmezdi ve 21 kapının hepsi
+# yeşil kalırdı. Kurallar B/C/E "yanlış söyleme"yi kolluyordu; "hiç söyleme"
+# serbestti — oysa bu ürünün tüm iddiası SÖYLEMEK üzerine kurulu.
+#
+# Kural simetrinin üçüncü ayağı:
+#   yetenek YOK  + iddia var        → kural B/C  (yanlış söyleme)
+#   yetenek VAR  + yokluk-iddiası   → ters yön   (eski cümle)
+#   yetenek YOK  + yokluk-iddiası YOK → KURAL G  (hiç söylememe)
+REQUIRED_DISCLOSURES = [
+    {
+        "name": "mikrofon yokluğu",
+        "pattern": re.compile(r"no microphone input in this build|"
+                              r"microphone is not wired", re.IGNORECASE),
+        "present_when": "audio_absent",
+        "why": "Ürün ses ölçümü ANLATIYOR (akor · zamanlama · perde) ama canlı "
+               "giriş yok. Bunu söylemeyen bir yüzey, kullanıcıyı motorun "
+               "yeteneğiyle ürünün yeteneğini karıştırmaya bırakır.",
+    },
+    {
+        "name": "saklama yokluğu",
+        "pattern": re.compile(r"nothing is stored|none to delete", re.IGNORECASE),
+        "present_when": "no_writer",
+        "why": "Kamera açıklaması varken saklama beyanı yoksa kullanıcı "
+               "cihazında bir kayıt olduğunu VARSAYAR (O-054'ün tersi).",
+    },
+]
+
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
 PUBSPEC = "pubspec.yaml"
@@ -644,6 +678,20 @@ def main() -> int:
     # ölçülen sıfır SANILIYOR*). Bir yol kırılır ya da cwd kayarsa bu kapı
     # "TEMİZ" der ve kimse sayıya bakmaz. Ölçüldü: 27 `tools/` betiğinin
     # yalnız 3'ü kendi doğru-pozitifini kontrol ediyordu.
+    # ── Kural G ──
+    for req in REQUIRED_DISCLOSURES:
+        active = (not audio_declared) if req["present_when"] == "audio_absent" \
+            else (not writer_found)
+        if not active:
+            continue          # yetenek geldi — ters yön devraldı
+        hits = [w for w, t in surfaces if req["pattern"].search(t)]
+        if not hits:
+            violations.append(
+                f"[yokluk beyanı EKSİK] '{req['name']}' hiçbir kullanıcı "
+                f"yüzeyinde söylenmiyor. {req['why']} — bir kapı, koruduğu "
+                f"cümlenin SİLİNMESİNİ de geçerli sayarsa dürüstlüğü değil "
+                f"SESSİZLİĞİ korur")
+
     if len(surfaces) < 150:
         violations.append(
             f"VAKUM: yalnız {len(surfaces)} kullanıcı-yüzeyi metni tarandı "
