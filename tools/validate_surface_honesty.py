@@ -218,6 +218,45 @@ RETENTION_WRITERS = re.compile(
     r"\.insert\(|openDatabase")
 RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
 
+# ── J: YÜKLEME-YOKLUĞU iddiası, YÜKLEYEN bir kod yolunun YOKLUĞUNU ister ──
+# (O-080, 2026-08-07 — E'nin ağ kardeşi.)
+#
+# Altı sevk edilen yüzey şunu söylüyor: *"Raw video never leaves this device"*,
+# *"Nothing is uploaded"*, *"Video never leaves your phone"*. Bugün ÖLÇÜLDÜ:
+# hepsi DOĞRU. Ama **hiçbir kapı onları korumuyordu** — yarın biri analitik
+# SDK'sı eklerse altı cümle birden yalana döner ve hiçbir şey ötmez.
+#
+# ⚠️ Bu kuralı yazarken kendi brifimdeki bir abartıyı da düzelttim:
+# `google_fonts` açılışta Google CDN'ine gidiyor, ama bu bir **GET**tir —
+# "yüklenmiyor" iddiasını YALANLAMAZ. Kural bu ayrımı KODLAR; "ağa çıkan her
+# şey iddiayı bozar" demek KOLAY ama YANLIŞ olurdu ve kapıyı gürültüye
+# boğardı (O-057: geniş kapsam → yanlış-pozitif → kapı susturulur).
+#
+# Kalıcı olan kısım: ağa çıkabilen HER bağımlılık **kayıtlı** olmak zorunda.
+# Kayıtsız bir tanesi belirdiğinde kapı öter — çünkü o noktada iddianın hâlâ
+# geçerli olup olmadığı bir İNSAN KARARIDIR, bir varsayım değil.
+UPLOAD_CLAIM = re.compile(
+    r"nothing is uploaded|never leaves (?:this|your) (?:device|phone)|"
+    r"does not leave (?:this|your) (?:device|phone)|nothing (?:is )?sent",
+    re.IGNORECASE)
+#: Kullanıcı verisini DIŞARI taşıyan kod yolları.
+UPLOADER_TRACES = re.compile(
+    r"\bhttp\.post\b|\bhttp\.put\b|\bDio\(|\bHttpClient\(|\bWebSocket\b|"
+    r"MultipartRequest|\.upload\(")
+#: Ağa çıkabilen ama kullanıcı verisi TAŞIMAYAN, KAYITLI bağımlılıklar.
+#: Yeni bir tanesi eklendiğinde kapı öter — kayıt bir MUAFİYET değil, bir
+#: KARAR NOKTASIDIR.
+NETWORK_DEPS_RECORDED = {
+    "google_fonts": "yazı tipi indirir (GET); kullanıcı verisi TAŞIMAZ — "
+                    "'yüklenmiyor' iddiasını yalanlamaz",
+}
+#: Ağa çıkabilen bağımlılık ailelerinin izleri (pubspec adlarında aranır).
+NETWORK_DEP_HINTS = re.compile(
+    r"^\s+(http|dio|firebase\w*|sentry\w*|posthog|amplitude|mixpanel|segment|"
+    r"appsflyer|adjust|google_fonts|supabase\w*|graphql\w*|web_socket\w*):",
+    re.MULTILINE)
+
+
 # ── F: kullanıcı yüzeyi TEK DİLDİR (bugün: İngilizce) ─────────────────────
 # Bu gece İKİ kez sızdı ve ikisi de BAŞKA bir kuralın yan etkisiyle ya da
 # elle yakalandı, yani şans eseri:
@@ -670,6 +709,34 @@ def main() -> int:
                     f"«{sentence.strip()[:110]}»"
                 )
 
+    # ── Kural J ── (yükleme-yokluğu iddiası ↔ yükleyen kod yolu + kayıtlı ağ)
+    claims_no_upload = [(w, t) for w, t in surfaces if UPLOAD_CLAIM.search(t)]
+    if claims_no_upload:
+        shipped_src = "\n".join(
+            f.read_text(encoding="utf-8", errors="ignore")
+            for f in Path("lib").rglob("*.dart"))
+        for m in UPLOADER_TRACES.finditer(shipped_src):
+            violations.append(
+                f"[yükleme iddiası] sevk edilen kod '{m.group(0)}' taşıyor ama "
+                f"{len(claims_no_upload)} yüzey 'hiçbir şey yüklenmiyor/"
+                f"cihazdan çıkmıyor' diyor — iddia artık YANLIŞ olabilir")
+        pub = Path("pubspec.yaml").read_text(encoding="utf-8")
+        for m in NETWORK_DEP_HINTS.finditer(pub):
+            dep = m.group(1)
+            if dep not in NETWORK_DEPS_RECORDED:
+                violations.append(
+                    f"[yükleme iddiası] '{dep}' ağa çıkabilen bir bağımlılık "
+                    f"ve KAYITLI DEĞİL. {len(claims_no_upload)} yüzey "
+                    f"'cihazdan çıkmıyor' diyor: bu iddianın hâlâ geçerli "
+                    f"olup olmadığı bir İNSAN KARARIDIR. Kararı verip "
+                    f"`NETWORK_DEPS_RECORDED`a GEREKÇESİYLE yazın")
+    else:
+        # VAKUM: iddia hiç bulunamadıysa kural boşa koşmuş demektir.
+        violations.append(
+            "[yükleme iddiası] VAKUM: hiçbir yüzeyde 'cihazdan çıkmıyor' "
+            "iddiası bulunamadı — ya cümleler kaldırıldı ya tarama kırıldı; "
+            "iki hâlde de bu kuralın yeşili anlamsız")
+
     # ── Kural C ──
     audio_declared = ios_declares("NSMicrophoneUsageDescription") or \
         android_declares("android.permission.RECORD_AUDIO")
@@ -864,7 +931,8 @@ def main() -> int:
           f"tarandı ({len(PROMISE_PATTERNS)} vaat deseni + "
           f"{len(CAPABILITY_RULES)} yetenek kuralı + "
           f"{checked_affirmative} olumlu iddia alanı + "
-          f"{checked_d} skor-ekseni + {checked_f} dil + "
+          f"{checked_d} skor-ekseni + {len(claims_no_upload)} yükleme iddiası + "
+          f"{checked_f} dil + "
           f"{checked_h} vücut-taraf + {checked_i} sayı)")
     # KAPSAM her koşumda YAZILIR: taranmayan bir yer 'temiz' sanılamasın diye
     # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
