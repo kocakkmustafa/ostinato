@@ -191,6 +191,29 @@ Bu gece kurduğum üçüne eklendi (`validate_surface_honesty` ≥150 metin +
 MUT-Y: `DART_ROOTS` bozuldu → kapı "temiz" DEMEDİ, VAKUM dedi.
 **Kalan 10 kapı hâlâ korumasız — isimli boşluk.**
 
+## 🧬 POZİTİF İKİZ — 31 desen, 0 ikiz (O-061)
+
+> **Vakum kapısı "hiç bulamadım"ı yakalar; pozitif ikiz "aracım BOZUK"u.**
+> İkisi ayrı arıza: vakum sayıya bakar, ama kapsam DOLU olup desenin kendisi
+> bozuksa sayı yüksek kalır ve kapı yine sahte-yeşil olur.
+
+Bu gece **üç kez** oldu ve **üçünde de kapsam doluydu**: `BARE_HEX` kapanış
+parantezi · ruleset yolundaki `[^.]+` · tanı bağlamı geri bakışı.
+
+`--selftest` eklendi (run_gates'te ayrı kapı): **22 desen** bilinen bir
+örneğe karşı sınanıyor, renk kapısında hepsi **olumlu VE olumsuz** örnekle.
+Üç yol türetimi de canlılık kontrolünden geçiyor (`pubspec` · ruleset glob ·
+`userExplanation` yolu).
+
+**MUT-AA/AB — bu gecenin GERÇEK üç hatası geri kondu, üçünü de ikiz gördü.**
+En keskin kanıt: bozuk `BARE_HEX` ile kapı *"TEMİZ — 56 çağrı tarandı"*
+diyor, ikiz *"ÖLÜ DESEN"* diyor. Aynı anda.
+
+⚠️ `find.byType` 14 kullanımım var; `findsNothing` iddialarının çoğu
+pozitif ikizli (ör. `'Try again'` hem `findsOneWidget` hem `findsNothing`
+ile sınanıyor — bulucunun çalıştığı ispatlı). **Test tarafı bugün temiz;
+kapı tarafı bu turda kapandı.**
+
 ## Açık kalan kapı boşlukları (isimli)
 
 1. ~~Dil kuralı yok~~ → **KAPANDI aynı tur (kural F).** ⚠️ Muafiyet İKİ KEZ

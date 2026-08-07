@@ -501,6 +501,65 @@ def sentences(text: str):
     return [s for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
 
 
+# ── POZİTİF İKİZ: her desen BİLİNEN bir örneği yakalayabiliyor mu? ─────────
+#
+# (O-061 · JabLab'ın `find.byType` tuzağı: bir bulucu her zaman sıfır
+# döndürüyordu, test yeşildi ve HİÇBİR ŞEY ölçmüyordu. İfşa eden şey pozitif
+# ikizdi.)
+#
+# **Vakum kapısı "hiç bulamadım"ı yakalar; pozitif ikiz "aracım bozuk"u.**
+# İkisi farklı arıza: vakum kapısı kapsam sayısına bakar, ama kapsam DOLU
+# olup desenin kendisi bozuksa sayı yüksek kalır ve kapı yine sahte-yeşil
+# olur. Bu gece üç kez oldu (BARE_HEX kapanış parantezi · ruleset yolundaki
+# `[^.]+` · tanı bağlamı geri bakışı) — üçünde de kapsam doluydu.
+#
+# Her örnek KASTEN ihlal: desen onu YAKALAMAZSA desen ölmüştür.
+SELFTEST_SAMPLES = [
+    ("vaat dili A", PROMISE_PATTERNS[0][0], "we do not grade this yet"),
+    ("vaat dili A/soon", PROMISE_PATTERNS[2][0], "chord grading is coming soon"),
+    ("yetenek B", CAPABILITY_RULES[0]["mention"], "the microphone reads pitch"),
+    ("yetenek B muafiyeti", CAPABILITY_RULES[0]["absence"][0],
+     "there is no live microphone here"),
+    ("ses kavramı C", AUDIO_CONCEPTS.pattern, "we hear every chord you play"),
+    ("ses yokluğu C", AUDIO_ABSENCE.pattern, "there is no microphone input"),
+    ("canlılık D", LIVE_CLAIM.pattern, "your elbow angle, live"),
+    ("puanlanmaz D muafiyeti", NOT_GRADED.pattern, "measured but never graded"),
+    ("saklama E", RETENTION_CLAIM.pattern, "the angles are kept on device"),
+    ("saklama yokluğu E", RETENTION_ABSENCE.pattern, "nothing is stored"),
+    ("dil F", TURKISH_WORDS.pattern, "bu ekran ve o kart için"),
+    ("tanı muafiyeti F", DIAGNOSTIC_LINE.pattern, "throw StateError('x')"),
+    ("ters yön", ABSENCE_ASSERTIONS.pattern, "there is no microphone input"),
+    ("zorunlu beyan G", REQUIRED_DISCLOSURES[0]["pattern"].pattern,
+     "there is no microphone input in this build"),
+    ("tanımlayıcı", IDENTIFIER_LIKE.pattern, "onboarding-microphone-card"),
+]
+
+
+def selftest() -> int:
+    dead = []
+    for name, pattern, sample in SELFTEST_SAMPLES:
+        if not re.search(pattern, sample, re.IGNORECASE):
+            dead.append(f"{name}: desen bilinen örneği YAKALAMIYOR — "
+                        f"«{sample}» · desen {pattern!r}")
+    # Yol türetimleri de sahte-sıfır verebilir (bu gece verdi).
+    if not shipped_json_assets():
+        dead.append("shipped_json_assets() BOŞ — pubspec türetimi ölmüş")
+    if not list(Path(".").glob(RULESET_TEXT_GLOB)):
+        dead.append(f"{RULESET_TEXT_GLOB} hiçbir dosyayla eşleşmiyor")
+    if not any(RULESET_USER_TEXT_PATH.search(p)
+               for p, _ in json_surface_strings()):
+        dead.append("ruleset `userExplanation` yolu HİÇ eşleşmiyor — "
+                    "kapsam satırı 'taranıyor' derken sıfır tarar (O-058)")
+    if dead:
+        print(f"⛔ {len(dead)} ÖLÜ DESEN/YOL (pozitif ikiz başarısız):")
+        for d in dead:
+            print(f"   - {d}")
+        return 1
+    print(f"✅ pozitif ikiz TEMİZ — {len(SELFTEST_SAMPLES)} desen bilinen "
+          f"örneğini yakaladı, 3 yol türetimi canlı")
+    return 0
+
+
 def main() -> int:
     violations = []
 
@@ -724,4 +783,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(selftest() if "--selftest" in sys.argv else main())

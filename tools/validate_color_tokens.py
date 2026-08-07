@@ -90,6 +90,50 @@ def strip_comments(src: str) -> str:
 RAW_TEXTSTYLE = re.compile(r"style:\s*(?:const\s+)?TextStyle\s*\(")
 
 
+#: POZİTİF İKİZ (O-061). Bu kapının `BARE_HEX`i bu gece SAHTE SIFIR verdi —
+#: kapanış parantezi arıyordu, yakalama grubu zaten `)`de kesiliyordu. Kapı
+#: "temiz" dedi, iki gerçek ihlal ortada duruyordu. Vakum kapısı bunu
+#: göremezdi: taranan çağrı sayısı DOLUYDU, bozuk olan DESENDİ.
+def _twin(name, ok, why):
+    return (name, ok, why)
+
+
+SELFTEST_SAMPLES = [
+    _twin("BARE_HEX olumlu",
+          lambda: BARE_HEX.search("const Color(0xFF9B95A8") is not None,
+          "sabit hex yakalanmalı"),
+    _twin("BARE_HEX olumsuz",
+          lambda: BARE_HEX.search("OstinatoColors.textMono") is None,
+          "token'ı hex sanmamalı"),
+    _twin("ALLOWED olumlu",
+          lambda: ALLOWED.search("OstinatoColors.ink") is not None,
+          "token muafiyeti çalışmalı"),
+    _twin("ALLOWED olumsuz",
+          lambda: ALLOWED.search("const Color(0xFF123456") is None,
+          "muafiyet sabit hex'i affetmemeli"),
+    _twin("RAW_TEXTSTYLE olumlu",
+          lambda: RAW_TEXTSTYLE.search("style: const TextStyle(") is not None,
+          "ham TextStyle yakalanmalı"),
+    _twin("RAW_TEXTSTYLE olumsuz",
+          lambda: RAW_TEXTSTYLE.search("style: hankenText(size: 12)") is None,
+          "yardımcıyı ham TextStyle sanmamalı"),
+    _twin("metin çağrısı",
+          lambda: TEXT_COLOR_CALLS[0].search("hankenText(size: 12, color: Foo)")
+          is not None, "hankenText çağrısı yakalanmalı"),
+]
+
+def selftest() -> int:
+    dead = [f"{n}: {why}" for n, fn, why in SELFTEST_SAMPLES if not fn()]
+    if dead:
+        print(f"⛔ {len(dead)} ÖLÜ DESEN (pozitif ikiz başarısız):")
+        for d in dead:
+            print(f"   - {d}")
+        return 1
+    print(f"✅ pozitif ikiz TEMİZ — {len(SELFTEST_SAMPLES)} desen sınandı "
+          f"(olumlu VE olumsuz örnekle)")
+    return 0
+
+
 def main() -> int:
     violations = []
     checked = 0
@@ -147,4 +191,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(selftest() if "--selftest" in sys.argv else main())
