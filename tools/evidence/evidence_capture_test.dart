@@ -428,4 +428,24 @@ void main() {
     await capture(t, '13-course-lesson-list.png');
     dumpText(t, '13-course-lesson-list.txt');
   });
+
+  // ── 14 — SIFIR-ÖLÇÜM HÂLİ (O-070). Koordinatörün "0 gösteren her yüzey"
+  // kalemi. Bu hâl render probuyla GÖRÜLEBİLİR ve sim BEKLEMEZ: negatif
+  // yön ("bu gösterilmemeli", "bu metin şöyle olmalı").
+  testWidgets('14 — Review, HİÇ okunabilir kare yok (dördüncü hâl)',
+      (WidgetTester t) async {
+    final Discipline d = guitar();
+    await t.pumpWidget(harness(ReviewScreenRoute(
+      discipline: d,
+      lesson: d.lessons.first,
+      hue: InstrumentHues.guitar,
+      summary: const SessionSummary(
+          elapsedSeconds: 42, sampleCount: 0, outCount: 0,
+          history: <double>[]),
+    )));
+    await t.pump();
+    await expectOnlyFontException(t);
+    await capture(t, '14-review-nothing-readable.png');
+    dumpText(t, '14-review-nothing-readable.txt');
+  });
 }

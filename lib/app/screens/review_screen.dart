@@ -20,8 +20,22 @@ final class SessionSummary {
   final int outCount;
   final List<double> history;
 
-  double get insideShare =>
-      sampleCount == 0 ? 1 : 1 - outCount / sampleCount;
+  /// HİÇ okunabilir kare yoksa oran YOK — `null`.
+  ///
+  /// ⚠️ Önceki hâli `sampleCount == 0 ? 1 : …` idi (O-070). Bir BÖLME-SIFIR
+  /// savunmasıydı ve sessizce **%100 bant-içi** anlamına geliyordu; oradan da
+  /// `verdict` **"Steady."** üretiyordu. Yani kamera hiç okunamadığında
+  /// (izin ortada reddedildi · sürekli karanlık · kadraj dışı) kullanıcı
+  /// SIFIR ölçümle OLUMLU bir hüküm görüyordu.
+  ///
+  /// Bu, ürünün en sert kuralının ihlaliydi: *düşük güvende hüküm yok.*
+  /// Live ekranı bunu zaten doğru yapıyor ("şu an göremiyorum"); Review
+  /// yapmıyordu. Savunmacı bir varsayılan, ölçülmemiş bir iddiaya dönüştü.
+  double? get insideShare =>
+      sampleCount == 0 ? null : 1 - outCount / sampleCount;
+
+  /// Okunabilir tek kare bile yok mu?
+  bool get nothingReadable => sampleCount == 0;
 
   /// Sunum-katmanı özeti — ÖLÇÜM eşiği değil, ekranda üç betimleyici
   /// arasında seçim yapan bir kural. Değerler (0.66 / 0.6°) tasarım
@@ -36,7 +50,10 @@ final class SessionSummary {
   /// kelime OLGUYA döndü: bandın DIŞINDA geçirilen süre, kullanıcının neye
   /// "ihtiyacı" olduğuna dair bir hüküm DEĞİL.
   String get verdict {
-    if (insideShare > 0.66) return 'Steady.';
+    // DÖRDÜNCÜ HÂL (O-070): hüküm YOK. Üç betimleyici de bir ÖLÇÜME dayanır;
+    // ölçüm yoksa dördüncüsü de bir betimleyici değil, bir YOKLUK beyanıdır.
+    if (nothingReadable) return 'Nothing we could read.';
+    if (insideShare! > 0.66) return 'Steady.';
     if (_improving()) return 'Improving.';
     return 'Mostly outside the band.';
   }
@@ -120,7 +137,13 @@ class ReviewScreenRoute extends StatelessWidget {
                       size: 27, weight: FontWeight.w600, height: 1.15)),
               const SizedBox(height: 10),
               Text(
-                  '$secs S MEASURED · ${discipline.displayName.toUpperCase()} · '
+                  // O-070 (ikinci tur, KANITA BAKINCA): sıfır-ölçüm hâlinde
+                  // bu satır "42 S MEASURED" diyordu ve gövde "tek kare
+                  // okuyamadık" diyordu — AYNI EKRANDA çelişki. Geçen SÜRE
+                  // ile ÖLÇÜLEN süre farklı şeyler; ikisini tek kelimeyle
+                  // ("measured") anlatmak, ölçülmemiş süreyi ölçülmüş
+                  // gösteriyordu.
+                  '${summary.nothingReadable ? "$secs S ELAPSED · NOTHING READ" : "$secs S MEASURED"} · ${discipline.displayName.toUpperCase()} · '
                   'NO SCORE',
                   style: monoText()),
               const SizedBox(height: 18),
@@ -145,13 +168,23 @@ class ReviewScreenRoute extends StatelessWidget {
                         child: CustomPaint(
                             painter: _CurvePainter(history: summary.history))),
                     const SizedBox(height: 12),
+                    // O-070: sıfır ölçümde bu cümle "%100 … 0 saniye" derdi.
+                    // Yokluk kendi cümlesini taşır; ölçüm cümlesinin içine
+                    // sıfır koymak, ölçülmemiş olanı ölçülmüş gibi biçimler.
                     Text(
-                      'Your trunk stayed inside the teachers’ band for '
-                      '${(summary.insideShare * 100).round()}% of the $secs '
-                      'seconds we could read it. That is the whole of it: '
-                      'share of time inside the band, and the shape of the '
-                      'line above. No weighting, no composite, nothing '
-                      'hidden behind a single figure.',
+                      summary.nothingReadable
+                          ? 'We could not read a single frame this session, '
+                            'so there is nothing to summarise — not a zero, '
+                            'and not a verdict. The camera never gave us a '
+                            'trunk line we trusted enough to measure.'
+                          : 'Your trunk stayed inside the teachers’ band for '
+                            '${(summary.insideShare! * 100).round()}% of the '
+                            '$secs seconds we could read it. That is the '
+                            'whole of it: share of time inside the band, and '
+                            'the shape of the line above. No weighting, no '
+                            'composite, nothing hidden behind a single '
+                            'figure.',
+                      key: const Key('review-measured-body'),
                       style: hankenText(size: 13.5, height: 1.55),
                     ),
                   ],
