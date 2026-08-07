@@ -36,6 +36,19 @@ TEXT_COLOR_CALLS = [
     re.compile(r"\bkicker\s*\([^)]*?\bcolor:\s*([^,)]+)", re.S),
 ]
 
+#: ── O-082 · KUSUR CÜMLENİN KONUSUNDA DEĞİL, ÖNVARSAYIMINDAYDI ─────────────
+#: Yukarıdaki üç desen çağrı YERİNİ denetler ve bu doğru. Ama ölçüldü ki
+#: `hankenText`/`monoText` çağrılarının ÇOĞU `color:` HİÇ GEÇMİYOR — renk
+#: imzadaki VARSAYILANDAN geliyor:
+#:     TextStyle hankenText({ ... Color color = OstinatoColors.ink, ... })
+#: Yani kapı, rengin çağrı yerine HER ZAMAN geldiğini VARSAYIYORDU. O
+#: varsayılan ham bir hex'e çevrilse uygulamanın TÜM metni ham renge düşerdi
+#: ve kapı yine "temiz" derdi — üstelik taranan çağrı sayısı DOLU kalırdı,
+#: yani vakum kapısı da göremezdi (O-061'in aynı gölgesi).
+#: Kapsam kasten dar: yalnız `TextStyle` DÖNDÜREN bir bildirimin imzası.
+TEXTSTYLE_DECL = re.compile(r"\bTextStyle\s+\w+\s*\(")
+COLOR_DEFAULT = re.compile(r"\bColor\??\s+\w+\s*=\s*([^,)\n]+)")
+
 #: Kabul edilen kaynaklar: tema token'ları, çalgı kimliği, ve Flutter'ın
 #: kendi iki ucu (saf beyaz/siyah — koyu sahnelerde metin bunlarla çizilir
 #: ve kontrast testi o yığınları AYRICA ölçüyor).
@@ -55,7 +68,11 @@ ALLOWED = re.compile(
 #: ŞEY yakalayamıyordu: yakalama grubu `[^,)]+` zaten ilk `)`de kesiliyor,
 #: yani hex'in kapanışı ifadeye hiç girmiyordu. Kapı "temiz" diyordu ve
 #: ölçülmüş İKİ ihlal ortada duruyordu — kapının kendi kör noktası.
-BARE_HEX = re.compile(r"Color\(0x[0-9A-Fa-f]{6,8}")
+#: ⚠️ O-081 — alt sınır İCAT EDİLMİŞTİ (`{6,8}`). `Color(0xFFF)` da, `Color(0x0)`
+#: da geçerli Dart'tır ve ikisi de ham renktir; eski desen ikisini de KAÇIRIYORDU.
+#: Bir kapının deseni "tipik" hedefi değil, MEŞRU hedeflerin TAMAMINI tanımalı —
+#: JabLab'ın 2 karakterlik `W1`'i `{3,}` yüzünden kaçırması ile aynı sınıf.
+BARE_HEX = re.compile(r"Color\(0x[0-9A-Fa-f]{1,8}")
 
 
 def strip_comments(src: str) -> str:
@@ -157,6 +174,36 @@ def main() -> int:
                     f"(O-049: tam olarak bu oldu). `OstinatoColors.*` kullan."
                 )
 
+    # ── O-082: `TextStyle` DÖNDÜREN imzaların renk VARSAYILANLARI.
+    # ⚠️ Bu geçiş `ostinato_theme.dart`ı DIŞLAMAZ — ve kör noktanın sebebi tam
+    # olarak o dışlamaydı: dosya PALETİ tanımladığı için muaftı, ama aynı
+    # dosyadaki imza varsayılanları palet DEĞİL, paletin TÜKETİCİSİDİR.
+    defaults_checked = 0
+    for path in sorted(LIB.rglob("*.dart")):
+        src = strip_comments(path.read_text(encoding="utf-8"))
+        for d in TEXTSTYLE_DECL.finditer(src):
+            depth, i, n = 0, d.end() - 1, len(src)
+            while i < n:  # imzanın kapanış parantezini bul
+                if src[i] == "(":
+                    depth += 1
+                elif src[i] == ")":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                i += 1
+            signature = src[d.end():i]
+            for c in COLOR_DEFAULT.finditer(signature):
+                expr = c.group(1).strip()
+                defaults_checked += 1
+                if not BARE_HEX.search(expr) or ALLOWED.search(expr):
+                    continue
+                line = src.count("\n", 0, d.start()) + 1
+                violations.append(
+                    f"{path}:{line}: `TextStyle` imzasında metin rengi "
+                    f"VARSAYILANI ham hex: {expr[:50]!r}. Çağrıların çoğu "
+                    f"`color:` GEÇMEZ — bu varsayılan uygulamanın metin "
+                    f"rengidir ve çağrı-yeri denetimi onu göremez (O-082).")
+
     # ── Tipografi: ham TextStyle yasak (yardımcıdan geç).
     for path in sorted(LIB.rglob("*.dart")):
         src = strip_comments(path.read_text(encoding="utf-8"))
@@ -185,8 +232,13 @@ def main() -> int:
         for v in violations:
             print(f"   - {v}")
         return 1
+    if defaults_checked == 0:
+        print("⛔ VAKUM: hiçbir `TextStyle` imzasında renk varsayılanı "
+              "bulunamadı — O-082 geçişi boşa koştu, yeşili anlamsız")
+        return 1
     print(f"✅ renk+tipografi token kapısı TEMİZ — {checked} metin-rengi "
-          f"çağrısı token'dan geliyor, ham `TextStyle` yok")
+          f"çağrısı + {defaults_checked} imza VARSAYILANI token'dan geliyor, "
+          f"ham `TextStyle` yok")
     return 0
 
 

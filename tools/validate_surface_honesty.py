@@ -455,21 +455,42 @@ def shipped_json_assets():
 
     Liste ELLE yazılmıyor çünkü elle yazılan bir kapsam, eklenen ilk yeni
     varlıkta sessizce bayatlar — tam da bu kapının kovaladığı arıza sınıfı.
+
+    ── O-081 (2026-08-07) · EŞİK SÜPÜRMESİ, JabLab'ın `{3,}`/`W1` sınıfı ──
+    Bu ayrıştırıcı `^\\s{2}assets:` ve `^\\s{4,}-` yazıyordu; yani girintiyi
+    İCAT EDİLMİŞ sabitlerle bağlıyordu. Oysa **2 boşluk girintili bir dizi
+    YAML'da tamamen geçerlidir**:
+        flutter:
+          assets:
+          - assets/foo.json      ← ÖLÇÜLDÜ: eski desen bunu KAÇIRIYORDU
+    Vakum kapısı (<3) yalnız TOPLAM kırılmayı yakalar. Üç varlık 4 boşlukta
+    kalıp DÖRDÜNCÜSÜ 2 boşlukta eklenseydi: kapı sessizce 3 tarar, vakum
+    geçer, ve yeni varlık **hiç denetlenmeden** sevk edilirdi.
+
+    🎓 Ders: eşiği GENİŞLETMEK (4 → 3) çizgiyi oynatmaktan ibarettir. Doğrusu
+    eşiği KALDIRMAK ve sınırı verinin KENDİSİNDEN türetmektir — burada
+    `assets:` anahtarının kendi girintisi.
     """
     text = Path(PUBSPEC).read_text(encoding="utf-8")
-    out, in_assets = [], False
+    out, key_indent = [], None
     for raw in text.splitlines():
-        if re.match(r"^\s{2}assets:\s*$", raw):
-            in_assets = True
+        m = re.match(r"^(\s*)assets:\s*$", raw)
+        if m:  # her gerçek `assets:` bloğu sayılır (yorumlar aşağıda elenir)
+            key_indent = len(m.group(1))
             continue
-        if in_assets:
-            m = re.match(r"^\s{4,}-\s+(\S+)\s*$", raw)
-            if m:
-                if m.group(1).endswith(".json"):
-                    out.append(m.group(1))
-                continue
-            if raw.strip() and not raw.strip().startswith("#"):
-                in_assets = False
+        if key_indent is None:
+            continue
+        if not raw.strip() or raw.strip().startswith("#"):
+            continue
+        indent = len(raw) - len(raw.lstrip())
+        item = re.match(r"^\s*-\s+(\S+)\s*$", raw)
+        # YAML: dizi öğesi anahtarla AYNI girintide ya da DAHA İÇERİDE olabilir.
+        if item and indent >= key_indent:
+            if item.group(1).endswith(".json"):
+                out.append(item.group(1))
+            continue
+        if indent <= key_indent:
+            key_indent = None  # blok bitti; sonraki `assets:` yorum olabilir
     return out
 
 
