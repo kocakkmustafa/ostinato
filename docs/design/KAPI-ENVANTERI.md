@@ -163,6 +163,34 @@ KAYNAĞINDAN türetilir, elle liste yok) + şema sürümü gerçekten doğrulan�
 
 ---
 
+## 🔁 TERS YÖN — "kendini emekliye ayırır" bir NİYETTİ (O-059)
+
+> **Ölçüt (JabLab J-133):** *bir cümle sevk edildiyse, onu yanlışa çevirecek
+> en MAKUL değişikliği sor. Makulse, kapı gerekir.*
+
+Kural B/C/E "izin/kod yolu gelince kendini emekliye ayırır" diyordu. **Ölçüldü:
+üçü de yalnız SUSUYORDU.** Mikrofon kablolandığı gün **20 cümle** (15
+`library.json` + 5 `lib/`) sessizce yanlışa dönecekti ve hiçbir kapı bakmayacaktı.
+*Kimse yalan söylemeye karar vermez; biri `Info.plist`e bir satır ekler.*
+
+Artık simetrik: **yetenek YOKKEN iddia yasak, yetenek VARKEN yokluk-iddiası
+yasak.** MUT-W: izin eklendi → **22 ters-yön ihlali**. MUT-X: saklayan kod
+yolu eklendi → 2 ihlal.
+
+⚠️ Bu deseni O-045'te `RUNTIME_REFS` için kurmuştum, sonra **aynı tek-yönlü
+hâli üç kez daha yazdım.** Bir dersi bir yerde uygulamak, onu her yerde
+uyguladığın anlamına gelmiyor.
+
+## 🕳️ VAKUM KORUMASI — 27 betikten 3'ü
+
+> *Rapor edilen sıfır, ölçülen sıfır sanılıyor.*
+
+`run_gates`teki 16 kapının **13'ünde vakum koruması yoktu** — en büyüğüm dahil.
+Bu gece kurduğum üçüne eklendi (`validate_surface_honesty` ≥150 metin +
+≥3 varlık · `validate_color_tokens` ≥30 çağrı · `gen_out_of_scope` >0 kalem).
+MUT-Y: `DART_ROOTS` bozuldu → kapı "temiz" DEMEDİ, VAKUM dedi.
+**Kalan 10 kapı hâlâ korumasız — isimli boşluk.**
+
 ## Açık kalan kapı boşlukları (isimli)
 
 1. ~~Dil kuralı yok~~ → **KAPANDI aynı tur (kural F).** ⚠️ Muafiyet İKİ KEZ
@@ -176,4 +204,5 @@ KAYNAĞINDAN türetilir, elle liste yok) + şema sürümü gerçekten doğrulan�
    kapı orayı kollamıyor: yarın eklenen bir cümle sessizce kapsam dışı kalır.
 4. **Metin-dışı kontrast (1.4.11)** — bant çubuğu, iskelet çizgileri, ayraçlar
    hiç ölçülmüyor.
-5. **Kanıt üreteci kapı değil** — elle tazelenir.
+5. **10 kapıda vakum koruması yok** — sahte-sıfır riski.
+6. **Kanıt üreteci kapı değil** — elle tazelenir.

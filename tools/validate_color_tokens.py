@@ -126,6 +126,16 @@ def main() -> int:
                 f"kanıtlanan ayrışır (O-052)."
             )
 
+
+    # ── VAKUM KAPISI (O-059 · JabLab'ın öz-düzeltmesi: *rapor edilen sıfır,
+    # ölçülen sıfır SANILIYOR*). Bir yol kırılır ya da cwd kayarsa bu kapı
+    # "TEMİZ" der ve kimse sayıya bakmaz. Ölçüldü: 27 `tools/` betiğinin
+    # yalnız 3'ü kendi doğru-pozitifini kontrol ediyordu.
+    if checked < 30:
+        violations.append(
+            f"VAKUM: yalnız {checked} metin-rengi çağrısı tarandı "
+            f"(beklenen ≥30) — regex ya da yol kırılmış, hüküm GEÇERSİZ")
+
     if violations:
         print(f"⛔ {len(violations)} TOKEN/TİPOGRAFİ İHLALİ:")
         for v in violations:

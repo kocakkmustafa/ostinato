@@ -120,6 +120,13 @@ def main():
                 f"icin yok' — iki ayri gerekce, tek listede toplanmaz.")
 
     if check:
+        # VAKUM (O-059): taksonomi okunamaz ya da filtre kırılırsa türetim
+        # BOŞ döner, kütüphane de boşsa "taze" görünür — sahte yeşil.
+        if sum(len(v) for v in derived.values()) == 0:
+            print("❌ VAKUM: taksonomiden HİÇ kapsam-dışı kalem türemedi — "
+                  "`inV1Scope` filtresi ya da dosya yolu kırılmış olabilir; "
+                  "'taze' hükmü GEÇERSİZ")
+            return 1
         if stale:
             print("❌ kapsam-dışı listesi BAYAT (kod/taksonomi değişti, "
                   "yeniden üretilmedi):")

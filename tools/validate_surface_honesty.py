@@ -251,6 +251,27 @@ TURKISH_WORDS = re.compile(
     r"\b(ve|ile|için|değil|yok|var|bu|şu|olan|bir|daha|çok|gibi|ama)\b",
     re.IGNORECASE)
 
+# ── TERS YÖN: yetenek GELDİĞİ gün, yokluk iddiaları YANLIŞA döner ─────────
+#
+# (O-059 · JabLab J-133 ölçütü: *bir cümle sevk edildiyse, onu yanlışa
+# çevirecek en MAKUL değişikliği sor. Makulse, kapı gerekir.*)
+#
+# Kural B/C/E "izin/kod yolu gelince kendini emekliye ayırır" DİYORDU — ve
+# ölçüldü: bu bir NİYETTİ, kapı değil. Üçü de yalnız SUSUYOR. Mikrofon
+# kablolandığı gün **20 cümle** (15 `library.json` + 5 `lib/`) sessizce
+# yanlışa döner ve hiçbir kapı bakmaz. Kimse yalan söylemeye karar vermez;
+# biri `Info.plist`e bir satır ekler.
+#
+# O-045'te `RUNTIME_REFS` için iki yönü de kapatmıştım, sonra AYNI tek-yönlü
+# deseni üç kez daha yazdım. Şimdi simetrik: yetenek YOKKEN iddia yasak,
+# yetenek VARKEN yokluk-iddiası yasak.
+ABSENCE_ASSERTIONS = re.compile(
+    r"no (?:live )?microphone|there is no microphone input|"
+    r"not wired in this build|no audio permission|hears nothing|"
+    r"never listen(?:s)? to your", re.IGNORECASE)
+RETENTION_ABSENCE_ASSERTIONS = re.compile(
+    r"nothing is stored|none to delete|no history here", re.IGNORECASE)
+
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
 PUBSPEC = "pubspec.yaml"
@@ -468,7 +489,17 @@ def main() -> int:
         declared = ios_declares(rule["ios_key"]) or android_declares(
             rule["android_permission"])
         if declared:
-            continue  # yetenek gerçekten beyan edilmiş — kural kendini kaldırdı
+            # ⚠️ KURAL KENDİNİ KALDIRMAZ, YÖN DEĞİŞTİRİR (O-059). Yetenek artık
+            # VAR: yokluğunu söyleyen her cümle BUGÜN YANLIŞ.
+            for where, text in surfaces:
+                for sentence in sentences(text):
+                    if ABSENCE_ASSERTIONS.search(sentence):
+                        violations.append(
+                            f"[ters yön] {where}: '{rule['name']}' artık BEYAN "
+                            f"EDİLMİŞ ({rule['ios_key']}/"
+                            f"{rule['android_permission']}) ama bu cümle hâlâ "
+                            f"yokluğunu söylüyor — «{sentence.strip()[:100]}»")
+            continue
         for where, text in surfaces:
             for sentence in sentences(text):
                 if not re.search(rule["mention"], sentence, flags=re.IGNORECASE):
@@ -556,6 +587,16 @@ def main() -> int:
                 f.read_text(encoding="utf-8"))):
             writer_found = True
             break
+    if writer_found:
+        # TERS YÖN (O-059): artık saklayan bir kod yolu VAR; "hiçbir şey
+        # saklanmıyor" diyen her cümle bugün YANLIŞ.
+        for where, text in surfaces:
+            for sentence in sentences(text):
+                if RETENTION_ABSENCE_ASSERTIONS.search(sentence):
+                    violations.append(
+                        f"[ters yön] {where}: kabukta ölçüm SAKLAYAN bir kod "
+                        f"yolu var ama bu cümle hâlâ hiçbir şeyin "
+                        f"saklanmadığını söylüyor — «{sentence.strip()[:100]}»")
     if not writer_found:
         for where, text in surfaces:
             for sentence in sentences(text):
@@ -597,6 +638,21 @@ def main() -> int:
                     f"beyan edilen dil {declared_lang!r} — İngilizce konuşan "
                     f"kullanıcıya gider ve hiçbir test bunu kırmaz — "
                     f"«{text.strip()[:100]}»")
+
+
+    # ── VAKUM KAPISI (O-059 · JabLab'ın öz-düzeltmesi: *rapor edilen sıfır,
+    # ölçülen sıfır SANILIYOR*). Bir yol kırılır ya da cwd kayarsa bu kapı
+    # "TEMİZ" der ve kimse sayıya bakmaz. Ölçüldü: 27 `tools/` betiğinin
+    # yalnız 3'ü kendi doğru-pozitifini kontrol ediyordu.
+    if len(surfaces) < 150:
+        violations.append(
+            f"VAKUM: yalnız {len(surfaces)} kullanıcı-yüzeyi metni tarandı "
+            f"(beklenen ≥150) — bir yol kırılmış olabilir, 'temiz' hükmü "
+            f"GEÇERSİZ")
+    if len(shipped_json_assets()) < 3:
+        violations.append(
+            f"VAKUM: pubspec'ten yalnız {len(shipped_json_assets())} JSON "
+            f"varlığı türedi (beklenen ≥3) — kapsam türetimi kırılmış")
 
     if violations:
         print(f"⛔ {len(violations)} YÜZEY DÜRÜSTLÜĞÜ İHLALİ:")
