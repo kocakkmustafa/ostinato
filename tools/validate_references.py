@@ -23,6 +23,7 @@ Sabotaj: `--sabotage` her atıf sınıfını kasten kırar ve kapının kırmız
 yandığını sınar. Kapı, kırabildiğini göstermeden "kapı" değildir.
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -36,7 +37,46 @@ FIXTURE_INDEX = "fixtures/audio/index.json"
 
 #: Çalışma-zamanı referansları: statik olarak çözülemez ve çözülmeye
 #: ÇALIŞILMAMALI. İSİMLE muaf tutuluyorlar — sessiz atlama, kapsamı gizler.
-RUNTIME_REFS = {"exercise.expectedNoteHz", "setup.roomFloorDb"}
+#:
+#: ⚠️ **AMA İSİMLİ OLMAK YETMİYOR** (JabLab aktarımı, koordinatör 2026-08-07;
+#: orada `engineDriven` muafiyet listesi 6→3 indi ve ÜÇ ÖLÜ REPLİK tam
+#: muafiyetin arkasında saklanıyordu). Mekanizma: liste "bunu çalışma zamanı
+#: üretir" der → üreten kod yolu YOKTUR → kapı yeşil kaldıkça kimse bakmaz.
+#: **Muafiyet, kapının kendi kör noktasını üretir.**
+#:
+#: Ostinato'da ölçüldü (2026-08-07) ve İKİSİ DE boştu:
+#:   · `setup.roomFloorDb`   — kabukta ÜRETİCİ 0 (mikrofon girişi yok, O-040).
+#:                             Tüketici var (`AudioConfidenceGate`), besleyen yok.
+#:   · `exercise.expectedNoteHz` — TÜM ağaçta 1 eşleşme: kendi beyanı.
+#:                             Ne üretici ne tüketici ne test. Tamamen ölü.
+#:
+#: Bu yüzden muafiyet artık çıplak bir isim değil, KENDİ CANLILIK İDDİASINI
+#: taşıyan bir kayıt — ve kapı o iddiayı DOĞRULUYOR (aşağıda). `live` iddia
+#: eden bir kalem üreticisini gösteremezse KIRMIZI; `blocked` diyen bir kalem
+#: üreticisi ORTAYA ÇIKARSA da KIRMIZI (kayıt bayatladı, muafiyet kendini
+#: emekliye ayırmalı). İki yön de kapalı olmadan bu sadece daha uzun bir
+#: muafiyet listesi olurdu.
+RUNTIME_REFS = {
+    "setup.roomFloorDb": {
+        "status": "blocked",
+        "blockedBy": "Kabukta mikrofon girişi YOK (O-040): oda gürültü tabanı "
+                     "hiç ölçülmüyor, Kurulum Kontrolü bunu kendi ekranında "
+                     "adıyla söylüyor. Tüketici hazır, besleyen yok.",
+        # Kabukta bu desen GÖRÜNÜRSE üretici doğmuş demektir → kayıt bayat.
+        "producerPattern": r"roomFloorDb",
+        "consumer": "packages/ostinato_audio/lib/src/gate/audio_confidence_gate.dart",
+    },
+    "exercise.expectedNoteHz": {
+        "status": "blocked",
+        "blockedBy": "Ne üretici ne tüketici var — tüm ağaçta tek eşleşme "
+                     "kendi beyanı (voice ruleset'i). Şan alıştırmasının hedef "
+                     "frekansını verecek alıştırma-durumu katmanı inşa "
+                     "edilmedi; mikrofon girişi de yok, yani tüketilecek bir "
+                     "yer de olmazdı.",
+        "producerPattern": r"expectedNoteHz",
+        "consumer": None,
+    },
+}
 
 
 def load(p):
@@ -257,6 +297,36 @@ def sweep():
     bad = {v for v in fmap.values() if v not in INSTRUMENTS}
     check(problems, not bad,
           f"fixture-instrument-map bilinmeyen çalgıya işaret ediyor: {sorted(bad)}")
+
+    # ── MUAFİYET DENETİMİ: muafiyetin VARSAYDIĞI şey gerçekten öyle mi?
+    #
+    # (JabLab aktarımı — bkz. RUNTIME_REFS başlığı.) İsimli olmak yetmez:
+    # muafiyet bir İDDİA taşır ("bunu çalışma zamanı üretir" / "bu bugün
+    # engelli"), ve denetlenmeyen bir iddia tam da bu kapının kovaladığı şey.
+    # İki yön de kapalı, yoksa bu yalnız daha uzun bir muafiyet listesi olur.
+    shell = "\n".join(
+        p.read_text(encoding="utf-8") for p in Path("lib").rglob("*.dart"))
+    for ref, spec in RUNTIME_REFS.items():
+        produced = bool(re.search(spec["producerPattern"], shell))
+        if spec["status"] == "live":
+            check(problems, produced,
+                  f"muafiyet {ref!r} 'live' diyor ama kabukta ÜRETİCİSİ YOK "
+                  f"(desen {spec['producerPattern']!r} lib/ içinde 0 eşleşme) "
+                  f"— muafiyetin arkasında ölü bir atıf saklanıyor")
+        else:
+            check(problems, spec.get("blockedBy"),
+                  f"muafiyet {ref!r} 'blocked' ama gerekçesi YOK — engelin "
+                  f"adı yazılmadan muafiyet, sessiz atlamanın uzun hâlidir")
+            # TERS YÖN: üretici doğduysa kayıt bayat, muafiyet emekli olmalı.
+            check(problems, not produced,
+                  f"muafiyet {ref!r} 'blocked' diyor ama kabukta ÜRETİCİSİ "
+                  f"GÖRÜNDÜ (desen {spec['producerPattern']!r}) — kayıt "
+                  f"bayatladı, status 'live' olmalı")
+        consumer = spec.get("consumer")
+        if consumer:
+            check(problems, Path(consumer).exists(),
+                  f"muafiyet {ref!r} tüketici olarak {consumer!r} gösteriyor "
+                  f"ama o dosya YOK")
 
     return problems
 
