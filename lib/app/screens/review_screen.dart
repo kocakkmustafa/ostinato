@@ -162,7 +162,14 @@ class ReviewScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker('What we could not measure'),
+                    // O-069 İKİNCİ TUR: bu başlığı ilk turda ATLADIM.
+                    // Çalgı sayfasının başlığını düzeltip Review'da yalnız
+                    // kapanış cümlesini değiştirmiştim — *bir kusuru bulduğun
+                    // yüzeyde düzeltmek, onu ürünün geri kalanında düzeltmek
+                    // değildir* (J-151), ve bu gece ÜÇÜNCÜ tekrarı. Kanıt
+                    // karesine bakınca görüldü: `05-review.png` hâlâ
+                    // "WHAT WE COULD NOT MEASURE" diyordu.
+                    kicker('What we did not judge — and why'),
                     const SizedBox(height: 6),
                     // Sayı LİSTEDEN türer. Elle yazılıydı ('Three things')
                     // ve tam altındaki liste de elle yazılıydı: dördüncü
@@ -188,9 +195,13 @@ class ReviewScreenRoute extends StatelessWidget {
                                 color: OstinatoColors.inkSoft)),
                       ),
                     Text(
-                      'This half is not a disclaimer. It is the same size '
-                      'as the half above because it carries the same '
-                      'weight.',
+                      // O-069: "aynı ağırlıkta" cümlesi doğruydu ama
+                      // eksikti — bu kalemler aynı TÜRDEN de değil.
+                      'This half is not a disclaimer. It is the same size as '
+                      'the half above because it carries the same weight — '
+                      'and these are not all the same kind of gap: some are '
+                      'missing tools, some are missing data, and some are '
+                      'judgements we do not think are ours to make.',
                       style: hankenText(size: 12.5, color: OstinatoColors.textMuted),
                     ),
                   ],

@@ -5,13 +5,13 @@ Sitting posture
 WHAT WE MEASURED
 Steady.
 Your trunk stayed inside the teachers’ band for 88% of the 92 seconds we could read it. That is the whole of it: share of time inside the band, and the shape of the line above. No weighting, no composite, nothing hidden behind a single figure.
-WHAT WE COULD NOT MEASURE
+WHAT WE DID NOT JUDGE — AND WHY
 Four things, by name.
 Landmark confidence below the bar. Any window like that is not counted, not scored as zero.
 Anything outside what this lesson measures — trunk alignment only; no other joint carries a verdict here.
 Your arms. If shown live elsewhere, they are measured and never marked — the teachers we recorded disagree by too much to call a difference an error.
 Your fingers on the fretboard, and everything below your hips. At the distance that keeps your hips in frame a fingertip is a few pixels wide, and the teaching footage our reference comes from is filmed waist-up.
-This half is not a disclaimer. It is the same size as the half above because it carries the same weight.
+This half is not a disclaimer. It is the same size as the half above because it carries the same weight — and these are not all the same kind of gap: some are missing tools, some are missing data, and some are judgements we do not think are ours to make.
 ONE THING NEXT
 Next time, sit a little further from the phone so both hips stay in frame the whole way through.
 One suggestion, not a list.
@@ -24,13 +24,13 @@ Done
 [RichText] WHAT WE MEASURED
 [RichText] Steady.
 [RichText] Your trunk stayed inside the teachers’ band for 88% of the 92 seconds we could read it. That is the whole of it: share of time inside the band, and the shape of the line above. No weighting, no composite, nothing hidden behind a single figure.
-[RichText] WHAT WE COULD NOT MEASURE
+[RichText] WHAT WE DID NOT JUDGE — AND WHY
 [RichText] Four things, by name.
 [RichText] Landmark confidence below the bar. Any window like that is not counted, not scored as zero.
 [RichText] Anything outside what this lesson measures — trunk alignment only; no other joint carries a verdict here.
 [RichText] Your arms. If shown live elsewhere, they are measured and never marked — the teachers we recorded disagree by too much to call a difference an error.
 [RichText] Your fingers on the fretboard, and everything below your hips. At the distance that keeps your hips in frame a fingertip is a few pixels wide, and the teaching footage our reference comes from is filmed waist-up.
-[RichText] This half is not a disclaimer. It is the same size as the half above because it carries the same weight.
+[RichText] This half is not a disclaimer. It is the same size as the half above because it carries the same weight — and these are not all the same kind of gap: some are missing tools, some are missing data, and some are judgements we do not think are ours to make.
 [RichText] ONE THING NEXT
 [RichText] Next time, sit a little further from the phone so both hips stay in frame the whole way through.
 [RichText] One suggestion, not a list.

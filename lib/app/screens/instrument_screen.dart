@@ -86,7 +86,33 @@ class InstrumentScreenRoute extends StatelessWidget {
                           const SizedBox(height: 6),
                           const Divider(height: 1),
                           const SizedBox(height: 12),
-                          kicker('Not measured'),
+                          // ÇERÇEVE DÜZELTİLDİ (O-069 · JabLab J-153).
+                          // Başlık "Not measured" idi ve TEK bir sebep ilan
+                          // ediyordu: "ölçmeye çalıştık, olmadı" — yani
+                          // TEKNİK KISIT. Teknik kısıt örtük bir VAAT taşır
+                          // ("daha iyi teknoloji çözer"); kasıtlı bir karar
+                          // taşımaz. Ölçüldü: bu listedeki 27 sınır EN AZ
+                          // DÖRT ayrı sınıftan — alet yok · kabuk eksik ·
+                          // referans yok · KARAR bize ait değil. Hiçbir
+                          // cümle yalan söylemiyordu; kusur CÜMLE düzeyinde
+                          // görünmüyordu, çünkü çerçeve KÜMENİN KENDİSİ
+                          // hakkında bir iddiaydı ve hiçbir öğesinde yazılı
+                          // değildi.
+                          kicker('What we do not judge — and why'),
+                          const SizedBox(height: 8),
+                          Text(
+                            'These are not all the same kind of gap. Some '
+                            'need a tool we do not have, some need teacher '
+                            'data nobody has collected, some are simply not '
+                            'built here, and at least one is not a data '
+                            'problem at all — it is a judgement we do not '
+                            'think is ours to make. Each line says which.',
+                            key: const Key('not-measured-frame'),
+                            style: hankenText(
+                                size: 12,
+                                height: 1.5,
+                                color: OstinatoColors.textMuted),
+                          ),
                           const SizedBox(height: 10),
                           for (final String m in discipline.notMeasured)
                             _HonestyRow(text: m, filled: false),

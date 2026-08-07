@@ -21,7 +21,7 @@
    "blurb": "Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit. This build hears nothing: there is no microphone input, so every judgement comes from the camera.",
    "honesty": {
     "measured": [
-     "Trunk alignment while sitting — checked against 7 independent guitar teachers who agree to within 2.24 degrees of each other (config/references/guitar-posture-setup.v1.json, ATTESTED)"
+     "Trunk alignment while sitting — checked against 7 independent guitar teachers who agree to within 2.24 degrees of each other, and that agreement is attested against the recorded reference we built from them"
     ],
     "notMeasured": [
      "Anything you play. The chord engine is real and measured — it covers the 8 open chords this course teaches (E A D G C Am Em Dm) and refuses a chord outside them by name ('not one of the chords this lesson covers') instead of reporting the nearest one that is. But it has only ever run on recordings. There is no microphone input in this build, so none of it runs in your room.",
@@ -37,7 +37,8 @@
     "outOfScopeDerived": [
      "Practicing Through Mistakes Instead of Slow, Deliberate Practice — deliberately out of scope. 4 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it."
     ],
-    "_outOfScopeDerived_source": "URETILDI: tools/gen_out_of_scope.py <- config/error-taxonomy.w1.json (inV1Scope=false olan hatalar: G-PRACTICE-NO-ISOLATION). ELLE DUZENLEME. comingSoonInThisDiscipline AYRI ve elle yazilir: o liste 'olcemedigimiz icin yok', bu liste 'kapsam disi biraktigimiz icin yok' — iki ayri gerekce, tek listede toplanmaz."
+    "_outOfScopeDerived_source": "URETILDI: tools/gen_out_of_scope.py <- config/error-taxonomy.w1.json (inV1Scope=false olan hatalar: G-PRACTICE-NO-ISOLATION). ELLE DUZENLEME. comingSoonInThisDiscipline AYRI ve elle yazilir: o liste 'olcemedigimiz icin yok', bu liste 'kapsam disi biraktigimiz icin yok' — iki ayri gerekce, tek listede toplanmaz.",
+    "_provenancePathRemoved": "2026-08-07 (O-069): measured[0] ham DEPO YOLU tasiyordu ('config/references/guitar-posture-setup.v1.json, ATTESTED'). Kullanicinin acamayacagi bir ic tanimlayici — O-050'de ham HATA KODU icin ayni kurali uygulamistim ('ham detail/hata kodu yuzeye sizmaz'), dosya yolu ayni sinif. OLGU KORUNDU: 'attested' kelimesi ve egitmen sayisi/anlasma derecesi cumlede duruyor; izlenebilirlik `_measurementProvenance` KAYDINDA. Kanit karesine BAKINCA gorundu — hicbir kapi bakmiyordu."
    },
    "courses": [
     {
@@ -196,7 +197,7 @@
    "_blurbRevised": "2026-08-04: onceki blurb 'get feedback on pitch, sustain and posture' diyordu. Perde ve sustain motorlari GERCEK ve olculuyor, ama GERCEK BIR INSAN SESI kaydinda hic dogrulanmadi (bkz. sustained_note dersi, locked). Canli bir disiplinde blurb bir SOZDUR — kilitli olani vaat edemez.",
    "honesty": {
     "measured": [
-     "Trunk alignment while you set up to sing — checked against 6 independent voice teachers who agree to within 1.35 degrees of each other (config/references/voice-posture-setup.v1.json, ATTESTED). The reference covers posture during singing too, but this build cannot tell when you start: that phase opens on periodicity in the sound, and there is no microphone input here."
+     "Trunk alignment while you set up to sing — checked against 6 independent voice teachers who agree to within 1.35 degrees of each other, and that agreement is attested against the recorded reference we built from them. The reference covers posture during singing too, but this build cannot tell when you start: that phase opens on periodicity in the sound, and there is no microphone input here."
     ],
     "notMeasured": [
      "Whether the room is quiet enough and your voice is loud enough to judge at all. The gate that refuses rather than guessing is built and exercised on recordings, but there is no microphone input in this build, so it never runs on your room. The setup check says the same thing in its own words, and shows no progress bar for a capture that does not happen.",
@@ -358,7 +359,7 @@
    "_blurbRevised": "2026-08-04: onceki blurb 'chords with posture and hand feedback' diyordu. EL GERI BILDIRIMI DIYE BIR SEY YOK — el/parmak landmark'i hic yok (P-WRIST-COLLAPSE ve P-FINGER-FLAT bu yuzden blockedByTool). Canli bir disiplinde var olmayan bir yetenegi vaat etmek, kullanicinin dogrulayamayacagi tek satirdir.",
    "honesty": {
     "measured": [
-     "Trunk alignment while you sit — checked against 3 independent piano teachers who agree to within 1.09 degrees of each other, the tightest agreement of any instrument we have measured (config/references/piano-posture-setup.v1.json, ATTESTED)"
+     "Trunk alignment while you sit — checked against 3 independent piano teachers who agree to within 1.09 degrees of each other, the tightest agreement of any instrument we have measured, and that agreement is attested against the recorded reference we built from them"
     ],
     "notMeasured": [
      "Note timing in your room. The timing measurement is real and was made on a recording (AF-008-five-note-timing); it has never run live, because there is no microphone input in this build. The line below explains why it would still not be graded even if it did.",

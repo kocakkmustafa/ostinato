@@ -11,6 +11,8 @@ import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/design/ostinato_theme.dart';
 import 'package:ostinato/app/onboarding_store.dart';
+import 'package:ostinato/app/screens/course_screen.dart';
+import 'package:ostinato/app/screens/instrument_screen.dart';
 import 'package:ostinato/app/screens/lesson_demo_screen.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/lesson_locked_screen.dart';
@@ -401,5 +403,29 @@ void main() {
     await expectOnlyFontException(t);
     await capture(t, '11-library-shared-band-scale.png');
     dumpText(t, '11-library-shared-band-scale.txt');
+  });
+
+  // ── 12/13 — KANIT BOŞLUĞU KAPANDI (O-069). Ölçüldü: 11 ekranın 9'u
+  // kanıtlıydı ve eksik ikisinden biri `instrument_screen`, yani DÜRÜSTLÜK
+  // KUTUSUNUN yaşadığı ekran — ürünün en güçlü iddia yüzeyi hiç GÖRÜLMEMİŞTİ.
+  // Aynı turda oraya yeni bir çerçeve cümlesi yazdım ve göremiyordum.
+  testWidgets('12 — Instrument (DÜRÜSTLÜK KUTUSU + yeni çerçeve cümlesi)',
+      (WidgetTester t) async {
+    await t.pumpWidget(harness(InstrumentScreenRoute(discipline: guitar())));
+    await t.pump();
+    await expectOnlyFontException(t);
+    await capture(t, '12-instrument-honesty-box.png');
+    dumpText(t, '12-instrument-honesty-box.txt');
+  });
+
+  testWidgets('13 — Course (ders listesi, kilit gerekçeleri satır-içi)',
+      (WidgetTester t) async {
+    final Discipline d = guitar();
+    await t.pumpWidget(harness(
+        CourseScreenRoute(discipline: d, course: d.courses.first)));
+    await t.pump();
+    await expectOnlyFontException(t);
+    await capture(t, '13-course-lesson-list.png');
+    dumpText(t, '13-course-lesson-list.txt');
   });
 }

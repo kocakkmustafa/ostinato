@@ -313,6 +313,42 @@ diyagonal) 3B eksen derinlikte kısalır ve düzlem-içi ölçek bunu kurtaramaz
 sonraki turun eline verilmiş silme talimatıdır"* dersinin tersi yönü: kayıt
 DOĞRUYDU, ve doğruluğu artık ölçülü.
 
+## 🕶️ KÖR NOKTA — sınır SINIFI (O-069, kapı YOK, bilerek)
+
+> **Teknik kısıt örtük bir VAAT taşır; kasıtlı karar taşımaz.**
+> *"Kamera bunu göremiyor"* → *"daha iyi teknoloji çözer"* demektir. Oysa
+> **kusursuz bir kamerayla da vermeyeceğin hükümler var** — veri sorunu
+> değil, **YETKİ** kararı.
+
+**ÖLÇÜM (2026-08-07): 27 sınır, en az DÖRT sınıf.**
+
+| sınıf | kaç | örnek |
+|---|---|---|
+| alet/kamera yok (teknoloji çözer) | 5 | *"no hand or finger landmarks at all"* |
+| **kabuk eksik** (teknoloji var, biz yapmadık) | 5 | *"there is no microphone input in this build"* |
+| **referans yok** (veri toplanmadı) | 5 | *"no teacher data exists on what rate is right"* |
+| **karar/yetki** (bize ait değil) | 2 | *"not ours to close: it needs a movement-science review"* |
+| (kaba sınıflandırıcının kaçırdığı) | 10 | — |
+
+Başlık `Not measured` idi ve **tek sebep** ilan ediyordu. **Hiçbir cümle yalan
+söylemiyordu**; kusur **cümle düzeyinde görünmüyordu**, çünkü ***çerçeve
+KÜMENİN KENDİSİ hakkında bir iddiadır ve hiçbir öğesinde yazılı değildir.***
+
+**Yapılan:** çerçeve iki yüzeyde de düzeltildi (çalgı sayfası + Review) —
+başlık `What we do not judge — and why`, ve sınıfların FARKLI olduğu açıkça
+söyleniyor.
+
+**⛔ KAPI KURULMADI, bilerek.** Bir satırın hangi sınıfa girdiği **semantik**
+bir yargı; mekanik ölçütüm (regex) 27 kalemin **10'unu sınıflandıramadı.
+Sınıflandıramayan bir kapı, sınıfı olmayanı "temiz" sayar** — sahte yeşilin
+en sinsi türü. **Kör nokta olarak kaydedildi.**
+
+**⚠️ Açık kalan asıl kalem — SES:** kabukta mikrofon yok (kabuk eksikliği,
+çözülebilir) ama **TTS/sesli koç bir ÜRÜN KARARI** (çekirdek yetenek +
+harcama, kurucuda). İkisi bugün aynı "ses yok" çatısı altında okunuyor ve
+**ikincisi teknoloji beklemiyor, karar bekliyor.** Ayrıştırılması koordinatör
+kararı — metin yazılabilir ama hangi sınıfa ait olduğu bana ait değil.
+
 ## Açık kalan kapı boşlukları (isimli)
 
 1. ~~Dil kuralı yok~~ → **KAPANDI aynı tur (kural F).** ⚠️ Muafiyet İKİ KEZ

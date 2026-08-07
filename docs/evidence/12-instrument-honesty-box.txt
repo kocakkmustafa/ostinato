@@ -1,0 +1,51 @@
+‹
+Guitar
+7 TEACHERS · AGREE TO 2.24°
+Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit. This build hears nothing: there is no microphone input, so every judgement comes from the camera.
+What we actually measure
+And what we deliberately do not. Both halves are the product.
+MEASURED
+Trunk alignment while sitting — checked against 7 independent guitar teachers who agree to within 2.24 degrees of each other, and that agreement is attested against the recorded reference we built from them
+WHAT WE DO NOT JUDGE — AND WHY
+These are not all the same kind of gap. Some need a tool we do not have, some need teacher data nobody has collected, some are simply not built here, and at least one is not a data problem at all — it is a judgement we do not think is ours to make. Each line says which.
+Anything you play. The chord engine is real and measured — it covers the 8 open chords this course teaches (E A D G C Am Em Dm) and refuses a chord outside them by name ('not one of the chords this lesson covers') instead of reporting the nearest one that is. But it has only ever run on recordings. There is no microphone input in this build, so none of it runs in your room.
+Arm and hand position while holding the guitar — teachers disagree about this by style (11-18 degrees apart), we show it but do not grade it (M-O-46)
+Finger placement or fretting technique — the camera does not resolve fingers well enough to grade them. At the distance that keeps your hips in frame, a fingertip is a few pixels wide, so there is nothing stable to measure.
+Strum timing — NOT measured. We can hear individual note attacks, but a strum is one gesture producing six near-simultaneous ones, and the step that maps those onto a chord does not exist. Until 2026-08-04 this line claimed the timing was measured and merely ungraded; that was wrong, and the config carried a matching dead gate.
+Full note-by-note transcription — we recognise the chord class, not every note played
+Chords beyond those 8 — we do not name them. Until 2026-08-04 we did something worse than not naming them: a played Bb was reported as 'Dm' in 28 of 29 windows, confidently, because the engine was only allowed to consider the 8 chords of the drill. It now weighs all 24 chords and refuses when the winner is not one this lesson teaches.
+COURSES
+Foundations
+BEGINNER · 61 MIN · 10 LESSONS
+Set up your space, sit the way real guitar teachers sit, and learn which eight open chords this course covers. Your posture is checked live; the chord work is described, not heard — there is no microphone input in this build.
+NOT HERE — AND WHY
+Strum timing as a graded skill — blocked twice over: the strum-to-chord alignment step is not built, and no teacher data exists on how far off the beat counts as a mistake
+Arm/hand posture as a graded skill — the seven teachers we measured hold the guitar 39 to 105 degrees apart at the elbows and forearms. That is style and camera angle, not error; this may never become gradeable.
+Named posture coaching (the 'you are slouching' cue) — the threshold is derived from the reference (14 degrees, the spread inside which any two recordings count as the same way of sitting), but the question of whether a measurement may be spoken as a correction is open, and it is not ours to close: it needs a movement-science review we have not commissioned.
+Practicing Through Mistakes Instead of Slow, Deliberate Practice — deliberately out of scope. 4 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it.
+[RichText] ‹
+[RichText] Guitar
+[RichText] 7 TEACHERS · AGREE TO 2.24°
+[RichText] Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit. This build hears nothing: there is no microphone input, so every judgement comes from the camera.
+[RichText] What we actually measure
+[RichText] And what we deliberately do not. Both halves are the product.
+[RichText] MEASURED
+[RichText] Trunk alignment while sitting — checked against 7 independent guitar teachers who agree to within 2.24 degrees of each other, and that agreement is attested against the recorded reference we built from them
+[RichText] WHAT WE DO NOT JUDGE — AND WHY
+[RichText] These are not all the same kind of gap. Some need a tool we do not have, some need teacher data nobody has collected, some are simply not built here, and at least one is not a data problem at all — it is a judgement we do not think is ours to make. Each line says which.
+[RichText] Anything you play. The chord engine is real and measured — it covers the 8 open chords this course teaches (E A D G C Am Em Dm) and refuses a chord outside them by name ('not one of the chords this lesson covers') instead of reporting the nearest one that is. But it has only ever run on recordings. There is no microphone input in this build, so none of it runs in your room.
+[RichText] Arm and hand position while holding the guitar — teachers disagree about this by style (11-18 degrees apart), we show it but do not grade it (M-O-46)
+[RichText] Finger placement or fretting technique — the camera does not resolve fingers well enough to grade them. At the distance that keeps your hips in frame, a fingertip is a few pixels wide, so there is nothing stable to measure.
+[RichText] Strum timing — NOT measured. We can hear individual note attacks, but a strum is one gesture producing six near-simultaneous ones, and the step that maps those onto a chord does not exist. Until 2026-08-04 this line claimed the timing was measured and merely ungraded; that was wrong, and the config carried a matching dead gate.
+[RichText] Full note-by-note transcription — we recognise the chord class, not every note played
+[RichText] Chords beyond those 8 — we do not name them. Until 2026-08-04 we did something worse than not naming them: a played Bb was reported as 'Dm' in 28 of 29 windows, confidently, because the engine was only allowed to consider the 8 chords of the drill. It now weighs all 24 chords and refuses when the winner is not one this lesson teaches.
+[RichText] COURSES
+[RichText] Foundations
+[RichText] 
+[RichText] BEGINNER · 61 MIN · 10 LESSONS
+[RichText] Set up your space, sit the way real guitar teachers sit, and learn which eight open chords this course covers. Your posture is checked live; the chord work is described, not heard — there is no microphone input in this build.
+[RichText] NOT HERE — AND WHY
+[RichText] Strum timing as a graded skill — blocked twice over: the strum-to-chord alignment step is not built, and no teacher data exists on how far off the beat counts as a mistake
+[RichText] Arm/hand posture as a graded skill — the seven teachers we measured hold the guitar 39 to 105 degrees apart at the elbows and forearms. That is style and camera angle, not error; this may never become gradeable.
+[RichText] Named posture coaching (the 'you are slouching' cue) — the threshold is derived from the reference (14 degrees, the spread inside which any two recordings count as the same way of sitting), but the question of whether a measurement may be spoken as a correction is open, and it is not ours to close: it needs a movement-science review we have not commissioned.
+[RichText] Practicing Through Mistakes Instead of Slow, Deliberate Practice — deliberately out of scope. 4 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it.
