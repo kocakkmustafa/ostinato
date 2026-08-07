@@ -5,7 +5,7 @@ TEACHERS 0.4–6.4° · N=7
 20.5°
 No score, and none is coming. The bar is the range; the mark is you.
 OBSERVATION
-None of the 7 guitar teachers we recorded leaned more than 14° from upright. You are at 21° right now.
+You are at 21° from upright. The 7 guitar teachers we recorded all stayed inside 14°.
 Not a correction — we have no teacher data on what you should do about it. Just what we measured.
 Stop and see the summary
 [RichText] ✕
@@ -15,6 +15,6 @@ Stop and see the summary
 [RichText] 20.5°
 [RichText] No score, and none is coming. The bar is the range; the mark is you.
 [RichText] OBSERVATION
-[RichText] None of the 7 guitar teachers we recorded leaned more than 14° from upright. You are at 21° right now.
+[RichText] You are at 21° from upright. The 7 guitar teachers we recorded all stayed inside 14°.
 [RichText] Not a correction — we have no teacher data on what you should do about it. Just what we measured.
 [RichText] Stop and see the summary

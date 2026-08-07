@@ -14,25 +14,94 @@
  "templates": {
   "OBS_TRUNK_OUTSIDE_RANGE": {
    "text": "None of the {n} {sourceClass} we recorded leaned more than {thresholdDeg}° from upright. You are at {measuredDeg}° right now.",
-   "slots": ["n", "sourceClass", "thresholdDeg", "measuredDeg"],
+   "slots": [
+    "n",
+    "sourceClass",
+    "thresholdDeg",
+    "measuredDeg"
+   ],
    "_claimClass": "observation",
    "_whyThisWording": [
     "İki cümlenin ikisi de ÖLÇÜM BEYANI: birincisi referansın ne olduğunu, ikincisi ölçülenin ne olduğunu söylüyor.",
     "Aradaki hükmü kullanıcı kuruyor — biz 'yanlış' demiyoruz, iki sayıyı yan yana koyuyoruz.",
     "'from upright' oturan (gitar/piyano) ve ayakta duran (şan) öğrenci için de doğru; çalgıya göre fiil değişmiyor.",
     "N ve kaynak sınıfı CÜMLENİN İÇİNDE (şart 3): sayı dayanağını taşımadan görünmez."
-   ]
+   ],
+   "variants": [
+    "None of the {n} {sourceClass} we recorded leaned more than {thresholdDeg}° from upright. You are at {measuredDeg}° right now.",
+    "Of the {n} {sourceClass} we recorded, not one leaned past {thresholdDeg}° from upright. Your trunk reads {measuredDeg}° at this moment.",
+    "{thresholdDeg}° is the far edge of where the {n} {sourceClass} we recorded sat. You are at {measuredDeg}° just now.",
+    "You are at {measuredDeg}° from upright. The {n} {sourceClass} we recorded all stayed inside {thresholdDeg}°.",
+    "Reading {measuredDeg}° right now. None of the {n} {sourceClass} in our recording leaned further than {thresholdDeg}°.",
+    "{measuredDeg}° at the moment — outside the {thresholdDeg}° edge that the {n} {sourceClass} we recorded stayed within."
+   ],
+   "_variants_why": "O-062: sablon 'bir kez calacakmis gibi' yazilmisti. OLCULDU: gozlem isareti ~31,68sn periyotla atesleniyor (O-032/O-035 canli olcumu) ve en uzun isaretli ders 7 dk -> ~13 ATESLEME. Tek varyantla ayni 125 karakterlik cumle bir derste 13 kez okunuyordu. NADIR GORUNEN bir oge, SIK TEKRARLANAN bir cumle olabilir — O-035'in 'nadir' kaniti beni yanlis yone itti. variants[0] MEVCUT metindir: widget_test ve 11 kanit karesi onun uzerine kurulu, ilk ateslemeyi degistirmek kanitlanmis bir seyi kanitsiz yapardi. Alti varyantin ALTISI da ayni UC olguyu tasir (kaynak sayisi + esik + anlik olcum) ve ayni yasak-kelime kapisindan gecer.",
+   "_variantCycleGap": "TURETILMIS ACIK: bir dersin ICINDE hic tekrar olmamasi icin gereken varyant sayisi = en uzun isaretli ders / periyot = 420sn / 31,68sn = 14. Bugun 6 var. Yani en kotu derste her cumle ~2 kez donuyor (onceki hal: 13). Kalan acigin SAYISI turetildi, kapatilip kapatilmayacagi koordinator karari — 'en az N' yazmak esik ICAT etmek olurdu."
   }
  },
  "forbidden": {
   "$why": "Şart 2'nin dişleri. Bu listeler şablon metnine kelime-sınırıyla uygulanır; eşleşme = kapı kırmızı.",
-  "imperative": ["sit", "stand", "straighten", "lift", "lower", "keep", "try", "correct", "fix",
-                 "adjust", "relax", "avoid", "stop", "start", "hold", "push", "pull", "should",
-                 "must", "need", "let", "make", "remember", "focus"],
-  "causal": ["because", "since", "causes", "cause", "leads", "results", "so", "therefore",
-             "which", "thus", "hence", "prevents", "improves", "helps"],
-  "bodyOutcome": ["pain", "painful", "injury", "injure", "strain", "hurt", "damage", "tension",
-                  "tense", "fatigue", "healthy", "unhealthy", "harm", "risk", "wrong", "bad", "poor"]
+  "imperative": [
+   "sit",
+   "stand",
+   "straighten",
+   "lift",
+   "lower",
+   "keep",
+   "try",
+   "correct",
+   "fix",
+   "adjust",
+   "relax",
+   "avoid",
+   "stop",
+   "start",
+   "hold",
+   "push",
+   "pull",
+   "should",
+   "must",
+   "need",
+   "let",
+   "make",
+   "remember",
+   "focus"
+  ],
+  "causal": [
+   "because",
+   "since",
+   "causes",
+   "cause",
+   "leads",
+   "results",
+   "so",
+   "therefore",
+   "which",
+   "thus",
+   "hence",
+   "prevents",
+   "improves",
+   "helps"
+  ],
+  "bodyOutcome": [
+   "pain",
+   "painful",
+   "injury",
+   "injure",
+   "strain",
+   "hurt",
+   "damage",
+   "tension",
+   "tense",
+   "fatigue",
+   "healthy",
+   "unhealthy",
+   "harm",
+   "risk",
+   "wrong",
+   "bad",
+   "poor"
+  ]
  },
  "_notForbidden": [
   "'leaned' / 'upright' / 'recorded' — betimleyici, emir değil.",

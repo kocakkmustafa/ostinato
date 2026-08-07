@@ -112,7 +112,17 @@ void main() {
     expect(find.byKey(const Key('observation-cue')), findsOneWidget,
         reason: 'sapma sürdü ama işaret doğmadı — hep-sessiz yüzey');
     // Şart 3: N + kaynak sınıfı CÜMLENİN İÇİNDE — golden katalogdan.
-    expect(find.textContaining('None of the 7 guitar teachers'), findsOneWidget);
+    //
+    // ⚠️ CÜMLE KALIBINA DEĞİL KAYNAĞA bağlanıyoruz (O-062). Önceki hâli
+    // `'None of the 7 guitar teachers'` diyordu; varyantlar eklenince o
+    // kalıp yalnız variants[0]'da kaldı ve test, ürün DOĞRU davranırken
+    // kırmızıya dönüyordu. Şartın kendisi kalıp değil: "kaç kaynak ve hangi
+    // sınıf" cümlenin İÇİNDE geçmeli. Altı varyantın altısı da `{n}` ve
+    // `{sourceClass}` taşıyor — `validate_observation_cues.py` bunu her
+    // varyant için ayrı ayrı kolluyor.
+    expect(find.textContaining('7 guitar teachers'), findsOneWidget,
+        reason: 'işaret kaynağını taşımıyor — sayı ve sınıf cümlenin içinde '
+            'olmalı (hangi varyant seçilirse seçilsin)');
     await src.dispose();
   });
 
@@ -126,8 +136,15 @@ void main() {
       expect(find.byKey(const Key('observation-cue')), findsOneWidget);
       // Golden şablon measuredDeg'i tam sayıya yuvarlar (ObservationCue.slots,
       // toStringAsFixed(0)) — "17°", "17.0°" DEĞİL.
-      expect(find.textContaining('You are at 17° right now'), findsOneWidget);
-      expect(find.textContaining('You are at 22° right now'), findsNothing,
+      //
+      // ⚠️ CÜMLEYE DEĞİL SAYIYA bağlanıyoruz (O-062). Önceki hâli
+      // `'You are at 17° right now'` tam cümlesini arıyordu; varyantlar
+      // eklenince (round-robin) ikinci ateşleme BAŞKA bir cümle kullanıyor ve
+      // test, ürün DOĞRU davranırken kırmızıya dönüyordu. Bu testin niyeti
+      // cümle değil TAZELİK: gösterilen sayı güncel ölçümle senkron mu.
+      // Altı varyantın altısı da `{measuredDeg}°` taşıyor (kapı bunu kolluyor).
+      expect(find.textContaining('17°'), findsOneWidget);
+      expect(find.textContaining('22°'), findsNothing,
           reason: 'işaret bayat bir ölçümde donmuş — ekranda çelişen sayı');
       await src.dispose();
     });

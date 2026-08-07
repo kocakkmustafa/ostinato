@@ -124,6 +124,27 @@ def main():
 
     # Şart 2: golden şablonların KENDİSİ yasak dil taşıyamaz.
     for tid, tpl in golden["templates"].items():
+        # O-062: `variants` eklendi ve bu kapı YALNIZ `text`e bakıyordu —
+        # yeni alan, kapının dışında kalan yeni yüzey demekti (gecenin altıncı
+        # tekrarı). Artık HER varyant aynı yasak-kelime kapısından geçiyor:
+        # bir varyant emir kipine kayarsa tek başına ihlaldir.
+        for _i, _v in enumerate(tpl.get("variants", [tpl["text"]])):
+            _h = check_wording(_v, golden["forbidden"])
+            if _h:
+                problems.append(
+                    f"{tid} varyant[{_i}]: yasak kelime {_h} — "
+                    f"varyant eklemek, kelime kuralını gevşetmenin yolu olamaz")
+            # Her varyant AYNI olguları taşımalı: eksik yuva = eksik iddia.
+            _missing = [sl for sl in tpl["slots"] if "{" + sl + "}" not in _v]
+            if _missing:
+                problems.append(
+                    f"{tid} varyant[{_i}]: yuva EKSİK {_missing} — varyantlar "
+                    f"aynı ölçümü söylemeli, biri sayıyı düşürürse cümle "
+                    f"kaynağını kaybeder")
+        if tpl.get("variants") and tpl["variants"][0] != tpl["text"]:
+            problems.append(
+                f"{tid}: variants[0] `text` ile AYNI olmalı — kanıt kareleri "
+                f"ve widget testleri ilk ateşlemenin üzerine kurulu")
         hits = check_wording(tpl["text"], golden["forbidden"])
         if hits:
             problems.append(f"ŞART 2: golden şablon {tid} yasak dil taşıyor: {hits}")
