@@ -23,6 +23,7 @@ yanmalı" kadar "yeşil KALMALI" da sınanır — hep-kırmızı yanan bir kapı
 her mutasyon testini geçerdi.
 """
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -225,38 +226,101 @@ TOUCHED = [RULESET.format(i) for i in ("guitar", "voice", "piano")] + \
 #: Çözüm: sabit yedek dizini + NÖBETÇİ dosya. Nöbetçi varsa önceki koşum
 #: mutasyonun ORTASINDA ölmüş demektir → sessizce değil, GÜRÜLTÜYLE onarılır.
 #: (Kendi dersim, O-065: *geri-alma da mutasyonun parçasıdır.*)
+#:
+#: ── O-079 (2026-08-07): ÇÖKMEYE dayanıklıydı, EŞZAMANLILIĞA değildi ────────
+#: İki MUT-A koşumu çakıştı ve şu zincir işledi:
+#:   A yedek alır → mutasyona başlar
+#:   B gelir, nöbetçiyi görür, "önceki tur ölmüş" der, onarır,
+#:     ve YEDEĞİ A'nın MUTASYONLU dosyalarıyla ÜZERİNE YAZAR   ← zehir
+#:   A biter, o zehirli yedekten "geri yükler" → mutasyon KALICI olur
+#: Üstüne: taban kırmızıysa `return 1` `try/finally`nin DIŞINDAydı; nöbetçi
+#: de temizlenmiyordu.
+#:
+#: 🎓 Asıl ders, kilitten daha genel: **onarım "başardım" yazdırdı ve BOZUK
+#: içeriği geri yükledi.** Bir geri-yükleme, YEDEĞİNİN KÖKENİ kadar geçerlidir;
+#: doğrulanmayan bir onarım yalnızca DENENMİŞ bir onarımdır.
+#:
+#: Üç panzehir:
+#:   ① KİLİT      — canlı bir koşum varken ikincisi BAŞLAMAZ (poziyon zehri yok)
+#:   ② KÖKEN      — dokunulan dosyalar commit'li değilse yedek güvenilmezdir;
+#:                  koşum baştan reddedilir (ve `git` kökeni kanıtlanabilirdir)
+#:   ③ DOĞRULAMA  — geri-yüklemeden SONRA `git diff` ile TUTTUĞU ölçülür;
+#:                  tutmadıysa sessizce değil GÜRÜLTÜYLE ölür
 BACKUP_DIR = Path(".mutA-backup")
 SENTINEL = BACKUP_DIR / "IN-FLIGHT"
 
 
-def _heal_if_needed():
+def _alive(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except (ProcessLookupError, ValueError):
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def _git_dirty(files):
+    """Dokunulan dosyalarda commit'lenmemiş değişiklik VAR mı?"""
+    r = subprocess.run(["git", "diff", "--quiet", "--"] + list(files),
+                       capture_output=True)
+    return r.returncode != 0
+
+
+def _git_restore(files) -> bool:
+    """Geri-yükle ve TUTTUĞUNU DOĞRULA. Köken = son commit (kanıtlanabilir)."""
+    subprocess.run(["git", "checkout", "--"] + list(files), capture_output=True)
+    return not _git_dirty(files)
+
+
+def _heal_if_needed() -> int:
+    """0 = devam edilebilir · 1 = başlama (canlı koşum var)."""
     if not SENTINEL.exists():
-        return
+        return 0
+    raw = SENTINEL.read_text(encoding="utf-8").strip().split()
+    pid = int(raw[-1]) if raw and raw[-1].isdigit() else -1
+    if pid > 0 and pid != os.getpid() and _alive(pid):
+        # ① KİLİT — B, A'yı "ölmüş" sanıp yedeğini zehirlemez.
+        print(f"⛔ MUT-A ZATEN KOŞUYOR (pid {pid}) — ikinci koşum BAŞLAMAZ.\n"
+              f"   Eşzamanlı iki koşum birbirinin yedeğini bozar ve mutasyon "
+              f"KALICI olur (O-079). Önceki koşumun bitmesini bekleyin.")
+        return 1
     print("⚠️  ÖNCEKİ MUT-A KOŞUMU MUTASYONUN ORTASINDA ÖLMÜŞ — onarılıyor:")
-    for f in TOUCHED:
-        src = BACKUP_DIR / Path(f).name
-        if src.exists():
-            shutil.copy(src, f)
-            print(f"     geri alındı: {f}")
+    if _git_restore(TOUCHED):
+        print(f"     ✅ {len(TOUCHED)} dosya commit'li hâline döndü ve DOĞRULANDI")
+    else:
+        print("     ⛔ ONARIM TUTMADI — dosyalar hâlâ commit'ten farklı. "
+              "Elle bakın; sessiz bir 'onarıldı' mesajı vermeyeceğim.")
+        return 1
     SENTINEL.unlink(missing_ok=True)
-    print("   (repo onarıldı; bu uyarı görüldüyse bir önceki tur kesilmiştir)")
+    return 0
 
 
 def main():
-    _heal_if_needed()
+    if _heal_if_needed():
+        return 1
+    # ② KÖKEN — yedeğin kaynağı kirliyse geri-yükleme kanıtlanamaz.
+    if _git_dirty(TOUCHED):
+        print("⛔ MUT-A BAŞLAMADI: mutasyona uğratılacak dosyalarda "
+              "commit'lenmemiş değişiklik var.\n"
+              "   Yedek ancak KÖKENİ bilinirse geri-yükleme sayılır; şu an "
+              "geri-yükleme neyi geri getireceğini kanıtlayamaz (O-079).\n"
+              "   Önce bu dosyaları commit'leyin ya da geri alın:")
+        for f in TOUCHED:
+            print(f"     {f}")
+        return 1
     BACKUP_DIR.mkdir(exist_ok=True)
     backup = BACKUP_DIR
     for f in TOUCHED:
         shutil.copy(f, backup / Path(f).name)
-    SENTINEL.write_text("mutations in flight\n", encoding="utf-8")
-
-    baseline = run_gates()
-    if baseline:
-        print(f"⛔ TABAN KIRMIZI ({baseline}) — mutasyon ölçümü anlamsız")
-        return 1
+    SENTINEL.write_text(f"mutations in flight {os.getpid()}\n", encoding="utf-8")
 
     rows, unguarded = [], []
     try:
+        baseline = run_gates()
+        if baseline:
+            print(f"⛔ TABAN KIRMIZI ({baseline}) — mutasyon ölçümü anlamsız")
+            return 1
         for label, kind, mutate, expect in MUTATIONS:
             for f in TOUCHED:
                 shutil.copy(backup / Path(f).name, f)
@@ -275,8 +339,16 @@ def main():
                     unguarded.append(label)
             rows.append((kind, label, verdict, ok))
     finally:
+        # ③ DOĞRULAMA — geri-yükleme DENENDİ değil, TUTTU mu?
         for f in TOUCHED:
             shutil.copy(backup / Path(f).name, f)
+        if _git_dirty(TOUCHED):
+            print("⚠️  yedekten geri-yükleme TUTMADI — git kökeninden "
+                  "onarılıyor (yedek kirlenmiş olabilir):")
+            if _git_restore(TOUCHED):
+                print("     ✅ commit'li hâle döndü ve doğrulandı")
+            else:
+                print("     ⛔ ONARIM BAŞARISIZ — repo BOZUK, elle bakın")
         SENTINEL.unlink(missing_ok=True)
         shutil.rmtree(backup, ignore_errors=True)
 
