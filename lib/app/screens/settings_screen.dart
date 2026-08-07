@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../content.dart';
+import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 
@@ -11,6 +13,25 @@ import '../design/widgets.dart';
 // henüz KARARLAŞTIRILMADI, bu yüzden burada bir toggle/iskele de YOK —
 // var olmayan bir karara sahte bir yer tutucu inşa etmek kendisi bir
 // taklit olurdu).
+/// Canlı çalgı cümlesi — SAYI ve ADLAR `library.json`dan TÜRER.
+/// Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce
+/// yanlış olur ve hiçbir test kırılmaz (O-068).
+String _liveSentence(BuildContext context) {
+  final List<Discipline> live = ContentRepositoryScope.of(context)
+      .repo
+      .disciplines
+      .where((Discipline d) => d.status == 'live')
+      .toList();
+  const Map<int, String> words = <int, String>{
+    1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six',
+  };
+  final String n = words[live.length] ?? '${live.length}';
+  final String names =
+      live.map((Discipline d) => d.displayName.toLowerCase()).join(', ');
+  final String verb = live.length == 1 ? 'instrument is' : 'instruments are';
+  return '$n $verb live: $names.';
+}
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -78,13 +99,20 @@ class SettingsScreen extends StatelessWidget {
                     'setting that changes that.',
               ),
               const SizedBox(height: 14),
-              const _SettingsCard(
+              _SettingsCard(
                 title: 'About this build',
                 // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
                 // çıkarıldı — bir zaman taahhüdüydü, üstelik bu cümlenin
                 // gerekçesi bile yoktu (en çıplak örnek). Kalan cümle
                 // bugünün OLGUSUNU söylüyor.
-                body: 'Three instruments are live: guitar, voice, piano. '
+                // TÜRETİLDİ (O-068, JabLab J-151): burada "Three instruments
+                // are live: guitar, voice, piano" ELLE yazılıydı. Aynı sayıyı
+                // karşılama ekranında `library.json`dan TÜRETMİŞTİM (O-039) ve
+                // BU yüzeyi taramamıştım — *bir kusuru bulduğun yüzeyde
+                // düzeltmek, onu ürünün geri kalanında düzeltmek değildir.*
+                // Dördüncü çalgı canlıya geçtiği gün burası sessizce "Three"
+                // demeye devam ederdi.
+                body: '${_liveSentence(context)} '
                     'Every posture reference is built from teaching footage '
                     'filmed waist-up, which is why nothing below your hips '
                     'is read. Nothing here has been verified on real '

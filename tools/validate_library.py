@@ -268,6 +268,43 @@ def main():
                         f"artefakt {expected_n} take ile kurulmuş — kullanıcıya "
                         f"gösterilen sayı ÖLÇÜMLE ÇELİŞİYOR (kural 9)")
 
+        # Kural 9b (O-068 · JabLab J-151): kural 9 YALNIZ `honesty.measured`e
+        # bakıyordu. Ölçüldü: "N teachers" ifadesi ALTI ayrı yerde daha
+        # geçiyor (comingSoon · notMeasured · lockedReason) ve HİÇBİRİ
+        # artefakta bağlı DEĞİLDİ. O-029 TAM BU YÜZDEN olmuştu — gitar havuzu
+        # 3→7 büyüdü, vitrin güncellenmedi — ve kapı o gün yazıldı, ama
+        # kapsamı yarım kaldı. *Bir kusuru bulduğun YÜZEYDE düzeltmek, onu
+        # ürünün geri kalanında düzeltmek değildir.*
+        if Path(ref_path).exists():
+            def _walk(node, path):
+                if isinstance(node, dict):
+                    for k, v in node.items():
+                        if not k.startswith("_"):
+                            yield from _walk(v, f"{path}.{k}")
+                elif isinstance(node, list):
+                    for i, v in enumerate(node):
+                        yield from _walk(v, f"{path}[{i}]")
+                elif isinstance(node, str):
+                    yield path, node
+            for where, text in _walk(d, did):
+                if where.endswith("measured") or ".measured[" in where:
+                    continue          # kural 9 zaten kolluyor
+                for m in re.finditer(
+                        r"\b(one|two|three|four|five|six|seven|eight|nine|ten|"
+                        r"eleven|twelve|\d+)\s+(?:\w+\s+)?teachers\b",
+                        text, re.IGNORECASE):
+                    word = m.group(1).lower()
+                    n = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+                         "six": 6, "seven": 7, "eight": 8, "nine": 9,
+                         "ten": 10, "eleven": 11, "twelve": 12}.get(
+                             word, int(word) if word.isdigit() else None)
+                    if n is not None and n != expected_n:
+                        violations.append(
+                            f"{where}: '{m.group(0)}' diyor ama artefakt "
+                            f"{expected_n} take ile kurulmuş — kural 9 yalnız "
+                            f"`measured`i kolluyordu, bu alan KAPSAM DIŞIYDI "
+                            f"(kural 9b)")
+
         # Kural 10 (MUT-A bulgusu): VARLIK kapısı → ÖZ kapısı.
         #
         # Mutasyon: her `lockedReason`ı "x"e, her `notMeasured` maddesini

@@ -335,6 +335,38 @@ BODY_SIDE = re.compile(
 #: Anatomik ÖLÇÜM adları (metrik kimliği) yönerge değildir — muaf.
 BODY_SIDE_METRIC = re.compile(r"left_|right_", re.IGNORECASE)
 
+# ── I: TÜRETİLEBİLİR bir sayı ELLE yazılamaz ──────────────────────────────
+#
+# (O-068 · JabLab J-151: *bir kusuru bulduğun YÜZEYDE düzeltmek, onu ürünün
+# geri kalanında düzeltmek değildir. Kapsam KATMAN bazında değil YÜZEY
+# bazında dolaşılmalı.*)
+#
+# ÖLÇÜLDÜ: karşılama ekranında canlı çalgı sayısını `library.json`dan
+# TÜRETMİŞTİM (O-039) — ve `settings_screen` aynı sayıyı ELLE yazıyordu
+# ("Three instruments are live: guitar, voice, piano"). Dördüncü çalgı canlıya
+# geçtiği gün ayarlar sessizce "Three" demeye devam ederdi ve hiçbir test
+# kırılmazdı. Düzeltme DOĞRUYDU, kapsamı EKSİKTİ.
+#
+# Kural: kullanıcı yüzeyinde bir SAYI SÖZCÜĞÜ, deponun bildiği bir
+# koleksiyonun adıyla yan yana geçemez — o sayı türetilmeli.
+# ⚠️ Dar tutuldu: yalnız `${...}` interpolasyonu OLMAYAN metinler; ve yalnız
+# depodan türetilebilen üç koleksiyon (çalgı · ders · eğitmen).
+COUNT_WORD = (r"\b(two|three|four|five|six|seven|eight|nine|ten|"
+              r"eleven|twelve)\b")
+#: ÇOĞUL isim ZORUNLU — "one lesson" bir sayım değil, bir örnektir.
+#: ⚠️ `teachers` BU KURALDAN muaf — ama SESSİZCE değil: `validate_library.py`
+#: **kural 9 + 9b** onu artefaktın `contributingTakes` değerine bağlıyor,
+#: yani daha GÜÇLÜ bir çapası var (sayı yalnız türetilmiş olmakla kalmıyor,
+#: ÖLÇÜMLE karşılaştırılıyor). İki kapının aynı şeyi iki farklı gerekçeyle
+#: kollaması gürültü üretir; muafiyetin gerekçesi burada YAZILI.
+DERIVABLE_NOUN = r"\b(instruments|lessons|courses)\b"
+#: Araya BELİRTEÇ giremez: "not one THIS lesson teaches" bir sayım DEĞİL.
+#: (İlk hâli 10 yanlış-pozitif üretti — geniş bir kapı, güvenilmez bir
+#: kapıdır ve susturulmasına yol açar; O-058'in dersi.)
+HANDWRITTEN_COUNT = re.compile(
+    COUNT_WORD + r"\s+(?:(?!this|that|these|those|the|a|an|of)\w+\s+)?"
+    + DERIVABLE_NOUN, re.IGNORECASE)
+
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
 PUBSPEC = "pubspec.yaml"
@@ -562,6 +594,7 @@ SELFTEST_SAMPLES = [
      "there is no microphone input in this build"),
     ("tanımlayıcı", IDENTIFIER_LIKE.pattern, "onboarding-microphone-card"),
     ("vücut-taraf H", BODY_SIDE.pattern, "rest your right hand here"),
+    ("elle sayı I", HANDWRITTEN_COUNT.pattern, "Three instruments are live"),
 ]
 
 
@@ -796,6 +829,19 @@ def main() -> int:
                     f"solak gitarist gitarı TERS tutar; bu yönerge ona YANLIŞ "
                     f"eli söyler — «{sentence.strip()[:90]}»")
 
+    # ── Kural I ──
+    checked_i = 0
+    for where, text in surfaces:
+        if "$" in text:          # interpolasyon = zaten türetilmiş
+            continue
+        checked_i += 1
+        m = HANDWRITTEN_COUNT.search(text)
+        if m:
+            violations.append(
+                f"[elle yazılmış sayı] {where}: «{m.group(0)}» — bu sayı "
+                f"depodan TÜRETİLEBİLİR. Elle yazılan bir sayı, koleksiyon "
+                f"büyüdüğü gün sessizce yanlış olur ve hiçbir test kırılmaz")
+
     if len(surfaces) < 150:
         violations.append(
             f"VAKUM: yalnız {len(surfaces)} kullanıcı-yüzeyi metni tarandı "
@@ -819,7 +865,7 @@ def main() -> int:
           f"{len(CAPABILITY_RULES)} yetenek kuralı + "
           f"{checked_affirmative} olumlu iddia alanı + "
           f"{checked_d} skor-ekseni + {checked_f} dil + "
-          f"{checked_h} vücut-taraf)")
+          f"{checked_h} vücut-taraf + {checked_i} sayı)")
     # KAPSAM her koşumda YAZILIR: taranmayan bir yer 'temiz' sanılamasın diye
     # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
     print(f"   kapsam: {DART_ROOTS} + kabuğa giden {len(shipped_json_assets())} "

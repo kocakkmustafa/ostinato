@@ -47,7 +47,7 @@ _Kayıtlı kalem yok._
 
 - **`lib/app/screens/onboarding_screen.dart:33`**
   yaş bandı / vasi onayı (O4) — bu akışta YOK. unblocked by: çocuk rejiminin tasarlanıp tasarlanmayacağına dair kurucu kararı; karar "evet" olursa kapı BURAYA girer (karşılamadan sonra, kütüphaneden önce), çünkü akışı durdurabilecek tek nokta burasıdır.
-- **`lib/app/screens/settings_screen.dart:9`**
-  çocuk rejimi (ayrı akış/izin/UI) bu ekranda YOK — unblocked by: kurucu ürün kararı (tasarlanıp tasarlanmayacağı bile henüz KARARLAŞTIRILMADI, bu yüzden burada bir toggle/iskele de YOK — var olmayan bir karara sahte bir yer tutucu inşa etmek kendisi bir taklit olurdu).
+- **`lib/app/screens/settings_screen.dart:11`**
+  çocuk rejimi (ayrı akış/izin/UI) bu ekranda YOK — unblocked by: kurucu ürün kararı (tasarlanıp tasarlanmayacağı bile henüz KARARLAŞTIRILMADI, bu yüzden burada bir toggle/iskele de YOK — var olmayan bir karara sahte bir yer tutucu inşa etmek kendisi bir taklit olurdu). / Canlı çalgı cümlesi — SAYI ve ADLAR `library.json`dan TÜRER. / Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce / yanlış olur ve hiçbir test kırılmaz (O-068).
 - **`lib/app/screens/setup_check_screen.dart:359`**
   oda gürültü-tabanı yakalama adımı KAPALI — tasarım 3-5sn sessizlik ölçen bir kalibrasyon gösterir, bu ekran onun yerine dürüst bir "henüz yok" kartı gösterir (aşağıda). unblocked by: gerçek bir mikrofon-giriş eklentisi `ostinato_audio`nun var olan `AudioConfidenceGate`ine bağlanıp bu ekranın state machine'ine (_Stage.room) gerçek bir örnekleme/geri-sayım aşaması eklenince.
