@@ -52,6 +52,15 @@ final class SessionSummary {
   }
 }
 
+/// Başlıktaki sayıyı yazıyla verir. Rakama düşmek ("4 things") bu ekranın
+/// geri kalanının tonundan kopardı; sınır isimli: on üstü rakama düşer,
+/// çünkü bugünkü liste hiçbir çalgıda dörtten fazla olamaz ve olursa bu
+/// fonksiyon uydurmak yerine rakam gösterir.
+String _countWord(int n) => const <int, String>{
+      1: 'One', 2: 'Two', 3: 'Three', 4: 'Four',
+      5: 'Five', 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten',
+    }[n] ?? '$n';
+
 /// Özet — "neyi ölçemedik" ZORUNLU ve EŞİT AĞIRLIKLI (§6/⑫).
 class ReviewScreenRoute extends StatelessWidget {
   const ReviewScreenRoute({
@@ -78,6 +87,11 @@ class ReviewScreenRoute extends StatelessWidget {
       "Your arms. If shown live elsewhere, they are measured and never "
           "marked — the teachers we recorded disagree by too much to call "
           "a difference an error.",
+      // 4. kalem ÇALGIYA ÖZEL ve VERİDEN gelir (DESIGN-AHEAD-OF-CODE §2.1'in
+      // eksik maddesi). Burada elle yazılsaydı üç çalgı için üç `if` olurdu
+      // ve dördüncü çalgı eklendiğinde sessizce eksik kalırdı.
+      if (discipline.instrumentSpecificGap.isNotEmpty)
+        discipline.instrumentSpecificGap,
     ];
 
     return Scaffold(
@@ -150,8 +164,14 @@ class ReviewScreenRoute extends StatelessWidget {
                   children: <Widget>[
                     kicker('What we could not measure'),
                     const SizedBox(height: 6),
-                    const Text('Three things, by name.',
-                        style: TextStyle(
+                    // Sayı LİSTEDEN türer. Elle yazılıydı ('Three things')
+                    // ve tam altındaki liste de elle yazılıydı: dördüncü
+                    // kalem eklenince başlık SESSİZCE bayatlardı — O-029'un
+                    // ("vitrin korumasızdı") canlı-yüzey hâli, kullanıcıya
+                    // görünen bir sayının saydığı şeye bağlı OLMAMASI.
+                    Text('${_countWord(gaps.length)} things, by name.',
+                        key: const Key('review-gap-headline'),
+                        style: const TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.w600,
                             color: OstinatoColors.ink)),

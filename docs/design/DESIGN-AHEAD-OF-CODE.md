@@ -144,7 +144,7 @@ kararı, bu turun kapsamı değil.
 
 ## 2. Kod > Tasarım (kodda VAR, tasarımda YOK) — sinsi yön
 
-### 2.1 🔴 Review "Neyi ölçemedik" — tasarımda 4 kalem, kodda 3 (ve örtüşen ikisi bile TAM eşleşmiyor)
+### 2.1 🟡 Review "Neyi ölçemedik" — 4. kalem İNŞA EDİLDİ (2026-08-07, O-044); tasarımın SOMUT olay-kalemi hâlâ açık
 
 **Tasarım (`gaps`, satır 1030-1035; `gapsHeadline: 'Four things, by
 name.'`):**
@@ -168,7 +168,28 @@ eşit-ağırlıklı" kuralına (§6/⑫) göre denetledi — YAPISI (zorunlu, e�
 ağırlık, tek sonraki-adım) doğrulandı, İÇERİĞİN tasarımla satır-satır
 örtüşmesi denetlenmedi.
 
-**İnşa edilirse neye dokunur:** `gaps` listesi 3'ten 4'e çıkar; çalgıya-özel
+**✅ YAPILDI (2026-08-07, `O-044`).** Çalgıya-özel 4. kalem inşa edildi ve
+`gaps` 3→4 oldu. **Ekran kodunda dallanmadı** — metin `library.json`ın
+`honesty.instrumentSpecificGap` alanından geliyor, `_instrumentSpecificGap_source`
+her birinin hangi `notMeasured` satırından kısaltıldığını taşıyor. Gerekçe:
+hangi boşluğun "bu çalgının kendi boşluğu" sayıldığı bir SEÇİMDİR; seçim ekran
+kodunda gömülü olsaydı gözden geçirilemezdi, veride durunca denetlenebiliyor
+(ve dördüncü çalgı eklendiğinde `if` zinciri unutulamaz).
+
+**Aynı turda çıkan İKİNCİ kusur:** başlık `'Three things, by name.'` ELLE
+yazılıydı, tam altındaki liste de elle yazılıydı — 4. kalem eklenince başlık
+SESSİZCE bayatlayacaktı. O-029'un ("vitrin korumasızdı") canlı-yüzey hâli.
+Sayı artık `gaps.length`ten türüyor (`_countWord`). Kilit: 
+`test/review_gap_section_test.dart` (5 test) — MUT 2/2: başlık elle yazıldı →
+kırmızı · çalgıya-özel kalem tek genel cümleye düştü → kırmızı.
+
+**⛔ HÂLÂ AÇIK — tasarımın SOMUT olay-kalemi** ("Your left hip left the frame",
+süre 1.2s). Bu bir içerik değil VERİ AKIŞI eksiği: `_LiveScreenRouteState._hist`
+yalnız toplam `outCount`/`sampleCount` tutuyor, HANGİ pencerenin HANGİ sebepten
+sayılmadığını tutmuyor. Süre etiketleri (3.6s/1.2s) de per-gap ölçüm ister.
+Uydurulamaz, bu yüzden yazılmadı.
+
+**İnşa edilirse neye dokunur:** ~~`gaps` listesi 3'ten 4'e çıkar~~; çalgıya-özel
 4. kalem `discipline.id`e göre dallanır (gitar/piyano/şan farklı cümle) —
 veri zaten `Discipline`/`Lesson` modelinde var, yeni ölçüm gerekmez, yalnız
 içerik. Süre-etiketleri (3.6s/1.2s) GERÇEK bir oturumda per-gap ölçülen süre

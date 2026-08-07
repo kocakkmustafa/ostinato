@@ -37,7 +37,8 @@ final class ContentRepository {
 
 final class Discipline {
   const Discipline._(this.id, this.displayName, this.status, this.blurb,
-      this.measured, this.notMeasured, this.comingSoon, this.courses);
+      this.measured, this.notMeasured, this.instrumentSpecificGap,
+      this.comingSoon, this.courses);
 
   final String id;
   final String displayName;
@@ -48,6 +49,13 @@ final class Discipline {
   /// Dürüstlük kutusunun "ölçmediklerimiz" yarısı. Ekranda küçük gri dipnot
   /// DEĞİL: ürünün en somut iddiası bu listede duruyor.
   final List<String> notMeasured;
+
+  /// Review'ın "neyi ölçemedik" listesindeki ÇALGIYA-ÖZEL kalem
+  /// (DESIGN-AHEAD-OF-CODE §2.1'in eksik 4. maddesi). Metin ekranda değil
+  /// VERİDE duruyor: hangi boşluğun "bu çalgının kendi boşluğu" sayıldığı bir
+  /// SEÇİMDİR, ve seçim ekran kodunda gömülü olsaydı gözden geçirilemezdi.
+  /// Kaynağı `_instrumentSpecificGap_source` alanında.
+  final String instrumentSpecificGap;
 
   /// "Not here — and why" — kapsam-dışı ama isimli-gerekçeli kalemler.
   /// (DÜZELTME 2026-08-07, M-F-186: "yet" çıkarıldı — bu liste zaten
@@ -73,6 +81,7 @@ final class Discipline {
       m['blurb'] as String? ?? '',
       List<String>.from(honesty['measured'] as List<dynamic>? ?? <dynamic>[]),
       List<String>.from(honesty['notMeasured'] as List<dynamic>? ?? <dynamic>[]),
+      honesty['instrumentSpecificGap'] as String? ?? '',
       List<String>.from(
           m['comingSoonInThisDiscipline'] as List<dynamic>? ?? <dynamic>[]),
       courses,
