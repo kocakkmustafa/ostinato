@@ -10,15 +10,13 @@
   "  5. status=locked olan her ders lockedReason tasimak zorunda (esik degeri DEGIL, EKSIK OLCUMUN adi).",
   "  6. Kapsam-disi (comingSoonInThisDiscipline) her madde gerekce tasimak zorunda."
  ],
- "schemaVersion": 1,
- "productName": "Ostinato — Music Practice",
+ "schemaVersion": 2,
  "language": "en",
  "disciplines": [
   {
    "id": "guitar",
    "displayName": "Guitar",
    "status": "live",
-   "wave": "W1",
    "rulesetId": "guitar",
    "blurb": "Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit. This build hears nothing: there is no microphone input, so every judgement comes from the camera.",
    "honesty": {
@@ -184,13 +182,14 @@
     "Named posture coaching (the 'you are slouching' cue) — the threshold is derived from the reference (14 degrees, the spread inside which two teachers count as sitting the same way), but the question of whether a measurement may be spoken as a correction is open, and it is not ours to close: it needs a movement-science review we have not commissioned."
    ],
    "_honestyStaleFix": "2026-08-04 (MUT-A kural 9): kutu kullanıcıya '3 independent guitar teachers' diyordu; havuz 2026-07-30'da 3→5→7'ye büyümüş, VİTRİN METNİ güncellenmemişti. Bayat-gerekçe sınıfının (O-024) EN GÖRÜNÜR hâli: config'teki her sayıyı üç kapıyla koruyup kullanıcının okuduğu cümleyi korumasız bırakmışız. Kural 9 artık bu sayıyı artefakta bağlıyor; mutasyon süpürmesi olmasa bulunmazdı.",
-   "_openSetFix": "2026-08-04 (M-O-67, fallback-canlılık reçetesi M-F-184 adım 5): ölçüm mekanizma A buldu — sözlük-dışı akorlar en yakın modellenmiş akora GÜVENLE tamamlanıyordu (Bb→Dm %97, Bm→D %76). Eşik oynatmak çözmüyordu: yanlış-etiketi yarıya indirmek gerçek akorların %61'ini kaybettiriyordu. Kök neden ADAY KÜMESİNİN daraltılmasıydı — kazanacak hipotez (Bb) listede yoktu, motor en yakınını seçmek zorundaydı. Düzeltme bedelsiz çıktı: aday 24, kabul 8 → yanlış-etiket %65,5→%0,0, tanıma kaybı değişmedi (%0,9). 'Open chords' dersi zaten kilitliydi, bu yüzden kusur kullanıcıya ULAŞMADI — ama dürüstlük kutusu canlıydı ve bu satırı taşımıyordu."
+   "_openSetFix": "2026-08-04 (M-O-67, fallback-canlılık reçetesi M-F-184 adım 5): ölçüm mekanizma A buldu — sözlük-dışı akorlar en yakın modellenmiş akora GÜVENLE tamamlanıyordu (Bb→Dm %97, Bm→D %76). Eşik oynatmak çözmüyordu: yanlış-etiketi yarıya indirmek gerçek akorların %61'ini kaybettiriyordu. Kök neden ADAY KÜMESİNİN daraltılmasıydı — kazanacak hipotez (Bb) listede yoktu, motor en yakınını seçmek zorundaydı. Düzeltme bedelsiz çıktı: aday 24, kabul 8 → yanlış-etiket %65,5→%0,0, tanıma kaybı değişmedi (%0,9). 'Open chords' dersi zaten kilitliydi, bu yüzden kusur kullanıcıya ULAŞMADI — ama dürüstlük kutusu canlıydı ve bu satırı taşımıyordu.",
+   "_wave": "W1",
+   "_wave_reclassified": "2026-08-07 (O-057): `wave` -> `_wave`. Hicbir tuketicisi yoktu; bu bir PLANLAMA notu, urunun okudugu bir veri degil. `_` on eki onu KAYIT alani olarak isaretliyor — yani 'okunmuyor' artik bir kusur degil bir BEYAN. Sinifini yazmak, sessizce birakmaktan farkli: oksuz anahtar kapisi artik onu dogru sinifla gecirir."
   },
   {
    "id": "voice",
    "displayName": "Voice",
    "status": "live",
-   "wave": "W1",
    "rulesetId": "voice",
    "blurb": "Put your phone where it can see you from the waist up. We check how you hold yourself against six independent singing teachers. This build hears nothing: there is no microphone input, so we watch your posture and never listen to your voice.",
    "_blurbRevised": "2026-08-04: onceki blurb 'get feedback on pitch, sustain and posture' diyordu. Perde ve sustain motorlari GERCEK ve olculuyor, ama GERCEK BIR INSAN SESI kaydinda hic dogrulanmadi (bkz. sustained_note dersi, locked). Canli bir disiplinde blurb bir SOZDUR — kilitli olani vaat edemez.",
@@ -346,13 +345,13 @@
     "Pitch and sustain grading — engine ready, waiting only on one real vocal recording (see the Sustained note lesson)"
    ],
    "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi.",
-   "_openedAt": "2026-08-04: coming_soon -> live. Onceki gerekce uc sey istiyordu — 'bu calginin kendi drill'leri, hata koclugu, ve gitarinki gibi dogrulanmis uctan-uca kosum'. Sonuc: uctan-uca DOGRULANDI (3 gercek quality kapisi, POSTURE_CHECK->SUSTAIN zinciri); drill yolu KURULDU (titular drill gitarinki gibi kilitli, ayni gercek-kayit standardi); hata koclugu OLCULDU ve NEGATIF cikti (M-O-64) — eksik olan esik degil, esleseecek kod."
+   "_openedAt": "2026-08-04: coming_soon -> live. Onceki gerekce uc sey istiyordu — 'bu calginin kendi drill'leri, hata koclugu, ve gitarinki gibi dogrulanmis uctan-uca kosum'. Sonuc: uctan-uca DOGRULANDI (3 gercek quality kapisi, POSTURE_CHECK->SUSTAIN zinciri); drill yolu KURULDU (titular drill gitarinki gibi kilitli, ayni gercek-kayit standardi); hata koclugu OLCULDU ve NEGATIF cikti (M-O-64) — eksik olan esik degil, esleseecek kod.",
+   "_wave": "W1"
   },
   {
    "id": "piano",
    "displayName": "Piano",
    "status": "live",
-   "wave": "W1",
    "rulesetId": "piano",
    "blurb": "Put your phone where it can see you at the keyboard from the waist up. We check how you sit against three independent piano teachers. This build hears nothing: there is no microphone input, so your notes are never timed in your room.",
    "_blurbRevised": "2026-08-04: onceki blurb 'chords with posture and hand feedback' diyordu. EL GERI BILDIRIMI DIYE BIR SEY YOK — el/parmak landmark'i hic yok (P-WRIST-COLLAPSE ve P-FINGER-FLAT bu yuzden blockedByTool). Canli bir disiplinde var olmayan bir yetenegi vaat etmek, kullanicinin dogrulayamayacagi tek satirdir.",
@@ -509,7 +508,10 @@
     "Shoulder tension, the mistake piano teachers name most — needs a shoulder-height metric we do not have, plus its own reference statistic"
    ],
    "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi.",
-   "_openedAt": "2026-08-04: coming_soon -> live. Uctan-uca DOGRULANDI (POSTURE_CHECK->PLAY, trunk_tilt 80/80 PASS); drill yolu kuruldu (titular drill kilitli, gerekce olculdu); hata koclugu OLCULDU ve NEGATIF cikti + yanlis-eslesmis bir kod (P-POST-SHOULDER-TENSION) bu turda sokuldu. Disiplin ACILIYOR ama vitrini POSTURDUR — blurb ve honesty kutusu bunu soyluyor."
+   "_openedAt": "2026-08-04: coming_soon -> live. Uctan-uca DOGRULANDI (POSTURE_CHECK->PLAY, trunk_tilt 80/80 PASS); drill yolu kuruldu (titular drill kilitli, gerekce olculdu); hata koclugu OLCULDU ve NEGATIF cikti + yanlis-eslesmis bir kod (P-POST-SHOULDER-TENSION) bu turda sokuldu. Disiplin ACILIYOR ama vitrini POSTURDUR — blurb ve honesty kutusu bunu soyluyor.",
+   "_wave": "W1"
   }
- ]
+ ],
+ "_schemaVersion_why": "v2 (2026-08-07, O-057): v1'den beri UC yeni alan girdi ve sürüm numarasi yerinde kaldi — 5 arac schemaVersion'i OKUYORDU ama HICBIRI dogrulamiyordu. Eklenenler: honesty.instrumentSpecificGap (O-044) · honesty.outOfScopeDerived (O-050, uretilen) · kilitli derslerde promotionPath.unblockedBy (O-046). Artik tools/validate_orphan_keys.py bu alani GERCEKTEN tuketiyor: sema degisirse ikisi BIRLIKTE yukselmek zorunda.",
+ "_productName_removed": "2026-08-07 (O-057): 'Ostinato — Music Practice' alani KALDIRILDI. Hicbir tuketicisi yoktu ve uygulamanin GERCEK basligiyla (MaterialApp title 'Ostinato', kutuphane ekraninin logo metni 'Ostinato') AYRISIYORDU — urun adinin ikinci, denetlenmeyen kaynagiydi. Tek kaynak kodda kaldi."
 }

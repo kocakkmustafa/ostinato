@@ -111,7 +111,17 @@ muafiyetler kendi canlılık iddiasını ispat ediyor (O-045).
 | **`comingSoonInThisDiscipline`** (elle yazılan yarı) | bilerek: ayrı sınıf, betik dokunmaz | kapsam-dışı **karar** |
 | Negatif ikiz | MUT-M | ✅ |
 
-### 7. `tools/evidence/` — ekran kanıtı (KAPI DEĞİL)
+### 7. `validate_orphan_keys.py` — okunmayan anahtar (O-057)
+**Ölçtüğü:** `library.json`daki her anahtarın bir tüketicisi var mı (parser
+KAYNAĞINDAN türetilir, elle liste yok) + şema sürümü gerçekten doğrulanıyor mu.
+
+| ÖLÇMEDİĞİ | kanıt | sınıf |
+|---|---|---|
+| **Diğer 20 JSON dosyası** (3 ruleset · taksonomi · referanslar · fixture indeksi) | yalnız `library.json` taranıyor; `fromJson` benzeri 7 parser var, biri kolllanıyor | **kod** ⚠️ |
+| **Anahtarın DEĞERİNİN doğruluğu** | tüketici VARLIĞINI ölçer; `_wave` gibi kayıt alanları hiç sınanmaz | **yöntem** |
+| Negatif ikiz | MUT-S (öksüz anahtar) · MUT-T (sürüm sabit kalırsa) · **MUT-U (VAKUM: parser regex'i bozulunca kapı "temiz" demiyor)** | ✅ |
+
+### 8. `tools/evidence/` — ekran kanıtı (KAPI DEĞİL)
 **⚠️ `run_gates.sh`a BAĞLI DEĞİL — elle tazelenir.** Bayat bir PNG
 "doğrulandı" sanılabilir.
 
@@ -131,8 +141,10 @@ muafiyetler kendi canlılık iddiasını ispat ediyor (O-045).
    `throw`u kaçırdı, düzeltince tek-satırlık `assert`in kendi `;`sine takıldı.
    Satır penceresine geçildi. *Muafiyet, kuralın kendisi kadar sınanmalı —
    sessizce yarım çalışan bir muafiyet, olmayan bir kapıdır.*
-2. **`packages/` metin taraması** — bugün kullanıcı metni YOK (ölçüldü), ama
+2. **Diğer 20 JSON dosyası öksüz-anahtar taramasının dışında** — 7 parser var,
+   biri kollanıyor.
+3. **`packages/` metin taraması** — bugün kullanıcı metni YOK (ölçüldü), ama
    kapı orayı kollamıyor: yarın eklenen bir cümle sessizce kapsam dışı kalır.
-3. **Metin-dışı kontrast (1.4.11)** — bant çubuğu, iskelet çizgileri, ayraçlar
+4. **Metin-dışı kontrast (1.4.11)** — bant çubuğu, iskelet çizgileri, ayraçlar
    hiç ölçülmüyor.
-4. **Kanıt üreteci kapı değil** — elle tazelenir.
+5. **Kanıt üreteci kapı değil** — elle tazelenir.

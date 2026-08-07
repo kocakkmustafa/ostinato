@@ -30,6 +30,7 @@ run "içerik-atıf süpürmesi"        python3 tools/validate_references.py
 run "yüzey dürüstlüğü (vaat+yetenek)" python3 tools/validate_surface_honesty.py
 run "renk token kapısı"               python3 tools/validate_color_tokens.py
 run "kapsam-dışı listesi (türetim)"   python3 tools/gen_out_of_scope.py --check
+run "öksüz-anahtar + şema sürümü"     python3 tools/validate_orphan_keys.py
 run "canlı yüzey sözleşmesi"       python3 tools/gen_posture_contract.py --check
 run "eşik türetimi (artefakt↔config)" python3 tools/derive_posture_thresholds.py --check
 run "gözlem işareti sözleşmesi"     python3 tools/validate_observation_cues.py
