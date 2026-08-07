@@ -213,10 +213,42 @@ TOUCHED = [RULESET.format(i) for i in ("guitar", "voice", "piano")] + \
           [REFERENCE.format(i) for i in ("guitar", "voice", "piano")] + [LIBRARY]
 
 
+#: ÇÖKMEYE-DAYANIKLI GERİ ALMA (O-072). Bu harness GERÇEK config dosyalarını
+#: mutasyona uğratır ve `finally` ile geri alır — ama SÜREÇ ÖLDÜRÜLÜRSE
+#: `finally` KOŞMAZ ve repo BOZUK kalır.
+#:
+#: O-064'te bu harness `run_gates.sh`a bağlandı; yarıçapı "hatırlayan koşar"dan
+#: "HER taramada"ya çıktı. Ve tam da öyle oldu: bir koşum zaman aşımıyla
+#: öldürüldü, `guitar@0.2.0-draft.json` `G-SNEAKY` mutasyonuyla kaldı, ve
+#: SONRAKİ kapı turu kırmızı yandı — kusur üründe değil, KAPININ KENDİSİNDEydi.
+#:
+#: Çözüm: sabit yedek dizini + NÖBETÇİ dosya. Nöbetçi varsa önceki koşum
+#: mutasyonun ORTASINDA ölmüş demektir → sessizce değil, GÜRÜLTÜYLE onarılır.
+#: (Kendi dersim, O-065: *geri-alma da mutasyonun parçasıdır.*)
+BACKUP_DIR = Path(".mutA-backup")
+SENTINEL = BACKUP_DIR / "IN-FLIGHT"
+
+
+def _heal_if_needed():
+    if not SENTINEL.exists():
+        return
+    print("⚠️  ÖNCEKİ MUT-A KOŞUMU MUTASYONUN ORTASINDA ÖLMÜŞ — onarılıyor:")
+    for f in TOUCHED:
+        src = BACKUP_DIR / Path(f).name
+        if src.exists():
+            shutil.copy(src, f)
+            print(f"     geri alındı: {f}")
+    SENTINEL.unlink(missing_ok=True)
+    print("   (repo onarıldı; bu uyarı görüldüyse bir önceki tur kesilmiştir)")
+
+
 def main():
-    backup = Path(tempfile.mkdtemp(prefix="mutA-"))
+    _heal_if_needed()
+    BACKUP_DIR.mkdir(exist_ok=True)
+    backup = BACKUP_DIR
     for f in TOUCHED:
         shutil.copy(f, backup / Path(f).name)
+    SENTINEL.write_text("mutations in flight\n", encoding="utf-8")
 
     baseline = run_gates()
     if baseline:
@@ -245,6 +277,7 @@ def main():
     finally:
         for f in TOUCHED:
             shutil.copy(backup / Path(f).name, f)
+        SENTINEL.unlink(missing_ok=True)
         shutil.rmtree(backup, ignore_errors=True)
 
     width = max(len(r[1]) for r in rows)

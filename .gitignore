@@ -9,3 +9,4 @@ __pycache__/
 # Pinli MediaPipe poz modeli — aile kuralı: .task ikilileri izlenmez
 # (tool/fetch_pose_model.sh indirir/kopyalar, SHA-256 build kapısı doğrular).
 assets/models/*.task
+.mutA-backup/
