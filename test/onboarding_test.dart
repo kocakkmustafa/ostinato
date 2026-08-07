@@ -164,11 +164,18 @@ void main() {
       expect(valueOf('onboarding-fact-locked'), '$locked');
       expect(valueOf('onboarding-fact-demo'), '$demo');
 
-      // Bugünkü GERÇEK değerler — türetimin gerçekten bir şey saydığını
-      // gösterir. Sıfır sayan bir türetim de "eşleşir" ve sessizce geçerdi.
-      expect(live.length, greaterThanOrEqualTo(3));
-      expect(all.length, greaterThanOrEqualTo(19));
-      expect(locked, greaterThan(0));
+      // Türetimin gerçekten BİR ŞEY saydığı ayrıca sınanır: sıfır sayan bir
+      // türetim de "eşleşir" ve sessizce geçerdi.
+      //
+      // ⚠️ Buradaki iddialar YAPISAL, içerik BOYUTUNA bağlı DEĞİL (JabLab
+      // dersi): önceki hâli `all.length >= 19` diyordu ve o gece 19→28'e
+      // çıktı. Taban bir kez doğruyken bile yanlış türden bir iddiaydı —
+      // ürünün büyüklüğünü değil, türetimin çalıştığını ölçmeliyiz.
+      expect(live.length, greaterThan(0));
+      expect(all.length, greaterThan(live.length),
+          reason: 'her çalgının en az bir dersi olmalı');
+      expect(locked, greaterThan(0),
+          reason: 'kilitli ders sayısı 0 ise "kilitli" satırı anlamsız');
       expect(demo, greaterThan(0));
     });
   });

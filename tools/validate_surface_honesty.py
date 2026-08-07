@@ -111,6 +111,38 @@ AUDIO_ABSENCE = re.compile(
     r"no microphone input|hears nothing|never listen|"
     r"not wired in this build|no audio permission", re.IGNORECASE)
 
+
+# ── D: OLUMLU iddia, "koçlanan ama SKORLANMAYAN" eklemi sahiplenemez ────────
+# (JabLab J-113 aktarımı, koordinatör 2026-08-07 — SKOR ekseni.) JabLab'ın
+# kusuru şuydu: `coachedOnlyJoints` bir eklemi açıkça "koçlanan ama
+# SKORLANMAYAN" kovasına koyuyordu, `measured` listesi ise aynı şeyi SINIRSIZ
+# iddia ediyordu. **İki temsil çelişiyordu ve çelişen taraf en görünür
+# yerdeydi.** Sınıfı M-F-287'nin TERS yönü: bir sınırı değil bir YETENEĞİ
+# olduğundan geniş yazmak — daha tehlikeli, çünkü kullanıcı ALEYHİNE hata
+# verir.
+#
+# Kova ELLE yazılmıyor: her çalgının kendi ruleset'indeki `coached_only`
+# listesinden okunuyor, yani kova değişirse kural da değişir.
+JOINT_WORDS = {
+    "shoulder": r"\bshoulders?\b",
+    "upper_arm": r"\bupper arms?\b",
+    "elbow": r"\belbows?\b",
+    "forearm": r"\bforearms?\b",
+}
+# "ölçülür ama puanlanmaz" DİYEN cümle meşrudur — iddia zaten sınırlı.
+NOT_GRADED = re.compile(
+    r"never graded|not graded|never marked|do not grade|"
+    r"never judged|not judged|show(?:n)? .{0,20}never", re.IGNORECASE)
+
+
+def coached_only_joints(instrument):
+    p = Path(f"config/rulesets/{instrument}@0.2.0-draft.json")
+    if not p.exists():
+        return []
+    rc = json.loads(p.read_text(encoding="utf-8")).get(
+        "referenceConsumption", {})
+    return rc.get("coached_only", []) or []
+
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
 PUBSPEC = "pubspec.yaml"
@@ -329,6 +361,31 @@ def main() -> int:
                     f"«{text.strip()[:110]}»"
                 )
 
+
+    # ── Kural D ──
+    lib_json = json.loads(Path(LIBRARY_JSON).read_text(encoding="utf-8"))
+    checked_d = 0
+    for disc in lib_json["disciplines"]:
+        joints = coached_only_joints(disc["id"])
+        if not joints:
+            continue
+        # Kovadaki eklem ADLARINDAN hangi kelimelerin yasak olduğunu TÜRET.
+        banned = {w: rx for w, rx in JOINT_WORDS.items()
+                  if any(w in j for j in joints)}
+        for claim in disc.get("honesty", {}).get("measured", []):
+            checked_d += 1
+            if NOT_GRADED.search(claim):
+                continue
+            for word, rx in banned.items():
+                if re.search(rx, claim, re.IGNORECASE):
+                    violations.append(
+                        f"[skor ekseni] {disc['id']}.honesty.measured: "
+                        f"'{word}' anılıyor ama o eklem ruleset'in "
+                        f"`coached_only` kovasında (koçlanır, SKORLANMAZ) ve "
+                        f"cümle bu sınırı söylemiyor — yeteneği olduğundan "
+                        f"geniş yazmak, sınırı dar yazmaktan tehlikelidir — "
+                        f"«{claim.strip()[:100]}»")
+
     if violations:
         print(f"⛔ {len(violations)} YÜZEY DÜRÜSTLÜĞÜ İHLALİ:")
         for v in violations:
@@ -339,7 +396,8 @@ def main() -> int:
     print(f"✅ yüzey dürüstlüğü TEMİZ — {len(surfaces)} kullanıcı-yüzeyi metni "
           f"tarandı ({len(PROMISE_PATTERNS)} vaat deseni + "
           f"{len(CAPABILITY_RULES)} yetenek kuralı + "
-          f"{checked_affirmative} olumlu iddia alanı)")
+          f"{checked_affirmative} olumlu iddia alanı + "
+          f"{checked_d} skor-ekseni iddiası)")
     # KAPSAM her koşumda YAZILIR: taranmayan bir yer 'temiz' sanılamasın diye
     # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
     print(f"   kapsam: {DART_ROOTS} + kabuğa giden {len(shipped_json_assets())} "

@@ -67,7 +67,16 @@ void main() {
   String headline(WidgetTester t) =>
       t.widget<Text>(find.byKey(const Key('review-gap-headline'))).data!;
 
-  for (final String id in <String>['guitar', 'voice', 'piano']) {
+  // ⚠️ Bu liste ELLE yazılı ve öyle KALMAK ZORUNDA: `testWidgets` KAYIT
+  // anında çağrılır, `repo` ise `setUpAll`da yani ÇALIŞTIRMA anında dolar —
+  // disiplin döngüsü burada kurulamaz (`real_content_overflow_test.dart`
+  // aynı sınırı aynı gerekçeyle taşıyor).
+  // Dördüncü çalgı eklenirse bu döngü onu KAPSAMAZ ve test KIRMIZI DA
+  // DÖNMEZ — sessizce eksik kalır. O yüzden aşağıdaki "HER canlı çalgıda
+  // FARKLI" testi TEST GÖVDESİNDE (repo hazırken) canlı listeyi kendi
+  // türetiyor: kapsamın tamamını o kolluyor, bu döngü yalnız başlık-sayı
+  // iddiasını üç bilinen çalgıda derinlemesine sınıyor.
+  for (final String id in const <String>['guitar', 'voice', 'piano']) {
     testWidgets('$id — başlıktaki sayı GERÇEK kalem sayısıyla aynı',
         (WidgetTester t) async {
       final List<String> texts = await pumpReview(t, id);
@@ -76,8 +85,13 @@ void main() {
 
       // 3 sabit kalem + çalgıya-özel kalem (varsa) — ekranın kendi kuralı.
       final int expected = 3 + (d.instrumentSpecificGap.isEmpty ? 0 : 1);
-      const Map<int, String> words = <int, String>{3: 'Three', 4: 'Four'};
-      expect(headline(t), '${words[expected]} things, by name.',
+      // Ekranın kendi yazıyla-sayı eşlemesinin AYNADAKİ hâli — ekran ondan
+      // uzun bir listede rakama düşüyor, test de öyle düşer (yoksa liste
+      // büyüdüğünde test, ürün doğru davranırken null'a çarpar).
+      const Map<int, String> words = <int, String>{
+        1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six',
+      };
+      expect(headline(t), '${words[expected] ?? expected} things, by name.',
           reason: 'başlık listeden TÜREMİYOR — sayı elle yazılmış olabilir');
 
       // Sayının SAYDIĞI şey gerçekten ekranda mı? Başlık türerken liste boş
@@ -86,18 +100,26 @@ void main() {
     });
   }
 
-  testWidgets('dördüncü kalem üç çalgıda ÜÇ FARKLI cümle', (WidgetTester t) async {
+  testWidgets('çalgıya-özel kalem HER canlı çalgıda FARKLI', (WidgetTester t) async {
+    // ⚠️ SAYI DEĞİL KURAL ölçülüyor (JabLab dersi, koordinatör 2026-08-07:
+    // "fazla geniş bir test, ürün doğru genişlerken kırmızıya döner").
+    // Önceki hâli `expect(seen.length, 3)` idi ve çalgı listesi de elle
+    // yazılıydı — DÖRDÜNCÜ çalgı eklendiği gün bu test, ürün DOĞRU
+    // genişlerken kırmızıya dönecekti. Kural şu: kaç canlı çalgı varsa o
+    // kadar FARKLI cümle olmalı; sayı listeden türer.
+    final List<Discipline> live =
+        repo.disciplines.where((Discipline d) => d.status == 'live').toList();
     final Set<String> seen = <String>{};
-    for (final String id in <String>['guitar', 'voice', 'piano']) {
-      await pumpReview(t, id);
-      seen.add(repo.disciplines
-          .firstWhere((Discipline x) => x.id == id)
-          .instrumentSpecificGap);
+    for (final Discipline d in live) {
+      await pumpReview(t, d.id);
+      seen.add(d.instrumentSpecificGap);
     }
-    expect(seen.length, 3,
+    expect(seen.length, live.length,
         reason: 'çalgıya-özel kalem çalgıya göre DEĞİŞMİYOR — türetim kopmuş '
             've ekran genel bir metne düşmüş olabilir');
     expect(seen.any((String s) => s.isEmpty), isFalse);
+    expect(live.length, greaterThan(1),
+        reason: 'tek çalgıyla "her çalgıda farklı" iddiası vakum-doğru olur');
   });
 
   test('her canlı disiplin çalgıya-özel boşluğunu ve KAYNAĞINI taşır', () {
