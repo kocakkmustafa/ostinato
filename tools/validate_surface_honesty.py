@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Yüzey dürüstlüğü kapısı — kullanıcının OKUDUĞU her metin, iki kural.
+"""Yüzey dürüstlüğü kapısı — kullanıcının OKUDUĞU her metin, ÜÇ kural.
 
 Neden var (2026-08-07, gece vardiyası ölçümü):
 
@@ -21,10 +21,22 @@ Neden var (2026-08-07, gece vardiyası ölçümü):
   mikrofon gerçekten kablolanıp izin beyan edildiği gün kendini emekliye
   ayırır; o gün kimsenin bu dosyayı hatırlaması gerekmez.
 
+  **C) OLUMLU iddia yüzeyi yalnız BU BUILD'in yapabildiğini söyler.** Kural B
+  KELİME arıyordu; asıl iddialar o kelimeyi hiç kullanmıyordu ve ürünün en
+  güçlü yüzeyinde duruyordu (`honesty.measured`, `blurb`). Ayrıntı kuralın
+  kendi başlığında.
+
 Kapsam: kullanıcıya GÖRÜNEN metin. Dart YORUMLARI kapsam DIŞI (bize yazılır,
 kullanıcıya değil) — bu yüzden kaynak taranmadan önce yorumlar sökülür.
-`library.json`da `_` ile başlayan alanlar ve `$comment` de kayıt alanıdır,
-kullanıcı yüzeyi değil.
+JSON'da `_` ile başlayan alanlar ve `$comment` de kayıt alanıdır, kullanıcı
+yüzeyi değil. Tanımlayıcı-biçimli string'ler (widget `Key`i, asset yolu)
+proza değildir, atlanır.
+
+⚠️ **Kapsamın kendisi de türetilir, elle yazılmaz.** Taranan JSON listesi
+`pubspec.yaml`ın `assets:` bloğundan okunur — kapı ilk yazıldığında yalnız
+`library.json`a bakıyordu ve kabuğa giden diğer iki metin varlığını (canlı
+gözlem cümlesinin golden kataloğu dahil) görmüyordu. Her koşumda kapsam
+EKRANA yazılır: bakılmayan bir yer "temiz" sanılamasın diye.
 """
 import json
 import re
@@ -96,6 +108,40 @@ AUDIO_ABSENCE = re.compile(
 
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
+PUBSPEC = "pubspec.yaml"
+
+
+def shipped_json_assets():
+    """Kabuğa GİDEN her JSON varlığı — liste `pubspec.yaml`dan TÜRER.
+
+    ⚠️ Bu fonksiyon bir kapsam hatasının düzeltmesidir (2026-08-07). Kapı ilk
+    yazıldığında yalnız `library.json`ı tarıyordu; ölçüldü ki `pubspec`
+    kabuğa **dört** varlık gönderiyor ve ikisi daha KULLANICI METNİ taşıyor —
+    `config/observation-cue-templates.golden.json` (canlı ekranda okunan
+    gözlem cümlesi, ürünün en çok "konuşan" metni) ve
+    `assets/config/posture-contract.json` (`sourceClass` etiketleri, cümlenin
+    içine giriyor). İkisi de o gün TEMİZDİ — ama **var olmayan kapsam
+    kırmızıya dönemez** (aile dersi #4'ün kapı hâli): kimse bakmıyordu, ve
+    bakılmadığı için temiz oldukları bilinmiyordu, sanılıyordu.
+
+    Liste ELLE yazılmıyor çünkü elle yazılan bir kapsam, eklenen ilk yeni
+    varlıkta sessizce bayatlar — tam da bu kapının kovaladığı arıza sınıfı.
+    """
+    text = Path(PUBSPEC).read_text(encoding="utf-8")
+    out, in_assets = [], False
+    for raw in text.splitlines():
+        if re.match(r"^\s{2}assets:\s*$", raw):
+            in_assets = True
+            continue
+        if in_assets:
+            m = re.match(r"^\s{4,}-\s+(\S+)\s*$", raw)
+            if m:
+                if m.group(1).endswith(".json"):
+                    out.append(m.group(1))
+                continue
+            if raw.strip() and not raw.strip().startswith("#"):
+                in_assets = False
+    return out
 
 
 def strip_dart_comments(src: str) -> str:
@@ -177,9 +223,14 @@ def dart_surface_strings():
                 yield str(path), src.count("\n", 0, start) + 1, pending
 
 
-def json_surface_strings():
-    """(yol, metin) — `_`/`$` ile başlayan KAYIT alanları hariç."""
-    data = json.loads(Path(LIBRARY_JSON).read_text(encoding="utf-8"))
+def json_surface_strings(files=None):
+    """(yol, metin) — `_`/`$` ile başlayan KAYIT alanları hariç.
+
+    `files` verilmezse kabuğa giden TÜM JSON varlıkları taranır (bkz.
+    [shipped_json_assets]). Kural C gibi yalnız `library.json`a ait alan
+    yollarıyla çalışan çağıranlar dosyayı AÇIKÇA verir.
+    """
+    results = []
 
     def walk(node, path):
         if isinstance(node, dict):
@@ -191,11 +242,13 @@ def json_surface_strings():
             for idx, v in enumerate(node):
                 walk(v, f"{path}[{idx}]")
         elif isinstance(node, str):
-            yield_from = (path, node)
-            results.append(yield_from)
+            results.append((path, node))
 
-    results = []
-    walk(data, LIBRARY_JSON)
+    for f in (files if files is not None else shipped_json_assets()):
+        p = Path(f)
+        if not p.exists():
+            continue
+        walk(json.loads(p.read_text(encoding="utf-8")), f)
     return results
 
 
@@ -256,7 +309,7 @@ def main() -> int:
         android_declares("android.permission.RECORD_AUDIO")
     checked_affirmative = 0
     if not audio_declared:
-        for path, text in json_surface_strings():
+        for path, text in json_surface_strings([LIBRARY_JSON]):
             if not any(p.search(path) for p in AFFIRMATIVE_JSON_PATHS):
                 continue
             checked_affirmative += 1
@@ -277,10 +330,15 @@ def main() -> int:
             print(f"   - {v}")
         return 1
 
+    scanned = ", ".join(shipped_json_assets())
     print(f"✅ yüzey dürüstlüğü TEMİZ — {len(surfaces)} kullanıcı-yüzeyi metni "
           f"tarandı ({len(PROMISE_PATTERNS)} vaat deseni + "
           f"{len(CAPABILITY_RULES)} yetenek kuralı + "
           f"{checked_affirmative} olumlu iddia alanı)")
+    # KAPSAM her koşumda YAZILIR: taranmayan bir yer 'temiz' sanılamasın diye
+    # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
+    print(f"   kapsam: {DART_ROOTS} + kabuğa giden {len(shipped_json_assets())} "
+          f"JSON varlığı ({scanned})")
     return 0
 
 
