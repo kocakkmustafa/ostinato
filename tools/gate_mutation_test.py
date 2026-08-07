@@ -22,6 +22,7 @@ NEGATİF İKİZ (M-F-194): her mutasyonun beklenen sonucu YAZILIDIR. "Kırmızı
 yanmalı" kadar "yeşil KALMALI" da sınanır — hep-kırmızı yanan bir kapı da
 her mutasyon testini geçerdi.
 """
+import hashlib
 import json
 import os
 import shutil
@@ -260,8 +261,28 @@ def _alive(pid: int) -> bool:
     return True
 
 
+def _digests(files) -> dict:
+    """Dosya özetleri — KÖKEN KANITI.
+
+    ── O-084 (2026-08-07) · YANLIŞ ORACLE ────────────────────────────────────
+    O-079'da kökeni `git`e bağlamıştım çünkü doğrulaması kolaydı. Ama sonucu
+    şu oldu: kapı, ruleset'te commit'lenmemiş bir değişiklik varken MUT-A'yı
+    REDDEDİYORDU — yani *"doğrulayabilmek için önce commit'le"* dayatıyordu.
+    Bu SIRAYI TERSİNE ÇEVİRİR: kapıların amacı commit'ten ÖNCE doğrulamaktır.
+    Kendi kuralımı kendi üzerimde denerken yakalandı (ruleset düzeltmem
+    commit'siz duruyordu ve kapı beni doğrulanmamış işi commit'lemeye zorladı).
+
+    🎓 Ders: **bir kapı, önlediği arızadan daha kötü bir alışkanlık
+    dayatıyorsa yanlış oracle'ı seçmiştir.** Köken kanıtı `git` değil HASH:
+    koşum başında özet alınır, geri-yüklemeden sonra yeniden özetlenip
+    karşılaştırılır — dosya commit'li olsun olmasın KANITLANABİLİR.
+    `git` yalnız SON ÇARE onarım oracle'ı olarak kalır (yedek yoksa/bozuksa).
+    """
+    return {f: hashlib.sha256(Path(f).read_bytes()).hexdigest() for f in files}
+
+
 def _git_dirty(files):
-    """Dokunulan dosyalarda commit'lenmemiş değişiklik VAR mı?"""
+    """Dokunulan dosyalarda commit'lenmemiş değişiklik VAR mı? (son çare için)"""
     r = subprocess.run(["git", "diff", "--quiet", "--"] + list(files),
                        capture_output=True)
     return r.returncode != 0
@@ -286,11 +307,23 @@ def _heal_if_needed() -> int:
               f"KALICI olur (O-079). Önceki koşumun bitmesini bekleyin.")
         return 1
     print("⚠️  ÖNCEKİ MUT-A KOŞUMU MUTASYONUN ORTASINDA ÖLMÜŞ — onarılıyor:")
-    if _git_restore(TOUCHED):
-        print(f"     ✅ {len(TOUCHED)} dosya commit'li hâline döndü ve DOĞRULANDI")
-    else:
-        print("     ⛔ ONARIM TUTMADI — dosyalar hâlâ commit'ten farklı. "
-              "Elle bakın; sessiz bir 'onarıldı' mesajı vermeyeceğim.")
+    # Öncelik YEDEK: koşum ÖNCESİ hâli o taşır (commit'li olsun olmasın).
+    dig = BACKUP_DIR / "DIGESTS.json"
+    restored = False
+    if dig.exists():
+        want = json.loads(dig.read_text(encoding="utf-8"))
+        if all((BACKUP_DIR / Path(f).name).exists() for f in TOUCHED):
+            for f in TOUCHED:
+                shutil.copy(BACKUP_DIR / Path(f).name, f)
+            restored = _digests(TOUCHED) == want
+            print(f"     {'✅' if restored else '⛔'} yedekten geri yüklendi, "
+                  f"özet doğrulaması: {'TUTTU' if restored else 'TUTMADI'}")
+    if not restored:  # SON ÇARE: git (yalnız yedek yoksa/bozuksa)
+        print("     ↪ yedek kullanılamadı; son çare git kökeni")
+        restored = not _git_dirty(TOUCHED) or _git_restore(TOUCHED)
+    if not restored:
+        print("     ⛔ ONARIM TUTMADI — elle bakın; sessiz bir 'onarıldı' "
+              "mesajı vermeyeceğim.")
         return 1
     SENTINEL.unlink(missing_ok=True)
     return 0
@@ -299,20 +332,13 @@ def _heal_if_needed() -> int:
 def main():
     if _heal_if_needed():
         return 1
-    # ② KÖKEN — yedeğin kaynağı kirliyse geri-yükleme kanıtlanamaz.
-    if _git_dirty(TOUCHED):
-        print("⛔ MUT-A BAŞLAMADI: mutasyona uğratılacak dosyalarda "
-              "commit'lenmemiş değişiklik var.\n"
-              "   Yedek ancak KÖKENİ bilinirse geri-yükleme sayılır; şu an "
-              "geri-yükleme neyi geri getireceğini kanıtlayamaz (O-079).\n"
-              "   Önce bu dosyaları commit'leyin ya da geri alın:")
-        for f in TOUCHED:
-            print(f"     {f}")
-        return 1
+    # ② KÖKEN — HASH ile (git ile DEĞİL, bkz. O-084 notu yukarıda).
     BACKUP_DIR.mkdir(exist_ok=True)
     backup = BACKUP_DIR
     for f in TOUCHED:
         shutil.copy(f, backup / Path(f).name)
+    before = _digests(TOUCHED)
+    (BACKUP_DIR / "DIGESTS.json").write_text(json.dumps(before), encoding="utf-8")
     SENTINEL.write_text(f"mutations in flight {os.getpid()}\n", encoding="utf-8")
 
     rows, unguarded = [], []
@@ -339,14 +365,14 @@ def main():
                     unguarded.append(label)
             rows.append((kind, label, verdict, ok))
     finally:
-        # ③ DOĞRULAMA — geri-yükleme DENENDİ değil, TUTTU mu?
+        # ③ DOĞRULAMA — geri-yükleme DENENDİ değil, TUTTU mu? (hash ile)
         for f in TOUCHED:
             shutil.copy(backup / Path(f).name, f)
-        if _git_dirty(TOUCHED):
-            print("⚠️  yedekten geri-yükleme TUTMADI — git kökeninden "
-                  "onarılıyor (yedek kirlenmiş olabilir):")
-            if _git_restore(TOUCHED):
-                print("     ✅ commit'li hâle döndü ve doğrulandı")
+        if _digests(TOUCHED) != before:
+            print("⚠️  yedekten geri-yükleme TUTMADI (özetler UYUŞMUYOR) — "
+                  "son çare: git kökeni:")
+            if not _git_dirty(TOUCHED) or _git_restore(TOUCHED):
+                print("     ✅ onarıldı ve doğrulandı")
             else:
                 print("     ⛔ ONARIM BAŞARISIZ — repo BOZUK, elle bakın")
         SENTINEL.unlink(missing_ok=True)

@@ -177,6 +177,29 @@ def check(doc, name):
             if not e.get("blockedByTool"):
                 p.append(f"{name}/{e.get('code')}: status=aspirational ama blockedByTool yok — "
                          f"eksik ALETİN adı zorunlu (envanter bundan üretilir)")
+
+        # ── O-083 · KANAL BEYANI ZORUNLU, ve ses kanalı ALETSİZ ─────────────
+        # `V-PITCH-DRIFT` üç kural setindeki `_observable` TAŞIMAYAN TEK kuraldı
+        # ve tam bu yüzden ses süpürmesini kaçırdı: kardeşleri (G/P-TEMPO-DRIFT,
+        # G-FINGER-PLACEMENT-BUZZ) `_observable: audio` taşıdığı için
+        # yakalanmıştı, o görünmezdi. **Sınıflandırılmamış bir kayıt, hiçbir
+        # sınıf süpürmesine yakalanmaz** — eksik alan sessiz bir muafiyettir.
+        #
+        # Zarar somuttu: üretilen uzman envanteri onu *"uzmana SORULACAK"*
+        # kovasına koyuyordu, yani bir uzmanın oturumu ÜRÜNÜN ÖLÇEMEDİĞİ bir
+        # metrik için eşik doğrulamaya harcanacaktı. İleriye dönük risk daha
+        # büyük: ses bağlandığı gün doğrulanmamış bir eşik sessizce canlı olurdu.
+        if e.get("_observable") not in ("camera", "audio"):
+            p.append(f"{name}/{e.get('code')}: `_observable` YOK (camera|audio) — "
+                     f"sınıflandırılmamış bir kayıt hiçbir sınıf süpürmesine "
+                     f"yakalanmaz; eksik alan sessiz bir MUAFİYETTİR (O-083)")
+        elif e.get("_observable") == "audio" and not _audio_shipped():
+            if e.get("status") != "aspirational" or not e.get("blockedByTool"):
+                p.append(f"{name}/{e.get('code')}: `_observable: audio` ama bu "
+                         f"build'de ses girdisi YOK (`ostinato_audio` uygulamaya "
+                         f"bağlı değil — O-077) → status=aspirational + "
+                         f"blockedByTool ZORUNLU. Aksi hâlde ses bağlandığı gün "
+                         f"DOĞRULANMAMIŞ bir eşik sessizce canlı olur (O-083)")
         # NOT: `expertPending ⇒ canlı yüzeye bağlanamaz` (M-F-125 okuyucu-i)
         # kasten BURADA DEĞİL, `validate_library.py` kural 7'de. Sebep
         # ölçüldü: burada "skorlanan metriğe bağlanamaz" diye uygularsam
@@ -185,6 +208,21 @@ def check(doc, name):
         # Ayrım: METRİK bağı ölçülebilirlik sorusu (buranın işi), YÜZEY bağı
         # "kullanıcıya hüküm olarak ulaşıyor mu" sorusu (kütüphanenin işi).
     return p
+
+def _audio_shipped() -> bool:
+    """Ses girdisi bu build'e SEVK EDİLİYOR mu? — ağaçtan TÜRER, elle yazılmaz.
+
+    Tek kaynak `validate_runner_inventory.shipping_map()`: uygulamanın
+    `pubspec.yaml`ından `path:` ile bağlı yerel paketler. `ostinato_audio`
+    bugün BAĞLI DEĞİL (O-077), yani hiçbir ses metriği üretilemiyor.
+    Bağlandığı gün bu fonksiyon KENDİLİĞİNDEN True döner ve yukarıdaki kural
+    susar — kural kendini emekliye ayırmaz, YÖN DEĞİŞTİRİR (O-059).
+    """
+    import sys as _sys
+    _sys.path.insert(0, str(pathlib.Path("tools").resolve()))
+    from validate_runner_inventory import shipping_map
+    return shipping_map().get("ostinato_audio", False)
+
 
 def self_test():
     """Her kontrolün gerçekten yakaladığını kanıtla."""

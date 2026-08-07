@@ -341,15 +341,12 @@
   {
    "code": "V-PITCH-DRIFT",
    "evaluateAt": "SUSTAIN",
-   "condition": {
-    "kind": "metric",
-    "metric": "pitch_deviation_cents",
-    "op": "gt",
-    "value": 25
-   },
-   "cooldownMs": 20000,
-   "expertPending": true,
-   "_sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json"
+   "_sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json",
+   "status": "aspirational",
+   "blockedByTool": "pitch-DSP",
+   "_observable": "audio",
+   "_why": "Perde kaymasi PITCH-DSP ister; bu build'de ses girdisi YOK (mikrofon izni istenmiyor, `ostinato_audio` uygulamaya BAGLI DEGIL — O-077'de olculdu). Alet gelmeden kosul yazilamaz.",
+   "_removedCondition": "O-083 (2026-08-07): M-F-125/M-O-53 ile AYNI SINIF, farkli sebeple kacmis. Kardesleri (G/P-TEMPO-DRIFT, G-FINGER-PLACEMENT-BUZZ) supurulurken bu kural ATLANMIS: uc kural setindeki `_observable` TASIMAYAN TEK kuraldi, bu yuzden ses-siniflandirmasi onu HIC GORMEDI. Kaldirilan hali: {\"condition\": {\"kind\": \"metric\", \"metric\": \"pitch_deviation_cents\", \"op\": \"gt\", \"value\": 25}, \"cooldownMs\": 20000, \"expertPending\": true} — Zarar somut: uretilen uzman envanteri onu 'uzmana SORULACAK' kovasina koyuyordu, yani bir uzmanin oturumu URUNUN OLCEMEDIGI bir metrik icin 25-sent esigi dogrulamaya harcanacakti. Ileriye donuk risk daha buyuk: ses baglandigi gun HIC KIMSENIN DOGRULAMADIGI bir esik sessizce CANLI olurdu."
   }
  ],
  "feedbackPolicy": {

@@ -27,15 +27,6 @@
    "sources": "4 bağımsız kanal",
    "threshold": "None None None",
    "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
-  },
-  {
-   "module": "voice",
-   "code": "V-PITCH-DRIFT",
-   "evaluateAt": "SUSTAIN",
-   "observable": null,
-   "sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json",
-   "threshold": "pitch_deviation_cents gt 25",
-   "askExpert": "Bu eşik doğru mu? (metrik ölçülebiliyor, eşik doğrulanmadı)"
   }
  ],
  "aspirational_engineeringDebt_notForExpert": [
@@ -101,6 +92,15 @@
    "sources": "4 bağımsız kanal",
    "blockedByTool": "rhythm-grid",
    "why": "Tempo kaymasi ritim-izgarasi ister (RhythmEngine onset->beat-grid API'si bitmedi)."
+  },
+  {
+   "module": "voice",
+   "code": "V-PITCH-DRIFT",
+   "evaluateAt": "SUSTAIN",
+   "observable": "audio",
+   "sources": "≥2 bağımsız öğretmen kaynağı — config/error-taxonomy.w1.json",
+   "blockedByTool": "pitch-DSP",
+   "why": "Perde kaymasi PITCH-DSP ister; bu build'de ses girdisi YOK (mikrofon izni istenmiyor, `ostinato_audio` uygulamaya BAGLI DEGIL — O-077'de olculdu). Alet gelmeden kosul yazilamaz."
   }
  ],
  "settledCount": 0
