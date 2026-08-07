@@ -8,10 +8,19 @@ import 'ostinato_theme.dart';
 /// Camsı/yarı-saydam kart — Ostinato'nun malzeme imzası (Lissom'un mat kili
 /// DEĞİL). `sigma` küçük tutulur: gerçek cihazda blur ucuz değil.
 class GlassCard extends StatelessWidget {
+  /// Varsayılan cam gradyanı — ADLANDIRILDI ki kontrast kapısı
+  /// (`test/contrast_test.dart`) onu ELLE kopyalamak zorunda kalmasın.
+  /// Elle kopyalanan bir zemin, temanın rengi değişince sessizce bayatlar
+  /// ve kapı ölçmediği bir pikseli ölçmeye devam eder.
+  static const List<Color> defaultGradient = <Color>[
+    Color(0xEBFFFFFF),
+    Color(0x8FFFFFFF),
+  ];
+
   const GlassCard({
     super.key,
     required this.child,
-    this.gradientColors = const <Color>[Color(0xEBFFFFFF), Color(0x8FFFFFFF)],
+    this.gradientColors = defaultGradient,
     this.padding = const EdgeInsets.all(18),
     this.borderRadius = 22,
   });

@@ -191,7 +191,7 @@
    "_blurbRevised": "2026-08-04: onceki blurb 'get feedback on pitch, sustain and posture' diyordu. Perde ve sustain motorlari GERCEK ve olculuyor, ama GERCEK BIR INSAN SESI kaydinda hic dogrulanmadi (bkz. sustained_note dersi, locked). Canli bir disiplinde blurb bir SOZDUR — kilitli olani vaat edemez.",
    "honesty": {
     "measured": [
-     "Trunk alignment, before you sing and while you sing — checked against 6 independent voice teachers who agree to within 1.35 degrees of each other (config/references/voice-posture-setup.v1.json, ATTESTED)"
+     "Trunk alignment while you set up to sing — checked against 6 independent voice teachers who agree to within 1.35 degrees of each other (config/references/voice-posture-setup.v1.json, ATTESTED). The reference covers posture during singing too, but this build cannot tell when you start: that phase opens on periodicity in the sound, and there is no microphone input here."
     ],
     "notMeasured": [
      "Whether the room is quiet enough and your voice is loud enough to judge at all. The gate that refuses rather than guessing is built and exercised on recordings, but there is no microphone input in this build, so it never runs on your room. The setup check says the same thing in its own words, and shows no progress bar for a capture that does not happen.",
@@ -203,7 +203,8 @@
     ],
     "_audioClaimsMoved": "2026-08-07: bu disiplinin measured listesindeki SES iddiası notMeasured'a taşındı ve blurb'ü düzeltildi. Sebep ölçüldü: Info.plist'te NSMicrophoneUsageDescription, AndroidManifest'te RECORD_AUDIO YOK ve kabukta tek bir ses yakalama çağrısı yok — motor gerçek ve fixture üzerinde ölçülü, ama kullanıcının ODASINDA hiç koşmuyor. \"Ölçüyoruz\" listesi ürünün en güçlü iddia yüzeyidir; oradaki yanlış bir satır en pahalı olanıdır. Tek bir olgu KAYBEDİLMEDİ, yalnız MEKÂNI doğru yazıldı (kayıtta ölçüldü ≠ odanda ölçülüyor). tools/validate_surface_honesty.py kural C bunu artık mekanik olarak kolluyor ve izin beyan edilince kendini emekliye ayırır.",
     "instrumentSpecificGap": "Pitch and sustain. The engine ran and was measured, but only ever on real cello audio — never on a real singing voice, and never live in your room.",
-    "_instrumentSpecificGap_source": "2026-08-07 (O-044): Review ekraninin 4. 'neyi olcemedik' kalemi. Kaynak: honesty.notMeasured — 'Pitch accuracy and steadiness while singing' + O-040 ile eklenen canli-giris satiri. ICAT DEGIL kisaltma — secim EKRAN KODUNDA degil VERIDE duruyor ki gozden gecirilebilsin."
+    "_instrumentSpecificGap_source": "2026-08-07 (O-044): Review ekraninin 4. 'neyi olcemedik' kalemi. Kaynak: honesty.notMeasured — 'Pitch accuracy and steadiness while singing' + O-040 ile eklenen canli-giris satiri. ICAT DEGIL kisaltma — secim EKRAN KODUNDA degil VERIDE duruyor ki gozden gecirilebilsin.",
+    "_phaseClaimFixed": "2026-08-07 (O-047, JabLab J-113 aktarimi — SKOR ekseni): onceki satir 'before you sing and WHILE YOU SING' diyordu. Olculdu: voice ruleset'inde SUSTAIN fazi periodicity>=0.55 ile aciliyor, yani SES metrigi — mikrofon girisi olmadan o pencereler HIC olusamaz. Iddia trunk_tilt'in olculdugu ANLARIN yarisini kapsiyordu ve o yari erisilemezdi. O-040'in altinci ornegi, bu kez 'ne olculuyor' degil 'NE ZAMAN olculuyor' ekseninde."
    },
    "courses": [
     {

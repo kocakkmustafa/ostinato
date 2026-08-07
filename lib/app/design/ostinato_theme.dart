@@ -13,9 +13,24 @@ abstract final class OstinatoColors {
   static const Color ink = Color(0xFF2A2533);
   static const Color inkSoft = Color(0xFF3E3849);
   static const Color textBody = Color(0xFF4E4759);
-  static const Color textMuted = Color(0xFF6E6880);
-  static const Color textFaint = Color(0xFF8B8497);
-  static const Color textMono = Color(0xFF9B95A8);
+  // ⚠️ ÜÇ TON KOYULAŞTIRILDI (2026-08-07, O-048 — JabLab J-114 aktarımı).
+  // Panelin ürettiği değerler WCAG 1.4.3 AA'nın (4.5:1, küçük metin) ALTINDA
+  // kalıyordu ve bu ÖLÇÜLDÜ, tahmin edilmedi — kontrast ekranda GERÇEKTEN
+  // oluşan renkten hesaplandı (alfa zemine bindirilerek, camsı gradyanın
+  // hem en açık hem en koyu ucunda, en kötü nokta alınarak).
+  //   textMono  #9B95A8 → #6E667D   (en kötü oran 2.41 → 4.54)
+  //   textFaint #8B8497 → #6E677A   (3.00 → 4.51)
+  //   textMuted #6E6880 → #6D677E   (4.43 → 4.50)
+  // TON ve DOYGUNLUK korundu, yalnız parlaklık düşürüldü (HLS L) — tasarımın
+  // rengi değil, okunabilirliği düzeltildi. Eşik İCAT DEĞİL: WCAG dış bir
+  // standart, formül standardın kendisi.
+  // `textMono` en pahalısıydı: `kicker()` uygulamadaki HER bölüm etiketi
+  // ("LOCKED" · "WHY IT IS LOCKED" · "WHAT WOULD OPEN IT" · "THE MICROPHONE
+  // IS NOT WIRED"), yani dürüst hâlleri ADLANDIRAN metin, uygulamanın en
+  // okunmaz metniydi. Görünmeyen bir dürüst hâl, susmakla aynı şeydir.
+  static const Color textMuted = Color(0xFF6D677E);
+  static const Color textFaint = Color(0xFF6E677A);
+  static const Color textMono = Color(0xFF6E667D);
   static const Color shell = Color(0xFFEDE9F0);
   static const Color surface = Color(0xFFF4F1F6);
   static const Color warnInk = Color(0xFF9A5A46);

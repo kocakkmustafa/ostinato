@@ -100,6 +100,11 @@ AFFIRMATIVE_JSON_PATHS = [
 AUDIO_CONCEPTS = re.compile(
     r"\b(chord|chords|pitch|note timing|onset|beat|loudness|loud enough|"
     r"room (?:is )?quiet|noise floor|microphone|audio|listen|listens|"
+    # "while you sing/play" bir ZAMAN ifadesi gibi görünür ama SES tetiğidir:
+    # o fazlar `periodicity`/`level_above_room_floor_db` ile açılıyor (O-047).
+    # Canlı giriş yokken o pencereler HİÇ oluşmaz, yani iddia ölçümün
+    # yapıldığı ANLARIN yarısını kapsayıp o yarıyı erişilemez bırakır.
+    r"while you (?:sing|play)|as you (?:sing|play)|"
     r"hear|hears|sound)\b", re.IGNORECASE)
 # Yokluğu söyleyen cümle geçer (kural B ile aynı mantık).
 AUDIO_ABSENCE = re.compile(
