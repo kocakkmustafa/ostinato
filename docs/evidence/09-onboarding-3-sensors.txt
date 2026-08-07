@@ -7,7 +7,7 @@ Ostinato describes how you are sitting compared to a set of teachers. It does no
 THE MICROPHONE IS NOT WIRED
 There is no microphone input in this build. No audio permission is requested and nothing you play is captured. Everything Ostinato judges, it judges from the camera.
 YOUR VIDEO
-Raw video never leaves this device — there is no setting that changes that. What we keep is the body angles we measured, and the camera only runs inside a lesson.
+Raw video never leaves this device — there is no setting that changes that. Nothing is stored either: what we measure exists while the lesson runs and is gone when it ends. The camera only runs inside a lesson.
 Open the library
 [RichText] SENSORS AND YOUR DATA
 [RichText] What we will ask for.
@@ -18,5 +18,5 @@ Open the library
 [RichText] THE MICROPHONE IS NOT WIRED
 [RichText] There is no microphone input in this build. No audio permission is requested and nothing you play is captured. Everything Ostinato judges, it judges from the camera.
 [RichText] YOUR VIDEO
-[RichText] Raw video never leaves this device — there is no setting that changes that. What we keep is the body angles we measured, and the camera only runs inside a lesson.
+[RichText] Raw video never leaves this device — there is no setting that changes that. Nothing is stored either: what we measure exists while the lesson runs and is gone when it ends. The camera only runs inside a lesson.
 [RichText] Open the library

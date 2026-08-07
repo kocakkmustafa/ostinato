@@ -143,6 +143,33 @@ def coached_only_joints(instrument):
         "referenceConsumption", {})
     return rc.get("coached_only", []) or []
 
+
+# ── E: SAKLAMA iddiası, saklayan bir KOD YOLU ister ────────────────────────
+# (Yayın envanteri, O-054 — JabLab'ın "üretici yok ama beyan onu ANLATIYOR"
+# sınıfı.) İki yüzey "what we keep is the body angles we measured" /
+# "only the body angles we measure are kept" diyordu. Ölçüldü: `lib/` içinde
+# TEK dosya yazımı karşılama işaretidir, hiçbir ölçüm saklanmıyor.
+#
+# En sinsi yanı: **sonuç DOĞRUYDU** (video cihazdan çıkmıyor), yalnız
+# GEREKÇE uydurmaydı. Doğru sonucu yanlış gerekçeyle söylemek en zor
+# yakalanan hatadır — kimse sonucu sorgulamadığı için gerekçe hiç
+# denetlenmez. Üstelik cümle bir gizlilik İMTİYAZI kılığındaydı, yani
+# kullanıcıya var olmayan bir KAYIT olduğunu düşündürüyordu.
+RETENTION_CLAIM = re.compile(
+    r"\bwe keep\b|\bare kept\b|\bis kept\b|\bwe store\b|\bis stored\b|"
+    r"\bsaved on (?:your|this) (?:phone|device)\b|\byour history\b",
+    re.IGNORECASE)
+# Yokluğu söyleyen cümle geçer.
+RETENTION_ABSENCE = re.compile(
+    r"nothing is stored|none to delete|no history|are gone when|"
+    r"is gone when|not stored|nothing is kept", re.IGNORECASE)
+#: Ölçüm SAKLAYAN bir kod yolu nasıl görünürdü. Karşılama işareti ve poz
+#: modeli dosyası HARİÇ (ikisi de ölçüm değil): dosya adlarıyla muaf.
+RETENTION_WRITERS = re.compile(
+    r"writeAsString|writeAsBytes|SharedPreferences|Hive\.|sqflite|"
+    r"\.insert\(|openDatabase")
+RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
+
 DART_ROOTS = ["lib"]
 LIBRARY_JSON = "assets/content/library.json"
 PUBSPEC = "pubspec.yaml"
@@ -385,6 +412,28 @@ def main() -> int:
                         f"cümle bu sınırı söylemiyor — yeteneği olduğundan "
                         f"geniş yazmak, sınırı dar yazmaktan tehlikelidir — "
                         f"«{claim.strip()[:100]}»")
+
+
+    # ── Kural E ──
+    writer_found = False
+    for f in Path("lib").rglob("*.dart"):
+        if f.name in RETENTION_EXEMPT_FILES:
+            continue
+        if RETENTION_WRITERS.search(strip_dart_comments(
+                f.read_text(encoding="utf-8"))):
+            writer_found = True
+            break
+    if not writer_found:
+        for where, text in surfaces:
+            for sentence in sentences(text):
+                if not RETENTION_CLAIM.search(sentence):
+                    continue
+                if RETENTION_ABSENCE.search(sentence):
+                    continue
+                violations.append(
+                    f"[saklama iddiası] {where}: cümle bir şeyin SAKLANDIĞINI "
+                    f"söylüyor ama kabukta ölçüm saklayan bir kod yolu YOK — "
+                    f"«{sentence.strip()[:110]}»")
 
     if violations:
         print(f"⛔ {len(violations)} YÜZEY DÜRÜSTLÜĞÜ İHLALİ:")

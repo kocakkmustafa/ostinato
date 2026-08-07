@@ -420,9 +420,12 @@ class _SensorsStep extends StatelessWidget {
           const _SensorCard(
             title: 'Your video',
             key: Key('onboarding-video-card'),
+            // Aynı düzeltme (O-054): "What we keep is …" var olmayan bir
+            // saklama mekanizmasını anlatıyordu.
             body: 'Raw video never leaves this device — there is no setting '
-                'that changes that. What we keep is the body angles we '
-                'measured, and the camera only runs inside a lesson.',
+                'that changes that. Nothing is stored either: what we '
+                'measure exists while the lesson runs and is gone when it '
+                'ends. The camera only runs inside a lesson.',
           ),
         ],
       );

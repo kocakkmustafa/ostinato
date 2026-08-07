@@ -47,10 +47,20 @@ class SettingsScreen extends StatelessWidget {
               // göremiyordu — başlık "mikrofon" diyor, gerekçe gövdedeydi.
               const _SettingsCard(
                 title: 'Camera',
+                // DÜZELTME (2026-08-07, O-054 — yayın envanteri): önceki
+                // cümle "only the body angles we measure are kept" diyordu.
+                // Ölçüldü: `lib/` içinde TEK dosya yazımı karşılama
+                // işaretidir; HİÇBİR ölçüm saklanmıyor. Sonuç DOĞRUYDU
+                // (video cihazdan çıkmıyor), GEREKÇE uydurmaydı — ve doğru
+                // sonucu yanlış gerekçeyle söylemek en zor yakalanan hata,
+                // çünkü kimse sonucu sorgulamıyor. Üstelik cümle bir
+                // gizlilik İMTİYAZI kılığındaydı ("yalnız şunu tutuyoruz"),
+                // yani kullanıcıya cihazında bir KAYIT olduğunu düşündürüyordu.
                 body: 'It runs on your phone and reads nine upper-body '
-                    'points. It only runs inside a lesson, and the video is '
-                    'never uploaded — only the body angles we measure are '
-                    'kept.',
+                    'points, and only inside a lesson. Nothing is uploaded '
+                    'and nothing is stored: the angles exist while the '
+                    'lesson is running and are gone when you leave it. '
+                    'There is no history here to browse, and none to delete.',
               ),
               const SizedBox(height: 14),
               const _SettingsCard(
