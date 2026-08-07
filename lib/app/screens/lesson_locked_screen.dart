@@ -35,7 +35,7 @@ class LessonLockedScreenRoute extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8)),
                 child: Text('LOCKED',
                     key: const Key('state-lesson-locked'),
-                    style: monoText(color: const Color(0xFF6E6880))),
+                    style: monoText(color: OstinatoColors.textMuted)),
               ),
               const SizedBox(height: 13),
               Text(lesson.displayName,

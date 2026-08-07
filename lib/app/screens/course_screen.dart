@@ -149,7 +149,8 @@ class _LessonRow extends StatelessWidget {
                 const SizedBox(height: 7),
                 RichText(
                   text: TextSpan(
-                    style: hankenText(size: 12.5, color: const Color(0xFF6B6479)),
+                    style: hankenText(
+                        size: 12.5, color: OstinatoColors.textMuted),
                     children: <InlineSpan>[
                       TextSpan(text: '${lesson.firstSentence} '),
                       TextSpan(

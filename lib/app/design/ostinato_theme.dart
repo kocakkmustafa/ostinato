@@ -63,6 +63,16 @@ final class InstrumentHue {
       begin: Alignment.topLeft, end: Alignment.bottomRight, colors: soft);
 }
 
+/// ⚠️ `ink` TONLARI KOYULAŞTIRILDI (2026-08-07, O-049 — JabLab J-116'nın
+/// "örüntüyü değil örneği düzelttim" dersi). O-048'de nötr metin tonlarını
+/// düzelttim ve DURDUM; oysa `kicker(color: hue.ink)` YEDİ çağrı yerinde
+/// çalgı tonunu KÜÇÜK metin olarak (9.5px mono) kullanıyor — yani eşiği
+/// 4.5, benim O-048'de sınadığım 3.0 (büyük başlık) DEĞİL. Ölçüldü:
+///   guitar #9A4E3E → 4.04 ⛔ · piano #2E7566 → 4.14 ⛔ · voice 4.68 ✅
+/// Kendi gradyanlarının EN KÖTÜ durağında. Düzeltme yine ton+doygunluk
+/// korunarak, yalnız parlaklık: #8F483A (4.53) · #2B6F60 (4.50). Voice
+/// zaten geçiyordu, DOKUNULMADI — geçen bir değeri "tutarlılık" için
+/// değiştirmek, ölçmediğin bir şeyi değiştirmektir.
 abstract final class InstrumentHues {
   static const InstrumentHue guitar = InstrumentHue(
     grad: <Color>[Color(0xF2FFD9BE), Color(0xCCF8C6D4)],
@@ -70,7 +80,7 @@ abstract final class InstrumentHues {
     soft: <Color>[Color(0x80FFD9BE), Color(0x57F8C6D4)],
     chip: Color(0xB3FFD9BE),
     band: Color(0x389A4E3E),
-    ink: Color(0xFF9A4E3E),
+    ink: Color(0xFF8F483A),
   );
   static const InstrumentHue voice = InstrumentHue(
     grad: <Color>[Color(0xF2DACDF6), Color(0xCCC3DDF8)],
@@ -86,7 +96,7 @@ abstract final class InstrumentHues {
     soft: <Color>[Color(0x80C4EADB), Color(0x57C9E3F1)],
     chip: Color(0xBFC4EADB),
     band: Color(0x332E7566),
-    ink: Color(0xFF2E7566),
+    ink: Color(0xFF2B6F60),
   );
 
   static InstrumentHue of(String disciplineId) => switch (disciplineId) {

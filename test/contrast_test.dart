@@ -153,4 +153,47 @@ void main() {
     expect(contrast(const Color(0xFF777777), const Color(0xFFFFFFFF)),
         closeTo(4.48, 0.02));
   });
+
+  group('çalgı tonu KÜÇÜK metin olarak — kicker(color: hue.ink)', () {
+    // O-049 (JabLab J-116 dersi): O-048'de nötr tonları düzeltip DURMUŞTUM.
+    // Oysa `kicker()` 9.5px mono çizer ve YEDİ çağrı yeri onu `hue.ink` ile
+    // override ediyor ("What would open it" · "Ready" · "Measured" ·
+    // "Observation" · "What we measured" …) — yani yine DÜRÜST HÂLLERİ
+    // ADLANDIRAN etiketler. 9.5px KÜÇÜK metindir: eşik 4.5, O-048'de
+    // sınadığım 3.0 (22px başlık) DEĞİL. Aynı token, iki farklı boyut, iki
+    // farklı eşik — ve ben yalnız birini ölçmüştüm.
+    for (final (String name, InstrumentHue hue) in <(String, InstrumentHue)>[
+      ('guitar', InstrumentHues.guitar),
+      ('voice', InstrumentHues.voice),
+      ('piano', InstrumentHues.piano),
+    ]) {
+      test('$name — ink, KENDİ gradyanlarının EN KÖTÜ durağında ≥ 4.5', () {
+        // Bir token × değişken zemin = iki bilinmeyen. Bu yüzden çalgının
+        // TÜM gradyan durakları (grad + gradAlt + soft) taranıyor, en iyi
+        // değil EN KÖTÜ nokta alınıyor.
+        final List<Color> stops = <Color>[
+          ...hue.grad,
+          ...hue.gradAlt,
+          ...hue.soft,
+        ].map((Color c) => over(c, OstinatoColors.shell)).toList();
+        expect(worst(hue.ink, stops), greaterThanOrEqualTo(4.5),
+            reason: '$name kicker etiketi kendi kartında okunmuyor');
+      });
+    }
+  });
+
+  test('HİYERARŞİ korundu — kontrast uğruna her şey aynı tona çekilmedi', () {
+    // JabLab'ın ikinci notu: kontrastı yükseltmenin ucuz yolu her şeyi en
+    // koyu tona çekmektir, o da okunurluk uğruna HİYERARŞİYİ feda etmektir.
+    // Birincil metin, sönük metinden hâlâ belirgin biçimde ayrışmalı.
+    final double primary = luminance(OstinatoColors.ink);
+    final double muted = luminance(OstinatoColors.textMono);
+    expect(muted / primary, greaterThan(2.0),
+        reason: 'sönük ton birincil tona fazla yaklaştı — kontrast kazanıldı '
+            'ama hiyerarşi kaybedildi');
+    // Üç sönük ton birbirinden de ayrışmaya devam etmeli (aksi hâlde üç
+    // ayrı token tutmanın anlamı kalmaz).
+    expect(luminance(OstinatoColors.textBody) < luminance(OstinatoColors.textMuted),
+        isTrue);
+  });
 }

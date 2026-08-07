@@ -28,6 +28,7 @@ run "ruleset şeması + linter"        python3 tools/validate_ruleset.py
 run "kütüphane dürüstlük kuralları"  python3 tools/validate_library.py
 run "içerik-atıf süpürmesi"        python3 tools/validate_references.py
 run "yüzey dürüstlüğü (vaat+yetenek)" python3 tools/validate_surface_honesty.py
+run "renk token kapısı"               python3 tools/validate_color_tokens.py
 run "canlı yüzey sözleşmesi"       python3 tools/gen_posture_contract.py --check
 run "eşik türetimi (artefakt↔config)" python3 tools/derive_posture_thresholds.py --check
 run "gözlem işareti sözleşmesi"     python3 tools/validate_observation_cues.py

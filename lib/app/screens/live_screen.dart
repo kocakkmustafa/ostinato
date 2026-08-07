@@ -444,7 +444,9 @@ class _BlindNotice extends StatelessWidget {
               'stretch — and I’m telling you rather than going quiet, '
               'because silence would read as "you’re doing fine".',
               textAlign: TextAlign.center,
-              style: hankenText(size: 14.5, height: 1.55, color: const Color(0xFF5C5569)),
+              style: hankenText(
+                        size: 14.5, height: 1.55,
+                        color: OstinatoColors.textBody),
             ),
           ],
         ),
