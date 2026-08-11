@@ -29,6 +29,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 RULESET = "config/rulesets/{}@0.2.0-draft.json"
@@ -250,6 +251,20 @@ TOUCHED = [RULESET.format(i) for i in ("guitar", "voice", "piano")] + \
 BACKUP_DIR = Path(".mutA-backup")
 SENTINEL = BACKUP_DIR / "IN-FLIGHT"
 
+#: DÖRDÜNCÜ unsur (koordinatör sevki 2026-08-11): kilit · köken · doğrulama
+#: vardı, KAYIT yoktu. Sonuç: kaçan bir mutasyonun (bu geceki contributingTakes
+#: 3→99 vakası) SEBEBİ dört gün sonra artık ölçülemedi — yalnız iki rakip
+#: hipotez kaldı, ikisi de kanıtlanamadı. Bu dosya o boşluğu kapatır.
+#: `.mutA-backup/` gibi BACKUP_DIR de koşum bitince silinir; LOG kalıcıdır —
+#: aksi hâlde tam da çözülmesi gereken problemi tekrar üretir.
+LOG_PATH = Path(".mutA-log.jsonl")
+
+
+def _log(event: str, **fields) -> None:
+    row = {"ts": datetime.now(timezone.utc).isoformat(), "event": event, **fields}
+    with LOG_PATH.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+
 
 def _alive(pid: int) -> bool:
     try:
@@ -305,26 +320,32 @@ def _heal_if_needed() -> int:
         print(f"⛔ MUT-A ZATEN KOŞUYOR (pid {pid}) — ikinci koşum BAŞLAMAZ.\n"
               f"   Eşzamanlı iki koşum birbirinin yedeğini bozar ve mutasyon "
               f"KALICI olur (O-079). Önceki koşumun bitmesini bekleyin.")
+        _log("heal_blocked", live_pid=pid, my_pid=os.getpid())
         return 1
     print("⚠️  ÖNCEKİ MUT-A KOŞUMU MUTASYONUN ORTASINDA ÖLMÜŞ — onarılıyor:")
+    _log("heal_detected", dead_pid=pid, touched=TOUCHED)
     # Öncelik YEDEK: koşum ÖNCESİ hâli o taşır (commit'li olsun olmasın).
     dig = BACKUP_DIR / "DIGESTS.json"
-    restored = False
+    restored, via = False, None
     if dig.exists():
         want = json.loads(dig.read_text(encoding="utf-8"))
         if all((BACKUP_DIR / Path(f).name).exists() for f in TOUCHED):
             for f in TOUCHED:
                 shutil.copy(BACKUP_DIR / Path(f).name, f)
             restored = _digests(TOUCHED) == want
+            via = "backup"
             print(f"     {'✅' if restored else '⛔'} yedekten geri yüklendi, "
                   f"özet doğrulaması: {'TUTTU' if restored else 'TUTMADI'}")
     if not restored:  # SON ÇARE: git (yalnız yedek yoksa/bozuksa)
         print("     ↪ yedek kullanılamadı; son çare git kökeni")
         restored = not _git_dirty(TOUCHED) or _git_restore(TOUCHED)
+        via = "git"
     if not restored:
         print("     ⛔ ONARIM TUTMADI — elle bakın; sessiz bir 'onarıldı' "
               "mesajı vermeyeceğim.")
+        _log("heal_result", dead_pid=pid, restored=False, via=via)
         return 1
+    _log("heal_result", dead_pid=pid, restored=True, via=via)
     SENTINEL.unlink(missing_ok=True)
     return 0
 
@@ -340,12 +361,15 @@ def main():
     before = _digests(TOUCHED)
     (BACKUP_DIR / "DIGESTS.json").write_text(json.dumps(before), encoding="utf-8")
     SENTINEL.write_text(f"mutations in flight {os.getpid()}\n", encoding="utf-8")
+    _log("run_start", pid=os.getpid(), touched=TOUCHED)
 
     rows, unguarded = [], []
+    final_restore_ok = None
     try:
         baseline = run_gates()
         if baseline:
             print(f"⛔ TABAN KIRMIZI ({baseline}) — mutasyon ölçümü anlamsız")
+            _log("run_end", reason="baseline_red", red=baseline, exit_code=1)
             return 1
         for label, kind, mutate, expect in MUTATIONS:
             for f in TOUCHED:
@@ -364,17 +388,27 @@ def main():
                 if not ok:
                     unguarded.append(label)
             rows.append((kind, label, verdict, ok))
+            # "hangi mutasyon" (koordinatör sevki): her vaka adıyla, tek başına
+            # aranabilir. Bu vakanın kendi restore'u BİR SONRAKİ iterasyonun
+            # başında (ya da son vakaysa `finally`de) olur — burada yalnız
+            # UYGULANDIĞI ve SONUCU kayıtlı, "restored" ayrı satırda gelir.
+            _log("mutation_case", label=label, kind=kind, red=red, ok=ok)
     finally:
         # ③ DOĞRULAMA — geri-yükleme DENENDİ değil, TUTTU mu? (hash ile)
         for f in TOUCHED:
             shutil.copy(backup / Path(f).name, f)
-        if _digests(TOUCHED) != before:
+        final_restore_ok = _digests(TOUCHED) == before
+        via = "backup"
+        if not final_restore_ok:
             print("⚠️  yedekten geri-yükleme TUTMADI (özetler UYUŞMUYOR) — "
                   "son çare: git kökeni:")
-            if not _git_dirty(TOUCHED) or _git_restore(TOUCHED):
+            final_restore_ok = not _git_dirty(TOUCHED) or _git_restore(TOUCHED)
+            via = "git"
+            if final_restore_ok:
                 print("     ✅ onarıldı ve doğrulandı")
             else:
                 print("     ⛔ ONARIM BAŞARISIZ — repo BOZUK, elle bakın")
+        _log("final_restore", restored=final_restore_ok, via=via)
         SENTINEL.unlink(missing_ok=True)
         shutil.rmtree(backup, ignore_errors=True)
 
@@ -393,7 +427,11 @@ def main():
               "'kapımız var' cümlesi bu iddialar için kurulamaz.")
     # Kaçan `single`/`control` = gerçek arıza; çapasız `both`/`content` = RAPOR.
     hard = [r for r in rows if not r[3] and r[0] in ("single", "control")]
-    return 1 if hard else 0
+    exit_code = 1 if hard else 0
+    _log("run_end", reason="completed", caught=caught, total=len(rows),
+         unguarded=unguarded, final_restore_ok=final_restore_ok,
+         exit_code=exit_code)
+    return exit_code
 
 
 if __name__ == "__main__":
