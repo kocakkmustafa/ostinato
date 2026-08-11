@@ -273,6 +273,17 @@ def selftest_log() -> int:
     sahte sabotajlarla ölçülür. İki senaryo simüle edilir — ① ölü-pid onarımı
     ② canlı-pid kilidi — ve `.mutA-log.jsonl`da BEKLENEN olay adları arandı.
     Test log'u/sentinel'i GERÇEK koşumdan izole eder, sonunda geri koyar."""
+    # ⚠️ Kendi kilidini de sayar (koordinatör 2026-08-12, commit9 vakası):
+    # bu fonksiyon LOG_PATH'i yedekleyip sonda GERİ YAZAR — eğer bu sırada
+    # GERÇEK bir MUT-A koşumu paralel yazıyorsa, geri-yazma o yeni satırları
+    # SİLER. Aynı SENTINEL'i saygıyla kontrol et; canlıysa BAŞLAMA.
+    if SENTINEL.exists():
+        raw = SENTINEL.read_text(encoding="utf-8").strip().split()
+        pid = int(raw[-1]) if raw and raw[-1].isdigit() else -1
+        if pid > 0 and pid != os.getpid() and _alive(pid):
+            print(f"⛔ ÖZ-TEST: gerçek bir MUT-A koşumu sürüyor (pid {pid}) — "
+                  f"log'u yedekleyip geri yazmak onu SİLERDİ. Başlamıyorum.")
+            return 1
     real_log_bak = None
     if LOG_PATH.exists():
         real_log_bak = LOG_PATH.read_text(encoding="utf-8")
@@ -418,15 +429,24 @@ def _heal_if_needed() -> int:
 def main():
     if _heal_if_needed():
         return 1
-    # ② KÖKEN — HASH ile (git ile DEĞİL, bkz. O-084 notu yukarıda).
+    # KAYIT en erken mümkün anda (koordinatör sevki 2026-08-12): pid 81734
+    # olayında sentinel bulundu ama run_start log'da HİÇ yoktu — süreç
+    # backup-kurulumu (copy+digest) SIRASINDA ölmüş olabilir, log satırı ise
+    # o kurulumdan SONRA yazılıyordu. Artık sentinel+log, dosya kopyalanmadan
+    # ÖNCE düşer — ama BACKUP_DIR'ın KENDİSİ önce var olmalı (SENTINEL onun
+    # İÇİNDE bir dosya): mkdir'i sentinel'den ÖNCEYE almadan denedim ve
+    # kendi hatamı canlı yakaladım — FileNotFoundError, '.mutA-backup/
+    # IN-FLIGHT' dizini yokken. Doğru sıra: mkdir (ucuz, tek syscall) →
+    # sentinel+log (henüz dosya kopyalanmadan) → asıl kopyalama/digest.
     BACKUP_DIR.mkdir(exist_ok=True)
+    SENTINEL.write_text(f"mutations in flight {os.getpid()}\n", encoding="utf-8")
+    _log("run_start", pid=os.getpid(), touched=TOUCHED)
+    # ② KÖKEN — HASH ile (git ile DEĞİL, bkz. O-084 notu yukarıda).
     backup = BACKUP_DIR
     for f in TOUCHED:
         shutil.copy(f, backup / Path(f).name)
     before = _digests(TOUCHED)
     (BACKUP_DIR / "DIGESTS.json").write_text(json.dumps(before), encoding="utf-8")
-    SENTINEL.write_text(f"mutations in flight {os.getpid()}\n", encoding="utf-8")
-    _log("run_start", pid=os.getpid(), touched=TOUCHED)
 
     rows, unguarded = [], []
     final_restore_ok = None
