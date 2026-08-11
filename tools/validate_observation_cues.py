@@ -58,6 +58,32 @@ def check_wording(text, forbidden):
     return hits
 
 
+def check_variant_derivation(golden):
+    """Türetim bütünlüğü (koordinatör hükmü 2026-08-11): `_variantCycleGap`
+    taşıyan her şablon için hedef = ceil(longestLessonSec/periodSec) BU KAPIDA
+    HESAPLANIR, elle yazılmaz. Kapı SAYIYI değil TÜRETİMİ ölçer: her türetilmiş
+    varyant ya gerçekleşmiştir ya da `_intentionallyWithheld`de ADIYLA +
+    GEREKÇEYLE işaretlidir. Sessiz açık yasak — 'en az N' yazmak eşik icat
+    etmek olurdu, ama açığı adsız bırakmak da aynı kusurun ters yönü."""
+    import math
+    problems = []
+    for tid, tpl in golden["templates"].items():
+        gap = tpl.get("_variantCycleGap")
+        if not isinstance(gap, dict):
+            continue
+        target = math.ceil(gap["longestLessonSec"] / gap["periodSec"])
+        have = len(tpl.get("variants", []))
+        withheld = tpl.get("_intentionallyWithheld", [])
+        if have + len(withheld) < target:
+            problems.append(
+                f"{tid}: türetim EKSİK — hedef {target} "
+                f"(ceil({gap['longestLessonSec']}/{gap['periodSec']})), "
+                f"{have} varyant + {len(withheld)} bilerek-tutulmuş = "
+                f"{have + len(withheld)}. Fark `_intentionallyWithheld`de "
+                f"ADIYLA+GEREKÇEYLE işaretlenmeli ya da varyant yazılmalı.")
+    return problems
+
+
 def _trunk_values(video_id, window=None):
     path = LIB / "landmarks" / f"{video_id}.full.json"
     if not path.exists():
@@ -150,6 +176,8 @@ def main():
             problems.append(f"ŞART 2: golden şablon {tid} yasak dil taşıyor: {hits}")
         if tpl.get("_claimClass") != "observation":
             problems.append(f"ŞART 2: golden şablon {tid} _claimClass='observation' değil")
+
+    problems.extend(check_variant_derivation(golden))
 
     total_cues = 0
     for inst in INSTRUMENTS:

@@ -33,10 +33,23 @@
     "{thresholdDeg}° is the far edge of where the {n} {sourceClass} we recorded sat. You are at {measuredDeg}° just now.",
     "You are at {measuredDeg}° from upright. The {n} {sourceClass} we recorded all stayed inside {thresholdDeg}°.",
     "Reading {measuredDeg}° right now. None of the {n} {sourceClass} in our recording leaned further than {thresholdDeg}°.",
-    "{measuredDeg}° at the moment — outside the {thresholdDeg}° edge that the {n} {sourceClass} we recorded stayed within."
+    "{measuredDeg}° at the moment — outside the {thresholdDeg}° edge that the {n} {sourceClass} we recorded stayed within.",
+    "Right now you're at {measuredDeg}°. The {n} {sourceClass} we recorded never went past {thresholdDeg}°.",
+    "The {n} {sourceClass} we recorded stayed within {thresholdDeg}° every time. Your current reading is {measuredDeg}°.",
+    "{measuredDeg}° is where you are right now, against a recorded range from {n} {sourceClass} that topped out at {thresholdDeg}°.",
+    "Across the {n} {sourceClass} we recorded, {thresholdDeg}° marked the furthest lean. You're currently at {measuredDeg}°.",
+    "Your reading right now: {measuredDeg}°. The {n} {sourceClass} we recorded topped out at {thresholdDeg}°.",
+    "{n} {sourceClass} recorded, and {thresholdDeg}° was the widest lean among them. You're at {measuredDeg}° right now.",
+    "At this moment you're at {measuredDeg}°, past the {thresholdDeg}° ceiling set by the {n} {sourceClass} we recorded.",
+    "The widest lean among the {n} {sourceClass} we recorded was {thresholdDeg}°; you're currently reading {measuredDeg}°."
    ],
-   "_variants_why": "O-062: sablon 'bir kez calacakmis gibi' yazilmisti. OLCULDU: gozlem isareti ~31,68sn periyotla atesleniyor (O-032/O-035 canli olcumu) ve en uzun isaretli ders 7 dk -> ~13 ATESLEME. Tek varyantla ayni 125 karakterlik cumle bir derste 13 kez okunuyordu. NADIR GORUNEN bir oge, SIK TEKRARLANAN bir cumle olabilir — O-035'in 'nadir' kaniti beni yanlis yone itti. variants[0] MEVCUT metindir: widget_test ve 11 kanit karesi onun uzerine kurulu, ilk ateslemeyi degistirmek kanitlanmis bir seyi kanitsiz yapardi. Alti varyantin ALTISI da ayni UC olguyu tasir (kaynak sayisi + esik + anlik olcum) ve ayni yasak-kelime kapisindan gecer.",
-   "_variantCycleGap": "TURETILMIS ACIK: bir dersin ICINDE hic tekrar olmamasi icin gereken varyant sayisi = en uzun isaretli ders / periyot = 420sn / 31,68sn = 14. Bugun 6 var. Yani en kotu derste her cumle ~2 kez donuyor (onceki hal: 13). Kalan acigin SAYISI turetildi, kapatilip kapatilmayacagi koordinator karari — 'en az N' yazmak esik ICAT etmek olurdu."
+   "_variants_why": "O-062: sablon 'bir kez calacakmis gibi' yazilmisti. OLCULDU: gozlem isareti ~31,68sn periyotla atesleniyor (O-032/O-035 canli olcumu) ve en uzun isaretli ders 7 dk -> ~13 ATESLEME. Tek varyantla ayni 125 karakterlik cumle bir derste 13 kez okunuyordu. NADIR GORUNEN bir oge, SIK TEKRARLANAN bir cumle olabilir — O-035'in 'nadir' kaniti beni yanlis yone itti. variants[0] MEVCUT metindir: widget_test ve 11 kanit karesi onun uzerine kurulu, ilk ateslemeyi degistirmek kanitlanmis bir seyi kanitsiz yapardi. ONDORT varyantin ONDORDU de ayni UC olguyu tasir (kaynak sayisi + esik + anlik olcum) ve ayni yasak-kelime kapisindan gecer.",
+   "_variantCycleGap": {
+    "$why": "Koordinator hukmu 2026-08-11: acik KAPATILDI, ama sayi kapinin hedefi degil — bu ALANLARIN kendisi hedef; kapi 14'u degil TURETIMI (longestLessonSec/periodSec) olcer. 'en az N' yazmak esik icat olurdu; longestLessonSec ve periodSec canli olcum, 14 onlarin COKTISI.",
+    "longestLessonSec": 420,
+    "periodSec": 31.68,
+    "note": "en uzun isaretli ders 7 dk (420sn); gozlem isareti O-032/O-035 canli olcumune gore ~31,68sn periyotla atesleniyor. Hedef = ceil(longestLessonSec/periodSec) = 14 — kapi bu bolmeyi KENDISI yapar, burada sabit yazilmadi."
+   }
   }
  },
  "forbidden": {
