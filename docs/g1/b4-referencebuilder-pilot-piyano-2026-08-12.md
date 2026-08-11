@@ -110,6 +110,65 @@ uzlaştığı/uzlaşmadığı ayrı bir ölçüm ister (her take'i sırayla dı�
 gap'in nasıl değiştiğine bakmak) — bu belgenin kapsamı dışında
 bırakıldı, adıyla.
 
+## Ek 2 — leave-one-out: hangi take heterojenliği taşıyor? (aynı gün)
+
+**Yöntem:** 9 attested take'in her biri sırayla dışlanarak pilot yeniden
+koşuldu (geçici `--exclude=` bayrağı, koşum sonrası **geri alındı**,
+`git checkout --`, commit'lenmedi). Taban (9/9): `runnerUpGap=0,00276`.
+
+| dışlanan | runnerUpGap | Δ taban'dan |
+|---|---|---|
+| 2T70e4OroEY | 0,00221 | −0,00055 |
+| 2mxlG5bzcyQ | 0,00418 | +0,00142 |
+| 8jbvOgGxk5c | 0,00311 | +0,00035 |
+| F8fKXmcL7ao | 0,00345 | +0,00069 |
+| SGsYZAqIwi4 | 0,00319 | +0,00043 |
+| U4mU0uu-0Aw | 0,00279 | +0,00003 |
+| **cBuC89ApQtM** | **0,00862** | **+0,00586 (~3×, en yakın etkinin 4 katı)** |
+| e-USjrHOL8s | 0,00279 | +0,00003 |
+| p_6y7MPW_Ek | 0,00316 | +0,00040 |
+
+**Tek net aday: `cBuC89ApQtM`.** Onun dışlanması gap'i 3 kata çıkarıyor
+(hâlâ `mirrorConfident:false` — eşik yine de aşılmıyor, ama etki tek
+başına diğer sekizin toplamından büyük).
+
+## Ek 3 — bağımsız-özellik kontrolü: dışlama İLKELİ mi? (aynı gün)
+
+**Kural (koordinatör):** bir take'i "gap'i iyileştirdiği için" dışlamak
+YASAK — o veri seçmektir. Doğru soru: `cBuC89ApQtM`, bu gece BAĞIMSIZ
+ölçülmüş bir eksende (angleClass, postureRatio, fullBodyRatio, yaw)
+diğer sekizden AYRIŞIYOR mu?
+
+| take | angleClass | yaw° | fullBodyRatio | postureRatio | looGap |
+|---|---|---|---|---|---|
+| 2T70e4OroEY | C_frontal | 13,9 | 0,041 | 0,537 | 0,00221 |
+| 2mxlG5bzcyQ | B_side_profile | 75,8 | 0,003 | 0,899 | 0,00418 |
+| 8jbvOgGxk5c | A_right_front_diagonal | 52,8 | 0,022 | 0,778 | 0,00311 |
+| F8fKXmcL7ao | A_right_front_diagonal | 41,3 | 0,006 | **0,086** | 0,00345 |
+| SGsYZAqIwi4 | C_frontal | 24,1 | 0,006 | 0,869 | 0,00319 |
+| U4mU0uu-0Aw | C_frontal | 9,1 | **0,251** | 0,476 | 0,00279 |
+| **cBuC89ApQtM** | C_frontal | 10,9 | 0,043 | 0,353 | **0,00862** |
+| e-USjrHOL8s | B_side_profile | 64,5 | 0,031 | 0,735 | 0,00279 |
+| p_6y7MPW_Ek | B_side_profile | 66,1 | 0,021 | 0,497 | 0,00316 |
+
+**Sonuç: PAYLAŞMIYOR — dışlama YAPILMADI.**
+- angleClass: `cBuC89ApQtM` C_frontal, 4/9 take'in paylaştığı EN KALABALIK sınıf — ayırt edici değil.
+- yaw: 10,9° — U4mU0uu-0Aw'ın (9,1°, looGap=0,00003, TABANA EN YAKIN etki) yaw'ına neredeyse eşit — ayırt edici değil.
+- fullBodyRatio: 0,043 — SGsYZAqIwi4 (0,006) ve F8fKXmcL7ao (0,006) daha uç, onların looGap etkisi küçük — ayırt edici değil.
+- postureRatio: 0,353 — F8fKXmcL7ao'nun 0,086'sı çok daha uç, ama F8fKXmcL7ao'nun looGap etkisi (0,00069) küçük — YÖN TERS, ayırt edici değil.
+
+**Dört eksenin dördünde de `cBuC89ApQtM`, en az bir başka take ile
+"benzer ama düşük-etkili" eşleşiyor** — hiçbiri onu tek başına
+açıklamıyor. Bu gece ölçülen eksenlerle heterojenliğin KAYNAĞI
+belirlenemedi.
+
+**⛔ Kalıcı, isimli sınır:** `cBuC89ApQtM` DIŞLANMADI.
+Aynalama belirsizliği bu 9-take havuzda ÇÖZÜLEMEDİ EN mevcut
+ölçümlerle. `piano.foundations.shoulder_tension` **ölçülmüş-bloke**
+kalır — kod/kural değişmedi, ders açılmadı. Heterojenliğin gerçek
+kaynağı (kanal/öğretim tarzı/çekim koşulları gibi bu oturumda
+ölçülmeyen bir eksen) ayrı bir soruşturma ister.
+
 ## Sonraki adım (öneri, karar değil)
 
 - Guitar/voice için aynı koşum (`pilot.dart guitar` / `pilot.dart voice`)
