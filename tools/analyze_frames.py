@@ -12,11 +12,56 @@
    (|dx| büyük, |dz| küçük), profilde eksene paralel. Elle etiketleme yerine
    ölçülebilir bir vekil — ReferenceBuilder pilotunun açı-duyarlılık kolu
    (B4) bu sınıflara göre ayrışacak.
+
+3. **frameClass (full_body/upper_body) türetimi — koordinatör sorusu
+   2026-08-11.** `manualLabels` (triage-thresholds.w1.json) bunun "elle"
+   etiketlendiğini varsayıyordu. ÖLÇÜLDÜ: yanlış varsayım — `lm` dizisinin
+   3 değil 5 elemanı var; [3]/[4] MediaPipe'ın visibility/presence
+   skorları, `extract_landmarks.py` onları ATMAMIŞ. Bu, harvest rig'in
+   KENDİ `_body_presence()` yöntemiyle (motion-core `tools/harvest_rig/
+   triage.py:155-203`: üst-gövde=burun+omuzlar, tam-gövde=+kalça+ayak
+   bileği, eşik visibility≥0.5) BİREBİR AYNI hesaplanabilir — eşik İCAT
+   EDİLMEDİ, rig'in zaten kalibre ettiği eşik (min_upper_body_ratio=0.6,
+   triage-thresholds.w1.json) yeniden kullanıldı.
+   ⚠️ Sınırı: full_body eşiği profil'de hiç ayarlanmamış
+   (min_full_body_ratio=0.0 varsayılan) — rig full_body_ratio'yu HİÇ
+   HESAPLAMAMIŞ (94 manifestin 94'ünde de null, ölçüldü). Burada
+   HESAPLANDI ama SINIR ÇİZİLMEDİ: hangi oranın "full_body" saymaya
+   yeteceği kurucu/koordinatör kararı, `unmeasured` bırakıldı.
+   ⛔ hand_cam/fretboard_cam/unusable AYRIMI: bu üçü GÖVDE GEOMETRİSİ
+   değil, KADRAJIN KONUSU (el/klavye mi, kötü çekim mi) — pose-landmark
+   görünürlüğünden TÜRETİLEMEZ, gerçek bir görsel inceleme gerektirir.
+   Düşük upper_body_ratio bu üçünü BİRBİRİNDEN AYIRT ETMEZ, yalnız
+   "full_body/upper_body değil" der.
 """
 import json, glob, math, os, sys
 from statistics import median
 
 L_SH, R_SH, L_HIP, R_HIP = 11, 12, 23, 24
+#: Harvest rig'in KENDİ tanımı (triage.py:161-164, 178, 157) — yeniden
+#: türetilmedi, birebir kopyalandı.
+UPPER_IDS = (0, 11, 12)          # burun + iki omuz
+LOWER_IDS = (23, 24, 27, 28)     # + kalçalar + ayak bilekleri
+VISIBILITY_THRESHOLD = 0.5       # rig'in kendi eşiği (triage.py:196,198)
+
+
+def body_presence_ratio(frames):
+    """(üst-gövde oranı, tam-gövde oranı) — rig'in _body_presence()'ı ile
+    AYNI mantık, ama PROBE örneklemi değil TÜM çıkarılmış kareler üzerinde
+    (extract zaten tüm kareleri gezmişti, ikinci bir video-okuma gerekmez)."""
+    seen_upper = seen_full = total = 0
+    for fr in frames:
+        lm = fr.get("lm")
+        if not lm or len(lm) <= max(LOWER_IDS):
+            continue
+        total += 1
+        if all(lm[i][3] >= VISIBILITY_THRESHOLD for i in UPPER_IDS):
+            seen_upper += 1
+            if all(lm[i][3] >= VISIBILITY_THRESHOLD for i in LOWER_IDS):
+                seen_full += 1
+    if total == 0:
+        return None, None
+    return seen_upper / total, seen_full / total
 
 
 def shoulder_yaw_deg(w):
@@ -84,12 +129,27 @@ def analyze(path):
     if not yaws:
         return None
     my = median(yaws)
+    upper_ratio, full_ratio = body_presence_ratio(d["frames"])
+    # rig'in KENDİ eşiği (min_upper_body_ratio=0.6, triage-thresholds.w1.json)
+    # — icat edilmedi. full_body için profilde eşik YOK (rig hiç ölçmemişti,
+    # ölçüldü: 94/94 manifest null) → sınır çizilmez, unmeasured bırakılır.
+    if upper_ratio is None:
+        frame_class_hint = "unmeasured (lm/visibility verisi yok)"
+    elif upper_ratio < 0.6:
+        frame_class_hint = "unmeasured (upper_body eşiğinin ALTINDA — " \
+            "hand_cam/fretboard_cam/unusable AYRIMI görsel inceleme ister)"
+    else:
+        frame_class_hint = "full_or_upper_body (full_body SINIRI kurucu " \
+            "kararı — full_body_ratio ölçüldü, eşiklenmedi)"
     out = {
         "video": os.path.basename(path).split(".")[0],
         "frames": len(yaws),
         "resolution": f"{w}x{h}" if w else "?",
         "medianShoulderYawDeg": round(my, 1),
         "angleClass": angle_class(my),
+        "upperBodyRatio": round(upper_ratio, 3) if upper_ratio is not None else None,
+        "fullBodyRatio": round(full_ratio, 3) if full_ratio is not None else None,
+        "frameClassHint": frame_class_hint,
         "trunkTilt_world_deg": round(median(world_tilt), 2),
         "trunkTilt_normalizedRaw_deg": round(median(norm_tilt), 2),
     }
@@ -131,6 +191,8 @@ def main():
 
     from collections import Counter
     print("\nB4 açı sınıfı dağılımı:", dict(Counter(r["angleClass"] for r in rows)))
+    print("frameClass ipucu dağılımı (koordinatör sorusu 2026-08-11):",
+          dict(Counter(r["frameClassHint"] for r in rows)))
     json.dump(rows, open("config/frame-analysis.json", "w"), ensure_ascii=False, indent=1)
     return 0
 
