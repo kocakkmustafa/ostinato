@@ -64,6 +64,35 @@ def body_presence_ratio(frames):
     return seen_upper / total, seen_full / total
 
 
+#: Kanonik ağaçtaki üçüncü eksen (koordinatör sevki 2026-08-11): ne kanonik
+#: ne bayat ağaçta Ostinato'nun triage-thresholds.w1.json'unda
+#: trunk_angle_band_deg HİÇ ayarlanmamıştı (0.0 gibi full_body — hiç
+#: koşulmamış). Band İCAT EDİLMEDİ: üç çalgının da (piano/guitar/voice)
+#: ZATEN KENDİ noiseBand'ı (8°, ruleset'lerde ATTESTED artefakttan
+#: türetilmiş) — "duruş" burada bu tabanla tanımlandı: gövde dikeyden
+#: sapması ≤ noiseBand.
+POSTURE_BAND_DEG = 8.0  # üç çalgı da 8 — config/rulesets/*.json noiseBand
+
+
+def posture_ratio(frames, band_deg=POSTURE_BAND_DEG):
+    """`_in_trunk_band` ile AYNI soru (kanonik triage.py:180-198): kare
+    içindeki gövde ekseni dikeyden sapması bandın İÇİNDE mi? Omuz/kalça
+    görünmüyorsa fail-closed (kanonikle aynı disiplin) — YOK sayılır."""
+    seen = total = 0
+    for fr in frames:
+        lm, W = fr.get("lm"), fr.get("world")
+        if not lm or not W or len(lm) <= R_HIP:
+            continue
+        if any(lm[i][3] < VISIBILITY_THRESHOLD for i in (L_SH, R_SH, L_HIP, R_HIP)):
+            continue  # kanonik: görünmeyen omuz/kalça → hareket kanıtı DEĞİL
+        total += 1
+        # world uzayı zaten en-boy bağımsız (kanonik pikselle aynı sonucu
+        # metrik uzayda verir — J-028/M-O-08, bu dosyanın kendi kanıtı).
+        if trunk_tilt_deg([[p[0], p[1]] for p in W]) <= band_deg:
+            seen += 1
+    return (seen / total) if total else None
+
+
 def shoulder_yaw_deg(w):
     """Omuz hattının kamera eksenine göre açısı, world uzayında.
 
@@ -130,6 +159,7 @@ def analyze(path):
         return None
     my = median(yaws)
     upper_ratio, full_ratio = body_presence_ratio(d["frames"])
+    posture_r = posture_ratio(d["frames"])
     # rig'in KENDİ eşiği (min_upper_body_ratio=0.6, triage-thresholds.w1.json)
     # — icat edilmedi. full_body için profilde eşik YOK (rig hiç ölçmemişti,
     # ölçüldü: 94/94 manifest null) → sınır çizilmez, unmeasured bırakılır.
@@ -149,6 +179,7 @@ def analyze(path):
         "angleClass": angle_class(my),
         "upperBodyRatio": round(upper_ratio, 3) if upper_ratio is not None else None,
         "fullBodyRatio": round(full_ratio, 3) if full_ratio is not None else None,
+        "postureRatio": round(posture_r, 3) if posture_r is not None else None,
         "frameClassHint": frame_class_hint,
         "trunkTilt_world_deg": round(median(world_tilt), 2),
         "trunkTilt_normalizedRaw_deg": round(median(norm_tilt), 2),
@@ -193,6 +224,16 @@ def main():
     print("\nB4 açı sınıfı dağılımı:", dict(Counter(r["angleClass"] for r in rows)))
     print("frameClass ipucu dağılımı (koordinatör sorusu 2026-08-11):",
           dict(Counter(r["frameClassHint"] for r in rows)))
+    pr = [r["postureRatio"] for r in rows if r["postureRatio"] is not None]
+    if pr:
+        pr_sorted = sorted(pr)
+        RIG_MIN_POSTURE_RATIO = 0.25  # kanonik triage.py'nin kendi varsayılanı
+        print(f"postureRatio (kanonik 3. eksen, band=0-{POSTURE_BAND_DEG}°, "
+              f"{len(pr)}/{len(rows)} ölçülebildi): medyan "
+              f"{pr_sorted[len(pr_sorted)//2]:.2f} · min {pr_sorted[0]:.2f} · "
+              f"max {pr_sorted[-1]:.2f} · rig'in kendi min_posture_ratio "
+              f"varsayılanını (≥{RIG_MIN_POSTURE_RATIO}) geçen: "
+              f"{sum(1 for x in pr if x >= RIG_MIN_POSTURE_RATIO)}/{len(pr)}")
     json.dump(rows, open("config/frame-analysis.json", "w"), ensure_ascii=False, indent=1)
     return 0
 
