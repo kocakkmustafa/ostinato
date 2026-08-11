@@ -25,6 +25,28 @@ elif [ "$_hooks_path" != "tools/git-hooks" ]; then
   printf '⚠️  core.hooksPath zaten "%s" — Ostinato commit kapısı KURULMADI (çakışmayı önce çöz)\n' "$_hooks_path"
 fi
 
+# build/ kendi-kurulumu (koordinatör sevki 2026-08-11 — üç hatta birden P0):
+# bu sembolik bağlantı ESKİDEN İZLENİYORDU, makineye-özgü mutlak yol taşıyordu
+# (başka makinede taze klon = sarkan bağlantı = flutter test tool-crash =
+# ÜRÜN kusuru sanılan kapı kırmızısı). Artık izlenmiyor (.gitignore); her
+# koşum kendi yerelini kurar/onarır. M-F-444: "ortam yok" ne sessizce
+# atlanır ne opak kırmızıya düşer — ADIYLA söylenir.
+_build_target="$HOME/ostinato_buildout/app"
+if [ -L build ]; then
+  if [ ! -e "$_build_target" ]; then
+    # sembolik bağlantı VAR ama hedefi SARKMIŞ — onarımı SESSİZCE yapma,
+    # ADIYLA söyle (M-F-444: onarım da bir durum değişikliğidir).
+    mkdir -p "$_build_target"
+    printf '⚙️  build hedefi eksikti (ORTAM TUZAĞI), onarıldı → %s\n' "$_build_target"
+  fi
+elif [ -e build ]; then
+  printf '⚠️  ORTAM YOK: "build" beklenmeyen bir GERÇEK dizin/dosya (sembolik bağlantı değil) — elle çözün, otomatik kurulum ATLANDI\n'
+else
+  mkdir -p "$_build_target"
+  ln -s "$_build_target" build
+  printf '⚙️  build → %s (ilk koşum, iCloud dışı yerel kuruldu)\n' "$_build_target"
+fi
+
 fail=0
 run() {
   local name="$1"; shift
