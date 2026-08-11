@@ -73,6 +73,43 @@ pilotun kendi metodolojisinden (ReferenceBuilder + StandardJoints) geldi;
 isteyen bir sonraki adım varsa, aynalama belirsizliğini önce çözmeli
 (daha fazla/daha net kaynak, ya da kural 7'nin izin verdiği bir prior).
 
+## Ek — aynalama belirsizliği: veri miktarı mı, yapısal mı? (aynı gün, ek ölçüm)
+
+**Soru (koordinatör):** `runnerUpGap=0,00276` küçük — eksik veriden mi,
+yoksa piyanonun kendi (neredeyse simetrik) duruşundan mı? **Ucuz test:**
+9 attested take'i alt-kümelere böl, `runnerUpGap`in N ile nasıl
+değiştiğini ölç.
+
+Geçici bir `--only=id1,id2,...` bayrağı `pilot.dart`a eklendi (koşum
+sonrası **geri alındı**, `git checkout --`, commit'lenmedi — bu yalnız
+tanı amaçlı):
+
+| N | Hangi take'ler | runnerUpGap | mirrorConfident |
+|---|---|---|---|
+| 5 (A) | ilk 5 (kronolojik) | **0,0246** | **true** |
+| 5 (B) | son 5 | **çöktü** — `ReferenceAgreementError`: 14° içinde küme yok (SGsYZAqIwi4 16,8° · U4mU0uu-0Aw 12,0° · cBuC89ApQtM 16,3° · e-USjrHOL8s 7,4° · p_6y7MPW_Ek 20,7°) | — |
+| 7 (A) | ilk 5 + 2 | 0,0032 | false |
+| 7 (B) | ilk 5 + son 2 (farklı 2) | 0,0132 | false |
+| 9 | tümü | 0,0028 | false |
+
+**Cevap ikisi de DEĞİL — soru ikiye ayrılmalıydı.** Gap, N'in düzgün bir
+fonksiyonu değil: aynı N=5'te bir alt-küme TEMİZ uzlaşıyor, başka bir
+alt-küme çekirdeğin kendi güvenlik kapısını (`ReferenceAgreementError`)
+tetikleyip TAMAMEN reddediliyor. Bu ne "veri arttıkça netleşir" (N=5'te
+zaten temiz bir sonuç ALINABİLİYOR) ne "piyano yapısal olarak simetrik"
+(N=5'te bazı kombinasyonlar KESİN çözülüyor) hipoteziyle temiz uyuşuyor.
+
+**En savunulabilir okuma: havuzun kendisi HETEROJEN.** 9 take'in bir
+kısmı birbiriyle iyi uzlaşıyor, bir kısmı uzlaşmıyor (kamera açısı,
+öğretim tarzı, oturuş farkı — hangisi olduğu bu ölçümle AYIRT
+EDİLEMEDİ). 9-take'in düşük-güven sonucu bu karışık popülasyonun
+DÜRÜST yansıması — 5 tutmayan take'i attest etmek gap'i büyütmeyebilir
+(zaten karışık bir alt-kümeye daha fazla karışıklık eklenmiş olur).
+**Kalıcı, isimli sınır bu:** hangi spesifik take'lerin birbiriyle
+uzlaştığı/uzlaşmadığı ayrı bir ölçüm ister (her take'i sırayla dışlayıp
+gap'in nasıl değiştiğine bakmak) — bu belgenin kapsamı dışında
+bırakıldı, adıyla.
+
 ## Sonraki adım (öneri, karar değil)
 
 - Guitar/voice için aynı koşum (`pilot.dart guitar` / `pilot.dart voice`)
