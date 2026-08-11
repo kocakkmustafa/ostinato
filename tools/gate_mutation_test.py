@@ -29,6 +29,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -266,6 +267,70 @@ def _log(event: str, **fields) -> None:
         fh.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
+def selftest_log() -> int:
+    """Lissom'un deseni (koordinatör sevki 2026-08-11, 2. kez port kaynağı
+    iyileştiriyor): "logluyorum" demek yetmez, logun GERÇEKTEN DOLDUĞU
+    sahte sabotajlarla ölçülür. İki senaryo simüle edilir — ① ölü-pid onarımı
+    ② canlı-pid kilidi — ve `.mutA-log.jsonl`da BEKLENEN olay adları arandı.
+    Test log'u/sentinel'i GERÇEK koşumdan izole eder, sonunda geri koyar."""
+    real_log_bak = None
+    if LOG_PATH.exists():
+        real_log_bak = LOG_PATH.read_text(encoding="utf-8")
+        LOG_PATH.unlink()
+    ok = True
+    try:
+        # ① ölü-pid onarımı: gerçekten ölü bir pid için fork+bekle kullan.
+        BACKUP_DIR.mkdir(exist_ok=True)
+        for f in TOUCHED:
+            shutil.copy(f, BACKUP_DIR / Path(f).name)
+        (BACKUP_DIR / "DIGESTS.json").write_text(
+            json.dumps(_digests(TOUCHED)), encoding="utf-8")
+        dead_pid = os.fork()
+        if dead_pid == 0:
+            os._exit(0)
+        os.waitpid(dead_pid, 0)
+        SENTINEL.write_text(f"mutations in flight {dead_pid}\n", encoding="utf-8")
+        _heal_if_needed()
+
+        # ② canlı-pid kilidi: GERÇEKTEN farklı, uyuyan bir alt-süreç —
+        # _heal_if_needed() `pid == os.getpid()`i BİLEREK canlı-kilit
+        # SAYMAZ (kendi bayat sentinel'iyle karışmasın diye), o yüzden bu
+        # senaryo kendi pid'imizle simüle edilemez (ilk yazımda bu hatayı
+        # yaptım, öz-testin kendisi yakaladı: heal_blocked hiç düşmedi).
+        live_pid = os.fork()
+        if live_pid == 0:
+            time.sleep(5)
+            os._exit(0)
+        try:
+            SENTINEL.write_text(f"mutations in flight {live_pid}\n", encoding="utf-8")
+            _heal_if_needed()
+        finally:
+            os.kill(live_pid, 15)
+            os.waitpid(live_pid, 0)
+        SENTINEL.unlink(missing_ok=True)
+        shutil.rmtree(BACKUP_DIR, ignore_errors=True)
+
+        events = set()
+        for line in LOG_PATH.read_text(encoding="utf-8").splitlines():
+            events.add(json.loads(line)["event"])
+        expected = {"heal_detected", "heal_result", "heal_blocked"}
+        missing = expected - events
+        if missing:
+            print(f"⛔ log ÖZ-TESTİ: {missing} olayı hiç DÜŞMEDİ — "
+                  f"logluyorum demek dolduğunu kanıtlamaz")
+            ok = False
+        else:
+            print(f"✅ log ÖZ-TESTİ: {expected} üç sabotaj senaryosunun "
+                  f"üçü de log'a düştü")
+    finally:
+        LOG_PATH.unlink(missing_ok=True)
+        if real_log_bak is not None:
+            LOG_PATH.write_text(real_log_bak, encoding="utf-8")
+        shutil.rmtree(BACKUP_DIR, ignore_errors=True)
+        SENTINEL.unlink(missing_ok=True)
+    return 0 if ok else 1
+
+
 def _alive(pid: int) -> bool:
     try:
         os.kill(pid, 0)
@@ -435,4 +500,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(selftest_log() if "--selftest-log" in sys.argv else main())

@@ -249,11 +249,23 @@ UPLOADER_TRACES = re.compile(
 NETWORK_DEPS_RECORDED = {
     "google_fonts": "yazı tipi indirir (GET); kullanıcı verisi TAŞIMAZ — "
                     "'yüklenmiyor' iddiasını yalanlamaz",
+    "http": "TRANSİTİF — google_fonts'un altında geliyor (pubspec.lock: "
+            "`dependency: transitive`), lib/'de DOĞRUDAN import YOK "
+            "(ölçüldü, `package:http` sıfır çağrı). google_fonts'un GET-only "
+            "gerekçesi bunu da kapsar; kendi başına ek yükleme yolu değil.",
 }
 #: Ağa çıkabilen bağımlılık ailelerinin izleri (pubspec adlarında aranır).
+#: ⚠️ Lissom'un O-080 reçetesini port ederken bulduğu delik (koordinatör
+#: 2026-08-11, kaynakta doğrulandı): `posthog`/`amplitude`/`mixpanel`/
+#: `segment`/`appsflyer`/`adjust` `\w*` TAŞIMIYORDU — Flutter'da baskın paket
+#: adı biçimi SONEKLİ (`posthog_flutter`, `amplitude_flutter`, ...), desen
+#: yalnız tam-adı yakalıyordu. Öz-test bunu görmedi çünkü bu repodaki TEK ağ
+#: bağımlılığı (`google_fonts`) soneksiz — kapsam yerel gerçeklik kadardı.
+#: Artık HEPSİ `\w*` taşıyor: yakalama alanını yalnız BÜYÜTÜR, daraltmaz.
 NETWORK_DEP_HINTS = re.compile(
-    r"^\s+(http|dio|firebase\w*|sentry\w*|posthog|amplitude|mixpanel|segment|"
-    r"appsflyer|adjust|google_fonts|supabase\w*|graphql\w*|web_socket\w*):",
+    r"^\s+(http|dio|firebase\w*|sentry\w*|posthog\w*|amplitude\w*|mixpanel\w*|"
+    r"segment\w*|appsflyer\w*|adjust\w*|google_fonts|supabase\w*|graphql\w*|"
+    r"web_socket\w*):",
     re.MULTILINE)
 
 
@@ -655,6 +667,18 @@ SELFTEST_SAMPLES = [
     ("tanımlayıcı", IDENTIFIER_LIKE.pattern, "onboarding-microphone-card"),
     ("vücut-taraf H", BODY_SIDE.pattern, "rest your right hand here"),
     ("elle sayı I", HANDWRITTEN_COUNT.pattern, "Three instruments are live"),
+    # Lissom portu bunu buldu (2026-08-11): yerel gerçeklikte (`google_fonts`)
+    # hiç SONEK yok, o yüzden desen soneksiz kaldı ve öz-test hiç fark etmedi.
+    # Bu vaka artık kalıcı: sahte bir SONEKLİ paket, gerçek repoda hiç
+    # olmasa bile.
+    ("ağ J soneki", NETWORK_DEP_HINTS.pattern, "  posthog_flutter: ^1.0.0"),
+    # Gravita bulgusu (2026-08-11): pubspec.yaml YALNIZ doğrudan bağımlılığı
+    # taşır; transitif olanlar (http gibi) SADECE pubspec.lock'ta görünür,
+    # orada da `dependency: transitive` satırının ÜSTÜNDE aynı girintili
+    # `ad:` biçiminde. Desen aynı ama YALNIZ yaml taranırsa bu satıra hiç
+    # ulaşılmaz — kalıcı hatırlatma sahte bir transitif paket adıyla.
+    ("ağ J transitif (lock-biçimi)", NETWORK_DEP_HINTS.pattern,
+     "  http:\n    dependency: transitive\n"),
 ]
 
 
@@ -673,6 +697,19 @@ def selftest() -> int:
                for p, _ in json_surface_strings()):
         dead.append("ruleset `userExplanation` yolu HİÇ eşleşmiyor — "
                     "kapsam satırı 'taranıyor' derken sıfır tarar (O-058)")
+    # Gravita bulgusu (2026-08-11): Kural J bir ara yalnız pubspec.yaml
+    # okuyordu, transitif bağımlılıklar (yalnız pubspec.lock'ta görünenler)
+    # kör noktaydı. `http` GERÇEKTEN transitif (google_fonts altında) ve
+    # yaml'da HİÇ geçmiyor — canlı kanıt olarak kullanılır: kapı pubspec.lock'u
+    # gerçekten okumuyorsa bu kontrol hiç görmez ve regresyon sessiz kalır.
+    lock_text = Path("pubspec.lock").read_text(encoding="utf-8")
+    if not NETWORK_DEP_HINTS.search(lock_text):
+        dead.append("pubspec.lock hiçbir ağ-bağımlılığı ipucuyla eşleşmiyor — "
+                    "kural yalnız yaml'a mı döndü? (Gravita'nın transitif "
+                    "bulgusu, http/google_fonts)")
+    if "http" not in NETWORK_DEPS_RECORDED:
+        dead.append("NETWORK_DEPS_RECORDED'da 'http' yok — transitif kayıt "
+                    "geri alınmış olabilir")
     if dead:
         print(f"⛔ {len(dead)} ÖLÜ DESEN/YOL (pozitif ikiz başarısız):")
         for d in dead:
@@ -741,16 +778,28 @@ def main() -> int:
                 f"[yükleme iddiası] sevk edilen kod '{m.group(0)}' taşıyor ama "
                 f"{len(claims_no_upload)} yüzey 'hiçbir şey yüklenmiyor/"
                 f"cihazdan çıkmıyor' diyor — iddia artık YANLIŞ olabilir")
+        # ⚠️ Gravita bulgusu (koordinatör 2026-08-11, kaynakta 5 hatta
+        # doğrulandı): yalnız pubspec.yaml TARANIYORDU — DOĞRUDAN
+        # bağımlılıkları görür, TRANSİTİF olanları göremez. `http`,
+        # google_fonts'un altında geliyor (`pubspec.lock`ta
+        # `dependency: transitive`), yaml'da hiç geçmiyor. pubspec.lock
+        # AYNI girinti biçimini taşıyor (`^\s+ad:`), o yüzden aynı desen
+        # ikisine de uygulanabilir.
         pub = Path("pubspec.yaml").read_text(encoding="utf-8")
-        for m in NETWORK_DEP_HINTS.finditer(pub):
-            dep = m.group(1)
+        lock = Path("pubspec.lock").read_text(encoding="utf-8")
+        seen_deps = set()
+        for src in (pub, lock):
+            for m in NETWORK_DEP_HINTS.finditer(src):
+                seen_deps.add(m.group(1))
+        for dep in sorted(seen_deps):
             if dep not in NETWORK_DEPS_RECORDED:
                 violations.append(
                     f"[yükleme iddiası] '{dep}' ağa çıkabilen bir bağımlılık "
-                    f"ve KAYITLI DEĞİL. {len(claims_no_upload)} yüzey "
-                    f"'cihazdan çıkmıyor' diyor: bu iddianın hâlâ geçerli "
-                    f"olup olmadığı bir İNSAN KARARIDIR. Kararı verip "
-                    f"`NETWORK_DEPS_RECORDED`a GEREKÇESİYLE yazın")
+                    f"(doğrudan ya da transitif) ve KAYITLI DEĞİL. "
+                    f"{len(claims_no_upload)} yüzey 'cihazdan çıkmıyor' "
+                    f"diyor: bu iddianın hâlâ geçerli olup olmadığı bir "
+                    f"İNSAN KARARIDIR. Kararı verip `NETWORK_DEPS_RECORDED`a "
+                    f"GEREKÇESİYLE yazın")
     else:
         # VAKUM: iddia hiç bulunamadıysa kural boşa koşmuş demektir.
         violations.append(
