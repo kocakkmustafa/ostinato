@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Ostinato commit kapısı — tools/run_gates.sh'i commit'ten ÖNCE çalıştırır.
+#
+# Neden var (A5, koordinatör sevki 2026-08-11): run_gates.sh depoda İZLENİYORDU
+# ama onu ÇAĞIRAN şey (bir git hook) izlenmiyordu — kapı bu makinenin ve bu
+# oturumun ALIŞKANLIĞINDA vardı, TAZE KLONDA yoktu. Bu dosya + core.hooksPath
+# kendi-kurulumu (bkz. tools/run_gates.sh üstü) o boşluğu kapatır.
+#
+# Acil durum atlaması: SKIP_PRE_COMMIT_GATE=1 git commit ...
+set -uo pipefail
+
+if [ "${SKIP_PRE_COMMIT_GATE:-0}" = "1" ]; then
+  echo "pre-commit: SKIP_PRE_COMMIT_GATE=1 — kapı atlandı" >&2
+  exit 0
+fi
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+exec bash tools/run_gates.sh

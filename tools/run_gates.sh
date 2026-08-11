@@ -12,6 +12,19 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
+# Kendi-kurulum (A5, koordinatör sevki 2026-08-11): bu betik depoda İZLENİYOR
+# ama onu commit'ten önce ÇAĞIRAN şey izlenmiyordu — kapı yalnız bu makinenin
+# alışkanlığındaydı, taze klonda sıfırdı. Bu betik zaten her oturumda elle
+# koşulduğu için kendi git-hook'unu burada, ilk koşumda, sessizce kurar.
+# Farklı bir core.hooksPath ZATEN ayarlıysa EZİLMEZ — yalnız uyarılır.
+_hooks_path="$(git config --get core.hooksPath || true)"
+if [ -z "$_hooks_path" ]; then
+  git config core.hooksPath tools/git-hooks
+  printf '⚙️  core.hooksPath → tools/git-hooks (ilk koşum, commit kapısı otomatik kuruldu)\n'
+elif [ "$_hooks_path" != "tools/git-hooks" ]; then
+  printf '⚠️  core.hooksPath zaten "%s" — Ostinato commit kapısı KURULMADI (çakışmayı önce çöz)\n' "$_hooks_path"
+fi
+
 fail=0
 run() {
   local name="$1"; shift
