@@ -16,5 +16,11 @@
   "notADestination": {
     "OstinatoApp": "MaterialApp sarmalayıcısı — kullanıcı buraya GİTMEZ, uygulama burada BAŞLAR",
     "OstinatoHome": "karşılama↔kütüphane ANAHTARI (`home:` içinde durum değiştirir, rota DEĞİL) — kullanıcı ona 'gidemez'"
-  }
+  },
+  "cameraDependency": {
+    "LiveScreenRoute": "kamerayı KENDİSİ kullanıyor (CameraPoseSource) — widget testinde platform kanalı yanıt vermez",
+    "ReviewScreenRoute": "kamerası YOK — yalnız kamera gerektiren bir ekranın ARKASINDA (live_screen.dart push eder)",
+    "SetupCheckScreenRoute": "kamerayı KENDİSİ kullanıyor (MotionCameraController, requestAndStartCamera) — widget testinde platform kanalı yanıt vermez"
+  },
+  "$handWrittenIsLowerBound": "(e) Yürüyüşteki ELLE yazılmış rota kimlikleri SİLİNMEZ: türetimin POZİTİF KONTROLÜdür (türetim, zaten bildiğimizi kapsamalı). ⚠️ O küme bir ALT SINIRDIR — ona ekleme yapmak bir envanter güncellemesi DEĞİL, KONTROLÜN TABANINI yükseltmektir."
 }

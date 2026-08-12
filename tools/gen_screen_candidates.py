@@ -45,6 +45,14 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# ⚠️ ÜÇÜNCÜ KEZ: yorum-kanıtı. İlk yazımda bu betik ham kaynağı tarıyordu ve
+# `OnboardingScreen`e kamera bağımlılığı ATFETTİ — kanıt bir YORUMDAN geldi
+# (`onboarding_screen.dart:27` kamerayı ANLATIYOR, kullanmıyor). Aynı sınıf
+# bugün `validate_placeholder_surface`ta da çıkmıştı. Ayıklayıcı yine
+# YENİDEN YAZILMADI, içe aktarıldı.
+from validate_surface_honesty import strip_dart_comments  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 LIB = ROOT / "lib"
 OUT = ROOT / "test" / "generated" / "screen_candidates.json"
@@ -67,6 +75,44 @@ def _class_bodies(text):
         m = re.match(r"([A-Za-z0-9_]+)", p)
         if m:
             yield m.group(1), p.split("\nclass ")[0]
+
+
+#: (c) VARILAMAMA SEBEBİ — TÜRETİLİR, elle yazılmaz.
+#: Choreia kuralı: *sebepsiz dışlama, denetimi yeniden TANIMA çevirir.*
+#: ⚠️ Ve sebep ekran BAŞINA ölçülür: ilk yazımda üçü için de "kamera
+#: arkasında" demiştim — ÖLÇÜM `ReviewScreenRoute`ta kamera izi OLMADIĞINI
+#: gösterdi. O ekran kamerayı KULLANMIYOR; yalnız kamera gerektiren
+#: `LiveScreenRoute`un ARKASINDA duruyor (`live_screen.dart:182` push eder).
+#: Yanlış bir sebep, sebepsizlikten daha kötüdür: denetimi doğrulanmış
+#: gösterir.
+CAMERA_TRACE = re.compile(
+    r"requestAndStartCamera|MotionCameraController|CameraPoseSource")
+
+
+def camera_dependency(name, src_by_file):
+    """Ekranın KAMERA BAĞIMLILIĞI — türetilmiş OLGU, erişilebilirlik İDDİASI
+    değil.
+
+    ⚠️ İlk yazımın adı `unreachable_reason`di ve bu YANLIŞTI: betik hangi
+    ekrana varılabildiğini BİLMEZ (o yürüyüşün işi). Burada üretilen şey bir
+    OLGU — *bu ekran kamerayı kullanır / kamera arkasındadır* — ve testte
+    yalnız VARILAMAYANLAR için sebep olarak okunur. Bir olguyu iddia diye
+    adlandırmak, kapsamı sessizce genişletir.
+    """
+    own = "".join(strip_dart_comments(t) for f, t in src_by_file.items()
+                  if re.search(rf"class _?{name}(State)?\b", t))
+    if CAMERA_TRACE.search(own):
+        traces = sorted(set(CAMERA_TRACE.findall(own)))
+        return f"kamerayı KENDİSİ kullanıyor ({', '.join(traces)}) — widget " \
+               f"testinde platform kanalı yanıt vermez"
+    # kamerası yok: onu PUSH eden ekran kamera arkasındaysa, sebep DOLAYLI
+    pushers = sorted({Path(f).name for f, t in src_by_file.items()
+                      if re.search(rf"=>\s*{name}\(", strip_dart_comments(t))
+                      and CAMERA_TRACE.search(strip_dart_comments(t))})
+    if pushers:
+        return f"kamerası YOK — yalnız kamera gerektiren bir ekranın " \
+               f"ARKASINDA ({', '.join(pushers)} push eder)"
+    return ""
 
 
 def derive():
@@ -112,11 +158,24 @@ def main() -> int:
         print(f"⛔ VAKUM: yalnız {len(candidates)} aday türedi (beklenen ≥5) — "
               f"desen ölmüş, 'tam kapsam' iddiası GEÇERSİZ")
         return 1
+    src_by_file = {str(f): f.read_text(encoding="utf-8")
+                   for f in sorted(LIB.rglob("*.dart"))}
+    reasons = {}
+    for c in candidates:
+        r = camera_dependency(c, src_by_file)
+        if r:
+            reasons[c] = r
     payload = {
         "$why": "TÜRETİLDİ — elle yazılmaz. İki bağımsız türetim (AD + YAPI) "
                 "uzlaştı. Kaynak: tools/gen_screen_candidates.py",
         "candidates": candidates,
         "notADestination": NOT_A_DESTINATION,
+        "cameraDependency": reasons,
+        "$handWrittenIsLowerBound":
+            "(e) Yürüyüşteki ELLE yazılmış rota kimlikleri SİLİNMEZ: "
+            "türetimin POZİTİF KONTROLÜdür (türetim, zaten bildiğimizi "
+            "kapsamalı). ⚠️ O küme bir ALT SINIRDIR — ona ekleme yapmak bir "
+            "envanter güncellemesi DEĞİL, KONTROLÜN TABANINI yükseltmektir.",
     }
     text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     if "--check" in sys.argv:

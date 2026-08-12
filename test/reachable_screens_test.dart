@@ -247,16 +247,41 @@ void main() {
         as Map<String, dynamic>;
     final Set<String> candidates =
         (gen['candidates'] as List<dynamic>).cast<String>().toSet();
+    final Map<String, dynamic> reasons =
+        (gen['cameraDependency'] as Map<String, dynamic>);
     final Set<String> unreached = candidates.difference(reached);
+    // (e) ELLE KÜME SİLİNMEZ — türetimin POZİTİF KONTROLÜ.
+    // Türetim, zaten BİLDİĞİMİZİ kapsamalı; kapsamıyorsa desen kördür.
+    // ⚠️ Bu küme bir ALT SINIRDIR: ona ekleme yapmak envanter güncellemesi
+    // DEĞİL, kontrolün TABANINI yükseltmektir.
+    const Set<String> handWritten = <String>{
+      'OnboardingScreen', 'LibraryScreen', 'SettingsScreen',
+      'InstrumentScreenRoute', 'CourseScreenRoute',
+      'LessonScoredScreenRoute', 'LessonDemoScreenRoute',
+      'LessonLockedScreenRoute',
+    };
+    expect(handWritten.difference(candidates), isEmpty,
+        reason: '(e) TÜRETİM, elle bilinen kümeyi KAPSAMIYOR — desen kör: '
+            'elle liste bir ALT SINIRDIR ve türetim onun altına düşemez');
     // ignore: avoid_print
     print('\n═══ (c) ADAY OLUP VARILAMAYAN — KATI\'ya girmez, KAYBOLMAZ ═══');
     for (final String u in unreached.toList()..sort()) {
       // ignore: avoid_print
-      print('   ⛔ $u');
+      print('   ⛔ $u\n        sebep: ${reasons[u] ?? '🔴 SEBEP YOK'}');
+    }
+    // Choreia kuralı: SEBEPSİZ dışlama, denetimi yeniden TANIMA çevirir.
+    for (final String u in unreached) {
+      expect(reasons.containsKey(u), isTrue,
+          reason: '$u varılamıyor ama SEBEBİ türetilemedi — sebepsiz bir '
+              'dışlama, denetimi "tanım" hâline getirir (varılamayanı '
+              'varılamaz diye tanımlamak)');
     }
     // ignore: avoid_print
     print('   → aday ${candidates.length} = varılan ${reached.length}'
-        ' ⊎ varılamayan ${unreached.length}\n');
+        ' ⊎ varılamayan ${unreached.length}');
+    // ignore: avoid_print
+    print('   (e) elle küme ${handWritten.length} ⊆ türetim '
+        '${candidates.length} — ALT SINIR, taban yükseltilebilir\n');
     // (d) BÖLME ASSERT'İ — Lissom'un vakası: eksik yürünen bir yürüyüş
     // "0 kusur" diye DOĞRU sonucu YANLIŞ sebeple basar.
     expect(reached.union(unreached).length, candidates.length,
