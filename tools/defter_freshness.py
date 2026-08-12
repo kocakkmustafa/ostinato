@@ -129,6 +129,44 @@ def defter_ids():
     return {int(m) for m in _ENTRY.findall(DEFTER.read_text(encoding="utf-8"))}
 
 
+def subject_ids():
+    """YALNIZ commit BAŞLIKLARINDA anılan numaralar — "bu commit o kaydı
+    YAZIYOR" iddiasının dar okuması."""
+    log = subprocess.run(
+        ["git", "-C", str(ROOT), "log", "--format=%s"],
+        capture_output=True, text=True).stdout
+    return {n for n in expand(log) if n not in SENTINEL_RANGE}
+
+
+def body_only_unrecorded():
+    """⚖️ İKİNCİ DESENİN GEREKLİLİĞİNİ ÖLÇEN ÇAPA (O-110, koordinatör hükmü).
+
+    **Sorun:** bu kapı İKİ YÖNLÜ ama deseni TEK, ve desen genişliğinin iki
+    yöndeki etkisi ZITTIR:
+      · *öksüz* yönünde geniş desen DOĞRU — dar desen 57 sahte öksüz üretirdi
+      · *eksik* yönünde geniş desen RİSKLİ — *"bkz. O-104"* diyen bir commit
+        O-104'ü İDDİA ETMİŞ sayılır (*sözünü etmek ≠ kayıt*)
+
+    **Ölçüldü (2026-08-12):** yalnız-gövde numarası **17** (geniş 101 − dar
+    84); bunun **9'u** erken dönem kendi KAYIT commit'i (başlıkta `O-` hiç
+    yok), **8'i** gerçek çapraz-atıf. Ama **zararlı alt-sınıf 0**: bu 17'nin
+    defterde OLMAYANI yok — ve sebebi yapısal, tesadüf değil (yabancı
+    numaralandırma ayrı önek kullanır: `M-O-`/`M-F-`; örnekler `9xx`te).
+
+    **Hüküm:** ikinci deseni SPEKÜLATİF olarak yazma; GEREKLİLİĞİNİ ölç.
+    > ***Bir kapıyı spekülatif olarak genişletmek yerine, genişlemenin
+    > gerekliliğini ölç — o zaman ikinci deseni sen değil, KUSUR ister.***
+
+    Bu fonksiyon o eşiği döndürür: yalnız gövdede anılan VE defterde kaydı
+    OLMAYAN numaralar. **0 ise** tek desen güvenli ve gerekçesi CANLI;
+    **>0 ise** iki yön iki ayrı desen ister (iddia için çapalı, bağ için
+    geniş) ve öz-test bunu ADIYLA söyler.
+    """
+    commits, _ = commit_ids()
+    body_only = commits - subject_ids()
+    return sorted(body_only - defter_ids() - KNOWN_EMPTY - PRE_COMMIT_ERA)
+
+
 def run() -> int:
     commits, census = commit_ids()
     with_ref, without_ref, total = census
@@ -183,6 +221,10 @@ def run() -> int:
               f"{', '.join('O-%03d' % n for n in inflight)} — commit'lenmiş "
               f"tavanın (O-{ceiling:03d}) ÜSTÜNDE, yani şu an yazılıyor "
               f"(kaydı commit'ten ÖNCE yazmak doğru alışkanlık)")
+    risky = body_only_unrecorded()
+    print(f"   ⚖️ tek-desen çapası: yalnız-gövde anılan VE defterde olmayan "
+          f"= {len(risky)}{'' if not risky else ' → ' + ', '.join('O-%03d' % n for n in risky)}"
+          f"  (0 iken tek desen güvenli; >0 ikinci deseni KUSUR ister)")
     print(f"   payda DENETLENDİ: atıflı {with_ref} + atıfsız {without_ref} "
           f"= {total} (rev-list ile birebir) · bilerek-boş "
           f"{len(KNOWN_EMPTY)} ({', '.join('O-%03d' % n for n in sorted(KNOWN_EMPTY))}) "
@@ -235,7 +277,16 @@ def selftest() -> int:
     if (commits - defter - KNOWN_EMPTY - PRE_COMMIT_ERA
             - {n for n in defter if n > max(commits or {0})}):
         dead.append("BUGÜNKÜ ağaçta gedik var — olumsuz ikiz başarısız")
-    # ⑤ PAYDA denklemi öz-testte de sınanır: bozulursa kapı sessiz kalmasın.
+    # ⑤ İKİNCİ DESENİN GEREKLİLİĞİ — spekülatif genişletme yerine EŞİK.
+    risky = body_only_unrecorded()
+    if risky:
+        dead.append(
+            f"TEK DESEN ARTIK YETMİYOR: {len(risky)} numara yalnız GÖVDEDE "
+            f"anılıyor ve defterde kaydı YOK ({', '.join('O-%03d' % n for n in risky)}) "
+            f"— geniş desen bunları İDDİA sayıyor ama 'sözünü etmek ≠ kayıt'. "
+            f"İki yön artık İKİ AYRI desen ister: iddia için ÇAPALI "
+            f"(başlık), bağ için GENİŞ (başlık+gövde)")
+    # ⑥ PAYDA denklemi öz-testte de sınanır: bozulursa kapı sessiz kalmasın.
     w, wo, tot = census
     if w + wo != tot:
         dead.append(f"PAYDA denklemi tutmuyor ({w}+{wo}≠{tot}) — kapının "
