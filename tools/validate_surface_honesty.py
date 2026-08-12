@@ -370,8 +370,25 @@ UPLOADER_TRACES = re.compile(
 #: Yeni bir tanesi eklendiğinde kapı öter — kayıt bir MUAFİYET değil, bir
 #: KARAR NOKTASIDIR.
 NETWORK_DEPS_RECORDED = {
-    "google_fonts": "yazı tipi indirir (GET); kullanıcı verisi TAŞIMAZ — "
-                    "'yüklenmiyor' iddiasını yalanlamaz",
+    # O-104 (JabLab J-217'nin bulgusundan, kendi ağacımda YENİDEN ölçüldü):
+    # kayıt eskiden yalnız "yazı tipi indirir (GET)" diyordu — doğru ama
+    # EKSİK. Ölçülen tam hâl: ÜRETİMDE ağa çıkıyor (`ostinato_theme.dart` 3
+    # çağrı) · `allowRuntimeFetching` üretimde HİÇ kapatılmamış · paketlenmiş
+    # font SIFIR → font yüzleri ilk açılışta Google'ın sunucularından iniyor.
+    # ⭐ JabLab'ın cümlesi, aynen taşınıyor çünkü ölçüm burada da aynı:
+    #   *"Kendi kodunda ağ olmaması, ürününde ağ olmaması demek değildir."*
+    # ⚠️ VE BU HATTIN ÖLÇTÜĞÜ EK: çekme 8 TEST dosyasında kapatılmış,
+    # üretimde değil → HİÇBİR TEST bu davranışı GÖREMEZ. Kapı eksik değil,
+    # KÖR EDİLMİŞ — ve körlük iyi niyetle (ağsız test) konmuş.
+    # Ayrıntı + kapı: `tools/validate_runtime_fetch.py`.
+    "google_fonts": "ÜRETİMDE AĞA ÇIKIYOR — font yüzleri çalışma anında "
+                    "Google'dan iniyor (ostinato_theme.dart 3 çağrı · "
+                    "allowRuntimeFetching üretimde kapatılmamış · paketlenmiş "
+                    "font 0). Kullanıcı verisi GÖNDERİLMİYOR (istek font "
+                    "dosyası için), o yüzden 'video cihazdan çıkmıyor' ve "
+                    "'hiçbir şey yüklenmiyor' iddiaları HÂLÂ DOĞRU; ama "
+                    "'ürün ağa çıkmıyor' cümlesi bu paket yüzünden YANLIŞ "
+                    "olurdu — ölçüldü: öyle bir cümle sevk edilmiyor (0)",
     "http": "TRANSİTİF — google_fonts'un altında geliyor (pubspec.lock: "
             "`dependency: transitive`), lib/'de DOĞRUDAN import YOK "
             "(ölçüldü, `package:http` sıfır çağrı). google_fonts'un GET-only "
