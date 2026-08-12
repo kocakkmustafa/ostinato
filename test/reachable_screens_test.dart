@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +23,27 @@ import 'package:ostinato/main.dart';
 /// KATI okuma (koordinatörün kanonik kuralı): ayrı bir ROTAYA gidiş sayılır.
 /// Aynı sayfa içinde değişen perde/aşama SAYILMAZ — o içerik derinliğidir,
 /// navigasyon kabuğu değil.
+/// (b) YÜRÜYÜŞ TANIĞI — sözleşme maddesi (O-112).
+///
+/// Bir ekrana "gidildi" demenin kanıtı, o ekranın metnini GÖRMEK değil
+/// `Navigator`ın oraya GÖTÜRDÜĞÜNÜ görmektir. Metin kontrolü aynı sayfada
+/// da geçebilir; rota olayı geçemez.
+class _RouteWitness extends NavigatorObserver {
+  final List<String> pushed = <String>[];
+  /// ⚠️ `settings.name` bu uygulamada BOŞ: rotalar `MaterialPageRoute` ile
+  /// ADSIZ push ediliyor. Tanık bu yüzden ADI değil OLAYI sayar — kaç kez
+  /// gerçek bir navigasyon sınırı geçildiğini. Ad beklemek, tanığı sessizce
+  /// boş bırakırdı (ölçüldü, varsayılmadı).
+  void _note(Route<dynamic>? r) {
+    if (r is PageRoute) pushed.add(r.settings.name ?? '(adsız)');
+  }
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previous) => _note(route);
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) =>
+      _note(newRoute);
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
@@ -110,10 +134,12 @@ void main() {
       return true;
     }
 
+    final _RouteWitness witness = _RouteWitness();
     await t.pumpWidget(ContentRepositoryScope(
       repo: repo,
       cueText: cueText,
       child: MaterialApp(
+        navigatorObservers: <NavigatorObserver>[witness],
         home: OstinatoHome(
           repo: repo,
           cueText: cueText,
@@ -134,7 +160,10 @@ void main() {
 
     // Ayarlar
     if (await tapIfPossible(t, find.text('⚙'))) {
-      note(t, '3 Settings', 'SettingsScreenRoute');
+      // ⚠️ 'SettingsScreenRoute' YAZMIŞTIM — gerçek sınıf `SettingsScreen`.
+      // TÜRETİLMİŞ aday kümesi (sözleşme (a)) bunu ilk koşumda
+      // yakaladı: elle yazılan kimlik, koddan türetilenle ayrıştı.
+      note(t, '3 Settings', 'SettingsScreen');
       requireSubstance(t, 'Settings', 'instruments are live');
       await tapIfPossible(t, find.text('‹'));
       await t.pump(const Duration(milliseconds: 400));
@@ -211,6 +240,42 @@ void main() {
     // OLDUĞU KANITLANAMAYAN üçü. Kod olarak varlar, rota olarak bağlılar —
     // ama hiçbir otomatik yürüyüş oraya GİDEMEZ, ve hiçbir insan da henüz
     // gerçek cihazda gitmedi.
+    // ── (a)(c)(d) SÖZLEŞME: aday = varılan ⊎ VARILAMAYAN ──────────────
+    // Aday küme TÜRETİLMİŞ (tools/gen_screen_candidates.py), elle YAZILMAZ.
+    final Map<String, dynamic> gen = jsonDecode(
+        File('test/generated/screen_candidates.json').readAsStringSync())
+        as Map<String, dynamic>;
+    final Set<String> candidates =
+        (gen['candidates'] as List<dynamic>).cast<String>().toSet();
+    final Set<String> unreached = candidates.difference(reached);
+    // ignore: avoid_print
+    print('\n═══ (c) ADAY OLUP VARILAMAYAN — KATI\'ya girmez, KAYBOLMAZ ═══');
+    for (final String u in unreached.toList()..sort()) {
+      // ignore: avoid_print
+      print('   ⛔ $u');
+    }
+    // ignore: avoid_print
+    print('   → aday ${candidates.length} = varılan ${reached.length}'
+        ' ⊎ varılamayan ${unreached.length}\n');
+    // (d) BÖLME ASSERT'İ — Lissom'un vakası: eksik yürünen bir yürüyüş
+    // "0 kusur" diye DOĞRU sonucu YANLIŞ sebeple basar.
+    expect(reached.union(unreached).length, candidates.length,
+        reason: 'aday = varılan ⊎ varılamayan TUTMUYOR — yürüyüş aday '
+            'kümesinin DIŞINDA bir ekrana varmış olabilir (küme bayat) ya da '
+            'sayaç kimlik dışı bir şey topluyor');
+    expect(reached.difference(candidates), isEmpty,
+        reason: 'yürüyüş aday kümesinde OLMAYAN bir ekrana vardı — aday '
+            'kümesi bayat, `gen_screen_candidates.py` yeniden koşmalı');
+    // (b) YÜRÜYÜŞ TANIĞI — ölçüm, iddia değil.
+    // ignore: avoid_print
+    print('   (b) tanık: ${witness.pushed.length} gerçek rota push\'u '
+        '(navigasyon SINIRI geçildi; sayfa-içi durum değişimi buraya '
+        'düşmez)\n');
+    expect(witness.pushed.length, greaterThanOrEqualTo(1),
+        reason: 'NavigatorObserver HİÇ push görmedi — ya gözlemci bağlı '
+            'değil ya yürüyüş hiç rota geçmedi; ikisi de "8 ekran gezildi" '
+            'iddiasını GEÇERSİZ kılar (kaydın varlığı tetiğinin varlığı '
+            'değildir)');
     expect(reached.length, greaterThanOrEqualTo(8),
         reason: 'kamerasız yol boyunca sekiz ayrı ekrana dokunarak '
             'gidilebilmeli — düşerse navigasyon kabuğu kırılmış demektir');

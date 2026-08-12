@@ -81,6 +81,7 @@ run "eşik türetimi (artefakt↔config)" python3 tools/derive_posture_threshold
 run "gözlem işareti sözleşmesi"     python3 tools/validate_observation_cues.py
 run "uzman-bekleyen envanteri"        python3 tools/gen_expert_inventory.py
 run "placeholder kaydı"               python3 tools/gen_placeholder_register.py --check
+run "gezilebilirlik aday kümesi"     python3 tools/gen_screen_candidates.py --check
 run "DEFTER tazeliği"                python3 tools/defter_freshness.py
 run "tazelik kapısı öz-testi"        python3 tools/defter_freshness.py --selftest
 run "yer tutucu ↔ KULLANICI yüzeyi" python3 tools/validate_placeholder_surface.py

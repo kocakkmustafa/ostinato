@@ -1,0 +1,20 @@
+{
+  "$why": "TÜRETİLDİ — elle yazılmaz. İki bağımsız türetim (AD + YAPI) uzlaştı. Kaynak: tools/gen_screen_candidates.py",
+  "candidates": [
+    "CourseScreenRoute",
+    "InstrumentScreenRoute",
+    "LessonDemoScreenRoute",
+    "LessonLockedScreenRoute",
+    "LessonScoredScreenRoute",
+    "LibraryScreen",
+    "LiveScreenRoute",
+    "OnboardingScreen",
+    "ReviewScreenRoute",
+    "SettingsScreen",
+    "SetupCheckScreenRoute"
+  ],
+  "notADestination": {
+    "OstinatoApp": "MaterialApp sarmalayıcısı — kullanıcı buraya GİTMEZ, uygulama burada BAŞLAR",
+    "OstinatoHome": "karşılama↔kütüphane ANAHTARI (`home:` içinde durum değiştirir, rota DEĞİL) — kullanıcı ona 'gidemez'"
+  }
+}
