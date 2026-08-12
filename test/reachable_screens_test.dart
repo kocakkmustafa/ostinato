@@ -100,14 +100,31 @@ void main() {
     /// yürüyüşün göremediği şey yazarın denemeyi akıl etmediği kontroldür.
     /// Desen-türetimi (ör. `*ScreenRoute` adı) o kör noktayı KAPATMAZ, yalnız
     /// BAŞKASIYLA değiştirirdi (Gravita'nın vakası: desenin tanımadığı ad).
-    void note(WidgetTester t, String where, String routeId) {
+    // ⚖️ (b) TANIK ÜYELİK BAŞINA (O-115). Eski hâl `witness.pushed.length
+    // >= 1` idi — bir TOPLAM, ve *bir toplam hiçbir üyenin kanıtı değildir.*
+    // `reached` `note()` çağrılarıyla doluyordu, yani üyelik testin KENDİ
+    // İDDİASIYLA kuruluyordu: (d)'de Lissom'un düştüğü "iki tarafı aynı
+    // kaynaktan okuma" biçiminin (b) yüzü.
+    //
+    // Artık her varış BİR TANIK OLAYINA eşlenir. ⚠️ Ve ÖLÇÜLDÜ: iki varış
+    // rota push'u DEĞİL — `OnboardingScreen` `home:` olarak doğar,
+    // `LibraryScreen` `OstinatoHome` içinde `setState` ile yer değiştirir
+    // (`pushReplacement` bile değil). Onlar için üçüncü bir sessiz hâl
+    // BIRAKILMAZ: `arrival` türü ADIYLA beyan edilir (`push` | `root`).
+    final Map<String, String> arrivalKind = <String, String>{};
+    final List<String> arrivals = <String>[];  // her VARIŞ (üye değil)
+    void note(WidgetTester t, String where, String routeId,
+        {String arrival = 'push'}) {
+      arrivalKind[routeId] = arrival;
+      arrivals.add(arrival);
       final String name = t
           .widget<Scaffold>(find.byType(Scaffold).first)
           .key
           ?.toString() ??
           '';
       reached.add(routeId);
-      log.add('$where → $routeId${name.isEmpty ? '' : ' [$name]'}');
+      log.add('$where → $routeId ($arrival)'
+          '${name.isEmpty ? '' : ' [$name]'}');
     }
 
     /// Gerçekten DOKUNULABİLİR mi? `find` yetmez — `tap` boşluğa inerse
@@ -149,13 +166,13 @@ void main() {
       ),
     ));
     await t.pump();
-    note(t, '1 Onboarding', 'OnboardingScreen');
+    note(t, '1 Onboarding', 'OnboardingScreen', arrival: 'root');
 
     // Karşılamayı GERÇEK dokunuşlarla geç (3 perde — KATI'da +0).
     for (int i = 0; i < 3; i++) {
       await tapIfPossible(t, find.byKey(const Key('onboarding-primary')));
     }
-    note(t, '2 Library', 'LibraryScreen');
+    note(t, '2 Library', 'LibraryScreen', arrival: 'root');
     requireSubstance(t, 'Library', 'Measured, not chosen');
 
     // Ayarlar
@@ -249,11 +266,32 @@ void main() {
         (gen['candidates'] as List<dynamic>).cast<String>().toSet();
     final Map<String, dynamic> reasons =
         (gen['cameraDependency'] as Map<String, dynamic>);
+    // ⚖️ (d) BEKLENTİ KAYNAKTAN TÜRETİLİR — FARKTAN DEĞİL (O-115).
+    //
+    // 🔴 Eski hâl: `unreached = candidates.difference(reached)` → sonra
+    // `reached ∪ unreached == candidates` assert'i. Bu denklem TANIM GEREĞİ
+    // doğruydu; sözleşmenin kendi cümlesiyle: *bir bölme denetimi, iki
+    // tarafı AYNI KAYNAKTAN okuyorsa denetim değil TANIMDIR.*
+    //
+    // Yeni hâl: beklenti KAYNAKTAN gelir — `cameraDependency` taşıyan aday
+    // widget testinde varılamaz (platform kanalı yanıt vermez), taşımayan
+    // varılabilir OLMALI. Böylece iki taraf BAĞIMSIZ: biri YÜRÜYÜŞ, öteki
+    // KAYNAK TÜRETİMİ. Artık iki yönde de gerçek bulgu mümkün:
+    //   · kamera bağımlısı bir ekrana VARILDIYSA → beklenti yanlış
+    //   · kamerasız bir ekrana VARILAMADIYSA → NAVİGASYON REGRESYONU
+    final Set<String> expectedUnreachable = candidates
+        .where((String c) => reasons.containsKey(c)).toSet();
+    final Set<String> expectedReachable =
+        candidates.difference(expectedUnreachable);
     final Set<String> unreached = candidates.difference(reached);
     // (e) ELLE KÜME SİLİNMEZ — türetimin POZİTİF KONTROLÜ.
     // Türetim, zaten BİLDİĞİMİZİ kapsamalı; kapsamıyorsa desen kördür.
-    // ⚠️ Bu küme bir ALT SINIRDIR: ona ekleme yapmak envanter güncellemesi
-    // DEĞİL, kontrolün TABANINI yükseltmektir.
+    // ⚠️ ŞERH 1: bu küme bir ALT SINIRDIR — **TAM ENVANTER DEĞİLDİR.**
+    //    (Eksik yarım O-115'te eklendi: "alt sınır" tek başına okunduğunda
+    //     "şu an tam" diye anlaşılabiliyordu. Bir sınırın adı, onun TAM
+    //     OLMADIĞINI söylemiyorsa yarım bir uyarıdır.)
+    // ⚠️ ŞERH 2: buraya ekleme yapmak envanter güncellemesi DEĞİL,
+    //    KONTROLÜN TABANINI yükseltmektir.
     const Set<String> handWritten = <String>{
       'OnboardingScreen', 'LibraryScreen', 'SettingsScreen',
       'InstrumentScreenRoute', 'CourseScreenRoute',
@@ -284,10 +322,15 @@ void main() {
         '${candidates.length} — ALT SINIR, taban yükseltilebilir\n');
     // (d) BÖLME ASSERT'İ — Lissom'un vakası: eksik yürünen bir yürüyüş
     // "0 kusur" diye DOĞRU sonucu YANLIŞ sebeple basar.
-    expect(reached.union(unreached).length, candidates.length,
-        reason: 'aday = varılan ⊎ varılamayan TUTMUYOR — yürüyüş aday '
-            'kümesinin DIŞINDA bir ekrana varmış olabilir (küme bayat) ya da '
-            'sayaç kimlik dışı bir şey topluyor');
+    // GERÇEK DENETİM: yürüyüş (taraf 1) ↔ kaynak beklentisi (taraf 2)
+    expect(reached, expectedReachable,
+        reason: 'YÜRÜYÜŞ ile KAYNAK BEKLENTİSİ ayrıştı. Fazladan varılan = '
+            'kamera bağımlısı sanılan bir ekrana varıldı (beklenti yanlış); '
+            'eksik = kamerasız bir ekrana VARILAMADI → NAVİGASYON '
+            'REGRESYONU. İki taraf AYRI kaynaktan okunuyor, bu yüzden bu '
+            'assert tanım değil DENETİMDİR.');
+    expect(unreached, expectedUnreachable,
+        reason: 'varılamayanlar, kaynaktan türetilen beklentiyle eşleşmiyor');
     expect(reached.difference(candidates), isEmpty,
         reason: 'yürüyüş aday kümesinde OLMAYAN bir ekrana vardı — aday '
             'kümesi bayat, `gen_screen_candidates.py` yeniden koşmalı');
@@ -296,11 +339,42 @@ void main() {
     print('   (b) tanık: ${witness.pushed.length} gerçek rota push\'u '
         '(navigasyon SINIRI geçildi; sayfa-içi durum değişimi buraya '
         'düşmez)\n');
-    expect(witness.pushed.length, greaterThanOrEqualTo(1),
-        reason: 'NavigatorObserver HİÇ push görmedi — ya gözlemci bağlı '
-            'değil ya yürüyüş hiç rota geçmedi; ikisi de "8 ekran gezildi" '
-            'iddiasını GEÇERSİZ kılar (kaydın varlığı tetiğinin varlığı '
-            'değildir)');
+    // ⚠️ ÜYE değil VARIŞ sayılır: `LessonScoredScreenRoute`a İKİ kez varılır
+    // (guide + scored) ve her varış ayrı bir push olayıdır. Üye sayısıyla
+    // karşılaştırmak, tanık gereksinimini SESSİZCE düşürürdü.
+    final int pushArrivals =
+        arrivals.where((String k) => k == 'push').length;
+    final int rootArrivals =
+        arrivals.where((String k) => k == 'root').length;
+    final int pushMembers =
+        arrivalKind.values.where((String k) => k == 'push').length;
+    final int rootMembers =
+        arrivalKind.values.where((String k) => k == 'root').length;
+    // 🔴 KÖK VARIŞ SINIRI — sabotajla ölçüldü (O-115): bir üyeyi `root`
+    // beyan etmek tanık gereksinimini DÜŞÜRÜYORDU, yani yanlış bir beyan
+    // sessizce geçiyordu. Kök varış YAPISAL olarak ikidir ve ikisi de
+    // ADIYLA bilinir: `OnboardingScreen` (`home:` kökü) ve `LibraryScreen`
+    // (`OstinatoHome` içinde `setState` takası — `pushReplacement` bile
+    // değil). Üçüncü bir kök varış, beyan değil BULGUDUR.
+    expect(rootMembers, 2,
+        reason: '(b) kök varış sayısı 2 değil ($rootMembers) — bir üyelik '
+            '`root` beyan edilerek TANIK GEREKSİNİMİNDEN kaçmış olabilir; '
+            'kök varış yapısaldır ve ikisi adıyla bilinir');
+    expect(arrivalKind['OnboardingScreen'], 'root');
+    expect(arrivalKind['LibraryScreen'], 'root');
+    // ignore: avoid_print
+    print('   (b) üyelik başına tanık: $pushArrivals push VARIŞI ↔ '
+        '${witness.pushed.length} tanık olayı · $pushMembers push-üyesi · '
+        '$rootArrivals kök varış (rota DEĞİL, ADIYLA sınırlı: '
+        'Onboarding+Library)\n');
+    expect(witness.pushed.length, greaterThanOrEqualTo(pushArrivals),
+        reason: '(b) `push` beyan eden $pushArrivals VARIŞ var ama tanık '
+            'yalnız ${witness.pushed.length} olay gördü — bir varış TANIKSIZ '
+            'kuruldu. Bir TOPLAM hiçbir üyenin kanıtı değildir; üyelik testin '
+            'kendi iddiasıyla değil TANIKLA kurulur');
+    expect(arrivalKind.keys.toSet(), reached,
+        reason: '(b) her varışın türü (push|root) beyan edilmeli — beyansız '
+            'bir varış ÜÇÜNCÜ SESSİZ HÂLdir');
     expect(reached.length, greaterThanOrEqualTo(8),
         reason: 'kamerasız yol boyunca sekiz ayrı ekrana dokunarak '
             'gidilebilmeli — düşerse navigasyon kabuğu kırılmış demektir');
