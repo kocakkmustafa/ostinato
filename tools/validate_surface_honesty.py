@@ -312,6 +312,107 @@ NETWORK_DEP_HINTS = re.compile(
     r"web_socket\w*):",
     re.MULTILINE)
 
+# ── ⑤ DEĞİŞİM-DEDEKTÖRÜ: ret-listesi yerine TAM BÖLME ────────────────────
+#
+# **Kaynak: ADAPTE EDİLDİ, İCAT EDİLMEDİ.** Lissom `1abd4a0` (2026-08-12,
+# M-F-455 ③) bu problemi zaten çözmüştü ve çözümü benim önerimden GÜÇLÜ:
+# ben *"paket-kümesi anlık görüntüsü, küme değişince öt"* önermiştim — o
+# **BÖLME** yazdı. Fark şu: anlık görüntü DEĞİŞİMİ yakalar, bölme
+# TAMLIĞI ZORLAR. Yeni bir paket eklendiğinde anlık görüntü "değişti" der
+# ve insan onu görmezden gelebilir; bölmede paket üçüncü hâlde kalır ve
+# kapı KIRMIZI yanar. (Koordinatör sevki: *"karşılıyorsa adapte et"*.)
+#
+# **Delik neydi (M-F-455, koordinatörün kendi ölçümü):** `NETWORK_DEP_HINTS`
+# bir RET-LİSTESİDİR — adı listede olmayan bir paket sessizce geçer.
+# Ostinato'da ÖLÇÜLDÜ: `pubspec.lock` 65 paket, `NETWORK_DEPS_RECORDED` 2 →
+# **63 paket hiçbir kapıdan geçmiyordu.** Ve desen tam-eşleşme aradığı için
+# (`^\s+http:`) `http_parser:` gibi ÖNEK PAYLAŞAN bir ad bile görülmüyordu.
+#
+# **Kural:** `pubspec.lock`taki HER paket `NETWORK_DEPS_RECORDED` (ağa
+# çıkabilir, gerekçeli) ⊎ `NETWORK_DEPS_KNOWN_SAFE` (çıkamaz, gerekçeli)
+# bölmesine girmek ZORUNDA. Üçüncü hâl (ikisinde de YOK) ya da çelişki
+# (ikisinde de VAR) → KIRMIZI. Liste kendiliğinden BÜYÜMEZ: yeni paket
+# geldiğinde kapı öter, sınıflandırma bir İNSAN KARARIdır.
+#
+# **DÜRÜST SINIR — isimle (Lissom'un sınırı, aynen taşınıyor):** bu
+# sınıflandırma her paketin KAYNAK KODUNU okuyarak DEĞİL, KATEGORİ+İTİBARLA
+# yapıldı (Dart/Flutter SDK'sının kendi paketleri; tek-amaçlı, I/O yüzeyi
+# olmayan ekosistem paketleri). `http_parser` kaydının kullandığı ilkenin
+# aynısı — 63 paket için tek tek kaynak okuması YAPILMADI.
+#
+# Kapsam: yalnız BUGÜN `pubspec.lock`ta olan paketler.
+NETWORK_DEPS_KNOWN_SAFE = {
+    "args": "komut satırı argüman ayrıştırma, I/O yok",
+    "async": "Future/Stream yardımcıları, kendi başına I/O yapmaz",
+    "boolean_selector": "test etiketi ayrıştırma, I/O yok",
+    "characters": "Unicode grapheme kümesi işlemleri, I/O yok",
+    "clock": "saat soyutlaması (test için), I/O yok",
+    "code_assets": "derleme-zamanı native varlık meta-verisi, I/O yok",
+    "collection": "saf veri yapısı, I/O yok",
+    "crypto": "SHA-256 hesaplama (reference_equivalence kanıt zinciri) — ",
+    "cupertino_icons": "ikon font VARLIĞI (ttf), çalışma zamanı kodu yok — I/O yüzeyi yok",
+    "fake_async": "test için zaman simülasyonu, I/O yok",
+    "ffi": "native bellek/işlev arayüzü (C interop), ağ değil",
+    "flutter": "Flutter SDK",
+    "flutter_lints": "yalnız analiz kuralları (dev_dependency), sevk edilen kodda ÇALIŞMAZ",
+    "flutter_test": "Flutter SDK",
+    "flutter_web_plugins": "Flutter SDK",
+    "hooks": "derleme-zamanı hook sözleşmesi, I/O yok",
+    "http_parser": "HTTP MESAJ AYRIŞTIRMA (başlık/medya-tipi string işleme), SOKET AÇMAZ — adı `http` öneki taşıdığı için ret-listesi desenine benziyor ama ret-listesi deseni TAM eşleşme aradığı için onu HİÇ görmüyordu: bölmenin yakaladığı ilk gerçek vaka",
+    "jni": "Java native interop köprüsü (poz modeli), ağ değil",
+    "jni_flutter": "jni paketinin Flutter eklentisi",
+    "jni_util": "jni paketinin yardımcı kütüphanesi",
+    "leak_tracker": "bellek-sızıntısı test aracı, dev-only, I/O yok",
+    "leak_tracker_flutter_testing": "leak_tracker'ın Flutter eklentisi, dev-only",
+    "leak_tracker_testing": "leak_tracker'ın test-altyapısı parçası, dev-only",
+    "lints": "statik analiz kural paketi, dev-only, ÇALIŞMA ZAMANINDA hiç yok",
+    "logging": "yerel log FASADI, varsayılan sink yok (uzağa göndermez)",
+    "matcher": "test-altyapısı (expect/matcher), I/O yok",
+    "material_color_utilities": "Material renk algoritmaları, saf hesaplama",
+    "meta": "yalnız annotation, çalışma zamanı kodu yok",
+    "motion_camera": "aile paketi, pinli — motion_core ile aynı gerekçe",
+    "motion_core": "aile paketi, pinli — kendi başına A3 kapsamı DIŞINDA ",
+    "objective_c": "Objective-C native interop köprüsü, ağ değil",
+    "ostinato_posture": "BU DEPONUN kendi paketi (path bağımlılığı), ağ kodu yok — kaynağı burada",
+    "package_config": "paket çözümleme meta-verisi okuma (yerel dosya), ağ değil",
+    "path": "dosya yolu string işlemleri, I/O yok",
+    "path_provider": "yerel dizin yolu çözümü, dosya sistemi — ağ değil",
+    "path_provider_android": "path_provider'ın Android platform eklentisi",
+    "path_provider_foundation": "path_provider'ın iOS/macOS platform eklentisi",
+    "path_provider_linux": "path_provider'ın Linux platform eklentisi",
+    "path_provider_platform_interface": "path_provider sözleşme soyutlaması",
+    "path_provider_windows": "path_provider'ın Windows platform eklentisi",
+    "permission_handler": "OS izin API'si, ağa çıkmaz (pubspec.yaml'da beyanlı)",
+    "permission_handler_android": "permission_handler'ın Android eklentisi",
+    "permission_handler_apple": "permission_handler'ın iOS/macOS eklentisi",
+    "permission_handler_html": "permission_handler'ın web eklentisi",
+    "permission_handler_platform_interface": "permission_handler sözleşmesi",
+    "permission_handler_windows": "permission_handler'ın Windows eklentisi",
+    "platform": "işletim sistemi/platform TESPİTİ, ağ değil",
+    "plugin_platform_interface": "Flutter eklenti sözleşme soyutlaması, I/O yok",
+    "pub_semver": "sürüm dizesi ayrıştırma, I/O yok",
+    "record_use": "derleme-zamanı kullanım kaydı (tree-shaking), I/O yok",
+    "sky_engine": "Flutter SDK (Dart core kütüphaneleri SDK snapshot'ı)",
+    "source_span": "kaynak-konum izleme (derleyici altyapısı), I/O yok",
+    "stack_trace": "hata izi biçimlendirme, I/O yok",
+    "stream_channel": "Stream soyutlaması, kendi başına I/O yapmaz",
+    "string_scanner": "string ayrıştırma, I/O yok",
+    "term_glyph": "terminal Unicode/ASCII glif seçimi, I/O yok",
+    "test_api": "test-altyapısı sözleşmesi, I/O yok",
+    "typed_data": "ikili veri görünümleri, I/O yok",
+    "vector_math": "saf matematik (matris/vektör), I/O yok",
+    "vm_service": "Dart VM hata-ayıklama protokolü, yerel/geliştirme aracı",
+    "web": "tarayıcı JS-interop bağlamaları — ÖLÇÜLDÜ: bu depoda `web/` dizini YOK, hedef platformlar yalnız android+ios; kullanılsa bile ÇAĞIRAN kod sorumludur ve kanal ① onu yakalar",
+    "xdg_directories": "Linux XDG dizin yolları, dosya sistemi — ağ değil",
+    "yaml": "YAML ayrıştırma, kendi başına I/O yapmaz",
+}
+
+
+def lock_packages(lock_text: str):
+    """`pubspec.lock`taki paket adları — bölme bunun ÜZERİNDE tanımlıdır."""
+    return re.findall(r"^  ([a-z0-9_]+):$", lock_text, re.MULTILINE)
+
+
 
 # ── F: kullanıcı yüzeyi TEK DİLDİR (bugün: İngilizce) ─────────────────────
 # Bu gece İKİ kez sızdı ve ikisi de BAŞKA bir kuralın yan etkisiyle ya da
@@ -947,6 +1048,32 @@ def selftest() -> int:
     if "http" not in NETWORK_DEPS_RECORDED:
         dead.append("NETWORK_DEPS_RECORDED'da 'http' yok — transitif kayıt "
                     "geri alınmış olabilir")
+    # ⑤ bölmenin İKİ arıza biçimi (Lissom'un iki öz-testinin aynısı):
+    # ① ret-listesi önekine UYMAYAN, sınıflandırılmamış paket sessizce geçmesin
+    # ② çelişkili sınıflandırma (ikisinde de) fark edilsin
+    fake_lock = "  ably_flutter:\n    dependency: transitive\n"
+    fake_pkgs = lock_packages(fake_lock)
+    if "ably_flutter" not in fake_pkgs:
+        dead.append("lock_packages() `ably_flutter`ı ayrıştıramadı — bölme "
+                    "hiçbir şeyin üzerinde tanımlı değil (biçim kayması)")
+    elif NETWORK_DEP_HINTS.search(fake_lock):
+        dead.append("öz-test örneği geçersiz: `ably_flutter` ret-listesine "
+                    "TAKILIYOR, dolayısıyla bölmenin ekstra değerini "
+                    "kanıtlamıyor — listede OLMAYAN bir ad seçilmeli")
+    elif ("ably_flutter" in NETWORK_DEPS_RECORDED
+          or "ably_flutter" in NETWORK_DEPS_KNOWN_SAFE):
+        dead.append("`ably_flutter` bir kayda girmiş — öz-test örneği artık "
+                    "'sınıflandırılmamış' vakasını temsil etmiyor")
+    overlap = set(NETWORK_DEPS_RECORDED) & set(NETWORK_DEPS_KNOWN_SAFE)
+    if overlap:
+        dead.append(f"BÖLME ÇELİŞKİSİ zaten var: {sorted(overlap)} iki kayıtta "
+                    f"birden — ⊎ bozulmuş")
+    # Bölme GERÇEKTEN dolu mu (vakum): 63 paketlik bir kayıt sessizce
+    # boşalırsa kapı "üçüncü hâl yok" der ve yeşil kalır.
+    if len(NETWORK_DEPS_KNOWN_SAFE) < 20:
+        dead.append(f"NETWORK_DEPS_KNOWN_SAFE yalnız "
+                    f"{len(NETWORK_DEPS_KNOWN_SAFE)} kayıt taşıyor (beklenen "
+                    f"≥20) — bölme boşalmış, tamlık kontrolü anlamsız")
     # O-099: izin metni yolu da sahte-sıfır verebilir — ve tam bu yüzey
     # yıllarca ölçülmedi. Uygulama kamerayı kullanıyor, dolayısıyla
     # `NSCameraUsageDescription` OKUNABİLİR olmak zorunda. Bu kontrol
@@ -1083,6 +1210,35 @@ def main() -> int:
             "[yükleme iddiası] VAKUM: hiçbir yüzeyde 'cihazdan çıkmıyor' "
             "iddiası bulunamadı — ya cümleler kaldırıldı ya tarama kırıldı; "
             "iki hâlde de bu kuralın yeşili anlamsız")
+
+    # ── ⑤ BÖLME TAMLIĞI (Lissom `1abd4a0`ten adapte) ─────────────────────
+    # Ret-listesi ANDIĞINI yakalar; bölme ANMADIĞINI da yakalar. Bu kontrol
+    # ret-listesinin YERİNE geçmez, ÜSTÜNE biner: HINTS bir paketi ağ-ailesi
+    # diye işaretleyip kayıtsız bulursa yukarıdaki ihlal düşer; burada ise
+    # SINIFLANDIRILMAMIŞ kalan her paket düşer.
+    lock_pkgs = lock_packages(Path("pubspec.lock").read_text(encoding="utf-8"))
+    unclassified = [p for p in lock_pkgs
+                    if p not in NETWORK_DEPS_RECORDED
+                    and p not in NETWORK_DEPS_KNOWN_SAFE]
+    contradictory = [p for p in lock_pkgs
+                     if p in NETWORK_DEPS_RECORDED
+                     and p in NETWORK_DEPS_KNOWN_SAFE]
+    if unclassified:
+        violations.append(
+            f"[bölme] {len(unclassified)} paket ÜÇÜNCÜ HÂLDE: ne "
+            f"`NETWORK_DEPS_RECORDED`da ne `NETWORK_DEPS_KNOWN_SAFE`de — "
+            f"{', '.join(unclassified[:8])}"
+            f"{' …' if len(unclassified) > 8 else ''}. Ret-listesi bunları "
+            f"ANMADIĞI için sessizce geçiriyordu; sınıflandırma bir İNSAN "
+            f"KARARIDIR, gerekçesiyle yazın (M-F-455 ③ / Lissom 1abd4a0)")
+    if contradictory:
+        violations.append(
+            f"[bölme] ÇELİŞKİLİ sınıflandırma — {', '.join(contradictory)} "
+            f"hem 'ağa çıkabilir' hem 'çıkamaz' kaydında; bölme ⊎ olmalı")
+    if not lock_pkgs:
+        violations.append(
+            "[bölme] VAKUM: `pubspec.lock`tan hiç paket adı ayrıştırılamadı — "
+            "bölmenin yeşili anlamsız (biçim değişmiş olabilir)")
 
     # ── Kural C ──
     audio_declared = ios_declares("NSMicrophoneUsageDescription") or \
@@ -1307,6 +1463,10 @@ def main() -> int:
     # O-100: yüzey SINIFI başına dosya/prosa sayımı — bir sınıfın SIFIR
     # olması da ADIYLA yazılır. "Mağaza: 0 dosya" cümlesi, o yüzeyin
     # taranmadığını değil VAR OLMADIĞINI söyler; ikisi karıştırılamaz.
+    print(f"   ⑤ bağımlılık bölmesi (Lissom 1abd4a0'ten adapte): "
+          f"{len(lock_pkgs)} paket = {len(NETWORK_DEPS_RECORDED)} kayıtlı "
+          f"(ağa çıkabilir) ⊎ {len(NETWORK_DEPS_KNOWN_SAFE)} güvenli "
+          f"(çıkamaz) · üçüncü hâl 0 · çelişki 0")
     print("   platform/mağaza kapsamı (O-099/O-100 — alan-adı beyaz listesi "
           "YOK, prosa biçiminden türer):")
     for cls, (files, prose) in surface_report.items():
