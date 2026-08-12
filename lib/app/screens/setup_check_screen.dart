@@ -364,12 +364,28 @@ class _Skeleton extends StatelessWidget {
       );
 }
 
+// PLACEHOLDER(asset): KAMERA ÖNİZLEMESİ YOK — bu ekran kadraj rehberi olarak
+// canlı görüntü yerine yukarıdaki STATİK iskeleti çiziyor. Sınıf: ERTELENMİŞ
+// (yapılabilir, biz yapmadık) — `Texture(`/`textureId`/`registrar.textures`
+// ölçüldü: sevk edilen kodda SIFIR; pozitif kontrol `motion_camera|
+// CameraSession` 8 satır, yani kamerayı GERÇEKTEN kullanıyoruz, göstermiyoruz.
+// unblocked by: `motion_camera`nın `registrar.textures` yolunun bu ekrana
+// bağlanması (JabLab `skeleton_overlay.dart` ile AYNI sınıf ve AYNI pin —
+// iki hattın farklı sınıflandırması tek kısıtı iki şeymiş gibi okuturdu).
+// source-only: kullanıcıya "kameranı göstermiyoruz" diyen bir cümle YOK.
+// ⚠️ Bunun bir KULLANICI SONUCU var ve adıyla kayıtlı: kişi kendi kadrajını
+// göremiyor, yalnız "kalçandan omzuna görünmelisin" yazısını okuyor. Cümle
+// YAZMAK bir yüzey kararıdır (koordinatöre bildirildi, sevk kapsamı dışı).
+
 // PLACEHOLDER(flow): oda gürültü-tabanı yakalama adımı KAPALI — tasarım
 // 3-5sn sessizlik ölçen bir kalibrasyon gösterir, bu ekran onun yerine
 // dürüst bir "henüz yok" kartı gösterir (aşağıda). unblocked by: gerçek
 // bir mikrofon-giriş eklentisi `ostinato_audio`nun var olan
 // `AudioConfidenceGate`ine bağlanıp bu ekranın state machine'ine
 // (_Stage.room) gerçek bir örnekleme/geri-sayım aşaması eklenince.
+// user-surface: setup-room-gap-body
+// (O-107: bu beyanın KULLANICI cümlesi silinse iki kapı da yeşil kalıyordu —
+//  sabotajla ölçüldü; artık `validate_placeholder_surface.py` onu koruyor.)
 class _RoomGapNotice extends StatelessWidget {
   const _RoomGapNotice({required this.onContinue});
   final VoidCallback onContinue;

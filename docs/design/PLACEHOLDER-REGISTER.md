@@ -2,11 +2,12 @@
 
 `python3 tools/gen_placeholder_register.py` ile üretilir. Kaynak: `lib/**/*.dart`taki `PLACEHOLDER(kategori): ... — unblocked by: ...` işaretleri + `assets/content/library.json`daki `locked`/`demoOnly` dersler. Bu dosyayı ELLE DÜZENLEME — kaynağı düzenle, betiği koş.
 
-**Toplam: 17 kalem.**
+**Toplam: 18 kalem.**
 
-## asset — görsel/foto (0)
+## asset — görsel/foto (1)
 
-_Kayıtlı kalem yok._
+- **`lib/app/screens/setup_check_screen.dart:367`**
+  KAMERA ÖNİZLEMESİ YOK — bu ekran kadraj rehberi olarak canlı görüntü yerine yukarıdaki STATİK iskeleti çiziyor. Sınıf: ERTELENMİŞ (yapılabilir, biz yapmadık) — `Texture(`/`textureId`/`registrar.textures` ölçüldü: sevk edilen kodda SIFIR; pozitif kontrol `motion_camera| CameraSession` 8 satır, yani kamerayı GERÇEKTEN kullanıyoruz, göstermiyoruz. unblocked by: `motion_camera`nın `registrar.textures` yolunun bu ekrana bağlanması (JabLab `skeleton_overlay.dart` ile AYNI sınıf ve AYNI pin — iki hattın farklı sınıflandırması tek kısıtı iki şeymiş gibi okuturdu). source-only: kullanıcıya "kameranı göstermiyoruz" diyen bir cümle YOK. ⚠️ Bunun bir KULLANICI SONUCU var ve adıyla kayıtlı: kişi kendi kadrajını göremiyor, yalnız "kalçandan omzuna görünmelisin" yazısını okuyor. Cümle YAZMAK bir yüzey kararıdır (koordinatöre bildirildi, sevk kapsamı dışı).
 
 ## copy — metin (0)
 
@@ -15,7 +16,7 @@ _Kayıtlı kalem yok._
 ## data — içerik/ölçüm (14)
 
 - **`lib/app/screens/lesson_demo_screen.dart:143`**
-  bu kart canlı dirsek/önkol açısı GÖSTERMEZ, yalnız statik ArmRangeHint (öğretmen aralığı) gösterir — unblocked by: motion_core'daki StandardJoints.leftElbow/rightElbow CameraPostureAdapter'a bağlanıp gerçek zamanlı bir açı üretilince (aynı sınır: widgets.dart içindeki SkeletonFigurePainter dirsek/bilek noktaları).
+  bu kart canlı dirsek/önkol açısı GÖSTERMEZ, yalnız statik ArmRangeHint (öğretmen aralığı) gösterir — unblocked by: motion_core'daki StandardJoints.leftElbow/rightElbow CameraPostureAdapter'a bağlanıp gerçek zamanlı bir açı üretilince (aynı sınır: widgets.dart içindeki SkeletonFigurePainter dirsek/bilek noktaları). user-surface: demo-live-gap-note
 - **`library.json: guitar.foundations.arms`**
   You see the range the teachers we recorded occupy for elbows and forearms, next to a figure of your own trunk. What you do NOT see is your own elbow angle: there is no live elbow measurement in this build, which is also why the arms in that figure are drawn as dashed lines and carry no joint dots. And even with it you would not get a mark, because there is nothing honest to mark you against. unblocked by: A measurement that separates style from mistake on this joint chain — e.g. a harvest where takes are labelled by teaching intent, so agreement can be computed within intent rather than across it.
 - **`library.json: guitar.foundations.foot_support`**
@@ -46,8 +47,8 @@ _Kayıtlı kalem yok._
 ## flow — kapalı adım (3)
 
 - **`lib/app/screens/onboarding_screen.dart:33`**
-  yaş bandı / vasi onayı (O4) — bu akışta YOK. unblocked by: çocuk rejiminin tasarlanıp tasarlanmayacağına dair kurucu kararı; karar "evet" olursa kapı BURAYA girer (karşılamadan sonra, kütüphaneden önce), çünkü akışı durdurabilecek tek nokta burasıdır.
+  yaş bandı / vasi onayı (O4) — bu akışta YOK. unblocked by: çocuk rejiminin tasarlanıp tasarlanmayacağına dair kurucu kararı; karar "evet" olursa kapı BURAYA girer (karşılamadan sonra, kütüphaneden önce), çünkü akışı durdurabilecek tek nokta burasıdır. source-only: adım AKIŞTA HİÇ YOK — var olmayan bir adımın kullanıcı cümlesi de olamaz; çocuk rejimi tasarlanırsa yüzey O ZAMAN doğar.
 - **`lib/app/screens/settings_screen.dart:11`**
-  çocuk rejimi (ayrı akış/izin/UI) bu ekranda YOK — unblocked by: kurucu ürün kararı (tasarlanıp tasarlanmayacağı bile henüz KARARLAŞTIRILMADI, bu yüzden burada bir toggle/iskele de YOK — var olmayan bir karara sahte bir yer tutucu inşa etmek kendisi bir taklit olurdu). / Canlı çalgı cümlesi — SAYI ve ADLAR `library.json`dan TÜRER. / Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce / yanlış olur ve hiçbir test kırılmaz (O-068).
-- **`lib/app/screens/setup_check_screen.dart:367`**
-  oda gürültü-tabanı yakalama adımı KAPALI — tasarım 3-5sn sessizlik ölçen bir kalibrasyon gösterir, bu ekran onun yerine dürüst bir "henüz yok" kartı gösterir (aşağıda). unblocked by: gerçek bir mikrofon-giriş eklentisi `ostinato_audio`nun var olan `AudioConfidenceGate`ine bağlanıp bu ekranın state machine'ine (_Stage.room) gerçek bir örnekleme/geri-sayım aşaması eklenince.
+  çocuk rejimi (ayrı akış/izin/UI) bu ekranda YOK — unblocked by: kurucu ürün kararı (tasarlanıp tasarlanmayacağı bile henüz KARARLAŞTIRILMADI, bu yüzden burada bir toggle/iskele de YOK — var olmayan bir karara sahte bir yer tutucu inşa etmek kendisi bir taklit olurdu). source-only: ekranda çocuk rejimine dair kullanıcı cümlesi YOK ve olmamalı — olmayan bir rejimi anlatmak onu varmış gibi gösterirdi. / Canlı çalgı cümlesi — SAYI ve ADLAR `library.json`dan TÜRER. / Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce / yanlış olur ve hiçbir test kırılmaz (O-068).
+- **`lib/app/screens/setup_check_screen.dart:380`**
+  oda gürültü-tabanı yakalama adımı KAPALI — tasarım 3-5sn sessizlik ölçen bir kalibrasyon gösterir, bu ekran onun yerine dürüst bir "henüz yok" kartı gösterir (aşağıda). unblocked by: gerçek bir mikrofon-giriş eklentisi `ostinato_audio`nun var olan `AudioConfidenceGate`ine bağlanıp bu ekranın state machine'ine (_Stage.room) gerçek bir örnekleme/geri-sayım aşaması eklenince. user-surface: setup-room-gap-body (O-107: bu beyanın KULLANICI cümlesi silinse iki kapı da yeşil kalıyordu — sabotajla ölçüldü; artık `validate_placeholder_surface.py` onu koruyor.)

@@ -13,6 +13,8 @@ import '../design/widgets.dart';
 // henüz KARARLAŞTIRILMADI, bu yüzden burada bir toggle/iskele de YOK —
 // var olmayan bir karara sahte bir yer tutucu inşa etmek kendisi bir
 // taklit olurdu).
+// source-only: ekranda çocuk rejimine dair kullanıcı cümlesi YOK ve
+// olmamalı — olmayan bir rejimi anlatmak onu varmış gibi gösterirdi.
 /// Canlı çalgı cümlesi — SAYI ve ADLAR `library.json`dan TÜRER.
 /// Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce
 /// yanlış olur ve hiçbir test kırılmaz (O-068).

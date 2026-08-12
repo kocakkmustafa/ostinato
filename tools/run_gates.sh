@@ -81,6 +81,8 @@ run "eşik türetimi (artefakt↔config)" python3 tools/derive_posture_threshold
 run "gözlem işareti sözleşmesi"     python3 tools/validate_observation_cues.py
 run "uzman-bekleyen envanteri"        python3 tools/gen_expert_inventory.py
 run "placeholder kaydı"               python3 tools/gen_placeholder_register.py --check
+run "yer tutucu ↔ KULLANICI yüzeyi" python3 tools/validate_placeholder_surface.py
+run "yer tutucu kapısı öz-testi"     python3 tools/validate_placeholder_surface.py --selftest
 run "pozitif-ikiz denetimi"        python3 tools/positive_twin_audit.py
 run "fixture envanteri"               python3 tools/fixture_check.py
 run "replay (3 çalgı)"                python3 tools/replay_check.py

@@ -147,6 +147,7 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 // bağlanıp gerçek zamanlı bir açı üretilince (aynı sınır:
                 // widgets.dart içindeki SkeletonFigurePainter dirsek/bilek
                 // noktaları).
+                  // user-surface: demo-live-gap-note
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
