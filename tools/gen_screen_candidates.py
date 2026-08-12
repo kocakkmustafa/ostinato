@@ -115,6 +115,46 @@ def camera_dependency(name, src_by_file):
     return ""
 
 
+#: (b) KÖK VARIŞ — `home:` kökünde rota push'u OLMADAN doğan yüzeyler.
+#:
+#: ⚠️ Neden TÜRETİLİYOR (O-116, koordinatör hükmü): testte `expect(rootMembers,
+#: 2)` yazılıydı ve gerekçesi *"kök varış YAPISAL olarak ikidir"* diyordu.
+#: Ölçüm bunu ÇÜRÜTTÜ: iki oluşu `main.dart`ın BUGÜNKÜ dallanmasının sonucu —
+#: üçüncü bir dal eklemek meşru bir değişikliktir ve o gün kapı, DOĞRU bir
+#: değişikliği kırmızı basardı.
+#:
+#: > ***'YAPISAL' DEMEK, 'BUGÜN BÖYLE' DEMEKTEN FARKLIDIR — VE ARADAKİ FARK
+#: > ANCAK ÖLÇÜLEREK BİLİNİR.***
+#:
+#: Yapısal olan şey SAYI değil KURAL: *kök varış, `OstinatoHome`un rota
+#: kurmadan döndürebildiği yüzeydir.* Kural burada kodlanır, sayı ondan düşer.
+HOME_STATE = "_OstinatoHomeState"
+#: ⚠️ `const`/`new` ATLANIR — ilk yazımım `return\s+([A-Z]...)` idi ve
+#: `return const SettingsScreen();` satırını HİÇ GÖRMÜYORDU. Sabotajla
+#: ölçüldü (O-116): `main.dart`a üçüncü bir kök dal eklendi, kapı SESSİZ
+#: kaldı — sabotaj kötü değildi, KAPI KÖRDÜ. Dart'ta kök yüzeyin `const`
+#: olması hiç de olağandışı değil (parametresiz `StatelessWidget`).
+_RETURNS = re.compile(r"return\s+(?:const\s+|new\s+)?([A-Z][A-Za-z0-9_]*)\s*\(")
+
+#: Sabotajın KALICI İKİZİ — desen bir daha bu üç biçimden birini kaybederse
+#: öz-test öter. Sentetik: gerçek kaynağın bugünkü hâline bağlı DEĞİL.
+_RETURN_SAMPLES = [
+    ("return LibraryScreen(repo: r);", "LibraryScreen"),
+    ("return const SettingsScreen();", "SettingsScreen"),
+    ("return new LegacyScreen();", "LegacyScreen"),
+]
+
+
+def root_surfaces(src_by_file):
+    """`OstinatoHome`un rota KURMADAN döndürebildiği yüzeyler — kaynaktan."""
+    out = set()
+    for _f, t in src_by_file.items():
+        for name, body in _class_bodies(strip_dart_comments(t)):
+            if name == HOME_STATE:
+                out |= set(_RETURNS.findall(body))
+    return out - set(NOT_A_DESTINATION)
+
+
 def derive():
     by_name, by_structure = set(), set()
     for f in sorted(LIB.rglob("*.dart")):
@@ -129,7 +169,36 @@ def derive():
     return by_name, by_structure
 
 
+def selftest() -> int:
+    """Desenler, adlandırma/biçim değişkenliğine karşı SENTETİK sınanır."""
+    dead = []
+    for src, want in _RETURN_SAMPLES:
+        got = _RETURNS.findall(src)
+        if got != [want]:
+            dead.append(f"KÖK DESENİ `{src}` için {got} buldu, [{want}] "
+                        f"bekleniyordu — bir dönüş biçimi görünmez oldu "
+                        f"(ölçülmüş vaka: `const`)")
+    if _RETURNS.findall("return widget.child;"):
+        dead.append("KÖK DESENİ yapıcı-olmayan dönüşü sayıyor (yanlış-pozitif)")
+    roots = root_surfaces({str(f): f.read_text(encoding="utf-8")
+                           for f in sorted(LIB.rglob("*.dart"))})
+    if not roots:
+        dead.append(f"VAKUM: `{HOME_STATE}` içinde kök yüzey bulunamadı — "
+                    f"sınıf adı ya da dallanma biçimi değişmiş")
+    if dead:
+        print(f"⛔ {len(dead)} ÖLÜ DESEN (öz-test başarısız):")
+        for d in dead:
+            print(f"   - {d}")
+        return 1
+    print(f"✅ aday-kümesi öz-testi GEÇTİ — kök deseni üç dönüş biçimini de "
+          f"görüyor (düz · const · new), yapıcı-olmayan dönüşü saymıyor; "
+          f"bu ağaçta {len(roots)} kök yüzey")
+    return 0
+
+
 def main() -> int:
+    if "--selftest" in sys.argv:
+        return selftest()
     by_name, by_structure = derive()
     only_name = sorted(by_name - by_structure)
     only_struct = sorted(by_structure - by_name)
@@ -160,6 +229,16 @@ def main() -> int:
         return 1
     src_by_file = {str(f): f.read_text(encoding="utf-8")
                    for f in sorted(LIB.rglob("*.dart"))}
+    roots = sorted(root_surfaces(src_by_file))
+    if not roots:
+        print(f"⛔ VAKUM: `{HOME_STATE}` içinde hiç kök yüzey bulunamadı — "
+              f"ya sınıf yeniden adlandırıldı ya dallanma başka bir biçime "
+              f"geçti; 'kök varış' beklentisi GEÇERSİZ")
+        return 1
+    if set(roots) - set(candidates):
+        print(f"⛔ kök yüzey aday kümesinde YOK: "
+              f"{sorted(set(roots) - set(candidates))} — iki türetim ayrıştı")
+        return 1
     reasons = {}
     for c in candidates:
         r = camera_dependency(c, src_by_file)
@@ -169,6 +248,13 @@ def main() -> int:
         "$why": "TÜRETİLDİ — elle yazılmaz. İki bağımsız türetim (AD + YAPI) "
                 "uzlaştı. Kaynak: tools/gen_screen_candidates.py",
         "candidates": candidates,
+        "rootSurfaces": roots,
+        "$rootSurfaces": (
+            "TÜRETİLDİ — `%s` içinde rota KURMADAN `return X(` edilen "
+            "yüzeyler. Bu bir SAYI değil KURAL: üçüncü bir dal meşruysa sayı "
+            "kendiliğinden 3 olur; ama bir varışı `root` BEYAN edip burada "
+            "GÖRÜNMEMEK tanık gereksiniminden kaçmaktır ve kapı öter."
+            % HOME_STATE),
         "notADestination": NOT_A_DESTINATION,
         "cameraDependency": reasons,
         "$handWrittenIsLowerBound":

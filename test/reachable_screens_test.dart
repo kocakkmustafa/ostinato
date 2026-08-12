@@ -352,21 +352,40 @@ void main() {
         arrivalKind.values.where((String k) => k == 'root').length;
     // 🔴 KÖK VARIŞ SINIRI — sabotajla ölçüldü (O-115): bir üyeyi `root`
     // beyan etmek tanık gereksinimini DÜŞÜRÜYORDU, yani yanlış bir beyan
-    // sessizce geçiyordu. Kök varış YAPISAL olarak ikidir ve ikisi de
-    // ADIYLA bilinir: `OnboardingScreen` (`home:` kökü) ve `LibraryScreen`
-    // (`OstinatoHome` içinde `setState` takası — `pushReplacement` bile
-    // değil). Üçüncü bir kök varış, beyan değil BULGUDUR.
-    expect(rootMembers, 2,
-        reason: '(b) kök varış sayısı 2 değil ($rootMembers) — bir üyelik '
-            '`root` beyan edilerek TANIK GEREKSİNİMİNDEN kaçmış olabilir; '
-            'kök varış yapısaldır ve ikisi adıyla bilinir');
-    expect(arrivalKind['OnboardingScreen'], 'root');
-    expect(arrivalKind['LibraryScreen'], 'root');
+    // sessizce geçiyordu.
+    //
+    // ⚠️ O-116 DÜZELTMESİ: burada `expect(rootMembers, 2)` yazılıydı ve
+    // gerekçesi *"kök varış YAPISAL olarak ikidir"* diyordu. ÖLÇÜM bunu
+    // ÇÜRÜTTÜ: iki oluşu `main.dart`ın BUGÜNKÜ dallanmasının sonucu, yapının
+    // zorunluluğu değil — üçüncü bir dal MEŞRU bir değişikliktir ve o gün bu
+    // satır DOĞRU bir değişikliği kırmızı basardı.
+    //
+    // > ***'YAPISAL' DEMEK, 'BUGÜN BÖYLE' DEMEKTEN FARKLIDIR — VE ARADAKİ
+    // > FARK ANCAK ÖLÇÜLEREK BİLİNİR.***
+    //
+    // Yapısal olan SAYI değil KURAL: *kök varış, `OstinatoHome`un rota
+    // kurmadan döndürebildiği yüzeydir.* Kural `gen_screen_candidates.py`de
+    // kodlu; buraya KÜME olarak iner — sayı değil, KİMLİK bağlanır. Beyanı
+    // `root` olup kaynakta kök OLMAYAN bir varış, tanık gereksiniminden
+    // kaçmış demektir ve kapı öter.
+    final Set<String> rootSurfaces =
+        (gen['rootSurfaces'] as List<dynamic>).cast<String>().toSet();
+    final Set<String> declaredRoot = arrivalKind.entries
+        .where((MapEntry<String, String> e) => e.value == 'root')
+        .map((MapEntry<String, String> e) => e.key)
+        .toSet();
+    expect(declaredRoot, rootSurfaces,
+        reason: '(b) `root` BEYAN edilen varışlar ($declaredRoot), kaynaktan '
+            'türetilen kök yüzeylerle ($rootSurfaces) eşleşmiyor. FAZLA = bir '
+            'üyelik `root` beyan edilerek TANIK GEREKSİNİMİNDEN kaçtı; EKSİK '
+            '= kaynakta kök olan bir yüzeye bu yürüyüşte VARILMADI. Sayı '
+            'değil KİMLİK bağlıdır: üçüncü bir kök dal eklemek kaynağı '
+            'değiştirir ve beklenti onu KENDİLİĞİNDEN izler');
     // ignore: avoid_print
     print('   (b) üyelik başına tanık: $pushArrivals push VARIŞI ↔ '
         '${witness.pushed.length} tanık olayı · $pushMembers push-üyesi · '
-        '$rootArrivals kök varış (rota DEĞİL, ADIYLA sınırlı: '
-        'Onboarding+Library)\n');
+        '$rootArrivals kök varış / $rootMembers kök üye '
+        '(KAYNAKTAN türetildi: ${rootSurfaces.toList()..sort()})\n');
     expect(witness.pushed.length, greaterThanOrEqualTo(pushArrivals),
         reason: '(b) `push` beyan eden $pushArrivals VARIŞ var ama tanık '
             'yalnız ${witness.pushed.length} olay gördü — bir varış TANIKSIZ '

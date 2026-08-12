@@ -94,6 +94,20 @@ SENTINEL_RANGE = range(900, 1000)
 #: > ***Bir numaradan söz etmek onu var eder — ve bu, `O-999`dan sonra AYNI
 #: > SEANSTA ÜÇÜNCÜ kez oldu. Kural artık yazılı: PROB NUMARASI 9xx'ten
 #: > SEÇİLİR; seçilmediyse buraya ADIYLA girer.***
+#:
+#: ⚠️ **MUAFİYETİN DAYANDIĞI VARSAYIM — adıyla (O-116, koordinatör hükmü):**
+#: `SENTINEL_RANGE` ve `PROBE_IDS`, bu numaraların git geçmişinde GEÇTİĞİ
+#: ölçümüne dayanır (`O-999` 5×, `O-777` 4× — 2026-08-12). Öz-test bu varlığı
+#: bir GEREKÇE-ÇAPASI olarak sınar: numara geçmişten kaybolursa muafiyet boşa
+#: koşuyor demektir ve çapa öter.
+#:
+#: > ***Bu muafiyet, git geçmişinin yeniden yazılmadığı VARSAYIMINA dayanır;
+#: > yazılırsa gerekçe-çapası öter — ve DOĞRU sebeple.***
+#:
+#: Yani bu bir KIRILGANLIK değil TASARIM: `rebase`/`filter-branch` muafiyetin
+#: gerekçesini gerçekten geçersiz kılar, ve kapının o gün susması —
+#: gerekçesiz bir muafiyeti sessizce taşıması — daha kötü olurdu. (Bu ağaçta
+#: `pull.rebase` AYARLI DEĞİL; ölçüldü, varsayılmadı.)
 PROBE_IDS = {777}
 
 
@@ -149,6 +163,32 @@ def subject_ids():
         ["git", "-C", str(ROOT), "log", "--format=%s"],
         capture_output=True, text=True).stdout
     return {n for n in expand(log) if n not in SENTINEL_RANGE}
+
+
+_ANCHORED = re.compile(r"^O-\d+")
+_ANYWHERE = re.compile(r"\bO-\d+")
+
+#: ⑴c SENTETİK KORPUS — deponun DİSİPLİNİNİ değil, DESENLERİN erişimini ölçer.
+#:
+#: ⚠️ Neden (O-116): eski kontrol `anchored >= mentions` ise ÖTÜYORDU, yani
+#: *"bu ağaç çok-biçimli"* varsayımına dayanıyordu. Ölçüldü: bugün 36/93.
+#: Ama herkes başlığa `O-123` yazmaya BAŞLARSA eşitlik gelir ve kapı
+#: **iyileşmeyi kusur diye** basar. Kontrolün NİYETİ bu değildi:
+#:
+#: > ***GENİŞ DESEN, ÇAPALI DESENDEN AZ BULAMAZ*** — bu, desenlerin bir
+#: > ÖZELLİĞİ; deponun bir HÂLİ değil. Özellik sentetik korpusta sınanır,
+#: > hâl ise ölçülüp RAPORLANIR (kapı yapılmaz).
+CORPUS = [
+    "O-101 kayıt: başta çapalı — iki desen de görür",
+    "fix: bkz. O-102 — yalnız GENİŞ desen görür",
+    "refactor: hiç numara yok — hiçbir desen görmez",
+]
+
+
+def pattern_reach(subjects):
+    """İki desenin ERİŞİMİ — verilen başlıklarda, depoda değil."""
+    return (len([l for l in subjects if _ANCHORED.match(l)]),
+            len([l for l in subjects if _ANYWHERE.search(l)]))
 
 
 def body_only_unrecorded():
@@ -287,15 +327,23 @@ def selftest() -> int:
     if 999 in commits:
         dead.append("SENTİNEL SIZDI: `O-999` kayıt sayılıyor — `9xx` aralığı "
                     "ayrılmış olmasına rağmen girdiye karışıyor")
-    # ③ Çapalı desen bu ağaçta YETERSİZ — kanıtı kayda geçsin.
+    # ③ İKİ DESENİN ERİŞİMİ — SENTETİK korpusta, depo disiplininde DEĞİL.
+    if pattern_reach(CORPUS) != (1, 2):
+        dead.append(f"DESEN ERİŞİMİ bozuk: sentetik korpusta (çapalı=1, "
+                    f"geniş=2) beklenirken {pattern_reach(CORPUS)} — ya "
+                    f"çapa `^` kaybolmuş (çapalı genişledi) ya geniş desen "
+                    f"daralmış; ikisi de bu kapının iki yönünü çökertir")
+    # ⭐ EŞİTLİK ARTIK KUSUR DEĞİL: herkes başlığa numara yazarsa çapalı=geniş
+    #    olur ve bu bir İYİLEŞMEDİR. Eski kontrol tam burayı kırmızı basıyordu.
+    if pattern_reach(["O-1 a", "O-2 b"]) != (2, 2):
+        dead.append("tam disiplinli korpusta çapalı≠geniş — desen, kendi "
+                    "gördüğü satırı öteki desene kaptırıyor")
+    if pattern_reach([]) != (0, 0):
+        dead.append("VAKUM: boş korpustan sıfır olmayan erişim döndü")
+    # Depodaki HÂL ölçülür ve RAPORLANIR — kapı yapılmaz (bkz. CORPUS notu).
     log = subprocess.run(["git", "-C", str(ROOT), "log", "--format=%s"],
                          capture_output=True, text=True).stdout
-    anchored = len([l for l in log.split("\n") if re.match(r"^O-\d+", l)])
-    mentions = len([l for l in log.split("\n") if re.search(r"\bO-\d+", l)])
-    if anchored >= mentions:
-        dead.append(f"çapalı desen ({anchored}) mention'la ({mentions}) eşit "
-                    f"— bu ağacın çok-biçimli olduğu varsayımı ARTIK YANLIŞ, "
-                    f"desen gerekçesi tazelenmeli")
+    anchored, mentions = pattern_reach(log.split("\n"))
     # ④ OLUMSUZ İKİZ: bugünkü ağaç gedik VERMEMELİ.
     if (commits - defter - KNOWN_EMPTY - PRE_COMMIT_ERA
             - {n for n in defter if n > max(commits or {0})}):
@@ -320,8 +368,9 @@ def selftest() -> int:
             print(f"   - {d}")
         return 1
     print(f"✅ tazelik kapısı öz-testi GEÇTİ — birleşik numara açılıyor "
-          f"(O-089/090 · O-077/078/079) · çapalı desen bu ağaçta {anchored}/"
-          f"{mentions} görürdü (yetersiz, gerekçe geçerli) · bugünkü ağaç "
+          f"(O-089/090 · O-077/078/079) · desen erişimi SENTETİK korpusta "
+          f"sınandı (çapalı 1 ⊆ geniş 2, eşitlik KUSUR DEĞİL) · bu ağaçtaki "
+          f"HÂL yalnız rapor: çapalı {anchored}/{mentions} · bugünkü ağaç "
           f"gediksiz")
     return 0
 

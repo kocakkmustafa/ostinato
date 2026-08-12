@@ -13,6 +13,11 @@
     "SettingsScreen",
     "SetupCheckScreenRoute"
   ],
+  "rootSurfaces": [
+    "LibraryScreen",
+    "OnboardingScreen"
+  ],
+  "$rootSurfaces": "TÜRETİLDİ — `_OstinatoHomeState` içinde rota KURMADAN `return X(` edilen yüzeyler. Bu bir SAYI değil KURAL: üçüncü bir dal meşruysa sayı kendiliğinden 3 olur; ama bir varışı `root` BEYAN edip burada GÖRÜNMEMEK tanık gereksiniminden kaçmaktır ve kapı öter.",
   "notADestination": {
     "OstinatoApp": "MaterialApp sarmalayıcısı — kullanıcı buraya GİTMEZ, uygulama burada BAŞLAR",
     "OstinatoHome": "karşılama↔kütüphane ANAHTARI (`home:` içinde durum değiştirir, rota DEĞİL) — kullanıcı ona 'gidemez'"

@@ -74,17 +74,38 @@ DECLARED = {
 }
 
 
+def detect(prod_sources, test_sources, bundled_names):
+    """SAF DEDEKTÖR — dosya sistemine DOKUNMAZ, verilen kaynakları ölçer.
+
+    ⚠️ Neden ayrıldı (O-116): öz-test *"üretimde HİÇ font API çağrısı
+    bulunamadı"* diye ötüyordu, yani kontrol **bugünkü DURUMA** dayanıyordu.
+    Ölçüldü (sabotaj): font gömülüp `GoogleFonts.*` kaldırılınca öz-test
+    **EXIT=1** verdi — oysa font gömmek **kurucunun açık kararı ve İSTENEN
+    sonuç.**
+
+    > ***BİR KAPI, KENDİ ÜRÜNÜNÜN İLERLEMESİNİ CEZALANDIRIYORSA, O KAPI
+    > ÜRÜNÜN DÜŞMANIDIR*** — ve yanlış alarm veren kapılar, GERÇEK kapıları
+    > öldüren basıncı üretir.
+
+    Kontrolün NİYETİ *"çalışma-anı-çekme DEDEKTÖRÜ çalışıyor"*dur, *"ürün
+    bugün çekiyor"* değil. Bu fonksiyon o niyeti **sonuçtan bağımsız**
+    sınanabilir kılar: kapı gerçek kaynağı okumaya DEVAM EDER, yalnız
+    öz-testin fixture'ı sentetikleşir.
+    """
+    prod_calls = sum(len(FONT_API.findall(re.sub(r"//.*", "", s)))
+                     for s in prod_sources)
+    prod_disabled = any(FETCH_DISABLED.search(re.sub(r"//.*", "", s))
+                        for s in prod_sources)
+    test_disabling = [i for i, s in enumerate(test_sources)
+                      if FETCH_DISABLED.search(s)]
+    return prod_calls, prod_disabled, test_disabling
+
+
 def measure():
     """Bugünkü gerçek — dosyalardan, beyandan DEĞİL."""
-    prod_calls = 0
-    for f in sorted(LIB.rglob("*.dart")):
-        src = f.read_text(encoding="utf-8")
-        # yorumları saymayız: yorumda geçen bir API çağrısı davranış değildir
-        src = re.sub(r"//.*", "", src)
-        prod_calls += len(FONT_API.findall(src))
-    prod_disabled = any(
-        FETCH_DISABLED.search(re.sub(r"//.*", "", f.read_text(encoding="utf-8")))
-        for f in LIB.rglob("*.dart"))
+    prod = [f.read_text(encoding="utf-8") for f in sorted(LIB.rglob("*.dart"))]
+    tests = [f.read_text(encoding="utf-8") for f in sorted(TEST.rglob("*.dart"))]
+    prod_calls, prod_disabled, test_disabling = detect(prod, tests, [])
     test_disabling = sorted(
         str(f) for f in TEST.rglob("*.dart")
         if FETCH_DISABLED.search(f.read_text(encoding="utf-8")))
@@ -130,12 +151,28 @@ def selftest() -> int:
     """Kapı, ölçümü GERÇEKTEN yapıyor mu — yoksa beyanı mı okuyor?"""
     dead = []
     actual = measure()
-    if actual["productionFontApiCalls"] < 1:
-        dead.append("üretimde HİÇ font API çağrısı bulunamadı — tarama ölmüş "
-                    "olabilir (bu depoda 3 çağrı VAR, ölçüldü)")
-    if actual["testFilesDisablingFetch"] < 1:
-        dead.append("çekmeyi kapatan test dosyası bulunamadı — desen ölmüş "
-                    "(bu depoda 8 dosya VAR)")
+    # ✅ SENTETİK DEDEKTÖR SINAMASI (O-116) — sonuçtan BAĞIMSIZ.
+    # Eskiden burada `actual["productionFontApiCalls"] < 1` vardı ve font
+    # gömüldüğü gün öterdi; artık dedektörün KENDİSİ sınanıyor.
+    calls, disabled, tests_off = detect(
+        ["final t = GoogleFonts.hankenGrotesk();  // gerçek çağrı",
+         "// GoogleFonts.ibmPlexMono(); yalnız YORUM — sayılmamalı"],
+        ["void main(){ GoogleFonts.config.allowRuntimeFetching = false; }",
+         "void main(){ /* kapatmıyor */ }"], [])
+    if calls != 1:
+        dead.append(f"DEDEKTÖR: sentetik kaynakta 1 gerçek çağrı beklenirken "
+                    f"{calls} bulundu (yorumdaki çağrı sayılmamalı) — "
+                    f"çalışma-anı-çekme dedektörü bozuk")
+    if len(tests_off) != 1:
+        dead.append(f"DEDEKTÖR: sentetik testlerden 1'i çekmeyi kapatıyor, "
+                    f"{len(tests_off)} saptandı — `allowRuntimeFetching` "
+                    f"deseni bozuk")
+    if detect(["GoogleFonts.config.allowRuntimeFetching = false;"], [], [])[1] \
+            is not True:
+        dead.append("DEDEKTÖR: üretimde çekme kapatılmışken saptanmıyor")
+    if detect(["final x = 1;"], [], [])[0] != 0:
+        dead.append("DEDEKTÖR: font çağrısı OLMAYAN kaynakta çağrı buluyor "
+                    "(yanlış-pozitif)")
     # Beyan/ölçüm karşılaştırması gerçekten ısırıyor mu?
     if not check({**DECLARED, "bundledFontAssets": 999}, actual):
         dead.append("beyan-ölçüm karşılaştırması ISIRMIYOR — uydurma bir sayı "
