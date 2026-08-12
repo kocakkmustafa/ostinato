@@ -65,6 +65,8 @@ run "içerik-atıf süpürmesi"        python3 tools/validate_references.py
 run "koşum envanteri (kapsam)"       python3 tools/validate_runner_inventory.py
 run "gizlilik manifesti ↔ kod"       python3 tools/validate_privacy_manifest.py
 run "gizlilik kapısı öz-testi"       python3 tools/validate_privacy_manifest.py --selftest
+run "release imzası (sessiz düşme)"  python3 tools/validate_release_signing.py
+run "imza kapısı öz-testi"           python3 tools/validate_release_signing.py --selftest
 run "MUT-A (kapılar ısırıyor mu)"     python3 tools/gate_mutation_test.py
 run "MUT-A log öz-testi (doluyor mu)" python3 tools/gate_mutation_test.py --selftest-log
 run "pozitif ikiz (kapı desenleri)"   bash -c 'python3 tools/validate_surface_honesty.py --selftest && python3 tools/validate_color_tokens.py --selftest'
