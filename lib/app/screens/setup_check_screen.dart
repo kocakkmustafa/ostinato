@@ -387,6 +387,12 @@ class _Skeleton extends StatelessWidget {
 // görüyorum" bugünkü kodla SÖYLENİYOR.
 // ⛔ Sınır: bu üç hâl gerçek cihazda HİÇ doğrulanmadı (yayın engeli ⑩) —
 // kod-gerçeği var, cihaz-gerçeği yok.
+// closedPaths: ["kullanıcıya 'kadrajını göremiyorsun' cümlesi yazmak —
+//   ÖLÇÜLDÜ ve ELENDİ (O-109): poz akışı bu ekranda CANLI ve kullanıcı
+//   ZATEN adlı teşhis alıyor (`_Stage.framingError` HANGİ landmark eksik
+//   diyor · `_Stage.lowLight` güven eşiğini söylüyor · `_Stage.ok` onaylıyor).
+//   Eksik olan GÖRÜNTÜ, ONAY değil; cümle GÜRÜLTÜ olurdu. Bir eksiği
+//   bildirmek, ardındaki ihtiyaç zaten karşılanıyorsa dürüstlük değildir."]
 
 // PLACEHOLDER(flow): oda gürültü-tabanı yakalama adımı KAPALI — tasarım
 // 3-5sn sessizlik ölçen bir kalibrasyon gösterir, bu ekran onun yerine
@@ -394,6 +400,7 @@ class _Skeleton extends StatelessWidget {
 // bir mikrofon-giriş eklentisi `ostinato_audio`nun var olan
 // `AudioConfidenceGate`ine bağlanıp bu ekranın state machine'ine
 // (_Stage.room) gerçek bir örnekleme/geri-sayım aşaması eklenince.
+// closedPaths: none-known
 // user-surface: setup-room-gap-body
 // (O-107: bu beyanın KULLANICI cümlesi silinse iki kapı da yeşil kalıyordu —
 //  sabotajla ölçüldü; artık `validate_placeholder_surface.py` onu koruyor.)

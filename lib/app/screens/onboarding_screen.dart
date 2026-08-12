@@ -36,6 +36,7 @@ import '../onboarding_store.dart';
 // önce), çünkü akışı durdurabilecek tek nokta burasıdır.
 // source-only: adım AKIŞTA HİÇ YOK — var olmayan bir adımın kullanıcı
 // cümlesi de olamaz; çocuk rejimi tasarlanırsa yüzey O ZAMAN doğar.
+// closedPaths: none-known
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({
     super.key,

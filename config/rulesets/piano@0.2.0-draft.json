@@ -1,509 +1,515 @@
 {
- "_schema": "motion-core v3.0 MÜHÜRLÜ şema · okuyucu motion_core-v0.5.0 · piano paketi",
- "_why_direct": "Ostinato'nun kalibre edilmiş çalışan motoru yok; ruleset-v0 taslaktı ve tüm eşikleri expertPending. Bu yüzden çevirici katmanı yazmıyoruz — mühürlenecek şemaya doğrudan yazıyoruz (M-F-35 §7 göç yolu).",
- "_status": "TASLAK — hiçbir sayısal eşik nihai değil (expertPending). Şema mühürlenmeden önce alan adları değişebilir; çelişkide ÇEKİRDEK KAZANIR.",
- "module": "piano",
- "version": "0.2.0-draft",
- "signalConditioning": {
-  "_why": "Kural #4 (M-C-07/J-027): filtre ve eşik AYRILMAZ. YIN eşiğinin anlamı pencere boyuna bağlıdır — pencereyi değiştirip eşiği sabit bırakmak sessizce başka bir dedektör yapar. Biri değişirse SÜRÜM ARTAR.",
-  "_units": "M-O-23 / 60-DSP-SOZLESMESI §1: analiz parametreleri SÜRE ve FREKANS cinsinden. Örnek cinsinden mühürlemek örtük bir sampleRate varsayımıdır — 44.1 kHz fixture'da doğru, 48 kHz cihazda (çoğu Android) sessizce başka bir dedektör. Cihaz hızı çalışma zamanında gelir, config sabitlemez.",
-  "_migratedFrom": "v0.1.0-draft: sampleRate 44100 · windowSamples 4096 · hopSamples 1024 · onsetFrameSize 1024 · onsetHopSize 256",
-  "pitchWindowMs": 92.9,
-  "pitchHopMs": 23.2,
-  "yinThreshold": 0.15,
-  "onsetFrameMs": 46,
-  "onsetHopMs": 6,
-  "onsetMedianWindow": 11,
-  "_onsetMedianWindowNote": "Kare cinsinden ama hop SÜRE cinsinden olduğu için kapsadığı süre hızdan bağımsız: 11×6 ms.",
-  "onsetBandCount": 24,
-  "onsetMinAnalysisHz": 40,
-  "onsetMaxAnalysisHz": 4000,
-  "_onsetBandsWhy": "Log-aralıklı bantlar + Hz cinsinden tanımlı aralık: çözünürlük ve bant genişliği AYRI düğmeler (O-019'un ikinci yarısı)."
- },
- "metrics": {
-  "level_above_room_floor_db": {
-   "id": "level_above_room_floor_db",
-   "unit": "dB",
-   "range": [
-    -40,
-    60
-   ],
-   "noiseBand": 2,
-   "baseline": {
-    "ref": "setup.roomFloorDb"
-   },
-   "interval": true,
-   "_baseline_why": "Mutlak dBFS eşiği telefon mikrofonu çeşitliliğinde yaşamaz; Setup Check odayı ÖLÇER, her şey ona görelidir."
+  "_schema": "motion-core v3.0 MÜHÜRLÜ şema · okuyucu motion_core-v0.5.0 · piano paketi",
+  "_why_direct": "Ostinato'nun kalibre edilmiş çalışan motoru yok; ruleset-v0 taslaktı ve tüm eşikleri expertPending. Bu yüzden çevirici katmanı yazmıyoruz — mühürlenecek şemaya doğrudan yazıyoruz (M-F-35 §7 göç yolu).",
+  "_status": "TASLAK — hiçbir sayısal eşik nihai değil (expertPending). Şema mühürlenmeden önce alan adları değişebilir; çelişkide ÇEKİRDEK KAZANIR.",
+  "module": "piano",
+  "version": "0.2.0-draft",
+  "signalConditioning": {
+    "_why": "Kural #4 (M-C-07/J-027): filtre ve eşik AYRILMAZ. YIN eşiğinin anlamı pencere boyuna bağlıdır — pencereyi değiştirip eşiği sabit bırakmak sessizce başka bir dedektör yapar. Biri değişirse SÜRÜM ARTAR.",
+    "_units": "M-O-23 / 60-DSP-SOZLESMESI §1: analiz parametreleri SÜRE ve FREKANS cinsinden. Örnek cinsinden mühürlemek örtük bir sampleRate varsayımıdır — 44.1 kHz fixture'da doğru, 48 kHz cihazda (çoğu Android) sessizce başka bir dedektör. Cihaz hızı çalışma zamanında gelir, config sabitlemez.",
+    "_migratedFrom": "v0.1.0-draft: sampleRate 44100 · windowSamples 4096 · hopSamples 1024 · onsetFrameSize 1024 · onsetHopSize 256",
+    "pitchWindowMs": 92.9,
+    "pitchHopMs": 23.2,
+    "yinThreshold": 0.15,
+    "onsetFrameMs": 46,
+    "onsetHopMs": 6,
+    "onsetMedianWindow": 11,
+    "_onsetMedianWindowNote": "Kare cinsinden ama hop SÜRE cinsinden olduğu için kapsadığı süre hızdan bağımsız: 11×6 ms.",
+    "onsetBandCount": 24,
+    "onsetMinAnalysisHz": 40,
+    "onsetMaxAnalysisHz": 4000,
+    "_onsetBandsWhy": "Log-aralıklı bantlar + Hz cinsinden tanımlı aralık: çözünürlük ve bant genişliği AYRI düğmeler (O-019'un ikinci yarısı)."
   },
-  "chord_correctness": {
-   "unit": "ratio",
-   "range": [
-    0,
-    1
-   ],
-   "noiseBand": 0.05,
-   "baseline": 1.0,
-   "interval": true,
-   "_why": "Akor-SINIFI doğrulama. MIDI modunda tam nota verisi gelir; mikrofonla yalnız akor sınıfı."
-  },
-  "note_timing_ms": {
-   "unit": "ms",
-   "range": [
-    -500,
-    500
-   ],
-   "noiseBand": 25,
-   "baseline": 0,
-   "interval": true,
-   "_why": "Nota zamanlaması; MIDI bağlıysa doğrudan, değilse onset'ten.",
-   "_measurement": "ÖLÇÜLDÜ 2026-08-04, fixtures/audio/AF-008-five-note-timing.json — GERÇEK OnsetDetector -> MetronomeAligner zinciri, piyano signalConditioning'iyle. Motor tabanı 8,29 ms (kusursuz ızgarada bile ölçülen sapma: STFT penceresinin çözünürlüğü). ÖLÇÜLEN ASİMETRİ: aynı büyüklükteki hata, acele edende geç kalandan ~18 ms daha ağır raporlanıyor (40 ms erken -> 49,33 ms · 40 ms geç -> 31,28 ms), çünkü motorun kendi erkenliği hükme sızıyor. Tek 'kusursuz' varyantlı bir fixture bunu gösteremezdi. Bu asimetri düzeltilmeden zamanlama DERECELENDİRİLEMEZ.",
-   "_grading": "measuredNotGraded"
-  },
-  "trunk_tilt": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 8,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "TÜRETİLDİ, ARTEFAKTTAN (tools/derive_posture_thresholds.py --check her koşumda doğrular). ATTESTED piyano referansı (3 bağımsız eğitmen, 145 hizalı kare): trunk_tilt eğitmenler-arası dispersiyon medyanı yalnız 1.09° — üç çalgının en dar anlaşması. Çekirdeğin tolerans kuralı bu değeri KULLANMIYOR, serbest tabana (freeFloorDeg 8.0) kıstırıyor; artefakt bunu KENDİ etiketiyle beyan ediyor (perJointSource: floor, floorBoundShare: 1.0 — 145 karenin 145'i). Yani bant dispersiyon DEĞERİNDEN değil, 'dispersiyonun tabana çarptığı ÖLÇÜMÜNDEN' geliyor (M-O-63). ESKİ DEĞER 2 BAYATTI: gerekçesi ölü B4 pilotuna (5.4°) dayanıyordu ve M-F-98 düzeltmesi yalnız gitara uygulanmıştı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu.",
-   "_derivedFrom": {
-    "artifact": "config/references/piano-posture-setup.v1.json",
-    "generatedAt": "2026-08-04T21:33:54.578506Z",
-    "contributingTakes": 3,
-    "dispersionMedianDeg": 1.09,
-    "toleranceSource": "floor",
-    "floorBoundShare": 1.0,
-    "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz.",
-    "_coreVersion": "motion_core 0.11.0 @ f13bdc9 (M-F-263 tek-pin). 0.8.6→0.11.0 atlamasında artefakt BİT-BİT aynı çıktı: frames hash (dispersionRad+meanRad) üç çalgıda da değişmedi, frameBasis deltası YOK."
-   }
-  },
-  "left_shoulder": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 2,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 5.3° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-  },
-  "right_shoulder": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 4,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 10.0° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-  },
-  "left_upper_arm": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 2,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 5.7° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-  },
-  "right_upper_arm": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 4,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 10.8° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-  },
-  "left_elbow": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 6,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 14.6° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-  },
-  "right_elbow": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 3,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 8.4° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-  },
-  "left_forearm": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 7,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 18.4° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-  },
-  "right_forearm": {
-   "unit": "deg",
-   "range": [
-    -180,
-    180
-   ],
-   "noiseBand": 5,
-   "baseline": 0,
-   "measurementSpace": "world",
-   "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 12.7° (B4 pilotu). Bant bunun ~%40'ı.",
-   "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
-  },
-  "setup_complete": {
-   "id": "setup_complete",
-   "unit": "bool",
-   "range": [
-    0,
-    1
-   ],
-   "noiseBand": 0,
-   "baseline": 0,
-   "_why": "Setup Check kapısının sonucu. Çekirdek linter'ı yakaladı: bayrak da bir METRİKTİR ve sözlükte tanımlı olmalı — tanımsız metriğe eşik yazılamaz (Gravita kuralı). Benim doğrulayıcım flag türünü muaf tutuyordu, o muafiyet YANLIŞTI (M-O-10)."
-  }
- },
- "techniques": [
-  {
-   "id": "five_finger_drill",
-   "_what": "Beş parmak egzersizi: eşit tuşe + tempo + bilek duruşu.",
-   "sideResolution": "calibrated",
-   "cyclic": false,
-   "requires": {
-    "signals": [
-     {
-      "signal": "level_above_room_floor_db",
-      "op": "gte",
-      "value": 6
-     }
-    ]
-   },
-   "verdictGates": [
-    {
-     "onEvent": "onset",
-     "holdMs": 100,
-     "effect": "collectNoVerdict",
-     "_why": "Atak penceresi aperiyodik: veri geçerli, hüküm yok."
-    },
-    {
-     "onEvent": "coachCue",
-     "holdMs": 0,
-     "effect": "discardWindow",
-     "_why": "Koç konuşurken mikrofon kirli: toplanmaz."
-    }
-   ],
-   "phases": [
-    {
-     "id": "POSTURE_CHECK",
-     "_what": "Çalmadan ÖNCE duruş değerlendirmesi. Setup Check'in ölçüm ayağı.",
-     "_why_pose_gated": "Replay kanıtı: ses-kapılı fazlar pose-only fixture'da HİÇ ateşlenmiyordu (3 çalgı × ~5500 kare, 0 giriş). Ama asıl mesele test değil ÜRÜN: kullanıcı henüz çalmadan duruşunu düzeltebilmeli — postür metriklerini ses kapısının arkasına koymak Setup Check'in amacını iptal ediyordu.",
-     "enter": {
-      "kind": "metric",
-      "metric": "trunk_tilt",
-      "op": "gte",
-      "value": 0
-     },
-     "quality": {
-      "trunk_tilt": {
-       "op": "lte",
-       "value": 8,
-       "thresholdProvenance": "reference-derived",
-       "_why": "5 → 8. Eski 5 değeri ölçüm bandının (8°) ALTINDAYDI: çekirdeğin kendi toleransının içinden hüküm çıkarmaya çalışıyordu — M-F-98'in gitarda düzelttiği kusurun aynısı, piyanoda düzeltilmeden kalmıştı. Yeni değer skorlama toleransının kendisi: 'referansa göre bandın içinde misin'."
-      }
-     },
-     "exit": {
-      "kind": "metric",
-      "metric": "level_above_room_floor_db",
-      "op": "gte",
-      "value": 6
-     },
-     "_exit_why": "Ses gelince oynama fazına devredilir; postür fazı sesi BEKLEMEZ ama sesle biter.",
-     "timeoutMs": 60000,
-     "measureHere": true
-    },
-    {
-     "id": "READY",
-     "enter": {
-      "kind": "flag",
-      "metric": "setup_complete",
-      "is": true
-     },
-     "exit": {
-      "kind": "metric",
-      "metric": "level_above_room_floor_db",
-      "op": "gte",
-      "value": 6
-     },
-     "timeoutMs": 30000
-    },
-    {
-     "id": "PLAY",
-     "enter": {
-      "kind": "metric",
-      "metric": "level_above_room_floor_db",
-      "op": "gte",
-      "value": 6
-     },
-     "_quality_removed": {
-      "was": {
-       "note_timing_ms": {
-        "op": "lte",
-        "value": 50,
-        "expertPending": true
-       }
+  "metrics": {
+    "level_above_room_floor_db": {
+      "id": "level_above_room_floor_db",
+      "unit": "dB",
+      "range": [
+        -40,
+        60
+      ],
+      "noiseBand": 2,
+      "baseline": {
+        "ref": "setup.roomFloorDb"
       },
-      "_why": "2026-08-04 (M-O-65): KAPI İNDİRİLDİ, metrik KALDI. İki ayrı kusur üst üste binmişti. (1) Kapı, ÜRETİLMEYEN bir metriğe bakıyordu: `MetronomeAligner` kodu ve birim testleri vardı ama hiçbir fixture'a bağlı değildi, `replay_check.audio_windows()` bu metriği hiç döndürmüyor — yani kapı sessizce hiç değerlendirilmiyordu ('kod var, tüketicisi yok', M-O-53'ün ölçüm tarafındaki kardeşi). (2) Bar UYDURMAYDI: 50 ms'i türetecek hiçbir referans istatistiği yok — postür referansı EKLEM ölçer, zamanlama ölçmez; zamanlama için eğitmen hasadı hiç yapılmadı. Şimdi AF-008 ile metrik GERÇEKTEN ölçülüyor (motor tabanı 8,29 ms), ama ölçülebilir olmak DERECELENDİRİLEBİLİR olmak değildir — kolların coached_only olmasıyla aynı ayrım (M-F-46 k.3). Gösterilir, söylenir, PUANLANMAZ.",
-      "_whatWouldChangeThis": "Zamanlama hata-kodları için eğitmen hasadı (hangi sapma 'hata' sayılıyor) VEYA movement-science/uzman turu. Motor tabanının (8,29 ms) altına hiçbir bar yazılamaz — yazılırsa tam zamanında çalan öğrenciye 'geç kaldın' der."
-     },
-     "exit": {
-      "kind": "metric",
-      "metric": "level_above_room_floor_db",
-      "op": "lt",
-      "value": 6
-     },
-     "timeoutMs": 20000,
-     "minDurationMs": 800,
-     "measureHere": true
+      "interval": true,
+      "_baseline_why": "Mutlak dBFS eşiği telefon mikrofonu çeşitliliğinde yaşamaz; Setup Check odayı ÖLÇER, her şey ona görelidir."
+    },
+    "chord_correctness": {
+      "unit": "ratio",
+      "range": [
+        0,
+        1
+      ],
+      "noiseBand": 0.05,
+      "baseline": 1.0,
+      "interval": true,
+      "_why": "Akor-SINIFI doğrulama. MIDI modunda tam nota verisi gelir; mikrofonla yalnız akor sınıfı."
+    },
+    "note_timing_ms": {
+      "unit": "ms",
+      "range": [
+        -500,
+        500
+      ],
+      "noiseBand": 25,
+      "baseline": 0,
+      "interval": true,
+      "_why": "Nota zamanlaması; MIDI bağlıysa doğrudan, değilse onset'ten.",
+      "_measurement": "ÖLÇÜLDÜ 2026-08-04, fixtures/audio/AF-008-five-note-timing.json — GERÇEK OnsetDetector -> MetronomeAligner zinciri, piyano signalConditioning'iyle. Motor tabanı 8,29 ms (kusursuz ızgarada bile ölçülen sapma: STFT penceresinin çözünürlüğü). ÖLÇÜLEN ASİMETRİ: aynı büyüklükteki hata, acele edende geç kalandan ~18 ms daha ağır raporlanıyor (40 ms erken -> 49,33 ms · 40 ms geç -> 31,28 ms), çünkü motorun kendi erkenliği hükme sızıyor. Tek 'kusursuz' varyantlı bir fixture bunu gösteremezdi. Bu asimetri düzeltilmeden zamanlama DERECELENDİRİLEMEZ.",
+      "_grading": "measuredNotGraded"
+    },
+    "trunk_tilt": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 8,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "TÜRETİLDİ, ARTEFAKTTAN (tools/derive_posture_thresholds.py --check her koşumda doğrular). ATTESTED piyano referansı (3 bağımsız eğitmen, 145 hizalı kare): trunk_tilt eğitmenler-arası dispersiyon medyanı yalnız 1.09° — üç çalgının en dar anlaşması. Çekirdeğin tolerans kuralı bu değeri KULLANMIYOR, serbest tabana (freeFloorDeg 8.0) kıstırıyor; artefakt bunu KENDİ etiketiyle beyan ediyor (perJointSource: floor, floorBoundShare: 1.0 — 145 karenin 145'i). Yani bant dispersiyon DEĞERİNDEN değil, 'dispersiyonun tabana çarptığı ÖLÇÜMÜNDEN' geliyor (M-O-63). ESKİ DEĞER 2 BAYATTI: gerekçesi ölü B4 pilotuna (5.4°) dayanıyordu ve M-F-98 düzeltmesi yalnız gitara uygulanmıştı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu.",
+      "_derivedFrom": {
+        "artifact": "config/references/piano-posture-setup.v1.json",
+        "generatedAt": "2026-08-04T21:33:54.578506Z",
+        "contributingTakes": 3,
+        "dispersionMedianDeg": 1.09,
+        "toleranceSource": "floor",
+        "floorBoundShare": 1.0,
+        "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz.",
+        "_coreVersion": "motion_core 0.11.0 @ f13bdc9 (M-F-263 tek-pin). 0.8.6→0.11.0 atlamasında artefakt BİT-BİT aynı çıktı: frames hash (dispersionRad+meanRad) üç çalgıda da değişmedi, frameBasis deltası YOK."
+      }
+    },
+    "left_shoulder": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 2,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 5.3° (B4 pilotu). Bant bunun ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "right_shoulder": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 4,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 10.0° (B4 pilotu). Bant bunun ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "left_upper_arm": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 2,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 5.7° (B4 pilotu). Bant bunun ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "right_upper_arm": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 4,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 10.8° (B4 pilotu). Bant bunun ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "left_elbow": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 6,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 14.6° (B4 pilotu). Bant bunun ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "right_elbow": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 3,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 8.4° (B4 pilotu). Bant bunun ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "left_forearm": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 7,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 18.4° (B4 pilotu). Bant bunun ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "right_forearm": {
+      "unit": "deg",
+      "range": [
+        -180,
+        180
+      ],
+      "noiseBand": 5,
+      "baseline": 0,
+      "measurementSpace": "world",
+      "_noiseBand_why": "ÖLÇÜLDÜ: küme dispersiyonu 12.7° (B4 pilotu). Bant bunun ~%40'ı.",
+      "_space_why": "J-028/M-O-08: ham normalize koordinat açıyı bozar; world zorunlu."
+    },
+    "setup_complete": {
+      "id": "setup_complete",
+      "unit": "bool",
+      "range": [
+        0,
+        1
+      ],
+      "noiseBand": 0,
+      "baseline": 0,
+      "_why": "Setup Check kapısının sonucu. Çekirdek linter'ı yakaladı: bayrak da bir METRİKTİR ve sözlükte tanımlı olmalı — tanımsız metriğe eşik yazılamaz (Gravita kuralı). Benim doğrulayıcım flag türünü muaf tutuyordu, o muafiyet YANLIŞTI (M-O-10)."
+    }
+  },
+  "techniques": [
+    {
+      "id": "five_finger_drill",
+      "_what": "Beş parmak egzersizi: eşit tuşe + tempo + bilek duruşu.",
+      "sideResolution": "calibrated",
+      "cyclic": false,
+      "requires": {
+        "signals": [
+          {
+            "signal": "level_above_room_floor_db",
+            "op": "gte",
+            "value": 6
+          }
+        ]
+      },
+      "verdictGates": [
+        {
+          "onEvent": "onset",
+          "holdMs": 100,
+          "effect": "collectNoVerdict",
+          "_why": "Atak penceresi aperiyodik: veri geçerli, hüküm yok."
+        },
+        {
+          "onEvent": "coachCue",
+          "holdMs": 0,
+          "effect": "discardWindow",
+          "_why": "Koç konuşurken mikrofon kirli: toplanmaz."
+        }
+      ],
+      "phases": [
+        {
+          "id": "POSTURE_CHECK",
+          "_what": "Çalmadan ÖNCE duruş değerlendirmesi. Setup Check'in ölçüm ayağı.",
+          "_why_pose_gated": "Replay kanıtı: ses-kapılı fazlar pose-only fixture'da HİÇ ateşlenmiyordu (3 çalgı × ~5500 kare, 0 giriş). Ama asıl mesele test değil ÜRÜN: kullanıcı henüz çalmadan duruşunu düzeltebilmeli — postür metriklerini ses kapısının arkasına koymak Setup Check'in amacını iptal ediyordu.",
+          "enter": {
+            "kind": "metric",
+            "metric": "trunk_tilt",
+            "op": "gte",
+            "value": 0
+          },
+          "quality": {
+            "trunk_tilt": {
+              "op": "lte",
+              "value": 8,
+              "thresholdProvenance": "reference-derived",
+              "_why": "5 → 8. Eski 5 değeri ölçüm bandının (8°) ALTINDAYDI: çekirdeğin kendi toleransının içinden hüküm çıkarmaya çalışıyordu — M-F-98'in gitarda düzelttiği kusurun aynısı, piyanoda düzeltilmeden kalmıştı. Yeni değer skorlama toleransının kendisi: 'referansa göre bandın içinde misin'."
+            }
+          },
+          "exit": {
+            "kind": "metric",
+            "metric": "level_above_room_floor_db",
+            "op": "gte",
+            "value": 6
+          },
+          "_exit_why": "Ses gelince oynama fazına devredilir; postür fazı sesi BEKLEMEZ ama sesle biter.",
+          "timeoutMs": 60000,
+          "measureHere": true
+        },
+        {
+          "id": "READY",
+          "enter": {
+            "kind": "flag",
+            "metric": "setup_complete",
+            "is": true
+          },
+          "exit": {
+            "kind": "metric",
+            "metric": "level_above_room_floor_db",
+            "op": "gte",
+            "value": 6
+          },
+          "timeoutMs": 30000
+        },
+        {
+          "id": "PLAY",
+          "enter": {
+            "kind": "metric",
+            "metric": "level_above_room_floor_db",
+            "op": "gte",
+            "value": 6
+          },
+          "_quality_removed": {
+            "was": {
+              "note_timing_ms": {
+                "op": "lte",
+                "value": 50,
+                "expertPending": true
+              }
+            },
+            "_why": "2026-08-04 (M-O-65): KAPI İNDİRİLDİ, metrik KALDI. İki ayrı kusur üst üste binmişti. (1) Kapı, ÜRETİLMEYEN bir metriğe bakıyordu: `MetronomeAligner` kodu ve birim testleri vardı ama hiçbir fixture'a bağlı değildi, `replay_check.audio_windows()` bu metriği hiç döndürmüyor — yani kapı sessizce hiç değerlendirilmiyordu ('kod var, tüketicisi yok', M-O-53'ün ölçüm tarafındaki kardeşi). (2) Bar UYDURMAYDI: 50 ms'i türetecek hiçbir referans istatistiği yok — postür referansı EKLEM ölçer, zamanlama ölçmez; zamanlama için eğitmen hasadı hiç yapılmadı. Şimdi AF-008 ile metrik GERÇEKTEN ölçülüyor (motor tabanı 8,29 ms), ama ölçülebilir olmak DERECELENDİRİLEBİLİR olmak değildir — kolların coached_only olmasıyla aynı ayrım (M-F-46 k.3). Gösterilir, söylenir, PUANLANMAZ.",
+            "_whatWouldChangeThis": "Zamanlama hata-kodları için eğitmen hasadı (hangi sapma 'hata' sayılıyor) VEYA movement-science/uzman turu. Motor tabanının (8,29 ms) altına hiçbir bar yazılamaz — yazılırsa tam zamanında çalan öğrenciye 'geç kaldın' der."
+          },
+          "exit": {
+            "kind": "metric",
+            "metric": "level_above_room_floor_db",
+            "op": "lt",
+            "value": 6
+          },
+          "timeoutMs": 20000,
+          "minDurationMs": 800,
+          "measureHere": true
+        },
+        {
+          "id": "COMPLETE",
+          "terminal": true,
+          "enter": {
+            "kind": "timeInPhase",
+            "op": "gte",
+            "ms": 0
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": "P-WRIST-COLLAPSE",
+      "evaluateAt": "PLAY",
+      "status": "aspirational",
+      "blockedByTool": "hand-landmarks",
+      "_why": "Bilek cokmesi el landmark'i ister (bilek-el duzlemi); pose modeli bilegi TEK NOKTA verir.",
+      "_observable": "camera",
+      "_sources": "4 bağımsız kanal",
+      "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu.",
+      "unblockedBy": "el landmark modeli (MediaPipe Hands sınıfı) — ÇEKİRDEK/AİLE kalemi (piyano·gitar·bas·ukulele paylaşıyor), bu hatta PLANLANMADI. DIŞ BAĞIMLILIK: pose modeli parmak taşımıyor.",
+      "closedPaths": "none-known"
     },
     {
-     "id": "COMPLETE",
-     "terminal": true,
-     "enter": {
-      "kind": "timeInPhase",
-      "op": "gte",
-      "ms": 0
-     }
+      "code": "P-FINGER-FLAT",
+      "evaluateAt": "PLAY",
+      "status": "aspirational",
+      "blockedByTool": "hand-landmarks",
+      "_why": "Duz parmak parmak landmark'i ister; pose modelinde parmak YOK.",
+      "_observable": "camera",
+      "_sources": "5 bağımsız kanal",
+      "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu.",
+      "unblockedBy": "el landmark modeli (MediaPipe Hands sınıfı) — ÇEKİRDEK/AİLE kalemi (piyano·gitar·bas·ukulele paylaşıyor), bu hatta PLANLANMADI. DIŞ BAĞIMLILIK: pose modeli parmak taşımıyor.",
+      "closedPaths": "none-known"
+    },
+    {
+      "code": "P-POST-SHOULDER-TENSION",
+      "evaluateAt": "PLAY",
+      "status": "thresholdPending",
+      "expertPending": true,
+      "blockedByStatistic": "Kod OMUZ YÜKSELMESİNİ tarif ediyor ('omuzlar yukarı çekilip kulaklara yaklaşır', taksonomide 5 bağımsız kanal) ama piyano referansında omuzlar coached_only ve dağılımları ÖLÇÜLDÜ: left_shoulder 24,2° · right_shoulder 5,1° — aynı eklem çiftinde 5 KATLIK asimetri, 3 take'ten. M-F-46 k.3 gereği coached_only metriğe eşik yazılamaz. Ölçüm ALETİ de tartışmalı: 'kulaklara yaklaşma' bir YÜKSEKLİK/oran ölçüsüdür, elimizdeki `*_shoulder` ise bir AÇI — V-POST-SHOULDER-RISE'ı öldüren boyut karışıklığının (M-F-140) aynı kapısı. Aktive edilebilmesi için gereken: normalize omuz-yükseklik metriği (shoulder_rise_norm) + onun referans istatistiği; ikisi de yok.",
+      "_observable": "camera",
+      "_sources": "5 bağımsız kanal",
+      "_removedCondition": {
+        "kind": "metric",
+        "metric": "trunk_tilt",
+        "op": "gt",
+        "value": 15
+      },
+      "_why": "2026-08-04 (M-O-64): KOŞUL YANLIŞ METRİĞE BAĞLIYDI ve bu, sayı düzeltilerek kapatılamazdı. `trunk_tilt` GÖVDE EĞİMİDİR; bu kod OMUZ yüksekliğini anlatır. Yani 'omuzların gergin' uyarısı, öne eğilen ama omuzları gevşek bir öğrencide ATEŞLER; omuzları kulaklarına yapışmış ama dik oturan öğrencide SUSARDI. M-F-125'in öldürdüğü sınıfın aynısı (yanlış ateşleyen taslak, yokluktan kötüdür) — tek farkı, oradaki bağ ses yüksekliğineydi, burada bir BAŞKA postür metriğine, bu yüzden gözden kaçtı. Eşiği 15→14 diye 'türetilmiş' göstermek yanlış eşlemeyi CİLALAMAK olurdu. Piyano coming_soon olduğu için kullanıcıya hiç ulaşmadı.",
+      "_note": "P-ELBOW-ANGLE ile AYNI SINIF: eksik olan isimli, kod SİLİNMEDİ — karşılığı ölçülebilir olduğunda kendi istatistiğiyle geri girer."
+    },
+    {
+      "code": "P-ELBOW-ANGLE",
+      "evaluateAt": "PLAY",
+      "status": "thresholdPending",
+      "expertPending": true,
+      "blockedByStatistic": "piano referansi ARTIK VAR ama dirsek istatistigi ESIK TASIMIYOR (olculdu 2026-07-30): left_elbow dispersiyonu 77,2 derece ve UNRELIABLE isaretli; right_elbow 20,8 derece. Uc take'ten gelen 20-77 derecelik dagilimdan hata esigi turetmek, gurultuyu esik diye satmak olurdu. Ayrica dirsekler bu config'te coached_only — M-F-46 k.3 gereigi quality esigi YALNIZ skorlanan metrige yazilabilir (skorlanan: trunk_tilt, dispersiyon 1,1 derece). AKTIVE EDILEBILMESI icin gereken: dirsegin SKORLANAN kumeye girmesi + dispersiyonun tolerans tabanina (8 derece) yaklasmasi — ikisi de daha cok ve daha tutarli piyano kaynagi ister.",
+      "_why": "M-F-140: SILINMEZ — uc kardesinden FARKLI sinif. Olcum ALETI VAR (dirsek acisi pose'dan hesaplanabiliyor, replay_check POSE sozlugunde zaten var). Eksik olan ESIK: referans istatistiginden ya da uzmandan gelmek ZORUNDA. Piyano referansi yokken AKTIVE EDILEMEZ. Sahte kosul (level_above_room_floor_db>15 — ses yuksekliginde atesleyen dirsek uyarisi) KALDIRILDI: yanlis atesleyen taslak, yokluktan kotudur. 2026-07-30 GUNCELLEME: M-F-147 'piyano referansi dogunca aktive edilebilir' beklentisi OLCULDU ve KARSILANMADI — referans dogdu, dirsek istatistigi esik tasimiyor. expertPending KALIYOR.",
+      "_observable": "camera",
+      "_sources": "4 bağımsız kanal",
+      "_removedCondition": {
+        "kind": "metric",
+        "metric": "level_above_room_floor_db",
+        "op": "gt",
+        "value": 15
+      }
+    },
+    {
+      "code": "P-TEMPO-DRIFT",
+      "evaluateAt": "PLAY",
+      "status": "aspirational",
+      "blockedByTool": "rhythm-grid",
+      "_why": "Tempo kaymasi ritim-izgarasi ister (RhythmEngine onset->beat-grid API'si bitmedi).",
+      "_observable": "audio",
+      "_sources": "4 bağımsız kanal",
+      "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu.",
+      "unblockedBy": "zamanlama ızgarası — mikrofon GİRİŞİ ister; bu build'de mikrofon yok (izin beyan edilmiyor, yakalama yolu yok). DIŞ BAĞIMLILIK.",
+      "closedPaths": "none-known"
     }
-   ]
-  }
- ],
- "errors": [
-  {
-   "code": "P-WRIST-COLLAPSE",
-   "evaluateAt": "PLAY",
-   "status": "aspirational",
-   "blockedByTool": "hand-landmarks",
-   "_why": "Bilek cokmesi el landmark'i ister (bilek-el duzlemi); pose modeli bilegi TEK NOKTA verir.",
-   "_observable": "camera",
-   "_sources": "4 bağımsız kanal",
-   "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu."
-  },
-  {
-   "code": "P-FINGER-FLAT",
-   "evaluateAt": "PLAY",
-   "status": "aspirational",
-   "blockedByTool": "hand-landmarks",
-   "_why": "Duz parmak parmak landmark'i ister; pose modelinde parmak YOK.",
-   "_observable": "camera",
-   "_sources": "5 bağımsız kanal",
-   "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu."
-  },
-  {
-   "code": "P-POST-SHOULDER-TENSION",
-   "evaluateAt": "PLAY",
-   "status": "thresholdPending",
-   "expertPending": true,
-   "blockedByStatistic": "Kod OMUZ YÜKSELMESİNİ tarif ediyor ('omuzlar yukarı çekilip kulaklara yaklaşır', taksonomide 5 bağımsız kanal) ama piyano referansında omuzlar coached_only ve dağılımları ÖLÇÜLDÜ: left_shoulder 24,2° · right_shoulder 5,1° — aynı eklem çiftinde 5 KATLIK asimetri, 3 take'ten. M-F-46 k.3 gereği coached_only metriğe eşik yazılamaz. Ölçüm ALETİ de tartışmalı: 'kulaklara yaklaşma' bir YÜKSEKLİK/oran ölçüsüdür, elimizdeki `*_shoulder` ise bir AÇI — V-POST-SHOULDER-RISE'ı öldüren boyut karışıklığının (M-F-140) aynı kapısı. Aktive edilebilmesi için gereken: normalize omuz-yükseklik metriği (shoulder_rise_norm) + onun referans istatistiği; ikisi de yok.",
-   "_observable": "camera",
-   "_sources": "5 bağımsız kanal",
-   "_removedCondition": {
-    "kind": "metric",
-    "metric": "trunk_tilt",
-    "op": "gt",
-    "value": 15
-   },
-   "_why": "2026-08-04 (M-O-64): KOŞUL YANLIŞ METRİĞE BAĞLIYDI ve bu, sayı düzeltilerek kapatılamazdı. `trunk_tilt` GÖVDE EĞİMİDİR; bu kod OMUZ yüksekliğini anlatır. Yani 'omuzların gergin' uyarısı, öne eğilen ama omuzları gevşek bir öğrencide ATEŞLER; omuzları kulaklarına yapışmış ama dik oturan öğrencide SUSARDI. M-F-125'in öldürdüğü sınıfın aynısı (yanlış ateşleyen taslak, yokluktan kötüdür) — tek farkı, oradaki bağ ses yüksekliğineydi, burada bir BAŞKA postür metriğine, bu yüzden gözden kaçtı. Eşiği 15→14 diye 'türetilmiş' göstermek yanlış eşlemeyi CİLALAMAK olurdu. Piyano coming_soon olduğu için kullanıcıya hiç ulaşmadı.",
-   "_note": "P-ELBOW-ANGLE ile AYNI SINIF: eksik olan isimli, kod SİLİNMEDİ — karşılığı ölçülebilir olduğunda kendi istatistiğiyle geri girer."
-  },
-  {
-   "code": "P-ELBOW-ANGLE",
-   "evaluateAt": "PLAY",
-   "status": "thresholdPending",
-   "expertPending": true,
-   "blockedByStatistic": "piano referansi ARTIK VAR ama dirsek istatistigi ESIK TASIMIYOR (olculdu 2026-07-30): left_elbow dispersiyonu 77,2 derece ve UNRELIABLE isaretli; right_elbow 20,8 derece. Uc take'ten gelen 20-77 derecelik dagilimdan hata esigi turetmek, gurultuyu esik diye satmak olurdu. Ayrica dirsekler bu config'te coached_only — M-F-46 k.3 gereigi quality esigi YALNIZ skorlanan metrige yazilabilir (skorlanan: trunk_tilt, dispersiyon 1,1 derece). AKTIVE EDILEBILMESI icin gereken: dirsegin SKORLANAN kumeye girmesi + dispersiyonun tolerans tabanina (8 derece) yaklasmasi — ikisi de daha cok ve daha tutarli piyano kaynagi ister.",
-   "_why": "M-F-140: SILINMEZ — uc kardesinden FARKLI sinif. Olcum ALETI VAR (dirsek acisi pose'dan hesaplanabiliyor, replay_check POSE sozlugunde zaten var). Eksik olan ESIK: referans istatistiginden ya da uzmandan gelmek ZORUNDA. Piyano referansi yokken AKTIVE EDILEMEZ. Sahte kosul (level_above_room_floor_db>15 — ses yuksekliginde atesleyen dirsek uyarisi) KALDIRILDI: yanlis atesleyen taslak, yokluktan kotudur. 2026-07-30 GUNCELLEME: M-F-147 'piyano referansi dogunca aktive edilebilir' beklentisi OLCULDU ve KARSILANMADI — referans dogdu, dirsek istatistigi esik tasimiyor. expertPending KALIYOR.",
-   "_observable": "camera",
-   "_sources": "4 bağımsız kanal",
-   "_removedCondition": {
-    "kind": "metric",
-    "metric": "level_above_room_floor_db",
-    "op": "gt",
-    "value": 15
-   }
-  },
-  {
-   "code": "P-TEMPO-DRIFT",
-   "evaluateAt": "PLAY",
-   "status": "aspirational",
-   "blockedByTool": "rhythm-grid",
-   "_why": "Tempo kaymasi ritim-izgarasi ister (RhythmEngine onset->beat-grid API'si bitmedi).",
-   "_observable": "audio",
-   "_sources": "4 bağımsız kanal",
-   "_removedCondition": "M-F-125/M-O-53 AYNI SINIF (gitarla birebir ayni taslak metin ve ayni `level_above_room_floor_db > 15` bagi): REMAP DEGIL SIL. Piyano `coming_soon` oldugu icin kullaniciya hic ulasmadi, ama gizli tuzak ayniydi — uretilen envanter buldu."
-  }
- ],
- "feedbackPolicy": {
-  "maxConcurrentCues": 1,
-  "suppression": {
-   "consecutiveOutOfBandBeforeCue": 3,
-   "expertPending": true
-  },
-  "fading": {
-   "enabled": true,
-   "_why": "guidance hypothesis: aşırı sık geri bildirim bağımlılık yaratıp kalıcı öğrenmeyi bozar"
-  },
-  "scoreDisplay": {
-   "numericScoresEnabled": false,
-   "_why": "K8/M-F-04: kalibrasyon kapısı geçilmeden SAYISAL skor gösterilmez; V1 = bant + eğri.",
-   "bands": [
-    "steady",
-    "improving",
-    "needs_focus"
-   ]
-  }
- },
- "_openItems": [
-  "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",
-  "shoulder_rise_norm + head_chin_angle_deg: ship öncesi ≥1 gerçek-kare regresyonu (J-028)",
-  "Gitar havuzu 1 fixture — minTakes=3 altında, B4 koşulamadı (hasat sürüyor)"
- ],
- "referenceConsumption": {
-  "_contract": "motion-core docs/50-REFERANS-TUKETIM-SOZLESMESI.md (M-F-46)",
-  "_measured": "B4 pilotu, motion_core-v0.5.0. piano 10 take → M-F-47 kapısı 4 dışladı → küme 6.",
-  "scoringBarDeg": 14.0,
-  "scored": [
-   "trunk_tilt"
   ],
-  "_scored_why": "Yalnız taraf-BAĞIMSIZ metrik puanlanır (trunk_tilt). Taraf-bağımlı metrikler coached_only: aynalama çözümü KESİN DEĞİL — ölçülen runnerUpGap 0.00181 < marj 0.020 (kural 7, M-F-46). Bu artık ÖLÇÜM: 0.7.1 öncesi çekirdek n>12'de gap'i uyduruyordu (sabit 0.04 = mirrorMargin×2) ve o kurgu değer bu çalgıda gerçeğin 22 KATIYDI — yani yalnız 'ölçülmemiş' değil, izin veren yönde çarpıtılmıştı. 0.7.1 tükenmeli arama sınırını 18'e çıkarıp gerçek farkı ölçtü (M-O-25 kapandı); sonuç: üç çalgıda da eşiğin altında → taraf-bağımlı metrikler TUTULUYOR. Simetrik duruşta çevirmenin maliyeti neredeyse sıfır olduğundan 'en iyi' atama gürültüyle belirleniyor; sol/sağ farkına anlam yüklemek artefaktı bulgu sanmak olurdu.",
-  "coached_only": [
-   "left_elbow",
-   "left_forearm",
-   "left_shoulder",
-   "right_shoulder",
-   "left_upper_arm",
-   "right_upper_arm",
-   "right_elbow",
-   "right_forearm"
+  "feedbackPolicy": {
+    "maxConcurrentCues": 1,
+    "suppression": {
+      "consecutiveOutOfBandBeforeCue": 3,
+      "expertPending": true
+    },
+    "fading": {
+      "enabled": true,
+      "_why": "guidance hypothesis: aşırı sık geri bildirim bağımlılık yaratıp kalıcı öğrenmeyi bozar"
+    },
+    "scoreDisplay": {
+      "numericScoresEnabled": false,
+      "_why": "K8/M-F-04: kalibrasyon kapısı geçilmeden SAYISAL skor gösterilmez; V1 = bant + eğri.",
+      "bands": [
+        "steady",
+        "improving",
+        "needs_focus"
+      ]
+    }
+  },
+  "_openItems": [
+    "Tüm expertPending eşikler: uzman turu (opsiyonel, manuel-sona) veya eğitmen-varyansından (ReferenceBuilder pilotu B3)",
+    "shoulder_rise_norm + head_chin_angle_deg: ship öncesi ≥1 gerçek-kare regresyonu (J-028)",
+    "Gitar havuzu 1 fixture — minTakes=3 altında, B4 koşulamadı (hasat sürüyor)"
   ],
-  "_coached_why": "Kural 3: çıta üstü (left_elbow, left_forearm) + kural 7 nedeniyle tutulan (left_shoulder, right_shoulder, left_upper_arm, right_upper_arm, right_elbow, right_forearm). Gösterilir, söylenir, PUANLANMAZ.",
-  "userExplanation": "Experienced piano teachers disagree about these, so we point them out but do not grade them.",
-  "_explanation_why": "Kural 3: açıklamasız puan-yokluğu kullanıcıya 'sistem bozuk' okunur.",
-  "provisional": false,
-  "_provisional_why": "KALDIRILDI: n=18 ≥ 5 (kural 6 eşiği). Önceki n=5'te işaretliydi. Not: provisional kalkması toleransların nihai olduğu anlamına gelmez — M-O-12 gereği havuz büyüdükçe yeniden ölçülür; nitekim kollar bu turda DAHA DA kötüleşti.",
-  "sideDependencyResolved": {
-   "mirrorConfident": false,
-   "runnerUpGap": 0.00181,
-   "mirrorMargin": 0.02,
-   "flippedTakes": "0/10"
+  "referenceConsumption": {
+    "_contract": "motion-core docs/50-REFERANS-TUKETIM-SOZLESMESI.md (M-F-46)",
+    "_measured": "B4 pilotu, motion_core-v0.5.0. piano 10 take → M-F-47 kapısı 4 dışladı → küme 6.",
+    "scoringBarDeg": 14.0,
+    "scored": [
+      "trunk_tilt"
+    ],
+    "_scored_why": "Yalnız taraf-BAĞIMSIZ metrik puanlanır (trunk_tilt). Taraf-bağımlı metrikler coached_only: aynalama çözümü KESİN DEĞİL — ölçülen runnerUpGap 0.00181 < marj 0.020 (kural 7, M-F-46). Bu artık ÖLÇÜM: 0.7.1 öncesi çekirdek n>12'de gap'i uyduruyordu (sabit 0.04 = mirrorMargin×2) ve o kurgu değer bu çalgıda gerçeğin 22 KATIYDI — yani yalnız 'ölçülmemiş' değil, izin veren yönde çarpıtılmıştı. 0.7.1 tükenmeli arama sınırını 18'e çıkarıp gerçek farkı ölçtü (M-O-25 kapandı); sonuç: üç çalgıda da eşiğin altında → taraf-bağımlı metrikler TUTULUYOR. Simetrik duruşta çevirmenin maliyeti neredeyse sıfır olduğundan 'en iyi' atama gürültüyle belirleniyor; sol/sağ farkına anlam yüklemek artefaktı bulgu sanmak olurdu.",
+    "coached_only": [
+      "left_elbow",
+      "left_forearm",
+      "left_shoulder",
+      "right_shoulder",
+      "left_upper_arm",
+      "right_upper_arm",
+      "right_elbow",
+      "right_forearm"
+    ],
+    "_coached_why": "Kural 3: çıta üstü (left_elbow, left_forearm) + kural 7 nedeniyle tutulan (left_shoulder, right_shoulder, left_upper_arm, right_upper_arm, right_elbow, right_forearm). Gösterilir, söylenir, PUANLANMAZ.",
+    "userExplanation": "Experienced piano teachers disagree about these, so we point them out but do not grade them.",
+    "_explanation_why": "Kural 3: açıklamasız puan-yokluğu kullanıcıya 'sistem bozuk' okunur.",
+    "provisional": false,
+    "_provisional_why": "KALDIRILDI: n=18 ≥ 5 (kural 6 eşiği). Önceki n=5'te işaretliydi. Not: provisional kalkması toleransların nihai olduğu anlamına gelmez — M-O-12 gereği havuz büyüdükçe yeniden ölçülür; nitekim kollar bu turda DAHA DA kötüleşti.",
+    "sideDependencyResolved": {
+      "mirrorConfident": false,
+      "runnerUpGap": 0.00181,
+      "mirrorMargin": 0.02,
+      "flippedTakes": "0/10"
+    },
+    "agreementGateCaveat": {
+      "excludedTakes": 4,
+      "totalTakes": 10,
+      "exclusionRate": 0.4,
+      "excludedIds": [
+        "8jbvOgGxk5c",
+        "F8fKXmcL7ao",
+        "N7IIVWvSyRQ",
+        "cBuC89ApQtM"
+      ],
+      "_why": "M-F-52: dışlama oranı SAĞLIK METRİĞİ. Bu sayılar 'eğitmenler hemfikir' değil 'hemfikir olan alt-küme hemfikir' demek."
+    },
+    "measuredDispersionDeg": {
+      "trunk_tilt": 5.4,
+      "left_shoulder": 5.3,
+      "right_shoulder": 10.0,
+      "left_upper_arm": 5.7,
+      "right_upper_arm": 10.8,
+      "left_elbow": 14.6,
+      "right_elbow": 8.4,
+      "left_forearm": 18.4,
+      "right_forearm": 12.7
+    },
+    "_mirrorGapProvenance": "MEASURED (motion_core 0.7.1, gapMeasured:true) — runnerUpGap 0.00181",
+    "_measurementProvenance": {
+      "status": "ATTESTED — ILK PIANO REFERANSI",
+      "artifact": "config/references/piano-posture-setup.v1.json",
+      "contributingTakes": 3,
+      "agreementGateJoints": [
+        "trunk_tilt"
+      ],
+      "clusterToleranceDeg": 14.0,
+      "why": "M-F-143: beyan-edilen kapi-eklem-kumesi ile ilk kez kuruldu. ONCEKI RED'in sebebi kaynak yoklugu DEGILDI (M-O-56): kapi tum-eklem medyanina bakiyordu, medyani da SKORLANMAYAN kol zinciri belirliyordu. trunk_tilt sapmalari zaten uyusuyordu (san 0,4-4,4 / piyano 1,9-2,8 take-medyani). Kapi urunun tukettigi kumeye alininca 14 varsayilan barinda gecti, excludedOutlier YOK.",
+      "unreliableJoints": [
+        "left_elbow",
+        "left_forearm"
+      ]
+    }
   },
-  "agreementGateCaveat": {
-   "excludedTakes": 4,
-   "totalTakes": 10,
-   "exclusionRate": 0.4,
-   "excludedIds": [
-    "8jbvOgGxk5c",
-    "F8fKXmcL7ao",
-    "N7IIVWvSyRQ",
-    "cBuC89ApQtM"
-   ],
-   "_why": "M-F-52: dışlama oranı SAĞLIK METRİĞİ. Bu sayılar 'eğitmenler hemfikir' değil 'hemfikir olan alt-küme hemfikir' demek."
-  },
-  "measuredDispersionDeg": {
-   "trunk_tilt": 5.4,
-   "left_shoulder": 5.3,
-   "right_shoulder": 10.0,
-   "left_upper_arm": 5.7,
-   "right_upper_arm": 10.8,
-   "left_elbow": 14.6,
-   "right_elbow": 8.4,
-   "left_forearm": 18.4,
-   "right_forearm": 12.7
-  },
-  "_mirrorGapProvenance": "MEASURED (motion_core 0.7.1, gapMeasured:true) — runnerUpGap 0.00181",
-  "_measurementProvenance": {
-   "status": "ATTESTED — ILK PIANO REFERANSI",
-   "artifact": "config/references/piano-posture-setup.v1.json",
-   "contributingTakes": 3,
-   "agreementGateJoints": [
-    "trunk_tilt"
-   ],
-   "clusterToleranceDeg": 14.0,
-   "why": "M-F-143: beyan-edilen kapi-eklem-kumesi ile ilk kez kuruldu. ONCEKI RED'in sebebi kaynak yoklugu DEGILDI (M-O-56): kapi tum-eklem medyanina bakiyordu, medyani da SKORLANMAYAN kol zinciri belirliyordu. trunk_tilt sapmalari zaten uyusuyordu (san 0,4-4,4 / piyano 1,9-2,8 take-medyani). Kapi urunun tukettigi kumeye alininca 14 varsayilan barinda gecti, excludedOutlier YOK.",
-   "unreliableJoints": [
-    "left_elbow",
-    "left_forearm"
-   ]
-  }
- },
- "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı.",
- "observationCues": [
-  {
-   "id": "OBS-TRUNK-RANGE",
-   "_class": "observation",
-   "_whyNotAnErrorCode": "Şart 1 (M-F-232): bu bir HATA KODU DEĞİL ve G-/V-/P- ad-alanını TAŞIYAMAZ. İki iddia sınıfı ayrı: ÖĞÜT ('formun yanlış') uzman doğrulaması ister ve hata kodları expertPending'de KALIR; GÖZLEM ('ölçtüğümüz eğitmenlerin hiçbiri bu kadar eğilmiyor') ölçüm geçerliliği ister ve o kanıt zaten var. Bu şerit, expertPending bayrağını TÜKETMEZ ve KAPATMAZ — uzman turu geldiğinde öğüt şeridi AYRICA açılır, gözlem kalkmaz.",
-   "metric": "trunk_tilt",
-   "evaluateAt": [
-    "POSTURE_CHECK",
-    "PLAY"
-   ],
-   "condition": {
-    "kind": "metric",
-    "metric": "trunk_tilt",
-    "op": "gt",
-    "value": 14.0
-   },
-   "silentWhen": {
-    "kind": "metric",
-    "metric": "trunk_tilt",
-    "op": "lte",
-    "value": 14.0
-   },
-   "_silentWhen_why": "Şart 6 (pozitif ikiz): aralık İÇİNDEYKEN SUSMAK, dışındayken görünmek kadar sözleşmenin parçası. Sürekli konuşan bir 'gözlem' işareti gözlem değil, arka plan gürültüsüdür — ve kullanıcı onu ölçüm sanır. İki yön AYRI ve BİRLİKTE test edilir.",
-   "cooldownMs": 30000,
-   "template": "OBS_TRUNK_OUTSIDE_RANGE",
-   "templateData": {
-    "n": 3,
-    "sourceClass": "piano teachers",
-    "thresholdDeg": 14.0
-   },
-   "_templateData_why": "Şart 3: N ve kaynak sınıfı CÜMLENİN İÇİNDE. Sayı dayanağını taşımadan görünmüyor — '14 dereceyi aştın' değil, 'kaydettiğimiz N eğitmenin hiçbiri bu kadar eğilmiyor'. measuredDeg'i motor çalışma zamanında doldurur; metin app'te, motor kullanıcı metni ÜRETMEZ (şart 2).",
-   "_derivedFrom": {
-    "artifact": "config/references/piano-posture-setup.v1.json",
-    "generatedAt": "2026-07-29T23:21:56.185407Z",
-    "contributingTakes": 3,
-    "dispersionMedianDeg": 1.09,
-    "toleranceSource": "floor",
-    "floorBoundShare": 1.0,
-    "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz."
-   },
-   "_thresholdIsFloorBound": "Şart 7 (M-O-63 şeffaflığı): 14,0° `gates.clusterToleranceDeg` — anlaşma kapısının barı. Bu eşiğin ALTINDAKİ skorlama toleransı (8,0°) dispersiyondan DEĞİL, dispersiyonun tolerans tabanına ÇARPMASINDAN geliyor (ölçülen dispersiyon 1.09°, floorBoundShare 1.0). İDDİA ile SAYI ÖRTÜŞÜK olmalı: cue 'aralığın dışındasın' der, 'hatalısın' DEMEZ — çünkü elimizdeki kanıt eğitmenlerin işgal ettiği aralıktır, doğru/yanlış hükmü değil.",
-   "_eligibility": "Şart 4: yalnız ATTESTED referans + `_derivedFrom` damgalı eşik taşıyan metrik-çalgı çiftinde ve `derive_posture_thresholds.py --check` YEŞİLKEN geçerli. Uygunluk `tools/validate_observation_cues.py` tarafından mekanik sınanır."
-  }
- ]
+  "_versionBumpWhy": "signalConditioning değişti → kendi kuralım gereği sürüm arttı ('filtre ve eşik AYRILMAZ; biri değişirse SÜRÜM ARTAR'). Değişiklik: örnek→süre birimi (M-O-23) + onset değerleri motorun O-019 sonrası sözleşmesine hizalandı.",
+  "observationCues": [
+    {
+      "id": "OBS-TRUNK-RANGE",
+      "_class": "observation",
+      "_whyNotAnErrorCode": "Şart 1 (M-F-232): bu bir HATA KODU DEĞİL ve G-/V-/P- ad-alanını TAŞIYAMAZ. İki iddia sınıfı ayrı: ÖĞÜT ('formun yanlış') uzman doğrulaması ister ve hata kodları expertPending'de KALIR; GÖZLEM ('ölçtüğümüz eğitmenlerin hiçbiri bu kadar eğilmiyor') ölçüm geçerliliği ister ve o kanıt zaten var. Bu şerit, expertPending bayrağını TÜKETMEZ ve KAPATMAZ — uzman turu geldiğinde öğüt şeridi AYRICA açılır, gözlem kalkmaz.",
+      "metric": "trunk_tilt",
+      "evaluateAt": [
+        "POSTURE_CHECK",
+        "PLAY"
+      ],
+      "condition": {
+        "kind": "metric",
+        "metric": "trunk_tilt",
+        "op": "gt",
+        "value": 14.0
+      },
+      "silentWhen": {
+        "kind": "metric",
+        "metric": "trunk_tilt",
+        "op": "lte",
+        "value": 14.0
+      },
+      "_silentWhen_why": "Şart 6 (pozitif ikiz): aralık İÇİNDEYKEN SUSMAK, dışındayken görünmek kadar sözleşmenin parçası. Sürekli konuşan bir 'gözlem' işareti gözlem değil, arka plan gürültüsüdür — ve kullanıcı onu ölçüm sanır. İki yön AYRI ve BİRLİKTE test edilir.",
+      "cooldownMs": 30000,
+      "template": "OBS_TRUNK_OUTSIDE_RANGE",
+      "templateData": {
+        "n": 3,
+        "sourceClass": "piano teachers",
+        "thresholdDeg": 14.0
+      },
+      "_templateData_why": "Şart 3: N ve kaynak sınıfı CÜMLENİN İÇİNDE. Sayı dayanağını taşımadan görünmüyor — '14 dereceyi aştın' değil, 'kaydettiğimiz N eğitmenin hiçbiri bu kadar eğilmiyor'. measuredDeg'i motor çalışma zamanında doldurur; metin app'te, motor kullanıcı metni ÜRETMEZ (şart 2).",
+      "_derivedFrom": {
+        "artifact": "config/references/piano-posture-setup.v1.json",
+        "generatedAt": "2026-07-29T23:21:56.185407Z",
+        "contributingTakes": 3,
+        "dispersionMedianDeg": 1.09,
+        "toleranceSource": "floor",
+        "floorBoundShare": 1.0,
+        "_why": "Gerekçe metninin MAKİNE-OKUNUR ikizi. Neden gerekti: gitarın kendi _noiseBand_why'ı '3 bağımsız eğitmen, medyan 0.54°' diyordu — DEĞER (8) hâlâ doğruydu ama DAYANAK bayatmıştı (artefakt artık 7 take, 2.24°). Sayı karşılaştıran bir kapı bunu göremez; bayat gerekçe, doğru sayının arkasında sessizce yaşar. Bu blok --check tarafından artefaktla karşılaştırılır, böylece regen sonrası gerekçe de bayatlayamaz."
+      },
+      "_thresholdIsFloorBound": "Şart 7 (M-O-63 şeffaflığı): 14,0° `gates.clusterToleranceDeg` — anlaşma kapısının barı. Bu eşiğin ALTINDAKİ skorlama toleransı (8,0°) dispersiyondan DEĞİL, dispersiyonun tolerans tabanına ÇARPMASINDAN geliyor (ölçülen dispersiyon 1.09°, floorBoundShare 1.0). İDDİA ile SAYI ÖRTÜŞÜK olmalı: cue 'aralığın dışındasın' der, 'hatalısın' DEMEZ — çünkü elimizdeki kanıt eğitmenlerin işgal ettiği aralıktır, doğru/yanlış hükmü değil.",
+      "_eligibility": "Şart 4: yalnız ATTESTED referans + `_derivedFrom` damgalı eşik taşıyan metrik-çalgı çiftinde ve `derive_posture_thresholds.py --check` YEŞİLKEN geçerli. Uygunluk `tools/validate_observation_cues.py` tarafından mekanik sınanır."
+    }
+  ]
 }

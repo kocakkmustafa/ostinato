@@ -15,6 +15,7 @@ import '../design/widgets.dart';
 // taklit olurdu).
 // source-only: ekranda çocuk rejimine dair kullanıcı cümlesi YOK ve
 // olmamalı — olmayan bir rejimi anlatmak onu varmış gibi gösterirdi.
+  // closedPaths: none-known
 /// Canlı çalgı cümlesi — SAYI ve ADLAR `library.json`dan TÜRER.
 /// Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce
 /// yanlış olur ve hiçbir test kırılmaz (O-068).
