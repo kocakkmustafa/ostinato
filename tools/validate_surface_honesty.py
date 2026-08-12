@@ -672,48 +672,148 @@ def android_declares(permission: str) -> bool:
     return p.exists() and permission in p.read_text(encoding="utf-8")
 
 
-def platform_permission_strings():
-    """İzin gerekçesi metinleri — İŞLETİM SİSTEMİNİN kullanıcıya gösterdiği
-    yüzey (O-099, koordinatör sevki 2026-08-12).
+# ── PLATFORM/MAĞAZA METİN YÜZEYLERİ (O-099 → O-100'de KAPSAM GENİŞLETİLDİ) ──
+#
+# **① Neden var (O-099):** bu kapı `ios_declares()` ile yalnız ANAHTARIN
+# VARLIĞINA bakıyordu, METNE hiç bakmıyordu. `NSCameraUsageDescription`
+# içinde 08-07'de ölçülüp YANLIŞ bulunan saklama iddiası günlerce sevk
+# edildi. Kullanıcı o cümleyi onboarding'in *"izni kurulum kontrolünde
+# isteyeceğiz"* sözünün hemen ardından sistem diyaloğunda görür.
+#
+# **② Neden kapsam GENİŞLEDİ (O-100, koordinatör kısıtı):** JabLab aynı
+# yanlış cümlenin ÜÇÜNCÜ bir yüzeyini buldu — `docs/store/listing.json`
+# içindeki `description` alanı — ve onun kapısı **yalnız
+# `cameraPermissionRationale`ı** okuduğu için kaçırdı.
+#   ⭐ *Bir kapının yakaladığı yüzey sayısı, kapının OKUDUĞU alan sayısıdır.*
+#   ⭐ *Kapsam dışındaki kopya, DÜZELTME TURUNDA BİLE hayatta kalır.*
+#
+# **KISIT ②: ALAN-ADI BEYAZ LİSTESİ TUTULMAZ.** Kapsam DOSYA sayımından ve
+# değerin BİÇİMİNDEN türer. `endswith("UsageDescription")` bir alan-adı
+# filtresiydi ve tam JabLab'ın kapısının hatasıydı — kaldırıldı. Artık her
+# yuvalı yapının TÜM string değerleri yürünüyor; ayıklama PROSA BİÇİMİNE
+# göre (boşluk taşıyor mu · build değişkeni mi), ada göre DEĞİL. Böylece
+# yarın eklenen `NSPhotoLibraryUsageDescription` ya da bir mağaza
+# `description`ı kapıya KENDİLİĞİNDEN girer — kimse liste güncellemez.
+#
+# **Ostinato ölçümü (2026-08-12):** mağaza taslağı YOK (pozitif kontrol:
+# aynı desen JabLab'ın `docs/store/listing.json`unu buluyor). Yokluk
+# ADIYLA raporlanır — sessizce "temiz" sayılmaz.
 
-    **Neden eklendi:** bu kapı bugüne dek `ios_declares()` ile yalnız
-    ANAHTARIN VARLIĞINA bakıyordu, METNE hiç bakmıyordu. Ölçüldü:
-    `NSCameraUsageDescription` içinde 08-07'de ölçülüp YANLIŞ bulunan
-    saklama iddiası (*"the app only keeps the body angles it measures"*)
-    sağ kalmıştı — `grep NSCameraUsageDescription test tools docs` → 0 atıf.
-    Sevk edilen, hiçbir kapının ölçmediği bir yüzeydi.
+#: Build değişkeni (`$(FLUTTER_BUILD_NAME)`) ya da tek-simge değer
+#: (`APPL`, `????`, `Main`, `6.0`) prosa DEĞİLDİR. Ölçüm: plist'in 24 string
+#: değerinden yalnız 1'i prosa (izin gerekçesi) — geri kalanı yapılandırma.
+_BUILD_VAR = re.compile(r"\$\(|\$\{")
 
-    **Neden birinci sınıf yüzey:** kullanıcı bu cümleyi onboarding'in
-    *"izni kurulum kontrolünde isteyeceğiz"* sözünün hemen ardından, sistem
-    diyaloğunda görür. Akışın parçası, dışı değil — ve uygulama içi metinden
-    daha zor düzeltilir (build gerektirir).
 
-    Aile ölçümü (koordinatör, 2026-08-12): beş hattın **4'ü** izin metninde
-    bir saklama iddiası taşıyor. Cümleyi kimse YAZMADI, hepsi DEVRALDI.
+def _is_prose(value: str) -> bool:
+    """Kullanıcıya cümle olarak görünebilecek bir metin mi? ADA BAKMAZ."""
+    v = value.strip()
+    return bool(v) and " " in v and not _BUILD_VAR.search(v)
+
+
+def prose_values(obj, path=""):
+    """Yuvalı bir yapıdaki (dict/list) TÜM string değerlerini yürür ve
+    PROSA olanları `(yol, metin)` olarak döndürür — **alan adına hiç
+    bakmadan** (kısıt ②). plist, mağaza listesi ve strings.xml aynı
+    yürüyücüyü kullanır: bir yüzey türü eklemek yeni bir kural istemez.
     """
-    out = []
-    ios = Path("ios/Runner/Info.plist")
-    if ios.exists():
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            yield from prose_values(value, f"{path}.{key}" if path else str(key))
+    elif isinstance(obj, list):
+        for i, value in enumerate(obj):
+            yield from prose_values(value, f"{path}[{i}]")
+    elif isinstance(obj, str) and _is_prose(obj):
+        yield path, obj
+
+
+#: Mağaza/metadata taslaklarının GELENEKSEL yerleri (aile geneli). Bu bir
+#: ALAN listesi değil, DOSYA listesi — alanlar `prose_values` ile türer.
+STORE_TEXT_GLOBS = [
+    "docs/store/**/*.json", "docs/store/**/*.md", "docs/store/**/*.txt",
+    "fastlane/**/metadata/**/*.txt", "store/**/*.json",
+]
+
+
+#: SATICI (vendored) yolları — BİZİM metnimiz değil. Ölçüldü: `ios/**/
+#: Info.plist` üç dosya buluyor ve ikisi **MediaPipe xcframework**'ünün kendi
+#: plist'i. Prosa vermiyorlar (yanlış-pozitif yok), ama kapsam satırında
+#: "3 dosya" demek AYNI TÜRDEN olmayan şeyleri saymaktır (M-F-499'un sayım
+#: kuralı) — kendi yüzeyimiz sanılır. Bu bir ALAN-ADI filtresi değil, SAHİPLİK
+#: filtresi: `Pods/` CocoaPods'un satıcı dizinidir, `build/` üretilmiş çıktı.
+_VENDOR_PATH = re.compile(r"(^|/)(Pods|build|\.symlinks|\.dart_tool)(/|$)")
+
+
+def _ours(p: Path) -> bool:
+    return not _VENDOR_PATH.search(str(p))
+
+
+def claim_bearing_text_surfaces():
+    """Saklama/gizlilik iddiası taşıyabilen HER metin yüzeyi + kapsam raporu.
+
+    Döner: `(yüzeyler, rapor)` — rapor her yüzey sınıfı için kaç DOSYA ve kaç
+    PROSA değer görüldüğünü taşır. Rapor basılır: taranmayan bir sınıf
+    'temiz' sanılmasın (bu kapının kendi kapsam hatası tam böyle görünmezdi).
+    """
+    out, report = [], {}
+
+    ios_files = [f for f in sorted(Path("ios").rglob("Info.plist")) if _ours(f)]
+    seen = 0
+    for ios in ios_files:
         try:
             data = plistlib.loads(ios.read_bytes())
         except Exception as exc:  # bozuk plist SESSİZCE atlanmaz
-            out.append((f"{ios} (OKUNAMADI: {exc})", ""))
-            data = {}
-        for key, value in sorted(data.items()):
-            if key.endswith("UsageDescription") and isinstance(value, str):
-                out.append((f"{ios}:{key}", value))
-    # Android'de kamera izni gerekçe METNİ taşımıyor (ölçüldü: strings.xml
-    # yok, manifest yalnız `uses-permission` satırı). Yol yine de kuruluyor:
-    # bir gün gerekçe eklenirse kapı onu KENDİLİĞİNDEN görür.
-    for strings in sorted(Path("android").rglob("strings.xml")):
+            out.append((f"{ios} (OKUNAMADI: {exc})", "plist okunamadi"))
+            continue
+        for key, value in prose_values(data):
+            out.append((f"{ios}:{key}", value))
+            seen += 1
+    report["plist"] = (len(ios_files), seen)
+
+    seen = 0
+    android_files = [f for f in sorted(Path("android").rglob("strings.xml"))
+                     if _ours(f)]
+    for strings in android_files:
         try:
             import xml.etree.ElementTree as ET
             for node in ET.parse(strings).getroot().iter("string"):
-                if node.text and node.get("name"):
+                if node.text and node.get("name") and _is_prose(node.text):
                     out.append((f"{strings}:{node.get('name')}", node.text))
+                    seen += 1
         except Exception as exc:
-            out.append((f"{strings} (OKUNAMADI: {exc})", ""))
-    return out
+            out.append((f"{strings} (OKUNAMADI: {exc})", "xml okunamadi"))
+    # Manifest'in kendi metin taşıyan öznitelikleri (`android:label`,
+    # `android:description`) — öznitelik ADI değil, DEĞERİN biçimi ayıklar.
+    manifests = [f for f in sorted(Path("android").rglob("AndroidManifest.xml"))
+                 if _ours(f)]
+    for man in manifests:
+        for m in re.finditer(r'android:(\w+)="([^"]*)"',
+                             man.read_text(encoding="utf-8")):
+            if _is_prose(m.group(2)):
+                out.append((f"{man}:android:{m.group(1)}", m.group(2)))
+                seen += 1
+    report["android"] = (len(android_files) + len(manifests), seen)
+
+    seen, store_files = 0, []
+    for pattern in STORE_TEXT_GLOBS:
+        store_files += [f for f in sorted(Path(".").glob(pattern)) if _ours(f)]
+    for f in store_files:
+        try:
+            if f.suffix == ".json":
+                for key, value in prose_values(
+                        json.loads(f.read_text(encoding="utf-8"))):
+                    out.append((f"{f}:{key}", value))
+                    seen += 1
+            else:
+                text = f.read_text(encoding="utf-8").strip()
+                if _is_prose(text):
+                    out.append((str(f), text))
+                    seen += 1
+        except Exception as exc:
+            out.append((f"{f} (OKUNAMADI: {exc})", "magaza dosyasi okunamadi"))
+    report["mağaza"] = (len(store_files), seen)
+
+    return out, report
 
 
 def sentences(text: str):
@@ -851,14 +951,36 @@ def selftest() -> int:
     # yıllarca ölçülmedi. Uygulama kamerayı kullanıyor, dolayısıyla
     # `NSCameraUsageDescription` OKUNABİLİR olmak zorunda. Bu kontrol
     # "kapsamı ekledim" iddiasını "kapsam gerçekten dolu" ölçümüne çevirir.
-    perm = platform_permission_strings()
+    perm, _report = claim_bearing_text_surfaces()
     if not perm:
-        dead.append("platform_permission_strings() BOŞ — izin metni yolu "
+        dead.append("claim_bearing_text_surfaces() BOŞ — platform metni yolu "
                     "ölmüş; kapı 'temiz' derken sıfır tarar (O-099)")
     elif not any(k.endswith("NSCameraUsageDescription") and t.strip()
                  for k, t in perm):
         dead.append("NSCameraUsageDescription METNİ okunamadı — anahtar "
                     "varlığı ölçülüyordu, METİN yine ölçülmüyor demektir")
+    # ⭐ O-100: MAĞAZA yüzeyi Ostinato'da HENÜZ YOK, ama kapının onu
+    # yakalayacağı BUGÜN kanıtlanır — yoksa "kapsama aldım" iddiası, dosya
+    # ortaya çıktığı gün sınanacak bir VARSAYIM olarak kalır.
+    # Örnek JabLab'ın GERÇEK kaçan yüzeyinin biçimi: yuvalı JSON + `description`
+    # alanı + üçüncü-şahıs-aktif saklama iddiası. Alan adı beyaz listeye
+    # ALINMADIĞI için yürüyücünün onu bulması gerekir.
+    jablab_shaped = {"listing": {"en-US": {
+        "title": "JabLab",
+        "description": "JabLab keeps the body positions it measures, "
+                       "not video.",
+        "version": "$(FLUTTER_BUILD_NAME)",
+    }}}
+    found = dict(prose_values(jablab_shaped))
+    hit = [p for p, t in found.items() if RETENTION_CLAIM.search(t)]
+    if not hit:
+        dead.append("MAĞAZA YÜZEYİ: yuvalı bir listing'in `description` alanı "
+                    "yürüyücüden ya da desenden KAÇIYOR — JabLab'ın üçüncü "
+                    "yüzeyi bu kapıdan da geçerdi (O-100)")
+    if any("version" in p for p in found):
+        dead.append("build değişkeni prosa sayıldı — `$(...)` ayıklaması "
+                    "kırılmış; kapsam sayısı şişer ve vakum kapısı anlamını "
+                    "yitirir")
     if dead:
         print(f"⛔ {len(dead)} ÖLÜ DESEN/YOL (pozitif ikiz başarısız):")
         for d in dead:
@@ -876,10 +998,10 @@ def main() -> int:
     dart_raw = list(dart_surface_strings())
     surfaces = [(f"{f}:{ln}", t) for f, ln, t in dart_raw]
     surfaces += [(p, t) for p, t in json_surface_strings()]
-    # İzin gerekçesi metinleri (O-099): İŞLETİM SİSTEMİNİN gösterdiği yüzey.
-    # Diğer yüzeylerle AYNI kurallardan geçer — ayrı bir muafiyet katmanı
-    # yaratmak, bugün kapatılan deliğin kendisiydi.
-    permission_surfaces = platform_permission_strings()
+    # Platform/mağaza metin yüzeyleri (O-099 → O-100): İŞLETİM SİSTEMİNİN ve
+    # MAĞAZANIN gösterdiği metinler. Diğer yüzeylerle AYNI kurallardan geçer —
+    # ayrı bir muafiyet katmanı yaratmak, bugün kapatılan deliğin kendisiydi.
+    permission_surfaces, surface_report = claim_bearing_text_surfaces()
     surfaces += permission_surfaces
     surfaces = [(w, t) for w, t in surfaces if not IDENTIFIER_LIKE.match(t)]
 
@@ -1147,11 +1269,20 @@ def main() -> int:
     # gerekçesi metni OLMAK ZORUNDA. Sıfır dönerse yol kırılmış demektir ve
     # "temiz" hükmü geçersiz — tam bu yüzeyin yıllarca ölçülmemiş olması bu
     # kapının var olma sebebi.
-    if not permission_surfaces:
+    if surface_report["plist"][1] < 1:
         violations.append(
-            "VAKUM: hiç izin gerekçesi metni bulunamadı (beklenen ≥1) — "
+            "VAKUM: plist'te hiç prosa metin bulunamadı (beklenen ≥1) — "
             "uygulama kamera kullanıyor; plist yolu kırılmış olabilir, "
             "'temiz' hükmü GEÇERSİZ")
+    # O-100 vakumu: mağaza dosyası VARSA prosa vermek zorundadır. Dosya YOKSA
+    # bu bir ihlal DEĞİL (Ostinato'da taslak yok, ölçüldü) — ama kapsam
+    # satırında ADIYLA yazılır, sessizce "temiz" sayılmaz (M-F-444).
+    store_files, store_prose = surface_report["mağaza"]
+    if store_files and not store_prose:
+        violations.append(
+            f"VAKUM: {store_files} mağaza metni dosyası var ama HİÇ prosa "
+            f"alan çıkmadı — alan yürüyücüsü kırılmış olabilir (JabLab'ın "
+            f"`description` vakası tam bu sınıftı), 'temiz' hükmü GEÇERSİZ")
 
     if violations:
         print(f"⛔ {len(violations)} YÜZEY DÜRÜSTLÜĞÜ İHLALİ:")
@@ -1172,10 +1303,18 @@ def main() -> int:
     # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
     print(f"   kapsam: {DART_ROOTS} + kabuğa giden {len(shipped_json_assets())} "
           f"JSON varlığı ({scanned}) + {len(ruleset_files)} ruleset "
-          f"(userExplanation katmanı, O-058) + "
-          f"{len(permission_surfaces)} izin gerekçesi metni "
-          f"({', '.join(w.split(':')[-1] for w, _ in permission_surfaces)}"
-          f" — O-099, İŞLETİM SİSTEMİNİN gösterdiği yüzey)")
+          f"(userExplanation katmanı, O-058)")
+    # O-100: yüzey SINIFI başına dosya/prosa sayımı — bir sınıfın SIFIR
+    # olması da ADIYLA yazılır. "Mağaza: 0 dosya" cümlesi, o yüzeyin
+    # taranmadığını değil VAR OLMADIĞINI söyler; ikisi karıştırılamaz.
+    print("   platform/mağaza kapsamı (O-099/O-100 — alan-adı beyaz listesi "
+          "YOK, prosa biçiminden türer):")
+    for cls, (files, prose) in surface_report.items():
+        note = ""
+        if cls == "mağaza" and files == 0:
+            note = "  ← Ostinato'da taslak YOK (ölçüldü; aynı desen " \
+                   "JabLab'ın docs/store/listing.json'unu buluyor)"
+        print(f"     {cls:8} {files} dosya · {prose} prosa metin{note}")
     return 0
 
 
