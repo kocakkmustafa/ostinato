@@ -10,7 +10,7 @@
   "  5. status=locked olan her ders lockedReason tasimak zorunda (esik degeri DEGIL, EKSIK OLCUMUN adi).",
   "  6. Kapsam-disi (comingSoonInThisDiscipline) her madde gerekce tasimak zorunda."
  ],
- "schemaVersion": 2,
+ "schemaVersion": 3,
  "language": "en",
  "disciplines": [
   {
@@ -18,6 +18,9 @@
    "displayName": "Guitar",
    "status": "live",
    "rulesetId": "guitar",
+   "starterLessonId": "guitar.foundations.camera_space",
+   "_why_starter": "ONAYLI TASARIMDAN, secilmedi: `Ostinato.dc.html` satir 133-145 + 982-986 'START HERE' seridini UC calgidan UCER ders olarak veriyor ve gitarin kalemi 'Camera and space'. Kimlik burada, EKRANDA DEGIL (kapi: validate_starters.py) — cunku hangi dersin giris kapisi oldugu bir ICERIK karari, ve ekran kodunda gomulu olsaydi gozden gecirilemezdi (ayni gerekce: honesty.instrumentSpecificGap).",
+   "_why_starter_kindNote": "Bu ders `guide` sinifinda (focus=setup, olcum iddiasi YOK); san ve piyanonunki `scored`. Uclu AYNI sinifta DEGIL ve bu bir kusur degil tasarimin secimi: ilk adim gitarci icin kurulum, otekiler icin olcumun ne oldugunu gosteren ders. Sinif farki gizlenmedi, yazildi.",
    "blurb": "Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit. This build hears nothing: there is no microphone input, so every judgement comes from the camera.",
    "honesty": {
     "measured": [
@@ -194,6 +197,8 @@
    "displayName": "Voice",
    "status": "live",
    "rulesetId": "voice",
+   "starterLessonId": "voice.foundations.teacher_range",
+   "_why_starter": "ONAYLI TASARIMDAN: `Ostinato.dc.html` satir 133-145 sanin 'START HERE' kalemini 'How much teachers actually differ' olarak veriyor. Urunun tek cumlesi ('dogru durus bir NOKTA degil BANT') tam bu derste anlatiliyor — giris kapisi olarak secilmesi tasarimin kendi mantigiyla tutarli.",
    "blurb": "Put your phone where it can see you from the waist up. We check how you hold yourself against six independent singing teachers. This build hears nothing: there is no microphone input, so we watch your posture and never listen to your voice.",
    "_blurbRevised": "2026-08-04: onceki blurb 'get feedback on pitch, sustain and posture' diyordu. Perde ve sustain motorlari GERCEK ve olculuyor, ama GERCEK BIR INSAN SESI kaydinda hic dogrulanmadi (bkz. sustained_note dersi, locked). Canli bir disiplinde blurb bir SOZDUR — kilitli olani vaat edemez.",
    "honesty": {
@@ -356,6 +361,8 @@
    "displayName": "Piano",
    "status": "live",
    "rulesetId": "piano",
+   "starterLessonId": "piano.foundations.posture",
+   "_why_starter": "ONAYLI TASARIMDAN: `Ostinato.dc.html` satir 133-145 piyanonun 'START HERE' kalemini 'How you sit at the keyboard' olarak veriyor — id karsiligi piano.foundations.posture.",
    "blurb": "Put your phone where it can see you at the keyboard from the waist up. We check how you sit against three independent piano teachers. This build hears nothing: there is no microphone input, so your notes are never timed in your room.",
    "_blurbRevised": "2026-08-04: onceki blurb 'chords with posture and hand feedback' diyordu. EL GERI BILDIRIMI DIYE BIR SEY YOK — el/parmak landmark'i hic yok (P-WRIST-COLLAPSE ve P-FINGER-FLAT bu yuzden blockedByTool). Canli bir disiplinde var olmayan bir yetenegi vaat etmek, kullanicinin dogrulayamayacagi tek satirdir.",
    "honesty": {
@@ -516,6 +523,6 @@
    "_wave": "W1"
   }
  ],
- "_schemaVersion_why": "v2 (2026-08-07, O-057): v1'den beri UC yeni alan girdi ve sürüm numarasi yerinde kaldi — 5 arac schemaVersion'i OKUYORDU ama HICBIRI dogrulamiyordu. Eklenenler: honesty.instrumentSpecificGap (O-044) · honesty.outOfScopeDerived (O-050, uretilen) · kilitli derslerde promotionPath.unblockedBy (O-046). Artik tools/validate_orphan_keys.py bu alani GERCEKTEN tuketiyor: sema degisirse ikisi BIRLIKTE yukselmek zorunda.",
+ "_schemaVersion_why": "v2 (2026-08-07, O-057): v1'den beri UC yeni alan girdi ve sürüm numarasi yerinde kaldi — 5 arac schemaVersion'i OKUYORDU ama HICBIRI dogrulamiyordu. Eklenenler: honesty.instrumentSpecificGap (O-044) · honesty.outOfScopeDerived (O-050, uretilen) · kilitli derslerde promotionPath.unblockedBy (O-046). Artik tools/validate_orphan_keys.py bu alani GERCEKTEN tuketiyor: sema degisirse ikisi BIRLIKTE yukselmek zorunda. || v3 (2026-08-13, O-117): `starterLessonId` eklendi (+ kayit alanlari `_why_starter`, `_why_starter_kindNote`). Surum ELLE yukseltildi, ve burada kuralin kapiyi astigi yer gorundu: `validate_orphan_keys.py` iki sayinin ESITLIGINI denetliyor, yeni bir alanin onlari YUKSELTMEYE ZORLADIGINI degil — alani ekleyip surumu birakan biri SESSIZCE gecerdi. Bosluk kapinin kendi ustune ve KAPI-ENVANTERI'ne isimli yazildi, bu turda KAPATILMADI.",
  "_productName_removed": "2026-08-07 (O-057): 'Ostinato — Music Practice' alani KALDIRILDI. Hicbir tuketicisi yoktu ve uygulamanin GERCEK basligiyla (MaterialApp title 'Ostinato', kutuphane ekraninin logo metni 'Ostinato') AYRISIYORDU — urun adinin ikinci, denetlenmeyen kaynagiydi. Tek kaynak kodda kaldi."
 }

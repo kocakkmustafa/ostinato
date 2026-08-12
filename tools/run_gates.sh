@@ -62,6 +62,8 @@ run() {
 run "ruleset şeması + linter"        python3 tools/validate_ruleset.py
 run "kütüphane dürüstlük kuralları"  python3 tools/validate_library.py
 run "içerik-atıf süpürmesi"        python3 tools/validate_references.py
+run "START HERE şeridi (türetim)"    python3 tools/validate_starters.py
+run "starter kapısı öz-testi"        python3 tools/validate_starters.py --selftest
 run "koşum envanteri (kapsam)"       python3 tools/validate_runner_inventory.py
 run "gizlilik manifesti ↔ kod"       python3 tools/validate_privacy_manifest.py
 run "gizlilik kapısı öz-testi"       python3 tools/validate_privacy_manifest.py --selftest

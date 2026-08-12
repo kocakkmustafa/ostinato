@@ -38,7 +38,8 @@ final class ContentRepository {
 final class Discipline {
   const Discipline._(this.id, this.displayName, this.status, this.blurb,
       this.measured, this.notMeasured, this.instrumentSpecificGap,
-      this.outOfScopeDerived, this.comingSoon, this.courses);
+      this.outOfScopeDerived, this.comingSoon, this.courses,
+      this.starterLessonId);
 
   final String id;
   final String displayName;
@@ -72,9 +73,30 @@ final class Discipline {
 
   final List<Course> courses;
 
+  /// Kütüphanenin "START HERE" şeridinin bu çalgıdaki kalemi
+  /// (DESIGN-AHEAD-OF-CODE §1.2). Kimlik VERİDE durur, ekranda değil:
+  /// hangi dersin giriş kapısı olduğu bir İÇERİK seçimidir ve ekran kodunda
+  /// gömülü olsaydı gözden geçirilemezdi — [instrumentSpecificGap] ile aynı
+  /// gerekçe. Seçimin kaynağı `_why_starter` alanında; kapı
+  /// `tools/validate_starters.py`.
+  final String? starterLessonId;
+
   /// Geriye-uyum: tek kursluk bugünkü yapıda düz liste isteyen çağıranlar için.
   List<Lesson> get lessons =>
       <Lesson>[for (final Course c in courses) ...c.lessons];
+
+  /// [starterLessonId]'nin çözülmüş hâli — BULUNAMAZSA `null`, ve o durumda
+  /// şerit bu çalgı için ÇİZİLMEZ. Sessiz bir yer tutucu göstermek, olmayan
+  /// bir giriş kapısını varmış gibi anlatırdı; kapı zaten çözülemeyen kimliği
+  /// kırmızıya düşürüyor, yüzey de onu uydurmuyor.
+  Lesson? get starterLesson {
+    final String? id = starterLessonId;
+    if (id == null) return null;
+    for (final Lesson l in lessons) {
+      if (l.id == id) return l;
+    }
+    return null;
+  }
 
   static Discipline _fromJson(Map<String, dynamic> m) {
     final List<Course> courses = <Course>[
@@ -95,6 +117,7 @@ final class Discipline {
       List<String>.from(
           m['comingSoonInThisDiscipline'] as List<dynamic>? ?? <dynamic>[]),
       courses,
+      m['starterLessonId'] as String?,
     );
   }
 }

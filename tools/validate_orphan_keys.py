@@ -45,7 +45,14 @@ PARSER = "lib/app/content.dart"
 #: yükselir; biri yükselmezse kapı kırmızı yanar.
 #: v2 (2026-08-07): `honesty.instrumentSpecificGap` · `honesty.outOfScopeDerived`
 #: · kilitli derslerde `promotionPath.unblockedBy` eklendi.
-EXPECTED_SCHEMA_VERSION = 2
+#: v3 (2026-08-13, O-117): `starterLessonId` eklendi (+ `_why_starter`,
+#: `_why_starter_kindNote` kayıt alanları).
+#: ⚠️ İSİMLİ BOŞLUK (bu turda ölçüldü): bu kapı iki sayının EŞİTLİĞİNİ
+#: denetler, yeni bir alanın onları YÜKSELTMEYE ZORLADIĞINI değil. Alan
+#: eklenip sürüm bırakılırsa kapı SESSİZ kalır — yükümlülük yazılı kuralda,
+#: kapıda değil. Kapatmanın yolu belli (bilinen-alan kümesini dondurup
+#: karşılaştırmak) ama BU TURDA YAPILMADI, adıyla açık bırakıldı.
+EXPECTED_SCHEMA_VERSION = 3
 
 #: Anahtarı KABUK dışında tüketen yerler de sayılır (kapılar, üreteçler).
 READER_ROOTS = ["tools", "test", "lib", "packages"]

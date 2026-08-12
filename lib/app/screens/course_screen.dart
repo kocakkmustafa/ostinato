@@ -7,6 +7,26 @@ import 'lesson_demo_screen.dart';
 import 'lesson_locked_screen.dart';
 import 'lesson_scored_screen.dart';
 
+/// Bir dersin AÇILACAĞI ekran — [LessonKind]'ın tek karşılığı.
+///
+/// Top-level, çünkü iki çağıranı var (kurs listesi ve Kütüphane'nin "START
+/// HERE" şeridi) ve switch'in İKİ kopyası olsaydı biri sessizce eskirdi:
+/// yeni bir [LessonKind] eklendiğinde derleyici yalnız güncellenen kopyayı
+/// bilir. Tek yer = tek gerçek.
+Widget lessonScreenFor({
+  required Discipline discipline,
+  required Lesson lesson,
+  required InstrumentHue hue,
+}) =>
+    switch (lesson.kind) {
+      LessonKind.locked =>
+        LessonLockedScreenRoute(discipline: discipline, lesson: lesson, hue: hue),
+      LessonKind.demoOnly =>
+        LessonDemoScreenRoute(discipline: discipline, lesson: lesson, hue: hue),
+      LessonKind.guide || LessonKind.scored =>
+        LessonScoredScreenRoute(discipline: discipline, lesson: lesson, hue: hue),
+    };
+
 /// Kurs — ders listesi. Üç görsel sınıf burada AYRI çip taşır; kilitli
 /// dersin gerekçesinin İLK CÜMLESİ satır-içi görünür (§4/⑭ — bilgi tonu,
 /// merak-tuzağı DEĞİL).
@@ -96,14 +116,8 @@ class _LessonRow extends StatelessWidget {
         key: Key('lesson-${lesson.id}'),
         borderRadius: BorderRadius.circular(18),
         onTap: () {
-          final Widget screen = switch (lesson.kind) {
-            LessonKind.locked => LessonLockedScreenRoute(
-                discipline: discipline, lesson: lesson, hue: hue),
-            LessonKind.demoOnly => LessonDemoScreenRoute(
-                discipline: discipline, lesson: lesson, hue: hue),
-            LessonKind.guide || LessonKind.scored => LessonScoredScreenRoute(
-                discipline: discipline, lesson: lesson, hue: hue),
-          };
+          final Widget screen = lessonScreenFor(
+              discipline: discipline, lesson: lesson, hue: hue);
           Navigator.of(context)
               .push(MaterialPageRoute<void>(builder: (_) => screen));
         },

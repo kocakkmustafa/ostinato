@@ -61,16 +61,33 @@ BİRİNDEN birer ders (Gitar "Camera and space" · Şan "How much teachers
 actually differ" · Piyano "How you sit at the keyboard"), kendi renk-kimliği
 ile, "START HERE" başlığı altında, instrument kartlarının HEMEN ALTINDA.
 
-**Kod:** `library_screen.dart`'ta yok. Ekran yalnız dürüstlük kutusu + 3
-instrument kartı taşıyor, altında başka bir bölüm yok.
+**✅ YAPILDI (2026-08-13, `O-117`).** Şerit `library_screen.dart`'ta;
+`_StarterRow`, anahtar `starter-<disiplin>`.
 
-**Neden yok:** giydirme turunun kapsamı 17 maddelik uyum listesindeydi, bu
-öğe o listede İSİMLENDİRİLMEMİŞTİ — atlanmadı, hiç fark edilmedi.
+**Açık bırakılan karar KAPANDI — türetildi, elle yazılmadı.** "Hangi 3 ders"
+kimliği ekranda DEĞİL `library.json`'da: her canlı disiplin bir
+`starterLessonId` + `_why_starter` bildiriyor, ekran yalnız çözüyor. Gerekçe
+bu deponun kendi kuralından: `honesty.instrumentSpecificGap` aynı sebeple
+veriye taşınmıştı — *seçim ekran kodunda gömülü olsaydı gözden geçirilemezdi.*
+Üç kimliğin KAYNAĞI icat değil, onaylı `Ostinato.dc.html` (satır 133-145 +
+982-986); `_why_starter` alanları o satırları adıyla taşıyor.
 
-**İnşa edilirse neye dokunur:** `library_screen.dart`'a yeni bir bölüm;
-"hangi 3 ders" seçimi bir İÇERİK kararı (design'da hardcoded, gerçek üründe
-`library.json`'dan mı türer yoksa elle mi seçilir — bu app'in kendi
-"türetimli listeler elle yazılmaz" disiplinine göre muhtemelen türetilmeli).
+**Kapı:** `tools/validate_starters.py` (+ `--selftest`, 6 mutasyon + pozitif
+ikiz) — ① canlı disiplin starter bildirir ② kimlik gerçekten vardır
+③ starter `locked`/`demoOnly` OLAMAZ (*"Start here" bir çıkmaza işaret
+edemez*) ④ **ekran kodu hiçbir ders kimliği taşımaz** ⑤ gerekçe boş olamaz.
+Gerçek dosyada üç sabotaj da indi (ekrana kimlik gömme · starter'ı kilitli
+derse çevirme · bildirimi silme).
+
+**Test:** `test/library_starters_test.dart` (4 test) — beklenen değerlerin
+hiçbiri elle yazılmadı, hepsi `repo`dan türüyor; gezinme tanığı
+`NavigatorObserver` (ilk yazımda "şerit kayboldu mu" diye sormuştum ve test
+haklı olarak düştü: `Navigator.push` önceki rotayı silmez, örter).
+
+**⚠️ Ölçülen sınır, kaydı için:** şerit 375×812'de **katlamanın altında** —
+tasarım onu kartların "HEMEN ALTINA" koyuyor ve en dar yaygın telefonda
+oraya scroll'suz ulaşılmıyor. Bu bir kusur olarak DÜZELTİLMEDİ (tasarımın
+yerleşimi korundu); yerleşim kararı olarak koordinatöre yazıldı.
 
 ### 1.3 Library — instrument kartı altında 0-24° ortak-ölçek bandı
 
@@ -81,15 +98,22 @@ adının hemen altında ince bir yatay çubuk — o çalginin öğretmen-bandın
 actually occupy, on one shared scale of 0–24°. Piano's is narrow because
 three teachers is also the thinnest evidence we hold."
 
-**Kod:** `library_screen.dart`'ın `_InstrumentCard`'ı bunu taşımıyor — kart
-yalnız başlık + blurb (2 satır, ellipsis) + chevron.
+**✅ YAPILDI (2026-08-12, `O-053`).** `_InstrumentCard` artık
+`HorizontalBandTrack` taşıyor (anahtar `band-scale-<disiplin>`), altında
+sayı satırı ve kartların altında paylaşılan-ölçek notu
+(`library-band-scale-note`).
 
-**Neden yok:** aynı — 17 maddelik listede İSİMLENDİRİLMEMİŞ bir öğe.
+⚠️ **BU SATIR 2026-08-13'e kadar BAYAT DURDU** — inşa 08-12'de bitti, bu
+belge hâlâ *"kart bunu taşımıyor"* diyordu. Bulan: §1.2'yi inşa etmek için
+aynı dosyayı okuyan tur (O-117). Sınıf tanıdık: **artefaktın varlığı işin
+durumunu güncellemez** — "tasarım>kod" listesi, kod yetiştiğinde ELDE
+kapatılmazsa ters yönde yanıltır (yapılmış işi yapılmamış gösterir).
 
-**İnşa edilirse neye dokunur:** `_InstrumentCard`'a küçük bir `HorizontalBandTrack`
-benzeri widget (zaten var olan bileşen yeniden kullanılabilir); veri zaten
-`PostureContract`ta (`bandLowDeg`/`bandHighDeg`) — YENİ bir ölçüm gerekmez,
-yalnız render.
+**Tasarımın açıklama cümlesi KASITLI YAZILMADI:** taslak, piyanonun dar
+bandını "üç eğitmen en ince kanıt" diye açıklıyordu; bant genişliği ölçülen
+ARALIKTAN gelir, kaynak SAYISINDAN değil — ikisini nedensel bağlamak
+ölçmediğimiz bir ilişkiyi iddia etmek olurdu. Sayılar yan yana duruyor, bağı
+kuran cümle yok.
 
 ### 1.4 Demo-lesson: "Begin" düğmesi HİÇBİR treatment'ta kodda yok
 
@@ -326,8 +350,8 @@ kapatabilir.
 | # | Kalem | Yön | Kategori | Ekran/bileşen gerekir mi | Veri/asset boşluğu |
 |---|---|---|---|---|---|
 | 1.1 | Sesli antrenör göstergesi | tasarım>kod | **flow (çekirdek yetenek sırası)** | evet | TTS/ses hattı — aile-geneli karar |
-| 1.2 | Library "START HERE" şeridi | tasarım>kod | flow | evet | 3-ders seçimi türetilmeli mi kararı |
-| 1.3 | Library 0-24° bant çubuğu | tasarım>kod | asset (render) | hayır (mevcut karta ekleme) | yok — veri zaten `PostureContract`ta |
+| 1.2 | Library "START HERE" şeridi | **✅ YAPILDI (O-117, 2026-08-13)** | — | — | karar KAPANDI: türetildi (`starterLessonId` + kapı) |
+| 1.3 | Library 0-24° bant çubuğu | **✅ YAPILDI (O-053, 2026-08-12)** | — | — | — |
 | 1.4 | Demo-lesson "Begin" düğmesi | tasarım>kod | flow | hayır (düğme) + karar | Live'ın demoOnly'de ne göstereceği kararı |
 | 1.5 | Review paylaşım/consent | tasarım>kod (zaten dürüstçe ele alındı) | flow | evet, ileride | rapor formatı + gönderim kanalı |
 | 2.1 | Review "4 şey" içeriği | kod<tasarım (içerik eksik) | data | hayır (mevcut ekrana içerik) | çalgıya-özel 4. kalem + per-gap süre verisi |

@@ -5,6 +5,7 @@ import '../content.dart';
 import '../cue_text.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import 'course_screen.dart';
 import 'instrument_screen.dart';
 import 'settings_screen.dart';
 
@@ -20,6 +21,12 @@ class LibraryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Discipline> live =
         repo.disciplines.where((Discipline d) => d.status == 'live').toList();
+    // Şerit ÜÇ karttan bağımsız türetilir: canlı disiplinin bildirdiği
+    // `starterLessonId` çözülebiliyorsa kalem var, çözülemiyorsa YOK.
+    final List<(Discipline, Lesson)> starters = <(Discipline, Lesson)>[
+      for (final Discipline d in live)
+        if (d.starterLesson case final Lesson l) (d, l),
+    ];
     return Scaffold(
       backgroundColor: OstinatoColors.shell,
       body: DecoratedBox(
@@ -142,8 +149,92 @@ class LibraryScreen extends StatelessWidget {
                   style: hankenText(
                       size: 12, height: 1.5, color: OstinatoColors.textMuted),
                 ),
+                // "START HERE" şeridi (DESIGN-AHEAD §1.2). Hangi ders olduğu
+                // BURADA YAZMIYOR — her çalgının `starterLessonId`'sinden
+                // çözülüyor (`library.json`, gerekçesi `_why_starter`da).
+                // Şeridi hiç çizmemek ile boş çizmek arasındaki fark kasıtlı:
+                // çözülemeyen kimlik yüzeyde SESSİZ kalır, kapı KIRMIZI verir.
+                if (starters.isNotEmpty) ...<Widget>[
+                  const SizedBox(height: 22),
+                  kicker('Start here'),
+                  const SizedBox(height: 11),
+                  for (final (Discipline d, Lesson l) in starters) ...<Widget>[
+                    _StarterRow(discipline: d, lesson: l),
+                    const SizedBox(height: 9),
+                  ],
+                ],
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// "START HERE" şeridinin tek kalemi — çalgının renk kimliğini taşır ama
+/// kartın gradyanını TEKRARLAMAZ: şerit kartların altında ikinci bir vitrin
+/// değil, onların içine açılan tek bir kapı.
+///
+/// Dersin görsel sınıfını (`GUIDE`/`SCORED`) gösterir. Gösterilmese "başla"
+/// diyen üç satır aynı şeyi vaat ediyor sanılırdı; oysa gitarınki ölçüm
+/// iddiası TAŞIMAYAN bir yönerge dersi. Sınıf farkı kurs listesinde zaten
+/// görünüyor — burada gizlenmesi o listeyle çelişirdi.
+class _StarterRow extends StatelessWidget {
+  const _StarterRow({required this.discipline, required this.lesson});
+  final Discipline discipline;
+  final Lesson lesson;
+
+  @override
+  Widget build(BuildContext context) {
+    final InstrumentHue hue = InstrumentHues.of(discipline.id);
+    final String kindChip = switch (lesson.kind) {
+      LessonKind.guide => 'GUIDE',
+      LessonKind.scored => 'SCORED',
+      LessonKind.demoOnly => 'MEASURED · NOT MARKED',
+      LessonKind.locked => 'LOCKED',
+    };
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        key: Key('starter-${discipline.id}'),
+        borderRadius: BorderRadius.circular(16),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+            builder: (_) => lessonScreenFor(
+                discipline: discipline, lesson: lesson, hue: hue))),
+        child: Ink(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: hue.soft.first,
+            border: Border.all(color: Colors.white.withValues(alpha: .8)),
+          ),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '${discipline.displayName.toUpperCase()} · $kindChip',
+                      style: monoText(
+                          size: 8.5, color: hue.ink.withValues(alpha: .85)),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(lesson.displayName,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: hankenText(
+                            size: 14.5,
+                            weight: FontWeight.w500,
+                            color: hue.ink)),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(Icons.chevron_right,
+                  size: 20, color: hue.ink.withValues(alpha: .6)),
+            ],
           ),
         ),
       ),

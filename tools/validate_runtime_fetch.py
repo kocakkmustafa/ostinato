@@ -52,7 +52,12 @@ DECLARED = {
     "productionFontApiCalls": 3,
     "productionFetchDisabled": False,
     "bundledFontAssets": 0,
-    "testFilesDisablingFetch": 8,
+    # 8 → 9 (2026-08-13, O-117): `test/library_starters_test.dart` eklendi ve
+    # o da çekmeyi kapatıyor. Sayı ELLE yükseltilmedi — kapı ötttüğü için
+    # tazelendi, ki beyan-ölçüm ayrışması tam bunun için tasarlanmış karar
+    # noktasıydı (O-116, ② sınıfı). ⚠️ ASİMETRİ BÜYÜDÜ, adıyla: üretim hâlâ
+    # çekiyor, testlerin HEPSİ kapatıyor ⇒ hiçbir test bu davranışı GÖREMEZ.
+    "testFilesDisablingFetch": 9,
     "$why": (
         "ÖLÇÜLDÜ 2026-08-12. Üretim `ostinato_theme.dart` içinde "
         "`GoogleFonts.hankenGrotesk` · `GoogleFonts.ibmPlexMono` · "
@@ -187,8 +192,16 @@ def selftest() -> int:
         for d in dead:
             print(f"   - {d}")
         return 1
-    print("✅ çekme kapısı öz-testi GEÇTİ — ölçüm canlı (3 çağrı · 8 test "
-          "dosyası), uydurma sayı ve boş asimetri beyanı yakalanıyor")
+    # Sayılar ÖLÇÜMDEN gelir, elle YAZILMAZ (2026-08-13, O-117). Eskiden
+    # burada `3 çağrı · 8 test dosyası` sabitleri vardı ve 9. test dosyası
+    # eklenince satır SESSİZCE bayatladı — hiçbir kontrol bir print'in
+    # içindeki sayıyı sınamıyor. ⭐ Bayat beyan avlayan kapının KENDİ başarı
+    # satırı bayat bir beyandı; ve bir başarı satırındaki yanlış sayı, tam
+    # olarak kapının var oluş sebebi olan yanlış güveni üretir.
+    print(f"✅ çekme kapısı öz-testi GEÇTİ — ölçüm canlı "
+          f"({actual['productionFontApiCalls']} çağrı · "
+          f"{actual['testFilesDisablingFetch']} test dosyası), uydurma sayı "
+          f"ve boş asimetri beyanı yakalanıyor")
     return 0
 
 

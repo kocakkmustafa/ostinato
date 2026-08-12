@@ -148,7 +148,20 @@ KAYNAĞINDAN türetilir, elle liste yok) + şema sürümü gerçekten doğrulan�
 |---|---|---|
 | **Diğer 20 JSON dosyası** (3 ruleset · taksonomi · referanslar · fixture indeksi) | yalnız `library.json` taranıyor; `fromJson` benzeri 7 parser var, biri kolllanıyor | **kod** ⚠️ |
 | **Anahtarın DEĞERİNİN doğruluğu** | tüketici VARLIĞINI ölçer; `_wave` gibi kayıt alanları hiç sınanmaz | **yöntem** |
+| 🆕 **ŞEMA SÜRÜMÜNÜN YÜKSELMESİ GEREKTİĞİ** — iki sayının **eşitliğini** denetler, yeni bir alanın onları **yükseltmeye zorladığını** DEĞİL | ölçüldü 2026-08-13 (O-117): `starterLessonId` eklendi, ikisi de 2'de kalsaydı kapı **SESSİZ** geçerdi; yükümlülük yazılı kuralda, kapıda değil. MUT-T yalnız *"biri değişip öteki kalırsa"*yı yakalar — *"ikisi de değişmezse"* onun kör noktası | **kod** (kapatılabilir: bilinen-alan kümesini dondurup karşılaştır) ⚠️ **bu turda KAPATILMADI** |
 | Negatif ikiz | MUT-S (öksüz anahtar) · MUT-T (sürüm sabit kalırsa) · **MUT-U (VAKUM: parser regex'i bozulunca kapı "temiz" demiyor)** | ✅ |
+
+### 7b. `validate_starters.py` — START HERE şeridi türetilmiş mi (O-117)
+**Ölçtüğü:** canlı disiplin `starterLessonId` bildiriyor mu · kimlik gerçekten
+var mı · starter `locked`/`demoOnly` DEĞİL mi · `_why_starter` dolu mu ·
+**ekran kodu hiçbir ders kimliği taşımıyor mu** (türetim gerçekten türetim mi).
+
+| ÖLÇMEDİĞİ | kanıt | sınıf |
+|---|---|---|
+| **Seçimin DOĞRU ders olduğu** — bildirilen kimliğin geçerliliğini ölçer, o dersin giriş kapısı olmayı HAK ETTİĞİNİ değil | kaynak `_why_starter`da (onaylı `Ostinato.dc.html`), kapı o kaynağın VARLIĞINA bakar, doğruluğuna değil | **yöntem** |
+| **`library_screen.dart` DIŞINDAKİ ekranlar** — kimlik gömme taraması tek dosya | desen tüm ağaca koşulabilir ama şerit tek ekranda; başka ekran ders kimliği gömerse görünmez | **kod** |
+| **Şeridin GÖRÜNÜRLÜĞÜ** — kalem var mı diye bakar, kullanıcı onu görüyor mu diye değil | ölçüldü: 375×812'de şerit katlamanın ALTINDA (`ensureVisible` gerekti) | **kapsam-dışı karar** (yerleşim koordinatörde) |
+| Negatif ikiz | `--selftest` 6 mutasyon + pozitif ikiz · gerçek dosyada 3 sabotaj indi | ✅ |
 
 ### 8. `tools/evidence/` — ekran kanıtı (KAPI DEĞİL)
 **⚠️ `run_gates.sh`a BAĞLI DEĞİL — elle tazelenir.** Bayat bir PNG
