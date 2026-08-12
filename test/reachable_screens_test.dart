@@ -59,14 +59,31 @@ void main() {
               'içerik boş (ulaşmak ≠ çalışmak)');
     }
 
-    void note(WidgetTester t, String where) {
+    /// ⚖️ SAYAÇ ROTA-KİMLİĞİNE BAĞLI (O-106, koordinatör hükmü 2026-08-12).
+    ///
+    /// **Kusur neydi:** küme `where` ETİKET DİZGESİNİ topluyordu, rota
+    /// kimliğini değil. `guide` ve `scored` ders türleri AYNI rotaya gidiyor
+    /// (`course_screen.dart:100-104` → `LessonKind.guide || LessonKind.scored
+    /// => LessonScoredScreenRoute`) ve yazar bunu BİLİYORDU — iki etiketi de
+    /// `'6'` ile numaralamış. Ama küme iki ayrı DİZGE gördüğü için **9**
+    /// sayıyordu; yazılı KATI kural ise *"ayrı ROTAYA gidiş sayılır"* diyor.
+    ///
+    /// > ***Sayı doğru sayıyordu ama SAYDIĞI ŞEY kuralın konusu değildi:
+    /// > ETİKET ≠ ROTA.***
+    ///
+    /// Kimlik ELLE veriliyor (türetilmiyor) — bu, bu yürüyüşün zaten isimli
+    /// kör noktasıdır (`docs/gates/GEZILEBILIRLIK-SAYMA-KURALI.md` §②): elle
+    /// yürüyüşün göremediği şey yazarın denemeyi akıl etmediği kontroldür.
+    /// Desen-türetimi (ör. `*ScreenRoute` adı) o kör noktayı KAPATMAZ, yalnız
+    /// BAŞKASIYLA değiştirirdi (Gravita'nın vakası: desenin tanımadığı ad).
+    void note(WidgetTester t, String where, String routeId) {
       final String name = t
           .widget<Scaffold>(find.byType(Scaffold).first)
           .key
           ?.toString() ??
           '';
-      reached.add(where);
-      log.add('$where${name.isEmpty ? '' : ' [$name]'}');
+      reached.add(routeId);
+      log.add('$where → $routeId${name.isEmpty ? '' : ' [$name]'}');
     }
 
     /// Gerçekten DOKUNULABİLİR mi? `find` yetmez — `tap` boşluğa inerse
@@ -106,18 +123,18 @@ void main() {
       ),
     ));
     await t.pump();
-    note(t, '1 Onboarding');
+    note(t, '1 Onboarding', 'OnboardingScreen');
 
     // Karşılamayı GERÇEK dokunuşlarla geç (3 perde — KATI'da +0).
     for (int i = 0; i < 3; i++) {
       await tapIfPossible(t, find.byKey(const Key('onboarding-primary')));
     }
-    note(t, '2 Library');
+    note(t, '2 Library', 'LibraryScreen');
     requireSubstance(t, 'Library', 'Measured, not chosen');
 
     // Ayarlar
     if (await tapIfPossible(t, find.text('⚙'))) {
-      note(t, '3 Settings');
+      note(t, '3 Settings', 'SettingsScreenRoute');
       requireSubstance(t, 'Settings', 'instruments are live');
       await tapIfPossible(t, find.text('‹'));
       await t.pump(const Duration(milliseconds: 400));
@@ -125,28 +142,31 @@ void main() {
 
     // Çalgı → Kurs → Ders sınıfları
     if (await tapIfPossible(t, find.text('Guitar'))) {
-      note(t, '4 Instrument');
+      note(t, '4 Instrument', 'InstrumentScreenRoute');
       requireSubstance(t, 'Instrument', 'not all the same kind of gap');
       final Discipline g =
           repo.disciplines.firstWhere((Discipline d) => d.id == 'guitar');
       if (await tapIfPossible(t, find.text(g.courses.first.displayName))) {
-        note(t, '5 Course');
+        note(t, '5 Course', 'CourseScreenRoute');
         requireSubstance(t, 'Course', g.courses.first.goal.split('.').first);
-        for (final MapEntry<LessonKind, String> e
-            in <LessonKind, String>{
-          LessonKind.guide: '6 Lesson/guide→scored',
-          LessonKind.scored: '6 Lesson/scored',
-          LessonKind.demoOnly: '7 Lesson/demoOnly',
-          LessonKind.locked: '8 Lesson/locked',
+        for (final MapEntry<LessonKind, (String, String)> e
+            in <LessonKind, (String, String)>{
+          // ⚠️ KİMLİKLER `course_screen.dart:100-104`ten ÖLÇÜLDÜ:
+          //   locked → LessonLockedScreenRoute · demoOnly → LessonDemoScreenRoute
+          //   guide VEYA scored → LessonScoredScreenRoute  (AYNI ROTA)
+          LessonKind.guide: ('6 Lesson/guide', 'LessonScoredScreenRoute'),
+          LessonKind.scored: ('6 Lesson/scored', 'LessonScoredScreenRoute'),
+          LessonKind.demoOnly: ('7 Lesson/demoOnly', 'LessonDemoScreenRoute'),
+          LessonKind.locked: ('8 Lesson/locked', 'LessonLockedScreenRoute'),
         }.entries) {
           final Iterable<Lesson> match =
               g.courses.first.lessons.where((Lesson l) => l.kind == e.key);
           if (match.isEmpty) continue;
           if (await tapIfPossible(t, find.text(match.first.displayName))) {
-            note(t, e.value);
+            note(t, e.value.$1, e.value.$2);
             // Ders ekranının ÖZÜ: kilitli ise gerekçesi, açık ise neye
             // karşı ölçüldüğü. İkisi de yoksa ekran boş kabuktur.
-            requireSubstance(t, e.value,
+            requireSubstance(t, e.value.$1,
                 match.first.kind == LessonKind.locked
                     ? match.first.lockedReason!.split('.').first
                     : match.first.displayName);
@@ -168,7 +188,16 @@ void main() {
       print('   $l');
     }
     // ignore: avoid_print
-    print('   → KATI SAYI (bu yürüyüşte): ${reached.length}\n');
+    print('   → KATI SAYI (bu yürüyüşte): ${reached.length}'
+        '  [${log.length} varış / ${reached.length} AYRI ROTA]');
+    // ⚖️ SAYININ YANINDA SEBEBİ (koordinatör hükmü O-106): sayı 9→8'e
+    // DÜŞMEDİ; 9 hiç DOĞRU DEĞİLDİ. Eski sayaç ETİKET DİZGESİ topluyordu,
+    // yazılı KATI kural ise AYRI ROTA sayar — `guide` ve `scored` aynı
+    // rotaya gider (`LessonScoredScreenRoute`). Birim değişti, yön değil.
+    // ignore: avoid_print
+    print('   ⚠️ eşik >= 8 · bugünkü sayı 8 → KAPI TAM TABANDA, SIFIR PAY: '
+        'tek bir rota kaybı kırmızıya düşürür. Bu bir kusur değil, DÜRÜST '
+        'HÂL — payı olmayan bir eşiği "geçti" diye okumak yanıltıcı olurdu.\n');
 
     // ⚠️ YÜRÜNEMEYEN ÜÇ EKRAN ve SEBEBİ — sayının yanına yazılmazsa
     // "11 ekran" iddiası GEVŞEK okuma olur:
