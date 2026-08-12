@@ -262,6 +262,85 @@ RETENTION_WRITERS = re.compile(
     r"\.insert\(|openDatabase")
 RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
 
+# ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────
+#
+# Her ÖZNE için: saklanıyor mu (`stored`) + bunu SÖYLEYEN ÖLÇÜM (`evidence`).
+# `evidence` bir gerekçe değil bir ADRES olmalı — hangi tarama/dosya/sayı bu
+# hükmü verdi. Beyanın kendisi kanıt değildir; kanıtın YERİNİ gösterir.
+#
+# ⚠️ Bu kayıt bir MUAFİYET LİSTESİ DEĞİL, bir KARAR NOKTASI: bir özne
+# hakkında iddia eden bir cümle sevk edilmişse, o öznenin burada bir kaydı
+# OLMAK ZORUNDA. Kayıt yoksa kapı öter (*"ölçmedim ama iddia ettim"*).
+#
+# Ostinato ölçümü (2026-08-12): `lib/` içinde diske yazan **iki** yer var —
+# `onboarding_store.dart` (karşılama biti, ÖLÇÜM DEĞİL) ve `pose_model.dart`
+# (model asset'i, ÖLÇÜM DEĞİL). Üçüncü bir yazıcı YOK; ağ çağrısı YOK.
+# Gravita'da üç yazıcı vardı ve landmark hiçbirinde değildi — *"bir şey
+# yazılıyor"* ile *"BU ŞEY yazılıyor"* farklı sorular, kayıt bu yüzden
+# ÖZNE BAŞINA tutulur.
+RETENTION_FACTS = {
+    "angle": {"stored": False, "evidence":
+              "lib/ yazıcı taraması: muaf olmayan writeAsString/Bytes/"
+              "SharedPreferences/Hive/sqflite SIFIR (2 muaf yazıcı: "
+              "karşılama biti + poz modeli asset'i)"},
+    "landmark": {"stored": False, "evidence":
+                 "aynı tarama; ayrıca canlı zincir yalnız trunkTiltDeg "
+                 "skalerini taşıyor (camera_posture_adapter), landmark "
+                 "dizisi ekrandan öteye geçmiyor"},
+    "measurement": {"stored": False, "evidence":
+                    "aynı tarama; ölçüm seans içinde bellekte, kalıcı "
+                    "yazıcı yok"},
+    "video": {"stored": False, "evidence":
+              "aynı tarama + kamera karesi hiçbir dosyaya yazılmıyor; "
+              "ağ çağrısı da yok (Kural J: yükleyen yol SIFIR)"},
+    "your footage": {"stored": False, "evidence": "video ile aynı ölçüm"},
+    "history": {"stored": False, "evidence":
+                "aynı tarama; geçmiş ekranı YOK (review_screen seans-içi)"},
+    "session data": {"stored": False, "evidence":
+                     "aynı tarama; seans kaydı tutan bir yol yok "
+                     "(Gravita'da VARDI — bu hattın ölçümü ayrı)"},
+    "your data": {"stored": False, "evidence": "yukarıdaki öznelerin toplamı"},
+}
+
+#: Cümledeki saklama ÖZNESİNİ çıkarır — hangi nesne eşleşti. `RETENTION_FACTS`
+#: anahtarlarına normalize eder (çoğul → tekil), böylece kayıt tek biçimde
+#: tutulur ve "angles"/"angle" ayrı kayıt gerektirmez.
+#
+#: ⚠️ DOLAYLI ÖZNELER (O-102, kendi ölçümümün bulduğu delik): özne çıkarıcı
+#: ilk yazımda `_RETENTION_OBJECT`i olduğu gibi kullanıyordu ve sevk edilen
+#: DÖRT saklama cümlesinden BİRİ özne vermiyordu —
+#: *"Nothing is stored either: **what we measure** exists while the lesson
+#: runs…"* (onboarding). Kod onu SESSİZCE atlıyordu (`if not subjects:
+#: continue`), yani cümle saklama hükmü veriyor ama hiçbir ölçüme
+#: bağlanmıyordu. Günün deseni burada da: *bir şeyi bulamayan tarama,
+#: bulunacak bir şey olmadığını kanıtlamaz.*
+#: Çözüm iki katmanlı: ① dolaylı biçimler özneye çevrilir ② hâlâ özne
+#: çıkmazsa bu SESSİZ kalmaz, kapsam satırında SAYIYLA raporlanır.
+#: Not: bu alternasyon YALNIZ özne çıkarımında kullanılır; `RETENTION_CLAIM`
+#: dar kalır (dolaylı kalıpları TESPİTE sokmak yanlış-pozitif üretirdi).
+_SUBJECT_PARAPHRASE = [
+    (r"what (?:we|the app|it|ostinato) measures?", "measurement"),
+    (r"what (?:we|the app|it|ostinato) reads?", "measurement"),
+    (r"the (?:body )?positions?", "landmark"),
+]
+_SUBJECT_RE = re.compile(_RETENTION_OBJECT, re.IGNORECASE)
+_PARAPHRASE_RES = [(re.compile(p, re.IGNORECASE), k)
+                   for p, k in _SUBJECT_PARAPHRASE]
+
+
+def retention_subjects(sentence: str):
+    """Cümlenin saklama hükmü verdiği ÖZNELER (normalize, sırayı korur)."""
+    out = []
+    for m in _SUBJECT_RE.finditer(sentence):
+        raw = m.group(0).lower()
+        key = raw if raw in RETENTION_FACTS else raw.rstrip("s")
+        if key not in out:
+            out.append(key)
+    for rx, key in _PARAPHRASE_RES:
+        if rx.search(sentence) and key not in out:
+            out.append(key)
+    return out
+
 # ── J: YÜKLEME-YOKLUĞU iddiası, YÜKLEYEN bir kod yolunun YOKLUĞUNU ister ──
 # (O-080, 2026-08-07 — E'nin ağ kardeşi.)
 #
@@ -1064,6 +1143,35 @@ def selftest() -> int:
           or "ably_flutter" in NETWORK_DEPS_KNOWN_SAFE):
         dead.append("`ably_flutter` bir kayda girmiş — öz-test örneği artık "
                     "'sınıflandırılmamış' vakasını temsil etmiyor")
+    # ── O-102: iddia↔ölçüm bağının kendi yolları ─────────────────────────
+    # ① Özne çıkarımı çalışıyor mu — DOĞRUDAN ve DOLAYLI biçimde.
+    if "angle" not in retention_subjects(
+            "the app only keeps the body angles it measures"):
+        dead.append("özne çıkarıcı DOĞRUDAN özneyi bulamıyor ('angles') — "
+                    "iddia↔ölçüm bağı hiçbir cümleye bağlanamaz")
+    if "measurement" not in retention_subjects(
+            "Nothing is stored either: what we measure exists while the "
+            "lesson runs and is gone when it ends."):
+        dead.append("özne çıkarıcı DOLAYLI özneyi bulamıyor ('what we "
+                    "measure') — sevk edilen gerçek bir cümle bu biçimde ve "
+                    "ilk yazımda SESSİZCE atlanıyordu (O-102)")
+    # ② BÖLME TAMLIĞI, ⑤'in aynısı ama ÖZNELER üzerinde: tespit edicinin
+    #    çıkarabildiği HER özne `RETENTION_FACTS`ta bir kayda sahip OLMALI.
+    #    Yeni bir nesne `_RETENTION_OBJECT`e eklenip kayda eklenmezse, o özne
+    #    hakkındaki her iddia sessizce bağsız kalırdı.
+    detectable = {a.strip().lower() for a in
+                  _RETENTION_OBJECT.strip("(?:)").split("|")}
+    for obj in sorted(detectable):
+        base = obj if obj in RETENTION_FACTS else obj.rstrip("s?")
+        if base not in RETENTION_FACTS:
+            dead.append(f"BÖLME (özne): tespit edici «{obj}» çıkarabiliyor "
+                        f"ama `RETENTION_FACTS`ta kaydı YOK — o özne "
+                        f"hakkındaki her iddia sessizce bağsız kalır")
+    # ③ Her kaydın ölçüm ADRESİ olmalı; boş gerekçe bir beyandır, kanıt değil.
+    for subj, fact in RETENTION_FACTS.items():
+        if not fact.get("evidence", "").strip():
+            dead.append(f"`RETENTION_FACTS[{subj}]` ölçüm ADRESİ taşımıyor — "
+                        f"beyan kendi kanıtı olamaz")
     overlap = set(NETWORK_DEPS_RECORDED) & set(NETWORK_DEPS_KNOWN_SAFE)
     if overlap:
         dead.append(f"BÖLME ÇELİŞKİSİ zaten var: {sorted(overlap)} iki kayıtta "
@@ -1305,14 +1413,14 @@ def main() -> int:
 
 
     # ── Kural E ──
-    writer_found = False
-    for f in Path("lib").rglob("*.dart"):
+    writers = []
+    for f in sorted(Path("lib").rglob("*.dart")):
         if f.name in RETENTION_EXEMPT_FILES:
             continue
         if RETENTION_WRITERS.search(strip_dart_comments(
                 f.read_text(encoding="utf-8"))):
-            writer_found = True
-            break
+            writers.append(str(f))
+    writer_found = bool(writers)
     if writer_found:
         # TERS YÖN (O-059): artık saklayan bir kod yolu VAR; "hiçbir şey
         # saklanmıyor" diyen her cümle bugün YANLIŞ.
@@ -1323,17 +1431,84 @@ def main() -> int:
                         f"[ters yön] {where}: kabukta ölçüm SAKLAYAN bir kod "
                         f"yolu var ama bu cümle hâlâ hiçbir şeyin "
                         f"saklanmadığını söylüyor — «{sentence.strip()[:100]}»")
-    if not writer_found:
-        for where, text in surfaces:
-            for sentence in sentences(text):
-                if not RETENTION_CLAIM.search(sentence):
+
+    # ── Kural E2: İDDİA ↔ ÖLÇÜM BAĞI, ÖZNE BAŞINA, İKİ YÖNDE ────────────
+    # (O-102 — Gravita'nın `f169ba5` ölçümünden doğan koordinatör kısıtı.)
+    #
+    # **Kapının sorusu değişti:** *"iddia VAR MI"* değil, ***"iddia ÖLÇÜMLE
+    # UYUŞUYOR MU — ve HER İKİ YÖNDE"***. Çünkü aynı cümleden İKİ AYRI sınıf
+    # kusur doğuyor:
+    #   ① **veriyi gizler** — beyandan FAZLA saklıyor (O-059'un yakaladığı yön)
+    #   ② **olmayan veriyi İCAT EDER** — saklamadığı hâlde sakladığını beyan
+    #      ediyor (Gravita + JabLab'ın vakası; kusur *gizli toplama* değil,
+    #      *var olmayan bir saklamayı beyan etmek*)
+    #
+    # **Neden ÖZNE BAŞINA:** yukarıdaki `writer_found` GLOBAL bir bool ve
+    # Gravita'nın vakasını ayırt EDEMEZ — orada diske yazan üç yer var (seans
+    # kaydı · onboarding biti · poz modeli) ama **landmark hiçbirinde yok.**
+    # Yani "bir şey yazılıyor" ile "BU ŞEY yazılıyor" farklı sorulardır.
+    # Ostinato'da ölçüldü: diske yazan 2 yer var (`onboarding_store.dart`
+    # karşılama biti · `pose_model.dart` model asset'i), ikisi de ÖLÇÜM
+    # DEĞİL ve ikisi de adıyla muaf.
+    #
+    # **Neden tam otomatik DEĞİL (koordinatörün sınırı):** gerçeği ölçmek
+    # HATTIN işi; bir regex "landmark diske gidiyor mu"yu karara bağlayamaz.
+    # O yüzden kapının şart koştuğu şey bir BAĞ: iddia edilen her öznenin
+    # `RETENTION_FACTS`ta **beyan edilmiş, gerekçeli** bir ölçüm karşılığı
+    # OLMAK ZORUNDA. Bağ yoksa kapı öter — *"ölçmedim ama iddia ettim"*
+    # sessizce geçemez.
+    bound, unbound, unresolved = 0, 0, 0
+    for where, text in surfaces:
+        for sentence in sentences(text):
+            positive = bool(RETENTION_CLAIM.search(sentence))
+            absence = bool(RETENTION_ABSENCE.search(sentence)
+                           or RETENTION_ABSENCE_ASSERTIONS.search(sentence))
+            if not (positive or absence):
+                continue
+            subjects = retention_subjects(sentence)
+            if not subjects:
+                # SESSİZ ATLAMA YOK: cümle saklama hükmü veriyor ama özne
+                # çıkarılamadı. Bu bir ihlal DEĞİL (her hüküm izlediğimiz
+                # bir özne hakkında olmayabilir) ama SAYILIR ve raporlanır —
+                # sayı büyüyorsa çıkarıcı gerçeğin gerisine düşmüş demektir.
+                unresolved += 1
+                continue
+            for subj in subjects:
+                fact = RETENTION_FACTS.get(subj)
+                if fact is None:
+                    unbound += 1
+                    violations.append(
+                        f"[iddia↔ölçüm bağı] {where}: cümle «{subj}» hakkında "
+                        f"saklama hükmü veriyor ama `RETENTION_FACTS`ta bu "
+                        f"öznenin BEYAN EDİLMİŞ bir ölçümü YOK — iddia "
+                        f"ölçüme bağlanmadan sevk edilemez "
+                        f"(«{sentence.strip()[:90]}»)")
                     continue
-                if RETENTION_ABSENCE.search(sentence):
-                    continue
-                violations.append(
-                    f"[saklama iddiası] {where}: cümle bir şeyin SAKLANDIĞINI "
-                    f"söylüyor ama kabukta ölçüm saklayan bir kod yolu YOK — "
-                    f"«{sentence.strip()[:110]}»")
+                bound += 1
+                # ② olmayan veriyi icat etmek
+                if positive and not absence and not fact["stored"]:
+                    violations.append(
+                        f"[iddia↔ölçüm ②] {where}: cümle «{subj}» "
+                        f"SAKLANDIĞINI söylüyor, ölçüm SAKLANMADIĞINI "
+                        f"({fact['evidence']}) — var olmayan bir saklamayı "
+                        f"BEYAN ETMEK «{sentence.strip()[:90]}»")
+                # ① veriyi gizlemek
+                if absence and fact["stored"]:
+                    violations.append(
+                        f"[iddia↔ölçüm ①] {where}: cümle «{subj}» "
+                        f"saklanmadığını söylüyor, ölçüm SAKLANDIĞINI "
+                        f"({fact['evidence']}) — veriyi GİZLEYEN yön "
+                        f"«{sentence.strip()[:90]}»")
+    # `stored: False` beyanlarının YENİDEN ÖLÇÜMÜ: kayıt bir kez yazıldı diye
+    # sonsuza kadar doğru kalmaz. Muaf olmayan bir yazıcı ortaya çıkarsa
+    # BÜTÜN "saklanmıyor" beyanları şüphelidir — ve hangisi olduğu ADIYLA.
+    if writer_found:
+        stale = [s for s, f in RETENTION_FACTS.items() if not f["stored"]]
+        violations.append(
+            f"[iddia↔ölçüm yeniden-ölçüm] muaf olmayan yazıcı bulundu "
+            f"({', '.join(writers)}) → 'saklanmıyor' beyanı taşıyan "
+            f"{len(stale)} özne ({', '.join(stale)}) YENİDEN "
+            f"SINIFLANDIRILMALI; beyanlar bugün şüpheli")
 
     # ── Kural F ──
     declared_lang = json.loads(
@@ -1425,6 +1600,15 @@ def main() -> int:
     # gerekçesi metni OLMAK ZORUNDA. Sıfır dönerse yol kırılmış demektir ve
     # "temiz" hükmü geçersiz — tam bu yüzeyin yıllarca ölçülmemiş olması bu
     # kapının var olma sebebi.
+    # O-102 vakumu — turun en çok tekrarlanan dersinin bu kurala uygulanışı:
+    # bağ kuralı SIFIR çift üzerinde koşarsa yeşili hiçbir şey söylemez.
+    # Ostinato'nun yüzeyleri video/açı/geçmiş hakkında iddia taşıyor, yani
+    # bu sayı ölçülebilir biçimde >0 olmak zorunda.
+    if bound == 0:
+        violations.append(
+            "VAKUM: iddia↔ölçüm bağı HİÇ çift üzerinde koşmadı (0 bağ) — "
+            "ya özne çıkarıcı ya yüzey taraması kırıldı; kuralın yeşili "
+            "anlamsız (vakum-yeşil sınıfı)")
     if surface_report["plist"][1] < 1:
         violations.append(
             "VAKUM: plist'te hiç prosa metin bulunamadı (beklenen ≥1) — "
@@ -1463,6 +1647,10 @@ def main() -> int:
     # O-100: yüzey SINIFI başına dosya/prosa sayımı — bir sınıfın SIFIR
     # olması da ADIYLA yazılır. "Mağaza: 0 dosya" cümlesi, o yüzeyin
     # taranmadığını değil VAR OLMADIĞINI söyler; ikisi karıştırılamaz.
+    print(f"   iddia↔ölçüm bağı (O-102, iki yönlü): {bound} iddia-özne "
+          f"çifti ÖLÇÜME BAĞLANDI · {len(RETENTION_FACTS)} özne kaydı (her "
+          f"biri ölçüm ADRESİYLE) · özne çıkarılamayan hüküm {unresolved} "
+          f"(sessizce atlanmıyor, SAYILIYOR)")
     print(f"   ⑤ bağımlılık bölmesi (Lissom 1abd4a0'ten adapte): "
           f"{len(lock_pkgs)} paket = {len(NETWORK_DEPS_RECORDED)} kayıtlı "
           f"(ağa çıkabilir) ⊎ {len(NETWORK_DEPS_KNOWN_SAFE)} güvenli "
