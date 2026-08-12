@@ -38,6 +38,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gen_placeholder_register import scan_dart_markers  # noqa: E402
+# ⚠️ Yorum ayıklayıcı YENİDEN YAZILMADI, var olandan içe aktarıldı: iki
+# bağımsız çıkarımın zamanla ayrışması bugün üç kez yaşandı. Üstelik bu
+# ayıklayıcı STRING-FARKINDALI (bir dizge içindeki `//` yorum sanılmaz) —
+# naif bir satır kontrolü onu kaçırırdı.
+from validate_surface_honesty import strip_dart_comments  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 LIB = ROOT / "lib"
@@ -54,9 +59,26 @@ KEY_RE = re.compile(r"Key\(\s*'([^']+)'\s*\)")
 
 
 def shipped_keys():
+    """SEVK EDİLEN koddaki widget anahtarları — YORUMLAR DÜŞÜRÜLÜR (O-111).
+
+    🔴 **Neden (Lissom işaret etti, bende SABOTAJLA doğrulandı):** ilk yazım
+    dosyayı HAM okuyordu, yani bir YORUM içindeki `Key('x')` de kanıt
+    sayılıyordu. Sabotaj: gerçek `key: const Key('demo-live-gap-note')`
+    satırı yoruma çevrildi → **kullanıcı yüzeyi sevk edilen koddan GİTTİ**
+    ama kapı **EXIT=0** kaldı ve hâlâ *"2 kullanıcı yüzeyine bağlı"* dedi.
+
+    > ***Bir kapının ÇIKTISI doğru olabilir ve İDDİASI yine de yanlış
+    > olabilir:*** sayı doğruydu (2 anahtar gerçekten vardı), ama kapı onu
+    > **yanlış tanığa sorarak** buldu — sayı doğru, GEREKÇE yok.
+
+    ⚠️ Ve *"bugün 0 yorum-anahtarı var"* gerekçeyi ZAYIFLATMAZ, güçlendirir:
+    42 gerçek / 0 yorum sayımı bir **alışkanlığın** sonucuydu, bir kuralın
+    değil — ve o koşul hiçbir yerde yazılı değildi.
+    """
     keys = set()
     for f in LIB.rglob("*.dart"):
-        keys |= set(KEY_RE.findall(f.read_text(encoding="utf-8")))
+        src = strip_dart_comments(f.read_text(encoding="utf-8"))
+        keys |= set(KEY_RE.findall(src))
     return keys
 
 
@@ -121,6 +143,20 @@ def selftest() -> int:
     # sabit bir ad olarak yazılamaz. Olumsuz ikiz DÜZ bir anahtar seçer —
     # ilk yazımda `sorted(keys)[0]` interpolasyonlu olanı seçti ve öz-test
     # kendi kapısını yanlış-pozitifle suçladı.
+    # ⭐ KALICI NEGATİF İKİZ (O-111) — bugün ürettiğim sabotajın kendisi.
+    # Silinirse kapı aynı körlüğe yeniden açılır, ve o gün kimse bakmaz.
+    probe = ("class X {\n"
+             "  // key: const Key('ZZQQ-yorumda-kalan-anahtar'),\n"
+             "  Widget b() => Text('x', key: const Key('ZZQQ-gercek'));\n"
+             "}\n")
+    from_comment = set(KEY_RE.findall(strip_dart_comments(probe)))
+    if "ZZQQ-yorumda-kalan-anahtar" in from_comment:
+        dead.append("YORUMDAKİ `Key()` hâlâ KANIT sayılıyor — kapı yanlış "
+                    "tanığa soruyor (Lissom'un işaret ettiği tuzak, bende "
+                    "sabotajla doğrulanmıştı)")
+    if "ZZQQ-gercek" not in from_comment:
+        dead.append("GERÇEK koddaki `Key()` ayıklayıcıdan sonra KAYBOLDU — "
+                    "yorum düşürme fazla geniş, kanıtı da siliyor")
     plain = sorted(k for k in keys if "$" not in k)
     assert plain, "düz anahtar yok"
     real = plain[0]

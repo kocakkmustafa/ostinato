@@ -84,6 +84,18 @@ PRE_COMMIT_ERA = {1, 2, 4, 5, 6, 14}
 #: için değil, ÖLÇÜMÜN KENDİSİ onu ürettiği için. Ayrılan aralık `9xx`.
 SENTINEL_RANGE = range(900, 1000)
 
+#: 🔴 SABOTAJ PROB NUMARALARI — kayıt DEĞİL, sabotaj anlatısında anılan.
+#: **ÜÇÜNCÜ TEKRAR (O-111):** O-110'da çapayı sabotajla kanıtladım ve
+#: probu `O-777` seçtim (ayrılmış `9xx` DIŞINDA). Sabotajı anlatan commit
+#: mesajı `O-777`yi ANDI → sonraki koşumda kapı onu "eksik kayıt" saydı,
+#: **ve `max(commits)` tavanını 777'ye çekerek O-111'i de "öksüz" gösterdi.**
+#: Tek bir prob numarası İKİ ayrı yönü birden bozdu.
+#:
+#: > ***Bir numaradan söz etmek onu var eder — ve bu, `O-999`dan sonra AYNI
+#: > SEANSTA ÜÇÜNCÜ kez oldu. Kural artık yazılı: PROB NUMARASI 9xx'ten
+#: > SEÇİLİR; seçilmediyse buraya ADIYLA girer.***
+PROBE_IDS = {777}
+
 
 def expand(text: str) -> set:
     """`O-089/090` → {89, 90}. Kısa parçalar baştaki numaradan tamamlanır."""
@@ -119,7 +131,8 @@ def commit_census():
 
 def commit_ids():
     commits, with_ref, total = commit_census()
-    ids = {n for n in expand("\n".join(commits)) if n not in SENTINEL_RANGE}
+    ids = {n for n in expand("\n".join(commits))
+           if n not in SENTINEL_RANGE and n not in PROBE_IDS}
     return ids, (len(with_ref), len(commits) - len(with_ref), total)
 
 
@@ -250,6 +263,16 @@ def selftest() -> int:
         dead.append("BİRLEŞİK numara açılmıyor — `O-089/090` yalnız ilk "
                     "numarayı veriyor; bu ağacın ÖLÇÜLEN kirlenme sınıfı bu "
                     "(4 birleşik başlık var)")
+    # ⑦ PROB numarası girdiye karışmıyor mu (O-111'in üçüncü tekrarı).
+    if 777 in commits:
+        dead.append("PROB SIZDI: `O-777` kayıt sayılıyor — sabotaj anlatısı "
+                    "girdiye karışıyor (bu, O-999'dan sonra aynı sınıfın "
+                    "ÜÇÜNCÜ tekrarıydı)")
+    probe_log = subprocess.run(["git", "-C", str(ROOT), "log", "--format=%s%n%b"],
+                               capture_output=True, text=True).stdout
+    if "O-777" not in probe_log:
+        dead.append("`O-777` geçmişte artık YOK — prob muafiyeti boşa "
+                    "koşuyor, gerekçe tazelenmeli")
     if expand("O-077/078/079") != {77, 78, 79}:
         dead.append("ÜÇLÜ birleşik numara açılmıyor")
     # ③ SENTİNEL: `O-999` commit MESAJINDA geçiyor (bu kapının kendi
