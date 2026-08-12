@@ -67,6 +67,23 @@ KNOWN_EMPTY = {15, 16, 90}
 #: bugün dört kez düştüğü sınıf.
 PRE_COMMIT_ERA = {1, 2, 4, 5, 6, 14}
 
+#: 🔴 SENTİNEL/ÖRNEK NUMARA ARALIĞI — `O-900`+ hiçbir zaman gerçek kayıt
+#: DEĞİLDİR; belgede/commit mesajında ÖRNEK olarak anılır.
+#:
+#: ⚠️ BU KURALIN DOĞUŞU, bugünün en keskin öz-yakalaması: Gravita'nın
+#: `G-999` sentinel testini "bende karşılığı YOK, `O-999` → 0" diye ölçüp
+#: YAZMADIM (Lissom'un kuralı: *bir öz-testi kopyalamak, koruduğu riski
+#: devraldığını varsaymaktır*). Sonra O-108'in commit MESAJINA tam o cümleyi
+#: yazdım — ve bir sonraki koşumda kapı `O-999`u EKSİK KAYIT diye bildirdi.
+#:
+#: > ***Riski devralmadığımı ölçtüğüm cümlenin KENDİSİ riski yarattı:
+#: > bir numaradan SÖZ ETMEK ile bir numarayı KAYDETMEK aynı metinde
+#: > ayırt edilemez.***
+#:
+#: Yani Gravita'nın sentinel tasarımı bende de GEREKLİ — ama devraldığım
+#: için değil, ÖLÇÜMÜN KENDİSİ onu ürettiği için. Ayrılan aralık `9xx`.
+SENTINEL_RANGE = range(900, 1000)
+
 
 def expand(text: str) -> set:
     """`O-089/090` → {89, 90}. Kısa parçalar baştaki numaradan tamamlanır."""
@@ -80,11 +97,30 @@ def expand(text: str) -> set:
     return out
 
 
+def commit_census():
+    """PAYDA DENETİMİ (koordinatör şartı): atıflı + atıfsız = TARANAN.
+
+    ⚠️ Neden sayı değil DENKLEM: bir kapı *"N commit taradım"* diyebilir ve
+    N yanlış olabilir — bölme kaçırırsa, `--format` bozulursa, ya da bir
+    ayrıştırma hatası commit'leri birleştirirse. Denklem tutmuyorsa
+    **kapı KENDİNE öter**; sayının doğruluğu kendi kanıtı değildir.
+    (JabLab'ınki bugün tutmuyor: 121+91=212, depoda 226 — 14 commit
+    kayboluyor. Ölçüm koordinatörden geldi, kendi paydamı denetledim.)
+    """
+    out = subprocess.run(
+        ["git", "-C", str(ROOT), "log", "--format=%H%x01%s%x01%b%x02"],
+        capture_output=True, text=True).stdout
+    commits = [c.strip() for c in out.split("\x02") if c.strip()]
+    with_ref = [c for c in commits if _MENTION.search(c)]
+    total = subprocess.run(["git", "-C", str(ROOT), "rev-list", "--count",
+                            "HEAD"], capture_output=True, text=True).stdout
+    return commits, with_ref, int(total.strip() or 0)
+
+
 def commit_ids():
-    log = subprocess.run(["git", "-C", str(ROOT), "log", "--format=%s%n%b"],
-                         capture_output=True, text=True).stdout
-    n = len([l for l in log.split("\n") if l.strip()])
-    return expand(log), n
+    commits, with_ref, total = commit_census()
+    ids = {n for n in expand("\n".join(commits)) if n not in SENTINEL_RANGE}
+    return ids, (len(with_ref), len(commits) - len(with_ref), total)
 
 
 def defter_ids():
@@ -94,7 +130,8 @@ def defter_ids():
 
 
 def run() -> int:
-    commits, lines = commit_ids()
+    commits, census = commit_ids()
+    with_ref, without_ref, total = census
     defter = defter_ids()
     missing = sorted(commits - defter - KNOWN_EMPTY)
     # ⚠️ UÇUŞTAKİ KAYIT: bu kapı pre-commit hook'unda koşar ve o anda
@@ -116,6 +153,13 @@ def run() -> int:
         print(f"⛔ VAKUM: {DEFTER} okunamadı ya da hiç kayıt yok")
         return 1
     bad = False
+    # PAYDA DENETİMİ — denklem tutmuyorsa kapı KENDİNE öter.
+    if with_ref + without_ref != total:
+        print(f"⛔ PAYDA TUTMUYOR: atıflı {with_ref} + atıfsız "
+              f"{without_ref} = {with_ref + without_ref}, ama depoda {total} "
+              f"commit var → tarama commit KAYBEDİYOR; bu kapının HER "
+              f"sonucu şüpheli (sayının doğruluğu kendi kanıtı değildir)")
+        bad = True
     if missing:
         print(f"⛔ DEFTER BAYAT — {len(missing)} kayıt commit'te VAR, defterde "
               f"YOK:")
@@ -139,7 +183,8 @@ def run() -> int:
               f"{', '.join('O-%03d' % n for n in inflight)} — commit'lenmiş "
               f"tavanın (O-{ceiling:03d}) ÜSTÜNDE, yani şu an yazılıyor "
               f"(kaydı commit'ten ÖNCE yazmak doğru alışkanlık)")
-    print(f"   payda: {lines} log satırı tarandı · bilerek-boş "
+    print(f"   payda DENETLENDİ: atıflı {with_ref} + atıfsız {without_ref} "
+          f"= {total} (rev-list ile birebir) · bilerek-boş "
           f"{len(KNOWN_EMPTY)} ({', '.join('O-%03d' % n for n in sorted(KNOWN_EMPTY))}) "
           f"· planlama-dönemi {len(PRE_COMMIT_ERA)} "
           f"· iki yönde ölçüldü (eksik 0 · öksüz 0)")
@@ -148,7 +193,7 @@ def run() -> int:
 
 def selftest() -> int:
     dead = []
-    commits, lines = commit_ids()
+    commits, census = commit_ids()
     defter = defter_ids()
     # ① VAKUM: iki yol da dolu mu?
     if len(commits) < 20:
@@ -165,6 +210,18 @@ def selftest() -> int:
                     "(4 birleşik başlık var)")
     if expand("O-077/078/079") != {77, 78, 79}:
         dead.append("ÜÇLÜ birleşik numara açılmıyor")
+    # ③ SENTİNEL: `O-999` commit MESAJINDA geçiyor (bu kapının kendi
+    #    docstring'i ve O-108'in mesajı) ama kayıt olarak SAYILMAMALI.
+    #    Gravita'nın testinin bendeki hâli — ve buraya "devraldığım için"
+    #    değil, ÖLÇÜMÜN KENDİSİ riski ürettiği için girdi.
+    log_all = subprocess.run(["git", "-C", str(ROOT), "log", "--format=%s%n%b"],
+                             capture_output=True, text=True).stdout
+    if "O-999" not in log_all:
+        dead.append("`O-999` commit geçmişinde artık YOK — sentinel testi "
+                    "boşa koşuyor; ya gerekçe bayatladı ya geçmiş yazıldı")
+    if 999 in commits:
+        dead.append("SENTİNEL SIZDI: `O-999` kayıt sayılıyor — `9xx` aralığı "
+                    "ayrılmış olmasına rağmen girdiye karışıyor")
     # ③ Çapalı desen bu ağaçta YETERSİZ — kanıtı kayda geçsin.
     log = subprocess.run(["git", "-C", str(ROOT), "log", "--format=%s"],
                          capture_output=True, text=True).stdout
@@ -175,8 +232,14 @@ def selftest() -> int:
                     f"— bu ağacın çok-biçimli olduğu varsayımı ARTIK YANLIŞ, "
                     f"desen gerekçesi tazelenmeli")
     # ④ OLUMSUZ İKİZ: bugünkü ağaç gedik VERMEMELİ.
-    if (commits - defter - KNOWN_EMPTY):
+    if (commits - defter - KNOWN_EMPTY - PRE_COMMIT_ERA
+            - {n for n in defter if n > max(commits or {0})}):
         dead.append("BUGÜNKÜ ağaçta gedik var — olumsuz ikiz başarısız")
+    # ⑤ PAYDA denklemi öz-testte de sınanır: bozulursa kapı sessiz kalmasın.
+    w, wo, tot = census
+    if w + wo != tot:
+        dead.append(f"PAYDA denklemi tutmuyor ({w}+{wo}≠{tot}) — kapının "
+                    f"kendi sayımı commit kaybediyor")
     if dead:
         print(f"⛔ {len(dead)} ÖLÜ DESEN (öz-test başarısız):")
         for d in dead:

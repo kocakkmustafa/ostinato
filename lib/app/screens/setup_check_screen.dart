@@ -373,9 +373,20 @@ class _Skeleton extends StatelessWidget {
 // bağlanması (JabLab `skeleton_overlay.dart` ile AYNI sınıf ve AYNI pin —
 // iki hattın farklı sınıflandırması tek kısıtı iki şeymiş gibi okuturdu).
 // source-only: kullanıcıya "kameranı göstermiyoruz" diyen bir cümle YOK.
-// ⚠️ Bunun bir KULLANICI SONUCU var ve adıyla kayıtlı: kişi kendi kadrajını
-// göremiyor, yalnız "kalçandan omzuna görünmelisin" yazısını okuyor. Cümle
-// YAZMAK bir yüzey kararıdır (koordinatöre bildirildi, sevk kapsamı dışı).
+//
+// ⚠️ DÜZELTME (O-109, ölçümle): önceki not "kişi kendi kadrajını göremiyor,
+// yalnız 'kalçandan omzuna görünmelisin' okuyor" diyordu. O cümle YALNIZ
+// `_Stage.starting`i okuyup GENELLEMİŞTİ. Ölçüldü: poz akışı bu ekranda
+// CANLI (`_camera.frames().listen(_onEnvelope)`) ve kalite sinyali zaten
+// durum makinesini SÜRÜYOR — kullanıcı onayı ve adlı teşhisi ZATEN alıyor:
+//   · `_Stage.ok`           → "Frame and light look right. Hold still…"
+//   · `_Stage.framingError` → "Your hips are outside the frame." (HANGİ
+//                              landmark eksik, adıyla)
+//   · `_Stage.lowLight`     → "Landmark confidence is below what we measure"
+// Yani eksik olan GÖRÜNTÜ; ONAY değil. Kullanıcının ihtiyacı olan "seni
+// görüyorum" bugünkü kodla SÖYLENİYOR.
+// ⛔ Sınır: bu üç hâl gerçek cihazda HİÇ doğrulanmadı (yayın engeli ⑩) —
+// kod-gerçeği var, cihaz-gerçeği yok.
 
 // PLACEHOLDER(flow): oda gürültü-tabanı yakalama adımı KAPALI — tasarım
 // 3-5sn sessizlik ölçen bir kalibrasyon gösterir, bu ekran onun yerine
