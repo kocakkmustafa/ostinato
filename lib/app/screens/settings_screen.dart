@@ -77,10 +77,19 @@ class SettingsScreen extends StatelessWidget {
                 // çünkü kimse sonucu sorgulamıyor. Üstelik cümle bir
                 // gizlilik İMTİYAZI kılığındaydı ("yalnız şunu tutuyoruz"),
                 // yani kullanıcıya cihazında bir KAYIT olduğunu düşündürüyordu.
-                body: 'It runs on your phone and reads nine upper-body '
-                    'points, and only inside a lesson. Nothing is uploaded '
-                    'and nothing is stored: the angles exist while the '
-                    'lesson is running and are gone when you leave it. '
+                // DÜZELTME-2 (O-099, 2026-08-12): 08-07'de bu cümlenin
+                // SAKLAMA iddiası düzeltildi, ama yanındaki SAYI kaldı —
+                // "nine upper-body points". Ölçüldü: canlı zincir
+                // `specs:[trunkTilt]` = TEK açı, `required:LmRegion.torso`
+                // = DÖRT landmark. Dokuz, `SkeletonFigurePainter`ın düğüm
+                // sayısıydı: sayı gerçek, BİRİMİ yanlış. Aynı kartta iki
+                // tur — bir iddiayı düzeltirken YANINDAKİNE bakılmamış.
+                body: 'It runs on your phone and reads your two shoulders '
+                    'and your two hips, and only inside a lesson. From those '
+                    'it measures one thing: how far your trunk leans. '
+                    'Nothing is uploaded and nothing is stored: that angle '
+                    'exists while the lesson is running and is gone when you '
+                    'leave it. '
                     'There is no history here to browse, and none to delete.',
               ),
               const SizedBox(height: 14),

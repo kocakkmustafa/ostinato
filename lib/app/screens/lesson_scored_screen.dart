@@ -82,10 +82,19 @@ class LessonScoredScreenRoute extends StatelessWidget {
                         style: hankenText(size: 13.5, height: 1.55),
                       ),
                       const SizedBox(height: 8),
+                      // DÜZELTME-2 (O-099, koordinatör hükmü 2026-08-12):
+                      // "Nine upper-body landmarks" OKUMA iddiasıydı ve
+                      // ölçüme uymuyordu — kamera DÖRT landmark okur (iki
+                      // omuz + iki kalça), TEK açı ölçer. Dokuz, BU
+                      // FİGÜRÜN düğüm sayısı; bu yüzden sayı yalnız burada
+                      // kalıyor ve fiili "çizer". Her sayı saydığı şeyin
+                      // yanında durur (08-06 netleştirmesi figürü tarif
+                      // ederken doğruydu, okunan veriye sızması yanlıştı).
                       Text(
-                        'Nine upper-body landmarks. No head node — our '
-                        'reference does not carry one, so nothing about '
-                        'your chin or jaw is read.',
+                        'Your two shoulders and your two hips are what the '
+                        'camera reads; this figure draws nine points. No '
+                        'head node — our reference does not carry one, so '
+                        'nothing about your chin or jaw is read.',
                         style: hankenText(
                             size: 12.5, color: OstinatoColors.textMuted),
                       ),

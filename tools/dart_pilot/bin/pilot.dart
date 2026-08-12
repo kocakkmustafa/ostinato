@@ -38,6 +38,25 @@ void main(List<String> args) {
   } else {
     stdout.writeln('ÇALGI: (karışık havuz — yalnız karşılaştırma için)');
   }
+  // BEYAN (koordinatör hükmü O-099, 2026-08-12): bu pilotun pencere kuralı
+  // ÖLÇÜLMÜŞ bir izolasyon DEĞİL, bir sezgi — ve artık sessiz varsayılan
+  // olarak durmuyor, her koşumda ADIYLA yazılıyor.
+  //
+  // Hüküm (a): pencere MANTIĞI değişmez, iki pilot AYRI kalır. Gerekçe
+  // ölçüm-birimi kuralı: B4/O-012'nin sorusu *"hangi AÇI SINIFI referansı
+  // besleyebilir"* ve bu bir TEŞHİS sorusu — bilerek GENİŞ havuzda (36
+  // kaynak) soruluyor. Havuzu hold-pencerelerine indirmek (16) soruyu
+  // cevaplamaz, SORUYU DEĞİŞTİRİR; üstelik piyanoyu tam `minTakes=3`
+  // sınırına oturtur (sıfır pay: tek take düşerse taban-altına iner ve
+  // düşüşün sebebi ölçüm mü malzeme mi ayırt edilemez).
+  // Dar-havuz yolu ZATEN var: `hold_reference.dart` (hold_isolator çıktısı).
+  stdout.writeln('windowRule: heuristic-mostStatic90, PROVISIONAL '
+      '(sezgi — 90 karelik en az hareketli açı-uzayı penceresi; '
+      'görünürlük/kadraj KRİTERİ YOK, rig-onaylı izolasyon DEĞİL — '
+      'M-O-41: bu sezgiyle kesilen pencereler şan/piyanoda 9 kaynaktan '
+      '5\'inde kanonik güven kapısından geçemedi)');
+  stdout.writeln('    → izole edilmiş pencere yolu: '
+      'dart run bin/hold_reference.dart <çalgı>\n');
   if (files.length < 3) {
     stderr.writeln('en az 3 fixture gerekir, ${files.length} var');
     exit(1);

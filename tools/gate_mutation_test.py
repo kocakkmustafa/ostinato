@@ -25,6 +25,7 @@ her mutasyon testini geçerdi.
 import hashlib
 import json
 import os
+import plistlib
 import shutil
 import subprocess
 import sys
@@ -36,12 +37,20 @@ from pathlib import Path
 RULESET = "config/rulesets/{}@0.2.0-draft.json"
 REFERENCE = "config/references/{}-posture-setup.v1.json"
 LIBRARY = "assets/content/library.json"
+#: İzin gerekçesi metni — İŞLETİM SİSTEMİNİN gösterdiği yüzey (O-099).
+CAMERA_PLIST = "ios/Runner/Info.plist"
 
 GATES = {
     "türetme": [sys.executable, "tools/derive_posture_thresholds.py", "--check"],
     "kütüphane": [sys.executable, "tools/validate_library.py"],
     "gözlem": [sys.executable, "tools/validate_observation_cues.py", "--fast"],
     "ruleset": [sys.executable, "tools/validate_ruleset.py"],
+    # O-099: yüzey dürüstlüğü kapısı MUT-A'ya BURADA girdi. Sebebi ölçüldü —
+    # kapı bugüne dek plist METNİNİ hiç taramıyordu ve orada günlerce yanlış
+    # bir saklama iddiası sevk edildi. Kapıyı uzatmak yetmez; UZATMANIN
+    # KENDİSİ de bir mutasyonla ısırıldığı kanıtlanmalı, yoksa yeni kapı da
+    # eskisi gibi sessizce ölür.
+    "yüzey": [sys.executable, "tools/validate_surface_honesty.py"],
 }
 
 
@@ -191,6 +200,29 @@ def m_error_code_as_cue(_):
     jdump(LIBRARY, d)
 
 
+def m_permission_retention_claim(_):
+    """İzin metnine SAKLAMA iddiasını GERİ koyar (O-099).
+
+    Neden bu mutasyon var: bu cümle (*"the app only keeps the body angles it
+    measures"*) 08-07'de uygulama içinde ölçülüp YANLIŞ bulundu ve
+    düzeltildi, ama `Info.plist`te SAĞ KALDI ve günlerce sevk edildi —
+    çünkü kapı yalnız anahtarın VARLIĞINA bakıyordu, metne bakmıyordu.
+
+    Neden ÜÇÜNCÜ-ŞAHIS AKTİF biçim seçildi: eski desen özneyi kendi içine
+    gömüyordu (`we keep` · `are kept`) ve tam bu biçimi KAÇIRIYORDU. Desen
+    bir gün özne-bağımlı hâline geri dönerse bu satır kırmızı yanmaz —
+    yani mutasyon hem KAPSAMI (plist taranıyor mu) hem DESENİ (özne-bağımsız
+    mı) tek seferde ölçüyor.
+    """
+    p = Path(CAMERA_PLIST)
+    d = plistlib.loads(p.read_bytes())
+    d["NSCameraUsageDescription"] = (
+        "Ostinato watches your sitting posture while you practice. Video "
+        "stays on this device and is never uploaded — the app only keeps "
+        "the body angles it measures.")
+    p.write_bytes(plistlib.dumps(d))
+
+
 def m_nothing(_):
     """Kontrol satırı: hiçbir şey bozulmadı. Kapılar YEŞİL kalmalı —
     hep-kırmızı bir takım da diğer tüm mutasyon testlerini geçerdi."""
@@ -211,10 +243,13 @@ MUTATIONS = [
     ("içerik: lockedReason 'x'e indirildi (alan duruyor)", "content", m_locked_reason_junk, []),
     ("içerik: notMeasured '-' (alan duruyor)", "content", m_not_measured_junk, []),
     ("içerik: dürüstlük kutusu 3 eğitmeni 30 diye yazıyor", "content", m_honesty_claim_lie, []),
+    ("izin metni: saklama iddiası geri kondu (O-099)", "single",
+     m_permission_retention_claim, ["yüzey"]),
 ]
 
 TOUCHED = [RULESET.format(i) for i in ("guitar", "voice", "piano")] + \
-          [REFERENCE.format(i) for i in ("guitar", "voice", "piano")] + [LIBRARY]
+          [REFERENCE.format(i) for i in ("guitar", "voice", "piano")] + \
+          [LIBRARY, CAMERA_PLIST]
 
 
 #: ÇÖKMEYE-DAYANIKLI GERİ ALMA (O-072). Bu harness GERÇEK config dosyalarını

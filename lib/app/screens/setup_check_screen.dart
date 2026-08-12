@@ -169,9 +169,16 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
           key: const Key('setup-stage-framing'),
           kicker: 'FRAME',
           title: 'Find your frame.',
+          // DÜZELTME-2 (O-099): "Nine points" burada bir OKUMA iddiasıydı
+          // ("we do not read your head" ile aynı cümlede) ve ölçüme
+          // uymuyordu — kamera DÖRT nokta okur (`LmRegion.torso`). BEŞİNCİ
+          // yüzey: ilk sayım "upper-body" ifadesini aradığı için burayı
+          // KAÇIRMIŞTI — deseni ifadeye bağlamanın, iddiaya bağlamamanın
+          // aynı sınıf hatası (plist kapısının deliğiyle birebir aynı).
           body: 'You should be visible from your hips to your shoulders. '
-              'Nine points, no face — we do not read your head, because '
-              'our reference does not carry one.',
+              'Four points — your two shoulders and your two hips — and no '
+              'face: we do not read your head, because our reference does '
+              'not carry one.',
           child: _Skeleton(dim: false),
         ),
       _Stage.framingError => _CameraStage(

@@ -99,9 +99,15 @@ class LibraryScreen extends StatelessWidget {
                       // yalanlıyordu. Ürünün TEK CÜMLESİ (UI-BRIEF §0)
                       // mikrofonu içeriyor — o ÜRÜNÜN cümlesi; bu ekran
                       // BU BUILD'i anlatır.
+                      // DÜZELTME-2 (O-099): "nine upper-body points" ölçüme
+                      // uymuyordu — kamera DÖRT landmark okuyor (iki omuz +
+                      // iki kalça) ve TEK açı ölçüyor. Dokuz, figürün düğüm
+                      // sayısı.
                       Text(
                         'Put your phone where it can see you. The camera '
-                        'reads nine upper-body points while you practise. '
+                        'reads your two shoulders and your two hips while '
+                        'you practise, and measures one thing: how far your '
+                        'trunk leans. '
                         'There is no live microphone input in this build — '
                         'the chord and note work described in the lessons '
                         'was measured on recordings, not in your room.',

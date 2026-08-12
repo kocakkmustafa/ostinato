@@ -39,6 +39,7 @@ gözlem cümlesinin golden kataloğu dahil) görmüyordu. Her koşumda kapsam
 EKRANA yazılır: bakılmayan bir yer "temiz" sanılamasın diye.
 """
 import json
+import plistlib
 import re
 import sys
 from pathlib import Path
@@ -203,14 +204,57 @@ def coached_only_joints(instrument):
 # yakalanan hatadır — kimse sonucu sorgulamadığı için gerekçe hiç
 # denetlenmez. Üstelik cümle bir gizlilik İMTİYAZI kılığındaydı, yani
 # kullanıcıya var olmayan bir KAYIT olduğunu düşündürüyordu.
+# ⚠️ DESEN ÖZNE-BAĞIMSIZ YAZILIR (O-099, 2026-08-12 — bu deliğin ÖLÇÜLDÜĞÜ
+# vaka): önceki hâli özneyi desenin İÇİNE gömüyordu (`we keep` · `are kept` ·
+# `we store`). Ölçüldü: 08-07'de `settings_screen`de düzeltilen cümle
+# *"only the body angles we measure **are kept**"* YAKALANIYORDU, ama AYNI
+# İDDİANIN üçüncü-şahıs-aktif hâli — `Info.plist`teki *"the app only
+# **keeps** the body angles it measures"* — KAÇIYORDU. Desen sağlamdı
+# (öz-test örneğini yakalıyordu); delik DİLBİLGİSİNDEYDİ.
+#
+# → Bir iddia düzeltildiğinde DÜZELTİLEN CÜMLE değil İDDİA aranır. Desen
+#   artık özneyi hiç saymıyor: SAKLAMA FİİLİ + SAKLANABİLİR NESNE arıyor.
+#   Böylece "the app keeps", "we keep", "are kept", "Ostinato retains" —
+#   dördü de aynı kapıdan geçer, ve yeni bir özne icat etmek deseni
+#   atlatmaz. Nesne listesi sınırlı tutuluyor ki "keep your phone steady"
+#   ya da "keeps you inside the band" YANLIŞ-POZİTİF üretmesin (ikisi de
+#   sevk edilen yüzeyde geçiyor — ölçüldü).
+_RETENTION_VERB = (r"(?:keeps?|kept|stores?|stored|retains?|retained|"
+                   r"saves?|saved|records?|recorded|logs?|logged)")
+# ⚠️ NESNE LİSTESİ DAR TUTULUR — ve bu sınır ÖLÇÜLEREK çizildi, tahminle
+# değil. İlk yazımda liste `points?|frames?|readings?|sessions?|data` da
+# içeriyordu; kapı GERÇEK korpusta koşturulunca ÜÇ yanlış-pozitif verdi:
+#   · "At the distance that keeps your hips IN FRAME …"  → `frame` kadraj,
+#     saklanan kare değil
+#   · "…the {n} {sourceClass} we RECORDED was {deg}°; you're currently
+#     READING {measured}" → `reading` fiil, saklanan ölçüm değil
+# İkisi de saklama İDDİASI değil. Ders: olumsuz örnekleri DESENİ YAZAN
+# seçerse, kaçırdığı biçimi de seçer — panzehir, kapıyı gerçek korpusta
+# koşturmak. O üç cümle artık NEGATIVE_SAMPLES'ta kalıcı.
+#
+# Nesne KULLANICI VERİSİNE işaret etmeli: eğitmen korpusunu "kaydettik"
+# demek bir saklama iddiası DEĞİL (o bizim referans malzememiz).
+# `footage` KULLANICI-KAPSAMLI yazılır (`your footage`): sevk edilen metinde
+# "footage" neredeyse daima EĞİTMEN malzemesidir ("the teaching footage our
+# references come from was recorded waist-up") — kapsamsız bırakmak o cümleyi
+# saklama iddiası sayardı. Kullanıcının kaydı bu üründe "video".
+_RETENTION_OBJECT = (r"(?:angles?|landmarks?|measurements?|"
+                     r"video|your footage|history|session data|your data)")
 RETENTION_CLAIM = re.compile(
-    r"\bwe keep\b|\bare kept\b|\bis kept\b|\bwe store\b|\bis stored\b|"
-    r"\bsaved on (?:your|this) (?:phone|device)\b|\byour history\b",
+    # aktif: "keeps the body angles" (özne kim olursa olsun)
+    rf"\b{_RETENTION_VERB}\b[^.!?]{{0,40}}?\b{_RETENTION_OBJECT}\b|"
+    # edilgen: "the angles are kept"
+    rf"\b{_RETENTION_OBJECT}\b[^.!?]{{0,40}}?\b(?:are|is|was|were)\s+"
+    rf"{_RETENTION_VERB}\b|"
+    rf"\bsaved on (?:your|this) (?:phone|device)\b|\byour history\b",
     re.IGNORECASE)
-# Yokluğu söyleyen cümle geçer.
+# Yokluğu söyleyen cümle geçer. ("nothing is recorded" O-099'da eklendi —
+# aynı iddianın başka fiille söylenmiş yokluk hâli; Choreia'nın izin metni
+# tam bu biçimi kullanıyor, aile ölçümü 4/5.)
 RETENTION_ABSENCE = re.compile(
     r"nothing is stored|none to delete|no history|are gone when|"
-    r"is gone when|not stored|nothing is kept", re.IGNORECASE)
+    r"is gone when|not stored|nothing is kept|nothing is recorded|"
+    r"nothing is saved|nothing is retained|nothing is logged", re.IGNORECASE)
 #: Ölçüm SAKLAYAN bir kod yolu nasıl görünürdü. Karşılama işareti ve poz
 #: modeli dosyası HARİÇ (ikisi de ölçüm değil): dosya adlarıyla muaf.
 RETENTION_WRITERS = re.compile(
@@ -628,6 +672,50 @@ def android_declares(permission: str) -> bool:
     return p.exists() and permission in p.read_text(encoding="utf-8")
 
 
+def platform_permission_strings():
+    """İzin gerekçesi metinleri — İŞLETİM SİSTEMİNİN kullanıcıya gösterdiği
+    yüzey (O-099, koordinatör sevki 2026-08-12).
+
+    **Neden eklendi:** bu kapı bugüne dek `ios_declares()` ile yalnız
+    ANAHTARIN VARLIĞINA bakıyordu, METNE hiç bakmıyordu. Ölçüldü:
+    `NSCameraUsageDescription` içinde 08-07'de ölçülüp YANLIŞ bulunan
+    saklama iddiası (*"the app only keeps the body angles it measures"*)
+    sağ kalmıştı — `grep NSCameraUsageDescription test tools docs` → 0 atıf.
+    Sevk edilen, hiçbir kapının ölçmediği bir yüzeydi.
+
+    **Neden birinci sınıf yüzey:** kullanıcı bu cümleyi onboarding'in
+    *"izni kurulum kontrolünde isteyeceğiz"* sözünün hemen ardından, sistem
+    diyaloğunda görür. Akışın parçası, dışı değil — ve uygulama içi metinden
+    daha zor düzeltilir (build gerektirir).
+
+    Aile ölçümü (koordinatör, 2026-08-12): beş hattın **4'ü** izin metninde
+    bir saklama iddiası taşıyor. Cümleyi kimse YAZMADI, hepsi DEVRALDI.
+    """
+    out = []
+    ios = Path("ios/Runner/Info.plist")
+    if ios.exists():
+        try:
+            data = plistlib.loads(ios.read_bytes())
+        except Exception as exc:  # bozuk plist SESSİZCE atlanmaz
+            out.append((f"{ios} (OKUNAMADI: {exc})", ""))
+            data = {}
+        for key, value in sorted(data.items()):
+            if key.endswith("UsageDescription") and isinstance(value, str):
+                out.append((f"{ios}:{key}", value))
+    # Android'de kamera izni gerekçe METNİ taşımıyor (ölçüldü: strings.xml
+    # yok, manifest yalnız `uses-permission` satırı). Yol yine de kuruluyor:
+    # bir gün gerekçe eklenirse kapı onu KENDİLİĞİNDEN görür.
+    for strings in sorted(Path("android").rglob("strings.xml")):
+        try:
+            import xml.etree.ElementTree as ET
+            for node in ET.parse(strings).getroot().iter("string"):
+                if node.text and node.get("name"):
+                    out.append((f"{strings}:{node.get('name')}", node.text))
+        except Exception as exc:
+            out.append((f"{strings} (OKUNAMADI: {exc})", ""))
+    return out
+
+
 def sentences(text: str):
     """Kaba cümle bölme — iddia CÜMLE düzeyinde değerlendirilir; bir paragrafın
     başka bir yerindeki olumsuzlama, buradaki iddiayı aklamaz."""
@@ -658,7 +746,19 @@ SELFTEST_SAMPLES = [
     ("canlılık D", LIVE_CLAIM.pattern, "your elbow angle, live"),
     ("puanlanmaz D muafiyeti", NOT_GRADED.pattern, "measured but never graded"),
     ("saklama E", RETENTION_CLAIM.pattern, "the angles are kept on device"),
+    # ⭐ O-099'un canlı kanıtı: AYNI İDDİANIN üç dilbilgisi. Üçüncüsü
+    # (üçüncü-şahıs aktif) eski desenden KAÇIYORDU ve `Info.plist`te sevk
+    # edilmişti. Örnekler burada durdukça özne-bağımlı bir desene geri
+    # dönüş SESSİZ olamaz.
+    ("saklama E/edilgen", RETENTION_CLAIM.pattern,
+     "only the body angles we measure are kept"),
+    ("saklama E/üçüncü şahıs aktif", RETENTION_CLAIM.pattern,
+     "the app only keeps the body angles it measures"),
+    ("saklama E/başka özne", RETENTION_CLAIM.pattern,
+     "Ostinato retains your session data"),
     ("saklama yokluğu E", RETENTION_ABSENCE.pattern, "nothing is stored"),
+    ("saklama yokluğu E/kayıt", RETENTION_ABSENCE.pattern,
+     "nothing is recorded or uploaded"),
     ("dil F", TURKISH_WORDS.pattern, "bu ekran ve o kart için"),
     ("tanı muafiyeti F", DIAGNOSTIC_LINE.pattern, "throw StateError('x')"),
     ("ters yön", ABSENCE_ASSERTIONS.pattern, "there is no microphone input"),
@@ -681,9 +781,46 @@ SELFTEST_SAMPLES = [
      "  http:\n    dependency: transitive\n"),
 ]
 
+# ── OLUMSUZ İKİZ: desen YAKALAMAMASI gerekeni yakalıyor mu? ───────────────
+#
+# (O-099 — bir deseni GENİŞLETMENİN kendi riski.) `RETENTION_CLAIM` özne
+# bağımlılığından kurtarılırken fiil listesi genişledi; genişleyen bir desen
+# gürültü üretirse hat kapıyı görmezden gelmeye başlar — pozitif ikizin
+# ölçmediği arıza budur. Bu örnekler GERÇEK sevk edilen cümlelerden alındı
+# (icat değil): desen bunlardan HERHANGİ BİRİNİ ihlal sayarsa genişletme
+# fazla geniş yazılmış demektir. *Sınırı geniş yazmak, dar yazmak kadar
+# pahalıdır* — bu hattın kendi dersi.
+NEGATIVE_SAMPLES = [
+    ("saklama: kılavuz cümlesi", RETENTION_CLAIM,
+     "Keep your phone steady."),
+    ("saklama: kayıt YOKLUĞU (sürüyor kipi)", RETENTION_CLAIM,
+     "This takes a moment. Nothing is being recorded."),
+    ("saklama: ses ölçülmedi", RETENTION_CLAIM,
+     "Room noise is not part of this check, so nothing about your sound "
+     "was measured or saved."),
+    ("saklama: figür sayısı", RETENTION_CLAIM,
+     "Your two shoulders and your two hips are what the camera reads; "
+     "this figure draws nine points."),
+    # ⭐ Bu üçünü kapının KENDİSİ buldu (yukarıdaki nesne-listesi şerhi):
+    # ikisi de gerçek sevk edilen metin, ikisi de saklama iddiası DEĞİL.
+    # Buradan çıkarılırlarsa nesne listesini genişletme SESSİZ olamaz.
+    ("saklama: kadraj 'in frame'", RETENTION_CLAIM,
+     "At the distance that keeps your hips in frame, a fingertip is a few "
+     "pixels wide, so there is nothing stable to measure."),
+    ("saklama: korpus 'we recorded'", RETENTION_CLAIM,
+     "The widest lean among the 7 teachers we recorded was 14.0°; you're "
+     "currently reading 19.2°."),
+    ("saklama: eğitmen malzemesi kaydı", RETENTION_CLAIM,
+     "The teaching footage our references come from was recorded waist-up."),
+]
+
 
 def selftest() -> int:
     dead = []
+    for name, pattern, sample in NEGATIVE_SAMPLES:
+        if pattern.search(sample):
+            dead.append(f"{name}: desen YAKALAMAMASI gerekeni yakaladı "
+                        f"(yanlış-pozitif) — «{sample[:70]}»")
     for name, pattern, sample in SELFTEST_SAMPLES:
         if not re.search(pattern, sample, re.IGNORECASE):
             dead.append(f"{name}: desen bilinen örneği YAKALAMIYOR — "
@@ -710,13 +847,26 @@ def selftest() -> int:
     if "http" not in NETWORK_DEPS_RECORDED:
         dead.append("NETWORK_DEPS_RECORDED'da 'http' yok — transitif kayıt "
                     "geri alınmış olabilir")
+    # O-099: izin metni yolu da sahte-sıfır verebilir — ve tam bu yüzey
+    # yıllarca ölçülmedi. Uygulama kamerayı kullanıyor, dolayısıyla
+    # `NSCameraUsageDescription` OKUNABİLİR olmak zorunda. Bu kontrol
+    # "kapsamı ekledim" iddiasını "kapsam gerçekten dolu" ölçümüne çevirir.
+    perm = platform_permission_strings()
+    if not perm:
+        dead.append("platform_permission_strings() BOŞ — izin metni yolu "
+                    "ölmüş; kapı 'temiz' derken sıfır tarar (O-099)")
+    elif not any(k.endswith("NSCameraUsageDescription") and t.strip()
+                 for k, t in perm):
+        dead.append("NSCameraUsageDescription METNİ okunamadı — anahtar "
+                    "varlığı ölçülüyordu, METİN yine ölçülmüyor demektir")
     if dead:
         print(f"⛔ {len(dead)} ÖLÜ DESEN/YOL (pozitif ikiz başarısız):")
         for d in dead:
             print(f"   - {d}")
         return 1
     print(f"✅ pozitif ikiz TEMİZ — {len(SELFTEST_SAMPLES)} desen bilinen "
-          f"örneğini yakaladı, 3 yol türetimi canlı")
+          f"örneğini yakaladı, {len(NEGATIVE_SAMPLES)} olumsuz örnek "
+          f"yakalanMADI, 4 yol türetimi canlı (izin metni dahil)")
     return 0
 
 
@@ -726,6 +876,11 @@ def main() -> int:
     dart_raw = list(dart_surface_strings())
     surfaces = [(f"{f}:{ln}", t) for f, ln, t in dart_raw]
     surfaces += [(p, t) for p, t in json_surface_strings()]
+    # İzin gerekçesi metinleri (O-099): İŞLETİM SİSTEMİNİN gösterdiği yüzey.
+    # Diğer yüzeylerle AYNI kurallardan geçer — ayrı bir muafiyet katmanı
+    # yaratmak, bugün kapatılan deliğin kendisiydi.
+    permission_surfaces = platform_permission_strings()
+    surfaces += permission_surfaces
     surfaces = [(w, t) for w, t in surfaces if not IDENTIFIER_LIKE.match(t)]
 
     # ── Kural A ──
@@ -988,6 +1143,15 @@ def main() -> int:
         violations.append(
             f"VAKUM: pubspec'ten yalnız {len(shipped_json_assets())} JSON "
             f"varlığı türedi (beklenen ≥3) — kapsam türetimi kırılmış")
+    # O-099 vakumu: uygulama kamerayı KULLANIYOR, dolayısıyla en az bir izin
+    # gerekçesi metni OLMAK ZORUNDA. Sıfır dönerse yol kırılmış demektir ve
+    # "temiz" hükmü geçersiz — tam bu yüzeyin yıllarca ölçülmemiş olması bu
+    # kapının var olma sebebi.
+    if not permission_surfaces:
+        violations.append(
+            "VAKUM: hiç izin gerekçesi metni bulunamadı (beklenen ≥1) — "
+            "uygulama kamera kullanıyor; plist yolu kırılmış olabilir, "
+            "'temiz' hükmü GEÇERSİZ")
 
     if violations:
         print(f"⛔ {len(violations)} YÜZEY DÜRÜSTLÜĞÜ İHLALİ:")
@@ -1008,7 +1172,10 @@ def main() -> int:
     # (bu kapının kendi kapsam hatası tam olarak böyle görünmezdi).
     print(f"   kapsam: {DART_ROOTS} + kabuğa giden {len(shipped_json_assets())} "
           f"JSON varlığı ({scanned}) + {len(ruleset_files)} ruleset "
-          f"(userExplanation katmanı, O-058)")
+          f"(userExplanation katmanı, O-058) + "
+          f"{len(permission_surfaces)} izin gerekçesi metni "
+          f"({', '.join(w.split(':')[-1] for w, _ in permission_surfaces)}"
+          f" — O-099, İŞLETİM SİSTEMİNİN gösterdiği yüzey)")
     return 0
 
 

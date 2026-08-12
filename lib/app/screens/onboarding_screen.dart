@@ -387,11 +387,19 @@ class _SensorsStep extends StatelessWidget {
           const _SensorCard(
             title: 'The camera',
             key: Key('onboarding-camera-card'),
-            body: 'It reads nine upper-body points — hips, shoulders, neck. '
-                'No face: our teacher references were filmed waist-up, so we '
-                'have nothing to compare a head against. Ostinato asks for '
-                'camera access when your first setup check starts, not now, '
-                'because there is nothing to look at until then.',
+            // DÜZELTME (O-099, koordinatör hükmü 2026-08-12): cümle "nine
+            // upper-body points — hips, shoulders, neck" diyordu. Ölçüldü:
+            // canlı zincir `specs:[trunkTilt]` = TEK açı, güven kapısı
+            // `required:LmRegion.torso` = DÖRT landmark, ve "neck" HİÇ
+            // okunmuyor. "Dokuz" figürün düğüm sayısıydı — sayı gerçek,
+            // BİRİMİ yanlış. Kural: her sayı saydığı şeyin yanında durur.
+            body: 'It reads your two shoulders and your two hips, and from '
+                'them measures one thing: how far your trunk leans. No face '
+                '— nothing above your shoulders is read at all: our teacher '
+                'references were filmed waist-up, so we have nothing to '
+                'compare a head against. Ostinato asks for camera access '
+                'when your first setup check starts, not now, because there '
+                'is nothing to look at until then.',
           ),
           const SizedBox(height: 12),
           // Sıra DEĞİŞTİ (2026-08-07, ekran kanıtı O-046): bu kart en sondaydı
