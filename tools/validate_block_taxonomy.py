@@ -93,6 +93,24 @@ def classify(l):
                   "sınıflandırma karar VERMİYOR" % ", ".join(h[0] for h in hits))
 
 
+def silence(l):
+    """A3 — bu yüzey SESSİZ mi? (JabLab'ın üç şartlı tanımı)
+
+    Bir boş yüzey *sessiz* sayılır ancak **neden boş olduğunu söylemiyorsa.**
+    Burada iki şart aranır ve ikisi de KULLANICIYA GÖRÜNEN alanlardır:
+      ① bir GEREKÇE (`lockedReason` ya da `demoOnlyReason`)
+      ② bir AÇILMA KOŞULU (`promotionPath.unblockedBy`)
+    ⚠️ İkincisi olmadan birincisi yarım bir dürüstlüktür: *"kapalı"* demek,
+    *"ne olursa açılır"* dememektir.
+    """
+    missing = []
+    if not (l.get("lockedReason") or l.get("demoOnlyReason")):
+        missing.append("GEREKÇE")
+    if not (l.get("promotionPath") or {}).get("unblockedBy"):
+        missing.append("AÇILMA KOŞULU")
+    return missing
+
+
 def measure():
     total, blocked, rows, bad = 0, [], [], []
     for _di, _c, l in lessons():
@@ -130,6 +148,22 @@ def selftest() -> int:
         if got != want:
             dead.append(f"ikiz-{i} ({note}): {got!r} verdi, {want!r} "
                         f"bekleniyordu")
+    # A3 kolunun SENTETİK ikizleri — *sessiz oran %0* bir YOKLUK iddiasıdır
+    # ve bir yokluk iddiası, aracın onu BULABİLDİĞİ gösterilmeden okunamaz.
+    for lesson, want, note in [
+        ({"status": "locked", "lockedReason": "x"}, ["AÇILMA KOŞULU"],
+         "gerekçe var, koşul YOK — YARIM dürüstlük yakalanmalı"),
+        ({"status": "locked", "lockedReason": "x",
+          "promotionPath": {"unblockedBy": "y"}}, [],
+         "ikisi de var — sessiz DEĞİL"),
+        ({"status": "locked"}, ["GEREKÇE", "AÇILMA KOŞULU"],
+         "ikisi de yok — tam SESSİZ"),
+    ]:
+        got = silence(lesson)
+        if got != want:
+            dead.append(f"A3 kolu ({note}): {got} verdi, {want} bekleniyordu "
+                        f"— *sessiz oran %0* iddiası, aracın sessizliği "
+                        f"BULABİLDİĞİ gösterilmeden okunamaz")
     # VAKUM: içerik dosyası okunabiliyor ve açılmayan ders GERÇEKTEN var mı?
     # (Bir 'ihlal 0' bulgusundan önce: ölçülecek bir şey var mı?)
     _t, blocked, _r, _b = measure()
@@ -142,9 +176,13 @@ def selftest() -> int:
         for d in dead:
             print(f"   - {d}")
         return 1
-    print(f"✅ taksonomi öz-testi GEÇTİ — beş sentetik ikiz (tek-E · tek-A' · "
-          f"demoOnly YAPIDAN · çift-eşleşme ÖTÜYOR · sıfır-eşleşme ÖTÜYOR), "
-          f"bu ağaçta {len(blocked)} açılmayan ders")
+    # ⚠️ SAYI TÜRETİLİR, YAZILMAZ (O-118'in sınıfı): burada "beş sentetik ikiz"
+    # yazılıydı ve A3 kolu eklenince SEKİZ oldu — kapının kendi başarı satırı
+    # bayat bir beyana dönüşmüştü. *Bir kapının raporu da bir iddiadır.*
+    print(f"✅ taksonomi öz-testi GEÇTİ — {len(cases)} sınıf ikizi (tek-E · "
+          f"tek-A' · demoOnly YAPIDAN · çift-eşleşme ÖTÜYOR · sıfır-eşleşme "
+          f"ÖTÜYOR) + 3 A3-sessizlik ikizi + VAKUM, bu ağaçta "
+          f"{len(blocked)} açılmayan ders")
     return 0
 
 
@@ -157,6 +195,14 @@ def main() -> int:
         for lid, why in bad:
             print(f"   - {lid}: {why}")
         return 1
+    # ── A3: SESSİZ BOŞ YÜZEY ORANI ───────────────────────────────────────
+    silent = [(l["id"], silence(l)) for l in blocked if silence(l)]
+    if silent:
+        print(f"⛔ {len(silent)} SESSİZ BOŞ YÜZEY — boş olduğunu söylüyor ama "
+              f"NEDEN boş olduğunu söylemiyor:")
+        for lid, miss in silent:
+            print(f"   - {lid}: eksik {', '.join(miss)}")
+        return 1
     dist = {}
     for _id, _st, cls, _why in rows:
         dist[cls] = dist.get(cls, 0) + 1
@@ -164,7 +210,13 @@ def main() -> int:
     print(f"✅ A4 TAKSONOMİSİ TÜRETİLDİ — her açılmayan ders TAM BİR sınıfa "
           f"düşüyor")
     print(f"   İŞLEM: {total} ders = {offering} iş sunan ⊎ {len(blocked)} "
-          f"açılmayan   [payda = {len(blocked)}]")
+          f"açılmayan ⊎ 0 çıkmaz   [payda = {len(blocked)}]")
+    print(f"   A3 SESSİZ ORAN: 0/{len(blocked)} = %0 — {len(blocked)}/"
+          f"{len(blocked)}'ü hem GEREKÇE hem AÇILMA KOŞULU taşıyor")
+    print(f"   ⚠️ A3 ŞERHİ (payda genişleyebilir): bu payda DERS KARTI "
+          f"yüzeyidir; dokunarak VARILAMAYAN 2 ekranı (Live · Review) "
+          f"KAPSAMAZ. Onlar kamera kapısının arkasında ve kanıtları A12'de. "
+          f"Bu şerh silinirse sayı olduğundan İYİ okunur.")
     print(f"   dağılım: " + " · ".join(
         f"{k} {dist.get(k, 0)}" for k in ("A", "A'", "B", "C", "D", "E")))
     for lid, st, cls, why in sorted(rows, key=lambda r: (r[2], r[0])):
