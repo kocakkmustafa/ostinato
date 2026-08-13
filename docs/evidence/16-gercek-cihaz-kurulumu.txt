@@ -1,0 +1,124 @@
+16 — GERÇEK CİHAZ: İMZA ENGELİ DÜŞTÜ, UYGULAMA KURULDU VE KOŞTU
+================================================================
+Tarih: 2026-08-14 · Kayıt: O-129 / O-130 · Hüküm: H-6 (HERKESE) düzeltmesi
+
+⚠️ KANIT SINIFI, İDDİADAN ÖNCE
+Bu dosyada EKRAN GÖRÜNTÜSÜ YOK ve olmaması bir eksiklik değil, bir OLGU:
+fiziksel iPhone'da dokunuş/ekran-yakalama sürebilen kanal bu makinede YOK
+(ölçüldü: mobile-mcp yalnız simülatör listeliyor, WebDriverAgent kurulu değil).
+⇒ Burada kanıtlanan şey ŞU: uygulama gerçek donanıma KURULUYOR ve orada
+KOŞUYOR. Kanıtlanmayan şey: bir insanın o cihazda akışı YÜRÜDÜĞÜ. O hâlâ A12.
+
+Cihaz: iPhone 14 Pro Max (iPhone15,3) · iOS 26.6 · UDID 00008120-001804D83E13C01E
+       Developer Mode: enabled · takıma kayıtlı
+
+
+① DEVRALINAN İKİ İDDİA — İKİSİ DE YANLIŞ YERDEN BAKIYORDU
+---------------------------------------------------------
+  (a) Kendi B tablom: "com.yulalab.ostinato profili YOK"
+  (b) H-6 hükmü:     "wildcard T5HZGYBWK8.* beş app'i birden kapsar;
+                      imzalı cihaz derlemesi -allowProvisioningUpdates
+                      olmadan GEÇTİ"
+
+  ÖLÇÜM — 10 profil çözüldü (security cms -D), ProvisionedDevices okundu:
+    T5HZGYBWK8.*                 → cihazlar: [00008132-001A70163AD3801C]  ← TEK
+    T5HZGYBWK8.…lifeos           → 00008120-001804D83E13C01E İÇERİR
+    T5HZGYBWK8.…LifeOSWidget     → 00008120-001804D83E13C01E İÇERİR
+    T5HZGYBWK8.…burunfarki       → 00008120-001804D83E13C01E İÇERİR
+    T5HZGYBWK8.…braavolabs.mobile→ 00008120-001804D83E13C01E İÇERİR
+
+  ⇒ Wildcard profil VARDI ama BU TELEFONU KAPSAMIYORDU (bayat: o telefon
+    kaydedilmeden önce üretilmiş). Telefon ise takıma KAYITLIYDI — dört ayrı
+    dev profilinde içerildiği için. Eksik olan KAYIT değil, TAZE PROFİL.
+
+  ⭐ BİR YOKLUK ÖLÇÜMÜ DİZİN SEÇİMİ KADAR GEÇERLİDİR (H-6 haklıydı) —
+     AMA BİR VARLIK ÖLÇÜMÜ DE ALAN SEÇİMİ KADAR GEÇERLİDİR: profil vardı,
+     hata `ProvisionedDevices` alanına hiç bakılmamış olmasıydı.
+
+
+② "İMZALI DERLEME GEÇTİ" BU BACAĞI ÖLÇEMEZ — ÖLÇÜMLE GÖSTERİLDİ
+----------------------------------------------------------------
+  flutter build ios --debug            → GEÇTİ (45,3 s)
+  embedded.mobileprovision okundu      → T5HZGYBWK8.* (BAYAT wildcard gömülmüş)
+  devicectl device install app         → DÜŞTÜ:
+      0xe8008012 "This provisioning profile cannot be installed on this device"
+      MIInstallerErrorDomain error 13 / ApplicationVerificationFailed
+
+  ⭐ BİR İMZANIN GEÇMESİ, KURULABİLDİĞİ ANLAMINA GELMEZ.
+     codesign sertifika+profil ister; kurulum AYRICA CİHAZ ÜYELİĞİ ister.
+
+
+③ DÜZELTME — PROFİL TAZELEME (kod değişikliği YOK)
+---------------------------------------------------
+  xcodebuild -allowProvisioningUpdates … → ** BUILD SUCCEEDED **
+  Portal YENİ profil üretti:
+      6838d7c8-66b1-46d0-9280-c448b9fcbf8f.mobileprovision
+      AppID : T5HZGYBWK8.com.yulalab.ostinato      ← app'e özel, İLK KEZ
+      cihaz : 4 adet, 00008120-001804D83E13C01E DAHİL
+
+  Not: Ostinato'nun `.entitlements` dosyası YOK (tek izin
+  NSCameraUsageDescription) ⇒ app-özel entitlement gerekmiyordu; wildcard
+  tazelense de yeterdi. Engel entitlement değil, CİHAZ ÜYELİĞİYDİ.
+
+
+④ DEBUG PAKETİ CİHAZDA KOŞAMAZ — VE `launch` BUNU EXIT 0 İLE SÖYLEDİ
+---------------------------------------------------------------------
+  devicectl device process launch      → EXIT=0, "Launched application"
+  devicectl device info processes      → süreç YOK
+
+  Üç hipotez kuruldu: (1) çöküyor (2) kilitli telefonda askıya alındı
+  (3) anlık görüntü zamanlaması. `--console` üçünü birden ayırdı:
+      "Cannot create a FlutterEngine instance in debug mode without
+       Flutter tooling or Xcode."
+      "App terminated due to signal 11."
+
+  ⇒ Kusur Ostinato'da DEĞİL: Flutter debug motoru JIT ister, iOS 14+
+    araç bağlı değilken JIT'i engeller.
+  ⭐ BİR SARMALAYICININ ÇIKIŞ KODU, SARDIĞI ŞEYİN SONUCU DEĞİLDİR —
+     `launch`ın kodu BAŞLATMAYI ölçer, uygulamanın YAŞAMASINI değil. (O-119,
+     aynı gün dördüncü vaka.)
+  🪤 Yan tuzak: süreci `grep -i ostinato` ile aradım → 0 eşleşme. Flutter
+     ikilisinin adı `Runner`. Bir süreci ÜRÜN adıyla aramak, işletim
+     sisteminin gördüğünü değil pazarlamanın yazdığını aramaktır.
+
+
+⑤ RELEASE (AOT) — KURULDU VE KOŞTU
+-----------------------------------
+  flutter build ios --release          → 140,7 s · 45,2 MB · EXIT=0
+  devicectl device install app         → "App installed" · EXIT=0
+  devicectl device process launch      → EXIT=0
+  devicectl device info processes      → /Runner.app/Runner  PID 29353  (1 eşleşme)
+  devicectl … --console                → ÇIKTI YOK, süreç yaşıyor
+                                         (debug'da saniyeler içinde signal 11'di)
+
+  ⚠️ Sayaç uyarısı: ilk sayımım 2 dedi — ikinci eşleşme Apple'ın `Roadrunner`ı.
+     Desen `/Runner\.app/Runner` biçimine ÇAPALANDI. Bir sayacın doğru sayması,
+     doğru şeyi saydığı anlamına gelmez.
+
+  BAĞIMSIZ TEYİT — devicectl device info apps:
+      Braavolabs  com.braavolabs.mobile        1.0.3  12
+      Burun Farkı com.yulalab.burunfarki       1.0.0   8
+      LifeOS      com.mustafakaankocak.lifeos  1.6.0  19
+      Ostinato    com.yulalab.ostinato         1.0.0   1   ← YENİ
+  ⇒ Bu boru hattı bu telefonda daha önce ÜÇ kez çalışmış; Ostinato dördüncü.
+
+  Ayrıca: `xctrace list devices` telefonu "Devices Offline" altında gösteriyordu.
+  BAYAT OKUMA — `devicectl` aynı anda canlı tünel kurdu ("Acquired tunnel
+  connection to device"). Bir aracın "yok" demesi, yokluğun kanıtı değildir.
+
+
+⑥ NE KAPANDI, NE KAPANMADI — adıyla
+------------------------------------
+  ✅ KAPANDI : imza/profil engeli · gerçek donanıma kurulum · gerçek donanımda
+               AOT paketinin koşması
+  ⛔ AÇIK    : A12'nin YÜRÜYÜŞÜ — hiçbir insan bu cihazda akışı yürümedi.
+               Kalan iki şart: (1) kurucunun elleri (dokunuş kanalı YOK),
+               (2) kamera bacağı — SetupCheck→Live geçişi GERÇEK KARE ister
+               ve o hâlâ yalnız gerçek cihazda gözlenebilir.
+  ⛔ AÇIK    : O-126 (kamera hata mesajının sınıfı) — simülatörde ayrılamıyordu,
+               cihazda ayrılabilir ama yine yürüyüş gerektiriyor.
+
+  🔒 SINIR — kayda geçsin: kurucunun kişisel telefonunda, gece yarısı, KAMERAYI
+     kendi başıma tetiklemedim. Kurulum ve açılış ölçümü başka şeydir. Kurucu
+     2026-08-14'te bunu teyit etti ("gerçek telefonda değil de testlerini
+     simülatörde ilerletebilirsin") ve hat simülatöre döndü.
