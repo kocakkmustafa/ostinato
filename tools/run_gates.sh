@@ -31,6 +31,25 @@ fi
 # ÜRÜN kusuru sanılan kapı kırmızısı). Artık izlenmiyor (.gitignore); her
 # koşum kendi yerelini kurar/onarır. M-F-444: "ortam yok" ne sessizce
 # atlanır ne opak kırmızıya düşer — ADIYLA söylenir.
+#
+# 🔴 2026-08-14 (O-137, H-12 uygulanırken ÖLÇÜLDÜ) — **İKİ PANZEHİR BİRBİRİNİ
+# İPTAL EDİYOR.** Koordinatör hükmü H-12: *cihaz derlemesi paylaşılan native
+# asset'in üzerine yazıyor; simülatöre girmeden ÖNCE `flutter clean`.* Ama bu
+# ağaçta `build` bir SEMBOLİK BAĞLANTIDIR ⇒ `flutter clean` **yalnız bağlantıyı
+# siler**, hedefteki dosyalara HİÇ DOKUNMAZ. Ölçüldü: cihaz release derlemesinden
+# sonra `build/native_assets/ios/objective_c.framework/objective_c` →
+# `vtool -show-build` = **platform IOS** (cihaz); `flutter clean` koşuldu ve
+# dosya **aynı boyut, aynı zaman damgasıyla YERİNDE KALDI**.
+#
+# > ***BİR PANZEHİR, BAŞKA BİR PANZEHİRİN ETKİ YOLUNU KESEBİLİR — VE İKİSİ DE
+# > TEK TEK DOĞRUYKEN BİRLİKTE HİÇBİR ŞEY YAPMAZLAR.***
+#
+# ⇒ Cihaz derlemesinden sonra simülatöre dönerken zehir **SYMLINK HEDEFİNDE**
+#   silinir; `flutter clean` tek başına YETMEZ:
+#       rm -rf "$HOME/ostinato_buildout/app/native_assets" \
+#              "$HOME/ostinato_buildout/app/ios"
+# ⚠️ Ve `flutter clean` İZLENEN `.flutter-plugins-dependencies` dosyasını da
+#   siler — `git checkout --` ile geri alınmalı (bu da ölçüldü).
 _build_target="$HOME/ostinato_buildout/app"
 if [ -L build ]; then
   if [ ! -e "$_build_target" ]; then
