@@ -85,7 +85,23 @@ PRE_COMMIT_ERA = {1, 2, 4, 5, 6, 14}
 #:
 #: ⛔ Bu bir muafiyet listesi DEĞİL: her numara defterde `ders` TÜRÜYLE bir
 #: SATIR olarak durur. Kova yalnız *"commit aramayı bırak"* der.
-LESSON_ONLY = {119}
+#: 🔻 `O-132` EKLENDİ (2026-08-14) — `O-119`un DOĞRUDAN TORUNU, aynı sınıf.
+#: Kaydın kendisi: *"`git commit`i 2 dakikalık zaman aşımıyla çağırdım; pre-commit
+#: kancası TAM takımı koşuyor (~22 dk) ⇒ MUT-A ortasında SIGTERM"* — kaynağı bir
+#: ÖLÇÜM (commit inmedi · mutasyon kalıntısı yok · `IN-FLIGHT` onarıldı), kod
+#: değişikliği ÜRETMEDİ, ve değiştirdiği şey sonraki oturumun ALIŞKANLIĞI:
+#: ***bir komutun zaman aşımı, onun TETİKLEDİĞİ işin süresine göre seçilir.***
+#:
+#: ⚠️ VE BU KOVAYI SEÇMEK BİR ÖLÇÜMDÜ, KOLAYLIK DEĞİL: önce kaydı commit
+#: mesajına yazmayı denedim ve kapı YİNE öttü — çünkü `pre-commit` anında
+#: yazılmakta olan mesaj `git log`da YOKTUR ve `O-132` tavanın (134) ALTINDA
+#: kaldığı için `inflight` sayılmıyordu. ⇒ Bu kovaya girmeyen böyle bir kayıt
+#: için kapı YAPISAL BİR ÇIKMAZ üretir: onu anacak commit, tam da onu anmasını
+#: engelleyen kapı yüzünden inemez.
+#: 📌 Sınır adıyla kayıtlı (koordinatöre bildirildi): `inflight` NUMARADAN
+#: türetiliyor, oysa yetkili sinyal MESAJDIR — ve mesajı yalnız `commit-msg`
+#: kancası görür. *Bir vekil, ölçtüğü şeyin kendisi değildir.*
+LESSON_ONLY = {119, 132}
 
 #: 🔴 SENTİNEL/ÖRNEK NUMARA ARALIĞI — `O-900`+ hiçbir zaman gerçek kayıt
 #: DEĞİLDİR; belgede/commit mesajında ÖRNEK olarak anılır.

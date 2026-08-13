@@ -61,6 +61,32 @@ PERSIST_WRITE = re.compile(
 #: çünkü o zaman "oturum sonucu saklanıyor mu" sorusu YANLIŞ ŞEYE bakıyordur.
 USER_ARTIFACT = re.compile(r"SessionSummary")
 
+#: 🔴 **GEÇİCİLİK BEYANI — ürünün kullanıcıya SÖYLEDİĞİ şey** (H-10, 2026-08-14).
+#:
+#: Koordinatör hükmü: ***BİR YOKLUK CÜMLESİ, YOKLUK BİTTİĞİ GÜN BAYATLAR.***
+#: Choreia'da onboarding *"Nothing you do is saved"* diyordu ve saklama
+#: eklenince **yanlış** oldu; kimse fark etmedi çünkü kapı **sembol** arıyordu,
+#: cümle ise **düz metindi**.
+#:
+#: Ostinato bugün o cümlenin DOĞRU tarafında: hiçbir şey saklanmıyor ve
+#: onboarding bunu **açıkça söylüyor**. ⚠️ Ama tam bu yüzden ikisi BİRBİRİNE
+#: BAĞLI: kalıcılık eklendiği gün bu cümle **bayat bir yokluk cümlesi** olur.
+#:
+#: ⇒ Kapı artık iki cümleyi **birbirine karşı** okur — H-10'un *"hiçbir kapı
+#: bir ekrandaki iki cümleyi birbirine karşı okumaz"* dediği eksik tam bu:
+#:     saklanıyor mu  ⟷  saklanmadığını SÖYLÜYOR mu
+#: İkisi ayrışırsa öter, **hangi yönde ayrışırsa ayrışsın.**
+#:
+#: 📌 **TEK DOSYA YETMEZ** (H-10): aynı iddia hem uygulama metninde hem iOS
+#: izin dizesinde geçiyor — ikisi de taranır, çünkü izin dizesi kullanıcının
+#: gördüğü ilk cümledir ve kimse onu "ekran" saymaz.
+EPHEMERALITY_CLAIM = re.compile(
+    r"[Nn]othing is stored|gone when it ends|is gone when the lesson ends|"
+    r"no history here to browse")
+
+#: Beyanın geçtiği, taranması ZORUNLU kabuk dosyaları (kod DIŞI yüzeyler).
+SHELL_SURFACES = (Path("ios/Runner/Info.plist"),)
+
 
 def detect(prod_sources):
     """SAF DEDEKTÖR — dosya sistemine DOKUNMAZ, verilen kaynakları ölçer.
@@ -71,9 +97,10 @@ def detect(prod_sources):
 
     `prod_sources`: {dosya-adı: dart kaynağı}
     """
-    write_files, artifact_files = set(), set()
+    write_files, artifact_files, claim_files = set(), set(), set()
     sites = 0
     for name, text in prod_sources.items():
+        # Kabuk yüzeyleri (plist/xml) dart yorumu taşımaz; ayıklayıcı zararsız.
         s = strip_dart_comments(text)
         hits = PERSIST_WRITE.findall(s)
         if hits:
@@ -81,6 +108,8 @@ def detect(prod_sources):
             sites += len(hits)
         if USER_ARTIFACT.search(s):
             artifact_files.add(name)
+        if EPHEMERALITY_CLAIM.search(s):
+            claim_files.add(name)
     return {
         "writeCallSites": sites,
         "writeFiles": sorted(write_files),
@@ -90,6 +119,11 @@ def detect(prod_sources):
         # hiçbir yerde yan yana gelmiyorlarsa saklanmıyordur.
         "userArtifactMayBePersisted": bool(artifact_files & write_files),
         "userArtifactFiles": sorted(artifact_files),
+        # ⚠️ Geçicilik beyanı YORUMDAN OKUNMAZ: `strip_dart_comments`ten
+        # geçmiş metinde aranır. Bir yorumda anlatılan vaat, kullanıcıya
+        # verilmiş vaat değildir — ve bu depoda o tuzak ölçüldü (`O-054`
+        # düzeltmesini ANLATAN yorum, ham taramada vaat gibi görünüyordu).
+        "ephemeralityClaimFiles": sorted(claim_files),
     }
 
 
@@ -115,9 +149,22 @@ DECLARED = {
         "çalışır, postür ölçülür, sonuç yüzeyi ÖLÇÜLEN kareden türetilir — "
         "ve ekran kapanınca hepsi yok olur. Geçmiş YOK · ilerleme YOK · "
         "streak YOK. Ertesi gün uygulama kullanıcıyı hiç görmemiş gibidir. "
-        "⚠️ Bu bir kusur olarak DEĞİL, adıyla bir GERÇEK olarak kayıtlı: "
-        "iz bırakmamak meşru bir cihaz-üstü duruş OLABİLİR — ama o duruş "
-        "SEÇİLMİŞ değil, yalnız YAZILMAMIŞTIR ve fark bu kapının konusudur."),
+        "✅ DÜZELTME (aynı gün, ölçümle): ilk yazdığım *'bu duruş SEÇİLMİŞ "
+        "değil, yalnız YAZILMAMIŞTIR'* cümlesi YANLIŞTI. Duruş kullanıcıya "
+        "AÇIKÇA beyan edilmiş — onboarding *'Your video'* kartı: «Nothing is "
+        "stored either: what we measure exists while the lesson runs and is "
+        "gone when it ends», ve aynı iddia iOS kamera-izin dizesinde de "
+        "geçiyor. ⇒ Bu bir DÜRÜSTLÜK kusuru DEĞİL, bir KAPSAM bulgusudur: "
+        "ürün saklamıyor ve saklamadığını SÖYLÜYOR."),
+    "ephemeralityClaimFiles": ["Info.plist", "onboarding_screen.dart",
+                               "settings_screen.dart"],
+    "$coupling": (
+        "H-10 (2026-08-14): *bir yokluk cümlesi, yokluk bittiği gün bayatlar.* "
+        "Bugün Ostinato o cümlenin DOĞRU tarafında — ama tam bu yüzden "
+        "kalıcılık ile geçicilik-beyanı BİRBİRİNE BAĞLI: saklama eklendiği "
+        "gün «Nothing is stored» YANLIŞ olur. Kapı ikisini birbirine karşı "
+        "okur ve HANGİ YÖNDE ayrışırsa ötterir — Choreia'nın vakasında kusur "
+        "tam da kimsenin bu bağı kurmamış olmasıydı."),
     "$founderDecision": (
         "AÇIK: ⑴ oturum sonucunu yerel olarak saklamak (ilerleme mümkün olur, "
         "cihaz-üstü kalır) mı, ⑵ hiçbir şey saklamamayı BİLEREK seçip bunu "
@@ -128,7 +175,24 @@ DECLARED = {
 }
 
 #: Beyanın boş bırakılamayacak gerekçe alanları.
-PROSE_FIELDS = ("$why", "$whatIsDiscarded", "$founderDecision")
+PROSE_FIELDS = ("$why", "$whatIsDiscarded", "$founderDecision", "$coupling")
+
+
+def coupling_violation(actual):
+    """Saklıyor mu ⟷ saklamadığını SÖYLÜYOR mu — İKİ YÖNDE de öter (H-10)."""
+    persists = actual["userArtifactMayBePersisted"]
+    claims = bool(actual["ephemeralityClaimFiles"])
+    if persists and claims:
+        return (f"🔴 BAYAT YOKLUK CÜMLESİ (H-10): ürün artık kullanıcı "
+                f"üretimini SAKLIYOR olabilir, ama {actual['ephemeralityClaimFiles']} "
+                f"hâlâ «hiçbir şey saklanmıyor» diyor. *Bir yokluk cümlesi, "
+                f"yokluk bittiği gün bayatlar* — metni ÖNCE düzelt")
+    if not persists and not claims:
+        return ("🔴 SESSİZ GEÇİCİLİK: ürün hiçbir kullanıcı üretimini "
+                "saklamıyor ve bunu kullanıcıya HİÇBİR YERDE söylemiyor. "
+                "*Saklamamak meşrudur; sessizce saklamamak değildir* — "
+                "kullanıcı emeğinin kaybolacağını önceden bilmelidir")
+    return ""
 
 #: 🔴 **HER YAZMA YOLU SINIFLANDIRILIR — gerekçesiz yazma geçemez.**
 #:
@@ -165,8 +229,11 @@ def check(declared, actual):
                        f"`WRITE_CLASSES`a gerekçesiyle eklenmeli. Bir ürünün "
                        f"neyi sakladığı, saklamaya BAŞLADIĞI anda yazılır; "
                        f"sonradan hatırlanmaz")
+    cv = coupling_violation(actual)
+    if cv:
+        bad.append(cv)
     for key in ("writeCallSites", "writeFiles", "userArtifactMayBePersisted",
-                "userArtifactFiles"):
+                "userArtifactFiles", "ephemeralityClaimFiles"):
         if declared.get(key) != actual[key]:
             bad.append(f"«{key}»: BEYAN {declared.get(key)!r} · ÖLÇÜM "
                        f"{actual[key]!r} — kalıcılık duruşu DEĞİŞMİŞ ve kayıt "
@@ -179,8 +246,13 @@ def check(declared, actual):
 
 
 def _read_lib():
-    return {f.name: f.read_text(encoding="utf-8")
-            for f in sorted(LIB.rglob("*.dart"))}
+    """`lib/` + KABUK yüzeyleri. H-10: *tek dosya yetmez.*"""
+    out = {f.name: f.read_text(encoding="utf-8")
+           for f in sorted(LIB.rglob("*.dart"))}
+    for p in SHELL_SURFACES:
+        if p.exists():
+            out[p.name] = p.read_text(encoding="utf-8")
+    return out
 
 
 def selftest() -> int:
@@ -220,11 +292,32 @@ def selftest() -> int:
     if not check({**DECLARED, "$whatIsDiscarded": ""}, actual):
         dead.append("GEREKÇE KONTROLÜ ölü — boş `$whatIsDiscarded` geçiyor; "
                     "sessizlik yasağı uygulanmıyor")
+    # ⑧ BAĞ — İKİ YÖNDE de ötmeli (H-10). Sentetik, bugünkü ağaçtan bağımsız.
+    if not coupling_violation({"userArtifactMayBePersisted": True,
+                               "ephemeralityClaimFiles": ["o.dart"]}):
+        dead.append("BAĞ TEK YÖNLÜ — saklama eklendiği hâlde «hiçbir şey "
+                    "saklanmıyor» cümlesi duruyorsa kapı SUSUYOR; Choreia'nın "
+                    "bayat-yokluk vakası burada TEKRARLANIR (H-10)")
+    if not coupling_violation({"userArtifactMayBePersisted": False,
+                               "ephemeralityClaimFiles": []}):
+        dead.append("BAĞ ÖTEKİ YÖNDE ÖLÜ — hiçbir şey saklamayıp bunu "
+                    "SÖYLEMEYEN ürün geçiyor; sessiz geçicilik yakalanmıyor")
+    if coupling_violation({"userArtifactMayBePersisted": False,
+                           "ephemeralityClaimFiles": ["o.dart"]}):
+        dead.append("BAĞ YANLIŞ-POZİTİF — bugünkü DOĞRU hâl (saklamıyor VE "
+                    "söylüyor) ötüyor")
+    # ⑨ Geçicilik beyanı YORUMDAN okunmamalı (O-054'ün ham-tarama tuzağı)
+    if detect({"o.dart": "// body: 'Nothing is stored either'"}
+              )["ephemeralityClaimFiles"]:
+        dead.append("GEÇİCİLİK BEYANI YORUMDAN OKUNUYOR — bir yorumda "
+                    "anlatılan vaat, kullanıcıya verilmiş vaat değildir")
     # ⑦ SINIFLANDIRMA ZORUNLULUĞU — sentetik, bugünkü ağaçtan BAĞIMSIZ.
     #    Yarın kalıcılık eklenirse bu kontrol *"ne sakladığını söyle"* der.
     fake = {"writeCallSites": 1, "writeFiles": ["yeni_depo.dart"],
             "userArtifactMayBePersisted": True,
-            "userArtifactFiles": ["yeni_depo.dart"]}
+            "userArtifactFiles": ["yeni_depo.dart"],
+            # Bağ ihlali ötmesin diye: saklıyor VE geçicilik iddiası YOK.
+            "ephemeralityClaimFiles": []}
     if not check({**DECLARED, **{k: fake[k] for k in fake}}, fake):
         dead.append("SINIFLANDIRMA ZORUNLULUĞU ölü — sınıfsız bir yazma yolu "
                     "geçiyor; kalıcılık eklendiğinde SESSİZ girer")
@@ -235,8 +328,8 @@ def selftest() -> int:
         return 1
     print(f"✅ kalıcılık kapısı öz-testi GEÇTİ — yazma deseni · yorum "
           f"bağışıklığı · artefakt kesişimi (İKİ yönde) · vakum · beyan "
-          f"mekanizması (sayı + gerekçe) · sınıflandırma zorunluluğu: "
-          f"YEDİ kontrolün yedisi de canlı")
+          f"mekanizması (sayı + gerekçe) · sınıflandırma zorunluluğu · BAĞ (üç yön) · "
+          f"beyan-yorum bağışıklığı: ON BİR kontrolün on biri de canlı")
     return 0
 
 
@@ -263,6 +356,12 @@ def main() -> int:
           f"oturum sonucunu ANAN dosya {actual['userArtifactFiles']}")
     print(f"   ⚠️ ATILAN (adıyla): her pratik oturumunun SONUCU — geçmiş yok, "
           f"ilerleme yok, streak yok")
+    print(f"   ✅ VE ÜRÜN BUNU SÖYLÜYOR — geçicilik beyanı "
+          f"{actual['ephemeralityClaimFiles']} ({len(actual['ephemeralityClaimFiles'])} yüzey). "
+          f"Bu bir dürüstlük kusuru DEĞİL, kapsam bulgusu")
+    print(f"   🔗 BAĞ CANLI (H-10): saklama eklendiği gün bu "
+          f"{len(actual['ephemeralityClaimFiles'])} metin BAYAT yokluk cümlesine "
+          f"döner ve kapı öter — metin ÖNCE düzeltilir")
     print(f"   ⏳ KURUCU KARARI AÇIK: yerel saklama mı, bilerek iz "
           f"bırakmamak mı (kapı bu kararı VERMEZ, görünür tutar)")
     return 0
