@@ -57,7 +57,15 @@ DECLARED = {
     # tazelendi, ki beyan-ölçüm ayrışması tam bunun için tasarlanmış karar
     # noktasıydı (O-116, ② sınıfı). ⚠️ ASİMETRİ BÜYÜDÜ, adıyla: üretim hâlâ
     # çekiyor, testlerin HEPSİ kapatıyor ⇒ hiçbir test bu davranışı GÖREMEZ.
-    "testFilesDisablingFetch": 9,
+    #
+    # 9 → 10 (2026-08-13, O-122): `test/full_flow_test.dart` (A1 tam akış)
+    # eklendi, o da kapatıyor. ⭐ Kapı yine ÖNCE öttü, beyan SONRA tazelendi —
+    # ve bu sıra kapının değeridir: yeni bir test dosyası eklemek asimetriyi
+    # BÜYÜTEN bir edimdir, ve büyüdüğünü kimse söylemezse fark edilmez.
+    # ⚠️ Asimetri artık 10/10: kurucu kararı (font gömme ↔ çevrimdışı ilk
+    # açılış) beklerken, A1 akışını GERÇEK ürün davranışıyla koşan tek yer
+    # simülatör/cihazdır — hiçbir test değil.
+    "testFilesDisablingFetch": 10,
     "$why": (
         "ÖLÇÜLDÜ 2026-08-12. Üretim `ostinato_theme.dart` içinde "
         "`GoogleFonts.hankenGrotesk` · `GoogleFonts.ibmPlexMono` · "

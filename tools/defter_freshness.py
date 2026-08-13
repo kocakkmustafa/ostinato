@@ -67,6 +67,26 @@ KNOWN_EMPTY = {15, 16, 90}
 #: bugün dört kez düştüğü sınıf.
 PRE_COMMIT_ERA = {1, 2, 4, 5, 6, 14}
 
+#: 🔻 ÜÇÜNCÜ KOVA — **DERS KAYDI** (O-123, 2026-08-13).
+#:
+#: Kaynağı bir ÖLÇÜM olan, kod değişikliği ÜRETMEYEN kayıtlar. Bunların
+#: commit karşılığı yoktur ve **hiçbir zaman olmayacaktır** — çünkü
+#: değiştirdikleri şey kod değil, sonraki oturumun ALIŞKANLIĞIDIR.
+#:
+#: ⚠️ Neden var: `O-119` (*"ölçüm aracım üç şeyi birden bozdu:
+#: `run_gates.sh | tail -60`"*) commit tavanının altına düşünce öksüz sayıldı,
+#: ve var olan iki kovanın İKİSİ DE ona YALAN söyletiyordu — `KNOWN_EMPTY`
+#: *"kaynağı aradım, bulamadım"* der (oysa kaynağı belli: bir ölçüm),
+#: `PRE_COMMIT_ERA` *"numara anma alışkanlığından önce yazıldı"* der (oysa
+#: dün yazıldı). Bu ağacın **beşinci** "kural evsiz" vakası.
+#:
+#: > ***BİR SINIFLANDIRMA, ELİNDEKİ KOVALARIN HİÇBİRİ UYMAYAN BİR KALEMİ
+#: > YİNE DE BİRİNE ATIYORSA, ÖLÇTÜĞÜ ŞEY KALEM DEĞİL KENDİ DARLIĞIDIR.***
+#:
+#: ⛔ Bu bir muafiyet listesi DEĞİL: her numara defterde `ders` TÜRÜYLE bir
+#: SATIR olarak durur. Kova yalnız *"commit aramayı bırak"* der.
+LESSON_ONLY = {119}
+
 #: 🔴 SENTİNEL/ÖRNEK NUMARA ARALIĞI — `O-900`+ hiçbir zaman gerçek kayıt
 #: DEĞİLDİR; belgede/commit mesajında ÖRNEK olarak anılır.
 #:
@@ -233,9 +253,9 @@ def run() -> int:
     # kaynaksız bir kayıt varsa o GERÇEK öksüzdür.
     ceiling = max(commits) if commits else 0
     inflight = sorted(n for n in defter - commits - KNOWN_EMPTY
-                      - PRE_COMMIT_ERA if n > ceiling)
+                      - PRE_COMMIT_ERA - LESSON_ONLY if n > ceiling)
     orphan = sorted(n for n in defter - commits - KNOWN_EMPTY
-                    - PRE_COMMIT_ERA if n <= ceiling)
+                    - PRE_COMMIT_ERA - LESSON_ONLY if n <= ceiling)
     if not commits:
         print("⛔ VAKUM: commit'lerde hiç O- numarası bulunamadı — tarama "
               "kırık, 'taze' hükmü GEÇERSİZ")
@@ -282,6 +302,8 @@ def run() -> int:
           f"= {total} (rev-list ile birebir) · bilerek-boş "
           f"{len(KNOWN_EMPTY)} ({', '.join('O-%03d' % n for n in sorted(KNOWN_EMPTY))}) "
           f"· planlama-dönemi {len(PRE_COMMIT_ERA)} "
+          f"· ders-kaydı {len(LESSON_ONLY)} "
+          f"({', '.join('O-%03d' % n for n in sorted(LESSON_ONLY))}) "
           f"· iki yönde ölçüldü (eksik 0 · öksüz 0)")
     return 0
 
@@ -348,6 +370,23 @@ def selftest() -> int:
     if (commits - defter - KNOWN_EMPTY - PRE_COMMIT_ERA
             - {n for n in defter if n > max(commits or {0})}):
         dead.append("BUGÜNKÜ ağaçta gedik var — olumsuz ikiz başarısız")
+    # ⑥ ÜÇÜNCÜ KOVANIN KENDİ KAPISI (O-123) — bir muafiyet, ancak
+    #    DENETLENEBİLİR olduğu sürece muafiyettir. `LESSON_ONLY` yalnız
+    #    defterde GERÇEKTEN `ders` türüyle duran numaraları taşıyabilir;
+    #    aksi hâlde herhangi bir öksüz numara buraya atılarak kırmızıdan
+    #    SESSİZCE kaçırılabilirdi — ve bu kapıyı kendi amacının düşmanı yapardı.
+    _defter_text = DEFTER.read_text(encoding="utf-8") if DEFTER.exists() else ""
+    for n in sorted(LESSON_ONLY):
+        row = re.search(rf"^\|\s*O-0*{n}\s*\|([^|]*)\|", _defter_text, re.M)
+        if row is None:
+            dead.append(f"LESSON_ONLY O-{n:03d} DEFTERDE YOK — bir muafiyet, "
+                        f"kaydı OLMAYAN bir numarayı kapsayamaz (kova "
+                        f"'commit arama' der, 'kayıt arama' DEMEZ)")
+        elif row.group(1).strip() != "ders":
+            dead.append(f"LESSON_ONLY O-{n:03d} defterde `{row.group(1).strip()}` "
+                        f"türüyle duruyor, `ders` değil — bu kova yalnız ÖLÇÜM "
+                        f"kaynaklı ders kayıtları içindir; bir `görev` ya da "
+                        f"`bulgu` buraya girerse commit'i OLMASI gerekirdi")
     # ⑤ İKİNCİ DESENİN GEREKLİLİĞİ — spekülatif genişletme yerine EŞİK.
     risky = body_only_unrecorded()
     if risky:

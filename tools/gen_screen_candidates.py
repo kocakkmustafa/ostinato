@@ -79,40 +79,53 @@ def _class_bodies(text):
 
 #: (c) VARILAMAMA SEBEBİ — TÜRETİLİR, elle yazılmaz.
 #: Choreia kuralı: *sebepsiz dışlama, denetimi yeniden TANIMA çevirir.*
-#: ⚠️ Ve sebep ekran BAŞINA ölçülür: ilk yazımda üçü için de "kamera
-#: arkasında" demiştim — ÖLÇÜM `ReviewScreenRoute`ta kamera izi OLMADIĞINI
-#: gösterdi. O ekran kamerayı KULLANMIYOR; yalnız kamera gerektiren
-#: `LiveScreenRoute`un ARKASINDA duruyor (`live_screen.dart:182` push eder).
-#: Yanlış bir sebep, sebepsizlikten daha kötüdür: denetimi doğrulanmış
-#: gösterir.
-CAMERA_TRACE = re.compile(
+#:
+#: 🔴 **2026-08-13 — YÜKLEM DEĞİŞTİ, ÖLÇÜMLE (O-121).**
+#: Eski yüklem *"ekran kamerayı KENDİSİ kullanıyor"* idi ve ondan
+#: *"öyleyse varılamaz"* sonucu çıkarılıyordu. Bir prob bunu ÇÜRÜTTÜ:
+#: `SetupCheckScreenRoute` kamerayı kendisi kurar (`setup_check_screen.dart:38`
+#: koşulsuz `MotionCameraController()`) **ama widget testinde DOKUNARAK
+#: VARILIYOR** — `camera_session.dart:109`daki `on Object catch` eksik
+#: platform kanalını `CameraStartFailed`e çevirir; ekran asılmaz, ilk
+#: perdesini çizer ("SETUP CHECK · FRAME · Find your frame.") ve tanık
+#: push'u görür.
+#:
+#: ⇒ Yürüyüşü durduran şey kamerayı KULLANMAK değil, kamera KAPISININ
+#: ARKASINDA olmaktır: `LiveScreenRoute`a ancak kurulum kontrolü GEÇİNCE
+#: gidilir (`setup_check_screen.dart:490`, `_Stage.passed`) ve o geçiş
+#: GERÇEK KARE ister.
+#:
+#: > ***BİR EKRANIN KAMERAYA DOKUNMASI İLE KAMERANIN ARKASINDA KALMASI
+#: > AYNI ŞEY DEĞİLDİR — VE ARADAKİ FARK, YÜRÜYÜŞÜN GİDEBİLDİĞİ YERDİR.***
+#:
+#: Yeni yüklem TEK CÜMLE: *bir ekranı push eden HER yer kare tüketiyorsa,
+#: o ekran kamera kapısının arkasındadır.* `SetupCheckScreenRoute`u
+#: `lesson_scored_screen.dart` push eder ve o dosya kare tüketmez → VARILIR.
+FRAME_CONSUMER = re.compile(
     r"requestAndStartCamera|MotionCameraController|CameraPoseSource")
 
 
-def camera_dependency(name, src_by_file):
-    """Ekranın KAMERA BAĞIMLILIĞI — türetilmiş OLGU, erişilebilirlik İDDİASI
-    değil.
+def behind_camera_gate(name, src_by_file):
+    """Ekran KAMERA KAPISININ ARKASINDA mı — türetilmiş OLGU, iddia değil.
 
-    ⚠️ İlk yazımın adı `unreachable_reason`di ve bu YANLIŞTI: betik hangi
-    ekrana varılabildiğini BİLMEZ (o yürüyüşün işi). Burada üretilen şey bir
-    OLGU — *bu ekran kamerayı kullanır / kamera arkasındadır* — ve testte
-    yalnız VARILAMAYANLAR için sebep olarak okunur. Bir olguyu iddia diye
-    adlandırmak, kapsamı sessizce genişletir.
+    ⚠️ Betik hangi ekrana varılabildiğini BİLMEZ (o yürüyüşün işi). Burada
+    üretilen şey bir OLGU — *bu ekrana giden her kapı kare tüketen bir
+    ekrandan geçiyor* — ve testte yalnız VARILAMAYANLAR için sebep olarak
+    okunur. Bir olguyu iddia diye adlandırmak, kapsamı sessizce genişletir.
+
+    Push eden yer YOKSA sebep de YOK: kök yüzeyler ve yalnız testten kurulan
+    ekranlar buraya düşmez.
     """
-    own = "".join(strip_dart_comments(t) for f, t in src_by_file.items()
-                  if re.search(rf"class _?{name}(State)?\b", t))
-    if CAMERA_TRACE.search(own):
-        traces = sorted(set(CAMERA_TRACE.findall(own)))
-        return f"kamerayı KENDİSİ kullanıyor ({', '.join(traces)}) — widget " \
-               f"testinde platform kanalı yanıt vermez"
-    # kamerası yok: onu PUSH eden ekran kamera arkasındaysa, sebep DOLAYLI
-    pushers = sorted({Path(f).name for f, t in src_by_file.items()
-                      if re.search(rf"=>\s*{name}\(", strip_dart_comments(t))
-                      and CAMERA_TRACE.search(strip_dart_comments(t))})
-    if pushers:
-        return f"kamerası YOK — yalnız kamera gerektiren bir ekranın " \
-               f"ARKASINDA ({', '.join(pushers)} push eder)"
-    return ""
+    pushers = {}
+    for f, t in src_by_file.items():
+        s = strip_dart_comments(t)
+        if re.search(rf"=>\s*{name}\(", s):
+            pushers[Path(f).name] = bool(FRAME_CONSUMER.search(s))
+    if not pushers or not all(pushers.values()):
+        return ""
+    return (f"kamera KAPISININ ARKASINDA — onu push eden her yer "
+            f"({', '.join(sorted(pushers))}) kamera karesi tüketir; widget "
+            f"testinde o kapı geçilemez (kare gelmeden sonraki düğme doğmaz)")
 
 
 #: (b) KÖK VARIŞ — `home:` kökünde rota push'u OLMADAN doğan yüzeyler.
@@ -142,6 +155,23 @@ _RETURN_SAMPLES = [
     ("return LibraryScreen(repo: r);", "LibraryScreen"),
     ("return const SettingsScreen();", "SettingsScreen"),
     ("return new LegacyScreen();", "LegacyScreen"),
+]
+
+#: `behind_camera_gate` YÜKLEMİNİN SENTETİK İKİZİ — dördü de gerçek kaynağın
+#: bugünkü hâlinden BAĞIMSIZ. ⚠️ Bunlar bir "geçer mi" kontrolü değil, yüklemin
+#: **iki yönde de** yanlış çıkabildiğinin kanıtı: ②'nin `False` olması eski
+#: yüklemin çürütüldüğü vakadır (SetupCheck), ③ ise *bir* kamerasız yolun
+#: yetmesi gerektiğini sabitler.
+_GATE_SAMPLES = [
+    # ① tek push eden, kare tüketiyor → kapı ARKASINDA
+    ({"live.dart": "MotionCameraController _c; builder: (_) => T("}, True),
+    # ② tek push eden, kare TÜKETMİYOR → varılır (SetupCheck'in ölçülmüş vakası)
+    ({"lesson.dart": "builder: (_) => T("}, False),
+    # ③ iki push eden, biri kamerasız → varılır (bir yol yeter)
+    ({"live.dart": "CameraPoseSource(); builder: (_) => T(",
+      "lesson.dart": "builder: (_) => T("}, False),
+    # ④ hiç push eden yok → sebep YOK (kök yüzey / yalnız testten kurulan)
+    ({"other.dart": "class T {}"}, False),
 ]
 
 
@@ -180,6 +210,13 @@ def selftest() -> int:
                         f"(ölçülmüş vaka: `const`)")
     if _RETURNS.findall("return widget.child;"):
         dead.append("KÖK DESENİ yapıcı-olmayan dönüşü sayıyor (yanlış-pozitif)")
+    for i, (src, want) in enumerate(_GATE_SAMPLES, 1):
+        got = bool(behind_camera_gate("T", src))
+        if got != want:
+            dead.append(
+                f"KAPI YÜKLEMİ ikiz-{i} için {got} verdi, {want} bekleniyordu "
+                f"— yüklem *'onu push eden HER yer kare tüketiyor mu'* "
+                f"sorusunu artık doğru sormuyor (kaynak: {sorted(src)})")
     roots = root_surfaces({str(f): f.read_text(encoding="utf-8")
                            for f in sorted(LIB.rglob("*.dart"))})
     if not roots:
@@ -241,7 +278,7 @@ def main() -> int:
         return 1
     reasons = {}
     for c in candidates:
-        r = camera_dependency(c, src_by_file)
+        r = behind_camera_gate(c, src_by_file)
         if r:
             reasons[c] = r
     payload = {
@@ -256,7 +293,15 @@ def main() -> int:
             "GÖRÜNMEMEK tanık gereksiniminden kaçmaktır ve kapı öter."
             % HOME_STATE),
         "notADestination": NOT_A_DESTINATION,
-        "cameraDependency": reasons,
+        "behindCameraGate": reasons,
+        "$behindCameraGate": (
+            "TÜRETİLDİ — *onu push eden HER yer kare tüketiyor mu?* Eski adı "
+            "`cameraDependency`di ve yüklemi *'ekran kamerayı kendisi "
+            "kullanıyor'*du; 2026-08-13'te ÖLÇÜMLE çürüdü: `SetupCheckScreen"
+            "Route` kamerayı kendisi kurar AMA dokunarak varılır (platform "
+            "kanalı yokken `camera_session.dart:109` zarifçe düşer). Ad "
+            "DEĞİŞTİ çünkü eski ad çürütülen önermeyi taşıyordu — anlamı "
+            "değişen bir adı korumak, sonraki okuyucuya sessiz tuzak kurar."),
         "$handWrittenIsLowerBound":
             "(e) Yürüyüşteki ELLE yazılmış rota kimlikleri SİLİNMEZ: "
             "türetimin POZİTİF KONTROLÜdür (türetim, zaten bildiğimizi "

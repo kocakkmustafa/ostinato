@@ -186,6 +186,10 @@ void main() {
       await t.pump(const Duration(milliseconds: 400));
     }
 
+    // ⭐ Kurulum kontrolüne YALNIZ BİR KEZ girilir: aynı ekrana ikinci varış
+    // sayıyı değiştirmez (küme), yalnız yürüyüşü uzatır.
+    bool setupVisited = false;
+
     // Çalgı → Kurs → Ders sınıfları
     if (await tapIfPossible(t, find.text('Guitar'))) {
       note(t, '4 Instrument', 'InstrumentScreenRoute');
@@ -216,6 +220,36 @@ void main() {
                 match.first.kind == LessonKind.locked
                     ? match.first.lockedReason!.split('.').first
                     : match.first.displayName);
+            // ⭐ KURULUM KONTROLÜ — 2026-08-13'te ÖLÇÜLDÜ, VARILIYOR (O-121).
+            //
+            // 🔴 Burada YILLARCA duracak bir yanlış vardı: aşağıdaki (c)
+            // bloğu `SetupCheckScreenRoute`u *"kamera kurar, widget testinde
+            // ekran ASILI KALIR"* diye dışlıyordu. Bir prob bunu çürüttü —
+            // `camera_session.dart:109` `on Object catch` eksik platform
+            // kanalını `CameraStartFailed`e çevirir; ekran asılmaz, ilk
+            // perdesini çizer ve tanık push'u GÖRÜR.
+            //
+            // ⚠️ Ve asıl ders yürüyüşteydi, yüklemde değil: bu düğmeye HİÇ
+            // BASILMIYORDU. İki taraf (yürüyüş ↔ kaynak beklentisi) ölçümle
+            // değil İHMALLE uzlaşıyordu.
+            // > ***BİR DENETİMİN İKİ TARAFI DA AYNI ŞEYİ DENEMİYORSA,
+            // > UZLAŞMALARI BİR ÖLÇÜM DEĞİL BİR SESSİZLİKTİR.***
+            if (!setupVisited &&
+                (match.first.kind == LessonKind.guide ||
+                    match.first.kind == LessonKind.scored)) {
+              final Finder go =
+                  find.text('Begin the setup check').evaluate().isNotEmpty
+                      ? find.text('Begin the setup check')
+                      : find.text('Continue');
+              if (await tapIfPossible(t, go)) {
+                setupVisited = true;
+                note(t, '9 SetupCheck (dersten)', 'SetupCheckScreenRoute');
+                requireSubstance(t, 'SetupCheck', 'Find your frame');
+                // Ürünün KENDİ kapatma kontrolü — '✕', `BackButton` değil.
+                await tapIfPossible(t, find.text('✕'));
+                await t.pump(const Duration(milliseconds: 400));
+              }
+            }
             // ⚠️ `t.pageBack()` KULLANILAMAZ: geri düğmesi standart
             // `BackButton` değil, `GlassIconButton` (metin glifi) — yani
             // ÜRÜNÜN kendi kontrolü. Kullanıcı ona basar; test de basmalı.
@@ -241,22 +275,28 @@ void main() {
     // yazılı KATI kural ise AYRI ROTA sayar — `guide` ve `scored` aynı
     // rotaya gider (`LessonScoredScreenRoute`). Birim değişti, yön değil.
     // ignore: avoid_print
-    print('   ⚠️ eşik >= 8 · bugünkü sayı 8 → KAPI TAM TABANDA, SIFIR PAY: '
-        'tek bir rota kaybı kırmızıya düşürür. Bu bir kusur değil, DÜRÜST '
-        'HÂL — payı olmayan bir eşiği "geçti" diye okumak yanıltıcı olurdu.\n');
+    print('   ⚠️ eşik >= 9 · bugünkü sayı ${reached.length} → KAPI TAM '
+        'TABANDA, SIFIR PAY: tek bir rota kaybı kırmızıya düşürür. Bu bir '
+        'kusur değil, DÜRÜST HÂL — payı olmayan bir eşiği "geçti" diye '
+        'okumak yanıltıcı olurdu.\n');
 
-    // ⚠️ YÜRÜNEMEYEN ÜÇ EKRAN ve SEBEBİ — sayının yanına yazılmazsa
+    // ⚠️ YÜRÜNEMEYEN İKİ EKRAN ve SEBEBİ — sayının yanına yazılmazsa
     // "11 ekran" iddiası GEVŞEK okuma olur:
-    //   SetupCheck · Live · Review
-    // Üçü de KAMERA arkasında. `SetupCheckScreenRoute` `initState`te gerçek
-    // `MotionCameraController` kurar; widget testinde platform kanalı yanıt
-    // vermez ve ekran asılı kalır (O-036/O-037'nin AYNI donanım sınırı).
+    //   Live · Review
     //
-    // Ve bu, sayının kendisinden daha önemli bir olgu: ÜRÜNÜN ASIL DENEYİMİNİ
-    // oluşturan üç ekran (kurulum · canlı ölçüm · özet) tam da GEZİLEBİLİR
-    // OLDUĞU KANITLANAMAYAN üçü. Kod olarak varlar, rota olarak bağlılar —
-    // ama hiçbir otomatik yürüyüş oraya GİDEMEZ, ve hiçbir insan da henüz
-    // gerçek cihazda gitmedi.
+    // 🔻 ÜÇTEN İKİYE DÜŞTÜ (O-121, 2026-08-13) ve sebebi bir ÖLÇÜM:
+    // `SetupCheckScreenRoute` bu listedeydi, çünkü yüklem *"kamerayı kendisi
+    // kullanıyor"*du. Yürüyüş artık ona GERÇEKTEN dokunuyor (yukarıda) ve
+    // varıyor. Kalan ikisi kamerayı kullandıkları için değil, kamera
+    // KAPISININ ARKASINDA oldukları için varılamaz: `LiveScreenRoute`a ancak
+    // kurulum kontrolü GEÇİNCE gidilir ve o geçiş GERÇEK KARE ister.
+    //
+    // Ve bu, sayının kendisinden daha önemli bir olgu: ÜRÜNÜN ASIL ÖLÇÜM
+    // DENEYİMİNİ oluşturan iki ekran (canlı ölçüm · özet) tam da dokunarak
+    // GEZİLEBİLİR OLDUĞU KANITLANAMAYAN ikisi. Kod olarak varlar, rota olarak
+    // bağlılar; `test/full_flow_test.dart` onları ZERK EDİLMİŞ bir kaynakla
+    // yürür — ama bu bir DOKUNMA kanıtı değildir ve orada adıyla yazılıdır.
+    // Gerçek cihazda hiçbir insan henüz gitmedi (A12).
     // ── (a)(c)(d) SÖZLEŞME: aday = varılan ⊎ VARILAMAYAN ──────────────
     // Aday küme TÜRETİLMİŞ (tools/gen_screen_candidates.py), elle YAZILMAZ.
     final Map<String, dynamic> gen = jsonDecode(
@@ -265,7 +305,7 @@ void main() {
     final Set<String> candidates =
         (gen['candidates'] as List<dynamic>).cast<String>().toSet();
     final Map<String, dynamic> reasons =
-        (gen['cameraDependency'] as Map<String, dynamic>);
+        (gen['behindCameraGate'] as Map<String, dynamic>);
     // ⚖️ (d) BEKLENTİ KAYNAKTAN TÜRETİLİR — FARKTAN DEĞİL (O-115).
     //
     // 🔴 Eski hâl: `unreached = candidates.difference(reached)` → sonra
@@ -273,12 +313,18 @@ void main() {
     // doğruydu; sözleşmenin kendi cümlesiyle: *bir bölme denetimi, iki
     // tarafı AYNI KAYNAKTAN okuyorsa denetim değil TANIMDIR.*
     //
-    // Yeni hâl: beklenti KAYNAKTAN gelir — `cameraDependency` taşıyan aday
-    // widget testinde varılamaz (platform kanalı yanıt vermez), taşımayan
-    // varılabilir OLMALI. Böylece iki taraf BAĞIMSIZ: biri YÜRÜYÜŞ, öteki
-    // KAYNAK TÜRETİMİ. Artık iki yönde de gerçek bulgu mümkün:
-    //   · kamera bağımlısı bir ekrana VARILDIYSA → beklenti yanlış
-    //   · kamerasız bir ekrana VARILAMADIYSA → NAVİGASYON REGRESYONU
+    // Yeni hâl: beklenti KAYNAKTAN gelir — `behindCameraGate` taşıyan aday
+    // widget testinde varılamaz (ona giden her kapı gerçek kare ister),
+    // taşımayan varılabilir OLMALI. Böylece iki taraf BAĞIMSIZ: biri
+    // YÜRÜYÜŞ, öteki KAYNAK TÜRETİMİ. Artık iki yönde de gerçek bulgu mümkün:
+    //   · kapı arkasında sanılan bir ekrana VARILDIYSA → beklenti yanlış
+    //   · kapısız bir ekrana VARILAMADIYSA → NAVİGASYON REGRESYONU
+    //
+    // ⚠️ Ve bu denetim 2026-08-13'te İLK KEZ gerçekten yanlış çıkabildi:
+    // yüklem `cameraDependency`den `behindCameraGate`e taşındığında
+    // `SetupCheckScreenRoute` beklenen-varılamaz kümesinden ÇIKTI ve
+    // yürüyüş onu bulmak ZORUNDA kaldı. Öncesinde ikisi de o düğmeye
+    // dokunmadığı için assert TANIM gibi davranıyordu.
     final Set<String> expectedUnreachable = candidates
         .where((String c) => reasons.containsKey(c)).toSet();
     final Set<String> expectedReachable =
@@ -297,6 +343,8 @@ void main() {
       'InstrumentScreenRoute', 'CourseScreenRoute',
       'LessonScoredScreenRoute', 'LessonDemoScreenRoute',
       'LessonLockedScreenRoute',
+      // ⬆ TABAN YÜKSELTİLDİ (O-121): dokunarak varıldığı ÖLÇÜLDÜ.
+      'SetupCheckScreenRoute',
     };
     expect(handWritten.difference(candidates), isEmpty,
         reason: '(e) TÜRETİM, elle bilinen kümeyi KAPSAMIYOR — desen kör: '
@@ -394,8 +442,17 @@ void main() {
     expect(arrivalKind.keys.toSet(), reached,
         reason: '(b) her varışın türü (push|root) beyan edilmeli — beyansız '
             'bir varış ÜÇÜNCÜ SESSİZ HÂLdir');
-    expect(reached.length, greaterThanOrEqualTo(8),
-        reason: 'kamerasız yol boyunca sekiz ayrı ekrana dokunarak '
-            'gidilebilmeli — düşerse navigasyon kabuğu kırılmış demektir');
+    // ⚖️ SAYI EŞİĞİ NEDEN HÂLÂ VAR — küme eşitliği varken gereksiz DEĞİL.
+    // `expect(reached, expectedReachable)` iki tarafı karşılaştırır; ama bir
+    // ekran KAYNAKTAN silinirse aday küme de, beklenti de, yürüyüş de birlikte
+    // küçülür ve küme eşitliği YİNE GEÇER. Bu taban, üzerinde ANLAŞILMIŞ bir
+    // küçülmeyi yakalayan tek şeydir.
+    // > ***İKİ TARAFI DA AYNI KAYNAKTAN BESLENEN BİR DENETİM, O KAYNAK
+    // > KÜÇÜLDÜĞÜNDE SESSİZDİR — MUTLAK BİR TABAN O SESSİZLİĞİ BOZAR.***
+    // 8 → 9 (O-121): `SetupCheckScreenRoute` ölçülerek eklendi, mandal yükseldi.
+    expect(reached.length, greaterThanOrEqualTo(9),
+        reason: 'kamera KAPISI ÖNCESİNDEKİ yol boyunca dokuz ayrı ekrana '
+            'dokunarak gidilebilmeli — düşerse ya navigasyon kabuğu kırıldı '
+            'ya bir ekran ürüne sessizce veda etti');
   });
 }

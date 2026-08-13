@@ -22,10 +22,10 @@
     "OstinatoApp": "MaterialApp sarmalayıcısı — kullanıcı buraya GİTMEZ, uygulama burada BAŞLAR",
     "OstinatoHome": "karşılama↔kütüphane ANAHTARI (`home:` içinde durum değiştirir, rota DEĞİL) — kullanıcı ona 'gidemez'"
   },
-  "cameraDependency": {
-    "LiveScreenRoute": "kamerayı KENDİSİ kullanıyor (CameraPoseSource) — widget testinde platform kanalı yanıt vermez",
-    "ReviewScreenRoute": "kamerası YOK — yalnız kamera gerektiren bir ekranın ARKASINDA (live_screen.dart push eder)",
-    "SetupCheckScreenRoute": "kamerayı KENDİSİ kullanıyor (MotionCameraController, requestAndStartCamera) — widget testinde platform kanalı yanıt vermez"
+  "behindCameraGate": {
+    "LiveScreenRoute": "kamera KAPISININ ARKASINDA — onu push eden her yer (setup_check_screen.dart) kamera karesi tüketir; widget testinde o kapı geçilemez (kare gelmeden sonraki düğme doğmaz)",
+    "ReviewScreenRoute": "kamera KAPISININ ARKASINDA — onu push eden her yer (live_screen.dart) kamera karesi tüketir; widget testinde o kapı geçilemez (kare gelmeden sonraki düğme doğmaz)"
   },
+  "$behindCameraGate": "TÜRETİLDİ — *onu push eden HER yer kare tüketiyor mu?* Eski adı `cameraDependency`di ve yüklemi *'ekran kamerayı kendisi kullanıyor'*du; 2026-08-13'te ÖLÇÜMLE çürüdü: `SetupCheckScreenRoute` kamerayı kendisi kurar AMA dokunarak varılır (platform kanalı yokken `camera_session.dart:109` zarifçe düşer). Ad DEĞİŞTİ çünkü eski ad çürütülen önermeyi taşıyordu — anlamı değişen bir adı korumak, sonraki okuyucuya sessiz tuzak kurar.",
   "$handWrittenIsLowerBound": "(e) Yürüyüşteki ELLE yazılmış rota kimlikleri SİLİNMEZ: türetimin POZİTİF KONTROLÜdür (türetim, zaten bildiğimizi kapsamalı). ⚠️ O küme bir ALT SINIRDIR — ona ekleme yapmak bir envanter güncellemesi DEĞİL, KONTROLÜN TABANINI yükseltmektir."
 }
