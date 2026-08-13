@@ -1,0 +1,56 @@
+15-tur3-device-walk-setupcheck.png — TUR-3 CİHAZ YÜRÜYÜŞÜ (2026-08-13, O-124)
+
+Cihaz: iPhone 17 Pro Max simülatörü (iOS 26.4) · debug build · TAZE KURULUM
+(`simctl uninstall` → `install` → `launch`, onboarding bayrağı boş).
+
+## NE KANITLIYOR
+
+Bu ekran görüntüsü tek bir kareyi gösterir, ama arkasında **kesintisiz bir
+GERÇEK DOKUNUŞ zinciri** var. Her adım elle basıldı ve ekran görüntüsüyle
+doğrulandı:
+
+  ① taze kurulum → Onboarding perde 1  "Measured, not chosen."
+  ② 👆 Continue  → perde 2  "Small, and honest about it."
+                            (3 çalgı · 28 ders · 10 kilitli · 3 ölçülen-not-verilmeyen)
+  ③ 👆 Continue  → perde 3  "What we will ask for."
+                            ("THE MICROPHONE IS NOT WIRED")
+  ④ 👆 Open the library → Kütüphane (Guitar · Voice · Piano, bantlar ölçülmüş
+                            sayılarla: 0.4–6.4° / 0.4–4.4° / 1.9–2.8° of 24°)
+  ⑤ 👆 Guitar    → Çalgı ekranı ("What we actually measure" + "WHAT WE DO NOT
+                            JUDGE — AND WHY")
+  ⑥ 👆 Foundations → Kurs (10 ders; "MEASURED · NOT MARKED" rozeti görünür)
+  ⑦ 👆 Sitting posture → Ders ("7 guitar teachers sit between 0.4° and 6.4°")
+  ⑧ 👆 Begin the setup check → **BU EKRAN**
+
+⭐ Ve bir yan ölçüm: ⑧'den sonra uygulama `terminate`+`launch` ile yeniden
+açıldı ve **onboarding'e DÜŞMEDİ, doğrudan Kütüphane'ye geldi** ⇒ gerçek
+dokunuşlarla set edilen onboarding bayrağı uygulama yeniden başlatmasından
+SAĞ ÇIKIYOR (A2, cihaz üstünde).
+
+⭐ Ve bu kare O-121'i cihazda doğruluyor: `SetupCheckScreenRoute` **asılmıyor.**
+Kamera yokken bile perdesini çiziyor (`SETUP CHECK · FRAME | ROOM | READY`) ve
+neden ilerleyemediğini ADIYLA söylüyor. Widget testindeki ölçümün cihazdaki
+karşılığı.
+
+## NE KANITLAMIYOR — adıyla
+
+⛔ **Oturum ve sonuç yüzeylerini KANITLAMIYOR.** Yürüyüş tam burada duruyor:
+   `LiveScreenRoute`a ancak kurulum kontrolü GEÇİNCE gidilir ve o geçiş
+   GERÇEK KAMERA KARESİ ister. Simülatörde kamera donanımı yoktur.
+   ⇒ Bu bacağın kanıtı **A12**'dir (gerçek cihaz), bu dosya değil.
+   *(O yüzeylerin sahte-kaynaklı kanıtı ayrı dosyalarda:
+    `04a-live-measuring-inband.png` · `05-review.png` · `14-review-nothing-readable.png`
+    — hepsi kaynağın SAHTE olduğunu kendi üstünde yazıyor.)*
+
+⛔ **Kamera hatasının SINIFINI kanıtlamıyor — ve bu ÖLÇÜLEMEDİ, `❌` değil.**
+   Ekran *"Camera access is off and the system will not ask again. Open
+   Settings to change it."* diyor. Ama bu kare **`xcrun simctl privacy
+   <udid> grant camera com.yulalab.ostinato` KOŞULDUKTAN SONRA** alındı ve
+   mesaj DEĞİŞMEDİ. İki açıklama ayırt edilemiyor:
+     (a) ürün *"izin reddedildi"* ile *"kamera donanımı yok"*u karıştırıyor ve
+         kullanıcıyı işe yaramayacak bir Ayarlar yolculuğuna yolluyor,
+     (b) simülatörün TCC'si var olmayan bir cihaz için izni zaten vermiyor,
+         yani `permission_handler` gerçekten `permanentlyDenied` döndürüyor.
+   **Simülatörde bu ikisi ayrılamaz.** Gerçek cihazda kamerayı kapatıp
+   açarak ayrılır — A12 turunda ölçülecek. Bir kusur İDDİA EDİLMİYOR;
+   ölçülemeyen bir ayrım ADIYLA yazılıyor.
