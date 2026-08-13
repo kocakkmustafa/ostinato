@@ -16,4 +16,7 @@ assets/models/*.task
 # Kalıcı MUT-A geçmişi (koordinatör sevki 2026-08-11, dördüncü unsur: KAYIT).
 # .mutA-backup/'ın aksine koşum bitince SİLİNMEZ — ama yine de yerel/makineye
 # özgü işlem geçmişi, kaynak değil; izlenmez.
-.mutA-log.jsonl
+# Yıldız, iCloud'un ÇAKIŞMA KOPYALARINI da kapsamak için (ölçüldü 2026-08-13:
+# ".mutA-log 2.jsonl" düz desene uymuyordu ve her çakışmada ağacı kirletiyordu;
+# kalıcı bir yanlış-pozitif, GERÇEK bir kirlenmenin sinyalini köreltir).
+.mutA-log*.jsonl
