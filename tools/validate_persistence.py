@@ -38,6 +38,30 @@ daha SESSİZ kalamaz.*
 ⚠️ Kapı **kalıcılığı ŞART KOŞMAZ.** Sıfır yazma çağrısı meşru bir üründür
 (cihaz-üstü, iz bırakmayan). Yasak olan şey **beyansızlık**: ürünün ne
 sakladığı ve neyi ATTIĞI yazılı olmadan geçilemez.
+
+## 🔴 ÖRTÜŞME — ADIYLA (O-138, 2026-08-14, öz-yakalama)
+
+**Bu kapıyı yazarken deponun onu ZATEN kurup kurmadığını ölçmedim, ve kısmen
+kurmuştu.** `validate_surface_honesty.py` **Kural E2** (`O-102`) saklama
+iddiasını ölçümle **iki yönde** ve **ÖZNE BAŞINA** bağlıyor; hatta bu ağacın
+iki yazma yolunu (`onboarding_store.dart` · `pose_model.dart`) kendi yorumunda
+adıyla sayıyor — yani `O-133`'te *"keşfettiğim"* olgu depoda **zaten
+ölçülmüştü.** Üstelik E2'nin yorumu bu dosyanın kusurunu önceden yazmış:
+*"`writer_found` GLOBAL bir bool ve Gravita'nın vakasını ayırt EDEMEZ"* —
+buradaki `userArtifactMayBePersisted` tam olarak o global bool.
+
+> ***BİR KAPIYI KURMADAN ÖNCE, DEPONUN ONU ZATEN KURUP KURMADIĞINI ÖLÇ.***
+> Ürünü aradım, ama deponun KENDİ BİLGİSİNİ aramadım.
+
+**Ölçülmüş iş bölümü — üstünlük iddiası GERİ ÇEKİLDİ:**
+  · **Yön ⑴** (saklıyor ama hâlâ *"saklanmıyor"* diyor) → **YETKİLİ SÜRÜM E2'dir**
+    (özne başına). Buradaki kontrol yalnız **KABA BİR ÇAPRAZ KONTROL**; E2 ile
+    çelişirse **E2 doğrudur.**
+  · **Yön ⑵** (hiçbir şey saklamıyor ve bunu **hiçbir yerde söylemiyor**) →
+    **E2 KAPSAMIYOR** ve bu kapının gerçek katkısı burasıdır: E2 saklama hükmü
+    veren *cümleleri* denetler; **hiç cümle yoksa denetleyecek şeyi de yoktur.**
+  · **`WRITE_CLASSES`** (her yazma yolunun gerekçeli sınıfı + sayı sapması) →
+    E2'de yok; ikinci gerçek katkı.
 """
 import re
 import sys
@@ -183,10 +207,13 @@ def coupling_violation(actual):
     persists = actual["userArtifactMayBePersisted"]
     claims = bool(actual["ephemeralityClaimFiles"])
     if persists and claims:
-        return (f"🔴 BAYAT YOKLUK CÜMLESİ (H-10): ürün artık kullanıcı "
-                f"üretimini SAKLIYOR olabilir, ama {actual['ephemeralityClaimFiles']} "
-                f"hâlâ «hiçbir şey saklanmıyor» diyor. *Bir yokluk cümlesi, "
-                f"yokluk bittiği gün bayatlar* — metni ÖNCE düzelt")
+        return (f"🔴 BAYAT YOKLUK CÜMLESİ (H-10) — ⚠️ KABA ÇAPRAZ KONTROL, "
+                f"yetkili sürüm `validate_surface_honesty` Kural E2'dir (özne "
+                f"başına; burası GLOBAL bool ve E2 ile çelişirse E2 doğrudur): "
+                f"ürün artık kullanıcı üretimini SAKLIYOR olabilir, ama "
+                f"{actual['ephemeralityClaimFiles']} hâlâ «hiçbir şey "
+                f"saklanmıyor» diyor. *Bir yokluk cümlesi, yokluk bittiği gün "
+                f"bayatlar* — metni ÖNCE düzelt")
     if not persists and not claims:
         return ("🔴 SESSİZ GEÇİCİLİK: ürün hiçbir kullanıcı üretimini "
                 "saklamıyor ve bunu kullanıcıya HİÇBİR YERDE söylemiyor. "
