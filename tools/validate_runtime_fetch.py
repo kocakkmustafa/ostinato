@@ -65,7 +65,18 @@ DECLARED = {
     # ⚠️ Asimetri artık 10/10: kurucu kararı (font gömme ↔ çevrimdışı ilk
     # açılış) beklerken, A1 akışını GERÇEK ürün davranışıyla koşan tek yer
     # simülatör/cihazdır — hiçbir test değil.
-    "testFilesDisablingFetch": 10,
+    #
+    # 10 → 11 (2026-08-14, O-140): `test/library_fold_test.dart` eklendi
+    # (START HERE şeridinin katlama mesafesini ölçen kapı) ve o da çekmeyi
+    # kapatıyor. ⭐ **ÜÇÜNCÜ VAKA, ve kapı yine ÖNCE öttü:** beyanı elle
+    # yükseltmedim, commit kancasında kırmızı verdi ve tazelemeye zorladı.
+    # Bu sıra kapının değeridir — *asimetriyi büyüten edim, büyüdüğünü kimse
+    # söylemezse fark edilmez.*
+    # ⚠️ ASİMETRİ ARTIK **11/11**: üretim çalışma anında çekiyor, testlerin
+    # HEPSİ kapatıyor ⇒ hiçbir test bu davranışı GÖREMEZ. Kurucu kararı
+    # (font gömme ↔ çevrimdışı ilk açılış) beklerken bu sayının her artışı
+    # aynı gerçeği bir kez daha söyler.
+    "testFilesDisablingFetch": 11,
     "$why": (
         "ÖLÇÜLDÜ 2026-08-12. Üretim `ostinato_theme.dart` içinde "
         "`GoogleFonts.hankenGrotesk` · `GoogleFonts.ibmPlexMono` · "
