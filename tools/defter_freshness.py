@@ -43,7 +43,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFTER = ROOT.parent / "workspace" / "DEFTER.md"
+DEFTER = ROOT / "workspace" / "DEFTER.md"
 
 #: Defter satırı: `| O-098 | …` (bu defterin TEK biçimi — 2026-08-12'de
 #: yeniden yazıldı, ölçüldü: başka biçim yok).
