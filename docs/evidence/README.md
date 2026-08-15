@@ -106,3 +106,40 @@ Testler yeşilken ekrana bakmasaydım ikisi de kaçardı:
 
 Yüzey (sealed hâller, bant çizimi, gözlem işareti mantığı) **HİÇ DEĞİŞMEDİ** —
 yalnız kaynak sahte'den gerçeğe geçti, tur-1'in taahhüt ettiği gibi.
+
+## O-141 kanıt yeniden-üretimi (2026-08-16) — H-15 tam karşılanarak
+
+**Neden var:** `O-141` ölçtü ki `O-124`'ün "sekiz adım, her biri ekran
+görüntüsüyle" dediği tur-3 cihaz/simülatör yürüyüşünün yalnız **1/8** karesi
+(`15-tur3-device-walk-setupcheck.png`) commit'lenmişti — yedisi hiç yok. Bu
+bölüm o yedi kareyi **kendi adanmış simülatöründe** (`ostinato-hatti`,
+`DAE5E512-F2DD-46AA-9FB0-5147EE8009BA`) yeniden üretir; H-15'in ön-plan
+belirsizliği artık **yapısal olarak imkânsız** (paylaşılan simülatörde değil,
+tek-uygulamalı kendi simülatöründe alındı — her karede `DEBUG` bandı + Ostinato
+içeriği doğrulanabilir).
+
+Cihaz: `ostinato-hatti` simülatörü (adanmış) · debug build (bu turun `flutter
+build ios --simulator --debug`'ı, D10 doğrulamasıyla AYNI artefakt) ·
+`motion_core/motion_camera 0.11.0/0.1.2 @ f13bdc9`.
+
+| dosya | ne KANITLIYOR | ne kanıtlamıyor |
+|---|---|---|
+| `17-tur5-walk-1-onboarding-welcome.png` | Onboarding perde 1, taze kurulum | — |
+| `18-tur5-walk-2-onboarding-scope.png` | Perde 2 — `3/28/10/3` sayıları `library.json`dan türetilmiş (elle yazılmamış, `_LibraryFacts.from`) | — |
+| `19-tur5-walk-3-onboarding-sensors.png` | Perde 3 — mikrofon-yok/video-atılır beyanları ekranda, `Open the library` düğmesi | — |
+| `20-tur5-walk-4-library.png` | Kütüphane, üç canlı çalgı kartı. **START HERE şeridi bu karede katlama altında** (`D16` henüz uygulanmadı — ayrı iş) | — |
+| `21-tur5-walk-5-guitar-instrument.png` | Gitar sayfası — "What we actually measure" dürüstlük kutusu, 7 öğretmen/2.24° | — |
+| `22-tur5-walk-6-guitar-foundations-course.png` | Foundations kursu, 4 ders listede (`Camera and space` GUIDE, üçü SCORED) | — |
+| `23-tur5-walk-7-sitting-posture.png` | Sitting posture dersi, "Begin the setup check" düğmesi | — |
+| `24-tur5-walk-8-setupcheck-camera-denied.png` | SetupCheck ekranı, **FRAME** aşaması — `O-126`'nın bulgusu bağımsız DOĞRULANDI: *"Camera access is off and the system will not ask again"* simülatörde tekrar üretildi | izin GERÇEKTEN reddedilmiş mi yoksa simülatörün TCC'si mi (O-126 hâlâ ⛔ ÖLÇÜLEMEDİ — bu tur onu kapatmadı, yalnız yeniden üretti) |
+
+**🪤 Alet tuzağı (adıyla, bu turda üç kez ısırdı):** `Begin the setup check`
+düğmesine yedi taptan sonra ancak sekizinci basıyor gibi göründü — gerçek
+sebep koordinat değil, **MCP simülatör aracının kendi `screenshot` eylemi
+BAYAT kare döndürüyordu.** `xcrun simctl io screenshot` ile DOĞRUDAN alınan
+kare, MCP `screenshot`un gösterdiğinden FARKLI (güncel) durumu gösterdi —
+dokunuş muhtemelen ilk denemelerde de inmişti, yalnız doğrulama aracı bunu
+söylemiyordu. **Kural: bu simülatör MCP aracıyla doğrulama-kritik bir anda
+tutarsız görünürse, `xcrun simctl io <udid> screenshot <path>` ile ikinci
+kaynaktan doğrula** — `H-26`'nın "tek kaynaklı sayı doğrulanmamış sayıdır"
+dersinin ekran-görüntüsü hâli.
