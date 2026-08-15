@@ -43,6 +43,11 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# ⚠️ Yorum-körlüğü panzehiri (H-31/O-143): `gates` bir BASH betiği, Dart
+# değil — `strip_dart_comments` `#` yorumunu SÖKMEZ. Kardeş ayıklayıcı.
+from validate_surface_honesty import strip_shell_comments  # noqa: E402
+
 #: Bilinen koşumlar — KİMLİKLE (yol), sayıyla değil.
 KNOWN_RUNNERS = {
     "kabuk": {"path": ".", "cmd": "flutter test", "kind": "dart"},
@@ -142,7 +147,7 @@ def main() -> int:
         print(kapsam_line())
         return 0
     problems = []
-    gates = Path(GATES).read_text(encoding="utf-8")
+    gates = strip_shell_comments(Path(GATES).read_text(encoding="utf-8"))
 
     # ── ④ SEVKİYAT: kapsam cümlesi elle yazılmış mı?
     if HANDWRITTEN_SCOPE.search(gates):

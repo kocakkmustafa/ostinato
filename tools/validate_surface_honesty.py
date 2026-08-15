@@ -786,6 +786,46 @@ def strip_dart_comments(src: str) -> str:
     return "".join(out)
 
 
+def strip_shell_comments(src: str) -> str:
+    """`strip_dart_comments`in kardeşi — BASH `#` yorumları için (H-31/O-143).
+
+    `//`/`/* */` Dart+Kotlin/Groovy'de ortak ama BASH'ta YOK — `run_gates.sh`
+    gibi bir kabuk betiğine `strip_dart_comments` uygulamak hiçbir şeyi
+    SÖKMEZ: `# flutter test` yorumundaki dizge yorum-körlüğü kapısını yine
+    geçer (H-31 ölçümü: `validate_runner_inventory.py`nin `gates` okuması
+    tam bu tuzağa açıktı, çünkü taranan dosya Dart değil BASH). Aynı
+    tırnak-farkında karakter-tarayıcı; blok-yorum YOK (bash'ta yok).
+    """
+    out = []
+    i, n = 0, len(src)
+    in_s = None
+    while i < n:
+        ch = src[i]
+        if in_s:
+            out.append(ch)
+            if ch == "\\" and i + 1 < n:
+                out.append(src[i + 1])
+                i += 2
+                continue
+            if ch == in_s:
+                in_s = None
+            i += 1
+            continue
+        if ch in ("'", '"'):
+            in_s = ch
+            out.append(ch)
+            i += 1
+            continue
+        if ch == "#":
+            while i < n and src[i] != "\n":
+                out.append(" ")
+                i += 1
+            continue
+        out.append(ch)
+        i += 1
+    return "".join(out)
+
+
 STRING_LITERAL = re.compile(r"'((?:[^'\\\n]|\\.)*)'|\"((?:[^\"\\\n]|\\.)*)\"")
 
 # Widget `Key`leri, asset yolları, paket adları… — boşluksuz ve yalnız

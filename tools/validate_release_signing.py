@@ -26,6 +26,11 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# ⚠️ Yorum-körlüğü panzehiri (H-31/O-143) — yeniden yazılmadı, içe aktarıldı.
+# `build.gradle.kts` Kotlin DSL'dir: `//`/`/* */` Dart'la AYNI sözdizimi.
+from validate_surface_honesty import strip_dart_comments  # noqa: E402
+
 GRADLE = Path("android/app/build.gradle.kts")
 
 #: Şablonun bıraktığı hâl: release KOŞULSUZ debug imzasına bağlanmış.
@@ -93,7 +98,7 @@ def selftest() -> int:
                     "varlığı sanılırdı")
     if not GRADLE.exists():
         dead.append(f"{GRADLE} YOK — kapı hiçbir şey ölçmüyor (vakum)")
-    elif check(GRADLE.read_text(encoding="utf-8")):
+    elif check(strip_dart_comments(GRADLE.read_text(encoding="utf-8"))):
         dead.append("BUGÜNKÜ kaynak ihlal veriyor — olumsuz ikiz başarısız")
     if dead:
         print(f"⛔ {len(dead)} ÖLÜ DESEN (öz-test başarısız):")
@@ -111,7 +116,7 @@ def main() -> int:
     if not GRADLE.exists():
         print(f"⛔ {GRADLE} YOK — 'temiz' hükmü GEÇERSİZ (vakum)")
         return 1
-    bad = check(GRADLE.read_text(encoding="utf-8"))
+    bad = check(strip_dart_comments(GRADLE.read_text(encoding="utf-8")))
     if bad:
         print(f"⛔ {len(bad)} RELEASE İMZASI İHLALİ:")
         for b in bad:

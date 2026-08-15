@@ -27,6 +27,10 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# ⚠️ Yorum-körlüğü panzehiri (H-31/O-143) — yeniden yazılmadı, içe aktarıldı.
+from validate_surface_honesty import strip_dart_comments  # noqa: E402
+
 INSTRUMENTS = ["guitar", "voice", "piano"]
 RULESET = "config/rulesets/{}@0.2.0-draft.json"
 REFERENCE = "config/references/{}-posture-setup.v1.json"
@@ -304,8 +308,8 @@ def sweep():
     # muafiyet bir İDDİA taşır ("bunu çalışma zamanı üretir" / "bu bugün
     # engelli"), ve denetlenmeyen bir iddia tam da bu kapının kovaladığı şey.
     # İki yön de kapalı, yoksa bu yalnız daha uzun bir muafiyet listesi olur.
-    shell = "\n".join(
-        p.read_text(encoding="utf-8") for p in Path("lib").rglob("*.dart"))
+    shell = strip_dart_comments("\n".join(
+        p.read_text(encoding="utf-8") for p in Path("lib").rglob("*.dart")))
     for ref, spec in RUNTIME_REFS.items():
         produced = bool(re.search(spec["producerPattern"], shell))
         if spec["status"] == "live":
