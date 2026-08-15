@@ -2,10 +2,53 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!--
+	ÖLÇÜLDÜ, VARSAYILMADI (H-34, 2026-08-16, O-144). Boş diziler öyle
+	doğdukları için değil, ÖLÇÜLDÜKTEN SONRA öyle kaldıkları için boş.
+
+	KAPSAM: kendi `lib/` (Dart) + pinli `motion_core`/`motion_camera`
+	KAYNAĞI (git ref f13bdc93 == motion_core-v0.11.0 + motion_camera-v0.1.2,
+	pubspec.yaml'daki pin) — yalnız kendi kodum değil, bağımlılığımın ağı
+	(H-34/Lissom L-288 dersi).
+
+	TARANAN Required-Reason API imzaları (Apple'ın beş kategorisi):
+	UserDefaults/NSUserDefaults · dosya-zaman-damgası (creationDate ·
+	modificationDate · getattrlist · stat/fstat) · sistem açılış-zamanı
+	(systemUptime · mach_absolute_time · mach_continuous_time) ·
+	disk-alanı (volumeAvailableCapacity · systemFreeSize) · aktif-klavye
+	(activeInputModes). SONUÇ: SIFIR gerçek isabet. `motion_camera`nın
+	Swift'inde TEK eşleşme ("mach_absolute_time") bir YORUMDU
+	("CMSampleBuffer PTS rides the host clock (mach_absolute_time
+	family)"), gerçek bir çağrı değil — kamera karesi zaman damgası
+	standart CoreMedia/AVFoundation API'siyle okunuyor, bu API
+	Required-Reason listesinde DEĞİL.
+
+	⛔ ÖLÇÜLEMEDİ (❌ değil): MediaPipeTasksVision/MediaPipeTasksCommon
+	(Google, CocoaPods ile ÖN-DERLENMİŞ .xcframework) kaynak taramasına
+	AÇIK DEĞİL. Kendi manifestlerini taşıyorlarsa Xcode derlemede
+	birleştirir; bu bağımsız doğrulanmadı — varsayım değil, adıyla
+	bırakılan bir ölçüm sınırı.
+
+	AĞ (H-34/L-288: kendi kodunda ağ olmaması, üründe ağ olmaması demek
+	değildir): `google_fonts` bağımlılığı (Hanken Grotesk + IBM Plex
+	Mono) ilk açılışta Google'ın font CDN'inden dosya indiriyor
+	(pubspec.yaml:55 — "dosya font gömmez; ilk açılışta indirir",
+	`allowRuntimeFetching` üretimde kapatılmadı, gömülü font YOK). Bu
+	KULLANICI VERİSİ göndermiyor — genel bir ağ soketi, Required-Reason
+	API kategorisi DEĞİL, indirilen şey kamu font dosyası. Ama "sıfır"
+	bu ağ etkinliğini gizlemesin diye adıyla yazılıyor. D1 (fontlar
+	PAKETLENİR) inince bu satır kalkar ve manifest YENİDEN ÖLÇÜLÜR —
+	bağ H-34'te ilan edildi, plan dosyasında değil.
+	-->
 	<key>NSPrivacyTracking</key>
 	<false/>
 	<key>NSPrivacyTrackingDomains</key>
 	<array/>
+	<!-- Ölçüldü: backend YOK (Supabase/API çağrısı 0), kamera işlemesi
+	     tamamen cihaz-üstü (validate_runtime_fetch.py, A9). google_fonts
+	     CDN indirmesi burada SAYILMAZ: bu alan app'in kullanıcıdan TOPLAYIP
+	     GÖNDERDİĞİ veri türlerini sayar — bir kamu font dosyası indirmek,
+	     kullanıcı verisi göndermek değildir. -->
 	<key>NSPrivacyCollectedDataTypes</key>
 	<array/>
 	<key>NSPrivacyAccessedAPITypes</key>
