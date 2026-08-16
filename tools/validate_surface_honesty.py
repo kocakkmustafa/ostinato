@@ -76,6 +76,13 @@ CAPABILITY_RULES = [
             r"\bnot wired in this build\b",
             r"\bno audio permission\b",
             r"\bthere is no microphone input\b",
+            # Türkçe yokluk hâli (D6/O-157, 2026-08-16): `mention` deseni
+            # `\bmikrofon\b`i zaten yakalıyordu ama `absence` yalnız İNGİLİZCE
+            # ifadelere bakıyordu — kaynağın kendi Türkçe iç-belge yüzeyinde
+            # (`docs/store/*.md`, aile deseni: JabLab'ın `STORE-LISTING-
+            # TASLAK.md`si) "mikrofon izni yok"/"mikrofon yok" gibi TAM
+            # dürüst cümleler bu asimetri yüzünden ihlal SANILIYORDU.
+            r"\bmikrofon\b[^.]{0,40}\byok\b",
         ],
         # İzin beyan edildiği gün kural kendini kaldırır.
         "ios_key": "NSMicrophoneUsageDescription",
@@ -1024,8 +1031,20 @@ def prose_values(obj, path=""):
 
 #: Mağaza/metadata taslaklarının GELENEKSEL yerleri (aile geneli). Bu bir
 #: ALAN listesi değil, DOSYA listesi — alanlar `prose_values` ile türer.
+#:
+#: ⚠️ `.md` BİLEREK YOK (D6/O-157, 2026-08-16): bu ailenin HER `docs/store/`
+#: yapısında (JabLab emsali, bu turda birebir izlendi) `.md` companion —
+#: `STORE-LISTING-TASLAK.md`, `screenshots/*/README.md` — Türkçe İÇ belgedir,
+#: `DEFTER.md`/`PROGRESS.md` ile AYNI sınıf (workspace'in kendi anlatı
+#: sözleşmesi), `.json`/`.txt`ten KATEGORİK farklı: hiçbir mağaza yükleme
+#: hattı `.md` KABUL ETMEZ, yani "gönderilecek metin taslağı" hiçbir zaman bu
+#: biçimde olmaz — yalnız `.json` (yapısal, makine-okur) ve `.txt`
+#: (fastlane metadata'nın KENDİSİ, kelimesi kelimesine yüklenen) gerçekten
+#: sevk edilir. Ölçüm: bu iki dosya `.md` taranınca "dil"/"vaat dili"
+#: ihlallerinin TAMAMI Türkçe iç-yorumdan geliyordu, gerçek İngilizce mağaza
+#: metninden değil — `docs/store/listing.json` zaten AYRICA taranıyor.
 STORE_TEXT_GLOBS = [
-    "docs/store/**/*.json", "docs/store/**/*.md", "docs/store/**/*.txt",
+    "docs/store/**/*.json", "docs/store/**/*.txt",
     "fastlane/**/metadata/**/*.txt", "store/**/*.json",
 ]
 
@@ -1097,6 +1116,17 @@ def claim_bearing_text_surfaces():
             if f.suffix == ".json":
                 for key, value in prose_values(
                         json.loads(f.read_text(encoding="utf-8"))):
+                    # `$`/`_` ile başlayan alanlar İÇ KAYIT'tır (D6/O-157,
+                    # 2026-08-16) — `json_surface_strings`in `walk()`ı bu
+                    # ayrımı ZATEN yapıyordu, `prose_values` (kısıt ②
+                    # gereği alan adına bakmaz) yapmıyordu. `prose_values`ın
+                    # KENDİSİNE dokunulmadı — plist/android çağıranları hâlâ
+                    # alan-adı-kör; filtre yalnız BURADA, mağaza JSON'unun
+                    # KENDİ iç-yorum sözleşmesine (DEFTER/`_derivedFrom`
+                    # deseniyle AYNI `$`/`_` kuralı) özgü.
+                    if any(seg.startswith(("$", "_"))
+                           for seg in key.split(".")):
+                        continue
                     out.append((f"{f}:{key}", value))
                     seen += 1
             else:

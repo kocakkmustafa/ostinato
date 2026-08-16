@@ -47,6 +47,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
           // Yükleme hatası GİZLENMEZ: üretilen bir varlık eksikse ekran onu
           // söyler, boş bir liste göstermez.
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: _theme,
             home: Scaffold(
                 body: Center(child: Padding(
@@ -56,6 +57,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
         }
         if (!snap.hasData) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: _theme,
             home: const Scaffold(
                 body: Center(child: CircularProgressIndicator())),
@@ -74,6 +76,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
           cueText: cue,
           child: MaterialApp(
             title: 'Ostinato',
+            debugShowCheckedModeBanner: false,
             theme: _theme,
             home: OstinatoHome(
               repo: repo,
