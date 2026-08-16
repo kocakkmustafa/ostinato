@@ -10,6 +10,7 @@ import '../cue_text.dart';
 import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../session_store.dart';
 import 'review_screen.dart';
 
 /// Gözlem işareti görünürlük tedavisi — ikisi de gerçek, ikisi de canlı.
@@ -176,21 +177,54 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
     return DateTime.now().difference(_cueAt!) < _cueHold;
   }
 
+  /// H-45 DÜZELTMESİ (2026-08-16, O-154 — `full_flow_test.dart` sabotajı
+  /// yakaladı): navigasyon ÖNCE depo OKUMASINI bekliyordu — gerçek cihazda
+  /// `getApplicationSupportDirectory()` hızlı döner ama `flutter test`te
+  /// platform kanalı YOK, bu yüzden SONUÇ yüzeyi hiç doğmadı (widget testi
+  /// "ReviewScreenRoute bulunamadı" diye çöktü — kod savunmasızdı, yalnız
+  /// üretimde şanslıydı). Şimdi navigasyon SENKRON ve depo I/O'suna hiç
+  /// bağlı değil; okuma+yazma arka planda sürer, sonucu `previousSession`
+  /// Future'ı taşır — Review kendi `FutureBuilder`ıyla çözer.
   void _stop() {
     _source.stop();
+    final SessionSummary summary = SessionSummary(
+      elapsedSeconds: _elapsed.elapsed.inSeconds,
+      sampleCount: _sampleCount,
+      outCount: _outCount,
+      history: List<double>.of(_hist),
+    );
     Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
       builder: (_) => ReviewScreenRoute(
         discipline: widget.discipline,
         lesson: widget.lesson,
         hue: widget.hue,
-        summary: SessionSummary(
-          elapsedSeconds: _elapsed.elapsed.inSeconds,
-          sampleCount: _sampleCount,
-          outCount: _outCount,
-          history: List<double>.of(_hist),
-        ),
+        summary: summary,
+        previousSession: _readPreviousThenSave(summary),
       ),
     ));
+  }
+
+  /// D14 (2026-08-16, O-153): ÖNCE önceki kaydı OKU, SONRA bugünküyü YAZ —
+  /// sıra kasıtlı, aksi hâlde "önceki oturum" bugünküyle YARIŞIR (yazma
+  /// önce inerse Review kendi oturumunu "önceki" diye gösterebilirdi).
+  /// Yazma kendisi kasıtlı unawaited: bu Future'ın çözülmesi yazmayı
+  /// BEKLEMEZ, ama `.ignore()` yalnız "beklemiyorum" der, hatayı GİZLEMEZ —
+  /// bir disk arızası burada sessiz kalır (kabul edilen sınır: sonuç yüzeyi
+  /// zaten ÖLÇÜLEN kareden türer, yazma başarısız olsa bile kullanıcı
+  /// SONUCU görür, yalnız GEÇMİŞE eklenmez). Bu Future'ın kendisi de
+  /// hatayla biterse (ör. okuma çöker) `FutureBuilder` onu yakalar — geçmiş
+  /// kartı çizilmez, uygulama çökmez.
+  Future<PersistedSession?> _readPreviousThenSave(
+      SessionSummary summary) async {
+    const SessionStore store = SessionStore();
+    final PersistedSession? previous = await store.lastSession();
+    store.save(PersistedSession.fromSummary(
+      disciplineId: widget.discipline.id,
+      lessonId: widget.lesson.id,
+      summary: summary,
+      completedAt: DateTime.now(),
+    )).ignore();
+    return previous;
   }
 
   @override

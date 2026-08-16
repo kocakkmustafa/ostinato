@@ -87,13 +87,24 @@ class SettingsScreen extends StatelessWidget {
                 // = DÖRT landmark. Dokuz, `SkeletonFigurePainter`ın düğüm
                 // sayısıydı: sayı gerçek, BİRİMİ yanlış. Aynı kartta iki
                 // tur — bir iddiayı düzeltirken YANINDAKİNE bakılmamış.
+                // D14 (2026-08-16, O-153): "nothing is stored"/"no history
+                // here" DÜZELTİLDİ — artık bir özet-geçmiş var (Review
+                // ekranı gösterir). Ham açı hâlâ saklanmıyor (korundu, doğru
+                // kaldı); "silecek bir şey yok" yerine GERÇEK silme yolu
+                // adıyla yazıldı (uygulamayı kaldırmak) — var olmayan bir
+                // "sil" DÜĞMESİ İCAT EDİLMEDİ, iOS'un kendi mekanizması
+                // anlatıldı.
                 body: 'It runs on your phone and reads your two shoulders '
                     'and your two hips, and only inside a lesson. From those '
                     'it measures one thing: how far your trunk leans. '
-                    'Nothing is uploaded and nothing is stored: that angle '
-                    'exists while the lesson is running and is gone when you '
-                    'leave it. '
-                    'There is no history here to browse, and none to delete.',
+                    'Nothing is uploaded, and that angle itself is never '
+                    'stored — it exists while the lesson is running and is '
+                    'gone when you leave it. '
+                    'A short summary of each session (how long you '
+                    'practised, how much you stayed in range) is kept on '
+                    'this device so Review can show your last session; '
+                    'nothing more detailed than that. Uninstalling the app '
+                    'removes it, the same as everything else the app keeps.',
               ),
               const SizedBox(height: 14),
               const _SettingsCard(

@@ -155,47 +155,45 @@ def detect(prod_sources):
 #
 # ⚠️ Bu bir MUAFİYET değil, KARAR NOKTASI.
 DECLARED = {
-    "writeCallSites": 2,
-    "writeFiles": ["onboarding_store.dart", "pose_model.dart"],
-    "userArtifactMayBePersisted": False,
-    "userArtifactFiles": ["live_screen.dart", "review_screen.dart"],
+    "writeCallSites": 3,
+    "writeFiles": ["onboarding_store.dart", "pose_model.dart",
+                   "session_store.dart"],
+    "userArtifactMayBePersisted": True,
+    "userArtifactFiles": ["live_screen.dart", "review_screen.dart",
+                          "session_store.dart"],
     "$why": (
-        "ÖLÇÜLDÜ 2026-08-14 (O-133). `lib/` ağacında İKİ kalıcı yazma var ve "
-        "İKİSİ DE kullanıcı üretimi DEĞİL (sınıfları `WRITE_CLASSES`ta). "
-        "`SharedPreferences` · `Hive` · `sqflite`: hiçbiri yok. "
-        "`SessionSummary` yalnız `live_screen.dart`ta üretilip "
-        "`review_screen.dart`a GEÇİRİLİR; hiçbir yere yazılmaz. "
-        "⚠️ İlk beyanım `1` yazıyordu ve KAPI ÖTEREK düzeltti: elle `grep`im "
-        "`writeAsBytes`i kapsamıyordu. *Bir envanteri elle saymak, deseninin "
-        "genişliği kadar doğrudur.*"),
+        "GÜNCELLENDİ 2026-08-16 (D14, O-153 — kurucu kararı geldi). "
+        "`session_store.dart` yeni yazma yolu: her pratik oturumunun "
+        "ÖZETİ (ders/çalgı kimliği + süre + örnek/dışarı-sayımı + "
+        "zaman damgası — HAM açı-örnekleri/`history` DEĞİL, o kapsam "
+        "dışında bırakıldı, kayıtlar KÜÇÜK kalsın diye) `sessions.jsonl`e "
+        "JSONL satırı olarak eklenir. `SharedPreferences`/`Hive`/`sqflite`: "
+        "hâlâ hiçbiri yok, düz dosya G/Ç (aile deseni, `M-F-650`)."),
     "$whatIsDiscarded": (
-        "ATILAN, adıyla: her pratik oturumunun SONUCU. Kullanıcı dersi "
-        "çalışır, postür ölçülür, sonuç yüzeyi ÖLÇÜLEN kareden türetilir — "
-        "ve ekran kapanınca hepsi yok olur. Geçmiş YOK · ilerleme YOK · "
-        "streak YOK. Ertesi gün uygulama kullanıcıyı hiç görmemiş gibidir. "
-        "✅ DÜZELTME (aynı gün, ölçümle): ilk yazdığım *'bu duruş SEÇİLMİŞ "
-        "değil, yalnız YAZILMAMIŞTIR'* cümlesi YANLIŞTI. Duruş kullanıcıya "
-        "AÇIKÇA beyan edilmiş — onboarding *'Your video'* kartı: «Nothing is "
-        "stored either: what we measure exists while the lesson runs and is "
-        "gone when it ends», ve aynı iddia iOS kamera-izin dizesinde de "
-        "geçiyor. ⇒ Bu bir DÜRÜSTLÜK kusuru DEĞİL, bir KAPSAM bulgusudur: "
-        "ürün saklamıyor ve saklamadığını SÖYLÜYOR."),
-    "ephemeralityClaimFiles": ["Info.plist", "onboarding_screen.dart",
-                               "settings_screen.dart"],
+        "ATILAN, adıyla — D14 SONRASI: ham açı-örnekleri (`history`) hâlâ "
+        "atılıyor, yalnız ÖZET saklanıyor. Video hiçbir zaman saklanmadı, "
+        "hâlâ saklanmıyor. SAKLANAN: hangi ders, ne zaman, kaç saniye, "
+        "bant-içi oranı. Kullanıcı 'son oturum'unu Review'da görür; tam "
+        "geçmiş listesi/ilerleme yüzeyi YOK (kapsam kararı, D14'ün "
+        "kendisi — post-V1)."),
+    "ephemeralityClaimFiles": [],
     "$coupling": (
-        "H-10 (2026-08-14): *bir yokluk cümlesi, yokluk bittiği gün bayatlar.* "
-        "Bugün Ostinato o cümlenin DOĞRU tarafında — ama tam bu yüzden "
-        "kalıcılık ile geçicilik-beyanı BİRBİRİNE BAĞLI: saklama eklendiği "
-        "gün «Nothing is stored» YANLIŞ olur. Kapı ikisini birbirine karşı "
-        "okur ve HANGİ YÖNDE ayrışırsa ötterir — Choreia'nın vakasında kusur "
-        "tam da kimsenin bu bağı kurmamış olmasıydı."),
+        "H-10 (2026-08-14): *bir yokluk cümlesi, yokluk bittiği gün "
+        "bayatlar.* D14 TAM BUNU YAPTI — saklama eklendiğinde üç yüzeyin "
+        "(Info.plist, onboarding, settings) 'nothing is stored' cümleleri "
+        "ÖNCE düzeltildi (bu commit'te, kod değişikliğiyle AYNI turda), "
+        "SONRA bu beyan tazelendi — H-10'un istediği sıra tam buydu: "
+        "'metni ÖNCE düzelt.' Üç yüzey artık ne sakladığını GERÇEKTEN "
+        "söylüyor (video/ham ölçüm hâlâ hayır, oturum özeti artık evet)."),
     "$founderDecision": (
-        "AÇIK: ⑴ oturum sonucunu yerel olarak saklamak (ilerleme mümkün olur, "
-        "cihaz-üstü kalır) mı, ⑵ hiçbir şey saklamamayı BİLEREK seçip bunu "
-        "kullanıcıya söylemek mi. Blueprint 'pratik günlüğü + streak' diyor "
-        "ama ileri-dönem listesinde ⇒ kapsam kararı. İlerlemenin NEREDE "
-        "görüneceği ayrıca TASARIM YÖNÜDÜR. Kapı bu kararı VERMEZ, görünür "
-        "tutar."),
+        "VERİLDİ (D14, 2026-08-16): oturum sonucu YEREL saklanır. "
+        "M-F-650 (Lissom emsali): Apple'ın anlamında 'collect' = cihazdan "
+        "DIŞARI aktarmak; bu veri hiç ağa çıkmıyor (D1'in repo-geneli "
+        "sıfır-ağ kapısı, `test/flutter_test_config.dart`, bunu da "
+        "kapsıyor — TRIPWIRE koda bağlı, belgeye değil). İlerleme "
+        "yüzeyinin NEREDE/NASIL görüneceği (tam geçmiş, grafik, streak) "
+        "ayrıca TASARIM YÖNÜDÜR ve post-V1; bugün yalnız 'son oturum' "
+        "tek satır."),
 }
 
 #: Beyanın boş bırakılamayacak gerekçe alanları.
@@ -245,6 +243,12 @@ WRITE_CLASSES = {
         "bundle değil YOL istiyor (`resolveFilePath`, dosya varsa yeniden "
         "yazmaz). Kullanıcı üretimi DEĞİL: silinse uygulama onu paketten "
         "yeniden açar, hiçbir bilgi kaybolmaz."),
+    "session_store.dart": (
+        "KULLANICI ÜRETİMİ (D14, 2026-08-16) — her pratik oturumunun "
+        "ÖZETİ (ders/çalgı kimliği, süre, bant-içi sayaçları, zaman "
+        "damgası; HAM açı-örnekleri DEĞİL). Silinirse kullanıcı geçmiş "
+        "oturumlarının izini kaybeder — bu SESSION_STORE'un TEK amacı, "
+        "kaybı önlemek değil GÖRÜNÜR ilerleme sağlamaktır."),
 }
 
 
@@ -381,16 +385,29 @@ def main() -> int:
     print(f"   ölçüm: {actual['writeCallSites']} yazma çağrısı · "
           f"yazan dosya {actual['writeFiles']} · "
           f"oturum sonucunu ANAN dosya {actual['userArtifactFiles']}")
-    print(f"   ⚠️ ATILAN (adıyla): her pratik oturumunun SONUCU — geçmiş yok, "
-          f"ilerleme yok, streak yok")
+    if actual["userArtifactMayBePersisted"]:
+        print("   ✅ ATILAN (adıyla): ham açı-örnekleri (`history`) — özet "
+              "saklanıyor, kare-kare hareket saklanmıyor")
+    else:
+        print("   ⚠️ ATILAN (adıyla): her pratik oturumunun SONUCU — geçmiş "
+              "yok, ilerleme yok, streak yok")
     print(f"   ✅ VE ÜRÜN BUNU SÖYLÜYOR — geçicilik beyanı "
           f"{actual['ephemeralityClaimFiles']} ({len(actual['ephemeralityClaimFiles'])} yüzey). "
           f"Bu bir dürüstlük kusuru DEĞİL, kapsam bulgusu")
-    print(f"   🔗 BAĞ CANLI (H-10): saklama eklendiği gün bu "
-          f"{len(actual['ephemeralityClaimFiles'])} metin BAYAT yokluk cümlesine "
-          f"döner ve kapı öter — metin ÖNCE düzeltilir")
-    print(f"   ⏳ KURUCU KARARI AÇIK: yerel saklama mı, bilerek iz "
-          f"bırakmamak mı (kapı bu kararı VERMEZ, görünür tutar)")
+    if actual["ephemeralityClaimFiles"]:
+        print(f"   🔗 BAĞ CANLI (H-10): saklama eklendiği gün bu "
+              f"{len(actual['ephemeralityClaimFiles'])} metin BAYAT yokluk "
+              f"cümlesine döner ve kapı öter — metin ÖNCE düzeltilir")
+    else:
+        print("   ✅ BAĞ TEMİZ (H-10): geçicilik iddiası taşıyan yüzey yok — "
+              "saklıyorsan söylemen, söylüyorsan saklamaman gerekmiyor")
+    if actual["userArtifactMayBePersisted"]:
+        print("   ✅ KURUCU KARARI VERİLDİ (D14, 2026-08-16): yerel saklama "
+              "— kapı artık kararı DEĞİL, kararın kalıcılığını görünür "
+              "tutuyor")
+    else:
+        print("   ⏳ KURUCU KARARI AÇIK: yerel saklama mı, bilerek iz "
+              "bırakmamak mı (kapı bu kararı VERMEZ, görünür tutar)")
     return 0
 
 

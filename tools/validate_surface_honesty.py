@@ -251,16 +251,42 @@ RETENTION_CLAIM = re.compile(
 # Yokluğu söyleyen cümle geçer. ("nothing is recorded" O-099'da eklendi —
 # aynı iddianın başka fiille söylenmiş yokluk hâli; Choreia'nın izin metni
 # tam bu biçimi kullanıyor, aile ölçümü 4/5.)
+#
+# "never stored" (O-154, 2026-08-16): D14 sırasında GERÇEK bir kaçış
+# yakalandı — bu liste "not stored"u tanıyordu ama "never stored"u
+# TANIMIYORDU, yani «The video itself is never stored» cümlesi olumsuzluk
+# değil OLUMLU bir saklama iddiası SANILDI (edilgen desen "video ... is ...
+# stored"a düştü, "never" araya giren kelime SAYILMADI). Ostinato'da bu
+# cümle YALNIZ tesadüfen (settings_screen.dart'ta AYNI cümlede ayrı bir
+# "is gone when" ifadesi de vardı) yanlış-pozitif ÜRETMEDİ —
+# onboarding_screen.dart'ın cümlesinde o ikinci ifade YOKTU, kapı gerçekten
+# öttü. Ders `O-116`nın kardeşi: *desen kendi kaçtığı biçimi bilmez, gerçek
+# korpus koşturulunca ortaya çıkar.*
 RETENTION_ABSENCE = re.compile(
     r"nothing is stored|none to delete|no history|are gone when|"
-    r"is gone when|not stored|nothing is kept|nothing is recorded|"
-    r"nothing is saved|nothing is retained|nothing is logged", re.IGNORECASE)
+    r"is gone when|not stored|never stored|nothing is kept|"
+    r"nothing is recorded|nothing is saved|nothing is retained|"
+    r"nothing is logged", re.IGNORECASE)
 #: Ölçüm SAKLAYAN bir kod yolu nasıl görünürdü. Karşılama işareti ve poz
 #: modeli dosyası HARİÇ (ikisi de ölçüm değil): dosya adlarıyla muaf.
 RETENTION_WRITERS = re.compile(
     r"writeAsString|writeAsBytes|SharedPreferences|Hive\.|sqflite|"
     r"\.insert\(|openDatabase")
 RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
+#: Muaf DEĞİL ama `RETENTION_FACTS`in TAMAMI bu yazıcıya karşı özne başına
+#: yeniden ölçüldü (D14/O-154, 2026-08-16 — aşağıdaki kayıtların her biri
+#: bu dosyaya karşı okunarak doğrulandı, varsayılmadı). Bir MUAFİYET
+#: DEĞİL: `session_store.dart` iddia-ölçüm bağı kontrolüne (aşağıdaki
+#: Kural E2 ①/②) HÂLÂ tam tabi — yalnız TEK SEFERLİK "yeniden-ölçüm
+#: gerekti" uyarısını bir daha tetiklemiyor. Neden gerekli: altı özne
+#: (angle/landmark/measurement/video/your footage/history) TASARIM
+#: GEREĞİ kalıcı olarak `False` kalacak — bu yazıcı var olduğu sürece
+#: `stale` listesi asla boşalmaz, yani reconciliation'sız bu kapı
+#: SONSUZA DEK kırmızı kalırdı (üründeki gerçek durumdan bağımsız,
+#: sinyal değil gürültü). Mekanizma: bir SONRAKİ yeni yazıcı (bu kümede
+#: OLMAYAN bir dosya) çıktığında kapı yeniden öter — tripwire yalnız BU
+#: yazıcı için tüketildi, genel olarak değil.
+RETENTION_WRITERS_RECONCILED = {"session_store.dart"}
 
 # ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────
 #
@@ -278,28 +304,60 @@ RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
 # Gravita'da üç yazıcı vardı ve landmark hiçbirinde değildi — *"bir şey
 # yazılıyor"* ile *"BU ŞEY yazılıyor"* farklı sorular, kayıt bu yüzden
 # ÖZNE BAŞINA tutulur.
+#
+# YENİDEN ÖLÇÜLDÜ (D14/O-154, 2026-08-16): `session_store.dart` eklendi —
+# ÜÇÜNCÜ bir yazıcı, ve bu kez MUAF DEĞİL (gerçek kullanıcı verisi: oturum
+# özeti). Aşağıdaki HER özne bu yazıcıya karşı TEK TEK yeniden kontrol
+# edildi (`grep -n` + `session_store.dart`ın kendi alan listesi okunarak,
+# varsayılmadı): `PersistedSession` yalnız `disciplineId/lessonId/`
+# `completedAt/elapsedSeconds/sampleCount/outCount` taşır — açı, landmark,
+# ham video, kare-kare ölçüm YOK; `history` (açı örnekleri) ADIYLA
+# TAŞINMAZ (bkz. `PersistedSession.fromSummary`'nin kendi yorum satırı).
+# Yani altı özne (angle/landmark/measurement/video/your footage/history)
+# GERÇEKTEN hâlâ `False` — tesadüf değil, tasarımın kendisi. İKİ özne
+# (session data/your data) artık GERÇEKTEN `True` — bir oturumun ÖZETİ
+# kelimenin tam anlamıyla "session data"dır.
 RETENTION_FACTS = {
     "angle": {"stored": False, "evidence":
               "lib/ yazıcı taraması: muaf olmayan writeAsString/Bytes/"
-              "SharedPreferences/Hive/sqflite SIFIR (2 muaf yazıcı: "
-              "karşılama biti + poz modeli asset'i)"},
+              "SharedPreferences/Hive/sqflite ÜÇ (2 muaf + 1 muaf-değil: "
+              "session_store.dart) — üçü de okundu, hiçbiri açı YAZMIYOR "
+              "(D14/O-154 yeniden-ölçüm)"},
     "landmark": {"stored": False, "evidence":
                  "aynı tarama; ayrıca canlı zincir yalnız trunkTiltDeg "
                  "skalerini taşıyor (camera_posture_adapter), landmark "
-                 "dizisi ekrandan öteye geçmiyor"},
+                 "dizisi ekrandan öteye geçmiyor; `session_store.dart` da "
+                 "landmark YAZMIYOR (D14/O-154 yeniden-ölçüm)"},
     "measurement": {"stored": False, "evidence":
-                    "aynı tarama; ölçüm seans içinde bellekte, kalıcı "
-                    "yazıcı yok"},
+                    "aynı tarama; kare-kare ölçüm seans içinde bellekte, "
+                    "kalıcı yazıcı yok — `session_store.dart` yalnız "
+                    "ÖZET SAYILARI (süre/örnek/dışarı) yazar, ham ölçüm "
+                    "DEĞİL (D14/O-154 yeniden-ölçüm)"},
     "video": {"stored": False, "evidence":
               "aynı tarama + kamera karesi hiçbir dosyaya yazılmıyor; "
-              "ağ çağrısı da yok (Kural J: yükleyen yol SIFIR)"},
-    "your footage": {"stored": False, "evidence": "video ile aynı ölçüm"},
+              "ağ çağrısı da yok (Kural J: yükleyen yol SIFIR); "
+              "`session_store.dart` metin alanları taşır, video/kare "
+              "YAZMAZ (D14/O-154 yeniden-ölçüm)"},
+    "your footage": {"stored": False, "evidence":
+                     "video ile aynı ölçüm, aynı yeniden-ölçüm"},
     "history": {"stored": False, "evidence":
-                "aynı tarama; geçmiş ekranı YOK (review_screen seans-içi)"},
-    "session data": {"stored": False, "evidence":
-                     "aynı tarama; seans kaydı tutan bir yol yok "
-                     "(Gravita'da VARDI — bu hattın ölçümü ayrı)"},
-    "your data": {"stored": False, "evidence": "yukarıdaki öznelerin toplamı"},
+                "`PersistedSession.fromSummary`nin kendi yorumu: `history` "
+                "(ham açı-örnekleri) BİLEREK taşınmaz — D14'ün kapsam "
+                "kararının kendisi, geçmiş ekranı YOK değil artık VAR "
+                "(review_screen 'Last session' kartı) ama o kart yalnız "
+                "ÖZETİ gösterir, ham diziyi DEĞİL (D14/O-154 yeniden-ölçüm)"},
+    "session data": {"stored": True, "evidence":
+                     "`session_store.dart`: `sessions.jsonl`e her oturum "
+                     "sonunda bir JSONL satırı eklenir (disciplineId/"
+                     "lessonId/completedAt/elapsedSeconds/sampleCount/"
+                     "outCount) — bu kelimenin tam anlamıyla seans verisi "
+                     "(D14/O-154, yön ① — artık gizlemek YALAN olurdu)"},
+    "your data": {"stored": True, "evidence":
+                  "yukarıdaki öznelerin toplamı; en az biri (session data) "
+                  "artık True olduğu için toplam da True — cihazdan "
+                  "DIŞARI çıkmıyor (M-F-650: 'collect' ≠ yerel saklama), "
+                  "ama CİHAZDA saklanıyor, 'your data' bu ayrımı taşımaz "
+                  "(D14/O-154 yeniden-ölçüm)"},
 }
 
 #: Cümledeki saklama ÖZNESİNİ çıkarır — hangi nesne eşleşti. `RETENTION_FACTS`
@@ -1564,13 +1622,20 @@ def main() -> int:
                         f"({fact['evidence']}) — veriyi GİZLEYEN yön "
                         f"«{sentence.strip()[:90]}»")
     # `stored: False` beyanlarının YENİDEN ÖLÇÜMÜ: kayıt bir kez yazıldı diye
-    # sonsuza kadar doğru kalmaz. Muaf olmayan bir yazıcı ortaya çıkarsa
-    # BÜTÜN "saklanmıyor" beyanları şüphelidir — ve hangisi olduğu ADIYLA.
-    if writer_found:
+    # sonsuza kadar doğru kalmaz. Muaf olmayan YENİ bir yazıcı ortaya
+    # çıkarsa BÜTÜN "saklanmıyor" beyanları şüphelidir — ve hangisi olduğu
+    # ADIYLA. `RETENTION_WRITERS_RECONCILED`e BAKILMAZ burada — bir kez
+    # tüketilince (aşağıdaki `new_writers`) bir DAHA sormaz; bu kasıtlı:
+    # altı özne TASARIM GEREĞİ kalıcı `False` kalacağından, kümeye
+    # bakmadan `stale` kontrolü tek başına bu kapıyı SONSUZA DEK kırmızı
+    # bırakırdı (D14/O-154 dersi).
+    new_writers = [w for w in writers
+                   if Path(w).name not in RETENTION_WRITERS_RECONCILED]
+    if new_writers:
         stale = [s for s, f in RETENTION_FACTS.items() if not f["stored"]]
         violations.append(
-            f"[iddia↔ölçüm yeniden-ölçüm] muaf olmayan yazıcı bulundu "
-            f"({', '.join(writers)}) → 'saklanmıyor' beyanı taşıyan "
+            f"[iddia↔ölçüm yeniden-ölçüm] muaf olmayan YENİ yazıcı bulundu "
+            f"({', '.join(new_writers)}) → 'saklanmıyor' beyanı taşıyan "
             f"{len(stale)} özne ({', '.join(stale)}) YENİDEN "
             f"SINIFLANDIRILMALI; beyanlar bugün şüpheli")
 

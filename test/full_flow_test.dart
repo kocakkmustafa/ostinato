@@ -236,9 +236,9 @@ void main() {
             'ürünün Live→Review replace\'i); eksikse özet ekranına rota '
             'DEĞİŞTİRMEDEN varılmış demektir');
     expect(w.events.last, 'replace',
-        reason: 'son olay `pushReplacement` olmalı — `live_screen.dart:181` '
-            'oturumu geri dönülemez biçimde kapatır; `push` görünürse '
-            'kullanıcı geri gelip biten bir oturuma düşebilir');
+        reason: 'son olay `pushReplacement` olmalı — `live_screen.dart` '
+            '`_stop()` oturumu geri dönülemez biçimde kapatır; `push` '
+            'görünürse kullanıcı geri gelip biten bir oturuma düşebilir');
   });
 }
 

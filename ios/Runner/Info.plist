@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Ostinato watches your sitting posture while you practice, comparing it to how real teachers sit. Video stays on this device and is never uploaded, and nothing is stored: what the app measures exists while the lesson runs and is gone when it ends.</string>
+	<string>Ostinato watches your sitting posture while you practice, comparing it to how real teachers sit. Video stays on this device and is never uploaded — the camera feed itself is never stored. A short summary of each practice session (how long you played, how much you stayed in range) is saved on this device so you can see your last session.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>

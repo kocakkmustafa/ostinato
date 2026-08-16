@@ -431,12 +431,16 @@ class _SensorsStep extends StatelessWidget {
           const _SensorCard(
             title: 'Your video',
             key: Key('onboarding-video-card'),
-            // Aynı düzeltme (O-054): "What we keep is …" var olmayan bir
-            // saklama mekanizmasını anlatıyordu.
+            // D14 (2026-08-16, O-153): "nothing is stored" DÜZELTİLDİ —
+            // oturum SONUCU artık saklanıyor. Video/ham ölçüm hâlâ
+            // saklanmıyor (bu iddia DOĞRU kaldı, o yüzden korundu);
+            // yalnız yeni gerçeği anlatan ikinci cümle YENİDEN yazıldı.
             body: 'Raw video never leaves this device — there is no setting '
-                'that changes that. Nothing is stored either: what we '
-                'measure exists while the lesson runs and is gone when it '
-                'ends. The camera only runs inside a lesson.',
+                'that changes that. The video itself is never stored, and '
+                'neither is the frame-by-frame measurement. What is stored '
+                'is a short summary of your practice — how long you played '
+                'and how much you stayed in range — so you can see your '
+                'last session. The camera only runs inside a lesson.',
           ),
         ],
       );

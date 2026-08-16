@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../content.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../session_store.dart';
 
 /// Bir oturumun ÖLÇÜLMÜŞ özeti — Live ekranından taşınır, İCAT EDİLMEZ.
 /// `verdict`in "steady/improving/needs_focus" üçlüsü g4-prep ruleset'in
@@ -86,6 +87,25 @@ String _countWord(int n) => const <int, String>{
       5: 'Five', 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten',
     }[n] ?? '$n';
 
+/// D14 (2026-08-16, O-153): "basit geçmiş listesi yeter" — tek satır,
+/// tek kayıt. Hangi DERS olduğunu adlandırmaz (ContentRepository lookup
+/// gerektirirdi, bu ekran onu almıyor); yalnız NE ZAMAN + NE OLDUĞU.
+String _lastSessionLine(PersistedSession s) {
+  final Duration age = DateTime.now().difference(s.completedAt);
+  final String when = age.inDays >= 2
+      ? '${age.inDays} days ago'
+      : age.inDays == 1
+          ? 'Yesterday'
+          : age.inHours >= 1
+              ? '${age.inHours}h ago'
+              : 'Earlier today';
+  if (s.sampleCount == 0) {
+    return '$when — nothing readable that time either.';
+  }
+  final int share = ((1 - s.outCount / s.sampleCount) * 100).round();
+  return '$when — inside the band for $share% of ${s.elapsedSeconds}s.';
+}
+
 /// Özet — "neyi ölçemedik" ZORUNLU ve EŞİT AĞIRLIKLI (§6/⑫).
 class ReviewScreenRoute extends StatelessWidget {
   const ReviewScreenRoute({
@@ -94,12 +114,23 @@ class ReviewScreenRoute extends StatelessWidget {
     required this.lesson,
     required this.hue,
     required this.summary,
+    this.previousSession,
   });
 
   final Discipline discipline;
   final Lesson lesson;
   final InstrumentHue hue;
   final SessionSummary summary;
+
+  /// D14 (2026-08-16, O-153): İLK oturumda `null` çözülür — bir öncekinin
+  /// YOKLUĞU, bilinmeyen bir değer DEĞİL, gerçek bir hâl (H-20 dersi:
+  /// bu iki durum ekranda AYRI çizilmeli, "0" ile "hiç yok" aynı kutuya
+  /// düşmemeli). H-45 (O-154): `Future` — bu ekran artık kendi depo
+  /// okumasını BEKLEMEDEN doğar (`live_screen.dart`), okuma bittiğinde
+  /// `FutureBuilder` kartı SONRADAN çizer; hata ile biterse kart hiç
+  /// çizilmez (çökme yok, yalnız sessiz eksiklik — kabul edilen sınır
+  /// aynı: geçmiş kartı SONUÇ yüzeyinin bir eklentisi, önkoşulu değil).
+  final Future<PersistedSession?>? previousSession;
 
   @override
   Widget build(BuildContext context) {
@@ -198,6 +229,48 @@ class ReviewScreenRoute extends StatelessWidget {
                   ],
                 ),
               ),
+              // D14/H-45 (2026-08-16, O-153/O-154): "son oturum" — İLK
+              // oturumda ve okuma henüz çözülmemişken/hata ile bitmişken
+              // hiç ÇİZİLMEZ (bir sayı değil bir kartın YOKLUĞU; H-20
+              // dersi: "hiç kayıt yok" ile "kayıt var, sıfır" aynı
+              // görünmemeli). `FutureBuilder`: bu kart SONUÇ yüzeyinin
+              // doğuşunu BEKLETMEZ, yalnız hazır olunca sonradan belirir.
+              if (previousSession != null)
+                FutureBuilder<PersistedSession?>(
+                  future: previousSession,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<PersistedSession?> snapshot) {
+                    final PersistedSession? prev = snapshot.data;
+                    if (prev == null) return const SizedBox.shrink();
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: 16),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: .55),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                                color: Colors.white.withValues(alpha: .7)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              kicker('Last session', color: hue.ink),
+                              const SizedBox(height: 6),
+                              Text(
+                                _lastSessionLine(prev),
+                                key: const Key('review-last-session-note'),
+                                style: hankenText(size: 13.5, height: 1.5),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               const SizedBox(height: 16),
               GlassCard(
                 child: Column(

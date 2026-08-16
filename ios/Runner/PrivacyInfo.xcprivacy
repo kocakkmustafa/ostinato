@@ -46,7 +46,15 @@
 	<!-- Ölçüldü: backend YOK (Supabase/API çağrısı 0), kamera işlemesi
 	     tamamen cihaz-üstü (validate_runtime_fetch.py, A9). D1'den beri ağ
 	     hiç yok (fontlar paketli) — bu alan zaten app'in kullanıcıdan
-	     TOPLAYIP GÖNDERDİĞİ veri türlerini sayardı, hiçbir zaman değişmedi. -->
+	     TOPLAYIP GÖNDERDİĞİ veri türlerini sayardı, hiçbir zaman değişmedi.
+
+	     D14 NOTU (2026-08-16, O-153): oturum sonuçları artık YEREL
+	     saklanıyor (`session_store.dart`) — ama bu alan YİNE boş kalıyor,
+	     BİLEREK: M-F-650 (Lissom emsali) — Apple'ın anlamında "collect" =
+	     cihazdan DIŞARI aktarmak, cihazda kalan veri toplanmış SAYILMAZ.
+	     Bu veri hiç ağa çıkmıyor; tripwire `test/flutter_test_config.dart`ın
+	     repo-geneli sıfır-ağ kapısı — O KAPI ÖTERSE bu alan YENİDEN
+	     DEĞERLENDİRİLMELİ, boş kalışı belgeye değil o kapıya dayanıyor. -->
 	<key>NSPrivacyCollectedDataTypes</key>
 	<array/>
 	<key>NSPrivacyAccessedAPITypes</key>
