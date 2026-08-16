@@ -616,6 +616,17 @@ DIAGNOSTIC_LINE = re.compile(
     r"\bassert\s*\(|\bthrow\b|\bStateError\s*\(|\bArgumentError\s*\(|"
     r"\bUnsupportedError\s*\(|\bException\s*\(")
 
+# ⚠️ DENETLENDİ (O-165, 2026-08-16 — orkestratörün `H-58`den yayılan
+# talebi): `re.IGNORECASE` burada GÜVENLİ — koordinatörün `grep -i`de
+# bulduğu Türkçe büyük/küçük harf katlama hatasının (İ/I/ı/i, Ç/Ş/Ğ/Ö/Ü
+# çiftleri ASCII katlamasında tanınmaz) AYNISI SANILMASIN. ÖLÇÜLDÜ,
+# VARSAYILMADI: `re.compile(r'İÇİN', re.IGNORECASE).search('için')` ve
+# tersi TUTAR — Python'un Unicode-farkında regex motoru `grep`in POSIX/C
+# yerelli katlamasından FARKLI bir mekanizma, aynı hataya sahip DEĞİL.
+# Bu dosyanın TEK gerçek Türkçe-katlama riski (`.lower()`, satır ~412/
+# ~1326) yalnız SABİT İNGİLİZCE kelime listeleri üzerinde çalışıyor
+# (retention-nesne adları, sayı-kelimeleri) — Türkçe metin O YOLDAN hiç
+# geçmiyor. Tam denetim: DEFTER O-165.
 TURKISH_WORDS = re.compile(
     r"\b(ve|ile|için|değil|yok|var|bu|şu|olan|bir|daha|çok|gibi|ama)\b",
     re.IGNORECASE)
