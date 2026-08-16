@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- D8 (2026-08-16, O-158): açılış zemini — ikonla AYNI lacivert
+         (`gen_final_assets.py`daki NAVY = #161C38 ile birebir). -->
+    <color name="launch_background">#161C38</color>
+</resources>

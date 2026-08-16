@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Modify this file to customize your launch splash screen -->
+<!-- D8 (2026-08-16, O-158): navy zemin + ortalanmış glif — `drawable/`
+     ile AYNI (v21 varyantının tek farkı `?android:colorBackground` yerine
+     `@color/launch_background` gibi bir referans DEĞİL — burada da AYNI
+     sabit renk, iki dosya arasında görsel fark OLMAMALI). -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="?android:colorBackground" />
-
-    <!-- You can insert your own image assets here -->
-    <!-- <item>
+    <item android:drawable="@color/launch_background" />
+    <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/launch_image" />
-    </item> -->
+            android:src="@drawable/launch_image" />
+    </item>
 </layer-list>
