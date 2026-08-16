@@ -37,7 +37,14 @@ const double kFold = 812.0;
 
 /// BEYAN: şeridin İLK kaleminin katlamadan aşağıdaki mesafesi (pt).
 /// ⚠️ Muafiyet değil KARAR NOKTASI — ölçümle ayrışırsa test öter.
-const double kDeclaredFirstItemBelowFold = 515.0;
+///
+/// D16 (2026-08-16, O-152): 515.0 → -240.0. Şerit `library_screen.dart`da
+/// "Your instruments"tan ÖNCEYE taşındı (koordinatör kararı, O-139/O-140
+/// ölçümü üstüne). Negatif değer katlamanın ÜSTÜNDE demek — üç kalemin
+/// EN UZAĞI bile artık -71pt (hâlâ üstte). Bu, testin kendi disiplininin
+/// ikinci yönünün uygulanışı: "sayı küçülürse düzeltme inmiş demektir ve
+/// test öter — beyanı tazele, iyileşme de bir olaydır."
+const double kDeclaredFirstItemBelowFold = -240.0;
 
 /// Yazı metrikleri sürüm/platformla birkaç pt oynayabilir; tolerans o kadar.
 /// **Yerleşim değişikliğini gizleyecek kadar geniş DEĞİL** (ölçülen fark

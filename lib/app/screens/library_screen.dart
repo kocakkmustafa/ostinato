@@ -124,6 +124,29 @@ class LibraryScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                // "START HERE" şeridi (DESIGN-AHEAD §1.2). Hangi ders olduğu
+                // BURADA YAZMIYOR — her çalgının `starterLessonId`'sinden
+                // çözülüyor (`library.json`, gerekçesi `_why_starter`da).
+                // Şeridi hiç çizmemek ile boş çizmek arasındaki fark kasıtlı:
+                // çözülemeyen kimlik yüzeyde SESSİZ kalır, kapı KIRMIZI verir.
+                //
+                // D16 (2026-08-16, O-139/O-140 ölçümü → koordinatör kararı):
+                // şerit BURAYA taşındı — eskiden "Your instruments"tan SONRA
+                // duruyordu ve katlamadan 515-684pt aşağıdaydı (375×812).
+                // Yönlendirme, yönlendirdiği seçimin ALTINDAYSA kullanıcı onu
+                // ancak yardım etmesi gereken kararı verdikten SONRA görür —
+                // artık intro kartından hemen sonra, katlama ÜSTÜNDE.
+                // `test/library_fold_test.dart` yeni konumu ölçüp beyanla
+                // karşılaştırır; bu yorum yerleşimi AÇIKLAR, KORUMAZ.
+                if (starters.isNotEmpty) ...<Widget>[
+                  const SizedBox(height: 22),
+                  kicker('Start here'),
+                  const SizedBox(height: 11),
+                  for (final (Discipline d, Lesson l) in starters) ...<Widget>[
+                    _StarterRow(discipline: d, lesson: l),
+                    const SizedBox(height: 9),
+                  ],
+                ],
                 const SizedBox(height: 22),
                 kicker('Your instruments'),
                 const SizedBox(height: 11),
@@ -149,20 +172,6 @@ class LibraryScreen extends StatelessWidget {
                   style: hankenText(
                       size: 12, height: 1.5, color: OstinatoColors.textMuted),
                 ),
-                // "START HERE" şeridi (DESIGN-AHEAD §1.2). Hangi ders olduğu
-                // BURADA YAZMIYOR — her çalgının `starterLessonId`'sinden
-                // çözülüyor (`library.json`, gerekçesi `_why_starter`da).
-                // Şeridi hiç çizmemek ile boş çizmek arasındaki fark kasıtlı:
-                // çözülemeyen kimlik yüzeyde SESSİZ kalır, kapı KIRMIZI verir.
-                if (starters.isNotEmpty) ...<Widget>[
-                  const SizedBox(height: 22),
-                  kicker('Start here'),
-                  const SizedBox(height: 11),
-                  for (final (Discipline d, Lesson l) in starters) ...<Widget>[
-                    _StarterRow(discipline: d, lesson: l),
-                    const SizedBox(height: 9),
-                  ],
-                ],
               ],
             ),
           ),
