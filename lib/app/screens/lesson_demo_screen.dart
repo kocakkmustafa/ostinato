@@ -164,6 +164,12 @@ class LessonDemoScreenRoute extends StatelessWidget {
                         'only trunk posture measures live today. The text '
                         'above is real; the live number is not, so we are '
                         'not showing one.',
+                        // H-44 (2026-08-16): İNECEK KALEM — dirsek/önkol
+                        // açısı CANLI ölçüme eklenirse (kart hâlâ elbow'u
+                        // GEREKÇELİ dar bırakabilir — bkz. guitar instrument
+                        // ekranındaki öğretmen-varyansı notu, "style not
+                        // error" — ama o zaman bu cümle "not wired" değil
+                        // "not graded" demeli). O gün ADIYLA güncellenmeli.
                         key: const Key('demo-live-gap-note'),
                         style: hankenText(
                             size: 12.5, color: OstinatoColors.textMuted),

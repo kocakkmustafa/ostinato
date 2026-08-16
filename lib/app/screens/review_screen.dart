@@ -287,6 +287,10 @@ class ReviewScreenRoute extends StatelessWidget {
                   'Sharing a skeleton-render report is not wired in this '
                   'build. Raw video never leaves this device either way — '
                   'there is simply no report to send.',
+                  // H-44 (2026-08-16): İNECEK KALEM — bir paylaşım/dışa
+                  // aktarma yolu (skeleton-render'ı PNG/PDF olarak
+                  // biriktirip göndermek) inşa edilirse bu cümle YALAN olur.
+                  // O gün bu metin ADIYLA güncellenmeli, sessizce bırakılmaz.
                   key: const Key('review-sharing-gap-note'),
                   style: hankenText(size: 12.5, color: OstinatoColors.textMuted),
                 ),
