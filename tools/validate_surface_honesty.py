@@ -47,6 +47,18 @@ from pathlib import Path
 # ── A: vaat dili ────────────────────────────────────────────────────────────
 # Her biri bir ZAMAN taahhüdü ima eder. "Neden yok" dürüstlüktür; "yakında
 # gelecek" vaattir — gerekçenin varlığı vaadi affetmez (M-F-186).
+#
+# ⚠️ KAPSAM BEYANI (H-58, 2026-08-16 — orkestratör hükmü, kapatmaya
+# ÇALIŞILMADI): bu liste KELİME eşleştirir, ANLAM değil. "still waiting on
+# that same measurement before they open" (Gravita'nın listing.json'u)
+# hiçbir kelimeyi taşımadan `M-F-186`nın taşıdığı ZAMAN-TAAHHÜDÜ anlamını
+# taşıyabilir — ve bu liste onu YAKALAMAZ, yakalayamaz. `H-50 ③`ün ayna
+# yüzü: bir kapı yalnızca masum bir cümleyi yanlış cezalandırmakla kalmaz
+# (`O-155`in "never stored"u), tam bu yüzden suçlu bir cümleyi de
+# kaçırabilir — ikisi aynı kökten, kapı KELİMEYİ görür, insan ANLAMI kurar.
+# Anlamı regex'lemek bu deliği KAPATMAZ, kapatılmış GÖSTERİR — ki bu
+# deliğin kendisinden kötüdür (`H-23`). Bu yüzden liste GENİŞLETİLMEDİ;
+# yalnız sınırı adıyla yazıldı.
 PROMISE_PATTERNS = [
     (r"\byet\b", "yet"),
     (r"\bcoming soon\b", "coming soon"),
