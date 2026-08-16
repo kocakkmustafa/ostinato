@@ -1,0 +1,9 @@
+# D20 (2026-08-16, O-159) — ŞABLON, sır TAŞIMAZ. Gerçek `key.properties`
+# bu dosyanın YANINA (android/key.properties) oluşturulur ve İZLENMEZ
+# (.gitignore). Keystore'un kendisi orkestratör kalemi (D5), yeri
+# ~/.secrets/yula/motion/ostinato-upload.jks olacak — storeFile o mutlak
+# yolu (ya da bu dizine göreli bir sembolik bağlantıyı) gösterebilir.
+storePassword=REPLACE_ME
+keyPassword=REPLACE_ME
+keyAlias=upload
+storeFile=/Users/mustafakaankocak/.secrets/yula/motion/ostinato-upload.jks

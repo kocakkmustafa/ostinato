@@ -20,3 +20,12 @@ assets/models/*.task
 # ".mutA-log 2.jsonl" düz desene uymuyordu ve her çakışmada ağacı kirletiyordu;
 # kalıcı bir yanlış-pozitif, GERÇEK bir kirlenmenin sinyalini köreltir).
 .mutA-log*.jsonl
+
+# D20 (2026-08-16, O-159): Android release imza SIRLARI — CLAUDE.md kuralı
+# "sırlar ~/.secrets/yula/ veya ~/.appstoreconnect/, asla workspace'e".
+# `key.properties.example` İZLENİR (şablon, sır TAŞIMAZ); gerçek dosya
+# İZLENMEZ. `*.jks`/`*.keystore`: keystore'un KENDİSİ hiçbir zaman repoya
+# girmemeli — üretici orkestratör (D5), yeri `~/.secrets/yula/motion/`.
+android/key.properties
+*.jks
+*.keystore
