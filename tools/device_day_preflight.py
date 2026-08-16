@@ -31,11 +31,24 @@ def run(cmd: list[str]) -> str:
     return subprocess.run(cmd, capture_output=True, text=True).stdout
 
 
-def find_ostinato_profile() -> dict | None:
-    """`ProvisionedDevices`/`ExpirationDate` gibi alanları taşıyan, BUGÜN
-    Ostinato'ya ait profili bulur — dosya adına (UUID, KOŞUM-BAĞIMLI,
-    profil yenilendikçe değişir) değil, İÇERİĞE göre arar."""
-    best = None
+def find_ostinato_profile() -> tuple[dict | None, list[dict]]:
+    """`ProvisionedDevices` alanını TAŞIYAN (cihaza doğrudan kurulum için
+    kullanılabilir — Development/Ad Hoc), BUGÜN Ostinato'ya ait profili
+    bulur — dosya adına (UUID, KOŞUM-BAĞIMLI, profil yenilendikçe değişir)
+    değil, İÇERİĞE göre arar.
+
+    ⚠️ 2026-08-16 ölçülen hata (orkestratör + Gravita): salt "en yeni
+    CreationDate" kuralı bir Store dağıtım profilini seçebilir — o
+    profilin `ProvisionedDevices`i TASARIM GEREĞİ boştur (App Store
+    derlemesi her cihaza gider), ve seçilirse "cihaz profilde YOK" diye
+    YANLIŞ ALARM verir; bir Store profili ne kadar yeni olursa olsun
+    cihaza doğrudan kurulum için KATEGORİK OLARAK kullanılamaz. Aday
+    kümesi önce `ProvisionedDevices` TAŞIYANLARA daraltılır, yalnız
+    SONRA en yeni seçilir. Cihaz-kapsamlı profil hiç yoksa (yalnız
+    Store-tipi varsa) bu ayrı ve daha kötü bir durum — çağıran bunu
+    `all_matches` üzerinden ayırt eder, sessizce "profil yok"a düşmez.
+    """
+    all_matches: list[dict] = []
     for d in PROFILE_DIRS:
         if not d.exists():
             continue
@@ -51,10 +64,15 @@ def find_ostinato_profile() -> dict | None:
             appid = doc.get("Entitlements", {}).get("application-identifier", "")
             if appid != f"{TEAM_ID}.{APP_ID}":
                 continue
-            if best is None or doc.get("CreationDate", "") > best.get("CreationDate", ""):
-                best = doc
-                best["_file"] = str(f)
-    return best
+            doc["_file"] = str(f)
+            all_matches.append(doc)
+
+    device_scoped = [d for d in all_matches if d.get("ProvisionedDevices")]
+    best = None
+    for doc in device_scoped:
+        if best is None or doc.get("CreationDate", "") > best.get("CreationDate", ""):
+            best = doc
+    return best, all_matches
 
 
 def connected_devices() -> list[dict]:
@@ -107,11 +125,20 @@ def main() -> int:
     else:
         ok.append(f"[imza] {len(idents)} geçerli codesign kimliği bulundu.")
 
-    profile = find_ostinato_profile()
-    if profile is None:
+    profile, all_matches = find_ostinato_profile()
+    if profile is None and not all_matches:
         problems.append(f"[profil] `{APP_ID}` için HİÇBİR provisioning profili "
                          f"bulunamadı — `xcodebuild -allowProvisioningUpdates` "
                          f"koşulmalı (Automatic signing profili kendi üretir).")
+    elif profile is None:
+        names = ", ".join(f"{m.get('Name', '?')}" for m in all_matches)
+        problems.append(
+            f"[profil] `{APP_ID}` için {len(all_matches)} profil bulundu ama "
+            f"HİÇBİRİ `ProvisionedDevices` taşımıyor (hepsi Store/dağıtım "
+            f"tipi — ne kadar yeni olursa olsun cihaza doğrudan kurulum için "
+            f"KATEGORİK OLARAK kullanılamaz): {names}. Development/Ad Hoc "
+            f"profili YOK — `xcodebuild -allowProvisioningUpdates` Debug ya "
+            f"da Release (Development imzalı) konfigürasyonla koşulmalı.")
     else:
         exp = profile.get("ExpirationDate")
         ok.append(f"[profil] bulundu: {profile.get('Name')} "
