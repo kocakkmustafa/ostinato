@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
@@ -19,7 +18,6 @@ import 'package:ostinato/main.dart';
 /// TÜRÜYOR yoksa elle mi yazılmış.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  GoogleFonts.config.allowRuntimeFetching = false;
 
   late ContentRepository repo;
   late CueTextResolver cueText;
@@ -51,10 +49,11 @@ void main() {
   /// Kabuğu AÇ — `OstinatoHome` HAZIR bağımlılıklarla pump edilir.
   ///
   /// `OstinatoApp`i pump etmiyoruz: onun `FutureBuilder`ı `rootBundle`dan
-  /// gerçek async okur, o da `runAsync` gerektirir, o da `google_fonts`un
-  /// kaçınılmaz test hatasını testi düşüren bir bölgeye taşır (bkz.
-  /// `OstinatoHome` üstündeki şerh). Dallanma o yüzden ayrıldı; burada bu
-  /// kod tabanının geri kalanıyla AYNI desenle sınanıyor.
+  /// gerçek async okur, o da `runAsync` gerektirir. **D1 NOTU (2026-08-16):**
+  /// bu ayrımın eski gerekçesinin bir yarısı (`google_fonts`un test-hatası
+  /// `runAsync` penceresine taşması) fontlar paketlenince ORTADAN KALKTI —
+  /// ama `rootBundle` async'i hâlâ gerçek, ayrım o yüzden BOZULMADI. Dallanma
+  /// burada bu kod tabanının geri kalanıyla AYNI desenle sınanıyor.
   Future<void> boot(WidgetTester t, OnboardingStore store,
       {bool alreadyOnboarded = false}) async {
     await t.pumpWidget(ContentRepositoryScope(

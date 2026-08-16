@@ -5,7 +5,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
@@ -74,31 +73,15 @@ import 'package:ostinato_posture/ostinato_posture.dart';
 /// KONTROL EDEN deterministik yol), rastgele bir ana güvenilmiyor.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  GoogleFonts.config.allowRuntimeFetching = false;
 
-  // KÖK NEDEN BULUNDU VE DÜZELTİLDİ (JabLab'ın bulgusu, koordinatör
-  // aktarımı 2026-08-07 — bkz. `flutter_test_config.dart`, bu dosyayla
-  // AYNI dizinde). Ostinato'nun kendi 2026-08-06 turundaki üç deneme kök
-  // nedeni EKSİK teşhis etmişti: sorun "test ortamı ağa ulaşamıyor"
-  // DEĞİLDİ — `TestWidgetsFlutterBinding`in kurduğu `HttpOverrides.global`
-  // HER isteği kasıtlı 400'e zorluyordu, `allowRuntimeFetching=true`
-  // denemesi bu yüzden hata BİÇİMİNİ değiştirdi ama gidermedi.
-  // `flutter_test_config.dart` gerçek testler başlamadan ÖNCE bir
-  // ön-ısınma penceresinde `HttpOverrides`i geçici açıyor + `path_provider`
-  // kanalını sahte bir uygulamayla değiştiriyor, ihtiyaç duyulan üç ağırlığı
-  // (hankenGrotesk w400/w500/w600, ibmPlexMono w500) indirip
-  // `google_fonts`un bellek-içi önbelleğine yazıyor, SONRA ikisini de eski
-  // hâline döndürüyor — testler standart sandbox'ta koşmaya devam ediyor,
-  // kalıcı bir ağ bağımlılığı EKLENMEDİ. Sonuç ÖLÇÜLDÜ: PNG'ler artık
-  // gerçek Hanken Grotesk/IBM Plex Mono glifleriyle çiziliyor (blok değil),
-  // 6 test 4.3sn'de sıfır istisnayla geçiyor.
-  //
-  // `allowRuntimeFetching=false` + aşağıdaki `expectOnlyFontException`
-  // BİLEREK KORUNUYOR — artık bir istisnayı SUSTURMAK için değil, GELECEK
-  // bir ekran değişikliğinin ön-ısınma listesine girmemiş yeni bir
-  // ağırlık/aile eklemesini SESSİZCE yeni bir ağ isteğine düşürmek yerine
-  // AÇIKÇA patlatmak için (fail-closed kanarya). Normal koşuda bu yardımcı
-  // artık HİÇBİR istisna bulmuyor — sıfır-istisna yolu zaten destekli.
+  // D1 NOTU (2026-08-16, O-149): bu dosya `google_fonts`un ağa-çıkan
+  // ön-ısınmasını yöneten karmaşık bir kurulum taşıyordu (`HttpOverrides` +
+  // sahte `path_provider` + fail-closed `allowRuntimeFetching` kanaryası) —
+  // fontlar artık PAKETLİ, `flutter test` bunları `pubspec.yaml`ın `fonts:`
+  // bölümünden senkron yükler, ağ/async ön-ısınma YOK. Eski mekanizma
+  // tamamen kaldırıldı (`flutter_test_config.dart` da sadeleşti). PNG'ler
+  // hâlâ gerçek Hanken Grotesk/IBM Plex Mono glifleriyle çiziliyor —
+  // kaynak değişti, sonuç değişmedi.
   //
   // Dosya hâlâ BİLEREK `test/` dışında yaşıyor — `flutter test`in varsayılan
   // süpürmesine (dolayısıyla `run_gates.sh`a) hiç girmiyor, yalnız açıkça
@@ -182,29 +165,6 @@ void main() {
     File('docs/evidence/$filename').writeAsStringSync(lines.join('\n'));
   }
 
-  /// FAIL-CLOSED KANARYA (bkz. dosya başı notu) — `flutter_test_config.dart`
-  /// ön-ısınmasından sonra normal koşuda BURADA hiçbir istisna beklenmiyor
-  /// (sıfır-istisna: `takeException()` ilk çağrıda `null` döner, döngü
-  /// hemen çıkar). Yalnız bir ekran YENİ bir google_fonts ağırlığı/ailesi
-  /// kullanmaya başlar da ön-ısınma listesine eklenmeyi UNUTULURSA devreye
-  /// girer: `allowRuntimeFetching=false` o çağrıyı sessiz bir ağ isteğine
-  /// değil AÇIK bir istisnaya düşürür, bu yardımcı YALNIZ o tanıdık
-  /// istisnayı drain eder — başka bir istisna çıkarsa test BAŞARISIZ olur,
-  /// sahte bir "temiz" geçiş üretmiyoruz.
-  Future<void> expectOnlyFontException(WidgetTester t) async {
-    // Font-yükleme reddi GERÇEK event-loop'ta olur (bkz. `capture`'daki
-    // runAsync notu) — boş bir `runAsync` burada AYNI gerçek-zaman
-    // penceresini açıp reddi `capture()`dan ÖNCE, burada yakalanabilir
-    // hâle getiriyor.
-    await t.runAsync(() async {});
-    while (true) {
-      final Object? e = t.takeException();
-      if (e == null) return;
-      expect(e.toString(), contains('allowRuntimeFetching'),
-          reason: 'beklenmeyen istisna: $e');
-    }
-  }
-
   Discipline guitar() =>
       repo.disciplines.firstWhere((Discipline d) => d.id == 'guitar');
 
@@ -216,7 +176,6 @@ void main() {
     await t.pumpWidget(harness(LessonDemoScreenRoute(
         discipline: d, lesson: l, hue: InstrumentHues.guitar)));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '01-demo-lesson-guitar.png');
     dumpText(t, '01-demo-lesson-guitar.txt');
   });
@@ -229,7 +188,6 @@ void main() {
     await t.pumpWidget(harness(LessonScoredScreenRoute(
         discipline: d, lesson: l, hue: InstrumentHues.guitar)));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '02-scored-lesson-guitar-posture.png');
     dumpText(t, '02-scored-lesson-guitar-posture.txt');
   });
@@ -261,7 +219,6 @@ void main() {
     for (int i = 0; i < 4; i++) {
       await t.pump(const Duration(milliseconds: 180));
     }
-    await expectOnlyFontException(t);
     await capture(t, '04a-live-measuring-inband.png');
     dumpText(t, '04a-live-measuring-inband.txt');
     await src.dispose();
@@ -294,7 +251,6 @@ void main() {
     }
     expect(find.byKey(const Key('observation-cue')), findsOneWidget,
         reason: 'proven tick aralığında işaret yok — senaryo kaydı bozuldu');
-    await expectOnlyFontException(t);
     await capture(t, '04b-live-observation-cue.png');
     dumpText(t, '04b-live-observation-cue.txt');
     await src.dispose();
@@ -321,7 +277,6 @@ void main() {
       summary: summary,
     )));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '05-review.png');
     dumpText(t, '05-review.txt');
   });
@@ -329,7 +284,6 @@ void main() {
   testWidgets('06 — Settings', (WidgetTester t) async {
     await t.pumpWidget(harness(const SettingsScreen()));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '06-settings.png');
     dumpText(t, '06-settings.txt');
   });
@@ -355,7 +309,6 @@ void main() {
       await t.pump();
       await t.pump(const Duration(milliseconds: 400));
     }
-    await expectOnlyFontException(t);
   }
 
   testWidgets('07 — Karşılama 1/3 (bant kaması + "Measured, not chosen.")',
@@ -391,7 +344,6 @@ void main() {
     await t.pumpWidget(harness(LessonLockedScreenRoute(
         discipline: d, lesson: l, hue: InstrumentHues.guitar)));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '10-locked-lesson-chords-beyond-eight.png');
     dumpText(t, '10-locked-lesson-chords-beyond-eight.txt');
   });
@@ -400,7 +352,6 @@ void main() {
       (WidgetTester t) async {
     await t.pumpWidget(harness(LibraryScreen(repo: repo, cueText: cueText)));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '11-library-shared-band-scale.png');
     dumpText(t, '11-library-shared-band-scale.txt');
   });
@@ -413,7 +364,6 @@ void main() {
       (WidgetTester t) async {
     await t.pumpWidget(harness(InstrumentScreenRoute(discipline: guitar())));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '12-instrument-honesty-box.png');
     dumpText(t, '12-instrument-honesty-box.txt');
   });
@@ -424,7 +374,6 @@ void main() {
     await t.pumpWidget(harness(
         CourseScreenRoute(discipline: d, course: d.courses.first)));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '13-course-lesson-list.png');
     dumpText(t, '13-course-lesson-list.txt');
   });
@@ -444,7 +393,6 @@ void main() {
           history: <double>[]),
     )));
     await t.pump();
-    await expectOnlyFontException(t);
     await capture(t, '14-review-nothing-readable.png');
     dumpText(t, '14-review-nothing-readable.txt');
   });

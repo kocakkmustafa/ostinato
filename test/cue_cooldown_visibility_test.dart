@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
@@ -14,7 +13,6 @@ import 'package:ostinato_posture/ostinato_posture.dart';
 /// → ikinci ateşleme, tek testte, fake-async'te <1sn'de.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  GoogleFonts.config.allowRuntimeFetching = false;
 
   late ContentRepository repo;
   late CueTextResolver cueText;

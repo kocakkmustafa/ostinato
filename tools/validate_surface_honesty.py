@@ -1173,14 +1173,21 @@ def selftest() -> int:
                     "kapsam satırı 'taranıyor' derken sıfır tarar (O-058)")
     # Gravita bulgusu (2026-08-11): Kural J bir ara yalnız pubspec.yaml
     # okuyordu, transitif bağımlılıklar (yalnız pubspec.lock'ta görünenler)
-    # kör noktaydı. `http` GERÇEKTEN transitif (google_fonts altında) ve
-    # yaml'da HİÇ geçmiyor — canlı kanıt olarak kullanılır: kapı pubspec.lock'u
-    # gerçekten okumuyorsa bu kontrol hiç görmez ve regresyon sessiz kalır.
+    # kör noktaydı. Kanıt olarak `http`/`google_fonts` kullanılıyordu — CANLI
+    # kanıt DEĞİL artık: D1 (2026-08-16, O-149) ikisini de `pubspec.lock`tan
+    # düşürdü (fontlar paketlendi). ⚠️ ÖLÇÜLDÜ: gerçek dosyaya bağlı bu kontrol
+    # D1 SONRASI kendi kendine öttü — O-116 ilkesinin ihlaliydi (dedektör
+    # BUGÜNÜN durumuna bağımlıydı, kendi ÖZELLİĞİNE değil). SENTETİK metne
+    # çevrildi: `NETWORK_DEP_HINTS`in kendisini sınar, bugünkü ağaçtan bağımsız.
+    _synthetic_lock = "  http:\n    dependency: transitive\n  meta:\n    dependency: transitive\n"
+    if not NETWORK_DEP_HINTS.search(_synthetic_lock):
+        dead.append("NETWORK_DEP_HINTS sentetik lock metninde 'http'i "
+                    "yakalamıyor — desenin kendisi bozuk")
     lock_text = Path("pubspec.lock").read_text(encoding="utf-8")
-    if not NETWORK_DEP_HINTS.search(lock_text):
-        dead.append("pubspec.lock hiçbir ağ-bağımlılığı ipucuyla eşleşmiyor — "
-                    "kural yalnız yaml'a mı döndü? (Gravita'nın transitif "
-                    "bulgusu, http/google_fonts)")
+    if NETWORK_DEP_HINTS.search(lock_text):
+        dead.append("BUGÜNKÜ pubspec.lock bir ağ-bağımlılığı ipucuyla "
+                    "eşleşiyor — D1 sonrası beklenen SIFIR isabetti "
+                    "(olumsuz ikiz başarısız, adıyla: hangi paket?)")
     if "http" not in NETWORK_DEPS_RECORDED:
         dead.append("NETWORK_DEPS_RECORDED'da 'http' yok — transitif kayıt "
                     "geri alınmış olabilir")

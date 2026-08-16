@@ -51,12 +51,6 @@ dependencies:
 
   permission_handler: ^12.0.3
 
-  # Tasarım paneli tipografisi (Hanken Grotesk + IBM Plex Mono) — DESIGN-PANEL-
-  # PROMPT.md §1. Dosya font gömmez; ilk açılışta indirir ve cihazda önbelleğe
-  # alır (yazı tipi statik varlıktır, "ham video cihazdan çıkmaz" kuralının
-  # kapsamındaki kullanıcı verisi DEĞİL).
-  google_fonts: ^6.2.1
-
   # YALNIZ poz modelini uygulama-özel bir dosyaya yazmak için (plugin bundle
   # değil YOL ister) — depolama BİÇİMİ yok, kablolama katmanında kalıyor.
   path_provider: ^2.1.0
@@ -76,12 +70,6 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
 
-  # tools/evidence/flutter_test_config.dart'ın google_fonts ön-ısınması için —
-  # TRANSITIVE bağımlılıktı (path_provider üzerinden), doğrudan import
-  # edildiği için burada AÇIKÇA listelendi (depend_on_referenced_packages).
-  # JabLab'ın AYNI kök-nedenle bulduğu AYNI çözüm (2026-08-07).
-  path_provider_platform_interface: ^2.1.2
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -97,8 +85,32 @@ flutter:
     # ve validate_library kapıları). Kabuk sayı taşımaz, okur.
     - assets/config/posture-contract.json
     - assets/content/library.json
+    # OFL lisans metinleri — paketlenmiş font DOSYALARIYLA BİRLİKTE dağıtılmak
+    # OFL §2'nin şartı (D1, H-34/H-40 bağı: google_fonts kalktı, yazı tipleri
+    # artık gömülü — lisans de gömülü olmalı).
+    - assets/fonts/OFL-HankenGrotesk.txt
+    - assets/fonts/OFL-IBMPlexMono.txt
     - config/observation-cue-templates.golden.json
     - assets/models/pose_landmarker_full.v1.task
+
+  # D1 (2026-08-16, O-149): google_fonts + iki transitif vasıtası (http,
+  # http_parser) kalktı; yazı yüzleri artık PAKETLİ. Ağırlıklar ÖLÇÜLEN
+  # kullanımla birebir (grep -rohn 'FontWeight\.w[0-9]+' lib/ +
+  # tools/evidence/flutter_test_config.dart'ın eski ön-ısınma listesi):
+  # Hanken Grotesk {400, 500, 600} · IBM Plex Mono {500 tek}.
+  fonts:
+    - family: Hanken Grotesk
+      fonts:
+        - asset: assets/fonts/HankenGrotesk-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/HankenGrotesk-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/HankenGrotesk-SemiBold.ttf
+          weight: 600
+    - family: IBM Plex Mono
+      fonts:
+        - asset: assets/fonts/IBMPlexMono-Medium.ttf
+          weight: 500
 
   # To add assets to your application, add an assets section, like this:
   # assets:

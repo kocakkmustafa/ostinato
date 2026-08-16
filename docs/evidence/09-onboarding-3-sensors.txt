@@ -1,7 +1,7 @@
 SENSORS AND YOUR DATA
 What we will ask for.
 THE CAMERA
-It reads nine upper-body points — hips, shoulders, neck. No face: our teacher references were filmed waist-up, so we have nothing to compare a head against. Ostinato asks for camera access when your first setup check starts, not now, because there is nothing to look at until then.
+It reads your two shoulders and your two hips, and from them measures one thing: how far your trunk leans. No face — nothing above your shoulders is read at all: our teacher references were filmed waist-up, so we have nothing to compare a head against. Ostinato asks for camera access when your first setup check starts, not now, because there is nothing to look at until then.
 NOT A MEDICAL TOOL
 Ostinato describes how you are sitting compared to a set of teachers. It does not diagnose anything and nothing it says is health advice. If something hurts, that is a question for a person, not an app.
 THE MICROPHONE IS NOT WIRED
@@ -12,7 +12,7 @@ Open the library
 [RichText] SENSORS AND YOUR DATA
 [RichText] What we will ask for.
 [RichText] THE CAMERA
-[RichText] It reads nine upper-body points — hips, shoulders, neck. No face: our teacher references were filmed waist-up, so we have nothing to compare a head against. Ostinato asks for camera access when your first setup check starts, not now, because there is nothing to look at until then.
+[RichText] It reads your two shoulders and your two hips, and from them measures one thing: how far your trunk leans. No face — nothing above your shoulders is read at all: our teacher references were filmed waist-up, so we have nothing to compare a head against. Ostinato asks for camera access when your first setup check starts, not now, because there is nothing to look at until then.
 [RichText] NOT A MEDICAL TOOL
 [RichText] Ostinato describes how you are sitting compared to a set of teachers. It does not diagnose anything and nothing it says is health advice. If something hurts, that is a question for a person, not an app.
 [RichText] THE MICROPHONE IS NOT WIRED

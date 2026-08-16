@@ -29,26 +29,24 @@
 	birleştirir; bu bağımsız doğrulanmadı — varsayım değil, adıyla
 	bırakılan bir ölçüm sınırı.
 
-	AĞ (H-34/L-288: kendi kodunda ağ olmaması, üründe ağ olmaması demek
-	değildir): `google_fonts` bağımlılığı (Hanken Grotesk + IBM Plex
-	Mono) ilk açılışta Google'ın font CDN'inden dosya indiriyor
-	(pubspec.yaml:55 — "dosya font gömmez; ilk açılışta indirir",
-	`allowRuntimeFetching` üretimde kapatılmadı, gömülü font YOK). Bu
-	KULLANICI VERİSİ göndermiyor — genel bir ağ soketi, Required-Reason
-	API kategorisi DEĞİL, indirilen şey kamu font dosyası. Ama "sıfır"
-	bu ağ etkinliğini gizlemesin diye adıyla yazılıyor. D1 (fontlar
-	PAKETLENİR) inince bu satır kalkar ve manifest YENİDEN ÖLÇÜLÜR —
-	bağ H-34'te ilan edildi, plan dosyasında değil.
+	AĞ — DÜZELTİLDİ (H-40, 2026-08-16, D1/O-149): bu paragraf `google_fonts`un
+	ilk açılışta Google CDN'inden font indirdiğini söylüyordu — D1 fontları
+	PAKETLEDİ (`assets/fonts/`, `google_fonts` + iki transitif vasıtası
+	`pubspec.lock`tan düştü, `flutter pub get` çıktısıyla doğrulandı) ve o
+	ağ etkinliği artık YOK. `H-40`'ın kendi ayrımı burada geçerli: bu bir
+	required-reason GİRDİSİ değildi (o hâlâ yasak, tek elden yapılacak),
+	yalnız bir AĞ olgusuydu — olgu değişince cümle bayatladı, düzeltildi.
+	Repo-geneli `test/flutter_test_config.dart` artık her test koşumunda
+	SIFIR ağ bağlantısını ZORUNLU kılıyor (kalıcı regresyon kapısı).
 	-->
 	<key>NSPrivacyTracking</key>
 	<false/>
 	<key>NSPrivacyTrackingDomains</key>
 	<array/>
 	<!-- Ölçüldü: backend YOK (Supabase/API çağrısı 0), kamera işlemesi
-	     tamamen cihaz-üstü (validate_runtime_fetch.py, A9). google_fonts
-	     CDN indirmesi burada SAYILMAZ: bu alan app'in kullanıcıdan TOPLAYIP
-	     GÖNDERDİĞİ veri türlerini sayar — bir kamu font dosyası indirmek,
-	     kullanıcı verisi göndermek değildir. -->
+	     tamamen cihaz-üstü (validate_runtime_fetch.py, A9). D1'den beri ağ
+	     hiç yok (fontlar paketli) — bu alan zaten app'in kullanıcıdan
+	     TOPLAYIP GÖNDERDİĞİ veri türlerini sayardı, hiçbir zaman değişmedi. -->
 	<key>NSPrivacyCollectedDataTypes</key>
 	<array/>
 	<key>NSPrivacyAccessedAPITypes</key>

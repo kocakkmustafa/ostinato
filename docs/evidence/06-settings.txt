@@ -1,7 +1,7 @@
 ‹
 Settings
 CAMERA
-It runs on your phone and reads nine upper-body points, and only inside a lesson. Nothing is uploaded and nothing is stored: the angles exist while the lesson is running and are gone when you leave it. There is no history here to browse, and none to delete.
+It runs on your phone and reads your two shoulders and your two hips, and only inside a lesson. From those it measures one thing: how far your trunk leans. Nothing is uploaded and nothing is stored: that angle exists while the lesson is running and is gone when you leave it. There is no history here to browse, and none to delete.
 MICROPHONE — NOT WIRED IN THIS BUILD
 No audio permission is requested and nothing you play is captured. The chord and note-attack work the lessons describe was measured on recordings, not in your room. Until an input is wired, every judgement this app makes comes from the camera.
 SHARING
@@ -11,7 +11,7 @@ Three instruments are live: guitar, voice, piano. Every posture reference is bui
 [RichText] ‹
 [RichText] Settings
 [RichText] CAMERA
-[RichText] It runs on your phone and reads nine upper-body points, and only inside a lesson. Nothing is uploaded and nothing is stored: the angles exist while the lesson is running and are gone when you leave it. There is no history here to browse, and none to delete.
+[RichText] It runs on your phone and reads your two shoulders and your two hips, and only inside a lesson. From those it measures one thing: how far your trunk leans. Nothing is uploaded and nothing is stored: that angle exists while the lesson is running and is gone when you leave it. There is no history here to browse, and none to delete.
 [RichText] MICROPHONE — NOT WIRED IN THIS BUILD
 [RichText] No audio permission is requested and nothing you play is captured. The chord and note-attack work the lessons describe was measured on recordings, not in your room. Until an input is wired, every judgement this app makes comes from the camera.
 [RichText] SHARING

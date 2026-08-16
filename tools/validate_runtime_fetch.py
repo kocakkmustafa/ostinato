@@ -48,53 +48,40 @@ FETCH_DISABLED = re.compile(r"allowRuntimeFetching\s*=\s*false")
 # ⚠️ Bu bir MUAFİYET değil, KARAR NOKTASI. Sayılar ölçümle ayrışırsa kapı
 # öter ve kaydın tazelenmesi gerekir; kayıt kendi kanıtı değildir.
 DECLARED = {
-    "productionFetchesAtRuntime": True,
-    "productionFontApiCalls": 3,
+    "productionFetchesAtRuntime": False,
+    "productionFontApiCalls": 0,
     "productionFetchDisabled": False,
-    "bundledFontAssets": 0,
-    # 8 → 9 (2026-08-13, O-117): `test/library_starters_test.dart` eklendi ve
-    # o da çekmeyi kapatıyor. Sayı ELLE yükseltilmedi — kapı ötttüğü için
-    # tazelendi, ki beyan-ölçüm ayrışması tam bunun için tasarlanmış karar
-    # noktasıydı (O-116, ② sınıfı). ⚠️ ASİMETRİ BÜYÜDÜ, adıyla: üretim hâlâ
-    # çekiyor, testlerin HEPSİ kapatıyor ⇒ hiçbir test bu davranışı GÖREMEZ.
-    #
-    # 9 → 10 (2026-08-13, O-122): `test/full_flow_test.dart` (A1 tam akış)
-    # eklendi, o da kapatıyor. ⭐ Kapı yine ÖNCE öttü, beyan SONRA tazelendi —
-    # ve bu sıra kapının değeridir: yeni bir test dosyası eklemek asimetriyi
-    # BÜYÜTEN bir edimdir, ve büyüdüğünü kimse söylemezse fark edilmez.
-    # ⚠️ Asimetri artık 10/10: kurucu kararı (font gömme ↔ çevrimdışı ilk
-    # açılış) beklerken, A1 akışını GERÇEK ürün davranışıyla koşan tek yer
-    # simülatör/cihazdır — hiçbir test değil.
-    #
-    # 10 → 11 (2026-08-14, O-140): `test/library_fold_test.dart` eklendi
-    # (START HERE şeridinin katlama mesafesini ölçen kapı) ve o da çekmeyi
-    # kapatıyor. ⭐ **ÜÇÜNCÜ VAKA, ve kapı yine ÖNCE öttü:** beyanı elle
-    # yükseltmedim, commit kancasında kırmızı verdi ve tazelemeye zorladı.
-    # Bu sıra kapının değeridir — *asimetriyi büyüten edim, büyüdüğünü kimse
-    # söylemezse fark edilmez.*
-    # ⚠️ ASİMETRİ ARTIK **11/11**: üretim çalışma anında çekiyor, testlerin
-    # HEPSİ kapatıyor ⇒ hiçbir test bu davranışı GÖREMEZ. Kurucu kararı
-    # (font gömme ↔ çevrimdışı ilk açılış) beklerken bu sayının her artışı
-    # aynı gerçeği bir kez daha söyler.
-    "testFilesDisablingFetch": 11,
+    "bundledFontAssets": 4,
+    # 11 → 0 (2026-08-16, D1/O-149): kurucu kararı geldi — fontlar GÖMÜLDÜ.
+    # Asimetrinin kendisi ortadan kalktı: üretim artık hiç çekmiyor, testlerin
+    # `allowRuntimeFetching=false` satırları (11 dosya) kaldırıldı çünkü
+    # artık KORUDUKLARI bir davranış yok — `GoogleFonts.*` üretimde hiç
+    # çağrılmıyor, kapatılacak bir çekme kapısı kalmadı. Asimetriyi
+    # BÜYÜTMEK önceki turların dersiydi (8→9→10→11); bu tur onu SIFIRLADI,
+    # ve bu da aynı disiplinle kayda geçer — kapı yine ÖNCE öttü (bu turda
+    # dört alan birden), beyan SONRA tazelendi.
+    "testFilesDisablingFetch": 0,
     "$why": (
-        "ÖLÇÜLDÜ 2026-08-12. Üretim `ostinato_theme.dart` içinde "
-        "`GoogleFonts.hankenGrotesk` · `GoogleFonts.ibmPlexMono` · "
-        "`GoogleFonts.hankenGroteskTextTheme` kullanıyor; `lib/` içinde "
-        "`allowRuntimeFetching = false` YOK; `pubspec.yaml`ın `fonts:` bölümü "
-        "şablon yorumu hâlinde ve depoda .ttf/.otf SIFIR → font yüzleri ilk "
-        "açılışta Google'dan iniyor. Kullanıcı verisi gönderilmiyor."),
+        "ÖLÇÜLDÜ 2026-08-16 (D1 sonrası). Üretim `ostinato_theme.dart` artık "
+        "`GoogleFonts.*` ÇAĞIRMIYOR — yerel `TextStyle(fontFamily:)`/"
+        "`ThemeData(fontFamily:)` kullanıyor. `pubspec.yaml`ın `fonts:` "
+        "bölümü GERÇEK (4 .ttf, ölçülen ağırlıklarla: Hanken Grotesk "
+        "400/500/600 · IBM Plex Mono 500), `google_fonts` bağımlılığı VE "
+        "iki transitif vasıtası (`http`, `http_parser`) `pubspec.lock`tan "
+        "düştü (`flutter pub get` çıktısı: kanıt). Kullanıcı verisi zaten "
+        "gönderilmiyordu, şimdi ağ da yok."),
     "$asymmetry": (
-        "8 test dosyası çekmeyi KAPATIYOR, üretim kapatmıyor → hiçbir test bu "
-        "davranışı göremez. Körlük iyi niyetle (ağsız test) konmuş ve "
-        "TESTLERİ DOĞRU, ürünü YANLIŞ temsil ediyor. Bu asimetri bir kusur "
-        "olarak DEĞİL, adıyla bir GERÇEK olarak kayıtlı; kapatma kararı "
-        "kurucuda (ürün duruşu: font paketlemek mi, çevrimdışı ilk açılışı "
-        "kabul etmek mi)."),
+        "ARTIK YOK — üretim hiç çekmiyor, testlerin de kapatacak bir şeyi "
+        "kalmadı; 11 dosyadaki `allowRuntimeFetching=false` satırları bu "
+        "yüzden kaldırıldı (vestigial hâle gelmişlerdi, korumasız bırakmak "
+        "DEĞİL, korudukları risk ortadan kalktığı için). Alan yine de BOŞ "
+        "bırakılmadı: `check()` asimetri varken dolu ister, yokken ZORUNLU "
+        "değil — bu alan gelecekte asimetri geri gelirse (ör. yeni bir "
+        "font ağırlığı yine ağdan çekilirse) yeniden doldurulmalı."),
     "$founderDecision": (
-        "AÇIK: fontları uygulamaya gömmek (boyut artar, ağsız ilk açılış "
-        "düzelir) mi, yoksa çevrimdışı ilk açılışta sistem fontuna düşmeyi "
-        "kabul etmek mi. Kapı bu kararı VERMEZ, görünür tutar."),
+        "VERİLDİ (2026-08-16, D1): fontlar GÖMÜLDÜ. Gravita `G-227` emsali; "
+        "yöntem aynı (üç katmanlı doğrulama), font seçimi kendi (Hanken "
+        "Grotesk + IBM Plex Mono, Gravita'nınkinden AYRI)."),
 }
 
 
@@ -201,7 +188,15 @@ def selftest() -> int:
     if not check({**DECLARED, "bundledFontAssets": 999}, actual):
         dead.append("beyan-ölçüm karşılaştırması ISIRMIYOR — uydurma bir sayı "
                     "(999) fark edilmedi")
-    if not check({**DECLARED, "$asymmetry": ""}, actual):
+    # D1 SONRASI NOTU (2026-08-16): bu kontrol eskiden `actual`ı (BUGÜNÜ)
+    # temel alıyordu — ve D1 asimetriyi gerçekten SIFIRLADIĞI için (bkz.
+    # DECLARED) `actual["testFilesDisablingFetch"]` artık 0, yani asimetri
+    # ZORUNLULUĞUNUN kendi koruma koşulu bugün hiç tetiklenmiyor. Dedektörün
+    # ÖZELLİĞİ sonuçtan bağımsız sınanmalı (O-116 ilkesi) — SENTETİK bir
+    # asimetri-var senaryosuyla, bugünkü ağaçtan bağımsız.
+    _asymmetric_actual = {**actual, "testFilesDisablingFetch": 3,
+                          "productionFetchDisabled": False}
+    if not check({**DECLARED, "$asymmetry": ""}, _asymmetric_actual):
         dead.append("ASİMETRİ beyanı boşken kapı susuyor — sessiz kalması "
                     "yasak olan tam bu")
     if check(DECLARED, actual):
@@ -241,11 +236,15 @@ def main() -> int:
           f"çağrısı · üretimde çekme kapatılmamış "
           f"({not actual['productionFetchDisabled']}) · paketlenmiş font "
           f"{actual['bundledFontAssets']}")
-    print(f"   ⚠️ ASİMETRİ (adıyla): {actual['testFilesDisablingFetch']} test "
-          f"dosyası çekmeyi kapatıyor, ÜRETİM kapatmıyor → hiçbir test bu "
-          f"davranışı GÖREMEZ")
-    print(f"   ⏳ KURUCU KARARI AÇIK: font gömme mi, çevrimdışı ilk açılışı "
-          f"kabul mü (kapı bu kararı VERMEZ, görünür tutar)")
+    if actual["testFilesDisablingFetch"] > 0 and not actual[
+            "productionFetchDisabled"]:
+        print(f"   ⚠️ ASİMETRİ (adıyla): {actual['testFilesDisablingFetch']} "
+              f"test dosyası çekmeyi kapatıyor, ÜRETİM kapatmıyor → hiçbir "
+              f"test bu davranışı GÖREMEZ")
+    else:
+        print("   ✅ ASİMETRİ YOK: üretim çekmiyor, kapatacak test kalmadı")
+    print("   ✅ KURUCU KARARI VERİLDİ (D1, 2026-08-16): fontlar gömüldü — "
+          "kapı artık kararı DEĞİL, kararın kalıcılığını görünür tutuyor")
     return 0
 
 

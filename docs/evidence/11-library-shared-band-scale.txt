@@ -1,7 +1,7 @@
 Ostinato
 ⚙
 Measured, not chosen. Correct posture is a band, not a point.
-Put your phone where it can see you. The camera reads nine upper-body points while you practise. There is no live microphone input in this build — the chord and note work described in the lessons was measured on recordings, not in your room.
+Put your phone where it can see you. The camera reads your two shoulders and your two hips while you practise, and measures one thing: how far your trunk leans. There is no live microphone input in this build — the chord and note work described in the lessons was measured on recordings, not in your room.
 YOUR INSTRUMENTS
 Guitar
 7 guitar teachers · 0.4–6.4° of 24°
@@ -13,10 +13,17 @@ Piano
 3 piano teachers · 1.9–2.8° of 24°
 Put your phone where it can see you at the keyboard from the waist up. We check how you sit against three independent piano teachers. This build hears nothing: there is no microphone input, so your notes are never timed in your room.
 The bar on each card is the range those teachers actually occupy, drawn on one shared 0–24° scale so the three can be compared. It is a range, not a target: no point inside it is more correct than another.
+START HERE
+GUITAR · GUIDE
+Camera and space
+VOICE · SCORED
+How much teachers actually differ
+PIANO · SCORED
+How you sit at the keyboard
 [RichText] Ostinato
 [RichText] ⚙
 [RichText] Measured, not chosen. Correct posture is a band, not a point.
-[RichText] Put your phone where it can see you. The camera reads nine upper-body points while you practise. There is no live microphone input in this build — the chord and note work described in the lessons was measured on recordings, not in your room.
+[RichText] Put your phone where it can see you. The camera reads your two shoulders and your two hips while you practise, and measures one thing: how far your trunk leans. There is no live microphone input in this build — the chord and note work described in the lessons was measured on recordings, not in your room.
 [RichText] YOUR INSTRUMENTS
 [RichText] Guitar
 [RichText] 
@@ -31,3 +38,13 @@ The bar on each card is the range those teachers actually occupy, drawn on one s
 [RichText] 3 piano teachers · 1.9–2.8° of 24°
 [RichText] Put your phone where it can see you at the keyboard from the waist up. We check how you sit against three independent piano teachers. This build hears nothing: there is no microphone input, so your notes are never timed in your room.
 [RichText] The bar on each card is the range those teachers actually occupy, drawn on one shared 0–24° scale so the three can be compared. It is a range, not a target: no point inside it is more correct than another.
+[RichText] START HERE
+[RichText] GUITAR · GUIDE
+[RichText] Camera and space
+[RichText] 
+[RichText] VOICE · SCORED
+[RichText] How much teachers actually differ
+[RichText] 
+[RichText] PIANO · SCORED
+[RichText] How you sit at the keyboard
+[RichText] 

@@ -27,7 +27,6 @@
 // *kapı bu kararı VERMEZ, görünür tutar.*)
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
@@ -47,7 +46,6 @@ const double kTolerance = 40.0;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  GoogleFonts.config.allowRuntimeFetching = false;
 
   late ContentRepository repo;
   late CueTextResolver cueText;

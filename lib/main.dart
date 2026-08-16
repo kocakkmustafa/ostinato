@@ -93,11 +93,11 @@ class _OstinatoAppState extends State<OstinatoApp> {
 /// **Neden `_OstinatoAppState`ten ayrıldı:** bu dalın testi, uygulamanın
 /// varlık yüklemesini beklemek ZORUNDA kalmamalı. `OstinatoApp`i pump eden
 /// bir test `rootBundle`ın gerçek async'ini beklemek için `runAsync`
-/// açmak zorunda kalıyor, `runAsync` da `google_fonts`un `flutter_test`
-/// altındaki kaçınılmaz hatasını (aile dersi #9) testi DOĞRUDAN düşüren bir
-/// bölgeye taşıyor — ölçüldü: aynı hata `pump()` içinde doğduğunda
-/// `takeException()`a düşüyor, `runAsync` içinde doğduğunda düşmüyor.
-/// Sonuç, dallanmanın kendisiyle ilgisi olmayan gezici bir kırmızıydı.
+/// açmak zorunda kalıyor. **D1 NOTU (2026-08-16):** eski gerekçenin bir
+/// yarısı (`runAsync`ın `google_fonts`un `flutter_test` altındaki
+/// kaçınılmaz hatasını testi düşüren bir bölgeye taşıması) fontlar
+/// paketlenince ORTADAN KALKTI — ama `rootBundle` async'i hâlâ gerçek,
+/// ayrım o yüzden BOZULMADI.
 ///
 /// Bu ayrım o kırmızıyı düzeltmiyor, İMKÂNSIZ kılıyor (aile dersi #7):
 /// dallanma artık yüklenmiş bağımlılıkları alan saf bir widget, ve bu kod

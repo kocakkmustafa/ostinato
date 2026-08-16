@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Ostinato'nun görsel kimliği — Claude Design paneli çıktısının (2026-08-05,
 /// proje `4352ea41-…`) sabitleri. Renk/malzeme İCAT edilmedi: panelin ürettiği
@@ -136,7 +135,8 @@ TextStyle hankenText({
   double? height,
   double? letterSpacing,
 }) =>
-    GoogleFonts.hankenGrotesk(
+    TextStyle(
+      fontFamily: 'Hanken Grotesk',
       fontSize: size,
       fontWeight: weight,
       color: color,
@@ -150,7 +150,8 @@ TextStyle monoText({
   Color color = OstinatoColors.textMono,
   double letterSpacing = 1.4,
 }) =>
-    GoogleFonts.ibmPlexMono(
+    TextStyle(
+      fontFamily: 'IBM Plex Mono',
       fontSize: size,
       fontWeight: weight,
       color: color,
@@ -172,7 +173,7 @@ TextStyle monoText({
 ThemeData ostinatoTheme() => ThemeData(
       colorSchemeSeed: const Color(0xFF5F4CA0),
       scaffoldBackgroundColor: OstinatoColors.shell,
-      textTheme: GoogleFonts.hankenGroteskTextTheme(),
+      fontFamily: 'Hanken Grotesk',
     );
 
 /// Bölüm başlığı — "SCREENS" / "YOUR INSTRUMENTS" tarzı mono kicker.
