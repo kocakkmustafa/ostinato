@@ -41,7 +41,12 @@ SHIPPED_FIELDS = {
 # (bu yüzden $ TAŞIMAZ). Bu kümede olmayan her anahtar $ İLE BAŞLAMALI — yoksa yeni bir
 # alan sessizce sızmış ya da bir gerekçe alanı yanlışlıkla $ almadan kalmış demektir.
 SHIPPED_KEYS_BY_BLOCK = {
-    "$root": {"appStore", "playStore", "description", "cameraPermissionRationale"},
+    # supportUrl / privacyPolicyUrl: Apple'ın ZORUNLU tuttuğu iki alan (H-83).
+    # Beş app ortak sayfa kullanır; değer kurucu kararıdır (H-85), hat seçmez.
+    # Bu kapı orkestratör alanları eklerken gerçekten öttü ve doğru öttü —
+    # beyaz listeye alınmadan geçselerdi "sessizce sızan sevk alanı" olurlardı.
+    "$root": {"appStore", "playStore", "description", "cameraPermissionRationale",
+              "supportUrl", "privacyPolicyUrl"},
     "appStore": {"name", "subtitle", "promotionalText", "keywords"},
     "playStore": {"shortDescription"},
     "cameraPermissionRationale": {"ios", "android"},
