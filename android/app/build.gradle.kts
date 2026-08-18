@@ -15,11 +15,21 @@ plugins {
 // SESSİZCE debug anahtarıyla imzalanıyordu. Mağaza böyle bir paketi reddeder;
 // daha kötüsü, kusur bir hata mesajı üretmiyor.
 //
-// Desen LifeOS'tan ADAPTE edildi (icat değil): `key.properties` varsa gerçek
-// imza, yoksa debug'a düşer. Geri-düşme KALDIRILAMAZ — kaldırılırsa taze
-// klonda ve CI'da `--debug` yapıları bile yapılandırma anında patlar (LifeOS
-// bunu ölçmüş). Ama geri-düşme SESSİZ olamaz: `verifyReleaseSigning` görevi
-// release yolunda çalışır ve düşüşü ADIYLA söyler.
+// ⚠️ GÜNCELLEME (motion-core consumer-matrix taraması, 2026-08-19): bu blok
+// "geri-düşme KALDIRILAMAZ — kaldırılırsa debug yapıları bile yapılandırma
+// anında patlar" diyordu, ama bu ÖLÇÜLMEMİŞ bir varsayımdı (LifeOS'un kendi
+// deseninden miras). jablab aynı sınıf kusuru `J-215`'te SERT DURMAYA çevirdi
+// ve KENDİ `--dry-run` ölçümüyle kanıtladı: `signingConfig = null` release'in
+// debug yapılarını KIRMIYOR (yalnız release görev grafiği etkileniyor). Desen
+// artık buraya da taşındı: geri-düşme YOK, kapı SESSİZ değil.
+//
+// `verifyReleaseSigning` GÖREV ADI ve `assembleRelease`/`bundleRelease`e
+// BAĞLANTISI BİLEREK KORUNDU (jablab'ın `taskGraph.whenReady` desenine tam
+// geçilmedi): `tools/validate_release_signing.py` bu ikisini METİN
+// düzeyinde arıyor — bu deponun her-commit süiti Gradle koşturmuyor, o
+// yüzden görevin VARLIĞI ve BAĞLANTISI (kaydın kendisi değil, adı+teli) tek
+// kanıt kanalı. Değişen yalnız görevin gövdesi: `logger.error` (log basıp
+// devam) yerine `GradleException` (durur).
 //
 // SINIR: keystore'un KENDİSİ kurucudadır (sır). Bu blok onu beklemez —
 // hat-yereli iş, kurucu kaleminin altına saklanmadan bugün kapanır.
@@ -56,11 +66,15 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
-            storeFile = (keystoreProperties["storeFile"] as String?)?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String?
+        // Yalnız gerçek anahtar VARSA tanımlanır. Boş/yer-tutucu bir release
+        // config tanımlamak, olmayan bir imzayı VARMIŞ gibi gösterirdi.
+        if (hasReleaseKeystore) {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String?
+                keyPassword = keystoreProperties["keyPassword"] as String?
+                storeFile = (keystoreProperties["storeFile"] as String?)?.let { file(it) }
+                storePassword = keystoreProperties["storePassword"] as String?
+            }
         }
     }
 
@@ -68,36 +82,33 @@ android {
         release {
             isDebuggable = false
             isJniDebuggable = false
-            signingConfig = if (hasReleaseKeystore) {
-                signingConfigs.getByName("release")
-            } else {
-                // Geri-düşme KASITLI (LifeOS ölçümü): kaldırılırsa taze klonda
-                // ve CI'da debug yapıları bile yapılandırma anında patlar.
-                // Ama SESSİZ değil — `verifyReleaseSigning` aşağıda öter.
-                signingConfigs.getByName("debug")
-            }
+            // ⚠️ `null` BİLEREK (J-215 deseni): debug'a artık DÜŞMÜYORUZ.
+            // Anahtar yoksa imza YOK, ve aşağıdaki kapı release görev
+            // grafiğini zaten başlatmıyor.
+            signingConfig = if (hasReleaseKeystore) signingConfigs.getByName("release") else null
         }
     }
 }
 
-// ⑤a KAPISI — sessiz düşmeyi ADIYLA söyleyen görev.
+// ⑤a KAPISI — sessiz düşmeyi ADIYLA söyleyen görev (O-103 → J-215 sertliği).
 //
 // Neden bir görev, neden yapılandırma-anı `throw` değil: yapılandırma anında
-// fırlatmak `--debug` yapılarını da kırar (LifeOS'un ölçtüğü tuzak). Bu görev
-// YALNIZ release paketleme yolunda çalışır ve o yolda kusur ADIYLA görünür.
+// fırlatmak `--debug` yapılarını da kırardı. Bu görev YALNIZ release
+// paketleme yolunda çalışır ve o yolda kusur ADIYLA görünür.
 //
 // ⛔ Kapı, keystore'un VARLIĞINI şart koşmaz (o kurucuda) — SESSİZLİĞİ
 // yasaklar. Kurucu keystore'u verdiği an kapı kendiliğinden susar.
 val verifyReleaseSigning = tasks.register("verifyReleaseSigning") {
     doLast {
         if (!hasReleaseKeystore) {
-            logger.error(
+            throw GradleException(
                 "\n⛔ RELEASE İMZASI: `android/key.properties` YOK → bu paket " +
-                "DEBUG anahtarıyla imzalanıyor (CN=Android Debug).\n" +
-                "   Mağaza böyle bir paketi REDDEDER. Ölçüldü 2026-08-12: " +
-                "üretilen APK'nın imzası gerçekten debug sertifikasıydı.\n" +
+                "imzasız kalır (signingConfig artık null — debug'a DÜŞMÜYOR).\n" +
+                "   Mağaza imzasız/yanlış-imzalı bir paketi REDDEDER. Ölçüldü " +
+                "2026-08-12: önceki (debug'a düşen) sürümün ürettiği APK'nın " +
+                "imzası gerçekten `CN=Android Debug` çıkmıştı.\n" +
                 "   Bu bir yapılandırma kusuru DEĞİL: yapılandırma hazır, " +
-                "eksik olan KEYSTORE (kurucu kalemi).\n" +
+                "eksik olan KEYSTORE (kurucu kalemi, ~/.secrets/yula/).\n" +
                 "   Gerekli: keyAlias · keyPassword · storeFile · storePassword\n"
             )
         } else {

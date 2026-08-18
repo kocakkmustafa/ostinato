@@ -9,6 +9,14 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    # `tools/midi_spike/` is its own standalone, throwaway Flutter project
+    # (own pubspec.yaml, own flutter_midi_command dependency, see O-021) —
+    # not part of the app. Without this exclude, `flutter analyze` descends
+    # into it and reports its unrelated MIDI-plugin errors as app issues.
+    - tools/midi_spike/**
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`
