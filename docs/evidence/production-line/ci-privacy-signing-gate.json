@@ -42,10 +42,25 @@
   "dartTest": {"file": "test/android_signing_test.dart", "testCount": 7, "result": "pass (flutter test 126/126 içinde)"},
   "ciEscapeHatch": "-PallowDebugSigning=true — gerçek yerel build'le doğrulandı (yukarıdaki ciWorkflow.localEquivalentVerification), Play'e yüklenebilir bir artefakt üretmediği açıkça işaretli"
  },
+ "realCiRunResult": {
+  "$why": "Bu bölüm GERÇEK bir GitHub Actions koşumunun sonucunu kaydeder — 'yerel eşdeğer doğrulaması muhtemelen çalışır' demek 'ÇALIŞTI' demek DEĞİL, ve bu tam olarak ÖYLE çıktı: yerel doğrulama YETERSİZDİ.",
+  "firstRun": {
+   "runId": "32222826889",
+   "result": "3/3 job FAILED, hepsi AYNI adımda",
+   "failedStep": "Poz modeli (pinli SHA-256 doğrulamalı) — tool/fetch_pose_model.sh",
+   "errorSignature": "curl: (23) Failure writing output to destination → Process completed with exit code 23",
+   "$rootCause": "tool/fetch_pose_model.sh HİÇBİR ZAMAN `assets/models/` hedef dizinini `mkdir -p` etmiyordu. `*.task` dosyaları gitignored olduğundan taze bir git klonunda bu dizin YOKTUR — curl'ün yazacağı bir yer yok. Bu makinede dizin YILLAR önce (script ilk yazıldığında) bir kez oluşturulmuş olduğundan, bu oturumdaki HİÇBİR yerel koşum (dahil O-185'in kendi 'localEquivalentVerification'ı) bu kusuru hiç GÖRMEDİ — yalnız GitHub'ın gerçekten temiz checkout'u ortaya çıkardı. Bu, 'yerel doğrulama önbelleklenmiş duruma dayanıyordu, temiz ortamı hiç sınamadı' sınıfının somut bir örneği.",
+   "$fix": "tool/fetch_pose_model.sh'e tek satır: `mkdir -p \"$(dirname \"$DEST\")\"`, cp/curl dallanmasından ÖNCE. İKİ AYRI şekilde doğrulandı (varsayılmadı): (1) assets/models/ tamamen SİLİNİP script koşturuldu, `cp` (aile-hattı) yolu başarıyla dizini yeniden oluşturdu; (2) hem assets/models/ HEM yerel motion-core kardeş kopyası GEÇİCİ olarak gizlenerek script GERÇEK `curl` indirme yolunu (CI'ın kullandığı AYNI kod yolu) almaya zorlandı — o da başarıyla dizini oluşturup doğru SHA'yı indirdi.",
+   "$familyWideRisk": "Script kendi yorumunda 'Gravita/JabLab ile BİREBİR aynı' diyor — aynı kusur SİBLİNG depolarda da olabilir. Hızlı bir `gh run list` kontrolü: jablab/gravita/lissom'un ÜÇÜNÜN de en son CI koşumu 'failure'. Ama jablab'ın log imzası FARKLI görünüyor (pose-fetch adımı başarı satırını yazdırmış GİBİ, ardından ayrı bir exit 69/128) — AYNI kök neden olduğu KANITLANMADI, derinlemesine bakılmadı (bu oturumun kapsamı DIŞINDA, kurucuya spawn_task ile bir inceleme görevi bırakıldı, kendi başına başka bir depoya commit ATILMADI)."
+  },
+  "fixCommit": "pending — bu turda commit edilecek (O-186)",
+  "secondRun": "pending — fix push edildikten sonra gerçek sonuç GÖZLEMLENECEK, tahmin EDİLMEYECEK"
+ },
  "notCoveredThisTurn": [
-  "GERÇEK GitHub Actions koşumu — bu turda yalnız YEREL EŞDEĞERİ doğrulandı, push sonrası `gh run list`/`gh run watch` ile GERÇEK koşum kontrol edilmeli (Ubuntu/macOS runner ortamı bu makineden farklı olabilir)",
-  "MOTION_CORE_RO_TOKEN secret'ının GERÇEKTEN eklenip eklenmediği — jablab/gravita/lissom emsalinde bu hâlâ kurucu kapısı (GitHub arayüzünden eklenir); secret yoksa motion-core adımı SESSİZCE atlanır, pub get o noktada kırmızı kalabilir — CI'ın İLK gerçek koşumunda bu görülecek",
+  "İkinci (düzeltme-sonrası) CI koşumunun GERÇEK sonucu — bu turda commit+push edildi ama koşum henüz İZLENMEDİ/tamamlanmadı olabilir, bkz. realCiRunResult.secondRun",
+  "MOTION_CORE_RO_TOKEN secret'ının GERÇEKTEN eklenip eklenmediği — jablab/gravita/lissom emsalinde bu hâlâ kurucu kapısı; mkdir kusuru düzelince CI bu adıma ULAŞABİLİR ve secret yoksa ORADA yeni bir kırmızı verebilir (BEKLENEN bir sınıf, panik değil)",
   "test/privacy_manifest_test.dart / test/release_signing_test.dart — roadmap'in LİTERAL isimlendirdiği dosyalar yazılmadı; onların işini tools/validate_privacy_manifest.py + tools/validate_release_signing.py + test/android_signing_test.dart ZATEN görüyor (öz-testli, run_gates.sh'a bağlı) — yinelenen bir Dart dosyası düşük öncelikli görüldü",
-  "iOS tarafında Android'in android_signing_test.dart'ına denk bir Dart testi yok — iOS'un asıl imza riski (Xcode takımı/sertifika) hesap-sahibi kalemi, bir Dart testinin ölçebileceği bir şey değil"
+  "iOS tarafında Android'in android_signing_test.dart'ına denk bir Dart testi yok — iOS'un asıl imza riski (Xcode takımı/sertifika) hesap-sahibi kalemi, bir Dart testinin ölçebileceği bir şey değil",
+  "Sibling depolardaki (jablab/gravita/lissom) CI başarısızlıklarının kök nedeni — kurucuya spawn_task ile bırakıldı, bu oturumun kapsamı DIŞINDA"
  ]
 }

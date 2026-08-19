@@ -25,6 +25,17 @@ URL="https://storage.googleapis.com/mediapipe-models/pose_landmarker/${VARIANT}/
 
 cd "$(dirname "$0")/.."
 
+# 2026-08-19 (O-186): GERÇEK bir CI koşumunda (GitHub Actions, tamamen
+# temiz checkout) `curl -o "$DEST"` "Failure writing output to destination"
+# (exit 23) ile düştü — DEST'in üst dizini (`assets/models/`) hiç
+# OLUŞTURULMAMIŞTI. `*.task` gitignored olduğundan taze bir klonda bu
+# dizin YOKTUR; bu makinede eskiden bir kez oluşturulmuş olduğu için yerel
+# koşumlar bu kusuru hiç göstermedi — yalnız gerçek-CI'ın taze checkout'u
+# ortaya çıkardı. Aile-genel bir kopya olduğundan (Gravita/JabLab/Lissom/
+# Choreia "birebir aynı") aynı kusur ONLARDA da olabilir, adıyla not
+# edildi (DEFTER); bu turda yalnız BU depo düzeltildi.
+mkdir -p "$(dirname "$DEST")"
+
 verify() {
   local got
   got=$(shasum -a 256 "$1" | awk '{print $1}')
