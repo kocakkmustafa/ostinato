@@ -53,14 +53,25 @@
    "$fix": "tool/fetch_pose_model.sh'e tek satır: `mkdir -p \"$(dirname \"$DEST\")\"`, cp/curl dallanmasından ÖNCE. İKİ AYRI şekilde doğrulandı (varsayılmadı): (1) assets/models/ tamamen SİLİNİP script koşturuldu, `cp` (aile-hattı) yolu başarıyla dizini yeniden oluşturdu; (2) hem assets/models/ HEM yerel motion-core kardeş kopyası GEÇİCİ olarak gizlenerek script GERÇEK `curl` indirme yolunu (CI'ın kullandığı AYNI kod yolu) almaya zorlandı — o da başarıyla dizini oluşturup doğru SHA'yı indirdi.",
    "$familyWideRisk": "Script kendi yorumunda 'Gravita/JabLab ile BİREBİR aynı' diyor — aynı kusur SİBLİNG depolarda da olabilir. Hızlı bir `gh run list` kontrolü: jablab/gravita/lissom'un ÜÇÜNÜN de en son CI koşumu 'failure'. Ama jablab'ın log imzası FARKLI görünüyor (pose-fetch adımı başarı satırını yazdırmış GİBİ, ardından ayrı bir exit 69/128) — AYNI kök neden olduğu KANITLANMADI, derinlemesine bakılmadı (bu oturumun kapsamı DIŞINDA, kurucuya spawn_task ile bir inceleme görevi bırakıldı, kendi başına başka bir depoya commit ATILMADI)."
   },
-  "fixCommit": "pending — bu turda commit edilecek (O-186)",
-  "secondRun": "pending — fix push edildikten sonra gerçek sonuç GÖZLEMLENECEK, tahmin EDİLMEYECEK"
+  "fixCommit": "ebbf982796591f540be4660beafd8d7ee0ca1ced (O-186)",
+  "secondRun": {
+   "runId": "32223828478",
+   "poseModelStep": "✅ GEÇTİ — 3/3 job'da (fix DOĞRULANDI, GERÇEK ortamda)",
+   "newBlocker": {
+    "step": "Run flutter pub get",
+    "result": "3/3 job FAILED",
+    "exactError": "Git error. Command: `git clone --mirror https://github.com/kocakkmustafa/motion-core.git ...` → stderr: fatal: could not read Username for 'https://github.com': No such device or address → exit code: 128 → Failed to update packages. → Process completed with exit code 69.",
+    "$diagnosis": "TAM checks.yml'nin KENDİ yorumunun önceden belgelediği aile-kalıbı (Lissom L-351, Gravita G-266 — ikisi de AYNI hatayı ölçmüştü). `MOTION_CORE_RO_TOKEN` GitHub secret'ı bu depoda TANIMLI DEĞİL — 'motion-core erişimi' adımı bu yüzden SESSİZCE atlandı ('-' işareti, `if` koşulu false), ve pubspec.yaml'ın private motion-core git bağımlılığı KİMLİK DOĞRULAMASIZ klonlanmaya çalışılıp reddedildi. Bu KURUCU KAPISIDIR (GitHub repo secret eklemek hesap-sahibi/repo-admin işlemi) — KOD DEĞİŞİKLİĞİYLE çözülemez, ÇÖZÜLMEYE de çalışılmadı.",
+    "$crossFamilyCorroboration": "Bu, daha önce belirsiz bırakılan jablab log imzasını (exit 69/128, pose-fetch başarı satırından SONRA) da AÇIKLIYOR — muhtemelen AYNI motion-core-secret sorunu, pose-fetch adımı jablab'da zaten çalışıyordu (Ostinato'nun mkdir kusuru onlarda YOKMUŞ gibi görünüyor). Yine de bu KESİN olarak doğrulanmadı — spawn_task kartı geçerliliğini KORUYOR."
+   },
+   "otherStepsPassed": "iOS/Android release build job'ları ve gates job'ı, pose-fetch'in ÖTESİNE hiç geçemedi (hepsi AYNI pub get adımında düştü) — flutter analyze/test/release-build adımlarının GERÇEK CI'da çalışıp çalışmadığı hâlâ doğrulanamadı (yalnız yerel eşdeğerleri doğrulandı, bkz. yukarısı)."
+  },
+  "$conclusion": "CI YAML'ının KENDİSİ artık doğru (iki gerçek kusur ölçülüp düzeltildi/teşhis edildi) — kalan TEK engel bir GitHub secret eklemek, mühendislik işi DEĞİL. Secret eklendiğinde işin gerisi (analyze/test/release-build adımları) hâlâ GÖZLEMLENMEMİŞ durumda — bu turda VARSAYILMADI, açık bırakıldı."
  },
  "notCoveredThisTurn": [
-  "İkinci (düzeltme-sonrası) CI koşumunun GERÇEK sonucu — bu turda commit+push edildi ama koşum henüz İZLENMEDİ/tamamlanmadı olabilir, bkz. realCiRunResult.secondRun",
-  "MOTION_CORE_RO_TOKEN secret'ının GERÇEKTEN eklenip eklenmediği — jablab/gravita/lissom emsalinde bu hâlâ kurucu kapısı; mkdir kusuru düzelince CI bu adıma ULAŞABİLİR ve secret yoksa ORADA yeni bir kırmızı verebilir (BEKLENEN bir sınıf, panik değil)",
+  "MOTION_CORE_RO_TOKEN GitHub secret'ının eklenmesi — KURUCU KAPISI (repo/hesap ayarları), bu oturum bunu YAPAMAZ/YAPMAMALI; secret eklenene kadar CI'ın flutter analyze/test/release-build adımları hiçbirinin GERÇEK ortamda çalıştığı doğrulanamaz (hepsi pub get'te ölüyor) — yalnız YEREL eşdeğerleri doğrulandı",
   "test/privacy_manifest_test.dart / test/release_signing_test.dart — roadmap'in LİTERAL isimlendirdiği dosyalar yazılmadı; onların işini tools/validate_privacy_manifest.py + tools/validate_release_signing.py + test/android_signing_test.dart ZATEN görüyor (öz-testli, run_gates.sh'a bağlı) — yinelenen bir Dart dosyası düşük öncelikli görüldü",
   "iOS tarafında Android'in android_signing_test.dart'ına denk bir Dart testi yok — iOS'un asıl imza riski (Xcode takımı/sertifika) hesap-sahibi kalemi, bir Dart testinin ölçebileceği bir şey değil",
-  "Sibling depolardaki (jablab/gravita/lissom) CI başarısızlıklarının kök nedeni — kurucuya spawn_task ile bırakıldı, bu oturumun kapsamı DIŞINDA"
+  "Sibling depolardaki (jablab/gravita/lissom) CI başarısızlıklarının KESİN kök nedeni — çapraz-aile kanıt (bkz. realCiRunResult.secondRun.newBlocker.$crossFamilyCorroboration) AYNI motion-core-secret sorununa işaret ediyor ama KESİN doğrulanmadı; kurucuya spawn_task ile bırakıldı, bu oturumun kapsamı DIŞINDA"
  ]
 }
