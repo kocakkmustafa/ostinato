@@ -1,0 +1,51 @@
+{
+ "schemaVersion": "ostinato-evidence-ci-privacy-signing-gate-1",
+ "claim": "OST-P0-004 — CI, privacy manifest ve signing (roadmap §12)",
+ "generatedAt": "2026-08-19",
+ "parentCommit": "835e7d00e3812f132f2b77f5c88dc9da52d9472b",
+ "$scopeThisTurn": "İlk kez ele alınan görev paketi (bu oturumda daha önce OST-P0-002/OST-P0-003'e odaklanılmıştı). Roadmap baseline'ının 'CI workflow yok' iddiası doğrulandı (.github/ dizini yoktu) — .github/workflows/checks.yml YENİ yazıldı. Privacy manifest + release signing gate'lerinin İKİSİ de daha önceki (bu oturumdan ÖNCEKİ) turlarda zaten kurulmuş ve öz-testli bulundu — bu turda yalnız DOĞRULANDI, yeniden yazılmadı. Release build'lerin İKİSİ de (Android/iOS) yerel olarak GERÇEKTEN koşturuldu, yalnız CI YAML'ının doğru olduğu varsayılmadı.",
+ "provenance": {
+  "appCommit": "835e7d00e3812f132f2b77f5c88dc9da52d9472b",
+  "motionCorePin": "f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d",
+  "flutterChannel": "stable (yerel kurulum; CI subosito/flutter-action@v2 ile aynı kanalı ister)"
+ },
+ "ciWorkflow": {
+  "file": ".github/workflows/checks.yml",
+  "$adaptedFrom": "jablab/app/.github/workflows/checks.yml — AYNI GÜN (2026-08-19), JAB-P0-004'te yazıldı; gravita/lissom'dan adapte edilmiş, üçü de aynı motion-core-pinli Flutter iskeletini paylaşıyor. Bu dosya jablab'ın BİREBİR kopyası, yalnız paket adları (ostinato_audio+ostinato_posture, jablab_engine yerine İKİ paket) değişti — icat edilmedi.",
+  "jobs": ["gates", "android-release-build", "ios-release-build"],
+  "$deliberateExclusion": "Roadmap Step 3 metni 'gates' geçiyor ama `bash tools/run_gates.sh` (40+ python kapısı + MUT-A, 30-40dk) CI'a EKLENMEDİ — bilinçli bir sapma, sessiz değil: `core.hooksPath=tools/git-hooks` ile HER commit pre-commit AŞAMASINDA bu süiti ZATEN yerel olarak geçmiş olmak ZORUNDA (bu depoya ulaşan hiçbir commit bu kapıyı atlayamaz). CI'da AYNI 30-40dk'lık süiti tekrarlamak büyük ölçüde gereksiz olurdu — jablab/gravita/lissom'un HİÇBİRİ CI'da tekrar koşturmuyor, aynı gerekçeyle (jablab'ın checks.yml'sinin kendi yorumu bunu açıkça yazıyor). CI'ın kendi işi FARKLI: temiz bir checkout'un yerel makine durumundan BAĞIMSIZ derlendiğini/test geçtiğini kanıtlamak.",
+  "localEquivalentVerification": {
+   "$method": "GitHub Actions'ı buradan TETİKLEYEMEM — YAML'daki HER adımın yerel eşdeğerini GERÇEKTEN koşturarak doğrulandı, YAML'ın doğruluğu varsayılmadı. Push sonrası gerçek Actions koşumu `gh run list`/`gh run watch` ile ayrıca kontrol edilecek (bkz. notCoveredThisTurn).",
+   "steps": [
+    {"step": "tool/fetch_pose_model.sh", "result": "pass", "detail": "model zaten yerinde + SHA doğrulandı"},
+    {"step": "flutter analyze", "result": "pass", "detail": "0 issue"},
+    {"step": "flutter test (app)", "result": "pass", "detail": "126/126"},
+    {"step": "(cd packages/ostinato_audio && flutter test)", "result": "pass", "detail": "100/100"},
+    {"step": "(cd packages/ostinato_posture && flutter test)", "result": "pass", "detail": "19/19"},
+    {"step": "flutter build appbundle --release -PallowDebugSigning=true", "result": "pass", "detail": "build/app/outputs/bundle/release/app-release.aab, 74.9MB, sha256=f2a8e19379288366e766f500a714fd6989c960670e78b00d2ef626b4c59eb715 — DEBUG anahtarıyla imzalı KOD YOLU kanıtı, Play'e yüklenebilir bir artefakt DEĞİL"},
+    {"step": "flutter build ios --release --no-codesign", "result": "pass", "detail": "build/ios/iphoneos/Runner.app, ~43MB, imzasız KOD YOLU kanıtı"}
+   ]
+  }
+ },
+ "privacyManifest": {
+  "file": "ios/Runner/PrivacyInfo.xcprivacy",
+  "$note": "Bu manifest ve onu doğrulayan tools/validate_privacy_manifest.py BU TURDAN ÖNCE zaten vardı (H-34/O-144, 2026-08-16). Bu turun katkısı: OST-P0-002'nin (bu oturumda eklenen GERÇEK mikrofon yakalama kodu, AudioCaptureStreamer.swift dahil) taramanın kendisini BAYATLATIP BAYATLATMADIĞINI DOĞRULAMAK — manifest'in kendi başlık yorumu 'SIFIR gerçek isabet' diyordu ama bu iddia mikrofon kodundan ÖNCEYDİ, ÇAPRAZ KONTROL edilmemiş bir varsayım OLABİLİRDİ.",
+  "gateResult": "pass",
+  "gateOutput": "✅ gizlilik manifesti ↔ kod TUTARLI — 48 sevk edilen kaynak tarandı (YENİ AudioCaptureStreamer.swift + lib/app/audio/*.dart dahil), 5 required-reason kategorisi İKİ YÖNDE denetlendi",
+  "selfTestResult": "pass",
+  "$micNotARequiredReasonAPI": "Mikrofon/AVAudioEngine erişimi Apple'ın 5 Required-Reason API kategorisinden (UserDefaults, dosya-zaman-damgası, sistem-açılış-zamanı, disk-alanı, aktif-klavye) HİÇBİRİNE girmiyor — bu manifestin değil, Info.plist NSMicrophoneUsageDescription'ın (ayrı bir mekanizma) konusu. NSPrivacyCollectedDataTypes'ın boş kalması hâlâ doğru: ses tamponu RAM-only, zeroize edilir, hiç ağa çıkmıyor (OST-P0-002'de test edildi) — kamera/session_store.dart için zaten kurulmuş 'cihazda kalan veri toplanmış SAYILMAZ' (M-F-650) ilkesiyle AYNI, hatta daha temiz (session_store diske yazıyor, ses tamponu hiç yazmıyor)."
+ },
+ "releaseSigning": {
+  "androidGradleFile": "android/app/build.gradle.kts",
+  "$note": "Bu mekanizma da BU TURDAN ÖNCE kuruldu — kardeş bir motion-core oturumunun 'beş-tüketici kontrat matrisi' testi sırasında JabLab'ın J-215 imza-kalıbını Ostinato'ya taşıdığı ölçüldü (bu oturumun önceki bir turunda `ps aux` ile gözlemlendi, dokunulmadı). Bu turun katkısı yalnız DOĞRULAMA + CI YAML'ının bu mekanizmayı doğru ÇAĞIRDIĞINI kanıtlamak.",
+  "pythonGate": {"result": "pass", "output": "✅ imza kapısı öz-testi GEÇTİ — şablon hâli · sessiz düşme · bağlanmamış görev: üçü de yakalanıyor, bugünkü kaynak temiz"},
+  "dartTest": {"file": "test/android_signing_test.dart", "testCount": 7, "result": "pass (flutter test 126/126 içinde)"},
+  "ciEscapeHatch": "-PallowDebugSigning=true — gerçek yerel build'le doğrulandı (yukarıdaki ciWorkflow.localEquivalentVerification), Play'e yüklenebilir bir artefakt üretmediği açıkça işaretli"
+ },
+ "notCoveredThisTurn": [
+  "GERÇEK GitHub Actions koşumu — bu turda yalnız YEREL EŞDEĞERİ doğrulandı, push sonrası `gh run list`/`gh run watch` ile GERÇEK koşum kontrol edilmeli (Ubuntu/macOS runner ortamı bu makineden farklı olabilir)",
+  "MOTION_CORE_RO_TOKEN secret'ının GERÇEKTEN eklenip eklenmediği — jablab/gravita/lissom emsalinde bu hâlâ kurucu kapısı (GitHub arayüzünden eklenir); secret yoksa motion-core adımı SESSİZCE atlanır, pub get o noktada kırmızı kalabilir — CI'ın İLK gerçek koşumunda bu görülecek",
+  "test/privacy_manifest_test.dart / test/release_signing_test.dart — roadmap'in LİTERAL isimlendirdiği dosyalar yazılmadı; onların işini tools/validate_privacy_manifest.py + tools/validate_release_signing.py + test/android_signing_test.dart ZATEN görüyor (öz-testli, run_gates.sh'a bağlı) — yinelenen bir Dart dosyası düşük öncelikli görüldü",
+  "iOS tarafında Android'in android_signing_test.dart'ına denk bir Dart testi yok — iOS'un asıl imza riski (Xcode takımı/sertifika) hesap-sahibi kalemi, bir Dart testinin ölçebileceği bir şey değil"
+ ]
+}

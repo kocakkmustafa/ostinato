@@ -1,0 +1,133 @@
+name: checks
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  gates:
+    name: analyze + app/audio/posture tests (OST-P0-004)
+    # Bu iş 2026-08-19'a kadar hiç yoktu — repo hiçbir CI koşturmuyordu
+    # (roadmap baseline'ında adıyla kayıtlı). Yapı jablab/gravita/lissom'un
+    # `.github/workflows/checks.yml`sinden ADAPTE edildi, icat edilmedi —
+    # hepsi aynı motion-core-pinli Flutter iskeletini paylaşıyor (jablab'ın
+    # `checks.yml`si AYNI GÜN, JAB-P0-004'te yazıldı — bu dosya onun
+    # birebir kopyası, yalnız paket adları ostinato_audio+ostinato_posture'a
+    # değişti).
+    #
+    # BİLEREK DIŞARIDA BIRAKILAN: `bash tools/run_gates.sh` (roadmap Step 3
+    # metninde "gates" geçiyor). Bu depo `core.hooksPath=tools/git-hooks`
+    # ile HER commit'te pre-commit AŞAMASINDA zaten TAM gate suite'ini
+    # (40+ python kapısı + MUT-A mutasyon testi, 30-40dk) koşturuyor — bu
+    # depoya ULAŞAN her commit ZATEN bu süiti yerel olarak geçmiş demektir.
+    # CI'da AYNI 30-40dk'lık süiti tekrarlamak büyük ölçüde gereksiz —
+    # jablab/gravita/lissom'un HİÇBİRİ CI'da tekrar koşturmuyor, aynı
+    # gerekçeyle. CI'ın kendi işi FARKLI: temiz bir checkout'un GERÇEKTEN
+    # derlendiğini/test geçtiğini (yerel makine durumuna bağlı olmadan)
+    # kanıtlamak + GitHub'da herkese görünür bir durum üretmek. Bu bilinçli
+    # bir sapma — sessizce değil, adıyla.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Poz modeli (pinli SHA-256 doğrulamalı)
+        run: tool/fetch_pose_model.sh
+
+      - name: motion-core erişimi (private repo, salt-okunur)
+        # pubspec.yaml motion_core/motion_camera'yı private bir git
+        # deposundan çekiyor (kocakkmustafa/motion-core). actions/checkout@v4'ün
+        # verdiği GITHUB_TOKEN yalnız BU depoya scope'lu, motion-core'u
+        # klonlayamaz (aile emsali: Lissom L-351, Gravita G-266, jablab
+        # JAB-P0-004 — hepsi aynı "could not read Username" hatasını
+        # ölçtü). Secret YOKSA bu adım SESSİZCE atlanır — pub get aynı
+        # yerde kırmızı kalır, YENİ bir bozulma yok. Secret kurucu
+        # tarafından GitHub arayüzünden eklenince (salt-okunur deploy-key/
+        # PAT, `MOTION_CORE_RO_TOKEN`) bu adım devreye girer, ekstra kod
+        # değişikliği GEREKMEZ.
+        if: ${{ env.MOTION_CORE_RO_TOKEN != '' }}
+        env:
+          MOTION_CORE_RO_TOKEN: ${{ secrets.MOTION_CORE_RO_TOKEN }}
+        run: |
+          git config --global url."https://x-access-token:${MOTION_CORE_RO_TOKEN}@github.com/kocakkmustafa/motion-core.git".insteadOf "https://github.com/kocakkmustafa/motion-core.git"
+
+      - run: flutter pub get
+
+      - name: flutter analyze
+        run: flutter analyze
+
+      - name: app test süiti
+        run: flutter test
+
+      - name: ostinato_audio test süiti
+        run: (cd packages/ostinato_audio && flutter test)
+
+      - name: ostinato_posture test süiti
+        run: (cd packages/ostinato_posture && flutter test)
+
+  android-release-build:
+    name: Android release build — kod yolu kanıtı, İMZALI YAYIN DEĞİL (OST-P0-004)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Poz modeli (pinli SHA-256 doğrulamalı)
+        run: tool/fetch_pose_model.sh
+
+      - name: motion-core erişimi (private repo, salt-okunur)
+        # gates işindeki AYNI adım — gerekçe orada.
+        if: ${{ env.MOTION_CORE_RO_TOKEN != '' }}
+        env:
+          MOTION_CORE_RO_TOKEN: ${{ secrets.MOTION_CORE_RO_TOKEN }}
+        run: |
+          git config --global url."https://x-access-token:${MOTION_CORE_RO_TOKEN}@github.com/kocakkmustafa/motion-core.git".insteadOf "https://github.com/kocakkmustafa/motion-core.git"
+
+      - run: flutter pub get
+
+      - name: Android release build — imzasız, KOD YOLU kanıtı
+        # Gerçek keystore kurucuda (~/.secrets/yula/), CI'da YOK.
+        # `-PallowDebugSigning` android/app/build.gradle.kts'in KENDİ kaçış
+        # kapısı (test/android_signing_test.dart bunu doğruluyor) — CI'a
+        # özgü bir icat değil, "bilerek imzasız yerel/CI build" için zaten
+        # var olan bayrak (aile emsali: Gravita G-192 → Lissom → jablab
+        # JAB-P0-004 → choreia CHO-P0-002 → ostinato). Bu adım release KOD
+        # YOLUNUN derlendiğini kanıtlar; Play'e yüklenebilir bir artefakt
+        # ÜRETMEZ.
+        run: flutter build appbundle --release -PallowDebugSigning=true
+
+  ios-release-build:
+    name: iOS release build, no-codesign (OST-P0-004)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Poz modeli (pinli SHA-256 doğrulamalı)
+        run: tool/fetch_pose_model.sh
+
+      - name: motion-core erişimi (private repo, salt-okunur)
+        if: ${{ env.MOTION_CORE_RO_TOKEN != '' }}
+        env:
+          MOTION_CORE_RO_TOKEN: ${{ secrets.MOTION_CORE_RO_TOKEN }}
+        run: |
+          git config --global url."https://x-access-token:${MOTION_CORE_RO_TOKEN}@github.com/kocakkmustafa/motion-core.git".insteadOf "https://github.com/kocakkmustafa/motion-core.git"
+
+      - run: flutter pub get
+
+      - name: iOS release build, imzasız
+        # `--no-codesign`: CI runner'ında imzalama sertifikası yok ve
+        # olmamalı (sertifika hesap-sahibi kalemidir). Bu adım release
+        # derleme yolunun GERÇEKTEN derlendiğini kanıtlar (bu turda yerel
+        # olarak da OST-P0-002'de doğrulandı — bkz. DEFTER).
+        run: flutter build ios --release --no-codesign
