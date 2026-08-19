@@ -1,0 +1,33 @@
+{
+ "schemaVersion": "ostinato-audiofix-1",
+ "fixtureId": "AF-R009-piano-a7",
+ "kind": "real-clean",
+ "audio": "AF-R009-piano-a7.wav",
+ "$what": "Real Iowa MIS piano note (A7, mf dynamic), trimmed to 3s from onset.",
+ "recordingMeta": {
+  "source": "iowa-mis-piano",
+  "device": "Steinway (Iowa Electronic Music Studios recording rig)",
+  "room": "Iowa EMS recording room",
+  "micDistanceM": null,
+  "sampleRate": 44100,
+  "license": "Iowa-without-restriction",
+  "$licenseNote": "University of Iowa Electronic Music Studios — \"without restriction\" per the institution's own page, verified 2026-08-18 (docs/research/2026-08-18-w1-audio-golden-fixture-kaynaklari.md). Source AIFF SHA-256 pinned in tool/fetch_audio_fixtures.sh.",
+  "sourceUrl": "https://theremin.music.uiowa.edu/MISpiano.html"
+ },
+ "expected": {
+  "f0Hz": 3520.0,
+  "$f0Derivation": "12-TET, A4=440Hz, derived from note name \"A7\" — not hand-typed (see frequencyForNote() in tool/prepare_audio_fixtures.dart).",
+  "shouldJudge": true,
+  "onsetMs": 140.0,
+  "$onsetDerivation": "Measured, not assumed: first 10ms RMS-power window exceeding -40dBFS in this recording (measureOnsetMs() in this file). Iowa MIS recordings do NOT start at the note attack — every one of these 6 fixtures has 167-560ms of leading silence, found by direct measurement, not documented anywhere upstream."
+ },
+ "tolerances": {
+  "centsMedian": 10,
+  "centsP95": 20,
+  "onsetMs": 30
+ },
+ "labels": {
+  "annotator": "derived-from-note-name+measured-envelope",
+  "confidence": "high"
+ }
+}

@@ -4,7 +4,7 @@
 #
 # NİYE İNDİRİLİYOR, NİYE COMMIT EDİLMİYOR: aile kuralı `.task` ikilileri
 # için ne diyorsa (`.gitignore`, fetch+SHA-256 build kapısı) bu dosyalar
-# için de geçerli — 6 gerçek piyano notası ~32MB, her klonda taşınmaz.
+# için de geçerli — 10 gerçek piyano notası ~40MB, her klonda taşınmaz.
 # Yalnız bu betik + fixture JSON'ları (`fixtures/audio-real/*.json`) izlenir.
 #
 # LİSANS: University of Iowa Electronic Music Studios, "without restriction"
@@ -28,7 +28,15 @@ mkdir -p "$RAW_DIR"
 
 # note -> beklenen f0Hz (12-TET, A4=440Hz) ve pinli SHA-256, ölçülüp
 # 2026-08-19'da doğrudan Iowa sunucusundan indirilerek sabitlendi.
-NOTES="A1 C3 C4 A4 C6 C8"
+# A6/C7/A7/B7: C8'in kök-nedeni (O-177) TEŞHİS edildi ama tek data noktasına
+# göre yin.dart eşiğini ayarlamak ilkesiz sayılıp ERTELENMİŞTİ (O-178/O-182/
+# O-183 boyunca tekrarlanan aynı disiplin) — bu 4 nota C6(geçti)-C8(kaldı)
+# arasına ARA veri noktaları katıyor (semitone: A6=+9, C7=+12, A7=+21,
+# B7=+23 — C8=+24'e en yakını B7), TEK bir başarısızlığa göre fit etmek
+# yerine bir EĞİLİM görmeyi mümkün kılıyor. Diyez notalar (Fs7 vb.) Iowa
+# sunucusunda 404 verdi — yalnız DOĞAL notalarla (bu okta aralığında zaten
+# 6 tane var) devam edildi, sahte bir isim İCAT edilmedi.
+NOTES="A1 C3 C4 A4 C6 A6 C7 A7 B7 C8"
 
 sha_for() {
   case "$1" in
@@ -37,6 +45,10 @@ sha_for() {
     C4) echo "1a7d8ddea94a3639fa58d79ebcc0b09b170b9c324811d2b705f97e278fdefac2" ;;
     A4) echo "800a6be43a44125bda75f7907aba2f6299287b4060d67e85efcf32a226757563" ;;
     C6) echo "897480810c72f06e4fc89cfe555925a344a7413230bd374d374a1796ae88acee" ;;
+    A6) echo "e5b2cc6e9894e7fbc4090bd961eb457362eda9d4e138d5fca7cf624b37d8b9d6" ;;
+    C7) echo "dc6dbb6fde60ac3349330285a5467cc7a045d246615c713d96c409fe0ea5ada7" ;;
+    A7) echo "0632cf6f140c40c70ac91a78264a831e05d708a8526a5d9fc37c434322c1922f" ;;
+    B7) echo "035fa4571d299c4f279a5a46efbbf59ccef1a202f5e2358c085e72ecb4baaced" ;;
     C8) echo "4b32b00da510fc38359a98061b99334acb4d53b39d7fd0413d26ee9fed5034ef" ;;
     *) echo ""; ;;
   esac
@@ -62,5 +74,5 @@ for note in $NOTES; do
   echo "✓ SHA doğrulandı ($note): $expected_sha"
 done
 
-echo "→ 6/6 ham AIFF hazır: $RAW_DIR/"
+echo "→ 10/10 ham AIFF hazır: $RAW_DIR/"
 echo "Sıradaki adım: dart run tool/prepare_audio_fixtures.dart"

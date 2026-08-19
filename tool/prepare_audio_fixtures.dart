@@ -19,7 +19,14 @@ import 'dart:math' as math;
 
 import 'audio_fixture_io.dart';
 
-const List<String> _notes = ['A1', 'C3', 'C4', 'A4', 'C6', 'C8'];
+// A6/C7/A7/B7 (2026-08-19, O-184): C8'in kök-nedeni (O-177) TEŞHİS edildi ama
+// tek data noktasına göre yin.dart eşiğini ayarlamak ilkesiz sayılıp ERTELENDİ
+// (O-178/O-182/O-183 boyunca tekrarlanan disiplin) — bu 4 nota C6(geçti)-
+// C8(kaldı) arasına ara veri noktaları katar, tek başarısızlığa göre fit
+// yerine bir EĞİLİM görmeyi mümkün kılar. SONA eklendi (frekans sırasına
+// göre ARAYA değil) — ilk 6 notanın fixtureId'si (AF-R001..006, DEFTER
+// O-176'dan beri referanslı) DEĞİŞMEDEN kalsın diye.
+const List<String> _notes = ['A1', 'C3', 'C4', 'A4', 'C6', 'C8', 'A6', 'C7', 'A7', 'B7'];
 
 /// 12-TET, A4=440Hz. `octave+1) * 12 + semitoneInOctave` MIDI-uyumlu mutlak
 /// yarım-ton sayısıdır (C4=60, A4=69) — hangi "C=60 mı C=48 mi" tartışmasına

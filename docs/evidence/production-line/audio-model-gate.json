@@ -2,10 +2,10 @@
  "schemaVersion": "ostinato-evidence-audio-model-gate-1",
  "claim": "OST-E-003 — Pitch/onset/chord/MIDI gate (roadmap §17)",
  "generatedAt": "2026-08-19",
- "parentCommit": "e05f37b7607ecad51c96f6fac6b34fbcf82cf543",
- "$scopeThisTurn": "Monophonic pitch + onset + pitch-under-SNR (piyano, Iowa MIS) — ÖNCEKİ turdan taşındı, değişmedi. Chord detection GERÇEK gitar kaydıyla (GuitarSet, CC BY 4.0, lazy HTTP-range extraction) ÜÇ bağımsız take'e genişledi (34 fixture, 170 pencere, majör+minör+dominant7) VE roadmap §11'in 'üç SNR koşulunda ayrı rapor' harfi de kapatıldı (6 fixture örneklendi, chordSnrResults). Aynı bulgular ürünün KENDİ `assets/content/library.json` dürüstlük kutusuna da yazıldı (guitar disiplini). MIDI, voice ve fiziksel route bu turda ÖLÇÜLMEDİ — aşağıdaki 'notCoveredThisTurn' bunları adıyla sayar.",
+ "parentCommit": "25dbcc75d11eb9c82975b3b3e9c246194417457d",
+ "$scopeThisTurn": "Chord detection GERÇEK gitar kaydıyla (GuitarSet, CC BY 4.0) ÜÇ bağımsız take'e genişledi (34 fixture, 170 pencere, majör+minör+dominant7, üç-SNR koşulu dahil) — ÖNCEKİ turdan taşındı. YENİ bu turda: piyano pitch'e 4 ARA nota eklendi (A6/C7/A7/B7, C6-C8 arası) — C8'in kök nedenini tek-nokta anomalisinden ÇOK-NOKTALI, MONOTONİK bir eğilime dönüştürdü ($highRegisterTrend). Sonuç: eşik-gevşetme fikri BİLEREK reddedildi (artık veri eksikliğinden değil, bu projenin 'reddet-tahmin etme' değeriyle çelişeceği için) — bunun yerine 'piyanonun güvenilir kapsamı A6/C6 civarında pratik olarak sona eriyor' diye dürüst bir sınır ÖNERİLDİ (henüz hiçbir içerik/config bu aralığı iddia etmiyor, bu yüzden bir honesty-box düzeltmesi GEREKMEDİ). MIDI, voice ve fiziksel route bu turda ÖLÇÜLMEDİ.",
  "provenance": {
-  "appCommit": "e05f37b7607ecad51c96f6fac6b34fbcf82cf543",
+  "appCommit": "25dbcc75d11eb9c82975b3b3e9c246194417457d",
   "audioPackageVersion": "ostinato_audio 0.1.0",
   "motionCorePin": "f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d",
   "engine": "YinPitchSource + OnsetDetector + AudioConfidenceGate (packages/ostinato_audio)",
@@ -29,21 +29,28 @@
   "note": "Fixture toleransları (tolerances.centsMedian/centsP95/onsetMs, her fixture JSON'unda) BU eşikleri birebir taşır — ayrı bir sayı İCAT edilmedi. Chord eşiği (0.90) tool/guitarset_chord_replay.dart içinde aynı disiplinle roadmap metninden birebir alındı."
  },
  "results": {
-  "summary": {"pass": 5, "fail": 1, "outOfRange": 0, "total": 6},
+  "summary": {"pass": 5, "fail": 5, "outOfRange": 0, "total": 10},
+  "$note10Fixtures": "2026-08-19 (O-184): 4 yeni ARA nota (A6/C7/A7/B7) C6(geçti)-C8(kaldı) arasına eklendi — C8'in kök-nedenini (O-177) tek data noktasından ÇOK-NOKTALI bir EĞİLİME dönüştürmek için. Bkz. $highRegisterTrend. İlk 6 fixture'ın fixtureId'si DEĞİŞMEDİ (AF-R001..006, bilerek SONA eklendi, ARAYA değil).",
   "fixtures": [
    {"fixtureId": "AF-R001-piano-a1", "note": "A1", "expectedHz": 55.0, "status": "pass", "medianCents": 8.87, "p95Cents": 11.03, "judgedFraction": 0.841, "onsetErrorMs": 6.4},
    {"fixtureId": "AF-R002-piano-c3", "note": "C3", "expectedHz": 130.8128, "status": "pass", "medianCents": 5.56, "p95Cents": 7.96, "judgedFraction": 0.825, "onsetErrorMs": 8.2},
    {"fixtureId": "AF-R003-piano-c4", "note": "C4", "expectedHz": 261.6256, "status": "pass", "medianCents": 5.35, "p95Cents": 9.06, "judgedFraction": 0.905, "onsetErrorMs": 1.5},
    {"fixtureId": "AF-R004-piano-a4", "note": "A4", "expectedHz": 440.0, "status": "pass", "medianCents": 7.16, "p95Cents": 8.99, "judgedFraction": 0.937, "onsetErrorMs": 6.7},
-   {"fixtureId": "AF-R005-piano-c6", "note": "C6", "expectedHz": 1046.5023, "status": "pass", "medianCents": 8.2, "p95Cents": 13.99, "judgedFraction": 0.794, "onsetErrorMs": 6.6},
-   {"fixtureId": "AF-R006-piano-c8", "note": "C8", "expectedHz": 4186.009, "status": "fail",
+   {"fixtureId": "AF-R005-piano-c6", "note": "C6", "expectedHz": 1046.5023, "semitonesFromC6": 0, "status": "pass", "medianCents": 8.2, "p95Cents": 13.99, "judgedFraction": 0.794, "onsetErrorMs": 6.6},
+   {"fixtureId": "AF-R007-piano-a6", "note": "A6", "expectedHz": 1760.0, "semitonesFromC6": 9, "status": "fail", "medianCents": 18.05, "p95Cents": 22.49, "judgedFraction": 0.68, "onsetErrorMs": 2.7},
+   {"fixtureId": "AF-R008-piano-c7", "note": "C7", "expectedHz": 2093.0, "semitonesFromC6": 12, "status": "fail", "medianCents": 23.13, "p95Cents": 27.9, "judgedFraction": 0.41, "onsetErrorMs": null},
+   {"fixtureId": "AF-R009-piano-a7", "note": "A7", "expectedHz": 3520.0, "semitonesFromC6": 21, "status": "fail", "medianCents": 49.22, "p95Cents": 49.69, "judgedFraction": 0.06, "onsetErrorMs": 8.8},
+   {"fixtureId": "AF-R010-piano-b7", "note": "B7", "expectedHz": 3951.07, "semitonesFromC6": 23, "status": "fail", "medianCents": 42.67, "p95Cents": 42.67, "judgedFraction": 0.03, "onsetErrorMs": 2.6},
+   {"fixtureId": "AF-R006-piano-c8", "note": "C8", "expectedHz": 4186.009, "semitonesFromC6": 24, "status": "fail",
     "pitchStatus": "fail", "onsetStatus": "pass",
     "medianCents": null, "p95Cents": null, "judgedFraction": 0.0, "onsetErrorMs": 12.8,
-    "$diagnosis": "KÖK NEDEN BULUNDU (bu turda, doğrudan cmnd değerleri incelenerek): YIN gerçek periyodu (~10,5 örnek, 44100/4186Hz) DOĞRU konumda buluyor — τ=11'de yerel minimum, cmnd=0,4646, komşu τ değerlerinden (τ=16'da 1,97) belirgin şekilde düşük. Bu bir sınır/off-by-one hatası DEĞİL: periyot yeri doğru tespit ediliyor. Ama bu minimumun MUTLAK değeri (0,4646) hiçbir zaman `_absoluteThreshold`ın varsayılan eşiğinin (0,15) altına inmiyor — yani algoritma 'confident' saymıyor ve HÜKÜM VERMİYOR (uydurmuyor). Bu, çok kısa periyotlarda (~10 örnek/döngü) fark-fonksiyonunun doğası gereği daha az kesin olmasından kaynaklanıyor gibi görünüyor (döngü başına az örnek → gürültüye karşı daha az dayanıklı normalize fark). Motor DAVRANIŞI doğru (bilmiyorsa söylemiyor) ama piyanonun en tiz tuşu bu haliyle DESTEKLENMİYOR. Olası çözüm yolları (denenmedi, önerilir): (a) frekansa-bağlı eşik (yüksek τ-bölgesinde daha gevşek), (b) τ-bölgesine özel ikinci bir onay adımı. İkisi de packages/ostinato_audio'nun PAYLAŞILAN motoruna dokunur — geniş regresyon (100/100 sentetik + 5/6 gerçek piyano) doğrulaması gerektirir, bu turun kapsamı DIŞINDA bırakıldı (riskli, tek-oturumluk bir değişiklik değil)."}
-  ]
+    "$diagnosis": "KÖK NEDEN BULUNDU (O-177, doğrudan cmnd değerleri incelenerek): YIN gerçek periyodu (~10,5 örnek, 44100/4186Hz) DOĞRU konumda buluyor — τ=11'de yerel minimum, cmnd=0,4646, komşu τ değerlerinden (τ=16'da 1,97) belirgin şekilde düşük. Bu bir sınır/off-by-one hatası DEĞİL: periyot yeri doğru tespit ediliyor. Ama bu minimumun MUTLAK değeri (0,4646) hiçbir zaman `_absoluteThreshold`ın varsayılan eşiğinin (0,15) altına inmiyor — yani algoritma 'confident' saymıyor ve HÜKÜM VERMİYOR (uydurmuyor)."}
+  ],
+  "$highRegisterTrend": "O-184 (bu tur): C6-C8 arasına 4 ara nota (A6/C7/A7/B7) eklenince C8'in 'tek nokta anomalisi' hipotezi ÇÜRÜDÜ — yerine TEMİZ, MONOTONİK bir eğilim bulundu. Semitone (C6'dan) → medyan¢/judgedFraction: 0→8,2¢/%79 (GEÇTİ) · 9→18,1¢/%68 (KALDI) · 12→23,1¢/%41 · 21→49,2¢/%6 · 23→42,7¢/%3 · 24→N/A¢/%0 (tam ret). HEM hata büyüyor HEM güven düşüyor, C6'nın hemen ÜSTÜNDEN (A6, +9 semitone) başlıyor — C8'e özgü bir sınır/off-by-one DEĞİL. Bu, önceki turun (O-177/O-178/O-182/O-183) tekrarlanan 'tek veri noktasına göre fit etmek ilkesiz olur' kararını ARTIK karşılıyor (6 nokta var) — ama ELDEKİ 6 noktayla YENİDEN değerlendirilince SONUÇ DEĞİŞTİ: bir eşik-gevşetmesi bu projenin KENDİ 'tahmin etme, reddet' kültürüyle GERÇEKTEN çelişebilir (kapsamayı artırmak güvenilirliği düşürür — chord/pitch'in HER YERİNDE bilinçli tercih edilen taraf REDDETMEK). `ChromaAnalyzer.highestMidi=84` (C6) zaten AYNI yükseklikte benzer bir sınır çiziyor ('üstünde guitar/piano partials dominates'). Bu yüzden ÖNERİ: yin.dart'a spekülatif bir eşik-parametresi eklemek YERİNE, piyanonun GÜVENİLİR monofonik pitch kapsamının A6/C6 civarında pratik olarak SONA erdiğini dürüstçe BELGELEMEK (bir hata değil, bu algoritma+4096-örnek-pencere kombinasyonunun GERÇEK bir sınırı). library.json/config'de piyano için henüz bir nota-aralığı İDDİASI YOK (kontrol edildi) — bu yüzden bir honesty-box düzeltmesi GEREKMEDİ, yalnız gelecekteki bir aralık-iddiası bu sınırı hesaba KATMALI.",
+  "$deferredFix": "Eşik/algoritma değişikliği YİNE (üçüncü kez) BİLEREK denenmedi — artık VERİ eksikliğinden değil, DEĞERİN kendisi şüpheli olduğundan: 'daha fazla pencerede hüküm ver' ile 'yalnız emin olduğunda hüküm ver' arasındaki ödünleşim, bu kod tabanının HER YERİNDE (chord, SNR, gate tasarımı) ikincisi lehine bilinçli seçilmiş bir DEĞER, yalnız YIN'de tersine çevirmek tutarsız olurdu. Değiştirilecekse bunun GEREKÇESİ 'daha fazla veri' değil 'bu ödünleşimi kasıtlı olarak farklı yapmak istiyoruz' olmalı — bu bir mühendislik kararı değil, ÜRÜN kararı."
  },
  "onsetResults": {
-  "summary": {"allSixMeasured": true, "worstCaseErrorMs": 12.8, "toleranceMs": 30, "note": "C8'in PITCH hükmü FAIL olsa da onset hükmü BAĞIMSIZ olarak PASS — iki motor farklı sinyal özelliklerine dayanıyor, C8'in kısa-periyot sorunu onset'i etkilemiyor."}
+  "summary": {"allSixMeasured": true, "worstCaseErrorMs": 12.8, "toleranceMs": 30, "note": "C8'in PITCH hükmü FAIL olsa da onset hükmü BAĞIMSIZ olarak PASS — iki motor farklı sinyal özelliklerine dayanıyor, C8'in kısa-periyot sorunu onset'i etkilemiyor. C7 onset ÖLÇÜLEMEDİ (measureOnsetMs bu kayıtta hiç eşik-üstü pencere bulamadı — adıyla null, 'geçti' SAYILMADI)."}
  },
  "snrResults": {
   "method": "AF-R003-piano-c4 + AF-R004-piano-a4 (C8 HARİÇ — onun pitch açığı zaten teşhisli, SNR bulgusunu bulandırırdı) üstüne SyntheticTone.roomNoise() 3 hedef SNR'da (30/15/3 dB) karıştırıldı; roomFloorDb GERÇEK ölçülen gürültü dBFS'i (varsayılmadı). tool/audio_snr_replay.dart, gitignored fixtures/audio-real/snr-report.json'a tam sonuç yazar.",
@@ -103,7 +110,7 @@
   "MIDI event doğruluğu (hiç dokunulmadı, roadmap §12 OST-P0-003 kapsamının bir parçası ama bu turda YOK)",
   "Voice gerçek fixture (yalnız piyano+gitar — voice için ticari-güvenli gerçek veri seti araştırması daha önce SIFIR bulmuştu, muhtemelen kurucunun kendi kaydına kalıyor)",
   "Kalite-gradyanı hipotezinin kesin doğrulanması + chord'un aşırı-gürültü (-20dB altı) davranışının tam popülasyonda ölçülmesi (bkz. chordResults/chordSnrResults — TÜM temel şartlar artık kapsanıyor, kalan yalnız daha geniş örneklem)",
-  "C8 kök nedeninin ÇÖZÜMÜ (yalnız TEŞHİSİ tamamlandı) — eşik/algoritma değişikliği BİLEREK denenmedi: tek data noktasına (C8) göre şeklen fit etmek, C6/C8 arası ara notalar olmadan ilkeli değil",
+  "C8/yüksek-register pitch — artık TEK anomaliden ÇOK-NOKTALI monotonik eğilime dönüştü (O-184, bkz. results.$highRegisterTrend), ama bir 'ürün kararı' olarak açık bırakıldı: eşik-gevşetmesi bu projenin 'reddet-tahmin etme' değeriyle çelişebilir, önerilen çözüm YIN'de kod değişikliği değil piyanonun beyan edilen kapsamını A6/C6 civarında dürüstçe sınırlamak — henüz hiçbir içerik bu aralığı iddia etmediği için şimdilik eylem GEREKMİYOR",
   "Step 3 — fiziksel matris (speaker/wired/Bluetooth/USB-BLE MIDI): EXTERNAL_GATE, bu oturumda fiziksel cihaz erişimi yok (roadmap §15 MANUAL-OSTINATO-DEVICE-20260818)"
  ]
 }
