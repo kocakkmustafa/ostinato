@@ -90,6 +90,7 @@ flutter:
     # Sözleşme ve kütüphane ÜRETİLEN varlıklardır (tools/gen_posture_contract.py
     # ve validate_library kapıları). Kabuk sayı taşımaz, okur.
     - assets/config/posture-contract.json
+    - assets/config/audio-contract.json
     - assets/content/library.json
     # OFL lisans metinleri — paketlenmiş font DOSYALARIYLA BİRLİKTE dağıtılmak
     # OFL §2'nin şartı (D1, H-34/H-40 bağı: google_fonts kalktı, yazı tipleri

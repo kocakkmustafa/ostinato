@@ -1,0 +1,23 @@
+{
+ "guitar": {
+  "chordCorrectnessThreshold": 0.8,
+  "levelAboveRoomFloorDbThreshold": 6,
+  "playTimeoutMs": 20000,
+  "playMinDurationMs": 800,
+  "onsetNoVerdictHoldMs": 100,
+  "pitchWindowMs": 92.9,
+  "pitchHopMs": 23.2,
+  "yinThreshold": 0.15,
+  "onsetFrameMs": 46,
+  "onsetHopMs": 6,
+  "onsetMedianWindow": 11,
+  "onsetBandCount": 24,
+  "onsetMinAnalysisHz": 40,
+  "onsetMaxAnalysisHz": 4000,
+  "_derivedFrom": {
+   "ruleset": "config/rulesets/guitar@0.2.0-draft.json",
+   "rulesetVersion": "0.2.0-draft",
+   "technique": "open_chord_drill"
+  }
+ }
+}
