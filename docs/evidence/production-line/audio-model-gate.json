@@ -2,10 +2,10 @@
  "schemaVersion": "ostinato-evidence-audio-model-gate-1",
  "claim": "OST-E-003 — Pitch/onset/chord/MIDI gate (roadmap §17)",
  "generatedAt": "2026-08-19",
- "parentCommit": "5bdf8f4cae9677ccdb096090a4bebb8bfa0fe79b",
- "$scopeThisTurn": "YALNIZ monophonic pitch + onset + pitch-under-SNR, YALNIZ piyano, YALNIZ Iowa MIS 'without restriction' gerçek stüdyo kaydı (+ SNR turunda kontrollü sentetik gürültü karışımı). Chord/MIDI, guitar/voice, chord-özel SNR varyasyonu, fiziksel route (speaker/wired/BT/USB-MIDI) ve gerçek cihaz mikrofonu bu turda ÖLÇÜLMEDİ — aşağıdaki 'notCoveredThisTurn' bunları adıyla sayar.",
+ "parentCommit": "123a4d12227153449d9b6fff3471931c9ca410c7",
+ "$scopeThisTurn": "Monophonic pitch + onset + pitch-under-SNR (piyano, Iowa MIS) — ÖNCEKİ turdan taşındı, değişmedi. YENİ bu turda: chord detection GERÇEK gitar kaydıyla (GuitarSet, CC BY 4.0, lazy HTTP-range extraction ile 657MB'lık arşivden ~1MB çekilerek) — yalnız majör üçlü, yalnız temiz/gürültüsüz. MIDI, voice, chord-özel 3-SNR koşulu ve fiziksel route bu turda da ÖLÇÜLMEDİ — aşağıdaki 'notCoveredThisTurn' bunları adıyla sayar.",
  "provenance": {
-  "appCommit": "5bdf8f4cae9677ccdb096090a4bebb8bfa0fe79b",
+  "appCommit": "123a4d12227153449d9b6fff3471931c9ca410c7",
   "audioPackageVersion": "ostinato_audio 0.1.0",
   "motionCorePin": "f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d",
   "engine": "YinPitchSource + OnsetDetector + AudioConfidenceGate (packages/ostinato_audio)",
@@ -25,7 +25,8 @@
  "acceptanceGate": {
   "pitch": "roadmap §11: monophonic pitch median absolute error ≤10 cent, p90/p95 ≤20 cent, supported range içinde",
   "onset": "roadmap §11: speaker/wired onset median absolute error ≤30ms",
-  "note": "Fixture toleransları (tolerances.centsMedian/centsP95/onsetMs, her fixture JSON'unda) BU eşikleri birebir taşır — ayrı bir sayı İCAT edilmedi."
+  "chord": "roadmap §11: supported major/minor triad chord accuracy ≥%90, üç SNR koşulunda ayrı rapor",
+  "note": "Fixture toleransları (tolerances.centsMedian/centsP95/onsetMs, her fixture JSON'unda) BU eşikleri birebir taşır — ayrı bir sayı İCAT edilmedi. Chord eşiği (0.90) tool/guitarset_chord_replay.dart içinde aynı disiplinle roadmap metninden birebir alındı."
  },
  "results": {
   "summary": {"pass": 5, "fail": 1, "outOfRange": 0, "total": 6},
@@ -63,12 +64,20 @@
   "result": "caught",
   "$why": "M-L-05 (ölü-metrik yasağı) — kapı hiç kırmızı üretemiyorsa 'bu turda temiz' iddiası anlamsız kalırdı"
  },
+ "chordResults": {
+  "method": "GuitarSet (Xu/Salamon/Bittner/Wang/Bello, ISMIR 2018 — Zenodo record 3371780, CC BY 4.0) take '00_BN1-129-Eb_comp' (Bossa Nova comping, 129 BPM). Arşiv 657MB — TAMAMI indirilmedi: tool/fetch_guitarset_fixtures.py, Zenodo'nun HTTP Range desteğini kullanarak ZIP merkezi dizinini + yalnız hedef 2 girişi çekti (~1.1MB toplam, arşivin %0,16'sı — doğrulandı, deterministik, SHA-256 pinli). JAMS'ın İKİ chord namespace'inden yapısal işaretle (hiçbir değeri '/' içermeyen) BASİT/üçlü katman seçildi — detaylı voicing katmanı (ör. 'D#:sus2(7)/1') ChordDetector'ın hiç modellemediği bir soru olurdu. 6 akor segmentinin her birinden +300ms'de başlayan 1200ms'lik pencere kesildi (tool/prepare_guitarset_fixtures.dart), her fixture 400ms/200ms-hop 5 kaydırmalı pencerede varsayılan ChordDetector() (24 şablon, acceptedNames kısıtı YOK) ile koşuldu (tool/guitarset_chord_replay.dart).",
+  "roadmapGate": {"threshold": 0.90, "measured": 0.2333, "gateOk": false},
+  "summary": {"fixturesTotal": 6, "fixturesAllWindowsCorrect": 2, "totalWindows": 30, "correctWindows": 7, "nullWindows": 13, "wrongWindows": 10, "meanLatencyMs": 2.08, "maxLatencyMs": 9.9},
+  "$diagnosis": "KÖK NEDEN bulundu (pencere-düzeyi skor/margin + 50ms RMS zarf ölçümüyle doğrulandı, tahmin değil): (1) Zarf ölçümü NULL'ların dijital sessizlikten gelmediğini gösterdi (-55..-27dB arası GERÇEK, yapılı sinyal, hiç dijital sıfır yok) — null'lar ChromaAnalyzer'ın sessizlik reddinden (peak<=0) DEĞİL, ChordDetector'ın KENDİ güven kapısından (minScore=0.55 / minRunnerUpMargin=0.06) geliyor; bu tasarım gereği ('tahmin etme, reddet'), yalnız bu ritmik comping sinyalinde SIK tetikleniyor (13/30 pencere, %43). (2) Ateşlendiğinde D#/A# fixture'ları ÇOĞUNLUKLA doğru ve yüksek güvenle (skor 0,82-0,92) — motor TEMİZ örnekte çalışıyor. (3) G# fixture'larından biri (AC-R002) TUTARLI şekilde 'Fm' diyor (skor 0,74-0,87, 4/5 pencere) — rastgele gürültü DEĞİL: G#majör(G#,C,D#) ile Fm(F,G#,C) 3 nottan 2'sini paylaşıyor, chord_detector.dart'ın kendi yorumunun ZATEN belgelediği 'yakın üçlü karışıklığı' (measure_fallback_liveness.dart, 2026-08-04) — eğitilmiş modele karşı lisans nedeniyle şablon-korelasyonu seçmenin (dosya-başı yorum) bilinen bedeli.",
+  "$representativenessCaveat": "GuitarSet 'comp' stili PROFESYONEL ritmik Bossa Nova comping — senkoplu kısa vuruşlar, Ostinato'nun gerçek open_chord_drill senaryosunun (öğrenciye TEK akoru TUTARAK çaldırmak) ima ettiği sürekli-çınlayan tek-akor tutuşu DEĞİL. GuitarSet'te 'tek akoru N saniye tut' tarzı bir kayıt YOK (her take müzikal bir performans) — başka bir GuitarSet dosyası seçmek bu farkı GİDERMEZDİ. Bu %23,3 'dedektörün bu ürünün asıl senaryosunda başarısız olduğu' diye OKUNMAMALI — 'daha zor, farklı bir sinyal sınıfında nasıl davrandığı' diye okunmalı. Ürünün asıl senaryosuna denk gerçek fixture için ya izole/kasıtlı tek-akor gerçek kayıt (kurucunun kendi kaydı, ses fixture açığıyla AYNI sınıf ihtiyaç) ya da bu GuitarSet ölçümünün KENDİSİ zorlaştırıcı-ama-geçerli bir kalıcı kıyas noktası olarak kabul edilmesi gerekir — bu bir kurucu/ürün kararı, bu turda VARSAYILMADI.",
+  "$deferredDecision": "C8 pitch bulgusuyla AYNI disiplin: minScore/minRunnerUpMargin'i (ya da şablon setini) tek bir dosyanın/tek bir alt-türün (G#'nin Fm karışıklığı) sonucuna göre ayarlamak ilkesiz olurdu — daha geniş/çeşitli gerçek veri (farklı çalgıcı, farklı akor, tercihen İZOLE strum) önce gerekir. Eşik/algoritma değişikliği bu turda BİLEREK denenmedi.",
+  "$notCoveredWithinChord": "Minör üçlü (bu take'in basit chord katmanı %100 majör — D#/G#/A#), dominant7, chord'un kendi 3-SNR koşulu (roadmap §11'in TAM şartı — bu tur yalnız temiz/gürültüsüz)."
+ },
  "notCoveredThisTurn": [
-  "Chord detection gerçek kayıtla (yalnız sentetik)",
   "MIDI event doğruluğu (hiç dokunulmadı, roadmap §12 OST-P0-003 kapsamının bir parçası ama bu turda YOK)",
-  "Guitar/voice gerçek fixture (yalnız piyano — GuitarSet lisansı doğrulandı ama İNDİRİLMEDİ, sonraki tur)",
-  "Chord accuracy 3 SNR koşulunda (roadmap §11'in TAM şartı) — bu tur yalnız PİTCH'i 3 SNR'da sınadı (bkz. snrResults), chord fixture'ı hâlâ yok",
-  "C8 kök nedeninin ÇÖZÜMÜ (yalnız TEŞHİSİ tamamlandı) — eşik/algoritma değişikliği BİLEREK denenmedi (bkz. aşağıdaki karar notu): tek data noktasına (C8) göre şeklen fit etmek, C6/C8 arası ara notalar olmadan ilkeli değil; guitar/voice fixture genişlemesi ve/veya ek yüksek-nota veri noktaları önce gelmeli",
+  "Voice gerçek fixture (yalnız piyano+gitar — voice için ticari-güvenli gerçek veri seti araştırması daha önce SIFIR bulmuştu, muhtemelen kurucunun kendi kaydına kalıyor)",
+  "Chord minör/dominant7 kapsamı + chord'un kendi 3-SNR koşulu (bkz. chordResults.$notCoveredWithinChord)",
+  "C8 kök nedeninin ÇÖZÜMÜ (yalnız TEŞHİSİ tamamlandı) — eşik/algoritma değişikliği BİLEREK denenmedi: tek data noktasına (C8) göre şeklen fit etmek, C6/C8 arası ara notalar olmadan ilkeli değil",
   "Step 3 — fiziksel matris (speaker/wired/Bluetooth/USB-BLE MIDI): EXTERNAL_GATE, bu oturumda fiziksel cihaz erişimi yok (roadmap §15 MANUAL-OSTINATO-DEVICE-20260818)"
  ]
 }

@@ -24,6 +24,7 @@ fixtures/audio-real/*.aiff
 # `docs/evidence/production-line/audio-model-gate.json`dadır (İZLENİR).
 fixtures/audio-real/replay-report.json
 fixtures/audio-real/snr-report.json
+fixtures/audio-real/chord-report.json
 .mutA-backup/
 # Kalıcı MUT-A geçmişi (koordinatör sevki 2026-08-11, dördüncü unsur: KAYIT).
 # .mutA-backup/'ın aksine koşum bitince SİLİNMEZ — ama yine de yerel/makineye

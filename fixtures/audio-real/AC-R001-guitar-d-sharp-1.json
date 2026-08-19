@@ -1,0 +1,41 @@
+{
+ "schemaVersion": "ostinato-audiofix-chord-1",
+ "fixtureId": "AC-R001-guitar-d-sharp-1",
+ "kind": "real-clean",
+ "audio": "AC-R001-guitar-d-sharp-1.wav",
+ "$what": "Real GuitarSet recording (Bossa Nova comping), D#:major chord, 1.2s window starting 0.3s after JAMS segment onset (instance 1 of this root+quality in the source take).",
+ "recordingMeta": {
+  "source": "guitarset",
+  "device": "guitar, mono neck-pickup mic (GuitarSet \"mono-mic\" release)",
+  "room": null,
+  "micDistanceM": null,
+  "sampleRate": 44100,
+  "license": "CC-BY-4.0",
+  "$licenseNote": "GuitarSet (Xu, Q., Salamon, J., Bittner, R., Wang, X., Bello, J.P. \"GuitarSet: A Dataset for Guitar Transcription\", ISMIR 2018), Zenodo record 3371780, CC BY 4.0 — verified 2026-08-18 (docs/research/2026-08-18-w1-audio-golden-fixture-kaynaklari.md). Source ZIP entries SHA-256-pinned in tool/fetch_guitarset_fixtures.py.",
+  "sourceUrl": "https://zenodo.org/records/3371780",
+  "sourceFile": "00_BN1-129-Eb_comp_mic.wav",
+  "sourceJams": "00_BN1-129-Eb_comp.jams",
+  "originalSegment": {
+   "startS": 0.0,
+   "durationS": 7.442,
+   "clipOffsetS": 0.3,
+   "clipDurationS": 1.2
+  }
+ },
+ "expected": {
+  "chordName": "D#",
+  "quality": "major",
+  "$chordDerivation": "JAMS \"chord\" namespace, structurally-selected simple/coarse track (no \"/\" in any event value — the detailed voicing track, e.g. \"D#:sus2(7)/1\", was deliberately excluded: ChordDetector only models {major,minor,dominant7}, so grading against extensions/inversions would test a question it never claims to answer). Root mapped via JAMS \"<root>:<quality>\" split; ChordTemplate.name for major has NO suffix (chroma.dart pitchClassNames are all-sharp, matching JAMS Harte notation directly for this take — no enharmonic conversion was needed here, though prepare_guitarset_fixtures.dart carries a flat→sharp table for future files that might use flat spellings).",
+  "shouldJudge": true
+ },
+ "windowing": {
+  "windowMs": 400,
+  "hopMs": 200,
+  "$rationale": "ChromaAnalyzer.minWindowMs=200 (chroma.dart) is the analysis floor; a 400ms window / 200ms hop yields 5 flush non-overlapping-start windows across this 1200ms clip, testing whether the chord reading is STABLE across the held sustain (a real reliability question) rather than accepting a single lucky sample."
+ },
+ "labels": {
+  "annotator": "guitarset-semi-automatic-with-manual-verification",
+  "$annotatorSource": "JAMS annotation_metadata.data_source on the simple chord namespace.",
+  "confidence": "high"
+ }
+}
