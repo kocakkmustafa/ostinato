@@ -2,10 +2,10 @@
  "schemaVersion": "ostinato-evidence-audio-model-gate-1",
  "claim": "OST-E-003 — Pitch/onset/chord/MIDI gate (roadmap §17)",
  "generatedAt": "2026-08-19",
- "parentCommit": "f414e998b5c570f474ba0d09238370093c7383d4",
- "$scopeThisTurn": "YALNIZ monophonic pitch + onset, YALNIZ piyano, YALNIZ Iowa MIS 'without restriction' gerçek stüdyo kaydı. Chord/MIDI, guitar/voice, SNR varyasyonu, fiziksel route (speaker/wired/BT/USB-MIDI) ve gerçek cihaz mikrofonu bu turda ÖLÇÜLMEDİ — aşağıdaki 'notCoveredThisTurn' bunları adıyla sayar.",
+ "parentCommit": "5bdf8f4cae9677ccdb096090a4bebb8bfa0fe79b",
+ "$scopeThisTurn": "YALNIZ monophonic pitch + onset + pitch-under-SNR, YALNIZ piyano, YALNIZ Iowa MIS 'without restriction' gerçek stüdyo kaydı (+ SNR turunda kontrollü sentetik gürültü karışımı). Chord/MIDI, guitar/voice, chord-özel SNR varyasyonu, fiziksel route (speaker/wired/BT/USB-MIDI) ve gerçek cihaz mikrofonu bu turda ÖLÇÜLMEDİ — aşağıdaki 'notCoveredThisTurn' bunları adıyla sayar.",
  "provenance": {
-  "appCommit": "f414e998b5c570f474ba0d09238370093c7383d4",
+  "appCommit": "5bdf8f4cae9677ccdb096090a4bebb8bfa0fe79b",
   "audioPackageVersion": "ostinato_audio 0.1.0",
   "motionCorePin": "f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d",
   "engine": "YinPitchSource + OnsetDetector + AudioConfidenceGate (packages/ostinato_audio)",
@@ -44,6 +44,20 @@
  "onsetResults": {
   "summary": {"allSixMeasured": true, "worstCaseErrorMs": 12.8, "toleranceMs": 30, "note": "C8'in PITCH hükmü FAIL olsa da onset hükmü BAĞIMSIZ olarak PASS — iki motor farklı sinyal özelliklerine dayanıyor, C8'in kısa-periyot sorunu onset'i etkilemiyor."}
  },
+ "snrResults": {
+  "method": "AF-R003-piano-c4 + AF-R004-piano-a4 (C8 HARİÇ — onun pitch açığı zaten teşhisli, SNR bulgusunu bulandırırdı) üstüne SyntheticTone.roomNoise() 3 hedef SNR'da (30/15/3 dB) karıştırıldı; roomFloorDb GERÇEK ölçülen gürültü dBFS'i (varsayılmadı). tool/audio_snr_replay.dart, gitignored fixtures/audio-real/snr-report.json'a tam sonuç yazar.",
+  "acceptanceReference": "roadmap §11: Noise/unsupported input false verdict oranı ≤%1",
+  "results": [
+   {"fixtureId": "AF-R003-piano-c4", "snrDb": 30, "judgedFraction": 0.905, "medianCentsWhenJudged": 5.37, "falseVerdictRate": 0.0},
+   {"fixtureId": "AF-R003-piano-c4", "snrDb": 15, "judgedFraction": 0.302, "medianCentsWhenJudged": 6.31, "falseVerdictRate": 0.0},
+   {"fixtureId": "AF-R003-piano-c4", "snrDb": 3, "judgedFraction": 0.111, "medianCentsWhenJudged": 6.4, "falseVerdictRate": 0.0},
+   {"fixtureId": "AF-R004-piano-a4", "snrDb": 30, "judgedFraction": 0.937, "medianCentsWhenJudged": 7.6, "falseVerdictRate": 0.0},
+   {"fixtureId": "AF-R004-piano-a4", "snrDb": 15, "judgedFraction": 0.25, "medianCentsWhenJudged": 6.9, "falseVerdictRate": 0.0},
+   {"fixtureId": "AF-R004-piano-a4", "snrDb": 3, "judgedFraction": 0.13, "medianCentsWhenJudged": 10.2, "falseVerdictRate": 0.0}
+  ],
+  "$finding": "İKİ bulgu birlikte: (1) judgedFraction gürültü arttıkça DÜZGÜNCE düşüyor (90-94%→25-30%→11-13%) — AudioConfidenceGate roadmap §7'nin 'noise floor yüksekse hüküm yok' sözleşmesini GERÇEK sinyalde doğru uyguluyor. (2) falseVerdictRate TÜM koşullarda 0,0% (166 yargılanan pencerenin 0'ı yanlış) — roadmap'in ≤%1 eşiğinin altında; kapı YARGILADIĞINDA hâlâ DOĞRU, yalnız DAHA AZ yargılıyor. Öz-test: -20dB'lik aşırı gürültüde judgedFraction 0,0% — kapı GERÇEKTEN reddedebiliyor, ölçüm kör değil.",
+  "$notCovered": "Bu SNR turu yalnız PİTCH içindi — roadmap §11'in 'chord accuracy 3 SNR'da ayrı rapor' şartı chord fixture'ı gerektirir (bu turda yok, bkz. notCoveredThisTurn)."
+ },
  "selfTest": {
   "method": "octave-corrupted expectedHzPrior (2x gerçek f0) ile aynı gerçek kayıt yeniden koşuldu",
   "result": "caught",
@@ -53,8 +67,8 @@
   "Chord detection gerçek kayıtla (yalnız sentetik)",
   "MIDI event doğruluğu (hiç dokunulmadı, roadmap §12 OST-P0-003 kapsamının bir parçası ama bu turda YOK)",
   "Guitar/voice gerçek fixture (yalnız piyano — GuitarSet lisansı doğrulandı ama İNDİRİLMEDİ, sonraki tur)",
-  "3 ayrı SNR koşulu (roadmap §11: chord accuracy 3 SNR'da AYRI raporlanmalı) — bu turun fixture'ları hepsi TEK, kontrolsüz stüdyo SNR'ında",
-  "C8 kök nedeninin ÇÖZÜMÜ (yalnız TEŞHİSİ bu turda tamamlandı) — eşik/algoritma değişikliği riskli, ayrı bir tur ister",
+  "Chord accuracy 3 SNR koşulunda (roadmap §11'in TAM şartı) — bu tur yalnız PİTCH'i 3 SNR'da sınadı (bkz. snrResults), chord fixture'ı hâlâ yok",
+  "C8 kök nedeninin ÇÖZÜMÜ (yalnız TEŞHİSİ tamamlandı) — eşik/algoritma değişikliği BİLEREK denenmedi (bkz. aşağıdaki karar notu): tek data noktasına (C8) göre şeklen fit etmek, C6/C8 arası ara notalar olmadan ilkeli değil; guitar/voice fixture genişlemesi ve/veya ek yüksek-nota veri noktaları önce gelmeli",
   "Step 3 — fiziksel matris (speaker/wired/Bluetooth/USB-BLE MIDI): EXTERNAL_GATE, bu oturumda fiziksel cihaz erişimi yok (roadmap §15 MANUAL-OSTINATO-DEVICE-20260818)"
  ]
 }
