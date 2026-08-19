@@ -79,6 +79,24 @@ TARGETS = [
         "dest": "guitarset_00_BN3-119-G_comp.jams",
         "sha256": "9e92a2ac7126785ec54ff72de46a719da6c33b11f2477340aa57f1fa3a2660a4",
     },
+    # Hedef 3: 00_Jazz2-110-Bb_comp — caz stili, klasik ii-V-I-IV döngüsü
+    # (D#m-G#7-C#-F# / Cø7-F7-A#m). roadmap'in "dominant7" kalitesi ilk kez
+    # burada (G#7/F7, 4 olay) + minör kapsamı 2 katına çıkıyor (D#m/A#m, 4
+    # olay daha). C:hdim7 olayları (2 tane) ChordDetector'ın bilmediği bir
+    # kalite — prepare_guitarset_fixtures.dart'ın mevcut null-döndür-ve-logla
+    # davranışıyla otomatik atlanır, fixture ÜRETMEZ (kod değişikliği gerekmedi).
+    {
+        "zip_url": AUDIO_ZIP_URL,
+        "entry": "00_Jazz2-110-Bb_comp_mic.wav",
+        "dest": "guitarset_00_Jazz2-110-Bb_comp_mic.wav",
+        "sha256": "47f1d3da58af0239febcbe1fb8d27da9d17a21b403f5011d01f011eda4406764",
+    },
+    {
+        "zip_url": ANNOTATION_ZIP_URL,
+        "entry": "00_Jazz2-110-Bb_comp.jams",
+        "dest": "guitarset_00_Jazz2-110-Bb_comp.jams",
+        "sha256": "b2c70a3b3cbcc011e1bb006fce09052109a713b2d10e88175e9e7eb6b6e51bab",
+    },
 ]
 
 

@@ -55,6 +55,15 @@ const List<GuitarSetSource> _sources = [
     '00_BN3-119-G_comp.jams',
     'Bossa Nova comping, 119 BPM, G key (I-V-vi-iii-IV: G/D/Em/Bm/C)',
   ),
+  GuitarSetSource(
+    'fixtures/audio-real/raw/guitarset_00_Jazz2-110-Bb_comp_mic.wav',
+    'fixtures/audio-real/raw/guitarset_00_Jazz2-110-Bb_comp.jams',
+    '00_Jazz2-110-Bb_comp_mic.wav',
+    '00_Jazz2-110-Bb_comp.jams',
+    'Jazz comping, 110 BPM, classic ii-V-I-IV turnaround (D#m-G#7-C#-F# / Cø7-F7-A#m) — '
+        'first source with dominant7 quality; the two C:hdim7 (half-diminished) events are '
+        'outside ChordDetector\'s vocabulary and are skipped, not fixtured',
+  ),
 ];
 
 const double _clipOffsetS = 0.3;
