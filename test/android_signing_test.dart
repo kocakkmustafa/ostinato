@@ -99,6 +99,33 @@ void main() {
             'varlığı değildir (aynı ayrım validate_release_signing.py\'de)');
   });
 
+  test('🚪 CI KAÇIŞ KAPISI — `allowDebugSigning` ailenin dördüncü kez doğrulanmış deseniyle var', () {
+    // Köken: Gravita G-192 → Lissom bayrağıyla birleşti → jablab JAB-P0-004 →
+    // choreia CHO-P0-002 → burada ostinato'ya taşındı. motion-core
+    // consumer-matrix'inin `android_release` adımı HER app'te AYNI komutu
+    // (`-PallowDebugSigning=true`) koşuyor — bu bayrak yoksa bu adım CI'da
+    // (gerçek keystore YOK ve OLMAMALI) SESSİZCE değil ama YİNE DE geçemezdi.
+    final String src = gradle.readAsStringSync();
+    expect(src, contains('allowDebugSigning'),
+        reason: 'CI kaçış bayrağı yok — consumer-matrix\'in android_release '
+            'adımı (-PallowDebugSigning=true) gerçek keystore olmadan '
+            'geçemez, ve gerçek keystore CI\'da OLMAMALI (sır, kurucuda)');
+    expect(src, contains('findProperty("allowDebugSigning")'),
+        reason: 'bayrak okunmuyor — jablab/choreia\'nın `findProperty(...) '
+            '== "true"` deseniyle AYNI olmalı (yalnız AÇIKÇA "true" '
+            'verildiğinde devreye girsin, salt varlık değil)');
+    // Bayrak VERİLDİĞİNDE durdurucu SUSMALI (yalnız uyarmalı) — aksi hâlde
+    // kaçış kapısı hiç var olmamış demektir (jablab'ın kendi ölçtüğü tuzak).
+    final RegExpMatch? taskBody = RegExp(
+      r'tasks\.register\("verifyReleaseSigning"\)\s*\{.*?\n\}',
+      dotAll: true,
+    ).firstMatch(src);
+    expect(taskBody, isNotNull);
+    expect(taskBody!.group(0)!, contains('allowDebugSigning'),
+        reason: 'görev gövdesi bayrağı hiç KONTROL ETMİYOR — bayrak '
+            'verilse bile hâlâ throw ederdi, kaçış kapısı susmaz');
+  });
+
   test('🐍 PYTHON KAPISI DA TEMİZ — `tools/validate_release_signing.py` bu dosyayla AYNI hükmü veriyor', () {
     // İki bağımsız denetçi (bu Dart testi + reponun kendi python kapısı)
     // AYNI dosyayı okuyup AYNI sonuca varmalı — biri yeşil biri kırmızıysa

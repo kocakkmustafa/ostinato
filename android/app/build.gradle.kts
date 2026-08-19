@@ -40,6 +40,17 @@ if (keystorePropertiesFile.exists()) {
 }
 val hasReleaseKeystore = keystorePropertiesFile.exists()
 
+// CI KAÇIŞ KAPISI — ailenin `allowDebugSigning` deseni (köken: Gravita
+// G-192, Lissom'un bayrağıyla birleştirdi; jablab JAB-P0-004'te + choreia
+// CHO-P0-002'de aynı desen; ostinato beşin son eksiğiydi — motion-core
+// consumer-matrix'inin `android_release` adımı HER app'te aynı komutu
+// (`flutter build apk --release -PallowDebugSigning=true`) koşuyor, bu
+// bayrak olmadan bu adım SESSİZCE değil AÇIKÇA da geçemezdi, çünkü CI'da
+// gerçek keystore YOK ve OLMAMALI (sır, kurucuda). Bayrak bilerek AÇIK bir
+// karar gerektirir; sessiz varsayılan DEĞİŞMEDİ (bayraksız hâlâ throw).
+val allowDebugSigning: Boolean =
+    (project.findProperty("allowDebugSigning") as String?) == "true"
+
 android {
     namespace = "com.yulalab.ostinato"
     compileSdk = flutter.compileSdkVersion
@@ -82,10 +93,23 @@ android {
         release {
             isDebuggable = false
             isJniDebuggable = false
-            // ⚠️ `null` BİLEREK (J-215 deseni): debug'a artık DÜŞMÜYORUZ.
-            // Anahtar yoksa imza YOK, ve aşağıdaki kapı release görev
-            // grafiğini zaten başlatmıyor.
-            signingConfig = if (hasReleaseKeystore) signingConfigs.getByName("release") else null
+            // Üç hâl, `if`in kendi zincirinde AÇIKÇA ayrılmış (`tools/
+            // validate_release_signing.py`nin CONDITIONAL kontrolü
+            // `signingConfig = if (` metnini arıyor — `when` bunu kaçırırdı):
+            //   1) gerçek anahtar VAR → onunla imzala (üretim yolu).
+            //   2) anahtar YOK ama `-PallowDebugSigning=true` AÇIKÇA verildi
+            //      → debug anahtarıyla imzala (yalnız CI/yerel kod-yolu
+            //      kanıtı; `verifyReleaseSigning` bunu GÜRÜLTÜLÜ uyarır,
+            //      Play'e yüklenebilir bir artefakt DEĞİLDİR).
+            //   3) ikisi de yok → `null`, `verifyReleaseSigning` GradleException
+            //      ile durur (O-103 → J-215 sertliği, DEĞİŞMEDİ).
+            signingConfig = if (hasReleaseKeystore) {
+                signingConfigs.getByName("release")
+            } else if (allowDebugSigning) {
+                signingConfigs.getByName("debug")
+            } else {
+                null
+            }
         }
     }
 }
@@ -100,7 +124,21 @@ android {
 // yasaklar. Kurucu keystore'u verdiği an kapı kendiliğinden susar.
 val verifyReleaseSigning = tasks.register("verifyReleaseSigning") {
     doLast {
-        if (!hasReleaseKeystore) {
+        // ⚠️ İKİ YÖNDE ölçülür (test/android_signing_test.dart'ta adıyla
+        // korunuyor): bayrak VERİLMEDİĞİNDE hâlâ DURMALI (aşağıda), VERİLDİĞİNDE
+        // ise SUSUP yalnız uyarı basmalı — bir kapı kendi kaçış bayrağını
+        // ENGELLERSE o bayrak hiç var olmamış demektir.
+        if (hasReleaseKeystore) {
+            logger.lifecycle("✅ RELEASE İMZASI: key.properties bulundu, " +
+                "release yapılandırması kullanılıyor.")
+        } else if (allowDebugSigning) {
+            logger.warn(
+                "\n⚠️  RELEASE DEBUG ANAHTARIYLA İMZALANIYOR " +
+                "(-PallowDebugSigning=true). Bu artefakt yalnız RELEASE KOD " +
+                "YOLUNUN derlendiğini kanıtlar — Play'e YÜKLENEMEZ, yerel/CI " +
+                "denemesi içindir.\n"
+            )
+        } else {
             throw GradleException(
                 "\n⛔ RELEASE İMZASI: `android/key.properties` YOK → bu paket " +
                 "imzasız kalır (signingConfig artık null — debug'a DÜŞMÜYOR).\n" +
@@ -109,11 +147,11 @@ val verifyReleaseSigning = tasks.register("verifyReleaseSigning") {
                 "imzası gerçekten `CN=Android Debug` çıkmıştı.\n" +
                 "   Bu bir yapılandırma kusuru DEĞİL: yapılandırma hazır, " +
                 "eksik olan KEYSTORE (kurucu kalemi, ~/.secrets/yula/).\n" +
-                "   Gerekli: keyAlias · keyPassword · storeFile · storePassword\n"
+                "   Gerekli: keyAlias · keyPassword · storeFile · storePassword\n" +
+                "   Yalnız RELEASE KOD YOLUNUN derlendiğini (imzalı yayın " +
+                "DEĞİL) kanıtlamak için: " +
+                "./gradlew :app:assembleRelease -PallowDebugSigning=true\n"
             )
-        } else {
-            logger.lifecycle("✅ RELEASE İMZASI: key.properties bulundu, " +
-                "release yapılandırması kullanılıyor.")
         }
     }
 }
