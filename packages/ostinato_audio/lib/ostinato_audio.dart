@@ -20,6 +20,7 @@ export 'src/capture/ring_buffer.dart';
 export 'src/contract/guitar_chord_drill_contract.dart';
 export 'src/fixture/synthetic.dart';
 export 'src/gate/audio_confidence_gate.dart';
+export 'src/gate/guitar_chord_drill_evaluator.dart';
 export 'src/harmony/chord_detector.dart';
 export 'src/harmony/chroma.dart';
 export 'src/harmony/midi_chord_detector.dart';

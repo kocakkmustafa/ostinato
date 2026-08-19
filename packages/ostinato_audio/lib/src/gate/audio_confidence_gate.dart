@@ -109,3 +109,21 @@ double absCents(double a, double b) => (1200 * math.log(a / b) / math.ln2).abs()
 
 /// Signed distance in cents: positive means [a] is sharp relative to [b].
 double cents(double a, double b) => 1200 * math.log(a / b) / math.ln2;
+
+/// RMS level in dBFS. Extracted here as a SHARED helper (2026-08-19,
+/// GuitarChordDrillEvaluator) after the same ~8-line formula had been
+/// copy-pasted privately in `yin.dart`, `audio_snr_replay.dart` and
+/// `guitarset_chord_snr_replay.dart` — those existing, already-tested call
+/// sites were deliberately left AS-IS (no retroactive refactor of shared
+/// motor code without its own regression pass); this is only for new code
+/// going forward.
+double rmsDb(List<double> samples) {
+  if (samples.isEmpty) return -160;
+  double sum = 0;
+  for (final double v in samples) {
+    sum += v * v;
+  }
+  final double rms = math.sqrt(sum / samples.length);
+  if (rms <= 1e-9) return -160;
+  return 20 * math.log(rms) / math.ln10;
+}
