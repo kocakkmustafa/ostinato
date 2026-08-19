@@ -12,6 +12,17 @@ __pycache__/
 # Pinli MediaPipe poz modeli — aile kuralı: .task ikilileri izlenmez
 # (tool/fetch_pose_model.sh indirir/kopyalar, SHA-256 build kapısı doğrular).
 assets/models/*.task
+
+# OST-P0-003: gerçek ses fixture'ları (Iowa MIS) — AYNI desen, ses ikilileri
+# izlenmez (tool/fetch_audio_fixtures.sh + tool/prepare_audio_fixtures.dart
+# indirir/türetir, SHA-256 doğrular). Yalnız `fixtures/audio-real/*.json`
+# (kontrat: expected/tolerances/provenance) İZLENİR.
+fixtures/audio-real/raw/
+fixtures/audio-real/*.wav
+fixtures/audio-real/*.aiff
+# Yerel koşumun ANLIK çıktısı, ephemeral — kalıcı/provenance'lı kanıt
+# `docs/evidence/production-line/audio-model-gate.json`dadır (İZLENİR).
+fixtures/audio-real/replay-report.json
 .mutA-backup/
 # Kalıcı MUT-A geçmişi (koordinatör sevki 2026-08-11, dördüncü unsur: KAYIT).
 # .mutA-backup/'ın aksine koşum bitince SİLİNMEZ — ama yine de yerel/makineye

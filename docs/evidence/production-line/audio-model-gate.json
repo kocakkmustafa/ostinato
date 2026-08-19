@@ -1,0 +1,54 @@
+{
+ "schemaVersion": "ostinato-evidence-audio-model-gate-1",
+ "claim": "OST-E-003 — Pitch/onset/chord/MIDI gate (roadmap §17)",
+ "generatedAt": "2026-08-19",
+ "parentCommit": "52fcc4cc336d0958f404620311f6d9e4640eaeb9",
+ "$scopeThisTurn": "YALNIZ monophonic pitch, YALNIZ piyano, YALNIZ Iowa MIS 'without restriction' gerçek stüdyo kaydı. Onset/chord/MIDI, guitar/voice, SNR varyasyonu, fiziksel route (speaker/wired/BT/USB-MIDI) ve gerçek cihaz mikrofonu bu turda ÖLÇÜLMEDİ — aşağıdaki 'notCoveredThisTurn' bunları adıyla sayar.",
+ "provenance": {
+  "appCommit": "52fcc4cc336d0958f404620311f6d9e4640eaeb9",
+  "audioPackageVersion": "ostinato_audio 0.1.0",
+  "motionCorePin": "f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d",
+  "engine": "YinPitchSource + AudioConfidenceGate (packages/ostinato_audio)",
+  "fixtureSource": "University of Iowa Electronic Music Studios (MIS piano), license: without-restriction",
+  "fixtureSourceUrl": "https://theremin.music.uiowa.edu/MISpiano.html",
+  "fixtureAcquisition": "tool/fetch_audio_fixtures.sh (SHA-256 pinned) + tool/prepare_audio_fixtures.dart",
+  "sampleRate": 44100,
+  "route": "n/a — pre-recorded studio file, not a live device capture route",
+  "snr": "not measured (studio recording; no controlled noise floor added this turn)",
+  "device": "n/a — Iowa EMS recording rig producing the source file, not an Ostinato capture device"
+ },
+ "detectorConfig": {
+  "minHz": 25.0,
+  "maxHz": 4200.0,
+  "$why": "Piyano-uygun sınır (A0=27,5Hz..C8=4186Hz) — YinPitchSource'ın sınıf-varsayılanı (55-1200Hz) çello turlarından kalma, piyano için GENİŞLETİLDİ (PitchSource sözleşmesinin kendi ilkesi: enstrüman-uygun sınır)."
+ },
+ "acceptanceGate": {
+  "source": "roadmap §11: monophonic pitch median absolute error ≤10 cent, p90/p95 ≤20 cent, supported range içinde",
+  "note": "Fixture toleransları (tolerances.centsMedian/centsP95, her fixture JSON'unda) BU eşiği birebir taşır — ayrı bir sayı İCAT edilmedi."
+ },
+ "results": {
+  "summary": {"pass": 5, "fail": 1, "outOfRange": 0, "total": 6},
+  "fixtures": [
+   {"fixtureId": "AF-R001-piano-a1", "note": "A1", "expectedHz": 55.0, "status": "pass", "medianCents": 8.87, "p95Cents": 11.03, "judgedFraction": 0.841},
+   {"fixtureId": "AF-R002-piano-c3", "note": "C3", "expectedHz": 130.8128, "status": "pass", "medianCents": 5.56, "p95Cents": 7.96, "judgedFraction": 0.825},
+   {"fixtureId": "AF-R003-piano-c4", "note": "C4", "expectedHz": 261.6256, "status": "pass", "medianCents": 5.35, "p95Cents": 9.06, "judgedFraction": 0.905},
+   {"fixtureId": "AF-R004-piano-a4", "note": "A4", "expectedHz": 440.0, "status": "pass", "medianCents": 7.16, "p95Cents": 8.99, "judgedFraction": 0.937},
+   {"fixtureId": "AF-R005-piano-c6", "note": "C6", "expectedHz": 1046.5023, "status": "pass", "medianCents": 8.2, "p95Cents": 13.99, "judgedFraction": 0.794},
+   {"fixtureId": "AF-R006-piano-c8", "note": "C8", "expectedHz": 4186.009, "status": "fail", "medianCents": null, "p95Cents": null, "judgedFraction": 0.0,
+    "$diagnosis": "YIN sıfır pitch adayı buluyor — expectedHzPrior VARKEN de YOKKEN de (serbest arama, 25-4200Hz), yani prior-reddi değil. Gerçek periyot (~10,5 örnek, 44100/4186Hz) tauMin sınırına (10 örnek) çok yakın — kısa periyotta ACF çözünürlüğü / sınır-koşulu şüphesi var ama KÖK NEDEN bu turda TAM teşhis edilmedi (adıyla bırakıldı, uydurulmadı). Piyanonun EN TİZ tuşu (88 tuşun sonuncusu) — pratik etki W1 başlangıç dersleri için muhtemelen düşük ama bu bir VARSAYIM, ölçülmedi."}
+  ]
+ },
+ "selfTest": {
+  "method": "octave-corrupted expectedHzPrior (2x gerçek f0) ile aynı gerçek kayıt yeniden koşuldu",
+  "result": "caught",
+  "$why": "M-L-05 (ölü-metrik yasağı) — kapı hiç kırmızı üretemiyorsa 'bu turda temiz' iddiası anlamsız kalırdı"
+ },
+ "notCoveredThisTurn": [
+  "Onset detection gerçek kayıtla (yalnız sentetik, packages/ostinato_audio/test/gate_and_timing_test.dart)",
+  "Chord detection gerçek kayıtla (yalnız sentetik)",
+  "MIDI event doğruluğu (hiç dokunulmadı, roadmap §12 OST-P0-003 kapsamının bir parçası ama bu turda YOK)",
+  "Guitar/voice gerçek fixture (yalnız piyano — GuitarSet lisansı doğrulandı ama İNDİRİLMEDİ, sonraki tur)",
+  "3 ayrı SNR koşulu (roadmap §11: chord accuracy 3 SNR'da AYRI raporlanmalı) — bu turun fixture'ları hepsi TEK, kontrolsüz stüdyo SNR'ında",
+  "Step 3 — fiziksel matris (speaker/wired/Bluetooth/USB-BLE MIDI): EXTERNAL_GATE, bu oturumda fiziksel cihaz erişimi yok (roadmap §15 MANUAL-OSTINATO-DEVICE-20260818)"
+ ]
+}

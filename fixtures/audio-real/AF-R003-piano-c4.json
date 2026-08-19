@@ -1,0 +1,30 @@
+{
+ "schemaVersion": "ostinato-audiofix-1",
+ "fixtureId": "AF-R003-piano-c4",
+ "kind": "real-clean",
+ "audio": "AF-R003-piano-c4.wav",
+ "$what": "Real Iowa MIS piano note (C4, mf dynamic), trimmed to 3s from onset.",
+ "recordingMeta": {
+  "source": "iowa-mis-piano",
+  "device": "Steinway (Iowa Electronic Music Studios recording rig)",
+  "room": "Iowa EMS recording room",
+  "micDistanceM": null,
+  "sampleRate": 44100,
+  "license": "Iowa-without-restriction",
+  "$licenseNote": "University of Iowa Electronic Music Studios — \"without restriction\" per the institution's own page, verified 2026-08-18 (docs/research/2026-08-18-w1-audio-golden-fixture-kaynaklari.md). Source AIFF SHA-256 pinned in tool/fetch_audio_fixtures.sh.",
+  "sourceUrl": "https://theremin.music.uiowa.edu/MISpiano.html"
+ },
+ "expected": {
+  "f0Hz": 261.6256,
+  "$f0Derivation": "12-TET, A4=440Hz, derived from note name \"C4\" — not hand-typed (see frequencyForNote() in tool/prepare_audio_fixtures.dart).",
+  "shouldJudge": true
+ },
+ "tolerances": {
+  "centsMedian": 10,
+  "centsP95": 20
+ },
+ "labels": {
+  "annotator": "derived-from-note-name",
+  "confidence": "high"
+ }
+}

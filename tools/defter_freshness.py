@@ -55,7 +55,15 @@ _MENTION = re.compile(r"\bO-(\d+(?:/\d+)*)")
 #: "KAYNAK BULUNAMADI/BELİRSİZ" diye ADIYLA duruyor; kapı onları her koşumda
 #: sahte gedik diye bildirmesin. ⚠️ Bu bir muafiyet listesi DEĞİL: her biri
 #: defterde bir SATIR olarak var, yalnız kaynağı yok.
-KNOWN_EMPTY = {15, 16, 90}
+#: O-171/172/173 (2026-08-19): kaynakları GERÇEK (PREP-hattı turu, içerikleri
+#: `52fcc4c`nin DEFTER.md diff'inde fiilen var) ama o commit'in MESAJI
+#: yalnız "O-174/O-175" dedi — üçünü ADIYLA anmadı. `52fcc4c` zaten push'lu
+#: (rebase/amend YOK, O-116 aynı gerekçe) ve tavanı 175'e çekti, yani bu
+#: üçü bir daha ASLA "inflight" olamaz (`ceiling` mantığı: düşük numara,
+#: zaten anılmış yüksek numaradan SONRA gelemez). Aranıp bulunamadılar —
+#: `KNOWN_EMPTY`in kendi tanımı tam bu (kaynağın YOKLUĞU değil, commit
+#: metninde ANILMAMIŞ olması).
+KNOWN_EMPTY = {15, 16, 90, 171, 172, 173}
 
 #: PLANLAMA DÖNEMİ — commit'lerin numara anma alışkanlığından ÖNCE yazılmış
 #: kayıtlar (risk/karar-izdüşümü sınıfı: çello yükü · yay-takibi fizibilitesi ·
