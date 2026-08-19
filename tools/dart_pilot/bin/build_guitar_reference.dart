@@ -122,7 +122,7 @@ void main(List<String> args) async {
   outDir.createSync(recursive: true);
   final outFile = File('${outDir.path}/$want-posture-setup.v1.json');
   outFile.writeAsStringSync(
-      const JsonEncoder.withIndent(' ').convert(artifact) + '\n');
+      '${const JsonEncoder.withIndent(' ').convert(artifact)}\n');
 
   stdout.writeln('\n✅ ARTEFAKT ÜRETİLDİ: ${outFile.path}');
   stdout.writeln('  measurementProvenance : ${artifact['measurementProvenance']}');

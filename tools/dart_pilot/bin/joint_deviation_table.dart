@@ -81,7 +81,7 @@ void main(List<String> args) {
 
   final jointSpecs = base.first.specs;
   stdout.writeln('=== eklem başına sapma (deg) — takes[t] vs leave-one-out konsensüs ===');
-  stdout.write('${''.padRight(20)}');
+  stdout.write(''.padRight(20));
   for (final t in resolved) {
     stdout.write(t.id.padLeft(16));
   }
