@@ -17,14 +17,17 @@
  "expected": {
   "f0Hz": 4186.009,
   "$f0Derivation": "12-TET, A4=440Hz, derived from note name \"C8\" — not hand-typed (see frequencyForNote() in tool/prepare_audio_fixtures.dart).",
-  "shouldJudge": true
+  "shouldJudge": true,
+  "onsetMs": 180.0,
+  "$onsetDerivation": "Measured, not assumed: first 10ms RMS-power window exceeding -40dBFS in this recording (measureOnsetMs() in this file). Iowa MIS recordings do NOT start at the note attack — every one of these 6 fixtures has 167-560ms of leading silence, found by direct measurement, not documented anywhere upstream."
  },
  "tolerances": {
   "centsMedian": 10,
-  "centsP95": 20
+  "centsP95": 20,
+  "onsetMs": 30
  },
  "labels": {
-  "annotator": "derived-from-note-name",
+  "annotator": "derived-from-note-name+measured-envelope",
   "confidence": "high"
  }
 }

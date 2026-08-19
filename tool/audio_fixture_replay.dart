@@ -115,10 +115,40 @@ void main() {
     final double? p95Cents = centsErrors.isEmpty ? null : _percentile(centsErrors, 0.95);
     final double judgedFraction = windowCount == 0 ? 0 : centsErrors.length / windowCount;
 
-    final bool ok = medianCents != null &&
+    final bool pitchOk = medianCents != null &&
         p95Cents != null &&
         medianCents <= centsMedianTol &&
         p95Cents <= centsP95Tol;
+
+    // Onset — roadmap §11 "Speaker/wired onset median absolute error ≤30ms".
+    // `expected.onsetMs` her fixture'da olmak ZORUNDA değil (eski şema
+    // sürümleri taşımayabilir) — YOKSA onset kontrolü SESSİZCE atlanır,
+    // yalnız pitch hükmü sayılır (`onsetOk` bu durumda `null`, "geçti"
+    // DEĞİL — üçüncü bir hâl, ölçülemedi).
+    final num? expectedOnsetMs = (expected['onsetMs'] as num?);
+    double? onsetErrorMs;
+    bool? onsetOk;
+    if (expectedOnsetMs != null) {
+      final List<Onset> onsets =
+          OnsetDetector().detect(mono, sampleRate: wav.sampleRate, tStartUs: 0);
+      final double onsetTolMs = ((tolerances['onsetMs'] as num?) ?? 30).toDouble();
+      if (onsets.isEmpty) {
+        onsetOk = false; // roadmap'in kendi eşiği: yanlış-hüküm değil ama HİÇ bulamamak da geçemez
+      } else {
+        // En yakın algılanan onset'i eşleştir — birden fazla algılanmışsa
+        // (gürültü/harmonik artefakt) en yakını gerçek hatayı temsil eder.
+        double best = double.infinity;
+        for (final Onset o in onsets) {
+          final double detectedMs = o.tUs / 1000.0;
+          final double err = (detectedMs - expectedOnsetMs).abs();
+          if (err < best) best = err;
+        }
+        onsetErrorMs = best;
+        onsetOk = best <= onsetTolMs;
+      }
+    }
+
+    final bool ok = pitchOk && (onsetOk ?? true);
 
     results.add(<String, Object?>{
       'fixtureId': fixtureId,
@@ -131,16 +161,22 @@ void main() {
       'p95Cents': p95Cents == null ? null : double.parse(p95Cents.toStringAsFixed(2)),
       'toleranceCentsMedian': centsMedianTol,
       'toleranceCentsP95': centsP95Tol,
+      'onsetStatus': expectedOnsetMs == null ? 'not_measured' : (onsetOk! ? 'pass' : 'fail'),
+      'expectedOnsetMs': expectedOnsetMs,
+      'onsetErrorMs': onsetErrorMs == null ? null : double.parse(onsetErrorMs.toStringAsFixed(1)),
     });
 
     final String medStr = medianCents?.toStringAsFixed(2) ?? 'N/A';
     final String p95Str = p95Cents?.toStringAsFixed(2) ?? 'N/A';
+    final String onsetStr = onsetErrorMs == null
+        ? (expectedOnsetMs == null ? '' : ' · onset YOK')
+        : ' · onset ${onsetErrorMs.toStringAsFixed(1)}ms hata${onsetOk! ? "" : " ⚠️"}';
     if (ok) {
       pass++;
-      stdout.writeln('✅ $fixtureId — medyan $medStr¢ / p95 $p95Str¢ (eşik $centsMedianTol¢/$centsP95Tol¢, judged ${(judgedFraction * 100).toStringAsFixed(0)}%)');
+      stdout.writeln('✅ $fixtureId — medyan $medStr¢ / p95 $p95Str¢ (eşik $centsMedianTol¢/$centsP95Tol¢, judged ${(judgedFraction * 100).toStringAsFixed(0)}%)$onsetStr');
     } else {
       fail++;
-      stdout.writeln('🔴 $fixtureId — medyan $medStr¢ / p95 $p95Str¢ (eşik $centsMedianTol¢/$centsP95Tol¢, judged ${(judgedFraction * 100).toStringAsFixed(0)}%)');
+      stdout.writeln('🔴 $fixtureId — medyan $medStr¢ / p95 $p95Str¢ (eşik $centsMedianTol¢/$centsP95Tol¢, judged ${(judgedFraction * 100).toStringAsFixed(0)}%)$onsetStr');
     }
   }
 

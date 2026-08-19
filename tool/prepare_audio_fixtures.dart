@@ -24,6 +24,29 @@ const List<String> _notes = ['A1', 'C3', 'C4', 'A4', 'C6', 'C8'];
 /// 12-TET, A4=440Hz. `octave+1) * 12 + semitoneInOctave` MIDI-uyumlu mutlak
 /// yarım-ton sayısıdır (C4=60, A4=69) — hangi "C=60 mı C=48 mi" tartışmasına
 /// girmeden A4=69'un KENDİSİ evrensel sabit, geri kalanı ona görecelidir.
+/// Gerçek onset zamanını RMS zarfından ÖLÇER — Iowa MIS kayıtlarının HİÇBİRİ
+/// t=0'da başlamıyor (ölçüldü: ilk 6 fixture'ın 6'sında da 167-560ms
+/// SESSİZLİK/pre-roll var, `dart run tool/diag_onset.dart` tek-seferlik
+/// teşhisiyle bulundu — trim adımının "onset t=0'da" varsayımı YANLIŞTI).
+/// Eşik `-40dBFS` (RMS-kare `0.0001`) — bu turda ölçülen sessizlik GERÇEKTEN
+/// dijital sıfırdı (stüdyo kaydı, taban gürültüsü yok), o yüzden mutlak bir
+/// eşik burada göreli bir eşikten (`AudioConfidenceGate`in `roomFloorDb`
+/// yaklaşımı) daha BASİT ve aynı derecede doğru — ikisi ayrı sınıf sorun.
+double? measureOnsetMs(List<double> samples, {required int sampleRate}) {
+  const int windowSamples = 441; // 10ms @ 44100Hz
+  const double thresholdRmsSquared = 0.0001;
+  for (int start = 0; start + windowSamples <= samples.length; start += windowSamples) {
+    double sumSq = 0;
+    for (int i = start; i < start + windowSamples; i++) {
+      sumSq += samples[i] * samples[i];
+    }
+    if (sumSq / windowSamples > thresholdRmsSquared) {
+      return start / sampleRate * 1000.0;
+    }
+  }
+  return null; // hiç eşik-üstü pencere yok — bu fixture için onset ÖLÇÜLEMEDİ
+}
+
 double frequencyForNote(String name) {
   final RegExpMatch? m = RegExp(r'^([A-G])(#?)(-?\d+)$').firstMatch(name);
   if (m == null) throw FormatException('nota adı çözülemedi: $name');
@@ -84,6 +107,7 @@ void main() {
     PcmWav.writeMonoFile('fixtures/audio-real/$wavName', sampleRate: sampleRate, samples: trimmed);
 
     final double f0 = frequencyForNote(note);
+    final double? onsetMs = measureOnsetMs(trimmed, sampleRate: sampleRate);
     final Map<String, Object?> fixture = {
       'schemaVersion': 'ostinato-audiofix-1',
       'fixtureId': fixtureId,
@@ -108,15 +132,21 @@ void main() {
         '\$f0Derivation': '12-TET, A4=440Hz, derived from note name "$note" — not hand-typed '
             '(see frequencyForNote() in tool/prepare_audio_fixtures.dart).',
         'shouldJudge': true,
+        'onsetMs': onsetMs == null ? null : double.parse(onsetMs.toStringAsFixed(1)),
+        '\$onsetDerivation': 'Measured, not assumed: first 10ms RMS-power window exceeding '
+            '-40dBFS in this recording (measureOnsetMs() in this file). Iowa MIS recordings do '
+            'NOT start at the note attack — every one of these 6 fixtures has 167-560ms of '
+            'leading silence, found by direct measurement, not documented anywhere upstream.',
       },
-      // Roadmap §11: "Monophonic pitch median absolute error ≤10 cent, p90 ≤20 cent".
+      // Roadmap §11: "Monophonic pitch median absolute error ≤10 cent, p90 ≤20 cent" +
+      // "Speaker/wired onset median absolute error ≤30 ms".
       // M-C-06 (audio-fixture-library-design.md §4.1): fixture sapması test
       // ettiği bandın ≥1,5 katı olmalı ki test anlamlı olsun — bu GERÇEK bir
-      // piyano kaydı, sentetik değil; motorun GERÇEKTEN kaç cent saptığı
+      // piyano kaydı, sentetik değil; motorun GERÇEKTEN kaç cent/ms saptığı
       // BİLİNMİYOR (bu yüzden bu fixture var), o yüzden burada roadmap'in
       // KENDİ kabul eşiği kullanılıyor, sahte-sıkı bir sayı İCAT edilmiyor.
-      'tolerances': {'centsMedian': 10, 'centsP95': 20},
-      'labels': {'annotator': 'derived-from-note-name', 'confidence': 'high'},
+      'tolerances': {'centsMedian': 10, 'centsP95': 20, 'onsetMs': 30},
+      'labels': {'annotator': 'derived-from-note-name+measured-envelope', 'confidence': 'high'},
     };
     File('fixtures/audio-real/$fixtureId.json')
         .writeAsStringSync(const JsonEncoder.withIndent(' ').convert(fixture));
