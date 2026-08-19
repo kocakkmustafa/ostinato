@@ -40,10 +40,20 @@ RAW_DIR = os.path.join(ROOT, "fixtures", "audio-real", "raw")
 AUDIO_ZIP_URL = "https://zenodo.org/records/3371780/files/audio_mono-mic.zip"
 ANNOTATION_ZIP_URL = "https://zenodo.org/records/3371780/files/annotation.zip"
 
-# Hedef: 00_BN1-129-Eb_comp — Bossa Nova stili, akor eşliği (comping), 3
+# Hedef 1: 00_BN1-129-Eb_comp — Bossa Nova stili, akor eşliği (comping), 3
 # ayrı gerçek majör akor içeriyor (D#:maj / G#:maj / A#:maj, JAMS'ın kendi
 # basit-akor katmanından — doğrulandı, elle yazılmadı, bkz.
 # prepare_guitarset_fixtures.py).
+#
+# Hedef 2: 00_BN3-119-G_comp — AYNI stil (Bossa Nova, kontrollü karşılaştırma),
+# ama G majör anahtarında I-V-vi-iii-IV döngüsü (G/D/Em/Bm/C) — roadmap'in
+# "major/MİNÖR üçlü" şartının MİNÖR yarısını ilk kez kapsıyor (Em/Bm, 4 olay).
+# 360 JAMS dosyasının TAMAMI taranarak (annotation.zip, 39MB, tek seferlik
+# tam indirme — bireysel dosyalar gibi Range'lenmedi, kendisi zaten küçük)
+# ':min' + süre>=1,5sn şartını sağlayan en temiz aday olarak seçildi (yalnız
+# maj/min kalite — dominant7/hdim7 gürültüsü yok, ChordDetector'ın TAM
+# desteklediği alt kümeyle örtüşüyor). 16 olay, HEPSİ ~2,017sn (önceki
+# hedeften daha DÜZENLİ — 300ms+1200ms kırpma payı her segmentte rahat sığıyor).
 TARGETS = [
     {
         "zip_url": AUDIO_ZIP_URL,
@@ -56,6 +66,18 @@ TARGETS = [
         "entry": "00_BN1-129-Eb_comp.jams",
         "dest": "guitarset_00_BN1-129-Eb_comp.jams",
         "sha256": "cd79564c51d0dec7d04e010d31525e9f7d2b9d41cf6116118a66ac5a8c181007",
+    },
+    {
+        "zip_url": AUDIO_ZIP_URL,
+        "entry": "00_BN3-119-G_comp_mic.wav",
+        "dest": "guitarset_00_BN3-119-G_comp_mic.wav",
+        "sha256": "56b5650341df8455f93e86ea7beb1b422e04f0ff412cae344b122144a23bf359",
+    },
+    {
+        "zip_url": ANNOTATION_ZIP_URL,
+        "entry": "00_BN3-119-G_comp.jams",
+        "dest": "guitarset_00_BN3-119-G_comp.jams",
+        "sha256": "9e92a2ac7126785ec54ff72de46a719da6c33b11f2477340aa57f1fa3a2660a4",
     },
 ]
 

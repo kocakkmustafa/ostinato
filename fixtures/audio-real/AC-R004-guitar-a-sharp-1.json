@@ -3,7 +3,7 @@
  "fixtureId": "AC-R004-guitar-a-sharp-1",
  "kind": "real-clean",
  "audio": "AC-R004-guitar-a-sharp-1.wav",
- "$what": "Real GuitarSet recording (Bossa Nova comping), A#:major chord, 1.2s window starting 0.3s after JAMS segment onset (instance 1 of this root+quality in the source take).",
+ "$what": "Real GuitarSet recording (Bossa Nova comping, 129 BPM, Eb key), A#:major chord, 1.2s window starting 0.3s after JAMS segment onset (instance 1 of this root+quality across all prepared sources).",
  "recordingMeta": {
   "source": "guitarset",
   "device": "guitar, mono neck-pickup mic (GuitarSet \"mono-mic\" release)",
@@ -25,7 +25,7 @@
  "expected": {
   "chordName": "A#",
   "quality": "major",
-  "$chordDerivation": "JAMS \"chord\" namespace, structurally-selected simple/coarse track (no \"/\" in any event value — the detailed voicing track, e.g. \"D#:sus2(7)/1\", was deliberately excluded: ChordDetector only models {major,minor,dominant7}, so grading against extensions/inversions would test a question it never claims to answer). Root mapped via JAMS \"<root>:<quality>\" split; ChordTemplate.name for major has NO suffix (chroma.dart pitchClassNames are all-sharp, matching JAMS Harte notation directly for this take — no enharmonic conversion was needed here, though prepare_guitarset_fixtures.dart carries a flat→sharp table for future files that might use flat spellings).",
+  "$chordDerivation": "JAMS \"chord\" namespace, structurally-selected simple/coarse track (no \"/\" in any event value — the detailed voicing track, e.g. \"D#:sus2(7)/1\", was deliberately excluded: ChordDetector only models {major,minor,dominant7}, so grading against extensions/inversions would test a question it never claims to answer). Root mapped via JAMS \"<root>:<quality>\" split; ChordTemplate.name for major has NO suffix, minor gets an \"m\" suffix (chord_detector.dart ChordTemplate.name) — chroma.dart pitchClassNames are all-sharp, matching JAMS Harte notation directly for this take, no enharmonic conversion needed here (though the flat→sharp table above exists for future files that might use flat spellings).",
   "shouldJudge": true
  },
  "windowing": {

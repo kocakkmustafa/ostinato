@@ -1,12 +1,18 @@
 // dart run tool/prepare_guitarset_fixtures.dart
 //
-// Doğrulanmış ham GuitarSet WAV+JAMS'tan (tool/fetch_guitarset_fixtures.py)
+// Doğrulanmış ham GuitarSet WAV+JAMS'lardan (tool/fetch_guitarset_fixtures.py)
 // KÜÇÜK akor-fixture WAV'ları + eşlik eden JSON kontratlarını türetir.
+// BİRDEN FAZLA kaynak take'i işler (bkz. _sources) — ilk turda tek take
+// (yalnız majör: D#/G#/A#) vardı, roadmap'in "major/MİNÖR üçlü" şartının
+// minör yarısı hiç sınanmamıştı; 360 JAMS dosyasının TAMAMI taranıp (bkz.
+// annotation.zip tek-seferlik tam indirme, dosyalar Range'lenmeden) ':min'
+// + süre≥1,5sn içeren en temiz aday (yalnız maj/min kalite, dominant7/hdim7
+// gürültüsü yok) 2. kaynak olarak eklendi.
 //
-// JAMS'ın İKİ 'chord' namespace'i taşıdığı DOĞRUDAN gözlemlendi (2026-08-19,
-// bu dosyanın hazırlığı sırasında): biri yalın üçlü ('D#:maj'), diğeri
-// voicing/inversion'lı ('D#:sus2(7)/1' — her olayda '/' içeriyor). Ostinato'nun
-// ChordDetector'ı yalnız {major, minor, dominant7} biliyor (bkz.
+// JAMS'ın İKİ 'chord' namespace'i taşıdığı DOĞRUDAN gözlemlendi (2026-08-19):
+// biri yalın üçlü ('D#:maj'), diğeri voicing/inversion'lı ('D#:sus2(7)/1' —
+// her olayda '/' içeriyor). Ostinato'nun ChordDetector'ı yalnız {major,
+// minor, dominant7} biliyor (bkz.
 // packages/ostinato_audio/lib/src/harmony/chord_detector.dart) — uzatma/
 // inversion YOK. Detaylı katmana karşı sınamak dedektörün HİÇ cevaplamaya
 // çalışmadığı bir soruyu sormak olurdu (kategori hatası); bu yüzden seçim
@@ -16,17 +22,41 @@
 // Kırpma penceresi: her akor segmentinin başından +300ms (saldırı/önceki-akor
 // sızıntısını atlamak için) başlayıp 1200ms süren tek bir pencere.
 // ChromaAnalyzer.minWindowMs=200 (chroma.dart) — 1200ms bunun 6 katı, üstelik
-// en kısa segment (1860ms, bkz. aşağıdaki ölçüm) içinde +300ms payla dahi
-// rahatça sığıyor. Sabit bir kural TÜM olaylara uygulanıyor — elle segment
-// başı ayarlanmadı.
+// en kısa segment (ilk kaynakta 1860ms) içinde +300ms payla dahi rahatça
+// sığıyor. Sabit bir kural TÜM olaylara/TÜM kaynaklara uygulanıyor — elle
+// segment başı ayarlanmadı.
 
 import 'dart:convert';
 import 'dart:io';
 
 import 'audio_fixture_io.dart';
 
-const String _sourceWav = 'fixtures/audio-real/raw/guitarset_00_BN1-129-Eb_comp_mic.wav';
-const String _sourceJams = 'fixtures/audio-real/raw/guitarset_00_BN1-129-Eb_comp.jams';
+class GuitarSetSource {
+  const GuitarSetSource(this.wavPath, this.jamsPath, this.sourceFileName, this.sourceJamsName, this.styleLabel);
+  final String wavPath;
+  final String jamsPath;
+  final String sourceFileName;
+  final String sourceJamsName;
+  final String styleLabel;
+}
+
+const List<GuitarSetSource> _sources = [
+  GuitarSetSource(
+    'fixtures/audio-real/raw/guitarset_00_BN1-129-Eb_comp_mic.wav',
+    'fixtures/audio-real/raw/guitarset_00_BN1-129-Eb_comp.jams',
+    '00_BN1-129-Eb_comp_mic.wav',
+    '00_BN1-129-Eb_comp.jams',
+    'Bossa Nova comping, 129 BPM, Eb key',
+  ),
+  GuitarSetSource(
+    'fixtures/audio-real/raw/guitarset_00_BN3-119-G_comp_mic.wav',
+    'fixtures/audio-real/raw/guitarset_00_BN3-119-G_comp.jams',
+    '00_BN3-119-G_comp_mic.wav',
+    '00_BN3-119-G_comp.jams',
+    'Bossa Nova comping, 119 BPM, G key (I-V-vi-iii-IV: G/D/Em/Bm/C)',
+  ),
+];
+
 const double _clipOffsetS = 0.3;
 const double _clipDurationS = 1.2;
 
@@ -72,8 +102,7 @@ List<Map<String, Object?>> _pickSimpleChordNamespace(Map<String, Object?> jams) 
 
 /// "D#:maj" → ChordEvent(root: "D#", quality: "major"). Yalnız Ostinato'nun
 /// bildiği 3 kalite kabul edilir (major/minor/dominant7); başka biri
-/// gelirse (bu dosyada YOK) sessizce atlamak yerine null döner — çağıran
-/// bunu açıkça loglar.
+/// gelirse sessizce atlamak yerine null döner — çağıran bunu açıkça loglar.
 ChordEvent? _parseChordEvent(Map<String, Object?> raw) {
   final double time = (raw['time'] as num).toDouble();
   final double duration = (raw['duration'] as num).toDouble();
@@ -89,117 +118,123 @@ ChordEvent? _parseChordEvent(Map<String, Object?> raw) {
 }
 
 void main() {
-  final File wavFile = File(_sourceWav);
-  final File jamsFile = File(_sourceJams);
-  if (!wavFile.existsSync() || !jamsFile.existsSync()) {
-    stderr.writeln('⛔ ham GuitarSet dosyaları yok — önce: python3 tool/fetch_guitarset_fixtures.py');
-    exit(1);
-  }
-
-  final PcmWav wav = PcmWav.readFile(wavFile.path);
-  final Map<String, Object?> jams = jsonDecode(jamsFile.readAsStringSync()) as Map<String, Object?>;
-  final List<Map<String, Object?>> simpleChordData = _pickSimpleChordNamespace(jams);
-
-  final List<ChordEvent> events = [];
-  for (final Map<String, Object?> raw in simpleChordData) {
-    final ChordEvent? ev = _parseChordEvent(raw);
-    if (ev == null) {
-      stdout.writeln('⏭  JAMS olayı atlandı (desteklenmeyen/boş değer): ${raw['value']}');
-      continue;
-    }
-    events.add(ev);
-  }
-
   final Map<String, int> instanceCounter = {};
   int prepared = 0;
-  for (final ChordEvent ev in events) {
-    if (ev.durationS < _clipOffsetS + _clipDurationS) {
-      stdout.writeln(
-          '⏭  ${ev.root}:${ev.quality} @ ${ev.timeS.toStringAsFixed(3)}s atlandı — segment '
-          '${ev.durationS.toStringAsFixed(3)}s, gereken ${(_clipOffsetS + _clipDurationS).toStringAsFixed(1)}s\'den kısa.');
+  int totalEvents = 0;
+
+  for (final GuitarSetSource source in _sources) {
+    final File wavFile = File(source.wavPath);
+    final File jamsFile = File(source.jamsPath);
+    if (!wavFile.existsSync() || !jamsFile.existsSync()) {
+      stderr.writeln('⛔ ${source.sourceFileName} yok — önce: python3 tool/fetch_guitarset_fixtures.py');
       continue;
     }
-    final int startSample = ((ev.timeS + _clipOffsetS) * wav.sampleRate).round();
-    final int clipSamples = (_clipDurationS * wav.sampleRate).round();
-    final int endSample = startSample + clipSamples;
-    if (endSample > wav.samples.length) {
-      stdout.writeln('⏭  ${ev.root}:${ev.quality} @ ${ev.timeS.toStringAsFixed(3)}s atlandı — kaynak WAV sona yetişmiyor.');
-      continue;
+
+    final PcmWav wav = PcmWav.readFile(wavFile.path);
+    final Map<String, Object?> jams = jsonDecode(jamsFile.readAsStringSync()) as Map<String, Object?>;
+    final List<Map<String, Object?>> simpleChordData = _pickSimpleChordNamespace(jams);
+
+    final List<ChordEvent> events = [];
+    for (final Map<String, Object?> raw in simpleChordData) {
+      final ChordEvent? ev = _parseChordEvent(raw);
+      if (ev == null) {
+        stdout.writeln('⏭  [${source.sourceFileName}] JAMS olayı atlandı (desteklenmeyen/boş değer): ${raw['value']}');
+        continue;
+      }
+      events.add(ev);
     }
-    final List<double> clip = wav.samples.sublist(startSample, endSample);
+    totalEvents += events.length;
 
-    final String rootSlug = _rootSlug(ev.root);
-    final String key = '$rootSlug-${ev.quality}';
-    final int instance = (instanceCounter[key] ?? 0) + 1;
-    instanceCounter[key] = instance;
+    for (final ChordEvent ev in events) {
+      if (ev.durationS < _clipOffsetS + _clipDurationS) {
+        stdout.writeln(
+            '⏭  [${source.sourceFileName}] ${ev.root}:${ev.quality} @ ${ev.timeS.toStringAsFixed(3)}s atlandı — '
+            'segment ${ev.durationS.toStringAsFixed(3)}s, gereken ${(_clipOffsetS + _clipDurationS).toStringAsFixed(1)}s\'den kısa.');
+        continue;
+      }
+      final int startSample = ((ev.timeS + _clipOffsetS) * wav.sampleRate).round();
+      final int clipSamples = (_clipDurationS * wav.sampleRate).round();
+      final int endSample = startSample + clipSamples;
+      if (endSample > wav.samples.length) {
+        stdout.writeln('⏭  [${source.sourceFileName}] ${ev.root}:${ev.quality} @ ${ev.timeS.toStringAsFixed(3)}s atlandı — kaynak WAV sona yetişmiyor.');
+        continue;
+      }
+      final List<double> clip = wav.samples.sublist(startSample, endSample);
 
-    final String seq = (prepared + 1).toString().padLeft(3, '0');
-    final String fixtureId = 'AC-R$seq-guitar-$rootSlug-$instance';
-    final String wavName = '$fixtureId.wav';
-    PcmWav.writeMonoFile('fixtures/audio-real/$wavName', sampleRate: wav.sampleRate, samples: clip);
+      final String rootSlug = _rootSlug(ev.root);
+      final String key = '$rootSlug-${ev.quality}';
+      final int instance = (instanceCounter[key] ?? 0) + 1;
+      instanceCounter[key] = instance;
 
-    final Map<String, Object?> fixture = {
-      'schemaVersion': 'ostinato-audiofix-chord-1',
-      'fixtureId': fixtureId,
-      'kind': 'real-clean',
-      'audio': wavName,
-      '\$what': 'Real GuitarSet recording (Bossa Nova comping), ${ev.root}:${ev.quality} chord, '
-          '${_clipDurationS}s window starting ${_clipOffsetS}s after JAMS segment onset '
-          '(instance $instance of this root+quality in the source take).',
-      'recordingMeta': {
-        'source': 'guitarset',
-        'device': 'guitar, mono neck-pickup mic (GuitarSet "mono-mic" release)',
-        'room': null,
-        'micDistanceM': null,
-        'sampleRate': wav.sampleRate,
-        'license': 'CC-BY-4.0',
-        '\$licenseNote': 'GuitarSet (Xu, Q., Salamon, J., Bittner, R., Wang, X., Bello, J.P. '
-            '"GuitarSet: A Dataset for Guitar Transcription", ISMIR 2018), Zenodo record 3371780, '
-            'CC BY 4.0 — verified 2026-08-18 (docs/research/'
-            '2026-08-18-w1-audio-golden-fixture-kaynaklari.md). Source ZIP entries SHA-256-pinned '
-            'in tool/fetch_guitarset_fixtures.py.',
-        'sourceUrl': 'https://zenodo.org/records/3371780',
-        'sourceFile': '00_BN1-129-Eb_comp_mic.wav',
-        'sourceJams': '00_BN1-129-Eb_comp.jams',
-        'originalSegment': {
-          'startS': double.parse(ev.timeS.toStringAsFixed(3)),
-          'durationS': double.parse(ev.durationS.toStringAsFixed(3)),
-          'clipOffsetS': _clipOffsetS,
-          'clipDurationS': _clipDurationS,
+      final String seq = (prepared + 1).toString().padLeft(3, '0');
+      final String fixtureId = 'AC-R$seq-guitar-$rootSlug-$instance';
+      final String wavName = '$fixtureId.wav';
+      PcmWav.writeMonoFile('fixtures/audio-real/$wavName', sampleRate: wav.sampleRate, samples: clip);
+
+      final Map<String, Object?> fixture = {
+        'schemaVersion': 'ostinato-audiofix-chord-1',
+        'fixtureId': fixtureId,
+        'kind': 'real-clean',
+        'audio': wavName,
+        '\$what': 'Real GuitarSet recording (${source.styleLabel}), ${ev.root}:${ev.quality} chord, '
+            '${_clipDurationS}s window starting ${_clipOffsetS}s after JAMS segment onset '
+            '(instance $instance of this root+quality across all prepared sources).',
+        'recordingMeta': {
+          'source': 'guitarset',
+          'device': 'guitar, mono neck-pickup mic (GuitarSet "mono-mic" release)',
+          'room': null,
+          'micDistanceM': null,
+          'sampleRate': wav.sampleRate,
+          'license': 'CC-BY-4.0',
+          '\$licenseNote': 'GuitarSet (Xu, Q., Salamon, J., Bittner, R., Wang, X., Bello, J.P. '
+              '"GuitarSet: A Dataset for Guitar Transcription", ISMIR 2018), Zenodo record 3371780, '
+              'CC BY 4.0 — verified 2026-08-18 (docs/research/'
+              '2026-08-18-w1-audio-golden-fixture-kaynaklari.md). Source ZIP entries SHA-256-pinned '
+              'in tool/fetch_guitarset_fixtures.py.',
+          'sourceUrl': 'https://zenodo.org/records/3371780',
+          'sourceFile': source.sourceFileName,
+          'sourceJams': source.sourceJamsName,
+          'originalSegment': {
+            'startS': double.parse(ev.timeS.toStringAsFixed(3)),
+            'durationS': double.parse(ev.durationS.toStringAsFixed(3)),
+            'clipOffsetS': _clipOffsetS,
+            'clipDurationS': _clipDurationS,
+          },
         },
-      },
-      'expected': {
-        'chordName': ev.root,
-        'quality': ev.quality,
-        '\$chordDerivation': 'JAMS "chord" namespace, structurally-selected simple/coarse track '
-            '(no "/" in any event value — the detailed voicing track, e.g. "D#:sus2(7)/1", was '
-            'deliberately excluded: ChordDetector only models {major,minor,dominant7}, so grading '
-            'against extensions/inversions would test a question it never claims to answer). Root '
-            'mapped via JAMS "<root>:<quality>" split; ChordTemplate.name for major has NO suffix '
-            '(chroma.dart pitchClassNames are all-sharp, matching JAMS Harte notation directly for '
-            'this take — no enharmonic conversion was needed here, though prepare_guitarset_fixtures.dart '
-            'carries a flat→sharp table for future files that might use flat spellings).',
-        'shouldJudge': true,
-      },
-      'windowing': {
-        'windowMs': 400,
-        'hopMs': 200,
-        '\$rationale': 'ChromaAnalyzer.minWindowMs=200 (chroma.dart) is the analysis floor; a '
-            '400ms window / 200ms hop yields 5 flush non-overlapping-start windows across this '
-            '1200ms clip, testing whether the chord reading is STABLE across the held sustain '
-            '(a real reliability question) rather than accepting a single lucky sample.',
-      },
-      'labels': {
-        'annotator': 'guitarset-semi-automatic-with-manual-verification',
-        '\$annotatorSource': 'JAMS annotation_metadata.data_source on the simple chord namespace.',
-        'confidence': 'high',
-      },
-    };
-    File('fixtures/audio-real/$fixtureId.json')
-        .writeAsStringSync(const JsonEncoder.withIndent(' ').convert(fixture));
-    stdout.writeln('✓ $fixtureId  (${ev.root}:${ev.quality} @ ${ev.timeS.toStringAsFixed(3)}s, ${clip.length} örnek)');
-    prepared++;
+        'expected': {
+          'chordName': ev.root,
+          'quality': ev.quality,
+          '\$chordDerivation': 'JAMS "chord" namespace, structurally-selected simple/coarse track '
+              '(no "/" in any event value — the detailed voicing track, e.g. "D#:sus2(7)/1", was '
+              'deliberately excluded: ChordDetector only models {major,minor,dominant7}, so grading '
+              'against extensions/inversions would test a question it never claims to answer). Root '
+              'mapped via JAMS "<root>:<quality>" split; ChordTemplate.name for major has NO suffix, '
+              'minor gets an "m" suffix (chord_detector.dart ChordTemplate.name) — chroma.dart '
+              'pitchClassNames are all-sharp, matching JAMS Harte notation directly for this take, no '
+              'enharmonic conversion needed here (though the flat→sharp table above exists for future '
+              'files that might use flat spellings).',
+          'shouldJudge': true,
+        },
+        'windowing': {
+          'windowMs': 400,
+          'hopMs': 200,
+          '\$rationale': 'ChromaAnalyzer.minWindowMs=200 (chroma.dart) is the analysis floor; a '
+              '400ms window / 200ms hop yields 5 flush non-overlapping-start windows across this '
+              '1200ms clip, testing whether the chord reading is STABLE across the held sustain '
+              '(a real reliability question) rather than accepting a single lucky sample.',
+        },
+        'labels': {
+          'annotator': 'guitarset-semi-automatic-with-manual-verification',
+          '\$annotatorSource': 'JAMS annotation_metadata.data_source on the simple chord namespace.',
+          'confidence': 'high',
+        },
+      };
+      File('fixtures/audio-real/$fixtureId.json')
+          .writeAsStringSync(const JsonEncoder.withIndent(' ').convert(fixture));
+      stdout.writeln('✓ $fixtureId  (${ev.root}:${ev.quality} @ ${ev.timeS.toStringAsFixed(3)}s, ${clip.length} örnek, kaynak: ${source.sourceFileName})');
+      prepared++;
+    }
   }
 
-  stdout.writeln('→ $prepared/${events.length} gitar akor fixture\'ı hazır: fixtures/audio-real/');
+  stdout.writeln('→ $prepared/$totalEvents gitar akor fixture\'ı hazır (${_sources.length} kaynak take): fixtures/audio-real/');
 }
