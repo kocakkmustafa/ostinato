@@ -32,6 +32,12 @@ dependencies:
     sdk: flutter
   ostinato_posture:
     path: packages/ostinato_posture
+  # OST-P0-002 (2026-08-19): şimdiye kadar `ostinato_audio` yalnız KENDİ
+  # test'lerinde tüketiliyordu (roadmap §1: "app session'a production bağlı
+  # değil") — bu satır o boşluğu kapatır, kabuk (`lib/app/audio/`) artık
+  # pitch/onset/chord primitiflerine erişebilir.
+  ostinato_audio:
+    path: packages/ostinato_audio
   # motion_core PATH ile çekiliyor; pub onun transitif core'unu ÇÖZÜLMÜŞ SHA,
   # buradaki pini TAG ADI olarak görür ve aynı commit olsalar bile
   # descriptor'ları FARKLI sayar ("incompatible with ... from path" — Choreia

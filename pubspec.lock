@@ -234,6 +234,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.5.0"
+  ostinato_audio:
+    dependency: "direct main"
+    description:
+      path: "packages/ostinato_audio"
+      relative: true
+    source: path
+    version: "0.1.0"
   ostinato_posture:
     dependency: "direct main"
     description:

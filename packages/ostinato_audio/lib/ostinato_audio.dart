@@ -13,6 +13,10 @@
 /// is right by definition.
 library;
 
+export 'src/capture/audio_route.dart';
+export 'src/capture/audio_source.dart';
+export 'src/capture/audio_surface_state.dart';
+export 'src/capture/ring_buffer.dart';
 export 'src/fixture/synthetic.dart';
 export 'src/gate/audio_confidence_gate.dart';
 export 'src/harmony/chord_detector.dart';

@@ -546,6 +546,7 @@ NETWORK_DEPS_KNOWN_SAFE = {
     "motion_camera": "aile paketi, pinli — motion_core ile aynı gerekçe",
     "motion_core": "aile paketi, pinli — kendi başına A3 kapsamı DIŞINDA ",
     "objective_c": "Objective-C native interop köprüsü, ağ değil",
+    "ostinato_audio": "BU DEPONUN kendi paketi (path bağımlılığı), Flutter'a BİLE bağımlı değil — saf Dart DSP (pitch/onset/chord), disk/ağ I/O'su hiç yok, kaynağı burada",
     "ostinato_posture": "BU DEPONUN kendi paketi (path bağımlılığı), ağ kodu yok — kaynağı burada",
     "package_config": "paket çözümleme meta-verisi okuma (yerel dosya), ağ değil",
     "path": "dosya yolu string işlemleri, I/O yok",
