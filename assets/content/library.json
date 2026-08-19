@@ -139,9 +139,10 @@
        ],
        "minutes": 15,
        "status": "locked",
-       "lockedReason": "Chord recognition has only been proven on synthetic audio (8/8 chords, zero false judgements) — it has never been tested on a real guitar recording. Synthetic tones have no body resonance, no string buzz and no overlapping decay, which are exactly the things that break a chord classifier. We won't grade you against a measurement we haven't confirmed on a real instrument.",
+       "lockedReason": "Chord recognition was proven on synthetic audio (8/8 chords, zero false judgements) — and as of 2026-08-19 it has also been measured on real guitar recordings, three independent takes, 34 real chord samples. The result was not good: 15.3% accuracy on the triad chords this course actually teaches, far short of the 90% we would need before grading you on it. The gap is not a mystery: most misses are the engine correctly refusing rather than guessing on a harder signal than this drill asks for (a professional's rhythmic comping, not the single held chord you would strum and sustain), and the rest split between a couple of specific chord pairs it confuses. We won't grade you against a measurement that keeps failing on real playing, however well we understand why it fails.",
+       "_lockedReason_source": "2026-08-19 (O-179/O-180/O-182, GuitarSet CC BY 4.0): docs/evidence/production-line/audio-model-gate.json chordResults.roadmapGate (triad-only, 150 windows, 0.1533) + $representativenessCaveat. Aynı sayı guitar disiplininin kendi honesty.notMeasured metnine de yazıldı (O-181/O-182).",
        "promotionPath": {
-        "unblockedBy": "One real guitar recording, measured the same way the synthetic set was — and a way to listen to you at all. The engine is finished; what is missing is proof on a real instrument.\n\nThere is no microphone input in this build, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
+        "unblockedBy": "A real accuracy improvement measured on real playing, not a threshold retuned to fit one dataset — the honest path is more representative fixture data (ideally an isolated held-chord recording closer to what this drill actually asks for, since every available real dataset so far is rhythmic performance) before any code changes to the shared detector. There is still no microphone input in this build either, so accuracy is not the only gate."
        }
       },
       {
