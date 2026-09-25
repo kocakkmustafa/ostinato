@@ -11,10 +11,8 @@ import 'package:test/test.dart';
 /// hiçbir test bunu yakalamıyordu). Bu test o günü beklemeden kırar: iki
 /// `pubspec.lock`'un `motion_core` için çözdüğü `resolved-ref` birebir
 /// aynı olmalı.
-/// Direktifle MÜHÜRLENEN tek ref (M-F-263): `motion_core-v0.11.0` ve
-/// `motion_camera-v0.1.2` AYRI commit'lerde durur ama pin TEKTİR — ikisini de
-/// içeren `f13bdc9`. Doğrulandı: v0.11.0 -> 2018469, v0.1.2 -> f13bdc9, ve
-/// f13bdc9 her ikisini de içeriyor (merge-base ataları).
+/// Onaylanan tek ref (M-F-263): hesap/üyelik çekirdeğini de içeren
+/// `f2ea161c`. Tüm tüketiciler aynı tam ref'i kullanır.
 ///
 /// **REF TAM 40-SHA OLMAK ZORUNDA** (M-F-263 zeyil-2, Choreia+Gravita ölçtü —
 /// ve burada da ÖLÇÜLDÜ): pub, git ref'lerini ÇÖZMEZ, STRING olarak
@@ -24,7 +22,7 @@ import 'package:test/test.dart';
 /// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
 /// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
 /// anlaşma, ancak iki taraf varken sınanabilir.)
-const String _mandatedRef = 'f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d';
+const String _mandatedRef = 'f2ea161c7e974d57b114ba7773836c72be17a381';
 const String _mandatedVersion = '0.11.0';
 
 void main() {

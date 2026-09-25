@@ -380,7 +380,7 @@
      "Bench height, pedalling, evenness of touch, note reading — either blocked on the same missing tools or outside what a camera can see."
     ],
     "_audioClaimsMoved": "2026-08-07: bu disiplinin measured listesindeki SES iddiası notMeasured'a taşındı ve blurb'ü düzeltildi. Sebep ölçüldü: Info.plist'te NSMicrophoneUsageDescription, AndroidManifest'te RECORD_AUDIO YOK ve kabukta tek bir ses yakalama çağrısı yok — motor gerçek ve fixture üzerinde ölçülü, ama kullanıcının ODASINDA hiç koşmuyor. \"Ölçüyoruz\" listesi ürünün en güçlü iddia yüzeyidir; oradaki yanlış bir satır en pahalı olanıdır. Tek bir olgu KAYBEDİLMEDİ, yalnız MEKÂNI doğru yazıldı (kayıtta ölçüldü ≠ odanda ölçülüyor). tools/validate_surface_honesty.py kural C bunu artık mekanik olarak kolluyor ve izin beyan edilince kendini emekliye ayırır.",
-    "instrumentSpecificGap": "Wrists, fingers and hand shape. We have no hand or finger landmarks at all, only body joints — a collapsed wrist and a good one look identical to this app.",
+    "instrumentSpecificGap": "Wrists, fingers and hand shape. The pose model includes wrists and coarse hand points, but Ostinato has no live hand-shape measurement or teacher reference, so it cannot judge a collapsed wrist.",
     "_instrumentSpecificGap_source": "2026-08-07 (O-044): Review ekraninin 4. 'neyi olcemedik' kalemi. Kaynak: honesty.notMeasured — 'Wrists, fingers and hand shape'. ICAT DEGIL kisaltma — secim EKRAN KODUNDA degil VERIDE duruyor ki gozden gecirilebilsin.",
     "outOfScopeDerived": [
      "Letter-Name/Rote Reliance Instead of True Note Reading — deliberately out of scope. 4 independent teaching channels name it, and a camera cannot see it at all. We would rather leave it out by name than pretend to watch it.",
@@ -506,10 +506,10 @@
        "focus": "posture",
        "minutes": 6,
        "status": "locked",
-       "lockedReason": "We have no hand or finger landmarks at all — only body joints. Every hand-related mistake in our error library is blocked on that missing tool, not on a missing threshold, and the difference matters: a threshold can be measured from teachers, a missing landmark cannot. Until the model reads hands, a collapsed wrist and a good one look identical to this app.",
+       "lockedReason": "The pose model includes wrists and coarse index, pinky and thumb points, but not finger joints. Ostinato has no live hand-shape measurement built from those points and no teacher reference for a good wrist. We cannot judge wrist collapse, flat fingers or hand shape until a suitable measurement and reference are validated.",
        "_why_locked_source": "piano.honesty.notMeasured (wrists/fingers, 'blocked on that missing tool') + comingSoonInThisDiscipline[1].",
        "promotionPath": {
-        "unblockedBy": "Hand and finger landmarks in the pose model. This is a missing measurement TOOL, not a missing threshold: no amount of teacher data would help until the model can see a wrist at all."
+        "unblockedBy": "A validated hand-shape measurement and a teacher reference. The existing pose points include the wrist and coarse hand tips, but do not resolve finger joints; whether they can support these judgments has not been shown."
        }
       }
      ]
@@ -517,7 +517,7 @@
    ],
    "comingSoonInThisDiscipline": [
     "Note timing as a graded skill — measured today, blocked on two things: teacher data about what counts as off-beat, and a fix for the engine's asymmetric bias",
-    "Everything involving hands and fingers (wrist collapse, flat fingers, hand shape) — blocked on hand landmarks, a missing measurement tool rather than a missing threshold",
+    "Everything involving hands and fingers (wrist collapse, flat fingers, hand shape) — blocked on an unbuilt hand-shape measurement and an uncollected teacher reference; the current pose points do not resolve finger joints",
     "Shoulder tension, the mistake piano teachers name most — needs a shoulder-height metric we do not have, plus its own reference statistic"
    ],
    "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi.",

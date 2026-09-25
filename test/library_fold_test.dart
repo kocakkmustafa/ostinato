@@ -1,4 +1,4 @@
-// "START HERE" ŞERİDİ KATLAMANIN NE KADAR ALTINDA — ÖLÇÜLÜR ve GÖRÜNÜR olur.
+// İLK DERS ŞERİDİ KATLAMANIN NE KADAR ALTINDA — ÖLÇÜLÜR ve GÖRÜNÜR olur.
 //
 // ## Neden bu test var (O-139)
 //
@@ -41,10 +41,12 @@ const double kFold = 812.0;
 /// D16 (2026-08-16, O-152): 515.0 → -240.0. Şerit `library_screen.dart`da
 /// "Your instruments"tan ÖNCEYE taşındı (koordinatör kararı, O-139/O-140
 /// ölçümü üstüne). Negatif değer katlamanın ÜSTÜNDE demek — üç kalemin
-/// EN UZAĞI bile artık -71pt (hâlâ üstte). Bu, testin kendi disiplininin
+/// EN UZAĞI bile artık -71pt (hâlâ üstte). 2026-09-25 ilk sürüm kapsam
+/// metni kısalınca ilk kalem -373pt'ye yükseldi; ölçüm tekrarlandı. Bu,
+/// testin kendi disiplininin
 /// ikinci yönünün uygulanışı: "sayı küçülürse düzeltme inmiş demektir ve
 /// test öter — beyanı tazele, iyileşme de bir olaydır."
-const double kDeclaredFirstItemBelowFold = -240.0;
+const double kDeclaredFirstItemBelowFold = -373.0;
 
 /// Yazı metrikleri sürüm/platformla birkaç pt oynayabilir; tolerans o kadar.
 /// **Yerleşim değişikliğini gizleyecek kadar geniş DEĞİL** (ölçülen fark
@@ -77,7 +79,7 @@ void main() {
         child: MaterialApp(home: LibraryScreen(repo: repo, cueText: cueText)),
       );
 
-  testWidgets('START HERE şeridinin katlama mesafesi BEYANLA uyuşuyor',
+  testWidgets('ilk ders şeridinin katlama mesafesi BEYANLA uyuşuyor',
       (WidgetTester t) async {
     await t.pumpWidget(harness());
     await t.pump();

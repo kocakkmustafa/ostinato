@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../app_locale.dart';
+import '../account_connection.dart';
 import '../content.dart';
 import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
@@ -15,7 +17,7 @@ import '../design/widgets.dart';
 // taklit olurdu).
 // source-only: ekranda çocuk rejimine dair kullanıcı cümlesi YOK ve
 // olmamalı — olmayan bir rejimi anlatmak onu varmış gibi gösterirdi.
-  // closedPaths: none-known
+// closedPaths: none-known
 /// Canlı çalgı cümlesi — SAYI ve ADLAR `library.json`dan TÜRER.
 /// Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce
 /// yanlış olur ve hiçbir test kırılmaz (O-068).
@@ -25,12 +27,27 @@ String _liveSentence(BuildContext context) {
       .disciplines
       .where((Discipline d) => d.status == 'live')
       .toList();
+  if (Localizations.localeOf(context).languageCode == 'tr') {
+    const names = <String, String>{
+      'guitar': 'gitar',
+      'voice': 'şan',
+      'piano': 'piyano',
+    };
+    return '${live.length} çalgı açık: '
+        '${live.map((d) => names[d.id] ?? d.displayName).join(', ')}.';
+  }
   const Map<int, String> words = <int, String>{
-    1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six',
+    1: 'One',
+    2: 'Two',
+    3: 'Three',
+    4: 'Four',
+    5: 'Five',
+    6: 'Six',
   };
   final String n = words[live.length] ?? '${live.length}';
-  final String names =
-      live.map((Discipline d) => d.displayName.toLowerCase()).join(', ');
+  final String names = live
+      .map((Discipline d) => d.displayName.toLowerCase())
+      .join(', ');
   final String verb = live.length == 1 ? 'instrument is' : 'instruments are';
   return '$n $verb live: $names.';
 }
@@ -49,14 +66,34 @@ class SettingsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               GlassIconButton(
-                  icon: '‹',
-                  semanticLabel: 'Back to library',
-                  onTap: () => Navigator.of(context).pop()),
+                icon: '‹',
+                semanticLabel: localized(
+                  context,
+                  'Back to library',
+                  'Kütüphaneye dön',
+                ),
+                onTap: () => Navigator.of(context).pop(),
+              ),
               const SizedBox(height: 20),
-              Text('Settings',
-                  style: hankenText(
-                      size: 28, weight: FontWeight.w600, height: 1.1)),
+              Text(
+                localized(context, 'Settings', 'Ayarlar'),
+                style: hankenText(
+                  size: 28,
+                  weight: FontWeight.w600,
+                  height: 1.1,
+                ),
+              ),
               const SizedBox(height: 22),
+              if (AccountScope.maybeOf(context)?.connection case final AccountConnection account) ...<Widget>[
+                OutlinedButton.icon(
+                  onPressed: () => Navigator.of(context).push<void>(
+                    MaterialPageRoute<void>(builder: account.pageBuilder),
+                  ),
+                  icon: const Icon(Icons.person_outline),
+                  label: Text(localized(context, 'Account', 'Hesap')),
+                ),
+                const SizedBox(height: 14),
+              ],
               // DÜZELTME (2026-08-07): tek kart "Camera and microphone"
               // deyip "the microphone reads level and pitch" diyordu — bu
               // build'de mikrofon giriş yolu YOK (`NSMicrophoneUsageDescription`
@@ -69,8 +106,8 @@ class SettingsScreen extends StatelessWidget {
               // değil KENDİ kartıdır (dürüst hâller birinci sınıf ekran).
               // Yan cümle hâlinde `validate_surface_honesty.py` de onu
               // göremiyordu — başlık "mikrofon" diyor, gerekçe gövdedeydi.
-              const _SettingsCard(
-                title: 'Camera',
+              _SettingsCard(
+                title: localized(context, 'Camera', 'Kamera'),
                 // DÜZELTME (2026-08-07, O-054 — yayın envanteri): önceki
                 // cümle "only the body angles we measure are kept" diyordu.
                 // Ölçüldü: `lib/` içinde TEK dosya yazımı karşılama
@@ -94,36 +131,65 @@ class SettingsScreen extends StatelessWidget {
                 // adıyla yazıldı (uygulamayı kaldırmak) — var olmayan bir
                 // "sil" DÜĞMESİ İCAT EDİLMEDİ, iOS'un kendi mekanizması
                 // anlatıldı.
-                body: 'It runs on your phone and reads your two shoulders '
-                    'and your two hips, and only inside a lesson. From those '
-                    'it measures one thing: how far your trunk leans. '
-                    'Nothing is uploaded, and that angle itself is never '
-                    'stored — it exists while the lesson is running and is '
-                    'gone when you leave it. '
-                    'A short summary of each session (how long you '
-                    'practised, how much you stayed in range) is kept on '
-                    'this device so Review can show your last session; '
-                    'nothing more detailed than that. Uninstalling the app '
-                    'removes it, the same as everything else the app keeps.',
-              ),
-              const SizedBox(height: 14),
-              const _SettingsCard(
-                title: 'Microphone — not wired in this build',
-                body: 'No audio permission is requested and nothing you play '
-                    'is captured. The chord and note-attack work the lessons '
-                    'describe was measured on recordings, not in your room. '
-                    'Until an input is wired, every judgement this app makes '
-                    'comes from the camera.',
-              ),
-              const SizedBox(height: 14),
-              const _SettingsCard(
-                title: 'Sharing',
-                body: 'Raw video never leaves this device. There is no '
-                    'setting that changes that.',
+                body: localized(
+                  context,
+                  'It runs on your phone and reads your two shoulders '
+                      'and your two hips, and only inside a lesson. From those '
+                      'it measures one thing: how far your trunk leans. '
+                      'Camera video is not uploaded, and that angle itself is never '
+                      'stored — it exists while the lesson is running and is '
+                      'gone when you leave it. '
+                      'A short summary of each session (how long you '
+                      'practised, how much you stayed in range) is kept on '
+                      'this device so Review can show your last session; '
+                      'nothing more detailed than that. Uninstalling the app '
+                      'removes it, the same as everything else the app keeps.',
+                  'Kamera yalnız ders sırasında ve bu cihazda çalışır. '
+                      'İki omuz ve iki kalçadan yalnız gövde eğiminizi ölçer. '
+                      'Video yüklenmez; açı da saklanmaz. Son oturumunuzu '
+                      'görebilmeniz için çalışma süresi ve aralıkta kaldığınız '
+                      'zamanın kısa özeti cihazda tutulur. Uygulamayı silmek '
+                      'bu özeti de siler.',
+                ),
               ),
               const SizedBox(height: 14),
               _SettingsCard(
-                title: 'About this build',
+                title: localized(
+                  context,
+                  'Microphone — not wired in this build',
+                  'Mikrofon — bu sürümde bağlı değil',
+                ),
+                body: localized(
+                  context,
+                  'No audio permission is requested and nothing you play '
+                      'is captured. The chord and note-attack work the lessons '
+                      'describe was measured on recordings, not in your room. '
+                      'Until an input is wired, every judgement this app makes '
+                      'comes from the camera.',
+                  'Ses izni istenmez ve çalmanız kaydedilmez. Derslerdeki '
+                      'akor ve nota başlangıcı çalışmaları sizin ortamınızda '
+                      'değil, kayıtlar üzerinde ölçülmüştür. Bu sürümde '
+                      'değerlendirmeler yalnız kameraya dayanır.',
+                ),
+              ),
+              const SizedBox(height: 14),
+              _SettingsCard(
+                title: localized(context, 'Sharing', 'Paylaşım'),
+                body: localized(
+                  context,
+                  'Raw video never leaves this device. There is no '
+                      'setting that changes that.',
+                  'Ham video cihazınızdan çıkmaz. Bunu değiştiren bir ayar '
+                      'yoktur.',
+                ),
+              ),
+              const SizedBox(height: 14),
+              _SettingsCard(
+                title: localized(
+                  context,
+                  'About this build',
+                  'Bu sürüm hakkında',
+                ),
                 // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
                 // çıkarıldı — bir zaman taahhüdüydü, üstelik bu cümlenin
                 // gerekçesi bile yoktu (en çıplak örnek). Kalan cümle
@@ -135,11 +201,18 @@ class SettingsScreen extends StatelessWidget {
                 // düzeltmek, onu ürünün geri kalanında düzeltmek değildir.*
                 // Dördüncü çalgı canlıya geçtiği gün burası sessizce "Three"
                 // demeye devam ederdi.
-                body: '${_liveSentence(context)} '
-                    'Every posture reference is built from teaching footage '
-                    'filmed waist-up, which is why nothing below your hips '
-                    'is read. Nothing here has been verified on real '
-                    'hardware.',
+                body: localized(
+                  context,
+                  '${_liveSentence(context)} '
+                      'Every posture reference is built from teaching footage '
+                      'filmed waist-up, which is why nothing below your hips '
+                      'is read. Nothing here has been verified on real '
+                      'hardware.',
+                  '${_liveSentence(context)} Tüm duruş referansları belden '
+                      'yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden '
+                      'kalçanızın altı okunmaz. Buradaki işlevler gerçek '
+                      'cihazda doğrulanmadı.',
+                ),
               ),
             ],
           ),
@@ -156,20 +229,26 @@ class _SettingsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: .62),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withValues(alpha: .75)),
+    padding: const EdgeInsets.all(18),
+    decoration: BoxDecoration(
+      color: Colors.white.withValues(alpha: .62),
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: Colors.white.withValues(alpha: .75)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        kicker(title),
+        const SizedBox(height: 10),
+        Text(
+          body,
+          style: hankenText(
+            size: 13.5,
+            height: 1.55,
+            color: OstinatoColors.textBody,
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            kicker(title),
-            const SizedBox(height: 10),
-            Text(body,
-                style: hankenText(size: 13.5, height: 1.55, color: OstinatoColors.textBody)),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 }

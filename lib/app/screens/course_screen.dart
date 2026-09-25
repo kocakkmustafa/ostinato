@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../content.dart';
+import '../app_locale.dart';
+import '../catalog_copy_tr.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import 'lesson_demo_screen.dart';
@@ -49,20 +51,20 @@ class CourseScreenRoute extends StatelessWidget {
             children: <Widget>[
               GlassIconButton(
                 icon: '‹',
-                semanticLabel: 'Back',
+                semanticLabel: localized(context, 'Back', 'Geri'),
                 onTap: () => Navigator.of(context).pop(),
               ),
               const SizedBox(height: 22),
-              Text('${discipline.displayName.toUpperCase()} · FOUNDATIONS',
+              Text('${catalogUpperName(context, discipline.id, discipline.displayName)} · ${localized(context, 'FOUNDATIONS', 'TEMELLER')}',
                   style: monoText(color: hue.ink)),
               const SizedBox(height: 9),
-              Text(course.goal,
+              Text(catalogGoal(context, course.id, course.goal),
                   style: hankenText(
                       size: 28, weight: FontWeight.w600, height: 1.1)),
               const SizedBox(height: 12),
               Text(
-                  '${course.level.toUpperCase()} · ${course.estimatedMinutes} '
-                  'MIN · ${course.lessons.length} LESSONS',
+                  '${catalogTag(context, course.level)} · ${course.estimatedMinutes} '
+                  '${localized(context, 'MIN', 'DK')} · ${course.lessons.length} ${localized(context, 'LESSONS', 'DERS')}',
                   style: monoText()),
               const SizedBox(height: 22),
               for (final Lesson l in course.lessons)
@@ -72,9 +74,9 @@ class CourseScreenRoute extends StatelessWidget {
                 ),
               const SizedBox(height: 8),
               Text(
-                'A locked lesson is visible on purpose. The reason it is '
-                'locked is the name of the measurement we are missing, not '
-                'a threshold you failed.',
+                localized(context,
+                  'A locked lesson is visible on purpose. The reason it is locked is the name of the measurement we are missing, not a threshold you failed.',
+                  'Kilitli dersler bilerek gösterilir. Kilidin nedeni geçemediğin bir eşik değil, eksik olan ölçümün adıdır.'),
                 style: hankenText(size: 12, color: OstinatoColors.textFaint),
               ),
             ],
@@ -110,6 +112,14 @@ class _LessonRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (String chip, Color chipBg, Color chipFg, Color bg) = _chip;
+    final String? sourceReason = lesson.lockedReason ?? lesson.demoOnlyReason;
+    final String firstSentence = sourceReason == null
+        ? ''
+        : catalogFirstSentence(
+            context,
+            '${lesson.id}.${lesson.lockedReason != null ? 'lockedReason' : 'demoOnlyReason'}',
+            sourceReason,
+          );
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -138,12 +148,12 @@ class _LessonRow extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(lesson.displayName,
+                        Text(catalogName(context, lesson.id, lesson.displayName),
                             style: hankenText(size: 15.5, weight: FontWeight.w500)),
                         const SizedBox(height: 6),
                         Text(
-                            '${lesson.minutes} MIN'
-                            '${lesson.focus.isEmpty ? '' : ' · ${lesson.focus.toUpperCase()}'}',
+                            '${lesson.minutes} ${localized(context, 'MIN', 'DK')}'
+                            '${lesson.focus.isEmpty ? '' : ' · ${catalogTag(context, lesson.focus)}'}',
                             style: monoText()),
                       ],
                     ),
@@ -154,21 +164,27 @@ class _LessonRow extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                     decoration: BoxDecoration(
                         color: chipBg, borderRadius: BorderRadius.circular(7)),
-                    child: Text(chip,
+                    child: Text(localized(context, chip,
+                        switch (lesson.kind) {
+                          LessonKind.locked => 'KİLİTLİ',
+                          LessonKind.demoOnly => 'ÖLÇÜM · PUAN YOK',
+                          LessonKind.guide => 'REHBER',
+                          LessonKind.scored => 'ÖLÇÜM',
+                        }),
                         style: monoText(size: 9.5, color: chipFg, letterSpacing: .07)),
                   ),
                 ],
               ),
-              if (lesson.firstSentence.isNotEmpty) ...<Widget>[
+              if (firstSentence.isNotEmpty) ...<Widget>[
                 const SizedBox(height: 7),
                 RichText(
                   text: TextSpan(
                     style: hankenText(
                         size: 12.5, color: OstinatoColors.textMuted),
                     children: <InlineSpan>[
-                      TextSpan(text: '${lesson.firstSentence} '),
+                      TextSpan(text: '$firstSentence '),
                       TextSpan(
-                          text: 'Read why ›',
+                          text: localized(context, 'Read why ›', 'Nedenini oku ›'),
                           style: hankenText(size: 12.5, color: hue.ink)),
                     ],
                   ),

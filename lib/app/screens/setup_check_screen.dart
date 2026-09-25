@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import '../app_locale.dart';
 import 'package:motion_camera/motion_camera.dart';
 import 'package:motion_core/motion_core.dart' as core;
 import 'package:ostinato_posture/ostinato_posture.dart';
@@ -133,9 +134,9 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
                 children: <Widget>[
                   GlassIconButton(
                       icon: '✕',
-                      semanticLabel: 'Cancel setup',
+                      semanticLabel: localized(context, 'Cancel setup', 'Kurulumdan çık'),
                       onTap: () => Navigator.of(context).pop()),
-                  kicker('Setup check'),
+                  kicker(localized(context, 'Setup check', 'Kurulum denetimi')),
                   const SizedBox(width: 38),
                 ],
               ),
@@ -167,45 +168,46 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
     return switch (_stage) {
       _Stage.starting => _CameraStage(
           key: const Key('setup-stage-framing'),
-          kicker: 'FRAME',
-          title: 'Find your frame.',
+          kicker: localized(context, 'FRAME', 'KADRAJ'),
+          title: localized(context, 'Find your frame.', 'Kadrajını ayarla.'),
           // DÜZELTME-2 (O-099): "Nine points" burada bir OKUMA iddiasıydı
           // ("we do not read your head" ile aynı cümlede) ve ölçüme
           // uymuyordu — kamera DÖRT nokta okur (`LmRegion.torso`). BEŞİNCİ
           // yüzey: ilk sayım "upper-body" ifadesini aradığı için burayı
           // KAÇIRMIŞTI — deseni ifadeye bağlamanın, iddiaya bağlamamanın
           // aynı sınıf hatası (plist kapısının deliğiyle birebir aynı).
-          body: 'You should be visible from your hips to your shoulders. '
-              'Four points — your two shoulders and your two hips — and no '
-              'face: we do not read your head, because our reference does '
-              'not carry one.',
+          body: localized(context,
+              'You should be visible from your hips to your shoulders. Four points — your two shoulders and your two hips — and no face: we do not read your head, because our reference does not carry one.',
+              'Omuzların ve kalçaların kadrajda olmalı. İki omuz ve iki kalça olmak üzere dört nokta okunur. Yüzün okunmaz; referans görüntümüzde baş bulunmaz.'),
           child: _Skeleton(dim: false),
         ),
       _Stage.framingError => _CameraStage(
           key: const Key('setup-stage-framing-error'),
-          kicker: 'FRAME',
-          title: 'Your hips are outside the frame.',
-          body: 'Both hip points are missing, so there is no trunk line to '
-              'measure. Move the phone back about an arm’s length, or sit '
-              'closer to it.',
+          kicker: localized(context, 'FRAME', 'KADRAJ'),
+          title: localized(context, 'Your hips are outside the frame.', 'Kalçaların kadraj dışında.'),
+          body: localized(context,
+              'Both hip points are missing, so there is no trunk line to measure. Move the phone back about an arm’s length, or sit closer to it.',
+              'İki kalça noktası da görünmüyor; gövde çizgisi ölçülemiyor. Telefonu yaklaşık bir kol boyu uzaklaştır veya ona biraz yaklaş.'),
           warn: true,
           child: _Skeleton(dim: true),
         ),
       _Stage.lowLight => _CameraStage(
           key: const Key('setup-stage-low-light'),
-          kicker: 'LIGHT',
-          title: 'Too dark to trust.',
-          body: 'Landmark confidence is below what we measure against. '
-              'Turn on a light or face a window — we would rather refuse '
-              'than guess.',
+          kicker: localized(context, 'LIGHT', 'IŞIK'),
+          title: localized(context, 'Too dark to trust.', 'Görüntü yeterince aydınlık değil.'),
+          body: localized(context,
+              'Landmark confidence is below what we measure against. Turn on a light or face a window — we would rather refuse than guess.',
+              'Vücut noktaları güvenilir biçimde okunmuyor. Bir ışık aç veya pencereye dön; tahmin ederek ölçüm yapmayız.'),
           warn: true,
           child: _Skeleton(dim: true),
         ),
       _Stage.ok => _CameraStage(
           key: const Key('setup-stage-ok'),
-          kicker: 'FRAME',
-          title: 'Holding steady…',
-          body: 'Frame and light look right. Hold still for a moment.',
+          kicker: localized(context, 'FRAME', 'KADRAJ'),
+          title: localized(context, 'Holding steady…', 'Sabit dur…'),
+          body: localized(context,
+              'Frame and light look right. Hold still for a moment.',
+              'Kadraj ve ışık uygun görünüyor. Kısa bir süre sabit dur.'),
           child: _Skeleton(dim: false),
         ),
       _Stage.room => _RoomGapNotice(
@@ -216,16 +218,17 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
   }
 
   String _describeFailure(SurfaceState s) => switch (s) {
-        PermissionDeniedRetriable() =>
-          'Ostinato needs the camera to see how you sit. Tap the button '
-              'below to allow it.',
-        PermissionDeniedPermanent() =>
-          'Camera access is off and the system will not ask again. Open '
-              'Settings to change it.',
-        SetupFailed(:final String reason) =>
-          'The camera did not start ($reason). The setup check cannot run '
-              'without it.',
-        _ => 'The camera is not available right now.',
+        PermissionDeniedRetriable() => localized(context,
+          'Ostinato needs the camera to see how you sit. Tap the button below to allow it.',
+          'Oturma duruşunu görebilmek için kamera erişimi gerekli. İzin vermek için aşağıdaki düğmeye dokun.'),
+        PermissionDeniedPermanent() => localized(context,
+          'Camera access is off and the system will not ask again. Open Settings to change it.',
+          'Kamera erişimi kapalı ve sistem tekrar izin istemeyecek. Erişimi Ayarlar’dan açabilirsin.'),
+        SetupFailed() => localized(context,
+          'The camera did not start. The setup check cannot run without it. Return to the lesson to try again.',
+          'Kamera açılamadı. Kurulum denetimi kamera olmadan çalışamaz. Yeniden denemek için derse dön.'),
+        _ => localized(context, 'The camera is not available right now.',
+          'Kamera şu anda kullanılamıyor.'),
       };
 }
 
@@ -243,7 +246,11 @@ class _StepBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
         children: <Widget>[
-          for (final (int i, String label) in const <String>['FRAME', 'ROOM', 'READY']
+          for (final (int i, String label) in <String>[
+            localized(context, 'FRAME', 'KADRAJ'),
+            localized(context, 'ROOM', 'ORTAM'),
+            localized(context, 'READY', 'HAZIR'),
+          ]
               .indexed) ...<Widget>[
             if (i > 0) const SizedBox(width: 7),
             Expanded(

@@ -1,25 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:motion_account/motion_account.dart';
 
 import 'app/content.dart';
 import 'app/cue_text.dart';
+import 'app/app_locale.dart';
+import 'app/account_connection.dart';
 import 'app/design/app_scope.dart';
 import 'app/design/ostinato_theme.dart';
 import 'app/onboarding_store.dart';
+import 'app/motion_account_bootstrap.dart';
 import 'app/screens/library_screen.dart';
 import 'app/screens/onboarding_screen.dart';
 
 /// Kabuk YALNIZ kablolama (Gravita G-100 deseni). Burada hüküm yok: eşik,
 /// bant, bastırma, dürüst hâller — hepsi `packages/ostinato_posture`da ve
 /// testte. Bir sayı buraya sızarsa test edilemez hâle gelir.
-void main() => runApp(const OstinatoApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    final (runtime, accountConnection) = await initializeMotionAccount();
+    runApp(
+      MotionIdentityGate(
+        runtime: runtime,
+        child: OstinatoApp(accountConnection: accountConnection),
+      ),
+    );
+  } on Object {
+    runApp(const AccountStartupFailure());
+  }
+}
 
 class OstinatoApp extends StatefulWidget {
   /// [store] enjekte edilebilir: widget testinde `path_provider` platform
   /// kanalı yok ve "ilk açılış" ile "ikinci açılış" AYRI ölçülebilir iki
   /// durum olmalı (bkz. `onboarding_store.dart` gerekçesi).
-  const OstinatoApp({super.key, this.store = const FileOnboardingStore()});
+  const OstinatoApp({
+    super.key,
+    this.store = const FileOnboardingStore(),
+    this.accountConnection,
+  });
 
   final OnboardingStore store;
+  final AccountConnection? accountConnection;
 
   @override
   State<OstinatoApp> createState() => _OstinatoAppState();
@@ -29,10 +51,10 @@ typedef _Boot = (ContentRepository, CueTextResolver, bool onboarded);
 
 class _OstinatoAppState extends State<OstinatoApp> {
   late final Future<_Boot> _load = (() async => (
-        await ContentRepository.load(),
-        await CueTextResolver.load(),
-        await widget.store.isComplete(),
-      ))();
+    await ContentRepository.load(),
+    await CueTextResolver.load(),
+    await widget.store.isComplete(),
+  ))();
 
   // Tema `ostinato_theme.dart`ta — kanıt üreteci de AYNI nesneyi kuruyor
   // (O-052: temasız kanıt koşumu ham `TextStyle`ları blok glif çiziyordu).
@@ -49,18 +71,27 @@ class _OstinatoAppState extends State<OstinatoApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: _theme,
+            supportedLocales: appSupportedLocales,
+            localizationsDelegates: appLocalizationsDelegates,
             home: Scaffold(
-                body: Center(child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Text('Content did not load: ${snap.error}')))),
+              body: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Text('Content did not load: ${snap.error}'),
+                ),
+              ),
+            ),
           );
         }
         if (!snap.hasData) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: _theme,
+            supportedLocales: appSupportedLocales,
+            localizationsDelegates: appLocalizationsDelegates,
             home: const Scaffold(
-                body: Center(child: CircularProgressIndicator())),
+              body: Center(child: CircularProgressIndicator()),
+            ),
           );
         }
         final (ContentRepository repo, CueTextResolver cue, bool onboarded) =
@@ -71,20 +102,35 @@ class _OstinatoAppState extends State<OstinatoApp> {
         // Scope MaterialApp.home'u sarsaydı, push edilen hiçbir ekran onu
         // GÖREMEZDİ — route_path_test.dart bunu ölçtü, main.dart'ta AYNI
         // hata olurdu (LibraryScreen'den herhangi bir dokunuş çökerdi).
-        return ContentRepositoryScope(
+        final AccountConnection? account = widget.accountConnection;
+        Widget accountApp(String? userId) => ContentRepositoryScope(
           repo: repo,
           cueText: cue,
-          child: MaterialApp(
-            title: 'Ostinato',
-            debugShowCheckedModeBanner: false,
-            theme: _theme,
-            home: OstinatoHome(
-              repo: repo,
-              cueText: cue,
-              store: widget.store,
-              alreadyOnboarded: onboarded,
+          child: AccountScope(
+            connection: account,
+            currentUserId: userId,
+            child: MaterialApp(
+              key: ValueKey<String>(
+                'ostinato-account-${userId ?? 'signed-out'}',
+              ),
+              title: 'Ostinato',
+              debugShowCheckedModeBanner: false,
+              theme: _theme,
+              supportedLocales: appSupportedLocales,
+              localizationsDelegates: appLocalizationsDelegates,
+              home: OstinatoHome(
+                repo: repo,
+                cueText: cue,
+                store: widget.store,
+                alreadyOnboarded: onboarded,
+              ),
             ),
           ),
+        );
+        if (account == null) return accountApp(null);
+        return ValueListenableBuilder<String?>(
+          valueListenable: account.userId,
+          builder: (_, userId, _) => accountApp(userId),
         );
       },
     );

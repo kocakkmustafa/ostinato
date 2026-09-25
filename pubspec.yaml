@@ -30,6 +30,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # Shared Motion account uses the same immutable revision as core and camera.
+  motion_account:
+    git:
+      url: https://github.com/kocakkmustafa/motion-core.git
+      path: packages/motion_account
+      ref: f2ea161c7e974d57b114ba7773836c72be17a381
   ostinato_posture:
     path: packages/ostinato_posture
   # OST-P0-002 (2026-08-19): şimdiye kadar `ostinato_audio` yalnız KENDİ
@@ -38,21 +46,19 @@ dependencies:
   # pitch/onset/chord primitiflerine erişebilir.
   ostinato_audio:
     path: packages/ostinato_audio
-  # motion_core PATH ile çekiliyor; pub onun transitif core'unu ÇÖZÜLMÜŞ SHA,
-  # buradaki pini TAG ADI olarak görür ve aynı commit olsalar bile
-  # descriptor'ları FARKLI sayar ("incompatible with ... from path" — Choreia
-  # pub-tuzağı, M-F-265). f13bdc9 == motion_core-v0.11.0 VE
-  # motion_camera-v0.1.2 (tek commit, M-F-260); tag'ler ayrı commit'lerde
-  # durur, f13bdc9 İKİSİNİ birden taşır. DEĞİŞTİRME.
+  # Alt paketler ve uygulama aynı TAM-40-SHA'yı kullanır. Pub, aynı Git
+  # paketinin farklı ref dizelerini ayrı kaynak sayar (M-F-265). Bu ref,
+  # Motion hesap + üyelik çekirdeğinin onaylanan sürümüdür; pin testleri
+  # bütün descriptor ve kilitlerin aynı commit'e çözülmesini denetler.
   motion_core:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_core
-      ref: f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d
+      ref: f2ea161c7e974d57b114ba7773836c72be17a381
   motion_camera:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
-      ref: f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d
+      ref: f2ea161c7e974d57b114ba7773836c72be17a381
       path: packages/motion_camera
 
   permission_handler: ^12.0.3

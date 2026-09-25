@@ -5,7 +5,7 @@ import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 
-/// "START HERE" şeridi — TÜRETİLDİĞİNİN testi (DESIGN-AHEAD §1.2, O-117).
+/// Başlangıç şeridi — TÜRETİLDİĞİNİN testi (DESIGN-AHEAD §1.2, O-117).
 ///
 /// ⚠️ Bu dosyanın kendi tuzağı: beklenen üç dersi BURAYA yazmak, kimliği
 /// ekrandan çıkarıp teste taşımak olurdu — aynı sertlikte ikinci bir gömülü
@@ -57,46 +57,62 @@ void main() {
   Widget harness({
     List<NavigatorObserver> observers = const <NavigatorObserver>[],
     Key? appKey,
-  }) =>
-      ContentRepositoryScope(
-        repo: repo,
-        cueText: cueText,
-        child: MaterialApp(
-          key: appKey,
-          navigatorObservers: observers,
-          home: LibraryScreen(repo: repo, cueText: cueText),
-        ),
-      );
+  }) => ContentRepositoryScope(
+    repo: repo,
+    cueText: cueText,
+    child: MaterialApp(
+      key: appKey,
+      locale: const Locale('en'),
+      supportedLocales: const <Locale>[Locale('en'), Locale('tr')],
+      navigatorObservers: observers,
+      home: LibraryScreen(repo: repo, cueText: cueText),
+    ),
+  );
 
   List<Discipline> liveWithStarter() => repo.disciplines
       .where((Discipline d) => d.status == 'live' && d.starterLesson != null)
       .toList();
 
-  testWidgets('şerit başlığı ve kalem SAYISI canlı disiplinlerden türer',
-      (WidgetTester t) async {
+  testWidgets('şerit başlığı ve kalem SAYISI canlı disiplinlerden türer', (
+    WidgetTester t,
+  ) async {
     await t.pumpWidget(harness());
     await t.pump();
 
     final List<Discipline> expected = liveWithStarter();
     // Ölçümün kendisi boşsa test HİÇBİR ŞEY kanıtlamaz — "0 kalem bulundu,
     // 0 bekleniyordu" yeşil yanar. Tabanı adıyla sınıyoruz.
-    expect(expected, isNotEmpty,
-        reason: 'canlı disiplinlerin hiçbiri starter çözemedi — şerit boş '
-            'olurdu ve bu testin geri kalanı boşlukta yeşil yanardı');
-
-    expect(find.text('START HERE'), findsOneWidget);
     expect(
-      find.byWidgetPredicate((Widget w) =>
-          w.key is ValueKey<String> &&
-          (w.key! as ValueKey<String>).value.startsWith('starter-')),
+      expected,
+      isNotEmpty,
+      reason:
+          'canlı disiplinlerin hiçbiri starter çözemedi — şerit boş '
+          'olurdu ve bu testin geri kalanı boşlukta yeşil yanardı',
+    );
+
+    expect(
+      find.text('EXPLORE LESSONS'),
+      findsOneWidget,
+      reason:
+          'ilk sürümde ücretli seanslar kapalı; keşif şeridi '
+          'başlama veya ödeme vaadi vermemeli',
+    );
+    expect(
+      find.byWidgetPredicate(
+        (Widget w) =>
+            w.key is ValueKey<String> &&
+            (w.key! as ValueKey<String>).value.startsWith('starter-'),
+      ),
       findsNWidgets(expected.length),
-      reason: 'şerit kalem sayısı canlı disiplin sayısından SAPTI — fazlası '
+      reason:
+          'şerit kalem sayısı canlı disiplin sayısından SAPTI — fazlası '
           'elle eklenmiş, eksiği çözülememiş kimlik demektir',
     );
   });
 
-  testWidgets('her kalem KENDİ disiplininin çözülmüş dersini gösterir',
-      (WidgetTester t) async {
+  testWidgets('her kalem KENDİ disiplininin çözülmüş dersini gösterir', (
+    WidgetTester t,
+  ) async {
     await t.pumpWidget(harness());
     await t.pump();
 
@@ -104,51 +120,69 @@ void main() {
       final Finder row = find.byKey(Key('starter-${d.id}'));
       expect(row, findsOneWidget, reason: '${d.id} için şerit kalemi yok');
       expect(
-        find.descendant(of: row, matching: find.text(d.starterLesson!.displayName)),
+        find.descendant(
+          of: row,
+          matching: find.text(d.starterLesson!.displayName),
+        ),
         findsOneWidget,
-        reason: '${d.id} kalemi kendi starterLessonId\'sinin başlığını '
+        reason:
+            '${d.id} kalemi kendi starterLessonId\'sinin başlığını '
             'göstermiyor — şerit veriden KOPMUŞ',
       );
     }
   });
 
-  testWidgets('HER kalem kendi dersinin ekranını AÇAR (tanık: NavigatorObserver)',
-      (WidgetTester t) async {
-    // İlk yazımda "şerit kayboldu mu" diye sormuştum ve test HAKLI OLARAK
-    // düştü: `Navigator.push` önceki rotayı ağaçtan SİLMEZ, üstünü örter.
-    // Kaybolma, gezinmenin YANLIŞ VEKİLİ. Tanık artık itilen rotanın
-    // kendisi — O-112'nin `NavigatorObserver` deseni.
-    for (final Discipline d in liveWithStarter()) {
-      final _PushWitness witness = _PushWitness();
-      await t.pumpWidget(harness(
-          observers: <NavigatorObserver>[witness],
-          appKey: ValueKey<String>('app-${d.id}')));
-      await t.pump();
-      witness.pushes.clear(); // ana rotanın kendi push'u sayılmaz
+  testWidgets(
+    'HER kalem kendi dersinin ekranını AÇAR (tanık: NavigatorObserver)',
+    (WidgetTester t) async {
+      // İlk yazımda "şerit kayboldu mu" diye sormuştum ve test HAKLI OLARAK
+      // düştü: `Navigator.push` önceki rotayı ağaçtan SİLMEZ, üstünü örter.
+      // Kaybolma, gezinmenin YANLIŞ VEKİLİ. Tanık artık itilen rotanın
+      // kendisi — O-112'nin `NavigatorObserver` deseni.
+      for (final Discipline d in liveWithStarter()) {
+        final _PushWitness witness = _PushWitness();
+        await t.pumpWidget(
+          harness(
+            observers: <NavigatorObserver>[witness],
+            appKey: ValueKey<String>('app-${d.id}'),
+          ),
+        );
+        await t.pump();
+        witness.pushes.clear(); // ana rotanın kendi push'u sayılmaz
 
-      // ŞERİT KATLAMANIN ALTINDA (375×812'de ölçüldü: ilk yazımda tap 0 rota
-      // itti çünkü kalem görünür alanın dışındaydı). Kaydırmak testin
-      // hilesi değil kullanıcının gerçeği — ama bu gerçek DEFTER'e de
-      // yazıldı (O-117): tasarım şeridi kartların hemen altına koyuyor ve
-      // en dar yaygın telefonda oraya scroll'suz ulaşılmıyor.
-      await t.ensureVisible(find.byKey(Key('starter-${d.id}')));
-      await t.pumpAndSettle();
+        // ŞERİT KATLAMANIN ALTINDA (375×812'de ölçüldü: ilk yazımda tap 0 rota
+        // itti çünkü kalem görünür alanın dışındaydı). Kaydırmak testin
+        // hilesi değil kullanıcının gerçeği — ama bu gerçek DEFTER'e de
+        // yazıldı (O-117): tasarım şeridi kartların hemen altına koyuyor ve
+        // en dar yaygın telefonda oraya scroll'suz ulaşılmıyor.
+        await t.ensureVisible(find.byKey(Key('starter-${d.id}')));
+        await t.pumpAndSettle();
 
-      await t.tap(find.byKey(Key('starter-${d.id}')));
-      await t.pumpAndSettle();
+        await t.tap(find.byKey(Key('starter-${d.id}')));
+        await t.pumpAndSettle();
 
-      expect(witness.pushes.length, 1,
-          reason: '${d.id}: dokunma TAM BİR rota itmeliydi');
-      expect(find.text(d.starterLesson!.displayName), findsWidgets,
-          reason: '${d.id}: açılan ekran o dersin başlığını taşımıyor');
-    }
-  });
+        expect(
+          witness.pushes.length,
+          1,
+          reason: '${d.id}: dokunma TAM BİR rota itmeliydi',
+        );
+        expect(
+          find.text(d.starterLesson!.displayName),
+          findsWidgets,
+          reason: '${d.id}: açılan ekran o dersin başlığını taşımıyor',
+        );
+      }
+    },
+  );
 
   testWidgets('şerit gerçek metinle taşmaz', (WidgetTester t) async {
     await t.pumpWidget(harness());
     await t.pump();
     await t.pump();
-    expect(t.takeException(), isNull,
-        reason: 'START HERE şeridi gerçek başlıklarla taştı (375pt)');
+    expect(
+      t.takeException(),
+      isNull,
+      reason: 'START HERE şeridi gerçek başlıklarla taştı (375pt)',
+    );
   });
 }

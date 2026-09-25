@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
@@ -161,11 +162,15 @@ void main() {
   });
 
   group('çıkmaz-sokak yasağı + izin ayrımı (zeyil-3, tur-2 ile canlı)', () {
-    Future<void> pumpState(WidgetTester t, SurfaceState forced) async {
+    Future<void> pumpState(WidgetTester t, SurfaceState forced,
+        {Locale locale = const Locale('en')}) async {
       await t.pumpWidget(ContentRepositoryScope(
         repo: repo,
         cueText: cueText,
         child: MaterialApp(
+          locale: locale,
+          supportedLocales: appSupportedLocales,
+          localizationsDelegates: appLocalizationsDelegates,
           home: LiveScreenRoute(
             discipline: guitar,
             lesson: postureLesson,
@@ -187,6 +192,18 @@ void main() {
               'sessiz ölümü');
       expect(find.textContaining('not analysing anything'), findsOneWidget);
       expect(find.textContaining('Exception'), findsNothing);
+    });
+
+    testWidgets('kamera tanı kodu EN/TR canlı hata metnine sızmaz',
+        (WidgetTester t) async {
+      await pumpState(t, const SetupFailed('no-such-camera'));
+      expect(find.textContaining('not analysing anything'), findsOneWidget);
+      expect(find.textContaining('no-such-camera'), findsNothing);
+
+      await pumpState(t, const SetupFailed('no-such-camera'),
+          locale: const Locale('tr'));
+      expect(find.textContaining('hiçbir şey analiz edilmiyor'), findsOneWidget);
+      expect(find.textContaining('no-such-camera'), findsNothing);
     });
 
     testWidgets('GEÇİCİ redde "tekrar dene" VAR', (WidgetTester t) async {

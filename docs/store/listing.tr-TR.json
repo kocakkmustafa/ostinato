@@ -1,0 +1,17 @@
+{
+  "$doc": "Türkçe mağaza metni taslağı. Gönderim ve sağlayıcı onayı yapılmadı. İngilizce kaynak: listing.json.",
+  "appStore": {
+    "name": "Ostinato: Müzik Pratiği",
+    "subtitle": "Çalgı pratiği kütüphanesi",
+    "promotionalText": "Gitar, ses ve piyano için duruş referanslarını incele. Kamera dersleri ve abonelikler bu sürümde açık değil.",
+    "keywords": "müzik pratiği,gitar,ses,piyano,duruş,çalgı,referans,çalışma"
+  },
+  "playStore": {
+    "shortDescription": "Çalgı pratiği bilgilerini incele; kamera dersleri henüz açık değil."
+  },
+  "description": "Ostinato, gitar, ses ve piyano pratiğine ilişkin bilgileri ve üst gövde duruşu için eğitmen referans aralıklarını incelemeni sağlar. Katalog, dersleri hazırlanan diğer çalgıları da durumlarıyla gösterir.\n\nBu ilk sürümde kataloğu inceleyebilir ve isteğe bağlı ortak Motion hesabı açabilirsin. Kamera dersleri, canlı duruş ölçümü ve abonelikler açık değildir. Mikrofon izni istenmez.\n\nMotion hesabı e-posta adresini, hesap kimliğini ve eklersen görünen adını kullanır. Hesap ekranından hesabının silinmesini isteyebilirsin. Ostinato bir pratik referansıdır; tıbbi tavsiye vermez.",
+  "cameraPermissionRationale": {
+    "ios": "Ostinato, ders sırasında gövde eğimini eğitmen referans aralığıyla karşılaştırmak için kamerayı kullanır. Video bu cihazda kalır; yüklenmez veya saklanmaz. Kısa oturum özeti cihazda saklanır."
+  },
+  "$releasePolicy20260925": "Founder deferred all paid camera sessions and subscription sales in the first release. Provider listings must use only the external fields above; older dollar-prefixed research notes describe deferred capabilities."
+}

@@ -11,13 +11,14 @@ import 'dart:io';
 /// ÇALIŞMA-ANI davranışını sınar (dinamik) — ikisi FARKLI bir riski
 /// yakalar: biri *"kod `GoogleFonts.*` çağırıyor mu"*, öteki *"test koşumu
 /// boyunca, hangi API'den olursa olsun, GERÇEKTEN bir ağ bağlantısı
-/// denendi mi"*. Fontlar paketli, backend yok (A9) — beklenen sayı SIFIR.
+/// denendi mi"*. Fontlar paketli; ortak hesap ağ kullanır ama bu kapıdaki
+/// widget/birim testleri gerçek Auth E2E'si değildir. Beklenen sayı SIFIR.
 class _ZeroNetworkOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     throw StateError(
         'Testler sırasında AĞ BAĞLANTISI denendi. Bu depoda hiçbir test '
-        'ağa çıkmamalı (D1: fontlar paketli, backend yok — A9). Gerçekten '
+        'ağa çıkmamalı (D1: fontlar paketli; Auth E2E ayrı koşulur). Gerçekten '
         'ağ gerektiren yeni bir test yazıyorsan bu istisna SESSİZCE '
         'geçilmez: kapsamı adıyla genişlet, sabote etme.');
   }
