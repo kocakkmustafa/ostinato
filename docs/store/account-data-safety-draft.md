@@ -10,6 +10,51 @@ tarihseldir. Kurucunun yeni kararı gitar kursunda isteğe bağlı, cihaz üstü
 tek nota gözlemidir. Bu güncelleme mevcut Dart/native kaynak kontrolüdür;
 canlı sağlayıcı, mağaza formu veya fiziksel mikrofon kabulü değildir.
 
+## Sağlayıcı günlükleri ve kimlik doğrulama — 2026-09-27
+
+Üretim sağlayıcısının 2026-09-26 21:36 UTC tarihli salt okunur alan/sayı
+makbuzu, cihaz dışındaki Auth ve edge günlüklerinin saklandığını doğrular.
+Ölçüm anına kadar dönen örnekte edge günlüklerinin 6/6 kaydında IP, user-agent ve
+ülke/bölge/şehir alanları; Auth günlüklerinin 6/6 kaydında IP ve 2/6 kaydında
+hesap kimliği; ayrı Auth audit deposunun 1/1 kaydında kimlik ve user-agent
+vardır. Veritabanındaki `auth.audit_log_entries` satır sayısının sıfır olması,
+[ayrı Auth günlük deposunun](https://supabase.com/docs/guides/auth/audit-logs)
+boş olduğu anlamına gelmez. Ham IP, kimlik, parola veya günlük içeriği bu
+belgeye alınmamıştır. Makbuz ortak servise aittir; her uygulamada yeni bir
+canlı ağ oturumu ölçüldüğü iddiası değildir.
+
+| Sunucuda saklanan veri | Apple manifest türü | Amaç ve bağlantı |
+|---|---|---|
+| IP, user-agent, istemci platform/sürüm bilgisi ve Auth/istek güvenlik günlükleri | `NSPrivacyCollectedDataTypeOtherDiagnosticData` | İşletim, güvenlik ve teknik tanılama; App Functionality, kullanıcıya bağlı, tracking yok |
+| Edge isteğine eklenen IP tabanlı ülke/bölge/şehir | `NSPrivacyCollectedDataTypeCoarseLocation` | Aynı hizmetin işletim/güvenlik kaydı; App Functionality, kullanıcıya bağlı, tracking yok; GPS veya kesin konum izni değildir |
+| Parola kimlik doğrulama verisi ve saklanan parola hash'i | `NSPrivacyCollectedDataTypeOtherDataTypes` | Hesap doğrulama; App Functionality, kullanıcıya bağlı, tracking yok |
+
+[Supabase Auth](https://supabase.com/docs/guides/auth/password-security)
+parolanın bcrypt hash'ini `auth.users.encrypted_password` alanında tutar;
+parola uygulamanın kurs/seans geçmişine yazılmaz. Apple parola için ayrı
+bir tür adlandırmadığından **Other Data Types eşlemesi bu projede yapılan
+bir sınıflandırma çıkarımıdır**. Kullanıcı kimliğinin tek yönlü özetiyle
+tutulan hesap silme makbuzu da güvenlik/hesap verisidir; hash olması tek
+başına anonim veri olduğu anlamına gelmez. IP ve hesap ilişkisinin toplama
+öncesinde kaldırıldığı kanıtlanmadığından bu üç tür `Linked=true` beyan edilir.
+
+Manifest artık e-posta, isteğe bağlı ad, kullanıcı ID'si ve bu üç türden
+oluşan **altı** collected-data kaydı taşır. Hepsinde
+`NSPrivacyCollectedDataTypePurposeAppFunctionality`, `Linked=true` ve
+`Tracking=false` vardır. Bu, davranış analitiği veya reklam amacı eklendiği
+anlamına gelmez. Kamera/kareler, cihazda kalan kurs ilerlemesi ve seans
+geçmişi için collection beyanı eklenmez; Ostinato'nun isteğe bağlı ham sesi
+de yalnız cihazdaki sınırlı RAM'de kalır. Diğer dört uygulama mikrofon
+kullanmaz. Sunucu günlükleri, cihaz içi geçici işleme ile aynı şey değildir.
+
+[Apple collection ve kullanım tanımları](https://developer.apple.com/app-store/app-privacy-details/)
+ve [manifest tür/anahtarları](https://developer.apple.com/documentation/bundleresources/describing-data-use-in-privacy-manifests)
+bu ayrımın temelidir. Apple manifestinin güncellenmesi App Store Connect
+veya Play Data safety formunun girildiği/onaylandığı anlamına gelmez.
+Play kategorileri kendi form tanımlarıyla ayrıca eşleştirilir. Sağlayıcı
+saklama süreleri, günlüklerin silme/erişim politikası, gerçek hesap silme
+akışı ve son paket/SDK gizlilik raporu ayrı kabul kapılarıdır.
+
 | Veri | Cihaz dışına çıkar mı? | Kullanım | Hesapla bağlı mı? |
 |---|---|---|---|
 | E-posta adresi | Evet, Motion Auth | Kayıt, giriş, doğrulama, şifre sıfırlama | Evet |
@@ -22,15 +67,18 @@ canlı sağlayıcı, mağaza formu veya fiziksel mikrofon kabulü değildir.
 | Gitar kursu ilerlemesi | Hayır | Görüldü, çalışıldı ve kullanıcı beyanıyla tamamlandı durumları | Konuk/hesap kapsamına ayrılmış yerel JSON; Motion hesabına senkronize edilmez |
 | Seans özeti/geçmişi | Hayır | Bu cihazdaki geçmiş | Yerel, hesap dizinine ayrılmış |
 
-İlk sürümün Apple gizlilik manifestinde e-posta, isteğe bağlı ad ve
-kullanıcı kimliği uygulama işlevi için kullanıcıyla bağlantılı, izleme dışı
-beyan edilir. Play taslağında bunlar Personal info / Email address, Name ve
-User IDs olarak değerlendirilir. Abonelik satışı ve satın alma geçmişi
+İlk sürümün Apple gizlilik manifestinde e-posta, isteğe bağlı ad,
+kullanıcı kimliği ve sağlayıcı tanılama/konum/kimlik doğrulama
+verileri uygulama işlevi için kullanıcıyla bağlantılı, izleme dışı beyan edilir.
+Play taslağında yalnız e-posta, görünen ad ve kullanıcı ID’si sırasıyla
+Personal info / Email address, Name ve User IDs olarak değerlendirilir.
+Abonelik satışı ve satın alma geçmişi
 aktarımı bu sürümde kapalıdır; ileride etkinleştirilirse Apple/Play
 formları ve bu belge birlikte güncellenir.
 Görünen ad kullanıcı için isteğe bağlıdır. Kamera ve cihazda kalan geçmiş
-“toplanan veri” diye işaretlenmez. Şifre ve sağlayıcı günlükleri için nihai
-form yanıtı canlı Supabase yapılandırmasıyla ayrıca doğrulanır.
+“toplanan veri” diye işaretlenmez. Sağlayıcı günlükleri makbuzu ve Auth
+saklama belgesi temelinde tanılama, yaklaşık konum ve kimlik doğrulama
+verileri de beyanlıdır; konsol formu ve saklama politikası ayrıca doğrulanır.
 
 ### Mikrofonun izin ve yaşam döngüsü
 
@@ -67,8 +115,9 @@ Kaynak kontrolü: `lib/app/audio/audio_input_controller.dart`,
 `lib/app/guitar_journey_progress.dart`, iOS/Android izin dosyaları ve
 `ios/Runner/PrivacyInfo.xcprivacy`. Çözümlenen `motion_account` paketindeki
 `motion_release_policy.dart` değeri `motionPaidFeaturesAvailable=false`;
-satış/üyelik girişleri bu kapıya bağlıdır. Manifestin üç collected türü
-e-posta, ad ve kullanıcı ID'sidir; satın alma veya ses collected türü yoktur.
+satış/üyelik girişleri bu kapıya bağlıdır. Manifestin altı collected türü
+e-posta, ad, kullanıcı ID'si, diğer tanılama,
+yaklaşık konum ve diğer verilerdir; satın alma veya ses collected türü yoktur.
 
 Hesap ekranı ortak hesabı silme yolu sunar; başarılı uzak silmenin ardından
 yalnız bu uygulamanın ilgili kullanıcıya ait yerel dizinini siler. Play'in
