@@ -1,8 +1,10 @@
 package com.yulalab.ostinato
 
+import java.util.concurrent.atomic.AtomicBoolean
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.media.AudioDeviceInfo
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
@@ -14,226 +16,120 @@ import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
-/**
- * Mikrofon → EventChannel, RAM-only (OST-P0-002, roadmap §7) — iOS
- * `AudioCaptureStreamer.swift`in Android karşılığı, AYNI wire format
- * (`{type, samples, sampleRate, t}` / `{type, route}` / `{type, reason}`).
- *
- * Hiçbir satır diske yazmaz: `AudioRecord.read()` doğrudan RAM'deki bir
- * `DoubleArray`e kopyalar, hiçbir `FileOutputStream`/`MediaRecorder`
- * (dosya-yazan sınıf, KASITLI KULLANILMADI — yalnız isim çakışması yüzünden
- * `AudioSource` sabiti için import edilir) çağrısı yok.
- *
- * `MediaRecorder.AudioSource.VOICE_RECOGNITION` bilinçli seçim: `MIC`/
- * `CAMCORDER`nin aksine AGC/gürültü-bastırma/yankı-iptali gibi ölçüm
- * sinyalini bozan işleme katmanlarını platformdan İSTEMEZ (Android'in kendi
- * dokümantasyonu bu kaynağı "ölçüm/tanıma amaçlı, ham'a en yakın" olarak
- * tanımlar) — `ostinato_audio`nun YIN/onset dedektörleri ham sinyal
- * bekliyor, işlenmiş DEĞİL.
- *
- * **Kanıt sınıfı DÜRÜST** (`AudioCaptureStreamer.swift` ile aynı disiplin):
- * bu dosya YALNIZ derleme-zamanı (`flutter build appbundle --release`)
- * kanıtlıdır. Gerçek mikrofon örneği hiç akıtılmadı — cihaz-günü
- * release-gate bunu İLK kez gerçek donanımda ölçecek.
- */
-class AudioCaptureStreamer(private val context: Context) :
+/** Foreground RAM-only capture. VOICE_RECOGNITION is requested; vendor signal
+ * processing is not assumed absent. No file, upload or background service. */
+class AudioCaptureStreamer(private val context: Context, private val foreground: () -> Boolean) :
   MethodChannel.MethodCallHandler, EventChannel.StreamHandler {
-
-  private var audioRecord: AudioRecord? = null
-  private var captureThread: Thread? = null
-
+  private var record: AudioRecord? = null
+  private var worker: Thread? = null
   @Volatile private var running = false
-  private var eventSink: EventChannel.EventSink? = null
-  private val mainHandler = Handler(Looper.getMainLooper())
-  private var routingListener: Any? = null // API 24+ AudioRecord.OnRoutingChangedListener — türü SDK guard'ının İÇİNDE çözülür
+  @Volatile private var generation = 0
+  private var sink: EventChannel.EventSink? = null
+  private val pendingBuffer = AtomicBoolean(false)
+  private val main = Handler(Looper.getMainLooper())
+  private var routing: AudioRecord.OnRoutingChangedListener? = null
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
-    when (call.method) {
+    when(call.method) {
+      "ready" -> result.success(sink != null)
       "start" -> {
-        val sampleRate = call.argument<Int>("sampleRate")
-        if (sampleRate == null) {
-          result.error("bad_args", "sampleRate required", null)
-          return
-        }
-        start(sampleRate, result)
+        val rate = call.argument<Int>("sampleRate")
+        if (rate == null) result.error("bad_args", null, null) else start(rate, result)
       }
-      "stop" -> {
-        stop()
-        result.success(null)
-      }
+      "stop" -> { stop(); result.success(null) }
       else -> result.notImplemented()
     }
   }
-
-  private fun start(sampleRate: Int, result: MethodChannel.Result) {
-    if (running) {
-      result.success(null) // Dart tarafının kilidi çift-start'ı zaten önler — no-op
-      return
+  private fun start(rate: Int, result: MethodChannel.Result) {
+    if (running) { result.success(null); return }
+    if (!foreground() || sink == null || ContextCompat.checkSelfPermission(context,
+        Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+      result.error("not_foreground_or_permitted", null, null); return
     }
-
-    if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) !=
-        PackageManager.PERMISSION_GRANTED
-    ) {
-      result.error("setup_failed", "RECORD_AUDIO permission not granted", null)
-      return
+    if (rate != 44100 && rate != 48000) {
+      result.error("unsupported_sample_rate", null, null); return
     }
-
-    val minBuf =
-      AudioRecord.getMinBufferSize(
-        sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
-    if (minBuf == AudioRecord.ERROR_BAD_VALUE || minBuf == AudioRecord.ERROR) {
-      result.error("unsupported_sample_rate", "$sampleRate", null)
-      return
-    }
-
-    val record =
-      try {
-        AudioRecord(
-          MediaRecorder.AudioSource.VOICE_RECOGNITION,
-          sampleRate,
-          AudioFormat.CHANNEL_IN_MONO,
-          AudioFormat.ENCODING_PCM_16BIT,
-          minBuf * 2)
-      } catch (e: IllegalArgumentException) {
-        result.error("unsupported_sample_rate", "$sampleRate", null)
-        return
+    try {
+      val size = AudioRecord.getMinBufferSize(rate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
+      if (size <= 0) { result.error("unsupported_sample_rate", null, null); return }
+      val input = AudioRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION, rate,
+        AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, size * 2)
+      record = input
+      if (input.state != AudioRecord.STATE_INITIALIZED || input.sampleRate !in listOf(44100, 48000)) {
+        stop(); result.error("unsupported_sample_rate", null, null); return
       }
-
-    if (record.state != AudioRecord.STATE_INITIALIZED) {
-      record.release()
-      result.error("unsupported_sample_rate", "$sampleRate", null)
-      return
-    }
-
-    audioRecord = record
-    running = true
-    record.startRecording()
-    registerRoutingListener(record)
-
-    val bufFrames = minBuf / 2 // ENCODING_PCM_16BIT = örnek başına 2 bayt
-    captureThread =
-      Thread {
-        val shortBuf = ShortArray(bufFrames)
-        // `while(running)` + içeride try/catch: `stop()` sırası `read()`i
-        // erken döndürmesi için tasarlandı (bkz. `stop()` notu) ama bu bir
-        // GARANTİ değil, belgelenmemiş bir durum geçişinde `read()` istisna
-        // fırlatabilir — yakalanmazsa Android'de HERHANGİ bir thread'deki
-        // istisna TÜM app'i çökertir. Basit bir "artık okuma yok" sinyali,
-        // app çökmesinden HER ZAMAN daha iyidir.
-        while (running) {
-          try {
-            val read = record.read(shortBuf, 0, shortBuf.size)
-            if (read > 0) {
-              val tUs = System.nanoTime() / 1000
-              val mono = DoubleArray(read)
-              for (i in 0 until read) {
-                mono[i] = shortBuf[i] / 32768.0
-              }
-              postChunk(mono, sampleRate, tUs)
-            }
-          } catch (e: Exception) {
-            break
-          }
-        }
+      input.startRecording()
+      if (input.recordingState != AudioRecord.RECORDSTATE_RECORDING) {
+        stop(); result.error("setup_failed", null, null); return
       }
-    captureThread?.apply {
-      name = "ostinato-audio-capture"
-      start()
-    }
-    result.success(null)
-  }
-
-  private fun postChunk(samples: DoubleArray, sampleRate: Int, tUs: Long) {
-    mainHandler.post {
-      eventSink?.success(
-        mapOf(
-          "type" to "chunk",
-          "samples" to samples,
-          "sampleRate" to sampleRate,
-          "t" to tUs,
-        ))
-    }
-  }
-
-  /**
-   * API 24 altında route-değişimi bildirimi YOK — `unknown` route'ta kalır
-   * (roadmap §7 madde 2: `unknown` de `AudioCalibrating`i tetikler, tahmin
-   * ÜRETİLMEZ). `minSdk` bugün 24'ün altındaysa bu isimli, kabul edilebilir
-   * bir kapsam daralması; capture'ın KENDİSİ etkilenmez.
-   */
-  private fun registerRoutingListener(record: AudioRecord) {
-    if (Build.VERSION.SDK_INT < 24) return
-    val listener =
-      AudioRecord.OnRoutingChangedListener { r ->
-        val device = r.routedDevice ?: return@OnRoutingChangedListener
-        mainHandler.post {
-          eventSink?.success(
-            mapOf("type" to "routeChanged", "route" to "android:${deviceTypeName(device.type)}"))
-        }
-      }
-    routingListener = listener
-    record.addOnRoutingChangedListener(listener, mainHandler)
-  }
-
-  /**
-   * `AudioDeviceInfo.TYPE_*` int sabitini ADINA çevirir — sabit numarayı
-   * telden İSİM olarak taşımak, bir SDK sürümünde numara kayarsa (teorik
-   * ama motion_camera M-F-260 emsali: sabitler zamanla anlam değiştirebilir)
-   * `audio_route_state.dart mapAndroidDeviceType`in SESSİZCE yanlış
-   * eşlemesini önler.
-   */
-  private fun deviceTypeName(type: Int): String =
-    when (type) {
-      android.media.AudioDeviceInfo.TYPE_BUILTIN_MIC -> "TYPE_BUILTIN_MIC"
-      android.media.AudioDeviceInfo.TYPE_WIRED_HEADSET -> "TYPE_WIRED_HEADSET"
-      android.media.AudioDeviceInfo.TYPE_BLUETOOTH_SCO -> "TYPE_BLUETOOTH_SCO"
-      android.media.AudioDeviceInfo.TYPE_USB_DEVICE -> "TYPE_USB_DEVICE"
-      android.media.AudioDeviceInfo.TYPE_USB_HEADSET -> "TYPE_USB_HEADSET"
-      else -> "TYPE_UNKNOWN_$type"
-    }
-
-  private fun stop() {
-    if (!running) return
-    running = false
-
-    // SIRA ÖNEMLİ: capture thread şu anda `record.read()` içinde BLOKE
-    // olabilir (`while(running)` kontrolü ancak `read()` dönünce tekrar
-    // çalışır). `record.release()`i önce çağırıp thread'i sonra join etmek,
-    // hâlâ okuma yapan bir kayıttan release sonrası kullanım riski taşırdı.
-    // Android'in kendi belgelediği çözüm: `stop()`u ÖNCE çağırmak, bloke
-    // `read()`i erkenden döndürür — thread `while(running)`e THEN döner ve
-    // hızla çıkar, `join(500)` bu yüzden güvenli bir üst sınır olur.
-    val record = audioRecord
-    if (record != null) {
+      generation += 1
+      val token = generation
+      running = true
       if (Build.VERSION.SDK_INT >= 24) {
-        (routingListener as? AudioRecord.OnRoutingChangedListener)?.let {
-          record.removeOnRoutingChangedListener(it)
+        val listener = AudioRecord.OnRoutingChangedListener { r ->
+          if (running && generation == token && record === r) sink?.success(mapOf("type" to "routeChanged", "route" to route(r)))
         }
+        routing = listener; input.addOnRoutingChangedListener(listener, main)
       }
-      routingListener = null
-      try {
-        record.stop()
-      } catch (e: IllegalStateException) {
-        // `startRecording()` hiç başarılı olmadıysa `stop()` istisna
-        // fırlatır — oturum zaten bitiyor, kullanıcıyı ilgilendirmez
-        // (iOS `AudioCaptureStreamer.stop()` ile aynı desen).
-      }
+      // Initial route may appear only after the first read; send again then.
+      sink?.success(mapOf("type" to "routeChanged", "route" to route(input)))
+      worker = Thread {
+        val pcm = ShortArray(maxOf(size / 2, 2048))
+        var announcedRoute = false
+        try {
+          while (running && generation == token) {
+            val count = input.read(pcm, 0, pcm.size)
+            if (count < 0) throw IllegalStateException("read_failed")
+            if (count == 0) continue
+            if (!pendingBuffer.compareAndSet(false, true)) { pcm.fill(0); continue }
+            val samples = DoubleArray(count) { pcm[it] / 32768.0 }
+            val time = System.nanoTime() / 1000 - count.toLong() * 1000000 / input.sampleRate
+            main.post {
+              if (running && generation == token) {
+                if (!announcedRoute) { sink?.success(mapOf("type" to "routeChanged", "route" to route(input))); announcedRoute = true }
+                sink?.success(mapOf("type" to "chunk", "samples" to samples, "sampleRate" to input.sampleRate, "t" to time))
+              }
+              samples.fill(0.0)
+              pendingBuffer.set(false)
+            }
+            pcm.fill(0)
+          }
+        } catch (_: Exception) {
+          main.post { if (running && generation == token) {
+            sink?.success(mapOf("type" to "interrupted", "reason" to "capture_read_failed")); stop()
+          } }
+        } finally { pcm.fill(0) }
+      }.apply { name = "ostinato-note-observation"; start() }
+      result.success(null)
+    } catch (_: Exception) {
+      stop(); result.error("setup_failed", null, null)
     }
-
-    captureThread?.join(500)
-    captureThread = null
-
-    record?.release()
-    audioRecord = null
   }
-
-  // MARK: EventChannel.StreamHandler
-
-  override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
-    eventSink = events
+  private fun route(input: AudioRecord): String {
+    if (Build.VERSION.SDK_INT < 24) return "android:Unknown"
+    return "android:" + when(input.routedDevice?.type) {
+      AudioDeviceInfo.TYPE_BUILTIN_MIC -> "TYPE_BUILTIN_MIC"
+      AudioDeviceInfo.TYPE_WIRED_HEADSET -> "TYPE_WIRED_HEADSET"
+      AudioDeviceInfo.TYPE_BLUETOOTH_SCO -> "TYPE_BLUETOOTH_SCO"
+      AudioDeviceInfo.TYPE_USB_DEVICE -> "TYPE_USB_DEVICE"
+      AudioDeviceInfo.TYPE_USB_HEADSET -> "TYPE_USB_HEADSET"
+      else -> "Unknown"
+    }
   }
-
-  override fun onCancel(arguments: Any?) {
-    eventSink = null
+  fun stop() {
+    generation += 1; running = false
+    val input = record; record = null
+    if (Build.VERSION.SDK_INT >= 24) routing?.let { input?.removeOnRoutingChangedListener(it) }
+    routing = null
+    try { input?.stop() } catch (_: Exception) { }
+    // Do not release a record while its read thread still uses it. On unusual
+    // drivers a blocked read is released by the worker after it finally exits.
+    val oldWorker = worker; worker = null
+    oldWorker?.join(250)
+    if (oldWorker?.isAlive == true) {
+      Thread { oldWorker.join(); input?.release() }.start()
+    } else { input?.release() }
   }
+  override fun onListen(arguments: Any?, events: EventChannel.EventSink?) { sink = events }
+  override fun onCancel(arguments: Any?) { stop(); sink = null }
 }

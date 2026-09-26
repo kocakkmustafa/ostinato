@@ -68,27 +68,33 @@ const Map<String, String> _turkishCatalogNames = <String, String>{
 };
 
 const Map<String, String> _turkishDisciplineBlurbs = <String, String>{
-  'guitar': 'Telefonu gitarınızla oturuşunuzu görecek yere koyun. '
+  'guitar':
+      'Telefonu gitarınızla oturuşunuzu görecek yere koyun. '
       'Oturuşunuzu gerçek eğitmenlerin duruşlarıyla karşılaştırırız. '
-      'Bu sürüm mikrofon kullanmaz; değerlendirme yalnız kameradan gelir.',
-  'voice': 'Telefonu sizi belden yukarı görecek yere koyun. Duruşunuzu '
-      'altı bağımsız şan eğitmeniyle karşılaştırırız. Bu sürüm mikrofon '
+      'Bu duruş dersleri mikrofon kullanmaz; gitar öğrenme yolunda isteğe bağlı tek nota gözlemi vardır.',
+  'voice':
+      'Telefonu sizi belden yukarı görecek yere koyun. Duruşunuzu '
+      'altı bağımsız şan eğitmeniyle karşılaştırırız. Bu ses dersleri mikrofon '
       'kullanmaz; sesinizi dinlemez.',
-  'piano': 'Telefonu piyano başında sizi belden yukarı görecek yere koyun. '
+  'piano':
+      'Telefonu piyano başında sizi belden yukarı görecek yere koyun. '
       'Oturuşunuzu üç bağımsız piyano eğitmeniyle karşılaştırırız. '
-      'Bu sürüm mikrofon kullanmaz; odanızdaki notaların zamanlamasını ölçmez.',
+      'Bu piyano dersleri mikrofon kullanmaz; odanızdaki notaların zamanlamasını ölçmez.',
 };
 
 const Map<String, String> _turkishCourseGoals = <String, String>{
-  'guitar.foundations': 'Alanını hazırla, gerçek gitar eğitmenlerinin oturuş '
+  'guitar.foundations':
+      'Alanını hazırla, gerçek gitar eğitmenlerinin oturuş '
       'biçimini öğren ve kursun kapsadığı sekiz açık akoru tanı. Duruşun '
-      'canlı denetlenir; akor çalışması anlatılır ancak dinlenmez. Bu sürümde '
-      'mikrofon girişi yoktur.',
-  'voice.foundations': 'Alanını hazırla ve deneyimli şan eğitmenlerinin '
+      'canlı denetlenir; akor çalışması anlatılır ancak dinlenmez. Bu duruş dersleri '
+      'mikrofon kullanmaz.',
+  'voice.foundations':
+      'Alanını hazırla ve deneyimli şan eğitmenlerinin '
       'duruşunu öğren. Kurulum sırasında gövden canlı denetlenir; referans '
       'şarkı söylerken duruşu da kapsar, fakat bu sürüm şarkıya ne zaman '
       'başladığını algılayamaz.',
-  'piano.foundations': 'Alanını hazırla ve deneyimli eğitmenlerin klavye '
+  'piano.foundations':
+      'Alanını hazırla ve deneyimli eğitmenlerin klavye '
       'başındaki oturuşunu öğren.',
 };
 
@@ -99,19 +105,17 @@ const Map<String, String> _turkishSourceClasses = <String, String>{
 };
 
 String catalogBlurb(BuildContext context, String id, String english) =>
-    Localizations.localeOf(context).languageCode == 'tr'
-        ? _turkishDisciplineBlurbs[id] ?? english
-        : english;
+    '${localized(context, 'Posture catalogue preview. Live camera practice is closed in this release.', 'Duruş kataloğu ön izlemesi. Bu sürümde canlı kamera pratiği kapalıdır.')} '
+    '${Localizations.localeOf(context).languageCode == 'tr' ? _turkishDisciplineBlurbs[id] ?? english : english}';
 
 String catalogGoal(BuildContext context, String id, String english) =>
-    Localizations.localeOf(context).languageCode == 'tr'
-        ? _turkishCourseGoals[id] ?? english
-        : english;
+    '${localized(context, 'Posture catalogue preview. Live camera practice is closed in this release.', 'Duruş kataloğu ön izlemesi. Bu sürümde canlı kamera pratiği kapalıdır.')} '
+    '${Localizations.localeOf(context).languageCode == 'tr' ? _turkishCourseGoals[id] ?? english : english}';
 
 String catalogSourceClass(BuildContext context, String english) =>
     Localizations.localeOf(context).languageCode == 'tr'
-        ? _turkishSourceClasses[english] ?? english
-        : english;
+    ? _turkishSourceClasses[english] ?? english
+    : english;
 
 String catalogName(BuildContext context, String id, String english) =>
     Localizations.localeOf(context).languageCode == 'tr'

@@ -68,7 +68,7 @@ void main() {
         ),
       ),
     );
-    expect(find.text('Ölçülür, tahmin edilmez.'), findsOneWidget);
+    expect(find.text('Gitar çalışmanı geliştir.'), findsOneWidget);
     expect(find.text('Devam et'), findsOneWidget);
     await tester.tap(find.byKey(const Key('onboarding-primary')));
     await tester.pumpAndSettle();

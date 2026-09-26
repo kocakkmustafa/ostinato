@@ -22,19 +22,18 @@ import '../design/widgets.dart';
 /// Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce
 /// yanlış olur ve hiçbir test kırılmaz (O-068).
 String _liveSentence(BuildContext context) {
-  final List<Discipline> live = ContentRepositoryScope.of(context)
-      .repo
-      .disciplines
-      .where((Discipline d) => d.status == 'live')
-      .toList();
+  final List<Discipline> live = ContentRepositoryScope.of(
+    context,
+  ).repo.disciplines.where((Discipline d) => d.status == 'live').toList();
   if (Localizations.localeOf(context).languageCode == 'tr') {
     const names = <String, String>{
       'guitar': 'gitar',
       'voice': 'şan',
       'piano': 'piyano',
     };
-    return '${live.length} çalgı açık: '
-        '${live.map((d) => names[d.id] ?? d.displayName).join(', ')}.';
+    return 'Duruş kataloğunda ${live.length} çalgı ön izlemesi: '
+        '${live.map((d) => names[d.id] ?? d.displayName).join(', ')}. '
+        'Bu sürümde canlı kamera pratiği kapalıdır.';
   }
   const Map<int, String> words = <int, String>{
     1: 'One',
@@ -48,8 +47,11 @@ String _liveSentence(BuildContext context) {
   final String names = live
       .map((Discipline d) => d.displayName.toLowerCase())
       .join(', ');
-  final String verb = live.length == 1 ? 'instrument is' : 'instruments are';
-  return '$n $verb live: $names.';
+  final String noun = live.length == 1
+      ? 'instrument preview'
+      : 'instrument previews';
+  return '$n $noun in the posture catalogue: $names. '
+      'Live camera practice is closed in this release.';
 }
 
 class SettingsScreen extends StatelessWidget {
@@ -84,7 +86,8 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 22),
-              if (AccountScope.maybeOf(context)?.connection case final AccountConnection account) ...<Widget>[
+              if (AccountScope.maybeOf(context)?.connection
+                  case final AccountConnection account) ...<Widget>[
                 OutlinedButton.icon(
                   onPressed: () => Navigator.of(context).push<void>(
                     MaterialPageRoute<void>(builder: account.pageBuilder),
@@ -133,43 +136,36 @@ class SettingsScreen extends StatelessWidget {
                 // anlatıldı.
                 body: localized(
                   context,
-                  'It runs on your phone and reads your two shoulders '
-                      'and your two hips, and only inside a lesson. From those '
-                      'it measures one thing: how far your trunk leans. '
-                      'Camera video is not uploaded, and that angle itself is never '
-                      'stored — it exists while the lesson is running and is '
-                      'gone when you leave it. '
-                      'A short summary of each session (how long you '
-                      'practised, how much you stayed in range) is kept on '
-                      'this device so Review can show your last session; '
-                      'nothing more detailed than that. Uninstalling the app '
-                      'removes it, the same as everything else the app keeps.',
-                  'Kamera yalnız ders sırasında ve bu cihazda çalışır. '
-                      'İki omuz ve iki kalçadan yalnız gövde eğiminizi ölçer. '
-                      'Video yüklenmez; açı da saklanmaz. Son oturumunuzu '
-                      'görebilmeniz için çalışma süresi ve aralıkta kaldığınız '
-                      'zamanın kısa özeti cihazda tutulur. Uygulamayı silmek '
-                      'bu özeti de siler.',
+                  'Live camera posture practice is closed in this release. '
+                      'The guitar course works without a camera and keeps your '
+                      'lesson progress and self-checks on this device. Existing '
+                      'posture-session summaries also remain local. Uninstalling '
+                      'the app removes its local records.',
+                  'Bu sürümde canlı kamera duruş pratiği kapalıdır. Gitar kursu '
+                      'kamera olmadan çalışır; ders ilerlemeniz ve öz denetimleriniz '
+                      'bu cihazda kalır. Önceki duruş seansı özetleri de yereldir. '
+                      'Uygulamayı kaldırmak yerel kayıtlarını siler.',
                 ),
               ),
               const SizedBox(height: 14),
               _SettingsCard(
                 title: localized(
                   context,
-                  'Microphone — not wired in this build',
-                  'Mikrofon — bu sürümde bağlı değil',
+                  'Microphone — optional single-note observation',
+                  'Mikrofon — isteğe bağlı tek nota gözlemi',
                 ),
                 body: localized(
                   context,
-                  'No audio permission is requested and nothing you play '
-                      'is captured. The chord and note-attack work the lessons '
-                      'describe was measured on recordings, not in your room. '
-                      'Until an input is wired, every judgement this app makes '
-                      'comes from the camera.',
-                  'Ses izni istenmez ve çalmanız kaydedilmez. Derslerdeki '
-                      'akor ve nota başlangıcı çalışmaları sizin ortamınızda '
-                      'değil, kayıtlar üzerinde ölçülmüştür. Bu sürümde '
-                      'değerlendirmeler yalnız kameraya dayanır.',
+                  'The guitar learning path offers optional on-device single-note observation. '
+                      'Permission is requested only after you press Start. Audio stays in temporary memory; '
+                      'it is never recorded or uploaded. Stop, leaving the screen, changing account or '
+                      'losing foreground closes capture. No chord, accuracy or mastery score is produced. '
+                      'Physical phone accuracy has not been verified.',
+                  'Gitar öğrenme yolunda isteğe bağlı cihaz üstü tek nota gözlemi vardır. '
+                      'İzin yalnız Başlat düğmesine bastığınızda istenir. Ses geçici bellekte kalır; '
+                      'kaydedilmez veya yüklenmez. Durdurma, ekrandan çıkış, hesap değişimi veya '
+                      'ön plandan ayrılma yakalamayı kapatır. Akor, doğruluk veya ustalık puanı üretilmez. '
+                      'Gerçek telefon doğruluğu doğrulanmadı.',
                 ),
               ),
               const SizedBox(height: 14),

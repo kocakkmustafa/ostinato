@@ -136,21 +136,22 @@ class LibraryScreen extends StatelessWidget {
                                 'Put your phone where it can see you. The camera '
                                     'reads your two shoulders and your two hips while '
                                     'you practise, and measures one thing: how far your '
-                                    'trunk leans. There is no live microphone input.',
+                                    'trunk leans. These posture lessons do not use the microphone.',
                                 'Telefonu sizi görebileceği bir yere koyun. '
                                     'Kamera çalışırken iki omzunuzu ve iki kalçanızı '
                                     'okur; yalnız gövde eğiminizi ölçer. '
-                                    'Canlı mikrofon girişi yoktur.',
+                                    'Bu duruş dersleri mikrofon kullanmaz.',
                               )
                             : localized(
                                 context,
                                 'Explore guitar, voice, and piano posture '
                                     'references. Camera lessons and subscriptions '
-                                    'are not open in this release. No microphone '
-                                    'permission is requested.',
+                                    'are not open in this release. The guitar learning path has '
+                                    'an optional on-device single-note observer.',
                                 'Gitar, ses ve piyano için duruş referanslarını '
                                     'incele. Kamera dersleri ve abonelikler bu '
-                                    'sürümde açık değil. Mikrofon izni istenmez.',
+                                    'sürümde açık değil. Gitar öğrenme yolunda isteğe bağlı '
+                                    'cihaz üstü tek nota gözlemi vardır.',
                               ),
                         style: hankenText(
                           size: 13,

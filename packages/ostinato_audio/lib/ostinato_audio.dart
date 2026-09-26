@@ -26,5 +26,7 @@ export 'src/harmony/chroma.dart';
 export 'src/harmony/midi_chord_detector.dart';
 export 'src/onset/onset_detector.dart';
 export 'src/pitch/pitch_source.dart';
+export 'src/pitch/guitar_single_note_evaluator.dart';
+export 'src/pitch/guitar_pitch_observer.dart';
 export 'src/pitch/yin.dart';
 export 'src/rhythm/metronome_aligner.dart';

@@ -311,7 +311,11 @@ RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
 #: sinyal değil gürültü). Mekanizma: bir SONRAKİ yeni yazıcı (bu kümede
 #: OLMAYAN bir dosya) çıktığında kapı yeniden öter — tripwire yalnız BU
 #: yazıcı için tüketildi, genel olarak değil.
-RETENTION_WRITERS_RECONCILED = {"session_store.dart"}
+# 2026-09-26: guitar_journey_progress.dart writes only course/lesson IDs,
+# content version, practice count, self-report timestamps and evidence type.
+# It writes no raw sound, angle, landmark, measurement array or video. Its
+# account-scoped path is removed by the existing deleteAccountData flow.
+RETENTION_WRITERS_RECONCILED = {"session_store.dart", "guitar_journey_progress.dart"}
 
 # ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────
 #
@@ -345,24 +349,28 @@ RETENTION_WRITERS_RECONCILED = {"session_store.dart"}
 RETENTION_FACTS = {
     "angle": {"stored": False, "evidence":
               "lib/ yazıcı taraması: muaf olmayan writeAsString/Bytes/"
-              "SharedPreferences/Hive/sqflite ÜÇ (2 muaf + 1 muaf-değil: "
-              "session_store.dart) — üçü de okundu, hiçbiri açı YAZMIYOR "
+              "SharedPreferences/Hive/sqflite DÖRT (2 muaf + 2 muaf-değil: "
+              "session_store.dart, guitar_journey_progress.dart) — dördü de "
+              "okundu, hiçbiri açı YAZMIYOR "
               "(D14/O-154 yeniden-ölçüm)"},
     "landmark": {"stored": False, "evidence":
                  "aynı tarama; ayrıca canlı zincir yalnız trunkTiltDeg "
                  "skalerini taşıyor (camera_posture_adapter), landmark "
                  "dizisi ekrandan öteye geçmiyor; `session_store.dart` da "
-                 "landmark YAZMIYOR (D14/O-154 yeniden-ölçüm)"},
+                 "landmark YAZMIYOR; guitar_journey_progress.dart da yalnız "
+                 "ders ilerleme meta verisini yazar (2026-09-26 yeniden-ölçüm)"},
     "measurement": {"stored": False, "evidence":
                     "aynı tarama; kare-kare ölçüm seans içinde bellekte, "
                     "kalıcı yazıcı yok — `session_store.dart` yalnız "
                     "ÖZET SAYILARI (süre/örnek/dışarı) yazar, ham ölçüm "
-                    "DEĞİL (D14/O-154 yeniden-ölçüm)"},
+                    "DEĞİL; guitar_journey_progress.dart yalnız ders sürümü, "
+                    "durumu ve zamanını yazar (2026-09-26 yeniden-ölçüm)"},
     "video": {"stored": False, "evidence":
               "aynı tarama + kamera karesi hiçbir dosyaya yazılmıyor; "
               "ağ çağrısı da yok (Kural J: yükleyen yol SIFIR); "
               "`session_store.dart` metin alanları taşır, video/kare "
-              "YAZMAZ (D14/O-154 yeniden-ölçüm)"},
+              "YAZMAZ; guitar_journey_progress.dart da video yazmaz "
+              "(2026-09-26 yeniden-ölçüm)"},
     "your footage": {"stored": False, "evidence":
                      "video ile aynı ölçüm, aynı yeniden-ölçüm"},
     "history": {"stored": False, "evidence":
@@ -370,7 +378,9 @@ RETENTION_FACTS = {
                 "(ham açı-örnekleri) BİLEREK taşınmaz — D14'ün kapsam "
                 "kararının kendisi, geçmiş ekranı YOK değil artık VAR "
                 "(review_screen 'Last session' kartı) ama o kart yalnız "
-                "ÖZETİ gösterir, ham diziyi DEĞİL (D14/O-154 yeniden-ölçüm)"},
+                "ÖZETİ gösterir, ham diziyi DEĞİL; "
+                "guitar_journey_progress.dart da yalnız ders eylemi ve zamanını "
+                "saklar (2026-09-26 yeniden-ölçüm)"},
     "session data": {"stored": True, "evidence":
                      "`session_store.dart`: `sessions.jsonl`e her oturum "
                      "sonunda bir JSONL satırı eklenir (disciplineId/"
@@ -453,6 +463,15 @@ UPLOADER_TRACES = re.compile(
 #: Yeni bir tanesi eklendiğinde kapı öter — kayıt bir MUAFİYET değil, bir
 #: KARAR NOKTASIDIR.
 NETWORK_DEPS_RECORDED = {
+    # SDK integration smoke tooling (dev-only imports under integration_test/).
+    # Conservative: record driver/VM HTTP and subprocess capabilities instead
+    # of asserting these test packages can never open a network connection.
+    "integration_test": "Flutter SDK dev harness; test result/driver transport, not imported by production lib; smoke uses prepare/stop without PCM capture",
+    "flutter_driver": "SDK dev-only VM service/WebDriver test transport; no production lib import",
+    "fuchsia_remote_debug_protocol": "SDK dev-only remote VM debugging/port-forwarding transport; no production lib import",
+    "webdriver": "dev-only WebDriver HTTP client below Flutter driver; no production lib import",
+    "sync_http": "dev-only synchronous HTTP transport below WebDriver; no production lib import",
+    "process": "dev-only test harness subprocess execution; commands can initiate network access, so conservatively recorded; no production lib import",
     # O-104 (JabLab J-217'nin bulgusundan, kendi ağacımda YENİDEN ölçüldü):
     # kayıt eskiden yalnız "yazı tipi indirir (GET)" diyordu — doğru ama
     # EKSİK. Ölçülen tam hâl: ÜRETİMDE ağa çıkıyor (`ostinato_theme.dart` 3
@@ -702,10 +721,23 @@ TURKISH_WORDS = re.compile(
 # yetenek VARKEN yokluk-iddiası yasak.
 ABSENCE_ASSERTIONS = re.compile(
     r"no (?:live )?microphone|there is no microphone input|"
-    r"not wired in this build|no audio permission|hears nothing|"
+    r"microphone[^.]{0,40}not wired in this build|no audio permission|hears nothing|"
     r"never listen(?:s)? to your|"
     r"mikrofon[^.]{0,40}(?:yoktur|kullanılmaz|kullanmaz|bağlı değil)|"
     r"mikrofon girişi olmadığ(?:ından|ı için)", re.IGNORECASE)
+# A mic permission declares an app capability, not capture on every route.
+# The legacy posture routes do not instantiate AudioInputController. Their
+# explicitly scoped disclosure remains true beside the opt-in guitar observer.
+SCOPED_AUDIO_ABSENCE = re.compile(
+    r"in these (?:posture|voice posture) lessons|"
+    r"these posture lessons|bu (?:duruş|ses|piyano) ders(?:leri|lerinde)", re.IGNORECASE)
+def global_audio_absence(sentence):
+    if not ABSENCE_ASSERTIONS.search(sentence):
+        return False
+    if re.search(r"no (?:live )?microphone[^.]{0,60}in this build|(?:bu sürümde|bu sürüm)[^.]{0,30}mikrofon", sentence, re.IGNORECASE):
+        return True
+    return not SCOPED_AUDIO_ABSENCE.search(sentence)
+
 RETENTION_ABSENCE_ASSERTIONS = re.compile(
     r"nothing is stored|none to delete|no history here", re.IGNORECASE)
 
@@ -1378,6 +1410,15 @@ def selftest() -> int:
         dead.append("canlı mikrofon iddiası yokluk/koşul sanıldı")
     if not ABSENCE_ASSERTIONS.search("mikrofon girişi olmadığı için"):
         dead.append("mikrofon gelince bayatlayacak TR yokluk beyanı kaçtı")
+    for text in ("There is no microphone input in these posture lessons.",
+                 "Bu duruş dersleri mikrofon kullanmaz.",
+                 "Sharing a skeleton-render report is not wired in this build."):
+        if global_audio_absence(text):
+            failures.append(f"Scoped or unrelated absence was rejected: {text}")
+    for text in ("There is no microphone input in this build.",
+                 "Bu sürüm mikrofon kullanmaz."):
+        if not global_audio_absence(text):
+            failures.append(f"Global absence escaped: {text}")
     if ABSENCE_ASSERTIONS.search("Mikrofon olsa bile puan üretilemez"):
         dead.append("mikrofon varsayımı bayatlayacak yokluk beyanı sanıldı")
     raw = list(dart_surface_strings())
@@ -1555,7 +1596,7 @@ def main() -> int:
             # VAR: yokluğunu söyleyen her cümle BUGÜN YANLIŞ.
             for where, text in surfaces:
                 for sentence in sentences(text):
-                    if ABSENCE_ASSERTIONS.search(sentence):
+                    if global_audio_absence(sentence):
                         violations.append(
                             f"[ters yön] {where}: '{rule['name']}' artık BEYAN "
                             f"EDİLMİŞ ({rule['ios_key']}/"
@@ -1819,6 +1860,16 @@ def main() -> int:
         Path(LIBRARY_JSON).read_text(encoding="utf-8")).get("language", "en")
     checked_f = 0
     if declared_lang.startswith("en"):
+        # The original library is English with a guarded Turkish overlay.
+        # guitar_journey.v1.json instead has explicit en/tr objects. Accept
+        # only their named `.tr` branches after the separate structural gate
+        # has proven that every user-facing field has both languages.
+        from validate_guitar_journey import check as check_guitar_journey
+        journey_path = Path("assets/content/guitar_journey.v1.json")
+        journey_errors = check_guitar_journey(json.loads(journey_path.read_text(encoding="utf-8")))
+        if journey_errors:
+            violations.append(f"[dil] gitar yolu şeması geçersiz: {journey_errors[:3]}")
+        journey_localized = not journey_errors
         guarded_tr = guarded_turkish_catalog_literals(dart_raw)
         localized_dart_files = {
             f for f, _, _ in dart_raw
@@ -1846,6 +1897,10 @@ def main() -> int:
             # content asset's language field. Keep every other honesty check
             # over this file; only the English-language mismatch rule skips it.
             if where.startswith('docs/store/listing.tr-TR.json:'):
+                continue
+            if (journey_localized and
+                where.startswith('assets/content/guitar_journey.v1.json.') and
+                where.endswith('.tr')):
                 continue
             # Bu dosyanın yalnız _turkishCopy MAP DEĞERLERİ TR yolunda
             # gösterilir. Locale veya kaynak-fingerprint kapısı değişirse

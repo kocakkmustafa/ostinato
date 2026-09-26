@@ -24,7 +24,7 @@ emsaliyle aynı sınıf, OST-P0-003 Step 1) — ATIF metni bu dosyanın
 docstring'inde + fixture JSON'larının `recordingMeta.license` alanında
 taşınıyor, ayrıca bir hukuk kapısı GEREKTİRMEDİ.
 
-ATIF (CC BY 4.0 şartı): Xu, Q., Salamon, J., Bittner, R., Wang, X., Bello,
+ATIF (CC BY 4.0 şartı): Xi, Q., Bittner, R., Pauwels, J., Ye, X., Bello,
 J.P. "GuitarSet: A Dataset for Guitar Transcription", ISMIR 2018.
 """
 import hashlib

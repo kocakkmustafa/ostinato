@@ -1,0 +1,94 @@
+{
+  "date": "2026-09-26",
+  "state": "original_text_course_and_self_report_ui_locally_verified_media_device_teacher_acceptance_open",
+  "courseId": "guitar.journey",
+  "contentVersion": "2026.09.26.1",
+  "assetSha256": "e4cbc8aef48721ac0f4b10002f9b0cd377773510db2d9d45443b43e6de85e0d9",
+  "assetBytes": 334505,
+  "moduleCount": 10,
+  "lessonCount": 60,
+  "languages": [
+    "en",
+    "tr"
+  ],
+  "sourceUrls": [
+    "https://online.berklee.edu/courses/guitar-for-beginners",
+    "https://online.berklee.edu/courses/guitar-fundamentals",
+    "https://www.trinitycollege.com/resource?id=8898",
+    "https://www.bapam.org.uk/return-to-play/",
+    "https://www.nidcd.nih.gov/health/noise-induced-hearing-loss",
+    "https://online.berklee.edu/takenote/guitar-notation-basics/",
+    "https://www.fender.com/articles/scales/c-major-guitar-scale"
+  ],
+  "originalCapstoneTasks": [
+    "guitar.journey.independent.rhythm_final",
+    "guitar.journey.independent.melody_final"
+  ],
+  "chordExampleCount": 13,
+  "tuningReferences": [
+    {
+      "string": 6,
+      "note": "E2",
+      "hz": 82.4069
+    },
+    {
+      "string": 5,
+      "note": "A2",
+      "hz": 110.0
+    },
+    {
+      "string": 4,
+      "note": "D3",
+      "hz": 146.8324
+    },
+    {
+      "string": 3,
+      "note": "G3",
+      "hz": 196.0
+    },
+    {
+      "string": 2,
+      "note": "B3",
+      "hz": 246.9417
+    },
+    {
+      "string": 1,
+      "note": "E4",
+      "hz": 329.6276
+    }
+  ],
+  "mediaState": "60 planned original AI briefs; no image/audio/video asset produced or accepted",
+  "progress": "account scoped local metadata; viewed, practiced and self reported completion; versioned records; no raw audio or sensor grade",
+  "verification": {
+    "flutterAnalyze": "no issues",
+    "fullFlutterTests": 198,
+    "focusedCourseTests": 6,
+    "contentValidator": "valid",
+    "contentValidatorUnitTests": 4,
+    "legacyLibraryAndReferences": "pass",
+    "surfaceHonestySelfTest": "pass",
+    "diffCheck": "pass",
+    "audioPackageTests": 124,
+    "audioPackageAnalyze": "no issues",
+    "nativeCourseFlow": "iOS simulator and Android emulator native assets/path_provider/first-lesson progress/reopen smokes passed; raw microphone not opened"
+  },
+  "remainingGates": [
+    "qualified guitar educator review of instructional text and future visuals",
+    "original AI media production and acceptance",
+    "player device disjoint wrong note noise octave chord refusal evaluation before user facing pitch score",
+    "physical-phone microphone observation acceptance; separate target-free observation evidence is guitar-note-observation-2026-09-26.json",
+    "physical-phone UI/accessibility and account deletion acceptance beyond native simulator/emulator smoke"
+  ],
+  "surfaceHonestyBaselineFindings": [],
+  "downloadCleanup": {
+    "fileCount": 16,
+    "bytes": 29542721,
+    "state": "verified_deleted",
+    "remainingDownloadedFiles": 0,
+    "receipt": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/download-receipt.json",
+    "receiptSha256": "c7a0dec6af5d44672f6f415e891ac45461faea0b37017ae616d9e1078e7cf297"
+  },
+  "scope": "app-local; existing workflow WIP untouched; no core/provider/store/vault/simulator/commit/push/sign/deploy",
+  "surfaceHonestyBaselineFindingsResolved": "root refreshed visible store copy; app writer reconciled legacy route-specific absence and current opt-in observation",
+  "optionalMicrophone": "course entry opens explicit opt-in target-free note observer; never completes/grades course"
+}

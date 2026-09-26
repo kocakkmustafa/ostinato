@@ -7,22 +7,26 @@ bağlam; metnin kendisi `listing.json`da.
 **Gönderim KURUCU kalemi (B7).** Bu yalnız taslak — ASC/Play'e hiçbir şey yüklenmedi,
 yüklenmeyecek. Orkestratör `PASS`ı olmadan submit yok.
 
-## Neden bu kadar dar
+## Güncel ürün sınırı — 2026-09-26
 
-`docs/PRD.md`nin W1 kabul kriterleri (§7) çok daha zengin bir yetenek seti listeliyor —
-perde doğruluğu, vibrato, akor-sınıfı, MIDI modu, tempo. **Bunların hiçbiri bugünkü build'de
-CANLI değil** (kullanıcı akışında mikrofon izni ve ses-yakalama çağrısı yok;
-`AudioInputController` hazırlığı mevcut ama hiçbir ekranda başlatılmıyor —
-`settings_screen.dart`ın kendi kartı bunu adıyla söylüyor). PRD bir **hedef**, bugünkü kodun
-**envanteri** değil. Mağaza metni PRD'yi değil `lib/`i baz aldı — JabLab'ın `$claimAuditWhy`
-denetiminin yakaladığı üç sınıf hatadan (saklama-yalanı · ölçülüyor-ama-gösterilmiyor ·
-"graded" aşırı-iddiası) ders alınarak, **yazmadan önce** önlendi.
+Gitar öğrenme yolunda10 modül/60 özgün TR-EN metin dersi ve yerel, hesap
+kapsamlı öz beyan ilerlemesi vardır. Model/demonstrasyon görselleri üretilmedi.
+İsteğe bağlı tek gitar nota gözlemi, kullanıcı Başlat'a bastığında mikrofon
+izni ister. Ham PCM yalnız geçici cihaz belleğinde işlenir; kaydedilmez ve
+aktarılmaz. Yaklaşık nota, Hz ve en yakın nota merkezinden cent gösterilir;
+doğru nota, akort başarısı, akor, zamanlama, mutlak dB(A) veya ustalık puanı yoktur.
+Gitar kursu mikrofonsuz tamamlanabilir.
 
-## Kontrol listesi (her cümle bir kaynağa bağlı)
+Native izin/kanal kaynakları ve derleme kanıtı, gerçek telefonda mikrofon
+kabulü sayılmaz. Stüdyo ölçümü ve gerçek telefon doğrulaması sınırı ekranda
+belirtilir. Eski duruş rotaları mikrofon başlatmaz; kamera/abonelik/puan
+kapıları bu çalışmada açılmadı. Mağaza gönderimi yapılmadı.
+
+## Tarihsel kamera kontrol listesi (2026-08-16; yeni kurs kapısı ayrı)
 
 | İddia | Kaynak |
 |---|---|
-| Kamera-temelli, canlı mikrofon yok | `lib/app/screens/settings_screen.dart` kartı + native mikrofon izni yok + `AudioInputController` kullanıcı akışında çağrılmıyor |
+| İsteğe bağlı cihaz üstü tek gitar nota gözlemi; eski duruş dersleri ses başlatmaz | `guitar_note_observation_screen.dart`, `guitar_note_observation_controller.dart`, native izin/kanal kayıtları; gerçek telefon kabulü açık |
 | Tek ölçüm: gövde eğimi | `settings_screen.dart` "it measures one thing" + `docs/g1/w1-hasat-nihai.md` (trunk_tilt = W1 omurgası) |
 | İskelet canlı çizilir | `grep SkeletonFigurePainter` → `live_screen.dart`/`setup_check_screen.dart`/`lesson_scored_screen.dart` |
 | Video hiç saklanmaz, özet saklanır | `PrivacyInfo.xcprivacy` (H-34/D14) + `session_store.dart` (bugün, D14) |
@@ -35,8 +39,8 @@ denetiminin yakaladığı üç sınıf hatadan (saklama-yalanı · ölçülüyor
 - **"Watched but not scored" katmanı** (JabLab'ın dirsek/omuz emsali): ruleset'lerde
   `coached_only` sınıflandırması VAR ama serbest-metin alanında yaşıyor (`_noiseBand_why`),
   boolean değil — bu oturumda eklem-eklem doğrulanmadı. Eksik bırakıldı, uydurulmadı.
-- **Ses/perde/ritim ölçümü** — config'te metrik, kaynakta yakalama hazırlığı var;
-  kullanıcı akışı bu hazırlığı başlatmıyor. PRD'nin hedefi bugünün gerçeği değil.
+- **Doğruluk/akor/ritim puanı** — yeni tek nota gözlemi bir hedef veya ders
+  başarısı kararı üretmez; stüdyo ölçümü fiziksel telefon doğruluğu sayılmaz.
 - **Cihaz-kanıtlı hiçbir cümle** — kamera köprüsü turu (`KAMERA-KÖPRÜSÜ-CANLILIK.md` emsali,
   JabLab'da) Ostinato'da henüz yapılmadı.
 

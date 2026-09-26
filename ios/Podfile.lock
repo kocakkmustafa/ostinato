@@ -5,6 +5,8 @@ PODS:
   - in_app_purchase_storekit (0.0.1):
     - Flutter
     - FlutterMacOS
+  - integration_test (0.0.1):
+    - Flutter
   - MediaPipeTasksCommon (0.10.21)
   - MediaPipeTasksVision (0.10.21):
     - MediaPipeTasksCommon (= 0.10.21)
@@ -23,6 +25,7 @@ DEPENDENCIES:
   - app_links (from `.symlinks/plugins/app_links/ios`)
   - Flutter (from `Flutter`)
   - in_app_purchase_storekit (from `.symlinks/plugins/in_app_purchase_storekit/darwin`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - motion_camera (from `.symlinks/plugins/motion_camera/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
@@ -40,6 +43,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   in_app_purchase_storekit:
     :path: ".symlinks/plugins/in_app_purchase_storekit/darwin"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
   motion_camera:
     :path: ".symlinks/plugins/motion_camera/ios"
   permission_handler_apple:
@@ -53,6 +58,7 @@ SPEC CHECKSUMS:
   app_links: a754cbec3c255bd4bbb4d236ecc06f28cd9a7ce8
   Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
   in_app_purchase_storekit: 22cca7d08eebca9babdf4d07d0baccb73325d3c8
+  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
   MediaPipeTasksCommon: 6cfa29170d4900f04d250ad95ec058f14a741f38
   MediaPipeTasksVision: 7b1c0f5a5820e87e9d96926f5e65d8cd3744fac2
   motion_camera: a751ce7af204db2e85af604e080e9d570b82687e
@@ -60,6 +66,6 @@ SPEC CHECKSUMS:
   shared_preferences_foundation: 7036424c3d8ec98dfe75ff1667cb0cd531ec82bb
   url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b
 
-PODFILE CHECKSUM: 8ca2b3b505de99ed0d603fd22cbc55398079579c
+PODFILE CHECKSUM: f39982a80ba5b5a379da858d300d3fe3c13e7ddd
 
 COCOAPODS: 1.17.0

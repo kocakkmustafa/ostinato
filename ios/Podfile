@@ -46,7 +46,7 @@ post_install do |installer|
     target.build_configurations.each do |config|
       definitions = Array(config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'])
       config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] =
-        (definitions + ['$(inherited)', 'PERMISSION_CAMERA=1']).uniq
+        (definitions + ['$(inherited)', 'PERMISSION_CAMERA=1', 'PERMISSION_MICROPHONE=1']).uniq
     end
   end
 end

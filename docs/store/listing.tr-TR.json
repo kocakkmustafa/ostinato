@@ -2,16 +2,31 @@
   "$doc": "Türkçe mağaza metni taslağı. Gönderim ve sağlayıcı onayı yapılmadı. İngilizce kaynak: listing.json.",
   "appStore": {
     "name": "Ostinato: Müzik Pratiği",
-    "subtitle": "Çalgı pratiği kütüphanesi",
-    "promotionalText": "Gitar, ses ve piyano için duruş referanslarını incele. Kamera dersleri ve abonelikler bu sürümde açık değil.",
+    "subtitle": "Notadan müziğe gitar",
+    "promotionalText": "Nota, akor, ritim, melodi ve özgün bitirme çalışmalarıyla gitar öğrenme yolunu keşfet. Kendi hızında çalış, ilerlemeni kaydet.",
     "keywords": "müzik pratiği,gitar,ses,piyano,duruş,çalgı,referans,çalışma"
   },
   "playStore": {
-    "shortDescription": "Çalgı pratiği bilgilerini incele; kamera dersleri henüz açık değil."
+    "shortDescription": "Sıralı gitar dersleri, özgün alıştırmalar ve cihazda ilerleme kaydı."
   },
-  "description": "Ostinato, gitar, ses ve piyano pratiğine ilişkin bilgileri ve üst gövde duruşu için eğitmen referans aralıklarını incelemeni sağlar. Katalog, dersleri hazırlanan diğer çalgıları da durumlarıyla gösterir.\n\nBu ilk sürümde kataloğu inceleyebilir ve isteğe bağlı ortak Motion hesabı açabilirsin. Kamera dersleri, canlı duruş ölçümü ve abonelikler açık değildir. Mikrofon izni istenmez.\n\nMotion hesabı e-posta adresini, hesap kimliğini ve eklersen görünen adını kullanır. Hesap ekranından hesabının silinmesini isteyebilirsin. Ostinato bir pratik referansıdır; tıbbi tavsiye vermez.",
+  "description": "Ostinato, 10 modülde 60 özgün Türkçe ve İngilizce gitar dersi sunar. Çalgı kurulumu ve tellerden başlayıp okuma, tek nota, akor, ritim, armoni ve parmak stiline ilerle. İki özgün bitirme çalışması becerilerini birleştirmene yardımcı olur. Her derste açıklama, uygulama, öz denetim ve kolay seçenekler bulunur.\n\nÖzgün metin derslerini oku, uygulama görevlerini takip et, kendi çalışmanı değerlendir ve cihazdaki ders kaydından devam et. Hesabın olmadan kataloğu gezebilir, isteğe bağlı ortak Motion hesabını kullanabilirsin. Hesap; e-posta, hesap kimliği ve eklediysen görünen adını kullanır; uygulamadan hesap silme isteği yapabilirsin. Kurs kayıtları cihazda mevcut konuk veya hesap kapsamında kalır. Ders bitirme ustalık belgesi değildir. Bu içerik hazırlığı sürümünde gösterim videosu bulunmaz.\n\nİsteğe bağlı mikrofon pratiği, izninle cihaz üstünde yaklaşık tek nota gözlemi gösterir; nota doğruluğu veya akor puanı vermez. Ham ses saklanmaz veya yüklenmez. Kurs kendi çalışma kaydını kullanır; kamera duruş puanı ve abonelik satışı açık değildir.",
   "cameraPermissionRationale": {
     "ios": "Ostinato, ders sırasında gövde eğimini eğitmen referans aralığıyla karşılaştırmak için kamerayı kullanır. Video bu cihazda kalır; yüklenmez veya saklanmaz. Kısa oturum özeti cihazda saklanır."
   },
-  "$releasePolicy20260925": "Founder deferred all paid camera sessions and subscription sales in the first release. Provider listings must use only the external fields above; older dollar-prefixed research notes describe deferred capabilities."
+  "$releasePolicy20260925": "Founder deferred all paid camera sessions and subscription sales in the first release. Provider listings must use only the external fields above; older dollar-prefixed research notes describe deferred capabilities.",
+  "supportUrl": "https://yulalab.com/support",
+  "privacyPolicyUrl": "https://yulalab.com/privacy/motion",
+  "$coursePreparation20260926": {
+    "status": "local_content_preparation_not_provider_readback_or_release_acceptance",
+    "asset": "assets/content/guitar_journey.v1.json",
+    "sha256": "e4cbc8aef48721ac0f4b10002f9b0cd377773510db2d9d45443b43e6de85e0d9",
+    "lessonCount": 60,
+    "moduleCount": 10,
+    "mediaIncluded": false,
+    "physicalDeviceAccepted": false
+  },
+  "$sourceOfFacts": "Current course: assets/content/guitar_journey.v1.json; its app-local UI and account-scoped practice store. Camera paid-access policy is unchanged. Readback of provider metadata is separate.",
+  "$notClaimed": "No independent skill/mastery outcome, physical-phone performance, clinical suitability, camera form grade or approved AI demonstration is asserted. This local content-preparation draft has not been uploaded.",
+  "$micClaimWhy": "2026-09-26: Founder approved optional on-device single-guitar-note observation. Explicit Start and OS permission are required. PCM stays in temporary RAM; no raw audio file, upload or automatic restart. iOS/Android native capture and permission declarations exist. The display is approximate note/Hz/cents; no correctness, chord, timing, dB(A) or mastery score. Existing paid-camera gates stay closed. Physical microphone acceptance remains open.",
+  "$shortDescriptionWhy": "Current copy describes the 60-lesson course and optional approximate on-device single-note observation. Raw audio is not saved or uploaded; live physical microphone accuracy is unverified."
 }

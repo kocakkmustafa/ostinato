@@ -8,29 +8,24 @@ import 'package:permission_handler/permission_handler.dart';
 import 'audio_capture_channel.dart';
 import 'audio_route_state.dart';
 
-/// İzin isteği + [AudioCaptureChannel.start] — `camera_session.dart`
-/// `requestAndStartCamera`sıyla AYNI iş bölümü: izin Dart'ta, PLUMBING
-/// kanalda.
-AudioSurfaceState audioPermissionState(PermissionStatus perm) {
-  if (perm.isPermanentlyDenied || perm.isRestricted) {
-    return const AudioPermissionDeniedPermanent();
-  }
-  return const AudioPermissionDeniedRetriable();
-}
+AudioSurfaceState audioPermissionState(PermissionStatus perm) =>
+    perm.isPermanentlyDenied || perm.isRestricted
+    ? const AudioPermissionDeniedPermanent()
+    : const AudioPermissionDeniedRetriable();
 
-AudioSurfaceState _mapPlatformException(PlatformException e) {
-  if (e.code == 'unsupported_sample_rate') {
-    return AudioUnavailable('unsupported_sample_rate:${e.message ?? "?"}');
-  }
-  return AudioSetupFailed(e.code);
-}
+AudioSurfaceState _mapPlatformException(PlatformException e) =>
+    e.code == 'unsupported_sample_rate'
+    ? AudioUnavailable('unsupported_sample_rate:${e.message ?? "?"}')
+    : AudioSetupFailed(e.code);
 
-/// 🔒 SÜREÇ-GENELİ KAPANIŞ KİLİDİ — `camera_session.dart`taki `_closing`
-/// deseninin BİREBİR ses karşılığı (O-076 aktarımı). Cihazda TEK mikrofon
-/// var; bir ekran kapanırken mikrofonu hâlâ bırakıyorken bir sonraki ekran
-/// `start()` çağırırsa native taraf "already running" ile patlar. Kilit:
-/// `start` önce uçuştaki kapanışı BEKLER, N=1'de maliyet SIFIR.
 Future<void>? _closingAudio;
+AudioInputController? _audioOwner;
+Future<void> _nativeLane = Future.value();
+Future<void> _serializeNative(Future<void> Function() operation) {
+  final next = _nativeLane.then((_) => operation());
+  _nativeLane = next.catchError((Object _) {});
+  return next;
+}
 
 void _releaseAudioCapture(Future<void> Function() stopFn) {
   _closingAudio = stopFn().catchError((Object _) {});
@@ -41,24 +36,27 @@ void noteAudioClosing(Future<void> closing) => _closingAudio = closing;
 
 @visibleForTesting
 Future<void> awaitPendingAudioClose() async {
-  final Future<void>? closing = _closingAudio;
+  final closing = _closingAudio;
   if (closing != null) {
     await closing;
-    _closingAudio = null;
+    if (identical(_closingAudio, closing)) _closingAudio = null;
   }
 }
 
-/// Uygulama arka plana düşünce/tekrar öne gelince [onBackground]i çağırır.
-/// Ayrı sınıf: kilidin kendisi gibi, eklentisiz sınanabilsin diye
-/// (`camera_session.dart noteClosing` deseniyle aynı "test edilebilirlik
-/// önce" gerekçesi).
+/// Permission dialogs can briefly make the app inactive before capture starts.
+/// Once capture is open, every loss of foreground stops it. Paused/detached
+/// additionally cancel pending permission/start work.
 @visibleForTesting
 final class AudioLifecycleObserver extends WidgetsBindingObserver {
-  AudioLifecycleObserver({required this.onBackground});
-
+  AudioLifecycleObserver({
+    required this.onBackground,
+    this.onInactive,
+    this.onResumed,
+  });
   final VoidCallback onBackground;
+  final VoidCallback? onInactive;
+  final VoidCallback? onResumed;
   bool _attached = false;
-
   void attach() {
     if (_attached) return;
     WidgetsBinding.instance.addObserver(this);
@@ -73,153 +71,223 @@ final class AudioLifecycleObserver extends WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.detached) {
-      onBackground();
+    switch (state) {
+      case AppLifecycleState.paused || AppLifecycleState.detached:
+        onBackground();
+      case AppLifecycleState.inactive || AppLifecycleState.hidden:
+        onInactive?.call();
+      case AppLifecycleState.resumed:
+        onResumed?.call();
     }
   }
 }
 
-/// Gerçek mikrofon → [AudioSource] adaptörü (OST-P0-002).
-///
-/// Roadmap §7 sözleşmesinin YEDİ maddesinden BEŞİ burada uygulanır (madde 4
-/// "noise floor" ve madde 6 "chord class" `ostinato_audio`nun kendi
-/// `AudioConfidenceGate`/`ChordDetector`ına ait, bu katmanın işi DEĞİL):
-///  1. Ring buffer RAM-only + session exit/permission revoke/background'da
-///     sıfırlanır → [stop] VE [AudioLifecycleObserver] ikisi de [_ring.clear]
-///     çağırır.
-///  2. Route/sample-rate değişince `calibration`a döner → [_onRawEvent]
-///     `RawRouteChangedEvent`i HER zaman `AudioCalibrating`e çevirir, asla
-///     doğrudan `AudioStreaming`e atlamaz (terfi YOK bu turda — bkz. dosya
-///     sonu not).
-///  3. BT latency kalibre edilmeden timing score yok → bu katman TIMING
-///     SCORE hiç ÜRETMEZ (kapsam dışı, OST-P0-003); `AudioStreaming`in
-///     kendisi zaten "latency kalibre" iddiası TAŞIMIYOR (bkz.
-///     `audio_surface_state.dart`).
-///  5. Monophonic/polyphonic ayrımı → `ostinato_audio` katmanının işi.
-///  7. MIDI event cihaz kimliği taşımaz → bu dosya MIDI'ye hiç dokunmuyor
-///     (ayrı görev paketi).
-///
-/// **Kanıt sınıfı DÜRÜST** (camera_pose_source.dart dosya-başı notuyla AYNI
-/// disiplin): bu sınıf PLUMBING + izin + hâlleri [FakeAudioCaptureChannel]
-/// ile kanıtlar. GERÇEK MİKROFON kanıtı YOK — cihaz-günü release-gate
-/// (roadmap §15 MANUAL-OSTINATO-DEVICE-20260818). Bağlandı ≠ canlı.
+/// RAM-only native source. Fake-channel tests prove cancellation/cleanup;
+/// physical microphone/route behavior remains a separate acceptance gate.
 final class AudioInputController implements AudioSource {
   AudioInputController({
     AudioCaptureChannel? channel,
     int ringBufferCapacitySamples = 44100 * 4,
     Future<PermissionStatus> Function()? requestMicrophonePermission,
-  })  : _channel = channel ?? MethodChannelAudioCaptureChannel(),
-        _ring = AudioRingBuffer(capacitySamples: ringBufferCapacitySamples),
-        _requestPermission =
-            requestMicrophonePermission ?? Permission.microphone.request;
+  }) : _channel = channel ?? MethodChannelAudioCaptureChannel(),
+       _ring = AudioRingBuffer(capacitySamples: ringBufferCapacitySamples),
+       _requestPermission =
+           requestMicrophonePermission ?? Permission.microphone.request;
 
   final AudioCaptureChannel _channel;
   final AudioRingBuffer _ring;
-
-  /// Enjekte edilebilir izin isteği — `camera_session.dart`taki
-  /// `Permission.camera.request()` doğrudan çağrısından FARKLI olarak
-  /// buradaki tek satır bir seam: `flutter test`te gerçek platform kanalı
-  /// YOK, ve roadmap'in "background/route-change/sample-rate" testleri
-  /// izin adımını GEÇMEK zorunda — enjeksiyon olmadan hepsi native
-  /// eklentiye takılırdı. Üretimde varsayılan gerçek `Permission.
-  /// microphone.request` (davranış DEĞİŞMEDİ, yalnız test edilebilir).
   final Future<PermissionStatus> Function() _requestPermission;
-
-  final StreamController<AudioChunk> _chunks =
-      StreamController<AudioChunk>.broadcast();
-  final StreamController<AudioSurfaceState> _status =
-      StreamController<AudioSurfaceState>.broadcast();
-
+  final _chunks = StreamController<AudioChunk>.broadcast();
+  final _status = StreamController<AudioSurfaceState>.broadcast();
   StreamSubscription<RawAudioEvent>? _sub;
   AudioLifecycleObserver? _lifecycle;
+  Completer<bool>? _foregroundReady;
   bool _running = false;
+  bool _starting = false;
+  bool _askingPermission = false;
+  bool _channelConnected = false;
+  bool _disposed = false;
+  int _epoch = 0;
+  int? _sampleRate;
   AudioRoute _route = AudioRoute.unknown;
 
   @override
   Stream<AudioChunk> get chunks => _chunks.stream;
-
   @override
   Stream<AudioSurfaceState> get status => _status.stream;
-
-  /// YALNIZ test/tanı: tamponda şu an tutulan örnek sayısı. "Temizlendi mi"
-  /// sorusu bu sayıyla ÖLÇÜLÜR (roadmap §7 madde 1'in doğrulama noktası),
-  /// bir yorumun beyanıyla değil.
   @visibleForTesting
   int get bufferedSampleCountForTest => _ring.length;
+  void _emit(AudioSurfaceState state) {
+    if (!_disposed) _status.add(state);
+  }
+
+  bool _current(int epoch) =>
+      !_disposed && epoch == _epoch && identical(_audioOwner, this);
+
+  Future<bool> _waitForForeground() async {
+    final state = WidgetsBinding.instance.lifecycleState;
+    // Null is the binding's initial state (including isolated unit harnesses).
+    // Native implementations also independently require foreground at start.
+    if (state == null || state == AppLifecycleState.resumed) return true;
+    _foregroundReady = Completer<bool>();
+    return _foregroundReady!.future.timeout(
+      const Duration(seconds: 3),
+      onTimeout: () => false,
+    );
+  }
 
   @override
   Future<void> start({required int sampleRate}) async {
-    _status.add(const AudioStarting());
-    await awaitPendingAudioClose();
-    final PermissionStatus perm = await _requestPermission();
-    if (!perm.isGranted) {
-      _status.add(audioPermissionState(perm));
-      return;
-    }
+    if (_disposed || _starting || _running) return;
+    final previous = _audioOwner;
+    _audioOwner = this;
+    final epoch = ++_epoch;
+    _starting = true;
+    if (previous != null && !identical(previous, this)) await previous.stop();
+    if (!_current(epoch)) return;
+    _route = AudioRoute.unknown;
+    _sampleRate = null;
+    _lifecycle = AudioLifecycleObserver(
+      onBackground: () => unawaited(_stop(announce: true)),
+      onInactive: () {
+        if (_running || (_starting && !_askingPermission)) {
+          unawaited(_stop(announce: true));
+        }
+      },
+      onResumed: () {
+        final pending = _foregroundReady;
+        if (pending != null && !pending.isCompleted) pending.complete(true);
+      },
+    )..attach();
+    _emit(const AudioStarting());
     try {
-      await _channel.start(sampleRate: sampleRate);
-      _running = true;
-      _route = AudioRoute.unknown; // ilk route bildirimi gelene kadar
-      _sub = _channel.events.listen(_onRawEvent, onError: (Object e) {
-        _status.add(AudioSetupFailed('unexpected: $e'));
+      await awaitPendingAudioClose();
+      if (!_current(epoch)) return;
+      _askingPermission = true;
+      final perm = await _requestPermission();
+      _askingPermission = false;
+      if (!_current(epoch)) return;
+      if (!perm.isGranted) {
+        _emit(audioPermissionState(perm));
+        await _stop(announce: false);
+        return;
+      }
+      if (!await _waitForForeground() || !_current(epoch)) {
+        if (_current(epoch)) _emit(const AudioSetupFailed('not_foreground'));
+        await _stop(announce: false);
+        return;
+      }
+      _channelConnected = true;
+      _sub = _channel.events.listen(
+        _onRawEvent,
+        onError: (Object _) {
+          _emit(const AudioSetupFailed('capture_stream_failed'));
+          unawaited(_stop(announce: false));
+        },
+      );
+      await _serializeNative(() async {
+        if (!_current(epoch)) return;
+        final channel = _channel;
+        if (channel is PreparedAudioCaptureChannel) {
+          await (channel as PreparedAudioCaptureChannel).prepare();
+        }
+        if (!_current(epoch)) return;
+        await _channel.start(sampleRate: sampleRate);
+        // Cleanup shares the same lane as every owner's start/stop. It
+        // cannot arrive after a newer owner's start and stop that session.
+        if (!_current(epoch)) await _channel.stop();
       });
-      _lifecycle = AudioLifecycleObserver(onBackground: _onBackground)..attach();
-      _status.add(AudioCalibrating(_route));
+      if (!_current(epoch)) return;
+      _running = true;
+      _starting = false;
+      _emit(AudioCalibrating(_route));
     } on PlatformException catch (e) {
-      _status.add(_mapPlatformException(e));
-    } on Object catch (e) {
-      _status.add(AudioSetupFailed('unexpected: $e'));
+      if (_current(epoch)) _emit(_mapPlatformException(e));
+      await _stop(announce: false);
+    } on Object {
+      if (_current(epoch)) {
+        _emit(const AudioSetupFailed('capture_start_failed'));
+      }
+      await _stop(announce: false);
     }
   }
 
   void _onRawEvent(RawAudioEvent event) {
+    if (_disposed || !(_running || _starting)) return;
     switch (event) {
-      case RawAudioChunkEvent(:final samples, :final sampleRate, :final tNativeUs):
+      case RawAudioChunkEvent(
+        :final samples,
+        :final sampleRate,
+        :final tNativeUs,
+      ):
+        if (!_running) return;
+        if (sampleRate <= 0 ||
+            samples.isEmpty ||
+            samples.any((v) => !v.isFinite || v.abs() > 1.0)) {
+          _emit(const AudioSetupFailed('invalid_pcm'));
+          unawaited(_stop(announce: false));
+          return;
+        }
+        if (_sampleRate != null && _sampleRate != sampleRate) {
+          _ring.clear();
+          _emit(AudioCalibrating(_route));
+        }
+        _sampleRate = sampleRate;
         _ring.push(samples);
-        _chunks.add(AudioChunk(
-          samples: samples,
-          sampleRate: sampleRate,
-          tStartUs: tNativeUs,
-          clockDomain: AudioClockDomain.monotonic,
-        ));
+        _chunks.add(
+          AudioChunk(
+            samples: samples,
+            sampleRate: sampleRate,
+            tStartUs: tNativeUs,
+            clockDomain: AudioClockDomain.monotonic,
+          ),
+        );
       case RawRouteChangedEvent(:final platformRouteTag):
         _route = mapPlatformRouteTag(platformRouteTag);
-        // Roadmap §7 madde 2: HER route değişimi kalibrasyona döner — akış
-        // durmaz (chunks akmaya devam eder), yalnız zamanlama hükmü kesilir.
-        _status.add(AudioCalibrating(_route));
+        _ring.clear();
+        _sampleRate = null;
+        if (_running) _emit(AudioCalibrating(_route));
       case RawInterruptedEvent(:final reason):
-        _status.add(AudioSetupFailed(reason));
-        unawaited(stop());
+        _emit(AudioSetupFailed(reason));
+        unawaited(_stop(announce: false));
     }
-  }
-
-  /// Roadmap §7 madde 1: arka plan geçişi — tampon sıfırlanır VE akış
-  /// TAMAMEN durur (yalnız tampon temizlenmez). Bu app'in `Info.plist`'inde
-  /// `audio` background modu YOK ve OLMAMALI — arka planda dinlemeye devam
-  /// eden bir müzik pratiği app'i kapsamın (roadmap §9: "raw mic/camera
-  /// upload yok; permission just-in-time ve görünür session indicator")
-  /// ruhuna aykırı olurdu.
-  void _onBackground() {
-    unawaited(stop());
   }
 
   @override
-  Future<void> stop() async {
-    await _sub?.cancel();
-    _sub = null;
+  Future<void> stop() => _stop(announce: true);
+
+  Future<void> _stop({required bool announce}) async {
+    final stoppedEpoch = ++_epoch;
+    _running = false;
+    _starting = false;
+    _askingPermission = false;
+    final pending = _foregroundReady;
+    if (pending != null && !pending.isCompleted) pending.complete(false);
+    _foregroundReady = null;
     _lifecycle?.detach();
     _lifecycle = null;
-    if (_running) {
-      _running = false;
-      _releaseAudioCapture(_channel.stop);
-    }
-    // Roadmap §7 madde 1 — "sıfırlanır" koşulsuzdur: başarılı/başarısız
-    // kapanış farketmez, HER `stop()` tamponu zeroize eder.
+    final subscription = _sub;
+    _sub = null;
+    final hadConnection = _channelConnected;
+    _channelConnected = false;
     _ring.clear();
+    _sampleRate = null;
+    // Publish the close barrier before cancellation can yield. A new start
+    // cannot overtake an old stop while a subscription takes time to close.
+    if (hadConnection) {
+      _releaseAudioCapture(() => _serializeNative(_channel.stop));
+    }
+    await subscription?.cancel();
+    if (hadConnection) await awaitPendingAudioClose();
+    if (stoppedEpoch != _epoch) return;
+    if (identical(_audioOwner, this)) _audioOwner = null;
+    if (announce) _emit(const AudioStopped());
   }
 
-  /// Test/harness kolaylığı — `CameraPoseSource.dispose()` ile aynı şekil.
   Future<void> dispose() async {
+    if (_disposed) return;
+    _disposed = true;
+    await _stop(announce: false);
     await _chunks.close();
     await _status.close();
   }

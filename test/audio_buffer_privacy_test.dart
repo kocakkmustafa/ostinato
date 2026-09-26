@@ -264,6 +264,8 @@ void main() {
       'lib/app/audio/audio_input_controller.dart',
       'lib/app/audio/audio_capture_channel.dart',
       'lib/app/audio/audio_route_state.dart',
+      'lib/app/audio/guitar_note_observation_controller.dart',
+      'packages/ostinato_audio/lib/src/pitch/guitar_pitch_observer.dart',
     ];
 
     // Paket sınırı: `packages/ostinato_audio/lib/src/capture/` da aynı

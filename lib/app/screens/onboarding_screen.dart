@@ -266,7 +266,11 @@ class _WelcomeStep extends StatelessWidget {
       kicker(localized(context, 'Welcome', 'Hoş geldin')),
       const SizedBox(height: 10),
       Text(
-        localized(context, 'Measured, not chosen.', 'Ölçülür, tahmin edilmez.'),
+        localized(
+          context,
+          'Build your guitar practice.',
+          'Gitar çalışmanı geliştir.',
+        ),
         key: const Key('onboarding-welcome-title'),
         style: hankenText(size: 30, weight: FontWeight.w600, height: 1.1),
       ),
@@ -274,12 +278,12 @@ class _WelcomeStep extends StatelessWidget {
       Text(
         localized(
           context,
-          'Put your phone where it can see you. Ostinato compares how you '
-              'sit to how real teachers sit — and shows you where you land '
-              'inside the spread they agree on.',
-          'Telefonu sizi görebileceği bir yere koyun. Ostinato oturuşunuzu '
-              'gerçek eğitmenlerin oturuşlarıyla karşılaştırır ve onların '
-              'ortak aralığında nerede olduğunuzu gösterir.',
+          'Learn guitar through progressive lessons, practice tasks and '
+              'self-checks. The course works without an account, camera or '
+              'microphone. Your practice record stays on this device.',
+          'Gitarı sıralı dersler, çalışma görevleri ve öz denetimlerle öğrenin. '
+              'Kurs hesap, kamera veya mikrofon olmadan çalışır. Çalışma '
+              'kaydınız bu cihazda kalır.',
         ),
         style: hankenText(
           size: 15,
@@ -294,14 +298,13 @@ class _WelcomeStep extends StatelessWidget {
         child: Text(
           localized(
             context,
-            'Correct posture is a band, not a point. That is why you will '
-                'never see a score out of ten here: we can tell you where you '
-                'are inside the teachers’ range, and we cannot honestly turn '
-                'that into a number.',
-            'Doğru duruş tek bir nokta değil, bir aralıktır. Bu yüzden '
-                'burada on üzerinden puan verilmiyor. Eğitmenlerin aralığında '
-                'nerede olduğunuzu gösterebiliriz; bunu dürüstçe tek bir '
-                'puana indirgeyemeyiz.',
+            'Optional microphone practice shows approximate single-note '
+                'observations after your permission. It does not grade your '
+                'playing. Live camera practice and subscription sales are '
+                'closed in this release.',
+            'İsteğe bağlı mikrofon pratiği, izninizden sonra yaklaşık tek nota '
+                'gözlemi gösterir. Çalma başarınızı puanlamaz. Bu sürümde canlı '
+                'kamera pratiği ve abonelik satışı kapalıdır.',
           ),
           style: hankenText(
             size: 13.5,
@@ -338,16 +341,18 @@ class _ScopeStep extends StatelessWidget {
         value: '${facts.instruments}',
         label: localized(
           context,
-          'instruments, each built on posture footage from real '
-              'teachers who agree with each other',
-          'çalgı; her biri birbiriyle uyumlu gerçek eğitmenlerin duruş '
-              'görüntülerine dayanır',
+          'instrument previews in the posture catalogue; live camera practice is closed',
+          'çalgı ön izlemesi duruş kataloğunda; canlı kamera pratiği kapalıdır',
         ),
       ),
       _FactRow(
         key: const Key('onboarding-fact-lessons'),
         value: '${facts.lessons}',
-        label: localized(context, 'lessons across them', 'toplam ders'),
+        label: localized(
+          context,
+          'legacy posture lesson previews',
+          'önceki duruş dersi ön izlemeleri',
+        ),
       ),
       _FactRow(
         key: const Key('onboarding-fact-locked'),
@@ -462,18 +467,12 @@ class _SensorsStep extends StatelessWidget {
         // BİRİMİ yanlış. Kural: her sayı saydığı şeyin yanında durur.
         body: localized(
           context,
-          'It reads your two shoulders and your two hips, and from '
-              'them measures one thing: how far your trunk leans. No face '
-              '— nothing above your shoulders is read at all: our teacher '
-              'references were filmed waist-up, so we have nothing to '
-              'compare a head against. Ostinato asks for camera access '
-              'when your first setup check starts, not now, because there '
-              'is nothing to look at until then.',
-          'Kamera iki omzunuzu ve iki kalçanızı görür; bunlardan yalnız '
-              'gövdenizin ne kadar eğildiğini ölçer. Yüzünüz okunmaz. '
-              'Eğitmen kayıtları belden yukarı çekildiği için başınızı '
-              'karşılaştıracak bir referansımız yok. Kamera izni şimdi '
-              'değil, ilk kurulum kontrolünüz başladığında istenir.',
+          'Live camera posture practice is closed in this release. The guitar '
+              'course does not ask for camera access and uses your own practice '
+              'record rather than an automatic posture grade.',
+          'Bu sürümde canlı kamera duruş pratiği kapalıdır. Gitar kursu kamera '
+              'izni istemez; otomatik duruş puanı yerine kendi çalışma '
+              'kaydınızı kullanır.',
         ),
       ),
       const SizedBox(height: 12),
@@ -488,31 +487,31 @@ class _SensorsStep extends StatelessWidget {
         key: const Key('onboarding-wellness-card'),
         body: localized(
           context,
-          'Ostinato describes how you are sitting compared to a set '
-              'of teachers. It does not diagnose anything and nothing it '
-              'says is health advice. If something hurts, that is a '
-              'question for a person, not an app.',
-          'Ostinato oturuşunuzu eğitmenlerle karşılaştırır. Tanı koymaz '
-              've sağlık tavsiyesi vermez. Ağrınız varsa bir sağlık '
-              'uzmanına danışın.',
+          'Ostinato teaches guitar practice. It does not diagnose or treat '
+              'conditions and does not provide health advice. Stop if practice '
+              'hurts and seek advice from a qualified healthcare professional.',
+          'Ostinato gitar çalışmasını öğretir. Tanı veya tedavi hizmeti ya da '
+              'sağlık tavsiyesi vermez. Çalışırken ağrı olursa durun ve bir '
+              'sağlık uzmanına danışın.',
         ),
       ),
       const SizedBox(height: 12),
       _SensorCard(
         title: localized(
           context,
-          'The microphone is not wired',
-          'Mikrofon bu sürümde bağlı değil',
+          'Optional single-note microphone',
+          'İsteğe bağlı tek nota mikrofonu',
         ),
         key: const Key('onboarding-microphone-card'),
         body: localized(
           context,
-          'There is no microphone input in this build. No audio '
-              'permission is requested and nothing you play is captured. '
-              'Everything Ostinato judges, it judges from the camera.',
-          'Bu sürümde mikrofon girişi yoktur. Ses izni istenmez ve '
-              'çalmanız kaydedilmez. Ostinato yalnız kameradan gelen '
-              'verilerle değerlendirme yapar.',
+          'The guitar learning path offers approximate single-note observation. '
+              'You choose when to start and grant microphone permission. Audio stays on this device '
+              'in temporary memory and is never recorded or uploaded. The course works without it; '
+              'no chord or playing-success score is produced.',
+          'Gitar öğrenme yolunda yaklaşık tek nota gözlemi vardır. Başlatmayı ve mikrofon '
+              'iznini siz seçersiniz. Ses bu cihazda geçici bellekte kalır; kaydedilmez veya yüklenmez. '
+              'Kurs mikrofonsuz çalışır; akor veya çalma başarısı puanı üretilmez.',
         ),
       ),
       const SizedBox(height: 12),
@@ -525,16 +524,12 @@ class _SensorsStep extends StatelessWidget {
         // yalnız yeni gerçeği anlatan ikinci cümle YENİDEN yazıldı.
         body: localized(
           context,
-          'Raw video never leaves this device — there is no setting '
-              'that changes that. The video itself is never stored, and '
-              'neither is the frame-by-frame measurement. What is stored '
-              'is a short summary of your practice — how long you played '
-              'and how much you stayed in range — so you can see your '
-              'last session. The camera only runs inside a lesson.',
-          'Ham video cihazınızdan çıkmaz ve saklanmaz; kare kare ölçüm '
-              'de saklanmaz. Yalnız son çalışmanızı görebilmeniz için '
-              'süreniz ve aralıkta kaldığınız zamanın kısa özeti bu cihazda '
-              'tutulur. Kamera yalnız ders sırasında çalışır.',
+          'The course does not capture video. Lesson progress and self-checks '
+              'stay in local app storage. Existing posture-session summaries '
+              'also stay on this device; they are not uploaded to your account.',
+          'Kurs video yakalamaz. Ders ilerlemesi ve öz denetimler yerel uygulama '
+              'alanında kalır. Önceki duruş seansı özetleri de bu cihazda kalır; '
+              'hesabınıza yüklenmez.',
         ),
       ),
     ],

@@ -1,0 +1,381 @@
+{
+  "date": "2026-09-26",
+  "state": "opt_in_target_free_observation_and_native_course_bridge_smokes_accepted_physical_microphone_acceptance_open",
+  "scope": "on-device optional single guitar note only; no target match/tuning success/chord/timing/loudness/mastery grade; no course progress write",
+  "config": {
+    "path": "assets/config/guitar-observation.v1.json",
+    "sha256": "9a80a7e607ac1151f98544122e23ea9cb3bfaf605b30f355818db7a85bb4b832",
+    "freeze": {
+      "configSha256": "9a80a7e607ac1151f98544122e23ea9cb3bfaf605b30f355818db7a85bb4b832",
+      "developmentPlayers": [
+        "00",
+        "01"
+      ],
+      "holdoutPlayers": [
+        "04",
+        "05"
+      ],
+      "tunedOnTheseRecordings": false,
+      "freezeBeforeDownload": false,
+      "guardIsAdditionalAndNotPartOfOriginal47of49Holdout": true,
+      "amendmentBeforeAnyRealReplay": "Added fundamental-family power guard after synthetic chords exposed subharmonic mixtures. No real holdout result seen.",
+      "finalFreezeAfterDownloadBeforeAnyRealReplay": true,
+      "freezeBeforeRealReplay": true
+    }
+  },
+  "source": {
+    "dataset": "GuitarSet1.1.0",
+    "url": "https://zenodo.org/records/3371780",
+    "license": "CC BY4.0",
+    "attribution": "Q. Xi, R. Bittner, J. Pauwels, X. Ye, J. P. Bello; GuitarSet: A Dataset for Guitar Transcription, ISMIR2018",
+    "copyright": "Research dataset only; not shipped as course audio or copied curriculum",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "measurement": {
+    "training": "No learned model trained; v1 YIN gate retained, additional spectral refusal configured using original synthetic fixtures before any real replay performance was examined",
+    "development": {
+      "split": "development",
+      "candidateCount": 38,
+      "accepted": 21,
+      "coverage": 0.5526315789473685,
+      "differentNote": 0,
+      "differentNoteAmongAccepted": 0.0,
+      "medianAbsCentsAccepted": 2.87652147210508,
+      "p90AbsCentsAccepted": 7.883908788139104,
+      "players": [
+        {
+          "player": "00",
+          "candidateCount": 22,
+          "match": 7,
+          "differentNote": 0,
+          "noVerdict": 15,
+          "accepted": 7,
+          "reasons": {
+            "observed": 7,
+            "tooQuiet": 14,
+            "notPeriodic": 1
+          },
+          "recordings": [
+            "00_BN1-129-Eb_solo",
+            "00_SS3-98-C_solo"
+          ]
+        },
+        {
+          "player": "01",
+          "candidateCount": 16,
+          "match": 14,
+          "differentNote": 0,
+          "noVerdict": 2,
+          "accepted": 14,
+          "reasons": {
+            "observed": 14,
+            "unstablePitch": 1,
+            "multipleSources": 1
+          },
+          "recordings": [
+            "01_BN1-129-Eb_solo",
+            "01_SS3-98-C_solo"
+          ]
+        }
+      ]
+    },
+    "holdout": {
+      "split": "holdout",
+      "candidateCount": 52,
+      "accepted": 50,
+      "coverage": 0.9615384615384616,
+      "differentNote": 0,
+      "differentNoteAmongAccepted": 0.0,
+      "medianAbsCentsAccepted": 2.2544335353948735,
+      "p90AbsCentsAccepted": 6.960326381198228,
+      "players": [
+        {
+          "player": "04",
+          "candidateCount": 21,
+          "match": 19,
+          "differentNote": 0,
+          "noVerdict": 2,
+          "accepted": 19,
+          "reasons": {
+            "observed": 19,
+            "ambiguousCenter": 1,
+            "multipleSources": 1
+          },
+          "recordings": [
+            "04_BN1-129-Eb_solo",
+            "04_SS3-98-C_solo"
+          ]
+        },
+        {
+          "player": "05",
+          "candidateCount": 31,
+          "match": 31,
+          "differentNote": 0,
+          "noVerdict": 0,
+          "accepted": 31,
+          "reasons": {
+            "observed": 31
+          },
+          "recordings": [
+            "05_BN1-129-Eb_solo",
+            "05_SS3-98-C_solo"
+          ]
+        }
+      ]
+    },
+    "holdoutDisjointByPlayerAndRecording": true,
+    "original02And03HoldoutNotReusedForNewGuard": true,
+    "syntheticCases": {
+      "openStringAndOctaveObservations": 7,
+      "singleHarmonicFamily": 1,
+      "openChordVoicingsRefused": 8,
+      "unrelatedToneMixtureRefused": 1,
+      "weakNoiseClippedNonfiniteAndAmbiguousCenterRefused": 5
+    }
+  },
+  "privacy": {
+    "rawPcm": "bounded RAM only; UI/window/ring cleared on stop/route/account/lifecycle. In-flight analysis copies are cleared/discarded on task completion; one queued native buffer is invalidated on stop. No file/network path.",
+    "nativeQueuedBufferCap": 1,
+    "inputScope": "built-in input only for numeric observation; 44100/48000 actual PCM sample rates",
+    "permission": "explicit Start then opt-in permission; denied and permanent-denied states; no automatic start or restart",
+    "stopEvents": [
+      "user stop",
+      "screen dispose",
+      "account ID change",
+      "inactive/hidden/paused/detached",
+      "native foreground loss",
+      "native interruption/read failure",
+      "invalid PCM"
+    ]
+  },
+  "verification": {
+    "flutterTests": 198,
+    "audioPackageTests": 124,
+    "flutterAnalyze": "no issues",
+    "audioAnalyze": "no issues",
+    "sourceLifecycleTests": 10,
+    "observerTests": 9,
+    "channelTests": 2,
+    "privacyTests": 28,
+    "surfaceHonesty": "pass;2891 visible prose;117 dependencies classified,6 dev-only integration harness transports recorded",
+    "surfaceHonestySelfTest": "pass",
+    "referenceScopeTests": 2,
+    "iosPlistAndProjectLint": "pass",
+    "podfileRubySyntax": "pass",
+    "nativeBuild": {
+      "iosSimulator": {
+        "state": "passed; final native course smoke rebuilt enum normalization followup",
+        "elapsedSeconds": 49.2,
+        "log": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/ios-audio-build.log",
+        "logSha256": "d4020ebe4185d0177dd475e63eb03ac78ca800082df9c602c6b78ef1e8c937cb"
+      },
+      "androidDebug": {
+        "state": "passed",
+        "elapsedSeconds": 39.5,
+        "log": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/android-audio-build.log",
+        "logSha256": "f9e38a4e77d81a309fc0d75a18a85d328907e9fcaca2cb7e73570411bba0f039"
+      },
+      "owner": "root serial nativebuild; subagent did not boot/build"
+    },
+    "nativeCourseAndReadySmoke": {
+      "iosSimulator": {
+        "state": "passed",
+        "buildSeconds": 19.3,
+        "testSeconds": 4,
+        "log": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/ios-course-native-final.log",
+        "logSha256": "d93a02952d7be60dd79fb6dbc57bff00b32bdad8be21ee9620bceaab116ee90e"
+      },
+      "androidEmulator": {
+        "state": "passed",
+        "buildSeconds": 13.1,
+        "testSeconds": 6,
+        "log": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/android-course-native.log",
+        "logSha256": "e31966bb7e04a470fb5373e5fe8fcc4169ea08cbfe374c1b7858c0d59041d882"
+      },
+      "actualAssertions": [
+        "bundled 10module/60lesson asset load",
+        "native path_provider application support directory",
+        "isolated test UUID owner viewed/practiced/self_reported completion",
+        "fresh widget/route disk progress readback",
+        "exact test-created subtree cleanup",
+        "native event listen/ready preparation and stop without capture"
+      ],
+      "microphoneCapture": false,
+      "microphonePermissionRequested": false,
+      "physicalMicrophoneEvidence": false,
+      "testSource": "integration_test/guitar_course_smoke_test.dart",
+      "testSourceSha256": "9950e00e5f40a840d6823756c9783ca23642c247755324935b33495067ba891b"
+    },
+    "focusedFinalLog": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/audio-final-focused.log",
+    "fullFlutterLog": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/flutter-final-tests.log",
+    "independentReview": {
+      "openP1P2": 0,
+      "casesPassed": "20 app targeted +13 DSP targeted +1 independent slow-cancel probe before enum alias followup",
+      "receipt": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/quality-review/ostinato-audio-review-receipt.json"
+    },
+    "fullFlutterLogSha256": "674dfa023fed31b0676637c7c7f8c6b441d1c7ed8bd1ebc64f25274d2cd540aa"
+  },
+  "nativeSourceSha256": {
+    "ios/Runner/AudioCaptureStreamer.swift": "ffa367e350bcdbd7536509f035c9029723d9dc2f468868e0e5d1169d6e9f441f",
+    "ios/Runner/AppDelegate.swift": "8a1e445329331dffab7122c84b1845c11ecf0f7786a12336557841275836af54",
+    "ios/Runner/Info.plist": "b082751a827599b97b819cf640010cc75c5be98fd5adbea9d647f7ddeb3f4ae1",
+    "ios/Podfile": "2c6098cbdf6541f5102e3642ed930a587b97aaff2afb2533772895efc96824c3",
+    "ios/Runner.xcodeproj/project.pbxproj": "bd3d71e909a4c8c2b2cb62fda93330070753a4f5ddad1c0dcfa650860ed500b2",
+    "android/app/src/main/kotlin/com/yulalab/ostinato/AudioCaptureStreamer.kt": "9f4fdc2d9d1ba4981b79d67c22c227eb55aeff985bb52cbb534876f33d240ae4",
+    "android/app/src/main/kotlin/com/yulalab/ostinato/MainActivity.kt": "c8e6c02b7a169439717bb16f2a061ad56ac351c5816441793b2c79ff4a00be74",
+    "android/app/src/main/AndroidManifest.xml": "cba155110a79e05ba73fc36fe1acc6a334cb8739b519b3dfd593f7f134cca064"
+  },
+  "cleanup": {
+    "receipt": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/observation-download-receipt.json",
+    "receiptSha256": "0c5362581098ebbb87bc4f08b24a40fd48c6f27263fb006f57c4422cd67e915e",
+    "fileCount": 16,
+    "bytes": 29334966,
+    "state": "verified_deleted",
+    "remainingDownloadedFiles": 0,
+    "files": [
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/00_BN1-129-Eb_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "entry": "00_BN1-129-Eb_solo.jams",
+        "bytes": 950809,
+        "sha256": "2258ef6f5dc58437f2807dfc0c05416ad8498cd345f95d6563b13d19283e6d54",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/00_BN1-129-Eb_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "entry": "00_BN1-129-Eb_solo_mic.wav",
+        "bytes": 1969056,
+        "sha256": "2a6057d0485d8ee2f4a04175ee085d610c0f7a13194e083b13ce803bec091d43",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/00_SS3-98-C_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "entry": "00_SS3-98-C_solo.jams",
+        "bytes": 2253770,
+        "sha256": "ef3f256a2b57b01c9cffce9c3ab7c320e200c7c6929fb91984e972983707bfde",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/00_SS3-98-C_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "entry": "00_SS3-98-C_solo_mic.wav",
+        "bytes": 3455614,
+        "sha256": "57574b363a2a277e1b8cfa43325b31867a443eafe3addf0e6bc99bc8f982393b",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/01_BN1-129-Eb_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "entry": "01_BN1-129-Eb_solo.jams",
+        "bytes": 509838,
+        "sha256": "ecdd877eaf6208cfefa47b74c1a6a5211146e12dfa0f5132345a4c456cd67fc8",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/01_BN1-129-Eb_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "entry": "01_BN1-129-Eb_solo_mic.wav",
+        "bytes": 1969056,
+        "sha256": "76330537c6a88df56c7e338da9dd81d84cbf7f3a5ae7cd1b32a663bded6b76b4",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/01_SS3-98-C_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "entry": "01_SS3-98-C_solo.jams",
+        "bytes": 1122191,
+        "sha256": "6d49c83a418ad5b363e09cb5a6383791f6a6aae4bbf5eae1720d45293f1ce408",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/01_SS3-98-C_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "entry": "01_SS3-98-C_solo_mic.wav",
+        "bytes": 3455614,
+        "sha256": "3a1c3c0af24807ebbd63963d607d05e25f3f0b0ca078e1dadbd7dd034e536985",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/04_BN1-129-Eb_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "entry": "04_BN1-129-Eb_solo.jams",
+        "bytes": 546271,
+        "sha256": "117e877427a2d363f8060e5731b3be4f73b94de5af0e1094bd38a73a84539c4b",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/04_BN1-129-Eb_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "entry": "04_BN1-129-Eb_solo_mic.wav",
+        "bytes": 1969056,
+        "sha256": "3003186fc9122d51d761c1b2ef2591d528c51aaaf991fa2a885f500b4c97bcaf",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/04_SS3-98-C_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "entry": "04_SS3-98-C_solo.jams",
+        "bytes": 864469,
+        "sha256": "4d8fab3ed713ca1ed9edfc4178bd64db475a6c11dea221b1470f4c16860b4fa4",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/04_SS3-98-C_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "entry": "04_SS3-98-C_solo_mic.wav",
+        "bytes": 3455614,
+        "sha256": "b7a8821cbf4bc1d18d3528d5cf181c31e9d9a0c9c04e28307daaaa0570e3e99a",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/05_BN1-129-Eb_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "entry": "05_BN1-129-Eb_solo.jams",
+        "bytes": 516763,
+        "sha256": "8b9c47dae61790596142ffc898995a82d066229fa5b2947facc4a83750a921e1",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/05_BN1-129-Eb_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "entry": "05_BN1-129-Eb_solo_mic.wav",
+        "bytes": 1969056,
+        "sha256": "ccf801f3a6e7b1ab38dd9bf1ae917d13c51ef93c977af41cdabcb0548f55a261",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/05_SS3-98-C_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "entry": "05_SS3-98-C_solo.jams",
+        "bytes": 872175,
+        "sha256": "6b12713aae7138e98a14f1b4ec43f05d41b94b530c0edc97e2204ae66fc8279c",
+        "license": "cc-by-4.0"
+      },
+      {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-courses/ostinato/05_SS3-98-C_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "entry": "05_SS3-98-C_solo_mic.wav",
+        "bytes": 3455614,
+        "sha256": "b89fb546ac6e2327d4791e242e71be321936ac305563641401f099dccadea5ce",
+        "license": "cc-by-4.0"
+      }
+    ]
+  },
+  "limits": [
+    "Isolated studio notes selected by labels do not prove phone microphones, room noise, novice attempts, clipping or accompaniment behavior.",
+    "Spectral guard is not a chord classifier. Octave mixtures/aligned partials can resemble one harmonic family and are not guaranteed rejected.",
+    "Coverage depends on room-floor estimation; quiet development recordings had many refusals.",
+    "Approximate note center label refuses beyond35cents; this is not an accurate tuner or correct-note verdict.",
+    "Real iOS/Android microphone indicator, stop/background/account cleanup, device-disjoint external-tuner comparison and route/noise behavior remain open.",
+    "Qualified educator text review and original media production/acceptance remain open."
+  ],
+  "reproduce": [
+    "python3 tool/guitar_single_note_corpus.py --observation",
+    "dart run tool/guitar_single_note_replay.dart development observation",
+    "dart run tool/guitar_single_note_replay.dart holdout observation",
+    "Verify exact receipt hash/size before deleting only listed downloaded WAV/JAMS files."
+  ],
+  "ownership": "app only; root owns storeJSON/simulators/nativebuild; prior workflow WIP untouched; no sharedCore/provider/Vault/commit/push/sign/deploy"
+}

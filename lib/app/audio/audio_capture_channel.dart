@@ -52,16 +52,19 @@ final class RawInterruptedEvent extends RawAudioEvent {
 abstract interface class AudioCaptureChannel {
   Stream<RawAudioEvent> get events;
 
-  /// [sampleRate] native tarafından HONORLANAMIYORSA
-  /// `PlatformException(code: 'unsupported_sample_rate')` fırlatır —
-  /// sessizce başka bir hıza YUVARLAMAZ. Başarılıysa dönen değer İSTENEN
-  /// hızla birebir aynıdır (native kendi doğrulamasını yapar; Dart tarafı
-  /// ikinci bir kontrol İCAT ETMEZ, native'in "evet" demesine güvenir —
-  /// gerçek hızın hangi API'yle doğrulandığı platforma göre değişir, bu
-  /// arayüz onu bilmek ZORUNDA değil).
+  /// Requests a supported preferred rate (44.1 or 48 kHz). Hardware can
+  /// choose the other supported rate; every chunk carries the actual rate.
+  /// Unsupported requested/actual formats fail closed, rather than interpreting
+  /// PCM with a guessed sample rate. The observation recalibrates on change.
   Future<void> start({required int sampleRate});
 
   Future<void> stop();
+}
+
+/// Optional readiness handshake, separated from capture so an owner can
+/// recheck cancellation after event subscription preparation completes.
+abstract interface class PreparedAudioCaptureChannel {
+  Future<void> prepare();
 }
 
 /// Üretim yolu — `com.yulalab.ostinato/audio_capture` (method) +
@@ -72,16 +75,19 @@ abstract interface class AudioCaptureChannel {
 /// widget testinde native taraf ya YOK ya da gerçek ses donanımına
 /// erişmiyor. Bağlandı ≠ canlı; gerçek mikrofon ölçümü cihaz-günü
 /// release-gate'idir (roadmap §15 MANUAL-OSTINATO-DEVICE-20260818).
-final class MethodChannelAudioCaptureChannel implements AudioCaptureChannel {
+final class MethodChannelAudioCaptureChannel
+    implements AudioCaptureChannel, PreparedAudioCaptureChannel {
   MethodChannelAudioCaptureChannel()
-      : _method = const MethodChannel('com.yulalab.ostinato/audio_capture'),
-        _eventChannel =
-            const EventChannel('com.yulalab.ostinato/audio_capture/events');
+    : _method = const MethodChannel('com.yulalab.ostinato/audio_capture'),
+      _eventChannel = const EventChannel(
+        'com.yulalab.ostinato/audio_capture/events',
+      );
 
   final MethodChannel _method;
   final EventChannel _eventChannel;
 
   StreamSubscription<dynamic>? _rawSub;
+  bool _prepared = false;
   final StreamController<RawAudioEvent> _events =
       StreamController<RawAudioEvent>.broadcast();
 
@@ -89,37 +95,64 @@ final class MethodChannelAudioCaptureChannel implements AudioCaptureChannel {
   Stream<RawAudioEvent> get events => _events.stream;
 
   @override
+  Future<void> prepare() async {
+    _rawSub ??= _eventChannel.receiveBroadcastStream().listen(
+      _onMessage,
+      onError: _onError,
+    );
+    // Event subscription and method calls are separate channels. Complete a
+    // bounded native handshake before capture, rather than assume ordering.
+    var ready = false;
+    for (var attempt = 0; attempt < 20; attempt++) {
+      if (await _method.invokeMethod<bool>('ready') == true) {
+        ready = true;
+        break;
+      }
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
+    _prepared = ready;
+    if (!ready) throw PlatformException(code: 'capture_stream_not_ready');
+  }
+
+  @override
   Future<void> start({required int sampleRate}) async {
-    _rawSub ??=
-        _eventChannel.receiveBroadcastStream().listen(_onMessage, onError: _onError);
+    if (!_prepared) await prepare();
     await _method.invokeMethod<void>('start', <String, Object?>{
       'sampleRate': sampleRate,
     });
   }
 
   void _onMessage(dynamic message) {
-    final Map<Object?, Object?> map = message as Map<Object?, Object?>;
-    switch (map['type']) {
-      case 'chunk':
-        // `samples` telden `Float64List` olarak gelir (StandardMessageCodec
-        // FlutterStandardTypedData.float64 ↔ Dart Float64List) — kanal
-        // başına binlerce örneği tek tek `NSNumber`/`Object` kutulamak
-        // yerine ham bayt kopyası. `Float64List` zaten `List<double>`
-        // sözleşmesini karşılar, ayrı bir dönüşüm GEREKMEZ.
-        _events.add(RawAudioChunkEvent(
-          samples: map['samples']! as List<double>,
-          sampleRate: map['sampleRate']! as int,
-          tNativeUs: map['t']! as int,
-        ));
-      case 'routeChanged':
-        _events.add(RawRouteChangedEvent(map['route']! as String));
-      case 'interrupted':
-        _events.add(RawInterruptedEvent(map['reason']! as String));
+    try {
+      final Map<Object?, Object?> map = message as Map<Object?, Object?>;
+      switch (map['type']) {
+        case 'chunk':
+          // `samples` telden `Float64List` olarak gelir (StandardMessageCodec
+          // FlutterStandardTypedData.float64 ↔ Dart Float64List) — kanal
+          // başına binlerce örneği tek tek `NSNumber`/`Object` kutulamak
+          // yerine ham bayt kopyası. `Float64List` zaten `List<double>`
+          // sözleşmesini karşılar, ayrı bir dönüşüm GEREKMEZ.
+          _events.add(
+            RawAudioChunkEvent(
+              samples: map['samples']! as List<double>,
+              sampleRate: map['sampleRate']! as int,
+              tNativeUs: map['t']! as int,
+            ),
+          );
+        case 'routeChanged':
+          _events.add(RawRouteChangedEvent(map['route']! as String));
+        case 'interrupted':
+          _events.add(RawInterruptedEvent(map['reason']! as String));
+      }
+    } on Object {
+      _events.add(const RawInterruptedEvent('invalid_capture_event'));
     }
   }
 
   void _onError(Object error) {
-    final String reason = error is PlatformException ? error.code : 'unexpected: $error';
+    final String reason = error is PlatformException
+        ? error.code
+        : 'unexpected: $error';
     _events.add(RawInterruptedEvent(reason));
   }
 
@@ -127,6 +160,7 @@ final class MethodChannelAudioCaptureChannel implements AudioCaptureChannel {
   Future<void> stop() async {
     await _rawSub?.cancel();
     _rawSub = null;
+    _prepared = false;
     try {
       await _method.invokeMethod<void>('stop');
     } on Object {
@@ -139,7 +173,9 @@ final class MethodChannelAudioCaptureChannel implements AudioCaptureChannel {
 /// Testlerin ve sim-kanıtının kaynağı: gerçek platform kanalı YOK, olaylar
 /// elle tetiklenir. `ostinato_posture.FakePoseSource` ile aynı disiplin.
 final class FakeAudioCaptureChannel implements AudioCaptureChannel {
-  FakeAudioCaptureChannel({this.supportedSampleRates = const <int>{44100, 48000}});
+  FakeAudioCaptureChannel({
+    this.supportedSampleRates = const <int>{44100, 48000},
+  });
 
   final Set<int> supportedSampleRates;
 
@@ -164,13 +200,19 @@ final class FakeAudioCaptureChannel implements AudioCaptureChannel {
   }
 
   /// Testte tek parça itmek için — `FakePoseSource.pushOne()` deseni.
-  void pushChunk(List<double> samples, {required int sampleRate, required int tNativeUs}) {
+  void pushChunk(
+    List<double> samples, {
+    required int sampleRate,
+    required int tNativeUs,
+  }) {
     if (!_running) return;
-    _events.add(RawAudioChunkEvent(
-      samples: samples,
-      sampleRate: sampleRate,
-      tNativeUs: tNativeUs,
-    ));
+    _events.add(
+      RawAudioChunkEvent(
+        samples: samples,
+        sampleRate: sampleRate,
+        tNativeUs: tNativeUs,
+      ),
+    );
   }
 
   void pushRouteChange(String platformRouteTag) {

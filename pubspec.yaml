@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ^3.11.0
@@ -72,6 +72,8 @@ dependencies:
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
 
@@ -98,6 +100,8 @@ flutter:
     - assets/config/posture-contract.json
     - assets/config/audio-contract.json
     - assets/content/library.json
+    - assets/content/guitar_journey.v1.json
+    - assets/config/guitar-observation.v1.json
     # OFL lisans metinleri — paketlenmiş font DOSYALARIYLA BİRLİKTE dağıtılmak
     # OFL §2'nin şartı (D1, H-34/H-40 bağı: google_fonts kalktı, yazı tipleri
     # artık gömülü — lisans de gömülü olmalı).

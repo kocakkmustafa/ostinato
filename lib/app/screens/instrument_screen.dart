@@ -8,6 +8,7 @@ import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import 'course_screen.dart';
+import 'guitar_journey_screen.dart';
 
 /// Çalgı sayfası — dürüstlük kutusu ürünün vitrini (§7). Tam genişlik,
 /// kurs listesinin ÜSTÜNDE, katlanabilir DEĞİL.
@@ -145,6 +146,78 @@ class InstrumentScreenRoute extends StatelessWidget {
                     const SizedBox(height: 20),
                     kicker(localized(context, 'Courses', 'Kurslar')),
                     const SizedBox(height: 10),
+                    if (discipline.id == 'guitar') ...<Widget>[
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          key: const Key('guitar-journey-entry'),
+                          borderRadius: BorderRadius.circular(20),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => const GuitarJourneyScreen(),
+                            ),
+                          ),
+                          child: Ink(
+                            padding: const EdgeInsets.all(17),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              gradient: hue.softGradient,
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: .8),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        localized(
+                                          context,
+                                          'Guitar: first sound to independent playing',
+                                          'Gitar: ilk sesten bağımsız çalmaya',
+                                        ),
+                                        style: hankenText(
+                                          size: 19,
+                                          weight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    const Icon(
+                                      Icons.chevron_right,
+                                      color: OstinatoColors.textFaint,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 7),
+                                Text(
+                                  localized(
+                                    context,
+                                    '10 MODULES · 60 LESSONS · SELF-GUIDED',
+                                    '10 MODÜL · 60 DERS · KENDİ ÇALIŞMAN',
+                                  ),
+                                  style: monoText(color: hue.ink),
+                                ),
+                                const SizedBox(height: 9),
+                                Text(
+                                  localized(
+                                    context,
+                                    'A complete original learning path with practice and two final performances. Progress is your own report; automatic note scoring is off.',
+                                    'Çalışmalar ve iki bitirme performansıyla tam özgün öğrenme yolu. İlerleme kendi beyanındır; otomatik nota puanı kapalıdır.',
+                                  ),
+                                  style: hankenText(
+                                    size: 13.5,
+                                    color: OstinatoColors.textBody,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                    ],
                     for (final Course c in discipline.courses)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),

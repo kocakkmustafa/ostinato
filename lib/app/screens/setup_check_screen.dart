@@ -436,7 +436,7 @@ class _RoomGapNotice extends StatelessWidget {
                 Text(
                   'The design calls for four seconds of quiet to measure '
                   'the room before you play. That capture is not wired '
-                  '— there is no microphone input in this build, so we are '
+                  'in these posture lessons, so we are '
                   'not showing a fake progress bar for it. Camera setup is '
                   'real; this step is a named gap.',
                   key: const Key('setup-room-gap-body'),

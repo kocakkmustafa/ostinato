@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/content.dart';
+import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
+import 'package:ostinato/app/screens/settings_screen.dart';
 import 'package:ostinato/main.dart';
 
 /// İlk açılış akışı — O-039.
@@ -26,7 +28,6 @@ void main() {
     // Kabuk açılışta bunu da yüklüyor; `rootBundle` string'leri ÖNBELLEKLER,
     // burada bir kez okumak testteki açılışı deterministik yapar.
     cueText = await CueTextResolver.load();
-
   });
 
   // Ders #3: gerçek metin fixture'dan uzun, `flutter_test` varsayılanı ~800pt
@@ -54,47 +55,135 @@ void main() {
   /// `runAsync` penceresine taşması) fontlar paketlenince ORTADAN KALKTI —
   /// ama `rootBundle` async'i hâlâ gerçek, ayrım o yüzden BOZULMADI. Dallanma
   /// burada bu kod tabanının geri kalanıyla AYNI desenle sınanıyor.
-  Future<void> boot(WidgetTester t, OnboardingStore store,
-      {bool alreadyOnboarded = false}) async {
-    await t.pumpWidget(ContentRepositoryScope(
-      repo: repo,
-      cueText: cueText,
-      child: MaterialApp(
-        home: OstinatoHome(
-          repo: repo,
-          cueText: cueText,
-          store: store,
-          alreadyOnboarded: alreadyOnboarded,
+  Future<void> boot(
+    WidgetTester t,
+    OnboardingStore store, {
+    bool alreadyOnboarded = false,
+  }) async {
+    await t.pumpWidget(
+      ContentRepositoryScope(
+        repo: repo,
+        cueText: cueText,
+        child: MaterialApp(
+          home: OstinatoHome(
+            repo: repo,
+            cueText: cueText,
+            store: store,
+            alreadyOnboarded: alreadyOnboarded,
+          ),
         ),
       ),
-    ));
+    );
     await settle(t);
   }
 
+  for (final language in ['en', 'tr']) {
+    testWidgets(
+      'current course and closed camera copy is visible in $language',
+      (tester) async {
+        Widget host(Widget child) => ContentRepositoryScope(
+          repo: repo,
+          cueText: cueText,
+          child: MaterialApp(
+            locale: Locale(language),
+            supportedLocales: appSupportedLocales,
+            localizationsDelegates: appLocalizationsDelegates,
+            home: child,
+          ),
+        );
+        await tester.pumpWidget(
+          host(
+            OnboardingScreen(
+              repo: repo,
+              store: InMemoryOnboardingStore(),
+              onFinished: () {},
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining(
+            language == 'tr'
+                ? 'Kurs hesap, kamera veya mikrofon olmadan çalışır'
+                : 'The course works without an account, camera or microphone',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.textContaining(
+            language == 'tr'
+                ? 'canlı kamera pratiği ve abonelik satışı kapalıdır'
+                : 'Live camera practice and subscription sales are closed',
+          ),
+          findsOneWidget,
+        );
+        expect(find.textContaining('compares how you sit'), findsNothing);
+        await tester.tap(find.byKey(const Key('onboarding-primary')));
+        await settle(tester);
+        await tester.tap(find.byKey(const Key('onboarding-primary')));
+        await settle(tester);
+        expect(
+          find.textContaining(
+            language == 'tr'
+                ? 'Kurs video yakalamaz'
+                : 'The course does not capture video',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.textContaining(
+            language == 'tr' ? 'tek nota gözlemi' : 'single-note observation',
+          ),
+          findsWidgets,
+        );
+        await tester.pumpWidget(host(const SettingsScreen()));
+        await tester.pumpAndSettle();
+        expect(
+          find.textContaining(
+            language == 'tr'
+                ? 'canlı kamera duruş pratiği kapalıdır'
+                : 'Live camera posture practice is closed',
+          ),
+          findsOneWidget,
+        );
+        expect(tester.takeException(), isNull);
+      },
+    );
+  }
+
   group('kabuk kapısı', () {
-    testWidgets('İLK açılış: karşılama gelir, kütüphane GELMEZ',
-        (WidgetTester t) async {
+    testWidgets('İLK açılış: karşılama gelir, kütüphane GELMEZ', (
+      WidgetTester t,
+    ) async {
       await boot(t, InMemoryOnboardingStore());
 
       expect(find.byType(OnboardingScreen), findsOneWidget);
-      expect(find.byType(LibraryScreen), findsNothing,
-          reason: 'karşılama bir KAPI olmalı — atlanabilirse kullanıcı '
-              'wellness beyanını ve izin gerekçesini hiç görmeden kameraya '
-              'çıkar');
+      expect(
+        find.byType(LibraryScreen),
+        findsNothing,
+        reason:
+            'karşılama bir KAPI olmalı — atlanabilirse kullanıcı '
+            'wellness beyanını ve izin gerekçesini hiç görmeden kameraya '
+            'çıkar',
+      );
       expect(t.takeException(), isNull);
     });
 
     testWidgets('İKİNCİ açılış: doğrudan kütüphane', (WidgetTester t) async {
-      await boot(t, InMemoryOnboardingStore(complete: true),
-          alreadyOnboarded: true);
+      await boot(
+        t,
+        InMemoryOnboardingStore(complete: true),
+        alreadyOnboarded: true,
+      );
 
       expect(find.byType(LibraryScreen), findsOneWidget);
       expect(find.byType(OnboardingScreen), findsNothing);
       expect(t.takeException(), isNull);
     });
 
-    testWidgets('üç adım geçilir, işaret KAYDEDİLİR, kütüphane açılır',
-        (WidgetTester t) async {
+    testWidgets('üç adım geçilir, işaret KAYDEDİLİR, kütüphane açılır', (
+      WidgetTester t,
+    ) async {
       final InMemoryOnboardingStore store = InMemoryOnboardingStore();
       await boot(t, store);
 
@@ -106,9 +195,13 @@ void main() {
       await t.tap(find.byKey(const Key('onboarding-primary')));
       await settle(t);
       expect(find.byKey(const Key('onboarding-sensors-title')), findsOneWidget);
-      expect(store.markCalls, 0,
-          reason: 'son adıma VARMAK bitirmek değildir — işaret ancak '
-              'kullanıcı akışı kapatınca yazılmalı');
+      expect(
+        store.markCalls,
+        0,
+        reason:
+            'son adıma VARMAK bitirmek değildir — işaret ancak '
+            'kullanıcı akışı kapatınca yazılmalı',
+      );
 
       await t.tap(find.byKey(const Key('onboarding-primary')));
       await settle(t);
@@ -120,19 +213,20 @@ void main() {
     });
 
     testWidgets(
-        'depo YAZAMASA bile aynı oturumda karşılama tekrar GÖSTERİLMEZ',
-        (WidgetTester t) async {
-      // `FileOnboardingStore.markComplete` sessizce başarısız olabiliyor
-      // (bilerek — bkz. gerekçesi). O durumda bile bu oturumda kullanıcı
-      // akışa geri düşmemeli.
-      await boot(t, _DeafStore());
-      for (int i = 0; i < 3; i++) {
-        await t.tap(find.byKey(const Key('onboarding-primary')));
-        await settle(t);
-      }
-      expect(find.byType(LibraryScreen), findsOneWidget);
-      expect(t.takeException(), isNull);
-    });
+      'depo YAZAMASA bile aynı oturumda karşılama tekrar GÖSTERİLMEZ',
+      (WidgetTester t) async {
+        // `FileOnboardingStore.markComplete` sessizce başarısız olabiliyor
+        // (bilerek — bkz. gerekçesi). O durumda bile bu oturumda kullanıcı
+        // akışa geri düşmemeli.
+        await boot(t, _DeafStore());
+        for (int i = 0; i < 3; i++) {
+          await t.tap(find.byKey(const Key('onboarding-primary')));
+          await settle(t);
+        }
+        expect(find.byType(LibraryScreen), findsOneWidget);
+        expect(t.takeException(), isNull);
+      },
+    );
   });
 
   group('içerik türetimi', () {
@@ -140,23 +234,33 @@ void main() {
     /// Bu test onların kütüphaneden TÜREDİĞİNİ ölçer: beklenen değerler
     /// burada da sabit DEĞİL, aynı `repo`dan hesaplanır — test ile ekran
     /// aynı kaynağı okur, ikisi birlikte kayar ya da birlikte kalır.
-    testWidgets('kapsam sayıları library.json ile aynı', (WidgetTester t) async {
-      final List<Discipline> live =
-          repo.disciplines.where((Discipline d) => d.status == 'live').toList();
-      final List<Lesson> all =
-          <Lesson>[for (final Discipline d in live) ...d.lessons];
-      final int locked =
-          all.where((Lesson l) => l.kind == LessonKind.locked).length;
-      final int demo =
-          all.where((Lesson l) => l.kind == LessonKind.demoOnly).length;
+    testWidgets('kapsam sayıları library.json ile aynı', (
+      WidgetTester t,
+    ) async {
+      final List<Discipline> live = repo.disciplines
+          .where((Discipline d) => d.status == 'live')
+          .toList();
+      final List<Lesson> all = <Lesson>[
+        for (final Discipline d in live) ...d.lessons,
+      ];
+      final int locked = all
+          .where((Lesson l) => l.kind == LessonKind.locked)
+          .length;
+      final int demo = all
+          .where((Lesson l) => l.kind == LessonKind.demoOnly)
+          .length;
 
       await boot(t, InMemoryOnboardingStore());
       await t.tap(find.byKey(const Key('onboarding-primary')));
       await settle(t);
 
       String valueOf(String key) => t
-          .widgetList<Text>(find.descendant(
-              of: find.byKey(Key(key)), matching: find.byType(Text)))
+          .widgetList<Text>(
+            find.descendant(
+              of: find.byKey(Key(key)),
+              matching: find.byType(Text),
+            ),
+          )
           .first
           .data!;
 
@@ -173,10 +277,16 @@ void main() {
       // çıktı. Taban bir kez doğruyken bile yanlış türden bir iddiaydı —
       // ürünün büyüklüğünü değil, türetimin çalıştığını ölçmeliyiz.
       expect(live.length, greaterThan(0));
-      expect(all.length, greaterThan(live.length),
-          reason: 'her çalgının en az bir dersi olmalı');
-      expect(locked, greaterThan(0),
-          reason: 'kilitli ders sayısı 0 ise "kilitli" satırı anlamsız');
+      expect(
+        all.length,
+        greaterThan(live.length),
+        reason: 'her çalgının en az bir dersi olmalı',
+      );
+      expect(
+        locked,
+        greaterThan(0),
+        reason: 'kilitli ders sayısı 0 ise "kilitli" satırı anlamsız',
+      );
       expect(demo, greaterThan(0));
     });
   });
@@ -193,8 +303,9 @@ void main() {
       }
     });
 
-    testWidgets('mikrofon kartı YOKLUĞU söyler, yeteneği DEĞİL',
-        (WidgetTester t) async {
+    testWidgets('mikrofon kartı YOKLUĞU söyler, yeteneği DEĞİL', (
+      WidgetTester t,
+    ) async {
       await boot(t, InMemoryOnboardingStore());
       await t.tap(find.byKey(const Key('onboarding-primary')));
       await settle(t);
@@ -202,9 +313,12 @@ void main() {
       await settle(t);
 
       final String mic = t
-          .widgetList<Text>(find.descendant(
+          .widgetList<Text>(
+            find.descendant(
               of: find.byKey(const Key('onboarding-microphone-card')),
-              matching: find.byType(Text)))
+              matching: find.byType(Text),
+            ),
+          )
           .map((Text w) => w.data ?? '')
           .join(' ');
 
@@ -224,23 +338,29 @@ void main() {
       // kural B/C'nin TERS YÖNÜ alır (O-059) — o da eski cümleyi zaten
       // kırmızı yakacak. İki katman, tek çapa, çelişki yok.
       final bool micDeclared =
-          File('ios/Runner/Info.plist').readAsStringSync()
-                  .contains('NSMicrophoneUsageDescription') ||
-              File('android/app/src/main/AndroidManifest.xml')
-                  .readAsStringSync()
-                  .contains('android.permission.RECORD_AUDIO');
+          File(
+            'ios/Runner/Info.plist',
+          ).readAsStringSync().contains('NSMicrophoneUsageDescription') ||
+          File(
+            'android/app/src/main/AndroidManifest.xml',
+          ).readAsStringSync().contains('android.permission.RECORD_AUDIO');
       if (micDeclared) {
-        expect(mic, isNot(contains('no microphone input in this build')),
-            reason: 'mikrofon artık BEYAN EDİLMİŞ — yokluk cümlesi bugün '
-                'yanlış, kart güncellenmeli');
+        expect(
+          mic,
+          isNot(contains('no microphone input in this build')),
+          reason:
+              'mikrofon artık BEYAN EDİLMİŞ — yokluk cümlesi bugün '
+              'yanlış, kart güncellenmeli',
+        );
       } else {
         expect(mic, contains('no microphone input in this build'));
       }
       expect(mic.toLowerCase(), isNot(contains('listens')));
     });
 
-    testWidgets('wellness beyanı akışın İÇİNDE, ayarlara gömülü değil',
-        (WidgetTester t) async {
+    testWidgets('wellness beyanı akışın İÇİNDE, ayarlara gömülü değil', (
+      WidgetTester t,
+    ) async {
       await boot(t, InMemoryOnboardingStore());
       await t.tap(find.byKey(const Key('onboarding-primary')));
       await settle(t);
@@ -248,9 +368,12 @@ void main() {
       await settle(t);
 
       final String text = t
-          .widgetList<Text>(find.descendant(
+          .widgetList<Text>(
+            find.descendant(
               of: find.byKey(const Key('onboarding-wellness-card')),
-              matching: find.byType(Text)))
+              matching: find.byType(Text),
+            ),
+          )
           .map((Text w) => w.data ?? '')
           .join(' ');
       expect(text, contains('does not diagnose'));
