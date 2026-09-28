@@ -2391,7 +2391,7 @@
             "tr": "Geçişli hücreyi çalıp açık La ile perdeli Do'nun oktavını doğru bulabiliyorum."
           },
           "commonError": {
-            "en": "The picking hand continues on string 6 after the note moves to 5. Name the string crossing aloud, rehearse it without fretting and restore the left-hand notes afterward.",
+            "en": "The picking hand continues on string 6 after the note moves to 5. Name the string crossing aloud, rehearse it without fretting and restore the fretted notes afterward.",
             "tr": "Nota tel 5'e geçince çalan el tel 6'da kalıyor. Tel geçişini sesli söyle, perde basmadan prova et; sonra basan el notalarını ekle."
           },
           "adaptation": {
@@ -2429,7 +2429,7 @@
               "tr": "Önce yavaş, sonra isteğe bağlı rahat vuruşta göster; geçme BPM'i yok."
             },
             "errorToShow": {
-              "en": "The picking hand continues on string 6 after the note moves to 5. Name the string crossing aloud, rehearse it without fretting and restore the left-hand notes afterward.",
+              "en": "The picking hand continues on string 6 after the note moves to 5. Name the string crossing aloud, rehearse it without fretting and restore the fretted notes afterward.",
               "tr": "Nota tel 5'e geçince çalan el tel 6'da kalıyor. Tel geçişini sesli söyle, perde basmadan prova et; sonra basan el notalarını ekle."
             },
             "adaptation": {
@@ -2544,8 +2544,8 @@
               }
             ],
             "earTraining": {
-              "en": "Compare E2→A2 and B2→C3 by distance and direction without yet needing interval labels.",
-              "tr": "Henüz aralık adı gerekmeksizin Mi2→La2 ve Si2→Do3 ün mesafesini ve yönünü karşılaştır."
+              "en": "Compare E2→A2 and B2→C3 by distance and direction without naming intervals.",
+              "tr": "Mi2→La2 ve Si2→Do3 çiftlerinin mesafesini ve yönünü aralık adlarını kullanmadan karşılaştır."
             },
             "errorCorrection": {
               "symptom": {
@@ -2554,7 +2554,7 @@
               },
               "possibleCauseStatus": "instructional_hypothesis_not_diagnosis",
               "action": {
-                "en": "Name the string crossing aloud, rehearse it without fretting and restore the left-hand notes afterward.",
+                "en": "Name the string crossing aloud, rehearse it without fretting and restore the fretted notes afterward.",
                 "tr": "Tel geçişini sesli söyle, perde basmadan prova et; sonra basan el notalarını ekle."
               }
             },
@@ -13346,8 +13346,8 @@
               "tr": "İki tel temasını kısmi Fa x-x-3-2-1-1'e koy; her çalan notayı yavaş denetle."
             },
             {
-              "en": "After comfortable trials move the two-string barre one fret as a unit, then release; do not introduce full six-string contact yet.",
-              "tr": "Rahat denemelerden sonra iki tel bareyi birlikte bir perde taşıyıp bırak; henüz altı tel teması ekleme."
+              "en": "After comfortable trials move the two-string barre one fret as a unit, then release; keep the barre contact limited to two strings in this drill.",
+              "tr": "Rahat denemelerden sonra iki tel bareyi birlikte bir perde taşıyıp bırak; bu alıştırmada bare temasını iki telle sınırla."
             }
           ],
           "practice": {
@@ -13390,8 +13390,8 @@
               "tr": "konum değişimi ve gevşeme için yandan ve üstten sap görünümü"
             },
             "sequence": {
-              "en": "At fret 1 cover strings 1 and 2 briefly and pluck each separately; release fully after each trial.\nPlace that two-string contact inside partial Fx-x-3-2-1-1, checking each sounded note slowly.\nAfter comfortable trials move the two-string barre one fret as a unit, then release; do not introduce full six-string contact yet.",
-              "tr": "Birinci perdede tel 1 ve 2'yi kısa kapatıp ayrı çek; her denemeden sonra tam bırak.\nİki tel temasını kısmi Fa x-x-3-2-1-1'e koy; her çalan notayı yavaş denetle.\nRahat denemelerden sonra iki tel bareyi birlikte bir perde taşıyıp bırak; henüz altı tel teması ekleme."
+              "en": "At fret 1 cover strings 1 and 2 briefly and pluck each separately; release fully after each trial.\nPlace that two-string contact inside partial Fx-x-3-2-1-1, checking each sounded note slowly.\nAfter comfortable trials move the two-string barre one fret as a unit, then release; keep the barre contact limited to two strings in this drill.",
+              "tr": "Birinci perdede tel 1 ve 2'yi kısa kapatıp ayrı çek; her denemeden sonra tam bırak.\nİki tel temasını kısmi Fa x-x-3-2-1-1'e koy; her çalan notayı yavaş denetle.\nRahat denemelerden sonra iki tel bareyi birlikte bir perde taşıyıp bırak; bu alıştırmada bare temasını iki telle sınırla."
             },
             "tempo": {
               "en": "Demonstrate slowly, then at an optional comfortable pulse; no pass BPM.",
@@ -13487,8 +13487,8 @@
                 "id": "guitar.journey.intermediate.partial_barre.lab.transfer",
                 "stage": "transfer",
                 "task": {
-                  "en": "After comfortable trials move the two-string barre one fret as a unit, then release; do not introduce full six-string contact yet.",
-                  "tr": "Rahat denemelerden sonra iki tel bareyi birlikte bir perde taşıyıp bırak; henüz altı tel teması ekleme."
+                  "en": "After comfortable trials move the two-string barre one fret as a unit, then release; keep the barre contact limited to two strings in this drill.",
+                  "tr": "Rahat denemelerden sonra iki tel bareyi birlikte bir perde taşıyıp bırak; bu alıştırmada bare temasını iki telle sınırla."
                 },
                 "suggested_minutes_range": [
                   3,
@@ -13547,8 +13547,8 @@
               ]
             },
             "transfer": {
-              "en": "After comfortable trials move the two-string barre one fret as a unit, then release; do not introduce full six-string contact yet.",
-              "tr": "Rahat denemelerden sonra iki tel bareyi birlikte bir perde taşıyıp bırak; henüz altı tel teması ekleme."
+              "en": "After comfortable trials move the two-string barre one fret as a unit, then release; keep the barre contact limited to two strings in this drill.",
+              "tr": "Rahat denemelerden sonra iki tel bareyi birlikte bir perde taşıyıp bırak; bu alıştırmada bare temasını iki telle sınırla."
             },
             "masteryCriteria": [
               {

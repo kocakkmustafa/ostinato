@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_account/motion_account.dart';
 
+import '../app_locale.dart';
 import 'practice_audio_lease.dart';
 
 /// No production call may infer a native close receipt from this placeholder.
@@ -490,46 +491,54 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
   @override
   Widget build(BuildContext context) {
     if (_owner.blocked) {
-      final tr =
-          WidgetsBinding.instance.platformDispatcher.locale.languageCode ==
-          'tr';
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        supportedLocales: const [Locale('tr'), Locale('en')],
-        home: Scaffold(
-          body: SafeArea(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      tr
-                          ? 'Ses kaynağının kapandığı doğrulanamadı.'
-                          : 'Audio shutdown could not be confirmed.',
-                      textAlign: TextAlign.center,
-                    ),
-                    if (_owner.nativeReplyPending) ...[
-                      const SizedBox(height: 12),
+        supportedLocales: appSupportedLocales,
+        localizationsDelegates: appLocalizationsDelegates,
+        home: Builder(
+          builder: (statusContext) => Scaffold(
+            body: SafeArea(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
                       Text(
-                        tr
-                            ? 'Önceki cihaz yanıtı hâlâ bekleniyor.'
-                            : 'A previous device reply is still pending.',
+                        localized(
+                          statusContext,
+                          'Audio shutdown could not be confirmed.',
+                          'Ses kaynağının kapandığı doğrulanamadı.',
+                        ),
                         textAlign: TextAlign.center,
                       ),
-                    ],
-                    const SizedBox(height: 16),
-                    FilledButton(
-                      key: const Key('ostinato-audio-root-recover'),
-                      onPressed: _owner.recovering
-                          ? null
-                          : () => unawaited(_owner.recover()),
-                      child: Text(
-                        tr ? 'Kapanmayı yeniden dene' : 'Retry shutdown',
+                      if (_owner.nativeReplyPending) ...[
+                        const SizedBox(height: 12),
+                        Text(
+                          localized(
+                            statusContext,
+                            'A previous device reply is still pending.',
+                            'Önceki cihaz yanıtı hâlâ bekleniyor.',
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                      const SizedBox(height: 16),
+                      FilledButton(
+                        key: const Key('ostinato-audio-root-recover'),
+                        onPressed: _owner.recovering
+                            ? null
+                            : () => unawaited(_owner.recover()),
+                        child: Text(
+                          localized(
+                            statusContext,
+                            'Retry shutdown',
+                            'Kapanmayı yeniden dene',
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

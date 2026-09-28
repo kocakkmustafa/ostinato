@@ -146,18 +146,18 @@ class _GuitarNoteObservationScreenState
       return switch (controller.phase) {
         NoteObservationPhase.analysisTimedOut => localized(
           context,
-          'Audio analysis did not finish in time. Stopping the microphone; closure has not been confirmed yet. This is a processing issue, not a playing result. You can continue the course while observation is unavailable.',
-          'Ses analizi zamanında tamamlanmadı. Mikrofon durduruluyor; kapatıldığı henüz doğrulanmadı. Bu bir işlem sorunu, çalma sonucu değil. Gözlem kullanılamazken kursa devam edebilirsin.',
+          'Audio analysis did not finish in time. Stopping the microphone; closure has not been confirmed. This is a processing issue, not a playing result. You can continue the course while observation is unavailable.',
+          'Ses analizi zamanında tamamlanmadı. Mikrofon durduruluyor; kapatıldığı doğrulanmadı. Bu bir işlem sorunu, çalma sonucu değil. Gözlem kullanılamazken kursa devam edebilirsin.',
         ),
         NoteObservationPhase.analysisSettling => localized(
           context,
-          'Stopping the microphone while earlier audio analysis finishes; closure has not been confirmed yet. No playing result was produced. You can continue the course.',
-          'Önceki ses analizi tamamlanırken mikrofon durduruluyor; kapatıldığı henüz doğrulanmadı. Çalma sonucu üretilmedi. Kursa devam edebilirsin.',
+          'Stopping the microphone while earlier audio analysis finishes; closure has not been confirmed. No playing result was produced. You can continue the course.',
+          'Önceki ses analizi tamamlanırken mikrofon durduruluyor; kapatıldığı doğrulanmadı. Çalma sonucu üretilmedi. Kursa devam edebilirsin.',
         ),
         _ => localized(
           context,
-          'Requesting microphone stop; closure has not been confirmed yet. Observation cannot restart while the stop request is pending.',
-          'Mikrofonun durdurulması isteniyor; kapatıldığı henüz doğrulanmadı. Durdurma isteği beklerken gözlem yeniden başlatılamaz.',
+          'Requesting microphone stop; closure has not been confirmed. Observation cannot restart while the stop request is pending.',
+          'Mikrofonun durdurulması isteniyor; kapatıldığı doğrulanmadı. Durdurma isteği beklerken gözlem yeniden başlatılamaz.',
         ),
       };
     }

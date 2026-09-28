@@ -173,10 +173,10 @@ class SettingsScreen extends StatelessWidget {
                 title: localized(context, 'Sharing', 'Paylaşım'),
                 body: localized(
                   context,
-                  'Raw video never leaves this device. There is no '
-                      'setting that changes that.',
-                  'Ham video cihazınızdan çıkmaz. Bunu değiştiren bir ayar '
-                      'yoktur.',
+                  'Raw video is never stored on this device. It never leaves '
+                      'this device. There is no setting that changes that.',
+                  'Ham video bu cihazda saklanmaz ve cihazdan çıkmaz. '
+                      'Bunu değiştiren bir ayar yoktur.',
                 ),
               ),
               const SizedBox(height: 14),

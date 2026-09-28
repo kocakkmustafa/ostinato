@@ -146,6 +146,14 @@ void main() {
           ),
           findsOneWidget,
         );
+        expect(
+          find.textContaining(
+            language == 'tr'
+                ? 'Ham video bu cihazda saklanmaz ve cihazdan çıkmaz'
+                : 'Raw video is never stored on this device',
+          ),
+          findsOneWidget,
+        );
         expect(tester.takeException(), isNull);
       },
     );

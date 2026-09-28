@@ -741,7 +741,11 @@ void main() {
       }
     });
     await t.pumpWidget(
-      MaterialApp(home: GuitarNoteObservationScreen(controller: controller)),
+      MaterialApp(
+        supportedLocales: appSupportedLocales,
+        localizationsDelegates: appLocalizationsDelegates,
+        home: GuitarNoteObservationScreen(controller: controller),
+      ),
     );
     await acknowledgeSession(t);
     await startObservation(t);
@@ -758,6 +762,16 @@ void main() {
         .data!;
     expect(pendingCopy, contains('closure has not been confirmed'));
     expect(pendingCopy, isNot(contains('microphone is off')));
+    t.binding.platformDispatcher.localesTestValue = const [Locale('tr')];
+    addTearDown(t.binding.platformDispatcher.clearLocalesTestValue);
+    await t.pump();
+    final pendingCopyTr = t
+        .widget<Text>(find.byKey(const Key('observation-status')))
+        .data!;
+    expect(pendingCopyTr, contains('kapatıldığı doğrulanmadı'));
+    expect(pendingCopyTr, isNot(contains('kapatıldığı doğrulandı')));
+    t.binding.platformDispatcher.clearLocalesTestValue();
+    await t.pump();
     expect(
       t
           .widget<FilledButton>(find.byKey(const Key('observation-start-stop')))

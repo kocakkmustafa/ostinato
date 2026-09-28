@@ -511,6 +511,17 @@ void main() {
         find.byKey(const Key('ostinato-audio-root-recover')),
         findsOneWidget,
       );
+      tester.binding.platformDispatcher.localesTestValue = const [Locale('tr')];
+      addTearDown(tester.binding.platformDispatcher.clearLocalesTestValue);
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Ses kaynağının kapandığı doğrulanamadı.'),
+        findsOneWidget,
+      );
+      expect(find.text('Kapanmayı yeniden dene'), findsOneWidget);
+      tester.binding.platformDispatcher.clearLocalesTestValue();
+      await tester.pumpAndSettle();
+      expect(find.text('Retry shutdown'), findsOneWidget);
 
       phase.value = MotionIdentityPhase.verifying;
       await tester.pump();

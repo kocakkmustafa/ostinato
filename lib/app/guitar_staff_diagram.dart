@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'app_locale.dart';
 import 'design/ostinato_theme.dart';
 import 'design/widgets.dart';
 import 'guitar_journey.dart';
@@ -47,7 +48,6 @@ class GuitarStaffDiagram extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tr = Localizations.localeOf(context).languageCode == 'tr';
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: GlassCard(
@@ -56,14 +56,16 @@ class GuitarStaffDiagram extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              tr ? 'Porteyi oku' : 'Read the staff',
+              localized(context, 'Read the staff', 'Porteyi oku'),
               style: hankenText(size: 17, weight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
             Text(
-              tr
-                  ? 'Sol anahtarı: aşağıdan ikinci çizgi G4. Gitar, yazılandan bir oktav pes seslenir.'
-                  : 'Treble clef: the second line from the bottom is G4. Guitar sounds one octave below the written pitch.',
+              localized(
+                context,
+                'Treble clef: the second line from the bottom is G4. Guitar sounds one octave below the written pitch.',
+                'Sol anahtarı: aşağıdan ikinci çizgi G4. Gitar, yazılandan bir oktav pes seslenir.',
+              ),
               style: hankenText(size: 13, height: 1.5),
             ),
             _staff(guitarOpenStaffNotes),
@@ -71,31 +73,39 @@ class GuitarStaffDiagram extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
-                  tr
-                      ? '${note.string}. açık tel: yazılı ${note.written} → seslenen ${note.sounding}'
-                      : 'Open string ${note.string}: written ${note.written} → sounding ${note.sounding}',
+                  localized(
+                    context,
+                    'Open string ${note.string}: written ${note.written} → sounding ${note.sounding}',
+                    '${note.string}. açık tel: yazılı ${note.written} → seslenen ${note.sounding}',
+                  ),
                   style: hankenText(size: 13, height: 1.4),
                 ),
               ),
             const SizedBox(height: 8),
             Text(
-              tr
-                  ? 'İlk telde üç dörtlük nota'
-                  : 'Three quarter notes on string 1',
+              localized(
+                context,
+                'Three quarter notes on string 1',
+                'İlk telde üç dörtlük nota',
+              ),
               style: hankenText(size: 15, weight: FontWeight.w600),
             ),
             _staff(guitarFirstStringStaffNotes),
             Text(
-              tr
-                  ? 'Yazılı E5 – F5 – G5; seslenen E4 – F4 – G4. İlk tel perdeleri: 0 – 1 – 3. Dolu baş ve sap bir dörtlük notayı gösterir.'
-                  : 'Written E5 – F5 – G5; sounding E4 – F4 – G4. String 1 frets: 0 – 1 – 3. A filled head and stem show a quarter note.',
+              localized(
+                context,
+                'Written E5 – F5 – G5; sounding E4 – F4 – G4. String 1 frets: 0 – 1 – 3. A filled head and stem show a quarter note.',
+                'Yazılı E5 – F5 – G5; seslenen E4 – F4 – G4. İlk tel perdeleri: 0 – 1 – 3. Dolu baş ve sap bir dörtlük notayı gösterir.',
+              ),
               style: hankenText(size: 13, height: 1.5),
             ),
             const SizedBox(height: 10),
             Text(
-              tr
-                  ? 'Özgün öğretim şeması; ses ölçümü veya başarı testi değildir. Kısa ek çizgiler porte dışındaki notaları gösterir.'
-                  : 'Original teaching schematic; not an audio measurement or skill test. Short ledger lines show pitches outside the staff.',
+              localized(
+                context,
+                'Original teaching schematic; not an audio measurement or skill test. Short ledger lines show pitches outside the staff.',
+                'Özgün öğretim şeması; ses ölçümü veya başarı testi değildir. Kısa ek çizgiler porte dışındaki notaları gösterir.',
+              ),
               style: hankenText(size: 12, height: 1.5),
             ),
           ],
@@ -193,20 +203,30 @@ class GuitarFirstReadScore extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            tr ? 'Özgün dört ölçülük porte' : 'Original four-bar staff',
+            localized(
+              context,
+              'Original four-bar staff',
+              'Özgün dört ölçülük porte',
+            ),
             style: hankenText(size: 17, weight: FontWeight.w600),
           ),
           const SizedBox(height: 8),
           Text(
-            tr
-                ? 'Sol anahtarı, 4/4. Gitarın yazılı notaları duyulandan bir oktav yukarıdadır. Porteyi veya aşağıdaki büyütülebilir nota ve süre metnini kullan; metin ekran okuyucuyla da okunur ve ikisi aynı dört ölçüyü anlatır.'
-                : 'Treble clef, 4/4. Written guitar notes are one octave above their sounding pitches. Use the staff or the scalable note-and-duration text below; the text also works with a screen reader, and both describe the same four bars.',
+            localized(
+              context,
+              'Treble clef, 4/4. Written guitar notes are one octave above their sounding pitches. Use the staff or the scalable note-and-duration text below; the text also works with a screen reader, and both describe the same four bars.',
+              'Sol anahtarı, 4/4. Gitarın yazılı notaları duyulandan bir oktav yukarıdadır. Porteyi veya aşağıdaki büyütülebilir nota ve süre metnini kullan; metin ekran okuyucuyla da okunur ve ikisi aynı dört ölçüyü anlatır.',
+            ),
             style: hankenText(size: 13, height: 1.5),
           ),
           for (var barIndex = 0; barIndex < score.bars.length; barIndex++) ...[
             const SizedBox(height: 12),
             Text(
-              tr ? '${barIndex + 1}. ölçü' : 'Bar ${barIndex + 1}',
+              localized(
+                context,
+                'Bar ${barIndex + 1}',
+                '${barIndex + 1}. ölçü',
+              ),
               style: hankenText(size: 14, weight: FontWeight.w600),
             ),
             ExcludeSemantics(
@@ -228,9 +248,11 @@ class GuitarFirstReadScore extends StatelessWidget {
           ],
           const SizedBox(height: 12),
           Text(
-            tr
-                ? 'Nota ve sürelerin okunabilir karşılığı'
-                : 'Readable notes and durations',
+            localized(
+              context,
+              'Readable notes and durations',
+              'Nota ve sürelerin okunabilir karşılığı',
+            ),
             style: hankenText(size: 14, weight: FontWeight.w600),
           ),
           for (var barIndex = 0; barIndex < score.bars.length; barIndex++)
@@ -243,9 +265,11 @@ class GuitarFirstReadScore extends StatelessWidget {
             ),
           const SizedBox(height: 12),
           Text(
-            tr
-                ? 'Bu kart öz denetimli çalışmadır; ses ölçümü veya puanlı deşifre sınavı değildir.'
-                : 'This card is self-guided practice; it is not an audio measurement or graded sight-reading exam.',
+            localized(
+              context,
+              'This card is self-guided practice; it is not an audio measurement or graded sight-reading exam.',
+              'Bu kart öz denetimli çalışmadır; ses ölçümü veya puanlı deşifre sınavı değildir.',
+            ),
             style: hankenText(size: 12, height: 1.5),
           ),
         ],
