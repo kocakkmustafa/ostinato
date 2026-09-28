@@ -5,6 +5,7 @@ import 'app/content.dart';
 import 'app/cue_text.dart';
 import 'app/app_locale.dart';
 import 'app/account_connection.dart';
+import 'app/audio/practice_audio_root.dart';
 import 'app/design/app_scope.dart';
 import 'app/design/ostinato_theme.dart';
 import 'app/onboarding_store.dart';
@@ -20,9 +21,16 @@ Future<void> main() async {
   try {
     final (runtime, accountConnection) = await initializeMotionAccount();
     runApp(
-      MotionIdentityGate(
-        runtime: runtime,
-        child: OstinatoApp(accountConnection: accountConnection),
+      OstinatoAudioRoot(
+        userId: runtime.userId,
+        phase: runtime.phase,
+        builder: (audioNavigatorHost) => MotionIdentityGate(
+          runtime: runtime,
+          child: OstinatoApp(
+            accountConnection: accountConnection,
+            audioNavigatorHost: audioNavigatorHost,
+          ),
+        ),
       ),
     );
   } on Object {
@@ -38,10 +46,13 @@ class OstinatoApp extends StatefulWidget {
     super.key,
     this.store = const FileOnboardingStore(),
     this.accountConnection,
-  });
+    PracticeAudioNavigatorHost? audioNavigatorHost,
+  }) : _audioNavigatorHost = audioNavigatorHost;
 
   final OnboardingStore store;
   final AccountConnection? accountConnection;
+  // Route widgets cannot read the root authority through an inherited scope.
+  final PracticeAudioNavigatorHost? _audioNavigatorHost;
 
   @override
   State<OstinatoApp> createState() => _OstinatoAppState();
@@ -103,30 +114,43 @@ class _OstinatoAppState extends State<OstinatoApp> {
         // GÖREMEZDİ — route_path_test.dart bunu ölçtü, main.dart'ta AYNI
         // hata olurdu (LibraryScreen'den herhangi bir dokunuş çökerdi).
         final AccountConnection? account = widget.accountConnection;
-        Widget accountApp(String? userId) => ContentRepositoryScope(
-          repo: repo,
-          cueText: cue,
-          child: AccountScope(
-            connection: account,
-            currentUserId: userId,
-            child: MaterialApp(
-              key: ValueKey<String>(
-                'ostinato-account-${userId ?? 'signed-out'}',
-              ),
-              title: 'Ostinato',
-              debugShowCheckedModeBanner: false,
-              theme: _theme,
-              supportedLocales: appSupportedLocales,
-              localizationsDelegates: appLocalizationsDelegates,
-              home: OstinatoHome(
-                repo: repo,
-                cueText: cue,
-                store: widget.store,
-                alreadyOnboarded: onboarded,
-              ),
+        Widget accountApp(String? userId) {
+          Widget materialApp(NavigatorObserver? observer) => MaterialApp(
+            key: ValueKey<String>('ostinato-account-${userId ?? 'signed-out'}'),
+            title: 'Ostinato',
+            debugShowCheckedModeBanner: false,
+            theme: _theme,
+            supportedLocales: appSupportedLocales,
+            localizationsDelegates: appLocalizationsDelegates,
+            navigatorObservers: observer == null
+                ? const <NavigatorObserver>[]
+                : <NavigatorObserver>[observer],
+            home: OstinatoHome(
+              repo: repo,
+              cueText: cue,
+              store: widget.store,
+              alreadyOnboarded: onboarded,
             ),
-          ),
-        );
+          );
+          final navigator = widget._audioNavigatorHost == null
+              ? materialApp(null)
+              : widget._audioNavigatorHost!.wrap(
+                  key: ValueKey<String>(
+                    'ostinato-audio-navigator-${userId ?? 'signed-out'}',
+                  ),
+                  builder: materialApp,
+                );
+          return ContentRepositoryScope(
+            repo: repo,
+            cueText: cue,
+            child: AccountScope(
+              connection: account,
+              currentUserId: userId,
+              child: navigator,
+            ),
+          );
+        }
+
         if (account == null) return accountApp(null);
         return ValueListenableBuilder<String?>(
           valueListenable: account.userId,

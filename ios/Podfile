@@ -49,4 +49,25 @@ post_install do |installer|
         (definitions + ['$(inherited)', 'PERMISSION_CAMERA=1', 'PERMISSION_MICROPHONE=1']).uniq
     end
   end
+
+  # RunnerTests is hosted by Runner. Loading the MediaPipe graph in both
+  # binaries registers its calculators twice before XCTest can start.
+  test_pods_targets = installer.aggregate_targets.select { |target| target.name == 'Pods-RunnerTests' }
+  raise 'Expected exactly one Pods-RunnerTests target' unless test_pods_targets.length == 1
+
+  test_pods = test_pods_targets.fetch(0)
+  expected_test_graph_flags = {
+    'OTHER_LDFLAGS[sdk=iphoneos*]' => '$(inherited) -force_load "$(PODS_ROOT)/MediaPipeTasksCommon/frameworks/graph_libraries/libMediaPipeTasksCommon_device_graph.a"',
+    'OTHER_LDFLAGS[sdk=iphonesimulator*]' => '$(inherited) -force_load "${PODS_ROOT}/MediaPipeTasksCommon/frameworks/graph_libraries/libMediaPipeTasksCommon_simulator_graph.a"',
+  }
+  test_configs = test_pods.xcconfigs
+  raise 'Unexpected RunnerTests configurations' unless test_configs.keys.sort == %w[Debug Profile Release]
+
+  test_configs.each do |name, config|
+    expected_test_graph_flags.each do |key, value|
+      raise "Unexpected RunnerTests #{name} #{key}" unless config.attributes[key] == value
+      config.attributes.delete(key)
+    end
+    config.save_as(test_pods.xcconfig_path(name))
+  end
 end

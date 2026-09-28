@@ -20,15 +20,22 @@ AudioSurfaceState _mapPlatformException(PlatformException e) =>
 
 Future<void>? _closingAudio;
 AudioInputController? _audioOwner;
-Future<void> _nativeLane = Future.value();
-Future<void> _serializeNative(Future<void> Function() operation) {
-  final next = _nativeLane.then((_) => operation());
-  _nativeLane = next.catchError((Object _) {});
-  return next;
-}
+AudioInputController? _audioCandidate;
+_AudioCloseLatch? _audioCloseLatch;
 
-void _releaseAudioCapture(Future<void> Function() stopFn) {
-  _closingAudio = stopFn().catchError((Object _) {});
+final class _AudioCloseLatch {
+  _AudioCloseLatch(
+    this.channel,
+    this.attemptId, {
+    required this.pendingNativeCall,
+    this.foreignRecovery = false,
+  }) : requiresExplicitRetry = pendingNativeCall;
+  // A foreign observed close has no pending call on its retired channel.
+  final AudioCaptureChannel? channel;
+  final String? attemptId;
+  bool pendingNativeCall;
+  final bool requiresExplicitRetry;
+  final bool foreignRecovery;
 }
 
 @visibleForTesting
@@ -41,6 +48,14 @@ Future<void> awaitPendingAudioClose() async {
     await closing;
     if (identical(_closingAudio, closing)) _closingAudio = null;
   }
+}
+
+@visibleForTesting
+void resetAudioCaptureCoordinatorForTest() {
+  _closingAudio = null;
+  _audioOwner = null;
+  _audioCandidate = null;
+  _audioCloseLatch = null;
 }
 
 /// Permission dialogs can briefly make the app inactive before capture starts.
@@ -89,13 +104,16 @@ final class AudioInputController implements AudioSource {
     AudioCaptureChannel? channel,
     int ringBufferCapacitySamples = 44100 * 4,
     Future<PermissionStatus> Function()? requestMicrophonePermission,
+    Duration nativeCallTimeout = const Duration(seconds: 3),
   }) : _channel = channel ?? MethodChannelAudioCaptureChannel(),
        _ring = AudioRingBuffer(capacitySamples: ringBufferCapacitySamples),
+       _nativeCallTimeout = nativeCallTimeout,
        _requestPermission =
            requestMicrophonePermission ?? Permission.microphone.request;
 
   final AudioCaptureChannel _channel;
   final AudioRingBuffer _ring;
+  final Duration _nativeCallTimeout;
   final Future<PermissionStatus> Function() _requestPermission;
   final _chunks = StreamController<AudioChunk>.broadcast();
   final _status = StreamController<AudioSurfaceState>.broadcast();
@@ -107,6 +125,11 @@ final class AudioInputController implements AudioSource {
   bool _askingPermission = false;
   bool _channelConnected = false;
   bool _disposed = false;
+  bool _nativeCallPending = false;
+  Future<void>? _stopInFlight;
+  AudioCaptureCloseState _closeState = const AudioCaptureCloseState.unknown();
+  bool _closeReadbackAfterLatch = false;
+  final Set<void Function()> _cancelCloseReadbacks = {};
   int _epoch = 0;
   int? _sampleRate;
   AudioRoute _route = AudioRoute.unknown;
@@ -117,12 +140,247 @@ final class AudioInputController implements AudioSource {
   Stream<AudioSurfaceState> get status => _status.stream;
   @visibleForTesting
   int get bufferedSampleCountForTest => _ring.length;
+  AudioCaptureCloseState get captureCloseState => _closeState;
+  bool get captureGateReady =>
+      _closeState.isClear &&
+      _audioCloseLatch == null &&
+      _audioOwner == null &&
+      _audioCandidate == null;
+  bool get captureClosePending =>
+      _stopInFlight != null ||
+      _closeState.attemptInFlight ||
+      ((_nativeCallPending || (_audioCloseLatch?.pendingNativeCall ?? false)) &&
+          !_freshNativeRetryEvidence(_audioCloseLatch, _closeState));
+  bool get captureNeedsExplicitRetry {
+    if (captureClosePending) return false;
+    final latch = _audioCloseLatch;
+    if (latch != null) return _freshNativeRetryEvidence(latch, _closeState);
+    if (_closeState.phase == AudioCaptureClosePhase.running) {
+      return _ownsNativeAttempt(_closeState.attemptId);
+    }
+    return _closeState.canRetry;
+  }
+
+  bool _ownsNativeAttempt(String? id) {
+    final channel = _channel;
+    return id != null &&
+        channel is AudioCaptureCloseControl &&
+        (channel as AudioCaptureCloseControl).attemptId == id;
+  }
+
+  bool _stickyRecoveryState(AudioCaptureCloseState state) =>
+      !state.attemptInFlight &&
+      state.requiresExplicitRetry &&
+      (state.phase == AudioCaptureClosePhase.unconfirmedQuiescent ||
+          state.phase == AudioCaptureClosePhase.releasedAwaitingExplicitRetry);
+
+  bool _nativeAllowsRetry(
+    _AudioCloseLatch latch,
+    AudioCaptureCloseState state,
+  ) {
+    final id = latch.attemptId;
+    return id != null &&
+        (state.isClear ||
+            (state.attemptId == id &&
+                !state.attemptInFlight &&
+                state.canRetry &&
+                (!latch.foreignRecovery || _stickyRecoveryState(state))));
+  }
+
+  bool _freshNativeRetryEvidence(
+    _AudioCloseLatch? latch,
+    AudioCaptureCloseState state,
+  ) =>
+      latch != null &&
+      _closeReadbackAfterLatch &&
+      _nativeAllowsRetry(latch, state);
+
+  Future<AudioCaptureCloseState> _boundedCloseReadback(
+    AudioCaptureCloseControl control,
+  ) {
+    if (_disposed) {
+      // A route can be disposed while an earlier stop is still finishing.
+      // Accept a status that is already settled in this microtask turn (the
+      // fake has one), but never arm a fresh timer for a detached route.
+      final settled = Completer<AudioCaptureCloseState>();
+      void finish(AudioCaptureCloseState state) {
+        if (!settled.isCompleted) settled.complete(state);
+      }
+
+      try {
+        unawaited(
+          control.readCloseState().then<void>(
+            finish,
+            onError: (Object _, StackTrace stackTrace) =>
+                finish(const AudioCaptureCloseState.unknown()),
+          ),
+        );
+      } on Object {
+        finish(const AudioCaptureCloseState.unknown());
+      }
+      scheduleMicrotask(() => finish(const AudioCaptureCloseState.unknown()));
+      return settled.future;
+    }
+    final result = Completer<AudioCaptureCloseState>();
+    late final Timer deadline;
+    late final void Function() cancel;
+    void finish(AudioCaptureCloseState state) {
+      if (result.isCompleted) return;
+      deadline.cancel();
+      _cancelCloseReadbacks.remove(cancel);
+      result.complete(state);
+    }
+
+    cancel = () => finish(const AudioCaptureCloseState.unknown());
+    _cancelCloseReadbacks.add(cancel);
+    deadline = Timer(_nativeCallTimeout, cancel);
+    try {
+      unawaited(
+        control.readCloseState().then<void>(
+          finish,
+          onError: (Object _, StackTrace stackTrace) => cancel(),
+        ),
+      );
+    } on Object {
+      cancel();
+    }
+    return result.future;
+  }
+
+  void _suspendPendingCloseReadbacks() {
+    for (final cancel in _cancelCloseReadbacks.toList()) {
+      cancel();
+    }
+    final channel = _channel;
+    if (channel is AudioCaptureReadbackCancellation) {
+      (channel as AudioCaptureReadbackCancellation)
+          .suspendCloseReadbacksUntilExplicitRetry();
+    }
+    final retained = _audioCloseLatch?.channel;
+    if (retained is AudioCaptureReadbackCancellation &&
+        !identical(retained, channel)) {
+      (retained as AudioCaptureReadbackCancellation)
+          .suspendCloseReadbacksUntilExplicitRetry();
+    }
+  }
+
+  Future<AudioCaptureCloseState> refreshCloseState() async {
+    final latchAtRead = _audioCloseLatch;
+    final channel = _channel;
+    AudioCaptureCloseState next;
+    try {
+      next = channel is AudioCaptureCloseControl
+          ? await _boundedCloseReadback(channel as AudioCaptureCloseControl)
+          : const AudioCaptureCloseState.unknown();
+    } on Object {
+      next = const AudioCaptureCloseState.unknown();
+    }
+    _closeState = next;
+    _closeReadbackAfterLatch = identical(_audioCloseLatch, latchAtRead);
+    if (_audioCloseLatch == null &&
+        _stickyRecoveryState(next) &&
+        next.attemptId != null &&
+        !_ownsNativeAttempt(next.attemptId)) {
+      // Keep the exact ID across route disposal in this Dart isolate. There
+      // is no pending call or retained retired transport for this foreign ID.
+      _audioCloseLatch = _AudioCloseLatch(
+        null,
+        next.attemptId,
+        pendingNativeCall: false,
+        foreignRecovery: true,
+      );
+      _closeReadbackAfterLatch = true;
+    }
+    return next;
+  }
+
+  /// An explicit user retry only closes the retained attempt. It never starts
+  /// capture or clears a local timeout merely because a readback says clear.
+  Future<void> retryClose() async {
+    if (_disposed) {
+      throw PlatformException(code: 'capture_controller_disposed');
+    }
+    final state = await refreshCloseState();
+    if (state.attemptInFlight) {
+      throw PlatformException(code: 'capture_close_in_flight');
+    }
+    var latch = _audioCloseLatch;
+    if (latch == null &&
+        state.canRetry &&
+        state.attemptId != null &&
+        (state.phase != AudioCaptureClosePhase.running ||
+            _ownsNativeAttempt(state.attemptId))) {
+      latch = _AudioCloseLatch(
+        _channel,
+        state.attemptId,
+        pendingNativeCall: false,
+      );
+      _audioCloseLatch = latch;
+    }
+    if (latch == null || !_nativeAllowsRetry(latch, state)) {
+      throw PlatformException(code: 'capture_close_unconfirmed');
+    }
+    final id = latch.attemptId;
+    final channel = _channel;
+    final AudioCaptureCloseControl? control =
+        channel is AudioCaptureCloseControl
+        ? channel as AudioCaptureCloseControl
+        : null;
+    final currentAttemptId = control?.attemptId;
+    if (control == null ||
+        id == null ||
+        (currentAttemptId != null && currentAttemptId != id) ||
+        !identical(_audioCloseLatch, latch)) {
+      throw PlatformException(code: 'capture_close_unconfirmed');
+    }
+    // The retained ID is closed through this controller's current transport.
+    await control.retryStopAttempt(id).timeout(_nativeCallTimeout);
+    final confirmed = await _boundedCloseReadback(control);
+    if (!confirmed.confirmsClearAfterStop(id) ||
+        !identical(_audioCloseLatch, latch)) {
+      throw PlatformException(code: 'capture_close_unconfirmed');
+    }
+    _audioCloseLatch = null;
+    _audioOwner = null;
+    _closeState = confirmed;
+    _closeReadbackAfterLatch = false;
+  }
+
   void _emit(AudioSurfaceState state) {
     if (!_disposed) _status.add(state);
   }
 
   bool _current(int epoch) =>
-      !_disposed && epoch == _epoch && identical(_audioOwner, this);
+      !_disposed &&
+      epoch == _epoch &&
+      (identical(_audioCandidate, this) || identical(_audioOwner, this));
+
+  Future<void> _boundedNative(Future<void> nativeCall) async {
+    _nativeCallPending = true;
+    unawaited(
+      nativeCall.then<void>(
+        (_) => _nativeCallSettled(),
+        onError: (Object _, StackTrace stackTrace) => _nativeCallSettled(),
+      ),
+    );
+    await nativeCall.timeout(_nativeCallTimeout);
+  }
+
+  void _nativeCallSettled() {
+    _nativeCallPending = false;
+    final latch = _audioCloseLatch;
+    if (latch != null &&
+        identical(latch.channel, _channel) &&
+        latch.pendingNativeCall) {
+      latch.pendingNativeCall = false;
+      // A legacy/fake native start can finish after the first stop request.
+      // Issue another direct close, but retain the latch: only a later
+      // explicit retry may unlock another capture.
+      unawaited(
+        _channel.stop().timeout(_nativeCallTimeout).catchError((Object _) {}),
+      );
+    }
+  }
 
   Future<bool> _waitForForeground() async {
     final state = WidgetsBinding.instance.lifecycleState;
@@ -139,19 +397,25 @@ final class AudioInputController implements AudioSource {
   @override
   Future<void> start({required int sampleRate}) async {
     if (_disposed || _starting || _running) return;
+    if (_audioCandidate != null && !identical(_audioCandidate, this)) {
+      _emit(const AudioSetupFailed('capture_owner_busy'));
+      return;
+    }
+    if (_audioCloseLatch != null) {
+      _emit(const AudioSetupFailed('capture_close_unconfirmed'));
+      return;
+    }
     final previous = _audioOwner;
-    _audioOwner = this;
+    _audioCandidate = this;
     final epoch = ++_epoch;
     _starting = true;
-    if (previous != null && !identical(previous, this)) await previous.stop();
-    if (!_current(epoch)) return;
     _route = AudioRoute.unknown;
     _sampleRate = null;
     _lifecycle = AudioLifecycleObserver(
-      onBackground: () => unawaited(_stop(announce: true)),
+      onBackground: () => _stopAfterLifecycle(),
       onInactive: () {
         if (_running || (_starting && !_askingPermission)) {
-          unawaited(_stop(announce: true));
+          _stopAfterLifecycle();
         }
       },
       onResumed: () {
@@ -161,8 +425,20 @@ final class AudioInputController implements AudioSource {
     )..attach();
     _emit(const AudioStarting());
     try {
+      if (previous != null && !identical(previous, this)) {
+        await previous.stop();
+      }
       await awaitPendingAudioClose();
       if (!_current(epoch)) return;
+      if (_audioCloseLatch != null) {
+        throw PlatformException(code: 'capture_close_unconfirmed');
+      }
+      final nativeState = await refreshCloseState();
+      if (!nativeState.isClear ||
+          _audioCloseLatch != null ||
+          !_current(epoch)) {
+        throw PlatformException(code: 'capture_close_unconfirmed');
+      }
       _askingPermission = true;
       final perm = await _requestPermission();
       _askingPermission = false;
@@ -182,34 +458,49 @@ final class AudioInputController implements AudioSource {
         _onRawEvent,
         onError: (Object _) {
           _emit(const AudioSetupFailed('capture_stream_failed'));
-          unawaited(_stop(announce: false));
+          _stopAfterLifecycle(announce: false);
         },
       );
-      await _serializeNative(() async {
-        if (!_current(epoch)) return;
-        final channel = _channel;
-        if (channel is PreparedAudioCaptureChannel) {
-          await (channel as PreparedAudioCaptureChannel).prepare();
-        }
-        if (!_current(epoch)) return;
-        await _channel.start(sampleRate: sampleRate);
-        // Cleanup shares the same lane as every owner's start/stop. It
-        // cannot arrive after a newer owner's start and stop that session.
-        if (!_current(epoch)) await _channel.stop();
-      });
+      final channel = _channel;
+      if (channel is PreparedAudioCaptureChannel) {
+        await _boundedNative(
+          (channel as PreparedAudioCaptureChannel).prepare(),
+        );
+      }
+      if (!_current(epoch) || _audioCloseLatch != null) return;
+      // This synchronous guard is the only point where the new capture owner
+      // is claimed. A prior owner's confirmed close is required above.
+      if (_audioOwner != null && !identical(_audioOwner, this)) {
+        throw PlatformException(code: 'capture_owner_busy');
+      }
+      _audioOwner = this;
+      _audioCandidate = null;
+      await _boundedNative(_channel.start(sampleRate: sampleRate));
       if (!_current(epoch)) return;
       _running = true;
       _starting = false;
       _emit(AudioCalibrating(_route));
     } on PlatformException catch (e) {
       if (_current(epoch)) _emit(_mapPlatformException(e));
-      await _stop(announce: false);
+      try {
+        await _stop(announce: false);
+      } on Object {
+        _emit(const AudioSetupFailed('capture_close_unconfirmed'));
+      }
     } on Object {
       if (_current(epoch)) {
         _emit(const AudioSetupFailed('capture_start_failed'));
       }
-      await _stop(announce: false);
+      try {
+        await _stop(announce: false);
+      } on Object {
+        _emit(const AudioSetupFailed('capture_close_unconfirmed'));
+      }
     }
+  }
+
+  void _stopAfterLifecycle({bool announce = true}) {
+    unawaited(_stop(announce: announce).catchError((Object _) {}));
   }
 
   void _onRawEvent(RawAudioEvent event) {
@@ -225,7 +516,7 @@ final class AudioInputController implements AudioSource {
             samples.isEmpty ||
             samples.any((v) => !v.isFinite || v.abs() > 1.0)) {
           _emit(const AudioSetupFailed('invalid_pcm'));
-          unawaited(_stop(announce: false));
+          _stopAfterLifecycle(announce: false);
           return;
         }
         if (_sampleRate != null && _sampleRate != sampleRate) {
@@ -249,14 +540,29 @@ final class AudioInputController implements AudioSource {
         if (_running) _emit(AudioCalibrating(_route));
       case RawInterruptedEvent(:final reason):
         _emit(AudioSetupFailed(reason));
-        unawaited(_stop(announce: false));
+        _stopAfterLifecycle(announce: false);
     }
   }
 
   @override
   Future<void> stop() => _stop(announce: true);
 
-  Future<void> _stop({required bool announce}) async {
+  Future<void> _stop({required bool announce}) {
+    final pending = _stopInFlight;
+    if (pending != null) return pending;
+    final next = _performStop(announce: announce);
+    _stopInFlight = next;
+    unawaited(
+      next
+          .whenComplete(() {
+            if (identical(_stopInFlight, next)) _stopInFlight = null;
+          })
+          .catchError((Object _) {}),
+    );
+    return next;
+  }
+
+  Future<void> _performStop({required bool announce}) async {
     final stoppedEpoch = ++_epoch;
     _running = false;
     _starting = false;
@@ -272,23 +578,79 @@ final class AudioInputController implements AudioSource {
     _channelConnected = false;
     _ring.clear();
     _sampleRate = null;
-    // Publish the close barrier before cancellation can yield. A new start
-    // cannot overtake an old stop while a subscription takes time to close.
+    // Keep the old owner and an explicit-retry handle before any await. Native
+    // stop is invoked directly, outside the start/prepare logical wait.
+    _AudioCloseLatch? latch;
+    Future<void>? nativeClose;
     if (hadConnection) {
-      _releaseAudioCapture(() => _serializeNative(_channel.stop));
+      final channel = _channel;
+      latch = _AudioCloseLatch(
+        channel,
+        channel is AudioCaptureCloseControl
+            ? (channel as AudioCaptureCloseControl).attemptId
+            : null,
+        pendingNativeCall: _nativeCallPending,
+      );
+      _audioCloseLatch = latch;
+      _closeState = const AudioCaptureCloseState.unknown();
+      _closeReadbackAfterLatch = false;
+      nativeClose = Future<void>.sync(channel.stop).timeout(_nativeCallTimeout);
+      _closingAudio = nativeClose;
     }
-    await subscription?.cancel();
-    if (hadConnection) await awaitPendingAudioClose();
+    Object? failure;
+    try {
+      await nativeClose;
+    } on Object catch (error) {
+      failure = error;
+    }
+    try {
+      await subscription?.cancel().timeout(_nativeCallTimeout);
+    } on Object catch (error) {
+      failure ??= error;
+    }
+    if (identical(_closingAudio, nativeClose)) _closingAudio = null;
     if (stoppedEpoch != _epoch) return;
-    if (identical(_audioOwner, this)) _audioOwner = null;
+    if (failure == null && latch != null && !latch.pendingNativeCall) {
+      final control = _channel;
+      if (control is AudioCaptureCloseControl) {
+        final state = await refreshCloseState();
+        if (latch.attemptId == null ||
+            !state.confirmsClearAfterStop(latch.attemptId!)) {
+          failure = PlatformException(code: 'capture_close_unconfirmed');
+        }
+      }
+    }
+    if (latch != null &&
+        (failure != null ||
+            latch.pendingNativeCall ||
+            latch.requiresExplicitRetry)) {
+      _emit(const AudioSetupFailed('capture_close_unconfirmed'));
+      throw PlatformException(code: 'capture_close_unconfirmed');
+    }
+    if (latch == null && _audioCloseLatch != null) {
+      _emit(const AudioSetupFailed('capture_close_unconfirmed'));
+      throw PlatformException(code: 'capture_close_unconfirmed');
+    }
+    if (identical(_audioCloseLatch, latch)) _audioCloseLatch = null;
+    if (identical(_audioOwner, this) && _audioCloseLatch == null) {
+      _audioOwner = null;
+    }
+    if (identical(_audioCandidate, this)) _audioCandidate = null;
     if (announce) _emit(const AudioStopped());
   }
 
   Future<void> dispose() async {
     if (_disposed) return;
     _disposed = true;
-    await _stop(announce: false);
-    await _chunks.close();
-    await _status.close();
+    _suspendPendingCloseReadbacks();
+    try {
+      await _stop(announce: false);
+    } on Object {
+      // The process close latch survives this controller and can be retried
+      // explicitly by a later screen. Dispose must still close Dart streams.
+    } finally {
+      await _chunks.close();
+      await _status.close();
+    }
   }
 }

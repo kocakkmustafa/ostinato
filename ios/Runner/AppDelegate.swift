@@ -3,7 +3,7 @@ import UIKit
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
-  private var audioCapture: AudioCaptureStreamer?
+  private let audioCaptureSlot = AudioCaptureHandlerSlot()
   private var audioMethods: FlutterMethodChannel?
   private var audioEvents: FlutterEventChannel?
 
@@ -15,9 +15,12 @@ import UIKit
   }
 
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
-    GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     let capture = AudioCaptureStreamer()
-    audioCapture = capture
+    // Retire the old sink and fence its hardware before the new bridge exists.
+    audioCaptureSlot.install(capture)
+    audioMethods?.setMethodCallHandler(nil)
+    audioEvents?.setStreamHandler(nil)
+    GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     let messenger = engineBridge.applicationRegistrar.messenger()
     audioMethods = FlutterMethodChannel(name: "com.yulalab.ostinato/audio_capture", binaryMessenger: messenger)
     audioEvents = FlutterEventChannel(name: "com.yulalab.ostinato/audio_capture/events", binaryMessenger: messenger)

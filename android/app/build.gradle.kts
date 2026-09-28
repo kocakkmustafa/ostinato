@@ -167,3 +167,8 @@ tasks.matching { it.name == "assembleRelease" || it.name == "bundleRelease" }
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // Pure JVM capture-state fakes; no Android microphone or device required.
+    testImplementation("junit:junit:4.12")
+}

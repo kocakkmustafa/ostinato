@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:ostinato_audio/ostinato_audio.dart';
 
 import 'audio_input_controller.dart';
+import 'audio_capture_channel.dart';
 
 final class GuitarObservationConfig {
   GuitarObservationConfig.fromJson(Map<String, dynamic> json) {
@@ -78,9 +79,12 @@ final class GuitarObservationConfig {
 enum NoteObservationPhase {
   idle,
   starting,
+  checkingInput,
   calibrating,
   listening,
   noResult,
+  analysisTimedOut,
+  analysisSettling,
   permissionDenied,
   permissionDeniedPermanent,
   unsupportedInput,
@@ -107,7 +111,11 @@ final class GuitarNoteObservationController extends ChangeNotifier {
        _analyzer =
            analyzer ??
            ((samples, rate, time, floor) =>
-               _analyzeOffMain(samples, rate, time, floor, config));
+               _analyzeOffMain(samples, rate, time, floor, config)) {
+    if (_source is AudioInputController) {
+      unawaited(refreshCaptureStatus());
+    }
+  }
   final GuitarObservationConfig config;
   final AudioSource _source;
   final bool _ownsSource;
@@ -116,17 +124,64 @@ final class GuitarNoteObservationController extends ChangeNotifier {
   StreamSubscription<AudioSurfaceState>? _status;
   final List<double> _window = [];
   final List<double> _floorLevels = [];
-  Timer? _stale, _pendingStale;
+  Timer? _stale, _pendingStale, _routeResolveTimer;
   int _analysisToken = 0;
+  int _nextJobId = 0;
+  int? _runningJobId;
+  List<double>? _analysisSamples;
+  Future<void>? _sourceClosing;
+  NoteObservationPhase? _terminalStopPhase;
   int _epoch = 0, _calibrationSamples = 0;
   int? _rate, _lastAnalysisUs;
   double? _floor;
-  bool _active = false, _disposed = false, _busy = false;
+  bool _active = false, _disposed = false, _sourceCloseFailed = false;
   AudioRoute _route = AudioRoute.unknown;
   NoteObservationPhase phase = NoteObservationPhase.idle;
   GuitarNoteObservation? observation;
   GuitarSingleNoteReason? refusal;
   bool get isActive => _active;
+  bool get isCaptureStopping => _sourceClosing != null;
+  bool get captureStopFailed => _sourceCloseFailed;
+  AudioCaptureClosePhase get captureClosePhase =>
+      _source is AudioInputController
+      ? _source.captureCloseState.phase
+      : AudioCaptureClosePhase.clear;
+  bool get captureClosePending =>
+      _source is AudioInputController && _source.captureClosePending;
+  bool get canRetryCaptureClose =>
+      _source is AudioInputController && _source.captureNeedsExplicitRetry;
+  bool get captureGateReady =>
+      _source is! AudioInputController || _source.captureGateReady;
+  bool get canStart =>
+      !_disposed &&
+      !_active &&
+      _runningJobId == null &&
+      _sourceClosing == null &&
+      !_sourceCloseFailed &&
+      captureGateReady;
+
+  Future<void> refreshCaptureStatus() async {
+    final source = _source;
+    if (source is AudioInputController) {
+      await source.refreshCloseState();
+      _notify();
+    }
+  }
+
+  Future<void> retryCaptureClose() async {
+    final source = _source;
+    if (source is! AudioInputController || !canRetryCaptureClose) return;
+    try {
+      await source.retryClose();
+      _sourceCloseFailed = false;
+      if (!_active) phase = NoteObservationPhase.idle;
+    } on Object {
+      _sourceCloseFailed = true;
+      phase = NoteObservationPhase.unavailable;
+    }
+    await refreshCaptureStatus();
+  }
+
   @visibleForTesting
   int get bufferedSamples => _window.length;
   void _notify() {
@@ -139,6 +194,10 @@ final class GuitarNoteObservationController extends ChangeNotifier {
       _window[i] = 0;
     }
     _window.clear();
+    final analysisSamples = _analysisSamples;
+    if (analysisSamples != null) {
+      analysisSamples.fillRange(0, analysisSamples.length, 0);
+    }
     _floorLevels.clear();
     _floor = null;
     _calibrationSamples = 0;
@@ -146,15 +205,60 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     _lastAnalysisUs = null;
     _stale?.cancel();
     _pendingStale?.cancel();
+    _routeResolveTimer?.cancel();
     _stale = null;
     _pendingStale = null;
+    _routeResolveTimer = null;
     _analysisToken++;
     observation = null;
     refusal = null;
   }
 
+  void _settlePendingStatus() {
+    if (!_active &&
+        _runningJobId == null &&
+        _sourceClosing == null &&
+        phase == NoteObservationPhase.analysisSettling) {
+      _terminalStopPhase = null;
+      phase = NoteObservationPhase.idle;
+    }
+  }
+
+  Future<void> _stopSource() {
+    final closing = _sourceClosing;
+    if (closing != null) return closing;
+    // Install the pending-close state before invoking the source: a source
+    // may announce AudioStopped synchronously from stop().
+    final next = Future<void>.microtask(_source.stop).catchError((Object _) {
+      _sourceCloseFailed = true;
+      _terminalStopPhase = NoteObservationPhase.unavailable;
+      phase = NoteObservationPhase.unavailable;
+      _notify();
+    });
+    _sourceClosing = next;
+    _notify();
+    unawaited(
+      next.whenComplete(() {
+        if (!identical(_sourceClosing, next)) return;
+        _sourceClosing = null;
+        _settlePendingStatus();
+        _notify();
+      }),
+    );
+    return next;
+  }
+
+  void _closeCaptureWithStatus(NoteObservationPhase terminal) {
+    _active = false;
+    _clear();
+    _terminalStopPhase = terminal;
+    phase = terminal;
+    unawaited(_stopSource());
+  }
+
   Future<void> start() async {
-    if (_disposed || _active) return;
+    if (!canStart) return;
+    _terminalStopPhase = null;
     _clear();
     _active = true;
     phase = NoteObservationPhase.starting;
@@ -169,11 +273,45 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     switch (status) {
       case AudioCalibrating(:final route):
         if (!_active) return;
+        if (_runningJobId != null) {
+          // A route/reset invalidates the old samples. Keeping capture open
+          // while its analysis is still pending would leave no usable path.
+          _closeCaptureWithStatus(NoteObservationPhase.analysisSettling);
+          return;
+        }
+        if (route == AudioRoute.unknown &&
+            _route == AudioRoute.unknown &&
+            _routeResolveTimer?.isActive == true) {
+          // Repeated unresolved route notices must not extend the first
+          // discovery deadline while the microphone remains open.
+          return;
+        }
         _clear();
         _route = route;
-        phase = route == AudioRoute.speaker
-            ? NoteObservationPhase.calibrating
-            : NoteObservationPhase.unsupportedInput;
+        if (route == AudioRoute.unknown) {
+          // Native startup can announce unknown before its first audio read.
+          // Give it the existing calibration window to identify the input,
+          // then close capture rather than leaving an unsupported route open.
+          final routeEpoch = _epoch;
+          phase = NoteObservationPhase.checkingInput;
+          _routeResolveTimer = Timer(
+            Duration(milliseconds: config.calibrationMs),
+            () {
+              if (_disposed ||
+                  !_active ||
+                  _epoch != routeEpoch ||
+                  _route != AudioRoute.unknown) {
+                return;
+              }
+              _closeCaptureWithStatus(NoteObservationPhase.unsupportedInput);
+            },
+          );
+        } else if (route != AudioRoute.speaker) {
+          _closeCaptureWithStatus(NoteObservationPhase.unsupportedInput);
+          return;
+        } else {
+          phase = NoteObservationPhase.calibrating;
+        }
       case AudioPermissionDeniedPermanent():
         _clear();
         _active = false;
@@ -187,9 +325,14 @@ final class GuitarNoteObservationController extends ChangeNotifier {
         _active = false;
         phase = NoteObservationPhase.unavailable;
       case AudioStopped():
+        final terminal = _terminalStopPhase;
         _clear();
         _active = false;
-        phase = NoteObservationPhase.idle;
+        phase =
+            terminal ??
+            (_runningJobId == null
+                ? NoteObservationPhase.idle
+                : NoteObservationPhase.analysisSettling);
       case AudioStarting():
         phase = NoteObservationPhase.starting;
       case AudioStreaming():
@@ -203,14 +346,14 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     if (!config.supportedSampleRates.contains(chunk.sampleRate) ||
         chunk.samples.isEmpty ||
         chunk.samples.any((v) => !v.isFinite || v.abs() > 1)) {
-      _clear();
-      phase = NoteObservationPhase.unavailable;
-      _active = false;
-      unawaited(_source.stop());
-      _notify();
+      _closeCaptureWithStatus(NoteObservationPhase.unavailable);
       return;
     }
     if (_rate != null && _rate != chunk.sampleRate) {
+      if (_runningJobId != null) {
+        _closeCaptureWithStatus(NoteObservationPhase.analysisSettling);
+        return;
+      }
       _clear();
       phase = NoteObservationPhase.calibrating;
     }
@@ -238,26 +381,28 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     }
     final epoch = _epoch;
     if (_window.length < config.windowSamples ||
-        _busy ||
+        _runningJobId != null ||
         (_lastAnalysisUs != null &&
             chunk.tStartUs - _lastAnalysisUs! <
                 config.analysisIntervalMs * 1000)) {
       return;
     }
-    _busy = true;
+    final jobId = ++_nextJobId;
+    _runningJobId = jobId;
     final token = ++_analysisToken;
+    final samples = List<double>.of(_window);
+    _analysisSamples = samples;
     _pendingStale?.cancel();
     _pendingStale = Timer(Duration(milliseconds: config.staleMs), () {
       if (epoch != _epoch || !_active || _disposed || token != _analysisToken) {
         return;
       }
-      _analysisToken++;
-      observation = null;
-      phase = NoteObservationPhase.noResult;
-      _notify();
+      // Isolate.run cannot cancel an unresolved Future. Stop recording and
+      // keep this one job in flight until it actually settles; never start a
+      // second analysis merely because the display timer elapsed.
+      _closeCaptureWithStatus(NoteObservationPhase.analysisTimedOut);
     });
     _lastAnalysisUs = chunk.tStartUs;
-    final samples = List<double>.of(_window);
     final startUs =
         chunk.tStartUs +
         ((chunk.samples.length - samples.length) * 1000000 / chunk.sampleRate)
@@ -293,23 +438,29 @@ final class GuitarNoteObservationController extends ChangeNotifier {
                 token != _analysisToken) {
               return;
             }
-            observation = null;
-            phase = NoteObservationPhase.noResult;
-            _notify();
+            _closeCaptureWithStatus(NoteObservationPhase.unavailable);
           },
         )
         .whenComplete(() {
           samples.fillRange(0, samples.length, 0);
-          _busy = false;
+          if (identical(_analysisSamples, samples)) _analysisSamples = null;
+          if (_runningJobId != jobId) return;
+          _runningJobId = null;
+          _settlePendingStatus();
+          _notify();
         });
   }
 
   Future<void> stop() async {
     _active = false;
+    _terminalStopPhase = _runningJobId == null
+        ? null
+        : NoteObservationPhase.analysisSettling;
     _clear();
-    phase = NoteObservationPhase.idle;
+    phase = _terminalStopPhase ?? NoteObservationPhase.idle;
+    final closing = _stopSource();
     _notify();
-    await _source.stop();
+    await closing;
   }
 
   @override
@@ -317,10 +468,11 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     if (_disposed) return;
     _disposed = true;
     _active = false;
+    _terminalStopPhase = null;
     _clear();
     unawaited(_chunks?.cancel());
     unawaited(_status?.cancel());
-    unawaited(_source.stop());
+    unawaited(_stopSource());
     if (_ownsSource) unawaited((_source as AudioInputController).dispose());
     super.dispose();
   }

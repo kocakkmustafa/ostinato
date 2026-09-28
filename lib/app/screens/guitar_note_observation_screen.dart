@@ -5,14 +5,21 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../account_connection.dart';
 import '../app_locale.dart';
+import '../audio/audio_capture_channel.dart';
 import '../audio/guitar_note_observation_controller.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../guitar_session_preparation.dart';
 
 /// Optional practice instrument; no target prompt, assessment or progress write.
 class GuitarNoteObservationScreen extends StatefulWidget {
-  const GuitarNoteObservationScreen({super.key, this.controller});
+  const GuitarNoteObservationScreen({
+    super.key,
+    this.controller,
+    this.preparation,
+  });
   final GuitarNoteObservationController? controller;
+  final GuitarSessionPreparation? preparation;
   @override
   State<GuitarNoteObservationScreen> createState() =>
       _GuitarNoteObservationScreenState();
@@ -20,12 +27,15 @@ class GuitarNoteObservationScreen extends StatefulWidget {
 
 class _GuitarNoteObservationScreenState
     extends State<GuitarNoteObservationScreen> {
+  late final GuitarSessionPreparation _preparation =
+      widget.preparation ?? GuitarSessionPreparation();
   GuitarNoteObservationController? _controller;
   bool _loadingFailed = false, _accountInitialized = false;
   String? _accountId;
   @override
   void initState() {
     super.initState();
+    _preparation.addListener(_preparationChanged);
     if (widget.controller != null) {
       _attach(widget.controller!);
     } else {
@@ -43,6 +53,16 @@ class _GuitarNoteObservationScreenState
   void _attach(GuitarNoteObservationController controller) {
     _controller = controller;
     controller.addListener(_changed);
+    if (!_preparation.isAcknowledged && controller.isActive) {
+      unawaited(controller.stop());
+    }
+    if (mounted) setState(() {});
+  }
+
+  void _preparationChanged() {
+    if (!_preparation.isAcknowledged && (_controller?.isActive ?? false)) {
+      unawaited(_controller!.stop());
+    }
     if (mounted) setState(() {});
   }
 
@@ -54,13 +74,18 @@ class _GuitarNoteObservationScreenState
   void didChangeDependencies() {
     super.didChangeDependencies();
     final id = AccountScope.maybeOf(context)?.currentUserId;
-    if (_accountInitialized && id != _accountId) unawaited(_controller?.stop());
+    if (_accountInitialized && id != _accountId) {
+      unawaited(_controller?.stop());
+      _preparation.afterBreak();
+    }
     _accountInitialized = true;
     _accountId = id;
   }
 
   @override
   void dispose() {
+    _preparation.removeListener(_preparationChanged);
+    if (widget.preparation == null) _preparation.dispose();
     _controller?.removeListener(_changed);
     unawaited(_controller?.stop());
     if (widget.controller == null) _controller?.dispose();
@@ -69,54 +94,137 @@ class _GuitarNoteObservationScreenState
 
   String _message(
     BuildContext context,
-    NoteObservationPhase phase,
-  ) => switch (phase) {
-    NoteObservationPhase.idle => localized(
-      context,
-      'Microphone is off. Start only when you want to observe.',
-      'Mikrofon kapalı. Yalnız gözlem yapmak istediğinde başlat.',
-    ),
-    NoteObservationPhase.starting => localized(
-      context,
-      'Waiting for microphone permission and input…',
-      'Mikrofon izni ve giriş bekleniyor…',
-    ),
-    NoteObservationPhase.calibrating => localized(
-      context,
-      'Keep the room quiet for two seconds; leave the strings silent.',
-      'İki saniye odayı sessiz tut; telleri sessiz bırak.',
-    ),
-    NoteObservationPhase.listening => localized(
-      context,
-      'Play one string, let it settle, then damp it before the next note.',
-      'Tek tel çal, sesin yerleşmesini bekle ve sonraki notadan önce sustur.',
-    ),
-    NoteObservationPhase.noResult => localized(
-      context,
-      'No clear single note. Damp other strings, stop accompaniment and try a steady tone.',
-      'Belirgin tek nota yok. Diğer telleri sustur, eşliği kapat ve kararlı bir ses dene.',
-    ),
-    NoteObservationPhase.permissionDenied => localized(
-      context,
-      'Microphone permission was declined. The course works without it; retry only if you choose.',
-      'Mikrofon izni verilmedi. Kurs mikrofonsuz çalışır; istersen yeniden deneyebilirsin.',
-    ),
-    NoteObservationPhase.permissionDeniedPermanent => localized(
-      context,
-      'Microphone access is disabled in Settings. You can continue the course without it.',
-      'Mikrofon erişimi Ayarlar’da kapalı. Kursa mikrofonsuz devam edebilirsin.',
-    ),
-    NoteObservationPhase.unsupportedInput => localized(
-      context,
-      'This observation supports the built-in microphone only. Change the input, stop and start again.',
-      'Bu gözlem yalnız dahili mikrofonu destekler. Girişi değiştir, durdur ve yeniden başlat.',
-    ),
-    NoteObservationPhase.unavailable => localized(
-      context,
-      'The microphone stopped or could not open. Return to the foreground and start again if you choose.',
-      'Mikrofon durdu veya açılamadı. Ön plana döndüğünde istersen yeniden başlat.',
-    ),
-  };
+    GuitarNoteObservationController controller,
+  ) {
+    if (!controller.isActive &&
+        (controller.captureClosePending ||
+            controller.captureClosePhase == AudioCaptureClosePhase.closing ||
+            controller.captureClosePhase ==
+                AudioCaptureClosePhase.unconfirmedInFlight)) {
+      return localized(
+        context,
+        'Microphone close is still in progress or has no final receipt. Capture stays disabled. Refresh status without starting a new recording.',
+        'Mikrofon kapatma işlemi sürüyor veya son makbuz gelmedi. Yakalama kapalı kalır. Yeni kayıt başlatmadan durumu yenile.',
+      );
+    }
+    if (!controller.isActive &&
+        controller.captureClosePhase == AudioCaptureClosePhase.running) {
+      return controller.canRetryCaptureClose
+          ? localized(
+              context,
+              'A previous microphone attempt still reports running. Request its closure before choosing a new start.',
+              'Önceki mikrofon denemesi hâlâ çalışıyor görünüyor. Yeni başlatmayı seçmeden önce kapatılmasını iste.',
+            )
+          : localized(
+              context,
+              'Another microphone attempt still reports running. Wait or refresh its status; this screen cannot close that active attempt. If the device microphone indicator remains on, close the app.',
+              'Başka bir mikrofon denemesi hâlâ çalışıyor görünüyor. Bekle veya durumunu yenile; bu ekran o etkin denemeyi kapatamaz. Cihazın mikrofon göstergesi açık kalırsa uygulamayı kapat.',
+            );
+    }
+    if (!controller.isActive && controller.canRetryCaptureClose) {
+      return localized(
+        context,
+        'Microphone closure needs an explicit retry. This action only requests closure; starting again is a separate choice after confirmation.',
+        'Mikrofonu kapatmak için açık bir yeniden deneme gerekiyor. Bu işlem yalnız kapatmayı ister; doğrulama sonrası başlatma ayrı bir seçimdir.',
+      );
+    }
+    if (!controller.isActive && !controller.captureGateReady) {
+      return localized(
+        context,
+        'Microphone close status is unknown. Capture remains disabled until a native close readback is available.',
+        'Mikrofonun kapanma durumu bilinmiyor. Native kapanma durumu doğrulanana kadar yakalama kapalı kalır.',
+      );
+    }
+    if (controller.captureStopFailed) {
+      return localized(
+        context,
+        'Microphone closure could not be confirmed. Observation cannot restart from this screen. Check the device microphone indicator; if it remains on, close the app. You can continue the course without audio.',
+        'Mikrofonun kapatıldığı doğrulanamadı. Bu ekranda gözlem yeniden başlatılamaz. Cihazın mikrofon göstergesini denetle; açık kalırsa uygulamayı kapat. Kursa sessiz devam edebilirsin.',
+      );
+    }
+    if (controller.isCaptureStopping) {
+      return switch (controller.phase) {
+        NoteObservationPhase.analysisTimedOut => localized(
+          context,
+          'Audio analysis did not finish in time. Stopping the microphone; closure has not been confirmed yet. This is a processing issue, not a playing result. You can continue the course while observation is unavailable.',
+          'Ses analizi zamanında tamamlanmadı. Mikrofon durduruluyor; kapatıldığı henüz doğrulanmadı. Bu bir işlem sorunu, çalma sonucu değil. Gözlem kullanılamazken kursa devam edebilirsin.',
+        ),
+        NoteObservationPhase.analysisSettling => localized(
+          context,
+          'Stopping the microphone while earlier audio analysis finishes; closure has not been confirmed yet. No playing result was produced. You can continue the course.',
+          'Önceki ses analizi tamamlanırken mikrofon durduruluyor; kapatıldığı henüz doğrulanmadı. Çalma sonucu üretilmedi. Kursa devam edebilirsin.',
+        ),
+        _ => localized(
+          context,
+          'Requesting microphone stop; closure has not been confirmed yet. Observation cannot restart while the stop request is pending.',
+          'Mikrofonun durdurulması isteniyor; kapatıldığı henüz doğrulanmadı. Durdurma isteği beklerken gözlem yeniden başlatılamaz.',
+        ),
+      };
+    }
+    return switch (controller.phase) {
+      NoteObservationPhase.idle => localized(
+        context,
+        'Note observation is stopped. Start only when you want to observe.',
+        'Nota gözlemi durdu. Yalnız gözlem yapmak istediğinde başlat.',
+      ),
+      NoteObservationPhase.starting => localized(
+        context,
+        'Waiting for microphone permission and input…',
+        'Mikrofon izni ve giriş bekleniyor…',
+      ),
+      NoteObservationPhase.checkingInput => localized(
+        context,
+        'Checking the microphone input. If the built-in microphone cannot be identified, capture will stop.',
+        'Mikrofon girişi denetleniyor. Dahili mikrofon belirlenemezse kayıt duracak.',
+      ),
+      NoteObservationPhase.calibrating => localized(
+        context,
+        'Keep the room quiet for two seconds; leave the strings silent.',
+        'İki saniye odayı sessiz tut; telleri sessiz bırak.',
+      ),
+      NoteObservationPhase.listening => localized(
+        context,
+        'Play one string, let it settle, then damp it before the next note.',
+        'Tek tel çal, sesin yerleşmesini bekle ve sonraki notadan önce sustur.',
+      ),
+      NoteObservationPhase.noResult => localized(
+        context,
+        'No clear single note. Damp other strings, stop accompaniment and try a steady tone.',
+        'Belirgin tek nota yok. Diğer telleri sustur, eşliği kapat ve kararlı bir ses dene.',
+      ),
+      NoteObservationPhase.analysisTimedOut => localized(
+        context,
+        'Audio analysis did not finish in time. Note observation stopped and the app’s microphone stop request finished. If the device microphone indicator stays on, close the app. This is a processing issue, not a playing result. You can continue the course and retry when the control enables.',
+        'Ses analizi zamanında tamamlanmadı. Nota gözlemi durdu ve uygulamanın mikrofon durdurma isteği tamamlandı. Cihazın mikrofon göstergesi açık kalırsa uygulamayı kapat. Bu bir işlem sorunu, çalma sonucu değil. Kursa devam edebilir, düğme kullanılabilir olduğunda yeniden deneyebilirsin.',
+      ),
+      NoteObservationPhase.analysisSettling => localized(
+        context,
+        'Note observation stopped and the app’s microphone stop request finished while earlier analysis settles. If the device microphone indicator stays on, close the app. No playing result was produced; you can continue the course.',
+        'Önceki analiz tamamlanırken nota gözlemi durdu ve uygulamanın mikrofon durdurma isteği tamamlandı. Cihazın mikrofon göstergesi açık kalırsa uygulamayı kapat. Çalma sonucu üretilmedi; kursa devam edebilirsin.',
+      ),
+      NoteObservationPhase.permissionDenied => localized(
+        context,
+        'Microphone permission was declined. The course works without it; retry only if you choose.',
+        'Mikrofon izni verilmedi. Kurs mikrofonsuz çalışır; istersen yeniden deneyebilirsin.',
+      ),
+      NoteObservationPhase.permissionDeniedPermanent => localized(
+        context,
+        'Microphone access is disabled in Settings. You can continue the course without it.',
+        'Mikrofon erişimi Ayarlar’da kapalı. Kursa mikrofonsuz devam edebilirsin.',
+      ),
+      NoteObservationPhase.unsupportedInput => localized(
+        context,
+        'This observation supports the built-in microphone only. Change the input, stop and start again.',
+        'Bu gözlem yalnız dahili mikrofonu destekler. Girişi değiştir, durdur ve yeniden başlat.',
+      ),
+      NoteObservationPhase.unavailable => localized(
+        context,
+        'Note observation stopped or could not open. Return to the foreground and retry if the control enables.',
+        'Nota gözlemi durdu veya açılamadı. Ön plana döndüğünde düğme kullanılabiliyorsa yeniden dene.',
+      ),
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = _controller;
@@ -170,6 +278,8 @@ class _GuitarNoteObservationScreenState
                 style: hankenText(size: 13, height: 1.5),
               ),
               const SizedBox(height: 18),
+              _sessionPreparationCard(context),
+              const SizedBox(height: 18),
               GlassCard(
                 gradientColors: hue.grad,
                 child: Column(
@@ -216,7 +326,7 @@ class _GuitarNoteObservationScreenState
                             )
                           : controller == null
                           ? localized(context, 'Loading…', 'Yükleniyor…')
-                          : _message(context, controller.phase),
+                          : _message(context, controller),
                       key: const Key('observation-status'),
                       style: hankenText(size: 13, height: 1.5),
                     ),
@@ -228,13 +338,17 @@ class _GuitarNoteObservationScreenState
                         children: [
                           FilledButton.icon(
                             key: const Key('observation-start-stop'),
-                            onPressed: () {
-                              if (controller.isActive) {
-                                unawaited(controller.stop());
-                              } else {
-                                unawaited(controller.start());
-                              }
-                            },
+                            onPressed: controller.isActive
+                                ? () => unawaited(controller.stop())
+                                : !_preparation.isAcknowledged ||
+                                      !controller.canStart
+                                ? null
+                                : () {
+                                    if (_preparation.isAcknowledged &&
+                                        controller.canStart) {
+                                      unawaited(controller.start());
+                                    }
+                                  },
                             icon: Icon(
                               controller.isActive ? Icons.stop : Icons.mic_none,
                             ),
@@ -264,6 +378,42 @@ class _GuitarNoteObservationScreenState
                                 ),
                               ),
                             ),
+                          if (!controller.isActive &&
+                              !controller.captureGateReady &&
+                              !controller.canRetryCaptureClose)
+                            TextButton(
+                              key: const Key('observation-close-refresh'),
+                              onPressed: () =>
+                                  unawaited(controller.refreshCaptureStatus()),
+                              child: Text(
+                                localized(
+                                  context,
+                                  'Refresh microphone status',
+                                  'Mikrofon durumunu yenile',
+                                ),
+                              ),
+                            ),
+                          if (!controller.isActive &&
+                              controller.canRetryCaptureClose)
+                            TextButton(
+                              key: const Key('observation-close-retry'),
+                              onPressed: () =>
+                                  unawaited(controller.retryCaptureClose()),
+                              child: Text(
+                                controller.captureClosePhase ==
+                                        AudioCaptureClosePhase.running
+                                    ? localized(
+                                        context,
+                                        'Close previous microphone',
+                                        'Önceki mikrofonu kapat',
+                                      )
+                                    : localized(
+                                        context,
+                                        'Retry microphone close',
+                                        'Mikrofonu kapatmayı yeniden dene',
+                                      ),
+                              ),
+                            ),
                         ],
                       ),
                   ],
@@ -273,8 +423,8 @@ class _GuitarNoteObservationScreenState
               Text(
                 localized(
                   context,
-                  'Audio stays in temporary memory on this device. It is never recorded or uploaded. Leaving this screen, changing account or losing the foreground closes capture; resuming does not restart it.',
-                  'Ses bu cihazda geçici bellekte kalır; kaydedilmez veya yüklenmez. Ekrandan çıkış, hesap değişimi ve ön plandan ayrılma yakalamayı kapatır; geri dönüşte kendiliğinden başlamaz.',
+                  'Audio stays in temporary memory on this device. It is never recorded or uploaded. Leaving this screen, changing account or losing the foreground stops observation and requests microphone closure; resuming does not restart it. If the device microphone indicator stays on, close the app.',
+                  'Ses bu cihazda geçici bellekte kalır; kaydedilmez veya yüklenmez. Ekrandan çıkış, hesap değişimi ve ön plandan ayrılma gözlemi durdurur ve mikrofonun kapatılmasını ister; geri dönüşte kendiliğinden başlamaz. Cihazın mikrofon göstergesi açık kalırsa uygulamayı kapat.',
                 ),
                 style: hankenText(size: 12.5, height: 1.5),
               ),
@@ -297,4 +447,61 @@ class _GuitarNoteObservationScreenState
       ),
     );
   }
+
+  Widget _sessionPreparationCard(BuildContext context) => GlassCard(
+    key: const Key('note-session-preparation'),
+    gradientColors: InstrumentHues.guitar.grad,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        kicker(
+          localized(context, 'BEFORE PLAYING TODAY', 'BUGÜN ÇALMADAN ÖNCE'),
+          color: InstrumentHues.guitar.ink,
+        ),
+        const SizedBox(height: 9),
+        Text(
+          localized(
+            context,
+            'Support the guitar so both hands can release. If tuning is needed, check string letters and octaves with an external tuner; do not force a peg. Begin with a few easy open-string plucks and full hand release.',
+            'Gitarı iki elin de gevşeyebileceği şekilde destekle. Akort gerekiyorsa tel adlarını ve oktavları harici akort cihazıyla denetle; burguyu zorlama. Birkaç kolay açık tel sesi ve tam el gevşetmesiyle başla.',
+          ),
+          style: hankenText(size: 13, height: 1.5),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          localized(
+            context,
+            'Pause for hand, neck, shoulder or hearing discomfort or tingling. This is your own check, not an app verdict about safety, posture or tuning. You can read this screen without starting the microphone.',
+            'El, boyun, omuz veya işitme rahatsızlığı ya da karıncalanmada ara ver. Bu senin denetimin; uygulamanın güvenlik, duruş veya akort hükmü değil. Mikrofonu açmadan bu ekranı okuyabilirsin.',
+          ),
+          style: hankenText(size: 12.5, height: 1.5),
+        ),
+        const SizedBox(height: 10),
+        if (!_preparation.isAcknowledged)
+          FilledButton(
+            key: const Key('note-session-acknowledge'),
+            onPressed: _preparation.acknowledge,
+            child: Text(
+              localized(
+                context,
+                'I checked this and may practise',
+                'Denetledim, çalışabilirim',
+              ),
+            ),
+          )
+        else
+          TextButton(
+            key: const Key('note-session-after-break'),
+            onPressed: _preparation.afterBreak,
+            child: Text(
+              localized(
+                context,
+                'After a break: prepare again',
+                'Aradan sonra: yeniden hazırlan',
+              ),
+            ),
+          ),
+      ],
+    ),
+  );
 }
