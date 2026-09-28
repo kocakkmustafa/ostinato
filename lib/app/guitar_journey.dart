@@ -1,7 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter/services.dart';
+import 'package:motion_content/motion_content.dart';
+
+import 'flutter_bundle_content_asset_reader.dart';
+
+const String _guitarCourseAssetPath = 'assets/content/guitar_journey.v1.json';
+const String _guitarIntegrityManifestPath =
+    'assets/motion_content/manifest.json';
 
 /// Original course copy is a separate, versioned asset. The legacy measured
 /// posture library keeps its own honesty and lesson-status contract.
@@ -398,12 +404,24 @@ final class GuitarJourneyCourse {
     for (final module in modules) ...module.lessons,
   ];
 
-  static Future<GuitarJourneyCourse> load() async {
-    final raw = await rootBundle.loadString(
-      'assets/content/guitar_journey.v1.json',
-    );
+  /// Verifies the packaged course bytes before any lesson is exposed.
+  /// The manifest is an asset-integrity envelope, not a second curriculum.
+  static Future<GuitarJourneyCourse> load({AssetBundle? bundle}) async {
+    final ContentLoadResult result = await ContentBundleLoader(
+      reader: FlutterBundleContentAssetReader(bundle: bundle),
+      expectedAppId: 'com.yulalab.ostinato',
+      currentCoreContract: currentMotionContentContract,
+      manifestPath: _guitarIntegrityManifestPath,
+    ).load();
+    if (result is ContentBlocked) throw ContentException(result.error);
+    if (result is! ContentReady) {
+      throw const ContentException(
+        ContentError(code: ContentErrorCode.capability),
+      );
+    }
+    final bytes = await result.assets.read(_guitarCourseAssetPath);
     return GuitarJourneyCourse.fromJson(
-      jsonDecode(raw) as Map<String, dynamic>,
+      jsonDecode(utf8.decode(bytes)) as Map<String, dynamic>,
     );
   }
 

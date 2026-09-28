@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motion_account/motion_account.dart';
+import 'package:motion_content/motion_content.dart';
 
 import 'app/content.dart';
 import 'app/cue_text.dart';
@@ -8,6 +9,7 @@ import 'app/account_connection.dart';
 import 'app/audio/practice_audio_root.dart';
 import 'app/design/app_scope.dart';
 import 'app/design/ostinato_theme.dart';
+import 'app/guitar_journey.dart';
 import 'app/onboarding_store.dart';
 import 'app/motion_account_bootstrap.dart';
 import 'app/screens/library_screen.dart';
@@ -46,11 +48,16 @@ class OstinatoApp extends StatefulWidget {
     super.key,
     this.store = const FileOnboardingStore(),
     this.accountConnection,
+    this.guitarCourseBundle,
     PracticeAudioNavigatorHost? audioNavigatorHost,
   }) : _audioNavigatorHost = audioNavigatorHost;
 
   final OnboardingStore store;
   final AccountConnection? accountConnection;
+
+  /// Allows the packaged guitar-course gate to be probed without mutating
+  /// Flutter's global rootBundle. Production uses the bundled asset bytes.
+  final AssetBundle? guitarCourseBundle;
   // Route widgets cannot read the root authority through an inherited scope.
   final PracticeAudioNavigatorHost? _audioNavigatorHost;
 
@@ -61,11 +68,14 @@ class OstinatoApp extends StatefulWidget {
 typedef _Boot = (ContentRepository, CueTextResolver, bool onboarded);
 
 class _OstinatoAppState extends State<OstinatoApp> {
-  late final Future<_Boot> _load = (() async => (
-    await ContentRepository.load(),
-    await CueTextResolver.load(),
-    await widget.store.isComplete(),
-  ))();
+  late final Future<_Boot> _load = (() async {
+    await GuitarJourneyCourse.load(bundle: widget.guitarCourseBundle);
+    return (
+      await ContentRepository.load(),
+      await CueTextResolver.load(),
+      await widget.store.isComplete(),
+    );
+  })();
 
   // Tema `ostinato_theme.dart`ta — kanıt üreteci de AYNI nesneyi kuruyor
   // (O-052: temasız kanıt koşumu ham `TextStyle`ları blok glif çiziyordu).
@@ -77,18 +87,47 @@ class _OstinatoAppState extends State<OstinatoApp> {
       future: _load,
       builder: (BuildContext ctx, AsyncSnapshot<_Boot> snap) {
         if (snap.hasError) {
-          // Yükleme hatası GİZLENMEZ: üretilen bir varlık eksikse ekran onu
-          // söyler, boş bir liste göstermez.
+          // The library stays closed. Show a useful localized message and a
+          // stable support code without exposing raw parser/asset diagnostics.
+          final Object? error = snap.error;
+          final String supportCode = error is ContentException
+              ? 'CONTENT_${error.error.code.name.toUpperCase()}'
+              : 'CONTENT_LOAD';
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: _theme,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
-            home: Scaffold(
-              body: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Text('Content did not load: ${snap.error}'),
+            home: Builder(
+              builder: (errorContext) => Scaffold(
+                body: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          localized(
+                            errorContext,
+                            'Course content could not be loaded. Close and reopen the app. If the problem continues, contact support with the code below.',
+                            'Kurs içeriği yüklenemedi. Uygulamayı kapatıp yeniden aç. Sorun sürerse aşağıdaki kodla destek ekibine ulaş.',
+                          ),
+                          key: const Key('ostinato-content-load-failure'),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          localized(
+                            errorContext,
+                            'Support code: $supportCode',
+                            'Destek kodu: $supportCode',
+                          ),
+                          key: const Key('ostinato-content-support-code'),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -1,5 +1,42 @@
 # Ostinato — İlerleme Kaydı
 
+## 2026-09-28 — gitar kursu paket bütünlüğü (kaynak ve yerel test)
+
+Mevcut 60 derslik kurs dosyasına tek varlıklı Motion Content manifesti eklendi:
+995.884 bayt ve SHA `bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18`.
+Uygulama açılışı kütüphaneyi göstermeden önce bu baytları denetliyor;
+eksik veya aynı uzunlukta değiştirilmiş JSON engelleniyor. Hata ekranı
+TR/EN anlaşılır metin ve kararlı destek kodu gösteriyor, ham hata metni
+göstermiyor. Üretici `--check` hem CI hem yerel kapıya bağlandı.
+
+Bağımsız kaynak incelemesinin ilk P2 kullanıcı metni bulgusu düzeltildi;
+son dar inceleme P0/P1/P2 bırakmadı
+(`scratch/2026-09-28-ostinato-runtime-integrity-peer/ADDENDUM.md`).
+Son biçimlendirme sonrası manifest kontrolü, yeni test dosyasının **5/5**
+testi ve iki dosyanın hedefli analizi geçti. Bu paket bütünlüğü kanıtı
+gerçek ders videosu, kişi-ayrık nota/form modeli, cihaz veya kurucu fiziksel
+kabulü değildir; bunlar açık kalır.
+
+## 2026-09-28 — 60 ders kaynak bağı, gizlilik metni ve güncel PR
+
+İki gitar dersindeki el/sıra anlatımı canlı enrichment kaynağında düzeltildi
+ve kurs JSON'u yeniden üretildi: **60 dersin kimliği, sırası ve ilerleme
+sözleşmesi aynı**, diğer 58 ders gövdesi değişmedi. Güncel kurs dosyası
+995.884 bayt, SHA `bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18`.
+Beş kursu yeniden bağlayan v8e paketinin kök kontrolü ve bağımsız incelemesi
+PASS (peer rapor SHA `c6c1295a18e88983e5658de3c5957d81d7d756da4808530b279370ce4f2bcf57`).
+Ostinato'nun 60 gösterim kimliği ve 420 sahne iş anahtarı
+yeni kurs SHA'sına göre yeniden hesaplandı. Bunlar üretim şartnamesidir;
+üretilmiş/onaylı medya, tam kurs nota/form modeli ve fiziksel kabul hâlâ **0**.
+
+Engellenmiş ses kapanış ekranı ve porte kartı TR/EN uygulama yerel ayarına
+bağlandı. Ayarlar gizlilik kartı ham videonun cihazda saklanmadığını ve
+cihazdan çıkmadığını açıkça bildiriyor. Kaynak dürüstlüğü kapısı 5.268
+yüzeyde **PASS**, bir iddia–ölçüm bağı kurdu; öz test 23 olumlu/7 olumsuz
+örneği geçti. Odaklı Flutter testleri ve hedefli analiz temiz. Bu kaynak
+değişiklikleri `008eb84` commitinde PR #1 dalına push edildi; GitHub Actions
+bütçe engeli nedeniyle yararlı son-baş CI, merge ve mağaza kabulü açık.
+
 ## 2026-09-28 — ilk gitar kursu kaynak hazırlığı; PR/ürün kabulü açık
 
 İlk gitar kursu **60 ders** olarak canlı kaynak ve bağımsız v8d paket

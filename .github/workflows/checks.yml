@@ -57,6 +57,9 @@ jobs:
 
       - run: flutter pub get
 
+      - name: Gitar kursu paket bütünlüğü
+        run: dart run tool/build_guitar_integrity_manifest.dart --check
+
       - name: Alt paket test bağımlılıkları
         run: |
           (cd packages/ostinato_audio && dart pub get)

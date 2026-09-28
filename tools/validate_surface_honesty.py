@@ -661,6 +661,13 @@ def lock_packages(lock_text: str):
     return re.findall(r"^  ([a-z0-9_]+):$", lock_text, re.MULTILINE)
 
 
+def active_partition_counts(packages):
+    """Count classified packages actually present in this lock, not old records."""
+    live = set(packages)
+    return (len(live & NETWORK_DEPS_RECORDED.keys()),
+            len(live & NETWORK_DEPS_KNOWN_SAFE.keys()))
+
+
 
 # ── F: her kullanıcı metni doğru locale yolunda olmalı ────────────────────
 # Bu gece İKİ kez sızdı ve ikisi de BAŞKA bir kuralın yan etkisiyle ya da
@@ -1482,6 +1489,9 @@ def selftest() -> int:
           or "ably_flutter" in NETWORK_DEPS_KNOWN_SAFE):
         dead.append("`ably_flutter` bir kayda girmiş — öz-test örneği artık "
                     "'sınıflandırılmamış' vakasını temsil etmiyor")
+    if active_partition_counts(["http", "meta"]) != (1, 1):
+        dead.append("BÖLME çıktı sayımı lock dışındaki eski kayıtları "
+                    "sayıyor; sentetik iki paketin birer sınıfta olması gerekir")
     # ── O-102: iddia↔ölçüm bağının kendi yolları ─────────────────────────
     # ① Özne çıkarımı çalışıyor mu — DOĞRUDAN ve DOLAYLI biçimde.
     if "angle" not in retention_subjects(
@@ -2032,9 +2042,10 @@ def main() -> int:
           f"çifti ÖLÇÜME BAĞLANDI · {len(RETENTION_FACTS)} özne kaydı (her "
           f"biri ölçüm ADRESİYLE) · özne çıkarılamayan hüküm {unresolved} "
           f"(sessizce atlanmıyor, SAYILIYOR)")
+    recorded_count, safe_count = active_partition_counts(lock_pkgs)
     print(f"   ⑤ bağımlılık bölmesi (Lissom 1abd4a0'ten adapte): "
-          f"{len(lock_pkgs)} paket = {len(NETWORK_DEPS_RECORDED)} kayıtlı "
-          f"(ağa çıkabilir) ⊎ {len(NETWORK_DEPS_KNOWN_SAFE)} güvenli "
+          f"{len(lock_pkgs)} paket = {recorded_count} kayıtlı "
+          f"(ağa çıkabilir) ⊎ {safe_count} güvenli "
           f"(çıkamaz) · üçüncü hâl 0 · çelişki 0")
     print("   platform/mağaza kapsamı (O-099/O-100 — alan-adı beyaz listesi "
           "YOK, prosa biçiminden türer):")

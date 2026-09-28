@@ -108,6 +108,7 @@ flutter:
     - assets/config/audio-contract.json
     - assets/content/library.json
     - assets/content/guitar_journey.v1.json
+    - assets/motion_content/manifest.json
     - assets/config/guitar-observation.v1.json
     # OFL lisans metinleri — paketlenmiş font DOSYALARIYLA BİRLİKTE dağıtılmak
     # OFL §2'nin şartı (D1, H-34/H-40 bağı: google_fonts kalktı, yazı tipleri
