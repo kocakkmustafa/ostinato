@@ -6,6 +6,7 @@ curricula. The app only ships our own text; mediaBrief entries are production
 instructions, not existing recordings or a claim of teacher validation.
 """
 
+import argparse
 import json
 from pathlib import Path
 
@@ -40,6 +41,10 @@ SHAPES = [
     ("F", "F major partial barre / Fa majör kısmi bare", [None, None, 3, 2, 1, 1], [None, None, 3, 2, 1, 1]),
     ("E5", "E root-fifth / Mi kök-beşli", [0, 2, None, None, None, None], [0, 1, None, None, None, None]),
     ("A5", "A root-fifth / La kök-beşli", [None, 0, 2, None, None, None], [None, 0, 1, None, None, None]),
+    ("G_barre", "G major movable barre / Sol majör taşınabilir bare", [3, 5, 5, 4, 3, 3], [1, 3, 4, 2, 1, 1]),
+    ("Gm_barre", "G minor movable barre / Sol minör taşınabilir bare", [3, 5, 5, 3, 3, 3], [1, 3, 4, 1, 1, 1]),
+    ("B_barre", "B major movable barre / Si majör taşınabilir bare", [None, 2, 4, 4, 4, 2], [None, 1, 3, 3, 3, 1]),
+    ("Bm_barre", "B minor movable barre / Si minör taşınabilir bare", [None, 2, 4, 4, 3, 2], [None, 1, 3, 4, 2, 1]),
 ]
 
 SHAPES_BY_LESSON = {
@@ -56,7 +61,8 @@ SHAPES_BY_LESSON = {
     "steady_bass": ["Em"], "alternating_bass": ["C"],
     "arpeggio": ["Am", "C"], "melody_bass": ["C", "Am"],
     "finger_arrangement": ["C", "Am", "Fmaj7", "G"],
-    "f_chord": ["F", "Fmaj7"], "movable_shape": ["E5", "A5"],
+    "f_chord": ["F", "Fmaj7"],
+    "movable_shape": ["G_barre", "Gm_barre", "B_barre", "Bm_barre"],
     "rhythm_final": ["G", "D", "Em", "C"],
 }
 
@@ -317,5 +323,58 @@ course = {
 
 if len(rows) != 60 or len(course_modules) != 10 or set(DETAILS) != {row[1] for row in rows}:
     raise RuntimeError(f"Expected 10 modules and 60 lessons, got {len(course_modules)} and {len(rows)}")
-OUT.write_text(json.dumps(course, ensure_ascii=False, indent=2) + "\n")
-print(f"built {OUT}: {len(course_modules)} modules, {len(rows)} lessons, {OUT.stat().st_size} bytes")
+
+# Stable lesson identities retain historical self-report records. The revision
+# describes richer practice material, not a newly certified completion state.
+enrichment = json.loads((APP / "tool/guitar_journey_enrichment.v1.json").read_text())
+if enrichment["schemaVersion"] != 1 or enrichment["contentVersion"] != VERSION:
+    raise RuntimeError("Enrichment must preserve the current progress identity")
+enriched_rows = enrichment["lessons"]
+enriched = {item["lesson_id"]: item for item in enriched_rows}
+base_lessons = [lesson for module in course_modules for lesson in module["lessons"]]
+if len(enriched_rows) != 60 or len(enriched) != 60 or set(enriched) != {l["id"] for l in base_lessons}:
+    raise RuntimeError("Enrichment must cover the exact sixty stable lessons")
+course["curriculumRevision"] = enrichment["curriculumRevision"]
+course["progressSemantics"] = enrichment["progressSemantics"]
+course["sources"] = enrichment["sourceRegistry"]
+for lesson in base_lessons:
+    item = enriched[lesson["id"]]
+    fields = item["replacementFields"]
+    if set(fields) != {"objective", "teachingSteps", "practice", "selfCheck", "commonError", "adaptation"}:
+        raise RuntimeError("Unexpected enrichment field")
+    lesson.update(fields)
+    lesson["learningLab"] = item["learningLab"]
+    for patch in item["sequencingChanges"]:
+        if patch["kind"] != "forward_skill_reference_fix":
+            raise RuntimeError("Unexpected sequence amendment")
+        lesson["shapeIds"] = patch["shapeIds"]
+    lesson["sourceIds"] = item["learningLab"]["sourceIds"]
+    for language in ("en", "tr"):
+        lesson["mediaBrief"]["sequence"][language] = "\n".join(fields["teachingSteps"][n][language] for n in range(3))
+        lesson["mediaBrief"]["errorToShow"][language] = fields["commonError"][language]
+        lesson["mediaBrief"]["adaptation"][language] = fields["adaptation"][language]
+    if lesson["id"] == "guitar.journey.independent.next_cycle":
+        # Preserve the first-read task: a performance demo would reveal its answer.
+        lesson["mediaBrief"]["sequence"] = localized(
+            "Display the original four-bar text note-and-duration card legibly and silently. "
+            "Let the learner scan, count and attempt it before showing any played example. "
+            "After their own error notes, demonstrate slowly and show how those notes inform the two-week plan; do not claim a graded sight-reading result.",
+            "Özgün dört ölçülük metin nota-süre kartını okunur ve sessiz göster. "
+            "Herhangi bir çalınmış örnekten önce kullanıcının taramasına, saymasına ve denemesine izin ver. "
+            "Kendi hata notlarından sonra yavaş göster ve bu notların iki haftalık plana nasıl girdiğini anlat; puanlı deşifre sonucu iddia etme.",
+        )
+rendered = json.dumps(course, ensure_ascii=False, indent=2) + "\n"
+parser = argparse.ArgumentParser(description="Build the bilingual guitar journey")
+parser.add_argument(
+    "--check",
+    action="store_true",
+    help="Compare generated content with the asset without writing either file",
+)
+args = parser.parse_args()
+if args.check:
+    if not OUT.exists() or OUT.read_text(encoding="utf-8") != rendered:
+        raise SystemExit("Guitar journey JSON is out of date; regenerate it")
+    print("Guitar journey JSON matches its source")
+else:
+    OUT.write_text(rendered, encoding="utf-8")
+    print(f"built {OUT}: {len(course_modules)} modules, {len(rows)} lessons, {OUT.stat().st_size} bytes")

@@ -20,6 +20,14 @@ final class GuitarText {
 GuitarText _text(Object? value) =>
     GuitarText.fromJson(value as Map<String, dynamic>);
 
+String? _lessonProgressRevision(Object? value) {
+  if (value == null) return null;
+  if (value is! String || !RegExp(r'^[A-Za-z0-9._-]{1,64}$').hasMatch(value)) {
+    throw const FormatException('Invalid guitar lesson progress revision');
+  }
+  return value;
+}
+
 final class GuitarJourneySource {
   const GuitarJourneySource({
     required this.id,
@@ -74,6 +82,188 @@ final class GuitarTuningString {
       );
 }
 
+/// An original fixed score for reading practice. Pitches are sounding guitar
+/// pitches; standard treble-clef guitar notation is written an octave higher.
+final class GuitarJourneyScoreEvent {
+  const GuitarJourneyScoreEvent({required this.sounding, required this.ticks});
+
+  final String? sounding;
+  final int ticks;
+
+  bool get isRest => sounding == null;
+  String? get written => sounding == null
+      ? null
+      : '${sounding![0]}${int.parse(sounding!.substring(1)) + 1}';
+
+  factory GuitarJourneyScoreEvent.fromJson(Map<String, dynamic> json) {
+    final ticks = json['ticks'];
+    if (ticks is! int || (ticks != 1 && ticks != 2)) {
+      throw const FormatException('Invalid first-read note duration');
+    }
+    if (json['rest'] == true) {
+      if (json.keys.toSet().difference({'rest', 'ticks'}).isNotEmpty ||
+          json.length != 2 ||
+          ticks != 2) {
+        throw const FormatException('Invalid first-read quarter rest');
+      }
+      return GuitarJourneyScoreEvent(sounding: null, ticks: ticks);
+    }
+    const allowed = {'E4', 'F4', 'G4', 'B3', 'C4', 'D4', 'G3'};
+    final sounding = json['sounding'];
+    if (json.keys.toSet().difference({'sounding', 'ticks'}).isNotEmpty ||
+        json.length != 2 ||
+        sounding is! String ||
+        !allowed.contains(sounding)) {
+      throw const FormatException('Invalid first-read sounding pitch');
+    }
+    return GuitarJourneyScoreEvent(sounding: sounding, ticks: ticks);
+  }
+}
+
+final class GuitarJourneyFirstReadScore {
+  const GuitarJourneyFirstReadScore(this.bars);
+
+  final List<List<GuitarJourneyScoreEvent>> bars;
+
+  factory GuitarJourneyFirstReadScore.fromJson(Map<String, dynamic> json) {
+    if (json.keys.toSet().difference({
+          'meter',
+          'ticksPerQuarter',
+          'pitchFrame',
+          'bars',
+        }).isNotEmpty ||
+        json.length != 4 ||
+        json['meter'] != '4/4' ||
+        json['ticksPerQuarter'] != 2 ||
+        json['pitchFrame'] != 'sounding' ||
+        json['bars'] is! List<dynamic>) {
+      throw const FormatException('Invalid first-read score header');
+    }
+    final rawBars = json['bars'] as List<dynamic>;
+    if (rawBars.length != 4) {
+      throw const FormatException('First-read score requires four bars');
+    }
+    final bars = <List<GuitarJourneyScoreEvent>>[];
+    for (final rawBar in rawBars) {
+      if (rawBar is! List<dynamic>) {
+        throw const FormatException('Invalid first-read bar');
+      }
+      final events = <GuitarJourneyScoreEvent>[
+        for (final item in rawBar)
+          GuitarJourneyScoreEvent.fromJson(item as Map<String, dynamic>),
+      ];
+      if (events.fold<int>(0, (sum, event) => sum + event.ticks) != 8) {
+        throw const FormatException(
+          'First-read 4/4 bar must contain eight ticks',
+        );
+      }
+      var startTick = 0;
+      for (var index = 0; index < events.length; index++) {
+        final event = events[index];
+        if (event.ticks == 1) {
+          final partnerIndex = startTick.isEven ? index + 1 : index - 1;
+          if (partnerIndex < 0 ||
+              partnerIndex >= events.length ||
+              events[partnerIndex].ticks != 1 ||
+              events[partnerIndex].isRest) {
+            throw const FormatException(
+              'First-read eighth notes must form an adjacent pair in one beat',
+            );
+          }
+        }
+        startTick += event.ticks;
+      }
+      bars.add(List.unmodifiable(events));
+    }
+    return GuitarJourneyFirstReadScore(List.unmodifiable(bars));
+  }
+}
+
+final class GuitarJourneyLabDrill {
+  const GuitarJourneyLabDrill({
+    required this.id,
+    required this.stage,
+    required this.task,
+    required this.minutesRange,
+    required this.rounds,
+    required this.optionalExtension,
+    this.firstReadScore,
+  });
+
+  final String id;
+  final String stage;
+  final GuitarText task;
+  final List<int> minutesRange;
+  final int rounds;
+  final bool optionalExtension;
+  final GuitarJourneyFirstReadScore? firstReadScore;
+
+  factory GuitarJourneyLabDrill.fromJson(Map<String, dynamic> json) {
+    final stage = json['stage'] as String;
+    final minutes = List<int>.from(json['suggested_minutes_range'] as List);
+    final rounds = json['suggested_rounds'] as int;
+    if (!const ['foundation', 'connected', 'transfer'].contains(stage) ||
+        minutes.length != 2 ||
+        minutes.first < 1 ||
+        minutes.last < minutes.first ||
+        rounds < 1) {
+      throw const FormatException('Invalid guitar practice drill');
+    }
+    return GuitarJourneyLabDrill(
+      id: json['id'] as String,
+      stage: stage,
+      task: _text(json['task']),
+      minutesRange: minutes,
+      rounds: rounds,
+      optionalExtension: json['optional_extension'] == true,
+      firstReadScore: json['firstReadScore'] == null
+          ? null
+          : GuitarJourneyFirstReadScore.fromJson(
+              json['firstReadScore'] as Map<String, dynamic>,
+            ),
+    );
+  }
+}
+
+final class GuitarJourneyLearningLab {
+  const GuitarJourneyLearningLab({
+    required this.technicalFocus,
+    required this.drills,
+    required this.earTraining,
+    required this.retentionTask,
+    required this.reviewDays,
+    required this.masteryCriteria,
+    required this.sensorBoundary,
+  });
+
+  final GuitarText technicalFocus;
+  final List<GuitarJourneyLabDrill> drills;
+  final GuitarText earTraining;
+  final GuitarText retentionTask;
+  final List<int> reviewDays;
+  final List<GuitarText> masteryCriteria;
+  final GuitarText sensorBoundary;
+
+  factory GuitarJourneyLearningLab.fromJson(Map<String, dynamic> json) {
+    final retention = json['retention'] as Map<String, dynamic>;
+    return GuitarJourneyLearningLab(
+      technicalFocus: _text(json['technicalFocus']),
+      drills: [
+        for (final drill in json['drills'] as List<dynamic>)
+          GuitarJourneyLabDrill.fromJson(drill as Map<String, dynamic>),
+      ],
+      earTraining: _text(json['earTraining']),
+      retentionTask: _text(retention['task']),
+      reviewDays: List<int>.from(retention['suggested_days'] as List),
+      masteryCriteria: [
+        for (final criterion in json['masteryCriteria'] as List<dynamic>)
+          _text(criterion),
+      ],
+      sensorBoundary: _text(json['sensorBoundary']),
+    );
+  }
+}
+
 final class GuitarJourneyLesson {
   const GuitarJourneyLesson({
     required this.id,
@@ -91,6 +281,8 @@ final class GuitarJourneyLesson {
     required this.shapeIds,
     required this.mediaStatus,
     required this.capstone,
+    this.learningLab,
+    this.progressRevision,
   });
 
   final String id;
@@ -108,6 +300,16 @@ final class GuitarJourneyLesson {
   final List<String> shapeIds;
   final String mediaStatus;
   final bool capstone;
+  final GuitarJourneyLearningLab? learningLab;
+
+  /// Set only when a newly required lesson task is active. Historical records
+  /// remain readable, while this lesson starts a separate self-report key.
+  final String? progressRevision;
+
+  String progressVersionFor(String courseContentVersion) =>
+      progressRevision == null
+      ? courseContentVersion
+      : '$courseContentVersion~$progressRevision';
 
   factory GuitarJourneyLesson.fromJson(Map<String, dynamic> json) =>
       GuitarJourneyLesson(
@@ -132,6 +334,12 @@ final class GuitarJourneyLesson {
         mediaStatus:
             (json['mediaBrief'] as Map<String, dynamic>)['status'] as String,
         capstone: json['capstone'] == 'original_performance',
+        progressRevision: _lessonProgressRevision(json['progressRevision']),
+        learningLab: json['learningLab'] == null
+            ? null
+            : GuitarJourneyLearningLab.fromJson(
+                json['learningLab'] as Map<String, dynamic>,
+              ),
       );
 }
 
@@ -170,6 +378,8 @@ final class GuitarJourneyCourse {
     required this.sources,
     required this.chordShapes,
     required this.tuning,
+    this.curriculumRevision,
+    this.progressSemantics,
   });
 
   final String id;
@@ -181,6 +391,8 @@ final class GuitarJourneyCourse {
   final Map<String, GuitarJourneySource> sources;
   final Map<String, GuitarChordShape> chordShapes;
   final List<GuitarTuningString> tuning;
+  final String? curriculumRevision;
+  final GuitarText? progressSemantics;
 
   List<GuitarJourneyLesson> get lessons => [
     for (final module in modules) ...module.lessons,
@@ -206,6 +418,10 @@ final class GuitarJourneyCourse {
     return GuitarJourneyCourse(
       id: json['id'] as String,
       contentVersion: json['contentVersion'] as String,
+      curriculumRevision: json['curriculumRevision'] as String?,
+      progressSemantics: json['progressSemantics'] == null
+          ? null
+          : _text(json['progressSemantics']),
       title: _text(json['title']),
       summary: _text(json['summary']),
       completionStatement: _text(json['completionStatement']),

@@ -3,11 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/account_connection.dart';
 import 'package:ostinato/app/account_data_directory.dart';
 import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/design/widgets.dart';
 import 'package:ostinato/app/guitar_journey.dart';
 import 'package:ostinato/app/guitar_journey_progress.dart';
+import 'package:ostinato/app/guitar_session_preparation.dart';
 import 'package:ostinato/app/screens/guitar_journey_screen.dart';
 
 const firstId = 'guitar.journey.start.parts';
@@ -23,6 +25,14 @@ void main() {
       final course = await GuitarJourneyCourse.load();
       expect(course.modules.length, 10);
       expect(course.lessons.length, 60);
+      expect(course.contentVersion, '2026.09.26.1');
+      expect(course.curriculumRevision, '2026.09.27.comprehensive.1');
+      expect(course.sources.length, 13);
+      expect(
+        course.lessons.every((l) => l.learningLab?.drills.length == 3),
+        isTrue,
+      );
+      expect(course.lessons.first.learningLab!.reviewDays, [1, 3, 7]);
       expect(course.lessons.first.id, firstId);
       expect(course.lessons.first.prerequisiteIds, isEmpty);
       expect(course.lessons.last.prerequisiteIds, [course.lessons[58].id]);
@@ -37,6 +47,16 @@ void main() {
       ]);
       expect(course.chordShapes['Em']!.frets6to1, [0, 2, 2, 0, 0, 0]);
       expect(course.chordShapes['D']!.frets6to1, [null, null, 0, 2, 3, 2]);
+      expect(
+        course.lessons.singleWhere((l) => l.id.endsWith('.power_chords')).shapeIds,
+        ['E5', 'A5'],
+      );
+      expect(
+        course.lessons.singleWhere((l) => l.id.endsWith('.movable_shape')).shapeIds,
+        ['G_barre', 'Gm_barre', 'B_barre', 'Bm_barre'],
+      );
+      expect(course.chordShapes['G_barre']!.frets6to1, [3, 5, 5, 4, 3, 3]);
+      expect(course.chordShapes['Bm_barre']!.frets6to1, [null, 2, 4, 4, 3, 2]);
       expect(
         course.lessons.where((l) => l.shapeIds.isNotEmpty).length,
         greaterThan(15),
@@ -55,6 +75,135 @@ void main() {
       );
     },
   );
+
+  test('older content without a practice lab still parses', () {
+    final json =
+        jsonDecode(
+              File('assets/content/guitar_journey.v1.json').readAsStringSync(),
+            )
+            as Map<String, dynamic>;
+    json.remove('curriculumRevision');
+    json.remove('progressSemantics');
+    final modules = json['modules'] as List<dynamic>;
+    final first = (modules.first as Map<String, dynamic>)['lessons'] as List;
+    (first.first as Map<String, dynamic>).remove('learningLab');
+    final course = GuitarJourneyCourse.fromJson(json);
+    expect(course.lessons.first.learningLab, isNull);
+    expect(course.curriculumRevision, isNull);
+    expect(course.lessons.length, 60);
+  });
+
+  test(
+    'enrichment keeps an existing historical completion under its stable key',
+    () async {
+      final root = await Directory.systemTemp.createTemp(
+        'ostinato-guitar-history-',
+      );
+      addTearDown(() => root.delete(recursive: true));
+      final store = GuitarJourneyProgressStore(
+        directoryProvider: () async => root,
+      );
+      await store.record(
+        lessonId: firstId,
+        contentVersion: '2026.09.26.1',
+        action: GuitarProgressAction.practiced,
+        at: DateTime.utc(2026, 9, 26),
+      );
+      await store.record(
+        lessonId: firstId,
+        contentVersion: '2026.09.26.1',
+        action: GuitarProgressAction.selfReportedCompleted,
+        at: DateTime.utc(2026, 9, 26, 1),
+      );
+      final before = File(
+        '${root.path}/guitar_journey_progress.v1.json',
+      ).readAsStringSync();
+      final course = await GuitarJourneyCourse.load();
+      final reopened = (await store
+          .load())['${course.contentVersion}|$firstId'];
+      expect(reopened!.practiceCount, 1);
+      expect(reopened.selfReportedCompletedAt, DateTime.utc(2026, 9, 26, 1));
+      expect(
+        File('${root.path}/guitar_journey_progress.v1.json').readAsStringSync(),
+        before,
+      );
+      expect(course.lessons.first.learningLab, isNotNull);
+    },
+  );
+
+  for (final index in [0, 50, 59]) {
+    testWidgets(
+      'Turkish practice lab at narrow width and 200percent text ($index)',
+      (tester) async {
+        tester.view.physicalSize = const Size(375, 812);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        final root = Directory.systemTemp.createTempSync(
+          'ostinato-guitar-lab-ui-',
+        );
+        addTearDown(() => root.deleteSync(recursive: true));
+        final course = GuitarJourneyCourse.fromJson(
+          jsonDecode(
+                File(
+                  'assets/content/guitar_journey.v1.json',
+                ).readAsStringSync(),
+              )
+              as Map<String, dynamic>,
+        );
+        final lesson = course.lessons[index];
+        await tester.pumpWidget(
+          MaterialApp(
+            locale: const Locale('tr'),
+            supportedLocales: appSupportedLocales,
+            localizationsDelegates: appLocalizationsDelegates,
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: TextScaler.linear(2)),
+              child: child!,
+            ),
+            home: GuitarJourneyLessonScreen(
+              course: course,
+              lesson: lesson,
+              store: GuitarJourneyProgressStore(
+                directoryProvider: () async => root,
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        if (index > 2) {
+          final acknowledge = find.byKey(
+            const Key('guitar-session-acknowledge'),
+          );
+          await tester.ensureVisible(acknowledge);
+          await tester.tap(acknowledge);
+          await tester.pumpAndSettle();
+        }
+        expect(
+          find.byKey(Key('guitar-learning-lab-${lesson.id}')),
+          findsOneWidget,
+        );
+        for (final drill in lesson.learningLab!.drills) {
+          expect(find.byKey(Key('guitar-drill-${drill.id}')), findsOneWidget);
+          if (drill.firstReadScore != null) {
+            expect(find.text(drill.task.tr), findsNothing);
+            final reveal = find.byKey(const Key('guitar-first-read-reveal'));
+            await tester.ensureVisible(reveal);
+            await tester.tap(reveal);
+            await tester.pumpAndSettle();
+          }
+          expect(find.text(drill.task.tr), findsOneWidget);
+        }
+        expect(find.textContaining('original_flexible_product'), findsNothing);
+        expect(find.textContaining('schemaVersion'), findsNothing);
+        expect(find.textContaining('native_status'), findsNothing);
+        expect(find.text('Bu çalışmayı tamamladım'), findsOneWidget);
+        expect(tester.takeException(), isNull);
+      },
+    );
+  }
 
   test(
     'progress distinguishes seen, practice and self-report; versions and accounts stay separate',
@@ -313,6 +462,10 @@ void main() {
         ),
       ),
     );
+    final acknowledge = find.byKey(const Key('guitar-session-acknowledge'));
+    await tester.ensureVisible(acknowledge);
+    await tester.tap(acknowledge);
+    await tester.pumpAndSettle();
     expect(find.text('E minor', skipOffstage: false), findsOneWidget);
     expect(find.text('A minor', skipOffstage: false), findsOneWidget);
     expect(
@@ -359,6 +512,10 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+    final acknowledge = find.byKey(const Key('guitar-session-acknowledge'));
+    await tester.ensureVisible(acknowledge);
+    await tester.tap(acknowledge);
+    await tester.pumpAndSettle();
     expect(
       find.text('Fa majör seçenekleri', skipOffstage: false),
       findsOneWidget,
@@ -368,6 +525,266 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('BU DERSTEN ÖNCE', skipOffstage: false), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  test(
+    'session preparation resets after a date change, background and break',
+    () {
+      var now = DateTime(2026, 9, 28, 9);
+      final preparation = GuitarSessionPreparation(now: () => now);
+      addTearDown(preparation.dispose);
+
+      expect(preparation.isAcknowledged, isFalse);
+      preparation.acknowledge();
+      expect(preparation.isAcknowledged, isTrue);
+      now = DateTime(2026, 9, 29, 9);
+      expect(preparation.isAcknowledged, isFalse);
+      preparation.didChangeAppLifecycleState(AppLifecycleState.resumed);
+      preparation.acknowledge();
+      preparation.didChangeAppLifecycleState(AppLifecycleState.paused);
+      expect(preparation.isAcknowledged, isFalse);
+      preparation.acknowledge();
+      preparation.afterBreak();
+      expect(preparation.isAcknowledged, isFalse);
+    },
+  );
+
+  testWidgets(
+    'yesterday prerequisites do not prepare a new accompaniment session',
+    (tester) async {
+      final course = GuitarJourneyCourse.fromJson(
+        jsonDecode(
+              File('assets/content/guitar_journey.v1.json').readAsStringSync(),
+            )
+            as Map<String, dynamic>,
+      );
+      final root = Directory.systemTemp.createTempSync('ostinato-guitar-prep-');
+      addTearDown(() => root.deleteSync(recursive: true));
+      final store = GuitarJourneyProgressStore(
+        directoryProvider: () async => root,
+      );
+      final yesterday = DateTime.utc(2026, 9, 27, 10);
+      final initialProgress = await tester.runAsync(() async {
+        for (final id in [
+          'guitar.journey.start.setup',
+          'guitar.journey.start.tuning',
+          'guitar.journey.strum.mute',
+        ]) {
+          await store.record(
+            lessonId: id,
+            contentVersion: course.contentVersion,
+            action: GuitarProgressAction.practiced,
+            at: yesterday,
+          );
+          await store.record(
+            lessonId: id,
+            contentVersion: course.contentVersion,
+            action: GuitarProgressAction.selfReportedCompleted,
+            at: yesterday.add(const Duration(minutes: 10)),
+          );
+        }
+        return store.load();
+      });
+      expect(initialProgress, isNotNull);
+      final now = DateTime(2026, 9, 28, 10);
+      final preparation = GuitarSessionPreparation(now: () => now);
+      addTearDown(preparation.dispose);
+      const lessonId = 'guitar.journey.strum.accompaniment';
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: GuitarJourneyScreen(
+            initialCourse: course,
+            initialProgress: initialProgress!,
+            progressStoreFactory: (_) => store,
+            preparation: preparation,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final lessonTile = find.byKey(const Key('guitar-lesson-$lessonId'));
+      await tester.ensureVisible(lessonTile);
+      await tester.tap(lessonTile);
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(const Key('guitar-session-preparation')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(const Key('guitar-learning-lab-$lessonId')),
+        findsNothing,
+      );
+      expect(find.text('Record practice', skipOffstage: false), findsNothing);
+
+      final observe = find.byKey(const Key('guitar-session-observe'));
+      await tester.ensureVisible(observe);
+      await tester.tap(observe);
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(const Key('guitar-learning-lab-$lessonId')),
+        findsOneWidget,
+      );
+      expect(
+        tester
+            .widget<OutlinedButton>(
+              find.widgetWithText(OutlinedButton, 'Record practice'),
+            )
+            .onPressed,
+        isNull,
+      );
+      expect(
+        tester
+            .widget<FilledButton>(
+              find.widgetWithText(FilledButton, 'I completed this practice'),
+            )
+            .onPressed,
+        isNull,
+      );
+      final viewed = find.text('Mark viewed');
+      await tester.ensureVisible(viewed);
+      await tester.tap(viewed);
+      GuitarLessonProgress? observedRecord;
+      for (var attempt = 0; attempt < 40; attempt++) {
+        observedRecord = (await tester.runAsync(
+          store.load,
+        ))?['${course.contentVersion}|$lessonId'];
+        await tester.pump();
+        if (observedRecord?.seenAt != null) break;
+      }
+      expect(observedRecord?.seenAt, isNotNull);
+      expect(observedRecord?.practiceCount, 0);
+      expect(observedRecord?.selfReportedCompletedAt, isNull);
+
+      final acknowledge = find.byKey(const Key('guitar-session-acknowledge'));
+      await tester.ensureVisible(acknowledge);
+      await tester.tap(acknowledge);
+      await tester.pumpAndSettle();
+      expect(preparation.isAcknowledged, isTrue);
+      expect(find.byKey(const Key('guitar-session-prepared')), findsOneWidget);
+      final afterBreak = find.byKey(const Key('guitar-session-after-break'));
+      await tester.ensureVisible(afterBreak);
+      await tester.tap(afterBreak);
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(const Key('guitar-session-preparation')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(const Key('guitar-learning-lab-$lessonId')),
+        findsNothing,
+      );
+      final afterBreakRecord = (await tester.runAsync(
+        store.load,
+      ))?['${course.contentVersion}|$lessonId'];
+      expect(afterBreakRecord?.practiceCount, 0);
+      expect(afterBreakRecord?.selfReportedCompletedAt, isNull);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'setup and tuning lessons teach without a duplicate session gate',
+    (tester) async {
+      final course = GuitarJourneyCourse.fromJson(
+        jsonDecode(
+              File('assets/content/guitar_journey.v1.json').readAsStringSync(),
+            )
+            as Map<String, dynamic>,
+      );
+      for (final id in [
+        'guitar.journey.start.setup',
+        'guitar.journey.start.tuning',
+      ]) {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: GuitarJourneyLessonScreen(
+              course: course,
+              lesson: course.lessons.firstWhere((lesson) => lesson.id == id),
+              store: const GuitarJourneyProgressStore(),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(const Key('guitar-session-preparation')),
+          findsNothing,
+        );
+        expect(find.byKey(Key('guitar-learning-lab-$id')), findsOneWidget);
+      }
+    },
+  );
+
+  testWidgets('a different account cannot inherit guitar session preparation', (
+    tester,
+  ) async {
+    final course = GuitarJourneyCourse.fromJson(
+      jsonDecode(
+            File('assets/content/guitar_journey.v1.json').readAsStringSync(),
+          )
+          as Map<String, dynamic>,
+    );
+    final preparation = GuitarSessionPreparation()..acknowledge();
+    addTearDown(preparation.dispose);
+    Widget app(String accountId) => MaterialApp(
+      home: AccountScope(
+        connection: null,
+        currentUserId: accountId,
+        child: GuitarJourneyScreen(
+          initialCourse: course,
+          initialProgress: const {},
+          preparation: preparation,
+          progressStoreFactory: (id) =>
+              GuitarJourneyProgressStore(accountUserId: id),
+        ),
+      ),
+    );
+    await tester.pumpWidget(app(accountA));
+    await tester.pumpAndSettle();
+    expect(preparation.isAcknowledged, isTrue);
+    await tester.pumpWidget(app(accountB));
+    await tester.pumpAndSettle();
+    expect(preparation.isAcknowledged, isFalse);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('course note entry shares its fresh-session acknowledgment', (
+    tester,
+  ) async {
+    final course = GuitarJourneyCourse.fromJson(
+      jsonDecode(
+            File('assets/content/guitar_journey.v1.json').readAsStringSync(),
+          )
+          as Map<String, dynamic>,
+    );
+    final preparation = GuitarSessionPreparation();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: GuitarJourneyScreen(
+          initialCourse: course,
+          initialProgress: const {},
+          preparation: preparation,
+          progressStoreFactory: (id) =>
+              GuitarJourneyProgressStore(accountUserId: id),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    final entry = find.byKey(const Key('guitar-note-observation-entry'));
+    await tester.ensureVisible(entry);
+    await tester.tap(entry);
+    await tester.pumpAndSettle();
+    expect(preparation.isAcknowledged, isFalse);
+    expect(find.byKey(const Key('note-session-acknowledge')), findsOneWidget);
+    final acknowledge = find.byKey(const Key('note-session-acknowledge'));
+    await tester.ensureVisible(acknowledge);
+    await tester.tap(acknowledge);
+    await tester.pump();
+    expect(preparation.isAcknowledged, isTrue);
+    expect(find.byKey(const Key('note-session-after-break')), findsOneWidget);
+    await tester.pumpWidget(const MaterialApp(home: SizedBox()));
+    preparation.dispose();
     expect(tester.takeException(), isNull);
   });
 }
