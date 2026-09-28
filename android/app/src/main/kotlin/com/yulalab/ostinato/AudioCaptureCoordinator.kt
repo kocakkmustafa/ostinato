@@ -10,6 +10,7 @@ internal class AudioCaptureCoordinator(
   private val dispatch: CaptureDispatch,
   private val closeDeadlineMs: Long = 2_000,
   private val readExitBudgetMs: Long = 500,
+  private val arbiter: PracticeAudioArbiter? = null,
 ) {
   internal interface RecorderFactory { fun create(sampleRate: Int): RecorderPort }
   internal interface RecorderPort {
@@ -66,7 +67,9 @@ internal class AudioCaptureCoordinator(
     val stopReplies = mutableListOf<ReplyGate>()
   }
 
-  private val gate = Any()
+  // Admission to the legacy AudioRecord path and the future output path is
+  // serialized by the same process monitor. A per-Activity check is too late.
+  private val gate = arbiter?.gate ?: Any()
   private val tombstones = mutableSetOf<String>()
   private val bindings = IdentityHashMap<Any, MutableSet<String>>()
   private var current: Attempt? = null
@@ -113,7 +116,8 @@ internal class AudioCaptureCoordinator(
     )
   }
 
-  fun start(owner: Any, id: String, rate: Int, output: Output, reply: Reply) {
+  fun start(owner: Any, id: String, rate: Int, output: Output, reply: Reply,
+            claim: PracticeAudioArbiter.CaptureClaim? = null) {
     val response = ReplyGate(reply)
     val attempt = synchronized(gate) {
       if (!validId(id) || rate !in setOf(44100, 48000)) {
@@ -126,6 +130,9 @@ internal class AudioCaptureCoordinator(
         response.error("capture_close_unconfirmed"); return
       }
       if (current != null || id in tombstones) {
+        response.error("capture_close_unconfirmed"); return
+      }
+      if (arbiter != null && !arbiter.claimCaptureStartLocked(owner, claim)) {
         response.error("capture_close_unconfirmed"); return
       }
       Attempt(owner, id, rate, ++generation, output, response).also { current = it }
@@ -174,8 +181,17 @@ internal class AudioCaptureCoordinator(
       if (current !== attempt || attempt.stopRequested) return
       val port = attempt.port ?: return
       attempt.phase = "running"
-      try { port.watchRoute { dispatch.main { emitRoute(attempt) } } }
-      catch (_: Throwable) { /* event is optional */ }
+      try {
+        port.watchRoute {
+          dispatch.main {
+            synchronized(gate) route@{
+              if (!isLiveLocked(attempt)) return@route
+              emitRoute(attempt)
+              arbiter?.closeAllGlobalForCaptureOwner(attempt.owner)
+            }
+          }
+        }
+      } catch (_: Throwable) { /* event is optional */ }
       emitRoute(attempt)
       attempt.reader = dispatch.reader { readLoop(attempt, port) }
       attempt.startReply.success()
@@ -345,6 +361,13 @@ internal class AudioCaptureCoordinator(
   }
 
   fun requestClose(owner: Any, id: String) = stop(owner, id, null)
+
+  /** Process lifecycle and engine replacement, never a Dart MethodChannel. */
+  fun requestCloseGlobal() = synchronized(gate) {
+    current?.takeUnless {
+      it.phase == "releasedAwaitingExplicitRetry" || it.phase == "unconfirmedQuiescent"
+    }?.let(::requestCloseLocked)
+  }
 
   private fun requestClose(attempt: Attempt) = synchronized(gate) {
     requestCloseLocked(attempt)

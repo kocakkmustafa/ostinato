@@ -1,3 +1,4 @@
+import AVFoundation
 import Flutter
 import XCTest
 @testable import Runner
@@ -535,5 +536,418 @@ final class RunnerTests: XCTestCase {
       }
     }
     return phase
+  }
+}
+
+private final class FakePracticeOutput: PracticeOutputHardware {
+  var startCalls = 0
+  var stopCalls = 0
+  var failStart = false
+  var failStop = false
+  var startGate: DispatchSemaphore?
+  var startEntered: XCTestExpectation?
+
+  func start(assetId: String) throws {
+    startCalls += 1
+    startEntered?.fulfill()
+    startGate?.wait()
+    if failStart { throw FakeCaptureFailure.deactivation }
+  }
+
+  func stop() throws {
+    stopCalls += 1
+    if failStop { throw FakeCaptureFailure.deactivation }
+  }
+}
+
+final class PracticeAudioArbiterTests: XCTestCase {
+  private let attempt = String(repeating: "a", count: 32)
+  private let inputLease = String(repeating: "b", count: 32)
+  private let outputLease = String(repeating: "c", count: 32)
+
+  private func onMain<T>(_ work: () -> T) -> T {
+    if Thread.isMainThread { return work() }
+    return DispatchQueue.main.sync(execute: work)
+  }
+
+  private func call(
+    _ arbiter: PracticeAudioArbiter,
+    _ owner: PracticeAudioOwner,
+    _ method: String,
+    _ arguments: [String: Any]
+  ) -> Any? {
+    onMain {
+      var answer: Any?
+      arbiter.handle(FlutterMethodCall(methodName: method, arguments: arguments), owner: owner) {
+        answer = $0
+      }
+      return answer
+    }
+  }
+
+  private func ownerFields(_ owner: PracticeAudioOwner) -> [String: Any] {
+    ["ownerToken": owner.token, "engineGeneration": owner.engineGeneration]
+  }
+
+  private func waitForPhase(_ phase: String, _ coordinator: AudioCaptureCoordinator) {
+    let reached = expectation(description: "capture phase \(phase)")
+    func poll() {
+      if coordinator.closeState()["phase"] as? String == phase { reached.fulfill() }
+      else { DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: poll) }
+    }
+    onMain(poll)
+    wait(for: [reached], timeout: 2)
+  }
+
+  private func waitForOutputPhase(
+    _ phase: String, _ arbiter: PracticeAudioArbiter, _ owner: PracticeAudioOwner
+  ) {
+    let reached = expectation(description: "output phase \(phase)")
+    func poll() {
+      let state = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+      if state?["outputPhase"] as? String == phase { reached.fulfill() }
+      else { DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: poll) }
+    }
+    onMain(poll)
+    wait(for: [reached], timeout: 2)
+  }
+
+  func testOutputReservationBlocksLegacyMicrophoneStartAndCanCloseWithoutHardware() {
+    let captureHardware = FakeCaptureHardware()
+    let coordinator = AudioCaptureCoordinator(hardware: captureHardware, canCapture: { true })
+    let output = FakePracticeOutput()
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       outputHardware: output, allowedOutputIds: ["fixture"])
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as? [String: Any])?["contextGeneration"] as? Int
+    XCTAssertNotNil(context)
+    let capture = AudioCaptureStreamer(coordinator: coordinator, arbiter: arbiter, owner: owner)
+    onMain {
+      XCTAssertNil(capture.onListen(withArguments: ["attemptId": attempt], eventSink: { _ in }))
+    }
+
+    let reserved = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context!, "leaseId": outputLease, "side": "output"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(reserved?["status"] as? String, "reserved")
+    let snap = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(snap?["activeSide"] as? String, "output")
+    XCTAssertEqual(snap?["allClear"] as? Bool, false)
+    XCTAssertEqual(snap?["inputPhase"] as? String, "clear")
+    var startAnswer: Any?
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "start",
+        arguments: ["attemptId": attempt, "sampleRate": 44100])) { startAnswer = $0 }
+    }
+    XCTAssertEqual((startAnswer as? FlutterError)?.code, "audio_busy")
+    XCTAssertEqual(captureHardware.startCalls, 0)
+    XCTAssertEqual(output.startCalls, 0)
+
+    let closed = call(arbiter, owner, "closeAll", ownerFields(owner).merging([
+      "contextGeneration": context!, "leaseId": outputLease,
+      "leaseGeneration": reserved!["leaseGeneration"]!, "reason": "userStop"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(closed?["status"] as? String, "closed")
+    XCTAssertEqual((closed?["snapshot"] as? [String: Any])?["allClear"] as? Bool, true)
+  }
+
+  func testInputReservationAndCaptureBlockOutputReservation() {
+    let captureHardware = FakeCaptureHardware()
+    let coordinator = AudioCaptureCoordinator(hardware: captureHardware, canCapture: { true })
+    let output = FakePracticeOutput()
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       outputHardware: output, allowedOutputIds: ["fixture"])
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as? [String: Any])?["contextGeneration"] as? Int
+    XCTAssertNotNil(context)
+    let capture = AudioCaptureStreamer(coordinator: coordinator, arbiter: arbiter, owner: owner)
+    onMain {
+      XCTAssertNil(capture.onListen(withArguments: ["attemptId": attempt], eventSink: { _ in }))
+    }
+    let reserved = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context!, "leaseId": inputLease, "side": "input"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(reserved?["status"] as? String, "reserved")
+    let held = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    let wrongRecovery = call(arbiter, owner, "recoverAll", ownerFields(owner).merging([
+      "expectedStateRevision": held!["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs })
+    XCTAssertEqual((wrongRecovery as? FlutterError)?.code, "audio_busy")
+    let started = expectation(description: "input started")
+    var inputArgs = ownerFields(owner)
+    inputArgs.merge(["contextGeneration": context!, "leaseId": inputLease,
+                     "leaseGeneration": reserved!["leaseGeneration"]!,
+                     "attemptId": attempt, "sampleRate": 44100]) { _, rhs in rhs }
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "start", arguments: inputArgs)) { answer in
+        XCTAssertNil(answer)
+        started.fulfill()
+      }
+    }
+    wait(for: [started], timeout: 2)
+    waitForPhase("running", coordinator)
+    let snapshot = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(snapshot?["activeSide"] as? String, "input")
+    XCTAssertEqual(snapshot?["inputPhase"] as? String, "running")
+    XCTAssertEqual(snapshot?["sessionReleased"] as? Bool, false)
+    XCTAssertEqual(snapshot?["allClear"] as? Bool, false)
+    let refused = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context!, "leaseId": outputLease, "side": "output"
+    ]) { _, rhs in rhs })
+    XCTAssertEqual((refused as? FlutterError)?.code, "audio_busy")
+    XCTAssertEqual(output.startCalls, 0)
+    _ = call(arbiter, owner, "closeAll", ownerFields(owner).merging([
+      "contextGeneration": context!, "leaseId": inputLease,
+      "leaseGeneration": reserved!["leaseGeneration"]!, "reason": "userStop"
+    ]) { _, rhs in rhs })
+    waitForPhase("clear", coordinator)
+    let clear = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(clear?["allClear"] as? Bool, true)
+  }
+
+  func testReplacedEngineCannotReadOrStopNewCapture() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+    let oldOwner = onMain { arbiter.replaceEngine() }
+    let old = AudioCaptureStreamer(coordinator: coordinator, arbiter: arbiter, owner: oldOwner)
+    onMain { XCTAssertNil(old.onListen(withArguments: ["attemptId": attempt], eventSink: { _ in })) }
+    let nextOwner = onMain { arbiter.replaceEngine() }
+    XCTAssertNotEqual(nextOwner, oldOwner)
+    let oldRead = call(arbiter, oldOwner, "readAllAudioState", ownerFields(oldOwner))
+    XCTAssertEqual((oldRead as? FlutterError)?.code, "stale_audio_owner")
+    var oldStop: Any?
+    onMain {
+      old.handle(FlutterMethodCall(methodName: "stop", arguments: ["attemptId": attempt])) {
+        oldStop = $0
+      }
+    }
+    XCTAssertEqual((oldStop as? FlutterError)?.code, "stale_audio_owner")
+    let nextRead = call(arbiter, nextOwner, "readAllAudioState", ownerFields(nextOwner)) as? [String: Any]
+    XCTAssertEqual(nextRead?["ownerToken"] as? String, nextOwner.token)
+  }
+
+  func testOutputSetupAndReleaseFailuresRemainStickyUntilExplicitRetry() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let output = FakePracticeOutput()
+    output.failStart = true
+    output.failStop = true
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       outputHardware: output, allowedOutputIds: ["fixture"])
+    let owner = onMain { arbiter.replaceEngine() }
+    let binding = call(arbiter, owner, "bind", ["schemaVersion": 1]) as? [String: Any]
+    let context = binding!["contextGeneration"] as! Int
+    let reserved = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "output"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(reserved?["status"] as? String, "reserved")
+
+    let failedStart = expectation(description: "output setup rejected")
+    var replyCount = 0
+    onMain {
+      arbiter.handle(FlutterMethodCall(methodName: "startOutput", arguments:
+        ownerFields(owner).merging([
+          "contextGeneration": context, "leaseId": outputLease,
+          "leaseGeneration": reserved!["leaseGeneration"]!, "assetId": "fixture"
+        ]) { _, rhs in rhs }), owner: owner) { answer in
+          replyCount += 1
+          XCTAssertEqual((answer as? FlutterError)?.code, "audio_close_unconfirmed")
+          failedStart.fulfill()
+        }
+    }
+    wait(for: [failedStart], timeout: 2)
+    waitForOutputPhase("unconfirmedQuiescent", arbiter, owner)
+    let blocked = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(blocked?["requiresExplicitRetry"] as? Bool, true)
+    XCTAssertEqual(blocked?["allClear"] as? Bool, false)
+    XCTAssertEqual(output.startCalls, 1)
+    XCTAssertEqual(output.stopCalls, 1)
+    XCTAssertEqual(replyCount, 1)
+
+    output.failStop = false
+    let retry = call(arbiter, owner, "recoverAll", ownerFields(owner).merging([
+      "expectedStateRevision": blocked!["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(retry?["status"] as? String, "pending")
+    waitForOutputPhase("clear", arbiter, owner)
+    let clear = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(clear?["allClear"] as? Bool, true)
+    XCTAssertEqual(output.stopCalls, 2)
+    XCTAssertEqual(replyCount, 1)
+  }
+
+  func testFailedInputDeactivationCannotYieldAllClear() {
+    let hardware = FakeCaptureHardware()
+    hardware.failuresRemaining = 1
+    let coordinator = AudioCaptureCoordinator(hardware: hardware, canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+    let owner = onMain { arbiter.replaceEngine() }
+    let capture = AudioCaptureStreamer(coordinator: coordinator, arbiter: arbiter, owner: owner)
+    onMain {
+      XCTAssertNil(capture.onListen(withArguments: ["attemptId": attempt], eventSink: { _ in }))
+    }
+    let started = expectation(description: "legacy input started")
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "start",
+        arguments: ["attemptId": attempt, "sampleRate": 44100])) { answer in
+        XCTAssertNil(answer)
+        started.fulfill()
+      }
+    }
+    wait(for: [started], timeout: 2)
+    waitForPhase("running", coordinator)
+    let failed = expectation(description: "session deactivation failed")
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "stop", arguments: ["attemptId": attempt])) {
+        answer in
+        XCTAssertEqual((answer as? FlutterError)?.code, "capture_close_unconfirmed")
+        failed.fulfill()
+      }
+    }
+    wait(for: [failed], timeout: 2)
+    waitForPhase("unconfirmedQuiescent", coordinator)
+    let held = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(held?["inputReleased"] as? Bool, false)
+    XCTAssertEqual(held?["sessionReleased"] as? Bool, false)
+    XCTAssertEqual(held?["requiresExplicitRetry"] as? Bool, true)
+    XCTAssertEqual(held?["allClear"] as? Bool, false)
+    let refused = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": held!["contextGeneration"]!,
+      "leaseId": inputLease, "side": "input"
+    ]) { _, rhs in rhs })
+    XCTAssertEqual((refused as? FlutterError)?.code, "audio_busy")
+
+    _ = call(arbiter, owner, "recoverAll", ownerFields(owner).merging([
+      "expectedStateRevision": held!["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs })
+    waitForPhase("clear", coordinator)
+    let clear = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(clear?["allClear"] as? Bool, true)
+    XCTAssertEqual(hardware.stopCalls, 2)
+  }
+
+  func testCloseWhileOutputSetupIsBlockedFencesLateStartAndRepliesOnce() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let output = FakePracticeOutput()
+    let gate = DispatchSemaphore(value: 0)
+    output.startGate = gate
+    output.startEntered = expectation(description: "output setup entered")
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       outputHardware: output, allowedOutputIds: ["fixture"])
+    let owner = onMain { arbiter.replaceEngine() }
+    let binding = call(arbiter, owner, "bind", ["schemaVersion": 1]) as? [String: Any]
+    let context = binding!["contextGeneration"] as! Int
+    let reserved = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "output"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(reserved?["status"] as? String, "reserved")
+    let closedStart = expectation(description: "late start denied")
+    var replies = 0
+    let permitFields = ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": reserved!["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    onMain {
+      arbiter.handle(FlutterMethodCall(methodName: "startOutput",
+                                       arguments: permitFields.merging(["assetId": "fixture"]) { _, rhs in rhs }),
+                     owner: owner) { answer in
+        replies += 1
+        XCTAssertEqual((answer as? FlutterError)?.code, "audio_close_unconfirmed")
+        closedStart.fulfill()
+      }
+    }
+    wait(for: [output.startEntered!], timeout: 1)
+    let close = call(arbiter, owner, "closeAll", permitFields.merging([
+      "reason": "userStop"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(close?["status"] as? String, "pending")
+    XCTAssertEqual((close?["snapshot"] as? [String: Any])?["allClear"] as? Bool, false)
+    gate.signal()
+    wait(for: [closedStart], timeout: 2)
+    waitForOutputPhase("clear", arbiter, owner)
+    let state = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(state?["allClear"] as? Bool, true)
+    XCTAssertEqual(replies, 1)
+    XCTAssertEqual(output.startCalls, 1)
+    XCTAssertEqual(output.stopCalls, 1)
+  }
+
+  func testCancelledEventSinkRetainsAuthorityForExplicitInputCloseRetry() {
+    let hardware = FakeCaptureHardware()
+    hardware.failuresRemaining = 1
+    let coordinator = AudioCaptureCoordinator(hardware: hardware, canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+    let owner = onMain { arbiter.replaceEngine() }
+    let capture = AudioCaptureStreamer(coordinator: coordinator, arbiter: arbiter, owner: owner)
+    onMain {
+      XCTAssertNil(capture.onListen(withArguments: ["attemptId": attempt], eventSink: { _ in }))
+    }
+    let started = expectation(description: "input started before stream cancellation")
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "start",
+        arguments: ["attemptId": attempt, "sampleRate": 44100])) { answer in
+        XCTAssertNil(answer)
+        started.fulfill()
+      }
+    }
+    wait(for: [started], timeout: 2)
+    waitForPhase("running", coordinator)
+    onMain {
+      XCTAssertNil(capture.onCancel(withArguments: ["attemptId": attempt]))
+    }
+    waitForPhase("unconfirmedQuiescent", coordinator)
+    var ordinaryStop: Any?
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "stop",
+        arguments: ["attemptId": attempt])) { ordinaryStop = $0 }
+    }
+    XCTAssertEqual((ordinaryStop as? FlutterError)?.code, "capture_close_unconfirmed")
+    let recovered = expectation(description: "explicit input close retry")
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "retryStop",
+        arguments: ["attemptId": attempt])) { answer in
+        XCTAssertNil(answer)
+        recovered.fulfill()
+      }
+    }
+    wait(for: [recovered], timeout: 2)
+    waitForPhase("clear", coordinator)
+    XCTAssertEqual(hardware.stopCalls, 2)
+  }
+
+  func testNewOutputRouteFencesReservedInputBeforeCaptureStarts() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+    let owner = onMain { arbiter.replaceEngine() }
+    let binding = call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any]
+    let originalContext = binding["contextGeneration"] as! Int
+    let reserved = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": originalContext, "leaseId": inputLease, "side": "input"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(reserved?["status"] as? String, "reserved")
+    onMain {
+      NotificationCenter.default.post(name: AVAudioSession.routeChangeNotification,
+        object: nil, userInfo: [AVAudioSessionRouteChangeReasonKey:
+          AVAudioSession.RouteChangeReason.newDeviceAvailable.rawValue])
+    }
+    let fenced = expectation(description: "new output route fenced reserved input")
+    func poll() {
+      let state = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+      if (state?["contextGeneration"] as? Int ?? originalContext) > originalContext {
+        XCTAssertEqual(state?["allClear"] as? Bool, true)
+        fenced.fulfill()
+      } else {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: poll)
+      }
+    }
+    onMain(poll)
+    wait(for: [fenced], timeout: 2)
+    let oldClaim: [String: Any] = ownerFields(owner).merging([
+      "contextGeneration": originalContext, "leaseId": inputLease,
+      "leaseGeneration": reserved!["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    let rejected = onMain {
+      arbiter.claimInputStart(owner: owner, attemptId: attempt, permit: oldClaim)
+    }
+    XCTAssertNotNil(rejected)
   }
 }

@@ -19,14 +19,35 @@ import java.util.concurrent.Executors
 /** Process-owned capture. Neither coordinator nor workers retain an Activity. */
 internal object AudioCaptureRuntime {
   private var coordinator: AudioCaptureCoordinator? = null
+  private val arbiter = PracticeAudioArbiter(AndroidArbiterWork())
 
-  fun coordinator(context: Context): AudioCaptureCoordinator = coordinator ?: AudioCaptureCoordinator(
-    AndroidRecorderFactory(), AndroidCaptureDispatch(),
-  ).also { coordinator = it }
+  @Synchronized fun coordinator(context: Context): AudioCaptureCoordinator =
+    coordinator ?: AudioCaptureCoordinator(
+      AndroidRecorderFactory(), AndroidCaptureDispatch(), arbiter = arbiter,
+    ).also {
+      coordinator = it
+      arbiter.attachCapture(it)
+    }
 
-  fun foreground(owner: Any, isForeground: Boolean) {
-    coordinator?.foreground(owner, isForeground)
+  fun registerEngine(context: Context, owner: Any, engine: Any): PracticeAudioArbiter.Binding {
+    coordinator(context)
+    return arbiter.registerEngine(owner, engine)
   }
+
+  fun arbiter(): PracticeAudioArbiter = arbiter
+
+  fun foreground(binding: PracticeAudioArbiter.Binding, isForeground: Boolean) =
+    arbiter.foreground(binding, isForeground)
+}
+
+private class AndroidArbiterWork : PracticeAudioArbiter.Work {
+  private val main = Handler(Looper.getMainLooper())
+  private val hardware = Executors.newSingleThreadExecutor { task ->
+    Thread(task, "ostinato-output-hardware").apply { isDaemon = true }
+  }
+  override fun hardware(task: () -> Unit) { hardware.execute(task) }
+  override fun main(task: () -> Unit) { main.post(task) }
+  override fun after(delayMs: Long, task: () -> Unit) { main.postDelayed(task, delayMs) }
 }
 
 private class AndroidCaptureDispatch : AudioCaptureCoordinator.CaptureDispatch {
@@ -104,22 +125,39 @@ internal class AudioCaptureStreamer(
   private val context: Context,
   private val owner: Any,
   private val coordinator: AudioCaptureCoordinator,
+  private val arbiter: PracticeAudioArbiter,
+  private val engineBinding: PracticeAudioArbiter.Binding,
 ) : MethodChannel.MethodCallHandler, EventChannel.StreamHandler {
   private val ids = AudioCaptureBoundIds()
   private var sink: EventChannel.EventSink? = null
   private var retired = false
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
-    if (retired && call.method != "closeState") {
-      result.error("capture_handler_retired", null, null)
+    if (retired || !arbiter.isCurrent(engineBinding)) {
+      result.error(if (retired) "capture_handler_retired" else "stale_audio_owner", null, null)
       return
     }
+    val args = call.arguments as? Map<*, *>
     when (call.method) {
-      "ready" -> result.success(call.argument<String>("attemptId") == ids.current && sink != null)
+      "ready" -> result.success((args?.get("attemptId") as? String) == ids.current && sink != null)
       "closeState" -> result.success(coordinator.closeState())
       "start" -> {
-        val id = call.argument<String>("attemptId")
-        val rate = call.argument<Int>("sampleRate")
+        val id = args?.get("attemptId") as? String
+        val rate = args?.get("sampleRate") as? Int
+        val claimKeys = setOf("ownerToken", "engineGeneration", "contextGeneration",
+          "leaseId", "leaseGeneration")
+        val hasClaimField = args?.keys?.any { it in claimKeys } == true
+        val claim = if (hasClaimField) {
+          val token = args?.get("ownerToken") as? String
+          val engine = wireLong(args?.get("engineGeneration"))
+          val context = wireLong(args?.get("contextGeneration"))
+          val leaseId = args?.get("leaseId") as? String
+          val generation = wireLong(args?.get("leaseGeneration"))
+          if (token == null || engine == null || context == null || leaseId == null || generation == null) {
+            result.error("bad_args", null, null); return
+          }
+          PracticeAudioArbiter.CaptureClaim(token, engine, context, leaseId, generation)
+        } else null
         if (id == null || rate == null || id != ids.current || sink == null) {
           result.error("bad_args", null, null); return
         }
@@ -131,16 +169,16 @@ internal class AudioCaptureStreamer(
           override fun event(message: Map<String, Any>) {
             if (ids.current == id) sink?.success(message)
           }
-        }, methodReply(result))
+        }, methodReply(result), claim)
       }
       "stop" -> {
-        val id = call.argument<String>("attemptId")
+        val id = args?.get("attemptId") as? String
         if (id == null) result.error("bad_args", null, null)
         else if (ids.owns(id)) coordinator.stop(owner, id, methodReply(result))
         else coordinator.stopBeforeListen(owner, id, methodReply(result))
       }
       "retryStop" -> {
-        val id = call.argument<String>("attemptId")
+        val id = args?.get("attemptId") as? String
         if (id == null) result.error("bad_args", null, null)
         else if (!coordinator.isForeground(owner)) {
           result.error("not_foreground_or_permitted", null, null)
@@ -155,8 +193,17 @@ internal class AudioCaptureStreamer(
     override fun error(code: String) { result.error(code, null, null) }
   }
 
+  private fun wireLong(value: Any?): Long? = when (value) {
+    is Int -> value.toLong()
+    is Long -> value
+    else -> null
+  }
+
   override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
-    if (retired) { events?.error("capture_handler_retired", null, null); return }
+    if (retired || !arbiter.isCurrent(engineBinding)) {
+      events?.error(if (retired) "capture_handler_retired" else "stale_audio_owner", null, null)
+      return
+    }
     val id = (arguments as? Map<*, *>)?.get("attemptId") as? String
     if (id == null || id.length != 32 || id.any { it !in '0'..'9' && it !in 'a'..'f' }) {
       events?.error("bad_args", null, null); return
@@ -174,7 +221,7 @@ internal class AudioCaptureStreamer(
   }
 
   override fun onCancel(arguments: Any?) {
-    if (retired) return
+    if (retired || !arbiter.isCurrent(engineBinding)) return
     // Flutter's implicit onCancel(null) runs on the OLD handler before onListen
     // replaces its binding. Never inspect the process-global current ID here.
     val supplied = (arguments as? Map<*, *>)?.get("attemptId") as? String
@@ -186,7 +233,7 @@ internal class AudioCaptureStreamer(
   fun closeBoundAttempt() {
     val id = ids.closeBound() ?: return
     sink = null
-    coordinator.requestClose(owner, id)
+    if (arbiter.isCurrent(engineBinding)) coordinator.requestClose(owner, id)
   }
 
   fun retire() {

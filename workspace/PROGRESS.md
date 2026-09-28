@@ -1,5 +1,23 @@
 # Ostinato — İlerleme Kaydı
 
+## 2026-09-28 — ortak ses hakemi Gate B/C yerel native doğrulama
+
+Gate A'nın tipli Dart sözleşmesi üstüne iOS ve Android proses hakemleri,
+mevcut mikrofon kaydıyla ortak giriş/çıkış sahipliği ve eski engine/Activity
+çitleri eklendi. Bağımsız salt-okunur inceleme iOS'ta EventChannel iptali
+sonrası `retryStop` yetkisinin kaybını ve yeni cihaz rotasının ayrılmış
+izni geçersizleştirmemesini; Android'de geç ama temiz kapanışın explicit
+recovery'de engelli kalmasını ve `stale`+`allClear` makbuz çelişkisini buldu.
+Bu dört bulgu dar regresyonla düzeltildi. Son kaynakta iOS simülatörü
+**15/15** XCTests, Android JVM **14/14** yeni hakem + **21/21** eski
+kayıt testi ve `assembleDebug` geçti. APK yalnız debug derlemedir; SHA
+`deb1da6b13cdc52430f46ffc579510a85d1ff948039cdba56367c916cac46ee9`.
+Makbuz: `scratch/2026-09-28-ostinato-native-arbiter-build/RESULT.md`.
+Üretim `_NoNativeAudioArbiter` ve `allowAcquisition=false` kalır.
+Gate D root'un boş lease için native bağlam çiti, Gate E onaylı örnek ses,
+Gate F fiziksel cihaz ve kurucu kabulü açıktır. Tam kurs nota/form modeli
+ve onaylı gösterim medyası **0**; bu native testler beceri doğruluğu değildir.
+
 ## 2026-09-28 — ortak ses hakemi Gate A, Dart sözleşmesi ve sahte durum
 
 İsteğe bağlı mikrofonla gelecekteki örnek ses çalmasının ortak native

@@ -28,24 +28,20 @@ protocol CaptureHardware: AnyObject {
 /// All AVAudioEngine/AVAudioSession calls run on one serial worker.
 final class AVEngineCaptureHardware: CaptureHardware {
   private let engine = AVAudioEngine()
-  private let session = AVAudioSession.sharedInstance()
+  private let sessionPolicy: PracticeAudioSessionPolicy
   private let pendingBuffer = DispatchSemaphore(value: 1)
   private var tapInstalled = false
-  private var sessionActivated = false
+
+  init(sessionPolicy: PracticeAudioSessionPolicy = .shared) {
+    self.sessionPolicy = sessionPolicy
+  }
 
   func start(
     rate: Int,
     fence: CaptureFence,
     onChunk: @escaping (Data, Int, Int64, @escaping () -> Void) -> Void
   ) throws -> String {
-    if fence.isCancelled { throw CaptureHardwareError.cancelled }
-    try session.setCategory(.record, mode: .measurement)
-    if fence.isCancelled { throw CaptureHardwareError.cancelled }
-    try session.setPreferredSampleRate(Double(rate))
-    if fence.isCancelled { throw CaptureHardwareError.cancelled }
-    try session.setActive(true)
-    sessionActivated = true
-    if fence.isCancelled { throw CaptureHardwareError.cancelled }
+    try sessionPolicy.activateInput(rate: rate, fence: fence)
 
     // The requested sample rate is only a preference; send the actual rate.
     let input = engine.inputNode
@@ -82,7 +78,7 @@ final class AVEngineCaptureHardware: CaptureHardware {
     if fence.isCancelled { throw CaptureHardwareError.cancelled }
     try engine.start()
     if fence.isCancelled { throw CaptureHardwareError.cancelled }
-    let type = session.currentRoute.inputs.first?.portType
+    let type = sessionPolicy.currentInputPort
     let port = type == .builtInMic ? "BuiltInMic" : (type?.rawValue ?? "Unknown")
     return "ios:\(port)"
   }
@@ -93,11 +89,7 @@ final class AVEngineCaptureHardware: CaptureHardware {
       tapInstalled = false
     }
     engine.stop()
-    // A thrown deactivation leaves the flag set for an explicit close retry.
-    if sessionActivated {
-      try session.setActive(false, options: .notifyOthersOnDeactivation)
-      sessionActivated = false
-    }
+    try sessionPolicy.deactivateInput()
   }
 }
 
@@ -137,12 +129,16 @@ final class CaptureMethodReply {
 final class AudioCaptureCoordinator {
   static let shared = AudioCaptureCoordinator(hardware: AVEngineCaptureHardware())
 
+  weak var processArbiter: PracticeAudioArbiter?
+
   private let hardware: CaptureHardware
   private let worker = DispatchQueue(label: "com.yulalab.ostinato.capture.hardware")
   private let scheduler: CaptureDeadlineScheduler
   private let deadline: TimeInterval
   private let canCapture: () -> Bool
-  private var phase: CapturePhase = .clear
+  private var phase: CapturePhase = .clear {
+    didSet { if oldValue != phase { processArbiter?.captureTransition() } }
+  }
   private var attemptId: String?
   private var fence: CaptureFence?
   private var startReply: CaptureMethodReply?
@@ -231,7 +227,12 @@ final class AudioCaptureCoordinator {
     ]
   }
 
-  func start(id: String, rate: Int, result: @escaping FlutterResult) {
+  var activeAttemptId: String? { attemptId }
+
+  func start(
+    id: String, rate: Int, result: @escaping FlutterResult,
+    owner: PracticeAudioOwner? = nil, permit: [String: Any]? = nil
+  ) {
     guard valid(id) else { result(error("bad_args")); return }
     guard rate == 44100 || rate == 48000 else {
       result(error("unsupported_sample_rate")); return
@@ -241,6 +242,10 @@ final class AudioCaptureCoordinator {
     }
     guard phase == .clear, !tombstones.contains(id) else {
       result(error("capture_close_unconfirmed")); return
+    }
+    if let arbiter = processArbiter,
+       let rejected = arbiter.claimInputStart(owner: owner, attemptId: id, permit: permit) {
+      result(rejected); return
     }
     attemptId = id
     phase = .starting
@@ -394,12 +399,12 @@ final class AudioCaptureCoordinator {
 
   private func clear() {
     closeGeneration &+= 1
-    phase = .clear
     attemptId = nil
     fence = nil
     startReply = nil
     uncertain = false
     closeScheduled = false
+    phase = .clear
   }
 
   private func interrupt(_ reason: String) {
@@ -415,10 +420,33 @@ final class AudioCaptureCoordinator {
 /// A Flutter engine handler owns only its sink binding, never the hardware.
 final class AudioCaptureStreamer: NSObject, FlutterStreamHandler {
   private let coordinator: AudioCaptureCoordinator
+  private let arbiter: PracticeAudioArbiter?
+  private let owner: PracticeAudioOwner?
   private var boundAttemptId: String?
+  // EventChannel cancellation removes a sink, not this engine's authority to
+  // close or explicitly retry a previously bound capture attempt.
+  private var closeAuthorizedIds = Set<String>()
   private var retired = false
 
-  init(coordinator: AudioCaptureCoordinator = .shared) { self.coordinator = coordinator }
+  init(
+    coordinator: AudioCaptureCoordinator = .shared,
+    arbiter: PracticeAudioArbiter? = nil,
+    owner: PracticeAudioOwner? = nil
+  ) {
+    self.coordinator = coordinator
+    self.arbiter = arbiter
+    self.owner = owner
+  }
+
+  private func ownerIsCurrent() -> Bool {
+    guard let arbiter = arbiter, let owner = owner else { return arbiter == nil }
+    return arbiter.isCurrent(owner)
+  }
+
+  private func foreignCapture() -> Bool {
+    guard let arbiter = arbiter, let owner = owner else { return false }
+    return arbiter.captureIsForeign(to: owner)
+  }
 
   /// AppDelegate calls this before publishing a replacement engine bridge.
   /// It fences the old sink and queues hardware cleanup synchronously.
@@ -428,15 +456,21 @@ final class AudioCaptureStreamer: NSObject, FlutterStreamHandler {
     retired = true
     let oldId = boundAttemptId
     boundAttemptId = nil
-    if let oldId = oldId { coordinator.detachSink(id: oldId) }
+    closeAuthorizedIds.removeAll()
+    if ownerIsCurrent(), let oldId = oldId { coordinator.detachSink(id: oldId) }
   }
 
   func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     if retired {
-      if call.method == "closeState" { result(coordinator.closeState()) }
-      else if call.method == "ready" { result(false) }
+      if call.method == "ready" { result(false) }
       else { result(FlutterError(code: "capture_unavailable", message: nil, details: nil)) }
       return
+    }
+    guard ownerIsCurrent() else {
+      result(FlutterError(code: "stale_audio_owner", message: nil, details: nil)); return
+    }
+    if foreignCapture() {
+      result(FlutterError(code: "capture_foreign_owner", message: nil, details: nil)); return
     }
     switch call.method {
     case "closeState": result(coordinator.closeState())
@@ -449,15 +483,24 @@ final class AudioCaptureStreamer: NSObject, FlutterStreamHandler {
             let rate = args["sampleRate"] as? Int else {
         result(FlutterError(code: "bad_args", message: nil, details: nil)); return
       }
-      coordinator.start(id: id, rate: rate, result: result)
+      let hasPermitField = ["ownerToken", "engineGeneration", "contextGeneration",
+                            "leaseId", "leaseGeneration"].contains { args[$0] != nil }
+      let permit = hasPermitField ? args : nil
+      coordinator.start(id: id, rate: rate, result: result, owner: owner, permit: permit)
     case "stop":
       guard let id = (call.arguments as? [String: Any])?["attemptId"] as? String else {
         result(FlutterError(code: "bad_args", message: nil, details: nil)); return
+      }
+      if arbiter != nil && !closeAuthorizedIds.contains(id) {
+        result(FlutterError(code: "capture_foreign_owner", message: nil, details: nil)); return
       }
       coordinator.requestStop(id: id, result: result)
     case "retryStop":
       guard let id = (call.arguments as? [String: Any])?["attemptId"] as? String else {
         result(FlutterError(code: "bad_args", message: nil, details: nil)); return
+      }
+      if arbiter != nil && !closeAuthorizedIds.contains(id) {
+        result(FlutterError(code: "capture_foreign_owner", message: nil, details: nil)); return
       }
       coordinator.requestStop(id: id, result: result, explicitRetry: true)
     default: result(FlutterMethodNotImplemented)
@@ -468,6 +511,12 @@ final class AudioCaptureStreamer: NSObject, FlutterStreamHandler {
     guard !retired else {
       return FlutterError(code: "capture_unavailable", message: nil, details: nil)
     }
+    guard ownerIsCurrent() else {
+      return FlutterError(code: "stale_audio_owner", message: nil, details: nil)
+    }
+    guard !foreignCapture() else {
+      return FlutterError(code: "capture_foreign_owner", message: nil, details: nil)
+    }
     guard let id = (arguments as? [String: Any])?["attemptId"] as? String else {
       return FlutterError(code: "bad_args", message: nil, details: nil)
     }
@@ -476,11 +525,13 @@ final class AudioCaptureStreamer: NSObject, FlutterStreamHandler {
     }
     if let failure = coordinator.attachSink(events, id: id) { return failure }
     boundAttemptId = id
+    closeAuthorizedIds.insert(id)
     return nil
   }
 
   func onCancel(withArguments arguments: Any?) -> FlutterError? {
     if retired { return nil }
+    guard ownerIsCurrent() else { boundAttemptId = nil; return nil }
     // Flutter's implicit cancel before a replacement listen passes nil. Use
     // the handler's old sink ID, not the coordinator's current attempt ID.
     guard let id = boundAttemptId else { return nil }

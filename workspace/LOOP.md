@@ -2,14 +2,16 @@
 
 ## 2026-09-28 ortak ses hakemi sonraki kapı
 
-Gate A tipli Dart kanal/lease sözleşmesi ve negatif fake testleri hazır;
-üretimde edinim kapalıdır. Sonraki tek yazarlı işler sırasıyla iOS proses
-hakemi (Gate B), Android proses hakemi (Gate C), mevcut mikrofon yolu ve
+Gate A tipli Dart kanal/lease; Gate B iOS proses hakemi ve Gate C Android
+proses hakemi kaynakta. Bağımsız incelemenin dört kapanış/rota bulgusu
+düzeltildi; son kaynak iOS simülatöründe 15/15, Android JVM'de 35/35 ve
+debug derlemede geçti. Üretimde edinim kapalıdır. Sıradaki tek yazarlı iş
 root'un **lease boşta olsa da** route/hesap/arka planda native
-`fenceContext` çağrısı (Gate D); eğitmen onaylı örnek ses ve UI Gate E,
-native/kurucu cihaz kabulü Gate F. Gate B–D ve bağımsız kabul bitmeden
-`allowAcquisition` açılmaz. Mevcut PR başında yararlı CI için Actions
-bütçesi engeli ayrıca açık.
+`fenceContext` çağrısı ve bunun aktif lease kapanışıyla sıra sözleşmesi
+(Gate D); ardından eğitmen onaylı örnek ses ve UI Gate E, native/kurucu
+fiziksel cihaz kabulü Gate F. Gate D/F ve bağımsız ürün kabulü bitmeden
+`allowAcquisition` açılmaz. Yararlı son-baş CI için Actions bütçe engeli
+ayrıca açık.
 
 ## 2026-09-28 güncel kuyruk
 1. PR #1'e taşınan 60 derslik gitar kaynağında CI bütçe engeli kalkınca son başta yararlı kontrolleri çalıştır; v8e kaynak/medya paketinin bağımsız denetimini kaydet.
