@@ -1,5 +1,22 @@
 # Ostinato — İlerleme Kaydı
 
+## 2026-09-28 — ortak ses hakemi Gate A, Dart sözleşmesi ve sahte durum
+
+İsteğe bağlı mikrofonla gelecekteki örnek ses çalmasının ortak native
+sahipliğini kuracak `practice_audio_v1` için tipli Dart wire/snapshot/permit
+sözleşmesi eklendi. 16 bayt rastgele lease kimliği, owner/engine/context ve
+revizyon denetimi, güvenli dosya ID allowlist'i, input/output ayrımı,
+sticky kapanış ve yalnız açık kullanıcı kurtarmasıyla temizlenme sahte
+durum testleriyle sınandı. Bağımsız incelemenin bulduğu geç snapshot,
+fence sonrası eski permit, eşzamanlı fence ve başarısız fence kurtarma
+yarışları negatif testlerle kapandı; son dar peer yeni P0/P1/P2 bulmadı.
+Root tekrarında **111/111** ilgili Flutter testi, hedefli analiz ve
+`git diff --check` geçti. Bu yalnız **Gate A kaynak ve fake** kanıtıdır.
+Üretim `_NoNativeAudioArbiter` ve varsayılan `allowAcquisition=false`
+duruyor; iOS/Android ortak hakem, mevcut mikrofon yolunun ona katılması,
+boşta bile native `fenceContext`, gerçek cihaz ve eğitmen/onaylı ses ayrı
+Gate B–F işleridir. Gerçek nota doğruluğu veya kurs beceri kabulü yok.
+
 ## 2026-09-28 — gitar kursu paket bütünlüğü (kaynak ve yerel test)
 
 Mevcut 60 derslik kurs dosyasına tek varlıklı Motion Content manifesti eklendi:

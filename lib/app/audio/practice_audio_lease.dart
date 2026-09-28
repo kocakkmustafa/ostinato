@@ -1,9 +1,18 @@
 import 'dart:async';
+import 'dart:math';
+
+import 'native_audio_state.dart';
+
+export 'native_audio_state.dart'
+    show
+        PracticeAudioSide,
+        NativeAllAudioState,
+        NativeAudioPermit,
+        NativeAudioCloseReason,
+        NativeAudioContextReason;
 
 /// An app-local ownership boundary for future lesson playback and optional
 /// microphone capture. This file does not open either native resource itself.
-enum PracticeAudioSide { input, output }
-
 enum PracticeAudioLeasePhase {
   idle,
   openingInput,
@@ -39,11 +48,17 @@ enum PracticeAudioReleaseStatus {
 /// A ticket can release only the particular successful acquisition that made
 /// it. A previous screen cannot close a later screen's audio session.
 final class PracticeAudioTicket {
-  const PracticeAudioTicket._(this._owner, this.side, this.generation);
+  const PracticeAudioTicket._(
+    this._owner,
+    this.side,
+    this.generation,
+    this.permit,
+  );
 
   final PracticeAudioLease _owner;
   final PracticeAudioSide side;
   final int generation;
+  final NativeAudioPermit permit;
 }
 
 /// Captured by the current route/account owner before it schedules audio work.
@@ -68,13 +83,21 @@ final class PracticeAudioAcquireResult {
 }
 
 /// The eventual native adapter must use one process owner for both sides.
-/// [readAllClear] may return true only after input, output, and their shared
-/// audio-session resources have a confirmed close receipt. A Dart dispose or
-/// a timed-out platform reply does not establish that receipt.
+/// The native implementation must cover existing capture, future output, and
+/// their shared session. All replies are checked against a single owner.
 abstract interface class PracticeAudioLeasePort {
-  Future<bool> readAllClear();
-  Future<void> open(PracticeAudioSide side);
-  Future<void> closeAll();
+  Future<NativeAllAudioState> readAllAudioState();
+  Future<NativeAudioPermit> reserve(PracticeAudioSide side, String leaseId);
+  Future<NativeAudioPermit> startOutput(
+    NativeAudioPermit permit,
+    String assetId,
+  );
+  Future<NativeAllAudioState> closeAll(
+    NativeAudioPermit permit,
+    NativeAudioCloseReason reason,
+  );
+  Future<NativeAllAudioState> recoverAll(int expectedStateRevision);
+  Future<NativeAllAudioState> fenceContext(NativeAudioContextReason reason);
 }
 
 /// Reserves a side synchronously before its first asynchronous platform call.
@@ -103,6 +126,8 @@ final class PracticeAudioLease {
   int _generation = 0;
   int _contextEpoch = 0;
   int _nativePending = 0;
+  NativeAudioPermit? _permit;
+  NativeAllAudioState? _lastNativeState;
 
   PracticeAudioLeasePhase get phase => _phase;
   PracticeAudioInvalidationReason? get lastInvalidationReason =>
@@ -114,6 +139,7 @@ final class PracticeAudioLease {
   Future<PracticeAudioAcquireResult> acquire(
     PracticeAudioSide side, {
     required PracticeAudioContext context,
+    String? assetId,
   }) {
     if (!identical(context._owner, this) ||
         context._leaseEpoch != _contextEpoch ||
@@ -141,6 +167,15 @@ final class PracticeAudioLease {
         ),
       );
     }
+    if (side == PracticeAudioSide.output &&
+        (assetId == null || assetId.isEmpty)) {
+      return Future.value(
+        const PracticeAudioAcquireResult._(
+          PracticeAudioAcquireStatus.openFailed,
+          null,
+        ),
+      );
+    }
     final owner = _isolateOwner;
     if (owner != null && !identical(owner, this)) {
       return Future.value(
@@ -154,10 +189,11 @@ final class PracticeAudioLease {
     }
 
     // Both process-isolate ownership and local phase are reserved before
-    // readAllClear or open can yield, including calls from another instance.
+    // readAllAudioState or reserve can yield, including another instance.
     _isolateOwner = this;
     final generation = ++_generation;
     _side = side;
+    _permit = null;
     _phase = switch (side) {
       PracticeAudioSide.input => PracticeAudioLeasePhase.openingInput,
       PracticeAudioSide.output => PracticeAudioLeasePhase.openingOutput,
@@ -165,7 +201,7 @@ final class PracticeAudioLease {
     final completion = Completer<PracticeAudioAcquireResult>();
     _opening = completion.future;
     unawaited(
-      _acquireReserved(side, generation).then<void>(
+      _acquireReserved(side, generation, assetId).then<void>(
         completion.complete,
         onError: (Object _, StackTrace _) {
           _block();
@@ -189,9 +225,13 @@ final class PracticeAudioLease {
   Future<PracticeAudioAcquireResult> _acquireReserved(
     PracticeAudioSide side,
     int generation,
+    String? assetId,
   ) async {
+    late NativeAllAudioState preflight;
     try {
-      if (!await _native(_port.readAllClear)) {
+      preflight = await _native(_port.readAllAudioState);
+      _lastNativeState = preflight;
+      if (!preflight.allClear) {
         _block();
         return const PracticeAudioAcquireResult._(
           PracticeAudioAcquireStatus.blockedUnconfirmed,
@@ -214,9 +254,51 @@ final class PracticeAudioLease {
     }
 
     try {
-      await _native(() => _port.open(side));
+      final leaseId = _newLeaseId();
+      final permit = await _native(() => _port.reserve(side, leaseId));
+      if (permit.leaseId != leaseId ||
+          permit.side != side ||
+          permit.ownerToken != preflight.ownerToken ||
+          permit.engineGeneration != preflight.engineGeneration ||
+          permit.contextGeneration != preflight.contextGeneration ||
+          permit.stateRevision <= preflight.stateRevision) {
+        _block();
+        return const PracticeAudioAcquireResult._(
+          PracticeAudioAcquireStatus.blockedUnconfirmed,
+          null,
+        );
+      }
+      _permit = permit;
+      if (generation != _generation) {
+        final closed = await _beginClose();
+        return PracticeAudioAcquireResult._(
+          closed == PracticeAudioReleaseStatus.confirmedClosed
+              ? PracticeAudioAcquireStatus.cancelled
+              : PracticeAudioAcquireStatus.blockedUnconfirmed,
+          null,
+        );
+      }
+      if (side == PracticeAudioSide.output) {
+        final playing = await _native(
+          () => _port.startOutput(permit, assetId!),
+        );
+        if (playing.leaseId != permit.leaseId ||
+            playing.leaseGeneration != permit.leaseGeneration ||
+            playing.ownerToken != permit.ownerToken ||
+            playing.engineGeneration != permit.engineGeneration ||
+            playing.contextGeneration != permit.contextGeneration ||
+            playing.side != PracticeAudioSide.output ||
+            playing.stateRevision <= permit.stateRevision) {
+          _block();
+          return const PracticeAudioAcquireResult._(
+            PracticeAudioAcquireStatus.blockedUnconfirmed,
+            null,
+          );
+        }
+        _permit = playing;
+      }
     } on TimeoutException {
-      // The original open may still allocate hardware after this reply. Do
+      // The native operation may still allocate hardware after this reply. Do
       // not race it with close or reset; explicit recovery waits for settling.
       _block();
       return const PracticeAudioAcquireResult._(
@@ -252,7 +334,7 @@ final class PracticeAudioLease {
     };
     return PracticeAudioAcquireResult._(
       PracticeAudioAcquireStatus.acquired,
-      PracticeAudioTicket._(this, side, generation),
+      PracticeAudioTicket._(this, side, generation, _permit!),
     );
   }
 
@@ -270,7 +352,7 @@ final class PracticeAudioLease {
       return Future.value(PracticeAudioReleaseStatus.busy);
     }
     ++_generation;
-    return _beginClose();
+    return _beginClose(reason: NativeAudioCloseReason.userStop);
   }
 
   /// Invalidates an in-flight start or closes the active side. A late open
@@ -287,12 +369,14 @@ final class PracticeAudioLease {
       // also fence the one that currently owns hardware.
       owner._lastInvalidationReason = reason;
       ++owner._contextEpoch;
-      return owner._invalidateOwned();
+      return owner._invalidateOwned(reason);
     }
-    return _invalidateOwned();
+    return _invalidateOwned(reason);
   }
 
-  Future<PracticeAudioReleaseStatus> _invalidateOwned() {
+  Future<PracticeAudioReleaseStatus> _invalidateOwned(
+    PracticeAudioInvalidationReason reason,
+  ) {
     if (_phase == PracticeAudioLeasePhase.idle) {
       return Future.value(PracticeAudioReleaseStatus.alreadyIdle);
     }
@@ -311,12 +395,24 @@ final class PracticeAudioLease {
     if (_phase == PracticeAudioLeasePhase.inputActive ||
         _phase == PracticeAudioLeasePhase.outputActive) {
       ++_generation;
-      return _beginClose();
+      return _beginClose(
+        reason: switch (reason) {
+          PracticeAudioInvalidationReason.routeChange =>
+            NativeAudioCloseReason.routeChange,
+          PracticeAudioInvalidationReason.accountChange =>
+            NativeAudioCloseReason.accountChange,
+          PracticeAudioInvalidationReason.background =>
+            NativeAudioCloseReason.routeChange,
+        },
+      );
     }
     return _closing ?? Future.value(PracticeAudioReleaseStatus.busy);
   }
 
-  Future<PracticeAudioReleaseStatus> _beginClose({bool recovery = false}) {
+  Future<PracticeAudioReleaseStatus> _beginClose({
+    bool recovery = false,
+    NativeAudioCloseReason reason = NativeAudioCloseReason.userStop,
+  }) {
     final completion = Completer<PracticeAudioReleaseStatus>();
     _phase = recovery
         ? PracticeAudioLeasePhase.recovering
@@ -327,7 +423,7 @@ final class PracticeAudioLease {
           };
     _closing = completion.future;
     unawaited(
-      _closeAndVerify().then<void>(
+      _closeAndVerify(recovery: recovery, reason: reason).then<void>(
         (confirmed) => completion.complete(
           confirmed
               ? PracticeAudioReleaseStatus.confirmedClosed
@@ -373,10 +469,52 @@ final class PracticeAudioLease {
     return _beginClose(recovery: true);
   }
 
-  Future<bool> _closeAndVerify() async {
+  Future<bool> _closeAndVerify({
+    required bool recovery,
+    required NativeAudioCloseReason reason,
+  }) async {
     try {
-      await _native(_port.closeAll);
-      if (!await _native(_port.readAllClear)) {
+      if (recovery) {
+        // Read a new revision after any late native operation has settled.
+        // recoverAll never starts audio or closes a newer lease.
+        final before = await _native(_port.readAllAudioState);
+        final previous = _lastNativeState;
+        if (previous != null &&
+            (before.ownerToken != previous.ownerToken ||
+                before.engineGeneration != previous.engineGeneration ||
+                before.contextGeneration < previous.contextGeneration ||
+                before.stateRevision < previous.stateRevision)) {
+          _block();
+          return false;
+        }
+        _lastNativeState = before;
+        final receipt = await _native(
+          () => _port.recoverAll(before.stateRevision),
+        );
+        _lastNativeState = receipt;
+        if (!receipt.allClear) {
+          _block();
+          return false;
+        }
+      } else {
+        final permit = _permit;
+        if (permit == null) {
+          _block();
+          return false;
+        }
+        final receipt = await _native(() => _port.closeAll(permit, reason));
+        _lastNativeState = receipt;
+        if (!receipt.allClear ||
+            receipt.ownerToken != permit.ownerToken ||
+            receipt.engineGeneration != permit.engineGeneration ||
+            receipt.stateRevision <= permit.stateRevision) {
+          _block();
+          return false;
+        }
+      }
+      final finalState = await _native(_port.readAllAudioState);
+      _lastNativeState = finalState;
+      if (!finalState.allClear) {
         _block();
         return false;
       }
@@ -403,8 +541,16 @@ final class PracticeAudioLease {
   void _idle() {
     _phase = PracticeAudioLeasePhase.idle;
     _side = null;
+    _permit = null;
+    _lastNativeState = null;
     if (identical(_isolateOwner, this)) _isolateOwner = null;
   }
 
   void _block() => _phase = PracticeAudioLeasePhase.blockedUnconfirmed;
+}
+
+String _newLeaseId() {
+  final random = Random.secure();
+  final bytes = List<int>.generate(16, (_) => random.nextInt(256));
+  return bytes.map((byte) => byte.toRadixString(16).padLeft(2, '0')).join();
 }

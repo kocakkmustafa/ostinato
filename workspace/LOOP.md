@@ -1,5 +1,16 @@
 # Ostinato — LOOP (iş kuyruğu)
 
+## 2026-09-28 ortak ses hakemi sonraki kapı
+
+Gate A tipli Dart kanal/lease sözleşmesi ve negatif fake testleri hazır;
+üretimde edinim kapalıdır. Sonraki tek yazarlı işler sırasıyla iOS proses
+hakemi (Gate B), Android proses hakemi (Gate C), mevcut mikrofon yolu ve
+root'un **lease boşta olsa da** route/hesap/arka planda native
+`fenceContext` çağrısı (Gate D); eğitmen onaylı örnek ses ve UI Gate E,
+native/kurucu cihaz kabulü Gate F. Gate B–D ve bağımsız kabul bitmeden
+`allowAcquisition` açılmaz. Mevcut PR başında yararlı CI için Actions
+bütçesi engeli ayrıca açık.
+
 ## 2026-09-28 güncel kuyruk
 1. PR #1'e taşınan 60 derslik gitar kaynağında CI bütçe engeli kalkınca son başta yararlı kontrolleri çalıştır; v8e kaynak/medya paketinin bağımsız denetimini kaydet.
 2. Ses giriş/çıkış hakemi, gerçek iki Activity/MethodChannel ve fiziksel mikrofon kapanışını ayrı kabul et; taklit testini cihaz kanıtı sayma.

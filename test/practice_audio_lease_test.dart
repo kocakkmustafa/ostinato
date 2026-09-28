@@ -2,34 +2,18 @@ import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/audio/practice_audio_lease.dart';
+import 'support/fake_practice_audio_port.dart';
 
-final class _Port implements PracticeAudioLeasePort {
-  final opens = <PracticeAudioSide>[];
-  int closeCalls = 0;
-  Future<bool> Function()? clear;
-  Future<void> Function(PracticeAudioSide)? start;
-  Future<void> Function()? stop;
-
-  @override
-  Future<bool> readAllClear() => clear?.call() ?? Future.value(true);
-
-  @override
-  Future<void> open(PracticeAudioSide side) {
-    opens.add(side);
-    return start?.call(side) ?? Future.value();
-  }
-
-  @override
-  Future<void> closeAll() {
-    closeCalls++;
-    return stop?.call() ?? Future.value();
-  }
-}
+typedef _Port = FakePracticeAudioPort;
 
 Future<PracticeAudioAcquireResult> _acquire(
   PracticeAudioLease lease,
   PracticeAudioSide side,
-) => lease.acquire(side, context: lease.captureContext());
+) => lease.acquire(
+  side,
+  context: lease.captureContext(),
+  assetId: side == PracticeAudioSide.output ? 'test-output' : null,
+);
 
 void main() {
   test(
@@ -332,6 +316,7 @@ void main() {
         (await second.acquire(
           PracticeAudioSide.output,
           context: secondOldContext,
+          assetId: 'test-output',
         )).status,
         PracticeAudioAcquireStatus.blockedUnconfirmed,
       );
@@ -342,6 +327,7 @@ void main() {
         (await second.acquire(
           PracticeAudioSide.output,
           context: secondOldContext,
+          assetId: 'test-output',
         )).status,
         PracticeAudioAcquireStatus.staleContext,
       );
@@ -414,6 +400,7 @@ void main() {
     final ticket = (await owner.acquire(
       PracticeAudioSide.output,
       context: oldContext,
+      assetId: 'test-output',
     )).ticket!;
     expect(
       await observer.invalidate(PracticeAudioInvalidationReason.routeChange),

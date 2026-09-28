@@ -8,29 +8,9 @@ import 'package:ostinato/app/audio/practice_audio_lease.dart';
 import 'package:ostinato/app/audio/practice_audio_root.dart';
 import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/main.dart';
+import 'support/fake_practice_audio_port.dart';
 
-final class _Port implements PracticeAudioLeasePort {
-  Future<bool> Function()? clear;
-  Future<void> Function(PracticeAudioSide)? start;
-  Future<void> Function()? stop;
-  final opens = <PracticeAudioSide>[];
-  int closeCalls = 0;
-
-  @override
-  Future<bool> readAllClear() => clear?.call() ?? Future.value(true);
-
-  @override
-  Future<void> open(PracticeAudioSide side) {
-    opens.add(side);
-    return start?.call(side) ?? Future.value();
-  }
-
-  @override
-  Future<void> closeAll() {
-    ++closeCalls;
-    return stop?.call() ?? Future.value();
-  }
-}
+typedef _Port = FakePracticeAudioPort;
 
 Route<dynamic> _route(String name) => MaterialPageRoute<void>(
   settings: RouteSettings(name: name),
@@ -216,7 +196,11 @@ void main() {
     observer.didPush(route, null);
     await _settleFence();
     final grant = owner.grantFor(route)!;
-    final starting = owner.acquire(grant, PracticeAudioSide.output);
+    final starting = owner.acquire(
+      grant,
+      PracticeAudioSide.output,
+      assetId: 'test-output',
+    );
     await _settleFence();
     expect(port.opens, [PracticeAudioSide.output]);
 
@@ -349,7 +333,10 @@ void main() {
     await _settleFence();
     final action = owner.grantFor(route)!;
     expect(
-      (await action.acquire(PracticeAudioSide.output)).status,
+      (await action.acquire(
+        PracticeAudioSide.output,
+        assetId: 'test-output',
+      )).status,
       AudioRouteAcquireStatus.acquired,
     );
     expect(

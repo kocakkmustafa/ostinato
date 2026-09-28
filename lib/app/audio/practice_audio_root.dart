@@ -13,14 +13,32 @@ final class _NoNativeAudioArbiter implements PracticeAudioLeasePort {
   const _NoNativeAudioArbiter();
 
   @override
-  Future<bool> readAllClear() async => false;
-
-  @override
-  Future<void> open(PracticeAudioSide side) =>
+  Future<NativeAllAudioState> readAllAudioState() =>
       Future.error(StateError('Native audio arbiter is not installed'));
 
   @override
-  Future<void> closeAll() async {}
+  Future<NativeAudioPermit> reserve(PracticeAudioSide side, String leaseId) =>
+      Future.error(StateError('Native audio arbiter is not installed'));
+
+  @override
+  Future<NativeAudioPermit> startOutput(
+    NativeAudioPermit permit,
+    String assetId,
+  ) => Future.error(StateError('Native audio arbiter is not installed'));
+
+  @override
+  Future<NativeAllAudioState> closeAll(
+    NativeAudioPermit permit,
+    NativeAudioCloseReason reason,
+  ) => Future.error(StateError('Native audio arbiter is not installed'));
+
+  @override
+  Future<NativeAllAudioState> recoverAll(int expectedStateRevision) =>
+      Future.error(StateError('Native audio arbiter is not installed'));
+
+  @override
+  Future<NativeAllAudioState> fenceContext(NativeAudioContextReason reason) =>
+      Future.error(StateError('Native audio arbiter is not installed'));
 }
 
 enum AudioRouteAcquireStatus {
@@ -64,8 +82,10 @@ final class PracticeAudioRouteGrant {
 
   /// A route action can spend its captured authority once. It cannot mint a
   /// fresh context after an account, route, or lifecycle transition.
-  Future<AudioRouteAcquireResult> acquire(PracticeAudioSide side) =>
-      _owner.acquire(this, side);
+  Future<AudioRouteAcquireResult> acquire(
+    PracticeAudioSide side, {
+    String? assetId,
+  }) => _owner.acquire(this, side, assetId: assetId);
 }
 
 /// App-lifetime, isolate-local context boundary. It deliberately has no
@@ -234,15 +254,20 @@ final class PracticeAudioRootOwner {
 
   Future<AudioRouteAcquireResult> acquire(
     PracticeAudioRouteGrant grant,
-    PracticeAudioSide side,
-  ) async {
+    PracticeAudioSide side, {
+    String? assetId,
+  }) async {
     if (grant._consumed || !_valid(grant)) {
       return const AudioRouteAcquireResult(AudioRouteAcquireStatus.staleGrant);
     }
     // This synchronous assignment precedes the first await, so concurrent
     // continuations cannot spend the same action twice.
     grant._consumed = true;
-    final result = await _lease.acquire(side, context: grant._leaseContext);
+    final result = await _lease.acquire(
+      side,
+      context: grant._leaseContext,
+      assetId: assetId,
+    );
     if (result.status == PracticeAudioAcquireStatus.blockedUnconfirmed) {
       _statusChanged();
     }
