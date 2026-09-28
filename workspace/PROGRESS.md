@@ -10,7 +10,10 @@ doğruluğu ve fiziksel ses kabulü yapılmadı. Sticky kapanışın iki-engine
 taklit sınırı Android **21/21** ve Dart **31/31** geçti
 (`scratch/2026-09-28-ostinato-cross-isolate-proof/REPORT.md`); gerçek iki
 Activity/MethodChannel, ortak giriş/çıkış hakemi ve iPhone mikrofon deneyi
-açık. İçerik için üretim Motion Content manifesti/okuyucusu ve oynatıcı yok.
+açık. Motion Content için kaynak düzeyinde Flutter `AssetBundle` okuyucusu
+eklendi; 60 derslik mevcut JSON'un SHA bağlı okuma ve güvenli yol testleri
+geçti. Üretim manifesti, uygulama açılış kapısı ve oynatıcı hâlâ yok;
+bu köprü gerçek medya veya ders/model kabulü değildir.
 
 Güncel kurs `8d89007`, isteğe bağlı yerel ses oturumu `e203dc6` ve henüz
 onaylanmamış ses materyali sözleşmesi `3acc49c` commitlerinde mevcut PR #1

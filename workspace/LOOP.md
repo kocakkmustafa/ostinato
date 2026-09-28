@@ -3,7 +3,7 @@
 ## 2026-09-28 güncel kuyruk
 1. PR #1'e taşınan 60 derslik gitar kaynağında CI bütçe engeli kalkınca son başta yararlı kontrolleri çalıştır.
 2. Ses giriş/çıkış hakemi, gerçek iki Activity/MethodChannel ve fiziksel mikrofon kapanışını ayrı kabul et; taklit testini cihaz kanıtı sayma.
-3. Üretim içerik manifesti, eğitmen onaylı medya/altyazı ve gerçek oynatma bağı; kişi-ayrık uzman nota/form etiketi olmadan model fit yok.
+3. Kaynak düzeyinde `AssetBundle` içerik okuyucusu var; üretim içerik manifesti, açılış kapısı, eğitmen onaylı medya/altyazı ve gerçek oynatma bağı açık. Kişi-ayrık uzman nota/form etiketi olmadan model fit yok.
 4. Tam ders kurucu kabulü en sonda; başarılı PR/CI kaynağı mağaza submit veya model kabulü sayılmaz.
 
 Protokol: her iterasyon = iş al → yap → DOĞRULA (kanıt) → PROGRESS mühürle → DEFTER güncelle → kuyruk güncelle. Kapsam otoritesi: `app/docs/OSTINATO-BLUEPRINT.md` + motion-core `30-URUN-BLUEPRINT-STANDARDI.md`. **Kurucuya SORU YOK** (standart §4 md.6); boşluk = blueprint çerçevesinde kendin karar ver + DEFTER'e yaz.

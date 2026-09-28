@@ -617,6 +617,7 @@ NETWORK_DEPS_KNOWN_SAFE = {
     "material_color_utilities": "Material renk algoritmaları, saf hesaplama",
     "meta": "yalnız annotation, çalışma zamanı kodu yok",
     "motion_camera": "aile paketi, pinli — motion_core ile aynı gerekçe",
+    "motion_content": "pinli aile paketi; Flutter bundle baytlarını ayrıştırır ve yerel SHA denetler, ağ API'si yok",
     "motion_core": "aile paketi, pinli — kendi başına A3 kapsamı DIŞINDA ",
     "objective_c": "Objective-C native interop köprüsü, ağ değil",
     "ostinato_audio": "BU DEPONUN kendi paketi (path bağımlılığı), Flutter'a BİLE bağımlı değil — saf Dart DSP (pitch/onset/chord), disk/ağ I/O'su hiç yok, kaynağı burada",
