@@ -1,5 +1,25 @@
 # Ostinato — İlerleme Kaydı
 
+## 2026-09-28 — ilk gitar kursu kaynak hazırlığı; PR/ürün kabulü açık
+
+İlk gitar kursu **60 ders** olarak canlı kaynak ve bağımsız v8d paket
+denetiminde mevcut. Ders gösterimi için kaynak bağlı brief hazır; gerçek,
+eğitmen onaylı video **0** ve tam-kurs nota/form modeli **0**. Mikrofon
+yalnız kullanıcının isteğe bağlı izniyle cihaz üstünde; ürün düzeyi nota
+doğruluğu ve fiziksel ses kabulü yapılmadı. Sticky kapanışın iki-engine
+taklit sınırı Android **21/21** ve Dart **31/31** geçti
+(`scratch/2026-09-28-ostinato-cross-isolate-proof/REPORT.md`); gerçek iki
+Activity/MethodChannel, ortak giriş/çıkış hakemi ve iPhone mikrofon deneyi
+açık. İçerik için üretim Motion Content manifesti/okuyucusu ve oynatıcı yok.
+
+Güncel kurs `8d89007`, isteğe bağlı yerel ses oturumu `e203dc6` ve henüz
+onaylanmamış ses materyali sözleşmesi `3acc49c` commitlerinde mevcut PR #1
+incelemesine taşındı. GitHub Actions'ın üç işi bütçe engeli nedeniyle
+başlamadı; bu kaynaklar için yararlı CI, merge veya mağaza kabulü yok.
+Kaynak ve model sınırının kanonik devamı
+`holding/plans/MOTION-MODEL-RESUME-2026-09-27.md`; kurucunun fiziksel
+kurs kabulü en son toplu yapılacak.
+
 ## 2026-08-13 — START HERE şeridi + kapıların kendi BEYANLARI (ve üç ölçüm-yöntemi kusuru)
 Oturum başı `3697b86` (== `origin/main`, ÖLÇÜLDÜ). Kayıtlar **O-117 · O-118 · O-119 · OK-14**.
 Kapılar **34 → 36 python kapısı**; nihai koşum **tek süreç, borusuz, dokunulmamış**: `✅ TÜM KAPILAR YEŞİL`, MUT-A **14/14**, ağaç yalnız bu turun kalemleri.
