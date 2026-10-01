@@ -1,6 +1,6 @@
 /// Versioned, deliberately strict value objects for the process-wide audio
 /// arbiter. These are wire receipts, not evidence of physical device release.
-enum PracticeAudioSide { input, output }
+enum PracticeAudioSide { input, output, video }
 
 enum NativeAudioCloseReason { userStop, routeChange, accountChange }
 
@@ -113,8 +113,10 @@ final class NativeAllAudioState {
     required this.activeLeaseGeneration,
     required this.inputPhase,
     required this.outputPhase,
+    required this.videoPhase,
     required this.inputReleased,
     required this.outputReleased,
+    required this.videoReleased,
     required this.sessionReleased,
     required this.nativeOperationInFlight,
     required this.requiresExplicitRetry,
@@ -129,8 +131,10 @@ final class NativeAllAudioState {
   final int? activeLeaseGeneration;
   final String inputPhase;
   final String outputPhase;
+  final String videoPhase;
   final bool inputReleased;
   final bool outputReleased;
+  final bool videoReleased;
   final bool sessionReleased;
   final bool nativeOperationInFlight;
   final bool requiresExplicitRetry;
@@ -145,8 +149,10 @@ final class NativeAllAudioState {
       activeLeaseGeneration == other.activeLeaseGeneration &&
       inputPhase == other.inputPhase &&
       outputPhase == other.outputPhase &&
+      videoPhase == other.videoPhase &&
       inputReleased == other.inputReleased &&
       outputReleased == other.outputReleased &&
+      videoReleased == other.videoReleased &&
       sessionReleased == other.sessionReleased &&
       nativeOperationInFlight == other.nativeOperationInFlight &&
       requiresExplicitRetry == other.requiresExplicitRetry &&
@@ -172,6 +178,12 @@ final class NativeAllAudioState {
     'unconfirmedQuiescent',
     'releasedAwaitingExplicitRetry',
   };
+  static const _videoPhases = {
+    'clear',
+    'reserved',
+    'closing',
+    'unconfirmedQuiescent',
+  };
 
   factory NativeAllAudioState.fromWire(Object? wire) {
     final map = _wireMap(wire);
@@ -180,6 +192,7 @@ final class NativeAllAudioState {
       null => null,
       'input' => PracticeAudioSide.input,
       'output' => PracticeAudioSide.output,
+      'video' => PracticeAudioSide.video,
       _ => throw const NativeAudioProtocolException('Invalid activeSide'),
     };
     final leaseGeneration = map['activeLeaseGeneration'] == null
@@ -190,6 +203,20 @@ final class NativeAllAudioState {
     }
     final inputPhase = _phase(map, 'inputPhase', _inputPhases);
     final outputPhase = _phase(map, 'outputPhase', _outputPhases);
+    // Schema 1 predates native video arbitration. Old native builds can only
+    // report an empty video side; a new video lease must carry both fields.
+    final hasVideoPhase = map.containsKey('videoPhase');
+    final hasVideoReleased = map.containsKey('videoReleased');
+    if (hasVideoPhase != hasVideoReleased ||
+        (side == PracticeAudioSide.video && !hasVideoPhase)) {
+      throw const NativeAudioProtocolException('Incomplete video state');
+    }
+    final videoPhase = hasVideoPhase
+        ? _phase(map, 'videoPhase', _videoPhases)
+        : 'clear';
+    final videoReleased = hasVideoReleased
+        ? _boolean(map, 'videoReleased')
+        : true;
     final inputReleased = _boolean(map, 'inputReleased');
     final outputReleased = _boolean(map, 'outputReleased');
     final sessionReleased = _boolean(map, 'sessionReleased');
@@ -200,8 +227,10 @@ final class NativeAllAudioState {
         side == null &&
         inputPhase == 'clear' &&
         outputPhase == 'clear' &&
+        videoPhase == 'clear' &&
         inputReleased &&
         outputReleased &&
+        videoReleased &&
         sessionReleased &&
         !inFlight &&
         !retry;
@@ -209,8 +238,14 @@ final class NativeAllAudioState {
       throw const NativeAudioProtocolException('Contradictory allClear');
     }
     if ((side == PracticeAudioSide.input && inputPhase == 'clear') ||
-        (side == PracticeAudioSide.output && outputPhase == 'clear')) {
+        (side == PracticeAudioSide.output && outputPhase == 'clear') ||
+        (side == PracticeAudioSide.video && videoPhase == 'clear')) {
       throw const NativeAudioProtocolException('Active side has clear phase');
+    }
+    if ((side != PracticeAudioSide.video &&
+            (videoPhase != 'clear' || !videoReleased)) ||
+        (side == PracticeAudioSide.video && videoReleased)) {
+      throw const NativeAudioProtocolException('Contradictory video state');
     }
     return NativeAllAudioState._(
       ownerToken: _token(map, 'ownerToken'),
@@ -221,8 +256,10 @@ final class NativeAllAudioState {
       activeLeaseGeneration: leaseGeneration,
       inputPhase: inputPhase,
       outputPhase: outputPhase,
+      videoPhase: videoPhase,
       inputReleased: inputReleased,
       outputReleased: outputReleased,
+      videoReleased: videoReleased,
       sessionReleased: sessionReleased,
       nativeOperationInFlight: inFlight,
       requiresExplicitRetry: retry,

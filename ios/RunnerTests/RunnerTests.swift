@@ -589,6 +589,16 @@ final class PracticeAudioArbiterTests: XCTestCase {
     ["ownerToken": owner.token, "engineGeneration": owner.engineGeneration]
   }
 
+  private func legacyStartArguments(
+    _ arbiter: PracticeAudioArbiter, _ owner: PracticeAudioOwner
+  ) -> [String: Any] {
+    let state = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    return ownerFields(owner).merging([
+      "contextGeneration": state["contextGeneration"]!,
+      "attemptId": attempt, "sampleRate": 44100
+    ]) { _, rhs in rhs }
+  }
+
   private func waitForPhase(_ phase: String, _ coordinator: AudioCaptureCoordinator) {
     let reached = expectation(description: "capture phase \(phase)")
     func poll() {
@@ -637,7 +647,7 @@ final class PracticeAudioArbiterTests: XCTestCase {
     var startAnswer: Any?
     onMain {
       capture.handle(FlutterMethodCall(methodName: "start",
-        arguments: ["attemptId": attempt, "sampleRate": 44100])) { startAnswer = $0 }
+        arguments: legacyStartArguments(arbiter, owner))) { startAnswer = $0 }
     }
     XCTAssertEqual((startAnswer as? FlutterError)?.code, "audio_busy")
     XCTAssertEqual(captureHardware.startCalls, 0)
@@ -788,7 +798,7 @@ final class PracticeAudioArbiterTests: XCTestCase {
     let started = expectation(description: "legacy input started")
     onMain {
       capture.handle(FlutterMethodCall(methodName: "start",
-        arguments: ["attemptId": attempt, "sampleRate": 44100])) { answer in
+        arguments: legacyStartArguments(arbiter, owner))) { answer in
         XCTAssertNil(answer)
         started.fulfill()
       }
@@ -884,7 +894,7 @@ final class PracticeAudioArbiterTests: XCTestCase {
     let started = expectation(description: "input started before stream cancellation")
     onMain {
       capture.handle(FlutterMethodCall(methodName: "start",
-        arguments: ["attemptId": attempt, "sampleRate": 44100])) { answer in
+        arguments: legacyStartArguments(arbiter, owner))) { answer in
         XCTAssertNil(answer)
         started.fulfill()
       }
@@ -949,5 +959,565 @@ final class PracticeAudioArbiterTests: XCTestCase {
       arbiter.claimInputStart(owner: owner, attemptId: attempt, permit: oldClaim)
     }
     XCTAssertNotNil(rejected)
+  }
+
+  func testLegacyMicrophoneRequiresCurrentThreeFieldContextClaim() {
+    let hardware = FakeCaptureHardware()
+    let coordinator = AudioCaptureCoordinator(hardware: hardware, canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+    let owner = onMain { arbiter.replaceEngine() }
+    let capture = AudioCaptureStreamer(coordinator: coordinator, arbiter: arbiter, owner: owner)
+    onMain {
+      XCTAssertNil(capture.onListen(withArguments: ["attemptId": attempt], eventSink: { _ in }))
+    }
+    let old = legacyStartArguments(arbiter, owner)
+    let oldContext = old["contextGeneration"] as! Int
+    let fenced = call(arbiter, owner, "fenceContext", ownerFields(owner).merging([
+      "contextGeneration": oldContext, "reason": "routeChange"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(fenced?["status"] as? String, "closed")
+
+    let missing: [String: Any] = ["attemptId": attempt, "sampleRate": 44100]
+    let partial = old.filter { $0.key != "contextGeneration" }
+    for (arguments, code) in [(missing, "bad_args"), (partial, "bad_args"),
+                              (old, "audio_lease_required")] {
+      var answer: Any?
+      onMain {
+        capture.handle(FlutterMethodCall(methodName: "start", arguments: arguments)) {
+          answer = $0
+        }
+      }
+      XCTAssertEqual((answer as? FlutterError)?.code, code)
+      XCTAssertEqual(hardware.startCalls, 0)
+    }
+
+    let started = expectation(description: "fresh legacy context starts")
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "start",
+        arguments: legacyStartArguments(arbiter, owner))) { answer in
+        XCTAssertNil(answer)
+        started.fulfill()
+      }
+    }
+    wait(for: [started], timeout: 2)
+    waitForPhase("running", coordinator)
+    XCTAssertEqual(hardware.startCalls, 1)
+
+    let stopped = expectation(description: "fresh legacy context closes")
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "stop",
+        arguments: ["attemptId": attempt])) { answer in
+        XCTAssertNil(answer)
+        stopped.fulfill()
+      }
+    }
+    wait(for: [stopped], timeout: 2)
+    waitForPhase("clear", coordinator)
+  }
+
+  func testVideoReservationIsDisabledByDefaultAndDisposeAcknowledgementExcludesCapture() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let disabled = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+    let oldOwner = onMain { disabled.replaceEngine() }
+    let disabledContext = (call(disabled, oldOwner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"]!
+    let denied = call(disabled, oldOwner, "reserve", ownerFields(oldOwner).merging([
+      "contextGeneration": disabledContext, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs })
+    XCTAssertEqual((denied as? FlutterError)?.code, "video_unavailable")
+
+    let enabledCoordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let enabled = PracticeAudioArbiter(coordinator: enabledCoordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { enabled.replaceEngine() }
+    let context = (call(enabled, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"]!
+    let permit = call(enabled, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertTrue(onMain { enabled.claimVideoPlayer(owner: owner,
+      contextGeneration: context as! Int, leaseId: outputLease,
+      leaseGeneration: permit["leaseGeneration"] as! Int, playerId: 7) })
+    XCTAssertFalse(onMain { enabled.claimVideoPlayer(owner: owner,
+      contextGeneration: context as! Int, leaseId: outputLease,
+      leaseGeneration: permit["leaseGeneration"] as! Int, playerId: 7) })
+    let held = call(enabled, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(held["activeSide"] as? String, "video")
+    XCTAssertEqual(held["videoPhase"] as? String, "reserved")
+    XCTAssertEqual(held["videoReleased"] as? Bool, false)
+    XCTAssertEqual(held["sessionReleased"] as? Bool, false)
+    let capture = AudioCaptureStreamer(coordinator: enabledCoordinator, arbiter: enabled, owner: owner)
+    onMain { XCTAssertNil(capture.onListen(withArguments: ["attemptId": attempt], eventSink: { _ in })) }
+    var captureAnswer: Any?
+    onMain {
+      capture.handle(FlutterMethodCall(methodName: "start",
+        arguments: legacyStartArguments(enabled, owner))) { captureAnswer = $0 }
+    }
+    XCTAssertEqual((captureAnswer as? FlutterError)?.code, "audio_busy")
+    let fields = ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": permit["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    let close = call(enabled, owner, "closeAll", fields.merging([
+      "reason": "userStop"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(close["status"] as? String, "pending")
+    XCTAssertFalse(onMain { enabled.releaseVideoPlayer(owner: owner,
+      contextGeneration: context as! Int, leaseId: outputLease,
+      leaseGeneration: permit["leaseGeneration"] as! Int, playerId: 8) })
+    XCTAssertTrue(onMain { enabled.releaseVideoPlayer(owner: owner,
+      contextGeneration: context as! Int, leaseId: outputLease,
+      leaseGeneration: permit["leaseGeneration"] as! Int, playerId: 7) })
+    let disposed = call(enabled, owner, "completeVideoDispose", fields.merging([
+      "confirmed": true
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(disposed["status"] as? String, "closed")
+    let input = call(enabled, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": inputLease, "side": "input"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(input["status"] as? String, "reserved")
+    let stale = call(enabled, owner, "completeVideoDispose", fields.merging([
+      "confirmed": true
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(stale["status"] as? String, "stale")
+    XCTAssertEqual((stale["snapshot"] as? [String: Any])?["activeSide"] as? String, "input")
+  }
+
+  func testVideoCreationGateRejectsStalePermitAndReentrantFenceKeepsExactClaim() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let permit = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = permit["leaseGeneration"] as! Int
+    var effects = 0
+    XCTAssertFalse(onMain { arbiter.withClaimedVideoCreation(owner: owner,
+      contextGeneration: context + 1, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 107) { effects += 1 } })
+    XCTAssertEqual(effects, 0)
+    XCTAssertFalse(onMain { arbiter.withClaimedVideoCreation(owner: owner,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 107) {
+        effects += 1
+        arbiter.closeAllGlobal(reason: "routeChange")
+      } })
+    XCTAssertEqual(effects, 1)
+    let held = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(held["activeSide"] as? String, "video")
+    XCTAssertFalse(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 108) })
+    XCTAssertTrue(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 107) })
+  }
+
+  func testReentrantExactReleaseDuringVideoCreationCannotReportSuccessBeforeDartAck() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let permit = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = permit["leaseGeneration"] as! Int
+    var released = false
+    let created = onMain { arbiter.withClaimedVideoCreation(owner: owner,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 111) {
+        released = arbiter.releaseVideoPlayer(owner: owner,
+          contextGeneration: context, leaseId: outputLease,
+          leaseGeneration: generation, playerId: 111)
+      } }
+    XCTAssertTrue(released)
+    XCTAssertFalse(created)
+    let held = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(held["activeSide"] as? String, "video")
+    XCTAssertEqual(held["allClear"] as? Bool, false)
+    XCTAssertFalse(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 111) })
+    let disposed = call(arbiter, owner, "completeVideoDispose", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": generation, "confirmed": true
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(disposed["status"] as? String, "closed")
+    XCTAssertEqual((disposed["snapshot"] as? [String: Any])?["allClear"] as? Bool, true)
+  }
+
+  func testThrowingVideoCreationGateKeepsClaimUntilExactRelease() {
+    enum PartialCreate: Error { case failed }
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let permit = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = permit["leaseGeneration"] as! Int
+    var caught = false
+    onMain {
+      do {
+        _ = try arbiter.withClaimedVideoCreation(owner: owner,
+          contextGeneration: context, leaseId: outputLease,
+          leaseGeneration: generation, playerId: 109) { throw PartialCreate.failed }
+      } catch { caught = true }
+    }
+    XCTAssertTrue(caught)
+    let held = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(held["activeSide"] as? String, "video")
+    XCTAssertFalse(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 110) })
+    XCTAssertTrue(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 109) })
+  }
+
+  func testVideoContextFenceRequiresExactReleaseForTimeoutRecovery() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"]!
+    let permit = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertTrue(onMain { arbiter.claimVideoPlayer(owner: owner,
+      contextGeneration: context as! Int, leaseId: outputLease,
+      leaseGeneration: permit["leaseGeneration"] as! Int, playerId: 7) })
+    let fields = ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": permit["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    let fence = call(arbiter, owner, "fenceContext", ownerFields(owner).merging([
+      "contextGeneration": context, "reason": "accountChange"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(fence["status"] as? String, "pending")
+    let freshContext = (fence["snapshot"] as! [String: Any])["contextGeneration"]!
+    let refused = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": freshContext, "leaseId": inputLease, "side": "input"
+    ]) { _, rhs in rhs })
+    XCTAssertEqual((refused as? FlutterError)?.code, "audio_busy")
+    let expired = expectation(description: "video dispose acknowledgement deadline")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2.05) { expired.fulfill() }
+    wait(for: [expired], timeout: 3)
+    let sticky = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(sticky["videoPhase"] as? String, "unconfirmedQuiescent")
+    XCTAssertEqual(sticky["requiresExplicitRetry"] as? Bool, true)
+    XCTAssertTrue(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: context as! Int, leaseId: outputLease,
+      leaseGeneration: permit["leaseGeneration"] as! Int, playerId: 7) })
+    let late = call(arbiter, owner, "completeVideoDispose", fields.merging([
+      "confirmed": true
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(late["status"] as? String, "blocked")
+    let latest = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    let recovery = call(arbiter, owner, "recoverAll", ownerFields(owner).merging([
+      "expectedStateRevision": latest["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(recovery["status"] as? String, "closed")
+  }
+
+  func testEngineReplacementCancelsUnclaimedVideoButClaimedVideoNeedsOldRelease() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let old = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, old, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"]!
+    let first = call(arbiter, old, "reserve", ownerFields(old).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let oldFields = ownerFields(old).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": first["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    let next = onMain { arbiter.replaceEngine() }
+    let empty = call(arbiter, next, "readAllAudioState", ownerFields(next)) as! [String: Any]
+    XCTAssertEqual(empty["allClear"] as? Bool, true)
+    let retiredCancel = call(arbiter, old, "cancelVideoReservation", oldFields)
+    XCTAssertEqual((retiredCancel as? FlutterError)?.code, "stale_audio_owner")
+    let nextContext = empty["contextGeneration"]!
+    let second = call(arbiter, next, "reserve", ownerFields(next).merging([
+      "contextGeneration": nextContext, "leaseId": inputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(second["status"] as? String, "reserved")
+
+    let coordinator2 = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter2 = PracticeAudioArbiter(coordinator: coordinator2, canAcquire: { true },
+                                        videoReservationEnabled: true)
+    let heldOwner = onMain { arbiter2.replaceEngine() }
+    let heldContext = (call(arbiter2, heldOwner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"]!
+    let held = call(arbiter2, heldOwner, "reserve", ownerFields(heldOwner).merging([
+      "contextGeneration": heldContext, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertTrue(onMain { arbiter2.claimVideoPlayer(owner: heldOwner,
+      contextGeneration: heldContext as! Int, leaseId: outputLease,
+      leaseGeneration: held["leaseGeneration"] as! Int, playerId: 17) })
+    let successor = onMain { arbiter2.replaceEngine() }
+    let before = call(arbiter2, successor, "readAllAudioState", ownerFields(successor)) as! [String: Any]
+    let denied = call(arbiter2, successor, "recoverAll", ownerFields(successor).merging([
+      "expectedStateRevision": before["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(denied["status"] as? String, "blocked")
+    XCTAssertFalse(onMain { arbiter2.releaseVideoPlayer(owner: heldOwner,
+      contextGeneration: heldContext as! Int, leaseId: inputLease,
+      leaseGeneration: held["leaseGeneration"] as! Int, playerId: 17) })
+    XCTAssertTrue(onMain { arbiter2.releaseVideoPlayer(owner: heldOwner,
+      contextGeneration: heldContext as! Int, leaseId: outputLease,
+      leaseGeneration: held["leaseGeneration"] as! Int, playerId: 17) })
+    let released = call(arbiter2, successor, "readAllAudioState", ownerFields(successor)) as! [String: Any]
+    let recovered = call(arbiter2, successor, "recoverAll", ownerFields(successor).merging([
+      "expectedStateRevision": released["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(recovered["status"] as? String, "closed")
+    let successorContext = (recovered["snapshot"] as! [String: Any])["contextGeneration"]!
+    let newer = call(arbiter2, successor, "reserve", ownerFields(successor).merging([
+      "contextGeneration": successorContext, "leaseId": inputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(newer["status"] as? String, "reserved")
+    XCTAssertFalse(onMain { arbiter2.releaseVideoPlayer(owner: heldOwner,
+      contextGeneration: heldContext as! Int, leaseId: outputLease,
+      leaseGeneration: held["leaseGeneration"] as! Int, playerId: 17) })
+  }
+
+  func testEarlyDisposeAcknowledgementWaitsForNativeRelease() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"]!
+    let permit = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let fields = ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": permit["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    XCTAssertTrue(onMain { arbiter.claimVideoPlayer(owner: owner,
+      contextGeneration: context as! Int, leaseId: outputLease,
+      leaseGeneration: permit["leaseGeneration"] as! Int, playerId: 7) })
+    let pending = call(arbiter, owner, "completeVideoDispose", fields.merging([
+      "confirmed": true
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(pending["status"] as? String, "pending")
+    XCTAssertEqual((pending["snapshot"] as? [String: Any])?["requiresExplicitRetry"] as? Bool, false)
+    XCTAssertTrue(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: context as! Int, leaseId: outputLease,
+      leaseGeneration: permit["leaseGeneration"] as! Int, playerId: 7) })
+    let closed = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(closed["allClear"] as? Bool, true)
+  }
+
+  func testVideoCancelAndReusedPlayerIdRequireExactLease() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"]!
+    let first = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let firstFields = ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": first["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    let wrong = call(arbiter, owner, "cancelVideoReservation", firstFields.merging([
+      "leaseId": inputLease
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(wrong["status"] as? String, "stale")
+    let fenced = call(arbiter, owner, "fenceContext", ownerFields(owner).merging([
+      "contextGeneration": context, "reason": "routeChange"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(fenced["status"] as? String, "pending")
+    let cancelled = call(arbiter, owner, "cancelVideoReservation", firstFields) as! [String: Any]
+    XCTAssertEqual(cancelled["status"] as? String, "closed")
+
+    let nextContext = (cancelled["snapshot"] as! [String: Any])["contextGeneration"]!
+    let second = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": nextContext, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let secondFields = ownerFields(owner).merging([
+      "contextGeneration": nextContext, "leaseId": outputLease,
+      "leaseGeneration": second["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    XCTAssertTrue(onMain { arbiter.claimVideoPlayer(owner: owner,
+      contextGeneration: nextContext as! Int, leaseId: outputLease,
+      leaseGeneration: second["leaseGeneration"] as! Int, playerId: 9) })
+    XCTAssertTrue(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: nextContext as! Int, leaseId: outputLease,
+      leaseGeneration: second["leaseGeneration"] as! Int, playerId: 9) })
+    let disposed = call(arbiter, owner, "completeVideoDispose", secondFields.merging([
+      "confirmed": true
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(disposed["status"] as? String, "closed")
+    let third = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": nextContext, "leaseId": inputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let thirdFields = ownerFields(owner).merging([
+      "contextGeneration": nextContext, "leaseId": inputLease,
+      "leaseGeneration": third["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    XCTAssertTrue(onMain { arbiter.claimVideoPlayer(owner: owner,
+      contextGeneration: nextContext as! Int, leaseId: inputLease,
+      leaseGeneration: third["leaseGeneration"] as! Int, playerId: 9) })
+    XCTAssertFalse(onMain { arbiter.releaseVideoPlayer(owner: owner,
+      contextGeneration: nextContext as! Int, leaseId: outputLease,
+      leaseGeneration: second["leaseGeneration"] as! Int, playerId: 9) })
+    let bare = call(arbiter, owner, "completeVideoDispose", thirdFields.merging([
+      "confirmed": true
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(bare["status"] as? String, "blocked")
+    XCTAssertEqual((bare["snapshot"] as? [String: Any])?["allClear"] as? Bool, false)
+  }
+
+  func testLostVideoReserveCancellationFencesLateCallAndStaleRevision() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let before = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    let context = before["contextGeneration"] as! Int
+    let revision = before["stateRevision"] as! Int
+    let fields = ownerFields(owner).merging([
+      "attemptOwnerToken": owner.token,
+      "attemptEngineGeneration": owner.engineGeneration,
+      "attemptContextGeneration": context,
+      "leaseId": outputLease,
+      "leaseGeneration": NSNull(),
+      "expectedStateRevision": revision
+    ]) { _, rhs in rhs }
+    let stale = call(arbiter, owner, "cancelUnclaimedVideoReservation",
+      fields.merging(["expectedStateRevision": revision - 1]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(stale["status"] as? String, "stale")
+    let closed = call(arbiter, owner, "cancelUnclaimedVideoReservation", fields) as! [String: Any]
+    XCTAssertEqual(closed["status"] as? String, "closed")
+    let late = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs })
+    XCTAssertEqual((late as? FlutterError)?.code, "stale_audio_lease")
+    let unrelated = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": inputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(unrelated["status"] as? String, "reserved")
+  }
+
+  func testUnclaimedVideoFailureCanCancelButClaimedAndNewLeaseStayHeld() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let first = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let firstFields = ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": first["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    let failed = call(arbiter, owner, "completeVideoDispose", firstFields.merging([
+      "confirmed": false
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(failed["status"] as? String, "blocked")
+    let cancelled = call(arbiter, owner, "cancelVideoReservation", firstFields) as! [String: Any]
+    XCTAssertEqual(cancelled["status"] as? String, "closed")
+
+    let second = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": inputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let secondState = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    let oldAttempt = ownerFields(owner).merging([
+      "attemptOwnerToken": owner.token,
+      "attemptEngineGeneration": owner.engineGeneration,
+      "attemptContextGeneration": context,
+      "leaseId": outputLease,
+      "leaseGeneration": first["leaseGeneration"]!,
+      "expectedStateRevision": secondState["stateRevision"]!
+    ]) { _, rhs in rhs }
+    let stale = call(arbiter, owner, "cancelUnclaimedVideoReservation", oldAttempt) as! [String: Any]
+    XCTAssertEqual(stale["status"] as? String, "stale")
+    XCTAssertTrue(onMain { arbiter.claimVideoPlayer(owner: owner,
+      contextGeneration: context, leaseId: inputLease,
+      leaseGeneration: second["leaseGeneration"] as! Int, playerId: 9) })
+    let claimed = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    let currentAttempt = oldAttempt.merging([
+      "leaseId": inputLease,
+      "leaseGeneration": second["leaseGeneration"]!,
+      "expectedStateRevision": claimed["stateRevision"]!
+    ]) { _, rhs in rhs }
+    let denied = call(arbiter, owner, "cancelUnclaimedVideoReservation", currentAttempt) as! [String: Any]
+    XCTAssertEqual(denied["status"] as? String, "blocked")
+    XCTAssertEqual((denied["snapshot"] as? [String: Any])?["activeSide"] as? String, "video")
+    let old = onMain { arbiter.replaceEngine() }
+    let retired = call(arbiter, owner, "cancelUnclaimedVideoReservation", currentAttempt)
+    XCTAssertEqual((retired as? FlutterError)?.code, "stale_audio_owner")
+    let stillHeld = call(arbiter, old, "readAllAudioState", ownerFields(old)) as! [String: Any]
+    XCTAssertEqual(stillHeld["activeSide"] as? String, "video")
+  }
+
+  func testUnclaimedVideoTimeoutAllowsExactLostReceiptCancellation() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let permit = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    _ = call(arbiter, owner, "fenceContext", ownerFields(owner).merging([
+      "contextGeneration": context, "reason": "routeChange"
+    ]) { _, rhs in rhs })
+    let expired = expectation(description: "unclaimed video close deadline")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2.05) { expired.fulfill() }
+    wait(for: [expired], timeout: 3)
+    let held = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(held["videoPhase"] as? String, "unconfirmedQuiescent")
+    let cancelled = call(arbiter, owner, "cancelUnclaimedVideoReservation",
+      ownerFields(owner).merging([
+        "attemptOwnerToken": owner.token,
+        "attemptEngineGeneration": owner.engineGeneration,
+        "attemptContextGeneration": context,
+        "leaseId": outputLease,
+        "leaseGeneration": permit["leaseGeneration"]!,
+        "expectedStateRevision": held["stateRevision"]!
+      ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(cancelled["status"] as? String, "closed")
+    XCTAssertEqual((cancelled["snapshot"] as? [String: Any])?["allClear"] as? Bool, true)
+  }
+
+  func testEarlyVideoAckEngineReplacementLateReleaseAllowsEmptyRetry() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let old = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, old, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let permit = call(arbiter, old, "reserve", ownerFields(old).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = permit["leaseGeneration"] as! Int
+    XCTAssertTrue(onMain { arbiter.claimVideoPlayer(owner: old,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 17) })
+    let ack = call(arbiter, old, "completeVideoDispose", ownerFields(old).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": generation, "confirmed": true
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(ack["status"] as? String, "pending")
+    let current = onMain { arbiter.replaceEngine() }
+    XCTAssertTrue(onMain { arbiter.releaseVideoPlayer(owner: old,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 17) })
+    let before = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    XCTAssertTrue(before["activeSide"] is NSNull)
+    XCTAssertEqual(before["videoPhase"] as? String, "clear")
+    XCTAssertEqual(before["requiresExplicitRetry"] as? Bool, true)
+    let recovered = call(arbiter, current, "recoverAll", ownerFields(current).merging([
+      "expectedStateRevision": before["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(recovered["status"] as? String, "closed")
+    XCTAssertEqual((recovered["snapshot"] as? [String: Any])?["allClear"] as? Bool, true)
   }
 }

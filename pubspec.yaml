@@ -70,6 +70,9 @@ dependencies:
 
   permission_handler: ^12.0.3
 
+  # QA-only silent lesson player adapter. Shipping lesson media remains empty.
+  video_player: 2.11.1
+
   # YALNIZ poz modelini uygulama-özel bir dosyaya yazmak için (plugin bundle
   # değil YOL ister) — depolama BİÇİMİ yok, kablolama katmanında kalıyor.
   path_provider: ^2.1.0
@@ -109,6 +112,11 @@ flutter:
     - assets/content/library.json
     - assets/content/guitar_journey.v1.json
     - assets/motion_content/manifest.json
+    # Code-pinned source membership for closed QA; the shipping media slot is empty.
+    - assets/motion_content/ostinato_source_pins_v2k.json
+    # Exact v2l source identities only; these assets contain no playable media.
+    - assets/motion_content/ostinato.source-slice.v1.json
+    - assets/motion_content/ostinato.source-projection.v1.json
     - assets/config/guitar-observation.v1.json
     # OFL lisans metinleri — paketlenmiş font DOSYALARIYLA BİRLİKTE dağıtılmak
     # OFL §2'nin şartı (D1, H-34/H-40 bağı: google_fonts kalktı, yazı tipleri

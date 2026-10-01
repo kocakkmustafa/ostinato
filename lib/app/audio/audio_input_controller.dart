@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'audio_capture_channel.dart';
 import 'audio_route_state.dart';
+import 'practice_audio_root.dart';
 
 AudioSurfaceState audioPermissionState(PermissionStatus perm) =>
     perm.isPermanentlyDenied || perm.isRestricted
@@ -119,6 +120,7 @@ final class AudioInputController implements AudioSource {
   final _status = StreamController<AudioSurfaceState>.broadcast();
   StreamSubscription<RawAudioEvent>? _sub;
   AudioLifecycleObserver? _lifecycle;
+  PracticeAudioCaptureAction? _captureAction;
   Completer<bool>? _foregroundReady;
   bool _running = false;
   bool _starting = false;
@@ -395,17 +397,39 @@ final class AudioInputController implements AudioSource {
   }
 
   @override
-  Future<void> start({required int sampleRate}) async {
-    if (_disposed || _starting || _running) return;
+  Future<void> start({
+    required int sampleRate,
+    PracticeAudioCaptureAction? captureAction,
+  }) async {
+    if (_disposed || _starting || _running) {
+      captureAction?.retire();
+      return;
+    }
+    // Production's MethodChannel has no unclaimed start path. Fake sources
+    // remain usable in isolated signal and controller tests.
+    if (_channel is MethodChannelAudioCaptureChannel && captureAction == null) {
+      _emit(const AudioSetupFailed('capture_context_required'));
+      return;
+    }
     if (_audioCandidate != null && !identical(_audioCandidate, this)) {
+      captureAction?.retire();
       _emit(const AudioSetupFailed('capture_owner_busy'));
       return;
     }
     if (_audioCloseLatch != null) {
+      captureAction?.retire();
       _emit(const AudioSetupFailed('capture_close_unconfirmed'));
       return;
     }
     final previous = _audioOwner;
+    if (captureAction != null &&
+        !captureAction.attachCancellation(() {
+          unawaited(_stop(announce: false).catchError((Object _) {}));
+        })) {
+      _emit(const AudioSetupFailed('capture_context_stale'));
+      return;
+    }
+    _captureAction = captureAction;
     _audioCandidate = this;
     final epoch = ++_epoch;
     _starting = true;
@@ -439,10 +463,20 @@ final class AudioInputController implements AudioSource {
           !_current(epoch)) {
         throw PlatformException(code: 'capture_close_unconfirmed');
       }
+      if (captureAction != null) {
+        if (!captureAction.isCurrent ||
+            !await captureAction.confirmPreflight() ||
+            !captureAction.isCurrent) {
+          throw PlatformException(code: 'capture_context_stale');
+        }
+      }
       _askingPermission = true;
       final perm = await _requestPermission();
       _askingPermission = false;
       if (!_current(epoch)) return;
+      if (captureAction != null && !captureAction.isCurrent) {
+        throw PlatformException(code: 'capture_context_stale');
+      }
       if (!perm.isGranted) {
         _emit(audioPermissionState(perm));
         await _stop(announce: false);
@@ -452,6 +486,9 @@ final class AudioInputController implements AudioSource {
         if (_current(epoch)) _emit(const AudioSetupFailed('not_foreground'));
         await _stop(announce: false);
         return;
+      }
+      if (captureAction != null && !captureAction.isCurrent) {
+        throw PlatformException(code: 'capture_context_stale');
       }
       _channelConnected = true;
       _sub = _channel.events.listen(
@@ -468,6 +505,9 @@ final class AudioInputController implements AudioSource {
         );
       }
       if (!_current(epoch) || _audioCloseLatch != null) return;
+      if (captureAction != null && !captureAction.isCurrent) {
+        throw PlatformException(code: 'capture_context_stale');
+      }
       // This synchronous guard is the only point where the new capture owner
       // is claimed. A prior owner's confirmed close is required above.
       if (_audioOwner != null && !identical(_audioOwner, this)) {
@@ -475,8 +515,14 @@ final class AudioInputController implements AudioSource {
       }
       _audioOwner = this;
       _audioCandidate = null;
-      await _boundedNative(_channel.start(sampleRate: sampleRate));
+      final nativeStart = channel is MethodChannelAudioCaptureChannel
+          ? channel.start(sampleRate: sampleRate, claim: captureAction?.claim)
+          : channel.start(sampleRate: sampleRate);
+      await _boundedNative(nativeStart);
       if (!_current(epoch)) return;
+      if (captureAction != null && !captureAction.isCurrent) {
+        throw PlatformException(code: 'capture_context_stale');
+      }
       _running = true;
       _starting = false;
       _emit(AudioCalibrating(_route));
@@ -564,6 +610,8 @@ final class AudioInputController implements AudioSource {
 
   Future<void> _performStop({required bool announce}) async {
     final stoppedEpoch = ++_epoch;
+    _captureAction?.retire();
+    _captureAction = null;
     _running = false;
     _starting = false;
     _askingPermission = false;

@@ -299,6 +299,37 @@ void main() {
   });
 
   test(
+    'observer reports and retries the process owner after a failed fence',
+    () async {
+      final ownerPort = _Port()
+        ..onFence = (_) => Future<void>.error(StateError('fence failed'));
+      final owner = PracticeAudioLease(port: ownerPort);
+      final observer = PracticeAudioLease(port: _Port());
+      final ticket = (await _acquire(owner, PracticeAudioSide.input)).ticket!;
+
+      expect(
+        await observer.invalidateAndFence(
+          PracticeAudioInvalidationReason.accountChange,
+        ),
+        PracticeAudioReleaseStatus.blockedUnconfirmed,
+      );
+      expect(observer.phase, PracticeAudioLeasePhase.blockedUnconfirmed);
+      expect(ownerPort.fences, [NativeAudioContextReason.accountChange]);
+      expect(
+        await owner.release(ticket),
+        PracticeAudioReleaseStatus.staleTicket,
+      );
+
+      ownerPort.onFence = null;
+      expect(
+        await observer.recover(),
+        PracticeAudioReleaseStatus.confirmedClosed,
+      );
+      expect(observer.phase, PracticeAudioLeasePhase.idle);
+    },
+  );
+
+  test(
     'failed initial preflight keeps the isolate owner until recovery',
     () async {
       final firstPort = _Port()..clear = () async => false;
@@ -360,6 +391,223 @@ void main() {
       await lease.release(ticket),
       PracticeAudioReleaseStatus.confirmedClosed,
     );
+  });
+
+  test(
+    'native idle fence closes a legacy-only input before a new grant',
+    () async {
+      var legacyOpen = true;
+      final port = _Port();
+      port.clear = () async => !legacyOpen;
+      port.onFence = (_) async {
+        legacyOpen = false;
+      };
+      final lease = PracticeAudioLease(port: port);
+      final old = lease.captureContext();
+      expect(
+        await lease.invalidateAndFence(
+          PracticeAudioInvalidationReason.accountChange,
+        ),
+        PracticeAudioReleaseStatus.confirmedClosed,
+      );
+      expect(port.fences, [NativeAudioContextReason.accountChange]);
+      expect(port.opens, isEmpty);
+      expect(lease.phase, PracticeAudioLeasePhase.idle);
+      expect(
+        (await lease.acquire(PracticeAudioSide.input, context: old)).status,
+        PracticeAudioAcquireStatus.staleContext,
+      );
+    },
+  );
+
+  test(
+    'rapid context events serialize native fences without an opening',
+    () async {
+      final first = Completer<void>();
+      final port = _Port()
+        ..onFence = (reason) => reason == NativeAudioContextReason.routeChange
+            ? first.future
+            : Future<void>.value();
+      final lease = PracticeAudioLease(port: port);
+      final route = lease.invalidateAndFence(
+        PracticeAudioInvalidationReason.routeChange,
+      );
+      final account = lease.invalidateAndFence(
+        PracticeAudioInvalidationReason.accountChange,
+      );
+      expect(lease.phase, PracticeAudioLeasePhase.fencing);
+      await Future<void>.delayed(Duration.zero);
+      expect(port.fences, [NativeAudioContextReason.routeChange]);
+      first.complete();
+      expect(await route, PracticeAudioReleaseStatus.confirmedClosed);
+      expect(await account, PracticeAudioReleaseStatus.confirmedClosed);
+      expect(port.fences, [
+        NativeAudioContextReason.routeChange,
+        NativeAudioContextReason.accountChange,
+      ]);
+      expect(port.opens, isEmpty);
+      expect(lease.phase, PracticeAudioLeasePhase.idle);
+    },
+  );
+
+  test(
+    'late joined context event cannot escape the final empty drain',
+    () async {
+      var joined = 0;
+      for (var depth = 0; depth <= 48; ++depth) {
+        final port = _Port();
+        late PracticeAudioLease lease;
+        Future<PracticeAudioReleaseStatus>? late;
+        final scheduled = Completer<void>();
+        var clearReads = 0;
+        port.clear = () async {
+          ++clearReads;
+          if (clearReads == 2) {
+            void enqueue(int remaining) {
+              scheduleMicrotask(() {
+                if (remaining == 0) {
+                  late = lease.invalidateAndFence(
+                    PracticeAudioInvalidationReason.accountChange,
+                  );
+                  scheduled.complete();
+                } else {
+                  enqueue(remaining - 1);
+                }
+              });
+            }
+
+            enqueue(depth);
+          }
+          return true;
+        };
+        lease = PracticeAudioLease(port: port);
+        final first = lease.invalidateAndFence(
+          PracticeAudioInvalidationReason.routeChange,
+        );
+        expect(await first, PracticeAudioReleaseStatus.confirmedClosed);
+        await scheduled.future;
+        final second = late!;
+        expect(await second, PracticeAudioReleaseStatus.confirmedClosed);
+        if (identical(second, first)) {
+          ++joined;
+          expect(port.fences, [
+            NativeAudioContextReason.routeChange,
+            NativeAudioContextReason.accountChange,
+          ], reason: 'Joined event escaped at microtask depth $depth');
+        }
+        expect(lease.phase, PracticeAudioLeasePhase.idle);
+      }
+      expect(joined, greaterThan(0));
+    },
+  );
+
+  test(
+    'active context fence closes globally without a competing closeAll',
+    () async {
+      final port = _Port();
+      final lease = PracticeAudioLease(port: port);
+      final ticket = (await _acquire(lease, PracticeAudioSide.input)).ticket!;
+      expect(
+        await lease.invalidateAndFence(
+          PracticeAudioInvalidationReason.background,
+        ),
+        PracticeAudioReleaseStatus.confirmedClosed,
+      );
+      expect(port.fences, [NativeAudioContextReason.background]);
+      expect(port.closeCalls, 1);
+      expect(
+        await lease.release(ticket),
+        PracticeAudioReleaseStatus.staleTicket,
+      );
+    },
+  );
+
+  test('timed out fence stays blocked until explicit recovery', () async {
+    final held = Completer<void>();
+    final port = _Port()..onFence = (_) => held.future;
+    final lease = PracticeAudioLease(
+      port: port,
+      operationTimeout: const Duration(milliseconds: 15),
+    );
+    expect(
+      await lease.invalidateAndFence(
+        PracticeAudioInvalidationReason.routeChange,
+      ),
+      PracticeAudioReleaseStatus.blockedUnconfirmed,
+    );
+    expect(lease.phase, PracticeAudioLeasePhase.blockedUnconfirmed);
+    expect(await lease.recover(), PracticeAudioReleaseStatus.pendingNative);
+    held.complete();
+    await Future<void>.delayed(Duration.zero);
+    expect(lease.phase, PracticeAudioLeasePhase.blockedUnconfirmed);
+    expect(await lease.recover(), PracticeAudioReleaseStatus.confirmedClosed);
+    expect(lease.phase, PracticeAudioLeasePhase.idle);
+    expect(port.opens, isEmpty);
+  });
+
+  test(
+    'blocked late start still sends account fence and stays sticky',
+    () async {
+      final started = Completer<void>();
+      final port = _Port()..start = (_) => started.future;
+      final lease = PracticeAudioLease(
+        port: port,
+        operationTimeout: const Duration(milliseconds: 15),
+      );
+      expect(
+        (await _acquire(lease, PracticeAudioSide.output)).status,
+        PracticeAudioAcquireStatus.blockedUnconfirmed,
+      );
+      expect(lease.phase, PracticeAudioLeasePhase.blockedUnconfirmed);
+
+      final fenced = lease.invalidateAndFence(
+        PracticeAudioInvalidationReason.accountChange,
+      );
+      expect(await lease.recover(), PracticeAudioReleaseStatus.busy);
+      expect(await fenced, PracticeAudioReleaseStatus.blockedUnconfirmed);
+      expect(port.fences, [NativeAudioContextReason.accountChange]);
+      expect(lease.phase, PracticeAudioLeasePhase.blockedUnconfirmed);
+      expect(await lease.recover(), PracticeAudioReleaseStatus.pendingNative);
+
+      started.complete();
+      await Future<void>.delayed(Duration.zero);
+      expect(lease.phase, PracticeAudioLeasePhase.blockedUnconfirmed);
+      expect(await lease.recover(), PracticeAudioReleaseStatus.confirmedClosed);
+    },
+  );
+
+  test('uncertain user close still sends background fence in order', () async {
+    final firstClose = Completer<void>();
+    var stopCount = 0;
+    final port = _Port()
+      ..stop = () {
+        ++stopCount;
+        return stopCount == 1 ? firstClose.future : Future<void>.value();
+      };
+    final lease = PracticeAudioLease(
+      port: port,
+      operationTimeout: const Duration(milliseconds: 15),
+    );
+    final ticket = (await _acquire(lease, PracticeAudioSide.output)).ticket!;
+    final closing = lease.release(ticket);
+    await Future<void>.delayed(Duration.zero);
+    expect(port.closeCalls, 1);
+    final fenced = lease.invalidateAndFence(
+      PracticeAudioInvalidationReason.background,
+    );
+    await Future<void>.delayed(Duration.zero);
+    expect(port.fences, [NativeAudioContextReason.background]);
+    expect(lease.phase, PracticeAudioLeasePhase.fencing);
+    expect(await closing, PracticeAudioReleaseStatus.blockedUnconfirmed);
+    expect(await fenced, PracticeAudioReleaseStatus.blockedUnconfirmed);
+    expect(port.fences, [NativeAudioContextReason.background]);
+    expect(port.closeCalls, 2);
+    expect(lease.phase, PracticeAudioLeasePhase.blockedUnconfirmed);
+    expect(await lease.recover(), PracticeAudioReleaseStatus.pendingNative);
+
+    firstClose.complete();
+    await Future<void>.delayed(Duration.zero);
+    expect(await lease.recover(), PracticeAudioReleaseStatus.confirmedClosed);
   });
 
   test('active invalidation fences a delayed old background context', () async {

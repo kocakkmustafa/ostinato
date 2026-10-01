@@ -60,6 +60,8 @@ void main() {
       expect(owner.grantFor(freshRoute), isNotNull);
       expect(port.opens, isEmpty);
       owner.dispose();
+      await owner.lastFenceForTest;
+      expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
       user.dispose();
       phase.dispose();
     },
@@ -114,6 +116,8 @@ void main() {
       expect(owner.grantFor(routeB), isNull);
       expect(port.opens, isEmpty);
       owner.dispose();
+      await owner.lastFenceForTest;
+      expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
       user.dispose();
       phase.dispose();
     },
@@ -170,6 +174,8 @@ void main() {
       AudioRouteAcquireStatus.staleGrant,
     );
     owner.dispose();
+    await owner.lastFenceForTest;
+    expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
     user.dispose();
     phase.dispose();
   });
@@ -212,7 +218,14 @@ void main() {
     closed.complete();
     expect((await starting).status, AudioRouteAcquireStatus.staleGrant);
     expect(port.closeCalls, 1);
+    await owner.lastFenceForTest;
+    // The reserve reply raced the new native context. Even after hardware
+    // closes, only an explicit all-clear recovery may remove that doubt.
+    expect(owner.blocked, isTrue);
+    expect(await owner.recover(), PracticeAudioReleaseStatus.confirmedClosed);
     owner.dispose();
+    await owner.lastFenceForTest;
+    expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
     user.dispose();
     phase.dispose();
   });
@@ -262,6 +275,8 @@ void main() {
       expect(port.opens, isEmpty);
       expect(owner.grantFor(route), isNotNull);
       owner.dispose();
+      await owner.lastFenceForTest;
+      expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
       user.dispose();
       phase.dispose();
     },
@@ -310,6 +325,8 @@ void main() {
     expect(await staleCallback(), AudioRouteAcquireStatus.staleGrant);
     expect(port.opens, isEmpty);
     owner.dispose();
+    await owner.lastFenceForTest;
+    expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
     user.dispose();
     phase.dispose();
   });
@@ -345,6 +362,8 @@ void main() {
     );
     expect(port.opens, [PracticeAudioSide.output]);
     owner.dispose();
+    await owner.lastFenceForTest;
+    expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
     user.dispose();
     phase.dispose();
   });
@@ -487,11 +506,11 @@ void main() {
         ),
       );
       await tester.pump();
-      final grant = owner.grantFor(owner.topRoute!)!;
-      expect(
-        (await owner.acquire(grant, PracticeAudioSide.input)).status,
-        AudioRouteAcquireStatus.blockedUnconfirmed,
-      );
+      // Idle native fencing now detects an uncleared legacy device before
+      // a lesson can receive any acquisition grant.
+      await tester.runAsync(_settleFence);
+      await tester.pump();
+      expect(owner.blocked, isTrue);
       expect(owner.blocked, isTrue);
       await tester.pumpAndSettle();
       expect(

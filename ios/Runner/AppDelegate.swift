@@ -7,6 +7,10 @@ import UIKit
   private var audioMethods: FlutterMethodChannel?
   private var audioEvents: FlutterEventChannel?
   private var practiceAudioMethods: FlutterMethodChannel?
+  #if DEBUG
+  private var qaVideoMethods: FlutterMethodChannel?
+  private var qaVideoProbe: QASilentVideoProbeHandler?
+  #endif
 
   override func application(
     _ application: UIApplication,
@@ -27,6 +31,10 @@ import UIKit
     audioMethods?.setMethodCallHandler(nil)
     audioEvents?.setStreamHandler(nil)
     practiceAudioMethods?.setMethodCallHandler(nil)
+    #if DEBUG
+    qaVideoProbe?.invalidate()
+    qaVideoMethods?.setMethodCallHandler(nil)
+    #endif
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     let messenger = engineBridge.applicationRegistrar.messenger()
     audioMethods = FlutterMethodChannel(name: "com.yulalab.ostinato/audio_capture", binaryMessenger: messenger)
@@ -41,5 +49,15 @@ import UIKit
     practiceAudioMethods?.setMethodCallHandler { call, result in
       practice.handle(call, result: result)
     }
+    #if DEBUG
+    let probe = QASilentVideoProbeHandler()
+    qaVideoProbe = probe
+    qaVideoMethods = FlutterMethodChannel(name: QASilentVideoProbeHandler.channelName,
+                                          binaryMessenger: messenger)
+    qaVideoMethods?.setMethodCallHandler { [weak probe] call, result in
+      guard let probe = probe else { result(false); return }
+      probe.handle(call, result: result)
+    }
+    #endif
   }
 }

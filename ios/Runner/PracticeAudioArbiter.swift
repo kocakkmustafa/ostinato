@@ -95,6 +95,7 @@ final class PracticeAudioArbiter {
   private let outputHardware: PracticeOutputHardware?
   private let sessionPolicy: PracticeAudioSessionPolicy?
   private let allowedOutputIds: Set<String>
+  private let videoReservationEnabled: Bool
   private let outputWorker = DispatchQueue(label: "com.yulalab.ostinato.practice.output")
   private var owner: PracticeAudioOwner?
   private var engineGeneration = 0
@@ -102,6 +103,9 @@ final class PracticeAudioArbiter {
   private var stateRevision = 0
   private var leaseGeneration = 0
   private var reservation: PracticeAudioReservation?
+  // A timed-out Dart reserve can reach this main queue after its cancellation.
+  // Keep the exact attempt fenced until the engine is replaced.
+  private var cancelledVideoAttempts = Set<String>()
   private var reservationClosing = false
   private var outputPhase = "clear"
   private var outputOperationInFlight = false
@@ -109,6 +113,12 @@ final class PracticeAudioArbiter {
   private var globalRetryRequired = false
   private var outputCloseGeneration = 0
   private var outputCloseScheduled = false
+  private var videoPhase = "clear"
+  private var videoCloseTimedOut = false
+  private var videoRetryRequired = false
+  private var videoPlayerId: Int64?
+  private var videoPlayerReleased = false
+  private var videoDisposeAcknowledged = false
   private var observers: [NSObjectProtocol] = []
 
   init(
@@ -116,13 +126,15 @@ final class PracticeAudioArbiter {
     canAcquire: @escaping () -> Bool = { UIApplication.shared.applicationState == .active },
     outputHardware: PracticeOutputHardware? = nil,
     allowedOutputIds: Set<String> = [],
-    sessionPolicy: PracticeAudioSessionPolicy? = nil
+    sessionPolicy: PracticeAudioSessionPolicy? = nil,
+    videoReservationEnabled: Bool = false
   ) {
     self.coordinator = coordinator
     self.canAcquire = canAcquire
     self.outputHardware = outputHardware
     self.sessionPolicy = sessionPolicy
     self.allowedOutputIds = allowedOutputIds
+    self.videoReservationEnabled = videoReservationEnabled
     coordinator.processArbiter = self
     let center = NotificationCenter.default
     observers.append(center.addObserver(forName: UIApplication.didEnterBackgroundNotification,
@@ -157,6 +169,11 @@ final class PracticeAudioArbiter {
     }
   }
 
+  private func videoAttemptKey(_ token: String, _ engine: Int,
+                               _ context: Int, _ id: String) -> String {
+    "\(token):\(engine):\(context):\(id)"
+  }
+
   private func newToken() -> String {
     var bytes = [UInt8](repeating: 0, count: 16)
     let status = bytes.withUnsafeMutableBytes { buffer in
@@ -170,11 +187,17 @@ final class PracticeAudioArbiter {
   @discardableResult
   func replaceEngine() -> PracticeAudioOwner {
     assert(Thread.isMainThread)
+    let unclaimedVideo = reservation?.side == "video" && videoPlayerId == nil
     let hadHardware = coordinator.closeState()["phase"] as? String != "clear" ||
-      outputPhase == "starting" || outputPhase == "playing" || outputOperationInFlight
+      outputPhase == "starting" || outputPhase == "playing" || outputOperationInFlight ||
+      (videoPhase != "clear" && !unclaimedVideo)
     owner = nil
     contextGeneration += 1
     stateRevision += 1
+    // Main-thread claim and engine replacement are serialized. A video
+    // reserve with no admitted player has no native resource to release.
+    if unclaimedVideo { clearVideoReservation() }
+    cancelledVideoAttempts.removeAll()
     if hadHardware { globalRetryRequired = true }
     closeAllGlobal(reason: "engineReplacement")
     engineGeneration += 1
@@ -205,8 +228,8 @@ final class PracticeAudioArbiter {
   }
 
   /// The old capture channel claims this same process owner before it queues
-  /// AVAudioEngine work. Until Gate D, a missing permit may use the legacy
-  /// capture path only while production output reservations are disabled.
+  /// AVAudioEngine work. A legacy start must carry the context captured for
+  /// its original action, even while output reservations remain disabled.
   func claimInputStart(
     owner candidate: PracticeAudioOwner?,
     attemptId: String,
@@ -217,18 +240,29 @@ final class PracticeAudioArbiter {
       return failure("stale_audio_owner")
     }
     if let held = reservation {
-      guard held.side == "input", held.owner == candidate,
+      let leasedKeys: Set<String> = ["ownerToken", "engineGeneration",
+                                     "contextGeneration", "leaseId", "leaseGeneration"]
+      guard let permit = permit,
+            held.side == "input", held.owner == candidate,
             held.contextGeneration == contextGeneration,
             !reservationClosing,
-            permit?["ownerToken"] as? String == candidate.token,
-            permit?["engineGeneration"] as? Int == candidate.engineGeneration,
-            permit?["contextGeneration"] as? Int == held.contextGeneration,
-            permit?["leaseId"] as? String == held.leaseId,
-            permit?["leaseGeneration"] as? Int == held.leaseGeneration else {
+            Set(permit.keys) == leasedKeys,
+            permit["ownerToken"] as? String == candidate.token,
+            permit["engineGeneration"] as? Int == candidate.engineGeneration,
+            permit["contextGeneration"] as? Int == held.contextGeneration,
+            permit["leaseId"] as? String == held.leaseId,
+            permit["leaseGeneration"] as? Int == held.leaseGeneration else {
         return failure("audio_busy")
       }
     } else {
-      guard outputHardware == nil, allowedOutputIds.isEmpty, permit == nil else {
+      let legacyKeys: Set<String> = ["ownerToken", "engineGeneration",
+                                     "contextGeneration"]
+      guard let permit = permit,
+            outputHardware == nil, allowedOutputIds.isEmpty,
+            Set(permit.keys) == legacyKeys,
+            permit["ownerToken"] as? String == candidate.token,
+            permit["engineGeneration"] as? Int == candidate.engineGeneration,
+            permit["contextGeneration"] as? Int == contextGeneration else {
         return failure("audio_lease_required")
       }
       leaseGeneration += 1
@@ -258,14 +292,16 @@ final class PracticeAudioArbiter {
     let inputReleased = input.released
     let outputReleased = outputPhase == "clear" || outputPhase == "reserved" ||
       outputPhase == "releasedAwaitingExplicitRetry"
+    let videoReleased = videoPhase == "clear" && reservation?.side != "video"
     // The input hardware is currently the only production AVAudioSession
     // client. A failed input deactivation makes resourcesReleased=false.
-    let sessionReleased = input.released && outputReleased &&
+    let sessionReleased = input.released && outputReleased && videoReleased &&
       (sessionPolicy?.isReleased ?? true)
-    let inFlight = input.inFlight || outputOperationInFlight
-    let retry = input.retry || outputRetryRequired || globalRetryRequired
+    let inFlight = input.inFlight || outputOperationInFlight || videoPhase == "closing"
+    let retry = input.retry || outputRetryRequired || videoRetryRequired || globalRetryRequired
     let allClear = side == nil && input.phase == "clear" && outputPhase == "clear" &&
-      inputReleased && outputReleased && sessionReleased && !inFlight && !retry
+      videoPhase == "clear" && inputReleased && outputReleased && videoReleased &&
+      sessionReleased && !inFlight && !retry
     return [
       "schemaVersion": 1,
       "ownerToken": caller.token,
@@ -276,8 +312,10 @@ final class PracticeAudioArbiter {
       "activeLeaseGeneration": reservation?.leaseGeneration as Any? ?? NSNull(),
       "inputPhase": input.phase,
       "outputPhase": outputPhase,
+      "videoPhase": videoPhase,
       "inputReleased": inputReleased,
       "outputReleased": outputReleased,
+      "videoReleased": videoReleased,
       "sessionReleased": sessionReleased,
       "nativeOperationInFlight": inFlight,
       "requiresExplicitRetry": retry,
@@ -296,6 +334,84 @@ final class PracticeAudioArbiter {
       args["contextGeneration"] as? Int == held.contextGeneration &&
       args["leaseId"] as? String == held.leaseId &&
       args["leaseGeneration"] as? Int == held.leaseGeneration
+  }
+
+  /// Future AVFoundation plugin hook. It must run on main before player create,
+  /// initialize, or any AVAudioSession mutation. The stock plugin does not
+  /// call this hook, so shipping video admission remains disabled.
+  func claimVideoPlayer(owner candidate: PracticeAudioOwner, contextGeneration context: Int,
+                        leaseId: String, leaseGeneration: Int, playerId: Int64) -> Bool {
+    guard Thread.isMainThread else { return false }
+    guard videoReservationEnabled, isCurrent(candidate), canAcquire(),
+          context == contextGeneration, playerId >= 0,
+          let held = reservation, held.owner == candidate,
+          held.contextGeneration == context, held.leaseId == leaseId,
+          held.leaseGeneration == leaseGeneration, held.side == "video",
+          videoPhase == "reserved", !reservationClosing,
+          videoPlayerId == nil else { return false }
+    videoPlayerId = playerId
+    stateRevision += 1
+    return true
+  }
+
+  /// Future plugin bridge entry point. Claim and the first synchronous AV
+  /// resource operation share the main-thread turn; a route, engine or account
+  /// fence must not be allowed between them. If the operation throws or
+  /// re-enters a fence, the exact claimed lease stays held until the plugin's
+  /// physical player/texture release callback arrives.
+  func withClaimedVideoCreation(owner candidate: PracticeAudioOwner,
+                                contextGeneration context: Int, leaseId: String,
+                                leaseGeneration: Int, playerId: Int64,
+                                firstSideEffect: () throws -> Void) rethrows -> Bool {
+    guard Thread.isMainThread,
+          claimVideoPlayer(owner: candidate, contextGeneration: context,
+                           leaseId: leaseId, leaseGeneration: leaseGeneration,
+                           playerId: playerId) else { return false }
+    try firstSideEffect()
+    guard isCurrent(candidate), contextGeneration == context,
+          let held = reservation, held.owner == candidate,
+          held.contextGeneration == context, held.leaseId == leaseId,
+          held.leaseGeneration == leaseGeneration, held.side == "video",
+          videoPlayerId == playerId, !reservationClosing,
+          !videoPlayerReleased else { return false }
+    return true
+  }
+
+  /// Future AVFoundation plugin hook. The plugin must call this only after
+  /// its matching native player and AVAudioSession resources are released.
+  func releaseVideoPlayer(owner candidate: PracticeAudioOwner, contextGeneration context: Int,
+                          leaseId: String, leaseGeneration: Int, playerId: Int64) -> Bool {
+    guard Thread.isMainThread else { return false }
+    guard let held = reservation, held.owner == candidate,
+          held.contextGeneration == context, held.leaseId == leaseId,
+          held.leaseGeneration == leaseGeneration, held.side == "video",
+          videoPlayerId == playerId,
+          !videoPlayerReleased else { return false }
+    videoPlayerReleased = true
+    stateRevision += 1
+    settleAcknowledgedVideo()
+    return true
+  }
+
+  private func clearVideoReservation() {
+    assert(Thread.isMainThread)
+    reservation = nil
+    reservationClosing = false
+    videoPhase = "clear"
+    videoCloseTimedOut = false
+    videoRetryRequired = false
+    videoPlayerId = nil
+    videoPlayerReleased = false
+    videoDisposeAcknowledged = false
+    stateRevision += 1
+  }
+
+  private func settleAcknowledgedVideo() {
+    assert(Thread.isMainThread)
+    guard reservation?.side == "video", videoDisposeAcknowledged,
+          videoPlayerReleased, !videoCloseTimedOut,
+          !videoRetryRequired else { return }
+    clearVideoReservation()
   }
 
   private func receipt(_ candidate: PracticeAudioOwner) -> [String: Any] {
@@ -346,6 +462,20 @@ final class PracticeAudioArbiter {
         }
       }
     }
+    if reservation?.side == "video" && videoPhase == "reserved" {
+      videoPhase = "closing"
+      stateRevision += 1
+      let expectedLease = reservation?.leaseGeneration
+      DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+        guard let self = self, self.reservation?.side == "video",
+              self.reservation?.leaseGeneration == expectedLease,
+              self.videoPhase == "closing" else { return }
+        self.videoCloseTimedOut = true
+        self.videoRetryRequired = true
+        self.videoPhase = "unconfirmedQuiescent"
+        self.stateRevision += 1
+      }
+    }
   }
 
   func closeAllGlobal(reason: String) {
@@ -373,9 +503,14 @@ final class PracticeAudioArbiter {
       result(snapshot(candidate))
     case "reserve":
       guard let id = args["leaseId"] as? String, isHex32(id),
-            let side = args["side"] as? String, side == "input" || side == "output",
+            let side = args["side"] as? String,
+            ["input", "output", "video"].contains(side),
             args["contextGeneration"] as? Int == contextGeneration else {
         result(failure("bad_args")); return
+      }
+      if side == "video" && cancelledVideoAttempts.contains(videoAttemptKey(
+          candidate.token, candidate.engineGeneration, contextGeneration, id)) {
+        result(failure("stale_audio_lease")); return
       }
       guard canAcquire(), snapshot(candidate)["allClear"] as? Bool == true else {
         result(failure("audio_busy")); return
@@ -383,12 +518,23 @@ final class PracticeAudioArbiter {
       guard side != "output" || (outputHardware != nil && !allowedOutputIds.isEmpty) else {
         result(failure("audio_output_unavailable")); return
       }
+      guard side != "video" || videoReservationEnabled else {
+        result(failure("video_unavailable")); return
+      }
       leaseGeneration += 1
       reservation = PracticeAudioReservation(owner: candidate,
         contextGeneration: contextGeneration, leaseId: id,
         leaseGeneration: leaseGeneration, side: side, legacyCapture: false)
       reservationClosing = false
       if side == "output" { outputPhase = "reserved" }
+      if side == "video" {
+        videoPhase = "reserved"
+        videoCloseTimedOut = false
+        videoRetryRequired = false
+        videoPlayerId = nil
+        videoPlayerReleased = false
+        videoDisposeAcknowledged = false
+      }
       stateRevision += 1
       result(["status": "reserved", "leaseId": id,
               "leaseGeneration": leaseGeneration, "stateRevision": stateRevision])
@@ -448,6 +594,84 @@ final class PracticeAudioArbiter {
       }
       closeCurrentResources()
       result(receipt(candidate))
+    case "completeVideoDispose":
+      let requiredKeys: Set<String> = ["ownerToken", "engineGeneration",
+        "contextGeneration", "leaseId", "leaseGeneration", "confirmed"]
+      guard Set(args.keys) == requiredKeys,
+            let held = reservation, held.side == "video", held.owner == candidate,
+            args["contextGeneration"] as? Int == held.contextGeneration,
+            args["leaseId"] as? String == held.leaseId,
+            args["leaseGeneration"] as? Int == held.leaseGeneration,
+            let confirmed = args["confirmed"] as? Bool else {
+        result(["status": "stale", "snapshot": snapshot(candidate)]); return
+      }
+      if !confirmed {
+        reservationClosing = true
+        videoRetryRequired = true
+        videoPhase = "unconfirmedQuiescent"
+        stateRevision += 1
+        result(receipt(candidate)); return
+      }
+      videoDisposeAcknowledged = true
+      stateRevision += 1
+      settleAcknowledgedVideo()
+      if reservation?.side == "video" && !videoCloseTimedOut && !videoRetryRequired &&
+          videoPhase == "reserved" { closeCurrentResources() }
+      result(receipt(candidate))
+    case "cancelVideoReservation":
+      let requiredKeys: Set<String> = ["ownerToken", "engineGeneration",
+        "contextGeneration", "leaseId", "leaseGeneration"]
+      guard Set(args.keys) == requiredKeys,
+            currentReservationMatches(args, candidate),
+            reservation?.side == "video" else {
+        result(["status": "stale", "snapshot": snapshot(candidate)]); return
+      }
+      guard videoPlayerId == nil else {
+        result(["status": "blocked", "snapshot": snapshot(candidate)]); return
+      }
+      clearVideoReservation()
+      result(receipt(candidate))
+    case "cancelUnclaimedVideoReservation":
+      let requiredKeys: Set<String> = ["ownerToken", "engineGeneration",
+        "attemptOwnerToken", "attemptEngineGeneration", "attemptContextGeneration",
+        "leaseId", "leaseGeneration", "expectedStateRevision"]
+      guard Set(args.keys) == requiredKeys,
+            let attemptToken = args["attemptOwnerToken"] as? String,
+            isHex32(attemptToken),
+            let attemptEngine = args["attemptEngineGeneration"] as? Int,
+            attemptEngine > 0,
+            let attemptContext = args["attemptContextGeneration"] as? Int,
+            attemptContext >= 0, attemptContext <= contextGeneration,
+            let id = args["leaseId"] as? String, isHex32(id),
+            let revision = args["expectedStateRevision"] as? Int,
+            revision >= 0 else { result(failure("bad_args")); return }
+      guard revision == stateRevision else {
+        result(["status": "stale", "snapshot": snapshot(candidate)]); return
+      }
+      let suppliedGeneration = args["leaseGeneration"] as? Int
+      if let held = reservation {
+        guard held.side == "video", suppliedGeneration != nil,
+              held.owner.token == attemptToken,
+              held.owner.engineGeneration == attemptEngine,
+              held.contextGeneration == attemptContext, held.leaseId == id,
+              held.leaseGeneration == suppliedGeneration else {
+          result(["status": "stale", "snapshot": snapshot(candidate)]); return
+        }
+        guard videoPlayerId == nil else {
+          result(["status": "blocked", "snapshot": snapshot(candidate)]); return
+        }
+        clearVideoReservation()
+      } else {
+        guard args["leaseGeneration"] is NSNull else {
+          result(["status": "stale", "snapshot": snapshot(candidate)]); return
+        }
+      }
+      if attemptToken == candidate.token && attemptEngine == candidate.engineGeneration {
+        cancelledVideoAttempts.insert(videoAttemptKey(attemptToken,
+          attemptEngine, attemptContext, id))
+      }
+      stateRevision += 1
+      result(receipt(candidate))
     case "fenceContext":
       guard args["contextGeneration"] as? Int == contextGeneration,
             let reason = args["reason"] as? String,
@@ -466,7 +690,20 @@ final class PracticeAudioArbiter {
             let revision = args["expectedStateRevision"] as? Int,
             revision == stateRevision else { result(failure("stale_audio_state")); return }
       let input = inputState()
-      guard !input.inFlight, !outputOperationInFlight,
+      if reservation?.side == "video" {
+        // Only the exact native player release hook can make an old-engine or
+        // timed-out video lease recoverable. The current Dart bool is never
+        // enough to infer a physical release.
+        guard videoPlayerReleased, !input.inFlight, !outputOperationInFlight,
+              input.phase == "clear", outputPhase == "clear" else {
+          result(["status": "blocked", "snapshot": snapshot(candidate)]); return
+        }
+        clearVideoReservation()
+        if sessionPolicy?.isReleased ?? true { globalRetryRequired = false }
+        result(receipt(candidate)); return
+      }
+      guard reservation?.side != "video", videoPhase == "clear",
+            !input.inFlight, !outputOperationInFlight,
             input.phase != "starting", input.phase != "running",
             outputPhase != "starting", outputPhase != "playing" else {
         result(receipt(candidate)); return

@@ -6,6 +6,11 @@ import 'package:ostinato/app/audio/audio_capture_channel.dart';
 
 const method = MethodChannel('com.yulalab.ostinato/audio_capture');
 const events = MethodChannel('com.yulalab.ostinato/audio_capture/events');
+const testClaim = AudioCaptureContextClaim(
+  ownerToken: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+  engineGeneration: 1,
+  contextGeneration: 0,
+);
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final messenger =
@@ -46,12 +51,73 @@ void main() {
   }
 
   test(
+    'native capture start requires a complete original context claim',
+    () async {
+      final channel = MethodChannelAudioCaptureChannel();
+      await expectLater(
+        channel.start(sampleRate: 44100),
+        throwsA(
+          isA<PlatformException>().having(
+            (error) => error.code,
+            'code',
+            'capture_context_required',
+          ),
+        ),
+      );
+      await expectLater(
+        channel.start(
+          sampleRate: 44100,
+          claim: const AudioCaptureContextClaim(
+            ownerToken: 'bad',
+            engineGeneration: 1,
+            contextGeneration: 0,
+          ),
+        ),
+        throwsA(
+          isA<PlatformException>().having(
+            (error) => error.code,
+            'code',
+            'capture_context_required',
+          ),
+        ),
+      );
+      expect(calls, isEmpty);
+
+      Map<String, Object?>? startArguments;
+      messenger.setMockMethodCallHandler(method, (call) async {
+        calls.add(call.method);
+        if (call.method == 'ready') return true;
+        if (call.method == 'start') {
+          startArguments = Map<String, Object?>.from(call.arguments as Map);
+        }
+        if (call.method == 'closeState') {
+          return {
+            'phase': 'clear',
+            'attemptId': null,
+            'attemptInFlight': false,
+            'resourcesReleased': true,
+            'requiresExplicitRetry': false,
+          };
+        }
+        return null;
+      });
+      await channel.start(sampleRate: 44100, claim: testClaim);
+      expect(startArguments, containsPair('ownerToken', testClaim.ownerToken));
+      expect(startArguments, containsPair('engineGeneration', 1));
+      expect(startArguments, containsPair('contextGeneration', 0));
+      expect(startArguments, containsPair('sampleRate', 44100));
+      expect(startArguments?['attemptId'], channel.attemptId);
+      await channel.stop();
+    },
+  );
+
+  test(
     'subscription ready handshake precedes native start and stop cancels events',
     () async {
       final channel = MethodChannelAudioCaptureChannel();
       final received = <RawAudioEvent>[];
       final sub = channel.events.listen(received.add);
-      await channel.start(sampleRate: 44100);
+      await channel.start(sampleRate: 44100, claim: testClaim);
       final id = channel.attemptId;
       expect(id, matches(RegExp(r'^[0-9a-f]{32}$')));
       expect(calls.indexOf('ready'), lessThan(calls.indexOf('start')));
@@ -82,7 +148,7 @@ void main() {
       final channel = MethodChannelAudioCaptureChannel();
       final received = <RawAudioEvent>[];
       final sub = channel.events.listen(received.add);
-      await channel.start(sampleRate: 44100);
+      await channel.start(sampleRate: 44100, claim: testClaim);
       await send({
         'type': 'chunk',
         'attemptId': channel.attemptId,
@@ -99,7 +165,7 @@ void main() {
 
   test('missing closeState refuses a native stop success', () async {
     final channel = MethodChannelAudioCaptureChannel();
-    await channel.start(sampleRate: 44100);
+    await channel.start(sampleRate: 44100, claim: testClaim);
     messenger.setMockMethodCallHandler(method, (call) async {
       if (call.method == 'closeState') return null;
       return call.method == 'ready' ? true : null;
@@ -120,7 +186,7 @@ void main() {
       AudioCaptureClosePhase.unknown,
     );
     await expectLater(
-      channel.start(sampleRate: 44100),
+      channel.start(sampleRate: 44100, claim: testClaim),
       throwsA(isA<PlatformException>()),
     );
   });
@@ -129,7 +195,7 @@ void main() {
     'disposed readback stays unknown until an explicit close retry',
     () async {
       final channel = MethodChannelAudioCaptureChannel();
-      await channel.start(sampleRate: 44100);
+      await channel.start(sampleRate: 44100, claim: testClaim);
       final id = channel.attemptId!;
       channel.suspendCloseReadbacksUntilExplicitRetry();
       expect(
@@ -150,89 +216,100 @@ void main() {
     },
   );
 
-  test('late ordinary stop cannot consume explicit retry wire intent', () async {
-    final channel = MethodChannelAudioCaptureChannel();
-    await channel.start(sampleRate: 44100);
-    final id = channel.attemptId!;
-    var sticky = true;
-    messenger.setMockMethodCallHandler(method, (call) async {
-      calls.add(call.method);
-      if (call.method == 'stop' && sticky) {
-        throw PlatformException(code: 'capture_close_unconfirmed');
-      }
-      if (call.method == 'retryStop') sticky = false;
-      if (call.method == 'closeState') {
-        return sticky
-            ? {
-                'phase': 'releasedAwaitingExplicitRetry',
-                'attemptId': id,
-                'attemptInFlight': false,
-                'resourcesReleased': true,
-                'requiresExplicitRetry': true,
-              }
-            : {
-                'phase': 'clear',
-                'attemptId': null,
-                'attemptInFlight': false,
-                'resourcesReleased': true,
-                'requiresExplicitRetry': false,
-              };
-      }
-      return null;
-    });
-    await expectLater(channel.stop(), throwsA(isA<PlatformException>()));
-    await expectLater(channel.stopAttempt(id), throwsA(isA<PlatformException>()));
-    expect(sticky, isTrue);
-    expect(channel.attemptId, id);
-    await channel.retryStopAttempt(id);
-    expect(calls.where((call) => call == 'stop').length, 2);
-    expect(calls.where((call) => call == 'retryStop').length, 1);
-    expect(channel.attemptId, isNull);
-  });
+  test(
+    'late ordinary stop cannot consume explicit retry wire intent',
+    () async {
+      final channel = MethodChannelAudioCaptureChannel();
+      await channel.start(sampleRate: 44100, claim: testClaim);
+      final id = channel.attemptId!;
+      var sticky = true;
+      messenger.setMockMethodCallHandler(method, (call) async {
+        calls.add(call.method);
+        if (call.method == 'stop' && sticky) {
+          throw PlatformException(code: 'capture_close_unconfirmed');
+        }
+        if (call.method == 'retryStop') sticky = false;
+        if (call.method == 'closeState') {
+          return sticky
+              ? {
+                  'phase': 'releasedAwaitingExplicitRetry',
+                  'attemptId': id,
+                  'attemptInFlight': false,
+                  'resourcesReleased': true,
+                  'requiresExplicitRetry': true,
+                }
+              : {
+                  'phase': 'clear',
+                  'attemptId': null,
+                  'attemptInFlight': false,
+                  'resourcesReleased': true,
+                  'requiresExplicitRetry': false,
+                };
+        }
+        return null;
+      });
+      await expectLater(channel.stop(), throwsA(isA<PlatformException>()));
+      await expectLater(
+        channel.stopAttempt(id),
+        throwsA(isA<PlatformException>()),
+      );
+      expect(sticky, isTrue);
+      expect(channel.attemptId, id);
+      await channel.retryStopAttempt(id);
+      expect(calls.where((call) => call == 'stop').length, 2);
+      expect(calls.where((call) => call == 'retryStop').length, 1);
+      expect(channel.attemptId, isNull);
+    },
+  );
 
-  test('explicit retry is sent while an ordinary stop reply is still pending', () async {
-    final channel = MethodChannelAudioCaptureChannel();
-    await channel.start(sampleRate: 44100);
-    final id = channel.attemptId!;
-    final ordinaryReply = Completer<void>();
-    var sticky = true;
-    messenger.setMockMethodCallHandler(method, (call) async {
-      calls.add(call.method);
-      if (call.method == 'stop') await ordinaryReply.future;
-      if (call.method == 'retryStop') sticky = false;
-      if (call.method == 'closeState') {
-        return sticky
-            ? {
-                'phase': 'releasedAwaitingExplicitRetry',
-                'attemptId': id,
-                'attemptInFlight': false,
-                'resourcesReleased': true,
-                'requiresExplicitRetry': true,
-              }
-            : {
-                'phase': 'clear',
-                'attemptId': null,
-                'attemptInFlight': false,
-                'resourcesReleased': true,
-                'requiresExplicitRetry': false,
-              };
-      }
-      return null;
-    });
-    final ordinary = channel.stop();
-    await pumpEventQueue();
-    await channel.retryStopAttempt(id);
-    expect(calls.where((call) => call == 'retryStop').length, 1);
-    expect(channel.attemptId, isNull);
-    ordinaryReply.completeError(PlatformException(code: 'capture_close_unconfirmed'));
-    await expectLater(ordinary, throwsA(isA<PlatformException>()));
-  });
+  test(
+    'explicit retry is sent while an ordinary stop reply is still pending',
+    () async {
+      final channel = MethodChannelAudioCaptureChannel();
+      await channel.start(sampleRate: 44100, claim: testClaim);
+      final id = channel.attemptId!;
+      final ordinaryReply = Completer<void>();
+      var sticky = true;
+      messenger.setMockMethodCallHandler(method, (call) async {
+        calls.add(call.method);
+        if (call.method == 'stop') await ordinaryReply.future;
+        if (call.method == 'retryStop') sticky = false;
+        if (call.method == 'closeState') {
+          return sticky
+              ? {
+                  'phase': 'releasedAwaitingExplicitRetry',
+                  'attemptId': id,
+                  'attemptInFlight': false,
+                  'resourcesReleased': true,
+                  'requiresExplicitRetry': true,
+                }
+              : {
+                  'phase': 'clear',
+                  'attemptId': null,
+                  'attemptInFlight': false,
+                  'resourcesReleased': true,
+                  'requiresExplicitRetry': false,
+                };
+        }
+        return null;
+      });
+      final ordinary = channel.stop();
+      await pumpEventQueue();
+      await channel.retryStopAttempt(id);
+      expect(calls.where((call) => call == 'retryStop').length, 1);
+      expect(channel.attemptId, isNull);
+      ordinaryReply.completeError(
+        PlatformException(code: 'capture_close_unconfirmed'),
+      );
+      await expectLater(ordinary, throwsA(isA<PlatformException>()));
+    },
+  );
 
   test('stop error is visible and old chunks are fenced', () async {
     final channel = MethodChannelAudioCaptureChannel();
     final received = <RawAudioEvent>[];
     final sub = channel.events.listen(received.add);
-    await channel.start(sampleRate: 44100);
+    await channel.start(sampleRate: 44100, claim: testClaim);
     final id = channel.attemptId;
     messenger.setMockMethodCallHandler(method, (call) async {
       if (call.method == 'stop') {
@@ -282,7 +359,7 @@ void main() {
     final channel = MethodChannelAudioCaptureChannel(
       transportTimeout: const Duration(milliseconds: 20),
     );
-    await channel.start(sampleRate: 44100);
+    await channel.start(sampleRate: 44100, claim: testClaim);
     final stopReply = Completer<void>();
     messenger.setMockMethodCallHandler(method, (call) async {
       if (call.method == 'stop') {
@@ -312,7 +389,7 @@ void main() {
     );
     expect(await channel.readCloseState(), isA<AudioCaptureCloseState>());
     await expectLater(
-      channel.start(sampleRate: 44100),
+      channel.start(sampleRate: 44100, claim: testClaim),
       throwsA(isA<PlatformException>()),
     );
     stopReply.complete();
@@ -341,7 +418,7 @@ void main() {
         }
         return null;
       });
-      await channel.start(sampleRate: 44100);
+      await channel.start(sampleRate: 44100, claim: testClaim);
       final id = channel.attemptId;
       final uncaught = <Object>[];
       await runZonedGuarded<Future<void>>(() async {
@@ -361,7 +438,7 @@ void main() {
       expect(calls.indexOf('stop'), lessThan(calls.indexOf('event:cancel')));
       expect(channel.attemptId, id);
       await expectLater(
-        channel.start(sampleRate: 44100),
+        channel.start(sampleRate: 44100, claim: testClaim),
         throwsA(isA<PlatformException>()),
       );
       nativeStopReply.complete();

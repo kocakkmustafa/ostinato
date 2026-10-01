@@ -9,6 +9,7 @@ import 'package:ostinato_audio/ostinato_audio.dart';
 
 import 'audio_input_controller.dart';
 import 'audio_capture_channel.dart';
+import 'practice_audio_root.dart';
 
 final class GuitarObservationConfig {
   GuitarObservationConfig.fromJson(Map<String, dynamic> json) {
@@ -256,8 +257,11 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     unawaited(_stopSource());
   }
 
-  Future<void> start() async {
-    if (!canStart) return;
+  Future<void> start({PracticeAudioCaptureAction? captureAction}) async {
+    if (!canStart) {
+      captureAction?.retire();
+      return;
+    }
     _terminalStopPhase = null;
     _clear();
     _active = true;
@@ -265,7 +269,16 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     _notify();
     _status ??= _source.status.listen(_onStatus);
     _chunks ??= _source.chunks.listen(_onChunk);
-    await _source.start(sampleRate: config.initialSampleRate);
+    final source = _source;
+    if (source is AudioInputController) {
+      await source.start(
+        sampleRate: config.initialSampleRate,
+        captureAction: captureAction,
+      );
+    } else {
+      captureAction?.retire();
+      await source.start(sampleRate: config.initialSampleRate);
+    }
   }
 
   void _onStatus(AudioSurfaceState status) {

@@ -44,8 +44,10 @@ Map<String, Object?> _snapshot({
         : sticky
         ? 'releasedAwaitingExplicitRetry'
         : 'clear',
+    'videoPhase': side == PracticeAudioSide.video ? 'reserved' : 'clear',
     'inputReleased': side != PracticeAudioSide.input,
     'outputReleased': side != PracticeAudioSide.output,
+    'videoReleased': side != PracticeAudioSide.video,
     'sessionReleased': side == null,
     'nativeOperationInFlight': false,
     'requiresExplicitRetry': sticky,
@@ -104,7 +106,9 @@ void main() {
         allowedAssetIds: const {'demo-01'},
       );
       expect((await port.readAllAudioState()).allClear, isTrue);
+      expect(port.capturePreflightSnapshot?.contextGeneration, 3);
       final reserved = await port.reserve(PracticeAudioSide.output, _leaseId);
+      expect(port.capturePreflightSnapshot, isNull);
       final playing = await port.startOutput(reserved, 'demo-01');
       expect(playing.stateRevision, 6);
       expect(
@@ -115,6 +119,7 @@ void main() {
         isTrue,
       );
       expect((await port.readAllAudioState()).stateRevision, 7);
+      expect(port.capturePreflightSnapshot?.stateRevision, 7);
       expect(calls, [
         'bind',
         'readAllAudioState',
@@ -215,6 +220,152 @@ void main() {
     );
     expect(starts, 0);
   });
+
+  test(
+    'video reserve is held until matching dispose acknowledgement',
+    () async {
+      final calls = <String>[];
+      messenger.setMockMethodCallHandler(_method, (call) async {
+        calls.add(call.method);
+        if (call.method == 'bind') return _binding();
+        if (call.method == 'readAllAudioState') return _snapshot();
+        if (call.method == 'reserve') {
+          expect((call.arguments as Map<Object?, Object?>)['side'], 'video');
+          return {
+            'status': 'reserved',
+            'leaseId': _leaseId,
+            'leaseGeneration': 1,
+            'stateRevision': 5,
+          };
+        }
+        if (call.method == 'completeVideoDispose') {
+          final args = call.arguments as Map<Object?, Object?>;
+          expect(args['contextGeneration'], 3);
+          expect(args['leaseGeneration'], 1);
+          expect(args['confirmed'], isTrue);
+          return {'status': 'closed', 'snapshot': _snapshot(revision: 6)};
+        }
+        throw StateError('Unexpected ${call.method}');
+      });
+      final port = NativeAudioArbiterChannel(channel: _method);
+      await port.readAllAudioState();
+      final permit = await port.reserve(PracticeAudioSide.video, _leaseId);
+      expect(port.capturePreflightSnapshot, isNull);
+      expect(
+        (await port.completeVideoDispose(permit, confirmed: true)).allClear,
+        isTrue,
+      );
+      expect(calls, [
+        'bind',
+        'readAllAudioState',
+        'reserve',
+        'completeVideoDispose',
+      ]);
+    },
+  );
+
+  test('video snapshot without disposal state is rejected', () {
+    final malformed = _snapshot(side: PracticeAudioSide.video)
+      ..remove('videoPhase');
+    expect(
+      () => NativeAllAudioState.fromWire(malformed),
+      throwsA(isA<NativeAudioProtocolException>()),
+    );
+  });
+
+  test(
+    'pre-create video cancellation sends the exact reserved identity',
+    () async {
+      final calls = <String>[];
+      messenger.setMockMethodCallHandler(_method, (call) async {
+        calls.add(call.method);
+        if (call.method == 'bind') return _binding();
+        if (call.method == 'readAllAudioState') return _snapshot();
+        if (call.method == 'reserve') {
+          return {
+            'status': 'reserved',
+            'leaseId': _leaseId,
+            'leaseGeneration': 1,
+            'stateRevision': 5,
+          };
+        }
+        if (call.method == 'cancelVideoReservation') {
+          expect(call.arguments, {
+            'ownerToken': _owner,
+            'engineGeneration': 2,
+            'contextGeneration': 3,
+            'leaseId': _leaseId,
+            'leaseGeneration': 1,
+          });
+          return {'status': 'closed', 'snapshot': _snapshot(revision: 6)};
+        }
+        throw StateError('Unexpected ${call.method}');
+      });
+      final port = NativeAudioArbiterChannel(channel: _method);
+      await port.readAllAudioState();
+      final permit = await port.reserve(PracticeAudioSide.video, _leaseId);
+      expect((await port.cancelVideoReservation(permit)).allClear, isTrue);
+      expect(calls, [
+        'bind',
+        'readAllAudioState',
+        'reserve',
+        'cancelVideoReservation',
+      ]);
+    },
+  );
+
+  test(
+    'lost video reserve cancellation carries exact attempt and CAS revision',
+    () async {
+      var cancels = 0;
+      messenger.setMockMethodCallHandler(_method, (call) async {
+        if (call.method == 'bind') return _binding();
+        if (call.method == 'readAllAudioState') {
+          return _snapshot(side: PracticeAudioSide.video, revision: 5);
+        }
+        if (call.method == 'cancelUnclaimedVideoReservation') {
+          ++cancels;
+          expect(call.arguments, {
+            'ownerToken': _owner,
+            'engineGeneration': 2,
+            'attemptOwnerToken': _owner,
+            'attemptEngineGeneration': 2,
+            'attemptContextGeneration': 3,
+            'leaseId': _leaseId,
+            'leaseGeneration': 1,
+            'expectedStateRevision': 5,
+          });
+          return {'status': 'closed', 'snapshot': _snapshot(revision: 6)};
+        }
+        throw StateError('Unexpected ${call.method}');
+      });
+      final port = NativeAudioArbiterChannel(channel: _method);
+      await port.readAllAudioState();
+      expect(
+        (await port.cancelUnclaimedVideoReservation(
+          attemptOwnerToken: _owner,
+          attemptEngineGeneration: 2,
+          attemptContextGeneration: 3,
+          leaseId: _leaseId,
+          leaseGeneration: 1,
+          expectedStateRevision: 5,
+        )).allClear,
+        isTrue,
+      );
+      await expectLater(
+        port.cancelUnclaimedVideoReservation(
+          attemptOwnerToken: _owner,
+          attemptEngineGeneration: 2,
+          attemptContextGeneration: 3,
+          leaseId: _leaseId,
+          leaseGeneration: 1,
+          expectedStateRevision: 5,
+        ),
+        throwsA(isA<NativeAudioProtocolException>()),
+      );
+      expect(cancels, 1);
+    },
+  );
 
   test(
     'stale close receipt cannot be accepted as a confirmed release',
@@ -567,6 +718,74 @@ void main() {
     },
   );
 
+  test('native pre-fence retries once after a newer empty read', () async {
+    final sentContexts = <int>[];
+    var reads = 0;
+    messenger.setMockMethodCallHandler(_method, (call) async {
+      if (call.method == 'bind') return _binding();
+      if (call.method == 'readAllAudioState') {
+        return {
+          ..._snapshot(revision: ++reads == 1 ? 4 : 5),
+          'contextGeneration': reads == 1 ? 3 : 4,
+        };
+      }
+      if (call.method == 'fenceContext') {
+        final context = (call.arguments as Map)['contextGeneration'] as int;
+        sentContexts.add(context);
+        if (sentContexts.length == 1) {
+          throw PlatformException(code: 'stale_audio_context');
+        }
+        return {
+          'status': 'closed',
+          'contextGeneration': 5,
+          'stateRevision': 6,
+          'snapshot': {..._snapshot(revision: 6), 'contextGeneration': 5},
+        };
+      }
+      throw StateError('Unexpected ${call.method}');
+    });
+    final port = NativeAudioArbiterChannel(channel: _method);
+    await port.readAllAudioState();
+    expect(
+      (await port.fenceContext(
+        NativeAudioContextReason.background,
+      )).contextGeneration,
+      5,
+    );
+    expect(sentContexts, [3, 4]);
+    expect(port.capturePreflightSnapshot?.contextGeneration, 5);
+  });
+
+  test(
+    'stale pre-fence with held audio never retries or grants capture',
+    () async {
+      var fences = 0;
+      var reads = 0;
+      messenger.setMockMethodCallHandler(_method, (call) async {
+        if (call.method == 'bind') return _binding();
+        if (call.method == 'readAllAudioState') {
+          return {
+            ..._snapshot(revision: ++reads == 1 ? 4 : 5, sticky: reads > 1),
+            'contextGeneration': reads == 1 ? 3 : 4,
+          };
+        }
+        if (call.method == 'fenceContext') {
+          ++fences;
+          throw PlatformException(code: 'stale_audio_context');
+        }
+        throw StateError('Unexpected ${call.method}');
+      });
+      final port = NativeAudioArbiterChannel(channel: _method);
+      await port.readAllAudioState();
+      await expectLater(
+        port.fenceContext(NativeAudioContextReason.background),
+        throwsA(isA<PlatformException>()),
+      );
+      expect(fences, 1);
+      expect(port.capturePreflightSnapshot, isNull);
+    },
+  );
+
   test(
     'fresh explicit recovery after a failed fence permits a new native fence',
     () async {
@@ -774,9 +993,9 @@ void main() {
         switch (call.method) {
           case 'bind':
             return _binding();
-        case 'readAllAudioState':
-          if (++reads == 1) return _snapshot();
-          return await earlyReadReply.future;
+          case 'readAllAudioState':
+            if (++reads == 1) return _snapshot();
+            return await earlyReadReply.future;
           case 'fenceContext':
             throw PlatformException(code: 'audio_close_unconfirmed');
           case 'recoverAll':

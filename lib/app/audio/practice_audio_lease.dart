@@ -22,6 +22,7 @@ enum PracticeAudioLeasePhase {
   outputActive,
   closingOutput,
   recovering,
+  fencing,
   blockedUnconfirmed,
 }
 
@@ -88,6 +89,19 @@ final class PracticeAudioAcquireResult {
 abstract interface class PracticeAudioLeasePort {
   Future<NativeAllAudioState> readAllAudioState();
   Future<NativeAudioPermit> reserve(PracticeAudioSide side, String leaseId);
+  Future<NativeAllAudioState> completeVideoDispose(
+    NativeAudioPermit permit, {
+    required bool confirmed,
+  });
+  Future<NativeAllAudioState> cancelVideoReservation(NativeAudioPermit permit);
+  Future<NativeAllAudioState> cancelUnclaimedVideoReservation({
+    required String attemptOwnerToken,
+    required int attemptEngineGeneration,
+    required int attemptContextGeneration,
+    required String leaseId,
+    required int? leaseGeneration,
+    required int expectedStateRevision,
+  });
   Future<NativeAudioPermit> startOutput(
     NativeAudioPermit permit,
     String assetId,
@@ -99,6 +113,9 @@ abstract interface class PracticeAudioLeasePort {
   Future<NativeAllAudioState> recoverAll(int expectedStateRevision);
   Future<NativeAllAudioState> fenceContext(NativeAudioContextReason reason);
 }
+
+typedef PracticeVideoFenceSettler =
+    Future<NativeAllAudioState> Function(NativeAllAudioState fenceReceipt);
 
 /// Reserves a side synchronously before its first asynchronous platform call.
 /// Unknown release remains sticky until [recover] is explicitly requested.
@@ -123,13 +140,38 @@ final class PracticeAudioLease {
   PracticeAudioInvalidationReason? _lastInvalidationReason;
   Future<PracticeAudioAcquireResult>? _opening;
   Future<PracticeAudioReleaseStatus>? _closing;
+  Future<PracticeAudioReleaseStatus>? _fencing;
+  final List<NativeAudioContextReason> _fenceQueue = [];
+  bool _fencingActive = false;
   int _generation = 0;
   int _contextEpoch = 0;
   int _nativePending = 0;
   NativeAudioPermit? _permit;
   NativeAllAudioState? _lastNativeState;
+  PracticeVideoFenceSettler? _videoFenceSettler;
 
-  PracticeAudioLeasePhase get phase => _phase;
+  /// The video owner must share this exact native channel. The root attaches
+  /// it once before any video work; production currently attaches none.
+  void attachVideoFenceSettler(
+    PracticeAudioLeasePort port,
+    PracticeVideoFenceSettler settler,
+  ) {
+    if (!identical(_port, port) || _videoFenceSettler != null) {
+      throw StateError('Video fence owner must share the native audio port');
+    }
+    _videoFenceSettler = settler;
+  }
+
+  PracticeAudioLeasePhase get phase {
+    final owner = _isolateOwner;
+    if (owner != null &&
+        !identical(owner, this) &&
+        owner._phase == PracticeAudioLeasePhase.blockedUnconfirmed) {
+      return PracticeAudioLeasePhase.blockedUnconfirmed;
+    }
+    return _phase;
+  }
+
   PracticeAudioInvalidationReason? get lastInvalidationReason =>
       _lastInvalidationReason;
 
@@ -141,6 +183,17 @@ final class PracticeAudioLease {
     required PracticeAudioContext context,
     String? assetId,
   }) {
+    // The generic audio lease cannot prove video_player disposal. Native
+    // video admission uses a separate reserve/completeVideoDispose handshake
+    // and remains unavailable to the shipping lesson route.
+    if (side == PracticeAudioSide.video) {
+      return Future.value(
+        const PracticeAudioAcquireResult._(
+          PracticeAudioAcquireStatus.openFailed,
+          null,
+        ),
+      );
+    }
     if (!identical(context._owner, this) ||
         context._leaseEpoch != _contextEpoch ||
         context._isolateEpoch != _isolateEpoch) {
@@ -197,6 +250,7 @@ final class PracticeAudioLease {
     _phase = switch (side) {
       PracticeAudioSide.input => PracticeAudioLeasePhase.openingInput,
       PracticeAudioSide.output => PracticeAudioLeasePhase.openingOutput,
+      PracticeAudioSide.video => throw StateError('Video lease is separate'),
     };
     final completion = Completer<PracticeAudioAcquireResult>();
     _opening = completion.future;
@@ -246,6 +300,12 @@ final class PracticeAudioLease {
       );
     }
     if (generation != _generation) {
+      if (_fencingActive) {
+        return const PracticeAudioAcquireResult._(
+          PracticeAudioAcquireStatus.cancelled,
+          null,
+        );
+      }
       _idle();
       return const PracticeAudioAcquireResult._(
         PracticeAudioAcquireStatus.cancelled,
@@ -270,6 +330,12 @@ final class PracticeAudioLease {
       }
       _permit = permit;
       if (generation != _generation) {
+        if (_fencingActive) {
+          return const PracticeAudioAcquireResult._(
+            PracticeAudioAcquireStatus.cancelled,
+            null,
+          );
+        }
         final closed = await _beginClose();
         return PracticeAudioAcquireResult._(
           closed == PracticeAudioReleaseStatus.confirmedClosed
@@ -306,6 +372,12 @@ final class PracticeAudioLease {
         null,
       );
     } on Object {
+      if (_fencingActive) {
+        return const PracticeAudioAcquireResult._(
+          PracticeAudioAcquireStatus.cancelled,
+          null,
+        );
+      }
       final closed = await _beginClose();
       final cleared = closed == PracticeAudioReleaseStatus.confirmedClosed;
       return PracticeAudioAcquireResult._(
@@ -319,6 +391,12 @@ final class PracticeAudioLease {
     }
 
     if (generation != _generation) {
+      if (_fencingActive) {
+        return const PracticeAudioAcquireResult._(
+          PracticeAudioAcquireStatus.cancelled,
+          null,
+        );
+      }
       final closed = await _beginClose();
       final cleared = closed == PracticeAudioReleaseStatus.confirmedClosed;
       return PracticeAudioAcquireResult._(
@@ -331,6 +409,7 @@ final class PracticeAudioLease {
     _phase = switch (side) {
       PracticeAudioSide.input => PracticeAudioLeasePhase.inputActive,
       PracticeAudioSide.output => PracticeAudioLeasePhase.outputActive,
+      PracticeAudioSide.video => throw StateError('Video lease is separate'),
     };
     return PracticeAudioAcquireResult._(
       PracticeAudioAcquireStatus.acquired,
@@ -372,6 +451,157 @@ final class PracticeAudioLease {
       return owner._invalidateOwned(reason);
     }
     return _invalidateOwned(reason);
+  }
+
+  /// Root-level context transition. The native process fence is the single
+  /// close authority for an active side; sending closeAll concurrently would
+  /// race its newly advanced context against an old permit. Acquisition stays
+  /// denied while every queued fence and late opening is reconciled.
+  Future<PracticeAudioReleaseStatus> invalidateAndFence(
+    PracticeAudioInvalidationReason reason,
+  ) {
+    _lastInvalidationReason = reason;
+    ++_contextEpoch;
+    ++_isolateEpoch;
+    final owner = _isolateOwner;
+    if (owner != null && !identical(owner, this)) {
+      owner._lastInvalidationReason = reason;
+      ++owner._contextEpoch;
+      return owner._fenceOwned(reason);
+    }
+    return _fenceOwned(reason);
+  }
+
+  Future<PracticeAudioReleaseStatus> _fenceOwned(
+    PracticeAudioInvalidationReason reason,
+  ) {
+    final wasBlocked = _phase == PracticeAudioLeasePhase.blockedUnconfirmed;
+    _fenceQueue.add(switch (reason) {
+      PracticeAudioInvalidationReason.routeChange =>
+        NativeAudioContextReason.routeChange,
+      PracticeAudioInvalidationReason.accountChange =>
+        NativeAudioContextReason.accountChange,
+      PracticeAudioInvalidationReason.background =>
+        NativeAudioContextReason.background,
+    });
+    if (_fencingActive) return _fencing!;
+
+    final opening = _opening;
+    final closing = _closing;
+    _fencingActive = true;
+    _isolateOwner = this;
+    ++_generation;
+    if (!wasBlocked) _phase = PracticeAudioLeasePhase.fencing;
+    final completion = Completer<PracticeAudioReleaseStatus>();
+    _fencing = completion.future;
+    unawaited(
+      _fenceAndVerify(
+        opening: opening,
+        closing: closing,
+        wasBlocked: wasBlocked,
+      ).then<void>(
+        completion.complete,
+        onError: (Object _, StackTrace _) {
+          _block();
+          _fencingActive = false;
+          completion.complete(PracticeAudioReleaseStatus.blockedUnconfirmed);
+        },
+      ),
+    );
+    unawaited(
+      completion.future.then<void>((_) {
+        if (identical(_fencing, completion.future)) _fencing = null;
+      }),
+    );
+    return completion.future;
+  }
+
+  Future<PracticeAudioReleaseStatus> _fenceAndVerify({
+    required Future<PracticeAudioAcquireResult>? opening,
+    required Future<PracticeAudioReleaseStatus>? closing,
+    required bool wasBlocked,
+  }) async {
+    var mustRemainBlocked = wasBlocked;
+    try {
+      // Native closeAll validates its exact permit and old context. A context
+      // event must fence immediately, even when that close later times out;
+      // the old close receipt remains read-only reconciliation afterward.
+      Future<void> drainFences() async {
+        while (_fenceQueue.isNotEmpty) {
+          final reason = _fenceQueue.removeAt(0);
+          final receipt = await _native(() => _port.fenceContext(reason));
+          _lastNativeState = receipt;
+          final videoSettler = _videoFenceSettler;
+          final videoPending = receipt.activeSide == PracticeAudioSide.video;
+          if (!receipt.allClear && !videoPending) {
+            // Existing capture/output uncertainty remains sticky. Only the
+            // exact video owner may turn a pending video close into a clear.
+            mustRemainBlocked = true;
+            continue;
+          }
+          if (videoPending && videoSettler == null) {
+            mustRemainBlocked = true;
+            continue;
+          }
+          if (videoSettler != null) {
+            // Also wait for a video reserve that was in flight when the fence
+            // arrived, even if its first native receipt looked empty.
+            final settled = await _native(() => videoSettler(receipt));
+            _lastNativeState = settled;
+            if (!settled.allClear ||
+                settled.ownerToken != receipt.ownerToken ||
+                settled.engineGeneration != receipt.engineGeneration ||
+                settled.contextGeneration != receipt.contextGeneration ||
+                settled.stateRevision < receipt.stateRevision ||
+                (videoPending &&
+                    settled.stateRevision <= receipt.stateRevision)) {
+              mustRemainBlocked = true;
+              continue;
+            }
+          }
+          final fresh = await _native(_port.readAllAudioState);
+          _lastNativeState = fresh;
+          if (!fresh.allClear ||
+              fresh.ownerToken != receipt.ownerToken ||
+              fresh.engineGeneration != receipt.engineGeneration ||
+              fresh.contextGeneration != receipt.contextGeneration ||
+              fresh.stateRevision < receipt.stateRevision ||
+              (videoPending && fresh.stateRevision <= receipt.stateRevision)) {
+            mustRemainBlocked = true;
+          }
+        }
+      }
+
+      await drainFences();
+      if (closing != null &&
+          await closing != PracticeAudioReleaseStatus.confirmedClosed) {
+        mustRemainBlocked = true;
+      }
+      if (opening != null) await opening;
+      // A new route/account event can enqueue a reason between an async
+      // drain's completion and this continuation. Check again synchronously
+      // before releasing the isolate owner or the root barrier.
+      do {
+        await drainFences();
+      } while (_fenceQueue.isNotEmpty);
+      if (mustRemainBlocked ||
+          _phase == PracticeAudioLeasePhase.blockedUnconfirmed ||
+          _nativePending != 0) {
+        _block();
+        return PracticeAudioReleaseStatus.blockedUnconfirmed;
+      }
+      _fencingActive = false;
+      _idle();
+      return PracticeAudioReleaseStatus.confirmedClosed;
+    } on Object {
+      _block();
+      return PracticeAudioReleaseStatus.blockedUnconfirmed;
+    } finally {
+      _fencingActive = false;
+      if (_phase == PracticeAudioLeasePhase.blockedUnconfirmed) {
+        _fenceQueue.clear();
+      }
+    }
   }
 
   Future<PracticeAudioReleaseStatus> _invalidateOwned(
@@ -419,6 +649,9 @@ final class PracticeAudioLease {
         : switch (_side) {
             PracticeAudioSide.input => PracticeAudioLeasePhase.closingInput,
             PracticeAudioSide.output => PracticeAudioLeasePhase.closingOutput,
+            PracticeAudioSide.video => throw StateError(
+              'Video lease is separate',
+            ),
             null => PracticeAudioLeasePhase.recovering,
           };
     _closing = completion.future;
@@ -446,15 +679,16 @@ final class PracticeAudioLease {
   /// User-triggered recovery never starts audio. It can release the sticky
   /// latch only after a fresh close request and an explicit all-clear receipt.
   Future<PracticeAudioReleaseStatus> recover() {
+    final owner = _isolateOwner;
+    if (owner != null && !identical(owner, this)) {
+      return owner._phase == PracticeAudioLeasePhase.blockedUnconfirmed
+          ? owner.recover()
+          : Future.value(PracticeAudioReleaseStatus.busy);
+    }
+    if (_fencingActive) {
+      return Future.value(PracticeAudioReleaseStatus.busy);
+    }
     if (_phase == PracticeAudioLeasePhase.idle) {
-      final owner = _isolateOwner;
-      if (owner != null && !identical(owner, this)) {
-        return Future.value(
-          owner._phase == PracticeAudioLeasePhase.blockedUnconfirmed
-              ? PracticeAudioReleaseStatus.blockedUnconfirmed
-              : PracticeAudioReleaseStatus.busy,
-        );
-      }
       return Future.value(PracticeAudioReleaseStatus.alreadyIdle);
     }
     if (_phase != PracticeAudioLeasePhase.blockedUnconfirmed) {
@@ -539,6 +773,13 @@ final class PracticeAudioLease {
   }
 
   void _idle() {
+    if (_phase == PracticeAudioLeasePhase.blockedUnconfirmed) return;
+    if (_fencingActive) {
+      _phase = PracticeAudioLeasePhase.fencing;
+      _side = null;
+      _permit = null;
+      return;
+    }
     _phase = PracticeAudioLeasePhase.idle;
     _side = null;
     _permit = null;

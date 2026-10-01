@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'native_audio_state.dart';
 import 'practice_audio_lease.dart';
 
-/// Wire adapter only. It is deliberately not installed in the production
-/// root until both platform arbiters include the existing capture path.
+/// Wire adapter for the shared native process owner. Production acquisition
+/// remains denied at the app root until example audio and device acceptance.
 final class NativeAudioArbiterChannel implements PracticeAudioLeasePort {
   NativeAudioArbiterChannel({
     MethodChannel? channel,
@@ -26,6 +26,21 @@ final class NativeAudioArbiterChannel implements PracticeAudioLeasePort {
   bool _fenceFailed = false;
   int _failedFenceSerial = 0;
   int _freshReadForFailedFence = 0;
+
+  /// A synchronous claim for the optional legacy microphone action. The
+  /// caller must capture this before permission or preparation can suspend;
+  /// it must never refresh the claim after a route/account/lifecycle fence.
+  NativeAllAudioState? get capturePreflightSnapshot {
+    final state = _latest;
+    if (_pendingFences != 0 ||
+        _fenceFailed ||
+        state == null ||
+        !state.allClear ||
+        state.stateRevision < _revisionFloor) {
+      return null;
+    }
+    return state;
+  }
 
   Future<NativeAudioBinding> _binding() => _bindingFuture ??= _channel
       .invokeMethod<Object?>('bind', const {'schemaVersion': 1})
@@ -178,6 +193,98 @@ final class NativeAudioArbiterChannel implements PracticeAudioLeasePort {
     return _acceptClose(wire, owner);
   }
 
+  /// A future video adapter may acknowledge this only after its native player
+  /// release hook has recorded the matching player ID. The native arbiter
+  /// independently rejects a bare Dart `confirmed: true`. A context fence
+  /// may advance while disposal is in flight; the original lease identity
+  /// still determines whether this acknowledgement can release it.
+  /// The current shipping lesson route never calls this method.
+  @override
+  Future<NativeAllAudioState> completeVideoDispose(
+    NativeAudioPermit permit, {
+    required bool confirmed,
+  }) async {
+    if (permit.side != PracticeAudioSide.video) {
+      throw const NativeAudioProtocolException('Not a video permit');
+    }
+    final owner = await _binding();
+    final latest = _latest;
+    if (permit.ownerToken != owner.ownerToken ||
+        permit.engineGeneration != owner.engineGeneration ||
+        (latest != null &&
+            latest.stateRevision >= permit.stateRevision &&
+            (latest.activeSide != PracticeAudioSide.video ||
+                latest.activeLeaseGeneration != permit.leaseGeneration))) {
+      throw const NativeAudioProtocolException('Stale video permit');
+    }
+    final wire = await _channel.invokeMethod<Object?>('completeVideoDispose', {
+      ..._permitFields(permit),
+      'confirmed': confirmed,
+    });
+    return _acceptClose(wire, owner);
+  }
+
+  @override
+  Future<NativeAllAudioState> cancelVideoReservation(
+    NativeAudioPermit permit,
+  ) async {
+    if (permit.side != PracticeAudioSide.video) {
+      throw const NativeAudioProtocolException('Not a video permit');
+    }
+    final owner = await _binding();
+    if (permit.ownerToken != owner.ownerToken ||
+        permit.engineGeneration != owner.engineGeneration) {
+      throw const NativeAudioProtocolException('Stale video permit');
+    }
+    final wire = await _channel.invokeMethod<Object?>(
+      'cancelVideoReservation',
+      _permitFields(permit),
+    );
+    return _acceptClose(wire, owner);
+  }
+
+  @override
+  Future<NativeAllAudioState> cancelUnclaimedVideoReservation({
+    required String attemptOwnerToken,
+    required int attemptEngineGeneration,
+    required int attemptContextGeneration,
+    required String leaseId,
+    required int? leaseGeneration,
+    required int expectedStateRevision,
+  }) async {
+    if (!isNativeAudioToken(attemptOwnerToken) ||
+        !isNativeAudioToken(leaseId) ||
+        attemptEngineGeneration < 1 ||
+        attemptContextGeneration < 0 ||
+        (leaseGeneration != null && leaseGeneration < 1)) {
+      throw const NativeAudioProtocolException('Invalid video attempt');
+    }
+    final owner = await _binding();
+    final latest = _latest;
+    if (latest == null ||
+        latest.ownerToken != owner.ownerToken ||
+        latest.engineGeneration != owner.engineGeneration ||
+        latest.contextGeneration < attemptContextGeneration ||
+        latest.stateRevision != expectedStateRevision ||
+        (latest.activeSide != null &&
+            (latest.activeSide != PracticeAudioSide.video ||
+                latest.activeLeaseGeneration != leaseGeneration)) ||
+        (latest.activeSide == null && leaseGeneration != null)) {
+      throw const NativeAudioProtocolException('Stale video attempt');
+    }
+    final wire = await _channel
+        .invokeMethod<Object?>('cancelUnclaimedVideoReservation', {
+          ..._ownerFields(owner),
+          'attemptOwnerToken': attemptOwnerToken,
+          'attemptEngineGeneration': attemptEngineGeneration,
+          'attemptContextGeneration': attemptContextGeneration,
+          'leaseId': leaseId,
+          'leaseGeneration': leaseGeneration,
+          'expectedStateRevision': expectedStateRevision,
+        });
+    return _acceptClose(wire, owner);
+  }
+
   @override
   Future<NativeAllAudioState> recoverAll(int expectedStateRevision) async {
     final failedFenceAtRecoveryStart = _failedFenceSerial;
@@ -248,12 +355,25 @@ final class NativeAudioArbiterChannel implements PracticeAudioLeasePort {
     NativeAudioContextReason reason,
   ) async {
     final owner = await _binding();
-    final previous = _latest?.contextGeneration ?? owner.contextGeneration;
-    final wire = await _channel.invokeMethod<Object?>('fenceContext', {
+    var previous = _latest?.contextGeneration ?? owner.contextGeneration;
+    Future<Object?> send() => _channel.invokeMethod<Object?>('fenceContext', {
       ..._ownerFields(owner),
       'contextGeneration': previous,
       'reason': reason.name,
     });
+    Object? wire;
+    try {
+      wire = await send();
+    } on PlatformException catch (error) {
+      if (error.code != 'stale_audio_context') rethrow;
+      // A native route/lifecycle observer can close first. Retry exactly
+      // once only if a new read proves the process empty and context newer.
+      // Any held or ambiguous resource stays behind the failed-fence latch.
+      final fresh = await readAllAudioState();
+      if (!fresh.allClear || fresh.contextGeneration <= previous) rethrow;
+      previous = fresh.contextGeneration;
+      wire = await send();
+    }
     final map = _map(wire);
     final status = map['status'];
     if (status != 'closed' && status != 'pending' && status != 'blocked') {

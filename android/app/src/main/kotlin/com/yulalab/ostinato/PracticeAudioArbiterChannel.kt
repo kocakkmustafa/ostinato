@@ -66,6 +66,31 @@ internal class PracticeAudioArbiterChannel(
             number(args, "contextGeneration"), string(args, "leaseId"),
             number(args, "leaseGeneration"), string(args, "reason")))
         }
+        "completeVideoDispose" -> {
+          exact(args, "ownerToken", "engineGeneration", "contextGeneration", "leaseId",
+            "leaseGeneration", "confirmed")
+          result.success(arbiter.completeVideoDispose(binding, token(args),
+            number(args, "engineGeneration"), number(args, "contextGeneration"),
+            string(args, "leaseId"), number(args, "leaseGeneration"),
+            args["confirmed"] as? Boolean ?: throw PracticeAudioArbiter.AudioFault("bad_args")))
+        }
+        "cancelVideoReservation" -> {
+          exact(args, "ownerToken", "engineGeneration", "contextGeneration", "leaseId",
+            "leaseGeneration")
+          result.success(arbiter.cancelVideoReservation(binding, token(args),
+            number(args, "engineGeneration"), number(args, "contextGeneration"),
+            string(args, "leaseId"), number(args, "leaseGeneration")))
+        }
+        "cancelUnclaimedVideoReservation" -> {
+          exact(args, "ownerToken", "engineGeneration", "attemptOwnerToken",
+            "attemptEngineGeneration", "attemptContextGeneration", "leaseId",
+            "leaseGeneration", "expectedStateRevision")
+          result.success(arbiter.cancelUnclaimedVideoReservation(binding, token(args),
+            number(args, "engineGeneration"), string(args, "attemptOwnerToken"),
+            number(args, "attemptEngineGeneration"), number(args, "attemptContextGeneration"),
+            string(args, "leaseId"), nullableNumber(args, "leaseGeneration"),
+            number(args, "expectedStateRevision")))
+        }
         "recoverAll" -> {
           exact(args, "ownerToken", "engineGeneration", "expectedStateRevision", "reason")
           result.success(arbiter.recoverAll(binding, token(args), number(args, "engineGeneration"),
@@ -94,4 +119,6 @@ internal class PracticeAudioArbiterChannel(
     is Long -> value
     else -> throw PracticeAudioArbiter.AudioFault("bad_args")
   }
+  private fun nullableNumber(args: Map<*, *>, field: String): Long? =
+    if (args[field] == null) null else number(args, field)
 }

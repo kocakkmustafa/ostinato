@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../account_connection.dart';
 import '../app_locale.dart';
+import '../course/media/lesson_media_slot.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../guitar_journey.dart';
@@ -591,6 +592,10 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                   '${lesson.minutes} DK · KENDİ ÇALIŞMAN',
                 ),
                 style: monoText(),
+              ),
+              LessonMediaSlot.empty(
+                lessonId: lesson.id,
+                locale: Localizations.localeOf(context).languageCode,
               ),
               const SizedBox(height: 17),
               if (widget.previousVersion?.selfReportedCompletedAt != null) ...[

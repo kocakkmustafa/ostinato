@@ -3,6 +3,33 @@ import 'dart:math';
 
 import 'package:flutter/services.dart';
 
+import 'native_audio_state.dart';
+
+/// The exact native process context observed at the user's capture action.
+/// A later read must never replace these fields after a fence.
+final class AudioCaptureContextClaim {
+  const AudioCaptureContextClaim({
+    required this.ownerToken,
+    required this.engineGeneration,
+    required this.contextGeneration,
+  });
+
+  final String ownerToken;
+  final int engineGeneration;
+  final int contextGeneration;
+
+  bool get isValid =>
+      isNativeAudioToken(ownerToken) &&
+      engineGeneration >= 1 &&
+      contextGeneration >= 0;
+
+  Map<String, Object> get wireFields => <String, Object>{
+    'ownerToken': ownerToken,
+    'engineGeneration': engineGeneration,
+    'contextGeneration': contextGeneration,
+  };
+}
+
 /// Native yakalama katmanının HAM olayı — henüz [AudioRoute]e çözülmemiş
 /// (bkz. `audio_route_state.dart`), henüz tampon/izin/yaşam-döngüsü mantığı
 /// uygulanmamış. Bu ayrım `motion_camera.CameraFrameEnvelope` ile
@@ -180,8 +207,10 @@ final class AudioCaptureCloseState {
 abstract interface class AudioCaptureCloseControl {
   String? get attemptId;
   Future<AudioCaptureCloseState> readCloseState();
+
   /// Ordinary/lifecycle close. It never acknowledges a sticky late release.
   Future<void> stopAttempt(String attemptId);
+
   /// Only the visible user retry action may send this distinct native method.
   Future<void> retryStopAttempt(String attemptId);
 }
@@ -328,7 +357,13 @@ final class MethodChannelAudioCaptureChannel
   }
 
   @override
-  Future<void> start({required int sampleRate}) async {
+  Future<void> start({
+    required int sampleRate,
+    AudioCaptureContextClaim? claim,
+  }) async {
+    if (claim == null || !claim.isValid) {
+      throw PlatformException(code: 'capture_context_required');
+    }
     if (_closeBlocked) throw _unconfirmed();
     if (!_prepared) await prepare();
     final id = _attemptId;
@@ -338,6 +373,7 @@ final class MethodChannelAudioCaptureChannel
     await _method.invokeMethod<void>('start', <String, Object?>{
       'attemptId': id,
       'sampleRate': sampleRate,
+      ...claim.wireFields,
     });
   }
 
@@ -416,12 +452,14 @@ final class MethodChannelAudioCaptureChannel
             onError: (Object _, StackTrace stackTrace) => false,
           );
       streamTeardown = teardown;
-      unawaited(teardown.then((ok) {
-        if (ok && identical(_rawSub, subscription)) {
-          _rawSub = null;
-          _eventTeardownPending = false;
-        }
-      }));
+      unawaited(
+        teardown.then((ok) {
+          if (ok && identical(_rawSub, subscription)) {
+            _rawSub = null;
+            _eventTeardownPending = false;
+          }
+        }),
+      );
     }
     try {
       await nativeRetry;
@@ -477,12 +515,14 @@ final class MethodChannelAudioCaptureChannel
                 (_) => true,
                 onError: (Object _, StackTrace stackTrace) => false,
               );
-    unawaited(streamTeardown.then((ok) {
-      if (ok && identical(_rawSub, subscription)) {
-        _rawSub = null;
-        _eventTeardownPending = false;
-      }
-    }));
+    unawaited(
+      streamTeardown.then((ok) {
+        if (ok && identical(_rawSub, subscription)) {
+          _rawSub = null;
+          _eventTeardownPending = false;
+        }
+      }),
+    );
     Object? failure;
     try {
       await nativeStop;

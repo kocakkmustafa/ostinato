@@ -15,11 +15,15 @@ import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import java.util.concurrent.Executors
+import java.util.concurrent.RejectedExecutionException
+import java.util.concurrent.ScheduledThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
 /** Process-owned capture. Neither coordinator nor workers retain an Activity. */
 internal object AudioCaptureRuntime {
   private var coordinator: AudioCaptureCoordinator? = null
-  private val arbiter = PracticeAudioArbiter(AndroidArbiterWork())
+  private val work = AndroidArbiterWork()
+  private val arbiter = PracticeAudioArbiter(work, videoCloseDispatcher = work)
 
   @Synchronized fun coordinator(context: Context): AudioCaptureCoordinator =
     coordinator ?: AudioCaptureCoordinator(
@@ -40,14 +44,23 @@ internal object AudioCaptureRuntime {
     arbiter.foreground(binding, isForeground)
 }
 
-private class AndroidArbiterWork : PracticeAudioArbiter.Work {
+private class AndroidArbiterWork : PracticeAudioArbiter.Work,
+  PracticeAudioArbiter.VideoCloseDispatcher {
   private val main = Handler(Looper.getMainLooper())
   private val hardware = Executors.newSingleThreadExecutor { task ->
     Thread(task, "ostinato-output-hardware").apply { isDaemon = true }
   }
+  private val videoDeadline = ScheduledThreadPoolExecutor(1) { task ->
+    Thread(task, "ostinato-video-close-deadline").apply { isDaemon = true }
+  }
   override fun hardware(task: () -> Unit) { hardware.execute(task) }
   override fun main(task: () -> Unit) { main.post(task) }
   override fun after(delayMs: Long, task: () -> Unit) { main.postDelayed(task, delayMs) }
+  override fun postMain(task: () -> Unit): Boolean = main.post(task)
+  override fun postDeadline(delayMs: Long, task: () -> Unit): Boolean = try {
+    videoDeadline.schedule(Runnable { task() }, delayMs, TimeUnit.MILLISECONDS)
+    true
+  } catch (_: RejectedExecutionException) { false }
 }
 
 private class AndroidCaptureDispatch : AudioCaptureCoordinator.CaptureDispatch {
@@ -120,6 +133,31 @@ private class AndroidRecorderPort(private val record: AudioRecord) : AudioCaptur
   }
 }
 
+/** A legacy start has three context fields; a leased input adds two lease fields. */
+internal fun parseCaptureStartClaim(args: Map<*, *>?): PracticeAudioArbiter.CaptureClaim? {
+  val startKeys = setOf("attemptId", "sampleRate", "ownerToken", "engineGeneration",
+    "contextGeneration")
+  val leasedKeys = startKeys + setOf("leaseId", "leaseGeneration")
+  val fields = args ?: return null
+  val keys = fields.keys
+  if (keys != startKeys && keys != leasedKeys) return null
+  val token = fields["ownerToken"] as? String ?: return null
+  val engine = captureWireLong(fields["engineGeneration"]) ?: return null
+  val context = captureWireLong(fields["contextGeneration"]) ?: return null
+  if (keys == startKeys) {
+    return PracticeAudioArbiter.CaptureClaim(token, engine, context)
+  }
+  val leaseId = fields["leaseId"] as? String ?: return null
+  val generation = captureWireLong(fields["leaseGeneration"]) ?: return null
+  return PracticeAudioArbiter.CaptureClaim(token, engine, context, leaseId, generation)
+}
+
+private fun captureWireLong(value: Any?): Long? = when (value) {
+  is Int -> value.toLong()
+  is Long -> value
+  else -> null
+}
+
 /** Event subscription ownership is local to this Flutter engine. Hardware ownership is not. */
 internal class AudioCaptureStreamer(
   private val context: Context,
@@ -144,21 +182,8 @@ internal class AudioCaptureStreamer(
       "start" -> {
         val id = args?.get("attemptId") as? String
         val rate = args?.get("sampleRate") as? Int
-        val claimKeys = setOf("ownerToken", "engineGeneration", "contextGeneration",
-          "leaseId", "leaseGeneration")
-        val hasClaimField = args?.keys?.any { it in claimKeys } == true
-        val claim = if (hasClaimField) {
-          val token = args?.get("ownerToken") as? String
-          val engine = wireLong(args?.get("engineGeneration"))
-          val context = wireLong(args?.get("contextGeneration"))
-          val leaseId = args?.get("leaseId") as? String
-          val generation = wireLong(args?.get("leaseGeneration"))
-          if (token == null || engine == null || context == null || leaseId == null || generation == null) {
-            result.error("bad_args", null, null); return
-          }
-          PracticeAudioArbiter.CaptureClaim(token, engine, context, leaseId, generation)
-        } else null
-        if (id == null || rate == null || id != ids.current || sink == null) {
+        val claim = parseCaptureStartClaim(args)
+        if (id == null || rate == null || claim == null || id != ids.current || sink == null) {
           result.error("bad_args", null, null); return
         }
         if (!coordinator.isForeground(owner) ||
@@ -191,12 +216,6 @@ internal class AudioCaptureStreamer(
   private fun methodReply(result: MethodChannel.Result) = object : AudioCaptureCoordinator.Reply {
     override fun success() { result.success(null) }
     override fun error(code: String) { result.error(code, null, null) }
-  }
-
-  private fun wireLong(value: Any?): Long? = when (value) {
-    is Int -> value.toLong()
-    is Long -> value
-    else -> null
   }
 
   override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {

@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:motion_account/motion_account.dart';
 
 import '../app_locale.dart';
+import 'audio_capture_channel.dart';
+import 'native_audio_arbiter_channel.dart';
 import 'practice_audio_lease.dart';
+import 'practice_video_session_owner.dart';
 
 /// No production call may infer a native close receipt from this placeholder.
 /// The input, output, and shared session need one native arbiter first.
@@ -19,6 +22,27 @@ final class _NoNativeAudioArbiter implements PracticeAudioLeasePort {
   @override
   Future<NativeAudioPermit> reserve(PracticeAudioSide side, String leaseId) =>
       Future.error(StateError('Native audio arbiter is not installed'));
+
+  @override
+  Future<NativeAllAudioState> completeVideoDispose(
+    NativeAudioPermit permit, {
+    required bool confirmed,
+  }) => Future.error(StateError('Native audio arbiter is not installed'));
+
+  @override
+  Future<NativeAllAudioState> cancelVideoReservation(
+    NativeAudioPermit permit,
+  ) => Future.error(StateError('Native audio arbiter is not installed'));
+
+  @override
+  Future<NativeAllAudioState> cancelUnclaimedVideoReservation({
+    required String attemptOwnerToken,
+    required int attemptEngineGeneration,
+    required int attemptContextGeneration,
+    required String leaseId,
+    required int? leaseGeneration,
+    required int expectedStateRevision,
+  }) => Future.error(StateError('Native audio arbiter is not installed'));
 
   @override
   Future<NativeAudioPermit> startOutput(
@@ -88,6 +112,102 @@ final class PracticeAudioRouteGrant {
   }) => _owner.acquire(this, side, assetId: assetId);
 }
 
+/// Reserved for the future verified-media route. The production root does not
+/// issue these actions until the native player itself enforces video permits.
+final class PracticeVideoStartAction {
+  PracticeVideoStartAction._(
+    this._owner,
+    this._route,
+    this._observer,
+    this._identityEpoch,
+    this._routeEpoch,
+    this._visibilityEpoch,
+  );
+
+  final PracticeAudioRootOwner _owner;
+  final Route<dynamic> _route;
+  final PracticeAudioRouteObserver _observer;
+  final int _identityEpoch;
+  final int _routeEpoch;
+  final int _visibilityEpoch;
+  bool _consumed = false;
+
+  Future<PracticeVideoOpenStatus> start(PracticeVideoPlayerPort player) =>
+      _owner.startVideo(this, player);
+}
+
+/// A single user tap can authorize only the native context that was clear at
+/// that tap. It is retired synchronously by route, identity, or visibility
+/// changes, including while a permission prompt is still unanswered.
+final class PracticeAudioCaptureAction {
+  PracticeAudioCaptureAction._(
+    this._owner,
+    this._route,
+    this._observer,
+    this._identityEpoch,
+    this._routeEpoch,
+    this._visibilityEpoch,
+    NativeAllAudioState nativeSnapshot,
+  ) : _nativeSnapshot = nativeSnapshot,
+      claim = AudioCaptureContextClaim(
+        ownerToken: nativeSnapshot.ownerToken,
+        engineGeneration: nativeSnapshot.engineGeneration,
+        contextGeneration: nativeSnapshot.contextGeneration,
+      );
+
+  final PracticeAudioRootOwner _owner;
+  final Route<dynamic> _route;
+  final PracticeAudioRouteObserver _observer;
+  final int _identityEpoch;
+  final int _routeEpoch;
+  final int _visibilityEpoch;
+  final NativeAllAudioState _nativeSnapshot;
+  final AudioCaptureContextClaim claim;
+  VoidCallback? _cancel;
+  bool _attached = false;
+  bool _retired = false;
+
+  bool get isCurrent => !_retired && _owner._validCapture(this);
+
+  /// A capture source attaches before its first asynchronous boundary.
+  bool attachCancellation(VoidCallback cancel) {
+    if (_attached || !isCurrent) return false;
+    _attached = true;
+    _cancel = cancel;
+    return true;
+  }
+
+  /// Fresh native readback is required before requesting microphone consent.
+  /// It checks the original claim, never mints a newer claim for this action.
+  Future<bool> confirmPreflight() async {
+    if (!isCurrent) return false;
+    try {
+      final state = await _owner._captureArbiter!.readAllAudioState();
+      return isCurrent &&
+          state.allClear &&
+          state.hasSameSnapshotAs(_nativeSnapshot);
+    } on Object {
+      return false;
+    }
+  }
+
+  void retire() {
+    if (_retired) return;
+    _retired = true;
+    _cancel = null;
+    _owner._captureActions.remove(this);
+  }
+
+  void _invalidate() {
+    if (_retired) return;
+    _retired = true;
+    final cancel = _cancel;
+    _cancel = null;
+    _owner._captureActions.remove(this);
+    cancel?.call();
+  }
+}
+
 /// App-lifetime, isolate-local context boundary. It deliberately has no
 /// player or microphone implementation. Production acquisition is disabled.
 final class PracticeAudioRootOwner {
@@ -95,16 +215,35 @@ final class PracticeAudioRootOwner {
     required ValueListenable<String?> userId,
     required ValueListenable<MotionIdentityPhase> phase,
     required PracticeAudioLease lease,
+    NativeAudioArbiterChannel? captureArbiter,
+    PracticeVideoSessionOwner? videoOwner,
     AppLifecycleState? initialLifecycleState,
     @visibleForTesting this.allowDetachedRouteEventsForTest = false,
     this.allowAcquisition = false,
+    @visibleForTesting this.allowVideoAcquisitionForTest = false,
+    this.nativeFenceEnabled = true,
     this.onStatusChanged,
   }) : _userIdListenable = userId,
        _phaseListenable = phase,
        _lease = lease,
+       _captureArbiter = captureArbiter,
+       _videoOwner = videoOwner,
        _userId = userId.value,
        _phase = phase.value,
        _foreground = initialLifecycleState == AppLifecycleState.resumed {
+    if (videoOwner != null) {
+      if (!nativeFenceEnabled) {
+        throw ArgumentError('Video owner requires native context fencing');
+      }
+      if (captureArbiter != null &&
+          !identical(captureArbiter, videoOwner.port)) {
+        throw ArgumentError('Capture and video must share one native channel');
+      }
+      _lease.attachVideoFenceSettler(
+        videoOwner.port,
+        videoOwner.settleAfterFence,
+      );
+    }
     // The root constructs this before building MotionIdentityGate or the
     // account-keyed Navigator; these listeners fence before either rebuilds.
     _userIdListenable.addListener(_onUserChanged);
@@ -114,9 +253,17 @@ final class PracticeAudioRootOwner {
   final ValueListenable<String?> _userIdListenable;
   final ValueListenable<MotionIdentityPhase> _phaseListenable;
   final PracticeAudioLease _lease;
+  final NativeAudioArbiterChannel? _captureArbiter;
+  final PracticeVideoSessionOwner? _videoOwner;
+  final Set<PracticeAudioCaptureAction> _captureActions = {};
 
   /// Test seam only. The production root always keeps this false.
   final bool allowAcquisition;
+
+  /// Test-only admission until the native video plugin validates each permit.
+  @visibleForTesting
+  final bool allowVideoAcquisitionForTest;
+  final bool nativeFenceEnabled;
 
   /// Unit tests may drive a NavigatorObserver without mounting a Navigator.
   /// The production root never enables detached observer events.
@@ -137,14 +284,18 @@ final class PracticeAudioRootOwner {
   bool _recovering = false;
   bool _disposed = false;
   PracticeAudioReleaseStatus? _lastRecoveryStatus;
+  Future<PracticeAudioReleaseStatus>? _lastFence;
 
   PracticeAudioLeasePhase get leasePhase => _lease.phase;
   bool get blocked =>
-      _lease.phase == PracticeAudioLeasePhase.blockedUnconfirmed;
+      _lease.phase == PracticeAudioLeasePhase.blockedUnconfirmed ||
+      (_videoOwner?.blocked ?? false);
   bool get recovering => _recovering;
   bool get nativeReplyPending =>
       _lastRecoveryStatus == PracticeAudioReleaseStatus.pendingNative;
   Route<dynamic>? get topRoute => _topRoute;
+  @visibleForTesting
+  Future<PracticeAudioReleaseStatus>? get lastFenceForTest => _lastFence;
 
   bool get _identityReady =>
       (_phase == MotionIdentityPhase.verified && _userId != null) ||
@@ -223,6 +374,7 @@ final class PracticeAudioRootOwner {
         !_identityReady ||
         !_foreground ||
         _barrier ||
+        (_videoOwner?.busy ?? false) ||
         observer == null ||
         !identical(_topRoute, route) ||
         blocked) {
@@ -237,6 +389,114 @@ final class PracticeAudioRootOwner {
       _visibilityEpoch,
       _lease.captureContext(),
     );
+  }
+
+  /// This seam proves Dart ordering with a fake player. Shipping lessons never
+  /// request an action; their media slot remains empty.
+  @visibleForTesting
+  PracticeVideoStartAction? videoActionFor(Route<dynamic> route) {
+    final observer = _observer;
+    if (_disposed ||
+        !allowVideoAcquisitionForTest ||
+        _videoOwner == null ||
+        _videoOwner.busy ||
+        !_identityReady ||
+        !_foreground ||
+        _barrier ||
+        observer == null ||
+        !identical(_topRoute, route) ||
+        blocked) {
+      return null;
+    }
+    return PracticeVideoStartAction._(
+      this,
+      route,
+      observer,
+      _identityEpoch,
+      _routeEpoch,
+      _visibilityEpoch,
+    );
+  }
+
+  bool _validVideoAction(PracticeVideoStartAction action) =>
+      identical(action._owner, this) &&
+      !_disposed &&
+      allowVideoAcquisitionForTest &&
+      _videoOwner != null &&
+      _identityReady &&
+      _foreground &&
+      !_barrier &&
+      !blocked &&
+      identical(action._observer, _observer) &&
+      identical(action._route, _topRoute) &&
+      action._identityEpoch == _identityEpoch &&
+      action._routeEpoch == _routeEpoch &&
+      action._visibilityEpoch == _visibilityEpoch;
+
+  Future<PracticeVideoOpenStatus> startVideo(
+    PracticeVideoStartAction action,
+    PracticeVideoPlayerPort player,
+  ) async {
+    if (action._consumed || !_validVideoAction(action)) {
+      return PracticeVideoOpenStatus.staleContext;
+    }
+    action._consumed = true;
+    final video = _videoOwner!;
+    final status = await video.open(
+      player,
+      isCurrent: () => _validVideoAction(action),
+    );
+    if (status == PracticeVideoOpenStatus.ready && !_validVideoAction(action)) {
+      return await video.close()
+          ? PracticeVideoOpenStatus.staleContext
+          : PracticeVideoOpenStatus.blockedUnconfirmed;
+    }
+    return status;
+  }
+
+  /// Legacy microphone capture remains separate from practice-lease
+  /// acquisition. The latter is still disabled in production.
+  PracticeAudioCaptureAction? captureActionFor(Route<dynamic> route) {
+    final observer = _observer;
+    final native = _captureArbiter?.capturePreflightSnapshot;
+    if (_disposed ||
+        !_identityReady ||
+        !_foreground ||
+        _barrier ||
+        observer == null ||
+        !identical(_topRoute, route) ||
+        blocked ||
+        native == null) {
+      return null;
+    }
+    final action = PracticeAudioCaptureAction._(
+      this,
+      route,
+      observer,
+      _identityEpoch,
+      _routeEpoch,
+      _visibilityEpoch,
+      native,
+    );
+    _captureActions.add(action);
+    return action;
+  }
+
+  bool _validCapture(PracticeAudioCaptureAction action) {
+    final native = _captureArbiter?.capturePreflightSnapshot;
+    return identical(action._owner, this) &&
+        !_disposed &&
+        _identityReady &&
+        _foreground &&
+        !_barrier &&
+        !blocked &&
+        identical(action._observer, _observer) &&
+        identical(action._route, _topRoute) &&
+        action._identityEpoch == _identityEpoch &&
+        action._routeEpoch == _routeEpoch &&
+        action._visibilityEpoch == _visibilityEpoch &&
+        native != null &&
+        native.hasSameSnapshotAs(action._nativeSnapshot);
   }
 
   bool _valid(PracticeAudioRouteGrant grant) =>
@@ -304,7 +564,20 @@ final class PracticeAudioRootOwner {
     _lastRecoveryStatus = null;
     _statusChanged();
     try {
-      final result = await _lease.recover();
+      final videoResult = await _videoOwner?.recover();
+      if (videoResult == PracticeVideoRecoveryStatus.busy ||
+          videoResult == PracticeVideoRecoveryStatus.blockedUnconfirmed) {
+        _lastRecoveryStatus = videoResult == PracticeVideoRecoveryStatus.busy
+            ? PracticeAudioReleaseStatus.busy
+            : PracticeAudioReleaseStatus.blockedUnconfirmed;
+        return _lastRecoveryStatus!;
+      }
+      final leaseResult = await _lease.recover();
+      final result =
+          videoResult == PracticeVideoRecoveryStatus.confirmedClosed &&
+              leaseResult == PracticeAudioReleaseStatus.alreadyIdle
+          ? PracticeAudioReleaseStatus.confirmedClosed
+          : leaseResult;
       _lastRecoveryStatus = result;
       return result;
     } finally {
@@ -317,6 +590,13 @@ final class PracticeAudioRootOwner {
     PracticeAudioInvalidationReason reason, {
     bool retireRoute = false,
   }) {
+    // Stop a pending or running legacy microphone synchronously before the
+    // shared native fence advances the context. A late permission reply can
+    // only carry its now-stale original claim.
+    for (final action in _captureActions.toList()) {
+      action._invalidate();
+    }
+    _videoOwner?.invalidate();
     if (retireRoute) {
       _observer = null;
       _topRoute = null;
@@ -325,7 +605,10 @@ final class PracticeAudioRootOwner {
     _barrier = true;
     final serial = ++_fenceSerial;
     // `invalidate` increments the lease epoch before returning its Future.
-    final close = _lease.invalidate(reason);
+    final close = nativeFenceEnabled
+        ? _lease.invalidateAndFence(reason)
+        : _lease.invalidate(reason);
+    _lastFence = close;
     unawaited(
       close.then((result) {
         if (_disposed) return;
@@ -350,6 +633,29 @@ final class PracticeAudioRootOwner {
     _fence(PracticeAudioInvalidationReason.routeChange);
     _disposed = true;
   }
+}
+
+/// Exposes only a one-shot capture action to route widgets, never the root
+/// owner or an unrestricted practice-audio lease grant.
+class PracticeAudioCaptureScope extends InheritedWidget {
+  const PracticeAudioCaptureScope._({
+    required this.owner,
+    required super.child,
+  });
+
+  final PracticeAudioRootOwner owner;
+
+  static PracticeAudioCaptureAction? actionFor(BuildContext context) {
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<PracticeAudioCaptureScope>();
+    final route = ModalRoute.of(context);
+    if (scope == null || route == null) return null;
+    return scope.owner.captureActionFor(route);
+  }
+
+  @override
+  bool updateShouldNotify(PracticeAudioCaptureScope oldWidget) =>
+      !identical(owner, oldWidget.owner);
 }
 
 final class PracticeAudioRouteObserver extends NavigatorObserver {
@@ -438,11 +744,15 @@ class _OstinatoObservedNavigatorState
   }
 
   @override
-  Widget build(BuildContext context) => widget._builder(_observer);
+  Widget build(BuildContext context) => PracticeAudioCaptureScope._(
+    owner: widget._owner,
+    child: widget._builder(_observer),
+  );
 }
 
 /// Persists above MotionIdentityGate while its child is removed. The optional
-/// injected lease is for tests; main() uses the denied native port.
+/// injected lease is for tests; mobile production uses the shared native
+/// arbiter for closure while acquisition remains denied.
 class OstinatoAudioRoot extends StatefulWidget {
   const OstinatoAudioRoot({
     super.key,
@@ -451,6 +761,7 @@ class OstinatoAudioRoot extends StatefulWidget {
     this.child,
     this.builder,
     this.testLease,
+    this.testCaptureArbiter,
     this.allowTestAcquisition = false,
     this.onTestOwnerCreated,
   }) : assert(child != null || builder != null);
@@ -461,6 +772,8 @@ class OstinatoAudioRoot extends StatefulWidget {
   final Widget Function(PracticeAudioNavigatorHost host)? builder;
   @visibleForTesting
   final PracticeAudioLease? testLease;
+  @visibleForTesting
+  final NativeAudioArbiterChannel? testCaptureArbiter;
   @visibleForTesting
   final bool allowTestAcquisition;
   @visibleForTesting
@@ -478,14 +791,27 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
   @override
   void initState() {
     super.initState();
+    final mobileNative =
+        !kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.iOS ||
+            defaultTargetPlatform == TargetPlatform.android);
+    final nativeArbiter =
+        widget.testCaptureArbiter ??
+        (widget.testLease == null && mobileNative
+            ? NativeAudioArbiterChannel()
+            : null);
     _owner = PracticeAudioRootOwner(
       userId: widget.userId,
       phase: widget.phase,
       lease:
           widget.testLease ??
-          PracticeAudioLease(port: const _NoNativeAudioArbiter()),
+          PracticeAudioLease(
+            port: nativeArbiter ?? const _NoNativeAudioArbiter(),
+          ),
+      captureArbiter: nativeArbiter,
       initialLifecycleState: WidgetsBinding.instance.lifecycleState,
       allowAcquisition: widget.allowTestAcquisition,
+      nativeFenceEnabled: widget.testLease != null || mobileNative,
       onStatusChanged: _refreshAfterFrame,
     );
     _navigatorHost = PracticeAudioNavigatorHost._(_owner);

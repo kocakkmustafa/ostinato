@@ -1,5 +1,50 @@
 # Ostinato — İlerleme Kaydı
 
+## 2026-10-01 — ilk kurs kaynak pini ve izole Android V4c
+
+Canlı uygulamada 60 derslik kurs, kaynak dilimi ve 420 sahnelik projeksiyon
+SHA'ları app-owned Dart pinine bağlandı; QA kaynak SHA'sı ortak v2k katalog
+SHA'sından ayrı tutuldu. Kaynak ve medya slotu odak testleri **10/10**,
+analiz temiz; bağımsız kaynak incelemesi dar PASS. Gerçek video veya model
+yüklenmedi, üretim medya slotu boş.
+
+Canlı uygulamaya aktarılmamış izole Android V4c adayında test makbuzu ve
+sahte native ACK sözleşmesi onarıldı; ilgili Dart **29/29**, aynı ürün
+kaynaklı V4b JVM **23/23** odak test geçti. Cached-engine quiescent A→B
+Dart binding yenilemesi ve gerçek cihaz kabulü açık; video gate false.
+Kanıt: `scratch/2026-10-01-ostinato-android-cached-engine-rebind-v4c-harness-repair/REPORT.md`.
+
+
+## 2026-09-30 — yalnız QA sessiz video adaptörü; native cihaz kabulü açık
+
+`video_player` 2.11.1 ile ayrı QA asset adaptörü eklendi. Android'de
+initialize öncesi/sonrası mute ve ExoPlayer audio-track yokluğu doğrulanmadan
+play açılmıyor; belirsiz kapanış aynı Flutter isolate'ındaki sonraki QA
+oyuncusunu karantinaya alıyor. AVFoundation `getAudioTracks()` sıradan MP4
+ses izini görmediği için iOS/macOS factory controller oluşturmadan reddediyor.
+Üretim `LessonMediaSlot.empty`, `allowAcquisition=false` ve Gate D hakemi
+değişmedi. Odak test **9/9**, tam Flutter **370/370**, analiz temiz;
+Android debug APK ve iOS simülatör Runner.app derlendi. Bu derlemeler gerçek
+cihazda mikrofon/video oturumu uyumunu, medya kabulünü veya mağazayı
+kanıtlamıyor. Makbuz: `scratch/2026-09-30-ostinato-native-video-adapter/RESULT.md`.
+
+## 2026-09-30 — sentetik tek-nota yanlışlaması ve dürüst kullanıcı metni
+
+Önceden dondurulmuş 14 sinyal × iki örnekleme hızı pilotu tek koşumda
+**25/28 FALSIFIED**: eşzamanlı A3+A4 iki hızda da tek A3 gözlemine
+dönüştü (iki yanlış pozitif); 48 kHz 10 dB gürültülü A3 25 cent bütçesini
+29,68 centle aştı. Temiz zorunlu 6/6 doğru; tek sesli yanlış nota/oktav
+yok. Bu gerçek gitar veya telefon kabulü değildir; eşik ayarı, tekrar,
+model fit yapılmadı. Kaynak/config SHA ve sonuç `scratch/2026-09-30-ostinato-yin-stress/REPORT.md`.
+Gözlem ekranına karma sesin makul ama yanıltıcı nota gösterebileceği
+TR/EN uyarısı eklendi; hedefli Flutter ekran testi **26/26**, analiz ve
+diff kontrolü temiz. Mevcut Gate D/medya WIP korunuyor; commit/push,
+gerçek cihaz/bağımsız nota kabulü açık.
+
+## 2026-09-29 — Gate D yerel kaynak/test; fiziksel kabul açık
+
+Boş görünen Dart lease'de bile hesap, rota veya arka plan değişimi aynı native proses hakemine çit gönderiyor ve taze tüm-ses kapanışını okuyor. Aktif sesin kapanışında yeni çit eski permit ile yarışmıyor. Eski mikrofonun izin bekleyen/gecikmiş açılışı, dokunuşta yakalanan üç alanlı native bağlam iddiası ve iOS/Android donanım-öncesi denetimiyle sınırlandı. Bağımsız incelemenin bulduğu son kuyruk yarışı eski davranışta kırmızı, düzeltmeyle yeşil test verdi. Flutter **127/127**, Android hakem JVM **17/17**, iOS simülatör **16/16**, hedefli analiz ve diff denetimi temiz. Bu **yerel WIP**; HEAD `ba0f29ce`, commit/push/yararlı son-baş CI, gerçek iPhone/Android mikrofon, onaylı örnek ses ve kullanıcı fiziksel kabulü yok. Üretim practice lease edinimi kapalı. `scratch/2026-09-29-ostinato-gate-d/RESULT.md`.
+
 ## 2026-09-28 — ortak ses hakemi Gate B/C yerel native doğrulama
 
 Gate A'nın tipli Dart sözleşmesi üstüne iOS ve Android proses hakemleri,

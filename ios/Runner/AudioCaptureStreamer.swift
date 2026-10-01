@@ -483,9 +483,18 @@ final class AudioCaptureStreamer: NSObject, FlutterStreamHandler {
             let rate = args["sampleRate"] as? Int else {
         result(FlutterError(code: "bad_args", message: nil, details: nil)); return
       }
-      let hasPermitField = ["ownerToken", "engineGeneration", "contextGeneration",
-                            "leaseId", "leaseGeneration"].contains { args[$0] != nil }
-      let permit = hasPermitField ? args : nil
+      var permit: [String: Any]?
+      if arbiter != nil {
+        let ownerKeys: Set<String> = ["ownerToken", "engineGeneration", "contextGeneration"]
+        let startKeys = ownerKeys.union(["attemptId", "sampleRate"])
+        let leasedKeys = startKeys.union(["leaseId", "leaseGeneration"])
+        let keys = Set(args.keys)
+        guard keys == startKeys || keys == leasedKeys else {
+          result(FlutterError(code: "bad_args", message: nil, details: nil)); return
+        }
+        permit = args.filter { ownerKeys.contains($0.key) ||
+          (keys == leasedKeys && ($0.key == "leaseId" || $0.key == "leaseGeneration")) }
+      }
       coordinator.start(id: id, rate: rate, result: result, owner: owner, permit: permit)
     case "stop":
       guard let id = (call.arguments as? [String: Any])?["attemptId"] as? String else {

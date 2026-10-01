@@ -7,6 +7,7 @@ import '../account_connection.dart';
 import '../app_locale.dart';
 import '../audio/audio_capture_channel.dart';
 import '../audio/guitar_note_observation_controller.dart';
+import '../audio/practice_audio_root.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../guitar_session_preparation.dart';
@@ -272,8 +273,8 @@ class _GuitarNoteObservationScreenState
               Text(
                 localized(
                   context,
-                  'Optional · one guitar string · a quiet room. Evaluated on isolated studio notes; real phone accuracy has not been verified. This is not a tuning or playing success decision.',
-                  'İsteğe bağlı · tek gitar teli · sessiz oda. Ayrı stüdyo notalarında ölçüldü; gerçek telefon doğruluğu doğrulanmadı. Akort veya çalma başarısına karar vermez.',
+                  'Optional · one guitar string · a quiet room. Overlapping sounds can show a plausible but misleading note. Evaluated on isolated studio notes; real phone accuracy has not been verified. This does not decide tuning or playing success.',
+                  'İsteğe bağlı · tek gitar teli · sessiz oda. Üst üste binen sesler inandırıcı ama yanıltıcı bir nota gösterebilir. Ayrı stüdyo notalarında ölçüldü; gerçek telefon doğruluğu doğrulanmadı. Akort veya çalma başarısına karar vermez.',
                 ),
                 style: hankenText(size: 13, height: 1.5),
               ),
@@ -346,7 +347,15 @@ class _GuitarNoteObservationScreenState
                                 : () {
                                     if (_preparation.isAcknowledged &&
                                         controller.canStart) {
-                                      unawaited(controller.start());
+                                      // Capture the top-route/account/native
+                                      // context before permission can suspend.
+                                      final action =
+                                          PracticeAudioCaptureScope.actionFor(
+                                            context,
+                                          );
+                                      unawaited(
+                                        controller.start(captureAction: action),
+                                      );
                                     }
                                   },
                             icon: Icon(

@@ -2,12 +2,18 @@ import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:motion_account/motion_account.dart';
 import 'package:ostinato/app/audio/audio_capture_channel.dart';
 import 'package:ostinato/app/audio/audio_input_controller.dart';
 import 'package:ostinato/app/audio/audio_route_state.dart';
+import 'package:ostinato/app/audio/native_audio_arbiter_channel.dart';
+import 'package:ostinato/app/audio/practice_audio_lease.dart';
+import 'package:ostinato/app/audio/practice_audio_root.dart';
 import 'package:ostinato_audio/ostinato_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import 'support/fake_practice_audio_port.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -537,12 +543,71 @@ void main() {
         messenger.setMockMethodCallHandler(method, null);
         messenger.setMockMethodCallHandler(events, null);
       });
+      const arbiterMethod = MethodChannel('test/active_dispose_arbiter');
+      const ownerToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+      messenger.setMockMethodCallHandler(arbiterMethod, (call) async {
+        if (call.method == 'bind') {
+          return <String, Object?>{
+            'schemaVersion': 1,
+            'ownerToken': ownerToken,
+            'engineGeneration': 1,
+            'contextGeneration': 0,
+            'stateRevision': 0,
+          };
+        }
+        if (call.method == 'readAllAudioState') {
+          return <String, Object?>{
+            'schemaVersion': 1,
+            'ownerToken': ownerToken,
+            'engineGeneration': 1,
+            'contextGeneration': 0,
+            'stateRevision': 0,
+            'activeSide': null,
+            'activeLeaseGeneration': null,
+            'inputPhase': 'clear',
+            'outputPhase': 'clear',
+            'inputReleased': true,
+            'outputReleased': true,
+            'sessionReleased': true,
+            'nativeOperationInFlight': false,
+            'requiresExplicitRetry': false,
+            'allClear': true,
+          };
+        }
+        return null;
+      });
+      addTearDown(
+        () => messenger.setMockMethodCallHandler(arbiterMethod, null),
+      );
+      final arbiter = NativeAudioArbiterChannel(channel: arbiterMethod);
+      await arbiter.readAllAudioState();
+      final user = ValueNotifier<String?>('A');
+      final phase = ValueNotifier(MotionIdentityPhase.verified);
+      final owner = PracticeAudioRootOwner(
+        userId: user,
+        phase: phase,
+        lease: PracticeAudioLease(port: FakePracticeAudioPort()),
+        captureArbiter: arbiter,
+        initialLifecycleState: AppLifecycleState.resumed,
+        allowDetachedRouteEventsForTest: true,
+        nativeFenceEnabled: false,
+      );
+      final observer = PracticeAudioRouteObserver(owner);
+      final route = MaterialPageRoute<void>(builder: (_) => const SizedBox());
+      owner.attachNavigator(observer);
+      observer.didPush(route, null);
+      await owner.lastFenceForTest;
+      final action = owner.captureActionFor(route)!;
       final source = AudioInputController(
         channel: MethodChannelAudioCaptureChannel(),
         requestMicrophonePermission: () async => PermissionStatus.granted,
       );
-      await source.start(sampleRate: 44100);
+      await source.start(sampleRate: 44100, captureAction: action);
       await source.dispose();
+      owner.dispose();
+      await owner.lastFenceForTest;
+      user.dispose();
+      phase.dispose();
       await tester.pump();
       expect(stopCalls, 1);
       expect(source.captureGateReady, isFalse);

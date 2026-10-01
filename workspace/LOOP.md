@@ -1,5 +1,30 @@
 # Ostinato — LOOP (iş kuyruğu)
 
+## 2026-09-30 QA sessiz video adaptörü sonrası
+
+Android debug ve iOS simülatör eklenti derlemeleri geçti; QA adaptörünün
+Dart yaşam döngüsü 9/9 odak ve 370/370 tam Flutter testinde temiz. iOS/macOS
+paketli MP4 audio-track API'si yanlış boş sonuç verebildiği için gerçek QA
+factory platformda native controller kurmadan kapanıyor. Üretim medya slotu
+boş ve practice audio edinimi kapalı. Sonraki kapı: doğrulanmış sessiz medya
+ve altyazı varlığı, iOS için bağımsız güvenilir ses-izi profili, Android ve
+iPhone'da video ile isteğe bağlı mikrofonun fiziksel oturum/kapanış denemesi;
+kurucu toplu ders kabulü en sonda. Bunlar olmadan oynatmayı ürüne açma.
+Makbuz `scratch/2026-09-30-ostinato-native-video-adapter/RESULT.md`.
+
+## 2026-09-30 sentetik YIN pilotu sonrası
+
+Hizalı iki eşzamanlı ses tek nota gibi gözlenebiliyor; 25/28 dondurulmuş
+sentetik pilot FALSIFIED. Kullanıcı metni sınırı açıkça söylüyor.
+Bağımsız referanslı gerçek tek tel/karma ses ve fiziksel telefon mikrofonu
+olmadan eşik retune'u veya ders başarısı iddiası yapma; eski tek koşumu
+yeniden çalıştırma. Gate E onaylı örnek ses ve Gate F gerçek cihaz/kurucu
+kabulü sırada. Makbuz `scratch/2026-09-30-ostinato-yin-stress/REPORT.md`.
+
+## 2026-09-29 Gate D sonrası
+
+Gate D boş lease native çiti, aktif kapanış sırası ve eski mikrofonun bağlam iddiası yerel kaynak/testte PASS (Flutter 127/127, Android 17/17, iOS 16/16; son kuyruk yarışı red/green). Yerel WIP commit/push edilmedi. Sırada eğitmen onaylı örnek ses ve kullanıcıya görünür oynatma Gate E; gerçek iPhone/Android ses-yaşam döngüsü, ardından kurucunun toplu fiziksel kabulü Gate F. Bunlar bitmeden practice lease edinimini açma veya nota doğruluğu ilan etme. Son SHA'da Actions ve mağaza kabulü ayrıca açık. Makbuz `scratch/2026-09-29-ostinato-gate-d/RESULT.md`.
+
 ## 2026-09-28 ortak ses hakemi sonraki kapı
 
 Gate A tipli Dart kanal/lease; Gate B iOS proses hakemi ve Gate C Android
