@@ -69,6 +69,9 @@ jobs:
         run: |
           (cd packages/ostinato_audio && dart pub get)
           (cd packages/ostinato_posture && dart pub get)
+          # dependency_pin_test compares both resolved Core refs; the pilot
+          # lockfile is generated and is absent from a fresh checkout.
+          (cd tools/dart_pilot && dart pub get)
 
       - name: flutter analyze
         run: flutter analyze
