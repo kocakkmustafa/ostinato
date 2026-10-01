@@ -6,15 +6,78 @@ import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
-  // OST-P0-002: ayrı bir plugin paketi AÇILMADI — iOS AppDelegate.swift ile
-  // aynı gerekçe (ses motion-core'un paylaşılan yapısına asla girmez).
+  private val owner = Any()
+  private val captureSlot = AudioCaptureHandlerSlot()
+  private var audioBinding: PracticeAudioArbiter.Binding? = null
+
   override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
-    super.configureFlutterEngine(flutterEngine)
-    val streamer = AudioCaptureStreamer(applicationContext)
-    MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.yulalab.ostinato/audio_capture")
-      .setMethodCallHandler(streamer)
-    EventChannel(
-        flutterEngine.dartExecutor.binaryMessenger, "com.yulalab.ostinato/audio_capture/events")
-      .setStreamHandler(streamer)
+    val processOwner = AudioCaptureRuntime.registerEngine(applicationContext, owner, flutterEngine)
+    audioBinding = processOwner
+    val input = AudioCaptureStreamer(applicationContext, owner,
+      AudioCaptureRuntime.coordinator(applicationContext), AudioCaptureRuntime.arbiter(), processOwner)
+    val binding = FlutterAudioCaptureBinding(input,
+      PracticeAudioArbiterChannel(AudioCaptureRuntime.arbiter(), processOwner))
+    captureSlot.replace(flutterEngine, binding) {
+      registerEngine(flutterEngine, binding)
+    }
+  }
+  private fun registerEngine(engine: FlutterEngine, binding: FlutterAudioCaptureBinding) {
+    super.configureFlutterEngine(engine)
+    binding.register(engine)
+  }
+  override fun onResume() {
+    super.onResume()
+    audioBinding?.let { AudioCaptureRuntime.foreground(it, true) }
+  }
+  override fun onPause() {
+    // Veto this Activity's prepared ID before giving up foreground ownership.
+    // The coordinator still checks the attempt owner if another Activity has
+    // already become current, so a late pause cannot close its capture.
+    captureSlot.closeCurrent()
+    audioBinding?.let { AudioCaptureRuntime.foreground(it, false) }
+    super.onPause()
+  }
+  override fun onDestroy() {
+    audioBinding?.let { AudioCaptureRuntime.foreground(it, false) }
+    captureSlot.retireCurrent()
+    super.onDestroy()
+  }
+  override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
+    captureSlot.retireIfEngine(flutterEngine)
+    audioBinding?.takeIf { it.engine === flutterEngine }?.let {
+      AudioCaptureRuntime.arbiter().closeAllGlobal(it)
+    }
+    super.cleanUpFlutterEngine(flutterEngine)
+  }
+}
+
+private class FlutterAudioCaptureBinding(
+  private val capture: AudioCaptureStreamer,
+  private val arbiterChannel: PracticeAudioArbiterChannel,
+) : AudioCaptureBinding {
+  private var methods: MethodChannel? = null
+  private var events: EventChannel? = null
+  private var retired = false
+
+  fun register(engine: FlutterEngine) {
+    val messenger = engine.dartExecutor.binaryMessenger
+    methods = MethodChannel(messenger, "com.yulalab.ostinato/audio_capture")
+      .apply { setMethodCallHandler(capture) }
+    events = EventChannel(messenger, "com.yulalab.ostinato/audio_capture/events")
+      .apply { setStreamHandler(capture) }
+    arbiterChannel.register(engine)
+  }
+
+  override fun closeBoundAttempt() { capture.closeBoundAttempt() }
+
+  override fun retire() {
+    if (retired) return
+    retired = true
+    arbiterChannel.retire()
+    capture.retire() // This fences the old sink and queues hardware close now.
+    methods?.setMethodCallHandler(null)
+    events?.setStreamHandler(null)
+    methods = null
+    events = null
   }
 }

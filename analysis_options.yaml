@@ -16,6 +16,9 @@ analyzer:
     # not part of the app. Without this exclude, `flutter analyze` descends
     # into it and reports its unrelated MIDI-plugin errors as app issues.
     - tools/midi_spike/**
+    - build/**
+    - android/**
+    - ios/**
 
 linter:
   # The lint rules applied to this project can be customized in the

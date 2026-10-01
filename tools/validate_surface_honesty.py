@@ -95,6 +95,12 @@ CAPABILITY_RULES = [
             # TASLAK.md`si) "mikrofon izni yok"/"mikrofon yok" gibi TAM
             # dürüst cümleler bu asimetri yüzünden ihlal SANILIYORDU.
             r"\bmikrofon\b[^.]{0,40}\byok\b",
+            r"\bmikrofon\b[^.]{0,40}\b(?:yoktur|kullanılmaz|kullanmaz|bağlı değil)\b",
+            # Gerekçeli yokluk ve varsayımsal koşul da yetenek iddiası değil.
+            # Koşul, ters-yön yokluk beyanına eklenmez: mikrofon gelince
+            # "olsa bile" cümlesi yanlış hâle gelmez.
+            r"\bmikrofon girişi olmadığ(?:ından|ı için)\b",
+            r"\bmikrofon olsa bile\b",
         ],
         # İzin beyan edildiği gün kural kendini kaldırır.
         "ios_key": "NSMicrophoneUsageDescription",
@@ -305,7 +311,11 @@ RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
 #: sinyal değil gürültü). Mekanizma: bir SONRAKİ yeni yazıcı (bu kümede
 #: OLMAYAN bir dosya) çıktığında kapı yeniden öter — tripwire yalnız BU
 #: yazıcı için tüketildi, genel olarak değil.
-RETENTION_WRITERS_RECONCILED = {"session_store.dart"}
+# 2026-09-26: guitar_journey_progress.dart writes only course/lesson IDs,
+# content version, practice count, self-report timestamps and evidence type.
+# It writes no raw sound, angle, landmark, measurement array or video. Its
+# account-scoped path is removed by the existing deleteAccountData flow.
+RETENTION_WRITERS_RECONCILED = {"session_store.dart", "guitar_journey_progress.dart"}
 
 # ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────
 #
@@ -339,24 +349,28 @@ RETENTION_WRITERS_RECONCILED = {"session_store.dart"}
 RETENTION_FACTS = {
     "angle": {"stored": False, "evidence":
               "lib/ yazıcı taraması: muaf olmayan writeAsString/Bytes/"
-              "SharedPreferences/Hive/sqflite ÜÇ (2 muaf + 1 muaf-değil: "
-              "session_store.dart) — üçü de okundu, hiçbiri açı YAZMIYOR "
+              "SharedPreferences/Hive/sqflite DÖRT (2 muaf + 2 muaf-değil: "
+              "session_store.dart, guitar_journey_progress.dart) — dördü de "
+              "okundu, hiçbiri açı YAZMIYOR "
               "(D14/O-154 yeniden-ölçüm)"},
     "landmark": {"stored": False, "evidence":
                  "aynı tarama; ayrıca canlı zincir yalnız trunkTiltDeg "
                  "skalerini taşıyor (camera_posture_adapter), landmark "
                  "dizisi ekrandan öteye geçmiyor; `session_store.dart` da "
-                 "landmark YAZMIYOR (D14/O-154 yeniden-ölçüm)"},
+                 "landmark YAZMIYOR; guitar_journey_progress.dart da yalnız "
+                 "ders ilerleme meta verisini yazar (2026-09-26 yeniden-ölçüm)"},
     "measurement": {"stored": False, "evidence":
                     "aynı tarama; kare-kare ölçüm seans içinde bellekte, "
                     "kalıcı yazıcı yok — `session_store.dart` yalnız "
                     "ÖZET SAYILARI (süre/örnek/dışarı) yazar, ham ölçüm "
-                    "DEĞİL (D14/O-154 yeniden-ölçüm)"},
+                    "DEĞİL; guitar_journey_progress.dart yalnız ders sürümü, "
+                    "durumu ve zamanını yazar (2026-09-26 yeniden-ölçüm)"},
     "video": {"stored": False, "evidence":
               "aynı tarama + kamera karesi hiçbir dosyaya yazılmıyor; "
               "ağ çağrısı da yok (Kural J: yükleyen yol SIFIR); "
               "`session_store.dart` metin alanları taşır, video/kare "
-              "YAZMAZ (D14/O-154 yeniden-ölçüm)"},
+              "YAZMAZ; guitar_journey_progress.dart da video yazmaz "
+              "(2026-09-26 yeniden-ölçüm)"},
     "your footage": {"stored": False, "evidence":
                      "video ile aynı ölçüm, aynı yeniden-ölçüm"},
     "history": {"stored": False, "evidence":
@@ -364,7 +378,9 @@ RETENTION_FACTS = {
                 "(ham açı-örnekleri) BİLEREK taşınmaz — D14'ün kapsam "
                 "kararının kendisi, geçmiş ekranı YOK değil artık VAR "
                 "(review_screen 'Last session' kartı) ama o kart yalnız "
-                "ÖZETİ gösterir, ham diziyi DEĞİL (D14/O-154 yeniden-ölçüm)"},
+                "ÖZETİ gösterir, ham diziyi DEĞİL; "
+                "guitar_journey_progress.dart da yalnız ders eylemi ve zamanını "
+                "saklar (2026-09-26 yeniden-ölçüm)"},
     "session data": {"stored": True, "evidence":
                      "`session_store.dart`: `sessions.jsonl`e her oturum "
                      "sonunda bir JSONL satırı eklenir (disciplineId/"
@@ -447,6 +463,15 @@ UPLOADER_TRACES = re.compile(
 #: Yeni bir tanesi eklendiğinde kapı öter — kayıt bir MUAFİYET değil, bir
 #: KARAR NOKTASIDIR.
 NETWORK_DEPS_RECORDED = {
+    # SDK integration smoke tooling (dev-only imports under integration_test/).
+    # Conservative: record driver/VM HTTP and subprocess capabilities instead
+    # of asserting these test packages can never open a network connection.
+    "integration_test": "Flutter SDK dev harness; test result/driver transport, not imported by production lib; smoke uses prepare/stop without PCM capture",
+    "flutter_driver": "SDK dev-only VM service/WebDriver test transport; no production lib import",
+    "fuchsia_remote_debug_protocol": "SDK dev-only remote VM debugging/port-forwarding transport; no production lib import",
+    "webdriver": "dev-only WebDriver HTTP client below Flutter driver; no production lib import",
+    "sync_http": "dev-only synchronous HTTP transport below WebDriver; no production lib import",
+    "process": "dev-only test harness subprocess execution; commands can initiate network access, so conservatively recorded; no production lib import",
     # O-104 (JabLab J-217'nin bulgusundan, kendi ağacımda YENİDEN ölçüldü):
     # kayıt eskiden yalnız "yazı tipi indirir (GET)" diyordu — doğru ama
     # EKSİK. Ölçülen tam hâl: ÜRETİMDE ağa çıkıyor (`ostinato_theme.dart` 3
@@ -470,6 +495,31 @@ NETWORK_DEPS_RECORDED = {
             "`dependency: transitive`), lib/'de DOĞRUDAN import YOK "
             "(ölçüldü, `package:http` sıfır çağrı). google_fonts'un GET-only "
             "gerekçesi bunu da kapsar; kendi başına ek yükleme yolu değil.",
+    # Ortak hesap e-posta/profil/üyelik verisini taşır. Kamera karesi veya
+    # ölçüm dizisi bu pakete verilmez; sevk edilen yokluk iddiaları videoyadır.
+    "motion_account": "Core ortak kimlik; Auth/profil/üyelik ağı var, kamera verisi göndermez",
+    "motion_entitlements": "Mağaza satın alma kanıtını Core sunucu doğrulamasına taşır; kamera verisi göndermez",
+    "in_app_purchase": "StoreKit/Google Play satın alma ve geri yükleme köprüsü; mağaza ağı kullanabilir",
+    "in_app_purchase_android": "Google Play Billing platform köprüsü; mağaza ağı kullanabilir",
+    "in_app_purchase_storekit": "Apple StoreKit platform köprüsü; mağaza ağı kullanabilir",
+    "supabase": "Core altındaki API/Auth istemcisi; hesap verisi gider, video gitmez",
+    "supabase_common": "Supabase ortak HTTP/WS altyapısı; hesap trafiği",
+    "supabase_flutter": "Supabase Auth oturumu ve deep-link köprüsü; hesap trafiği",
+    "functions_client": "hesap silme Edge Function HTTP çağrısı",
+    "gotrue": "Auth e-posta/şifre ve oturum istekleri",
+    "postgrest": "profil ve uygulama-özel üyelik sorguları",
+    "realtime_client": "Supabase transitif WebSocket istemcisi; burada Realtime çağrısı yok",
+    "storage_client": "Supabase transitif depolama istemcisi; burada Storage çağrısı yok",
+    "web_socket": "Supabase Realtime transitif ağ taşıyıcısı",
+    "web_socket_channel": "WebSocket transitif ağ taşıyıcısı",
+    "url_launcher": "dış URL açma yeteneği, tarayıcı ağı tetikleyebilir",
+    "url_launcher_android": "url_launcher Android platform katmanı",
+    "url_launcher_ios": "url_launcher iOS platform katmanı",
+    "url_launcher_linux": "url_launcher Linux platform katmanı",
+    "url_launcher_macos": "url_launcher macOS platform katmanı",
+    "url_launcher_platform_interface": "url_launcher platform sözleşmesi",
+    "url_launcher_web": "url_launcher web platform katmanı",
+    "url_launcher_windows": "url_launcher Windows platform katmanı",
 }
 #: Ağa çıkabilen bağımlılık ailelerinin izleri (pubspec adlarında aranır).
 #: ⚠️ Lissom'un O-080 reçetesini port ederken bulduğu delik (koordinatör
@@ -515,6 +565,27 @@ NETWORK_DEP_HINTS = re.compile(
 #
 # Kapsam: yalnız BUGÜN `pubspec.lock`ta olan paketler.
 NETWORK_DEPS_KNOWN_SAFE = {
+    "in_app_purchase_platform_interface": "satın alma eklentisi çağrı sözleşmesi; kendi ağ taşıyıcısı yok",
+    "app_links": "gelen URI'yi işletim sisteminden alır, ağ isteği yapmaz",
+    "app_links_linux": "app_links Linux platform katmanı",
+    "app_links_platform_interface": "app_links platform sözleşmesi",
+    "app_links_web": "gelen web URI'sini çözer; kendi ağ isteği yok",
+    "convert": "ikili/metin kodlama işlemleri; soket açmaz",
+    "dart_jsonwebtoken": "yerel JWT matematiği; ağ taşıyıcısı değil",
+    "file": "yerel dosya API soyutlaması; ağ istemcisi değil",
+    "gtk": "Linux pencere/GTK köprüsü; ağ istemcisi değil",
+    "json_annotation": "JSON annotation meta-verisi; I/O yok",
+    "mime": "medya türü ayrıştırma, I/O yok",
+    "passkeys_platform_interface": "passkey platform sözleşmesi; ağ taşıyıcısı değil",
+    "pointycastle": "yerel kriptografi; ağ istemcisi değil",
+    "shared_preferences": "cihazdaki yerel anahtar/değer deposu; ağ değil",
+    "shared_preferences_android": "shared_preferences Android platform katmanı",
+    "shared_preferences_foundation": "shared_preferences Apple platform katmanı",
+    "shared_preferences_linux": "shared_preferences Linux platform katmanı",
+    "shared_preferences_platform_interface": "shared_preferences platform sözleşmesi",
+    "shared_preferences_web": "shared_preferences tarayıcı yerel deposu",
+    "shared_preferences_windows": "shared_preferences Windows platform katmanı",
+    "yet_another_json_isolate": "JSON ayrıştırma isolate köprüsü; kendi ağ isteği yok",
     "args": "komut satırı argüman ayrıştırma, I/O yok",
     "async": "Future/Stream yardımcıları, kendi başına I/O yapmaz",
     "boolean_selector": "test etiketi ayrıştırma, I/O yok",
@@ -527,10 +598,12 @@ NETWORK_DEPS_KNOWN_SAFE = {
     "fake_async": "test için zaman simülasyonu, I/O yok",
     "ffi": "native bellek/işlev arayüzü (C interop), ağ değil",
     "flutter": "Flutter SDK",
+    "flutter_localizations": "Flutter SDK yerelleştirme delegeleri, kendi başına ağ istemez",
     "flutter_lints": "yalnız analiz kuralları (dev_dependency), sevk edilen kodda ÇALIŞMAZ",
     "flutter_test": "Flutter SDK",
     "flutter_web_plugins": "Flutter SDK",
     "hooks": "derleme-zamanı hook sözleşmesi, I/O yok",
+    "intl": "yerel sayı/tarih/dil biçimlendirme verisi, kendi başına ağ istemez",
     "http_parser": "HTTP MESAJ AYRIŞTIRMA (başlık/medya-tipi string işleme), SOKET AÇMAZ — adı `http` öneki taşıdığı için ret-listesi desenine benziyor ama ret-listesi deseni TAM eşleşme aradığı için onu HİÇ görmüyordu: bölmenin yakaladığı ilk gerçek vaka",
     "jni": "Java native interop köprüsü (poz modeli), ağ değil",
     "jni_flutter": "jni paketinin Flutter eklentisi",
@@ -544,6 +617,7 @@ NETWORK_DEPS_KNOWN_SAFE = {
     "material_color_utilities": "Material renk algoritmaları, saf hesaplama",
     "meta": "yalnız annotation, çalışma zamanı kodu yok",
     "motion_camera": "aile paketi, pinli — motion_core ile aynı gerekçe",
+    "motion_content": "pinli aile paketi; Flutter bundle baytlarını ayrıştırır ve yerel SHA denetler, ağ API'si yok",
     "motion_core": "aile paketi, pinli — kendi başına A3 kapsamı DIŞINDA ",
     "objective_c": "Objective-C native interop köprüsü, ağ değil",
     "ostinato_audio": "BU DEPONUN kendi paketi (path bağımlılığı), Flutter'a BİLE bağımlı değil — saf Dart DSP (pitch/onset/chord), disk/ağ I/O'su hiç yok, kaynağı burada",
@@ -587,17 +661,24 @@ def lock_packages(lock_text: str):
     return re.findall(r"^  ([a-z0-9_]+):$", lock_text, re.MULTILINE)
 
 
+def active_partition_counts(packages):
+    """Count classified packages actually present in this lock, not old records."""
+    live = set(packages)
+    return (len(live & NETWORK_DEPS_RECORDED.keys()),
+            len(live & NETWORK_DEPS_KNOWN_SAFE.keys()))
 
-# ── F: kullanıcı yüzeyi TEK DİLDİR (bugün: İngilizce) ─────────────────────
+
+
+# ── F: her kullanıcı metni doğru locale yolunda olmalı ────────────────────
 # Bu gece İKİ kez sızdı ve ikisi de BAŞKA bir kuralın yan etkisiyle ya da
 # elle yakalandı, yani şans eseri:
 #   · `promotionPath.unblockedBy` — mikrofon şerhini Türkçe bırakmıştım
 #     (kural B "mikrofon" kelimesini gördüğü için tesadüfen çıktı)
 #   · `gen_out_of_scope.py` çıktısı — taksonominin `names[0]`ı Türkçeydi
 #     (gözle görüldü, hiçbir kapı bakmıyordu)
-# Kütüphane baştan sona İngilizce (`library.json` `language` alanı da öyle
-# diyor). Türkçe bir cümle İngilizce konuşan kullanıcıya GİDER ve hiçbir
-# testi kırmaz — sessiz, ama kullanıcı için en görünür kusur sınıfı.
+# Kaynak kütüphane İngilizce (`library.json` `language` alanı da öyle diyor).
+# Korunmayan Türkçe cümle İngilizce konuşan kullanıcıya GİDER. TR yardımcı
+# sözlük ise yalnız TR locale + değişmemiş kaynak metin koşuluyla gösterilir.
 #
 # ⚠️ Bu kural DİL DEĞİŞTİĞİ gün güncellenmeli: TR yerelleştirmesi geldiğinde
 # yüzey artık tek dilli olmayacak. O yüzden hangi dil olduğu `library.json`ın
@@ -648,8 +729,23 @@ TURKISH_WORDS = re.compile(
 # yetenek VARKEN yokluk-iddiası yasak.
 ABSENCE_ASSERTIONS = re.compile(
     r"no (?:live )?microphone|there is no microphone input|"
-    r"not wired in this build|no audio permission|hears nothing|"
-    r"never listen(?:s)? to your", re.IGNORECASE)
+    r"microphone[^.]{0,40}not wired in this build|no audio permission|hears nothing|"
+    r"never listen(?:s)? to your|"
+    r"mikrofon[^.]{0,40}(?:yoktur|kullanılmaz|kullanmaz|bağlı değil)|"
+    r"mikrofon girişi olmadığ(?:ından|ı için)", re.IGNORECASE)
+# A mic permission declares an app capability, not capture on every route.
+# The legacy posture routes do not instantiate AudioInputController. Their
+# explicitly scoped disclosure remains true beside the opt-in guitar observer.
+SCOPED_AUDIO_ABSENCE = re.compile(
+    r"in these (?:posture|voice posture) lessons|"
+    r"these posture lessons|bu (?:duruş|ses|piyano) ders(?:leri|lerinde)", re.IGNORECASE)
+def global_audio_absence(sentence):
+    if not ABSENCE_ASSERTIONS.search(sentence):
+        return False
+    if re.search(r"no (?:live )?microphone[^.]{0,60}in this build|(?:bu sürümde|bu sürüm)[^.]{0,30}mikrofon", sentence, re.IGNORECASE):
+        return True
+    return not SCOPED_AUDIO_ABSENCE.search(sentence)
+
 RETENTION_ABSENCE_ASSERTIONS = re.compile(
     r"nothing is stored|none to delete|no history here", re.IGNORECASE)
 
@@ -953,6 +1049,42 @@ def dart_surface_strings():
                 last_end = m.end()
             if pending:
                 yield str(path), src.count("\n", 0, start) + 1, pending
+
+
+def guarded_turkish_catalog_literals(dart_raw, source_text=None):
+    """Only TR map literals with an intact locale AND source-drift guard.
+
+    This is a rule-F language classification, not an honesty exemption: the
+    same literals still pass promise, capability, retention and other rules.
+    A changed render guard makes this return empty, so the Turkish strings
+    become visible as language violations again.
+    """
+    path = Path("lib/app/catalog_copy_tr.dart")
+    if not path.exists():
+        return set()
+    src = strip_dart_comments(source_text if source_text is not None
+                              else path.read_text(encoding="utf-8"))
+    required = (
+        r"if\s*\(\s*Localizations\.localeOf\(context\)\.languageCode\s*"
+        r"!=\s*'tr'\s*\)\s*return source\s*;",
+        r"return\s+hasCurrentTurkishCatalogCopy\(key,\s*source\)\s*\?\s*"
+        r"_turkishCopy\[key\]!\s*:\s*source\s*;",
+        r"_sourceFingerprints\[key\]\s*==\s*_fingerprint\(source\)",
+    )
+    if not all(re.search(pattern, src) for pattern in required):
+        return set()
+    marker = re.search(
+        r"const\s+Map<String,\s*String>\s+_turkishCopy\s*=\s*"
+        r"<String,\s*String>\s*\{", src)
+    if marker is None:
+        return set()
+    end = src.find("\n};", marker.end())
+    if end < 0:
+        return set()
+    start_line = src.count("\n", 0, marker.end()) + 1
+    end_line = src.count("\n", 0, end) + 2
+    return {f"{path}:{line}" for file, line, _ in dart_raw
+            if file == str(path) and start_line < line < end_line}
 
 
 def json_surface_strings(files=None):
@@ -1274,6 +1406,45 @@ def selftest() -> int:
         if not re.search(pattern, sample, re.IGNORECASE):
             dead.append(f"{name}: desen bilinen örneği YAKALAMIYOR — "
                         f"«{sample}» · desen {pattern!r}")
+    mic = CAPABILITY_RULES[0]
+    for sample in ("bu sürümde mikrofon girişi olmadığından odanızda çalışmaz",
+                   "bu sürümde mikrofon girişi olmadığı için canlı çalışmaz",
+                   "Mikrofon olsa bile bu sayılardan puan üretilemez"):
+        if not any(re.search(p, sample, re.IGNORECASE)
+                   for p in mic["absence"]):
+            dead.append(f"mikrofon yokluk/koşul kalıbı kaçtı: «{sample}»")
+    if any(re.search(p, "Mikrofon çalmanızı dinler", re.IGNORECASE)
+           for p in mic["absence"]):
+        dead.append("canlı mikrofon iddiası yokluk/koşul sanıldı")
+    if not ABSENCE_ASSERTIONS.search("mikrofon girişi olmadığı için"):
+        dead.append("mikrofon gelince bayatlayacak TR yokluk beyanı kaçtı")
+    for text in ("There is no microphone input in these posture lessons.",
+                 "Bu duruş dersleri mikrofon kullanmaz.",
+                 "Sharing a skeleton-render report is not wired in this build."):
+        if global_audio_absence(text):
+            failures.append(f"Scoped or unrelated absence was rejected: {text}")
+    for text in ("There is no microphone input in this build.",
+                 "Bu sürüm mikrofon kullanmaz."):
+        if not global_audio_absence(text):
+            failures.append(f"Global absence escaped: {text}")
+    if ABSENCE_ASSERTIONS.search("Mikrofon olsa bile puan üretilemez"):
+        dead.append("mikrofon varsayımı bayatlayacak yokluk beyanı sanıldı")
+    raw = list(dart_surface_strings())
+    guarded_tr = guarded_turkish_catalog_literals(raw)
+    if not guarded_tr:
+        dead.append("kaynak/locale korumalı TR sözlük literalini tanımadı")
+    catalog_source = Path("lib/app/catalog_copy_tr.dart").read_text(
+        encoding="utf-8")
+    broken_guard = catalog_source.replace("languageCode != 'tr'",
+                                          "languageCode == 'tr'", 1)
+    if guarded_turkish_catalog_literals(raw, broken_guard):
+        dead.append("TR sözlük locale koruması bozulunca muafiyet sürüyor")
+    broken_source_guard = catalog_source.replace(
+        "_sourceFingerprints[key] == _fingerprint(source)", "true", 1)
+    if guarded_turkish_catalog_literals(raw, broken_source_guard):
+        dead.append("TR sözlük kaynak-eşleşme kapısı bozulunca muafiyet sürüyor")
+    if "lib/app/catalog_copy_tr.dart:6" in guarded_tr:
+        dead.append("TR sözlük sınırı render kodunu da muaf saydı")
     # Yol türetimleri de sahte-sıfır verebilir (bu gece verdi).
     if not shipped_json_assets():
         dead.append("shipped_json_assets() BOŞ — pubspec türetimi ölmüş")
@@ -1287,19 +1458,18 @@ def selftest() -> int:
     # okuyordu, transitif bağımlılıklar (yalnız pubspec.lock'ta görünenler)
     # kör noktaydı. Kanıt olarak `http`/`google_fonts` kullanılıyordu — CANLI
     # kanıt DEĞİL artık: D1 (2026-08-16, O-149) ikisini de `pubspec.lock`tan
-    # düşürdü (fontlar paketlendi). ⚠️ ÖLÇÜLDÜ: gerçek dosyaya bağlı bu kontrol
-    # D1 SONRASI kendi kendine öttü — O-116 ilkesinin ihlaliydi (dedektör
-    # BUGÜNÜN durumuna bağımlıydı, kendi ÖZELLİĞİNE değil). SENTETİK metne
-    # çevrildi: `NETWORK_DEP_HINTS`in kendisini sınar, bugünkü ağaçtan bağımsız.
+    # düşürdü (fontlar paketlendi). Desenin kendisi SENTETİK metinle sınanır;
+    # bugünkü lock'ta ipucu varsa gerekçeli kaydı ayrıca doğrulanır.
     _synthetic_lock = "  http:\n    dependency: transitive\n  meta:\n    dependency: transitive\n"
     if not NETWORK_DEP_HINTS.search(_synthetic_lock):
         dead.append("NETWORK_DEP_HINTS sentetik lock metninde 'http'i "
                     "yakalamıyor — desenin kendisi bozuk")
     lock_text = Path("pubspec.lock").read_text(encoding="utf-8")
-    if NETWORK_DEP_HINTS.search(lock_text):
-        dead.append("BUGÜNKÜ pubspec.lock bir ağ-bağımlılığı ipucuyla "
-                    "eşleşiyor — D1 sonrası beklenen SIFIR isabetti "
-                    "(olumsuz ikiz başarısız, adıyla: hangi paket?)")
+    hinted = {match.group(1) for match in NETWORK_DEP_HINTS.finditer(lock_text)}
+    unrecorded_hints = hinted - NETWORK_DEPS_RECORDED.keys()
+    if unrecorded_hints:
+        dead.append("BUGÜNKÜ pubspec.lock'taki ağ ipuçları kayıtsız: "
+                    + ", ".join(sorted(unrecorded_hints)))
     if "http" not in NETWORK_DEPS_RECORDED:
         dead.append("NETWORK_DEPS_RECORDED'da 'http' yok — transitif kayıt "
                     "geri alınmış olabilir")
@@ -1319,6 +1489,9 @@ def selftest() -> int:
           or "ably_flutter" in NETWORK_DEPS_KNOWN_SAFE):
         dead.append("`ably_flutter` bir kayda girmiş — öz-test örneği artık "
                     "'sınıflandırılmamış' vakasını temsil etmiyor")
+    if active_partition_counts(["http", "meta"]) != (1, 1):
+        dead.append("BÖLME çıktı sayımı lock dışındaki eski kayıtları "
+                    "sayıyor; sentetik iki paketin birer sınıfta olması gerekir")
     # ── O-102: iddia↔ölçüm bağının kendi yolları ─────────────────────────
     # ① Özne çıkarımı çalışıyor mu — DOĞRUDAN ve DOLAYLI biçimde.
     if "angle" not in retention_subjects(
@@ -1434,7 +1607,7 @@ def main() -> int:
             # VAR: yokluğunu söyleyen her cümle BUGÜN YANLIŞ.
             for where, text in surfaces:
                 for sentence in sentences(text):
-                    if ABSENCE_ASSERTIONS.search(sentence):
+                    if global_audio_absence(sentence):
                         violations.append(
                             f"[ters yön] {where}: '{rule['name']}' artık BEYAN "
                             f"EDİLMİŞ ({rule['ios_key']}/"
@@ -1698,6 +1871,22 @@ def main() -> int:
         Path(LIBRARY_JSON).read_text(encoding="utf-8")).get("language", "en")
     checked_f = 0
     if declared_lang.startswith("en"):
+        # The original library is English with a guarded Turkish overlay.
+        # guitar_journey.v1.json instead has explicit en/tr objects. Accept
+        # only their named `.tr` branches after the separate structural gate
+        # has proven that every user-facing field has both languages.
+        from validate_guitar_journey import check as check_guitar_journey
+        journey_path = Path("assets/content/guitar_journey.v1.json")
+        journey_errors = check_guitar_journey(json.loads(journey_path.read_text(encoding="utf-8")))
+        if journey_errors:
+            violations.append(f"[dil] gitar yolu şeması geçersiz: {journey_errors[:3]}")
+        journey_localized = not journey_errors
+        guarded_tr = guarded_turkish_catalog_literals(dart_raw)
+        localized_dart_files = {
+            f for f, _, _ in dart_raw
+            if f == 'lib/app/app_locale.dart'
+            or 'app_locale.dart' in Path(f).read_text(encoding='utf-8')
+        }
         # Tanı bağlamında duran literalleri ATLA (dosya-satır ile eşlenir).
         diagnostic = set()
         for f, ln, t in dart_raw:
@@ -1714,6 +1903,25 @@ def main() -> int:
                 diagnostic.add(f"{f}:{ln}")
         for where, text in surfaces:
             if " " not in text or where in diagnostic:
+                continue
+            # A separately named store locale is not governed by the English
+            # content asset's language field. Keep every other honesty check
+            # over this file; only the English-language mismatch rule skips it.
+            if where.startswith('docs/store/listing.tr-TR.json:'):
+                continue
+            if (journey_localized and
+                where.startswith('assets/content/guitar_journey.v1.json.') and
+                where.endswith('.tr')):
+                continue
+            # Bu dosyanın yalnız _turkishCopy MAP DEĞERLERİ TR yolunda
+            # gösterilir. Locale veya kaynak-fingerprint kapısı değişirse
+            # muafiyet otomatik düşer; diğer dürüstlük kuralları sürer.
+            if where in guarded_tr:
+                continue
+            # These Dart sources explicitly choose EN/TR at render time via
+            # app_locale.dart; library.json's English declaration applies to
+            # content JSON and unlocalized Dart sources, not TR branches.
+            if where.split(':', 1)[0] in localized_dart_files:
                 continue
             checked_f += 1
             if set(text) & TURKISH_CHARS or TURKISH_WORDS.search(text):
@@ -1834,9 +2042,10 @@ def main() -> int:
           f"çifti ÖLÇÜME BAĞLANDI · {len(RETENTION_FACTS)} özne kaydı (her "
           f"biri ölçüm ADRESİYLE) · özne çıkarılamayan hüküm {unresolved} "
           f"(sessizce atlanmıyor, SAYILIYOR)")
+    recorded_count, safe_count = active_partition_counts(lock_pkgs)
     print(f"   ⑤ bağımlılık bölmesi (Lissom 1abd4a0'ten adapte): "
-          f"{len(lock_pkgs)} paket = {len(NETWORK_DEPS_RECORDED)} kayıtlı "
-          f"(ağa çıkabilir) ⊎ {len(NETWORK_DEPS_KNOWN_SAFE)} güvenli "
+          f"{len(lock_pkgs)} paket = {recorded_count} kayıtlı "
+          f"(ağa çıkabilir) ⊎ {safe_count} güvenli "
           f"(çıkamaz) · üçüncü hâl 0 · çelişki 0")
     print("   platform/mağaza kapsamı (O-099/O-100 — alan-adı beyaz listesi "
           "YOK, prosa biçiminden türer):")

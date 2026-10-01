@@ -1,5 +1,145 @@
 # Ostinato — İlerleme Kaydı
 
+## 2026-10-01 — ilk kurs kaynak pini ve izole Android V4c
+
+Canlı uygulamada 60 derslik kurs, kaynak dilimi ve 420 sahnelik projeksiyon
+SHA'ları app-owned Dart pinine bağlandı; QA kaynak SHA'sı ortak v2k katalog
+SHA'sından ayrı tutuldu. Kaynak ve medya slotu odak testleri **10/10**,
+analiz temiz; bağımsız kaynak incelemesi dar PASS. Gerçek video veya model
+yüklenmedi, üretim medya slotu boş.
+
+Canlı uygulamaya aktarılmamış izole Android V4c adayında test makbuzu ve
+sahte native ACK sözleşmesi onarıldı; ilgili Dart **29/29**, aynı ürün
+kaynaklı V4b JVM **23/23** odak test geçti. Cached-engine quiescent A→B
+Dart binding yenilemesi ve gerçek cihaz kabulü açık; video gate false.
+Kanıt: `scratch/2026-10-01-ostinato-android-cached-engine-rebind-v4c-harness-repair/REPORT.md`.
+
+
+## 2026-09-30 — yalnız QA sessiz video adaptörü; native cihaz kabulü açık
+
+`video_player` 2.11.1 ile ayrı QA asset adaptörü eklendi. Android'de
+initialize öncesi/sonrası mute ve ExoPlayer audio-track yokluğu doğrulanmadan
+play açılmıyor; belirsiz kapanış aynı Flutter isolate'ındaki sonraki QA
+oyuncusunu karantinaya alıyor. AVFoundation `getAudioTracks()` sıradan MP4
+ses izini görmediği için iOS/macOS factory controller oluşturmadan reddediyor.
+Üretim `LessonMediaSlot.empty`, `allowAcquisition=false` ve Gate D hakemi
+değişmedi. Odak test **9/9**, tam Flutter **370/370**, analiz temiz;
+Android debug APK ve iOS simülatör Runner.app derlendi. Bu derlemeler gerçek
+cihazda mikrofon/video oturumu uyumunu, medya kabulünü veya mağazayı
+kanıtlamıyor. Makbuz: `scratch/2026-09-30-ostinato-native-video-adapter/RESULT.md`.
+
+## 2026-09-30 — sentetik tek-nota yanlışlaması ve dürüst kullanıcı metni
+
+Önceden dondurulmuş 14 sinyal × iki örnekleme hızı pilotu tek koşumda
+**25/28 FALSIFIED**: eşzamanlı A3+A4 iki hızda da tek A3 gözlemine
+dönüştü (iki yanlış pozitif); 48 kHz 10 dB gürültülü A3 25 cent bütçesini
+29,68 centle aştı. Temiz zorunlu 6/6 doğru; tek sesli yanlış nota/oktav
+yok. Bu gerçek gitar veya telefon kabulü değildir; eşik ayarı, tekrar,
+model fit yapılmadı. Kaynak/config SHA ve sonuç `scratch/2026-09-30-ostinato-yin-stress/REPORT.md`.
+Gözlem ekranına karma sesin makul ama yanıltıcı nota gösterebileceği
+TR/EN uyarısı eklendi; hedefli Flutter ekran testi **26/26**, analiz ve
+diff kontrolü temiz. Mevcut Gate D/medya WIP korunuyor; commit/push,
+gerçek cihaz/bağımsız nota kabulü açık.
+
+## 2026-09-29 — Gate D yerel kaynak/test; fiziksel kabul açık
+
+Boş görünen Dart lease'de bile hesap, rota veya arka plan değişimi aynı native proses hakemine çit gönderiyor ve taze tüm-ses kapanışını okuyor. Aktif sesin kapanışında yeni çit eski permit ile yarışmıyor. Eski mikrofonun izin bekleyen/gecikmiş açılışı, dokunuşta yakalanan üç alanlı native bağlam iddiası ve iOS/Android donanım-öncesi denetimiyle sınırlandı. Bağımsız incelemenin bulduğu son kuyruk yarışı eski davranışta kırmızı, düzeltmeyle yeşil test verdi. Flutter **127/127**, Android hakem JVM **17/17**, iOS simülatör **16/16**, hedefli analiz ve diff denetimi temiz. Bu **yerel WIP**; HEAD `ba0f29ce`, commit/push/yararlı son-baş CI, gerçek iPhone/Android mikrofon, onaylı örnek ses ve kullanıcı fiziksel kabulü yok. Üretim practice lease edinimi kapalı. `scratch/2026-09-29-ostinato-gate-d/RESULT.md`.
+
+## 2026-09-28 — ortak ses hakemi Gate B/C yerel native doğrulama
+
+Gate A'nın tipli Dart sözleşmesi üstüne iOS ve Android proses hakemleri,
+mevcut mikrofon kaydıyla ortak giriş/çıkış sahipliği ve eski engine/Activity
+çitleri eklendi. Bağımsız salt-okunur inceleme iOS'ta EventChannel iptali
+sonrası `retryStop` yetkisinin kaybını ve yeni cihaz rotasının ayrılmış
+izni geçersizleştirmemesini; Android'de geç ama temiz kapanışın explicit
+recovery'de engelli kalmasını ve `stale`+`allClear` makbuz çelişkisini buldu.
+Bu dört bulgu dar regresyonla düzeltildi. Son kaynakta iOS simülatörü
+**15/15** XCTests, Android JVM **14/14** yeni hakem + **21/21** eski
+kayıt testi ve `assembleDebug` geçti. APK yalnız debug derlemedir; SHA
+`deb1da6b13cdc52430f46ffc579510a85d1ff948039cdba56367c916cac46ee9`.
+Makbuz: `scratch/2026-09-28-ostinato-native-arbiter-build/RESULT.md`.
+Üretim `_NoNativeAudioArbiter` ve `allowAcquisition=false` kalır.
+Gate D root'un boş lease için native bağlam çiti, Gate E onaylı örnek ses,
+Gate F fiziksel cihaz ve kurucu kabulü açıktır. Tam kurs nota/form modeli
+ve onaylı gösterim medyası **0**; bu native testler beceri doğruluğu değildir.
+
+## 2026-09-28 — ortak ses hakemi Gate A, Dart sözleşmesi ve sahte durum
+
+İsteğe bağlı mikrofonla gelecekteki örnek ses çalmasının ortak native
+sahipliğini kuracak `practice_audio_v1` için tipli Dart wire/snapshot/permit
+sözleşmesi eklendi. 16 bayt rastgele lease kimliği, owner/engine/context ve
+revizyon denetimi, güvenli dosya ID allowlist'i, input/output ayrımı,
+sticky kapanış ve yalnız açık kullanıcı kurtarmasıyla temizlenme sahte
+durum testleriyle sınandı. Bağımsız incelemenin bulduğu geç snapshot,
+fence sonrası eski permit, eşzamanlı fence ve başarısız fence kurtarma
+yarışları negatif testlerle kapandı; son dar peer yeni P0/P1/P2 bulmadı.
+Root tekrarında **111/111** ilgili Flutter testi, hedefli analiz ve
+`git diff --check` geçti. Bu yalnız **Gate A kaynak ve fake** kanıtıdır.
+Üretim `_NoNativeAudioArbiter` ve varsayılan `allowAcquisition=false`
+duruyor; iOS/Android ortak hakem, mevcut mikrofon yolunun ona katılması,
+boşta bile native `fenceContext`, gerçek cihaz ve eğitmen/onaylı ses ayrı
+Gate B–F işleridir. Gerçek nota doğruluğu veya kurs beceri kabulü yok.
+
+## 2026-09-28 — gitar kursu paket bütünlüğü (kaynak ve yerel test)
+
+Mevcut 60 derslik kurs dosyasına tek varlıklı Motion Content manifesti eklendi:
+995.884 bayt ve SHA `bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18`.
+Uygulama açılışı kütüphaneyi göstermeden önce bu baytları denetliyor;
+eksik veya aynı uzunlukta değiştirilmiş JSON engelleniyor. Hata ekranı
+TR/EN anlaşılır metin ve kararlı destek kodu gösteriyor, ham hata metni
+göstermiyor. Üretici `--check` hem CI hem yerel kapıya bağlandı.
+
+Bağımsız kaynak incelemesinin ilk P2 kullanıcı metni bulgusu düzeltildi;
+son dar inceleme P0/P1/P2 bırakmadı
+(`scratch/2026-09-28-ostinato-runtime-integrity-peer/ADDENDUM.md`).
+Son biçimlendirme sonrası manifest kontrolü, yeni test dosyasının **5/5**
+testi ve iki dosyanın hedefli analizi geçti. Bu paket bütünlüğü kanıtı
+gerçek ders videosu, kişi-ayrık nota/form modeli, cihaz veya kurucu fiziksel
+kabulü değildir; bunlar açık kalır.
+
+## 2026-09-28 — 60 ders kaynak bağı, gizlilik metni ve güncel PR
+
+İki gitar dersindeki el/sıra anlatımı canlı enrichment kaynağında düzeltildi
+ve kurs JSON'u yeniden üretildi: **60 dersin kimliği, sırası ve ilerleme
+sözleşmesi aynı**, diğer 58 ders gövdesi değişmedi. Güncel kurs dosyası
+995.884 bayt, SHA `bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18`.
+Beş kursu yeniden bağlayan v8e paketinin kök kontrolü ve bağımsız incelemesi
+PASS (peer rapor SHA `c6c1295a18e88983e5658de3c5957d81d7d756da4808530b279370ce4f2bcf57`).
+Ostinato'nun 60 gösterim kimliği ve 420 sahne iş anahtarı
+yeni kurs SHA'sına göre yeniden hesaplandı. Bunlar üretim şartnamesidir;
+üretilmiş/onaylı medya, tam kurs nota/form modeli ve fiziksel kabul hâlâ **0**.
+
+Engellenmiş ses kapanış ekranı ve porte kartı TR/EN uygulama yerel ayarına
+bağlandı. Ayarlar gizlilik kartı ham videonun cihazda saklanmadığını ve
+cihazdan çıkmadığını açıkça bildiriyor. Kaynak dürüstlüğü kapısı 5.268
+yüzeyde **PASS**, bir iddia–ölçüm bağı kurdu; öz test 23 olumlu/7 olumsuz
+örneği geçti. Odaklı Flutter testleri ve hedefli analiz temiz. Bu kaynak
+değişiklikleri `008eb84` commitinde PR #1 dalına push edildi; GitHub Actions
+bütçe engeli nedeniyle yararlı son-baş CI, merge ve mağaza kabulü açık.
+
+## 2026-09-28 — ilk gitar kursu kaynak hazırlığı; PR/ürün kabulü açık
+
+İlk gitar kursu **60 ders** olarak canlı kaynak ve bağımsız v8d paket
+denetiminde mevcut. Ders gösterimi için kaynak bağlı brief hazır; gerçek,
+eğitmen onaylı video **0** ve tam-kurs nota/form modeli **0**. Mikrofon
+yalnız kullanıcının isteğe bağlı izniyle cihaz üstünde; ürün düzeyi nota
+doğruluğu ve fiziksel ses kabulü yapılmadı. Sticky kapanışın iki-engine
+taklit sınırı Android **21/21** ve Dart **31/31** geçti
+(`scratch/2026-09-28-ostinato-cross-isolate-proof/REPORT.md`); gerçek iki
+Activity/MethodChannel, ortak giriş/çıkış hakemi ve iPhone mikrofon deneyi
+açık. Motion Content için kaynak düzeyinde Flutter `AssetBundle` okuyucusu
+eklendi; 60 derslik mevcut JSON'un SHA bağlı okuma ve güvenli yol testleri
+geçti. Üretim manifesti, uygulama açılış kapısı ve oynatıcı hâlâ yok;
+bu köprü gerçek medya veya ders/model kabulü değildir.
+
+Güncel kurs `8d89007`, isteğe bağlı yerel ses oturumu `e203dc6` ve henüz
+onaylanmamış ses materyali sözleşmesi `3acc49c` commitlerinde mevcut PR #1
+incelemesine taşındı. GitHub Actions'ın üç işi bütçe engeli nedeniyle
+başlamadı; bu kaynaklar için yararlı CI, merge veya mağaza kabulü yok.
+Kaynak ve model sınırının kanonik devamı
+`holding/plans/MOTION-MODEL-RESUME-2026-09-27.md`; kurucunun fiziksel
+kurs kabulü en son toplu yapılacak.
+
 ## 2026-08-13 — START HERE şeridi + kapıların kendi BEYANLARI (ve üç ölçüm-yöntemi kusuru)
 Oturum başı `3697b86` (== `origin/main`, ÖLÇÜLDÜ). Kayıtlar **O-117 · O-118 · O-119 · OK-14**.
 Kapılar **34 → 36 python kapısı**; nihai koşum **tek süreç, borusuz, dokunulmamış**: `✅ TÜM KAPILAR YEŞİL`, MUT-A **14/14**, ağaç yalnız bu turun kalemleri.

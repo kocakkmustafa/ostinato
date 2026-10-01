@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ^3.11.0
@@ -30,6 +30,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # Shared Motion account uses the same immutable revision as core and camera.
+  motion_account:
+    git:
+      url: https://github.com/kocakkmustafa/motion-core.git
+      path: packages/motion_account
+      ref: f2ea161c7e974d57b114ba7773836c72be17a381
   ostinato_posture:
     path: packages/ostinato_posture
   # OST-P0-002 (2026-08-19): şimdiye kadar `ostinato_audio` yalnız KENDİ
@@ -38,24 +46,32 @@ dependencies:
   # pitch/onset/chord primitiflerine erişebilir.
   ostinato_audio:
     path: packages/ostinato_audio
-  # motion_core PATH ile çekiliyor; pub onun transitif core'unu ÇÖZÜLMÜŞ SHA,
-  # buradaki pini TAG ADI olarak görür ve aynı commit olsalar bile
-  # descriptor'ları FARKLI sayar ("incompatible with ... from path" — Choreia
-  # pub-tuzağı, M-F-265). f13bdc9 == motion_core-v0.11.0 VE
-  # motion_camera-v0.1.2 (tek commit, M-F-260); tag'ler ayrı commit'lerde
-  # durur, f13bdc9 İKİSİNİ birden taşır. DEĞİŞTİRME.
+  # Alt paketler ve uygulama aynı TAM-40-SHA'yı kullanır. Pub, aynı Git
+  # paketinin farklı ref dizelerini ayrı kaynak sayar (M-F-265). Bu ref,
+  # Motion hesap + üyelik çekirdeğinin onaylanan sürümüdür; pin testleri
+  # bütün descriptor ve kilitlerin aynı commit'e çözülmesini denetler.
   motion_core:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_core
-      ref: f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d
+      ref: f2ea161c7e974d57b114ba7773836c72be17a381
+  # Flutter bundle bytes are checked by the same pinned Core content contract.
+  # Production manifests and media playback remain separate acceptance gates.
+  motion_content:
+    git:
+      url: https://github.com/kocakkmustafa/motion-core.git
+      path: packages/motion_content
+      ref: f2ea161c7e974d57b114ba7773836c72be17a381
   motion_camera:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
-      ref: f13bdc93b2eae2f741bfcdb4c9270a88e5d75e5d
+      ref: f2ea161c7e974d57b114ba7773836c72be17a381
       path: packages/motion_camera
 
   permission_handler: ^12.0.3
+
+  # QA-only silent lesson player adapter. Shipping lesson media remains empty.
+  video_player: 2.11.1
 
   # YALNIZ poz modelini uygulama-özel bir dosyaya yazmak için (plugin bundle
   # değil YOL ister) — depolama BİÇİMİ yok, kablolama katmanında kalıyor.
@@ -66,6 +82,8 @@ dependencies:
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
 
@@ -92,6 +110,14 @@ flutter:
     - assets/config/posture-contract.json
     - assets/config/audio-contract.json
     - assets/content/library.json
+    - assets/content/guitar_journey.v1.json
+    - assets/motion_content/manifest.json
+    # Code-pinned source membership for closed QA; the shipping media slot is empty.
+    - assets/motion_content/ostinato_source_pins_v2k.json
+    # Exact v2l source identities only; these assets contain no playable media.
+    - assets/motion_content/ostinato.source-slice.v1.json
+    - assets/motion_content/ostinato.source-projection.v1.json
+    - assets/config/guitar-observation.v1.json
     # OFL lisans metinleri — paketlenmiş font DOSYALARIYLA BİRLİKTE dağıtılmak
     # OFL §2'nin şartı (D1, H-34/H-40 bağı: google_fonts kalktı, yazı tipleri
     # artık gömülü — lisans de gömülü olmalı).

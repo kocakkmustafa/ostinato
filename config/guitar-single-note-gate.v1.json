@@ -1,0 +1,14 @@
+{
+  "version": "guitar-single-note-gate.v1",
+  "windowSize": 4096,
+  "hopSize": 2048,
+  "minReliableWindows": 2,
+  "minHz": 70.0,
+  "maxHz": 1200.0,
+  "yinThreshold": 0.15,
+  "minPeriodicity": 0.55,
+  "minLevelAboveFloorDb": 6.0,
+  "attackWindowUs": 100000,
+  "maxSpreadCents": 35.0,
+  "maxCenterErrorCents": 35.0
+}

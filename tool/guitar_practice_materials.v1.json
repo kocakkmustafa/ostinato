@@ -1,0 +1,631 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate_unapproved",
+  "sourceManifestSha256": "cba7ebc0b0b3f1a2b4526ab25fbc4b4f85540ee5081242f6c2726a6e0b5fe8bb",
+  "provenance": "Original mathematical synthesis; no external recording, sample, voice, or downloaded media",
+  "evidence": {
+    "educatorApproved": false,
+    "devicePlaybackAccepted": false,
+    "trainingGroundTruth": false,
+    "learnerScoring": false,
+    "completionEvidence": "self_report_only"
+  },
+  "format": {
+    "container": "WAV",
+    "encoding": "PCM_S16LE",
+    "sampleRateHz": 24000,
+    "channels": 1,
+    "sampleBits": 16
+  },
+  "assets": {
+    "contour_07_a": {
+      "path": "wav/contour_07_a.wav",
+      "role": "hidden_answer_contour",
+      "sha256": "917f8e654a80c55981c71fc0e8d38cdbca433959e283b3f4d0c85eac00a0d45a",
+      "bytes": 98444,
+      "durationSeconds": 2.05,
+      "status": "candidate_unapproved"
+    },
+    "contour_07_b": {
+      "path": "wav/contour_07_b.wav",
+      "role": "hidden_answer_contour",
+      "sha256": "3d294c1d475d6055510c7c89a883e53516cf1c844b3ebc7661af015b62baeb57",
+      "bytes": 98444,
+      "durationSeconds": 2.05,
+      "status": "candidate_unapproved"
+    },
+    "contour_07_c": {
+      "path": "wav/contour_07_c.wav",
+      "role": "hidden_answer_contour",
+      "sha256": "686ae8c63ce6453b5f533e8ff9cf68df1825de2c8b9f0adf9cdbe38d6b802306",
+      "bytes": 98444,
+      "durationSeconds": 2.05,
+      "status": "candidate_unapproved"
+    },
+    "contour_07_d": {
+      "path": "wav/contour_07_d.wav",
+      "role": "hidden_answer_contour",
+      "sha256": "591680a3a812b365ebe457584d2a5b8057e6ba90ecba48f5eaf5d99197e96688",
+      "bytes": 98444,
+      "durationSeconds": 2.05,
+      "status": "candidate_unapproved"
+    },
+    "rhythm_13_a": {
+      "path": "wav/rhythm_13_a.wav",
+      "role": "rhythm_echo_constant_beat",
+      "sha256": "927b87c5726f9deb45210eeb1d80cac1ca7e027815f0bacd1ea7e1cab6eb9ebd",
+      "bytes": 440684,
+      "durationSeconds": 9.18,
+      "status": "candidate_unapproved",
+      "tempoBpm": 80
+    },
+    "rhythm_13_b": {
+      "path": "wav/rhythm_13_b.wav",
+      "role": "rhythm_echo_constant_beat",
+      "sha256": "2aafb9aec7ee6ba2a4c6d3009e85e9cf4c08c766dcb716f1f7ec781a7f7f185b",
+      "bytes": 440684,
+      "durationSeconds": 9.18,
+      "status": "candidate_unapproved",
+      "tempoBpm": 80
+    },
+    "backing_30": {
+      "path": "wav/backing_30.wav",
+      "role": "continuous_16_bar_backing",
+      "sha256": "21aaec56aa3173b004ecadff5c797cf425cb9ce4d7085a8db1f709486b1b723b",
+      "bytes": 2732044,
+      "durationSeconds": 56.916667,
+      "status": "candidate_unapproved",
+      "tempoBpm": 72
+    },
+    "backing_40_54": {
+      "path": "wav/backing_40_54.wav",
+      "role": "continuous_two_chorus_12_bar_backing",
+      "sha256": "0996fc581b0508858d25d704da0c0dbfaa340aebf55cec229f0e592e9a6b7bf4",
+      "bytes": 3612044,
+      "durationSeconds": 75.25,
+      "status": "candidate_unapproved",
+      "tempoBpm": 80
+    },
+    "piece_55_melody": {
+      "path": "wav/piece_55_melody.wav",
+      "role": "eight_bar_original_reference_melody",
+      "sha256": "b29413326d7b5fe897362082d3e57f667f4d6ca740cb1d0af9fe6d44b5dfdb85",
+      "bytes": 1310444,
+      "durationSeconds": 27.3,
+      "status": "candidate_unapproved",
+      "tempoBpm": 80
+    },
+    "piece_55_sparse": {
+      "path": "wav/piece_55_sparse.wav",
+      "role": "eight_bar_original_reference_optional_harmony",
+      "sha256": "429e5323bc8548fe23986fb4a2d68b8fb9bc58902e65e3f607d03c398811eac4",
+      "bytes": 1310444,
+      "durationSeconds": 27.3,
+      "status": "candidate_unapproved",
+      "tempoBpm": 80
+    },
+    "piece_55_backing": {
+      "path": "wav/piece_55_backing.wav",
+      "role": "eight_bar_original_play_along_without_melody",
+      "sha256": "6eecc71fb184e9f89755ba4cbf2d4b961a8738616305a91428a0469fc6a3d158",
+      "bytes": 1310444,
+      "durationSeconds": 27.3,
+      "status": "candidate_unapproved",
+      "tempoBpm": 80
+    }
+  },
+  "lessonTasks": [
+    {
+      "lessonId": "guitar.journey.notes.bass_e",
+      "kind": "contour",
+      "status": "candidate_unapproved",
+      "cues": [
+        {
+          "assetId": "contour_07_a",
+          "answerDirection": "up",
+          "soundingPitches": [
+            "E4",
+            "G4"
+          ]
+        },
+        {
+          "assetId": "contour_07_b",
+          "answerDirection": "down",
+          "soundingPitches": [
+            "G4",
+            "F4"
+          ]
+        },
+        {
+          "assetId": "contour_07_c",
+          "answerDirection": "up",
+          "soundingPitches": [
+            "E4",
+            "F4"
+          ]
+        },
+        {
+          "assetId": "contour_07_d",
+          "answerDirection": "down",
+          "soundingPitches": [
+            "G4",
+            "E4"
+          ]
+        }
+      ]
+    },
+    {
+      "lessonId": "guitar.journey.reading.quarters_eighths",
+      "kind": "rhythmEcho",
+      "status": "candidate_unapproved",
+      "tempoBpm": 80,
+      "cues": [
+        {
+          "assetId": "rhythm_13_a",
+          "countInBars": 1,
+          "attackBeatOffsetsAfterCountIn": [
+            0.0,
+            2.0,
+            2.5,
+            4.0,
+            5.0,
+            7.0
+          ],
+          "bars": [
+            [
+              [
+                "hit",
+                2
+              ],
+              [
+                "rest",
+                2
+              ],
+              [
+                "hit",
+                1
+              ],
+              [
+                "hit",
+                1
+              ],
+              [
+                "rest",
+                2
+              ]
+            ],
+            [
+              [
+                "hit",
+                2
+              ],
+              [
+                "hit",
+                2
+              ],
+              [
+                "rest",
+                2
+              ],
+              [
+                "hit",
+                2
+              ]
+            ]
+          ]
+        },
+        {
+          "assetId": "rhythm_13_b",
+          "countInBars": 1,
+          "attackBeatOffsetsAfterCountIn": [
+            0.0,
+            1.0,
+            3.0,
+            4.0,
+            4.5,
+            6.0
+          ],
+          "bars": [
+            [
+              [
+                "hit",
+                2
+              ],
+              [
+                "hit",
+                2
+              ],
+              [
+                "rest",
+                2
+              ],
+              [
+                "hit",
+                2
+              ]
+            ],
+            [
+              [
+                "hit",
+                1
+              ],
+              [
+                "hit",
+                1
+              ],
+              [
+                "rest",
+                2
+              ],
+              [
+                "hit",
+                2
+              ],
+              [
+                "rest",
+                2
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "lessonId": "guitar.journey.strum.accompaniment",
+      "kind": "continuousBacking",
+      "status": "candidate_unapproved",
+      "assetId": "backing_30",
+      "tempoBpm": 72,
+      "countInBars": 1,
+      "barChords": [
+        "G",
+        "D",
+        "Em",
+        "C",
+        "G",
+        "D",
+        "Em",
+        "C",
+        "G",
+        "D",
+        "Em",
+        "C",
+        "G",
+        "D",
+        "Em",
+        "C"
+      ]
+    },
+    {
+      "lessonId": "guitar.journey.harmony.blues_form",
+      "kind": "continuousBacking",
+      "status": "candidate_unapproved",
+      "assetId": "backing_40_54",
+      "tempoBpm": 80,
+      "countInBars": 1,
+      "barChords": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "D",
+        "D",
+        "A",
+        "A",
+        "E",
+        "D",
+        "A",
+        "E",
+        "A",
+        "A",
+        "A",
+        "A",
+        "D",
+        "D",
+        "A",
+        "A",
+        "E",
+        "D",
+        "A",
+        "E"
+      ]
+    },
+    {
+      "lessonId": "guitar.journey.intermediate.blues_improv",
+      "kind": "continuousBacking",
+      "status": "candidate_unapproved",
+      "assetId": "backing_40_54",
+      "tempoBpm": 80,
+      "countInBars": 1,
+      "barChords": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "D",
+        "D",
+        "A",
+        "A",
+        "E",
+        "D",
+        "A",
+        "E",
+        "A",
+        "A",
+        "A",
+        "A",
+        "D",
+        "D",
+        "A",
+        "A",
+        "E",
+        "D",
+        "A",
+        "E"
+      ]
+    },
+    {
+      "lessonId": "guitar.journey.independent.choose_piece",
+      "kind": "preparedPiece",
+      "status": "candidate_unapproved",
+      "pieceId": "return_home_v1",
+      "assetIds": [
+        "piece_55_melody",
+        "piece_55_sparse",
+        "piece_55_backing"
+      ]
+    },
+    {
+      "lessonId": "guitar.journey.independent.arrange",
+      "kind": "preparedPiece",
+      "status": "candidate_unapproved",
+      "pieceId": "return_home_v1",
+      "assetIds": [
+        "piece_55_melody",
+        "piece_55_sparse",
+        "piece_55_backing"
+      ]
+    },
+    {
+      "lessonId": "guitar.journey.independent.self_review",
+      "kind": "preparedPiece",
+      "status": "candidate_unapproved",
+      "pieceId": "return_home_v1",
+      "assetIds": [
+        "piece_55_melody",
+        "piece_55_sparse",
+        "piece_55_backing"
+      ]
+    }
+  ],
+  "preparedPiece": {
+    "id": "return_home_v1",
+    "status": "candidate_unapproved",
+    "title": {
+      "en": "Return Home",
+      "tr": "Dönüş"
+    },
+    "meter": "4/4",
+    "ticksPerQuarter": 2,
+    "pitchFrame": "sounding",
+    "writtenOctaveOffset": 1,
+    "tempoBpm": 80,
+    "countInBars": 1,
+    "barChords": [
+      "C",
+      "Am",
+      "Fmaj7",
+      "G",
+      "C",
+      "Fmaj7",
+      "G",
+      "C"
+    ],
+    "bars": [
+      [
+        {
+          "ticks": 2,
+          "sounding": "E4",
+          "string": 1,
+          "fret": 0
+        },
+        {
+          "ticks": 2,
+          "sounding": "G4",
+          "string": 1,
+          "fret": 3
+        },
+        {
+          "ticks": 2,
+          "sounding": "E4",
+          "string": 1,
+          "fret": 0
+        },
+        {
+          "ticks": 2,
+          "sounding": "C4",
+          "string": 2,
+          "fret": 1
+        }
+      ],
+      [
+        {
+          "ticks": 2,
+          "sounding": "C4",
+          "string": 2,
+          "fret": 1
+        },
+        {
+          "ticks": 2,
+          "sounding": "E4",
+          "string": 1,
+          "fret": 0
+        },
+        {
+          "ticks": 2,
+          "sounding": "A3",
+          "string": 3,
+          "fret": 2
+        },
+        {
+          "ticks": 2,
+          "rest": true
+        }
+      ],
+      [
+        {
+          "ticks": 2,
+          "sounding": "F4",
+          "string": 1,
+          "fret": 1
+        },
+        {
+          "ticks": 2,
+          "sounding": "E4",
+          "string": 1,
+          "fret": 0
+        },
+        {
+          "ticks": 2,
+          "sounding": "C4",
+          "string": 2,
+          "fret": 1
+        },
+        {
+          "ticks": 2,
+          "sounding": "A3",
+          "string": 3,
+          "fret": 2
+        }
+      ],
+      [
+        {
+          "ticks": 2,
+          "sounding": "D4",
+          "string": 2,
+          "fret": 3
+        },
+        {
+          "ticks": 2,
+          "sounding": "B3",
+          "string": 2,
+          "fret": 0
+        },
+        {
+          "ticks": 2,
+          "sounding": "G3",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "ticks": 2,
+          "rest": true
+        }
+      ],
+      [
+        {
+          "ticks": 2,
+          "sounding": "E4",
+          "string": 1,
+          "fret": 0
+        },
+        {
+          "ticks": 1,
+          "sounding": "G4",
+          "string": 1,
+          "fret": 3
+        },
+        {
+          "ticks": 1,
+          "sounding": "E4",
+          "string": 1,
+          "fret": 0
+        },
+        {
+          "ticks": 4,
+          "sounding": "C4",
+          "string": 2,
+          "fret": 1
+        }
+      ],
+      [
+        {
+          "ticks": 2,
+          "sounding": "A3",
+          "string": 3,
+          "fret": 2
+        },
+        {
+          "ticks": 2,
+          "sounding": "C4",
+          "string": 2,
+          "fret": 1
+        },
+        {
+          "ticks": 2,
+          "sounding": "E4",
+          "string": 1,
+          "fret": 0
+        },
+        {
+          "ticks": 2,
+          "sounding": "F4",
+          "string": 1,
+          "fret": 1
+        }
+      ],
+      [
+        {
+          "ticks": 2,
+          "sounding": "G3",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "ticks": 1,
+          "sounding": "B3",
+          "string": 2,
+          "fret": 0
+        },
+        {
+          "ticks": 1,
+          "sounding": "D4",
+          "string": 2,
+          "fret": 3
+        },
+        {
+          "ticks": 2,
+          "sounding": "B3",
+          "string": 2,
+          "fret": 0
+        },
+        {
+          "ticks": 2,
+          "sounding": "G3",
+          "string": 3,
+          "fret": 0
+        }
+      ],
+      [
+        {
+          "ticks": 2,
+          "sounding": "C4",
+          "string": 2,
+          "fret": 1
+        },
+        {
+          "ticks": 2,
+          "sounding": "E4",
+          "string": 1,
+          "fret": 0
+        },
+        {
+          "ticks": 4,
+          "sounding": "C4",
+          "string": 2,
+          "fret": 1
+        }
+      ]
+    ]
+  }
+}

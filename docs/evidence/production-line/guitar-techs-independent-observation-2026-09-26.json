@@ -1,0 +1,1397 @@
+{
+  "date": "2026-09-26",
+  "state": "frozen_observer_second_corpus_evaluated_physical_microphone_gate_open",
+  "source": {
+    "record": "https://zenodo.org/records/14963133",
+    "officialProject": "https://guitar-techs.github.io/",
+    "recordVersion": "v1",
+    "license": "CC BY4.0",
+    "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+    "authors": [
+      {
+        "name": "Pedroza Villalobos, Hegel Emmanuel",
+        "affiliation": "Universidad Nacional Autónoma de México",
+        "orcid": "0009-0006-4249-4696"
+      },
+      {
+        "name": "Taheri, Termeh",
+        "affiliation": "Queen Mary University of London"
+      },
+      {
+        "name": "Abreu, Wallace",
+        "affiliation": "Universidade Federal do Rio de Janeiro",
+        "orcid": "0009-0008-4047-8312"
+      },
+      {
+        "name": "Corey, Ryan",
+        "affiliation": "University of Illinois Chicago",
+        "orcid": "0000-0002-3122-124X"
+      },
+      {
+        "name": "Roman, Iran R.",
+        "affiliation": "Queen Mary University of London",
+        "orcid": "0000-0003-3781-7244"
+      }
+    ],
+    "attribution": "Guitar-TECHS; H. E. Pedroza Villalobos, T. Taheri, W. Abreu, R. Corey, I. R. Roman (dataset creators); Pedroza et al., ICASSP2025 (paper)",
+    "use": "offline evaluation only; no corpus audio/annotation shipped as course media",
+    "transformation": "8192-frame time crops, original format/rate; discard other RIFF metadata; original stereo averaged only at analysis",
+    "annotationLimit": "Per-string MIDI labels; source warns audio/MIDI alignment may vary by≤100ms; no calibrated continuous-F0 reference"
+  },
+  "freeze": {
+    "record": "https://zenodo.org/records/14963133",
+    "license": {
+      "id": "cc-by-4.0"
+    },
+    "authors": [
+      {
+        "name": "Pedroza Villalobos, Hegel Emmanuel",
+        "affiliation": "Universidad Nacional Autónoma de México",
+        "orcid": "0009-0006-4249-4696"
+      },
+      {
+        "name": "Taheri, Termeh",
+        "affiliation": "Queen Mary University of London"
+      },
+      {
+        "name": "Abreu, Wallace",
+        "affiliation": "Universidade Federal do Rio de Janeiro",
+        "orcid": "0009-0008-4047-8312"
+      },
+      {
+        "name": "Corey, Ryan",
+        "affiliation": "University of Illinois Chicago",
+        "orcid": "0000-0002-3122-124X"
+      },
+      {
+        "name": "Roman, Iran R.",
+        "affiliation": "Queen Mary University of London",
+        "orcid": "0000-0003-3781-7244"
+      }
+    ],
+    "selection": {
+      "positiveMidi": [
+        40,
+        43,
+        45,
+        48,
+        50,
+        52,
+        55,
+        57,
+        59,
+        60,
+        64,
+        69,
+        72,
+        76,
+        79,
+        81,
+        83
+      ],
+      "windowFrames": 8192,
+      "afterOnsetSeconds": 0.25,
+      "beforeOffsetSeconds": 0.15,
+      "audioMidiAlignmentAllowanceSeconds": 0.1,
+      "positive": "first eligible event per listed MIDI; no overlapping MIDI event",
+      "negative": "first12 distinct eligible simultaneously active MIDI triads",
+      "channels": "micamp only; original channels averaged by replay when stereo",
+      "changes": "time crop only; original PCM format/rate preserved"
+    },
+    "selectedRecordings": [
+      [
+        "P1",
+        "singlenotes",
+        "allsinglenotes",
+        "positive"
+      ],
+      [
+        "P2",
+        "singlenotes",
+        "allsinglenotes",
+        "positive"
+      ],
+      [
+        "P1",
+        "chords",
+        "Set1_maj",
+        "polyphonicNegative"
+      ]
+    ],
+    "configSha256": "9a80a7e607ac1151f98544122e23ea9cb3bfaf605b30f355818db7a85bb4b832",
+    "reviewedFiles": {
+      "ios/Runner/AudioCaptureStreamer.swift": "ffa367e350bcdbd7536509f035c9029723d9dc2f468868e0e5d1169d6e9f441f",
+      "ios/Runner/AppDelegate.swift": "8a1e445329331dffab7122c84b1845c11ecf0f7786a12336557841275836af54",
+      "ios/Runner/Info.plist": "b082751a827599b97b819cf640010cc75c5be98fd5adbea9d647f7ddeb3f4ae1",
+      "ios/Podfile": "2c6098cbdf6541f5102e3642ed930a587b97aaff2afb2533772895efc96824c3",
+      "ios/Runner.xcodeproj/project.pbxproj": "bd3d71e909a4c8c2b2cb62fda93330070753a4f5ddad1c0dcfa650860ed500b2",
+      "android/app/src/main/kotlin/com/yulalab/ostinato/AudioCaptureStreamer.kt": "9f4fdc2d9d1ba4981b79d67c22c227eb55aeff985bb52cbb534876f33d240ae4",
+      "android/app/src/main/kotlin/com/yulalab/ostinato/MainActivity.kt": "c8e6c02b7a169439717bb16f2a061ad56ac351c5816441793b2c79ff4a00be74",
+      "android/app/src/main/AndroidManifest.xml": "cba155110a79e05ba73fc36fe1acc6a334cb8739b519b3dfd593f7f134cca064",
+      "lib/app/audio/audio_input_controller.dart": "24cf9f484d7ac107dc8ed7edae25f381d8655aa602f5d96274d0e93bc852be56",
+      "lib/app/audio/audio_capture_channel.dart": "73fb517a3d9c5f83b682128e9eab3152de081d651e11e9b7abe07d1910ac41e9",
+      "lib/app/audio/guitar_note_observation_controller.dart": "6e69e3f79264c94e3d837f46df723aa3266f97ad12f9eab8458ad2e872176d06",
+      "lib/app/screens/guitar_note_observation_screen.dart": "7703b6c4dc7dc527cde80d39ef4f9a218eceb9330838f836c4ff371ee9ddd757",
+      "packages/ostinato_audio/lib/src/pitch/guitar_pitch_observer.dart": "0c7b0dcaa4b105f2c793a7fa28b2469b1ed6274208201a486e01b97cc43f2e8f",
+      "packages/ostinato_audio/lib/src/pitch/guitar_single_note_evaluator.dart": "ae4d4c10817cc6225e3d9fe8a305641e7c37d5be91d815b97c8bc766c381bb69",
+      "assets/config/guitar-observation.v1.json": "9a80a7e607ac1151f98544122e23ea9cb3bfaf605b30f355818db7a85bb4b832",
+      "test/audio_input_lifecycle_test.dart": "7633fafb7552f1aec9bfa84fe4edeeae69e2266aa1a004896afa7ea4f9008f4f",
+      "test/audio_capture_channel_test.dart": "5f83c855a22bb9dc44adc301a0358898d4c0be0febc1f9a40fa83707c293aedc",
+      "test/guitar_note_observation_test.dart": "675a9dd63b9694328df14d95237748a4d1ed0e0ebfd1b8295fe47924a47f4ead",
+      "lib/app/audio/audio_route_state.dart": "97b28633d6a7591e27229a0f093c7452d03b6560e106e89d875886ee448e4988"
+    },
+    "selectionFrozenBeforeAudioReplay": true,
+    "candidateSourceSha256": {
+      "packages/ostinato_audio/lib/src/pitch/guitar_pitch_observer.dart": "0c7b0dcaa4b105f2c793a7fa28b2469b1ed6274208201a486e01b97cc43f2e8f",
+      "packages/ostinato_audio/lib/src/pitch/guitar_single_note_evaluator.dart": "ae4d4c10817cc6225e3d9fe8a305641e7c37d5be91d815b97c8bc766c381bb69",
+      "packages/ostinato_audio/lib/src/pitch/yin.dart": "4447777973284fcf019bedf413ce017b24f09ee7247f352d159dfe0e626080c3",
+      "packages/ostinato_audio/lib/src/gate/audio_confidence_gate.dart": "959cb4393ac003c6ca603f6de03b00bf561d14927e7b8b86fc57cd16dcd68e86"
+    },
+    "toolSha256": {
+      "tool/guitar_techs_corpus.py": "edf68861dfd86b77f0474f5e1ef7fbdc00b92ec6c885fa7b195479cc8cd8164b",
+      "tool/guitar_techs_replay.dart": "f8de1c57b5a0f700d16aad22d628ae6b12c48008ed0da246676c5dae17a16d06",
+      "tools/test_guitar_techs_corpus.py": "4d1c5c3fd217fb1ad215315ec7a08c208fb79ecf9fe85976b8ac25e8c5c85efa"
+    },
+    "tuningOnThisCorpus": false,
+    "training": false,
+    "loaderAmendmentBeforeAnyReplay": "identity encoding and bounded same-range retry/network journal after truncated transport; observer/config/annotation selection unchanged"
+  },
+  "finalToolSha256": {
+    "tool/guitar_techs_corpus.py": "3916fddf7ba466595ab69cdf297e94a6d2f7ba6e723cd23820330e0ac1a52e10",
+    "tool/guitar_techs_replay.dart": "f8de1c57b5a0f700d16aad22d628ae6b12c48008ed0da246676c5dae17a16d06",
+    "tools/test_guitar_techs_corpus.py": "4d1c5c3fd217fb1ad215315ec7a08c208fb79ecf9fe85976b8ac25e8c5c85efa"
+  },
+  "postReplayToolMaintenance": {
+    "path": "tool/guitar_techs_corpus.py",
+    "change": "Make network journal output explicit in task Budget so unit tests cannot overwrite the acquisition journal; no observer/config/data selection/replay change",
+    "replayedToolSha256": "edf68861dfd86b77f0474f5e1ef7fbdc00b92ec6c885fa7b195479cc8cd8164b",
+    "finalToolSha256": "3916fddf7ba466595ab69cdf297e94a6d2f7ba6e723cd23820330e0ac1a52e10"
+  },
+  "measurement": {
+    "positive": {
+      "players": [
+        "P1",
+        "P2"
+      ],
+      "recordings": [
+        "P1-singlenotes-allsinglenotes",
+        "P2-singlenotes-allsinglenotes"
+      ],
+      "windowCount": 34,
+      "labels": {
+        "refused": 3,
+        "nominalNoteMatched": 31
+      },
+      "reasons": {
+        "multipleSources": 3,
+        "observed": 31
+      },
+      "differentNominalNote": 0
+    },
+    "positiveByPlayer": [
+      {
+        "player": "P1",
+        "recordingCount": 1,
+        "windows": 17,
+        "nominalNoteMatched": 14,
+        "differentNominalNote": 0,
+        "refused": 3
+      },
+      {
+        "player": "P2",
+        "recordingCount": 1,
+        "windows": 17,
+        "nominalNoteMatched": 17,
+        "differentNominalNote": 0,
+        "refused": 0
+      }
+    ],
+    "polyphonicNegative": {
+      "players": [
+        "P1"
+      ],
+      "recordings": [
+        "P1-chords-Set1_maj"
+      ],
+      "windowCount": 12,
+      "labels": {
+        "refused": 12
+      },
+      "reasons": {
+        "notPeriodic": 4,
+        "multipleSources": 8
+      },
+      "singleNoteOutputOnAnnotatedPolyphony": 0
+    },
+    "participantCountWithinCorpus": 2,
+    "recordingCount": 3,
+    "windowCount": 46,
+    "inputVariant": "amplifier microphone only",
+    "continuousF0ErrorAvailable": false,
+    "trainingOrTuning": false,
+    "physicalPhoneAccuracyEvidence": false,
+    "crossCorpusPersonIdentityDisjointnessVerified": false,
+    "offlineRoomFloorMethod": "source10th-percentile50ms mono RMS; offline, not phone quiet-room calibration",
+    "recordings": [
+      {
+        "recording": "P1-singlenotes-allsinglenotes",
+        "player": "P1",
+        "kind": "positive",
+        "midiEventCount": 142,
+        "windowCount": 17,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16,
+        "roomFloorDbfs": -71.23748375242403
+      },
+      {
+        "recording": "P2-singlenotes-allsinglenotes",
+        "player": "P2",
+        "kind": "positive",
+        "midiEventCount": 137,
+        "windowCount": 17,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16,
+        "roomFloorDbfs": -68.11426681953189
+      },
+      {
+        "recording": "P1-chords-Set1_maj",
+        "player": "P1",
+        "kind": "polyphonicNegative",
+        "midiEventCount": 131,
+        "windowCount": 12,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16,
+        "roomFloorDbfs": -64.30787707923957
+      }
+    ],
+    "results": [
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-00.wav",
+        "startFrame": 12000,
+        "referenceMidi": [
+          40
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 39913,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-01.wav",
+        "startFrame": 587200,
+        "referenceMidi": [
+          43
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 24280,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-02.wav",
+        "startFrame": 971850,
+        "referenceMidi": [
+          45
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 23441,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-03.wav",
+        "startFrame": 1550100,
+        "referenceMidi": [
+          48
+        ],
+        "observedMidi": 48,
+        "observedHz": 130.8119504715073,
+        "centsFromNearestCenter": -0.011013456124526295,
+        "nominalMidiReferenceCentsDifference": -0.011013456124526295,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17379,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-04.wav",
+        "startFrame": 1933550,
+        "referenceMidi": [
+          50
+        ],
+        "observedMidi": 50,
+        "observedHz": 146.1919132050507,
+        "centsFromNearestCenter": -7.56801775570624,
+        "nominalMidiReferenceCentsDifference": -7.56801775570624,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 22041,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-05.wav",
+        "startFrame": 2319400,
+        "referenceMidi": [
+          52
+        ],
+        "observedMidi": 52,
+        "observedHz": 164.62524955229128,
+        "centsFromNearestCenter": -1.9814755749483248,
+        "nominalMidiReferenceCentsDifference": -1.9814755749483248,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 19118,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-06.wav",
+        "startFrame": 2890450,
+        "referenceMidi": [
+          55
+        ],
+        "observedMidi": 55,
+        "observedHz": 196.2566078468113,
+        "centsFromNearestCenter": 2.285246938592353,
+        "nominalMidiReferenceCentsDifference": 2.285246938592353,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 19267,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-07.wav",
+        "startFrame": 3276550,
+        "referenceMidi": [
+          57
+        ],
+        "observedMidi": 57,
+        "observedHz": 218.65475914461592,
+        "centsFromNearestCenter": -10.618528697743198,
+        "nominalMidiReferenceCentsDifference": -10.618528697743198,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 21925,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-08.wav",
+        "startFrame": 3661650,
+        "referenceMidi": [
+          59
+        ],
+        "observedMidi": 59,
+        "observedHz": 247.83956591268202,
+        "centsFromNearestCenter": 6.283598360157283,
+        "nominalMidiReferenceCentsDifference": 6.283598360157283,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17505,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-09.wav",
+        "startFrame": 7307450,
+        "referenceMidi": [
+          60
+        ],
+        "observedMidi": 60,
+        "observedHz": 260.9272162562047,
+        "centsFromNearestCenter": -4.627308115952115,
+        "nominalMidiReferenceCentsDifference": -4.627308115952115,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17689,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-10.wav",
+        "startFrame": 8075350,
+        "referenceMidi": [
+          64
+        ],
+        "observedMidi": 64,
+        "observedHz": 326.3186848737969,
+        "centsFromNearestCenter": -17.46631099580872,
+        "nominalMidiReferenceCentsDifference": -17.46631099580872,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17526,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-11.wav",
+        "startFrame": 12493400,
+        "referenceMidi": [
+          69
+        ],
+        "observedMidi": 69,
+        "observedHz": 437.2253308020583,
+        "centsFromNearestCenter": -10.951844734038199,
+        "nominalMidiReferenceCentsDifference": -10.951844734038199,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 18266,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-12.wav",
+        "startFrame": 13071150,
+        "referenceMidi": [
+          72
+        ],
+        "observedMidi": 72,
+        "observedHz": 519.3245756628071,
+        "centsFromNearestCenter": -13.040429975361016,
+        "nominalMidiReferenceCentsDifference": -13.040429975361016,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17463,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-13.wav",
+        "startFrame": 17293100,
+        "referenceMidi": [
+          76
+        ],
+        "observedMidi": 76,
+        "observedHz": 652.2294935600714,
+        "centsFromNearestCenter": -18.54861170631971,
+        "nominalMidiReferenceCentsDifference": -18.54861170631971,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17581,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-14.wav",
+        "startFrame": 21515850,
+        "referenceMidi": [
+          79
+        ],
+        "observedMidi": 79,
+        "observedHz": 777.3000484944432,
+        "centsFromNearestCenter": -14.83830100414054,
+        "nominalMidiReferenceCentsDifference": -14.83830100414054,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17645,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-15.wav",
+        "startFrame": 21900600,
+        "referenceMidi": [
+          81
+        ],
+        "observedMidi": 81,
+        "observedHz": 880.8061977913193,
+        "centsFromNearestCenter": 1.5853160511301672,
+        "nominalMidiReferenceCentsDifference": 1.5853160511301672,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 16819,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-singlenotes-allsinglenotes-16.wav",
+        "startFrame": 25740750,
+        "referenceMidi": [
+          83
+        ],
+        "observedMidi": 83,
+        "observedHz": 982.7625635095475,
+        "centsFromNearestCenter": -8.792746106965469,
+        "nominalMidiReferenceCentsDifference": -8.792746106965469,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 15370,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-00.wav",
+        "startFrame": 12350,
+        "referenceMidi": [
+          40
+        ],
+        "observedMidi": 40,
+        "observedHz": 81.81979590092949,
+        "centsFromNearestCenter": -12.378016242872027,
+        "nominalMidiReferenceCentsDifference": -12.378016242872027,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 15869,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-01.wav",
+        "startFrame": 590150,
+        "referenceMidi": [
+          43
+        ],
+        "observedMidi": 43,
+        "observedHz": 97.39737738370155,
+        "centsFromNearestCenter": -10.658431856006635,
+        "nominalMidiReferenceCentsDifference": -10.658431856006635,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 15502,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-02.wav",
+        "startFrame": 970200,
+        "referenceMidi": [
+          45
+        ],
+        "observedMidi": 45,
+        "observedHz": 109.49962293127453,
+        "centsFromNearestCenter": -7.893146309465059,
+        "nominalMidiReferenceCentsDifference": -7.893146309465059,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17854,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-03.wav",
+        "startFrame": 1545300,
+        "referenceMidi": [
+          48
+        ],
+        "observedMidi": 48,
+        "observedHz": 130.09863463789264,
+        "centsFromNearestCenter": -9.477242932173612,
+        "nominalMidiReferenceCentsDifference": -9.477242932173612,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 19158,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-04.wav",
+        "startFrame": 1932000,
+        "referenceMidi": [
+          50
+        ],
+        "observedMidi": 50,
+        "observedHz": 145.46660509937183,
+        "centsFromNearestCenter": -16.178640098934824,
+        "nominalMidiReferenceCentsDifference": -16.178640098934824,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 22069,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-05.wav",
+        "startFrame": 2316500,
+        "referenceMidi": [
+          52
+        ],
+        "observedMidi": 52,
+        "observedHz": 163.1851831725896,
+        "centsFromNearestCenter": -17.192144536350447,
+        "nominalMidiReferenceCentsDifference": -17.192144536350447,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 21489,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-06.wav",
+        "startFrame": 2893450,
+        "referenceMidi": [
+          55
+        ],
+        "observedMidi": 55,
+        "observedHz": 195.00891349566044,
+        "centsFromNearestCenter": -8.756146424883891,
+        "nominalMidiReferenceCentsDifference": -8.756146424883891,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 22411,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-07.wav",
+        "startFrame": 3277800,
+        "referenceMidi": [
+          57
+        ],
+        "observedMidi": 57,
+        "observedHz": 219.52302230972998,
+        "centsFromNearestCenter": -3.7575294138903943,
+        "nominalMidiReferenceCentsDifference": -3.7575294138903943,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 22918,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-08.wav",
+        "startFrame": 3659950,
+        "referenceMidi": [
+          59
+        ],
+        "observedMidi": 59,
+        "observedHz": 248.06170228471038,
+        "centsFromNearestCenter": 7.834592887400489,
+        "nominalMidiReferenceCentsDifference": 7.834592887400489,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 24197,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-09.wav",
+        "startFrame": 3851900,
+        "referenceMidi": [
+          60
+        ],
+        "observedMidi": 60,
+        "observedHz": 260.38978838157414,
+        "centsFromNearestCenter": -8.196782185679899,
+        "nominalMidiReferenceCentsDifference": -8.196782185679899,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 21161,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-10.wav",
+        "startFrame": 8078200,
+        "referenceMidi": [
+          64
+        ],
+        "observedMidi": 64,
+        "observedHz": 329.1762344144911,
+        "centsFromNearestCenter": -2.372011238613689,
+        "nominalMidiReferenceCentsDifference": -2.372011238613689,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 22787,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-11.wav",
+        "startFrame": 12490600,
+        "referenceMidi": [
+          69
+        ],
+        "observedMidi": 69,
+        "observedHz": 441.4620633785603,
+        "centsFromNearestCenter": 5.743131393381688,
+        "nominalMidiReferenceCentsDifference": 5.743131393381688,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 22400,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-12.wav",
+        "startFrame": 13068800,
+        "referenceMidi": [
+          72
+        ],
+        "observedMidi": 72,
+        "observedHz": 526.4711696328978,
+        "centsFromNearestCenter": 10.621206570535138,
+        "nominalMidiReferenceCentsDifference": 10.621206570535138,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 22656,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-13.wav",
+        "startFrame": 17290950,
+        "referenceMidi": [
+          76
+        ],
+        "observedMidi": 76,
+        "observedHz": 664.3867606360501,
+        "centsFromNearestCenter": 13.423761167188283,
+        "nominalMidiReferenceCentsDifference": 13.423761167188283,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 21703,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-14.wav",
+        "startFrame": 21515900,
+        "referenceMidi": [
+          79
+        ],
+        "observedMidi": 79,
+        "observedHz": 788.4868971423003,
+        "centsFromNearestCenter": 9.899908588307163,
+        "nominalMidiReferenceCentsDifference": 9.899908588307163,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 20897,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-15.wav",
+        "startFrame": 21899500,
+        "referenceMidi": [
+          81
+        ],
+        "observedMidi": 81,
+        "observedHz": 876.7829467824117,
+        "centsFromNearestCenter": -6.340542300509813,
+        "nominalMidiReferenceCentsDifference": -6.340542300509813,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17803,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P2",
+        "recording": "P2-singlenotes-allsinglenotes",
+        "kind": "positive",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P2-singlenotes-allsinglenotes-16.wav",
+        "startFrame": 25738350,
+        "referenceMidi": [
+          83
+        ],
+        "observedMidi": 83,
+        "observedHz": 989.4238644683494,
+        "centsFromNearestCenter": 2.902208003174016,
+        "nominalMidiReferenceCentsDifference": 2.902208003174016,
+        "continuousF0ErrorAvailable": false,
+        "label": "nominalNoteMatched",
+        "reason": "observed",
+        "analysisUsDesktop": 17889,
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-00.wav",
+        "startFrame": 13950,
+        "referenceMidi": [
+          58,
+          62,
+          65
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "notPeriodic",
+        "analysisUsDesktop": 16226,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-01.wav",
+        "startFrame": 207500,
+        "referenceMidi": [
+          59,
+          63,
+          66
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "notPeriodic",
+        "analysisUsDesktop": 16301,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-02.wav",
+        "startFrame": 589200,
+        "referenceMidi": [
+          61,
+          65,
+          68
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "notPeriodic",
+        "analysisUsDesktop": 16365,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-03.wav",
+        "startFrame": 780250,
+        "referenceMidi": [
+          62,
+          66,
+          69
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 17446,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-04.wav",
+        "startFrame": 975750,
+        "referenceMidi": [
+          63,
+          67,
+          70
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 15715,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-05.wav",
+        "startFrame": 1165000,
+        "referenceMidi": [
+          64,
+          68,
+          71
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 15648,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-06.wav",
+        "startFrame": 1359900,
+        "referenceMidi": [
+          65,
+          69,
+          72
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 15565,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-07.wav",
+        "startFrame": 1545850,
+        "referenceMidi": [
+          66,
+          70,
+          73
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 15714,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-08.wav",
+        "startFrame": 1740750,
+        "referenceMidi": [
+          67,
+          71,
+          74
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 16045,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-09.wav",
+        "startFrame": 1930200,
+        "referenceMidi": [
+          68,
+          72,
+          75
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 17035,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-10.wav",
+        "startFrame": 2124500,
+        "referenceMidi": [
+          69,
+          73,
+          76
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "multipleSources",
+        "analysisUsDesktop": 16751,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      },
+      {
+        "player": "P1",
+        "recording": "P1-chords-Set1_maj",
+        "kind": "polyphonicNegative",
+        "windowPath": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/P1-chords-Set1_maj-11.wav",
+        "startFrame": 2512100,
+        "referenceMidi": [
+          56,
+          61,
+          65
+        ],
+        "observedMidi": null,
+        "observedHz": null,
+        "centsFromNearestCenter": null,
+        "nominalMidiReferenceCentsDifference": null,
+        "continuousF0ErrorAvailable": false,
+        "label": "refused",
+        "reason": "notPeriodic",
+        "analysisUsDesktop": 15198,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16
+      }
+    ]
+  },
+  "acquisition": {
+    "budgetPeakBytes": 67108864,
+    "retainedMediaPeakBytes": 1038704,
+    "completedAttemptRequestedRangeBytes": 64556529,
+    "completedAttemptActualResponseBodyBytes": 64546177,
+    "strictHTTP206": true,
+    "boundedPrefetchBytes": 1048576,
+    "wholeArchivesDownloaded": false,
+    "wholeWAVEntriesPersisted": false,
+    "originalWAVStreams": [
+      {
+        "entry": "P1_singlenotes/audio/micamp/micamp_allsinglenotes.wav",
+        "sourceZip": "https://zenodo.org/records/14963133/files/P1_singlenotes.zip",
+        "originalBytes": 52992078,
+        "sha256": "520ef333dc1f2f6f820556d26e0d66cafc4b0b17bb8253cbc9ef964591048459",
+        "zipCRC32": "2b2319fd",
+        "compressedBytes": 24992709,
+        "wholeEntryPersisted": false,
+        "transformation": "8192-frame time crops; original rate/format; other RIFF metadata omitted"
+      },
+      {
+        "entry": "P2_singlenotes/audio/micamp/micamp_allsinglenotes.wav",
+        "sourceZip": "https://zenodo.org/records/14963133/files/P2_singlenotes.zip",
+        "originalBytes": 105984112,
+        "sha256": "db0ffa95f8c595e059c5da3ff2161ddcb187fe68d3b5f86d25c5293992fa1602",
+        "zipCRC32": "59a825d4",
+        "compressedBytes": 29103347,
+        "wholeEntryPersisted": false,
+        "transformation": "8192-frame time crops; original rate/format; other RIFF metadata omitted"
+      },
+      {
+        "entry": "P1_chords/audio/micamp/micamp_Set1_maj.wav",
+        "sourceZip": "https://zenodo.org/records/14963133/files/P1_chords.zip",
+        "originalBytes": 14592086,
+        "sha256": "393c6a0afbbcc6a0db08b32efd7b3f73bd27202335030c81e5e949035c6b0beb",
+        "zipCRC32": "cc7ba45c",
+        "compressedBytes": 8332833,
+        "wholeEntryPersisted": false,
+        "transformation": "8192-frame time crops; original rate/format; other RIFF metadata omitted"
+      }
+    ],
+    "archiveMetadata": [
+      {
+        "name": "P1_singlenotes.zip",
+        "size": 108626613,
+        "checksum": "md5:ca0c4674dde3805574685a313f7c39eb",
+        "rangeBytesFetched": 24996170
+      },
+      {
+        "name": "P2_singlenotes.zip",
+        "size": 116133457,
+        "checksum": "md5:40fbf03d8b04bb2cf42df20f36dc2254",
+        "rangeBytesFetched": 29106854
+      },
+      {
+        "name": "P1_chords.zip",
+        "size": 981741162,
+        "checksum": "md5:be9ef8bbdceb1912d565254e607a6d94",
+        "rangeBytesFetched": 8356353
+      }
+    ],
+    "archiveMD5DeclaredBySourceNotVerifiedAsWholeArchive": true,
+    "boundedBodyLengthRetries": 2,
+    "initialAbortedAttempt": "download-receipt.attempt-1.json; cleaned19files/282338bytes before retry, never observer-evaluated; exact partialP2 network count unavailable, compressed-entry upper bound recorded"
+  },
+  "cleanup": {
+    "receipt": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/download-receipt.json",
+    "receiptSha256": "6030e8753cbc1476c7d0f115883f1cd577f876920517cb4a387ab2e2d733c092",
+    "fileCount": 49,
+    "verifiedDeletedBytes": 1038704,
+    "remainingDownloadedFiles": 0,
+    "initialAbortedReceipt": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/download-receipt.attempt-1.json",
+    "initialAbortedReceiptSha256": "55359469c3c6ea79eda3cb868cd74c0171a34032a66602978c281b1cbe0681a4"
+  },
+  "verification": {
+    "reviewedFilesMatched": 19,
+    "candidateSourceFilesMatched": 4,
+    "configSha256": "9a80a7e607ac1151f98544122e23ea9cb3bfaf605b30f355818db7a85bb4b832",
+    "pythonCorpusTestsPassed": 6,
+    "decoderChecksPassed": 5,
+    "dartAnalyze": "No issues found",
+    "previousFlutter198AndAudio124AcceptancePreservedNotRerun": true,
+    "logs": {
+      "corpus-tests.log": {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/corpus-tests.log",
+        "sha256": "c6b9b1f09add0403cc07e90bfdf272129b1ddfa2f8f7675ea8218862f2516371"
+      },
+      "decoder-tests.log": {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/decoder-tests.log",
+        "sha256": "2652f4dd73a23460419e4d8382225acb9cef32886dbbef01a0e72cd65c6380fc"
+      },
+      "tool-analyze.log": {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/tool-analyze.log",
+        "sha256": "7ac61efeb4ebe58d00f4c440d450a73f1acb2cc08a8eb79441b7a5008e7cd5f5"
+      },
+      "replay-summary.log": {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/replay-summary.log",
+        "sha256": "99ac0abcb2d1454e5eeac1e38af641da23efe1c56352e21572ecea7523f9310a"
+      }
+    },
+    "artifacts": {
+      "freeze.json": {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/freeze.json",
+        "sha256": "056fb274ccc670f769ecf2bfed9a9ea7d9bbbf7e80f5a3eace5674eaea84ec95"
+      },
+      "manifest.json": {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/manifest.json",
+        "sha256": "5f83ae9fa3a32ff0417c36d32c15897227f36bf1cc4db0aa7b5183a246433169"
+      },
+      "replay.json": {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/replay.json",
+        "sha256": "53e202ee9c909b9bce3c5ee4be081cca72aef8841b55fc0d9d7f1731afebf8e0"
+      },
+      "network-ranges.json": {
+        "path": "/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-09-26-motion-device-release/note-corpus/network-ranges.json",
+        "sha256": "e583406165b0f422c0d8ca39844a8eb0e3e926ac7403acf33fa7578b9fc07dc4"
+      }
+    }
+  },
+  "limits": [
+    "31/34 nominal note labels and12/12 triad refusals apply only to these selected windows; no population accuracy percentage or universal chord rejection claim.",
+    "Windows within2positive and1negative long recordings are correlated; within-corpus2player IDs are not46independent people.",
+    "MIDI pickup note labels do not establish actual continuous Hz/cents truth. Nominal-reference cents differences remain descriptive.",
+    "Amplifier microphone recordings and offline source-percentile floor do not establish phone mic, quiet calibration, novice/noise/accompaniment or lifecycle acceptance.",
+    "Only P1 Set1 major triads were tested as real negatives; speech, environmental sounds, octave/aligned-partial mixtures and other chord families remain unmeasured.",
+    "Physical phone opt-in/privacy/route/performance and independent calibrated frequency reference gates remain open; no scores/chord/tuning-success/mastery gate promoted."
+  ],
+  "reproduce": [
+    "Use same candidate/config source hashes; preserve existing JSON receipts and start from an empty task-owned note-corpus directory.",
+    "PYTHONDONTWRITEBYTECODE=1 python3 tool/guitar_techs_corpus.py",
+    "dart run tool/guitar_techs_replay.dart",
+    "Verify receipt path/size/SHA before deleting only downloaded MIDI/time-crop WAV files; keep small JSON/text receipts."
+  ],
+  "ownership": "App-local offline tools/evidence only; no19reviewed source/config change, native/mic/Core/provider/Vault/workflow/commit/push/store action."
+}

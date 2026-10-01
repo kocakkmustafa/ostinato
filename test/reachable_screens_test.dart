@@ -179,7 +179,7 @@ void main() {
       // TÜRETİLMİŞ aday kümesi (sözleşme (a)) bunu ilk koşumda
       // yakaladı: elle yazılan kimlik, koddan türetilenle ayrıştı.
       note(t, '3 Settings', 'SettingsScreen');
-      requireSubstance(t, 'Settings', 'instruments are live');
+      requireSubstance(t, 'Settings', 'instrument previews in the posture catalogue');
       await tapIfPossible(t, find.text('‹'));
       await t.pump(const Duration(milliseconds: 400));
     }

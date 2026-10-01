@@ -1,4 +1,49 @@
 # Ostinato — LOOP (iş kuyruğu)
+
+## 2026-09-30 QA sessiz video adaptörü sonrası
+
+Android debug ve iOS simülatör eklenti derlemeleri geçti; QA adaptörünün
+Dart yaşam döngüsü 9/9 odak ve 370/370 tam Flutter testinde temiz. iOS/macOS
+paketli MP4 audio-track API'si yanlış boş sonuç verebildiği için gerçek QA
+factory platformda native controller kurmadan kapanıyor. Üretim medya slotu
+boş ve practice audio edinimi kapalı. Sonraki kapı: doğrulanmış sessiz medya
+ve altyazı varlığı, iOS için bağımsız güvenilir ses-izi profili, Android ve
+iPhone'da video ile isteğe bağlı mikrofonun fiziksel oturum/kapanış denemesi;
+kurucu toplu ders kabulü en sonda. Bunlar olmadan oynatmayı ürüne açma.
+Makbuz `scratch/2026-09-30-ostinato-native-video-adapter/RESULT.md`.
+
+## 2026-09-30 sentetik YIN pilotu sonrası
+
+Hizalı iki eşzamanlı ses tek nota gibi gözlenebiliyor; 25/28 dondurulmuş
+sentetik pilot FALSIFIED. Kullanıcı metni sınırı açıkça söylüyor.
+Bağımsız referanslı gerçek tek tel/karma ses ve fiziksel telefon mikrofonu
+olmadan eşik retune'u veya ders başarısı iddiası yapma; eski tek koşumu
+yeniden çalıştırma. Gate E onaylı örnek ses ve Gate F gerçek cihaz/kurucu
+kabulü sırada. Makbuz `scratch/2026-09-30-ostinato-yin-stress/REPORT.md`.
+
+## 2026-09-29 Gate D sonrası
+
+Gate D boş lease native çiti, aktif kapanış sırası ve eski mikrofonun bağlam iddiası yerel kaynak/testte PASS (Flutter 127/127, Android 17/17, iOS 16/16; son kuyruk yarışı red/green). Yerel WIP commit/push edilmedi. Sırada eğitmen onaylı örnek ses ve kullanıcıya görünür oynatma Gate E; gerçek iPhone/Android ses-yaşam döngüsü, ardından kurucunun toplu fiziksel kabulü Gate F. Bunlar bitmeden practice lease edinimini açma veya nota doğruluğu ilan etme. Son SHA'da Actions ve mağaza kabulü ayrıca açık. Makbuz `scratch/2026-09-29-ostinato-gate-d/RESULT.md`.
+
+## 2026-09-28 ortak ses hakemi sonraki kapı
+
+Gate A tipli Dart kanal/lease; Gate B iOS proses hakemi ve Gate C Android
+proses hakemi kaynakta. Bağımsız incelemenin dört kapanış/rota bulgusu
+düzeltildi; son kaynak iOS simülatöründe 15/15, Android JVM'de 35/35 ve
+debug derlemede geçti. Üretimde edinim kapalıdır. Sıradaki tek yazarlı iş
+root'un **lease boşta olsa da** route/hesap/arka planda native
+`fenceContext` çağrısı ve bunun aktif lease kapanışıyla sıra sözleşmesi
+(Gate D); ardından eğitmen onaylı örnek ses ve UI Gate E, native/kurucu
+fiziksel cihaz kabulü Gate F. Gate D/F ve bağımsız ürün kabulü bitmeden
+`allowAcquisition` açılmaz. Yararlı son-baş CI için Actions bütçe engeli
+ayrıca açık.
+
+## 2026-09-28 güncel kuyruk
+1. PR #1'e taşınan 60 derslik gitar kaynağında CI bütçe engeli kalkınca son başta yararlı kontrolleri çalıştır; v8e kaynak/medya paketinin bağımsız denetimini kaydet.
+2. Ses giriş/çıkış hakemi, gerçek iki Activity/MethodChannel ve fiziksel mikrofon kapanışını ayrı kabul et; taklit testini cihaz kanıtı sayma.
+3. 60 derslik mevcut kurs JSON'u paket manifestiyle boyut/SHA denetiminden geçiyor; bozuk/eksik pakette açılış kütüphaneyi kapatıyor. Eğitmen onaylı medya/altyazı ve gerçek oynatma bağı hâlâ açık. Kişi-ayrık uzman nota/form etiketi olmadan model fit yok.
+4. Tam ders kurucu kabulü en sonda; başarılı PR/CI kaynağı mağaza submit veya model kabulü sayılmaz.
+
 Protokol: her iterasyon = iş al → yap → DOĞRULA (kanıt) → PROGRESS mühürle → DEFTER güncelle → kuyruk güncelle. Kapsam otoritesi: `app/docs/OSTINATO-BLUEPRINT.md` + motion-core `30-URUN-BLUEPRINT-STANDARDI.md`. **Kurucuya SORU YOK** (standart §4 md.6); boşluk = blueprint çerçevesinde kendin karar ver + DEFTER'e yaz.
 
 ## ⛔ KALDIRILDI (M-F-19, 2026-07-28)

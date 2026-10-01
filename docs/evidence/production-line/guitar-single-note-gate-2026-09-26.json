@@ -1,0 +1,253 @@
+{
+  "gateId": "guitar-single-note-gate.v1",
+  "state": "offline_candidate_only_no_user_facing_score",
+  "source": {
+    "dataset": "GuitarSet 1.1.0",
+    "record": "https://zenodo.org/records/3371780",
+    "license": "CC BY 4.0",
+    "attribution": "Xi, Q.; Bittner, R.; Pauwels, J.; Ye, X.; Bello, J. P. GuitarSet: A Dataset for Guitar Transcription. ISMIR 2018.",
+    "inputFiles": [
+      {
+        "entry": "00_BN1-129-Eb_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "bytes": 950809,
+        "sha256": "2258ef6f5dc58437f2807dfc0c05416ad8498cd345f95d6563b13d19283e6d54",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "00_BN1-129-Eb_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "bytes": 1969056,
+        "sha256": "2a6057d0485d8ee2f4a04175ee085d610c0f7a13194e083b13ce803bec091d43",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "00_SS3-98-C_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "bytes": 2253770,
+        "sha256": "ef3f256a2b57b01c9cffce9c3ab7c320e200c7c6929fb91984e972983707bfde",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "00_SS3-98-C_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "bytes": 3455614,
+        "sha256": "57574b363a2a277e1b8cfa43325b31867a443eafe3addf0e6bc99bc8f982393b",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "01_BN1-129-Eb_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "bytes": 509838,
+        "sha256": "ecdd877eaf6208cfefa47b74c1a6a5211146e12dfa0f5132345a4c456cd67fc8",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "01_BN1-129-Eb_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "bytes": 1969056,
+        "sha256": "76330537c6a88df56c7e338da9dd81d84cbf7f3a5ae7cd1b32a663bded6b76b4",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "01_SS3-98-C_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "bytes": 1122191,
+        "sha256": "6d49c83a418ad5b363e09cb5a6383791f6a6aae4bbf5eae1720d45293f1ce408",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "01_SS3-98-C_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "bytes": 3455614,
+        "sha256": "3a1c3c0af24807ebbd63963d607d05e25f3f0b0ca078e1dadbd7dd034e536985",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "02_BN1-129-Eb_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "bytes": 559549,
+        "sha256": "3ff0c7c98cc3abb4c37a0023030991c0c5b112caad2c53962636c62f260524aa",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "02_BN1-129-Eb_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "bytes": 1969056,
+        "sha256": "9a99f25ef470da34b6a85189d2895f64b59c20b653114b59b24cf7efa3239f13",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "02_SS3-98-C_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "bytes": 1024950,
+        "sha256": "984d33a16b1b0ded9eb5a048d8526724cc2e44a6ebea291c3a166dcf88af7983",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "02_SS3-98-C_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "bytes": 3455614,
+        "sha256": "e8601f8b9145170436ada516c332044c20b76027ddc3c754db8ed64bed7b76ae",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "03_BN1-129-Eb_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "bytes": 524685,
+        "sha256": "44dd4061b27bb3320d1e42180f5602e71932be8c388945f8b06a46d2df6d7aef",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "03_BN1-129-Eb_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "bytes": 1969056,
+        "sha256": "51ec6f1d43b4866a02ca5ff43bb5cfcb7f2b8069fe12b078385e091a8f8d78f4",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "03_SS3-98-C_solo.jams",
+        "sourceZip": "https://zenodo.org/records/3371780/files/annotation.zip",
+        "bytes": 898249,
+        "sha256": "ee9cd82f6bb899df173dfffa3be53d98ae4d7f73dd05dcaba62f8f15e75a0130",
+        "license": "cc-by-4.0"
+      },
+      {
+        "entry": "03_SS3-98-C_solo_mic.wav",
+        "sourceZip": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip",
+        "bytes": 3455614,
+        "sha256": "32e3ffb4de68f197c1304471974ff4ac813076f8888022435d958a7235ef578b",
+        "license": "cc-by-4.0"
+      }
+    ]
+  },
+  "selection": {
+    "tracks": [
+      "BN1-129-Eb",
+      "SS3-98-C"
+    ],
+    "developmentPlayers": [
+      "00",
+      "01"
+    ],
+    "holdoutPlayers": [
+      "02",
+      "03"
+    ],
+    "windowSamples": 8192,
+    "afterOnsetS": 0.11,
+    "edgeS": 0.04,
+    "method": "one note_midi event overlaps full window, with neighbor margin"
+  },
+  "development": {
+    "candidateCount": 38,
+    "accepted": 22,
+    "coverage": 0.5789473684210527,
+    "differentNote": 0,
+    "differentNoteAmongAccepted": 0.0,
+    "medianAbsCentsAccepted": 3.2992060562101133,
+    "p90AbsCentsAccepted": 7.883908788139104,
+    "players": [
+      {
+        "player": "00",
+        "candidateCount": 22,
+        "match": 7,
+        "differentNote": 0,
+        "noVerdict": 15,
+        "accepted": 7,
+        "reasons": {
+          "observed": 7,
+          "tooQuiet": 14,
+          "notPeriodic": 1
+        },
+        "recordings": [
+          "00_BN1-129-Eb_solo",
+          "00_SS3-98-C_solo"
+        ]
+      },
+      {
+        "player": "01",
+        "candidateCount": 16,
+        "match": 15,
+        "differentNote": 0,
+        "noVerdict": 1,
+        "accepted": 15,
+        "reasons": {
+          "observed": 15,
+          "unstablePitch": 1
+        },
+        "recordings": [
+          "01_BN1-129-Eb_solo",
+          "01_SS3-98-C_solo"
+        ]
+      }
+    ]
+  },
+  "holdout": {
+    "candidateCount": 49,
+    "accepted": 47,
+    "coverage": 0.9591836734693877,
+    "differentNote": 0,
+    "differentNoteAmongAccepted": 0.0,
+    "medianAbsCentsAccepted": 1.8690596545441616,
+    "p90AbsCentsAccepted": 4.63740175190418,
+    "players": [
+      {
+        "player": "02",
+        "candidateCount": 25,
+        "match": 24,
+        "differentNote": 0,
+        "noVerdict": 1,
+        "accepted": 24,
+        "reasons": {
+          "observed": 24,
+          "unstablePitch": 1
+        },
+        "recordings": [
+          "02_BN1-129-Eb_solo",
+          "02_SS3-98-C_solo"
+        ]
+      },
+      {
+        "player": "03",
+        "candidateCount": 24,
+        "match": 23,
+        "differentNote": 0,
+        "noVerdict": 1,
+        "accepted": 23,
+        "reasons": {
+          "observed": 23,
+          "unstablePitch": 1
+        },
+        "recordings": [
+          "03_BN1-129-Eb_solo",
+          "03_SS3-98-C_solo"
+        ]
+      }
+    ]
+  },
+  "configSha256": "cef566bea4e9b6be17d0c1dce75117a355734d39113e32db0b0882cc4c44a6cf",
+  "config": {
+    "version": "guitar-single-note-gate.v1",
+    "windowSize": 4096,
+    "hopSize": 2048,
+    "minReliableWindows": 2,
+    "minHz": 70.0,
+    "maxHz": 1200.0,
+    "yinThreshold": 0.15,
+    "minPeriodicity": 0.55,
+    "minLevelAboveFloorDb": 6.0,
+    "attackWindowUs": 100000,
+    "maxSpreadCents": 35.0,
+    "maxCenterErrorCents": 35.0
+  },
+  "freezeDecision": "No threshold adjustment; freeze original v1 config before holdout replay. Low coverage will be reported, not tuned on this sample.",
+  "interpretation": [
+    "This reports only isolated note_midi-labeled windows from two GuitarSet solo tracks per player. Selection and label quality are not independently adjudicated.",
+    "Players 00/01 were development; players 02/03 were held out. No training occurred and thresholds were not adjusted after development or holdout.",
+    "A match is a stable, prior-free YIN note/octave observation. The UI does not use this gate yet. Different-note false calls were zero among 47 accepted holdout windows, but this small sample does not establish real-device reliability.",
+    "Development player 00 had 7/22 coverage because the track-derived room-floor estimate rejected quiet segments; the app must calibrate the actual room before any live use.",
+    "Studio mono-mic takes do not represent built-in iOS/Android microphones, room noise, accompaniment, wrong-note attempts, chords or users with varied instruments. The founder authorized future opt-in on-device single-note tracking without raw audio storage or upload; native capture was absent at this initial offline replay stage. Subsequent opt-in observation wiring and separate players 04/05 replay are documented in guitar-note-observation-2026-09-26.json; physical-phone acceptance and user-facing scoring gates remain open.",
+    "dB in this evaluation is digital dBFS relative to an estimated recording floor, not acoustic dB(A) or hearing exposure."
+  ]
+}

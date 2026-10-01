@@ -80,6 +80,10 @@ run() {
 
 run "ruleset şeması + linter"        python3 tools/validate_ruleset.py
 run "kütüphane dürüstlük kuralları"  python3 tools/validate_library.py
+run "gitar yolu içerik şeması"         python3 tools/validate_guitar_journey.py
+run "gitar yolu paket bütünlüğü"       dart run tool/build_guitar_integrity_manifest.dart --check
+run "gitar yolu kapı öz-testi"          python3 -B -m unittest tools/test_validate_guitar_journey.py
+run "nota gözlemi atıf kapsamı"          python3 -B -m unittest discover -s tools -p test_validate_references_scope.py
 run "içerik-atıf süpürmesi"        python3 tools/validate_references.py
 run "START HERE şeridi (türetim)"    python3 tools/validate_starters.py
 run "starter kapısı öz-testi"        python3 tools/validate_starters.py --selftest

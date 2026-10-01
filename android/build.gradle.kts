@@ -16,6 +16,17 @@ subprojects {
     project.layout.buildDirectory.value(newSubprojectBuildDir)
 }
 subprojects {
+    // Third-party Flutter plugins sometimes pin older Android SDK levels in
+    // their own Gradle modules. Keep every Android subproject on the workspace
+    // toolchain so Gradle does not silently reinstall retired SDK packages.
+    afterEvaluate {
+        extensions.findByType(com.android.build.gradle.BaseExtension::class.java)?.apply {
+            compileSdkVersion(37)
+            buildToolsVersion("37.0.0")
+            ndkVersion = "30.0.16248370"
+        }
+    }
+
     project.evaluationDependsOn(":app")
 }
 

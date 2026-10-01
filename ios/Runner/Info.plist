@@ -16,10 +16,23 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>ostinato</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.yulalab.ostinato</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>With your permission, Ostinato observes a single guitar note on this device during optional practice. Audio is never recorded or uploaded.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Ostinato watches your sitting posture while you practice, comparing it to how real teachers sit. Video stays on this device and is never uploaded — the camera feed itself is never stored. A short summary of each practice session (how long you played, how much you stayed in range) is saved on this device so you can see your last session.</string>
+	<string>Ostinato uses the camera during lessons to compare your trunk lean with teacher reference ranges. Video stays on this device and is not uploaded or saved; a short session summary is saved locally.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>

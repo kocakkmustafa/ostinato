@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../content.dart';
+import '../app_locale.dart';
+import '../catalog_copy_tr.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 
@@ -25,7 +27,7 @@ class LessonLockedScreenRoute extends StatelessWidget {
             children: <Widget>[
               GlassIconButton(
                   icon: '‹',
-                  semanticLabel: 'Back',
+                  semanticLabel: localized(context, 'Back', 'Geri'),
                   onTap: () => Navigator.of(context).pop()),
               const SizedBox(height: 22),
               Container(
@@ -33,27 +35,28 @@ class LessonLockedScreenRoute extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: const Color(0x122A2533),
                     borderRadius: BorderRadius.circular(8)),
-                child: Text('LOCKED',
+                child: Text(localized(context, 'LOCKED', 'KİLİTLİ'),
                     key: const Key('state-lesson-locked'),
                     style: monoText(color: OstinatoColors.textMuted)),
               ),
               const SizedBox(height: 13),
-              Text(lesson.displayName,
+              Text(catalogName(context, lesson.id, lesson.displayName),
                   style: hankenText(
                       size: 27, weight: FontWeight.w600, height: 1.15)),
               const SizedBox(height: 11),
-              Text('${lesson.minutes} MIN'
-                  '${lesson.focus.isEmpty ? '' : ' · ${lesson.focus.toUpperCase()}'} '
-                  '· ${discipline.displayName.toUpperCase()}',
+              Text('${lesson.minutes} ${localized(context, 'MIN', 'DK')}'
+                  '${lesson.focus.isEmpty ? '' : ' · ${catalogTag(context, lesson.focus)}'} '
+                  '· ${catalogUpperName(context, discipline.id, discipline.displayName)}',
                   style: monoText()),
               const SizedBox(height: 20),
               GlassCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker('Why it is locked'),
+                    kicker(localized(context, 'Why it is locked', 'Neden kilitli')),
                     const SizedBox(height: 12),
-                    Text(lesson.lockedReason ?? '',
+                    Text(catalogCopy(context, '${lesson.id}.lockedReason',
+                            lesson.lockedReason ?? ''),
                         key: const Key('locked-reason'),
                         style: hankenText(size: 16.5, height: 1.62)),
                   ],
@@ -80,9 +83,10 @@ class LessonLockedScreenRoute extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      kicker('What would open it', color: hue.ink),
+                      kicker(localized(context, 'What would open it', 'Ne zaman açılır'), color: hue.ink),
                       const SizedBox(height: 9),
-                      Text(lesson.unblockedBy!,
+                      Text(catalogCopy(context, '${lesson.id}.unblockedBy',
+                              lesson.unblockedBy!),
                           key: const Key('locked-what-would-open-it'),
                           style: hankenText(size: 14.5, height: 1.55)),
                     ],
@@ -91,9 +95,9 @@ class LessonLockedScreenRoute extends StatelessWidget {
               ],
               const SizedBox(height: 16),
               Text(
-                'There is nothing to try here and no way to unlock it from '
-                'your side. It opens when the measurement is confirmed, '
-                'and you will see it change.',
+                localized(context,
+                  'There is nothing to try here and no way to unlock it from your side. It opens when the measurement is confirmed, and you will see it change.',
+                  'Bu dersi kendi başına açabileceğin bir işlem yok. Gerekli ölçüm doğrulandığında açılacak ve değişikliği burada göreceksin.'),
                 style: hankenText(size: 12.5, color: OstinatoColors.textFaint),
               ),
               const SizedBox(height: 18),
@@ -105,7 +109,7 @@ class LessonLockedScreenRoute extends StatelessWidget {
                   shape:
                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
                 ),
-                child: Text('Back to ${discipline.courses.first.displayName}',
+                child: Text('${localized(context, 'Back to', 'Geri dön:')} ${catalogName(context, discipline.courses.first.id, discipline.courses.first.displayName)}',
                     style: hankenText(size: 15, weight: FontWeight.w500)),
               ),
             ],

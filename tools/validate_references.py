@@ -63,9 +63,11 @@ FIXTURE_INDEX = "fixtures/audio/index.json"
 RUNTIME_REFS = {
     "setup.roomFloorDb": {
         "status": "blocked",
-        "blockedBy": "Kabukta mikrofon girişi YOK (O-040): oda gürültü tabanı "
-                     "hiç ölçülmüyor, Kurulum Kontrolü bunu kendi ekranında "
-                     "adıyla söylüyor. Tüketici hazır, besleyen yok.",
+        "blockedBy": "Eski duruş Kurulum Kontrolü ses yakalamaz; setup.roomFloorDb "
+                     "üreticisi bu rotaya bağlanmadı. Ayrı gitar nota gözlemi kendi "
+                     "RAM tabanını kullanır ve eski setup atfını beslemez.",
+        "excludedProducerPaths": ["lib/app/audio/guitar_note_observation_controller.dart"],
+        "separateProducerReason": "Target-free guitar observation has no legacy setup/ruleset input.",
         # Kabukta bu desen GÖRÜNÜRSE üretici doğmuş demektir → kayıt bayat.
         "producerPattern": r"roomFloorDb",
         "consumer": "packages/ostinato_audio/lib/src/gate/audio_confidence_gate.dart",
@@ -75,8 +77,8 @@ RUNTIME_REFS = {
         "blockedBy": "Ne üretici ne tüketici var — tüm ağaçta tek eşleşme "
                      "kendi beyanı (voice ruleset'i). Şan alıştırmasının hedef "
                      "frekansını verecek alıştırma-durumu katmanı inşa "
-                     "edilmedi; mikrofon girişi de yok, yani tüketilecek bir "
-                     "yer de olmazdı.",
+                     "edilmedi; şan rotası ses yakalamaz. Ayrı gitar gözlemi "
+                     "hedef nota veya şan ruleset girdisi üretmez.",
         "producerPattern": r"expectedNoteHz",
         "consumer": None,
     },
@@ -311,7 +313,11 @@ def sweep():
     shell = strip_dart_comments("\n".join(
         p.read_text(encoding="utf-8") for p in Path("lib").rglob("*.dart")))
     for ref, spec in RUNTIME_REFS.items():
-        produced = bool(re.search(spec["producerPattern"], shell))
+        excluded = set(spec.get("excludedProducerPaths", []))
+        scoped_shell = strip_dart_comments("\n".join(
+            p.read_text(encoding="utf-8") for p in Path("lib").rglob("*.dart")
+            if p.as_posix() not in excluded)) if excluded else shell
+        produced = bool(re.search(spec["producerPattern"], scoped_shell))
         if spec["status"] == "live":
             check(problems, produced,
                   f"muafiyet {ref!r} 'live' diyor ama kabukta ÜRETİCİSİ YOK "

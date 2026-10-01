@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../app_locale.dart';
 import '../content.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
@@ -117,8 +118,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: PrimaryButton(
                   key: const Key('onboarding-primary'),
                   label: _index == _stepCount - 1
-                      ? 'Open the library'
-                      : 'Continue',
+                      ? localized(context, 'Open the library', 'Kütüphaneyi aç')
+                      : localized(context, 'Continue', 'Devam et'),
                   onPressed: _next,
                 ),
               ),
@@ -148,10 +149,12 @@ final class _LibraryFacts {
   final int demoOnly;
 
   static _LibraryFacts from(ContentRepository repo) {
-    final List<Discipline> live =
-        repo.disciplines.where((Discipline d) => d.status == 'live').toList();
-    final List<Lesson> all =
-        <Lesson>[for (final Discipline d in live) ...d.lessons];
+    final List<Discipline> live = repo.disciplines
+        .where((Discipline d) => d.status == 'live')
+        .toList();
+    final List<Lesson> all = <Lesson>[
+      for (final Discipline d in live) ...d.lessons,
+    ];
     return _LibraryFacts(
       instruments: live.length,
       lessons: all.length,
@@ -170,29 +173,31 @@ class _MetronomeProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Semantics(
-        label: 'Step ${index + 1} of $count',
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            for (int i = 0; i < count; i++) ...<Widget>[
-              if (i > 0) const SizedBox(width: 7),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 280),
-                curve: Curves.easeOutCubic,
-                width: 3,
-                height: i == index ? 18 : 9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  color: i <= index
-                      ? OstinatoColors.ink
-                      : const Color(0x2E2A2533),
-                ),
-              ),
-            ],
-          ],
-        ),
-      );
+    label: localized(
+      context,
+      'Step ${index + 1} of $count',
+      '${index + 1} / $count adım',
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        for (int i = 0; i < count; i++) ...<Widget>[
+          if (i > 0) const SizedBox(width: 7),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 280),
+            curve: Curves.easeOutCubic,
+            width: 3,
+            height: i == index ? 18 : 9,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3),
+              color: i <= index ? OstinatoColors.ink : const Color(0x2E2A2533),
+            ),
+          ),
+        ],
+      ],
+    ),
+  );
 }
 
 /// Ortak sayfa iskeleti — içerik HER ZAMAN kaydırılabilir.
@@ -209,14 +214,14 @@ class _Step extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-      builder: (BuildContext ctx, BoxConstraints c) => SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
-        // Kısa adımda içerik dikeyde ortalanır, uzun adımda normal akar
-        // (ekran kanıtı O-046: adım 1-2'de kartla düğme arasında ~200px ölü
-        // boşluk vardı, adım 3'te ise taşma — aynı ekranda iki zıt kusur).
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: c.maxHeight - 46),
-          child: Column(
+    builder: (BuildContext ctx, BoxConstraints c) => SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
+      // Kısa adımda içerik dikeyde ortalanır, uzun adımda normal akar
+      // (ekran kanıtı O-046: adım 1-2'de kartla düğme arasında ~200px ölü
+      // boşluk vardı, adım 3'te ise taşma — aynı ekranda iki zıt kusur).
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: c.maxHeight - 46),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -224,8 +229,9 @@ class _Step extends StatelessWidget {
             ...children,
           ],
         ),
-        ),
-      ));
+      ),
+    ),
+  );
 }
 
 class _WelcomeStep extends StatelessWidget {
@@ -233,58 +239,82 @@ class _WelcomeStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _Step(
-        top: Center(
-          child: SizedBox(
-            width: 150,
-            height: 178,
-            // Karşılamanın görseli bir ikon DEĞİL, ürünün asıl iddiası:
-            // arkadaki kama eğitmen BANDI, kesik çizgi bir konum. "Bant,
-            // nokta değil" cümlesi burada çiziliyor. Açılar temsilîdir ve
-            // hüküm taşımaz — bu yüzden yanında bir sayı yoktur.
-            child: CustomPaint(
-              // Kama GENİŞLETİLDİ ve KOYULAŞTIRILDI (ekran kanıtı O-046):
-              // ±7° bu ölçekte ince bir dilim olarak çıkıyordu ve görselin
-              // tek işi olan cümleyi — "band, not a point" — tam TERSİNDEN
-              // söylüyordu. Açı hüküm taşımıyor (bu figürün yanında sayı
-              // YOK, ölçüm iddiası YOK), o yüzden tek ölçüt OKUNABİLİRLİK.
-              painter: SkeletonFigurePainter(
-                bandLowDeg: -15,
-                bandHighDeg: 15,
-                bandColor: const Color(0x4D5F4CA0),
-                markerDeg: 6,
-              ),
-            ),
+    top: Center(
+      child: SizedBox(
+        width: 150,
+        height: 178,
+        // Karşılamanın görseli bir ikon DEĞİL, ürünün asıl iddiası:
+        // arkadaki kama eğitmen BANDI, kesik çizgi bir konum. "Bant,
+        // nokta değil" cümlesi burada çiziliyor. Açılar temsilîdir ve
+        // hüküm taşımaz — bu yüzden yanında bir sayı yoktur.
+        child: CustomPaint(
+          // Kama GENİŞLETİLDİ ve KOYULAŞTIRILDI (ekran kanıtı O-046):
+          // ±7° bu ölçekte ince bir dilim olarak çıkıyordu ve görselin
+          // tek işi olan cümleyi — "band, not a point" — tam TERSİNDEN
+          // söylüyordu. Açı hüküm taşımıyor (bu figürün yanında sayı
+          // YOK, ölçüm iddiası YOK), o yüzden tek ölçüt OKUNABİLİRLİK.
+          painter: SkeletonFigurePainter(
+            bandLowDeg: -15,
+            bandHighDeg: 15,
+            bandColor: const Color(0x4D5F4CA0),
+            markerDeg: 6,
           ),
         ),
-        children: <Widget>[
-          kicker('Welcome'),
-          const SizedBox(height: 10),
-          Text('Measured, not chosen.',
-              key: const Key('onboarding-welcome-title'),
-              style: hankenText(size: 30, weight: FontWeight.w600, height: 1.1)),
-          const SizedBox(height: 12),
-          Text(
-            'Put your phone where it can see you. Ostinato compares how you '
-            'sit to how real teachers sit — and shows you where you land '
-            'inside the spread they agree on.',
-            style: hankenText(
-                size: 15, height: 1.55, color: OstinatoColors.textBody),
+      ),
+    ),
+    children: <Widget>[
+      kicker(localized(context, 'Welcome', 'Hoş geldin')),
+      const SizedBox(height: 10),
+      Text(
+        localized(
+          context,
+          'Build your guitar practice.',
+          'Gitar çalışmanı geliştir.',
+        ),
+        key: const Key('onboarding-welcome-title'),
+        style: hankenText(size: 30, weight: FontWeight.w600, height: 1.1),
+      ),
+      const SizedBox(height: 12),
+      Text(
+        localized(
+          context,
+          'Learn guitar through progressive lessons, practice tasks and '
+              'self-checks. The course works without an account, camera or '
+              'microphone. Your practice record stays on this device.',
+          'Gitarı sıralı dersler, çalışma görevleri ve öz denetimlerle öğrenin. '
+              'Kurs hesap, kamera veya mikrofon olmadan çalışır. Çalışma '
+              'kaydınız bu cihazda kalır.',
+        ),
+        style: hankenText(
+          size: 15,
+          height: 1.55,
+          color: OstinatoColors.textBody,
+        ),
+      ),
+      const SizedBox(height: 14),
+      GlassCard(
+        borderRadius: 18,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Text(
+          localized(
+            context,
+            'Optional microphone practice shows approximate single-note '
+                'observations after your permission. It does not grade your '
+                'playing. Live camera practice and subscription sales are '
+                'closed in this release.',
+            'İsteğe bağlı mikrofon pratiği, izninizden sonra yaklaşık tek nota '
+                'gözlemi gösterir. Çalma başarınızı puanlamaz. Bu sürümde canlı '
+                'kamera pratiği ve abonelik satışı kapalıdır.',
           ),
-          const SizedBox(height: 14),
-          GlassCard(
-            borderRadius: 18,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            child: Text(
-              'Correct posture is a band, not a point. That is why you will '
-              'never see a score out of ten here: we can tell you where you '
-              'are inside the teachers’ range, and we cannot honestly turn '
-              'that into a number.',
-              style: hankenText(
-                  size: 13.5, height: 1.55, color: OstinatoColors.textBody),
-            ),
+          style: hankenText(
+            size: 13.5,
+            height: 1.55,
+            color: OstinatoColors.textBody,
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 class _ScopeStep extends StatelessWidget {
@@ -293,50 +323,81 @@ class _ScopeStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _Step(
-        children: <Widget>[
-          kicker('What is here'),
-          const SizedBox(height: 10),
-          Text('Small, and honest about it.',
-              key: const Key('onboarding-scope-title'),
-              style: hankenText(size: 28, weight: FontWeight.w600, height: 1.12)),
-          const SizedBox(height: 14),
-          _FactRow(
-            key: const Key('onboarding-fact-instruments'),
-            value: '${facts.instruments}',
-            label: 'instruments, each built on posture footage from real '
-                'teachers who agree with each other',
+    children: <Widget>[
+      kicker(localized(context, 'What is here', 'İçerik')),
+      const SizedBox(height: 10),
+      Text(
+        localized(
+          context,
+          'Small, and honest about it.',
+          'Kapsamı sınırlı, açıklaması açık.',
+        ),
+        key: const Key('onboarding-scope-title'),
+        style: hankenText(size: 28, weight: FontWeight.w600, height: 1.12),
+      ),
+      const SizedBox(height: 14),
+      _FactRow(
+        key: const Key('onboarding-fact-instruments'),
+        value: '${facts.instruments}',
+        label: localized(
+          context,
+          'instrument previews in the posture catalogue; live camera practice is closed',
+          'çalgı ön izlemesi duruş kataloğunda; canlı kamera pratiği kapalıdır',
+        ),
+      ),
+      _FactRow(
+        key: const Key('onboarding-fact-lessons'),
+        value: '${facts.lessons}',
+        label: localized(
+          context,
+          'legacy posture lesson previews',
+          'önceki duruş dersi ön izlemeleri',
+        ),
+      ),
+      _FactRow(
+        key: const Key('onboarding-fact-locked'),
+        value: '${facts.locked}',
+        label: localized(
+          context,
+          'of those are locked. You can open every one of them and '
+              'read exactly which measurement it is waiting on',
+          'ders kilitli. Her birini açıp hangi ölçümün eksik olduğunu '
+              'görebilirsiniz',
+        ),
+      ),
+      _FactRow(
+        key: const Key('onboarding-fact-demo'),
+        value: '${facts.demoOnly}',
+        label: localized(
+          context,
+          'are measured but never graded — the teachers disagree '
+              'too much for a judgement to mean anything',
+          'ders ölçülür ama puanlanmaz; eğitmenler anlamlı bir hüküm '
+              'için yeterince uzlaşmıyor',
+        ),
+      ),
+      const SizedBox(height: 8),
+      GlassCard(
+        borderRadius: 18,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Text(
+          localized(
+            context,
+            'Every instrument page carries the full list of what we measure '
+                'and what we do not, with the reason next to each line. It is '
+                'the first thing on the page, not a footnote.',
+            'Her çalgı sayfasında neyin ölçülüp neyin ölçülmediği, '
+                'nedenleriyle birlikte başta gösterilir.',
           ),
-          _FactRow(
-            key: const Key('onboarding-fact-lessons'),
-            value: '${facts.lessons}',
-            label: 'lessons across them',
+          style: hankenText(
+            size: 13.5,
+            height: 1.55,
+            color: OstinatoColors.textBody,
           ),
-          _FactRow(
-            key: const Key('onboarding-fact-locked'),
-            value: '${facts.locked}',
-            label: 'of those are locked. You can open every one of them and '
-                'read exactly which measurement it is waiting on',
-          ),
-          _FactRow(
-            key: const Key('onboarding-fact-demo'),
-            value: '${facts.demoOnly}',
-            label: 'are measured but never graded — the teachers disagree '
-                'too much for a judgement to mean anything',
-          ),
-          const SizedBox(height: 8),
-          GlassCard(
-            borderRadius: 18,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            child: Text(
-              'Every instrument page carries the full list of what we measure '
-              'and what we do not, with the reason next to each line. It is '
-              'the first thing on the page, not a footnote.',
-              style: hankenText(
-                  size: 13.5, height: 1.55, color: OstinatoColors.textBody),
-            ),
-          ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 class _FactRow extends StatelessWidget {
@@ -346,33 +407,37 @@ class _FactRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(bottom: 14),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              width: 42,
-              child: Text(value,
-                  style: hankenText(
-                      size: 26, weight: FontWeight.w600, height: 1)),
-            ),
-            const SizedBox(width: 10),
-            // Expanded ŞART: sayı sabit genişlikte, etiket gerçek metinle
-            // uzuyor. Bu satır sınıfı bu kod tabanında daha önce taştı
-            // (`library_screen.dart` başlığı, `live_screen.dart` başlığı).
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 3),
-                child: Text(label,
-                    style: hankenText(
-                        size: 13.5,
-                        height: 1.5,
-                        color: OstinatoColors.textBody)),
+    padding: const EdgeInsets.only(bottom: 14),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(
+          width: 42,
+          child: Text(
+            value,
+            style: hankenText(size: 26, weight: FontWeight.w600, height: 1),
+          ),
+        ),
+        const SizedBox(width: 10),
+        // Expanded ŞART: sayı sabit genişlikte, etiket gerçek metinle
+        // uzuyor. Bu satır sınıfı bu kod tabanında daha önce taştı
+        // (`library_screen.dart` başlığı, `live_screen.dart` başlığı).
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 3),
+            child: Text(
+              label,
+              style: hankenText(
+                size: 13.5,
+                height: 1.5,
+                color: OstinatoColors.textBody,
               ),
             ),
-          ],
+          ),
         ),
-      );
+      ],
+    ),
+  );
 }
 
 class _SensorsStep extends StatelessWidget {
@@ -380,70 +445,95 @@ class _SensorsStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _Step(
-        children: <Widget>[
-          kicker('Sensors and your data'),
-          const SizedBox(height: 10),
-          Text('What we will ask for.',
-              key: const Key('onboarding-sensors-title'),
-              style: hankenText(size: 28, weight: FontWeight.w600, height: 1.12)),
-          const SizedBox(height: 14),
-          const _SensorCard(
-            title: 'The camera',
-            key: Key('onboarding-camera-card'),
-            // DÜZELTME (O-099, koordinatör hükmü 2026-08-12): cümle "nine
-            // upper-body points — hips, shoulders, neck" diyordu. Ölçüldü:
-            // canlı zincir `specs:[trunkTilt]` = TEK açı, güven kapısı
-            // `required:LmRegion.torso` = DÖRT landmark, ve "neck" HİÇ
-            // okunmuyor. "Dokuz" figürün düğüm sayısıydı — sayı gerçek,
-            // BİRİMİ yanlış. Kural: her sayı saydığı şeyin yanında durur.
-            body: 'It reads your two shoulders and your two hips, and from '
-                'them measures one thing: how far your trunk leans. No face '
-                '— nothing above your shoulders is read at all: our teacher '
-                'references were filmed waist-up, so we have nothing to '
-                'compare a head against. Ostinato asks for camera access '
-                'when your first setup check starts, not now, because there '
-                'is nothing to look at until then.',
-          ),
-          const SizedBox(height: 12),
-          // Sıra DEĞİŞTİ (2026-08-07, ekran kanıtı O-046): bu kart en sondaydı
-          // ve 375×812'de görüntü kenarında CÜMLE ORTASINDA kesiliyordu —
-          // "it does not treat anything," diye. Metin VARDI ve DOĞRUYDU,
-          // yani hiçbir test bunu göremezdi (Lissom'un M-F-296 sınıfı:
-          // okunabilirlik `find.textContaining` ile ölçülemez). Uygulamanın
-          // etik olarak en yüklü cümlesi, kaydırmaya bağlı olmamalı.
-          const _SensorCard(
-            title: 'Not a medical tool',
-            key: Key('onboarding-wellness-card'),
-            body: 'Ostinato describes how you are sitting compared to a set '
-                'of teachers. It does not diagnose anything and nothing it '
-                'says is health advice. If something hurts, that is a '
-                'question for a person, not an app.',
-          ),
-          const SizedBox(height: 12),
-          const _SensorCard(
-            title: 'The microphone is not wired',
-            key: Key('onboarding-microphone-card'),
-            body: 'There is no microphone input in this build. No audio '
-                'permission is requested and nothing you play is captured. '
-                'Everything Ostinato judges, it judges from the camera.',
-          ),
-          const SizedBox(height: 12),
-          const _SensorCard(
-            title: 'Your video',
-            key: Key('onboarding-video-card'),
-            // D14 (2026-08-16, O-153): "nothing is stored" DÜZELTİLDİ —
-            // oturum SONUCU artık saklanıyor. Video/ham ölçüm hâlâ
-            // saklanmıyor (bu iddia DOĞRU kaldı, o yüzden korundu);
-            // yalnız yeni gerçeği anlatan ikinci cümle YENİDEN yazıldı.
-            body: 'Raw video never leaves this device — there is no setting '
-                'that changes that. The video itself is never stored, and '
-                'neither is the frame-by-frame measurement. What is stored '
-                'is a short summary of your practice — how long you played '
-                'and how much you stayed in range — so you can see your '
-                'last session. The camera only runs inside a lesson.',
-          ),
-        ],
-      );
+    children: <Widget>[
+      kicker(
+        localized(context, 'Sensors and your data', 'Sensörler ve verileriniz'),
+      ),
+      const SizedBox(height: 10),
+      Text(
+        localized(context, 'What we will ask for.', 'Hangi izni isteyeceğiz?'),
+        key: const Key('onboarding-sensors-title'),
+        style: hankenText(size: 28, weight: FontWeight.w600, height: 1.12),
+      ),
+      const SizedBox(height: 14),
+      _SensorCard(
+        title: localized(context, 'The camera', 'Kamera'),
+        key: const Key('onboarding-camera-card'),
+        // DÜZELTME (O-099, koordinatör hükmü 2026-08-12): cümle "nine
+        // upper-body points — hips, shoulders, neck" diyordu. Ölçüldü:
+        // canlı zincir `specs:[trunkTilt]` = TEK açı, güven kapısı
+        // `required:LmRegion.torso` = DÖRT landmark, ve "neck" HİÇ
+        // okunmuyor. "Dokuz" figürün düğüm sayısıydı — sayı gerçek,
+        // BİRİMİ yanlış. Kural: her sayı saydığı şeyin yanında durur.
+        body: localized(
+          context,
+          'Live camera posture practice is closed in this release. The guitar '
+              'course does not ask for camera access and uses your own practice '
+              'record rather than an automatic posture grade.',
+          'Bu sürümde canlı kamera duruş pratiği kapalıdır. Gitar kursu kamera '
+              'izni istemez; otomatik duruş puanı yerine kendi çalışma '
+              'kaydınızı kullanır.',
+        ),
+      ),
+      const SizedBox(height: 12),
+      // Sıra DEĞİŞTİ (2026-08-07, ekran kanıtı O-046): bu kart en sondaydı
+      // ve 375×812'de görüntü kenarında CÜMLE ORTASINDA kesiliyordu —
+      // "it does not treat anything," diye. Metin VARDI ve DOĞRUYDU,
+      // yani hiçbir test bunu göremezdi (Lissom'un M-F-296 sınıfı:
+      // okunabilirlik `find.textContaining` ile ölçülemez). Uygulamanın
+      // etik olarak en yüklü cümlesi, kaydırmaya bağlı olmamalı.
+      _SensorCard(
+        title: localized(context, 'Not a medical tool', 'Tıbbi araç değil'),
+        key: const Key('onboarding-wellness-card'),
+        body: localized(
+          context,
+          'Ostinato teaches guitar practice. It does not diagnose or treat '
+              'conditions and does not provide health advice. Stop if practice '
+              'hurts and seek advice from a qualified healthcare professional.',
+          'Ostinato gitar çalışmasını öğretir. Tanı veya tedavi hizmeti ya da '
+              'sağlık tavsiyesi vermez. Çalışırken ağrı olursa durun ve bir '
+              'sağlık uzmanına danışın.',
+        ),
+      ),
+      const SizedBox(height: 12),
+      _SensorCard(
+        title: localized(
+          context,
+          'Optional single-note microphone',
+          'İsteğe bağlı tek nota mikrofonu',
+        ),
+        key: const Key('onboarding-microphone-card'),
+        body: localized(
+          context,
+          'The guitar learning path offers approximate single-note observation. '
+              'You choose when to start and grant microphone permission. Audio stays on this device '
+              'in temporary memory and is never recorded or uploaded. The course works without it; '
+              'no chord or playing-success score is produced.',
+          'Gitar öğrenme yolunda yaklaşık tek nota gözlemi vardır. Başlatmayı ve mikrofon '
+              'iznini siz seçersiniz. Ses bu cihazda geçici bellekte kalır; kaydedilmez veya yüklenmez. '
+              'Kurs mikrofonsuz çalışır; akor veya çalma başarısı puanı üretilmez.',
+        ),
+      ),
+      const SizedBox(height: 12),
+      _SensorCard(
+        title: localized(context, 'Your video', 'Videonuz'),
+        key: const Key('onboarding-video-card'),
+        // D14 (2026-08-16, O-153): "nothing is stored" DÜZELTİLDİ —
+        // oturum SONUCU artık saklanıyor. Video/ham ölçüm hâlâ
+        // saklanmıyor (bu iddia DOĞRU kaldı, o yüzden korundu);
+        // yalnız yeni gerçeği anlatan ikinci cümle YENİDEN yazıldı.
+        body: localized(
+          context,
+          'The course does not capture video. Lesson progress and self-checks '
+              'stay in local app storage. Existing posture-session summaries '
+              'also stay on this device; they are not uploaded to your account.',
+          'Kurs video yakalamaz. Ders ilerlemesi ve öz denetimler yerel uygulama '
+              'alanında kalır. Önceki duruş seansı özetleri de bu cihazda kalır; '
+              'hesabınıza yüklenmez.',
+        ),
+      ),
+    ],
+  );
 }
 
 class _SensorCard extends StatelessWidget {
@@ -453,22 +543,27 @@ class _SensorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: .62),
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: Colors.white.withValues(alpha: .75)),
+    width: double.infinity,
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.white.withValues(alpha: .62),
+      borderRadius: BorderRadius.circular(18),
+      border: Border.all(color: Colors.white.withValues(alpha: .75)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        kicker(title),
+        const SizedBox(height: 9),
+        Text(
+          body,
+          style: hankenText(
+            size: 13.5,
+            height: 1.55,
+            color: OstinatoColors.textBody,
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            kicker(title),
-            const SizedBox(height: 9),
-            Text(body,
-                style: hankenText(
-                    size: 13.5, height: 1.55, color: OstinatoColors.textBody)),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 }

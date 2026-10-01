@@ -5,6 +5,8 @@ import 'package:ostinato_posture/ostinato_posture.dart';
 import 'package:permission_handler/permission_handler.dart' show openAppSettings;
 
 import '../camera_pose_source.dart';
+import '../account_connection.dart';
+import '../app_locale.dart';
 import '../content.dart';
 import '../cue_text.dart';
 import '../design/app_scope.dart';
@@ -66,6 +68,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   // didChangeDependencies()'e taşındı, TEK SEFERLİK bayrakla korunuyor.
   late final PostureContract? _contract;
   late final CueTextResolver _cueText;
+  String? _accountUserId;
   PostureEvaluator? _evaluator;
   bool _contextReady = false;
 
@@ -128,6 +131,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
     super.didChangeDependencies();
     if (_contextReady) return;
     _contextReady = true;
+    _accountUserId = AccountScope.maybeOf(context)?.currentUserId;
 
     final ContentRepositoryScope scope = ContentRepositoryScope.of(context);
     _contract = scope.contractOrNull(widget.discipline.id);
@@ -216,7 +220,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   /// kartı çizilmez, uygulama çökmez.
   Future<PersistedSession?> _readPreviousThenSave(
       SessionSummary summary) async {
-    const SessionStore store = SessionStore();
+    final SessionStore store = SessionStore(accountUserId: _accountUserId);
     final PersistedSession? previous = await store.lastSession();
     store.save(PersistedSession.fromSummary(
       disciplineId: widget.discipline.id,
@@ -257,7 +261,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
                   // taştı (375pt'te ölçüldü, test/real_content_overflow_test.dart).
                   Expanded(
                     child: Column(children: <Widget>[
-                      Text(widget.lesson.displayName,
+                      Text(catalogName(context, widget.lesson.id, widget.lesson.displayName),
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -378,7 +382,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
               shape:
                   RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
             ),
-            child: Text('Stop and see the summary',
+            child: Text(localized(context, 'Stop and see the summary', 'Durdur ve özeti gör'),
                 style: hankenText(size: 15, weight: FontWeight.w500)),
           ),
       ],
@@ -420,7 +424,7 @@ class _MeasuringFigure extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                      'TEACHERS ${contract.bandLowDeg.toStringAsFixed(1)}–'
+                      '${localized(context, 'TEACHERS', 'EĞİTMENLER')} ${contract.bandLowDeg.toStringAsFixed(1)}–'
                       '${contract.bandHighDeg.toStringAsFixed(1)}° · '
                       'N=${contract.teacherCount}',
                       style: monoText(size: 9.5, letterSpacing: .09)),
@@ -438,8 +442,8 @@ class _MeasuringFigure extends StatelessWidget {
                 color: hue.ink,
               ),
               const SizedBox(height: 8),
-              Text('No score, and none is coming. The bar is the range; '
-                  'the mark is you.',
+              Text(localized(context, 'No score, and none is coming. The bar is the range; the mark is you.',
+                  'Puan yok. Çubuk eğitmen aralığını, işaret seni gösterir.'),
                   style: hankenText(size: 11.5, color: OstinatoColors.textMuted)),
             ],
           ),
@@ -470,13 +474,13 @@ class _BlindNotice extends StatelessWidget {
               child: Text('?', style: hankenText(size: 20, color: OstinatoColors.textFaint)),
             ),
             const SizedBox(height: 16),
-            Text('I can’t see you right now.',
+            Text(localized(context, 'I can’t see you right now.', 'Şu anda seni göremiyoruz.'),
                 style: hankenText(size: 21, weight: FontWeight.w500)),
             const SizedBox(height: 10),
             Text(
-              'Landmark confidence is below the bar. I’m not judging this '
-              'stretch — and I’m telling you rather than going quiet, '
-              'because silence would read as "you’re doing fine".',
+              localized(context,
+                  'Landmark confidence is below the bar. I’m not judging this stretch — and I’m telling you rather than going quiet, because silence would read as "you’re doing fine".',
+                  'Vücut noktaları yeterli güvenle okunmuyor. Bu bölümü değerlendirmiyoruz; sessiz kalmak yanlış bir güven verebilirdi.'),
               textAlign: TextAlign.center,
               style: hankenText(
                         size: 14.5, height: 1.55,
@@ -501,14 +505,15 @@ class _CueAPanel extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            kicker('Observation', color: hue.ink),
+            kicker(localized(context, 'Observation', 'Gözlem'), color: hue.ink),
             const SizedBox(height: 8),
             Text(text,
                 style: hankenText(size: 17, weight: FontWeight.w500, height: 1.35)),
             const SizedBox(height: 7),
             Text(
-              'Not a correction — we have no teacher data on what you '
-              'should do about it. Just what we measured.',
+              localized(context,
+                  'Not a correction — we have no teacher data on what you should do about it. Just what we measured.',
+                  'Bu bir düzeltme önerisi değil. Ne yapman gerektiğine dair eğitmen verimiz yok; yalnızca ölçtüğümüzü gösteriyoruz.'),
               style: hankenText(size: 12.5, color: OstinatoColors.textMuted),
             ),
           ],
@@ -599,13 +604,13 @@ class _NoticeCard extends StatelessWidget {
           'Open Settings',
           openAppSettings,
         ),
-      SetupFailed(:final String reason) => ('live-setup-failed',
+      SetupFailed() => ('live-setup-failed',
           'This lesson opened, but nothing is being measured',
-          'The camera did not start ($reason). We are simply not '
+          'The camera did not start. We are simply not '
               'analysing anything right now.', null, null),
-      CameraUnavailable(:final String reason) => ('live-camera-unavailable',
+      CameraUnavailable() => ('live-camera-unavailable',
           'The camera did not open',
-          'We could not start a camera session ($reason).', null, null),
+          'We could not start a camera session.', null, null),
       _ => ('live-unknown', 'Nothing to show', '', null, null),
     };
     return Center(
@@ -615,9 +620,22 @@ class _NoticeCard extends StatelessWidget {
           key: Key(key),
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text(title, style: hankenText(size: 19, weight: FontWeight.w500)),
+            Text(localized(context, title, switch (state) {
+              Starting() => 'Kamera hazırlanıyor',
+              PermissionDeniedRetriable() || PermissionDeniedPermanent() => 'Kamera erişimi kapalı',
+              SetupFailed() => 'Ders açıldı ancak ölçüm başlamadı',
+              CameraUnavailable() => 'Kamera açılamadı',
+              _ => 'Gösterilecek bir şey yok',
+            }), style: hankenText(size: 19, weight: FontWeight.w500)),
             const SizedBox(height: 8),
-            Text(body,
+            Text(localized(context, body, switch (state) {
+              Starting() => 'Bu kısa sürebilir. Hiçbir şey kaydedilmiyor.',
+              PermissionDeniedRetriable() => 'Oturma duruşunu görebilmek için kamera erişimi gerekli. Video telefonundan çıkmaz.',
+              PermissionDeniedPermanent() => 'Sistem tekrar izin istemeyecek. Erişimi Ayarlar’dan açabilirsin. Video telefonundan çıkmaz.',
+              SetupFailed() => 'Kamera açılamadı. Şu anda hiçbir şey analiz edilmiyor.',
+              CameraUnavailable() => 'Kamera oturumu başlatılamadı.',
+              _ => '',
+            }),
                 textAlign: TextAlign.center,
                 style: hankenText(size: 14, color: OstinatoColors.textBody)),
             if (action != null) ...<Widget>[
@@ -626,7 +644,8 @@ class _NoticeCard extends StatelessWidget {
                 key: const Key('notice-action'),
                 onPressed: onAction,
                 style: FilledButton.styleFrom(backgroundColor: OstinatoColors.ink),
-                child: Text(action),
+                child: Text(localized(context, action,
+                    state is PermissionDeniedRetriable ? 'Tekrar dene' : 'Ayarları aç')),
               ),
             ],
           ],

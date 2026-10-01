@@ -13,6 +13,11 @@ sealed class AudioSurfaceState {
   const AudioSurfaceState();
 }
 
+/// Capture is closed. Resuming the app never implicitly restarts it.
+final class AudioStopped extends AudioSurfaceState {
+  const AudioStopped();
+}
+
 /// Oturum henüz açılıyor — izin isteği/native akış kurulumu sürüyor.
 final class AudioStarting extends AudioSurfaceState {
   const AudioStarting();

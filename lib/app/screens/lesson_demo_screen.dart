@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../content.dart';
+import '../app_locale.dart';
+import '../catalog_copy_tr.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 
@@ -41,23 +43,23 @@ class LessonDemoScreenRoute extends StatelessWidget {
             children: <Widget>[
               GlassIconButton(
                   icon: '‹',
-                  semanticLabel: 'Back',
+                  semanticLabel: localized(context, 'Back', 'Geri'),
                   onTap: () => Navigator.of(context).pop()),
               const SizedBox(height: 22),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                     color: hue.chip, borderRadius: BorderRadius.circular(8)),
-                child: Text('MEASURED · NOT MARKED',
+                child: Text(localized(context, 'MEASURED · NOT MARKED', 'ÖLÇÜM · PUAN YOK'),
                     key: const Key('state-lesson-demo'),
                     style: monoText(color: hue.ink)),
               ),
               const SizedBox(height: 13),
-              Text(lesson.displayName,
+              Text(catalogName(context, lesson.id, lesson.displayName),
                   style: hankenText(
                       size: 27, weight: FontWeight.w600, height: 1.15)),
               const SizedBox(height: 11),
-              Text('${lesson.minutes} MIN · ${discipline.displayName.toUpperCase()}',
+              Text('${lesson.minutes} ${localized(context, 'MIN', 'DK')} · ${catalogUpperName(context, discipline.id, discipline.displayName)}',
                   style: monoText()),
               const SizedBox(height: 20),
               Container(
@@ -70,7 +72,8 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker('Your elbow angle, when this is live', color: hue.ink),
+                    kicker(localized(context, 'Your elbow angle, when this is live',
+                        'Canlı ölçüm olduğunda dirsek açınız'), color: hue.ink),
                     const SizedBox(height: 14),
                     if (arm != null)
                       Column(
@@ -101,7 +104,8 @@ class LessonDemoScreenRoute extends StatelessWidget {
                         ],
                       ),
                     const SizedBox(height: 14),
-                    Text(lesson.demoOnlyReason ?? '',
+                    Text(catalogCopy(context, '${lesson.id}.demoOnlyReason',
+                            lesson.demoOnlyReason ?? ''),
                         key: const Key('demo-reason'),
                         style: hankenText(size: 15, height: 1.6)),
                   ],
@@ -112,23 +116,29 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker('Why there is no mark'),
+                    kicker(localized(context, 'Why there is no mark',
+                        'Neden puan verilmiyor')),
                     const SizedBox(height: 8),
-                    Text(lesson.blockedBy ?? '',
+                    Text(catalogCopy(context, '${lesson.id}.blockedBy',
+                            lesson.blockedBy ?? ''),
                         style: hankenText(size: 13.5, height: 1.55)),
                     const SizedBox(height: 12),
                     const Divider(height: 1),
                     const SizedBox(height: 12),
-                    kicker('What would change it'),
+                    kicker(localized(context, 'What would change it',
+                        'Bunu ne değiştirebilir')),
                     const SizedBox(height: 8),
-                    Text(lesson.unblockedBy ?? '',
+                    Text(catalogCopy(context, '${lesson.id}.unblockedBy',
+                            lesson.unblockedBy ?? ''),
                         style: hankenText(size: 13.5, height: 1.55)),
                     const SizedBox(height: 12),
                     const Divider(height: 1),
                     const SizedBox(height: 12),
-                    kicker('If it never does'),
+                    kicker(localized(context, 'If it never does',
+                        'Değişmezse ne olur')),
                     const SizedBox(height: 8),
-                    Text(lesson.ifBlockedStaysBlocked ?? '',
+                    Text(catalogCopy(context, '${lesson.id}.ifItStaysBlocked',
+                            lesson.ifBlockedStaysBlocked ?? ''),
                         style: hankenText(size: 13.5, height: 1.55)),
                   ],
                 ),
@@ -160,10 +170,17 @@ class LessonDemoScreenRoute extends StatelessWidget {
                       // çıkarıldı — bir zaman taahhüdüydü. Kalan cümle
                       // bugünün OLGUSUNU söylüyor, gelecek vaat etmiyor.
                       child: Text(
-                        'Elbow tracking is not wired into this build — '
-                        'only trunk posture measures live today. The text '
-                        'above is real; the live number is not, so we are '
-                        'not showing one.',
+                        localized(
+                          context,
+                          'Elbow tracking is not wired into this build — '
+                              'only trunk posture measures live today. The text '
+                              'above is real; the live number is not, so we are '
+                              'not showing one.',
+                          'Bu sürümde dirsek takibi bağlı değildir; canlı olarak '
+                              'yalnız gövde duruşu ölçülür. Yukarıdaki açıklama '
+                              'gerçektir, ancak canlı dirsek değeri olmadığı için '
+                              'bir sayı göstermiyoruz.',
+                        ),
                         // H-44 (2026-08-16): İNECEK KALEM — dirsek/önkol
                         // açısı CANLI ölçüme eklenirse (kart hâlâ elbow'u
                         // GEREKÇELİ dar bırakabilir — bkz. guitar instrument

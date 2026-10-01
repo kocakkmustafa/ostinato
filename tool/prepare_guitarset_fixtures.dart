@@ -195,7 +195,7 @@ void main() {
           'micDistanceM': null,
           'sampleRate': wav.sampleRate,
           'license': 'CC-BY-4.0',
-          '\$licenseNote': 'GuitarSet (Xu, Q., Salamon, J., Bittner, R., Wang, X., Bello, J.P. '
+          '\$licenseNote': 'GuitarSet (Xi, Q., Bittner, R., Pauwels, J., Ye, X., Bello, J.P. '
               '"GuitarSet: A Dataset for Guitar Transcription", ISMIR 2018), Zenodo record 3371780, '
               'CC BY 4.0 — verified 2026-08-18 (docs/research/'
               '2026-08-18-w1-audio-golden-fixture-kaynaklari.md). Source ZIP entries SHA-256-pinned '

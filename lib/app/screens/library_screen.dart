@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
+import 'package:motion_account/motion_account.dart'
+    show motionPaidFeaturesAvailable;
 
+import '../app_locale.dart';
 import '../content.dart';
 import '../cue_text.dart';
 import '../design/ostinato_theme.dart';
@@ -19,8 +22,9 @@ class LibraryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Discipline> live =
-        repo.disciplines.where((Discipline d) => d.status == 'live').toList();
+    final List<Discipline> live = repo.disciplines
+        .where((Discipline d) => d.status == 'live')
+        .toList();
     // Şerit ÜÇ karttan bağımsız türetilir: canlı disiplinin bildirdiği
     // `starterLessonId` çözülebiliyorsa kalem var, çözülemiyorsa YOK.
     final List<(Discipline, Lesson)> starters = <(Discipline, Lesson)>[
@@ -46,36 +50,43 @@ class LibraryScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(children: <Widget>[
-                      Container(
-                        width: 26,
-                        height: 26,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(9),
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: <Color>[
-                              Color(0xFFFFD9BE),
-                              Color(0xFFDACDF6),
-                              Color(0xFFC4EADB)
-                            ],
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          width: 26,
+                          height: 26,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(9),
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: <Color>[
+                                Color(0xFFFFD9BE),
+                                Color(0xFFDACDF6),
+                                Color(0xFFC4EADB),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 9),
-                      Text('Ostinato',
+                        const SizedBox(width: 9),
+                        Text(
+                          'Ostinato',
                           style: hankenText(
-                              size: 21,
-                              weight: FontWeight.w600,
-                              color: OstinatoColors.ink)),
-                    ]),
+                            size: 21,
+                            weight: FontWeight.w600,
+                            color: OstinatoColors.ink,
+                          ),
+                        ),
+                      ],
+                    ),
                     GlassIconButton(
                       icon: '⚙',
-                      semanticLabel: 'Settings',
+                      semanticLabel: localized(context, 'Settings', 'Ayarlar'),
                       onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                              builder: (_) => const SettingsScreen())),
+                        MaterialPageRoute<void>(
+                          builder: (_) => const SettingsScreen(),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -83,17 +94,25 @@ class LibraryScreen extends StatelessWidget {
                 GlassCard(
                   borderRadius: 18,
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 18, vertical: 16),
+                    horizontal: 18,
+                    vertical: 16,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Measured, not chosen. Correct posture is a band, '
-                        'not a point.',
+                        localized(
+                          context,
+                          'Measured, not chosen. Correct posture is a band, '
+                              'not a point.',
+                          'Ölçülür, tahmin edilmez. Doğru duruş tek bir '
+                              'nokta değil, bir aralıktır.',
+                        ),
                         style: hankenText(
-                            size: 16.5,
-                            weight: FontWeight.w500,
-                            height: 1.35),
+                          size: 16.5,
+                          weight: FontWeight.w500,
+                          height: 1.35,
+                        ),
                       ),
                       const SizedBox(height: 7),
                       // DÜZELTME (2026-08-07): önceki cümle "the microphone
@@ -111,15 +130,33 @@ class LibraryScreen extends StatelessWidget {
                       // iki kalça) ve TEK açı ölçüyor. Dokuz, figürün düğüm
                       // sayısı.
                       Text(
-                        'Put your phone where it can see you. The camera '
-                        'reads your two shoulders and your two hips while '
-                        'you practise, and measures one thing: how far your '
-                        'trunk leans. '
-                        'There is no live microphone input in this build — '
-                        'the chord and note work described in the lessons '
-                        'was measured on recordings, not in your room.',
+                        motionPaidFeaturesAvailable
+                            ? localized(
+                                context,
+                                'Put your phone where it can see you. The camera '
+                                    'reads your two shoulders and your two hips while '
+                                    'you practise, and measures one thing: how far your '
+                                    'trunk leans. These posture lessons do not use the microphone.',
+                                'Telefonu sizi görebileceği bir yere koyun. '
+                                    'Kamera çalışırken iki omzunuzu ve iki kalçanızı '
+                                    'okur; yalnız gövde eğiminizi ölçer. '
+                                    'Bu duruş dersleri mikrofon kullanmaz.',
+                              )
+                            : localized(
+                                context,
+                                'Explore guitar, voice, and piano posture '
+                                    'references. Camera lessons and subscriptions '
+                                    'are not open in this release. The guitar learning path has '
+                                    'an optional on-device single-note observer.',
+                                'Gitar, ses ve piyano için duruş referanslarını '
+                                    'incele. Kamera dersleri ve abonelikler bu '
+                                    'sürümde açık değil. Gitar öğrenme yolunda isteğe bağlı '
+                                    'cihaz üstü tek nota gözlemi vardır.',
+                              ),
                         style: hankenText(
-                            size: 13, color: OstinatoColors.textMuted),
+                          size: 13,
+                          color: OstinatoColors.textMuted,
+                        ),
                       ),
                     ],
                   ),
@@ -140,7 +177,17 @@ class LibraryScreen extends StatelessWidget {
                 // karşılaştırır; bu yorum yerleşimi AÇIKLAR, KORUMAZ.
                 if (starters.isNotEmpty) ...<Widget>[
                   const SizedBox(height: 22),
-                  kicker('Start here'),
+                  kicker(
+                    localized(
+                      context,
+                      motionPaidFeaturesAvailable
+                          ? 'Start here'
+                          : 'Explore lessons',
+                      motionPaidFeaturesAvailable
+                          ? 'Buradan başlayın'
+                          : 'Dersleri incele',
+                    ),
+                  ),
                   const SizedBox(height: 11),
                   for (final (Discipline d, Lesson l) in starters) ...<Widget>[
                     _StarterRow(discipline: d, lesson: l),
@@ -148,11 +195,13 @@ class LibraryScreen extends StatelessWidget {
                   ],
                 ],
                 const SizedBox(height: 22),
-                kicker('Your instruments'),
+                kicker(localized(context, 'Your instruments', 'Çalgılarınız')),
                 const SizedBox(height: 11),
                 for (final Discipline d in live) ...<Widget>[
                   _InstrumentCard(
-                      discipline: d, contract: repo.contractOrNull(d.id)),
+                    discipline: d,
+                    contract: repo.contractOrNull(d.id),
+                  ),
                   const SizedBox(height: 11),
                 ],
                 // 0-24° PAYLAŞILAN ölçek açıklaması (DESIGN-AHEAD §1.3).
@@ -164,13 +213,23 @@ class LibraryScreen extends StatelessWidget {
                 // yan yana duruyor; bağı kuran cümle KURULMADI.
                 const SizedBox(height: 6),
                 Text(
-                  'The bar on each card is the range those teachers actually '
-                  'occupy, drawn on one shared 0–24° scale so the three can '
-                  'be compared. It is a range, not a target: no point inside '
-                  'it is more correct than another.',
+                  localized(
+                    context,
+                    'The bar on each card is the range those teachers actually '
+                        'occupy, drawn on one shared 0–24° scale so the three can '
+                        'be compared. It is a range, not a target: no point inside '
+                        'it is more correct than another.',
+                    'Her karttaki çubuk, eğitmenlerin bulunduğu gerçek '
+                        'aralığı ortak 0–24° ölçeğinde gösterir. Bu bir hedef '
+                        'değil aralıktır; içindeki bir nokta diğerinden daha '
+                        'doğru değildir.',
+                  ),
                   key: const Key('library-band-scale-note'),
                   style: hankenText(
-                      size: 12, height: 1.5, color: OstinatoColors.textMuted),
+                    size: 12,
+                    height: 1.5,
+                    color: OstinatoColors.textMuted,
+                  ),
                 ),
               ],
             ),
@@ -198,19 +257,29 @@ class _StarterRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final InstrumentHue hue = InstrumentHues.of(discipline.id);
     final String kindChip = switch (lesson.kind) {
-      LessonKind.guide => 'GUIDE',
-      LessonKind.scored => 'SCORED',
-      LessonKind.demoOnly => 'MEASURED · NOT MARKED',
-      LessonKind.locked => 'LOCKED',
+      LessonKind.guide => localized(context, 'GUIDE', 'REHBER'),
+      LessonKind.scored => localized(context, 'SCORED', 'ÖLÇÜM'),
+      LessonKind.demoOnly => localized(
+        context,
+        'MEASURED · NOT MARKED',
+        'ÖLÇÜM · PUAN YOK',
+      ),
+      LessonKind.locked => localized(context, 'LOCKED', 'KİLİTLİ'),
     };
     return Material(
       color: Colors.transparent,
       child: InkWell(
         key: Key('starter-${discipline.id}'),
         borderRadius: BorderRadius.circular(16),
-        onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
             builder: (_) => lessonScreenFor(
-                discipline: discipline, lesson: lesson, hue: hue))),
+              discipline: discipline,
+              lesson: lesson,
+              hue: hue,
+            ),
+          ),
+        ),
         child: Ink(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 13),
           decoration: BoxDecoration(
@@ -225,24 +294,32 @@ class _StarterRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      '${discipline.displayName.toUpperCase()} · $kindChip',
+                      '${catalogUpperName(context, discipline.id, discipline.displayName)} · $kindChip',
                       style: monoText(
-                          size: 8.5, color: hue.ink.withValues(alpha: .85)),
+                        size: 8.5,
+                        color: hue.ink.withValues(alpha: .85),
+                      ),
                     ),
                     const SizedBox(height: 4),
-                    Text(lesson.displayName,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: hankenText(
-                            size: 14.5,
-                            weight: FontWeight.w500,
-                            color: hue.ink)),
+                    Text(
+                      catalogName(context, lesson.id, lesson.displayName),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: hankenText(
+                        size: 14.5,
+                        weight: FontWeight.w500,
+                        color: hue.ink,
+                      ),
+                    ),
                   ],
                 ),
               ),
               const SizedBox(width: 8),
-              Icon(Icons.chevron_right,
-                  size: 20, color: hue.ink.withValues(alpha: .6)),
+              Icon(
+                Icons.chevron_right,
+                size: 20,
+                color: hue.ink.withValues(alpha: .6),
+              ),
             ],
           ),
         ),
@@ -277,8 +354,11 @@ class _InstrumentCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(22),
-        onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
-            builder: (_) => InstrumentScreenRoute(discipline: discipline))),
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => InstrumentScreenRoute(discipline: discipline),
+          ),
+        ),
         child: Ink(
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
@@ -297,11 +377,23 @@ class _InstrumentCard extends StatelessWidget {
                   // chevron'un yanında Expanded olmadan aynı taşma sınıfı
                   // bekliyor (bkz. live_screen.dart başlık düzeltmesi).
                   Expanded(
-                    child: Text(discipline.displayName,
-                        style: hankenText(
-                            size: 22, weight: FontWeight.w600, color: hue.ink)),
+                    child: Text(
+                      catalogName(
+                        context,
+                        discipline.id,
+                        discipline.displayName,
+                      ),
+                      style: hankenText(
+                        size: 22,
+                        weight: FontWeight.w600,
+                        color: hue.ink,
+                      ),
+                    ),
                   ),
-                  Icon(Icons.chevron_right, color: hue.ink.withValues(alpha: .6)),
+                  Icon(
+                    Icons.chevron_right,
+                    color: hue.ink.withValues(alpha: .6),
+                  ),
                 ],
               ),
               const SizedBox(height: 6),
@@ -317,19 +409,28 @@ class _InstrumentCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  '${contract!.teacherCount} ${contract!.sourceClass} · '
+                  '${contract!.teacherCount} '
+                  '${catalogSourceClass(context, contract!.sourceClass)} · '
                   '${contract!.bandLowDeg.toStringAsFixed(1)}–'
-                  '${contract!.bandHighDeg.toStringAsFixed(1)}° of '
+                  '${contract!.bandHighDeg.toStringAsFixed(1)}° / '
                   '${_sharedScaleMaxDeg.toStringAsFixed(0)}°',
-                  style: monoText(size: 8.5, color: hue.ink.withValues(alpha: .85)),
+                  style: monoText(
+                    size: 8.5,
+                    color: hue.ink.withValues(alpha: .85),
+                  ),
                 ),
                 const SizedBox(height: 10),
               ] else
                 const SizedBox(height: 6),
-              Text(discipline.blurb,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: hankenText(size: 12.5, color: hue.ink.withValues(alpha: .8))),
+              Text(
+                catalogBlurb(context, discipline.id, discipline.blurb),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: hankenText(
+                  size: 12.5,
+                  color: hue.ink.withValues(alpha: .8),
+                ),
+              ),
             ],
           ),
         ),

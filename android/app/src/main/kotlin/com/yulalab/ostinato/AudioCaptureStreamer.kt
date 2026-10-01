@@ -3,6 +3,7 @@ package com.yulalab.ostinato
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.media.AudioDeviceInfo
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
@@ -13,227 +14,251 @@ import androidx.core.content.ContextCompat
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import java.util.concurrent.Executors
+import java.util.concurrent.RejectedExecutionException
+import java.util.concurrent.ScheduledThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
-/**
- * Mikrofon → EventChannel, RAM-only (OST-P0-002, roadmap §7) — iOS
- * `AudioCaptureStreamer.swift`in Android karşılığı, AYNI wire format
- * (`{type, samples, sampleRate, t}` / `{type, route}` / `{type, reason}`).
- *
- * Hiçbir satır diske yazmaz: `AudioRecord.read()` doğrudan RAM'deki bir
- * `DoubleArray`e kopyalar, hiçbir `FileOutputStream`/`MediaRecorder`
- * (dosya-yazan sınıf, KASITLI KULLANILMADI — yalnız isim çakışması yüzünden
- * `AudioSource` sabiti için import edilir) çağrısı yok.
- *
- * `MediaRecorder.AudioSource.VOICE_RECOGNITION` bilinçli seçim: `MIC`/
- * `CAMCORDER`nin aksine AGC/gürültü-bastırma/yankı-iptali gibi ölçüm
- * sinyalini bozan işleme katmanlarını platformdan İSTEMEZ (Android'in kendi
- * dokümantasyonu bu kaynağı "ölçüm/tanıma amaçlı, ham'a en yakın" olarak
- * tanımlar) — `ostinato_audio`nun YIN/onset dedektörleri ham sinyal
- * bekliyor, işlenmiş DEĞİL.
- *
- * **Kanıt sınıfı DÜRÜST** (`AudioCaptureStreamer.swift` ile aynı disiplin):
- * bu dosya YALNIZ derleme-zamanı (`flutter build appbundle --release`)
- * kanıtlıdır. Gerçek mikrofon örneği hiç akıtılmadı — cihaz-günü
- * release-gate bunu İLK kez gerçek donanımda ölçecek.
- */
-class AudioCaptureStreamer(private val context: Context) :
-  MethodChannel.MethodCallHandler, EventChannel.StreamHandler {
+/** Process-owned capture. Neither coordinator nor workers retain an Activity. */
+internal object AudioCaptureRuntime {
+  private var coordinator: AudioCaptureCoordinator? = null
+  private val work = AndroidArbiterWork()
+  private val arbiter = PracticeAudioArbiter(work, videoCloseDispatcher = work)
 
-  private var audioRecord: AudioRecord? = null
-  private var captureThread: Thread? = null
+  @Synchronized fun coordinator(context: Context): AudioCaptureCoordinator =
+    coordinator ?: AudioCaptureCoordinator(
+      AndroidRecorderFactory(), AndroidCaptureDispatch(), arbiter = arbiter,
+    ).also {
+      coordinator = it
+      arbiter.attachCapture(it)
+    }
 
-  @Volatile private var running = false
-  private var eventSink: EventChannel.EventSink? = null
-  private val mainHandler = Handler(Looper.getMainLooper())
-  private var routingListener: Any? = null // API 24+ AudioRecord.OnRoutingChangedListener — türü SDK guard'ının İÇİNDE çözülür
+  fun registerEngine(context: Context, owner: Any, engine: Any): PracticeAudioArbiter.Binding {
+    coordinator(context)
+    return arbiter.registerEngine(owner, engine)
+  }
+
+  fun arbiter(): PracticeAudioArbiter = arbiter
+
+  fun foreground(binding: PracticeAudioArbiter.Binding, isForeground: Boolean) =
+    arbiter.foreground(binding, isForeground)
+}
+
+private class AndroidArbiterWork : PracticeAudioArbiter.Work,
+  PracticeAudioArbiter.VideoCloseDispatcher {
+  private val main = Handler(Looper.getMainLooper())
+  private val hardware = Executors.newSingleThreadExecutor { task ->
+    Thread(task, "ostinato-output-hardware").apply { isDaemon = true }
+  }
+  private val videoDeadline = ScheduledThreadPoolExecutor(1) { task ->
+    Thread(task, "ostinato-video-close-deadline").apply { isDaemon = true }
+  }
+  override fun hardware(task: () -> Unit) { hardware.execute(task) }
+  override fun main(task: () -> Unit) { main.post(task) }
+  override fun after(delayMs: Long, task: () -> Unit) { main.postDelayed(task, delayMs) }
+  override fun postMain(task: () -> Unit): Boolean = main.post(task)
+  override fun postDeadline(delayMs: Long, task: () -> Unit): Boolean = try {
+    videoDeadline.schedule(Runnable { task() }, delayMs, TimeUnit.MILLISECONDS)
+    true
+  } catch (_: RejectedExecutionException) { false }
+}
+
+private class AndroidCaptureDispatch : AudioCaptureCoordinator.CaptureDispatch {
+  private val main = Handler(Looper.getMainLooper())
+  private val hardware = Executors.newSingleThreadExecutor { task ->
+    Thread(task, "ostinato-capture-hardware").apply { isDaemon = true }
+  }
+
+  override fun hardware(task: () -> Unit) { hardware.execute(task) }
+  override fun reader(task: () -> Unit): AudioCaptureCoordinator.ReadHandle {
+    val thread = Thread(task, "ostinato-capture-read").apply { isDaemon = true; start() }
+    return object : AudioCaptureCoordinator.ReadHandle {
+      override fun awaitExit(timeoutMs: Long): Boolean {
+        thread.join(timeoutMs)
+        return !thread.isAlive
+      }
+    }
+  }
+  override fun main(task: () -> Unit) { main.post(task) }
+  override fun after(delayMs: Long, task: () -> Unit) { main.postDelayed(task, delayMs) }
+}
+
+private class AndroidRecorderFactory : AudioCaptureCoordinator.RecorderFactory {
+  override fun create(sampleRate: Int): AudioCaptureCoordinator.RecorderPort {
+    val min = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO,
+      AudioFormat.ENCODING_PCM_16BIT)
+    if (min <= 0) throw IllegalStateException("unsupported_sample_rate")
+    val record = AudioRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION, sampleRate,
+      AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, min * 2)
+    return AndroidRecorderPort(record)
+  }
+}
+
+private class AndroidRecorderPort(private val record: AudioRecord) : AudioCaptureCoordinator.RecorderPort {
+  private var routing: AudioRecord.OnRoutingChangedListener? = null
+  override val sampleRate: Int get() = record.sampleRate
+  override fun start() {
+    if (record.state != AudioRecord.STATE_INITIALIZED || record.sampleRate !in setOf(44100, 48000)) {
+      throw IllegalStateException("unsupported_sample_rate")
+    }
+    record.startRecording()
+    if (record.recordingState != AudioRecord.RECORDSTATE_RECORDING) {
+      throw IllegalStateException("setup_failed")
+    }
+  }
+  override fun read(buffer: ShortArray): Int = record.read(buffer, 0, buffer.size)
+  override fun stop() { record.stop() }
+  override fun release() { record.release() }
+  override fun watchRoute(changed: () -> Unit) {
+    if (Build.VERSION.SDK_INT < 24) return
+    val listener = AudioRecord.OnRoutingChangedListener { changed() }
+    routing = listener
+    record.addOnRoutingChangedListener(listener, Handler(Looper.getMainLooper()))
+  }
+  override fun unwatchRoute() {
+    val listener = routing ?: return
+    routing = null
+    if (Build.VERSION.SDK_INT >= 24) record.removeOnRoutingChangedListener(listener)
+  }
+  override fun route(): String {
+    if (Build.VERSION.SDK_INT < 24) return "android:Unknown"
+    return "android:" + when (record.routedDevice?.type) {
+      AudioDeviceInfo.TYPE_BUILTIN_MIC -> "TYPE_BUILTIN_MIC"
+      AudioDeviceInfo.TYPE_WIRED_HEADSET -> "TYPE_WIRED_HEADSET"
+      AudioDeviceInfo.TYPE_BLUETOOTH_SCO -> "TYPE_BLUETOOTH_SCO"
+      AudioDeviceInfo.TYPE_USB_DEVICE -> "TYPE_USB_DEVICE"
+      AudioDeviceInfo.TYPE_USB_HEADSET -> "TYPE_USB_HEADSET"
+      else -> "Unknown"
+    }
+  }
+}
+
+/** A legacy start has three context fields; a leased input adds two lease fields. */
+internal fun parseCaptureStartClaim(args: Map<*, *>?): PracticeAudioArbiter.CaptureClaim? {
+  val startKeys = setOf("attemptId", "sampleRate", "ownerToken", "engineGeneration",
+    "contextGeneration")
+  val leasedKeys = startKeys + setOf("leaseId", "leaseGeneration")
+  val fields = args ?: return null
+  val keys = fields.keys
+  if (keys != startKeys && keys != leasedKeys) return null
+  val token = fields["ownerToken"] as? String ?: return null
+  val engine = captureWireLong(fields["engineGeneration"]) ?: return null
+  val context = captureWireLong(fields["contextGeneration"]) ?: return null
+  if (keys == startKeys) {
+    return PracticeAudioArbiter.CaptureClaim(token, engine, context)
+  }
+  val leaseId = fields["leaseId"] as? String ?: return null
+  val generation = captureWireLong(fields["leaseGeneration"]) ?: return null
+  return PracticeAudioArbiter.CaptureClaim(token, engine, context, leaseId, generation)
+}
+
+private fun captureWireLong(value: Any?): Long? = when (value) {
+  is Int -> value.toLong()
+  is Long -> value
+  else -> null
+}
+
+/** Event subscription ownership is local to this Flutter engine. Hardware ownership is not. */
+internal class AudioCaptureStreamer(
+  private val context: Context,
+  private val owner: Any,
+  private val coordinator: AudioCaptureCoordinator,
+  private val arbiter: PracticeAudioArbiter,
+  private val engineBinding: PracticeAudioArbiter.Binding,
+) : MethodChannel.MethodCallHandler, EventChannel.StreamHandler {
+  private val ids = AudioCaptureBoundIds()
+  private var sink: EventChannel.EventSink? = null
+  private var retired = false
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+    if (retired || !arbiter.isCurrent(engineBinding)) {
+      result.error(if (retired) "capture_handler_retired" else "stale_audio_owner", null, null)
+      return
+    }
+    val args = call.arguments as? Map<*, *>
     when (call.method) {
+      "ready" -> result.success((args?.get("attemptId") as? String) == ids.current && sink != null)
+      "closeState" -> result.success(coordinator.closeState())
       "start" -> {
-        val sampleRate = call.argument<Int>("sampleRate")
-        if (sampleRate == null) {
-          result.error("bad_args", "sampleRate required", null)
-          return
+        val id = args?.get("attemptId") as? String
+        val rate = args?.get("sampleRate") as? Int
+        val claim = parseCaptureStartClaim(args)
+        if (id == null || rate == null || claim == null || id != ids.current || sink == null) {
+          result.error("bad_args", null, null); return
         }
-        start(sampleRate, result)
+        if (!coordinator.isForeground(owner) ||
+          ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+          result.error("not_foreground_or_permitted", null, null); return
+        }
+        coordinator.start(owner, id, rate, object : AudioCaptureCoordinator.Output {
+          override fun event(message: Map<String, Any>) {
+            if (ids.current == id) sink?.success(message)
+          }
+        }, methodReply(result), claim)
       }
       "stop" -> {
-        stop()
-        result.success(null)
+        val id = args?.get("attemptId") as? String
+        if (id == null) result.error("bad_args", null, null)
+        else if (ids.owns(id)) coordinator.stop(owner, id, methodReply(result))
+        else coordinator.stopBeforeListen(owner, id, methodReply(result))
+      }
+      "retryStop" -> {
+        val id = args?.get("attemptId") as? String
+        if (id == null) result.error("bad_args", null, null)
+        else if (!coordinator.isForeground(owner)) {
+          result.error("not_foreground_or_permitted", null, null)
+        } else coordinator.retryStop(owner, id, methodReply(result))
       }
       else -> result.notImplemented()
     }
   }
 
-  private fun start(sampleRate: Int, result: MethodChannel.Result) {
-    if (running) {
-      result.success(null) // Dart tarafının kilidi çift-start'ı zaten önler — no-op
-      return
-    }
-
-    if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) !=
-        PackageManager.PERMISSION_GRANTED
-    ) {
-      result.error("setup_failed", "RECORD_AUDIO permission not granted", null)
-      return
-    }
-
-    val minBuf =
-      AudioRecord.getMinBufferSize(
-        sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
-    if (minBuf == AudioRecord.ERROR_BAD_VALUE || minBuf == AudioRecord.ERROR) {
-      result.error("unsupported_sample_rate", "$sampleRate", null)
-      return
-    }
-
-    val record =
-      try {
-        AudioRecord(
-          MediaRecorder.AudioSource.VOICE_RECOGNITION,
-          sampleRate,
-          AudioFormat.CHANNEL_IN_MONO,
-          AudioFormat.ENCODING_PCM_16BIT,
-          minBuf * 2)
-      } catch (e: IllegalArgumentException) {
-        result.error("unsupported_sample_rate", "$sampleRate", null)
-        return
-      }
-
-    if (record.state != AudioRecord.STATE_INITIALIZED) {
-      record.release()
-      result.error("unsupported_sample_rate", "$sampleRate", null)
-      return
-    }
-
-    audioRecord = record
-    running = true
-    record.startRecording()
-    registerRoutingListener(record)
-
-    val bufFrames = minBuf / 2 // ENCODING_PCM_16BIT = örnek başına 2 bayt
-    captureThread =
-      Thread {
-        val shortBuf = ShortArray(bufFrames)
-        // `while(running)` + içeride try/catch: `stop()` sırası `read()`i
-        // erken döndürmesi için tasarlandı (bkz. `stop()` notu) ama bu bir
-        // GARANTİ değil, belgelenmemiş bir durum geçişinde `read()` istisna
-        // fırlatabilir — yakalanmazsa Android'de HERHANGİ bir thread'deki
-        // istisna TÜM app'i çökertir. Basit bir "artık okuma yok" sinyali,
-        // app çökmesinden HER ZAMAN daha iyidir.
-        while (running) {
-          try {
-            val read = record.read(shortBuf, 0, shortBuf.size)
-            if (read > 0) {
-              val tUs = System.nanoTime() / 1000
-              val mono = DoubleArray(read)
-              for (i in 0 until read) {
-                mono[i] = shortBuf[i] / 32768.0
-              }
-              postChunk(mono, sampleRate, tUs)
-            }
-          } catch (e: Exception) {
-            break
-          }
-        }
-      }
-    captureThread?.apply {
-      name = "ostinato-audio-capture"
-      start()
-    }
-    result.success(null)
+  private fun methodReply(result: MethodChannel.Result) = object : AudioCaptureCoordinator.Reply {
+    override fun success() { result.success(null) }
+    override fun error(code: String) { result.error(code, null, null) }
   }
-
-  private fun postChunk(samples: DoubleArray, sampleRate: Int, tUs: Long) {
-    mainHandler.post {
-      eventSink?.success(
-        mapOf(
-          "type" to "chunk",
-          "samples" to samples,
-          "sampleRate" to sampleRate,
-          "t" to tUs,
-        ))
-    }
-  }
-
-  /**
-   * API 24 altında route-değişimi bildirimi YOK — `unknown` route'ta kalır
-   * (roadmap §7 madde 2: `unknown` de `AudioCalibrating`i tetikler, tahmin
-   * ÜRETİLMEZ). `minSdk` bugün 24'ün altındaysa bu isimli, kabul edilebilir
-   * bir kapsam daralması; capture'ın KENDİSİ etkilenmez.
-   */
-  private fun registerRoutingListener(record: AudioRecord) {
-    if (Build.VERSION.SDK_INT < 24) return
-    val listener =
-      AudioRecord.OnRoutingChangedListener { r ->
-        val device = r.routedDevice ?: return@OnRoutingChangedListener
-        mainHandler.post {
-          eventSink?.success(
-            mapOf("type" to "routeChanged", "route" to "android:${deviceTypeName(device.type)}"))
-        }
-      }
-    routingListener = listener
-    record.addOnRoutingChangedListener(listener, mainHandler)
-  }
-
-  /**
-   * `AudioDeviceInfo.TYPE_*` int sabitini ADINA çevirir — sabit numarayı
-   * telden İSİM olarak taşımak, bir SDK sürümünde numara kayarsa (teorik
-   * ama motion_camera M-F-260 emsali: sabitler zamanla anlam değiştirebilir)
-   * `audio_route_state.dart mapAndroidDeviceType`in SESSİZCE yanlış
-   * eşlemesini önler.
-   */
-  private fun deviceTypeName(type: Int): String =
-    when (type) {
-      android.media.AudioDeviceInfo.TYPE_BUILTIN_MIC -> "TYPE_BUILTIN_MIC"
-      android.media.AudioDeviceInfo.TYPE_WIRED_HEADSET -> "TYPE_WIRED_HEADSET"
-      android.media.AudioDeviceInfo.TYPE_BLUETOOTH_SCO -> "TYPE_BLUETOOTH_SCO"
-      android.media.AudioDeviceInfo.TYPE_USB_DEVICE -> "TYPE_USB_DEVICE"
-      android.media.AudioDeviceInfo.TYPE_USB_HEADSET -> "TYPE_USB_HEADSET"
-      else -> "TYPE_UNKNOWN_$type"
-    }
-
-  private fun stop() {
-    if (!running) return
-    running = false
-
-    // SIRA ÖNEMLİ: capture thread şu anda `record.read()` içinde BLOKE
-    // olabilir (`while(running)` kontrolü ancak `read()` dönünce tekrar
-    // çalışır). `record.release()`i önce çağırıp thread'i sonra join etmek,
-    // hâlâ okuma yapan bir kayıttan release sonrası kullanım riski taşırdı.
-    // Android'in kendi belgelediği çözüm: `stop()`u ÖNCE çağırmak, bloke
-    // `read()`i erkenden döndürür — thread `while(running)`e THEN döner ve
-    // hızla çıkar, `join(500)` bu yüzden güvenli bir üst sınır olur.
-    val record = audioRecord
-    if (record != null) {
-      if (Build.VERSION.SDK_INT >= 24) {
-        (routingListener as? AudioRecord.OnRoutingChangedListener)?.let {
-          record.removeOnRoutingChangedListener(it)
-        }
-      }
-      routingListener = null
-      try {
-        record.stop()
-      } catch (e: IllegalStateException) {
-        // `startRecording()` hiç başarılı olmadıysa `stop()` istisna
-        // fırlatır — oturum zaten bitiyor, kullanıcıyı ilgilendirmez
-        // (iOS `AudioCaptureStreamer.stop()` ile aynı desen).
-      }
-    }
-
-    captureThread?.join(500)
-    captureThread = null
-
-    record?.release()
-    audioRecord = null
-  }
-
-  // MARK: EventChannel.StreamHandler
 
   override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
-    eventSink = events
+    if (retired || !arbiter.isCurrent(engineBinding)) {
+      events?.error(if (retired) "capture_handler_retired" else "stale_audio_owner", null, null)
+      return
+    }
+    val id = (arguments as? Map<*, *>)?.get("attemptId") as? String
+    if (id == null || id.length != 32 || id.any { it !in '0'..'9' && it !in 'a'..'f' }) {
+      events?.error("bad_args", null, null); return
+    }
+    if (!coordinator.isForeground(owner)) {
+      events?.error("not_foreground_or_permitted", null, null); return
+    }
+    if (!coordinator.bind(owner, id)) {
+      events?.error("capture_close_unconfirmed", null, null); return
+    }
+    val oldId = ids.current
+    if (oldId != null && oldId != id) coordinator.requestClose(owner, oldId)
+    ids.bind(id)
+    sink = events
   }
 
   override fun onCancel(arguments: Any?) {
-    eventSink = null
+    if (retired || !arbiter.isCurrent(engineBinding)) return
+    // Flutter's implicit onCancel(null) runs on the OLD handler before onListen
+    // replaces its binding. Never inspect the process-global current ID here.
+    val supplied = (arguments as? Map<*, *>)?.get("attemptId") as? String
+    val id = ids.cancel(supplied) ?: return
+    sink = null
+    coordinator.requestClose(owner, id)
+  }
+
+  fun closeBoundAttempt() {
+    val id = ids.closeBound() ?: return
+    sink = null
+    if (arbiter.isCurrent(engineBinding)) coordinator.requestClose(owner, id)
+  }
+
+  fun retire() {
+    if (retired) return
+    closeBoundAttempt()
+    retired = true
+    for (id in ids.retire()) coordinator.unbind(owner, id)
   }
 }

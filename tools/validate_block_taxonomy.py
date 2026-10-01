@@ -42,12 +42,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LIBRARY = ROOT / "assets" / "content" / "library.json"
 
-#: `E` — ALET eksikliği. Üçü de ürünün KENDİ cümlesinden alındı, uydurulmadı:
+#: `E` — ölçüm yeteneği eksikliği. Üçü de ürünün KENDİ cümlesinden alındı:
 #: · mikrofon girişi yok (6 derste birebir bu cümle)
-#: · "a missing measurement TOOL, not a missing threshold" (el/bilek landmark'ı)
+#: · canlı el-biçimi ölçümü yok (el/bilek noktaları var; metrik kurulmadı,
+#:   eğitmen referansı da ayrıca eksik)
 #: · "we only measure angles today" (omuz YÜKSEKLİĞİ metriği yok)
 E_MARKERS = re.compile(
-    r"no microphone input|missing measurement TOOL|only measure angles")
+    r"no microphone input|no live hand-shape measurement|only measure angles")
 
 #: `A'` — REFERANS eksikliği: yeni bir HASAT gerekiyor (eşik değil).
 #: Ürünün cümlesi: *"this is a new harvest — not a threshold"*.
@@ -132,6 +133,16 @@ def selftest() -> int:
     cases = [
         ({"status": "locked", "lockedReason": "there is no microphone input"},
          "E", "tek E işareti"),
+        ({"status": "locked", "lockedReason":
+          "Wrists are present, but Ostinato has no live hand-shape measurement "
+          "or teacher reference"},
+         "E", "el noktaları varken canlı el ölçümü eksik"),
+        ({"status": "locked", "lockedReason":
+          "The pose model includes wrists and coarse hand points"},
+         None, "nokta varlığı tek başına ölçüm eksikliği sınıfı yaratmaz"),
+        ({"status": "locked", "lockedReason":
+          "We have no hand or finger landmarks at all, only body joints"},
+         None, "yanlış eski el-noktası iddiası sınıf için kullanılmaz"),
         ({"status": "locked",
           "promotionPath": {"unblockedBy": "a new harvest of footage"}},
          "A'", "tek A' işareti"),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'account_data_directory.dart';
 
 import 'screens/review_screen.dart' show SessionSummary;
 
@@ -111,7 +112,7 @@ class PersistedSession {
 /// `sessions.jsonl` — `getApplicationSupportDirectory()` altında, aile
 /// deseniyle aynı (Lissom `attempt_values.jsonl`, `M-F-650`).
 class SessionStore {
-  const SessionStore({this.directoryProvider});
+  const SessionStore({this.directoryProvider, this.accountUserId});
 
   /// Testler GERÇEK `getApplicationSupportDirectory()`e (platform kanalı
   /// ister, `flutter test`te YOK) ihtiyaç duymadan geçici bir dizin
@@ -120,14 +121,20 @@ class SessionStore {
   /// deseni) doğrudan bağımlılık enjeksiyonu: daha az hareketli parça.
   final Future<Directory> Function()? directoryProvider;
 
+  /// Null retains the pre-account local journal. Signed-in accounts never
+  /// read or append to that journal or to another account's journal.
+  final String? accountUserId;
+
   Future<File> _file() async {
     final Directory dir =
         await (directoryProvider ?? getApplicationSupportDirectory)();
-    return File('${dir.path}/sessions.jsonl');
+    final Directory owned = accountDataDirectory(dir, accountUserId);
+    return File('${owned.path}/sessions.jsonl');
   }
 
   Future<void> save(PersistedSession session) async {
     final File f = await _file();
+    await f.parent.create(recursive: true);
     await f.writeAsString('${jsonEncode(session.toJson())}\n',
         mode: FileMode.append, flush: true);
   }

@@ -44,6 +44,7 @@ AudioRoute mapIosPortType(String rawPortType) {
     case 'Speaker':
     case 'Receiver':
     case 'BuiltInMic':
+    case 'MicrophoneBuiltIn':
       return AudioRoute.speaker;
     case 'Headphones':
     case 'HeadsetMic':

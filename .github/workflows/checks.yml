@@ -2,7 +2,7 @@ name: checks
 
 on:
   push:
-    branches: ["**"]
+    branches: ["main"]
   pull_request:
 
 jobs:
@@ -57,6 +57,22 @@ jobs:
 
       - run: flutter pub get
 
+      - name: Gitar v2l kaynak kimliği (oynatma kapalı)
+        run: |
+          python3 -m unittest discover -s tool -p 'test_check_v2l_source_projection.py'
+          python3 tool/check_v2l_source_projection.py --check
+
+      - name: Gitar kursu paket bütünlüğü
+        run: dart run tool/build_guitar_integrity_manifest.dart --check
+
+      - name: Alt paket test bağımlılıkları
+        run: |
+          (cd packages/ostinato_audio && dart pub get)
+          (cd packages/ostinato_posture && dart pub get)
+          # dependency_pin_test compares both resolved Core refs; the pilot
+          # lockfile is generated and is absent from a fresh checkout.
+          (cd tools/dart_pilot && dart pub get)
+
       - name: flutter analyze
         run: flutter analyze
 
@@ -92,6 +108,11 @@ jobs:
 
       - run: flutter pub get
 
+      - name: Gitar v2l kaynak kimliği (oynatma kapalı)
+        run: |
+          python3 -m unittest discover -s tool -p 'test_check_v2l_source_projection.py'
+          python3 tool/check_v2l_source_projection.py --check
+
       - name: Android release build — imzasız, KOD YOLU kanıtı
         # Gerçek keystore kurucuda (~/.secrets/yula/), CI'da YOK.
         # `-PallowDebugSigning` android/app/build.gradle.kts'in KENDİ kaçış
@@ -124,6 +145,11 @@ jobs:
           git config --global url."https://x-access-token:${MOTION_CORE_RO_TOKEN}@github.com/kocakkmustafa/motion-core.git".insteadOf "https://github.com/kocakkmustafa/motion-core.git"
 
       - run: flutter pub get
+
+      - name: Gitar v2l kaynak kimliği (oynatma kapalı)
+        run: |
+          python3 -m unittest discover -s tool -p 'test_check_v2l_source_projection.py'
+          python3 tool/check_v2l_source_projection.py --check
 
       - name: iOS release build, imzasız
         # `--no-codesign`: CI runner'ında imzalama sertifikası yok ve

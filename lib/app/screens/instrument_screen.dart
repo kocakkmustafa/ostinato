@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
 
 import '../content.dart';
+import '../app_locale.dart';
+import '../catalog_copy_tr.dart';
 import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import 'course_screen.dart';
+import 'guitar_journey_screen.dart';
 
 /// Çalgı sayfası — dürüstlük kutusu ürünün vitrini (§7). Tam genişlik,
 /// kurs listesinin ÜSTÜNDE, katlanabilir DEĞİL.
@@ -35,11 +38,11 @@ class InstrumentScreenRoute extends StatelessWidget {
                     children: <Widget>[
                       GlassIconButton(
                         icon: '‹',
-                        semanticLabel: 'Back to library',
+                        semanticLabel: localized(context, 'Back to library', 'Kütüphaneye dön'),
                         onTap: () => Navigator.of(context).pop(),
                       ),
                       const SizedBox(height: 22),
-                      Text(discipline.displayName,
+                      Text(catalogName(context, discipline.id, discipline.displayName),
                           style: hankenText(
                               size: 30,
                               weight: FontWeight.w600,
@@ -47,12 +50,18 @@ class InstrumentScreenRoute extends StatelessWidget {
                       const SizedBox(height: 9),
                       if (contract != null)
                         Text(
-                          '${contract.teacherCount} TEACHERS · AGREE TO '
-                          '${contract.dispersionMedianDeg.toStringAsFixed(2)}°',
+                          localized(
+                            context,
+                            '${contract.teacherCount} TEACHERS · AGREE TO '
+                                '${contract.dispersionMedianDeg.toStringAsFixed(2)}°',
+                            '${contract.teacherCount} '
+                                '${catalogSourceClass(context, contract.sourceClass)} · '
+                                '${contract.dispersionMedianDeg.toStringAsFixed(2)}° UYUM',
+                          ),
                           style: monoText(color: hue.ink),
                         ),
                       const SizedBox(height: 14),
-                      Text(discipline.blurb,
+                      Text(catalogBlurb(context, discipline.id, discipline.blurb),
                           style: hankenText(
                               size: 14.5,
                               color: OstinatoColors.inkSoft.withValues(alpha: .85))),
@@ -69,20 +78,24 @@ class InstrumentScreenRoute extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('What we actually measure',
+                          Text(localized(context, 'What we actually measure', 'Gerçekte neyi ölçüyoruz'),
                               style: hankenText(
                                   size: 18, weight: FontWeight.w600)),
                           const SizedBox(height: 4),
                           Text(
-                              'And what we deliberately do not. Both halves '
-                              'are the product.',
+                              localized(context, 'And what we deliberately do not. Both halves are the product.',
+                                  'Neyi ölçmediğimizi de açıkça gösteriyoruz.'),
                               style: hankenText(
                                   size: 13, color: OstinatoColors.textMuted)),
                           const SizedBox(height: 16),
-                          kicker('Measured', color: hue.ink),
+                          kicker(localized(context, 'Measured', 'Ölçülen'), color: hue.ink),
                           const SizedBox(height: 10),
-                          for (final String m in discipline.measured)
-                            _HonestyRow(text: m, filled: true),
+                          for (var i = 0; i < discipline.measured.length; i++)
+                            _HonestyRow(
+                                text: catalogCopy(context,
+                                    '${discipline.id}.measured.$i',
+                                    discipline.measured[i]),
+                                filled: true),
                           const SizedBox(height: 6),
                           const Divider(height: 1),
                           const SizedBox(height: 12),
@@ -98,15 +111,22 @@ class InstrumentScreenRoute extends StatelessWidget {
                           // görünmüyordu, çünkü çerçeve KÜMENİN KENDİSİ
                           // hakkında bir iddiaydı ve hiçbir öğesinde yazılı
                           // değildi.
-                          kicker('What we do not judge — and why'),
+                          kicker(localized(context, 'What we do not judge — and why', 'Neyi değerlendirmiyoruz ve neden')),
                           const SizedBox(height: 8),
                           Text(
-                            'These are not all the same kind of gap. Some '
-                            'need a tool we do not have, some need teacher '
-                            'data nobody has collected, some are simply not '
-                            'built here, and at least one is not a data '
-                            'problem at all — it is a judgement we do not '
-                            'think is ours to make. Each line says which.',
+                            localized(
+                              context,
+                              'These are not all the same kind of gap. Some '
+                                  'need a tool we do not have, some need teacher '
+                                  'data nobody has collected, some are simply not '
+                                  'built here, and at least one is not a data '
+                                  'problem at all — it is a judgement we do not '
+                                  'think is ours to make. Each line says which.',
+                              'Bu sınırların nedenleri farklıdır: eksik araç, '
+                                  'toplanmamış eğitmen verisi, burada kurulmayan '
+                                  'özellikler veya bize ait olmayan bir değerlendirme. '
+                                  'Her satır kendi nedenini açıklar.',
+                            ),
                             key: const Key('not-measured-frame'),
                             style: hankenText(
                                 size: 12,
@@ -114,14 +134,90 @@ class InstrumentScreenRoute extends StatelessWidget {
                                 color: OstinatoColors.textMuted),
                           ),
                           const SizedBox(height: 10),
-                          for (final String m in discipline.notMeasured)
-                            _HonestyRow(text: m, filled: false),
+                          for (var i = 0; i < discipline.notMeasured.length; i++)
+                            _HonestyRow(
+                                text: catalogCopy(context,
+                                    '${discipline.id}.notMeasured.$i',
+                                    discipline.notMeasured[i]),
+                                filled: false),
                         ],
                       ),
                     ),
                     const SizedBox(height: 20),
-                    kicker('Courses'),
+                    kicker(localized(context, 'Courses', 'Kurslar')),
                     const SizedBox(height: 10),
+                    if (discipline.id == 'guitar') ...<Widget>[
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          key: const Key('guitar-journey-entry'),
+                          borderRadius: BorderRadius.circular(20),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => const GuitarJourneyScreen(),
+                            ),
+                          ),
+                          child: Ink(
+                            padding: const EdgeInsets.all(17),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              gradient: hue.softGradient,
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: .8),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        localized(
+                                          context,
+                                          'Guitar: first sound to independent playing',
+                                          'Gitar: ilk sesten bağımsız çalmaya',
+                                        ),
+                                        style: hankenText(
+                                          size: 19,
+                                          weight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    const Icon(
+                                      Icons.chevron_right,
+                                      color: OstinatoColors.textFaint,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 7),
+                                Text(
+                                  localized(
+                                    context,
+                                    '10 MODULES · 60 LESSONS · SELF-GUIDED',
+                                    '10 MODÜL · 60 DERS · KENDİ ÇALIŞMAN',
+                                  ),
+                                  style: monoText(color: hue.ink),
+                                ),
+                                const SizedBox(height: 9),
+                                Text(
+                                  localized(
+                                    context,
+                                    'A complete original learning path with practice and two final performances. Progress is your own report; automatic note scoring is off.',
+                                    'Çalışmalar ve iki bitirme performansıyla tam özgün öğrenme yolu. İlerleme kendi beyanındır; otomatik nota puanı kapalıdır.',
+                                  ),
+                                  style: hankenText(
+                                    size: 13.5,
+                                    color: OstinatoColors.textBody,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                    ],
                     for (final Course c in discipline.courses)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
@@ -153,7 +249,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                                       // olmadan aynı taşma sınıfı bekliyor
                                       // (bkz. live_screen.dart başlık düzeltmesi).
                                       Expanded(
-                                        child: Text(c.displayName,
+                                        child: Text(catalogName(context, c.id, c.displayName),
                                             style: hankenText(
                                                 size: 19,
                                                 weight: FontWeight.w600)),
@@ -164,12 +260,12 @@ class InstrumentScreenRoute extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 7),
                                   Text(
-                                      '${c.level.toUpperCase()} · '
-                                      '${c.estimatedMinutes} MIN · '
-                                      '${c.lessons.length} LESSONS',
+                                      '${catalogTag(context, c.level)} · '
+                                      '${c.estimatedMinutes} ${localized(context, 'MIN', 'DK')} · '
+                                      '${c.lessons.length} ${localized(context, 'LESSONS', 'DERS')}',
                                       style: monoText(color: hue.ink)),
                                   const SizedBox(height: 11),
-                                  Text(c.goal,
+                                  Text(catalogGoal(context, c.id, c.goal),
                                       style: hankenText(
                                           size: 13.5,
                                           color: OstinatoColors.textBody)),
@@ -187,16 +283,21 @@ class InstrumentScreenRoute extends StatelessWidget {
                       // kalemler (`comingSoon`) — kapsam-dışı bir şey için
                       // "henüz" demek, gelmeyecek olana geleceğini vaat
                       // etmek olurdu.
-                      kicker('Not here — and why'),
+                      kicker(localized(context, 'Not here — and why',
+                          'Burada bulunmayanlar ve nedenleri')),
                       const SizedBox(height: 10),
-                      for (final String c in <String>[
-                        ...discipline.comingSoon,
+                      for (final entry in <MapEntry<String, String>>[
+                        for (var i = 0; i < discipline.comingSoon.length; i++)
+                          MapEntry('${discipline.id}.comingSoon.$i',
+                              discipline.comingSoon[i]),
                         // TÜRETİLEN kalemler elle yazılanlardan SONRA gelir:
                         // ikisi ayrı sınıf ama kullanıcı için aynı soru
                         // ("burada ne yok ve neden"), o yüzden tek başlık
                         // altında tek liste — ayrım KAYITTA, yüzeyde bir
                         // ayraç gürültüsü değil.
-                        ...discipline.outOfScopeDerived,
+                        for (var i = 0; i < discipline.outOfScopeDerived.length; i++)
+                          MapEntry('${discipline.id}.outOfScopeDerived.$i',
+                              discipline.outOfScopeDerived[i]),
                       ])
                         Container(
                           margin: const EdgeInsets.only(bottom: 8),
@@ -208,7 +309,8 @@ class InstrumentScreenRoute extends StatelessWidget {
                             border: Border.all(
                                 color: Colors.white.withValues(alpha: .65)),
                           ),
-                          child: Text(c,
+                          child: Text(catalogCopy(context, entry.key,
+                                  entry.value),
                               style: hankenText(
                                   size: 13, color: OstinatoColors.textMuted)),
                         ),

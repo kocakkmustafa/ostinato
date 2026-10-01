@@ -1,25 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:motion_account/motion_account.dart';
+import 'package:motion_content/motion_content.dart';
 
 import 'app/content.dart';
 import 'app/cue_text.dart';
+import 'app/app_locale.dart';
+import 'app/account_connection.dart';
+import 'app/audio/practice_audio_root.dart';
 import 'app/design/app_scope.dart';
 import 'app/design/ostinato_theme.dart';
+import 'app/guitar_journey.dart';
 import 'app/onboarding_store.dart';
+import 'app/motion_account_bootstrap.dart';
 import 'app/screens/library_screen.dart';
 import 'app/screens/onboarding_screen.dart';
 
 /// Kabuk YALNIZ kablolama (Gravita G-100 deseni). Burada hüküm yok: eşik,
 /// bant, bastırma, dürüst hâller — hepsi `packages/ostinato_posture`da ve
 /// testte. Bir sayı buraya sızarsa test edilemez hâle gelir.
-void main() => runApp(const OstinatoApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    final (runtime, accountConnection) = await initializeMotionAccount();
+    runApp(
+      OstinatoAudioRoot(
+        userId: runtime.userId,
+        phase: runtime.phase,
+        builder: (audioNavigatorHost) => MotionIdentityGate(
+          runtime: runtime,
+          child: OstinatoApp(
+            accountConnection: accountConnection,
+            audioNavigatorHost: audioNavigatorHost,
+          ),
+        ),
+      ),
+    );
+  } on Object {
+    runApp(const AccountStartupFailure());
+  }
+}
 
 class OstinatoApp extends StatefulWidget {
   /// [store] enjekte edilebilir: widget testinde `path_provider` platform
   /// kanalı yok ve "ilk açılış" ile "ikinci açılış" AYRI ölçülebilir iki
   /// durum olmalı (bkz. `onboarding_store.dart` gerekçesi).
-  const OstinatoApp({super.key, this.store = const FileOnboardingStore()});
+  const OstinatoApp({
+    super.key,
+    this.store = const FileOnboardingStore(),
+    this.accountConnection,
+    this.guitarCourseBundle,
+    PracticeAudioNavigatorHost? audioNavigatorHost,
+  }) : _audioNavigatorHost = audioNavigatorHost;
 
   final OnboardingStore store;
+  final AccountConnection? accountConnection;
+
+  /// Allows the packaged guitar-course gate to be probed without mutating
+  /// Flutter's global rootBundle. Production uses the bundled asset bytes.
+  final AssetBundle? guitarCourseBundle;
+  // Route widgets cannot read the root authority through an inherited scope.
+  final PracticeAudioNavigatorHost? _audioNavigatorHost;
 
   @override
   State<OstinatoApp> createState() => _OstinatoAppState();
@@ -28,11 +68,14 @@ class OstinatoApp extends StatefulWidget {
 typedef _Boot = (ContentRepository, CueTextResolver, bool onboarded);
 
 class _OstinatoAppState extends State<OstinatoApp> {
-  late final Future<_Boot> _load = (() async => (
-        await ContentRepository.load(),
-        await CueTextResolver.load(),
-        await widget.store.isComplete(),
-      ))();
+  late final Future<_Boot> _load = (() async {
+    await GuitarJourneyCourse.load(bundle: widget.guitarCourseBundle);
+    return (
+      await ContentRepository.load(),
+      await CueTextResolver.load(),
+      await widget.store.isComplete(),
+    );
+  })();
 
   // Tema `ostinato_theme.dart`ta — kanıt üreteci de AYNI nesneyi kuruyor
   // (O-052: temasız kanıt koşumu ham `TextStyle`ları blok glif çiziyordu).
@@ -44,23 +87,61 @@ class _OstinatoAppState extends State<OstinatoApp> {
       future: _load,
       builder: (BuildContext ctx, AsyncSnapshot<_Boot> snap) {
         if (snap.hasError) {
-          // Yükleme hatası GİZLENMEZ: üretilen bir varlık eksikse ekran onu
-          // söyler, boş bir liste göstermez.
+          // The library stays closed. Show a useful localized message and a
+          // stable support code without exposing raw parser/asset diagnostics.
+          final Object? error = snap.error;
+          final String supportCode = error is ContentException
+              ? 'CONTENT_${error.error.code.name.toUpperCase()}'
+              : 'CONTENT_LOAD';
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: _theme,
-            home: Scaffold(
-                body: Center(child: Padding(
+            supportedLocales: appSupportedLocales,
+            localizationsDelegates: appLocalizationsDelegates,
+            home: Builder(
+              builder: (errorContext) => Scaffold(
+                body: Center(
+                  child: Padding(
                     padding: const EdgeInsets.all(24),
-                    child: Text('Content did not load: ${snap.error}')))),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          localized(
+                            errorContext,
+                            'Course content could not be loaded. Close and reopen the app. If the problem continues, contact support with the code below.',
+                            'Kurs içeriği yüklenemedi. Uygulamayı kapatıp yeniden aç. Sorun sürerse aşağıdaki kodla destek ekibine ulaş.',
+                          ),
+                          key: const Key('ostinato-content-load-failure'),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          localized(
+                            errorContext,
+                            'Support code: $supportCode',
+                            'Destek kodu: $supportCode',
+                          ),
+                          key: const Key('ostinato-content-support-code'),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           );
         }
         if (!snap.hasData) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: _theme,
+            supportedLocales: appSupportedLocales,
+            localizationsDelegates: appLocalizationsDelegates,
             home: const Scaffold(
-                body: Center(child: CircularProgressIndicator())),
+              body: Center(child: CircularProgressIndicator()),
+            ),
           );
         }
         final (ContentRepository repo, CueTextResolver cue, bool onboarded) =
@@ -71,20 +152,48 @@ class _OstinatoAppState extends State<OstinatoApp> {
         // Scope MaterialApp.home'u sarsaydı, push edilen hiçbir ekran onu
         // GÖREMEZDİ — route_path_test.dart bunu ölçtü, main.dart'ta AYNI
         // hata olurdu (LibraryScreen'den herhangi bir dokunuş çökerdi).
-        return ContentRepositoryScope(
-          repo: repo,
-          cueText: cue,
-          child: MaterialApp(
+        final AccountConnection? account = widget.accountConnection;
+        Widget accountApp(String? userId) {
+          Widget materialApp(NavigatorObserver? observer) => MaterialApp(
+            key: ValueKey<String>('ostinato-account-${userId ?? 'signed-out'}'),
             title: 'Ostinato',
             debugShowCheckedModeBanner: false,
             theme: _theme,
+            supportedLocales: appSupportedLocales,
+            localizationsDelegates: appLocalizationsDelegates,
+            navigatorObservers: observer == null
+                ? const <NavigatorObserver>[]
+                : <NavigatorObserver>[observer],
             home: OstinatoHome(
               repo: repo,
               cueText: cue,
               store: widget.store,
               alreadyOnboarded: onboarded,
             ),
-          ),
+          );
+          final navigator = widget._audioNavigatorHost == null
+              ? materialApp(null)
+              : widget._audioNavigatorHost!.wrap(
+                  key: ValueKey<String>(
+                    'ostinato-audio-navigator-${userId ?? 'signed-out'}',
+                  ),
+                  builder: materialApp,
+                );
+          return ContentRepositoryScope(
+            repo: repo,
+            cueText: cue,
+            child: AccountScope(
+              connection: account,
+              currentUserId: userId,
+              child: navigator,
+            ),
+          );
+        }
+
+        if (account == null) return accountApp(null);
+        return ValueListenableBuilder<String?>(
+          valueListenable: account.userId,
+          builder: (_, userId, _) => accountApp(userId),
         );
       },
     );
