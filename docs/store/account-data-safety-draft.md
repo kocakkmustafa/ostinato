@@ -3,28 +3,33 @@
 Bu taslak uygulama kodundaki ortak Motion hesabına göredir. App Store Connect
 gizlilik yanıtı ve Google Play Data safety formu henüz gönderilmiş değildir.
 
-## Kaynakla uzlaştırma — 2026-09-26
+## Kaynakla uzlaştırma — 2026-10-02
 
 Başlıktaki 2026-09-25 ilk taslak tarihidir; o günün mikrofonsuz kapsamı
 tarihseldir. Kurucunun yeni kararı gitar kursunda isteğe bağlı, cihaz üstünde
 tek nota gözlemidir. Bu güncelleme mevcut Dart/native kaynak kontrolüdür;
 canlı sağlayıcı, mağaza formu veya fiziksel mikrofon kabulü değildir.
 
-## Sağlayıcı günlükleri ve kimlik doğrulama — 2026-09-27
+## Sağlayıcı günlükleri ve kimlik doğrulama — tarihsel 2026-09-26 makbuzu
 
 Üretim sağlayıcısının 2026-09-26 21:36 UTC tarihli salt okunur alan/sayı
-makbuzu, cihaz dışındaki Auth ve edge günlüklerinin saklandığını doğrular.
-Ölçüm anına kadar dönen örnekte edge günlüklerinin 6/6 kaydında IP, user-agent ve
+makbuzu, o tarihsel örnekte cihaz dışındaki Auth ve edge günlüklerinin
+saklandığını göstermiştir. O ölçümde dönen örnekte edge günlüklerinin 6/6 kaydında IP, user-agent ve
 ülke/bölge/şehir alanları; Auth günlüklerinin 6/6 kaydında IP ve 2/6 kaydında
 hesap kimliği; ayrı Auth audit deposunun 1/1 kaydında kimlik ve user-agent
 vardır. Veritabanındaki `auth.audit_log_entries` satır sayısının sıfır olması,
 [ayrı Auth günlük deposunun](https://supabase.com/docs/guides/auth/audit-logs)
 boş olduğu anlamına gelmez. Ham IP, kimlik, parola veya günlük içeriği bu
 belgeye alınmamıştır. Makbuz ortak servise aittir; her uygulamada yeni bir
-canlı ağ oturumu ölçüldüğü iddiası değildir.
+canlı ağ oturumu ölçüldüğü iddiası değildir. 2026-10-02 kaynak uzlaştırması
+sağlayıcıya yeniden bağlanmamıştır; güncel saklama, alanlar, silme davranışı
+ve Ostinato çalışma zamanı trafiği bu tarihsel makbuzla kabul edilmiş sayılmaz.
 
-| Sunucuda saklanan veri | Apple manifest türü | Amaç ve bağlantı |
+| Beyan kapsamındaki hesap/sağlayıcı verisi | Apple manifest türü | Amaç ve bağlantı |
 |---|---|---|
+| E-posta adresi | `NSPrivacyCollectedDataTypeEmailAddress` | Hesap işlevleri; App Functionality, kullanıcıya bağlı, tracking yok |
+| Kullanıcının isteğe bağlı görünen adı | `NSPrivacyCollectedDataTypeName` | Profil; App Functionality, kullanıcıya bağlı, tracking yok |
+| Kullanıcı/hesap kimliği | `NSPrivacyCollectedDataTypeUserID` | Oturum ve hesap ayrımı; App Functionality, kullanıcıya bağlı, tracking yok |
 | IP, user-agent, istemci platform/sürüm bilgisi ve Auth/istek güvenlik günlükleri | `NSPrivacyCollectedDataTypeOtherDiagnosticData` | İşletim, güvenlik ve teknik tanılama; App Functionality, kullanıcıya bağlı, tracking yok |
 | Edge isteğine eklenen IP tabanlı ülke/bölge/şehir | `NSPrivacyCollectedDataTypeCoarseLocation` | Aynı hizmetin işletim/güvenlik kaydı; App Functionality, kullanıcıya bağlı, tracking yok; GPS veya kesin konum izni değildir |
 | Parola kimlik doğrulama verisi ve saklanan parola hash'i | `NSPrivacyCollectedDataTypeOtherDataTypes` | Hesap doğrulama; App Functionality, kullanıcıya bağlı, tracking yok |
@@ -38,7 +43,7 @@ tutulan hesap silme makbuzu da güvenlik/hesap verisidir; hash olması tek
 başına anonim veri olduğu anlamına gelmez. IP ve hesap ilişkisinin toplama
 öncesinde kaldırıldığı kanıtlanmadığından bu üç tür `Linked=true` beyan edilir.
 
-Manifest artık e-posta, isteğe bağlı ad, kullanıcı ID'si ve bu üç türden
+2026-10-02 kaynak okumasında manifest e-posta, isteğe bağlı ad, kullanıcı ID'si ve bu üç türden
 oluşan **altı** collected-data kaydı taşır. Hepsinde
 `NSPrivacyCollectedDataTypePurposeAppFunctionality`, `Linked=true` ve
 `Tracking=false` vardır. Bu, davranış analitiği veya reklam amacı eklendiği
@@ -70,23 +75,43 @@ akışı ve son paket/SDK gizlilik raporu ayrı kabul kapılarıdır.
 İlk sürümün Apple gizlilik manifestinde e-posta, isteğe bağlı ad,
 kullanıcı kimliği ve sağlayıcı tanılama/konum/kimlik doğrulama
 verileri uygulama işlevi için kullanıcıyla bağlantılı, izleme dışı beyan edilir.
-Play taslağında yalnız e-posta, görünen ad ve kullanıcı ID’si sırasıyla
-Personal info / Email address, Name ve User IDs olarak değerlendirilir.
+Apple'ın bu altı manifest türü Play'e altı aynı kategori olarak kopyalanmaz.
+Play taslağı hesap alanlarının yanında sağlayıcı verilerini de kapsar;
+aşağıdaki eşleme [Google'ın kendi tür/amaç tanımları](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en)
+üzerinden hazırlanmıştır ve konsol yanıtı değildir.
+
+| Veri | Google Play taslak kategorisi | Eşleme sınırı |
+|---|---|---|
+| E-posta | Personal info / Email address | Kaynakta hesap alanı |
+| İsteğe bağlı görünen ad | Personal info / Name | Kaynakta profil alanı |
+| Kullanıcı/hesap ID'si | Personal info / User IDs | Kaynakta hesap alanı |
+| IP'den türetilen ülke/bölge/şehir | Location / Approximate location | Tarihsel sağlayıcı örneği; güncel kapsam manuel doğrulanacak |
+| IP, user-agent, platform ve Auth/istek güvenlik günlükleri | App info and performance / Diagnostics; Device or other IDs için alan bazlı eşleme açık | Teknik tanılama ile cihaz/tarayıcı tanımlayıcısı ayrımı manuel doğrulanacak; Apple türü tek başına Play seçimi belirlemez |
+| Parola kimlik doğrulama verisi/hash | Personal info / Other info adayı | Proje çıkarımı; Google parola için ayrı tür adlandırmaz, nihai form eşlemesi manuel doğrulanacak |
+
+Hesap alanları için App functionality / Account management; güvenlik günlükleri
+için Fraud prevention, security, and compliance amaçları taslak adaylarıdır.
+Her alanın gerçek kullanımı ve SDK davranışı doğrulanmadan amaç, paylaşım,
+isteğe bağlılık, şifreleme veya silme yanıtı kesinleştirilmez. Apple manifesti
+ve bu tablo, güncel sunucu davranışı ya da gönderilmiş mağaza formu kanıtı değildir.
+
 Abonelik satışı ve satın alma geçmişi
 aktarımı bu sürümde kapalıdır; ileride etkinleştirilirse Apple/Play
 formları ve bu belge birlikte güncellenir.
 Görünen ad kullanıcı için isteğe bağlıdır. Kamera ve cihazda kalan geçmiş
-“toplanan veri” diye işaretlenmez. Sağlayıcı günlükleri makbuzu ve Auth
-saklama belgesi temelinde tanılama, yaklaşık konum ve kimlik doğrulama
-verileri de beyanlıdır; konsol formu ve saklama politikası ayrıca doğrulanır.
+“toplanan veri” diye işaretlenmez. Tarihsel sağlayıcı günlükleri makbuzu ve
+Auth saklama belgesi temelinde tanılama, yaklaşık konum ve kimlik doğrulama
+verileri Apple kaynak manifestinde beyanlıdır; Play eşlemesi, konsol formu,
+güncel sağlayıcı saklama politikası ve son paket/SDK raporu ayrıca doğrulanır.
 
 ### Mikrofonun izin ve yaşam döngüsü
 
 Kullanıcı gözlem ekranında **Başlat** seçer; işletim sistemi mikrofon izni
 verilmeden native capture başlamaz. İzin reddedilirse kursa mikrofonsuz
 devam edilir. Kullanıcı **Durdur** seçtiğinde, ekran dispose olduğunda,
-hesap kapsamı değiştiğinde veya uygulama ön planı kaybettiğinde capture
-kapanır. Ön plana dönüş mikrofonu otomatik yeniden başlatmaz. iOS native
+hesap kapsamı değiştiğinde veya uygulama ön planı kaybettiğinde kaynak
+capture kapanmasını ister. Bu kaynak davranışı fiziksel cihazda başarılı
+kapanma/route kabulü değildir. Ön plana dönüş mikrofonu otomatik yeniden başlatmaz. iOS native
 kaynağı izin/foreground denetler; Android native kaynağı da izin ve
 foreground denetler. Ham PCM yalnız sınırlı bellek tamponlarında işlenir;
 bu yolda ses dosyası yazma, ses upload'u veya ağ sink'i yoktur.

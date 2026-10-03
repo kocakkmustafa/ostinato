@@ -8,6 +8,7 @@ export 'native_audio_state.dart'
         PracticeAudioSide,
         NativeAllAudioState,
         NativeAudioPermit,
+        NativeVideoDisposeReceipt,
         NativeAudioCloseReason,
         NativeAudioContextReason;
 
@@ -114,6 +115,26 @@ abstract interface class PracticeAudioLeasePort {
   Future<NativeAllAudioState> fenceContext(NativeAudioContextReason reason);
 }
 
+/// Optional cached-engine handoff protocol. An implementation may only call
+/// the write method after the owner retained success of the exact Dart player
+/// dispose Future. Ordinary audio ports need no knowledge of this protocol.
+abstract interface class PracticeVideoExactAckPort {
+  Future<NativeVideoDisposeReceipt> completeRetiredVideoDispose(
+    NativeAudioPermit permit,
+  );
+  Future<NativeVideoDisposeReceipt> readVideoDisposeReceipt(
+    NativeAudioPermit permit,
+  );
+  /// Pins an explicit current-handler retry to this exact old video claim.
+  /// A blocked snapshot is only a retry dispatch receipt, never release proof.
+  Future<NativeAllAudioState> recoverRetiredVideo(
+    NativeVideoDisposeReceipt receipt,
+  );
+  Future<NativeAllAudioState> refreshOwnerAfterExactVideoDispose(
+    NativeVideoDisposeReceipt receipt,
+  );
+}
+
 typedef PracticeVideoFenceSettler =
     Future<NativeAllAudioState> Function(NativeAllAudioState fenceReceipt);
 
@@ -132,6 +153,7 @@ final class PracticeAudioLease {
   }
 
   final PracticeAudioLeasePort _port;
+  PracticeAudioLeasePort get port => _port;
   final Duration operationTimeout;
   static PracticeAudioLease? _isolateOwner;
   static int _isolateEpoch = 0;
@@ -170,6 +192,29 @@ final class PracticeAudioLease {
       return PracticeAudioLeasePhase.blockedUnconfirmed;
     }
     return _phase;
+  }
+
+  /// A native-empty owner transition may clear a local retry latch only if
+  /// this isolate retained no ticket, opening, close, fence or native call.
+  bool get canRefreshQuiescentOwner =>
+      _permit == null &&
+      _side == null &&
+      _opening == null &&
+      _closing == null &&
+      _nativePending == 0 &&
+      !_fencingActive &&
+      _fenceQueue.isEmpty &&
+      (_isolateOwner == null || identical(_isolateOwner, this));
+
+  void settleQuiescentOwnerRefresh(NativeAllAudioState proof) {
+    if (!canRefreshQuiescentOwner || !proof.allClear) {
+      throw StateError('Audio lease still owns an uncertain claim');
+    }
+    ++_generation;
+    ++_contextEpoch;
+    ++_isolateEpoch;
+    _phase = PracticeAudioLeasePhase.recovering;
+    _idle();
   }
 
   PracticeAudioInvalidationReason? get lastInvalidationReason =>

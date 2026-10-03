@@ -30,6 +30,10 @@ final class FakePracticeAudioPort implements PracticeAudioLeasePort {
   final fences = <NativeAudioContextReason>[];
   int closeCalls = 0;
   int videoDisposeCalls = 0;
+  final videoDisposePermits = <NativeAudioPermit>[];
+  final videoDisposeConfirmations = <bool>[];
+  bool dropNextVideoDisposeRequest = false;
+  bool dropNextVideoDisposeReply = false;
   int videoCancelCalls = 0;
   int unknownVideoCancelCalls = 0;
   bool waitForNativeVideoRelease = false;
@@ -172,12 +176,19 @@ final class FakePracticeAudioPort implements PracticeAudioLeasePort {
     required bool confirmed,
   }) async {
     ++videoDisposeCalls;
+    videoDisposePermits.add(permit);
+    videoDisposeConfirmations.add(confirmed);
+    if (dropNextVideoDisposeRequest) {
+      dropNextVideoDisposeRequest = false;
+      throw StateError('video ACK request lost before native dispatch');
+    }
     if (_activeSide != PracticeAudioSide.video ||
         permit.side != PracticeAudioSide.video ||
         permit.ownerToken != ownerToken ||
         permit.engineGeneration != engineGeneration ||
         permit.contextGeneration != _leaseContext ||
-        permit.leaseGeneration != _leaseGeneration) {
+        permit.leaseGeneration != _leaseGeneration ||
+        permit.leaseId != _leaseId) {
       throw StateError('stale video permit');
     }
     if (confirmed && waitForNativeVideoRelease) {
@@ -197,6 +208,10 @@ final class FakePracticeAudioPort implements PracticeAudioLeasePort {
       _videoUnconfirmed = true;
     }
     ++_revision;
+    if (dropNextVideoDisposeReply) {
+      dropNextVideoDisposeReply = false;
+      throw StateError('video ACK reply lost after native dispatch');
+    }
     return _snapshot();
   }
 
@@ -297,7 +312,9 @@ final class FakePracticeAudioPort implements PracticeAudioLeasePort {
       throw StateError('revision changed');
     }
     if (_activeSide == PracticeAudioSide.video) {
-      if (!waitForNativeVideoRelease || !_videoNativeReleased) {
+      if (!waitForNativeVideoRelease ||
+          !_videoNativeReleased ||
+          !_videoDisposeAcknowledged) {
         return _snapshot();
       }
       _activeSide = null;

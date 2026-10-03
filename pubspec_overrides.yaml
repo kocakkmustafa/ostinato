@@ -1,0 +1,14 @@
+dependency_overrides:
+  video_player:
+    path: third_party/video_player_permit/video_player-2.11.1
+  video_player_android:
+    path: third_party/video_player_permit/video_player_android-2.12.2
+  video_player_avfoundation:
+    path: third_party/video_player_permit/video_player_avfoundation-2.12.0
+  video_player_platform_interface:
+    path: third_party/video_player_permit/video_player_platform_interface-6.9.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.

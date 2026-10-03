@@ -6,6 +6,7 @@ import 'app/content.dart';
 import 'app/cue_text.dart';
 import 'app/app_locale.dart';
 import 'app/account_connection.dart';
+import 'app/camera_session.dart';
 import 'app/audio/practice_audio_root.dart';
 import 'app/design/app_scope.dart';
 import 'app/design/ostinato_theme.dart';
@@ -22,10 +23,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     final (runtime, accountConnection) = await initializeMotionAccount();
+    bindCameraResourceAdmission(accountConnection.resourceAdmission);
     runApp(
       OstinatoAudioRoot(
         userId: runtime.userId,
         phase: runtime.phase,
+        passwordRecovery: accountConnection.passwordRecovery,
+        identityBoundary: accountConnection.identityBoundary,
+        resourceAdmission: accountConnection.resourceAdmission,
+        disposeAccountBinding: accountConnection.disposeBinding,
         builder: (audioNavigatorHost) => MotionIdentityGate(
           runtime: runtime,
           child: OstinatoApp(
@@ -68,6 +74,98 @@ class OstinatoApp extends StatefulWidget {
 typedef _Boot = (ContentRepository, CueTextResolver, bool onboarded);
 
 class _OstinatoAppState extends State<OstinatoApp> {
+  late ({String? userId, bool recovery}) _accountNavigationState;
+  int _navigationEpoch = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _observeAccount();
+  }
+
+  void _observeAccount() {
+    final account = widget.accountConnection;
+    bindCameraResourceAdmission(account?.resourceAdmission);
+    _accountNavigationState = (
+      userId: account?.userId.value,
+      recovery: account?.passwordRecovery?.value ?? false,
+    );
+    account?.userId.addListener(_onAccountBoundaryChanged);
+    account?.passwordRecovery?.addListener(_onAccountBoundaryChanged);
+    account?.identityBoundary?.addListener(_onIdentityBoundaryChanged);
+    if (!identical(account?.identityBoundary, account?.resourceAdmission)) {
+      account?.resourceAdmission?.addListener(_onIdentityBoundaryChanged);
+    }
+  }
+
+  void _stopObservingAccount(AccountConnection? account) {
+    account?.userId.removeListener(_onAccountBoundaryChanged);
+    account?.passwordRecovery?.removeListener(_onAccountBoundaryChanged);
+    account?.identityBoundary?.removeListener(_onIdentityBoundaryChanged);
+    if (!identical(account?.identityBoundary, account?.resourceAdmission)) {
+      account?.resourceAdmission?.removeListener(_onIdentityBoundaryChanged);
+    }
+  }
+
+  void _onIdentityBoundaryChanged() {
+    retireAllCameraOwners();
+    setState(() => ++_navigationEpoch);
+  }
+
+  void _onAccountBoundaryChanged() {
+    final account = widget.accountConnection;
+    final next = (
+      userId: account?.userId.value,
+      recovery: account?.passwordRecovery?.value ?? false,
+    );
+    if (next == _accountNavigationState) return;
+    retireAllCameraOwners();
+    // Preserve every boundary event, including A → null → A or recovery
+    // enter/exit before a frame. A final-value key alone misses those events.
+    setState(() {
+      _accountNavigationState = next;
+      ++_navigationEpoch;
+    });
+  }
+
+  @override
+  void didUpdateWidget(OstinatoApp oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!identical(oldWidget.accountConnection, widget.accountConnection)) {
+      final oldState = _accountNavigationState;
+      final boundaryChanged =
+          !identical(
+            oldWidget.accountConnection?.userId,
+            widget.accountConnection?.userId,
+          ) ||
+          !identical(
+            oldWidget.accountConnection?.passwordRecovery,
+            widget.accountConnection?.passwordRecovery,
+          ) ||
+          !identical(
+            oldWidget.accountConnection?.identityBoundary,
+            widget.accountConnection?.identityBoundary,
+          ) ||
+          !identical(
+            oldWidget.accountConnection?.resourceAdmission,
+            widget.accountConnection?.resourceAdmission,
+          );
+      _stopObservingAccount(oldWidget.accountConnection);
+      _observeAccount();
+      if (boundaryChanged || oldState != _accountNavigationState) {
+        retireAllCameraOwners();
+        ++_navigationEpoch;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    retireAllCameraOwners();
+    _stopObservingAccount(widget.accountConnection);
+    super.dispose();
+  }
+
   late final Future<_Boot> _load = (() async {
     await GuitarJourneyCourse.load(bundle: widget.guitarCourseBundle);
     return (
@@ -164,12 +262,14 @@ class _OstinatoAppState extends State<OstinatoApp> {
             navigatorObservers: observer == null
                 ? const <NavigatorObserver>[]
                 : <NavigatorObserver>[observer],
-            home: OstinatoHome(
-              repo: repo,
-              cueText: cue,
-              store: widget.store,
-              alreadyOnboarded: onboarded,
-            ),
+            home: _accountNavigationState.recovery && account != null
+                ? Builder(builder: account.pageBuilder)
+                : OstinatoHome(
+                    repo: repo,
+                    cueText: cue,
+                    store: widget.store,
+                    alreadyOnboarded: onboarded,
+                  ),
           );
           final navigator = widget._audioNavigatorHost == null
               ? materialApp(null)
@@ -185,16 +285,15 @@ class _OstinatoAppState extends State<OstinatoApp> {
             child: AccountScope(
               connection: account,
               currentUserId: userId,
-              child: navigator,
+              child: KeyedSubtree(
+                key: ValueKey<int>(_navigationEpoch),
+                child: navigator,
+              ),
             ),
           );
         }
 
-        if (account == null) return accountApp(null);
-        return ValueListenableBuilder<String?>(
-          valueListenable: account.userId,
-          builder: (_, userId, _) => accountApp(userId),
-        );
+        return accountApp(_accountNavigationState.userId);
       },
     );
   }

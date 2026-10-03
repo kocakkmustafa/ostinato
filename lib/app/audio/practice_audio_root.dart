@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_account/motion_account.dart';
 
+import '../account_connection.dart';
 import '../app_locale.dart';
 import 'audio_capture_channel.dart';
 import 'native_audio_arbiter_channel.dart';
@@ -208,6 +209,84 @@ final class PracticeAudioCaptureAction {
   }
 }
 
+/// One immutable resource period. Normal retirement binds its original close
+/// before the registry observes it, so later UUID cleanup cannot select B.
+final class _AccountAudioDrain implements AccountResourceDrain {
+  _AccountAudioDrain(this.owner);
+
+  final PracticeAudioRootOwner owner;
+  AccountResourceDrainRegistration? registration;
+  Future<PracticeAudioReleaseStatus>? _close;
+  Completer<void>? _proof;
+  bool _retired = false;
+  bool _hadWork = false;
+
+  void attach(AccountResourceDrainRegistration value) {
+    registration = value;
+    if (_retired) _observeRegistration();
+  }
+
+  void workStarted() => _hadWork = true;
+
+  bool get neverDispatched => !_hadWork &&
+      !(owner._videoOwner?.busy ?? false) &&
+      owner._captureActions.isEmpty;
+
+  // This is local absence of work, not readback of another isolate owner.
+  // Unknown lease state remains uncertain even when this actor never opened.
+  bool get provablyEmpty => neverDispatched &&
+      owner._lease.phase == PracticeAudioLeasePhase.idle;
+
+  void closedBy(Future<PracticeAudioReleaseStatus> close) {
+    _close ??= close;
+    _retired = true;
+    _observeRegistration();
+  }
+
+  void _observeRegistration() {
+    final record = registration;
+    if (record == null) return;
+    // This only observes a derived outcome. The original stable drain Future
+    // and its failure remain available to every confirmed UUID ticket.
+    unawaited(record.retireAndDrain().then<void>(
+      (_) {},
+      onError: (Object _, StackTrace _) {},
+    ));
+  }
+
+  @override
+  void retire() {
+    if (_retired) return;
+    _retired = true;
+    owner._retireAccountResource(this);
+  }
+
+  @override
+  Future<void> waitForClosed() {
+    final existing = _proof;
+    if (existing != null) return existing.future;
+    final proof = Completer<void>();
+    _proof = proof;
+    final close = _close;
+    if (close == null) {
+      proof.completeError(StateError('Audio resource has no captured close proof'));
+      return proof.future;
+    }
+    unawaited(close.then<void>(
+      (status) {
+        if (status == PracticeAudioReleaseStatus.confirmedClosed ||
+            (status == PracticeAudioReleaseStatus.alreadyIdle && !_hadWork)) {
+          proof.complete();
+        } else {
+          proof.completeError(StateError('Unconfirmed audio close: $status'));
+        }
+      },
+      onError: (Object error, StackTrace stack) => proof.completeError(error, stack),
+    ));
+    return proof.future;
+  }
+}
+
 /// App-lifetime, isolate-local context boundary. It deliberately has no
 /// player or microphone implementation. Production acquisition is disabled.
 final class PracticeAudioRootOwner {
@@ -215,6 +294,9 @@ final class PracticeAudioRootOwner {
     required ValueListenable<String?> userId,
     required ValueListenable<MotionIdentityPhase> phase,
     required PracticeAudioLease lease,
+    ValueListenable<bool>? passwordRecovery,
+    Listenable? identityBoundary,
+    ValueListenable<bool>? resourceAdmission,
     NativeAudioArbiterChannel? captureArbiter,
     PracticeVideoSessionOwner? videoOwner,
     AppLifecycleState? initialLifecycleState,
@@ -225,11 +307,15 @@ final class PracticeAudioRootOwner {
     this.onStatusChanged,
   }) : _userIdListenable = userId,
        _phaseListenable = phase,
+       _passwordRecoveryListenable = passwordRecovery,
+       _identityBoundary = identityBoundary,
+       _resourceAdmission = resourceAdmission,
        _lease = lease,
        _captureArbiter = captureArbiter,
        _videoOwner = videoOwner,
        _userId = userId.value,
        _phase = phase.value,
+       _passwordRecovery = passwordRecovery?.value ?? false,
        _foreground = initialLifecycleState == AppLifecycleState.resumed {
     if (videoOwner != null) {
       if (!nativeFenceEnabled) {
@@ -248,10 +334,19 @@ final class PracticeAudioRootOwner {
     // account-keyed Navigator; these listeners fence before either rebuilds.
     _userIdListenable.addListener(_onUserChanged);
     _phaseListenable.addListener(_onPhaseChanged);
+    _passwordRecoveryListenable?.addListener(_onPasswordRecoveryChanged);
+    _identityBoundary?.addListener(_onIdentityBoundaryChanged);
+    if (!identical(_identityBoundary, _resourceAdmission)) {
+      _resourceAdmission?.addListener(_onIdentityBoundaryChanged);
+    }
+    _registerAccountResource();
   }
 
   final ValueListenable<String?> _userIdListenable;
   final ValueListenable<MotionIdentityPhase> _phaseListenable;
+  final ValueListenable<bool>? _passwordRecoveryListenable;
+  final Listenable? _identityBoundary;
+  final ValueListenable<bool>? _resourceAdmission;
   final PracticeAudioLease _lease;
   final NativeAudioArbiterChannel? _captureArbiter;
   final PracticeVideoSessionOwner? _videoOwner;
@@ -273,6 +368,7 @@ final class PracticeAudioRootOwner {
 
   String? _userId;
   MotionIdentityPhase _phase;
+  bool _passwordRecovery;
   PracticeAudioRouteObserver? _observer;
   Route<dynamic>? _topRoute;
   int _identityEpoch = 0;
@@ -285,6 +381,7 @@ final class PracticeAudioRootOwner {
   bool _disposed = false;
   PracticeAudioReleaseStatus? _lastRecoveryStatus;
   Future<PracticeAudioReleaseStatus>? _lastFence;
+  _AccountAudioDrain? _accountResource;
 
   PracticeAudioLeasePhase get leasePhase => _lease.phase;
   bool get blocked =>
@@ -298,8 +395,44 @@ final class PracticeAudioRootOwner {
   Future<PracticeAudioReleaseStatus>? get lastFenceForTest => _lastFence;
 
   bool get _identityReady =>
-      (_phase == MotionIdentityPhase.verified && _userId != null) ||
-      (_phase == MotionIdentityPhase.signedOut && _userId == null);
+      (_resourceAdmission?.value ?? true) &&
+      !_passwordRecovery &&
+      ((_phase == MotionIdentityPhase.verified && _userId != null) ||
+          (_phase == MotionIdentityPhase.signedOut && _userId == null));
+
+  void _registerAccountResource() {
+    if (_disposed || _accountResource != null) return;
+    final registry = _resourceAdmission;
+    if (registry == null || registry is! AccountResourceDrainRegistry) return;
+    final resource = _AccountAudioDrain(this);
+    // Install the actor before registration: denial may call retire immediately.
+    _accountResource = resource;
+    resource.attach((registry as AccountResourceDrainRegistry)
+        .registerResource(resource: resource));
+  }
+
+  void _retireAccountResource(_AccountAudioDrain resource) {
+    if (!identical(_accountResource, resource)) return;
+    if (resource.neverDispatched) {
+      _retireLocalResource(resource);
+    } else {
+      _fence(PracticeAudioInvalidationReason.accountChange, retireRoute: true);
+    }
+  }
+
+  void _retireLocalResource(_AccountAudioDrain resource) {
+    _observer = null;
+    _topRoute = null;
+    ++_routeEpoch;
+    _accountResource = null;
+    final close = Future.value(
+      resource.provablyEmpty
+          ? PracticeAudioReleaseStatus.alreadyIdle
+          : PracticeAudioReleaseStatus.blockedUnconfirmed,
+    );
+    _lastFence = close;
+    resource.closedBy(close);
+  }
 
   void _onUserChanged() {
     final next = _userIdListenable.value;
@@ -313,6 +446,20 @@ final class PracticeAudioRootOwner {
     final next = _phaseListenable.value;
     if (next == _phase) return;
     _phase = next;
+    ++_identityEpoch;
+    _fence(PracticeAudioInvalidationReason.accountChange, retireRoute: true);
+  }
+
+  void _onPasswordRecoveryChanged() {
+    final next = _passwordRecoveryListenable!.value;
+    if (next == _passwordRecovery) return;
+    _passwordRecovery = next;
+    ++_identityEpoch;
+    _fence(PracticeAudioInvalidationReason.accountChange, retireRoute: true);
+  }
+
+  void _onIdentityBoundaryChanged() {
+    if (_disposed) return;
     ++_identityEpoch;
     _fence(PracticeAudioInvalidationReason.accountChange, retireRoute: true);
   }
@@ -380,6 +527,8 @@ final class PracticeAudioRootOwner {
         blocked) {
       return null;
     }
+    _registerAccountResource();
+    if (!_identityReady || _barrier || !identical(_topRoute, route)) return null;
     return PracticeAudioRouteGrant._(
       this,
       route,
@@ -408,6 +557,8 @@ final class PracticeAudioRootOwner {
         blocked) {
       return null;
     }
+    _registerAccountResource();
+    if (!_identityReady || _barrier || !identical(_topRoute, route)) return null;
     return PracticeVideoStartAction._(
       this,
       route,
@@ -442,6 +593,7 @@ final class PracticeAudioRootOwner {
     }
     action._consumed = true;
     final video = _videoOwner!;
+    _accountResource?.workStarted();
     final status = await video.open(
       player,
       isCurrent: () => _validVideoAction(action),
@@ -469,6 +621,9 @@ final class PracticeAudioRootOwner {
         native == null) {
       return null;
     }
+    _registerAccountResource();
+    if (!_identityReady || _barrier || !identical(_topRoute, route)) return null;
+    _accountResource?.workStarted();
     final action = PracticeAudioCaptureAction._(
       this,
       route,
@@ -523,6 +678,7 @@ final class PracticeAudioRootOwner {
     // This synchronous assignment precedes the first await, so concurrent
     // continuations cannot spend the same action twice.
     grant._consumed = true;
+    _accountResource?.workStarted();
     final result = await _lease.acquire(
       side,
       context: grant._leaseContext,
@@ -552,7 +708,29 @@ final class PracticeAudioRootOwner {
   }
 
   Future<PracticeAudioReleaseStatus> release(PracticeAudioTicket ticket) async {
-    final result = await _lease.release(ticket);
+    final resource = _accountResource;
+    final before = _lease.phase;
+    final close = _lease.release(ticket);
+    final after = _lease.phase;
+    final startedClose = resource != null &&
+        ((before == PracticeAudioLeasePhase.inputActive &&
+              after == PracticeAudioLeasePhase.closingInput) ||
+          (before == PracticeAudioLeasePhase.outputActive &&
+              after == PracticeAudioLeasePhase.closingOutput));
+    if (startedClose) {
+      // A stale ticket can arrive while a different close is already pending.
+      // Only this active-to-closing transition captures the original Future.
+      if (identical(_accountResource, resource)) _accountResource = null;
+      _lastFence = close;
+      resource.closedBy(close);
+    }
+    final result = await close;
+    if (!startedClose &&
+        result == PracticeAudioReleaseStatus.confirmedClosed &&
+        resource != null) {
+      if (identical(_accountResource, resource)) _accountResource = null;
+      resource.closedBy(close);
+    }
     _statusChanged();
     return result;
   }
@@ -564,6 +742,47 @@ final class PracticeAudioRootOwner {
     _lastRecoveryStatus = null;
     _statusChanged();
     try {
+      final quiescentPort =
+          _captureArbiter ??
+          (_videoOwner?.port is NativeAudioArbiterChannel
+              ? _videoOwner!.port as NativeAudioArbiterChannel
+              : null);
+      if (quiescentPort != null &&
+          identical(_lease.port, quiescentPort) &&
+          _lease.canRefreshQuiescentOwner &&
+          (_videoOwner?.canRefreshQuiescentOwner ?? true)) {
+        if (!quiescentPort.needsQuiescentOwnerRefresh) {
+          try {
+            await quiescentPort.readAllAudioState();
+          } on Object {
+            if (!quiescentPort.needsQuiescentOwnerRefresh) {
+              _lastRecoveryStatus =
+                  PracticeAudioReleaseStatus.blockedUnconfirmed;
+              return _lastRecoveryStatus!;
+            }
+          }
+        }
+        if (quiescentPort.needsQuiescentOwnerRefresh) {
+          try {
+            if (!_lease.canRefreshQuiescentOwner ||
+                !(_videoOwner?.canRefreshQuiescentOwner ?? true)) {
+              throw StateError('Owner changed during quiescent recovery');
+            }
+            final proof = await quiescentPort.refreshQuiescentOwner();
+            if (!_lease.canRefreshQuiescentOwner ||
+                !(_videoOwner?.canRefreshQuiescentOwner ?? true)) {
+              throw StateError('Owner changed after quiescent readback');
+            }
+            _videoOwner?.settleQuiescentOwnerRefresh(proof);
+            _lease.settleQuiescentOwnerRefresh(proof);
+            _lastRecoveryStatus = PracticeAudioReleaseStatus.confirmedClosed;
+            return _lastRecoveryStatus!;
+          } on Object {
+            _lastRecoveryStatus = PracticeAudioReleaseStatus.blockedUnconfirmed;
+            return _lastRecoveryStatus!;
+          }
+        }
+      }
       final videoResult = await _videoOwner?.recover();
       if (videoResult == PracticeVideoRecoveryStatus.busy ||
           videoResult == PracticeVideoRecoveryStatus.blockedUnconfirmed) {
@@ -590,6 +809,25 @@ final class PracticeAudioRootOwner {
     PracticeAudioInvalidationReason reason, {
     bool retireRoute = false,
   }) {
+    if (_resourceAdmission?.value == true) _registerAccountResource();
+    final resource = _accountResource;
+    // A denied owner which never dispatched work must not forward invalidate
+    // through the isolate's unrelated current owner. Any older pending close
+    // already has its immutable registry record and continues independently.
+    if (_resourceAdmission is AccountResourceDrainRegistry &&
+        _resourceAdmission?.value == false &&
+        (resource == null || resource.neverDispatched)) {
+      if (resource != null) {
+        _retireLocalResource(resource);
+      } else {
+        if (retireRoute) {
+          _observer = null;
+          _topRoute = null;
+        }
+        ++_routeEpoch;
+      }
+      return;
+    }
     // Stop a pending or running legacy microphone synchronously before the
     // shared native fence advances the context. A late permission reply can
     // only carry its now-stale original claim.
@@ -605,10 +843,13 @@ final class PracticeAudioRootOwner {
     _barrier = true;
     final serial = ++_fenceSerial;
     // `invalidate` increments the lease epoch before returning its Future.
+    if (nativeFenceEnabled) resource?.workStarted();
     final close = nativeFenceEnabled
         ? _lease.invalidateAndFence(reason)
         : _lease.invalidate(reason);
     _lastFence = close;
+    _accountResource = null;
+    resource?.closedBy(close);
     unawaited(
       close.then((result) {
         if (_disposed) return;
@@ -628,6 +869,11 @@ final class PracticeAudioRootOwner {
     if (_disposed) return;
     _userIdListenable.removeListener(_onUserChanged);
     _phaseListenable.removeListener(_onPhaseChanged);
+    _passwordRecoveryListenable?.removeListener(_onPasswordRecoveryChanged);
+    _identityBoundary?.removeListener(_onIdentityBoundaryChanged);
+    if (!identical(_identityBoundary, _resourceAdmission)) {
+      _resourceAdmission?.removeListener(_onIdentityBoundaryChanged);
+    }
     _observer = null;
     _topRoute = null;
     _fence(PracticeAudioInvalidationReason.routeChange);
@@ -758,6 +1004,10 @@ class OstinatoAudioRoot extends StatefulWidget {
     super.key,
     required this.userId,
     required this.phase,
+    this.passwordRecovery,
+    this.identityBoundary,
+    this.resourceAdmission,
+    this.disposeAccountBinding,
     this.child,
     this.builder,
     this.testLease,
@@ -768,6 +1018,10 @@ class OstinatoAudioRoot extends StatefulWidget {
 
   final ValueListenable<String?> userId;
   final ValueListenable<MotionIdentityPhase> phase;
+  final ValueListenable<bool>? passwordRecovery;
+  final Listenable? identityBoundary;
+  final ValueListenable<bool>? resourceAdmission;
+  final VoidCallback? disposeAccountBinding;
   final Widget? child;
   final Widget Function(PracticeAudioNavigatorHost host)? builder;
   @visibleForTesting
@@ -803,6 +1057,9 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
     _owner = PracticeAudioRootOwner(
       userId: widget.userId,
       phase: widget.phase,
+      passwordRecovery: widget.passwordRecovery,
+      identityBoundary: widget.identityBoundary,
+      resourceAdmission: widget.resourceAdmission,
       lease:
           widget.testLease ??
           PracticeAudioLease(
@@ -836,6 +1093,7 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _owner.dispose();
+    widget.disposeAccountBinding?.call();
     super.dispose();
   }
 

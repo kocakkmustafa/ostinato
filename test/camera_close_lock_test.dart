@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/camera_session.dart';
 
@@ -7,6 +9,8 @@ import 'package:ostinato/app/camera_session.dart';
 /// çalışıyor mu"* diye soruyordu ve cevap İLK seferinde evetti. Yarış ancak
 /// İKİNCİ açılışta görünür.
 void main() {
+  setUp(resetCameraSessionForTesting);
+  tearDown(resetCameraSessionForTesting);
   test('uçuşta kapanış varsa START onu BEKLER (sıra korunur)', () async {
     final List<String> order = <String>[];
 
@@ -29,5 +33,34 @@ void main() {
     sw.stop();
     expect(sw.elapsedMilliseconds, lessThan(20),
         reason: 'N=1 yolunda kilit maliyet eklememeli');
+  });
+
+  test('older close completion cannot erase a newer pending close barrier', () async {
+    final Completer<void> first = Completer<void>();
+    final Completer<void> newer = Completer<void>();
+    final List<Future<void>> waiters = <Future<void>>[];
+    try {
+      noteClosing(first.future);
+      var admitted = false;
+      final Future<void> waiting = awaitPendingClose().then((_) { admitted = true; });
+      waiters.add(waiting);
+      noteClosing(newer.future);
+      first.complete();
+      await Future<void>.delayed(Duration.zero);
+      expect(admitted, isFalse, reason: 'successor must await every recorded closure');
+      var secondAdmitted = false;
+      final Future<void> second = awaitPendingClose().then((_) { secondAdmitted = true; });
+      waiters.add(second);
+      await Future<void>.delayed(Duration.zero);
+      expect(secondAdmitted, isFalse, reason: 'old completion erased the newer barrier');
+      newer.complete();
+      await waiting;
+      await second;
+      expect(admitted && secondAdmitted, isTrue);
+    } finally {
+      if (!first.isCompleted) first.complete();
+      if (!newer.isCompleted) newer.complete();
+      await Future.wait(waiters);
+    }
   });
 }

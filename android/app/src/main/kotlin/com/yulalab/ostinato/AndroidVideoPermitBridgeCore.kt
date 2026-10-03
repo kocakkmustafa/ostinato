@@ -1,11 +1,10 @@
 package com.yulalab.ostinato
 
-/** App-owned half of a future engine-bound video permit bridge.
+/** App-owned half of one engine-bound video permit bridge.
  *
  * [Claim], [Plugin], and [Messenger] remain the caller's exact objects. The
- * shipping app still resolves the hosted plugin and does not construct this
- * class. A vendor-bound adapter must create one core per registered plugin and
- * messenger; it must not rebuild a claim from its fields for a later callback.
+ * vendor adapter creates one core per registered plugin and messenger; it
+ * must not rebuild a claim from its fields for a later callback.
  */
 internal class AndroidVideoPermitBridgeCore<Claim : Any, Plugin : Any, Messenger : Any>(
   private val arbiter: PracticeAudioArbiter,
@@ -74,4 +73,8 @@ internal class AndroidVideoPermitBridgeCore<Claim : Any, Plugin : Any, Messenger
     )
     return released || arbiter.wasVideoPlayerReleased(exact)
   }
+
+  /** The vendor separately verifies that no native record or player remains. */
+  fun isQuiescentForRebind(): Boolean =
+    arbiter.isVideoBridgeRebindQuiescent(captured?.arbiterClaim)
 }

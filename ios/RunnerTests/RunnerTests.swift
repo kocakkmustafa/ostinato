@@ -1,6 +1,7 @@
 import AVFoundation
 import Flutter
 import XCTest
+import video_player_avfoundation
 @testable import Runner
 
 private enum FakeCaptureFailure: Error { case deactivation }
@@ -589,6 +590,75 @@ final class PracticeAudioArbiterTests: XCTestCase {
     ["ownerToken": owner.token, "engineGeneration": owner.engineGeneration]
   }
 
+  private func call(_ handler: PracticeAudioArbiterHandler, _ method: String,
+                    _ arguments: [String: Any]) -> Any? {
+    onMain {
+      var answer: Any?
+      handler.handle(FlutterMethodCall(methodName: method, arguments: arguments)) { answer = $0 }
+      return answer
+    }
+  }
+
+  private func quiescentRebindArguments(_ retired: PracticeAudioOwner) -> [String: Any] {
+    ["retiredOwnerToken": retired.token,
+      "retiredEngineGeneration": retired.engineGeneration, "reason": "userRetry"]
+  }
+
+  private struct VideoRebindFixture {
+    let arbiter: PracticeAudioArbiter
+    let engine: NSObject
+    let retired: PracticeAudioOwner
+    let bridge: OstinatoVideoPermitBridge
+    let permit: VideoPermitIdentity
+    let claim: [String: Any]
+    let playerId: Int64
+  }
+
+  private func makeVideoRebindFixture(playerId: Int64 = 89) -> VideoRebindFixture {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let engine = NSObject()
+    let retired = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    let binding = call(arbiter, retired, "bind", ["schemaVersion": 1]) as! [String: Any]
+    let context = binding["contextGeneration"] as! Int
+    let reserved = call(arbiter, retired, "reserve", ownerFields(retired).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = reserved["leaseGeneration"] as! Int
+    let permit = VideoPermitIdentity(ownerToken: retired.token,
+      engineGeneration: Int64(retired.engineGeneration), contextGeneration: Int64(context),
+      leaseId: outputLease, leaseGeneration: Int64(generation))
+    let bridge = OstinatoVideoPermitBridge(arbiter: arbiter, owner: retired)
+    XCTAssertTrue(onMain { try! bridge.withClaimedVideoCreation(
+      permit: permit, playerId: playerId, firstSideEffect: {}) })
+    return VideoRebindFixture(arbiter: arbiter, engine: engine, retired: retired,
+      bridge: bridge, permit: permit, claim: ownerFields(retired).merging([
+        "contextGeneration": context, "leaseId": outputLease, "leaseGeneration": generation
+      ]) { _, rhs in rhs }, playerId: playerId)
+  }
+
+  private func drainVideoRebindCloseDispatch() {
+    let drained = expectation(description: "video rebind close dispatch drained")
+    onMain { DispatchQueue.main.async { drained.fulfill() } }
+    wait(for: [drained], timeout: 1)
+  }
+
+  private func settleVideoRebindFixture(_ fixture: VideoRebindFixture,
+                                       current: PracticeAudioOwner) {
+    drainVideoRebindCloseDispatch()
+    XCTAssertTrue(onMain { fixture.bridge.releaseVideoPlayer(
+      permit: fixture.permit, playerId: fixture.playerId) })
+    _ = call(fixture.arbiter, current, "completeRetiredVideoDispose",
+      fixture.claim.merging(["confirmed": true]) { _, rhs in rhs })
+    let state = call(fixture.arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    let settled = call(fixture.arbiter, current, "recoverAll", ownerFields(current).merging([
+      "expectedStateRevision": state["stateRevision"]!, "reason": "userRetry",
+      "exactVideoClaim": fixture.claim
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(settled["status"] as? String, "closed")
+  }
+
   private func legacyStartArguments(
     _ arbiter: PracticeAudioArbiter, _ owner: PracticeAudioOwner
   ) -> [String: Any] {
@@ -1081,6 +1151,47 @@ final class PracticeAudioArbiterTests: XCTestCase {
     XCTAssertEqual((stale["snapshot"] as? [String: Any])?["activeSide"] as? String, "input")
   }
 
+  func testHostVideoBridgeRejectsForeignPermitAndReleasesOnlyRetiredExactClaim() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let old = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, old, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let reservation = call(arbiter, old, "reserve", ownerFields(old).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = reservation["leaseGeneration"] as! Int
+    let exact = VideoPermitIdentity(ownerToken: old.token,
+                                    engineGeneration: Int64(old.engineGeneration),
+                                    contextGeneration: Int64(context), leaseId: outputLease,
+                                    leaseGeneration: Int64(generation))
+    let foreign = VideoPermitIdentity(ownerToken: String(repeating: "f", count: 32),
+                                      engineGeneration: Int64(old.engineGeneration),
+                                      contextGeneration: Int64(context), leaseId: outputLease,
+                                      leaseGeneration: Int64(generation))
+    let bridge = OstinatoVideoPermitBridge(arbiter: arbiter, owner: old)
+    var effects = 0
+    let rejected = onMain {
+      try? bridge.withClaimedVideoCreation(permit: foreign, playerId: 41) { effects += 1 }
+    }
+    XCTAssertFalse(rejected ?? true)
+    XCTAssertEqual(effects, 0)
+    let admitted = onMain {
+      try? bridge.withClaimedVideoCreation(permit: exact, playerId: 41) { effects += 1 }
+    }
+    XCTAssertTrue(admitted ?? false)
+    XCTAssertEqual(effects, 1)
+
+    let current = onMain { arbiter.replaceEngine() }
+    XCTAssertFalse(onMain { bridge.releaseVideoPlayer(permit: foreign, playerId: 41) })
+    XCTAssertFalse(onMain { bridge.releaseVideoPlayer(permit: exact, playerId: 42) })
+    XCTAssertTrue(onMain { bridge.releaseVideoPlayer(permit: exact, playerId: 41) })
+    XCTAssertFalse(onMain { bridge.releaseVideoPlayer(permit: exact, playerId: 41) })
+    let held = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    XCTAssertEqual(held["activeSide"] as? String, "video")
+    XCTAssertEqual(held["allClear"] as? Bool, false) // Native release is not Dart ACK.
+  }
+
   func testVideoCreationGateRejectsStalePermitAndReentrantFenceKeepsExactClaim() {
     let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
     let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
@@ -1273,15 +1384,13 @@ final class PracticeAudioArbiterTests: XCTestCase {
     let recovered = call(arbiter2, successor, "recoverAll", ownerFields(successor).merging([
       "expectedStateRevision": released["stateRevision"]!, "reason": "userRetry"
     ]) { _, rhs in rhs }) as! [String: Any]
-    XCTAssertEqual(recovered["status"] as? String, "closed")
+    XCTAssertEqual(recovered["status"] as? String, "blocked")
+    XCTAssertEqual((recovered["snapshot"] as? [String: Any])?["activeSide"] as? String, "video")
     let successorContext = (recovered["snapshot"] as! [String: Any])["contextGeneration"]!
     let newer = call(arbiter2, successor, "reserve", ownerFields(successor).merging([
       "contextGeneration": successorContext, "leaseId": inputLease, "side": "video"
-    ]) { _, rhs in rhs }) as! [String: Any]
-    XCTAssertEqual(newer["status"] as? String, "reserved")
-    XCTAssertFalse(onMain { arbiter2.releaseVideoPlayer(owner: heldOwner,
-      contextGeneration: heldContext as! Int, leaseId: outputLease,
-      leaseGeneration: held["leaseGeneration"] as! Int, playerId: 17) })
+    ]) { _, rhs in rhs })
+    XCTAssertEqual((newer as? FlutterError)?.code, "audio_busy")
   }
 
   func testEarlyDisposeAcknowledgementWaitsForNativeRelease() {
@@ -1519,5 +1628,398 @@ final class PracticeAudioArbiterTests: XCTestCase {
     ]) { _, rhs in rhs }) as! [String: Any]
     XCTAssertEqual(recovered["status"] as? String, "closed")
     XCTAssertEqual((recovered["snapshot"] as? [String: Any])?["allClear"] as? Bool, true)
+  }
+
+  func testVideoFenceDispatchesExactNativeCloseWithoutDartAck() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let reserved = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = reserved["leaseGeneration"] as! Int
+    let dispatched = expectation(description: "exact native video close dispatched")
+    let admitted = onMain { arbiter.withClaimedVideoCreation(
+      owner: owner, contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 71,
+      closePort: {
+        XCTAssertTrue(arbiter.releaseVideoPlayer(owner: owner,
+          contextGeneration: context, leaseId: self.outputLease,
+          leaseGeneration: generation, playerId: 71))
+        dispatched.fulfill()
+        return true
+      }, firstSideEffect: {}) }
+    XCTAssertTrue(admitted)
+    let fence = call(arbiter, owner, "fenceContext", ownerFields(owner).merging([
+      "contextGeneration": context, "reason": "accountChange"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(fence["status"] as? String, "pending")
+    wait(for: [dispatched], timeout: 1)
+    let held = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(held["activeSide"] as? String, "video")
+    let retry = call(arbiter, owner, "recoverAll", ownerFields(owner).merging([
+      "expectedStateRevision": held["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(retry["status"] as? String, "blocked")
+  }
+
+  func testVideoClosePortFailureDoesNotProduceReleaseReceipt() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let owner = onMain { arbiter.replaceEngine() }
+    let context = (call(arbiter, owner, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let reserved = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let rejected = expectation(description: "native close port rejected")
+    XCTAssertTrue(onMain { arbiter.withClaimedVideoCreation(
+      owner: owner, contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: reserved["leaseGeneration"] as! Int, playerId: 73,
+      closePort: { rejected.fulfill(); return false }, firstSideEffect: {}) })
+    _ = call(arbiter, owner, "fenceContext", ownerFields(owner).merging([
+      "contextGeneration": context, "reason": "routeChange"
+    ]) { _, rhs in rhs })
+    wait(for: [rejected], timeout: 1)
+    let held = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as! [String: Any]
+    XCTAssertEqual(held["activeSide"] as? String, "video")
+    XCTAssertEqual(held["requiresExplicitRetry"] as? Bool, true)
+    XCTAssertEqual(held["allClear"] as? Bool, false)
+  }
+
+  func testRetiredVideoAckReadbackRequiresSameEngineAndBothExactReceipts() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let engine = NSObject()
+    let old = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    let context = (call(arbiter, old, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let reserved = call(arbiter, old, "reserve", ownerFields(old).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = reserved["leaseGeneration"] as! Int
+    XCTAssertTrue(onMain { arbiter.claimVideoPlayer(owner: old,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 79) })
+    let current = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    let fields: [String: Any] = [
+      "ownerToken": old.token, "engineGeneration": old.engineGeneration,
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": generation
+    ]
+    let before = call(arbiter, current, "readVideoDisposeReceipt", fields) as! [String: Any]
+    XCTAssertEqual(before["ackStatus"] as? String, "NOT_RECORDED")
+    XCTAssertEqual(before["nativeReleaseRecorded"] as? Bool, false)
+    XCTAssertTrue(onMain { arbiter.releaseVideoPlayer(owner: old,
+      contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 79) })
+    let releaseOnly = call(arbiter, current, "readVideoDisposeReceipt", fields) as! [String: Any]
+    XCTAssertEqual(releaseOnly["ackStatus"] as? String, "NOT_RECORDED")
+    XCTAssertEqual(releaseOnly["nativeReleaseRecorded"] as? Bool, true)
+    let acknowledged = call(arbiter, current, "completeRetiredVideoDispose",
+      fields.merging(["confirmed": true]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(acknowledged["ackStatus"] as? String, "RECORDED")
+    XCTAssertEqual(acknowledged["nativeReleaseRecorded"] as? Bool, true)
+    XCTAssertEqual(acknowledged["leaseSettled"] as? Bool, false)
+    let replay = call(arbiter, current, "readVideoDisposeReceipt", fields) as! [String: Any]
+    XCTAssertEqual(replay["ackStatus"] as? String, "RECORDED")
+    XCTAssertEqual(replay["leaseSettled"] as? Bool, false)
+    let foreign = onMain { arbiter.replaceEngine(engineIdentity: NSObject()) }
+    let denied = call(arbiter, foreign, "completeRetiredVideoDispose",
+      fields.merging(["confirmed": true]) { _, rhs in rhs })
+    XCTAssertEqual((denied as? FlutterError)?.code, "stale_audio_owner")
+    let unknown = call(arbiter, foreign, "readVideoDisposeReceipt", fields) as! [String: Any]
+    XCTAssertEqual(unknown["ackStatus"] as? String, "UNKNOWN")
+  }
+
+  func testQuiescentBridgeRebindUsesStableNativeHandoff() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+    let engine = NSObject()
+    let retired = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    let bridge = OstinatoVideoPermitBridge(arbiter: arbiter, owner: retired)
+    let oldState = call(arbiter, retired, "readAllAudioState", ownerFields(retired)) as! [String: Any]
+    let current = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    var dispatches = 0
+    let handler = PracticeAudioArbiterHandler(arbiter: arbiter, owner: current, rebindBridge: {
+      dispatches += 1
+      return bridge.isQuiescentForRebind()
+    })
+    let before = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    let result = call(handler, "rebindQuiescentOwner", quiescentRebindArguments(retired)) as! [String: Any]
+    let proof = result["handoff"] as! [String: Any]
+    XCTAssertEqual(result["bridgeReady"] as? Bool, true)
+    XCTAssertEqual(proof["retiredContextGeneration"] as? Int, oldState["contextGeneration"] as? Int)
+    XCTAssertEqual(proof["retiredStateRevision"] as? Int, oldState["stateRevision"] as? Int)
+    XCTAssertTrue((proof["snapshot"] as! NSDictionary).isEqual(before as NSDictionary))
+    let first = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    let second = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    XCTAssertTrue((before as NSDictionary).isEqual(first as NSDictionary))
+    XCTAssertTrue((first as NSDictionary).isEqual(second as NSDictionary))
+    XCTAssertEqual(dispatches, 1)
+  }
+
+  func testQuiescentBridgeRebindRejectsForeignAndSkippedOwners() {
+    for foreignEngine in [true, false] {
+      let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+      let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+      let engine = NSObject()
+      let retired = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+      let second = onMain { arbiter.replaceEngine(engineIdentity: foreignEngine ? NSObject() : engine) }
+      let current = foreignEngine ? second : onMain { arbiter.replaceEngine(engineIdentity: engine) }
+      var dispatches = 0
+      let handler = PracticeAudioArbiterHandler(arbiter: arbiter, owner: current, rebindBridge: {
+        dispatches += 1; return true
+      })
+      let denied = call(handler, "rebindQuiescentOwner", quiescentRebindArguments(retired))
+      XCTAssertEqual((denied as? FlutterError)?.code, "quiescent_handoff_unavailable")
+      XCTAssertEqual(dispatches, 0)
+    }
+  }
+
+  func testQuiescentBridgeRebindRejectsHeldCancelledAndBackgroundOwners() {
+    for history in ["held", "cancelled", "background"] {
+      let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+      var foreground = true
+      let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { foreground },
+                                         videoReservationEnabled: true)
+      let engine = NSObject()
+      let retired = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+      let state = call(arbiter, retired, "readAllAudioState", ownerFields(retired)) as! [String: Any]
+      if history == "held" {
+        _ = call(arbiter, retired, "reserve", ownerFields(retired).merging([
+          "contextGeneration": state["contextGeneration"]!, "leaseId": outputLease, "side": "video"
+        ]) { _, rhs in rhs })
+      } else if history == "cancelled" {
+        _ = call(arbiter, retired, "cancelUnclaimedVideoReservation", ownerFields(retired).merging([
+          "attemptOwnerToken": retired.token, "attemptEngineGeneration": retired.engineGeneration,
+          "attemptContextGeneration": state["contextGeneration"]!, "leaseId": outputLease,
+          "leaseGeneration": NSNull(), "expectedStateRevision": state["stateRevision"]!
+        ]) { _, rhs in rhs })
+      }
+      let current = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+      if history == "background" { foreground = false }
+      let after = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+      XCTAssertEqual(after["allClear"] as? Bool, true)
+      var dispatches = 0
+      let handler = PracticeAudioArbiterHandler(arbiter: arbiter, owner: current, rebindBridge: {
+        dispatches += 1; return true
+      })
+      let denied = call(handler, "rebindQuiescentOwner", quiescentRebindArguments(retired))
+      XCTAssertEqual((denied as? FlutterError)?.code, "quiescent_handoff_unavailable")
+      XCTAssertEqual(dispatches, 0)
+    }
+  }
+
+  func testExactVideoBridgeRebindRequiresOwnSettledClaimAndReplaysItsReceipt() {
+    let fixture = makeVideoRebindFixture()
+    let arbiter = fixture.arbiter
+    let current = onMain { arbiter.replaceEngine(engineIdentity: fixture.engine) }
+    drainVideoRebindCloseDispatch()
+    var dispatches = 0
+    let handler = PracticeAudioArbiterHandler(arbiter: arbiter, owner: current, rebindBridge: {
+      dispatches += 1
+      return fixture.bridge.isQuiescentForRebind()
+    })
+    XCTAssertEqual((call(handler, "rebindVideoPermitBridge", fixture.claim) as? FlutterError)?.code,
+                   "video_handoff_pending")
+    XCTAssertTrue(onMain { fixture.bridge.releaseVideoPlayer(permit: fixture.permit, playerId: fixture.playerId) })
+    XCTAssertEqual((call(handler, "rebindVideoPermitBridge", fixture.claim) as? FlutterError)?.code,
+                   "video_handoff_pending")
+    _ = call(arbiter, current, "completeRetiredVideoDispose",
+      fixture.claim.merging(["confirmed": true]) { _, rhs in rhs })
+    XCTAssertEqual((call(handler, "rebindVideoPermitBridge", fixture.claim) as? FlutterError)?.code,
+                   "video_handoff_pending")
+    XCTAssertEqual(dispatches, 0)
+    let held = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    _ = call(arbiter, current, "recoverAll", ownerFields(current).merging([
+      "expectedStateRevision": held["stateRevision"]!, "reason": "userRetry",
+      "exactVideoClaim": fixture.claim
+    ]) { _, rhs in rhs })
+    XCTAssertFalse(onMain { arbiter.videoBridgeIsQuiescent(owner: fixture.retired,
+      contextGeneration: Int(fixture.permit.contextGeneration), leaseId: fixture.permit.leaseId,
+      leaseGeneration: Int(fixture.permit.leaseGeneration), playerId: fixture.playerId + 1) })
+    let wrong = fixture.claim.merging(["leaseId": inputLease]) { _, rhs in rhs }
+    XCTAssertEqual((call(handler, "rebindVideoPermitBridge", wrong) as? FlutterError)?.code,
+                   "video_handoff_pending")
+    let first = call(handler, "rebindVideoPermitBridge", fixture.claim) as! [String: Any]
+    let replay = call(handler, "rebindVideoPermitBridge", fixture.claim) as! [String: Any]
+    XCTAssertEqual(first["bridgeReady"] as? Bool, true)
+    let ack = first["ack"] as! [String: Any]
+    XCTAssertEqual(ack["playerId"] as? Int64, fixture.playerId)
+    XCTAssertEqual(ack["ackStatus"] as? String, "RECORDED")
+    XCTAssertEqual(ack["nativeReleaseRecorded"] as? Bool, true)
+    XCTAssertEqual(ack["leaseSettled"] as? Bool, true)
+    XCTAssertTrue((first as NSDictionary).isEqual(replay as NSDictionary))
+    XCTAssertEqual(dispatches, 2)
+  }
+
+  func testVideoBridgeRebindKeepsCapturedClaimWhenGlobalReceiptChanges() {
+    let fixture = makeVideoRebindFixture(playerId: 97)
+    let arbiter = fixture.arbiter
+    let current = onMain { arbiter.replaceEngine(engineIdentity: fixture.engine) }
+    settleVideoRebindFixture(fixture, current: current)
+    XCTAssertTrue(onMain { fixture.bridge.isQuiescentForRebind() })
+    let state = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    let context = state["contextGeneration"] as! Int
+    let nextId = String(repeating: "d", count: 32)
+    let reserved = call(arbiter, current, "reserve", ownerFields(current).merging([
+      "contextGeneration": context, "leaseId": nextId, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = reserved["leaseGeneration"] as! Int
+    let nextPermit = VideoPermitIdentity(ownerToken: current.token,
+      engineGeneration: Int64(current.engineGeneration), contextGeneration: Int64(context),
+      leaseId: nextId, leaseGeneration: Int64(generation))
+    let nextBridge = OstinatoVideoPermitBridge(arbiter: arbiter, owner: current)
+    XCTAssertTrue(onMain { try! nextBridge.withClaimedVideoCreation(
+      permit: nextPermit, playerId: 101, firstSideEffect: {}) })
+    XCTAssertTrue(onMain { nextBridge.releaseVideoPlayer(permit: nextPermit, playerId: 101) })
+    _ = call(arbiter, current, "completeVideoDispose", ownerFields(current).merging([
+      "contextGeneration": context, "leaseId": nextId, "leaseGeneration": generation,
+      "confirmed": true
+    ]) { _, rhs in rhs })
+    let clear = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    XCTAssertEqual(clear["allClear"] as? Bool, true)
+    XCTAssertTrue(onMain { nextBridge.isQuiescentForRebind() })
+    XCTAssertFalse(onMain { fixture.bridge.isQuiescentForRebind() })
+    var dispatches = 0
+    let handler = PracticeAudioArbiterHandler(arbiter: arbiter, owner: current, rebindBridge: {
+      dispatches += 1; return true
+    })
+    XCTAssertEqual((call(handler, "rebindVideoPermitBridge", fixture.claim) as? FlutterError)?.code,
+                   "video_handoff_pending")
+    XCTAssertEqual(dispatches, 0)
+  }
+
+  func testBridgeRebindRejectsChangedCallbacksFailedPortsAndStaleHandlers() {
+    for exactVideo in [false, true] {
+      for mutation in ["owner", "context", "revision", "failedPort"] {
+        let arbiter: PracticeAudioArbiter
+        let engine: NSObject
+        let retired: PracticeAudioOwner
+        let current: PracticeAudioOwner
+        let arguments: [String: Any]
+        if exactVideo {
+          let fixture = makeVideoRebindFixture()
+          arbiter = fixture.arbiter; engine = fixture.engine; retired = fixture.retired
+          current = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+          settleVideoRebindFixture(fixture, current: current)
+          arguments = fixture.claim
+        } else {
+          let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+          arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+          engine = NSObject()
+          retired = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+          current = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+          arguments = quiescentRebindArguments(retired)
+        }
+        let method = exactVideo ? "rebindVideoPermitBridge" : "rebindQuiescentOwner"
+        let changedCode = exactVideo ? "video_handoff_changed" : "quiescent_handoff_changed"
+        var dispatches = 0
+        let handler = PracticeAudioArbiterHandler(arbiter: arbiter, owner: current, rebindBridge: {
+          dispatches += 1
+          if mutation == "owner" { arbiter.replaceEngine(engineIdentity: engine) }
+          if mutation == "context" { arbiter.closeAllGlobal(reason: "routeChange") }
+          if mutation == "revision" {
+            let state = self.call(arbiter, current, "readAllAudioState", self.ownerFields(current)) as! [String: Any]
+            _ = self.call(arbiter, current, "recoverAll", self.ownerFields(current).merging([
+              "expectedStateRevision": state["stateRevision"]!, "reason": "userRetry"
+            ]) { _, rhs in rhs })
+          }
+          return mutation != "failedPort"
+        })
+        let denied = call(handler, method, arguments)
+        XCTAssertEqual((denied as? FlutterError)?.code,
+                       mutation == "failedPort" ? "video_bridge_unavailable" : changedCode)
+        XCTAssertNil(denied as? [String: Any])
+        XCTAssertEqual(dispatches, 1)
+        onMain { arbiter.replaceEngine(engineIdentity: engine) }
+        XCTAssertEqual((call(handler, method, arguments) as? FlutterError)?.code, "stale_audio_owner")
+        XCTAssertEqual(dispatches, 1)
+      }
+    }
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true })
+    let engine = NSObject()
+    let retired = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    let bridge = OstinatoVideoPermitBridge(arbiter: arbiter, owner: retired)
+    let current = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    let handler = PracticeAudioArbiterHandler(arbiter: arbiter, owner: current,
+      rebindBridge: { bridge.isQuiescentForRebind() })
+    let first = call(handler, "rebindQuiescentOwner", quiescentRebindArguments(retired)) as! [String: Any]
+    let replay = call(handler, "rebindQuiescentOwner", quiescentRebindArguments(retired)) as! [String: Any]
+    XCTAssertTrue((first as NSDictionary).isEqual(replay as NSDictionary))
+  }
+
+  func testExactRetiredUserRetryDispatchesCloseThenSettlesOnlyAfterReadback() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       videoReservationEnabled: true)
+    let engine = NSObject()
+    let old = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    let context = (call(arbiter, old, "bind", ["schemaVersion": 1]) as! [String: Any])["contextGeneration"] as! Int
+    let reserved = call(arbiter, old, "reserve", ownerFields(old).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "video"
+    ]) { _, rhs in rhs }) as! [String: Any]
+    let generation = reserved["leaseGeneration"] as! Int
+    let first = expectation(description: "first close port rejected")
+    let second = expectation(description: "exact close port retried")
+    var dispatches = 0
+    XCTAssertTrue(onMain { arbiter.withClaimedVideoCreation(
+      owner: old, contextGeneration: context, leaseId: outputLease,
+      leaseGeneration: generation, playerId: 83,
+      closePort: {
+        dispatches += 1
+        if dispatches == 1 { first.fulfill(); return false }
+        XCTAssertTrue(arbiter.releaseVideoPlayer(owner: old,
+          contextGeneration: context, leaseId: self.outputLease,
+          leaseGeneration: generation, playerId: 83))
+        second.fulfill()
+        return true
+      }, firstSideEffect: {}) })
+    _ = call(arbiter, old, "fenceContext", ownerFields(old).merging([
+      "contextGeneration": context, "reason": "routeChange"
+    ]) { _, rhs in rhs })
+    wait(for: [first], timeout: 1)
+    let current = onMain { arbiter.replaceEngine(engineIdentity: engine) }
+    let claim: [String: Any] = [
+      "ownerToken": old.token, "engineGeneration": old.engineGeneration,
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": generation
+    ]
+    let ack = call(arbiter, current, "completeRetiredVideoDispose",
+      claim.merging(["confirmed": true]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(ack["ackStatus"] as? String, "RECORDED")
+    XCTAssertEqual(ack["nativeReleaseRecorded"] as? Bool, false)
+    let held = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    let base: [String: Any] = ownerFields(current).merging([
+      "expectedStateRevision": held["stateRevision"]!, "reason": "userRetry"
+    ]) { _, rhs in rhs }
+    let wrong = claim.merging(["leaseId": String(repeating: "d", count: 32)]) { _, rhs in rhs }
+    let denied = call(arbiter, current, "recoverAll", base.merging([
+      "exactVideoClaim": wrong
+    ]) { _, rhs in rhs })
+    XCTAssertEqual((denied as? FlutterError)?.code, "stale_audio_lease")
+    let broad = call(arbiter, current, "recoverAll", base) as! [String: Any]
+    XCTAssertEqual(broad["status"] as? String, "blocked")
+    XCTAssertEqual(dispatches, 1)
+    let retry = call(arbiter, current, "recoverAll", base.merging([
+      "exactVideoClaim": claim
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(retry["status"] as? String, "blocked")
+    wait(for: [second], timeout: 1)
+    let released = call(arbiter, current, "readVideoDisposeReceipt", claim) as! [String: Any]
+    XCTAssertEqual(released["nativeReleaseRecorded"] as? Bool, true)
+    XCTAssertEqual(released["leaseSettled"] as? Bool, false)
+    let beforeSettle = call(arbiter, current, "readAllAudioState", ownerFields(current)) as! [String: Any]
+    let settled = call(arbiter, current, "recoverAll", ownerFields(current).merging([
+      "expectedStateRevision": beforeSettle["stateRevision"]!,
+      "reason": "userRetry", "exactVideoClaim": claim
+    ]) { _, rhs in rhs }) as! [String: Any]
+    XCTAssertEqual(settled["status"] as? String, "closed")
+    let final = call(arbiter, current, "readVideoDisposeReceipt", claim) as! [String: Any]
+    XCTAssertEqual(final["leaseSettled"] as? Bool, true)
   }
 }

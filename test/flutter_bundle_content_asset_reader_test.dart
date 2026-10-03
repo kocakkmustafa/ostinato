@@ -9,7 +9,7 @@ import 'package:ostinato/app/guitar_journey.dart';
 
 const String _manifestPath = 'assets/motion_content/manifest.json';
 const String _coursePath = 'assets/content/guitar_journey.v1.json';
-const String _corePin = 'f2ea161c7e974d57b114ba7773836c72be17a381';
+const String _corePin = '0fed3a05466946bf2710750f4feca8dbd75be123';
 // Current reviewed course asset. Any authored course change requires a repin.
 const int _courseByteLength = 995884;
 const String _courseSha256 =
@@ -31,6 +31,30 @@ String _packageBlock(String source, String package) {
     start,
     next == null ? source.length : matches.single.end + next.start,
   );
+}
+
+void _expectNoPublishedCoreOverride(String source, String package) {
+  expect(
+    RegExp('^  ${RegExp.escape(package)}:', multiLine: true).allMatches(source),
+    isEmpty,
+    reason: 'Published Core packages must resolve from the pinned Git commit',
+  );
+}
+
+void _expectPinnedGitLock(String block) {
+  for (final field in <String>['ref', 'resolved-ref']) {
+    final pin = RegExp.escape(_corePin);
+    expect(
+      RegExp(
+        """^      $field: (?:$pin|"$pin"|'$pin')\\s*\$""",
+        multiLine: true,
+      ).allMatches(block),
+      hasLength(1),
+      reason: '$field must equal the actual reviewed Core commit',
+    );
+  }
+  expect(block, contains('    source: git'));
+  expect(block, contains('https://github.com/kocakkmustafa/motion-core.git'));
 }
 
 final class _ManifestOverlayBundle extends CachingAssetBundle {
@@ -131,13 +155,12 @@ void main() {
         expectedRef.allMatches(_packageBlock(descriptor, package)),
         hasLength(1),
       );
+      final override = File('pubspec_overrides.yaml');
+      if (override.existsSync()) {
+        _expectNoPublishedCoreOverride(override.readAsStringSync(), package);
+      }
       final locked = _packageBlock(lock, package);
-      expect(expectedRef.allMatches(locked), hasLength(1));
-      final expectedResolvedRef = RegExp(
-        r'^      resolved-ref: ' + RegExp.escape(_corePin) + r'$',
-        multiLine: true,
-      );
-      expect(expectedResolvedRef.allMatches(locked), hasLength(1));
+      _expectPinnedGitLock(locked);
       if (package == 'motion_content') {
         expect(
           RegExp(
@@ -148,6 +171,49 @@ void main() {
         );
       }
     }
+  });
+
+  test('published pin contract accepts quoted scalars and empty overrides', () {
+    _expectNoPublishedCoreOverride('dependency_overrides:\n', 'motion_core');
+    for (final quote in <String>['', '"', "'"]) {
+      _expectPinnedGitLock(
+        '  motion_core:\n'
+        '    description:\n'
+        '      ref: $quote$_corePin$quote\n'
+        '      resolved-ref: $quote$_corePin$quote\n'
+        '      url: "https://github.com/kocakkmustafa/motion-core.git"\n'
+        '    source: git\n',
+      );
+    }
+  });
+
+  test('published pin contract rejects wrong SHA and local Core overrides', () {
+    final valid =
+        '      ref: "$_corePin"\n'
+        '      resolved-ref: "$_corePin"\n'
+        '      url: "https://github.com/kocakkmustafa/motion-core.git"\n'
+        '    source: git\n';
+    for (final field in <String>['ref', 'resolved-ref']) {
+      expect(
+        () => _expectPinnedGitLock(
+          valid.replaceFirst('$field: "$_corePin"', '$field: "${'1' * 40}"'),
+        ),
+        throwsA(isA<TestFailure>()),
+      );
+    }
+    expect(
+      () => _expectNoPublishedCoreOverride(
+        'dependency_overrides:\n  motion_core:\n    path: ../motion-core\n',
+        'motion_core',
+      ),
+      throwsA(isA<TestFailure>()),
+    );
+    expect(
+      () => _expectPinnedGitLock(
+        valid.replaceFirst('source: git', 'source: path'),
+      ),
+      throwsA(isA<TestFailure>()),
+    );
   });
 
   test('reads pinned guitar bytes and parses the active course', () async {

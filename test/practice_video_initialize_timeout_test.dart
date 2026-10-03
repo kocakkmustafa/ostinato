@@ -36,6 +36,7 @@ void main() {
       );
       expect(player.disposals, 1);
       expect(port.videoDisposeCalls, 1);
+      expect(port.videoDisposeConfirmations, [false]);
       expect(owner.blocked, isTrue);
       expect(
         (await port.readAllAudioState()).activeSide,
@@ -45,6 +46,7 @@ void main() {
       await Future<void>.delayed(Duration.zero);
       expect((await port.readAllAudioState()).allClear, isFalse);
       expect(await owner.close(), isFalse);
+      expect(port.videoDisposeConfirmations, [false]);
     },
   );
 }

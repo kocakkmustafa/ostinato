@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'account_data_operations.dart';
+
 final RegExp _canonicalAccountUuid = RegExp(
   r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
 );
@@ -38,7 +40,11 @@ Future<List<String>> localAccountIds(Directory root) async {
 
 /// Called only after verified common-account deletion, with the user ID
 /// captured before remote sign-out. Sign-out and switching keep local data.
-Future<void> deleteAccountData(Directory root, String accountUserId) async {
+Future<void> deleteAccountData(
+  Directory root,
+  String accountUserId, {
+  Future<void>? beforeErase,
+}) {
   final directory = accountDataDirectory(root, accountUserId);
-  if (await directory.exists()) await directory.delete(recursive: true);
+  return AccountDataOperations.delete(directory, beforeErase: beforeErase);
 }

@@ -5,6 +5,7 @@ import 'package:ostinato_posture/ostinato_posture.dart';
 import 'package:permission_handler/permission_handler.dart' show openAppSettings;
 
 import '../camera_pose_source.dart';
+import '../camera_session.dart';
 import '../account_connection.dart';
 import '../app_locale.dart';
 import '../content.dart';
@@ -71,6 +72,10 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   String? _accountUserId;
   PostureEvaluator? _evaluator;
   bool _contextReady = false;
+  bool _routeRetired = false;
+  StreamSubscription<SurfaceState>? _statusSubscription;
+  StreamSubscription<PoseFrame>? _frameSubscription;
+  Future<void>? _closeFuture;
 
   /// İşaretin YÜKÜ tutulur, METNİ değil — her karede GÜNCEL ölçümle yeniden
   /// çözülür (O-034 dersi: sayı başlıkla senkron kalmalı, aksi hâlde ekranda
@@ -139,14 +144,19 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
     _evaluator =
         _contract == null ? null : PostureEvaluator(contract: _contract);
 
-    _source.status.listen((SurfaceState s) {
-      if (!mounted) return;
+    _statusSubscription = _source.status.listen((SurfaceState s) {
+      if (!mounted || _routeRetired) return;
+      final PoseSource source = _source;
+      if (source is CameraPoseSource && !source.canObserveStatus) return;
       setState(() {
         _state = s;
         _cue = null;
       });
     });
-    _source.frames.listen((PoseFrame f) {
+    _frameSubscription = _source.frames.listen((PoseFrame f) {
+      if (!mounted || _routeRetired) return;
+      final PoseSource source = _source;
+      if (source is CameraPoseSource && !source.canObserveFrames) return;
       final PostureEvaluator? ev = _evaluator;
       if (ev == null) return;
       final SurfaceState s = ev.evaluate(f);
@@ -173,7 +183,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
         }
       });
     });
-    _source.start();
+    observeCameraWork(_source.start());
   }
 
   bool get _cueVisible {
@@ -190,7 +200,8 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   /// bağlı değil; okuma+yazma arka planda sürer, sonucu `previousSession`
   /// Future'ı taşır — Review kendi `FutureBuilder`ıyla çözer.
   void _stop() {
-    _source.stop();
+    if (_routeRetired) return;
+    observeCameraWork(_retireSource());
     final SessionSummary summary = SessionSummary(
       elapsedSeconds: _elapsed.elapsed.inSeconds,
       sampleCount: _sampleCount,
@@ -233,10 +244,29 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
 
   @override
   void dispose() {
+    observeCameraWork(_retireSource());
     _countdownTimer?.cancel();
     _cueClearTimer?.cancel();
-    _source.stop();
     super.dispose();
+  }
+
+  Future<void> _retireSource() {
+    if (_closeFuture != null) return _closeFuture!;
+    _routeRetired = true;
+    // CameraPoseSource.stop retires its real lease synchronously. Only then
+    // cancel the two retained route listeners, before queued evaluation/UI work.
+    final Future<void> sourceClose = _source.stop();
+    final StreamSubscription<SurfaceState>? status = _statusSubscription;
+    final StreamSubscription<PoseFrame>? frames = _frameSubscription;
+    _statusSubscription = null;
+    _frameSubscription = null;
+    final Future<void> closing = Future.wait<void>(<Future<void>>[
+      sourceClose,
+      if (status != null) status.cancel(),
+      if (frames != null) frames.cancel(),
+    ]).then<void>((_) {});
+    _closeFuture = closing;
+    return closing;
   }
 
   @override

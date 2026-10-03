@@ -115,6 +115,15 @@ internal class PracticeAudioArbiter(
     val leaseId: String,
   )
 
+  /** One same-engine, resource-free Activity handoff. A later registration
+   * replaces it, so an older Dart owner cannot skip across generations. */
+  private data class QuiescentHandoff(
+    val retired: Binding,
+    val current: Binding,
+    val retiredContextGeneration: Long,
+    val retiredStateRevision: Long,
+  )
+
   val gate = Any()
   private val random = SecureRandom()
   private var capture: AudioCaptureCoordinator? = null
@@ -131,7 +140,27 @@ internal class PracticeAudioArbiter(
   // One bounded, read-only receipt permits an exact bridge retry after a lost
   // return value. It never mutates a lease or authorizes a different player.
   private var releasedVideoReceipt: VideoPlayerClaim? = null
+  // Independent of the native player release. Only an exact Dart ACK call may
+  // write this bounded receipt; a duplicate can read it after lease settlement.
+  private var acknowledgedVideoReceipt: VideoPlayerClaim? = null
+  private var quiescentHandoff: QuiescentHandoff? = null
   private var lastInputFingerprint: List<Any?>? = null
+
+  /** A completed video keeps its exact release and Dart ACK receipts for
+   * vendor rebind and lost-reply replay. A matched foreign-engine pair is
+   * provisionally neutral for a later same-engine Activity handoff; the
+   * channel must still install/rebind that engine's vendor bridge before it
+   * confirms the handoff to Dart. Never erase the old engine's bridge proof. */
+  private fun hasNoUnsettledVideoHistoryLocked(): Boolean {
+    val released = releasedVideoReceipt
+    val acknowledged = acknowledgedVideoReceipt
+    if (released == null || acknowledged == null) {
+      return released == null && acknowledged == null
+    }
+    return released == acknowledged &&
+      released.ownerToken == released.owner.ownerToken &&
+      released.engineGeneration == released.owner.engineGeneration
+  }
 
   fun attachCapture(coordinator: AudioCaptureCoordinator) = synchronized(gate) {
     check(capture == null || capture === coordinator)
@@ -143,6 +172,14 @@ internal class PracticeAudioArbiter(
   fun registerEngine(activityOwner: Any, engine: Any): Binding = synchronized(gate) {
     val old = binding
     if (old != null && old.engine === engine && old.activityOwner === activityOwner) return@synchronized old
+    // Observe before retiring A. A lease that only becomes clear during the
+    // retirement is not a claim-free handoff for its old Dart owner.
+    val oldClear = if (old != null && old.engine === engine &&
+      lease == null && hasNoUnsettledVideoHistoryLocked() &&
+      cancelledVideoAttempts.isEmpty()) {
+      snapshotLocked(old).takeIf { it["allClear"] == true }
+    } else null
+    quiescentHandoff = null
     if (old != null) {
       foregroundOwner = null
       capture?.foreground(old.activityOwner, false)
@@ -162,6 +199,12 @@ internal class PracticeAudioArbiter(
     val current = Binding(activityOwner, engine, randomToken(), ++engineGeneration)
     binding = current
     ++stateRevision
+    if (old != null && oldClear != null && lease == null &&
+      hasNoUnsettledVideoHistoryLocked() &&
+      cancelledVideoAttempts.isEmpty() && snapshotLocked(current)["allClear"] == true) {
+      quiescentHandoff = QuiescentHandoff(old, current,
+        oldClear["contextGeneration"] as Long, oldClear["stateRevision"] as Long)
+    }
     current
   }
 
@@ -196,6 +239,37 @@ internal class PracticeAudioArbiter(
   fun readAllAudioState(owner: Binding, token: String, generation: Long): Map<String, Any?> = synchronized(gate) {
     requireOwnerLocked(owner, token, generation)
     snapshotLocked(owner)
+  }
+
+  /** Read-only proof for an explicit retry after a claim-free same-engine
+   * Activity swap. It cannot stand in for a video dispose ACK or a lease close. */
+  fun quiescentOwnerHandoff(
+    current: Binding, retiredToken: String, retiredGeneration: Long,
+  ): Map<String, Any?> = synchronized(gate) {
+    requireCurrentLocked(current)
+    val handoff = quiescentHandoff ?: throw AudioFault("quiescent_handoff_unavailable")
+    if (handoff.current !== current || handoff.retired.engine !== current.engine ||
+      handoff.retired.ownerToken != retiredToken ||
+      handoff.retired.engineGeneration != retiredGeneration ||
+      retiredGeneration >= current.engineGeneration ||
+      foregroundOwner !== current.activityOwner || lease != null ||
+      !hasNoUnsettledVideoHistoryLocked() ||
+      cancelledVideoAttempts.isNotEmpty()) {
+      throw AudioFault("quiescent_handoff_unavailable")
+    }
+    val snapshot = snapshotLocked(current)
+    if (snapshot["allClear"] != true || snapshot["nativeOperationInFlight"] != false ||
+      snapshot["requiresExplicitRetry"] != false) {
+      throw AudioFault("quiescent_handoff_pending")
+    }
+    mapOf(
+      "schemaVersion" to 1,
+      "retiredOwnerToken" to retiredToken,
+      "retiredEngineGeneration" to retiredGeneration,
+      "retiredContextGeneration" to handoff.retiredContextGeneration,
+      "retiredStateRevision" to handoff.retiredStateRevision,
+      "snapshot" to snapshot,
+    )
   }
 
   /** Called under the very same monitor as AudioCaptureCoordinator.start(). */
@@ -237,6 +311,8 @@ internal class PracticeAudioArbiter(
     // and a new output reservation cannot both observe an empty process.
     if (snapshotLocked(owner)["allClear"] != true) throw AudioFault("audio_busy")
     val held = Lease(owner, id, ++leaseGeneration, contextGeneration, side)
+    // An unclaimed reserve does not replace the vendor bridge's last exact
+    // player claim. Preserve its settled release/ACK history through cancel.
     lease = held
     ++stateRevision
     mapOf("status" to "reserved", "leaseId" to id,
@@ -424,6 +500,11 @@ internal class PracticeAudioArbiter(
       held.videoPlayerId != null || playerId < 0) return false
     held.videoPlayerId = playerId
     held.videoClosePort = closePort
+    // The vendor captures this Y claim before its first side effect. Only
+    // now can the preceding X claim's archived receipts be retired; moving
+    // this to reserve() strands a cancelled, never-created Y behind X.
+    releasedVideoReceipt = null
+    acknowledgedVideoReceipt = null
     ++stateRevision
     return true
   }
@@ -452,6 +533,12 @@ internal class PracticeAudioArbiter(
 
   fun wasVideoPlayerReleased(claim: VideoPlayerClaim): Boolean = synchronized(gate) {
     releasedVideoReceipt == claim
+  }
+
+  /** A claimed player keeps its lease until both native release and Dart ACK.
+   * A retired owner's bridge may only move once that exact receipt is settled. */
+  internal fun isVideoBridgeRebindQuiescent(lastClaim: VideoPlayerClaim?): Boolean = synchronized(gate) {
+    lease == null && (lastClaim == null || releasedVideoReceipt == lastClaim)
   }
 
   private fun settleAcknowledgedVideoLocked(held: Lease) {
@@ -535,6 +622,7 @@ internal class PracticeAudioArbiter(
       return@synchronized receiptLocked(owner)
     }
     held.videoDisposeAcknowledged = true
+    videoClaimLocked(held)?.let { acknowledgedVideoReceipt = it }
     ++stateRevision
     settleAcknowledgedVideoLocked(held)
     if (lease === held && !held.closeTimedOut && !held.closeFailed) {
@@ -542,6 +630,129 @@ internal class PracticeAudioArbiter(
     }
     receiptLocked(owner)
   }
+
+  /** The current Activity on the same cached engine may carry the original
+   * Dart dispose fact across the Activity handoff. This does not grant any
+   * operation under the retired owner or derive an ACK from native release. */
+  fun completeRetiredVideoDispose(
+    current: Binding, token: String, generation: Long, context: Long,
+    id: String, heldGeneration: Long, confirmed: Boolean,
+  ): Map<String, Any?> = synchronized(gate) {
+    requireCurrentLocked(current)
+    if (!confirmed) throw AudioFault("bad_args")
+    val held = exactVideoLeaseLocked(current, token, generation, context, id, heldGeneration)
+    if (held != null) {
+      val claim = videoClaimLocked(held) ?: throw AudioFault("stale_audio_lease")
+      if (!held.videoDisposeAcknowledged) {
+        held.videoDisposeAcknowledged = true
+        acknowledgedVideoReceipt = claim
+        ++stateRevision
+        settleAcknowledgedVideoLocked(held)
+        if (lease === held && !held.closeTimedOut && !held.closeFailed) {
+          requestVideoCloseLocked(held)
+        }
+      }
+      // This method is an explicit replay of the original Dart success fact.
+      // A prior deadline can leave both facts held behind the retry latch;
+      // with the exact player released and no close call running, it is safe
+      // to settle that one lease, as recoverAll would on an explicit retry.
+      if (lease === held && held.videoDisposeAcknowledged &&
+          held.videoPlayerReleased && !held.videoCloseCallInFlight) {
+        lease = null
+        ++stateRevision
+      }
+      return@synchronized exactVideoDisposeReceiptLocked(
+        current, token, generation, context, id, heldGeneration)
+    }
+    // The ACK response can disappear after both receipts settled the lease.
+    // Replay is read-only for the one exact archived claim, never a new lease.
+    if (lease != null || !matchesVideoClaim(acknowledgedVideoReceipt,
+        current, token, generation, context, id, heldGeneration)) {
+      throw AudioFault("stale_audio_lease")
+    }
+    exactVideoDisposeReceiptLocked(current, token, generation, context, id, heldGeneration)
+  }
+
+  /** Read-only exact ACK provenance. UNKNOWN cannot authorize a Dart reset. */
+  fun readVideoDisposeReceipt(
+    current: Binding, token: String, generation: Long, context: Long,
+    id: String, heldGeneration: Long,
+  ): Map<String, Any?> = synchronized(gate) {
+    requireCurrentLocked(current)
+    exactVideoDisposeReceiptLocked(current, token, generation, context, id, heldGeneration)
+  }
+
+  private fun exactVideoDisposeReceiptLocked(
+    current: Binding, token: String, generation: Long, context: Long,
+    id: String, heldGeneration: Long,
+  ): Map<String, Any?> {
+    val held = exactVideoLeaseLocked(current, token, generation, context, id, heldGeneration)
+    val heldClaim = held?.let(::videoClaimLocked)
+    val ackClaim = acknowledgedVideoReceipt?.takeIf {
+      matchesVideoClaim(it, current, token, generation, context, id, heldGeneration)
+    }
+    val releasedClaim = releasedVideoReceipt?.takeIf {
+      matchesVideoClaim(it, current, token, generation, context, id, heldGeneration)
+    }
+    val exact = heldClaim ?: ackClaim ?: releasedClaim
+    // A foreign engine may not even inspect an old claim's receipt.
+    if (exact == null && (held?.owner?.engine !== current.engine) &&
+        (acknowledgedVideoReceipt?.owner?.engine !== current.engine) &&
+        (releasedVideoReceipt?.owner?.engine !== current.engine)) {
+      throw AudioFault("stale_audio_owner")
+    }
+    val ackRecorded = ackClaim != null || held?.videoDisposeAcknowledged == true
+    val releaseRecorded = releasedClaim != null || held?.videoPlayerReleased == true
+    return mapOf(
+      "schemaVersion" to 1,
+      "ownerToken" to token,
+      "engineGeneration" to generation,
+      "contextGeneration" to context,
+      "leaseId" to id,
+      "leaseGeneration" to heldGeneration,
+      "playerId" to exact?.playerId,
+      "ackStatus" to when {
+        ackRecorded -> "RECORDED"
+        heldClaim != null -> "NOT_RECORDED"
+        else -> "UNKNOWN"
+      },
+      "nativeReleaseRecorded" to releaseRecorded,
+      "leaseSettled" to (ackRecorded && releaseRecorded && lease == null),
+      "snapshot" to snapshotLocked(current),
+    )
+  }
+
+  private fun exactVideoLeaseLocked(
+    current: Binding, token: String, generation: Long, context: Long,
+    id: String, heldGeneration: Long,
+  ): Lease? {
+    val held = lease ?: return null
+    if (held.side != "video" || held.owner.engine !== current.engine ||
+      held.owner.ownerToken != token || held.owner.engineGeneration != generation ||
+      held.contextGeneration != context || held.id != id ||
+      held.generation != heldGeneration) return null
+    return held
+  }
+
+  private fun videoClaimLocked(held: Lease): VideoPlayerClaim? {
+    val claim = held.videoClosePort?.claim ?: return null
+    return claim.takeIf {
+      held.videoPlayerId == it.playerId && it.owner === held.owner &&
+        it.ownerToken == held.owner.ownerToken &&
+        it.engineGeneration == held.owner.engineGeneration &&
+        it.contextGeneration == held.contextGeneration &&
+        it.leaseId == held.id && it.leaseGeneration == held.generation
+    }
+  }
+
+  private fun matchesVideoClaim(
+    claim: VideoPlayerClaim?, current: Binding, token: String,
+    generation: Long, context: Long, id: String, heldGeneration: Long,
+  ): Boolean = claim != null && claim.owner.engine === current.engine &&
+    claim.owner.ownerToken == token && claim.owner.engineGeneration == generation &&
+    claim.ownerToken == token && claim.engineGeneration == generation &&
+    claim.contextGeneration == context && claim.leaseId == id &&
+    claim.leaseGeneration == heldGeneration
 
   fun recoverAll(
     owner: Binding, token: String, generation: Long, expectedRevision: Long,

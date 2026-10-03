@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
 import '../app_locale.dart';
 import 'package:motion_camera/motion_camera.dart';
@@ -24,10 +25,17 @@ import 'live_screen.dart';
 /// çubuğu GÖSTERMEK yerine bu adım kendi ismiyle "henüz yok" der.
 class SetupCheckScreenRoute extends StatefulWidget {
   const SetupCheckScreenRoute(
-      {super.key, required this.discipline, required this.lesson, required this.hue});
+      {super.key, required this.discipline, required this.lesson, required this.hue,
+      this.controller, this.resolveModelPath, this.requestPermission,
+      this.lifecycle, this.liveSource});
   final Discipline discipline;
   final Lesson lesson;
   final InstrumentHue hue;
+  final MotionCameraController? controller;
+  final CameraModelPathResolver? resolveModelPath;
+  final CameraPermissionRequest? requestPermission;
+  final ValueListenable<AppLifecycleState>? lifecycle;
+  final PoseSource? liveSource;
 
   @override
   State<SetupCheckScreenRoute> createState() => _SetupCheckScreenRouteState();
@@ -36,8 +44,11 @@ class SetupCheckScreenRoute extends StatefulWidget {
 enum _Stage { starting, framingError, lowLight, ok, room, passed }
 
 class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
-  final MotionCameraController _camera = MotionCameraController();
+  late final MotionCameraController _camera;
+  late final CameraCaptureOwner _owner;
   StreamSubscription<CameraFrameEnvelope>? _sub;
+  Future<void>? _closeFuture;
+  bool _calibratingClose = false;
   final CameraPostureAdapter _adapter = CameraPostureAdapter();
   core.FrameSize? _size;
 
@@ -50,26 +61,34 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
   @override
   void initState() {
     super.initState();
-    unawaited(_start());
+    _camera = widget.controller ?? processCameraController;
+    _owner = registerCameraOwner(_camera, lifecycle: widget.lifecycle);
+    observeCameraWork(_start());
   }
 
   Future<void> _start() async {
     final CameraStartResult result = await requestAndStartCamera(
-      _camera,
-      modelPath: await PoseModelPin.resolveFilePath(),
+      _owner,
+      resolveModelPath: widget.resolveModelPath ?? PoseModelPin.resolveFilePath,
       modelId: PoseModelPin.modelId,
+      requestPermission: widget.requestPermission,
     );
     if (!mounted) return;
     switch (result) {
-      case CameraStartFailed(:final SurfaceState state):
-        setState(() => _failure = state);
+      case CameraStartFailed():
+        _publishFailure();
       case CameraStarted(:final CameraSessionInfo info):
+        if (!_owner.canObserveFrames) return;
         _size = core.FrameSize(info.width, info.height);
-        _sub = _camera.frames().listen(_onEnvelope);
+        _sub = _owner.lease.frames().listen(_onEnvelope, onError: (Object error) {
+          _owner.failTransport(error);
+          _publishFailure();
+        });
     }
   }
 
   void _onEnvelope(CameraFrameEnvelope e) {
+    if (!mounted || _calibratingClose || !_owner.canObserveFrames) return;
     if (_stage != _Stage.starting &&
         _stage != _Stage.framingError &&
         _stage != _Stage.lowLight &&
@@ -91,8 +110,8 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
     } else {
       _consecutiveOk++;
       if (_consecutiveOk >= _dwellFrames) {
-        _stopCamera();
-        setState(() => _stage = _Stage.room);
+        _calibratingClose = true;
+        observeCameraWork(_completeCalibration());
       } else {
         _advance(_Stage.ok);
       }
@@ -106,16 +125,49 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
     setState(() => _stage = s);
   }
 
-  void _stopCamera() {
-    unawaited(_sub?.cancel());
+  void _publishFailure() {
+    if (!mounted || !_owner.isContextCurrent) return;
+    final SurfaceState? failure = _owner.takeFailure();
+    if (failure != null) setState(() => _failure = failure);
+  }
+
+  Future<void> _completeCalibration() async {
+    try {
+      await _stopCamera();
+      if (!mounted || !_owner.isContextCurrent) return;
+      if (!_owner.isForeground) {
+        setState(() => _failure = const SetupFailed('lifecycle-unavailable'));
+        return;
+      }
+      setState(() => _stage = _Stage.room);
+    } on CameraException catch (error) {
+      if (mounted && _owner.isContextCurrent) {
+        setState(() => _failure = cameraFailureState(error.failure));
+      }
+    } on Object {
+      if (mounted && _owner.isContextCurrent) {
+        setState(() => _failure = const SetupFailed('close-uncertain'));
+      }
+    }
+  }
+
+  Future<void> _stopCamera() {
+    if (_closeFuture != null) return _closeFuture!;
+    _owner.retire();
+    final StreamSubscription<CameraFrameEnvelope>? sub = _sub;
     _sub = null;
-    // O-076: kapanış artık İZLENİYOR — sıradaki `start` onu bekler.
-    releaseCamera(_camera);
+    final Future<void> closing = Future.wait<void>(<Future<void>>[
+      _owner.close(),
+      if (sub != null) sub.cancel(),
+    ]).then<void>((_) {});
+    _closeFuture = closing;
+    observeCameraWork(closing);
+    return closing;
   }
 
   @override
   void dispose() {
-    _stopCamera();
+    observeCameraWork(_stopCamera());
     super.dispose();
   }
 
@@ -213,7 +265,8 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
       _Stage.room => _RoomGapNotice(
           onContinue: () => setState(() => _stage = _Stage.passed)),
       _Stage.passed => _PassedStage(
-          discipline: widget.discipline, lesson: widget.lesson, hue: widget.hue),
+          discipline: widget.discipline, lesson: widget.lesson, hue: widget.hue,
+          source: widget.liveSource),
     };
   }
 
@@ -453,10 +506,12 @@ class _RoomGapNotice extends StatelessWidget {
 
 class _PassedStage extends StatelessWidget {
   const _PassedStage(
-      {required this.discipline, required this.lesson, required this.hue});
+      {required this.discipline, required this.lesson, required this.hue,
+      this.source});
   final Discipline discipline;
   final Lesson lesson;
   final InstrumentHue hue;
+  final PoseSource? source;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -497,7 +552,8 @@ class _PassedStage extends StatelessWidget {
             onPressed: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute<void>(
                     builder: (_) =>
-                        LiveScreenRoute(discipline: discipline, lesson: lesson, hue: hue))),
+                        LiveScreenRoute(discipline: discipline, lesson: lesson, hue: hue,
+                            source: source))),
           ),
         ],
       );

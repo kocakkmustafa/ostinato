@@ -598,6 +598,400 @@ class PracticeAudioArbiterTest {
     assertEquals("reserved", h.reserve(current, b, "input")["status"])
   }
 
+  @Test fun claimFreeSameEngineActivityHandoffHasTypedCurrentOwnerProof() {
+    val h = Harness(); val engine = Any()
+    val old = h.bind(engine = engine)
+    val oldSnapshot = h.state(old)
+    val current = h.bind(engine = engine)
+    val proof = h.arbiter.quiescentOwnerHandoff(
+      current, old.ownerToken, old.engineGeneration)
+    val snapshot = proof["snapshot"] as Map<*, *>
+    assertEquals(1, proof["schemaVersion"])
+    assertEquals(old.ownerToken, proof["retiredOwnerToken"])
+    assertEquals(old.engineGeneration, proof["retiredEngineGeneration"])
+    assertEquals(oldSnapshot["contextGeneration"], proof["retiredContextGeneration"])
+    assertEquals(oldSnapshot["stateRevision"], proof["retiredStateRevision"])
+    assertEquals(current.ownerToken, snapshot["ownerToken"])
+    assertEquals(current.engineGeneration, snapshot["engineGeneration"])
+    assertEquals(true, snapshot["allClear"])
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(current, b, old.engineGeneration)
+    }
+    val third = h.bind(engine = engine)
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(third, old.ownerToken, old.engineGeneration)
+    }
+    assertEquals(true, h.arbiter.quiescentOwnerHandoff(
+      third, current.ownerToken, current.engineGeneration)
+      .let { (it["snapshot"] as Map<*, *>)["allClear"] })
+  }
+
+  @Test fun foreignEngineAndHeldVideoNeverGetClaimFreeHandoff() {
+    val h = Harness(withVideo = true); val engine = Any()
+    val old = h.bind(engine = engine)
+    val foreign = h.bind(engine = Any())
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(foreign, old.ownerToken, old.engineGeneration)
+    }
+
+    val held = h.reserve(foreign, a, "video")
+    val current = h.bind(engine = foreign.engine)
+    // Registration cancels an unclaimed reserve; it must not retroactively
+    // turn the previously held A state into a quiescent handoff receipt.
+    assertEquals(true, h.state(current)["allClear"])
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(current, foreign.ownerToken,
+        foreign.engineGeneration)
+    }
+    assertNotNull(held["leaseGeneration"])
+  }
+
+  @Test fun pendingOutputOrVideoClaimBlocksQuiescentHandoff() {
+    val after = Harness(); val afterEngine = Any()
+    val afterOld = after.bind(engine = afterEngine)
+    val afterCurrent = after.bind(engine = afterEngine)
+    after.reserve(afterCurrent, a, "output")
+    expectCode("quiescent_handoff_unavailable") {
+      after.arbiter.quiescentOwnerHandoff(afterCurrent, afterOld.ownerToken,
+        afterOld.engineGeneration)
+    }
+
+    val output = Harness(); val engine = Any()
+    val old = output.bind(engine = engine)
+    output.reserve(old, a, "output")
+    val current = output.bind(engine = engine)
+    expectCode("quiescent_handoff_unavailable") {
+      output.arbiter.quiescentOwnerHandoff(current, old.ownerToken,
+        old.engineGeneration)
+    }
+
+    val video = Harness(withVideo = true); val videoEngine = Any()
+    val videoOld = video.bind(engine = videoEngine)
+    val context = video.state(videoOld)["contextGeneration"] as Long
+    val permit = video.reserve(videoOld, b, "video")
+    assertTrue(video.claimVideo(videoOld, b, permit, context))
+    val videoCurrent = video.bind(engine = videoEngine)
+    expectCode("quiescent_handoff_unavailable") {
+      video.arbiter.quiescentOwnerHandoff(videoCurrent, videoOld.ownerToken,
+        videoOld.engineGeneration)
+    }
+
+    val input = Harness(); val inputEngine = Any()
+    val inputOld = input.bind(engine = inputEngine)
+    input.startCapture(inputOld, c)
+    assertFalse(input.state(inputOld)["allClear"] as Boolean)
+    val inputCurrent = input.bind(engine = inputEngine)
+    expectCode("quiescent_handoff_unavailable") {
+      input.arbiter.quiescentOwnerHandoff(inputCurrent, inputOld.ownerToken,
+        inputOld.engineGeneration)
+    }
+  }
+
+  @Test fun settledVideoHistoryAllowsSameEngineClaimFreeHandoffAndExactReplay() {
+    val h = Harness(withVideo = true); val engine = Any()
+    val old = h.bind(engine = engine)
+    val context = h.state(old)["contextGeneration"] as Long
+    val permit = h.reserve(old, a, "video")
+    assertTrue(h.claimVideo(old, a, permit, context))
+    val claim = PracticeAudioArbiter.VideoPlayerClaim(old, old.ownerToken,
+      old.engineGeneration, context, a, permit["leaseGeneration"] as Long, 7L)
+    assertTrue(h.releaseVideo(old, a, permit, context, 7L))
+    assertEquals("closed", h.finishVideo(old, a, permit, context)["status"])
+    assertEquals(true, h.state(old)["allClear"])
+    assertTrue(h.arbiter.isVideoBridgeRebindQuiescent(claim))
+
+    val current = h.bind(engine = engine)
+    val handoff = h.arbiter.quiescentOwnerHandoff(
+      current, old.ownerToken, old.engineGeneration)
+    assertEquals(true, (handoff["snapshot"] as Map<*, *>)["allClear"])
+    assertTrue(h.arbiter.isVideoBridgeRebindQuiescent(claim))
+
+    // A lost MethodChannel reply is not a second ACK. Both exact reads remain
+    // available and replay is read-only after the lease has settled.
+    val before = h.state(current)["stateRevision"]
+    val read = h.arbiter.readVideoDisposeReceipt(current, old.ownerToken,
+      old.engineGeneration, context, a, permit["leaseGeneration"] as Long)
+    assertEquals("RECORDED", read["ackStatus"])
+    assertEquals(true, read["nativeReleaseRecorded"])
+    assertEquals(true, read["leaseSettled"])
+    val replay = h.arbiter.completeRetiredVideoDispose(current, old.ownerToken,
+      old.engineGeneration, context, a, permit["leaseGeneration"] as Long, true)
+    assertEquals("RECORDED", replay["ackStatus"])
+    assertEquals(true, replay["leaseSettled"])
+    assertEquals(before, h.state(current)["stateRevision"])
+    expectCode("stale_audio_lease") {
+      h.arbiter.completeRetiredVideoDispose(current, old.ownerToken,
+        old.engineGeneration, context, b, permit["leaseGeneration"] as Long, true)
+    }
+    val newer = h.reserve(current, b, "output")
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(current, old.ownerToken,
+        old.engineGeneration)
+    }
+    expectCode("stale_audio_lease") {
+      h.arbiter.completeRetiredVideoDispose(current, old.ownerToken,
+        old.engineGeneration, context, a, permit["leaseGeneration"] as Long, true)
+    }
+    assertEquals("closed", h.close(current, b, newer)["status"])
+  }
+
+  @Test fun unfinishedVideoHistoryNeverBecomesAQuiescentHandoff() {
+    val released = Harness(withVideo = true); val engine = Any()
+    val old = released.bind(engine = engine)
+    val context = released.state(old)["contextGeneration"] as Long
+    val permit = released.reserve(old, a, "video")
+    assertTrue(released.claimVideo(old, a, permit, context))
+    assertTrue(released.releaseVideo(old, a, permit, context, 7L))
+    val current = released.bind(engine = engine)
+    expectCode("quiescent_handoff_unavailable") {
+      released.arbiter.quiescentOwnerHandoff(current, old.ownerToken,
+        old.engineGeneration)
+    }
+    // Exact retired ACK can settle the held lease, but cannot retroactively
+    // certify that the earlier A registration was claim-free.
+    val exact = released.arbiter.completeRetiredVideoDispose(current,
+      old.ownerToken, old.engineGeneration, context, a,
+      permit["leaseGeneration"] as Long, true)
+    assertEquals(true, exact["leaseSettled"])
+    expectCode("quiescent_handoff_unavailable") {
+      released.arbiter.quiescentOwnerHandoff(current, old.ownerToken,
+        old.engineGeneration)
+    }
+
+    val ackOnly = Harness(withVideo = true); val ackEngine = Any()
+    val ackOld = ackOnly.bind(engine = ackEngine)
+    val ackContext = ackOnly.state(ackOld)["contextGeneration"] as Long
+    val ackPermit = ackOnly.reserve(ackOld, b, "video")
+    assertTrue(ackOnly.claimVideo(ackOld, b, ackPermit, ackContext))
+    assertEquals("pending", ackOnly.finishVideo(ackOld, b, ackPermit,
+      ackContext)["status"])
+    val ackCurrent = ackOnly.bind(engine = ackEngine)
+    expectCode("quiescent_handoff_unavailable") {
+      ackOnly.arbiter.quiescentOwnerHandoff(ackCurrent, ackOld.ownerToken,
+        ackOld.engineGeneration)
+    }
+  }
+
+  @Test fun foreignHistoryCannotAuthorizeDirectEngineSwapButIsNeutralForLaterSameEngineActivity() {
+    val h = Harness(withVideo = true); val firstEngine = Any()
+    val original = h.bind(engine = firstEngine)
+    val context = h.state(original)["contextGeneration"] as Long
+    val permit = h.reserve(original, a, "video")
+    assertTrue(h.claimVideo(original, a, permit, context))
+    assertTrue(h.releaseVideo(original, a, permit, context, 7L))
+    assertEquals("closed", h.finishVideo(original, a, permit, context)["status"])
+
+    val foreignEngine = Any()
+    val foreign = h.bind(engine = foreignEngine)
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(foreign, original.ownerToken,
+        original.engineGeneration)
+    }
+    val next = h.bind(engine = foreignEngine)
+    assertEquals(true, h.state(next)["allClear"])
+    assertEquals(true, h.arbiter.quiescentOwnerHandoff(next,
+      foreign.ownerToken, foreign.engineGeneration)
+      .let { (it["snapshot"] as Map<*, *>)["allClear"] })
+    expectCode("stale_audio_owner") {
+      h.arbiter.readVideoDisposeReceipt(next, original.ownerToken,
+        original.engineGeneration, context, a,
+        permit["leaseGeneration"] as Long)
+    }
+    expectCode("stale_audio_lease") {
+      h.arbiter.completeRetiredVideoDispose(next, original.ownerToken,
+        original.engineGeneration, context, a,
+        permit["leaseGeneration"] as Long, true)
+    }
+  }
+
+  @Test fun foreignSettledHistorySurvivesNewEngineUnclaimedReserveAndCancel() {
+    val h = Harness(withVideo = true); val firstEngine = Any()
+    val original = h.bind(engine = firstEngine)
+    val context = h.state(original)["contextGeneration"] as Long
+    val first = h.reserve(original, a, "video")
+    assertTrue(h.claimVideo(original, a, first, context))
+    val firstClaim = PracticeAudioArbiter.VideoPlayerClaim(original,
+      original.ownerToken, original.engineGeneration, context, a,
+      first["leaseGeneration"] as Long, 7L)
+    assertTrue(h.releaseVideo(original, a, first, context, 7L))
+    assertEquals("closed", h.finishVideo(original, a, first, context)["status"])
+
+    val secondEngine = Any()
+    val second = h.bind(engine = secondEngine)
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(second, original.ownerToken,
+        original.engineGeneration)
+    }
+    val unclaimed = h.reserve(second, b, "video")
+    assertTrue(h.arbiter.wasVideoPlayerReleased(firstClaim))
+    assertFalse(h.arbiter.isVideoBridgeRebindQuiescent(firstClaim))
+    expectCode("stale_audio_owner") {
+      h.arbiter.readVideoDisposeReceipt(second, original.ownerToken,
+        original.engineGeneration, context, a,
+        first["leaseGeneration"] as Long)
+    }
+    expectCode("stale_audio_lease") {
+      h.arbiter.completeRetiredVideoDispose(second, original.ownerToken,
+        original.engineGeneration, context, a,
+        first["leaseGeneration"] as Long, true)
+    }
+    val secondContext = h.state(second)["contextGeneration"] as Long
+    assertEquals("closed", h.cancelVideo(second, b, unclaimed,
+      secondContext)["status"])
+    assertTrue(h.arbiter.wasVideoPlayerReleased(firstClaim))
+    assertTrue(h.arbiter.isVideoBridgeRebindQuiescent(firstClaim))
+
+    val third = h.bind(engine = secondEngine)
+    assertEquals(true, h.arbiter.quiescentOwnerHandoff(third,
+      second.ownerToken, second.engineGeneration)
+      .let { (it["snapshot"] as Map<*, *>)["allClear"] })
+    expectCode("stale_audio_owner") {
+      h.arbiter.readVideoDisposeReceipt(third, original.ownerToken,
+        original.engineGeneration, context, a,
+        first["leaseGeneration"] as Long)
+    }
+    expectCode("stale_audio_lease") {
+      h.arbiter.completeRetiredVideoDispose(third, original.ownerToken,
+        original.engineGeneration, context, a,
+        first["leaseGeneration"] as Long, true)
+    }
+  }
+
+  @Test fun foreignHistoryDoesNotBypassHeldReserveOrCancelledAttemptTombstone() {
+    val h = Harness(withVideo = true); val firstEngine = Any()
+    val original = h.bind(engine = firstEngine)
+    val context = h.state(original)["contextGeneration"] as Long
+    val first = h.reserve(original, a, "video")
+    assertTrue(h.claimVideo(original, a, first, context))
+    assertTrue(h.releaseVideo(original, a, first, context, 7L))
+    assertEquals("closed", h.finishVideo(original, a, first, context)["status"])
+    val secondEngine = Any()
+    val second = h.bind(engine = secondEngine)
+    h.reserve(second, b, "video")
+    val whileHeld = h.bind(engine = secondEngine)
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(whileHeld, second.ownerToken,
+        second.engineGeneration)
+    }
+    assertEquals(true, h.state(whileHeld)["allClear"])
+
+    val tombstone = Harness(withVideo = true)
+    val x = tombstone.bind(engine = Any())
+    val xContext = tombstone.state(x)["contextGeneration"] as Long
+    val xPermit = tombstone.reserve(x, a, "video")
+    assertTrue(tombstone.claimVideo(x, a, xPermit, xContext))
+    assertTrue(tombstone.releaseVideo(x, a, xPermit, xContext, 7L))
+    assertEquals("closed", tombstone.finishVideo(x, a, xPermit, xContext)["status"])
+    val yEngine = Any()
+    val yOwner = tombstone.bind(engine = yEngine)
+    val yContext = tombstone.state(yOwner)["contextGeneration"] as Long
+    val yPermit = tombstone.reserve(yOwner, b, "video")
+    val revision = tombstone.state(yOwner)["stateRevision"] as Long
+    assertEquals("closed", tombstone.cancelUnknownVideo(yOwner, yOwner,
+      yContext, b, yPermit["leaseGeneration"] as Long, revision)["status"])
+    expectCode("stale_audio_lease") { tombstone.reserve(yOwner, b, "video") }
+    val yNext = tombstone.bind(engine = yEngine)
+    expectCode("quiescent_handoff_unavailable") {
+      tombstone.arbiter.quiescentOwnerHandoff(yNext, yOwner.ownerToken,
+        yOwner.engineGeneration)
+    }
+  }
+
+  @Test fun cancelledUnclaimedVideoKeepsPriorExactHistoryForABHandoff() {
+    val h = Harness(withVideo = true); val engine = Any()
+    val old = h.bind(engine = engine)
+    val context = h.state(old)["contextGeneration"] as Long
+    val first = h.reserve(old, a, "video")
+    assertTrue(h.claimVideo(old, a, first, context))
+    val firstClaim = PracticeAudioArbiter.VideoPlayerClaim(old,
+      old.ownerToken, old.engineGeneration, context, a,
+      first["leaseGeneration"] as Long, 7L)
+    assertTrue(h.releaseVideo(old, a, first, context, 7L))
+    assertEquals("closed", h.finishVideo(old, a, first, context)["status"])
+
+    val unclaimed = h.reserve(old, b, "video")
+    assertFalse(h.arbiter.isVideoBridgeRebindQuiescent(firstClaim))
+    assertFalse(h.claimVideo(old, b, unclaimed, context + 1, 8L))
+    assertTrue(h.arbiter.wasVideoPlayerReleased(firstClaim))
+    assertEquals("closed", h.cancelVideo(old, b, unclaimed, context)["status"])
+    assertEquals(true, h.state(old)["allClear"])
+    assertTrue(h.arbiter.wasVideoPlayerReleased(firstClaim))
+    val oldAck = h.arbiter.readVideoDisposeReceipt(old, old.ownerToken,
+      old.engineGeneration, context, a, first["leaseGeneration"] as Long)
+    assertEquals("RECORDED", oldAck["ackStatus"])
+    assertEquals(true, oldAck["leaseSettled"])
+
+    val current = h.bind(engine = engine)
+    assertTrue(h.arbiter.isVideoBridgeRebindQuiescent(firstClaim))
+    assertEquals(true, h.arbiter.quiescentOwnerHandoff(current,
+      old.ownerToken, old.engineGeneration)
+      .let { (it["snapshot"] as Map<*, *>)["allClear"] })
+    val beforeReplay = h.state(current)["stateRevision"]
+    val firstReplay = h.arbiter.completeRetiredVideoDispose(current,
+      old.ownerToken, old.engineGeneration, context, a,
+      first["leaseGeneration"] as Long, true)
+    assertEquals("RECORDED", firstReplay["ackStatus"])
+    assertEquals(true, firstReplay["leaseSettled"])
+    assertEquals(beforeReplay, h.state(current)["stateRevision"])
+    expectCode("stale_audio_lease") {
+      h.arbiter.completeRetiredVideoDispose(current, old.ownerToken,
+        old.engineGeneration, context, b,
+        unclaimed["leaseGeneration"] as Long, true)
+    }
+  }
+
+  @Test fun claimedSuccessorRetiresOnlyOldHistoryBeforeFirstEffect() {
+    val h = Harness(withVideo = true); val engine = Any()
+    val owner = h.bind(engine = engine)
+    val context = h.state(owner)["contextGeneration"] as Long
+    val first = h.reserve(owner, a, "video")
+    assertTrue(h.claimVideo(owner, a, first, context))
+    val firstClaim = PracticeAudioArbiter.VideoPlayerClaim(owner,
+      owner.ownerToken, owner.engineGeneration, context, a,
+      first["leaseGeneration"] as Long, 7L)
+    assertTrue(h.releaseVideo(owner, a, first, context, 7L))
+    assertEquals("closed", h.finishVideo(owner, a, first, context)["status"])
+    val second = h.reserve(owner, b, "video")
+    assertTrue(h.arbiter.wasVideoPlayerReleased(firstClaim))
+    assertTrue(h.claimVideo(owner, b, second, context, 8L))
+    assertFalse(h.arbiter.wasVideoPlayerReleased(firstClaim))
+    assertFalse(h.arbiter.isVideoBridgeRebindQuiescent(firstClaim))
+    expectCode("stale_audio_lease") {
+      h.arbiter.completeRetiredVideoDispose(owner, owner.ownerToken,
+        owner.engineGeneration, context, a,
+        first["leaseGeneration"] as Long, true)
+    }
+    val current = h.bind(engine = engine)
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(current, owner.ownerToken,
+        owner.engineGeneration)
+    }
+  }
+
+  @Test fun lostReserveTombstoneStillBlocksHandoffAfterPriorVideoSuccess() {
+    val h = Harness(withVideo = true); val engine = Any()
+    val old = h.bind(engine = engine)
+    val context = h.state(old)["contextGeneration"] as Long
+    val first = h.reserve(old, a, "video")
+    assertTrue(h.claimVideo(old, a, first, context))
+    val firstClaim = PracticeAudioArbiter.VideoPlayerClaim(old,
+      old.ownerToken, old.engineGeneration, context, a,
+      first["leaseGeneration"] as Long, 7L)
+    assertTrue(h.releaseVideo(old, a, first, context, 7L))
+    assertEquals("closed", h.finishVideo(old, a, first, context)["status"])
+    val lost = h.reserve(old, b, "video")
+    val revision = h.state(old)["stateRevision"] as Long
+    assertEquals("closed", h.cancelUnknownVideo(old, old, context, b,
+      lost["leaseGeneration"] as Long, revision)["status"])
+    assertTrue(h.arbiter.wasVideoPlayerReleased(firstClaim))
+    expectCode("stale_audio_lease") { h.reserve(old, b, "video") }
+    val current = h.bind(engine = engine)
+    expectCode("quiescent_handoff_unavailable") {
+      h.arbiter.quiescentOwnerHandoff(current, old.ownerToken,
+        old.engineGeneration)
+    }
+  }
+
   @Test fun retiredEngineVideoNeedsExactNativeReleaseThenCurrentOwnerRecovery() {
     val h = Harness(withVideo = true); val old = h.bind()
     val context = h.state(old)["contextGeneration"] as Long

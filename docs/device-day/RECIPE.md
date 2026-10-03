@@ -1,5 +1,14 @@
 # Cihaz günü reçetesi (F5, 2026-08-16, O-160)
 
+> 2026-10-02: Bu belge eski 28-ders/mikrofonsuz sürümün tarihsel reçetesidir.
+> Güncel ilk kurs 60 TR/EN gitar dersi ve isteğe bağlı cihaz üstü tek-nota
+> gözlemidir. Aşağıdaki profil, cihaz, izin ve ekran ölçümleri güncel kabul
+> sayılmaz; provisioning güncellemesi veya kurulum yetkisi vermez. Yayın haftası
+> güncel source/native/provider/signed/store kapıları `workspace/PROGRESS.md`
+> ve `scratch/2026-10-01-release-week-dispatch/lanes/ostinato/STATUS.md` içinde
+> ayrı kaydedilir. Gerçek medya ve kurucunun tüm-ders kamera/mikrofon kabulü
+> son toplu aşamadadır.
+
 **Amaç:** kurucu telefonunu bağladığında beş dakikada yürünecek, üç adımlı
 bir akış. **Kurulum** (adım 2) otomatik/betiklenebilir (D9) — **yürüyüş**
 (adım 3) kurucunun elini ister (`H-9`: fiziksel cihazda dokunuş MCP ile

@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  supabase_flutter: 2.17.2
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -37,7 +38,7 @@ dependencies:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_account
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: 0fed3a05466946bf2710750f4feca8dbd75be123
   ostinato_posture:
     path: packages/ostinato_posture
   # OST-P0-002 (2026-08-19): şimdiye kadar `ostinato_audio` yalnız KENDİ
@@ -54,18 +55,18 @@ dependencies:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_core
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: 0fed3a05466946bf2710750f4feca8dbd75be123
   # Flutter bundle bytes are checked by the same pinned Core content contract.
   # Production manifests and media playback remain separate acceptance gates.
   motion_content:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_content
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: 0fed3a05466946bf2710750f4feca8dbd75be123
   motion_camera:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: 0fed3a05466946bf2710750f4feca8dbd75be123
       path: packages/motion_camera
 
   permission_handler: ^12.0.3
@@ -82,6 +83,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
+  http: 1.6.0
   integration_test:
     sdk: flutter
   flutter_test:
@@ -93,6 +95,18 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+
+# Exact native permit creation/release contract; keep all four layers together.
+# Shipping lesson media stays empty and practice acquisition remains closed.
+dependency_overrides:
+  video_player:
+    path: third_party/video_player_permit/video_player-2.11.1
+  video_player_android:
+    path: third_party/video_player_permit/video_player_android-2.12.2
+  video_player_avfoundation:
+    path: third_party/video_player_permit/video_player_avfoundation-2.12.0
+  video_player_platform_interface:
+    path: third_party/video_player_permit/video_player_platform_interface-6.9.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

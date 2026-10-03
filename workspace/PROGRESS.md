@@ -1,5 +1,53 @@
 # Ostinato — İlerleme Kaydı
 
+## 2026-10-02 — yayın haftası: hesap/gizlilik, recovery hazırlığı ve gerçek exact1 native
+
+HEAD `1de443d7a8216574232bde2620c19d359be65df0` üstünde yerel WIP;
+commit/push/submit/deploy yok. Merkez READY ve Ostinato source lease'i geçerli.
+
+Hesap dosyası admission/dizin kuyruğu ve doğrulanmış silme çiti gerçek FS
+kırmızı/yeşil regresyonla düzeltildi: eski6test1PASS/5FAIL; final8 yaşam
+döngüsü dahil32/32PASS. Guest/diğer hesap korunur; tek Flutter isolate sınırı.
+Privacy scan öncesi schema/duplicate denetimi ve canlı manifest özeti
+root+peer19/19PASS;83source/6types/0requiredAPIs/trackingfalse. EN/TR opt-in
+mikrofon metni, Apple/Play taslak ayrımı, current60 internal pins ve eski
+screenshot etiketi güncel; external listing alanları değişmedi.
+
+V2a15prod+19test+328vendor, V15a invalid-file ve V1b combined2 kaynak
+birleşimi hazır. SDK010 dört local video fork'u seçti, Core5 resolved-ref
+hâlâ `f2ea161c7e974d57b114ba7773836c72be17a381`; videoDart41/41.
+iOS rebind5prod+2test peerPASS;7path digest
+`e7688f8486f3f653ddca8e4be97a8d580fc11dc686164cb01b913495b2b1d588`.
+
+Tarihsel V2a xcresult gerçek0testtir ve guard reddetti. Yeni native002/device002
+ile doğru `RunnerTests/PracticeAudioArbiterTests/testExactRetiredUserRetryDispatchesCloseThenSettlesOnlyAfterReadback`
+**gerçek1/1 Passed**, intended leaf/count guard ve bağımsız readback PASS.
+944path seal drift0. İlk all-network-deny deneme AF_UNIX XCTest IPC nedeniyle
+exit65/0test kaldı; retry yalnız local Unix soketine izin verdi, IP ağ deny
+probe EPERM1. SDK012 cache-only Pods deployment exit0, lock değişmedi.
+Native002/device002/SDK012 açıkça RELEASE; aynı simülatör readback Shutdown.
+Bu tek arbiter testi fake hardware/close-port kullanır; yeni6app+5vendor,
+app47/vendor46/Android79+combined2 ve fiziksel AV/camera/mic kabulü değildir.
+
+Recovery app seam: Core-owned bool/user/phase olayları eski Navigator neslini
+kaldırır; same-frame enter/exit/A-null-A/phase bounce kaçmaz, eş listenable
+rebuild açık dersi korur. Audio root recovery'de senkron fence ve late-open
+staleGrant uygular. Eski main'de4/4 davranışFAIL; yeni6navigation+3audio dahil
+focused26/26PASS; current fullapp **442/442PASS**, analyze **No issues found**.
+Bağımsız kaynak reviewer yeniP0/P1 bulmadı. **Üretim recovery P1 açık:** Core0.2.0
+reviewed/published immutableSHA ve `runtime.passwordRecovery` binder yok;
+WIP/path override tüketilmedi. Yeni camera owned lease/native adoption da
+aynı Core paketinin sonraki consumer işidir.
+
+Kanıt lane'i: `/Users/mustafakaankocak/Developer/YULAlab-AI/scratch/2026-10-01-release-week-dispatch/lanes/ostinato/`.
+`STATUS.md`, `ACCOUNT-PRIVACY-RECEIPT.json`, `ACCOUNT-RECOVERY-RECEIPT.json`,
+`NATIVE-EXACT-ONE-RECEIPT.json` ve hash'li log/xcresult çıktıları.
+Core/provider/strict-delete UUID echo, güncel signed candidate/current-SHA CI,
+store/screenshots ve gerçek medya/model/fiziksel kabul ayrı kapılardır.
+Production media empty/video false/acquisition false/paid false;19 frozen/no-retry
+araştırma tekrar koşulmadı. Gerçek Flow ve kurucu tüm-ders kamera/mikrofon
+kabulü en son toplu aşamada tutulur; Vault/shared kayıtları merkez yazar.
+
 ## 2026-10-01 — ilk kurs kaynak pini ve izole Android V4c
 
 Canlı uygulamada 60 derslik kurs, kaynak dilimi ve 420 sahnelik projeksiyon

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:test/test.dart';
 
@@ -22,8 +23,8 @@ import 'package:test/test.dart';
 /// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
 /// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
 /// anlaşma, ancak iki taraf varken sınanabilir.)
-const String _mandatedRef = 'f2ea161c7e974d57b114ba7773836c72be17a381';
-const String _mandatedVersion = '0.11.0';
+const String _mandatedRef = '0fed3a05466946bf2710750f4feca8dbd75be123';
+const String _mandatedVersion = '0.12.0';
 
 void main() {
   test('pin MÜHÜRLENEN refte — "ikisi aynı" yetmez, DOĞRU şeyde aynı olmalı', () {
@@ -42,12 +43,18 @@ void main() {
               'taşımıyor — M-F-263 tek-pin şartı');
     }
     final String lock = File('pubspec.lock').readAsStringSync();
-    expect(_resolvedVersion(lock), _mandatedVersion,
+    expect(_resolvedVersion(lock), _localCoreOverride() ? '0.12.0' : _mandatedVersion,
         reason: 'kilit $_mandatedVersion çözmüyor — tagin işaret ettiği sürüm '
             'ile refin çözdüğü sürüm ayrışmış olabilir');
   });
 
   test('ostinato_audio ve dart_pilot AYNI motion_core sürümünü çözüyor', () {
+    if (_localCoreOverride()) {
+      _expectExactLocalCore('pubspec.lock', '.dart_tool/package_config.json');
+      _expectExactLocalCore('../../tools/dart_pilot/pubspec.lock',
+          '../../tools/dart_pilot/.dart_tool/package_config.json');
+      return;
+    }
     final String? audioRef =
         _resolvedRef(File('pubspec.lock').readAsStringSync());
     final String? pilotRef = _resolvedRef(
@@ -89,4 +96,50 @@ String? _fieldOf(String lockYaml, String field) {
     if (m != null) return m.group(1);
   }
   return null;
+}
+
+/// A local run is explicit and bounded to this lane's sibling Core candidate.
+/// Canonical Git descriptors above remain unchanged and checked in either mode.
+bool _localCoreOverride() {
+  const roots = ['.', '../../tools/dart_pilot'];
+  final declared = roots.map((root) {
+    final override = File('$root/pubspec_overrides.yaml');
+    return override.existsSync() &&
+        RegExp(r'^  motion_core:', multiLine: true)
+            .hasMatch(override.readAsStringSync());
+  }).toList();
+  if (!declared.any((value) => value)) return false;
+  expect(declared, everyElement(isTrue),
+      reason: 'Both independent packages must explicitly override Core');
+  final expected = Directory('../../../motion-core/packages/motion_core')
+      .resolveSymbolicLinksSync();
+  for (final root in roots) {
+    final yaml = File('$root/pubspec_overrides.yaml').readAsStringSync();
+    final block = RegExp(r'^  motion_core:\s*\n    path: ([^\n]+)',
+        multiLine: true).firstMatch(yaml);
+    expect(block, isNotNull, reason: 'Core override must be an explicit path');
+    final path = block!.group(1)!.trim().replaceAll('"', '').replaceAll("'", '');
+    final actual = Directory.fromUri(Directory(root).absolute.uri.resolve(path))
+        .resolveSymbolicLinksSync();
+    expect(actual, expected, reason: 'Only exact sibling Core candidate allowed');
+  }
+  return true;
+}
+
+void _expectExactLocalCore(String lockPath, String configPath) {
+  final lock = File(lockPath).readAsStringSync();
+  expect(_fieldOf(lock, 'source'), 'path');
+  expect(_resolvedVersion(lock), '0.12.0');
+  final config = File(configPath).absolute;
+  final document = jsonDecode(config.readAsStringSync()) as Map<String, dynamic>;
+  final packages = document['packages'] as List<dynamic>;
+  final core = packages.cast<Map<String, dynamic>>()
+      .singleWhere((entry) => entry['name'] == 'motion_core');
+  final actual = Directory.fromUri(config.uri.resolve(core['rootUri'] as String))
+      .resolveSymbolicLinksSync();
+  final expected = Directory('../../../motion-core/packages/motion_core')
+      .resolveSymbolicLinksSync();
+  expect(actual, expected, reason: 'Resolved config must use exact Core source');
+  expect(File('$actual/pubspec.yaml').readAsStringSync(),
+      contains('version: 0.12.0'));
 }

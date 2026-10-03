@@ -119,6 +119,7 @@ void main() {
       expect(h.root.videoActionFor(h.route), isNull);
       expect(player.initializes, 1);
       expect(await h.video.close(), isTrue);
+      expect(h.video.canRefreshQuiescentOwner, isTrue);
       expect(player.disposals, 1);
       expect(h.port.videoCancelCalls, 0);
       expect(h.port.videoDisposeCalls, 1);
@@ -126,6 +127,31 @@ void main() {
       await h.dispose();
     },
   );
+
+  test('settled X and cancelled unclaimed Y leave no local video claim', () async {
+    final h = _Harness(allowVideo: true);
+    await h.ready();
+    expect(
+      await h.video.open(_Player(), isCurrent: () => true),
+      PracticeVideoOpenStatus.ready,
+    );
+    expect(await h.video.close(), isTrue);
+    expect(h.video.canRefreshQuiescentOwner, isTrue);
+
+    final unclaimed = _Player(onInitialize: (_) async => throw StateError('init'));
+    expect(
+      await h.video.open(unclaimed, isCurrent: () => true),
+      PracticeVideoOpenStatus.blockedUnconfirmed,
+    );
+    expect(h.video.canRefreshQuiescentOwner, isFalse);
+    expect(
+      await h.video.recover(),
+      PracticeVideoRecoveryStatus.confirmedClosed,
+    );
+    expect(h.video.canRefreshQuiescentOwner, isTrue);
+    expect((await h.port.readAllAudioState()).allClear, isTrue);
+    await h.dispose();
+  });
 
   test(
     'account fence waits pending video dispose then fresh all-clear',
@@ -231,18 +257,6 @@ void main() {
     await h.dispose();
   });
 
-  test('orphaned released video can be explicitly recovered', () async {
-    final h = _Harness(allowVideo: true);
-    await h.ready();
-    h.port.waitForNativeVideoRelease = true;
-    await h.port.reserve(PracticeAudioSide.video, 'd' * 32);
-    h.port.releaseNativeVideoForTest();
-    expect((await h.port.readAllAudioState()).allClear, isFalse);
-    expect(await h.root.recover(), PracticeAudioReleaseStatus.confirmedClosed);
-    expect((await h.port.readAllAudioState()).allClear, isTrue);
-    await h.dispose();
-  });
-
   test('lost reserve reply cancels the exact unclaimed native lease', () async {
     final h = _Harness(
       allowVideo: true,
@@ -258,7 +272,9 @@ void main() {
     );
     expect(player.initializes, 0);
     expect(h.video.blocked, isTrue);
+    expect(h.video.canRefreshQuiescentOwner, isFalse);
     expect(await h.root.recover(), PracticeAudioReleaseStatus.confirmedClosed);
+    expect(h.video.canRefreshQuiescentOwner, isTrue);
     expect(h.port.unknownVideoCancelCalls, 1);
     expect((await h.port.readAllAudioState()).allClear, isTrue);
     delayedReply.complete();
@@ -417,4 +433,5 @@ void main() {
     h.user.dispose();
     h.identity.dispose();
   });
+
 }

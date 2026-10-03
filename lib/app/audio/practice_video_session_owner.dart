@@ -62,8 +62,10 @@ final class PracticeVideoSessionOwner {
   Future<PracticeVideoOpenStatus>? _opening;
   Future<NativeAllAudioState?>? _closing;
   int _epoch = 0;
+  int _claimSerial = 0;
   bool _initializationUncertain = false;
   bool _initializationStarted = false;
+  _ConfirmedVideoDispose? _disposeProof;
 
   PracticeAudioLeasePort get port => _port;
   PracticeVideoSessionPhase get phase {
@@ -78,6 +80,30 @@ final class PracticeVideoSessionOwner {
 
   bool get blocked => phase == PracticeVideoSessionPhase.blockedUnconfirmed;
   bool get busy => phase != PracticeVideoSessionPhase.idle;
+
+  /// Exact video ACK recovery takes precedence whenever a player, permit or
+  /// even a pre-reserve attempt survives in this isolate.
+  bool get canRefreshQuiescentOwner =>
+      _player == null &&
+      _permit == null &&
+      _reservePreflight == null &&
+      _reserveLeaseId == null &&
+      _opening == null &&
+      _closing == null &&
+      _disposeProof == null &&
+      !_initializationStarted &&
+      !_initializationUncertain &&
+      (_isolateOwner == null || identical(_isolateOwner, this));
+
+  void settleQuiescentOwnerRefresh(NativeAllAudioState proof) {
+    if (!canRefreshQuiescentOwner || !proof.allClear) {
+      throw StateError('Video owner still has an exact claim');
+    }
+    ++_epoch;
+    ++_claimSerial;
+    _phase = PracticeVideoSessionPhase.closing;
+    _idle();
+  }
 
   /// A root context event calls this synchronously before its single native
   /// fence. The fence settler then waits for any in-flight opening and closes
@@ -102,6 +128,8 @@ final class PracticeVideoSessionOwner {
     _isolateOwner = this;
     _phase = PracticeVideoSessionPhase.opening;
     _player = player;
+    ++_claimSerial;
+    _disposeProof = null;
     final epoch = ++_epoch;
     final opening = _openReserved(player, epoch, isCurrent);
     _opening = opening;
@@ -307,11 +335,22 @@ final class PracticeVideoSessionOwner {
     // An uninitialized video_player controller can wait indefinitely inside
     // dispose(). The port's side-effect-free construction contract means no
     // native player exists yet, so only the original reservation is cancelled.
-    var disposeCompleted = !_initializationStarted;
+    final cancelledBeforeCreate = !_initializationStarted;
     if (_initializationStarted) {
       try {
         await player.dispose().timeout(operationTimeout);
-        disposeCompleted = true;
+        // This is one isolate-local fact about this exact player and permit.
+        // Neither a native release receipt nor a late timed-out Future may
+        // manufacture it. Keep it if the first ACK transport attempt fails.
+        if (!_initializationUncertain &&
+            identical(_permit, permit) &&
+            identical(_player, player)) {
+          _disposeProof = _ConfirmedVideoDispose(
+            permit,
+            player,
+            _claimSerial,
+          );
+        }
       } on Object {
         // A timed-out dispose may still complete. Never turn that late callback
         // into a release acknowledgement for this or a newer lease.
@@ -320,48 +359,22 @@ final class PracticeVideoSessionOwner {
     try {
       // Before initialize was invoked there cannot be a native player claim.
       // Keep that cancellation separate from the player-ID release receipt.
-      final cancelledBeforeCreate = !_initializationStarted;
-      final confirmed = disposeCompleted && !_initializationUncertain;
+      final confirmed = cancelledBeforeCreate ||
+          _hasExactDisposeProof(permit, player);
       final deadline = Stopwatch()..start();
-      var receipt = await _nativeWithin(
+      final receipt = await _nativeWithin(
         () => cancelledBeforeCreate
             ? _port.cancelVideoReservation(permit)
             : _port.completeVideoDispose(permit, confirmed: confirmed),
         operationTimeout,
       );
-      if (!confirmed || !_sameVideoOwner(receipt, permit)) {
+      if (!confirmed) {
         _block();
         return null;
       }
-      while (!receipt.allClear) {
-        if (!_pendingOwnVideo(receipt, permit)) {
-          _block();
-          return null;
-        }
-        final remaining = operationTimeout - deadline.elapsed;
-        if (remaining <= Duration.zero) {
-          _block();
-          return null;
-        }
-        await Future<void>.delayed(
-          remaining < const Duration(milliseconds: 20)
-              ? remaining
-              : const Duration(milliseconds: 20),
-        );
-        receipt = await _nativeWithin(
-          _port.readAllAudioState,
-          operationTimeout - deadline.elapsed,
-        );
-      }
-      final fresh = await _nativeWithin(
-        _port.readAllAudioState,
-        operationTimeout - deadline.elapsed,
-      );
-      if (!fresh.allClear ||
-          fresh.ownerToken != receipt.ownerToken ||
-          fresh.engineGeneration != receipt.engineGeneration ||
-          fresh.contextGeneration != receipt.contextGeneration ||
-          fresh.stateRevision < receipt.stateRevision) {
+      _rememberExactAckResponse(permit, player, receipt);
+      final fresh = await _awaitVideoClosed(_port, permit, receipt, deadline);
+      if (fresh == null) {
         _block();
         return null;
       }
@@ -371,6 +384,71 @@ final class PracticeVideoSessionOwner {
       _block();
       return null;
     }
+  }
+
+  bool _hasExactDisposeProof(
+    NativeAudioPermit permit,
+    PracticeVideoPlayerPort player,
+  ) {
+    final proof = _disposeProof;
+    return proof != null &&
+        !_initializationUncertain &&
+        proof.claimSerial == _claimSerial &&
+        identical(proof.permit, permit) &&
+        identical(proof.player, player) &&
+        identical(_permit, permit) &&
+        identical(_player, player);
+  }
+
+  void _rememberExactAckResponse(
+    NativeAudioPermit permit,
+    PracticeVideoPlayerPort player,
+    NativeAllAudioState receipt,
+  ) {
+    if (_hasExactDisposeProof(permit, player) &&
+        _sameVideoOwner(receipt, permit) &&
+        (receipt.allClear || _pendingOwnVideo(receipt, permit))) {
+      // A delivered response for the same held claim is distinct from the
+      // native player release. It lets a later all-clear close a timed-out
+      // poll, but a lost ACK reply does not get this evidence.
+      _disposeProof!.ackResponseObserved = true;
+    }
+  }
+
+  Future<NativeAllAudioState?> _awaitVideoClosed(
+    PracticeAudioLeasePort port,
+    NativeAudioPermit permit,
+    NativeAllAudioState initial,
+    Stopwatch deadline,
+  ) async {
+    var receipt = initial;
+    if (!_sameVideoOwner(receipt, permit)) return null;
+    while (!receipt.allClear) {
+      if (!_pendingOwnVideo(receipt, permit)) return null;
+      final remaining = operationTimeout - deadline.elapsed;
+      if (remaining <= Duration.zero) return null;
+      await Future<void>.delayed(
+        remaining < const Duration(milliseconds: 20)
+            ? remaining
+            : const Duration(milliseconds: 20),
+      );
+      receipt = await _nativeWithin(
+        port.readAllAudioState,
+        operationTimeout - deadline.elapsed,
+      );
+    }
+    final fresh = await _nativeWithin(
+      port.readAllAudioState,
+      operationTimeout - deadline.elapsed,
+    );
+    if (!fresh.allClear ||
+        fresh.ownerToken != receipt.ownerToken ||
+        fresh.engineGeneration != receipt.engineGeneration ||
+        fresh.contextGeneration != receipt.contextGeneration ||
+        fresh.stateRevision < receipt.stateRevision) {
+      return null;
+    }
+    return fresh;
   }
 
   bool _sameVideoOwner(NativeAllAudioState state, NativeAudioPermit permit) =>
@@ -384,6 +462,17 @@ final class PracticeVideoSessionOwner {
       state.activeSide == PracticeAudioSide.video &&
       state.activeLeaseGeneration == permit.leaseGeneration &&
       state.videoPhase == 'closing' &&
+      !state.requiresExplicitRetry;
+
+  bool _heldExactVideo(NativeAllAudioState state, NativeAudioPermit permit) =>
+      state.ownerToken == permit.ownerToken &&
+      state.engineGeneration == permit.engineGeneration &&
+      state.contextGeneration >= permit.contextGeneration &&
+      state.stateRevision >= permit.stateRevision &&
+      state.activeSide == PracticeAudioSide.video &&
+      state.activeLeaseGeneration == permit.leaseGeneration &&
+      (state.videoPhase == 'reserved' || state.videoPhase == 'closing') &&
+      !state.allClear &&
       !state.requiresExplicitRetry;
 
   /// Explicit user retry can settle a late native release or an old-engine
@@ -405,7 +494,131 @@ final class PracticeVideoSessionOwner {
     }
     final permit = _permit;
     try {
+      final proof = _disposeProof;
+      if (proof != null && recoveryPort is PracticeVideoExactAckPort) {
+        final exactPort = recoveryPort as PracticeVideoExactAckPort;
+        // Do not start with readAllAudioState: the wire adapter still caches
+        // Activity A's binding, while B's current handler is already live.
+        if (permit == null ||
+            _player == null ||
+            !_hasExactDisposeProof(permit, _player!)) {
+          return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+        }
+        NativeVideoDisposeReceipt exact;
+        try {
+          exact = await _native(
+            () => exactPort.completeRetiredVideoDispose(permit),
+          );
+        } on Object {
+          // A lost response may still have committed the exact ACK. This is
+          // read-only; UNKNOWN or native-release-only never advances recovery.
+          exact = await _native(
+            () => exactPort.readVideoDisposeReceipt(permit),
+          );
+        }
+        if (!exact.ackRecorded || exact.playerId == null) {
+          return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+        }
+        if (!exact.nativeReleaseRecorded) {
+          if (!_retryableExactVideo(exact, permit)) {
+            return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+          }
+          // This user retry is pinned to the current handler and exact held
+          // claim. A blocked response only means dispatch was requested.
+          await _native(() => exactPort.recoverRetiredVideo(exact));
+          final released = await _awaitExactNativeRelease(
+            exactPort,
+            permit,
+            exact,
+          );
+          if (released == null) {
+            return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+          }
+          exact = released;
+        }
+        if (!exact.leaseSettled) {
+          // ACK and physical release are separate facts. The native global
+          // retry latch may still require one revision-pinned userRetry.
+          await _native(() => exactPort.recoverRetiredVideo(exact));
+          final settled = await _native(
+            () => exactPort.readVideoDisposeReceipt(permit),
+          );
+          if (!_sameExactReadback(settled, exact)) {
+            return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+          }
+          exact = settled;
+        }
+        if (!exact.ackRecorded ||
+            !exact.nativeReleaseRecorded ||
+            !exact.leaseSettled ||
+            !exact.snapshot.allClear) {
+          return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+        }
+        final current = await _native(
+          () => exactPort.refreshOwnerAfterExactVideoDispose(exact),
+        );
+        if (!current.allClear ||
+            current.ownerToken != exact.snapshot.ownerToken ||
+            current.engineGeneration != exact.snapshot.engineGeneration ||
+            current.contextGeneration != exact.snapshot.contextGeneration ||
+            current.stateRevision < exact.snapshot.stateRevision) {
+          return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+        }
+        _phase = PracticeVideoSessionPhase.closing;
+        _idle();
+        return PracticeVideoRecoveryStatus.confirmedClosed;
+      }
       final before = await _native(recoveryPort.readAllAudioState);
+      if (proof != null) {
+        if (permit == null ||
+            _player == null ||
+            !_hasExactDisposeProof(permit, _player!)) {
+          return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+        }
+        if (before.allClear &&
+            proof.ackResponseObserved &&
+            _sameVideoOwner(before, permit)) {
+          final fresh = await _native(recoveryPort.readAllAudioState);
+          if (fresh.allClear &&
+              _sameCurrentSnapshot(fresh, before) &&
+              fresh.stateRevision >= before.stateRevision) {
+            _phase = PracticeVideoSessionPhase.closing;
+            _idle();
+            return PracticeVideoRecoveryStatus.confirmedClosed;
+          }
+        }
+        if (!_heldExactVideo(before, permit)) {
+          // An already-clear lease after an ACK reply was lost still needs an
+          // exact native ACK receipt. A fresh epoch or another lease cannot
+          // consume this old Dart proof.
+          return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+        }
+        final deadline = Stopwatch()..start();
+        final receipt = await _nativeWithin(
+          () => recoveryPort.completeVideoDispose(permit, confirmed: true),
+          operationTimeout,
+        );
+        _rememberExactAckResponse(permit, _player!, receipt);
+        final closed = await _awaitVideoClosed(
+          recoveryPort,
+          permit,
+          receipt,
+          deadline,
+        );
+        if (closed == null) {
+          return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+        }
+        _phase = PracticeVideoSessionPhase.closing;
+        _idle();
+        return PracticeVideoRecoveryStatus.confirmedClosed;
+      }
+      if (permit != null &&
+          _initializationStarted &&
+          !_initializationUncertain) {
+        // A real player may have been created, but its dispose Future did not
+        // succeed. Native release by itself cannot stand in for Dart ACK.
+        return PracticeVideoRecoveryStatus.blockedUnconfirmed;
+      }
       var receipt = before;
       final attempt = _reservePreflight;
       final attemptedId = _reserveLeaseId;
@@ -475,11 +688,7 @@ final class PracticeVideoSessionOwner {
         }
       }
       if (!receipt.allClear) {
-        return permit == null &&
-                attempt == null &&
-                _phase == PracticeVideoSessionPhase.idle
-            ? PracticeVideoRecoveryStatus.alreadyClear
-            : PracticeVideoRecoveryStatus.blockedUnconfirmed;
+        return PracticeVideoRecoveryStatus.blockedUnconfirmed;
       }
       final fresh = await _native(recoveryPort.readAllAudioState);
       if (!fresh.allClear ||
@@ -507,6 +716,68 @@ final class PracticeVideoSessionOwner {
       next.ownerToken == prior.ownerToken &&
       next.engineGeneration == prior.engineGeneration &&
       next.contextGeneration == prior.contextGeneration;
+
+  bool _retryableExactVideo(
+    NativeVideoDisposeReceipt receipt,
+    NativeAudioPermit permit,
+  ) {
+    final state = receipt.snapshot;
+    return receipt.ackRecorded &&
+        !receipt.nativeReleaseRecorded &&
+        !receipt.leaseSettled &&
+        state.activeSide == PracticeAudioSide.video &&
+        state.activeLeaseGeneration == permit.leaseGeneration &&
+        state.videoPhase == 'unconfirmedQuiescent' &&
+        state.requiresExplicitRetry &&
+        !state.nativeOperationInFlight &&
+        !state.allClear;
+  }
+
+  bool _sameExactReadback(
+    NativeVideoDisposeReceipt next,
+    NativeVideoDisposeReceipt prior,
+  ) =>
+      next.ackRecorded &&
+      next.playerId == prior.playerId &&
+      next.permit.ownerToken == prior.permit.ownerToken &&
+      next.permit.engineGeneration == prior.permit.engineGeneration &&
+      next.permit.contextGeneration == prior.permit.contextGeneration &&
+      next.permit.leaseId == prior.permit.leaseId &&
+      next.permit.leaseGeneration == prior.permit.leaseGeneration &&
+      (!prior.nativeReleaseRecorded || next.nativeReleaseRecorded) &&
+      (!prior.leaseSettled || next.leaseSettled) &&
+      _sameCurrentSnapshot(next.snapshot, prior.snapshot) &&
+      next.snapshot.stateRevision >= prior.snapshot.stateRevision &&
+      (next.snapshot.stateRevision != prior.snapshot.stateRevision ||
+          next.snapshot.hasSameSnapshotAs(prior.snapshot));
+
+  Future<NativeVideoDisposeReceipt?> _awaitExactNativeRelease(
+    PracticeVideoExactAckPort port,
+    NativeAudioPermit permit,
+    NativeVideoDisposeReceipt prior,
+  ) async {
+    final deadline = Stopwatch()..start();
+    var previous = prior;
+    while (true) {
+      final next = await _native(() => port.readVideoDisposeReceipt(permit));
+      if (!_sameExactReadback(next, previous)) return null;
+      if (next.nativeReleaseRecorded) return next;
+      final state = next.snapshot;
+      if (state.activeSide != PracticeAudioSide.video ||
+          state.activeLeaseGeneration != permit.leaseGeneration ||
+          state.videoPhase != 'closing' ||
+          deadline.elapsed >= operationTimeout) {
+        return null;
+      }
+      previous = next;
+      final remaining = operationTimeout - deadline.elapsed;
+      await Future<void>.delayed(
+        remaining < const Duration(milliseconds: 20)
+            ? remaining
+            : const Duration(milliseconds: 20),
+      );
+    }
+  }
 
   bool _quiescentRetry(NativeAllAudioState state) =>
       state.activeSide == null &&
@@ -547,10 +818,20 @@ final class PracticeVideoSessionOwner {
     _player = null;
     _initializationUncertain = false;
     _initializationStarted = false;
+    _disposeProof = null;
     if (identical(_isolateOwner, this)) _isolateOwner = null;
   }
 
   void _block() => _phase = PracticeVideoSessionPhase.blockedUnconfirmed;
+}
+
+final class _ConfirmedVideoDispose {
+  _ConfirmedVideoDispose(this.permit, this.player, this.claimSerial);
+
+  final NativeAudioPermit permit;
+  final PracticeVideoPlayerPort player;
+  final int claimSerial;
+  bool ackResponseObserved = false;
 }
 
 String _newVideoLeaseId() {
