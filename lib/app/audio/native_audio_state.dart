@@ -103,6 +103,141 @@ final class NativeAudioPermit {
   }
 }
 
+/// An exact, bounded acknowledgement readback. The native player release and
+/// the successful Dart dispose acknowledgement are separate facts.
+final class NativeVideoDisposeReceipt {
+  const NativeVideoDisposeReceipt._({
+    required this.permit,
+    required this.playerId,
+    required this.ackStatus,
+    required this.nativeReleaseRecorded,
+    required this.leaseSettled,
+    required this.snapshot,
+  });
+
+  final NativeAudioPermit permit;
+  final int? playerId;
+  final String ackStatus;
+  final bool nativeReleaseRecorded;
+  final bool leaseSettled;
+  final NativeAllAudioState snapshot;
+
+  bool get ackRecorded => ackStatus == 'RECORDED';
+
+  factory NativeVideoDisposeReceipt.fromWire(
+    Object? wire,
+    NativeAudioPermit permit,
+  ) {
+    final map = _wireMap(wire);
+    _version(map);
+    if (permit.side != PracticeAudioSide.video ||
+        _token(map, 'ownerToken') != permit.ownerToken ||
+        _integer(map, 'engineGeneration', minimum: 1) !=
+            permit.engineGeneration ||
+        _integer(map, 'contextGeneration') != permit.contextGeneration ||
+        _token(map, 'leaseId') != permit.leaseId ||
+        _integer(map, 'leaseGeneration', minimum: 1) !=
+            permit.leaseGeneration) {
+      throw const NativeAudioProtocolException('Foreign video ACK receipt');
+    }
+    final status = map['ackStatus'];
+    if (status != 'RECORDED' &&
+        status != 'NOT_RECORDED' &&
+        status != 'UNKNOWN') {
+      throw const NativeAudioProtocolException('Invalid video ACK status');
+    }
+    final playerId = map['playerId'] == null
+        ? null
+        : _integer(map, 'playerId');
+    final release = _boolean(map, 'nativeReleaseRecorded');
+    final settled = _boolean(map, 'leaseSettled');
+    final snapshot = NativeAllAudioState.fromWire(map['snapshot']);
+    if ((status != 'UNKNOWN' && playerId == null) ||
+        snapshot.engineGeneration < permit.engineGeneration ||
+        (settled &&
+            (status != 'RECORDED' || !release || !snapshot.allClear))) {
+      throw const NativeAudioProtocolException('Contradictory video ACK receipt');
+    }
+    return NativeVideoDisposeReceipt._(
+      permit: permit,
+      playerId: playerId,
+      ackStatus: status as String,
+      nativeReleaseRecorded: release,
+      leaseSettled: settled,
+      snapshot: snapshot,
+    );
+  }
+}
+
+/// Native attestation for an explicit, claim-free Activity handoff on one
+/// FlutterEngine. This carries no video dispose acknowledgement.
+final class NativeQuiescentOwnerHandoff {
+  const NativeQuiescentOwnerHandoff._({
+    required this.retiredOwnerToken,
+    required this.retiredEngineGeneration,
+    required this.retiredContextGeneration,
+    required this.retiredStateRevision,
+    required this.snapshot,
+  });
+
+  final String retiredOwnerToken;
+  final int retiredEngineGeneration;
+  final int retiredContextGeneration;
+  final int retiredStateRevision;
+  final NativeAllAudioState snapshot;
+
+  factory NativeQuiescentOwnerHandoff.fromWire(
+    Object? wire,
+    NativeAudioBinding retired,
+    NativeAllAudioState? cached,
+  ) {
+    final outer = _wireMap(wire);
+    _version(outer);
+    if (outer['bridgeReady'] != true) {
+      throw const NativeAudioProtocolException('Quiescent bridge unavailable');
+    }
+    final map = _wireMap(outer['handoff']);
+    _version(map);
+    final oldToken = _token(map, 'retiredOwnerToken');
+    final oldGeneration = _integer(
+      map,
+      'retiredEngineGeneration',
+      minimum: 1,
+    );
+    final oldContext = _integer(map, 'retiredContextGeneration');
+    final oldRevision = _integer(map, 'retiredStateRevision');
+    final snapshot = NativeAllAudioState.fromWire(map['snapshot']);
+    if (oldToken != retired.ownerToken ||
+        oldGeneration != retired.engineGeneration ||
+        oldContext < retired.contextGeneration ||
+        oldRevision < retired.stateRevision ||
+        (cached != null &&
+            (cached.ownerToken != oldToken ||
+                cached.engineGeneration != oldGeneration ||
+                !cached.allClear ||
+                cached.nativeOperationInFlight ||
+                cached.requiresExplicitRetry ||
+                oldContext < cached.contextGeneration ||
+                oldRevision < cached.stateRevision)) ||
+        snapshot.ownerToken == oldToken ||
+        snapshot.engineGeneration <= oldGeneration ||
+        snapshot.contextGeneration <= oldContext ||
+        snapshot.stateRevision <= oldRevision ||
+        !snapshot.allClear ||
+        snapshot.nativeOperationInFlight ||
+        snapshot.requiresExplicitRetry) {
+      throw const NativeAudioProtocolException('Invalid quiescent handoff');
+    }
+    return NativeQuiescentOwnerHandoff._(
+      retiredOwnerToken: oldToken,
+      retiredEngineGeneration: oldGeneration,
+      retiredContextGeneration: oldContext,
+      retiredStateRevision: oldRevision,
+      snapshot: snapshot,
+    );
+  }
+}
+
 final class NativeAllAudioState {
   const NativeAllAudioState._({
     required this.ownerToken,

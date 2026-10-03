@@ -232,7 +232,7 @@ packages:
     source: hosted
     version: "0.15.7"
   http:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: http
       sha256: "87721a4a50b19c7f1d49001e51409bddc46303966ce89a65af4f4e6004896412"
@@ -400,26 +400,26 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/motion_account"
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
-      resolved-ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
+      resolved-ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
       url: "https://github.com/kocakkmustafa/motion-core.git"
     source: git
-    version: "0.1.0"
+    version: "0.2.0"
   motion_camera:
     dependency: "direct main"
     description:
       path: "packages/motion_camera"
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
-      resolved-ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
+      resolved-ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
       url: "https://github.com/kocakkmustafa/motion-core.git"
     source: git
-    version: "0.1.2"
+    version: "0.2.0"
   motion_content:
     dependency: "direct main"
     description:
       path: "packages/motion_content"
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
-      resolved-ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
+      resolved-ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
       url: "https://github.com/kocakkmustafa/motion-core.git"
     source: git
     version: "0.1.0"
@@ -427,20 +427,20 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/motion_core"
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
-      resolved-ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
+      resolved-ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
       url: "https://github.com/kocakkmustafa/motion-core.git"
     source: git
-    version: "0.11.0"
+    version: "0.12.0"
   motion_entitlements:
     dependency: transitive
     description:
       path: "packages/motion_entitlements"
-      ref: f2ea161c7e974d57b114ba7773836c72be17a381
-      resolved-ref: f2ea161c7e974d57b114ba7773836c72be17a381
+      ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
+      resolved-ref: "0fed3a05466946bf2710750f4feca8dbd75be123"
       url: "https://github.com/kocakkmustafa/motion-core.git"
     source: git
-    version: "0.1.0"
+    version: "0.1.1"
   objective_c:
     dependency: transitive
     description:
@@ -765,7 +765,7 @@ packages:
     source: hosted
     version: "0.1.2"
   supabase_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: supabase_flutter
       sha256: "26eb3d3b71bcc5651551e64d6b131ba929ea261998570bbcc90356b1b42fd532"
@@ -879,34 +879,30 @@ packages:
   video_player:
     dependency: "direct main"
     description:
-      name: video_player
-      sha256: "48a7bdaa38a3d50ec10c78627abdbfad863fdf6f0d6e08c7c3c040cfd80ae36f"
-      url: "https://pub.dev"
-    source: hosted
+      path: "third_party/video_player_permit/video_player-2.11.1"
+      relative: true
+    source: path
     version: "2.11.1"
   video_player_android:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: video_player_android
-      sha256: d27054dea34d748a44f06d433a57005d2aac69944485b0abbaed3303dbcfa3f1
-      url: "https://pub.dev"
-    source: hosted
+      path: "third_party/video_player_permit/video_player_android-2.12.2"
+      relative: true
+    source: path
     version: "2.12.2"
   video_player_avfoundation:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: video_player_avfoundation
-      sha256: "2fc56e537324a19eb649fca991aa308ac961b5406292876fa657b062de461fd8"
-      url: "https://pub.dev"
-    source: hosted
+      path: "third_party/video_player_permit/video_player_avfoundation-2.12.0"
+      relative: true
+    source: path
     version: "2.12.0"
   video_player_platform_interface:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: video_player_platform_interface
-      sha256: "92c0fbabe20c788e71fd10d26cea998d0d253282e65d145aed0818731cf593ce"
-      url: "https://pub.dev"
-    source: hosted
+      path: "third_party/video_player_permit/video_player_platform_interface-6.9.0"
+      relative: true
+    source: path
     version: "6.9.0"
   video_player_web:
     dependency: transitive

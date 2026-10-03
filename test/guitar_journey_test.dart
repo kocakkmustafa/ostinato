@@ -48,11 +48,15 @@ void main() {
       expect(course.chordShapes['Em']!.frets6to1, [0, 2, 2, 0, 0, 0]);
       expect(course.chordShapes['D']!.frets6to1, [null, null, 0, 2, 3, 2]);
       expect(
-        course.lessons.singleWhere((l) => l.id.endsWith('.power_chords')).shapeIds,
+        course.lessons
+            .singleWhere((l) => l.id.endsWith('.power_chords'))
+            .shapeIds,
         ['E5', 'A5'],
       );
       expect(
-        course.lessons.singleWhere((l) => l.id.endsWith('.movable_shape')).shapeIds,
+        course.lessons
+            .singleWhere((l) => l.id.endsWith('.movable_shape'))
+            .shapeIds,
         ['G_barre', 'Gm_barre', 'B_barre', 'Bm_barre'],
       );
       expect(course.chordShapes['G_barre']!.frets6to1, [3, 5, 5, 4, 3, 3]);
@@ -380,8 +384,33 @@ void main() {
         await tester.pumpAndSettle();
 
         Future<GuitarLessonProgress?> savedRecord() async {
-          final records = await tester.runAsync(store.load);
-          await tester.pump();
+          Map<String, GuitarLessonProgress>? records;
+          Object? error;
+          StackTrace? stack;
+          var done = false;
+          await tester.runAsync(() async {
+            store.load().then(
+              (value) {
+                records = value;
+                done = true;
+              },
+              onError: (Object failure, StackTrace trace) {
+                error = failure;
+                stack = trace;
+                done = true;
+              },
+            );
+          });
+          // A route-pop reload may already own the file queue in the fake
+          // widget zone. Pump it while actual file I/O finishes, then join it.
+          for (var attempt = 0; attempt < 40 && !done; attempt++) {
+            await tester.pump();
+            await tester.runAsync(
+              () => Future<void>.delayed(const Duration(milliseconds: 5)),
+            );
+          }
+          if (error != null) Error.throwWithStackTrace(error!, stack!);
+          expect(done, isTrue, reason: 'The queued progress read must finish');
           return records?[recordKey];
         }
 
@@ -390,7 +419,10 @@ void main() {
           bool Function(GuitarLessonProgress?) saved,
         ) async {
           await tester.ensureVisible(find.text(text));
-          await tester.tap(find.text(text));
+          await tester.runAsync(() async {
+            await tester.tap(find.text(text));
+            await store.load();
+          });
           for (var attempt = 0; attempt < 40; attempt++) {
             // Yield to actual file I/O; completion must be read from disk.
             if (saved(await savedRecord())) return;
@@ -458,7 +490,7 @@ void main() {
         home: GuitarJourneyLessonScreen(
           course: course,
           lesson: lesson,
-          store: const GuitarJourneyProgressStore(),
+          store: GuitarJourneyProgressStore(),
         ),
       ),
     );
@@ -507,7 +539,7 @@ void main() {
         home: GuitarJourneyLessonScreen(
           course: course,
           lesson: lesson,
-          store: const GuitarJourneyProgressStore(),
+          store: GuitarJourneyProgressStore(),
         ),
       ),
     );
@@ -644,7 +676,10 @@ void main() {
       );
       final viewed = find.text('Mark viewed');
       await tester.ensureVisible(viewed);
-      await tester.tap(viewed);
+      await tester.runAsync(() async {
+        await tester.tap(viewed);
+        await store.load();
+      });
       GuitarLessonProgress? observedRecord;
       for (var attempt = 0; attempt < 40; attempt++) {
         observedRecord = (await tester.runAsync(
@@ -702,7 +737,7 @@ void main() {
             home: GuitarJourneyLessonScreen(
               course: course,
               lesson: course.lessons.firstWhere((lesson) => lesson.id == id),
-              store: const GuitarJourneyProgressStore(),
+              store: GuitarJourneyProgressStore(),
             ),
           ),
         );

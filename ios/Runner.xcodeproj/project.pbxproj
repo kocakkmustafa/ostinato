@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B390E72B134998714A87B901 /* AudioCaptureStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A17EF9A2D9C1AB2926688 /* AudioCaptureStreamer.swift */; };
 		C02F8A761B264E53980A0101 /* PracticeAudioArbiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F8A761B264E53980A0102 /* PracticeAudioArbiter.swift */; };
+		A14101010000000000000001 /* OstinatoVideoPermitBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14101010000000000000002 /* OstinatoVideoPermitBridge.swift */; };
 		9A1000000000000000000001 /* QASilentVideoProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1000000000000000000002 /* QASilentVideoProbe.swift */; };
 		9A1000000000000000000003 /* QASilentVideoProbeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1000000000000000000004 /* QASilentVideoProbeTests.swift */; };
 		9A1000000000000000000005 /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 9A1000000000000000000006 /* Fixtures */; };
@@ -63,6 +64,7 @@
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D7A17EF9A2D9C1AB2926688 /* AudioCaptureStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCaptureStreamer.swift; sourceTree = "<group>"; };
 		C02F8A761B264E53980A0102 /* PracticeAudioArbiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeAudioArbiter.swift; sourceTree = "<group>"; };
+		A14101010000000000000002 /* OstinatoVideoPermitBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OstinatoVideoPermitBridge.swift; sourceTree = "<group>"; };
 		9A1000000000000000000002 /* QASilentVideoProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QASilentVideoProbe.swift; sourceTree = "<group>"; };
 		9A1000000000000000000004 /* QASilentVideoProbeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QASilentVideoProbeTests.swift; sourceTree = "<group>"; };
 		9A1000000000000000000006 /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				6D7A17EF9A2D9C1AB2926688 /* AudioCaptureStreamer.swift */,
 				C02F8A761B264E53980A0102 /* PracticeAudioArbiter.swift */,
+				A14101010000000000000002 /* OstinatoVideoPermitBridge.swift */,
 				9A1000000000000000000002 /* QASilentVideoProbe.swift */,
 				7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
@@ -409,6 +412,7 @@
 			files = (
 				B390E72B134998714A87B901 /* AudioCaptureStreamer.swift in Sources */,
 				C02F8A761B264E53980A0101 /* PracticeAudioArbiter.swift in Sources */,
+				A14101010000000000000001 /* OstinatoVideoPermitBridge.swift in Sources */,
 				9A1000000000000000000001 /* QASilentVideoProbe.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,

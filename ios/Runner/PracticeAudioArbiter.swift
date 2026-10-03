@@ -53,6 +53,22 @@ final class PracticeAudioSessionPolicy {
 struct PracticeAudioOwner: Equatable {
   let token: String
   let engineGeneration: Int
+  // Native registry identity, never supplied by Dart. A retired Dart success
+  // may be carried only across a handoff of this same engine.
+  let engineIdentity: AnyObject
+
+  static func == (lhs: PracticeAudioOwner, rhs: PracticeAudioOwner) -> Bool {
+    lhs.token == rhs.token && lhs.engineGeneration == rhs.engineGeneration &&
+      lhs.engineIdentity === rhs.engineIdentity
+  }
+}
+
+private struct PracticeVideoClaim: Equatable {
+  let owner: PracticeAudioOwner
+  let contextGeneration: Int
+  let leaseId: String
+  let leaseGeneration: Int
+  let playerId: Int64
 }
 
 private struct PracticeAudioReservation {
@@ -62,6 +78,13 @@ private struct PracticeAudioReservation {
   let leaseGeneration: Int
   let side: String
   let legacyCapture: Bool
+}
+
+private struct PracticeQuiescentHandoff {
+  let retired: PracticeAudioOwner
+  let current: PracticeAudioOwner
+  let retiredContextGeneration: Int
+  let retiredStateRevision: Int
 }
 
 private final class PracticeAudioReply {
@@ -119,6 +142,13 @@ final class PracticeAudioArbiter {
   private var videoPlayerId: Int64?
   private var videoPlayerReleased = false
   private var videoDisposeAcknowledged = false
+  // The admitted vendor player owns this exact close request. A lifecycle
+  // fence must be able to request native disposal without a live Dart isolate.
+  private var videoClosePort: (() -> Bool)?
+  private var videoCloseDispatchPending = false
+  private var releasedVideoReceipt: PracticeVideoClaim?
+  private var acknowledgedVideoReceipt: PracticeVideoClaim?
+  private var quiescentHandoff: PracticeQuiescentHandoff?
   private var observers: [NSObjectProtocol] = []
 
   init(
@@ -185,8 +215,20 @@ final class PracticeAudioArbiter {
 
   /// AppDelegate registers a new implicit engine before either channel is published.
   @discardableResult
-  func replaceEngine() -> PracticeAudioOwner {
+  func replaceEngine(engineIdentity: AnyObject = NSObject()) -> PracticeAudioOwner {
     assert(Thread.isMainThread)
+    let retired = owner
+    let oldClear: [String: Any]?
+    if let retired = retired, retired.engineIdentity === engineIdentity,
+        reservation == nil, hasNoUnsettledVideoHistory(), cancelledVideoAttempts.isEmpty {
+      let state = snapshot(retired)
+      oldClear = state["allClear"] as? Bool == true ? state : nil
+    } else {
+      oldClear = nil
+    }
+    // A later registration replaces this one-step proof. Retirement itself
+    // cannot turn a held reservation into a claim-free handoff.
+    quiescentHandoff = nil
     let unclaimedVideo = reservation?.side == "video" && videoPlayerId == nil
     let hadHardware = coordinator.closeState()["phase"] as? String != "clear" ||
       outputPhase == "starting" || outputPhase == "playing" || outputOperationInFlight ||
@@ -201,13 +243,122 @@ final class PracticeAudioArbiter {
     if hadHardware { globalRetryRequired = true }
     closeAllGlobal(reason: "engineReplacement")
     engineGeneration += 1
-    let next = PracticeAudioOwner(token: newToken(), engineGeneration: engineGeneration)
+    let next = PracticeAudioOwner(token: newToken(), engineGeneration: engineGeneration,
+                                  engineIdentity: engineIdentity)
     owner = next
     stateRevision += 1
+    if let retired = retired, let oldClear = oldClear, reservation == nil,
+        hasNoUnsettledVideoHistory(), cancelledVideoAttempts.isEmpty,
+        snapshot(next)["allClear"] as? Bool == true {
+      quiescentHandoff = PracticeQuiescentHandoff(retired: retired, current: next,
+        retiredContextGeneration: oldClear["contextGeneration"] as! Int,
+        retiredStateRevision: oldClear["stateRevision"] as! Int)
+    }
     return next
   }
 
   func isCurrent(_ candidate: PracticeAudioOwner) -> Bool { owner == candidate }
+
+  private func currentVideoClaim() -> PracticeVideoClaim? {
+    guard let held = reservation, held.side == "video",
+          let playerId = videoPlayerId else { return nil }
+    return PracticeVideoClaim(owner: held.owner,
+      contextGeneration: held.contextGeneration, leaseId: held.leaseId,
+      leaseGeneration: held.leaseGeneration, playerId: playerId)
+  }
+
+  private func videoClaim(_ args: [String: Any]) -> PracticeVideoClaim? {
+    guard let token = args["ownerToken"] as? String, isHex32(token),
+          let engine = args["engineGeneration"] as? Int, engine > 0,
+          let context = args["contextGeneration"] as? Int, context >= 0,
+          let id = args["leaseId"] as? String, isHex32(id),
+          let generation = args["leaseGeneration"] as? Int, generation > 0 else { return nil }
+    for claim in [currentVideoClaim(), acknowledgedVideoReceipt, releasedVideoReceipt].compactMap({ $0 }) {
+      if claim.owner.token == token && claim.owner.engineGeneration == engine &&
+          claim.contextGeneration == context && claim.leaseId == id &&
+          claim.leaseGeneration == generation { return claim }
+    }
+    return nil
+  }
+
+  private func videoDisposeReceipt(_ args: [String: Any], current: PracticeAudioOwner) -> [String: Any] {
+    let claim = videoClaim(args)
+    let sameEngine = claim?.owner.engineIdentity === current.engineIdentity
+    let exact = sameEngine ? claim : nil
+    let ack = exact != nil && acknowledgedVideoReceipt == exact
+    let released = exact != nil && releasedVideoReceipt == exact
+    let state = snapshot(current)
+    return [
+      "schemaVersion": 1,
+      "ownerToken": args["ownerToken"]!,
+      "engineGeneration": args["engineGeneration"]!,
+      "contextGeneration": args["contextGeneration"]!,
+      "leaseId": args["leaseId"]!,
+      "leaseGeneration": args["leaseGeneration"]!,
+      "playerId": exact?.playerId as Any? ?? NSNull(),
+      "ackStatus": exact == nil ? "UNKNOWN" : (ack ? "RECORDED" : "NOT_RECORDED"),
+      "nativeReleaseRecorded": released,
+      "leaseSettled": ack && released && reservation == nil &&
+        (state["allClear"] as? Bool == true),
+      "snapshot": state
+    ]
+  }
+
+  private func hasNoUnsettledVideoHistory() -> Bool {
+    if releasedVideoReceipt == nil && acknowledgedVideoReceipt == nil { return true }
+    return releasedVideoReceipt != nil && releasedVideoReceipt == acknowledgedVideoReceipt
+  }
+
+  private func clearBridgeOwner(_ bridgeOwner: PracticeAudioOwner) -> PracticeAudioOwner? {
+    guard Thread.isMainThread, let current = owner,
+          bridgeOwner.engineIdentity === current.engineIdentity, canAcquire(),
+          reservation == nil, cancelledVideoAttempts.isEmpty,
+          snapshot(current)["allClear"] as? Bool == true, isCurrent(current) else { return nil }
+    return current
+  }
+
+  /// A bridge that never admitted a player needs the native one-step handoff,
+  /// rather than inferring the old owner's state from the new allClear flag.
+  func videoBridgeIsQuiescent(owner bridgeOwner: PracticeAudioOwner) -> Bool {
+    guard let current = clearBridgeOwner(bridgeOwner), hasNoUnsettledVideoHistory() else { return false }
+    if current == bridgeOwner { return true }
+    return quiescentHandoff?.retired == bridgeOwner && quiescentHandoff?.current == current
+  }
+
+  /// A previously admitted bridge keeps its own exact player proof. A global
+  /// receipt for a different player or engine cannot release this bridge.
+  func videoBridgeIsQuiescent(owner bridgeOwner: PracticeAudioOwner,
+                             contextGeneration context: Int, leaseId: String,
+                             leaseGeneration: Int, playerId: Int64) -> Bool {
+    guard clearBridgeOwner(bridgeOwner) != nil else { return false }
+    let exact = PracticeVideoClaim(owner: bridgeOwner, contextGeneration: context,
+      leaseId: leaseId, leaseGeneration: leaseGeneration, playerId: playerId)
+    return releasedVideoReceipt == exact && acknowledgedVideoReceipt == exact
+  }
+
+  private func quiescentOwnerHandoff(_ args: [String: Any],
+                                     current: PracticeAudioOwner) -> [String: Any]? {
+    guard isCurrent(current), let handoff = quiescentHandoff,
+          handoff.current == current, handoff.retired.engineIdentity === current.engineIdentity,
+          args["retiredOwnerToken"] as? String == handoff.retired.token,
+          args["retiredEngineGeneration"] as? Int == handoff.retired.engineGeneration,
+          handoff.retired.engineGeneration < current.engineGeneration,
+          clearBridgeOwner(handoff.retired) != nil, hasNoUnsettledVideoHistory() else { return nil }
+    return ["schemaVersion": 1,
+      "retiredOwnerToken": handoff.retired.token,
+      "retiredEngineGeneration": handoff.retired.engineGeneration,
+      "retiredContextGeneration": handoff.retiredContextGeneration,
+      "retiredStateRevision": handoff.retiredStateRevision,
+      "snapshot": snapshot(current)]
+  }
+
+  private func settledVideoHandoff(_ args: [String: Any],
+                                  current: PracticeAudioOwner) -> [String: Any]? {
+    guard isCurrent(current), let claim = videoClaim(args), claim.owner != current,
+          clearBridgeOwner(claim.owner) != nil,
+          releasedVideoReceipt == claim, acknowledgedVideoReceipt == claim else { return nil }
+    return videoDisposeReceipt(args, current: current)
+  }
 
   func captureIsForeign(to candidate: PracticeAudioOwner) -> Bool {
     guard let held = reservation, held.side == "input" else { return false }
@@ -340,7 +491,8 @@ final class PracticeAudioArbiter {
   /// initialize, or any AVAudioSession mutation. The stock plugin does not
   /// call this hook, so shipping video admission remains disabled.
   func claimVideoPlayer(owner candidate: PracticeAudioOwner, contextGeneration context: Int,
-                        leaseId: String, leaseGeneration: Int, playerId: Int64) -> Bool {
+                        leaseId: String, leaseGeneration: Int, playerId: Int64,
+                        closePort: (() -> Bool)? = nil) -> Bool {
     guard Thread.isMainThread else { return false }
     guard videoReservationEnabled, isCurrent(candidate), canAcquire(),
           context == contextGeneration, playerId >= 0,
@@ -350,6 +502,9 @@ final class PracticeAudioArbiter {
           videoPhase == "reserved", !reservationClosing,
           videoPlayerId == nil else { return false }
     videoPlayerId = playerId
+    videoClosePort = closePort
+    releasedVideoReceipt = nil
+    acknowledgedVideoReceipt = nil
     stateRevision += 1
     return true
   }
@@ -362,11 +517,12 @@ final class PracticeAudioArbiter {
   func withClaimedVideoCreation(owner candidate: PracticeAudioOwner,
                                 contextGeneration context: Int, leaseId: String,
                                 leaseGeneration: Int, playerId: Int64,
+                                closePort: (() -> Bool)? = nil,
                                 firstSideEffect: () throws -> Void) rethrows -> Bool {
     guard Thread.isMainThread,
           claimVideoPlayer(owner: candidate, contextGeneration: context,
                            leaseId: leaseId, leaseGeneration: leaseGeneration,
-                           playerId: playerId) else { return false }
+                           playerId: playerId, closePort: closePort) else { return false }
     try firstSideEffect()
     guard isCurrent(candidate), contextGeneration == context,
           let held = reservation, held.owner == candidate,
@@ -388,6 +544,7 @@ final class PracticeAudioArbiter {
           videoPlayerId == playerId,
           !videoPlayerReleased else { return false }
     videoPlayerReleased = true
+    releasedVideoReceipt = currentVideoClaim()
     stateRevision += 1
     settleAcknowledgedVideo()
     return true
@@ -403,15 +560,71 @@ final class PracticeAudioArbiter {
     videoPlayerId = nil
     videoPlayerReleased = false
     videoDisposeAcknowledged = false
+    videoClosePort = nil
+    videoCloseDispatchPending = false
     stateRevision += 1
   }
 
   private func settleAcknowledgedVideo() {
     assert(Thread.isMainThread)
-    guard reservation?.side == "video", videoDisposeAcknowledged,
-          videoPlayerReleased, !videoCloseTimedOut,
-          !videoRetryRequired else { return }
+    guard let claim = currentVideoClaim(), videoDisposeAcknowledged,
+          videoPlayerReleased,
+          acknowledgedVideoReceipt == claim,
+          releasedVideoReceipt == claim, !videoCloseTimedOut,
+          !videoRetryRequired, !videoCloseDispatchPending else { return }
     clearVideoReservation()
+  }
+
+  private func requestVideoClose(retry: Bool = false) {
+    assert(Thread.isMainThread)
+    guard reservation?.side == "video", !videoPlayerReleased,
+          !videoCloseDispatchPending,
+          videoPhase == "reserved" ||
+            (retry && videoPhase == "unconfirmedQuiescent") else { return }
+    videoPhase = "closing"
+    videoCloseTimedOut = false
+    videoRetryRequired = false
+    stateRevision += 1
+    let expectedLease = reservation?.leaseGeneration
+    let expectedPlayer = videoPlayerId
+    if let closePort = videoClosePort {
+      videoCloseDispatchPending = true
+      // The create closure can re-enter a fence. Dispatch after its main turn
+      // so a partially configured player is never disposed by this port.
+      DispatchQueue.main.async { [weak self] in
+        guard let self = self,
+              self.reservation?.side == "video",
+              self.reservation?.leaseGeneration == expectedLease,
+              self.videoPlayerId == expectedPlayer,
+              self.videoCloseDispatchPending else { return }
+        if self.videoPlayerReleased {
+          self.videoCloseDispatchPending = false
+          self.settleAcknowledgedVideo()
+          return
+        }
+        let accepted = closePort()
+        guard self.reservation?.side == "video",
+              self.reservation?.leaseGeneration == expectedLease,
+              self.videoPlayerId == expectedPlayer else { return }
+        self.videoCloseDispatchPending = false
+        if !accepted {
+          self.videoRetryRequired = true
+          self.videoPhase = "unconfirmedQuiescent"
+          self.stateRevision += 1
+        } else {
+          self.settleAcknowledgedVideo()
+        }
+      }
+    }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+      guard let self = self, self.reservation?.side == "video",
+            self.reservation?.leaseGeneration == expectedLease,
+            self.videoPhase == "closing" else { return }
+      self.videoCloseTimedOut = true
+      self.videoRetryRequired = true
+      self.videoPhase = "unconfirmedQuiescent"
+      self.stateRevision += 1
+    }
   }
 
   private func receipt(_ candidate: PracticeAudioOwner) -> [String: Any] {
@@ -462,20 +675,7 @@ final class PracticeAudioArbiter {
         }
       }
     }
-    if reservation?.side == "video" && videoPhase == "reserved" {
-      videoPhase = "closing"
-      stateRevision += 1
-      let expectedLease = reservation?.leaseGeneration
-      DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-        guard let self = self, self.reservation?.side == "video",
-              self.reservation?.leaseGeneration == expectedLease,
-              self.videoPhase == "closing" else { return }
-        self.videoCloseTimedOut = true
-        self.videoRetryRequired = true
-        self.videoPhase = "unconfirmedQuiescent"
-        self.stateRevision += 1
-      }
-    }
+    requestVideoClose()
   }
 
   func closeAllGlobal(reason: String) {
@@ -486,7 +686,8 @@ final class PracticeAudioArbiter {
     closeCurrentResources()
   }
 
-  func handle(_ call: FlutterMethodCall, owner candidate: PracticeAudioOwner, result: @escaping FlutterResult) {
+  func handle(_ call: FlutterMethodCall, owner candidate: PracticeAudioOwner,
+              rebindBridge: (() -> Bool)? = nil, result: @escaping FlutterResult) {
     assert(Thread.isMainThread)
     guard isCurrent(candidate) else { result(failure("stale_audio_owner")); return }
     let args = call.arguments as? [String: Any] ?? [:]
@@ -497,8 +698,78 @@ final class PracticeAudioArbiter {
               "contextGeneration": contextGeneration, "stateRevision": stateRevision])
       return
     }
-    guard ownerMatches(args, candidate) else { result(failure("stale_audio_owner")); return }
+    let exactRetiredVideoMethod = call.method == "completeRetiredVideoDispose" ||
+      call.method == "readVideoDisposeReceipt" ||
+      call.method == "rebindVideoPermitBridge" ||
+      call.method == "rebindQuiescentOwner"
+    guard exactRetiredVideoMethod || ownerMatches(args, candidate) else {
+      result(failure("stale_audio_owner")); return
+    }
     switch call.method {
+    case "completeRetiredVideoDispose":
+      let requiredKeys: Set<String> = ["ownerToken", "engineGeneration",
+        "contextGeneration", "leaseId", "leaseGeneration", "confirmed"]
+      guard Set(args.keys) == requiredKeys,
+            args["confirmed"] as? Bool == true,
+            let claim = videoClaim(args),
+            claim.owner.engineIdentity === candidate.engineIdentity,
+            claim.owner != candidate else {
+        result(failure("stale_audio_owner")); return
+      }
+      if currentVideoClaim() == claim && !videoDisposeAcknowledged {
+        videoDisposeAcknowledged = true
+        acknowledgedVideoReceipt = claim
+        stateRevision += 1
+        settleAcknowledgedVideo()
+      } else if acknowledgedVideoReceipt != claim {
+        result(failure("stale_audio_lease")); return
+      }
+      result(videoDisposeReceipt(args, current: candidate))
+    case "readVideoDisposeReceipt":
+      let requiredKeys: Set<String> = ["ownerToken", "engineGeneration",
+        "contextGeneration", "leaseId", "leaseGeneration"]
+      guard Set(args.keys) == requiredKeys,
+            let token = args["ownerToken"] as? String, isHex32(token),
+            let id = args["leaseId"] as? String, isHex32(id),
+            args["engineGeneration"] as? Int != nil,
+            args["contextGeneration"] as? Int != nil,
+            args["leaseGeneration"] as? Int != nil else {
+        result(failure("bad_args")); return
+      }
+      result(videoDisposeReceipt(args, current: candidate))
+    case "rebindVideoPermitBridge":
+      let keys: Set<String> = ["ownerToken", "engineGeneration", "contextGeneration",
+        "leaseId", "leaseGeneration"]
+      guard Set(args.keys) == keys else { result(failure("bad_args")); return }
+      guard let before = settledVideoHandoff(args, current: candidate) else {
+        result(failure("video_handoff_pending")); return
+      }
+      guard let rebind = rebindBridge, rebind() else {
+        result(failure("video_bridge_unavailable")); return
+      }
+      guard isCurrent(candidate), let after = settledVideoHandoff(args, current: candidate),
+            (before as NSDictionary).isEqual(after as NSDictionary) else {
+        result(failure("video_handoff_changed")); return
+      }
+      result(["schemaVersion": 1, "bridgeReady": true, "ack": after])
+    case "rebindQuiescentOwner":
+      let keys: Set<String> = ["retiredOwnerToken", "retiredEngineGeneration", "reason"]
+      guard Set(args.keys) == keys, args["reason"] as? String == "userRetry",
+            let token = args["retiredOwnerToken"] as? String, isHex32(token),
+            let generation = args["retiredEngineGeneration"] as? Int, generation > 0 else {
+        result(failure("bad_args")); return
+      }
+      guard let before = quiescentOwnerHandoff(args, current: candidate) else {
+        result(failure("quiescent_handoff_unavailable")); return
+      }
+      guard let rebind = rebindBridge, rebind() else {
+        result(failure("video_bridge_unavailable")); return
+      }
+      guard isCurrent(candidate), let after = quiescentOwnerHandoff(args, current: candidate),
+            (before as NSDictionary).isEqual(after as NSDictionary) else {
+        result(failure("quiescent_handoff_changed")); return
+      }
+      result(["schemaVersion": 1, "bridgeReady": true, "handoff": after])
     case "readAllAudioState":
       result(snapshot(candidate))
     case "reserve":
@@ -534,6 +805,8 @@ final class PracticeAudioArbiter {
         videoPlayerId = nil
         videoPlayerReleased = false
         videoDisposeAcknowledged = false
+        videoClosePort = nil
+        videoCloseDispatchPending = false
       }
       stateRevision += 1
       result(["status": "reserved", "leaseId": id,
@@ -613,6 +886,7 @@ final class PracticeAudioArbiter {
         result(receipt(candidate)); return
       }
       videoDisposeAcknowledged = true
+      acknowledgedVideoReceipt = currentVideoClaim()
       stateRevision += 1
       settleAcknowledgedVideo()
       if reservation?.side == "video" && !videoCloseTimedOut && !videoRetryRequired &&
@@ -689,13 +963,39 @@ final class PracticeAudioArbiter {
       guard args["reason"] as? String == "userRetry",
             let revision = args["expectedStateRevision"] as? Int,
             revision == stateRevision else { result(failure("stale_audio_state")); return }
+      var exactRetryClaim: PracticeVideoClaim?
+      if let supplied = args["exactVideoClaim"] {
+        let keys: Set<String> = ["ownerToken", "engineGeneration",
+          "contextGeneration", "leaseId", "leaseGeneration"]
+        guard let fields = supplied as? [String: Any], Set(fields.keys) == keys,
+              let claim = videoClaim(fields),
+              claim.owner.engineIdentity === candidate.engineIdentity,
+              (currentVideoClaim() == claim ||
+                (reservation == nil &&
+                  acknowledgedVideoReceipt == claim &&
+                  releasedVideoReceipt == claim)) else {
+          result(failure("stale_audio_lease")); return
+        }
+        exactRetryClaim = claim
+      }
       let input = inputState()
       if reservation?.side == "video" {
         // Only the exact native player release hook can make an old-engine or
         // timed-out video lease recoverable. The current Dart bool is never
         // enough to infer a physical release.
-        guard videoPlayerReleased, !input.inFlight, !outputOperationInFlight,
+        guard let claim = currentVideoClaim(), videoPlayerReleased,
+              videoDisposeAcknowledged,
+              releasedVideoReceipt == claim,
+              acknowledgedVideoReceipt == claim,
+              !videoCloseDispatchPending, !input.inFlight,
+              !outputOperationInFlight,
               input.phase == "clear", outputPhase == "clear" else {
+          if let claim = currentVideoClaim(), exactRetryClaim == claim,
+              videoDisposeAcknowledged, acknowledgedVideoReceipt == claim,
+              !videoPlayerReleased && videoClosePort != nil &&
+              videoRetryRequired && !videoCloseDispatchPending {
+            requestVideoClose(retry: true)
+          }
           result(["status": "blocked", "snapshot": snapshot(candidate)]); return
         }
         clearVideoReservation()
@@ -736,13 +1036,16 @@ final class PracticeAudioArbiter {
 final class PracticeAudioArbiterHandler {
   private let arbiter: PracticeAudioArbiter
   private let owner: PracticeAudioOwner
+  private let rebindBridge: (() -> Bool)?
 
-  init(arbiter: PracticeAudioArbiter, owner: PracticeAudioOwner) {
+  init(arbiter: PracticeAudioArbiter, owner: PracticeAudioOwner,
+       rebindBridge: (() -> Bool)? = nil) {
     self.arbiter = arbiter
     self.owner = owner
+    self.rebindBridge = rebindBridge
   }
 
   func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    arbiter.handle(call, owner: owner, result: result)
+    arbiter.handle(call, owner: owner, rebindBridge: rebindBridge, result: result)
   }
 }

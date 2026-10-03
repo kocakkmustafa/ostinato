@@ -16,6 +16,11 @@ analyzer:
     # not part of the app. Without this exclude, `flutter analyze` descends
     # into it and reports its unrelated MIDI-plugin errors as app issues.
     - tools/midi_spike/**
+    # Vendored examples/tests/Pigeon generators have their own dev dependencies.
+    # Analyze their shipped lib code here; native vendor suites are separate.
+    - third_party/video_player_permit/**/example/**
+    - third_party/video_player_permit/**/test/**
+    - third_party/video_player_permit/**/pigeons/**
     - build/**
     - android/**
     - ios/**

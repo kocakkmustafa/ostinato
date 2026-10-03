@@ -32,6 +32,7 @@ void main() {
     expect(await owner.close(), isFalse);
     expect(owner.blocked, isTrue);
     expect(port.videoDisposeCalls, 1);
+    expect(port.videoDisposeConfirmations, [false]);
     expect((await port.readAllAudioState()).allClear, isFalse);
     player.disposal.complete();
     await Future<void>.delayed(Duration.zero);
@@ -40,5 +41,10 @@ void main() {
       PracticeAudioSide.video,
     );
     expect(await owner.close(), isFalse);
+    expect(
+      await owner.recover(),
+      PracticeVideoRecoveryStatus.blockedUnconfirmed,
+    );
+    expect(port.videoDisposeConfirmations, [false]);
   });
 }

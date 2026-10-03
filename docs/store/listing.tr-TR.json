@@ -19,7 +19,8 @@
   "$coursePreparation20260926": {
     "status": "local_content_preparation_not_provider_readback_or_release_acceptance",
     "asset": "assets/content/guitar_journey.v1.json",
-    "sha256": "e4cbc8aef48721ac0f4b10002f9b0cd377773510db2d9d45443b43e6de85e0d9",
+    "sha256": "bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18",
+    "sourceReadbackDate": "2026-10-02",
     "lessonCount": 60,
     "moduleCount": 10,
     "mediaIncluded": false,

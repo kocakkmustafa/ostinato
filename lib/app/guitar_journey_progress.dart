@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 import 'account_data_directory.dart';
+import 'account_data_operations.dart';
 
 /// A record of user actions, never a claim that pitch, technique or health was
 /// measured. Version is carried per record so revised content cannot inherit
@@ -57,22 +58,29 @@ final class GuitarLessonProgress {
 enum GuitarProgressAction { viewed, practiced, selfReportedCompleted }
 
 final class GuitarJourneyProgressStore {
-  const GuitarJourneyProgressStore({
-    this.directoryProvider,
-    this.accountUserId,
-  });
+  GuitarJourneyProgressStore({this.directoryProvider, this.accountUserId})
+    : _operations = AccountDataOperations(() async {
+        final root =
+            await (directoryProvider ?? getApplicationSupportDirectory)();
+        return accountDataDirectory(root, accountUserId);
+      });
 
   final Future<Directory> Function()? directoryProvider;
   final String? accountUserId;
+  final AccountDataOperations _operations;
 
-  Future<File> _file() async {
-    final root = await (directoryProvider ?? getApplicationSupportDirectory)();
-    final account = accountDataDirectory(root, accountUserId);
-    return File('${account.path}/guitar_journey_progress.v1.json');
-  }
+  Future<T> _run<T>(
+    Future<T> Function(File file) operation, {
+    bool writing = false,
+  }) => _operations.run(
+    (directory) =>
+        operation(File('${directory.path}/guitar_journey_progress.v1.json')),
+    writing: writing,
+  );
 
-  Future<Map<String, GuitarLessonProgress>> load() async {
-    final file = await _file();
+  Future<Map<String, GuitarLessonProgress>> load() => _run(_load);
+
+  Future<Map<String, GuitarLessonProgress>> _load(File file) async {
     if (!await file.exists()) return {};
     final decoded =
         jsonDecode(await file.readAsString()) as Map<String, dynamic>;
@@ -101,11 +109,14 @@ final class GuitarJourneyProgressStore {
     required String contentVersion,
     required GuitarProgressAction action,
     DateTime? at,
-  }) async {
-    if (lessonId.isEmpty || contentVersion.isEmpty || lessonId.contains('|')) {
+  }) => _run((file) async {
+    if (lessonId.isEmpty ||
+        contentVersion.isEmpty ||
+        lessonId.contains('|') ||
+        contentVersion.contains('|')) {
       throw ArgumentError('Invalid course progress identity');
     }
-    final records = await load();
+    final records = await _load(file);
     final key = '$contentVersion|$lessonId';
     final old =
         records[key] ??
@@ -136,7 +147,6 @@ final class GuitarJourneyProgressStore {
           : old.selfReportedCompletedAt,
     );
     records[key] = next;
-    final file = await _file();
     await file.parent.create(recursive: true);
     final temp = File('${file.path}.tmp');
     await temp.writeAsString(
@@ -145,5 +155,5 @@ final class GuitarJourneyProgressStore {
     );
     await temp.rename(file.path);
     return next;
-  }
+  }, writing: true);
 }

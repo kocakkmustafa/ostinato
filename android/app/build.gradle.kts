@@ -111,6 +111,14 @@ android {
             }
         }
     }
+    // Robolectric 4.17 on JDK 25 needs this export in the unit-test worker.
+    testOptions {
+        unitTests {
+            all {
+                it.jvmArgs("--add-exports=java.base/jdk.internal.access=ALL-UNNAMED")
+            }
+        }
+    }
 }
 
 kotlin {
@@ -170,5 +178,8 @@ flutter {
 
 dependencies {
     // Pure JVM capture-state fakes; no Android microphone or device required.
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13.2")
+    // The channel/vendor integration tests exercise the real plugin on a JVM looper.
+    testImplementation("org.mockito:mockito-core:5.23.0")
+    testImplementation("org.robolectric:robolectric:4.17")
 }

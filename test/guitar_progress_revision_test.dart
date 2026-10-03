@@ -98,7 +98,10 @@ void main() {
     expect(find.textContaining('earlier version'), findsOneWidget);
     final viewed = find.text('Mark viewed');
     await tester.ensureVisible(viewed);
-    await tester.tap(viewed);
+    await tester.runAsync(() async {
+      await tester.tap(viewed);
+      await store.load();
+    });
     await tester.pumpAndSettle();
     Map<String, GuitarLessonProgress>? records;
     final newKey =

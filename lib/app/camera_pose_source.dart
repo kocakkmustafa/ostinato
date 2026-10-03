@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart' show AppLifecycleState;
 import 'package:motion_camera/motion_camera.dart';
 import 'package:motion_core/motion_core.dart' as core;
 import 'package:ostinato_posture/ostinato_posture.dart';
@@ -24,10 +26,35 @@ import 'pose_model.dart';
 /// Gravita'nın arka-kamera seçiminden farklı (o, yerde farklı bir kurulum).
 /// Cihaz günü gerçek kullanımla sınanmadan kesin sayılmaz.
 final class CameraPoseSource implements PoseSource {
-  CameraPoseSource({MotionCameraController? controller})
-      : _camera = controller ?? MotionCameraController();
+  CameraPoseSource({
+    MotionCameraController? controller,
+    CameraModelPathResolver? resolveModelPath,
+    CameraPermissionRequest? requestPermission,
+    ValueListenable<AppLifecycleState>? lifecycle,
+  }) : _camera = controller ?? processCameraController,
+       _resolveModelPath = resolveModelPath ?? PoseModelPin.resolveFilePath,
+       _requestPermission = requestPermission,
+       _lifecycle = lifecycle {
+    _owner = registerCameraOwner(_camera, lifecycle: _lifecycle);
+  }
 
   final MotionCameraController _camera;
+  final CameraModelPathResolver _resolveModelPath;
+  final CameraPermissionRequest? _requestPermission;
+  final ValueListenable<AppLifecycleState>? _lifecycle;
+  late final CameraCaptureOwner _owner;
+
+  @visibleForTesting
+  CameraCaptureLease get captureLease => _owner.lease;
+
+  bool get canObserveFrames => !_stopRequested && !_disposed && _owner.canObserveFrames;
+  bool get canObserveStatus => !_stopRequested && !_disposed && _owner.isContextCurrent;
+
+  @visibleForTesting
+  bool get hasFrameListeners => _frames.hasListener;
+
+  @visibleForTesting
+  bool get hasStatusListeners => _status.hasListener;
   final CameraPostureAdapter _adapter = CameraPostureAdapter();
 
   final StreamController<PoseFrame> _frames =
@@ -36,7 +63,14 @@ final class CameraPoseSource implements PoseSource {
       StreamController<SurfaceState>.broadcast();
 
   StreamSubscription<CameraFrameEnvelope>? _sub;
-  bool _running = false;
+  bool _stopRequested = false;
+  bool _disposed = false;
+  Future<void>? _lastStart;
+  Future<void>? _stopFuture;
+  Future<void>? _disposeFuture;
+
+  @visibleForTesting
+  Future<void>? get startSettlementForTesting => _lastStart;
 
   @override
   Stream<PoseFrame> get frames => _frames.stream;
@@ -45,31 +79,36 @@ final class CameraPoseSource implements PoseSource {
   Stream<SurfaceState> get status => _status.stream;
 
   @override
-  Future<void> start() async {
+  Future<void> start() {
+    return _lastStart ??= _start();
+  }
+
+  Future<void> _start() async {
     final CameraStartResult result = await requestAndStartCamera(
-      _camera,
-      modelPath: await PoseModelPin.resolveFilePath(),
+      _owner,
+      resolveModelPath: _resolveModelPath,
       modelId: PoseModelPin.modelId,
+      requestPermission: _requestPermission,
     );
     switch (result) {
-      case CameraStartFailed(:final SurfaceState state):
-        _status.add(state);
+      case CameraStartFailed():
+        _publishFailure();
         return;
       case CameraStarted(:final CameraSessionInfo info):
-        _running = true;
+        if (!canObserveFrames) return;
         final core.FrameSize size = core.FrameSize(info.width, info.height);
-        _sub = _camera.frames().listen(
+        _sub = _owner.lease.frames().listen(
           (CameraFrameEnvelope e) => _onEnvelope(e, size),
           onError: (Object err) {
-            _status.add(err is CameraException
-                ? cameraFailureState(err.failure)
-                : SetupFailed('unexpected: $err'));
+            _owner.failTransport(err);
+            _publishFailure();
           },
         );
     }
   }
 
   void _onEnvelope(CameraFrameEnvelope e, core.FrameSize size) {
+    if (!canObserveFrames) return;
     // uprightOnly planı bu geçişi HER zaman çalıştırır; olmaması planlama
     // hatası olurdu (CameraFrameEnvelope.pass kendi StateError'ünü fırlatır) —
     // kare-başına sessizce atlanır, ders çökmez.
@@ -85,30 +124,42 @@ final class CameraPoseSource implements PoseSource {
   }
 
   @override
-  Future<void> stop() async {
-    await _sub?.cancel();
+  Future<void> stop() {
+    if (_stopFuture != null) return _stopFuture!;
+    _stopRequested = true;
+    _owner.retire();
+    final Future<void> closing = _finishStop();
+    _stopFuture = closing;
+    observeCameraWork(closing);
+    return closing;
+  }
+
+  Future<void> _finishStop() async {
+    final StreamSubscription<CameraFrameEnvelope>? sub = _sub;
     _sub = null;
-    if (_running) {
-      _running = false;
-      try {
-        // O-076: süreç-geneli kapanış kilidine kaydet (bu yol `await`
-        // edebiliyor, ama kayıt yine de gerekli — `dispose()` yolundan
-        // gelen çağrı bekleyemiyor).
-        releaseCamera(_camera);
-        await _camera.stop();
-      } on Object {
-        // Durdurmada arıza kullanıcıyı ilgilendirmez: oturum zaten bitiyor
-        // (Gravita deseni, live_session_screen.dart `_stop()`).
-      }
-    }
+    await Future.wait<void>(<Future<void>>[
+      _owner.close(),
+      if (sub != null) sub.cancel(),
+    ]);
     _adapter.reset();
   }
 
-  /// Test/harness kolaylığı — `FakePoseSource.dispose()` ile aynı şekil.
-  /// Üretim yolu (main.dart) bunu çağırmaz; `PostureScreen.dispose()`
-  /// yalnız `stop()` çağırır (var olan aile deseni, değiştirilmedi).
-  Future<void> dispose() async {
-    await _frames.close();
-    await _status.close();
+  void _publishFailure() {
+    if (!canObserveStatus || _status.isClosed) return;
+    final SurfaceState? failure = _owner.takeFailure();
+    if (failure != null) _status.add(failure);
+  }
+
+  Future<void> dispose() {
+    _disposed = true;
+    return _disposeFuture ??= _dispose();
+  }
+
+  Future<void> _dispose() async {
+    try {
+      await stop();
+    } finally {
+      await Future.wait<void>(<Future<void>>[_frames.close(), _status.close()]);
+    }
   }
 }

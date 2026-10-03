@@ -65,6 +65,11 @@ jobs:
       - name: Gitar kursu paket bütünlüğü
         run: dart run tool/build_guitar_integrity_manifest.dart --check
 
+      - name: Gizlilik beyanı ve kanıt özeti
+        run: |
+          python3 -m unittest discover -s tools -p 'test_validate_privacy_manifest.py'
+          python3 tools/validate_privacy_manifest.py
+
       - name: Alt paket test bağımlılıkları
         run: |
           (cd packages/ostinato_audio && dart pub get)

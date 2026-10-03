@@ -10,6 +10,7 @@ internal class PracticeAudioArbiterChannel(
   private val binding: PracticeAudioArbiter.Binding,
 ) : MethodChannel.MethodCallHandler {
   private var channel: MethodChannel? = null
+  @Volatile
   private var retired = false
 
   fun register(engine: FlutterEngine) {
@@ -18,10 +19,11 @@ internal class PracticeAudioArbiterChannel(
       .apply { setMethodCallHandler(this@PracticeAudioArbiterChannel) }
   }
 
-  fun retire() {
+  /** The binding's exact registry claim decides whether physical clear is safe. */
+  fun retire(clearHandler: Boolean) {
     if (retired) return
     retired = true
-    channel?.setMethodCallHandler(null)
+    if (clearHandler) channel?.setMethodCallHandler(null)
     channel = null
   }
 
@@ -42,6 +44,39 @@ internal class PracticeAudioArbiterChannel(
         "readAllAudioState" -> {
           exact(args, "ownerToken", "engineGeneration")
           result.success(arbiter.readAllAudioState(binding, token(args), number(args, "engineGeneration")))
+        }
+        "rebindQuiescentOwner" -> {
+          exact(args, "retiredOwnerToken", "retiredEngineGeneration", "reason")
+          if (string(args, "reason") != "userRetry") {
+            throw PracticeAudioArbiter.AudioFault("bad_args")
+          }
+          val retiredToken = string(args, "retiredOwnerToken")
+          val retiredGeneration = number(args, "retiredEngineGeneration")
+          val before = arbiter.quiescentOwnerHandoff(binding, retiredToken, retiredGeneration)
+          val engine = binding.engine as? FlutterEngine
+            ?: throw PracticeAudioArbiter.AudioFault("video_bridge_unavailable")
+          val install = VendorVideoPermitBridge.installForEngine(engine, binding, arbiter)
+          if (install != VendorVideoPermitBridge.InstallResult.INSTALLED &&
+              install != VendorVideoPermitBridge.InstallResult.REBOUND) {
+            throw PracticeAudioArbiter.AudioFault("video_bridge_unavailable")
+          }
+          val after = arbiter.quiescentOwnerHandoff(binding, retiredToken, retiredGeneration)
+          val first = before["snapshot"] as? Map<*, *>
+            ?: throw PracticeAudioArbiter.AudioFault("quiescent_handoff_changed")
+          val second = after["snapshot"] as? Map<*, *>
+            ?: throw PracticeAudioArbiter.AudioFault("quiescent_handoff_changed")
+          if (before["retiredOwnerToken"] != after["retiredOwnerToken"] ||
+              before["retiredEngineGeneration"] != after["retiredEngineGeneration"] ||
+              before["retiredContextGeneration"] != after["retiredContextGeneration"] ||
+              before["retiredStateRevision"] != after["retiredStateRevision"] ||
+              first != second || second["allClear"] != true) {
+            throw PracticeAudioArbiter.AudioFault("quiescent_handoff_changed")
+          }
+          result.success(mapOf(
+            "schemaVersion" to 1,
+            "bridgeReady" to true,
+            "handoff" to after,
+          ))
         }
         "reserve" -> {
           exact(args, "ownerToken", "engineGeneration", "contextGeneration", "leaseId", "side")
@@ -73,6 +108,55 @@ internal class PracticeAudioArbiterChannel(
             number(args, "engineGeneration"), number(args, "contextGeneration"),
             string(args, "leaseId"), number(args, "leaseGeneration"),
             args["confirmed"] as? Boolean ?: throw PracticeAudioArbiter.AudioFault("bad_args")))
+        }
+        "completeRetiredVideoDispose" -> {
+          exact(args, "ownerToken", "engineGeneration", "contextGeneration", "leaseId",
+            "leaseGeneration", "confirmed")
+          result.success(arbiter.completeRetiredVideoDispose(binding, token(args),
+            number(args, "engineGeneration"), number(args, "contextGeneration"),
+            string(args, "leaseId"), number(args, "leaseGeneration"),
+            args["confirmed"] as? Boolean ?: throw PracticeAudioArbiter.AudioFault("bad_args")))
+        }
+        "readVideoDisposeReceipt" -> {
+          exact(args, "ownerToken", "engineGeneration", "contextGeneration", "leaseId",
+            "leaseGeneration")
+          result.success(arbiter.readVideoDisposeReceipt(binding, token(args),
+            number(args, "engineGeneration"), number(args, "contextGeneration"),
+            string(args, "leaseId"), number(args, "leaseGeneration")))
+        }
+        "rebindVideoPermitBridge" -> {
+          exact(args, "ownerToken", "engineGeneration", "contextGeneration", "leaseId",
+            "leaseGeneration")
+          val originalToken = token(args)
+          val originalEngine = number(args, "engineGeneration")
+          val originalContext = number(args, "contextGeneration")
+          val originalId = string(args, "leaseId")
+          val originalLease = number(args, "leaseGeneration")
+          val before = arbiter.readVideoDisposeReceipt(binding, originalToken,
+            originalEngine, originalContext, originalId, originalLease)
+          if (before["ackStatus"] != "RECORDED" ||
+              before["nativeReleaseRecorded"] != true ||
+              before["leaseSettled"] != true ||
+              (before["snapshot"] as? Map<*, *>)?.get("allClear") != true) {
+            throw PracticeAudioArbiter.AudioFault("video_handoff_pending")
+          }
+          val engine = binding.engine as? FlutterEngine
+            ?: throw PracticeAudioArbiter.AudioFault("video_bridge_unavailable")
+          val install = VendorVideoPermitBridge.installForEngine(engine, binding, arbiter)
+          if (install != VendorVideoPermitBridge.InstallResult.INSTALLED &&
+              install != VendorVideoPermitBridge.InstallResult.REBOUND) {
+            throw PracticeAudioArbiter.AudioFault("video_bridge_unavailable")
+          }
+          val after = arbiter.readVideoDisposeReceipt(binding, originalToken,
+            originalEngine, originalContext, originalId, originalLease)
+          if (after["ackStatus"] != "RECORDED" ||
+              after["nativeReleaseRecorded"] != true ||
+              after["leaseSettled"] != true ||
+              (after["snapshot"] as? Map<*, *>)?.get("allClear") != true) {
+            throw PracticeAudioArbiter.AudioFault("video_handoff_changed")
+          }
+          result.success(mapOf("schemaVersion" to 1,
+            "bridgeReady" to true, "ack" to after))
         }
         "cancelVideoReservation" -> {
           exact(args, "ownerToken", "engineGeneration", "contextGeneration", "leaseId",

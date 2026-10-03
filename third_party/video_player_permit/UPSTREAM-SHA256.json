@@ -1,0 +1,1637 @@
+{
+  "packages": [
+    {
+      "bytes": 11342667,
+      "fileCount": 111,
+      "files": [
+        {
+          "bytes": 2634,
+          "path": "AUTHORS",
+          "sha256": "e166ea6f02885adcc88d4785d197217989a3fa7ff4655cd5e6de24f899592d96"
+        },
+        {
+          "bytes": 19795,
+          "path": "CHANGELOG.md",
+          "sha256": "18b657ff738a84a5328474d0e67286b149275f0030fa8aac8ea853fd301dbdd4"
+        },
+        {
+          "bytes": 1497,
+          "path": "LICENSE",
+          "sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d"
+        },
+        {
+          "bytes": 6269,
+          "path": "README.md",
+          "sha256": "4d07cac7b4e63760bf1bc28d78a733811ded1c99f391bf42bbbb290f4f1d6400"
+        },
+        {
+          "bytes": 6139170,
+          "path": "doc/demo_ipod.gif",
+          "sha256": "22a74fe98da279953a2f80b925475e07cb00306ccb5c790c619adcdffb69dd3e"
+        },
+        {
+          "bytes": 73,
+          "path": "example/README.md",
+          "sha256": "09a3999257d7f0382f020e861e107c71daa2573c77bd98ea7a8f3e11f00930af"
+        },
+        {
+          "bytes": 1905,
+          "path": "example/android/app/build.gradle",
+          "sha256": "2f391bf950207f63cc6130acfdfacaa1f160fafd1935a3c927e25009b661d715"
+        },
+        {
+          "bytes": 223,
+          "path": "example/android/app/gradle/wrapper/gradle-wrapper.properties",
+          "sha256": "52de8e8f102fc846e89fceeeb759640f37b15e280619bc84470a3b952d614ddf"
+        },
+        {
+          "bytes": 728,
+          "path": "example/android/app/src/androidTest/java/io/flutter/plugins/DartIntegrationTest.java",
+          "sha256": "70e12e4cd073acfa3dd16c630699942e3ab94f0d35364b32efbcc2c76de00902"
+        },
+        {
+          "bytes": 652,
+          "path": "example/android/app/src/androidTest/java/io/flutter/plugins/videoplayerexample/FlutterActivityTest.java",
+          "sha256": "836891a5ca584b2e57f7a0966747b6ad8c40905e2c1396bb4b8676018fb76acc"
+        },
+        {
+          "bytes": 924,
+          "path": "example/android/app/src/main/AndroidManifest.xml",
+          "sha256": "35ec0164783ebc44909c5f1dc3061f14c51e057877dfcd4fbf19f2cef125c02c"
+        },
+        {
+          "bytes": 434,
+          "path": "example/android/app/src/main/res/drawable/launch_background.xml",
+          "sha256": "94433756fe10005ddd6fc55cc5c0b1e9f3c10b66a08ceac795ece6713d34e28a"
+        },
+        {
+          "bytes": 544,
+          "path": "example/android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+          "sha256": "6a7c8f0d703e3682108f9662f813302236240d3f8f638bb391e32bfb96055fef"
+        },
+        {
+          "bytes": 442,
+          "path": "example/android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+          "sha256": "c7c0c0189145e4e32a401c61c9bdc615754b0264e7afae24e834bb81049eaf81"
+        },
+        {
+          "bytes": 721,
+          "path": "example/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+          "sha256": "e14aa40904929bf313fded22cf7e7ffcbf1d1aac4263b5ef1be8bfce650397aa"
+        },
+        {
+          "bytes": 1031,
+          "path": "example/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+          "sha256": "4d470bf22d5c17d84edc5f82516d1ba8a1c09559cd761cefb792f86d9f52b540"
+        },
+        {
+          "bytes": 1443,
+          "path": "example/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+          "sha256": "3c34e1f298d0c9ea3455d46db6b7759c8211a49e9ec6e44b635fc5c87dfb4180"
+        },
+        {
+          "bytes": 236,
+          "path": "example/android/app/src/main/res/values/styles.xml",
+          "sha256": "c3d480f67850784b24c4991ef723b51270a184a001d23681c26a81cafca1d52e"
+        },
+        {
+          "bytes": 302,
+          "path": "example/android/app/src/main/res/xml/network_security_config.xml",
+          "sha256": "350fa4773f0d04e304a1f9694004fa9273e87018972cacf790b5c6a817b67d63"
+        },
+        {
+          "bytes": 700,
+          "path": "example/android/build.gradle",
+          "sha256": "f68c254c38eb2469e0f5bc80c2f085a0cccd3409082a4155960115d64e03383e"
+        },
+        {
+          "bytes": 233,
+          "path": "example/android/gradle/wrapper/gradle-wrapper.properties",
+          "sha256": "7f1ddaf30a25ea2c8b0677dd08f382665111bbe2c15223ac77a1b3fe8d647790"
+        },
+        {
+          "bytes": 51,
+          "path": "example/android/gradle.properties",
+          "sha256": "d9dee78fe96651a3552d9084b0e9fa91b8a8889af91f9a39cb7a7becc1cfd547"
+        },
+        {
+          "bytes": 947,
+          "path": "example/android/settings.gradle",
+          "sha256": "fb4e94669ce6d1abd818a9e1e63b19477d96ff94315ab48f978ed4346efbba17"
+        },
+        {
+          "bytes": 121715,
+          "path": "example/assets/Audio.mp3",
+          "sha256": "c0d515701793564cd80649c10d5f3b85c24ceb5471a29e8a898b9716921f95c5"
+        },
+        {
+          "bytes": 2429896,
+          "path": "example/assets/Butterfly-209.mp4",
+          "sha256": "c78f3f9d3e4834a91e83a0fb0fd005348354329ea58443f4156407b5f6d80413"
+        },
+        {
+          "bytes": 2113335,
+          "path": "example/assets/Butterfly-209.webm",
+          "sha256": "23351f153ed19b911e91123c54477912a1e23dea9502b2e5beb095afa329380f"
+        },
+        {
+          "bytes": 96,
+          "path": "example/assets/bumble_bee_captions.srt",
+          "sha256": "4cba64b83311d47734ce4a1cf90f1cb8b989064784592b875bf37a00aabd0e22"
+        },
+        {
+          "bytes": 100,
+          "path": "example/assets/bumble_bee_captions.vtt",
+          "sha256": "2e346cac1b7bb729bf1be96fcaa760f706c37023f767be39e192a81f55ba17b8"
+        },
+        {
+          "bytes": 482,
+          "path": "example/assets/flutter-mark-square-64.png",
+          "sha256": "f416b0d8ac552ec8819d1f492d1ab5e6d4f20cf45db47c227bb431fefb5b67b2"
+        },
+        {
+          "bytes": 2971,
+          "path": "example/integration_test/controller_swap_test.dart",
+          "sha256": "051cad1ddfc1a3855e9da4987f1c7ead7e5f32940f251bd2d5dbe846ecba3393"
+        },
+        {
+          "bytes": 14158,
+          "path": "example/integration_test/video_player_test.dart",
+          "sha256": "1c52e56106cb157f1e26324c53ebff56c6adbf191bd579fabe218a8b87e58fcc"
+        },
+        {
+          "bytes": 774,
+          "path": "example/ios/Flutter/AppFrameworkInfo.plist",
+          "sha256": "91b8d35bd9c88b43ae0eac8348f9b57d2f3e209a4500e6516b18b459b7e3f2be"
+        },
+        {
+          "bytes": 107,
+          "path": "example/ios/Flutter/Debug.xcconfig",
+          "sha256": "690b8a8b1ae15ddd29b241429963e971bbc6720ab22f154cf8cf6b085b6d4925"
+        },
+        {
+          "bytes": 109,
+          "path": "example/ios/Flutter/Release.xcconfig",
+          "sha256": "75abb819a9de1e0e41c835e7307bc64a506cac25a9a5c0b0d8253fa1c3d5d422"
+        },
+        {
+          "bytes": 1332,
+          "path": "example/ios/Podfile",
+          "sha256": "bb1d30e9cc67318ac92fe93440db6d8fa257f4bbc4af43906c07224c71fc8824"
+        },
+        {
+          "bytes": 534,
+          "path": "example/ios/Runner/AppDelegate.swift",
+          "sha256": "0bf5b60817ccc624e6699c580f78bc21ccfca658e9062d842ec10d968bf33ff2"
+        },
+        {
+          "bytes": 2376,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+          "sha256": "48d67c2eb89bf6bb3e7536011cecfa15012d69b101a56435e27a6aa87c86c8d9"
+        },
+        {
+          "bytes": 564,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png",
+          "sha256": "5925dab509451f9ecbb12ce8a625f9d4c104718ee20caff8b1b51032d1cd8946"
+        },
+        {
+          "bytes": 1283,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png",
+          "sha256": "c4d9a284c12301d0f50e248ec53ed51a19a10147b774b23308399250b0d44c55"
+        },
+        {
+          "bytes": 1588,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png",
+          "sha256": "bf97f9d3233f33e1389b09f7b8add53741300cb834d6c7a5ca32cbed363a4fb2"
+        },
+        {
+          "bytes": 1025,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png",
+          "sha256": "285442f69a06b45d9d79df80321815b546473548a37b78819b68959c7b8ed237"
+        },
+        {
+          "bytes": 1716,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png",
+          "sha256": "2ab64af8ac727ea99c6ab9eaff847f46fbf2a9a0a78a0abcbf3180f3851645b4"
+        },
+        {
+          "bytes": 1920,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png",
+          "sha256": "9dca09f4e5ed5684d3c4dff41f4e8b7cb864b438172d72be069315fa362930f9"
+        },
+        {
+          "bytes": 1283,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png",
+          "sha256": "c4d9a284c12301d0f50e248ec53ed51a19a10147b774b23308399250b0d44c55"
+        },
+        {
+          "bytes": 1895,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png",
+          "sha256": "d5ad04de321ef37cacc5a7b960afcce71bdcb96fa020c48249c1545dd1a0f497"
+        },
+        {
+          "bytes": 2665,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png",
+          "sha256": "809abfe75c440770c13c4e2e46d09603c22053e9d4e0e2275dcb9c1dcfbb2c75"
+        },
+        {
+          "bytes": 2665,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png",
+          "sha256": "809abfe75c440770c13c4e2e46d09603c22053e9d4e0e2275dcb9c1dcfbb2c75"
+        },
+        {
+          "bytes": 3831,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png",
+          "sha256": "3db08cb79e7b01b9e81f956e3a0ae10148d0fafde3ea7aa70048df905aa52cfd"
+        },
+        {
+          "bytes": 1888,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png",
+          "sha256": "23c13d463f5dca5c1f14a14934003601c29f1218fd461016d8a22cef579a665f"
+        },
+        {
+          "bytes": 3294,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png",
+          "sha256": "6db7726530d71d3f52cb59793eb691313baa04796e129e1e043c0a58a1bffd2f"
+        },
+        {
+          "bytes": 3612,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png",
+          "sha256": "cee565f5e62116569b64980b209fd5ca4b3d3739011f5343250b33a1a2c6eb65"
+        },
+        {
+          "bytes": 391,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json",
+          "sha256": "ccc7950fd5f5b82067c85f667940a9d59189151460761ece8098ca78daa19469"
+        },
+        {
+          "bytes": 68,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png",
+          "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+        },
+        {
+          "bytes": 68,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png",
+          "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+        },
+        {
+          "bytes": 68,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png",
+          "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+        },
+        {
+          "bytes": 336,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md",
+          "sha256": "a985b626c4f7546a8ba392d135e9226c3547c8e2b46895f5f2bdf40d7b14ef9f"
+        },
+        {
+          "bytes": 2377,
+          "path": "example/ios/Runner/Base.lproj/LaunchScreen.storyboard",
+          "sha256": "857e61203b3deafb05766d8fcda898b86a7cb6f3d5e385ecc9926c4d698215e9"
+        },
+        {
+          "bytes": 1605,
+          "path": "example/ios/Runner/Base.lproj/Main.storyboard",
+          "sha256": "fd367b6c43006d61b730f674970dd48b9f662c8f2264e52ffc1558102a2c9f2d"
+        },
+        {
+          "bytes": 1765,
+          "path": "example/ios/Runner/Info.plist",
+          "sha256": "f3ad67bd99fcff1efdbd003b059305ae798858166d82dfe8b83ea9e1a168beec"
+        },
+        {
+          "bytes": 181,
+          "path": "example/ios/Runner/Runner-Bridging-Header.h",
+          "sha256": "05b96b30059e613dae35195e44e89843f1d5bf9e801165c87b8da12cd1cdc132"
+        },
+        {
+          "bytes": 24559,
+          "path": "example/ios/Runner.xcodeproj/project.pbxproj",
+          "sha256": "df7e2267d94ed441e66d55d311222cbaa41e545b14d8abfa688100401b82c792"
+        },
+        {
+          "bytes": 135,
+          "path": "example/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+          "sha256": "7f3b00b5c3fdb45242d7b87e1e5c4e25d1fa8129a16c94295ecc4e8ea2235c5f"
+        },
+        {
+          "bytes": 238,
+          "path": "example/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+          "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+        },
+        {
+          "bytes": 226,
+          "path": "example/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings",
+          "sha256": "11b247bc6796892d67c9a821d18604db4dd6a880981b34f38460b9866e6b247f"
+        },
+        {
+          "bytes": 4717,
+          "path": "example/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme",
+          "sha256": "9fbce429f56243561dd437a527136c9f9ed77165e3b271b923faf236cfcd0484"
+        },
+        {
+          "bytes": 224,
+          "path": "example/ios/Runner.xcworkspace/contents.xcworkspacedata",
+          "sha256": "465e6de5660384eb6832e8078920ba6cd5305c445cb29a24a86a2fda4aa6b67e"
+        },
+        {
+          "bytes": 238,
+          "path": "example/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+          "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+        },
+        {
+          "bytes": 226,
+          "path": "example/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings",
+          "sha256": "11b247bc6796892d67c9a821d18604db4dd6a880981b34f38460b9866e6b247f"
+        },
+        {
+          "bytes": 10900,
+          "path": "example/lib/audio_tracks_demo.dart",
+          "sha256": "91e0d8d7e3924084a38ab74db4714c922d30b76bb3a9379fcd396163707eb4d5"
+        },
+        {
+          "bytes": 2161,
+          "path": "example/lib/basic.dart",
+          "sha256": "b1efa751c5d1ce760b255dd6e23db655a148ca933473cd8a5a198248fc09dff0"
+        },
+        {
+          "bytes": 15441,
+          "path": "example/lib/main.dart",
+          "sha256": "0c31b3caf79d0ad337035d059afbfa64a29914d9d7f6876841dccbf57bf51a7e"
+        },
+        {
+          "bytes": 125,
+          "path": "example/macos/Flutter/Flutter-Debug.xcconfig",
+          "sha256": "802714a37a8fd3065fb3d8e21cbcfbb3147c7ad25f25934b64590085aa9f5b28"
+        },
+        {
+          "bytes": 127,
+          "path": "example/macos/Flutter/Flutter-Release.xcconfig",
+          "sha256": "d575f436f8bab30d7096792396e73b65db242edc01913c4123d2c29e713b3a6d"
+        },
+        {
+          "bytes": 1307,
+          "path": "example/macos/Podfile",
+          "sha256": "d7926c622d581173155014a3589e4ce6e99d4c9761439a0f2f4875ac317907b9"
+        },
+        {
+          "bytes": 454,
+          "path": "example/macos/Runner/AppDelegate.swift",
+          "sha256": "27e9456c290383e23997207bea974494267734b78e0d2b6373e274808cc2b937"
+        },
+        {
+          "bytes": 1291,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+          "sha256": "bc6ba8105ca69651aeeb77358851590de295dca04681a1d58c0f449641c242f3"
+        },
+        {
+          "bytes": 102994,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png",
+          "sha256": "6232e5815af17e25e0268b2fec7aea9e068cc92ec709e9605c2b31df4ff2a313"
+        },
+        {
+          "bytes": 5680,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png",
+          "sha256": "15591f03f31313af6fd644ed0512106cc04365130b8b73244f1cfa6dddfb4400"
+        },
+        {
+          "bytes": 520,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png",
+          "sha256": "cc6928b5adfc00dbf526192e2705dd9af641cdf20ab4c6c7ca7cd4936dca59f0"
+        },
+        {
+          "bytes": 14142,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png",
+          "sha256": "416efd77cde932d42ef34168da24dd428a495b1f4f34bbbd125a18d2add186a2"
+        },
+        {
+          "bytes": 1066,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png",
+          "sha256": "ae8c4458e41f1e28b1e851ed87d3268d4a0351ceea427fa2a84cc94ddfb6d4c5"
+        },
+        {
+          "bytes": 36406,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png",
+          "sha256": "0a91c6c1bf242e54ee179e34629e9ef3e8a6d286c0fce01e302280a8be9277e6"
+        },
+        {
+          "bytes": 2218,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png",
+          "sha256": "6ad229623498e5f1277800db3ab7cb11faf85eb2569e1213f7d8e55003c07b42"
+        },
+        {
+          "bytes": 23729,
+          "path": "example/macos/Runner/Base.lproj/MainMenu.xib",
+          "sha256": "be9e9ef8469d3262370e0f0b855ed163cbf9c8362c59e330b2ffe63b86fa42f4"
+        },
+        {
+          "bytes": 650,
+          "path": "example/macos/Runner/Configs/AppInfo.xcconfig",
+          "sha256": "d4b72f4b9c6752d465355dee6e3422b9c8c47890ee76700cacb795be4e99ff07"
+        },
+        {
+          "bytes": 77,
+          "path": "example/macos/Runner/Configs/Debug.xcconfig",
+          "sha256": "8067d533ef6593760baad9a9855a786a7a77470fcc3f0925ec04fe43bc1ac4b0"
+        },
+        {
+          "bytes": 79,
+          "path": "example/macos/Runner/Configs/Release.xcconfig",
+          "sha256": "7a6a4b4d973a23052fa0a0388dd261e32d311d7b66ba1bfc3b914b361808ac61"
+        },
+        {
+          "bytes": 580,
+          "path": "example/macos/Runner/Configs/Warnings.xcconfig",
+          "sha256": "0e341a392b16ad302d12890aa3dac9257a6c10ece685437604259a85341645a3"
+        },
+        {
+          "bytes": 403,
+          "path": "example/macos/Runner/DebugProfile.entitlements",
+          "sha256": "5322f4decc6fff6056dde0f238c69c4a65a6d88e260c7437e22bf08e2329aa48"
+        },
+        {
+          "bytes": 1060,
+          "path": "example/macos/Runner/Info.plist",
+          "sha256": "f253e89c512b3a9a81bc5cdd7a14bf932470f835f261654a808ea4549cd94aad"
+        },
+        {
+          "bytes": 531,
+          "path": "example/macos/Runner/MainFlutterWindow.swift",
+          "sha256": "7f285f35a25f14583f623229a1272ccb792c175d779e801b3a6e45254d45297d"
+        },
+        {
+          "bytes": 295,
+          "path": "example/macos/Runner/Release.entitlements",
+          "sha256": "b043dea477bbd5da1552ef2f436a0cb644b884bb2568a9f831bd4ee362f9e99b"
+        },
+        {
+          "bytes": 27457,
+          "path": "example/macos/Runner.xcodeproj/project.pbxproj",
+          "sha256": "645239fbab00a8f1957e68e263bb380e9747db99f184cd0aa5200dea664d87fd"
+        },
+        {
+          "bytes": 238,
+          "path": "example/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+          "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+        },
+        {
+          "bytes": 5159,
+          "path": "example/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme",
+          "sha256": "64fe92a7ef17cbaf846135d474649cda27632a52bfe75b3686f93d27d0f9ed50"
+        },
+        {
+          "bytes": 224,
+          "path": "example/macos/Runner.xcworkspace/contents.xcworkspacedata",
+          "sha256": "465e6de5660384eb6832e8078920ba6cd5305c445cb29a24a86a2fda4aa6b67e"
+        },
+        {
+          "bytes": 238,
+          "path": "example/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+          "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+        },
+        {
+          "bytes": 947,
+          "path": "example/pubspec.yaml",
+          "sha256": "7142010c24bdbda26c35e2c55f425ad272d142c42e5a5579a1ad8095229a756e"
+        },
+        {
+          "bytes": 252,
+          "path": "example/test_driver/integration_test.dart",
+          "sha256": "e24f1ddc7dd25c9907d590ba3e398eab1c64443236db4b48e975d063a372b2ad"
+        },
+        {
+          "bytes": 323,
+          "path": "example/web/index.html",
+          "sha256": "82d90265b0ef0e37b2a198a2e80d282937f337b6b2782d14b0da584ef8153a5b"
+        },
+        {
+          "bytes": 2592,
+          "path": "lib/src/closed_caption_file.dart",
+          "sha256": "9d9f92284aa99fcd135a00921fdacd31ca48533356146b12a293b733262360da"
+        },
+        {
+          "bytes": 3860,
+          "path": "lib/src/sub_rip.dart",
+          "sha256": "218b3691eb4fc36eaf4de72631a26a840084d9f230f47bb21f29347dc22d4dc8"
+        },
+        {
+          "bytes": 6292,
+          "path": "lib/src/web_vtt.dart",
+          "sha256": "8af8762f376189cbe644c17d4e73507b3e00ec356ab41d8896900447b6160e30"
+        },
+        {
+          "bytes": 48012,
+          "path": "lib/video_player.dart",
+          "sha256": "05489dcc7a66588879cdb7f5207a8324203ed9afb91b423fd005b8cba4f6bc25"
+        },
+        {
+          "bytes": 1024,
+          "path": "pubspec.yaml",
+          "sha256": "1bdfe4761eed6c6abcd0fb467e254fea5e26c879d37f59c81c412c3261de73a6"
+        },
+        {
+          "bytes": 686,
+          "path": "test/closed_caption_file_test.dart",
+          "sha256": "fdcc12cc4cd83bdea8368dca42eafcf7d237214e9a6d7dc141e42531305b9b79"
+        },
+        {
+          "bytes": 417,
+          "path": "test/flutter_test_config.dart",
+          "sha256": "45c5a6d3c113bf890673bd19041e2e47c1c5eb5adf2302e4acfb5a84e1ab1d13"
+        },
+        {
+          "bytes": 3061,
+          "path": "test/sub_rip_file_test.dart",
+          "sha256": "d96e7f007bc88d6830f6841d86ab80d7fedc4b566685e77e1e404501dca73694"
+        },
+        {
+          "bytes": 2452,
+          "path": "test/video_player_initialization_test.dart",
+          "sha256": "c49f3b97cf46209dbdb7dfb516078586c37726e1307dc627a4e1b0f18d3b0385"
+        },
+        {
+          "bytes": 73740,
+          "path": "test/video_player_test.dart",
+          "sha256": "429503304fd827909af25268aa9c26b17fc177f28aadd1ab47573e5347f6c1e5"
+        },
+        {
+          "bytes": 7867,
+          "path": "test/web_vtt_test.dart",
+          "sha256": "677bb8053d4e8354010db7e479fbca66026349f6beef9aeb99dae1be987919a4"
+        }
+      ],
+      "licenseSHA256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "name": "video_player-2.11.1"
+    },
+    {
+      "bytes": 2853657,
+      "fileCount": 77,
+      "files": [
+        {
+          "bytes": 2529,
+          "path": "AUTHORS",
+          "sha256": "90d5300d3b74f2adbee390cdccd52517246e185a79c5da00c00a5e64d0f739e5"
+        },
+        {
+          "bytes": 10309,
+          "path": "CHANGELOG.md",
+          "sha256": "a6d6dccc422221a98046147f8253e1286e9f2c098ce56d6598e1e4d1802aa092"
+        },
+        {
+          "bytes": 1497,
+          "path": "LICENSE",
+          "sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d"
+        },
+        {
+          "bytes": 728,
+          "path": "README.md",
+          "sha256": "03d60076d8ed495c45c5e10488dc9738d16d04e0cf2c330a0d20c9db2df3d4e0"
+        },
+        {
+          "bytes": 2786,
+          "path": "android/build.gradle.kts",
+          "sha256": "f6e15b9ad612d0aefdafaee003984d63774b0916aac4b417d13ccbc32e817f00"
+        },
+        {
+          "bytes": 1039,
+          "path": "android/lint-baseline.xml",
+          "sha256": "ecaeb0cfe70e27cf6d2788a77cd6c07304bdb7c65c15a3ed68b5d5fe278df583"
+        },
+        {
+          "bytes": 42,
+          "path": "android/settings.gradle.kts",
+          "sha256": "1df579c8b33c4ba967d52f389cf2f48bd3ad948e0f07943a8d9e21d898c28407"
+        },
+        {
+          "bytes": 125,
+          "path": "android/src/main/AndroidManifest.xml",
+          "sha256": "9c55f1d2e199c9ce8d3a1d4f2aa2dd9f2f35d6855bef45e3ff2a4a2252056f3f"
+        },
+        {
+          "bytes": 6474,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/ExoPlayerEventListener.java",
+          "sha256": "6e32dfd197df72f6e8d8eb1b1ade0ff71859e76c11334fe03a5ea238bc7f1f24"
+        },
+        {
+          "bytes": 3353,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/HttpVideoAsset.java",
+          "sha256": "afdecd78aac0c4b1fe0bafbeed25757387ec28de68d28adcea25e7aa35b6f174"
+        },
+        {
+          "bytes": 819,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/LocalVideoAsset.java",
+          "sha256": "30f5d5c181b910e0f066f6826c2e86d342df45fb50fd2213e24be2711d42089c"
+        },
+        {
+          "bytes": 2094,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/QueuingEventSink.java",
+          "sha256": "40dc86811adb4b3ddb3dff61fa2568da29ca8cae649aa38863b03277deae760d"
+        },
+        {
+          "bytes": 1008,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/RtspVideoAsset.java",
+          "sha256": "907c5e3272a42905aa788d71ceae345779158b069e15c2c7a3ef04a152559ef7"
+        },
+        {
+          "bytes": 2961,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/VideoAsset.java",
+          "sha256": "93f5e3083ff51694c9134164a59d98cc45ecd76051d41c925b12af15d1d66ce4"
+        },
+        {
+          "bytes": 17601,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/VideoPlayer.java",
+          "sha256": "18c6418f742611b6d40bba3ab677b239f42fa07ae4316a5604cf280b4deda048"
+        },
+        {
+          "bytes": 1111,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/VideoPlayerCallbacks.java",
+          "sha256": "b51a372a6c79f0387886ace21a36073087eeb17dbe3c12f0d7658373f3a2f25c"
+        },
+        {
+          "bytes": 2436,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/VideoPlayerEventCallbacks.java",
+          "sha256": "00198f716672793eca02fad87b185a9de6a9665bf4b509e9ee5fa742ed3450bb"
+        },
+        {
+          "bytes": 762,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/VideoPlayerOptions.java",
+          "sha256": "54465659f5ab0c240875026c201d2946fb76bdeccb4c8865bf9795c2406feef9"
+        },
+        {
+          "bytes": 8564,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/VideoPlayerPlugin.java",
+          "sha256": "5e9f5a22cab144064b2c61b74657491e7a1143992d6992268ee7970ac827c36b"
+        },
+        {
+          "bytes": 4295,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/platformview/PlatformVideoView.java",
+          "sha256": "fd13fca677964f2b844bd72d44d3978b72729c16d148955a9c4b72e63bd4bfb9"
+        },
+        {
+          "bytes": 2500,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/platformview/PlatformVideoViewFactory.java",
+          "sha256": "e37d097d1bfe4b4f2245a18139168ad7900938ab8a0a07e39e78d86a619b67d1"
+        },
+        {
+          "bytes": 2460,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/platformview/PlatformViewExoPlayerEventListener.java",
+          "sha256": "84aa36683329cf918e11449cdd766efa0008261e5d55aae27f9a00e60c5e5cbb"
+        },
+        {
+          "bytes": 3696,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/platformview/PlatformViewVideoPlayer.java",
+          "sha256": "e1ed50dcbd5212281fc5b3156edbc40c7b481b9f9e96c1a57099e9b7eac3e034"
+        },
+        {
+          "bytes": 3409,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/texture/TextureExoPlayerEventListener.java",
+          "sha256": "da6af79989b263e317162620afe459a3351f5b72fdeda1e79c60bf74b67680f3"
+        },
+        {
+          "bytes": 5392,
+          "path": "android/src/main/java/io/flutter/plugins/videoplayer/texture/TextureVideoPlayer.java",
+          "sha256": "0f6f80de23f55f148481cf1d9d7c2bfff06b973013d56f42d1586da5fd92cb0f"
+        },
+        {
+          "bytes": 55096,
+          "path": "android/src/main/kotlin/io/flutter/plugins/videoplayer/Messages.kt",
+          "sha256": "5c73d45cd6fd979358d6fb99aab19d0dc292beafdd73903f284f863dcc824439"
+        },
+        {
+          "bytes": 6332,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/ExoPlayerEventListenerTest.java",
+          "sha256": "ee815f39b154d9376f6383e196e122dc3983f7d438918b24ae893ff656144ac6"
+        },
+        {
+          "bytes": 1097,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/FakeVideoAsset.java",
+          "sha256": "f0e6cb4a62e74b2b46e0e14b49883a2c5f40f4e7bfaa2cb376fb3920275b6cde"
+        },
+        {
+          "bytes": 1807,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/PlatformVideoViewFactoryTest.java",
+          "sha256": "abf3ea982dd77c1f73c29a359e3aa03a5f672c90015c7d68270b01ff4ba2effc"
+        },
+        {
+          "bytes": 5085,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/PlatformVideoViewTest.java",
+          "sha256": "a6e5a514ebd327e2de832332a7e7ec5688473e88702d741c90063ffde2306ad2"
+        },
+        {
+          "bytes": 5705,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/PlatformViewExoPlayerEventListenerTest.java",
+          "sha256": "c6c9f260bf0bfdbbe1f7c8fc5cf8f27d31dfd275ef6adbab2d7bb0d5f34b52c8"
+        },
+        {
+          "bytes": 2490,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/PlatformViewVideoPlayerTest.java",
+          "sha256": "f2d203a56cd721f28aeae513940f1d447bb9f429a703a4e9099458fc24968b5d"
+        },
+        {
+          "bytes": 8013,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/TextureExoPlayerEventListenerTest.java",
+          "sha256": "c2b61e295bf78c904d13fd3acad0676f212ddf1b3381b833bf9ca045a715a053"
+        },
+        {
+          "bytes": 8968,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/TextureVideoPlayerTest.java",
+          "sha256": "2bb81e98ad8610abf3e0d08a27eb4e7f9396bc214a66728abd920a03aa57e105"
+        },
+        {
+          "bytes": 5208,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/VideoAssetTest.java",
+          "sha256": "768f35662027d508c63fc2f4228052355bfa618e81c459fcfddc66aae67038ea"
+        },
+        {
+          "bytes": 3583,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/VideoPlayerEventCallbacksTest.java",
+          "sha256": "03b55745aa080e70a4677846146ef16fa0bfec611ec1a0c691275ec1d1aeda0b"
+        },
+        {
+          "bytes": 4420,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/VideoPlayerPluginTest.java",
+          "sha256": "e7f9e2407243d2300f26674420d5369b007a224ef6ebb608fac0c5fa05efa332"
+        },
+        {
+          "bytes": 42683,
+          "path": "android/src/test/java/io/flutter/plugins/videoplayer/VideoPlayerTest.java",
+          "sha256": "61ead2cb86f6931e3b1a2a1a239071a24dbb2d37dc969a69789b5c79a18c6d8d"
+        },
+        {
+          "bytes": 380,
+          "path": "example/README.md",
+          "sha256": "dd0bc1ede31e368cfa967ab560215f621f37e5a8f41eee510afcc3e46aee6119"
+        },
+        {
+          "bytes": 1487,
+          "path": "example/android/app/build.gradle.kts",
+          "sha256": "2126e4be3edc9c589b8f6e568c116108d9963dfaf421604d3d8739092d542ea5"
+        },
+        {
+          "bytes": 223,
+          "path": "example/android/app/gradle/wrapper/gradle-wrapper.properties",
+          "sha256": "52de8e8f102fc846e89fceeeb759640f37b15e280619bc84470a3b952d614ddf"
+        },
+        {
+          "bytes": 652,
+          "path": "example/android/app/src/androidTest/java/io/flutter/plugins/videoplayerexample/FlutterActivityTest.java",
+          "sha256": "836891a5ca584b2e57f7a0966747b6ad8c40905e2c1396bb4b8676018fb76acc"
+        },
+        {
+          "bytes": 3078,
+          "path": "example/android/app/src/androidTest/java/io/flutter/plugins/videoplayerexample/VideoPlayerUITest.java",
+          "sha256": "47c03d8847d98b75cfe1f794477868df896dc4f0019b6d9f5248fc65ac6e5ee1"
+        },
+        {
+          "bytes": 575,
+          "path": "example/android/app/src/androidTest/kotlin/io/flutter/plugins/DartIntegrationTest.kt",
+          "sha256": "28834a2bc84c0c6df9d6d32d12d944ac70f225dfe5c3d74b581eb27bbcf65d6e"
+        },
+        {
+          "bytes": 1215,
+          "path": "example/android/app/src/debug/AndroidManifest.xml",
+          "sha256": "be95f12d930b348945871c05a052a3d0965098c6deae6940517922985243aee6"
+        },
+        {
+          "bytes": 978,
+          "path": "example/android/app/src/main/AndroidManifest.xml",
+          "sha256": "a70e2a2976e69c98a147e7d5c508f0c461ae0f460432ded5738145e635f20632"
+        },
+        {
+          "bytes": 380,
+          "path": "example/android/app/src/main/kotlin/io/flutter/plugins/videoplayerexample/DriverExtensionActivity.kt",
+          "sha256": "8d65e0ace09f7e163d648bdf11117624c0cb32fc43a7de280991c20434f791a4"
+        },
+        {
+          "bytes": 434,
+          "path": "example/android/app/src/main/res/drawable/launch_background.xml",
+          "sha256": "94433756fe10005ddd6fc55cc5c0b1e9f3c10b66a08ceac795ece6713d34e28a"
+        },
+        {
+          "bytes": 544,
+          "path": "example/android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+          "sha256": "6a7c8f0d703e3682108f9662f813302236240d3f8f638bb391e32bfb96055fef"
+        },
+        {
+          "bytes": 442,
+          "path": "example/android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+          "sha256": "c7c0c0189145e4e32a401c61c9bdc615754b0264e7afae24e834bb81049eaf81"
+        },
+        {
+          "bytes": 721,
+          "path": "example/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+          "sha256": "e14aa40904929bf313fded22cf7e7ffcbf1d1aac4263b5ef1be8bfce650397aa"
+        },
+        {
+          "bytes": 1031,
+          "path": "example/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+          "sha256": "4d470bf22d5c17d84edc5f82516d1ba8a1c09559cd761cefb792f86d9f52b540"
+        },
+        {
+          "bytes": 1443,
+          "path": "example/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+          "sha256": "3c34e1f298d0c9ea3455d46db6b7759c8211a49e9ec6e44b635fc5c87dfb4180"
+        },
+        {
+          "bytes": 236,
+          "path": "example/android/app/src/main/res/values/styles.xml",
+          "sha256": "c3d480f67850784b24c4991ef723b51270a184a001d23681c26a81cafca1d52e"
+        },
+        {
+          "bytes": 416,
+          "path": "example/android/app/src/main/res/xml/network_security_config.xml",
+          "sha256": "bc6818a97941c238e66d532f23acee239b54f73249ebf4aa17555c55d28b19ec"
+        },
+        {
+          "bytes": 1887,
+          "path": "example/android/app/src/test/java/io/flutter/plugins/videoplayerexample/FlutterActivityTest.java",
+          "sha256": "46c79a060d9dbe150298096f94065997a433cd60f9027e58437050af18be905a"
+        },
+        {
+          "bytes": 2543,
+          "path": "example/android/build.gradle.kts",
+          "sha256": "c3f65b23d49bb4dbad6a6a3883abcd2328667e351e0fcbfbc8a1c72743fe31a5"
+        },
+        {
+          "bytes": 234,
+          "path": "example/android/gradle/wrapper/gradle-wrapper.properties",
+          "sha256": "50067fe69fe3383c198f11d1f88245ad98dfec82d7b06c77472ba88243a763db"
+        },
+        {
+          "bytes": 234,
+          "path": "example/android/gradle.properties",
+          "sha256": "4e437643d8628d0642450fe0c0975ad8c1dffd6b759eb487a4de4de8fe19ce3f"
+        },
+        {
+          "bytes": 990,
+          "path": "example/android/settings.gradle.kts",
+          "sha256": "e356245940c71d75533f393cb93c3f322c9cde0b5e268b59e6bd37fea25e4d41"
+        },
+        {
+          "bytes": 2429896,
+          "path": "example/assets/Butterfly-209.mp4",
+          "sha256": "c78f3f9d3e4834a91e83a0fb0fd005348354329ea58443f4156407b5f6d80413"
+        },
+        {
+          "bytes": 482,
+          "path": "example/assets/flutter-mark-square-64.png",
+          "sha256": "f416b0d8ac552ec8819d1f492d1ab5e6d4f20cf45db47c227bb431fefb5b67b2"
+        },
+        {
+          "bytes": 797,
+          "path": "example/integration_test/video_player_android_test.dart",
+          "sha256": "80eb7d180047d1e5e0b1e3d6d8fcd34a6c5921e181900dc89dc00857358fa87b"
+        },
+        {
+          "bytes": 5383,
+          "path": "example/integration_test/video_player_test.dart",
+          "sha256": "a70ee6c10ac40a0293f0304d4b5a29857ecfceded4c4f05c174eb3606fbb2bf4"
+        },
+        {
+          "bytes": 10316,
+          "path": "example/lib/main.dart",
+          "sha256": "8166f910b31887b5da1d67df8b8dc3a112112e92e7017b93627ca7c9b4f85083"
+        },
+        {
+          "bytes": 17857,
+          "path": "example/lib/mini_controller.dart",
+          "sha256": "ce1ec34b4025da15e9fb2274050d16de589851bef72595e696192d8197928bd0"
+        },
+        {
+          "bytes": 907,
+          "path": "example/pubspec.yaml",
+          "sha256": "ea3c795b04a154cc407c9845da03c564cf9c65c00ffcab64b52b96f6a56864bc"
+        },
+        {
+          "bytes": 252,
+          "path": "example/test_driver/integration_test.dart",
+          "sha256": "e24f1ddc7dd25c9907d590ba3e398eab1c64443236db4b48e975d063a372b2ad"
+        },
+        {
+          "bytes": 21905,
+          "path": "lib/src/android_video_player.dart",
+          "sha256": "fc7ff8e62d04a3422dc95bb44d5d07b4e71d13b42e45013427c8f9a3dd8f7eaa"
+        },
+        {
+          "bytes": 43742,
+          "path": "lib/src/messages.g.dart",
+          "sha256": "c1e8f5713ead4750dac863758207edecee8a24945cc51e68325407e9bd216796"
+        },
+        {
+          "bytes": 1983,
+          "path": "lib/src/platform_view_player.dart",
+          "sha256": "6d8a89fa64e52f27e7f904aefaacb5db8292f9985d0f9a689bdb4ba860ed9bed"
+        },
+        {
+          "bytes": 183,
+          "path": "lib/video_player_android.dart",
+          "sha256": "afdf120ef61ec67cc06d3bb3713b22a6c349580170963c70917dea91498ba55e"
+        },
+        {
+          "bytes": 133,
+          "path": "pigeons/copyright.txt",
+          "sha256": "8389b4e4116894c3d8b31c0619df9e131555acafdc9486b7e7db5bb483d2a957"
+        },
+        {
+          "bytes": 7080,
+          "path": "pigeons/messages.dart",
+          "sha256": "74687517e4992f38d08a906d88740a00ac574de5acf9f7ea43c6cc139b666e59"
+        },
+        {
+          "bytes": 829,
+          "path": "pubspec.yaml",
+          "sha256": "051401d6a35433d93f8766cca469d30fea897e28c4efd810ab76e67c47ff7642"
+        },
+        {
+          "bytes": 43123,
+          "path": "test/android_video_player_test.dart",
+          "sha256": "30181a48419f0274d6e208b7b57146a134b022d19f38a16297af7563eedfaf69"
+        },
+        {
+          "bytes": 10189,
+          "path": "test/android_video_player_test.mocks.dart",
+          "sha256": "cd7bfebfd66782e185d9d4c6ab0cbd961d89915ecbf6ec14f649f2c886bb61bc"
+        }
+      ],
+      "licenseSHA256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "name": "video_player_android-2.12.2"
+    },
+    {
+      "bytes": 3068937,
+      "fileCount": 122,
+      "files": [
+        {
+          "bytes": 2491,
+          "path": "AUTHORS",
+          "sha256": "44e9cf62e93fd51a59b9ad5f92b6769bfe161b5e20f42f31c4a859812cf46eb7"
+        },
+        {
+          "bytes": 7249,
+          "path": "CHANGELOG.md",
+          "sha256": "e1fd78660fb48f9e4fe0ab61e0087e67c2baed06632fee5e41446169cf711477"
+        },
+        {
+          "bytes": 1497,
+          "path": "LICENSE",
+          "sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d"
+        },
+        {
+          "bytes": 529,
+          "path": "README.md",
+          "sha256": "a300a11adf1d704e421d4de48c98584b8f9b7e5be2068655cd45968c1aa97941"
+        },
+        {
+          "bytes": 8270,
+          "path": "darwin/RunnerTests/TestClasses.swift",
+          "sha256": "ccec08500a1fcd59172577fb9b3aafdcfac536a58e128ff6bb1b1bf6d2c63392"
+        },
+        {
+          "bytes": 44256,
+          "path": "darwin/RunnerTests/VideoPlayerTests.swift",
+          "sha256": "c54aec682ffc6716c608296509c93bc040460a4bb2aa4489154769bbbdf173a3"
+        },
+        {
+          "bytes": 1588,
+          "path": "darwin/video_player_avfoundation/Package.swift",
+          "sha256": "ad8b5fc4c07a50388800da5893dc62b81e16afcbd37db1194e135ec9971f83de"
+        },
+        {
+          "bytes": 2155,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation/NativeVideoViewFactory.swift",
+          "sha256": "1f554be2dbd19bc123ad255904652e6b2805311b4c3b8b4dd20333f0979a669c"
+        },
+        {
+          "bytes": 373,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation/Resources/PrivacyInfo.xcprivacy",
+          "sha256": "6d2da0d8d930227d428c1d9363b0ad6e3a12e2c9b68c5ce297158a7412fc8c31"
+        },
+        {
+          "bytes": 11092,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation/VideoPlayerPlugin.swift",
+          "sha256": "80c678778664ce3a3ffb58d40c537526bd8658b6629723d2694cb62d1a9ac20b"
+        },
+        {
+          "bytes": 15000,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation/VideoPlayerPluginMessages.g.swift",
+          "sha256": "8a7150d5cb629ad638b45c7eea90d45f47a028393092011e940bd59572194965"
+        },
+        {
+          "bytes": 881,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_ios/FVPNativeVideoView.m",
+          "sha256": "0bbdc1f5a6533b868648fae6f806abdeaf0a16aec2bb4794eac7d0665afd2cc1"
+        },
+        {
+          "bytes": 279,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_ios/include/FVPEmpty.h",
+          "sha256": "53c2eabeba99c7df17ab2bfec667430687c3fd05cbfc293a804b8713b190170c"
+        },
+        {
+          "bytes": 3594,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_macos/FVPCoreVideoDisplayLink.m",
+          "sha256": "3e85e34cddf0b0eb93ceec0da51aa45f7425d718a1677c0bf1bdb39ea578f4f7"
+        },
+        {
+          "bytes": 625,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_macos/FVPNativeVideoView.m",
+          "sha256": "65b4a955c375a6120f60516af00bc87a06e33f4de98c07c1c905fc70d8aea641"
+        },
+        {
+          "bytes": 279,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_macos/include/FVPEmpty.h",
+          "sha256": "53c2eabeba99c7df17ab2bfec667430687c3fd05cbfc293a804b8713b190170c"
+        },
+        {
+          "bytes": 1438,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/AVAssetTrackUtils.m",
+          "sha256": "e0d2447d54168f4a2d58af1afb1891996b4f4abe0572eed80e93e9b3b24c28fe"
+        },
+        {
+          "bytes": 5226,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/FVPAVFactory.m",
+          "sha256": "096b65b73e8166f22a7a2a3039ad1c386dda7723d0f5f01ff5ec90581a72c2f8"
+        },
+        {
+          "bytes": 2581,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/FVPCADisplayLink.m",
+          "sha256": "996416606ecbb7cc7b900506a1f8ca9da6d02954963b13acc35c787879f9cc60"
+        },
+        {
+          "bytes": 3577,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/FVPEventBridge.m",
+          "sha256": "3d4c38dd3046a8842361280ebbb8f5a7badb869c206a7b769ff4ea69e5a660db"
+        },
+        {
+          "bytes": 586,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/FVPFrameUpdater.m",
+          "sha256": "912266f586c482c13431daac072b30d2ccb5b0486b7134165d4dd19f0f56b007"
+        },
+        {
+          "bytes": 9395,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/FVPTextureBasedVideoPlayer.m",
+          "sha256": "f941e5ab07f206d01673412924d975957ef85b7c1449efb3629be402b7d5fada"
+        },
+        {
+          "bytes": 30059,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/FVPVideoPlayer.m",
+          "sha256": "5b90df7bb73725cc5c2fc7e1cd6e5bc64bebbf324a72ed075f84ef4d2bb1c663"
+        },
+        {
+          "bytes": 826,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/FVPViewProvider.m",
+          "sha256": "94a46f780f437260a98b7d7c0d267efa1590cce755e71f53cec6523df04cd8c6"
+        },
+        {
+          "bytes": 33555,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/VideoPlayerInstanceMessages.g.m",
+          "sha256": "524441639174292d9ae40ac978195bc2012271a9a281a0cdba10fef4797a4458"
+        },
+        {
+          "bytes": 488,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/AVAssetTrackUtils.h",
+          "sha256": "2292561d9be47d9b3fbab0ad1dd24fff0ca7b057b4789a9660a5c4d0511ec300"
+        },
+        {
+          "bytes": 5003,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPAVFactory.h",
+          "sha256": "3f9f40a7cd92b731c3ebe55fc42c100c3d0d239740b7e5a91ace831dbcc9b932"
+        },
+        {
+          "bytes": 1078,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPAssetProvider.h",
+          "sha256": "1b390406983017edd9b76f7fab0c695c602e6a2f205cf894d78236f2cb0d16ca"
+        },
+        {
+          "bytes": 1704,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPDisplayLink.h",
+          "sha256": "02a761d6c58ba0a5344ac738c882af37318a7805195b81453095cdc4ba5b3fc6"
+        },
+        {
+          "bytes": 701,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPEventBridge.h",
+          "sha256": "7537379d1df41b88a3c824b50a6941e02e0c372841e68dadaab2e0171912b9ff"
+        },
+        {
+          "bytes": 1399,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPFrameUpdater.h",
+          "sha256": "ad748fbd8fac054d78c747065dcb3dbf953840e8a9261d996d71c0cff55f8184"
+        },
+        {
+          "bytes": 767,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPNativeVideoView.h",
+          "sha256": "5c980168abd17bc0c237eb3a8350f99b9cd333ebe7fcf852151e79a9e7ff18ef"
+        },
+        {
+          "bytes": 1489,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPTextureBasedVideoPlayer.h",
+          "sha256": "7b74d57c11ea6fc456fe9d530750d2588f548e42b2d50f201f27daff0beca760"
+        },
+        {
+          "bytes": 1092,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPTextureBasedVideoPlayer_Test.h",
+          "sha256": "3b8e1e10de6b079eef88e348dc51b9426da9321748312e5c291c2b4d37349017"
+        },
+        {
+          "bytes": 1607,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPVideoEventListener.h",
+          "sha256": "42eef75007c596e27aa4834f38b5d765b58f450d2b08c101080a2eb53e44f704"
+        },
+        {
+          "bytes": 1864,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPVideoPlayer.h",
+          "sha256": "4130d4d17ea75bb41cbf49f158fa121e1611eded31d6fd2ecee1a49eb765d056"
+        },
+        {
+          "bytes": 1653,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPVideoPlayer_Internal.h",
+          "sha256": "380f62a98f34c3cfcea643326a038cf36cb3da8a3da5cb1855b93c83dd4dd66c"
+        },
+        {
+          "bytes": 1004,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/FVPViewProvider.h",
+          "sha256": "068490751cdcfa1bd58a0044df3aa967fdb63de7b175abd343426ed6c4760837"
+        },
+        {
+          "bytes": 6303,
+          "path": "darwin/video_player_avfoundation/Sources/video_player_avfoundation_objc/include/video_player_avfoundation_objc/VideoPlayerInstanceMessages.g.h",
+          "sha256": "92af990d96bb14479207ab6da9cc2a94f994cb5d683eb5106602c4d0e2268122"
+        },
+        {
+          "bytes": 1751,
+          "path": "darwin/video_player_avfoundation.podspec",
+          "sha256": "d8d3e34db1d799be583ffb978eb3b38b6439143f369f0fee16c93a8e2bc4c062"
+        },
+        {
+          "bytes": 380,
+          "path": "example/README.md",
+          "sha256": "dd0bc1ede31e368cfa967ab560215f621f37e5a8f41eee510afcc3e46aee6119"
+        },
+        {
+          "bytes": 2429896,
+          "path": "example/assets/Butterfly-209.mp4",
+          "sha256": "c78f3f9d3e4834a91e83a0fb0fd005348354329ea58443f4156407b5f6d80413"
+        },
+        {
+          "bytes": 482,
+          "path": "example/assets/flutter-mark-square-64.png",
+          "sha256": "f416b0d8ac552ec8819d1f492d1ab5e6d4f20cf45db47c227bb431fefb5b67b2"
+        },
+        {
+          "bytes": 7507,
+          "path": "example/integration_test/video_player_test.dart",
+          "sha256": "d64b28b60bcf682b4ff6c780d93a4085282af66695c9cdd03b8f483f9741a024"
+        },
+        {
+          "bytes": 720,
+          "path": "example/ios/Flutter/AppFrameworkInfo.plist",
+          "sha256": "da12038f9b2688a8a26160fea2609fa8fcb11421448c109f09c0f573efe7698d"
+        },
+        {
+          "bytes": 30,
+          "path": "example/ios/Flutter/Debug.xcconfig",
+          "sha256": "a82d7765b37116ee4821d2cd1d65942febf8032353757ffb0826eabde785b4a6"
+        },
+        {
+          "bytes": 30,
+          "path": "example/ios/Flutter/Release.xcconfig",
+          "sha256": "a82d7765b37116ee4821d2cd1d65942febf8032353757ffb0826eabde785b4a6"
+        },
+        {
+          "bytes": 682,
+          "path": "example/ios/Runner/AppDelegate.swift",
+          "sha256": "f8eabe4168e18b09b367f132fec2b67ffe1c0b6d2e890579a43dd66e3f8a9df2"
+        },
+        {
+          "bytes": 2519,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+          "sha256": "3b1e214f466ffedff74baa5598ad5c4421130eea6bc8d57b8fe23435e8280ae4"
+        },
+        {
+          "bytes": 10932,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png",
+          "sha256": "7770183009e914112de7d8ef1d235a6a30c5834424858e0d2f8253f6b8d31926"
+        },
+        {
+          "bytes": 295,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png",
+          "sha256": "cab10a0d391ec5bc09ef50ce49e8ad401cee7ef03707ec0923a222c5c2b3d212"
+        },
+        {
+          "bytes": 406,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png",
+          "sha256": "b9ad02cf6576a04d1b6806ac02a2431481b448dd0c2e505ce25842d1f7c4730b"
+        },
+        {
+          "bytes": 450,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png",
+          "sha256": "c6e6d3b215ae744a9c391f4c4d44157eff5e739d6ad6c39f9bfa5df66dddd267"
+        },
+        {
+          "bytes": 282,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png",
+          "sha256": "5dee24dc104ac76dc162e42ae0beb163d426bf365562ee28ba7b3ad368559a60"
+        },
+        {
+          "bytes": 462,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png",
+          "sha256": "a9b21eb6f4271385655a8771f76e29eef8c1107d7879cbcfc567e6619d1f716a"
+        },
+        {
+          "bytes": 704,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png",
+          "sha256": "e677d701ffe4af7bc2935098d6b3984cc9ab7ace573e6900955a5535b12410cf"
+        },
+        {
+          "bytes": 406,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png",
+          "sha256": "b9ad02cf6576a04d1b6806ac02a2431481b448dd0c2e505ce25842d1f7c4730b"
+        },
+        {
+          "bytes": 586,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png",
+          "sha256": "7c61c42fc7b657d9cf314d32a4ec458f0647c3aaf360be1b9377857266ec2499"
+        },
+        {
+          "bytes": 862,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png",
+          "sha256": "19be171481dc71a0b2803ebcd01dd8b0c5fd5778dee34c0a3cabc948c225f24e"
+        },
+        {
+          "bytes": 862,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png",
+          "sha256": "19be171481dc71a0b2803ebcd01dd8b0c5fd5778dee34c0a3cabc948c225f24e"
+        },
+        {
+          "bytes": 1674,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png",
+          "sha256": "4209a49e44a92ec40a327d3455eb1b1c153ee83d75de1c2be0a12ab18b2ff9de"
+        },
+        {
+          "bytes": 762,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png",
+          "sha256": "836c918cb613249eba0483a6b02fa3df3c1c0a89a315ee4d3b88509b83c7ab73"
+        },
+        {
+          "bytes": 1226,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png",
+          "sha256": "41c7d42f6e61f8fe7f30b1ffa2256aecbc9682be06d18c4a3062043e1a2e547c"
+        },
+        {
+          "bytes": 1418,
+          "path": "example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png",
+          "sha256": "5d7e5bdf01b93802bc973345b3a78c038907147625035952a08a115a563b7f81"
+        },
+        {
+          "bytes": 391,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json",
+          "sha256": "ccc7950fd5f5b82067c85f667940a9d59189151460761ece8098ca78daa19469"
+        },
+        {
+          "bytes": 68,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png",
+          "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+        },
+        {
+          "bytes": 68,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png",
+          "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+        },
+        {
+          "bytes": 68,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png",
+          "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+        },
+        {
+          "bytes": 336,
+          "path": "example/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md",
+          "sha256": "a985b626c4f7546a8ba392d135e9226c3547c8e2b46895f5f2bdf40d7b14ef9f"
+        },
+        {
+          "bytes": 2377,
+          "path": "example/ios/Runner/Base.lproj/LaunchScreen.storyboard",
+          "sha256": "857e61203b3deafb05766d8fcda898b86a7cb6f3d5e385ecc9926c4d698215e9"
+        },
+        {
+          "bytes": 1605,
+          "path": "example/ios/Runner/Base.lproj/Main.storyboard",
+          "sha256": "fd367b6c43006d61b730f674970dd48b9f662c8f2264e52ffc1558102a2c9f2d"
+        },
+        {
+          "bytes": 2238,
+          "path": "example/ios/Runner/Info.plist",
+          "sha256": "6392989ec3b064a2eec043ba7a815583e0c2ecb8c815ceec08211f504cc02f73"
+        },
+        {
+          "bytes": 181,
+          "path": "example/ios/Runner/Runner-Bridging-Header.h",
+          "sha256": "05b96b30059e613dae35195e44e89843f1d5bf9e801165c87b8da12cd1cdc132"
+        },
+        {
+          "bytes": 219,
+          "path": "example/ios/Runner/SceneDelegate.swift",
+          "sha256": "1f9508dbc9064599699298bb37563fc933889cb1f6fa653b81191c8dc985678a"
+        },
+        {
+          "bytes": 31156,
+          "path": "example/ios/Runner.xcodeproj/project.pbxproj",
+          "sha256": "9cf9c794e853e4151deae1cc56839903d8a852a3ddeba13709614f97b62de2be"
+        },
+        {
+          "bytes": 135,
+          "path": "example/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+          "sha256": "7f3b00b5c3fdb45242d7b87e1e5c4e25d1fa8129a16c94295ecc4e8ea2235c5f"
+        },
+        {
+          "bytes": 238,
+          "path": "example/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+          "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+        },
+        {
+          "bytes": 226,
+          "path": "example/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings",
+          "sha256": "11b247bc6796892d67c9a821d18604db4dd6a880981b34f38460b9866e6b247f"
+        },
+        {
+          "bytes": 5183,
+          "path": "example/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme",
+          "sha256": "b1d01bdeb73a3f0bb90a660f336157eb136c74665c6029e6b09c77beccd37c11"
+        },
+        {
+          "bytes": 152,
+          "path": "example/ios/Runner.xcworkspace/contents.xcworkspacedata",
+          "sha256": "46c3c9702ff7c5584e11c954d943cfb6e07fb26e3fbd072ddbc0f388aa352de1"
+        },
+        {
+          "bytes": 238,
+          "path": "example/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+          "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+        },
+        {
+          "bytes": 226,
+          "path": "example/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings",
+          "sha256": "11b247bc6796892d67c9a821d18604db4dd6a880981b34f38460b9866e6b247f"
+        },
+        {
+          "bytes": 2462,
+          "path": "example/ios/RunnerUITests/VideoPlayerUITests.swift",
+          "sha256": "4a75bb03acdcc9d375317e36bcdfa6f761b183aa6a034503478a995478aa8161"
+        },
+        {
+          "bytes": 9396,
+          "path": "example/lib/main.dart",
+          "sha256": "94fb6f7f24f354bba30464544a199dc8fcf7d87d430d694bb20ad1cf3b9e43a2"
+        },
+        {
+          "bytes": 16914,
+          "path": "example/lib/mini_controller.dart",
+          "sha256": "85c5679d8f34755257e1c2360f7f4a6838c051301e563bdbb85f990d5261cd0b"
+        },
+        {
+          "bytes": 48,
+          "path": "example/macos/Flutter/Flutter-Debug.xcconfig",
+          "sha256": "62290ad8e938bf410206d8c7e131262696b58a6df110d39faf3399396ffe61b1"
+        },
+        {
+          "bytes": 48,
+          "path": "example/macos/Flutter/Flutter-Release.xcconfig",
+          "sha256": "62290ad8e938bf410206d8c7e131262696b58a6df110d39faf3399396ffe61b1"
+        },
+        {
+          "bytes": 454,
+          "path": "example/macos/Runner/AppDelegate.swift",
+          "sha256": "27e9456c290383e23997207bea974494267734b78e0d2b6373e274808cc2b937"
+        },
+        {
+          "bytes": 1291,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+          "sha256": "bc6ba8105ca69651aeeb77358851590de295dca04681a1d58c0f449641c242f3"
+        },
+        {
+          "bytes": 102994,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png",
+          "sha256": "6232e5815af17e25e0268b2fec7aea9e068cc92ec709e9605c2b31df4ff2a313"
+        },
+        {
+          "bytes": 5680,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png",
+          "sha256": "15591f03f31313af6fd644ed0512106cc04365130b8b73244f1cfa6dddfb4400"
+        },
+        {
+          "bytes": 520,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png",
+          "sha256": "cc6928b5adfc00dbf526192e2705dd9af641cdf20ab4c6c7ca7cd4936dca59f0"
+        },
+        {
+          "bytes": 14142,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png",
+          "sha256": "416efd77cde932d42ef34168da24dd428a495b1f4f34bbbd125a18d2add186a2"
+        },
+        {
+          "bytes": 1066,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png",
+          "sha256": "ae8c4458e41f1e28b1e851ed87d3268d4a0351ceea427fa2a84cc94ddfb6d4c5"
+        },
+        {
+          "bytes": 36406,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png",
+          "sha256": "0a91c6c1bf242e54ee179e34629e9ef3e8a6d286c0fce01e302280a8be9277e6"
+        },
+        {
+          "bytes": 2218,
+          "path": "example/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png",
+          "sha256": "6ad229623498e5f1277800db3ab7cb11faf85eb2569e1213f7d8e55003c07b42"
+        },
+        {
+          "bytes": 23729,
+          "path": "example/macos/Runner/Base.lproj/MainMenu.xib",
+          "sha256": "be9e9ef8469d3262370e0f0b855ed163cbf9c8362c59e330b2ffe63b86fa42f4"
+        },
+        {
+          "bytes": 650,
+          "path": "example/macos/Runner/Configs/AppInfo.xcconfig",
+          "sha256": "d4b72f4b9c6752d465355dee6e3422b9c8c47890ee76700cacb795be4e99ff07"
+        },
+        {
+          "bytes": 77,
+          "path": "example/macos/Runner/Configs/Debug.xcconfig",
+          "sha256": "8067d533ef6593760baad9a9855a786a7a77470fcc3f0925ec04fe43bc1ac4b0"
+        },
+        {
+          "bytes": 79,
+          "path": "example/macos/Runner/Configs/Release.xcconfig",
+          "sha256": "7a6a4b4d973a23052fa0a0388dd261e32d311d7b66ba1bfc3b914b361808ac61"
+        },
+        {
+          "bytes": 580,
+          "path": "example/macos/Runner/Configs/Warnings.xcconfig",
+          "sha256": "0e341a392b16ad302d12890aa3dac9257a6c10ece685437604259a85341645a3"
+        },
+        {
+          "bytes": 403,
+          "path": "example/macos/Runner/DebugProfile.entitlements",
+          "sha256": "5322f4decc6fff6056dde0f238c69c4a65a6d88e260c7437e22bf08e2329aa48"
+        },
+        {
+          "bytes": 1060,
+          "path": "example/macos/Runner/Info.plist",
+          "sha256": "f253e89c512b3a9a81bc5cdd7a14bf932470f835f261654a808ea4549cd94aad"
+        },
+        {
+          "bytes": 531,
+          "path": "example/macos/Runner/MainFlutterWindow.swift",
+          "sha256": "7f285f35a25f14583f623229a1272ccb792c175d779e801b3a6e45254d45297d"
+        },
+        {
+          "bytes": 295,
+          "path": "example/macos/Runner/Release.entitlements",
+          "sha256": "b043dea477bbd5da1552ef2f436a0cb644b884bb2568a9f831bd4ee362f9e99b"
+        },
+        {
+          "bytes": 28925,
+          "path": "example/macos/Runner.xcodeproj/project.pbxproj",
+          "sha256": "8aa4d6854ea61245e3dd363952661f6e2a2de5cba6b892b3d74f61252f195464"
+        },
+        {
+          "bytes": 238,
+          "path": "example/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+          "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+        },
+        {
+          "bytes": 5159,
+          "path": "example/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme",
+          "sha256": "64fe92a7ef17cbaf846135d474649cda27632a52bfe75b3686f93d27d0f9ed50"
+        },
+        {
+          "bytes": 224,
+          "path": "example/macos/Runner.xcworkspace/contents.xcworkspacedata",
+          "sha256": "465e6de5660384eb6832e8078920ba6cd5305c445cb29a24a86a2fda4aa6b67e"
+        },
+        {
+          "bytes": 238,
+          "path": "example/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+          "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+        },
+        {
+          "bytes": 863,
+          "path": "example/pubspec.yaml",
+          "sha256": "6e1b736606579ab0d88d0d8ba426c861223b3aed5697f7946a6ebfb460aa90a9"
+        },
+        {
+          "bytes": 252,
+          "path": "example/test_driver/integration_test.dart",
+          "sha256": "e24f1ddc7dd25c9907d590ba3e398eab1c64443236db4b48e975d063a372b2ad"
+        },
+        {
+          "bytes": 15037,
+          "path": "lib/src/avfoundation_video_player.dart",
+          "sha256": "d259b92b43ce0cb77b445b3ea6253cefd5307363186bf10b0b01659277a4a821"
+        },
+        {
+          "bytes": 21082,
+          "path": "lib/src/video_player_instance_messages.g.dart",
+          "sha256": "b5602d445b7e29776eab4284609aeb5cb6b5f9f89e6091566604be78981e65cd"
+        },
+        {
+          "bytes": 11458,
+          "path": "lib/src/video_player_plugin_messages.g.dart",
+          "sha256": "6ea0a3335bcf2bcbedc0dd1d6027b40a284b80e6a71a7f80f1dde5750c16f6c2"
+        },
+        {
+          "bytes": 188,
+          "path": "lib/video_player_avfoundation.dart",
+          "sha256": "d1f6b8ac1989d81c5839f83820ef8274b262d9317c794a4ac4e65fc5b8bc25d8"
+        },
+        {
+          "bytes": 133,
+          "path": "pigeons/copyright.txt",
+          "sha256": "8389b4e4116894c3d8b31c0619df9e131555acafdc9486b7e7db5bb483d2a957"
+        },
+        {
+          "bytes": 3506,
+          "path": "pigeons/video_player_instance_messages.dart",
+          "sha256": "74b84d17c6349d9c97ae72fee12bb7b6ed56139d511f44b620239356e5ac095c"
+        },
+        {
+          "bytes": 1634,
+          "path": "pigeons/video_player_plugin_messages.dart",
+          "sha256": "ee3454187e36d13a5a266056afb81697334197ae5625f5a0b13e9eb04ace5a87"
+        },
+        {
+          "bytes": 965,
+          "path": "pubspec.yaml",
+          "sha256": "a3e06f7e9c59fb8fbb1971a380841edba2ea2ccbb1c0e158581250d540b389bb"
+        },
+        {
+          "bytes": 24376,
+          "path": "test/avfoundation_video_player_test.dart",
+          "sha256": "906736eaba01a9695e73ce34c2686392cccbdbf5f2c78bcb76f6892766afaa5e"
+        },
+        {
+          "bytes": 9634,
+          "path": "test/avfoundation_video_player_test.mocks.dart",
+          "sha256": "f9e28203a4acdb3fed6f151cdbb9bdfb3db013952ce6dcc2640f99524dbab154"
+        }
+      ],
+      "licenseSHA256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "name": "video_player_avfoundation-2.12.0"
+    },
+    {
+      "bytes": 45596,
+      "fileCount": 10,
+      "files": [
+        {
+          "bytes": 2491,
+          "path": "AUTHORS",
+          "sha256": "44e9cf62e93fd51a59b9ad5f92b6769bfe161b5e20f42f31c4a859812cf46eb7"
+        },
+        {
+          "bytes": 5050,
+          "path": "CHANGELOG.md",
+          "sha256": "f9d5916d582f731ee7f8b8902551122d5a81e902bfd2d12e6e1990aeea0ffe13"
+        },
+        {
+          "bytes": 1497,
+          "path": "LICENSE",
+          "sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d"
+        },
+        {
+          "bytes": 956,
+          "path": "README.md",
+          "sha256": "b687cef329d7fcdab13893faf8439686ea37743be2206095c2b9ca96a36a8ada"
+        },
+        {
+          "bytes": 25935,
+          "path": "lib/video_player_platform_interface.dart",
+          "sha256": "3eecc74f3b99d5bccec91b95170d505c58b6f2e17dd0579174bb39007b9e6a77"
+        },
+        {
+          "bytes": 720,
+          "path": "pubspec.yaml",
+          "sha256": "8b305cba72bed8bcf5db22eb2c000e93448437e0a69322f5161deb5d3b12c604"
+        },
+        {
+          "bytes": 1205,
+          "path": "test/video_player_options_test.dart",
+          "sha256": "6090598d2d18eee7511d4a313e663ddf0f854f79b702492818440f57bccd2291"
+        },
+        {
+          "bytes": 4500,
+          "path": "test/video_player_platform_interface_test.dart",
+          "sha256": "caf102147bd5a22c9936d013798f9c6c9f79d2f8b514ccf08dad2f6de4122f5a"
+        },
+        {
+          "bytes": 1997,
+          "path": "test/video_player_web_options_controls_test.dart",
+          "sha256": "081741b46041adc73e5f9da413247d6d30e8371e540ffd64ee4e723711090f84"
+        },
+        {
+          "bytes": 1245,
+          "path": "test/video_player_web_options_test.dart",
+          "sha256": "6578c862a9d90d3e4c630105069535ef658904d3f083aae08dc8208d3c3c5a9b"
+        }
+      ],
+      "licenseSHA256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "name": "video_player_platform_interface-6.9.0"
+    }
+  ],
+  "source": "local pubcache read-only"
+}

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'account_data_directory.dart';
+import 'account_data_operations.dart';
 
 import 'screens/review_screen.dart' show SessionSummary;
 
@@ -53,26 +54,25 @@ class PersistedSession {
     required String lessonId,
     required SessionSummary summary,
     required DateTime completedAt,
-  }) =>
-      PersistedSession(
-        schemaVersion: currentSchemaVersion,
-        disciplineId: disciplineId,
-        lessonId: lessonId,
-        completedAt: completedAt,
-        elapsedSeconds: summary.elapsedSeconds,
-        sampleCount: summary.sampleCount,
-        outCount: summary.outCount,
-      );
+  }) => PersistedSession(
+    schemaVersion: currentSchemaVersion,
+    disciplineId: disciplineId,
+    lessonId: lessonId,
+    completedAt: completedAt,
+    elapsedSeconds: summary.elapsedSeconds,
+    sampleCount: summary.sampleCount,
+    outCount: summary.outCount,
+  );
 
   Map<String, Object?> toJson() => <String, Object?>{
-        'v': schemaVersion,
-        'disciplineId': disciplineId,
-        'lessonId': lessonId,
-        'completedAt': completedAt.toIso8601String(),
-        'elapsedSeconds': elapsedSeconds,
-        'sampleCount': sampleCount,
-        'outCount': outCount,
-      };
+    'v': schemaVersion,
+    'disciplineId': disciplineId,
+    'lessonId': lessonId,
+    'completedAt': completedAt.toIso8601String(),
+    'elapsedSeconds': elapsedSeconds,
+    'sampleCount': sampleCount,
+    'outCount': outCount,
+  };
 
   /// `null` döner (fırlatmaz) satır okunamazsa — ÜÇ ayrı biçimde:
   /// bozuk JSON, geçerli JSON + yanlış tip, bilinmeyen şema sürümü.
@@ -112,7 +112,12 @@ class PersistedSession {
 /// `sessions.jsonl` — `getApplicationSupportDirectory()` altında, aile
 /// deseniyle aynı (Lissom `attempt_values.jsonl`, `M-F-650`).
 class SessionStore {
-  const SessionStore({this.directoryProvider, this.accountUserId});
+  SessionStore({this.directoryProvider, this.accountUserId})
+    : _operations = AccountDataOperations(() async {
+        final root =
+            await (directoryProvider ?? getApplicationSupportDirectory)();
+        return accountDataDirectory(root, accountUserId);
+      });
 
   /// Testler GERÇEK `getApplicationSupportDirectory()`e (platform kanalı
   /// ister, `flutter test`te YOK) ihtiyaç duymadan geçici bir dizin
@@ -124,28 +129,26 @@ class SessionStore {
   /// Null retains the pre-account local journal. Signed-in accounts never
   /// read or append to that journal or to another account's journal.
   final String? accountUserId;
+  final AccountDataOperations _operations;
 
-  Future<File> _file() async {
-    final Directory dir =
-        await (directoryProvider ?? getApplicationSupportDirectory)();
-    final Directory owned = accountDataDirectory(dir, accountUserId);
-    return File('${owned.path}/sessions.jsonl');
-  }
-
-  Future<void> save(PersistedSession session) async {
-    final File f = await _file();
-    await f.parent.create(recursive: true);
-    await f.writeAsString('${jsonEncode(session.toJson())}\n',
-        mode: FileMode.append, flush: true);
-  }
+  Future<void> save(PersistedSession session) =>
+      _operations.run((directory) async {
+        final f = File('${directory.path}/sessions.jsonl');
+        await f.parent.create(recursive: true);
+        await f.writeAsString(
+          '${jsonEncode(session.toJson())}\n',
+          mode: FileMode.append,
+          flush: true,
+        );
+      }, writing: true);
 
   /// En son kaydı döner — bugünkü kullanım "basit geçmiş listesi" için
   /// yeterli (D14 kapsamı). Bozuk/tanınmayan satırlar SESSİZCE atlanır
   /// (adıyla değil — çünkü bu bir kullanıcı YÜZEYİ değil, kendi
   /// dosyamızın kendi geçmiş yazmalarından biri bozulmuş olabilir; bir
   /// önceki turun kaydı okunamıyorsa en son OKUNABİLEN gösterilir).
-  Future<PersistedSession?> lastSession() async {
-    final File f = await _file();
+  Future<PersistedSession?> lastSession() => _operations.run((directory) async {
+    final f = File('${directory.path}/sessions.jsonl');
     if (!f.existsSync()) return null;
     final List<String> lines = await f.readAsLines();
     for (final String line in lines.reversed) {
@@ -154,5 +157,5 @@ class SessionStore {
       if (parsed != null) return parsed;
     }
     return null;
-  }
+  });
 }
