@@ -23,7 +23,7 @@ import 'package:test/test.dart';
 /// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
 /// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
 /// anlaşma, ancak iki taraf varken sınanabilir.)
-const String _mandatedRef = '0fed3a05466946bf2710750f4feca8dbd75be123';
+const String _mandatedRef = 'edeec10a161c76bfa086b1d165d53e46ec88c3d7';
 const String _mandatedVersion = '0.12.0';
 
 void main() {
