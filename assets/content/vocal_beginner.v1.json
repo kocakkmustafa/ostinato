@@ -1,0 +1,738 @@
+{
+  "title": {
+    "en": "Voice: comfortable written beginner foundation",
+    "tr": "Vokal: rahat yazılı başlangıç temeli"
+  },
+  "entry": {
+    "en": "An ordinarily comfortable speaking voice today, quiet space, willingness to stop/rest and self-observe. No prior notation assumed; no fixed note, audio reference or device measurement supplied.",
+    "tr": "Bugün sıradan rahat konuşma sesi, sessiz ortam, durma/dinlenme ve öz gözlem isteği. Önceki nota bilgisi beklenmez; sabit nota, ses referansı veya cihaz ölçümü sağlanmaz."
+  },
+  "exit": {
+    "en": "Explain and attempt comfortable short onset/release, natural breath without holding, counted rhythm/rests, a small personal pitch contour distinct from volume, vowels/clear original words and an original/adapted eight-bar study with one honest same-task correction and another-day revisit. Self-observation and reading only; no audio/health/range/intonation/mastery verification.",
+    "tr": "Rahat kısa başlatma/bırakma, tutmadan doğal nefes, sayılan ritim/sus, seviyeden farklı küçük kişisel perde çizgisi, ünlü/açık özgün sözler ve dürüst aynı-görev düzeltmesi/başka-gün tekrarı içeren özgün/uyarlanmış sekiz ölçülük etüdü açıkla ve dene. Yalnız öz gözlem ve okuma; ses/sağlık/alan/entonasyon/ustalık doğrulaması yok."
+  },
+  "rhythmSymbols": {
+    "voice": "V",
+    "hold": "=",
+    "rest": "R"
+  },
+  "contour": [
+    [
+      "M",
+      "H",
+      "M",
+      "R"
+    ],
+    [
+      "L",
+      "M",
+      "M",
+      "R"
+    ]
+  ],
+  "paperAnswers": {
+    "rhythm": {
+      "en": "Bar 1: start on beat 1, continue its sound on 2, rest 3–4. Bar 2: separate starts on beats 1 and 2, rest 3–4. Breathing is allowed in silence.",
+      "tr": "Ölçü 1: vuruş 1’de başla, sesini 2’de sürdür, 3–4 sus. Ölçü 2: vuruş 1 ve 2’de ayrı başla, 3–4 sus. Sessizlikte nefes serbest."
+    },
+    "contour": {
+      "en": "Bar1 beats1–4: chosen middle, nearby higher, middle, counted silence. Bar2: nearby lower, middle, a new middle start, counted silence. These are symbol-reading answers, not verified sung intervals.",
+      "tr": "Ölçü1 vuruş1–4: seçilmiş orta, yakın tiz, orta, sayılan sessizlik. Ölçü2: yakın pes, orta, yeni orta başlangıcı, sayılan sessizlik. Bunlar sembol okuma cevaplarıdır; doğrulanmış söylenen aralıklar değil."
+    }
+  },
+  "study": [
+    {
+      "events": [
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "mm",
+            "tr": "mm"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "oo",
+            "tr": "u"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "ah",
+            "tr": "a"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "la",
+            "tr": "la"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "voice",
+          "tone": "H",
+          "syllable": {
+            "en": "la",
+            "tr": "la"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "la",
+            "tr": "la"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "I",
+            "tr": "Ben"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "am",
+            "tr": "bu"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "voice",
+          "tone": "H",
+          "syllable": {
+            "en": "here",
+            "tr": "ra"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "now",
+            "tr": "da"
+          }
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "Take",
+            "tr": "Bir"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "voice",
+          "tone": "H",
+          "syllable": {
+            "en": "a",
+            "tr": "a"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "voice",
+          "tone": "M",
+          "syllable": {
+            "en": "small",
+            "tr": "ra"
+          }
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "voice",
+          "tone": "L",
+          "syllable": {
+            "en": "pause",
+            "tr": "ver"
+          }
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "vocal-01",
+      "title": {
+        "en": "Start comfortably and know when to stop",
+        "tr": "Rahat başla ve ne zaman duracağını bil"
+      },
+      "teach": {
+        "en": "This is a written beginner singing proposal for a generally comfortable speaking voice, not diagnosis or treatment. No prior notation is required. It provides no reference audio, voice classification, pitch detector, breathing measurement or mastery score. Do not sing when your voice is hoarse, ill or tired; stop for pain, strain, dizziness or increased effort. Do not force high/low limits, breath holds, screaming or whispering.",
+        "tr": "Bu, genel olarak rahat konuşma sesi olan kişi için yazılı başlangıç şan önerisidir; tanı veya tedavi değildir. Önceden nota okuma gerekmez. Referans ses, ses türü sınıflaması, perde algılayıcı, nefes ölçümü veya ustalık puanı sağlamaz. Sesin kısık, hasta veya yorgunken söyleme; ağrı, zorlanma, baş dönmesi veya artan eforda dur. Tiz/pes sınırları, nefes tutmayı, bağırmayı veya fısıldamayı zorlama."
+      },
+      "practice": {
+        "en": "Check how ordinary speaking feels today. If comfortable, choose a quiet space and a short attempt followed by rest; water can be nearby. If uncomfortable, skip vocalizing and read or tap the written rhythm instead.",
+        "tr": "Bugün sıradan konuşmanın nasıl hissettirdiğine bak. Rahatsa sessiz ortam ve ardından dinlenme gelen kısa deneme seç; yakında su olabilir. Rahatsızsa seslendirmeyi atlayıp yazılı ritmi oku veya vur."
+      },
+      "check": {
+        "en": "Can I choose practice or rest from how I feel without treating a button as clearance?",
+        "tr": "Düğmeyi izin saymadan hislerime göre çalışma veya dinlenme seçebiliyor muyum?"
+      },
+      "recover": {
+        "en": "Stop rather than try to fix pain by an exercise. Persistent or recurring voice problems need appropriate professional advice; individual technique questions can go to a qualified voice teacher. No lesson certifies vocal health.",
+        "tr": "Ağrıyı alıştırmayla düzeltmeye çalışmak yerine dur. Süren veya tekrarlayan ses sorunları uygun profesyonel danışma gerektirir; bireysel teknik soruları yetkin şan öğretmenine sorulabilir. Hiçbir ders ses sağlığını onaylamaz."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-02",
+      "title": {
+        "en": "Settle without a rigid posture target",
+        "tr": "Katı duruş hedefi olmadan yerleş"
+      },
+      "teach": {
+        "en": "Sit or stand with comfortable support, relaxed shoulders and an unforced head position. Let the jaw move freely without pushing it down. You need no camera or measured angle for this written exercise. Do not press, massage or manipulate the throat to make a sound.",
+        "tr": "Rahat destekle otur veya ayakta dur; omuzlar rahat, baş konumu zorlanmamış olsun. Çeneyi aşağı itmeden serbest hareket etmesine izin ver. Bu yazılı alıştırmada kamera veya ölçülmüş açı gerekmez. Ses çıkarmak için boğaza basma, masaj veya müdahale yapma."
+      },
+      "practice": {
+        "en": "Say “hello” once at an easy conversational volume. Release unnecessary shoulder/jaw effort, then say it again; rest. Observe only comfort and freedom to move.",
+        "tr": "“Merhaba”yı bir kez rahat konuşma seviyesinde söyle. Gereksiz omuz/çene eforunu bırakıp yeniden söyle; dinlen. Yalnız rahatlığı ve hareket özgürlüğünü gözle."
+      },
+      "check": {
+        "en": "Did the second attempt feel easier, unchanged or uncertain?",
+        "tr": "İkinci deneme daha rahat, aynı veya belirsiz mi hissettirdi?"
+      },
+      "recover": {
+        "en": "If trying to look correct adds stiffness, return to an ordinary comfortable speaking position. Stop if discomfort remains. A mirror cannot show all vocal function.",
+        "tr": "Doğru görünmeye çalışmak sertlik ekliyorsa sıradan rahat konuşma konumuna dön. Rahatsızlık sürerse dur. Ayna ses işlevlerinin tamamını gösteremez."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-03",
+      "title": {
+        "en": "Natural breath and short airflow",
+        "tr": "Doğal nefes ve kısa hava akışı"
+      },
+      "teach": {
+        "en": "Allow an ordinary easy inhale and an unforced exhale. Do not gulp maximum air, hold it, repeatedly breathe fast or push the abdomen/throat. Breathing for a phrase is coordination, not a contest for longest exhale. You can breathe whenever needed.",
+        "tr": "Sıradan rahat nefes alışına ve zorlamasız verişe izin ver. En fazla havayı yutmaya, tutmaya, tekrar tekrar hızlı nefes almaya veya karın/boğazı itmeye çalışma. Cümle için nefes eşgüdümdür; en uzun veriş yarışı değildir. Gerektiğinde nefes alabilirsin."
+      },
+      "practice": {
+        "en": "One ordinary inhale; let a gentle unvoiced “sss” out briefly, about two comfortable counts, then release and breathe normally. Try at most twice with a rest between. End earlier whenever needed; do not reach the count by squeezing.",
+        "tr": "Sıradan bir nefes al; hafif, sessiz “sss” ile yaklaşık iki rahat sayım kadar kısa ver, sonra bırakıp normal nefes al. Arada dinlenerek en fazla iki deneme yap. Gerektiğinde daha erken bitir; sıkarak sayıya ulaşma."
+      },
+      "check": {
+        "en": "Can I stop early without holding my breath or feeling light-headed?",
+        "tr": "Nefes tutmadan veya başım dönmeden erken bitirebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If you need more air, stop, breathe normally and shorten the next attempt. If dizzy or strained, stop the session. Written counts are never a breath-hold target.",
+        "tr": "Daha fazla hava gerekiyorsa dur, normal nefes al ve sonraki denemeyi kısalt. Baş dönmesi veya zorlanmada oturumu durdur. Yazılı sayılar hiçbir zaman nefes tutma hedefi değildir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-04",
+      "title": {
+        "en": "A gentle comfortable hum",
+        "tr": "Hafif ve rahat mırıldanma"
+      },
+      "teach": {
+        "en": "Use a small “mm” near an easy speaking pitch, with lips softly together rather than pressed. A comfortable tone is personal; no universal starting note or soprano/tenor label is assigned. Notice ease without insisting on a vibration location. Humming is a learning option, not a remedy for hoarseness.",
+        "tr": "Rahat konuşma sesine yakın küçük “mm” kullan; dudaklar bastırılmadan hafif birleşsin. Rahat ses kişiye özeldir; herkese başlangıç notası veya soprano/tenor etiketi atanmaz. Belirli titreşim yeri zorlamadan rahatlığa bak. Mırıldanma öğrenme seçeneğidir; ses kısıklığını gideren tedavi değildir."
+      },
+      "practice": {
+        "en": "Say a comfortable “mm-hm”, then briefly keep one easy “mm” tone. Release and rest. Try at most three brief attempts, leaving normal breathing between. Skip the sound if it feels pressed or uncomfortable.",
+        "tr": "Rahat “mm-hm” söyle, sonra tek rahat “mm” sesini kısa sürdür. Bırakıp dinlen. Arada normal nefesle en fazla üç kısa deneme yap. Baskılı veya rahatsız hissettiriyorsa sesi atla."
+      },
+      "check": {
+        "en": "Can I begin quietly at a comfortable volume without squeezing my lips or neck?",
+        "tr": "Dudak veya boynu sıkmadan rahat seviyede hafif başlayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "Reduce duration and return to ordinary speaking if comfortable. Do not force a hum or switch to a whispered sound to push through discomfort.",
+        "tr": "Rahatsa süreyi azaltıp sıradan konuşmaya dön. Rahatsızlığı aşmak için mırıldanmayı zorlama veya fısıltıya geçme."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-05",
+      "title": {
+        "en": "Start and release a short tone",
+        "tr": "Kısa sesi başlat ve bırak"
+      },
+      "teach": {
+        "en": "A tone has a beginning and an ending. Aim for an easy start and gentle release, without a hard throat attack or a big burst of breath. Finishing a tone does not mean locking the breath afterward.",
+        "tr": "Sesin başlangıcı ve sonu vardır. Sert boğaz saldırısı veya büyük hava patlaması olmadan rahat başlangıç ve hafif bırakış dene. Sesi bitirmek sonrasında nefesi kilitlemek değildir."
+      },
+      "practice": {
+        "en": "On the comfortable “mm”, begin for two relaxed counts, release, then leave two counts silent with normal breathing. Repeat at most twice with rest. If two counts are too long, use one and mark that adaptation.",
+        "tr": "Rahat “mm” üzerinde iki rahat sayım söyle, bırak, sonra normal nefesle iki sayım sessiz bırak. Dinlenmeyle en fazla iki tekrar yap. İki sayım uzunsa bir kullan ve uyarlamayı işaretle."
+      },
+      "check": {
+        "en": "Did I release the sound without a pushed final accent or held breath?",
+        "tr": "Sonu itilen vurgu veya tutulan nefes olmadan bırakabildim mi?"
+      },
+      "recover": {
+        "en": "If the start feels forceful, stop and try only an ordinary easy “mm-hm” on a later comfortable attempt. If running out of air, shorten; never keep going to finish a counter.",
+        "tr": "Başlangıç zorlamalıysa dur; daha sonraki rahat denemede yalnız sıradan rahat “mm-hm” dene. Hava bitiyorsa kısalt; sayacı bitirmek için sürdürme."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-06",
+      "title": {
+        "en": "Read a four-count rhythm",
+        "tr": "Dört sayımlı ritmi oku"
+      },
+      "teach": {
+        "en": "A 4/4 bar has four quarter beats, counted 1 2 3 4. One syllable can last more than one count; a rest is silence while the pulse continues. Tapping and silent reading come before adding voice. Silence does not forbid breathing.",
+        "tr": "4/4 ölçüde 1 2 3 4 sayılan dört dörtlük vuruş vardır. Tek hece birden çok sayı sürebilir; sus, nabız sürerken sessizliktir. Ses eklemeden önce vurma ve sessiz okuma gelir. Sessizlik nefes almayı yasaklamaz."
+      },
+      "practice": {
+        "en": "Tap two bars: bar 1 tap on 1, no new tap on 2, rest 3–4; bar 2 tap on 1 and 2, rest 3–4. Write the attack counts before looking at the separate reading answer. If comfortable later, sustain one gentle hum across beats 1–2 of bar 1, then release for silence on 3–4. In bar 2 make separate gentle starts on 1 and 2, then silence on 3–4. Breathe whenever needed.",
+        "tr": "İki ölçü vur: ölçü 1’de 1’de vur, 2’de yeni vuruş yok, 3–4 sus; ölçü 2’de 1 ve 2’de vur, 3–4 sus. Ayrı okuma cevabına bakmadan başlangıç sayılarını yaz. Daha sonra rahatsa ölçü 1’de tek hafif mırıldanmayı vuruş 1–2 boyunca sürdür, sonra 3–4’te sessizlik için bırak. Ölçü 2’de 1 ve 2’de ayrı hafif başla, sonra 3–4 sus. Gerektiğinde nefes al."
+      },
+      "check": {
+        "en": "Can I keep the count through silence and identify each new start?",
+        "tr": "Sessizlikte sayımı sürdürüp her yeni başlangıcı tanıyabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If you add an extra count, return to silent four-beat tapping. If breathing needs interrupt the vocal version, adapt the phrase and record the change rather than call it unchanged.",
+        "tr": "Fazladan sayı ekliyorsan sessiz dört vuruş vurmaya dön. Nefes ihtiyacı sesli sürümü bölüyorsa cümleyi uyarlayıp değişmedi demek yerine değişimi kaydet."
+      },
+      "diagrams": [
+        "rhythm"
+      ]
+    },
+    {
+      "id": "vocal-07",
+      "title": {
+        "en": "Pitch direction is different from volume",
+        "tr": "Perde yönü ses seviyesinden farklıdır"
+      },
+      "teach": {
+        "en": "Pitch means how high or low a tone sounds; volume means how loud it is. A nearby higher tone need not be louder. This course first uses relative directions, not fixed semitone intervals or accuracy scores. Work within a small, easy part of your voice; avoid testing your range limits.",
+        "tr": "Perde sesin tiz/pes oluşudur; seviye ne kadar yüksek duyulduğudur. Yakın tiz ses daha gür olmak zorunda değildir. Bu kurs önce göreli yönleri kullanır; sabit yarım ses aralığı veya doğruluk puanı değil. Sesinin küçük, rahat bölümünde çalış; sınırlarını deneme."
+      },
+      "practice": {
+        "en": "Hum one comfortable tone, make a very small easy glide slightly higher and return; release and rest. On a separate attempt try slightly lower and return. Keep conversationally comfortable volume; stop if the move adds effort.",
+        "tr": "Tek rahat ses mırıldan; çok küçük rahat kayışla biraz tizleşip dön, bırak ve dinlen. Ayrı denemede biraz pesleşip dön. Rahat konuşma seviyesini koru; hareket efor eklerse dur."
+      },
+      "check": {
+        "en": "Did I hear a direction change, or merely a louder/softer sound, or am I unsure?",
+        "tr": "Yön değişimi mi duydum, yalnız daha gür/hafif ses mi, yoksa emin değil miyim?"
+      },
+      "recover": {
+        "en": "If unsure, mark uncertainty; do not push higher or louder to prove it. Return to one tone. Optional guidance from a teacher or an external reference can clarify pitch, but this app supplies no judged reference.",
+        "tr": "Emin değilsen belirsizliği işaretle; kanıtlamak için daha tiz veya gür zorlama. Tek sese dön. İsteğe bağlı öğretmen veya harici referans perdeyi açıklayabilir; uygulama hüküm verilmiş referans sağlamaz."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-08",
+      "title": {
+        "en": "Choose three nearby comfortable tones",
+        "tr": "Yakın üç rahat ses seç"
+      },
+      "teach": {
+        "en": "Call your easy centre M, a nearby lower tone L, and a nearby higher tone H. These labels describe a personal contour, not Do-Re-Mi, a key, an octave or a voice type. Keep all three comfortably close; narrowing the span is allowed and must be recorded if changed for comparison.",
+        "tr": "Rahat merkeze M, yakındaki pes sese L, yakındaki tiz sese H de. Etiketler kişisel ses çizgisidir; Do-Re-Mi, ton, oktav veya ses türü değildir. Üçü de rahatça yakın olsun; alanı daraltabilirsin, karşılaştırma için değiştiyse kaydet."
+      },
+      "practice": {
+        "en": "Choose M from the easy hum, then gently try L and H separately with rests. Write how you identified them, or “uncertain”. Say/hum M H M L as four separate quarter counts only if all choices are comfortable. Rest a bar.",
+        "tr": "M’yi rahat mırıldanmadan seç; sonra L ve H’yi aralarla ayrı hafif dene. Nasıl tanıdığını veya “belirsiz” yaz. Tümü rahatsa M H M L’yi dört ayrı dörtlük sayımda söyle/mırıldan. Bir ölçü dinlen."
+      },
+      "check": {
+        "en": "Can I keep the chosen contour small without confusing H with loudness?",
+        "tr": "H’yi gürlükle karıştırmadan seçilmiş çizgiyi küçük tutabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If any tone strains, omit vocalizing and return to silent contour reading. A teacher can help choose a starting span; no written pattern proves your chosen tones are accurate or safe.",
+        "tr": "Seslerden biri zorluyorsa seslendirmeyi atlayıp sessiz çizgi okumaya dön. Öğretmen başlangıç alanını seçmeye yardım edebilir; yazılı desen seçilmiş seslerin doğru veya güvenli olduğunu kanıtlamaz."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-09",
+      "title": {
+        "en": "Read a new two-bar contour",
+        "tr": "Yeni iki ölçülük çizgiyi oku"
+      },
+      "teach": {
+        "en": "Read the supplied two-bar contour left to right. Each cell is one quarter beat. M/L/H mean your previously chosen middle/lower/higher tones; R means counted silence with normal breathing allowed. Decode on paper before revealing the separate reading answer. No staff/key or interval accuracy is implied.",
+        "tr": "Verilen iki ölçülük çizgiyi soldan sağa oku. Hücrede bir dörtlük vuruş vardır. M/L/H önce seçtiğin orta/pes/tiz seslerdir; R, normal nefese izin verilen sayılan sessizliktir. Ayrı okuma cevabını açmadan kâğıtta çöz. Porte/ton veya aralık doğruluğu ima edilmez."
+      },
+      "practice": {
+        "en": "Bar 1: M H M R. Bar 2: L M M R. First tap/speak symbols through 1 2 3 4 each bar. Later, if comfortable, hum the voiced cells at the same gentle volume, releasing for R. Each printed M is a new start here.",
+        "tr": "Ölçü 1: M H M R. Ölçü 2: L M M R. Önce her ölçüde 1 2 3 4 boyunca sembolleri vur/söyle. Daha sonra rahatsa sesli hücreleri aynı hafif seviyede mırıldan; R’de bırak. Burada basılı her M yeni başlangıçtır."
+      },
+      "check": {
+        "en": "Can I write both bars’ tone directions and rests correctly, without claiming actual pitch matching?",
+        "tr": "Gerçek perde eşleşmesi iddiası olmadan iki ölçünün ses yönü ve suslarını doğru yazabiliyor muyum?"
+      },
+      "recover": {
+        "en": "For a reading error isolate one cell and compare its symbol to the answer. For a vocal uncertainty return to lesson 7/8; paper correctness is not evidence that singing was correct.",
+        "tr": "Okuma hatasında tek hücreyi ayırıp sembolünü cevapla karşılaştır. Sesli belirsizlikte ders 7/8’e dön; kâğıt doğruluğu şanın doğru olduğuna kanıt değildir."
+      },
+      "diagrams": [
+        "contour"
+      ]
+    },
+    {
+      "id": "vocal-10",
+      "title": {
+        "en": "Open a vowel without forcing",
+        "tr": "Ünlüyü zorlamadan aç"
+      },
+      "teach": {
+        "en": "After an easy hum, explore “oo” with gently rounded lips, then a separate “ah” with a comfortable jaw opening. They are sound-shape options, not an instruction to force a resonance location, tongue stretch or larynx height. A change in vowel can change tone colour without requiring a higher note or louder voice.",
+        "tr": "Rahat mırıldanmadan sonra hafif yuvarlak dudakla “u”, sonra ayrı denemede rahat çene açıklığıyla “a” keşfet. Bunlar ses şekli seçenekleridir; belirli rezonans yeri, dil esnetme veya gırtlak yüksekliği zorlama yönergesi değildir. Ünlü değişimi daha tiz nota veya gür ses gerektirmeden rengi değiştirebilir."
+      },
+      "practice": {
+        "en": "On chosen M, one brief “mm” then gently open to “oo”; release and rest. Try a separate brief “ah” only if easy. Observe whether the opening changes effort; keep attempts short, not a long sustained test.",
+        "tr": "Seçilmiş M’de kısa “mm”, sonra hafifçe “u”ya açıl; bırak ve dinlen. Yalnız rahatsa ayrı kısa “a” dene. Açılışın eforu değiştirip değiştirmediğine bak; uzun tutuş testi yerine kısa denemeler yap."
+      },
+      "check": {
+        "en": "Can I change the vowel without pushing the jaw down or getting louder?",
+        "tr": "Çeneyi aşağı itmeden veya gürleşmeden ünlüyü değiştirebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If opening increases effort, stop and return to ordinary easy speaking on a later attempt, or use silent reading today. No exercise is a treatment for an uncomfortable voice.",
+        "tr": "Açılmak eforu artırıyorsa dur; sonraki denemede sıradan rahat konuşmaya dön veya bugün sessiz okuma kullan. Hiçbir alıştırma rahatsız ses için tedavi değildir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-11",
+      "title": {
+        "en": "Clear original words and syllables",
+        "tr": "Açık özgün sözler ve heceler"
+      },
+      "teach": {
+        "en": "Consonants separate syllables and vowels carry their tone. Use normal clear speech before gentle singing; do not over-enunciate with a locked jaw. Our original English phrase “I am here now” has four one-syllable words. Turkish “Ben bu-ra-da” has four syllables. They are practice text, not a copied song.",
+        "tr": "Ünsüzler heceleri ayırır; ünlüler sesi taşır. Hafif şandan önce normal açık konuşma kullan; çeneyi kilitleyerek aşırı telaffuz etme. Özgün “Ben bu-ra-da” dört hecedir. İngilizce “I am here now” dört tek heceli sözcüktür. Bunlar çalışma sözüdür; kopyalanmış şarkı değil."
+      },
+      "practice": {
+        "en": "Speak one syllable per quarter count for four beats. If easy, try all four on M, then try M M H M on another rested attempt. Leave a silent bar afterward. If you need a breath sooner, use two syllables plus a rest and label the adaptation.",
+        "tr": "Dört vuruşta dörtlük sayım başına bir hece konuş. Rahatsa dördünü M’de dene; sonra dinlenmiş başka denemede M M H M dene. Ardından bir sessiz ölçü bırak. Daha erken nefes gerekiyorsa iki hece ve sus kullanıp uyarlamayı adlandır."
+      },
+      "check": {
+        "en": "Are the words understandable and comfortably timed by my own observation?",
+        "tr": "Kendi gözlemime göre sözler anlaşılır ve rahat zamanlanmış mı?"
+      },
+      "recover": {
+        "en": "If consonants disrupt time, speak/tap only the difficult pair first. If voice effort rises, stop vocalizing rather than exaggerating pronunciation or volume.",
+        "tr": "Ünsüzler zamanı bozuyorsa önce yalnız zor çifti konuş/vur. Ses eforu artarsa telaffuz veya seviyeyi abartmak yerine seslendirmeyi durdur."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-12",
+      "title": {
+        "en": "Expression at a comfortable volume",
+        "tr": "Rahat seviyede ifade"
+      },
+      "teach": {
+        "en": "Expression can come from word intention and timing, not just loudness. Try a neutral then friendly intention while keeping the same chosen gentle contour and comfortable volume. This is artistic exploration, not an emotion or voice-quality score.",
+        "tr": "İfade yalnız gürlükten değil söz niyeti ve zamanından da gelir. Aynı seçilmiş hafif çizgi ve rahat seviyeyi koruyarak önce nötr sonra dostça niyet dene. Bu sanatsal keşiftir; duygu veya ses kalitesi puanı değildir."
+      },
+      "practice": {
+        "en": "Speak the original four syllables once with neutral intention, rest, then once as a friendly greeting. If comfortable, sing both at M M H M. Name one intentional difference, or “uncertain”; do not shout or whisper for contrast.",
+        "tr": "Özgün dört heceyi bir kez nötr söyle, dinlen, sonra dostça selamlama olarak söyle. Rahatsa ikisini M M H M’de söyle. Bir niyetli fark veya “belirsiz” adlandır; karşıtlık için bağırma veya fısıldama."
+      },
+      "check": {
+        "en": "Did I change communication while preserving comfort and the chosen timing?",
+        "tr": "Rahatlık ve seçilmiş zamanı korurken iletişimi değiştirebildim mi?"
+      },
+      "recover": {
+        "en": "If expression causes pushing, return to speech at normal easy volume. Keep the contour smaller or use only spoken practice; record that change honestly.",
+        "tr": "İfade itmeye yol açıyorsa normal rahat seviyede konuşmaya dön. Çizgiyi küçült veya yalnız konuşma çalış; değişimi dürüstçe kaydet."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-13",
+      "title": {
+        "en": "Phrase lengths and breathing windows",
+        "tr": "Cümle süresi ve nefes araları"
+      },
+      "teach": {
+        "en": "The study uses eight half-beat cells per 4/4 bar. V starts the stated tone/syllable; = adds no new start and continues current sound or silence; R releases sound and counts silence. = never means hold your breath. Normal breathing is allowed during rests and whenever needed. Written durations are suggestions, not physiological targets. H remains the higher-tone label; it is never the continuation symbol.",
+        "tr": "Etüt, 4/4 ölçü başına sekiz yarım vuruş hücresi kullanır. V belirtilen ses/heceyi başlatır; = yeni başlangıç eklemez, mevcut ses veya sessizliği sürdürür; R sesi bırakıp sessizlik sayar. = asla nefes tut demek değildir. Suslarda ve gerektiğinde normal nefes serbesttir. Yazılı süreler öneridir; fizyolojik hedef değil. H tiz ses etiketi olarak kalır; sürdürme sembolü değildir."
+      },
+      "practice": {
+        "en": "Tap each printed V, keep counting =/R. Inspect the full silent bars 6 and 8 and the silent endings of bars 1–4 before singing. Choose a tempo and span that allow an easy short phrase, or shorten the voiced part and label your exact adapted task.",
+        "tr": "Basılı her V’yi vur; =/R’de saymayı sürdür. Söylemeden önce tam sessiz ölçü 6 ve 8’i ve ölçü 1–4’ün sessiz sonlarını incele. Rahat kısa cümleye izin veren tempo/alan seç veya sesli bölümü kısaltıp tam uyarlanmış görevi adlandır."
+      },
+      "check": {
+        "en": "Can I identify silence and breathe without treating a counter as an obligation?",
+        "tr": "Sayacı zorunluluk saymadan sessizliği tanıyıp nefes alabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If a phrase exhausts the breath, stop sooner and plan a shorter version. Compare the same adapted version in both later attempts; do not claim the original was completed.",
+        "tr": "Cümle nefesi bitiriyorsa daha erken durup kısa sürüm planla. Sonraki iki denemede aynı uyarlanmış sürümü karşılaştır; özgünün tamamlandığını iddia etme."
+      },
+      "diagrams": [
+        "study"
+      ]
+    },
+    {
+      "id": "vocal-14",
+      "title": {
+        "en": "Prepare the original eight-bar voice study",
+        "tr": "Özgün sekiz ölçülük ses etüdünü hazırla"
+      },
+      "teach": {
+        "en": "The original study combines the learned hum/vowel, small M/L/H contour, quarter-word starts and explicit silence. No fixed key, exact interval, accompaniment or verified pitch reference is provided. The silent bar and short endings are planned recovery space; they are not breath holds.",
+        "tr": "Özgün etüt öğrenilmiş mırıldanma/ünlü, küçük M/L/H çizgisi, dörtlük söz başlangıcı ve açık sessizliği birleştirir. Sabit ton, kesin aralık, eşlik veya doğrulanmış perde referansı sağlanmaz. Sessiz ölçü ve kısa sonlar planlı dinlenme alanıdır; nefes tutma değildir."
+      },
+      "practice": {
+        "en": "Read each bar and tap all eight equal half-counts first. Practise bars 1–3 separately, then the three-note contour in 4, then speak the words in 5 and 7. Connect only while comfortable, using the same recorded tempo and personal span; release on R and rest in bars 6 and 8.",
+        "tr": "Önce her ölçüyü oku ve sekiz eşit yarım sayımı vur. Ölçü 1–3’ü ayrı, sonra 4’ün üç sesli çizgisini, sonra 5 ve 7’nin konuşulan sözlerini çalış. Yalnız rahatsa aynı kayıtlı tempo ve kişisel alanla bağla; R’de bırak ve ölçü 6 ve 8’de dinlen."
+      },
+      "check": {
+        "en": "Do all sung tasks follow what I already practised, with a clear stop/adaptation option?",
+        "tr": "Tüm sesli görevler önce çalıştıklarımı izliyor ve açık durma/uyarlama seçeneği taşıyor mu?"
+      },
+      "recover": {
+        "en": "If a vowel/word adds effort, stop singing and keep the reading/tapping version. For a rhythm error isolate the bar; for pitch uncertainty seek optional guidance rather than an invented app verdict.",
+        "tr": "Ünlü/söz efor ekliyorsa şanı durdurup okuma/vurma sürümünü tut. Ritim hatasında ölçüyü ayır; perde belirsizliğinde uydurma uygulama hükmü yerine isteğe bağlı yönlendirme al."
+      },
+      "diagrams": [
+        "study"
+      ]
+    },
+    {
+      "id": "vocal-15",
+      "title": {
+        "en": "Observe one issue and compare the same task",
+        "tr": "Tek sorunu gözle ve aynı görevi karşılaştır"
+      },
+      "teach": {
+        "en": "An observation can be “late word”, “forgot rest”, “tone direction uncertain”, “more effort”, or “no observed error”. Comfort is a stop decision, not a measured score. Paper correctness, time spent and a completed button are not evidence of vocal mastery.",
+        "tr": "Gözlem “geç söz”, “sus unutuldu”, “ses yönü belirsiz”, “daha fazla efor” veya “gözlenen hata yok” olabilir. Rahatlık durma kararıdır; ölçülmüş puan değil. Kâğıt doğruluğu, geçirilen süre ve tamamlandı düğmesi ses ustalığına kanıt değildir."
+      },
+      "practice": {
+        "en": "If comfortable, attempt the chosen original or explicitly adapted study once. Write its tempo/span/adaptation and one bar/count issue. For a timing issue, silently tap that bar as one correction. Return to the identical chosen task, same tempo/span, and compare improved/unchanged/uncertain. End the session if effort increases; no rerun is required.",
+        "tr": "Rahatsa seçilmiş özgün veya açık uyarlanmış etüdü bir kez dene. Tempo/alan/uyarlamasını ve tek ölçü/sayım sorununu yaz. Zaman sorunu için o ölçüyü tek düzeltme olarak sessiz vur. Aynı seçilmiş görev, tempo/alanla dönüp daha iyi/değişmedi/belirsiz karşılaştır. Efor artarsa oturumu bitir; yeniden tur zorunlu değildir."
+      },
+      "check": {
+        "en": "Can I identify the task and compare one observation without inventing an audio judgment?",
+        "tr": "Ses hükmü uydurmadan görevi tanımlayıp tek gözlemi karşılaştırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the issue is discomfort, stop instead of treating it as a rhythm problem. If the span/task changed, label it a new comparison task and repeat only later when comfortable.",
+        "tr": "Sorun rahatsızlıksa ritim sorunu saymak yerine dur. Alan/görev değiştiyse yeni karşılaştırma görevi olarak adlandır; yalnız sonra rahatken tekrar et."
+      },
+      "diagrams": [
+        "study"
+      ]
+    },
+    {
+      "id": "vocal-16",
+      "title": {
+        "en": "Beginner exit and another-day revisit",
+        "tr": "Başlangıç çıkışı ve başka gün tekrarı"
+      },
+      "teach": {
+        "en": "Review comfortable start/stop choices, natural breathing, short hum/onset/release, counted rests, pitch versus volume, three-tone contour, vowels, original words and phrase planning. This bounded written foundation does not certify range, intonation, sustained-note quality, vibrato, health or a voice type.",
+        "tr": "Rahat başla/dur seçimleri, doğal nefes, kısa mırıldanma/başlatma/bırakma, sayılan sus, perde-seviye ayrımı, üç sesli çizgi, ünlüler, özgün sözler ve cümle planını gözden geçir. Bu sınırlı yazılı temel alanı, entonasyonu, uzun ses kalitesini, vibratoyu, sağlığı veya ses türünü onaylamaz."
+      },
+      "practice": {
+        "en": "On another comfortable day decode the new two-bar contour before reading its answer, speak/tap the original words, and try your recorded short study only if comfortable. Name one repeatable outcome, one uncertainty and the relevant smaller lesson. Rest is always a valid choice.",
+        "tr": "Başka rahat günde cevabı okumadan yeni iki ölçülük çizgiyi çöz, özgün sözleri konuş/vur ve yalnız rahatsa kayıtlı kısa etüdünü dene. Tekrarlanabilir bir kazanım, bir belirsizlik ve ilgili küçük dersi adlandır. Dinlenmek her zaman geçerli seçimdir."
+      },
+      "check": {
+        "en": "Can I understand and attempt the defined beginner tasks, stop appropriately and choose a useful next step?",
+        "tr": "Tanımlı başlangıç görevlerini anlayıp deneyebiliyor, uygun durup yararlı sonraki adımı seçebiliyor muyum?"
+      },
+      "recover": {
+        "en": "Return to the smaller task for an uncertain outcome. Individual voice teaching can help with technique; persistent voice problems need appropriate professional advice. No written exit task verifies your real voice.",
+        "tr": "Belirsiz kazanımda küçük göreve dön. Bireysel şan eğitimi tekniğe yardım edebilir; süren ses sorunları uygun profesyonel danışma gerektirir. Hiçbir yazılı çıkış görevi gerçek sesini doğrulamaz."
+      },
+      "diagrams": []
+    }
+  ],
+  "schemaVersion": 1,
+  "id": "voice.beginner.written",
+  "pitchMode": "personal-relative:L-M-H;no-fixed-interval"
+}

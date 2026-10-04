@@ -11,6 +11,9 @@ import '../design/widgets.dart';
 import 'course_screen.dart';
 import 'instrument_screen.dart';
 import 'settings_screen.dart';
+import 'ukulele_beginner_screen.dart';
+import 'bass_beginner_screen.dart';
+import 'vocal_beginner_screen.dart';
 
 /// Kütüphane — kabuğun giriş ekranı. Üç canlı çalgı, her biri kendi gradyan
 /// kimliğinde bir kart. Zemin NÖTR kalır (§13); renk yalnız kartlarda.
@@ -204,6 +207,64 @@ class LibraryScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 11),
                 ],
+                ListTile(
+                  key: const Key('ukulele-beginner-entry'),
+                  title: Text(localized(context, 'Ukulele', 'Ukulele')),
+                  subtitle: Text(
+                    localized(
+                      context,
+                      'Written beginner course · high-G GCEA · self-observation',
+                      'Yazılı başlangıç kursu · yüksek Sol GCEA · öz gözlem',
+                    ),
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const UkuleleBeginnerScreen(),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  key: const Key('bass-beginner-entry'),
+                  title: Text(localized(context, 'Bass', 'Bas')),
+                  subtitle: Text(
+                    localized(
+                      context,
+                      'Written beginner course · four-string EADG · self-observation',
+                      'Yazılı başlangıç kursu · dört telli EADG · öz gözlem',
+                    ),
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const BassBeginnerScreen(),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  key: const Key('vocal-written-course'),
+                  leading: const Icon(Icons.menu_book_outlined),
+                  title: Text(
+                    localized(
+                      context,
+                      'Voice · written practice',
+                      'Vokal · yazılı çalışma',
+                    ),
+                  ),
+                  subtitle: Text(
+                    localized(
+                      context,
+                      'Comfortable beginner course · personal pitch direction · self-observation',
+                      'Rahat başlangıç kursu · kişisel perde yönü · öz gözlem',
+                    ),
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const VocalBeginnerScreen(),
+                    ),
+                  ),
+                ),
                 // 0-24° PAYLAŞILAN ölçek açıklaması (DESIGN-AHEAD §1.3).
                 // Tasarımın taslak cümlesi piyanonun dar bandını "üç
                 // eğitmen en ince kanıt" diye AÇIKLIYORDU — o cümle

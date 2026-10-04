@@ -125,6 +125,10 @@ flutter:
     - assets/config/audio-contract.json
     - assets/content/library.json
     - assets/content/guitar_journey.v1.json
+    - assets/content/piano_beginner.v1.json
+    - assets/content/ukulele_beginner.v1.json
+    - assets/content/bass_beginner.v1.json
+    - assets/content/vocal_beginner.v1.json
     - assets/motion_content/manifest.json
     # Code-pinned source membership for closed QA; the shipping media slot is empty.
     - assets/motion_content/ostinato_source_pins_v2k.json

@@ -1,0 +1,386 @@
+{
+  "schemaVersion": 1,
+  "id": "piano.beginner",
+  "title": {
+    "en": "Piano / keyboard: beginner foundation",
+    "tr": "Piyano / klavye: başlangıç temeli"
+  },
+  "entry": {
+    "en": "No prior reading required. Use an acoustic piano or keyboard with C3–G4 available; octave labels may differ by manufacturer. Choose comfortable seating, low volume and short sessions.",
+    "tr": "Önceki nota bilgisi gerekmez. Do3–Sol4 aralığı olan piyano veya klavye kullan; üretici oktav adları değişebilir. Rahat oturuş, düşük ses ve kısa çalışma seç."
+  },
+  "exit": {
+    "en": "Locate and name keys; count notes and rests; use treble/bass anchors; play each hand and a simple two-hand study; identify a mistake and choose a smaller practice task. All checks are self-observation.",
+    "tr": "Tuşları bul ve adlandır; nota ve susları say; sol/fa anahtarı referanslarını kullan; elleri ayrı ve basit etütte birlikte çal; hatayı fark edip küçük çalışma seç. Tüm kontroller öz gözlemdir."
+  },
+  "lessons": [
+    {
+      "id": "piano-01",
+      "title": {
+        "en": "Setup and limits",
+        "tr": "Kurulum ve sınırlar"
+      },
+      "teach": {
+        "en": "Use a stable seat and keyboard. Support your feet; adjust height so forearms can reach the keys without raised shoulders. Start with five comfortable minutes and quiet volume. No pedal yet. This written course needs no microphone or camera.",
+        "tr": "Sabit oturak ve klavye kullan. Ayaklarını destekle; omuzlarını kaldırmadan tuşlara ulaşabileceğin yüksekliği seç. Rahat beş dakika ve düşük sesle başla. Pedal kullanma. Yazılı kurs mikrofon veya kamera istemez."
+      },
+      "practice": {
+        "en": "Sit, reach three nearby keys, then release your arms. Repeat after a short break.",
+        "tr": "Otur, yakın üç tuşa uzan, sonra kollarını serbest bırak. Kısa aradan sonra tekrarla."
+      },
+      "check": {
+        "en": "Can I reach without leaning or strain?",
+        "tr": "Eğilmeden ve zorlanmadan ulaşabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If uncomfortable, stop and adjust distance/height. Pain or numbness means stop; seek appropriate help if persistent.",
+        "tr": "Rahatsızsan dur, mesafe/yüksekliği değiştir. Ağrı veya uyuşmada dur; sürerse uygun destek al."
+      }
+    },
+    {
+      "id": "piano-02",
+      "title": {
+        "en": "Keyboard map",
+        "tr": "Klavye haritası"
+      },
+      "teach": {
+        "en": "Black keys repeat in groups of two and three. C is the white key immediately left of a pair. Moving right raises pitch; moving left lowers it. White keys repeat C D E F G A B (Do Re Mi Fa Sol La Si).",
+        "tr": "Siyah tuşlar ikili ve üçlü gruplarla tekrarlanır. Do (C), ikili grubun hemen solundaki beyaz tuştur. Sağa gitmek sesi inceltir, sola gitmek kalınlaştırır. Beyaz tuşlar Do Re Mi Fa Sol La Si (C D E F G A B) sırasındadır."
+      },
+      "practice": {
+        "en": "Find two C keys within C3–G4; an optional third C only if your keyboard has it. Name C through B in one octave, then reverse.",
+        "tr": "Do3–Sol4 aralığında iki Do bul; klavyende varsa üçüncü Do isteğe bağlıdır. Bir oktavda Do’dan Si’ye adlandır, sonra tersine dön."
+      },
+      "check": {
+        "en": "Can I find C without counting from the end?",
+        "tr": "Baştan saymadan Do bulabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If lost, locate a pair of black keys again; do not guess from a triple.",
+        "tr": "Kaybolursan yeniden iki siyah tuş bul; üçlü gruptan tahmin etme."
+      }
+    },
+    {
+      "id": "piano-03",
+      "title": {
+        "en": "Finger numbers and touch",
+        "tr": "Parmak numaraları ve tuşe"
+      },
+      "teach": {
+        "en": "Both hands: thumb 1, index 2, middle 3, ring 4, little 5. Let fingers curve naturally; wrists stay mobile, not locked. Press then release one key; avoid forcing a fixed hand shape. Before playing C4, use the keyboard diagram below. On an 88-key piano, middle C is the fourth C from the left (white key number 24, overall key number 40); the first key is A0. On shorter keyboards, consult the manufacturer’s key map for middle C / MIDI note 60. Manufacturers may label this C3, C4 or C5. Do not choose a C only because it looks central. If the map is unavailable, register identification is uncertain: practise relative note direction without calling a key C4 or claiming the required range.",
+        "tr": "İki elde de başparmak 1, işaret 2, orta 3, yüzük 4, serçe 5. Parmaklar doğal kıvrılsın; bilek hareketli olsun, kilitlenmesin. Bir tuşa bas ve bırak; sabit el şeklini zorlama. Do4 çalmadan önce aşağıdaki klavye çizimini kullan. 88 tuşlu piyanoda orta Do soldan dördüncü Do’dur (24. beyaz tuş, tüm tuşlarda 40. tuş); ilk tuş La0’dır. Kısa klavyede üreticinin tuş haritasında orta Do / MIDI nota 60 konumunu bul. Üretici bunu C3, C4 veya C5 diye etiketleyebilir. Yalnız merkezde göründüğü için Do seçme. Harita yoksa ses bölgesi belirsizdir: tuşa Do4 demeden ve gereken aralığın varlığını iddia etmeden göreli nota yönünü çalış."
+      },
+      "practice": {
+        "en": "On C4 play right thumb four times, slowly. Rest. On C3 play left little finger four times. C4 means middle C here; C3 is one octave below.",
+        "tr": "Do4’te sağ başparmakla yavaşça dört kez çal. Dinlen. Do3’te sol serçeyle dört kez çal. Burada Do4 orta Do, Do3 bir oktav altıdır."
+      },
+      "check": {
+        "en": "Can I release between notes without tightening?",
+        "tr": "Notalar arasında kasılmadan bırakabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If finger joints collapse or wrist stiffens, use less pressure and pause; individual hands vary.",
+        "tr": "Parmak eklemi çöker veya bilek sertleşirse basıncı azalt ve ara ver; el yapıları farklıdır."
+      }
+    },
+    {
+      "id": "piano-04",
+      "title": {
+        "en": "Steady pulse and rests",
+        "tr": "Düzenli vuruş ve sus"
+      },
+      "teach": {
+        "en": "In 4/4 count 1 2 3 4. A quarter note lasts one beat, half note two, whole note four. A rest is counted silence, not an extra pause. Tempo is beats per minute; choose a comfortable slow pulse, not a pass threshold.",
+        "tr": "4/4 ölçüde 1 2 3 4 say. Dörtlük bir, ikilik iki, birlik dört vuruş sürer. Sus sayılan sessizliktir, fazladan ara değildir. Tempo dakikadaki vuruştur; rahat yavaş hız seç, geçme eşiği değil."
+      },
+      "practice": {
+        "en": "Clap on beats 1, 2, 3, 4. Then clap on 1, count and wait on 2; clap on 3, count and wait on 4. A clap is a brief onset, not a sound you hold. Next clap on 1, stay silent on 2, clap 3 and 4. After locating middle C in lesson 3, play C4 on 1 and keep its key down while counting 2; release and play on 3, hold through 4. These are two actual half notes. Repeat twice.",
+        "tr": "1, 2, 3, 4’te alkışla. Sonra 1’de alkışla, 2’yi sayıp bekle; 3’te alkışla, 4’ü sayıp bekle. Alkış kısa bir başlangıçtır, tutulan bir ses değildir. Sonra 1’de alkışla, 2’de sus, 3 ve 4’te alkışla. Ders 3’te orta Do’yu bulduktan sonra 1’de Do4 çal, 2’yi sayarken tuşu basılı tut; bırakıp 3’te yeniden çal, 4 boyunca tut. Bunlar gerçekten tutulan iki ikilik notadır. İki kez tekrarla."
+      },
+      "check": {
+        "en": "Did my count continue through silence?",
+        "tr": "Sessizlikte sayım sürdü mü?"
+      },
+      "recover": {
+        "en": "If rushing, speak the count and tap before touching keys. Restart at a bar boundary.",
+        "tr": "Hızlanıyorsan tuşlara geçmeden sayarak vur. Ölçü başında yeniden başla."
+      }
+    },
+    {
+      "id": "piano-05",
+      "title": {
+        "en": "Right-hand five notes",
+        "tr": "Sağ elde beş nota"
+      },
+      "teach": {
+        "en": "Place right 1–5 on C4 D4 E4 F4 G4. These are a small five-note position, not a full scale. Move one finger at a time and release the previous key.",
+        "tr": "Sağ 1–5’i Do4 Re4 Mi4 Fa4 Sol4’e koy. Bu küçük beş nota konumudur, tam dizi değildir. Bir parmağı hareket ettir ve önceki tuşu bırak."
+      },
+      "practice": {
+        "en": "Play C4 D4 E4 F4 | G4 F4 E4 D4 | C4 held four beats. Each note before the final C lasts one beat. Count each bar.",
+        "tr": "Do4 Re4 Mi4 Fa4 | Sol4 Fa4 Mi4 Re4 | Do4 dört vuruş. Son Do’dan önce her nota bir vuruş. Her ölçüyü say."
+      },
+      "check": {
+        "en": "Can I name the notes and keep the same pulse?",
+        "tr": "Notaları adlandırıp aynı vuruşu sürdürebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the fourth finger feels awkward, slow down; do not hammer or hold other fingers rigidly.",
+        "tr": "Dördüncü parmak zorlanırsa yavaşla; vurma veya diğer parmakları katı tutma."
+      }
+    },
+    {
+      "id": "piano-06",
+      "title": {
+        "en": "Left-hand five notes",
+        "tr": "Sol elde beş nota"
+      },
+      "teach": {
+        "en": "Place left 5–1 on C3 D3 E3 F3 G3. Finger numbers therefore run opposite to the right hand when pitch rises.",
+        "tr": "Sol 5–1’i Do3 Re3 Mi3 Fa3 Sol3’e koy. Ses yükselirken parmak numaraları sağ elin tersine gider."
+      },
+      "practice": {
+        "en": "Play C3 D3 E3 F3 | G3 F3 E3 D3 | C3 held four beats. Use 5 4 3 2 | 1 2 3 4 | 5.",
+        "tr": "Do3 Re3 Mi3 Fa3 | Sol3 Fa3 Mi3 Re3 | Do3 dört vuruş. 5 4 3 2 | 1 2 3 4 | 5 kullan."
+      },
+      "check": {
+        "en": "Can I choose a finger by hand, not copy the right-hand numbers?",
+        "tr": "Parmağı ele göre seçiyor muyum, sağ el numarasını kopyalıyor muyum?"
+      },
+      "recover": {
+        "en": "If confused, practise C3 D3 with 5 4 only, then rebuild.",
+        "tr": "Karışırsa yalnız Do3 Re3’ü 5 4 ile çalış, sonra genişlet."
+      }
+    },
+    {
+      "id": "piano-07",
+      "title": {
+        "en": "Reading the grand staff",
+        "tr": "Büyük dizeği okumak"
+      },
+      "teach": {
+        "en": "A staff has five lines; notes progress line-space-line upward. Treble clef second line is G4; its bottom line is E4 and space above is F4. Bass clef second line from top is F3; its top space is G3. Middle C4 lies on one ledger line below treble or above bass. Keyboard notes sound at written pitch here.",
+        "tr": "Dizekte beş çizgi vardır; notalar yukarı çizgi-aralık-çizgi ilerler. Sol anahtarında alttan ikinci çizgi Sol4; alt çizgi Mi4, üstündeki aralık Fa4’tür. Fa anahtarında üstten ikinci çizgi Fa3; en üst aralık Sol3’tür. Orta Do4, sol anahtarının altında veya fa anahtarının üstünde bir ek çizgidedir. Burada yazılan nota aynı yükseklikte duyulur."
+      },
+      "practice": {
+        "en": "Study the original grand-staff anchors below. The treble G clef curls around G4 on the second line from the bottom; the bass F clef dots surround F3 on the second line from the top. Compare the two middle-C ledger lines. Find and play these keys separately; then cover the labels and identify each anchor again.",
+        "tr": "Aşağıdaki özgün büyük dizek referanslarını incele. Sol anahtarı alttan ikinci çizgideki Sol4 çevresinde kıvrılır; fa anahtarının noktaları üstten ikinci çizgideki Fa3’ü çevreler. İki orta Do ek çizgisini karşılaştır. Tuşları bulup ayrı çal; sonra etiketleri ört ve her referansı yeniden adlandır."
+      },
+      "check": {
+        "en": "Can I distinguish a line from a space and use a clef anchor?",
+        "tr": "Çizgi ile aralığı ayırıp anahtar referansı kullanabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If an octave is wrong, return to G4/F3 anchors and middle C; do not treat both clefs alike.",
+        "tr": "Oktav yanlışsa Sol4/Fa3 ve orta Do referansına dön; iki anahtarı aynı okuma."
+      }
+    },
+    {
+      "id": "piano-08",
+      "title": {
+        "en": "Reading rhythm with notes",
+        "tr": "Nota ile ritmi okumak"
+      },
+      "teach": {
+        "en": "Filled notehead with stem: quarter. Hollow with stem: half. Hollow without stem: whole. Two beamed eighths share one beat: count 1-and. In 4/4 each bar totals four quarter beats. These text exercises are original, not sheet-music exam tasks. A quarter rest lasts one counted beat; a half rest sits above a staff line and lasts two; a whole rest hangs below a staff line and here lasts a four-beat bar. See the original symbol key below.",
+        "tr": "Saplı dolu baş: dörtlük. Saplı boş baş: ikilik. Sapsız boş baş: birlik. Kirişle birleştirilmiş iki sekizlik bir vuruşu paylaşır: 1-ve say. 4/4’te her ölçü dört dörtlük vuruş toplamıdır. Bu metin alıştırmaları özgündür, sınav notası değildir. Dörtlük sus sayılan bir vuruştur; ikilik sus çizginin üstüne oturur ve iki vuruştur; birlik sus çizginin altından sarkar ve burada dört vuruşluk ölçüdür. Aşağıdaki özgün simge anahtarına bak."
+      },
+      "practice": {
+        "en": "Right hand: C4 quarter, D4 quarter, E4 half | D4 half, C4 half. Next: C4 and D4 eighths on beat 1, E4 quarter on 2, F4 half on 3–4. Clap before playing.",
+        "tr": "Sağ el: Do4 dörtlük, Re4 dörtlük, Mi4 ikilik | Re4 ikilik, Do4 ikilik. Sonra: 1’de Do4 ve Re4 sekizlik, 2’de Mi4 dörtlük, 3–4’te Fa4 ikilik. Çalmadan alkışla."
+      },
+      "check": {
+        "en": "Does every bar total four beats?",
+        "tr": "Her ölçü dört vuruş ediyor mu?"
+      },
+      "recover": {
+        "en": "If eighths accelerate, say 1-ve 2-ve 3-ve 4-ve evenly and practise the first pair alone.",
+        "tr": "Sekizlikler hızlanırsa 1-ve 2-ve 3-ve 4-ve eşit söyle ve ilk çifti yalnız çalış."
+      }
+    },
+    {
+      "id": "piano-09",
+      "title": {
+        "en": "Alternating hands",
+        "tr": "Elleri sırayla kullanmak"
+      },
+      "teach": {
+        "en": "Prepare both five-note positions. Alternate short phrases before simultaneous playing. No hand crosses or shares a key.",
+        "tr": "İki beş nota konumunu hazırla. Eşzamanlı çalmadan önce kısa cümleleri sırayla çal. Eller çaprazlaşmaz veya aynı tuşu paylaşmaz."
+      },
+      "practice": {
+        "en": "Bar 1: right C4 D4 E4 G4; left silent. Bar 2: left C3 D3 E3 G3; right silent. Each note is one beat. Repeat the two bars twice.",
+        "tr": "Ölçü 1: sağ Do4 Re4 Mi4 Sol4, sol susar. Ölçü 2: sol Do3 Re3 Mi3 Sol3, sağ susar. Her nota bir vuruş. İki ölçüyü iki kez tekrarla."
+      },
+      "check": {
+        "en": "Can the resting hand remain easy and ready?",
+        "tr": "Susayarak bekleyen el rahat ve hazır mı?"
+      },
+      "recover": {
+        "en": "If a hand joins early, speak right/left on beat 1 and return to separate hands.",
+        "tr": "Bir el erken katılırsa 1’de sağ/sol söyle ve ayrı ellere dön."
+      }
+    },
+    {
+      "id": "piano-10",
+      "title": {
+        "en": "Together: matching pulse",
+        "tr": "Birlikte: ortak vuruş"
+      },
+      "teach": {
+        "en": "Hands first share the same rhythm in separate octaves. This simplifies timing before independence.",
+        "tr": "Eller önce ayrı oktavlarda aynı ritmi paylaşır. Bu, bağımsızlıktan önce zamanlamayı kolaylaştırır."
+      },
+      "practice": {
+        "en": "Together play C3+C4 on 1, D3+D4 on 2, E3+E4 on 3, rest on 4. Left fingers 5 4 3; right 1 2 3. Repeat two bars.",
+        "tr": "Birlikte 1’de Do3+Do4, 2’de Re3+Re4, 3’te Mi3+Mi4 çal, 4’te sus. Sol 5 4 3, sağ 1 2 3. İki ölçü tekrarla."
+      },
+      "check": {
+        "en": "Do both hands start and release together by my own listening?",
+        "tr": "Kendi dinlememe göre eller birlikte başlayıp bırakıyor mu?"
+      },
+      "recover": {
+        "en": "If uneven, use only the C pair once per bar; rebuild two notes then three.",
+        "tr": "Eşit değilse her ölçüde yalnız Do çiftini çal; iki sonra üç notaya dön."
+      }
+    },
+    {
+      "id": "piano-11",
+      "title": {
+        "en": "Melody over held bass",
+        "tr": "Tutulan bas üstünde melodi"
+      },
+      "teach": {
+        "en": "Left hand holds C3 for a whole bar while right moves. Keep counting; a held note does not need repeated pressure.",
+        "tr": "Sağ hareket ederken sol Do3’ü ölçü boyunca tutar. Saymayı sürdür; tutulan notaya yeniden basınç gerekmez."
+      },
+      "practice": {
+        "en": "Two bars: left C3 whole in each; right C4 D4 E4 G4 | G4 E4 D4 C4, all quarters. Practise each hand, then combine only bar 1.",
+        "tr": "İki ölçü: solda her ölçü Do3 birlik; sağ Do4 Re4 Mi4 Sol4 | Sol4 Mi4 Re4 Do4, tümü dörtlük. Önce ayrı eller, sonra yalnız ölçü 1 birlikte."
+      },
+      "check": {
+        "en": "Can the left note stay while the right changes?",
+        "tr": "Sağ değişirken sol nota kalıyor mu?"
+      },
+      "recover": {
+        "en": "If left releases with right, hold C3 while speaking the right rhythm before playing it.",
+        "tr": "Sol sağla bırakıyorsa sağ ritmini söyleyerek Do3’ü tut, sonra sağla çal."
+      }
+    },
+    {
+      "id": "piano-12",
+      "title": {
+        "en": "Changing bass and two-note harmony",
+        "tr": "Değişen bas ve iki sesli armoni"
+      },
+      "teach": {
+        "en": "A chord combines notes; C major contains C E G. Start with C4+E4 using right 1+3; add G4 with 5 only if comfortable. No stretched reach is required.",
+        "tr": "Akor notaları birleştirir; Do majör Do Mi Sol içerir. Sağ 1+3 ile Do4+Mi4 başla; yalnız rahatsa 5 ile Sol4 ekle. Geniş uzanış gerekmez."
+      },
+      "practice": {
+        "en": "Bar 1: left C3 half on 1, G3 half on 3 (5 then 1); right C4+E4 half on 1, rest two beats on 3–4. Bar 2 repeat. Try each hand first.",
+        "tr": "Ölçü 1: sol 1’de Do3 ikilik, 3’te Sol3 ikilik (5 sonra 1); sağ 1’de Do4+Mi4 ikilik, 3–4’te iki vuruş sus. Ölçü 2 tekrarla. Önce ayrı eller."
+      },
+      "check": {
+        "en": "Can I release harmony while bass continues?",
+        "tr": "Bas sürerken armoniyi bırakabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If tense, return to a single right C4 and separate hands; omit the optional third note.",
+        "tr": "Kasılıyorsan tek sağ Do4 ve ayrı ellere dön; isteğe bağlı üçüncü notayı çıkar."
+      }
+    },
+    {
+      "id": "piano-13",
+      "title": {
+        "en": "Phrasing and dynamics",
+        "tr": "Cümleleme ve gürlük"
+      },
+      "teach": {
+        "en": "Legato connects notes with controlled release; do not keep every key down. A slur groups a phrase; a tie joins the same pitch across durations. p is soft, f loud, crescendo gradually louder. Keep volume comfortable, no forced impact.",
+        "tr": "Legato notaları kontrollü bırakışla bağlar; tüm tuşları basılı tutma. Cümle bağı bir cümleyi gruplar; uzatma bağı aynı notanın sürelerini birleştirir. p hafif, f güçlü, crescendo giderek gürdür. Ses rahat olsun, zorlayarak vurma."
+      },
+      "practice": {
+        "en": "Each note is a quarter unless marked half. Right: C4 D4 E4 G4 | E4 D4 C4 half. First soft throughout; next time gently grow toward G4 and ease toward final C4. Left hand rests.",
+        "tr": "İkilik olarak belirtilmedikçe her nota dörtlüktür. Sağ: Do4 Re4 Mi4 Sol4 | Mi4 Re4 Do4 ikilik. Önce tümünü hafif; sonra Sol4’e doğru biraz büyüt, son Do4’e doğru hafiflet. Sol susar."
+      },
+      "check": {
+        "en": "Can I hear a phrase without adding beats?",
+        "tr": "Vuruş eklemeden cümleyi duyabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If keys overlap into a blur, practise two notes and release the first as the next starts. Pedal stays off.",
+        "tr": "Tuşlar bulanık biçimde örtüşüyorsa iki nota çalış; sonraki başlarken ilkini bırak. Pedal kapalı."
+      }
+    },
+    {
+      "id": "piano-14",
+      "title": {
+        "en": "First independent reading",
+        "tr": "İlk bağımsız okuma"
+      },
+      "teach": {
+        "en": "Use clef anchors and interval direction, not just memorised finger numbers. A step goes to the next staff position; a skip passes one. Before playing, name notes, clap durations, then choose comfortable fingers.",
+        "tr": "Yalnız ezber parmak değil, anahtar referansı ve aralık yönü kullan. Adım sonraki dizek konumuna gider; atlama bir konumu geçer. Çalmadan adlandır, süreleri alkışla, sonra rahat parmak seç."
+      },
+      "practice": {
+        "en": "Read the new two-bar grand-staff task below without opening the answers first. Identify each clef, name pitches and durations, count each bar, then play hands separately before combining. The vertical positions show pitch; simultaneous notes align vertically across the two staves. Write your decoded notes and counts on paper. Open the separate answer panel only to compare.",
+        "tr": "Aşağıdaki yeni iki ölçülük büyük dizek görevini cevapları açmadan oku. Anahtarları tanı, notaları ve sürelerini adlandır, her ölçüyü say; birleştirmeden önce elleri ayrı çal. Dikey konumlar ses yüksekliğini gösterir; eşzamanlı notalar iki dizekte dikey hizalıdır. Çözdüğün notaları ve sayıları kağıda yaz. Yalnız karşılaştırmak için ayrı cevap panelini aç."
+      },
+      "check": {
+        "en": "Can I decode this new phrase before practising it?",
+        "tr": "Bu yeni cümleyi çalışmadan çözebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If reading stalls, isolate one bar and point to each note while counting, then return to keys.",
+        "tr": "Okuma durursa bir ölçüyü ayır ve sayarken her notayı göster, sonra tuşa dön."
+      }
+    },
+    {
+      "id": "piano-15",
+      "title": {
+        "en": "Original two-hand study",
+        "tr": "Özgün iki el etüdü"
+      },
+      "teach": {
+        "en": "Prepare C3–G3 left and C4–G4 right. All four bars are 4/4, no pedal. Practise a single bar separately, then together, then connect bars. Choose your own slow tempo.",
+        "tr": "Sol Do3–Sol3, sağ Do4–Sol4 hazırla. Dört ölçü 4/4, pedal yok. Tek ölçüyü ayrı, sonra birlikte, sonra ölçüleri bağlayarak çalış. Kendi yavaş temponu seç."
+      },
+      "practice": {
+        "en": "RH quarters unless marked: C4 D4 E4 G4 | G4 E4 D4 C4 | E4 F4 G4 half | E4 D4 C4 half. LH: C3 whole | G3 whole | C3 half G3 half | C3 whole. Count 1–4 each bar. Repeat only if comfortable.",
+        "tr": "Sağ, belirtilmedikçe dörtlük: Do4 Re4 Mi4 Sol4 | Sol4 Mi4 Re4 Do4 | Mi4 Fa4 Sol4 ikilik | Mi4 Re4 Do4 ikilik. Sol: Do3 birlik | Sol3 birlik | Do3 ikilik Sol3 ikilik | Do3 birlik. Her ölçü 1–4 say. Yalnız rahatsa tekrarla."
+      },
+      "check": {
+        "en": "Can I keep the bass durations while the melody changes, and finish without extra beats?",
+        "tr": "Melodi değişirken bas sürelerini koruyup fazladan vuruşsuz bitirebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If lost, stop and record the exact bar and count: for example, “bar 3, beat 3: left G3 entered one beat late.” If unsure, write “uncertain at bar 3, beat 3”; if no error was observed, write that, not “perfect”. Choose one smaller correction (only the bass change on beats 1 and 3, counting aloud). Practise it slowly, then return to the same four-bar study at the original chosen tempo. Compare the same bar/count on the next attempt: improved, unchanged, or uncertain. If still unclear, isolate it again rather than inventing a result.",
+        "tr": "Kaybolursan dur ve tam ölçü/sayıyı kaydet: örneğin “ölçü 3, vuruş 3: sol Sol3 bir vuruş geç girdi.” Emin değilsen “ölçü 3, vuruş 3 belirsiz” yaz; hata gözlemediysen bunu yaz, “kusursuz” değil. Daha küçük tek düzeltme seç (yalnız 1 ve 3’teki bas değişimini sesli sayarak çalışmak). Bunu yavaş çalış, sonra aynı dört ölçülük etüde ilk seçtiğin tempoda dön. Sonraki denemede aynı ölçü/vuruşu karşılaştır: iyileşti, aynı kaldı veya belirsiz. Hâlâ belirsizse sonuç uydurmak yerine yeniden ayır."
+      }
+    },
+    {
+      "id": "piano-16",
+      "title": {
+        "en": "Exit review and next practice",
+        "tr": "Çıkış değerlendirmesi ve sonraki çalışma"
+      },
+      "teach": {
+        "en": "Review key direction and C locations, finger numbers, both clef anchors and durations. Perform lesson 15 and decode lesson 14 afresh. Your own observation is not a sensor result or mastery certificate. This is a bounded beginner foundation, not grade equivalence or complete piano training.",
+        "tr": "Tuş yönü ve Do konumlarını, parmak numaralarını, iki anahtar referansını ve süreleri gözden geçir. Ders 15’i çal, ders 14’ü yeniden çöz. Kendi gözlemin sensör sonucu veya ustalık belgesi değildir. Bu sınırlı başlangıç temelidir; sınav derecesi veya tüm piyano eğitimi değildir."
+      },
+      "practice": {
+        "en": "On separate days, try naming/reading, steady counting and the two-hand study. For a recovery cycle, record the chosen tempo and one concrete bar/count observation from lesson 15. Practise one smaller correction, then repeat the same study at that same tempo and compare that bar/count. Record improved, unchanged or uncertain. “No observed error” is also valid; it is not proof of mastery. Revisit the matching lesson when uncertain. Extend only when comfortable; a teacher can help with individual technique and notation.",
+        "tr": "Ayrı günlerde adlandırma/okuma, düzenli sayma ve iki el etüdünü dene. Toparlanma döngüsünde seçtiğin tempoyu ve ders 15’ten somut bir ölçü/vuruş gözlemini kaydet. Daha küçük tek düzeltme çalış, sonra aynı etüdü aynı tempoda tekrarlayıp o ölçü/vuruşu karşılaştır. İyileşti, aynı kaldı veya belirsiz kaydet. “Hata gözlemedim” de geçerlidir; ustalık kanıtı değildir. Belirsizlikte ilgili derse dön. Yalnız rahatsa genişlet; bireysel teknik ve nota için öğretmen yardımcı olabilir."
+      },
+      "check": {
+        "en": "Can I explain and repeat these beginner tasks, including recovering from a mistake?",
+        "tr": "Hatadan toparlanma dahil bu başlangıç görevlerini açıklayıp tekrarlayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If one outcome is uncertain, return to its lesson; there is no deadline, score or automatic completion.",
+        "tr": "Bir kazanım kararsızsa ilgili derse dön; süre sınırı, puan veya otomatik tamamlama yok."
+      }
+    }
+  ]
+}
