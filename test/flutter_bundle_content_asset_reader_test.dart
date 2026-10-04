@@ -9,7 +9,7 @@ import 'package:ostinato/app/guitar_journey.dart';
 
 const String _manifestPath = 'assets/motion_content/manifest.json';
 const String _coursePath = 'assets/content/guitar_journey.v1.json';
-const String _corePin = '0fed3a05466946bf2710750f4feca8dbd75be123';
+const String _corePin = 'edeec10a161c76bfa086b1d165d53e46ec88c3d7';
 // Current reviewed course asset. Any authored course change requires a repin.
 const int _courseByteLength = 995884;
 const String _courseSha256 =

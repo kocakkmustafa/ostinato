@@ -1,0 +1,708 @@
+{
+  "schemaVersion": 1,
+  "id": "ukulele.beginner",
+  "title": {
+    "en": "Ukulele: high-G beginner foundation",
+    "tr": "Ukulele: yüksek Sol başlangıç temeli"
+  },
+  "entry": {
+    "en": "No previous playing required. Right-handed four-string soprano/concert/tenor, identified high-G G4 C4 E4 A4 strings, external tuning aid, supported seating and short comfortable sessions. The course offers no audio reference or tuning verification.",
+    "tr": "Önceki çalım gerekmez. Sağ elli dört telli soprano/konser/tenor, tanımlanmış yüksek Sol G4 C4 E4 A4 teller, dış akort aracı, destekli oturuş ve kısa rahat çalışma. Kurs ses referansı veya akort doğrulaması sunmaz."
+  },
+  "exit": {
+    "en": "Identify the specified tuning and string/fret directions; read four chord grids and a two-bar tab; form C/Am/F/G7; count 4/4, down/up strokes and counted rests; play an original eight-bar study and compare a specific correction at the same tempo. All performance checks are your own observation.",
+    "tr": "Belirtilen akordu ve tel/perde yönlerini tanımla; dört akor ızgarası ve iki ölçü tab oku; Do/La minör/Fa/Sol yedi kur; 4/4, aşağı/yukarı tarama ve sayılan susları kullan; özgün sekiz ölçü etüdü çal ve aynı tempoda somut düzeltmeyi karşılaştır. Tüm çalım kontrolleri kendi gözlemindir."
+  },
+  "tuning": "high-G:G4-C4-E4-A4",
+  "chords": [
+    {
+      "id": "C",
+      "title": {
+        "en": "C major",
+        "tr": "Do majör"
+      },
+      "frets4to1": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "fingers4to1": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    {
+      "id": "Am",
+      "title": {
+        "en": "A minor",
+        "tr": "La minör"
+      },
+      "frets4to1": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "fingers4to1": [
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "F",
+      "title": {
+        "en": "F major",
+        "tr": "Fa majör"
+      },
+      "frets4to1": [
+        2,
+        0,
+        1,
+        0
+      ],
+      "fingers4to1": [
+        2,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": "G7",
+      "title": {
+        "en": "G seventh",
+        "tr": "Sol yedi"
+      },
+      "frets4to1": [
+        0,
+        2,
+        1,
+        2
+      ],
+      "fingers4to1": [
+        0,
+        2,
+        1,
+        3
+      ]
+    }
+  ],
+  "tab": [
+    {
+      "string": 3,
+      "fret": 0
+    },
+    {
+      "string": 3,
+      "fret": 2
+    },
+    {
+      "string": 2,
+      "fret": 0
+    },
+    {
+      "string": 2,
+      "fret": 1
+    },
+    {
+      "string": 2,
+      "fret": 3
+    },
+    {
+      "string": 2,
+      "fret": 0
+    },
+    {
+      "string": 3,
+      "fret": 2
+    },
+    {
+      "string": 3,
+      "fret": 0
+    }
+  ],
+  "study": [
+    {
+      "chord": "C",
+      "slots": [
+        "D",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H"
+      ]
+    },
+    {
+      "chord": "Am",
+      "slots": [
+        "D",
+        "H",
+        "H",
+        "H",
+        "D",
+        "H",
+        "H",
+        "H"
+      ]
+    },
+    {
+      "chord": "F",
+      "slots": [
+        "D",
+        "H",
+        "D",
+        "H",
+        "D",
+        "H",
+        "R",
+        "H"
+      ]
+    },
+    {
+      "chord": "G7",
+      "slots": [
+        "D",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H"
+      ]
+    },
+    {
+      "chord": "C",
+      "slots": [
+        "D",
+        "U",
+        "D",
+        "U",
+        "D",
+        "U",
+        "D",
+        "U"
+      ]
+    },
+    {
+      "chord": "Am",
+      "slots": [
+        "D",
+        "H",
+        "D",
+        "H",
+        "D",
+        "U",
+        "R",
+        "H"
+      ]
+    },
+    {
+      "chord": "F",
+      "slots": [
+        "D",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H"
+      ]
+    },
+    {
+      "chord": "C",
+      "slots": [
+        "D",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H"
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "ukulele-01",
+      "title": {
+        "en": "Choose the exact instrument",
+        "tr": "Çalgı ve akort düzenini seç"
+      },
+      "teach": {
+        "en": "This course uses a right-handed four-string soprano, concert or tenor ukulele with high-G re-entrant C tuning: strings 4→1 are G4 C4 E4 A4. C4 is middle C; octave names on tuners can vary. String 3 C4 is the lowest sounding open string; string 4 G4 is higher, not a bass G. Low-G G3 C4 E4 A4 and baritone D3 G3 B3 E4 are different setups and are not taught here. Do not retune an unknown instrument or string set by an octave to fit this course.",
+        "tr": "Bu kurs sağ elli, dört telli soprano, konser veya tenor ukulelede yüksek Sol ile yeniden yükselen Do akordunu kullanır: 4→1 teller Sol4 Do4 Mi4 La4 (G4 C4 E4 A4). Do4 orta Do’dur; akort cihazlarının oktav adları değişebilir. En kalın sesli açık tel 3. tel Do4’tür; 4. tel Sol4 daha incedir, bas Sol değildir. Düşük Sol (G3 C4 E4 A4) ve bariton (D3 G3 B3 E4) farklı düzenlerdir, burada öğretilmez. Bilinmeyen çalgı veya tel takımını bu kursa uydurmak için bir oktav yeniden akort etme."
+      },
+      "practice": {
+        "en": "Check the instrument and string-set label or manufacturer guide for high-G GCEA. Start only when this setup is identified. This written course never listens, checks tuning, grades chords or records mastery.",
+        "tr": "Çalgı/tel takımı etiketi veya üretici kılavuzundan yüksek Sol GCEA düzenini kontrol et. Düzen belirlendiğinde başla. Yazılı kurs dinlemez, akordu kontrol etmez, akorları puanlamaz veya ustalık kaydetmez."
+      },
+      "check": {
+        "en": "Can I identify my string set and tuning variant rather than assume all ukuleles match?",
+        "tr": "Tüm ukulelelerin aynı olduğunu varsaymadan tel takımımı ve akort türünü tanımlayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the setup is unknown, keep tuning uncertain and ask an instrument technician or teacher to identify it before tightening strings. A left-handed setup needs its own orientation guidance; do not mirror these fingerings automatically.",
+        "tr": "Düzen bilinmiyorsa akordu belirsiz kabul et; telleri germeden çalgı teknisyeni veya öğretmenden tanımlamasını iste. Sol elli düzen kendi yön rehberini gerektirir; bu parmakları otomatik aynalama."
+      },
+      "diagrams": [
+        "strings"
+      ]
+    },
+    {
+      "id": "ukulele-02",
+      "title": {
+        "en": "Hold and hand directions",
+        "tr": "Tutuş ve el yönleri"
+      },
+      "teach": {
+        "en": "Sit with supported feet and relaxed shoulders. Rest the body against your torso, support it with your right forearm, and let the neck extend to your left. A suitable strap can help if it slips. The left hand frets; the right hand plucks or strums. Keep the left thumb comfortably behind the neck rather than squeezing it hard. These are starting options, not measured angles.",
+        "tr": "Ayakların destekli, omuzların rahat otur. Gövdeyi bedenine yasla, sağ önkolunla destekle; sap sola uzansın. Kayıyorsa uygun askı destek olabilir. Sol el perdelere basar, sağ el teli çeker veya telleri tarar. Sol başparmak sap arkasında rahat dursun; sapı sert sıkma. Bunlar başlangıç seçenekleridir, ölçülen açılar değil."
+      },
+      "practice": {
+        "en": "Without playing, place and release the left hand three times while the instrument stays supported. Start with a few comfortable minutes, then pause. Stop if pain, numbness or strain appears.",
+        "tr": "Çalmadan sol eli üç kez yerleştirip bırak; çalgı destekli kalsın. Birkaç rahat dakika çalış, sonra ara ver. Ağrı, uyuşma veya zorlanmada dur."
+      },
+      "check": {
+        "en": "Can both hands move without the neck dropping or my shoulders rising?",
+        "tr": "Sap düşmeden veya omuzlarım yükselmeden iki el hareket edebiliyor mu?"
+      },
+      "recover": {
+        "en": "If it slips, adjust support or use a suitable strap before fretting. Do not solve slipping by clamping the neck. Persistent discomfort needs appropriate help.",
+        "tr": "Kayıyorsa perdeye basmadan desteği ayarla veya uygun askı kullan. Kaymayı sapı sıkarak çözme. Süren rahatsızlıkta uygun destek al."
+      },
+      "diagrams": [
+        "strings"
+      ]
+    },
+    {
+      "id": "ukulele-03",
+      "title": {
+        "en": "Tune with an external reference",
+        "tr": "Dış referansla akort"
+      },
+      "teach": {
+        "en": "Use a reliable external tuner/reference and its instructions; the app provides no reference sound or pitch measurement. In playing position, the string nearest your face is 4 G4, then 3 C4, 2 E4, and nearest the floor is 1 A4. Trace one string to its own peg before turning it. Pluck that string alone, damp the others, and make small adjustments. Tightening raises pitch; loosening lowers it, but peg-turn direction differs by instrument. Confirm the octave as well as the letter.",
+        "tr": "Güvenilir dış akort cihazı/referansı ve onun yönergelerini kullan; uygulama referans ses veya perde ölçümü sağlamaz. Çalma konumunda yüzüne en yakın tel 4 Sol4; sonra 3 Do4, 2 Mi4; zemine en yakın tel 1 La4’tür. Çevirmeden bir teli kendi burgusuna kadar izle. Yalnız o teli çek, diğerlerini sustur ve küçük ayarlar yap. Germek sesi inceltir, gevşetmek kalınlaştırır; burgunun dönüş yönü çalgıya göre değişir. Harf kadar oktavı da doğrula."
+      },
+      "practice": {
+        "en": "With the identified high-G setup, check 4 G4, 3 C4, 2 E4, 1 A4 one at a time using your external aid. Recheck after a short rest; new strings may drift. You decide from that aid whether tuning is ready or uncertain.",
+        "tr": "Tanımlanmış yüksek Sol düzeninde dış aracınla 4 Sol4, 3 Do4, 2 Mi4, 1 La4’ü tek tek kontrol et. Kısa aradan sonra yeniden kontrol et; yeni teller kayabilir. Akordun hazır mı belirsiz mi olduğuna o araçla sen karar verirsin."
+      },
+      "check": {
+        "en": "Is the intended string and octave clear, and am I turning only its peg?",
+        "tr": "Hedef tel ve oktav açık mı, yalnız onun burgusunu mu çeviriyorum?"
+      },
+      "recover": {
+        "en": "If the pitch/register or peg is unclear, stop. Do not keep tightening to chase a letter-only display or turn another string by mistake. Confirm your tuner convention and string set with the manual or a knowledgeable person.",
+        "tr": "Ses bölgesi veya burgu belirsizse dur. Yalnız harf gösteren ekranı yakalamak için sürekli germe veya yanlış teli çevirme. Cihazın adlandırmasını ve tel takımını kılavuzla ya da bilgili biriyle doğrula."
+      },
+      "diagrams": [
+        "strings"
+      ]
+    },
+    {
+      "id": "ukulele-04",
+      "title": {
+        "en": "Read strings, frets and chord diagrams",
+        "tr": "Tel, perde ve akor çizimini oku"
+      },
+      "teach": {
+        "en": "An open string is fret 0. Fret 1 is the space immediately after the nut toward the body; place the fingertip just behind its metal fret wire, not on it. Moving toward the body increases fret number and pitch on that same string. Left-hand fingers: index 1, middle 2, ring 3, little 4; the thumb is not numbered. Our vertical chord grids show strings left→right as 4 G, 3 C, 2 E, 1 A. The thick top line is the nut; each space below is fret 1, 2, then 3. O means play open; a dot means fret there, with its finger number inside.",
+        "tr": "Açık tel perde 0’dır. Perde 1, üst eşikten gövdeye doğru ilk boşluktur; parmak ucunu metal perde çubuğunun hemen gerisine koy, üstüne değil. Aynı telde gövdeye ilerlemek perde numarasını ve ses yüksekliğini artırır. Sol el parmakları: işaret 1, orta 2, yüzük 3, serçe 4; başparmak numaralı değildir. Dikey akor ızgaramız soldan sağa 4 Sol, 3 Do, 2 Mi, 1 La tellerini gösterir. Kalın üst çizgi üst eşiktir; aşağıdaki boşluklar perde 1, 2, 3’tür. O açık çal; nokta oraya bas demektir, içindeki sayı parmaktır."
+      },
+      "practice": {
+        "en": "Identify string 1 at the floor side. Pluck it open, then place left index at fret 1 and pluck gently. Release. Read the C grid: only string 1 is fretted at 3, with finger 3; the other three are open. Do not play C yet if reaching is uncomfortable.",
+        "tr": "Zemin tarafındaki 1. teli bul. Açık çek, sonra sol işareti perde 1’e koyup hafif çek. Bırak. Do akorunu oku: yalnız tel 1 perde 3’te parmak 3 ile basılı; diğer üçü açık. Uzanış rahat değilse Do akorunu henüz çalma."
+      },
+      "check": {
+        "en": "Can I distinguish a string number, a fret number and a finger number?",
+        "tr": "Tel, perde ve parmak numarasını ayırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If a note buzzes, move just behind the wire and use only enough pressure for a clear note. If another string is muted accidentally, curve that finger a little and check one string at a time; pause rather than force the hand.",
+        "tr": "Cızırdarsa çubuğun hemen gerisine gel ve açık ses için gereken kadar basınç kullan. Başka tel yanlışlıkla susarsa parmağı biraz kıvırıp telleri tek tek kontrol et; eli zorlamak yerine ara ver."
+      },
+      "diagrams": [
+        "C"
+      ]
+    },
+    {
+      "id": "ukulele-05",
+      "title": {
+        "en": "First single-note phrase",
+        "tr": "İlk tek nota cümlesi"
+      },
+      "teach": {
+        "en": "Use the right thumb to pluck one string gently. On string 1, open = A4, fret 2 = B4, fret 3 = C5 in this high-G setup. Use left middle 2 at fret 2 and ring 3 at fret 3; lift between changes. These are sounding pitches, not a sensor result.",
+        "tr": "Sağ başparmakla tek teli hafifçe çek. Bu yüksek Sol düzeninde tel 1 açık = La4, perde 2 = Si4, perde 3 = Do5. Perde 2’de sol orta 2, perde 3’te yüzük 3 kullan; değişimde kaldır. Bunlar hedef ses adlarıdır, sensör sonucu değil."
+      },
+      "practice": {
+        "en": "On string 1 play frets 0, 2, 3, 2, then 0, slowly. Name A4 B4 C5 B4 A4. Leave silence between attempts; aim for one intentional string each time.",
+        "tr": "Tel 1’de 0, 2, 3, 2, sonra 0 perdelerini yavaş çal. La4 Si4 Do5 Si4 La4 diye adlandır. Denemeler arasında sessizlik bırak; her defa tek hedef teli çek."
+      },
+      "check": {
+        "en": "By my own listening, did I pluck the intended string without neighbouring-string noise?",
+        "tr": "Kendi dinlememe göre komşu tel sesi olmadan hedef teli çektim mi?"
+      },
+      "recover": {
+        "en": "If reaching 3 is awkward, work only 0 and 2 first. If the wrong string sounds, return to open string 1 and aim the thumb; do not press harder with the left hand to fix a right-hand error.",
+        "tr": "3’e uzanmak zorsa önce yalnız 0 ve 2 çalış. Yanlış tel duyulursa açık tel 1’e dönüp başparmağı yönelt; sağ el hatasını düzeltmek için sol elle daha sert basma."
+      },
+      "diagrams": [
+        "strings"
+      ]
+    },
+    {
+      "id": "ukulele-06",
+      "title": {
+        "en": "Count a steady pulse and silence",
+        "tr": "Düzenli vuruş ve sessizliği say"
+      },
+      "teach": {
+        "en": "In 4/4 a bar contains four quarter-note beats: 1 2 3 4. Tap a comfortable slow pulse and count aloud. One pluck can ring over several counts without being plucked again. A rest means counted silence: lightly touch the strings with the right hand to stop the ringing, without striking the body.",
+        "tr": "4/4’te bir ölçü dört dörtlük vuruştur: 1 2 3 4. Rahat yavaş vuruşu vurup sesli say. Bir çekilen nota tekrar çekilmeden birkaç sayı boyunca uzayabilir. Sus sayılan sessizliktir: gövdeye vurmadan sağ elle tellere hafif dokunup sesi kes."
+      },
+      "practice": {
+        "en": "On open string 1: bar 1 pluck on 1 and let it ring through 4. Bar 2 pluck on 1, stop sound on 2, pluck on 3, stop on 4. Count all four beats through the silence. Repeat twice at your chosen comfortable tempo.",
+        "tr": "Açık tel 1’de: ölçü 1, 1’de çek ve 4’e kadar çınlasın. Ölçü 2, 1’de çek, 2’de sesi kes, 3’te çek, 4’te kes. Sessizlikte dört vuruşu da say. Seçtiğin rahat tempoda iki kez tekrarla."
+      },
+      "check": {
+        "en": "Did the count continue evenly when I stopped the sound?",
+        "tr": "Sesi kestiğimde sayım eşit sürdü mü?"
+      },
+      "recover": {
+        "en": "If you rush, tap and speak a silent bar before playing. If sound continues into a rest, practise just the gentle stop on beat 2.",
+        "tr": "Hızlanıyorsan çalmadan sessiz bir ölçü vurup say. Ses susa taşıyorsa yalnız 2’deki hafif susturmayı çalış."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "ukulele-07",
+      "title": {
+        "en": "C major and the first downstroke",
+        "tr": "Do majör ve ilk aşağı tarama"
+      },
+      "teach": {
+        "en": "For C, fret string 1 at 3 with left ring finger 3; strings 4, 3, 2 stay open: 0003 in 4→1 order. Check strings individually, then brush all four gently with the right thumb from 4 nearest your face toward 1 nearest the floor. We call this a downstroke D. It describes hand travel, not falling pitch: the open high-G string is not the lowest note.",
+        "tr": "Do (C) için tel 1 perde 3’e sol yüzük 3 ile bas; teller 4, 3, 2 açıktır: 4→1 sırasıyla 0003. Telleri tek tek kontrol et, sonra sağ başparmakla yüzüne yakın 4’ten zemine yakın 1’e dört teli hafif tara. Buna aşağı tarama D diyoruz. Bu elin yönüdür, seslerin kalınlaşması değil: açık yüksek Sol en kalın nota değildir."
+      },
+      "practice": {
+        "en": "One bar: form C before starting; D on beat 1, let it ring through 2 3 4. Repeat four bars with a short break between attempts. Listen yourself for each string, especially the open E string next to your ring finger.",
+        "tr": "Bir ölçü: başlamadan Do’yu kur; 1’de D, 2 3 4 boyunca çınlasın. Denemeler arasında kısa ara ile dört ölçü tekrarla. Her teli, özellikle yüzük parmağının yanındaki açık Mi telini kendin dinle."
+      },
+      "check": {
+        "en": "Can I read 0003 correctly and strum without forcing the wrist?",
+        "tr": "0003’ü doğru okuyup bileği zorlamadan tarayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If E is muffled, adjust the ring fingertip so it does not lie across E; pluck E alone to recheck. If C buzzes, check fret 3 placement before adding pressure.",
+        "tr": "Mi boğuksa yüzük ucunu Mi üzerine yatmayacak biçimde ayarla; yeniden kontrol için Mi’yi tek çek. Do cızırdarsa basınç eklemeden perde 3 konumunu kontrol et."
+      },
+      "diagrams": [
+        "C"
+      ]
+    },
+    {
+      "id": "ukulele-08",
+      "title": {
+        "en": "A minor and separate chord changes",
+        "tr": "La minör ve ayrı akor değişimleri"
+      },
+      "teach": {
+        "en": "Am is 2000: left middle finger 2 on string 4 fret 2, all others open. Its notes are A C E; a four-string strum may repeat a chord tone. A chord does not need four different notes. Keep C and Am as distinct shapes.",
+        "tr": "La minör (Am) 2000’dır: sol orta 2, tel 4 perde 2’de; diğerleri açık. Notaları La Do Mi’dir; dört tel taramada bir akor sesi tekrarlanabilir. Akorun dört farklı nota içermesi gerekmez. Do ve La minör şekillerini ayır."
+      },
+      "practice": {
+        "en": "Without a beat deadline: form C, check one strum, release ring finger; form Am with middle finger on 4/2, check one strum; release. Repeat three times, then pause. Never keep C’s 1/3 finger down when the task says Am.",
+        "tr": "Vuruş süresi dayatmadan: Do’yu kur, bir tarama kontrol et, yüzüğü kaldır; ortayı 4/2’ye koyarak La minör kur, bir tarama kontrol et, bırak. Üç kez tekrarla, ara ver. Görev La minörken Do’nun 1/3 parmağını basılı tutma."
+      },
+      "check": {
+        "en": "Can I change the correct finger while leaving the required open strings open?",
+        "tr": "Doğru parmağı değiştirirken açık olması gereken telleri açık tutabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If an old finger stays on, stop and name the new 4→1 fret pattern before placing the hand. Practise the release alone.",
+        "tr": "Eski parmak kalıyorsa dur, eli koymadan yeni 4→1 perde düzenini söyle. Yalnız bırakış çalış."
+      },
+      "diagrams": [
+        "C",
+        "Am"
+      ]
+    },
+    {
+      "id": "ukulele-09",
+      "title": {
+        "en": "F major and the shared finger",
+        "tr": "Fa majör ve ortak parmak"
+      },
+      "teach": {
+        "en": "F is 2010: middle 2 on string 4 fret 2, index 1 on string 2 fret 1; strings 3 and 1 open. Its chord tones are F A C. Compared with Am, the middle finger can stay on 4/2 while the index adds 2/1. Do not let index touch the open A string.",
+        "tr": "Fa (F) 2010’dır: orta 2 tel 4 perde 2’de, işaret 1 tel 2 perde 1’de; teller 3 ve 1 açık. Akor sesleri Fa La Do’dur. La minöre göre orta parmak 4/2’de kalırken işaret 2/1’e eklenebilir. İşaret açık La teline değmesin."
+      },
+      "practice": {
+        "en": "Form Am; add index for F; pluck strings 4→1 separately; remove index to return to Am. Repeat three times without a tempo target. Then play one four-beat bar of Am and one of F, a downstroke only on each beat 1.",
+        "tr": "La minör kur; işareti ekleyerek Fa kur; telleri 4→1 ayrı çek; işareti kaldırıp La minöre dön. Tempo hedefi olmadan üç kez tekrarla. Sonra La minör ve Fa için birer dört vuruşluk ölçü çal, yalnız her 1’de aşağı tara."
+      },
+      "check": {
+        "en": "Can I keep the shared middle finger comfortable and hear the open A?",
+        "tr": "Ortak orta parmağı rahat tutup açık La’yı duyabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the thumb clamps, release the whole shape and reposition. If A is muted, check index angle before strumming faster.",
+        "tr": "Başparmak sıkıyorsa tüm şekli bırakıp yeniden yerleştir. La susuyorsa hızlanmadan işaret açısını kontrol et."
+      },
+      "diagrams": [
+        "Am",
+        "F"
+      ]
+    },
+    {
+      "id": "ukulele-10",
+      "title": {
+        "en": "G7 and return to C",
+        "tr": "Sol yedi ve Do’ya dönüş"
+      },
+      "teach": {
+        "en": "G7 is 0212: index 1 on string 2 fret 1, middle 2 on string 3 fret 2, ring 3 on string 1 fret 2; string 4 open. Its tones G B D F contain a seventh, unlike a three-tone major chord. Build slowly one fingertip at a time; this course does not require a barre.",
+        "tr": "Sol yedi (G7) 0212’dir: işaret 1 tel 2 perde 1’de, orta 2 tel 3 perde 2’de, yüzük 3 tel 1 perde 2’de; tel 4 açık. Sol Si Re Fa sesleri, üç sesli majör akordan farklı olarak yedili içerir. Uçları birer birer koyarak yavaş kur; bu kurs bare istemez."
+      },
+      "practice": {
+        "en": "Place G7; check four individual strings; release. Form C with only ring on 1/3; check. Repeat each shape before trying changes. Then alternate one bar G7, one C with one D on beat 1 of each; stop between pairs if needed.",
+        "tr": "Sol yedi kur; dört teli ayrı kontrol et; bırak. Yalnız yüzüğü 1/3’e koyup Do kur; kontrol et. Değişimden önce şekilleri ayrı tekrarla. Sonra birer ölçü Sol yedi ve Do, her 1’de tek D çal; gerekirse çiftler arasında dur."
+      },
+      "check": {
+        "en": "Can I distinguish G7’s 0212 from C’s 0003 and release unneeded fingers?",
+        "tr": "Sol yedi 0212 ile Do 0003’ü ayırıp gereksiz parmakları kaldırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the change is not ready, go back to each shape without a pulse, then a two-chord pair. Do not label an unclear chord correct because the diagram looks familiar.",
+        "tr": "Değişim hazır değilse vuruşsuz ayrı şekillere, sonra iki akor çiftine dön. Çizim tanıdık diye belirsiz akora doğru deme."
+      },
+      "diagrams": [
+        "G7",
+        "C"
+      ]
+    },
+    {
+      "id": "ukulele-11",
+      "title": {
+        "en": "Changes on a bar boundary",
+        "tr": "Ölçü başında akor değişimi"
+      },
+      "teach": {
+        "en": "Keep the count separate from the change. For this preparation drill, strum on beat 1, let ring on 2 and 3, stop sound on 4 and use that counted silence to form the next chord. Begin the next bar on its 1. This planned rest is part of the drill, not an extra uncounted beat.",
+        "tr": "Sayımı değişimden ayır. Bu hazırlıkta 1’de tara, 2 ve 3’te çınlasın, 4’te sesi kes ve sayılan sessizlikte sonraki akoru kur. Sonraki ölçünün 1’inde başla. Planlı sus alıştırmanın parçasıdır, fazladan sayılmayan vuruş değil."
+      },
+      "practice": {
+        "en": "Four bars: C | Am | F | C. Each bar: D on 1, ring 2–3, rest/change on 4. Say the next chord name quietly on 4. Choose a tempo that allows the shape; practise just C→Am if the sequence is too much.",
+        "tr": "Dört ölçü: Do | La minör | Fa | Do. Her ölçü: 1’de D, 2–3 çınlama, 4’te sus/değişim. 4’te sonraki akoru hafif söyle. Şekle zaman veren tempo seç; dizi fazlaysa yalnız Do→La minör çalış."
+      },
+      "check": {
+        "en": "Did I keep four beats per bar instead of adding a fifth while searching?",
+        "tr": "Akora bakarken beşinciyi eklemek yerine ölçüyü dört vuruşta tuttum mu?"
+      },
+      "recover": {
+        "en": "If late, stop, count a silent bar, practise the exact two-shape change, then repeat at the same chosen tempo. Record late/uncertain honestly; slowing for the small drill is allowed, but compare the full attempts at the same tempo.",
+        "tr": "Geç kaldıysan dur, sessiz ölçü say, tam o iki şekli çalış, sonra seçtiğin aynı tempoda tekrarla. Geç/belirsiz durumu dürüst kaydet; küçük çalışmada yavaşlamak serbest, tam denemeleri aynı tempoda karşılaştır."
+      },
+      "diagrams": [
+        "C",
+        "Am",
+        "F"
+      ]
+    },
+    {
+      "id": "ukulele-12",
+      "title": {
+        "en": "Down and up eighth-note strokes",
+        "tr": "Aşağı ve yukarı sekizlik tarama"
+      },
+      "teach": {
+        "en": "D means travel from string 4 toward 1; U returns from 1 toward 4. For a gentle alternating stroke, try the right index nail lightly on D and its soft side on U; keep the wrist mobile, not stiff. Count 1-and 2-and 3-and 4-and evenly: each spoken part is half a beat. D on numbers, U on “and”. These are two attacks per beat, not a tie.",
+        "tr": "D, tel 4’ten 1’e gidiştir; U, 1’den 4’e dönüş. Hafif sıra taramada sağ işaretin tırnağı D’de, yumuşak yanı U’da hafif değebilir; bilek hareketli olsun, katı değil. 1-ve 2-ve 3-ve 4-ve eşit say: her söylenen parça yarım vuruş. Sayılarda D, “ve”de U. Bu her vuruşta iki başlangıçtır, uzatma bağı değil."
+      },
+      "practice": {
+        "en": "With C held, practise only 1-and: D U, then stop. Next do one full bar D U D U D U D U while counting; rest a bar. Repeat twice. The table in the final study uses the same eight half-beat slots.",
+        "tr": "Do basılıyken yalnız 1-ve çalış: D U, sonra dur. Sonra sayarak bir tam ölçü D U D U D U D U D U; bir ölçü dinlen. İki kez tekrarla. Son etütte tablo aynı sekiz yarım vuruş hücresini kullanır."
+      },
+      "check": {
+        "en": "Can I return on the “and” without doubling the speed of the numbered beats?",
+        "tr": "Numaralı vuruşların hızını ikiye katlamadan “ve”de geri dönebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the finger catches a string, reduce the reach and brush lightly; pause if sore. If the rhythm rushes, speak/tap the eight equal parts without playing, then rejoin one D U pair.",
+        "tr": "Parmak tele takılıyorsa hareketi küçültüp hafif tara; acırsa dur. Ritim hızlanıyorsa çalmadan sekiz eşit parçayı söyle/vur, sonra tek D U çiftine dön."
+      },
+      "diagrams": [
+        "C"
+      ]
+    },
+    {
+      "id": "ukulele-13",
+      "title": {
+        "en": "Ringing, rests and sparse rhythms",
+        "tr": "Çınlama, sus ve seyrek ritim"
+      },
+      "teach": {
+        "en": "In our rhythm table H means keep counting without a new stroke: let the current sound ring, or stay silent if it was stopped. R means stop sound with a gentle right-hand touch at that count and do not strum there. A missing attack is not automatically a silent rest. D/U/R/H occupy eight equal half-beat slots in each 4/4 bar.",
+        "tr": "Ritim tablomuzda H, yeni tarama yapmadan saymayı sürdür demektir: ses varsa çınlasın, kesildiyse sessizlik sürsün. R, o sayıda sağ elle hafif dokunup sesi kes ve orada tarama yapma demektir. Yeni başlangıç olmaması otomatik sessiz sus değildir. D/U/R/H her 4/4 ölçüde sekiz eşit yarım vuruş hücresindedir."
+      },
+      "practice": {
+        "en": "On C count 1-and 2-and 3-and 4-and: D H R H D U R H. Thus strum on 1, silence from 2, strum on 3 and its “and”, silence from 4. Practise stopping first, then insert the D U pair. Keep the same count through every H/R.",
+        "tr": "Do’da 1-ve 2-ve 3-ve 4-ve say: D H R H D U R H. Yani 1’de tara, 2’den itibaren sus; 3 ve onun “ve”sinde tara, 4’ten itibaren sus. Önce susturmayı çalış, sonra D U çiftini ekle. Her H/R boyunca aynı sayımı sürdür."
+      },
+      "check": {
+        "en": "Can I distinguish counted ringing from counted silence by my own listening?",
+        "tr": "Kendi dinlememe göre sayılan çınlama ile sayılan sessizliği ayırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If ringing continues through R, isolate only the stop. If silent gaps add time, return to tapping eight even slots. Never use an uncounted pause as proof of a correct rhythm.",
+        "tr": "Çınlama R boyunca sürüyorsa yalnız susturmayı ayır. Sessiz boşluk süre ekliyorsa sekiz eşit hücre vurmaya dön. Sayılmayan arayı doğru ritim kanıtı sayma."
+      },
+      "diagrams": [
+        "C"
+      ]
+    },
+    {
+      "id": "ukulele-14",
+      "title": {
+        "en": "Read an original tablature melody",
+        "tr": "Özgün tab melodisini oku"
+      },
+      "teach": {
+        "en": "Tablature shows four horizontal string lines: top 1 A, then 2 E, 3 C, bottom 4 high G. This is not the left→right order of a chord grid. A number on a line is a fret, not a finger; 0 means open. Here each column is one quarter beat; each group of four columns is one 4/4 bar. Only the marked string is plucked in that column. No chord is held.",
+        "tr": "Tab dört yatay tel çizgisidir: üstte 1 La, sonra 2 Mi, 3 Do, altta 4 yüksek Sol. Bu, akor ızgarasının soldan sağa sırası değildir. Çizgideki sayı perdedir, parmak değil; 0 açık demektir. Burada her sütun bir dörtlük vuruş; dört sütun bir 4/4 ölçüdür. Sütunda yalnız işaretli tel çekilir. Akor tutulmaz."
+      },
+      "practice": {
+        "en": "Decode the two-bar tab below on paper before opening its pitch answers. Pluck with the right thumb; left index for fret 1, middle for 2, ring for 3. Count each column 1 2 3 4. Practise one bar, then join the two. Answers compare only your written decoding, not your playing.",
+        "tr": "Ses adı cevaplarını açmadan aşağıdaki iki ölçülük tabı kağıtta çöz. Sağ başparmakla çek; perde 1’de sol işaret, 2’de orta, 3’te yüzük kullan. Her sütunu 1 2 3 4 say. Bir ölçü çalış, sonra ikisini bağla. Cevaplar yalnız yazılı çözümünü karşılaştırır, çalmanı değil."
+      },
+      "check": {
+        "en": "Can I choose the intended line and fret rather than read the number as a string or finger?",
+        "tr": "Sayıyı tel veya parmak sanmak yerine hedef çizgi ve perdeyi seçebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If an octave or string is wrong, reread the top 1/bottom 4 legend and confirm high-G tuning separately. If reading stalls, isolate one column, say string/fret, then rebuild the bar.",
+        "tr": "Oktav veya tel yanlışsa üst 1/alt 4 açıklamasını yeniden oku ve yüksek Sol akordunu ayrıca doğrula. Okuma durursa tek sütunu ayır, tel/perde söyle, sonra ölçüyü yeniden kur."
+      },
+      "diagrams": [
+        "tab"
+      ]
+    },
+    {
+      "id": "ukulele-15",
+      "title": {
+        "en": "Shape an original four-note idea",
+        "tr": "Özgün dört nota fikri kur"
+      },
+      "teach": {
+        "en": "Make a small original melody using string 3 frets 0/2 and string 2 frets 0/1/3 from the tab exercise. Each chosen note lasts one quarter beat. Four notes fill one bar; do not add an extra beat while selecting. This is your own exercise, not a copied song.",
+        "tr": "Tab alıştırmasından tel 3 perde 0/2 ve tel 2 perde 0/1/3 ile küçük özgün melodi kur. Seçilen her nota bir dörtlük sürsün. Dört nota bir ölçü doldurur; seçerken fazladan vuruş ekleme. Bu kendi alıştırmandır, kopyalanmış şarkı değil."
+      },
+      "practice": {
+        "en": "Write four string/fret pairs, then play them in one bar at a chosen slow tempo. Repeat the same bar, changing only the final pair on a later attempt. Name one difference you heard, or write uncertain. Do not compare two different tempos as the same task.",
+        "tr": "Dört tel/perde çifti yaz, seçilmiş yavaş tempoda bir ölçü çal. Aynı ölçüyü tekrarla; sonraki denemede yalnız son çifti değiştir. Duyduğun bir farkı adlandır veya belirsiz yaz. İki farklı tempoyu aynı görevmiş gibi karşılaştırma."
+      },
+      "check": {
+        "en": "Can I write a playable four-beat idea and repeat it without an extra pause?",
+        "tr": "Çalınabilir dört vuruşluk fikir yazıp fazladan arasız tekrarlayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If lost, return to two chosen notes repeated twice. If fretting is uncomfortable, use open-string notes only and take a break before extending.",
+        "tr": "Kaybolursan iki seçilmiş notayı ikişer kez tekrarlamaya dön. Perdeye basmak rahatsızsa yalnız açık teller kullan, genişletmeden önce ara ver."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "ukulele-16",
+      "title": {
+        "en": "Prepare the eight-bar study",
+        "tr": "Sekiz ölçülük etüde hazırlan"
+      },
+      "teach": {
+        "en": "The original study below has eight 4/4 bars. Read each chord and all eight half-beat slots before starting. Form a chord before its bar’s first D. H keeps counting with no new stroke; R stops sound at that count. Choose a slow tempo that allows the changes. Test each difficult pair separately; nothing here times, listens or marks you.",
+        "tr": "Aşağıdaki özgün etüt sekiz 4/4 ölçüdür. Başlamadan her akoru ve sekiz yarım vuruş hücresini oku. Akoru ölçüsünün ilk D’sinden önce kur. H yeni taramasız saymayı sürdürür; R o sayıda sesi keser. Değişime zaman veren yavaş tempo seç. Zor iki akoru ayrı dene; burada hiçbir şey seni zamanlamaz, dinlemez veya puanlamaz."
+      },
+      "practice": {
+        "en": "First practise bars 1–2 C→Am, then 3–4 F→G7, then 4–5 G7→C. Count one silent bar before each pair. Bar 5 uses eight D/U attacks; bar 6 ends with a counted rest on beat 4. Use that silence to prepare F for bar 7. Connect pairs only when comfortable.",
+        "tr": "Önce ölçü 1–2 Do→La minör, sonra 3–4 Fa→Sol yedi, sonra 4–5 Sol yedi→Do çalış. Her çift öncesi sessiz bir ölçü say. Ölçü 5 sekiz D/U başlangıcıdır; ölçü 6 vuruş 4’te sayılan susla biter. O sessizlikte ölçü 7 Fa’yı hazırla. Yalnız rahatsa çiftleri bağla."
+      },
+      "check": {
+        "en": "Can I explain which slots ring, which stop and where the chord changes happen?",
+        "tr": "Hangi hücrelerde çınlama, hangisinde kesme ve nerede akor değişimi olduğunu açıklayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If a boundary is too hard, stop the full study, practise that exact pair more slowly, then retry the full pair at the original chosen tempo. Do not hide a lost beat by accelerating.",
+        "tr": "Ölçü sınırı çok zorsa tam etüdü durdur, tam o çifti daha yavaş çalış, sonra ilk seçtiğin tempoda çifti yeniden dene. Kaybolan vuruşu hızlanarak gizleme."
+      },
+      "diagrams": [
+        "study",
+        "C",
+        "Am",
+        "F",
+        "G7"
+      ]
+    },
+    {
+      "id": "ukulele-17",
+      "title": {
+        "en": "Perform, observe and recover",
+        "tr": "Çal, gözlemle ve toparlan"
+      },
+      "teach": {
+        "en": "Use the same eight-bar study and chosen tempo. Count one silent bar to start, then play bars 1–8 once. Your observation may be “late”, “muffled”, “wrong string”, “uncertain” or “no observed error”; none is an app measurement or certificate.",
+        "tr": "Aynı sekiz ölçülük etüt ve seçtiğin tempoyu kullan. Başlangıçta sessiz bir ölçü say, sonra 1–8’i bir kez çal. Gözlemin “geç”, “boğuk”, “yanlış tel”, “belirsiz” veya “hata gözlemedim” olabilir; hiçbiri uygulama ölçümü veya sertifikası değildir."
+      },
+      "practice": {
+        "en": "Write the tempo and one concrete bar/count observation, for example “bar 4, beat 1: G7 not ready”. Practise only F→G7 placement or that bar’s rhythm as the single smaller correction. Return to the same eight bars at the same original tempo and compare the same bar/count: improved, unchanged or uncertain. If no error was observed, record that without claiming perfection.",
+        "tr": "Tempoyu ve tek somut ölçü/sayı gözlemini yaz; örneğin “ölçü 4, vuruş 1: Sol yedi hazır değildi”. Tek küçük düzeltme olarak yalnız Fa→Sol yedi yerleşimi veya o ölçünün ritmini çalış. Aynı sekiz ölçüye aynı ilk tempoda dönüp aynı ölçü/sayıyı karşılaştır: iyileşti, aynı kaldı veya belirsiz. Hata gözlemediysen kusursuzluk iddia etmeden bunu kaydet."
+      },
+      "check": {
+        "en": "Can I compare two attempts of the same task and choose one useful smaller practice step?",
+        "tr": "Aynı görevin iki denemesini karşılaştırıp yararlı küçük bir çalışma adımı seçebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If you cannot name the location, slow only the diagnostic attempt and count aloud to find it; keep uncertainty visible. Then choose a new clearly recorded comparison tempo for both full attempts. Rest if tired rather than forcing another run.",
+        "tr": "Konumu adlandıramıyorsan yalnız tanıma denemesini yavaşlatıp bulmak için sesli say; belirsizliği görünür tut. Sonra iki tam deneme için açıkça kaydedilmiş yeni karşılaştırma temposu seç. Yorgunsan yeni turu zorlamak yerine dinlen."
+      },
+      "diagrams": [
+        "study"
+      ]
+    },
+    {
+      "id": "ukulele-18",
+      "title": {
+        "en": "Beginner exit review",
+        "tr": "Başlangıç çıkış değerlendirmesi"
+      },
+      "teach": {
+        "en": "Review the identified high-G setup and external tuning check, 4→1 strings, fret/finger distinction, C/Am/F/G7 diagrams, 4/4 count, down/up directions, ringing versus rests, tab decoding and the original study. This is a bounded written beginner foundation, not all ukulele training, a grade qualification or sensor-confirmed mastery.",
+        "tr": "Tanımlanmış yüksek Sol düzenini ve dış akort kontrolünü, 4→1 telleri, perde/parmak ayrımını, Do/La minör/Fa/Sol yedi çizimlerini, 4/4 sayımı, aşağı/yukarı yönlerini, çınlama/sus ayrımını, tab çözümünü ve özgün etüdü gözden geçir. Bu sınırlı yazılı başlangıç temelidir; tüm ukulele eğitimi, sınav derecesi veya sensörle doğrulanmış ustalık değildir."
+      },
+      "practice": {
+        "en": "On another day, locate strings/frets, decode the tab again, form the four chords and play the study at a comfortable recorded tempo. Use lesson 17’s same-task correction loop. Write what you can repeat, one uncertain outcome and its next practice lesson. Seek individual instruction for unresolved setup, discomfort or technique; there is no completion timer or score.",
+        "tr": "Başka gün telleri/perdeleri bul, tabı yeniden çöz, dört akoru kur ve rahat kaydedilmiş tempoda etüdü çal. Ders 17’nin aynı görevde düzeltme döngüsünü kullan. Tekrarlayabildiklerini, belirsiz bir kazanımı ve onun sonraki çalışma dersini yaz. Çözülemeyen kurulum, rahatsızlık veya teknik için bireysel eğitim al; tamamlama süresi veya puanı yok."
+      },
+      "check": {
+        "en": "Can I explain and repeat the stated beginner tasks and recover from a specific error without claiming certainty I do not have?",
+        "tr": "Sahip olmadığım kesinliği iddia etmeden belirtilen başlangıç görevlerini açıklayıp tekrarlayabiliyor, somut hatadan toparlanabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If one outcome remains uncertain, return to its lesson and reduce the task. Keep tuning uncertainty separate from rhythm or shape difficulty; this app cannot settle either by listening.",
+        "tr": "Bir kazanım belirsizse ilgili derse dönüp görevi küçült. Akort belirsizliğini ritim veya şekil güçlüğünden ayır; uygulama dinleyerek bunları çözemez."
+      },
+      "diagrams": []
+    }
+  ]
+}

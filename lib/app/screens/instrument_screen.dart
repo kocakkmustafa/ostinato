@@ -9,6 +9,7 @@ import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import 'course_screen.dart';
 import 'guitar_journey_screen.dart';
+import 'piano_beginner_screen.dart';
 
 /// Çalgı sayfası — dürüstlük kutusu ürünün vitrini (§7). Tam genişlik,
 /// kurs listesinin ÜSTÜNDE, katlanabilir DEĞİL.
@@ -146,6 +147,14 @@ class InstrumentScreenRoute extends StatelessWidget {
                     const SizedBox(height: 20),
                     kicker(localized(context, 'Courses', 'Kurslar')),
                     const SizedBox(height: 10),
+                    if (discipline.id == 'piano')
+                      ListTile(
+                        key: const Key('piano-beginner-entry'),
+                        title: Text(localized(context, 'Piano / keyboard: written beginner course', 'Piyano / klavye: yazılı başlangıç kursu')),
+                        subtitle: Text(localized(context, '16 original lessons · self-observation', '16 özgün ders · öz gözlem')),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const PianoBeginnerScreen())),
+                      ),
                     if (discipline.id == 'guitar') ...<Widget>[
                       Material(
                         color: Colors.transparent,

@@ -1,0 +1,779 @@
+{
+  "schemaVersion": 1,
+  "id": "bass.beginner",
+  "title": {
+    "en": "Bass: four-string beginner foundation",
+    "tr": "Bas: dört telli başlangıç temeli"
+  },
+  "entry": {
+    "en": "Right-handed fretted four-string electric bass identified in standard sounding E1 A1 D2 G2; secure strap/support, external bass-capable tuning aid and quiet suitable amplification. No prior reading or bass technique assumed.",
+    "tr": "Standart gerçek Mi1 La1 Re2 Sol2 düzeni tanımlı, sağ elle çalınan perdeli dört telli elektrik bas; güvenli askı/destek, bas için uygun harici akort yardımı ve düşük seviyeli uygun yükseltme. Önceden okuma veya bas tekniği beklenmez."
+  },
+  "exit": {
+    "en": "Identify supported tuning and string/fret/finger directions; distinguish sounding/written octaves and four open-string bass-clef examples; attempt gentle alternating plucks, two-hand muting, 4/4 quarters/eighths/rests, root/fifth/octave pairs and original two-bar tab/eight-bar study; locate one issue and compare a smaller correction in the same task/tempo. Self-observation only; no detected pitch, posture, progress or mastery approval.",
+    "tr": "Desteklenen akordu ve tel/perde/parmak yönlerini tanı; gerçek/yazılı oktavı ve dört açık tel Fa anahtarı örneğini ayır; hafif sıralı çekiş, iki elle susturma, 4/4 dörtlük/sekizlik/sus, kök/beşli/oktav çiftleri ve özgün iki ölçülük tab/sekiz ölçülük etüdü dene; tek sorunu bulup küçük düzeltmeyi aynı görev/tempoda karşılaştır. Yalnız öz gözlem; algılanmış ses, duruş, ilerleme veya ustalık onayı yok."
+  },
+  "tuning": "standard:E1-A1-D2-G2",
+  "pitchConvention": "sounding:C4=middle-C;staff=one-octave-higher",
+  "tab": [
+    {
+      "string": 4,
+      "fret": 0
+    },
+    {
+      "string": 4,
+      "fret": 3
+    },
+    {
+      "string": 3,
+      "fret": 0
+    },
+    {
+      "string": 3,
+      "fret": 2
+    },
+    {
+      "string": 2,
+      "fret": 0
+    },
+    {
+      "string": 2,
+      "fret": 2
+    },
+    {
+      "string": 1,
+      "fret": 0
+    },
+    {
+      "string": 4,
+      "fret": 0
+    }
+  ],
+  "study": [
+    {
+      "events": [
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 2
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "note",
+          "string": 2,
+          "fret": 2
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 3
+        },
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 2
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 2
+        },
+        {
+          "kind": "note",
+          "string": 3,
+          "fret": 0
+        },
+        {
+          "kind": "note",
+          "string": 2,
+          "fret": 2
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "note",
+          "string": 2,
+          "fret": 2
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    },
+    {
+      "events": [
+        {
+          "kind": "note",
+          "string": 4,
+          "fret": 0
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "rest"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        },
+        {
+          "kind": "hold"
+        }
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "bass-01",
+      "title": {
+        "en": "Identify the four-string setup",
+        "tr": "Dört telli düzeni tanı"
+      },
+      "teach": {
+        "en": "This course uses a right-handed, fretted, four-string electric bass in standard tuning. Strings 4→1 sound E1 A1 D2 G2; string 4 is thickest/lowest and nearest your face in playing position, string 1 thinnest/highest and nearest the floor. C4 means middle C here. Five/six-string, fretless, piccolo, left-handed and altered-tuning setups need their own guidance; do not retune an unknown string set to fit this course. Note letters C D E F G A B name pitches; their octave number changes at C, with larger numbers indicating higher registers. Here E1 is below E2.",
+        "tr": "Bu kurs sağ elle çalınan, perdeli, dört telli elektrik basın standart akordunu kullanır. 4→1 telleri Mi1 La1 Re2 Sol2 sesini verir; tel 4 en kalın/en pes ve çalım konumunda yüzüne yakın, tel 1 en ince/en tiz ve zemine yakındır. Burada Do4 orta Do’dur. Beş/altı telli, perdesiz, piccolo, sol elle çalınan ve farklı akortlu düzenler kendi yönlendirmesini gerektirir; bilinmeyen tel takımını bu kursa uydurmak için yeniden akort etme. Nota harfleri C D E F G A B sırasıyla Do Re Mi Fa Sol La Si’dir; oktav numarası Do’da değişir, büyük numara daha tiz bölgeyi gösterir. Burada Mi1, Mi2’den pestir."
+      },
+      "practice": {
+        "en": "Identify the bass and string set from its manual/label. Obtain an external bass-capable tuner/reference and suitable support. Written lessons provide no sound reference, listening, tuning judgment, score or mastery record.",
+        "tr": "Bas ve tel takımını kılavuz/etiketten tanı. Bas için uygun harici akort cihazı/referansı ve uygun destek edin. Yazılı dersler referans ses, dinleme, akort hükmü, puan veya ustalık kaydı sağlamaz."
+      },
+      "check": {
+        "en": "Can I identify my instrument and standard sounding register before adjusting strings?",
+        "tr": "Telleri ayarlamadan önce çalgımı ve standart gerçek ses bölgesini tanıyabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If uncertain, ask a technician or teacher to identify the setup. A left-handed bass cannot safely use these diagrams by an unexplained mirror operation.",
+        "tr": "Emin değilsen düzeni tanıması için teknisyen veya öğretmene danış. Sol el bası bu şemaları açıklamasız aynalama ile güvenle kullanamaz."
+      },
+      "diagrams": [
+        "strings"
+      ]
+    },
+    {
+      "id": "bass-02",
+      "title": {
+        "en": "Support and quiet amplification",
+        "tr": "Destek ve düşük sesli yükseltme"
+      },
+      "teach": {
+        "en": "Use a secure, suitable strap; check its attachment while supporting the bass. Seated, use a stable chair with supported feet. Let the neck rise to a comfortable reachable angle; keep shoulders relaxed and wrists comfortable. Hands should play, not clamp the instrument to prevent slipping. No angle here is a measured posture target.",
+        "tr": "Güvenli, uygun askı kullan; bası desteklerken bağlantısını kontrol et. Otururken ayakların destekli, sandalye dengeli olsun. Sapı rahat ulaşabildiğin açıda yükselt; omuzlar rahat, bilekler konforlu olsun. Eller kaymayı önlemek için çalgıyı sıkıştırmak yerine çalabilsin. Buradaki açı ölçülmüş duruş hedefi değildir."
+      },
+      "practice": {
+        "en": "Follow your bass/amp manual: begin with output low or muted before connecting, then raise only to comfortable quiet listening. Avoid loud headphones. Place and release the fretting hand while the strap supports the bass. Practise briefly, pause; stop for pain, numbness or strain.",
+        "tr": "Bas/amfi kılavuzunu izle: bağlamadan önce çıkışı düşük veya sessiz tut, sonra yalnız rahat ve düşük dinleme seviyesine yükselt. Yüksek kulaklık sesinden kaçın. Askı bası desteklerken perde elini yerleştirip bırak. Kısa çalış, ara ver; ağrı, uyuşma veya zorlanmada dur."
+      },
+      "check": {
+        "en": "Can both hands move without supporting the neck by a squeeze?",
+        "tr": "Sapı sıkarak desteklemem gerekmeden iki elim de hareket edebiliyor mu?"
+      },
+      "recover": {
+        "en": "Readjust strap/support before playing if the neck drops. Do not pluck harder just to overcome low amplification; use the manual and quiet output. Unresolved discomfort needs individual help.",
+        "tr": "Sap düşüyorsa çalmadan askı/desteği ayarla. Düşük yükseltmeyi aşmak için daha sert çekme; kılavuzu ve düşük çıkışı kullan. Çözülemeyen rahatsızlık bireysel yardım gerektirir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-03",
+      "title": {
+        "en": "External tuning and octave labels",
+        "tr": "Harici akort ve oktav adları"
+      },
+      "teach": {
+        "en": "Check strings separately with an external bass-capable tuner using its instructions: 4 E1, 3 A1, 2 D2, 1 G2 sounding pitches. Trace the string to its own peg, gently pluck it alone and damp the others. Make small adjustments: tightening raises pitch, loosening lowers it; turning direction depends on the instrument. Octave numbering can vary on tuners, so a letter alone is not enough to identify the correct register. Some tuners emit sound-out references at a higher octave. Follow their bass-mode/manual register instructions; do not tighten your bass to match that higher reference octave.",
+        "tr": "Telleri harici, bas için uygun akort cihazının yönergeleriyle ayrı kontrol et: gerçek sesler 4 Mi1, 3 La1, 2 Re2, 1 Sol2. Teli kendi burgusuna kadar izle, tek başına hafif çek ve diğerlerini sustur. Küçük ayarlar yap: germe sesi tizleştirir, gevşetme pesleştirir; dönüş yönü çalgıya bağlıdır. Akort cihazlarında oktav numarası değişebilir; doğru ses bölgesini tanımaya yalnız harf yetmez. Bazı akort cihazları referans sesini daha tiz oktavdan verir. Bas modu/kılavuzun ses bölgesi yönergesini izle; bası o tiz referans oktavına eşlemek için germe."
+      },
+      "practice": {
+        "en": "Identify each intended string/register and check with the external aid, then recheck after a short rest. Read its manual if the display fluctuates on low E. This app never settles readiness by hearing you.",
+        "tr": "Her hedef tel/ses bölgesini tanıyıp harici yardımcıyla kontrol et, kısa aradan sonra yeniden bak. Pes Mi’de gösterge dalgalanıyorsa kılavuzunu oku. Bu uygulama seni dinleyerek hazır oluşu belirlemez."
+      },
+      "check": {
+        "en": "Am I turning only the intended peg and checking the sounding register?",
+        "tr": "Yalnız hedef burguyu çevirip gerçek ses bölgesini kontrol ediyor muyum?"
+      },
+      "recover": {
+        "en": "Stop if the octave, peg or string set is unclear. Never keep tightening to chase a letter or assume a written staff octave is the tuning target. Seek setup guidance.",
+        "tr": "Oktav, burgu veya tel takımı belirsizse dur. Harfi yakalamak için germeyi sürdürme veya portede yazılı oktavı akort hedefi sanma. Çalgı düzeni için yönlendirme al."
+      },
+      "diagrams": [
+        "strings"
+      ]
+    },
+    {
+      "id": "bass-04",
+      "title": {
+        "en": "Strings, frets and both hands",
+        "tr": "Teller, perdeler ve iki el"
+      },
+      "teach": {
+        "en": "Fret 0 means open. Fret 1 is the space after the nut toward the body. Higher fret numbers move toward the body and raise pitch on the same string by a semitone per fret. Left fingers: index 1, middle 2, ring 3, little 4; thumb is not counted. Right index/middle pluck. String, fret and finger numbers are different. A semitone is the small pitch step from one fret to its neighbour; twelve semitones form an octave.",
+        "tr": "Perde 0 açık tel demektir. Perde 1 üst eşikten gövdeye doğru ilk boşluktur. Perde numarası gövdeye doğru artar ve aynı telde sesi her perdede yarım ses yükseltir. Sol parmaklar: işaret 1, orta 2, yüzük 3, serçe 4; başparmak sayılmaz. Sağ işaret/orta teli çeker. Tel, perde ve parmak numarası farklıdır. Yarım ses, bir perdeden komşusuna küçük ses adımıdır; on iki yarım ses bir oktav eder."
+      },
+      "practice": {
+        "en": "On string 3 A, locate open, fret 1 and fret 2 without stretching. Place left index just behind fret-1 wire, not on it; use only enough pressure for clarity. Thumb rests comfortably behind the neck. Release without bending the string sideways.",
+        "tr": "Tel 3 La’da açık, perde 1 ve perde 2’yi esnetmeden bul. Sol işareti perde 1’in metalinin hemen gerisine, metalin üstüne değil, koy; açıklık için yalnız yeterli basınç kullan. Başparmak sap arkasında rahat dursun. Teli yana bükmeden bırak."
+      },
+      "check": {
+        "en": "Can I locate the space and finger without mistaking string 3 for fret 3?",
+        "tr": "Tel 3’ü perde 3 sanmadan boşluğu ve parmağı bulabiliyor muyum?"
+      },
+      "recover": {
+        "en": "For buzz, check placement and gentle plucking before adding pressure. For excessive reach, release and shift the whole relaxed hand; do not force four low frets under four stretched fingers.",
+        "tr": "Cızırtıda basıncı artırmadan konumu ve hafif çekişi kontrol et. Fazla uzanmada bırakıp rahat elin tamamını kaydır; dört pes perdeye dört esnetilmiş parmağı zorla yerleştirme."
+      },
+      "diagrams": [
+        "strings",
+        "frets"
+      ]
+    },
+    {
+      "id": "bass-05",
+      "title": {
+        "en": "First controlled plucks",
+        "tr": "İlk kontrollü tel çekişleri"
+      },
+      "teach": {
+        "en": "Begin with open A string 3. Lightly rest the right thumb on a suitable pickup surface or unused lower E string without pressing hard. Roll the index gently through A toward the lower-pitched E string; it may land on E to mute it. Avoid pulling A far outward and letting it snap. Left hand lightly contacts unused D/G without fretting A.",
+        "tr": "Açık La tel 3 ile başla. Sağ başparmağı uygun manyetik yüzeyine veya kullanılmayan pes Mi teline sert basmadan hafif dayandır. İşareti La’dan pes Mi teline doğru hafifçe geçir; Mi’ye konması onu susturabilir. La’yı dışarı fazla çekip çarptırmaktan kaçın. Sol el La’ya basmadan kullanılmayan Re/Sol’e hafif temas eder."
+      },
+      "practice": {
+        "en": "Pluck A once with right index; stop it with gentle contact. Repeat four separate plucks with pauses. Judge only your own listening: one intended note, no unwanted neighbouring ring.",
+        "tr": "La’yı sağ işaretle bir kez çek; hafif temasla sustur. Aralar vererek dört ayrı çekiş tekrarla. Yalnız kendi dinlemene bak: tek hedef nota, komşuda istenmeyen çınlama yok."
+      },
+      "check": {
+        "en": "Does a small motion create a note without a snap or stiff wrist?",
+        "tr": "Küçük hareket çarptırma veya sert bilek olmadan nota çıkarıyor mu?"
+      },
+      "recover": {
+        "en": "If it snaps, reduce force and check quiet amplification rather than digging in. If A is muted too, lift only the contact blocking A. Pause for discomfort.",
+        "tr": "Çarptırıyorsa gücü azaltıp daha sert çekmek yerine düşük seviyeli yükseltmeyi kontrol et. La da susuyorsa yalnız La’yı engelleyen teması kaldır. Rahatsızlıkta ara ver."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-06",
+      "title": {
+        "en": "Alternate index and middle",
+        "tr": "İşaret ve ortayı sırala"
+      },
+      "teach": {
+        "en": "Use right index i and middle m alternately; i/m are plucking fingers, not fret numbers. Keep a small relaxed motion and similar sound between fingers. There is no measured speed target.",
+        "tr": "Sağ işaret i ve orta m’yi sırayla kullan; i/m tel çeken parmaklardır, perde numarası değildir. Hareket küçük ve rahat, iki parmağın sesi benzer olsun. Ölçülmüş hız hedefi yoktur."
+      },
+      "practice": {
+        "en": "On open A: i, m, i, m as four separate notes. Count 1 2 3 4 slowly, one note on each number. Stop at the end. Repeat once beginning with m, then rest.",
+        "tr": "Açık La’da dört ayrı nota olarak i, m, i, m. Yavaş 1 2 3 4 say; her sayıda bir nota. Sonda dur. Bir kez m ile başlayarak tekrarla, sonra dinlen."
+      },
+      "check": {
+        "en": "Did I alternate intentionally without one finger striking much harder?",
+        "tr": "Bir parmak çok daha sert vurmadan bilinçli sırayla kullanabildim mi?"
+      },
+      "recover": {
+        "en": "If alternation is lost, play two notes i/m then stop and reset. Speak the finger order without playing before rebuilding four. Do not rush to prove speed.",
+        "tr": "Sıra kaybolursa i/m iki nota çalıp dur ve yeniden kur. Dördü yeniden kurmadan parmak sırasını çalmadan söyle. Hız kanıtlamak için acele etme."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-07",
+      "title": {
+        "en": "Count 4/4 and control endings",
+        "tr": "4/4 say ve sonları yönet"
+      },
+      "teach": {
+        "en": "A 4/4 bar has four quarter beats. A note can ring across counts without another attack; a rest requires silence while counting. Gently touch the sounding string to stop it without striking the body or pressing it to a fret.",
+        "tr": "4/4 ölçüde dört dörtlük vuruş vardır. Nota yeni çekiş olmadan sayılar boyunca çınlayabilir; sus sayarken sessizlik gerektirir. Çınlayan teli gövdeye vurmadan veya perdeye bastırmadan hafif temasla sustur."
+      },
+      "practice": {
+        "en": "Open E: bar 1 pluck on 1 and ring through 4. Bar 2 pluck on 1, stop on 2, pluck on 3, stop on 4. Count evenly through the silence, repeat two bars then rest.",
+        "tr": "Açık Mi: ölçü 1’de 1’de çek, 4 boyunca çınlat. Ölçü 2’de 1’de çek, 2’de sustur, 3’te çek, 4’te sustur. Sessizlikte eşit say; iki ölçüyü tekrarlayıp dinlen."
+      },
+      "check": {
+        "en": "Did stopping the sound keep the same pulse rather than add a pause?",
+        "tr": "Sesi durdururken durak eklemek yerine aynı nabız sürdü mü?"
+      },
+      "recover": {
+        "en": "Tap a silent bar if the pulse drifts. If a rest rings, isolate pluck-on-1/stop-on-2 before adding other notes.",
+        "tr": "Nabız kayarsa sessiz ölçü vur. Sus çınlıyorsa diğer notaları eklemeden 1’de çek/2’de sustur çiftini ayır."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-08",
+      "title": {
+        "en": "Mute unused strings with two hands",
+        "tr": "Kullanılmayan telleri iki elle sustur"
+      },
+      "teach": {
+        "en": "Usually only the intended bass note should ring. For an A-string note, right thumb lightly mutes E and left index gently contacts D/G without pressing them to frets. For a D-string note, move the relaxed right thumb/contact so E/A stay quiet; plucking can land on A, while left hand contacts G. Light contact stops vibration; pressing an unintended fret can create another note or harmonic.",
+        "tr": "Genellikle yalnız hedef bas notası çınlasın. La telindeki notada sağ başparmak Mi’yi hafif susturur, sol işaret Re/Sol’e perdeye bastırmadan hafif temas eder. Re telindeki notada rahat sağ başparmak/teması Mi/La sessiz kalacak şekilde taşı; çekiş La’ya konabilir, sol el Sol’e temas eder. Hafif temas titreşimi keser; yanlış perdeye basmak başka nota veya armonik çıkarabilir."
+      },
+      "practice": {
+        "en": "Play open A once, stop, then open D once, stop. Check the other three strings by your own listening. Change the muting contacts before each note; no simultaneous chord is needed.",
+        "tr": "Açık La’yı bir kez çalıp sustur, sonra açık Re’yi bir kez çalıp sustur. Diğer üç teli kendi dinlemenle kontrol et. Her notadan önce susturma temaslarını değiştir; aynı anda akor gerekmez."
+      },
+      "check": {
+        "en": "Can I keep unused strings quiet without silencing the intended one?",
+        "tr": "Hedefi susturmadan kullanılmayan telleri sessiz tutabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If a second string rings, name it and practise its light contact alone. If a harmonic rings at a light-touch point, use a broader gentle contact slightly away from that point. Stop and reset before adding speed.",
+        "tr": "İkinci tel çınlıyorsa adını söyle ve yalnız hafif temasını çalış. Hafif temas noktasında armonik çınlıyorsa o noktadan biraz uzakta daha geniş hafif temas kullan. Hız eklemeden durup yeniden kur."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-09",
+      "title": {
+        "en": "Fretted notes and hand shifts",
+        "tr": "Perdeli notalar ve el kaydırma"
+      },
+      "teach": {
+        "en": "On E string 4: open E1, fret 1 F1, fret 3 G1. On A string 3: open A1, fret 2 B1. On D string 2: open D2, fret 2 E2. Use index at fret 1, middle at 2 and ring at 3 only if comfortable; otherwise release and shift a relaxed hand, using index at the new fret. Never hold all positions in a forced stretch.",
+        "tr": "Mi tel 4’te açık Mi1, perde 1 Fa1, perde 3 Sol1. La tel 3’te açık La1, perde 2 Si1. Re tel 2’de açık Re2, perde 2 Mi2. Yalnız rahatsa perde 1’de işaret, 2’de orta, 3’te yüzük kullan; aksi halde bırakıp rahat eli kaydırarak yeni perdede işaret kullan. Zorlanmış esnemede tüm konumları tutma."
+      },
+      "practice": {
+        "en": "On E play open, fret 1, open, fret 3 with a pause between attempts. Then A open/fret 2, then D open/fret 2. Speak string/fret and sounding name. Mute the previous note before switching.",
+        "tr": "Mi’de açık, perde 1, açık, perde 3 çal; denemeler arasında ara ver. Sonra La açık/perde 2, sonra Re açık/perde 2. Tel/perdeyi ve gerçek ses adını söyle. Değişmeden önce önceki notayı sustur."
+      },
+      "check": {
+        "en": "Is my fret choice clear without bending the string or locking the thumb?",
+        "tr": "Teli bükmeden veya başparmağı kilitlemeden perde seçimim açık mı?"
+      },
+      "recover": {
+        "en": "If reaching 3 strains, isolate open/1 first or shift rather than stretch. If pitch seems uncertain, separate fretting placement from external tuning; the app does not judge either.",
+        "tr": "3’e uzanmak zorluyorsa önce açık/1’i ayır veya esnemek yerine kaydır. Ses belirsizse perde yerleştirmeyi harici akorttan ayır; uygulama ikisine de hüküm vermez."
+      },
+      "diagrams": [
+        "frets"
+      ]
+    },
+    {
+      "id": "bass-10",
+      "title": {
+        "en": "Cross strings without losing the count",
+        "tr": "Saymayı kaybetmeden tel değiştir"
+      },
+      "teach": {
+        "en": "Crossing a string changes the right-hand aim and muting plan. Open E→A→D→G ascend in sounding pitch; physically 4→1 travels toward the floor. This differs from the tab view, where string 1 is the top line.",
+        "tr": "Tel değişimi sağ el hedefini ve susturma planını değiştirir. Açık Mi→La→Re→Sol gerçek seste tizleşir; fiziksel 4→1 zemine doğru gider. Bu, tel 1’in üst çizgide olduğu tab görünümünden farklıdır."
+      },
+      "practice": {
+        "en": "One 4/4 bar: open E on 1, A on 2, D on 3, G on 4, one quarter note each; stop before repeating. Alternate i/m if manageable, and silence the old string on each switch. Then try the reverse order.",
+        "tr": "Bir 4/4 ölçü: 1’de açık Mi, 2’de La, 3’te Re, 4’te Sol; her biri bir dörtlük nota. Tekrardan önce sustur. Yönetilebiliyorsa i/m sırala ve her değişimde eski teli sustur. Sonra ters sırayı dene."
+      },
+      "check": {
+        "en": "Did each count get one intended note, with no previous open string bleeding through?",
+        "tr": "Her sayıya önceki açık tel sızmadan tek hedef nota geldi mi?"
+      },
+      "recover": {
+        "en": "If G leaves E/A ringing, move the right-thumb contact lightly across E/A while a plucking finger can stop on D. Isolate D→G without a deadline before rebuilding the bar.",
+        "tr": "Sol, Mi/La’yı çınlatıyorsa sağ başparmak temasını Mi/La boyunca hafif taşı; tel çeken parmak Re’de durabilir. Ölçüyü yeniden kurmadan Re→Sol’ü süre baskısı olmadan ayır."
+      },
+      "diagrams": [
+        "strings"
+      ]
+    },
+    {
+      "id": "bass-11",
+      "title": {
+        "en": "Roots, fifths and octaves",
+        "tr": "Kökler, beşliler ve oktavlar"
+      },
+      "teach": {
+        "en": "A root names a chord: Em uses E, Am uses A. This is an imagined practice harmony, not supplied backing audio. A perfect fifth is seven semitones above its root: E1→B1 (4/0→3/2), A1→E2 (3/0→2/2). An octave is twelve semitones: E1→E2 (4/0→2/2). The same letter at a different octave is not the same sounding pitch.",
+        "tr": "Kök akora adını verir: Mi minörün kökü Mi, La minörünki La’dır. Bu hayali çalışma armonisidir; eşlik sesi sağlanmaz. Tam beşli kökten yedi yarım ses yukarıdır: Mi1→Si1 (4/0→3/2), La1→Mi2 (3/0→2/2). Oktav on iki yarım sestir: Mi1→Mi2 (4/0→2/2). Farklı oktavdaki aynı harf, aynı gerçek ses değildir."
+      },
+      "practice": {
+        "en": "Before counting, practise E/B then A/E then low E/high E as separate pairs. Use middle for fret 2 or shift index there if more comfortable. Next one bar: E1 on 1, B1 on 2, E1 on 3, counted rest on 4.",
+        "tr": "Saymadan önce Mi/Si, La/Mi, sonra pes Mi/tiz Mi’yi ayrı çiftler olarak çalış. Perde 2’de orta kullan veya daha rahatsa işareti oraya kaydır. Sonra bir ölçü: 1’de Mi1, 2’de Si1, 3’te Mi1, 4’te sayılan sus."
+      },
+      "check": {
+        "en": "Can I distinguish fifth versus octave and mute notes between strings?",
+        "tr": "Beşli ile oktavı ayırıp teller arasında notaları susturabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If you confuse B1 with E2, point to their different strings at fret 2 before playing. If the reach or crossing is hard, work one pair with silence between notes.",
+        "tr": "Si1 ile Mi2 karışırsa çalmadan perde 2’deki farklı tellerini göster. Uzanma veya değişim zorsa notalar arasında sessizlikle tek çifti çalış."
+      },
+      "diagrams": [
+        "pairs"
+      ]
+    },
+    {
+      "id": "bass-12",
+      "title": {
+        "en": "Read an original two-bar tab",
+        "tr": "Özgün iki ölçülük tabı oku"
+      },
+      "teach": {
+        "en": "Tab has four horizontal lines: top 1 G, then 2 D, 3 A, bottom 4 E. A number is a fret on that string, not a finger. 0 is open; read columns left→right. Here each column is one quarter beat and four columns make one 4/4 bar. This timing is explicitly supplied; generic tab may omit rhythm.",
+        "tr": "Tabın dört yatay çizgisi vardır: üst 1 Sol, sonra 2 Re, 3 La, alt 4 Mi. Sayı o teldeki perdedir; parmak değildir. 0 açıktır; sütunları soldan sağa oku. Burada her sütun bir dörtlük vuruş, dört sütun bir 4/4 ölçüdür. Zamanlama açıkça verilmiştir; genel tab ritmi göstermeyebilir."
+      },
+      "practice": {
+        "en": "Decode eight string/fret pairs on paper before opening the answer panel. Then practise one bar at a time, counting 1 2 3 4, before joining both. Use lesson 9’s comfortable fretting choices and small i/m plucks. Answers compare written reading, not measured sound.",
+        "tr": "Cevap panelini açmadan sekiz tel/perde çiftini kâğıtta çöz. Sonra ikisini birleştirmeden önce 1 2 3 4 sayarak ölçüleri ayrı çalış. Ders 9’un rahat perde seçimlerini ve küçük i/m çekişlerini kullan. Cevaplar ölçülmüş sesi değil yazılı okumayı karşılaştırır."
+      },
+      "check": {
+        "en": "Can I select the correct line and fret and keep four counts per bar?",
+        "tr": "Doğru çizgi ve perdeyi seçip ölçüde dört sayıyı sürdürebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If you read a fret as a string/finger, isolate one column and name all three separately. If a crossing interrupts time, practise that two-note pair before the complete bar.",
+        "tr": "Perdeyi tel/parmak olarak okursan tek sütunu ayırıp üçünü ayrı adlandır. Tel değişimi zamanı bölüyorsa tam ölçüden önce o iki notalı çifti çalış."
+      },
+      "diagrams": [
+        "tab"
+      ]
+    },
+    {
+      "id": "bass-13",
+      "title": {
+        "en": "Sounding pitch versus written bass clef",
+        "tr": "Gerçek ses ile yazılı Fa anahtarı"
+      },
+      "teach": {
+        "en": "Conventional bass-guitar staff notation is written one octave above the sound: written E2 sounds E1. Our tuner labels, fret map and tab pitch answers always name SOUNDING pitches. Bass clef has five staff lines; they are not string lines. Bottom→top lines are written G2 B2 D3 F3 A3; spaces A2 C3 E3 G3. Written E2 uses one ledger line below, written A2 the bottom space, D3 the middle line, G3 the top space.",
+        "tr": "Geleneksel bas gitar porte yazımı gerçek sesten bir oktav yukarıdır: yazılı Mi2, Mi1 sesi verir. Akort etiketlerimiz, perde haritamız ve tab ses cevaplarımız daima GERÇEK sesleri adlandırır. Fa anahtarının beş porte çizgisi vardır; bunlar tel çizgisi değildir. Alttan üste çizgiler yazılı Sol2 Si2 Re3 Fa3 La3; boşluklar La2 Do3 Mi3 Sol3. Yazılı Mi2 altta bir ek çizgide, La2 en alt boşlukta, Re3 orta çizgide, Sol3 en üst boşluktadır."
+      },
+      "practice": {
+        "en": "Look at the original four open-string staff examples: say each written name, sounding name and open string number. Hide the labels with paper and identify again. Do not tune to the written octave. This lesson introduces those four notes, not complete sight-reading.",
+        "tr": "Özgün dört açık tel porte örneğine bak: her yazılı adı, gerçek ses adını ve açık tel numarasını söyle. Etiketleri kâğıtla kapatıp yeniden tanı. Yazılı oktava akort etme. Bu ders bu dört notayı tanıtır; tam deşifre eğitimi değildir."
+      },
+      "check": {
+        "en": "Can I tell a five-line staff from four-string tab and explain why written E2 sounds E1?",
+        "tr": "Beş çizgili porteyi dört telli tabdan ayırıp yazılı Mi2’nin neden Mi1 sesi verdiğini açıklayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If octave names are confusing, return to C4=middle C and the explicit written/sounding pair. For tuning, use the instrument/tuner manual and sounding register, not the note’s staff height.",
+        "tr": "Oktav adları karışırsa Do4=orta Do ve açık yazılı/gerçek ses çiftine dön. Akortta notanın porte yüksekliğini değil çalgı/akort cihazı kılavuzunu ve gerçek ses bölgesini kullan."
+      },
+      "diagrams": [
+        "staff"
+      ]
+    },
+    {
+      "id": "bass-14",
+      "title": {
+        "en": "Eighths and counted silence",
+        "tr": "Sekizlikler ve sayılan sessizlik"
+      },
+      "teach": {
+        "en": "Count 1-and 2-and 3-and 4-and as eight equal halves of four beats. Our table uses N=pluck the stated string/fret, H=no new attack (keep current ringing or silence), R=stop sound and count silence. H here is a rhythm-table instruction, not a tab hammer-on symbol. A note replaces the previous note; stop the old string when changing.",
+        "tr": "1-ve 2-ve 3-ve 4-ve’yi dört vuruşun sekiz eşit yarısı olarak say. Tablomuzda N=belirtilen tel/perdeyi çek, H=yeni çekiş yok (mevcut çınlama veya sessizlik sürer), R=sesi kesip sessizlik say. Buradaki H ritim tablosu yönergesidir; tabdaki hammer-on işareti değildir. Yeni nota öncekinin yerini alır; değişimde eski teli sustur."
+      },
+      "practice": {
+        "en": "On open E, one bar: N H N H N N R H. Pluck on 1, 2, 3 and its “and”; stop on 4. Alternate i/m for attacks only; an H/R is not a pluck. Tap eight equal parts silently first.",
+        "tr": "Açık Mi’de bir ölçü: N H N H N N R H. 1, 2, 3 ve onun “ve”sinde çek; 4’te sustur. Yalnız çekişlerde i/m sırala; H/R çekiş değildir. Önce sekiz eşit parçayı sessiz vur."
+      },
+      "check": {
+        "en": "Can I keep the numbered pulse steady when adding “and” attacks or a rest?",
+        "tr": "“Ve” çekişleri veya sus eklerken sayılı nabzı eşit tutabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If eighths double your pulse, speak/tap without playing, then add one pair. If H after R rings, check that R actually stopped the note.",
+        "tr": "Sekizlikler nabzı iki katına çıkarıyorsa çalmadan söyle/vur, sonra tek çift ekle. R’den sonra H çınlıyorsa R’nin notayı gerçekten kestiğini kontrol et."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-15",
+      "title": {
+        "en": "Create a small original bassline",
+        "tr": "Küçük özgün bas çizgisi oluştur"
+      },
+      "teach": {
+        "en": "Start with an imagined Em | Am pair. A root on beat 1 can make the intended change clear. E1/B1 fit the first bar, A1/E2 the second. This is a writing exercise with no supplied band recording; no note is automatically judged correct.",
+        "tr": "Hayali Mi minör | La minör çiftiyle başla. 1’de kök, hedef değişimi belirginleştirebilir. İlk ölçüde Mi1/Si1, ikincide La1/Mi2 kullanılır. Bu, grup kaydı sağlanmayan yazma alıştırmasıdır; hiçbir nota otomatik doğru sayılmaz."
+      },
+      "practice": {
+        "en": "Write two four-beat bars: first root on 1, fifth on 3; second its root on 1, fifth on 3. Let each note ring two beats, then stop at the end. On a later attempt change only the first bar’s last beat to a counted rest. Keep both comparison tempos the same.",
+        "tr": "Dört vuruşlu iki ölçü yaz: ilk kök 1’de, beşli 3’te; ikinci ölçünün kökü 1’de, beşlisi 3’te. Her notayı iki vuruş çınlat, sonda sustur. Sonraki denemede yalnız ilk ölçünün son vuruşunu sayılan susa değiştir. İki karşılaştırmanın temposunu aynı tut."
+      },
+      "check": {
+        "en": "Can I place a root at the boundary and describe the change I chose?",
+        "tr": "Sınırda kök yerleştirip seçtiğim değişimi açıklayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If it becomes too complex, keep only one root per bar and count four. Separate the note choice from a muting/timing problem before adding the fifth again.",
+        "tr": "Karmaşıklaşırsa ölçüde tek kök tutup dört say. Beşliyi yeniden eklemeden nota seçimini susturma/zamanlama sorunundan ayır."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-16",
+      "title": {
+        "en": "Prepare the original eight-bar study",
+        "tr": "Özgün sekiz ölçülük etüdü hazırla"
+      },
+      "teach": {
+        "en": "The study uses standard sounding pitches and explicit string/fret pairs in eight 4/4 bars. Each table has eight half-beat cells: N attacks, H holds the current sound or silence, R stops sound. Read both ends of each row; on a narrow screen pan horizontally. A displayed instruction is not detected playing.",
+        "tr": "Etüt sekiz 4/4 ölçüde standart gerçek sesleri ve açık tel/perde çiftlerini kullanır. Her tabloda sekiz yarım vuruş hücresi vardır: N çeker, H mevcut ses/sessizliği sürdürür, R susturur. Her satırın iki ucunu oku; dar ekranda yatay kaydır. Gösterilen yönerge algılanmış çalım değildir."
+      },
+      "practice": {
+        "en": "Choose and write a comfortable tempo. Isolate bars 3–4 root/fifth changes, then 5–6 eighths, then 7 octave crossing. At bar 8 stop on beat 3 and count through 4. Practise pairs with one silent count-in bar; connect only after reading the events.",
+        "tr": "Rahat tempo seçip yaz. Ölçü 3–4 kök/beşli değişimini, sonra 5–6 sekizliklerini, sonra 7 oktav geçişini ayır. Ölçü 8’de vuruş 3’te susturup 4 boyunca say. Bir sessiz giriş ölçüsüyle çiftleri çalış; olayları okuduktan sonra bağla."
+      },
+      "check": {
+        "en": "Can I explain each attack/rest and the exact string/fret before beginning?",
+        "tr": "Başlamadan her çekiş/susu ve tam tel/perdeyi açıklayabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If a crossing is hard, use only its two notes with pauses, then rebuild that bar. Diagnose at a slower tempo if needed, but compare complete attempts at the same chosen tempo.",
+        "tr": "Geçiş zorsa yalnız o iki notayı aralarla kullan, sonra o ölçüyü yeniden kur. Gerekirse daha yavaş tempoda sorunu bul; tam denemeleri aynı seçilmiş tempoda karşılaştır."
+      },
+      "diagrams": [
+        "study"
+      ]
+    },
+    {
+      "id": "bass-17",
+      "title": {
+        "en": "Play, locate one issue and retry",
+        "tr": "Çal, tek sorunu bul ve yeniden dene"
+      },
+      "teach": {
+        "en": "Count one silent bar, then attempt all eight bars at the recorded tempo. You can observe “late”, “wrong string”, “ringing through rest”, “buzz”, “uncertain” or “no observed error”. This is your observation, not a detector, grade or certificate.",
+        "tr": "Bir sessiz ölçü say, sonra sekiz ölçüyü kaydettiğin tempoda dene. “Geç”, “yanlış tel”, “susta çınlama”, “cızırtı”, “belirsiz” veya “gözlenen hata yok” gözleyebilirsin. Bu senin gözlemindir; algılayıcı, not veya sertifika değildir."
+      },
+      "practice": {
+        "en": "Write tempo plus a specific bar/count issue, e.g. “bar 6 beat 4: A still ringing”. Practise just that stop or crossing as one smaller correction. Return to the identical eight-bar task at the same tempo; compare improved/unchanged/uncertain at that location. If no error was observed, record that without calling it perfect.",
+        "tr": "Tempo ve belirli ölçü/vuruş sorununu yaz; örneğin “ölçü 6 vuruş 4: La hâlâ çınlıyor”. Yalnız o susturma veya geçişi küçük tek düzeltme olarak çalış. Aynı sekiz ölçülük göreve aynı tempoda dön; o konumda daha iyi/değişmedi/belirsiz karşılaştır. Hata gözlemediysen mükemmel demeden bunu kaydet."
+      },
+      "check": {
+        "en": "Can I compare the same task and separate fret/tuning uncertainty from rhythm or muting?",
+        "tr": "Aynı görevi karşılaştırıp perde/akort belirsizliğini ritim veya susturmadan ayırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the location is unclear, stop the full run and slowly count the troublesome bar to identify it. Choose a new recorded comparison tempo for both full runs if needed. Rest instead of forcing fatigue.",
+        "tr": "Konum belirsizse tam turu durdurup sorunlu ölçüyü yavaş sayarak bul. Gerekirse iki tam tur için yeni kayıtlı karşılaştırma temposu seç. Yorgunluğu zorlamak yerine dinlen."
+      },
+      "diagrams": [
+        "study"
+      ]
+    },
+    {
+      "id": "bass-18",
+      "title": {
+        "en": "Beginner exit and another-day revisit",
+        "tr": "Başlangıç çıkışı ve başka gün tekrarı"
+      },
+      "teach": {
+        "en": "Review supported setup/external tuning, sounding-versus-written octave, string/fret/finger directions, gentle i/m attacks and two-hand muting, 4/4 quarters/eighths/rests, roots/fifths/octaves, two-bar tab and the original study. This bounded written foundation is not complete bass musicianship or measured physical/audio mastery.",
+        "tr": "Desteklenen düzen/harici akort, gerçek-yazılı oktav farkı, tel/perde/parmak yönleri, hafif i/m çekiş ve iki elle susturma, 4/4 dörtlük/sekizlik/sus, kök/beşli/oktav, iki ölçülük tab ve özgün etüdü gözden geçir. Bu sınırlı yazılı temel, tüm bas müzisyenliği veya ölçülmüş fiziksel/sesli ustalık değildir."
+      },
+      "practice": {
+        "en": "On another day identify the setup and open strings, decode the tab before revealing answers, name the four staff examples with both octaves, and attempt the study at a comfortable recorded tempo. Use lesson 17’s same-task correction loop. Write one repeatable outcome, one uncertainty and its next lesson.",
+        "tr": "Başka bir gün düzeni ve açık telleri tanı, cevapları açmadan tabı çöz, dört porte örneğini iki oktavıyla adlandır ve etüdü rahat, kayıtlı tempoda dene. Ders 17’nin aynı görevde düzeltme döngüsünü kullan. Tekrarlanabilir bir kazanım, bir belirsizlik ve sonraki dersini yaz."
+      },
+      "check": {
+        "en": "Can I explain and repeat the stated beginner tasks and choose a specific recovery without claiming unobserved mastery?",
+        "tr": "Gözlenmemiş ustalık iddiası olmadan belirtilen başlangıç görevlerini açıklayıp tekrarlayabiliyor ve belirli toparlanma seçebiliyor muyum?"
+      },
+      "recover": {
+        "en": "Return to the relevant smaller lesson for an uncertain outcome; seek individual help for unresolved setup, discomfort or technique. No timer, button or written answer declares your real playing correct.",
+        "tr": "Belirsiz kazanımda ilgili küçük derse dön; çözülemeyen çalgı düzeni, rahatsızlık veya teknik için bireysel yardım al. Hiçbir zamanlayıcı, düğme veya yazılı cevap gerçek çalımını doğru ilan etmez."
+      },
+      "diagrams": []
+    }
+  ]
+}
