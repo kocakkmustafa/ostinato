@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../app_locale.dart';
 import '../vocal_beginner.dart';
 import 'vocal_diagrams.dart';
@@ -152,6 +153,17 @@ class _VocalLessonScreen extends StatelessWidget {
               'Gerekirse tekrarla veya önceki göreve dön. Sayfayı okumak beceriyi tamamlamaz.',
             ),
           ),
+          if (index > 0)
+            TextButton(
+              key: const Key('vocal-previous-lesson'),
+              onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute<void>(
+                  builder: (_) =>
+                      _VocalLessonScreen(course: course, index: index - 1),
+                ),
+              ),
+              child: Text(localized(context, 'Previous lesson', 'Önceki ders')),
+            ),
           if (index + 1 < course.lessons.length)
             TextButton(
               onPressed: () => Navigator.of(context).pushReplacement(

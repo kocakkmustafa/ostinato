@@ -126,7 +126,9 @@ class UkuleleDiagrams extends StatelessWidget {
                     '${localized(context, 'Bar', 'Ölçü')} ${bar + 1} · ${course.chords[course.study[bar].chord]!.title.of(context)}',
                   ),
                   Semantics(
+                    key: Key('ukulele-study-bar-${bar + 1}'),
                     label: _studyDescription(course.study[bar], context),
+                    excludeSemantics: true,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: SizedBox(
@@ -158,11 +160,11 @@ class UkuleleDiagrams extends StatelessWidget {
                             ),
                             TableRow(
                               children: [
-                                for (final slot in course.study[bar].slots)
+                                for (var slot = 0; slot < 8; slot++)
                                   Padding(
                                     padding: const EdgeInsets.all(6),
                                     child: Text(
-                                      slot,
+                                      _studySymbol(course.study[bar], slot, context),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -211,15 +213,57 @@ String _tabDescription(List<UkuleleTabNote> notes, BuildContext context) => [
   for (var i = 0; i < notes.length; i++)
     '${localized(context, 'beat', 'vuruş')} ${i + 1}: ${localized(context, 'string', 'tel')} ${notes[i].string}, ${localized(context, 'fret', 'perde')} ${notes[i].fret}',
 ].join('; ');
-String _studyDescription(UkuleleStudyBar bar, BuildContext context) => [
-  for (var i = 0; i < 8; i++)
-    '${i ~/ 2 + 1}${i.isOdd ? localized(context, ' and', ' ve') : ''}: ${switch (bar.slots[i]) {
+String _studyDescription(UkuleleStudyBar bar, BuildContext context) {
+  var ringing = false;
+  final counts = <String>[];
+  for (var i = 0; i < bar.slots.length; i++) {
+    final action = switch (bar.slots[i]) {
       'D' => localized(context, 'downstroke', 'aşağı tarama'),
       'U' => localized(context, 'upstroke', 'yukarı tarama'),
-      'R' => localized(context, 'stop sound', 'sesi kes'),
-      _ => localized(context, 'no new stroke', 'yeni tarama yok'),
-    }}',
-].join('; ');
+      'R' => localized(
+        context,
+        'stop sound; counted silence',
+        'sesi kes; sayılan sessizlik',
+      ),
+      'H' => ringing
+          ? localized(
+              context,
+              'keep ringing; no new stroke',
+              'çınlamayı sürdür; yeni tarama yok',
+            )
+          : localized(
+              context,
+              'continue counted silence; no new stroke',
+              'sayılan sessizliği sürdür; yeni tarama yok',
+            ),
+      _ => throw const FormatException('Unsupported ukulele study slot'),
+    };
+    if (bar.slots[i] == 'D' || bar.slots[i] == 'U') {
+      ringing = true;
+    } else if (bar.slots[i] == 'R') {
+      ringing = false;
+    }
+    counts.add(
+      '${i ~/ 2 + 1}${i.isOdd ? localized(context, ' and', ' ve') : ''}: $action',
+    );
+  }
+  return counts.join('; ');
+}
+
+String _studySymbol(UkuleleStudyBar bar, int slot, BuildContext context) {
+  if (bar.slots[slot] != 'H') return bar.slots[slot];
+  var ringing = false;
+  for (var i = 0; i < slot; i++) {
+    if (bar.slots[i] == 'D' || bar.slots[i] == 'U') {
+      ringing = true;
+    } else if (bar.slots[i] == 'R') {
+      ringing = false;
+    }
+  }
+  return ringing
+      ? localized(context, 'H\nring', 'H\nçınlama')
+      : localized(context, 'H\nsilence', 'H\nsessizlik');
+}
 
 class _Vector extends StatelessWidget {
   const _Vector({

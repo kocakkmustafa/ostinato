@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:motion_content/motion_content.dart';
+
 import 'flutter_bundle_content_asset_reader.dart';
 import 'guitar_journey.dart' show GuitarText;
 
@@ -41,10 +43,10 @@ final class PianoLesson {
     }
     id = map['id'] as String;
     title = _copy(map['title']);
-    sections = [
+    sections = List<GuitarText>.unmodifiable([
       for (final key in ['teach', 'practice', 'check', 'recover'])
         _copy(map[key]),
-    ];
+    ]);
   }
   late final String id;
   late final GuitarText title;
@@ -70,9 +72,9 @@ final class PianoCourse {
     title = _copy(map['title']);
     entry = _copy(map['entry']);
     exit = _copy(map['exit']);
-    lessons = [
+    lessons = List<PianoLesson>.unmodifiable([
       for (final lesson in map['lessons'] as List) PianoLesson(lesson),
-    ];
+    ]);
     if (lessons.length != 16) {
       throw const FormatException('Incomplete piano course');
     }

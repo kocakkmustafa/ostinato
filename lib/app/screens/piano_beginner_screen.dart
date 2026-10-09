@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../app_locale.dart';
 import '../piano_beginner.dart';
 import 'piano_notation.dart';
+import 'piano_visual_practice_screen.dart';
 
 /// Written practice only. No sensor, entitlement, progress or audio acquisition.
 class PianoBeginnerScreen extends StatefulWidget {
@@ -145,6 +147,22 @@ class _PianoLessonScreen extends StatelessWidget {
             if (i == 1) PianoNotation(lesson: index + 1),
             const SizedBox(height: 24),
           ],
+          if (index == 14)
+            OutlinedButton(
+              key: const Key('piano-visual-practice-entry'),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const PianoVisualPracticeScreen(),
+                ),
+              ),
+              child: Text(
+                localized(
+                  context,
+                  'Work through bar 1 step by step',
+                  'Ölçü 1’i adım adım çalış',
+                ),
+              ),
+            ),
           Text(
             localized(
               context,
@@ -152,6 +170,17 @@ class _PianoLessonScreen extends StatelessWidget {
               'Gerekirse tekrarla veya önceki göreve dön. Sayfayı okumak beceriyi tamamlamaz.',
             ),
           ),
+          if (index > 0)
+            TextButton(
+              key: const Key('piano-previous-lesson'),
+              onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute<void>(
+                  builder: (_) =>
+                      _PianoLessonScreen(course: course, index: index - 1),
+                ),
+              ),
+              child: Text(localized(context, 'Previous lesson', 'Önceki ders')),
+            ),
           if (index + 1 < course.lessons.length)
             TextButton(
               onPressed: () => Navigator.of(context).pushReplacement(
