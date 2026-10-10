@@ -47,9 +47,12 @@ void main() {
       findsNothing,
     );
     expect(
-      find.textContaining('Telefonu gitarınızla oturuşunuzu'),
+      find.textContaining('Gitar duruş referansları ve yazılı dersler'),
       findsOneWidget,
     );
+    expect(find.text('Yazılı dersler. Duruş referansları.'), findsOneWidget);
+    expect(find.text('ÖLÇÜM'), findsNothing);
+    expect(find.text('SCORED'), findsNothing);
     expect(find.textContaining('GİTAR · REHBER'), findsOneWidget);
   });
 
@@ -171,10 +174,13 @@ void main() {
       find.textContaining('Bu sınırların nedenleri farklıdır'),
       findsOneWidget,
     );
+    expect(find.text('Duruş referansı notları'), findsOneWidget);
+    expect(find.textContaining('kamera değerlendirmesi ve duruş puanlaması kapalı'), findsOneWidget);
+    expect(find.text('Gerçekte neyi ölçüyoruz'), findsNothing);
     expect(find.text('KURSLAR'), findsOneWidget);
     expect(find.textContaining('Alanını hazırla'), findsOneWidget);
     expect(
-      find.textContaining('Bağımsız yedi gitar eğitmeninin'),
+      find.textContaining('Kaydedilmiş eğitim örnekleri duruş referansı sunar'),
       findsOneWidget,
     );
     expect(find.textContaining('Çaldığınız ses ölçülmez'), findsOneWidget);

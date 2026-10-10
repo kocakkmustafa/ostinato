@@ -79,24 +79,27 @@ class InstrumentScreenRoute extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(localized(context, 'What we actually measure', 'Gerçekte neyi ölçüyoruz'),
+                          Text(localized(context, 'Posture reference notes', 'Duruş referansı notları'),
                               style: hankenText(
                                   size: 18, weight: FontWeight.w600)),
                           const SizedBox(height: 4),
                           Text(
-                              localized(context, 'And what we deliberately do not. Both halves are the product.',
-                                  'Neyi ölçmediğimizi de açıkça gösteriyoruz.'),
+                              localized(context, 'Written courses support self-guided practice. Camera assessment '
+                                  'and posture scoring are unavailable in this version.',
+                                  'Yazılı kurslar öz denetimli çalışmayı destekler. Bu sürümde '
+                                  'kamera değerlendirmesi ve duruş puanlaması kapalı.'),
                               style: hankenText(
                                   size: 13, color: OstinatoColors.textMuted)),
                           const SizedBox(height: 16),
-                          kicker(localized(context, 'Measured', 'Ölçülen'), color: hue.ink),
+                          kicker(localized(context, 'Recorded references', 'Kayıtlı referanslar'), color: hue.ink),
                           const SizedBox(height: 10),
-                          for (var i = 0; i < discipline.measured.length; i++)
-                            _HonestyRow(
-                                text: catalogCopy(context,
-                                    '${discipline.id}.measured.$i',
-                                    discipline.measured[i]),
-                                filled: true),
+                          _HonestyRow(
+                              text: localized(context,
+                                  'Recorded teaching examples provide posture references. '
+                                  'They are not a measurement of your practice.',
+                                  'Kaydedilmiş eğitim örnekleri duruş referansı sunar. '
+                                  'Bunlar senin çalışmanın ölçümü değildir.'),
+                              filled: true),
                           const SizedBox(height: 6),
                           const Divider(height: 1),
                           const SizedBox(height: 12),

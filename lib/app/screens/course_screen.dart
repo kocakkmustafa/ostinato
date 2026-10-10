@@ -98,14 +98,14 @@ class _LessonRow extends StatelessWidget {
         LessonKind.locked => ('LOCKED', const Color(0x122A2533),
             const Color(0xFF6E6880), Colors.white.withValues(alpha: .5)),
         LessonKind.demoOnly => (
-            'MEASURED · NOT MARKED',
+            'REFERENCE · NO SCORING',
             hue.chip,
             hue.ink,
             hue.soft.first,
           ),
         LessonKind.guide => ('GUIDE', const Color(0x0D2A2533),
             const Color(0xFF8B8497), Colors.white.withValues(alpha: .62)),
-        LessonKind.scored => ('SCORED', const Color(0x0F2A2533),
+        LessonKind.scored => ('REFERENCE', const Color(0x0F2A2533),
             const Color(0xFF4E4759), Colors.white.withValues(alpha: .72)),
       };
 
@@ -167,9 +167,9 @@ class _LessonRow extends StatelessWidget {
                     child: Text(localized(context, chip,
                         switch (lesson.kind) {
                           LessonKind.locked => 'KİLİTLİ',
-                          LessonKind.demoOnly => 'ÖLÇÜM · PUAN YOK',
+                          LessonKind.demoOnly => 'REFERANS · PUAN YOK',
                           LessonKind.guide => 'REHBER',
-                          LessonKind.scored => 'ÖLÇÜM',
+                          LessonKind.scored => 'REFERANS',
                         }),
                         style: monoText(size: 9.5, color: chipFg, letterSpacing: .07)),
                   ),
