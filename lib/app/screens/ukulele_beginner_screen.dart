@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../app_locale.dart';
 import '../ukulele_beginner.dart';
 import 'ukulele_diagrams.dart';
@@ -152,6 +153,17 @@ class _UkuleleLessonScreen extends StatelessWidget {
               'Gerekirse tekrarla veya önceki göreve dön. Sayfayı okumak beceriyi tamamlamaz.',
             ),
           ),
+          if (index > 0)
+            TextButton(
+              key: const Key('ukulele-previous-lesson'),
+              onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute<void>(
+                  builder: (_) =>
+                      _UkuleleLessonScreen(course: course, index: index - 1),
+                ),
+              ),
+              child: Text(localized(context, 'Previous lesson', 'Önceki ders')),
+            ),
           if (index + 1 < course.lessons.length)
             TextButton(
               onPressed: () => Navigator.of(context).pushReplacement(

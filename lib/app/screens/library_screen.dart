@@ -106,10 +106,8 @@ class LibraryScreen extends StatelessWidget {
                       Text(
                         localized(
                           context,
-                          'Measured, not chosen. Correct posture is a band, '
-                              'not a point.',
-                          'Ölçülür, tahmin edilmez. Doğru duruş tek bir '
-                              'nokta değil, bir aralıktır.',
+                          'Written lessons. Posture references.',
+                          'Yazılı dersler. Duruş referansları.',
                         ),
                         style: hankenText(
                           size: 16.5,
@@ -319,11 +317,11 @@ class _StarterRow extends StatelessWidget {
     final InstrumentHue hue = InstrumentHues.of(discipline.id);
     final String kindChip = switch (lesson.kind) {
       LessonKind.guide => localized(context, 'GUIDE', 'REHBER'),
-      LessonKind.scored => localized(context, 'SCORED', 'ÖLÇÜM'),
+      LessonKind.scored => localized(context, 'REFERENCE', 'REFERANS'),
       LessonKind.demoOnly => localized(
         context,
-        'MEASURED · NOT MARKED',
-        'ÖLÇÜM · PUAN YOK',
+        'REFERENCE · NO SCORING',
+        'REFERANS · PUAN YOK',
       ),
       LessonKind.locked => localized(context, 'LOCKED', 'KİLİTLİ'),
     };

@@ -37,7 +37,7 @@ const Map<String, String> _turkishCatalogNames = <String, String>{
   'guitar.foundations.posture': 'Oturma duruşu',
   'guitar.foundations.teacher_range': 'Eğitmenler ne kadar farklı?',
   'guitar.foundations.posture_under_play': 'Çalarken dik kalmak',
-  'guitar.foundations.arms': 'Gitarı tutuş: ölçülür, puanlanmaz',
+  'guitar.foundations.arms': 'Gitarı tutuş: duruş referansı',
   'guitar.foundations.foot_support': 'Ayak desteği ve gitar açısı',
   'guitar.foundations.open_chords': 'Açık akorlar',
   'guitar.foundations.light_and_frame': 'Işık, kadraj ve ölçüm sınırları',
@@ -50,7 +50,7 @@ const Map<String, String> _turkishCatalogNames = <String, String>{
   'voice.foundations.teacher_range': 'Eğitmenler ne kadar farklı?',
   'voice.foundations.posture_under_sing': 'Şarkı söylerken açık duruş',
   'voice.foundations.sustained_note': 'Uzatılmış nota',
-  'voice.foundations.arms': 'Kolların: ölçülür, puanlanmaz',
+  'voice.foundations.arms': 'Kolların: duruş referansı',
   'voice.foundations.light_and_frame': 'Işık, kadraj ve ölçüm sınırları',
   'voice.foundations.vibrato': 'Vibrato',
   'voice.foundations.knees_and_chin': 'Kilitli dizler ve yukarı kalkık çene',
@@ -61,41 +61,35 @@ const Map<String, String> _turkishCatalogNames = <String, String>{
   'piano.foundations.teacher_range': 'Eğitmenler ne kadar farklı?',
   'piano.foundations.posture_under_play': 'Çalarken dengeli oturuş',
   'piano.foundations.five_finger': 'Beş parmak çalışmaları',
-  'piano.foundations.arms': 'Kolların: ölçülür, puanlanmaz',
+  'piano.foundations.arms': 'Kolların: duruş referansı',
   'piano.foundations.light_and_frame': 'Işık, kadraj ve ölçüm sınırları',
   'piano.foundations.shoulder_tension': 'Omuz gerginliği',
   'piano.foundations.hands_and_wrists': 'Bilekler, parmaklar ve el biçimi',
 };
 
+// Release display copy; the historical reference dataset stays unchanged.
+const Map<String, String> _englishDisciplineBlurbs = <String, String>{
+  'guitar': 'Guitar posture references and written lessons. Camera assessment and posture scoring are unavailable. Posture lessons do not use the microphone; the written guitar path has an optional single-note observer.',
+  'voice': 'Voice posture references and written lessons. Camera assessment and posture scoring are unavailable. These posture lessons do not use the microphone.',
+  'piano': 'Piano posture references and written lessons. Camera assessment and posture scoring are unavailable. These posture lessons do not measure your notes or their timing.',
+};
+
 const Map<String, String> _turkishDisciplineBlurbs = <String, String>{
-  'guitar':
-      'Telefonu gitarınızla oturuşunuzu görecek yere koyun. '
-      'Oturuşunuzu gerçek eğitmenlerin duruşlarıyla karşılaştırırız. '
-      'Bu duruş dersleri mikrofon kullanmaz; gitar öğrenme yolunda isteğe bağlı tek nota gözlemi vardır.',
-  'voice':
-      'Telefonu sizi belden yukarı görecek yere koyun. Duruşunuzu '
-      'altı bağımsız şan eğitmeniyle karşılaştırırız. Bu ses dersleri mikrofon '
-      'kullanmaz; sesinizi dinlemez.',
-  'piano':
-      'Telefonu piyano başında sizi belden yukarı görecek yere koyun. '
-      'Oturuşunuzu üç bağımsız piyano eğitmeniyle karşılaştırırız. '
-      'Bu piyano dersleri mikrofon kullanmaz; odanızdaki notaların zamanlamasını ölçmez.',
+  'guitar': 'Gitar duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Duruş dersleri mikrofon kullanmaz; yazılı gitar yolunda isteğe bağlı tek nota gözlemi vardır.',
+  'voice': 'Şan duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Bu duruş dersleri mikrofon kullanmaz.',
+  'piano': 'Piyano duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Bu duruş dersleri notalarını veya zamanlamalarını ölçmez.',
+};
+
+const Map<String, String> _englishCourseGoals = <String, String>{
+  'guitar.foundations': 'Set up your space, read the guitar posture references, and learn which eight open chords the notes describe. Camera assessment and posture scoring are unavailable; these posture lessons do not use the microphone.',
+  'voice.foundations': 'Set up your space and read the recorded singing posture references. Camera assessment and posture scoring are unavailable; these posture lessons do not use the microphone.',
+  'piano.foundations': 'Set up your space and read the recorded keyboard posture references. Camera assessment and posture scoring are unavailable.',
 };
 
 const Map<String, String> _turkishCourseGoals = <String, String>{
-  'guitar.foundations':
-      'Alanını hazırla, gerçek gitar eğitmenlerinin oturuş '
-      'biçimini öğren ve kursun kapsadığı sekiz açık akoru tanı. Duruşun '
-      'canlı denetlenir; akor çalışması anlatılır ancak dinlenmez. Bu duruş dersleri '
-      'mikrofon kullanmaz.',
-  'voice.foundations':
-      'Alanını hazırla ve deneyimli şan eğitmenlerinin '
-      'duruşunu öğren. Kurulum sırasında gövden canlı denetlenir; referans '
-      'şarkı söylerken duruşu da kapsar, fakat bu sürüm şarkıya ne zaman '
-      'başladığını algılayamaz.',
-  'piano.foundations':
-      'Alanını hazırla ve deneyimli eğitmenlerin klavye '
-      'başındaki oturuşunu öğren.',
+  'guitar.foundations': 'Alanını hazırla, gitar duruş referanslarını oku ve notlarda anlatılan sekiz açık akoru tanı. Kamera değerlendirmesi ve duruş puanlaması kapalı; bu duruş dersleri mikrofon kullanmaz.',
+  'voice.foundations': 'Alanını hazırla ve kayıtlı şan duruş referanslarını oku. Kamera değerlendirmesi ve duruş puanlaması kapalı; bu duruş dersleri mikrofon kullanmaz.',
+  'piano.foundations': 'Alanını hazırla ve kayıtlı klavye duruş referanslarını oku. Kamera değerlendirmesi ve duruş puanlaması kapalı.',
 };
 
 const Map<String, String> _turkishSourceClasses = <String, String>{
@@ -106,11 +100,11 @@ const Map<String, String> _turkishSourceClasses = <String, String>{
 
 String catalogBlurb(BuildContext context, String id, String english) =>
     '${localized(context, 'Posture catalogue preview. Live camera practice is closed in this release.', 'Duruş kataloğu ön izlemesi. Bu sürümde canlı kamera pratiği kapalıdır.')} '
-    '${Localizations.localeOf(context).languageCode == 'tr' ? _turkishDisciplineBlurbs[id] ?? english : english}';
+    '${Localizations.localeOf(context).languageCode == 'tr' ? _turkishDisciplineBlurbs[id] ?? english : _englishDisciplineBlurbs[id] ?? english}';
 
 String catalogGoal(BuildContext context, String id, String english) =>
     '${localized(context, 'Posture catalogue preview. Live camera practice is closed in this release.', 'Duruş kataloğu ön izlemesi. Bu sürümde canlı kamera pratiği kapalıdır.')} '
-    '${Localizations.localeOf(context).languageCode == 'tr' ? _turkishCourseGoals[id] ?? english : english}';
+    '${Localizations.localeOf(context).languageCode == 'tr' ? _turkishCourseGoals[id] ?? english : _englishCourseGoals[id] ?? english}';
 
 String catalogSourceClass(BuildContext context, String english) =>
     Localizations.localeOf(context).languageCode == 'tr'
@@ -120,7 +114,11 @@ String catalogSourceClass(BuildContext context, String english) =>
 String catalogName(BuildContext context, String id, String english) =>
     Localizations.localeOf(context).languageCode == 'tr'
     ? _turkishCatalogNames[id] ?? english
-    : english;
+    : switch ((id, english)) {
+        ('guitar.foundations.arms', 'Holding the guitar — measured, never graded') => 'Holding the guitar — posture reference',
+        ('voice.foundations.arms' || 'piano.foundations.arms', 'Your arms — measured, never graded') => 'Your arms — posture reference',
+        _ => english,
+      };
 
 String catalogUpperName(BuildContext context, String id, String english) {
   final String name = catalogName(context, id, english);
