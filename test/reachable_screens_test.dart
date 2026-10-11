@@ -171,7 +171,7 @@ void main() {
       await tapIfPossible(t, find.byKey(const Key('onboarding-primary')));
     }
     note(t, '2 Library', 'LibraryScreen', arrival: 'root');
-    requireSubstance(t, 'Library', 'Measured, not chosen');
+    requireSubstance(t, 'Library', 'Written lessons. Posture references.');
 
     // Ayarlar
     if (await tapIfPossible(t, find.text('⚙'))) {
@@ -196,7 +196,8 @@ void main() {
           repo.disciplines.firstWhere((Discipline d) => d.id == 'guitar');
       if (await tapIfPossible(t, find.text(g.courses.first.displayName))) {
         note(t, '5 Course', 'CourseScreenRoute');
-        requireSubstance(t, 'Course', g.courses.first.goal.split('.').first);
+        requireSubstance(t, 'Course',
+            'Set up your space, read the guitar posture references, and learn which eight open chords the notes describe.');
         for (final MapEntry<LessonKind, (String, String)> e
             in <LessonKind, (String, String)>{
           // ⚠️ KİMLİKLER `course_screen.dart:100-104`ten ÖLÇÜLDÜ:
@@ -210,14 +211,17 @@ void main() {
           final Iterable<Lesson> match =
               g.courses.first.lessons.where((Lesson l) => l.kind == e.key);
           if (match.isEmpty) continue;
-          if (await tapIfPossible(t, find.text(match.first.displayName))) {
+          final String lessonTitle = match.first.id == 'guitar.foundations.arms'
+              ? 'Holding the guitar — posture reference'
+              : match.first.displayName;
+          if (await tapIfPossible(t, find.text(lessonTitle))) {
             note(t, e.value.$1, e.value.$2);
             // Ders ekranının ÖZÜ: kilitli ise gerekçesi, açık ise neye
             // karşı ölçüldüğü. İkisi de yoksa ekran boş kabuktur.
             requireSubstance(t, e.value.$1,
                 match.first.kind == LessonKind.locked
                     ? match.first.lockedReason!.split('.').first
-                    : match.first.displayName);
+                    : lessonTitle);
             // ⭐ KURULUM KONTROLÜ — 2026-08-13'te ÖLÇÜLDÜ, VARILIYOR (O-121).
             //
             // 🔴 Burada YILLARCA duracak bir yanlış vardı: aşağıdaki (c)

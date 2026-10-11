@@ -129,7 +129,7 @@ void main() {
       await tap(find.byKey(const Key('onboarding-primary')),
           'onboarding perde ${i + 1}');
     }
-    substance('Kütüphane', 'Measured, not chosen');
+    substance('Kütüphane', 'Written lessons. Posture references.');
 
     // ── ② SEÇİM ──────────────────────────────────────────────────────
     await tap(find.text('Guitar'), 'Gitar');
