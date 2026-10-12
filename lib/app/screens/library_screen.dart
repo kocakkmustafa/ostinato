@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../study_review.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
 import 'package:motion_account/motion_account.dart'
     show motionPaidFeaturesAvailable;
@@ -176,6 +177,7 @@ class LibraryScreen extends StatelessWidget {
                 // artık intro kartından hemen sonra, katlama ÜSTÜNDE.
                 // `test/library_fold_test.dart` yeni konumu ölçüp beyanla
                 // karşılaştırır; bu yorum yerleşimi AÇIKLAR, KORUMAZ.
+                const StudyReviewEntry(),
                 if (starters.isNotEmpty) ...<Widget>[
                   const SizedBox(height: 22),
                   kicker(
