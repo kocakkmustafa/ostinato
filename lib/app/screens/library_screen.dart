@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../study_review.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
 import 'package:motion_account/motion_account.dart'
     show motionPaidFeaturesAvailable;
@@ -195,6 +196,7 @@ class LibraryScreen extends StatelessWidget {
                     const SizedBox(height: 9),
                   ],
                 ],
+                const StudyReviewEntry(),
                 const SizedBox(height: 22),
                 kicker(localized(context, 'Your instruments', 'Çalgılarınız')),
                 const SizedBox(height: 11),

@@ -28,6 +28,7 @@ jobs:
     # kanıtlamak + GitHub'da herkese görünür bir durum üretmek. Bu bilinçli
     # bir sapma — sessizce değil, adıyla.
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
 
@@ -93,6 +94,7 @@ jobs:
   android-release-build:
     name: Android release build — kod yolu kanıtı, İMZALI YAYIN DEĞİL (OST-P0-004)
     runs-on: ubuntu-latest
+    timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
 
@@ -132,6 +134,7 @@ jobs:
   ios-release-build:
     name: iOS release build, no-codesign (OST-P0-004)
     runs-on: macos-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 

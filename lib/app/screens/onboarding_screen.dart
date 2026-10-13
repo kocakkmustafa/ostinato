@@ -359,10 +359,12 @@ class _ScopeStep extends StatelessWidget {
         value: '${facts.locked}',
         label: localized(
           context,
-          'of those are locked. You can open every one of them and '
-              'read exactly which measurement it is waiting on',
-          'ders kilitli. Her birini açıp hangi ölçümün eksik olduğunu '
-              'görebilirsiniz',
+          'are locked legacy posture previews. Their pages explain the missing '
+              'reference or measurement evidence; live camera measurement and '
+              'posture grading are unavailable in this release.',
+          'kilitli eski duruş ön izlemesidir. Sayfaları eksik referans veya '
+              'ölçüm kanıtını açıklar; bu sürümde canlı kamera ölçümü ve '
+              'duruş puanlaması yoktur.',
         ),
       ),
       _FactRow(
@@ -370,10 +372,11 @@ class _ScopeStep extends StatelessWidget {
         value: '${facts.demoOnly}',
         label: localized(
           context,
-          'are measured but never graded — the teachers disagree '
-              'too much for a judgement to mean anything',
-          'ders ölçülür ama puanlanmaz; eğitmenler anlamlı bir hüküm '
-              'için yeterince uzlaşmıyor',
+          'are legacy demonstration-only posture previews based on recorded '
+              'teacher references. This release does not measure or grade '
+              'your posture.',
+          'ders, kaydedilmiş eğitmen referanslarına dayanan eski gösterim '
+              'ön izlemesidir. Bu sürüm duruşunuzu ölçmez veya puanlamaz.',
         ),
       ),
       const SizedBox(height: 8),
@@ -383,11 +386,14 @@ class _ScopeStep extends StatelessWidget {
         child: Text(
           localized(
             context,
-            'Every instrument page carries the full list of what we measure '
-                'and what we do not, with the reason next to each line. It is '
-                'the first thing on the page, not a footnote.',
-            'Her çalgı sayfasında neyin ölçülüp neyin ölçülmediği, '
-                'nedenleriyle birlikte başta gösterilir.',
+            'Instrument pages describe recorded references and the measurement '
+                "engine's limits. These historical findings are not measurements "
+                'of your practice; live camera assessment and posture scoring '
+                'are unavailable in this release.',
+            'Çalgı sayfaları kaydedilmiş referansları ve ölçüm motorunun '
+                'sınırlarını açıklar. Bu tarihsel bulgular sizin pratiğinizin '
+                'ölçümü değildir; bu sürümde canlı kamera değerlendirmesi ve '
+                'duruş puanlaması kapalıdır.',
           ),
           style: hankenText(
             size: 13.5,
