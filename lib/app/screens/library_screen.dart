@@ -177,7 +177,6 @@ class LibraryScreen extends StatelessWidget {
                 // artık intro kartından hemen sonra, katlama ÜSTÜNDE.
                 // `test/library_fold_test.dart` yeni konumu ölçüp beyanla
                 // karşılaştırır; bu yorum yerleşimi AÇIKLAR, KORUMAZ.
-                const StudyReviewEntry(),
                 if (starters.isNotEmpty) ...<Widget>[
                   const SizedBox(height: 22),
                   kicker(
@@ -197,6 +196,7 @@ class LibraryScreen extends StatelessWidget {
                     const SizedBox(height: 9),
                   ],
                 ],
+                const StudyReviewEntry(),
                 const SizedBox(height: 22),
                 kicker(localized(context, 'Your instruments', 'Çalgılarınız')),
                 const SizedBox(height: 11),
