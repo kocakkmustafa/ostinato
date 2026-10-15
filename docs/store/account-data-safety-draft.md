@@ -144,6 +144,19 @@ satış/üyelik girişleri bu kapıya bağlıdır. Manifestin altı collected t�
 e-posta, ad, kullanıcı ID'si, diğer tanılama,
 yaklaşık konum ve diğer verilerdir; satın alma veya ses collected türü yoktur.
 
+### 2026-10-15 herkese açık silme yönergesi okuması
+
+Mevcut [Motion gizlilik sayfasının hesap silme bölümü](https://yulalab.com/privacy/motion#motion-account-deletion)
+HTTP 200 HTML içinde `motion-account-deletion` hedefini ve
+`mailto:support@yulalab.com?subject=Motion%20account%20deletion` bağlantısını taşıyor.
+Metin, uygulama kullanılamadığında hesap e-postası ve uygulama adıyla talep
+gönderilmesini, parola gönderilmemesini ve aboneliğin mağazada ayrıca iptalini
+açıklıyor. Bu mevcut adres, Play'in uygulama dışı silme URL alanı için doğrulanacak
+metadata adayıdır; ayrı bir `/delete-account/motion` adresi varsayılmamalıdır.
+Bu okuma mağaza formunun kaydedildiği/kabul edildiği, mail gönderildiği, silme
+talebinin işlendiği veya gerçek hesabın silindiği anlamına gelmez. Nihai form
+uygunluğu, sağlayıcı saklama kapsamı ve gerçek silme kabulü açık kalır.
+
 Hesap ekranı ortak hesabı silme yolu sunar; başarılı uzak silmenin ardından
 yalnız bu uygulamanın ilgili kullanıcıya ait yerel dizinini siler. Play'in
 istediği uygulama dışı hesap silme bağlantısının canlı içeriği, mağaza

@@ -1,8 +1,12 @@
 # Mağaza Liste Metni — TASLAK (D6, 2026-08-16, O-156)
 
-**Makine-okur kaynak:** `docs/store/listing.json` — `test/`e bağlı bir kapı YOK (koordinatör
-sınırı: bu genişletme JabLab'da var, Ostinato'da bilerek yazılmadı). Bu dosya insan-okur
-bağlam; metnin kendisi `listing.json`da.
+**Makine-okur kaynaklar:** `docs/store/listing.json` (EN) ve
+`docs/store/listing.tr-TR.json` (TR). `python3 -B tools/validate_store_listing_limits.py`
+iki dosyanın mekanik kısıtlarını denetler; keyword sınırı virgüller dahil 100 UTF-8
+byte'tır. `tools/test_validate_store_listing_limits.py` 100 byte kabul / 102 byte ret
+ve iki locale'ın denetlenmesini sınar; `tools/run_gates.sh` bu regresyonları çağırır
+(2026-10-15). Bu yerel kontrol mağaza formu, gerçek cihaz veya yayın kabulü değildir.
+Bu dosya insan-okur bağlamdır; metinler JSON dosyalarındadır.
 
 **Gönderim KURUCU kalemi (B7).** Bu yalnız taslak — ASC/Play'e hiçbir şey yüklenmedi,
 yüklenmeyecek. Orkestratör `PASS`ı olmadan submit yok.

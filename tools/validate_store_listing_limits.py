@@ -13,8 +13,8 @@ otorite) `## 📐 LİMİTLER` tablosundan ÇALIŞMA-ANINDA okunur — burada bir
 (`H-58`: kopya = güncelleme borcu). O dosya değişirse bu kapı otomatik izler; parse hiçbir
 satır bulamazsa (desen kayboldu/dosya taşındı) kapı KÖR olduğunu söyler, sessizce geçmez.
 
-    python3 tools/validate_store_listing_limits.py            # gerçek dosyalarla
-    python3 tools/validate_store_listing_limits.py --selftest # pozitif ikiz + 2 sabotaj + vakum
+    python3 tools/validate_store_listing_limits.py            # EN/TR gerçek dosyalarla
+    python3 tools/validate_store_listing_limits.py --selftest # sınırlar + sabotaj + vakum
 """
 import json
 import re
@@ -23,6 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LISTING = ROOT / "docs" / "store" / "listing.json"
+LISTINGS = (LISTING, LISTING.with_name("listing.tr-TR.json"))
 LIMITS_MD = ROOT.parent.parent / "motion-core" / "workspace" / "MAGAZA-ALAN-LIMITLERI.md"
 
 # Ostinato'da SEVK EDİLEN alanlar → MAGAZA-ALAN-LIMITLERI.md'deki karşılığı.
@@ -83,10 +84,13 @@ def check_lengths(listing: dict, limits: dict[str, int]) -> list[str]:
         if value is None:
             errors.append(f"⛔ VARLIK: '{limit_key}' listing.json'da YOK (zorunlu alan).")
             continue
-        length = len(value)
+        # ASC keywords sınırı virgüller dahil UTF-8 byte; diğer alanlar karakter.
+        is_keywords = limit_key == "appStore/keywords"
+        length = len(value.encode("utf-8")) if is_keywords else len(value)
+        unit = "UTF-8 byte" if is_keywords else "karakter"
         if length > limit:
             errors.append(
-                f"⛔ UZUNLUK: '{limit_key}' {length} karakter, belgelenmiş limit "
+                f"⛔ UZUNLUK: '{limit_key}' {length} {unit}, belgelenmiş limit "
                 f"{limit} (+{length - limit}) — yükleme reddedebilir.")
     return errors
 
@@ -153,6 +157,16 @@ def self_test() -> int:
         return 1
     print("✅ pozitif ikiz: bugünkü doğru veriler sessizce geçti")
 
+    # Çok byte'lı keyword sınırı: 50 × ü = 100 byte geçer, 51 × ü = 102 byte kalır.
+    for count, accepted in ((50, True), (51, False)):
+        boundary = json.loads(json.dumps(ok))
+        boundary["appStore"]["keywords"] = "ü" * count
+        errs = check(boundary, BASE_LIMITS)
+        if bool(errs) == accepted:
+            print(f"⛔ UTF-8 keyword sınırı yanlış: {count * 2} byte, {errs}")
+            return 1
+    print("✅ UTF-8 keyword sınırı: 100 byte kabul, 102 byte ret")
+
     # SABOTAJ ①: bir alan limiti 1 karakter aşıyor.
     sab1 = json.loads(json.dumps(ok))
     sab1["playStore"]["shortDescription"] = "E" * 81
@@ -180,7 +194,7 @@ def self_test() -> int:
         return 1
     print("✅ vakum (limit tablosu kayboldu): kapı kör olduğunu söyledi")
 
-    print("\n✅ 4/4 kapı ateşlendi (pozitif ikiz + 2 sabotaj + vakum)")
+    print("\n✅ 6/6 kapı ateşlendi (pozitif ikiz + 2 UTF-8 sınırı + 2 sabotaj + vakum)")
     return 0
 
 
@@ -188,23 +202,27 @@ def main() -> int:
     if "--selftest" in sys.argv:
         return self_test()
 
-    if not LISTING.exists():
-        print(f"⛔ beklenen dosya yok: {LISTING}")
-        return 1
     if not LIMITS_MD.exists():
         print(f"⛔ KÖR: aile limit dosyası yok: {LIMITS_MD}")
         return 1
 
-    listing = json.loads(LISTING.read_text(encoding="utf-8"))
     limits = parse_limits(LIMITS_MD.read_text(encoding="utf-8"))
-    errors = check(listing, limits)
-    if errors:
-        for e in errors:
-            print(e)
-        return 1
-    print(f"✅ mağaza metni MEKANİK kısıtları geçti — {len(SHIPPED_FIELDS)} alan "
-          f"uzunluk/varlık, $ sözleşmesi temiz")
-    return 0
+    failed = False
+    for path in LISTINGS:
+        if not path.exists():
+            print(f"⛔ beklenen dosya yok: {path}")
+            failed = True
+            continue
+        listing = json.loads(path.read_text(encoding="utf-8"))
+        errors = check(listing, limits)
+        if errors:
+            for e in errors:
+                print(f"{path.name}: {e}")
+            failed = True
+            continue
+        print(f"✅ {path.name} MEKANİK kısıtları geçti — {len(SHIPPED_FIELDS)} alan "
+              f"uzunluk/varlık, keywords UTF-8 byte, $ sözleşmesi temiz")
+    return int(failed)
 
 
 if __name__ == "__main__":

@@ -100,6 +100,7 @@ run "şablon-varlık denetimi (D8)"    python3 tools/validate_template_assets.py
 run "şablon-varlık öz-testi"         python3 tools/validate_template_assets.py --selftest
 run "mağaza metni mekanik kısıt (H-78)" python3 tools/validate_store_listing_limits.py
 run "mekanik kısıt kapısı öz-testi"  python3 tools/validate_store_listing_limits.py --selftest
+run "mağaza metni UTF-8 regresyonları" python3 -B -m unittest discover -s tools -p test_validate_store_listing_limits.py
 run "MUT-A (kapılar ısırıyor mu)"     python3 tools/gate_mutation_test.py
 run "MUT-A log öz-testi (doluyor mu)" python3 tools/gate_mutation_test.py --selftest-log
 run "pozitif ikiz (kapı desenleri)"   bash -c 'python3 tools/validate_surface_honesty.py --selftest && python3 tools/validate_color_tokens.py --selftest'
