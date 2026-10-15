@@ -64,3 +64,7 @@ saklı tutuyor (`orkestratör, D8 mesajı`).
 `colors.xml`). Kanıt: `tools/validate_template_assets.py` — 25/25 varlık
 Flutter'ın stok görsellerinden MD5-farklı, `run_gates.sh`a kalıcı gate
 olarak eklendi.
+
+## 2026-10-15 — Google Play dosya biçimi
+
+Güncel `D-rhythm-O-dark-Google-Play-512.png` dosyası, [Google Play ikon şartına](https://developer.android.com/distribute/google-play/resources/icon-design-specifications) uygun 512 × 512, 32-bit RGBA PNG olarak dışa aktarıldı; sRGB etiketi taşır. Önceki RGB pikselleri birebir korundu (fark 0); alfa kanalı her pikselde 255, görünüm opaktır. Kaynak çizim, App Store adayı ve native ikonlar değişmedi. Bu yerel dosya doğrulamasıdır; mağazaya yükleme kabulü değildir.
