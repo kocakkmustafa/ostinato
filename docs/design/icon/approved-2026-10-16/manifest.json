@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "product": "ostinato",
+  "approval_date": "2026-10-16",
+  "before_commit": "9e4253433bdf428717abc92cd92fed082e2be48f",
+  "approved_version": "original-unchanged",
+  "master": {
+    "path": "docs/design/icon/approved-2026-10-16/master.png",
+    "sha256": "6db03e9cdc6da965fc88ed28e6fd7f78aedf02a5d3fe4927bacffdd6b6a57b73",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "mode": "RGB",
+    "has_alpha": false,
+    "source_registry": "/Users/mustafakaankocak/Documents/Codex/2026-10-15/task-4/approved-icons/registry.json",
+    "source_path": "/Users/mustafakaankocak/Documents/Codex/2026-10-15/task-4/approved-icons/ostinato/master.png"
+  },
+  "generation": {
+    "tool": "Installed Pillow; existing Lissom tools/uret_ikon_launch.py native size tables and LANCZOS recipe",
+    "pillow_version": "12.1.1",
+    "resampling": "LANCZOS, directly from unchanged approved master to each target size",
+    "geometry": "Full square frame; no crop, inset, redraw or pre-rounded mask",
+    "color": "RGB samples unchanged except resampling; sRGB intent 0 tagged on resized PNGs; no color conversion",
+    "same_size_rule": "Copy approved master byte-for-byte"
+  },
+  "targets": {
+    "ios": {
+      "catalog": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "catalog_sha256": "3b1e214f466ffedff74baa5598ad5c4421130eea6bc8d57b8fe23435e8280ae4",
+      "catalog_entries": 19,
+      "unique_png_files": 15,
+      "idioms": [
+        "ios-marketing",
+        "ipad",
+        "iphone"
+      ],
+      "appicon_name": "AppIcon"
+    },
+    "android": {
+      "manifest": "android/app/src/main/AndroidManifest.xml",
+      "resource": "@mipmap/ic_launcher",
+      "unique_png_files": 5,
+      "densities": {
+        "mipmap-mdpi": 48,
+        "mipmap-hdpi": 72,
+        "mipmap-xhdpi": 96,
+        "mipmap-xxhdpi": 144,
+        "mipmap-xxxhdpi": 192
+      },
+      "adaptive_icon_present": false,
+      "round_icon_present": false
+    },
+    "other_shipping_platforms": [],
+    "excluded": [
+      "LaunchImage / launch backgrounds (separate splash artwork)",
+      "Existing store candidates and screenshots (historical; new store artwork remains pending)",
+      "Third-party examples and local tool spikes"
+    ]
+  },
+  "verification": {
+    "all_outputs_match_full_frame_master_resizes": true,
+    "all_dimensions_match_platform_slots": true,
+    "all_outputs_rgb_without_alpha": true,
+    "native_installation": "UNRUN; requires parent resource window",
+    "store_upload": "UNRUN; out of scope",
+    "store_screenshots_ready": false,
+    "changed_platform_png_files": 19,
+    "unchanged_already_approved_png_files": 1,
+    "visual_review": {
+      "result": "PASS",
+      "viewed_sizes_px": [
+        192,
+        180,
+        120,
+        60,
+        48
+      ],
+      "masks": [
+        "full square",
+        "illustrative rounded rectangle with 22% corner radius",
+        "circle"
+      ],
+      "native_launcher_claim": false
+    },
+    "focused_checks": [
+      {
+        "command": "python3 verify_icons.py --installed (local task evidence tool)",
+        "result": "PASS: 20 PNGs, master, platform wiring and 19 iOS catalog entries"
+      },
+      {
+        "command": "python3 tools/validate_template_assets.py",
+        "result": "PASS: 25/25 assets non-stock"
+      }
+    ]
+  },
+  "assets": [
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png",
+      "platform": "ios",
+      "dimensions": [
+        20,
+        20
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "1eca2e4e039b5b30965c6c613d83d030542e61b8ea1d1c1c5397eff185611bc8",
+      "previous_sha256": "f272161d88f2d1109aa5ecd3afc68fcf698fe9e480553ce0ae87b5c63f7a5e11",
+      "byte_size": 856
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png",
+      "platform": "ios",
+      "dimensions": [
+        40,
+        40
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "dc64f86cdf677ad207b7c943a642ebed52613b286bae8f3604d0932e24c7bfeb",
+      "previous_sha256": "ec7c6a4343581cbea825f17c8c801038a661d1c9788622cf6d026968e510901c",
+      "byte_size": 2249
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png",
+      "platform": "ios",
+      "dimensions": [
+        60,
+        60
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "129ababa7eab502af7374686dd662be452a0599326aa68bc0d48aecaf2821d45",
+      "previous_sha256": "58781452c755566df3bf1d8e60fbc900e484937e16082cec71f7a9bcfc31daa9",
+      "byte_size": 4209
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png",
+      "platform": "ios",
+      "dimensions": [
+        29,
+        29
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "f5a32ba29d0512660fd7b5f524d35f52c646fc5978fe939b44dd3b99c66fd64a",
+      "previous_sha256": "037f6cdd4d132df520e7d5ac5b8a4657c0d184ab6ec1acec6a40b1283a7c0f80",
+      "byte_size": 1429
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png",
+      "platform": "ios",
+      "dimensions": [
+        58,
+        58
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "db713820f94af801854f441a0ada1fb12919ff851c0c8df535febba008b0d442",
+      "previous_sha256": "9e393d6d8d7c34961b3eb564adfb19b7a93f6c46bb6671a97960c01a171ef316",
+      "byte_size": 4041
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png",
+      "platform": "ios",
+      "dimensions": [
+        87,
+        87
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "4397151cab1c8161a0066025790528d893281f5ab31bcf41b2b6d68595882f31",
+      "previous_sha256": "72ad4e6d06faa97b6926474383809ea92f5878fb345d12ca3311bf2e3159505d",
+      "byte_size": 7700
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png",
+      "platform": "ios",
+      "dimensions": [
+        40,
+        40
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "dc64f86cdf677ad207b7c943a642ebed52613b286bae8f3604d0932e24c7bfeb",
+      "previous_sha256": "ec7c6a4343581cbea825f17c8c801038a661d1c9788622cf6d026968e510901c",
+      "byte_size": 2249
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png",
+      "platform": "ios",
+      "dimensions": [
+        80,
+        80
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "21d03e6de06dc07dba7491d287adfb1bf29f3c31c96963a8fd8b8702c7d3270a",
+      "previous_sha256": "f4a4f063cffe964ec80732ea6d18528900de675c374aa5eb75e03ea2c82ee2dd",
+      "byte_size": 6665
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png",
+      "platform": "ios",
+      "dimensions": [
+        120,
+        120
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "5bbee0984865568dddfd7675756b9601150765dadb1d824fe0cf0a459817ab44",
+      "previous_sha256": "ff2c62071888f53307b7acd307d438b529dee4256c370ca59b86fd1adc49a647",
+      "byte_size": 13247
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png",
+      "platform": "ios",
+      "dimensions": [
+        120,
+        120
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "5bbee0984865568dddfd7675756b9601150765dadb1d824fe0cf0a459817ab44",
+      "previous_sha256": "ff2c62071888f53307b7acd307d438b529dee4256c370ca59b86fd1adc49a647",
+      "byte_size": 13247
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png",
+      "platform": "ios",
+      "dimensions": [
+        180,
+        180
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "1161520ace487550691a552d05ec1872e8392b2da02a61e1d27cbdc4c2301535",
+      "previous_sha256": "a4ba44c7a9766383cc1ac750093f3a6c964be08c240fa93641dd0b85d9c8a354",
+      "byte_size": 28041
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png",
+      "platform": "ios",
+      "dimensions": [
+        76,
+        76
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "b94814fecacf794ac4da25555612dbd56d88469fc2a6ea25aba3e5fd60ba68fb",
+      "previous_sha256": "31540d85f6d8d4fac5709af4e46bb003e52f6dcf0be56f1c503b2d8fb71554fd",
+      "byte_size": 6169
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png",
+      "platform": "ios",
+      "dimensions": [
+        152,
+        152
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "8fcec65fd72666deccb625abf1f358fd054e633e9da70a77ab78f55ecce54a25",
+      "previous_sha256": "6a709f7b2c01e07809f15a3cfa9bb301d828c6d0c9c98c869f3e685b83bff920",
+      "byte_size": 20329
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png",
+      "platform": "ios",
+      "dimensions": [
+        167,
+        167
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "acd6eb62e7c8da5023a59116eb1a07439e6af1641b343c6837307a5d53899b5b",
+      "previous_sha256": "cc111b64b566994e59108eeb7ec70cd0aa26f2113474a67b9cfb436f3cacfdaf",
+      "byte_size": 24330
+    },
+    {
+      "path": "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png",
+      "platform": "ios",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "6db03e9cdc6da965fc88ed28e6fd7f78aedf02a5d3fe4927bacffdd6b6a57b73",
+      "previous_sha256": "6db03e9cdc6da965fc88ed28e6fd7f78aedf02a5d3fe4927bacffdd6b6a57b73",
+      "byte_size": 873077
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "platform": "android",
+      "dimensions": [
+        48,
+        48
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "d8bbe3bdcff8c913596522a06562800db6adb32033791f6e3c8943a7fbb7f383",
+      "previous_sha256": "488a1cd3f48f9636e12e512f9c33661a8a80a0def5800e089d1786c611528efa",
+      "byte_size": 2967
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "platform": "android",
+      "dimensions": [
+        72,
+        72
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "ff3f740e9f345be3680f2471f9172a1f1187bc994137c184f6e868ce2d3c6ea9",
+      "previous_sha256": "b587cd203496779785d0d693dcbfd9880d88ea3ba60c5f23b289ba9c5dcc0d2d",
+      "byte_size": 5659
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "platform": "android",
+      "dimensions": [
+        96,
+        96
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "deacb083bb058780e73b356791095a05c8201426bac05959e80cb2219cf9ab47",
+      "previous_sha256": "09e29f0ecb0212611e49b8f18b8ede426f11b02ebcf39e95c356aa543bbb957a",
+      "byte_size": 9114
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "platform": "android",
+      "dimensions": [
+        144,
+        144
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "94b09340b82f3e4cc93c995fdf0b6b8fa857881ff9c22b8be8f7d9a8a1940538",
+      "previous_sha256": "8d129f791d8bb39c57d36c250b641bb027c1b18a40758cc6c8a96b8c36891015",
+      "byte_size": 18410
+    },
+    {
+      "path": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "platform": "android",
+      "dimensions": [
+        192,
+        192
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "has_alpha": false,
+      "sha256": "0c6e766a579299556da111a373a42a5503315db50e8bf464b9300f09f45fa2c7",
+      "previous_sha256": "c5e9a63cdc7470798f0fc20499a534239e60bb836c129126889bc6e97d00b019",
+      "byte_size": 31845
+    }
+  ]
+}

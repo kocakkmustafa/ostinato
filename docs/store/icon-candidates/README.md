@@ -1,3 +1,14 @@
+# Güncel native simge — 2026-10-16
+
+Yeni onay: **original-unchanged**. Güncel master, platform envanteri,
+boyutlar ve hashler [onaylı simge kaydında](../../design/icon/approved-2026-10-16/README.md).
+15 iOS AppIcon ve 5 Android launcher PNG doğrulandı; 19 PNG yenilendi,
+1024 px iOS PNG onaylı kaynakla zaten byte eşiydi ve korundu. Aşağıdaki adaylar ve
+mağaza dosyaları tarihsel kayıttır; yeni onaylı simgeyle mağaza görsellerinin
+hazır olduğu anlamına gelmez. Native kurulum ve mağaza yüklemesi yapılmadı.
+
+---
+
 # Ostinato uygulama simgesi
 
 ## 2026-09-25 — koyu zemin düzeltmesi
