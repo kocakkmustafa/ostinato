@@ -155,13 +155,19 @@ def detect(prod_sources):
 #
 # ⚠️ Bu bir MUAFİYET değil, KARAR NOKTASI.
 DECLARED = {
-    "writeCallSites": 3,
-    "writeFiles": ["onboarding_store.dart", "pose_model.dart",
-                   "session_store.dart"],
+    "writeCallSites": 4,
+    "writeFiles": ["guitar_journey_progress.dart", "onboarding_store.dart",
+                   "pose_model.dart", "session_store.dart"],
     "userArtifactMayBePersisted": True,
     "userArtifactFiles": ["live_screen.dart", "review_screen.dart",
                           "session_store.dart"],
     "$why": (
+        "GÜNCEL ENVANTER 2026-10-16: mevcut `guitar_journey_progress.dart` "
+        "ders kimliği/sürümü, görülme ve pratik zamanları, pratik sayısı ve "
+        "öz beyan tamamlama zamanını `guitar_journey_progress.v1.json`a "
+        "yazar. Bu kayıt `self_report_only`dir; ölçülen nota/teknik/ustalık "
+        "değildir. Misafir yerel kökü ve hesap-UUID dizinleri ayrıdır. "
+        "Bu envanter düzeltmesi yeni saklama davranışı eklemez. "
         "GÜNCELLENDİ 2026-08-16 (D14, O-153 — kurucu kararı geldi). "
         "`session_store.dart` yeni yazma yolu: her pratik oturumunun "
         "ÖZETİ (ders/çalgı kimliği + süre + örnek/dışarı-sayımı + "
@@ -173,9 +179,10 @@ DECLARED = {
         "ATILAN, adıyla — D14 SONRASI: ham açı-örnekleri (`history`) hâlâ "
         "atılıyor, yalnız ÖZET saklanıyor. Video hiçbir zaman saklanmadı, "
         "hâlâ saklanmıyor. SAKLANAN: hangi ders, ne zaman, kaç saniye, "
-        "bant-içi oranı. Kullanıcı 'son oturum'unu Review'da görür; tam "
-        "geçmiş listesi/ilerleme yüzeyi YOK (kapsam kararı, D14'ün "
-        "kendisi — post-V1)."),
+        "bant-içi oranı ve ayrı gitar yolunda ders sürümüne bağlı öz beyan "
+        "ilerlemesi. Kullanıcı 'son oturum'unu Review'da, gitar ders "
+        "ilerlemesini yazılı kurs yüzeyinde görür. Ham ses, kare-kare açı "
+        "geçmişi ve ölçülen müzik ustalığı bu kayıtlarda tutulmaz."),
     "ephemeralityClaimFiles": [],
     "$coupling": (
         "H-10 (2026-08-14): *bir yokluk cümlesi, yokluk bittiği gün "
@@ -192,8 +199,10 @@ DECLARED = {
         "sıfır-ağ kapısı, `test/flutter_test_config.dart`, bunu da "
         "kapsıyor — TRIPWIRE koda bağlı, belgeye değil). İlerleme "
         "yüzeyinin NEREDE/NASIL görüneceği (tam geçmiş, grafik, streak) "
-        "ayrıca TASARIM YÖNÜDÜR ve post-V1; bugün yalnız 'son oturum' "
-        "tek satır."),
+        "ayrıca TASARIM YÖNÜDÜR ve o tarihsel kararda post-V1'dir. "
+        "2026-10-16 mevcut kaynak gözlemi: ayrı yazılı gitar kursu öz beyan "
+        "ilerlemesini zaten saklar; envanter, mevcut davranışı kaydeder ve "
+        "yeni veri toplama veya kapsam genişletme yetkisi oluşturmaz."),
 }
 
 #: Beyanın boş bırakılamayacak gerekçe alanları.
@@ -232,6 +241,12 @@ def coupling_violation(actual):
 #: **sınıflandırılmadan geçemez** — yani *"ne sakladığını söyle"* zorunluluğu
 #: koda gömülür, kayıtlara değil.
 WRITE_CLASSES = {
+    "guitar_journey_progress.dart": (
+        "KULLANICI ÜRETİMİ — yazılı gitar yolunda sürümlü ders kimliği, "
+        "görülme/pratik zamanları, pratik sayısı ve öz beyan tamamlama "
+        "zamanı. `self_report_only`; sensör sonucu, ham ses veya ölçülen "
+        "ustalık değildir. Misafir kökü hesap-UUID dizinlerinden ayrıdır. "
+        "Silinirse kullanıcının yerel gitar çalışma kaydı kaybolur."),
     "onboarding_store.dart": (
         "KULLANICI DURUMU (tek bit) — `onboarding-v1.done` işaretçisi. "
         "Kullanıcının ÜRETTİĞİ bir değer değil, uygulamanın onu bir kez "

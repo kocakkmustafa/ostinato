@@ -42,7 +42,14 @@ import json
 import plistlib
 import re
 import sys
+from collections import Counter
 from pathlib import Path
+
+from surface_context import (body_side_allowed, dart_hand_context,
+                             guarded_dart_contexts, hand_context, historical_body_report,
+                             instructional_promise_word,
+                             merged_dart_literals, paired_json_contexts,
+                             without_labelled_turkish_quote)
 
 # ── A: vaat dili ────────────────────────────────────────────────────────────
 # Her biri bir ZAMAN taahhüdü ima eder. "Neden yok" dürüstlüktür; "yakında
@@ -265,11 +272,15 @@ _RETENTION_VERB = (r"(?:keeps?|kept|stores?|stored|retains?|retained|"
 # saklama iddiası sayardı. Kullanıcının kaydı bu üründe "video".
 _RETENTION_OBJECT = (r"(?:angles?|landmarks?|measurements?|"
                      r"video|your footage|history|session data|your data)")
+# An engine is software, not a retained user measurement. Keep the subject
+# vocabulary intact for the partition self-test and qualify only data claims.
+_RETENTION_DATA_OBJECT = _RETENTION_OBJECT.replace(
+    'measurements?', r'measurements?(?!\s+engine\b)')
 RETENTION_CLAIM = re.compile(
     # aktif: "keeps the body angles" (özne kim olursa olsun)
-    rf"\b{_RETENTION_VERB}\b[^.!?]{{0,40}}?\b{_RETENTION_OBJECT}\b|"
+    rf"\b{_RETENTION_VERB}\b[^.!?]{{0,40}}?\b{_RETENTION_DATA_OBJECT}\b|"
     # edilgen: "the angles are kept"
-    rf"\b{_RETENTION_OBJECT}\b[^.!?]{{0,40}}?\b(?:are|is|was|were)\s+"
+    rf"\b{_RETENTION_DATA_OBJECT}\b[^.!?]{{0,40}}?\b(?:are|is|was|were)\s+"
     rf"{_RETENTION_VERB}\b|"
     rf"\bsaved on (?:your|this) (?:phone|device)\b|\byour history\b",
     re.IGNORECASE)
@@ -463,6 +474,11 @@ UPLOADER_TRACES = re.compile(
 #: Yeni bir tanesi eklendiğinde kapı öter — kayıt bir MUAFİYET değil, bir
 #: KARAR NOKTASIDIR.
 NETWORK_DEPS_RECORDED = {
+    "video_player": "2.11.1 API networkUrl/DataSourceType.network taşıyabilir (lib/video_player.dart); Ostinato yalnız local-file QA oynatır ve release medya kapalıdır; kaynak aile yeteneği güvenli sayılmadı",
+    "video_player_android": "Yerel permit yaması DataSourceType.file dışını reddeder (lib/src/android_video_player.dart); native oynatıcı ailesinin ağ yeteneği ihtiyaten kayıtlı, kullanıcı videosu kaynak yapılmaz",
+    "video_player_avfoundation": "Yerel permit yaması DataSourceType.file dışını reddeder (lib/src/avfoundation_video_player.dart); AVPlayer ağ yeteneği ihtiyaten kayıtlı, kullanıcı videosu kaynak yapılmaz",
+    "video_player_platform_interface": "6.9.0 DataSource network URI ve HTTP başlıklarını tanımlar; kendi taşıyıcısı olmasa da ağ-capable oynatıcı sözleşmesi olarak ihtiyaten kayıtlı",
+    "video_player_web": "2.4.0 browser video src ve network data source açabilir; Android/iOS hedefinde kullanılmayan transitif adapter olsa da güvenli sayılmadı",
     # SDK integration smoke tooling (dev-only imports under integration_test/).
     # Conservative: record driver/VM HTTP and subprocess capabilities instead
     # of asserting these test packages can never open a network connection.
@@ -491,10 +507,11 @@ NETWORK_DEPS_RECORDED = {
                     "'hiçbir şey yüklenmiyor' iddiaları HÂLÂ DOĞRU; ama "
                     "'ürün ağa çıkmıyor' cümlesi bu paket yüzünden YANLIŞ "
                     "olurdu — ölçüldü: öyle bir cümle sevk edilmiyor (0)",
-    "http": "TRANSİTİF — google_fonts'un altında geliyor (pubspec.lock: "
-            "`dependency: transitive`), lib/'de DOĞRUDAN import YOK "
-            "(ölçüldü, `package:http` sıfır çağrı). google_fonts'un GET-only "
-            "gerekçesi bunu da kapsar; kendi başına ek yükleme yolu değil.",
+    "http": "1.6.0 doğrudan dev bağımlılığı; test/support/account_delete_fixture.dart "
+            "MockClient kullanır, üretim lib/ altında package:http importu yok. "
+            "Ortak hesap transitif HTTP yeteneği ayrıca Motion/Supabase kayıtlarında "
+            "yer alır; istemci ağ açabilir ve güvenli sınıfına konmaz. Önceki "
+            "google_fonts gerekçesi bugünkü lock için geçerli değildir (2026-10-16).",
     # Ortak hesap e-posta/profil/üyelik verisini taşır. Kamera karesi veya
     # ölçüm dizisi bu pakete verilmez; sevk edilen yokluk iddiaları videoyadır.
     "motion_account": "Core ortak kimlik; Auth/profil/üyelik ağı var, kamera verisi göndermez",
@@ -565,6 +582,8 @@ NETWORK_DEP_HINTS = re.compile(
 #
 # Kapsam: yalnız BUGÜN `pubspec.lock`ta olan paketler.
 NETWORK_DEPS_KNOWN_SAFE = {
+    "csslib": "1.0.2 lib/parser.dart CSS metnini ayrıştırır; lib kaynaklarında soket/HTTP/fetch istemcisi yok, URL tokeni ağ isteği değildir (2026-10-16 yerel kaynak incelemesi)",
+    "html": "0.15.7 lib/parser.dart ve dom.dart HTML string/byte girdisini DOM'a ayrıştırır; lib kaynaklarında soket/HTTP/fetch istemcisi yok (2026-10-16 yerel kaynak incelemesi)",
     "in_app_purchase_platform_interface": "satın alma eklentisi çağrı sözleşmesi; kendi ağ taşıyıcısı yok",
     "app_links": "gelen URI'yi işletim sisteminden alır, ağ isteği yapmaz",
     "app_links_linux": "app_links Linux platform katmanı",
@@ -738,7 +757,8 @@ ABSENCE_ASSERTIONS = re.compile(
 # explicitly scoped disclosure remains true beside the opt-in guitar observer.
 SCOPED_AUDIO_ABSENCE = re.compile(
     r"in these (?:posture|voice posture) lessons|"
-    r"these posture lessons|bu (?:duruş|ses|piyano) ders(?:leri|lerinde)", re.IGNORECASE)
+    r"these posture lessons|this written course|"
+    r"(?:bu )?(?:duruş|ses|piyano) ders(?:leri|lerinde)|yazılı kurs", re.IGNORECASE)
 def global_audio_absence(sentence):
     if not ABSENCE_ASSERTIONS.search(sentence):
         return False
@@ -807,7 +827,9 @@ REQUIRED_DISCLOSURES = [
 # zıt sınıflar.*
 BODY_SIDE = re.compile(
     r"\b(left|right)[- ](hand|hands|wrist|wrists|arm|arms|elbow|elbows|"
-    r"shoulder|shoulders|foot|feet|leg|legs|side|thumb|finger|fingers)\b",
+    r"shoulder|shoulders|foot|feet|leg|legs|side|thumb|finger|fingers)\b|"
+    r"\b(?:sağ|sol)\s+(?:el(?:in|ini|ler)?|başparmak|işaret|orta parmak|"
+    r"bilek|kol|dirsek|omuz|ayak|bacak)\b",
     re.IGNORECASE)
 #: Anatomik ÖLÇÜM adları (metrik kimliği) yönerge değildir — muaf.
 BODY_SIDE_METRIC = re.compile(r"left_|right_", re.IGNORECASE)
@@ -1034,24 +1056,12 @@ def dart_surface_strings():
     for root in DART_ROOTS:
         for path in sorted(Path(root).rglob("*.dart")):
             src = strip_dart_comments(path.read_text(encoding="utf-8"))
-            pending, start = None, None
-            last_end = None
-            for m in STRING_LITERAL.finditer(src):
-                text = m.group(1) if m.group(1) is not None else m.group(2)
-                adjacent = (last_end is not None
-                            and src[last_end:m.start()].strip() == "")
-                if adjacent and pending is not None:
-                    pending += text
-                else:
-                    if pending:
-                        yield str(path), src.count("\n", 0, start) + 1, pending
-                    pending, start = text, m.start()
-                last_end = m.end()
-            if pending:
-                yield str(path), src.count("\n", 0, start) + 1, pending
+            for start, _, text in merged_dart_literals(src):
+                if text:
+                    yield str(path), src.count('\n', 0, start) + 1, text
 
 
-def guarded_turkish_catalog_literals(dart_raw, source_text=None):
+def guarded_turkish_catalog_literals(dart_raw, source_text=None, precise=False):
     """Only TR map literals with an intact locale AND source-drift guard.
 
     This is a rule-F language classification, not an honesty exemption: the
@@ -1064,14 +1074,25 @@ def guarded_turkish_catalog_literals(dart_raw, source_text=None):
         return set()
     src = strip_dart_comments(source_text if source_text is not None
                               else path.read_text(encoding="utf-8"))
-    required = (
+    render = re.search(
+        r"String catalogCopy\(BuildContext context, String key, String source\)\s*\{\s*"
         r"if\s*\(\s*Localizations\.localeOf\(context\)\.languageCode\s*"
-        r"!=\s*'tr'\s*\)\s*return source\s*;",
+        r"!=\s*'tr'\s*\)\s*return source\s*;\s*"
         r"return\s+hasCurrentTurkishCatalogCopy\(key,\s*source\)\s*\?\s*"
-        r"_turkishCopy\[key\]!\s*:\s*source\s*;",
-        r"_sourceFingerprints\[key\]\s*==\s*_fingerprint\(source\)",
-    )
-    if not all(re.search(pattern, src) for pattern in required):
+        r"(_turkishCopy)\[key\]!\s*:\s*source\s*;\s*\}", src)
+    current = re.search(
+        r"bool hasCurrentTurkishCatalogCopy\(String key, String source\)\s*=>\s*"
+        r"(_turkishCopy)\.containsKey\(key\)\s*&&\s*"
+        r"_sourceFingerprints\[key\]\s*==\s*_fingerprint\(source\)\s*;", src)
+    if not render or not current:
+        return set()
+    # Only the guarded value lookup and containsKey probe may reference this
+    # map. An alias or unconditional read invalidates its language context.
+    reference_positions = {m.start() for m in re.finditer(r'\b_turkishCopy\b', src)}
+    allowed_positions = {render.start(1), current.start(1)}
+    for pattern in (r'const\s+Map<String,\s*String>\s+(_turkishCopy)\s*=',):
+        allowed_positions.update(m.start(1) for m in re.finditer(pattern, src))
+    if reference_positions != allowed_positions:
         return set()
     marker = re.search(
         r"const\s+Map<String,\s*String>\s+_turkishCopy\s*=\s*"
@@ -1081,6 +1102,10 @@ def guarded_turkish_catalog_literals(dart_raw, source_text=None):
     end = src.find("\n};", marker.end())
     if end < 0:
         return set()
+    if precise:
+        return [(f'{path}:{src.count(chr(10), 0, start) + 1}', text)
+                for start, stop, text in merged_dart_literals(src)
+                if marker.end() <= start and stop <= end]
     start_line = src.count("\n", 0, marker.end()) + 1
     end_line = src.count("\n", 0, end) + 2
     return {f"{path}:{line}" for file, line, _ in dart_raw
@@ -1422,11 +1447,11 @@ def selftest() -> int:
                  "Bu duruş dersleri mikrofon kullanmaz.",
                  "Sharing a skeleton-render report is not wired in this build."):
         if global_audio_absence(text):
-            failures.append(f"Scoped or unrelated absence was rejected: {text}")
+            dead.append(f"Scoped or unrelated absence was rejected: {text}")
     for text in ("There is no microphone input in this build.",
                  "Bu sürüm mikrofon kullanmaz."):
         if not global_audio_absence(text):
-            failures.append(f"Global absence escaped: {text}")
+            dead.append(f"Global absence escaped: {text}")
     if ABSENCE_ASSERTIONS.search("Mikrofon olsa bile puan üretilemez"):
         dead.append("mikrofon varsayımı bayatlayacak yokluk beyanı sanıldı")
     raw = list(dart_surface_strings())
@@ -1589,10 +1614,26 @@ def main() -> int:
     surfaces += permission_surfaces
     surfaces = [(w, t) for w, t in surfaces if not IDENTIFIER_LIKE.match(t)]
 
+    json_locales, hand_scopes = {}, {}
+    for asset in shipped_json_assets():
+        node = json.loads(Path(asset).read_text(encoding='utf-8'))
+        locales, invalid = paired_json_contexts(node, asset)
+        json_locales.update(locales)
+        for where in invalid:
+            violations.append(f'[dil şeması] {where}: EN/TR çifti eksik veya boş')
+        if isinstance(node, dict):
+            hand_scopes[asset] = hand_context(node)
+    dart_hands = {file: dart_hand_context(
+        strip_dart_comments(Path(file).read_text()), hand_scopes)
+                  for file in {f for f, _, _ in dart_raw}}
+
     # ── Kural A ──
     for where, text in surfaces:
         for pattern, label in PROMISE_PATTERNS:
-            if re.search(pattern, text, flags=re.IGNORECASE):
+            matches = [sentence for sentence in sentences(text)
+                       if re.search(pattern, sentence, flags=re.IGNORECASE)
+                       and not instructional_promise_word(sentence, label)]
+            if matches:
                 violations.append(
                     f"[vaat dili] {where}: '{label}' geçiyor — "
                     f"«{text.strip()[:110]}»"
@@ -1881,12 +1922,12 @@ def main() -> int:
         if journey_errors:
             violations.append(f"[dil] gitar yolu şeması geçersiz: {journey_errors[:3]}")
         journey_localized = not journey_errors
-        guarded_tr = guarded_turkish_catalog_literals(dart_raw)
-        localized_dart_files = {
-            f for f, _, _ in dart_raw
-            if f == 'lib/app/app_locale.dart'
-            or 'app_locale.dart' in Path(f).read_text(encoding='utf-8')
-        }
+        guarded_tr = Counter(guarded_turkish_catalog_literals(dart_raw, precise=True))
+        guarded_pairs = Counter(guarded_dart_contexts({
+            file: strip_dart_comments(Path(file).read_text())
+            for file in {f for f, _, _ in dart_raw}
+        }))
+        dart_occurrences = Counter((f'{file}:{line}', text) for file, line, text in dart_raw)
         # Tanı bağlamında duran literalleri ATLA (dosya-satır ile eşlenir).
         diagnostic = set()
         for f, ln, t in dart_raw:
@@ -1913,18 +1954,23 @@ def main() -> int:
                 where.startswith('assets/content/guitar_journey.v1.json.') and
                 where.endswith('.tr')):
                 continue
+            if json_locales.get(where) == 'tr':
+                continue
             # Bu dosyanın yalnız _turkishCopy MAP DEĞERLERİ TR yolunda
             # gösterilir. Locale veya kaynak-fingerprint kapısı değişirse
             # muafiyet otomatik düşer; diğer dürüstlük kuralları sürer.
-            if where in guarded_tr:
+            if (guarded_tr[(where, text)] and
+                    guarded_tr[(where, text)] == dart_occurrences[(where, text)]):
                 continue
             # These Dart sources explicitly choose EN/TR at render time via
             # app_locale.dart; library.json's English declaration applies to
             # content JSON and unlocalized Dart sources, not TR branches.
-            if where.split(':', 1)[0] in localized_dart_files:
+            if (guarded_pairs[(where, text)] and
+                    guarded_pairs[(where, text)] == dart_occurrences[(where, text)]):
                 continue
             checked_f += 1
-            if set(text) & TURKISH_CHARS or TURKISH_WORDS.search(text):
+            language_text = without_labelled_turkish_quote(text)
+            if set(language_text) & TURKISH_CHARS or TURKISH_WORDS.search(language_text):
                 violations.append(
                     f"[dil] {where}: kullanıcı yüzeyi TÜRKÇE görünüyor ama "
                     f"beyan edilen dil {declared_lang!r} — İngilizce konuşan "
@@ -1954,16 +2000,18 @@ def main() -> int:
     checked_h = 0
     for where, text in surfaces:
         for sentence in sentences(text):
-            if BODY_SIDE_METRIC.search(sentence):
-                continue          # `left_elbow` gibi metrik adı — ölçüm, yönerge değil
+            if historical_body_report(sentence):
+                continue          # Historical reference uncertainty, no instruction.
             checked_h += 1
-            m = BODY_SIDE.search(sentence)
-            if m:
-                violations.append(
-                    f"[vücut-taraf] {where}: '{m.group(0)}' — uygulama "
-                    f"kullanıcının ELLİĞİNİ bilmiyor (ellik girdisi YOK) ve "
-                    f"solak gitarist gitarı TERS tutar; bu yönerge ona YANLIŞ "
-                    f"eli söyler — «{sentence.strip()[:90]}»")
+            asset = next((path for path in hand_scopes if where.startswith(path + '.')), None)
+            context = hand_scopes.get(asset) or dart_hands.get(where.split(':', 1)[0])
+            for match in BODY_SIDE.finditer(sentence):
+                if not body_side_allowed(context, match.group(0)):
+                    violations.append(
+                        f"[vücut-taraf] {where}: '{match.group(0)}' — bu "
+                        f"çalgı/ellik bağlamı uzuv yönergesini doğrulamıyor "
+                        f"(bağlam: {context or 'bilinmiyor'}) — "
+                        f"«{sentence.strip()[:90]}»")
 
     # ── Kural I ──
     checked_i = 0
