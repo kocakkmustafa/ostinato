@@ -19,6 +19,7 @@ class GuitarJourneyScreen extends StatefulWidget {
     this.initialCourse,
     this.initialProgress,
     this.preparation,
+    this.bundle,
   });
 
   final GuitarJourneyProgressStore Function(String? accountUserId)?
@@ -26,6 +27,7 @@ class GuitarJourneyScreen extends StatefulWidget {
   final GuitarJourneyCourse? initialCourse;
   final Map<String, GuitarLessonProgress>? initialProgress;
   final GuitarSessionPreparation? preparation;
+  final AssetBundle? bundle;
 
   @override
   State<GuitarJourneyScreen> createState() => _GuitarJourneyScreenState();
@@ -34,9 +36,10 @@ class GuitarJourneyScreen extends StatefulWidget {
 class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
   late final GuitarSessionPreparation _preparation =
       widget.preparation ?? GuitarSessionPreparation();
-  late final Future<GuitarJourneyCourse> _course = widget.initialCourse == null
-      ? GuitarJourneyCourse.load()
+  Future<GuitarJourneyCourse> _loadCourse() => widget.initialCourse == null
+      ? GuitarJourneyCourse.load(bundle: widget.bundle)
       : Future.value(widget.initialCourse);
+  late Future<GuitarJourneyCourse> _course = _loadCourse();
   String? _accountId;
   GuitarJourneyProgressStore? _store;
   Future<Map<String, GuitarLessonProgress>>? _progress;
@@ -70,6 +73,36 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
     });
   }
 
+  void _reloadCourse() {
+    final course = _loadCourse();
+    setState(() {
+      _course = course;
+    });
+  }
+
+  Widget _loadError(BuildContext context, String message, VoidCallback retry) =>
+      Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(message, textAlign: TextAlign.center),
+              const SizedBox(height: 12),
+              OutlinedButton(
+                onPressed: retry,
+                child: Text(localized(context, 'Retry', 'Yeniden dene')),
+              ),
+              if (Navigator.of(context).canPop())
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(localized(context, 'Back', 'Geri')),
+                ),
+            ],
+          ),
+        ),
+      );
+
   GuitarLessonProgress? _record(
     Map<String, GuitarLessonProgress> progress,
     GuitarJourneyCourse course,
@@ -84,15 +117,18 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
       child: FutureBuilder<GuitarJourneyCourse>(
         future: _course,
         builder: (context, courseSnapshot) {
+          if (courseSnapshot.connectionState != ConnectionState.done) {
+            return const Center(child: CircularProgressIndicator());
+          }
           if (courseSnapshot.hasError) {
-            return Center(
-              child: Text(
-                localized(
-                  context,
-                  'The course could not be loaded.',
-                  'Kurs yüklenemedi.',
-                ),
+            return _loadError(
+              context,
+              localized(
+                context,
+                'The course could not be loaded.',
+                'Kurs yüklenemedi.',
               ),
+              _reloadCourse,
             );
           }
           if (!courseSnapshot.hasData) {
@@ -102,14 +138,14 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
             future: _progress,
             builder: (context, progressSnapshot) {
               if (progressSnapshot.hasError) {
-                return Center(
-                  child: Text(
-                    localized(
-                      context,
-                      'Your local progress could not be read. It has not been reset.',
-                      'Yerel ilerlemen okunamadı. Kayıt sıfırlanmadı.',
-                    ),
+                return _loadError(
+                  context,
+                  localized(
+                    context,
+                    'Your local progress could not be read. It has not been reset.',
+                    'Yerel ilerlemen okunamadı. Kayıt sıfırlanmadı.',
                   ),
+                  _reload,
                 );
               }
               if (!progressSnapshot.hasData) {
