@@ -1,3 +1,22 @@
+# Güncel mağaza metni girişi · 17 Ekim 2026
+
+Yayıma hazırlanacak TR/EN metinlerin kaynağı [listing.json](listing.json) ve
+[listing.tr-TR.json](listing.tr-TR.json) dosyalarıdır. Güncel dar kurs kapsamı
+**60 ders / 10 modül gitar**; kurs varlık kimliği ve hashleri JSON içindeki `$` kaynak notlarındadır.
+İsteğe bağlı mikrofonla cihaz üstü yaklaşık tek nota gözlemi vardır; doğruluk/akor puanı, kamera koçluğu veya abonelik satışı vaadi yoktur.
+
+Kurs ilerlemesi kullanıcının kendi çalışma kaydıdır; ustalık veya fiziksel öğretim
+kabulü değildir. Hesap ve destek/gizlilik metinleri güncel JSON'dan alınır.
+Yerel metin, eski ekran görüntüsü veya kaynak testi mağazada kaydedildiği, güncel
+imzalı pakette bulunduğu ya da fiziksel cihazda kabul edildiği anlamına gelmez.
+Bu bakımda mağaza paneline yazılmadı ve yükleme yapılmadı.
+
+## Tarihsel araştırma · aşağıdaki metni yayın metni olarak kullanmayın
+
+Aşağıdaki eski katalog/kamera incelemesi kendi tarihinin kanıtıdır. Eski “bugün”,
+“sıradaki” ve simge onayı ifadeleri güncel yayın durumu değildir; yukarıdaki iki
+JSON ve kaynaklarına bağlı güncel kabul kullanılır.
+
 # Mağaza Liste Metni — TASLAK (D6, 2026-08-16, O-156)
 
 **Makine-okur kaynaklar:** `docs/store/listing.json` (EN) ve
