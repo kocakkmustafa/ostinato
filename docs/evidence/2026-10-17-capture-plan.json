@@ -1,0 +1,386 @@
+{
+  "date": "2026-10-17",
+  "full_teaching_goal_preserved": true,
+  "baseline": "7a91f3cc39ebf527ead983be410d826ee171c4e2",
+  "shared_offline_intake": "ventures/motion-core/lib/tools/fixture_pipeline/first_party_capture.py",
+  "delivery_spec": "ventures/motion-core/lib/tools/fixture_pipeline/FIRST_PARTY_VIDEO_DELIVERY.tr.txt",
+  "areas": [
+    {
+      "app": "ostinato",
+      "area": "guitar",
+      "title": "Gitar",
+      "courses": [
+        {
+          "path": "assets/content/guitar_journey.v1.json",
+          "id": "guitar.journey",
+          "version": 1,
+          "units": 60,
+          "sha256": "bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18",
+          "bytes": 995884,
+          "lesson_ids": [
+            "guitar.journey.start.parts",
+            "guitar.journey.start.setup",
+            "guitar.journey.start.tuning",
+            "guitar.journey.start.pluck",
+            "guitar.journey.start.fret",
+            "guitar.journey.start.first_pulse",
+            "guitar.journey.notes.bass_e",
+            "guitar.journey.notes.bass_a",
+            "guitar.journey.notes.middle_strings",
+            "guitar.journey.notes.treble_strings",
+            "guitar.journey.notes.alternating_pick",
+            "guitar.journey.notes.note_checkpoint",
+            "guitar.journey.reading.quarters_eighths",
+            "guitar.journey.reading.rests_ties",
+            "guitar.journey.reading.meters",
+            "guitar.journey.reading.tablature",
+            "guitar.journey.reading.staff",
+            "guitar.journey.reading.reading_checkpoint",
+            "guitar.journey.chords.diagrams_em_am",
+            "guitar.journey.chords.e_a",
+            "guitar.journey.chords.d_g",
+            "guitar.journey.chords.c_dm",
+            "guitar.journey.chords.two_chord_changes",
+            "guitar.journey.chords.four_chord_loop",
+            "guitar.journey.strum.down_up",
+            "guitar.journey.strum.accents",
+            "guitar.journey.strum.waltz",
+            "guitar.journey.strum.offbeat",
+            "guitar.journey.strum.mute",
+            "guitar.journey.strum.accompaniment",
+            "guitar.journey.melody.interval_map",
+            "guitar.journey.melody.c_major",
+            "guitar.journey.melody.g_major",
+            "guitar.journey.melody.a_minor_pent",
+            "guitar.journey.melody.phrasing",
+            "guitar.journey.melody.melody_capstone",
+            "guitar.journey.harmony.triads",
+            "guitar.journey.harmony.key_chords",
+            "guitar.journey.harmony.transpose",
+            "guitar.journey.harmony.blues_form",
+            "guitar.journey.harmony.power_chords",
+            "guitar.journey.harmony.sevenths_chart",
+            "guitar.journey.fingerstyle.finger_names",
+            "guitar.journey.fingerstyle.steady_bass",
+            "guitar.journey.fingerstyle.alternating_bass",
+            "guitar.journey.fingerstyle.arpeggio",
+            "guitar.journey.fingerstyle.melody_bass",
+            "guitar.journey.fingerstyle.finger_arrangement",
+            "guitar.journey.intermediate.partial_barre",
+            "guitar.journey.intermediate.f_chord",
+            "guitar.journey.intermediate.movable_shape",
+            "guitar.journey.intermediate.pentatonic_link",
+            "guitar.journey.intermediate.slides_bends",
+            "guitar.journey.intermediate.blues_improv",
+            "guitar.journey.independent.choose_piece",
+            "guitar.journey.independent.arrange",
+            "guitar.journey.independent.self_review",
+            "guitar.journey.independent.rhythm_final",
+            "guitar.journey.independent.melody_final",
+            "guitar.journey.independent.next_cycle"
+          ]
+        }
+      ],
+      "current_baseline": "7a91f3cc39ebf527ead983be410d826ee171c4e2",
+      "existing_architecture": "Existing body-pose posture plus deterministic FFT/pitch/chord/onset/timing, not a learned audio backbone. Use synchronized original audio/human note and onset labels for DSP/drill calibration. Body pose cannot resolve finger articulation/key contact; new hand/instrument recognition requires a separate design and dataset.",
+      "source_references": [
+        {
+          "path": "lib/app/pose_model.dart",
+          "sha256": "f1379550864dd94d7908d368c151ddd735775f12d36bf45216636b0ea3d1c1e3"
+        },
+        {
+          "path": "packages/ostinato_posture/lib/src/evaluator.dart",
+          "sha256": "65fb132f6c8c7e7c55951759e1bdf06a09467ad0612df5227605cfa6b597e346"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/pitch/guitar_pitch_observer.dart",
+          "sha256": "0c7b0dcaa4b105f2c793a7fa28b2469b1ed6274208201a486e01b97cc43f2e8f"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/harmony/chord_detector.dart",
+          "sha256": "a2f4dc225fcf5caa763614ec2938b24e95fb6fbb48dc67040002275530b4ded7"
+        }
+      ],
+      "next_operation": "Human teaching demonstration and annotation → exact pinned extraction/DSP replay → reference/rule calibration candidate → heldout evaluation → real-device parity. No runtime promotion in this change.",
+      "acceptance_gap": "Physical teaching/rights/learner and device evidence open; no first-party capture supplied.",
+      "first_party_data_received": false,
+      "trained": false,
+      "physical_or_device_validated": false
+    },
+    {
+      "app": "ostinato",
+      "area": "piano",
+      "title": "Piyano/klavye",
+      "courses": [
+        {
+          "path": "assets/content/piano_beginner.v1.json",
+          "id": "piano.beginner",
+          "version": 1,
+          "units": 16,
+          "sha256": "c714a5d8be7a98b62104044eaec2ec33bcd83e775915246e65c3a3d98cbdbce7",
+          "bytes": 27012,
+          "lesson_ids": [
+            "piano-01",
+            "piano-02",
+            "piano-03",
+            "piano-04",
+            "piano-05",
+            "piano-06",
+            "piano-07",
+            "piano-08",
+            "piano-09",
+            "piano-10",
+            "piano-11",
+            "piano-12",
+            "piano-13",
+            "piano-14",
+            "piano-15",
+            "piano-16"
+          ]
+        }
+      ],
+      "current_baseline": "7a91f3cc39ebf527ead983be410d826ee171c4e2",
+      "existing_architecture": "Existing body-pose posture plus deterministic FFT/pitch/chord/onset/timing, not a learned audio backbone. Use synchronized original audio/human note and onset labels for DSP/drill calibration. Body pose cannot resolve finger articulation/key contact; new hand/instrument recognition requires a separate design and dataset.",
+      "source_references": [
+        {
+          "path": "lib/app/pose_model.dart",
+          "sha256": "f1379550864dd94d7908d368c151ddd735775f12d36bf45216636b0ea3d1c1e3"
+        },
+        {
+          "path": "packages/ostinato_posture/lib/src/evaluator.dart",
+          "sha256": "65fb132f6c8c7e7c55951759e1bdf06a09467ad0612df5227605cfa6b597e346"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/pitch/guitar_pitch_observer.dart",
+          "sha256": "0c7b0dcaa4b105f2c793a7fa28b2469b1ed6274208201a486e01b97cc43f2e8f"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/harmony/chord_detector.dart",
+          "sha256": "a2f4dc225fcf5caa763614ec2938b24e95fb6fbb48dc67040002275530b4ded7"
+        }
+      ],
+      "next_operation": "Human teaching demonstration and annotation → exact pinned extraction/DSP replay → reference/rule calibration candidate → heldout evaluation → real-device parity. No runtime promotion in this change.",
+      "acceptance_gap": "Physical teaching/rights/learner and device evidence open; no first-party capture supplied. Instrument-specific written content does not establish accepted note/technique feedback for this instrument.",
+      "first_party_data_received": false,
+      "trained": false,
+      "physical_or_device_validated": false
+    },
+    {
+      "app": "ostinato",
+      "area": "vocal",
+      "title": "Vokal",
+      "courses": [
+        {
+          "path": "assets/content/vocal_beginner.v1.json",
+          "id": "voice.beginner.written",
+          "version": 1,
+          "units": 16,
+          "sha256": "5564e76bdd97740d14c15d396c7e9916fd2943982c7418d87737cf64b84b78e5",
+          "bytes": 40015,
+          "lesson_ids": [
+            "vocal-01",
+            "vocal-02",
+            "vocal-03",
+            "vocal-04",
+            "vocal-05",
+            "vocal-06",
+            "vocal-07",
+            "vocal-08",
+            "vocal-09",
+            "vocal-10",
+            "vocal-11",
+            "vocal-12",
+            "vocal-13",
+            "vocal-14",
+            "vocal-15",
+            "vocal-16"
+          ]
+        }
+      ],
+      "current_baseline": "7a91f3cc39ebf527ead983be410d826ee171c4e2",
+      "existing_architecture": "Existing body-pose posture plus deterministic FFT/pitch/chord/onset/timing, not a learned audio backbone. Use synchronized original audio/human note and onset labels for DSP/drill calibration. Body pose cannot resolve finger articulation/key contact; new hand/instrument recognition requires a separate design and dataset.",
+      "source_references": [
+        {
+          "path": "lib/app/pose_model.dart",
+          "sha256": "f1379550864dd94d7908d368c151ddd735775f12d36bf45216636b0ea3d1c1e3"
+        },
+        {
+          "path": "packages/ostinato_posture/lib/src/evaluator.dart",
+          "sha256": "65fb132f6c8c7e7c55951759e1bdf06a09467ad0612df5227605cfa6b597e346"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/pitch/guitar_pitch_observer.dart",
+          "sha256": "0c7b0dcaa4b105f2c793a7fa28b2469b1ed6274208201a486e01b97cc43f2e8f"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/harmony/chord_detector.dart",
+          "sha256": "a2f4dc225fcf5caa763614ec2938b24e95fb6fbb48dc67040002275530b4ded7"
+        }
+      ],
+      "next_operation": "Human teaching demonstration and annotation → exact pinned extraction/DSP replay → reference/rule calibration candidate → heldout evaluation → real-device parity. No runtime promotion in this change.",
+      "acceptance_gap": "Physical teaching/rights/learner and device evidence open; no first-party capture supplied. Instrument-specific written content does not establish accepted note/technique feedback for this instrument.",
+      "first_party_data_received": false,
+      "trained": false,
+      "physical_or_device_validated": false
+    },
+    {
+      "app": "ostinato",
+      "area": "ukulele",
+      "title": "Ukulele",
+      "courses": [
+        {
+          "path": "assets/content/ukulele_beginner.v1.json",
+          "id": "ukulele.beginner",
+          "version": 1,
+          "units": 18,
+          "sha256": "181095def47ae1ab8c8a930ef2668d44dc4eca2f6a640458398bd8b49cef0126",
+          "bytes": 42209,
+          "lesson_ids": [
+            "ukulele-01",
+            "ukulele-02",
+            "ukulele-03",
+            "ukulele-04",
+            "ukulele-05",
+            "ukulele-06",
+            "ukulele-07",
+            "ukulele-08",
+            "ukulele-09",
+            "ukulele-10",
+            "ukulele-11",
+            "ukulele-12",
+            "ukulele-13",
+            "ukulele-14",
+            "ukulele-15",
+            "ukulele-16",
+            "ukulele-17",
+            "ukulele-18"
+          ]
+        }
+      ],
+      "current_baseline": "7a91f3cc39ebf527ead983be410d826ee171c4e2",
+      "existing_architecture": "Existing body-pose posture plus deterministic FFT/pitch/chord/onset/timing, not a learned audio backbone. Use synchronized original audio/human note and onset labels for DSP/drill calibration. Body pose cannot resolve finger articulation/key contact; new hand/instrument recognition requires a separate design and dataset.",
+      "source_references": [
+        {
+          "path": "lib/app/pose_model.dart",
+          "sha256": "f1379550864dd94d7908d368c151ddd735775f12d36bf45216636b0ea3d1c1e3"
+        },
+        {
+          "path": "packages/ostinato_posture/lib/src/evaluator.dart",
+          "sha256": "65fb132f6c8c7e7c55951759e1bdf06a09467ad0612df5227605cfa6b597e346"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/pitch/guitar_pitch_observer.dart",
+          "sha256": "0c7b0dcaa4b105f2c793a7fa28b2469b1ed6274208201a486e01b97cc43f2e8f"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/harmony/chord_detector.dart",
+          "sha256": "a2f4dc225fcf5caa763614ec2938b24e95fb6fbb48dc67040002275530b4ded7"
+        }
+      ],
+      "next_operation": "Human teaching demonstration and annotation → exact pinned extraction/DSP replay → reference/rule calibration candidate → heldout evaluation → real-device parity. No runtime promotion in this change.",
+      "acceptance_gap": "Physical teaching/rights/learner and device evidence open; no first-party capture supplied. Instrument-specific written content does not establish accepted note/technique feedback for this instrument.",
+      "first_party_data_received": false,
+      "trained": false,
+      "physical_or_device_validated": false
+    },
+    {
+      "app": "ostinato",
+      "area": "bass",
+      "title": "Bas",
+      "courses": [
+        {
+          "path": "assets/content/bass_beginner.v1.json",
+          "id": "bass.beginner",
+          "version": 1,
+          "units": 18,
+          "sha256": "3cc61af85ab350d67e65a207335cb83fc910ab9774def12c86d170500d7551fe",
+          "bytes": 44282,
+          "lesson_ids": [
+            "bass-01",
+            "bass-02",
+            "bass-03",
+            "bass-04",
+            "bass-05",
+            "bass-06",
+            "bass-07",
+            "bass-08",
+            "bass-09",
+            "bass-10",
+            "bass-11",
+            "bass-12",
+            "bass-13",
+            "bass-14",
+            "bass-15",
+            "bass-16",
+            "bass-17",
+            "bass-18"
+          ]
+        }
+      ],
+      "current_baseline": "7a91f3cc39ebf527ead983be410d826ee171c4e2",
+      "existing_architecture": "Existing body-pose posture plus deterministic FFT/pitch/chord/onset/timing, not a learned audio backbone. Use synchronized original audio/human note and onset labels for DSP/drill calibration. Body pose cannot resolve finger articulation/key contact; new hand/instrument recognition requires a separate design and dataset.",
+      "source_references": [
+        {
+          "path": "lib/app/pose_model.dart",
+          "sha256": "f1379550864dd94d7908d368c151ddd735775f12d36bf45216636b0ea3d1c1e3"
+        },
+        {
+          "path": "packages/ostinato_posture/lib/src/evaluator.dart",
+          "sha256": "65fb132f6c8c7e7c55951759e1bdf06a09467ad0612df5227605cfa6b597e346"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/pitch/guitar_pitch_observer.dart",
+          "sha256": "0c7b0dcaa4b105f2c793a7fa28b2469b1ed6274208201a486e01b97cc43f2e8f"
+        },
+        {
+          "path": "packages/ostinato_audio/lib/src/harmony/chord_detector.dart",
+          "sha256": "a2f4dc225fcf5caa763614ec2938b24e95fb6fbb48dc67040002275530b4ded7"
+        }
+      ],
+      "next_operation": "Human teaching demonstration and annotation → exact pinned extraction/DSP replay → reference/rule calibration candidate → heldout evaluation → real-device parity. No runtime promotion in this change.",
+      "acceptance_gap": "Physical teaching/rights/learner and device evidence open; no first-party capture supplied. Instrument-specific written content does not establish accepted note/technique feedback for this instrument.",
+      "first_party_data_received": false,
+      "trained": false,
+      "physical_or_device_validated": false
+    }
+  ],
+  "inference_checks": {
+    "ostinato-audio": {
+      "exit_code": 0,
+      "cwd": "/Users/mustafakaankocak/Developer/YULAlab-AI/ventures/ostinato/app/packages/ostinato_audio",
+      "tests": [
+        "pitch_test.dart",
+        "onset_register_test.dart",
+        "chord_detector_test.dart",
+        "guitar_pitch_observer_test.dart",
+        "guitar_single_note_evaluator_test.dart",
+        "guitar_chord_drill_evaluator_test.dart"
+      ],
+      "log": "ostinato-audio-inference.log",
+      "dependency_resolution": "existing engine package config; direct VM test runner, no pub command/network",
+      "scope": "logic/recorded fixture replay only; not first-party training, native or physical acceptance"
+    },
+    "ostinato-posture": {
+      "exit_code": 0,
+      "cwd": "/Users/mustafakaankocak/Developer/YULAlab-AI/ventures/ostinato/app/packages/ostinato_posture",
+      "tests": [
+        "evaluator_test.dart"
+      ],
+      "log": "ostinato-posture-inference.log",
+      "dependency_resolution": "existing engine package config; direct VM test runner, no pub command/network",
+      "scope": "logic/recorded fixture replay only; not first-party training, native or physical acceptance"
+    }
+  },
+  "first_party_data_received": false,
+  "new_model_training": false,
+  "device_validation_completed": false,
+  "runtime_model_rules_or_pins_changed": false,
+  "large_changes": [
+    "Gravita three dedicated missing course/variant definitions",
+    "Lissom yoga-course pose/transition assessment",
+    "JabLab other-discipline live recognition",
+    "Ostinato finger/key/contact or broader instrument-specific feedback",
+    "Choreia all-style choreography/physical support recognition",
+    "Existing extract_landmarks.py timestamps are frame-index/fps, not original variable-rate PTS: intake blocks VFR timing calibration until a compatible PTS-preserving extractor proposal is accepted. No timestamp rewrite in this change."
+  ]
+}
