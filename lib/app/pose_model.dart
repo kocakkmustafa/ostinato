@@ -12,10 +12,11 @@
 library;
 
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+
+import 'inference_manifest.dart';
 
 final class PoseModelPin {
   const PoseModelPin._();
@@ -23,27 +24,59 @@ final class PoseModelPin {
   /// Flutter asset yolu. Dosya git'te **DEĞİL** (aile kuralı: `.task`
   /// ikilileri izlenmez, `.gitignore`) — `tool/fetch_pose_model.sh` indirir
   /// ya da aile hattından kopyalar ve SHA-256'yı DOĞRULAR.
-  static const String assetPath =
-      'assets/models/pose_landmarker_full.v1.task';
+  static const String assetPath = InferenceManifest.poseModelPath;
 
   /// Zarfa damgalanan kimlik.
-  static const String modelId = 'pose_landmarker_full/float16/1';
+  static const String modelId = InferenceManifest.poseModelId;
 
   /// Kanonik hash (varyant `full`, sürüm `1`) — fetch betiğiyle AYNI.
-  static const String sha256 =
-      '5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1';
+  static const String sha256 = InferenceManifest.poseModelSha256;
 
   /// Asset'i uygulama-özel bir dosyaya yazar — plugin bundle DEĞİL bir YOL
-  /// ister (Gravita `_modelPath()` deseni). Dosya zaten varsa yeniden
-  /// yazılmaz. TEK yer: `CameraPoseSource` + Kurulum Kontrolü kamera probu
+  /// ister (Gravita `_modelPath()` deseni). Dosya içerik hashine göre ayrılır ve her açılışta
+  /// doğrulanır. TEK yer: `CameraPoseSource` + Kurulum Kontrolü kamera probu
   /// bunu paylaşır, ikisi ayrı ayrı yazmaz.
   static Future<String> resolveFilePath() async {
-    final Directory dir = await getApplicationSupportDirectory();
-    final File f = File('${dir.path}/${assetPath.split('/').last}');
-    if (!await f.exists()) {
-      final ByteData data = await rootBundle.load(assetPath);
-      await f.writeAsBytes(data.buffer.asUint8List(), flush: true);
-    }
-    return f.path;
+    final manifest = await InferenceManifest.load();
+    await manifest.postureReference.readVerified(rootBundle);
+    return resolveVerifiedModelFile(
+      artifact: manifest.poseModel,
+      directory: await getApplicationSupportDirectory(),
+      bundle: rootBundle,
+    );
   }
+}
+
+/// Content-addressed model cache: every returned file is verified. A corrupt
+/// file is retained for diagnosis and refused; it is never silently activated.
+/// Different release hashes occupy different paths, so rollback uses its own
+/// bundled bytes instead of a previous release's mutable filename.
+Future<String> resolveVerifiedModelFile({
+  required RuntimeArtifact artifact,
+  required Directory directory,
+  required AssetBundle bundle,
+}) async {
+  final file = File('${directory.path}/pose-${artifact.sha256}.task');
+  if (await file.exists()) {
+    if (!artifact.matches(await file.readAsBytes())) {
+      throw const FormatException('Cached pose model hash mismatch');
+    }
+    return file.path;
+  }
+  final bytes = await artifact.readVerified(bundle);
+  await directory.create(recursive: true);
+  // A separate temporary file prevents partial writes from becoming active.
+  final temporary = await directory.createTemp('.ostinato-model-');
+  final candidate = File('${temporary.path}/verified.task');
+  try {
+    await candidate.writeAsBytes(bytes, flush: true);
+    if (!artifact.matches(await candidate.readAsBytes())) {
+      throw const FormatException('Written pose model hash mismatch');
+    }
+    await candidate.rename(file.path);
+  } finally {
+    // Only this function's new temporary directory is removed.
+    await temporary.delete(recursive: true);
+  }
+  return file.path;
 }

@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:ostinato_audio/ostinato_audio.dart';
 
 import 'audio_input_controller.dart';
+import 'audio_continuity.dart';
+import '../inference_manifest.dart';
 import 'audio_capture_channel.dart';
 import 'practice_audio_root.dart';
 
@@ -66,15 +68,17 @@ final class GuitarObservationConfig {
       staleMs,
       initialSampleRate;
   late final Set<int> supportedSampleRates;
-  static Future<GuitarObservationConfig> load() async =>
-      GuitarObservationConfig.fromJson(
-        jsonDecode(
-              await rootBundle.loadString(
-                'assets/config/guitar-observation.v1.json',
-              ),
-            )
-            as Map<String, dynamic>,
-      );
+  static Future<GuitarObservationConfig> load() async {
+    final manifest = await InferenceManifest.load();
+    if (manifest.capability('guitar.singleNote') !=
+        InferenceCapability.approximate) {
+      throw const FormatException('Guitar observation unavailable');
+    }
+    final bytes = await manifest.guitarObservation.readVerified(rootBundle);
+    return GuitarObservationConfig.fromJson(
+      jsonDecode(utf8.decode(bytes)) as Map<String, dynamic>,
+    );
+  }
 }
 
 enum NoteObservationPhase {
@@ -124,6 +128,7 @@ final class GuitarNoteObservationController extends ChangeNotifier {
   StreamSubscription<AudioChunk>? _chunks;
   StreamSubscription<AudioSurfaceState>? _status;
   final List<double> _window = [];
+  final _continuity = AudioContinuity();
   final List<double> _floorLevels = [];
   Timer? _stale, _pendingStale, _routeResolveTimer;
   int _analysisToken = 0;
@@ -133,7 +138,7 @@ final class GuitarNoteObservationController extends ChangeNotifier {
   Future<void>? _sourceClosing;
   NoteObservationPhase? _terminalStopPhase;
   int _epoch = 0, _calibrationSamples = 0;
-  int? _rate, _lastAnalysisUs;
+  int? _lastAnalysisUs;
   double? _floor;
   bool _active = false, _disposed = false, _sourceCloseFailed = false;
   AudioRoute _route = AudioRoute.unknown;
@@ -202,8 +207,8 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     _floorLevels.clear();
     _floor = null;
     _calibrationSamples = 0;
-    _rate = null;
     _lastAnalysisUs = null;
+    _continuity.reset();
     _stale?.cancel();
     _pendingStale?.cancel();
     _routeResolveTimer?.cancel();
@@ -362,15 +367,33 @@ final class GuitarNoteObservationController extends ChangeNotifier {
       _closeCaptureWithStatus(NoteObservationPhase.unavailable);
       return;
     }
-    if (_rate != null && _rate != chunk.sampleRate) {
+    if (chunk.clockDomain != AudioClockDomain.monotonic) {
+      _closeCaptureWithStatus(NoteObservationPhase.unavailable);
+      return;
+    }
+    final continuity = _continuity.observe(
+      startUs: chunk.tStartUs,
+      sampleRate: chunk.sampleRate,
+      sampleCount: chunk.samples.length,
+    );
+    if (continuity == AudioContinuityResult.invalid) {
+      _closeCaptureWithStatus(NoteObservationPhase.unavailable);
+      return;
+    }
+    if (continuity == AudioContinuityResult.recalibrate) {
       if (_runningJobId != null) {
         _closeCaptureWithStatus(NoteObservationPhase.analysisSettling);
         return;
       }
       _clear();
       phase = NoteObservationPhase.calibrating;
+      _continuity.observe(
+        startUs: chunk.tStartUs,
+        sampleRate: chunk.sampleRate,
+        sampleCount: chunk.samples.length,
+      );
+      _notify();
     }
-    _rate = chunk.sampleRate;
     if (_floor == null) {
       final rms = math.sqrt(
         chunk.samples.fold<double>(0, (a, v) => a + v * v) /

@@ -8,6 +8,7 @@ import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import 'course_screen.dart';
+import 'feedback_availability.dart';
 import 'guitar_journey_screen.dart';
 import 'piano_beginner_screen.dart';
 
@@ -75,6 +76,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    FeedbackAvailability(instrumentId: discipline.id),
                     GlassCard(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,10 +97,10 @@ class InstrumentScreenRoute extends StatelessWidget {
                           const SizedBox(height: 10),
                           _HonestyRow(
                               text: localized(context,
-                                  'Recorded teaching examples provide posture references. '
-                                  'They are not a measurement of your practice.',
-                                  'Kaydedilmiş eğitim örnekleri duruş referansı sunar. '
-                                  'Bunlar senin çalışmanın ölçümü değildir.'),
+                                  'These notes describe historical posture references. '
+                                  'Playable teaching demonstrations are not included.',
+                                  'Bu notlar tarihsel duruş referanslarını açıklar. '
+                                  'Oynatılabilir öğretim gösterimleri eklenmedi.'),
                               filled: true),
                           const SizedBox(height: 6),
                           const Divider(height: 1),

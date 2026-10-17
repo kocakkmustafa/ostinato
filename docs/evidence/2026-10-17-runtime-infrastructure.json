@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_RUNTIME_INFRASTRUCTURE_HOST_ACCEPTANCE; PHYSICAL_AND_RELEASE_GATES_OPEN",
+  "sourceBase": "add4c92379959ec9741f518d526181fa6c5dc2b2",
+  "sharedCoreEdited": false,
+  "runtimeDependenciesChanged": false,
+  "modelWeightsChanged": false,
+  "trainingStarted": false,
+  "manifest": {
+    "path": "assets/config/inference-manifest.v1.json",
+    "sha256": "031fd0584030ba2dbec5b2a25cbf1cf20b8f6d37c4c16d5336af7061133bb690",
+    "activation": "Bundled, code-pinned schema/provider API/input schema and artifact hashes. No runtime download or remote activation."
+  },
+  "changes": [
+    "Verify bundled pose model and posture reference before native camera start. Use content-addressed cache and verify existing bytes; refuse corrupt cache, preserve legacy file. Atomic write of bundled bytes only. Different release hashes allow safe app-release rollback.",
+    "Verify guitar observation config against the same activation root. Unsupported instruments and closed posture scoring cannot be enabled by manifest flags alone.",
+    "Reject duplicate/reversed/negative audio timestamps and unknown clock domains. Clear old samples and calibration on a gap or sample-rate change; pending analysis is settled without accepting stale results.",
+    "Show feedback availability in instrument routes and all four directly reachable starter courses; preserve written lesson access and self-recorded progress."
+  ],
+  "softwareVerification": {
+    "distinctHostWidgetCases": 186,
+    "groups": [
+      {
+        "files": [
+          "inference_manifest_test.dart",
+          "audio_continuity_test.dart",
+          "feedback_availability_test.dart",
+          "audio_input_lifecycle_test.dart",
+          "guitar_note_observation_test.dart",
+          "release_reference_copy_test.dart"
+        ],
+        "firstRunPassed": 90,
+        "laterManifestLegacyCaseAdded": 1,
+        "modelAudioFinalPassed": 44,
+        "notes": "Later final model/audio run replaces affected cases; not added again."
+      },
+      {
+        "files": [
+          "feedback_availability_test.dart",
+          "full_flow_test.dart",
+          "guitar_progress_revision_test.dart",
+          "account_boundary_test.dart",
+          "guitar_lesson_media_slot_test.dart",
+          "reachable_screens_test.dart"
+        ],
+        "passed": 29,
+        "overlapWithFirstGroup": 12
+      },
+      {
+        "files": [
+          "piano_beginner_test.dart",
+          "ukulele_beginner_test.dart",
+          "bass_beginner_test.dart",
+          "vocal_beginner_test.dart"
+        ],
+        "passed": 78,
+        "overlap": 0
+      }
+    ],
+    "countMethod": "90 + 1 new legacy cache case + (29 - 12 overlapping feedback cases) + 78 = 186; reruns are replacements, not additional acceptance."
+  },
+  "bounds": {
+    "timestampJitterUs": 20000,
+    "timestampToleranceMeaning": "Software continuity buffer guard for estimated Android read timestamps, not AV synchronization or a measured physical acceptance tolerance.",
+    "rawAudioVideoLandmarksWrittenOrUploadedByNewCode": false,
+    "newTestFixtures": "Only test/*.dart; synthetic byte arrays, fake channels and timestamped PCM. No physical inference or teaching result.",
+    "pianoHandKeyboardContract": "Proposed piano.beginner/piano-05 right hand C4-G4 HandSource + calibrated KeyboardMap + independent clock binding. User decision pending; adapter/provider not implemented or enabled in this commit.",
+    "firstPartyDemonstrationsReceived": false,
+    "shippingLessonMediaCatalog": "Empty; no fake or historical asset represented as delivered demonstration.",
+    "modelAccuracyExpertDeviceAcceptance": "OPEN_AFTER_TRAINING",
+    "realAccountSubscriptionRestore": "OPEN; host isolation is synthetic. Sales and paid camera remain disabled.",
+    "signedCurrentSourcePackage": "NOT_BUILT; separate explicit user approval required after prior heavy-build denial.",
+    "storeUpload": "Not authorized; first three groups and final user release decision remain open."
+  },
+  "futureModelUpdate": [
+    "Freeze task definitions, independent data labels and validation thresholds before holdout; use the existing Core intake/split/test-open tooling.",
+    "Select and implement the real provider and schema; bind exact model/config/calibration hashes and scoped tasks. Update bundled manifest and code pin together in a new app release.",
+    "Keep unsupported/calibrationRequired/unobservable states when input or evidence is missing. No automatic lesson mastery or finger pressure/physical-contact claim.",
+    "Run isolated software rejection/lifecycle tests, then source-bound physical audio/camera/device and independent expert/data acceptance. Only those results can change the real capability gate."
+  ],
+  "sharedProviderContractReview": {
+    "coreHead": "a9b9f2c120024a6822452b1d963ebb6cbe51c302",
+    "currentConsumerPin": "ef60e346934d7e5d45c87deb81583b263575b208",
+    "pinChanged": false,
+    "migration": "Optional shared contract read-only reviewed. App activation verifies actual bytes; it does not assert validated accuracy. A planned future pin adoption must map unsupported/releaseClosed conservatively and require independent reviewed acceptance."
+  }
+}

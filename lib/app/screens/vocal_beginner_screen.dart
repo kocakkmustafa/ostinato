@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_locale.dart';
+import 'feedback_availability.dart';
 import '../vocal_beginner.dart';
 import 'vocal_diagrams.dart';
 
@@ -85,6 +86,7 @@ class _VocalBeginnerScreenState extends State<VocalBeginnerScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
+            const FeedbackAvailability(instrumentId: 'voice'),
             Text(course.entry.of(context)),
             const SizedBox(height: 16),
             Text(course.exit.of(context)),

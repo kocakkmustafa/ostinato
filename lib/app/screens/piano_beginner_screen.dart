@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_locale.dart';
+import 'feedback_availability.dart';
 import '../piano_beginner.dart';
 import 'piano_notation.dart';
 import 'piano_visual_practice_screen.dart';
@@ -86,6 +87,7 @@ class _PianoBeginnerScreenState extends State<PianoBeginnerScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
+            const FeedbackAvailability(instrumentId: 'piano'),
             Text(course.entry.of(context)),
             const SizedBox(height: 16),
             Text(course.exit.of(context)),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_locale.dart';
+import 'feedback_availability.dart';
 import '../bass_beginner.dart';
 import 'bass_diagrams.dart';
 
@@ -81,6 +82,7 @@ class _BassBeginnerScreenState extends State<BassBeginnerScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
+            const FeedbackAvailability(instrumentId: 'bass'),
             Text(course.entry.of(context)),
             const SizedBox(height: 16),
             Text(course.exit.of(context)),

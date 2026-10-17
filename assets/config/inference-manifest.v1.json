@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "revision": "ostinato.inference.2026-10-17.1",
+  "providerApiVersion": 1,
+  "poseProvider": "motion_camera.pose_landmarker",
+  "poseInputSchema": "pose33.normalized_image.v1",
+  "poseModel": {
+    "id": "pose_landmarker_full/float16/1",
+    "path": "assets/models/pose_landmarker_full.v1.task",
+    "sha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1"
+  },
+  "postureReference": {
+    "id": "ostinato.posture-reference.v1",
+    "path": "assets/config/posture-contract.json",
+    "sha256": "f973f33bdf3910805c037b2f6fe462e4b02664c336a4812326cff75db7abea9c"
+  },
+  "guitarObservation": {
+    "id": "guitar-observation.v1",
+    "path": "assets/config/guitar-observation.v1.json",
+    "sha256": "9a80a7e607ac1151f98544122e23ea9cb3bfaf605b30f355818db7a85bb4b832"
+  },
+  "capabilities": {
+    "guitar.singleNote": "approximate",
+    "body.posture": "releaseClosed",
+    "piano.fingerKey": "unsupported",
+    "ukulele.singleNote": "unsupported",
+    "bass.singleNote": "unsupported",
+    "voice.pitch": "unsupported"
+  }
+}

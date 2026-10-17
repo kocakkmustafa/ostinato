@@ -123,6 +123,7 @@ flutter:
     # ve validate_library kapıları). Kabuk sayı taşımaz, okur.
     - assets/config/posture-contract.json
     - assets/config/audio-contract.json
+    - assets/config/inference-manifest.v1.json
     - assets/content/library.json
     - assets/content/guitar_journey.v1.json
     - assets/content/piano_beginner.v1.json

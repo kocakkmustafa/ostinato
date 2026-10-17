@@ -6,6 +6,7 @@ import 'package:ostinato_audio/ostinato_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'audio_capture_channel.dart';
+import 'audio_continuity.dart';
 import 'audio_route_state.dart';
 import 'practice_audio_root.dart';
 
@@ -114,6 +115,7 @@ final class AudioInputController implements AudioSource {
 
   final AudioCaptureChannel _channel;
   final AudioRingBuffer _ring;
+  final _continuity = AudioContinuity();
   final Duration _nativeCallTimeout;
   final Future<PermissionStatus> Function() _requestPermission;
   final _chunks = StreamController<AudioChunk>.broadcast();
@@ -133,7 +135,6 @@ final class AudioInputController implements AudioSource {
   bool _closeReadbackAfterLatch = false;
   final Set<void Function()> _cancelCloseReadbacks = {};
   int _epoch = 0;
-  int? _sampleRate;
   AudioRoute _route = AudioRoute.unknown;
 
   @override
@@ -434,7 +435,6 @@ final class AudioInputController implements AudioSource {
     final epoch = ++_epoch;
     _starting = true;
     _route = AudioRoute.unknown;
-    _sampleRate = null;
     _lifecycle = AudioLifecycleObserver(
       onBackground: () => _stopAfterLifecycle(),
       onInactive: () {
@@ -565,11 +565,20 @@ final class AudioInputController implements AudioSource {
           _stopAfterLifecycle(announce: false);
           return;
         }
-        if (_sampleRate != null && _sampleRate != sampleRate) {
+        final continuity = _continuity.observe(
+          startUs: tNativeUs,
+          sampleRate: sampleRate,
+          sampleCount: samples.length,
+        );
+        if (continuity == AudioContinuityResult.invalid) {
+          _emit(const AudioSetupFailed('invalid_audio_clock'));
+          _stopAfterLifecycle(announce: false);
+          return;
+        }
+        if (continuity == AudioContinuityResult.recalibrate) {
           _ring.clear();
           _emit(AudioCalibrating(_route));
         }
-        _sampleRate = sampleRate;
         _ring.push(samples);
         _chunks.add(
           AudioChunk(
@@ -581,8 +590,8 @@ final class AudioInputController implements AudioSource {
         );
       case RawRouteChangedEvent(:final platformRouteTag):
         _route = mapPlatformRouteTag(platformRouteTag);
+        _continuity.reset();
         _ring.clear();
-        _sampleRate = null;
         if (_running) _emit(AudioCalibrating(_route));
       case RawInterruptedEvent(:final reason):
         _emit(AudioSetupFailed(reason));
@@ -625,7 +634,7 @@ final class AudioInputController implements AudioSource {
     final hadConnection = _channelConnected;
     _channelConnected = false;
     _ring.clear();
-    _sampleRate = null;
+    _continuity.reset();
     // Keep the old owner and an explicit-retry handle before any await. Native
     // stop is invoked directly, outside the start/prepare logical wait.
     _AudioCloseLatch? latch;
