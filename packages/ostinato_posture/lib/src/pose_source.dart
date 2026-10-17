@@ -10,7 +10,9 @@ final class PoseFrame {
   /// Monotonik saat damgası (motion_core sözleşmesi).
   final int tUs;
 
-  /// Gövde eğimi, DERECE, `world` uzayında. `null` = kişi görünmüyor.
+  /// Gövde eğimi, DERECE; CameraPostureAdapter'ın en-boy düzeltmeli
+  /// görüntü düzlemindeki 2B ölçümü. Metrik 3B `world` açısı değildir.
+  /// `null` = görünür/güvenilir gövde ölçümü yok.
   /// Bunu 0 ile doldurmak, görünmeyen bir kişiyi "dimdik oturuyor" diye
   /// raporlamak olurdu (J-056 sınıfı: çöp-ölçüm-gibi).
   final double? trunkTiltDeg;
