@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "status": "APPROVED_APP_ADAPTER_IMPLEMENTED; PRODUCTION_HAND_SOURCE_UNSUPPORTED",
+  "sourceBase": "377b25b39d898afa3863464e7aaf628770e417ae",
+  "task": {
+    "courseId": "piano.beginner",
+    "lessonId": "piano-05",
+    "physicalHand": "right",
+    "midiNotes": [
+      60,
+      62,
+      64,
+      65,
+      67
+    ],
+    "scope": "Fixed calibrated camera; five adjacent white keys; monophonic onset candidate only"
+  },
+  "approval": {
+    "source": "Direct user response in Ostinato project thread",
+    "answer": "Bu sözleşmeyle uygula",
+    "scope": "Separate HandSource, calibrated KeyboardMap, independent clock binding; local adapter and synthetic tests only. No real tracker/training/fee. At most contactCandidate, never verified contact/mastery."
+  },
+  "implemented": [
+    "21-point HandSource/HandFrame identity and actual hand, capture/camera/clock/rotation/mirror binding; replay provenance retained",
+    "Versioned convex five-key KeyboardMap with geometry/confidence/provider binding; changed context invalidates calibration",
+    "Separate versioned hand/audio clock binding, explicit calibration tolerances and validity; monophonic independent onset/visible finger matching; one onset not repeatedly consumed",
+    "unsupported/calibrationRequired/unobservable/hover/contactCandidate results; no force, verified-contact, score or progress fields",
+    "Subscription/session start-stop bridge: retirement clears cached onset, drains pending start, drops late frames/errors, and never resumes capture automatically",
+    "Production factory fixed to UnsupportedHandSource; no runtime replay toggle, tracker/model download or camera acquisition; piano-05 shows an explicit support notice"
+  ],
+  "acceptance": {
+    "newIsolatedSyntheticCases": 43,
+    "existingPianoCourseCases": 21,
+    "distinctAcrossThisTaskIncludingPreviousPhase": 229,
+    "countMethod": "Previous 186 unique host/widget cases + 43 new adapter cases. The 21 piano course cases were rerun for changed lesson UI and are not counted again.",
+    "analyzer": "PASS",
+    "surfaceHonesty": "PASS",
+    "fixtureProvenance": "ReplayHandSource and synthetic landmarks/PCM event labels live only in test/piano_hand_adapter_test.dart. No real performer, phone microphone, model inference or teacher approval."
+  },
+  "limits": [
+    "Calibration id/hash fields are declaration bindings, not authenticity or accuracy proofs. Future real provider must verify actual artifact bytes via the activation root and separately reviewed acceptance.",
+    "No shipping hand model, native camera/audio synchronization path or calibration map is enabled. Current inference manifest correctly leaves piano.fingerKey unsupported.",
+    "Source close is a software barrier and not physical camera-release attestation. A real native provider requires owned cancellation/release/device acceptance before activation.",
+    "No demonstration delivered or teaching/physical accuracy accepted; training remains deferred. Full teaching target unchanged.",
+    "Shared Core and consumer dependency pins unchanged. Optional a9b9f2c contract adoption remains a planned future pin update, not an implied migration.",
+    "No new signed package, native build, store write/upload, paid CI/deploy, new credential or external service call."
+  ]
+}

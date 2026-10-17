@@ -4,6 +4,7 @@ import '../app_locale.dart';
 import 'feedback_availability.dart';
 import '../piano_beginner.dart';
 import 'piano_notation.dart';
+import 'piano_hand_support_notice.dart';
 import 'piano_visual_practice_screen.dart';
 
 /// Written practice only. No sensor, entitlement, progress or audio acquisition.
@@ -136,6 +137,10 @@ class _PianoLessonScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          if (index == 4) ...[
+            const PianoHandSupportNotice(),
+            const SizedBox(height: 16),
+          ],
           for (var i = 0; i < 4; i++) ...[
             Semantics(
               header: true,
