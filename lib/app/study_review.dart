@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'app_locale.dart';
+import 'screens/piano_beginner_screen.dart';
+import 'screens/vocal_beginner_screen.dart';
+import 'screens/ukulele_beginner_screen.dart';
+import 'screens/bass_beginner_screen.dart';
 
 import 'study_review_content.dart';
 
@@ -34,6 +38,14 @@ class StudyReviewEntry extends StatelessWidget {
 class StudyReviewPage extends StatelessWidget {
   const StudyReviewPage({super.key});
 
+  Widget _course(String area) => switch (area) {
+    'piano' => const PianoBeginnerScreen(),
+    'vocal' => const VocalBeginnerScreen(),
+    'ukulele' => const UkuleleBeginnerScreen(),
+    'bass' => const BassBeginnerScreen(),
+    _ => throw ArgumentError.value(area),
+  };
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
@@ -60,6 +72,14 @@ class StudyReviewPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(area.boundary.inContext(context)),
+                TextButton.icon(
+                  key: Key('study-course-${area.id}'),
+                  icon: const Icon(Icons.menu_book_outlined),
+                  label: Text(_text(context, 'Open existing written course', 'Mevcut yazılı kursu aç')),
+                  onPressed: () => Navigator.of(context).push<void>(
+                    MaterialPageRoute<void>(builder: (_) => _course(area.id)),
+                  ),
+                ),
                 for (final RecallLesson lesson in area.lessons)
                   ListTile(
                     key: Key('study-lesson-${lesson.id}'),

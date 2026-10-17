@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-17",
+  "baseline_sha": "98c3aae6e8b460e835a35d9d00b8befc98c03154",
+  "scope": "Only written-recall to existing course/symbolic-aid navigation. No course content, rules, sensors, Core pins, production media catalog, entitlements or native package changed.",
+  "areas": [
+    {
+      "project": "ostinato",
+      "area": "Gitar",
+      "courses": [
+        {
+          "path": "assets/content/guitar_journey.v1.json",
+          "id": "guitar.journey",
+          "version": 1,
+          "units": 60,
+          "sha256": "bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18",
+          "bytes": 995884
+        }
+      ],
+      "dedicated_beginner_course_present": true,
+      "source_native_diagrams": [],
+      "remaining_acceptance": "60 ders; gerçek gitar/ses, perde/akor/onset ve fiziksel öğretim kabulü açık. Paketli gerçek gösterim ve uzman-öğrenci kabulü ayrı gerekir.",
+      "full_physical_curriculum_acceptance": "NOT_ESTABLISHED",
+      "expert_or_learner_physical_validation_this_run": "UNRUN",
+      "shipping_playable_demonstrations": 0
+    },
+    {
+      "project": "ostinato",
+      "area": "Piyano/klavye",
+      "courses": [
+        {
+          "path": "assets/content/piano_beginner.v1.json",
+          "id": "piano.beginner",
+          "version": 1,
+          "units": 16,
+          "sha256": "c714a5d8be7a98b62104044eaec2ec33bcd83e775915246e65c3a3d98cbdbce7",
+          "bytes": 27012
+        }
+      ],
+      "dedicated_beginner_course_present": true,
+      "source_native_diagrams": [
+        {
+          "path": "lib/app/screens/piano_notation.dart",
+          "sha256": "f53e02bcb06dbc6fb4c65d82f839998fdd1f591f9842533d7baa3a10bf2f31de"
+        }
+      ],
+      "remaining_acceptance": "16 yazılı ders; nota/klavye çizimleri ve görsel pratik gerçek ses/tuşe/bedensel öğretim değildir. Paketli gerçek gösterim ve uzman-öğrenci kabulü ayrı gerekir.",
+      "full_physical_curriculum_acceptance": "NOT_ESTABLISHED",
+      "expert_or_learner_physical_validation_this_run": "UNRUN",
+      "shipping_playable_demonstrations": 0
+    },
+    {
+      "project": "ostinato",
+      "area": "Vokal",
+      "courses": [
+        {
+          "path": "assets/content/vocal_beginner.v1.json",
+          "id": "voice.beginner.written",
+          "version": 1,
+          "units": 16,
+          "sha256": "5564e76bdd97740d14c15d396c7e9916fd2943982c7418d87737cf64b84b78e5",
+          "bytes": 40015
+        }
+      ],
+      "dedicated_beginner_course_present": true,
+      "source_native_diagrams": [],
+      "remaining_acceptance": "16 yazılı ders; kişisel perde yönü, gerçek ses ve uygunluk/öğretmen değerlendirmesi açık. Paketli gerçek gösterim ve uzman-öğrenci kabulü ayrı gerekir.",
+      "full_physical_curriculum_acceptance": "NOT_ESTABLISHED",
+      "expert_or_learner_physical_validation_this_run": "UNRUN",
+      "shipping_playable_demonstrations": 0
+    },
+    {
+      "project": "ostinato",
+      "area": "Ukulele",
+      "courses": [
+        {
+          "path": "assets/content/ukulele_beginner.v1.json",
+          "id": "ukulele.beginner",
+          "version": 1,
+          "units": 18,
+          "sha256": "181095def47ae1ab8c8a930ef2668d44dc4eca2f6a640458398bd8b49cef0126",
+          "bytes": 42209
+        }
+      ],
+      "dedicated_beginner_course_present": true,
+      "source_native_diagrams": [
+        {
+          "path": "lib/app/screens/ukulele_diagrams.dart",
+          "sha256": "4bebab104e945ac05e25ef146f5e5b49d87e2afb80391b68ef265ebc432f4422"
+        }
+      ],
+      "remaining_acceptance": "18 yazılı ders; yalnız high-G GCEA. Gerçek akort/temiz ses/çalışma gözlemi açık. Paketli gerçek gösterim ve uzman-öğrenci kabulü ayrı gerekir.",
+      "full_physical_curriculum_acceptance": "NOT_ESTABLISHED",
+      "expert_or_learner_physical_validation_this_run": "UNRUN",
+      "shipping_playable_demonstrations": 0
+    },
+    {
+      "project": "ostinato",
+      "area": "Bas",
+      "courses": [
+        {
+          "path": "assets/content/bass_beginner.v1.json",
+          "id": "bass.beginner",
+          "version": 1,
+          "units": 18,
+          "sha256": "3cc61af85ab350d67e65a207335cb83fc910ab9774def12c86d170500d7551fe",
+          "bytes": 44282
+        }
+      ],
+      "dedicated_beginner_course_present": true,
+      "source_native_diagrams": [],
+      "remaining_acceptance": "18 yazılı ders; dört telli EADG. Gerçek susturma/ses/tuşe öğretim kabulü açık. Paketli gerçek gösterim ve uzman-öğrenci kabulü ayrı gerekir.",
+      "full_physical_curriculum_acceptance": "NOT_ESTABLISHED",
+      "expert_or_learner_physical_validation_this_run": "UNRUN",
+      "shipping_playable_demonstrations": 0
+    }
+  ],
+  "source_media_rights_or_expert_approval_added": false,
+  "verification": {
+    "new_link_tests": 2,
+    "existing_regression_tests": 8,
+    "passed": 10,
+    "accepted_logs": [
+      "ostinato-links-tests-complete.log"
+    ],
+    "analyze": "ostinato-analyze.log",
+    "existing_regression_log": "ostinato-links-tests-initial.log: 8 PASS; overall exit 1 from two new fixture errors later corrected. Existing eight were not needlessly repeated."
+  },
+  "shipping_playable_demonstrations": 0,
+  "release_acceptance": "OPEN",
+  "native_runtime_real_hardware_iap_store": "UNRUN in this change; prior scoped acceptance stays historical.",
+  "changed_behavior": "Recall opens the four actual offline written instrument courses and their real first lessons; Back returns to recall. Existing notation/diagrams remain in those lessons.",
+  "evidence_source_manifest": {
+    "lib/app/study_review.dart": "3770fb17435616e8cbed8d3b81dfe697ad0ed40160760656a1c1214b7d327e16",
+    "test/study_course_links_test.dart": "0679fdda66017ca5263c1f1dc1969b6b99f6607f709a50b9d893946d0db1e8e1"
+  }
+}
