@@ -167,3 +167,25 @@ ayrıca açıklanır.
 Kaynak: [Apple privacy manifest](https://developer.apple.com/documentation/BundleResources/describing-data-use-in-privacy-manifests),
 [Google Play Data safety](https://support.google.com/googleplay/android-developer/answer/10787469),
 [Google Play hesap silme](https://support.google.com/googleplay/android-developer/answer/13327111).
+
+## 2026-10-18 mevcut paket ve herkese açık bağlantı uzlaştırması
+
+`73b05164` kaynağının `1.0.0(4)` Development IPA'sında dokuz privacy manifesti
+bulundu. Uygulamanın altı collected-data türü kaynakla aynıdır; hiçbir manifestte
+tracking veya tracking domain bildirimi yoktur. Required-reason API bildirimleri
+UserDefaults (1C8F.1), FileTimestamp (0A2A.1/C617.1) ve SystemBootTime
+(35F9.1) için ilgili SDK manifestlerinde bulunur. Bu paket okuması çalışma zamanı
+trafik denetimi, Xcode aggregate privacy report veya mağaza formu kabulü değildir.
+
+Aynı gün mevcut privacy ve support URL'leri HTTP200 döndü; privacy sayfasındaki
+`motion-account-deletion` hedefi ve mevcut destek e-posta yolu tekrar görüldü.
+Mesaj gönderilmedi, hesap silinmedi, site veya backend değiştirilmedi. Güncel
+sağlayıcı saklama süreleri ve silme makbuzu/oturum davranışı gerçek hesapta ayrı
+kabul gerektirir; eski günlük örnekleri bu kabul yerine geçmez.
+
+App-local Basic Pitch/GuitarSet araştırma pilotu bu IPA'nın içinde değildir;
+yeni veri toplama/aktarımı, privacy kategorisi veya doğruluk iddiası eklemez.
+Abonelik ve ücretli kamera kapısı kapalı kalır. Restore ve satın alma geçmişi
+kapısı, satış açılan sonraki sürümün sandbox kabulüdür; bu sürüm için başarılı
+IAP işlemi yapılmış gibi işaretlenmez. Reviewer ve store taslak girişi:
+[RELEASE-REVIEW.md](RELEASE-REVIEW.md).

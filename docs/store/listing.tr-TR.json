@@ -4,12 +4,12 @@
     "name": "Ostinato: Müzik Pratiği",
     "subtitle": "Notadan müziğe gitar",
     "promotionalText": "Nota, akor, ritim, melodi ve özgün bitirme çalışmalarıyla gitar öğrenme yolunu keşfet. Kendi hızında çalış, ilerlemeni kaydet.",
-    "keywords": "müzik pratiği,gitar,ses,piyano,duruş,çalgı,referans,çalışma"
+    "keywords": "gitar,müzik,piyano,ukulele,bas,şan,nota,ritim,ders,alıştırma"
   },
   "playStore": {
     "shortDescription": "Sıralı gitar dersleri, özgün alıştırmalar ve cihazda ilerleme kaydı."
   },
-  "description": "Ostinato, 10 modülde 60 özgün Türkçe ve İngilizce gitar dersi sunar. Çalgı kurulumu ve tellerden başlayıp okuma, tek nota, akor, ritim, armoni ve parmak stiline ilerle. İki özgün bitirme çalışması becerilerini birleştirmene yardımcı olur. Her derste açıklama, uygulama, öz denetim ve kolay seçenekler bulunur.\n\nÖzgün metin derslerini oku, uygulama görevlerini takip et, kendi çalışmanı değerlendir ve cihazdaki ders kaydından devam et. Hesabın olmadan kataloğu gezebilir, isteğe bağlı ortak Motion hesabını kullanabilirsin. Hesap; e-posta, hesap kimliği ve eklediysen görünen adını kullanır; uygulamadan hesap silme isteği yapabilirsin. Kurs kayıtları cihazda mevcut konuk veya hesap kapsamında kalır. Ders bitirme ustalık belgesi değildir. Bu içerik hazırlığı sürümünde gösterim videosu bulunmaz.\n\nİsteğe bağlı mikrofon pratiği, izninle cihaz üstünde yaklaşık tek nota gözlemi gösterir; nota doğruluğu veya akor puanı vermez. Ham ses saklanmaz veya yüklenmez. Kurs kendi çalışma kaydını kullanır; kamera duruş puanı ve abonelik satışı açık değildir.",
+  "description": "Ostinato, 10 modülde 60 özgün Türkçe ve İngilizce gitar dersi sunar. Çalgı kurulumu ve tellerden başlayıp okuma, tek nota, akor, ritim, armoni ve parmak stiline ilerle. İki özgün bitirme çalışması becerilerini birleştirmene yardımcı olur. Her derste açıklama, uygulama, öz denetim ve kolay seçenekler bulunur.\n\nEk başlangıç kursları piyano, ukulele, bas ve şan için yazılı çalışma sunar. Bu kurslarda canlı nota, parmak tekniği ve ses doğruluğu geri bildirimi yoktur.\n\nÖzgün metin derslerini oku, uygulama görevlerini takip et, kendi çalışmanı değerlendir ve cihazdaki ders kaydından devam et. Hesabın olmadan kataloğu gezebilir, isteğe bağlı ortak Motion hesabını kullanabilirsin. Hesap; e-posta, hesap kimliği ve eklediysen görünen adını kullanır; uygulamadan hesap silme isteği yapabilirsin. Kurs kayıtları cihazda mevcut konuk veya hesap kapsamında kalır. Ders bitirme ustalık belgesi değildir. Bu içerik hazırlığı sürümünde gösterim videosu bulunmaz.\n\nİsteğe bağlı mikrofon pratiği, izninle cihaz üstünde yaklaşık tek nota gözlemi gösterir; nota doğruluğu veya akor puanı vermez. Ham ses saklanmaz veya yüklenmez. Kurs kendi çalışma kaydını kullanır; kamera duruş puanı ve abonelik satışı açık değildir.",
   "cameraPermissionRationale": {
     "ios": "Ostinato, ders sırasında gövde eğimini eğitmen referans aralığıyla karşılaştırmak için kamerayı kullanır. Video bu cihazda kalır; yüklenmez veya saklanmaz. Kısa oturum özeti cihazda saklanır."
   },
@@ -29,5 +29,20 @@
   "$sourceOfFacts": "Current course: assets/content/guitar_journey.v1.json; its app-local UI and account-scoped practice store. Camera paid-access policy is unchanged. Readback of provider metadata is separate.",
   "$notClaimed": "No independent skill/mastery outcome, physical-phone performance, clinical suitability, camera form grade or approved AI demonstration is asserted. This local content-preparation draft has not been uploaded.",
   "$micClaimWhy": "2026-09-26: Founder approved optional on-device single-guitar-note observation. Explicit Start and OS permission are required. PCM stays in temporary RAM; no raw audio file, upload or automatic restart. iOS/Android native capture and permission declarations exist. The display is approximate note/Hz/cents; no correctness, chord, timing, dB(A) or mastery score. Existing paid-camera gates stay closed. Physical microphone acceptance remains open.",
-  "$shortDescriptionWhy": "Current copy describes the 60-lesson course and optional approximate on-device single-note observation. Raw audio is not saved or uploaded; live physical microphone accuracy is unverified."
+  "$shortDescriptionWhy": "Current copy describes the 60-lesson course and optional approximate on-device single-note observation. Raw audio is not saved or uploaded; live physical microphone accuracy is unverified.",
+  "$releaseReview20261018": {
+    "sourceRuntime": "73b05164a620eba32e2bc928676e009b92b9d336",
+    "courseCounts": {
+      "guitar": 60,
+      "piano": 16,
+      "ukulele": 18,
+      "bass": 18,
+      "voice": 16
+    },
+    "cameraAndSubscriptionSales": false,
+    "modelTrainingPilotInRelease": false,
+    "GuitarSetPrecisionClaimAllowed": false,
+    "reviewGuide": "RELEASE-REVIEW.md",
+    "status": "local_draft_not_provider_write_or_physical_acceptance"
+  }
 }

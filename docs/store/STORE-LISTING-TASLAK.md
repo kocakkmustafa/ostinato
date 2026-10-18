@@ -1,8 +1,12 @@
-# Güncel mağaza metni girişi · 17 Ekim 2026
+# Güncel mağaza metni girişi · 18 Ekim 2026
 
 Yayıma hazırlanacak TR/EN metinlerin kaynağı [listing.json](listing.json) ve
 [listing.tr-TR.json](listing.tr-TR.json) dosyalarıdır. Güncel dar kurs kapsamı
-**60 ders / 10 modül gitar**; kurs varlık kimliği ve hashleri JSON içindeki `$` kaynak notlarındadır.
+**60 ders / 10 modül gitar**; ayrıca piyano16, ukulele18, bas18 ve şan16 yazılı
+başlangıç dersi kaynakta vardır. Bu ek kurslarda canlı nota/teknik doğruluğu
+geribildirimi yoktur. Kurs varlık kimliği ve hashleri JSON kaynak notlarındadır.
+Reviewer adımları, gerçek hesap/restore ayrımı ve paket-privacy uzlaştırması:
+[RELEASE-REVIEW.md](RELEASE-REVIEW.md).
 İsteğe bağlı mikrofonla cihaz üstü yaklaşık tek nota gözlemi vardır; doğruluk/akor puanı, kamera koçluğu veya abonelik satışı vaadi yoktur.
 
 Kurs ilerlemesi kullanıcının kendi çalışma kaydıdır; ustalık veya fiziksel öğretim
