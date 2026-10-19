@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -49,6 +50,28 @@ Future<void> _tap(WidgetTester tester, String text) async {
   await tester.pumpAndSettle();
   await tester.runAsync(() => tester.tap(finder));
   await tester.pump();
+}
+
+Future<void> _tapKey(WidgetTester tester, String key) async {
+  final finder = find.byKey(Key(key));
+  await tester.ensureVisible(finder);
+  await tester.pumpAndSettle();
+  await tester.runAsync(() => tester.tap(finder));
+  await tester.pump();
+}
+
+void _expectRecordingDisabled(WidgetTester tester) {
+  for (final key in [
+    'guitar-progress-viewed',
+    'guitar-progress-practiced',
+    'guitar-progress-completed',
+  ]) {
+    expect(
+      tester.widget<ButtonStyleButton>(find.byKey(Key(key))).onPressed,
+      isNull,
+      reason: '$key must not record unknown progress',
+    );
+  }
 }
 
 GuitarJourneyCourse _course() => GuitarJourneyCourse.fromJson(
@@ -113,7 +136,7 @@ void main() {
     });
 
     testWidgets(
-      'progress retry preserves corrupt bytes then recovers ($locale)',
+      'unreadable progress keeps lessons read-only until a valid retry ($locale)',
       (tester) async {
         final root = Directory.systemTemp.createTempSync('ostinato-recovery-');
         addTearDown(() => root.deleteSync(recursive: true));
@@ -122,11 +145,12 @@ void main() {
         final store = GuitarJourneyProgressStore(
           directoryProvider: () async => root,
         );
+        final course = _course();
         await tester.pumpWidget(
           _app(
             locale,
             GuitarJourneyScreen(
-              initialCourse: _course(),
+              initialCourse: course,
               progressStoreFactory: (_) => store,
             ),
           ),
@@ -134,6 +158,61 @@ void main() {
         final error = tr
             ? 'Yerel ilerlemen okunamadı. Kayıt sıfırlanmadı.'
             : 'Your local progress could not be read. It has not been reset.';
+        await _waitText(tester, error);
+        expect(
+          tester
+              .widget<Text>(find.byKey(const Key('guitar-journey-progress')))
+              .data,
+          tr ? 'İlerleme bilinmiyor' : 'Progress unknown',
+        );
+        expect(find.text(zero), findsNothing);
+        expect(
+          find.text(tr ? '0 / 6 öz beyan' : '0 / 6 self-reported'),
+          findsNothing,
+        );
+        expect(find.text(tr ? 'BAŞLANMADI' : 'NOT STARTED'), findsNothing);
+        expect(find.byKey(const Key('guitar-journey-next')), findsNothing);
+        expect(find.byType(LinearProgressIndicator), findsNothing);
+
+        // This lesson normally gates its body behind session preparation.
+        // Unknown progress must allow reading, without enabling any writer.
+        final lesson = course.lessons[3];
+        await _tapKey(tester, 'guitar-lesson-${lesson.id}');
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(Key('guitar-lesson-title-${lesson.id}')),
+          findsOneWidget,
+        );
+        expect(
+          find.text(tr ? lesson.objective.tr : lesson.objective.en),
+          findsOneWidget,
+        );
+        expect(
+          find.text(
+            tr ? 'Çalışma kaydı: bilinmiyor' : 'Practice entries: unknown',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.text(tr ? 'Çalışma kaydı: 0' : 'Practice entries: 0'),
+          findsNothing,
+        );
+        expect(
+          find.byKey(const Key('guitar-previous-version-completion')),
+          findsNothing,
+        );
+        expect(
+          find.byKey(const Key('guitar-lesson-progress-unavailable')),
+          findsOneWidget,
+        );
+        _expectRecordingDisabled(tester);
+        await _tapKey(tester, 'guitar-session-acknowledge');
+        _expectRecordingDisabled(tester);
+        await _tapKey(tester, 'guitar-session-after-break');
+        _expectRecordingDisabled(tester);
+        expect(file.readAsStringSync(), '{broken guest history');
+        expect(File('${file.path}.tmp').existsSync(), isFalse);
+        await _tapKey(tester, 'guitar-lesson-back');
         await _waitText(tester, error);
         await _tap(tester, retry);
         Object? readFailure;
@@ -165,6 +244,13 @@ void main() {
         file.writeAsStringSync('{"schemaVersion":1,"records":[]}');
         await _tap(tester, retry);
         await _waitText(tester, zero);
+        expect(find.byKey(const Key('guitar-progress-unavailable')), findsNothing);
+        await _tap(tester, tr ? 'Dersi aç' : 'Open lesson');
+        await tester.pumpAndSettle();
+        await _tap(tester, tr ? 'Çalışmayı kaydet' : 'Record practice');
+        await _waitText(tester, tr ? 'Çalışma kaydı: 1' : 'Practice entries: 1');
+        final saved = await tester.runAsync(store.load);
+        expect(saved?.values.single.practiceCount, 1);
         expect(tester.takeException(), isNull);
       },
     );
@@ -217,6 +303,211 @@ void main() {
         accountUserId: '11111111-1111-4111-8111-111111111111',
       );
       expect(await tester.runAsync(otherAccount.load), isEmpty);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
+  testWidgets('pending reload never reuses known progress with the next read', (
+    tester,
+  ) async {
+    final root = Directory.systemTemp.createTempSync(
+      'ostinato-pending-progress-',
+    );
+    addTearDown(() => root.deleteSync(recursive: true));
+    Completer<Directory>? pendingDirectory;
+    final store = GuitarJourneyProgressStore(
+      directoryProvider: () => pendingDirectory?.future ?? Future.value(root),
+    );
+    final course = _course();
+    await tester.pumpWidget(
+      _app(
+        'en',
+        GuitarJourneyScreen(
+          initialCourse: course,
+          progressStoreFactory: (_) => store,
+        ),
+      ),
+    );
+    await _waitText(tester, '0 of 60 self-reported complete');
+    await _tap(tester, 'Open lesson');
+    await tester.pumpAndSettle();
+    final file = File('${root.path}/guitar_journey_progress.v1.json');
+    file.writeAsStringSync('{changed after the previous read');
+    final pending = Completer<Directory>();
+    pendingDirectory = pending;
+    await _tapKey(tester, 'guitar-lesson-back');
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const Key('guitar-journey-progress')), findsNothing);
+    expect(find.byKey(const Key('guitar-journey-next')), findsNothing);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    pending.complete(root);
+    await _waitText(
+      tester,
+      'Your local progress could not be read. It has not been reset.',
+    );
+    expect(find.text('0 of 60 self-reported complete'), findsNothing);
+    expect(file.readAsStringSync(), '{changed after the previous read');
+    expect(tester.takeException(), isNull);
+  });
+
+  final validRecord = GuitarLessonProgress(
+    lessonId: 'guitar.journey.start.parts',
+    contentVersion: 'test_content_v1',
+    seenAt: DateTime.utc(2026, 10, 19),
+    practicedAt: DateTime.utc(2026, 10, 19),
+    practiceCount: 1,
+  ).toJson();
+  final invalidSnapshots = <String, String>{
+    'malformed JSON': '{broken history',
+    'future schema': jsonEncode({
+      'schemaVersion': 2,
+      'records': [validRecord],
+    }),
+    'wrong root type': '[]',
+    'wrong records type': '{"schemaVersion":1,"records":{}}',
+    'wrong record type': '{"schemaVersion":1,"records":[42]}',
+    'wrong field type': jsonEncode({
+      'schemaVersion': 1,
+      'records': [{...validRecord, 'practiceCount': 'one'}],
+    }),
+    'invalid date': jsonEncode({
+      'schemaVersion': 1,
+      'records': [{...validRecord, 'seenAt': 'not-a-date'}],
+    }),
+    'negative practice count': jsonEncode({
+      'schemaVersion': 1,
+      'records': [{...validRecord, 'practiceCount': -1}],
+    }),
+    'duplicate record': jsonEncode({
+      'schemaVersion': 1,
+      'records': [validRecord, validRecord],
+    }),
+  };
+  for (final entry in invalidSnapshots.entries) {
+    test(
+      'record preserves ${entry.key} for every action and queue recovers',
+      () async {
+        final root = Directory.systemTemp.createTempSync(
+          'ostinato-invalid-progress-',
+        );
+        addTearDown(() => root.deleteSync(recursive: true));
+        final file = File('${root.path}/guitar_journey_progress.v1.json');
+        final temp = File('${file.path}.tmp');
+        file.writeAsStringSync(entry.value);
+        final originalBytes = file.readAsBytesSync();
+        final store = GuitarJourneyProgressStore(
+          directoryProvider: () async => root,
+        );
+        final readFailure = anyOf(isA<FormatException>(), isA<TypeError>());
+        await expectLater(store.load(), throwsA(readFailure));
+        for (final action in GuitarProgressAction.values) {
+          await expectLater(
+            store.record(
+              lessonId: 'guitar.journey.start.parts',
+              contentVersion: 'test_content_v1',
+              action: action,
+            ),
+            throwsA(readFailure),
+          );
+          expect(file.readAsBytesSync(), orderedEquals(originalBytes));
+          expect(temp.existsSync(), isFalse);
+        }
+        // An existing uncommitted temp is not a backup and must also be left
+        // alone when the main file cannot be read.
+        temp.writeAsStringSync('uncommitted test bytes');
+        await expectLater(
+          store.record(
+            lessonId: 'guitar.journey.start.parts',
+            contentVersion: 'test_content_v1',
+            action: GuitarProgressAction.practiced,
+          ),
+          throwsA(readFailure),
+        );
+        expect(file.readAsBytesSync(), orderedEquals(originalBytes));
+        expect(temp.readAsStringSync(), 'uncommitted test bytes');
+
+        // Only the test fixture restores a valid snapshot. Failed reads/writes
+        // must not poison the real store/account queue for a later valid save.
+        file.writeAsStringSync('{"schemaVersion":1,"records":[]}');
+        final next = await store.record(
+          lessonId: 'guitar.journey.start.parts',
+          contentVersion: 'test_content_v1',
+          action: GuitarProgressAction.practiced,
+          at: DateTime.utc(2026, 10, 19),
+        );
+        expect(next.practiceCount, 1);
+        expect((await store.load()).values.single.practiceCount, 1);
+        expect(temp.existsSync(), isFalse);
+      },
+    );
+  }
+
+  for (final action in GuitarProgressAction.values) {
+    testWidgets('read-only guard rejects a stale $action callback', (
+      tester,
+    ) async {
+      final root = Directory.systemTemp.createTempSync(
+        'ostinato-readonly-callback-',
+      );
+      addTearDown(() => root.deleteSync(recursive: true));
+      var resolutions = 0;
+      final store = GuitarJourneyProgressStore(
+        directoryProvider: () async {
+          resolutions++;
+          return root;
+        },
+      );
+      final course = _course();
+      final lesson = course.lessons.first;
+      GuitarLessonProgress? initial;
+      if (action == GuitarProgressAction.selfReportedCompleted) {
+        initial = await tester.runAsync(
+          () => store.record(
+            lessonId: lesson.id,
+            contentVersion: lesson.progressVersionFor(course.contentVersion),
+            action: GuitarProgressAction.practiced,
+          ),
+        );
+      }
+      Widget screen(bool readOnly) => _app(
+        'en',
+        GuitarJourneyLessonScreen(
+          key: const ValueKey('same-lesson-state'),
+          course: course,
+          lesson: lesson,
+          store: store,
+          initial: initial,
+          progressReadOnly: readOnly,
+        ),
+      );
+      await tester.pumpWidget(screen(false));
+      await tester.pumpAndSettle();
+      final key = switch (action) {
+        GuitarProgressAction.viewed => 'guitar-progress-viewed',
+        GuitarProgressAction.practiced => 'guitar-progress-practiced',
+        GuitarProgressAction.selfReportedCompleted =>
+          'guitar-progress-completed',
+      };
+      final staleCallback = tester
+          .widget<ButtonStyleButton>(find.byKey(Key(key)))
+          .onPressed;
+      expect(staleCallback, isNotNull);
+      final file = File('${root.path}/guitar_journey_progress.v1.json');
+      file.writeAsStringSync('{unreadable history');
+      await tester.pumpWidget(screen(true));
+      await tester.pumpAndSettle();
+      _expectRecordingDisabled(tester);
+      final before = resolutions;
+      staleCallback!();
+      await tester.pumpAndSettle();
+      expect(
+        resolutions,
+        before,
+        reason: 'shared save guard must reject before store.record',
+      );
+      expect(file.readAsStringSync(), '{unreadable history');
+      expect(File('${file.path}.tmp').existsSync(), isFalse);
+      expect(find.text('Practice entries: unknown'), findsOneWidget);
       expect(tester.takeException(), isNull);
     });
   }

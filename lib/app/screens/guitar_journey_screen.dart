@@ -104,11 +104,11 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
       );
 
   GuitarLessonProgress? _record(
-    Map<String, GuitarLessonProgress> progress,
+    Map<String, GuitarLessonProgress>? progress,
     GuitarJourneyCourse course,
     GuitarJourneyLesson lesson,
   ) =>
-      progress['${lesson.progressVersionFor(course.contentVersion)}|${lesson.id}'];
+      progress?['${lesson.progressVersionFor(course.contentVersion)}|${lesson.id}'];
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -137,16 +137,13 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
           return FutureBuilder<Map<String, GuitarLessonProgress>>(
             future: _progress,
             builder: (context, progressSnapshot) {
+              // A new account or retry may retain the old snapshot's data.
+              // Do not pair it with the newly selected store while loading.
+              if (progressSnapshot.connectionState != ConnectionState.done) {
+                return const Center(child: CircularProgressIndicator());
+              }
               if (progressSnapshot.hasError) {
-                return _loadError(
-                  context,
-                  localized(
-                    context,
-                    'Your local progress could not be read. It has not been reset.',
-                    'Yerel ilerlemen okunamadı. Kayıt sıfırlanmadı.',
-                  ),
-                  _reload,
-                );
+                return _body(context, courseSnapshot.data!, null);
               }
               if (!progressSnapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
@@ -166,20 +163,26 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
   Widget _body(
     BuildContext context,
     GuitarJourneyCourse course,
-    Map<String, GuitarLessonProgress> progress,
+    Map<String, GuitarLessonProgress>? progress,
   ) {
     final lessons = course.lessons;
-    final completed = lessons
-        .where(
-          (l) => _record(progress, course, l)?.selfReportedCompletedAt != null,
-        )
-        .length;
-    final next = lessons.cast<GuitarJourneyLesson?>().firstWhere(
-      (l) =>
-          l != null &&
-          _record(progress, course, l)?.selfReportedCompletedAt == null,
-      orElse: () => null,
-    );
+    final completed = progress == null
+        ? null
+        : lessons
+              .where(
+                (l) =>
+                    _record(progress, course, l)?.selfReportedCompletedAt !=
+                    null,
+              )
+              .length;
+    final next = progress == null
+        ? null
+        : lessons.cast<GuitarJourneyLesson?>().firstWhere(
+            (l) =>
+                l != null &&
+                _record(progress, course, l)?.selfReportedCompletedAt == null,
+            orElse: () => null,
+          );
     final hue = InstrumentHues.guitar;
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
@@ -221,24 +224,64 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  localized(
-                    context,
-                    '$completed of ${lessons.length} self-reported complete',
-                    '$completed / ${lessons.length} öz beyanla tamamlandı',
-                  ),
+                  completed == null
+                      ? localized(
+                          context,
+                          'Progress unknown',
+                          'İlerleme bilinmiyor',
+                        )
+                      : localized(
+                          context,
+                          '$completed of ${lessons.length} self-reported complete',
+                          '$completed / ${lessons.length} öz beyanla tamamlandı',
+                        ),
                   key: const Key('guitar-journey-progress'),
                   style: monoText(color: hue.ink),
                 ),
-                const SizedBox(height: 7),
-                LinearProgressIndicator(
-                  value: completed / lessons.length,
-                  color: hue.ink,
-                  backgroundColor: Colors.white.withValues(alpha: .65),
-                  minHeight: 6,
-                ),
+                if (completed != null) ...[
+                  const SizedBox(height: 7),
+                  LinearProgressIndicator(
+                    value: completed / lessons.length,
+                    color: hue.ink,
+                    backgroundColor: Colors.white.withValues(alpha: .65),
+                    minHeight: 6,
+                  ),
+                ],
               ],
             ),
           ),
+          if (progress == null) ...[
+            const SizedBox(height: 17),
+            GlassCard(
+              key: const Key('guitar-progress-unavailable'),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    localized(
+                      context,
+                      'Your local progress could not be read. It has not been reset.',
+                      'Yerel ilerlemen okunamadı. Kayıt sıfırlanmadı.',
+                    ),
+                    style: hankenText(size: 13.5, height: 1.5),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    localized(
+                      context,
+                      'You can read every lesson. Progress is unknown and recording is disabled until the saved record can be read.',
+                      'Bütün dersleri okuyabilirsin. Kayıt okunana dek ilerleme bilinmiyor ve ilerleme kaydı kapalıdır.',
+                    ),
+                    style: hankenText(size: 12.5, height: 1.5),
+                  ),
+                  OutlinedButton(
+                    onPressed: _reload,
+                    child: Text(localized(context, 'Retry', 'Yeniden dene')),
+                  ),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 17),
           GlassCard(
             child: Column(
@@ -344,26 +387,37 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
     GuitarJourneyCourse course,
     GuitarJourneyModule module,
     int index,
-    Map<String, GuitarLessonProgress> progress,
+    Map<String, GuitarLessonProgress>? progress,
   ) {
-    final done = module.lessons
-        .where(
-          (l) => _record(progress, course, l)?.selfReportedCompletedAt != null,
-        )
-        .length;
+    final done = progress == null
+        ? null
+        : module.lessons
+              .where(
+                (l) =>
+                    _record(progress, course, l)?.selfReportedCompletedAt !=
+                    null,
+              )
+              .length;
     return GlassCard(
       padding: EdgeInsets.zero,
       child: ExpansionTile(
         key: Key('guitar-module-${module.id}'),
         initiallyExpanded:
-            index == 0 || (done > 0 && done < module.lessons.length),
+            index == 0 ||
+            (done != null && done > 0 && done < module.lessons.length),
         tilePadding: const EdgeInsets.symmetric(horizontal: 17, vertical: 5),
         title: Text(
           '${index + 1}. ${module.title.of(context)}',
           style: hankenText(size: 16, weight: FontWeight.w600),
         ),
         subtitle: Text(
-          localized(context, '$done / 6 self-reported', '$done / 6 öz beyan'),
+          done == null
+              ? localized(context, 'Progress unknown', 'İlerleme bilinmiyor')
+              : localized(
+                  context,
+                  '$done / 6 self-reported',
+                  '$done / 6 öz beyan',
+                ),
           style: monoText(),
         ),
         children: [
@@ -382,7 +436,13 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                 style: hankenText(size: 14),
               ),
               subtitle: Text(
-                _statusText(context, _record(progress, course, lesson)),
+                progress == null
+                    ? localized(
+                        context,
+                        'PROGRESS UNKNOWN',
+                        'İLERLEME BİLİNMİYOR',
+                      )
+                    : _statusText(context, _record(progress, course, lesson)),
                 style: monoText(),
               ),
               trailing: const Icon(Icons.chevron_right, size: 19),
@@ -417,23 +477,25 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
     BuildContext context,
     GuitarJourneyCourse course,
     GuitarJourneyLesson lesson,
-    Map<String, GuitarLessonProgress> progress,
+    Map<String, GuitarLessonProgress>? progress,
   ) async {
+    final store = _store!;
     await Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => GuitarJourneyLessonScreen(
           course: course,
           lesson: lesson,
-          store: _store!,
+          store: store,
+          progressReadOnly: progress == null,
           initial: _record(progress, course, lesson),
           previousVersion: lesson.progressRevision == null
               ? null
-              : progress['${course.contentVersion}|${lesson.id}'],
+              : progress?['${course.contentVersion}|${lesson.id}'],
           preparation: _preparation,
         ),
       ),
     );
-    if (mounted) _reload();
+    if (mounted && identical(_store, store)) _reload();
   }
 }
 
@@ -446,6 +508,7 @@ class GuitarJourneyLessonScreen extends StatefulWidget {
     this.initial,
     this.previousVersion,
     this.preparation,
+    this.progressReadOnly = false,
   });
   final GuitarJourneyCourse course;
   final GuitarJourneyLesson lesson;
@@ -453,6 +516,8 @@ class GuitarJourneyLessonScreen extends StatefulWidget {
   final GuitarLessonProgress? initial;
   final GuitarLessonProgress? previousVersion;
   final GuitarSessionPreparation? preparation;
+  // Unknown history must not become an empty writable progress record.
+  final bool progressReadOnly;
 
   @override
   State<GuitarJourneyLessonScreen> createState() =>
@@ -474,7 +539,8 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
   }.contains(widget.lesson.id);
 
   bool get _mayRecordPractice =>
-      !_needsPreparation || _preparation.isAcknowledged;
+      !widget.progressReadOnly &&
+      (!_needsPreparation || _preparation.isAcknowledged);
 
   @override
   void initState() {
@@ -522,6 +588,8 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
   }
 
   Future<void> _save(GuitarProgressAction action) async {
+    // Also guard stale callbacks; disabling the three controls is not enough.
+    if (widget.progressReadOnly || _saving) return;
     if (action != GuitarProgressAction.viewed && !_mayRecordPractice) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -593,6 +661,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GlassIconButton(
+                key: const Key('guitar-lesson-back'),
                 icon: '‹',
                 semanticLabel: localized(
                   context,
@@ -634,7 +703,22 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                 locale: Localizations.localeOf(context).languageCode,
               ),
               const SizedBox(height: 17),
-              if (widget.previousVersion?.selfReportedCompletedAt != null) ...[
+              if (widget.progressReadOnly) ...[
+                GlassCard(
+                  key: const Key('guitar-lesson-progress-unavailable'),
+                  child: Text(
+                    localized(
+                      context,
+                      'Progress is unknown. You can read this lesson, but progress recording is disabled. Return to the course to retry reading the saved record.',
+                      'İlerleme bilinmiyor. Bu dersi okuyabilirsin; ilerleme kaydı kapalıdır. Kaydı okumayı yeniden denemek için kursa dön.',
+                    ),
+                    style: hankenText(size: 12.5, height: 1.5),
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+              if (!widget.progressReadOnly &&
+                  widget.previousVersion?.selfReportedCompletedAt != null) ...[
                 _previousCompletionCard(context),
                 const SizedBox(height: 12),
               ],
@@ -642,7 +726,8 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                 _preparationCard(context),
               if (_needsPreparation && _preparation.isAcknowledged)
                 _preparedCard(context),
-              if (!_needsPreparation ||
+              if (widget.progressReadOnly ||
+                  !_needsPreparation ||
                   _preparation.isAcknowledged ||
                   _observationOnly) ...[
                 if (lesson.prerequisiteIds.isNotEmpty)
@@ -764,11 +849,17 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                         const SizedBox(height: 10),
                       ],
                       Text(
-                        localized(
-                          context,
-                          'Practice entries: ${_record?.practiceCount ?? 0}',
-                          'Çalışma kaydı: ${_record?.practiceCount ?? 0}',
-                        ),
+                        widget.progressReadOnly
+                            ? localized(
+                                context,
+                                'Practice entries: unknown',
+                                'Çalışma kaydı: bilinmiyor',
+                              )
+                            : localized(
+                                context,
+                                'Practice entries: ${_record?.practiceCount ?? 0}',
+                                'Çalışma kaydı: ${_record?.practiceCount ?? 0}',
+                              ),
                         style: monoText(),
                       ),
                       const SizedBox(height: 9),
@@ -777,7 +868,11 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                         runSpacing: 8,
                         children: [
                           OutlinedButton(
-                            onPressed: _saving || _record?.seenAt != null
+                            key: const Key('guitar-progress-viewed'),
+                            onPressed:
+                                widget.progressReadOnly ||
+                                    _saving ||
+                                    _record?.seenAt != null
                                 ? null
                                 : () => _save(GuitarProgressAction.viewed),
                             child: Text(
@@ -785,6 +880,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                             ),
                           ),
                           OutlinedButton(
+                            key: const Key('guitar-progress-practiced'),
                             onPressed: _saving || !_mayRecordPractice
                                 ? null
                                 : () => _save(GuitarProgressAction.practiced),
@@ -797,8 +893,10 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                             ),
                           ),
                           FilledButton(
+                            key: const Key('guitar-progress-completed'),
                             onPressed:
-                                _saving ||
+                                widget.progressReadOnly ||
+                                    _saving ||
                                     !_mayRecordPractice ||
                                     (_record?.practiceCount ?? 0) == 0 ||
                                     _record?.selfReportedCompletedAt != null
