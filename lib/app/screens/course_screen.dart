@@ -20,28 +20,41 @@ Widget lessonScreenFor({
   required Discipline discipline,
   required Lesson lesson,
   required InstrumentHue hue,
-}) =>
-    switch (lesson.kind) {
-      LessonKind.locked =>
-        LessonLockedScreenRoute(discipline: discipline, lesson: lesson, hue: hue),
-      LessonKind.demoOnly =>
-        LessonDemoScreenRoute(discipline: discipline, lesson: lesson, hue: hue),
-      LessonKind.guide || LessonKind.scored =>
-        LessonScoredScreenRoute(discipline: discipline, lesson: lesson, hue: hue),
-    };
+}) => switch (lesson.kind) {
+  LessonKind.locked => LessonLockedScreenRoute(
+    discipline: discipline,
+    lesson: lesson,
+    hue: hue,
+  ),
+  LessonKind.demoOnly => LessonDemoScreenRoute(
+    discipline: discipline,
+    lesson: lesson,
+    hue: hue,
+  ),
+  LessonKind.guide || LessonKind.scored => LessonScoredScreenRoute(
+    discipline: discipline,
+    lesson: lesson,
+    hue: hue,
+  ),
+};
 
 /// Kurs — ders listesi. Üç görsel sınıf burada AYRI çip taşır; kilitli
 /// dersin gerekçesinin İLK CÜMLESİ satır-içi görünür (§4/⑭ — bilgi tonu,
 /// merak-tuzağı DEĞİL).
 class CourseScreenRoute extends StatelessWidget {
-  const CourseScreenRoute(
-      {super.key, required this.discipline, required this.course});
+  const CourseScreenRoute({
+    super.key,
+    required this.discipline,
+    required this.course,
+  });
   final Discipline discipline;
   final Course course;
 
   @override
   Widget build(BuildContext context) {
-    final InstrumentHue hue = OstinatoPalette.of(context).instrument(discipline.id);
+    final InstrumentHue hue = OstinatoPalette.of(
+      context,
+    ).instrument(discipline.id);
     return Scaffold(
       backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
@@ -56,28 +69,50 @@ class CourseScreenRoute extends StatelessWidget {
                 onTap: () => Navigator.of(context).pop(),
               ),
               const SizedBox(height: 22),
-              Text('${catalogUpperName(context, discipline.id, discipline.displayName)} · ${localized(context, 'FOUNDATIONS', 'TEMELLER')}',
-                  style: monoText(color: hue.ink)),
+              Text(
+                '${catalogUpperName(context, discipline.id, discipline.displayName)} · ${localized(context, 'FOUNDATIONS', 'TEMELLER')}',
+                style: monoText(color: hue.ink),
+              ),
               const SizedBox(height: 9),
-              Text(catalogGoal(context, course.id, course.goal),
-                  style: hankenText(
-                      size: 28, weight: FontWeight.w600, height: 1.1)),
+              Text(
+                catalogGoal(context, course.id, course.goal),
+                style: hankenText(
+                  size: 28,
+                  weight: FontWeight.w600,
+                  height: 1.1,
+                ),
+              ),
               const SizedBox(height: 12),
               Text(
-                  courseMetadata(context, course.level, course.estimatedMinutes, course.lessons.length),
-                  style: monoText()),
+                courseMetadata(
+                  context,
+                  course.level,
+                  course.estimatedMinutes,
+                  course.lessons.length,
+                ),
+                style: monoText(),
+              ),
               const SizedBox(height: 22),
               for (final Lesson l in course.lessons)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: _LessonRow(discipline: discipline, lesson: l, hue: hue),
+                  child: _LessonRow(
+                    discipline: discipline,
+                    lesson: l,
+                    hue: hue,
+                  ),
                 ),
               const SizedBox(height: 8),
               Text(
-                localized(context,
+                localized(
+                  context,
                   'A locked lesson is visible on purpose. The reason it is locked is the name of the measurement we are missing, not a threshold you failed.',
-                  'Kilitli dersler bilerek gösterilir. Kilidin nedeni geçemediğin bir eşik değil, eksik olan ölçümün adıdır.'),
-                style: hankenText(size: 12, color: OstinatoPalette.of(context).textFaint),
+                  'Kilitli dersler bilerek gösterilir. Kilidin nedeni geçemediğin bir eşik değil, eksik olan ölçümün adıdır.',
+                ),
+                style: hankenText(
+                  size: 12,
+                  color: OstinatoPalette.of(context).textFaint,
+                ),
               ),
             ],
           ),
@@ -88,8 +123,11 @@ class CourseScreenRoute extends StatelessWidget {
 }
 
 class _LessonRow extends StatelessWidget {
-  const _LessonRow(
-      {required this.discipline, required this.lesson, required this.hue});
+  const _LessonRow({
+    required this.discipline,
+    required this.lesson,
+    required this.hue,
+  });
   final Discipline discipline;
   final Lesson lesson;
   final InstrumentHue hue;
@@ -98,10 +136,25 @@ class _LessonRow extends StatelessWidget {
     final p = OstinatoPalette.of(context);
     final currentHue = p.instrument(discipline.id);
     return switch (lesson.kind) {
-      LessonKind.locked => ('LOCKED', p.controlSurface, p.textMuted, p.glassStart),
-      LessonKind.demoOnly => ('REFERENCE · NO SCORING', currentHue.chip, currentHue.ink, currentHue.soft.first),
+      LessonKind.locked => (
+        'LOCKED',
+        p.controlSurface,
+        p.textMuted,
+        p.glassStart,
+      ),
+      LessonKind.demoOnly => (
+        'REFERENCE · NO SCORING',
+        currentHue.chip,
+        currentHue.ink,
+        currentHue.soft.first,
+      ),
       LessonKind.guide => ('GUIDE', p.controlSurface, p.textMono, p.glassStart),
-      LessonKind.scored => ('REFERENCE', p.controlSurface, p.textBody, p.glassEnd),
+      LessonKind.scored => (
+        'REFERENCE',
+        p.controlSurface,
+        p.textBody,
+        p.glassEnd,
+      ),
     };
   }
 
@@ -123,9 +176,13 @@ class _LessonRow extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         onTap: () {
           final Widget screen = lessonScreenFor(
-              discipline: discipline, lesson: lesson, hue: hue);
-          Navigator.of(context)
-              .push(MaterialPageRoute<void>(builder: (_) => screen));
+            discipline: discipline,
+            lesson: lesson,
+            hue: hue,
+          );
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute<void>(builder: (_) => screen));
         },
         child: Ink(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
@@ -154,16 +211,36 @@ class _LessonRow extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 9,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                        color: chipBg, borderRadius: BorderRadius.circular(7)),
+                      color: chipBg,
+                      borderRadius: BorderRadius.circular(7),
+                    ),
                     child: Text(
                       switch (lesson.kind) {
-                        LessonKind.locked => localized(context, 'LOCKED', 'KİLİTLİ'),
-                        LessonKind.demoOnly => localized(context, 'REFERENCE · NO SCORING', 'REFERANS · PUAN YOK'),
-                        LessonKind.guide => localized(context, 'GUIDE', 'REHBER'),
-                        LessonKind.scored => localized(context, 'REFERENCE', 'REFERANS'),
+                        LessonKind.locked => localized(
+                          context,
+                          'LOCKED',
+                          'KİLİTLİ',
+                        ),
+                        LessonKind.demoOnly => localized(
+                          context,
+                          'REFERENCE · NO SCORING',
+                          'REFERANS · PUAN YOK',
+                        ),
+                        LessonKind.guide => localized(
+                          context,
+                          'GUIDE',
+                          'REHBER',
+                        ),
+                        LessonKind.scored => localized(
+                          context,
+                          'REFERENCE',
+                          'REFERANS',
+                        ),
                       },
                       style: monoText(
                         size: 9.5,
@@ -179,12 +256,19 @@ class _LessonRow extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     style: hankenText(
-                        size: 12.5, color: OstinatoPalette.of(context).textMuted),
+                      size: 12.5,
+                      color: OstinatoPalette.of(context).textMuted,
+                    ),
                     children: <InlineSpan>[
                       TextSpan(text: '$firstSentence '),
                       TextSpan(
-                          text: localized(context, 'Read why ›', 'Nedenini oku ›'),
-                          style: hankenText(size: 12.5, color: hue.ink)),
+                        text: localized(
+                          context,
+                          'Read why ›',
+                          'Nedenini oku ›',
+                        ),
+                        style: hankenText(size: 12.5, color: hue.ink),
+                      ),
                     ],
                   ),
                 ),

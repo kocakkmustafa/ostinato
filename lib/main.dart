@@ -29,30 +29,36 @@ Future<void> main() async {
     final (runtime, accountConnection) = await initializeMotionAccount();
     bindCameraResourceAdmission(accountConnection.resourceAdmission);
     await themeReady;
-    runApp(AppThemeHost(
-      controller: theme,
-      child: AppLocaleHost(
-        child: OstinatoAudioRoot(
-          userId: runtime.userId,
-          phase: runtime.phase,
-          passwordRecovery: accountConnection.passwordRecovery,
-          identityBoundary: accountConnection.identityBoundary,
-          resourceAdmission: accountConnection.resourceAdmission,
-          disposeAccountBinding: accountConnection.disposeBinding,
-          builder: (audioNavigatorHost) => MotionIdentityGate(
-            runtime: runtime,
-            child: OstinatoApp(
-              accountConnection: accountConnection,
-              audioNavigatorHost: audioNavigatorHost,
+    runApp(
+      AppThemeHost(
+        controller: theme,
+        child: AppLocaleHost(
+          child: OstinatoAudioRoot(
+            userId: runtime.userId,
+            phase: runtime.phase,
+            passwordRecovery: accountConnection.passwordRecovery,
+            identityBoundary: accountConnection.identityBoundary,
+            resourceAdmission: accountConnection.resourceAdmission,
+            disposeAccountBinding: accountConnection.disposeBinding,
+            builder: (audioNavigatorHost) => MotionIdentityGate(
+              runtime: runtime,
+              child: OstinatoApp(
+                accountConnection: accountConnection,
+                audioNavigatorHost: audioNavigatorHost,
+              ),
             ),
           ),
         ),
       ),
-    ));
+    );
   } on Object {
     await themeReady;
-    runApp(AppThemeHost(controller: theme,
-      child: const AppLocaleHost(child: AccountStartupFailure())));
+    runApp(
+      AppThemeHost(
+        controller: theme,
+        child: const AppLocaleHost(child: AccountStartupFailure()),
+      ),
+    );
   }
 }
 
@@ -185,7 +191,6 @@ class _OstinatoAppState extends State<OstinatoApp> {
     );
   })();
 
-
   @override
   Widget build(BuildContext context) {
     // Tests which embed the shell without the app preference host retain
@@ -232,7 +237,12 @@ class _OstinatoAppState extends State<OstinatoApp> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          localized(errorContext, "Support code: {v0}", "Destek kodu: {v0}", values: {"v0": supportCode}),
+                          localized(
+                            errorContext,
+                            "Support code: {v0}",
+                            "Destek kodu: {v0}",
+                            values: {"v0": supportCode},
+                          ),
                           key: const Key('ostinato-content-support-code'),
                           textAlign: TextAlign.center,
                         ),

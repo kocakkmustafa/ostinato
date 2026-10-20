@@ -39,11 +39,14 @@ class LibraryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: OstinatoPalette.of(context).shell,
       body: DecoratedBox(
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           gradient: RadialGradient(
             center: Alignment(-0.7, -1),
             radius: 1.2,
-            colors: <Color>[OstinatoPalette.of(context).voice.chip.withValues(alpha: .55), Colors.transparent],
+            colors: <Color>[
+              OstinatoPalette.of(context).voice.chip.withValues(alpha: .55),
+              Colors.transparent,
+            ],
           ),
         ),
         child: SafeArea(
@@ -188,7 +191,11 @@ class LibraryScreen extends StatelessWidget {
                   kicker(
                     motionPaidFeaturesAvailable
                         ? localized(context, "Start here", "Buradan başlayın")
-                        : localized(context, "Explore lessons", "Dersleri incele"),
+                        : localized(
+                            context,
+                            "Explore lessons",
+                            "Dersleri incele",
+                          ),
                   ),
                   const SizedBox(height: 11),
                   for (final (Discipline d, Lesson l) in starters) ...<Widget>[
@@ -316,7 +323,9 @@ class _StarterRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InstrumentHue hue = OstinatoPalette.of(context).instrument(discipline.id);
+    final InstrumentHue hue = OstinatoPalette.of(
+      context,
+    ).instrument(discipline.id);
     final String kindChip = switch (lesson.kind) {
       LessonKind.guide => localized(context, 'GUIDE', 'REHBER'),
       LessonKind.scored => localized(context, 'REFERENCE', 'REFERANS'),
@@ -356,10 +365,7 @@ class _StarterRow extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       '${catalogUpperName(context, discipline.id, discipline.displayName)} · $kindChip',
-                      style: monoText(
-                        size: 8.5,
-                        color: hue.ink,
-                      ),
+                      style: monoText(size: 8.5, color: hue.ink),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -376,11 +382,7 @@ class _StarterRow extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Icon(
-                Icons.chevron_right,
-                size: 20,
-                color: hue.ink,
-              ),
+              Icon(Icons.chevron_right, size: 20, color: hue.ink),
             ],
           ),
         ),
@@ -394,7 +396,7 @@ class _StarterRow extends StatelessWidget {
 /// bandı AYNI eksende karşılaştırılabilsin diye sabit. Tasarımın verdiği
 /// 24° korundu; bugünkü en geniş bant 6.4° ve gözlem eşiği 14° — ikisi de
 /// ölçeğin içinde kalıyor, yani ölçek ölçümü kırpmıyor.
- double _sharedScaleMaxDeg = 24;
+double _sharedScaleMaxDeg = 24;
 
 class _InstrumentCard extends StatelessWidget {
   const _InstrumentCard({required this.discipline, required this.contract});
@@ -407,7 +409,9 @@ class _InstrumentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InstrumentHue hue = OstinatoPalette.of(context).instrument(discipline.id);
+    final InstrumentHue hue = OstinatoPalette.of(
+      context,
+    ).instrument(discipline.id);
     // Eğitmen sayısı+anlaşma derecesini göstermek için kartın kendi kapsam
     // sözcüğü — gerçek sayılar contract'tan gelir, burada yalnız etiket için
     // discipline metninden türetilen kaba bir konum çizilir (hüküm taşımaz).
@@ -451,10 +455,7 @@ class _InstrumentCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Icon(
-                    Icons.chevron_right,
-                    color: hue.ink,
-                  ),
+                  Icon(Icons.chevron_right, color: hue.ink),
                 ],
               ),
               const SizedBox(height: 6),
@@ -475,10 +476,7 @@ class _InstrumentCard extends StatelessWidget {
                   '${appDecimal(context, contract!.bandLowDeg, 1)}–'
                   '${appDecimal(context, contract!.bandHighDeg, 1)}° / '
                   '${appDecimal(context, _sharedScaleMaxDeg, 0)}°',
-                  style: monoText(
-                    size: 8.5,
-                    color: hue.ink,
-                  ),
+                  style: monoText(size: 8.5, color: hue.ink),
                 ),
                 const SizedBox(height: 10),
               ] else
@@ -487,10 +485,7 @@ class _InstrumentCard extends StatelessWidget {
                 catalogBlurb(context, discipline.id, discipline.blurb),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: hankenText(
-                  size: 12.5,
-                  color: hue.ink,
-                ),
+                style: hankenText(size: 12.5, color: hue.ink),
               ),
             ],
           ),

@@ -17,24 +17,38 @@ final class AppAppearancePicker extends StatelessWidget {
     final status = controller.loading
         ? localized(context, 'Loading appearance…', 'Görünüm yükleniyor…')
         : controller.readFailed
-        ? localized(context,
+        ? localized(
+            context,
             'Theme preference could not be loaded. System appearance is in use.',
-            'Tema tercihi yüklenemedi. Sistem görünümü kullanılıyor.')
+            'Tema tercihi yüklenemedi. Sistem görünümü kullanılıyor.',
+          )
         : controller.writeFailed
-        ? localized(context,
+        ? localized(
+            context,
             'Theme changed on this device, but could not be saved. Choose again to retry.',
-            'Tema bu cihazda değişti ancak kaydedilemedi. Yeniden denemek için tekrar seç.')
+            'Tema bu cihazda değişti ancak kaydedilemedi. Yeniden denemek için tekrar seç.',
+          )
         : controller.saving
-        ? localized(context, 'Saving theme preference…', 'Tema tercihi kaydediliyor…')
+        ? localized(
+            context,
+            'Saving theme preference…',
+            'Tema tercihi kaydediliyor…',
+          )
         : controller.hasSavedSelection
-        ? localized(context, 'Theme preference saved on this device.', 'Tema tercihi bu cihazda kaydedildi.')
+        ? localized(
+            context,
+            'Theme preference saved on this device.',
+            'Tema tercihi bu cihazda kaydedildi.',
+          )
         : null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
         InputDecorator(
-          decoration: InputDecoration(labelText: localized(context, 'Theme', 'Tema')),
+          decoration: InputDecoration(
+            labelText: localized(context, 'Theme', 'Tema'),
+          ),
           child: ConstrainedBox(
             constraints: const BoxConstraints(minHeight: 48),
             child: DropdownButtonHideUnderline(
@@ -42,16 +56,24 @@ final class AppAppearancePicker extends StatelessWidget {
                 value: controller.preference,
                 isExpanded: true,
                 items: [
-                  DropdownMenuItem(value: AppThemePreference.system,
-                    child: Text(localized(context, 'System', 'Sistem'))),
-                  DropdownMenuItem(value: AppThemePreference.light,
-                    child: Text(localized(context, 'Light', 'Açık'))),
-                  DropdownMenuItem(value: AppThemePreference.dark,
-                    child: Text(localized(context, 'Dark', 'Koyu'))),
+                  DropdownMenuItem(
+                    value: AppThemePreference.system,
+                    child: Text(localized(context, 'System', 'Sistem')),
+                  ),
+                  DropdownMenuItem(
+                    value: AppThemePreference.light,
+                    child: Text(localized(context, 'Light', 'Açık')),
+                  ),
+                  DropdownMenuItem(
+                    value: AppThemePreference.dark,
+                    child: Text(localized(context, 'Dark', 'Koyu')),
+                  ),
                 ],
-                onChanged: controller.loading ? null : (value) {
-                  if (value != null) unawaited(controller.select(value));
-                },
+                onChanged: controller.loading
+                    ? null
+                    : (value) {
+                        if (value != null) unawaited(controller.select(value));
+                      },
               ),
             ),
           ),

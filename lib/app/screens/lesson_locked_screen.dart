@@ -10,8 +10,12 @@ import '../design/widgets.dart';
 /// Kilitli ders — sebep EKSİK ÖLÇÜMÜN ADIYLA, eşik değeriyle DEĞİL (§4/⑦).
 /// `lockedReason` AYNEN gösterilir — yumuşatılmaz, kısaltılmaz.
 class LessonLockedScreenRoute extends StatelessWidget {
-  const LessonLockedScreenRoute(
-      {super.key, required this.discipline, required this.lesson, required this.hue});
+  const LessonLockedScreenRoute({
+    super.key,
+    required this.discipline,
+    required this.lesson,
+    required this.hue,
+  });
   final Discipline discipline;
   final Lesson lesson;
   final InstrumentHue hue;
@@ -28,38 +32,59 @@ class LessonLockedScreenRoute extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               GlassIconButton(
-                  icon: '‹',
-                  semanticLabel: localized(context, 'Back', 'Geri'),
-                  onTap: () => Navigator.of(context).pop()),
+                icon: '‹',
+                semanticLabel: localized(context, 'Back', 'Geri'),
+                onTap: () => Navigator.of(context).pop(),
+              ),
               const SizedBox(height: 22),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
                 decoration: BoxDecoration(
-                    color: OstinatoPalette.of(context).controlSurface,
-                    borderRadius: BorderRadius.circular(8)),
-                child: Text(localized(context, 'LOCKED', 'KİLİTLİ'),
-                    key: const Key('state-lesson-locked'),
-                    style: monoText(color: OstinatoPalette.of(context).textMuted)),
+                  color: OstinatoPalette.of(context).controlSurface,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  localized(context, 'LOCKED', 'KİLİTLİ'),
+                  key: const Key('state-lesson-locked'),
+                  style: monoText(color: OstinatoPalette.of(context).textMuted),
+                ),
               ),
               const SizedBox(height: 13),
-              Text(catalogName(context, lesson.id, lesson.displayName),
-                  style: hankenText(
-                      size: 27, weight: FontWeight.w600, height: 1.15)),
+              Text(
+                catalogName(context, lesson.id, lesson.displayName),
+                style: hankenText(
+                  size: 27,
+                  weight: FontWeight.w600,
+                  height: 1.15,
+                ),
+              ),
               const SizedBox(height: 11),
-              Text('${lessonMetadata(context, lesson.minutes, lesson.focus)} '
-                                    '· ${catalogUpperName(context, discipline.id, discipline.displayName)}',
-                  style: monoText()),
+              Text(
+                '${lessonMetadata(context, lesson.minutes, lesson.focus)} '
+                '· ${catalogUpperName(context, discipline.id, discipline.displayName)}',
+                style: monoText(),
+              ),
               const SizedBox(height: 20),
               GlassCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker(localized(context, 'Why it is locked', 'Neden kilitli')),
+                    kicker(
+                      localized(context, 'Why it is locked', 'Neden kilitli'),
+                    ),
                     const SizedBox(height: 12),
-                    Text(catalogCopy(context, '${lesson.id}.lockedReason',
-                            lesson.lockedReason ?? ''),
-                        key: const Key('locked-reason'),
-                        style: hankenText(size: 16.5, height: 1.62)),
+                    Text(
+                      catalogCopy(
+                        context,
+                        '${lesson.id}.lockedReason',
+                        lesson.lockedReason ?? '',
+                      ),
+                      key: const Key('locked-reason'),
+                      style: hankenText(size: 16.5, height: 1.62),
+                    ),
                   ],
                 ),
               ),
@@ -79,39 +104,63 @@ class LessonLockedScreenRoute extends StatelessWidget {
                   decoration: BoxDecoration(
                     gradient: hue.softGradient,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: OstinatoPalette.of(context).glassBorder),
+                    border: Border.all(
+                      color: OstinatoPalette.of(context).glassBorder,
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      kicker(localized(context, 'What would open it', 'Ne zaman açılır'), color: hue.ink),
+                      kicker(
+                        localized(
+                          context,
+                          'What would open it',
+                          'Ne zaman açılır',
+                        ),
+                        color: hue.ink,
+                      ),
                       const SizedBox(height: 9),
-                      Text(catalogCopy(context, '${lesson.id}.unblockedBy',
-                              lesson.unblockedBy!),
-                          key: const Key('locked-what-would-open-it'),
-                          style: hankenText(size: 14.5, height: 1.55)),
+                      Text(
+                        catalogCopy(
+                          context,
+                          '${lesson.id}.unblockedBy',
+                          lesson.unblockedBy!,
+                        ),
+                        key: const Key('locked-what-would-open-it'),
+                        style: hankenText(size: 14.5, height: 1.55),
+                      ),
                     ],
                   ),
                 ),
               ],
               const SizedBox(height: 16),
               Text(
-                localized(context,
+                localized(
+                  context,
                   'There is nothing to try here and no way to unlock it from your side. It opens when the measurement is confirmed, and you will see it change.',
-                  'Bu dersi kendi başına açabileceğin bir işlem yok. Gerekli ölçüm doğrulandığında açılacak ve değişikliği burada göreceksin.'),
-                style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textFaint),
+                  'Bu dersi kendi başına açabileceğin bir işlem yok. Gerekli ölçüm doğrulandığında açılacak ve değişikliği burada göreceksin.',
+                ),
+                style: hankenText(
+                  size: 12.5,
+                  color: OstinatoPalette.of(context).textFaint,
+                ),
               ),
               const SizedBox(height: 18),
               OutlinedButton(
                 onPressed: () => Navigator.of(context).pop(),
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size.fromHeight(52),
-                  side:  BorderSide(color: OstinatoPalette.of(context).controlBorder),
-                  shape:
-                      RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
+                  side: BorderSide(
+                    color: OstinatoPalette.of(context).controlBorder,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(17),
+                  ),
                 ),
-                child: Text('${localized(context, 'Back to', 'Geri dön:')} ${catalogName(context, discipline.courses.first.id, discipline.courses.first.displayName)}',
-                    style: hankenText(size: 15, weight: FontWeight.w500)),
+                child: Text(
+                  '${localized(context, 'Back to', 'Geri dön:')} ${catalogName(context, discipline.courses.first.id, discipline.courses.first.displayName)}',
+                  style: hankenText(size: 15, weight: FontWeight.w500),
+                ),
               ),
             ],
           ),

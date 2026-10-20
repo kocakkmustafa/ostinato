@@ -137,12 +137,16 @@ class UkuleleDiagrams extends StatelessWidget {
                         child: SizedBox(
                           width: 480,
                           child: Table(
-                            border: TableBorder.all(color: OstinatoPalette.of(context).notationInk),
+                            border: TableBorder.all(
+                              color: OstinatoPalette.of(context).notationInk,
+                            ),
                             defaultColumnWidth: const FixedColumnWidth(60),
                             children: [
                               TableRow(
                                 decoration: BoxDecoration(
-                                  color: OstinatoPalette.of(context).notationPaper,
+                                  color: OstinatoPalette.of(
+                                    context,
+                                  ).notationPaper,
                                 ),
                                 children: [
                                   for (final count in [
@@ -159,7 +163,11 @@ class UkuleleDiagrams extends StatelessWidget {
                                       padding: const EdgeInsets.all(6),
                                       child: Text(
                                         count,
-                                        style: TextStyle(color: OstinatoPalette.of(context).notationInk),
+                                        style: TextStyle(
+                                          color: OstinatoPalette.of(
+                                            context,
+                                          ).notationInk,
+                                        ),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -167,17 +175,29 @@ class UkuleleDiagrams extends StatelessWidget {
                               ),
                               TableRow(
                                 decoration: BoxDecoration(
-                                  color: OstinatoPalette.of(context).notationPaper,
+                                  color: OstinatoPalette.of(
+                                    context,
+                                  ).notationPaper,
                                 ),
                                 children: [
                                   for (var slot = 0; slot < 8; slot++)
                                     Padding(
                                       padding: const EdgeInsets.all(6),
                                       child: Text(
-                                        _studySymbol(course.study[bar], slot, context),
-                                        style: TextStyle(color: OstinatoPalette.of(context).notationInk),
+                                        _studySymbol(
+                                          course.study[bar],
+                                          slot,
+                                          context,
+                                        ),
+                                        style: TextStyle(
+                                          color: OstinatoPalette.of(
+                                            context,
+                                          ).notationInk,
+                                        ),
                                         textAlign: TextAlign.center,
-                                        textDirection: Directionality.of(context),
+                                        textDirection: Directionality.of(
+                                          context,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -198,12 +218,8 @@ class UkuleleDiagrams extends StatelessWidget {
 
 String _pitch(String pitch, BuildContext context) => musicPitch(context, pitch);
 
-String _barLabel(BuildContext context, int bar) => localized(
-  context,
-  'Bar {v0}',
-  'Ölçü {v0}',
-  values: {'v0': bar},
-);
+String _barLabel(BuildContext context, int bar) =>
+    localized(context, 'Bar {v0}', 'Ölçü {v0}', values: {'v0': bar});
 
 String _chordDescription(UkuleleChord chord, BuildContext context) => [
   for (var i = 0; i < 4; i++)
@@ -218,11 +234,7 @@ String _chordDescription(UkuleleChord chord, BuildContext context) => [
             context,
             'string {v0}: fret {v1}, finger {v2}',
             'tel {v0}: perde {v1}, parmak {v2}',
-            values: {
-              'v0': 4 - i,
-              'v1': chord.frets[i],
-              'v2': chord.fingers[i],
-            },
+            values: {'v0': 4 - i, 'v1': chord.frets[i], 'v2': chord.fingers[i]},
           ),
 ].join('; ');
 
@@ -253,17 +265,18 @@ String _studyDescription(UkuleleStudyBar bar, BuildContext context) {
         'stop sound; counted silence',
         'sesi kes; sayılan sessizlik',
       ),
-      'H' => ringing
-          ? localized(
-              context,
-              'keep ringing; no new stroke',
-              'çınlamayı sürdür; yeni tarama yok',
-            )
-          : localized(
-              context,
-              'continue counted silence; no new stroke',
-              'sayılan sessizliği sürdür; yeni tarama yok',
-            ),
+      'H' =>
+        ringing
+            ? localized(
+                context,
+                'keep ringing; no new stroke',
+                'çınlamayı sürdür; yeni tarama yok',
+              )
+            : localized(
+                context,
+                'continue counted silence; no new stroke',
+                'sayılan sessizliği sürdür; yeni tarama yok',
+              ),
       _ => throw const FormatException('Unsupported ukulele study slot'),
     };
     if (bar.slots[i] == 'D' || bar.slots[i] == 'U') {
@@ -331,7 +344,9 @@ class _Vector extends StatelessWidget {
               child: CustomPaint(
                 key: Key('ukulele-vector-$kind'),
                 painter: _UkePainter(
-                  kind, chord, notes,
+                  kind,
+                  chord,
+                  notes,
                   inkColor: OstinatoPalette.of(context).notationInk,
                   paperColor: OstinatoPalette.of(context).notationPaper,
                 ),
@@ -346,7 +361,9 @@ class _Vector extends StatelessWidget {
 
 class _UkePainter extends CustomPainter {
   _UkePainter(
-    this.kind, this.chord, this.notes, {
+    this.kind,
+    this.chord,
+    this.notes, {
     required this.inkColor,
     required this.paperColor,
   });
@@ -462,5 +479,7 @@ class _UkePainter extends CustomPainter {
   bool shouldRepaint(covariant _UkePainter old) =>
       old.inkColor != inkColor ||
       old.paperColor != paperColor ||
-      old.kind != kind || old.chord != chord || old.notes != notes;
+      old.kind != kind ||
+      old.chord != chord ||
+      old.notes != notes;
 }

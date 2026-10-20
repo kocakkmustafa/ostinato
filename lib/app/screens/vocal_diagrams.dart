@@ -37,7 +37,9 @@ class VocalDiagrams extends StatelessWidget {
             // Beat columns and their scroll origin retain musical order.
             // _cell uses the caller's direction for translated cell text.
             textDirection: TextDirection.ltr,
-            border: TableBorder.all(color: OstinatoPalette.of(context).notationInk),
+            border: TableBorder.all(
+              color: OstinatoPalette.of(context).notationInk,
+            ),
             children: [
               for (final row in rows)
                 TableRow(
@@ -142,9 +144,14 @@ class VocalDiagrams extends StatelessWidget {
             ),
           ),
           for (var i = 0; i < course.study.length; i++) ...[
-            Text(localized(
-              context, 'Bar {v0}', 'Ölçü {v0}', values: {'v0': i + 1},
-            )),
+            Text(
+              localized(
+                context,
+                'Bar {v0}',
+                'Ölçü {v0}',
+                values: {'v0': i + 1},
+              ),
+            ),
             _grid(
               context,
               'vocal-study-${i + 1}',

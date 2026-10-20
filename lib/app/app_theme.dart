@@ -178,8 +178,16 @@ final class OstinatoPalette extends ThemeExtension<OstinatoPalette> {
       glassShadow: Color.lerp(glassShadow, other.glassShadow, t)!,
       controlSurface: Color.lerp(controlSurface, other.controlSurface, t)!,
       controlBorder: Color.lerp(controlBorder, other.controlBorder, t)!,
-      disabledBackground: Color.lerp(disabledBackground, other.disabledBackground, t)!,
-      disabledForeground: Color.lerp(disabledForeground, other.disabledForeground, t)!,
+      disabledBackground: Color.lerp(
+        disabledBackground,
+        other.disabledBackground,
+        t,
+      )!,
+      disabledForeground: Color.lerp(
+        disabledForeground,
+        other.disabledForeground,
+        t,
+      )!,
       selection: Color.lerp(selection, other.selection, t)!,
       notationPaper: Color.lerp(notationPaper, other.notationPaper, t)!,
       notationInk: Color.lerp(notationInk, other.notationInk, t)!,
@@ -298,14 +306,16 @@ final class OstinatoPalette extends ThemeExtension<OstinatoPalette> {
       ink: Color(0xFFB0E3CF),
     ),
   );
-
 }
 
 InstrumentHue _lerpHue(InstrumentHue a, InstrumentHue b, double t) {
   List<Color> colors(List<Color> first, List<Color> second) =>
-      List<Color>.unmodifiable(List<Color>.generate(
-        first.length, (i) => Color.lerp(first[i], second[i], t)!,
-      ));
+      List<Color>.unmodifiable(
+        List<Color>.generate(
+          first.length,
+          (i) => Color.lerp(first[i], second[i], t)!,
+        ),
+      );
   return InstrumentHue(
     grad: colors(a.grad, b.grad),
     gradAlt: colors(a.gradAlt, b.gradAlt),
@@ -317,37 +327,41 @@ InstrumentHue _lerpHue(InstrumentHue a, InstrumentHue b, double t) {
 }
 
 abstract final class OstinatoThemes {
-  static final ThemeData light = _build(Brightness.light, OstinatoPalette.light);
+  static final ThemeData light = _build(
+    Brightness.light,
+    OstinatoPalette.light,
+  );
   static final ThemeData dark = _build(Brightness.dark, OstinatoPalette.dark);
 
   static ThemeData forBrightness(Brightness brightness) =>
       brightness == Brightness.dark ? dark : light;
 
   static ThemeData _build(Brightness brightness, OstinatoPalette p) {
-    final scheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF5F4CA0),
-      brightness: brightness,
-    ).copyWith(
-      primary: p.primary,
-      onPrimary: p.onPrimary,
-      secondary: p.voice.ink,
-      onSecondary: p.onPrimary,
-      error: p.error,
-      onError: p.onError,
-      surface: p.surface,
-      onSurface: p.ink,
-      onSurfaceVariant: p.textBody,
-      surfaceContainerLowest: p.shell,
-      surfaceContainerLow: p.surface,
-      surfaceContainer: p.surface,
-      surfaceContainerHigh: p.controlSurface,
-      surfaceContainerHighest: p.controlSurface,
-      surfaceDim: p.shell,
-      surfaceBright: p.surface,
-      surfaceTint: Colors.transparent,
-      outline: p.outline,
-      outlineVariant: p.divider,
-    );
+    final scheme =
+        ColorScheme.fromSeed(
+          seedColor: const Color(0xFF5F4CA0),
+          brightness: brightness,
+        ).copyWith(
+          primary: p.primary,
+          onPrimary: p.onPrimary,
+          secondary: p.voice.ink,
+          onSecondary: p.onPrimary,
+          error: p.error,
+          onError: p.onError,
+          surface: p.surface,
+          onSurface: p.ink,
+          onSurfaceVariant: p.textBody,
+          surfaceContainerLowest: p.shell,
+          surfaceContainerLow: p.surface,
+          surfaceContainer: p.surface,
+          surfaceContainerHigh: p.controlSurface,
+          surfaceContainerHighest: p.controlSurface,
+          surfaceDim: p.shell,
+          surfaceBright: p.surface,
+          surfaceTint: Colors.transparent,
+          outline: p.outline,
+          outlineVariant: p.divider,
+        );
     final base = ThemeData(
       useMaterial3: true,
       brightness: brightness,
@@ -357,18 +371,21 @@ abstract final class OstinatoThemes {
       extensions: <ThemeExtension<dynamic>>[p],
     );
     WidgetStateProperty<Color?> stateColor(Color normal, Color disabled) =>
-        WidgetStateProperty.resolveWith((states) =>
-          states.contains(WidgetState.disabled) ? disabled : normal);
+        WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.disabled) ? disabled : normal,
+        );
     OutlineInputBorder border(Color color, [double width = 1]) =>
         OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: color, width: width),
         );
     return base.copyWith(
-      pageTransitionsTheme: PageTransitionsTheme(builders: {
-        for (final entry in base.pageTransitionsTheme.builders.entries)
-          entry.key: _ReducedMotionPageTransitionsBuilder(entry.value),
-      }),
+      pageTransitionsTheme: PageTransitionsTheme(
+        builders: {
+          for (final entry in base.pageTransitionsTheme.builders.entries)
+            entry.key: _ReducedMotionPageTransitionsBuilder(entry.value),
+        },
+      ),
       textTheme: base.textTheme.apply(bodyColor: p.ink, displayColor: p.ink),
       iconTheme: IconThemeData(color: p.inkSoft),
       dividerColor: p.divider,
@@ -405,16 +422,24 @@ abstract final class OstinatoThemes {
         style: ButtonStyle(
           foregroundColor: stateColor(p.onPrimary, p.disabledForeground),
           backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) return p.disabledBackground;
+            if (states.contains(WidgetState.disabled))
+              return p.disabledBackground;
             if (states.contains(WidgetState.focused)) {
-              return Color.alphaBlend(p.onPrimary.withValues(alpha: .10), p.primary);
+              return Color.alphaBlend(
+                p.onPrimary.withValues(alpha: .10),
+                p.primary,
+              );
             }
             return p.primary;
           }),
-          side: WidgetStateProperty.resolveWith((states) => BorderSide(
-            color: states.contains(WidgetState.focused) ? p.onPrimary : Colors.transparent,
-            width: 2,
-          )),
+          side: WidgetStateProperty.resolveWith(
+            (states) => BorderSide(
+              color: states.contains(WidgetState.focused)
+                  ? p.onPrimary
+                  : Colors.transparent,
+              width: 2,
+            ),
+          ),
           minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
         ),
       ),
@@ -422,28 +447,39 @@ abstract final class OstinatoThemes {
         style: ButtonStyle(
           foregroundColor: stateColor(p.ink, p.disabledForeground),
           backgroundColor: stateColor(p.controlSurface, p.disabledBackground),
-          side: WidgetStateProperty.resolveWith((states) => BorderSide(
-            color: states.contains(WidgetState.focused) ? p.focus : p.controlBorder,
-            width: states.contains(WidgetState.focused) ? 2 : 1,
-          )),
+          side: WidgetStateProperty.resolveWith(
+            (states) => BorderSide(
+              color: states.contains(WidgetState.focused)
+                  ? p.focus
+                  : p.controlBorder,
+              width: states.contains(WidgetState.focused) ? 2 : 1,
+            ),
+          ),
           minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
         ),
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
           foregroundColor: stateColor(p.inkSoft, p.disabledForeground),
-          overlayColor: WidgetStateProperty.resolveWith((states) =>
-            states.contains(WidgetState.focused) ? p.focus.withValues(alpha: .18) : null),
-          side: WidgetStateProperty.resolveWith((states) =>
-            states.contains(WidgetState.focused)
-              ? BorderSide(color: p.focus, width: 2)
-              : BorderSide.none),
+          overlayColor: WidgetStateProperty.resolveWith(
+            (states) => states.contains(WidgetState.focused)
+                ? p.focus.withValues(alpha: .18)
+                : null,
+          ),
+          side: WidgetStateProperty.resolveWith(
+            (states) => states.contains(WidgetState.focused)
+                ? BorderSide(color: p.focus, width: 2)
+                : BorderSide.none,
+          ),
           minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
         ),
       ),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: p.ink,
-        contentTextStyle: TextStyle(fontFamily: 'Hanken Grotesk', color: p.surface),
+        contentTextStyle: TextStyle(
+          fontFamily: 'Hanken Grotesk',
+          color: p.surface,
+        ),
         actionTextColor: p.surface,
       ),
       tooltipTheme: TooltipThemeData(
@@ -460,7 +496,8 @@ abstract final class OstinatoThemes {
 /// Preserve each platform's normal route transition and duration. When the
 /// operating system requests reduced motion, present the same route child
 /// without a visual transform. This changes no Navigator or route identity.
-final class _ReducedMotionPageTransitionsBuilder extends PageTransitionsBuilder {
+final class _ReducedMotionPageTransitionsBuilder
+    extends PageTransitionsBuilder {
   const _ReducedMotionPageTransitionsBuilder(this.fallback);
   final PageTransitionsBuilder fallback;
 
@@ -479,7 +516,13 @@ final class _ReducedMotionPageTransitionsBuilder extends PageTransitionsBuilder 
     Widget child,
   ) => MediaQuery.disableAnimationsOf(context)
       ? child
-      : fallback.buildTransitions(route, context, animation, secondaryAnimation, child);
+      : fallback.buildTransitions(
+          route,
+          context,
+          animation,
+          secondaryAnimation,
+          child,
+        );
 
   @override
   DelegatedTransitionBuilder? get delegatedTransition {
@@ -487,7 +530,13 @@ final class _ReducedMotionPageTransitionsBuilder extends PageTransitionsBuilder 
     if (transition == null) return null;
     return (context, animation, secondaryAnimation, allowSnapshotting, child) =>
         MediaQuery.disableAnimationsOf(context)
-          ? child
-          : transition(context, animation, secondaryAnimation, allowSnapshotting, child);
+        ? child
+        : transition(
+            context,
+            animation,
+            secondaryAnimation,
+            allowSnapshotting,
+            child,
+          );
   }
 }

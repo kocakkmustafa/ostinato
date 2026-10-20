@@ -20,9 +20,13 @@ String localized(
   String turkish, {
   Map<String, Object?> values = const {},
   num? pluralCount,
-}) => (AppTranslations.maybeOf(context) ?? AppTranslations(
-  Localizations.maybeLocaleOf(context) ?? const Locale('en'), const {},
-)).text(english, turkish, values: values, pluralCount: pluralCount);
+}) =>
+    (AppTranslations.maybeOf(context) ??
+            AppTranslations(
+              Localizations.maybeLocaleOf(context) ?? const Locale('en'),
+              const {},
+            ))
+        .text(english, turkish, values: values, pluralCount: pluralCount);
 
 String appDecimal(BuildContext context, num value, int digits) {
   final format = NumberFormat.decimalPattern(
@@ -33,7 +37,8 @@ String appDecimal(BuildContext context, num value, int digits) {
   return format.format(value);
 }
 
-String appInteger(BuildContext context, int value) => appDecimal(context, value, 0);
+String appInteger(BuildContext context, int value) =>
+    appDecimal(context, value, 0);
 
 /// Technical pitch symbols remain explicit when conventional local names differ.
 String musicPitch(BuildContext context, String pitch) {
@@ -101,27 +106,39 @@ const Map<String, String> _turkishCatalogNames = <String, String>{
 
 // Release display copy; the historical reference dataset stays unchanged.
 const Map<String, String> _englishDisciplineBlurbs = <String, String>{
-  'guitar': 'Guitar posture references and written lessons. Camera assessment and posture scoring are unavailable. Posture lessons do not use the microphone; the written guitar path has an optional single-note observer.',
-  'voice': 'Voice posture references and written lessons. Camera assessment and posture scoring are unavailable. These posture lessons do not use the microphone.',
-  'piano': 'Piano posture references and written lessons. Camera assessment and posture scoring are unavailable. These posture lessons do not measure your notes or their timing.',
+  'guitar':
+      'Guitar posture references and written lessons. Camera assessment and posture scoring are unavailable. Posture lessons do not use the microphone; the written guitar path has an optional single-note observer.',
+  'voice':
+      'Voice posture references and written lessons. Camera assessment and posture scoring are unavailable. These posture lessons do not use the microphone.',
+  'piano':
+      'Piano posture references and written lessons. Camera assessment and posture scoring are unavailable. These posture lessons do not measure your notes or their timing.',
 };
 
 const Map<String, String> _turkishDisciplineBlurbs = <String, String>{
-  'guitar': 'Gitar duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Duruş dersleri mikrofon kullanmaz; yazılı gitar yolunda isteğe bağlı tek nota gözlemi vardır.',
-  'voice': 'Şan duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Bu duruş dersleri mikrofon kullanmaz.',
-  'piano': 'Piyano duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Bu duruş dersleri notalarını veya zamanlamalarını ölçmez.',
+  'guitar':
+      'Gitar duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Duruş dersleri mikrofon kullanmaz; yazılı gitar yolunda isteğe bağlı tek nota gözlemi vardır.',
+  'voice':
+      'Şan duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Bu duruş dersleri mikrofon kullanmaz.',
+  'piano':
+      'Piyano duruş referansları ve yazılı dersler. Kamera değerlendirmesi ve duruş puanlaması kapalı. Bu duruş dersleri notalarını veya zamanlamalarını ölçmez.',
 };
 
 const Map<String, String> _englishCourseGoals = <String, String>{
-  'guitar.foundations': 'Set up your space, read the guitar posture references, and learn which eight open chords the notes describe. Camera assessment and posture scoring are unavailable; these posture lessons do not use the microphone.',
-  'voice.foundations': 'Set up your space and read the recorded singing posture references. Camera assessment and posture scoring are unavailable; these posture lessons do not use the microphone.',
-  'piano.foundations': 'Set up your space and read the recorded keyboard posture references. Camera assessment and posture scoring are unavailable.',
+  'guitar.foundations':
+      'Set up your space, read the guitar posture references, and learn which eight open chords the notes describe. Camera assessment and posture scoring are unavailable; these posture lessons do not use the microphone.',
+  'voice.foundations':
+      'Set up your space and read the recorded singing posture references. Camera assessment and posture scoring are unavailable; these posture lessons do not use the microphone.',
+  'piano.foundations':
+      'Set up your space and read the recorded keyboard posture references. Camera assessment and posture scoring are unavailable.',
 };
 
 const Map<String, String> _turkishCourseGoals = <String, String>{
-  'guitar.foundations': 'Alanını hazırla, gitar duruş referanslarını oku ve notlarda anlatılan sekiz açık akoru tanı. Kamera değerlendirmesi ve duruş puanlaması kapalı; bu duruş dersleri mikrofon kullanmaz.',
-  'voice.foundations': 'Alanını hazırla ve kayıtlı şan duruş referanslarını oku. Kamera değerlendirmesi ve duruş puanlaması kapalı; bu duruş dersleri mikrofon kullanmaz.',
-  'piano.foundations': 'Alanını hazırla ve kayıtlı klavye duruş referanslarını oku. Kamera değerlendirmesi ve duruş puanlaması kapalı.',
+  'guitar.foundations':
+      'Alanını hazırla, gitar duruş referanslarını oku ve notlarda anlatılan sekiz açık akoru tanı. Kamera değerlendirmesi ve duruş puanlaması kapalı; bu duruş dersleri mikrofon kullanmaz.',
+  'voice.foundations':
+      'Alanını hazırla ve kayıtlı şan duruş referanslarını oku. Kamera değerlendirmesi ve duruş puanlaması kapalı; bu duruş dersleri mikrofon kullanmaz.',
+  'piano.foundations':
+      'Alanını hazırla ve kayıtlı klavye duruş referanslarını oku. Kamera değerlendirmesi ve duruş puanlaması kapalı.',
 };
 
 const Map<String, String> _turkishSourceClasses = <String, String>{
@@ -150,8 +167,16 @@ String catalogSourceClass(BuildContext context, String english) =>
 String catalogName(BuildContext context, String id, String english) {
   if (_catalogNameSources[id] != english) return english;
   final en = switch ((id, english)) {
-    ('guitar.foundations.arms', 'Holding the guitar — measured, never graded') => 'Holding the guitar — posture reference',
-    ('voice.foundations.arms' || 'piano.foundations.arms', 'Your arms — measured, never graded') => 'Your arms — posture reference',
+    (
+      'guitar.foundations.arms',
+      'Holding the guitar — measured, never graded',
+    ) =>
+      'Holding the guitar — posture reference',
+    (
+      'voice.foundations.arms' || 'piano.foundations.arms',
+      'Your arms — measured, never graded',
+    ) =>
+      'Your arms — posture reference',
     _ => english,
   };
   return localized(context, en, _turkishCatalogNames[id] ?? en);
@@ -204,27 +229,44 @@ const _catalogNameSources = <String, String>{
 
 // Exact source binding prevents stale translated metadata after edits.
 const _catalogBlurbSources = <String, String>{
-  "guitar": "Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit. These posture lessons do not use microphone input, so every judgement comes from the camera.",
-  "voice": "Put your phone where it can see you from the waist up. We check how you hold yourself against six independent singing teachers. These posture lessons do not use microphone input, so we watch your posture and never listen to your voice.",
-  "piano": "Put your phone where it can see you at the keyboard from the waist up. We check how you sit against three independent piano teachers. These posture lessons do not use microphone input, so your notes are never timed in your room.",
+  "guitar":
+      "Put your phone where it can see you sitting with your guitar. We check your sitting posture against how real teachers sit. These posture lessons do not use microphone input, so every judgement comes from the camera.",
+  "voice":
+      "Put your phone where it can see you from the waist up. We check how you hold yourself against six independent singing teachers. These posture lessons do not use microphone input, so we watch your posture and never listen to your voice.",
+  "piano":
+      "Put your phone where it can see you at the keyboard from the waist up. We check how you sit against three independent piano teachers. These posture lessons do not use microphone input, so your notes are never timed in your room.",
 };
 
 // Exact source binding prevents stale translated metadata after edits.
 const _catalogGoalSources = <String, String>{
-  "guitar.foundations": "Set up your space, sit the way real guitar teachers sit, and learn which eight open chords this course covers. Your posture is checked live; the chord work is described, not heard — there is no microphone input in these posture lessons.",
-  "voice.foundations": "Set up your space and learn to hold yourself the way experienced singing teachers do. Your trunk is checked live while you set up; the reference also covers posture during singing, but this build cannot tell when you start.",
-  "piano.foundations": "Set up your space and learn to sit at the keyboard the way experienced teachers sit.",
+  "guitar.foundations":
+      "Set up your space, sit the way real guitar teachers sit, and learn which eight open chords this course covers. Your posture is checked live; the chord work is described, not heard — there is no microphone input in these posture lessons.",
+  "voice.foundations":
+      "Set up your space and learn to hold yourself the way experienced singing teachers do. Your trunk is checked live while you set up; the reference also covers posture during singing, but this build cannot tell when you start.",
+  "piano.foundations":
+      "Set up your space and learn to sit at the keyboard the way experienced teachers sit.",
 };
 
 /// Whole metadata templates keep unit/order/plural rules in the catalog.
 String lessonMetadata(BuildContext context, int minutes, String focus) =>
     focus.isEmpty
-        ? localized(context, '{v0} MIN', '{v0} DK', values: {'v0': minutes})
-        : localized(context, '{v0} MIN · {v1}', '{v0} DK · {v1}',
-            values: {'v0': minutes, 'v1': catalogTag(context, focus)});
+    ? localized(context, '{v0} MIN', '{v0} DK', values: {'v0': minutes})
+    : localized(
+        context,
+        '{v0} MIN · {v1}',
+        '{v0} DK · {v1}',
+        values: {'v0': minutes, 'v1': catalogTag(context, focus)},
+      );
 
-String courseMetadata(BuildContext context, String level, int minutes, int lessons) =>
-    localized(context, '{v0} · {v1} MIN · {v2} LESSONS',
-      '{v0} · {v1} DK · {v2} DERS',
-      values: {'v0': catalogTag(context, level), 'v1': minutes, 'v2': lessons},
-      pluralCount: lessons);
+String courseMetadata(
+  BuildContext context,
+  String level,
+  int minutes,
+  int lessons,
+) => localized(
+  context,
+  '{v0} · {v1} MIN · {v2} LESSONS',
+  '{v0} · {v1} DK · {v2} DERS',
+  values: {'v0': catalogTag(context, level), 'v1': minutes, 'v2': lessons},
+  pluralCount: lessons,
+);

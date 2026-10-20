@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
-import 'package:permission_handler/permission_handler.dart' show openAppSettings;
+import 'package:permission_handler/permission_handler.dart'
+    show openAppSettings;
 
 import '../camera_pose_source.dart';
 import '../camera_session.dart';
@@ -85,13 +86,15 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   String? _cueTextFor(double currentTiltDeg) {
     final ObservationCue? c = _cue;
     if (c == null) return null;
-    return _cueText.resolve(ObservationCue(
-      templateId: c.templateId,
-      teacherCount: c.teacherCount,
-      sourceClass: c.sourceClass,
-      thresholdDeg: c.thresholdDeg,
-      measuredDeg: currentTiltDeg,
-    ));
+    return _cueText.resolve(
+      ObservationCue(
+        templateId: c.templateId,
+        teacherCount: c.teacherCount,
+        sourceClass: c.sourceClass,
+        thresholdDeg: c.thresholdDeg,
+        measuredDeg: currentTiltDeg,
+      ),
+    );
   }
 
   SurfaceState _state = const Starting();
@@ -142,8 +145,9 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
     final ContentRepositoryScope scope = ContentRepositoryScope.of(context);
     _contract = scope.contractOrNull(widget.discipline.id);
     _cueText = scope.cueText;
-    _evaluator =
-        _contract == null ? null : PostureEvaluator(contract: _contract);
+    _evaluator = _contract == null
+        ? null
+        : PostureEvaluator(contract: _contract);
 
     _statusSubscription = _source.status.listen((SurfaceState s) {
       if (!mounted || _routeRetired) return;
@@ -209,15 +213,17 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
       outCount: _outCount,
       history: List<double>.of(_hist),
     );
-    Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
-      builder: (_) => ReviewScreenRoute(
-        discipline: widget.discipline,
-        lesson: widget.lesson,
-        hue: widget.hue,
-        summary: summary,
-        previousSession: _readPreviousThenSave(summary),
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(
+        builder: (_) => ReviewScreenRoute(
+          discipline: widget.discipline,
+          lesson: widget.lesson,
+          hue: widget.hue,
+          summary: summary,
+          previousSession: _readPreviousThenSave(summary),
+        ),
       ),
-    ));
+    );
   }
 
   /// D14 (2026-08-16, O-153): ÖNCE önceki kaydı OKU, SONRA bugünküyü YAZ —
@@ -231,15 +237,20 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   /// hatayla biterse (ör. okuma çöker) `FutureBuilder` onu yakalar — geçmiş
   /// kartı çizilmez, uygulama çökmez.
   Future<PersistedSession?> _readPreviousThenSave(
-      SessionSummary summary) async {
+    SessionSummary summary,
+  ) async {
     final SessionStore store = SessionStore(accountUserId: _accountUserId);
     final PersistedSession? previous = await store.lastSession();
-    store.save(PersistedSession.fromSummary(
-      disciplineId: widget.discipline.id,
-      lessonId: widget.lesson.id,
-      summary: summary,
-      completedAt: DateTime.now(),
-    )).ignore();
+    store
+        .save(
+          PersistedSession.fromSummary(
+            disciplineId: widget.discipline.id,
+            lessonId: widget.lesson.id,
+            summary: summary,
+            completedAt: DateTime.now(),
+          ),
+        )
+        .ignore();
     return previous;
   }
 
@@ -283,23 +294,35 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   GlassIconButton(
-                      icon: '✕',
-                      semanticLabel: 'Stop session',
-                      onTap: _stop),
+                    icon: '✕',
+                    semanticLabel: 'Stop session',
+                    onTap: _stop,
+                  ),
                   // `lesson.displayName` GERÇEK içerikte 34 karaktere kadar
                   // çıkıyor ("How much teachers actually differ") — Expanded
                   // olmadan sabit-genişlikli iki komşusu arasında RenderFlex
                   // taştı (375pt'te ölçüldü, test/real_content_overflow_test.dart).
                   Expanded(
-                    child: Column(children: <Widget>[
-                      Text(catalogName(context, widget.lesson.id, widget.lesson.displayName),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          catalogName(
+                            context,
+                            widget.lesson.id,
+                            widget.lesson.displayName,
+                          ),
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: hankenText(size: 13.5, weight: FontWeight.w500)),
-                      const SizedBox(height: 3),
-                      Text(_clock(), style: monoText()),
-                    ]),
+                          style: hankenText(
+                            size: 13.5,
+                            weight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 3),
+                        Text(_clock(), style: monoText()),
+                      ],
+                    ),
                   ),
                   const SizedBox(width: 48, height: 48),
                 ],
@@ -331,8 +354,9 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
     }
     if (_contract == null) {
       return _NoticeCard(
-          state: const SetupFailed('no-contract-for-discipline'),
-          onRetry: () {});
+        state: const SetupFailed('no-contract-for-discipline'),
+        onRetry: () {},
+      );
     }
 
     return Column(
@@ -353,18 +377,21 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
                 alignment: Alignment.center,
                 children: <Widget>[
                   if (_counting)
-                    Text('$_countdown',
-                        key: const Key('live-countdown'),
-                        style: hankenText(size: 96, weight: FontWeight.w500))
+                    Text(
+                      '$_countdown',
+                      key: const Key('live-countdown'),
+                      style: hankenText(size: 96, weight: FontWeight.w500),
+                    )
                   else if (_state is NoPersonVisible)
                     const _BlindNotice()
                   else if (_state is Measuring)
                     KeyedSubtree(
                       key: const Key('live-measuring'),
                       child: _MeasuringFigure(
-                          state: _state as Measuring,
-                          contract: _contract,
-                          hue: hue),
+                        state: _state as Measuring,
+                        contract: _contract,
+                        hue: hue,
+                      ),
                     ),
                   if (!_counting &&
                       _cueVisible &&
@@ -396,13 +423,15 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
               // cooldown, no entrance"). Cümle YİNE golden katalogdan.
               text: (_state as Measuring).inBand
                   ? null
-                  : _cueText.resolve(ObservationCue(
-                      templateId: _contract.cueTemplateId,
-                      teacherCount: _contract.teacherCount,
-                      sourceClass: _contract.sourceClass,
-                      thresholdDeg: _contract.cueThresholdDeg,
-                      measuredDeg: (_state as Measuring).trunkTiltDeg.abs(),
-                    )),
+                  : _cueText.resolve(
+                      ObservationCue(
+                        templateId: _contract.cueTemplateId,
+                        teacherCount: _contract.teacherCount,
+                        sourceClass: _contract.sourceClass,
+                        thresholdDeg: _contract.cueThresholdDeg,
+                        measuredDeg: (_state as Measuring).trunkTiltDeg.abs(),
+                      ),
+                    ),
               hue: hue,
             ),
           ),
@@ -412,11 +441,18 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
             style: OutlinedButton.styleFrom(
               minimumSize: const Size.fromHeight(52),
               side: BorderSide(color: p.controlBorder),
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(17),
+              ),
             ),
-            child: Text(localized(context, 'Stop and see the summary', 'Durdur ve özeti gör'),
-                style: hankenText(size: 15, weight: FontWeight.w500)),
+            child: Text(
+              localized(
+                context,
+                'Stop and see the summary',
+                'Durdur ve özeti gör',
+              ),
+              style: hankenText(size: 15, weight: FontWeight.w500),
+            ),
           ),
       ],
     );
@@ -424,8 +460,11 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
 }
 
 class _MeasuringFigure extends StatelessWidget {
-  const _MeasuringFigure(
-      {required this.state, required this.contract, required this.hue});
+  const _MeasuringFigure({
+    required this.state,
+    required this.contract,
+    required this.hue,
+  });
   final Measuring state;
   final PostureContract contract;
   final InstrumentHue hue;
@@ -459,13 +498,19 @@ class _MeasuringFigure extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                      '${localized(context, 'TEACHERS', 'EĞİTMENLER')} ${appDecimal(context, contract.bandLowDeg, 1)}–'
-                      '${appDecimal(context, contract.bandHighDeg, 1)}° · '
-                      'N=${contract.teacherCount}',
-                      style: monoText(size: 9.5, letterSpacing: .09)),
-                  Text('${appDecimal(context, state.trunkTiltDeg.abs(), 1)}°',
-                      key: const Key('live-tilt-label'),
-                      style: monoText(size: 15, color: OstinatoPalette.of(context).ink)),
+                    '${localized(context, 'TEACHERS', 'EĞİTMENLER')} ${appDecimal(context, contract.bandLowDeg, 1)}–'
+                    '${appDecimal(context, contract.bandHighDeg, 1)}° · '
+                    'N=${contract.teacherCount}',
+                    style: monoText(size: 9.5, letterSpacing: .09),
+                  ),
+                  Text(
+                    '${appDecimal(context, state.trunkTiltDeg.abs(), 1)}°',
+                    key: const Key('live-tilt-label'),
+                    style: monoText(
+                      size: 15,
+                      color: OstinatoPalette.of(context).ink,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 8),
@@ -477,9 +522,17 @@ class _MeasuringFigure extends StatelessWidget {
                 color: hue.ink,
               ),
               const SizedBox(height: 8),
-              Text(localized(context, 'No score, and none is coming. The bar is the range; the mark is you.',
-                  'Puan yok. Çubuk eğitmen aralığını, işaret seni gösterir.'),
-                  style: hankenText(size: 11.5, color: OstinatoPalette.of(context).textMuted)),
+              Text(
+                localized(
+                  context,
+                  'No score, and none is coming. The bar is the range; the mark is you.',
+                  'Puan yok. Çubuk eğitmen aralığını, işaret seni gösterir.',
+                ),
+                style: hankenText(
+                  size: 11.5,
+                  color: OstinatoPalette.of(context).textMuted,
+                ),
+              ),
             ],
           ),
         ),
@@ -492,38 +545,56 @@ class _BlindNotice extends StatelessWidget {
   const _BlindNotice();
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 34),
-        child: Column(
-          key: const Key('live-blind'),
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              width: 58,
-              height: 58,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border:
-                    Border.all(color: OstinatoPalette.of(context).outline, width: 1.5),
-              ),
-              alignment: Alignment.center,
-              child: Text('?', style: hankenText(size: 20, color: OstinatoPalette.of(context).textFaint)),
+    padding: const EdgeInsets.symmetric(horizontal: 34),
+    child: Column(
+      key: const Key('live-blind'),
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          width: 58,
+          height: 58,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: OstinatoPalette.of(context).outline,
+              width: 1.5,
             ),
-            const SizedBox(height: 16),
-            Text(localized(context, 'I can’t see you right now.', 'Şu anda seni göremiyoruz.'),
-                style: hankenText(size: 21, weight: FontWeight.w500)),
-            const SizedBox(height: 10),
-            Text(
-              localized(context,
-                  'Landmark confidence is below the bar. I’m not judging this stretch — and I’m telling you rather than going quiet, because silence would read as "you’re doing fine".',
-                  'Vücut noktaları yeterli güvenle okunmuyor. Bu bölümü değerlendirmiyoruz; sessiz kalmak yanlış bir güven verebilirdi.'),
-              textAlign: TextAlign.center,
-              style: hankenText(
-                        size: 14.5, height: 1.55,
-                        color: OstinatoPalette.of(context).textBody),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            '?',
+            style: hankenText(
+              size: 20,
+              color: OstinatoPalette.of(context).textFaint,
             ),
-          ],
+          ),
         ),
-      );
+        const SizedBox(height: 16),
+        Text(
+          localized(
+            context,
+            'I can’t see you right now.',
+            'Şu anda seni göremiyoruz.',
+          ),
+          style: hankenText(size: 21, weight: FontWeight.w500),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          localized(
+            context,
+            'Landmark confidence is below the bar. I’m not judging this stretch — and I’m telling you rather than going quiet, because silence would read as "you’re doing fine".',
+            'Vücut noktaları yeterli güvenle okunmuyor. Bu bölümü değerlendirmiyoruz; sessiz kalmak yanlış bir güven verebilirdi.',
+          ),
+          textAlign: TextAlign.center,
+          style: hankenText(
+            size: 14.5,
+            height: 1.55,
+            color: OstinatoPalette.of(context).textBody,
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 /// Treatment A — nadir, güçlü: tam panel, [text] `CueTextResolver`den
@@ -535,25 +606,32 @@ class _CueAPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GlassCard(
-        key: const Key('observation-cue'),
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            kicker(localized(context, 'Observation', 'Gözlem'), color: hue.ink),
-            const SizedBox(height: 8),
-            Text(text,
-                style: hankenText(size: 17, weight: FontWeight.w500, height: 1.35)),
-            const SizedBox(height: 7),
-            Text(
-              localized(context,
-                  'Not a correction — we have no teacher data on what you should do about it. Just what we measured.',
-                  'Bu bir düzeltme önerisi değil. Ne yapman gerektiğine dair eğitmen verimiz yok; yalnızca ölçtüğümüzü gösteriyoruz.'),
-              style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textMuted),
-            ),
-          ],
+    key: const Key('observation-cue'),
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        kicker(localized(context, 'Observation', 'Gözlem'), color: hue.ink),
+        const SizedBox(height: 8),
+        Text(
+          text,
+          style: hankenText(size: 17, weight: FontWeight.w500, height: 1.35),
         ),
-      );
+        const SizedBox(height: 7),
+        Text(
+          localized(
+            context,
+            'Not a correction — we have no teacher data on what you should do about it. Just what we measured.',
+            'Bu bir düzeltme önerisi değil. Ne yapman gerektiğine dair eğitmen verimiz yok; yalnızca ölçtüğümüzü gösteriyoruz.',
+          ),
+          style: hankenText(
+            size: 12.5,
+            color: OstinatoPalette.of(context).textMuted,
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 /// Treatment B — daima orada, sessiz: [text] null ise bant-içi DURUM
@@ -564,7 +642,11 @@ class _CueAPanel extends StatelessWidget {
 /// evaluator'ın cooldown'lu `cue` alanını BEKLEMEZ, ama cümle yine golden
 /// katalogdan doldurulur.
 class _CueBLine extends StatelessWidget {
-  const _CueBLine({required this.inBand, required this.text, required this.hue});
+  const _CueBLine({
+    required this.inBand,
+    required this.text,
+    required this.hue,
+  });
   final bool inBand;
   final String? text;
   final InstrumentHue hue;
@@ -599,7 +681,10 @@ class _CueBLine extends StatelessWidget {
               text ??
                   'You are inside the range the teachers occupy. Nothing '
                       'to report.',
-              style: hankenText(size: 13, color: OstinatoPalette.of(context).inkSoft),
+              style: hankenText(
+                size: 13,
+                color: OstinatoPalette.of(context).inkSoft,
+              ),
             ),
           ),
         ],
@@ -619,14 +704,79 @@ class _NoticeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (String key, String title, String body, String? action, VoidCallback? onAction) =
-        switch (state) {
-      Starting() => ("live-starting", localized(context, "Getting the camera ready", "Kamera hazırlanıyor"), localized(context, "This takes a moment. Nothing is being recorded.", "Bu kısa sürebilir. Hiçbir şey kaydedilmiyor."), null, null),
-      PermissionDeniedRetriable() => ("live-permission-retriable", localized(context, "Camera access is off", "Kamera erişimi kapalı"), localized(context, "Ostinato needs the camera to see how you sit. Video never leaves your phone.", "Oturma duruşunu görebilmek için kamera erişimi gerekli. Video telefonundan çıkmaz."), localized(context, "Try again", "Tekrar dene"), onRetry),
-      PermissionDeniedPermanent() => ("live-permission-permanent", localized(context, "Camera access is off", "Kamera erişimi kapalı"), localized(context, "The system will not ask again. Open Settings to change it. Video never leaves your phone.", "Sistem tekrar izin istemeyecek. Erişimi Ayarlar’dan açabilirsin. Video telefonundan çıkmaz."), localized(context, "Open Settings", "Ayarları aç"), openAppSettings),
-      SetupFailed() => ("live-setup-failed", localized(context, "This lesson opened, but nothing is being measured", "Ders açıldı ancak ölçüm başlamadı"), localized(context, "The camera did not start. We are simply not analysing anything right now.", "Kamera açılamadı. Şu anda hiçbir şey analiz edilmiyor."), null, null),
-      CameraUnavailable() => ("live-camera-unavailable", localized(context, "The camera did not open", "Kamera açılamadı"), localized(context, "We could not start a camera session.", "Kamera oturumu başlatılamadı."), null, null),
-      _ => ("live-unknown", localized(context, "Nothing to show", "Gösterilecek bir şey yok"), '', null, null),
+    final (
+      String key,
+      String title,
+      String body,
+      String? action,
+      VoidCallback? onAction,
+    ) = switch (state) {
+      Starting() => (
+        "live-starting",
+        localized(context, "Getting the camera ready", "Kamera hazırlanıyor"),
+        localized(
+          context,
+          "This takes a moment. Nothing is being recorded.",
+          "Bu kısa sürebilir. Hiçbir şey kaydedilmiyor.",
+        ),
+        null,
+        null,
+      ),
+      PermissionDeniedRetriable() => (
+        "live-permission-retriable",
+        localized(context, "Camera access is off", "Kamera erişimi kapalı"),
+        localized(
+          context,
+          "Ostinato needs the camera to see how you sit. Video never leaves your phone.",
+          "Oturma duruşunu görebilmek için kamera erişimi gerekli. Video telefonundan çıkmaz.",
+        ),
+        localized(context, "Try again", "Tekrar dene"),
+        onRetry,
+      ),
+      PermissionDeniedPermanent() => (
+        "live-permission-permanent",
+        localized(context, "Camera access is off", "Kamera erişimi kapalı"),
+        localized(
+          context,
+          "The system will not ask again. Open Settings to change it. Video never leaves your phone.",
+          "Sistem tekrar izin istemeyecek. Erişimi Ayarlar’dan açabilirsin. Video telefonundan çıkmaz.",
+        ),
+        localized(context, "Open Settings", "Ayarları aç"),
+        openAppSettings,
+      ),
+      SetupFailed() => (
+        "live-setup-failed",
+        localized(
+          context,
+          "This lesson opened, but nothing is being measured",
+          "Ders açıldı ancak ölçüm başlamadı",
+        ),
+        localized(
+          context,
+          "The camera did not start. We are simply not analysing anything right now.",
+          "Kamera açılamadı. Şu anda hiçbir şey analiz edilmiyor.",
+        ),
+        null,
+        null,
+      ),
+      CameraUnavailable() => (
+        "live-camera-unavailable",
+        localized(context, "The camera did not open", "Kamera açılamadı"),
+        localized(
+          context,
+          "We could not start a camera session.",
+          "Kamera oturumu başlatılamadı.",
+        ),
+        null,
+        null,
+      ),
+      _ => (
+        "live-unknown",
+        localized(context, "Nothing to show", "Gösterilecek bir şey yok"),
+        '',
+        null,
+        null,
+      ),
     };
     return Center(
       child: Padding(
@@ -637,8 +787,14 @@ class _NoticeCard extends StatelessWidget {
           children: <Widget>[
             Text(title, style: hankenText(size: 19, weight: FontWeight.w500)),
             const SizedBox(height: 8),
-            Text(body, textAlign: TextAlign.center,
-                style: hankenText(size: 14, color: OstinatoPalette.of(context).textBody)),
+            Text(
+              body,
+              textAlign: TextAlign.center,
+              style: hankenText(
+                size: 14,
+                color: OstinatoPalette.of(context).textBody,
+              ),
+            ),
             if (action != null) ...<Widget>[
               const SizedBox(height: 18),
               FilledButton(

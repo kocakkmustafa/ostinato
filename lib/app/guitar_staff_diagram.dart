@@ -74,7 +74,16 @@ class GuitarStaffDiagram extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
-                  localized(context, "Open string {v0}: written {v1} → sounding {v2}", "{v0}. açık tel: yazılı {v1} → seslenen {v2}", values: {"v0": note.string, "v1": note.written, "v2": note.sounding}),
+                  localized(
+                    context,
+                    "Open string {v0}: written {v1} → sounding {v2}",
+                    "{v0}. açık tel: yazılı {v1} → seslenen {v2}",
+                    values: {
+                      "v0": note.string,
+                      "v1": note.written,
+                      "v2": note.sounding,
+                    },
+                  ),
                   style: hankenText(size: 13, height: 1.4),
                 ),
               ),
@@ -111,7 +120,10 @@ class GuitarStaffDiagram extends StatelessWidget {
     );
   }
 
-  Widget _staff(BuildContext context, List<GuitarStaffNote> notes) => ExcludeSemantics(
+  Widget _staff(
+    BuildContext context,
+    List<GuitarStaffNote> notes,
+  ) => ExcludeSemantics(
     // All visual information is repeated in scalable, readable text above/below.
     child: SizedBox(
       height: 180,
@@ -193,7 +205,8 @@ class _StaffPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_StaffPainter oldDelegate) => oldDelegate.notes != notes ||
+  bool shouldRepaint(_StaffPainter oldDelegate) =>
+      oldDelegate.notes != notes ||
       oldDelegate.inkColor != inkColor ||
       oldDelegate.paperColor != paperColor;
 }
@@ -232,7 +245,12 @@ class GuitarFirstReadScore extends StatelessWidget {
           for (var barIndex = 0; barIndex < score.bars.length; barIndex++) ...[
             const SizedBox(height: 12),
             Text(
-              localized(context, "Bar {v0}", "{v0}. ölçü", values: {"v0": barIndex + 1}),
+              localized(
+                context,
+                "Bar {v0}",
+                "{v0}. ölçü",
+                values: {"v0": barIndex + 1},
+              ),
               style: hankenText(size: 14, weight: FontWeight.w600),
             ),
             ExcludeSemantics(
@@ -298,15 +316,26 @@ class GuitarFirstReadScore extends StatelessWidget {
         final duration = event.ticks == 2
             ? localized(context, 'quarter note', 'dörtlük')
             : localized(context, 'eighth note', 'sekizlik');
-        parts.add(localized(context,
-          'written {v0} (sounds {v1}), {v2}',
-          'yazılı {v0} (duyulan {v1}), {v2}',
-          values: {'v0': musicPitch(context, event.written!),
-            'v1': musicPitch(context, event.sounding!), 'v2': duration}));
+        parts.add(
+          localized(
+            context,
+            'written {v0} (sounds {v1}), {v2}',
+            'yazılı {v0} (duyulan {v1}), {v2}',
+            values: {
+              'v0': musicPitch(context, event.written!),
+              'v1': musicPitch(context, event.sounding!),
+              'v2': duration,
+            },
+          ),
+        );
       }
     }
-    return localized(context, 'Bar {v0}: {v1}.', '{v0}. ölçü: {v1}.',
-      values: {'v0': index + 1, 'v1': parts.join('; ')});
+    return localized(
+      context,
+      'Bar {v0}: {v1}.',
+      '{v0}. ölçü: {v1}.',
+      values: {'v0': index + 1, 'v1': parts.join('; ')},
+    );
   }
 }
 

@@ -10,8 +10,12 @@ import '../design/widgets.dart';
 /// Historical teacher-reference notes. This page has no camera input and
 /// displays neither a body measurement nor a posture assessment.
 class LessonDemoScreenRoute extends StatelessWidget {
-  const LessonDemoScreenRoute(
-      {super.key, required this.discipline, required this.lesson, required this.hue});
+  const LessonDemoScreenRoute({
+    super.key,
+    required this.discipline,
+    required this.lesson,
+    required this.hue,
+  });
   final Discipline discipline;
   final Lesson lesson;
   final InstrumentHue hue;
@@ -29,22 +33,39 @@ class LessonDemoScreenRoute extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               GlassIconButton(
-                  icon: '‹',
-                  semanticLabel: localized(context, 'Back', 'Geri'),
-                  onTap: () => Navigator.of(context).pop()),
+                icon: '‹',
+                semanticLabel: localized(context, 'Back', 'Geri'),
+                onTap: () => Navigator.of(context).pop(),
+              ),
               const SizedBox(height: 22),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
                 decoration: BoxDecoration(
-                    color: hue.chip, borderRadius: BorderRadius.circular(8)),
-                child: Text(localized(context, 'REFERENCE · NO SCORING', 'REFERANS · PUAN YOK'),
-                    key: const Key('state-lesson-demo'),
-                    style: monoText(color: hue.ink)),
+                  color: hue.chip,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  localized(
+                    context,
+                    'REFERENCE · NO SCORING',
+                    'REFERANS · PUAN YOK',
+                  ),
+                  key: const Key('state-lesson-demo'),
+                  style: monoText(color: hue.ink),
+                ),
               ),
               const SizedBox(height: 13),
-              Text(catalogName(context, lesson.id, lesson.displayName),
-                  style: hankenText(
-                      size: 27, weight: FontWeight.w600, height: 1.15)),
+              Text(
+                catalogName(context, lesson.id, lesson.displayName),
+                style: hankenText(
+                  size: 27,
+                  weight: FontWeight.w600,
+                  height: 1.15,
+                ),
+              ),
               const SizedBox(height: 11),
               Text(
                 localized(
@@ -53,7 +74,11 @@ class LessonDemoScreenRoute extends StatelessWidget {
                   '{v0} DK · {v1}',
                   values: {
                     'v0': appInteger(context, lesson.minutes),
-                    'v1': catalogUpperName(context, discipline.id, discipline.displayName),
+                    'v1': catalogUpperName(
+                      context,
+                      discipline.id,
+                      discipline.displayName,
+                    ),
                   },
                 ),
                 style: monoText(),
@@ -64,13 +89,21 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: hue.gradient,
                   borderRadius: BorderRadius.circular(22),
-                  border: Border.all(color: OstinatoPalette.of(context).glassBorder),
+                  border: Border.all(
+                    color: OstinatoPalette.of(context).glassBorder,
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker(localized(context, 'Recorded teacher reference range',
-                        'Kaydedilmiş eğitmen referansı aralığı'), color: hue.ink),
+                    kicker(
+                      localized(
+                        context,
+                        'Recorded teacher reference range',
+                        'Kaydedilmiş eğitmen referansı aralığı',
+                      ),
+                      color: hue.ink,
+                    ),
                     const SizedBox(height: 14),
                     if (arm != null)
                       Column(
@@ -130,10 +163,15 @@ class LessonDemoScreenRoute extends StatelessWidget {
                         ],
                       ),
                     const SizedBox(height: 14),
-                    Text(catalogCopy(context, '${lesson.id}.demoOnlyReason',
-                            lesson.demoOnlyReason ?? ''),
-                        key: const Key('demo-reason'),
-                        style: hankenText(size: 15, height: 1.6)),
+                    Text(
+                      catalogCopy(
+                        context,
+                        '${lesson.id}.demoOnlyReason',
+                        lesson.demoOnlyReason ?? '',
+                      ),
+                      key: const Key('demo-reason'),
+                      style: hankenText(size: 15, height: 1.6),
+                    ),
                   ],
                 ),
               ),
@@ -142,30 +180,60 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker(localized(context, 'Why this is not a target',
-                        'Bu aralık neden hedef değil')),
+                    kicker(
+                      localized(
+                        context,
+                        'Why this is not a target',
+                        'Bu aralık neden hedef değil',
+                      ),
+                    ),
                     const SizedBox(height: 8),
-                    Text(catalogCopy(context, '${lesson.id}.blockedBy',
-                            lesson.blockedBy ?? ''),
-                        style: hankenText(size: 13.5, height: 1.55)),
+                    Text(
+                      catalogCopy(
+                        context,
+                        '${lesson.id}.blockedBy',
+                        lesson.blockedBy ?? '',
+                      ),
+                      style: hankenText(size: 13.5, height: 1.55),
+                    ),
                     const SizedBox(height: 12),
                     const Divider(height: 1),
                     const SizedBox(height: 12),
-                    kicker(localized(context, 'What research would be needed',
-                        'Hangi araştırma gerekir')),
+                    kicker(
+                      localized(
+                        context,
+                        'What research would be needed',
+                        'Hangi araştırma gerekir',
+                      ),
+                    ),
                     const SizedBox(height: 8),
-                    Text(catalogCopy(context, '${lesson.id}.unblockedBy',
-                            lesson.unblockedBy ?? ''),
-                        style: hankenText(size: 13.5, height: 1.55)),
+                    Text(
+                      catalogCopy(
+                        context,
+                        '${lesson.id}.unblockedBy',
+                        lesson.unblockedBy ?? '',
+                      ),
+                      style: hankenText(size: 13.5, height: 1.55),
+                    ),
                     const SizedBox(height: 12),
                     const Divider(height: 1),
                     const SizedBox(height: 12),
-                    kicker(localized(context, 'What this page offers',
-                        'Bu sayfa ne sunuyor')),
+                    kicker(
+                      localized(
+                        context,
+                        'What this page offers',
+                        'Bu sayfa ne sunuyor',
+                      ),
+                    ),
                     const SizedBox(height: 8),
-                    Text(catalogCopy(context, '${lesson.id}.ifItStaysBlocked',
-                            lesson.ifBlockedStaysBlocked ?? ''),
-                        style: hankenText(size: 13.5, height: 1.55)),
+                    Text(
+                      catalogCopy(
+                        context,
+                        '${lesson.id}.ifItStaysBlocked',
+                        lesson.ifBlockedStaysBlocked ?? '',
+                      ),
+                      style: hankenText(size: 13.5, height: 1.55),
+                    ),
                   ],
                 ),
               ),
@@ -183,8 +251,11 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                     Icon(Icons.info_outline,
-                        size: 18, color: OstinatoPalette.of(context).textMuted),
+                    Icon(
+                      Icons.info_outline,
+                      size: 18,
+                      color: OstinatoPalette.of(context).textMuted,
+                    ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -195,7 +266,9 @@ class LessonDemoScreenRoute extends StatelessWidget {
                         ),
                         key: const Key('demo-live-gap-note'),
                         style: hankenText(
-                            size: 12.5, color: OstinatoPalette.of(context).textMuted),
+                          size: 12.5,
+                          color: OstinatoPalette.of(context).textMuted,
+                        ),
                       ),
                     ),
                   ],

@@ -231,7 +231,12 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                           'Progress unknown',
                           'İlerleme bilinmiyor',
                         )
-                      : localized(context, "{v0} of {v1} self-reported complete", "{v0} / {v1} öz beyanla tamamlandı", values: {"v0": completed, "v1": lessons.length}),
+                      : localized(
+                          context,
+                          "{v0} of {v1} self-reported complete",
+                          "{v0} / {v1} öz beyanla tamamlandı",
+                          values: {"v0": completed, "v1": lessons.length},
+                        ),
                   key: const Key('guitar-journey-progress'),
                   style: monoText(color: hue.ink),
                 ),
@@ -410,7 +415,12 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
         subtitle: Text(
           done == null
               ? localized(context, 'Progress unknown', 'İlerleme bilinmiyor')
-              : localized(context, "{v0} / 6 self-reported", "{v0} / 6 öz beyan", values: {"v0": done}),
+              : localized(
+                  context,
+                  "{v0} / 6 self-reported",
+                  "{v0} / 6 öz beyan",
+                  values: {"v0": done},
+                ),
           style: monoText(),
         ),
         children: [
@@ -418,7 +428,10 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
             padding: const EdgeInsets.fromLTRB(17, 0, 17, 9),
             child: Text(
               module.goal.of(context),
-              style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textMuted),
+              style: hankenText(
+                size: 12.5,
+                color: OstinatoPalette.of(context).textMuted,
+              ),
             ),
           ),
           for (final lesson in module.lessons)
@@ -448,13 +461,23 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
 
   String _statusText(BuildContext context, GuitarLessonProgress? record) {
     if (record?.selfReportedCompletedAt != null) {
-      final date = MaterialLocalizations.of(context).formatMediumDate(
-        record!.selfReportedCompletedAt!.toLocal(),
+      final date = MaterialLocalizations.of(
+        context,
+      ).formatMediumDate(record!.selfReportedCompletedAt!.toLocal());
+      return localized(
+        context,
+        "SELF-REPORTED · {v0}",
+        "ÖZ BEYAN · {v0}",
+        values: {"v0": date},
       );
-      return localized(context, "SELF-REPORTED · {v0}", "ÖZ BEYAN · {v0}", values: {"v0": date});
     }
     if ((record?.practiceCount ?? 0) > 0) {
-      return localized(context, "PRACTISED ×{v0}", "ÇALIŞILDI ×{v0}", values: {"v0": record?.practiceCount ?? 0});
+      return localized(
+        context,
+        "PRACTISED ×{v0}",
+        "ÇALIŞILDI ×{v0}",
+        values: {"v0": record?.practiceCount ?? 0},
+      );
     }
     if (record?.seenAt != null) return localized(context, 'VIEWED', 'GÖRÜLDÜ');
     return localized(context, 'NOT STARTED', 'BAŞLANMADI');
@@ -555,7 +578,12 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
           ),
           const SizedBox(height: 6),
           Text(
-            localized(context, "You self-reported completing an earlier version on {v0}. That record remains saved; new required material has its own practice record.", "Önceki sürümü {v0} tarihinde tamamladığını beyan ettin. O kayıt korunuyor; yeni zorunlu içeriğin ayrı bir çalışma kaydı var.", values: {"v0": date}),
+            localized(
+              context,
+              "You self-reported completing an earlier version on {v0}. That record remains saved; new required material has its own practice record.",
+              "Önceki sürümü {v0} tarihinde tamamladığını beyan ettin. O kayıt korunuyor; yeni zorunlu içeriğin ayrı bir çalışma kaydı var.",
+              values: {"v0": date},
+            ),
             style: hankenText(size: 12.5, height: 1.5),
           ),
         ],
@@ -656,7 +684,11 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               const SizedBox(height: 20),
               kicker(
                 lesson.capstone
-                    ? localized(context, 'ORIGINAL PERFORMANCE', 'ÖZGÜN PERFORMANS')
+                    ? localized(
+                        context,
+                        'ORIGINAL PERFORMANCE',
+                        'ÖZGÜN PERFORMANS',
+                      )
                     : localized(context, 'GUITAR LESSON', 'GİTAR DERSİ'),
                 color: hue.ink,
               ),
@@ -672,7 +704,12 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                localized(context, "{v0} MIN · SELF-GUIDED", "{v0} DK · KENDİ ÇALIŞMAN", values: {"v0": lesson.minutes}),
+                localized(
+                  context,
+                  "{v0} MIN · SELF-GUIDED",
+                  "{v0} DK · KENDİ ÇALIŞMAN",
+                  values: {"v0": lesson.minutes},
+                ),
                 style: monoText(),
               ),
               LessonMediaSlot.empty(
@@ -716,7 +753,14 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                       context,
                       'Practise {v0} and use its self-check before continuing. Return to the course to revisit it.',
                       '{v0} dersini çalış ve devam etmeden öz denetimini yap. Yeniden açmak için kursa dön.',
-                      values: {'v0': widget.course.lessons.firstWhere((l) => l.id == lesson.prerequisiteIds.single).title.of(context)},
+                      values: {
+                        'v0': widget.course.lessons
+                            .firstWhere(
+                              (l) => l.id == lesson.prerequisiteIds.single,
+                            )
+                            .title
+                            .of(context),
+                      },
                     ),
                   ),
                 _section(
@@ -735,7 +779,10 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                     lesson.teachingSteps
                         .asMap()
                         .entries
-                        .map((e) => '${appInteger(context, e.key + 1)}. ${e.value.of(context)}')
+                        .map(
+                          (e) =>
+                              '${appInteger(context, e.key + 1)}. ${e.value.of(context)}',
+                        )
                         .join('\n\n'),
                   ),
                 if (lesson.id.endsWith('.tuning')) _tuningCard(context),
@@ -833,7 +880,12 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                                 'Practice entries: unknown',
                                 'Çalışma kaydı: bilinmiyor',
                               )
-                            : localized(context, "Practice entries: {v0}", "Çalışma kaydı: {v0}", values: {"v0": _record?.practiceCount ?? 0}),
+                            : localized(
+                                context,
+                                "Practice entries: {v0}",
+                                "Çalışma kaydı: {v0}",
+                                values: {"v0": _record?.practiceCount ?? 0},
+                              ),
                         style: monoText(),
                       ),
                       const SizedBox(height: 9),
@@ -1117,7 +1169,11 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                     context,
                     'About {v0}–{v1} min · {v2} short rounds',
                     'Yaklaşık {v0}–{v1} dk · {v2} kısa tur',
-                    values: {'v0': drill.minutesRange.first, 'v1': drill.minutesRange.last, 'v2': drill.rounds},
+                    values: {
+                      'v0': drill.minutesRange.first,
+                      'v1': drill.minutesRange.last,
+                      'v2': drill.rounds,
+                    },
                     pluralCount: drill.rounds,
                   ),
                   style: hankenText(
@@ -1195,8 +1251,20 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 3),
               child: Text(
-                localized(context, "String {v0} · {v1} · {v2} Hz", "{v0}. tel · {v1} · {v2} Hz", values: {"v0": string.number, "v1": string.note, "v2": AppDecimal(string.hz, 2)}),
-                style: monoText(size: 10.5, color: OstinatoPalette.of(context).textBody),
+                localized(
+                  context,
+                  "String {v0} · {v1} · {v2} Hz",
+                  "{v0}. tel · {v1} · {v2} Hz",
+                  values: {
+                    "v0": string.number,
+                    "v1": string.note,
+                    "v2": AppDecimal(string.hz, 2),
+                  },
+                ),
+                style: monoText(
+                  size: 10.5,
+                  color: OstinatoPalette.of(context).textBody,
+                ),
               ),
             ),
           const SizedBox(height: 7),
@@ -1206,7 +1274,10 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               'These are standard-tuning reference frequencies, not live readings or sound-level measurements.',
               'Bunlar standart akort referans frekanslarıdır; canlı okuma veya ses düzeyi ölçümü değildir.',
             ),
-            style: hankenText(size: 12, color: OstinatoPalette.of(context).textMuted),
+            style: hankenText(
+              size: 12,
+              color: OstinatoPalette.of(context).textMuted,
+            ),
           ),
         ],
       ),
@@ -1230,7 +1301,10 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               'Strings run thick to thin (6→1). × = do not play; 0 = open. Finger numbers are examples, not a required grip.',
               'Teller kalından inceye (6→1) gider. × = çalma; 0 = açık. Parmak sayıları zorunlu tutuş değil, örnektir.',
             ),
-            style: hankenText(size: 12, color: OstinatoPalette.of(context).textMuted),
+            style: hankenText(
+              size: 12,
+              color: OstinatoPalette.of(context).textMuted,
+            ),
           ),
           const SizedBox(height: 12),
           for (final id in widget.lesson.shapeIds)
@@ -1286,7 +1360,10 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                   'Top row: string · middle: fret · bottom: example finger',
                   'Üst: tel · orta: perde · alt: örnek parmak',
                 ),
-                style: hankenText(size: 10.5, color: OstinatoPalette.of(context).textFaint),
+                style: hankenText(
+                  size: 10.5,
+                  color: OstinatoPalette.of(context).textFaint,
+                ),
               ),
               const SizedBox(height: 12),
             ],

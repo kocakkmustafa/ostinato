@@ -45,7 +45,12 @@ class GlassCard extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: gradientColors ?? [OstinatoPalette.of(context).glassStart, OstinatoPalette.of(context).glassEnd],
+              colors:
+                  gradientColors ??
+                  [
+                    OstinatoPalette.of(context).glassStart,
+                    OstinatoPalette.of(context).glassEnd,
+                  ],
             ),
             border: Border.all(color: OstinatoPalette.of(context).glassBorder),
             boxShadow: <BoxShadow>[
@@ -125,10 +130,13 @@ class SkeletonFigurePainter extends CustomPainter {
 
     if (markerDeg != null) {
       final Offset m = _angle(markerDeg!, 148);
-      canvas.drawLine(const Offset(100, 200), m,
-          Paint()
-            ..color = markerColor
-            ..strokeWidth = 1.4);
+      canvas.drawLine(
+        const Offset(100, 200),
+        m,
+        Paint()
+          ..color = markerColor
+          ..strokeWidth = 1.4,
+      );
     }
 
     canvas.translate(100, 200);
@@ -151,8 +159,13 @@ class SkeletonFigurePainter extends CustomPainter {
     // `drawLine`dan BİLEREK farklı bir çizgi STİLİ, yalnız daha soluk bir
     // ton değil: "izleniyor" ile "izlenmiyor" arasındaki fark opaklıkla
     // karışabilir, çizgi TÜRÜyle karışmaz.
-    void dashedLine(Offset a, Offset b, Paint p,
-        {double dash = 3.4, double gap = 3}) {
+    void dashedLine(
+      Offset a,
+      Offset b,
+      Paint p, {
+      double dash = 3.4,
+      double gap = 3,
+    }) {
       final double total = (b - a).distance;
       if (total == 0) return;
       final Offset dir = (b - a) / total;
@@ -194,9 +207,9 @@ class SkeletonFigurePainter extends CustomPainter {
 
     final Paint hipPaint = dim
         ? (Paint()
-          ..color = color.withValues(alpha: .3)
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.6)
+            ..color = color.withValues(alpha: .3)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 1.6)
         : (Paint()..color = color);
     if (dim) {
       canvas.drawCircle(lh, 4.4, hipPaint);
@@ -244,6 +257,7 @@ class HorizontalBandTrack extends StatelessWidget {
   final double lowDeg;
   final double highDeg;
   final double maxDeg;
+
   /// "Sen" imleyicisi — NULL olabilir. Kütüphane kartında canlı bir ölçüm
   /// YOKTUR; oraya bir imleyici çizmek, olmayan bir ölçümü ima ederdi.
   final double? youDeg;
@@ -252,57 +266,67 @@ class HorizontalBandTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (BuildContext ctx, BoxConstraints c) {
-      double x(double deg) => (deg.clamp(0, maxDeg) / maxDeg) * c.maxWidth;
-      return SizedBox(
-        height: height,
-        child: Stack(children: <Widget>[
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: OstinatoPalette.of(context).controlSurface,
-                borderRadius: BorderRadius.circular(7),
-                border: Border.all(color: OstinatoPalette.of(context).controlBorder),
-              ),
-            ),
-          ),
-          Positioned(
-            left: x(lowDeg),
-            top: 0,
-            bottom: 0,
-            width: (x(highDeg) - x(lowDeg)).clamp(2, c.maxWidth),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: color.withValues(alpha: .75),
-                borderRadius: BorderRadius.circular(7),
-              ),
-            ),
-          ),
-          if (youDeg != null)
-            Positioned(
-              key: const Key('you-marker'),
-              left: (x(youDeg!) - 1.5).clamp(0, c.maxWidth - 3),
-              top: -4,
-              bottom: -4,
-              width: 3,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: OstinatoPalette.of(context).ink,
-                  borderRadius: BorderRadius.circular(3),
+    return LayoutBuilder(
+      builder: (BuildContext ctx, BoxConstraints c) {
+        double x(double deg) => (deg.clamp(0, maxDeg) / maxDeg) * c.maxWidth;
+        return SizedBox(
+          height: height,
+          child: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: OstinatoPalette.of(context).controlSurface,
+                    borderRadius: BorderRadius.circular(7),
+                    border: Border.all(
+                      color: OstinatoPalette.of(context).controlBorder,
+                    ),
+                  ),
                 ),
               ),
-            ),
-        ]),
-      );
-    });
+              Positioned(
+                left: x(lowDeg),
+                top: 0,
+                bottom: 0,
+                width: (x(highDeg) - x(lowDeg)).clamp(2, c.maxWidth),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: .75),
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                ),
+              ),
+              if (youDeg != null)
+                Positioned(
+                  key: const Key('you-marker'),
+                  left: (x(youDeg!) - 1.5).clamp(0, c.maxWidth - 3),
+                  top: -4,
+                  bottom: -4,
+                  width: 3,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: OstinatoPalette.of(context).ink,
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 
 /// Original 38px glass visual inside a 48px native button target.
 /// IconButton retains keyboard focus and one accessible action.
 class GlassIconButton extends StatelessWidget {
-  const GlassIconButton(
-      {super.key, required this.icon, required this.onTap, this.semanticLabel});
+  const GlassIconButton({
+    super.key,
+    required this.icon,
+    required this.onTap,
+    this.semanticLabel,
+  });
   final String icon;
   final VoidCallback? onTap;
   final String? semanticLabel;
@@ -311,7 +335,11 @@ class GlassIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final label = semanticLabel ?? icon;
     final glyph = Directionality.of(context) == TextDirection.rtl
-        ? switch (icon) {'‹' => '›', '›' => '‹', _ => icon}
+        ? switch (icon) {
+            '‹' => '›',
+            '›' => '‹',
+            _ => icon,
+          }
         : icon;
     return SizedBox(
       width: 48,
@@ -342,7 +370,8 @@ class GlassIconButton extends StatelessWidget {
               height: 38,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: onTap == null ? OstinatoPalette.of(context).disabledBackground
+                  color: onTap == null
+                      ? OstinatoPalette.of(context).disabledBackground
                       : OstinatoPalette.of(context).controlSurface,
                   borderRadius: BorderRadius.circular(13),
                   border: Border.all(
@@ -354,7 +383,8 @@ class GlassIconButton extends StatelessWidget {
                     glyph,
                     style: hankenText(
                       size: 17,
-                      color: onTap == null ? OstinatoPalette.of(context).disabledForeground
+                      color: onTap == null
+                          ? OstinatoPalette.of(context).disabledForeground
                           : OstinatoPalette.of(context).inkSoft,
                     ),
                   ),
@@ -370,35 +400,63 @@ class GlassIconButton extends StatelessWidget {
 
 /// Birincil eylem düğmesi — koyu, tam-genişlik.
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton(
-      {super.key, required this.label, required this.onPressed, this.dim = false});
+  const PrimaryButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.dim = false,
+  });
   final String label;
   final VoidCallback? onPressed;
   final bool dim;
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: double.infinity,
-        child: FilledButton(
-          onPressed: onPressed,
-          style: FilledButton.styleFrom(
-            backgroundColor:
-                dim ? OstinatoPalette.of(context).controlSurface : OstinatoPalette.of(context).primary,
-            foregroundColor: dim ? OstinatoPalette.of(context).ink : OstinatoPalette.of(context).onPrimary,
-            disabledBackgroundColor: OstinatoPalette.of(context).disabledBackground,
-            disabledForegroundColor: OstinatoPalette.of(context).disabledForeground,
+    width: double.infinity,
+    child: FilledButton(
+      onPressed: onPressed,
+      style:
+          FilledButton.styleFrom(
+            backgroundColor: dim
+                ? OstinatoPalette.of(context).controlSurface
+                : OstinatoPalette.of(context).primary,
+            foregroundColor: dim
+                ? OstinatoPalette.of(context).ink
+                : OstinatoPalette.of(context).onPrimary,
+            disabledBackgroundColor: OstinatoPalette.of(
+              context,
+            ).disabledBackground,
+            disabledForegroundColor: OstinatoPalette.of(
+              context,
+            ).disabledForeground,
             padding: const EdgeInsets.symmetric(vertical: 17),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(17)),
-          ).copyWith(side: WidgetStateProperty.resolveWith((states) => BorderSide(
-            color: states.contains(WidgetState.focused)
-                ? dim ? OstinatoPalette.of(context).focus : OstinatoPalette.of(context).onPrimary
-                : Colors.transparent,
-            width: 2,
-          ))),
-          child: Text(label, style: hankenText(size: 16, weight: FontWeight.w500,
-              color: onPressed == null ? OstinatoPalette.of(context).disabledForeground
-                  : dim ? OstinatoPalette.of(context).ink : OstinatoPalette.of(context).onPrimary)),
+              borderRadius: BorderRadius.circular(17),
+            ),
+          ).copyWith(
+            side: WidgetStateProperty.resolveWith(
+              (states) => BorderSide(
+                color: states.contains(WidgetState.focused)
+                    ? dim
+                          ? OstinatoPalette.of(context).focus
+                          : OstinatoPalette.of(context).onPrimary
+                    : Colors.transparent,
+                width: 2,
+              ),
+            ),
+          ),
+      child: Text(
+        label,
+        style: hankenText(
+          size: 16,
+          weight: FontWeight.w500,
+          color: onPressed == null
+              ? OstinatoPalette.of(context).disabledForeground
+              : dim
+              ? OstinatoPalette.of(context).ink
+              : OstinatoPalette.of(context).onPrimary,
         ),
-      );
+      ),
+    ),
+  );
 }

@@ -55,11 +55,20 @@ final class InstrumentHue {
   final Color ink;
 
   LinearGradient get gradient => LinearGradient(
-      begin: Alignment.topLeft, end: Alignment.bottomRight, colors: grad);
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: grad,
+  );
   LinearGradient get gradientAlt => LinearGradient(
-      begin: Alignment.topLeft, end: Alignment.bottomRight, colors: gradAlt);
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: gradAlt,
+  );
   LinearGradient get softGradient => LinearGradient(
-      begin: Alignment.topLeft, end: Alignment.bottomRight, colors: soft);
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: soft,
+  );
 }
 
 /// ⚠️ `ink` TONLARI KOYULAŞTIRILDI (2026-08-07, O-049 — JabLab J-116'nın
@@ -99,11 +108,11 @@ abstract final class InstrumentHues {
   );
 
   static InstrumentHue of(String disciplineId) => switch (disciplineId) {
-        'guitar' => guitar,
-        'voice' => voice,
-        'piano' => piano,
-        _ => guitar,
-      };
+    'guitar' => guitar,
+    'voice' => voice,
+    'piano' => piano,
+    _ => guitar,
+  };
 }
 
 /// Yalnız görsel kimlik — ölçüm değeri taşımaz. Şu an bu üç sabitin kaynağı
@@ -134,29 +143,27 @@ TextStyle hankenText({
   Color? color,
   double? height,
   double? letterSpacing,
-}) =>
-    TextStyle(
-      fontFamily: 'Hanken Grotesk',
-      fontSize: size,
-      fontWeight: weight,
-      color: color,
-      height: height,
-      letterSpacing: letterSpacing,
-    );
+}) => TextStyle(
+  fontFamily: 'Hanken Grotesk',
+  fontSize: size,
+  fontWeight: weight,
+  color: color,
+  height: height,
+  letterSpacing: letterSpacing,
+);
 
 TextStyle monoText({
   double size = 9.5,
   FontWeight weight = FontWeight.w500,
   Color? color,
   double letterSpacing = 1.4,
-}) =>
-    TextStyle(
-      fontFamily: 'IBM Plex Mono',
-      fontSize: size,
-      fontWeight: weight,
-      color: color,
-      letterSpacing: letterSpacing,
-    );
+}) => TextStyle(
+  fontFamily: 'IBM Plex Mono',
+  fontSize: size,
+  fontWeight: weight,
+  color: color,
+  letterSpacing: letterSpacing,
+);
 
 /// Uygulamanın TEK `ThemeData`sı.
 ///
@@ -171,13 +178,17 @@ TextStyle monoText({
 /// Buraya taşındı ki iki yer AYNI nesneyi kullansın; elle kopyalanan bir
 /// tema, ilk değişiklikte sessizce ayrışır.
 ThemeData ostinatoTheme() => ThemeData(
-      colorSchemeSeed: const Color(0xFF5F4CA0),
-      scaffoldBackgroundColor: OstinatoColors.shell,
-      fontFamily: 'Hanken Grotesk',
-    );
+  colorSchemeSeed: const Color(0xFF5F4CA0),
+  scaffoldBackgroundColor: OstinatoColors.shell,
+  fontFamily: 'Hanken Grotesk',
+);
 
 /// Bölüm başlığı — "SCREENS" / "YOUR INSTRUMENTS" tarzı mono kicker.
 Widget kicker(String text, {Color? color}) => Builder(
-      builder: (context) => Text(text.toUpperCase(),
-        style: monoText(color: color ?? Theme.of(context).colorScheme.onSurfaceVariant)),
-    );
+  builder: (context) => Text(
+    text.toUpperCase(),
+    style: monoText(
+      color: color ?? Theme.of(context).colorScheme.onSurfaceVariant,
+    ),
+  ),
+);

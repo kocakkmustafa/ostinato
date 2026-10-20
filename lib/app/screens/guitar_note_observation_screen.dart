@@ -233,7 +233,20 @@ class _GuitarNoteObservationScreenState
     final value = controller?.observation;
     final p = OstinatoPalette.of(context);
     final hue = p.guitar;
-    const names = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
+    const names = [
+      'C',
+      'C♯',
+      'D',
+      'D♯',
+      'E',
+      'F',
+      'F♯',
+      'G',
+      'G♯',
+      'A',
+      'A♯',
+      'B',
+    ];
     return Scaffold(
       backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(

@@ -83,6 +83,7 @@ AccountConnection bindMotionAccountRuntime(
       onRetryIdentity: runtime.refreshIdentity,
     );
   }
+
   return AccountConnection(
     userId: runtime.userId,
     passwordRecovery: runtime.passwordRecovery,

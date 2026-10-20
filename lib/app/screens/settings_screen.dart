@@ -28,14 +28,22 @@ import '../design/widgets.dart';
 /// Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce
 /// yanlış olur ve hiçbir test kırılmaz (O-068).
 String _liveSentence(BuildContext context) {
-  final live = ContentRepositoryScope.of(context)
-      .repo.disciplines.where((discipline) => discipline.status == 'live').toList();
+  final live = ContentRepositoryScope.of(context).repo.disciplines
+      .where((discipline) => discipline.status == 'live')
+      .toList();
   final names = live
-      .map((discipline) => catalogName(
-            context, discipline.id, discipline.displayName,
-          ))
+      .map(
+        (discipline) =>
+            catalogName(context, discipline.id, discipline.displayName),
+      )
       .join(', ');
-  return localized(context, "{v0} instrument previews in the posture catalogue: {v1}. Live camera practice is closed in this release.", "Duruş kataloğunda {v0} çalgı ön izlemesi: {v1}. Bu sürümde canlı kamera pratiği kapalıdır.", values: {"v0": live.length, "v1": names}, pluralCount: live.length);
+  return localized(
+    context,
+    "{v0} instrument previews in the posture catalogue: {v1}. Live camera practice is closed in this release.",
+    "Duruş kataloğunda {v0} çalgı ön izlemesi: {v1}. Bu sürümde canlı kamera pratiği kapalıdır.",
+    values: {"v0": live.length, "v1": names},
+    pluralCount: live.length,
+  );
 }
 
 class SettingsScreen extends StatelessWidget {
@@ -188,7 +196,12 @@ class SettingsScreen extends StatelessWidget {
                 // düzeltmek, onu ürünün geri kalanında düzeltmek değildir.*
                 // Dördüncü çalgı canlıya geçtiği gün burası sessizce "Three"
                 // demeye devam ederdi.
-                body: localized(context, "{v0} Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware.", "{v0} Tüm duruş referansları belden yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden kalçanızın altı okunmaz. Buradaki işlevler gerçek cihazda doğrulanmadı.", values: {"v0": _liveSentence(context)}),
+                body: localized(
+                  context,
+                  "{v0} Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware.",
+                  "{v0} Tüm duruş referansları belden yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden kalçanızın altı okunmaz. Buradaki işlevler gerçek cihazda doğrulanmadı.",
+                  values: {"v0": _liveSentence(context)},
+                ),
               ),
             ],
           ),
@@ -241,7 +254,13 @@ class _LanguageSettings extends StatelessWidget {
               DropdownMenuItem(
                 key: const Key('app-language-option-system'),
                 value: _system,
-                child: Text(localized(context, "Use device language", "Cihaz dilini kullan")),
+                child: Text(
+                  localized(
+                    context,
+                    "Use device language",
+                    "Cihaz dilini kullan",
+                  ),
+                ),
               ),
               for (final tag in supportedLanguageTags)
                 DropdownMenuItem(
@@ -261,7 +280,11 @@ class _LanguageSettings extends StatelessWidget {
           Semantics(
             liveRegion: true,
             child: Text(
-              localized(context, "Reading saved language…", "Kayıtlı dil okunuyor…"),
+              localized(
+                context,
+                "Reading saved language…",
+                "Kayıtlı dil okunuyor…",
+              ),
               key: const Key("app-language-loading"),
               style: hankenText(size: 12.5, height: 1.5),
             ),
@@ -272,7 +295,11 @@ class _LanguageSettings extends StatelessWidget {
           Semantics(
             liveRegion: true,
             child: Text(
-              localized(context, "The saved language could not be read. Device language is being used. Choose a language to save a new preference.", "Kayıtlı dil okunamadı. Cihaz dili kullanılıyor. Yeni tercih kaydetmek için bir dil seçin."),
+              localized(
+                context,
+                "The saved language could not be read. Device language is being used. Choose a language to save a new preference.",
+                "Kayıtlı dil okunamadı. Cihaz dili kullanılıyor. Yeni tercih kaydetmek için bir dil seçin.",
+              ),
               key: const Key("app-language-read-failure"),
               style: hankenText(size: 12.5, height: 1.5),
             ),
@@ -283,7 +310,11 @@ class _LanguageSettings extends StatelessWidget {
           Semantics(
             liveRegion: true,
             child: Text(
-              localized(context, "The language changed for this session but could not be saved. Select it again to retry.", "Dil bu oturum için değişti ancak kaydedilemedi. Yeniden denemek için tekrar seçin."),
+              localized(
+                context,
+                "The language changed for this session but could not be saved. Select it again to retry.",
+                "Dil bu oturum için değişti ancak kaydedilemedi. Yeniden denemek için tekrar seçin.",
+              ),
               key: const Key("app-language-write-failure"),
               style: hankenText(size: 12.5, height: 1.5),
             ),

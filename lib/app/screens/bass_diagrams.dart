@@ -199,12 +199,16 @@ class BassDiagrams extends StatelessWidget {
                         child: SizedBox(
                           width: 800,
                           child: Table(
-                            border: TableBorder.all(color: OstinatoPalette.of(context).notationInk),
+                            border: TableBorder.all(
+                              color: OstinatoPalette.of(context).notationInk,
+                            ),
                             defaultColumnWidth: const FixedColumnWidth(100),
                             children: [
                               TableRow(
                                 decoration: BoxDecoration(
-                                  color: OstinatoPalette.of(context).notationPaper,
+                                  color: OstinatoPalette.of(
+                                    context,
+                                  ).notationPaper,
                                 ),
                                 children: [
                                   for (final count in [
@@ -221,7 +225,11 @@ class BassDiagrams extends StatelessWidget {
                                       padding: const EdgeInsets.all(6),
                                       child: Text(
                                         count,
-                                        style: TextStyle(color: OstinatoPalette.of(context).notationInk),
+                                        style: TextStyle(
+                                          color: OstinatoPalette.of(
+                                            context,
+                                          ).notationInk,
+                                        ),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -229,7 +237,9 @@ class BassDiagrams extends StatelessWidget {
                               ),
                               TableRow(
                                 decoration: BoxDecoration(
-                                  color: OstinatoPalette.of(context).notationPaper,
+                                  color: OstinatoPalette.of(
+                                    context,
+                                  ).notationPaper,
                                 ),
                                 children: [
                                   for (final event in course.study[bar].events)
@@ -241,7 +251,11 @@ class BassDiagrams extends StatelessWidget {
                                             : event.kind == 'hold'
                                             ? 'H'
                                             : 'R',
-                                        style: TextStyle(color: OstinatoPalette.of(context).notationInk),
+                                        style: TextStyle(
+                                          color: OstinatoPalette.of(
+                                            context,
+                                          ).notationInk,
+                                        ),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -261,12 +275,8 @@ class BassDiagrams extends StatelessWidget {
   );
 }
 
-String _barLabel(BuildContext context, int bar) => localized(
-  context,
-  'Bar {v0}',
-  'Ölçü {v0}',
-  values: {'v0': bar},
-);
+String _barLabel(BuildContext context, int bar) =>
+    localized(context, 'Bar {v0}', 'Ölçü {v0}', values: {'v0': bar});
 
 String _tabNoteDescription(BassTabNote note, int beat, BuildContext context) =>
     localized(
@@ -278,13 +288,13 @@ String _tabNoteDescription(BassTabNote note, int beat, BuildContext context) =>
 
 String _countDescription(int slot, String action, BuildContext context) =>
     slot.isOdd
-        ? localized(
-            context,
-            '{v0} and: {v1}',
-            '{v0} ve: {v1}',
-            values: {'v0': slot ~/ 2 + 1, 'v1': action},
-          )
-        : '${appInteger(context, slot ~/ 2 + 1)}: $action';
+    ? localized(
+        context,
+        '{v0} and: {v1}',
+        '{v0} ve: {v1}',
+        values: {'v0': slot ~/ 2 + 1, 'v1': action},
+      )
+    : '${appInteger(context, slot ~/ 2 + 1)}: $action';
 
 String _event(BassEvent event, BuildContext context) => event.kind == 'note'
     ? localized(
@@ -336,7 +346,8 @@ class _Vector extends StatelessWidget {
             child: CustomPaint(
               key: Key('bass-vector-$kind'),
               painter: _BassPainter(
-                kind, notes,
+                kind,
+                notes,
                 inkColor: OstinatoPalette.of(context).notationInk,
                 paperColor: OstinatoPalette.of(context).notationPaper,
               ),
@@ -353,7 +364,8 @@ int bassWrittenStaffPosition(String pitch) =>
 
 class _BassPainter extends CustomPainter {
   _BassPainter(
-    this.kind, this.notes, {
+    this.kind,
+    this.notes, {
     required this.inkColor,
     required this.paperColor,
   });
@@ -483,5 +495,6 @@ class _BassPainter extends CustomPainter {
   bool shouldRepaint(covariant _BassPainter old) =>
       old.inkColor != inkColor ||
       old.paperColor != paperColor ||
-      old.kind != kind || old.notes != notes;
+      old.kind != kind ||
+      old.notes != notes;
 }

@@ -313,8 +313,16 @@ class _Vector extends StatelessWidget {
                     localeTag: Localizations.localeOf(context).toLanguageTag(),
                     pitchLabels: {
                       for (final pitch in const [
-                        'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5',
-                        'F3', 'G3',
+                        'C4',
+                        'D4',
+                        'E4',
+                        'F4',
+                        'G4',
+                        'A4',
+                        'B4',
+                        'C5',
+                        'F3',
+                        'G3',
                       ])
                         pitch: musicPitch(context, pitch),
                     },
@@ -560,13 +568,7 @@ class _PianoPainter extends CustomPainter {
           Paint()..color = Colors.black,
         );
       }
-      label(
-        c,
-        middleCLabel,
-        8,
-        123,
-        direction: proseDirection,
-      );
+      label(c, middleCLabel, 8, 123, direction: proseDirection);
       return;
     }
     if (kind == 'symbols') {

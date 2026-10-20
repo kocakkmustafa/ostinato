@@ -91,11 +91,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       backgroundColor: OstinatoPalette.of(context).shell,
       body: DecoratedBox(
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           gradient: RadialGradient(
             center: Alignment(-0.7, -1),
             radius: 1.2,
-            colors: <Color>[OstinatoPalette.of(context).voice.chip.withValues(alpha: .55), Colors.transparent],
+            colors: <Color>[
+              OstinatoPalette.of(context).voice.chip.withValues(alpha: .55),
+              Colors.transparent,
+            ],
           ),
         ),
         child: SafeArea(
@@ -174,7 +177,12 @@ class _MetronomeProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Semantics(
-    label: localized(context, "Step {v0} of {v1}", "{v0} / {v1} adım", values: {"v0": index + 1, "v1": count}),
+    label: localized(
+      context,
+      "Step {v0} of {v1}",
+      "{v0} / {v1} adım",
+      values: {"v0": index + 1, "v1": count},
+    ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -188,7 +196,9 @@ class _MetronomeProgress extends StatelessWidget {
             height: i == index ? 18 : 9,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3),
-              color: i <= index ? OstinatoPalette.of(context).ink : OstinatoPalette.of(context).divider,
+              color: i <= index
+                  ? OstinatoPalette.of(context).ink
+                  : OstinatoPalette.of(context).divider,
             ),
           ),
         ],

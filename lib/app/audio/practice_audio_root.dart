@@ -230,14 +230,15 @@ final class _AccountAudioDrain implements AccountResourceDrain {
 
   void workStarted() => _hadWork = true;
 
-  bool get neverDispatched => !_hadWork &&
+  bool get neverDispatched =>
+      !_hadWork &&
       !(owner._videoOwner?.busy ?? false) &&
       owner._captureActions.isEmpty;
 
   // This is local absence of work, not readback of another isolate owner.
   // Unknown lease state remains uncertain even when this actor never opened.
-  bool get provablyEmpty => neverDispatched &&
-      owner._lease.phase == PracticeAudioLeasePhase.idle;
+  bool get provablyEmpty =>
+      neverDispatched && owner._lease.phase == PracticeAudioLeasePhase.idle;
 
   void closedBy(Future<PracticeAudioReleaseStatus> close) {
     _close ??= close;
@@ -250,10 +251,12 @@ final class _AccountAudioDrain implements AccountResourceDrain {
     if (record == null) return;
     // This only observes a derived outcome. The original stable drain Future
     // and its failure remain available to every confirmed UUID ticket.
-    unawaited(record.retireAndDrain().then<void>(
-      (_) {},
-      onError: (Object _, StackTrace _) {},
-    ));
+    unawaited(
+      record.retireAndDrain().then<void>(
+        (_) {},
+        onError: (Object _, StackTrace _) {},
+      ),
+    );
   }
 
   @override
@@ -271,20 +274,25 @@ final class _AccountAudioDrain implements AccountResourceDrain {
     _proof = proof;
     final close = _close;
     if (close == null) {
-      proof.completeError(StateError('Audio resource has no captured close proof'));
+      proof.completeError(
+        StateError('Audio resource has no captured close proof'),
+      );
       return proof.future;
     }
-    unawaited(close.then<void>(
-      (status) {
-        if (status == PracticeAudioReleaseStatus.confirmedClosed ||
-            (status == PracticeAudioReleaseStatus.alreadyIdle && !_hadWork)) {
-          proof.complete();
-        } else {
-          proof.completeError(StateError('Unconfirmed audio close: $status'));
-        }
-      },
-      onError: (Object error, StackTrace stack) => proof.completeError(error, stack),
-    ));
+    unawaited(
+      close.then<void>(
+        (status) {
+          if (status == PracticeAudioReleaseStatus.confirmedClosed ||
+              (status == PracticeAudioReleaseStatus.alreadyIdle && !_hadWork)) {
+            proof.complete();
+          } else {
+            proof.completeError(StateError('Unconfirmed audio close: $status'));
+          }
+        },
+        onError: (Object error, StackTrace stack) =>
+            proof.completeError(error, stack),
+      ),
+    );
     return proof.future;
   }
 }
@@ -409,8 +417,11 @@ final class PracticeAudioRootOwner {
     final resource = _AccountAudioDrain(this);
     // Install the actor before registration: denial may call retire immediately.
     _accountResource = resource;
-    resource.attach((registry as AccountResourceDrainRegistry)
-        .registerResource(resource: resource));
+    resource.attach(
+      (registry as AccountResourceDrainRegistry).registerResource(
+        resource: resource,
+      ),
+    );
   }
 
   void _retireAccountResource(_AccountAudioDrain resource) {
@@ -530,7 +541,8 @@ final class PracticeAudioRootOwner {
       return null;
     }
     _registerAccountResource();
-    if (!_identityReady || _barrier || !identical(_topRoute, route)) return null;
+    if (!_identityReady || _barrier || !identical(_topRoute, route))
+      return null;
     return PracticeAudioRouteGrant._(
       this,
       route,
@@ -560,7 +572,8 @@ final class PracticeAudioRootOwner {
       return null;
     }
     _registerAccountResource();
-    if (!_identityReady || _barrier || !identical(_topRoute, route)) return null;
+    if (!_identityReady || _barrier || !identical(_topRoute, route))
+      return null;
     return PracticeVideoStartAction._(
       this,
       route,
@@ -624,7 +637,8 @@ final class PracticeAudioRootOwner {
       return null;
     }
     _registerAccountResource();
-    if (!_identityReady || _barrier || !identical(_topRoute, route)) return null;
+    if (!_identityReady || _barrier || !identical(_topRoute, route))
+      return null;
     _accountResource?.workStarted();
     final action = PracticeAudioCaptureAction._(
       this,
@@ -714,11 +728,12 @@ final class PracticeAudioRootOwner {
     final before = _lease.phase;
     final close = _lease.release(ticket);
     final after = _lease.phase;
-    final startedClose = resource != null &&
+    final startedClose =
+        resource != null &&
         ((before == PracticeAudioLeasePhase.inputActive &&
-              after == PracticeAudioLeasePhase.closingInput) ||
-          (before == PracticeAudioLeasePhase.outputActive &&
-              after == PracticeAudioLeasePhase.closingOutput));
+                after == PracticeAudioLeasePhase.closingInput) ||
+            (before == PracticeAudioLeasePhase.outputActive &&
+                after == PracticeAudioLeasePhase.closingOutput));
     if (startedClose) {
       // A stale ticket can arrive while a different close is already pending.
       // Only this active-to-closing transition captures the original Future.
@@ -1103,10 +1118,10 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
   Widget build(BuildContext context) {
     if (_owner.blocked) {
       return MaterialApp(
-    theme: OstinatoThemes.light,
-    darkTheme: OstinatoThemes.dark,
-    themeMode: AppThemeScope.modeOf(context),
-    themeAnimationDuration: Duration.zero,
+        theme: OstinatoThemes.light,
+        darkTheme: OstinatoThemes.dark,
+        themeMode: AppThemeScope.modeOf(context),
+        themeAnimationDuration: Duration.zero,
         debugShowCheckedModeBanner: false,
         locale: Localizations.maybeLocaleOf(context),
         localeListResolutionCallback: resolveAppLocales,

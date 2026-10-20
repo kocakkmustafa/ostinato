@@ -86,9 +86,8 @@ final class AppThemeController extends ChangeNotifier {
 
   /// Await before the first MaterialApp is mounted. The maximum read wait is
   /// bounded; late read completion has no state mutation after timeout.
-  Future<void> load() => _load ??= _selectionRevision == 0
-      ? _read()
-      : Future<void>.value();
+  Future<void> load() =>
+      _load ??= _selectionRevision == 0 ? _read() : Future<void>.value();
 
   Future<void> _read() async {
     final revision = _selectionRevision;
@@ -157,9 +156,8 @@ final class AppThemeScope extends InheritedNotifier<AppThemeController> {
     required super.child,
   }) : super(notifier: controller);
 
-  static AppThemeController? maybeOf(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<AppThemeScope>()
-      ?.notifier;
+  static AppThemeController? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<AppThemeScope>()?.notifier;
 
   static ThemeMode modeOf(BuildContext context) =>
       maybeOf(context)?.themeMode ?? ThemeMode.system;
@@ -198,7 +196,8 @@ final class _AppThemeHostState extends State<AppThemeHost>
 
   @override
   void didChangePlatformBrightness() {
-    if (widget.controller.preference == AppThemePreference.system) setState(() {});
+    if (widget.controller.preference == AppThemePreference.system)
+      setState(() {});
   }
 
   @override
@@ -229,7 +228,10 @@ final class _AppThemeHostState extends State<AppThemeHost>
       };
       return AppThemeScope(
         controller: widget.controller,
-        child: Theme(data: OstinatoThemes.forBrightness(brightness), child: child!),
+        child: Theme(
+          data: OstinatoThemes.forBrightness(brightness),
+          child: child!,
+        ),
       );
     },
   );

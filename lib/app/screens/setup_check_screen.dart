@@ -25,10 +25,17 @@ import 'live_screen.dart';
 /// var ama hiçbir mikrofon-giriş eklentisine bağlı değil. Sahte bir ilerleme
 /// çubuğu GÖSTERMEK yerine bu adım kendi ismiyle "henüz yok" der.
 class SetupCheckScreenRoute extends StatefulWidget {
-  const SetupCheckScreenRoute(
-      {super.key, required this.discipline, required this.lesson, required this.hue,
-      this.controller, this.resolveModelPath, this.requestPermission,
-      this.lifecycle, this.liveSource});
+  const SetupCheckScreenRoute({
+    super.key,
+    required this.discipline,
+    required this.lesson,
+    required this.hue,
+    this.controller,
+    this.resolveModelPath,
+    this.requestPermission,
+    this.lifecycle,
+    this.liveSource,
+  });
   final Discipline discipline;
   final Lesson lesson;
   final InstrumentHue hue;
@@ -81,10 +88,13 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
       case CameraStarted(:final CameraSessionInfo info):
         if (!_owner.canObserveFrames) return;
         _size = core.FrameSize(info.width, info.height);
-        _sub = _owner.lease.frames().listen(_onEnvelope, onError: (Object error) {
-          _owner.failTransport(error);
-          _publishFailure();
-        });
+        _sub = _owner.lease.frames().listen(
+          _onEnvelope,
+          onError: (Object error) {
+            _owner.failTransport(error);
+            _publishFailure();
+          },
+        );
     }
   }
 
@@ -186,15 +196,25 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   GlassIconButton(
-                      icon: '✕',
-                      semanticLabel: localized(context, 'Cancel setup', 'Kurulumdan çık'),
-                      onTap: () => Navigator.of(context).pop()),
+                    icon: '✕',
+                    semanticLabel: localized(
+                      context,
+                      'Cancel setup',
+                      'Kurulumdan çık',
+                    ),
+                    onTap: () => Navigator.of(context).pop(),
+                  ),
                   kicker(localized(context, 'Setup check', 'Kurulum denetimi')),
                   const SizedBox(width: 48),
                 ],
               ),
               const SizedBox(height: 18),
-              _StepBar(stage: _stage, hue: OstinatoPalette.of(context).instrument(widget.discipline.id)),
+              _StepBar(
+                stage: _stage,
+                hue: OstinatoPalette.of(
+                  context,
+                ).instrument(widget.discipline.id),
+              ),
               const SizedBox(height: 18),
               Expanded(child: _stageBody(context)),
             ],
@@ -210,80 +230,111 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(28),
-            child: Text(_describeFailure(_failure!),
-                key: const Key('setup-camera-failed'),
-                textAlign: TextAlign.center,
-                style: hankenText(size: 15, color: Colors.white, height: 1.5)),
+            child: Text(
+              _describeFailure(_failure!),
+              key: const Key('setup-camera-failed'),
+              textAlign: TextAlign.center,
+              style: hankenText(size: 15, color: Colors.white, height: 1.5),
+            ),
           ),
         ),
       );
     }
     return switch (_stage) {
       _Stage.starting => _CameraStage(
-          key: const Key('setup-stage-framing'),
-          kicker: localized(context, 'FRAME', 'KADRAJ'),
-          title: localized(context, 'Find your frame.', 'Kadrajını ayarla.'),
-          // DÜZELTME-2 (O-099): "Nine points" burada bir OKUMA iddiasıydı
-          // ("we do not read your head" ile aynı cümlede) ve ölçüme
-          // uymuyordu — kamera DÖRT nokta okur (`LmRegion.torso`). BEŞİNCİ
-          // yüzey: ilk sayım "upper-body" ifadesini aradığı için burayı
-          // KAÇIRMIŞTI — deseni ifadeye bağlamanın, iddiaya bağlamamanın
-          // aynı sınıf hatası (plist kapısının deliğiyle birebir aynı).
-          body: localized(context,
-              'You should be visible from your hips to your shoulders. Four points — your two shoulders and your two hips — and no face: we do not read your head, because our reference does not carry one.',
-              'Omuzların ve kalçaların kadrajda olmalı. İki omuz ve iki kalça olmak üzere dört nokta okunur. Yüzün okunmaz; referans görüntümüzde baş bulunmaz.'),
-          child: _Skeleton(dim: false),
+        key: const Key('setup-stage-framing'),
+        kicker: localized(context, 'FRAME', 'KADRAJ'),
+        title: localized(context, 'Find your frame.', 'Kadrajını ayarla.'),
+        // DÜZELTME-2 (O-099): "Nine points" burada bir OKUMA iddiasıydı
+        // ("we do not read your head" ile aynı cümlede) ve ölçüme
+        // uymuyordu — kamera DÖRT nokta okur (`LmRegion.torso`). BEŞİNCİ
+        // yüzey: ilk sayım "upper-body" ifadesini aradığı için burayı
+        // KAÇIRMIŞTI — deseni ifadeye bağlamanın, iddiaya bağlamamanın
+        // aynı sınıf hatası (plist kapısının deliğiyle birebir aynı).
+        body: localized(
+          context,
+          'You should be visible from your hips to your shoulders. Four points — your two shoulders and your two hips — and no face: we do not read your head, because our reference does not carry one.',
+          'Omuzların ve kalçaların kadrajda olmalı. İki omuz ve iki kalça olmak üzere dört nokta okunur. Yüzün okunmaz; referans görüntümüzde baş bulunmaz.',
         ),
+        child: _Skeleton(dim: false),
+      ),
       _Stage.framingError => _CameraStage(
-          key: const Key('setup-stage-framing-error'),
-          kicker: localized(context, 'FRAME', 'KADRAJ'),
-          title: localized(context, 'Your hips are outside the frame.', 'Kalçaların kadraj dışında.'),
-          body: localized(context,
-              'Both hip points are missing, so there is no trunk line to measure. Move the phone back about an arm’s length, or sit closer to it.',
-              'İki kalça noktası da görünmüyor; gövde çizgisi ölçülemiyor. Telefonu yaklaşık bir kol boyu uzaklaştır veya ona biraz yaklaş.'),
-          warn: true,
-          child: _Skeleton(dim: true),
+        key: const Key('setup-stage-framing-error'),
+        kicker: localized(context, 'FRAME', 'KADRAJ'),
+        title: localized(
+          context,
+          'Your hips are outside the frame.',
+          'Kalçaların kadraj dışında.',
         ),
+        body: localized(
+          context,
+          'Both hip points are missing, so there is no trunk line to measure. Move the phone back about an arm’s length, or sit closer to it.',
+          'İki kalça noktası da görünmüyor; gövde çizgisi ölçülemiyor. Telefonu yaklaşık bir kol boyu uzaklaştır veya ona biraz yaklaş.',
+        ),
+        warn: true,
+        child: _Skeleton(dim: true),
+      ),
       _Stage.lowLight => _CameraStage(
-          key: const Key('setup-stage-low-light'),
-          kicker: localized(context, 'LIGHT', 'IŞIK'),
-          title: localized(context, 'Too dark to trust.', 'Görüntü yeterince aydınlık değil.'),
-          body: localized(context,
-              'Landmark confidence is below what we measure against. Turn on a light or face a window — we would rather refuse than guess.',
-              'Vücut noktaları güvenilir biçimde okunmuyor. Bir ışık aç veya pencereye dön; tahmin ederek ölçüm yapmayız.'),
-          warn: true,
-          child: _Skeleton(dim: true),
+        key: const Key('setup-stage-low-light'),
+        kicker: localized(context, 'LIGHT', 'IŞIK'),
+        title: localized(
+          context,
+          'Too dark to trust.',
+          'Görüntü yeterince aydınlık değil.',
         ),
+        body: localized(
+          context,
+          'Landmark confidence is below what we measure against. Turn on a light or face a window — we would rather refuse than guess.',
+          'Vücut noktaları güvenilir biçimde okunmuyor. Bir ışık aç veya pencereye dön; tahmin ederek ölçüm yapmayız.',
+        ),
+        warn: true,
+        child: _Skeleton(dim: true),
+      ),
       _Stage.ok => _CameraStage(
-          key: const Key('setup-stage-ok'),
-          kicker: localized(context, 'FRAME', 'KADRAJ'),
-          title: localized(context, 'Holding steady…', 'Sabit dur…'),
-          body: localized(context,
-              'Frame and light look right. Hold still for a moment.',
-              'Kadraj ve ışık uygun görünüyor. Kısa bir süre sabit dur.'),
-          child: _Skeleton(dim: false),
+        key: const Key('setup-stage-ok'),
+        kicker: localized(context, 'FRAME', 'KADRAJ'),
+        title: localized(context, 'Holding steady…', 'Sabit dur…'),
+        body: localized(
+          context,
+          'Frame and light look right. Hold still for a moment.',
+          'Kadraj ve ışık uygun görünüyor. Kısa bir süre sabit dur.',
         ),
+        child: _Skeleton(dim: false),
+      ),
       _Stage.room => _RoomGapNotice(
-          onContinue: () => setState(() => _stage = _Stage.passed)),
+        onContinue: () => setState(() => _stage = _Stage.passed),
+      ),
       _Stage.passed => _PassedStage(
-          discipline: widget.discipline, lesson: widget.lesson, hue: OstinatoPalette.of(context).instrument(widget.discipline.id),
-          source: widget.liveSource),
+        discipline: widget.discipline,
+        lesson: widget.lesson,
+        hue: OstinatoPalette.of(context).instrument(widget.discipline.id),
+        source: widget.liveSource,
+      ),
     };
   }
 
   String _describeFailure(SurfaceState s) => switch (s) {
-        PermissionDeniedRetriable() => localized(context,
-          'Ostinato needs the camera to see how you sit. Tap the button below to allow it.',
-          'Oturma duruşunu görebilmek için kamera erişimi gerekli. İzin vermek için aşağıdaki düğmeye dokun.'),
-        PermissionDeniedPermanent() => localized(context,
-          'Camera access is off and the system will not ask again. Open Settings to change it.',
-          'Kamera erişimi kapalı ve sistem tekrar izin istemeyecek. Erişimi Ayarlar’dan açabilirsin.'),
-        SetupFailed() => localized(context,
-          'The camera did not start. The setup check cannot run without it. Return to the lesson to try again.',
-          'Kamera açılamadı. Kurulum denetimi kamera olmadan çalışamaz. Yeniden denemek için derse dön.'),
-        _ => localized(context, 'The camera is not available right now.',
-          'Kamera şu anda kullanılamıyor.'),
-      };
+    PermissionDeniedRetriable() => localized(
+      context,
+      'Ostinato needs the camera to see how you sit. Tap the button below to allow it.',
+      'Oturma duruşunu görebilmek için kamera erişimi gerekli. İzin vermek için aşağıdaki düğmeye dokun.',
+    ),
+    PermissionDeniedPermanent() => localized(
+      context,
+      'Camera access is off and the system will not ask again. Open Settings to change it.',
+      'Kamera erişimi kapalı ve sistem tekrar izin istemeyecek. Erişimi Ayarlar’dan açabilirsin.',
+    ),
+    SetupFailed() => localized(
+      context,
+      'The camera did not start. The setup check cannot run without it. Return to the lesson to try again.',
+      'Kamera açılamadı. Kurulum denetimi kamera olmadan çalışamaz. Yeniden denemek için derse dön.',
+    ),
+    _ => localized(
+      context,
+      'The camera is not available right now.',
+      'Kamera şu anda kullanılamıyor.',
+    ),
+  };
 }
 
 class _StepBar extends StatelessWidget {
@@ -292,54 +343,62 @@ class _StepBar extends StatelessWidget {
   final InstrumentHue hue;
 
   int get _step => switch (stage) {
-        _Stage.starting || _Stage.framingError || _Stage.lowLight || _Stage.ok => 0,
-        _Stage.room => 1,
-        _Stage.passed => 2,
-      };
+    _Stage.starting || _Stage.framingError || _Stage.lowLight || _Stage.ok => 0,
+    _Stage.room => 1,
+    _Stage.passed => 2,
+  };
 
   @override
   Widget build(BuildContext context) => Row(
-        children: <Widget>[
-          for (final (int i, String label) in <String>[
-            localized(context, 'FRAME', 'KADRAJ'),
-            localized(context, 'ROOM', 'ORTAM'),
-            localized(context, 'READY', 'HAZIR'),
-          ]
-              .indexed) ...<Widget>[
-            if (i > 0) const SizedBox(width: 7),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    height: 3,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3),
-                      color: i < _step
-                          ? OstinatoPalette.of(context).ink
-                          : (i == _step
-                              ? hue.ink
-                              : OstinatoPalette.of(context).outline),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(label,
-                      style: monoText(
-                          size: 9,
-                          color: i <= _step
-                              ? OstinatoPalette.of(context).inkSoft
-                              : OstinatoPalette.of(context).textMuted)),
-                ],
+    children: <Widget>[
+      for (final (int i, String label) in <String>[
+        localized(context, 'FRAME', 'KADRAJ'),
+        localized(context, 'ROOM', 'ORTAM'),
+        localized(context, 'READY', 'HAZIR'),
+      ].indexed) ...<Widget>[
+        if (i > 0) const SizedBox(width: 7),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                height: 3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  color: i < _step
+                      ? OstinatoPalette.of(context).ink
+                      : (i == _step
+                            ? hue.ink
+                            : OstinatoPalette.of(context).outline),
+                ),
               ),
-            ),
-          ],
-        ],
-      );
+              const SizedBox(height: 6),
+              Text(
+                label,
+                style: monoText(
+                  size: 9,
+                  color: i <= _step
+                      ? OstinatoPalette.of(context).inkSoft
+                      : OstinatoPalette.of(context).textMuted,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ],
+  );
 }
 
 class _CameraStage extends StatelessWidget {
-  const _CameraStage(
-      {super.key, required this.child, this.kicker, this.title, this.body, this.warn = false});
+  const _CameraStage({
+    super.key,
+    required this.child,
+    this.kicker,
+    this.title,
+    this.body,
+    this.warn = false,
+  });
   final Widget child;
   final String? kicker;
   final String? title;
@@ -361,23 +420,27 @@ class _CameraStage extends StatelessWidget {
                   colors: <Color>[Color(0xFF3A3348), Color(0xFF241F2E)],
                 ),
               ),
-              child: Stack(alignment: Alignment.center, children: <Widget>[
-                Positioned.fill(
-                  child: Padding(
-                    padding: const EdgeInsets.all(26),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(90),
-                        border: Border.all(
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Padding(
+                      padding: const EdgeInsets.all(26),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(90),
+                          border: Border.all(
                             color: Colors.white.withValues(alpha: .22),
                             width: 1.4,
-                            style: BorderStyle.solid),
+                            style: BorderStyle.solid,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Center(child: child),
-              ]),
+                  Center(child: child),
+                ],
+              ),
             ),
           ),
         ),
@@ -395,12 +458,19 @@ class _CameraStage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(kicker!,
-                    style: monoText(
-                        color: warn ? OstinatoPalette.of(context).warnInk : OstinatoPalette.of(context).textMono)),
+                Text(
+                  kicker!,
+                  style: monoText(
+                    color: warn
+                        ? OstinatoPalette.of(context).warnInk
+                        : OstinatoPalette.of(context).textMono,
+                  ),
+                ),
                 const SizedBox(height: 6),
-                Text(title ?? '',
-                    style: hankenText(size: 19, weight: FontWeight.w500)),
+                Text(
+                  title ?? '',
+                  style: hankenText(size: 19, weight: FontWeight.w500),
+                ),
                 const SizedBox(height: 6),
                 Text(body ?? '', style: hankenText(size: 13.5, height: 1.5)),
               ],
@@ -417,12 +487,12 @@ class _Skeleton extends StatelessWidget {
   final bool dim;
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 170,
-        height: 200,
-        child: CustomPaint(
-          painter: SkeletonFigurePainter(color: Colors.white, dim: dim),
-        ),
-      );
+    width: 170,
+    height: 200,
+    child: CustomPaint(
+      painter: SkeletonFigurePainter(color: Colors.white, dim: dim),
+    ),
+  );
 }
 
 // PLACEHOLDER(asset): KAMERA ÖNİZLEMESİ YOK — bu ekran kadraj rehberi olarak
@@ -471,44 +541,53 @@ class _RoomGapNotice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          GlassCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                kicker('Room noise floor'),
-                const SizedBox(height: 10),
-                Text('Not measured in this build.',
-                    key: const Key('setup-room-gap-title'),
-                    style: hankenText(size: 19, weight: FontWeight.w500)),
-                const SizedBox(height: 8),
-                // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
-                // çıkarıldı. Gerekçenin varlığı "yet"i affetmiyor —
-                // `lesson_demo_screen.dart`ın düzeltilen hâliyle aynı sınıf.
-                Text(
-                  'The design calls for four seconds of quiet to measure '
-                  'the room before you play. That capture is not wired '
-                  'in these posture lessons, so we are '
-                  'not showing a fake progress bar for it. Camera setup is '
-                  'real; this step is a named gap.',
-                  key: const Key('setup-room-gap-body'),
-                  style: hankenText(size: 13.5, height: 1.55, color: OstinatoPalette.of(context).textBody),
-                ),
-              ],
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: <Widget>[
+      GlassCard(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            kicker('Room noise floor'),
+            const SizedBox(height: 10),
+            Text(
+              'Not measured in this build.',
+              key: const Key('setup-room-gap-title'),
+              style: hankenText(size: 19, weight: FontWeight.w500),
             ),
-          ),
-          const SizedBox(height: 18),
-          PrimaryButton(label: 'Continue', onPressed: onContinue),
-        ],
-      );
+            const SizedBox(height: 8),
+            // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
+            // çıkarıldı. Gerekçenin varlığı "yet"i affetmiyor —
+            // `lesson_demo_screen.dart`ın düzeltilen hâliyle aynı sınıf.
+            Text(
+              'The design calls for four seconds of quiet to measure '
+              'the room before you play. That capture is not wired '
+              'in these posture lessons, so we are '
+              'not showing a fake progress bar for it. Camera setup is '
+              'real; this step is a named gap.',
+              key: const Key('setup-room-gap-body'),
+              style: hankenText(
+                size: 13.5,
+                height: 1.55,
+                color: OstinatoPalette.of(context).textBody,
+              ),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 18),
+      PrimaryButton(label: 'Continue', onPressed: onContinue),
+    ],
+  );
 }
 
 class _PassedStage extends StatelessWidget {
-  const _PassedStage(
-      {required this.discipline, required this.lesson, required this.hue,
-      this.source});
+  const _PassedStage({
+    required this.discipline,
+    required this.lesson,
+    required this.hue,
+    this.source,
+  });
   final Discipline discipline;
   final Lesson lesson;
   final InstrumentHue hue;
@@ -516,46 +595,58 @@ class _PassedStage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              gradient: OstinatoPalette.of(context).instrument(discipline.id).gradient,
-              borderRadius: BorderRadius.circular(22),
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          gradient: OstinatoPalette.of(
+            context,
+          ).instrument(discipline.id).gradient,
+          borderRadius: BorderRadius.circular(22),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            kicker(
+              'Ready',
+              color: OstinatoPalette.of(context).instrument(discipline.id).ink,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                kicker('Ready', color: OstinatoPalette.of(context).instrument(discipline.id).ink),
-                const SizedBox(height: 8),
-                Text('Camera calibrated.',
-                    key: const Key('setup-stage-passed'),
-                    style: hankenText(size: 19.5, weight: FontWeight.w500)),
-                const SizedBox(height: 8),
-                // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
-                // çıkarıldı — gerekçe zaten `_RoomGapNotice`de var, burası
-                // yalnız kısa bir sonuç notu.
-                Text(
-                  'Your frame and the light. Room noise is not part of '
-                  'this check, so nothing about your sound was '
-                  'measured or saved.',
-                  // O-052: ham `TextStyle` yerine tipografi yardımcısı.
-                  style: hankenText(size: 13.5, height: 1.5),
-                ),
-              ],
+            const SizedBox(height: 8),
+            Text(
+              'Camera calibrated.',
+              key: const Key('setup-stage-passed'),
+              style: hankenText(size: 19.5, weight: FontWeight.w500),
+            ),
+            const SizedBox(height: 8),
+            // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
+            // çıkarıldı — gerekçe zaten `_RoomGapNotice`de var, burası
+            // yalnız kısa bir sonuç notu.
+            Text(
+              'Your frame and the light. Room noise is not part of '
+              'this check, so nothing about your sound was '
+              'measured or saved.',
+              // O-052: ham `TextStyle` yerine tipografi yardımcısı.
+              style: hankenText(size: 13.5, height: 1.5),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 18),
+      PrimaryButton(
+        label: 'Start the lesson',
+        onPressed: () => Navigator.of(context).pushReplacement(
+          MaterialPageRoute<void>(
+            builder: (_) => LiveScreenRoute(
+              discipline: discipline,
+              lesson: lesson,
+              hue: OstinatoPalette.of(context).instrument(discipline.id),
+              source: source,
             ),
           ),
-          const SizedBox(height: 18),
-          PrimaryButton(
-            label: 'Start the lesson',
-            onPressed: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(
-                    builder: (_) =>
-                        LiveScreenRoute(discipline: discipline, lesson: lesson, hue: OstinatoPalette.of(context).instrument(discipline.id),
-                            source: source))),
-          ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }

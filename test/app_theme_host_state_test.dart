@@ -16,7 +16,9 @@ final class _ThemePreferences implements AppThemePreferences {
   @override
   Future<AppThemePreference> read() async => saved;
   @override
-  Future<void> write(AppThemePreference value) async { saved = value; }
+  Future<void> write(AppThemePreference value) async {
+    saved = value;
+  }
 }
 
 final class _LocalePreferences implements AppLocalePreferences {
@@ -30,9 +32,15 @@ final class _CatalogBundle extends CachingAssetBundle {
   @override
   Future<ByteData> load(String key) async {
     final tag = key.split('/').last.replaceAll('.json', '');
-    final bytes = Uint8List.fromList(utf8.encode(jsonEncode({
-      'schemaVersion': 1, 'locale': tag, 'messages': <String, Object>{},
-    })));
+    final bytes = Uint8List.fromList(
+      utf8.encode(
+        jsonEncode({
+          'schemaVersion': 1,
+          'locale': tag,
+          'messages': <String, Object>{},
+        }),
+      ),
+    );
     return ByteData.sublistView(bytes);
   }
 }
@@ -48,9 +56,17 @@ class _LifetimeProbe extends StatefulWidget {
 
 class _LifetimeProbeState extends State<_LifetimeProbe> {
   @override
-  void initState() { super.initState(); ++_LifetimeProbe.initializations; }
+  void initState() {
+    super.initState();
+    ++_LifetimeProbe.initializations;
+  }
+
   @override
-  void dispose() { ++_LifetimeProbe.disposals; super.dispose(); }
+  void dispose() {
+    ++_LifetimeProbe.disposals;
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => widget.child;
 }
@@ -66,13 +82,23 @@ class _DraftPageState extends State<_DraftPage> {
   final focus = FocusNode();
   final scroll = ScrollController();
   @override
-  void dispose() { text.dispose(); focus.dispose(); scroll.dispose(); super.dispose(); }
+  void dispose() {
+    text.dispose();
+    focus.dispose();
+    scroll.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: ListView(
       controller: scroll,
       children: [
-        TextField(key: const Key('retained-draft'), controller: text, focusNode: focus),
+        TextField(
+          key: const Key('retained-draft'),
+          controller: text,
+          focusNode: focus,
+        ),
         const SizedBox(height: 1200),
       ],
     ),
@@ -80,91 +106,111 @@ class _DraftPageState extends State<_DraftPage> {
 }
 
 void main() {
-  testWidgets('theme changes retain route, dialog, draft, focus, locale and child lifetime', (tester) async {
-    _LifetimeProbe.initializations = 0;
-    _LifetimeProbe.disposals = 0;
-    final preference = _ThemePreferences();
-    final controller = AppThemeController(preferences: preference);
-    await controller.load();
-    final bundle = _CatalogBundle();
-    AppLocaleController? localeController;
-    final navigatorKey = GlobalKey<NavigatorState>();
-    await tester.pumpWidget(AppThemeHost(
-      controller: controller,
-      child: AppLocaleHost(
-        preferences: _LocalePreferences(),
-        translationBundle: bundle,
-        child: _LifetimeProbe(
-          child: Builder(builder: (context) {
-            localeController = AppLocaleScope.maybeOf(context);
-            return MaterialApp(
-              navigatorKey: navigatorKey,
-              locale: Localizations.localeOf(context),
-              supportedLocales: appSupportedLocales,
-              localeListResolutionCallback: resolveAppLocales,
-              localizationsDelegates: [
-                AppTranslationsDelegate(bundle: bundle),
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              theme: OstinatoThemes.light,
-              darkTheme: OstinatoThemes.dark,
-              themeMode: AppThemeScope.modeOf(context),
-              themeAnimationDuration: Duration.zero,
-              home: const Scaffold(body: Text('root')),
-            );
-          }),
+  testWidgets(
+    'theme changes retain route, dialog, draft, focus, locale and child lifetime',
+    (tester) async {
+      _LifetimeProbe.initializations = 0;
+      _LifetimeProbe.disposals = 0;
+      final preference = _ThemePreferences();
+      final controller = AppThemeController(preferences: preference);
+      await controller.load();
+      final bundle = _CatalogBundle();
+      AppLocaleController? localeController;
+      final navigatorKey = GlobalKey<NavigatorState>();
+      await tester.pumpWidget(
+        AppThemeHost(
+          controller: controller,
+          child: AppLocaleHost(
+            preferences: _LocalePreferences(),
+            translationBundle: bundle,
+            child: _LifetimeProbe(
+              child: Builder(
+                builder: (context) {
+                  localeController = AppLocaleScope.maybeOf(context);
+                  return MaterialApp(
+                    navigatorKey: navigatorKey,
+                    locale: Localizations.localeOf(context),
+                    supportedLocales: appSupportedLocales,
+                    localeListResolutionCallback: resolveAppLocales,
+                    localizationsDelegates: [
+                      AppTranslationsDelegate(bundle: bundle),
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    theme: OstinatoThemes.light,
+                    darkTheme: OstinatoThemes.dark,
+                    themeMode: AppThemeScope.modeOf(context),
+                    themeAnimationDuration: Duration.zero,
+                    home: const Scaffold(body: Text('root')),
+                  );
+                },
+              ),
+            ),
+          ),
         ),
-      ),
-    ));
-    await tester.pumpAndSettle();
-    final navigator = navigatorKey.currentState!;
-    navigator.push(MaterialPageRoute<void>(builder: (_) => const _DraftPage()));
-    await tester.pumpAndSettle();
-    final state = tester.state<_DraftPageState>(find.byType(_DraftPage));
-    state.text.value = const TextEditingValue(text: 'Arabic العربية draft', selection: TextSelection(baseOffset: 3, extentOffset: 7));
-    state.focus.requestFocus();
-    await tester.pump();
-    state.scroll.jumpTo(100);
-    await tester.pump();
-    final originalOffset = state.scroll.offset;
-    final originalValue = state.text.value;
-    final originalLocale = localeController;
-    expect(originalLocale!.languageTag, 'ar');
-    expect(Directionality.of(state.context), TextDirection.rtl);
-    await controller.select(AppThemePreference.dark);
-    await tester.pumpAndSettle();
-    expect(navigatorKey.currentState, same(navigator));
-    expect(tester.state(find.byType(_DraftPage)), same(state));
-    expect(state.text.value, originalValue);
-    expect(state.scroll.offset, originalOffset);
-    expect(state.focus.hasFocus, isTrue);
-    expect(Theme.of(state.context).brightness, Brightness.dark);
-    expect(Directionality.of(state.context), TextDirection.rtl);
-    expect(localeController, same(originalLocale));
-    expect(localeController!.languageTag, 'ar');
-    expect(_LifetimeProbe.initializations, 1);
-    expect(_LifetimeProbe.disposals, 0);
+      );
+      await tester.pumpAndSettle();
+      final navigator = navigatorKey.currentState!;
+      navigator.push(
+        MaterialPageRoute<void>(builder: (_) => const _DraftPage()),
+      );
+      await tester.pumpAndSettle();
+      final state = tester.state<_DraftPageState>(find.byType(_DraftPage));
+      state.text.value = const TextEditingValue(
+        text: 'Arabic العربية draft',
+        selection: TextSelection(baseOffset: 3, extentOffset: 7),
+      );
+      state.focus.requestFocus();
+      await tester.pump();
+      state.scroll.jumpTo(100);
+      await tester.pump();
+      final originalOffset = state.scroll.offset;
+      final originalValue = state.text.value;
+      final originalLocale = localeController;
+      expect(originalLocale!.languageTag, 'ar');
+      expect(Directionality.of(state.context), TextDirection.rtl);
+      await controller.select(AppThemePreference.dark);
+      await tester.pumpAndSettle();
+      expect(navigatorKey.currentState, same(navigator));
+      expect(tester.state(find.byType(_DraftPage)), same(state));
+      expect(state.text.value, originalValue);
+      expect(state.scroll.offset, originalOffset);
+      expect(state.focus.hasFocus, isTrue);
+      expect(Theme.of(state.context).brightness, Brightness.dark);
+      expect(Directionality.of(state.context), TextDirection.rtl);
+      expect(localeController, same(originalLocale));
+      expect(localeController!.languageTag, 'ar');
+      expect(_LifetimeProbe.initializations, 1);
+      expect(_LifetimeProbe.disposals, 0);
 
-    showDialog<void>(
-      context: state.context,
-      builder: (_) => const AlertDialog(content: Text('retained dialog')),
-    );
-    await tester.pumpAndSettle();
-    final dialogRoute = ModalRoute.of(tester.element(find.byType(AlertDialog)));
-    await controller.select(AppThemePreference.light);
-    await tester.pumpAndSettle();
-    expect(find.text('retained dialog'), findsOneWidget);
-    expect(ModalRoute.of(tester.element(find.byType(AlertDialog))), same(dialogRoute));
-    expect(Theme.of(tester.element(find.byType(AlertDialog))).brightness, Brightness.light);
-    expect(_LifetimeProbe.initializations, 1);
-    expect(_LifetimeProbe.disposals, 0);
-    navigator.pop();
-    await tester.pumpAndSettle();
-    expect(state.text.value, originalValue);
-    expect(localeController!.languageTag, 'ar');
-    await tester.pumpWidget(const SizedBox.shrink());
-    expect(_LifetimeProbe.disposals, 1);
-  });
+      showDialog<void>(
+        context: state.context,
+        builder: (_) => const AlertDialog(content: Text('retained dialog')),
+      );
+      await tester.pumpAndSettle();
+      final dialogRoute = ModalRoute.of(
+        tester.element(find.byType(AlertDialog)),
+      );
+      await controller.select(AppThemePreference.light);
+      await tester.pumpAndSettle();
+      expect(find.text('retained dialog'), findsOneWidget);
+      expect(
+        ModalRoute.of(tester.element(find.byType(AlertDialog))),
+        same(dialogRoute),
+      );
+      expect(
+        Theme.of(tester.element(find.byType(AlertDialog))).brightness,
+        Brightness.light,
+      );
+      expect(_LifetimeProbe.initializations, 1);
+      expect(_LifetimeProbe.disposals, 0);
+      navigator.pop();
+      await tester.pumpAndSettle();
+      expect(state.text.value, originalValue);
+      expect(localeController!.languageTag, 'ar');
+      await tester.pumpWidget(const SizedBox.shrink());
+      expect(_LifetimeProbe.disposals, 1);
+    },
+  );
 }

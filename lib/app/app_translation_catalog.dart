@@ -8,8 +8,20 @@ import 'package:intl/intl.dart';
 import 'app_message_ids.dart';
 
 const supportedLanguageTags = <String>[
-  'tr', 'en', 'es-419', 'pt-BR', 'de', 'fr', 'ja', 'ar',
-  'it', 'ko', 'id', 'pl', 'hi', 'zh-Hans',
+  'tr',
+  'en',
+  'es-419',
+  'pt-BR',
+  'de',
+  'fr',
+  'ja',
+  'ar',
+  'it',
+  'ko',
+  'id',
+  'pl',
+  'hi',
+  'zh-Hans',
 ];
 
 const ostinatoSupportedLocales = <Locale>[
@@ -51,7 +63,7 @@ String canonicalLanguageTag(Locale? locale) {
 bool _supportsChinese(Locale locale) =>
     locale.scriptCode == 'Hans' ||
     (locale.scriptCode == null &&
-      !const {'TW', 'HK', 'MO'}.contains(locale.countryCode));
+        !const {'TW', 'HK', 'MO'}.contains(locale.countryCode));
 
 bool _supportsAppLocale(Locale locale) =>
     (locale.languageCode != 'zh' || _supportsChinese(locale)) &&
@@ -111,7 +123,8 @@ final class AppTranslations {
     final messages = <String, Object>{};
     for (final entry in (value['messages'] as Map<String, dynamic>).entries) {
       final message = entry.value;
-      if (message is String && message.trim().isNotEmpty &&
+      if (message is String &&
+          message.trim().isNotEmpty &&
           !appMessagePluralSources.containsKey(entry.key)) {
         messages[entry.key] = message;
       } else if (message is Map<String, dynamic> &&
@@ -126,11 +139,14 @@ final class AppTranslations {
       } else {
         throw const FormatException('Invalid translated message');
       }
-      final expected = appMessagePlaceholders[entry.key] ?? const <String, int>{};
+      final expected =
+          appMessagePlaceholders[entry.key] ?? const <String, int>{};
       final templates = message is String
           ? [message]
           : (message as Map<String, dynamic>).values.cast<String>();
-      if (templates.any((text) => !mapEquals(_placeholderCounts(text), expected))) {
+      if (templates.any(
+        (text) => !mapEquals(_placeholderCounts(text), expected),
+      )) {
         throw const FormatException('Translated placeholder contract changed');
       }
     }
@@ -151,8 +167,9 @@ final class AppTranslations {
     final translated = id == null ? null : messages[id];
     var template = tag == 'tr' ? turkish : english;
     if (pluralCount == 1 && id != null) {
-      template = appMessagePluralSources[id]?[tag == 'tr' ? 'trOne' : 'enOne']
-          ?? template;
+      template =
+          appMessagePluralSources[id]?[tag == 'tr' ? 'trOne' : 'enOne'] ??
+          template;
     }
     if (translated is String) {
       template = translated;
@@ -223,18 +240,24 @@ final class AppTranslationsDelegate
     final cached = ready[tag];
     if (cached != null) return SynchronousFuture<AppTranslations>(cached);
     final pending = _pending[assets] ??= <String, Future<AppTranslations>>{};
-    return pending.putIfAbsent(tag, () => _readCatalog(assets, canonical).then((value) {
-      ready[tag] = value;
-      pending.remove(tag);
-      return value;
-    }));
+    return pending.putIfAbsent(
+      tag,
+      () => _readCatalog(assets, canonical).then((value) {
+        ready[tag] = value;
+        pending.remove(tag);
+        return value;
+      }),
+    );
   }
 
-  Future<AppTranslations> _readCatalog(AssetBundle assets, Locale locale) async {
+  Future<AppTranslations> _readCatalog(
+    AssetBundle assets,
+    Locale locale,
+  ) async {
     try {
-      final raw = await assets.loadString(
-        'assets/l10n/${canonicalLanguageTag(locale)}.json',
-      ).timeout(const Duration(seconds: 3));
+      final raw = await assets
+          .loadString('assets/l10n/${canonicalLanguageTag(locale)}.json')
+          .timeout(const Duration(seconds: 3));
       return AppTranslations.fromJson(locale, jsonDecode(raw));
     } on Object {
       // A missing/invalid asset is cached as an exact source fallback too.

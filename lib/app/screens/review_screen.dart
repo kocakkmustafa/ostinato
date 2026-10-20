@@ -77,7 +77,7 @@ final class SessionSummary {
     double avg(List<double> a) => a.isEmpty
         ? 0
         : a.map((double v) => v.abs()).reduce((double x, double y) => x + y) /
-            a.length;
+              a.length;
     return avg(history.sublist(half)) < avg(history.sublist(0, half)) - 0.6;
   }
 }
@@ -88,26 +88,40 @@ final class SessionSummary {
 String _lastSessionLine(BuildContext context, PersistedSession s) {
   final Duration age = DateTime.now().difference(s.completedAt);
   final String when = age.inDays >= 2
-      ? localized(context, "{v0} days ago", "{v0} gün önce", values: {"v0": age.inDays}, pluralCount: age.inDays)
+      ? localized(
+          context,
+          "{v0} days ago",
+          "{v0} gün önce",
+          values: {"v0": age.inDays},
+          pluralCount: age.inDays,
+        )
       : age.inDays == 1
-          ? localized(context, 'Yesterday', 'Dün')
-          : age.inHours >= 1
-              ? localized(context, "{v0}h ago", "{v0} saat önce", values: {"v0": age.inHours}, pluralCount: age.inHours)
-              : localized(context, 'Earlier today', 'Bugün daha önce');
+      ? localized(context, 'Yesterday', 'Dün')
+      : age.inHours >= 1
+      ? localized(
+          context,
+          "{v0}h ago",
+          "{v0} saat önce",
+          values: {"v0": age.inHours},
+          pluralCount: age.inHours,
+        )
+      : localized(context, 'Earlier today', 'Bugün daha önce');
   if (s.sampleCount == 0) {
-    return ReviewCopyTr.template(context, 'last.none',
-        '{when} — nothing readable that time either.',
-        <String, Object?>{'when': when});
+    return ReviewCopyTr.template(
+      context,
+      'last.none',
+      '{when} — nothing readable that time either.',
+      <String, Object?>{'when': when},
+    );
   }
   final int share = ((1 - s.outCount / s.sampleCount) * 100).round();
-  return ReviewCopyTr.template(context, 'last.readable',
-      '{when} — inside the band in {share}% of readable samples; '
-      '{secs}s elapsed.',
-      <String, Object?>{
-        'when': when,
-        'share': share,
-        'secs': s.elapsedSeconds,
-      });
+  return ReviewCopyTr.template(
+    context,
+    'last.readable',
+    '{when} — inside the band in {share}% of readable samples; '
+        '{secs}s elapsed.',
+    <String, Object?>{'when': when, 'share': share, 'secs': s.elapsedSeconds},
+  );
 }
 
 /// Özet — "neyi ölçemedik" ZORUNLU ve EŞİT AĞIRLIKLI (§6/⑫).
@@ -142,22 +156,34 @@ class ReviewScreenRoute extends StatelessWidget {
     final hue = p.instrument(discipline.id);
     final int secs = summary.elapsedSeconds < 1 ? 1 : summary.elapsedSeconds;
     final List<String> gaps = <String>[
-      ReviewCopyTr.text(context, 'gap.confidence',
-          'Landmark confidence below the bar. Any window like that is not '
-          'counted, not scored as zero.'),
-      ReviewCopyTr.text(context, 'gap.scope',
-          'Anything outside what this lesson measures — trunk alignment only; '
-          'no other joint carries a verdict here.'),
-      ReviewCopyTr.text(context, 'gap.arms',
-          'Your arms. If shown live elsewhere, they are measured and never '
-          'marked — the teachers we recorded disagree by too much to call '
-          'a difference an error.'),
+      ReviewCopyTr.text(
+        context,
+        'gap.confidence',
+        'Landmark confidence below the bar. Any window like that is not '
+            'counted, not scored as zero.',
+      ),
+      ReviewCopyTr.text(
+        context,
+        'gap.scope',
+        'Anything outside what this lesson measures — trunk alignment only; '
+            'no other joint carries a verdict here.',
+      ),
+      ReviewCopyTr.text(
+        context,
+        'gap.arms',
+        'Your arms. If shown live elsewhere, they are measured and never '
+            'marked — the teachers we recorded disagree by too much to call '
+            'a difference an error.',
+      ),
       // 4. kalem ÇALGIYA ÖZEL ve VERİDEN gelir (DESIGN-AHEAD-OF-CODE §2.1'in
       // eksik maddesi). Burada elle yazılsaydı üç çalgı için üç `if` olurdu
       // ve dördüncü çalgı eklendiğinde sessizce eksik kalırdı.
       if (discipline.instrumentSpecificGap.isNotEmpty)
-        catalogCopy(context, '${discipline.id}.instrumentSpecificGap',
-            discipline.instrumentSpecificGap),
+        catalogCopy(
+          context,
+          '${discipline.id}.instrumentSpecificGap',
+          discipline.instrumentSpecificGap,
+        ),
     ];
 
     return Scaffold(
@@ -172,29 +198,37 @@ class ReviewScreenRoute extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   GlassIconButton(
-                      icon: '✕',
-                      semanticLabel: localized(context, 'Done', 'Bitti'),
-                      onTap: () =>
-                          Navigator.of(context).popUntil((Route<void> r) => r.isFirst)),
+                    icon: '✕',
+                    semanticLabel: localized(context, 'Done', 'Bitti'),
+                    onTap: () => Navigator.of(
+                      context,
+                    ).popUntil((Route<void> r) => r.isFirst),
+                  ),
                   kicker(localized(context, 'Summary', 'ÖZET')),
                   const SizedBox(width: 48),
                 ],
               ),
               const SizedBox(height: 18),
-              Text(catalogName(context, lesson.id, lesson.displayName),
-                  style: hankenText(
-                      size: 27, weight: FontWeight.w600, height: 1.15)),
+              Text(
+                catalogName(context, lesson.id, lesson.displayName),
+                style: hankenText(
+                  size: 27,
+                  weight: FontWeight.w600,
+                  height: 1.15,
+                ),
+              ),
               const SizedBox(height: 10),
               Text(
-                  // O-070 (ikinci tur, KANITA BAKINCA): sıfır-ölçüm hâlinde
-                  // bu satır "42 S MEASURED" diyordu ve gövde "tek kare
-                  // okuyamadık" diyordu — AYNI EKRANDA çelişki. Geçen SÜRE
-                  // ile ÖLÇÜLEN süre farklı şeyler; ikisini tek kelimeyle
-                  // ("measured") anlatmak, ölçülmemiş süreyi ölçülmüş
-                  // gösteriyordu.
-                  '${summary.nothingReadable ? localized(context, "{v0} S ELAPSED · NOTHING READ", "{v0} SN GEÇTİ · ÖLÇÜM YOK", values: {"v0": secs}) : localized(context, "{v0} S ELAPSED · {v1} READABLE SAMPLES", "{v0} SN GEÇTİ · {v1} OKUNABİLİR ÖRNEK", values: {"v0": secs, "v1": summary.sampleCount})} · ${catalogUpperName(context, discipline.id, discipline.displayName)} · '
-                  '${localized(context, 'NO SCORE', 'PUAN YOK')}',
-                  style: monoText()),
+                // O-070 (ikinci tur, KANITA BAKINCA): sıfır-ölçüm hâlinde
+                // bu satır "42 S MEASURED" diyordu ve gövde "tek kare
+                // okuyamadık" diyordu — AYNI EKRANDA çelişki. Geçen SÜRE
+                // ile ÖLÇÜLEN süre farklı şeyler; ikisini tek kelimeyle
+                // ("measured") anlatmak, ölçülmemiş süreyi ölçülmüş
+                // gösteriyordu.
+                '${summary.nothingReadable ? localized(context, "{v0} S ELAPSED · NOTHING READ", "{v0} SN GEÇTİ · ÖLÇÜM YOK", values: {"v0": secs}) : localized(context, "{v0} S ELAPSED · {v1} READABLE SAMPLES", "{v0} SN GEÇTİ · {v1} OKUNABİLİR ÖRNEK", values: {"v0": secs, "v1": summary.sampleCount})} · ${catalogUpperName(context, discipline.id, discipline.displayName)} · '
+                '${localized(context, 'NO SCORE', 'PUAN YOK')}',
+                style: monoText(),
+              ),
               const SizedBox(height: 18),
               Container(
                 padding: const EdgeInsets.all(20),
@@ -206,37 +240,53 @@ class ReviewScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker(localized(context, 'What we measured', 'ÖLÇTÜKLERİMİZ'), color: hue.ink),
+                    kicker(
+                      localized(context, 'What we measured', 'ÖLÇTÜKLERİMİZ'),
+                      color: hue.ink,
+                    ),
                     const SizedBox(height: 6),
-                    Text(ReviewCopyTr.verdict(context, summary.verdict),
-                        key: const Key('review-verdict'),
-                        style: hankenText(size: 25, weight: FontWeight.w600)),
+                    Text(
+                      ReviewCopyTr.verdict(context, summary.verdict),
+                      key: const Key('review-verdict'),
+                      style: hankenText(size: 25, weight: FontWeight.w600),
+                    ),
                     const SizedBox(height: 12),
                     SizedBox(
-                        height: 60,
-                        child: CustomPaint(
-                            painter: _CurvePainter(history: summary.history, color: p.ink))),
+                      height: 60,
+                      child: CustomPaint(
+                        painter: _CurvePainter(
+                          history: summary.history,
+                          color: p.ink,
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 12),
                     // O-070: sıfır ölçümde bu cümle "%100 … 0 saniye" derdi.
                     // Yokluk kendi cümlesini taşır; ölçüm cümlesinin içine
                     // sıfır koymak, ölçülmemiş olanı ölçülmüş gibi biçimler.
                     Text(
                       summary.nothingReadable
-                          ? ReviewCopyTr.text(context, 'body.none',
+                          ? ReviewCopyTr.text(
+                              context,
+                              'body.none',
                               'We could not read a single frame this session, '
-                              'so there is nothing to summarise — not a zero, '
-                              'and not a verdict. The camera never gave us a '
-                              'trunk line we trusted enough to measure.')
-                          : ReviewCopyTr.template(context, 'body.readable',
+                                  'so there is nothing to summarise — not a zero, '
+                                  'and not a verdict. The camera never gave us a '
+                                  'trunk line we trusted enough to measure.',
+                            )
+                          : ReviewCopyTr.template(
+                              context,
+                              'body.readable',
                               'Your trunk stayed inside the teachers’ band in '
-                              '{share}% of readable samples. That is the whole '
-                              'of it: the share of readable samples inside '
-                              'the band and the shape of the line above. No '
-                              'weighting, no composite, nothing hidden behind '
-                              'a single figure.',
+                                  '{share}% of readable samples. That is the whole '
+                                  'of it: the share of readable samples inside '
+                                  'the band and the shape of the line above. No '
+                                  'weighting, no composite, nothing hidden behind '
+                                  'a single figure.',
                               <String, Object?>{
                                 'share': (summary.insideShare! * 100).round(),
-                              }),
+                              },
+                            ),
                       key: const Key('review-measured-body'),
                       style: hankenText(size: 13.5, height: 1.55),
                     ),
@@ -252,38 +302,47 @@ class ReviewScreenRoute extends StatelessWidget {
               if (previousSession != null)
                 FutureBuilder<PersistedSession?>(
                   future: previousSession,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<PersistedSession?> snapshot) {
-                    final PersistedSession? prev = snapshot.data;
-                    if (prev == null) return const SizedBox.shrink();
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const SizedBox(height: 16),
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: p.controlSurface,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                                color: p.controlBorder),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              kicker(localized(context, 'Last session', 'SON OTURUM'), color: hue.ink),
-                              const SizedBox(height: 6),
-                              Text(
-                                _lastSessionLine(context, prev),
-                                key: const Key('review-last-session-note'),
-                                style: hankenText(size: 13.5, height: 1.5),
+                  builder:
+                      (
+                        BuildContext context,
+                        AsyncSnapshot<PersistedSession?> snapshot,
+                      ) {
+                        final PersistedSession? prev = snapshot.data;
+                        if (prev == null) return const SizedBox.shrink();
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const SizedBox(height: 16),
+                            Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: p.controlSurface,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(color: p.controlBorder),
                               ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  kicker(
+                                    localized(
+                                      context,
+                                      'Last session',
+                                      'SON OTURUM',
+                                    ),
+                                    color: hue.ink,
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    _lastSessionLine(context, prev),
+                                    key: const Key('review-last-session-note'),
+                                    style: hankenText(size: 13.5, height: 1.5),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                 ),
               const SizedBox(height: 16),
               GlassCard(
@@ -297,44 +356,65 @@ class ReviewScreenRoute extends StatelessWidget {
                     // değildir* (J-151), ve bu gece ÜÇÜNCÜ tekrarı. Kanıt
                     // karesine bakınca görüldü: `05-review.png` hâlâ
                     // "WHAT WE COULD NOT MEASURE" diyordu.
-                    kicker(localized(context, 'What we did not judge — and why',
-                        'NEYİ DEĞERLENDİRMEDİK, NEDEN?')),
+                    kicker(
+                      localized(
+                        context,
+                        'What we did not judge — and why',
+                        'NEYİ DEĞERLENDİRMEDİK, NEDEN?',
+                      ),
+                    ),
                     const SizedBox(height: 6),
                     // Sayı LİSTEDEN türer. Elle yazılıydı ('Three things')
                     // ve tam altındaki liste de elle yazılıydı: dördüncü
                     // kalem eklenince başlık SESSİZCE bayatlardı — O-029'un
                     // ("vitrin korumasızdı") canlı-yüzey hâli, kullanıcıya
                     // görünen bir sayının saydığı şeye bağlı OLMAMASI.
-                    Text(localized(context,
-                            '{v0} things, by name.',
-                            '{v0} alan, tek tek.', values: {'v0': gaps.length}, pluralCount: gaps.length),
-                        key: const Key('review-gap-headline'),
-                        // hankenText() — ham `TextStyle` tipografi
-                        // yardımcısını ATLIYORDU (O-052).
-                        style: hankenText(
-                            size: 25,
-                            weight: FontWeight.w600,
-                            color: OstinatoPalette.of(context).ink)),
+                    Text(
+                      localized(
+                        context,
+                        '{v0} things, by name.',
+                        '{v0} alan, tek tek.',
+                        values: {'v0': gaps.length},
+                        pluralCount: gaps.length,
+                      ),
+                      key: const Key('review-gap-headline'),
+                      // hankenText() — ham `TextStyle` tipografi
+                      // yardımcısını ATLIYORDU (O-052).
+                      style: hankenText(
+                        size: 25,
+                        weight: FontWeight.w600,
+                        color: OstinatoPalette.of(context).ink,
+                      ),
+                    ),
                     const SizedBox(height: 14),
                     for (final String g in gaps)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 12),
-                        child: Text(g,
-                            style: hankenText(
-                                size: 13.5,
-                                height: 1.55,
-                                color: OstinatoPalette.of(context).inkSoft)),
+                        child: Text(
+                          g,
+                          style: hankenText(
+                            size: 13.5,
+                            height: 1.55,
+                            color: OstinatoPalette.of(context).inkSoft,
+                          ),
+                        ),
                       ),
                     Text(
                       // O-069: "aynı ağırlıkta" cümlesi doğruydu ama
                       // eksikti — bu kalemler aynı TÜRDEN de değil.
-                      ReviewCopyTr.text(context, 'gap.footer',
+                      ReviewCopyTr.text(
+                        context,
+                        'gap.footer',
                         'This half is not a disclaimer. It is the same size as '
-                        'the half above because it carries the same weight — '
-                        'and these are not all the same kind of gap: some are '
-                        'missing tools, some are missing data, and some are '
-                        'judgements we do not think are ours to make.'),
-                      style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textMuted),
+                            'the half above because it carries the same weight — '
+                            'and these are not all the same kind of gap: some are '
+                            'missing tools, some are missing data, and some are '
+                            'judgements we do not think are ours to make.',
+                      ),
+                      style: hankenText(
+                        size: 12.5,
+                        color: OstinatoPalette.of(context).textMuted,
+                      ),
                     ),
                   ],
                 ),
@@ -350,19 +430,31 @@ class ReviewScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker(localized(context, 'One thing next', 'BİR SONRAKİ ADIM')),
+                    kicker(
+                      localized(context, 'One thing next', 'BİR SONRAKİ ADIM'),
+                    ),
                     const SizedBox(height: 8),
                     Text(
-                      ReviewCopyTr.text(context, 'next.space',
+                      ReviewCopyTr.text(
+                        context,
+                        'next.space',
                         'Next time, leave enough room between you and the '
-                        'phone to keep both hips in frame throughout.'),
+                            'phone to keep both hips in frame throughout.',
+                      ),
                       style: hankenText(size: 17.5, weight: FontWeight.w500),
                     ),
                     const SizedBox(height: 6),
-                    Text(ReviewCopyTr.text(context, 'next.footer',
-                        'One suggestion, not a list.'),
-                        style: hankenText(
-                            size: 12.5, color: OstinatoPalette.of(context).textMuted)),
+                    Text(
+                      ReviewCopyTr.text(
+                        context,
+                        'next.footer',
+                        'One suggestion, not a list.',
+                      ),
+                      style: hankenText(
+                        size: 12.5,
+                        color: OstinatoPalette.of(context).textMuted,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -377,23 +469,30 @@ class ReviewScreenRoute extends StatelessWidget {
                 // çıkarıldı — bir zaman taahhüdüydü. Kalan cümle bugünün
                 // OLGUSUNU söylüyor, gelecek vaat etmiyor.
                 child: Text(
-                  ReviewCopyTr.text(context, 'sharing',
+                  ReviewCopyTr.text(
+                    context,
+                    'sharing',
                     'Sharing a skeleton-render report is not wired in this '
-                    'build. Raw video never leaves this device either way — '
-                    'there is simply no report to send.'),
+                        'build. Raw video never leaves this device either way — '
+                        'there is simply no report to send.',
+                  ),
                   // H-44 (2026-08-16): İNECEK KALEM — bir paylaşım/dışa
                   // aktarma yolu (skeleton-render'ı PNG/PDF olarak
                   // biriktirip göndermek) inşa edilirse bu cümle YALAN olur.
                   // O gün bu metin ADIYLA güncellenmeli, sessizce bırakılmaz.
                   key: const Key('review-sharing-gap-note'),
-                  style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textMuted),
+                  style: hankenText(
+                    size: 12.5,
+                    color: OstinatoPalette.of(context).textMuted,
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
               PrimaryButton(
                 label: localized(context, 'Done', 'Bitti'),
-                onPressed: () =>
-                    Navigator.of(context).popUntil((Route<void> r) => r.isFirst),
+                onPressed: () => Navigator.of(
+                  context,
+                ).popUntil((Route<void> r) => r.isFirst),
               ),
             ],
           ),
@@ -423,11 +522,14 @@ class _CurvePainter extends CustomPainter {
     // Boş geçmiş artık HİÇBİR ŞEY çizmez. Yokluğun görseli boşluktur.
     if (history.isEmpty) return;
     final List<double> h = history;
-    final double maxAbs = h.map((double v) => v.abs()).fold(1.0, (double a, double b) => a > b ? a : b);
+    final double maxAbs = h
+        .map((double v) => v.abs())
+        .fold(1.0, (double a, double b) => a > b ? a : b);
     final Path path = Path();
     for (int i = 0; i < h.length; i++) {
       final double x = h.length <= 1 ? 0 : (i / (h.length - 1)) * size.width;
-      final double y = size.height -
+      final double y =
+          size.height -
           (h[i].abs() / (maxAbs < 1 ? 1 : maxAbs)).clamp(0, 1) * size.height;
       if (i == 0) {
         path.moveTo(x, y);
@@ -436,15 +538,17 @@ class _CurvePainter extends CustomPainter {
       }
     }
     canvas.drawPath(
-        path,
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2
-          ..strokeCap = StrokeCap.round
-          ..strokeJoin = StrokeJoin.round);
+      path,
+      Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round,
+    );
   }
 
   @override
-  bool shouldRepaint(covariant _CurvePainter old) => old.history != history || old.color != color;
+  bool shouldRepaint(covariant _CurvePainter old) =>
+      old.history != history || old.color != color;
 }
