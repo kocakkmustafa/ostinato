@@ -177,6 +177,8 @@ final class AppTranslations {
       template = Intl.pluralLogic(
         pluralCount,
         locale: intlLocaleName(locale),
+        // Catalog keys are grammatical categories, not exact-number overrides.
+        useExplicitNumberCases: false,
         zero: translated['zero'],
         one: translated['one'],
         two: translated['two'],
