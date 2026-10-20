@@ -735,7 +735,7 @@ void main() {
       final app = _RealApp(theme);
       await app.mount(tester);
       final library = find.byType(LibraryScreen);
-      final state = tester.state(library);
+      final libraryElement = tester.element(library);
       final navigator = tester.state<NavigatorState>(find.byType(Navigator));
       final owner = app.owner;
       final before = _counts(app.port);
@@ -749,7 +749,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 250));
       expect(theme.preference, AppThemePreference.dark);
       expect(theme.readFailed, isFalse);
-      expect(tester.state(library), same(state));
+      expect(tester.element(library), same(libraryElement));
       expect(
         tester.state<NavigatorState>(find.byType(Navigator)),
         same(navigator),
