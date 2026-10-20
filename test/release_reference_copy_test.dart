@@ -13,6 +13,8 @@ import 'package:ostinato/app/screens/instrument_screen.dart';
 import 'package:ostinato/app/screens/lesson_demo_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
 
+import 'support/localized_widget_ready.dart';
+
 // Keep the framework's own error handler. Extra diagnostics make a failed
 // phase identify its RenderFlex creator instead of hiding it behind takeException.
 List<String> _watchFrameworkErrors() {
@@ -83,6 +85,11 @@ void main() {
             ),
           ),
         );
+        await waitForLocalizedFixture(tester,
+          languageTag: language,
+          anchor: find.byType(OnboardingScreen),
+          reason: 'Onboarding must publish its actual packaged translations',
+        );
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(const Key('onboarding-primary')));
         await tester.pumpAndSettle();
@@ -140,6 +147,11 @@ void main() {
                   CourseScreenRoute(discipline: discipline, course: course),
                   textScale: textScale,
                 ),
+              );
+              await waitForLocalizedFixture(tester,
+                languageTag: language,
+                anchor: find.byKey(Key('lesson-${lesson.id}')),
+                reason: 'Course ${lesson.id} must render before reading its copy',
               );
               await tester.pumpAndSettle();
               final row = find.byKey(Key('lesson-${lesson.id}'));
@@ -221,6 +233,11 @@ void main() {
                 textScale: 2,
               ),
             );
+            await waitForLocalizedFixture(tester,
+              languageTag: language,
+              anchor: find.text('Open test reference'),
+              reason: 'The direct demo fixture must render before a real tap',
+            );
             await tester.tap(find.text('Open test reference'));
             await tester.pumpAndSettle();
             expect(find.byType(LessonDemoScreenRoute), findsOneWidget);
@@ -301,6 +318,11 @@ void main() {
         final guitar = repo.disciplines.singleWhere((d) => d.id == 'guitar');
         await tester.pumpWidget(
           host(InstrumentScreenRoute(discipline: guitar)),
+        );
+        await waitForLocalizedFixture(tester,
+          languageTag: language,
+          anchor: find.byType(InstrumentScreenRoute),
+          reason: 'Instrument footer must render its packaged translations',
         );
         await tester.pumpAndSettle();
         final claim = find.textContaining(

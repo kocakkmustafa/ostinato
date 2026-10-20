@@ -81,8 +81,22 @@ Future<void> _choose(
     const Duration(seconds: 2),
   );
   final item = find.byKey(ValueKey('app-language-option-$option')).last;
-  await tester.ensureVisible(item);
-  await tester.tap(item);
+  expect(item, findsOneWidget);
+  // The menu item's full-width semantics container is not its text hit box.
+  // Scroll and tap the actual visible child, keeping hit-test failures fatal
+  // to this assertion rather than bypassing the real dropdown interaction.
+  final optionText = find.descendant(of: item, matching: find.byType(Text));
+  expect(optionText, findsOneWidget);
+  await tester.ensureVisible(optionText);
+  await tester.pumpAndSettle(
+    const Duration(milliseconds: 50),
+    EnginePhase.sendSemanticsUpdate,
+    const Duration(seconds: 2),
+  );
+  final hitText = optionText.hitTestable();
+  expect(hitText, findsOneWidget,
+      reason: 'The visible $option label must receive the real pointer hit');
+  await tester.tap(hitText);
   await _waitFor(
     tester,
     () => canonicalLanguageTag(
@@ -92,6 +106,30 @@ Future<void> _choose(
   );
   // Finish the popup transition without waiting on unrelated IO spinners.
   await tester.pump(const Duration(milliseconds: 350));
+  expect(tester.widget<DropdownButton<String>>(dropdown).value, option);
+}
+
+// The UI starts this Future in the widget fake zone. Awaiting it inside
+// runAsync can leave its fake-zone continuations unpumped. Observe completion
+// across bounded fake pumps and real event turns, then rethrow any IO failure
+// with its original stack; disk bytes are still checked by the caller.
+Future<void> _finishUiWrite(WidgetTester tester, Future<void> writing) async {
+  var finished = false;
+  Object? failure;
+  StackTrace? failureStack;
+  unawaited(writing.then<void>(
+    (_) { finished = true; },
+    onError: (Object error, StackTrace stack) {
+      failure = error;
+      failureStack = stack;
+      finished = true;
+    },
+  ));
+  await _waitFor(tester, () => finished,
+      'The explicit UI preference write must finish within 200 IO turns');
+  if (failure != null) {
+    Error.throwWithStackTrace(failure!, failureStack!);
+  }
 }
 
 final class _Preferences implements AppLocalePreferences {
@@ -473,15 +511,14 @@ void main() {
       expect(file.readAsBytesSync(), originalBytes);
       expect(temporary.existsSync(), isFalse);
 
-      // An explicit UI choice may replace those bytes. Await real file IO
-      // outside the widget fake clock rather than treating a locale repaint
-      // as evidence that the preference was persisted.
+      // An explicit UI choice may replace those bytes. Its write starts
+      // in the fake widget zone: interleave real IO turns with fake pumps,
+      // then independently read disk outside the fake zone. A locale repaint
+      // alone is not persistence evidence.
       await _choose(tester, 'ar', 'ar');
       expect(preferences.writes, ['ar']);
       expect(preferences.lastWrite, isNotNull);
-      await tester.runAsync(
-        () => preferences.lastWrite!.timeout(const Duration(seconds: 5)),
-      );
+      await _finishUiWrite(tester, preferences.lastWrite!);
       final persisted = await tester.runAsync(
         () => files.read().timeout(const Duration(seconds: 5)),
       );

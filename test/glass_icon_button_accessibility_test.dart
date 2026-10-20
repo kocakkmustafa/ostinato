@@ -13,6 +13,8 @@ import 'package:ostinato/app/design/widgets.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/settings_screen.dart';
 
+import 'support/localized_widget_ready.dart';
+
 int _tapActions(SemanticsNode node) {
   var count = node.getSemanticsData().hasAction(SemanticsAction.tap) ? 1 : 0;
   node.visitChildren((child) {
@@ -96,6 +98,11 @@ void main() {
           ),
         );
         await tester.pumpWidget(screen(true));
+        await waitForLocalizedFixture(tester,
+          languageTag: locale,
+          anchor: find.byKey(const Key('target')),
+          reason: 'The enabled native button must render before target checks',
+        );
         await tester.pumpAndSettle();
         final target = find.byKey(const Key('target'));
         final nativeTarget = find.descendant(
@@ -171,6 +178,11 @@ void main() {
         );
         expect(find.text(label), findsNothing);
         await tester.pumpWidget(screen(false));
+        await waitForLocalizedFixture(tester,
+          languageTag: locale,
+          anchor: find.byKey(const Key('target')),
+          reason: 'The disabled native button must render before semantics checks',
+        );
         await tester.pumpAndSettle();
         expect(find.bySemanticsLabel(label), findsOneWidget);
         final disabled = tester.getSemantics(nativeTarget);
@@ -217,6 +229,11 @@ void main() {
               ),
             ),
           ),
+        );
+        await waitForLocalizedFixture(tester,
+          languageTag: locale,
+          anchor: find.byType(GlassIconButton),
+          reason: 'The keyboard fixture must render before requesting focus',
         );
         await tester.sendKeyEvent(LogicalKeyboardKey.tab);
         await tester.pumpAndSettle();
@@ -281,6 +298,11 @@ void main() {
             home: LibraryScreen(repo: repo, cueText: cues),
           ),
         ),
+      );
+      await waitForLocalizedFixture(tester,
+        languageTag: locale,
+        anchor: find.byType(LibraryScreen),
+        reason: 'Library must render before 320px/2x target and layout checks',
       );
       await tester.pumpAndSettle();
       _expectNoFrameworkError(tester, diagnostics,

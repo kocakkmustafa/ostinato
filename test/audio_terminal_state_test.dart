@@ -171,6 +171,7 @@ void main() {
         expect(harness.channel.stopCalls, 1);
         expect(tester.takeException(), isNull);
       } finally {
+        if (!lateAnalysis.isCompleted) lateAnalysis.complete(_observed);
         await harness.dispose();
       }
     },
@@ -281,19 +282,31 @@ Future<_ObservationHarness> _pumpObservation(
     // This preparation belongs to the fixture, not to the screen. Its date
     // boundary timer must end before testWidgets verifies its invariants.
     preparation.dispose();
-    await tester.pumpWidget(const SizedBox.shrink());
-    channel.acknowledgeClose();
-    await controller.stop();
-    controller.dispose();
-    await statuses.cancel();
-    await source.dispose();
-    await channel.dispose();
-    await tester.pump();
-    resetAudioCaptureCoordinatorForTest();
+    try {
+      debugPrint('audio-fixture begin: terminal widget detach');
+      await tester.pumpWidget(const SizedBox.shrink());
+      debugPrint('audio-fixture settled: terminal widget detach');
+    } finally {
+      // Cleanup-only ACK; all body close/reject assertions precede this.
+      channel.acknowledgeClose();
+      try {
+        await _cleanupTerminalOperations(tester, {
+          'terminal controller stop': controller.stop,
+          'terminal controller dispose': () async => controller.dispose(),
+          'terminal status listener cancel': statuses.cancel,
+          'terminal source dispose': source.dispose,
+          'terminal fake channel close': channel.dispose,
+        });
+        await tester.pump();
+      } finally {
+        resetAudioCaptureCoordinatorForTest();
+      }
+    }
   }
 
   harness.dispose = dispose;
   addTearDown(dispose);
+  debugPrint('audio-fixture begin: terminal initial widget mount');
   await tester.pumpWidget(
     MaterialApp(
       locale: const Locale('en'),
@@ -304,6 +317,7 @@ Future<_ObservationHarness> _pumpObservation(
     ),
   );
   await tester.pump();
+  debugPrint('audio-fixture settled: terminal initial widget mount');
   return harness;
 }
 
@@ -318,20 +332,26 @@ final class _ObservationHarness {
   late final Future<void> Function() dispose;
 
   Future<void> startThroughScreen(WidgetTester tester) async {
+    debugPrint('audio-fixture begin: terminal screen acknowledgement');
     final acknowledge = find.byKey(const Key('note-session-acknowledge'));
     await tester.ensureVisible(acknowledge);
     await tester.tap(acknowledge);
     await tester.pump();
+    debugPrint('audio-fixture settled: terminal screen acknowledgement');
+    debugPrint('audio-fixture begin: terminal screen start');
     final start = find.byKey(const Key('observation-start-stop'));
     await tester.ensureVisible(start);
     expect(_startButton(tester).onPressed, isNotNull);
     await tester.tap(start);
     await tester.pump();
     expect(channel.startCalls, 1);
+    debugPrint('audio-fixture settled: terminal screen start');
+    debugPrint('audio-fixture begin: terminal built-in route delivery');
     channel.deliverBuiltInRoute();
     await tester.pump();
     expect(controller.phase, NoteObservationPhase.calibrating);
     expect(controller.isActive, isTrue);
+    debugPrint('audio-fixture settled: terminal built-in route delivery');
   }
 }
 
@@ -441,4 +461,68 @@ final class _NativeTerminalChannel
   }
 
   Future<void> dispose() => _events.close();
+}
+
+Future<void> _settleTerminalOperation(
+  WidgetTester tester,
+  Future<void> operation, {
+  required String stage,
+}) async {
+  debugPrint('audio-fixture begin: $stage');
+  var completed = false;
+  Object? failure;
+  StackTrace? failureStack;
+  unawaited(
+    operation.then<void>(
+      (_) {
+        completed = true;
+      },
+      onError: (Object error, StackTrace stack) {
+        failure = error;
+        failureStack = stack;
+        completed = true;
+      },
+    ),
+  );
+  for (var turn = 0; turn < 100 && !completed; turn++) {
+    await tester.pump();
+    if (!completed) {
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 1)),
+      );
+    }
+  }
+  expect(
+    completed,
+    isTrue,
+    reason: '$stage did not settle in 100 event turns',
+  );
+  debugPrint('audio-fixture settled: $stage');
+  if (failure != null) Error.throwWithStackTrace(failure!, failureStack!);
+}
+
+/// Try every fixture cleanup, retain the first failure, and rethrow it.
+/// This does not consume FlutterError or framework exceptions.
+Future<void> _cleanupTerminalOperations(
+  WidgetTester tester,
+  Map<String, Future<void> Function()> operations,
+) async {
+  Object? firstFailure;
+  StackTrace? firstStack;
+  for (final operation in operations.entries) {
+    try {
+      await _settleTerminalOperation(
+        tester,
+        Future<void>.sync(operation.value),
+        stage: operation.key,
+      );
+    } on Object catch (error, stack) {
+      firstFailure ??= error;
+      firstStack ??= stack;
+      debugPrint('audio-fixture cleanup failed: ${operation.key}: $error');
+    }
+  }
+  if (firstFailure != null) {
+    Error.throwWithStackTrace(firstFailure!, firstStack!);
+  }
 }

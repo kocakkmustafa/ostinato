@@ -175,28 +175,37 @@ void main() {
       );
       final states = <AudioSurfaceState>[];
       final sub = source.status.listen(states.add);
-      await source.start(sampleRate: 44100);
-      for (var notice = 0; notice < 3; notice++) {
-        await tester.pump(const Duration(milliseconds: 30));
-        channel._events.add(const RawRouteChangedEvent('ios:BuiltInMic'));
-        await tester.pump();
+      try {
+        await _settleLifecycleOperation(
+          tester,
+          source.start(sampleRate: 44100),
+          stage: 'known-route notices source start',
+        );
+        for (var notice = 0; notice < 3; notice++) {
+          await tester.pump(const Duration(milliseconds: 30));
+          channel._events.add(const RawRouteChangedEvent('ios:BuiltInMic'));
+          await tester.pump();
+        }
+        expect(channel.running, isTrue);
+        await tester.pump(const Duration(milliseconds: 11));
+        expect(
+          states.whereType<AudioSetupFailed>().map((state) => state.reason),
+          ['capture_pcm_timeout'],
+        );
+        expect(channel.running, isFalse);
+        expect(channel.stopCalls, 1);
+        expect(channel.retryCalls, 0);
+        expect(source.bufferedSampleCountForTest, 0);
+        await tester.pump(const Duration(milliseconds: 200));
+        expect(channel.startCalls, 1);
+        expect(channel.stopCalls, 1);
+      } finally {
+        await _cleanupLifecycleOperations(tester, {
+          'known-route notices status listener cancel': sub.cancel,
+          'known-route notices source dispose': source.dispose,
+          'known-route notices fake channel close': channel._events.close,
+        });
       }
-      expect(channel.running, isTrue);
-      await tester.pump(const Duration(milliseconds: 11));
-      expect(
-        states.whereType<AudioSetupFailed>().map((state) => state.reason),
-        ['capture_pcm_timeout'],
-      );
-      expect(channel.running, isFalse);
-      expect(channel.stopCalls, 1);
-      expect(channel.retryCalls, 0);
-      expect(source.bufferedSampleCountForTest, 0);
-      await tester.pump(const Duration(milliseconds: 200));
-      expect(channel.startCalls, 1);
-      expect(channel.stopCalls, 1);
-      await sub.cancel();
-      await source.dispose();
-      await channel._events.close();
     },
   );
 
@@ -213,36 +222,45 @@ void main() {
       final chunks = <AudioChunk>[];
       final sub = source.status.listen(states.add);
       final chunkSub = source.chunks.listen(chunks.add);
-      await source.start(sampleRate: 44100);
-      for (var chunk = 0; chunk < 4; chunk++) {
-        await tester.pump(const Duration(milliseconds: 90));
-        channel._events.add(
-          RawAudioChunkEvent(
-            samples: List<double>.filled(4410, 0),
-            sampleRate: 44100,
-            tNativeUs: chunk * 100000,
-          ),
+      try {
+        await _settleLifecycleOperation(
+          tester,
+          source.start(sampleRate: 44100),
+          stage: 'silent PCM source start',
         );
-        await tester.pump();
+        for (var chunk = 0; chunk < 4; chunk++) {
+          await tester.pump(const Duration(milliseconds: 90));
+          channel._events.add(
+            RawAudioChunkEvent(
+              samples: List<double>.filled(4410, 0),
+              sampleRate: 44100,
+              tNativeUs: chunk * 100000,
+            ),
+          );
+          await tester.pump();
+          expect(channel.running, isTrue);
+          expect(states.whereType<AudioSetupFailed>(), isEmpty);
+        }
+        expect(chunks, hasLength(4));
+        expect(channel.stopCalls, 0);
+        await tester.pump(const Duration(milliseconds: 99));
         expect(channel.running, isTrue);
-        expect(states.whereType<AudioSetupFailed>(), isEmpty);
+        await tester.pump(const Duration(milliseconds: 1));
+        expect(channel.running, isFalse);
+        expect(channel.stopCalls, 1);
+        expect(
+          (states.last as AudioSetupFailed).reason,
+          'capture_pcm_timeout',
+        );
+        expect(source.bufferedSampleCountForTest, 0);
+      } finally {
+        await _cleanupLifecycleOperations(tester, {
+          'silent PCM chunk listener cancel': chunkSub.cancel,
+          'silent PCM status listener cancel': sub.cancel,
+          'silent PCM source dispose': source.dispose,
+          'silent PCM fake channel close': channel._events.close,
+        });
       }
-      expect(chunks, hasLength(4));
-      expect(channel.stopCalls, 0);
-      await tester.pump(const Duration(milliseconds: 99));
-      expect(channel.running, isTrue);
-      await tester.pump(const Duration(milliseconds: 1));
-      expect(channel.running, isFalse);
-      expect(channel.stopCalls, 1);
-      expect(
-        (states.last as AudioSetupFailed).reason,
-        'capture_pcm_timeout',
-      );
-      expect(source.bufferedSampleCountForTest, 0);
-      await chunkSub.cancel();
-      await sub.cancel();
-      await source.dispose();
-      await channel._events.close();
     },
   );
 
@@ -259,23 +277,35 @@ void main() {
     final states = <AudioSurfaceState>[];
     final sub = source.status.listen(states.add);
     final opening = source.start(sampleRate: 44100);
-    await tester.pump();
-    expect(channel.startCalls, 1);
-    await tester.pump(const Duration(milliseconds: 200));
-    expect(channel.stopCalls, 0);
-    expect(states.whereType<AudioSetupFailed>(), isEmpty);
-    startGate.complete();
-    await tester.pump();
-    await opening;
-    await tester.pump(const Duration(milliseconds: 100));
-    expect(
-      (states.last as AudioSetupFailed).reason,
-      'capture_pcm_timeout',
-    );
-    expect(channel.stopCalls, 1);
-    await sub.cancel();
-    await source.dispose();
-    await channel._events.close();
+    try {
+      await tester.pump();
+      expect(channel.startCalls, 1);
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(channel.stopCalls, 0);
+      expect(states.whereType<AudioSetupFailed>(), isEmpty);
+      startGate.complete();
+      await tester.pump();
+      await _settleLifecycleOperation(
+        tester,
+        opening,
+        stage: 'native-start gate receipt',
+      );
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(
+        (states.last as AudioSetupFailed).reason,
+        'capture_pcm_timeout',
+      );
+      expect(channel.stopCalls, 1);
+    } finally {
+      // This releases only the test gate, after all body assertions (or failure).
+      if (!startGate.isCompleted) startGate.complete();
+      await _cleanupLifecycleOperations(tester, {
+        'native-start gate cleanup receipt': () => opening,
+        'native-start gate status listener cancel': sub.cancel,
+        'native-start gate source dispose': source.dispose,
+        'native-start gate fake channel close': channel._events.close,
+      });
+    }
   });
 
   for (final dispose in [false, true]) {
@@ -290,21 +320,38 @@ void main() {
         );
         final states = <AudioSurfaceState>[];
         final sub = source.status.listen(states.add);
-        await source.start(sampleRate: 44100);
-        await tester.pump(const Duration(milliseconds: 50));
-        if (dispose) {
-          await source.dispose();
-        } else {
-          await source.stop();
+        try {
+          await _settleLifecycleOperation(
+            tester,
+            source.start(sampleRate: 44100),
+            stage: 'cancel timer source start',
+          );
+          await tester.pump(const Duration(milliseconds: 50));
+          if (dispose) {
+            await _settleLifecycleOperation(
+              tester,
+              source.dispose(),
+              stage: 'cancel timer active dispose',
+            );
+          } else {
+            await _settleLifecycleOperation(
+              tester,
+              source.stop(),
+              stage: 'cancel timer manual stop',
+            );
+          }
+          await tester.pump(const Duration(milliseconds: 200));
+          expect(states.whereType<AudioSetupFailed>(), isEmpty);
+          expect(channel.running, isFalse);
+          expect(channel.stopCalls, 1);
+          expect(channel.startCalls, 1);
+        } finally {
+          await _cleanupLifecycleOperations(tester, {
+            'cancel timer status listener cancel': sub.cancel,
+            'cancel timer source dispose': source.dispose,
+            'cancel timer fake channel close': channel._events.close,
+          });
         }
-        await tester.pump(const Duration(milliseconds: 200));
-        expect(states.whereType<AudioSetupFailed>(), isEmpty);
-        expect(channel.running, isFalse);
-        expect(channel.stopCalls, 1);
-        expect(channel.startCalls, 1);
-        await sub.cancel();
-        await source.dispose();
-        await channel._events.close();
       },
     );
   }
@@ -324,23 +371,46 @@ void main() {
     final next = source(nextChannel);
     final nextStates = <AudioSurfaceState>[];
     final sub = next.status.listen(nextStates.add);
-    await first.start(sampleRate: 44100);
-    await tester.pump(const Duration(milliseconds: 90));
-    await next.start(sampleRate: 44100);
-    expect(firstChannel.stopCalls, 1);
-    await tester.pump(const Duration(milliseconds: 20));
-    expect(nextChannel.running, isTrue);
-    expect(nextChannel.stopCalls, 0);
-    expect(nextStates.whereType<AudioSetupFailed>(), isEmpty);
-    await first.dispose();
-    await next.dispose();
-    await tester.pump(const Duration(milliseconds: 200));
-    expect(nextStates.whereType<AudioSetupFailed>(), isEmpty);
-    expect(nextChannel.startCalls, 1);
-    expect(nextChannel.stopCalls, 1);
-    await sub.cancel();
-    await firstChannel._events.close();
-    await nextChannel._events.close();
+    try {
+      await _settleLifecycleOperation(
+        tester,
+        first.start(sampleRate: 44100),
+        stage: 'retired first start',
+      );
+      await tester.pump(const Duration(milliseconds: 90));
+      await _settleLifecycleOperation(
+        tester,
+        next.start(sampleRate: 44100),
+        stage: 'retired next start',
+      );
+      expect(firstChannel.stopCalls, 1);
+      await tester.pump(const Duration(milliseconds: 20));
+      expect(nextChannel.running, isTrue);
+      expect(nextChannel.stopCalls, 0);
+      expect(nextStates.whereType<AudioSetupFailed>(), isEmpty);
+      await _settleLifecycleOperation(
+        tester,
+        first.dispose(),
+        stage: 'retired first dispose',
+      );
+      await _settleLifecycleOperation(
+        tester,
+        next.dispose(),
+        stage: 'retired next dispose',
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(nextStates.whereType<AudioSetupFailed>(), isEmpty);
+      expect(nextChannel.startCalls, 1);
+      expect(nextChannel.stopCalls, 1);
+    } finally {
+      await _cleanupLifecycleOperations(tester, {
+        'retired status listener cancel': sub.cancel,
+        'retired first source cleanup': first.dispose,
+        'retired next source cleanup': next.dispose,
+        'retired first fake channel close': firstChannel._events.close,
+        'retired next fake channel close': nextChannel._events.close,
+      });
+    }
   });
 
   test(
@@ -904,7 +974,11 @@ void main() {
         () => messenger.setMockMethodCallHandler(arbiterMethod, null),
       );
       final arbiter = NativeAudioArbiterChannel(channel: arbiterMethod);
-      await arbiter.readAllAudioState();
+      await _settleLifecycleOperation(
+        tester,
+        arbiter.readAllAudioState().then<void>((_) {}),
+        stage: 'active dispose arbiter read',
+      );
       final user = ValueNotifier<String?>('A');
       final phase = ValueNotifier(MotionIdentityPhase.verified);
       final owner = PracticeAudioRootOwner(
@@ -920,24 +994,66 @@ void main() {
       final route = MaterialPageRoute<void>(builder: (_) => const SizedBox());
       owner.attachNavigator(observer);
       observer.didPush(route, null);
-      await owner.lastFenceForTest;
-      final action = owner.captureActionFor(route)!;
       final source = AudioInputController(
         channel: MethodChannelAudioCaptureChannel(),
         requestMicrophonePermission: () async => PermissionStatus.granted,
       );
-      await source.start(sampleRate: 44100, captureAction: action);
-      await source.dispose();
-      owner.dispose();
-      await owner.lastFenceForTest;
-      user.dispose();
-      phase.dispose();
-      await tester.pump();
-      expect(stopCalls, 1);
-      expect(source.captureGateReady, isFalse);
-      expect(source.captureNeedsExplicitRetry, isFalse);
-      // The platform reply remains unanswered. A disposed route must not
-      // retain a Dart timer or turn this into a confirmed close.
+      var ownerDisposed = false;
+      var notifiersDisposed = false;
+      try {
+        await _settleLifecycleOperation(
+          tester,
+          owner.lastFenceForTest?.then<void>((_) {}) ?? Future<void>.value(),
+          stage: 'active dispose initial owner fence',
+        );
+        final action = owner.captureActionFor(route)!;
+        await _settleLifecycleOperation(
+          tester,
+          source.start(sampleRate: 44100, captureAction: action),
+          stage: 'active dispose source start',
+        );
+        await _settleLifecycleOperation(
+          tester,
+          source.dispose(),
+          stage: 'active dispose source dispose',
+        );
+        owner.dispose();
+        ownerDisposed = true;
+        await _settleLifecycleOperation(
+          tester,
+          owner.lastFenceForTest?.then<void>((_) {}) ?? Future<void>.value(),
+          stage: 'active dispose owner fence',
+        );
+        user.dispose();
+        phase.dispose();
+        notifiersDisposed = true;
+        await tester.pump();
+        expect(stopCalls, 1);
+        expect(source.captureGateReady, isFalse);
+        expect(source.captureNeedsExplicitRetry, isFalse);
+        // The platform reply remains unanswered. A disposed route must not
+        // retain a Dart timer or turn this into a confirmed close.
+      } finally {
+        try {
+          await _cleanupLifecycleOperations(tester, {
+            'active dispose source cleanup': source.dispose,
+            'active dispose owner cleanup': () async {
+              if (!ownerDisposed) {
+                owner.dispose();
+                ownerDisposed = true;
+              }
+            },
+            'active dispose owner final fence': () async {
+              await owner.lastFenceForTest;
+            },
+          });
+        } finally {
+          if (!notifiersDisposed) {
+            user.dispose();
+            phase.dispose();
+          }
+        }
+      }
     },
   );
 
@@ -1268,6 +1384,7 @@ Future<void> _settleLifecycleOperation(
   Future<void> operation, {
   required String stage,
 }) async {
+  debugPrint('audio-fixture begin: $stage');
   var completed = false;
   Object? failure;
   StackTrace? failureStack;
@@ -1296,7 +1413,34 @@ Future<void> _settleLifecycleOperation(
     isTrue,
     reason: '$stage did not settle in 100 event turns',
   );
+  debugPrint('audio-fixture settled: $stage');
   if (failure != null) Error.throwWithStackTrace(failure!, failureStack!);
+}
+
+/// Try every fixture cleanup, retain the first failure, and rethrow it.
+/// This does not consume FlutterError or framework exceptions.
+Future<void> _cleanupLifecycleOperations(
+  WidgetTester tester,
+  Map<String, Future<void> Function()> operations,
+) async {
+  Object? firstFailure;
+  StackTrace? firstStack;
+  for (final operation in operations.entries) {
+    try {
+      await _settleLifecycleOperation(
+        tester,
+        Future<void>.sync(operation.value),
+        stage: operation.key,
+      );
+    } on Object catch (error, stack) {
+      firstFailure ??= error;
+      firstStack ??= stack;
+      debugPrint('audio-fixture cleanup failed: ${operation.key}: $error');
+    }
+  }
+  if (firstFailure != null) {
+    Error.throwWithStackTrace(firstFailure!, firstStack!);
+  }
 }
 
 final class _SharedCloseNative {
