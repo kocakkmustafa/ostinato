@@ -5,11 +5,11 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/motion_core"
-      ref: ef60e346934d7e5d45c87deb81583b263575b208
-      resolved-ref: ef60e346934d7e5d45c87deb81583b263575b208
+      ref: d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d
+      resolved-ref: d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d
       url: "https://github.com/kocakkmustafa/motion-core.git"
     source: git
-    version: "0.12.0"
+    version: "0.13.0"
   ostinato_audio:
     dependency: "direct main"
     description:
