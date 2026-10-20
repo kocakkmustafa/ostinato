@@ -15,6 +15,8 @@ import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/screens/instrument_screen.dart';
 import 'package:ostinato/app/screens/piano_beginner_screen.dart';
 
+import 'support/localized_widget_ready.dart';
+
 class Files extends CachingAssetBundle {
   Files({this.corrupt = false});
   final bool corrupt;
@@ -189,6 +191,16 @@ void main() {
             ),
             home: PianoBeginnerScreen(bundle: Files()),
           ),
+        );
+        await waitForLocalizedFixture(
+          tester,
+          languageTag: locale,
+          anchor: find.descendant(
+            of: find.byType(PianoBeginnerScreen),
+            matching: find.byType(ListView),
+          ),
+          reason:
+              'Piano course and packaged translations must be ready before scrolling',
         );
         await tester.pumpAndSettle();
         await tester.scrollUntilVisible(
