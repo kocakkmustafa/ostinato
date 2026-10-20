@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -196,8 +195,9 @@ final class _AppThemeHostState extends State<AppThemeHost>
 
   @override
   void didChangePlatformBrightness() {
-    if (widget.controller.preference == AppThemePreference.system)
+    if (widget.controller.preference == AppThemePreference.system) {
       setState(() {});
+    }
   }
 
   @override

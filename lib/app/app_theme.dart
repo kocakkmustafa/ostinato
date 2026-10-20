@@ -422,8 +422,9 @@ abstract final class OstinatoThemes {
         style: ButtonStyle(
           foregroundColor: stateColor(p.onPrimary, p.disabledForeground),
           backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled))
+            if (states.contains(WidgetState.disabled)) {
               return p.disabledBackground;
+            }
             if (states.contains(WidgetState.focused)) {
               return Color.alphaBlend(
                 p.onPrimary.withValues(alpha: .10),

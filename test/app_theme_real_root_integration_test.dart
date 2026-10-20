@@ -16,6 +16,8 @@ import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/app_locale_preferences.dart';
 import 'package:ostinato/app/app_theme.dart';
 import 'package:ostinato/app/app_theme_preferences.dart';
+import 'package:ostinato/app/app_translation_catalog.dart'
+    show canonicalLanguageTag;
 import 'package:ostinato/app/audio/native_audio_state.dart';
 import 'package:ostinato/app/audio/practice_audio_lease.dart';
 import 'package:ostinato/app/audio/practice_audio_root.dart';
@@ -290,8 +292,9 @@ final class _RealApp {
   Future<void> unmount(WidgetTester tester) async {
     await tester.pumpWidget(const SizedBox.shrink());
     final close = owner.lastFenceForTest;
-    if (close != null)
+    if (close != null) {
       await _complete(tester, close, 'Fake root disposal must finish');
+    }
     expect(bindingDisposals, 1);
     expect(captureCalls, 0);
     user.dispose();

@@ -1,5 +1,3 @@
-import 'dart:ui' show SemanticsAction, SemanticsFlag;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/semantics.dart';
@@ -130,9 +128,9 @@ void main() {
         final node = tester.getSemantics(named);
         final data = node.getSemanticsData();
         expect(data.label, label);
-        expect(data.hasFlag(SemanticsFlag.isButton), isTrue);
-        expect(data.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
-        expect(data.hasFlag(SemanticsFlag.isEnabled), isTrue);
+        expect(data.flagsCollection.isButton, isTrue);
+        expect(data.flagsCollection.isEnabled.toBoolOrNull(), isNotNull);
+        expect(data.flagsCollection.isEnabled.toBoolOrNull(), isTrue);
         expect(node.rect.width, greaterThanOrEqualTo(48));
         expect(node.rect.height, greaterThanOrEqualTo(48));
         expect(_tapActions(node), 1);
@@ -157,9 +155,12 @@ void main() {
         expect(taps, 4);
 
         final actionNode = tester.getSemantics(nativeTarget);
-        tester.binding.pipelineOwner.semanticsOwner!.performAction(
-          actionNode.id,
-          SemanticsAction.tap,
+        tester.binding.performSemanticsAction(
+          SemanticsActionEvent(
+            type: SemanticsAction.tap,
+            nodeId: actionNode.id,
+            viewId: tester.view.viewId,
+          ),
         );
         await tester.pump();
         expect(taps, 5);
@@ -188,15 +189,15 @@ void main() {
         final disabled = tester.getSemantics(nativeTarget);
         expect(disabled.getSemanticsData().label, label);
         expect(
-          disabled.getSemanticsData().hasFlag(SemanticsFlag.isButton),
+          disabled.getSemanticsData().flagsCollection.isButton,
           isTrue,
         );
         expect(
-          disabled.getSemanticsData().hasFlag(SemanticsFlag.hasEnabledState),
-          isTrue,
+          disabled.getSemanticsData().flagsCollection.isEnabled.toBoolOrNull(),
+          isNotNull,
         );
         expect(
-          disabled.getSemanticsData().hasFlag(SemanticsFlag.isEnabled),
+          disabled.getSemanticsData().flagsCollection.isEnabled.toBoolOrNull(),
           isFalse,
         );
         expect(_tapActions(disabled), 0);
@@ -241,7 +242,9 @@ void main() {
           tester
               .getSemantics(find.bySemanticsLabel(label))
               .getSemanticsData()
-              .hasFlag(SemanticsFlag.isFocused),
+              .flagsCollection
+              .isFocused
+              .toBoolOrNull(),
           isTrue,
         );
         await tester.sendKeyEvent(LogicalKeyboardKey.enter);

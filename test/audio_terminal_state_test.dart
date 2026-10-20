@@ -523,6 +523,6 @@ Future<void> _cleanupTerminalOperations(
     }
   }
   if (firstFailure != null) {
-    Error.throwWithStackTrace(firstFailure!, firstStack!);
+    Error.throwWithStackTrace(firstFailure, firstStack!);
   }
 }

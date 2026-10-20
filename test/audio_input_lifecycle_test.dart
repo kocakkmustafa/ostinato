@@ -1439,7 +1439,7 @@ Future<void> _cleanupLifecycleOperations(
     }
   }
   if (firstFailure != null) {
-    Error.throwWithStackTrace(firstFailure!, firstStack!);
+    Error.throwWithStackTrace(firstFailure, firstStack!);
   }
 }
 

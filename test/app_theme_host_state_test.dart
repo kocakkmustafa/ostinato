@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -46,7 +45,7 @@ final class _CatalogBundle extends CachingAssetBundle {
 }
 
 class _LifetimeProbe extends StatefulWidget {
-  const _LifetimeProbe({super.key, required this.child});
+  const _LifetimeProbe({required this.child});
   final Widget child;
   static int initializations = 0;
   static int disposals = 0;
@@ -72,7 +71,7 @@ class _LifetimeProbeState extends State<_LifetimeProbe> {
 }
 
 class _DraftPage extends StatefulWidget {
-  const _DraftPage({super.key});
+  const _DraftPage();
   @override
   State<_DraftPage> createState() => _DraftPageState();
 }

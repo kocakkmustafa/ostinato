@@ -2,7 +2,6 @@
 // HOST-INTEGRATION.patch are integrated. SDK/runtime acceptance is UNRUN.
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

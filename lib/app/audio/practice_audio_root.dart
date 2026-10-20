@@ -541,8 +541,9 @@ final class PracticeAudioRootOwner {
       return null;
     }
     _registerAccountResource();
-    if (!_identityReady || _barrier || !identical(_topRoute, route))
+    if (!_identityReady || _barrier || !identical(_topRoute, route)) {
       return null;
+    }
     return PracticeAudioRouteGrant._(
       this,
       route,
@@ -572,8 +573,9 @@ final class PracticeAudioRootOwner {
       return null;
     }
     _registerAccountResource();
-    if (!_identityReady || _barrier || !identical(_topRoute, route))
+    if (!_identityReady || _barrier || !identical(_topRoute, route)) {
       return null;
+    }
     return PracticeVideoStartAction._(
       this,
       route,
@@ -637,8 +639,9 @@ final class PracticeAudioRootOwner {
       return null;
     }
     _registerAccountResource();
-    if (!_identityReady || _barrier || !identical(_topRoute, route))
+    if (!_identityReady || _barrier || !identical(_topRoute, route)) {
       return null;
+    }
     _accountResource?.workStarted();
     final action = PracticeAudioCaptureAction._(
       this,
