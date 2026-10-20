@@ -72,41 +72,99 @@ Future<void> _choose(
   String option,
   String effectiveTag,
 ) async {
-  final dropdown = find.byKey(const Key('app-language-select'));
-  await tester.ensureVisible(dropdown);
-  await tester.tap(dropdown);
-  await tester.pumpAndSettle(
-    const Duration(milliseconds: 50),
-    EnginePhase.sendSemanticsUpdate,
-    const Duration(seconds: 2),
-  );
-  final item = find.byKey(ValueKey('app-language-option-$option')).last;
-  expect(item, findsOneWidget);
-  // The menu item's full-width semantics container is not its text hit box.
-  // Scroll and tap the actual visible child, keeping hit-test failures fatal
-  // to this assertion rather than bypassing the real dropdown interaction.
-  final optionText = find.descendant(of: item, matching: find.byType(Text));
-  expect(optionText, findsOneWidget);
-  await tester.ensureVisible(optionText);
-  await tester.pumpAndSettle(
-    const Duration(milliseconds: 50),
-    EnginePhase.sendSemanticsUpdate,
-    const Duration(seconds: 2),
-  );
-  final hitText = optionText.hitTestable();
-  expect(hitText, findsOneWidget,
-      reason: 'The visible $option label must receive the real pointer hit');
-  await tester.tap(hitText);
-  await _waitFor(
-    tester,
-    () => canonicalLanguageTag(
-      Localizations.localeOf(tester.element(find.byType(SettingsScreen))),
-    ) == effectiveTag,
-    'The real Settings dropdown must apply its choice immediately',
-  );
-  // Finish the popup transition without waiting on unrelated IO spinners.
-  await tester.pump(const Duration(milliseconds: 350));
-  expect(tester.widget<DropdownButton<String>>(dropdown).value, option);
+  var stage = 'locate dropdown';
+  try {
+    final dropdown = find.byKey(const Key('app-language-select'));
+    expect(dropdown, findsOneWidget,
+        reason: 'Settings choice $option: the real dropdown must exist');
+    final button = tester.widget<DropdownButton<String>>(dropdown);
+    final order = button.items!.map((item) => item.value).toList();
+    final targetIndex = order.indexOf(option);
+    final selectedIndex = order.indexOf(button.value);
+    expect(targetIndex, greaterThanOrEqualTo(0),
+        reason: 'Settings choice $option must be declared by the real dropdown');
+    expect(selectedIndex, greaterThanOrEqualTo(0),
+        reason: 'Settings choice $option: the current value must be declared');
+
+    stage = 'open popup';
+    await tester.ensureVisible(dropdown);
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 50),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(seconds: 2),
+    );
+    final hitDropdown = dropdown.hitTestable();
+    expect(hitDropdown, findsOneWidget,
+        reason: 'Settings choice $option: the dropdown must receive the tap');
+    await tester.tap(hitDropdown);
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 50),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(seconds: 2),
+    );
+
+    // Settings uses SingleChildScrollView; the opened Flutter dropdown owns
+    // the ListView. Scope the target to that popup instead of relying on .last
+    // across the selected button item and lazily mounted menu rows.
+    stage = 'locate popup scrollable';
+    final menu = find.byType(ListView);
+    expect(menu, findsOneWidget,
+        reason: 'Settings choice $option: one dropdown popup must be open');
+    final scrollable = find.descendant(
+      of: menu,
+      matching: find.byType(Scrollable),
+    );
+    expect(scrollable, findsOneWidget,
+        reason: 'Settings choice $option: the popup must have one scrollable');
+    final item = find.descendant(
+      of: menu,
+      matching: find.byKey(ValueKey('app-language-option-$option')),
+    );
+
+    // A menu row outside the current viewport may have no element yet.
+    // Use bounded real drags toward its declared index before asserting its
+    // existence; ensureVisible alone cannot discover an unmounted row.
+    stage = 'scroll popup to target';
+    await tester.scrollUntilVisible(
+      item,
+      targetIndex < selectedIndex ? -160.0 : 160.0,
+      scrollable: scrollable,
+      maxScrolls: 24,
+      duration: const Duration(milliseconds: 50),
+    );
+    expect(item, findsOneWidget,
+        reason: 'Settings choice $option: target must exist after bounded scroll');
+    final optionText = find.descendant(of: item, matching: find.byType(Text));
+    expect(optionText, findsOneWidget,
+        reason: 'Settings choice $option: target must contain one label');
+    await tester.ensureVisible(optionText);
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 50),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(seconds: 2),
+    );
+    final hitText = optionText.hitTestable();
+    expect(hitText, findsOneWidget,
+        reason: 'The visible $option label must receive the real pointer hit');
+
+    stage = 'tap popup label';
+    await tester.tap(hitText);
+    stage = 'await selected locale';
+    await _waitFor(
+      tester,
+      () => canonicalLanguageTag(
+        Localizations.localeOf(tester.element(find.byType(SettingsScreen))),
+      ) == effectiveTag,
+      'The real Settings dropdown must apply $option as $effectiveTag immediately',
+    );
+    // Finish the popup transition without waiting on unrelated IO spinners.
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(tester.widget<DropdownButton<String>>(dropdown).value, option,
+        reason: 'Settings choice $option must remain the selected value');
+  } catch (error, stack) {
+    debugPrint('Settings dropdown choice=$option effective=$effectiveTag stage=$stage');
+    Error.throwWithStackTrace(error, stack);
+  }
 }
 
 // The UI starts this Future in the widget fake zone. Awaiting it inside
