@@ -66,14 +66,18 @@ Future<void> _complete(
   var finished = false;
   Object? failure;
   StackTrace? trace;
-  unawaited(operation.then<void>(
-    (_) { finished = true; },
-    onError: (Object error, StackTrace stack) {
-      failure = error;
-      trace = stack;
-      finished = true;
-    },
-  ));
+  unawaited(
+    operation.then<void>(
+      (_) {
+        finished = true;
+      },
+      onError: (Object error, StackTrace stack) {
+        failure = error;
+        trace = stack;
+        finished = true;
+      },
+    ),
+  );
   await _ready(tester, () => finished, stage);
   if (failure != null) Error.throwWithStackTrace(failure!, trace!);
 }
@@ -107,7 +111,9 @@ final class _LocalePreferences implements AppLocalePreferences {
   @override
   Future<String?> read() async => tag;
   @override
-  Future<void> write(String? value) async { tag = value; }
+  Future<void> write(String? value) async {
+    tag = value;
+  }
 }
 
 final class _ThemePreferences implements AppThemePreferences {
@@ -138,19 +144,26 @@ final class _Fixture {
   int deletedCallbacks = 0;
   int clearCallbacks = 0;
 
-  int get userReads => requests.where((r) => r.url.path == '/auth/v1/user').length;
-  int get membershipRequests => requests.where(
-    (r) => r.url.path.contains('membership') || r.url.path.contains('purchase'),
-  ).length;
-  int get deleteRequests => requests.where(
-    (r) => r.url.path.contains('motion-delete-account'),
-  ).length;
+  int get userReads =>
+      requests.where((r) => r.url.path == '/auth/v1/user').length;
+  int get membershipRequests => requests
+      .where(
+        (r) =>
+            r.url.path.contains('membership') ||
+            r.url.path.contains('purchase'),
+      )
+      .length;
+  int get deleteRequests => requests
+      .where((r) => r.url.path.contains('motion-delete-account'))
+      .length;
 
   static Future<_Fixture> open(WidgetTester tester) async {
     final f = _Fixture();
     addTearDown(() => f.close(tester));
     await _real(tester, () async {
-      f.directory = await Directory.systemTemp.createTemp('ostinato-profile-ui-');
+      f.directory = await Directory.systemTemp.createTemp(
+        'ostinato-profile-ui-',
+      );
       f.transport = MockClient(f.respond);
       f.client = SupabaseClient(
         'https://motion.example.invalid',
@@ -162,7 +175,9 @@ final class _Fixture {
       f.runtime = MotionAccountRuntime.forTesting(
         client: f.client!,
         app: MotionApp.ostinato,
-        onDeletedAccount: (_) async { f.deletedCallbacks++; },
+        onDeletedAccount: (_) async {
+          f.deletedCallbacks++;
+        },
         localAccountIds: () async => const <String>[],
         wasAccountDeleted: (_) async => false,
       );
@@ -172,7 +187,9 @@ final class _Fixture {
       f.connection = bindMotionAccountRuntime(
         f.runtime!,
         deletionCoordinator: AccountDeletionCoordinator.forRoot(f.directory!),
-        clearLocalData: (_) async { f.clearCallbacks++; },
+        clearLocalData: (_) async {
+          f.clearCallbacks++;
+        },
       );
       f.theme = AppThemeController(preferences: _ThemePreferences());
       await f.theme!.load();
@@ -199,30 +216,32 @@ final class _Fixture {
   }
 
   Future<http.Response> _responseFor(http.Request request) async {
-      if (request.url.host != 'motion.example.invalid') {
-        unexpected.add('${request.method} ${request.url.host}${request.url.path}');
-        throw StateError('Unexpected offline fixture origin');
-      }
-      if (request.method == 'GET' && request.url.path == '/auth/v1/user') {
-        return _json(_user());
-      }
-      if (request.url.path == '/rest/v1/motion_profiles') {
-        if (request.method == 'GET') {
-          profileReads.add(request);
-          if (holdProfile) {
-            final response = Completer<http.Response>();
-            held.add(response);
-            return await response.future;
-          }
-          return profileUnavailable ? _profileFailure() : _profileReply();
+    if (request.url.host != 'motion.example.invalid') {
+      unexpected.add(
+        '${request.method} ${request.url.host}${request.url.path}',
+      );
+      throw StateError('Unexpected offline fixture origin');
+    }
+    if (request.method == 'GET' && request.url.path == '/auth/v1/user') {
+      return _json(_user());
+    }
+    if (request.url.path == '/rest/v1/motion_profiles') {
+      if (request.method == 'GET') {
+        profileReads.add(request);
+        if (holdProfile) {
+          final response = Completer<http.Response>();
+          held.add(response);
+          return await response.future;
         }
-        if (request.method == 'POST') {
-          profileWrites.add(request);
-          return http.Response('', 201);
-        }
+        return profileUnavailable ? _profileFailure() : _profileReply();
       }
-      unexpected.add('${request.method} ${request.url.path}');
-      throw StateError('Unexpected offline fixture HTTP request');
+      if (request.method == 'POST') {
+        profileWrites.add(request);
+        return http.Response('', 201);
+      }
+    }
+    unexpected.add('${request.method} ${request.url.path}');
+    throw StateError('Unexpected offline fixture HTTP request');
   }
 
   http.Response _profileReply() => _json([
@@ -272,7 +291,11 @@ final class _Fixture {
           if (!response.isCompleted) response.complete(_profileReply());
         }
         // Profile HTTP starts in the widget zone: pump that same zone to drain it.
-        await _ready(tester, () => inFlight == 0, 'profile transport teardown drain');
+        await _ready(
+          tester,
+          () => inFlight == 0,
+          'profile transport teardown drain',
+        );
         await _real(tester, () async {
           await client?.dispose();
           if (directory case final dir?) {
@@ -319,8 +342,8 @@ Future<void> _mount(WidgetTester tester, _Fixture f, String tag) async {
                   FilledButton(
                     key: _paidButton,
                     onPressed: () async {
-                      f.paidResult.value = await f.connection!
-                          .requirePaidAccess!(context);
+                      f.paidResult.value =
+                          await f.connection!.requirePaidAccess!(context);
                     },
                     child: const Text('TEST_CLOSED_PAID_ACTION'),
                   ),
@@ -334,7 +357,8 @@ Future<void> _mount(WidgetTester tester, _Fixture f, String tag) async {
   );
   await _ready(
     tester,
-    () => find.byType(MotionAccountPage).evaluate().isNotEmpty &&
+    () =>
+        find.byType(MotionAccountPage).evaluate().isNotEmpty &&
         f.profileReads.isNotEmpty,
     'production page factory and actual profile GET',
   );
@@ -346,12 +370,17 @@ Future<void> _mount(WidgetTester tester, _Fixture f, String tag) async {
 }
 
 Finder _name(MotionAccountLocalizations strings) => find.byWidgetPredicate(
-  (widget) => widget is TextField &&
-      widget.decoration?.labelText == strings.text(MotionAccountString.displayName),
+  (widget) =>
+      widget is TextField &&
+      widget.decoration?.labelText ==
+          strings.text(MotionAccountString.displayName),
 );
 
-Finder _button(Type type, MotionAccountLocalizations strings, MotionAccountString key) =>
-    find.widgetWithText(type, strings.text(key));
+Finder _button(
+  Type type,
+  MotionAccountLocalizations strings,
+  MotionAccountString key,
+) => find.widgetWithText(type, strings.text(key));
 
 Future<void> _tap(WidgetTester tester, Finder button) async {
   expect(button, findsOneWidget);
@@ -369,141 +398,221 @@ void main() {
     }
   });
 
-  testWidgets('production account factory retains its real page across fourteen locales with paid access closed', (tester) async {
-    tester.view.physicalSize = const Size(1000, 1400);
-    tester.view.devicePixelRatio = 1;
-    addTearDown(tester.view.resetPhysicalSize);
-    addTearDown(tester.view.resetDevicePixelRatio);
-    final f = await _Fixture.open(tester);
-    await _mount(tester, f, 'en');
-    var strings = MotionAccountLocalizations(const Locale('en'));
-    await _ready(
-      tester,
-      () => tester.widget<TextField>(_name(strings)).controller!.text ==
-          'Existing server name',
-      'actual profile payload published',
-    );
-    final page = find.byType(MotionAccountPage);
-    final pageState = tester.state(page);
-    final pageKey = tester.widget<MotionAccountPage>(page).key;
-    final navigator = tester.state<NavigatorState>(find.byType(Navigator));
-    final controller = tester.widget<TextField>(_name(strings)).controller!;
-    final localeController = AppLocaleScope.maybeOf(tester.element(page))!;
-    final profileReadCount = f.profileReads.length;
-    final authReadCount = f.userReads;
-    await tester.enterText(_name(strings), 'Retained موسيقى draft');
-    expect(appSupportedLocales, MotionAccountLocalizations.supportedLocales);
-    expect(appSupportedLocales, hasLength(14));
-
-    for (final locale in appSupportedLocales) {
-      final tag = canonicalLanguageTag(locale);
-      await _complete(tester, localeController.select(tag), 'preference write $tag');
+  testWidgets(
+    'production account factory retains its real page across fourteen locales with paid access closed',
+    (tester) async {
+      tester.view.physicalSize = const Size(1000, 1400);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final f = await _Fixture.open(tester);
+      await _mount(tester, f, 'en');
+      var strings = MotionAccountLocalizations(const Locale('en'));
       await _ready(
         tester,
-        () => canonicalLanguageTag(Localizations.localeOf(tester.element(page))) == tag,
-        'published actual account locale $tag',
+        () =>
+            tester.widget<TextField>(_name(strings)).controller!.text ==
+            'Existing server name',
+        'actual profile payload published',
       );
-      await tester.pump(const Duration(milliseconds: 250));
-      strings = MotionAccountLocalizations(locale);
-      expect(tester.state(page), same(pageState), reason: tag);
-      expect(tester.widget<MotionAccountPage>(page).key, pageKey, reason: tag);
-      expect(tester.state<NavigatorState>(find.byType(Navigator)), same(navigator));
-      expect(tester.widget<TextField>(_name(strings)).controller, same(controller));
-      expect(controller.text, 'Retained موسيقى draft', reason: tag);
-      expect(find.text(strings.text(MotionAccountString.accountTitle)), findsOneWidget);
-      expect(Directionality.of(tester.element(page)), strings.textDirection);
-      expect(Theme.of(tester.element(page)).brightness, Brightness.light);
-      expect(_button(FilledButton, strings, MotionAccountString.membershipOptions), findsNothing);
-      expect(find.byType(MotionMembershipPage), findsNothing);
+      final page = find.byType(MotionAccountPage);
+      final pageState = tester.state(page);
+      final pageKey = tester.widget<MotionAccountPage>(page).key;
+      final navigator = tester.state<NavigatorState>(find.byType(Navigator));
+      final controller = tester.widget<TextField>(_name(strings)).controller!;
+      final localeController = AppLocaleScope.maybeOf(tester.element(page))!;
+      final profileReadCount = f.profileReads.length;
+      final authReadCount = f.userReads;
+      await tester.enterText(_name(strings), 'Retained موسيقى draft');
+      expect(appSupportedLocales, MotionAccountLocalizations.supportedLocales);
+      expect(appSupportedLocales, hasLength(14));
 
-      f.paidResult.value = null;
-      await _tap(tester, find.byKey(_paidButton));
-      await _ready(tester, () => f.paidResult.value != null, 'closed paid callback $tag');
-      expect(f.paidResult.value, isFalse);
-      expect(find.text(strings.text(MotionAccountString.futureSession)), findsOneWidget);
-      ScaffoldMessenger.of(tester.element(page)).removeCurrentSnackBar();
-      await tester.pump();
+      for (final locale in appSupportedLocales) {
+        final tag = canonicalLanguageTag(locale);
+        await _complete(
+          tester,
+          localeController.select(tag),
+          'preference write $tag',
+        );
+        await _ready(
+          tester,
+          () =>
+              canonicalLanguageTag(
+                Localizations.localeOf(tester.element(page)),
+              ) ==
+              tag,
+          'published actual account locale $tag',
+        );
+        await tester.pump(const Duration(milliseconds: 250));
+        strings = MotionAccountLocalizations(locale);
+        expect(tester.state(page), same(pageState), reason: tag);
+        expect(
+          tester.widget<MotionAccountPage>(page).key,
+          pageKey,
+          reason: tag,
+        );
+        expect(
+          tester.state<NavigatorState>(find.byType(Navigator)),
+          same(navigator),
+        );
+        expect(
+          tester.widget<TextField>(_name(strings)).controller,
+          same(controller),
+        );
+        expect(controller.text, 'Retained موسيقى draft', reason: tag);
+        expect(
+          find.text(strings.text(MotionAccountString.accountTitle)),
+          findsOneWidget,
+        );
+        expect(Directionality.of(tester.element(page)), strings.textDirection);
+        expect(Theme.of(tester.element(page)).brightness, Brightness.light);
+        expect(
+          _button(FilledButton, strings, MotionAccountString.membershipOptions),
+          findsNothing,
+        );
+        expect(find.byType(MotionMembershipPage), findsNothing);
 
-      await _tap(tester, _button(TextButton, strings, MotionAccountString.deleteMotionAccount));
-      await tester.pump(const Duration(milliseconds: 250));
-      expect(find.byType(AlertDialog), findsOneWidget);
-      expect(find.text(strings.text(MotionAccountString.deleteExplanation)), findsOneWidget);
-      expect(Directionality.of(tester.element(find.byType(AlertDialog))), strings.textDirection);
-      await _tap(tester, _button(TextButton, strings, MotionAccountString.cancel));
-      await tester.pump(const Duration(milliseconds: 250));
-      expect(find.byType(AlertDialog), findsNothing);
-      expect(tester.state(page), same(pageState));
-      expect(f.profileReads, hasLength(profileReadCount));
+        f.paidResult.value = null;
+        await _tap(tester, find.byKey(_paidButton));
+        await _ready(
+          tester,
+          () => f.paidResult.value != null,
+          'closed paid callback $tag',
+        );
+        expect(f.paidResult.value, isFalse);
+        expect(
+          find.text(strings.text(MotionAccountString.futureSession)),
+          findsOneWidget,
+        );
+        ScaffoldMessenger.of(tester.element(page)).removeCurrentSnackBar();
+        await tester.pump();
+
+        await _tap(
+          tester,
+          _button(TextButton, strings, MotionAccountString.deleteMotionAccount),
+        );
+        await tester.pump(const Duration(milliseconds: 250));
+        expect(find.byType(AlertDialog), findsOneWidget);
+        expect(
+          find.text(strings.text(MotionAccountString.deleteExplanation)),
+          findsOneWidget,
+        );
+        expect(
+          Directionality.of(tester.element(find.byType(AlertDialog))),
+          strings.textDirection,
+        );
+        await _tap(
+          tester,
+          _button(TextButton, strings, MotionAccountString.cancel),
+        );
+        await tester.pump(const Duration(milliseconds: 250));
+        expect(find.byType(AlertDialog), findsNothing);
+        expect(tester.state(page), same(pageState));
+        expect(f.profileReads, hasLength(profileReadCount));
+        expect(f.profileWrites, isEmpty);
+        expect(f.userReads, authReadCount);
+        f.expectClosedBoundaries();
+        expect(tester.takeException(), isNull);
+      }
+    },
+  );
+
+  testWidgets(
+    'production profile read failure cannot save an untouched blank and actual retry writes only intentional owner data',
+    (tester) async {
+      tester.view.physicalSize = const Size(1000, 1400);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final f = await _Fixture.open(tester);
+      f.holdProfile = true;
+      await _mount(tester, f, 'fr');
+      final strings = MotionAccountLocalizations(const Locale('fr'));
+      final save = _button(
+        FilledButton,
+        strings,
+        MotionAccountString.saveProfile,
+      );
+      expect(f.held, isNotEmpty);
+      expect(
+        find.text(strings.text(MotionAccountString.profileLoading)),
+        findsOneWidget,
+      );
+      expect(
+        tester.widget<TextField>(_name(strings)).controller!.text,
+        isEmpty,
+      );
+      expect(tester.widget<FilledButton>(save).onPressed, isNull);
+      await _tap(tester, save);
       expect(f.profileWrites, isEmpty);
-      expect(f.userReads, authReadCount);
+
+      f.failHeldReads();
+      await _ready(
+        tester,
+        () => find
+            .text(strings.text(MotionAccountString.profileReadFailed))
+            .evaluate()
+            .isNotEmpty,
+        'actual failed profile GET renders safe retry',
+      );
+      expect(
+        tester.widget<TextField>(_name(strings)).controller!.text,
+        isEmpty,
+      );
+      expect(tester.widget<FilledButton>(save).onPressed, isNull);
+      await _tap(tester, save);
+      expect(f.profileWrites, isEmpty);
+      final readsBeforeRetry = f.profileReads.length;
+      final authBeforeRetry = f.userReads;
+      f.profileUnavailable = false;
+      await _tap(
+        tester,
+        _button(TextButton, strings, MotionAccountString.retryProfile),
+      );
+      await _ready(
+        tester,
+        () =>
+            tester.widget<TextField>(_name(strings)).controller!.text ==
+            'Existing server name',
+        'actual Retry profile GET returns the original server name',
+      );
+      expect(f.profileReads.length, greaterThan(readsBeforeRetry));
+      expect(
+        f.userReads,
+        authBeforeRetry,
+      ); // Retry profile is not Refresh identity.
+      expect(tester.widget<FilledButton>(save).onPressed, isNotNull);
+      expect(f.profileWrites, isEmpty);
+      for (final request in f.profileReads) {
+        expect(request.url.queryParameters['user_id'], 'eq.$_id');
+        expect(
+          request.url.queryParameters['select'],
+          'user_id,display_name,created_at,updated_at',
+        );
+        expect(request.headers['Authorization'], 'Bearer $_token');
+      }
+      await tester.enterText(_name(strings), '  Intentional Ostinato draft  ');
+      await _tap(tester, save);
+      await _ready(
+        tester,
+        () => find
+            .text(strings.text(MotionAccountString.profileSaved))
+            .evaluate()
+            .isNotEmpty,
+        'actual profile POST success is published',
+      );
+      expect(f.profileWrites, hasLength(1));
+      final request = f.profileWrites.single;
+      final payload = jsonDecode(request.body) as Map<String, dynamic>;
+      expect(payload.keys.toSet(), {'user_id', 'display_name', 'updated_at'});
+      expect(payload['user_id'], _id);
+      expect(payload['display_name'], 'Intentional Ostinato draft');
+      expect(DateTime.parse(payload['updated_at'] as String).isUtc, isTrue);
+      expect(request.headers['Authorization'], 'Bearer $_token');
+      expect(f.connection!.userId.value, _id);
+      expect(f.runtime!.isCurrentSessionVerified, isTrue);
       f.expectClosedBoundaries();
       expect(tester.takeException(), isNull);
-    }
-  });
-
-  testWidgets('production profile read failure cannot save an untouched blank and actual retry writes only intentional owner data', (tester) async {
-    tester.view.physicalSize = const Size(1000, 1400);
-    tester.view.devicePixelRatio = 1;
-    addTearDown(tester.view.resetPhysicalSize);
-    addTearDown(tester.view.resetDevicePixelRatio);
-    final f = await _Fixture.open(tester);
-    f.holdProfile = true;
-    await _mount(tester, f, 'fr');
-    final strings = MotionAccountLocalizations(const Locale('fr'));
-    final save = _button(FilledButton, strings, MotionAccountString.saveProfile);
-    expect(f.held, isNotEmpty);
-    expect(find.text(strings.text(MotionAccountString.profileLoading)), findsOneWidget);
-    expect(tester.widget<TextField>(_name(strings)).controller!.text, isEmpty);
-    expect(tester.widget<FilledButton>(save).onPressed, isNull);
-    await _tap(tester, save);
-    expect(f.profileWrites, isEmpty);
-
-    f.failHeldReads();
-    await _ready(
-      tester,
-      () => find.text(strings.text(MotionAccountString.profileReadFailed)).evaluate().isNotEmpty,
-      'actual failed profile GET renders safe retry',
-    );
-    expect(tester.widget<TextField>(_name(strings)).controller!.text, isEmpty);
-    expect(tester.widget<FilledButton>(save).onPressed, isNull);
-    await _tap(tester, save);
-    expect(f.profileWrites, isEmpty);
-    final readsBeforeRetry = f.profileReads.length;
-    final authBeforeRetry = f.userReads;
-    f.profileUnavailable = false;
-    await _tap(tester, _button(TextButton, strings, MotionAccountString.retryProfile));
-    await _ready(
-      tester,
-      () => tester.widget<TextField>(_name(strings)).controller!.text == 'Existing server name',
-      'actual Retry profile GET returns the original server name',
-    );
-    expect(f.profileReads.length, greaterThan(readsBeforeRetry));
-    expect(f.userReads, authBeforeRetry); // Retry profile is not Refresh identity.
-    expect(tester.widget<FilledButton>(save).onPressed, isNotNull);
-    expect(f.profileWrites, isEmpty);
-    for (final request in f.profileReads) {
-      expect(request.url.queryParameters['user_id'], 'eq.$_id');
-      expect(request.url.queryParameters['select'], 'user_id,display_name,created_at,updated_at');
-      expect(request.headers['Authorization'], 'Bearer $_token');
-    }
-    await tester.enterText(_name(strings), '  Intentional Ostinato draft  ');
-    await _tap(tester, save);
-    await _ready(
-      tester,
-      () => find.text(strings.text(MotionAccountString.profileSaved)).evaluate().isNotEmpty,
-      'actual profile POST success is published',
-    );
-    expect(f.profileWrites, hasLength(1));
-    final request = f.profileWrites.single;
-    final payload = jsonDecode(request.body) as Map<String, dynamic>;
-    expect(payload.keys.toSet(), {'user_id', 'display_name', 'updated_at'});
-    expect(payload['user_id'], _id);
-    expect(payload['display_name'], 'Intentional Ostinato draft');
-    expect(DateTime.parse(payload['updated_at'] as String).isUtc, isTrue);
-    expect(request.headers['Authorization'], 'Bearer $_token');
-    expect(f.connection!.userId.value, _id);
-    expect(f.runtime!.isCurrentSessionVerified, isTrue);
-    f.expectClosedBoundaries();
-    expect(tester.takeException(), isNull);
-  });
+    },
+  );
 }

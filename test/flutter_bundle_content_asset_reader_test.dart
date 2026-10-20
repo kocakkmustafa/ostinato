@@ -139,92 +139,95 @@ ContentBundleLoader _loader(_ManifestOverlayBundle bundle) =>
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('published Motion packages and posture keep one immutable source pin', () {
-    final descriptor = File('pubspec.yaml').readAsStringSync();
-    final lock = File('pubspec.lock').readAsStringSync();
-    for (final package in <String>[
-      'motion_account',
-      'motion_core',
-      'motion_camera',
-      'motion_content',
-    ]) {
-      final expectedRef = RegExp(
-        r'^      ref: ' + RegExp.escape(_corePin) + r'$',
-        multiLine: true,
-      );
-      expect(
-        expectedRef.allMatches(_packageBlock(descriptor, package)),
-        hasLength(1),
-      );
-      final override = File('pubspec_overrides.yaml');
-      if (override.existsSync()) {
-        _expectNoPublishedCoreOverride(override.readAsStringSync(), package);
-      }
-      final declared = _packageBlock(descriptor, package);
-      expect(declared, contains('path: packages/$package'));
-      expect(
-        declared,
-        contains('https://github.com/kocakkmustafa/motion-core.git'),
-      );
-      final locked = _packageBlock(lock, package);
-      _expectPinnedGitLock(locked);
-      expect(locked, contains('path: "packages/$package"'));
-      if (package == 'motion_core') {
-        expect(locked, contains('    version: "0.13.0"'));
-      }
-      if (package == 'motion_content') {
+  test(
+    'published Motion packages and posture keep one immutable source pin',
+    () {
+      final descriptor = File('pubspec.yaml').readAsStringSync();
+      final lock = File('pubspec.lock').readAsStringSync();
+      for (final package in <String>[
+        'motion_account',
+        'motion_core',
+        'motion_camera',
+        'motion_content',
+      ]) {
+        final expectedRef = RegExp(
+          r'^      ref: ' + RegExp.escape(_corePin) + r'$',
+          multiLine: true,
+        );
         expect(
-          RegExp(
-            r'^    version: "0\.1\.0"$',
-            multiLine: true,
-          ).allMatches(locked),
+          expectedRef.allMatches(_packageBlock(descriptor, package)),
           hasLength(1),
         );
+        final override = File('pubspec_overrides.yaml');
+        if (override.existsSync()) {
+          _expectNoPublishedCoreOverride(override.readAsStringSync(), package);
+        }
+        final declared = _packageBlock(descriptor, package);
+        expect(declared, contains('path: packages/$package'));
+        expect(
+          declared,
+          contains('https://github.com/kocakkmustafa/motion-core.git'),
+        );
+        final locked = _packageBlock(lock, package);
+        _expectPinnedGitLock(locked);
+        expect(locked, contains('path: "packages/$package"'));
+        if (package == 'motion_core') {
+          expect(locked, contains('    version: "0.13.0"'));
+        }
+        if (package == 'motion_content') {
+          expect(
+            RegExp(
+              r'^    version: "0\.1\.0"$',
+              multiLine: true,
+            ).allMatches(locked),
+            hasLength(1),
+          );
+        }
       }
-    }
-    final entitlements = _packageBlock(lock, 'motion_entitlements');
-    _expectPinnedGitLock(entitlements);
-    expect(entitlements, contains('path: "packages/motion_entitlements"'));
-    final override = File('pubspec_overrides.yaml');
-    if (override.existsSync()) {
-      _expectNoPublishedCoreOverride(
-        override.readAsStringSync(),
-        'motion_entitlements',
-      );
-    }
+      final entitlements = _packageBlock(lock, 'motion_entitlements');
+      _expectPinnedGitLock(entitlements);
+      expect(entitlements, contains('path: "packages/motion_entitlements"'));
+      final override = File('pubspec_overrides.yaml');
+      if (override.existsSync()) {
+        _expectNoPublishedCoreOverride(
+          override.readAsStringSync(),
+          'motion_entitlements',
+        );
+      }
 
-    const postureRoot = 'packages/ostinato_posture';
-    final postureDescriptor = _packageBlock(
-      File('$postureRoot/pubspec.yaml').readAsStringSync(),
-      'motion_core',
-    );
-    expect(
-      RegExp(
-        r'^      ref: ' + RegExp.escape(_corePin) + r'$',
-        multiLine: true,
-      ).allMatches(postureDescriptor),
-      hasLength(1),
-    );
-    expect(postureDescriptor, contains('path: packages/motion_core'));
-    expect(
-      postureDescriptor,
-      contains('https://github.com/kocakkmustafa/motion-core.git'),
-    );
-    final postureLock = _packageBlock(
-      File('$postureRoot/pubspec.lock').readAsStringSync(),
-      'motion_core',
-    );
-    _expectPinnedGitLock(postureLock);
-    expect(postureLock, contains('path: "packages/motion_core"'));
-    expect(postureLock, contains('    version: "0.13.0"'));
-    final postureOverride = File('$postureRoot/pubspec_overrides.yaml');
-    if (postureOverride.existsSync()) {
-      _expectNoPublishedCoreOverride(
-        postureOverride.readAsStringSync(),
+      const postureRoot = 'packages/ostinato_posture';
+      final postureDescriptor = _packageBlock(
+        File('$postureRoot/pubspec.yaml').readAsStringSync(),
         'motion_core',
       );
-    }
-  });
+      expect(
+        RegExp(
+          r'^      ref: ' + RegExp.escape(_corePin) + r'$',
+          multiLine: true,
+        ).allMatches(postureDescriptor),
+        hasLength(1),
+      );
+      expect(postureDescriptor, contains('path: packages/motion_core'));
+      expect(
+        postureDescriptor,
+        contains('https://github.com/kocakkmustafa/motion-core.git'),
+      );
+      final postureLock = _packageBlock(
+        File('$postureRoot/pubspec.lock').readAsStringSync(),
+        'motion_core',
+      );
+      _expectPinnedGitLock(postureLock);
+      expect(postureLock, contains('path: "packages/motion_core"'));
+      expect(postureLock, contains('    version: "0.13.0"'));
+      final postureOverride = File('$postureRoot/pubspec_overrides.yaml');
+      if (postureOverride.existsSync()) {
+        _expectNoPublishedCoreOverride(
+          postureOverride.readAsStringSync(),
+          'motion_core',
+        );
+      }
+    },
+  );
 
   test('published pin contract accepts quoted scalars and empty overrides', () {
     _expectNoPublishedCoreOverride('dependency_overrides:\n', 'motion_core');

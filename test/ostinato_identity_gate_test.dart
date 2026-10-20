@@ -178,9 +178,13 @@ final class _AuthFixture {
       fixture._runtime = MotionAccountRuntime.forTesting(
         client: fixture.client,
         app: MotionApp.ostinato,
-        onDeletedAccount: (_) async { fixture.deletedCallbacks++; },
+        onDeletedAccount: (_) async {
+          fixture.deletedCallbacks++;
+        },
       );
-      await fixture.client.auth.setInitialSession(_session('synthetic-restored'));
+      await fixture.client.auth.setInitialSession(
+        _session('synthetic-restored'),
+      );
       await _until(() => fixture.heldUsers.isNotEmpty);
     });
     return fixture;
@@ -200,9 +204,13 @@ final class _AuthFixture {
       }
       if (request.url.path.endsWith('/verify')) {
         recoveryRequests++;
-        return _json(jsonDecode(_session('synthetic-recovery-$recoveryRequests')));
+        return _json(
+          jsonDecode(_session('synthetic-recovery-$recoveryRequests')),
+        );
       }
-      throw StateError('Unexpected offline fixture request: ${request.url.path}');
+      throw StateError(
+        'Unexpected offline fixture request: ${request.url.path}',
+      );
     } finally {
       inFlight--;
     }
@@ -318,187 +326,352 @@ void _expectPresentation(
     Theme.of(context).colorScheme.primary,
     OstinatoThemes.forBrightness(brightness).colorScheme.primary,
   );
-  final gate = tester.widget<MotionIdentityGate>(find.byType(MotionIdentityGate));
+  final gate = tester.widget<MotionIdentityGate>(
+    find.byType(MotionIdentityGate),
+  );
   expect(gate.theme, same(OstinatoThemes.light));
   expect(gate.darkTheme, same(OstinatoThemes.dark));
   expect(gate.locale, locale);
 }
 
 void main() {
-  testWidgets('selected 14 locales and three cold-start modes reach loading and blocked', (tester) async {
-    final dispatcher = tester.binding.platformDispatcher;
-    addTearDown(dispatcher.clearLocalesTestValue);
-    addTearDown(dispatcher.clearPlatformBrightnessTestValue);
-    // One body; 14 x 3 = 42 cold starts, each observing two real gate stages.
-    for (var index = 0; index < supportedLanguageTags.length; index++) {
-      final tag = supportedLanguageTags[index];
-      final locale = localeForLanguageTag(tag);
-      for (final preference in AppThemePreference.values) {
-        final platform = preference == AppThemePreference.system
-            ? (index.isEven ? Brightness.light : Brightness.dark)
-            : (preference == AppThemePreference.light ? Brightness.dark : Brightness.light);
-        final expected = switch (preference) {
-          AppThemePreference.system => platform,
-          AppThemePreference.light => Brightness.light,
-          AppThemePreference.dark => Brightness.dark,
-        };
-        dispatcher.localesTestValue = const [Locale('xx'), Locale('en')];
-        dispatcher.platformBrightnessTestValue = platform;
-        final fixture = await _AuthFixture.open(tester);
-        try {
-          final child = _StateProbe(runtime: fixture.runtime);
-          await _mount(tester, fixture, languageTag: tag, preference: preference, child: child);
-          await _framesUntil(tester, () => find.byType(CircularProgressIndicator).evaluate().isNotEmpty,
-            stage: '$tag/$preference checking');
-          _expectPresentation(tester, locale: locale, brightness: expected,
-            message: MotionAccountString.checkingAccount);
-          expect(find.byType(_StateProbe), findsNothing);
-          final gate = tester.widget<MotionIdentityGate>(find.byType(MotionIdentityGate));
-          expect(gate.runtime, same(fixture.runtime));
-          expect(gate.child, same(child));
-          expect(gate.themeMode, fixture.theme!.themeMode);
-          await _real(tester, () async {
-            fixture.releaseUsers(success: false);
-            await _until(() => fixture.runtime.phase.value == MotionIdentityPhase.unavailable);
-          });
-          await _framesUntil(tester, () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
-            stage: '$tag/$preference blocked');
-          _expectPresentation(tester, locale: locale, brightness: expected,
-            message: MotionAccountString.accountVerificationFailed);
-          final strings = MotionAccountLocalizations(locale);
-          expect(find.text(strings.text(MotionAccountString.retry)), findsOneWidget);
-          expect(find.text(strings.text(MotionAccountString.continueAsGuest)), findsOneWidget);
-          expect(fixture.runtime.userId.value, isNull);
-          expect(find.byType(_StateProbe), findsNothing);
-        } finally {
-          await fixture.close(tester);
+  testWidgets(
+    'selected 14 locales and three cold-start modes reach loading and blocked',
+    (tester) async {
+      final dispatcher = tester.binding.platformDispatcher;
+      addTearDown(dispatcher.clearLocalesTestValue);
+      addTearDown(dispatcher.clearPlatformBrightnessTestValue);
+      // One body; 14 x 3 = 42 cold starts, each observing two real gate stages.
+      for (var index = 0; index < supportedLanguageTags.length; index++) {
+        final tag = supportedLanguageTags[index];
+        final locale = localeForLanguageTag(tag);
+        for (final preference in AppThemePreference.values) {
+          final platform = preference == AppThemePreference.system
+              ? (index.isEven ? Brightness.light : Brightness.dark)
+              : (preference == AppThemePreference.light
+                    ? Brightness.dark
+                    : Brightness.light);
+          final expected = switch (preference) {
+            AppThemePreference.system => platform,
+            AppThemePreference.light => Brightness.light,
+            AppThemePreference.dark => Brightness.dark,
+          };
+          dispatcher.localesTestValue = const [Locale('xx'), Locale('en')];
+          dispatcher.platformBrightnessTestValue = platform;
+          final fixture = await _AuthFixture.open(tester);
+          try {
+            final child = _StateProbe(runtime: fixture.runtime);
+            await _mount(
+              tester,
+              fixture,
+              languageTag: tag,
+              preference: preference,
+              child: child,
+            );
+            await _framesUntil(
+              tester,
+              () =>
+                  find.byType(CircularProgressIndicator).evaluate().isNotEmpty,
+              stage: '$tag/$preference checking',
+            );
+            _expectPresentation(
+              tester,
+              locale: locale,
+              brightness: expected,
+              message: MotionAccountString.checkingAccount,
+            );
+            expect(find.byType(_StateProbe), findsNothing);
+            final gate = tester.widget<MotionIdentityGate>(
+              find.byType(MotionIdentityGate),
+            );
+            expect(gate.runtime, same(fixture.runtime));
+            expect(gate.child, same(child));
+            expect(gate.themeMode, fixture.theme!.themeMode);
+            await _real(tester, () async {
+              fixture.releaseUsers(success: false);
+              await _until(
+                () =>
+                    fixture.runtime.phase.value ==
+                    MotionIdentityPhase.unavailable,
+              );
+            });
+            await _framesUntil(
+              tester,
+              () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+              stage: '$tag/$preference blocked',
+            );
+            _expectPresentation(
+              tester,
+              locale: locale,
+              brightness: expected,
+              message: MotionAccountString.accountVerificationFailed,
+            );
+            final strings = MotionAccountLocalizations(locale);
+            expect(
+              find.text(strings.text(MotionAccountString.retry)),
+              findsOneWidget,
+            );
+            expect(
+              find.text(strings.text(MotionAccountString.continueAsGuest)),
+              findsOneWidget,
+            );
+            expect(fixture.runtime.userId.value, isNull);
+            expect(find.byType(_StateProbe), findsNothing);
+          } finally {
+            await fixture.close(tester);
+          }
         }
       }
-    }
-  });
+    },
+  );
 
-  testWidgets('public recovery stays localized while pending and admits only matching proof', (tester) async {
-    final fixture = await _AuthFixture.open(tester);
-    try {
-      final probeKey = GlobalKey<_StateProbeState>();
-      final child = _StateProbe(key: probeKey, runtime: fixture.runtime);
-      await _mount(tester, fixture, languageTag: 'ar', preference: AppThemePreference.dark, child: child);
-      await _real(tester, () async {
-        await fixture.client.auth.verifyOTP(type: OtpType.recovery, tokenHash: 'synthetic-recovery-hash');
-        await _until(() => fixture.runtime.isPasswordRecovery && fixture.heldUsers.length >= 2);
-      });
-      await _framesUntil(tester, () => find.text(MotionAccountLocalizations(const Locale('ar'))
-        .text(MotionAccountString.checkingAccount)).evaluate().isNotEmpty, stage: 'recovery checking AR');
-      _expectPresentation(tester, locale: const Locale('ar'), brightness: Brightness.dark,
-        message: MotionAccountString.checkingAccount);
-      expect(probeKey.currentState, isNull);
-      expect(fixture.runtime.isCurrentSessionVerified, isFalse);
-      expect(fixture.recoveryRequests, 1);
-      await _real(tester, () async {
-        fixture.releaseUsers(success: true);
-        await _until(() => fixture.runtime.isCurrentSessionVerified);
-      });
-      await _framesUntil(tester, () => probeKey.currentState != null, stage: 'verified recovery admission');
-      expect(fixture.runtime.isPasswordRecovery, isTrue);
-      expect(probeKey.currentState!.recoveryAtAdmission, isTrue);
-      expect(Localizations.localeOf(probeKey.currentContext!), const Locale('ar'));
-      expect(Directionality.of(probeKey.currentContext!), TextDirection.rtl);
-      expect(Theme.of(probeKey.currentContext!).brightness, Brightness.dark);
-      // Admission only: actual OstinatoApp/AccountPage recovery form is a
-      // separate acceptance surface; this probe does not simulate that form.
-    } finally {
-      await fixture.close(tester);
-    }
-  });
+  testWidgets(
+    'public recovery stays localized while pending and admits only matching proof',
+    (tester) async {
+      final fixture = await _AuthFixture.open(tester);
+      try {
+        final probeKey = GlobalKey<_StateProbeState>();
+        final child = _StateProbe(key: probeKey, runtime: fixture.runtime);
+        await _mount(
+          tester,
+          fixture,
+          languageTag: 'ar',
+          preference: AppThemePreference.dark,
+          child: child,
+        );
+        await _real(tester, () async {
+          await fixture.client.auth.verifyOTP(
+            type: OtpType.recovery,
+            tokenHash: 'synthetic-recovery-hash',
+          );
+          await _until(
+            () =>
+                fixture.runtime.isPasswordRecovery &&
+                fixture.heldUsers.length >= 2,
+          );
+        });
+        await _framesUntil(
+          tester,
+          () => find
+              .text(
+                MotionAccountLocalizations(
+                  const Locale('ar'),
+                ).text(MotionAccountString.checkingAccount),
+              )
+              .evaluate()
+              .isNotEmpty,
+          stage: 'recovery checking AR',
+        );
+        _expectPresentation(
+          tester,
+          locale: const Locale('ar'),
+          brightness: Brightness.dark,
+          message: MotionAccountString.checkingAccount,
+        );
+        expect(probeKey.currentState, isNull);
+        expect(fixture.runtime.isCurrentSessionVerified, isFalse);
+        expect(fixture.recoveryRequests, 1);
+        await _real(tester, () async {
+          fixture.releaseUsers(success: true);
+          await _until(() => fixture.runtime.isCurrentSessionVerified);
+        });
+        await _framesUntil(
+          tester,
+          () => probeKey.currentState != null,
+          stage: 'verified recovery admission',
+        );
+        expect(fixture.runtime.isPasswordRecovery, isTrue);
+        expect(probeKey.currentState!.recoveryAtAdmission, isTrue);
+        expect(
+          Localizations.localeOf(probeKey.currentContext!),
+          const Locale('ar'),
+        );
+        expect(Directionality.of(probeKey.currentContext!), TextDirection.rtl);
+        expect(Theme.of(probeKey.currentContext!).brightness, Brightness.dark);
+        // Admission only: actual OstinatoApp/AccountPage recovery form is a
+        // separate acceptance surface; this probe does not simulate that form.
+      } finally {
+        await fixture.close(tester);
+      }
+    },
+  );
 
-  testWidgets('authorized runtime gate and child draft survive actual host presentation changes', (tester) async {
-    final dispatcher = tester.binding.platformDispatcher;
-    addTearDown(dispatcher.clearPlatformBrightnessTestValue);
-    final fixture = await _AuthFixture.open(tester);
-    try {
-      await _real(tester, () async {
-        fixture.releaseUsers(success: true);
-        await _until(() => fixture.runtime.isCurrentSessionVerified);
-      });
-      final probeKey = GlobalKey<_StateProbeState>();
-      final child = _StateProbe(key: probeKey, runtime: fixture.runtime);
-      await _mount(tester, fixture, languageTag: 'en', preference: AppThemePreference.light, child: child);
-      await _framesUntil(tester, () => probeKey.currentState != null, stage: 'verified child');
-      final state = probeKey.currentState!;
-      final wrapperElement = tester.element(find.byType(OstinatoIdentityGate));
-      final gateElement = tester.element(find.byType(MotionIdentityGate));
-      final session = fixture.client.auth.currentSession;
-      final requests = fixture.userRequests;
-      state.changeDraft(7);
-      await tester.pump();
-      final localeController = AppLocaleScope.maybeOf(wrapperElement)!;
-      await _real(tester, () => fixture.theme!.select(AppThemePreference.dark));
-      await _real(tester, () => localeController.select('ar'));
-      await _framesUntil(tester, () => Localizations.localeOf(state.context) == const Locale('ar') &&
-        Theme.of(state.context).brightness == Brightness.dark, stage: 'selected AR/dark');
-      await _real(tester, () => fixture.theme!.select(AppThemePreference.system));
-      for (final brightness in [Brightness.light, Brightness.dark]) {
-        dispatcher.platformBrightnessTestValue = brightness;
-        await _framesUntil(tester, () => Theme.of(state.context).brightness == brightness,
-          stage: 'real host system brightness $brightness');
-        expect(probeKey.currentState, same(state));
-        expect(state.draft, 7);
-        expect(tester.element(find.byType(OstinatoIdentityGate)), same(wrapperElement));
-        expect(tester.element(find.byType(MotionIdentityGate)), same(gateElement));
-        final gate = tester.widget<MotionIdentityGate>(find.byType(MotionIdentityGate));
+  testWidgets(
+    'authorized runtime gate and child draft survive actual host presentation changes',
+    (tester) async {
+      final dispatcher = tester.binding.platformDispatcher;
+      addTearDown(dispatcher.clearPlatformBrightnessTestValue);
+      final fixture = await _AuthFixture.open(tester);
+      try {
+        await _real(tester, () async {
+          fixture.releaseUsers(success: true);
+          await _until(() => fixture.runtime.isCurrentSessionVerified);
+        });
+        final probeKey = GlobalKey<_StateProbeState>();
+        final child = _StateProbe(key: probeKey, runtime: fixture.runtime);
+        await _mount(
+          tester,
+          fixture,
+          languageTag: 'en',
+          preference: AppThemePreference.light,
+          child: child,
+        );
+        await _framesUntil(
+          tester,
+          () => probeKey.currentState != null,
+          stage: 'verified child',
+        );
+        final state = probeKey.currentState!;
+        final wrapperElement = tester.element(
+          find.byType(OstinatoIdentityGate),
+        );
+        final gateElement = tester.element(find.byType(MotionIdentityGate));
+        final session = fixture.client.auth.currentSession;
+        final requests = fixture.userRequests;
+        state.changeDraft(7);
+        await tester.pump();
+        final localeController = AppLocaleScope.maybeOf(wrapperElement)!;
+        await _real(
+          tester,
+          () => fixture.theme!.select(AppThemePreference.dark),
+        );
+        await _real(tester, () => localeController.select('ar'));
+        await _framesUntil(
+          tester,
+          () =>
+              Localizations.localeOf(state.context) == const Locale('ar') &&
+              Theme.of(state.context).brightness == Brightness.dark,
+          stage: 'selected AR/dark',
+        );
+        await _real(
+          tester,
+          () => fixture.theme!.select(AppThemePreference.system),
+        );
+        for (final brightness in [Brightness.light, Brightness.dark]) {
+          dispatcher.platformBrightnessTestValue = brightness;
+          await _framesUntil(
+            tester,
+            () => Theme.of(state.context).brightness == brightness,
+            stage: 'real host system brightness $brightness',
+          );
+          expect(probeKey.currentState, same(state));
+          expect(state.draft, 7);
+          expect(
+            tester.element(find.byType(OstinatoIdentityGate)),
+            same(wrapperElement),
+          );
+          expect(
+            tester.element(find.byType(MotionIdentityGate)),
+            same(gateElement),
+          );
+          final gate = tester.widget<MotionIdentityGate>(
+            find.byType(MotionIdentityGate),
+          );
+          expect(gate.runtime, same(fixture.runtime));
+          expect(gate.child, same(child));
+          expect(gate.locale, const Locale('ar'));
+          expect(gate.themeMode, ThemeMode.system);
+        }
+        expect(Directionality.of(state.context), TextDirection.rtl);
+        expect(fixture.client.auth.currentSession, same(session));
+        expect(fixture.runtime.isCurrentSessionVerified, isTrue);
+        expect(fixture.runtime.userId.value, _userId);
+        expect(
+          fixture.userRequests,
+          requests,
+          reason: 'Presentation must not reverify identity',
+        );
+        expect(find.byType(CircularProgressIndicator), findsNothing);
+      } finally {
+        await fixture.close(tester);
+      }
+    },
+  );
+
+  testWidgets(
+    'real AppLocaleHost observer follows unsupported then FR and AR OS preferences',
+    (tester) async {
+      final dispatcher = tester.binding.platformDispatcher;
+      addTearDown(dispatcher.clearLocalesTestValue);
+      dispatcher.localesTestValue = const [Locale('xx'), Locale('fr')];
+      final fixture = await _AuthFixture.open(tester);
+      try {
+        final prefs = _MemoryLocalePreferences(null);
+        final child = _StateProbe(runtime: fixture.runtime);
+        await _mount(
+          tester,
+          fixture,
+          languageTag: null,
+          preference: AppThemePreference.light,
+          localePreferences: prefs,
+          child: child,
+        );
+        await _framesUntil(
+          tester,
+          () => find
+              .text(
+                MotionAccountLocalizations(
+                  const Locale('fr'),
+                ).text(MotionAccountString.checkingAccount),
+              )
+              .evaluate()
+              .isNotEmpty,
+          stage: 'OS second choice FR',
+        );
+        _expectPresentation(
+          tester,
+          locale: const Locale('fr'),
+          brightness: Brightness.light,
+          message: MotionAccountString.checkingAccount,
+        );
+        final wrapperElement = tester.element(
+          find.byType(OstinatoIdentityGate),
+        );
+        final gateElement = tester.element(find.byType(MotionIdentityGate));
+        final requests = fixture.userRequests;
+        // This setter invokes onLocaleChanged and the binding's real observer
+        // dispatch. Never call resolveAppLocales/didChangeLocales directly.
+        dispatcher.localesTestValue = const [Locale('xx'), Locale('ar')];
+        await _framesUntil(
+          tester,
+          () => find
+              .text(
+                MotionAccountLocalizations(
+                  const Locale('ar'),
+                ).text(MotionAccountString.checkingAccount),
+              )
+              .evaluate()
+              .isNotEmpty,
+          stage: 'OS second choice AR',
+        );
+        _expectPresentation(
+          tester,
+          locale: const Locale('ar'),
+          brightness: Brightness.light,
+          message: MotionAccountString.checkingAccount,
+        );
+        expect(
+          tester.element(find.byType(OstinatoIdentityGate)),
+          same(wrapperElement),
+        );
+        expect(
+          tester.element(find.byType(MotionIdentityGate)),
+          same(gateElement),
+        );
+        final gate = tester.widget<MotionIdentityGate>(
+          find.byType(MotionIdentityGate),
+        );
         expect(gate.runtime, same(fixture.runtime));
         expect(gate.child, same(child));
-        expect(gate.locale, const Locale('ar'));
-        expect(gate.themeMode, ThemeMode.system);
+        expect(AppLocaleScope.maybeOf(wrapperElement)!.languageTag, isNull);
+        expect(prefs.value, isNull);
+        expect(prefs.writes, 0);
+        expect(fixture.runtime.phase.value, MotionIdentityPhase.verifying);
+        expect(fixture.userRequests, requests);
+        expect(find.byType(_StateProbe), findsNothing);
+      } finally {
+        await fixture.close(tester);
       }
-      expect(Directionality.of(state.context), TextDirection.rtl);
-      expect(fixture.client.auth.currentSession, same(session));
-      expect(fixture.runtime.isCurrentSessionVerified, isTrue);
-      expect(fixture.runtime.userId.value, _userId);
-      expect(fixture.userRequests, requests, reason: 'Presentation must not reverify identity');
-      expect(find.byType(CircularProgressIndicator), findsNothing);
-    } finally {
-      await fixture.close(tester);
-    }
-  });
-
-  testWidgets('real AppLocaleHost observer follows unsupported then FR and AR OS preferences', (tester) async {
-    final dispatcher = tester.binding.platformDispatcher;
-    addTearDown(dispatcher.clearLocalesTestValue);
-    dispatcher.localesTestValue = const [Locale('xx'), Locale('fr')];
-    final fixture = await _AuthFixture.open(tester);
-    try {
-      final prefs = _MemoryLocalePreferences(null);
-      final child = _StateProbe(runtime: fixture.runtime);
-      await _mount(tester, fixture, languageTag: null, preference: AppThemePreference.light,
-        localePreferences: prefs, child: child);
-      await _framesUntil(tester, () => find.text(MotionAccountLocalizations(const Locale('fr'))
-        .text(MotionAccountString.checkingAccount)).evaluate().isNotEmpty, stage: 'OS second choice FR');
-      _expectPresentation(tester, locale: const Locale('fr'), brightness: Brightness.light,
-        message: MotionAccountString.checkingAccount);
-      final wrapperElement = tester.element(find.byType(OstinatoIdentityGate));
-      final gateElement = tester.element(find.byType(MotionIdentityGate));
-      final requests = fixture.userRequests;
-      // This setter invokes onLocaleChanged and the binding's real observer
-      // dispatch. Never call resolveAppLocales/didChangeLocales directly.
-      dispatcher.localesTestValue = const [Locale('xx'), Locale('ar')];
-      await _framesUntil(tester, () => find.text(MotionAccountLocalizations(const Locale('ar'))
-        .text(MotionAccountString.checkingAccount)).evaluate().isNotEmpty, stage: 'OS second choice AR');
-      _expectPresentation(tester, locale: const Locale('ar'), brightness: Brightness.light,
-        message: MotionAccountString.checkingAccount);
-      expect(tester.element(find.byType(OstinatoIdentityGate)), same(wrapperElement));
-      expect(tester.element(find.byType(MotionIdentityGate)), same(gateElement));
-      final gate = tester.widget<MotionIdentityGate>(find.byType(MotionIdentityGate));
-      expect(gate.runtime, same(fixture.runtime));
-      expect(gate.child, same(child));
-      expect(AppLocaleScope.maybeOf(wrapperElement)!.languageTag, isNull);
-      expect(prefs.value, isNull);
-      expect(prefs.writes, 0);
-      expect(fixture.runtime.phase.value, MotionIdentityPhase.verifying);
-      expect(fixture.userRequests, requests);
-      expect(find.byType(_StateProbe), findsNothing);
-    } finally {
-      await fixture.close(tester);
-    }
-  });
+    },
+  );
 }

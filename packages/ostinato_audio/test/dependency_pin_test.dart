@@ -27,7 +27,8 @@ const String _mandatedRef = 'd69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d';
 const String _mandatedVersion = '0.13.0';
 
 void main() {
-  test('pin MÜHÜRLENEN refte — "ikisi aynı" yetmez, DOĞRU şeyde aynı olmalı', () {
+  test('pin MÜHÜRLENEN refte — "ikisi aynı" yetmez, DOĞRU şeyde aynı olmalı',
+      () {
     // ÜÇÜNCÜ ÇAPA (MUT-A dersi, O-029 sınıfı): eşitlik kapısı iki kaynağı
     // KARŞILAŞTIRIR; ikisini BİRLİKTE başka bir ref'e taşıyan bir düzenleme
     // sessizce geçer. Karşılaştırılacak bir DIŞ sabit olmadan "pin mühürlü"
@@ -43,7 +44,8 @@ void main() {
               'taşımıyor — M-F-263 tek-pin şartı');
     }
     final String lock = File('pubspec.lock').readAsStringSync();
-    expect(_resolvedVersion(lock), _localCoreOverride() ? '0.12.0' : _mandatedVersion,
+    expect(_resolvedVersion(lock),
+        _localCoreOverride() ? '0.12.0' : _mandatedVersion,
         reason: 'kilit $_mandatedVersion çözmüyor — tagin işaret ettiği sürüm '
             'ile refin çözdüğü sürüm ayrışmış olabilir');
   });
@@ -120,13 +122,16 @@ bool _localCoreOverride() {
       .resolveSymbolicLinksSync();
   for (final root in roots) {
     final yaml = File('$root/pubspec_overrides.yaml').readAsStringSync();
-    final block = RegExp(r'^  motion_core:\s*\n    path: ([^\n]+)',
-        multiLine: true).firstMatch(yaml);
+    final block =
+        RegExp(r'^  motion_core:\s*\n    path: ([^\n]+)', multiLine: true)
+            .firstMatch(yaml);
     expect(block, isNotNull, reason: 'Core override must be an explicit path');
-    final path = block!.group(1)!.trim().replaceAll('"', '').replaceAll("'", '');
+    final path =
+        block!.group(1)!.trim().replaceAll('"', '').replaceAll("'", '');
     final actual = Directory.fromUri(Directory(root).absolute.uri.resolve(path))
         .resolveSymbolicLinksSync();
-    expect(actual, expected, reason: 'Only exact sibling Core candidate allowed');
+    expect(actual, expected,
+        reason: 'Only exact sibling Core candidate allowed');
   }
   return true;
 }
@@ -136,15 +141,19 @@ void _expectExactLocalCore(String lockPath, String configPath) {
   expect(_fieldOf(lock, 'source'), 'path');
   expect(_resolvedVersion(lock), '0.12.0');
   final config = File(configPath).absolute;
-  final document = jsonDecode(config.readAsStringSync()) as Map<String, dynamic>;
+  final document =
+      jsonDecode(config.readAsStringSync()) as Map<String, dynamic>;
   final packages = document['packages'] as List<dynamic>;
-  final core = packages.cast<Map<String, dynamic>>()
+  final core = packages
+      .cast<Map<String, dynamic>>()
       .singleWhere((entry) => entry['name'] == 'motion_core');
-  final actual = Directory.fromUri(config.uri.resolve(core['rootUri'] as String))
-      .resolveSymbolicLinksSync();
+  final actual =
+      Directory.fromUri(config.uri.resolve(core['rootUri'] as String))
+          .resolveSymbolicLinksSync();
   final expected = Directory('../../../motion-core/packages/motion_core')
       .resolveSymbolicLinksSync();
-  expect(actual, expected, reason: 'Resolved config must use exact Core source');
+  expect(actual, expected,
+      reason: 'Resolved config must use exact Core source');
   expect(File('$actual/pubspec.yaml').readAsStringSync(),
       contains('version: 0.12.0'));
 }
