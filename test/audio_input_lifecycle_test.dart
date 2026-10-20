@@ -248,10 +248,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 1));
         expect(channel.running, isFalse);
         expect(channel.stopCalls, 1);
-        expect(
-          (states.last as AudioSetupFailed).reason,
-          'capture_pcm_timeout',
-        );
+        expect((states.last as AudioSetupFailed).reason, 'capture_pcm_timeout');
         expect(source.bufferedSampleCountForTest, 0);
       } finally {
         await _cleanupLifecycleOperations(tester, {
@@ -291,10 +288,7 @@ void main() {
         stage: 'native-start gate receipt',
       );
       await tester.pump(const Duration(milliseconds: 100));
-      expect(
-        (states.last as AudioSetupFailed).reason,
-        'capture_pcm_timeout',
-      );
+      expect((states.last as AudioSetupFailed).reason, 'capture_pcm_timeout');
       expect(channel.stopCalls, 1);
     } finally {
       // This releases only the test gate, after all body assertions (or failure).
@@ -1408,11 +1402,7 @@ Future<void> _settleLifecycleOperation(
       );
     }
   }
-  expect(
-    completed,
-    isTrue,
-    reason: '$stage did not settle in 100 event turns',
-  );
+  expect(completed, isTrue, reason: '$stage did not settle in 100 event turns');
   debugPrint('audio-fixture settled: $stage');
   if (failure != null) Error.throwWithStackTrace(failure!, failureStack!);
 }

@@ -56,8 +56,11 @@ void _expectNoFrameworkError(
   List<String> diagnostics,
   String phase,
 ) {
-  expect(tester.takeException(), isNull,
-      reason: '$phase\n${diagnostics.join("\n")}');
+  expect(
+    tester.takeException(),
+    isNull,
+    reason: '$phase\n${diagnostics.join("\n")}',
+  );
   diagnostics.clear();
 }
 
@@ -96,7 +99,8 @@ void main() {
           ),
         );
         await tester.pumpWidget(screen(true));
-        await waitForLocalizedFixture(tester,
+        await waitForLocalizedFixture(
+          tester,
           languageTag: locale,
           anchor: find.byKey(const Key('target')),
           reason: 'The enabled native button must render before target checks',
@@ -116,9 +120,7 @@ void main() {
           of: target,
           matching: find.byWidgetPredicate(
             (widget) =>
-                widget is SizedBox &&
-                widget.width == 38 &&
-                widget.height == 38,
+                widget is SizedBox && widget.width == 38 && widget.height == 38,
           ),
         );
         expect(visual, findsOneWidget);
@@ -179,19 +181,18 @@ void main() {
         );
         expect(find.text(label), findsNothing);
         await tester.pumpWidget(screen(false));
-        await waitForLocalizedFixture(tester,
+        await waitForLocalizedFixture(
+          tester,
           languageTag: locale,
           anchor: find.byKey(const Key('target')),
-          reason: 'The disabled native button must render before semantics checks',
+          reason:
+              'The disabled native button must render before semantics checks',
         );
         await tester.pumpAndSettle();
         expect(find.bySemanticsLabel(label), findsOneWidget);
         final disabled = tester.getSemantics(nativeTarget);
         expect(disabled.getSemanticsData().label, label);
-        expect(
-          disabled.getSemanticsData().flagsCollection.isButton,
-          isTrue,
-        );
+        expect(disabled.getSemanticsData().flagsCollection.isButton, isTrue);
         expect(
           disabled.getSemanticsData().flagsCollection.isEnabled.toBoolOrNull(),
           isNotNull,
@@ -231,7 +232,8 @@ void main() {
             ),
           ),
         );
-        await waitForLocalizedFixture(tester,
+        await waitForLocalizedFixture(
+          tester,
           languageTag: locale,
           anchor: find.byType(GlassIconButton),
           reason: 'The keyboard fixture must render before requesting focus',
@@ -293,23 +295,27 @@ void main() {
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
             builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: const TextScaler.linear(2),
-              ),
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: const TextScaler.linear(2)),
               child: child!,
             ),
             home: LibraryScreen(repo: repo, cueText: cues),
           ),
         ),
       );
-      await waitForLocalizedFixture(tester,
+      await waitForLocalizedFixture(
+        tester,
         languageTag: locale,
         anchor: find.byType(LibraryScreen),
         reason: 'Library must render before 320px/2x target and layout checks',
       );
       await tester.pumpAndSettle();
-      _expectNoFrameworkError(tester, diagnostics,
-          'Library header ($locale) before Settings tap at 320px/2x');
+      _expectNoFrameworkError(
+        tester,
+        diagnostics,
+        'Library header ($locale) before Settings tap at 320px/2x',
+      );
       final settings = find.byType(GlassIconButton);
       expect(settings, findsOneWidget);
       expect(tester.getSize(settings), const Size(48, 48));
@@ -323,8 +329,11 @@ void main() {
       expect(brand.right, lessThanOrEqualTo(targetBounds.left));
       await tester.tapAt(tester.getTopLeft(settings) + const Offset(47, 24));
       await tester.pumpAndSettle();
-      _expectNoFrameworkError(tester, diagnostics,
-          'Library ($locale) outer-ring tap must open Settings');
+      _expectNoFrameworkError(
+        tester,
+        diagnostics,
+        'Library ($locale) outer-ring tap must open Settings',
+      );
       expect(find.byType(SettingsScreen), findsOneWidget);
       final back = find.byType(GlassIconButton).last;
       await tester.ensureVisible(back);
@@ -332,8 +341,11 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(SettingsScreen), findsNothing);
       expect(find.byType(LibraryScreen), findsOneWidget);
-      _expectNoFrameworkError(tester, diagnostics,
-          'Settings ($locale) return must retain the Library layout');
+      _expectNoFrameworkError(
+        tester,
+        diagnostics,
+        'Settings ($locale) return must retain the Library layout',
+      );
     }
   });
 }

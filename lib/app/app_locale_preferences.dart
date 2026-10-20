@@ -87,9 +87,8 @@ final class AppLocaleController extends ChangeNotifier {
   bool get readFailed => _readFailed;
   bool get writeFailed => _writeFailed;
 
-  Future<void> load() => _load ??= _selectionRevision == 0
-      ? _read()
-      : Future<void>.value();
+  Future<void> load() =>
+      _load ??= _selectionRevision == 0 ? _read() : Future<void>.value();
 
   Future<void> _read() async {
     final revision = _selectionRevision;
@@ -157,9 +156,8 @@ final class AppLocaleScope extends InheritedNotifier<AppLocaleController> {
     required super.child,
   }) : super(notifier: controller);
 
-  static AppLocaleController? maybeOf(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<AppLocaleScope>()
-      ?.notifier;
+  static AppLocaleController? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<AppLocaleScope>()?.notifier;
 }
 
 final class AppLocaleHost extends StatefulWidget {
@@ -199,13 +197,16 @@ final class _AppLocaleHostState extends State<AppLocaleHost>
 
   void _prepareSelection() {
     if (!mounted || _controller.loading) return;
-    final locale = _controller.locale ?? resolveAppLocales(
-      WidgetsBinding.instance.platformDispatcher.locales,
-      ostinatoSupportedLocales,
-    );
+    final locale =
+        _controller.locale ??
+        resolveAppLocales(
+          WidgetsBinding.instance.platformDispatcher.locales,
+          ostinatoSupportedLocales,
+        );
     final assets = widget.translationBundle ?? rootBundle;
     final request = (assets, canonicalLanguageTag(locale));
-    if (_requested?.$2 == request.$2 && identical(_requested?.$1, assets)) return;
+    if (_requested?.$2 == request.$2 && identical(_requested?.$1, assets))
+      return;
     _requested = request;
     final generation = ++_generation;
     unawaited(_prepareAndPublish(generation, locale, assets));
@@ -236,8 +237,10 @@ final class _AppLocaleHostState extends State<AppLocaleHost>
   @override
   void didUpdateWidget(covariant AppLocaleHost oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!identical(oldWidget.translationBundle ?? rootBundle,
-        widget.translationBundle ?? rootBundle)) {
+    if (!identical(
+      oldWidget.translationBundle ?? rootBundle,
+      widget.translationBundle ?? rootBundle,
+    )) {
       _requested = null;
       _prepareSelection();
     }

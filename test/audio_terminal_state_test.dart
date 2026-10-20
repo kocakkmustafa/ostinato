@@ -119,8 +119,8 @@ void main() {
 
         // Keep timestamps contiguous while reaching the next analysis interval.
         // No synthetic wall-clock advance is needed to feed this native boundary.
-        final advanceSamples =
-            (rate * harness.config.analysisIntervalMs / 1000).ceil();
+        final advanceSamples = (rate * harness.config.analysisIntervalMs / 1000)
+            .ceil();
         harness.channel.deliverPcm(advanceSamples);
         await tester.pump();
         harness.channel.deliverPcm(harness.config.windowSamples);
@@ -128,7 +128,10 @@ void main() {
         expect(analyses, 2);
         expect(pendingSamples, isNotNull);
         expect(pendingSamples!, contains(.2));
-        expect(harness.controller.bufferedSamples, harness.config.windowSamples);
+        expect(
+          harness.controller.bufferedSamples,
+          harness.config.windowSamples,
+        );
         expect(harness.source.bufferedSampleCountForTest, greaterThan(0));
 
         // The raw EventChannel EOF-to-terminal translation is tested below this
@@ -217,7 +220,10 @@ void main() {
         expect(harness.controller.canRetryCaptureClose, isTrue);
         expect(harness.controller.captureGateReady, isFalse);
         expect(_startButton(tester).onPressed, isNull);
-        expect(_statusText(tester), contains('closure needs an explicit retry'));
+        expect(
+          _statusText(tester),
+          contains('closure needs an explicit retry'),
+        );
         expect(_statusText(tester), isNot(contains('microphone is off')));
         expect(_statusText(tester), isNot(contains('stop request finished')));
         expect(harness.controller.observation, isNull);
@@ -245,9 +251,8 @@ FilledButton _startButton(WidgetTester tester) => tester.widget<FilledButton>(
   find.byKey(const Key('observation-start-stop')),
 );
 
-String _statusText(WidgetTester tester) => tester
-    .widget<Text>(find.byKey(const Key('observation-status')))
-    .data!;
+String _statusText(WidgetTester tester) =>
+    tester.widget<Text>(find.byKey(const Key('observation-status'))).data!;
 
 String _noteText(WidgetTester tester) =>
     tester.widget<Text>(find.byKey(const Key('observed-note'))).data!;
@@ -492,11 +497,7 @@ Future<void> _settleTerminalOperation(
       );
     }
   }
-  expect(
-    completed,
-    isTrue,
-    reason: '$stage did not settle in 100 event turns',
-  );
+  expect(completed, isTrue, reason: '$stage did not settle in 100 event turns');
   debugPrint('audio-fixture settled: $stage');
   if (failure != null) Error.throwWithStackTrace(failure!, failureStack!);
 }
