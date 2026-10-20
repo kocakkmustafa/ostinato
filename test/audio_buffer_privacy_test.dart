@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
@@ -403,6 +404,8 @@ final class _ThrowingCaptureChannel
     implements AudioCaptureChannel, AudioCaptureCloseControl {
   _ThrowingCaptureChannel(this._error);
   final PlatformException _error;
+  // A setup exception is distinct from a transport that ends by itself.
+  final _events = StreamController<RawAudioEvent>.broadcast();
 
   @override
   String? get attemptId => 'throwing-start';
@@ -411,7 +414,7 @@ final class _ThrowingCaptureChannel
       const AudioCaptureCloseState.clear();
 
   @override
-  Stream<RawAudioEvent> get events => const Stream.empty();
+  Stream<RawAudioEvent> get events => _events.stream;
 
   @override
   Future<void> start({required int sampleRate}) async => throw _error;

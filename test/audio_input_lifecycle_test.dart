@@ -19,6 +19,304 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(resetAudioCaptureCoordinatorForTest);
 
+  testWidgets(
+    'raw EventChannel EOF is terminal once and preserves the reusable wrapper',
+    (tester) async {
+      const method = MethodChannel('com.yulalab.ostinato/audio_capture');
+      const events = MethodChannel('com.yulalab.ostinato/audio_capture/events');
+      final messenger =
+          TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+      final calls = <String>[];
+      messenger.setMockMethodCallHandler(events, (call) async => null);
+      messenger.setMockMethodCallHandler(method, (call) async {
+        calls.add(call.method);
+        if (call.method == 'ready') return true;
+        if (call.method == 'closeState') {
+          return <String, Object?>{
+            'phase': 'clear',
+            'attemptId': null,
+            'attemptInFlight': false,
+            'resourcesReleased': true,
+            'requiresExplicitRetry': false,
+          };
+        }
+        return null;
+      });
+      addTearDown(() {
+        messenger.setMockMethodCallHandler(method, null);
+        messenger.setMockMethodCallHandler(events, null);
+      });
+      const claim = AudioCaptureContextClaim(
+        ownerToken: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        engineGeneration: 1,
+        contextGeneration: 0,
+      );
+      final channel = MethodChannelAudioCaptureChannel();
+      final received = <RawAudioEvent>[];
+      final sub = channel.events.listen(received.add);
+      await channel.start(sampleRate: 44100, claim: claim);
+      final firstAttempt = channel.attemptId;
+
+      // A null platform message is EOF; a success envelope containing null
+      // would instead be a malformed data event.
+      messenger.handlePlatformMessage(events.name, null, (_) {});
+      await tester.pump();
+      expect(received, hasLength(1));
+      expect(
+        (received.single as RawInterruptedEvent).reason,
+        'capture_stream_ended',
+      );
+      expect(channel.attemptId, firstAttempt);
+      await expectLater(
+        channel.start(sampleRate: 44100, claim: claim),
+        throwsA(isA<PlatformException>()),
+      );
+      expect(calls.where((call) => call == 'start'), hasLength(1));
+
+      await channel.stop();
+      await channel.start(sampleRate: 48000, claim: claim);
+      expect(channel.attemptId, isNot(firstAttempt));
+      messenger.handlePlatformMessage(
+        events.name,
+        const StandardMethodCodec().encodeSuccessEnvelope(<String, Object?>{
+          'attemptId': channel.attemptId,
+          'type': 'routeChanged',
+          'route': 'ios:BuiltInMic',
+        }),
+        (_) {},
+      );
+      await tester.pump();
+      expect(received.last, isA<RawRouteChangedEvent>());
+      await channel.stop();
+      // A retired raw stream must not publish another terminal event.
+      messenger.handlePlatformMessage(events.name, null, (_) {});
+      await tester.pump();
+      expect(received.whereType<RawInterruptedEvent>(), hasLength(1));
+      expect(calls.where((call) => call == 'stop'), hasLength(2));
+      await sub.cancel();
+    },
+  );
+
+  testWidgets(
+    'event-stream EOF clears PCM and starts one ordinary close immediately',
+    (tester) async {
+      final channel = _CloseProbeChannel();
+      final source = AudioInputController(
+        channel: channel,
+        pcmDeliveryTimeout: const Duration(milliseconds: 100),
+        requestMicrophonePermission: () async => PermissionStatus.granted,
+      );
+      final states = <AudioSurfaceState>[];
+      final sub = source.status.listen(states.add);
+      await source.start(sampleRate: 44100);
+      channel._events.add(
+        const RawAudioChunkEvent(
+          samples: [.2, .2],
+          sampleRate: 44100,
+          tNativeUs: 0,
+        ),
+      );
+      await tester.pump();
+      expect(source.bufferedSampleCountForTest, 2);
+      await tester.pump(const Duration(milliseconds: 99));
+      final ended = channel._events.close();
+      await tester.pump();
+      await ended;
+      expect(
+        states.whereType<AudioSetupFailed>().map((state) => state.reason),
+        ['capture_stream_ended'],
+      );
+      expect(source.bufferedSampleCountForTest, 0);
+      expect(channel.running, isFalse);
+      expect(channel.stopCalls, 1);
+      expect(channel.retryCalls, 0);
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(channel.stopCalls, 1);
+      expect(channel.startCalls, 1);
+      await sub.cancel();
+      await source.dispose();
+    },
+  );
+
+  testWidgets(
+    'known-route notices cannot extend the first missing-PCM deadline',
+    (tester) async {
+      final channel = _CloseProbeChannel();
+      final source = AudioInputController(
+        channel: channel,
+        pcmDeliveryTimeout: const Duration(milliseconds: 100),
+        requestMicrophonePermission: () async => PermissionStatus.granted,
+      );
+      final states = <AudioSurfaceState>[];
+      final sub = source.status.listen(states.add);
+      await source.start(sampleRate: 44100);
+      for (var notice = 0; notice < 3; notice++) {
+        await tester.pump(const Duration(milliseconds: 30));
+        channel._events.add(const RawRouteChangedEvent('ios:BuiltInMic'));
+        await tester.pump();
+      }
+      expect(channel.running, isTrue);
+      await tester.pump(const Duration(milliseconds: 11));
+      expect(
+        states.whereType<AudioSetupFailed>().map((state) => state.reason),
+        ['capture_pcm_timeout'],
+      );
+      expect(channel.running, isFalse);
+      expect(channel.stopCalls, 1);
+      expect(channel.retryCalls, 0);
+      expect(source.bufferedSampleCountForTest, 0);
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(channel.startCalls, 1);
+      expect(channel.stopCalls, 1);
+      await sub.cancel();
+      await source.dispose();
+      await channel._events.close();
+    },
+  );
+
+  testWidgets(
+    'valid silent PCM keeps delivery alive until samples actually stop',
+    (tester) async {
+      final channel = _CloseProbeChannel();
+      final source = AudioInputController(
+        channel: channel,
+        pcmDeliveryTimeout: const Duration(milliseconds: 100),
+        requestMicrophonePermission: () async => PermissionStatus.granted,
+      );
+      final states = <AudioSurfaceState>[];
+      final chunks = <AudioChunk>[];
+      final sub = source.status.listen(states.add);
+      final chunkSub = source.chunks.listen(chunks.add);
+      await source.start(sampleRate: 44100);
+      for (var chunk = 0; chunk < 4; chunk++) {
+        await tester.pump(const Duration(milliseconds: 90));
+        channel._events.add(
+          RawAudioChunkEvent(
+            samples: List<double>.filled(4410, 0),
+            sampleRate: 44100,
+            tNativeUs: chunk * 100000,
+          ),
+        );
+        await tester.pump();
+        expect(channel.running, isTrue);
+        expect(states.whereType<AudioSetupFailed>(), isEmpty);
+      }
+      expect(chunks, hasLength(4));
+      expect(channel.stopCalls, 0);
+      await tester.pump(const Duration(milliseconds: 99));
+      expect(channel.running, isTrue);
+      await tester.pump(const Duration(milliseconds: 1));
+      expect(channel.running, isFalse);
+      expect(channel.stopCalls, 1);
+      expect(
+        (states.last as AudioSetupFailed).reason,
+        'capture_pcm_timeout',
+      );
+      expect(source.bufferedSampleCountForTest, 0);
+      await chunkSub.cancel();
+      await sub.cancel();
+      await source.dispose();
+      await channel._events.close();
+    },
+  );
+
+  testWidgets('PCM deadline begins only after native start settles', (
+    tester,
+  ) async {
+    final startGate = Completer<void>();
+    final channel = _CloseProbeChannel(startGate: startGate.future);
+    final source = AudioInputController(
+      channel: channel,
+      pcmDeliveryTimeout: const Duration(milliseconds: 100),
+      requestMicrophonePermission: () async => PermissionStatus.granted,
+    );
+    final states = <AudioSurfaceState>[];
+    final sub = source.status.listen(states.add);
+    final opening = source.start(sampleRate: 44100);
+    await tester.pump();
+    expect(channel.startCalls, 1);
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(channel.stopCalls, 0);
+    expect(states.whereType<AudioSetupFailed>(), isEmpty);
+    startGate.complete();
+    await tester.pump();
+    await opening;
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(
+      (states.last as AudioSetupFailed).reason,
+      'capture_pcm_timeout',
+    );
+    expect(channel.stopCalls, 1);
+    await sub.cancel();
+    await source.dispose();
+    await channel._events.close();
+  });
+
+  for (final dispose in [false, true]) {
+    testWidgets(
+      '${dispose ? 'dispose' : 'manual stop'} cancels the PCM delivery timer',
+      (tester) async {
+        final channel = _CloseProbeChannel();
+        final source = AudioInputController(
+          channel: channel,
+          pcmDeliveryTimeout: const Duration(milliseconds: 100),
+          requestMicrophonePermission: () async => PermissionStatus.granted,
+        );
+        final states = <AudioSurfaceState>[];
+        final sub = source.status.listen(states.add);
+        await source.start(sampleRate: 44100);
+        await tester.pump(const Duration(milliseconds: 50));
+        if (dispose) {
+          await source.dispose();
+        } else {
+          await source.stop();
+        }
+        await tester.pump(const Duration(milliseconds: 200));
+        expect(states.whereType<AudioSetupFailed>(), isEmpty);
+        expect(channel.running, isFalse);
+        expect(channel.stopCalls, 1);
+        expect(channel.startCalls, 1);
+        await sub.cancel();
+        await source.dispose();
+        await channel._events.close();
+      },
+    );
+  }
+
+  testWidgets('a retired PCM deadline cannot terminate the next owner', (
+    tester,
+  ) async {
+    final firstChannel = _CloseProbeChannel();
+    final nextChannel = _CloseProbeChannel();
+    AudioInputController source(_CloseProbeChannel channel) =>
+        AudioInputController(
+          channel: channel,
+          pcmDeliveryTimeout: const Duration(milliseconds: 100),
+          requestMicrophonePermission: () async => PermissionStatus.granted,
+        );
+    final first = source(firstChannel);
+    final next = source(nextChannel);
+    final nextStates = <AudioSurfaceState>[];
+    final sub = next.status.listen(nextStates.add);
+    await first.start(sampleRate: 44100);
+    await tester.pump(const Duration(milliseconds: 90));
+    await next.start(sampleRate: 44100);
+    expect(firstChannel.stopCalls, 1);
+    await tester.pump(const Duration(milliseconds: 20));
+    expect(nextChannel.running, isTrue);
+    expect(nextChannel.stopCalls, 0);
+    expect(nextStates.whereType<AudioSetupFailed>(), isEmpty);
+    await first.dispose();
+    await next.dispose();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(nextStates.whereType<AudioSetupFailed>(), isEmpty);
+    expect(nextChannel.startCalls, 1);
+    expect(nextChannel.stopCalls, 1);
+    await sub.cancel();
+    await firstChannel._events.close();
+    await nextChannel._events.close();
+  });
+
   test(
     'iOS built-in enum tag and raw port alias both identify built-in input',
     () {
@@ -959,10 +1257,11 @@ final class _SharedCloseChannel
   AudioCaptureCloseState? stateAfterRetry;
   int reads = 0, startCalls = 0, stopCalls = 0;
   final retryIds = <String>[];
+  final _events = StreamController<RawAudioEvent>.broadcast();
   @override
   String? get attemptId => reportedAttemptId ?? (startCalls > 0 ? id : null);
   @override
-  Stream<RawAudioEvent> get events => const Stream.empty();
+  Stream<RawAudioEvent> get events => _events.stream;
   @override
   Future<AudioCaptureCloseState> readCloseState() async {
     reads++;
@@ -1043,10 +1342,11 @@ final class _UnknownCloseChannel implements AudioCaptureChannel {
 final class _NullIdChannel
     implements AudioCaptureChannel, AudioCaptureCloseControl {
   int stopCalls = 0;
+  final _events = StreamController<RawAudioEvent>.broadcast();
   @override
   String? get attemptId => null;
   @override
-  Stream<RawAudioEvent> get events => const Stream.empty();
+  Stream<RawAudioEvent> get events => _events.stream;
   @override
   Future<AudioCaptureCloseState> readCloseState() async =>
       const AudioCaptureCloseState.clear();

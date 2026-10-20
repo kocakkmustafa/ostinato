@@ -336,7 +336,7 @@ final class MethodChannelAudioCaptureChannel
     _acceptEvents = true;
     _rawSub ??= _eventChannel
         .receiveBroadcastStream(<String, Object?>{'attemptId': id})
-        .listen(_onMessage, onError: _onError);
+        .listen(_onMessage, onError: _onError, onDone: () => _onDone(id));
     // Event subscription and method calls are separate channels. Complete a
     // bounded native handshake before capture, rather than assume ordering.
     var ready = false;
@@ -412,6 +412,17 @@ final class MethodChannelAudioCaptureChannel
         ? error.code
         : 'unexpected: $error';
     _events.add(RawInterruptedEvent(reason));
+  }
+
+  void _onDone(String id) {
+    // An ended transport is not a native close receipt. Retain the attempt
+    // for ordinary stop/readback and keep the reusable public stream open.
+    // A retired subscription must not end a later capture attempt.
+    if (!_acceptEvents || id != _attemptId) return;
+    _acceptEvents = false;
+    _prepared = false;
+    _closeBlocked = true;
+    _events.add(const RawInterruptedEvent('capture_stream_ended'));
   }
 
   @override

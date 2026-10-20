@@ -107,9 +107,12 @@ final class AudioInputController implements AudioSource {
     int ringBufferCapacitySamples = 44100 * 4,
     Future<PermissionStatus> Function()? requestMicrophonePermission,
     Duration nativeCallTimeout = const Duration(seconds: 3),
-  }) : _channel = channel ?? MethodChannelAudioCaptureChannel(),
+    Duration pcmDeliveryTimeout = const Duration(seconds: 3),
+  }) : assert(pcmDeliveryTimeout > Duration.zero),
+       _channel = channel ?? MethodChannelAudioCaptureChannel(),
        _ring = AudioRingBuffer(capacitySamples: ringBufferCapacitySamples),
        _nativeCallTimeout = nativeCallTimeout,
+       _pcmDeliveryTimeout = pcmDeliveryTimeout,
        _requestPermission =
            requestMicrophonePermission ?? Permission.microphone.request;
 
@@ -117,10 +120,15 @@ final class AudioInputController implements AudioSource {
   final AudioRingBuffer _ring;
   final _continuity = AudioContinuity();
   final Duration _nativeCallTimeout;
+  // Wall-clock transport budget after native start / the last valid PCM.
+  // This is independent of room calibration, pitch detection and loudness:
+  // nonempty, valid all-zero PCM is still successful sample delivery.
+  final Duration _pcmDeliveryTimeout;
   final Future<PermissionStatus> Function() _requestPermission;
   final _chunks = StreamController<AudioChunk>.broadcast();
   final _status = StreamController<AudioSurfaceState>.broadcast();
   StreamSubscription<RawAudioEvent>? _sub;
+  Timer? _pcmDeliveryTimer;
   AudioLifecycleObserver? _lifecycle;
   PracticeAudioCaptureAction? _captureAction;
   Completer<bool>? _foregroundReady;
@@ -493,10 +501,10 @@ final class AudioInputController implements AudioSource {
       _channelConnected = true;
       _sub = _channel.events.listen(
         _onRawEvent,
-        onError: (Object _) {
-          _emit(const AudioSetupFailed('capture_stream_failed'));
-          _stopAfterLifecycle(announce: false);
-        },
+        onError: (Object _) =>
+            _failCapture('capture_stream_failed', expectedEpoch: epoch),
+        onDone: () =>
+            _failCapture('capture_stream_ended', expectedEpoch: epoch),
       );
       final channel = _channel;
       if (channel is PreparedAudioCaptureChannel) {
@@ -525,6 +533,7 @@ final class AudioInputController implements AudioSource {
       }
       _running = true;
       _starting = false;
+      _resetPcmDeliveryDeadline(epoch);
       _emit(AudioCalibrating(_route));
     } on PlatformException catch (e) {
       if (_current(epoch)) _emit(_mapPlatformException(e));
@@ -547,6 +556,25 @@ final class AudioInputController implements AudioSource {
 
   void _stopAfterLifecycle({bool announce = true}) {
     unawaited(_stop(announce: announce).catchError((Object _) {}));
+  }
+
+  void _failCapture(String reason, {int? expectedEpoch}) {
+    if (_disposed ||
+        !(_running || _starting) ||
+        (expectedEpoch != null && !_current(expectedEpoch))) {
+      return;
+    }
+    _emit(AudioSetupFailed(reason));
+    _stopAfterLifecycle(announce: false);
+  }
+
+  void _resetPcmDeliveryDeadline(int epoch) {
+    _pcmDeliveryTimer?.cancel();
+    _pcmDeliveryTimer = Timer(_pcmDeliveryTimeout, () {
+      _pcmDeliveryTimer = null;
+      if (!_current(epoch) || !_running) return;
+      _failCapture('capture_pcm_timeout', expectedEpoch: epoch);
+    });
   }
 
   void _onRawEvent(RawAudioEvent event) {
@@ -575,6 +603,7 @@ final class AudioInputController implements AudioSource {
           _stopAfterLifecycle(announce: false);
           return;
         }
+        _resetPcmDeliveryDeadline(_epoch);
         if (continuity == AudioContinuityResult.recalibrate) {
           _ring.clear();
           _emit(AudioCalibrating(_route));
@@ -594,8 +623,7 @@ final class AudioInputController implements AudioSource {
         _ring.clear();
         if (_running) _emit(AudioCalibrating(_route));
       case RawInterruptedEvent(:final reason):
-        _emit(AudioSetupFailed(reason));
-        _stopAfterLifecycle(announce: false);
+        _failCapture(reason);
     }
   }
 
@@ -619,6 +647,8 @@ final class AudioInputController implements AudioSource {
 
   Future<void> _performStop({required bool announce}) async {
     final stoppedEpoch = ++_epoch;
+    _pcmDeliveryTimer?.cancel();
+    _pcmDeliveryTimer = null;
     _captureAction?.retire();
     _captureAction = null;
     _running = false;

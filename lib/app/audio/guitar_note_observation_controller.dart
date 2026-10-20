@@ -339,9 +339,11 @@ final class GuitarNoteObservationController extends ChangeNotifier {
         _active = false;
         phase = NoteObservationPhase.permissionDenied;
       case AudioUnavailable() || AudioSetupFailed():
-        _clear();
-        _active = false;
-        phase = NoteObservationPhase.unavailable;
+        // Observe the same singleflight stop as the source's terminal error.
+        // The UI must refresh when its native close receipt settles, while
+        // retaining an unavailable result rather than a playing verdict.
+        _closeCaptureWithStatus(NoteObservationPhase.unavailable);
+        return;
       case AudioStopped():
         final terminal = _terminalStopPhase;
         _clear();

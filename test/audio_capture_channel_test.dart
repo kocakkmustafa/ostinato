@@ -458,6 +458,8 @@ final class _FailingCancelEventChannel extends EventChannel {
 final class _FailingCancelStream extends Stream<dynamic> {
   _FailingCancelStream(this.calls);
   final List<String> calls;
+  // This fixture models a live transport whose cancellation fails, not EOF.
+  final _events = StreamController<dynamic>.broadcast();
 
   @override
   StreamSubscription<dynamic> listen(
@@ -466,7 +468,7 @@ final class _FailingCancelStream extends Stream<dynamic> {
     void Function()? onDone,
     bool? cancelOnError,
   }) => _FailingCancelSubscription(
-    const Stream<dynamic>.empty().listen(
+    _events.stream.listen(
       onData,
       onError: onError,
       onDone: onDone,
