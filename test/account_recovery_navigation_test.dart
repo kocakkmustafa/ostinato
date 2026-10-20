@@ -43,8 +43,7 @@ void main() {
         ? find.text('PASSWORD_RECOVERY', skipOffstage: false)
         : find.byType(LibraryScreen, skipOffstage: false);
     bool ready() =>
-        navigator.evaluate().length == 1 &&
-        expectedRoot.evaluate().length == 1;
+        navigator.evaluate().length == 1 && expectedRoot.evaluate().length == 1;
     for (var attempt = 0; attempt < 60 && !ready(); attempt++) {
       await tester.runAsync(() async {
         await Future<void>.delayed(const Duration(milliseconds: 5));
@@ -54,7 +53,8 @@ void main() {
     expect(
       ready(),
       isTrue,
-      reason: 'Actual recovery root and Navigator must finish boot: '
+      reason:
+          'Actual recovery root and Navigator must finish boot: '
           'navigator=${navigator.evaluate().length}, '
           'expectedRoot=${expectedRoot.evaluate().length}, '
           'spinner=${find.byType(CircularProgressIndicator).evaluate().length}, '
