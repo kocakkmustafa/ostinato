@@ -135,8 +135,21 @@ class SessionStore {
       _operations.run((directory) async {
         final f = File('${directory.path}/sessions.jsonl');
         await f.parent.create(recursive: true);
+        var separator = '';
+        if (await f.exists()) {
+          final input = await f.open();
+          try {
+            final length = await input.length();
+            if (length > 0) {
+              await input.setPosition(length - 1);
+              if (await input.readByte() != 0x0a) separator = '\n';
+            }
+          } finally {
+            await input.close();
+          }
+        }
         await f.writeAsString(
-          '${jsonEncode(session.toJson())}\n',
+          '$separator${jsonEncode(session.toJson())}\n',
           mode: FileMode.append,
           flush: true,
         );
