@@ -293,7 +293,8 @@ class HorizontalBandTrack extends StatelessWidget {
   }
 }
 
-/// Üst app-bar iaşesi: geri/kapat düğmesi ortak stili.
+/// Original 38px glass visual inside a 48px native button target.
+/// IconButton retains keyboard focus and one accessible action.
 class GlassIconButton extends StatelessWidget {
   const GlassIconButton(
       {super.key, required this.icon, required this.onTap, this.semanticLabel});
@@ -302,27 +303,59 @@ class GlassIconButton extends StatelessWidget {
   final String? semanticLabel;
 
   @override
-  Widget build(BuildContext context) => Semantics(
-        button: true,
-        label: semanticLabel,
-        child: Material(
-          color: Colors.white.withValues(alpha: .62),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(13),
-              side: BorderSide(color: Colors.white.withValues(alpha: .8))),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(13),
-            onTap: onTap,
+  Widget build(BuildContext context) {
+    final label = semanticLabel ?? icon;
+    return SizedBox(
+      width: 48,
+      height: 48,
+      child: Tooltip(
+        message: label,
+        excludeFromSemantics: true,
+        child: IconButton(
+          onPressed: onTap,
+          iconSize: 38,
+          padding: EdgeInsets.zero,
+          visualDensity: VisualDensity.standard,
+          constraints: const BoxConstraints.tightFor(width: 48, height: 48),
+          style: const ButtonStyle(
+            minimumSize: WidgetStatePropertyAll(Size(48, 48)),
+            maximumSize: WidgetStatePropertyAll(Size(48, 48)),
+            padding: WidgetStatePropertyAll(EdgeInsets.zero),
+            visualDensity: VisualDensity.standard,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          // IconButton owns the single tap/focus/disabled semantics action.
+          // Only its label is contributed here; the glyph is decorative.
+          icon: Semantics(
+            label: label,
+            excludeSemantics: true,
             child: SizedBox(
               width: 38,
               height: 38,
-              child: Center(
-                  child: Text(icon,
-                      style: hankenText(size: 17, color: OstinatoColors.inkSoft))),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: .62),
+                  borderRadius: BorderRadius.circular(13),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: .8),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    icon,
+                    style: hankenText(
+                      size: 17,
+                      color: OstinatoColors.inkSoft,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }
 
 /// Birincil eylem düğmesi — koyu, tam-genişlik.

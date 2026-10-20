@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/app_locale.dart';
+import 'package:ostinato/app/catalog_copy_tr.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
+import 'package:ostinato/app/design/ostinato_theme.dart';
+import 'package:ostinato/app/design/widgets.dart';
 import 'package:ostinato/app/onboarding_store.dart';
+import 'package:ostinato/app/screens/course_screen.dart';
 import 'package:ostinato/app/screens/instrument_screen.dart';
+import 'package:ostinato/app/screens/lesson_demo_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
 
 void main() {
@@ -16,13 +21,20 @@ void main() {
     cues = await CueTextResolver.load();
   });
   for (final language in ['en', 'tr']) {
-    Widget host(Widget child) => ContentRepositoryScope(
+    Widget host(Widget child, {double textScale = 1}) => ContentRepositoryScope(
       repo: repo,
       cueText: cues,
       child: MaterialApp(
+        theme: ostinatoTheme(),
         locale: Locale(language),
         supportedLocales: appSupportedLocales,
         localizationsDelegates: appLocalizationsDelegates,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.linear(textScale),
+          ),
+          child: child!,
+        ),
         home: child,
       ),
     );
@@ -70,6 +82,162 @@ void main() {
         expect(copy, isNot(contains('are measured but never graded')));
         expect(copy, isNot(contains('ders ölçülür ama puanlanmaz')));
         expect(tester.takeException(), isNull);
+      },
+    );
+    testWidgets(
+      'normal demo routes show static references with no user marker ($language)',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(320, 812));
+        addTearDown(() => tester.binding.setSurfaceSize(null));
+        final tr = language == 'tr';
+        final firstSentence = tr
+            ? 'Yalnız kayıtlı eğitmen referansları; bu sürümde kamera değerlendirmesi kapalıdır.'
+            : 'Recorded teacher references only; camera assessment is disabled in this release.';
+        var opened = 0;
+        for (final discipline in repo.disciplines) {
+          final demos = discipline.lessons.where(
+            (lesson) => lesson.kind == LessonKind.demoOnly,
+          );
+          for (final lesson in demos) {
+            final course = discipline.courses.singleWhere(
+              (course) => course.lessons.any((entry) => entry.id == lesson.id),
+            );
+            await tester.pumpWidget(
+              host(CourseScreenRoute(discipline: discipline, course: course)),
+            );
+            await tester.pumpAndSettle();
+            final row = find.byKey(Key('lesson-${lesson.id}'));
+            final rowCopy = tester
+                .widgetList<RichText>(
+                  find.descendant(of: row, matching: find.byType(RichText)),
+                )
+                .map((widget) => widget.text.toPlainText())
+                .join(' ');
+            expect(rowCopy, contains(firstSentence));
+            expect(rowCopy, isNot(contains('your own trunk')));
+            expect(rowCopy, isNot(contains('gövdenizin çizimiyle')));
+            await tester.ensureVisible(row);
+            await tester.tap(row);
+            await tester.pumpAndSettle();
+            expect(find.byType(LessonDemoScreenRoute), findsOneWidget);
+            final reason = find.byKey(const Key('demo-reason'));
+            expect(tester.widget<Text>(reason).data, contains(firstSentence));
+
+            // Call the production reader in the rendered route's locale. Old
+            // release copy must never conceal a changed or unknown source.
+            final context = tester.element(reason);
+            final fields = <String, String>{
+              'demoOnlyReason': lesson.demoOnlyReason!,
+              'ifItStaysBlocked': lesson.ifBlockedStaysBlocked!,
+            };
+            for (final field in fields.entries) {
+              final key = '${lesson.id}.${field.key}';
+              final copy = catalogCopy(context, key, field.value);
+              expect(copy, isNot(field.value));
+              expect(copy, contains(tr ? 'referans' : 'reference'));
+              expect(find.text(copy), findsOneWidget);
+              expect(
+                catalogCopy(context, key, '${field.value} changed'),
+                '${field.value} changed',
+              );
+              expect(
+                catalogCopy(context, 'unreviewed.$key', field.value),
+                field.value,
+              );
+            }
+            final courseBack = find.byType(GlassIconButton).last;
+            await tester.ensureVisible(courseBack);
+            await tester.pumpAndSettle();
+            await tester.tapAt(
+              tester.getTopLeft(courseBack) + const Offset(1, 24),
+            );
+            await tester.pumpAndSettle();
+            expect(find.byType(CourseScreenRoute), findsOneWidget);
+            expect(find.byType(LessonDemoScreenRoute), findsNothing);
+            expect(tester.takeException(), isNull);
+
+            await tester.pumpWidget(
+              host(
+                Builder(
+                  key: ValueKey(lesson.id),
+                  builder: (context) => Scaffold(
+                    body: TextButton(
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => lessonScreenFor(
+                            discipline: discipline,
+                            lesson: lesson,
+                            hue: InstrumentHues.of(discipline.id),
+                          ),
+                        ),
+                      ),
+                      child: const Text('Open test reference'),
+                    ),
+                  ),
+                ),
+                textScale: 2,
+              ),
+            );
+            await tester.tap(find.text('Open test reference'));
+            await tester.pumpAndSettle();
+            expect(find.byType(LessonDemoScreenRoute), findsOneWidget);
+            opened++;
+            expect(
+              tester
+                  .widget<Text>(find.byKey(const Key('state-lesson-demo')))
+                  .data,
+              tr ? 'REFERANS · PUAN YOK' : 'REFERENCE · NO SCORING',
+            );
+            final note = tester.widget<Text>(
+              find.byKey(const Key('demo-live-gap-note')),
+            ).data!;
+            expect(
+              note,
+              contains(
+                tr
+                    ? 'Bu sürümde kamera değerlendirmesi kapalıdır'
+                    : 'Camera assessment is disabled in this release',
+              ),
+            );
+            final text = tester
+                .widgetList<Text>(
+                  find.descendant(
+                    of: find.byType(LessonDemoScreenRoute),
+                    matching: find.byType(Text),
+                  ),
+                )
+                .map((widget) => widget.data ?? '')
+                .join(' ');
+            for (final staleClaim in [
+              'MEASURED · NOT MARKED',
+              'ÖLÇÜM · PUAN YOK',
+              'only trunk posture measures live today',
+              'yalnız gövde duruşu ölçülür',
+              'your own trunk',
+              'gövdenizin çizimiyle',
+              'measurement shown, no mark',
+              'ölçüm gösterilir, puan verilmez',
+              'when this is live',
+              'Canlı ölçüm olduğunda',
+            ]) {
+              expect(text, isNot(contains(staleClaim)));
+            }
+            final range = tester.widget<HorizontalBandTrack>(
+              find.byType(HorizontalBandTrack),
+            );
+            expect(range.youDeg, isNull);
+            expect(find.byKey(const Key('you-marker')), findsNothing);
+            expect(tester.takeException(), isNull);
+            final back = find.byType(GlassIconButton);
+            await tester.ensureVisible(back);
+            await tester.pumpAndSettle();
+            await tester.tapAt(tester.getTopLeft(back) + const Offset(1, 24));
+            await tester.pumpAndSettle();
+            expect(find.text('Open test reference'), findsOneWidget);
+            expect(find.byType(LessonDemoScreenRoute), findsNothing);
+          }
+        }
+        expect(opened, greaterThan(0));
       },
     );
     testWidgets(

@@ -1,10 +1,15 @@
 import 'package:flutter/widgets.dart';
 
-/// The versioned English catalog remains the source of product claims. A
-/// Turkish sentence is used only for the exact catalog text it was reviewed
-/// against; changed source text stays visible in English until retranslated.
+/// The versioned catalog preserves historical research text. Narrow release
+/// presentation overrides and Turkish copy apply only to their reviewed source
+/// fingerprints; changed source text stays visible until it is reviewed again.
 String catalogCopy(BuildContext context, String key, String source) {
-  if (Localizations.localeOf(context).languageCode != 'tr') return source;
+  final turkish = Localizations.localeOf(context).languageCode == 'tr';
+  final releaseCopy = _referenceOnlyEnglishCopy[key];
+  if (releaseCopy != null && _sourceFingerprints[key] == _fingerprint(source)) {
+    return turkish ? _turkishCopy[key] ?? releaseCopy : releaseCopy;
+  }
+  if (!turkish) return source;
   return hasCurrentTurkishCatalogCopy(key, source)
       ? _turkishCopy[key]!
       : source;
@@ -29,6 +34,22 @@ String _fingerprint(String source) {
   }
   return '${source.length}:${first.toRadixString(16)}:${second.toRadixString(16)}';
 }
+
+// Release presentation for the six reviewed historical arms fields only.
+// Keep the source fingerprints unchanged: this is not a rewrite of the dataset
+// or permission to reuse an old override after its source changes.
+const _referenceOnlyReason =
+    'Recorded teacher references only; camera assessment is disabled in this release. The band shows a static elbow and forearm range. Your own elbow angle is not shown; this page does not measure your body or assess your posture.';
+const _referenceOnlyReading =
+    'These historical reference notes remain available to read. They do not provide a personal measurement or score, and they do not promise camera assessment.';
+const Map<String, String> _referenceOnlyEnglishCopy = <String, String>{
+  'guitar.foundations.arms.demoOnlyReason': _referenceOnlyReason,
+  'guitar.foundations.arms.ifItStaysBlocked': _referenceOnlyReading,
+  'voice.foundations.arms.demoOnlyReason': _referenceOnlyReason,
+  'voice.foundations.arms.ifItStaysBlocked': _referenceOnlyReading,
+  'piano.foundations.arms.demoOnlyReason': _referenceOnlyReason,
+  'piano.foundations.arms.ifItStaysBlocked': _referenceOnlyReading,
+};
 
 // Generated from the reviewed English fields in assets/content/library.json.
 // The focused catalog test checks every live field and catches source drift.
@@ -123,10 +144,10 @@ const Map<String, String> _turkishCopy = <String, String>{
   'guitar.foundations.open_chords.lockedReason': 'Akor tanıma sentetik seste sekiz akorun tamamında, yanlış hüküm vermeden çalıştı. Gerçek gitara ait üç bağımsız kayıttaki 34 akor örneğinde ise bu kursun üç sesli akorlarında doğruluk yalnız %15,3 oldu; puanlama için gereken %90’ın çok altında. Hataların çoğu motorun tahmin etmek yerine daha zor ritimli eşlik sinyalini reddetmesinden, kalanı belirli akor çiftlerini karıştırmasından kaynaklanır. Nedenini bilsek de gerçek çalmada başarısız olan bir ölçüme göre puan vermeyiz.',
   'guitar.foundations.strum_timing.lockedReason': 'İki ayrı engel var. Pena vuruşunun ürettiği altı yakın nota başlangıcını tek akor olayına bağlayan adım yok. Bu adım olsa bile ritimden ne kadar sapmanın hata olduğuna ilişkin eğitmen verisi yok. Karşılaştırma dayanağı olmadan sayı üretip bu dersi açmayız.',
   'guitar.foundations.chords_beyond_eight.lockedReason': 'Bu kurs sekiz açık akor öğretir; motor artık diğerlerini adlarıyla reddeder. Önceden çalınan Si bemol, 29 pencerenin 28’inde güvenle Re minör diye raporlanıyordu; çünkü motor yalnız sekiz akor arasından seçim yapıyordu. Artık 24 akoru değerlendirir ve dersin kapsamı dışındaki kazananı reddeder. Diğer 16 akordaki doğruluğu ölçmeden o derslerde puan veremeyiz.',
-  'guitar.foundations.arms.demoOnlyReason': 'Kaydettiğimiz eğitmenlerin dirsek ve önkol aralığını gövdenizin çizimiyle birlikte görürsünüz. Kendi dirsek açınız gösterilmez: bu sürümde canlı dirsek ölçümü yoktur; bu yüzden çizimde kollar kesiklidir ve eklem noktaları yoktur. Ölçüm olsa bile dürüst bir puanlama dayanağı bulunmuyor.',
+  'guitar.foundations.arms.demoOnlyReason': 'Yalnız kayıtlı eğitmen referansları; bu sürümde kamera değerlendirmesi kapalıdır. Bant, dirsek ve önkol için statik referans aralığını gösterir. Kendi dirsek açınız gösterilmez; bu sayfa vücudunuzu ölçmez veya duruşunuzu değerlendirmez.',
   'guitar.foundations.arms.blockedBy': 'Referanstaki eğitmenlerin dirsek ve önkol açıları 39–105° arasında yayılır. Bu aralıktan türetilen tolerans neredeyse hiçbir şeyi hata saymaz; daha dar bir tolerans ise normal stil farkını hata sayar.',
   'guitar.foundations.arms.unblockedBy': 'Bu eklem zincirinde stil ile hatayı ayıran bir ölçüm gerekir. Örneğin kayıtlar eğitim amacıyla etiketlenirse uyum farklı amaçlar arasında değil, aynı amaç içinde hesaplanabilir.',
-  'guitar.foundations.arms.ifItStaysBlocked': 'Ders olduğu gibi kalır: ölçüm gösterilir, puan verilmez. Bu kalıcı da olabilecek meşru bir durumdur; ancak kamera bu eklemleri görebildiği için kesin kalıcı demiyoruz. Eksik olan görüş değil, uzlaşıdır.',
+  'guitar.foundations.arms.ifItStaysBlocked': 'Bu tarihsel referans notlarını okuyabilirsiniz. Notlar kişisel ölçüm veya puan sunmaz; kamera değerlendirmesi vaadi taşımaz.',
   'guitar.foundations.foot_support.unblockedBy': 'Bacakları gerçekten kadraja alan görüntülerden yeni bir duruş referansı gerekir. Bugünkü referans belden yukarı gitar eğitim çekimlerinden oluşur; mevcut veriden çıkarılacak bir eşik yetmez.',
   'guitar.foundations.open_chords.unblockedBy': 'Gerçek çalmada ölçülmüş bir doğruluk artışı gerekir; tek veri kümesine uydurulmuş yeni eşik yetmez. Paylaşılan algılayıcı kodu değiştirilmeden önce, dersin istediği tek ve tutulmuş akora daha yakın gerçek kayıtlarla sınamak gerekir. Bu duruş derslerinde mikrofon girişi de yoktur; doğruluk tek engel değildir.',
   'guitar.foundations.strum_timing.unblockedBy': 'Altı yakın nota başlangıcını tek akora bağlayan adım ve ritim sapmasını değerlendiren eğitmen verisi birlikte gerekir. İlkini tek başına kurmak, karşılaştırılacak dayanağı olmayan bir sayı üretir. Ayrıca bu duruş derslerinde mikrofon girişi yoktur; ölçüm doğrulanmamıştır ve çalmanızı dinleme yolu bulunmaz.',
@@ -148,10 +169,10 @@ const Map<String, String> _turkishCopy = <String, String>{
   'voice.foundations.sustained_note.lockedReason': 'Perde motoru gerçektir ve neyi ölçtüğü gösterilebilir; ancak yalnız gerçek çello kayıtlarında doğrulandı (48 bölüm, ortanca hata 19 sentin altında). Gerçek şan sesinde hiç doğrulanmadı. Vibrato, nefes ve formantlar çellodan farklıdır ve sonucu bozabilir. Şarkınızı, şan üzerinde doğrulanmamış bir ölçüme göre puanlamayız. Aynı hattan geçirilen bilinen perdeli bir gerçek şan kaydı bu ölçüm engelini kaldırır.',
   'voice.foundations.vibrato.lockedReason': 'Vibrato ölçülür ama puanlanmaz; eksik olan araç değildir. Doğru hız için eğitmen verisi yoktur. Burada sayı uydurmak ölçüm kılığında tahmin olur. Ders motor gelişince değil, bir referans oluşunca açılabilir.',
   'voice.foundations.knees_and_chin.lockedReason': 'Şan eğitmenlerinin sık adlandırdığı kilitli diz ve kalkık çeneyi göremiyoruz. Belden yukarı eğitim görüntülerinden oluşturulan referansta baş noktası yoktur; dizler de çoğunlukla kadraj dışındadır. Bu nedenle çenenin neye göre kalktığı veya dizin kilitlenip kilitlenmediği bilinmez. Yeni bir eşik değil, bu noktaları içeren yeni görüntüler gerekir.',
-  'voice.foundations.arms.demoOnlyReason': 'Kaydettiğimiz eğitmenlerin dirsek ve önkol aralığını gövdenizin çizimiyle birlikte görürsünüz. Kendi dirsek açınız gösterilmez: bu sürümde canlı dirsek ölçümü yoktur; bu yüzden çizimde kollar kesiklidir ve eklem noktaları yoktur. Ölçüm olsa bile dürüst bir puanlama dayanağı bulunmuyor.',
+  'voice.foundations.arms.demoOnlyReason': 'Yalnız kayıtlı eğitmen referansları; bu sürümde kamera değerlendirmesi kapalıdır. Bant, dirsek ve önkol için statik referans aralığını gösterir. Kendi dirsek açınız gösterilmez; bu sayfa vücudunuzu ölçmez veya duruşunuzu değerlendirmez.',
   'voice.foundations.arms.blockedBy': 'Referanstaki eğitmenlerin dirsek ve önkol açıları 43–88° arasında yayılır. Bu aralıktan türetilen tolerans neredeyse hiçbir şeyi hata saymaz; daha dar bir tolerans normal stil farkını hata sayar.',
   'voice.foundations.arms.unblockedBy': 'Bu eklem zincirinde stil ile hatayı ayıran bir ölçüm gerekir. Örneğin kayıtlar eğitim amacıyla etiketlenirse uyum farklı amaçlar arasında değil, aynı amaç içinde hesaplanabilir.',
-  'voice.foundations.arms.ifItStaysBlocked': 'Ders olduğu gibi kalır: ölçüm gösterilir, puan verilmez. Bu kalıcı da olabilecek meşru bir durumdur; ancak kamera bu eklemleri görebildiği için kesin kalıcı demiyoruz. Eksik olan görüş değil, uzlaşıdır.',
+  'voice.foundations.arms.ifItStaysBlocked': 'Bu tarihsel referans notlarını okuyabilirsiniz. Notlar kişisel ölçüm veya puan sunmaz; kamera değerlendirmesi vaadi taşımaz.',
   'voice.foundations.sustained_note.unblockedBy': 'Bilinen perdeli bir gerçek şan kaydının çello kayıtlarıyla aynı yöntemle ölçülmesi gerekir. Motor tamamdır ve çellodaki hatası bilinir; eksik olan şan ölçümüdür. Ayrıca bu duruş derslerinde mikrofon girişi yoktur; ölçüm doğrulanmamıştır ve sesinizi dinleme yolu bulunmaz.',
   'voice.foundations.vibrato.unblockedBy': 'Vibrato hızını anlamlı bir aralıkla karşılaştırabilmek için yeterli sayıda bağımsız şan eğitmeninden, birbirine yakın ölçümler gerekir. Motor hızı zaten ölçer; karşılaştırma verisi yoktur. Ayrıca bu duruş derslerinde mikrofon girişi yoktur; ölçüm doğrulanmamıştır ve sesinizi dinleme yolu bulunmaz.',
   'voice.foundations.knees_and_chin.unblockedBy': 'Dizleri ve başı içeren yeni eğitim görüntüleri toplanmalı; referans bu iki hatanın gerektirdiği noktaları taşımalıdır. Bu kamera ve kadraj sorunudur, eşik sorunu değil.',
@@ -172,10 +193,10 @@ const Map<String, String> _turkishCopy = <String, String>{
   'piano.foundations.five_finger.lockedReason': 'Bir kayıtta her notayı ayırıp vuruşa göre zamanlayabiliyoruz. Odanızda bunu yapamıyoruz: bu duruş derslerinde mikrofon girişi yoktur. Mikrofon olsa bile bu sayılardan puan üretilemez; ritimden ne kadar sapmanın hata sayıldığına ilişkin piyano eğitmeni verisi yoktur. Motor da tam zamanında çalınan notayı 8,3 ms erken ve hızlanmayı yavaşlamadan daha ağır okuyarak yanlı sonuç verir.',
   'piano.foundations.shoulder_tension.lockedReason': 'Beş bağımsız eğitim kaynağına göre piyano eğitmenlerinin en sık adlandırdığı hata omuz gerginliğidir. Omuzları görüyoruz, ancak “omuzların kulaklara yükselmesi” bir yükseklik; bizim ölçtüğümüz ise açıdır. Üç eğitmenin omuz açıları bir tarafta 24°, diğerinde 5° farklı olduğundan üzerinde uzlaşılan bir konum da yoktur. Buna hata demek ölçüme dayanarak tahmin yürütmek olur.',
   'piano.foundations.hands_and_wrists.lockedReason': 'Poz modeli bilekleri ve kaba işaret, serçe ve başparmak noktalarını içerir; parmak eklemlerini çözmez. Ostinato’da bu noktalardan kurulmuş canlı bir el biçimi ölçümü ve iyi bileğe ilişkin eğitmen referansı yoktur. Uygun ölçüm ve referans doğrulanana kadar bilek çökmesi, düz parmaklar ve el biçimi değerlendirilemez.',
-  'piano.foundations.arms.demoOnlyReason': 'Kaydettiğimiz eğitmenlerin dirsek ve önkol aralığını gövdenizin çizimiyle birlikte görürsünüz. Kendi dirsek açınız gösterilmez: bu sürümde canlı dirsek ölçümü yoktur; bu yüzden çizimde kollar kesiklidir ve eklem noktaları yoktur. Ölçüm olsa bile dürüst bir puanlama dayanağı bulunmuyor.',
+  'piano.foundations.arms.demoOnlyReason': 'Yalnız kayıtlı eğitmen referansları; bu sürümde kamera değerlendirmesi kapalıdır. Bant, dirsek ve önkol için statik referans aralığını gösterir. Kendi dirsek açınız gösterilmez; bu sayfa vücudunuzu ölçmez veya duruşunuzu değerlendirmez.',
   'piano.foundations.arms.blockedBy': 'Referanstaki eğitmenlerin dirsek ve önkol açıları 20–77° arasında yayılır. Bu aralıktan türetilen tolerans neredeyse hiçbir şeyi hata saymaz; daha dar bir tolerans normal stil farkını hata sayar.',
   'piano.foundations.arms.unblockedBy': 'Bu eklem zincirinde stil ile hatayı ayıran bir ölçüm gerekir. Örneğin kayıtlar eğitim amacıyla etiketlenirse uyum farklı amaçlar arasında değil, aynı amaç içinde hesaplanabilir.',
-  'piano.foundations.arms.ifItStaysBlocked': 'Ders olduğu gibi kalır: ölçüm gösterilir, puan verilmez. Bu kalıcı da olabilecek meşru bir durumdur; ancak kamera bu eklemleri görebildiği için kesin kalıcı demiyoruz. Eksik olan görüş değil, uzlaşıdır.',
+  'piano.foundations.arms.ifItStaysBlocked': 'Bu tarihsel referans notlarını okuyabilirsiniz. Notlar kişisel ölçüm veya puan sunmaz; kamera değerlendirmesi vaadi taşımaz.',
   'piano.foundations.five_finger.unblockedBy': 'Ritimden ne kadar sapmanın hata olduğunu belirleyen eğitmen verisi ve motorun eşitsiz yanlılığının düzeltilmesi gerekir (tam zamanlı notayı 8,3 ms erken okur). İkisi de ölçüm işidir, bizim görüşümüzle seçilecek sayı değildir. Ayrıca bu duruş derslerinde mikrofon girişi yoktur; ölçüm doğrulanmamıştır ve çalmanızı dinleme yolu bulunmaz.',
   'piano.foundations.shoulder_tension.unblockedBy': 'Yalnız açı ölçüldüğü için yeni bir omuz yüksekliği ölçümü ve eğitmenler arasındaki kendi referans istatistiği gerekir. İkisi de eksiktir; hiçbiri keyfî seçilecek bir sayı değildir.',
   'piano.foundations.hands_and_wrists.unblockedBy': 'Doğrulanmış bir el biçimi ölçümü ve eğitmen referansı gerekir. Mevcut poz noktaları bileği ve kaba el uçlarını içerir, fakat parmak eklemlerini çözmez; bu noktalardan güvenilir değerlendirme yapılıp yapılamayacağı gösterilmedi.',

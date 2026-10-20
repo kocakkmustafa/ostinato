@@ -6,23 +6,8 @@ import '../catalog_copy_tr.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 
-/// ⭐ Üçüncü görsel sınıf — "ölçülür ama puanlanmaz" (§4/⑧). "Bilgi" tonu,
-/// "hata" tonu DEĞİL: aynı camsı kart dili, aynı bütünlük.
-///
-/// 📌 İSİMLİ SEÇİM (koordinatör hükmü, 2026-08-06): tasarımın iki paralel
-/// "Explorations" çatalından (`demoTreatment` A/B) **Treatment A seçildi**
-/// — rozet-başlık + TEK renkli kart + 3-bölümlü beyaz kart (WHY NO MARK /
-/// WHAT WOULD CHANGE IT / IF IT NEVER DOES), Treatment B'nin "iki eşit kart"
-/// simetrisi DENENMEDİ. Tek sadakatsizlik: A'nın 52px canlı-sayı öğesi
-/// burada yok — bkz. aşağıdaki İSİMLİ SINIR.
-///
-/// ⚠️ İSİMLİ SINIR (giydirme turu, 2026-08-05): tasarımın canlı kol/önkol
-/// açısı okuması (`armLive`) burada YOK. `CameraPostureAdapter` bugün yalnız
-/// `trunk_tilt` hesaplıyor — dirsek açısı için motion_core'da
-/// `StandardJoints.leftElbow/rightElbow` hazır ama Ostinato'nun canlı
-/// zincirine hiç bağlanmadı. Sahte bir sayı GÖSTERMEK yerine bu ekran
-/// gerçek statik dürüstlük metnini (demoOnlyReason + promotionPath) taşır
-/// ve canlı ölçümün henüz yazılmadığını AÇIKÇA söyler — taklit etmez.
+/// Historical teacher-reference notes. This page has no camera input and
+/// displays neither a body measurement nor a posture assessment.
 class LessonDemoScreenRoute extends StatelessWidget {
   const LessonDemoScreenRoute(
       {super.key, required this.discipline, required this.lesson, required this.hue});
@@ -50,7 +35,7 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                     color: hue.chip, borderRadius: BorderRadius.circular(8)),
-                child: Text(localized(context, 'MEASURED · NOT MARKED', 'ÖLÇÜM · PUAN YOK'),
+                child: Text(localized(context, 'REFERENCE · NO SCORING', 'REFERANS · PUAN YOK'),
                     key: const Key('state-lesson-demo'),
                     style: monoText(color: hue.ink)),
               ),
@@ -72,8 +57,8 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker(localized(context, 'Your elbow angle, when this is live',
-                        'Canlı ölçüm olduğunda dirsek açınız'), color: hue.ink),
+                    kicker(localized(context, 'Recorded teacher reference range',
+                        'Kaydedilmiş eğitmen referansı aralığı'), color: hue.ink),
                     const SizedBox(height: 14),
                     if (arm != null)
                       Column(
@@ -85,7 +70,6 @@ class LessonDemoScreenRoute extends StatelessWidget {
                               lowDeg: arm.lowDeg,
                               highDeg: arm.highDeg,
                               maxDeg: 120,
-                              youDeg: (arm.lowDeg + arm.highDeg) / 2,
                               color: hue.ink,
                             ),
                           ),
@@ -116,8 +100,8 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    kicker(localized(context, 'Why there is no mark',
-                        'Neden puan verilmiyor')),
+                    kicker(localized(context, 'Why this is not a target',
+                        'Bu aralık neden hedef değil')),
                     const SizedBox(height: 8),
                     Text(catalogCopy(context, '${lesson.id}.blockedBy',
                             lesson.blockedBy ?? ''),
@@ -125,8 +109,8 @@ class LessonDemoScreenRoute extends StatelessWidget {
                     const SizedBox(height: 12),
                     const Divider(height: 1),
                     const SizedBox(height: 12),
-                    kicker(localized(context, 'What would change it',
-                        'Bunu ne değiştirebilir')),
+                    kicker(localized(context, 'What research would be needed',
+                        'Hangi araştırma gerekir')),
                     const SizedBox(height: 8),
                     Text(catalogCopy(context, '${lesson.id}.unblockedBy',
                             lesson.unblockedBy ?? ''),
@@ -134,8 +118,8 @@ class LessonDemoScreenRoute extends StatelessWidget {
                     const SizedBox(height: 12),
                     const Divider(height: 1),
                     const SizedBox(height: 12),
-                    kicker(localized(context, 'If it never does',
-                        'Değişmezse ne olur')),
+                    kicker(localized(context, 'What this page offers',
+                        'Bu sayfa ne sunuyor')),
                     const SizedBox(height: 8),
                     Text(catalogCopy(context, '${lesson.id}.ifItStaysBlocked',
                             lesson.ifBlockedStaysBlocked ?? ''),
@@ -150,15 +134,10 @@ class LessonDemoScreenRoute extends StatelessWidget {
                   color: const Color(0x0D2A2533),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                // PLACEHOLDER(data): bu kart canlı dirsek/önkol açısı
-                // GÖSTERMEZ, yalnız statik ArmRangeHint (öğretmen aralığı)
-                // gösterir — unblocked by: motion_core'daki
-                // StandardJoints.leftElbow/rightElbow CameraPostureAdapter'a
-                // bağlanıp gerçek zamanlı bir açı üretilince (aynı sınır:
-                // widgets.dart içindeki SkeletonFigurePainter dirsek/bilek
-                // noktaları).
-                  // closedPaths: none-known
-                  // user-surface: demo-live-gap-note
+                // PLACEHOLDER(data): yalnız statik kayıtlı referans aralığı.
+                // Kamera kapalıdır; kullanıcıya ait ölçüm veya imleyici yoktur.
+                // closedPaths: none-known
+                // user-surface: demo-live-gap-note
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -166,27 +145,12 @@ class LessonDemoScreenRoute extends StatelessWidget {
                         size: 18, color: OstinatoColors.textMuted),
                     const SizedBox(width: 10),
                     Expanded(
-                      // DÜZELTME (koordinatör, 2026-08-06, M-F-186): "yet"
-                      // çıkarıldı — bir zaman taahhüdüydü. Kalan cümle
-                      // bugünün OLGUSUNU söylüyor, gelecek vaat etmiyor.
                       child: Text(
                         localized(
                           context,
-                          'Elbow tracking is not wired into this build — '
-                              'only trunk posture measures live today. The text '
-                              'above is real; the live number is not, so we are '
-                              'not showing one.',
-                          'Bu sürümde dirsek takibi bağlı değildir; canlı olarak '
-                              'yalnız gövde duruşu ölçülür. Yukarıdaki açıklama '
-                              'gerçektir, ancak canlı dirsek değeri olmadığı için '
-                              'bir sayı göstermiyoruz.',
+                          'Camera assessment is disabled in this release. No live trunk or elbow angle is measured or displayed here. The range above comes from recorded references.',
+                          'Bu sürümde kamera değerlendirmesi kapalıdır. Burada canlı gövde veya dirsek açısı ölçülmez ve gösterilmez. Yukarıdaki aralık kayıtlı referanslardan gelir.',
                         ),
-                        // H-44 (2026-08-16): İNECEK KALEM — dirsek/önkol
-                        // açısı CANLI ölçüme eklenirse (kart hâlâ elbow'u
-                        // GEREKÇELİ dar bırakabilir — bkz. guitar instrument
-                        // ekranındaki öğretmen-varyansı notu, "style not
-                        // error" — ama o zaman bu cümle "not wired" değil
-                        // "not graded" demeli). O gün ADIYLA güncellenmeli.
                         key: const Key('demo-live-gap-note'),
                         style: hankenText(
                             size: 12.5, color: OstinatoColors.textMuted),
