@@ -36,19 +36,30 @@ void main() {
         ),
       ),
     );
-    // The three bundled-asset reads alternate between real I/O and fake-zone
-    // continuations. Drain both until boot completes instead of timing one read.
-    for (
-      var attempt = 0;
-      attempt < 60 &&
-          find.byType(CircularProgressIndicator).evaluate().isNotEmpty;
-      attempt++
-    ) {
+    // Async MaterialApp localizations may hide both its spinner and Navigator.
+    // Wait for the actual root, retaining the same real-IO turn budget.
+    final navigator = find.byType(Navigator);
+    final expectedRoot = recovery.value
+        ? find.text('PASSWORD_RECOVERY', skipOffstage: false)
+        : find.byType(LibraryScreen, skipOffstage: false);
+    bool ready() =>
+        navigator.evaluate().length == 1 &&
+        expectedRoot.evaluate().length == 1;
+    for (var attempt = 0; attempt < 60 && !ready(); attempt++) {
       await tester.runAsync(() async {
         await Future<void>.delayed(const Duration(milliseconds: 5));
       });
       await tester.pump();
     }
+    expect(
+      ready(),
+      isTrue,
+      reason: 'Actual recovery root and Navigator must finish boot: '
+          'navigator=${navigator.evaluate().length}, '
+          'expectedRoot=${expectedRoot.evaluate().length}, '
+          'spinner=${find.byType(CircularProgressIndicator).evaluate().length}, '
+          'contentError=${find.byKey(const Key('ostinato-content-load-failure')).evaluate().length}',
+    );
     await tester.pumpAndSettle();
   }
 
