@@ -39,7 +39,7 @@ dependencies:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_account
-      ref: ef60e346934d7e5d45c87deb81583b263575b208
+      ref: d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d
   ostinato_posture:
     path: packages/ostinato_posture
   # OST-P0-002 (2026-08-19): şimdiye kadar `ostinato_audio` yalnız KENDİ
@@ -56,18 +56,18 @@ dependencies:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_core
-      ref: ef60e346934d7e5d45c87deb81583b263575b208
+      ref: d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d
   # Flutter bundle bytes are checked by the same pinned Core content contract.
   # Production manifests and media playback remain separate acceptance gates.
   motion_content:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_content
-      ref: ef60e346934d7e5d45c87deb81583b263575b208
+      ref: d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d
   motion_camera:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
-      ref: ef60e346934d7e5d45c87deb81583b263575b208
+      ref: d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d
       path: packages/motion_camera
 
   permission_handler: ^12.0.3

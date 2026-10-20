@@ -12,8 +12,8 @@ import 'package:test/test.dart';
 /// hiçbir test bunu yakalamıyordu). Bu test o günü beklemeden kırar: iki
 /// `pubspec.lock`'un `motion_core` için çözdüğü `resolved-ref` birebir
 /// aynı olmalı.
-/// Onaylanan tek ref (M-F-263): hesap/üyelik çekirdeğini de içeren
-/// `f2ea161c`. Tüm tüketiciler aynı tam ref'i kullanır.
+/// Public tüketici checkpoint'i: hesap/üyelik ve 14 dil/tema sözleşmesini
+/// içeren `d69e1078`. Tüm tüketiciler aynı tam ref'i kullanır.
 ///
 /// **REF TAM 40-SHA OLMAK ZORUNDA** (M-F-263 zeyil-2, Choreia+Gravita ölçtü —
 /// ve burada da ÖLÇÜLDÜ): pub, git ref'lerini ÇÖZMEZ, STRING olarak
@@ -23,8 +23,8 @@ import 'package:test/test.dart';
 /// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
 /// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
 /// anlaşma, ancak iki taraf varken sınanabilir.)
-const String _mandatedRef = 'ef60e346934d7e5d45c87deb81583b263575b208';
-const String _mandatedVersion = '0.12.0';
+const String _mandatedRef = 'd69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d';
+const String _mandatedVersion = '0.13.0';
 
 void main() {
   test('pin MÜHÜRLENEN refte — "ikisi aynı" yetmez, DOĞRU şeyde aynı olmalı', () {
@@ -55,10 +55,11 @@ void main() {
           '../../tools/dart_pilot/.dart_tool/package_config.json');
       return;
     }
-    final String? audioRef =
-        _resolvedRef(File('pubspec.lock').readAsStringSync());
-    final String? pilotRef = _resolvedRef(
-        File('../../tools/dart_pilot/pubspec.lock').readAsStringSync());
+    final String audioLock = File('pubspec.lock').readAsStringSync();
+    final String pilotLock =
+        File('../../tools/dart_pilot/pubspec.lock').readAsStringSync();
+    final String? audioRef = _resolvedRef(audioLock);
+    final String? pilotRef = _resolvedRef(pilotLock);
 
     expect(audioRef, isNotNull,
         reason: 'pubspec.lock içinde motion_core.resolved-ref bulunamadı — '
@@ -67,6 +68,10 @@ void main() {
         reason: 'tools/dart_pilot/pubspec.lock içinde '
             'motion_core.resolved-ref bulunamadı — önce o klasörde de '
             '`dart pub get` koştur');
+    expect(_fieldOf(audioLock, 'ref'), _mandatedRef);
+    expect(_fieldOf(pilotLock, 'ref'), _mandatedRef);
+    expect(audioRef, _mandatedRef);
+    expect(pilotRef, _mandatedRef);
     expect(audioRef, pilotRef,
         reason: 'İKİ KİLİT DOSYASI FARKLI SÜRÜM ÇÖZÜYOR: ostinato_audio '
             '$audioRef, dart_pilot $pilotRef. Pin yükseltmesi her iki '

@@ -9,7 +9,7 @@ import 'package:ostinato/app/guitar_journey.dart';
 
 const String _manifestPath = 'assets/motion_content/manifest.json';
 const String _coursePath = 'assets/content/guitar_journey.v1.json';
-const String _corePin = 'ef60e346934d7e5d45c87deb81583b263575b208';
+const String _corePin = 'd69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d';
 // Current reviewed course asset. Any authored course change requires a repin.
 const int _courseByteLength = 995884;
 const String _courseSha256 =
@@ -139,10 +139,11 @@ ContentBundleLoader _loader(_ManifestOverlayBundle bundle) =>
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('content, camera, and core keep one immutable source pin', () {
+  test('published Motion packages and posture keep one immutable source pin', () {
     final descriptor = File('pubspec.yaml').readAsStringSync();
     final lock = File('pubspec.lock').readAsStringSync();
     for (final package in <String>[
+      'motion_account',
       'motion_core',
       'motion_camera',
       'motion_content',
@@ -159,8 +160,18 @@ void main() {
       if (override.existsSync()) {
         _expectNoPublishedCoreOverride(override.readAsStringSync(), package);
       }
+      final declared = _packageBlock(descriptor, package);
+      expect(declared, contains('path: packages/$package'));
+      expect(
+        declared,
+        contains('https://github.com/kocakkmustafa/motion-core.git'),
+      );
       final locked = _packageBlock(lock, package);
       _expectPinnedGitLock(locked);
+      expect(locked, contains('path: "packages/$package"'));
+      if (package == 'motion_core') {
+        expect(locked, contains('    version: "0.13.0"'));
+      }
       if (package == 'motion_content') {
         expect(
           RegExp(
@@ -170,6 +181,48 @@ void main() {
           hasLength(1),
         );
       }
+    }
+    final entitlements = _packageBlock(lock, 'motion_entitlements');
+    _expectPinnedGitLock(entitlements);
+    expect(entitlements, contains('path: "packages/motion_entitlements"'));
+    final override = File('pubspec_overrides.yaml');
+    if (override.existsSync()) {
+      _expectNoPublishedCoreOverride(
+        override.readAsStringSync(),
+        'motion_entitlements',
+      );
+    }
+
+    const postureRoot = 'packages/ostinato_posture';
+    final postureDescriptor = _packageBlock(
+      File('$postureRoot/pubspec.yaml').readAsStringSync(),
+      'motion_core',
+    );
+    expect(
+      RegExp(
+        r'^      ref: ' + RegExp.escape(_corePin) + r'$',
+        multiLine: true,
+      ).allMatches(postureDescriptor),
+      hasLength(1),
+    );
+    expect(postureDescriptor, contains('path: packages/motion_core'));
+    expect(
+      postureDescriptor,
+      contains('https://github.com/kocakkmustafa/motion-core.git'),
+    );
+    final postureLock = _packageBlock(
+      File('$postureRoot/pubspec.lock').readAsStringSync(),
+      'motion_core',
+    );
+    _expectPinnedGitLock(postureLock);
+    expect(postureLock, contains('path: "packages/motion_core"'));
+    expect(postureLock, contains('    version: "0.13.0"'));
+    final postureOverride = File('$postureRoot/pubspec_overrides.yaml');
+    if (postureOverride.existsSync()) {
+      _expectNoPublishedCoreOverride(
+        postureOverride.readAsStringSync(),
+        'motion_core',
+      );
     }
   });
 
