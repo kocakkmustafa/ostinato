@@ -205,8 +205,9 @@ final class _AppLocaleHostState extends State<AppLocaleHost>
         );
     final assets = widget.translationBundle ?? rootBundle;
     final request = (assets, canonicalLanguageTag(locale));
-    if (_requested?.$2 == request.$2 && identical(_requested?.$1, assets))
+    if (_requested?.$2 == request.$2 && identical(_requested?.$1, assets)) {
       return;
+    }
     _requested = request;
     final generation = ++_generation;
     unawaited(_prepareAndPublish(generation, locale, assets));
