@@ -5,20 +5,17 @@
 // It does not invoke main(), initialize live Auth, or open physical audio.
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:motion_account/motion_account.dart';
 import 'package:ostinato/app/account_connection.dart';
-import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/app_locale_preferences.dart';
 import 'package:ostinato/app/app_theme.dart';
 import 'package:ostinato/app/app_theme_preferences.dart';
 import 'package:ostinato/app/app_translation_catalog.dart'
     show canonicalLanguageTag;
-import 'package:ostinato/app/audio/native_audio_state.dart';
 import 'package:ostinato/app/audio/practice_audio_lease.dart';
 import 'package:ostinato/app/audio/practice_audio_root.dart';
 import 'package:ostinato/app/guitar_journey.dart';
