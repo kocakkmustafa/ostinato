@@ -60,7 +60,7 @@ jobs:
 
       - name: Gitar v2l kaynak kimliği (oynatma kapalı)
         run: |
-          python3 -m unittest discover -s tool -p 'test_check_v2l_source_projection.py'
+          python3 -m unittest discover -s tool -p 'test_*source_projection.py'
           python3 tool/check_v2l_source_projection.py --check
 
       - name: Gitar kursu paket bütünlüğü
@@ -117,7 +117,7 @@ jobs:
 
       - name: Gitar v2l kaynak kimliği (oynatma kapalı)
         run: |
-          python3 -m unittest discover -s tool -p 'test_check_v2l_source_projection.py'
+          python3 -m unittest discover -s tool -p 'test_*source_projection.py'
           python3 tool/check_v2l_source_projection.py --check
 
       - name: Android release build — imzasız, KOD YOLU kanıtı
@@ -156,7 +156,7 @@ jobs:
 
       - name: Gitar v2l kaynak kimliği (oynatma kapalı)
         run: |
-          python3 -m unittest discover -s tool -p 'test_check_v2l_source_projection.py'
+          python3 -m unittest discover -s tool -p 'test_*source_projection.py'
           python3 tool/check_v2l_source_projection.py --check
 
       - name: iOS release build, imzasız

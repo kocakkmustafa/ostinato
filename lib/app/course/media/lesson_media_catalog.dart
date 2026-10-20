@@ -8,16 +8,16 @@ import '../../flutter_bundle_content_asset_reader.dart';
 import '../../guitar_journey.dart';
 import 'ostinato_source_projection_pin.dart';
 
-// Closed v2k QA source identity. These pins are not media acceptance roots.
+// Closed app-only education QA source identity. These pins are not media acceptance roots.
 const ostinatoMediaManifestSha256 =
     OstinatoSourceProjectionPin.sourceManifestSha256;
 const ostinatoMediaSourceCatalogSha256 =
-    'fc838a2276cae3146951b63004ad9fba4075cfc7fae0397fc602291762b7074f';
+    '469b187a110db399d2b6a2967d4084efb7a7acd8aa6394fb8486393907a1f5f2';
 const _sourceCatalogPath =
     'assets/motion_content/ostinato_source_pins_v2k.json';
 const _opsSourceCatalogSha256 = OstinatoSourceProjectionPin.sourceCatalogSha256;
 const _sourceProofSha256 =
-    'dec615e14881b86b7676e1157f63b8bf6269026d856e59f2ee3a65d7f97e512a';
+    '272fd56aeab1477f7a27eb7666728e7a8ce85a88878f68309b2e997c3c4ea087';
 const _courseSourceSha256 = OstinatoSourceProjectionPin.courseSha256;
 const _coursePath = OstinatoSourceProjectionPin.coursePath;
 const _mediaRoot = 'assets/content/media/';
@@ -26,7 +26,7 @@ const _maxCaptionBytes = 1024 * 1024;
 const _maxTotalBytes = 512 * 1024 * 1024;
 final _sha = RegExp(r'^[0-9a-f]{64}$');
 
-/// One exact QA source row from the code-pinned Ostinato ops v2k subset.
+/// One exact QA source row from the app-only education source catalog.
 /// There are no media candidates in the shipping catalog.
 @immutable
 final class LessonMediaSourcePin {

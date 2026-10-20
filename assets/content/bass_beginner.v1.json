@@ -480,8 +480,8 @@
         "tr": "4/4 say ve sonları yönet"
       },
       "teach": {
-        "en": "A 4/4 bar has four quarter beats. A note can ring across counts without another attack; a rest requires silence while counting. Gently touch the sounding string to stop it without striking the body or pressing it to a fret.",
-        "tr": "4/4 ölçüde dört dörtlük vuruş vardır. Nota yeni çekiş olmadan sayılar boyunca çınlayabilir; sus sayarken sessizlik gerektirir. Çınlayan teli gövdeye vurmadan veya perdeye bastırmadan hafif temasla sustur."
+        "en": "A 4/4 bar has four quarter beats. A note can ring across counts without another attack; a rest requires silence while counting. Gently touch the sounding string to stop it without striking the body or pressing it to a fret. Tempo is the speed of the beat. BPM means beats per minute; in these 4/4 tasks, each beat is a quarter note. If you use an available external metronome, let one click match each spoken number: 1, 2, 3, 4. At 60 BPM, clicks are one second apart; this is an example, not a required playing speed. Choose a pace at which you can prepare the next action without rushing.",
+        "tr": "4/4 ölçüde dört dörtlük vuruş vardır. Nota yeni çekiş olmadan sayılar boyunca çınlayabilir; sus sayarken sessizlik gerektirir. Çınlayan teli gövdeye vurmadan veya perdeye bastırmadan hafif temasla sustur. Tempo, vuruşun hızıdır. BPM dakikadaki vuruş sayısı demektir; bu 4/4 görevlerde her vuruş bir dörtlüktür. Mevcut bir harici metronom kullanıyorsan her tık bir söylediğin sayıya denk gelsin: 1, 2, 3, 4. 60 BPM’de tıklar bir saniye aralıklıdır; bu bir örnektir, zorunlu çalma hızı değildir. Sonraki hareketi acele etmeden hazırlayabildiğin bir hız seç."
       },
       "practice": {
         "en": "Open E: bar 1 pluck on 1 and ring through 4. Bar 2 pluck on 1, stop on 2, pluck on 3, stop on 4. Count evenly through the silence, repeat two bars then rest.",
@@ -532,16 +532,16 @@
         "tr": "Mi tel 4’te açık Mi1, perde 1 Fa1, perde 3 Sol1. La tel 3’te açık La1, perde 2 Si1. Re tel 2’de açık Re2, perde 2 Mi2. Yalnız rahatsa perde 1’de işaret, 2’de orta, 3’te yüzük kullan; aksi halde bırakıp rahat eli kaydırarak yeni perdede işaret kullan. Zorlanmış esnemede tüm konumları tutma."
       },
       "practice": {
-        "en": "On E play open, fret 1, open, fret 3 with a pause between attempts. Then A open/fret 2, then D open/fret 2. Speak string/fret and sounding name. Mute the previous note before switching.",
-        "tr": "Mi’de açık, perde 1, açık, perde 3 çal; denemeler arasında ara ver. Sonra La açık/perde 2, sonra Re açık/perde 2. Tel/perdeyi ve gerçek ses adını söyle. Değişmeden önce önceki notayı sustur."
+        "en": "On E play open, fret 1, open, fret 3 with a pause between attempts. Then A open/fret 2, then D open/fret 2. Speak string/fret and sounding name. Mute the previous note before switching. Then isolate a fretted ending: on string 3 fret 2, pluck B1 on count 1, let it ring through 2, stop on 3 and count 3–4 in silence. Ease the fretting pressure while keeping light finger contact on the string; gentle contact from a plucking finger can also stop it. Keep the other strings quiet. The intended sequence is B1 then silence, with no open A between them. Repeat on string 2 fret 2, E2 then silence, only after the first ending is clear.",
+        "tr": "Mi’de açık, perde 1, açık, perde 3 çal; denemeler arasında ara ver. Sonra La açık/perde 2, sonra Re açık/perde 2. Tel/perdeyi ve gerçek ses adını söyle. Değişmeden önce önceki notayı sustur. Sonra perdeli notanın sonunu ayır: tel 3 perde 2’de Si1’i 1’de çek, 2 boyunca çınlat, 3’te sustur ve 3–4’ü sessiz say. Parmak tel üzerinde hafif teması korurken perde basıncını bırak; tel çeken parmağın hafif teması da sesi durdurabilir. Diğer teller sessiz kalsın. Hedef sıra Si1 ve ardından sessizliktir; araya açık La girmesin. İlk sonlandırma netleşince tel 2 perde 2’de Mi2 ve ardından sessizlikle tekrarla."
       },
       "check": {
         "en": "Is my fret choice clear without bending the string or locking the thumb?",
         "tr": "Teli bükmeden veya başparmağı kilitlemeden perde seçimim açık mı?"
       },
       "recover": {
-        "en": "If reaching 3 strains, isolate open/1 first or shift rather than stretch. If pitch seems uncertain, separate fretting placement from external tuning; the app does not judge either.",
-        "tr": "3’e uzanmak zorluyorsa önce açık/1’i ayır veya esnemek yerine kaydır. Ses belirsizse perde yerleştirmeyi harici akorttan ayır; uygulama ikisine de hüküm vermez."
+        "en": "If reaching 3 strains, isolate open/1 first or shift rather than stretch. If pitch seems uncertain, separate fretting placement from external tuning; the app does not judge either. If an open A or D appears as you stop the fretted note, repeat just that ending without a pulse: stop the string with a gentle plucking-hand touch, release fretting pressure while retaining light contact, then move away only after the string is quiet. Avoid pulling the string sideways. Return to the counted B1-to-silence bar and compare the same ending.",
+        "tr": "3’e uzanmak zorluyorsa önce açık/1’i ayır veya esnemek yerine kaydır. Ses belirsizse perde yerleştirmeyi harici akorttan ayır; uygulama ikisine de hüküm vermez. Perdeli notayı sustururken açık La veya Re duyulursa yalnız o sonlandırmayı nabız olmadan tekrarla: teli çeken elin hafif temasıyla sustur, hafif temas korunurken perde basıncını bırak ve tel sessizleşince elini uzaklaştır. Teli yana çekmekten kaçın. Sayılan Si1-sessizlik ölçüsüne dön ve aynı sonlandırmayı karşılaştır."
       },
       "diagrams": [
         "frets"
@@ -710,8 +710,8 @@
         "tr": "Etüt sekiz 4/4 ölçüde standart gerçek sesleri ve açık tel/perde çiftlerini kullanır. Her tabloda sekiz yarım vuruş hücresi vardır: N çeker, H mevcut ses/sessizliği sürdürür, R susturur. Her satırın iki ucunu oku; dar ekranda yatay kaydır. Gösterilen yönerge algılanmış çalım değildir."
       },
       "practice": {
-        "en": "Choose and write a comfortable tempo. Isolate bars 3–4 root/fifth changes, then 5–6 eighths, then 7 octave crossing. At bar 8 stop on beat 3 and count through 4. Practise pairs with one silent count-in bar; connect only after reading the events.",
-        "tr": "Rahat tempo seçip yaz. Ölçü 3–4 kök/beşli değişimini, sonra 5–6 sekizliklerini, sonra 7 oktav geçişini ayır. Ölçü 8’de vuruş 3’te susturup 4 boyunca say. Bir sessiz giriş ölçüsüyle çiftleri çalış; olayları okuduktan sonra bağla."
+        "en": "Choose and write a comfortable tempo. Isolate bars 3–4 root/fifth changes, then 5–6 eighths, then 7 octave crossing. At bar 8 stop on beat 3 and count through 4. Practise pairs with one silent count-in bar; connect only after reading the events. If you use an available external metronome for the comparison, write its setting as “quarter note = ___ BPM” and keep that setting for both full attempts. Count 1 2 3 4 with its four clicks before starting; place each “and” halfway between clicks, without doubling the click setting for eighth notes. If you change the tempo, begin a new pair of attempts at that setting. The click supplies a reference; it does not judge your playing.",
+        "tr": "Rahat tempo seçip yaz. Ölçü 3–4 kök/beşli değişimini, sonra 5–6 sekizliklerini, sonra 7 oktav geçişini ayır. Ölçü 8’de vuruş 3’te susturup 4 boyunca say. Bir sessiz giriş ölçüsüyle çiftleri çalış; olayları okuduktan sonra bağla. Karşılaştırmada mevcut bir harici metronom kullanıyorsan ayarını “dörtlük = ___ BPM” diye yaz ve iki tam denemede aynı ayarı koru. Başlamadan dört tıkla 1 2 3 4 say; her “ve”yi iki tık ortasına yerleştir, sekizlikler için tık ayarını iki katına çıkarma. Tempoyu değiştirirsen o ayarda yeni bir deneme çifti başlat. Tık bir referans verir; çalımına hükmetmez."
       },
       "check": {
         "en": "Can I explain each attack/rest and the exact string/fret before beginning?",

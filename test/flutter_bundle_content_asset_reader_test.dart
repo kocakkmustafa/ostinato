@@ -11,9 +11,9 @@ const String _manifestPath = 'assets/motion_content/manifest.json';
 const String _coursePath = 'assets/content/guitar_journey.v1.json';
 const String _corePin = 'd69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d';
 // Current reviewed course asset. Any authored course change requires a repin.
-const int _courseByteLength = 995884;
+const int _courseByteLength = 1021794;
 const String _courseSha256 =
-    'bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18';
+    '9e8f01c2ebffbd28ffaf8203be0bce036867d857c3e009a79bf2cf43a75a1f96';
 
 String _packageBlock(String source, String package) {
   final matches = RegExp(

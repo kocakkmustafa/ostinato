@@ -9,16 +9,16 @@ abstract final class OstinatoSourceProjectionPin {
       'assets/motion_content/ostinato.source-projection.v1.json';
 
   static const courseSha256 =
-      'bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18';
+      '9e8f01c2ebffbd28ffaf8203be0bce036867d857c3e009a79bf2cf43a75a1f96';
   static const sliceSha256 =
-      'a1bcfcbe28f8f8c518b24faca593f8ff2e9bc5e92e3e1ca22b693dffda2dcbe0';
+      '4fe8bf84d44a05e4d863cbbfd618c8d001ddcefed6fccbe7173418ad731acf38';
   static const projectionSha256 =
-      'a5213f9447d5aac10c5bea96c1d8eb5717d5eafb976c069833b9003e235afb20';
+      '07a6f9d37ae96cec4c3b74c8e9582fa64ed14a9d631167bea689a75364c3cf68';
   static const sourceCatalogSha256 =
-      '791bfea8e1479307794bcf8799cf703a7a840bcd3058c1a0d7fdf065d32d8594';
+      'f1f19ee459a818ef61c7fd6f18bd87dbb2852bee7b1e32498c17a32b006b50c9';
   // Preproduction source manifest; not a media release root.
   static const sourceManifestSha256 =
-      'd887683c9a9b9bdb8d4ab7c51cdc5a5b4b4de6a918079e4cfd9cf543e9751e60';
+      '3f8419ac1b07a75fd51bd17f15c97e1df3488d3253a9425b8155c613f36582ea';
 
   static const lessonCount = 60;
   static const sceneCount = 420;

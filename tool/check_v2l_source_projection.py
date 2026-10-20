@@ -16,6 +16,8 @@ import stat
 import sys
 from pathlib import Path
 
+import build_education_source_projection as education
+
 
 APP = Path(__file__).absolute().parent.parent
 INPUTS = {
@@ -24,19 +26,29 @@ INPUTS = {
     "projection": Path("assets/motion_content/ostinato.source-projection.v1.json"),
     "qa": Path("assets/motion_content/ostinato_source_pins_v2k.json"),
     "pubspec": Path("pubspec.yaml"),
+    "policy": Path("tool/source_proof/education-2026-10-20/policy-templates.v1.json"),
+    "production_manifest": Path("tool/source_proof/education-2026-10-20/production-manifest.v1.json"),
+    "source_catalog": Path("tool/source_proof/education-2026-10-20/source-catalog.v1.json"),
+    "source_proof": Path("tool/source_proof/education-2026-10-20/source-proof.v1.json"),
 }
 PINS = {
-    "course": "bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18",
-    "slice": "a1bcfcbe28f8f8c518b24faca593f8ff2e9bc5e92e3e1ca22b693dffda2dcbe0",
-    "projection": "a5213f9447d5aac10c5bea96c1d8eb5717d5eafb976c069833b9003e235afb20",
-    "qa": "fc838a2276cae3146951b63004ad9fba4075cfc7fae0397fc602291762b7074f",
+    "course": "9e8f01c2ebffbd28ffaf8203be0bce036867d857c3e009a79bf2cf43a75a1f96",
+    "slice": "4fe8bf84d44a05e4d863cbbfd618c8d001ddcefed6fccbe7173418ad731acf38",
+    "projection": "07a6f9d37ae96cec4c3b74c8e9582fa64ed14a9d631167bea689a75364c3cf68",
+    "qa": "469b187a110db399d2b6a2967d4084efb7a7acd8aa6394fb8486393907a1f5f2",
+    "policy": "0f19ae4d5238a3ea44b436f2dd74c7a5e2f759fc18ce48ae57d668539e4c04e4",
+    "production_manifest": "3f8419ac1b07a75fd51bd17f15c97e1df3488d3253a9425b8155c613f36582ea",
+    "source_catalog": "f1f19ee459a818ef61c7fd6f18bd87dbb2852bee7b1e32498c17a32b006b50c9",
+    "source_proof": "272fd56aeab1477f7a27eb7666728e7a8ce85a88878f68309b2e997c3c4ea087",
 }
-CATALOG_SHA256 = "791bfea8e1479307794bcf8799cf703a7a840bcd3058c1a0d7fdf065d32d8594"
-MANIFEST_SHA256 = "d887683c9a9b9bdb8d4ab7c51cdc5a5b4b4de6a918079e4cfd9cf543e9751e60"
-PROOF_SHA256 = "dec615e14881b86b7676e1157f63b8bf6269026d856e59f2ee3a65d7f97e512a"
+CATALOG_SHA256 = "f1f19ee459a818ef61c7fd6f18bd87dbb2852bee7b1e32498c17a32b006b50c9"
+MANIFEST_SHA256 = "3f8419ac1b07a75fd51bd17f15c97e1df3488d3253a9425b8155c613f36582ea"
+PROOF_SHA256 = "272fd56aeab1477f7a27eb7666728e7a8ce85a88878f68309b2e997c3c4ea087"
 COUNTS = (60, 420, 420, 0)
 LIMITS = {"course": 2 << 20, "slice": 2 << 20, "projection": 2 << 20,
-          "qa": 2 << 20, "pubspec": 512 << 10}
+          "qa": 2 << 20, "pubspec": 512 << 10, "policy": 64 << 10,
+          "production_manifest": 4 << 20, "source_catalog": 2 << 20,
+          "source_proof": 64 << 10}
 DIR_FLAGS = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
 FILE_FLAGS = os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
@@ -289,7 +301,7 @@ def _check_pubspec(raw: bytes) -> None:
         if match:
             assets.append(match.group(1))
     for required in INPUTS.values():
-        if required == INPUTS["pubspec"]:
+        if required == INPUTS["pubspec"] or required.parts[0] != "assets":
             continue
         require(assets.count(required.as_posix()) == 1,
                 "PUBSPEC_EXACT_ASSET:" + required.as_posix())
@@ -310,6 +322,11 @@ def check_app(app_root: Path = APP) -> tuple[int, int, int, int]:
     for key, expected in PINS.items():
         require(digest(raw[key]) == expected, "APP_BYTE_SHA_DRIFT:" + key)
     _check_pubspec(raw["pubspec"])
+    try:
+        education.verify_bundle(raw["course"], raw["policy"],
+                                {key: raw[key] for key in education.OUTPUTS})
+    except (ValueError, KeyError, TypeError, IndexError) as error:
+        raise ProjectionError("APP_ONLY_SOURCE_DERIVATION_DRIFT") from error
     course = parse_json(raw["course"], canonical_source=False)
     source_slice = parse_json(raw["slice"], canonical_source=True)
     projection = parse_json(raw["projection"], canonical_source=True)

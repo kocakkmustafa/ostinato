@@ -115,8 +115,8 @@ class VocalDiagrams extends StatelessWidget {
           Text(
             localized(
               context,
-              'Original quarter-beat contour. M = your comfortable centre; L/H = nearby lower/higher, not quieter/louder. Each letter starts a new sound. R = counted silence. No fixed note or interval.',
-              'Özgün dörtlük vuruş çizgisi. M = rahat merkezin; L/H = yakın pes/tiz, daha kısık/yüksek ses değil. Her harf yeni ses başlatır. R = sayılan sessizlik. Sabit nota veya aralık yok.',
+              'Original contour in quarter-note beats. M = your comfortable centre; L/H = nearby lower/higher, not quieter/louder. Each letter starts a new sound. R = counted silence. No fixed note or interval.',
+              'Özgün dörtlük vuruş çizgisi. M = rahat merkezin; L/H = yakın pes/tiz; daha hafif/gür demek değildir. Her harf yeni ses başlatır. R = sayılan sessizlik. Sabit nota veya aralık yok.',
             ),
           ),
           _grid(

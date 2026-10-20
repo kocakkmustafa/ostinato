@@ -96,21 +96,21 @@
         },
         "teachingSteps": [
           {
-            "en": "With the guitar supported, point to bridge, nut, frets and strings 6→1 without turning a peg.",
-            "tr": "Gitar destekliyken burguyu çevirmeden köprüyü, eşiği, perdeleri ve 6→1 yönündeki telleri göster."
+            "en": "Find the headstock with its tuning pegs, the neck and the body. The nut is the small bar where the strings pass from headstock onto the neck; the bridge anchors them on the body. Metal fret wires cross the neck. Point to these parts without turning a peg.",
+            "tr": "Burguların bulunduğu başı, sapı ve gövdeyi bul. Üst eşik, tellerin baştan sapa geçtiği küçük çubuktur; köprü telleri gövdede tutar. Metal perde çubukları sapı enine keser. Burguyu çevirmeden bu bölümleri göster."
           },
           {
-            "en": "Say E2 A2 D3 G3 B3 E4 while touching one string at a time; low/high describes pitch, not height.",
-            "tr": "Telleri tek tek gösterirken Mi2 La2 Re3 Sol3 Si3 Mi4 söyle; pes/tiz fiziksel yüksekliği değil sesi anlatır."
+            "en": "In this six-string standard setup, number the strings from the thinnest 1 to the thickest 6. The open-string map from 6 to 1 is 6=E2, 5=A2, 4=D3, 3=G3, 2=B3, 1=E4. Read it while touching only the chosen string. The letter names a note; the octave number distinguishes its register. Low and high describe pitch.",
+            "tr": "Bu altı telli standart düzende telleri en ince 1’den en kalın 6’ya numaralandır. 6’dan 1’e açık tel haritası 6=Mi2, 5=La2, 4=Re3, 3=Sol3, 2=Si3, 1=Mi4’tür. Yalnız seçilen tele dokunurken haritayı oku. Harf nota adını, oktav sayısı ses bölgesini ayırır. Pes ve tiz ses yüksekliğini anlatır."
           },
           {
-            "en": "Cover the chart, choose a string number and identify its name; repeat on a left-handed diagram if relevant.",
-            "tr": "Şemayı kapat, seçilen telin adını bul; ilgiliyse solak şemada da aynı numaraları kullan."
+            "en": "Look away from this text, choose a string number and name its open note. Reopen the map to check; then try the reverse, choosing a note and locating its string. String numbers stay tied to the same strings on a correctly set up left-handed guitar.",
+            "tr": "Bu metinden gözünü ayır, bir tel numarası seç ve açık sesini söyle. Kontrol için haritayı yeniden oku; sonra bir ses seçip telini bul. Doğru kurulmuş solak gitarda tel numaraları yine aynı tellere aittir."
           }
         ],
         "practice": {
-          "en": "Say E2 A2 D3 G3 B3 E4 while touching one string at a time; low/high describes pitch, not height. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
-          "tr": "Telleri tek tek gösterirken Mi2 La2 Re3 Sol3 Si3 Mi4 söyle; pes/tiz fiziksel yüksekliği değil sesi anlatır. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla."
+          "en": "In this six-string standard setup, number the strings from the thinnest 1 to the thickest 6. The open-string map from 6 to 1 is 6=E2, 5=A2, 4=D3, 3=G3, 2=B3, 1=E4. Read it while touching only the chosen string. The letter names a note; the octave number distinguishes its register. Low and high describe pitch. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
+          "tr": "Bu altı telli standart düzende telleri en ince 1’den en kalın 6’ya numaralandır. 6’dan 1’e açık tel haritası 6=Mi2, 5=La2, 4=Re3, 3=Sol3, 2=Si3, 1=Mi4’tür. Yalnız seçilen tele dokunurken haritayı oku. Harf nota adını, oktav sayısı ses bölgesini ayırır. Pes ve tiz ses yüksekliğini anlatır. İki kısa rahat turdan sonra aktarım görevini bir kez dene; hepsini bugün zorlamak yerine ara ver ve sonraki oturumlarda tekrarla."
         },
         "selfCheck": {
           "en": "I can name all six strings in both directions and identify nut versus fret.",
@@ -121,8 +121,8 @@
           "tr": "Birinci tel en kalın telle karışıyor. En tiz açık tel 1'den tel 6'ya numaraları izle; numarayı yere yakınlıktan çıkarma."
         },
         "adaptation": {
-          "en": "Use a large labelled diagram first; point to two neighbouring strings before covering labels for all six.",
-          "tr": "Önce büyük etiketli şema kullan; altı etiketin hepsini kapatmadan komşu iki teli göster."
+          "en": "Read the string map aloud and identify only two neighbouring strings first. Look again whenever needed, then try the same pair without looking. A separate diagram is not required for this task.",
+          "tr": "Tel haritasını sesli oku ve önce yalnız komşu iki teli bul. Gerektiğinde yeniden bak; sonra aynı çifti bakmadan dene. Bu görev ayrı bir şema gerektirmez."
         }
       },
       "learningLab": {
@@ -135,8 +135,8 @@
             "id": "guitar.journey.start.parts.lab.foundation",
             "stage": "foundation",
             "task": {
-              "en": "With the guitar supported, point to bridge, nut, frets and strings 6→1 without turning a peg.",
-              "tr": "Gitar destekliyken burguyu çevirmeden köprüyü, eşiği, perdeleri ve 6→1 yönündeki telleri göster."
+              "en": "Find the headstock with its tuning pegs, the neck and the body. The nut is the small bar where the strings pass from headstock onto the neck; the bridge anchors them on the body. Metal fret wires cross the neck. Point to these parts without turning a peg.",
+              "tr": "Burguların bulunduğu başı, sapı ve gövdeyi bul. Üst eşik, tellerin baştan sapa geçtiği küçük çubuktur; köprü telleri gövdede tutar. Metal perde çubukları sapı enine keser. Burguyu çevirmeden bu bölümleri göster."
             },
             "suggested_minutes_range": [
               1,
@@ -164,8 +164,8 @@
             "id": "guitar.journey.start.parts.lab.connected",
             "stage": "connected",
             "task": {
-              "en": "Say E2 A2 D3 G3 B3 E4 while touching one string at a time; low/high describes pitch, not height.",
-              "tr": "Telleri tek tek gösterirken Mi2 La2 Re3 Sol3 Si3 Mi4 söyle; pes/tiz fiziksel yüksekliği değil sesi anlatır."
+              "en": "In this six-string standard setup, number the strings from the thinnest 1 to the thickest 6. The open-string map from 6 to 1 is 6=E2, 5=A2, 4=D3, 3=G3, 2=B3, 1=E4. Read it while touching only the chosen string. The letter names a note; the octave number distinguishes its register. Low and high describe pitch.",
+              "tr": "Bu altı telli standart düzende telleri en ince 1’den en kalın 6’ya numaralandır. 6’dan 1’e açık tel haritası 6=Mi2, 5=La2, 4=Re3, 3=Sol3, 2=Si3, 1=Mi4’tür. Yalnız seçilen tele dokunurken haritayı oku. Harf nota adını, oktav sayısı ses bölgesini ayırır. Pes ve tiz ses yüksekliğini anlatır."
             },
             "suggested_minutes_range": [
               2,
@@ -193,8 +193,8 @@
             "id": "guitar.journey.start.parts.lab.transfer",
             "stage": "transfer",
             "task": {
-              "en": "Cover the chart, choose a string number and identify its name; repeat on a left-handed diagram if relevant.",
-              "tr": "Şemayı kapat, seçilen telin adını bul; ilgiliyse solak şemada da aynı numaraları kullan."
+              "en": "Look away from this text, choose a string number and name its open note. Reopen the map to check; then try the reverse, choosing a note and locating its string. String numbers stay tied to the same strings on a correctly set up left-handed guitar.",
+              "tr": "Bu metinden gözünü ayır, bir tel numarası seç ve açık sesini söyle. Kontrol için haritayı yeniden oku; sonra bir ses seçip telini bul. Doğru kurulmuş solak gitarda tel numaraları yine aynı tellere aittir."
             },
             "suggested_minutes_range": [
               2,
@@ -242,8 +242,8 @@
             7
           ],
           "task": {
-            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: With the guitar supported, point to bridge, nut, frets and strings 6→1 without turning a peg. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
-            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Gitar destekliyken burguyu çevirmeden köprüyü, eşiği, perdeleri ve 6→1 yönündeki telleri göster. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
+            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Find the headstock with its tuning pegs, the neck and the body. The nut is the small bar where the strings pass from headstock onto the neck; the bridge anchors them on the body. Metal fret wires cross the neck. Point to these parts without turning a peg. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
+            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Burguların bulunduğu başı, sapı ve gövdeyi bul. Üst eşik, tellerin baştan sapa geçtiği küçük çubuktur; köprü telleri gövdede tutar. Metal perde çubukları sapı enine keser. Burguyu çevirmeden bu bölümleri göster. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
           },
           "source_ids": [
             "piano-spacing-study",
@@ -251,8 +251,8 @@
           ]
         },
         "transfer": {
-          "en": "Cover the chart, choose a string number and identify its name; repeat on a left-handed diagram if relevant.",
-          "tr": "Şemayı kapat, seçilen telin adını bul; ilgiliyse solak şemada da aynı numaraları kullan."
+          "en": "Look away from this text, choose a string number and name its open note. Reopen the map to check; then try the reverse, choosing a note and locating its string. String numbers stay tied to the same strings on a correctly set up left-handed guitar.",
+          "tr": "Bu metinden gözünü ayır, bir tel numarası seç ve açık sesini söyle. Kontrol için haritayı yeniden oku; sonra bir ses seçip telini bul. Doğru kurulmuş solak gitarda tel numaraları yine aynı tellere aittir."
         },
         "masteryCriteria": [
           {
@@ -920,21 +920,21 @@
         },
         "teachingSteps": [
           {
-            "en": "On string 1 fret 1 place the fingertip near the metal fret on its nut side, pluck once and release.",
-            "tr": "Tel 1 perde 1'de parmak ucunu metal perdenin eşik tarafında yakınına koy, bir kez çekip bırak."
+            "en": "The open string is fret 0: the fretting hand does not press it. Starting at the nut, the first space toward the body is fret 1, the next is 2, then 3. Use the fretting-hand finger names index 1, middle 2, ring 3, little 4; these finger numbers are different from string and fret numbers. On string 1, place index 1 in fret space 1 just behind its metal wire, on the nut side; pluck once and release.",
+            "tr": "Açık tel perde 0’dır: basan el tele basmaz. Üst eşikten gövdeye doğru ilk boşluk perde 1, sonraki 2, ardından 3’tür. Basan elde işaret 1, orta 2, yüzük 3, serçe 4’tür; parmak numarası tel ve perde numarasından ayrıdır. Tel 1’de işaret 1’i perde 1 boşluğunda metal çubuğun üst eşik tarafındaki hemen gerisine koy; bir kez çal ve bırak."
           },
           {
-            "en": "Ease pressure gradually, then reposition before adding only enough contact for the intended sound.",
-            "tr": "Basıncı yavaş azalt, sonra yalnız hedef ses için yeterli teması eklemeden önce konumu düzelt."
+            "en": "Ease pressure gradually until the note becomes unclear. Reposition close behind the fret wire before restoring only the contact needed for a clear note. Do not replace placement with a hard squeeze; release the hand between trials.",
+            "tr": "Ses belirsizleşene kadar basıncı yavaşça azalt. Yalnız temiz ses için gereken teması geri vermeden önce perde çubuğunun hemen gerisine yeniden yerleş. Doğru yerleşimin yerine kuvvetli sıkmayı koyma; denemeler arasında eli bırak."
           },
           {
-            "en": "Repeat on string 2 fret 1 with a shorter trial; compare contact location rather than forcing equal hand shapes.",
-            "tr": "Daha kısa denemeyle tel 2 perde 1'de tekrarla; elleri aynı şekle zorlamak yerine temas yerini karşılaştır."
+            "en": "Repeat on string 2 fret 1 with index 1 for a short trial. Say string 2, fret 1, finger 1 before sounding it; compare the contact location, without forcing the two hand shapes to look identical.",
+            "tr": "Tel 2 perde 1’de işaret 1 ile kısa dene. Çalmadan tel 2, perde 1, parmak 1 de; iki el biçimini zorla aynı yapmadan temas yerini karşılaştır."
           }
         ],
         "practice": {
-          "en": "Ease pressure gradually, then reposition before adding only enough contact for the intended sound. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
-          "tr": "Basıncı yavaş azalt, sonra yalnız hedef ses için yeterli teması eklemeden önce konumu düzelt. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla."
+          "en": "Ease pressure gradually until the note becomes unclear. Reposition close behind the fret wire before restoring only the contact needed for a clear note. Do not replace placement with a hard squeeze; release the hand between trials. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
+          "tr": "Ses belirsizleşene kadar basıncı yavaşça azalt. Yalnız temiz ses için gereken teması geri vermeden önce perde çubuğunun hemen gerisine yeniden yerleş. Doğru yerleşimin yerine kuvvetli sıkmayı koyma; denemeler arasında eli bırak. İki kısa rahat turdan sonra aktarım görevini bir kez dene; hepsini bugün zorlamak yerine ara ver ve sonraki oturumlarda tekrarla."
         },
         "selfCheck": {
           "en": "I can produce and release a clear single note without treating force or pain as a success measure.",
@@ -959,8 +959,8 @@
             "id": "guitar.journey.start.fret.lab.foundation",
             "stage": "foundation",
             "task": {
-              "en": "On string 1 fret 1 place the fingertip near the metal fret on its nut side, pluck once and release.",
-              "tr": "Tel 1 perde 1'de parmak ucunu metal perdenin eşik tarafında yakınına koy, bir kez çekip bırak."
+              "en": "The open string is fret 0: the fretting hand does not press it. Starting at the nut, the first space toward the body is fret 1, the next is 2, then 3. Use the fretting-hand finger names index 1, middle 2, ring 3, little 4; these finger numbers are different from string and fret numbers. On string 1, place index 1 in fret space 1 just behind its metal wire, on the nut side; pluck once and release.",
+              "tr": "Açık tel perde 0’dır: basan el tele basmaz. Üst eşikten gövdeye doğru ilk boşluk perde 1, sonraki 2, ardından 3’tür. Basan elde işaret 1, orta 2, yüzük 3, serçe 4’tür; parmak numarası tel ve perde numarasından ayrıdır. Tel 1’de işaret 1’i perde 1 boşluğunda metal çubuğun üst eşik tarafındaki hemen gerisine koy; bir kez çal ve bırak."
             },
             "suggested_minutes_range": [
               1,
@@ -988,8 +988,8 @@
             "id": "guitar.journey.start.fret.lab.connected",
             "stage": "connected",
             "task": {
-              "en": "Ease pressure gradually, then reposition before adding only enough contact for the intended sound.",
-              "tr": "Basıncı yavaş azalt, sonra yalnız hedef ses için yeterli teması eklemeden önce konumu düzelt."
+              "en": "Ease pressure gradually until the note becomes unclear. Reposition close behind the fret wire before restoring only the contact needed for a clear note. Do not replace placement with a hard squeeze; release the hand between trials.",
+              "tr": "Ses belirsizleşene kadar basıncı yavaşça azalt. Yalnız temiz ses için gereken teması geri vermeden önce perde çubuğunun hemen gerisine yeniden yerleş. Doğru yerleşimin yerine kuvvetli sıkmayı koyma; denemeler arasında eli bırak."
             },
             "suggested_minutes_range": [
               2,
@@ -1017,8 +1017,8 @@
             "id": "guitar.journey.start.fret.lab.transfer",
             "stage": "transfer",
             "task": {
-              "en": "Repeat on string 2 fret 1 with a shorter trial; compare contact location rather than forcing equal hand shapes.",
-              "tr": "Daha kısa denemeyle tel 2 perde 1'de tekrarla; elleri aynı şekle zorlamak yerine temas yerini karşılaştır."
+              "en": "Repeat on string 2 fret 1 with index 1 for a short trial. Say string 2, fret 1, finger 1 before sounding it; compare the contact location, without forcing the two hand shapes to look identical.",
+              "tr": "Tel 2 perde 1’de işaret 1 ile kısa dene. Çalmadan tel 2, perde 1, parmak 1 de; iki el biçimini zorla aynı yapmadan temas yerini karşılaştır."
             },
             "suggested_minutes_range": [
               2,
@@ -1066,8 +1066,8 @@
             7
           ],
           "task": {
-            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: On string 1 fret 1 place the fingertip near the metal fret on its nut side, pluck once and release. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
-            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Tel 1 perde 1'de parmak ucunu metal perdenin eşik tarafında yakınına koy, bir kez çekip bırak. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
+            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: The open string is fret 0: the fretting hand does not press it. Starting at the nut, the first space toward the body is fret 1, the next is 2, then 3. Use the fretting-hand finger names index 1, middle 2, ring 3, little 4; these finger numbers are different from string and fret numbers. On string 1, place index 1 in fret space 1 just behind its metal wire, on the nut side; pluck once and release. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
+            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Açık tel perde 0’dır: basan el tele basmaz. Üst eşikten gövdeye doğru ilk boşluk perde 1, sonraki 2, ardından 3’tür. Basan elde işaret 1, orta 2, yüzük 3, serçe 4’tür; parmak numarası tel ve perde numarasından ayrıdır. Tel 1’de işaret 1’i perde 1 boşluğunda metal çubuğun üst eşik tarafındaki hemen gerisine koy; bir kez çal ve bırak. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
           },
           "source_ids": [
             "piano-spacing-study",
@@ -1075,8 +1075,8 @@
           ]
         },
         "transfer": {
-          "en": "Repeat on string 2 fret 1 with a shorter trial; compare contact location rather than forcing equal hand shapes.",
-          "tr": "Daha kısa denemeyle tel 2 perde 1'de tekrarla; elleri aynı şekle zorlamak yerine temas yerini karşılaştır."
+          "en": "Repeat on string 2 fret 1 with index 1 for a short trial. Say string 2, fret 1, finger 1 before sounding it; compare the contact location, without forcing the two hand shapes to look identical.",
+          "tr": "Tel 2 perde 1’de işaret 1 ile kısa dene. Çalmadan tel 2, perde 1, parmak 1 de; iki el biçimini zorla aynı yapmadan temas yerini karşılaştır."
         },
         "masteryCriteria": [
           {
@@ -1126,21 +1126,21 @@
         },
         "teachingSteps": [
           {
-            "en": "Count one silent 4/4 bar, then pluck open E4 on 1 and 3. On 2 and 4, use the light contact with the vibrating open string learned in One clear sound to end it deliberately while the count continues.",
-            "tr": "Sessiz bir 4/4 ölçü say, açık Mi4’ü 1 ve 3’te çal. 2 ve 4’te Tek temiz ses dersindeki titreşen açık tele hafifçe dokunma yoluyla sesi bilerek bitir; saymaya devam et."
+            "en": "For this 4/4 exercise, one bar contains four equally spaced quarter-note beats, counted 1 2 3 4; after 4 the next bar starts at 1. Keep the spacing even when nothing sounds. Count one silent bar, then pluck open E4 on 1 and 3. On 2 and 4, end the sound with the light string contact learned in One clear sound.",
+            "tr": "Bu 4/4 çalışmasında bir ölçü eşit aralıklı dört dörtlük vuruş içerir; 1 2 3 4 sayılır ve 4’ten sonra yeni ölçü 1 ile başlar. Ses yokken de aralıkları koru. Bir sessiz ölçü say; sonra açık Mi4’ü 1 ve 3’te çal. 2 ve 4’te Tek temiz ses dersindeki hafif tel temasıyla sesi bitir."
           },
           {
             "en": "Play four bars, maintaining the count during eight sounded notes and eight silent beats.",
-            "tr": "Sekiz çalan nota ve sekiz sessiz vuruşta saymayı koruyarak dört ölçü çal."
+            "tr": "Sekiz çalınan nota ve sekiz sessiz vuruş boyunca sayımı koruyarak dört ölçü çal."
           },
           {
             "en": "Move the same pattern to B3; return to the next bar after a mistake without restarting the count.",
-            "tr": "Aynı örüntüyü Si3'e taşı; hata sonrasında saymaya baştan dönmeden sonraki ölçüye gir."
+            "tr": "Aynı örüntüyü Si3’e taşı; hata sonrası sayımı başlatmadan sonraki ölçüye dön."
           }
         ],
         "practice": {
           "en": "Play four bars, maintaining the count during eight sounded notes and eight silent beats. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
-          "tr": "Sekiz çalan nota ve sekiz sessiz vuruşta saymayı koruyarak dört ölçü çal. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla."
+          "tr": "Sekiz çalınan nota ve sekiz sessiz vuruş boyunca sayımı koruyarak dört ölçü çal. İki kısa rahat turdan sonra aktarım görevini bir kez dene; hepsini bugün zorlamak yerine ara ver ve sonraki oturumlarda tekrarla."
         },
         "selfCheck": {
           "en": "I can finish four bars and identify every note beat and rest beat without losing the bar count.",
@@ -1165,8 +1165,8 @@
             "id": "guitar.journey.start.first_pulse.lab.foundation",
             "stage": "foundation",
             "task": {
-              "en": "Count one silent 4/4 bar, then pluck open E4 on 1 and 3. On 2 and 4, use the light contact with the vibrating open string learned in One clear sound to end it deliberately while the count continues.",
-              "tr": "Sessiz bir 4/4 ölçü say, açık Mi4’ü 1 ve 3’te çal. 2 ve 4’te Tek temiz ses dersindeki titreşen açık tele hafifçe dokunma yoluyla sesi bilerek bitir; saymaya devam et."
+              "en": "For this 4/4 exercise, one bar contains four equally spaced quarter-note beats, counted 1 2 3 4; after 4 the next bar starts at 1. Keep the spacing even when nothing sounds. Count one silent bar, then pluck open E4 on 1 and 3. On 2 and 4, end the sound with the light string contact learned in One clear sound.",
+              "tr": "Bu 4/4 çalışmasında bir ölçü eşit aralıklı dört dörtlük vuruş içerir; 1 2 3 4 sayılır ve 4’ten sonra yeni ölçü 1 ile başlar. Ses yokken de aralıkları koru. Bir sessiz ölçü say; sonra açık Mi4’ü 1 ve 3’te çal. 2 ve 4’te Tek temiz ses dersindeki hafif tel temasıyla sesi bitir."
             },
             "suggested_minutes_range": [
               1,
@@ -1195,7 +1195,7 @@
             "stage": "connected",
             "task": {
               "en": "Play four bars, maintaining the count during eight sounded notes and eight silent beats.",
-              "tr": "Sekiz çalan nota ve sekiz sessiz vuruşta saymayı koruyarak dört ölçü çal."
+              "tr": "Sekiz çalınan nota ve sekiz sessiz vuruş boyunca sayımı koruyarak dört ölçü çal."
             },
             "suggested_minutes_range": [
               2,
@@ -1224,7 +1224,7 @@
             "stage": "transfer",
             "task": {
               "en": "Move the same pattern to B3; return to the next bar after a mistake without restarting the count.",
-              "tr": "Aynı örüntüyü Si3'e taşı; hata sonrasında saymaya baştan dönmeden sonraki ölçüye gir."
+              "tr": "Aynı örüntüyü Si3’e taşı; hata sonrası sayımı başlatmadan sonraki ölçüye dön."
             },
             "suggested_minutes_range": [
               2,
@@ -1272,8 +1272,8 @@
             7
           ],
           "task": {
-            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Count one silent 4/4 bar, then pluck open E4 on 1 and 3. On 2 and 4, use the light contact with the vibrating open string learned in One clear sound to end it deliberately while the count continues. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
-            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Sessiz bir 4/4 ölçü say, açık Mi4’ü 1 ve 3’te çal. 2 ve 4’te Tek temiz ses dersindeki titreşen açık tele hafifçe dokunma yoluyla sesi bilerek bitir; saymaya devam et. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
+            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: For this 4/4 exercise, one bar contains four equally spaced quarter-note beats, counted 1 2 3 4; after 4 the next bar starts at 1. Keep the spacing even when nothing sounds. Count one silent bar, then pluck open E4 on 1 and 3. On 2 and 4, end the sound with the light string contact learned in One clear sound. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
+            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Bu 4/4 çalışmasında bir ölçü eşit aralıklı dört dörtlük vuruş içerir; 1 2 3 4 sayılır ve 4’ten sonra yeni ölçü 1 ile başlar. Ses yokken de aralıkları koru. Bir sessiz ölçü say; sonra açık Mi4’ü 1 ve 3’te çal. 2 ve 4’te Tek temiz ses dersindeki hafif tel temasıyla sesi bitir. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
           },
           "source_ids": [
             "piano-spacing-study",
@@ -1282,7 +1282,7 @@
         },
         "transfer": {
           "en": "Move the same pattern to B3; return to the next bar after a mistake without restarting the count.",
-          "tr": "Aynı örüntüyü Si3'e taşı; hata sonrasında saymaya baştan dönmeden sonraki ölçüye gir."
+          "tr": "Aynı örüntüyü Si3’e taşı; hata sonrası sayımı başlatmadan sonraki ölçüye dön."
         },
         "masteryCriteria": [
           {
@@ -1332,21 +1332,21 @@
         },
         "teachingSteps": [
           {
-            "en": "Play 6/0–6/1–6/3–6/1 with one beat per note and a full-bar rest after it.",
-            "tr": "6/0–6/1–6/3–6/1'i nota başına bir vuruşla çal, ardından tam ölçü dinlen."
+            "en": "Our compact string/fret writing uses the number before the slash for the string and the number after it for the fret: 6/0 is open string 6; 6/1 is string 6 at fret 1. These are not fractions or finger numbers. Play 6/0–6/1–6/3–6/1, saying E2 F2 G2 F2, with one beat per note. Count a full four-beat silent bar afterward.",
+            "tr": "Kısa tel/perde yazımımızda eğik çizgiden önceki sayı tel, sonraki sayı perdedir: 6/0 açık tel 6; 6/1 tel 6 perde 1 demektir. Bunlar kesir veya parmak numarası değildir. Her notaya bir vuruş vererek 6/0–6/1–6/3–6/1 çal ve Mi2 Fa2 Sol2 Fa2 söyle. Ardından dört vuruşluk tam sessiz ölçü say."
           },
           {
             "en": "Reverse to 6/3–6/1–6/0–6/1; say G F E F before plucking.",
-            "tr": "6/3–6/1–6/0–6/1'e dön; çekmeden önce Sol Fa Mi Fa söyle."
+            "tr": "6/3–6/1–6/0–6/1 yönüne dön; çalmadan Sol Fa Mi Fa söyle."
           },
           {
             "en": "Choose one of the two cells without looking, then write its note names afterward.",
-            "tr": "Bakmadan iki hücreden birini seç, ardından nota adlarını yaz."
+            "tr": "Bakmadan iki hücreden birini seç; sonra nota adlarını yaz."
           }
         ],
         "practice": {
           "en": "Reverse to 6/3–6/1–6/0–6/1; say G F E F before plucking. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
-          "tr": "6/3–6/1–6/0–6/1'e dön; çekmeden önce Sol Fa Mi Fa söyle. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla."
+          "tr": "6/3–6/1–6/0–6/1 yönüne dön; çalmadan Sol Fa Mi Fa söyle. İki kısa rahat turdan sonra aktarım görevini bir kez dene; hepsini bugün zorlamak yerine ara ver ve sonraki oturumlarda tekrarla."
         },
         "selfCheck": {
           "en": "I can recall both four-note cells, name their notes and keep the rest counted.",
@@ -1371,8 +1371,8 @@
             "id": "guitar.journey.notes.bass_e.lab.foundation",
             "stage": "foundation",
             "task": {
-              "en": "Play 6/0–6/1–6/3–6/1 with one beat per note and a full-bar rest after it.",
-              "tr": "6/0–6/1–6/3–6/1'i nota başına bir vuruşla çal, ardından tam ölçü dinlen."
+              "en": "Our compact string/fret writing uses the number before the slash for the string and the number after it for the fret: 6/0 is open string 6; 6/1 is string 6 at fret 1. These are not fractions or finger numbers. Play 6/0–6/1–6/3–6/1, saying E2 F2 G2 F2, with one beat per note. Count a full four-beat silent bar afterward.",
+              "tr": "Kısa tel/perde yazımımızda eğik çizgiden önceki sayı tel, sonraki sayı perdedir: 6/0 açık tel 6; 6/1 tel 6 perde 1 demektir. Bunlar kesir veya parmak numarası değildir. Her notaya bir vuruş vererek 6/0–6/1–6/3–6/1 çal ve Mi2 Fa2 Sol2 Fa2 söyle. Ardından dört vuruşluk tam sessiz ölçü say."
             },
             "suggested_minutes_range": [
               1,
@@ -1402,7 +1402,7 @@
             "stage": "connected",
             "task": {
               "en": "Reverse to 6/3–6/1–6/0–6/1; say G F E F before plucking.",
-              "tr": "6/3–6/1–6/0–6/1'e dön; çekmeden önce Sol Fa Mi Fa söyle."
+              "tr": "6/3–6/1–6/0–6/1 yönüne dön; çalmadan Sol Fa Mi Fa söyle."
             },
             "suggested_minutes_range": [
               2,
@@ -1432,7 +1432,7 @@
             "stage": "transfer",
             "task": {
               "en": "Choose one of the two cells without looking, then write its note names afterward.",
-              "tr": "Bakmadan iki hücreden birini seç, ardından nota adlarını yaz."
+              "tr": "Bakmadan iki hücreden birini seç; sonra nota adlarını yaz."
             },
             "suggested_minutes_range": [
               2,
@@ -1481,8 +1481,8 @@
             7
           ],
           "task": {
-            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Play 6/0–6/1–6/3–6/1 with one beat per note and a full-bar rest after it. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
-            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: 6/0–6/1–6/3–6/1'i nota başına bir vuruşla çal, ardından tam ölçü dinlen. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
+            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Our compact string/fret writing uses the number before the slash for the string and the number after it for the fret: 6/0 is open string 6; 6/1 is string 6 at fret 1. These are not fractions or finger numbers. Play 6/0–6/1–6/3–6/1, saying E2 F2 G2 F2, with one beat per note. Count a full four-beat silent bar afterward. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
+            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Kısa tel/perde yazımımızda eğik çizgiden önceki sayı tel, sonraki sayı perdedir: 6/0 açık tel 6; 6/1 tel 6 perde 1 demektir. Bunlar kesir veya parmak numarası değildir. Her notaya bir vuruş vererek 6/0–6/1–6/3–6/1 çal ve Mi2 Fa2 Sol2 Fa2 söyle. Ardından dört vuruşluk tam sessiz ölçü say. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
           },
           "source_ids": [
             "piano-spacing-study",
@@ -1491,7 +1491,7 @@
         },
         "transfer": {
           "en": "Choose one of the two cells without looking, then write its note names afterward.",
-          "tr": "Bakmadan iki hücreden birini seç, ardından nota adlarını yaz."
+          "tr": "Bakmadan iki hücreden birini seç; sonra nota adlarını yaz."
         },
         "masteryCriteria": [
           {
@@ -2598,21 +2598,21 @@
         },
         "teachingSteps": [
           {
-            "en": "Tap four quarter beats and say 1-and 2-and 3-and 4-and without changing the taps. If useful, align those taps to an optional external metronome at a comfortable, low listening level; it is a self-check, not an app timing score or a required BPM.",
-            "tr": "Dört dörtlük vuruş vur; vuruşları değiştirmeden 1-ve 2-ve 3-ve 4-ve say. Yararlıysa vuruşları rahat, düşük dinleme düzeyindeki isteğe bağlı harici metronomla eşleştir; bu öz kontroldür, uygulama zamanlama puanı veya zorunlu BPM değildir."
+            "en": "In 4/4, the upper 4 means four beats per bar and the lower 4 names the quarter note as the beat unit. A quarter note has a filled head and a stem and lasts one beat here. An eighth note lasts half a beat; its stem has one flag, or two or more eighths share a joining beam. Tap four beats and say 1-and 2-and 3-and 4-and without changing the taps. If useful, align the taps to an optional external metronome at a comfortable low listening level; this is a self-check, not an app timing score or required BPM.",
+            "tr": "4/4’te üstteki 4 ölçüde dört vuruş olduğunu, alttaki 4 vuruş biriminin dörtlük nota olduğunu belirtir. Dörtlüğün dolu başı ve sapı vardır; burada bir vuruş sürer. Sekizlik yarım vuruştur; sapında tek bayrak bulunur veya iki ya da daha çok sekizlik bir kirişle bağlanır. Dört vuruş vururken aralığı değiştirmeden 1-ve 2-ve 3-ve 4-ve say. İstersen rahat ve düşük dinleme düzeyinde dış metronomla eşle; bu öz denetimdir, uygulama zamanlama puanı veya zorunlu BPM değildir."
           },
           {
             "en": "Play one E4 per beat for a bar, then two evenly spaced E4 notes per beat for a bar.",
-            "tr": "Bir ölçü vuruş başına tek Mi4, sonra bir ölçü eşit aralıklı iki Mi4 çal."
+            "tr": "Bir ölçü her vuruşta bir Mi4, sonra bir ölçü her vuruşta eşit aralıklı iki Mi4 çal."
           },
           {
             "en": "Combine two quarter beats and two eighth-note pairs in a written 4/4 bar.",
-            "tr": "Yazılı 4/4 ölçüde iki dörtlük vuruşla iki sekizlik çiftini birleştir."
+            "tr": "Yazılı 4/4 ölçüde iki dörtlük ve iki sekizlik çifti birleştir."
           }
         ],
         "practice": {
           "en": "Play one E4 per beat for a bar, then two evenly spaced E4 notes per beat for a bar. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
-          "tr": "Bir ölçü vuruş başına tek Mi4, sonra bir ölçü eşit aralıklı iki Mi4 çal. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla."
+          "tr": "Bir ölçü her vuruşta bir Mi4, sonra bir ölçü her vuruşta eşit aralıklı iki Mi4 çal. İki kısa rahat turdan sonra aktarım görevini bir kez dene; hepsini bugün zorlamak yerine ara ver ve sonraki oturumlarda tekrarla."
         },
         "selfCheck": {
           "en": "I can switch quarter/eighth density while the bar still contains four beats.",
@@ -2637,8 +2637,8 @@
             "id": "guitar.journey.reading.quarters_eighths.lab.foundation",
             "stage": "foundation",
             "task": {
-              "en": "Tap four quarter beats and say 1-and 2-and 3-and 4-and without changing the taps. If useful, align those taps to an optional external metronome at a comfortable, low listening level; it is a self-check, not an app timing score or a required BPM.",
-              "tr": "Dört dörtlük vuruş vur; vuruşları değiştirmeden 1-ve 2-ve 3-ve 4-ve say. Yararlıysa vuruşları rahat, düşük dinleme düzeyindeki isteğe bağlı harici metronomla eşleştir; bu öz kontroldür, uygulama zamanlama puanı veya zorunlu BPM değildir."
+              "en": "In 4/4, the upper 4 means four beats per bar and the lower 4 names the quarter note as the beat unit. A quarter note has a filled head and a stem and lasts one beat here. An eighth note lasts half a beat; its stem has one flag, or two or more eighths share a joining beam. Tap four beats and say 1-and 2-and 3-and 4-and without changing the taps. If useful, align the taps to an optional external metronome at a comfortable low listening level; this is a self-check, not an app timing score or required BPM.",
+              "tr": "4/4’te üstteki 4 ölçüde dört vuruş olduğunu, alttaki 4 vuruş biriminin dörtlük nota olduğunu belirtir. Dörtlüğün dolu başı ve sapı vardır; burada bir vuruş sürer. Sekizlik yarım vuruştur; sapında tek bayrak bulunur veya iki ya da daha çok sekizlik bir kirişle bağlanır. Dört vuruş vururken aralığı değiştirmeden 1-ve 2-ve 3-ve 4-ve say. İstersen rahat ve düşük dinleme düzeyinde dış metronomla eşle; bu öz denetimdir, uygulama zamanlama puanı veya zorunlu BPM değildir."
             },
             "suggested_minutes_range": [
               2,
@@ -2669,7 +2669,7 @@
             "stage": "connected",
             "task": {
               "en": "Play one E4 per beat for a bar, then two evenly spaced E4 notes per beat for a bar.",
-              "tr": "Bir ölçü vuruş başına tek Mi4, sonra bir ölçü eşit aralıklı iki Mi4 çal."
+              "tr": "Bir ölçü her vuruşta bir Mi4, sonra bir ölçü her vuruşta eşit aralıklı iki Mi4 çal."
             },
             "suggested_minutes_range": [
               3,
@@ -2699,7 +2699,7 @@
             "stage": "transfer",
             "task": {
               "en": "Combine two quarter beats and two eighth-note pairs in a written 4/4 bar.",
-              "tr": "Yazılı 4/4 ölçüde iki dörtlük vuruşla iki sekizlik çiftini birleştir."
+              "tr": "Yazılı 4/4 ölçüde iki dörtlük ve iki sekizlik çifti birleştir."
             },
             "suggested_minutes_range": [
               3,
@@ -2748,8 +2748,8 @@
             7
           ],
           "task": {
-            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Tap four quarter beats and say 1-and 2-and 3-and 4-and without changing the taps. If useful, align those taps to an optional external metronome at a comfortable, low listening level; it is a self-check, not an app timing score or a required BPM. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
-            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Dört dörtlük vuruş vur; vuruşları değiştirmeden 1-ve 2-ve 3-ve 4-ve say. Yararlıysa vuruşları rahat, düşük dinleme düzeyindeki isteğe bağlı harici metronomla eşleştir; bu öz kontroldür, uygulama zamanlama puanı veya zorunlu BPM değildir. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
+            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: In 4/4, the upper 4 means four beats per bar and the lower 4 names the quarter note as the beat unit. A quarter note has a filled head and a stem and lasts one beat here. An eighth note lasts half a beat; its stem has one flag, or two or more eighths share a joining beam. Tap four beats and say 1-and 2-and 3-and 4-and without changing the taps. If useful, align the taps to an optional external metronome at a comfortable low listening level; this is a self-check, not an app timing score or required BPM. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
+            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: 4/4’te üstteki 4 ölçüde dört vuruş olduğunu, alttaki 4 vuruş biriminin dörtlük nota olduğunu belirtir. Dörtlüğün dolu başı ve sapı vardır; burada bir vuruş sürer. Sekizlik yarım vuruştur; sapında tek bayrak bulunur veya iki ya da daha çok sekizlik bir kirişle bağlanır. Dört vuruş vururken aralığı değiştirmeden 1-ve 2-ve 3-ve 4-ve say. İstersen rahat ve düşük dinleme düzeyinde dış metronomla eşle; bu öz denetimdir, uygulama zamanlama puanı veya zorunlu BPM değildir. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
           },
           "source_ids": [
             "piano-spacing-study",
@@ -2758,7 +2758,7 @@
         },
         "transfer": {
           "en": "Combine two quarter beats and two eighth-note pairs in a written 4/4 bar.",
-          "tr": "Yazılı 4/4 ölçüde iki dörtlük vuruşla iki sekizlik çiftini birleştir."
+          "tr": "Yazılı 4/4 ölçüde iki dörtlük ve iki sekizlik çifti birleştir."
         },
         "masteryCriteria": [
           {
@@ -2810,21 +2810,21 @@
         },
         "teachingSteps": [
           {
-            "en": "Count quarter-note E4, quarter rest, E4, rest; keep four beats without re-attacking a rest.",
-            "tr": "Dörtlük Mi4, dörtlük sus, Mi4, sus say; susta yeniden vurmadan dört vuruşu koru."
+            "en": "A rest is silence for its written duration; it still occupies counted time. A quarter rest takes one beat in 4/4. Count E4 for one beat, one silent beat, E4 for one beat, one silent beat. Lightly stop a ringing string at the start of each rest; leaving a note ringing is not a rest.",
+            "tr": "Sus, yazılı süresi boyunca sessizliktir; sayılan zamanda yer tutar. Dörtlük sus 4/4’te bir vuruştur. Bir vuruş Mi4, bir sessiz vuruş, bir vuruş Mi4, bir sessiz vuruş say. Her susun başında çınlayan teli hafifçe durdur; notayı çınlatmak sus değildir."
           },
           {
-            "en": "Tie a beat 4 note across to beat 1 of the next bar; attack once and maintain the bar boundary.",
-            "tr": "Dördüncü vuruş notasını sonraki ölçünün ilkine bağla; bir kez vur ve ölçü sınırını koru."
+            "en": "A tie is a curved line joining two notes of the same pitch: add their durations and pluck only the first note. Tie a one-beat note on beat 4 to the same one-beat note on the next bar’s beat 1. Let it ring across that barline, then stop on beat 2; keep counting 4 | 1 2 3 4.",
+            "tr": "Uzatma bağı aynı yükseklikte iki notayı birleştiren eğri çizgidir: süreleri topla ve yalnız ilk notayı çal. 4. vuruştaki bir vuruşluk notayı sonraki ölçünün 1’indeki aynı bir vuruşluk notaya bağla. Ölçü çizgisinin üzerinden çınlat, sonra 2’de durdur; 4 | 1 2 3 4 saymayı sürdür."
           },
           {
             "en": "Write two bars with one tie and one rest, then tap and play their different durations.",
-            "tr": "Bir bağ ve bir sus içeren iki ölçü yaz; farklı süreleri vurup çal."
+            "tr": "Bir bağ ve bir sus içeren iki ölçü yaz; farklı sürelerini vurup çal."
           }
         ],
         "practice": {
-          "en": "Tie a beat 4 note across to beat 1 of the next bar; attack once and maintain the bar boundary. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
-          "tr": "Dördüncü vuruş notasını sonraki ölçünün ilkine bağla; bir kez vur ve ölçü sınırını koru. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla."
+          "en": "A tie is a curved line joining two notes of the same pitch: add their durations and pluck only the first note. Tie a one-beat note on beat 4 to the same one-beat note on the next bar’s beat 1. Let it ring across that barline, then stop on beat 2; keep counting 4 | 1 2 3 4. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
+          "tr": "Uzatma bağı aynı yükseklikte iki notayı birleştiren eğri çizgidir: süreleri topla ve yalnız ilk notayı çal. 4. vuruştaki bir vuruşluk notayı sonraki ölçünün 1’indeki aynı bir vuruşluk notaya bağla. Ölçü çizgisinin üzerinden çınlat, sonra 2’de durdur; 4 | 1 2 3 4 saymayı sürdür. İki kısa rahat turdan sonra aktarım görevini bir kez dene; hepsini bugün zorlamak yerine ara ver ve sonraki oturumlarda tekrarla."
         },
         "selfCheck": {
           "en": "I can identify attacks, holds and rests in my two-bar example and count the barline.",
@@ -2849,8 +2849,8 @@
             "id": "guitar.journey.reading.rests_ties.lab.foundation",
             "stage": "foundation",
             "task": {
-              "en": "Count quarter-note E4, quarter rest, E4, rest; keep four beats without re-attacking a rest.",
-              "tr": "Dörtlük Mi4, dörtlük sus, Mi4, sus say; susta yeniden vurmadan dört vuruşu koru."
+              "en": "A rest is silence for its written duration; it still occupies counted time. A quarter rest takes one beat in 4/4. Count E4 for one beat, one silent beat, E4 for one beat, one silent beat. Lightly stop a ringing string at the start of each rest; leaving a note ringing is not a rest.",
+              "tr": "Sus, yazılı süresi boyunca sessizliktir; sayılan zamanda yer tutar. Dörtlük sus 4/4’te bir vuruştur. Bir vuruş Mi4, bir sessiz vuruş, bir vuruş Mi4, bir sessiz vuruş say. Her susun başında çınlayan teli hafifçe durdur; notayı çınlatmak sus değildir."
             },
             "suggested_minutes_range": [
               2,
@@ -2879,8 +2879,8 @@
             "id": "guitar.journey.reading.rests_ties.lab.connected",
             "stage": "connected",
             "task": {
-              "en": "Tie a beat 4 note across to beat 1 of the next bar; attack once and maintain the bar boundary.",
-              "tr": "Dördüncü vuruş notasını sonraki ölçünün ilkine bağla; bir kez vur ve ölçü sınırını koru."
+              "en": "A tie is a curved line joining two notes of the same pitch: add their durations and pluck only the first note. Tie a one-beat note on beat 4 to the same one-beat note on the next bar’s beat 1. Let it ring across that barline, then stop on beat 2; keep counting 4 | 1 2 3 4.",
+              "tr": "Uzatma bağı aynı yükseklikte iki notayı birleştiren eğri çizgidir: süreleri topla ve yalnız ilk notayı çal. 4. vuruştaki bir vuruşluk notayı sonraki ölçünün 1’indeki aynı bir vuruşluk notaya bağla. Ölçü çizgisinin üzerinden çınlat, sonra 2’de durdur; 4 | 1 2 3 4 saymayı sürdür."
             },
             "suggested_minutes_range": [
               3,
@@ -2910,7 +2910,7 @@
             "stage": "transfer",
             "task": {
               "en": "Write two bars with one tie and one rest, then tap and play their different durations.",
-              "tr": "Bir bağ ve bir sus içeren iki ölçü yaz; farklı süreleri vurup çal."
+              "tr": "Bir bağ ve bir sus içeren iki ölçü yaz; farklı sürelerini vurup çal."
             },
             "suggested_minutes_range": [
               3,
@@ -2959,8 +2959,8 @@
             7
           ],
           "task": {
-            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Count quarter-note E4, quarter rest, E4, rest; keep four beats without re-attacking a rest. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
-            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Dörtlük Mi4, dörtlük sus, Mi4, sus say; susta yeniden vurmadan dört vuruşu koru. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
+            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: A rest is silence for its written duration; it still occupies counted time. A quarter rest takes one beat in 4/4. Count E4 for one beat, one silent beat, E4 for one beat, one silent beat. Lightly stop a ringing string at the start of each rest; leaving a note ringing is not a rest. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
+            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Sus, yazılı süresi boyunca sessizliktir; sayılan zamanda yer tutar. Dörtlük sus 4/4’te bir vuruştur. Bir vuruş Mi4, bir sessiz vuruş, bir vuruş Mi4, bir sessiz vuruş say. Her susun başında çınlayan teli hafifçe durdur; notayı çınlatmak sus değildir. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
           },
           "source_ids": [
             "piano-spacing-study",
@@ -2969,7 +2969,7 @@
         },
         "transfer": {
           "en": "Write two bars with one tie and one rest, then tap and play their different durations.",
-          "tr": "Bir bağ ve bir sus içeren iki ölçü yaz; farklı süreleri vurup çal."
+          "tr": "Bir bağ ve bir sus içeren iki ölçü yaz; farklı sürelerini vurup çal."
         },
         "masteryCriteria": [
           {
@@ -3443,21 +3443,21 @@
         },
         "teachingSteps": [
           {
-            "en": "Read written E3 A3 D4 G4 B4 E5 as open-string guitar notation; they sound E2 A2 D3 G3 B3 E 4.",
-            "tr": "Yazılı Mi3 La3 Re4 Sol4 Si4 Mi5'i açık tel gitar notası olarak oku; Mi2 La2 Re3 Sol3 Si3 Mi4 duyulur."
+            "en": "A staff has five lines and four spaces. In treble clef the lines from bottom to top are written E4 G4 B4 D5 F5; the spaces are F4 A4 C5 E5. Moving from a line to its next space, or a space to its next line, moves one letter along C D E F G A B, repeating into the next octave. Short ledger lines extend this pattern outside the staff. In the diagram, circled numbers identify strings. Read the open-string written notes E3 A3 D4 G4 B4 E5; guitar sounds them one octave lower as E2 A2 D3 G3 B3 E4.",
+            "tr": "Porte beş çizgi ve dört aralıktan oluşur. Sol anahtarında alttan üste çizgilerin yazılı sesleri Mi4 Sol4 Si4 Re5 Fa5; aralıklarınki Fa4 La4 Do5 Mi5’tir. Bir çizgiden komşu aralığa veya aralıktan komşu çizgiye geçiş Do Re Mi Fa Sol La Si sırasını bir adım ilerletir; sonraki oktavda sıra yeniden başlar. Kısa ek çizgiler düzeni porte dışına sürdürür. Şemada daire içindeki sayılar telleri gösterir. Açık tellerin yazılı Mi3 La3 Re4 Sol4 Si4 Mi5 notalarını oku; gitarda bir oktav pes, Mi2 La2 Re3 Sol3 Si3 Mi4 duyulur."
           },
           {
-            "en": "Match a short written E5 F5 G5 phrase to sounding string 1 frets0-1-3 with quarter rhythms.",
-            "tr": "Kısa yazılı Mi5 Fa5 Sol5 cümlesini dörtlük ritimle duyulan tel 1 perde 0-1-3'e eşle."
+            "en": "Match a short written E5 F5 G5 phrase to sounding string 1 frets 0-1-3 with quarter rhythms.",
+            "tr": "Kısa yazılı Mi5 Fa5 Sol5 cümlesini dörtlük ritimle duyulan tel 1 perde 0-1-3’e eşle."
           },
           {
             "en": "Create another three-note first-position phrase and write both written and sounding octave labels.",
-            "tr": "Başka üç notalı birinci konum cümlesi kur; yazılı ve çalan oktav adlarını birlikte yaz."
+            "tr": "Başka üç notalı birinci konum cümlesi kur; yazılı ve duyulan oktav adlarını birlikte yaz."
           }
         ],
         "practice": {
-          "en": "Match a short written E5 F5 G5 phrase to sounding string 1 frets0-1-3 with quarter rhythms. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
-          "tr": "Kısa yazılı Mi5 Fa5 Sol5 cümlesini dörtlük ritimle duyulan tel 1 perde 0-1-3'e eşle. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla."
+          "en": "Match a short written E5 F5 G5 phrase to sounding string 1 frets 0-1-3 with quarter rhythms. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
+          "tr": "Kısa yazılı Mi5 Fa5 Sol5 cümlesini dörtlük ritimle duyulan tel 1 perde 0-1-3’e eşle. İki kısa rahat turdan sonra aktarım görevini bir kez dene; hepsini bugün zorlamak yerine ara ver ve sonraki oturumlarda tekrarla."
         },
         "selfCheck": {
           "en": "I can state the octave convention and find three written notes on the intended first-position string.",
@@ -3482,8 +3482,8 @@
             "id": "guitar.journey.reading.staff.lab.foundation",
             "stage": "foundation",
             "task": {
-              "en": "Read written E3 A3 D4 G4 B4 E5 as open-string guitar notation; they sound E2 A2 D3 G3 B3 E 4.",
-              "tr": "Yazılı Mi3 La3 Re4 Sol4 Si4 Mi5'i açık tel gitar notası olarak oku; Mi2 La2 Re3 Sol3 Si3 Mi4 duyulur."
+              "en": "A staff has five lines and four spaces. In treble clef the lines from bottom to top are written E4 G4 B4 D5 F5; the spaces are F4 A4 C5 E5. Moving from a line to its next space, or a space to its next line, moves one letter along C D E F G A B, repeating into the next octave. Short ledger lines extend this pattern outside the staff. In the diagram, circled numbers identify strings. Read the open-string written notes E3 A3 D4 G4 B4 E5; guitar sounds them one octave lower as E2 A2 D3 G3 B3 E4.",
+              "tr": "Porte beş çizgi ve dört aralıktan oluşur. Sol anahtarında alttan üste çizgilerin yazılı sesleri Mi4 Sol4 Si4 Re5 Fa5; aralıklarınki Fa4 La4 Do5 Mi5’tir. Bir çizgiden komşu aralığa veya aralıktan komşu çizgiye geçiş Do Re Mi Fa Sol La Si sırasını bir adım ilerletir; sonraki oktavda sıra yeniden başlar. Kısa ek çizgiler düzeni porte dışına sürdürür. Şemada daire içindeki sayılar telleri gösterir. Açık tellerin yazılı Mi3 La3 Re4 Sol4 Si4 Mi5 notalarını oku; gitarda bir oktav pes, Mi2 La2 Re3 Sol3 Si3 Mi4 duyulur."
             },
             "suggested_minutes_range": [
               2,
@@ -3512,8 +3512,8 @@
             "id": "guitar.journey.reading.staff.lab.connected",
             "stage": "connected",
             "task": {
-              "en": "Match a short written E5 F5 G5 phrase to sounding string 1 frets0-1-3 with quarter rhythms.",
-              "tr": "Kısa yazılı Mi5 Fa5 Sol5 cümlesini dörtlük ritimle duyulan tel 1 perde 0-1-3'e eşle."
+              "en": "Match a short written E5 F5 G5 phrase to sounding string 1 frets 0-1-3 with quarter rhythms.",
+              "tr": "Kısa yazılı Mi5 Fa5 Sol5 cümlesini dörtlük ritimle duyulan tel 1 perde 0-1-3’e eşle."
             },
             "suggested_minutes_range": [
               3,
@@ -3543,7 +3543,7 @@
             "stage": "transfer",
             "task": {
               "en": "Create another three-note first-position phrase and write both written and sounding octave labels.",
-              "tr": "Başka üç notalı birinci konum cümlesi kur; yazılı ve çalan oktav adlarını birlikte yaz."
+              "tr": "Başka üç notalı birinci konum cümlesi kur; yazılı ve duyulan oktav adlarını birlikte yaz."
             },
             "suggested_minutes_range": [
               3,
@@ -3592,8 +3592,8 @@
             7
           ],
           "task": {
-            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Read written E3 A3 D4 G4 B4 E5 as open-string guitar notation; they sound E2 A2 D3 G3 B3 E 4. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
-            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Yazılı Mi3 La3 Re4 Sol4 Si4 Mi5'i açık tel gitar notası olarak oku; Mi2 La2 Re3 Sol3 Si3 Mi4 duyulur. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
+            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: A staff has five lines and four spaces. In treble clef the lines from bottom to top are written E4 G4 B4 D5 F5; the spaces are F4 A4 C5 E5. Moving from a line to its next space, or a space to its next line, moves one letter along C D E F G A B, repeating into the next octave. Short ledger lines extend this pattern outside the staff. In the diagram, circled numbers identify strings. Read the open-string written notes E3 A3 D4 G4 B4 E5; guitar sounds them one octave lower as E2 A2 D3 G3 B3 E4. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
+            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Porte beş çizgi ve dört aralıktan oluşur. Sol anahtarında alttan üste çizgilerin yazılı sesleri Mi4 Sol4 Si4 Re5 Fa5; aralıklarınki Fa4 La4 Do5 Mi5’tir. Bir çizgiden komşu aralığa veya aralıktan komşu çizgiye geçiş Do Re Mi Fa Sol La Si sırasını bir adım ilerletir; sonraki oktavda sıra yeniden başlar. Kısa ek çizgiler düzeni porte dışına sürdürür. Şemada daire içindeki sayılar telleri gösterir. Açık tellerin yazılı Mi3 La3 Re4 Sol4 Si4 Mi5 notalarını oku; gitarda bir oktav pes, Mi2 La2 Re3 Sol3 Si3 Mi4 duyulur. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
           },
           "source_ids": [
             "piano-spacing-study",
@@ -3602,7 +3602,7 @@
         },
         "transfer": {
           "en": "Create another three-note first-position phrase and write both written and sounding octave labels.",
-          "tr": "Başka üç notalı birinci konum cümlesi kur; yazılı ve çalan oktav adlarını birlikte yaz."
+          "tr": "Başka üç notalı birinci konum cümlesi kur; yazılı ve duyulan oktav adlarını birlikte yaz."
         },
         "masteryCriteria": [
           {
@@ -3654,21 +3654,21 @@
         },
         "teachingSteps": [
           {
-            "en": "Before playing, scan four bars for meter, notes, rests and the hardest string change.",
-            "tr": "Çalmadan dört ölçünün ölçü türünü, notalarını, suslarını ve en zor tel geçişini tara."
+            "en": "Use this original four-bar 4/4 reading card. Pitches are sounding pitches; (1) is one beat, (1/2) half a beat, and Rest(1) is one silent beat. Each bar totals four beats. Scan the meter, notes, rests and hardest string change before playing:\n1 | E4(1) G4(1) F4(1) E4(1)\n2 | B3(1) D4(1/2) C4(1/2) B3(1) Rest(1)\n3 | G3(1) A3(1) B3(1) D4(1)\n4 | C4(1) B3(1) E4(1) Rest(1)\nUse known first-position locations: string 1 E4/F4/G4 = frets 0/1/3; string 2 B3/C4/D4 = 0/1/3; string 3 G3/A3 = 0/2. This text card practises note-and-duration reading; return to the staff diagram for written staff locations.",
+            "tr": "Bu özgün dört ölçülük 4/4 okuma kartını kullan. Adlar duyulan seslerdir; (1) bir vuruş, (1/2) yarım vuruş, Sus(1) bir sessiz vuruştur. Her ölçü toplam dört vuruştur. Çalmadan ölçü türünü, notaları, susları ve en zor tel geçişini tara:\n1 | Mi4(1) Sol4(1) Fa4(1) Mi4(1)\n2 | Si3(1) Re4(1/2) Do4(1/2) Si3(1) Sus(1)\n3 | Sol3(1) La3(1) Si3(1) Re4(1)\n4 | Do4(1) Si3(1) Mi4(1) Sus(1)\nBilinen birinci konum yerlerini kullan: tel 1 Mi4/Fa4/Sol4 = perde 0/1/3; tel 2 Si3/Do4/Re4 = 0/1/3; tel 3 Sol3/La3 = 0/2. Bu metin kartı nota ve süre okuma çalışmasıdır; yazılı porte yerleri için porte şemasına dön."
           },
           {
-            "en": "Count the rhythm alone, then play the phrase at a comfortable pulse without restarting every error.",
-            "tr": "Önce yalnız ritmi say, sonra her hatada başa dönmeden rahat vuruşla cümleyi çal."
+            "en": "Count the card’s rhythm alone, then play its four bars at a comfortable pulse. Keep the count after an error and note the bar and beat to revisit. Use this fixed card as a first read only on the first attempt; subsequent runs practise a familiar passage.",
+            "tr": "Önce kartın yalnız ritmini say, sonra dört ölçüsünü rahat vuruşla çal. Hata sonrasında sayımı koru ve dönülecek ölçüyle vuruşu yaz. Bu sabit kart yalnız ilk denemede ilk okumadır; sonraki çalımlar tanıdık cümle çalışmasıdır."
           },
           {
-            "en": "Change one bar's notes while retaining rhythm and read the revised version for the first time.",
-            "tr": "Bir ölçünün notalarını ritmi koruyarak değiştir; yeni sürümü ilk kez oku."
+            "en": "Change one bar’s notes while retaining its four-beat total and read the revised version before rehearsing it. Keep the other three bars unchanged so you can compare the exact change.",
+            "tr": "Bir ölçünün notalarını dört vuruşluk toplamını koruyarak değiştir ve yeni sürümü prova etmeden oku. Somut değişikliği karşılaştırmak için diğer üç ölçüyü aynı tut."
           }
         ],
         "practice": {
-          "en": "Count the rhythm alone, then play the phrase at a comfortable pulse without restarting every error. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
-          "tr": "Önce yalnız ritmi say, sonra her hatada başa dönmeden rahat vuruşla cümleyi çal. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla."
+          "en": "Count the card’s rhythm alone, then play its four bars at a comfortable pulse. Keep the count after an error and note the bar and beat to revisit. Use this fixed card as a first read only on the first attempt; subsequent runs practise a familiar passage. Try two short comfortable rounds, then the transfer task once; take rests and repeat in later sessions rather than forcing everything today.",
+          "tr": "Önce kartın yalnız ritmini say, sonra dört ölçüsünü rahat vuruşla çal. Hata sonrasında sayımı koru ve dönülecek ölçüyle vuruşu yaz. Bu sabit kart yalnız ilk denemede ilk okumadır; sonraki çalımlar tanıdık cümle çalışmasıdır. İki kısa rahat turdan sonra aktarım görevini bir kez dene; hepsini bugün zorlamak yerine ara ver ve sonraki oturumlarda tekrarla."
         },
         "selfCheck": {
           "en": "I can read a changed four-bar phrase, name one error and improve that exact place on the next attempt.",
@@ -3693,8 +3693,8 @@
             "id": "guitar.journey.reading.reading_checkpoint.lab.foundation",
             "stage": "foundation",
             "task": {
-              "en": "Before playing, scan four bars for meter, notes, rests and the hardest string change.",
-              "tr": "Çalmadan dört ölçünün ölçü türünü, notalarını, suslarını ve en zor tel geçişini tara."
+              "en": "Use this original four-bar 4/4 reading card. Pitches are sounding pitches; (1) is one beat, (1/2) half a beat, and Rest(1) is one silent beat. Each bar totals four beats. Scan the meter, notes, rests and hardest string change before playing:\n1 | E4(1) G4(1) F4(1) E4(1)\n2 | B3(1) D4(1/2) C4(1/2) B3(1) Rest(1)\n3 | G3(1) A3(1) B3(1) D4(1)\n4 | C4(1) B3(1) E4(1) Rest(1)\nUse known first-position locations: string 1 E4/F4/G4 = frets 0/1/3; string 2 B3/C4/D4 = 0/1/3; string 3 G3/A3 = 0/2. This text card practises note-and-duration reading; return to the staff diagram for written staff locations.",
+              "tr": "Bu özgün dört ölçülük 4/4 okuma kartını kullan. Adlar duyulan seslerdir; (1) bir vuruş, (1/2) yarım vuruş, Sus(1) bir sessiz vuruştur. Her ölçü toplam dört vuruştur. Çalmadan ölçü türünü, notaları, susları ve en zor tel geçişini tara:\n1 | Mi4(1) Sol4(1) Fa4(1) Mi4(1)\n2 | Si3(1) Re4(1/2) Do4(1/2) Si3(1) Sus(1)\n3 | Sol3(1) La3(1) Si3(1) Re4(1)\n4 | Do4(1) Si3(1) Mi4(1) Sus(1)\nBilinen birinci konum yerlerini kullan: tel 1 Mi4/Fa4/Sol4 = perde 0/1/3; tel 2 Si3/Do4/Re4 = 0/1/3; tel 3 Sol3/La3 = 0/2. Bu metin kartı nota ve süre okuma çalışmasıdır; yazılı porte yerleri için porte şemasına dön."
             },
             "suggested_minutes_range": [
               2,
@@ -3723,8 +3723,8 @@
             "id": "guitar.journey.reading.reading_checkpoint.lab.connected",
             "stage": "connected",
             "task": {
-              "en": "Count the rhythm alone, then play the phrase at a comfortable pulse without restarting every error.",
-              "tr": "Önce yalnız ritmi say, sonra her hatada başa dönmeden rahat vuruşla cümleyi çal."
+              "en": "Count the card’s rhythm alone, then play its four bars at a comfortable pulse. Keep the count after an error and note the bar and beat to revisit. Use this fixed card as a first read only on the first attempt; subsequent runs practise a familiar passage.",
+              "tr": "Önce kartın yalnız ritmini say, sonra dört ölçüsünü rahat vuruşla çal. Hata sonrasında sayımı koru ve dönülecek ölçüyle vuruşu yaz. Bu sabit kart yalnız ilk denemede ilk okumadır; sonraki çalımlar tanıdık cümle çalışmasıdır."
             },
             "suggested_minutes_range": [
               3,
@@ -3753,8 +3753,8 @@
             "id": "guitar.journey.reading.reading_checkpoint.lab.transfer",
             "stage": "transfer",
             "task": {
-              "en": "Change one bar's notes while retaining rhythm and read the revised version for the first time.",
-              "tr": "Bir ölçünün notalarını ritmi koruyarak değiştir; yeni sürümü ilk kez oku."
+              "en": "Change one bar’s notes while retaining its four-beat total and read the revised version before rehearsing it. Keep the other three bars unchanged so you can compare the exact change.",
+              "tr": "Bir ölçünün notalarını dört vuruşluk toplamını koruyarak değiştir ve yeni sürümü prova etmeden oku. Somut değişikliği karşılaştırmak için diğer üç ölçüyü aynı tut."
             },
             "suggested_minutes_range": [
               3,
@@ -3803,8 +3803,8 @@
             7
           ],
           "task": {
-            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Before playing, scan four bars for meter, notes, rests and the hardest string change. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
-            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Çalmadan dört ölçünün ölçü türünü, notalarını, suslarını ve en zor tel geçişini tara. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
+            "en": "First recall the earlier task order or its main idea without viewing the details. Then reopen the instructions and check; practise only if appropriate. Review task: Use this original four-bar 4/4 reading card. Pitches are sounding pitches; (1) is one beat, (1/2) half a beat, and Rest(1) is one silent beat. Each bar totals four beats. Scan the meter, notes, rests and hardest string change before playing:\n1 | E4(1) G4(1) F4(1) E4(1)\n2 | B3(1) D4(1/2) C4(1/2) B3(1) Rest(1)\n3 | G3(1) A3(1) B3(1) D4(1)\n4 | C4(1) B3(1) E4(1) Rest(1)\nUse known first-position locations: string 1 E4/F4/G4 = frets 0/1/3; string 2 B3/C4/D4 = 0/1/3; string 3 G3/A3 = 0/2. This text card practises note-and-duration reading; return to the staff diagram for written staff locations. Note what was recalled and what needed help; adjust the interval to your available time and comfort.",
+            "tr": "Önce ayrıntılara bakmadan önceki görevin sırasını veya temel fikrini söyle. Sonra yönergeyi açıp kontrol et; yalnız uygunsa çalış. Tekrar görevi: Bu özgün dört ölçülük 4/4 okuma kartını kullan. Adlar duyulan seslerdir; (1) bir vuruş, (1/2) yarım vuruş, Sus(1) bir sessiz vuruştur. Her ölçü toplam dört vuruştur. Çalmadan ölçü türünü, notaları, susları ve en zor tel geçişini tara:\n1 | Mi4(1) Sol4(1) Fa4(1) Mi4(1)\n2 | Si3(1) Re4(1/2) Do4(1/2) Si3(1) Sus(1)\n3 | Sol3(1) La3(1) Si3(1) Re4(1)\n4 | Do4(1) Si3(1) Mi4(1) Sus(1)\nBilinen birinci konum yerlerini kullan: tel 1 Mi4/Fa4/Sol4 = perde 0/1/3; tel 2 Si3/Do4/Re4 = 0/1/3; tel 3 Sol3/La3 = 0/2. Bu metin kartı nota ve süre okuma çalışmasıdır; yazılı porte yerleri için porte şemasına dön. Hatırlananı ve yardım gerekeni yaz; aralığı zamanına ve rahatlığına göre değiştir."
           },
           "source_ids": [
             "piano-spacing-study",
@@ -3812,8 +3812,8 @@
           ]
         },
         "transfer": {
-          "en": "Change one bar's notes while retaining rhythm and read the revised version for the first time.",
-          "tr": "Bir ölçünün notalarını ritmi koruyarak değiştir; yeni sürümü ilk kez oku."
+          "en": "Change one bar’s notes while retaining its four-beat total and read the revised version before rehearsing it. Keep the other three bars unchanged so you can compare the exact change.",
+          "tr": "Bir ölçünün notalarını dört vuruşluk toplamını koruyarak değiştir ve yeni sürümü prova etmeden oku. Somut değişikliği karşılaştırmak için diğer üç ölçüyü aynı tut."
         },
         "masteryCriteria": [
           {
@@ -12653,10 +12653,86 @@
               "ticksPerQuarter": 2,
               "pitchFrame": "sounding",
               "bars": [
-                [{"sounding": "E4", "ticks": 2}, {"sounding": "F4", "ticks": 2}, {"sounding": "G4", "ticks": 2}, {"sounding": "F4", "ticks": 2}],
-                [{"sounding": "B3", "ticks": 2}, {"sounding": "C4", "ticks": 1}, {"sounding": "D4", "ticks": 1}, {"sounding": "C4", "ticks": 2}, {"rest": true, "ticks": 2}],
-                [{"sounding": "G3", "ticks": 2}, {"sounding": "B3", "ticks": 2}, {"sounding": "D4", "ticks": 1}, {"sounding": "C4", "ticks": 1}, {"sounding": "B3", "ticks": 2}],
-                [{"sounding": "E4", "ticks": 2}, {"sounding": "G4", "ticks": 2}, {"rest": true, "ticks": 2}, {"sounding": "E4", "ticks": 2}]
+                [
+                  {
+                    "sounding": "E4",
+                    "ticks": 2
+                  },
+                  {
+                    "sounding": "F4",
+                    "ticks": 2
+                  },
+                  {
+                    "sounding": "G4",
+                    "ticks": 2
+                  },
+                  {
+                    "sounding": "F4",
+                    "ticks": 2
+                  }
+                ],
+                [
+                  {
+                    "sounding": "B3",
+                    "ticks": 2
+                  },
+                  {
+                    "sounding": "C4",
+                    "ticks": 1
+                  },
+                  {
+                    "sounding": "D4",
+                    "ticks": 1
+                  },
+                  {
+                    "sounding": "C4",
+                    "ticks": 2
+                  },
+                  {
+                    "rest": true,
+                    "ticks": 2
+                  }
+                ],
+                [
+                  {
+                    "sounding": "G3",
+                    "ticks": 2
+                  },
+                  {
+                    "sounding": "B3",
+                    "ticks": 2
+                  },
+                  {
+                    "sounding": "D4",
+                    "ticks": 1
+                  },
+                  {
+                    "sounding": "C4",
+                    "ticks": 1
+                  },
+                  {
+                    "sounding": "B3",
+                    "ticks": 2
+                  }
+                ],
+                [
+                  {
+                    "sounding": "E4",
+                    "ticks": 2
+                  },
+                  {
+                    "sounding": "G4",
+                    "ticks": 2
+                  },
+                  {
+                    "rest": true,
+                    "ticks": 2
+                  },
+                  {
+                    "sounding": "E4",
+                    "ticks": 2
+                  }
+                ]
               ]
             },
             "suggested_minutes_range": [

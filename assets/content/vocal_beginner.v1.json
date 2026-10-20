@@ -491,7 +491,7 @@
       },
       "teach": {
         "en": "Pitch means how high or low a tone sounds; volume means how loud it is. A nearby higher tone need not be louder. This course first uses relative directions, not fixed semitone intervals or accuracy scores. Work within a small, easy part of your voice; avoid testing your range limits.",
-        "tr": "Perde sesin tiz/pes oluşudur; seviye ne kadar yüksek duyulduğudur. Yakın tiz ses daha gür olmak zorunda değildir. Bu kurs önce göreli yönleri kullanır; sabit yarım ses aralığı veya doğruluk puanı değil. Sesinin küçük, rahat bölümünde çalış; sınırlarını deneme."
+        "tr": "Perde sesin tiz/pes oluşudur; ses şiddeti ne kadar gür veya hafif duyulduğudur. Yakın tiz ses daha gür olmak zorunda değildir. Bu kurs önce göreli yönleri kullanır; sabit yarım ses aralığı veya doğruluk puanı değil. Sesinin küçük, rahat bölümünde çalış; sınırlarını deneme."
       },
       "practice": {
         "en": "Hum one comfortable tone, make a very small easy glide slightly higher and return; release and rest. On a separate attempt try slightly lower and return. Keep conversationally comfortable volume; stop if the move adds effort.",
@@ -636,12 +636,12 @@
         "tr": "Cümle süresi ve nefes araları"
       },
       "teach": {
-        "en": "The study uses eight half-beat cells per 4/4 bar. V starts the stated tone/syllable; = adds no new start and continues current sound or silence; R releases sound and counts silence. = never means hold your breath. Normal breathing is allowed during rests and whenever needed. Written durations are suggestions, not physiological targets. H remains the higher-tone label; it is never the continuation symbol.",
-        "tr": "Etüt, 4/4 ölçü başına sekiz yarım vuruş hücresi kullanır. V belirtilen ses/heceyi başlatır; = yeni başlangıç eklemez, mevcut ses veya sessizliği sürdürür; R sesi bırakıp sessizlik sayar. = asla nefes tut demek değildir. Suslarda ve gerektiğinde normal nefes serbesttir. Yazılı süreler öneridir; fizyolojik hedef değil. H tiz ses etiketi olarak kalır; sürdürme sembolü değildir."
+        "en": "The study uses eight equal half-beat cells per 4/4 bar. Count “1 and 2 and 3 and 4 and”: each number is a beat and each “and” is halfway to the next number. V starts the stated tone/syllable; = adds no new start and continues current sound or silence; R releases sound and counts silence. = never means hold your breath. Normal breathing is allowed during rests and whenever needed. Written durations are suggestions, not physiological targets. H remains the higher-tone label; it is never the continuation symbol.",
+        "tr": "Etüt, 4/4 ölçü başına sekiz eşit yarım vuruş hücresi kullanır. “1 ve 2 ve 3 ve 4 ve” say: her sayı bir vuruştur; her “ve” sonraki sayıya giden sürenin ortasındadır. V belirtilen ses/heceyi başlatır; = yeni başlangıç eklemez, mevcut ses veya sessizliği sürdürür; R sesi bırakıp sessizlik sayar. = asla nefes tut demek değildir. Suslarda ve gerektiğinde normal nefes serbesttir. Yazılı süreler öneridir; fizyolojik hedef değil. H tiz ses etiketi olarak kalır; sürdürme sembolü değildir."
       },
       "practice": {
-        "en": "Tap each printed V, keep counting =/R. Inspect the full silent bars 6 and 8 and the silent endings of bars 1–4 before singing. Choose a tempo and span that allow an easy short phrase, or shorten the voiced part and label your exact adapted task.",
-        "tr": "Basılı her V’yi vur; =/R’de saymayı sürdür. Söylemeden önce tam sessiz ölçü 6 ve 8’i ve ölçü 1–4’ün sessiz sonlarını incele. Rahat kısa cümleye izin veren tempo/alan seç veya sesli bölümü kısaltıp tam uyarlanmış görevi adlandır."
+        "en": "First tap four even beats without singing; then count “1 and 2 and 3 and 4 and” with eight evenly spaced taps. On the study, tap only each printed V while the half-beat count continues through = and R. Inspect the full silent bars 6 and 8 and the silent endings of bars 1–4 before singing. Choose a tempo and span that allow an easy short phrase, or shorten the voiced part and label your exact adapted task.",
+        "tr": "Önce seslendirmeden dört eşit vuruş vur; sonra sekiz eşit aralıklı vuruşla “1 ve 2 ve 3 ve 4 ve” say. Etütte yarım vuruş sayımı = ve R boyunca sürerken yalnız basılı V’leri vur. Söylemeden önce tam sessiz ölçü 6 ve 8’i ve ölçü 1–4’ün sessiz sonlarını incele. Rahat kısa cümleye izin veren tempo/alan seç veya sesli bölümü kısaltıp tam uyarlanmış görevi adlandır."
       },
       "check": {
         "en": "Can I identify silence and breathe without treating a counter as an obligation?",
@@ -718,8 +718,8 @@
         "tr": "Rahat başla/dur seçimleri, doğal nefes, kısa mırıldanma/başlatma/bırakma, sayılan sus, perde-seviye ayrımı, üç sesli çizgi, ünlüler, özgün sözler ve cümle planını gözden geçir. Bu sınırlı yazılı temel alanı, entonasyonu, uzun ses kalitesini, vibratoyu, sağlığı veya ses türünü onaylamaz."
       },
       "practice": {
-        "en": "On another comfortable day decode the new two-bar contour before reading its answer, speak/tap the original words, and try your recorded short study only if comfortable. Name one repeatable outcome, one uncertainty and the relevant smaller lesson. Rest is always a valid choice.",
-        "tr": "Başka rahat günde cevabı okumadan yeni iki ölçülük çizgiyi çöz, özgün sözleri konuş/vur ve yalnız rahatsa kayıtlı kısa etüdünü dene. Tekrarlanabilir bir kazanım, bir belirsizlik ve ilgili küçük dersi adlandır. Dinlenmek her zaman geçerli seçimdir."
+        "en": "On another comfortable day, before reopening the explanations, recall what M/L/H, R and = mean and name one reason to stop vocalizing. Check your answer against lessons 8 and 13 and return to a missed item. Decode the two-bar contour before revealing its reading answer, speak/tap the original words, and try your recorded short study only if comfortable. Name one repeatable outcome and one uncertainty. Rest is always a valid choice.",
+        "tr": "Başka rahat günde açıklamaları yeniden açmadan M/L/H, R ve = anlamlarını hatırla ve seslendirmeyi durdurmak için bir neden söyle. Yanıtını ders 8 ve 13 ile kontrol et; eksik öğeye dön. Okuma cevabını açmadan iki ölçülük çizgiyi çöz, özgün sözleri konuş/vur ve yalnız rahatsa kayıtlı kısa etüdünü dene. Tekrarlanabilir bir kazanım ve bir belirsizlik adlandır. Dinlenmek her zaman geçerli seçimdir."
       },
       "check": {
         "en": "Can I understand and attempt the defined beginner tasks, stop appropriately and choose a useful next step?",

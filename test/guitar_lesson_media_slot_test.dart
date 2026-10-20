@@ -44,20 +44,20 @@ final class _Fixture {
       lessonId: lessonId,
       sceneId: 'ostinato:$lessonId:orientation',
       variantStem:
-          'ostinato/guitar-journey-start-parts--bd7825d2/orientation--073d547b2a4ce9e1a10d894bbb15b530d9e26398490b5cf6a280c742e097d64d--master-format-pending',
+          'ostinato/guitar-journey-start-parts--bd7825d2/orientation--2396f9e7f0d1fe64754d84fad831e287e8f3571093c3e936dd56e63392feaf3f--master-format-pending',
       courseSourceSha256: computeSha256Hex(courseBytes),
       lessonCanonicalSha256: computeSha256Hex(
         Uint8List.fromList(utf8.encode(canonicalJsonEncode(firstLesson))),
       ),
       productionSpecSha256:
-          '073d547b2a4ce9e1a10d894bbb15b530d9e26398490b5cf6a280c742e097d64d',
+          '2396f9e7f0d1fe64754d84fad831e287e8f3571093c3e936dd56e63392feaf3f',
       sourceCueSha256:
           '82f49f9b65c8eb0075add7c569f18a8143090c7a876f1f20e4cb397c177d4fcb',
       idempotencyKey:
-          'motion-media-v1:073d547b2a4ce9e1a10d894bbb15b530d9e26398490b5cf6a280c742e097d64d',
+          'motion-media-v1:2396f9e7f0d1fe64754d84fad831e287e8f3571093c3e936dd56e63392feaf3f',
       productionState: 'PREPRODUCTION_UNGENERATED',
       sourcePinSha256:
-          '1ac1a16f559a778c9e575d8aeb840b4e061d6ea7559b9e4b14ee6340448dddfc',
+          'e57bb9d003a4baf06da5e98a314e09ca5df92fefbf6936b671517fdeb953f1eb',
     );
     final stem = 'assets/content/media/${source.variantStem}';
     video = Uint8List.fromList([
