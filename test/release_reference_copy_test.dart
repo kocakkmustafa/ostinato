@@ -102,20 +102,31 @@ void main() {
             final course = discipline.courses.singleWhere(
               (course) => course.lessons.any((entry) => entry.id == lesson.id),
             );
-            await tester.pumpWidget(
-              host(CourseScreenRoute(discipline: discipline, course: course)),
-            );
-            await tester.pumpAndSettle();
+            for (final textScale in [1.0, 2.0]) {
+              await tester.pumpWidget(
+                host(
+                  CourseScreenRoute(discipline: discipline, course: course),
+                  textScale: textScale,
+                ),
+              );
+              await tester.pumpAndSettle();
+              final row = find.byKey(Key('lesson-${lesson.id}'));
+              final rowCopy = tester
+                  .widgetList<RichText>(
+                    find.descendant(of: row, matching: find.byType(RichText)),
+                  )
+                  .map((widget) => widget.text.toPlainText())
+                  .join(' ');
+              expect(rowCopy, contains(firstSentence));
+              expect(rowCopy, isNot(contains('your own trunk')));
+              expect(rowCopy, isNot(contains('gövdenizin çizimiyle')));
+              expect(
+                tester.takeException(),
+                isNull,
+                reason: 'Course row must fit at 320px and ${textScale}x text',
+              );
+            }
             final row = find.byKey(Key('lesson-${lesson.id}'));
-            final rowCopy = tester
-                .widgetList<RichText>(
-                  find.descendant(of: row, matching: find.byType(RichText)),
-                )
-                .map((widget) => widget.text.toPlainText())
-                .join(' ');
-            expect(rowCopy, contains(firstSentence));
-            expect(rowCopy, isNot(contains('your own trunk')));
-            expect(rowCopy, isNot(contains('gövdenizin çizimiyle')));
             await tester.ensureVisible(row);
             await tester.tap(row);
             await tester.pumpAndSettle();

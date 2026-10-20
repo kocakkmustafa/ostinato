@@ -366,6 +366,19 @@ void main() {
         final back = isTr ? 'Kursa dön' : 'Back to course';
         final recordKey = '${course.contentVersion}|$firstId';
 
+        Future<void> waitForUi(bool Function() ready, String reason) async {
+          // A progress reload performs actual file I/O while the widget clock
+          // is fake. Bound both clocks instead of settling a loading spinner.
+          for (var attempt = 0; attempt < 200; attempt++) {
+            await tester.pump(const Duration(milliseconds: 20));
+            if (ready()) return;
+            await tester.runAsync(
+              () => Future<void>.delayed(const Duration(milliseconds: 10)),
+            );
+          }
+          expect(ready(), isTrue, reason: reason);
+        }
+
         await tester.pumpWidget(
           MaterialApp(
             locale: Locale(locale),
@@ -403,10 +416,10 @@ void main() {
           });
           // A route-pop reload may already own the file queue in the fake
           // widget zone. Pump it while actual file I/O finishes, then join it.
-          for (var attempt = 0; attempt < 40 && !done; attempt++) {
+          for (var attempt = 0; attempt < 100 && !done; attempt++) {
             await tester.pump();
             await tester.runAsync(
-              () => Future<void>.delayed(const Duration(milliseconds: 5)),
+              () => Future<void>.delayed(const Duration(milliseconds: 10)),
             );
           }
           if (error != null) Error.throwWithStackTrace(error!, stack!);
@@ -419,13 +432,15 @@ void main() {
           bool Function(GuitarLessonProgress?) saved,
         ) async {
           await tester.ensureVisible(find.text(text));
-          await tester.runAsync(() async {
-            await tester.tap(find.text(text));
-            await store.load();
-          });
+          await tester.runAsync(() => tester.tap(find.text(text)));
           for (var attempt = 0; attempt < 40; attempt++) {
             // Yield to actual file I/O; completion must be read from disk.
-            if (saved(await savedRecord())) return;
+            final record = await savedRecord();
+            await tester.pump();
+            if (saved(record)) return;
+            await tester.runAsync(
+              () => Future<void>.delayed(const Duration(milliseconds: 10)),
+            );
           }
           fail('The lesson action was not persisted: $text');
         }
@@ -441,9 +456,7 @@ void main() {
         expect(backButton, findsOneWidget);
         await tester.ensureVisible(backButton);
         await tester.pumpAndSettle();
-        await tester.tap(backButton);
-        await tester.pumpAndSettle();
-        expect(tester.takeException(), isNull);
+        await tester.runAsync(() => tester.tap(backButton));
 
         // The course route stayed mounted; its reload must read the saved record.
         final courseProgress = find.text(
@@ -451,16 +464,27 @@ void main() {
               ? '1 / 60 öz beyanla tamamlandı'
               : '1 of 60 self-reported complete',
         );
-        for (var attempt = 0; attempt < 40; attempt++) {
-          await savedRecord();
-          await tester.pumpAndSettle();
-          if (courseProgress.evaluate().isNotEmpty) break;
-        }
+        await waitForUi(
+          () =>
+              courseProgress.evaluate().isNotEmpty &&
+              find.byType(GuitarJourneyLessonScreen).evaluate().isEmpty,
+          'Returning to the course must reload the saved disk progress',
+        );
         expect(courseProgress, findsOneWidget);
+        final savedAfterReturn = await savedRecord();
+        expect(savedAfterReturn?.practiceCount, 1);
+        expect(savedAfterReturn?.selfReportedCompletedAt, isNotNull);
+        expect(tester.takeException(), isNull);
         final firstLesson = find.byKey(const Key('guitar-lesson-$firstId'));
         await tester.ensureVisible(firstLesson);
         await tester.tap(firstLesson);
-        await tester.pumpAndSettle();
+        await waitForUi(
+          () => find
+              .text(isTr ? 'Çalışma kaydı: 1' : 'Practice entries: 1')
+              .evaluate()
+              .isNotEmpty,
+          'Reopening the lesson must show its persisted practice count',
+        );
         expect(
           find.text(isTr ? 'Çalışma kaydı: 1' : 'Practice entries: 1'),
           findsOneWidget,

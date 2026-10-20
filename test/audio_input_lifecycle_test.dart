@@ -19,9 +19,11 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(resetAudioCaptureCoordinatorForTest);
 
-  testWidgets(
+  // Channel plumbing needs the real event queue; the PCM/deadline tests
+  // below continue to use the widget fake clock.
+  test(
     'raw EventChannel EOF is terminal once and preserves the reusable wrapper',
-    (tester) async {
+    () async {
       const method = MethodChannel('com.yulalab.ostinato/audio_capture');
       const events = MethodChannel('com.yulalab.ostinato/audio_capture/events');
       final messenger =
@@ -60,7 +62,7 @@ void main() {
       // A null platform message is EOF; a success envelope containing null
       // would instead be a malformed data event.
       messenger.handlePlatformMessage(events.name, null, (_) {});
-      await tester.pump();
+      await pumpEventQueue();
       expect(received, hasLength(1));
       expect(
         (received.single as RawInterruptedEvent).reason,
@@ -85,12 +87,12 @@ void main() {
         }),
         (_) {},
       );
-      await tester.pump();
+      await pumpEventQueue();
       expect(received.last, isA<RawRouteChangedEvent>());
       await channel.stop();
       // A retired raw stream must not publish another terminal event.
       messenger.handlePlatformMessage(events.name, null, (_) {});
-      await tester.pump();
+      await pumpEventQueue();
       expect(received.whereType<RawInterruptedEvent>(), hasLength(1));
       expect(calls.where((call) => call == 'stop'), hasLength(2));
       await sub.cancel();

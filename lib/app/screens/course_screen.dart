@@ -141,37 +141,45 @@ class _LessonRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
+              // Give the title and status their own bounded lines. A long
+              // status chip must wrap at large text sizes, not squeeze the
+              // title or overflow the lesson card.
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(catalogName(context, lesson.id, lesson.displayName),
-                            style: hankenText(size: 15.5, weight: FontWeight.w500)),
-                        const SizedBox(height: 6),
-                        Text(
-                            '${lesson.minutes} ${localized(context, 'MIN', 'DK')}'
-                            '${lesson.focus.isEmpty ? '' : ' · ${catalogTag(context, lesson.focus)}'}',
-                            style: monoText()),
-                      ],
-                    ),
+                  Text(
+                    catalogName(context, lesson.id, lesson.displayName),
+                    style: hankenText(size: 15.5, weight: FontWeight.w500),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(height: 6),
+                  Text(
+                    '${lesson.minutes} ${localized(context, 'MIN', 'DK')}'
+                    '${lesson.focus.isEmpty ? '' : ' · ${catalogTag(context, lesson.focus)}'}',
+                    style: monoText(),
+                  ),
+                  const SizedBox(height: 10),
                   Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                     decoration: BoxDecoration(
                         color: chipBg, borderRadius: BorderRadius.circular(7)),
-                    child: Text(localized(context, chip,
+                    child: Text(
+                      localized(
+                        context,
+                        chip,
                         switch (lesson.kind) {
                           LessonKind.locked => 'KİLİTLİ',
                           LessonKind.demoOnly => 'REFERANS · PUAN YOK',
                           LessonKind.guide => 'REHBER',
                           LessonKind.scored => 'REFERANS',
-                        }),
-                        style: monoText(size: 9.5, color: chipFg, letterSpacing: .07)),
+                        },
+                      ),
+                      style: monoText(
+                        size: 9.5,
+                        color: chipFg,
+                        letterSpacing: .07,
+                      ),
+                    ),
                   ),
                 ],
               ),

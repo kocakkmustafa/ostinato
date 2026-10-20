@@ -67,6 +67,11 @@ void main() {
         await tester.pumpWidget(screen(true));
         await tester.pumpAndSettle();
         final target = find.byKey(const Key('target'));
+        final nativeTarget = find.descendant(
+          of: target,
+          matching: find.byType(IconButton),
+        );
+        expect(nativeTarget, findsOneWidget);
         final neighbor = find.byKey(const Key('neighbor'));
         final rect = tester.getRect(target);
         expect(rect.size, const Size(48, 48));
@@ -113,7 +118,7 @@ void main() {
         expect(neighborTaps, 1);
         expect(taps, 4);
 
-        final actionNode = tester.getSemantics(find.bySemanticsLabel(label));
+        final actionNode = tester.getSemantics(nativeTarget);
         tester.binding.pipelineOwner.semanticsOwner!.performAction(
           actionNode.id,
           SemanticsAction.tap,
@@ -125,9 +130,24 @@ void main() {
         expect(find.text(label), findsOneWidget);
         expect(taps, 5);
 
+        // The tooltip overlay also contains the label. Let its real lifecycle
+        // finish before checking label uniqueness on the disabled button.
+        await tester.pump(const Duration(seconds: 3));
+        await tester.pumpAndSettle(
+          const Duration(milliseconds: 50),
+          EnginePhase.sendSemanticsUpdate,
+          const Duration(seconds: 2),
+        );
+        expect(find.text(label), findsNothing);
         await tester.pumpWidget(screen(false));
         await tester.pumpAndSettle();
-        final disabled = tester.getSemantics(find.bySemanticsLabel(label));
+        expect(find.bySemanticsLabel(label), findsOneWidget);
+        final disabled = tester.getSemantics(nativeTarget);
+        expect(disabled.getSemanticsData().label, label);
+        expect(
+          disabled.getSemanticsData().hasFlag(SemanticsFlag.isButton),
+          isTrue,
+        );
         expect(
           disabled.getSemanticsData().hasFlag(SemanticsFlag.hasEnabledState),
           isTrue,
@@ -196,8 +216,19 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-    final repo = await ContentRepository.load();
-    final cues = await CueTextResolver.load();
+    final content = await tester.runAsync(() async {
+      final repo = await ContentRepository.load().timeout(
+        const Duration(seconds: 10),
+      );
+      final cues = await CueTextResolver.load().timeout(
+        const Duration(seconds: 10),
+      );
+      return (repo: repo, cues: cues);
+    });
+    expect(content, isNotNull);
+    final loaded = content!;
+    final repo = loaded.repo;
+    final cues = loaded.cues;
     for (final locale in ['en', 'tr']) {
       await tester.pumpWidget(
         ContentRepositoryScope(
