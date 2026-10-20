@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:motion_account/motion_account.dart';
 import 'package:motion_content/motion_content.dart';
 
 import 'app/content.dart';
@@ -15,6 +14,7 @@ import 'app/app_theme_preferences.dart';
 import 'app/guitar_journey.dart';
 import 'app/onboarding_store.dart';
 import 'app/motion_account_bootstrap.dart';
+import 'app/ostinato_identity_gate.dart';
 import 'app/screens/library_screen.dart';
 import 'app/screens/onboarding_screen.dart';
 
@@ -40,7 +40,7 @@ Future<void> main() async {
             identityBoundary: accountConnection.identityBoundary,
             resourceAdmission: accountConnection.resourceAdmission,
             disposeAccountBinding: accountConnection.disposeBinding,
-            builder: (audioNavigatorHost) => MotionIdentityGate(
+            builder: (audioNavigatorHost) => OstinatoIdentityGate(
               runtime: runtime,
               child: OstinatoApp(
                 accountConnection: accountConnection,
