@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'ostinato_theme.dart';
+import '../app_theme.dart';
 
 /// Camsı/yarı-saydam kart — Ostinato'nun malzeme imzası (Lissom'un mat kili
 /// DEĞİL). `sigma` küçük tutulur: gerçek cihazda blur ucuz değil.
@@ -20,13 +21,13 @@ class GlassCard extends StatelessWidget {
   const GlassCard({
     super.key,
     required this.child,
-    this.gradientColors = defaultGradient,
+    this.gradientColors,
     this.padding = const EdgeInsets.all(18),
     this.borderRadius = 22,
   });
 
   final Widget child;
-  final List<Color> gradientColors;
+  final List<Color>? gradientColors;
   final EdgeInsets padding;
   final double borderRadius;
 
@@ -44,12 +45,12 @@ class GlassCard extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: gradientColors,
+              colors: gradientColors ?? [OstinatoPalette.of(context).glassStart, OstinatoPalette.of(context).glassEnd],
             ),
-            border: Border.all(color: Colors.white.withValues(alpha: .85)),
+            border: Border.all(color: OstinatoPalette.of(context).glassBorder),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: const Color(0xFF40305A).withValues(alpha: .16),
+                color: OstinatoPalette.of(context).glassShadow,
                 blurRadius: 30,
                 offset: const Offset(0, 14),
               ),
@@ -118,7 +119,7 @@ class SkeletonFigurePainter extends CustomPainter {
 
     // Dikey referans çizgisi.
     final Paint dash = Paint()
-      ..color = const Color(0x282A2533)
+      ..color = color.withValues(alpha: .55)
       ..strokeWidth = 1;
     canvas.drawLine(const Offset(100, 200), const Offset(100, 60), dash);
 
@@ -220,6 +221,10 @@ class SkeletonFigurePainter extends CustomPainter {
       old.tiltDeg != tiltDeg ||
       old.color != color ||
       old.markerDeg != markerDeg ||
+      old.markerColor != markerColor ||
+      old.bandLowDeg != bandLowDeg ||
+      old.bandHighDeg != bandHighDeg ||
+      old.bandColor != bandColor ||
       old.dim != dim;
 }
 
@@ -255,9 +260,9 @@ class HorizontalBandTrack extends StatelessWidget {
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: .7),
+                color: OstinatoPalette.of(context).controlSurface,
                 borderRadius: BorderRadius.circular(7),
-                border: Border.all(color: Colors.white.withValues(alpha: .9)),
+                border: Border.all(color: OstinatoPalette.of(context).controlBorder),
               ),
             ),
           ),
@@ -282,7 +287,7 @@ class HorizontalBandTrack extends StatelessWidget {
               width: 3,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: OstinatoColors.ink,
+                  color: OstinatoPalette.of(context).ink,
                   borderRadius: BorderRadius.circular(3),
                 ),
               ),
@@ -337,10 +342,11 @@ class GlassIconButton extends StatelessWidget {
               height: 38,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: .62),
+                  color: onTap == null ? OstinatoPalette.of(context).disabledBackground
+                      : OstinatoPalette.of(context).controlSurface,
                   borderRadius: BorderRadius.circular(13),
                   border: Border.all(
-                    color: Colors.white.withValues(alpha: .8),
+                    color: OstinatoPalette.of(context).controlBorder,
                   ),
                 ),
                 child: Center(
@@ -348,7 +354,8 @@ class GlassIconButton extends StatelessWidget {
                     glyph,
                     style: hankenText(
                       size: 17,
-                      color: OstinatoColors.inkSoft,
+                      color: onTap == null ? OstinatoPalette.of(context).disabledForeground
+                          : OstinatoPalette.of(context).inkSoft,
                     ),
                   ),
                 ),
@@ -376,14 +383,22 @@ class PrimaryButton extends StatelessWidget {
           onPressed: onPressed,
           style: FilledButton.styleFrom(
             backgroundColor:
-                dim ? const Color(0x1A2A2533) : OstinatoColors.ink,
-            foregroundColor: dim ? OstinatoColors.textFaint : Colors.white,
+                dim ? OstinatoPalette.of(context).controlSurface : OstinatoPalette.of(context).primary,
+            foregroundColor: dim ? OstinatoPalette.of(context).ink : OstinatoPalette.of(context).onPrimary,
+            disabledBackgroundColor: OstinatoPalette.of(context).disabledBackground,
+            disabledForegroundColor: OstinatoPalette.of(context).disabledForeground,
             padding: const EdgeInsets.symmetric(vertical: 17),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(17)),
-          ),
+          ).copyWith(side: WidgetStateProperty.resolveWith((states) => BorderSide(
+            color: states.contains(WidgetState.focused)
+                ? dim ? OstinatoPalette.of(context).focus : OstinatoPalette.of(context).onPrimary
+                : Colors.transparent,
+            width: 2,
+          ))),
           child: Text(label, style: hankenText(size: 16, weight: FontWeight.w500,
-              color: dim ? OstinatoColors.textFaint : Colors.white)),
+              color: onPressed == null ? OstinatoPalette.of(context).disabledForeground
+                  : dim ? OstinatoPalette.of(context).ink : OstinatoPalette.of(context).onPrimary)),
         ),
       );
 }

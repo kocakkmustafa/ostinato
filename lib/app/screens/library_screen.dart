@@ -1,3 +1,4 @@
+import '../app_theme.dart';
 import 'package:flutter/material.dart';
 import '../study_review.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
@@ -36,13 +37,13 @@ class LibraryScreen extends StatelessWidget {
         if (d.starterLesson case final Lesson l) (d, l),
     ];
     return Scaffold(
-      backgroundColor: OstinatoColors.shell,
+      backgroundColor: OstinatoPalette.of(context).shell,
       body: DecoratedBox(
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           gradient: RadialGradient(
             center: Alignment(-0.7, -1),
             radius: 1.2,
-            colors: <Color>[Color(0x8CDACDF6), Colors.transparent],
+            colors: <Color>[OstinatoPalette.of(context).voice.chip.withValues(alpha: .55), Colors.transparent],
           ),
         ),
         child: SafeArea(
@@ -80,7 +81,7 @@ class LibraryScreen extends StatelessWidget {
                               style: hankenText(
                                 size: 21,
                                 weight: FontWeight.w600,
-                                color: OstinatoColors.ink,
+                                color: OstinatoPalette.of(context).ink,
                               ),
                             ),
                           ),
@@ -162,7 +163,7 @@ class LibraryScreen extends StatelessWidget {
                               ),
                         style: hankenText(
                           size: 13,
-                          color: OstinatoColors.textMuted,
+                          color: OstinatoPalette.of(context).textMuted,
                         ),
                       ),
                     ],
@@ -288,7 +289,7 @@ class LibraryScreen extends StatelessWidget {
                   style: hankenText(
                     size: 12,
                     height: 1.5,
-                    color: OstinatoColors.textMuted,
+                    color: OstinatoPalette.of(context).textMuted,
                   ),
                 ),
               ],
@@ -315,7 +316,7 @@ class _StarterRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InstrumentHue hue = InstrumentHues.of(discipline.id);
+    final InstrumentHue hue = OstinatoPalette.of(context).instrument(discipline.id);
     final String kindChip = switch (lesson.kind) {
       LessonKind.guide => localized(context, 'GUIDE', 'REHBER'),
       LessonKind.scored => localized(context, 'REFERENCE', 'REFERANS'),
@@ -345,7 +346,7 @@ class _StarterRow extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: hue.soft.first,
-            border: Border.all(color: Colors.white.withValues(alpha: .8)),
+            border: Border.all(color: OstinatoPalette.of(context).glassBorder),
           ),
           child: Row(
             children: <Widget>[
@@ -357,7 +358,7 @@ class _StarterRow extends StatelessWidget {
                       '${catalogUpperName(context, discipline.id, discipline.displayName)} · $kindChip',
                       style: monoText(
                         size: 8.5,
-                        color: hue.ink.withValues(alpha: .85),
+                        color: hue.ink,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -378,7 +379,7 @@ class _StarterRow extends StatelessWidget {
               Icon(
                 Icons.chevron_right,
                 size: 20,
-                color: hue.ink.withValues(alpha: .6),
+                color: hue.ink,
               ),
             ],
           ),
@@ -393,7 +394,7 @@ class _StarterRow extends StatelessWidget {
 /// bandı AYNI eksende karşılaştırılabilsin diye sabit. Tasarımın verdiği
 /// 24° korundu; bugünkü en geniş bant 6.4° ve gözlem eşiği 14° — ikisi de
 /// ölçeğin içinde kalıyor, yani ölçek ölçümü kırpmıyor.
-const double _sharedScaleMaxDeg = 24;
+ double _sharedScaleMaxDeg = 24;
 
 class _InstrumentCard extends StatelessWidget {
   const _InstrumentCard({required this.discipline, required this.contract});
@@ -406,7 +407,7 @@ class _InstrumentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InstrumentHue hue = InstrumentHues.of(discipline.id);
+    final InstrumentHue hue = OstinatoPalette.of(context).instrument(discipline.id);
     // Eğitmen sayısı+anlaşma derecesini göstermek için kartın kendi kapsam
     // sözcüğü — gerçek sayılar contract'tan gelir, burada yalnız etiket için
     // discipline metninden türetilen kaba bir konum çizilir (hüküm taşımaz).
@@ -424,7 +425,7 @@ class _InstrumentCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(22),
             gradient: hue.gradient,
-            border: Border.all(color: Colors.white.withValues(alpha: .8)),
+            border: Border.all(color: OstinatoPalette.of(context).glassBorder),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -452,7 +453,7 @@ class _InstrumentCard extends StatelessWidget {
                   ),
                   Icon(
                     Icons.chevron_right,
-                    color: hue.ink.withValues(alpha: .6),
+                    color: hue.ink,
                   ),
                 ],
               ),
@@ -476,7 +477,7 @@ class _InstrumentCard extends StatelessWidget {
                   '${appDecimal(context, _sharedScaleMaxDeg, 0)}°',
                   style: monoText(
                     size: 8.5,
-                    color: hue.ink.withValues(alpha: .85),
+                    color: hue.ink,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -488,7 +489,7 @@ class _InstrumentCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: hankenText(
                   size: 12.5,
-                  color: hue.ink.withValues(alpha: .8),
+                  color: hue.ink,
                 ),
               ),
             ],

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
 import '../app_locale.dart';
+import '../app_theme.dart';
 import 'package:motion_camera/motion_camera.dart';
 import 'package:motion_core/motion_core.dart' as core;
 import 'package:ostinato_posture/ostinato_posture.dart';
@@ -174,7 +175,7 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 30),
@@ -193,7 +194,7 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
                 ],
               ),
               const SizedBox(height: 18),
-              _StepBar(stage: _stage, hue: widget.hue),
+              _StepBar(stage: _stage, hue: OstinatoPalette.of(context).instrument(widget.discipline.id)),
               const SizedBox(height: 18),
               Expanded(child: _stageBody(context)),
             ],
@@ -265,7 +266,7 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
       _Stage.room => _RoomGapNotice(
           onContinue: () => setState(() => _stage = _Stage.passed)),
       _Stage.passed => _PassedStage(
-          discipline: widget.discipline, lesson: widget.lesson, hue: widget.hue,
+          discipline: widget.discipline, lesson: widget.lesson, hue: OstinatoPalette.of(context).instrument(widget.discipline.id),
           source: widget.liveSource),
     };
   }
@@ -315,10 +316,10 @@ class _StepBar extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3),
                       color: i < _step
-                          ? OstinatoColors.ink
+                          ? OstinatoPalette.of(context).ink
                           : (i == _step
                               ? hue.ink
-                              : const Color(0x212A2533)),
+                              : OstinatoPalette.of(context).outline),
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -326,8 +327,8 @@ class _StepBar extends StatelessWidget {
                       style: monoText(
                           size: 9,
                           color: i <= _step
-                              ? OstinatoColors.inkSoft
-                              : const Color(0xFFB5AFC0))),
+                              ? OstinatoPalette.of(context).inkSoft
+                              : OstinatoPalette.of(context).textMuted)),
                 ],
               ),
             ),
@@ -387,8 +388,8 @@ class _CameraStage extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: warn
-                  ? const Color(0xFFFFECE2)
-                  : Colors.white.withValues(alpha: .85),
+                  ? OstinatoPalette.of(context).controlSurface
+                  : OstinatoPalette.of(context).surface,
               borderRadius: BorderRadius.circular(18),
             ),
             child: Column(
@@ -396,7 +397,7 @@ class _CameraStage extends StatelessWidget {
               children: <Widget>[
                 Text(kicker!,
                     style: monoText(
-                        color: warn ? OstinatoColors.warnInk : OstinatoColors.textMono)),
+                        color: warn ? OstinatoPalette.of(context).warnInk : OstinatoPalette.of(context).textMono)),
                 const SizedBox(height: 6),
                 Text(title ?? '',
                     style: hankenText(size: 19, weight: FontWeight.w500)),
@@ -493,7 +494,7 @@ class _RoomGapNotice extends StatelessWidget {
                   'not showing a fake progress bar for it. Camera setup is '
                   'real; this step is a named gap.',
                   key: const Key('setup-room-gap-body'),
-                  style: hankenText(size: 13.5, height: 1.55, color: OstinatoColors.textBody),
+                  style: hankenText(size: 13.5, height: 1.55, color: OstinatoPalette.of(context).textBody),
                 ),
               ],
             ),
@@ -521,13 +522,13 @@ class _PassedStage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              gradient: hue.gradient,
+              gradient: OstinatoPalette.of(context).instrument(discipline.id).gradient,
               borderRadius: BorderRadius.circular(22),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                kicker('Ready', color: hue.ink),
+                kicker('Ready', color: OstinatoPalette.of(context).instrument(discipline.id).ink),
                 const SizedBox(height: 8),
                 Text('Camera calibrated.',
                     key: const Key('setup-stage-passed'),
@@ -552,7 +553,7 @@ class _PassedStage extends StatelessWidget {
             onPressed: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute<void>(
                     builder: (_) =>
-                        LiveScreenRoute(discipline: discipline, lesson: lesson, hue: hue,
+                        LiveScreenRoute(discipline: discipline, lesson: lesson, hue: OstinatoPalette.of(context).instrument(discipline.id),
                             source: source))),
           ),
         ],

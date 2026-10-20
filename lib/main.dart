@@ -10,7 +10,8 @@ import 'app/account_connection.dart';
 import 'app/camera_session.dart';
 import 'app/audio/practice_audio_root.dart';
 import 'app/design/app_scope.dart';
-import 'app/design/ostinato_theme.dart';
+import 'app/app_theme.dart';
+import 'app/app_theme_preferences.dart';
 import 'app/guitar_journey.dart';
 import 'app/onboarding_store.dart';
 import 'app/motion_account_bootstrap.dart';
@@ -22,11 +23,15 @@ import 'app/screens/onboarding_screen.dart';
 /// testte. Bir sayı buraya sızarsa test edilemez hâle gelir.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final theme = AppThemeController();
+  final themeReady = theme.load();
   try {
     final (runtime, accountConnection) = await initializeMotionAccount();
     bindCameraResourceAdmission(accountConnection.resourceAdmission);
-    runApp(
-      AppLocaleHost(
+    await themeReady;
+    runApp(AppThemeHost(
+      controller: theme,
+      child: AppLocaleHost(
         child: OstinatoAudioRoot(
           userId: runtime.userId,
           phase: runtime.phase,
@@ -43,9 +48,11 @@ Future<void> main() async {
           ),
         ),
       ),
-    );
+    ));
   } on Object {
-    runApp(const AppLocaleHost(child: AccountStartupFailure()));
+    await themeReady;
+    runApp(AppThemeHost(controller: theme,
+      child: const AppLocaleHost(child: AccountStartupFailure())));
   }
 }
 
@@ -178,9 +185,6 @@ class _OstinatoAppState extends State<OstinatoApp> {
     );
   })();
 
-  // Tema `ostinato_theme.dart`ta — kanıt üreteci de AYNI nesneyi kuruyor
-  // (O-052: temasız kanıt koşumu ham `TextStyle`ları blok glif çiziyordu).
-  static final ThemeData _theme = ostinatoTheme();
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +205,10 @@ class _OstinatoAppState extends State<OstinatoApp> {
               : 'CONTENT_LOAD';
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: _theme,
+            theme: OstinatoThemes.light,
+            darkTheme: OstinatoThemes.dark,
+            themeMode: AppThemeScope.modeOf(context),
+            themeAnimationDuration: Duration.zero,
             locale: locale,
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
@@ -240,7 +247,10 @@ class _OstinatoAppState extends State<OstinatoApp> {
         if (!snap.hasData) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: _theme,
+            theme: OstinatoThemes.light,
+            darkTheme: OstinatoThemes.dark,
+            themeMode: AppThemeScope.modeOf(context),
+            themeAnimationDuration: Duration.zero,
             locale: locale,
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
@@ -264,7 +274,10 @@ class _OstinatoAppState extends State<OstinatoApp> {
             key: ValueKey<String>('ostinato-account-${userId ?? 'signed-out'}'),
             title: 'Ostinato',
             debugShowCheckedModeBanner: false,
-            theme: _theme,
+            theme: OstinatoThemes.light,
+            darkTheme: OstinatoThemes.dark,
+            themeMode: AppThemeScope.modeOf(context),
+            themeAnimationDuration: Duration.zero,
             locale: locale,
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,

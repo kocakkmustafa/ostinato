@@ -131,7 +131,7 @@ abstract final class ArmRangeHints {
 TextStyle hankenText({
   double size = 14,
   FontWeight weight = FontWeight.w400,
-  Color color = OstinatoColors.ink,
+  Color? color,
   double? height,
   double? letterSpacing,
 }) =>
@@ -147,7 +147,7 @@ TextStyle hankenText({
 TextStyle monoText({
   double size = 9.5,
   FontWeight weight = FontWeight.w500,
-  Color color = OstinatoColors.textMono,
+  Color? color,
   double letterSpacing = 1.4,
 }) =>
     TextStyle(
@@ -177,7 +177,7 @@ ThemeData ostinatoTheme() => ThemeData(
     );
 
 /// Bölüm başlığı — "SCREENS" / "YOUR INSTRUMENTS" tarzı mono kicker.
-Widget kicker(String text, {Color? color}) => Text(
-      text.toUpperCase(),
-      style: monoText(color: color ?? OstinatoColors.textMono),
+Widget kicker(String text, {Color? color}) => Builder(
+      builder: (context) => Text(text.toUpperCase(),
+        style: monoText(color: color ?? Theme.of(context).colorScheme.onSurfaceVariant)),
     );

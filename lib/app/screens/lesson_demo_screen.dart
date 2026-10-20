@@ -1,3 +1,4 @@
+import '../app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../content.dart';
@@ -17,9 +18,10 @@ class LessonDemoScreenRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hue = OstinatoPalette.of(context).instrument(discipline.id);
     final ArmRangeHint? arm = ArmRangeHints.byDiscipline[discipline.id];
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
@@ -62,7 +64,7 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: hue.gradient,
                   borderRadius: BorderRadius.circular(22),
-                  border: Border.all(color: Colors.white.withValues(alpha: .85)),
+                  border: Border.all(color: OstinatoPalette.of(context).glassBorder),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,7 +173,7 @@ class LessonDemoScreenRoute extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0x0D2A2533),
+                  color: OstinatoPalette.of(context).controlSurface,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 // PLACEHOLDER(data): yalnız statik kayıtlı referans aralığı.
@@ -181,8 +183,8 @@ class LessonDemoScreenRoute extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const Icon(Icons.info_outline,
-                        size: 18, color: OstinatoColors.textMuted),
+                     Icon(Icons.info_outline,
+                        size: 18, color: OstinatoPalette.of(context).textMuted),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -193,7 +195,7 @@ class LessonDemoScreenRoute extends StatelessWidget {
                         ),
                         key: const Key('demo-live-gap-note'),
                         style: hankenText(
-                            size: 12.5, color: OstinatoColors.textMuted),
+                            size: 12.5, color: OstinatoPalette.of(context).textMuted),
                       ),
                     ),
                   ],

@@ -1,0 +1,2 @@
+"NSCameraUsageDescription" = "La pratica con fotocamera è chiusa in questa versione. L'accesso alla fotocamera è riservato all'osservazione posturale sul dispositivo; i video non vengono salvati né caricati online.";
+"NSMicrophoneUsageDescription" = "L'accesso al microfono permette di osservare una nota di chitarra durante la pratica facoltativa. L'audio viene elaborato su questo dispositivo nella memoria temporanea e non viene salvato né caricato online.";

@@ -1,3 +1,4 @@
+import '../app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../account_connection.dart';
@@ -112,7 +113,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: OstinatoColors.surface,
+    backgroundColor: OstinatoPalette.of(context).surface,
     body: SafeArea(
       child: FutureBuilder<GuitarJourneyCourse>(
         future: _course,
@@ -183,7 +184,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                 _record(progress, course, l)?.selfReportedCompletedAt == null,
             orElse: () => null,
           );
-    final hue = InstrumentHues.guitar;
+    final hue = OstinatoPalette.of(context).guitar;
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
       child: Column(
@@ -239,7 +240,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                   LinearProgressIndicator(
                     value: completed / lessons.length,
                     color: hue.ink,
-                    backgroundColor: Colors.white.withValues(alpha: .65),
+                    backgroundColor: OstinatoPalette.of(context).controlSurface,
                     minHeight: 6,
                   ),
                 ],
@@ -346,7 +347,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                     ),
                     style: hankenText(
                       size: 12.5,
-                      color: OstinatoColors.textMuted,
+                      color: OstinatoPalette.of(context).textMuted,
                     ),
                   ),
                   const SizedBox(height: 11),
@@ -417,7 +418,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
             padding: const EdgeInsets.fromLTRB(17, 0, 17, 9),
             child: Text(
               module.goal.of(context),
-              style: hankenText(size: 12.5, color: OstinatoColors.textMuted),
+              style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textMuted),
             ),
           ),
           for (final lesson in module.lessons)
@@ -550,7 +551,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
         children: [
           kicker(
             localized(context, 'EARLIER PRACTICE', 'ÖNCEKİ ÇALIŞMA'),
-            color: InstrumentHues.guitar.ink,
+            color: OstinatoPalette.of(context).guitar.ink,
           ),
           const SizedBox(height: 6),
           Text(
@@ -633,9 +634,9 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
   @override
   Widget build(BuildContext context) {
     final lesson = widget.lesson;
-    final hue = InstrumentHues.guitar;
+    final hue = OstinatoPalette.of(context).guitar;
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
@@ -819,7 +820,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                           explanation.of(context),
                           style: hankenText(
                             size: 12,
-                            color: OstinatoColors.textMuted,
+                            color: OstinatoPalette.of(context).textMuted,
                             height: 1.5,
                           ),
                         ),
@@ -925,13 +926,13 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
 
   Widget _preparationCard(BuildContext context) => GlassCard(
     key: const Key('guitar-session-preparation'),
-    gradientColors: InstrumentHues.guitar.grad,
+    gradientColors: OstinatoPalette.of(context).guitar.grad,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         kicker(
           localized(context, 'BEFORE PLAYING TODAY', 'BUGÜN ÇALMADAN ÖNCE'),
-          color: InstrumentHues.guitar.ink,
+          color: OstinatoPalette.of(context).guitar.ink,
         ),
         const SizedBox(height: 9),
         Text(
@@ -1063,7 +1064,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                     'Try another context',
                     'Farklı durumda dene',
                   ),
-                }, color: InstrumentHues.guitar.ink),
+                }, color: OstinatoPalette.of(context).guitar.ink),
                 const SizedBox(height: 8),
                 if (drill.firstReadScore case final score?) ...[
                   if (!_firstReadScoreRevealed)
@@ -1121,7 +1122,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                   ),
                   style: hankenText(
                     size: 11.5,
-                    color: OstinatoColors.textMuted,
+                    color: OstinatoPalette.of(context).textMuted,
                   ),
                 ),
                 if (drill.optionalExtension) ...[
@@ -1134,7 +1135,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                     ),
                     style: hankenText(
                       size: 11.5,
-                      color: OstinatoColors.textMuted,
+                      color: OstinatoPalette.of(context).textMuted,
                     ),
                   ),
                 ],
@@ -1166,7 +1167,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
             children: [
               kicker(
                 localized(context, en, tr),
-                color: InstrumentHues.guitar.ink,
+                color: OstinatoPalette.of(context).guitar.ink,
               ),
               const SizedBox(height: 9),
               Text(body, style: hankenText(size: 13.5, height: 1.55)),
@@ -1187,7 +1188,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               'Standard tuning reference',
               'Standart akort referansı',
             ),
-            color: InstrumentHues.guitar.ink,
+            color: OstinatoPalette.of(context).guitar.ink,
           ),
           const SizedBox(height: 9),
           for (final string in widget.course.tuning)
@@ -1195,7 +1196,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               padding: const EdgeInsets.symmetric(vertical: 3),
               child: Text(
                 localized(context, "String {v0} · {v1} · {v2} Hz", "{v0}. tel · {v1} · {v2} Hz", values: {"v0": string.number, "v1": string.note, "v2": AppDecimal(string.hz, 2)}),
-                style: monoText(size: 10.5, color: OstinatoColors.textBody),
+                style: monoText(size: 10.5, color: OstinatoPalette.of(context).textBody),
               ),
             ),
           const SizedBox(height: 7),
@@ -1205,7 +1206,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               'These are standard-tuning reference frequencies, not live readings or sound-level measurements.',
               'Bunlar standart akort referans frekanslarıdır; canlı okuma veya ses düzeyi ölçümü değildir.',
             ),
-            style: hankenText(size: 12, color: OstinatoColors.textMuted),
+            style: hankenText(size: 12, color: OstinatoPalette.of(context).textMuted),
           ),
         ],
       ),
@@ -1220,7 +1221,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
         children: [
           kicker(
             localized(context, 'Example chord shapes', 'Örnek akor şekilleri'),
-            color: InstrumentHues.guitar.ink,
+            color: OstinatoPalette.of(context).guitar.ink,
           ),
           const SizedBox(height: 6),
           Text(
@@ -1229,7 +1230,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               'Strings run thick to thin (6→1). × = do not play; 0 = open. Finger numbers are examples, not a required grip.',
               'Teller kalından inceye (6→1) gider. × = çalma; 0 = açık. Parmak sayıları zorunlu tutuş değil, örnektir.',
             ),
-            style: hankenText(size: 12, color: OstinatoColors.textMuted),
+            style: hankenText(size: 12, color: OstinatoPalette.of(context).textMuted),
           ),
           const SizedBox(height: 12),
           for (final id in widget.lesson.shapeIds)
@@ -1249,7 +1250,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                         margin: const EdgeInsets.only(right: 3),
                         padding: const EdgeInsets.symmetric(vertical: 6),
                         decoration: BoxDecoration(
-                          color: InstrumentHues.guitar.chip,
+                          color: OstinatoPalette.of(context).guitar.chip,
                           borderRadius: BorderRadius.circular(7),
                         ),
                         child: Column(
@@ -1258,7 +1259,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                               '${6 - i}',
                               style: monoText(
                                 size: 9,
-                                color: InstrumentHues.guitar.ink,
+                                color: OstinatoPalette.of(context).guitar.ink,
                               ),
                             ),
                             Text(
@@ -1285,7 +1286,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                   'Top row: string · middle: fret · bottom: example finger',
                   'Üst: tel · orta: perde · alt: örnek parmak',
                 ),
-                style: hankenText(size: 10.5, color: OstinatoColors.textFaint),
+                style: hankenText(size: 10.5, color: OstinatoPalette.of(context).textFaint),
               ),
               const SizedBox(height: 12),
             ],

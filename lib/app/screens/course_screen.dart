@@ -1,3 +1,4 @@
+import '../app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../content.dart';
@@ -40,9 +41,9 @@ class CourseScreenRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InstrumentHue hue = InstrumentHues.of(discipline.id);
+    final InstrumentHue hue = OstinatoPalette.of(context).instrument(discipline.id);
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
@@ -76,7 +77,7 @@ class CourseScreenRoute extends StatelessWidget {
                 localized(context,
                   'A locked lesson is visible on purpose. The reason it is locked is the name of the measurement we are missing, not a threshold you failed.',
                   'Kilitli dersler bilerek gösterilir. Kilidin nedeni geçemediğin bir eşik değil, eksik olan ölçümün adıdır.'),
-                style: hankenText(size: 12, color: OstinatoColors.textFaint),
+                style: hankenText(size: 12, color: OstinatoPalette.of(context).textFaint),
               ),
             ],
           ),
@@ -93,24 +94,20 @@ class _LessonRow extends StatelessWidget {
   final Lesson lesson;
   final InstrumentHue hue;
 
-  (String, Color, Color, Color) get _chip => switch (lesson.kind) {
-        LessonKind.locked => ('LOCKED', const Color(0x122A2533),
-            const Color(0xFF6E6880), Colors.white.withValues(alpha: .5)),
-        LessonKind.demoOnly => (
-            'REFERENCE · NO SCORING',
-            hue.chip,
-            hue.ink,
-            hue.soft.first,
-          ),
-        LessonKind.guide => ('GUIDE', const Color(0x0D2A2533),
-            const Color(0xFF8B8497), Colors.white.withValues(alpha: .62)),
-        LessonKind.scored => ('REFERENCE', const Color(0x0F2A2533),
-            const Color(0xFF4E4759), Colors.white.withValues(alpha: .72)),
-      };
+  (String, Color, Color, Color) _chip(BuildContext context) {
+    final p = OstinatoPalette.of(context);
+    final currentHue = p.instrument(discipline.id);
+    return switch (lesson.kind) {
+      LessonKind.locked => ('LOCKED', p.controlSurface, p.textMuted, p.glassStart),
+      LessonKind.demoOnly => ('REFERENCE · NO SCORING', currentHue.chip, currentHue.ink, currentHue.soft.first),
+      LessonKind.guide => ('GUIDE', p.controlSurface, p.textMono, p.glassStart),
+      LessonKind.scored => ('REFERENCE', p.controlSurface, p.textBody, p.glassEnd),
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
-    final (_, chipBg, chipFg, bg) = _chip;
+    final (_, chipBg, chipFg, bg) = _chip(context);
     final String? sourceReason = lesson.lockedReason ?? lesson.demoOnlyReason;
     final String firstSentence = sourceReason == null
         ? ''
@@ -135,7 +132,7 @@ class _LessonRow extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
             color: bg,
-            border: Border.all(color: Colors.white.withValues(alpha: .8)),
+            border: Border.all(color: OstinatoPalette.of(context).glassBorder),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,7 +179,7 @@ class _LessonRow extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     style: hankenText(
-                        size: 12.5, color: OstinatoColors.textMuted),
+                        size: 12.5, color: OstinatoPalette.of(context).textMuted),
                     children: <InlineSpan>[
                       TextSpan(text: '$firstSentence '),
                       TextSpan(

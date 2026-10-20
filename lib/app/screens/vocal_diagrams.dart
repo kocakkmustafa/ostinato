@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_locale.dart';
+import '../app_theme.dart';
 import '../vocal_beginner.dart';
 
 /// Original written practice. Relative tones are personal choices, not pitches.
@@ -12,6 +13,7 @@ class VocalDiagrams extends StatelessWidget {
     padding: const EdgeInsets.all(6),
     child: Text(
       text,
+      style: TextStyle(color: OstinatoPalette.of(context).notationInk),
       textAlign: TextAlign.center,
       textDirection: Directionality.of(context),
     ),
@@ -35,10 +37,13 @@ class VocalDiagrams extends StatelessWidget {
             // Beat columns and their scroll origin retain musical order.
             // _cell uses the caller's direction for translated cell text.
             textDirection: TextDirection.ltr,
-            border: TableBorder.all(color: Theme.of(context).dividerColor),
+            border: TableBorder.all(color: OstinatoPalette.of(context).notationInk),
             children: [
               for (final row in rows)
                 TableRow(
+                  decoration: BoxDecoration(
+                    color: OstinatoPalette.of(context).notationPaper,
+                  ),
                   children: [for (final cell in row) _cell(context, cell)],
                 ),
             ],

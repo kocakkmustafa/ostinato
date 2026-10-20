@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_locale.dart';
+import '../app_theme.dart';
 import '../ukulele_beginner.dart';
 
 /// Original repo-native diagrams. They display instructions, never observed sound.
@@ -136,10 +137,13 @@ class UkuleleDiagrams extends StatelessWidget {
                         child: SizedBox(
                           width: 480,
                           child: Table(
-                            border: TableBorder.all(color: Colors.black54),
+                            border: TableBorder.all(color: OstinatoPalette.of(context).notationInk),
                             defaultColumnWidth: const FixedColumnWidth(60),
                             children: [
                               TableRow(
+                                decoration: BoxDecoration(
+                                  color: OstinatoPalette.of(context).notationPaper,
+                                ),
                                 children: [
                                   for (final count in [
                                     '1',
@@ -155,18 +159,23 @@ class UkuleleDiagrams extends StatelessWidget {
                                       padding: const EdgeInsets.all(6),
                                       child: Text(
                                         count,
+                                        style: TextStyle(color: OstinatoPalette.of(context).notationInk),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
                                 ],
                               ),
                               TableRow(
+                                decoration: BoxDecoration(
+                                  color: OstinatoPalette.of(context).notationPaper,
+                                ),
                                 children: [
                                   for (var slot = 0; slot < 8; slot++)
                                     Padding(
                                       padding: const EdgeInsets.all(6),
                                       child: Text(
                                         _studySymbol(course.study[bar], slot, context),
+                                        style: TextStyle(color: OstinatoPalette.of(context).notationInk),
                                         textAlign: TextAlign.center,
                                         textDirection: Directionality.of(context),
                                       ),
@@ -321,7 +330,11 @@ class _Vector extends StatelessWidget {
                   : 220,
               child: CustomPaint(
                 key: Key('ukulele-vector-$kind'),
-                painter: _UkePainter(kind, chord, notes),
+                painter: _UkePainter(
+                  kind, chord, notes,
+                  inkColor: OstinatoPalette.of(context).notationInk,
+                  paperColor: OstinatoPalette.of(context).notationPaper,
+                ),
               ),
             ),
           ),
@@ -332,12 +345,17 @@ class _Vector extends StatelessWidget {
 }
 
 class _UkePainter extends CustomPainter {
-  _UkePainter(this.kind, this.chord, this.notes);
+  _UkePainter(
+    this.kind, this.chord, this.notes, {
+    required this.inkColor,
+    required this.paperColor,
+  });
+  final Color inkColor, paperColor;
   final String kind;
   final UkuleleChord? chord;
   final List<UkuleleTabNote> notes;
-  final ink = Paint()
-    ..color = Colors.black
+  late final ink = Paint()
+    ..color = inkColor
     ..strokeWidth = 1.4;
   void label(
     Canvas c,
@@ -345,7 +363,7 @@ class _UkePainter extends CustomPainter {
     double x,
     double y, {
     double size = 16,
-    Color color = Colors.black,
+    Color? color,
   }) {
     final painter = TextPainter(
       text: TextSpan(
@@ -353,7 +371,7 @@ class _UkePainter extends CustomPainter {
         style: TextStyle(
           fontFamily: 'Hanken Grotesk',
           fontSize: size,
-          color: color,
+          color: color ?? inkColor,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -363,7 +381,7 @@ class _UkePainter extends CustomPainter {
 
   @override
   void paint(Canvas c, Size size) {
-    c.drawRect(Offset.zero & size, Paint()..color = Colors.white);
+    c.drawRect(Offset.zero & size, Paint()..color = paperColor);
     if (kind == 'strings') {
       for (var i = 0; i < 4; i++) {
         final y = 50 + i * 40.0;
@@ -374,7 +392,7 @@ class _UkePainter extends CustomPainter {
         const Offset(80, 40),
         const Offset(80, 180),
         Paint()
-          ..color = Colors.black
+          ..color = inkColor
           ..strokeWidth = 5,
       );
       for (var i = 1; i <= 3; i++) {
@@ -407,7 +425,7 @@ class _UkePainter extends CustomPainter {
             x - 4.5,
             dotY - 11,
             size: 17,
-            color: Colors.white,
+            color: paperColor,
           );
         }
       }
@@ -416,7 +434,7 @@ class _UkePainter extends CustomPainter {
           Offset(55, y + fret * step),
           Offset(size.width - 55, y + fret * step),
           Paint()
-            ..color = Colors.black
+            ..color = inkColor
             ..strokeWidth = fret == 0 ? 5 : 1.4,
         );
         if (fret > 0) label(c, '$fret', 20, y + (fret - .5) * step - 11);
@@ -433,7 +451,7 @@ class _UkePainter extends CustomPainter {
       final x = 85 + i * unit, y = 35 + (notes[i].string - 1) * 30.0;
       c.drawRect(
         Rect.fromCenter(center: Offset(x, y), width: 22, height: 23),
-        Paint()..color = Colors.white,
+        Paint()..color = paperColor,
       );
       label(c, '${notes[i].fret}', x - 5, y - 12, size: 18);
       label(c, '${i + 1}', x - 5, 145, size: 14);
@@ -442,5 +460,7 @@ class _UkePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _UkePainter old) =>
+      old.inkColor != inkColor ||
+      old.paperColor != paperColor ||
       old.kind != kind || old.chord != chord || old.notes != notes;
 }

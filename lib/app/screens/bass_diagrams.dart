@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_locale.dart';
+import '../app_theme.dart';
 import '../bass_beginner.dart';
 
 /// Original instruction diagrams, never captured or judged performance.
@@ -198,10 +199,13 @@ class BassDiagrams extends StatelessWidget {
                         child: SizedBox(
                           width: 800,
                           child: Table(
-                            border: TableBorder.all(color: Colors.black54),
+                            border: TableBorder.all(color: OstinatoPalette.of(context).notationInk),
                             defaultColumnWidth: const FixedColumnWidth(100),
                             children: [
                               TableRow(
+                                decoration: BoxDecoration(
+                                  color: OstinatoPalette.of(context).notationPaper,
+                                ),
                                 children: [
                                   for (final count in [
                                     '1',
@@ -217,12 +221,16 @@ class BassDiagrams extends StatelessWidget {
                                       padding: const EdgeInsets.all(6),
                                       child: Text(
                                         count,
+                                        style: TextStyle(color: OstinatoPalette.of(context).notationInk),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
                                 ],
                               ),
                               TableRow(
+                                decoration: BoxDecoration(
+                                  color: OstinatoPalette.of(context).notationPaper,
+                                ),
                                 children: [
                                   for (final event in course.study[bar].events)
                                     Padding(
@@ -233,6 +241,7 @@ class BassDiagrams extends StatelessWidget {
                                             : event.kind == 'hold'
                                             ? 'H'
                                             : 'R',
+                                        style: TextStyle(color: OstinatoPalette.of(context).notationInk),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -326,7 +335,11 @@ class _Vector extends StatelessWidget {
                 : 230,
             child: CustomPaint(
               key: Key('bass-vector-$kind'),
-              painter: _BassPainter(kind, notes),
+              painter: _BassPainter(
+                kind, notes,
+                inkColor: OstinatoPalette.of(context).notationInk,
+                paperColor: OstinatoPalette.of(context).notationPaper,
+              ),
             ),
           ),
         ),
@@ -339,18 +352,23 @@ int bassWrittenStaffPosition(String pitch) =>
     'CDEFGAB'.indexOf(pitch[0]) + int.parse(pitch.substring(1)) * 7 - 18;
 
 class _BassPainter extends CustomPainter {
-  _BassPainter(this.kind, this.notes);
+  _BassPainter(
+    this.kind, this.notes, {
+    required this.inkColor,
+    required this.paperColor,
+  });
+  final Color inkColor, paperColor;
   final String kind;
   final List<BassTabNote> notes;
-  final ink = Paint()
-    ..color = Colors.black
+  late final ink = Paint()
+    ..color = inkColor
     ..strokeWidth = 1.4;
   void label(Canvas c, String text, double x, double y, {double size = 16}) {
     final p = TextPainter(
       text: TextSpan(
         text: text,
         style: TextStyle(
-          color: Colors.black,
+          color: inkColor,
           fontSize: size,
           fontFamily: 'Hanken Grotesk',
         ),
@@ -362,7 +380,7 @@ class _BassPainter extends CustomPainter {
 
   @override
   void paint(Canvas c, Size s) {
-    c.drawRect(Offset.zero & s, Paint()..color = Colors.white);
+    c.drawRect(Offset.zero & s, Paint()..color = paperColor);
     if (kind == 'strings' || kind == 'frets') {
       final step = (s.width - 110) / 3;
       for (var i = 0; i < 4; i++) {
@@ -376,7 +394,7 @@ class _BassPainter extends CustomPainter {
           Offset(x, 35),
           Offset(x, 195),
           Paint()
-            ..color = Colors.black
+            ..color = inkColor
             ..strokeWidth = f == 0 ? 5 : 1.4,
         );
         if (f > 0) {
@@ -393,7 +411,7 @@ class _BassPainter extends CustomPainter {
           final x = 75 + (n.$2 - .5) * step, y = 50 + (4 - n.$1) * 43.0;
           c.drawRect(
             Rect.fromCenter(center: Offset(x, y), width: 34, height: 24),
-            Paint()..color = Colors.white,
+            Paint()..color = paperColor,
           );
           label(c, n.$3, x - 12, y - 10, size: 14);
         }
@@ -416,7 +434,7 @@ class _BassPainter extends CustomPainter {
       c.drawPath(
         curve,
         Paint()
-          ..color = Colors.black
+          ..color = inkColor
           ..strokeWidth = 2.5
           ..style = PaintingStyle.stroke,
       );
@@ -454,7 +472,7 @@ class _BassPainter extends CustomPainter {
       final x = 85 + i * unit, y = 35 + (notes[i].string - 1) * 30.0;
       c.drawRect(
         Rect.fromCenter(center: Offset(x, y), width: 22, height: 23),
-        Paint()..color = Colors.white,
+        Paint()..color = paperColor,
       );
       label(c, '${notes[i].fret}', x - 5, y - 12, size: 18);
       label(c, '${i + 1}', x - 5, 145, size: 14);
@@ -463,5 +481,7 @@ class _BassPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _BassPainter old) =>
+      old.inkColor != inkColor ||
+      old.paperColor != paperColor ||
       old.kind != kind || old.notes != notes;
 }

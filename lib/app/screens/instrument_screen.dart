@@ -1,3 +1,4 @@
+import '../app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
 
@@ -20,12 +21,12 @@ class InstrumentScreenRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InstrumentHue hue = InstrumentHues.of(discipline.id);
+    final InstrumentHue hue = OstinatoPalette.of(context).instrument(discipline.id);
     final PostureContract? contract =
         ContentRepositoryScope.of(context).contractOrNull(discipline.id);
 
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -48,7 +49,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                           style: hankenText(
                               size: 30,
                               weight: FontWeight.w600,
-                              color: OstinatoColors.inkSoft)),
+                              color: OstinatoPalette.of(context).inkSoft)),
                       const SizedBox(height: 9),
                       if (contract != null)
                         Text(
@@ -59,7 +60,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                       Text(catalogBlurb(context, discipline.id, discipline.blurb),
                           style: hankenText(
                               size: 14.5,
-                              color: OstinatoColors.inkSoft.withValues(alpha: .85))),
+                              color: OstinatoPalette.of(context).inkSoft.withValues(alpha: .85))),
                     ],
                   ),
                 ),
@@ -84,7 +85,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                                   'Yazılı kurslar öz denetimli çalışmayı destekler. Bu sürümde '
                                   'kamera değerlendirmesi ve duruş puanlaması kapalı.'),
                               style: hankenText(
-                                  size: 13, color: OstinatoColors.textMuted)),
+                                  size: 13, color: OstinatoPalette.of(context).textMuted)),
                           const SizedBox(height: 16),
                           kicker(localized(context, 'Recorded references', 'Kayıtlı referanslar'), color: hue.ink),
                           const SizedBox(height: 10),
@@ -130,7 +131,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                             style: hankenText(
                                 size: 12,
                                 height: 1.5,
-                                color: OstinatoColors.textMuted),
+                                color: OstinatoPalette.of(context).textMuted),
                           ),
                           const SizedBox(height: 10),
                           for (var i = 0; i < discipline.notMeasured.length; i++)
@@ -170,7 +171,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               gradient: hue.softGradient,
                               border: Border.all(
-                                color: Colors.white.withValues(alpha: .8),
+                                color: OstinatoPalette.of(context).controlSurface,
                               ),
                             ),
                             child: Column(
@@ -191,9 +192,9 @@ class InstrumentScreenRoute extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const Icon(
+                                     Icon(
                                       Icons.chevron_right,
-                                      color: OstinatoColors.textFaint,
+                                      color: OstinatoPalette.of(context).textFaint,
                                     ),
                                   ],
                                 ),
@@ -215,7 +216,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                                   ),
                                   style: hankenText(
                                     size: 13.5,
-                                    color: OstinatoColors.textBody,
+                                    color: OstinatoPalette.of(context).textBody,
                                   ),
                                 ),
                               ],
@@ -242,7 +243,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20),
                                 gradient: hue.softGradient,
                                 border: Border.all(
-                                    color: Colors.white.withValues(alpha: .8)),
+                                    color: OstinatoPalette.of(context).controlSurface),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,8 +262,8 @@ class InstrumentScreenRoute extends StatelessWidget {
                                                 size: 19,
                                                 weight: FontWeight.w600)),
                                       ),
-                                      const Icon(Icons.chevron_right,
-                                          color: OstinatoColors.textFaint),
+                                       Icon(Icons.chevron_right,
+                                          color: OstinatoPalette.of(context).textFaint),
                                     ],
                                   ),
                                   const SizedBox(height: 7),
@@ -273,7 +274,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                                   Text(catalogGoal(context, c.id, c.goal),
                                       style: hankenText(
                                           size: 13.5,
-                                          color: OstinatoColors.textBody)),
+                                          color: OstinatoPalette.of(context).textBody)),
                                 ],
                               ),
                             ),
@@ -309,15 +310,15 @@ class InstrumentScreenRoute extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 13),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: .5),
+                            color: OstinatoPalette.of(context).controlSurface,
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(
-                                color: Colors.white.withValues(alpha: .65)),
+                                color: OstinatoPalette.of(context).controlSurface),
                           ),
                           child: Text(catalogCopy(context, entry.key,
                                   entry.value),
                               style: hankenText(
-                                  size: 13, color: OstinatoColors.textMuted)),
+                                  size: 13, color: OstinatoPalette.of(context).textMuted)),
                         ),
                     ],
                   ],
@@ -355,8 +356,8 @@ class _HonestyRow extends StatelessWidget {
                         size: 13.5,
                         height: 1.5,
                         color: filled
-                            ? OstinatoColors.inkSoft
-                            : const Color(0xFF5C5569)))),
+                            ? OstinatoPalette.of(context).inkSoft
+                            : OstinatoPalette.of(context).textMuted))),
           ],
         ),
       );
@@ -371,10 +372,10 @@ class _Dot extends StatelessWidget {
         height: 7,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: filled ? OstinatoColors.ink : Colors.transparent,
+          color: filled ? OstinatoPalette.of(context).ink : Colors.transparent,
           border: filled
               ? null
-              : Border.all(color: const Color(0x572A2533), width: 1.5),
+              : Border.all(color: OstinatoPalette.of(context).outline, width: 1.5),
         ),
       );
 }

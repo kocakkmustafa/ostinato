@@ -1,3 +1,5 @@
+import 'app_theme.dart';
+import 'app_theme_preferences.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -108,6 +110,10 @@ class AccountStartupFailure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+    theme: OstinatoThemes.light,
+    darkTheme: OstinatoThemes.dark,
+    themeMode: AppThemeScope.modeOf(context),
+    themeAnimationDuration: Duration.zero,
     locale: AppLocaleScope.maybeOf(context) == null
         ? null
         : Localizations.localeOf(context),

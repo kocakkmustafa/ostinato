@@ -1,3 +1,5 @@
+import '../app_theme.dart';
+import '../app_theme_preferences.dart';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -1101,6 +1103,10 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
   Widget build(BuildContext context) {
     if (_owner.blocked) {
       return MaterialApp(
+    theme: OstinatoThemes.light,
+    darkTheme: OstinatoThemes.dark,
+    themeMode: AppThemeScope.modeOf(context),
+    themeAnimationDuration: Duration.zero,
         debugShowCheckedModeBanner: false,
         locale: Localizations.maybeLocaleOf(context),
         localeListResolutionCallback: resolveAppLocales,

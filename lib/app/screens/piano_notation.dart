@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_locale.dart';
+import '../app_theme.dart';
 
 /// Original vector examples. Pitch is a diatonic staff position, not a sensor.
 class PianoWrittenNote {
@@ -301,6 +302,8 @@ class _Vector extends StatelessWidget {
                     kind,
                     right,
                     left,
+                    inkColor: OstinatoPalette.of(context).notationInk,
+                    paperColor: OstinatoPalette.of(context).notationPaper,
                     middleCLabel: localized(
                       context,
                       'C4 = middle C / MIDI 60',
@@ -373,6 +376,8 @@ class _PianoPainter extends CustomPainter {
     this.kind,
     this.right,
     this.left, {
+    required this.inkColor,
+    required this.paperColor,
     required this.middleCLabel,
     required this.proseDirection,
     required this.localeTag,
@@ -380,13 +385,14 @@ class _PianoPainter extends CustomPainter {
     required this.countLabels,
   });
   final String middleCLabel, localeTag;
+  final Color inkColor, paperColor;
   final TextDirection proseDirection;
   final Map<String, String> pitchLabels;
   final List<String> countLabels;
   final String kind;
   final List<PianoWrittenNote> right, left;
-  final ink = Paint()
-    ..color = Colors.black
+  late final ink = Paint()
+    ..color = inkColor
     ..strokeWidth = 1.4;
   void label(
     Canvas c,
@@ -395,12 +401,13 @@ class _PianoPainter extends CustomPainter {
     double y, {
     double size = 14,
     TextDirection direction = TextDirection.ltr,
+    Color? color,
   }) {
     final t = TextPainter(
       text: TextSpan(
         text: s,
         style: TextStyle(
-          color: Colors.black,
+          color: color ?? inkColor,
           fontSize: size,
           fontFamily: 'Hanken Grotesk',
         ),
@@ -432,7 +439,7 @@ class _PianoPainter extends CustomPainter {
       c.drawPath(
         path,
         Paint()
-          ..color = Colors.black
+          ..color = inkColor
           ..strokeWidth = 2.2
           ..style = PaintingStyle.stroke,
       );
@@ -445,7 +452,7 @@ class _PianoPainter extends CustomPainter {
       c.drawPath(
         path,
         Paint()
-          ..color = Colors.black
+          ..color = inkColor
           ..strokeWidth = 2.3
           ..style = PaintingStyle.stroke,
       );
@@ -492,7 +499,7 @@ class _PianoPainter extends CustomPainter {
     c.drawOval(
       head,
       Paint()
-        ..color = Colors.black
+        ..color = inkColor
         ..strokeWidth = 2
         ..style = n.beats < 2 ? PaintingStyle.fill : PaintingStyle.stroke,
     );
@@ -513,7 +520,7 @@ class _PianoPainter extends CustomPainter {
       c.drawPath(
         p,
         Paint()
-          ..color = Colors.black
+          ..color = inkColor
           ..strokeWidth = 3
           ..style = PaintingStyle.stroke,
       );
@@ -522,7 +529,7 @@ class _PianoPainter extends CustomPainter {
 
   @override
   void paint(Canvas c, Size s) {
-    c.drawRect(Offset.zero & s, Paint()..color = Colors.white);
+    c.drawRect(Offset.zero & s, Paint()..color = paperColor);
     if (kind == 'keyboard') {
       final w = (s.width - 16) / 8;
       for (var i = 0; i < 8; i++) {
@@ -544,12 +551,13 @@ class _PianoPainter extends CustomPainter {
           12 + i * w,
           87,
           size: 10,
+          color: Colors.black,
         );
       }
       for (final i in [0, 1, 3, 4, 5]) {
         c.drawRect(
           Rect.fromLTWH(8 + (i + 1) * w - w * .28, 8, w * .56, 60),
-          ink,
+          Paint()..color = Colors.black,
         );
       }
       label(
@@ -578,7 +586,7 @@ class _PianoPainter extends CustomPainter {
         const Offset(276, 25),
         const Offset(311, 25),
         Paint()
-          ..color = Colors.black
+          ..color = inkColor
           ..strokeWidth = 4,
       );
       label(c, '½ + ½', 265, 68);
@@ -631,6 +639,8 @@ class _PianoPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _PianoPainter old) =>
+      old.inkColor != inkColor ||
+      old.paperColor != paperColor ||
       old.localeTag != localeTag ||
       old.middleCLabel != middleCLabel ||
       old.proseDirection != proseDirection ||

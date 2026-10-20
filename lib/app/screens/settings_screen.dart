@@ -1,3 +1,5 @@
+import '../app_appearance_picker.dart';
+import '../app_theme.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -43,7 +45,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final localeController = AppLocaleScope.maybeOf(context);
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
@@ -69,6 +71,8 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 22),
+              const AppAppearancePicker(),
+              const SizedBox(height: 14),
               if (localeController != null) ...<Widget>[
                 _LanguageSettings(controller: localeController),
                 const SizedBox(height: 14),
@@ -299,9 +303,9 @@ class _SettingsCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(18),
     decoration: BoxDecoration(
-      color: Colors.white.withValues(alpha: .62),
+      color: OstinatoPalette.of(context).controlSurface,
       borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: Colors.white.withValues(alpha: .75)),
+      border: Border.all(color: OstinatoPalette.of(context).glassBorder),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -313,7 +317,7 @@ class _SettingsCard extends StatelessWidget {
           style: hankenText(
             size: 13.5,
             height: 1.55,
-            color: OstinatoColors.textBody,
+            color: OstinatoPalette.of(context).textBody,
           ),
         ),
       ],

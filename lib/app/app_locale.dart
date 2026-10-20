@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'app_translation_catalog.dart';
 export 'app_translation_catalog.dart' show AppDecimal, resolveAppLocales;
 
-/// Eight approved presentation locales; device preferences resolve in order.
+/// Fourteen approved presentation locales; device preferences resolve in order.
 const List<Locale> appSupportedLocales = ostinatoSupportedLocales;
 const List<LocalizationsDelegate<dynamic>> appLocalizationsDelegates = [
   AppTranslationsDelegate(),

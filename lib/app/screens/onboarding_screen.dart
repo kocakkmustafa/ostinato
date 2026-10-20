@@ -1,3 +1,4 @@
+import '../app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../app_locale.dart';
@@ -88,13 +89,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     final _LibraryFacts facts = _LibraryFacts.from(widget.repo);
     return Scaffold(
-      backgroundColor: OstinatoColors.shell,
+      backgroundColor: OstinatoPalette.of(context).shell,
       body: DecoratedBox(
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           gradient: RadialGradient(
             center: Alignment(-0.7, -1),
             radius: 1.2,
-            colors: <Color>[Color(0x8CDACDF6), Colors.transparent],
+            colors: <Color>[OstinatoPalette.of(context).voice.chip.withValues(alpha: .55), Colors.transparent],
           ),
         ),
         child: SafeArea(
@@ -187,7 +188,7 @@ class _MetronomeProgress extends StatelessWidget {
             height: i == index ? 18 : 9,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3),
-              color: i <= index ? OstinatoColors.ink : const Color(0x2E2A2533),
+              color: i <= index ? OstinatoPalette.of(context).ink : OstinatoPalette.of(context).divider,
             ),
           ),
         ],
@@ -250,9 +251,11 @@ class _WelcomeStep extends StatelessWidget {
           // söylüyordu. Açı hüküm taşımıyor (bu figürün yanında sayı
           // YOK, ölçüm iddiası YOK), o yüzden tek ölçüt OKUNABİLİRLİK.
           painter: SkeletonFigurePainter(
+            color: OstinatoPalette.of(context).ink,
+            markerColor: OstinatoPalette.of(context).textMuted,
             bandLowDeg: -15,
             bandHighDeg: 15,
-            bandColor: const Color(0x4D5F4CA0),
+            bandColor: OstinatoPalette.of(context).voice.band,
             markerDeg: 6,
           ),
         ),
@@ -284,7 +287,7 @@ class _WelcomeStep extends StatelessWidget {
         style: hankenText(
           size: 15,
           height: 1.55,
-          color: OstinatoColors.textBody,
+          color: OstinatoPalette.of(context).textBody,
         ),
       ),
       const SizedBox(height: 14),
@@ -305,7 +308,7 @@ class _WelcomeStep extends StatelessWidget {
           style: hankenText(
             size: 13.5,
             height: 1.55,
-            color: OstinatoColors.textBody,
+            color: OstinatoPalette.of(context).textBody,
           ),
         ),
       ),
@@ -394,7 +397,7 @@ class _ScopeStep extends StatelessWidget {
           style: hankenText(
             size: 13.5,
             height: 1.55,
-            color: OstinatoColors.textBody,
+            color: OstinatoPalette.of(context).textBody,
           ),
         ),
       ),
@@ -432,7 +435,7 @@ class _FactRow extends StatelessWidget {
               style: hankenText(
                 size: 13.5,
                 height: 1.5,
-                color: OstinatoColors.textBody,
+                color: OstinatoPalette.of(context).textBody,
               ),
             ),
           ),
@@ -548,9 +551,9 @@ class _SensorCard extends StatelessWidget {
     width: double.infinity,
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: Colors.white.withValues(alpha: .62),
+      color: OstinatoPalette.of(context).controlSurface,
       borderRadius: BorderRadius.circular(18),
-      border: Border.all(color: Colors.white.withValues(alpha: .75)),
+      border: Border.all(color: OstinatoPalette.of(context).glassBorder),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -562,7 +565,7 @@ class _SensorCard extends StatelessWidget {
           style: hankenText(
             size: 13.5,
             height: 1.55,
-            color: OstinatoColors.textBody,
+            color: OstinatoPalette.of(context).textBody,
           ),
         ),
       ],

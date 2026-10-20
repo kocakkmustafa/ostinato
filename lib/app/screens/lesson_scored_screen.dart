@@ -1,3 +1,4 @@
+import '../app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
 
@@ -25,13 +26,14 @@ class LessonScoredScreenRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hue = OstinatoPalette.of(context).instrument(discipline.id);
     final PostureContract? contract = ContentRepositoryScope.of(
       context,
     ).contractOrNull(discipline.id);
     final bool isGuide = lesson.kind == LessonKind.guide;
 
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
@@ -80,6 +82,8 @@ class LessonScoredScreenRoute extends StatelessWidget {
                           height: 200,
                           child: CustomPaint(
                             painter: SkeletonFigurePainter(
+            color: OstinatoPalette.of(context).ink,
+            markerColor: OstinatoPalette.of(context).textMuted,
                               bandLowDeg: contract.bandLowDeg,
                               bandHighDeg: contract.bandHighDeg,
                               bandColor: hue.band,
@@ -115,7 +119,7 @@ class LessonScoredScreenRoute extends StatelessWidget {
                         ),
                         style: hankenText(
                           size: 12.5,
-                          color: OstinatoColors.textMuted,
+                          color: OstinatoPalette.of(context).textMuted,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -143,7 +147,7 @@ class LessonScoredScreenRoute extends StatelessWidget {
                         ),
                         style: hankenText(
                           size: 11.5,
-                          color: OstinatoColors.textFaint,
+                          color: OstinatoPalette.of(context).textFaint,
                         ),
                       ),
                     ],
@@ -157,9 +161,9 @@ class LessonScoredScreenRoute extends StatelessWidget {
                   vertical: 16,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: .55),
+                  color: OstinatoPalette.of(context).controlSurface,
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: Colors.white.withValues(alpha: .7)),
+                  border: Border.all(color: OstinatoPalette.of(context).glassBorder),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -135,6 +135,7 @@ void main() {
     expect(intlLocaleName(chinese), 'zh');
     for (final unsupported in [
       const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
+      const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Latn'),
       const Locale('zh', 'TW'), const Locale('zh', 'HK'), const Locale('zh', 'MO'),
     ]) {
       expect(canonicalLanguageTag(unsupported), 'en');
@@ -274,14 +275,59 @@ void main() {
         for (final category in ['one', 'few', 'many', 'other'])
           category: variants[category]!,
       }});
-      for (final item in [(1, 'one'), (2, 'few'), (5, 'many')]) {
+      for (final item in [(1, 'one'), (2, 'few'), (5, 'many'),
+          (12, 'many'), (22, 'few'), (101, 'many')]) {
         expect(polish.text(pair.$1, pair.$2, pluralCount: item.$1),
             startsWith('${item.$2} '));
       }
+      // Integer counts used by these UI messages. Italian has a many
+      // category at a million; a translated other form remains its documented
+      // grammatical fallback when the catalog intentionally shares that form.
+      for (final entry in <String, List<(int, String)>>{
+        'hi': [(0, 'one'), (1, 'one'), (2, 'other')],
+        'it': [(1, 'one'), (1000000, 'many')],
+        'ko': [(0, 'other'), (1, 'other'), (2, 'other')],
+        'id': [(0, 'other'), (1, 'other'), (2, 'other')],
+        'zh-Hans': [(0, 'other'), (1, 'other'), (2, 'other')],
+      }.entries) {
+        final locale = localeForLanguageTag(entry.key);
+        final translated = AppTranslations(locale, {id: variants});
+        for (final item in entry.value) {
+          expect(translated.text(pair.$1, pair.$2, pluralCount: item.$1),
+              startsWith('${item.$2} '), reason: '$id ${entry.key} ${item.$1}');
+        }
+      }
+      final italianFallback = AppTranslations(const Locale('it'), {id: {
+        'one': variants['one']!, 'other': variants['other']!,
+      }});
+      expect(italianFallback.text(pair.$1, pair.$2, pluralCount: 1000000),
+          startsWith('other '));
       for (final locale in [const Locale('en'), const Locale('tr')]) {
         final source = AppTranslations(locale, const {});
         final expected = appMessagePluralSources[id]![locale.languageCode == 'tr' ? 'trOne' : 'enOne'];
         expect(source.text(pair.$1, pair.$2, pluralCount: 1), expected);
+      }
+    }
+  });
+
+  test('all fourteen packaged catalogs retain every exact source contract', () {
+    expect(ostinatoSupportedLocales, hasLength(14));
+    expect(appMessageIds, hasLength(1885));
+    final ids = appMessageIds.values.toSet();
+    for (final locale in ostinatoSupportedLocales) {
+      final tag = canonicalLanguageTag(locale);
+      final raw = jsonDecode(File('assets/l10n/$tag.json').readAsStringSync());
+      final translated = AppTranslations.fromJson(locale, raw);
+      expect(translated.messages.keys.toSet(), ids, reason: tag);
+      for (final pair in appMessageIds.entries) {
+        final names = appMessagePlaceholders[pair.value]?.keys ?? const <String>[];
+        final values = <String, Object?>{for (final key in names) key: 'fixture-$key'};
+        final rendered = translated.text(pair.key.$1, pair.key.$2,
+            values: values,
+            pluralCount: appMessagePluralSources.containsKey(pair.value) ? 2 : null);
+        expect(rendered.trim(), isNotEmpty, reason: '$tag ${pair.value}');
+        expect(rendered, isNot(contains(RegExp(r'\{[A-Za-z][A-Za-z0-9_]*\}'))),
+            reason: '$tag ${pair.value}');
       }
     }
   });

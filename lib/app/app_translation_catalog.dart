@@ -50,7 +50,7 @@ String canonicalLanguageTag(Locale? locale) {
 
 bool _supportsChinese(Locale locale) =>
     locale.scriptCode == 'Hans' ||
-    (locale.scriptCode != 'Hant' &&
+    (locale.scriptCode == null &&
       !const {'TW', 'HK', 'MO'}.contains(locale.countryCode));
 
 bool _supportsAppLocale(Locale locale) =>

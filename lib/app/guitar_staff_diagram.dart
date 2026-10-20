@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_locale.dart';
+import 'app_theme.dart';
 import 'design/ostinato_theme.dart';
 import 'design/widgets.dart';
 import 'guitar_journey.dart';
@@ -68,7 +69,7 @@ class GuitarStaffDiagram extends StatelessWidget {
               ),
               style: hankenText(size: 13, height: 1.5),
             ),
-            _staff(guitarOpenStaffNotes),
+            _staff(context, guitarOpenStaffNotes),
             for (final note in guitarOpenStaffNotes)
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
@@ -86,7 +87,7 @@ class GuitarStaffDiagram extends StatelessWidget {
               ),
               style: hankenText(size: 15, weight: FontWeight.w600),
             ),
-            _staff(guitarFirstStringStaffNotes),
+            _staff(context, guitarFirstStringStaffNotes),
             Text(
               localized(
                 context,
@@ -110,26 +111,38 @@ class GuitarStaffDiagram extends StatelessWidget {
     );
   }
 
-  Widget _staff(List<GuitarStaffNote> notes) => ExcludeSemantics(
+  Widget _staff(BuildContext context, List<GuitarStaffNote> notes) => ExcludeSemantics(
     // All visual information is repeated in scalable, readable text above/below.
     child: SizedBox(
       height: 180,
       width: double.infinity,
-      child: CustomPaint(painter: _StaffPainter(notes)),
+      child: CustomPaint(
+        painter: _StaffPainter(
+          notes,
+          inkColor: OstinatoPalette.of(context).notationInk,
+          paperColor: OstinatoPalette.of(context).notationPaper,
+        ),
+      ),
     ),
   );
 }
 
 class _StaffPainter extends CustomPainter {
-  const _StaffPainter(this.notes);
+  const _StaffPainter(
+    this.notes, {
+    required this.inkColor,
+    required this.paperColor,
+  });
+  final Color inkColor, paperColor;
   final List<GuitarStaffNote> notes;
 
   @override
   void paint(Canvas canvas, Size size) {
+    canvas.drawRect(Offset.zero & size, Paint()..color = paperColor);
     canvas.save();
     canvas.scale(size.width / 300, size.height / 180);
     final ink = Paint()
-      ..color = OstinatoColors.ink
+      ..color = inkColor
       ..strokeWidth = 1.5
       ..style = PaintingStyle.stroke;
     double y(int step) => 112 - step * 6;
@@ -156,7 +169,7 @@ class _StaffPainter extends CustomPainter {
       canvas.rotate(-0.25);
       canvas.drawOval(
         Rect.fromCenter(center: Offset.zero, width: 14, height: 9),
-        Paint()..color = OstinatoColors.ink,
+        Paint()..color = inkColor,
       );
       canvas.restore();
       final down = note.staffStep >= 4;
@@ -170,7 +183,7 @@ class _StaffPainter extends CustomPainter {
       final label = TextPainter(
         text: TextSpan(
           text: '${note.string}',
-          style: monoText(size: 13, color: OstinatoColors.ink),
+          style: monoText(size: 13, color: inkColor),
         ),
         textDirection: TextDirection.ltr,
       )..layout();
@@ -180,7 +193,9 @@ class _StaffPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_StaffPainter oldDelegate) => oldDelegate.notes != notes;
+  bool shouldRepaint(_StaffPainter oldDelegate) => oldDelegate.notes != notes ||
+      oldDelegate.inkColor != inkColor ||
+      oldDelegate.paperColor != paperColor;
 }
 
 /// Four original 4/4 bars for the final reading task. This is a drawing and a
@@ -229,6 +244,8 @@ class GuitarFirstReadScore extends StatelessWidget {
                   child: CustomPaint(
                     painter: _FirstReadBarPainter(
                       score.bars[barIndex],
+                      inkColor: OstinatoPalette.of(context).notationInk,
+                      paperColor: OstinatoPalette.of(context).notationPaper,
                       showMeter: barIndex == 0,
                       finalBar: barIndex == score.bars.length - 1,
                     ),
@@ -296,11 +313,14 @@ class GuitarFirstReadScore extends StatelessWidget {
 class _FirstReadBarPainter extends CustomPainter {
   const _FirstReadBarPainter(
     this.events, {
+    required this.inkColor,
+    required this.paperColor,
     required this.showMeter,
     required this.finalBar,
   });
 
   final List<GuitarJourneyScoreEvent> events;
+  final Color inkColor, paperColor;
   final bool showMeter;
   final bool finalBar;
 
@@ -310,10 +330,11 @@ class _FirstReadBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    canvas.drawRect(Offset.zero & size, Paint()..color = paperColor);
     canvas.save();
     canvas.scale(size.width / 340, size.height / 150);
     final ink = Paint()
-      ..color = OstinatoColors.ink
+      ..color = inkColor
       ..strokeWidth = 1.5
       ..style = PaintingStyle.stroke;
     for (var step = 0; step <= 8; step += 2) {
@@ -365,7 +386,7 @@ class _FirstReadBarPainter extends CustomPainter {
         );
         canvas.drawRect(
           Rect.fromLTWH(leftX - 6, beamY - 2, rightX - leftX, 5),
-          Paint()..color = OstinatoColors.ink,
+          Paint()..color = inkColor,
         );
         i++;
       }
@@ -384,7 +405,7 @@ class _FirstReadBarPainter extends CustomPainter {
       canvas.rotate(-0.25);
       canvas.drawOval(
         Rect.fromCenter(center: Offset.zero, width: 14, height: 9),
-        Paint()..color = OstinatoColors.ink,
+        Paint()..color = inkColor,
       );
       canvas.restore();
       if (!beamed.contains(i)) {
@@ -431,7 +452,7 @@ class _FirstReadBarPainter extends CustomPainter {
     final painter = TextPainter(
       text: TextSpan(
         text: value,
-        style: monoText(size: size, color: OstinatoColors.ink),
+        style: monoText(size: size, color: inkColor),
       ),
       textDirection: TextDirection.ltr,
     )..layout();
@@ -440,6 +461,8 @@ class _FirstReadBarPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_FirstReadBarPainter oldDelegate) =>
+      oldDelegate.inkColor != inkColor ||
+      oldDelegate.paperColor != paperColor ||
       oldDelegate.events != events ||
       oldDelegate.showMeter != showMeter ||
       oldDelegate.finalBar != finalBar;

@@ -5,6 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../account_connection.dart';
 import '../app_locale.dart';
+import '../app_theme.dart';
 import '../audio/audio_capture_channel.dart';
 import '../audio/guitar_note_observation_controller.dart';
 import '../audio/practice_audio_root.dart';
@@ -230,10 +231,11 @@ class _GuitarNoteObservationScreenState
   Widget build(BuildContext context) {
     final controller = _controller;
     final value = controller?.observation;
-    final hue = InstrumentHues.guitar;
+    final p = OstinatoPalette.of(context);
+    final hue = p.guitar;
     const names = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
@@ -438,7 +440,7 @@ class _GuitarNoteObservationScreenState
                 ),
                 style: hankenText(
                   size: 12.5,
-                  color: OstinatoColors.textMuted,
+                  color: OstinatoPalette.of(context).textMuted,
                   height: 1.5,
                 ),
               ),
@@ -451,13 +453,13 @@ class _GuitarNoteObservationScreenState
 
   Widget _sessionPreparationCard(BuildContext context) => GlassCard(
     key: const Key('note-session-preparation'),
-    gradientColors: InstrumentHues.guitar.grad,
+    gradientColors: OstinatoPalette.of(context).guitar.grad,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         kicker(
           localized(context, 'BEFORE PLAYING TODAY', 'BUGÜN ÇALMADAN ÖNCE'),
-          color: InstrumentHues.guitar.ink,
+          color: OstinatoPalette.of(context).guitar.ink,
         ),
         const SizedBox(height: 9),
         Text(

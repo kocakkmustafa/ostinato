@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_locale.dart';
+import '../app_theme.dart';
 import '../catalog_copy_tr.dart';
 
 import '../content.dart';
@@ -137,6 +138,8 @@ class ReviewScreenRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final p = OstinatoPalette.of(context);
+    final hue = p.instrument(discipline.id);
     final int secs = summary.elapsedSeconds < 1 ? 1 : summary.elapsedSeconds;
     final List<String> gaps = <String>[
       ReviewCopyTr.text(context, 'gap.confidence',
@@ -158,7 +161,7 @@ class ReviewScreenRoute extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 40),
@@ -198,7 +201,7 @@ class ReviewScreenRoute extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: hue.gradient,
                   borderRadius: BorderRadius.circular(22),
-                  border: Border.all(color: Colors.white.withValues(alpha: .85)),
+                  border: Border.all(color: p.glassBorder),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,7 +215,7 @@ class ReviewScreenRoute extends StatelessWidget {
                     SizedBox(
                         height: 60,
                         child: CustomPaint(
-                            painter: _CurvePainter(history: summary.history))),
+                            painter: _CurvePainter(history: summary.history, color: p.ink))),
                     const SizedBox(height: 12),
                     // O-070: sıfır ölçümde bu cümle "%100 … 0 saniye" derdi.
                     // Yokluk kendi cümlesini taşır; ölçüm cümlesinin içine
@@ -260,10 +263,10 @@ class ReviewScreenRoute extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: .55),
+                            color: p.controlSurface,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                                color: Colors.white.withValues(alpha: .7)),
+                                color: p.controlBorder),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,7 +314,7 @@ class ReviewScreenRoute extends StatelessWidget {
                         style: hankenText(
                             size: 25,
                             weight: FontWeight.w600,
-                            color: OstinatoColors.ink)),
+                            color: OstinatoPalette.of(context).ink)),
                     const SizedBox(height: 14),
                     for (final String g in gaps)
                       Padding(
@@ -320,7 +323,7 @@ class ReviewScreenRoute extends StatelessWidget {
                             style: hankenText(
                                 size: 13.5,
                                 height: 1.55,
-                                color: OstinatoColors.inkSoft)),
+                                color: OstinatoPalette.of(context).inkSoft)),
                       ),
                     Text(
                       // O-069: "aynı ağırlıkta" cümlesi doğruydu ama
@@ -331,7 +334,7 @@ class ReviewScreenRoute extends StatelessWidget {
                         'and these are not all the same kind of gap: some are '
                         'missing tools, some are missing data, and some are '
                         'judgements we do not think are ours to make.'),
-                      style: hankenText(size: 12.5, color: OstinatoColors.textMuted),
+                      style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textMuted),
                     ),
                   ],
                 ),
@@ -340,9 +343,9 @@ class ReviewScreenRoute extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: .6),
+                  color: p.controlSurface,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white.withValues(alpha: .75)),
+                  border: Border.all(color: p.controlBorder),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -359,7 +362,7 @@ class ReviewScreenRoute extends StatelessWidget {
                     Text(ReviewCopyTr.text(context, 'next.footer',
                         'One suggestion, not a list.'),
                         style: hankenText(
-                            size: 12.5, color: OstinatoColors.textMuted)),
+                            size: 12.5, color: OstinatoPalette.of(context).textMuted)),
                   ],
                 ),
               ),
@@ -367,7 +370,7 @@ class ReviewScreenRoute extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0x0D2A2533),
+                  color: p.controlSurface,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 // DÜZELTME (koordinatör, 2026-08-06, M-F-186): "yet"
@@ -383,7 +386,7 @@ class ReviewScreenRoute extends StatelessWidget {
                   // biriktirip göndermek) inşa edilirse bu cümle YALAN olur.
                   // O gün bu metin ADIYLA güncellenmeli, sessizce bırakılmaz.
                   key: const Key('review-sharing-gap-note'),
-                  style: hankenText(size: 12.5, color: OstinatoColors.textMuted),
+                  style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textMuted),
                 ),
               ),
               const SizedBox(height: 20),
@@ -401,7 +404,8 @@ class ReviewScreenRoute extends StatelessWidget {
 }
 
 class _CurvePainter extends CustomPainter {
-  const _CurvePainter({required this.history});
+  const _CurvePainter({required this.history, required this.color});
+  final Color color;
   final List<double> history;
 
   @override
@@ -434,7 +438,7 @@ class _CurvePainter extends CustomPainter {
     canvas.drawPath(
         path,
         Paint()
-          ..color = OstinatoColors.ink
+          ..color = color
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2
           ..strokeCap = StrokeCap.round
@@ -442,5 +446,5 @@ class _CurvePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _CurvePainter old) => old.history != history;
+  bool shouldRepaint(covariant _CurvePainter old) => old.history != history || old.color != color;
 }

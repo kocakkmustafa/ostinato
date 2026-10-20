@@ -8,6 +8,7 @@ import '../camera_pose_source.dart';
 import '../camera_session.dart';
 import '../account_connection.dart';
 import '../app_locale.dart';
+import '../app_theme.dart';
 import '../content.dart';
 import '../cue_text.dart';
 import '../design/app_scope.dart';
@@ -272,7 +273,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
@@ -319,6 +320,8 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   }
 
   Widget _body(BuildContext context) {
+    final p = OstinatoPalette.of(context);
+    final hue = p.instrument(widget.discipline.id);
     if (_state is PermissionDeniedRetriable ||
         _state is PermissionDeniedPermanent ||
         _state is SetupFailed ||
@@ -339,11 +342,11 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
             borderRadius: BorderRadius.circular(26),
             child: Container(
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: <Color>[Color(0xFFF9F7FB), Color(0xFFF1ECF6)],
+                  colors: <Color>[p.surface, p.controlSurface],
                 ),
               ),
               child: Stack(
@@ -361,7 +364,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
                       child: _MeasuringFigure(
                           state: _state as Measuring,
                           contract: _contract,
-                          hue: widget.hue),
+                          hue: hue),
                     ),
                   if (!_counting &&
                       _cueVisible &&
@@ -373,7 +376,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
                       top: 16,
                       child: _CueAPanel(
                         text: _cueTextFor((_state as Measuring).trunkTiltDeg)!,
-                        hue: widget.hue,
+                        hue: hue,
                       ),
                     ),
                 ],
@@ -400,7 +403,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
                       thresholdDeg: _contract.cueThresholdDeg,
                       measuredDeg: (_state as Measuring).trunkTiltDeg.abs(),
                     )),
-              hue: widget.hue,
+              hue: hue,
             ),
           ),
         if (!_counting)
@@ -408,7 +411,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
             onPressed: _stop,
             style: OutlinedButton.styleFrom(
               minimumSize: const Size.fromHeight(52),
-              side: const BorderSide(color: Color(0x282A2533)),
+              side: BorderSide(color: p.controlBorder),
               shape:
                   RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
             ),
@@ -438,6 +441,8 @@ class _MeasuringFigure extends StatelessWidget {
           child: CustomPaint(
             painter: SkeletonFigurePainter(
               tiltDeg: state.trunkTiltDeg.clamp(-30, 30),
+              color: OstinatoPalette.of(context).ink,
+              markerColor: OstinatoPalette.of(context).outline,
               bandLowDeg: contract.bandLowDeg,
               bandHighDeg: contract.bandHighDeg,
               bandColor: hue.band,
@@ -460,7 +465,7 @@ class _MeasuringFigure extends StatelessWidget {
                       style: monoText(size: 9.5, letterSpacing: .09)),
                   Text('${appDecimal(context, state.trunkTiltDeg.abs(), 1)}°',
                       key: const Key('live-tilt-label'),
-                      style: monoText(size: 15, color: OstinatoColors.ink)),
+                      style: monoText(size: 15, color: OstinatoPalette.of(context).ink)),
                 ],
               ),
               const SizedBox(height: 8),
@@ -474,7 +479,7 @@ class _MeasuringFigure extends StatelessWidget {
               const SizedBox(height: 8),
               Text(localized(context, 'No score, and none is coming. The bar is the range; the mark is you.',
                   'Puan yok. Çubuk eğitmen aralığını, işaret seni gösterir.'),
-                  style: hankenText(size: 11.5, color: OstinatoColors.textMuted)),
+                  style: hankenText(size: 11.5, color: OstinatoPalette.of(context).textMuted)),
             ],
           ),
         ),
@@ -498,10 +503,10 @@ class _BlindNotice extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border:
-                    Border.all(color: const Color(0x4D2A2533), width: 1.5),
+                    Border.all(color: OstinatoPalette.of(context).outline, width: 1.5),
               ),
               alignment: Alignment.center,
-              child: Text('?', style: hankenText(size: 20, color: OstinatoColors.textFaint)),
+              child: Text('?', style: hankenText(size: 20, color: OstinatoPalette.of(context).textFaint)),
             ),
             const SizedBox(height: 16),
             Text(localized(context, 'I can’t see you right now.', 'Şu anda seni göremiyoruz.'),
@@ -514,7 +519,7 @@ class _BlindNotice extends StatelessWidget {
               textAlign: TextAlign.center,
               style: hankenText(
                         size: 14.5, height: 1.55,
-                        color: OstinatoColors.textBody),
+                        color: OstinatoPalette.of(context).textBody),
             ),
           ],
         ),
@@ -544,7 +549,7 @@ class _CueAPanel extends StatelessWidget {
               localized(context,
                   'Not a correction — we have no teacher data on what you should do about it. Just what we measured.',
                   'Bu bir düzeltme önerisi değil. Ne yapman gerektiğine dair eğitmen verimiz yok; yalnızca ölçtüğümüzü gösteriyoruz.'),
-              style: hankenText(size: 12.5, color: OstinatoColors.textMuted),
+              style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textMuted),
             ),
           ],
         ),
@@ -570,9 +575,9 @@ class _CueBLine extends StatelessWidget {
       key: const Key('observation-cue'),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 13),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: .62),
+        color: OstinatoPalette.of(context).controlSurface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withValues(alpha: .78)),
+        border: Border.all(color: OstinatoPalette.of(context).controlBorder),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -584,7 +589,7 @@ class _CueBLine extends StatelessWidget {
               height: 7,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: inBand ? const Color(0x282A2533) : hue.ink,
+                color: inBand ? OstinatoPalette.of(context).textMuted : hue.ink,
               ),
             ),
           ),
@@ -594,7 +599,7 @@ class _CueBLine extends StatelessWidget {
               text ??
                   'You are inside the range the teachers occupy. Nothing '
                       'to report.',
-              style: hankenText(size: 13, color: OstinatoColors.inkSoft),
+              style: hankenText(size: 13, color: OstinatoPalette.of(context).inkSoft),
             ),
           ),
         ],
@@ -633,13 +638,16 @@ class _NoticeCard extends StatelessWidget {
             Text(title, style: hankenText(size: 19, weight: FontWeight.w500)),
             const SizedBox(height: 8),
             Text(body, textAlign: TextAlign.center,
-                style: hankenText(size: 14, color: OstinatoColors.textBody)),
+                style: hankenText(size: 14, color: OstinatoPalette.of(context).textBody)),
             if (action != null) ...<Widget>[
               const SizedBox(height: 18),
               FilledButton(
                 key: const Key('notice-action'),
                 onPressed: onAction,
-                style: FilledButton.styleFrom(backgroundColor: OstinatoColors.ink),
+                style: FilledButton.styleFrom(
+                  backgroundColor: OstinatoPalette.of(context).primary,
+                  foregroundColor: OstinatoPalette.of(context).onPrimary,
+                ),
                 child: Text(action),
               ),
             ],

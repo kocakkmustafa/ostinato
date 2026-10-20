@@ -1,3 +1,4 @@
+import '../app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../content.dart';
@@ -17,8 +18,9 @@ class LessonLockedScreenRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hue = OstinatoPalette.of(context).instrument(discipline.id);
     return Scaffold(
-      backgroundColor: OstinatoColors.surface,
+      backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
@@ -33,11 +35,11 @@ class LessonLockedScreenRoute extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                    color: const Color(0x122A2533),
+                    color: OstinatoPalette.of(context).controlSurface,
                     borderRadius: BorderRadius.circular(8)),
                 child: Text(localized(context, 'LOCKED', 'KİLİTLİ'),
                     key: const Key('state-lesson-locked'),
-                    style: monoText(color: OstinatoColors.textMuted)),
+                    style: monoText(color: OstinatoPalette.of(context).textMuted)),
               ),
               const SizedBox(height: 13),
               Text(catalogName(context, lesson.id, lesson.displayName),
@@ -77,7 +79,7 @@ class LessonLockedScreenRoute extends StatelessWidget {
                   decoration: BoxDecoration(
                     gradient: hue.softGradient,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white.withValues(alpha: .75)),
+                    border: Border.all(color: OstinatoPalette.of(context).glassBorder),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,14 +99,14 @@ class LessonLockedScreenRoute extends StatelessWidget {
                 localized(context,
                   'There is nothing to try here and no way to unlock it from your side. It opens when the measurement is confirmed, and you will see it change.',
                   'Bu dersi kendi başına açabileceğin bir işlem yok. Gerekli ölçüm doğrulandığında açılacak ve değişikliği burada göreceksin.'),
-                style: hankenText(size: 12.5, color: OstinatoColors.textFaint),
+                style: hankenText(size: 12.5, color: OstinatoPalette.of(context).textFaint),
               ),
               const SizedBox(height: 18),
               OutlinedButton(
                 onPressed: () => Navigator.of(context).pop(),
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size.fromHeight(52),
-                  side: const BorderSide(color: Color(0x282A2533)),
+                  side:  BorderSide(color: OstinatoPalette.of(context).controlBorder),
                   shape:
                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
                 ),
