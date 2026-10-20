@@ -18,6 +18,8 @@ import 'package:ostinato/app/app_translation_catalog.dart'
     show canonicalLanguageTag;
 import 'package:ostinato/app/audio/practice_audio_lease.dart';
 import 'package:ostinato/app/audio/practice_audio_root.dart';
+import 'package:ostinato/app/content.dart';
+import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/guitar_journey.dart';
 import 'package:ostinato/app/guitar_journey_progress.dart';
 import 'package:ostinato/app/onboarding_store.dart';
@@ -363,6 +365,10 @@ void main() {
     course = await GuitarJourneyCourse.load().timeout(
       const Duration(seconds: 10),
     );
+    // Root-bundle string Futures must be created outside each widget test's
+    // FakeAsync zone so later real-app boots can await the same cached values.
+    await ContentRepository.load().timeout(const Duration(seconds: 10));
+    await CueTextResolver.load().timeout(const Duration(seconds: 10));
   });
   setUp(() {
     addTearDown(
