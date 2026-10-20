@@ -230,11 +230,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                           'Progress unknown',
                           'İlerleme bilinmiyor',
                         )
-                      : localized(
-                          context,
-                          '$completed of ${lessons.length} self-reported complete',
-                          '$completed / ${lessons.length} öz beyanla tamamlandı',
-                        ),
+                      : localized(context, "{v0} of {v1} self-reported complete", "{v0} / {v1} öz beyanla tamamlandı", values: {"v0": completed, "v1": lessons.length}),
                   key: const Key('guitar-journey-progress'),
                   style: monoText(color: hue.ink),
                 ),
@@ -413,11 +409,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
         subtitle: Text(
           done == null
               ? localized(context, 'Progress unknown', 'İlerleme bilinmiyor')
-              : localized(
-                  context,
-                  '$done / 6 self-reported',
-                  '$done / 6 öz beyan',
-                ),
+              : localized(context, "{v0} / 6 self-reported", "{v0} / 6 öz beyan", values: {"v0": done}),
           style: monoText(),
         ),
         children: [
@@ -455,19 +447,13 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
 
   String _statusText(BuildContext context, GuitarLessonProgress? record) {
     if (record?.selfReportedCompletedAt != null) {
-      final date = record!.selfReportedCompletedAt!
-          .toLocal()
-          .toIso8601String()
-          .split('T')
-          .first;
-      return localized(context, 'SELF-REPORTED · $date', 'ÖZ BEYAN · $date');
+      final date = MaterialLocalizations.of(context).formatMediumDate(
+        record!.selfReportedCompletedAt!.toLocal(),
+      );
+      return localized(context, "SELF-REPORTED · {v0}", "ÖZ BEYAN · {v0}", values: {"v0": date});
     }
     if ((record?.practiceCount ?? 0) > 0) {
-      return localized(
-        context,
-        'PRACTISED ×${record?.practiceCount ?? 0}',
-        'ÇALIŞILDI ×${record?.practiceCount ?? 0}',
-      );
+      return localized(context, "PRACTISED ×{v0}", "ÇALIŞILDI ×{v0}", values: {"v0": record?.practiceCount ?? 0});
     }
     if (record?.seenAt != null) return localized(context, 'VIEWED', 'GÖRÜLDÜ');
     return localized(context, 'NOT STARTED', 'BAŞLANMADI');
@@ -568,11 +554,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
           ),
           const SizedBox(height: 6),
           Text(
-            localized(
-              context,
-              'You self-reported completing an earlier version on $date. That record remains saved; new required material has its own practice record.',
-              'Önceki sürümü $date tarihinde tamamladığını beyan ettin. O kayıt korunuyor; yeni zorunlu içeriğin ayrı bir çalışma kaydı var.',
-            ),
+            localized(context, "You self-reported completing an earlier version on {v0}. That record remains saved; new required material has its own practice record.", "Önceki sürümü {v0} tarihinde tamamladığını beyan ettin. O kayıt korunuyor; yeni zorunlu içeriğin ayrı bir çalışma kaydı var.", values: {"v0": date}),
             style: hankenText(size: 12.5, height: 1.5),
           ),
         ],
@@ -672,11 +654,9 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               ),
               const SizedBox(height: 20),
               kicker(
-                localized(
-                  context,
-                  lesson.capstone ? 'ORIGINAL PERFORMANCE' : 'GUITAR LESSON',
-                  lesson.capstone ? 'ÖZGÜN PERFORMANS' : 'GİTAR DERSİ',
-                ),
+                lesson.capstone
+                    ? localized(context, 'ORIGINAL PERFORMANCE', 'ÖZGÜN PERFORMANS')
+                    : localized(context, 'GUITAR LESSON', 'GİTAR DERSİ'),
                 color: hue.ink,
               ),
               const SizedBox(height: 8),
@@ -691,11 +671,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                localized(
-                  context,
-                  '${lesson.minutes} MIN · SELF-GUIDED',
-                  '${lesson.minutes} DK · KENDİ ÇALIŞMAN',
-                ),
+                localized(context, "{v0} MIN · SELF-GUIDED", "{v0} DK · KENDİ ÇALIŞMAN", values: {"v0": lesson.minutes}),
                 style: monoText(),
               ),
               LessonMediaSlot.empty(
@@ -737,8 +713,9 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                     'Bu dersten önce',
                     localized(
                       context,
-                      'Practise ${widget.course.lessons.firstWhere((l) => l.id == lesson.prerequisiteIds.single).title.en} and use its self-check before continuing. Return to the course to revisit it.',
-                      '${widget.course.lessons.firstWhere((l) => l.id == lesson.prerequisiteIds.single).title.tr} dersini çalış ve devam etmeden öz denetimini yap. Yeniden açmak için kursa dön.',
+                      'Practise {v0} and use its self-check before continuing. Return to the course to revisit it.',
+                      '{v0} dersini çalış ve devam etmeden öz denetimini yap. Yeniden açmak için kursa dön.',
+                      values: {'v0': widget.course.lessons.firstWhere((l) => l.id == lesson.prerequisiteIds.single).title.of(context)},
                     ),
                   ),
                 _section(
@@ -757,7 +734,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                     lesson.teachingSteps
                         .asMap()
                         .entries
-                        .map((e) => '${e.key + 1}. ${e.value.of(context)}')
+                        .map((e) => '${appInteger(context, e.key + 1)}. ${e.value.of(context)}')
                         .join('\n\n'),
                   ),
                 if (lesson.id.endsWith('.tuning')) _tuningCard(context),
@@ -855,11 +832,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                                 'Practice entries: unknown',
                                 'Çalışma kaydı: bilinmiyor',
                               )
-                            : localized(
-                                context,
-                                'Practice entries: ${_record?.practiceCount ?? 0}',
-                                'Çalışma kaydı: ${_record?.practiceCount ?? 0}',
-                              ),
+                            : localized(context, "Practice entries: {v0}", "Çalışma kaydı: {v0}", values: {"v0": _record?.practiceCount ?? 0}),
                         style: monoText(),
                       ),
                       const SizedBox(height: 9),
@@ -1141,8 +1114,10 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
                 Text(
                   localized(
                     context,
-                    'About ${drill.minutesRange.first}–${drill.minutesRange.last} min · ${drill.rounds} short round${drill.rounds == 1 ? '' : 's'}',
-                    'Yaklaşık ${drill.minutesRange.first}–${drill.minutesRange.last} dk · ${drill.rounds} kısa tur',
+                    'About {v0}–{v1} min · {v2} short rounds',
+                    'Yaklaşık {v0}–{v1} dk · {v2} kısa tur',
+                    values: {'v0': drill.minutesRange.first, 'v1': drill.minutesRange.last, 'v2': drill.rounds},
+                    pluralCount: drill.rounds,
                   ),
                   style: hankenText(
                     size: 11.5,
@@ -1219,11 +1194,7 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 3),
               child: Text(
-                localized(
-                  context,
-                  'String ${string.number} · ${string.note} · ${string.hz.toStringAsFixed(2)} Hz',
-                  '${string.number}. tel · ${string.note} · ${string.hz.toStringAsFixed(2)} Hz',
-                ),
+                localized(context, "String {v0} · {v1} · {v2} Hz", "{v0}. tel · {v1} · {v2} Hz", values: {"v0": string.number, "v1": string.note, "v2": AppDecimal(string.hz, 2)}),
                 style: monoText(size: 10.5, color: OstinatoColors.textBody),
               ),
             ),

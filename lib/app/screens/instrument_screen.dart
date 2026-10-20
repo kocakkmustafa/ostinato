@@ -52,14 +52,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                       const SizedBox(height: 9),
                       if (contract != null)
                         Text(
-                          localized(
-                            context,
-                            '${contract.teacherCount} TEACHERS · AGREE TO '
-                                '${contract.dispersionMedianDeg.toStringAsFixed(2)}°',
-                            '${contract.teacherCount} '
-                                '${catalogSourceClass(context, contract.sourceClass)} · '
-                                '${contract.dispersionMedianDeg.toStringAsFixed(2)}° UYUM',
-                          ),
+                          localized(context, "{v0} {v1} · AGREE TO {v2}°", "{v0} {v1} · {v2}° UYUM", values: {"v0": contract.teacherCount, "v1": catalogSourceClass(context, contract.sourceClass), "v2": AppDecimal(contract.dispersionMedianDeg, 2)}),
                           style: monoText(color: hue.ink),
                         ),
                       const SizedBox(height: 14),
@@ -274,9 +267,7 @@ class InstrumentScreenRoute extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 7),
                                   Text(
-                                      '${catalogTag(context, c.level)} · '
-                                      '${c.estimatedMinutes} ${localized(context, 'MIN', 'DK')} · '
-                                      '${c.lessons.length} ${localized(context, 'LESSONS', 'DERS')}',
+                                      courseMetadata(context, c.level, c.estimatedMinutes, c.lessons.length),
                                       style: monoText(color: hue.ink)),
                                   const SizedBox(height: 11),
                                   Text(catalogGoal(context, c.id, c.goal),

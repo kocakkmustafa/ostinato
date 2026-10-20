@@ -54,35 +54,40 @@ class LibraryScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: 26,
-                          height: 26,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(9),
-                            gradient: const LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: <Color>[
-                                Color(0xFFFFD9BE),
-                                Color(0xFFDACDF6),
-                                Color(0xFFC4EADB),
-                              ],
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            width: 26,
+                            height: 26,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(9),
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: <Color>[
+                                  Color(0xFFFFD9BE),
+                                  Color(0xFFDACDF6),
+                                  Color(0xFFC4EADB),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 9),
-                        Text(
-                          'Ostinato',
-                          style: hankenText(
-                            size: 21,
-                            weight: FontWeight.w600,
-                            color: OstinatoColors.ink,
+                          const SizedBox(width: 9),
+                          Flexible(
+                            child: Text(
+                              'Ostinato',
+                              style: hankenText(
+                                size: 21,
+                                weight: FontWeight.w600,
+                                color: OstinatoColors.ink,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 12),
                     GlassIconButton(
                       icon: '⚙',
                       semanticLabel: localized(context, 'Settings', 'Ayarlar'),
@@ -180,15 +185,9 @@ class LibraryScreen extends StatelessWidget {
                 if (starters.isNotEmpty) ...<Widget>[
                   const SizedBox(height: 22),
                   kicker(
-                    localized(
-                      context,
-                      motionPaidFeaturesAvailable
-                          ? 'Start here'
-                          : 'Explore lessons',
-                      motionPaidFeaturesAvailable
-                          ? 'Buradan başlayın'
-                          : 'Dersleri incele',
-                    ),
+                    motionPaidFeaturesAvailable
+                        ? localized(context, "Start here", "Buradan başlayın")
+                        : localized(context, "Explore lessons", "Dersleri incele"),
                   ),
                   const SizedBox(height: 11),
                   for (final (Discipline d, Lesson l) in starters) ...<Widget>[
@@ -470,11 +469,11 @@ class _InstrumentCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  '${contract!.teacherCount} '
+                  '${appInteger(context, contract!.teacherCount)} '
                   '${catalogSourceClass(context, contract!.sourceClass)} · '
-                  '${contract!.bandLowDeg.toStringAsFixed(1)}–'
-                  '${contract!.bandHighDeg.toStringAsFixed(1)}° / '
-                  '${_sharedScaleMaxDeg.toStringAsFixed(0)}°',
+                  '${appDecimal(context, contract!.bandLowDeg, 1)}–'
+                  '${appDecimal(context, contract!.bandHighDeg, 1)}° / '
+                  '${appDecimal(context, _sharedScaleMaxDeg, 0)}°',
                   style: monoText(
                     size: 8.5,
                     color: hue.ink.withValues(alpha: .85),

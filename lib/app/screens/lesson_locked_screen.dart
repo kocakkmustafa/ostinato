@@ -44,9 +44,8 @@ class LessonLockedScreenRoute extends StatelessWidget {
                   style: hankenText(
                       size: 27, weight: FontWeight.w600, height: 1.15)),
               const SizedBox(height: 11),
-              Text('${lesson.minutes} ${localized(context, 'MIN', 'DK')}'
-                  '${lesson.focus.isEmpty ? '' : ' · ${catalogTag(context, lesson.focus)}'} '
-                  '· ${catalogUpperName(context, discipline.id, discipline.displayName)}',
+              Text('${lessonMetadata(context, lesson.minutes, lesson.focus)} '
+                                    '· ${catalogUpperName(context, discipline.id, discipline.displayName)}',
                   style: monoText()),
               const SizedBox(height: 20),
               GlassCard(

@@ -1,24 +1,24 @@
 import 'package:flutter/widgets.dart';
 
+import 'app_locale.dart';
+
 /// The versioned catalog preserves historical research text. Narrow release
 /// presentation overrides and Turkish copy apply only to their reviewed source
 /// fingerprints; changed source text stays visible until it is reviewed again.
 String catalogCopy(BuildContext context, String key, String source) {
-  final turkish = Localizations.localeOf(context).languageCode == 'tr';
   final releaseCopy = _referenceOnlyEnglishCopy[key];
   if (releaseCopy != null && _sourceFingerprints[key] == _fingerprint(source)) {
-    return turkish ? _turkishCopy[key] ?? releaseCopy : releaseCopy;
+    return localized(context, releaseCopy, _turkishCopy[key] ?? releaseCopy);
   }
-  if (!turkish) return source;
   return hasCurrentTurkishCatalogCopy(key, source)
-      ? _turkishCopy[key]!
+      ? localized(context, source, _turkishCopy[key]!)
       : source;
 }
 
 String catalogFirstSentence(BuildContext context, String key, String source) {
   final text = catalogCopy(context, key, source);
-  final stop = text.indexOf('. ');
-  return stop == -1 ? text : text.substring(0, stop + 1);
+  final stop = RegExp(r'(?:[.!?؟](?=\s|$)|[。！？])').firstMatch(text);
+  return stop == null ? text : text.substring(0, stop.end);
 }
 
 bool hasCurrentTurkishCatalogCopy(String key, String source) =>

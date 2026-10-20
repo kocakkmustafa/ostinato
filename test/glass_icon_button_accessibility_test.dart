@@ -30,6 +30,37 @@ Widget _host(String locale, Widget home) => MaterialApp(
   home: home,
 );
 
+// Keep the framework's own error handler. Extra diagnostics make a failed
+// phase identify its RenderFlex creator instead of hiding it behind takeException.
+List<String> _watchFrameworkErrors() {
+  final diagnostics = <String>[];
+  final previous = FlutterError.onError!;
+  FlutterError.onError = (details) {
+    final text = StringBuffer()..writeln(details.exceptionAsString());
+    if (details.context != null) text.writeln(details.context!.toDescription());
+    final collector = details.informationCollector;
+    if (collector != null) {
+      for (final node in collector()) {
+        text.writeln(node.toStringDeep());
+      }
+    }
+    diagnostics.add(text.toString());
+    previous(details);
+  };
+  addTearDown(() => FlutterError.onError = previous);
+  return diagnostics;
+}
+
+void _expectNoFrameworkError(
+  WidgetTester tester,
+  List<String> diagnostics,
+  String phase,
+) {
+  expect(tester.takeException(), isNull,
+      reason: '$phase\n${diagnostics.join("\n")}');
+  diagnostics.clear();
+}
+
 void main() {
   for (final locale in ['en', 'tr']) {
     final label = locale == 'tr' ? 'Ayarlar' : 'Settings';
@@ -212,6 +243,7 @@ void main() {
   testWidgets('library settings and back remain reachable at 320px and 2x', (
     tester,
   ) async {
+    final diagnostics = _watchFrameworkErrors();
     tester.view.physicalSize = const Size(320, 812);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -251,18 +283,32 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+      _expectNoFrameworkError(tester, diagnostics,
+          'Library header ($locale) before Settings tap at 320px/2x');
       final settings = find.byType(GlassIconButton);
+      expect(settings, findsOneWidget);
       expect(tester.getSize(settings), const Size(48, 48));
+      final targetBounds = tester.getRect(settings);
+      expect(targetBounds.left, greaterThanOrEqualTo(0));
+      expect(targetBounds.right, lessThanOrEqualTo(320));
+      expect(targetBounds.top, greaterThanOrEqualTo(0));
+      expect(targetBounds.bottom, lessThanOrEqualTo(812));
+      final brand = tester.getRect(find.text('Ostinato'));
+      expect(brand.left, greaterThanOrEqualTo(0));
+      expect(brand.right, lessThanOrEqualTo(targetBounds.left));
       await tester.tapAt(tester.getTopLeft(settings) + const Offset(47, 24));
       await tester.pumpAndSettle();
+      _expectNoFrameworkError(tester, diagnostics,
+          'Library ($locale) outer-ring tap must open Settings');
       expect(find.byType(SettingsScreen), findsOneWidget);
-      expect(tester.takeException(), isNull);
       final back = find.byType(GlassIconButton).last;
+      await tester.ensureVisible(back);
       await tester.tapAt(tester.getTopLeft(back) + const Offset(1, 24));
       await tester.pumpAndSettle();
       expect(find.byType(SettingsScreen), findsNothing);
       expect(find.byType(LibraryScreen), findsOneWidget);
-      expect(tester.takeException(), isNull);
+      _expectNoFrameworkError(tester, diagnostics,
+          'Settings ($locale) return must retain the Library layout');
     }
   });
 }

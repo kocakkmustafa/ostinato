@@ -44,8 +44,18 @@ class LessonDemoScreenRoute extends StatelessWidget {
                   style: hankenText(
                       size: 27, weight: FontWeight.w600, height: 1.15)),
               const SizedBox(height: 11),
-              Text('${lesson.minutes} ${localized(context, 'MIN', 'DK')} · ${catalogUpperName(context, discipline.id, discipline.displayName)}',
-                  style: monoText()),
+              Text(
+                localized(
+                  context,
+                  '{v0} MIN · {v1}',
+                  '{v0} DK · {v1}',
+                  values: {
+                    'v0': appInteger(context, lesson.minutes),
+                    'v1': catalogUpperName(context, discipline.id, discipline.displayName),
+                  },
+                ),
+                style: monoText(),
+              ),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(20),
@@ -74,16 +84,46 @@ class LessonDemoScreenRoute extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 6),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text('0°', style: monoText(size: 9)),
-                              Text(
-                                  '${arm.lowDeg.toStringAsFixed(0)}–'
-                                  '${arm.highDeg.toStringAsFixed(0)}°',
-                                  style: monoText(size: 9)),
-                              Text('120°', style: monoText(size: 9)),
-                            ],
+                          // Endpoints retain their scale positions. The
+                          // reference range has its own readable line so a
+                          // narrow card never squeezes three scaled labels.
+                          // The plotted scale uses left=x(degrees) in every
+                          // locale; keep its numeric endpoints in that order.
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '${appInteger(context, 0)}°',
+                                        key: const Key('demo-scale-min'),
+                                        style: monoText(size: 9),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Text(
+                                        '${appInteger(context, 120)}°',
+                                        key: const Key('demo-scale-max'),
+                                        textAlign: TextAlign.end,
+                                        style: monoText(size: 9),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  '${appDecimal(context, arm.lowDeg, 0)}–'
+                                  '${appDecimal(context, arm.highDeg, 0)}°',
+                                  key: const Key('demo-range-value'),
+                                  textAlign: TextAlign.center,
+                                  style: monoText(size: 9),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

@@ -71,10 +71,13 @@ class PianoNotation extends StatelessWidget {
               'Orta Do (Do4) çevresinde bir oktav',
             ),
           ),
-          const _Vector(
+          _Vector(
             kind: 'keyboard',
-            description:
-                'C4 D4 E4 F4 G4 A4 B4 C5; black keys in groups of two and three',
+            description: localized(
+              context,
+              'C4 D4 E4 F4 G4 A4 B4 C5; black keys in groups of two and three',
+              'C4 D4 E4 F4 G4 A4 B4 C5; siyah tuşlar ikili ve üçlü gruplar halinde. C4 orta Do, MIDI 60.',
+            ),
           ),
           Text(
             localized(
@@ -97,10 +100,13 @@ class PianoNotation extends StatelessWidget {
               'Sol: alt çizgi Mi4, alt aralık Fa4, ikinci çizgi Sol4; altta ek çizgi Do4. Fa: üstten ikinci çizgi Fa3, en üst aralık Sol3; üstte ek çizgi Do4.',
             ),
           ),
-          const _Vector(
+          _Vector(
             kind: 'anchors',
-            description:
-                'Treble E4 F4 G4 C4; bass F3 G3 C4. Each labeled note is a quarter.',
+            description: localized(
+              context,
+              'Treble E4 F4 G4 C4; bass F3 G3 C4. Each labeled note is a quarter.',
+              'Sol anahtarı Mi4 Fa4 Sol4 Do4; fa anahtarı Fa3 Sol3 Do4. Etiketli her nota dörtlük.',
+            ),
           ),
         ],
       );
@@ -115,10 +121,13 @@ class PianoNotation extends StatelessWidget {
               '4/4 simgeleri: dörtlük 1; ikilik 2; birlik 4; kirişle birleştirilmiş iki sekizlik ½ + ½. Suslar: dörtlük 1, ikilik 2, birlik ölçü 4.',
             ),
           ),
-          const _Vector(
+          _Vector(
             kind: 'symbols',
-            description:
-                'Filled stem note quarter; hollow stem half; hollow no stem whole; beamed eighth pair. Quarter zigzag rest; half rectangle above line; whole rectangle below line.',
+            description: localized(
+              context,
+              'Filled stem note quarter; hollow stem half; hollow no stem whole; beamed eighth pair. Quarter zigzag rest; half rectangle above line; whole rectangle below line.',
+              'Saplı dolu dörtlük; saplı boş ikilik; sapsız boş birlik; kirişle birleştirilmiş iki sekizlik. Dörtlük zikzak sus; ikilik çizgi üstü, birlik çizgi altı dikdörtgen sus.',
+            ),
           ),
           Text(
             localized(
@@ -127,9 +136,13 @@ class PianoNotation extends StatelessWidget {
               'Sus örneği: 1’de Do4 dörtlük, 2’de dörtlük sus, 3–4’te Re4 ikilik.',
             ),
           ),
-          const _Vector(
+          _Vector(
             kind: 'rest',
-            description: 'Treble C4 quarter, quarter rest, D4 half; 4 beats.',
+            description: localized(
+              context,
+              'Treble C4 quarter, quarter rest, D4 half; 4 beats.',
+              'Sol anahtarı Do4 dörtlük, dörtlük sus, Re4 ikilik; dört vuruş.',
+            ),
           ),
         ],
       );
@@ -148,14 +161,30 @@ class PianoNotation extends StatelessWidget {
           ),
         ),
         for (var bar = 0; bar < right.length; bar++) ...[
-          Text(localized(context, 'Bar ${bar + 1}', 'Ölçü ${bar + 1}')),
+          Text(
+            localized(
+              context,
+              'Bar {v0}',
+              'Ölçü {v0}',
+              values: {'v0': bar + 1},
+            ),
+          ),
           _Vector(
             kind: 'score',
             right: right[bar],
             left: left[bar],
             description: lesson == 14
-                ? 'Grand staff reading task. Treble staff above bass; decode the positions and durations before opening answers.'
-                : 'Original study bar ${bar + 1}; see the written notes in the practice text.',
+                ? localized(
+                    context,
+                    'Grand staff reading task. Treble staff above bass; decode the positions and durations before opening answers.',
+                    'Büyük dizek okuma görevi. Sol anahtarlı dizek fa anahtarlı dizeğin üstündedir; yanıtları açmadan konumları ve süreleri çözün.',
+                  )
+                : localized(
+                    context,
+                    'Original study bar {v0}; see the written notes in the practice text.',
+                    'Özgün etüt ölçüsü {v0}; pratik metnindeki yazılı notalara bakın.',
+                    values: {'v0': bar + 1},
+                  ),
           ),
         ],
         ExpansionTile(
@@ -175,7 +204,7 @@ class PianoNotation extends StatelessWidget {
                 children: [
                   for (var bar = 0; bar < right.length; bar++)
                     Text(
-                      '${localized(context, 'Bar', 'Ölçü')} ${bar + 1}: ${localized(context, 'right', 'sağ')} ${_answer(right[bar], context)}; ${localized(context, 'left', 'sol')} ${_answer(left[bar], context)}',
+                      '${localized(context, 'Bar', 'Ölçü')} ${appInteger(context, bar + 1)}: ${localized(context, 'right', 'sağ')} ${_answer(right[bar], context)}; ${localized(context, 'left', 'sol')} ${_answer(left[bar], context)}',
                     ),
                   Text(
                     localized(
@@ -198,37 +227,32 @@ String _answer(List<PianoWrittenNote> notes, BuildContext context) {
   var beat = 1.0;
   return notes
       .map((n) {
-        final names = {
-          'C': 'Do',
-          'D': 'Re',
-          'E': 'Mi',
-          'F': 'Fa',
-          'G': 'Sol',
-          'A': 'La',
-          'B': 'Si',
-        };
         final pitch = n.pitch == null
             ? localized(context, 'rest', 'sus')
+            : musicPitch(context, n.pitch!);
+        final duration = n.beats == 4
+            ? localized(context, 'whole', 'birlik')
+            : n.beats == 2
+            ? localized(context, 'half', 'ikilik')
+            : localized(context, 'quarter', 'dörtlük');
+        final result = n.beats > 1
+            ? localized(
+                context,
+                '{v0} {v1} (beats {v2}–{v3})',
+                '{v0} {v1} (vuruş {v2}–{v3})',
+                values: {
+                  'v0': pitch,
+                  'v1': duration,
+                  'v2': beat.toInt(),
+                  'v3': (beat + n.beats - 1).toInt(),
+                },
+              )
             : localized(
                 context,
-                n.pitch!,
-                '${names[n.pitch![0]]}${n.pitch!.substring(1)}',
+                '{v0} {v1} (beat {v2})',
+                '{v0} {v1} (vuruş {v2})',
+                values: {'v0': pitch, 'v1': duration, 'v2': beat.toInt()},
               );
-        final duration = localized(
-          context,
-          n.beats == 4
-              ? 'whole'
-              : n.beats == 2
-              ? 'half'
-              : 'quarter',
-          n.beats == 4
-              ? 'birlik'
-              : n.beats == 2
-              ? 'ikilik'
-              : 'dörtlük',
-        );
-        final result =
-            '$pitch $duration (${localized(context, 'beat', 'vuruş')} ${beat.toInt()}${n.beats > 1 ? '–${(beat + n.beats - 1).toInt()}' : ''})';
         beat += n.beats;
         return result;
       })
@@ -249,18 +273,8 @@ class _Vector extends StatelessWidget {
     padding: const EdgeInsets.symmetric(vertical: 12),
     child: Semantics(
       label: kind == 'score'
-          ? '${localized(context, 'Staff positions: bottom line is 0, each space or line above adds 1; negative positions lie below. Even positions are lines; 10 or -2 is a ledger line. ', 'Dizek konumları: alt çizgi 0, üstte her aralık veya çizgi 1 ekler; negatif konumlar alttadır. Çift konumlar çizgidir; 10 veya -2 ek çizgidir. ')}${_positions(right, true, context)} ${_positions(left, false, context)}'
-          : localized(context, description, switch (kind) {
-              'keyboard' =>
-                'C4 D4 E4 F4 G4 A4 B4 C5; siyah tuşlar ikili ve üçlü gruplar halinde. C4 orta Do, MIDI 60.',
-              'anchors' =>
-                'Sol anahtarı Mi4 Fa4 Sol4 Do4; fa anahtarı Fa3 Sol3 Do4. Etiketli her nota dörtlük.',
-              'symbols' =>
-                'Saplı dolu dörtlük; saplı boş ikilik; sapsız boş birlik; kirişle birleştirilmiş iki sekizlik. Dörtlük zikzak sus; ikilik çizgi üstü, birlik çizgi altı dikdörtgen sus.',
-              'rest' =>
-                'Sol anahtarı Do4 dörtlük, dörtlük sus, Re4 ikilik; dört vuruş.',
-              _ => description,
-            }),
+          ? '$description ${localized(context, 'Staff positions: bottom line is 0, each space or line above adds 1; negative positions lie below. Even positions are lines; 10 or -2 is a ledger line. ', 'Dizek konumları: alt çizgi 0, üstte her aralık veya çizgi 1 ekler; negatif konumlar alttadır. Çift konumlar çizgidir; 10 veya -2 ek çizgidir. ')}${_positions(right, true, context)} ${_positions(left, false, context)}'
+          : description,
       image: true,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -268,24 +282,44 @@ class _Vector extends StatelessWidget {
           final width = constraints.maxWidth < 340
               ? 340.0
               : constraints.maxWidth;
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: SizedBox(
-              width: width,
-              height: kind == 'keyboard'
-                  ? 150
-                  : kind == 'symbols'
-                  ? 155
-                  : kind == 'rest'
-                  ? 140
-                  : 255,
-              child: CustomPaint(
-                key: Key('piano-vector-$kind'),
-                painter: _PianoPainter(
-                  kind,
-                  right,
-                  left,
-                  Localizations.localeOf(context).languageCode == 'tr',
+          return Directionality(
+            textDirection: TextDirection.ltr,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: SizedBox(
+                width: width,
+                height: kind == 'keyboard'
+                    ? 150
+                    : kind == 'symbols'
+                    ? 155
+                    : kind == 'rest'
+                    ? 140
+                    : 255,
+                child: CustomPaint(
+                  key: Key('piano-vector-$kind'),
+                  painter: _PianoPainter(
+                    kind,
+                    right,
+                    left,
+                    middleCLabel: localized(
+                      context,
+                      'C4 = middle C / MIDI 60',
+                      'C4 = orta Do / MIDI 60',
+                    ),
+                    proseDirection: Directionality.of(context),
+                    localeTag: Localizations.localeOf(context).toLanguageTag(),
+                    pitchLabels: {
+                      for (final pitch in const [
+                        'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5',
+                        'F3', 'G3',
+                      ])
+                        pitch: musicPitch(context, pitch),
+                    },
+                    countLabels: [
+                      for (var count = 1; count <= 4; count++)
+                        appInteger(context, count),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -306,11 +340,9 @@ String _positions(
   BuildContext context,
 ) {
   var start = 1.0;
-  final prefix = localized(
-    context,
-    treble ? 'Treble' : 'Bass',
-    treble ? 'Sol' : 'Fa',
-  );
+  final prefix = treble
+      ? localized(context, 'Treble', 'Sol')
+      : localized(context, 'Bass', 'Fa');
   final details = notes
       .map((note) {
         final pos = note.pitch == null
@@ -318,8 +350,17 @@ String _positions(
             : 'CDEFGAB'.indexOf(note.pitch![0]) +
                   int.parse(note.pitch!.substring(1)) * 7 -
                   (treble ? 30 : 18);
-        final result =
-            '${localized(context, 'beat', 'vuruş')} ${start.toInt()}, ${localized(context, 'position', 'konum')} ${pos ?? localized(context, 'rest', 'sus')}, ${note.beats} ${localized(context, 'beats', 'vuruş')}';
+        final result = localized(
+          context,
+          'beat {v0}, position {v1}, {v2} beats',
+          'vuruş {v0}, konum {v1}, {v2} vuruş',
+          values: {
+            'v0': start.toInt(),
+            'v1': pos ?? localized(context, 'rest', 'sus'),
+            'v2': note.beats,
+          },
+          pluralCount: note.beats,
+        );
         start += note.beats;
         return result;
       })
@@ -328,14 +369,33 @@ String _positions(
 }
 
 class _PianoPainter extends CustomPainter {
-  _PianoPainter(this.kind, this.right, this.left, this.turkish);
-  final bool turkish;
+  _PianoPainter(
+    this.kind,
+    this.right,
+    this.left, {
+    required this.middleCLabel,
+    required this.proseDirection,
+    required this.localeTag,
+    required this.pitchLabels,
+    required this.countLabels,
+  });
+  final String middleCLabel, localeTag;
+  final TextDirection proseDirection;
+  final Map<String, String> pitchLabels;
+  final List<String> countLabels;
   final String kind;
   final List<PianoWrittenNote> right, left;
   final ink = Paint()
     ..color = Colors.black
     ..strokeWidth = 1.4;
-  void label(Canvas c, String s, double x, double y, {double size = 14}) {
+  void label(
+    Canvas c,
+    String s,
+    double x,
+    double y, {
+    double size = 14,
+    TextDirection direction = TextDirection.ltr,
+  }) {
     final t = TextPainter(
       text: TextSpan(
         text: s,
@@ -345,7 +405,7 @@ class _PianoPainter extends CustomPainter {
           fontFamily: 'Hanken Grotesk',
         ),
       ),
-      textDirection: TextDirection.ltr,
+      textDirection: direction,
     )..layout();
     t.paint(c, Offset(x, y));
   }
@@ -479,10 +539,11 @@ class _PianoPainter extends CustomPainter {
         );
         label(
           c,
-          ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'][i],
+          pitchLabels[['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'][i]]!
+              .replaceFirst(' (', '\n('),
           12 + i * w,
           87,
-          size: 12,
+          size: 10,
         );
       }
       for (final i in [0, 1, 3, 4, 5]) {
@@ -493,9 +554,10 @@ class _PianoPainter extends CustomPainter {
       }
       label(
         c,
-        turkish ? 'C4 = orta Do / MIDI 60' : 'C4 = middle C / MIDI 60',
+        middleCLabel,
         8,
         123,
+        direction: proseDirection,
       );
       return;
     }
@@ -540,12 +602,12 @@ class _PianoPainter extends CustomPainter {
       for (var i = 0; i < 4; i++) {
         final pitch = ['E4', 'F4', 'G4', 'C4'][i];
         note(c, 90 + i * 62.0, topBottom, true, PianoWrittenNote(pitch, 1));
-        label(c, pitch, 80 + i * 62.0, 110);
+        label(c, pitchLabels[pitch]!, 80 + i * 62.0, 110, size: 11);
       }
       for (var i = 0; i < 3; i++) {
         final pitch = ['F3', 'G3', 'C4'][i];
         note(c, 105 + i * 80.0, bassBottom, false, PianoWrittenNote(pitch, 1));
-        label(c, pitch, 95 + i * 80.0, 225);
+        label(c, pitchLabels[pitch]!, 95 + i * 80.0, 225, size: 11);
       }
       return;
     }
@@ -555,7 +617,7 @@ class _PianoPainter extends CustomPainter {
     label(c, '4', 57, 186, size: 16);
     final unit = (s.width - 100) / 4;
     for (var beat = 0; beat < 4; beat++) {
-      label(c, '${beat + 1}', 83 + beat * unit, 235, size: 12);
+      label(c, countLabels[beat], 83 + beat * unit, 235, size: 12);
     }
     for (final pair in [(right, topBottom, true), (left, bassBottom, false)]) {
       var time = 0.0;
@@ -569,7 +631,17 @@ class _PianoPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _PianoPainter old) =>
-      old.turkish != turkish ||
+      old.localeTag != localeTag ||
+      old.middleCLabel != middleCLabel ||
+      old.proseDirection != proseDirection ||
+      old.pitchLabels.length != pitchLabels.length ||
+      old.pitchLabels.entries.any(
+        (entry) => pitchLabels[entry.key] != entry.value,
+      ) ||
+      old.countLabels.length != countLabels.length ||
+      old.countLabels.indexed.any(
+        (entry) => countLabels[entry.$1] != entry.$2,
+      ) ||
       old.kind != kind ||
       old.right != right ||
       old.left != left;

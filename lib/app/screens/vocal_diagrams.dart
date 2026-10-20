@@ -10,7 +10,11 @@ class VocalDiagrams extends StatelessWidget {
 
   Widget _cell(BuildContext context, String text) => Padding(
     padding: const EdgeInsets.all(6),
-    child: Text(text, textAlign: TextAlign.center),
+    child: Text(
+      text,
+      textAlign: TextAlign.center,
+      textDirection: Directionality.of(context),
+    ),
   );
   Widget _grid(
     BuildContext context,
@@ -20,19 +24,25 @@ class VocalDiagrams extends StatelessWidget {
     required String description,
   }) => Semantics(
     label: description,
-    child: SingleChildScrollView(
-      key: Key(id),
-      scrollDirection: Axis.horizontal,
-      child: SizedBox(
-        width: width,
-        child: Table(
-          border: TableBorder.all(color: Theme.of(context).dividerColor),
-          children: [
-            for (final row in rows)
-              TableRow(
-                children: [for (final cell in row) _cell(context, cell)],
-              ),
-          ],
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: SingleChildScrollView(
+        key: Key(id),
+        scrollDirection: Axis.horizontal,
+        child: SizedBox(
+          width: width,
+          child: Table(
+            // Beat columns and their scroll origin retain musical order.
+            // _cell uses the caller's direction for translated cell text.
+            textDirection: TextDirection.ltr,
+            border: TableBorder.all(color: Theme.of(context).dividerColor),
+            children: [
+              for (final row in rows)
+                TableRow(
+                  children: [for (final cell in row) _cell(context, cell)],
+                ),
+            ],
+          ),
         ),
       ),
     ),
@@ -47,6 +57,22 @@ class VocalDiagrams extends StatelessWidget {
           Padding(padding: const EdgeInsets.all(12), child: Text(answer)),
         ],
       );
+  String _eventDescription(BuildContext context, VocalEvent event) =>
+      switch (event.kind) {
+        'voice' => localized(
+          context,
+          'start {v0}, {v1}',
+          'başla {v0}, {v1}',
+          values: {'v0': event.tone, 'v1': event.syllable!.of(context)},
+        ),
+        'hold' => localized(
+          context,
+          'continue sound or silence',
+          'ses veya sessizlik devam',
+        ),
+        _ => localized(context, 'release to silence', 'bırak ve sus'),
+      };
+
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,8 +90,8 @@ class VocalDiagrams extends StatelessWidget {
           _grid(
             context,
             'vocal-rhythm',
-            const [
-              ['1', '2', '3', '4'],
+            [
+              [for (var beat = 1; beat <= 4; beat++) appInteger(context, beat)],
               ['V', '=', 'R', 'R'],
               ['V', 'V', 'R', 'R'],
             ],
@@ -90,7 +116,7 @@ class VocalDiagrams extends StatelessWidget {
             context,
             'vocal-contour',
             [
-              ['1', '2', '3', '4'],
+              [for (var beat = 1; beat <= 4; beat++) appInteger(context, beat)],
               ...course.contour,
             ],
             width: 400,
@@ -111,14 +137,18 @@ class VocalDiagrams extends StatelessWidget {
             ),
           ),
           for (var i = 0; i < course.study.length; i++) ...[
-            Text(localized(context, 'Bar ${i + 1}', 'Ölçü ${i + 1}')),
+            Text(localized(
+              context, 'Bar {v0}', 'Ölçü {v0}', values: {'v0': i + 1},
+            )),
             _grid(
               context,
               'vocal-study-${i + 1}',
               [
                 [
                   for (var j = 0; j < 8; j++)
-                    j.isEven ? '${j ~/ 2 + 1}' : localized(context, '&', 've'),
+                    j.isEven
+                        ? appInteger(context, j ~/ 2 + 1)
+                        : localized(context, '&', 've'),
                 ],
                 [
                   for (final e in course.study[i].events)
@@ -132,16 +162,14 @@ class VocalDiagrams extends StatelessWidget {
               width: 800,
               description: localized(
                 context,
-                'Bar ${i + 1}, half-beat symbols: ${course.study[i].events.map((e) => e.kind == 'voice'
-                    ? 'start ${e.tone}, ${e.syllable!.of(context)}'
-                    : e.kind == 'hold'
-                    ? 'continue sound or silence'
-                    : 'release to silence').join('; ')}',
-                'Ölçü ${i + 1}, yarım vuruş sembolleri: ${course.study[i].events.map((e) => e.kind == 'voice'
-                    ? 'başla ${e.tone}, ${e.syllable!.of(context)}'
-                    : e.kind == 'hold'
-                    ? 'ses veya sessizlik devam'
-                    : 'bırak ve sus').join('; ')}',
+                'Bar {v0}, half-beat symbols: {v1}',
+                'Ölçü {v0}, yarım vuruş sembolleri: {v1}',
+                values: {
+                  'v0': i + 1,
+                  'v1': course.study[i].events
+                      .map((event) => _eventDescription(context, event))
+                      .join('; '),
+                },
               ),
             ),
             const SizedBox(height: 12),

@@ -13,6 +13,37 @@ import 'package:ostinato/app/screens/instrument_screen.dart';
 import 'package:ostinato/app/screens/lesson_demo_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
 
+// Keep the framework's own error handler. Extra diagnostics make a failed
+// phase identify its RenderFlex creator instead of hiding it behind takeException.
+List<String> _watchFrameworkErrors() {
+  final diagnostics = <String>[];
+  final previous = FlutterError.onError!;
+  FlutterError.onError = (details) {
+    final text = StringBuffer()..writeln(details.exceptionAsString());
+    if (details.context != null) text.writeln(details.context!.toDescription());
+    final collector = details.informationCollector;
+    if (collector != null) {
+      for (final node in collector()) {
+        text.writeln(node.toStringDeep());
+      }
+    }
+    diagnostics.add(text.toString());
+    previous(details);
+  };
+  addTearDown(() => FlutterError.onError = previous);
+  return diagnostics;
+}
+
+void _expectNoFrameworkError(
+  WidgetTester tester,
+  List<String> diagnostics,
+  String phase,
+) {
+  expect(tester.takeException(), isNull,
+      reason: '$phase\n${diagnostics.join("\n")}');
+  diagnostics.clear();
+}
+
 void main() {
   late ContentRepository repo;
   late CueTextResolver cues;
@@ -89,6 +120,7 @@ void main() {
       (tester) async {
         await tester.binding.setSurfaceSize(const Size(320, 812));
         addTearDown(() => tester.binding.setSurfaceSize(null));
+        final diagnostics = _watchFrameworkErrors();
         final tr = language == 'tr';
         final firstSentence = tr
             ? 'Yalnız kayıtlı eğitmen referansları; bu sürümde kamera değerlendirmesi kapalıdır.'
@@ -120,17 +152,16 @@ void main() {
               expect(rowCopy, contains(firstSentence));
               expect(rowCopy, isNot(contains('your own trunk')));
               expect(rowCopy, isNot(contains('gövdenizin çizimiyle')));
-              expect(
-                tester.takeException(),
-                isNull,
-                reason: 'Course row must fit at 320px and ${textScale}x text',
-              );
+              _expectNoFrameworkError(tester, diagnostics,
+                  'Course ${lesson.id} ($language) at 320px/${textScale}x');
             }
             final row = find.byKey(Key('lesson-${lesson.id}'));
             await tester.ensureVisible(row);
             await tester.tap(row);
             await tester.pumpAndSettle();
             expect(find.byType(LessonDemoScreenRoute), findsOneWidget);
+            _expectNoFrameworkError(tester, diagnostics,
+                'Demo ${lesson.id} ($language) immediately after route push');
             final reason = find.byKey(const Key('demo-reason'));
             expect(tester.widget<Text>(reason).data, contains(firstSentence));
 
@@ -165,7 +196,8 @@ void main() {
             await tester.pumpAndSettle();
             expect(find.byType(CourseScreenRoute), findsOneWidget);
             expect(find.byType(LessonDemoScreenRoute), findsNothing);
-            expect(tester.takeException(), isNull);
+            _expectNoFrameworkError(tester, diagnostics,
+                'Demo ${lesson.id} ($language) return to course');
 
             await tester.pumpWidget(
               host(
@@ -192,6 +224,8 @@ void main() {
             await tester.tap(find.text('Open test reference'));
             await tester.pumpAndSettle();
             expect(find.byType(LessonDemoScreenRoute), findsOneWidget);
+            _expectNoFrameworkError(tester, diagnostics,
+                'Demo ${lesson.id} ($language) immediately after route push');
             opened++;
             expect(
               tester
@@ -238,7 +272,17 @@ void main() {
             );
             expect(range.youDeg, isNull);
             expect(find.byKey(const Key('you-marker')), findsNothing);
-            expect(tester.takeException(), isNull);
+            for (final key in ['demo-scale-min', 'demo-range-value', 'demo-scale-max']) {
+              final label = find.byKey(Key(key));
+              expect(label, findsOneWidget);
+              final bounds = tester.getRect(label);
+              expect(bounds.left, greaterThanOrEqualTo(0));
+              expect(bounds.right, lessThanOrEqualTo(320));
+              expect(tester.widget<Text>(label).maxLines, isNull);
+              expect(Directionality.of(tester.element(label)), TextDirection.ltr);
+            }
+            _expectNoFrameworkError(tester, diagnostics,
+                'Demo ${lesson.id} ($language) reference legend at 320px/2x');
             final back = find.byType(GlassIconButton);
             await tester.ensureVisible(back);
             await tester.pumpAndSettle();

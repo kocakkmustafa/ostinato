@@ -63,8 +63,7 @@ class CourseScreenRoute extends StatelessWidget {
                       size: 28, weight: FontWeight.w600, height: 1.1)),
               const SizedBox(height: 12),
               Text(
-                  '${catalogTag(context, course.level)} · ${course.estimatedMinutes} '
-                  '${localized(context, 'MIN', 'DK')} · ${course.lessons.length} ${localized(context, 'LESSONS', 'DERS')}',
+                  courseMetadata(context, course.level, course.estimatedMinutes, course.lessons.length),
                   style: monoText()),
               const SizedBox(height: 22),
               for (final Lesson l in course.lessons)
@@ -111,7 +110,7 @@ class _LessonRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (String chip, Color chipBg, Color chipFg, Color bg) = _chip;
+    final (_, chipBg, chipFg, bg) = _chip;
     final String? sourceReason = lesson.lockedReason ?? lesson.demoOnlyReason;
     final String firstSentence = sourceReason == null
         ? ''
@@ -153,8 +152,7 @@ class _LessonRow extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    '${lesson.minutes} ${localized(context, 'MIN', 'DK')}'
-                    '${lesson.focus.isEmpty ? '' : ' · ${catalogTag(context, lesson.focus)}'}',
+                    lessonMetadata(context, lesson.minutes, lesson.focus),
                     style: monoText(),
                   ),
                   const SizedBox(height: 10),
@@ -164,16 +162,12 @@ class _LessonRow extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: chipBg, borderRadius: BorderRadius.circular(7)),
                     child: Text(
-                      localized(
-                        context,
-                        chip,
-                        switch (lesson.kind) {
-                          LessonKind.locked => 'KİLİTLİ',
-                          LessonKind.demoOnly => 'REFERANS · PUAN YOK',
-                          LessonKind.guide => 'REHBER',
-                          LessonKind.scored => 'REFERANS',
-                        },
-                      ),
+                      switch (lesson.kind) {
+                        LessonKind.locked => localized(context, 'LOCKED', 'KİLİTLİ'),
+                        LessonKind.demoOnly => localized(context, 'REFERENCE · NO SCORING', 'REFERANS · PUAN YOK'),
+                        LessonKind.guide => localized(context, 'GUIDE', 'REHBER'),
+                        LessonKind.scored => localized(context, 'REFERENCE', 'REFERANS'),
+                      },
                       style: monoText(
                         size: 9.5,
                         color: chipFg,

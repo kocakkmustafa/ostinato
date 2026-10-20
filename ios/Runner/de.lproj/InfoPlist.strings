@@ -1,0 +1,2 @@
+"NSCameraUsageDescription" = "Kameraübungen sind in dieser Version geschlossen. Kamerazugriff ist für Haltungsbeobachtung auf dem Gerät vorgesehen; Video wird weder gespeichert noch hochgeladen.";
+"NSMicrophoneUsageDescription" = "Mikrofonzugriff ermöglicht dir, bei optionalen Übungen einen einzelnen Gitarrenton zu beobachten. Audio wird auf diesem Gerät im temporären Speicher verarbeitet und weder gespeichert noch hochgeladen.";

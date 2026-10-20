@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "Ostinato, ders sırasında gövde eğimini eğitmen referans aralığıyla karşılaştırmak için kamerayı kullanır. Video bu cihazda kalır; yüklenmez veya saklanmaz. Kısa oturum özeti cihazda saklanır.";
-"NSMicrophoneUsageDescription" = "İzninizle Ostinato, isteğe bağlı pratik sırasında bu cihazda tek gitar notasını gözlemler. Ses kaydedilmez veya yüklenmez.";
+"NSCameraUsageDescription" = "Bu sürümde kamera pratiği kapalıdır. Kamera erişimi cihazda duruş gözlemi içindir; video saklanmaz veya yüklenmez.";
+"NSMicrophoneUsageDescription" = "Mikrofon erişimi, isteğe bağlı pratikte tek gitar notasını gözlemlemenizi sağlar. Ses bu cihazda geçici bellekte işlenir; saklanmaz veya yüklenmez.";

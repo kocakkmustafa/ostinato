@@ -73,11 +73,7 @@ class GuitarStaffDiagram extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
-                  localized(
-                    context,
-                    'Open string ${note.string}: written ${note.written} → sounding ${note.sounding}',
-                    '${note.string}. açık tel: yazılı ${note.written} → seslenen ${note.sounding}',
-                  ),
+                  localized(context, "Open string {v0}: written {v1} → sounding {v2}", "{v0}. açık tel: yazılı {v1} → seslenen {v2}", values: {"v0": note.string, "v1": note.written, "v2": note.sounding}),
                   style: hankenText(size: 13, height: 1.4),
                 ),
               ),
@@ -196,7 +192,6 @@ class GuitarFirstReadScore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tr = Localizations.localeOf(context).languageCode == 'tr';
     return GlassCard(
       key: const Key('guitar-first-read-score'),
       child: Column(
@@ -222,11 +217,7 @@ class GuitarFirstReadScore extends StatelessWidget {
           for (var barIndex = 0; barIndex < score.bars.length; barIndex++) ...[
             const SizedBox(height: 12),
             Text(
-              localized(
-                context,
-                'Bar ${barIndex + 1}',
-                '${barIndex + 1}. ölçü',
-              ),
+              localized(context, "Bar {v0}", "{v0}. ölçü", values: {"v0": barIndex + 1}),
               style: hankenText(size: 14, weight: FontWeight.w600),
             ),
             ExcludeSemantics(
@@ -259,7 +250,7 @@ class GuitarFirstReadScore extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: SelectableText(
-                _barDescription(score.bars[barIndex], barIndex, tr),
+                _barDescription(context, score.bars[barIndex], barIndex),
                 style: hankenText(size: 12.5, height: 1.5),
               ),
             ),
@@ -278,40 +269,27 @@ class GuitarFirstReadScore extends StatelessWidget {
   }
 
   String _barDescription(
+    BuildContext context,
     List<GuitarJourneyScoreEvent> events,
     int index,
-    bool tr,
   ) {
-    String pitch(String note) {
-      if (!tr) return note;
-      const names = {
-        'C': 'Do',
-        'D': 'Re',
-        'E': 'Mi',
-        'F': 'Fa',
-        'G': 'Sol',
-        'A': 'La',
-        'B': 'Si',
-      };
-      return '${names[note[0]]}${note.substring(1)}';
-    }
-
     final parts = <String>[];
     for (final event in events) {
       if (event.isRest) {
-        parts.add(tr ? 'bir vuruş sus' : 'one-beat rest');
+        parts.add(localized(context, 'one-beat rest', 'bir vuruş sus'));
       } else {
         final duration = event.ticks == 2
-            ? (tr ? 'dörtlük' : 'quarter note')
-            : (tr ? 'sekizlik' : 'eighth note');
-        parts.add(
-          tr
-              ? 'yazılı ${pitch(event.written!)} (duyulan ${pitch(event.sounding!)}), $duration'
-              : 'written ${event.written} (sounds ${event.sounding}), $duration',
-        );
+            ? localized(context, 'quarter note', 'dörtlük')
+            : localized(context, 'eighth note', 'sekizlik');
+        parts.add(localized(context,
+          'written {v0} (sounds {v1}), {v2}',
+          'yazılı {v0} (duyulan {v1}), {v2}',
+          values: {'v0': musicPitch(context, event.written!),
+            'v1': musicPitch(context, event.sounding!), 'v2': duration}));
       }
     }
-    return '${tr ? '${index + 1}. ölçü' : 'Bar ${index + 1}'}: ${parts.join('; ')}.';
+    return localized(context, 'Bar {v0}: {v1}.', '{v0}. ölçü: {v1}.',
+      values: {'v0': index + 1, 'v1': parts.join('; ')});
   }
 }
 

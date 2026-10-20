@@ -9,6 +9,7 @@ import 'account_connection.dart';
 import 'account_data_directory.dart';
 import 'account_ownership_epoch.dart';
 import 'app_locale.dart';
+import 'app_locale_preferences.dart';
 import 'ownership_guarded_account_client.dart';
 
 const _url = String.fromEnvironment('MOTION_SUPABASE_URL');
@@ -107,6 +108,10 @@ class AccountStartupFailure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+    locale: AppLocaleScope.maybeOf(context) == null
+        ? null
+        : Localizations.localeOf(context),
+    localeListResolutionCallback: resolveAppLocales,
     supportedLocales: appSupportedLocales,
     localizationsDelegates: appLocalizationsDelegates,
     home: Builder(

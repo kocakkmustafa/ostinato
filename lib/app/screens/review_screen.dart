@@ -81,45 +81,31 @@ final class SessionSummary {
   }
 }
 
-/// Başlıktaki sayıyı yazıyla verir. Rakama düşmek ("4 things") bu ekranın
-/// geri kalanının tonundan kopardı; sınır isimli: on üstü rakama düşer,
-/// çünkü bugünkü liste hiçbir çalgıda dörtten fazla olamaz ve olursa bu
-/// fonksiyon uydurmak yerine rakam gösterir.
-String _countWord(int n) => const <int, String>{
-      1: 'One', 2: 'Two', 3: 'Three', 4: 'Four',
-      5: 'Five', 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten',
-    }[n] ?? '$n';
-
-String _countWordTr(int n) => const <int, String>{
-      1: 'Bir', 2: 'İki', 3: 'Üç', 4: 'Dört', 5: 'Beş',
-      6: 'Altı', 7: 'Yedi', 8: 'Sekiz', 9: 'Dokuz', 10: 'On',
-    }[n] ?? '$n';
-
 /// D14 (2026-08-16, O-153): "basit geçmiş listesi yeter" — tek satır,
 /// tek kayıt. Hangi DERS olduğunu adlandırmaz (ContentRepository lookup
 /// gerektirirdi, bu ekran onu almıyor); yalnız NE ZAMAN + NE OLDUĞU.
 String _lastSessionLine(BuildContext context, PersistedSession s) {
   final Duration age = DateTime.now().difference(s.completedAt);
   final String when = age.inDays >= 2
-      ? localized(context, '${age.inDays} days ago', '${age.inDays} gün önce')
+      ? localized(context, "{v0} days ago", "{v0} gün önce", values: {"v0": age.inDays}, pluralCount: age.inDays)
       : age.inDays == 1
           ? localized(context, 'Yesterday', 'Dün')
           : age.inHours >= 1
-              ? localized(context, '${age.inHours}h ago', '${age.inHours} saat önce')
+              ? localized(context, "{v0}h ago", "{v0} saat önce", values: {"v0": age.inHours}, pluralCount: age.inHours)
               : localized(context, 'Earlier today', 'Bugün daha önce');
   if (s.sampleCount == 0) {
     return ReviewCopyTr.template(context, 'last.none',
         '{when} — nothing readable that time either.',
-        <String, String>{'when': when});
+        <String, Object?>{'when': when});
   }
   final int share = ((1 - s.outCount / s.sampleCount) * 100).round();
   return ReviewCopyTr.template(context, 'last.readable',
       '{when} — inside the band in {share}% of readable samples; '
       '{secs}s elapsed.',
-      <String, String>{
+      <String, Object?>{
         'when': when,
-        'share': '$share',
-        'secs': '${s.elapsedSeconds}',
+        'share': share,
+        'secs': s.elapsedSeconds,
       });
 }
 
@@ -188,7 +174,7 @@ class ReviewScreenRoute extends StatelessWidget {
                       onTap: () =>
                           Navigator.of(context).popUntil((Route<void> r) => r.isFirst)),
                   kicker(localized(context, 'Summary', 'ÖZET')),
-                  const SizedBox(width: 38),
+                  const SizedBox(width: 48),
                 ],
               ),
               const SizedBox(height: 18),
@@ -203,7 +189,7 @@ class ReviewScreenRoute extends StatelessWidget {
                   // ile ÖLÇÜLEN süre farklı şeyler; ikisini tek kelimeyle
                   // ("measured") anlatmak, ölçülmemiş süreyi ölçülmüş
                   // gösteriyordu.
-                  '${summary.nothingReadable ? localized(context, "$secs S ELAPSED · NOTHING READ", "$secs SN GEÇTİ · ÖLÇÜM YOK") : localized(context, "$secs S ELAPSED · ${summary.sampleCount} READABLE SAMPLES", "$secs SN GEÇTİ · ${summary.sampleCount} OKUNABİLİR ÖRNEK")} · ${catalogUpperName(context, discipline.id, discipline.displayName)} · '
+                  '${summary.nothingReadable ? localized(context, "{v0} S ELAPSED · NOTHING READ", "{v0} SN GEÇTİ · ÖLÇÜM YOK", values: {"v0": secs}) : localized(context, "{v0} S ELAPSED · {v1} READABLE SAMPLES", "{v0} SN GEÇTİ · {v1} OKUNABİLİR ÖRNEK", values: {"v0": secs, "v1": summary.sampleCount})} · ${catalogUpperName(context, discipline.id, discipline.displayName)} · '
                   '${localized(context, 'NO SCORE', 'PUAN YOK')}',
                   style: monoText()),
               const SizedBox(height: 18),
@@ -245,8 +231,8 @@ class ReviewScreenRoute extends StatelessWidget {
                               'the band and the shape of the line above. No '
                               'weighting, no composite, nothing hidden behind '
                               'a single figure.',
-                              <String, String>{
-                                'share': '${(summary.insideShare! * 100).round()}',
+                              <String, Object?>{
+                                'share': (summary.insideShare! * 100).round(),
                               }),
                       key: const Key('review-measured-body'),
                       style: hankenText(size: 13.5, height: 1.55),
@@ -317,8 +303,8 @@ class ReviewScreenRoute extends StatelessWidget {
                     // ("vitrin korumasızdı") canlı-yüzey hâli, kullanıcıya
                     // görünen bir sayının saydığı şeye bağlı OLMAMASI.
                     Text(localized(context,
-                            '${_countWord(gaps.length)} things, by name.',
-                            '${_countWordTr(gaps.length)} alan, tek tek.'),
+                            '{v0} things, by name.',
+                            '{v0} alan, tek tek.', values: {'v0': gaps.length}, pluralCount: gaps.length),
                         key: const Key('review-gap-headline'),
                         // hankenText() — ham `TextStyle` tipografi
                         // yardımcısını ATLIYORDU (O-052).

@@ -189,7 +189,7 @@ class _SetupCheckScreenRouteState extends State<SetupCheckScreenRoute> {
                       semanticLabel: localized(context, 'Cancel setup', 'Kurulumdan çık'),
                       onTap: () => Navigator.of(context).pop()),
                   kicker(localized(context, 'Setup check', 'Kurulum denetimi')),
-                  const SizedBox(width: 38),
+                  const SizedBox(width: 48),
                 ],
               ),
               const SizedBox(height: 18),

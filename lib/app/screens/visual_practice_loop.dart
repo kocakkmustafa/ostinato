@@ -236,19 +236,11 @@ class _VisualPracticeLoopState extends State<VisualPracticeLoop> {
                   key: Key('visual-comparison-${result.name}'),
                   selected: _comparison == result,
                   label: Text(
-                    localized(
-                      context,
-                      switch (result) {
-                        PracticeComparison.changed => 'Changed',
-                        PracticeComparison.same => 'Same',
-                        PracticeComparison.uncertain => 'Uncertain',
-                      },
-                      switch (result) {
-                        PracticeComparison.changed => 'Değişti',
-                        PracticeComparison.same => 'Aynı',
-                        PracticeComparison.uncertain => 'Belirsiz',
-                      },
-                    ),
+                    switch (result) {
+                      PracticeComparison.changed => localized(context, "Changed", "Değişti"),
+                      PracticeComparison.same => localized(context, "Same", "Aynı"),
+                      PracticeComparison.uncertain => localized(context, "Uncertain", "Belirsiz"),
+                    },
                   ),
                   onSelected: (_) => setState(() => _comparison = result),
                 ),

@@ -173,11 +173,7 @@ class _MetronomeProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Semantics(
-    label: localized(
-      context,
-      'Step ${index + 1} of $count',
-      '${index + 1} / $count adım',
-    ),
+    label: localized(context, "Step {v0} of {v1}", "{v0} / {v1} adım", values: {"v0": index + 1, "v1": count}),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,

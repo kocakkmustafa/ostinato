@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:motion_content/motion_content.dart';
 
 import 'flutter_bundle_content_asset_reader.dart';
+import 'app_locale.dart';
 
 const String _guitarCourseAssetPath = 'assets/content/guitar_journey.v1.json';
 const String _guitarIntegrityManifestPath =
@@ -12,12 +13,13 @@ const String _guitarIntegrityManifestPath =
 /// Original course copy is a separate, versioned asset. The legacy measured
 /// posture library keeps its own honesty and lesson-status contract.
 final class GuitarText {
-  const GuitarText(this.en, this.tr);
+  const GuitarText(this.en, this.tr, {this.values = const {}});
   final String en;
   final String tr;
+  final Map<String, Object?> values;
 
   String of(BuildContext context) =>
-      Localizations.localeOf(context).languageCode == 'tr' ? tr : en;
+      localized(context, en, tr, values: values);
 
   factory GuitarText.fromJson(Map<String, dynamic> json) =>
       GuitarText(json['en'] as String, json['tr'] as String);

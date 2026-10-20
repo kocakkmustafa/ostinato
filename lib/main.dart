@@ -5,6 +5,7 @@ import 'package:motion_content/motion_content.dart';
 import 'app/content.dart';
 import 'app/cue_text.dart';
 import 'app/app_locale.dart';
+import 'app/app_locale_preferences.dart';
 import 'app/account_connection.dart';
 import 'app/camera_session.dart';
 import 'app/audio/practice_audio_root.dart';
@@ -25,24 +26,26 @@ Future<void> main() async {
     final (runtime, accountConnection) = await initializeMotionAccount();
     bindCameraResourceAdmission(accountConnection.resourceAdmission);
     runApp(
-      OstinatoAudioRoot(
-        userId: runtime.userId,
-        phase: runtime.phase,
-        passwordRecovery: accountConnection.passwordRecovery,
-        identityBoundary: accountConnection.identityBoundary,
-        resourceAdmission: accountConnection.resourceAdmission,
-        disposeAccountBinding: accountConnection.disposeBinding,
-        builder: (audioNavigatorHost) => MotionIdentityGate(
-          runtime: runtime,
-          child: OstinatoApp(
-            accountConnection: accountConnection,
-            audioNavigatorHost: audioNavigatorHost,
+      AppLocaleHost(
+        child: OstinatoAudioRoot(
+          userId: runtime.userId,
+          phase: runtime.phase,
+          passwordRecovery: accountConnection.passwordRecovery,
+          identityBoundary: accountConnection.identityBoundary,
+          resourceAdmission: accountConnection.resourceAdmission,
+          disposeAccountBinding: accountConnection.disposeBinding,
+          builder: (audioNavigatorHost) => MotionIdentityGate(
+            runtime: runtime,
+            child: OstinatoApp(
+              accountConnection: accountConnection,
+              audioNavigatorHost: audioNavigatorHost,
+            ),
           ),
         ),
       ),
     );
   } on Object {
-    runApp(const AccountStartupFailure());
+    runApp(const AppLocaleHost(child: AccountStartupFailure()));
   }
 }
 
@@ -181,6 +184,11 @@ class _OstinatoAppState extends State<OstinatoApp> {
 
   @override
   Widget build(BuildContext context) {
+    // Tests which embed the shell without the app preference host retain
+    // MaterialApp's device-locale behavior. Locale changes never own a key.
+    final locale = AppLocaleScope.maybeOf(context) == null
+        ? null
+        : Localizations.localeOf(context);
     return FutureBuilder<_Boot>(
       future: _load,
       builder: (BuildContext ctx, AsyncSnapshot<_Boot> snap) {
@@ -194,6 +202,8 @@ class _OstinatoAppState extends State<OstinatoApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: _theme,
+            locale: locale,
+            localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
             home: Builder(
@@ -215,11 +225,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          localized(
-                            errorContext,
-                            'Support code: $supportCode',
-                            'Destek kodu: $supportCode',
-                          ),
+                          localized(errorContext, "Support code: {v0}", "Destek kodu: {v0}", values: {"v0": supportCode}),
                           key: const Key('ostinato-content-support-code'),
                           textAlign: TextAlign.center,
                         ),
@@ -235,6 +241,8 @@ class _OstinatoAppState extends State<OstinatoApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: _theme,
+            locale: locale,
+            localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
             home: const Scaffold(
@@ -257,6 +265,8 @@ class _OstinatoAppState extends State<OstinatoApp> {
             title: 'Ostinato',
             debugShowCheckedModeBanner: false,
             theme: _theme,
+            locale: locale,
+            localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
             navigatorObservers: observer == null

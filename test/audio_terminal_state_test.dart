@@ -35,46 +35,50 @@ void main() {
           return _observed;
         },
       );
-      await harness.startThroughScreen(tester);
+      try {
+        await harness.startThroughScreen(tester);
 
-      await tester.pump(const Duration(milliseconds: 99));
-      expect(harness.controller.phase, NoteObservationPhase.calibrating);
-      expect(harness.controller.isActive, isTrue);
-      expect(harness.channel.stopCalls, 0);
+        await tester.pump(const Duration(milliseconds: 99));
+        expect(harness.controller.phase, NoteObservationPhase.calibrating);
+        expect(harness.controller.isActive, isTrue);
+        expect(harness.channel.stopCalls, 0);
 
-      await tester.pump(const Duration(milliseconds: 2));
-      expect(harness.failureReasons, contains('capture_pcm_timeout'));
-      expect(harness.controller.phase, NoteObservationPhase.unavailable);
-      expect(harness.controller.isActive, isFalse);
-      expect(harness.controller.isCaptureStopping, isTrue);
-      expect(harness.controller.captureClosePending, isTrue);
-      expect(harness.controller.captureGateReady, isFalse);
-      expect(harness.controller.canStart, isFalse);
-      expect(_startButton(tester).onPressed, isNull);
-      expect(_statusText(tester), contains('Capture stays disabled'));
-      expect(harness.channel.stopCalls, 1);
-      expect(harness.source.bufferedSampleCountForTest, 0);
-      expect(analyses, 0);
+        await tester.pump(const Duration(milliseconds: 2));
+        expect(harness.failureReasons, contains('capture_pcm_timeout'));
+        expect(harness.controller.phase, NoteObservationPhase.unavailable);
+        expect(harness.controller.isActive, isFalse);
+        expect(harness.controller.isCaptureStopping, isTrue);
+        expect(harness.controller.captureClosePending, isTrue);
+        expect(harness.controller.captureGateReady, isFalse);
+        expect(harness.controller.canStart, isFalse);
+        expect(_startButton(tester).onPressed, isNull);
+        expect(_statusText(tester), contains('Capture stays disabled'));
+        expect(harness.channel.stopCalls, 1);
+        expect(harness.source.bufferedSampleCountForTest, 0);
+        expect(analyses, 0);
 
-      harness.channel.acknowledgeClose();
-      await tester.pump();
-      expect(harness.controller.phase, NoteObservationPhase.unavailable);
-      expect(harness.controller.isCaptureStopping, isFalse);
-      expect(harness.controller.captureClosePending, isFalse);
-      expect(harness.controller.captureGateReady, isTrue);
-      expect(harness.controller.canStart, isTrue);
-      expect(_startButton(tester).onPressed, isNotNull);
-      expect(_statusText(tester), contains('Note observation stopped'));
+        harness.channel.acknowledgeClose();
+        await tester.pump();
+        expect(harness.controller.phase, NoteObservationPhase.unavailable);
+        expect(harness.controller.isCaptureStopping, isFalse);
+        expect(harness.controller.captureClosePending, isFalse);
+        expect(harness.controller.captureGateReady, isTrue);
+        expect(harness.controller.canStart, isTrue);
+        expect(_startButton(tester).onPressed, isNotNull);
+        expect(_statusText(tester), contains('Note observation stopped'));
 
-      // A completed close makes a later user choice possible; it does not
-      // turn a terminal transport failure into a successful observation.
-      await tester.pump(const Duration(milliseconds: 500));
-      expect(harness.controller.phase, NoteObservationPhase.unavailable);
-      expect(harness.controller.isActive, isFalse);
-      expect(harness.channel.startCalls, 1);
-      expect(harness.channel.stopCalls, 1);
-      expect(harness.channel.retryCalls, 0);
-      expect(tester.takeException(), isNull);
+        // A completed close makes a later user choice possible; it does not
+        // turn a terminal transport failure into a successful observation.
+        await tester.pump(const Duration(milliseconds: 500));
+        expect(harness.controller.phase, NoteObservationPhase.unavailable);
+        expect(harness.controller.isActive, isFalse);
+        expect(harness.channel.startCalls, 1);
+        expect(harness.channel.stopCalls, 1);
+        expect(harness.channel.retryCalls, 0);
+        expect(tester.takeException(), isNull);
+      } finally {
+        await harness.dispose();
+      }
     },
   );
 
@@ -96,75 +100,79 @@ void main() {
           return lateAnalysis.future;
         },
       );
-      await harness.startThroughScreen(tester);
+      try {
+        await harness.startThroughScreen(tester);
 
-      final rate = harness.config.initialSampleRate;
-      harness.channel.deliverPcm(
-        (rate * harness.config.calibrationMs / 1000).ceil(),
-        amplitude: .0001,
-      );
-      await tester.pump();
-      expect(harness.controller.phase, NoteObservationPhase.listening);
+        final rate = harness.config.initialSampleRate;
+        harness.channel.deliverPcm(
+          (rate * harness.config.calibrationMs / 1000).ceil(),
+          amplitude: .0001,
+        );
+        await tester.pump();
+        expect(harness.controller.phase, NoteObservationPhase.listening);
 
-      harness.channel.deliverPcm(harness.config.windowSamples);
-      await tester.pump();
-      expect(analyses, 1);
-      expect(_noteText(tester), 'A3');
-      expect(harness.controller.observation, isNotNull);
+        harness.channel.deliverPcm(harness.config.windowSamples);
+        await tester.pump();
+        expect(analyses, 1);
+        expect(_noteText(tester), 'A3');
+        expect(harness.controller.observation, isNotNull);
 
-      // Keep timestamps contiguous while reaching the next analysis interval.
-      // No synthetic wall-clock advance is needed to feed this native boundary.
-      final advanceSamples =
-          (rate * harness.config.analysisIntervalMs / 1000).ceil();
-      harness.channel.deliverPcm(advanceSamples);
-      await tester.pump();
-      harness.channel.deliverPcm(harness.config.windowSamples);
-      await tester.pump();
-      expect(analyses, 2);
-      expect(pendingSamples, isNotNull);
-      expect(pendingSamples!, contains(.2));
-      expect(harness.controller.bufferedSamples, harness.config.windowSamples);
-      expect(harness.source.bufferedSampleCountForTest, greaterThan(0));
+        // Keep timestamps contiguous while reaching the next analysis interval.
+        // No synthetic wall-clock advance is needed to feed this native boundary.
+        final advanceSamples =
+            (rate * harness.config.analysisIntervalMs / 1000).ceil();
+        harness.channel.deliverPcm(advanceSamples);
+        await tester.pump();
+        harness.channel.deliverPcm(harness.config.windowSamples);
+        await tester.pump();
+        expect(analyses, 2);
+        expect(pendingSamples, isNotNull);
+        expect(pendingSamples!, contains(.2));
+        expect(harness.controller.bufferedSamples, harness.config.windowSamples);
+        expect(harness.source.bufferedSampleCountForTest, greaterThan(0));
 
-      // The raw EventChannel EOF-to-terminal translation is tested below this
-      // layer. This fake emits that transport boundary's translated event.
-      harness.channel.reportStreamEnded();
-      await tester.pump();
-      expect(harness.failureReasons, contains('capture_stream_ended'));
-      expect(harness.controller.phase, NoteObservationPhase.unavailable);
-      expect(harness.controller.observation, isNull);
-      expect(_noteText(tester), '—');
-      expect(harness.controller.bufferedSamples, 0);
-      expect(harness.source.bufferedSampleCountForTest, 0);
-      expect(pendingSamples!, everyElement(0));
-      expect(harness.controller.isCaptureStopping, isTrue);
-      expect(harness.controller.canStart, isFalse);
-      expect(_startButton(tester).onPressed, isNull);
-      expect(harness.channel.stopCalls, 1);
+        // The raw EventChannel EOF-to-terminal translation is tested below this
+        // layer. This fake emits that transport boundary's translated event.
+        harness.channel.reportStreamEnded();
+        await tester.pump();
+        expect(harness.failureReasons, contains('capture_stream_ended'));
+        expect(harness.controller.phase, NoteObservationPhase.unavailable);
+        expect(harness.controller.observation, isNull);
+        expect(_noteText(tester), '—');
+        expect(harness.controller.bufferedSamples, 0);
+        expect(harness.source.bufferedSampleCountForTest, 0);
+        expect(pendingSamples!, everyElement(0));
+        expect(harness.controller.isCaptureStopping, isTrue);
+        expect(harness.controller.canStart, isFalse);
+        expect(_startButton(tester).onPressed, isNull);
+        expect(harness.channel.stopCalls, 1);
 
-      harness.channel.acknowledgeClose();
-      await tester.pump();
-      expect(harness.controller.phase, NoteObservationPhase.unavailable);
-      expect(harness.controller.observation, isNull);
-      expect(_noteText(tester), '—');
-      expect(harness.controller.isCaptureStopping, isFalse);
-      expect(harness.controller.captureGateReady, isTrue);
-      // Native closure alone cannot admit another job while the retired
-      // analyzer still owns its one in-flight slot.
-      expect(harness.controller.canStart, isFalse);
-      expect(_startButton(tester).onPressed, isNull);
-      expect(harness.channel.stopCalls, 1);
-      expect(analyses, 2);
+        harness.channel.acknowledgeClose();
+        await tester.pump();
+        expect(harness.controller.phase, NoteObservationPhase.unavailable);
+        expect(harness.controller.observation, isNull);
+        expect(_noteText(tester), '—');
+        expect(harness.controller.isCaptureStopping, isFalse);
+        expect(harness.controller.captureGateReady, isTrue);
+        // Native closure alone cannot admit another job while the retired
+        // analyzer still owns its one in-flight slot.
+        expect(harness.controller.canStart, isFalse);
+        expect(_startButton(tester).onPressed, isNull);
+        expect(harness.channel.stopCalls, 1);
+        expect(analyses, 2);
 
-      lateAnalysis.complete(_observed);
-      await tester.pump();
-      expect(harness.controller.phase, NoteObservationPhase.unavailable);
-      expect(harness.controller.canStart, isTrue);
-      expect(_startButton(tester).onPressed, isNotNull);
-      expect(_noteText(tester), '—');
-      expect(harness.channel.startCalls, 1);
-      expect(harness.channel.stopCalls, 1);
-      expect(tester.takeException(), isNull);
+        lateAnalysis.complete(_observed);
+        await tester.pump();
+        expect(harness.controller.phase, NoteObservationPhase.unavailable);
+        expect(harness.controller.canStart, isTrue);
+        expect(_startButton(tester).onPressed, isNotNull);
+        expect(_noteText(tester), '—');
+        expect(harness.channel.startCalls, 1);
+        expect(harness.channel.stopCalls, 1);
+        expect(tester.takeException(), isNull);
+      } finally {
+        await harness.dispose();
+      }
     },
   );
 
@@ -175,48 +183,52 @@ void main() {
         tester,
         analyzer: (_, _, _, _) async => _observed,
       );
-      await harness.startThroughScreen(tester);
-      harness.channel.deliverPcm(1024, amplitude: .0001);
-      await tester.pump();
-      expect(harness.controller.phase, NoteObservationPhase.calibrating);
-      expect(harness.source.bufferedSampleCountForTest, 1024);
+      try {
+        await harness.startThroughScreen(tester);
+        harness.channel.deliverPcm(1024, amplitude: .0001);
+        await tester.pump();
+        expect(harness.controller.phase, NoteObservationPhase.calibrating);
+        expect(harness.source.bufferedSampleCountForTest, 1024);
 
-      harness.channel.reportStreamEnded();
-      await tester.pump();
-      expect(harness.controller.phase, NoteObservationPhase.unavailable);
-      expect(harness.controller.isCaptureStopping, isTrue);
-      expect(harness.source.bufferedSampleCountForTest, 0);
-      expect(_startButton(tester).onPressed, isNull);
+        harness.channel.reportStreamEnded();
+        await tester.pump();
+        expect(harness.controller.phase, NoteObservationPhase.unavailable);
+        expect(harness.controller.isCaptureStopping, isTrue);
+        expect(harness.source.bufferedSampleCountForTest, 0);
+        expect(_startButton(tester).onPressed, isNull);
 
-      harness.channel.rejectClose();
-      await tester.pump();
-      expect(harness.controller.phase, NoteObservationPhase.unavailable);
-      expect(harness.controller.isCaptureStopping, isFalse);
-      expect(harness.controller.captureStopFailed, isTrue);
-      expect(harness.controller.captureGateReady, isFalse);
-      expect(harness.controller.canStart, isFalse);
-      expect(_startButton(tester).onPressed, isNull);
-      expect(_statusText(tester), contains('Capture remains disabled'));
+        harness.channel.rejectClose();
+        await tester.pump();
+        expect(harness.controller.phase, NoteObservationPhase.unavailable);
+        expect(harness.controller.isCaptureStopping, isFalse);
+        expect(harness.controller.captureStopFailed, isTrue);
+        expect(harness.controller.captureGateReady, isFalse);
+        expect(harness.controller.canStart, isFalse);
+        expect(_startButton(tester).onPressed, isNull);
+        expect(_statusText(tester), contains('Capture remains disabled'));
 
-      // A fresh read may offer explicit recovery, never a successful close or
-      // an automatic new capture in response to the terminal stream event.
-      final refresh = find.byKey(const Key('observation-close-refresh'));
-      await tester.ensureVisible(refresh);
-      await tester.tap(refresh);
-      await tester.pump();
-      expect(harness.controller.canRetryCaptureClose, isTrue);
-      expect(harness.controller.captureGateReady, isFalse);
-      expect(_startButton(tester).onPressed, isNull);
-      expect(_statusText(tester), contains('closure needs an explicit retry'));
-      expect(_statusText(tester), isNot(contains('microphone is off')));
-      expect(_statusText(tester), isNot(contains('stop request finished')));
-      expect(harness.controller.observation, isNull);
-      expect(_noteText(tester), '—');
-      expect(harness.controller.bufferedSamples, 0);
-      expect(harness.channel.startCalls, 1);
-      expect(harness.channel.stopCalls, 1);
-      expect(harness.channel.retryCalls, 0);
-      expect(tester.takeException(), isNull);
+        // A fresh read may offer explicit recovery, never a successful close or
+        // an automatic new capture in response to the terminal stream event.
+        final refresh = find.byKey(const Key('observation-close-refresh'));
+        await tester.ensureVisible(refresh);
+        await tester.tap(refresh);
+        await tester.pump();
+        expect(harness.controller.canRetryCaptureClose, isTrue);
+        expect(harness.controller.captureGateReady, isFalse);
+        expect(_startButton(tester).onPressed, isNull);
+        expect(_statusText(tester), contains('closure needs an explicit retry'));
+        expect(_statusText(tester), isNot(contains('microphone is off')));
+        expect(_statusText(tester), isNot(contains('stop request finished')));
+        expect(harness.controller.observation, isNull);
+        expect(_noteText(tester), '—');
+        expect(harness.controller.bufferedSamples, 0);
+        expect(harness.channel.startCalls, 1);
+        expect(harness.channel.stopCalls, 1);
+        expect(harness.channel.retryCalls, 0);
+        expect(tester.takeException(), isNull);
+      } finally {
+        await harness.dispose();
+      }
     },
   );
 }
@@ -262,7 +274,13 @@ Future<_ObservationHarness> _pumpObservation(
   final statuses = source.status.listen((status) {
     if (status is AudioSetupFailed) harness.failureReasons.add(status.reason);
   });
-  addTearDown(() async {
+  var disposed = false;
+  Future<void> dispose() async {
+    if (disposed) return;
+    disposed = true;
+    // This preparation belongs to the fixture, not to the screen. Its date
+    // boundary timer must end before testWidgets verifies its invariants.
+    preparation.dispose();
     await tester.pumpWidget(const SizedBox.shrink());
     channel.acknowledgeClose();
     await controller.stop();
@@ -270,10 +288,12 @@ Future<_ObservationHarness> _pumpObservation(
     await statuses.cancel();
     await source.dispose();
     await channel.dispose();
-    preparation.dispose();
     await tester.pump();
     resetAudioCaptureCoordinatorForTest();
-  });
+  }
+
+  harness.dispose = dispose;
+  addTearDown(dispose);
   await tester.pumpWidget(
     MaterialApp(
       locale: const Locale('en'),
@@ -295,6 +315,7 @@ final class _ObservationHarness {
   final AudioInputController source;
   final GuitarNoteObservationController controller;
   final failureReasons = <String>[];
+  late final Future<void> Function() dispose;
 
   Future<void> startThroughScreen(WidgetTester tester) async {
     final acknowledge = find.byKey(const Key('note-session-acknowledge'));

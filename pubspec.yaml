@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   supabase_flutter: 2.17.2
+  intl: 0.20.3
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -119,6 +120,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/l10n/
     # Sözleşme ve kütüphane ÜRETİLEN varlıklardır (tools/gen_posture_contract.py
     # ve validate_library kapıları). Kabuk sayı taşımaz, okur.
     - assets/config/posture-contract.json

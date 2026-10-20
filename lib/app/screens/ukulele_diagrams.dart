@@ -59,7 +59,7 @@ class UkuleleDiagrams extends StatelessWidget {
             ),
           ),
           for (var bar = 0; bar < 2; bar++) ...[
-            Text(localized(context, 'Bar ${bar + 1}', 'Ölçü ${bar + 1}')),
+            Text(_barLabel(context, bar + 1)),
             _Vector(
               kind: 'tab',
               notes: course.tab.sublist(bar * 4, bar * 4 + 4),
@@ -86,7 +86,7 @@ class UkuleleDiagrams extends StatelessWidget {
                   children: [
                     for (var bar = 0; bar < 2; bar++)
                       Text(
-                        '${localized(context, 'Bar', 'Ölçü')} ${bar + 1}: ${[for (var beat = 0; beat < 4; beat++) '${localized(context, 'beat', 'vuruş')} ${beat + 1}: ${localized(context, 'string', 'tel')} ${course.tab[bar * 4 + beat].string}, ${localized(context, 'fret', 'perde')} ${course.tab[bar * 4 + beat].fret} (${_pitch(course.tab[bar * 4 + beat].pitch, context)})'].join('; ')}. ${localized(context, 'Each note one beat. Pitch names are explanatory; compare the string/fret pairs you decoded.', 'Her nota bir vuruş. Ses adları açıklamadır; çözdüğün tel/perde çiftlerini karşılaştır.')}',
+                        '${_barLabel(context, bar + 1)}: ${[for (var beat = 0; beat < 4; beat++) '${_tabNoteDescription(course.tab[bar * 4 + beat], beat + 1, context)} (${_pitch(course.tab[bar * 4 + beat].pitch, context)})'].join('; ')}. ${localized(context, 'Each note one beat. Pitch names are explanatory; compare the string/fret pairs you decoded.', 'Her nota bir vuruş. Ses adları açıklamadır; çözdüğün tel/perde çiftlerini karşılaştır.')}',
                       ),
                     Text(
                       localized(
@@ -123,54 +123,58 @@ class UkuleleDiagrams extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${localized(context, 'Bar', 'Ölçü')} ${bar + 1} · ${course.chords[course.study[bar].chord]!.title.of(context)}',
+                    '${_barLabel(context, bar + 1)} · ${course.chords[course.study[bar].chord]!.title.of(context)}',
                   ),
                   Semantics(
                     key: Key('ukulele-study-bar-${bar + 1}'),
                     label: _studyDescription(course.study[bar], context),
                     excludeSemantics: true,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: SizedBox(
-                        width: 480,
-                        child: Table(
-                          border: TableBorder.all(color: Colors.black54),
-                          defaultColumnWidth: const FixedColumnWidth(60),
-                          children: [
-                            TableRow(
-                              children: [
-                                for (final count in [
-                                  '1',
-                                  '&',
-                                  '2',
-                                  '&',
-                                  '3',
-                                  '&',
-                                  '4',
-                                  '&',
-                                ])
-                                  Padding(
-                                    padding: const EdgeInsets.all(6),
-                                    child: Text(
-                                      count,
-                                      textAlign: TextAlign.center,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: SizedBox(
+                          width: 480,
+                          child: Table(
+                            border: TableBorder.all(color: Colors.black54),
+                            defaultColumnWidth: const FixedColumnWidth(60),
+                            children: [
+                              TableRow(
+                                children: [
+                                  for (final count in [
+                                    '1',
+                                    '&',
+                                    '2',
+                                    '&',
+                                    '3',
+                                    '&',
+                                    '4',
+                                    '&',
+                                  ])
+                                    Padding(
+                                      padding: const EdgeInsets.all(6),
+                                      child: Text(
+                                        count,
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
-                                  ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                for (var slot = 0; slot < 8; slot++)
-                                  Padding(
-                                    padding: const EdgeInsets.all(6),
-                                    child: Text(
-                                      _studySymbol(course.study[bar], slot, context),
-                                      textAlign: TextAlign.center,
+                                ],
+                              ),
+                              TableRow(
+                                children: [
+                                  for (var slot = 0; slot < 8; slot++)
+                                    Padding(
+                                      padding: const EdgeInsets.all(6),
+                                      child: Text(
+                                        _studySymbol(course.study[bar], slot, context),
+                                        textAlign: TextAlign.center,
+                                        textDirection: Directionality.of(context),
+                                      ),
                                     ),
-                                  ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -183,35 +187,50 @@ class UkuleleDiagrams extends StatelessWidget {
   );
 }
 
-String _pitch(String pitch, BuildContext context) {
-  const tr = {
-    'C': 'Do',
-    'C#': 'Do♯',
-    'D': 'Re',
-    'D#': 'Re♯',
-    'E': 'Mi',
-    'F': 'Fa',
-    'F#': 'Fa♯',
-    'G': 'Sol',
-    'G#': 'Sol♯',
-    'A': 'La',
-    'A#': 'La♯',
-    'B': 'Si',
-  };
-  return localized(
-    context,
-    pitch,
-    '${tr[pitch.substring(0, pitch.length - 1)]}${pitch[pitch.length - 1]}',
-  );
-}
+String _pitch(String pitch, BuildContext context) => musicPitch(context, pitch);
+
+String _barLabel(BuildContext context, int bar) => localized(
+  context,
+  'Bar {v0}',
+  'Ölçü {v0}',
+  values: {'v0': bar},
+);
 
 String _chordDescription(UkuleleChord chord, BuildContext context) => [
   for (var i = 0; i < 4; i++)
-    '${localized(context, 'string', 'tel')} ${4 - i}: ${chord.frets[i] == 0 ? localized(context, 'open', 'açık') : '${localized(context, 'fret', 'perde')} ${chord.frets[i]}, ${localized(context, 'finger', 'parmak')} ${chord.fingers[i]}'}',
+    chord.frets[i] == 0
+        ? localized(
+            context,
+            'string {v0}: open',
+            'tel {v0}: açık',
+            values: {'v0': 4 - i},
+          )
+        : localized(
+            context,
+            'string {v0}: fret {v1}, finger {v2}',
+            'tel {v0}: perde {v1}, parmak {v2}',
+            values: {
+              'v0': 4 - i,
+              'v1': chord.frets[i],
+              'v2': chord.fingers[i],
+            },
+          ),
 ].join('; ');
+
+String _tabNoteDescription(
+  UkuleleTabNote note,
+  int beat,
+  BuildContext context,
+) => localized(
+  context,
+  'beat {v0}: string {v1}, fret {v2}',
+  'vuruş {v0}: tel {v1}, perde {v2}',
+  values: {'v0': beat, 'v1': note.string, 'v2': note.fret},
+);
+
 String _tabDescription(List<UkuleleTabNote> notes, BuildContext context) => [
   for (var i = 0; i < notes.length; i++)
-    '${localized(context, 'beat', 'vuruş')} ${i + 1}: ${localized(context, 'string', 'tel')} ${notes[i].string}, ${localized(context, 'fret', 'perde')} ${notes[i].fret}',
+    _tabNoteDescription(notes[i], i + 1, context),
 ].join('; ');
 String _studyDescription(UkuleleStudyBar bar, BuildContext context) {
   var ringing = false;
@@ -244,7 +263,14 @@ String _studyDescription(UkuleleStudyBar bar, BuildContext context) {
       ringing = false;
     }
     counts.add(
-      '${i ~/ 2 + 1}${i.isOdd ? localized(context, ' and', ' ve') : ''}: $action',
+      i.isOdd
+          ? localized(
+              context,
+              '{v0} and: {v1}',
+              '{v0} ve: {v1}',
+              values: {'v0': i ~/ 2 + 1, 'v1': action},
+            )
+          : '${appInteger(context, i ~/ 2 + 1)}: $action',
     );
   }
   return counts.join('; ');
@@ -281,19 +307,22 @@ class _Vector extends StatelessWidget {
     child: Semantics(
       label: description,
       image: true,
-      child: LayoutBuilder(
-        builder: (context, constraints) => SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: SizedBox(
-            width: constraints.maxWidth < 340 ? 340 : constraints.maxWidth,
-            height: kind == 'chord'
-                ? 265
-                : kind == 'tab'
-                ? 170
-                : 220,
-            child: CustomPaint(
-              key: Key('ukulele-vector-$kind'),
-              painter: _UkePainter(kind, chord, notes),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: LayoutBuilder(
+          builder: (context, constraints) => SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              width: constraints.maxWidth < 340 ? 340 : constraints.maxWidth,
+              height: kind == 'chord'
+                  ? 265
+                  : kind == 'tab'
+                  ? 170
+                  : 220,
+              child: CustomPaint(
+                key: Key('ukulele-vector-$kind'),
+                painter: _UkePainter(kind, chord, notes),
+              ),
             ),
           ),
         ),

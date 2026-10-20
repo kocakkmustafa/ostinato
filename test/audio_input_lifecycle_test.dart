@@ -110,33 +110,57 @@ void main() {
       );
       final states = <AudioSurfaceState>[];
       final sub = source.status.listen(states.add);
-      await source.start(sampleRate: 44100);
-      channel._events.add(
-        const RawAudioChunkEvent(
-          samples: [.2, .2],
-          sampleRate: 44100,
-          tNativeUs: 0,
-        ),
-      );
-      await tester.pump();
-      expect(source.bufferedSampleCountForTest, 2);
-      await tester.pump(const Duration(milliseconds: 99));
-      final ended = channel._events.close();
-      await tester.pump();
-      await ended;
-      expect(
-        states.whereType<AudioSetupFailed>().map((state) => state.reason),
-        ['capture_stream_ended'],
-      );
-      expect(source.bufferedSampleCountForTest, 0);
-      expect(channel.running, isFalse);
-      expect(channel.stopCalls, 1);
-      expect(channel.retryCalls, 0);
-      await tester.pump(const Duration(milliseconds: 200));
-      expect(channel.stopCalls, 1);
-      expect(channel.startCalls, 1);
-      await sub.cancel();
-      await source.dispose();
+      try {
+        await _settleLifecycleOperation(
+          tester,
+          source.start(sampleRate: 44100),
+          stage: 'EOF source start',
+        );
+        channel._events.add(
+          const RawAudioChunkEvent(
+            samples: [.2, .2],
+            sampleRate: 44100,
+            tNativeUs: 0,
+          ),
+        );
+        await tester.pump();
+        expect(source.bufferedSampleCountForTest, 2);
+        await tester.pump(const Duration(milliseconds: 99));
+        final ended = channel._events.close();
+        await tester.pump();
+        await _settleLifecycleOperation(
+          tester,
+          ended,
+          stage: 'EOF stream close receipt',
+        );
+        expect(
+          states.whereType<AudioSetupFailed>().map((state) => state.reason),
+          ['capture_stream_ended'],
+        );
+        expect(source.bufferedSampleCountForTest, 0);
+        expect(channel.running, isFalse);
+        expect(channel.stopCalls, 1);
+        expect(channel.retryCalls, 0);
+        await tester.pump(const Duration(milliseconds: 200));
+        expect(channel.stopCalls, 1);
+        expect(channel.startCalls, 1);
+      } finally {
+        await _settleLifecycleOperation(
+          tester,
+          sub.cancel(),
+          stage: 'EOF status listener cancel',
+        );
+        await _settleLifecycleOperation(
+          tester,
+          source.dispose(),
+          stage: 'EOF source dispose',
+        );
+        await _settleLifecycleOperation(
+          tester,
+          channel._events.close(),
+          stage: 'EOF fake channel dispose',
+        );
+      }
     },
   );
 
@@ -1233,6 +1257,46 @@ void main() {
       await b.dispose();
     },
   );
+}
+
+/// Drain the widget fake-clock microtasks while observing real queue turns.
+/// This never advances the PCM clock: the exact 99/200 ms steps stay in the
+/// test body. An unresolved operation names its stage instead of hanging the
+/// entire suite until the outer process timeout.
+Future<void> _settleLifecycleOperation(
+  WidgetTester tester,
+  Future<void> operation, {
+  required String stage,
+}) async {
+  var completed = false;
+  Object? failure;
+  StackTrace? failureStack;
+  unawaited(
+    operation.then<void>(
+      (_) {
+        completed = true;
+      },
+      onError: (Object error, StackTrace stack) {
+        failure = error;
+        failureStack = stack;
+        completed = true;
+      },
+    ),
+  );
+  for (var turn = 0; turn < 100 && !completed; turn++) {
+    await tester.pump();
+    if (!completed) {
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 1)),
+      );
+    }
+  }
+  expect(
+    completed,
+    isTrue,
+    reason: '$stage did not settle in 100 event turns',
+  );
+  if (failure != null) Error.throwWithStackTrace(failure!, failureStack!);
 }
 
 final class _SharedCloseNative {

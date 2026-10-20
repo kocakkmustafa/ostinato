@@ -300,7 +300,7 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
                       Text(_clock(), style: monoText()),
                     ]),
                   ),
-                  const SizedBox(width: 38, height: 38),
+                  const SizedBox(width: 48, height: 48),
                 ],
               ),
               const SizedBox(height: 12),
@@ -454,11 +454,11 @@ class _MeasuringFigure extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                      '${localized(context, 'TEACHERS', 'EĞİTMENLER')} ${contract.bandLowDeg.toStringAsFixed(1)}–'
-                      '${contract.bandHighDeg.toStringAsFixed(1)}° · '
+                      '${localized(context, 'TEACHERS', 'EĞİTMENLER')} ${appDecimal(context, contract.bandLowDeg, 1)}–'
+                      '${appDecimal(context, contract.bandHighDeg, 1)}° · '
                       'N=${contract.teacherCount}',
                       style: monoText(size: 9.5, letterSpacing: .09)),
-                  Text('${state.trunkTiltDeg.abs().toStringAsFixed(1)}°',
+                  Text('${appDecimal(context, state.trunkTiltDeg.abs(), 1)}°',
                       key: const Key('live-tilt-label'),
                       style: monoText(size: 15, color: OstinatoColors.ink)),
                 ],
@@ -616,32 +616,12 @@ class _NoticeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final (String key, String title, String body, String? action, VoidCallback? onAction) =
         switch (state) {
-      Starting() => ('live-starting', 'Getting the camera ready',
-          'This takes a moment. Nothing is being recorded.', null, null),
-      PermissionDeniedRetriable() => (
-          'live-permission-retriable',
-          'Camera access is off',
-          'Ostinato needs the camera to see how you sit. Video never '
-              'leaves your phone.',
-          'Try again',
-          onRetry,
-        ),
-      PermissionDeniedPermanent() => (
-          'live-permission-permanent',
-          'Camera access is off',
-          'The system will not ask again. Open Settings to change it. '
-              'Video never leaves your phone.',
-          'Open Settings',
-          openAppSettings,
-        ),
-      SetupFailed() => ('live-setup-failed',
-          'This lesson opened, but nothing is being measured',
-          'The camera did not start. We are simply not '
-              'analysing anything right now.', null, null),
-      CameraUnavailable() => ('live-camera-unavailable',
-          'The camera did not open',
-          'We could not start a camera session.', null, null),
-      _ => ('live-unknown', 'Nothing to show', '', null, null),
+      Starting() => ("live-starting", localized(context, "Getting the camera ready", "Kamera hazırlanıyor"), localized(context, "This takes a moment. Nothing is being recorded.", "Bu kısa sürebilir. Hiçbir şey kaydedilmiyor."), null, null),
+      PermissionDeniedRetriable() => ("live-permission-retriable", localized(context, "Camera access is off", "Kamera erişimi kapalı"), localized(context, "Ostinato needs the camera to see how you sit. Video never leaves your phone.", "Oturma duruşunu görebilmek için kamera erişimi gerekli. Video telefonundan çıkmaz."), localized(context, "Try again", "Tekrar dene"), onRetry),
+      PermissionDeniedPermanent() => ("live-permission-permanent", localized(context, "Camera access is off", "Kamera erişimi kapalı"), localized(context, "The system will not ask again. Open Settings to change it. Video never leaves your phone.", "Sistem tekrar izin istemeyecek. Erişimi Ayarlar’dan açabilirsin. Video telefonundan çıkmaz."), localized(context, "Open Settings", "Ayarları aç"), openAppSettings),
+      SetupFailed() => ("live-setup-failed", localized(context, "This lesson opened, but nothing is being measured", "Ders açıldı ancak ölçüm başlamadı"), localized(context, "The camera did not start. We are simply not analysing anything right now.", "Kamera açılamadı. Şu anda hiçbir şey analiz edilmiyor."), null, null),
+      CameraUnavailable() => ("live-camera-unavailable", localized(context, "The camera did not open", "Kamera açılamadı"), localized(context, "We could not start a camera session.", "Kamera oturumu başlatılamadı."), null, null),
+      _ => ("live-unknown", localized(context, "Nothing to show", "Gösterilecek bir şey yok"), '', null, null),
     };
     return Center(
       child: Padding(
@@ -650,23 +630,9 @@ class _NoticeCard extends StatelessWidget {
           key: Key(key),
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text(localized(context, title, switch (state) {
-              Starting() => 'Kamera hazırlanıyor',
-              PermissionDeniedRetriable() || PermissionDeniedPermanent() => 'Kamera erişimi kapalı',
-              SetupFailed() => 'Ders açıldı ancak ölçüm başlamadı',
-              CameraUnavailable() => 'Kamera açılamadı',
-              _ => 'Gösterilecek bir şey yok',
-            }), style: hankenText(size: 19, weight: FontWeight.w500)),
+            Text(title, style: hankenText(size: 19, weight: FontWeight.w500)),
             const SizedBox(height: 8),
-            Text(localized(context, body, switch (state) {
-              Starting() => 'Bu kısa sürebilir. Hiçbir şey kaydedilmiyor.',
-              PermissionDeniedRetriable() => 'Oturma duruşunu görebilmek için kamera erişimi gerekli. Video telefonundan çıkmaz.',
-              PermissionDeniedPermanent() => 'Sistem tekrar izin istemeyecek. Erişimi Ayarlar’dan açabilirsin. Video telefonundan çıkmaz.',
-              SetupFailed() => 'Kamera açılamadı. Şu anda hiçbir şey analiz edilmiyor.',
-              CameraUnavailable() => 'Kamera oturumu başlatılamadı.',
-              _ => '',
-            }),
-                textAlign: TextAlign.center,
+            Text(body, textAlign: TextAlign.center,
                 style: hankenText(size: 14, color: OstinatoColors.textBody)),
             if (action != null) ...<Widget>[
               const SizedBox(height: 18),
@@ -674,8 +640,7 @@ class _NoticeCard extends StatelessWidget {
                 key: const Key('notice-action'),
                 onPressed: onAction,
                 style: FilledButton.styleFrom(backgroundColor: OstinatoColors.ink),
-                child: Text(localized(context, action,
-                    state is PermissionDeniedRetriable ? 'Tekrar dene' : 'Ayarları aç')),
+                child: Text(action),
               ),
             ],
           ],

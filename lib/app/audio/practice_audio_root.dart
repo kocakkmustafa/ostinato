@@ -1102,6 +1102,8 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
     if (_owner.blocked) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
+        locale: Localizations.maybeLocaleOf(context),
+        localeListResolutionCallback: resolveAppLocales,
         supportedLocales: appSupportedLocales,
         localizationsDelegates: appLocalizationsDelegates,
         home: Builder(

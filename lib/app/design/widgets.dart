@@ -305,6 +305,9 @@ class GlassIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = semanticLabel ?? icon;
+    final glyph = Directionality.of(context) == TextDirection.rtl
+        ? switch (icon) {'‹' => '›', '›' => '‹', _ => icon}
+        : icon;
     return SizedBox(
       width: 48,
       height: 48,
@@ -342,7 +345,7 @@ class GlassIconButton extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    icon,
+                    glyph,
                     style: hankenText(
                       size: 17,
                       color: OstinatoColors.inkSoft,

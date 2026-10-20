@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../app_locale.dart';
+import '../app_locale_preferences.dart';
+import '../app_translation_catalog.dart' show supportedLanguageTags;
 import '../account_connection.dart';
 import '../content.dart';
 import '../design/app_scope.dart';
@@ -22,36 +26,14 @@ import '../design/widgets.dart';
 /// Elle yazılmış bir "üç çalgı" cümlesi, dördüncüsü eklendiği gün sessizce
 /// yanlış olur ve hiçbir test kırılmaz (O-068).
 String _liveSentence(BuildContext context) {
-  final List<Discipline> live = ContentRepositoryScope.of(
-    context,
-  ).repo.disciplines.where((Discipline d) => d.status == 'live').toList();
-  if (Localizations.localeOf(context).languageCode == 'tr') {
-    const names = <String, String>{
-      'guitar': 'gitar',
-      'voice': 'şan',
-      'piano': 'piyano',
-    };
-    return 'Duruş kataloğunda ${live.length} çalgı ön izlemesi: '
-        '${live.map((d) => names[d.id] ?? d.displayName).join(', ')}. '
-        'Bu sürümde canlı kamera pratiği kapalıdır.';
-  }
-  const Map<int, String> words = <int, String>{
-    1: 'One',
-    2: 'Two',
-    3: 'Three',
-    4: 'Four',
-    5: 'Five',
-    6: 'Six',
-  };
-  final String n = words[live.length] ?? '${live.length}';
-  final String names = live
-      .map((Discipline d) => d.displayName.toLowerCase())
+  final live = ContentRepositoryScope.of(context)
+      .repo.disciplines.where((discipline) => discipline.status == 'live').toList();
+  final names = live
+      .map((discipline) => catalogName(
+            context, discipline.id, discipline.displayName,
+          ))
       .join(', ');
-  final String noun = live.length == 1
-      ? 'instrument preview'
-      : 'instrument previews';
-  return '$n $noun in the posture catalogue: $names. '
-      'Live camera practice is closed in this release.';
+  return localized(context, "{v0} instrument previews in the posture catalogue: {v1}. Live camera practice is closed in this release.", "Duruş kataloğunda {v0} çalgı ön izlemesi: {v1}. Bu sürümde canlı kamera pratiği kapalıdır.", values: {"v0": live.length, "v1": names}, pluralCount: live.length);
 }
 
 class SettingsScreen extends StatelessWidget {
@@ -59,6 +41,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localeController = AppLocaleScope.maybeOf(context);
     return Scaffold(
       backgroundColor: OstinatoColors.surface,
       body: SafeArea(
@@ -86,6 +69,10 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 22),
+              if (localeController != null) ...<Widget>[
+                _LanguageSettings(controller: localeController),
+                const SizedBox(height: 14),
+              ],
               if (AccountScope.maybeOf(context)?.connection
                   case final AccountConnection account) ...<Widget>[
                 OutlinedButton.icon(
@@ -197,18 +184,7 @@ class SettingsScreen extends StatelessWidget {
                 // düzeltmek, onu ürünün geri kalanında düzeltmek değildir.*
                 // Dördüncü çalgı canlıya geçtiği gün burası sessizce "Three"
                 // demeye devam ederdi.
-                body: localized(
-                  context,
-                  '${_liveSentence(context)} '
-                      'Every posture reference is built from teaching footage '
-                      'filmed waist-up, which is why nothing below your hips '
-                      'is read. Nothing here has been verified on real '
-                      'hardware.',
-                  '${_liveSentence(context)} Tüm duruş referansları belden '
-                      'yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden '
-                      'kalçanızın altı okunmaz. Buradaki işlevler gerçek '
-                      'cihazda doğrulanmadı.',
-                ),
+                body: localized(context, "{v0} Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware.", "{v0} Tüm duruş referansları belden yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden kalçanızın altı okunmaz. Buradaki işlevler gerçek cihazda doğrulanmadı.", values: {"v0": _liveSentence(context)}),
               ),
             ],
           ),
@@ -216,6 +192,102 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+// Stable language identifiers and their own-language names are selector
+// metadata, not account or course state. System selection persists null.
+class _LanguageSettings extends StatelessWidget {
+  const _LanguageSettings({required this.controller});
+  final AppLocaleController controller;
+
+  static const _system = 'system';
+  static const _names = <String, String>{
+    'tr': 'Türkçe',
+    'en': 'English',
+    'es-419': 'Español (Latinoamérica)',
+    'pt-BR': 'Português (Brasil)',
+    'de': 'Deutsch',
+    'fr': 'Français',
+    'ja': '日本語',
+    'ar': 'العربية',
+    'it': 'Italiano',
+    'ko': '한국어',
+    'id': 'Bahasa Indonesia',
+    'pl': 'Polski',
+    'hi': 'हिन्दी',
+    'zh-Hans': '简体中文',
+  };
+
+  @override
+  Widget build(BuildContext context) => GlassCard(
+    key: const Key('app-language-settings'),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        kicker(localized(context, "Language", "Dil")),
+        const SizedBox(height: 10),
+        Semantics(
+          label: localized(context, "Language", "Dil"),
+          child: DropdownButton<String>(
+            key: const Key('app-language-select'),
+            isExpanded: true,
+            itemHeight: null,
+            value: controller.languageTag ?? _system,
+            items: [
+              DropdownMenuItem(
+                key: const Key('app-language-option-system'),
+                value: _system,
+                child: Text(localized(context, "Use device language", "Cihaz dilini kullan")),
+              ),
+              for (final tag in supportedLanguageTags)
+                DropdownMenuItem(
+                  key: ValueKey('app-language-option-$tag'),
+                  value: tag,
+                  child: Text(_names[tag] ?? tag),
+                ),
+            ],
+            onChanged: (tag) {
+              if (tag == null) return;
+              unawaited(controller.select(tag == _system ? null : tag));
+            },
+          ),
+        ),
+        if (controller.loading) ...[
+          const SizedBox(height: 8),
+          Semantics(
+            liveRegion: true,
+            child: Text(
+              localized(context, "Reading saved language…", "Kayıtlı dil okunuyor…"),
+              key: const Key("app-language-loading"),
+              style: hankenText(size: 12.5, height: 1.5),
+            ),
+          ),
+        ],
+        if (controller.readFailed) ...[
+          const SizedBox(height: 8),
+          Semantics(
+            liveRegion: true,
+            child: Text(
+              localized(context, "The saved language could not be read. Device language is being used. Choose a language to save a new preference.", "Kayıtlı dil okunamadı. Cihaz dili kullanılıyor. Yeni tercih kaydetmek için bir dil seçin."),
+              key: const Key("app-language-read-failure"),
+              style: hankenText(size: 12.5, height: 1.5),
+            ),
+          ),
+        ],
+        if (controller.writeFailed) ...[
+          const SizedBox(height: 8),
+          Semantics(
+            liveRegion: true,
+            child: Text(
+              localized(context, "The language changed for this session but could not be saved. Select it again to retry.", "Dil bu oturum için değişti ancak kaydedilemedi. Yeniden denemek için tekrar seçin."),
+              key: const Key("app-language-write-failure"),
+              style: hankenText(size: 12.5, height: 1.5),
+            ),
+          ),
+        ],
+      ],
+    ),
+  );
 }
 
 class _SettingsCard extends StatelessWidget {

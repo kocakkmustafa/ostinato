@@ -231,22 +231,7 @@ class _GuitarNoteObservationScreenState
     final controller = _controller;
     final value = controller?.observation;
     final hue = InstrumentHues.guitar;
-    final names = Localizations.localeOf(context).languageCode == 'tr'
-        ? [
-            'Do',
-            'Do♯',
-            'Re',
-            'Re♯',
-            'Mi',
-            'Fa',
-            'Fa♯',
-            'Sol',
-            'Sol♯',
-            'La',
-            'La♯',
-            'Si',
-          ]
-        : ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
+    const names = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
     return Scaffold(
       backgroundColor: OstinatoColors.surface,
       body: SafeArea(
@@ -298,21 +283,28 @@ class _GuitarNoteObservationScreenState
                     Text(
                       value == null
                           ? '—'
-                          : '${names[value.midi % 12]}${value.midi ~/ 12 - 1}',
+                          : musicPitch(
+                              context,
+                              '${names[value.midi % 12]}${value.midi ~/ 12 - 1}',
+                            ),
                       key: const Key('observed-note'),
                       style: hankenText(size: 42, weight: FontWeight.w600),
                     ),
                     if (value != null) ...[
                       Text(
-                        '${value.hz.toStringAsFixed(1)} Hz',
+                        '${appDecimal(context, value.hz, 1)} Hz',
                         style: monoText(color: hue.ink),
                       ),
                       const SizedBox(height: 6),
                       Text(
                         localized(
                           context,
-                          '${value.centsFromCenter >= 0 ? '+' : ''}${value.centsFromCenter.toStringAsFixed(0)} cents from nearest note center (A4 = 440 Hz)',
-                          '${value.centsFromCenter >= 0 ? '+' : ''}${value.centsFromCenter.toStringAsFixed(0)} cent: en yakın nota merkezine göre (La4 = 440 Hz)',
+                          '{v0}{v1} cents from nearest note center (A4 = 440 Hz)',
+                          '{v0}{v1} cent: en yakın nota merkezine göre (La4 = 440 Hz)',
+                          values: {
+                            'v0': value.centsFromCenter >= 0 ? '+' : '',
+                            'v1': AppDecimal(value.centsFromCenter, 0),
+                          },
                         ),
                         style: hankenText(size: 12.5, height: 1.5),
                       ),

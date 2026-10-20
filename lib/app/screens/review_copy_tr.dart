@@ -26,13 +26,15 @@ abstract final class ReviewCopyTr {
     BuildContext context,
     String id,
     String source,
-    Map<String, String> values,
+    Map<String, Object?> values,
   ) {
-    var result = text(context, id, source);
-    for (final entry in values.entries) {
-      result = result.replaceAll('{${entry.key}}', entry.value);
-    }
-    return result;
+    final copy = _copies[id];
+    return localized(
+      context,
+      source,
+      copy != null && copy.source == source ? copy.turkish : source,
+      values: values,
+    );
   }
 
   static const Map<String, _Reviewed> _copies = <String, _Reviewed>{

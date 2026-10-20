@@ -97,7 +97,16 @@ class BassDiagrams extends StatelessWidget {
             ('G3', 'G2', 1),
           ])
             Text(
-              '${localized(context, 'written', 'yazılı')} ${_pitch(pair.$1, context)} → ${localized(context, 'sounds', 'gerçek ses')} ${_pitch(pair.$2, context)} · ${localized(context, 'open string', 'açık tel')} ${pair.$3}',
+              localized(
+                context,
+                'written {v0} → sounds {v1} · open string {v2}',
+                'yazılı {v0} → gerçek ses {v1} · açık tel {v2}',
+                values: {
+                  'v0': _pitch(pair.$1, context),
+                  'v1': _pitch(pair.$2, context),
+                  'v2': pair.$3,
+                },
+              ),
             ),
         ] else if (id == 'tab') ...[
           Text(
@@ -108,13 +117,13 @@ class BassDiagrams extends StatelessWidget {
             ),
           ),
           for (var bar = 0; bar < 2; bar++) ...[
-            Text('${localized(context, 'Bar', 'Ölçü')} ${bar + 1}'),
+            Text(_barLabel(context, bar + 1)),
             _Vector(
               kind: 'tab',
               notes: course.tab.sublist(bar * 4, bar * 4 + 4),
               description: [
                 for (var i = 0; i < 4; i++)
-                  '${localized(context, 'beat', 'vuruş')} ${i + 1}: ${localized(context, 'string', 'tel')} ${course.tab[bar * 4 + i].string}, ${localized(context, 'fret', 'perde')} ${course.tab[bar * 4 + i].fret}',
+                  _tabNoteDescription(course.tab[bar * 4 + i], i + 1, context),
               ].join('; '),
             ),
           ],
@@ -135,7 +144,7 @@ class BassDiagrams extends StatelessWidget {
                   children: [
                     for (var bar = 0; bar < 2; bar++)
                       Text(
-                        '${localized(context, 'Bar', 'Ölçü')} ${bar + 1}: ${[for (var beat = 0; beat < 4; beat++) '${localized(context, 'beat', 'vuruş')} ${beat + 1}: ${localized(context, 'string', 'tel')} ${course.tab[bar * 4 + beat].string}, ${localized(context, 'fret', 'perde')} ${course.tab[bar * 4 + beat].fret} (${_pitch(course.tab[bar * 4 + beat].pitch, context)})'].join('; ')}. ${localized(context, 'Each note one beat; pitch labels are SOUNDING information.', 'Her nota bir vuruş; ses etiketleri GERÇEK ses bilgisidir.')}',
+                        '${_barLabel(context, bar + 1)}: ${[for (var beat = 0; beat < 4; beat++) '${_tabNoteDescription(course.tab[bar * 4 + beat], beat + 1, context)} (${_pitch(course.tab[bar * 4 + beat].pitch, context)})'].join('; ')}. ${localized(context, 'Each note one beat; pitch labels are SOUNDING information.', 'Her nota bir vuruş; ses etiketleri GERÇEK ses bilgisidir.')}',
                       ),
                     Text(
                       localized(
@@ -171,59 +180,66 @@ class BassDiagrams extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${localized(context, 'Bar', 'Ölçü')} ${bar + 1}'),
+                  Text(_barLabel(context, bar + 1)),
                   Semantics(
                     label: [
                       for (var i = 0; i < 8; i++)
-                        '${i ~/ 2 + 1}${i.isOdd ? ' &' : ''}: ${_event(course.study[bar].events[i], context)}',
+                        _countDescription(
+                          i,
+                          _event(course.study[bar].events[i], context),
+                          context,
+                        ),
                     ].join('; '),
-                    child: SingleChildScrollView(
-                      key: Key('bass-study-${bar + 1}'),
-                      scrollDirection: Axis.horizontal,
-                      child: SizedBox(
-                        width: 800,
-                        child: Table(
-                          border: TableBorder.all(color: Colors.black54),
-                          defaultColumnWidth: const FixedColumnWidth(100),
-                          children: [
-                            TableRow(
-                              children: [
-                                for (final count in [
-                                  '1',
-                                  '&',
-                                  '2',
-                                  '&',
-                                  '3',
-                                  '&',
-                                  '4',
-                                  '&',
-                                ])
-                                  Padding(
-                                    padding: const EdgeInsets.all(6),
-                                    child: Text(
-                                      count,
-                                      textAlign: TextAlign.center,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: SingleChildScrollView(
+                        key: Key('bass-study-${bar + 1}'),
+                        scrollDirection: Axis.horizontal,
+                        child: SizedBox(
+                          width: 800,
+                          child: Table(
+                            border: TableBorder.all(color: Colors.black54),
+                            defaultColumnWidth: const FixedColumnWidth(100),
+                            children: [
+                              TableRow(
+                                children: [
+                                  for (final count in [
+                                    '1',
+                                    '&',
+                                    '2',
+                                    '&',
+                                    '3',
+                                    '&',
+                                    '4',
+                                    '&',
+                                  ])
+                                    Padding(
+                                      padding: const EdgeInsets.all(6),
+                                      child: Text(
+                                        count,
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
-                                  ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                for (final event in course.study[bar].events)
-                                  Padding(
-                                    padding: const EdgeInsets.all(6),
-                                    child: Text(
-                                      event.kind == 'note'
-                                          ? 'N\n${event.string}/${event.fret}'
-                                          : event.kind == 'hold'
-                                          ? 'H'
-                                          : 'R',
-                                      textAlign: TextAlign.center,
+                                ],
+                              ),
+                              TableRow(
+                                children: [
+                                  for (final event in course.study[bar].events)
+                                    Padding(
+                                      padding: const EdgeInsets.all(6),
+                                      child: Text(
+                                        event.kind == 'note'
+                                            ? 'N\n${event.string}/${event.fret}'
+                                            : event.kind == 'hold'
+                                            ? 'H'
+                                            : 'R',
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
-                                  ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -236,8 +252,42 @@ class BassDiagrams extends StatelessWidget {
   );
 }
 
+String _barLabel(BuildContext context, int bar) => localized(
+  context,
+  'Bar {v0}',
+  'Ölçü {v0}',
+  values: {'v0': bar},
+);
+
+String _tabNoteDescription(BassTabNote note, int beat, BuildContext context) =>
+    localized(
+      context,
+      'beat {v0}: string {v1}, fret {v2}',
+      'vuruş {v0}: tel {v1}, perde {v2}',
+      values: {'v0': beat, 'v1': note.string, 'v2': note.fret},
+    );
+
+String _countDescription(int slot, String action, BuildContext context) =>
+    slot.isOdd
+        ? localized(
+            context,
+            '{v0} and: {v1}',
+            '{v0} ve: {v1}',
+            values: {'v0': slot ~/ 2 + 1, 'v1': action},
+          )
+        : '${appInteger(context, slot ~/ 2 + 1)}: $action';
+
 String _event(BassEvent event, BuildContext context) => event.kind == 'note'
-    ? '${localized(context, 'pluck string', 'tel çek')} ${event.string}, ${localized(context, 'fret', 'perde')} ${event.fret} (${_pitch(event.pitch!, context)})'
+    ? localized(
+        context,
+        'pluck string {v0}, fret {v1} ({v2})',
+        'tel çek {v0}, perde {v1} ({v2})',
+        values: {
+          'v0': event.string,
+          'v1': event.fret,
+          'v2': _pitch(event.pitch!, context),
+        },
+      )
     : event.kind == 'hold'
     ? localized(
         context,
@@ -245,26 +295,8 @@ String _event(BassEvent event, BuildContext context) => event.kind == 'note'
         'yeni çekiş yok, ses veya sessizlik sürer',
       )
     : localized(context, 'stop, counted silence', 'sustur, sayılan sessizlik');
-String _pitch(String pitch, BuildContext context) {
-  if (Localizations.localeOf(context).languageCode != 'tr') {
-    return pitch;
-  }
-  const names = {
-    'C': 'Do',
-    'C#': 'Do♯',
-    'D': 'Re',
-    'D#': 'Re♯',
-    'E': 'Mi',
-    'F': 'Fa',
-    'F#': 'Fa♯',
-    'G': 'Sol',
-    'G#': 'Sol♯',
-    'A': 'La',
-    'A#': 'La♯',
-    'B': 'Si',
-  };
-  return '${names[pitch.substring(0, pitch.length - 1)]}${pitch[pitch.length - 1]}';
-}
+
+String _pitch(String pitch, BuildContext context) => musicPitch(context, pitch);
 
 String _pitchPhrase(String pair, BuildContext context) =>
     pair.split(' → ').map((p) => _pitch(p, context)).join(' → ');
@@ -280,19 +312,22 @@ class _Vector extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     label: description,
-    child: LayoutBuilder(
-      builder: (context, constraints) => SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: SizedBox(
-          width: constraints.maxWidth < 380 ? 380 : constraints.maxWidth,
-          height: kind == 'tab'
-              ? 170
-              : kind == 'staff'
-              ? 170
-              : 230,
-          child: CustomPaint(
-            key: Key('bass-vector-$kind'),
-            painter: _BassPainter(kind, notes),
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: LayoutBuilder(
+        builder: (context, constraints) => SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: SizedBox(
+            width: constraints.maxWidth < 380 ? 380 : constraints.maxWidth,
+            height: kind == 'tab'
+                ? 170
+                : kind == 'staff'
+                ? 170
+                : 230,
+            child: CustomPaint(
+              key: Key('bass-vector-$kind'),
+              painter: _BassPainter(kind, notes),
+            ),
           ),
         ),
       ),

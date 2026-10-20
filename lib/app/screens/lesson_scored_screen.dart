@@ -55,9 +55,8 @@ class LessonScoredScreenRoute extends StatelessWidget {
               ),
               const SizedBox(height: 11),
               Text(
-                '${lesson.minutes} ${localized(context, 'MIN', 'DK')}'
-                '${lesson.focus.isEmpty ? '' : ' · ${catalogTag(context, lesson.focus)}'} '
-                '· ${catalogUpperName(context, discipline.id, discipline.displayName)}',
+                '${lessonMetadata(context, lesson.minutes, lesson.focus)} '
+                                '· ${catalogUpperName(context, discipline.id, discipline.displayName)}',
                 style: monoText(),
               ),
               const SizedBox(height: 20),
@@ -91,28 +90,7 @@ class LessonScoredScreenRoute extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        localized(
-                          context,
-                          '${contract.teacherCount} ${contract.sourceClass} sit '
-                              'between ${contract.bandLowDeg.toStringAsFixed(1)}° and '
-                              '${contract.bandHighDeg.toStringAsFixed(1)}° of trunk '
-                              'tilt — a band '
-                              '${(contract.bandHighDeg - contract.bandLowDeg).toStringAsFixed(1)}° '
-                              'wide. The dashed line marks '
-                              '${contract.cueThresholdDeg.toStringAsFixed(1)}°, the '
-                              'edge of what we will still call the same way of '
-                              'sitting. There is no point inside the band that is '
-                              'more correct than another.',
-                          '${contract.teacherCount} ${catalogSourceClass(context, contract.sourceClass)} '
-                              'için ölçülen gövde eğimi '
-                              '${contract.bandLowDeg.toStringAsFixed(1)}°–'
-                              '${contract.bandHighDeg.toStringAsFixed(1)}° arasındadır; '
-                              'aralık genişliği '
-                              '${(contract.bandHighDeg - contract.bandLowDeg).toStringAsFixed(1)}°.'
-                              ' Kesikli çizgi, aynı oturuş biçimi saydığımız '
-                              '${contract.cueThresholdDeg.toStringAsFixed(1)}° sınırını gösterir. '
-                              'Aralığın içindeki bir nokta diğerinden daha doğru değildir.',
-                        ),
+                        localized(context, "{v0} {v1} sit between {v2}° and {v3}° of trunk tilt — a band {v4}° wide. The dashed line marks {v5}°, the edge of what we will still call the same way of sitting. There is no point inside the band that is more correct than another.", "{v0} {v1} için ölçülen gövde eğimi {v2}°–{v3}° arasındadır; aralık genişliği {v4}°. Kesikli çizgi, aynı oturuş biçimi saydığımız {v5}° sınırını gösterir. Aralığın içindeki bir nokta diğerinden daha doğru değildir.", values: {"v0": contract.teacherCount, "v1": catalogSourceClass(context, contract.sourceClass), "v2": AppDecimal(contract.bandLowDeg, 1), "v3": AppDecimal(contract.bandHighDeg, 1), "v4": AppDecimal(contract.bandHighDeg - contract.bandLowDeg, 1), "v5": AppDecimal(contract.cueThresholdDeg, 1)}),
                         style: hankenText(size: 13.5, height: 1.55),
                       ),
                       const SizedBox(height: 8),

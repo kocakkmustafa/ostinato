@@ -18,17 +18,7 @@ class PianoVisualPracticeScreen extends StatefulWidget {
 class _PianoVisualPracticeScreenState extends State<PianoVisualPracticeScreen> {
   _Hands _hands = _Hands.both;
 
-  String _pitch(BuildContext context, String pitch) {
-    final name = switch (pitch[0]) {
-      'C' => 'Do',
-      'D' => 'Re',
-      'E' => 'Mi',
-      'F' => 'Fa',
-      'G' => 'Sol',
-      _ => pitch[0],
-    };
-    return localized(context, pitch, '$name${pitch.substring(1)}');
-  }
+  String _pitch(BuildContext context, String pitch) => musicPitch(context, pitch);
 
   String _handLabel(BuildContext context, _Hands hands) => switch (hands) {
     _Hands.right => localized(context, 'Right hand only', 'Yalnız sağ el'),
@@ -36,7 +26,7 @@ class _PianoVisualPracticeScreenState extends State<PianoVisualPracticeScreen> {
     _Hands.both => localized(context, 'Both hands', 'İki el'),
   };
 
-  List<VisualPracticeStep> _steps() {
+  List<VisualPracticeStep> _steps(BuildContext context) {
     // The original first bar: RH C4 D4 E4 G4 quarters; LH C3 whole.
     final right = pianoStudyRight.first;
     final left = pianoStudyLeft.first.single;
@@ -50,15 +40,11 @@ class _PianoVisualPracticeScreenState extends State<PianoVisualPracticeScreen> {
       for (var i = 0; i < 4; i++)
         VisualPracticeStep(
           label: GuitarText(
-            'Bar 1 · count ${i + 1}',
-            'Ölçü 1 · sayım ${i + 1}',
+            'Bar 1 · count {v0}',
+            'Ölçü 1 · sayım {v0}',
+            values: {'v0': i + 1},
           ),
-          instruction: GuitarText(
-            '${i == 0 && _hands == _Hands.both ? 'Start left C3 and right C4 together on count 1. ' : ''}${_hands != _Hands.left ? (i == 0 ? 'Right: start ${right[i].pitch}, for one beat. ' : 'Right: release ${right[i - 1].pitch} and start ${right[i].pitch}, for one beat. ') : 'Right: stay at rest. '}'
-                '${_hands != _Hands.right ? (i == 0 ? 'Left: start ${left.pitch} and keep it through all four beats.' : 'Left: continue holding ${left.pitch}; do not strike again.') : 'Left: stay at rest.'}',
-            '${i == 0 && _hands == _Hands.both ? 'Sayım 1’de sol Do3 ve sağ Do4’ü birlikte başlat. ' : ''}${_hands != _Hands.left ? (i == 0 ? 'Sağ: ${_trPitch(right[i].pitch!)} başlat, bir vuruş sürdür. ' : 'Sağ: ${_trPitch(right[i - 1].pitch!)} bırak ve ${_trPitch(right[i].pitch!)} başlat, bir vuruş sürdür. ') : 'Sağ: çalma; dinlen. '}'
-                '${_hands != _Hands.right ? (i == 0 ? 'Sol: ${_trPitch(left.pitch!)} başlat ve dört vuruş boyunca sürdür.' : 'Sol: ${_trPitch(left.pitch!)} tutmayı sürdür; yeniden basma.') : 'Sol: çalma; dinlen.'}',
-          ),
+          instruction: _instruction(context, i, right, left),
         ),
       VisualPracticeStep(
         label: const GuitarText(
@@ -73,14 +59,52 @@ class _PianoVisualPracticeScreenState extends State<PianoVisualPracticeScreen> {
     ]);
   }
 
-  String _trPitch(String pitch) =>
-      '${switch (pitch[0]) {
-        'C' => 'Do',
-        'D' => 'Re',
-        'E' => 'Mi',
-        'G' => 'Sol',
-        _ => pitch[0],
-      }}${pitch.substring(1)}';
+  GuitarText _instruction(
+    BuildContext context,
+    int count,
+    List<PianoWrittenNote> right,
+    PianoWrittenNote left,
+  ) {
+    final leftPitch = _pitch(context, left.pitch!);
+    final rightPitch = _pitch(context, right[count].pitch!);
+    if (count == 0) {
+      return switch (_hands) {
+        _Hands.both => GuitarText(
+          'Start left {v0} and right {v1} together on count 1. Right: start {v1}, for one beat. Left: start {v0} and keep it through all four beats.',
+          'Sayım 1’de sol {v0} ve sağ {v1} sesini birlikte başlat. Sağ: {v1} başlat, bir vuruş sürdür. Sol: {v0} başlat ve dört vuruş boyunca sürdür.',
+          values: {'v0': leftPitch, 'v1': rightPitch},
+        ),
+        _Hands.right => GuitarText(
+          'Right: start {v0}, for one beat. Left: stay at rest.',
+          'Sağ: {v0} başlat, bir vuruş sürdür. Sol: çalma; dinlen.',
+          values: {'v0': rightPitch},
+        ),
+        _Hands.left => GuitarText(
+          'Right: stay at rest. Left: start {v0} and keep it through all four beats.',
+          'Sağ: çalma; dinlen. Sol: {v0} başlat ve dört vuruş boyunca sürdür.',
+          values: {'v0': leftPitch},
+        ),
+      };
+    }
+    final previousPitch = _pitch(context, right[count - 1].pitch!);
+    return switch (_hands) {
+      _Hands.both => GuitarText(
+        'Right: release {v0} and start {v1}, for one beat. Left: continue holding {v2}; do not strike again.',
+        'Sağ: {v0} bırak ve {v1} başlat, bir vuruş sürdür. Sol: {v2} tutmayı sürdür; yeniden basma.',
+        values: {'v0': previousPitch, 'v1': rightPitch, 'v2': leftPitch},
+      ),
+      _Hands.right => GuitarText(
+        'Right: release {v0} and start {v1}, for one beat. Left: stay at rest.',
+        'Sağ: {v0} bırak ve {v1} başlat, bir vuruş sürdür. Sol: çalma; dinlen.',
+        values: {'v0': previousPitch, 'v1': rightPitch},
+      ),
+      _Hands.left => GuitarText(
+        'Right: stay at rest. Left: continue holding {v0}; do not strike again.',
+        'Sağ: çalma; dinlen. Sol: {v0} tutmayı sürdür; yeniden basma.',
+        values: {'v0': leftPitch},
+      ),
+    };
+  }
 
   Widget _choices(BuildContext context) => Wrap(
     spacing: 8,
@@ -94,10 +118,23 @@ class _PianoVisualPracticeScreenState extends State<PianoVisualPracticeScreen> {
     ],
   );
 
-  String _cellLabel(BuildContext context, int beat) =>
-      '${localized(context, 'Count', 'Sayım')} ${beat + 1} · '
-      '${localized(context, 'RH', 'Sağ')}: ${_hands == _Hands.left ? localized(context, 'rest', 'dinlenme') : _pitch(context, pianoStudyRight.first[beat].pitch!)} · '
-      '${localized(context, 'LH', 'Sol')}: ${_hands == _Hands.right ? localized(context, 'rest', 'dinlenme') : '${_pitch(context, pianoStudyLeft.first.single.pitch!)} ${localized(context, beat == 0 ? 'start' : 'hold, no new attack', beat == 0 ? 'başlat' : 'sürdür, yeni başlangıç yok')}'}';
+  String _cellLabel(BuildContext context, int beat) {
+    final leftAction = beat == 0
+        ? localized(context, 'start', 'başlat')
+        : localized(context, 'hold, no new attack', 'sürdür, yeni başlangıç yok');
+    final right = _hands == _Hands.left
+        ? localized(context, 'rest', 'dinlenme')
+        : _pitch(context, pianoStudyRight.first[beat].pitch!);
+    final left = _hands == _Hands.right
+        ? localized(context, 'rest', 'dinlenme')
+        : '${_pitch(context, pianoStudyLeft.first.single.pitch!)} $leftAction';
+    return localized(
+      context,
+      'Count {v0} · RH: {v1} · LH: {v2}',
+      'Sayım {v0} · Sağ: {v1} · Sol: {v2}',
+      values: {'v0': beat + 1, 'v1': right, 'v2': left},
+    );
+  }
 
   Widget _grid(BuildContext context, int step) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +199,7 @@ class _PianoVisualPracticeScreenState extends State<PianoVisualPracticeScreen> {
         VisualPracticeLoop(
           key: ValueKey(_taskIdentity),
           taskIdentity: _taskIdentity,
-          steps: _steps(),
+          steps: _steps(context),
           target: const GuitarText(
             'Find C3 for the left hand and C4–G4 for the right using the lesson’s keyboard map. In this original study bar the melody changes every beat while the bass stays for four. Inspect separate hands, then both only when comfortable. These cells explain the timing relationship, not physical touch.',
             'Dersteki tuş haritasıyla sol Do3 ve sağ Do4–Sol4 bul. Bu özgün etüt ölçüsünde melodi her vuruş değişir, bas dört vuruş kalır. Önce elleri ayrı incele, sonra yalnız rahatsa birlikte dene. Hücreler zaman ilişkisini açıklar, fiziksel tuşeyi değil.',
