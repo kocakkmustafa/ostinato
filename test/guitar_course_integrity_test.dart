@@ -9,6 +9,8 @@ import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/main.dart';
 
+import 'support/localized_widget_ready.dart';
+
 const String _manifestPath = 'assets/motion_content/manifest.json';
 const String _coursePath = 'assets/content/guitar_journey.v1.json';
 
@@ -133,6 +135,13 @@ void main() {
       Locale('tr'),
     ];
     addTearDown(tester.binding.platformDispatcher.clearLocalesTestValue);
+    await waitForLocalizedFixture(
+      tester,
+      languageTag: 'tr',
+      anchor: find.byKey(const Key('ostinato-content-load-failure')),
+      reason:
+          'Real Turkish error catalog must be ready after the locale change',
+    );
     await tester.pumpAndSettle();
     expect(find.textContaining('Kurs içeriği yüklenemedi'), findsOneWidget);
     expect(find.text('Destek kodu: CONTENT_HASHMISMATCH'), findsOneWidget);
