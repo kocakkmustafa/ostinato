@@ -83,13 +83,10 @@ void main() {
 
       // 3 sabit kalem + çalgıya-özel kalem (varsa) — ekranın kendi kuralı.
       final int expected = 3 + (d.instrumentSpecificGap.isEmpty ? 0 : 1);
-      // Ekranın kendi yazıyla-sayı eşlemesinin AYNADAKİ hâli — ekran ondan
-      // uzun bir listede rakama düşüyor, test de öyle düşer (yoksa liste
-      // büyüdüğünde test, ürün doğru davranırken null'a çarpar).
-      const Map<int, String> words = <int, String>{
-        1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six',
-      };
-      expect(headline(t), '${words[expected] ?? expected} things, by name.',
+      // 14 dilli katalog (e703632) sayıyı rakamla ve çoğul kuralıyla yazar:
+      // "{v0} thing(s), by name." — sayı yine listenin uzunluğundan türer.
+      final String noun = expected == 1 ? 'thing' : 'things';
+      expect(headline(t), '$expected $noun, by name.',
           reason: 'başlık listeden TÜREMİYOR — sayı elle yazılmış olabilir');
 
       // Sayının SAYDIĞI şey gerçekten ekranda mı? Başlık türerken liste boş
