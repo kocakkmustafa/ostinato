@@ -160,15 +160,61 @@ class SessionStore {
   /// (adıyla değil — çünkü bu bir kullanıcı YÜZEYİ değil, kendi
   /// dosyamızın kendi geçmiş yazmalarından biri bozulmuş olabilir; bir
   /// önceki turun kaydı okunamıyorsa en son OKUNABİLEN gösterilir).
+  ///
+  /// Satırlar BAYT düzeyinde 0x0a'dan bölünür ve her biri ayrı çözülür: yarım
+  /// kalmış çok baytlı bir UTF-8 kuyruğu (ör. "ü"nün yalnız 0xC3'ü) bütün
+  /// dosyayı okunamaz kılmamalı. 0x0a hiçbir çok baytlı dizinin parçası
+  /// olamaz, bu yüzden bölme geçerli satırları bozmaz. Bozuk baytlar dosyada
+  /// KALIR — okuma onarım yazmaz, yalnız o satırı atlar.
   Future<PersistedSession?> lastSession() => _operations.run((directory) async {
     final f = File('${directory.path}/sessions.jsonl');
     if (!f.existsSync()) return null;
-    final List<String> lines = await f.readAsLines();
-    for (final String line in lines.reversed) {
-      if (line.trim().isEmpty) continue;
-      final PersistedSession? parsed = PersistedSession.tryParse(line);
+    final List<int> bytes = await f.readAsBytes();
+    var end = bytes.length;
+    while (end > 0) {
+      var start = end - 1;
+      while (start >= 0 && bytes[start] != 0x0a) {
+        start--;
+      }
+      final PersistedSession? parsed = _parseLine(bytes, start + 1, end);
       if (parsed != null) return parsed;
+      end = start < 0 ? 0 : start;
     }
     return null;
   });
+
+  static PersistedSession? _parseLine(List<int> bytes, int start, int end) {
+    if (start >= end) return null;
+    final String line;
+    try {
+      line = utf8.decode(bytes.sublist(start, end));
+    } on FormatException {
+      return null;
+    }
+    if (line.trim().isEmpty) return null;
+    return PersistedSession.tryParse(line);
+  }
+}
+
+/// D14 (2026-08-16, O-153): ÖNCE önceki kaydı OKU, SONRA bugünküyü YAZ —
+/// sıra kasıtlı, aksi hâlde "önceki oturum" bugünküyle YARIŞIR. Yazma
+/// kasıtlı unawaited; dönen Future yazmayı beklemez.
+///
+/// Okuma başarısız olsa bile bugünkü kayıt YAZILIR: önceki kartın
+/// gösterilememesi, bu oturumun geçmişe eklenmemesinin sebebi olamaz. Okuma
+/// hatası yazma başlatıldıktan sonra yeniden fırlatılır; Review'un
+/// `FutureBuilder`ı yalnız geçmiş kartını çizmez.
+Future<PersistedSession?> readPreviousThenSave(
+  SessionStore store,
+  PersistedSession current,
+) async {
+  final PersistedSession? previous;
+  try {
+    previous = await store.lastSession();
+  } catch (_) {
+    store.save(current).ignore();
+    rethrow;
+  }
+  store.save(current).ignore();
+  return previous;
 }

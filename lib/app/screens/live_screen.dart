@@ -235,24 +235,18 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
   /// zaten ÖLÇÜLEN kareden türer, yazma başarısız olsa bile kullanıcı
   /// SONUCU görür, yalnız GEÇMİŞE eklenmez). Bu Future'ın kendisi de
   /// hatayla biterse (ör. okuma çöker) `FutureBuilder` onu yakalar — geçmiş
-  /// kartı çizilmez, uygulama çökmez.
-  Future<PersistedSession?> _readPreviousThenSave(
-    SessionSummary summary,
-  ) async {
-    final SessionStore store = SessionStore(accountUserId: _accountUserId);
-    final PersistedSession? previous = await store.lastSession();
-    store
-        .save(
-          PersistedSession.fromSummary(
-            disciplineId: widget.discipline.id,
-            lessonId: widget.lesson.id,
-            summary: summary,
-            completedAt: DateTime.now(),
-          ),
-        )
-        .ignore();
-    return previous;
-  }
+  /// kartı çizilmez, uygulama çökmez — ve bugünkü kayıt yine yazılır
+  /// (bkz. [readPreviousThenSave]).
+  Future<PersistedSession?> _readPreviousThenSave(SessionSummary summary) =>
+      readPreviousThenSave(
+        SessionStore(accountUserId: _accountUserId),
+        PersistedSession.fromSummary(
+          disciplineId: widget.discipline.id,
+          lessonId: widget.lesson.id,
+          summary: summary,
+          completedAt: DateTime.now(),
+        ),
+      );
 
   @override
   void dispose() {
