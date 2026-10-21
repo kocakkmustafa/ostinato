@@ -17,10 +17,19 @@ const String _manifestPath = 'assets/motion_content/manifest.json';
 
 /// Generates the canonical integrity envelope for all reviewed authored courses.
 /// Lesson semantics stay in the course JSON, rather than being copied here.
-Future<void> main(List<String> arguments) async {
+Future<void> main(List<String> arguments) =>
+    runCourseIntegrityManifestCli(arguments);
+
+/// Runs the CLI with capturable diagnostics for strict machine-reporter tests.
+/// Normal invocations retain stderr diagnostics and process exit codes.
+Future<void> runCourseIntegrityManifestCli(
+  List<String> arguments, {
+  void Function(String)? writeError,
+}) async {
+  final void Function(String) emitError = writeError ?? stderr.writeln;
   if (arguments.length != 1 ||
       !<String>{'--write', '--check'}.contains(arguments.single)) {
-    stderr.writeln('Use --write or --check from the Ostinato app root.');
+    emitError('Use --write or --check from the Ostinato app root.');
     exitCode = 64;
     return;
   }
@@ -37,12 +46,12 @@ Future<void> main(List<String> arguments) async {
   }
 
   if (!await manifest.exists()) {
-    stderr.writeln('Missing generated manifest: $_manifestPath');
+    emitError('Missing generated manifest: $_manifestPath');
     exitCode = 1;
     return;
   }
   if (!await courseIntegrityManifestIsCurrent(Directory.current)) {
-    stderr.writeln('Stale generated manifest: $_manifestPath');
+    emitError('Stale generated manifest: $_manifestPath');
     exitCode = 1;
     return;
   }

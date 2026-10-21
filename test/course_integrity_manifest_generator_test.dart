@@ -67,8 +67,16 @@ void main() {
         ['--check', '--write'],
         ['--write', '--allow-stale'],
       ]) {
-        await generator.main(args);
+        final diagnostics = StringBuffer();
+        await generator.runCourseIntegrityManifestCli(
+          args,
+          writeError: diagnostics.writeln,
+        );
         expect(exitCode, 64);
+        expect(
+          diagnostics.toString(),
+          'Use --write or --check from the Ostinato app root.\n',
+        );
       }
     } finally {
       exitCode = previous;
