@@ -9,15 +9,15 @@
   "playStore": {
     "shortDescription": "Sıralı gitar dersleri, özgün alıştırmalar ve cihazda ilerleme kaydı."
   },
-  "description": "Ostinato, 10 modülde 60 özgün Türkçe ve İngilizce gitar dersi sunar. Çalgı kurulumu ve tellerden başlayıp okuma, tek nota, akor, ritim, armoni ve parmak stiline ilerle. İki özgün bitirme çalışması becerilerini birleştirmene yardımcı olur. Her derste açıklama, uygulama, öz denetim ve kolay seçenekler bulunur.\n\nEk başlangıç kursları piyano, ukulele, bas ve şan için yazılı çalışma sunar. Bu kurslarda canlı nota, parmak tekniği ve ses doğruluğu geri bildirimi yoktur.\n\nÖzgün metin derslerini oku, uygulama görevlerini takip et, kendi çalışmanı değerlendir ve cihazdaki ders kaydından devam et. Hesabın olmadan kataloğu gezebilir, isteğe bağlı ortak Motion hesabını kullanabilirsin. Hesap; e-posta, hesap kimliği ve eklediysen görünen adını kullanır; uygulamadan hesap silme isteği yapabilirsin. Kurs kayıtları cihazda mevcut konuk veya hesap kapsamında kalır. Ders bitirme ustalık belgesi değildir. Bu içerik hazırlığı sürümünde gösterim videosu bulunmaz.\n\nİsteğe bağlı mikrofon pratiği, izninle cihaz üstünde yaklaşık tek nota gözlemi gösterir; nota doğruluğu veya akor puanı vermez. Ham ses saklanmaz veya yüklenmez. Kurs kendi çalışma kaydını kullanır; kamera duruş puanı ve abonelik satışı açık değildir.",
+  "description": "Ostinato, 10 modülde 60 özgün gitar dersi ve 14 dilde yazılı kurs anlatımı sunar. Çalgı kurulumu ve tellerden başlayıp okuma, tek nota, akor, ritim, armoni ve parmak stiline ilerle. İki özgün bitirme çalışması becerilerini birleştirmene yardımcı olur. Her derste açıklama, uygulama, öz denetim ve kolay seçenekler bulunur.\n\nEk başlangıç kursları piyano, ukulele, bas ve şan için yazılı çalışma sunar. Bu kurslarda canlı nota, parmak tekniği ve ses doğruluğu geri bildirimi yoktur.\n\nÖzgün metin derslerini oku, uygulama görevlerini takip et, kendi çalışmanı değerlendir ve cihazdaki ders kaydından devam et. Hesabın olmadan kataloğu gezebilir, isteğe bağlı ortak Motion hesabını kullanabilirsin. Hesap; e-posta, hesap kimliği ve eklediysen görünen adını kullanır; uygulamadan hesap silme isteği yapabilirsin. Kurs kayıtları cihazda mevcut konuk veya hesap kapsamında kalır. Ders bitirme ustalık belgesi değildir. Bu içerik hazırlığı sürümünde gösterim videosu bulunmaz.\n\nİsteğe bağlı mikrofon pratiği, izninle cihaz üstünde yaklaşık tek nota gözlemi gösterir; nota doğruluğu veya akor puanı vermez. Ham ses saklanmaz veya yüklenmez. Kurs kendi çalışma kaydını kullanır; kamera duruş puanı ve abonelik satışı açık değildir.",
   "cameraPermissionRationale": {
-    "ios": "Ostinato, ders sırasında gövde eğimini eğitmen referans aralığıyla karşılaştırmak için kamerayı kullanır. Video bu cihazda kalır; yüklenmez veya saklanmaz. Kısa oturum özeti cihazda saklanır."
+    "ios": "Bu sürümde kamera pratiği kapalıdır. Kamera erişimi cihazda duruş gözlemi içindir; video saklanmaz veya yüklenmez."
   },
   "$releasePolicy20260925": "Founder deferred all paid camera sessions and subscription sales in the first release. Provider listings must use only the external fields above; older dollar-prefixed research notes describe deferred capabilities.",
   "supportUrl": "https://yulalab.com/support",
   "privacyPolicyUrl": "https://yulalab.com/privacy/motion",
   "$coursePreparation20260926": {
-    "status": "local_content_preparation_not_provider_readback_or_release_acceptance",
+    "status": "historical_2026_10_02_source_not_current_candidate",
     "asset": "assets/content/guitar_journey.v1.json",
     "sha256": "bf553f62d91927be66b88210103b982bed17c357b4b643cb9b50f57a3e105a18",
     "sourceReadbackDate": "2026-10-02",
@@ -26,7 +26,7 @@
     "mediaIncluded": false,
     "physicalDeviceAccepted": false
   },
-  "$sourceOfFacts": "Current course: assets/content/guitar_journey.v1.json; its app-local UI and account-scoped practice store. Camera paid-access policy is unchanged. Readback of provider metadata is separate.",
+  "$sourceOfFacts": "Current authored course assets and 14 presentation catalogs are app-owned. This local source candidate is separate from the historical 73b05164 IPA4. Native/device/provider acceptance and final source-to-package binding are pending.",
   "$notClaimed": "No independent skill/mastery outcome, physical-phone performance, clinical suitability, camera form grade or approved AI demonstration is asserted. This local content-preparation draft has not been uploaded.",
   "$micClaimWhy": "2026-09-26: Founder approved optional on-device single-guitar-note observation. Explicit Start and OS permission are required. PCM stays in temporary RAM; no raw audio file, upload or automatic restart. iOS/Android native capture and permission declarations exist. The display is approximate note/Hz/cents; no correctness, chord, timing, dB(A) or mastery score. Existing paid-camera gates stay closed. Physical microphone acceptance remains open.",
   "$shortDescriptionWhy": "Current copy describes the 60-lesson course and optional approximate on-device single-note observation. Raw audio is not saved or uploaded; live physical microphone accuracy is unverified.",
@@ -44,5 +44,63 @@
     "GuitarSetPrecisionClaimAllowed": false,
     "reviewGuide": "RELEASE-REVIEW.md",
     "status": "local_draft_not_provider_write_or_physical_acceptance"
+  },
+  "$releaseCandidate20261021": {
+    "sourceAtPreparation": "8e98440ec8ccbb59c462e74de63b623bbd608018",
+    "publicCorePinAtPreparation": "d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d",
+    "status": "local_metadata_draft_host38_verified_not_native_device_provider_or_release_acceptance",
+    "presentationLocales": [
+      "tr",
+      "en",
+      "es-419",
+      "pt-BR",
+      "de",
+      "fr",
+      "ja",
+      "ar",
+      "it",
+      "ko",
+      "id",
+      "pl",
+      "hi",
+      "zh-Hans"
+    ],
+    "courseCounts": {
+      "guitar": 60,
+      "piano": 16,
+      "ukulele": 18,
+      "bass": 18,
+      "voice": 16
+    },
+    "courseAssetsSha256AtPreparation": {
+      "assets/content/guitar_journey.v1.json": "9e8f01c2ebffbd28ffaf8203be0bce036867d857c3e009a79bf2cf43a75a1f96",
+      "assets/content/piano_beginner.v1.json": "c8803c80f7ce37ae88a2bbc48dc14b0f42312b71414c107c43531140018f9c31",
+      "assets/content/vocal_beginner.v1.json": "dce745c5bc6ba9e7d95fba8cfb7379e72698758161b090b09229081eae7d2003",
+      "assets/content/ukulele_beginner.v1.json": "181095def47ae1ab8c8a930ef2668d44dc4eca2f6a640458398bd8b49cef0126",
+      "assets/content/bass_beginner.v1.json": "422e5c1df9d23cc79bcabc9c57c277f0763367fd9ad437cc7a5aaa2c25f7afdf"
+    },
+    "cameraAndSubscriptionSales": false,
+    "productionDemonstrationMediaIncluded": false,
+    "physicalDeviceAccepted": false,
+    "nativePackageForThisCandidate": null,
+    "historicalAppStoreIPA": {
+      "runtimeSource": "73b05164a620eba32e2bc928676e009b92b9d336",
+      "version": "1.0.0(4)",
+      "sha256": "2b3bb71bffde11833d2f30f44f4f9d6ff9158a9952e769101615824d9858b1d6",
+      "currentSourceEquivalent": false
+    },
+    "reviewGuide": "RELEASE-REVIEW.md",
+    "finalSourceAndAcceptanceBindingRequiredAfterMetadataCommit": true,
+    "hostAcceptance": {
+      "source": "8e98440ec8ccbb59c462e74de63b623bbd608018",
+      "requestSha256": "674f5f12058593293bded30db7a95bcb1b710e668b30bd40f864c12033fd98c5",
+      "staticCommandsExit0": 3,
+      "PASS": 38,
+      "FAIL": 0,
+      "SKIP": 0,
+      "UNRUN": 0,
+      "historicalPassCountsAdded": false,
+      "nativeOrPhysicalDeviceAccepted": false
+    }
   }
 }

@@ -1,4 +1,4 @@
-# Ostinato yayın inceleme paketi — 18 Ekim 2026
+# Ostinato yayın inceleme taslağı — 21 Ekim 2026
 
 Bu dosya yerel submission taslağıdır. App Store Connect'e kaydetme, build
 upload, submit veya yayın kararı değildir. İmza/paket kanıtı model veya fiziksel
@@ -7,19 +7,33 @@ sınırları ayrı anlatılır.
 
 ## Kaynak ve aday
 
-Mevcut doğrulanmış Development IPA: runtime kaynak `73b05164`, `1.0.0 (4)`,
-`com.yulalab.ostinato`, SHA256
-`910be9df017745a4623bb193d6c52e181b1910d34a38d92353052e02a4049f04`.
-Distribution henüz üretilmiş değildir. Mevcut App Store profil/Distribution
-identity metadata'sı bulundu; yeni credential gereksinimi saptanmadı. Aynı
-arşivden ayrı, açık onaylı tek `app-store-connect` export en kısa alternatiftir.
-Development IPA yeniden üretilmez. Kaynakta runtime değişirse bu arşiv güncel
-runtime yerine kullanılamaz. Mağazada build4 çakışması güncel panelde doğrulanır.
+Bu taslak hazırlanırken ürün kaynağı `8e98440ec8ccbb59c462e74de63b623bbd608018`, public
+Core pin `d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d` idi. 14 sunum dili ve 128
+yazılı ders kaynakta bulunur. `8e98440` kaynağında analyzer, readonlyformat ve
+gerçek manifest kontrolü ile 38 host testi kabul edildi: 38 PASS, 0 FAIL,
+0 SKIP, 0 UNRUN. Önceki kaynakların PASS sayıları bu 38'e eklenmez. Bu yerel
+metadata değişikliğinin final kaynak kimliği ayrı raporda bağlanır; 38 testin
+ölçülen kaynağı `8e98440` olarak kalır. Bu, native paket veya cihaz kabulü değildir.
+
+Tarihsel App Store IPA `1.0.0(4)`, runtime `73b05164`;
+SHA256 `2b3bb71bffde11833d2f30f44f4f9d6ff9158a9952e769101615824d9858b1d6`.
+Mevcut dağıtım paketi korunur; yalnız EN/TR native izin çevirileri ve eski
+kurs baytlarını içerir. Yeni 14 dil/tema/eğitim kaynağının paketi değildir.
+Development IPA ve eski export hata makbuzu da tarihsel olarak korunur.
+
+Bu aday için yeni native archive/package veya fiziksel cihaz kabulü yoktur.
+Eski arşivin yeniden export edilmesi yeni kaynak içeriğini eklemez. Ayrı
+normal ortak native kuyruğu ve yetkili paket fazı gerekir. Yeni credential,
+build, imza, export veya upload bu taslakla yetkilendirilmez. Mağazada build4
+çakışması güncel panelde doğrulanmamıştır.
 
 ## EN reviewer notes — inceleme öncesi son cihaz kontrolü gereken taslak
 
-Ostinato provides original English and Turkish music lessons and practice
-records. The guitar path has 60 lessons in 10 modules; introductory written
+Draft notes for the new source candidate; do not submit before its host,
+package and device checks are complete.
+
+Ostinato provides original written music lessons and practice records, with
+course presentation in 14 languages. The guitar path has 60 lessons in 10 modules; introductory written
 courses also cover piano (16), ukulele (18), bass (18) and voice (16).
 Lesson completion is the user's self-report, not a measured mastery result.
 
@@ -62,9 +76,9 @@ Original demonstration video is not included in this content version.
   CoarseLocation, OtherDataTypes; altısı AppFunctionality, linked, tracking=false.
 - Kamera/mikrofon ve yerel ilerleme için bu yolda cihaz dışına collection
   bildirilmez. Auth/provider günlükleri yerel RAM işlemiyle karıştırılmaz.
-- Mevcut pakette dokuz manifest var; SDK reason kodlarının kaynak manifestleri
-  pakette taşınıyor. Bu, son distribution paketinin veya mağaza formunun kabulü
-  değildir; export sonrası aynı envanter tekrar bağlanır.
+- Tarihsel IPA4 içinde dokuz privacy manifesti vardır; root manifest güncel
+  kaynakla byte eşleşir. Bu, yeni adayın SDK arşiv raporu veya mağaza formu
+  kabulü değildir; yeni yetkili pakette envanter tekrar bağlanır.
 - `ITSAppUsesNonExemptEncryption` mevcut pakette belirtilmemiş. Export compliance
   sorusu App Store Connect'te gerçek kullanılan kriptografi kapsamına göre
   sahibi tarafından cevaplanmalı; otomatik varsayılan yanıt uydurulmaz.
@@ -78,7 +92,7 @@ Original demonstration video is not included in this content version.
 | Konuk ders akışı, hesap kapsamlı yerel ayrım | Önceki host/widget testleri | Signed pakette kullanıcı cihazı kontrolü |
 | Gerçek mevcut hesap giriş/çıkış | Kaynak ve host kanıtı | Kullanıcı mevcut test hesabıyla güvenli giriş; parolayı sohbet/rapora verme |
 | Hesap silme | Kaynak ve başarısızlık/yerel temizlik testleri | Kalıcı silme ayrı açık onay ister; mevcut gerçek hesap silinmez |
-| Satış/üyelik/restore | Shared pin `ef60e346` içinde `motionPaidFeaturesAvailable=false` | Bu sürümde satış kapsam dışı; satış açılırsa gerçek store sandbox satın alma/restore ayrı kapı |
+| Satış/üyelik/restore | Public Core pin `d69e1078` tüketiminde satış kapalıdır | Bu sürümde satış kapsam dışı; satış açılırsa gerçek store sandbox satın alma/restore ayrı kapı |
 | Reviewer erişimi | Konuk yolu ve bu adımlar | Final cihaz yürüyüşü; gerekiyorsa mevcut demo hesabı güvenli ASC alanında |
 
 Apple/Google sandbox satın alma, yeni hesap/credential veya üretim ödemesi bu
@@ -108,13 +122,17 @@ Bu runtime iPhone-only (`UIDeviceFamily=[1]`); iPad destekleniyor gibi davranmay
 
 ## Yayın öncesi açık kapılar
 
-1. Distribution export için yeni sınırlı koşu onayı ve actual imza/profile/hash.
+1. Yeni exact kaynak için ayrı yetkili native archive/package ve gerçek
+   imza/profile/hash/asset/locale readback; eski IPA4 güncel aday yerine geçmez.
 2. ASC mevcut oturum/build4, privacy formu, reviewer kişi alanları ve doğru
    export-compliance cevabı; kaydetme/yükleme/submit ayrı yetkiyle.
 3. Signed pakette gerçek hesap/izin/background/yerel kayıt yürüyüşü; önceki
    OS cihaz erişim reddi başka araçla aşılmaz. Kullanıcı cihazda tamamlayabilir.
-4. Kullanıcı gösterimleri/öğretmen ve model doğruluğu kabulü ayrı; mevcut ses
-   pilotunun train overlap'ı bu kapıları kapatmaz.
+4. Harici uzman incelemesi ilk prototipin zorunlu kapısı değildir. AI sahibi
+   yalnız gerçekten incelediği video bölümlerini ve özgün yazılı dersleri
+   kaydeder. Bu, uzman onayı veya fiziksel öğrenme başarısı değildir. Gerçek
+   mikrofon/cihaz sınırları açık kalır; GuitarSet train overlap bağımsız
+   doğruluk kanıtı sayılmaz.
 5. İlk üç kabul grubu ve açık final yayın kararı kapanmadan store upload yok.
 
 Kaynaklı kapanış yalnız gerçekten çalışan kontrollerle yapılır. Bu belge
