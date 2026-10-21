@@ -15,6 +15,8 @@ import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/bass_beginner_screen.dart';
 
+import 'support/localized_widget_ready.dart';
+
 class Files extends CachingAssetBundle {
   Files({this.corrupt = false});
   final bool corrupt;
@@ -167,6 +169,16 @@ void main() {
             home: BassBeginnerScreen(bundle: Files()),
           ),
         );
+        await waitForLocalizedFixture(
+          tester,
+          languageTag: locale,
+          anchor: find.descendant(
+            of: find.byType(BassBeginnerScreen),
+            matching: find.byType(ListView),
+          ),
+          reason:
+              'Bass course and packaged translations must be ready before scrolling',
+        );
         await tester.pumpAndSettle();
         await tester.scrollUntilVisible(
           find.byKey(const Key('bass-01')),
@@ -189,7 +201,7 @@ void main() {
             final answer = find.byKey(const Key('bass-tab-answers'));
             final answerText = find.textContaining(
               locale == 'tr'
-                  ? 'vuruş 1: tel 4, perde 0 (Mi1)'
+                  ? 'vuruş 1: tel 4, perde 0 (E1 (Mi1))'
                   : 'beat 1: string 4, fret 0 (E1)',
             );
             expect(answerText, findsNothing);
@@ -256,7 +268,7 @@ void main() {
         expect(
           find.textContaining(
             locale == 'tr'
-                ? 'vuruş 1: tel 4, perde 0 (Mi1)'
+                ? 'vuruş 1: tel 4, perde 0 (E1 (Mi1))'
                 : 'beat 1: string 4, fret 0 (E1)',
           ),
           findsNothing,

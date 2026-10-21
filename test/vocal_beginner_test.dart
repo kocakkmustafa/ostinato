@@ -15,6 +15,8 @@ import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/vocal_beginner_screen.dart';
 
+import 'support/localized_widget_ready.dart';
+
 class Files extends CachingAssetBundle {
   Files({this.corrupt = false});
   final bool corrupt;
@@ -216,6 +218,16 @@ void main() {
             ),
             home: VocalBeginnerScreen(bundle: Files()),
           ),
+        );
+        await waitForLocalizedFixture(
+          tester,
+          languageTag: locale,
+          anchor: find.descendant(
+            of: find.byType(VocalBeginnerScreen),
+            matching: find.byType(ListView),
+          ),
+          reason:
+              'Vocal course and packaged translations must be ready before scrolling',
         );
         await tester.pumpAndSettle();
         await _centre(tester, find.byKey(const Key('vocal-01')));

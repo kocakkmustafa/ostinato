@@ -230,7 +230,7 @@ void main() {
             expect(
               find.textContaining(
                 locale == 'tr'
-                    ? 'Mi4 dörtlük (vuruş 1)'
+                    ? 'E4 (Mi4) dörtlük (vuruş 1)'
                     : 'E4 quarter (beat 1)',
               ),
               findsNothing,
@@ -250,7 +250,7 @@ void main() {
             expect(
               find.textContaining(
                 locale == 'tr'
-                    ? 'Mi4 dörtlük (vuruş 1)'
+                    ? 'E4 (Mi4) dörtlük (vuruş 1)'
                     : 'E4 quarter (beat 1)',
               ),
               findsNWidgets(i == 13 ? 1 : 2),
