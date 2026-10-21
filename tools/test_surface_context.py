@@ -9,7 +9,8 @@ import validate_surface_honesty as gate
 from surface_context import (
     arguments, body_side_allowed, dart_hand_context, guarded_dart_contexts,
     hand_context, historical_body_report, instructional_promise_word,
-    merged_dart_literals, paired_json_contexts, without_labelled_turkish_quote,
+    catalog_parity, merged_dart_literals, message_id_map, paired_json_contexts, preference_payload_role,
+    translation_text_proof, without_labelled_turkish_quote,
 )
 
 LOCALE = """String localized(BuildContext context, String english, String turkish) =>
@@ -205,8 +206,16 @@ text(context, 'Read.', 'Yanlış Türkçe.');"""
         for leak in leaks:
             self.assertFalse(gate.guarded_turkish_catalog_literals(
                 [], source + leak, precise=True), leak)
-        for mutation in [source.replace('return source;', "return 'Önce oku.';", 1),
-                         source.replace('_fingerprint(source);', '_fingerprint(source) || true;')]:
+        # Both render shapes: legacy early-return and the fourteen-locale
+        # forwarded dispatch. Only mutations that actually apply are counted.
+        mutations = [source.replace('return source;', "return 'Önce oku.';", 1),
+                     source.replace(': source;', ": 'Önce oku.';", 1),
+                     source.replace('localized(context, source, _turkishCopy[key]!)',
+                                    'localized(context, _turkishCopy[key]!, source)', 1),
+                     source.replace('_fingerprint(source);', '_fingerprint(source) || true;')]
+        applied = [m for m in mutations if m != source]
+        self.assertGreaterEqual(len(applied), 3)
+        for mutation in applied:
             self.assertFalse(gate.guarded_turkish_catalog_literals([], mutation, precise=True))
 
     def test_nested_interpolation_keeps_every_inner_literal_and_concatenation(self):
@@ -355,6 +364,194 @@ class GateRegressionTests(unittest.TestCase):
         self.assertIn('1-and 2-and 3-and 4-and', copy['en'])
         self.assertNotIn('1-ve', copy['en'])
         self.assertIn('1-ve', copy['tr'])
+
+
+FORWARDED_LOCALE = """String localized(
+  BuildContext context,
+  String english,
+  String turkish, {
+  Map<String, Object?> values = const {},
+  num? pluralCount,
+}) =>
+    (AppTranslations.maybeOf(context) ??
+            AppTranslations(
+              Localizations.maybeLocaleOf(context) ?? const Locale('en'),
+              const {},
+            ))
+        .text(english, turkish, values: values, pluralCount: pluralCount);"""
+CATALOG = """final class AppTranslations {
+  String text(
+    String english,
+    String turkish, {
+    Map<String, Object?> values = const {},
+    num? pluralCount,
+  }) {
+    final tag = canonicalLanguageTag(locale);
+    final id = appMessageIds[(english, turkish)];
+    var template = tag == 'tr' ? turkish : english;
+    if (pluralCount == 1 && id != null) {
+      template = appMessagePluralSources[id]?[tag == 'tr' ? 'trOne' : 'enOne'] ?? template;
+    }
+    return template;
+  }
+}"""
+
+
+def forwarded(source, catalog=CATALOG, extra=None):
+    return texts(guarded_dart_contexts({
+        'lib/app/app_locale.dart': FORWARDED_LOCALE,
+        'lib/app/app_translation_catalog.dart': catalog,
+        FILE: source, **(extra or {})}))
+
+
+class ForwardedDispatcherTests(unittest.TestCase):
+    call = ("import '../app_locale.dart'; a = localized(context, 'Read {v0}.', 'Oku {v0}.', "
+            "values: {'v0': 1}); b = localized(context, 'Read.', 'Oku.');")
+
+    def test_forwarded_dispatcher_classifies_tr_argument_with_named_values(self):
+        self.assertTrue({'Oku {v0}.', 'Oku.'} <= forwarded(self.call))
+        self.assertTrue(translation_text_proof(CATALOG))
+
+    def test_unknown_named_or_positional_extra_argument_fails_closed(self):
+        for call in ["localized(context, 'Read.', 'Yanlış.', other: 1);",
+                     "localized(context, 'Read.', 'Yanlış.', 'extra');",
+                     "localized(context, 'Read.', 'Yanlış.', values: {}, values: {});",
+                     "localized(context, english: 'Read.', 'Yanlış.', 'x');"]:
+            self.assertNotIn('Yanlış.', forwarded("import '../app_locale.dart'; " + call), call)
+
+    def test_catalog_that_can_render_turkish_off_the_tr_branch_fails_closed(self):
+        for old, new in [("tag == 'tr' ? turkish : english", "tag == 'tr' ? english : turkish"),
+                         ("var template = tag == 'tr' ? turkish : english;", "var template = turkish;"),
+                         ("final id =", "tag = 'tr'; final id ="),
+                         ("[tag == 'tr' ? 'trOne' : 'enOne']", "['trOne']"),
+                         ("return template;", "return template + turkish;")]:
+            broken = CATALOG.replace(old, new, 1)
+            self.assertNotEqual(broken, CATALOG)
+            self.assertFalse(translation_text_proof(broken), new)
+            self.assertNotIn('Oku.', forwarded(self.call, broken), new)
+
+    def test_second_reader_of_the_id_map_fails_closed(self):
+        self.assertNotIn('Oku.', forwarded(self.call, extra={
+            'lib/app/leak.dart': "String leak() => appMessageIds.keys.first.$2;"}))
+
+    def test_changed_forwarding_definition_fails_closed(self):
+        source = FORWARDED_LOCALE.replace('.text(english, turkish', '.text(turkish, english')
+        self.assertNotIn('Oku.', texts(guarded_dart_contexts({
+            'lib/app/app_locale.dart': source,
+            'lib/app/app_translation_catalog.dart': CATALOG, FILE: self.call})))
+
+    def test_turkish_map_only_read_as_tr_argument(self):
+        good = ("import '../app_locale.dart';\n"
+                "const Map<String, String> _names = <String, String>{'a': 'Gitar adı'};\n"
+                "String name(BuildContext context, String id, String en) {\n"
+                "  final tr = _names[id] ?? en;\n  return localized(context, en, tr);\n}")
+        self.assertIn('Gitar adı', forwarded(good))
+        leaked = good.replace('return localized(context, en, tr);',
+                              'return localized(context, tr, en);')
+        self.assertNotIn('Gitar adı', forwarded(leaked))
+        direct = good + "\nString raw(String id) => _names[id]!;"
+        self.assertNotIn('Gitar adı', forwarded(direct))
+
+
+class MessageIdMapTests(unittest.TestCase):
+    source = ('const appMessageIds = <(String, String), String>{\n'
+              '  ("Play\\nnow", "Çal\\nşimdi"): "0123456789abcdef",\n};\n'
+              'const appMessagePlaceholders = <String, Map<String, int>>{\n'
+              '  "0123456789abcdef": {"v0": 1},\n};\n'
+              'const appMessagePluralSources = <String, Map<String, String>>{\n'
+              '  "0123456789abcdef": {"enOne": "{v0} day", "trOne": "{v0} gün"},\n};\n')
+
+    def test_generated_map_structure_is_read_with_unescaped_values(self):
+        result = message_id_map(self.source)
+        self.assertEqual(result['keys'], [(2, 'Play\nnow', 'Çal\nşimdi')])
+        self.assertEqual(result['plural'], [(8, '{v0} day', '{v0} gün')])
+
+    def test_any_other_code_or_entry_shape_is_not_a_key_map(self):
+        for broken in [self.source + "String leak() => 'Sızıntı';",
+                       self.source.replace('"Çal\\nşimdi"', '"Çal${x}"'),
+                       self.source.replace('"0123456789abcdef",\n}', '"zz",\n}', 1),
+                       self.source.replace('): "0123456789abcdef"', ', "x"): "0123456789abcdef"', 1)]:
+            self.assertIsNone(message_id_map(broken))
+
+
+class PreferencePayloadTests(unittest.TestCase):
+    locale = """Future<void> write(String? languageTag) async {
+    if (languageTag != null && !supportedLanguageTags.contains(languageTag)) {
+      throw ArgumentError.value(languageTag, 'languageTag');
+    }
+    await pending.writeAsString(
+      jsonEncode({'schemaVersion': 1, 'languageTag': languageTag}),
+      flush: true,
+    );
+  }"""
+    theme = """enum AppThemePreference { system, light, dark }
+  Future<void> write(AppThemePreference preference) async {
+    await pending.writeAsString(
+      jsonEncode({'schemaVersion': 1, 'mode': preference.name}),
+      flush: true,
+    );
+  }"""
+
+    def test_locale_and_theme_payloads_are_preferences(self):
+        self.assertEqual(preference_payload_role(self.locale), 'locale')
+        self.assertEqual(preference_payload_role(self.theme), 'theme')
+
+    def test_measurement_like_or_unproven_payloads_stay_writers(self):
+        for broken in [
+                self.locale.replace("'languageTag': languageTag", "'history': languageTag"),
+                self.locale.replace("if (languageTag != null", "if (false"),
+                self.locale.replace("String? languageTag", "String? languageTag, List<double> a")
+                    .replace("'languageTag': languageTag", "'languageTag': a"),
+                self.locale + "\nawait File('a').writeAsBytes(bytes);",
+                self.theme.replace("dark }", "dark, angles }"),
+                self.theme.replace("preference.name", "rawSamples"),
+                self.theme.replace("flush: true,", "")]:
+            self.assertIsNone(preference_payload_role(broken), broken[-80:])
+
+
+GUITAR = """final class GuitarText {
+  const GuitarText(this.en, this.tr, {this.values = const {}});
+  final String en;
+  final String tr;
+  final Map<String, Object?> values;
+  String of(BuildContext context) => localized(context, en, tr, values: values);
+  factory GuitarText.fromJson(Map<String, dynamic> json) =>
+      GuitarText(json['en'] as String, json['tr'] as String);
+}"""
+
+
+class ForwardedGuitarTextTests(unittest.TestCase):
+    use = ("import '../guitar_journey.dart' show GuitarText;\n"
+           "final a = GuitarText('Bar {v0}', 'Ölçü {v0}', values: {'v0': 1});\n"
+           "final b = GuitarText('Wrong', 'Yanlış ölçü', other: 1);\n"
+           "final c = fail('piece title.tr');")
+
+    def contexts(self, use, guitar=GUITAR):
+        return forwarded(use, extra={'lib/app/guitar_journey.dart': guitar})
+
+    def test_values_named_argument_is_the_only_extra(self):
+        result = self.contexts(self.use)
+        self.assertIn('Ölçü {v0}', result)
+        self.assertNotIn('Yanlış ölçü', result)
+
+    def test_direct_tr_read_in_code_disables_the_guard(self):
+        self.assertNotIn('Ölçü {v0}', self.contexts(self.use + "\nString leak(GuitarText t) => t.tr;"))
+
+    def test_changed_of_dispatch_disables_the_guard(self):
+        broken = GUITAR.replace('localized(context, en, tr, values: values)',
+                                'localized(context, tr, en, values: values)')
+        self.assertNotIn('Ölçü {v0}', self.contexts(self.use, broken))
+
+
+class CatalogParityTests(unittest.TestCase):
+    def test_en_tr_catalog_values_must_equal_the_key_sides(self):
+        id_map = message_id_map(MessageIdMapTests.source)
+        good = {'messages': {'0123456789abcdef': {'one': '{v0} day', 'other': 'Play\nnow'}}}
+        self.assertEqual(catalog_parity(good, 0, id_map), ([], [], []))
+        drifted = {'messages': {'0123456789abcdef': 'Play later', 'ffffffffffffffff': 'x'}}
+        mismatched, missing, unknown = catalog_parity(drifted, 0, id_map)
+        self.assertEqual((mismatched, missing, unknown), (['0123456789abcdef'], [], ['ffffffffffffffff']))
+        self.assertEqual(catalog_parity({'messages': {}}, 1, id_map)[1], ['0123456789abcdef'])
 
 
 gate_json_original = gate.json_surface_strings

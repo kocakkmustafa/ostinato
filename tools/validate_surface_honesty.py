@@ -49,6 +49,9 @@ from surface_context import (body_side_allowed, dart_hand_context,
                              guarded_dart_contexts, hand_context, historical_body_report,
                              instructional_promise_word,
                              merged_dart_literals, paired_json_contexts,
+                             preference_payload_role, MESSAGE_ID_FILE,
+                             dart_unescape, forwarded_dispatcher_proven,
+                             message_id_map, catalog_parity,
                              without_labelled_turkish_quote)
 
 # ── A: vaat dili ────────────────────────────────────────────────────────────
@@ -1084,12 +1087,39 @@ def guarded_turkish_catalog_literals(dart_raw, source_text=None, precise=False):
         r"bool hasCurrentTurkishCatalogCopy\(String key, String source\)\s*=>\s*"
         r"(_turkishCopy)\.containsKey\(key\)\s*&&\s*"
         r"_sourceFingerprints\[key\]\s*==\s*_fingerprint\(source\)\s*;", src)
-    if not render or not current:
+    # Fourteen-locale render (2026-10-20): both reads are the TURKISH argument
+    # of the proven `localized` dispatcher, and each is behind the reviewed
+    # source-fingerprint check. Accepted only with that dispatcher proof.
+    forwarded = re.search(
+        r"String catalogCopy\(BuildContext context, String key, String source\)\s*\{\s*"
+        r"final releaseCopy = _referenceOnlyEnglishCopy\[key\];\s*"
+        r"if\s*\(\s*releaseCopy != null\s*&&\s*"
+        r"_sourceFingerprints\[key\]\s*==\s*_fingerprint\(source\)\s*\)\s*\{\s*"
+        r"return localized\(context, releaseCopy, (_turkishCopy)\[key\] \?\? releaseCopy\);\s*\}\s*"
+        r"return hasCurrentTurkishCatalogCopy\(key, source\)\s*"
+        r"\?\s*localized\(context, source, (_turkishCopy)\[key\]!\)\s*:\s*source;\s*\}", src)
+    if forwarded and current and render is None:
+        lib_sources = {str(f): strip_dart_comments(f.read_text(encoding="utf-8"))
+                       for f in Path("lib").rglob("*.dart")}
+        if source_text is not None:
+            lib_sources[str(path)] = src
+        if not forwarded_dispatcher_proven(lib_sources):
+            return set()
+        reference_positions = {m.start() for m in re.finditer(r'\b_turkishCopy\b', src)}
+        allowed_positions = {forwarded.start(1), forwarded.start(2), current.start(1)}
+        for pattern in (r'const\s+Map<String,\s*String>\s+(_turkishCopy)\s*=',):
+            allowed_positions.update(m.start(1) for m in re.finditer(pattern, src))
+        if reference_positions != allowed_positions:
+            return set()
+        render = forwarded
+    elif not render or not current:
         return set()
     # Only the guarded value lookup and containsKey probe may reference this
     # map. An alias or unconditional read invalidates its language context.
     reference_positions = {m.start() for m in re.finditer(r'\b_turkishCopy\b', src)}
     allowed_positions = {render.start(1), current.start(1)}
+    if render is forwarded:
+        allowed_positions.add(forwarded.start(2))
     for pattern in (r'const\s+Map<String,\s*String>\s+(_turkishCopy)\s*=',):
         allowed_positions.update(m.start(1) for m in re.finditer(pattern, src))
     if reference_positions != allowed_positions:
@@ -1462,6 +1492,13 @@ def selftest() -> int:
         encoding="utf-8")
     broken_guard = catalog_source.replace("languageCode != 'tr'",
                                           "languageCode == 'tr'", 1)
+    if broken_guard == catalog_source:
+        # Forwarded render: the TR copy moved into the ENGLISH argument.
+        broken_guard = catalog_source.replace(
+            "localized(context, source, _turkishCopy[key]!)",
+            "localized(context, _turkishCopy[key]!, source)", 1)
+    if broken_guard == catalog_source:
+        dead.append("TR sözlük locale-koruması mutasyonu kaynağa uygulanamadı")
     if guarded_turkish_catalog_literals(raw, broken_guard):
         dead.append("TR sözlük locale koruması bozulunca muafiyet sürüyor")
     broken_source_guard = catalog_source.replace(
@@ -1590,6 +1627,80 @@ def selftest() -> int:
         dead.append("build değişkeni prosa sayıldı — `$(...)` ayıklaması "
                     "kırılmış; kapsam sayısı şişer ve vakum kapısı anlamını "
                     "yitirir")
+    # ── K11 (2026-10-21): payload rolü, dispatcher zinciri, mesaj haritası ──
+    # Her tanıyıcı gerçek kaynakta POZİTİF, sentetik mutasyonda NEGATİF olmalı.
+    for f, role in (("lib/app/app_locale_preferences.dart", "locale"),
+                    ("lib/app/app_theme_preferences.dart", "theme")):
+        real = strip_dart_comments(Path(f).read_text(encoding="utf-8"))
+        if preference_payload_role(real) != role:
+            dead.append(f"tercih payload rolü gerçek {f} için kanıtlanamadı")
+        mutations = {
+            "ölçüm anahtarı": real.replace("'schemaVersion': 1,", "'schemaVersion': 1, 'history': angles,", 1),
+            "serbest değer": real.replace("'languageTag': languageTag", "'languageTag': rawInput", 1)
+                             .replace("'mode': preference.name", "'mode': rawInput", 1),
+            "ikinci yazma": real + "\nFuture<void> dump(List<double> a) async {\n"
+                            "  await File('x').writeAsBytes(a, flush: true);\n}\n",
+            "flush yok": real.replace("flush: true,", "", 1),
+        }
+        if role == "locale":
+            mutations["doğrulama yok"] = re.sub(
+                r"if \(languageTag != null && !supportedLanguageTags\.contains\(languageTag\)\) \{[^}]*\}",
+                "", real, count=1)
+        else:
+            mutations["enum genişledi"] = real.replace(
+                "enum AppThemePreference { system, light, dark }",
+                "enum AppThemePreference { system, light, dark, angles }", 1)
+        for name, mutated in mutations.items():
+            if mutated == real:
+                dead.append(f"tercih payload mutasyonu ({name}) {f}'e uygulanamadı")
+            elif preference_payload_role(mutated) is not None:
+                dead.append(f"tercih payload rolü mutasyonda ({name}) hâlâ kabul edildi: {f}")
+    for f in ("lib/app/session_store.dart", "lib/app/guitar_journey_progress.dart"):
+        if preference_payload_role(strip_dart_comments(Path(f).read_text(encoding="utf-8"))):
+            dead.append(f"gerçek kullanıcı verisi yazıcısı tercih sayıldı: {f}")
+    lib_sources = {str(f): strip_dart_comments(f.read_text(encoding="utf-8"))
+                   for f in Path("lib").rglob("*.dart")}
+    if not forwarded_dispatcher_proven(lib_sources):
+        dead.append("14 dilli localized→AppTranslations.text zinciri gerçek kaynakta kanıtlanamadı")
+    catalog = "lib/app/app_translation_catalog.dart"
+    for name, old_text, new_text in (
+            ("TR dalı ters", "var template = tag == 'tr' ? turkish : english;",
+             "var template = tag == 'tr' ? english : turkish;"),
+            ("koşulsuz TR", "var template = tag == 'tr' ? turkish : english;",
+             "var template = turkish;"),
+            ("tag yeniden atandı", "final id = appMessageIds[(english, turkish)];",
+             "tag = 'tr'; final id = appMessageIds[(english, turkish)];"),
+            ("çoğul TR koşulsuz", "[tag == 'tr' ? 'trOne' : 'enOne']", "['trOne']")):
+        mutated = dict(lib_sources)
+        mutated[catalog] = lib_sources[catalog].replace(old_text, new_text, 1)
+        if mutated[catalog] == lib_sources[catalog]:
+            dead.append(f"dispatcher mutasyonu ({name}) uygulanamadı")
+        elif forwarded_dispatcher_proven(mutated):
+            dead.append(f"dispatcher mutasyonunda ({name}) TR bağlamı hâlâ kanıtlı sayıldı")
+    reader = dict(lib_sources)
+    reader["lib/app/leak.dart"] = r"String leak() => appMessageIds.keys.first.$2;"
+    if forwarded_dispatcher_proven(reader):
+        dead.append("mesaj haritasının ikinci okuyucusu dispatcher kanıtını bozmadı")
+    named_ok = guarded_dart_contexts({
+        "lib/app/app_locale.dart": lib_sources["lib/app/app_locale.dart"],
+        catalog: lib_sources[catalog],
+        "lib/app/example.dart": "import 'app_locale.dart'; x = localized(context, 'Read {v0}.', "
+                                "'Oku {v0}.', values: {'v0': 1}); y = localized(context, "
+                                "'Wrong.', 'Yanlış.', other: 1);"})
+    named_texts = {t for _, t in named_ok}
+    if "Oku {v0}." not in named_texts or "Yanlış." in named_texts:
+        dead.append("localized adlandırılmış argüman (values/pluralCount) sınırı yanlış")
+    id_source = lib_sources[MESSAGE_ID_FILE]
+    if message_id_map(id_source) is None:
+        dead.append("mesaj-kimliği haritası gerçek kaynakta yapısal olarak okunamadı")
+    for name, mutated in (
+            ("kod eklendi", id_source + "\nString leak() => 'Sızıntı metni';\n"),
+            ("interpolasyon", id_source.replace('("Bass", "Fa")', '("Bass", "Fa${x}")', 1)),
+            ("üçlü kayıt", id_source.replace('("Bass", "Fa")', '("Bass", "Fa", "x")', 1))):
+        if mutated == id_source:
+            dead.append(f"mesaj haritası mutasyonu ({name}) uygulanamadı")
+        elif message_id_map(mutated) is not None:
+            dead.append(f"mesaj haritası mutasyonunda ({name}) yapı hâlâ kabul edildi")
     if dead:
         print(f"⛔ {len(dead)} ÖLÜ DESEN/YOL (pozitif ikiz başarısız):")
         for d in dead:
@@ -1612,7 +1723,69 @@ def main() -> int:
     # ayrı bir muafiyet katmanı yaratmak, bugün kapatılan deliğin kendisiydi.
     permission_surfaces, surface_report = claim_bearing_text_surfaces()
     surfaces += permission_surfaces
+    # Tüketici dizini filtre ÖNCESİ kurulur: "Fa"/"Summary" gibi tek kelimelik
+    # gerçek etiketler tanımlayıcı-biçimli diye yüzeyden düşse de tüketicidir.
+    all_texts = list(surfaces)
     surfaces = [(w, t) for w, t in surfaces if not IDENTIFIER_LIKE.match(t)]
+
+    # ── Üretilmiş mesaj-kimliği haritası (2026-10-21, K11) ──────────────────
+    # `app_message_ids.dart` kullanıcıya metin GÖSTERMEZ: (EN, TR) çifti,
+    # kanıtlı `AppTranslations.text` içinde yalnız katalog ANAHTARI olarak
+    # okunur; gösterilen şablon çağıranın argümanı veya cihaz dilinin
+    # kataloğudur. Bu yüzden bir anahtar çifti ancak İKİ metni de başka bir
+    # gerçek yüzeyde (lib/ Dart literali veya sevk edilen JSON) TÜKETİLİYORSA
+    # bu dosyadaki kopyası yüzeyden düşer — o tüketici yüzey bütün kurallardan
+    # kendi bağlamıyla geçer. Tüketicisi bulunmayan anahtar SESSİZCE düşmez:
+    # ayrı ihlal olarak adıyla yazılır ve metinleri normal yüzey olarak kalır.
+    # Yapı, dispatcher veya tek-okuyucu kanıtı bozulursa harita hiç tanınmaz.
+    dart_sources = {file: strip_dart_comments(Path(file).read_text(encoding="utf-8"))
+                    for file in {f for f, _, _ in dart_raw}}
+    id_map = (message_id_map(dart_sources[MESSAGE_ID_FILE])
+              if MESSAGE_ID_FILE in dart_sources and
+              forwarded_dispatcher_proven(dart_sources) else None)
+    id_map_bound, id_map_orphans, plural_tr = 0, [], set()
+    if id_map is not None:
+        prefix = MESSAGE_ID_FILE + ':'
+        dart_where = {f"{f}:{ln}" for f, ln, _ in dart_raw}
+        consumed = {dart_unescape(t) if w in dart_where else t
+                    for w, t in all_texts if not w.startswith(prefix)}
+        dropped = set()
+        for line, en, tr in id_map['keys']:
+            where = f'{prefix}{line}'
+            if en in consumed and tr in consumed:
+                dropped.add((where, en))
+                dropped.add((where, tr))
+                id_map_bound += 1
+            else:
+                id_map_orphans.append((where, en, tr))
+        for line, _, tr in id_map['plural']:
+            plural_tr.add((f'{prefix}{line}', tr))
+        surfaces = [(w, t) for w, t in surfaces
+                    if not (w.startswith(prefix) and (w, dart_unescape(t)) in dropped)]
+        # Tüketicisiz anahtar ERİŞİLEMEZ: `text` bir kimliği yalnız çağıranın
+        # tam (english, turkish) eşitliğiyle seçer; lib/ literal ve JSON
+        # çiftlerinin hiçbiri onu taşımaz ve çalışma zamanında birleştirilen
+        # çift yok. Yine de SESSİZ düşmez: kapsam satırında sayılır ve bu
+        # metinler ürün yüzeyi sayılmaz (eski içerik revizyonu artığı).
+        unreachable = {(w, t) for w, en, tr in id_map_orphans for t in (en, tr)}
+        surfaces = [(w, t) for w, t in surfaces
+                    if not (w.startswith(prefix) and (w, dart_unescape(t)) in unreachable)]
+        # Gösterilen İngilizce/Türkçe şablon katalog DEĞERİDİR; değer kaynak
+        # anahtarıyla bire bir aynı değilse taranmamış bir yüzey olurdu.
+        for tag, side in (('en', 0), ('tr', 1)):
+            catalog_path = Path(f'assets/l10n/{tag}.json')
+            parity = (catalog_parity(json.loads(catalog_path.read_text(encoding='utf-8')),
+                                     side, id_map) if catalog_path.exists() else None)
+            if parity is None:
+                violations.append(f"[katalog eşliği] {catalog_path}: okunamadı veya biçimi bilinmiyor")
+                continue
+            mismatched, missing, unknown = parity
+            for label, ids in (('kaynak metinden farklı değer', mismatched),
+                               ('eksik kimlik', missing), ('bilinmeyen kimlik', unknown)):
+                if ids:
+                    violations.append(
+                        f"[katalog eşliği] {catalog_path}: {len(ids)} {label} "
+                        f"({', '.join(ids[:5])}) — gösterilen metin taranan kaynak çiftle bağlı değil")
 
     json_locales, hand_scopes = {}, {}
     for asset in shipped_json_assets():
@@ -1897,8 +2070,16 @@ def main() -> int:
     # altı özne TASARIM GEREĞİ kalıcı `False` kalacağından, kümeye
     # bakmadan `stale` kontrolü tek başına bu kapıyı SONSUZA DEK kırmızı
     # bırakırdı (D14/O-154 dersi).
+    # Payload rolü (2026-10-21): yalnız locale etiketi veya tema modu yazdığı
+    # YAPISAL olarak kanıtlanan tercih yazıcıları ölçüm öznelerini yeniden
+    # açmaz. Kanıt dosya adına değil yazma çağrısının kendisine bağlı: yeni
+    # bir anahtar, serbest değer veya ikinci bir yazma rolü düşürür.
+    preference_writers = {
+        w: preference_payload_role(strip_dart_comments(Path(w).read_text(encoding="utf-8")))
+        for w in writers}
     new_writers = [w for w in writers
-                   if Path(w).name not in RETENTION_WRITERS_RECONCILED]
+                   if Path(w).name not in RETENTION_WRITERS_RECONCILED
+                   and preference_writers[w] is None]
     if new_writers:
         stale = [s for s, f in RETENTION_FACTS.items() if not f["stored"]]
         violations.append(
@@ -1955,6 +2136,8 @@ def main() -> int:
                 where.endswith('.tr')):
                 continue
             if json_locales.get(where) == 'tr':
+                continue
+            if (where, dart_unescape(text)) in plural_tr:
                 continue
             # Bu dosyanın yalnız _turkishCopy MAP DEĞERLERİ TR yolunda
             # gösterilir. Locale veya kaynak-fingerprint kapısı değişirse
@@ -2086,6 +2269,16 @@ def main() -> int:
     # O-100: yüzey SINIFI başına dosya/prosa sayımı — bir sınıfın SIFIR
     # olması da ADIYLA yazılır. "Mağaza: 0 dosya" cümlesi, o yüzeyin
     # taranmadığını değil VAR OLMADIĞINI söyler; ikisi karıştırılamaz.
+    if id_map is not None:
+        catalogs = sorted(Path('assets/l10n').glob('*.json'))
+        print(f"   mesaj-kimliği haritası (K11): {len(id_map['keys'])} anahtar · "
+              f"{id_map_bound} tüketici yüzeye bağlandı (kopyası düştü) · "
+              f"{len(id_map_orphans)} tüketicisiz/erişilemez anahtar (ürün yüzeyi değil, "
+              f"sayılıyor) · {len(plural_tr)} TR çoğul kaynağı · en/tr katalog değerleri "
+              f"kaynakla eş; {len(catalogs) - 2} diğer dil kataloğu EN/TR kelime "
+              f"kurallarının kapsamı DIŞINDA (anlam incelemesi ayrı)")
+    print(f"   tercih yazıcıları (payload rolü): "
+          f"{', '.join(f'{Path(w).name}={r}' for w, r in sorted(preference_writers.items()) if r) or 'yok'}")
     print(f"   iddia↔ölçüm bağı (O-102, iki yönlü): {bound} iddia-özne "
           f"çifti ÖLÇÜME BAĞLANDI · {len(RETENTION_FACTS)} özne kaydı (her "
           f"biri ölçüm ADRESİYLE) · özne çıkarılamayan hüküm {unresolved} "

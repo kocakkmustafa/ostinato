@@ -72,6 +72,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 # Bu depoda üç kapı ham metin tarayıp "sessiz yeşil" verdi (2026-08-13 taraması);
 # aynı sınıfa dördüncü kez düşmemek için ayıklayıcı ilk satırdan itibaren burada.
 from validate_surface_honesty import strip_dart_comments  # noqa: E402
+from surface_context import preference_payload_role  # noqa: E402
 
 LIB = Path("lib")
 
@@ -134,7 +135,10 @@ def detect(prod_sources):
             artifact_files.add(name)
         if EPHEMERALITY_CLAIM.search(s):
             claim_files.add(name)
+    roles = {name: preference_payload_role(strip_dart_comments(text))
+             for name, text in prod_sources.items() if name in write_files}
     return {
+        "preferenceRoles": {k: v for k, v in roles.items() if v},
         "writeCallSites": sites,
         "writeFiles": sorted(write_files),
         # Kullanıcı artefaktını ANAN dosyalardan herhangi biri yazıyor mu.
@@ -155,13 +159,21 @@ def detect(prod_sources):
 #
 # ⚠️ Bu bir MUAFİYET değil, KARAR NOKTASI.
 DECLARED = {
-    "writeCallSites": 4,
-    "writeFiles": ["guitar_journey_progress.dart", "onboarding_store.dart",
+    "writeCallSites": 6,
+    "writeFiles": ["app_locale_preferences.dart", "app_theme_preferences.dart",
+                   "guitar_journey_progress.dart", "onboarding_store.dart",
                    "pose_model.dart", "session_store.dart"],
     "userArtifactMayBePersisted": True,
     "userArtifactFiles": ["live_screen.dart", "review_screen.dart",
                           "session_store.dart"],
     "$why": (
+        "GÜNCEL ENVANTER 2026-10-21: `app_locale_preferences.dart` ve "
+        "`app_theme_preferences.dart` uygulama düzeyinde birer sunum tercihi "
+        "dosyası yazar (`ostinato.locale.v1.json`: şema sürümü + desteklenen "
+        "dil etiketi veya null; `ostinato.theme.v1.json`: şema sürümü + "
+        "system/light/dark). Kullanıcı üretimi, ölçüm veya hesap verisi "
+        "değildir; payload rolü `preference_payload_role` ile yapısal "
+        "olarak kanıtlanır. "
         "GÜNCEL ENVANTER 2026-10-16: mevcut `guitar_journey_progress.dart` "
         "ders kimliği/sürümü, görülme ve pratik zamanları, pratik sayısı ve "
         "öz beyan tamamlama zamanını `guitar_journey_progress.v1.json`a "
@@ -241,6 +253,14 @@ def coupling_violation(actual):
 #: **sınıflandırılmadan geçemez** — yani *"ne sakladığını söyle"* zorunluluğu
 #: koda gömülür, kayıtlara değil.
 WRITE_CLASSES = {
+    "app_locale_preferences.dart": (
+        "SUNUM TERCİHİ — yalnız şema sürümü ve desteklenen 14 dilden birinin "
+        "etiketi (veya sistem dili için null). Hesap, ilerleme veya ölçüm "
+        "taşımaz. Silinirse uygulama cihaz diline döner; kullanıcı emeği "
+        "kaybolmaz."),
+    "app_theme_preferences.dart": (
+        "SUNUM TERCİHİ — yalnız şema sürümü ve system/light/dark modu. "
+        "Silinirse görünüm sisteme döner; kullanıcı emeği kaybolmaz."),
     "guitar_journey_progress.dart": (
         "KULLANICI ÜRETİMİ — yazılı gitar yolunda sürümlü ders kimliği, "
         "görülme/pratik zamanları, pratik sayısı ve öz beyan tamamlama "
@@ -267,6 +287,10 @@ WRITE_CLASSES = {
 }
 
 
+PREFERENCE_CLASSES = {"app_locale_preferences.dart": "locale",
+                      "app_theme_preferences.dart": "theme"}
+
+
 def check(declared, actual):
     bad = []
     for f in actual["writeFiles"]:
@@ -275,6 +299,12 @@ def check(declared, actual):
                        f"`WRITE_CLASSES`a gerekçesiyle eklenmeli. Bir ürünün "
                        f"neyi sakladığı, saklamaya BAŞLADIĞI anda yazılır; "
                        f"sonradan hatırlanmaz")
+    # Tercih sınıfı bir beyan değil kanıt ister: dosyanın her yazması
+    # yapısal olarak locale/theme payload'ı olmalı (fail-closed).
+    for f, role in PREFERENCE_CLASSES.items():
+        if f in actual["writeFiles"] and actual.get("preferenceRoles", {}).get(f) != role:
+            bad.append(f"«{f}» SUNUM TERCİHİ sınıfında ama yazma payload'ı "
+                       f"«{role}» rolü olarak kanıtlanamadı — sınıf yeniden ölçülmeli")
     cv = coupling_violation(actual)
     if cv:
         bad.append(cv)
@@ -313,6 +343,22 @@ def selftest() -> int:
     if a["writeCallSites"] != 0:
         dead.append("YORUM BAĞIŞIKLIĞI ÖLDÜ — yorumdaki yazma sayılıyor; "
                     "kapı 'saklıyor' der, ürün saklamaz")
+    # ②b TERCİH SINIFI KANIT İSTER: tercih dosyası ölçüm yazmaya başlarsa
+    #     sınıfı düşmeli (beyan kendi kanıtı değildir).
+    pref = ("Future<void> write(String? languageTag) async {\n"
+            "  if (languageTag != null && !supportedLanguageTags.contains(languageTag)) {\n"
+            "    throw ArgumentError.value(languageTag);\n  }\n"
+            "  await f.writeAsString(\n"
+            "    jsonEncode({'schemaVersion': 1, 'languageTag': languageTag}),\n"
+            "    flush: true,\n  );\n}")
+    good = detect({"app_locale_preferences.dart": pref})
+    bad = detect({"app_locale_preferences.dart": pref.replace(
+        "'languageTag': languageTag", "'history': languageTag")})
+    if good["preferenceRoles"] != {"app_locale_preferences.dart": "locale"}:
+        dead.append("TERCİH ROLÜ kör — kanıtlı locale payload'ı tanınmadı")
+    if not any("SUNUM TERCİHİ sınıfında" in b for b in check(DECLARED, bad)):
+        dead.append("TERCİH SINIFI KANITSIZ GEÇİYOR — ölçüm benzeri payload "
+                    "sunum tercihi sayıldı")
     # ③ artefakt + yazma AYNI dosyada → saklanma İHTİMALİ açılır
     a = detect({"live.dart": "SessionSummary s; f.writeAsString(j);"})
     if not a["userArtifactMayBePersisted"]:
@@ -375,7 +421,7 @@ def selftest() -> int:
     print(f"✅ kalıcılık kapısı öz-testi GEÇTİ — yazma deseni · yorum "
           f"bağışıklığı · artefakt kesişimi (İKİ yönde) · vakum · beyan "
           f"mekanizması (sayı + gerekçe) · sınıflandırma zorunluluğu · BAĞ (üç yön) · "
-          f"beyan-yorum bağışıklığı: ON BİR kontrolün on biri de canlı")
+          f"beyan-yorum bağışıklığı: ON İKİ kontrolün on ikisi de canlı")
     return 0
 
 
