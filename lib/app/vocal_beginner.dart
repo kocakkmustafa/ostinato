@@ -155,7 +155,7 @@ final class VocalCourse {
     lessons = List<VocalLesson>.unmodifiable([
       for (final lesson in m['lessons'] as List) VocalLesson(lesson),
     ]);
-    if (study.length != 8 || lessons.length != 16) {
+    if (study.length != 8 || lessons.length != 22) {
       throw const FormatException('Incomplete vocal foundation');
     }
     for (var i = 0; i < lessons.length; i++) {

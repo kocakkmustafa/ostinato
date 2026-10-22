@@ -10,8 +10,8 @@
     "tr": "Önceki çalım gerekmez. Sağ elli dört telli soprano/konser/tenor, tanımlanmış yüksek Sol G4 C4 E4 A4 teller, dış akort aracı, destekli oturuş ve kısa rahat çalışma. Kurs ses referansı veya akort doğrulaması sunmaz."
   },
   "exit": {
-    "en": "Identify the specified tuning and string/fret directions; read four chord grids and a two-bar tab; form C/Am/F/G7; count 4/4, down/up strokes and counted rests; play an original eight-bar study and compare a specific correction at the same tempo. All performance checks are your own observation.",
-    "tr": "Belirtilen akordu ve tel/perde yönlerini tanımla; dört akor ızgarası ve iki ölçü tab oku; Do/La minör/Fa/Sol yedi kur; 4/4, aşağı/yukarı tarama ve sayılan susları kullan; özgün sekiz ölçü etüdü çal ve aynı tempoda somut düzeltmeyi karşılaştır. Tüm çalım kontrolleri kendi gözlemindir."
+    "en": "Identify the specified tuning and string/fret directions; read chord grids and a two-bar tab; form C/Am/F/G7 and G/Em/Dm/A7; count 4/4 and 3/4, use down/up strokes, a common strum pattern, counted rests and a first fingerpicking pattern; play an original eight-bar study and a song-form chart; then map your own chart and run a practice cycle comparing a specific correction at the same tempo. All performance checks are your own observation.",
+    "tr": "Belirtilen akordu ve tel/perde yönlerini tanı; akor şemalarını ve iki ölçülük tabı oku; Do/La minör/Fa/Sol7 ile Sol/Mi minör/Re minör/La7'yi kur; 4/4 ve 3/4 say, aşağı/yukarı vuruşları, yaygın tarama kalıbını, sayılan susları ve ilk parmakla çalma kalıbını kullan; özgün sekiz ölçülük etüdü ve şarkı formundaki şemayı çal; sonra kendi şemanı haritala ve aynı tempoda somut bir düzeltmeyi karşılaştıran çalışma döngüsü uygula. Tüm çalım kontrolleri kendi gözlemindir."
   },
   "tuning": "high-G:G4-C4-E4-A4",
   "chords": [
@@ -683,16 +683,160 @@
     {
       "id": "ukulele-18",
       "title": {
+        "en": "G major and E minor",
+        "tr": "Sol majör ve Mi minör"
+      },
+      "teach": {
+        "en": "Written in 4→1 string order, G is 0232: index 1 on string 3 fret 2, middle 2 on string 1 fret 2, ring 3 on string 2 fret 3; string 4 open. Em is 0432: ring 3 on string 3 fret 4, middle 2 on string 2 fret 3, index 1 on string 1 fret 2. G and Em share the notes G and B. A comfortable alternative Em is 0402 if the full shape is too wide.",
+        "tr": "4→1 tel sırasıyla Sol 0232'dir: işaret 1, 3. telde 2. perde; orta 2, 1. telde 2. perde; yüzük 3, 2. telde 3. perde; 4. tel açık. Mi minör 0432'dir: yüzük 3, 3. telde 4. perde; orta 2, 2. telde 3. perde; işaret 1, 1. telde 2. perde. Sol ile Mi minör, Sol ve Si notalarını paylaşır. Tam şekil çok genişse rahat bir Mi minör seçeneği 0402'dir."
+      },
+      "practice": {
+        "en": "Form G, pluck each string separately, then strum gently four downstrokes. Do the same for Em. Then change G | Em | G | Em, one bar each, strumming on beat 1 and letting it ring, forming the next chord during beat 4.",
+        "tr": "Sol'ü kur, her teli ayrı çek, sonra hafifçe dört aşağı vuruş tara. Mi minör için de aynısını yap. Sonra her biri bir ölçü olmak üzere Sol | Mi minör | Sol | Mi minör değiştir; 1. vuruşta tarayıp çınlat, sonraki akoru 4. vuruşta kur."
+      },
+      "check": {
+        "en": "Does every string of G and Em sound clearly before I add rhythm?",
+        "tr": "Ritim eklemeden önce Sol ve Mi minörün her teli net çalıyor mu?"
+      },
+      "recover": {
+        "en": "If a string is muted, pluck strings one at a time and adjust the finger touching it; arch the finger and place it just behind the fret wire.",
+        "tr": "Bir tel boğuluyorsa telleri tek tek çek ve ona değen parmağı ayarla; parmağı kavisle ve perde telinin hemen gerisine koy."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "ukulele-19",
+      "title": {
+        "en": "D minor and A seventh",
+        "tr": "Re minör ve La yedi"
+      },
+      "teach": {
+        "en": "Dm is 2210: middle 2 on string 4 fret 2, ring 3 on string 3 fret 2, index 1 on string 2 fret 1; string 1 open. A7 is 0100: index 1 on string 3 fret 1, other strings open. In the key of F, F, Dm and C belong together; A7 leads well into Dm. Notice that F (2010) and Dm (2210) differ by one finger.",
+        "tr": "Re minör 2210'dur: orta 2, 4. telde 2. perde; yüzük 3, 3. telde 2. perde; işaret 1, 2. telde 1. perde; 1. tel açık. La7 0100'dür: işaret 1, 3. telde 1. perde, diğer teller açık. Fa tonunda Fa, Re minör ve Do birlikte kullanılır; La7 Re minöre iyi bağlanır. Fa (2010) ile Re minörün (2210) tek parmakla ayrıldığına dikkat et."
+      },
+      "practice": {
+        "en": "Change F → Dm by adding one finger, back and forth slowly. Then play A7 → Dm. Then the loop F | Dm | A7 | Dm, one bar each with four downstrokes, keeping fingers that stay in place on the strings.",
+        "tr": "Fa → Re minör geçişini tek parmak ekleyerek yavaşça ileri geri yap. Sonra La7 → Re minör çal. Ardından her biri dört aşağı vuruşlu bir ölçü olarak Fa | Re minör | La7 | Re minör döngüsünü çal; yerinde kalan parmakları tellerde tut."
+      },
+      "check": {
+        "en": "Can I keep the shared finger down when changing F to Dm?",
+        "tr": "Fa'dan Re minöre geçerken ortak parmağı basılı tutabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If Dm buzzes, check that the index on fret 1 is close to the fret wire and the ring finger does not touch string 2.",
+        "tr": "Re minör cızırdarsa 1. perdedeki işaret parmağının perde teline yakın olduğunu ve yüzük parmağının 2. tele değmediğini kontrol et."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "ukulele-20",
+      "title": {
+        "en": "A common strum and a waltz strum",
+        "tr": "Yaygın bir tarama ve vals taraması"
+      },
+      "teach": {
+        "en": "A strum pattern places D and U in the eight half-beat slots of a bar. A common pattern is D, D U, U D U: slots D · D U · U D U, with no stroke on the 'and' of 1 and on beat 3. Keep the hand moving down and up all the time; only touch the strings where a stroke is written. In 3/4 a simple waltz strum is D D D or D D U D U.",
+        "tr": "Tarama kalıbı D ve U'yu bir ölçünün sekiz yarım vuruşluk yuvasına yerleştirir. Yaygın kalıp A, A Y, Y A Y'dir (D, D U, U D U): yuvalar D · D U · U D U; 1'in 've'sinde ve 3. vuruşta vuruş yok. El sürekli aşağı yukarı hareket etsin; yalnız vuruş yazan yerde tellere değ. 3/4'te basit vals taraması D D D veya D D U D U'dur."
+      },
+      "practice": {
+        "en": "On a muted strum (left hand resting lightly on the strings), count 1 & 2 & 3 & 4 & and play D · D U · U D U for four bars. Then play it on C. Then on C | Am | F | G7. For 3/4, play D D U D U on C | G | G | C, counting 1 & 2 & 3 &.",
+        "tr": "Boğuk taramayla (sol el tellerde hafifçe dururken) 1 ve 2 ve 3 ve 4 ve say ve dört ölçü D · D U · U D U çal. Sonra Do üzerinde çal. Sonra Do | La minör | Fa | Sol7 üzerinde. 3/4 için Do | Sol | Sol | Do üzerinde 1 ve 2 ve 3 ve sayarak D D U D U çal."
+      },
+      "check": {
+        "en": "Does my hand keep moving evenly even where there is no stroke?",
+        "tr": "Vuruş olmayan yerlerde bile elim düzenli hareket etmeyi sürdürüyor mu?"
+      },
+      "recover": {
+        "en": "If the pattern falls apart, play only D on every beat, then add the U before beat 3 and 4, one addition at a time.",
+        "tr": "Kalıp dağılırsa yalnız her vuruşta D çal, sonra 3 ve 4'ten önceki U'yu teker teker ekle."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "ukulele-21",
+      "title": {
+        "en": "First fingerpicking pattern",
+        "tr": "İlk parmakla çalma kalıbı"
+      },
+      "teach": {
+        "en": "Fingerpicking plays chord notes one at a time. Let the thumb p play string 4 (and sometimes 3), index i string 2 and middle m string 1. A simple pattern over one bar of 4/4 in eighths: p i m i p i m i. Hold the full chord shape so each note rings into the next.",
+        "tr": "Parmakla çalma akor notalarını tek tek çalar. Başparmak p 4. teli (bazen 3.), işaret i 2. teli, orta m 1. teli çalsın. 4/4'lük bir ölçüde sekizliklerle basit kalıp: p i m i p i m i. Her nota bir sonrakine çınlasın diye tam akor şeklini tut."
+      },
+      "practice": {
+        "en": "Without the left hand, play open strings p i m i p i m i slowly for four bars. Then hold C and play the pattern for two bars, then Am for two bars. Then C | Am | F | G7 with one bar each. Keep the thumb relaxed and the wrist still.",
+        "tr": "Sol el olmadan açık tellerde dört ölçü yavaşça p i m i p i m i çal. Sonra Do'yu tut ve kalıbı iki ölçü çal, sonra La minörde iki ölçü. Ardından her biri bir ölçü olarak Do | La minör | Fa | Sol7. Başparmağı gevşek, bileği sabit tut."
+      },
+      "check": {
+        "en": "Are the eight notes even, and does the chord keep ringing?",
+        "tr": "Sekiz nota düzenli mi ve akor çınlamayı sürdürüyor mu?"
+      },
+      "recover": {
+        "en": "If fingers tangle, practise only p i p i, then add m; say the finger names aloud in time.",
+        "tr": "Parmaklar karışırsa yalnız p i p i çalış, sonra m ekle; parmak adlarını zamanında sesli söyle."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "ukulele-22",
+      "title": {
+        "en": "From a chord chart to a song form",
+        "tr": "Akor şemasından şarkı formuna"
+      },
+      "teach": {
+        "en": "A chord chart lists chords per bar, often in sections such as verse and chorus. Repeat signs or written repeats tell you to play a section again. A short introduction (for example two bars of the first chord) and a clear ending (one strum on the last chord, let ring) make a performance feel complete.",
+        "tr": "Akor şeması her ölçünün akorunu, çoğu zaman kıta ve nakarat gibi bölümler halinde listeler. Tekrar işaretleri veya yazılı tekrarlar bir bölümü yeniden çalmanı söyler. Kısa bir giriş (örneğin ilk akordan iki ölçü) ve net bir bitiş (son akorda tek tarama, çınlasın) çalmayı tamamlanmış hissettirir."
+      },
+      "practice": {
+        "en": "Play this original chart with the lesson 20 strum: Intro C | C. Verse C | Am | F | G7 (twice). Chorus F | G7 | C | Am | F | G7 | C | C. End: one strum on C and let it ring. Count one silent bar before starting.",
+        "tr": "Ders 20 taramasıyla bu özgün şemayı çal: Giriş Do | Do. Kıta Do | La minör | Fa | Sol7 (iki kez). Nakarat Fa | Sol7 | Do | La minör | Fa | Sol7 | Do | Do. Bitiş: Do'da tek tarama, çınlasın. Başlamadan önce bir sessiz ölçü say."
+      },
+      "check": {
+        "en": "Can I play through the sections without stopping at the joins?",
+        "tr": "Bölüm geçişlerinde durmadan baştan sona çalabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If a join stops you, loop only the last bar of one section and the first bar of the next.",
+        "tr": "Bir geçiş seni durduruyorsa yalnız bir bölümün son ölçüsü ile sonrakinin ilk ölçüsünü döngüye al."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "ukulele-23",
+      "title": {
+        "en": "Map a chart and run your own practice cycle",
+        "tr": "Bir şemayı haritala ve kendi çalışma döngünü uygula"
+      },
+      "teach": {
+        "en": "Choose a chord chart you may use for yourself, or write your own with chords from this course. Map it: time signature, sections and repeats, every chord change, the hardest change, and a strum or picking pattern. A practice cycle then has four parts: a short warm-up (changes from lessons 18–19), work on the hardest change, one full play-through at a chosen tempo, and a written note.",
+        "tr": "Kendin için kullanabileceğin bir akor şeması seç ya da bu kursun akorlarıyla kendininkini yaz. Haritala: ölçü işareti, bölümler ve tekrarlar, her akor değişimi, en zor değişim ve bir tarama veya parmakla çalma kalıbı. Sonra çalışma döngüsünün dört parçası vardır: kısa ısınma (ders 18–19 değişimleri), en zor değişime çalışma, seçilen tempoda bir kez baştan sona çalma ve yazılı not."
+      },
+      "practice": {
+        "en": "Write the map, then run one cycle and note: tempo, the hardest change and what you observed (late / muted string / lost strum / no observed issue / uncertain). On another day repeat the same play-through at the same tempo and compare that change: improved, unchanged or uncertain. Write the next focus.",
+        "tr": "Haritayı yaz, sonra bir döngü uygula ve not et: tempo, en zor değişim ve gözlediğin (geç / boğuk tel / kaybolan tarama / gözlenen sorun yok / belirsiz). Başka bir gün aynı tempoda aynı çalmayı tekrarla ve o değişimi karşılaştır: iyileşti, aynı kaldı veya belirsiz. Sıradaki odağı yaz."
+      },
+      "check": {
+        "en": "Can I plan, run and compare a practice session without step-by-step help?",
+        "tr": "Adım adım yardım olmadan bir çalışmayı planlayıp uygulayıp karşılaştırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the chart is too hard, keep two chords and one pattern; a short complete cycle still counts. A teacher can help with individual technique.",
+        "tr": "Şema çok zorsa iki akor ve tek kalıp tut; kısa ama tam bir döngü yine sayılır. Bireysel teknik için öğretmen yardımcı olabilir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "ukulele-24",
+      "title": {
         "en": "Beginner exit review",
         "tr": "Başlangıç çıkış değerlendirmesi"
       },
       "teach": {
-        "en": "Review the identified high-G setup and external tuning check, 4→1 strings, fret/finger distinction, C/Am/F/G7 diagrams, 4/4 count, down/up directions, ringing versus rests, tab decoding and the original study. This is a bounded written beginner foundation, not all ukulele training, a grade qualification or sensor-confirmed mastery.",
-        "tr": "Tanımlanmış yüksek Sol düzenini ve dış akort kontrolünü, 4→1 telleri, perde/parmak ayrımını, Do/La minör/Fa/Sol yedi çizimlerini, 4/4 sayımı, aşağı/yukarı yönlerini, çınlama/sus ayrımını, tab çözümünü ve özgün etüdü gözden geçir. Bu sınırlı yazılı başlangıç temelidir; tüm ukulele eğitimi, sınav derecesi veya sensörle doğrulanmış ustalık değildir."
+        "en": "Review the identified high-G setup and external tuning check, 4→1 strings, fret/finger distinction, the C/Am/F/G7 diagrams and the G, Em, Dm and A7 shapes, 4/4 and 3/4 counts, down/up directions and strum patterns, ringing versus rests, a first fingerpicking pattern, tab decoding, the original study and a song-form chart. This is a bounded written beginner foundation, not all ukulele training, a grade qualification or sensor-confirmed mastery.",
+        "tr": "Tanımlanmış yüksek Sol düzenini ve dış akort kontrolünü, 4→1 telleri, perde/parmak ayrımını, Do/La minör/Fa/Sol yedi çizimlerini ve Sol, Mi minör, Re minör ve La7 şekillerini, 4/4 ve 3/4 sayımları, aşağı/yukarı yönlerini ve tarama kalıplarını, çınlama/sus ayrımını, ilk parmakla çalma kalıbını, tab çözümünü, özgün etüdü ve şarkı formundaki şemayı gözden geçir. Bu sınırlı yazılı başlangıç temelidir; tüm ukulele eğitimi, sınav derecesi veya sensörle doğrulanmış ustalık değildir."
       },
       "practice": {
-        "en": "On another day, locate strings/frets, decode the tab again, form the four chords and play the study at a comfortable recorded tempo. Use lesson 17’s same-task correction loop. Write what you can repeat, one uncertain outcome and its next practice lesson. Seek individual instruction for unresolved setup, discomfort or technique; there is no completion timer or score.",
-        "tr": "Başka gün telleri/perdeleri bul, tabı yeniden çöz, dört akoru kur ve rahat kaydedilmiş tempoda etüdü çal. Ders 17’nin aynı görevde düzeltme döngüsünü kullan. Tekrarlayabildiklerini, belirsiz bir kazanımı ve onun sonraki çalışma dersini yaz. Çözülemeyen kurulum, rahatsızlık veya teknik için bireysel eğitim al; tamamlama süresi veya puanı yok."
+        "en": "On another day, locate strings/frets, decode the tab again, form the eight chords, play the study and the lesson 22 chart at a comfortable recorded tempo, and run one cycle with your own mapped chart (lesson 23). Use lesson 17’s same-task correction loop. Write what you can repeat, one uncertain outcome and its next practice lesson. Seek individual instruction for unresolved setup, discomfort or technique; there is no completion timer or score.",
+        "tr": "Başka gün telleri/perdeleri bul, tabı yeniden çöz, sekiz akoru kur, etüdü ve ders 22 şemasını rahat kaydedilmiş tempoda çal ve kendi haritaladığın şemayla bir döngü uygula (ders 23). Ders 17’nin aynı görevde düzeltme döngüsünü kullan. Tekrarlayabildiklerini, belirsiz bir kazanımı ve onun sonraki çalışma dersini yaz. Çözülemeyen kurulum, rahatsızlık veya teknik için bireysel eğitim al; tamamlama süresi veya puanı yok."
       },
       "check": {
         "en": "Can I explain and repeat the stated beginner tasks and recover from a specific error without claiming certainty I do not have?",

@@ -8,8 +8,8 @@
     "tr": "Bugün sıradan rahat konuşma sesi, sessiz ortam, durma/dinlenme ve öz gözlem isteği. Önceki nota bilgisi beklenmez; sabit nota, ses referansı veya cihaz ölçümü sağlanmaz."
   },
   "exit": {
-    "en": "Explain and attempt comfortable short onset/release, natural breath without holding, counted rhythm/rests, a small personal pitch contour distinct from volume, vowels/clear original words and an original/adapted eight-bar study with one honest same-task correction and another-day revisit. Self-observation and reading only; no audio/health/range/intonation/mastery verification.",
-    "tr": "Rahat kısa başlatma/bırakma, tutmadan doğal nefes, sayılan ritim/sus, seviyeden farklı küçük kişisel perde çizgisi, ünlü/açık özgün sözler ve dürüst aynı-görev düzeltmesi/başka-gün tekrarı içeren özgün/uyarlanmış sekiz ölçülük etüdü açıkla ve dene. Yalnız öz gözlem ve okuma; ses/sağlık/alan/entonasyon/ustalık doğrulaması yok."
+    "en": "Explain and attempt comfortable short onset/release, natural breath without holding, counted rhythm/rests, a small personal pitch contour and five-step stair distinct from volume, gradual loudness changes, vowels/clear original words and an original/adapted eight-bar study; build your own warm-up with stop signals, map a short melody you choose and run your own practice cycle with another-day comparison. Self-observation and reading only; no audio/health/range/intonation/mastery verification.",
+    "tr": "Rahat kısa başlatma/bırakmayı, tutmadan doğal nefesi, sayılan ritim/susları, gürlükten ayrı küçük kişisel perde çizgisini ve beş basamaklı merdiveni, kademeli gürlük değişimini, ünlüleri/net özgün sözleri ve özgün/uyarlanmış sekiz ölçülük etüdü açıkla ve dene; durma sinyalleriyle kendi ısınmanı kur, seçtiğin kısa bir melodiyi haritala ve başka gün karşılaştırmasıyla kendi çalışma döngünü uygula. Yalnız öz gözlem ve okuma; ses/sağlık/alan/entonasyon/ustalık doğrulaması yok."
   },
   "rhythmSymbols": {
     "voice": "V",
@@ -710,16 +710,160 @@
     {
       "id": "vocal-16",
       "title": {
+        "en": "Five small steps up and down",
+        "tr": "Beş küçük basamak çıkış ve iniş"
+      },
+      "teach": {
+        "en": "Extend the L/M/H idea into a short stair: number five small, even-feeling steps 1 2 3 4 5, starting from a comfortable low tone near your L. Each step only moves a little higher than the one before. This is a personal relative pattern; exact interval sizes, a key or a note name are not checked. Keep volume the same on every step.",
+        "tr": "L/M/H fikrini kısa bir merdivene genişlet: L'ye yakın rahat bir pes sesten başlayarak beş küçük, eşit hissedilen basamağı 1 2 3 4 5 diye numarala. Her basamak bir öncekinden yalnız biraz tizdir. Bu kişisel göreli bir desendir; kesin aralık büyüklüğü, ton veya nota adı denetlenmez. Her basamakta gürlüğü aynı tut."
+      },
+      "practice": {
+        "en": "Hum 1 2 3 2 1 slowly, one quarter count each, then rest a bar. If comfortable, hum 1 2 3 4 5 4 3 2 1. Write which step felt least easy, or “uncertain”. If the top step strains, stop at 3 and keep that smaller stair.",
+        "tr": "1 2 3 2 1'i her biri bir dörtlük sayımda yavaşça mırıldan, sonra bir ölçü dinlen. Rahatsa 1 2 3 4 5 4 3 2 1'i mırıldan. En az kolay hissettiren basamağı veya “belirsiz” yaz. Üst basamak zorlarsa 3'te dur ve o küçük merdiveni koru."
+      },
+      "check": {
+        "en": "Can I go up and back down by small steps without getting louder at the top?",
+        "tr": "Tepede gürleşmeden küçük basamaklarla çıkıp geri inebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If steps blur, speak the numbers on one tone first, then hum only 1 2 1 and 2 3 2; a smaller stair is a valid choice.",
+        "tr": "Basamaklar karışırsa önce sayıları tek seste konuş, sonra yalnız 1 2 1 ve 2 3 2'yi mırıldan; daha küçük merdiven geçerli bir seçimdir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-17",
+      "title": {
+        "en": "Skips and returning home",
+        "tr": "Atlamalar ve eve dönüş"
+      },
+      "teach": {
+        "en": "A skip leaves out a step: 1 3 means moving from step 1 to step 3 without singing 2. Returning to 1 after a skip helps you check that your home tone stayed the same. Think the missing step silently if it helps. Accuracy is not measured here; you compare by your own listening.",
+        "tr": "Atlama bir basamağı atlar: 1 3, 2'yi söylemeden 1. basamaktan 3. basamağa geçmektir. Atlamadan sonra 1'e dönmek ev sesinin aynı kaldığını denetlemene yardım eder. İşine yararsa atlanan basamağı içinden düşün. Burada doğruluk ölçülmez; kendi dinlemenle karşılaştırırsın."
+      },
+      "practice": {
+        "en": "Hum 1 2 3 then 1 3, with a rest between. Then try 1 3 1 and 3 5 3 if your five-step stair was comfortable. Read this contour silently first, then hum it: 1 3 2 1 | 3 5 3 R. Each number is one quarter count; R is a counted silence.",
+        "tr": "1 2 3, sonra arada susla 1 3 mırıldan. Beş basamaklı merdivenin rahattıysa 1 3 1 ve 3 5 3'ü dene. Önce bu çizgiyi içinden oku, sonra mırıldan: 1 3 2 1 | 3 5 3 R. Her sayı bir dörtlük sayımdır; R sayılan sessizliktir."
+      },
+      "check": {
+        "en": "After a skip, does my return to 1 feel like the same home tone?",
+        "tr": "Atlamadan sonra 1'e dönüşüm aynı ev sesi gibi hissettiriyor mu?"
+      },
+      "recover": {
+        "en": "If the skip lands unclear, sing the full steps 1 2 3, then repeat 1 3 while thinking 2; record “uncertain” rather than guessing.",
+        "tr": "Atlama belirsiz konarsa tüm basamakları 1 2 3 söyle, sonra 2'yi düşünerek 1 3'ü tekrarla; tahmin yerine “belirsiz” yaz."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-18",
+      "title": {
+        "en": "Growing and fading volume",
+        "tr": "Gürlüğü artırmak ve azaltmak"
+      },
+      "teach": {
+        "en": "A crescendo < grows gradually louder; a diminuendo > fades gradually softer. Volume and pitch are separate: a crescendo on one tone stays on the same tone. Stay inside a comfortable range of loudness; louder never means pushing the throat. Breath support for a phrase comes from an easy inhale, not a forced one.",
+        "tr": "Kreşendo < giderek gürleşir; diminuendo > giderek yumuşar. Gürlük ve perde ayrıdır: tek seste kreşendo aynı seste kalır. Rahat bir gürlük aralığında kal; daha gür olmak boğazı zorlamak demek değildir. Bir cümle için nefes desteği zorlanmış değil, rahat bir nefes alışından gelir."
+      },
+      "practice": {
+        "en": "On a comfortable hum of M, count four beats: grow a little on 1–2, fade on 3–4, then rest a bar. Then speak “one two three four” with the same shape. Finally hum the 1 2 3 2 1 stair with a gentle crescendo up and diminuendo down, keeping the top step no louder than easy speech.",
+        "tr": "Rahat bir M mırıldanmasında dört vuruş say: 1–2'de biraz büyü, 3–4'te sön, sonra bir ölçü dinlen. Ardından “bir iki üç dört”ü aynı biçimle konuş. Son olarak 1 2 3 2 1 merdivenini çıkışta hafif kreşendo, inişte diminuendo ile mırıldan; üst basamağı rahat konuşmadan gür yapma."
+      },
+      "check": {
+        "en": "Can I change loudness gradually while the tone stays easy?",
+        "tr": "Ses rahat kalırken gürlüğü kademeli değiştirebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the throat tightens, return to speaking volume and practise only the fade; a smaller range of loudness is fine.",
+        "tr": "Boğaz sıkışırsa konuşma gürlüğüne dön ve yalnız sönmeyi çalış; daha küçük bir gürlük aralığı uygundur."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-19",
+      "title": {
+        "en": "Your own warm-up and stop signals",
+        "tr": "Kendi ısınman ve durma sinyallerin"
+      },
+      "teach": {
+        "en": "A warm-up prepares, it does not test. Build a short order from earlier lessons: settle and breathe (2–3), a gentle hum (4), short starts and releases (5), a small stair (16). Keep it about five minutes. Stop signals: pain, hoarseness that lasts, a scratchy throat, breathlessness or dizziness. Then rest; lasting voice problems need a qualified professional. This course gives no medical advice.",
+        "tr": "Isınma hazırlar, sınamaz. Önceki derslerden kısa bir sıra kur: yerleşme ve nefes (2–3), hafif mırıldanma (4), kısa başlatma ve bırakma (5), küçük merdiven (16). Yaklaşık beş dakika tut. Durma sinyalleri: ağrı, süren kısıklık, gıcıklanan boğaz, nefessizlik veya baş dönmesi. O zaman dinlen; süren ses sorunları yetkin bir uzman gerektirir. Bu kurs tıbbi tavsiye vermez."
+      },
+      "practice": {
+        "en": "Write your warm-up as four lines with a time for each. Try it once today. Afterwards write one word for how the voice felt (easy / effortful / uncertain) and one change for next time. Water and short breaks are allowed at any point.",
+        "tr": "Isınmanı her biri için süre yazarak dört satırda yaz. Bugün bir kez dene. Sonra sesin nasıl hissettirdiğine dair tek kelime (rahat / zorlu / belirsiz) ve sonraki sefer için tek değişiklik yaz. Her an su ve kısa mola serbesttir."
+      },
+      "check": {
+        "en": "Do I know my warm-up order and when I must stop?",
+        "tr": "Isınma sıramı ve ne zaman durmam gerektiğini biliyor muyum?"
+      },
+      "recover": {
+        "en": "If a warm-up step feels effortful, remove it and keep the breath and hum only; a shorter warm-up is still a warm-up.",
+        "tr": "Bir ısınma adımı zorlu geliyorsa onu çıkar, yalnız nefes ve mırıldanmayı tut; kısa ısınma da ısınmadır."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-20",
+      "title": {
+        "en": "Map a short melody you choose",
+        "tr": "Seçtiğin kısa bir melodiyi haritala"
+      },
+      "teach": {
+        "en": "Choose a short melody you already know and may sing for yourself, such as a traditional children's tune, or write your own four bars with the contour symbols. Do not copy song lyrics into notes you share. Map it: where phrases end, where you will breathe, which part goes highest, and a relative contour using L M H or steps 1–5. A map makes the melody practisable in small parts.",
+        "tr": "Zaten bildiğin ve kendin için söyleyebileceğin kısa bir melodi seç (ör. geleneksel bir çocuk ezgisi) ya da çizgi sembolleriyle kendi dört ölçünü yaz. Paylaştığın notlara şarkı sözlerini kopyalama. Haritala: cümleler nerede bitiyor, nerede nefes alacaksın, en tiz bölüm hangisi, ve L M H veya 1–5 basamaklarıyla göreli bir çizgi. Harita melodiyi küçük parçalarda çalışılabilir yapar."
+      },
+      "practice": {
+        "en": "Write the map in four lines: phrases, breath marks, highest part, contour. Speak the words or a neutral syllable in rhythm first. Then hum one phrase at a time, resting between phrases. If the highest part strains, choose a lower starting tone or keep that phrase spoken.",
+        "tr": "Haritayı dört satırda yaz: cümleler, nefes işaretleri, en tiz bölüm, çizgi. Önce sözleri veya nötr bir heceyi ritimle konuş. Sonra cümleler arasında dinlenerek her seferde bir cümle mırıldan. En tiz bölüm zorlarsa daha pes bir başlangıç sesi seç ya da o cümleyi konuşarak bırak."
+      },
+      "check": {
+        "en": "Can I show where each phrase breathes and where the melody goes highest?",
+        "tr": "Her cümlenin nerede nefes aldığını ve melodinin nerede en tize çıktığını gösterebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the melody is too long, map only its first phrase; a short complete map is better than a long guess.",
+        "tr": "Melodi çok uzunsa yalnız ilk cümlesini haritala; kısa ve tam bir harita uzun bir tahminden iyidir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-21",
+      "title": {
+        "en": "Your own practice cycle",
+        "tr": "Kendi çalışma döngün"
+      },
+      "teach": {
+        "en": "An independent session has four parts: your warm-up (19), one focus from your map (20), one comfortable run of the melody, and a written note. Short, regular sessions usually help more than long ones. Comfort decides the length; stopping is always a valid result.",
+        "tr": "Bağımsız bir oturumun dört parçası vardır: ısınman (19), haritandan tek odak (20), melodinin rahat bir kez baştan sona söylenmesi ve yazılı bir not. Kısa, düzenli oturumlar çoğu zaman uzunlardan daha çok yardım eder. Süreyi rahatlık belirler; durmak her zaman geçerli bir sonuçtur."
+      },
+      "practice": {
+        "en": "Run the cycle once with your lesson 20 melody and write: focus, observed result for one phrase (late breath / unclear word / effort / no observed issue / uncertain). On another day repeat the same run and compare that phrase: improved, unchanged or uncertain. Write the next focus.",
+        "tr": "Döngüyü ders 20 melodinle bir kez uygula ve yaz: odak, bir cümle için gözlenen sonuç (geç nefes / belirsiz kelime / zorlanma / gözlenen sorun yok / belirsiz). Başka bir gün aynısını tekrarla ve o cümleyi karşılaştır: iyileşti, aynı kaldı veya belirsiz. Sıradaki odağı yaz."
+      },
+      "check": {
+        "en": "Can I plan, run and compare a practice session on my own?",
+        "tr": "Bir çalışma oturumunu kendi başıma planlayıp uygulayıp karşılaştırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If a session feels effortful, end it after the warm-up and note that; a teacher can help with individual technique and choosing a comfortable range.",
+        "tr": "Bir oturum zorlu hissettirirse ısınmadan sonra bitir ve bunu not et; bireysel teknik ve rahat alan seçimi için öğretmen yardımcı olabilir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "vocal-22",
+      "title": {
         "en": "Beginner exit and another-day revisit",
         "tr": "Başlangıç çıkışı ve başka gün tekrarı"
       },
       "teach": {
-        "en": "Review comfortable start/stop choices, natural breathing, short hum/onset/release, counted rests, pitch versus volume, three-tone contour, vowels, original words and phrase planning. This bounded written foundation does not certify range, intonation, sustained-note quality, vibrato, health or a voice type.",
-        "tr": "Rahat başla/dur seçimleri, doğal nefes, kısa mırıldanma/başlatma/bırakma, sayılan sus, perde-seviye ayrımı, üç sesli çizgi, ünlüler, özgün sözler ve cümle planını gözden geçir. Bu sınırlı yazılı temel alanı, entonasyonu, uzun ses kalitesini, vibratoyu, sağlığı veya ses türünü onaylamaz."
+        "en": "Review comfortable start/stop choices, natural breathing, short hum/onset/release, counted rests, pitch versus volume, three-tone contour, the five-step stair and skips, gradual loudness changes, vowels, original words, phrase planning, your own warm-up and stop signals, and the melody you mapped. This bounded written foundation does not certify range, intonation, sustained-note quality, vibrato, health or a voice type.",
+        "tr": "Rahat başla/dur seçimleri, doğal nefes, kısa mırıldanma/başlatma/bırakma, sayılan sus, perde-seviye ayrımı, üç sesli çizgi, beş basamaklı merdiven ve atlamalar, kademeli gürlük değişimi, ünlüler, özgün sözler, cümle planı, kendi ısınman ve durma sinyallerin ve haritaladığın melodiyi gözden geçir. Bu sınırlı yazılı temel alanı, entonasyonu, uzun ses kalitesini, vibratoyu, sağlığı veya ses türünü onaylamaz."
       },
       "practice": {
-        "en": "On another comfortable day, before reopening the explanations, recall what M/L/H, R and = mean and name one reason to stop vocalizing. Check your answer against lessons 8 and 13 and return to a missed item. Decode the two-bar contour before revealing its reading answer, speak/tap the original words, and try your recorded short study only if comfortable. Name one repeatable outcome and one uncertainty. Rest is always a valid choice.",
-        "tr": "Başka rahat günde açıklamaları yeniden açmadan M/L/H, R ve = anlamlarını hatırla ve seslendirmeyi durdurmak için bir neden söyle. Yanıtını ders 8 ve 13 ile kontrol et; eksik öğeye dön. Okuma cevabını açmadan iki ölçülük çizgiyi çöz, özgün sözleri konuş/vur ve yalnız rahatsa kayıtlı kısa etüdünü dene. Tekrarlanabilir bir kazanım ve bir belirsizlik adlandır. Dinlenmek her zaman geçerli seçimdir."
+        "en": "On another comfortable day, before reopening the explanations, recall what M/L/H, R and = mean, name your warm-up order and two reasons to stop vocalizing. Check your answer against lessons 8, 13 and 19 and return to a missed item. Decode the two-bar contour before revealing its reading answer, hum the small stair only if comfortable, and run one practice cycle with your mapped melody (lessons 20–21), comparing one phrase with your earlier note. Name one repeatable outcome and one uncertainty. Rest is always a valid choice.",
+        "tr": "Başka rahat günde açıklamaları yeniden açmadan M/L/H, R ve = anlamlarını hatırla, ısınma sıranı ve seslendirmeyi durdurmak için iki nedeni söyle. Yanıtını ders 8, 13 ve 19 ile kontrol et; eksik öğeye dön. Okuma cevabını açmadan iki ölçülük çizgiyi çöz, yalnız rahatsa küçük merdiveni mırıldan ve haritaladığın melodiyle bir çalışma döngüsü uygula (ders 20–21); bir cümleyi önceki notunla karşılaştır. Tekrarlanabilir bir kazanım ve bir belirsizlik adlandır. Dinlenmek her zaman geçerli seçimdir."
       },
       "check": {
         "en": "Can I understand and attempt the defined beginner tasks, stop appropriately and choose a useful next step?",

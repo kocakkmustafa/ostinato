@@ -178,7 +178,7 @@ final class BassCourse {
     lessons = List<BassLesson>.unmodifiable([
       for (final l in m['lessons'] as List) BassLesson(l),
     ]);
-    if (tab.length != 8 || study.length != 8 || lessons.length != 18) {
+    if (tab.length != 8 || study.length != 8 || lessons.length != 24) {
       throw const FormatException('Incomplete bass foundation');
     }
     for (var i = 0; i < lessons.length; i++) {

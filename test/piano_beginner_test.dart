@@ -383,8 +383,8 @@ void main() {
       jsonDecode(File(pianoAsset).readAsStringSync()) as Map<String, dynamic>;
   test('complete translated ordered curriculum and integrity', () async {
     final course = await PianoCourse.load(bundle: Files());
-    expect(course.lessons.length, 16);
-    expect(course.lessons.last.id, 'piano-16');
+    expect(course.lessons.length, 25);
+    expect(course.lessons.last.id, 'piano-25');
   });
   test('strict fields, translations, sequence, schema and completeness', () {
     for (final mutate in <void Function(Map<String, dynamic>)>[

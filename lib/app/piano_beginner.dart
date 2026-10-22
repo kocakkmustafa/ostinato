@@ -75,7 +75,7 @@ final class PianoCourse {
     lessons = List<PianoLesson>.unmodifiable([
       for (final lesson in map['lessons'] as List) PianoLesson(lesson),
     ]);
-    if (lessons.length != 16) {
+    if (lessons.length != 25) {
       throw const FormatException('Incomplete piano course');
     }
     for (var i = 0; i < lessons.length; i++) {

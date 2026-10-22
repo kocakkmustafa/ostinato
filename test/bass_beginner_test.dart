@@ -451,8 +451,8 @@ void main() {
       jsonDecode(File(bassAsset).readAsStringSync()) as Map<String, dynamic>;
   test('complete translated ordered curriculum and integrity', () async {
     final course = await BassCourse.load(bundle: Files());
-    expect(course.lessons.length, 18);
-    expect(course.lessons.last.id, 'bass-18');
+    expect(course.lessons.length, 24);
+    expect(course.lessons.last.id, 'bass-24');
   });
   test('strict fields, translations, sequence, schema and completeness', () {
     for (final mutate in <void Function(Map<String, dynamic>)>[

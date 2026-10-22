@@ -434,8 +434,8 @@ void main() {
       jsonDecode(File(ukuleleAsset).readAsStringSync()) as Map<String, dynamic>;
   test('complete translated ordered curriculum and integrity', () async {
     final course = await UkuleleCourse.load(bundle: Files());
-    expect(course.lessons.length, 18);
-    expect(course.lessons.last.id, 'ukulele-18');
+    expect(course.lessons.length, 24);
+    expect(course.lessons.last.id, 'ukulele-24');
   });
   test('strict fields, translations, sequence, schema and completeness', () {
     for (final mutate in <void Function(Map<String, dynamic>)>[

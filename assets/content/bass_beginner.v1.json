@@ -10,8 +10,8 @@
     "tr": "Standart gerçek Mi1 La1 Re2 Sol2 düzeni tanımlı, sağ elle çalınan perdeli dört telli elektrik bas; güvenli askı/destek, bas için uygun harici akort yardımı ve düşük seviyeli uygun yükseltme. Önceden okuma veya bas tekniği beklenmez."
   },
   "exit": {
-    "en": "Identify supported tuning and string/fret/finger directions; distinguish sounding/written octaves and four open-string bass-clef examples; attempt gentle alternating plucks, two-hand muting, 4/4 quarters/eighths/rests, root/fifth/octave pairs and original two-bar tab/eight-bar study; locate one issue and compare a smaller correction in the same task/tempo. Self-observation only; no detected pitch, posture, progress or mastery approval.",
-    "tr": "Desteklenen akordu ve tel/perde/parmak yönlerini tanı; gerçek/yazılı oktavı ve dört açık tel Fa anahtarı örneğini ayır; hafif sıralı çekiş, iki elle susturma, 4/4 dörtlük/sekizlik/sus, kök/beşli/oktav çiftleri ve özgün iki ölçülük tab/sekiz ölçülük etüdü dene; tek sorunu bulup küçük düzeltmeyi aynı görev/tempoda karşılaştır. Yalnız öz gözlem; algılanmış ses, duruş, ilerleme veya ustalık onayı yok."
+    "en": "Identify supported tuning and string/fret/finger directions; name natural notes in the first five frets; distinguish sounding/written octaves and four open-string bass-clef examples; attempt gentle alternating plucks, two-hand muting, 4/4 quarters/eighths/rests, root/fifth/octave pairs, a one-octave major scale shape, approach notes and a twelve-bar blues line with an external pulse; play the original two-bar tab and eight-bar study; then write your own bass line for a chart and run a practice cycle comparing a smaller correction in the same task/tempo. Self-observation only; no detected pitch, posture, progress or mastery approval.",
+    "tr": "Desteklenen akordu ve tel/perde/parmak yönlerini tanı; ilk beş perdedeki doğal notaları adlandır; gerçek/yazılı oktavları ve dört açık tel fa anahtarı örneğini ayırt et; hafif dönüşümlü çekişleri, iki elle susturmayı, 4/4 dörtlük/sekizlik/susları, kök/beşli/oktav çiftlerini, tek oktav majör dizi şeklini, yaklaşım notalarını ve dış nabızla on iki ölçülük blues hattını dene; özgün iki ölçülük tabı ve sekiz ölçülük etüdü çal; sonra bir şemaya kendi bas hattını yaz ve aynı görev/tempoda daha küçük bir düzeltmeyi karşılaştıran çalışma döngüsü uygula. Yalnız öz gözlem; algılanmış perde, duruş, ilerleme veya ustalık onayı yok."
   },
   "tuning": "standard:E1-A1-D2-G2",
   "pitchConvention": "sounding:C4=middle-C;staff=one-octave-higher",
@@ -754,16 +754,160 @@
     {
       "id": "bass-18",
       "title": {
+        "en": "Natural notes in the first five frets",
+        "tr": "İlk beş perdede doğal notalar"
+      },
+      "teach": {
+        "en": "Natural notes are the letter names without sharps or flats. In sounding pitch, frets 0–5: string 4 E1 F1 (1) G1 (3) A1 (5); string 3 A1 B1 (2) C2 (3) D2 (5); string 2 D2 E2 (2) F2 (3) G2 (5); string 1 G2 A2 (2) B2 (4) C3 (5). Fret 5 on one string sounds the same as the next higher open string, for example string 4 fret 5 A1 = open string 3.",
+        "tr": "Doğal notalar diyez veya bemolsüz harf adlarıdır. Gerçek sesle 0–5. perdeler: 4. tel Mi1 Fa1 (1) Sol1 (3) La1 (5); 3. tel La1 Si1 (2) Do2 (3) Re2 (5); 2. tel Re2 Mi2 (2) Fa2 (3) Sol2 (5); 1. tel Sol2 La2 (2) Si2 (4) Do3 (5). Bir telin 5. perdesi bir sonraki tiz açık telle aynı sestir; örneğin 4. tel 5. perde La1 = açık 3. tel."
+      },
+      "practice": {
+        "en": "Say and play the natural notes on string 4 from E1 to A1, then on string 3 from A1 to D2, one note per beat. Then find A1 in two places (string 4 fret 5 and open string 3) and D2 in two places, and compare that they sound the same. Keep index on fret 1–2 and ring/little finger on fret 4–5 as comfortable.",
+        "tr": "4. telde Mi1'den La1'e, sonra 3. telde La1'den Re2'ye doğal notaları vuruş başına bir nota söyle ve çal. Sonra La1'i iki yerde (4. tel 5. perde ve açık 3. tel) ve Re2'yi iki yerde bul; aynı çaldıklarını karşılaştır. Rahat olduğu kadar işareti 1–2., yüzük/küçük parmağı 4–5. perdede tut."
+      },
+      "check": {
+        "en": "Can I name any natural note in frets 0–5 and find one note in two places?",
+        "tr": "0–5. perdelerde herhangi bir doğal notayı adlandırıp bir notayı iki yerde bulabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If you lose track, recite the letters E F G A B C D on string 4 aloud while pointing, then play only the notes on frets 0, 3 and 5.",
+        "tr": "Takibi kaybedersen 4. telde işaret ederek Mi Fa Sol La Si Do Re harflerini sesli say, sonra yalnız 0, 3 ve 5. perdelerdeki notaları çal."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-19",
+      "title": {
+        "en": "One-octave major scale shape",
+        "tr": "Tek oktav majör dizi şekli"
+      },
+      "teach": {
+        "en": "A major scale has the step pattern whole, whole, half, whole, whole, whole, half. On bass a movable one-octave shape starting with finger 2 on the root covers three strings: root (2), 2nd (4), 3rd next string (1), 4th (2), 5th (4), 6th next string (1), 7th (3), octave (4). From C2 at string 3 fret 3 this gives C2 D2 E2 F2 G2 A2 B2 C3.",
+        "tr": "Majör dizinin basamak düzeni tam, tam, yarım, tam, tam, tam, yarımdır. Basta kökte 2. parmakla başlayan taşınabilir tek oktav şekli üç teli kaplar: kök (2), 2. derece (4), sonraki telde 3. derece (1), 4. (2), 5. (4), sonraki telde 6. (1), 7. (3), oktav (4). 3. tel 3. perdedeki Do2'den bu Do2 Re2 Mi2 Fa2 Sol2 La2 Si2 Do3 verir."
+      },
+      "practice": {
+        "en": "Play the C major shape up and down: string 3 frets 3 5; string 2 frets 2 3 5; string 1 frets 2 4 5. One note per beat, alternating i and m, at a slow tempo. Then move the same shape so the root is G1 on string 4 fret 3 and play it again.",
+        "tr": "Do majör şeklini çıkıp in: 3. tel 3 5. perdeler; 2. tel 2 3 5; 1. tel 2 4 5. Vuruş başına bir nota, i ve m dönüşümlü, yavaş tempoda. Sonra aynı şekli kök 4. tel 3. perdede Sol1 olacak şekilde taşı ve yeniden çal."
+      },
+      "check": {
+        "en": "Can I play the shape evenly and say the scale degree of each note?",
+        "tr": "Şekli düzgün çalıp her notanın dizi derecesini söyleyebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the stretch from fret 2 to 5 is uncomfortable, shift the hand by one fret for the top notes instead of reaching; comfort comes before the textbook fingering.",
+        "tr": "2'den 5. perdeye uzanmak rahatsızsa uzanmak yerine üst notalar için eli bir perde kaydır; rahatlık kitap parmaklamasından önce gelir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-20",
+      "title": {
+        "en": "Approach notes into a chord change",
+        "tr": "Akor değişimine yaklaşım notaları"
+      },
+      "teach": {
+        "en": "An approach note on the last beat of a bar leads into the next root. A chromatic approach is one fret below or above the target root; a scale approach is the scale note next to it. For C to F, play E2 (one fret below F2) on beat 4; for F to G, play F♯2 or A2. The approach is short and leads, it does not replace the root on beat 1.",
+        "tr": "Ölçünün son vuruşundaki yaklaşım notası bir sonraki köke götürür. Kromatik yaklaşım hedef kökün bir perde altı veya üstüdür; dizi yaklaşımı yanındaki dizi notasıdır. Do'dan Fa'ya geçerken 4. vuruşta Mi2 (Fa2'nin bir perde altı) çal; Fa'dan Sol'e Fa♯2 veya La2 çal. Yaklaşım kısadır ve götürür; 1. vuruştaki kökün yerini almaz."
+      },
+      "practice": {
+        "en": "Imagine the chart C | F | G | C. Play roots on beats 1–3 and an approach on beat 4: C2 C2 C2 E2 | F2 F2 F2 F♯2 | G2 G2 G2 B1 | C2 whole. Use string 3 fret 3 for C2, string 3 fret 2 for B1 and string 2 for F2 and G2. Count aloud; then try your own approach choices.",
+        "tr": "Do | Fa | Sol | Do şemasını düşün. 1–3. vuruşlarda kökleri, 4. vuruşta yaklaşımı çal: Do2 Do2 Do2 Mi2 | Fa2 Fa2 Fa2 Fa♯2 | Sol2 Sol2 Sol2 Si1 | Do2 birlik. Do2 için 3. tel 3. perde, Si1 için 3. tel 2. perde, Fa2 ve Sol2 için 2. teli kullan. Sesli say; sonra kendi yaklaşım seçimlerini dene."
+      },
+      "check": {
+        "en": "Does each approach lead clearly into the next root on beat 1?",
+        "tr": "Her yaklaşım 1. vuruştaki sonraki köke net biçimde götürüyor mu?"
+      },
+      "recover": {
+        "en": "If the change arrives late, play only beat 4 and the next beat 1 several times, keeping the left hand moving during beat 4.",
+        "tr": "Değişim geç gelirse yalnız 4. vuruşu ve sonraki 1. vuruşu birkaç kez çal; 4. vuruş sırasında sol elin hareket etmesini sürdür."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-21",
+      "title": {
+        "en": "A twelve-bar blues line",
+        "tr": "On iki ölçülük blues hattı"
+      },
+      "teach": {
+        "en": "A twelve-bar blues in A uses A7, D7 and E7 in the order A A A A | D D A A | E D A E. A common bass line plays root, third, fifth, sixth: over A that is A1 C♯2 E2 F♯2; over D it is D2 F♯2 A2 B2; over E it is E1 G♯1 B1 C♯2. Play them as quarter notes, one pattern per bar.",
+        "tr": "La'da on iki ölçülük blues La7, Re7 ve Mi7'yi La La La La | Re Re La La | Mi Re La Mi sırasıyla kullanır. Yaygın bas hattı kök, üçlü, beşli, altılı çalar: La üzerinde La1 Do♯2 Mi2 Fa♯2; Re üzerinde Re2 Fa♯2 La2 Si2; Mi üzerinde Mi1 Sol♯1 Si1 Do♯2. Bunları dörtlük olarak, ölçü başına bir kalıp çal."
+      },
+      "practice": {
+        "en": "Learn the A pattern first: open string 3, string 3 fret 4, string 2 fret 2, string 2 fret 4. Move it to D (open string 2, string 2 fret 4, string 1 fret 2, string 1 fret 4) and to E (open string 4, string 4 fret 4, string 3 fret 2, string 3 fret 4). Then play all twelve bars at a slow tempo with a counted bar before starting.",
+        "tr": "Önce La kalıbını öğren: açık 3. tel, 3. tel 4. perde, 2. tel 2. perde, 2. tel 4. perde. Re'ye taşı (açık 2. tel, 2. tel 4. perde, 1. tel 2. perde, 1. tel 4. perde) ve Mi'ye taşı (açık 4. tel, 4. tel 4. perde, 3. tel 2. perde, 3. tel 4. perde). Sonra başlamadan bir ölçü sayıp on iki ölçünün tamamını yavaş tempoda çal."
+      },
+      "check": {
+        "en": "Can I keep track of where I am in the twelve bars without stopping?",
+        "tr": "On iki ölçüde nerede olduğumu durmadan takip edebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If you get lost, say the chord name on beat 1 of each bar while playing only roots, then add the pattern back one line of four bars at a time.",
+        "tr": "Kaybolursan yalnız kökleri çalarken her ölçünün 1. vuruşunda akor adını söyle, sonra kalıbı dört ölçülük satırlar halinde teker teker geri ekle."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-22",
+      "title": {
+        "en": "Play with an external pulse and control note length",
+        "tr": "Dış bir nabızla çal ve nota uzunluğunu kontrol et"
+      },
+      "teach": {
+        "en": "A bassist keeps time for others. Use any external metronome or drum loop you already have; this course does not supply sound. Start slow enough that every note lands with the click. Note length is part of the groove: legato notes ring until the next one, staccato notes stop early with a gentle left-hand release or right-hand touch while the beat continues.",
+        "tr": "Basçı başkaları için zamanı tutar. Zaten sahip olduğun herhangi bir dış metronom veya davul döngüsünü kullan; bu kurs ses sağlamaz. Her nota tıkla birlikte düşecek kadar yavaş başla. Nota uzunluğu grovun parçasıdır: legato notalar bir sonrakine kadar çınlar, staccato notalar vuruş sürerken hafif bir sol el bırakışı veya sağ el dokunuşuyla erken durur."
+      },
+      "practice": {
+        "en": "Set a slow click. Play the lesson 21 blues roots as quarter notes, all legato for four bars, then all staccato for four bars. Then play half notes, ending each exactly on the next beat. Note your tempo and whether notes landed with the click: on time / early / late / uncertain.",
+        "tr": "Yavaş bir tık ayarla. Ders 21 blues köklerini dörtlük olarak dört ölçü hepsi legato, sonra dört ölçü hepsi staccato çal. Ardından ikilikler çal, her birini tam bir sonraki vuruşta bitir. Temponu ve notaların tıkla düşüp düşmediğini not et: zamanında / erken / geç / belirsiz."
+      },
+      "check": {
+        "en": "Can I keep the click and choose short or long notes on purpose?",
+        "tr": "Tıkı koruyup kısa veya uzun notayı bilerek seçebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If you drift from the click, play only on beat 1 of each bar and count the other beats silently, then add beats back.",
+        "tr": "Tıktan kayarsan yalnız her ölçünün 1. vuruşunda çal ve diğer vuruşları içinden say, sonra vuruşları geri ekle."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-23",
+      "title": {
+        "en": "Write a bass line for a chart and run your own practice cycle",
+        "tr": "Bir şemaya bas hattı yaz ve kendi çalışma döngünü uygula"
+      },
+      "teach": {
+        "en": "Choose a chord chart you may use for yourself, or write your own using chords from this course. Write a bass line: roots on beat 1, fifths or octaves on beat 3, and an approach note into each change. Map the hardest change and set a tempo. A practice cycle then has four parts: warm-up (lesson 19 scale), work on the hardest change, one play-through with an external pulse, and a written note.",
+        "tr": "Kendin için kullanabileceğin bir akor şeması seç ya da bu kursun akorlarıyla kendininkini yaz. Bir bas hattı yaz: 1. vuruşta kökler, 3. vuruşta beşli veya oktavlar ve her değişime bir yaklaşım notası. En zor değişimi haritala ve bir tempo belirle. Sonra çalışma döngüsünün dört parçası vardır: ısınma (ders 19 dizisi), en zor değişime çalışma, dış nabızla bir kez baştan sona çalma ve yazılı not."
+      },
+      "practice": {
+        "en": "Write your line for at least eight bars, then run one cycle and note: tempo, hardest change, observed result (late / wrong string / ringing through rest / buzz / no observed issue / uncertain). On another day repeat at the same tempo and compare that change: improved, unchanged or uncertain. Write the next focus.",
+        "tr": "Hattını en az sekiz ölçü yaz, sonra bir döngü uygula ve not et: tempo, en zor değişim, gözlenen sonuç (geç / yanlış tel / susta çınlama / cızırtı / gözlenen sorun yok / belirsiz). Başka bir gün aynı tempoda tekrarla ve o değişimi karşılaştır: iyileşti, aynı kaldı veya belirsiz. Sıradaki odağı yaz."
+      },
+      "check": {
+        "en": "Can I write, practise and compare a bass line without step-by-step help?",
+        "tr": "Adım adım yardım olmadan bir bas hattı yazıp çalışıp karşılaştırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the line is too busy, keep only roots on beat 1 and 3; a simple complete line is a valid result. A teacher can help with individual technique.",
+        "tr": "Hat çok yoğunsa yalnız 1 ve 3. vuruşta kökleri tut; basit ama tam bir hat geçerli bir sonuçtur. Bireysel teknik için öğretmen yardımcı olabilir."
+      },
+      "diagrams": []
+    },
+    {
+      "id": "bass-24",
+      "title": {
         "en": "Beginner exit and another-day revisit",
         "tr": "Başlangıç çıkışı ve başka gün tekrarı"
       },
       "teach": {
-        "en": "Review supported setup/external tuning, sounding-versus-written octave, string/fret/finger directions, gentle i/m attacks and two-hand muting, 4/4 quarters/eighths/rests, roots/fifths/octaves, two-bar tab and the original study. This bounded written foundation is not complete bass musicianship or measured physical/audio mastery.",
-        "tr": "Desteklenen düzen/harici akort, gerçek-yazılı oktav farkı, tel/perde/parmak yönleri, hafif i/m çekiş ve iki elle susturma, 4/4 dörtlük/sekizlik/sus, kök/beşli/oktav, iki ölçülük tab ve özgün etüdü gözden geçir. Bu sınırlı yazılı temel, tüm bas müzisyenliği veya ölçülmüş fiziksel/sesli ustalık değildir."
+        "en": "Review supported setup/external tuning, sounding-versus-written octave, string/fret/finger directions, natural notes in the first five frets, gentle i/m attacks and two-hand muting, 4/4 quarters/eighths/rests, roots/fifths/octaves, the one-octave major scale shape, approach notes, the twelve-bar blues line, playing with an external pulse and note length, two-bar tab and the original study. This bounded written foundation is not complete bass musicianship or measured physical/audio mastery.",
+        "tr": "Desteklenen düzen/harici akort, gerçek-yazılı oktav farkı, tel/perde/parmak yönleri, ilk beş perdedeki doğal notalar, hafif i/m çekiş ve iki elle susturma, 4/4 dörtlük/sekizlik/sus, kök/beşli/oktav, tek oktav majör dizi şekli, yaklaşım notaları, on iki ölçülük blues hattı, dış nabızla çalma ve nota uzunluğu, iki ölçülük tab ve özgün etüdü gözden geçir. Bu sınırlı yazılı temel, tüm bas müzisyenliği veya ölçülmüş fiziksel/sesli ustalık değildir."
       },
       "practice": {
-        "en": "On another day identify the setup and open strings, decode the tab before revealing answers, name the four staff examples with both octaves, and attempt the study at a comfortable recorded tempo. Use lesson 17’s same-task correction loop. Write one repeatable outcome, one uncertainty and its next lesson.",
-        "tr": "Başka bir gün düzeni ve açık telleri tanı, cevapları açmadan tabı çöz, dört porte örneğini iki oktavıyla adlandır ve etüdü rahat, kayıtlı tempoda dene. Ders 17’nin aynı görevde düzeltme döngüsünü kullan. Tekrarlanabilir bir kazanım, bir belirsizlik ve sonraki dersini yaz."
+        "en": "On another day identify the setup and open strings, name natural notes in frets 0–5, decode the tab before revealing answers, name the four staff examples with both octaves, play the major scale shape and the twelve-bar line with an external pulse, and run one cycle with the bass line you wrote (lesson 23). Use lesson 17’s same-task correction loop. Write one repeatable outcome, one uncertainty and its next lesson.",
+        "tr": "Başka bir gün düzeni ve açık telleri tanı, 0–5. perdelerdeki doğal notaları adlandır, cevapları açmadan tabı çöz, dört porte örneğini iki oktavıyla adlandır, majör dizi şeklini ve on iki ölçülük hattı dış nabızla çal ve yazdığın bas hattıyla bir döngü uygula (ders 23). Ders 17’nin aynı görevde düzeltme döngüsünü kullan. Tekrarlanabilir bir kazanım, bir belirsizlik ve sonraki dersini yaz."
       },
       "check": {
         "en": "Can I explain and repeat the stated beginner tasks and choose a specific recovery without claiming unobserved mastery?",

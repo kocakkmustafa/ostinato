@@ -20,7 +20,7 @@ void main() {
       final ids = course.lessons.map((lesson) => lesson.id).toList();
       expect(() => entry.value(course), throwsUnsupportedError);
       expect(course.lessons.map((lesson) => lesson.id), ids);
-      expect(course.lessons.length, 16);
+      expect(course.lessons.length, 25);
     });
   }
 

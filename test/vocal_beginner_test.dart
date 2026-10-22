@@ -154,7 +154,7 @@ void main() {
           jsonDecode(File(vocalAsset).readAsStringSync())
               as Map<String, dynamic>;
       final course = await VocalCourse.load(bundle: Files());
-      expect(course.lessons.length, 16);
+      expect(course.lessons.length, 22);
       expect(course.study.length, 8);
       expect(course.contour, [
         ['M', 'H', 'M', 'R'],

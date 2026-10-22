@@ -10,8 +10,8 @@
     "tr": "Önceki nota bilgisi gerekmez. Do3–Sol4 aralığı olan piyano veya klavye kullan; üretici oktav adları değişebilir. Rahat oturuş, düşük ses ve kısa çalışma seç."
   },
   "exit": {
-    "en": "Locate and name keys; count notes and rests; use treble/bass anchors; play each hand and a simple two-hand study; identify a mistake and choose a smaller practice task. All checks are self-observation.",
-    "tr": "Tuşları bul ve adlandır; nota ve susları say; sol/fa anahtarı referanslarını kullan; elleri ayrı ve basit etütte birlikte çal; hatayı fark edip küçük çalışma seç. Tüm kontroller öz gözlemdir."
+    "en": "Locate and name keys including sharps and flats; count notes, rests, 3/4 and dotted rhythms; read both clefs and intervals; play each hand, G position, the C major scale, a two-hand study and left-hand I–IV–V7 accompaniment; then map a new piece and run your own practice cycle with one specific correction. All checks are self-observation.",
+    "tr": "Diyez ve bemoller dahil tuşları bul ve adlandır; notaları, susları, 3/4'ü ve noktalı ritimleri say; iki anahtarı ve aralıkları oku; her eli, Sol konumunu, Do majör dizisini, bir iki el etüdünü ve sol el I–IV–V7 eşliğini çal; sonra yeni bir parçayı haritalayıp tek somut düzeltmeyle kendi çalışma döngünü uygula. Tüm kontroller öz gözlemdir."
   },
   "lessons": [
     {
@@ -362,16 +362,223 @@
     {
       "id": "piano-16",
       "title": {
+        "en": "Black keys, sharps and flats",
+        "tr": "Siyah tuşlar, diyez ve bemoller"
+      },
+      "teach": {
+        "en": "A semitone is the nearest key to the right or left, black or white. A sharp ♯ raises a note by one semitone: F♯ is the black key right of F. A flat ♭ lowers it: B♭ is the black key left of B. One black key has two names, so F♯ and G♭ share a key. A natural ♮ cancels a sharp or flat. E–F and B–C are semitones with no black key between them.",
+        "tr": "Yarım ses, sağdaki veya soldaki en yakın tuştur; siyah ya da beyaz. Diyez ♯ notayı bir yarım ses yükseltir: Fa♯, Fa'nın sağındaki siyah tuştur. Bemol ♭ alçaltır: Si♭, Si'nin solundaki siyah tuştur. Bir siyah tuşun iki adı vardır; Fa♯ ile Sol♭ aynı tuştur. Natürel ♮ diyez veya bemolü kaldırır. Mi–Fa ve Si–Do arasında siyah tuş yoktur; ikisi de yarım sestir."
+      },
+      "practice": {
+        "en": "With right finger 2, touch C4 then each next semitone up to C5, naming each key aloud with a sharp name. Return down naming flats. Then play F4 F♯4 G4 and B4 B♭4 A4 slowly with relaxed fingers. A sign lasts until the end of its bar unless a natural cancels it.",
+        "tr": "Sağ 2. parmakla Do4'e, sonra Do5'e kadar her yarım sese dokun; her tuşu diyezli adıyla sesli söyle. İnerken bemol adlarını söyle. Sonra gevşek parmaklarla yavaşça Fa4 Fa♯4 Sol4 ve Si4 Si♭4 La4 çal. Bir işaret, natürel kaldırmadıkça ölçü sonuna kadar geçerlidir."
+      },
+      "check": {
+        "en": "Can I name both possible names of a black key and find E–F and B–C?",
+        "tr": "Bir siyah tuşun iki adını söyleyip Mi–Fa ve Si–Do'yu bulabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If names mix up, go back to lesson 2 and find the two-black-key groups first; then move one semitone at a time and say the direction before the name.",
+        "tr": "Adlar karışırsa ders 2'ye dön, önce iki siyah tuşlu grupları bul; sonra tek yarım ses ilerle ve adı söylemeden önce yönü söyle."
+      }
+    },
+    {
+      "id": "piano-17",
+      "title": {
+        "en": "Intervals from a second to a fifth",
+        "tr": "İkiliden beşliye aralıklar"
+      },
+      "teach": {
+        "en": "An interval counts letter names from one note to another, including both. C to D is a second (line to space), C to E a third (line to line or space to space), C to F a fourth, C to G a fifth. On the staff a second moves to the next position; a third skips one position; a fifth skips three. In a five-finger position the finger difference plus one gives the interval.",
+        "tr": "Aralık, iki nota arasındaki nota adlarını ikisi dahil sayar. Do–Re ikili (çizgiden aralığa), Do–Mi üçlü (çizgiden çizgiye veya aralıktan aralığa), Do–Fa dörtlü, Do–Sol beşlidir. Dizekte ikili sonraki konuma gider; üçlü bir konum atlar; beşli üç konum atlar. Beş parmak konumunda parmak farkının bir fazlası aralığı verir."
+      },
+      "practice": {
+        "en": "In right-hand C position play C4–D4, C4–E4, C4–F4, C4–G4, naming each interval before playing. Then read these pairs from the staff in your head first: E4–G4, D4–G4, F4–G4, C4–F4. Name, play, and compare only afterwards. Repeat with left hand C3–G3.",
+        "tr": "Sağ el Do konumunda Do4–Re4, Do4–Mi4, Do4–Fa4, Do4–Sol4 çal; çalmadan önce her aralığı adlandır. Sonra şu çiftleri önce zihninde dizekten oku: Mi4–Sol4, Re4–Sol4, Fa4–Sol4, Do4–Fa4. Adlandır, çal, ancak sonra karşılaştır. Sol el Do3–Sol3 ile tekrarla."
+      },
+      "check": {
+        "en": "Can I name an interval from the staff before I play it?",
+        "tr": "Bir aralığı çalmadan önce dizekten adlandırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If counting slips, count letter names on your fingers including the first note, then check line/space pattern; a third always stays line–line or space–space.",
+        "tr": "Sayım kayarsa ilk nota dahil nota adlarını parmaklarında say, sonra çizgi/aralık düzenine bak; üçlü hep çizgi–çizgi veya aralık–aralık kalır."
+      }
+    },
+    {
+      "id": "piano-18",
+      "title": {
+        "en": "G position and moving the hand",
+        "tr": "Sol konumu ve eli taşımak"
+      },
+      "teach": {
+        "en": "A five-finger position is named by the lowest note it covers. In right-hand G position, fingers 1–5 cover G4 A4 B4 C5 D5. In left-hand G position, fingers 5–1 cover G2 A2 B2 C3 D3. Moving position means lifting the whole hand during a rest or a held note, not stretching one finger. G major uses F♯; when a melody meets F, play the black key F♯ unless a natural is written.",
+        "tr": "Beş parmak konumu kapladığı en pes notayla adlandırılır. Sağ el Sol konumunda 1–5 parmaklar Sol4 La4 Si4 Do5 Re5'i kaplar. Sol el Sol konumunda 5–1 parmaklar Sol2 La2 Si2 Do3 Re3'ü kaplar. Konum değiştirmek bir parmağı germek değil, sus veya tutulan nota sırasında bütün eli kaldırıp taşımaktır. Sol majör Fa♯ kullanır; melodide Fa gelirse natürel yazmadıkça siyah tuş Fa♯'yi çal."
+      },
+      "practice": {
+        "en": "Right hand: play C4 D4 E4 F4 G4 in C position, rest one beat while moving finger 1 to G4, then play G4 A4 B4 C5 D5. Then play this G-position phrase: G4 A4 B4 G4 | A4 F♯4 G4 half. F♯ is reached with finger 1 moving one key left of G or with a short shift; choose the comfortable option and keep the shoulder low.",
+        "tr": "Sağ el: Do konumunda Do4 Re4 Mi4 Fa4 Sol4 çal, 1. parmağı Sol4'e taşırken bir vuruş sus, sonra Sol4 La4 Si4 Do5 Re5 çal. Ardından şu Sol konumu cümlesini çal: Sol4 La4 Si4 Sol4 | La4 Fa♯4 Sol4 ikilik. Fa♯'ye 1. parmağı Sol'ün bir tuş soluna kaydırarak veya kısa bir taşımayla ulaş; rahat olanı seç ve omzu alçak tut."
+      },
+      "check": {
+        "en": "Can I move to a new position during a rest without rushing the count?",
+        "tr": "Sayımı hızlandırmadan sus sırasında yeni konuma geçebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the move is late, practise only the last note, the rest and the first note of the new position, counting aloud; place the hand silently before playing.",
+        "tr": "Geçiş geç kalırsa yalnız son notayı, susu ve yeni konumun ilk notasını sesli sayarak çalış; çalmadan önce eli sessizce yerleştir."
+      }
+    },
+    {
+      "id": "piano-19",
+      "title": {
+        "en": "C major scale with a thumb crossing",
+        "tr": "Başparmak geçişiyle Do majör dizisi"
+      },
+      "teach": {
+        "en": "A scale is a stepwise order of notes. C major uses only white keys: C D E F G A B C. One octave in the right hand is fingered 1 2 3 1 2 3 4 5: after finger 3 plays E, the thumb passes under to F. Descending, finger 3 crosses over the thumb from F to E. The left hand ascends 5 4 3 2 1 3 2 1: finger 3 crosses over to A. Keep the wrist level and let the arm travel.",
+        "tr": "Dizi, notaların adım adım sırasıdır. Do majör yalnız beyaz tuşları kullanır: Do Re Mi Fa Sol La Si Do. Sağ elde bir oktav 1 2 3 1 2 3 4 5 parmaklanır: 3. parmak Mi'yi çaldıktan sonra başparmak altından Fa'ya geçer. İnerken 3. parmak başparmağın üstünden Fa'dan Mi'ye geçer. Sol el çıkarken 5 4 3 2 1 3 2 1 kullanır: 3. parmak üstten La'ya geçer. Bileği düz tut, kolun ilerlemesine izin ver."
+      },
+      "practice": {
+        "en": "First practise only the crossing: right E4 (3) to F4 (1) and back, slowly ten times with a release between. Then play C4 to C5 and back, one note per beat at a slow tempo. Left hand alone: C3 to C4 and back with 5 4 3 2 1 3 2 1. Hands together only if each hand is even.",
+        "tr": "Önce yalnız geçişi çalış: sağ Mi4 (3) ile Fa4 (1) arası gidip gel, aralarda bırakarak yavaşça on kez. Sonra Do4'ten Do5'e çıkıp in, yavaş tempoda vuruş başına bir nota. Sol el ayrı: 5 4 3 2 1 3 2 1 ile Do3'ten Do4'e çıkıp in. Her el düzgün olmadıkça elleri birleştirme."
+      },
+      "check": {
+        "en": "Is the crossing note as even in time as its neighbours?",
+        "tr": "Geçiş notası zaman olarak komşuları kadar düzenli mi?"
+      },
+      "recover": {
+        "en": "If the thumb bumps or the elbow lifts, slow down and play only three notes around the crossing; let the elbow move sideways with the hand.",
+        "tr": "Başparmak takılırsa veya dirsek kalkarsa yavaşla ve yalnız geçişin etrafındaki üç notayı çal; dirseğin elle birlikte yana gitmesine izin ver."
+      }
+    },
+    {
+      "id": "piano-20",
+      "title": {
+        "en": "Three-four time and dotted notes",
+        "tr": "Üç dörtlük ölçü ve noktalı notalar"
+      },
+      "teach": {
+        "en": "In 3/4 each bar has three quarter-note beats, counted 1 2 3, with beat 1 slightly stronger. A dot adds half of a note's value: a dotted half lasts three beats, a dotted quarter lasts one and a half. A dotted quarter is often followed by an eighth: count 1 (2) and | the eighth falls on the 'and' of beat 2.",
+        "tr": "3/4'te her ölçüde üç dörtlük vuruş vardır; 1 2 3 diye sayılır ve 1. vuruş biraz daha güçlüdür. Nokta, notanın değerinin yarısını ekler: noktalı ikilik üç vuruş, noktalı dörtlük bir buçuk vuruş sürer. Noktalı dörtlüğü çoğu zaman sekizlik izler: 1 (2) ve diye say; sekizlik 2. vuruşun 've'sine düşer."
+      },
+      "practice": {
+        "en": "Clap and count before playing. 3/4: C4 E4 G4 | C5 dotted half | G4 E4 C4 | dotted half C4. 4/4 with dotted rhythm: C4 dotted quarter, D4 eighth, E4 half | E4 dotted quarter, D4 eighth, C4 half. Then play each line with the right hand in C position, counting aloud.",
+        "tr": "Çalmadan önce alkışla ve say. 3/4: Do4 Mi4 Sol4 | Do5 noktalı ikilik | Sol4 Mi4 Do4 | noktalı ikilik Do4. Noktalı ritimle 4/4: Do4 noktalı dörtlük, Re4 sekizlik, Mi4 ikilik | Mi4 noktalı dörtlük, Re4 sekizlik, Do4 ikilik. Sonra her satırı sağ el Do konumunda sesli sayarak çal."
+      },
+      "check": {
+        "en": "Does each bar add up to its time signature without an extra or missing beat?",
+        "tr": "Her ölçü, fazla veya eksik vuruş olmadan ölçü işaretine eşit mi?"
+      },
+      "recover": {
+        "en": "If the dotted rhythm becomes even, count in eighths (1 and 2 and) and hold the dotted note through three of them before the short note.",
+        "tr": "Noktalı ritim eşitleşirse sekizliklerle say (1 ve 2 ve) ve kısa notadan önce noktalı notayı üç sekizlik boyunca tut."
+      }
+    },
+    {
+      "id": "piano-21",
+      "title": {
+        "en": "Staccato, legato and accents",
+        "tr": "Staccato, legato ve aksanlar"
+      },
+      "teach": {
+        "en": "Legato connects notes: release one key exactly as the next sounds. Staccato, a dot above or below the notehead, means short and detached; the key rises quickly but the beat keeps its full length. An accent > asks for one note a little stronger than its neighbours. These are touch choices, not force; keep the hand loose.",
+        "tr": "Legato notaları bağlar: bir tuşu tam bir sonraki ses çıkarken bırak. Staccato, notanın üstünde veya altında nokta, kısa ve ayrık demektir; tuş hızla kalkar ama vuruş tam süresini korur. Aksan > bir notanın komşularından biraz daha güçlü olmasını ister. Bunlar kuvvet değil dokunuş seçimleridir; eli gevşek tut."
+      },
+      "practice": {
+        "en": "Play C4 D4 E4 F4 G4 three ways at the same slow tempo: all legato, all staccato, then legato with an accent on each beat 1. Then play G4 F4 E4 D4 C4 with the first two staccato and the last three legato. Listen for silence between staccato notes while the count continues.",
+        "tr": "Do4 Re4 Mi4 Fa4 Sol4'ü aynı yavaş tempoda üç biçimde çal: hepsi legato, hepsi staccato, sonra her 1. vuruşta aksanla legato. Ardından Sol4 Fa4 Mi4 Re4 Do4'ü ilk ikisi staccato, son üçü legato çal. Sayım sürerken staccato notalar arasındaki sessizliği dinle."
+      },
+      "check": {
+        "en": "Can I keep the same tempo while changing only the touch?",
+        "tr": "Yalnız dokunuşu değiştirirken aynı tempoyu koruyabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If staccato speeds you up, tap the pulse with the other hand or foot and play staccato only on every other beat first.",
+        "tr": "Staccato seni hızlandırırsa diğer elle veya ayakla nabzı vur ve önce yalnız iki vuruşta bir staccato çal."
+      }
+    },
+    {
+      "id": "piano-22",
+      "title": {
+        "en": "Left-hand C, F and G7 chords",
+        "tr": "Sol elde Do, Fa ve Sol7 akorları"
+      },
+      "teach": {
+        "en": "In C major the main chords are I (C), IV (F) and V7 (G7). A close left-hand pattern avoids big jumps: C chord C3 E3 G3 with fingers 5 3 1; F chord C3 F3 A3 with 5 2 1; G7 chord B2 F3 G3 with 5 2 1. C stays as a shared note between C and F; G stays between C and G7. Shared notes let the hand change with small finger moves.",
+        "tr": "Do majörde ana akorlar I (Do), IV (Fa) ve V7 (Sol7)'dir. Yakın bir sol el düzeni büyük atlamaları önler: Do akoru Do3 Mi3 Sol3, parmaklar 5 3 1; Fa akoru Do3 Fa3 La3, 5 2 1; Sol7 akoru Si2 Fa3 Sol3, 5 2 1. Do, Do ile Fa arasında ortak notadır; Sol, Do ile Sol7 arasında ortaktır. Ortak notalar elin küçük parmak hareketleriyle değişmesini sağlar."
+      },
+      "practice": {
+        "en": "Left hand alone, one chord per bar as a whole note: C | F | C | G7 | C. Move only the fingers that change. Then accompany this original right-hand melody in C position: E4 G4 E4 C4 | D4 F4 D4 G4 | F4 E4 D4 half | C4 whole, with left chords C | G7 | G7 | C held for each bar.",
+        "tr": "Sol el ayrı, ölçü başına birlik olarak tek akor: Do | Fa | Do | Sol7 | Do. Yalnız değişen parmakları kıpırdat. Sonra sağ el Do konumunda şu özgün melodiye eşlik et: Mi4 Sol4 Mi4 Do4 | Re4 Fa4 Re4 Sol4 | Fa4 Mi4 Re4 ikilik | Do4 birlik; sol el her ölçü Do | Sol7 | Sol7 | Do akorunu tutar."
+      },
+      "check": {
+        "en": "Can I change chords on beat 1 while the melody keeps its rhythm?",
+        "tr": "Melodi ritmini korurken akoru 1. vuruşta değiştirebiliyor muyum?"
+      },
+      "recover": {
+        "en": "If the change is late, play only the last melody note and the new chord together several times; then add one bar before it.",
+        "tr": "Değişim geç kalırsa yalnız son melodi notasını ve yeni akoru birkaç kez birlikte çal; sonra önüne bir ölçü ekle."
+      }
+    },
+    {
+      "id": "piano-23",
+      "title": {
+        "en": "Map a new piece on your own",
+        "tr": "Yeni bir parçayı kendin haritala"
+      },
+      "teach": {
+        "en": "Independent practice starts before playing. Choose a short beginner piece you are allowed to use, or write your own eight bars in C or G. Map it on paper: key and sharps/flats, time signature, the hand positions and where they move, the hardest two bars, and any dynamics or touch marks. A map turns a page into small, ordered tasks.",
+        "tr": "Bağımsız çalışma çalmadan önce başlar. Kullanmana izin verilen kısa bir başlangıç parçası seç ya da Do veya Sol'de kendi sekiz ölçünü yaz. Kağıtta haritala: ton ve diyez/bemoller, ölçü işareti, el konumları ve nerede değiştikleri, en zor iki ölçü ve gürlük veya dokunuş işaretleri. Harita bir sayfayı küçük, sıralı görevlere çevirir."
+      },
+      "practice": {
+        "en": "Write your map in five lines. Then choose the order: the hardest bars first, hands separately, slowly; then connect bars in pairs. Set a starting tempo you can keep without stopping. Do not look for a recording of the piece as a requirement; reading and counting are the goal here.",
+        "tr": "Haritanı beş satırda yaz. Sonra sırayı seç: önce en zor ölçüler, eller ayrı, yavaş; sonra ölçüleri ikişer bağla. Durmadan koruyabileceğin bir başlangıç temposu belirle. Parçanın kaydını aramak şart değildir; buradaki amaç okumak ve saymaktır."
+      },
+      "check": {
+        "en": "Could someone else follow my map to know what to practise first?",
+        "tr": "Başka biri haritamı izleyerek önce neyi çalışacağını anlayabilir mi?"
+      },
+      "recover": {
+        "en": "If the piece feels too hard, choose fewer bars or a piece in one position; a smaller complete map is better than a long unfinished one.",
+        "tr": "Parça çok zor geliyorsa daha az ölçü veya tek konumlu bir parça seç; küçük ama tam bir harita, uzun ve yarım bir haritadan iyidir."
+      }
+    },
+    {
+      "id": "piano-24",
+      "title": {
+        "en": "Your own practice cycle",
+        "tr": "Kendi çalışma döngün"
+      },
+      "teach": {
+        "en": "A practice cycle has four parts: a short warm-up (lesson 19 scale or lesson 17 intervals), focused work on one mapped problem, a full play-through at the chosen tempo, and a note for next time. Short regular sessions usually help more than one long session. Rest when hands or shoulders feel tense.",
+        "tr": "Bir çalışma döngüsünün dört parçası vardır: kısa ısınma (ders 19 dizisi veya ders 17 aralıkları), haritadaki tek bir soruna odaklı çalışma, seçilen tempoda baştan sona çalma ve bir sonraki sefer için not. Kısa düzenli oturumlar çoğu zaman tek uzun oturumdan daha çok yardım eder. Eller veya omuzlar gerilince dinlen."
+      },
+      "practice": {
+        "en": "On one day run the cycle with your lesson 23 piece: warm-up, one focus task, one play-through, one written note (bar, count, observed result). On another day repeat the same play-through at the same tempo and compare that bar: improved, unchanged or uncertain. Then write the next focus and, only if comfortable, a slightly faster tempo.",
+        "tr": "Bir gün döngüyü ders 23 parçanla uygula: ısınma, tek odak görevi, bir kez baştan sona çalma, bir yazılı not (ölçü, vuruş, gözlenen sonuç). Başka bir gün aynı tempoda aynı çalmayı tekrarla ve o ölçüyü karşılaştır: iyileşti, aynı kaldı veya belirsiz. Sonra sıradaki odağı ve yalnız rahatsa biraz daha hızlı bir tempoyu yaz."
+      },
+      "check": {
+        "en": "Can I plan, run and compare a practice session without the course telling me each step?",
+        "tr": "Kurs her adımı söylemeden bir çalışmayı planlayıp uygulayıp karşılaştırabiliyor muyum?"
+      },
+      "recover": {
+        "en": "If a session goes badly, shorten it to the warm-up and one bar; a finished small cycle still counts. A teacher can help with individual technique.",
+        "tr": "Bir oturum kötü geçerse onu ısınma ve tek ölçüye indir; bitmiş küçük bir döngü yine sayılır. Bireysel teknik için öğretmen yardımcı olabilir."
+      }
+    },
+    {
+      "id": "piano-25",
+      "title": {
         "en": "Exit review and next practice",
         "tr": "Çıkış değerlendirmesi ve sonraki çalışma"
       },
       "teach": {
-        "en": "Review key direction and C locations, finger numbers, both clef anchors and durations. Perform lesson 15 and decode lesson 14 afresh. Your own observation is not a sensor result or mastery certificate. This is a bounded beginner foundation, not grade equivalence or complete piano training.",
-        "tr": "Tuş yönü ve Do konumlarını, parmak numaralarını, iki anahtar referansını ve süreleri gözden geçir. Ders 15’i çal, ders 14’ü yeniden çöz. Kendi gözlemin sensör sonucu veya ustalık belgesi değildir. Bu sınırlı başlangıç temelidir; sınav derecesi veya tüm piyano eğitimi değildir."
+        "en": "Review key direction and C locations, finger numbers, both clef anchors and durations, sharps and flats, intervals, G position, the C major scale, 3/4 and dotted rhythms, touch marks and the left-hand C, F and G7 chords. Perform lesson 15, decode lesson 14 afresh and run one cycle with your own mapped piece from lessons 23–24. Your own observation is not a sensor result or mastery certificate. This is a bounded beginner foundation, not grade equivalence or complete piano training.",
+        "tr": "Tuş yönü ve Do konumlarını, parmak numaralarını, iki anahtar referansını ve süreleri, diyez ve bemolleri, aralıkları, Sol konumunu, Do majör dizisini, 3/4 ve noktalı ritimleri, dokunuş işaretlerini ve sol el Do, Fa ve Sol7 akorlarını gözden geçir. Ders 15'i çal, ders 14'ü yeniden çöz ve ders 23–24'te haritaladığın kendi parçanla bir döngü uygula. Kendi gözlemin sensör sonucu veya ustalık belgesi değildir. Bu sınırlı başlangıç temelidir; sınav derecesi veya tüm piyano eğitimi değildir."
       },
       "practice": {
-        "en": "On separate days, try naming/reading, steady counting and the two-hand study. For a recovery cycle, record the chosen tempo and one concrete bar/count observation from lesson 15. Practise one smaller correction, then repeat the same study at that same tempo and compare that bar/count. Record improved, unchanged or uncertain. “No observed error” is also valid; it is not proof of mastery. Revisit the matching lesson when uncertain. Extend only when comfortable; a teacher can help with individual technique and notation. For each outcome, write one of “observed”, “needs another attempt”, or “uncertain”: find a C and name its white and black neighbours (2–3); explain 4/4 and count a note–rest bar without adding a beat (4, 8); decode the two staves on paper before comparing the answer panel (7, 14); keep the melody and bass durations in the four-bar study (10–12, 15); and compare one smaller correction at the same chosen tempo (15). Describe the exact task you observed, not general piano ability. A device-limited dynamics check stays unassessed (13).",
-        "tr": "Ayrı günlerde adlandırma/okuma, düzenli sayma ve iki el etüdünü dene. Toparlanma döngüsünde seçtiğin tempoyu ve ders 15’ten somut bir ölçü/vuruş gözlemini kaydet. Daha küçük tek düzeltme çalış, sonra aynı etüdü aynı tempoda tekrarlayıp o ölçü/vuruşu karşılaştır. İyileşti, aynı kaldı veya belirsiz kaydet. “Hata gözlemedim” de geçerlidir; ustalık kanıtı değildir. Belirsizlikte ilgili derse dön. Yalnız rahatsa genişlet; bireysel teknik ve nota için öğretmen yardımcı olabilir. Her kazanım için “gözledim”, “yeniden denemeliyim” veya “belirsiz” yaz: bir Do bulup beyaz ve siyah komşularını adlandır (2–3); 4/4’ü açıkla ve nota–sus ölçüsünü vuruş eklemeden say (4, 8); cevap paneliyle karşılaştırmadan önce iki dizeği kağıtta çöz (7, 14); dört ölçülük etütte melodi ve bas sürelerini koru (10–12, 15); daha küçük tek düzeltmeyi aynı seçilen tempoda karşılaştır (15). Genel piyano yeteneği yerine gözlediğin tam görevi anlat. Cihazla sınırlı gürlük kontrolü değerlendirilmemiş kalır (13)."
+        "en": "On separate days, try naming/reading, steady counting, the two-hand study and your own piece. For each outcome, write one of “observed”, “needs another attempt”, or “uncertain”: find a C and name its white and black neighbours, including a sharp and a flat name (2–3, 16); explain 4/4 and 3/4 and count a note–rest bar and a dotted rhythm without adding a beat (4, 8, 20); name an interval from the staff before playing (17); move to G position during a rest (18); play the C major scale with an even thumb crossing (19); change left-hand chords on beat 1 under a melody (22); keep melody and bass durations in the four-bar study (10–12, 15); and map a new piece, run your own cycle and compare one smaller correction at the same tempo (23–24). “No observed error” is also valid; it is not proof of mastery. Revisit the matching lesson when uncertain. A device-limited dynamics check stays unassessed (13). A teacher can help with individual technique and notation.",
+        "tr": "Ayrı günlerde adlandırma/okuma, düzenli sayma, iki el etüdü ve kendi parçanı dene. Her kazanım için “gözledim”, “yeniden denemeliyim” veya “belirsiz” yaz: bir Do bulup beyaz ve siyah komşularını, bir diyez ve bir bemol adı dahil adlandır (2–3, 16); 4/4 ve 3/4'ü açıkla, nota–sus ölçüsünü ve noktalı ritmi vuruş eklemeden say (4, 8, 20); çalmadan önce dizekten bir aralığı adlandır (17); sus sırasında Sol konumuna geç (18); Do majör dizisini düzgün başparmak geçişiyle çal (19); melodi altında sol el akorlarını 1. vuruşta değiştir (22); dört ölçülük etütte melodi ve bas sürelerini koru (10–12, 15); yeni bir parçayı haritala, kendi döngünü uygula ve daha küçük tek düzeltmeyi aynı tempoda karşılaştır (23–24). “Hata gözlemedim” de geçerlidir; ustalık kanıtı değildir. Belirsizlikte ilgili derse dön. Cihazla sınırlı gürlük kontrolü değerlendirilmemiş kalır (13). Bireysel teknik ve nota için öğretmen yardımcı olabilir."
       },
       "check": {
         "en": "Can I explain and repeat these beginner tasks, including recovering from a mistake?",

@@ -207,7 +207,7 @@ final class UkuleleCourse {
     lessons = List<UkuleleLesson>.unmodifiable([
       for (final item in m['lessons'] as List) UkuleleLesson(item),
     ]);
-    if (tab.length != 8 || study.length != 8 || lessons.length != 18) {
+    if (tab.length != 8 || study.length != 8 || lessons.length != 24) {
       throw const FormatException('Incomplete ukulele foundation');
     }
     for (var i = 0; i < lessons.length; i++) {
