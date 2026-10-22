@@ -94,6 +94,21 @@ final class AccountDeleteTransport {
       return _json(jsonDecode(_session(aliceUuid, 'A-refreshed')));
     }
     if (request.url.path.endsWith('/motion_profiles')) return _json(<Object>[]);
+    // Core 5832031 account page age read: a declared adult without consent row.
+    if (request.method == 'GET' &&
+        request.url.path.endsWith('/motion_age_declarations')) {
+      return _json(<Object>[
+        <String, Object>{
+          'birth_year_month': '1990-01',
+          'country': 'TR',
+          'policy_version': '2026-10-21.1',
+        },
+      ]);
+    }
+    if (request.method == 'GET' &&
+        request.url.path.endsWith('/motion_parental_consents')) {
+      return _json(<Object>[]);
+    }
     return _json(<String, Object>{});
   }
 

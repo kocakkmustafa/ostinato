@@ -134,6 +134,10 @@ final class _Fixture {
   final paidResult = ValueNotifier<bool?>(null);
   final requests = <http.Request>[];
   final profileReads = <http.Request>[];
+  // Core 5832031 reads the signed-in owner's age declaration and consent on
+  // the account page. The fixture answers as a declared adult (no consent
+  // row), so these reads are owner-scoped GETs, never writes.
+  final ageReads = <http.Request>[];
   final profileWrites = <http.Request>[];
   final unexpected = <String>[];
   final held = <Completer<http.Response>>[];
@@ -225,6 +229,22 @@ final class _Fixture {
     if (request.method == 'GET' && request.url.path == '/auth/v1/user') {
       return _json(_user());
     }
+    if (request.method == 'GET' &&
+        request.url.path == '/rest/v1/motion_age_declarations') {
+      ageReads.add(request);
+      return _json([
+        {
+          'birth_year_month': '1990-01',
+          'country': 'TR',
+          'policy_version': '2026-10-21.1',
+        },
+      ]);
+    }
+    if (request.method == 'GET' &&
+        request.url.path == '/rest/v1/motion_parental_consents') {
+      ageReads.add(request);
+      return _json(<Object>[]);
+    }
     if (request.url.path == '/rest/v1/motion_profiles') {
       if (request.method == 'GET') {
         profileReads.add(request);
@@ -274,6 +294,9 @@ final class _Fixture {
     expect(deletedCallbacks, 0);
     expect(clearCallbacks, 0);
     expect(unexpected, isEmpty);
+    for (final read in ageReads) {
+      expect(read.url.queryParameters['user_id'], 'eq.$_id');
+    }
   }
 
   Future<void> close(WidgetTester tester) async {
