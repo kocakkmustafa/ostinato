@@ -1866,6 +1866,7 @@ const appMessageIds = <(String, String), String>{
   ("Find C from a pair", "Do’yu ikiliden bul"): "e2f4236965ccc8e1",
   ("Can I keep the shared middle finger comfortable and hear the open A?", "Ortak orta parmağı rahat tutup açık La’yı duyabiliyor muyum?"): "e3425054a3c48103",
   ("Each note one beat; pitch labels are SOUNDING information.", "Her nota bir vuruş; ses etiketleri GERÇEK ses bilgisidir."): "e38bec80c5ad8fab",
+  ("A seventh", "La yedi"): "e3e7345e0bb83651",
   ("A fingertip blocks a required open string.", "Parmak ucu gerekli açık teli kapatıyor."): "e3ead6e4c8d2c60d",
   ("Expressive pitch motion", "Anlatımlı perde hareketi"): "e3f18f7fca672b9b",
   ("Tablature shows four horizontal string lines: top 1 A, then 2 E, 3 C, bottom 4 high G. This is not the left→right order of a chord grid. A number on a line is a fret, not a finger; 0 means open. Here each column is one quarter beat; each group of four columns is one 4/4 bar. Only the marked string is plucked in that column. No chord is held.", "Tab dört yatay tel çizgisidir: üstte 1 La, sonra 2 Mi, 3 Do, altta 4 yüksek Sol. Bu, akor ızgarasının soldan sağa sırası değildir. Çizgideki sayı perdedir, parmak değil; 0 açık demektir. Burada her sütun bir dörtlük vuruş; dört sütun bir 4/4 ölçüdür. Sütunda yalnız işaretli tel çekilir. Akor tutulmaz."): "e3f4aa8557baed5b",

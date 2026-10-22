@@ -90,6 +90,82 @@
         1,
         3
       ]
+    },
+    {
+      "id": "G",
+      "title": {
+        "en": "G major",
+        "tr": "Sol majör"
+      },
+      "frets4to1": [
+        0,
+        2,
+        3,
+        2
+      ],
+      "fingers4to1": [
+        0,
+        1,
+        3,
+        2
+      ]
+    },
+    {
+      "id": "Em",
+      "title": {
+        "en": "E minor",
+        "tr": "Mi minör"
+      },
+      "frets4to1": [
+        0,
+        4,
+        3,
+        2
+      ],
+      "fingers4to1": [
+        0,
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "Dm",
+      "title": {
+        "en": "D minor",
+        "tr": "Re minör"
+      },
+      "frets4to1": [
+        2,
+        2,
+        1,
+        0
+      ],
+      "fingers4to1": [
+        2,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "id": "A7",
+      "title": {
+        "en": "A seventh",
+        "tr": "La yedi"
+      },
+      "frets4to1": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "fingers4to1": [
+        0,
+        1,
+        0,
+        0
+      ]
     }
   ],
   "tab": [
@@ -702,7 +778,10 @@
         "en": "If a string is muted, pluck strings one at a time and adjust the finger touching it; arch the finger and place it just behind the fret wire.",
         "tr": "Bir tel boğuluyorsa telleri tek tek çek ve ona değen parmağı ayarla; parmağı kavisle ve perde telinin hemen gerisine koy."
       },
-      "diagrams": []
+      "diagrams": [
+        "G",
+        "Em"
+      ]
     },
     {
       "id": "ukulele-19",
@@ -726,7 +805,10 @@
         "en": "If Dm buzzes, check that the index on fret 1 is close to the fret wire and the ring finger does not touch string 2.",
         "tr": "Re minör cızırdarsa 1. perdedeki işaret parmağının perde teline yakın olduğunu ve yüzük parmağının 2. tele değmediğini kontrol et."
       },
-      "diagrams": []
+      "diagrams": [
+        "Dm",
+        "A7"
+      ]
     },
     {
       "id": "ukulele-20",

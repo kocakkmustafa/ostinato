@@ -12,6 +12,10 @@ const ukuleleChordFrets = {
   'Am': [2, 0, 0, 0],
   'F': [2, 0, 1, 0],
   'G7': [0, 2, 1, 2],
+  'G': [0, 2, 3, 2],
+  'Em': [0, 4, 3, 2],
+  'Dm': [2, 2, 1, 0],
+  'A7': [0, 1, 0, 0],
 };
 Map<String, dynamic> _object(Object? value, Set<String> keys) {
   if (value is! Map<String, dynamic> ||
@@ -49,7 +53,7 @@ final class UkuleleChord {
     }
     id = m['id'] as String;
     title = _copy(m['title']);
-    frets = _fourInts(m['frets4to1'], 3);
+    frets = _fourInts(m['frets4to1'], 4);
     fingers = _fourInts(m['fingers4to1'], 4);
     for (var i = 0; i < 4; i++) {
       if (frets[i] != ukuleleChordFrets[id]![i] ||
@@ -192,7 +196,8 @@ final class UkuleleCourse {
     entry = _copy(m['entry']);
     exit = _copy(m['exit']);
     final shapes = [for (final item in m['chords'] as List) UkuleleChord(item)];
-    if (shapes.length != 4 || shapes.map((c) => c.id).toSet().length != 4) {
+    if (shapes.length != ukuleleChordFrets.length ||
+        shapes.map((c) => c.id).toSet().length != ukuleleChordFrets.length) {
       throw const FormatException('Incomplete ukulele chord set');
     }
     chords = Map<String, UkuleleChord>.unmodifiable({

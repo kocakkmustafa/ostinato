@@ -337,7 +337,7 @@ class _Vector extends StatelessWidget {
             child: SizedBox(
               width: constraints.maxWidth < 340 ? 340 : constraints.maxWidth,
               height: kind == 'chord'
-                  ? 265
+                  ? 265 + 48.0 * (_chordRows(chord) - 3)
                   : kind == 'tab'
                   ? 170
                   : 220,
@@ -358,6 +358,10 @@ class _Vector extends StatelessWidget {
     ),
   );
 }
+
+/// Three fret rows by default; a shape reaching fret 4 (E minor) adds one.
+int _chordRows(UkuleleChord? chord) =>
+    chord == null ? 3 : chord.frets.fold(3, (a, b) => b > a ? b : a);
 
 class _UkePainter extends CustomPainter {
   _UkePainter(
@@ -426,11 +430,18 @@ class _UkePainter extends CustomPainter {
     }
     if (kind == 'chord') {
       const y = 60.0, step = 48.0;
+      final rows = _chordRows(chord);
       final gap = (size.width - 110) / 3;
       for (var i = 0; i < 4; i++) {
         final x = 55 + i * gap;
-        label(c, ['4 G', '3 C', '2 E', '1 A'][i], x - 13, 228, size: 14);
-        c.drawLine(Offset(x, y), Offset(x, y + 3 * step), ink);
+        label(
+          c,
+          ['4 G', '3 C', '2 E', '1 A'][i],
+          x - 13,
+          y + rows * step + 24,
+          size: 14,
+        );
+        c.drawLine(Offset(x, y), Offset(x, y + rows * step), ink);
         if (chord!.frets[i] == 0) {
           label(c, 'O', x - 7, 27);
         } else {
@@ -446,7 +457,7 @@ class _UkePainter extends CustomPainter {
           );
         }
       }
-      for (var fret = 0; fret <= 3; fret++) {
+      for (var fret = 0; fret <= rows; fret++) {
         c.drawLine(
           Offset(55, y + fret * step),
           Offset(size.width - 55, y + fret * step),

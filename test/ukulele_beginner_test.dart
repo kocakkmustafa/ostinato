@@ -455,7 +455,7 @@ void main() {
       (m) => (m['chords'][0] as Map)['fingers4to1'] = [1, 0, 0, 3],
       (m) => (m['lessons'][0] as Map)['diagrams'] = ['unknown'],
       (m) => (m['study'][0] as Map)['slots'] = ['D'],
-      (m) => (m['study'][0] as Map)['chord'] = 'Dm',
+      (m) => (m['study'][0] as Map)['chord'] = 'Bb',
       (m) => (m['study'][0]['slots'] as List)[1] = 'X',
     ]) {
       final copy = jsonDecode(jsonEncode(source)) as Map<String, dynamic>;
@@ -470,6 +470,10 @@ void main() {
       'Am': {9, 0, 4},
       'F': {0, 5, 9},
       'G7': {2, 5, 7, 11},
+      'G': {7, 11, 2},
+      'Em': {4, 7, 11},
+      'Dm': {2, 5, 9},
+      'A7': {9, 1, 4, 7},
     };
     for (final chord in course.chords.values) {
       expect({
