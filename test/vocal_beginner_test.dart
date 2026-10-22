@@ -81,6 +81,7 @@ Future<void> _centre(WidgetTester tester, Finder target) async {
 
 void main() {
   setUpAll(() async {
+    await prepareRootTranslations();
     final font = FontLoader('Hanken Grotesk')
       ..addFont(rootBundle.load('assets/fonts/HankenGrotesk-Regular.ttf'));
     await font.load();
@@ -195,7 +196,7 @@ void main() {
   );
   for (final locale in ['en', 'tr']) {
     testWidgets(
-      '$locale sixteen lessons, separate answers, navigation and study pan at 2x',
+      '$locale every lesson, separate answers, navigation and study pan at 2x',
       (tester) async {
         tester.view.physicalSize = const Size(390, 844);
         tester.view.devicePixelRatio = 1;
@@ -233,7 +234,7 @@ void main() {
         await _centre(tester, find.byKey(const Key('vocal-01')));
         await tester.tap(find.byKey(const Key('vocal-01')));
         await tester.pumpAndSettle();
-        for (var i = 0; i < 16; i++) {
+        for (var i = 0; i < course.lessons.length; i++) {
           expect(
             find.text(
               locale == 'tr'
@@ -281,7 +282,7 @@ void main() {
             }
           }
           expect(tester.takeException(), isNull);
-          if (i < 15) {
+          if (i < course.lessons.length - 1) {
             final next = find.text(
               locale == 'tr' ? 'Sonraki ders' : 'Next lesson',
             );
@@ -455,6 +456,18 @@ void main() {
       await tester.tap(entry);
       await tester.pumpAndSettle();
       expect(find.byType(VocalBeginnerScreen), findsOneWidget);
+      // The library route loads the packaged course from the real root bundle.
+      // The lesson list sits below the course summary in a lazy ListView.
+      await waitForLocalizedFixture(
+        tester,
+        languageTag: locale,
+        anchor: find.descendant(
+          of: find.byType(VocalBeginnerScreen),
+          matching: find.byType(ListView),
+        ),
+        reason: 'Packaged voice course must load from the library route',
+      );
+      await _centre(tester, find.byKey(const Key('vocal-01')));
       expect(find.byKey(const Key('vocal-01')), findsOneWidget);
       expect(tester.takeException(), isNull);
     });

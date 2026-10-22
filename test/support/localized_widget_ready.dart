@@ -32,3 +32,19 @@ Future<void> waitForLocalizedFixture(
   expect(ready(), isTrue,
       reason: '$reason: no prepared localized frame after 200 real IO turns');
 }
+
+/// Loads every packaged catalog for the real root bundle once, with real IO,
+/// before a file's widget tests run. Without it the first tests in a file
+/// pumped against a cold delegate and only passed after an earlier test had
+/// warmed the shared cache (order-dependent). A catalog that falls back to
+/// empty source copy fails here instead of being masked.
+Future<void> prepareRootTranslations() async {
+  for (final tag in supportedLanguageTags) {
+    final translations = await const AppTranslationsDelegate().load(
+      localeForLanguageTag(tag),
+    );
+    if (translations.messages.isEmpty) {
+      throw StateError('Packaged catalog $tag did not load');
+    }
+  }
+}

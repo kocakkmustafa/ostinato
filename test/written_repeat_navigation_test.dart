@@ -9,6 +9,7 @@ import 'package:ostinato/app/screens/piano_beginner_screen.dart';
 import 'package:ostinato/app/screens/ukulele_beginner_screen.dart';
 import 'package:ostinato/app/screens/bass_beginner_screen.dart';
 import 'package:ostinato/app/screens/vocal_beginner_screen.dart';
+import 'support/localized_widget_ready.dart';
 
 class _Files extends CachingAssetBundle {
   @override
@@ -75,6 +76,7 @@ void _title(List<dynamic> lessons, int index, String locale) => expect(
 );
 
 void main() {
+  setUpAll(prepareRootTranslations);
   for (final kind in ['piano', 'ukulele', 'bass', 'vocal']) {
     for (final locale in ['en', 'tr']) {
       testWidgets('$kind $locale repeated Previous/Next then one Back at2x', (

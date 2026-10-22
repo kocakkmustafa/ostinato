@@ -14,6 +14,7 @@ import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/ukulele_beginner_screen.dart';
+import 'support/localized_widget_ready.dart';
 
 class Files extends CachingAssetBundle {
   Files({this.corrupt = false});
@@ -79,6 +80,7 @@ Future<void> _centre(WidgetTester tester, Finder target) async {
 
 void main() {
   setUpAll(() async {
+    await prepareRootTranslations();
     final font = FontLoader('Hanken Grotesk')
       ..addFont(rootBundle.load('assets/fonts/HankenGrotesk-Regular.ttf'));
     await font.load();
@@ -137,7 +139,7 @@ void main() {
   });
   for (final locale in ['en', 'tr']) {
     testWidgets(
-      '$locale all 18 lessons, hidden answers and navigation at 2x text',
+      '$locale every lesson, hidden answers and navigation at 2x text',
       (tester) async {
         tester.view.physicalSize = const Size(390, 844);
         tester.view.devicePixelRatio = 1;
@@ -170,7 +172,7 @@ void main() {
         await _centre(tester, find.byKey(const Key('ukulele-01')));
         await tester.tap(find.byKey(const Key('ukulele-01')));
         await tester.pumpAndSettle();
-        for (var i = 0; i < 18; i++) {
+        for (var i = 0; i < course.lessons.length; i++) {
           expect(
             find.text(
               locale == 'tr'
@@ -183,7 +185,7 @@ void main() {
             final answer = find.byKey(const Key('ukulele-tab-answers'));
             final answerText = find.textContaining(
               locale == 'tr'
-                  ? 'vuruş 1: tel 3, perde 0 (Do4)'
+                  ? 'vuruş 1: tel 3, perde 0 (C4 (Do4))'
                   : 'beat 1: string 3, fret 0 (C4)',
             );
             expect(answerText, findsNothing);
@@ -217,7 +219,7 @@ void main() {
               );
             }
           }
-          if (i < 17) {
+          if (i < course.lessons.length - 1) {
             final next = find.text(
               locale == 'tr' ? 'Sonraki ders' : 'Next lesson',
             );
@@ -250,7 +252,7 @@ void main() {
         expect(
           find.textContaining(
             locale == 'tr'
-                ? 'vuruş 1: tel 3, perde 0 (Do4)'
+                ? 'vuruş 1: tel 3, perde 0 (C4 (Do4))'
                 : 'beat 1: string 3, fret 0 (C4)',
           ),
           findsNothing,
@@ -328,7 +330,7 @@ void main() {
             );
             await tester.pumpAndSettle();
             final expected = locale == 'tr'
-                ? 'vuruş 1: tel 3, perde 0 (Do4)'
+                ? 'vuruş 1: tel 3, perde 0 (C4 (Do4))'
                 : 'beat 1: string 3, fret 0 (C4)';
             await _centre(tester, find.textContaining(expected));
             await capture('-answers-bar1');
@@ -336,7 +338,7 @@ void main() {
               tester,
               find.textContaining(
                 locale == 'tr'
-                    ? 'vuruş 1: tel 2, perde 3 (Sol4)'
+                    ? 'vuruş 1: tel 2, perde 3 (G4 (Sol4))'
                     : 'beat 1: string 2, fret 3 (G4)',
               ),
             );

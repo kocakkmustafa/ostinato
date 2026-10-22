@@ -8,6 +8,7 @@ import 'package:ostinato/app/guitar_journey.dart';
 import 'package:ostinato/app/screens/piano_beginner_screen.dart';
 import 'package:ostinato/app/screens/piano_visual_practice_screen.dart';
 import 'package:ostinato/app/screens/visual_practice_loop.dart';
+import 'support/localized_widget_ready.dart';
 
 class _Files extends CachingAssetBundle {
   _Files({this.corrupt = false});
@@ -120,6 +121,7 @@ void _widgetTest(String description, Future<void> Function(WidgetTester) body) {
 }
 
 void main() {
+  setUpAll(prepareRootTranslations);
   test('immutable snapshot rejects mutation and empty steps', () {
     final steps = [
       const VisualPracticeStep(
@@ -147,7 +149,7 @@ void main() {
           _active(tester),
           startsWith(
             locale == 'tr'
-                ? 'Sayım 1’de sol Do3 ve sağ Do4’ü birlikte başlat.'
+                ? 'Sayım 1’de sol C3 (Do3) ve sağ C4 (Do4) sesini birlikte başlat.'
                 : 'Start left C3 and right C4 together on count 1.',
           ),
         );
@@ -158,7 +160,7 @@ void main() {
             _active(tester),
             contains(
               locale == 'tr'
-                  ? 'Sol: Do3 tutmayı sürdür; yeniden basma.'
+                  ? 'Sol: C3 (Do3) tutmayı sürdür; yeniden basma.'
                   : 'Left: continue holding C3; do not strike again.',
             ),
           );

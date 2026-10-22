@@ -15,12 +15,14 @@ import 'package:ostinato/app/screens/lesson_scored_screen.dart';
 import 'package:ostinato/app/screens/lesson_demo_screen.dart';
 import 'package:ostinato/app/screens/lesson_locked_screen.dart';
 import 'package:ostinato/app/screens/review_screen.dart';
+import 'support/localized_widget_ready.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ContentRepository repo;
   late CueTextResolver cueText;
   setUpAll(() async {
+    await prepareRootTranslations();
     repo = await ContentRepository.load();
     cueText = await CueTextResolver.load();
   });
@@ -91,22 +93,27 @@ void main() {
         localizationsDelegates: appLocalizationsDelegates,
         home: Builder(
           builder: (context) {
-            final ids = <String>[
+            // catalogName binds a Turkish label to the exact English source
+            // name, so the real displayName is passed (a sentinel never
+            // matches). "Vibrato" is the one reviewed label identical in TR.
+            final names = <String, String>{
               for (final discipline in repo.disciplines)
-                if (discipline.status == 'live') ...<String>[
-                  discipline.id,
-                  for (final course in discipline.courses) ...<String>[
-                    course.id,
-                    for (final lesson in course.lessons) lesson.id,
-                  ],
-                ],
-            ];
-            missing = ids
+                if (discipline.status == 'live') ...<String, String>{
+                  discipline.id: discipline.displayName,
+                  for (final course in discipline.courses) ...<String, String>{
+                    course.id: course.displayName,
+                    for (final lesson in course.lessons)
+                      lesson.id: lesson.displayName,
+                  },
+                },
+            };
+            missing = names.entries
                 .where(
-                  (id) =>
-                      catalogName(context, id, 'UNTRANSLATED') ==
-                      'UNTRANSLATED',
+                  (e) =>
+                      e.key != 'voice.foundations.vibrato' &&
+                      catalogName(context, e.key, e.value) == e.value,
                 )
+                .map((e) => e.key)
                 .toList();
             return const SizedBox();
           },
@@ -180,7 +187,7 @@ void main() {
     expect(find.text('KURSLAR'), findsOneWidget);
     expect(find.textContaining('Alanını hazırla'), findsOneWidget);
     expect(
-      find.textContaining('Kaydedilmiş eğitim örnekleri duruş referansı sunar'),
+      find.textContaining('Bu notlar tarihsel duruş referanslarını açıklar'),
       findsOneWidget,
     );
     expect(find.textContaining('Çaldığınız ses ölçülmez'), findsOneWidget);

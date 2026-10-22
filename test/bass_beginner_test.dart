@@ -81,6 +81,7 @@ Future<void> _centre(WidgetTester tester, Finder target) async {
 
 void main() {
   setUpAll(() async {
+    await prepareRootTranslations();
     final font = FontLoader('Hanken Grotesk')
       ..addFont(rootBundle.load('assets/fonts/HankenGrotesk-Regular.ttf'));
     await font.load();
@@ -145,7 +146,7 @@ void main() {
   });
   for (final locale in ['en', 'tr']) {
     testWidgets(
-      '$locale all 18 lessons, hidden answers and navigation at 2x text',
+      '$locale every lesson, hidden answers and navigation at 2x text',
       (tester) async {
         tester.view.physicalSize = const Size(390, 844);
         tester.view.devicePixelRatio = 1;
@@ -188,7 +189,7 @@ void main() {
         await _centre(tester, find.byKey(const Key('bass-01')));
         await tester.tap(find.byKey(const Key('bass-01')));
         await tester.pumpAndSettle();
-        for (var i = 0; i < 18; i++) {
+        for (var i = 0; i < course.lessons.length; i++) {
           expect(
             find.text(
               locale == 'tr'
@@ -235,7 +236,7 @@ void main() {
               );
             }
           }
-          if (i < 17) {
+          if (i < course.lessons.length - 1) {
             final next = find.text(
               locale == 'tr' ? 'Sonraki ders' : 'Next lesson',
             );
@@ -350,7 +351,7 @@ void main() {
             );
             await tester.pumpAndSettle();
             final expected = locale == 'tr'
-                ? 'vuruş 1: tel 4, perde 0 (Mi1)'
+                ? 'vuruş 1: tel 4, perde 0 (E1 (Mi1))'
                 : 'beat 1: string 4, fret 0 (E1)';
             await _centre(tester, find.textContaining(expected));
             await capture('-answers-bar1');
@@ -358,7 +359,7 @@ void main() {
               tester,
               find.textContaining(
                 locale == 'tr'
-                    ? 'vuruş 1: tel 2, perde 0 (Re2)'
+                    ? 'vuruş 1: tel 2, perde 0 (D2 (Re2))'
                     : 'beat 1: string 2, fret 0 (D2)',
               ),
             );
