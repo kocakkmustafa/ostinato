@@ -11,7 +11,7 @@ dependencies:
   motion_core:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
-      ref: d69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d
+      ref: 583203112c942dd38673bc43d7d05f82f4f5173d
       path: packages/motion_core
 dev_dependencies:
   test: ^1.25.0

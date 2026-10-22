@@ -13,7 +13,7 @@ import 'package:test/test.dart';
 /// `pubspec.lock`'un `motion_core` için çözdüğü `resolved-ref` birebir
 /// aynı olmalı.
 /// Public tüketici checkpoint'i: hesap/üyelik ve 14 dil/tema sözleşmesini
-/// içeren `d69e1078`. Tüm tüketiciler aynı tam ref'i kullanır.
+/// içeren `5832031` (K08 deadline, J01, yaş/veli ve saklama yardımcıları). Tüm tüketiciler aynı tam ref'i kullanır.
 ///
 /// **REF TAM 40-SHA OLMAK ZORUNDA** (M-F-263 zeyil-2, Choreia+Gravita ölçtü —
 /// ve burada da ÖLÇÜLDÜ): pub, git ref'lerini ÇÖZMEZ, STRING olarak
@@ -23,7 +23,7 @@ import 'package:test/test.dart';
 /// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
 /// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
 /// anlaşma, ancak iki taraf varken sınanabilir.)
-const String _mandatedRef = 'd69e10786e2f1cd509b9eeadeb3ef6ea42d93b5d';
+const String _mandatedRef = '583203112c942dd38673bc43d7d05f82f4f5173d';
 const String _mandatedVersion = '0.13.0';
 
 void main() {
