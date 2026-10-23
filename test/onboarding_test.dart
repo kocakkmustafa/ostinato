@@ -11,6 +11,7 @@ import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
 import 'package:ostinato/app/screens/settings_screen.dart';
 import 'package:ostinato/main.dart';
+import 'support/localized_widget_ready.dart';
 
 /// İlk açılış akışı — O-039.
 ///
@@ -19,6 +20,7 @@ import 'package:ostinato/main.dart';
 /// ikinci açılışta GÖRÜNMÜYOR mu, ve ekrandaki sayılar kütüphaneden mi
 /// TÜRÜYOR yoksa elle mi yazılmış.
 void main() {
+  setUpAll(prepareRootTranslations);
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late ContentRepository repo;

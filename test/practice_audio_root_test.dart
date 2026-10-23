@@ -9,6 +9,7 @@ import 'package:ostinato/app/audio/practice_audio_root.dart';
 import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/main.dart';
 import 'support/fake_practice_audio_port.dart';
+import 'support/localized_widget_ready.dart';
 
 typedef _Port = FakePracticeAudioPort;
 
@@ -20,6 +21,7 @@ Route<dynamic> _route(String name) => MaterialPageRoute<void>(
 Future<void> _settleFence() => Future<void>.delayed(Duration.zero);
 
 void main() {
+  setUpAll(prepareRootTranslations);
   test(
     'A → null → A synchronously retires the old Navigator and grant',
     () async {

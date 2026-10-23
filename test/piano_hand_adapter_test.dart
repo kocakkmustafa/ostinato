@@ -7,6 +7,7 @@ import 'package:ostinato/app/piano/hand_source.dart';
 import 'package:ostinato/app/piano/piano_hand_observer.dart';
 import 'package:ostinato/app/piano/piano_hand_session.dart';
 import 'package:ostinato/app/screens/piano_hand_support_notice.dart';
+import 'support/localized_widget_ready.dart';
 
 // Entirely isolated software fixture: no native camera, audio/model inference,
 // first-party performance, teacher judgement, file, network or progress store.
@@ -168,6 +169,7 @@ final class ReplayHandSource implements HandSource {
 }
 
 void main() {
+  setUpAll(prepareRootTranslations);
   TestWidgetsFlutterBinding.ensureInitialized();
   test('candidate preserves replay provenance and exact note/finger scope', () {
     final observed = observer().observe(

@@ -8,8 +8,10 @@ import 'package:ostinato/app/guitar_journey.dart';
 import 'package:ostinato/app/guitar_journey_progress.dart';
 import 'package:ostinato/app/guitar_staff_diagram.dart';
 import 'package:ostinato/app/screens/guitar_journey_screen.dart';
+import 'support/localized_widget_ready.dart';
 
 void main() {
+  setUpAll(prepareRootTranslations);
   test('the original first-read score has four complete playable bars', () {
     final course = GuitarJourneyCourse.fromJson(
       jsonDecode(
@@ -324,7 +326,7 @@ void main() {
                 .getTopLeft(
                   find.textContaining(
                     language == 'tr'
-                        ? '1. ölçü: yazılı Mi5 (duyulan Mi4), dörtlük'
+                        ? '1. ölçü: yazılı E5 (Mi5) (duyulan E4 (Mi4)), dörtlük'
                         : 'Bar 1: written E5 (sounds E4), quarter note',
                   ),
                 )
@@ -338,7 +340,7 @@ void main() {
         expect(
           find.textContaining(
             language == 'tr'
-                ? '1. ölçü: yazılı Mi5 (duyulan Mi4), dörtlük'
+                ? '1. ölçü: yazılı E5 (Mi5) (duyulan E4 (Mi4)), dörtlük'
                 : 'Bar 1: written E5 (sounds E4), quarter note',
           ),
           findsOneWidget,

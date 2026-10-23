@@ -9,6 +9,7 @@ import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/guitar_journey.dart';
 import 'package:ostinato/app/guitar_journey_progress.dart';
 import 'package:ostinato/app/screens/guitar_journey_screen.dart';
+import 'support/localized_widget_ready.dart';
 
 class _Files extends CachingAssetBundle {
   bool unavailable = true;
@@ -80,6 +81,7 @@ GuitarJourneyCourse _course() => GuitarJourneyCourse.fromJson(
 );
 
 void main() {
+  setUpAll(prepareRootTranslations);
   for (final locale in ['en', 'tr']) {
     final tr = locale == 'tr';
     final retry = tr ? 'Yeniden dene' : 'Retry';

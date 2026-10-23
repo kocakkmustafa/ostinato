@@ -7,8 +7,10 @@ import 'package:ostinato/app/design/ostinato_theme.dart';
 import 'package:ostinato/app/screens/review_copy_tr.dart';
 import 'package:ostinato/app/screens/review_screen.dart';
 import 'package:ostinato/app/session_store.dart';
+import 'support/localized_widget_ready.dart';
 
 void main() {
+  setUpAll(prepareRootTranslations);
   TestWidgetsFlutterBinding.ensureInitialized();
   late ContentRepository repo;
   setUpAll(() async => repo = await ContentRepository.load());
@@ -68,7 +70,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Ölçümlerin çoğu bant içinde.'), findsOneWidget);
-    expect(find.text('Dört alan, tek tek.'), findsOneWidget);
+    expect(find.text('4 alan, tek tek.'), findsOneWidget);
     expect(
       find.textContaining('Gitarın sapındaki parmaklarınız'),
       findsOneWidget,

@@ -14,6 +14,7 @@ import 'package:ostinato/app/guitar_session_preparation.dart';
 import 'package:ostinato/app/screens/guitar_note_observation_screen.dart';
 import 'package:ostinato_audio/ostinato_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'support/localized_widget_ready.dart';
 
 GuitarObservationConfig config() => GuitarObservationConfig.fromJson(
   jsonDecode(
@@ -127,6 +128,7 @@ final class _UiCloseChannel
 }
 
 void main() {
+  setUpAll(prepareRootTranslations);
   setUp(resetAudioCaptureCoordinatorForTest);
   testWidgets('route disposal cancels an unanswered closeState deadline', (
     t,

@@ -7,6 +7,7 @@ import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/design/ostinato_theme.dart';
 import 'package:ostinato/app/screens/live_screen.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
+import 'support/localized_widget_ready.dart';
 
 /// Canlı YOLUN widget seviyesindeki kanıtı — sahte kaynakla.
 ///
@@ -15,6 +16,7 @@ import 'package:ostinato_posture/ostinato_posture.dart';
 /// açıyor, gözlem işareti bant içinde SUSUYOR ve dışında GÖRÜNÜYOR, ve hiçbir
 /// yerde sayısal puan yok.
 void main() {
+  setUpAll(prepareRootTranslations);
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late ContentRepository repo;

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/screens/feedback_availability.dart';
+import 'support/localized_widget_ready.dart';
 
 void main() {
+  setUpAll(prepareRootTranslations);
   for (final language in ['en', 'tr']) {
     for (final instrument in ['guitar', 'piano', 'ukulele', 'bass', 'voice']) {
       testWidgets(

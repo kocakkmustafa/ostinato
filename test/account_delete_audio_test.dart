@@ -7,8 +7,10 @@ import 'package:ostinato/app/audio/practice_audio_lease.dart';
 import 'package:ostinato/app/audio/practice_audio_root.dart';
 
 import 'support/fake_practice_audio_port.dart';
+import 'support/localized_widget_ready.dart';
 
 void main() {
+  setUpAll(prepareRootTranslations);
   test('retirement epoch invalidates audio without an identity value change', (
   ) async {
     final user = ValueNotifier<String?>('A');

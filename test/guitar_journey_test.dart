@@ -11,12 +11,14 @@ import 'package:ostinato/app/guitar_journey.dart';
 import 'package:ostinato/app/guitar_journey_progress.dart';
 import 'package:ostinato/app/guitar_session_preparation.dart';
 import 'package:ostinato/app/screens/guitar_journey_screen.dart';
+import 'support/localized_widget_ready.dart';
 
 const firstId = 'guitar.journey.start.parts';
 const accountA = '11111111-1111-4111-8111-111111111111';
 const accountB = '22222222-2222-4222-8222-222222222222';
 
 void main() {
+  setUpAll(prepareRootTranslations);
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test(
