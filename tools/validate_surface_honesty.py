@@ -522,6 +522,7 @@ NETWORK_DEPS_RECORDED = {
     "in_app_purchase": "StoreKit/Google Play satın alma ve geri yükleme köprüsü; mağaza ağı kullanabilir",
     "in_app_purchase_android": "Google Play Billing platform köprüsü; mağaza ağı kullanabilir",
     "in_app_purchase_storekit": "Apple StoreKit platform köprüsü; mağaza ağı kullanabilir",
+    "motion_platform_signals": "Core R3 (0.2.0) native eklentisi: StoreKit 2 AppTransaction ve Apple Declared Age Range / Google Play Age Signals isteği; işletim sistemi/mağaza bu sırada ağa çıkabilir. Uygulama verisi, kamera karesi veya ses göndermez; dönen yaş aralığı yalnız 13+ kontrolünü sıkılaştırır ve app tarafından saklanmaz",
     "supabase": "Core altındaki API/Auth istemcisi; hesap verisi gider, video gitmez",
     "supabase_common": "Supabase ortak HTTP/WS altyapısı; hesap trafiği",
     "supabase_flutter": "Supabase Auth oturumu ve deep-link köprüsü; hesap trafiği",
