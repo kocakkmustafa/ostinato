@@ -10,9 +10,10 @@ final class PaidAccessProbe {
 
   bool member;
   int calls = 0;
-  final ValueNotifier<String?> userId = ValueNotifier<String?>(
-    'synthetic-member',
-  );
+  // Guest scope on purpose: course progress is scoped by the signed-in user,
+  // so a synthetic user id would move records away from the guest store the
+  // course walks read back. Sign-in itself is Core's part of the guard.
+  final ValueNotifier<String?> userId = ValueNotifier<String?>(null);
 
   Widget wrap(Widget child) => AccountScope(
     connection: AccountConnection(

@@ -453,6 +453,16 @@ void main() {
             'Existing server name',
         'actual profile payload published',
       );
+      // The page asks motion-check-membership once when it opens; its answer
+      // arrives asynchronously, so wait for it before the locale walk.
+      await _ready(
+        tester,
+        () => find
+            .text(strings.text(MotionAccountString.membershipActiveInApp))
+            .evaluate()
+            .isNotEmpty,
+        'actual membership answer published',
+      );
       final page = find.byType(MotionAccountPage);
       final pageState = tester.state(page);
       final pageKey = tester.widget<MotionAccountPage>(page).key;
@@ -655,6 +665,9 @@ void main() {
       expect(f.connection!.userId.value, _id);
       expect(f.runtime!.isCurrentSessionVerified, isTrue);
       f.expectClosedBoundaries();
+      // Let the account client's 10 s membership read deadline run out in
+      // fake time (Core fixture note); a late timeout is absorbed by the page.
+      await tester.pump(const Duration(seconds: 11));
       expect(tester.takeException(), isNull);
     },
   );

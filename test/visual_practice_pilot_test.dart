@@ -9,6 +9,7 @@ import 'package:ostinato/app/screens/piano_beginner_screen.dart';
 import 'package:ostinato/app/screens/piano_visual_practice_screen.dart';
 import 'package:ostinato/app/screens/visual_practice_loop.dart';
 import 'support/localized_widget_ready.dart';
+import 'support/paid_access_scope.dart';
 
 class _Files extends CachingAssetBundle {
   _Files({this.corrupt = false});
@@ -23,15 +24,19 @@ class _Files extends CachingAssetBundle {
   }
 }
 
-Widget _app(Widget child, String locale) => MaterialApp(
-  locale: Locale(locale),
-  supportedLocales: appSupportedLocales,
-  localizationsDelegates: appLocalizationsDelegates,
-  builder: (context, child) => MediaQuery(
-    data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(2)),
-    child: child!,
+// Lesson 15 is past the free range (paywall A): walk it as a member. The
+// scope wraps the whole app so pushed lesson routes see the same gate.
+Widget _app(Widget child, String locale) => PaidAccessProbe().wrap(
+  MaterialApp(
+    locale: Locale(locale),
+    supportedLocales: appSupportedLocales,
+    localizationsDelegates: appLocalizationsDelegates,
+    builder: (context, child) => MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(2)),
+      child: child!,
+    ),
+    home: child,
   ),
-  home: child,
 );
 
 void _narrow(WidgetTester tester) {

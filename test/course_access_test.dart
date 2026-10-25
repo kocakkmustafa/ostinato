@@ -80,6 +80,7 @@ void main() {
     testWidgets('course states the free range and marks paid lessons ($locale)', (
       tester,
     ) async {
+      final semantics = tester.ensureSemantics();
       final course = await pumpCourse(tester, locale: locale);
       expect(
         find.text(
@@ -89,8 +90,9 @@ void main() {
         ),
         findsOneWidget,
       );
+      // The list tile merges the lock icon's label into its own node.
       final mark = find.bySemanticsLabel(
-        locale == 'tr' ? 'Abonelik dersi' : 'Subscription lesson',
+        RegExp(locale == 'tr' ? 'Abonelik dersi' : 'Subscription lesson'),
       );
       final free = find.byKey(Key(course.lessons[7].id));
       final paid = find.byKey(Key(course.lessons[8].id));
@@ -116,6 +118,7 @@ void main() {
         ),
         findsOneWidget,
       );
+      semantics.dispose();
     });
   }
 
