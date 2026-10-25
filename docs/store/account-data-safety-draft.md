@@ -33,6 +33,7 @@ ve Ostinato çalışma zamanı trafiği bu tarihsel makbuzla kabul edilmiş say�
 | IP, user-agent, istemci platform/sürüm bilgisi ve Auth/istek güvenlik günlükleri | `NSPrivacyCollectedDataTypeOtherDiagnosticData` | İşletim, güvenlik ve teknik tanılama; App Functionality, kullanıcıya bağlı, tracking yok |
 | Edge isteğine eklenen IP tabanlı ülke/bölge/şehir | `NSPrivacyCollectedDataTypeCoarseLocation` | Aynı hizmetin işletim/güvenlik kaydı; App Functionality, kullanıcıya bağlı, tracking yok; GPS veya kesin konum izni değildir |
 | Parola kimlik doğrulama verisi ve saklanan parola hash'i | `NSPrivacyCollectedDataTypeOtherDataTypes` | Hesap doğrulama; App Functionality, kullanıcıya bağlı, tracking yok |
+| Abonelik satın alma kanıtı ve sunucuda doğrulanan hak kaydı (`motion_entitlements`, Motion+ deneme defteri `motion_trial_ledger`) — 2026-10-26 | `NSPrivacyCollectedDataTypePurchaseHistory` | Satın almanın sunucuda doğrulanması ve erişim; App Functionality, kullanıcıya bağlı, tracking yok |
 
 [Supabase Auth](https://supabase.com/docs/guides/auth/password-security)
 parolanın bcrypt hash'ini `auth.users.encrypted_password` alanında tutar;
@@ -65,7 +66,7 @@ akışı ve son paket/SDK gizlilik raporu ayrı kabul kapılarıdır.
 | E-posta adresi | Evet, Motion Auth | Kayıt, giriş, doğrulama, şifre sıfırlama | Evet |
 | Görünen ad | Kullanıcı girerse evet, Motion profili | Profil | Evet |
 | Kullanıcı kimliği | Evet, Motion Auth/profil/uygulama üyeliği | Oturum ve hesap veri ayrımı | Evet |
-| Satın alma geçmişi | Hayır; ilk sürümde satış ve ücretli oturum kapalı | Bu sürümde kullanılmaz | Hayır |
+| Satın alma geçmişi (2026-10-26) | Evet; mağaza satın alma kanıtı Motion sunucusuna (`motion-verify-purchase`) gider, mağaza bildirimleri hak kaydını günceller | Aboneliği doğrulamak, erişim vermek, Motion+ denemesini hesap başına bir kez sunmak | Evet |
 | Şifre | Auth isteğinde sunucuya gider; uygulama geçmişine yazılmaz | Kayıt, giriş, şifre değiştirme | Evet |
 | Kamera görüntüsü ve kare ölçümü | Hayır | Cihazdaki canlı çalışma | Yerel, sunucuda yok |
 | İsteğe bağlı mikrofonun ham sesi | Hayır | Yaklaşık tek gitar notası/Hz/cents gözlemi | Yalnız sınırlı RAM; ses dosyası, upload veya hesap kaydı yok |
@@ -88,6 +89,7 @@ aşağıdaki eşleme [Google'ın kendi tür/amaç tanımları](https://support.g
 | IP'den türetilen ülke/bölge/şehir | Location / Approximate location | Tarihsel sağlayıcı örneği; güncel kapsam manuel doğrulanacak |
 | IP, user-agent, platform ve Auth/istek güvenlik günlükleri | App info and performance / Diagnostics; Device or other IDs için alan bazlı eşleme açık | Teknik tanılama ile cihaz/tarayıcı tanımlayıcısı ayrımı manuel doğrulanacak; Apple türü tek başına Play seçimi belirlemez |
 | Parola kimlik doğrulama verisi/hash | Personal info / Other info adayı | Proje çıkarımı; Google parola için ayrı tür adlandırmaz, nihai form eşlemesi manuel doğrulanacak |
+| Abonelik satın alma geçmişi (2026-10-26) | Financial info / Purchase history | Ödeme kartı bilgisi uygulamaya/sunucuya gelmez (mağaza işler); yalnız satın alma kanıtı ve hak durumu |
 
 Hesap alanları için App functionality / Account management; güvenlik günlükleri
 için Fraud prevention, security, and compliance amaçları taslak adaylarıdır.
@@ -95,9 +97,15 @@ Her alanın gerçek kullanımı ve SDK davranışı doğrulanmadan amaç, payla�
 isteğe bağlılık, şifreleme veya silme yanıtı kesinleştirilmez. Apple manifesti
 ve bu tablo, güncel sunucu davranışı ya da gönderilmiş mağaza formu kanıtı değildir.
 
-Abonelik satışı ve satın alma geçmişi
-aktarımı bu sürümde kapalıdır; ileride etkinleştirilirse Apple/Play
-formları ve bu belge birlikte güncellenir.
+**2026-10-26 güncellemesi:** abonelik satışı ilk sürümde açıktır (kurucu
+kararı 2026-10-23). Satın alma geçmişi Apple manifestine
+`NSPrivacyCollectedDataTypePurchaseHistory` (bağlı, tracking yok, App
+Functionality) olarak eklendi; manifest artık **yedi** collected tür taşır.
+App Store Connect App Privacy formuna "Purchases" ve Play Data safety'ye
+"Financial info / Purchase history" girişi Yönetim işidir. Yaş beyanı (ay/yıl)
+ve veli onayı kayıtları hesapla bağlı sunucu verisidir; Apple form eşlemesi
+(Other Data Types) Yönetim/hukuk teyidine açıktır. Aşağıdaki tarihsel
+bölümlerdeki "altı tür / satış kapalı" ifadeleri o tarihin okumasıdır.
 Görünen ad kullanıcı için isteğe bağlıdır. Kamera ve cihazda kalan geçmiş
 “toplanan veri” diye işaretlenmez. Tarihsel sağlayıcı günlükleri makbuzu ve
 Auth saklama belgesi temelinde tanılama, yaklaşık konum ve kimlik doğrulama
