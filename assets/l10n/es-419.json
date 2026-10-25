@@ -574,7 +574,6 @@
     "4f41186a47f43ad3": "Se recuerdan los números de traste, pero se pierden los nombres de las notas.",
     "4f5d0352d55a6159": "Forma Amx-0-2-2-1-0 y empieza intencionalmente en la cuerda 5, dejando la cuerda 6 sin sonar.",
     "4f63b907476b388a": "Detener y ver el resumen",
-    "4f69a34685ff5421": "Explora referencias de postura para guitarra, voz y piano. Las lecciones con cámara y suscripciones no están abiertas en esta versión. El recorrido escrito de guitarra tiene un observador opcional de notas individuales en el dispositivo.",
     "4f979fa363ec3e34": "Inicia y termina un tono corto",
     "4f9e7653c3e21931": "INTERPRETACIÓN ORIGINAL",
     "4fa71abdb493751e": "Bajo: base para principiantes de cuatro cuerdas",
@@ -2111,6 +2110,7 @@
     "b3ade159f643b686": "La práctica opcional con micrófono muestra observaciones aproximadas de notas individuales tras tu permiso. No califica tu interpretación. La práctica con cámara en vivo está cerrada en esta versión. Las primeras lecciones de cada curso son gratuitas; las siguientes requieren una suscripción a Ostinato o Motion+.",
     "b17b63ccf42baffe": "Las lecciones 1–{v0} son gratuitas. Las siguientes requieren una suscripción a Ostinato o Motion+; tus registros de progreso siempre siguen visibles.",
     "5e95bb16d894c7e7": "Lección con suscripción",
-    "cebdd1905c0acfe3": "Esta lección requiere una suscripción y el servicio de cuenta no está disponible en este momento."
+    "cebdd1905c0acfe3": "Esta lección requiere una suscripción y el servicio de cuenta no está disponible en este momento.",
+    "503840cca53dc480": "Explora referencias de postura para guitarra, voz y piano. Las lecciones con cámara no están abiertas en esta versión. El recorrido escrito de guitarra tiene un observador opcional de notas individuales en el dispositivo."
   }
 }

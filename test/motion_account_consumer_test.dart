@@ -403,7 +403,7 @@ Future<void> _mount(WidgetTester tester, _Fixture f, String tag) async {
   expect(page.account, isA<OwnershipGuardedAccountClient>());
   expect(page.account.app, MotionApp.ostinato);
   expect(page.account.currentUser?.id, _id);
-  expect(page.paidFeaturesAvailable, isTrue);
+  expect(page.membershipAvailable, isTrue);
 }
 
 Finder _name(MotionAccountLocalizations strings) => find.byWidgetPredicate(

@@ -1402,7 +1402,6 @@
     "4e42a5577df83e2c": "O que não avaliamos — e por quê",
     "4f1da5e228b29465": "Nada que conseguíssemos ler.",
     "4f63b907476b388a": "Parar e ver resumo",
-    "4f69a34685ff5421": "Explore referências de postura para violão, voz e piano. Aulas com câmera e assinaturas não estão abertas nesta versão. O percurso de violão tem um observador opcional de notas isoladas no dispositivo.",
     "50379b16cb3e91c2": "O fechamento do microfone ainda está em andamento ou não tem confirmação final. A captura continua desativada. Atualize o estado sem iniciar uma nova gravação.",
     "505a616ad1925bc1": "Acordes além desses 8 — não os nomeamos. Até 2026-08-04 fazíamos algo pior: um Bb tocado era informado como “Dm” em 28 de 29 janelas, com confiança, porque o motor só podia considerar os 8 acordes do exercício. Agora ele considera todos os 24 acordes e recusa quando o vencedor não é um dos ensinados nesta aula.",
     "50b2e954b53ef2f7": "Sem pontuação, e não haverá. A barra é a faixa; a marca é você.",
@@ -2111,6 +2110,7 @@
     "b3ade159f643b686": "A prática opcional com microfone mostra observações aproximadas de notas isoladas após sua permissão. Não avalia sua execução. A prática com câmera ao vivo está fechada nesta versão. As primeiras aulas de cada curso são gratuitas; as seguintes exigem uma assinatura Ostinato ou Motion+.",
     "b17b63ccf42baffe": "As aulas 1–{v0} são gratuitas. As seguintes exigem uma assinatura Ostinato ou Motion+; seus registros de progresso continuam sempre visíveis.",
     "5e95bb16d894c7e7": "Aula por assinatura",
-    "cebdd1905c0acfe3": "Esta aula exige uma assinatura, e o serviço de conta está indisponível no momento."
+    "cebdd1905c0acfe3": "Esta aula exige uma assinatura, e o serviço de conta está indisponível no momento.",
+    "503840cca53dc480": "Explore referências de postura para violão, voz e piano. Aulas com câmera não estão abertas nesta versão. O percurso de violão tem um observador opcional de notas isoladas no dispositivo."
   }
 }

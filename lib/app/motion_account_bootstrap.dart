@@ -1,5 +1,6 @@
 import 'app_theme.dart';
 import 'app_theme_preferences.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -100,7 +101,7 @@ AccountConnection bindMotionAccountRuntime(
       onRetryIdentity: runtime.refreshIdentity,
       ageBlocked: underAgeBlocked,
       onAgeBlocked: blockUnderAge,
-      paidFeaturesAvailable: ostinatoPaidFeaturesAvailable,
+      membershipAvailable: ostinatoPaidFeaturesAvailable,
     );
   }
 
@@ -120,7 +121,13 @@ AccountConnection bindMotionAccountRuntime(
       context,
       account: runtime.account,
       accountPageBuilder: accountPage,
-      paidFeaturesAvailable: ostinatoPaidFeaturesAvailable,
+      salesAvailable: ostinatoPaidFeaturesAvailable,
+    ),
+    requireCameraAccess: (context) => requireMotionCameraAccess(
+      context,
+      account: runtime.account,
+      accountPageBuilder: accountPage,
+      cameraCoachingAvailable: ostinatoCameraPracticeAvailable,
     ),
   );
 }

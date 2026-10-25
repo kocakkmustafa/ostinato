@@ -1402,7 +1402,6 @@
     "4e42a5577df83e2c": "Was wir nicht beurteilen und warum",
     "4f1da5e228b29465": "Nichts Lesbares.",
     "4f63b907476b388a": "Stoppen und Zusammenfassung ansehen",
-    "4f69a34685ff5421": "Erkunde Haltungsreferenzen für Gitarre, Gesang und Klavier. Kameralektionen und Abonnements sind in dieser Version nicht geöffnet. Der Gitarrenlernweg bietet eine optionale Einzeltonbeobachtung auf dem Gerät.",
     "50379b16cb3e91c2": "Das Schließen des Mikrofons läuft noch oder hat keine abschließende Bestätigung. Die Aufnahme bleibt deaktiviert. Aktualisiere den Status, ohne eine neue Aufnahme zu starten.",
     "505a616ad1925bc1": "Akkorde außerhalb dieser 8 benennen wir nicht. Bis 2026-08-04 machten wir etwas Schlimmeres: Ein gespieltes Bb wurde in 28 von 29 Fenstern selbstsicher als „Dm“ gemeldet, weil die Engine nur die 8 Übungsakkorde berücksichtigen durfte. Jetzt gewichtet sie alle 24 Akkorde und lehnt ab, wenn der Sieger nicht in dieser Lektion vermittelt wird.",
     "50b2e954b53ef2f7": "Keine Punktzahl, und es wird auch keine geben. Der Balken zeigt den Bereich, die Markierung dich.",
@@ -2111,6 +2110,7 @@
     "b3ade159f643b686": "Optionale Mikrofonübungen zeigen nach deiner Erlaubnis ungefähre Einzeltonbeobachtungen. Sie bewerten dein Spiel nicht. Live-Kameraübungen sind in dieser Version geschlossen. Die ersten Lektionen jedes Kurses sind kostenlos; spätere Lektionen erfordern ein Ostinato- oder Motion+-Abonnement.",
     "b17b63ccf42baffe": "Lektionen 1–{v0} sind kostenlos. Spätere Lektionen erfordern ein Ostinato- oder Motion+-Abonnement; deine Fortschrittsaufzeichnungen bleiben immer sichtbar.",
     "5e95bb16d894c7e7": "Abonnement-Lektion",
-    "cebdd1905c0acfe3": "Diese Lektion erfordert ein Abonnement, und der Kontodienst ist gerade nicht verfügbar."
+    "cebdd1905c0acfe3": "Diese Lektion erfordert ein Abonnement, und der Kontodienst ist gerade nicht verfügbar.",
+    "503840cca53dc480": "Erkunde Haltungsreferenzen für Gitarre, Gesang und Klavier. Kameralektionen sind in dieser Version nicht geöffnet. Der Gitarrenlernweg bietet eine optionale Einzeltonbeobachtung auf dem Gerät."
   }
 }

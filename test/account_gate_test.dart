@@ -6,6 +6,7 @@ import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/design/ostinato_theme.dart';
 import 'package:ostinato/app/onboarding_store.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'package:ostinato/app/screens/lesson_scored_screen.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/setup_check_screen.dart';
@@ -71,27 +72,20 @@ void main() {
     expect(find.byType(LibraryScreen), findsOneWidget);
   });
 
-  testWidgets('paid access denied keeps setup check closed', (tester) async {
+  Future<void> tapSetupCheck(
+    WidgetTester tester,
+    AccountConnection? connection,
+  ) async {
     final guitar = repo.disciplines.firstWhere((d) => d.id == 'guitar');
     final lesson = guitar.courses.first.lessons.firstWhere(
       (l) => l.kind == LessonKind.scored,
     );
-    final userId = ValueNotifier<String?>(null);
-    addTearDown(userId.dispose);
-    int guardCalls = 0;
     await tester.pumpWidget(
       ContentRepositoryScope(
         repo: repo,
         cueText: cueText,
         child: AccountScope(
-          connection: AccountConnection(
-            userId: userId,
-            pageBuilder: (_) => const SizedBox.shrink(),
-            requirePaidAccess: (_) async {
-              guardCalls++;
-              return false;
-            },
-          ),
+          connection: connection,
           currentUserId: null,
           child: MaterialApp(
             home: LessonScoredScreenRoute(
@@ -108,8 +102,43 @@ void main() {
     await tester.ensureVisible(start);
     await tester.tap(start);
     await tester.pumpAndSettle();
+  }
 
-    expect(guardCalls, 1);
+  testWidgets(
+    'camera gate keeps setup check closed and never asks for a subscription',
+    (tester) async {
+      final userId = ValueNotifier<String?>(first);
+      addTearDown(userId.dispose);
+      var paidCalls = 0;
+      var cameraCalls = 0;
+      await tapSetupCheck(
+        tester,
+        AccountConnection(
+          userId: userId,
+          pageBuilder: (_) => const SizedBox.shrink(),
+          requirePaidAccess: (_) async {
+            paidCalls++;
+            return true; // an active member
+          },
+          requireCameraAccess: (_) async {
+            cameraCalls++;
+            return false;
+          },
+        ),
+      );
+
+      expect(cameraCalls, 1);
+      expect(paidCalls, 0);
+      expect(find.byType(SetupCheckScreenRoute), findsNothing);
+      expect(find.byType(LessonScoredScreenRoute), findsOneWidget);
+    },
+  );
+
+  testWidgets('without an account service setup check stays closed', (
+    tester,
+  ) async {
+    expect(ostinatoCameraPracticeAvailable, isFalse);
+    await tapSetupCheck(tester, null);
     expect(find.byType(SetupCheckScreenRoute), findsNothing);
     expect(find.byType(LessonScoredScreenRoute), findsOneWidget);
   });

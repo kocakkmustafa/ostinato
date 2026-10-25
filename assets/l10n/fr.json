@@ -1402,7 +1402,6 @@
     "4e42a5577df83e2c": "Ce que nous ne jugeons pas, et pourquoi",
     "4f1da5e228b29465": "Rien de lisible.",
     "4f63b907476b388a": "Arrêter et voir le résumé",
-    "4f69a34685ff5421": "Explore les références de posture pour guitare, voix et piano. Les leçons avec caméra et les abonnements ne sont pas ouverts dans cette version. Le parcours de guitare dispose d'un observateur facultatif de notes seules sur l'appareil.",
     "50379b16cb3e91c2": "La fermeture du microphone est encore en cours ou sans confirmation finale. La capture reste désactivée. Actualise l'état sans démarrer de nouvel enregistrement.",
     "505a616ad1925bc1": "Les accords hors de ces 8 ne sont pas nommés. Jusqu'au 2026-08-04, nous faisions pire : un Bb joué était annoncé « Dm » avec assurance dans 28 fenêtres sur 29, car le moteur ne pouvait envisager que les 8 accords de l'exercice. Il évalue maintenant les 24 accords et refuse si le gagnant n'est pas enseigné dans cette leçon.",
     "50b2e954b53ef2f7": "Aucun score, et aucun n'est prévu. La barre est l'étendue ; le repère, c'est toi.",
@@ -2111,6 +2110,7 @@
     "b3ade159f643b686": "La pratique facultative au microphone affiche des observations approximatives de notes seules après ton autorisation. Elle ne note pas ton jeu. La pratique avec caméra en direct est fermée dans cette version. Les premières leçons de chaque cours sont gratuites ; les suivantes nécessitent un abonnement Ostinato ou Motion+.",
     "b17b63ccf42baffe": "Les leçons 1–{v0} sont gratuites. Les suivantes nécessitent un abonnement Ostinato ou Motion+ ; tes relevés de progression restent toujours visibles.",
     "5e95bb16d894c7e7": "Leçon avec abonnement",
-    "cebdd1905c0acfe3": "Cette leçon nécessite un abonnement, et le service de compte est indisponible pour le moment."
+    "cebdd1905c0acfe3": "Cette leçon nécessite un abonnement, et le service de compte est indisponible pour le moment.",
+    "503840cca53dc480": "Explore les références de posture pour guitare, voix et piano. Les leçons avec caméra ne sont pas ouvertes dans cette version. Le parcours de guitare dispose d'un observateur facultatif de notes seules sur l'appareil."
   }
 }

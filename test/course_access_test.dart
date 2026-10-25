@@ -41,6 +41,66 @@ void main() {
       isTrue,
       reason: 'with sales closed nothing is gated',
     );
+    expect(isFreeLesson('guitar', -1), isFalse, reason: 'missing lesson');
+    expect(isFreeLesson('voice', 22), isFalse, reason: 'outside the course');
+  });
+
+  test('Core lesson lock keeps the approved counts, not its default', () {
+    // OST-K2 (founder decision 2026-10-25): the app's counts are passed as
+    // freeLessonLimit. Core's default formula would give guitar 20, piano 9.
+    expect(ostinatoFreeLessonCounts, {
+      'guitar': 12,
+      'piano': 8,
+      'ukulele': 8,
+      'bass': 8,
+      'voice': 8,
+    });
+    for (final MapEntry(key: id, value: shape)
+        in ostinatoCourseShapes.entries) {
+      final free = ostinatoFreeLessonCounts[id]!;
+      expect(isFreeLesson(id, free - 1), isTrue, reason: id);
+      expect(isFreeLesson(id, free), isFalse, reason: id);
+      expect(isFreeLesson(id, shape.totalLessons - 1), isFalse, reason: id);
+    }
+    expect(
+      ostinatoCourseShapes.keys,
+      unorderedEquals(ostinatoFreeLessonCounts.keys),
+    );
+  });
+
+  test('course shapes match the bundled course files', () {
+    List<Object?> lessonsOf(String file) =>
+        (jsonDecode(File('assets/content/$file').readAsStringSync())
+                as Map<String, Object?>)['lessons']!
+            as List<Object?>;
+    final guitarModules =
+        (jsonDecode(
+                  File(
+                    'assets/content/guitar_journey.v1.json',
+                  ).readAsStringSync(),
+                )
+                as Map<String, Object?>)['modules']!
+            as List<Object?>;
+    final moduleSizes = [
+      for (final m in guitarModules)
+        ((m as Map<String, Object?>)['lessons']! as List<Object?>).length,
+    ];
+    expect(ostinatoCourseShapes['guitar'], (
+      totalLessons: moduleSizes.fold<int>(0, (a, b) => a + b),
+      firstModuleLessonCount: moduleSizes.first,
+    ));
+    for (final (id, file) in [
+      ('piano', 'piano_beginner.v1.json'),
+      ('ukulele', 'ukulele_beginner.v1.json'),
+      ('bass', 'bass_beginner.v1.json'),
+      ('voice', 'vocal_beginner.v1.json'),
+    ]) {
+      expect(
+        ostinatoCourseShapes[id]!.totalLessons,
+        lessonsOf(file).length,
+        reason: id,
+      );
+    }
   });
 
   Future<UkuleleCourse> pumpCourse(

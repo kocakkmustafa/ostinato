@@ -37,6 +37,7 @@ class AccountConnection {
     this.resourceAdmission,
     this.disposeBinding,
     this.requirePaidAccess,
+    this.requireCameraAccess,
   });
 
   final ValueListenable<String?> userId;
@@ -55,7 +56,13 @@ class AccountConnection {
 
   /// Owned by the app host; route rebuilds never dispose the shared binding.
   final VoidCallback? disposeBinding;
+
+  /// Paid lessons and independent practice (Core `requireMotionPaidAccess`).
   final Future<bool> Function(BuildContext)? requirePaidAccess;
+
+  /// Camera setup, measurement and scoring (Core `requireMotionCameraAccess`);
+  /// closed in this release whatever the membership.
+  final Future<bool> Function(BuildContext)? requireCameraAccess;
 }
 
 class AccountScope extends InheritedWidget {

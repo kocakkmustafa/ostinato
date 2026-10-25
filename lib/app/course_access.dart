@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:motion_entitlements/motion_entitlements.dart'
+    show isLessonUnlocked;
 
 import 'account_connection.dart';
 import 'app_locale.dart';
@@ -17,15 +19,40 @@ const Map<String, int> ostinatoFreeLessonCounts = {
   'voice': 8,
 };
 
-/// An unknown course has no free lessons (closed by default). With sales
-/// closed nothing is gated, as before the paywall.
+/// Course shapes passed to Core's lesson lock. Guitar has ten six-lesson
+/// modules; the other courses have no module structure, so their first-module
+/// count is 0 and only the approved free count above applies.
+/// `test/course_access_test.dart` checks the totals against the bundled
+/// course files.
+const Map<String, ({int totalLessons, int firstModuleLessonCount})>
+ostinatoCourseShapes = {
+  'guitar': (totalLessons: 60, firstModuleLessonCount: 6),
+  'piano': (totalLessons: 25, firstModuleLessonCount: 0),
+  'ukulele': (totalLessons: 24, firstModuleLessonCount: 0),
+  'bass': (totalLessons: 24, firstModuleLessonCount: 0),
+  'voice': (totalLessons: 22, firstModuleLessonCount: 0),
+};
+
+/// Core `isLessonUnlocked` for a non-member, with the app's approved free
+/// counts as the override (OST-K2, founder decision 2026-10-25). An unknown
+/// course or an index outside the course has no free lessons (closed by
+/// default). With sales closed nothing is gated, as before the paywall.
 bool isFreeLesson(
   String instrumentId,
   int index, {
   bool paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
-}) =>
-    !paidFeaturesAvailable ||
-    index < (ostinatoFreeLessonCounts[instrumentId] ?? 0);
+}) {
+  if (!paidFeaturesAvailable) return true;
+  final shape = ostinatoCourseShapes[instrumentId];
+  if (shape == null || index < 0 || index >= shape.totalLessons) return false;
+  return isLessonUnlocked(
+    lessonIndex: index,
+    totalLessons: shape.totalLessons,
+    firstModuleLessonCount: shape.firstModuleLessonCount,
+    entitled: false,
+    freeLessonLimit: ostinatoFreeLessonCounts[instrumentId],
+  );
+}
 
 /// Admits a lesson open. A paid lesson goes through the account's paid-access
 /// guard (Core: sign-in, server membership check, then the membership page).

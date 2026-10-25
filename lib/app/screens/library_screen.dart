@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../study_review.dart';
 import 'package:ostinato_posture/ostinato_posture.dart';
 import 'package:motion_account/motion_account.dart'
-    show motionPaidFeaturesAvailable;
+    show motionCameraCoachingAvailable;
 
 import '../app_locale.dart';
 import '../content.dart';
@@ -141,7 +141,7 @@ class LibraryScreen extends StatelessWidget {
                       // iki kalça) ve TEK açı ölçüyor. Dokuz, figürün düğüm
                       // sayısı.
                       Text(
-                        motionPaidFeaturesAvailable
+                        motionCameraCoachingAvailable
                             ? localized(
                                 context,
                                 'Put your phone where it can see you. The camera '
@@ -156,11 +156,11 @@ class LibraryScreen extends StatelessWidget {
                             : localized(
                                 context,
                                 'Explore guitar, voice, and piano posture '
-                                    'references. Camera lessons and subscriptions '
+                                    'references. Camera lessons '
                                     'are not open in this release. The guitar learning path has '
                                     'an optional on-device single-note observer.',
                                 'Gitar, ses ve piyano için duruş referanslarını '
-                                    'incele. Kamera dersleri ve abonelikler bu '
+                                    'incele. Kamera dersleri bu '
                                     'sürümde açık değil. Gitar öğrenme yolunda isteğe bağlı '
                                     'cihaz üstü tek nota gözlemi vardır.',
                               ),
@@ -189,7 +189,7 @@ class LibraryScreen extends StatelessWidget {
                 if (starters.isNotEmpty) ...<Widget>[
                   const SizedBox(height: 22),
                   kicker(
-                    motionPaidFeaturesAvailable
+                    motionCameraCoachingAvailable
                         ? localized(context, "Start here", "Buradan başlayın")
                         : localized(
                             context,

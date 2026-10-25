@@ -13,6 +13,8 @@ PODS:
   - motion_camera (0.2.0):
     - Flutter
     - MediaPipeTasksVision (= 0.10.21)
+  - motion_platform_signals (0.2.0):
+    - Flutter
   - permission_handler_apple (9.4.8):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -30,6 +32,7 @@ DEPENDENCIES:
   - in_app_purchase_storekit (from `.symlinks/plugins/in_app_purchase_storekit/darwin`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - motion_camera (from `.symlinks/plugins/motion_camera/ios`)
+  - motion_platform_signals (from `.symlinks/plugins/motion_platform_signals/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -51,6 +54,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/integration_test/ios"
   motion_camera:
     :path: ".symlinks/plugins/motion_camera/ios"
+  motion_platform_signals:
+    :path: ".symlinks/plugins/motion_platform_signals/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   shared_preferences_foundation:
@@ -68,6 +73,7 @@ SPEC CHECKSUMS:
   MediaPipeTasksCommon: 6cfa29170d4900f04d250ad95ec058f14a741f38
   MediaPipeTasksVision: 7b1c0f5a5820e87e9d96926f5e65d8cd3744fac2
   motion_camera: 8d8bc12ca279a5994900a25081af0bf09b59125f
+  motion_platform_signals: 3372990901f7581d41e26b6b7f385b7a4fefdc0f
   permission_handler_apple: 92d754bbaa7361d436db2d6c3c1c2a0fdcec462e
   shared_preferences_foundation: 7036424c3d8ec98dfe75ff1667cb0cd531ec82bb
   url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b

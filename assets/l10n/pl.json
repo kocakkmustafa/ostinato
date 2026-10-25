@@ -581,7 +581,6 @@
     "4f41186a47f43ad3": "Numery progów są zapamiętane, ale nazwy nut giną.",
     "4f5d0352d55a6159": "Ułóż Am x-0-2-2-1-0 i świadomie rozpocznij od struny 5, pozostawiając strunę 6 bez dźwięku.",
     "4f63b907476b388a": "Zatrzymaj i zobacz podsumowanie",
-    "4f69a34685ff5421": "Poznaj wzorce postawy gitarzystów, wokalistów i pianistów. Lekcje z kamerą i subskrypcje nie są dostępne w tej wersji. Gitarowa ścieżka nauki ma opcjonalną obserwację pojedynczej nuty na urządzeniu.",
     "4f979fa363ec3e34": "Rozpocznij i zakończ krótki dźwięk",
     "4f9e7653c3e21931": "ORYGINALNE WYKONANIE",
     "4fa71abdb493751e": "Bas: czterostrunowe podstawy dla początkujących",
@@ -2125,6 +2124,7 @@
     "b3ade159f643b686": "Opcjonalne ćwiczenie z mikrofonem po Twoim zezwoleniu pokazuje przybliżone obserwacje pojedynczej nuty. Nie ocenia Twojej gry. Ćwiczenia na żywo z kamerą są wyłączone w tej wersji. Pierwsze lekcje każdego kursu są bezpłatne; kolejne wymagają subskrypcji Ostinato lub Motion+.",
     "b17b63ccf42baffe": "Lekcje 1–{v0} są bezpłatne. Kolejne wymagają subskrypcji Ostinato lub Motion+; zapisy postępów zawsze pozostają widoczne.",
     "5e95bb16d894c7e7": "Lekcja w subskrypcji",
-    "cebdd1905c0acfe3": "Ta lekcja wymaga subskrypcji, a usługa konta jest teraz niedostępna."
+    "cebdd1905c0acfe3": "Ta lekcja wymaga subskrypcji, a usługa konta jest teraz niedostępna.",
+    "503840cca53dc480": "Poznaj wzorce postawy gitarzystów, wokalistów i pianistów. Lekcje z kamerą nie są dostępne w tej wersji. Gitarowa ścieżka nauki ma opcjonalną obserwację pojedynczej nuty na urządzeniu."
   }
 }

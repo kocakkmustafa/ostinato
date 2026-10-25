@@ -577,7 +577,6 @@
     "4f41186a47f43ad3": "Fret numbers are recalled but note names are lost.",
     "4f5d0352d55a6159": "Build Amx-0-2-2-1-0 and deliberately begin on string 5, leaving string 6 unsounded.",
     "4f63b907476b388a": "Stop and see the summary",
-    "4f69a34685ff5421": "Explore guitar, voice, and piano posture references. Camera lessons and subscriptions are not open in this release. The guitar learning path has an optional on-device single-note observer.",
     "4f979fa363ec3e34": "Start and release a short tone",
     "4f9e7653c3e21931": "ORIGINAL PERFORMANCE",
     "4fa71abdb493751e": "Bass: four-string beginner foundation",
@@ -2111,6 +2110,7 @@
     "b3ade159f643b686": "Optional microphone practice shows approximate single-note observations after your permission. It does not grade your playing. Live camera practice is closed in this release. The first lessons of each course are free; later lessons need an Ostinato or Motion+ subscription.",
     "b17b63ccf42baffe": "Lessons 1–{v0} are free. Later lessons need an Ostinato or Motion+ subscription; your progress records always stay visible.",
     "5e95bb16d894c7e7": "Subscription lesson",
-    "cebdd1905c0acfe3": "This lesson needs a subscription, and the account service is unavailable right now."
+    "cebdd1905c0acfe3": "This lesson needs a subscription, and the account service is unavailable right now.",
+    "503840cca53dc480": "Explore guitar, voice, and piano posture references. Camera lessons are not open in this release. The guitar learning path has an optional on-device single-note observer."
   }
 }
