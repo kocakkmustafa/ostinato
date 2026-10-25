@@ -1,4 +1,4 @@
-# Ostinato yayın inceleme taslağı — 21 Ekim 2026
+# Ostinato yayın inceleme taslağı — 21 Ekim 2026 (satış notu 25 Ekim 2026)
 
 Bu dosya yerel submission taslağıdır. App Store Connect'e kaydetme, build
 upload, submit veya yayın kararı değildir. İmza/paket kanıtı model veya fiziksel
@@ -33,8 +33,9 @@ Draft notes for the new source candidate; do not submit before its host,
 package and device checks are complete.
 
 Ostinato provides original written music lessons and practice records, with
-course presentation in 14 languages. The guitar path has 60 lessons in 10 modules; introductory written
-courses also cover piano (16), ukulele (18), bass (18) and voice (16).
+course presentation in 14 languages. The guitar path has 60 lessons in 10 modules; written
+courses also cover piano (25), ukulele (24), bass (24) and voice (22), each ending in an
+independent-practice stage.
 Lesson completion is the user's self-report, not a measured mastery result.
 
 Core written lessons are available as a guest. Read the onboarding, open the
@@ -48,12 +49,13 @@ it does not grade the target note, chords, rhythm, posture or mastery. Declining
 permission leaves the written course available. Raw audio is processed in
 bounded temporary device memory; it is not saved or uploaded by this path.
 
-Live camera posture practice, paid sessions and subscription sales are disabled
-in this release. No purchase or trial is required for the written courses.
-There is no active restore-purchase flow to exercise in this release. Written
-piano/ukulele/bass/voice content does not provide validated live technique or
-voice measurement. Piano lesson05 explicitly states that finger-key contact
-cannot be measured with the current production provider.
+Ostinato offers optional auto-renewable subscriptions: "Ostinato" (this app only; USD 11.99 per month or 69.99 per year) and "Motion+" (all five Motion apps by YULA Lab; USD 19.99 per month or 129.99 per year). Eligible new subscribers get a 14-day free trial; the Motion+ trial is offered once per Motion account. The first 12 guitar lessons and the first 8 lessons of the piano, ukulele, bass and voice courses are free without an account. Later lessons, including the guitar independent-practice module, need a subscription. Lesson titles and progress records always stay visible. To see the paywall, open the guitar course and tap lesson 13, or open any other course and tap lesson 9.
+
+To view the subscription options, open Settings > Account, sign in, and tap "Membership options". Prices and periods come from the App Store. The auto-renewal terms, Terms of Use (https://yulalab.com/terms) and Privacy Policy (https://yulalab.com/privacy/motion) are shown on the same screen. "Restore purchases" is available on that screen. Cancellation is done in the App Store subscription settings, which the app opens from "Manage subscription". Purchases are verified on our server before access is granted. Deleting the Motion account does not cancel a store subscription; the deletion dialog says so.
+
+Accounts require age 13 or older. The age screen asks only month and year, with no preselected value. Where the App Store shares an age range (Declared Age Range), it can only tighten this check: an under-13 range blocks sign-up, and a declared age above the shared range must be corrected. If the user is under 13, account sign-up is blocked on that device. Users under their country's digital-consent age get a restricted account until a parent or guardian approves by email; a restricted account is not offered purchases. On-device practice remains available without an account.
+
+Live camera posture practice and scoring are disabled in this release, also for subscribers. Written piano/ukulele/bass/voice content does not provide validated live technique or voice measurement. Piano lesson05 explicitly states that finger-key contact cannot be measured with the current production provider.
 
 An optional shared Motion account is available under Settings > Account.
 Account sign-in, profile, sign-out and common-account deletion use that service.
@@ -92,11 +94,11 @@ Original demonstration video is not included in this content version.
 | Konuk ders akışı, hesap kapsamlı yerel ayrım | Önceki host/widget testleri | Signed pakette kullanıcı cihazı kontrolü |
 | Gerçek mevcut hesap giriş/çıkış | Kaynak ve host kanıtı | Kullanıcı mevcut test hesabıyla güvenli giriş; parolayı sohbet/rapora verme |
 | Hesap silme | Kaynak ve başarısızlık/yerel temizlik testleri | Kalıcı silme ayrı açık onay ister; mevcut gerçek hesap silinmez |
-| Satış/üyelik/restore | Public Core pin `d69e1078` tüketiminde satış kapalıdır | Bu sürümde satış kapsam dışı; satış açılırsa gerçek store sandbox satın alma/restore ayrı kapı |
+| Satış/üyelik/restore | Satış açık (kurucu kararı 2026-10-23); Core R3 `f43d71a` pini, paywall A ve ücretli ders kapısı host testleriyle | Gerçek StoreKit/Play sandbox satın alma, restore, deneme ve iptal: `SALES-OPEN-REVIEW-AND-SANDBOX.md` §5 S1–S17 (kullanıcı/yönetim yürütür) |
 | Reviewer erişimi | Konuk yolu ve bu adımlar | Final cihaz yürüyüşü; gerekiyorsa mevcut demo hesabı güvenli ASC alanında |
 
 Apple/Google sandbox satın alma, yeni hesap/credential veya üretim ödemesi bu
-belgeyle yetkilendirilmez. Kapalı satış yüzeyini sahte restore başarısı ile
+belgeyle yetkilendirilmez. Satış yüzeyini sahte restore başarısı ile
 kapatmayın; gerçek hesabın varlığını da sentetik testten çıkarmayın.
 
 ## Ekran taslakları

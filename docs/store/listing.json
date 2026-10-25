@@ -160,5 +160,22 @@
       }
     },
     "consoleExistenceVerified": false
+  },
+  "$releaseCandidate20261025": {
+    "coreRef": "f43d71a375431e96c689a7a4a04fb53ff01af693 (Motion Core R3)",
+    "courseCounts": {
+      "guitar": 60,
+      "piano": 25,
+      "ukulele": 24,
+      "bass": 24,
+      "voice": 22
+    },
+    "subscriptionSales": true,
+    "cameraCoachingAndScoring": false,
+    "freeLessonsSource": "app counts passed to Core isLessonUnlocked as freeLessonLimit; OST-K2 founder decision 2026-10-25",
+    "motionPlusTrial": "14 days, once per Motion account (Core R3 trial ledger); iOS 15 cannot block a second trial",
+    "storeAgeSignal": "Declared Age Range (iOS 26+) / Play Age Signals only tighten the 13+ check; entitlement com.apple.developer.declared-age-range",
+    "reviewGuide": "RELEASE-REVIEW.md + SALES-OPEN-REVIEW-AND-SANDBOX.md",
+    "status": "local_draft_not_provider_write_or_physical_acceptance"
   }
 }
