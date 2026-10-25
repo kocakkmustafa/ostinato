@@ -8,7 +8,6 @@ import '../app_locale.dart';
 import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
-import '../ostinato_release_policy.dart';
 import 'setup_check_screen.dart';
 
 /// Skorlu/guide ders — ölçüm oturumundan ÖNCEKİ bilgi ekranı. Guide sınıfı
@@ -224,15 +223,12 @@ class LessonScoredScreenRoute extends StatelessWidget {
                 onPressed: () async {
                   // Camera setup and measurement follow the camera gate, not
                   // the subscription gate: closed in this release for members
-                  // too, and closed when no account service is bound.
+                  // too. Production always binds an account connection; only
+                  // test shells run without one.
                   final guard = AccountScope.maybeOf(
                     context,
                   )?.connection?.requireCameraAccess;
-                  if (guard == null) {
-                    if (!ostinatoCameraPracticeAvailable) return;
-                  } else if (!await guard(context)) {
-                    return;
-                  }
+                  if (guard != null && !await guard(context)) return;
                   if (!context.mounted) return;
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(

@@ -6,7 +6,6 @@ import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/design/ostinato_theme.dart';
 import 'package:ostinato/app/onboarding_store.dart';
-import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'package:ostinato/app/screens/lesson_scored_screen.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/setup_check_screen.dart';
@@ -133,13 +132,4 @@ void main() {
       expect(find.byType(LessonScoredScreenRoute), findsOneWidget);
     },
   );
-
-  testWidgets('without an account service setup check stays closed', (
-    tester,
-  ) async {
-    expect(ostinatoCameraPracticeAvailable, isFalse);
-    await tapSetupCheck(tester, null);
-    expect(find.byType(SetupCheckScreenRoute), findsNothing);
-    expect(find.byType(LessonScoredScreenRoute), findsOneWidget);
-  });
 }
