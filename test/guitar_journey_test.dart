@@ -12,6 +12,11 @@ import 'package:ostinato/app/guitar_journey_progress.dart';
 import 'package:ostinato/app/guitar_session_preparation.dart';
 import 'package:ostinato/app/screens/guitar_journey_screen.dart';
 import 'support/localized_widget_ready.dart';
+import 'support/paid_access_scope.dart';
+
+/// Paywall A: course walks run as a member; the lock itself is covered by
+/// course_access_test.dart.
+Widget _asMember(Widget app) => PaidAccessProbe().wrap(app);
 
 const firstId = 'guitar.journey.start.parts';
 const accountA = '11111111-1111-4111-8111-111111111111';
@@ -159,21 +164,23 @@ void main() {
         );
         final lesson = course.lessons[index];
         await tester.pumpWidget(
-          MaterialApp(
-            locale: const Locale('tr'),
-            supportedLocales: appSupportedLocales,
-            localizationsDelegates: appLocalizationsDelegates,
-            builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(
-                context,
-              ).copyWith(textScaler: TextScaler.linear(2)),
-              child: child!,
-            ),
-            home: GuitarJourneyLessonScreen(
-              course: course,
-              lesson: lesson,
-              store: GuitarJourneyProgressStore(
-                directoryProvider: () async => root,
+          _asMember(
+            MaterialApp(
+              locale: const Locale('tr'),
+              supportedLocales: appSupportedLocales,
+              localizationsDelegates: appLocalizationsDelegates,
+              builder: (context, child) => MediaQuery(
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: TextScaler.linear(2)),
+                child: child!,
+              ),
+              home: GuitarJourneyLessonScreen(
+                course: course,
+                lesson: lesson,
+                store: GuitarJourneyProgressStore(
+                  directoryProvider: () async => root,
+                ),
               ),
             ),
           ),
@@ -307,12 +314,14 @@ void main() {
           as Map<String, dynamic>,
     );
     await tester.pumpWidget(
-      MaterialApp(
-        home: GuitarJourneyScreen(
-          initialCourse: course,
-          initialProgress: const {},
-          progressStoreFactory: (_) =>
-              GuitarJourneyProgressStore(directoryProvider: () async => root),
+      _asMember(
+        MaterialApp(
+          home: GuitarJourneyScreen(
+            initialCourse: course,
+            initialProgress: const {},
+            progressStoreFactory: (_) =>
+                GuitarJourneyProgressStore(directoryProvider: () async => root),
+          ),
         ),
       ),
     );
@@ -382,14 +391,16 @@ void main() {
         }
 
         await tester.pumpWidget(
-          MaterialApp(
-            locale: Locale(locale),
-            supportedLocales: appSupportedLocales,
-            localizationsDelegates: appLocalizationsDelegates,
-            home: GuitarJourneyScreen(
-              initialCourse: course,
-              initialProgress: const {},
-              progressStoreFactory: (_) => store,
+          _asMember(
+            MaterialApp(
+              locale: Locale(locale),
+              supportedLocales: appSupportedLocales,
+              localizationsDelegates: appLocalizationsDelegates,
+              home: GuitarJourneyScreen(
+                initialCourse: course,
+                initialProgress: const {},
+                progressStoreFactory: (_) => store,
+              ),
             ),
           ),
         );
@@ -512,11 +523,13 @@ void main() {
       (l) => l.id.endsWith('.diagrams_em_am'),
     );
     await tester.pumpWidget(
-      MaterialApp(
-        home: GuitarJourneyLessonScreen(
-          course: course,
-          lesson: lesson,
-          store: GuitarJourneyProgressStore(),
+      _asMember(
+        MaterialApp(
+          home: GuitarJourneyLessonScreen(
+            course: course,
+            lesson: lesson,
+            store: GuitarJourneyProgressStore(),
+          ),
         ),
       ),
     );
@@ -552,20 +565,22 @@ void main() {
     );
     final lesson = course.lessons.firstWhere((l) => l.id.endsWith('.f_chord'));
     await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('tr'),
-        supportedLocales: appSupportedLocales,
-        localizationsDelegates: appLocalizationsDelegates,
-        builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(
-            context,
-          ).copyWith(textScaler: const TextScaler.linear(1.6)),
-          child: child!,
-        ),
-        home: GuitarJourneyLessonScreen(
-          course: course,
-          lesson: lesson,
-          store: GuitarJourneyProgressStore(),
+      _asMember(
+        MaterialApp(
+          locale: const Locale('tr'),
+          supportedLocales: appSupportedLocales,
+          localizationsDelegates: appLocalizationsDelegates,
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(
+              context,
+            ).copyWith(textScaler: const TextScaler.linear(1.6)),
+            child: child!,
+          ),
+          home: GuitarJourneyLessonScreen(
+            course: course,
+            lesson: lesson,
+            store: GuitarJourneyProgressStore(),
+          ),
         ),
       ),
     );
@@ -651,12 +666,14 @@ void main() {
       const lessonId = 'guitar.journey.strum.accompaniment';
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: GuitarJourneyScreen(
-            initialCourse: course,
-            initialProgress: initialProgress!,
-            progressStoreFactory: (_) => store,
-            preparation: preparation,
+        _asMember(
+          MaterialApp(
+            home: GuitarJourneyScreen(
+              initialCourse: course,
+              initialProgress: initialProgress!,
+              progressStoreFactory: (_) => store,
+              preparation: preparation,
+            ),
           ),
         ),
       );
@@ -759,11 +776,13 @@ void main() {
         'guitar.journey.start.tuning',
       ]) {
         await tester.pumpWidget(
-          MaterialApp(
-            home: GuitarJourneyLessonScreen(
-              course: course,
-              lesson: course.lessons.firstWhere((lesson) => lesson.id == id),
-              store: GuitarJourneyProgressStore(),
+          _asMember(
+            MaterialApp(
+              home: GuitarJourneyLessonScreen(
+                course: course,
+                lesson: course.lessons.firstWhere((lesson) => lesson.id == id),
+                store: GuitarJourneyProgressStore(),
+              ),
             ),
           ),
         );
@@ -801,10 +820,10 @@ void main() {
         ),
       ),
     );
-    await tester.pumpWidget(app(accountA));
+    await tester.pumpWidget(_asMember(app(accountA)));
     await tester.pumpAndSettle();
     expect(preparation.isAcknowledged, isTrue);
-    await tester.pumpWidget(app(accountB));
+    await tester.pumpWidget(_asMember(app(accountB)));
     await tester.pumpAndSettle();
     expect(preparation.isAcknowledged, isFalse);
     expect(tester.takeException(), isNull);
@@ -821,13 +840,15 @@ void main() {
     );
     final preparation = GuitarSessionPreparation();
     await tester.pumpWidget(
-      MaterialApp(
-        home: GuitarJourneyScreen(
-          initialCourse: course,
-          initialProgress: const {},
-          preparation: preparation,
-          progressStoreFactory: (id) =>
-              GuitarJourneyProgressStore(accountUserId: id),
+      _asMember(
+        MaterialApp(
+          home: GuitarJourneyScreen(
+            initialCourse: course,
+            initialProgress: const {},
+            preparation: preparation,
+            progressStoreFactory: (id) =>
+                GuitarJourneyProgressStore(accountUserId: id),
+          ),
         ),
       ),
     );
@@ -844,7 +865,7 @@ void main() {
     await tester.pump();
     expect(preparation.isAcknowledged, isTrue);
     expect(find.byKey(const Key('note-session-after-break')), findsOneWidget);
-    await tester.pumpWidget(const MaterialApp(home: SizedBox()));
+    await tester.pumpWidget(_asMember(const MaterialApp(home: SizedBox())));
     preparation.dispose();
     expect(tester.takeException(), isNull);
   });

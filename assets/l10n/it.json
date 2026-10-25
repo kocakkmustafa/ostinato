@@ -120,7 +120,6 @@
     "11872fcd5196bcdc": "Di norma deve suonare solo la nota di basso desiderata. Per una nota sulla corda A, il pollice destro smorza leggermente E e l'indice sinistro sfiora D/G senza premerle sui tasti. Per una nota sulla corda D, sposta il pollice destro rilassato e i punti di contatto per tenere silenziose E/A; il dito che pizzica può appoggiarsi su A, mentre la mano sinistra sfiora G. Un contatto leggero ferma la vibrazione; premere un tasto non previsto può produrre un'altra nota o un armonico.",
     "11883c21a360aa7d": "Riesco a raggiungere la posizione senza inclinarmi o sforzarmi?",
     "11bb1fa9c7802d96": "Completare Fmaj7 viene scambiato per la prova di padroneggiare il barrè completo di F.",
-    "11d0aaae6559b06c": "Impara la chitarra con lezioni progressive, compiti pratici e autoverifiche. Il corso funziona senza account, fotocamera o microfono. Il tuo resoconto di pratica resta su questo dispositivo.",
     "122d2b998e5e832c": "Usa G C D G con un accordo per battuta; ricava A D E A su carta prima di suonare in una seconda tonalità.",
     "128abb0076eb9728": "La pagina viene ignorata dopo una sola ripetizione memorizzata.",
     "12bf5a15e3ccbf73": "Ripeti sulla corda 2, tasto 1, con un tentativo più breve; confronta il punto di contatto senza forzare forme identiche della mano.",
@@ -1555,7 +1554,6 @@
     "cf6d32ad46c9b4ba": "Associa G C D G a I IV V I, poi scrivi A D E A usando forme aperte già imparate.",
     "cfcbcf1f52d048f4": "Riesco a scrivere correttamente direzioni dei suoni e pause delle due battute senza dichiarare una corrispondenza reale d'altezza?",
     "d006b60a4ce09ebe": "pizzica corda {v0}, tasto {v1} ({v2})",
-    "d0250341a5b5b6e7": "La pratica facoltativa con microfono mostra osservazioni approssimative di note singole dopo il tuo permesso. Non valuta la tua esecuzione. Pratica dal vivo con fotocamera e vendita di abbonamenti sono chiuse in questa versione.",
     "d0cbaef607923809": "La pratica riparte sempre dalla battuta 1.",
     "d1024de6c4be3b12": "Impossibile caricare il corso.",
     "d13ef10db667dfb3": "Batti e conta l'intero schema di quattro battute prima di aggiungere solo gli attacchi sul battito 1.",
@@ -2108,6 +2106,11 @@
     "39a262d189e99339": "Ripassa configurazione con sostegno e accordatura esterna, ottave reali e scritte, direzioni di corde, tasti e dita, note naturali nei primi cinque tasti, attacchi delicati i/m e smorzamento a due mani, semiminime, crome e pause in 4/4, fondamentali, quinte e ottave, la diteggiatura della scala maggiore su un'ottava, le note di avvicinamento, la linea blues di dodici battute, suonare con una pulsazione esterna e la durata delle note, la tablatura di due battute e lo studio originale. Questi fondamenti scritti e circoscritti non sono una formazione musicale completa di basso né una padronanza fisica o audio misurata.",
     "ac59dfccc8bce18e": "Un altro giorno identifica configurazione e corde a vuoto, nomina le note naturali nei tasti 0–5, decifra la tablatura prima di mostrare le risposte, nomina i quattro esempi sul pentagramma con entrambe le ottave, suona la diteggiatura della scala maggiore e la linea di dodici battute con una pulsazione esterna e conduci un ciclo con la linea di basso che hai scritto (lezione 23). Usa il ciclo di correzione sullo stesso compito della lezione 17. Scrivi un risultato ripetibile, un'incertezza e la lezione successiva pertinente.",
     "0d1acaf0016c818d": "Identifica accordatura supportata e direzioni di corde, tasti e dita; nomina le note naturali nei primi cinque tasti; distingui ottave reali e scritte e quattro esempi di corde a vuoto in chiave di basso; prova pizzicate alternate delicate, smorzamento a due mani, semiminime, crome e pause in 4/4, coppie fondamentale/quinta/ottava, una diteggiatura della scala maggiore su un'ottava, note di avvicinamento e una linea blues di dodici battute con una pulsazione esterna; suona la tablatura originale di due battute e lo studio di otto; poi scrivi la tua linea di basso per uno schema e conduci un ciclo di pratica confrontando una correzione più piccola nello stesso compito e allo stesso tempo. Solo auto-osservazione; nessuna conferma di altezza rilevata, postura, avanzamento o padronanza.",
-    "e3e7345e0bb83651": "La settima"
+    "e3e7345e0bb83651": "La settima",
+    "fbd52aa3863b78f1": "Impara la chitarra con lezioni progressive, compiti pratici e autoverifiche. Le lezioni gratuite funzionano senza account, fotocamera o microfono. Il tuo resoconto di pratica resta su questo dispositivo.",
+    "b3ade159f643b686": "La pratica facoltativa con microfono mostra osservazioni approssimative di note singole dopo il tuo permesso. Non valuta la tua esecuzione. La pratica dal vivo con fotocamera è chiusa in questa versione. Le prime lezioni di ogni corso sono gratuite; le successive richiedono un abbonamento Ostinato o Motion+.",
+    "b17b63ccf42baffe": "Le lezioni 1–{v0} sono gratuite. Le successive richiedono un abbonamento Ostinato o Motion+; i tuoi registri di avanzamento restano sempre visibili.",
+    "5e95bb16d894c7e7": "Lezione in abbonamento",
+    "cebdd1905c0acfe3": "Questa lezione richiede un abbonamento e il servizio account non è disponibile al momento."
   }
 }

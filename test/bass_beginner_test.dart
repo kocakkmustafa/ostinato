@@ -16,6 +16,11 @@ import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/bass_beginner_screen.dart';
 
 import 'support/localized_widget_ready.dart';
+import 'support/paid_access_scope.dart';
+
+/// Paywall A: course walks run as a member; the lock itself is covered by
+/// course_access_test.dart.
+Widget _asMember(Widget app) => PaidAccessProbe().wrap(app);
 
 class Files extends CachingAssetBundle {
   Files({this.corrupt = false});
@@ -93,9 +98,9 @@ void main() {
     'late old bundle cannot replace newer result; back/unmount while pending',
     (tester) async {
       final old = DelayedFiles(corrupt: true), latest = DelayedFiles();
-      await tester.pumpWidget(_app(old));
+      await tester.pumpWidget(_asMember(_app(old)));
       await tester.pump();
-      await tester.pumpWidget(_app(latest));
+      await tester.pumpWidget(_asMember(_app(latest)));
       await tester.pump();
       latest.gate.complete();
       await tester.pumpAndSettle();
@@ -111,15 +116,17 @@ void main() {
       );
       final pending = DelayedFiles();
       await tester.pumpWidget(
-        MaterialApp(
-          home: Builder(
-            builder: (context) => TextButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) => BassBeginnerScreen(bundle: pending),
+        _asMember(
+          MaterialApp(
+            home: Builder(
+              builder: (context) => TextButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => BassBeginnerScreen(bundle: pending),
+                  ),
                 ),
+                child: const Text('Open'),
               ),
-              child: const Text('Open'),
             ),
           ),
         ),
@@ -137,7 +144,7 @@ void main() {
     },
   );
   testWidgets('successful retry uses real verified assets', (tester) async {
-    await tester.pumpWidget(_app(RecoveringFiles()));
+    await tester.pumpWidget(_asMember(_app(RecoveringFiles())));
     await tester.pumpAndSettle();
     expect(find.text('Written course unavailable.'), findsOneWidget);
     await tester.tap(find.text('Retry'));
@@ -156,18 +163,20 @@ void main() {
           jsonDecode(File(bassAsset).readAsStringSync()),
         );
         await tester.pumpWidget(
-          MaterialApp(
-            locale: Locale(locale),
-            theme: ThemeData(fontFamily: 'Hanken Grotesk'),
-            supportedLocales: appSupportedLocales,
-            localizationsDelegates: appLocalizationsDelegates,
-            builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(
-                context,
-              ).copyWith(textScaler: const TextScaler.linear(2)),
-              child: child!,
+          _asMember(
+            MaterialApp(
+              locale: Locale(locale),
+              theme: ThemeData(fontFamily: 'Hanken Grotesk'),
+              supportedLocales: appSupportedLocales,
+              localizationsDelegates: appLocalizationsDelegates,
+              builder: (context, child) => MediaQuery(
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: const TextScaler.linear(2)),
+                child: child!,
+              ),
+              home: BassBeginnerScreen(bundle: Files()),
             ),
-            home: BassBeginnerScreen(bundle: Files()),
           ),
         );
         await waitForLocalizedFixture(
@@ -286,30 +295,32 @@ void main() {
           addTearDown(tester.view.resetDevicePixelRatio);
           final boundary = GlobalKey();
           await tester.pumpWidget(
-            MaterialApp(
-              locale: Locale(locale),
-              theme: ThemeData(fontFamily: 'Hanken Grotesk'),
-              supportedLocales: appSupportedLocales,
-              localizationsDelegates: appLocalizationsDelegates,
-              home: Scaffold(
-                body: RepaintBoundary(
-                  key: boundary,
-                  child: Material(
-                    color: Colors.white,
-                    child: MediaQuery(
-                      data: const MediaQueryData(
-                        textScaler: TextScaler.linear(2),
-                      ),
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: BassDiagrams(
-                            course: BassCourse.fromJson(
-                              jsonDecode(File(bassAsset).readAsStringSync()),
+            _asMember(
+              MaterialApp(
+                locale: Locale(locale),
+                theme: ThemeData(fontFamily: 'Hanken Grotesk'),
+                supportedLocales: appSupportedLocales,
+                localizationsDelegates: appLocalizationsDelegates,
+                home: Scaffold(
+                  body: RepaintBoundary(
+                    key: boundary,
+                    child: Material(
+                      color: Colors.white,
+                      child: MediaQuery(
+                        data: const MediaQueryData(
+                          textScaler: TextScaler.linear(2),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: BassDiagrams(
+                              course: BassCourse.fromJson(
+                                jsonDecode(File(bassAsset).readAsStringSync()),
+                              ),
+                              lesson: BassCourse.fromJson(
+                                jsonDecode(File(bassAsset).readAsStringSync()),
+                              ).lessons[lesson - 1],
                             ),
-                            lesson: BassCourse.fromJson(
-                              jsonDecode(File(bassAsset).readAsStringSync()),
-                            ).lessons[lesson - 1],
                           ),
                         ),
                       ),
@@ -429,11 +440,13 @@ void main() {
     final repo = (await tester.runAsync(ContentRepository.load))!;
     final cue = (await tester.runAsync(CueTextResolver.load))!;
     await tester.pumpWidget(
-      ContentRepositoryScope(
-        repo: repo,
-        cueText: cue,
-        child: MaterialApp(
-          home: LibraryScreen(repo: repo, cueText: cue),
+      _asMember(
+        ContentRepositoryScope(
+          repo: repo,
+          cueText: cue,
+          child: MaterialApp(
+            home: LibraryScreen(repo: repo, cueText: cue),
+          ),
         ),
       ),
     );
@@ -525,12 +538,14 @@ void main() {
     tester,
   ) async {
     await tester.pumpWidget(
-      MaterialApp(home: BassBeginnerScreen(bundle: Files())),
+      _asMember(MaterialApp(home: BassBeginnerScreen(bundle: Files()))),
     );
     await tester.pumpAndSettle();
     expect(find.text('Bass: four-string beginner foundation'), findsOneWidget);
     await tester.pumpWidget(
-      MaterialApp(home: BassBeginnerScreen(bundle: Files(corrupt: true))),
+      _asMember(
+        MaterialApp(home: BassBeginnerScreen(bundle: Files(corrupt: true))),
+      ),
     );
     expect(find.byKey(const Key('bass-01')), findsNothing);
     await tester.pumpAndSettle();

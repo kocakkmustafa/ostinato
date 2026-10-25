@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../account_connection.dart';
 import '../app_locale.dart';
+import '../course_access.dart';
 import '../course/media/lesson_media_slot.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
@@ -366,6 +367,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
               ),
             ),
           const SizedBox(height: 20),
+          const FreeLessonsNotice(instrumentId: 'guitar'),
           kicker(localized(context, 'The ten modules', 'On modül')),
           const SizedBox(height: 10),
           for (var index = 0; index < course.modules.length; index++) ...[
@@ -451,7 +453,13 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                     : _statusText(context, _record(progress, course, lesson)),
                 style: monoText(),
               ),
-              trailing: const Icon(Icons.chevron_right, size: 19),
+              trailing:
+                  subscriptionLessonMark(
+                    context,
+                    'guitar',
+                    course.lessons.indexOf(lesson),
+                  ) ??
+                  const Icon(Icons.chevron_right, size: 19),
               onTap: () => _openLesson(context, course, lesson, progress),
             ),
         ],
@@ -490,6 +498,12 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
     Map<String, GuitarLessonProgress>? progress,
   ) async {
     final store = _store!;
+    // Paywall A: opening a paid lesson needs membership; its progress record
+    // above stays readable either way.
+    if (!await admitLesson(context, 'guitar', course.lessons.indexOf(lesson)) ||
+        !context.mounted) {
+      return;
+    }
     await Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => GuitarJourneyLessonScreen(

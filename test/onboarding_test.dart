@@ -106,16 +106,24 @@ void main() {
         expect(
           find.textContaining(
             language == 'tr'
-                ? 'Kurs hesap, kamera veya mikrofon olmadan çalışır'
-                : 'The course works without an account, camera or microphone',
+                ? 'Ücretsiz dersler hesap, kamera veya mikrofon olmadan çalışır'
+                : 'Free lessons work without an account, camera or microphone',
           ),
           findsOneWidget,
         );
         expect(
           find.textContaining(
             language == 'tr'
-                ? 'canlı kamera pratiği ve abonelik satışı kapalıdır'
-                : 'Live camera practice and subscription sales are closed',
+                ? 'canlı kamera pratiği kapalıdır'
+                : 'Live camera practice is closed in this release',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.textContaining(
+            language == 'tr'
+                ? 'sonraki dersler Ostinato veya Motion+ aboneliği gerektirir'
+                : 'later lessons need an Ostinato or Motion+ subscription',
           ),
           findsOneWidget,
         );

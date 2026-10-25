@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_locale.dart';
+import '../course_access.dart';
 import 'feedback_availability.dart';
 import '../piano_beginner.dart';
 import 'piano_notation.dart';
@@ -89,6 +90,7 @@ class _PianoBeginnerScreenState extends State<PianoBeginnerScreen> {
             ),
             const SizedBox(height: 16),
             const FeedbackAvailability(instrumentId: 'piano'),
+            const FreeLessonsNotice(instrumentId: 'piano'),
             Text(course.entry.of(context)),
             const SizedBox(height: 16),
             Text(course.exit.of(context)),
@@ -104,13 +106,21 @@ class _PianoBeginnerScreenState extends State<PianoBeginnerScreen> {
               ListTile(
                 key: Key(course.lessons[i].id),
                 title: Text('${i + 1}. ${course.lessons[i].title.of(context)}'),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) =>
-                        _PianoLessonScreen(course: course, index: i),
-                  ),
-                ),
+                trailing:
+                    subscriptionLessonMark(context, 'piano', i) ??
+                    const Icon(Icons.chevron_right),
+                onTap: () async {
+                  if (!await admitLesson(context, 'piano', i) ||
+                      !context.mounted) {
+                    return;
+                  }
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) =>
+                          _PianoLessonScreen(course: course, index: i),
+                    ),
+                  );
+                },
               ),
           ],
         );
@@ -180,22 +190,34 @@ class _PianoLessonScreen extends StatelessWidget {
           if (index > 0)
             TextButton(
               key: const Key('piano-previous-lesson'),
-              onPressed: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(
-                  builder: (_) =>
-                      _PianoLessonScreen(course: course, index: index - 1),
-                ),
-              ),
+              onPressed: () async {
+                if (!await admitLesson(context, 'piano', index - 1) ||
+                    !context.mounted) {
+                  return;
+                }
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute<void>(
+                    builder: (_) =>
+                        _PianoLessonScreen(course: course, index: index - 1),
+                  ),
+                );
+              },
               child: Text(localized(context, 'Previous lesson', 'Önceki ders')),
             ),
           if (index + 1 < course.lessons.length)
             TextButton(
-              onPressed: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(
-                  builder: (_) =>
-                      _PianoLessonScreen(course: course, index: index + 1),
-                ),
-              ),
+              onPressed: () async {
+                if (!await admitLesson(context, 'piano', index + 1) ||
+                    !context.mounted) {
+                  return;
+                }
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute<void>(
+                    builder: (_) =>
+                        _PianoLessonScreen(course: course, index: index + 1),
+                  ),
+                );
+              },
               child: Text(localized(context, 'Next lesson', 'Sonraki ders')),
             ),
         ],

@@ -10,6 +10,11 @@ import 'package:ostinato/app/screens/ukulele_beginner_screen.dart';
 import 'package:ostinato/app/screens/bass_beginner_screen.dart';
 import 'package:ostinato/app/screens/vocal_beginner_screen.dart';
 import 'support/localized_widget_ready.dart';
+import 'support/paid_access_scope.dart';
+
+/// Paywall A: course walks run as a member; the lock itself is covered by
+/// course_access_test.dart.
+Widget _asMember(Widget app) => PaidAccessProbe().wrap(app);
 
 class _Files extends CachingAssetBundle {
   @override
@@ -19,8 +24,11 @@ class _Files extends CachingAssetBundle {
 
 List<dynamic> _lessons(String kind) =>
     (jsonDecode(
-          File('assets/content/${kind}_beginner.v1.json').readAsStringSync(),
-        ) as Map<String, dynamic>)['lessons']
+              File(
+                'assets/content/${kind}_beginner.v1.json',
+              ).readAsStringSync(),
+            )
+            as Map<String, dynamic>)['lessons']
         as List<dynamic>;
 
 Future<void> _mount(WidgetTester tester, String kind, String locale) async {
@@ -36,15 +44,19 @@ Future<void> _mount(WidgetTester tester, String kind, String locale) async {
     _ => VocalBeginnerScreen(bundle: bundle),
   };
   await tester.pumpWidget(
-    MaterialApp(
-      locale: Locale(locale),
-      supportedLocales: appSupportedLocales,
-      localizationsDelegates: appLocalizationsDelegates,
-      builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(2)),
-        child: child!,
+    _asMember(
+      MaterialApp(
+        locale: Locale(locale),
+        supportedLocales: appSupportedLocales,
+        localizationsDelegates: appLocalizationsDelegates,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: TextScaler.linear(2)),
+          child: child!,
+        ),
+        home: home,
       ),
-      home: home,
     ),
   );
   await tester.pumpAndSettle();

@@ -159,8 +159,9 @@ def detect(prod_sources):
 #
 # ⚠️ Bu bir MUAFİYET değil, KARAR NOKTASI.
 DECLARED = {
-    "writeCallSites": 6,
-    "writeFiles": ["app_locale_preferences.dart", "app_theme_preferences.dart",
+    "writeCallSites": 7,
+    "writeFiles": ["age_gate_store.dart", "app_locale_preferences.dart",
+                   "app_theme_preferences.dart",
                    "guitar_journey_progress.dart", "onboarding_store.dart",
                    "pose_model.dart", "session_store.dart"],
     "userArtifactMayBePersisted": True,
@@ -253,6 +254,11 @@ def coupling_violation(actual):
 #: **sınıflandırılmadan geçemez** — yani *"ne sakladığını söyle"* zorunluluğu
 #: koda gömülür, kayıtlara değil.
 WRITE_CLASSES = {
+    "age_gate_store.dart": (
+        "CİHAZ KORUMA İŞARETİ (2026-10-23) — Core'un 13 yaş altı kayıt "
+        "engeli bu cihazda bir kez gerçekleşti mi; yalnız şema sürümü ve "
+        "sabit `blocked: true`. Doğum ayı/yılı, ülke, e-posta veya hesap "
+        "kimliği yazılmaz. Silinirse engel bu cihazda yeniden sorulur."),
     "app_locale_preferences.dart": (
         "SUNUM TERCİHİ — yalnız şema sürümü ve desteklenen 14 dilden birinin "
         "etiketi (veya sistem dili için null). Hesap, ilerleme veya ölçüm "
@@ -287,7 +293,8 @@ WRITE_CLASSES = {
 }
 
 
-PREFERENCE_CLASSES = {"app_locale_preferences.dart": "locale",
+PREFERENCE_CLASSES = {"age_gate_store.dart": "age_gate",
+                      "app_locale_preferences.dart": "locale",
                       "app_theme_preferences.dart": "theme"}
 
 

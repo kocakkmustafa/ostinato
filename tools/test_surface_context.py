@@ -496,6 +496,20 @@ class PreferencePayloadTests(unittest.TestCase):
         self.assertEqual(preference_payload_role(self.locale), 'locale')
         self.assertEqual(preference_payload_role(self.theme), 'theme')
 
+    age = """Future<void> markBlocked() async {
+    await pending.writeAsString(
+      jsonEncode({'schemaVersion': 1, 'blocked': true}),
+      flush: true,
+    );
+  }"""
+
+    def test_age_gate_marker_is_a_fixed_fact(self):
+        self.assertEqual(preference_payload_role(self.age), 'age_gate')
+        for broken in [self.age.replace("'blocked': true", "'blocked': birthYear"),
+                       self.age.replace('markBlocked()', 'markBlocked(int birthYear)'),
+                       self.age.replace("'blocked': true", "'birthMonth': true")]:
+            self.assertIsNone(preference_payload_role(broken), broken[:60])
+
     def test_measurement_like_or_unproven_payloads_stay_writers(self):
         for broken in [
                 self.locale.replace("'languageTag': languageTag", "'history': languageTag"),

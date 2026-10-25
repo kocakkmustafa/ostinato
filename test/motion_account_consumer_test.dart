@@ -139,6 +139,11 @@ final class _Fixture {
   // row), so these reads are owner-scoped GETs, never writes.
   final ageReads = <http.Request>[];
   final profileWrites = <http.Request>[];
+  // Sales are open (ostinatoPaidFeaturesAvailable): the account page and the
+  // paid guard ask motion-check-membership. The fixture answers for this
+  // owner only; no purchase verification is ever sent from these screens.
+  final membershipChecks = <http.Request>[];
+  bool membershipActive = false;
   final unexpected = <String>[];
   final held = <Completer<http.Response>>[];
   bool holdProfile = false;
@@ -245,6 +250,11 @@ final class _Fixture {
       ageReads.add(request);
       return _json(<Object>[]);
     }
+    if (request.method == 'POST' &&
+        request.url.path == '/functions/v1/motion-check-membership') {
+      membershipChecks.add(request);
+      return _json({'active': membershipActive, 'anyActive': membershipActive});
+    }
     if (request.url.path == '/rest/v1/motion_profiles') {
       if (request.method == 'GET') {
         profileReads.add(request);
@@ -289,7 +299,11 @@ final class _Fixture {
   }
 
   void expectClosedBoundaries() {
-    expect(membershipRequests, 0);
+    expect(membershipRequests, membershipChecks.length);
+    for (final check in membershipChecks) {
+      expect(jsonDecode(check.body), {'appId': 'ostinato'});
+      expect(check.headers['Authorization'], startsWith('Bearer '));
+    }
     expect(deleteRequests, 0);
     expect(deletedCallbacks, 0);
     expect(clearCallbacks, 0);
@@ -368,7 +382,7 @@ Future<void> _mount(WidgetTester tester, _Fixture f, String tag) async {
                       f.paidResult.value =
                           await f.connection!.requirePaidAccess!(context);
                     },
-                    child: const Text('TEST_CLOSED_PAID_ACTION'),
+                    child: const Text('TEST_PAID_ACTION'),
                   ),
                 ],
               ),
@@ -389,7 +403,7 @@ Future<void> _mount(WidgetTester tester, _Fixture f, String tag) async {
   expect(page.account, isA<OwnershipGuardedAccountClient>());
   expect(page.account.app, MotionApp.ostinato);
   expect(page.account.currentUser?.id, _id);
-  expect(page.paidFeaturesAvailable, isFalse);
+  expect(page.paidFeaturesAvailable, isTrue);
 }
 
 Finder _name(MotionAccountLocalizations strings) => find.byWidgetPredicate(
@@ -422,13 +436,14 @@ void main() {
   });
 
   testWidgets(
-    'production account factory retains its real page across fourteen locales with paid access closed',
+    'production account factory retains its real page across fourteen locales with paid access open',
     (tester) async {
       tester.view.physicalSize = const Size(1000, 1400);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
       final f = await _Fixture.open(tester);
+      f.membershipActive = true;
       await _mount(tester, f, 'en');
       var strings = MotionAccountLocalizations(const Locale('en'));
       await _ready(
@@ -491,24 +506,29 @@ void main() {
         expect(Theme.of(tester.element(page)).brightness, Brightness.light);
         expect(
           _button(FilledButton, strings, MotionAccountString.membershipOptions),
-          findsNothing,
+          findsOneWidget,
+        );
+        expect(
+          find.text(strings.text(MotionAccountString.membershipActiveInApp)),
+          findsOneWidget,
         );
         expect(find.byType(MotionMembershipPage), findsNothing);
 
+        final checksBefore = f.membershipChecks.length;
         f.paidResult.value = null;
         await _tap(tester, find.byKey(_paidButton));
         await _ready(
           tester,
           () => f.paidResult.value != null,
-          'closed paid callback $tag',
+          'open paid callback $tag',
         );
-        expect(f.paidResult.value, isFalse);
+        expect(f.paidResult.value, isTrue);
+        expect(f.membershipChecks.length, checksBefore + 1);
+        expect(find.byType(MotionMembershipPage), findsNothing);
         expect(
           find.text(strings.text(MotionAccountString.futureSession)),
-          findsOneWidget,
+          findsNothing,
         );
-        ScaffoldMessenger.of(tester.element(page)).removeCurrentSnackBar();
-        await tester.pump();
 
         await _tap(
           tester,

@@ -10,8 +10,10 @@ import 'package:supabase_flutter/supabase_flutter.dart' show AuthState;
 import 'account_connection.dart';
 import 'account_data_directory.dart';
 import 'account_ownership_epoch.dart';
+import 'age_gate_store.dart';
 import 'app_locale.dart';
 import 'app_locale_preferences.dart';
+import 'ostinato_release_policy.dart';
 import 'ownership_guarded_account_client.dart';
 
 const _url = String.fromEnvironment('MOTION_SUPABASE_URL');
@@ -28,6 +30,8 @@ initializeMotionAccount() async {
   // Permanent receipts can arrive during Core initialization. The same root
   // authority already remembers old pending resource closures before that await.
   final coordinator = AccountDeletionCoordinator.forRoot(supportRoot);
+  final ageGate = AgeGateStore(directory: supportRoot);
+  final ageBlocked = await ageGate.read();
   Future<void> clearLocalAccountData(String userId) =>
       deleteAccountData(supportRoot, userId);
 
@@ -45,6 +49,8 @@ initializeMotionAccount() async {
       runtime,
       deletionCoordinator: coordinator,
       clearLocalData: clearLocalAccountData,
+      ageBlocked: ageBlocked,
+      onAgeBlocked: ageGate.markBlocked,
     ),
   );
 }
@@ -55,6 +61,8 @@ AccountConnection bindMotionAccountRuntime(
   MotionAccountRuntime runtime, {
   required Future<void> Function(String userId) clearLocalData,
   required AccountDeletionCoordinator deletionCoordinator,
+  bool ageBlocked = false,
+  Future<void> Function()? onAgeBlocked,
   @visibleForTesting Stream<AuthState>? ownerAuthChanges,
 }) {
   final ownership = AccountOwnershipEpoch(
@@ -63,6 +71,15 @@ AccountConnection bindMotionAccountRuntime(
     ownerAuthChanges: ownerAuthChanges,
   );
   var disposed = false;
+  // Core's 13+ check: an under-13 result is persisted once and passed back on
+  // every later page so another age on this device cannot reopen sign-up.
+  var underAgeBlocked = ageBlocked;
+  void blockUnderAge() {
+    if (underAgeBlocked) return;
+    underAgeBlocked = true;
+    onAgeBlocked?.call().ignore();
+  }
+
   Widget accountPage(BuildContext _) {
     final pageOwnership = ownership.capturePage();
     return MotionAccountPage(
@@ -81,6 +98,9 @@ AccountConnection bindMotionAccountRuntime(
       initialPasswordRecovery: runtime.isPasswordRecovery,
       clearLocalData: clearLocalData,
       onRetryIdentity: runtime.refreshIdentity,
+      ageBlocked: underAgeBlocked,
+      onAgeBlocked: blockUnderAge,
+      paidFeaturesAvailable: ostinatoPaidFeaturesAvailable,
     );
   }
 
@@ -100,6 +120,7 @@ AccountConnection bindMotionAccountRuntime(
       context,
       account: runtime.account,
       accountPageBuilder: accountPage,
+      paidFeaturesAvailable: ostinatoPaidFeaturesAvailable,
     ),
   );
 }

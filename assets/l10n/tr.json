@@ -120,7 +120,6 @@
     "11872fcd5196bcdc": "Genellikle yalnız hedef bas notası çınlasın. La telindeki notada sağ başparmak Mi’yi hafif susturur, sol işaret Re/Sol’e perdeye bastırmadan hafif temas eder. Re telindeki notada rahat sağ başparmak/teması Mi/La sessiz kalacak şekilde taşı; çekiş La’ya konabilir, sol el Sol’e temas eder. Hafif temas titreşimi keser; yanlış perdeye basmak başka nota veya armonik çıkarabilir.",
     "11883c21a360aa7d": "Eğilmeden ve zorlanmadan ulaşabiliyor muyum?",
     "11bb1fa9c7802d96": "Fa majör yedili tamamlamak tam Fa bare ustalığı sayılıyor.",
-    "11d0aaae6559b06c": "Gitarı sıralı dersler, çalışma görevleri ve öz denetimlerle öğrenin. Kurs hesap, kamera veya mikrofon olmadan çalışır. Çalışma kaydınız bu cihazda kalır.",
     "122d2b998e5e832c": "Ölçü başına tek akorla Sol Do Re Sol kullan; ikinci tonu çalmadan kağıtta La Re Mi La çıkar.",
     "128abb0076eb9728": "Bir ezber tekrarından sonra sayfa göz ardı ediliyor.",
     "12bf5a15e3ccbf73": "Daha kısa denemeyle tel 2 perde 1'de tekrarla; elleri aynı şekle zorlamak yerine temas yerini karşılaştır.",
@@ -1555,7 +1554,6 @@
     "cf6d32ad46c9b4ba": "Sol–Do–Re–Sol dizisini I–IV–V–I olarak haritala; öğrenilmiş açık akorlarla La–Re–Mi–La dizisini yaz.",
     "cfcbcf1f52d048f4": "Gerçek perde eşleşmesi iddiası olmadan iki ölçünün ses yönü ve suslarını doğru yazabiliyor muyum?",
     "d006b60a4ce09ebe": "tel çek {v0}, perde {v1} ({v2})",
-    "d0250341a5b5b6e7": "İsteğe bağlı mikrofon pratiği, izninizden sonra yaklaşık tek nota gözlemi gösterir. Çalma başarınızı puanlamaz. Bu sürümde canlı kamera pratiği ve abonelik satışı kapalıdır.",
     "d0cbaef607923809": "Çalışma hep ilk ölçüden başlıyor.",
     "d1024de6c4be3b12": "Kurs yüklenemedi.",
     "d13ef10db667dfb3": "Yalnız ilk vuruş başlangıçlarını eklemeden dört ölçülük örüntünün tamamını vurup say.",
@@ -2108,6 +2106,11 @@
     "39a262d189e99339": "Desteklenen düzen/harici akort, gerçek-yazılı oktav farkı, tel/perde/parmak yönleri, ilk beş perdedeki doğal notalar, hafif i/m çekiş ve iki elle susturma, 4/4 dörtlük/sekizlik/sus, kök/beşli/oktav, tek oktav majör dizi şekli, yaklaşım notaları, on iki ölçülük blues hattı, dış nabızla çalma ve nota uzunluğu, iki ölçülük tab ve özgün etüdü gözden geçir. Bu sınırlı yazılı temel, tüm bas müzisyenliği veya ölçülmüş fiziksel/sesli ustalık değildir.",
     "ac59dfccc8bce18e": "Başka bir gün düzeni ve açık telleri tanı, 0–5. perdelerdeki doğal notaları adlandır, cevapları açmadan tabı çöz, dört porte örneğini iki oktavıyla adlandır, majör dizi şeklini ve on iki ölçülük hattı dış nabızla çal ve yazdığın bas hattıyla bir döngü uygula (ders 23). Ders 17’nin aynı görevde düzeltme döngüsünü kullan. Tekrarlanabilir bir kazanım, bir belirsizlik ve sonraki dersini yaz.",
     "0d1acaf0016c818d": "Desteklenen akordu ve tel/perde/parmak yönlerini tanı; ilk beş perdedeki doğal notaları adlandır; gerçek/yazılı oktavları ve dört açık tel fa anahtarı örneğini ayırt et; hafif dönüşümlü çekişleri, iki elle susturmayı, 4/4 dörtlük/sekizlik/susları, kök/beşli/oktav çiftlerini, tek oktav majör dizi şeklini, yaklaşım notalarını ve dış nabızla on iki ölçülük blues hattını dene; özgün iki ölçülük tabı ve sekiz ölçülük etüdü çal; sonra bir şemaya kendi bas hattını yaz ve aynı görev/tempoda daha küçük bir düzeltmeyi karşılaştıran çalışma döngüsü uygula. Yalnız öz gözlem; algılanmış perde, duruş, ilerleme veya ustalık onayı yok.",
-    "e3e7345e0bb83651": "La yedi"
+    "e3e7345e0bb83651": "La yedi",
+    "fbd52aa3863b78f1": "Gitarı sıralı dersler, çalışma görevleri ve öz denetimlerle öğrenin. Ücretsiz dersler hesap, kamera veya mikrofon olmadan çalışır. Çalışma kaydınız bu cihazda kalır.",
+    "b3ade159f643b686": "İsteğe bağlı mikrofon pratiği, izninizden sonra yaklaşık tek nota gözlemi gösterir. Çalma başarınızı puanlamaz. Bu sürümde canlı kamera pratiği kapalıdır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato veya Motion+ aboneliği gerektirir.",
+    "b17b63ccf42baffe": "1–{v0}. dersler ücretsizdir. Sonraki dersler Ostinato veya Motion+ aboneliği gerektirir; ilerleme kayıtların her zaman görünür kalır.",
+    "5e95bb16d894c7e7": "Abonelik dersi",
+    "cebdd1905c0acfe3": "Bu ders abonelik gerektirir; hesap hizmeti şu anda kullanılamıyor."
   }
 }

@@ -120,7 +120,6 @@
     "11872fcd5196bcdc": "Biasanya hanya nada bas yang dimaksud yang boleh berdering. Untuk nada pada senar A, ibu jari kanan meredam E secara ringan dan telunjuk kiri menyentuh D/G dengan lembut tanpa menekannya ke fret. Untuk nada pada senar D, pindahkan kontak ibu jari kanan yang santai agar E/A tetap diam; petikan dapat mendarat pada A, sementara tangan kiri menyentuh G. Kontak ringan menghentikan getaran; menekan fret yang tidak dimaksud dapat menghasilkan nada lain atau harmonik.",
     "11883c21a360aa7d": "Bisakah aku menjangkau tanpa mencondongkan badan atau menegang?",
     "11bb1fa9c7802d96": "Penyelesaian Fmaj7 dianggap sebagai bukti bahwa barre F penuh telah dikuasai.",
-    "11d0aaae6559b06c": "Belajar gitar melalui pelajaran bertahap, tugas latihan, dan pemeriksaan mandiri. Kursus berjalan tanpa akun, kamera, atau mikrofon. Catatan latihanmu tetap berada di perangkat ini.",
     "122d2b998e5e832c": "Gunakan G C D G dengan satu akor per birama; turunkan A D E A di kertas sebelum memainkan nada dasar kedua.",
     "128abb0076eb9728": "Halaman diabaikan setelah satu pengulangan yang dihafal.",
     "12bf5a15e3ccbf73": "Ulangi pada senar 2 fret 1 dengan percobaan lebih singkat; bandingkan lokasi kontak, bukan memaksakan bentuk tangan yang sama.",
@@ -1551,7 +1550,6 @@
     "cf6d32ad46c9b4ba": "Petakan G C D G menjadi I IV V I, lalu tulis A D E A memakai bentuk terbuka yang sudah dipelajari.",
     "cfcbcf1f52d048f4": "Bisakah aku menulis arah nada dan jeda kedua birama dengan benar, tanpa mengklaim kesesuaian tinggi nada nyata?",
     "d006b60a4ce09ebe": "petik senar {v0}, fret {v1} ({v2})",
-    "d0250341a5b5b6e7": "Latihan mikrofon opsional menampilkan perkiraan pengamatan satu nada setelah izinmu. Ini tidak menilai permainanmu. Latihan kamera langsung dan penjualan langganan ditutup dalam rilis ini.",
     "d0cbaef607923809": "Latihan selalu dimulai lagi dari birama 1.",
     "d1024de6c4be3b12": "Kursus tidak dapat dimuat.",
     "d13ef10db667dfb3": "Ketukkan dan hitung seluruh pola empat birama sebelum menambahkan hanya serangan pada ketukan 1.",
@@ -2101,6 +2099,11 @@
     "39a262d189e99339": "Tinjau persiapan tersangga/penyetelan eksternal, oktaf bunyi-versus-tertulis, arah senar/fret/jari, nada natural di lima fret pertama, serangan i/m lembut dan peredaman dua tangan, seperempat/seperdelapan/jeda 4/4, nada dasar/kuint/oktaf, bentuk tangga nada mayor satu oktaf, nada pendekatan, garis blues dua belas birama, bermain dengan denyut eksternal dan panjang nada, tab dua birama, dan etude asli. Dasar tertulis yang terbatas ini bukan seluruh keterampilan bermusik bas atau penguasaan fisik/audio yang terukur.",
     "ac59dfccc8bce18e": "Pada hari lain, kenali susunan dan senar terbuka, sebutkan nada natural di fret 0–5, baca tab sebelum mengungkap jawaban, sebutkan empat contoh paranada dengan kedua oktaf, mainkan bentuk tangga nada mayor dan garis dua belas birama dengan denyut eksternal, lalu jalankan satu siklus dengan garis bas yang kamu tulis (pelajaran 23). Gunakan siklus perbaikan tugas yang sama dari pelajaran 17. Tulis satu hasil yang dapat diulang, satu ketidakpastian, dan pelajaran berikutnya.",
     "0d1acaf0016c818d": "Kenali penyetelan yang didukung dan arah senar/fret/jari; sebutkan nada natural di lima fret pertama; bedakan oktaf bunyi/tertulis serta empat contoh senar terbuka berkunci fa; coba petikan lembut bergantian, peredaman dua tangan, seperempat/seperdelapan/jeda 4/4, pasangan nada dasar/kuint/oktaf, bentuk tangga nada mayor satu oktaf, nada pendekatan, dan garis blues dua belas birama dengan denyut eksternal; mainkan tab asli dua birama dan etude delapan birama; lalu tulis garis basmu sendiri untuk sebuah bagan dan jalankan siklus latihan sambil membandingkan perbaikan kecil dalam tugas/tempo yang sama. Hanya pengamatan diri; tanpa pengesahan tinggi nada terdeteksi, postur, kemajuan, atau penguasaan.",
-    "e3e7345e0bb83651": "A tujuh"
+    "e3e7345e0bb83651": "A tujuh",
+    "fbd52aa3863b78f1": "Belajar gitar melalui pelajaran bertahap, tugas latihan, dan pemeriksaan mandiri. Pelajaran gratis berjalan tanpa akun, kamera, atau mikrofon. Catatan latihanmu tetap berada di perangkat ini.",
+    "b3ade159f643b686": "Latihan mikrofon opsional menampilkan perkiraan pengamatan satu nada setelah izinmu. Ini tidak menilai permainanmu. Latihan kamera langsung ditutup dalam rilis ini. Pelajaran awal setiap kursus gratis; pelajaran berikutnya memerlukan langganan Ostinato atau Motion+.",
+    "b17b63ccf42baffe": "Pelajaran 1–{v0} gratis. Pelajaran berikutnya memerlukan langganan Ostinato atau Motion+; catatan kemajuanmu selalu tetap terlihat.",
+    "5e95bb16d894c7e7": "Pelajaran berlangganan",
+    "cebdd1905c0acfe3": "Pelajaran ini memerlukan langganan, dan layanan akun sedang tidak tersedia."
   }
 }

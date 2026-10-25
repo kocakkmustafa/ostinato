@@ -120,7 +120,6 @@
     "11872fcd5196bcdc": "Usually only the intended bass note should ring. For an A-string note, right thumb lightly mutes E and left index gently contacts D/G without pressing them to frets. For a D-string note, move the relaxed right thumb/contact so E/A stay quiet; plucking can land on A, while left hand contacts G. Light contact stops vibration; pressing an unintended fret can create another note or harmonic.",
     "11883c21a360aa7d": "Can I reach without leaning or strain?",
     "11bb1fa9c7802d96": "Fmaj7 completion is mistaken for proof that the full Fbarre is mastered.",
-    "11d0aaae6559b06c": "Learn guitar through progressive lessons, practice tasks and self-checks. The course works without an account, camera or microphone. Your practice record stays on this device.",
     "122d2b998e5e832c": "Use G C D G at one chord per bar; derive A D E A on paper before playing a second key.",
     "128abb0076eb9728": "The page is ignored after one memorized repetition.",
     "12bf5a15e3ccbf73": "Repeat on string 2 fret 1 with a shorter trial; compare contact location rather than forcing equal hand shapes.",
@@ -1555,7 +1554,6 @@
     "cf6d32ad46c9b4ba": "Map G C D G to I IV V I, then write A D E A using already learned open shapes.",
     "cfcbcf1f52d048f4": "Can I write both bars’ tone directions and rests correctly, without claiming actual pitch matching?",
     "d006b60a4ce09ebe": "pluck string {v0}, fret {v1} ({v2})",
-    "d0250341a5b5b6e7": "Optional microphone practice shows approximate single-note observations after your permission. It does not grade your playing. Live camera practice and subscription sales are closed in this release.",
     "d0cbaef607923809": "Practice always restarts at bar 1.",
     "d1024de6c4be3b12": "The course could not be loaded.",
     "d13ef10db667dfb3": "Tap and count the entire four-bar pattern before adding only the attacks on beat 1.",
@@ -2108,6 +2106,11 @@
     "39a262d189e99339": "Review supported setup/external tuning, sounding-versus-written octave, string/fret/finger directions, natural notes in the first five frets, gentle i/m attacks and two-hand muting, 4/4 quarters/eighths/rests, roots/fifths/octaves, the one-octave major scale shape, approach notes, the twelve-bar blues line, playing with an external pulse and note length, two-bar tab and the original study. This bounded written foundation is not complete bass musicianship or measured physical/audio mastery.",
     "ac59dfccc8bce18e": "On another day identify the setup and open strings, name natural notes in frets 0–5, decode the tab before revealing answers, name the four staff examples with both octaves, play the major scale shape and the twelve-bar line with an external pulse, and run one cycle with the bass line you wrote (lesson 23). Use lesson 17’s same-task correction loop. Write one repeatable outcome, one uncertainty and its next lesson.",
     "0d1acaf0016c818d": "Identify supported tuning and string/fret/finger directions; name natural notes in the first five frets; distinguish sounding/written octaves and four open-string bass-clef examples; attempt gentle alternating plucks, two-hand muting, 4/4 quarters/eighths/rests, root/fifth/octave pairs, a one-octave major scale shape, approach notes and a twelve-bar blues line with an external pulse; play the original two-bar tab and eight-bar study; then write your own bass line for a chart and run a practice cycle comparing a smaller correction in the same task/tempo. Self-observation only; no detected pitch, posture, progress or mastery approval.",
-    "e3e7345e0bb83651": "A seventh"
+    "e3e7345e0bb83651": "A seventh",
+    "fbd52aa3863b78f1": "Learn guitar through progressive lessons, practice tasks and self-checks. Free lessons work without an account, camera or microphone. Your practice record stays on this device.",
+    "b3ade159f643b686": "Optional microphone practice shows approximate single-note observations after your permission. It does not grade your playing. Live camera practice is closed in this release. The first lessons of each course are free; later lessons need an Ostinato or Motion+ subscription.",
+    "b17b63ccf42baffe": "Lessons 1–{v0} are free. Later lessons need an Ostinato or Motion+ subscription; your progress records always stay visible.",
+    "5e95bb16d894c7e7": "Subscription lesson",
+    "cebdd1905c0acfe3": "This lesson needs a subscription, and the account service is unavailable right now."
   }
 }

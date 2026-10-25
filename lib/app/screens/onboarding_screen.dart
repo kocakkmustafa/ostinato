@@ -288,10 +288,10 @@ class _WelcomeStep extends StatelessWidget {
         localized(
           context,
           'Learn guitar through progressive lessons, practice tasks and '
-              'self-checks. The course works without an account, camera or '
+              'self-checks. Free lessons work without an account, camera or '
               'microphone. Your practice record stays on this device.',
           'Gitarı sıralı dersler, çalışma görevleri ve öz denetimlerle öğrenin. '
-              'Kurs hesap, kamera veya mikrofon olmadan çalışır. Çalışma '
+              'Ücretsiz dersler hesap, kamera veya mikrofon olmadan çalışır. Çalışma '
               'kaydınız bu cihazda kalır.',
         ),
         style: hankenText(
@@ -309,11 +309,13 @@ class _WelcomeStep extends StatelessWidget {
             context,
             'Optional microphone practice shows approximate single-note '
                 'observations after your permission. It does not grade your '
-                'playing. Live camera practice and subscription sales are '
-                'closed in this release.',
+                'playing. Live camera practice is closed in this release. The '
+                'first lessons of each course are free; later lessons need an '
+                'Ostinato or Motion+ subscription.',
             'İsteğe bağlı mikrofon pratiği, izninizden sonra yaklaşık tek nota '
                 'gözlemi gösterir. Çalma başarınızı puanlamaz. Bu sürümde canlı '
-                'kamera pratiği ve abonelik satışı kapalıdır.',
+                'kamera pratiği kapalıdır. Her kursun ilk dersleri ücretsizdir; '
+                'sonraki dersler Ostinato veya Motion+ aboneliği gerektirir.',
           ),
           style: hankenText(
             size: 13.5,

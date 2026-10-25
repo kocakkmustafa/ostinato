@@ -1288,7 +1288,6 @@
     "10737df4372ca3ef": "Il faut une amélioration réelle de la précision mesurée sur du jeu réel, pas un seuil réajusté à un seul jeu de données. Avant de changer le détecteur partagé, il faut des données de test plus représentatives, idéalement un accord isolé tenu, plus proche de ce que demande cet exercice : tous les jeux réels disponibles jusqu'ici sont des interprétations rythmiques. Ces leçons de posture n'utilisent pas non plus le microphone ; la précision n'est donc pas le seul obstacle.",
     "114e00bb6f1eb75d": "Positions de portée : la ligne inférieure vaut 0 ; chaque interligne ou ligne au-dessus ajoute 1 ; les positions négatives sont en dessous. Les positions paires sont des lignes ; 10 ou -2 est une ligne supplémentaire. ",
     "117765c9ad6da940": "La fermeture du microphone n'a pas pu être confirmée. L'observation ne peut pas redémarrer depuis cet écran. Vérifie le voyant microphone de l'appareil ; s'il reste allumé, ferme l'application. Tu peux continuer le cours sans audio.",
-    "11d0aaae6559b06c": "Apprends la guitare par des leçons progressives, tâches de pratique et auto-vérifications. Le cours fonctionne sans compte, caméra ni microphone. Ton journal de pratique reste sur cet appareil.",
     "12da8712f408f5ea": "Repère C3 pour la main gauche et C4–G4 pour la droite avec le plan de clavier de la leçon. Dans cette mesure d'étude originale, la mélodie change à chaque temps tandis que la basse dure quatre temps. Examine les mains séparément, puis ensemble seulement si c'est confortable. Ces cases expliquent la relation rythmique, pas le toucher physique.",
     "12dca09a2a88cf11": "GUIDE",
     "14191e634c7c5f45": "Je ne suis pas sûr",
@@ -1688,7 +1687,6 @@
     "cedb2ed6f3c8e5db": "Cette moitié n'est pas une réserve en petits caractères. Elle a la même taille que celle au-dessus car elle a le même poids ; ces lacunes sont diverses : outils absents, données absentes ou jugements que nous ne pensons pas devoir porter.",
     "cf139ee6b1b82c19": "Une flèche de contour montante signifie-t-elle « augmenter le volume » ?",
     "cf17844f79170318": "Manche tenu : haut près du visage, bas près du sol. Sillet à gauche, caisse vers la droite ; les espaces numérotés sont les cases. D va de 4→1 ; U revient de 1→4.",
-    "d0250341a5b5b6e7": "La pratique facultative au microphone affiche des observations approximatives de notes seules après ton autorisation. Elle ne note pas ton jeu. La pratique avec caméra en direct et la vente d'abonnements sont fermées dans cette version.",
     "d1024de6c4be3b12": "Le cours n'a pas pu être chargé.",
     "d159fca5a8520caa": "MG",
     "d277f9ac45a00fed": "Accords hors des huit",
@@ -2108,6 +2106,11 @@
     "39a262d189e99339": "Revois l'installation soutenue et l'accordage externe, l'octave réelle et écrite, les directions corde/case/doigt, les notes naturelles dans les cinq premières cases, les attaques douces i/m et l'étouffement à deux mains, les noires, croches et silences en 4/4, fondamentales, quintes et octaves, le doigté de gamme majeure sur une octave, les notes d'approche, la ligne de blues sur douze mesures, le jeu avec une pulsation externe et la durée des notes, la tablature de deux mesures et l'étude originale. Cette base écrite limitée n'est ni une formation musicale complète à la basse ni une maîtrise physique ou audio mesurée.",
     "ac59dfccc8bce18e": "Un autre jour, identifie la configuration et les cordes à vide, nomme les notes naturelles dans les cases 0–5, déchiffre la tablature avant de révéler les réponses, nomme les quatre exemples sur portée avec les deux octaves, joue le doigté de gamme majeure et la ligne de douze mesures avec une pulsation externe, et mène un cycle avec la ligne de basse que tu as écrite (leçon 23). Utilise la boucle de correction de la même tâche de la leçon 17. Écris un résultat reproductible, une incertitude et sa prochaine leçon.",
     "0d1acaf0016c818d": "Identifie l'accordage pris en charge et les directions corde/case/doigt ; nomme les notes naturelles dans les cinq premières cases ; distingue octaves réelles et écrites et quatre exemples de cordes à vide en clé de fa ; essaie pincements alternés doux, étouffement à deux mains, noires/croches/silences en 4/4, paires fondamentale/quinte/octave, un doigté de gamme majeure sur une octave, des notes d'approche et une ligne de blues sur douze mesures avec une pulsation externe ; joue la tablature originale de deux mesures et l'étude de huit mesures ; puis écris ta propre ligne de basse pour une grille et mène un cycle de pratique en comparant une petite correction dans la même tâche au même tempo. Auto-observation seulement ; aucune détection de hauteur ou de posture, ni validation de progression ou de maîtrise.",
-    "e3e7345e0bb83651": "A septième"
+    "e3e7345e0bb83651": "A septième",
+    "fbd52aa3863b78f1": "Apprends la guitare par des leçons progressives, tâches de pratique et auto-vérifications. Les leçons gratuites fonctionnent sans compte, caméra ni microphone. Ton journal de pratique reste sur cet appareil.",
+    "b3ade159f643b686": "La pratique facultative au microphone affiche des observations approximatives de notes seules après ton autorisation. Elle ne note pas ton jeu. La pratique avec caméra en direct est fermée dans cette version. Les premières leçons de chaque cours sont gratuites ; les suivantes nécessitent un abonnement Ostinato ou Motion+.",
+    "b17b63ccf42baffe": "Les leçons 1–{v0} sont gratuites. Les suivantes nécessitent un abonnement Ostinato ou Motion+ ; tes relevés de progression restent toujours visibles.",
+    "5e95bb16d894c7e7": "Leçon avec abonnement",
+    "cebdd1905c0acfe3": "Cette leçon nécessite un abonnement, et le service de compte est indisponible pour le moment."
   }
 }

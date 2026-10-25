@@ -9,7 +9,7 @@
   "playStore": {
     "shortDescription": "Sıralı gitar dersleri, özgün alıştırmalar ve cihazda ilerleme kaydı."
   },
-  "description": "Ostinato, 10 modülde 60 özgün gitar dersi ve 14 dilde yazılı kurs anlatımı sunar. Çalgı kurulumu ve tellerden başlayıp okuma, tek nota, akor, ritim, armoni ve parmak stiline ilerle. İki özgün bitirme çalışması becerilerini birleştirmene yardımcı olur. Her derste açıklama, uygulama, öz denetim ve kolay seçenekler bulunur.\n\nEk başlangıç kursları piyano, ukulele, bas ve şan için yazılı çalışma sunar. Bu kurslarda canlı nota, parmak tekniği ve ses doğruluğu geri bildirimi yoktur.\n\nÖzgün metin derslerini oku, uygulama görevlerini takip et, kendi çalışmanı değerlendir ve cihazdaki ders kaydından devam et. Hesabın olmadan kataloğu gezebilir, isteğe bağlı ortak Motion hesabını kullanabilirsin. Hesap; e-posta, hesap kimliği ve eklediysen görünen adını kullanır; uygulamadan hesap silme isteği yapabilirsin. Kurs kayıtları cihazda mevcut konuk veya hesap kapsamında kalır. Ders bitirme ustalık belgesi değildir. Bu içerik hazırlığı sürümünde gösterim videosu bulunmaz.\n\nİsteğe bağlı mikrofon pratiği, izninle cihaz üstünde yaklaşık tek nota gözlemi gösterir; nota doğruluğu veya akor puanı vermez. Ham ses saklanmaz veya yüklenmez. Kurs kendi çalışma kaydını kullanır; kamera duruş puanı ve abonelik satışı açık değildir.",
+  "description": "Ostinato, 10 modülde 60 özgün gitar dersi ve 14 dilde yazılı kurs anlatımı sunar. Çalgı kurulumu ve tellerden başlayıp okuma, tek nota, akor, ritim, armoni ve parmak stiline ilerle. İki özgün bitirme çalışması becerilerini birleştirmene yardımcı olur. Her derste açıklama, uygulama, öz denetim ve kolay seçenekler bulunur.\n\nEk başlangıç kursları piyano, ukulele, bas ve şan için yazılı çalışma sunar. Bu kurslarda canlı nota, parmak tekniği ve ses doğruluğu geri bildirimi yoktur.\n\nÖzgün metin derslerini oku, uygulama görevlerini takip et, kendi çalışmanı değerlendir ve cihazdaki ders kaydından devam et. Hesabın olmadan kataloğu gezebilir, isteğe bağlı ortak Motion hesabını kullanabilirsin. Hesap; e-posta, hesap kimliği ve eklediysen görünen adını kullanır; uygulamadan hesap silme isteği yapabilirsin. Kurs kayıtları cihazda mevcut konuk veya hesap kapsamında kalır. Ders bitirme ustalık belgesi değildir. Bu içerik hazırlığı sürümünde gösterim videosu bulunmaz.\n\nİsteğe bağlı mikrofon pratiği, izninle cihaz üstünde yaklaşık tek nota gözlemi gösterir; nota doğruluğu veya akor puanı vermez. Ham ses saklanmaz veya yüklenmez. Kurs kendi çalışma kaydını kullanır; kamera duruş puanı sunulmaz.\n\nİlk 12 gitar dersi ve diğer her kursun ilk 8 dersi ücretsizdir. Sonraki dersler isteğe bağlı, otomatik yenilenen bir abonelik gerektirir: Ostinato (bu uygulama) veya Motion+ (beş Motion uygulamasının tümü), aylık ya da yıllık; uygun yeni abonelere 14 gün ücretsiz deneme. Fiyatlar satın almadan önce uygulamada gösterilir. Ödeme mağaza hesabından alınır. Abonelik, yenileme tarihinden önce mağaza hesabı ayarlarından iptal edilmedikçe otomatik yenilenir. Koşullar: https://yulalab.com/terms",
   "cameraPermissionRationale": {
     "ios": "Bu sürümde kamera pratiği kapalıdır. Kamera erişimi cihazda duruş gözlemi içindir; video saklanmaz veya yüklenmez."
   },
@@ -102,5 +102,42 @@
       "historicalPassCountsAdded": false,
       "nativeOrPhysicalDeviceAccepted": false
     }
+  },
+  "$releasePolicy20261023": "Kurucu kararı 2026-10-23: abonelik satışı ilk sürümde açık (paywall A). Abonelik için $releasePolicy20260925'in yerine geçer; canlı kamera pratiği kapalı kalır.",
+  "$pricing20261023": {
+    "decidedBy": "founder 2026-10-23 (shared by the five Motion apps, USD base; store tiers set per storefront)",
+    "appMonthlyUSD": "11.99",
+    "appYearlyUSD": "69.99",
+    "motionPlusMonthlyUSD": "19.99",
+    "motionPlusYearlyUSD": "129.99",
+    "freeTrialDays": 14,
+    "freeTrialScope": "introductory offer for eligible new subscribers, configured in App Store Connect / Play Console (not in app code)",
+    "freeLessons": {
+      "guitar": 12,
+      "piano": 8,
+      "ukulele": 8,
+      "bass": 8,
+      "voice": 8
+    },
+    "inAppPriceSource": "the app shows only store-localized prices returned by StoreKit / Play Billing; no price is hard-coded",
+    "productIds": {
+      "appStore": [
+        "com.yulalab.ostinato.individual.monthly",
+        "com.yulalab.ostinato.individual.yearly",
+        "com.yulalab.ostinato.motionplus.monthly",
+        "com.yulalab.ostinato.motionplus.yearly"
+      ],
+      "playStore": {
+        "ostinato_individual": [
+          "monthly",
+          "yearly"
+        ],
+        "ostinato_motion_plus": [
+          "monthly",
+          "yearly"
+        ]
+      }
+    },
+    "consoleExistenceVerified": false
   }
 }

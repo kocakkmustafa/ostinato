@@ -6,6 +6,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/guitar_journey.dart';
 import 'package:ostinato/app/guitar_journey_progress.dart';
 import 'package:ostinato/app/screens/guitar_journey_screen.dart';
+import 'support/paid_access_scope.dart';
+
+/// Paywall A: course walks run as a member; the lock itself is covered by
+/// course_access_test.dart.
+Widget _asMember(Widget app) => PaidAccessProbe().wrap(app);
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -75,11 +80,13 @@ void main() {
     final oldFile = File('${root.path}/guitar_journey_progress.v1.json');
     final oldText = oldFile.readAsStringSync();
     await tester.pumpWidget(
-      MaterialApp(
-        home: GuitarJourneyScreen(
-          initialCourse: course,
-          initialProgress: oldRecords!,
-          progressStoreFactory: (_) => store,
+      _asMember(
+        MaterialApp(
+          home: GuitarJourneyScreen(
+            initialCourse: course,
+            initialProgress: oldRecords!,
+            progressStoreFactory: (_) => store,
+          ),
         ),
       ),
     );
@@ -149,10 +156,12 @@ void main() {
     };
     expect(oldRecords.length, 60);
     await tester.pumpWidget(
-      MaterialApp(
-        home: GuitarJourneyScreen(
-          initialCourse: course,
-          initialProgress: oldRecords,
+      _asMember(
+        MaterialApp(
+          home: GuitarJourneyScreen(
+            initialCourse: course,
+            initialProgress: oldRecords,
+          ),
         ),
       ),
     );

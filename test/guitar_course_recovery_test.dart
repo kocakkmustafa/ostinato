@@ -10,6 +10,11 @@ import 'package:ostinato/app/guitar_journey.dart';
 import 'package:ostinato/app/guitar_journey_progress.dart';
 import 'package:ostinato/app/screens/guitar_journey_screen.dart';
 import 'support/localized_widget_ready.dart';
+import 'support/paid_access_scope.dart';
+
+/// Paywall A: course walks run as a member; the lock itself is covered by
+/// course_access_test.dart.
+Widget _asMember(Widget app) => PaidAccessProbe().wrap(app);
 
 class _Files extends CachingAssetBundle {
   bool unavailable = true;
@@ -101,20 +106,22 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
       final files = _Files();
       await tester.pumpWidget(
-        _app(
-          locale,
-          Builder(
-            builder: (context) => Scaffold(
-              body: TextButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => GuitarJourneyScreen(
-                      bundle: files,
-                      initialProgress: const {},
+        _asMember(
+          _app(
+            locale,
+            Builder(
+              builder: (context) => Scaffold(
+                body: TextButton(
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => GuitarJourneyScreen(
+                        bundle: files,
+                        initialProgress: const {},
+                      ),
                     ),
                   ),
+                  child: const Text('Open test course'),
                 ),
-                child: const Text('Open test course'),
               ),
             ),
           ),
@@ -149,11 +156,13 @@ void main() {
         );
         final course = _course();
         await tester.pumpWidget(
-          _app(
-            locale,
-            GuitarJourneyScreen(
-              initialCourse: course,
-              progressStoreFactory: (_) => store,
+          _asMember(
+            _app(
+              locale,
+              GuitarJourneyScreen(
+                initialCourse: course,
+                progressStoreFactory: (_) => store,
+              ),
             ),
           ),
         );
@@ -246,11 +255,17 @@ void main() {
         file.writeAsStringSync('{"schemaVersion":1,"records":[]}');
         await _tap(tester, retry);
         await _waitText(tester, zero);
-        expect(find.byKey(const Key('guitar-progress-unavailable')), findsNothing);
+        expect(
+          find.byKey(const Key('guitar-progress-unavailable')),
+          findsNothing,
+        );
         await _tap(tester, tr ? 'Dersi aç' : 'Open lesson');
         await tester.pumpAndSettle();
         await _tap(tester, tr ? 'Çalışmayı kaydet' : 'Record practice');
-        await _waitText(tester, tr ? 'Çalışma kaydı: 1' : 'Practice entries: 1');
+        await _waitText(
+          tester,
+          tr ? 'Çalışma kaydı: 1' : 'Practice entries: 1',
+        );
         final saved = await tester.runAsync(store.load);
         expect(saved?.values.single.practiceCount, 1);
         expect(tester.takeException(), isNull);
@@ -275,7 +290,7 @@ void main() {
           ),
         ),
       );
-      await tester.pumpWidget(screen());
+      await tester.pumpWidget(_asMember(screen()));
       await _waitText(tester, zero);
       await _tap(tester, tr ? 'Dersi aç' : 'Open lesson');
       await tester.pumpAndSettle();
@@ -298,7 +313,7 @@ void main() {
       expect(records?.values.single.selfReportedCompletedAt, isNotNull);
       await tester.pumpWidget(const SizedBox());
       await tester.pumpAndSettle();
-      await tester.pumpWidget(screen());
+      await tester.pumpWidget(_asMember(screen()));
       await _waitText(tester, one);
       final otherAccount = GuitarJourneyProgressStore(
         directoryProvider: () async => root,
@@ -322,11 +337,13 @@ void main() {
     );
     final course = _course();
     await tester.pumpWidget(
-      _app(
-        'en',
-        GuitarJourneyScreen(
-          initialCourse: course,
-          progressStoreFactory: (_) => store,
+      _asMember(
+        _app(
+          'en',
+          GuitarJourneyScreen(
+            initialCourse: course,
+            progressStoreFactory: (_) => store,
+          ),
         ),
       ),
     );
@@ -370,15 +387,21 @@ void main() {
     'wrong record type': '{"schemaVersion":1,"records":[42]}',
     'wrong field type': jsonEncode({
       'schemaVersion': 1,
-      'records': [{...validRecord, 'practiceCount': 'one'}],
+      'records': [
+        {...validRecord, 'practiceCount': 'one'},
+      ],
     }),
     'invalid date': jsonEncode({
       'schemaVersion': 1,
-      'records': [{...validRecord, 'seenAt': 'not-a-date'}],
+      'records': [
+        {...validRecord, 'seenAt': 'not-a-date'},
+      ],
     }),
     'negative practice count': jsonEncode({
       'schemaVersion': 1,
-      'records': [{...validRecord, 'practiceCount': -1}],
+      'records': [
+        {...validRecord, 'practiceCount': -1},
+      ],
     }),
     'duplicate record': jsonEncode({
       'schemaVersion': 1,
@@ -482,7 +505,7 @@ void main() {
           progressReadOnly: readOnly,
         ),
       );
-      await tester.pumpWidget(screen(false));
+      await tester.pumpWidget(_asMember(screen(false)));
       await tester.pumpAndSettle();
       final key = switch (action) {
         GuitarProgressAction.viewed => 'guitar-progress-viewed',
@@ -496,7 +519,7 @@ void main() {
       expect(staleCallback, isNotNull);
       final file = File('${root.path}/guitar_journey_progress.v1.json');
       file.writeAsStringSync('{unreadable history');
-      await tester.pumpWidget(screen(true));
+      await tester.pumpWidget(_asMember(screen(true)));
       await tester.pumpAndSettle();
       _expectRecordingDisabled(tester);
       final before = resolutions;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_locale.dart';
+import '../course_access.dart';
 import 'feedback_availability.dart';
 import '../vocal_beginner.dart';
 import 'vocal_diagrams.dart';
@@ -87,6 +88,7 @@ class _VocalBeginnerScreenState extends State<VocalBeginnerScreen> {
             ),
             const SizedBox(height: 16),
             const FeedbackAvailability(instrumentId: 'voice'),
+            const FreeLessonsNotice(instrumentId: 'voice'),
             Text(course.entry.of(context)),
             const SizedBox(height: 16),
             Text(course.exit.of(context)),
@@ -102,13 +104,21 @@ class _VocalBeginnerScreenState extends State<VocalBeginnerScreen> {
               ListTile(
                 key: Key(course.lessons[i].id),
                 title: Text('${i + 1}. ${course.lessons[i].title.of(context)}'),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) =>
-                        _VocalLessonScreen(course: course, index: i),
-                  ),
-                ),
+                trailing:
+                    subscriptionLessonMark(context, 'voice', i) ??
+                    const Icon(Icons.chevron_right),
+                onTap: () async {
+                  if (!await admitLesson(context, 'voice', i) ||
+                      !context.mounted) {
+                    return;
+                  }
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) =>
+                          _VocalLessonScreen(course: course, index: i),
+                    ),
+                  );
+                },
               ),
           ],
         );
@@ -158,22 +168,34 @@ class _VocalLessonScreen extends StatelessWidget {
           if (index > 0)
             TextButton(
               key: const Key('vocal-previous-lesson'),
-              onPressed: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(
-                  builder: (_) =>
-                      _VocalLessonScreen(course: course, index: index - 1),
-                ),
-              ),
+              onPressed: () async {
+                if (!await admitLesson(context, 'voice', index - 1) ||
+                    !context.mounted) {
+                  return;
+                }
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute<void>(
+                    builder: (_) =>
+                        _VocalLessonScreen(course: course, index: index - 1),
+                  ),
+                );
+              },
               child: Text(localized(context, 'Previous lesson', 'Önceki ders')),
             ),
           if (index + 1 < course.lessons.length)
             TextButton(
-              onPressed: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(
-                  builder: (_) =>
-                      _VocalLessonScreen(course: course, index: index + 1),
-                ),
-              ),
+              onPressed: () async {
+                if (!await admitLesson(context, 'voice', index + 1) ||
+                    !context.mounted) {
+                  return;
+                }
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute<void>(
+                    builder: (_) =>
+                        _VocalLessonScreen(course: course, index: index + 1),
+                  ),
+                );
+              },
               child: Text(localized(context, 'Next lesson', 'Sonraki ders')),
             ),
         ],

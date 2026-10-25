@@ -119,7 +119,6 @@
     "11872fcd5196bcdc": "Por lo general, solo debe sonar la nota de bajo deseada. Para una nota de la cuerda A, el pulgar derecho apaga suavemente E y el índice izquierdo toca ligeramente D/G sin presionarlas contra los trastes. Para una nota de la cuerda D, mueve el pulgar derecho relajado o su punto de contacto para mantener E/A en silencio; el dedo que pulsa puede apoyarse en A, mientras la mano izquierda toca G. El contacto ligero detiene la vibración; presionar un traste no deseado puede producir otra nota o un armónico.",
     "11883c21a360aa7d": "¿Puedo alcanzar sin inclinarme ni esforzarme?",
     "11bb1fa9c7802d96": "Se confunde completar Fmaj7 con una prueba de dominar la cejilla completa de F.",
-    "11d0aaae6559b06c": "Aprende guitarra con lecciones progresivas, tareas de práctica y autoevaluaciones. El curso funciona sin cuenta, cámara ni micrófono. Tu registro de práctica queda en este dispositivo.",
     "122d2b998e5e832c": "Usa G C D G con un acorde por compás; deduce A D E A en papel antes de tocar en otra tonalidad.",
     "128abb0076eb9728": "Se ignora la página después de una repetición de memoria.",
     "12bf5a15e3ccbf73": "Repite en la cuerda 2, traste 1, con un intento más corto; compara el punto de contacto sin forzar las manos a adoptar la misma forma.",
@@ -1547,7 +1546,6 @@
     "cf6d32ad46c9b4ba": "Relaciona G C D G con I IV V I y escribe A D E A usando posiciones abiertas ya aprendidas.",
     "cfcbcf1f52d048f4": "¿Puedo escribir correctamente las direcciones tonales y silencios de ambos compases sin afirmar coincidencia real de alturas?",
     "d006b60a4ce09ebe": "pulsa cuerda {v0}, traste {v1} ({v2})",
-    "d0250341a5b5b6e7": "La práctica opcional con micrófono muestra observaciones aproximadas de notas individuales tras tu permiso. No califica tu interpretación. La práctica con cámara en vivo y la venta de suscripciones están cerradas en esta versión.",
     "d0cbaef607923809": "La práctica siempre vuelve al compás 1.",
     "d1024de6c4be3b12": "No se pudo cargar el curso.",
     "d13ef10db667dfb3": "Marca y cuenta todo el patrón de cuatro compases antes de agregar solo los ataques del tiempo 1.",
@@ -2108,6 +2106,11 @@
     "39a262d189e99339": "Repasa apoyo y afinación externos, octava real frente a escrita, direcciones de cuerda/traste/dedo, notas naturales en los primeros cinco trastes, ataques suaves i/m y apagado con ambas manos, negras/corcheas/silencios en 4/4, fundamentales/quintas/octavas, la digitación de escala mayor de una octava, notas de aproximación, la línea de blues de doce compases, tocar con un pulso externo y la duración de las notas, la tablatura de dos compases y el estudio original. Esta base escrita limitada no es formación musical completa de bajo ni dominio físico o sonoro medido.",
     "ac59dfccc8bce18e": "Otro día, identifica la configuración y las cuerdas al aire, nombra las notas naturales en los trastes 0–5, descifra la tablatura antes de revelar respuestas, nombra los cuatro ejemplos de pentagrama con ambas octavas, toca la digitación de escala mayor y la línea de doce compases con un pulso externo, y haz un ciclo con la línea de bajo que escribiste (lección 23). Usa el ciclo de corrección de la misma tarea de la lección 17. Escribe un resultado repetible, una incertidumbre y su próxima lección.",
     "0d1acaf0016c818d": "Identifica la afinación admitida y las direcciones de cuerda/traste/dedo; nombra las notas naturales en los primeros cinco trastes; distingue octavas reales y escritas y cuatro ejemplos de cuerdas al aire en clave de fa; intenta pulsaciones alternadas suaves, apagado con ambas manos, negras/corcheas/silencios en 4/4, pares de fundamental/quinta/octava, una digitación de escala mayor de una octava, notas de aproximación y una línea de blues de doce compases con un pulso externo; toca la tablatura original de dos compases y el estudio de ocho; luego escribe tu propia línea de bajo para un esquema y haz un ciclo de práctica comparando una corrección más pequeña en la misma tarea y tempo. Solo autoobservación; no hay detección de altura ni aprobación de postura, progreso o dominio.",
-    "e3e7345e0bb83651": "A de séptima"
+    "e3e7345e0bb83651": "A de séptima",
+    "fbd52aa3863b78f1": "Aprende guitarra con lecciones progresivas, tareas de práctica y autoevaluaciones. Las lecciones gratuitas funcionan sin cuenta, cámara ni micrófono. Tu registro de práctica queda en este dispositivo.",
+    "b3ade159f643b686": "La práctica opcional con micrófono muestra observaciones aproximadas de notas individuales tras tu permiso. No califica tu interpretación. La práctica con cámara en vivo está cerrada en esta versión. Las primeras lecciones de cada curso son gratuitas; las siguientes requieren una suscripción a Ostinato o Motion+.",
+    "b17b63ccf42baffe": "Las lecciones 1–{v0} son gratuitas. Las siguientes requieren una suscripción a Ostinato o Motion+; tus registros de progreso siempre siguen visibles.",
+    "5e95bb16d894c7e7": "Lección con suscripción",
+    "cebdd1905c0acfe3": "Esta lección requiere una suscripción y el servicio de cuenta no está disponible en este momento."
   }
 }

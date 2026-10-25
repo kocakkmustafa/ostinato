@@ -120,7 +120,6 @@
     "11872fcd5196bcdc": "Zwykle powinna brzmieć tylko zamierzona nuta basowa. Przy nucie na strunie A prawy kciuk lekko tłumi E, a lewy wskazujący delikatnie dotyka D/G bez dociskania do progów. Przy nucie na strunie D przesuń rozluźniony prawy kciuk lub punkt kontaktu, aby E/A milczały; palec szarpiący może oprzeć się na A, a lewa dłoń dotyka G. Lekki dotyk zatrzymuje drgania; niezamierzony docisk na progu może stworzyć dodatkową nutę lub flażolet.",
     "11883c21a360aa7d": "Czy mogę dosięgnąć bez pochylania się lub przeciążenia?",
     "11bb1fa9c7802d96": "Wykonanie Fmaj7 jest mylone z dowodem opanowania pełnego F z barré.",
-    "11d0aaae6559b06c": "Ucz się gitary przez stopniowane lekcje, zadania praktyczne i samodzielne sprawdzanie. Kurs działa bez konta, kamery i mikrofonu. Zapis ćwiczeń pozostaje na tym urządzeniu.",
     "122d2b998e5e832c": "Zagraj G C D G po jednym akordzie na takt; przed zagraniem w drugiej tonacji wyznacz na papierze A D E A.",
     "128abb0076eb9728": "Zapis jest ignorowany po jednym zapamiętanym powtórzeniu.",
     "12bf5a15e3ccbf73": "Powtórz na strunie 2, progu 1, w krótszej próbie; porównuj miejsce kontaktu, zamiast wymuszać identyczne ułożenie dłoni.",
@@ -1563,7 +1562,6 @@
     "cf6d32ad46c9b4ba": "Przypisz G C D G do I IV V I, a następnie zapisz A D E A ze znanymi już otwartymi chwytami.",
     "cfcbcf1f52d048f4": "Czy potrafię poprawnie zapisać kierunki dźwięków i pauzy obu taktów bez deklarowania rzeczywistego dopasowania wysokości?",
     "d006b60a4ce09ebe": "szarpnij strunę {v0}, próg {v1} ({v2})",
-    "d0250341a5b5b6e7": "Opcjonalne ćwiczenie z mikrofonem po Twoim zezwoleniu pokazuje przybliżone obserwacje pojedynczej nuty. Nie ocenia Twojej gry. Ćwiczenia na żywo z kamerą i sprzedaż subskrypcji są wyłączone w tej wersji.",
     "d0cbaef607923809": "Ćwiczenie zawsze zaczyna się od taktu 1.",
     "d1024de6c4be3b12": "Nie udało się wczytać kursu.",
     "d13ef10db667dfb3": "Wystukaj i policz cały schemat czterotaktowy przed dodaniem samych ataków na 1.",
@@ -2122,6 +2120,11 @@
     "39a262d189e99339": "Powtórz podparte przygotowanie i zewnętrzne strojenie, oktawę brzmiącą wobec zapisanej, kierunki strun, progów i palców, dźwięki naturalne na pierwszych pięciu progach, delikatne ataki i/m i tłumienie obiema rękami, ćwierćnuty, ósemki i pauzy 4/4, prymy, kwinty i oktawy, jednooktawowy układ gamy durowej, dźwięki podejścia, dwunastotaktową linię bluesową, grę z zewnętrznym pulsem i długość dźwięków, tabulaturę dwutaktową oraz oryginalne ćwiczenie. Te ograniczone pisemne podstawy nie są pełnym wykształceniem basisty ani zmierzonym opanowaniem fizycznym lub dźwiękowym.",
     "ac59dfccc8bce18e": "Innego dnia rozpoznaj konfigurację i otwarte struny, nazwij dźwięki naturalne na progach 0–5, odczytaj tabulaturę przed pokazaniem odpowiedzi, nazwij cztery przykłady na pięciolinii z obiema oktawami, zagraj układ gamy durowej i linię dwunastotaktową z zewnętrznym pulsem oraz przeprowadź jeden cykl z napisaną przez siebie linią basową (lekcja 23). Użyj pętli korekty tego samego zadania z lekcji 17. Zapisz jeden powtarzalny rezultat, jedną niepewność i następną lekcję.",
     "0d1acaf0016c818d": "Rozpoznaj obsługiwany strój i kierunki strun, progów oraz palców; nazwij dźwięki naturalne na pierwszych pięciu progach; odróżniaj oktawy brzmiące od zapisanych oraz cztery przykłady otwartych strun w kluczu basowym; spróbuj delikatnego naprzemiennego szarpania, tłumienia obiema rękami, ćwierćnut, ósemek i pauz 4/4, par prymy, kwinty i oktawy, jednooktawowego układu gamy durowej, dźwięków podejścia i dwunastotaktowej linii bluesowej z zewnętrznym pulsem; zagraj oryginalną tabulaturę dwutaktową i ćwiczenie ośmiotaktowe; następnie napisz własną linię basową do planu akordów i przeprowadź cykl ćwiczeń, porównując mniejszą korektę w tym samym zadaniu i tempie. Tylko samoobserwacja; bez potwierdzenia wykrytej wysokości, postawy, postępu lub opanowania.",
-    "e3e7345e0bb83651": "A z septymą"
+    "e3e7345e0bb83651": "A z septymą",
+    "fbd52aa3863b78f1": "Ucz się gitary przez stopniowane lekcje, zadania praktyczne i samodzielne sprawdzanie. Bezpłatne lekcje działają bez konta, kamery i mikrofonu. Zapis ćwiczeń pozostaje na tym urządzeniu.",
+    "b3ade159f643b686": "Opcjonalne ćwiczenie z mikrofonem po Twoim zezwoleniu pokazuje przybliżone obserwacje pojedynczej nuty. Nie ocenia Twojej gry. Ćwiczenia na żywo z kamerą są wyłączone w tej wersji. Pierwsze lekcje każdego kursu są bezpłatne; kolejne wymagają subskrypcji Ostinato lub Motion+.",
+    "b17b63ccf42baffe": "Lekcje 1–{v0} są bezpłatne. Kolejne wymagają subskrypcji Ostinato lub Motion+; zapisy postępów zawsze pozostają widoczne.",
+    "5e95bb16d894c7e7": "Lekcja w subskrypcji",
+    "cebdd1905c0acfe3": "Ta lekcja wymaga subskrypcji, a usługa konta jest teraz niedostępna."
   }
 }

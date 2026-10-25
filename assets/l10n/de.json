@@ -1288,7 +1288,6 @@
     "10737df4372ca3ef": "Erforderlich ist eine echte, an realem Spiel gemessene Genauigkeitsverbesserung statt eines an einen Datensatz angepassten Schwellenwerts. Vor Änderungen am gemeinsamen Detektor brauchen wir repräsentativere Prüfdaten, möglichst eine isolierte Aufnahme eines gehaltenen Akkords, die näher an dieser Aufgabe liegt; alle bisher verfügbaren realen Datensätze enthalten rhythmisches Spiel. Diese Haltungslektionen nutzen ebenfalls keinen Mikrofoneingang, daher ist Genauigkeit nicht die einzige Voraussetzung.",
     "114e00bb6f1eb75d": "Systempositionen: Die unterste Linie ist 0, jeder Zwischenraum oder jede Linie darüber erhöht um 1; negative Positionen liegen darunter. Gerade Positionen sind Linien; 10 oder -2 ist eine Hilfslinie. ",
     "117765c9ad6da940": "Das Schließen des Mikrofons konnte nicht bestätigt werden. Die Beobachtung kann von diesem Bildschirm aus nicht neu starten. Prüfe die Mikrofonanzeige des Geräts; bleibt sie an, schließe die App. Du kannst den Kurs ohne Audio fortsetzen.",
-    "11d0aaae6559b06c": "Lerne Gitarre mit aufeinander aufbauenden Lektionen, Übungsaufgaben und Selbstprüfungen. Der Kurs funktioniert ohne Konto, Kamera oder Mikrofon. Deine Übungsdokumentation bleibt auf diesem Gerät.",
     "12da8712f408f5ea": "Finde C3 für links und C4–G4 für rechts anhand der Tastaturübersicht der Lektion. In diesem eigenen Etüdentakt wechselt die Melodie auf jedem Schlag, während der Bass vier Schläge bleibt. Betrachte die Hände getrennt und dann nur bei Wohlbefinden gemeinsam. Diese Felder erklären das Timingverhältnis, keinen körperlichen Anschlag.",
     "12dca09a2a88cf11": "ANLEITUNG",
     "14191e634c7c5f45": "Ich bin unsicher",
@@ -1688,7 +1687,6 @@
     "cedb2ed6f3c8e5db": "Diese Hälfte ist kein Haftungshinweis. Sie ist so groß wie die obere, weil sie genauso viel Gewicht trägt. Die Lücken sind verschieden: Manchen fehlen Werkzeuge, anderen Daten, und manche betreffen Urteile, die wir nicht für unsere Aufgabe halten.",
     "cf139ee6b1b82c19": "Bedeutet ein nach oben gerichteter Verlaufspfeil „mehr Lautstärke“?",
     "cf17844f79170318": "Übersicht des gehaltenen Halses: oben nahe dem Gesicht, unten nahe dem Boden. Sattel links, Korpus rechts; nummerierte Räume sind Bünde. D führt 4→1, U zurück 1→4.",
-    "d0250341a5b5b6e7": "Optionale Mikrofonübungen zeigen nach deiner Erlaubnis ungefähre Einzeltonbeobachtungen. Sie bewerten dein Spiel nicht. Live-Kameraübungen und Abonnementverkäufe sind in dieser Version geschlossen.",
     "d1024de6c4be3b12": "Der Kurs konnte nicht geladen werden.",
     "d159fca5a8520caa": "LH",
     "d277f9ac45a00fed": "Akkorde außerhalb der acht",
@@ -2108,6 +2106,11 @@
     "39a262d189e99339": "Wiederhole abgestützte Einrichtung und externes Stimmen, klingende und geschriebene Oktave, Saiten-, Bund- und Fingerrichtungen, Stammtöne in den ersten fünf Bünden, sanfte i/m-Anschläge und Dämpfung mit beiden Händen, Viertel, Achtel und Pausen in 4/4, Grundtöne, Quinten und Oktaven, das Dur-Tonleiter-Griffbild über eine Oktave, Annäherungstöne, die Zwölftakt-Blueslinie, Spielen mit externem Puls und Tonlänge, TAB über zwei Takte und die eigene Etüde. Diese begrenzte schriftliche Grundlage ist weder vollständige Bassmusikalität noch gemessene körperliche oder klangliche Beherrschung.",
     "ac59dfccc8bce18e": "Bestimme an einem anderen Tag Einrichtung und leere Saiten, benenne Stammtöne in den Bünden 0–5, entschlüssle die TAB vor dem Aufdecken der Antworten, benenne die vier Notensystembeispiele mit beiden Oktaven, spiele das Dur-Tonleiter-Griffbild und die Zwölftaktlinie mit externem Puls und führe einen Zyklus mit der von dir geschriebenen Basslinie durch (Lektion 23). Nutze den Korrekturablauf derselben Aufgabe aus Lektion 17. Notiere ein wiederholbares Ergebnis, eine Unsicherheit und ihre nächste Lektion.",
     "0d1acaf0016c818d": "Erkenne unterstützte Stimmung sowie Saiten-, Bund- und Fingerrichtungen; benenne Stammtöne in den ersten fünf Bünden; unterscheide klingende und geschriebene Oktaven und vier Leersaitenbeispiele im Bassschlüssel; probiere sanfte wechselnde Anschläge, Dämpfung mit beiden Händen, Viertel, Achtel und Pausen in 4/4, Grundton-, Quinten- und Oktavpaare, ein Dur-Tonleiter-Griffbild über eine Oktave, Annäherungstöne und eine Zwölftakt-Blueslinie mit externem Puls; spiele die eigene TAB über zwei Takte und die Etüde über acht Takte; schreibe dann eine eigene Basslinie zu einem Schema und führe einen Übungszyklus durch, in dem du eine kleinere Korrektur in derselben Aufgabe und demselben Tempo vergleichst. Nur Selbstbeobachtung; keine Freigabe durch erkannte Tonhöhe, Haltung, Fortschritt oder Beherrschung.",
-    "e3e7345e0bb83651": "A-Septakkord"
+    "e3e7345e0bb83651": "A-Septakkord",
+    "fbd52aa3863b78f1": "Lerne Gitarre mit aufeinander aufbauenden Lektionen, Übungsaufgaben und Selbstprüfungen. Die kostenlosen Lektionen funktionieren ohne Konto, Kamera oder Mikrofon. Deine Übungsdokumentation bleibt auf diesem Gerät.",
+    "b3ade159f643b686": "Optionale Mikrofonübungen zeigen nach deiner Erlaubnis ungefähre Einzeltonbeobachtungen. Sie bewerten dein Spiel nicht. Live-Kameraübungen sind in dieser Version geschlossen. Die ersten Lektionen jedes Kurses sind kostenlos; spätere Lektionen erfordern ein Ostinato- oder Motion+-Abonnement.",
+    "b17b63ccf42baffe": "Lektionen 1–{v0} sind kostenlos. Spätere Lektionen erfordern ein Ostinato- oder Motion+-Abonnement; deine Fortschrittsaufzeichnungen bleiben immer sichtbar.",
+    "5e95bb16d894c7e7": "Abonnement-Lektion",
+    "cebdd1905c0acfe3": "Diese Lektion erfordert ein Abonnement, und der Kontodienst ist gerade nicht verfügbar."
   }
 }

@@ -661,6 +661,7 @@ def guarded_dart_contexts(sources):
 PREFERENCE_PAYLOADS = {
     'languageTag': 'locale',
     'mode': 'theme',
+    'blocked': 'age_gate',
 }
 _WRITE_CALL = re.compile(
     r"writeAsString|writeAsBytes|SharedPreferences|Hive\.|sqflite|"
@@ -707,7 +708,12 @@ def preference_payload_role(source):
         parameters, body = _enclosing_method(source, write.start())
         if parameters is None:
             return None
-        if key == 'languageTag':
+        if key == 'blocked':
+            # Core's under-13 result: only the literal fact, from a method
+            # that takes no data at all.
+            if value != 'true' or parameters.strip():
+                return None
+        elif key == 'languageTag':
             # A nullable String parameter, rejected unless it is a supported tag.
             if not re.fullmatch(r'\s*String\?\s+' + re.escape(value) + r'\s*', parameters):
                 return None

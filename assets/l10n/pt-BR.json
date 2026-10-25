@@ -1288,7 +1288,6 @@
     "10737df4372ca3ef": "É necessária uma melhora real de precisão medida em execução real, não um limite reajustado para se adequar a um conjunto de dados. O caminho honesto é ter dados de teste mais representativos, idealmente uma gravação isolada de acorde sustentado mais próxima do que este exercício pede, pois todos os conjuntos reais disponíveis até agora são de execução rítmica, antes de mudar o código do detector compartilhado. Estas aulas de postura também não usam entrada de microfone, então precisão não é a única condição.",
     "114e00bb6f1eb75d": "Posições na pauta: a linha inferior é 0; cada espaço ou linha acima soma 1; posições negativas ficam abaixo. Posições pares são linhas; 10 ou -2 é uma linha suplementar. ",
     "117765c9ad6da940": "Não foi possível confirmar o fechamento do microfone. A observação não pode reiniciar nesta tela. Confira o indicador de microfone do dispositivo; se continuar aceso, feche o aplicativo. Você pode continuar o curso sem áudio.",
-    "11d0aaae6559b06c": "Aprenda violão com aulas progressivas, tarefas de prática e autochecagens. O curso funciona sem conta, câmera ou microfone. Seu registro de prática fica neste dispositivo.",
     "12da8712f408f5ea": "Encontre C3 para a esquerda e C4–G4 para a direita usando o mapa do teclado da aula. Neste compasso original de estudo, a melodia muda a cada tempo e o baixo fica por quatro. Examine as mãos separadas e depois juntas apenas se for confortável. As células explicam a relação temporal, não o toque físico.",
     "12dca09a2a88cf11": "GUIA",
     "14191e634c7c5f45": "Não tenho certeza",
@@ -1688,7 +1687,6 @@
     "cedb2ed6f3c8e5db": "Esta metade não é uma ressalva em letras pequenas. Tem o mesmo tamanho da metade acima porque tem o mesmo peso. E as lacunas não são todas iguais: algumas são ferramentas ausentes, outras dados ausentes e outras julgamentos que acreditamos não nos caber fazer.",
     "cf139ee6b1b82c19": "Uma seta ascendente de contorno significa “use mais volume”?",
     "cf17844f79170318": "Mapa do braço na posição de tocar: topo perto do rosto, embaixo perto do chão. Pestana à esquerda, corpo à direita; espaços numerados são casas. D vai 4→1; U volta 1→4.",
-    "d0250341a5b5b6e7": "A prática opcional com microfone mostra observações aproximadas de notas isoladas após sua permissão. Não avalia sua execução. Prática com câmera ao vivo e venda de assinaturas estão fechadas nesta versão.",
     "d1024de6c4be3b12": "Não foi possível carregar o curso.",
     "d159fca5a8520caa": "ME",
     "d277f9ac45a00fed": "Acordes além dos oito",
@@ -2108,6 +2106,11 @@
     "39a262d189e99339": "Revise apoio/configuração e afinação externa, diferença de oitava real/escrita, direções de corda/casa/dedo, notas naturais nas cinco primeiras casas, ataques suaves i/m e abafamento com duas mãos, semínimas/colcheias/pausas em 4/4, fundamentais/quintas/oitavas, o desenho de escala maior de uma oitava, notas de aproximação, a linha de blues de doze compassos, tocar com pulsação externa e duração das notas, tablatura de dois compassos e o estudo original. Esta base escrita delimitada não é formação completa em baixo nem domínio físico/sonoro medido.",
     "ac59dfccc8bce18e": "Em outro dia, identifique a configuração e as cordas soltas, nomeie as notas naturais nas casas 0–5, decifre a tablatura antes de revelar as respostas, nomeie os quatro exemplos de pauta com as duas oitavas, toque o desenho de escala maior e a linha de doze compassos com uma pulsação externa e faça um ciclo com a linha de baixo que você escreveu (aula 23). Use o ciclo de correção da mesma tarefa da aula 17. Anote um resultado repetível, uma incerteza e sua próxima aula.",
     "0d1acaf0016c818d": "Identifique a afinação compatível e direções de corda/casa/dedo; nomeie as notas naturais nas cinco primeiras casas; diferencie oitavas reais/escritas e quatro exemplos de cordas soltas na clave de fá; tente toques alternados suaves, abafamento com duas mãos, semínimas/colcheias/pausas em 4/4, pares fundamental/quinta/oitava, um desenho de escala maior de uma oitava, notas de aproximação e uma linha de blues de doze compassos com pulsação externa; toque a tablatura original de dois compassos e o estudo de oito compassos; depois escreva sua própria linha de baixo para um quadro e conduza um ciclo de prática comparando uma correção menor na mesma tarefa/andamento. Apenas auto-observação; sem detecção de altura ou postura, nem aprovação de progresso ou domínio.",
-    "e3e7345e0bb83651": "A com sétima"
+    "e3e7345e0bb83651": "A com sétima",
+    "fbd52aa3863b78f1": "Aprenda violão com aulas progressivas, tarefas de prática e autochecagens. As aulas gratuitas funcionam sem conta, câmera ou microfone. Seu registro de prática fica neste dispositivo.",
+    "b3ade159f643b686": "A prática opcional com microfone mostra observações aproximadas de notas isoladas após sua permissão. Não avalia sua execução. A prática com câmera ao vivo está fechada nesta versão. As primeiras aulas de cada curso são gratuitas; as seguintes exigem uma assinatura Ostinato ou Motion+.",
+    "b17b63ccf42baffe": "As aulas 1–{v0} são gratuitas. As seguintes exigem uma assinatura Ostinato ou Motion+; seus registros de progresso continuam sempre visíveis.",
+    "5e95bb16d894c7e7": "Aula por assinatura",
+    "cebdd1905c0acfe3": "Esta aula exige uma assinatura, e o serviço de conta está indisponível no momento."
   }
 }
