@@ -1,4 +1,4 @@
-# Ostinato satış açık ilk sürüm — App Review metni ve sandbox kabul planı (2026-10-23; Core R3 güncellemesi 2026-10-25)
+# Ostinato satış açık ilk sürüm — App Review metni ve sandbox kabul planı (2026-10-23; Core R3 güncellemesi 2026-10-25; Core R4 + OST-K1 2026-10-27)
 
 Kaynak karar: kullanıcı kararı 23 Ekim, madde 4. Satış beş Motion app'te ilk sürümde açık; app'e özgü abonelik ve Motion+ satılır.
 Bu belge yerel taslaktır. Şunları yetkilendirmez: App Store Connect/Play Console kaydı, ürün oluşturma, fiyat, upload, submit, sandbox satın alma, secret girişi. Sandbox hesabı kullanıcıdan gelir; parola sohbete, repoya veya rapora yazılmaz.
@@ -70,7 +70,7 @@ Kimlikler Core kodundan türetildi. Mağaza panelindeki varlıkları, durumları
 >
 > To view the subscription options, open Settings > Account, sign in, and tap "Membership options". Prices and periods come from the App Store. The auto-renewal terms, Terms of Use (https://yulalab.com/terms) and Privacy Policy (https://yulalab.com/privacy/motion) are shown on the same screen. "Restore purchases" is available on that screen. Cancellation is done in the App Store subscription settings, which the app opens from "Manage subscription". Purchases are verified on our server before access is granted. Deleting the Motion account does not cancel a store subscription; the deletion dialog says so.
 >
-> Accounts require age 13 or older. The age screen asks only month and year, with no preselected value. Where the App Store shares an age range (Declared Age Range), it can only tighten this check: an under-13 range blocks sign-up, and a declared age above the shared range must be corrected. If the user is under 13, account sign-up is blocked on that device. Users under their country's digital-consent age get a restricted account until a parent or guardian approves by email; a restricted account is not offered purchases. On-device practice remains available without an account.
+> Accounts require age 13 or older. The age screen asks only month and year, with no preselected value. Where the App Store shares an age range (Declared Age Range), it can only tighten this check: an under-13 range blocks sign-up, and a declared age above the shared range must be corrected. If the user is under 13, account sign-up is blocked on that device. Users under their country's digital-consent age get a restricted account until a parent or guardian approves by email; a restricted account can still see the subscription offers, and purchases by users under 18 are subject to the App Store's family controls (Ask to Buy); account features stay limited until approval, and users under 13 cannot purchase. On-device practice remains available without an account.
 >
 > Live camera posture practice and scoring are disabled in this release, also for subscribers.
 >
@@ -80,7 +80,7 @@ Kimlikler Core kodundan türetildi. Mağaza panelindeki varlıkları, durumları
 
 ### 5.1 Ön koşullar (kullanıcı/servis girdisi; bu oturum yapmaz)
 
-1. **Supabase (Core R3 `f43d71a375431e96c689a7a4a04fb53ff01af693`'ten deploy; paket: Core `scratch/2026-10-25-motion-core-packages/CORE-07-CANLI-DEPLOY.tr.md`):**
+1. **Supabase (Core R4 `0d29d1b019033f00828be741aa3e23e3923841be`'ten deploy — R3→R4 `supabase/` değişmedi; paket: Core `scratch/2026-10-25-motion-core-packages/CORE-07-CANLI-DEPLOY.tr.md`):**
    - Migration'lar: `20261021190000_motion_age_consent_retention`, `20261023120000_motion_age_metadata_strip`, `20261025120000_motion_trial_ledger`.
    - Fonksiyonlar: `motion-check-membership`, `motion-verify-purchase`, `motion-parental-consent` (`verify_jwt=false`), `motion-offer-eligibility`, `motion-store-notifications` (`verify_jwt=false`).
    - Function secret **adları** (değerler girilmez, okunmaz):
@@ -108,7 +108,7 @@ Kimlikler Core kodundan türetildi. Mağaza panelindeki varlıkları, durumları
 | S9 | Ödeme reddi / Ask to Buy bekleyen | Erişim açılmaz; bekleyen durum dürüst gösterilir |
 | S10 | Ağ kesik / function 5xx | "Üyelik doğrulanamadı"; erişim verilmez, sahte başarı yok |
 | S11 | 13 altı beyan | Kayıt engellenir; uygulama yeniden açılınca da engel sürer (`AgeGateStore`); satın alma yüzeyi oturumsuz kalır |
-| S12 | 13 ≤ yaş < rıza yaşı | Kısıtlı hesap, veli e-postası gönderilir. Bugün (Core `c530309`…R3) veli onayı bekleyen kısıtlı hesaba satın alma sunulmaz. **Kurucu kararı (2026-10-25, OST-K1): 13–17 satın alması mağaza aile kontrollerine bırakılır; Core sürümü bekleniyor** (Ekip-2, ET3-4). Core yeni sürümü duyurulunca bu senaryo ve testi uyarlanır; app Core davranışını aşan yol açmaz |
+| S12 | 13 ≤ yaş < rıza yaşı, veli onayı **bekleniyor** | Kısıtlı hesap, veli e-postası gönderilir; hesap özellikleri (profil, veli formu dışı) onaya kadar kapalı. **OST-K1 (kurucu kararı 2026-10-25), Core R4 `teenPurchasePolicy: storeFamilyControls`:** üyelik sayfası bireysel + Motion+ tekliflerini ve 14 dilde "18 yaş altı satın almalar mağazanın aile/ebeveyn denetimlerine tabidir" notunu gösterir; ödeme kararı mağazada (iOS Ask to Buy / Play ebeveyn onayı), bekleyen satın alma aktif sayılmaz; sunucu doğrulaması aynı. Ayrıntılı adımlar: Core `scratch/2026-10-25-motion-core-packages/CORE-R3-KABUL-KONTROLLERI.tr.md` "R4 eki" S-R4-1/2/3/5 (S-R4-4 varsayılan politikalı başka app) |
 | S13 | Hesap silme (aktif abonelikle) | Silme uyarısı aboneliğin mağazadan iptal edilmesi gerektiğini söyler; abonelik mağazada sürer |
 | S14 | 14 dilde membership sayfası, 320 pt genişlik, %200 metin | Fiyat, yenileme metni, restore ve bağlantılar görünür, taşma yok |
 | S15 | Yeni sandbox abonesi deneme ile başlar | 14 günlük tanıtım teklifi mağaza ekranında görünür (sandbox'ta hızlandırılmış); deneme süresince `active=true`; deneme sonunda ücret veya iptal sunucuya yansır |
@@ -121,7 +121,7 @@ Kimlikler Core kodundan türetildi. Mağaza panelindeki varlıkları, durumları
 ### 5.3 Açık kararlar ve girdiler
 
 - **ASC/Play'de SKU, fiyat ve 14 günlük deneme teklifinin gerçekten var olduğu** konsol erişimi gerektirir; kullanıcı girdisidir. `consoleExistenceVerified: false`.
-- **Reşit olmayanların satın alması (OST-K1, kurucu kararı 2026-10-25):** 13–17 yaş hesapların satın alması mağaza aile kontrollerine (Ask to Buy, Play ebeveyn onayı) bırakılır. Bugün Core (`c530309`…R3) veli onayı bekleyen kısıtlı hesaba satın alma sunmuyor; bunu değiştirmek Core işidir (Ekip-2, ET3-4). Ostinato Core davranışını aşan yol açmaz; Core sürümü duyurulunca S12 ve testi uyarlanır.
+- **Reşit olmayanların satın alması (OST-K1, kurucu kararı 2026-10-25):** 13–17 yaş hesapların satın alması mağaza aile kontrollerine (Ask to Buy, Play ebeveyn onayı) bırakılır. Core R4 (`0d29d1b`, CORE-12) bunu app başına parametreyle verir; Ostinato `lib/app/ostinato_release_policy.dart` `ostinatoTeenPurchasePolicy = storeFamilyControls` seçer ve hesap sayfası, ücretli ders kapısı ve kamera kapısı bu değeri Core'a geçirir (`test/teen_purchase_policy_test.dart`). Hesap özellikleri veli onayına kadar kapalı kalır, 13 yaş altı satın alamaz; Ostinato Core davranışını aşan yol açmaz. Onaylanmayan genç hesabı Core'da 30 gün sonra silinir; mağaza aboneliği bununla iptal olmaz ve yeni/onaylı hesapta geri yüklenir (Core R4 kırıcı/dikkat 4).
 - **Paywall A sayıları (OST-K2, kurucu kararı 2026-10-25):** gitar 12/60, piyano 8/25, vokal 8/22, ukulele 8/24, bas 8/24 — Core `isLessonUnlocked(..., freeLessonLimit:)` override ile birebir; Core formülüne (gitar 20, piyano 9) geçilmez.
 - **Storefront ülkesi:** kapandı. Core `30a2cb2`'den (R1 ve sonrası) beri hesap sayfası `countryCode` verilmeyince kayıt/yaş onayında mağaza ülkesini okur (3 sn sınır; hata → cihaz bölgesi; bölge yoksa 16 eşiği). Ostinato ek kablolama yapmaz.
 - Sandbox tester (Apple), lisans test kullanıcıları (Play), function secret'ları ve internal testing upload onayı kullanıcıdan gelir.
