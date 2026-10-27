@@ -102,6 +102,7 @@ AccountConnection bindMotionAccountRuntime(
       ageBlocked: underAgeBlocked,
       onAgeBlocked: blockUnderAge,
       membershipAvailable: ostinatoPaidFeaturesAvailable,
+      teenPurchasePolicy: ostinatoTeenPurchasePolicy,
     );
   }
 
@@ -122,12 +123,14 @@ AccountConnection bindMotionAccountRuntime(
       account: runtime.account,
       accountPageBuilder: accountPage,
       salesAvailable: ostinatoPaidFeaturesAvailable,
+      teenPurchasePolicy: ostinatoTeenPurchasePolicy,
     ),
     requireCameraAccess: (context) => requireMotionCameraAccess(
       context,
       account: runtime.account,
       accountPageBuilder: accountPage,
       cameraCoachingAvailable: ostinatoCameraPracticeAvailable,
+      teenPurchasePolicy: ostinatoTeenPurchasePolicy,
     ),
   );
 }
