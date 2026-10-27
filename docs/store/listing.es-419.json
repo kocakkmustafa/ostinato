@@ -1,0 +1,23 @@
+{
+  "$doc": "Local translation draft of listing.json (K-6, 2026-10-27): same facts as the EN source at d007b2f, paragraph for paragraph. Not submitted or provider-accepted. Native-speaker, legal and store review remain UNRUN.",
+  "$storeLocales": {
+    "appStoreConnect": "es-MX",
+    "playConsole": "es-419"
+  },
+  "appStore": {
+    "name": "Ostinato: Práctica musical",
+    "subtitle": "Guitarra, de notas a música",
+    "promotionalText": "Explora una ruta completa para aprender guitarra: notas, acordes, ritmo, melodía y presentaciones finales originales. Practica a tu ritmo y registra tu progreso.",
+    "keywords": "guitarra,música,práctica,piano,ukelele,bajo,voz,notas,ritmo,clases"
+  },
+  "playStore": {
+    "shortDescription": "Curso progresivo de guitarra con lecciones, práctica guiada y progreso local."
+  },
+  "description": "Ostinato ofrece 60 lecciones originales de guitarra en 10 módulos, con presentación escrita del curso en 14 idiomas. Empieza con la preparación del instrumento y las cuerdas, y luego desarrolla lectura, notas individuales, acordes, ritmo, armonía y fingerstyle. Dos presentaciones finales originales te ayudan a combinar las habilidades. Cada lección incluye explicaciones, una tarea de práctica, autoevaluaciones y opciones más fáciles.\n\nCursos introductorios adicionales ofrecen práctica escrita de piano, ukelele, bajo y voz. Esos cursos no ofrecen retroalimentación en vivo sobre notas, técnica de dedos ni precisión vocal.\n\nLee lecciones de texto originales, sigue tareas de práctica, revisa tu propia práctica y continúa desde tu registro local de lecciones. Puedes explorar sin iniciar sesión y usar una cuenta Motion compartida opcional. La cuenta usa tu correo electrónico, un ID de cuenta y un nombre visible opcional; puedes eliminar la cuenta desde la app. Los registros del curso permanecen en el dispositivo dentro del ámbito actual de invitado o de cuenta. Completar una lección no certifica dominio. Esta versión no incluye videos de demostración.\n\nLa práctica opcional con micrófono muestra en el dispositivo observaciones aproximadas de notas individuales después de tu permiso. No califica precisión ni acordes. El audio sin procesar no se guarda ni se sube. Este curso usa tu propio registro de práctica; no hay calificaciones de postura con cámara.\n\nLas primeras 12 lecciones de guitarra y las primeras 8 lecciones de cada uno de los otros cursos son gratuitas. Las siguientes requieren una suscripción opcional de renovación automática: Ostinato (esta app) o Motion+ (las cinco apps Motion), mensual o anual, con una prueba gratuita de 14 días para nuevos suscriptores elegibles. Los precios se muestran en la app antes de la compra. El pago se carga a tu cuenta de la tienda. La suscripción se renueva automáticamente salvo que la canceles en la configuración de tu cuenta de la tienda antes de la fecha de renovación. Términos: https://yulalab.com/terms",
+  "cameraPermissionRationale": {
+    "ios": "La práctica con cámara está cerrada en esta versión. Su acceso está reservado para observar postura en el dispositivo; el video no se guarda ni se sube.",
+    "$source": "ios/Runner/es-419.lproj/InfoPlist.strings NSCameraUsageDescription (verbatim)."
+  },
+  "supportUrl": "https://yulalab.com/support",
+  "privacyPolicyUrl": "https://yulalab.com/privacy/motion"
+}

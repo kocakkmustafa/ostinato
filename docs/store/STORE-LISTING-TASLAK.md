@@ -7,7 +7,16 @@ başlangıç dersi kaynakta vardır. Bu ek kurslarda canlı nota/teknik doğrulu
 geribildirimi yoktur. Kurs varlık kimliği ve hashleri JSON kaynak notlarındadır.
 Reviewer adımları, gerçek hesap/restore ayrımı ve paket-privacy uzlaştırması:
 [RELEASE-REVIEW.md](RELEASE-REVIEW.md).
-İsteğe bağlı mikrofonla cihaz üstü yaklaşık tek nota gözlemi vardır; doğruluk/akor puanı, kamera koçluğu veya abonelik satışı vaadi yoktur.
+İsteğe bağlı mikrofonla cihaz üstü yaklaşık tek nota gözlemi vardır; doğruluk/akor puanı veya kamera koçluğu vaadi yoktur. Abonelik satışı ilk sürümde açıktır (paywall A, kurucu kararı 2026-10-23; koşullar JSON açıklamasının son paragrafında).
+
+**14 mağaza dili (K-6, kurucu kararı 2026-10-27).** EN/TR'ye ek olarak 12 çeviri
+taslağı `listing.<dil>.json`: de, es-419, pt-BR, fr, it, pl, id, ja, ko, zh-Hans,
+ar, hi (dil kümesi uygulamanın 14 sunum kataloğuyla aynı). Her dosya EN kaynağın
+(d007b2f) olgularını paragraf paragraf taşır; kamera izin metni o dilin
+`ios/Runner/<dil>.lproj/InfoPlist.strings` satırından birebir alınır. Konsol
+yerel kodları her dosyanın `$storeLocales` alanındadır (ör. es-419 → ASC `es-MX`,
+Play `es-419`; zh-Hans → Play `zh-CN`). Uzunluk/$ sözleşmesi denetimi 14 dosyada
+geçti; ana dil, hukuk ve mağaza incelemesi UNRUN. Konsol girişi Yönetim'de.
 
 Kurs ilerlemesi kullanıcının kendi çalışma kaydıdır; ustalık veya fiziksel öğretim
 kabulü değildir. Hesap ve destek/gizlilik metinleri güncel JSON'dan alınır.

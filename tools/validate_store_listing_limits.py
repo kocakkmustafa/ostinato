@@ -13,7 +13,7 @@ otorite) `## 📐 LİMİTLER` tablosundan ÇALIŞMA-ANINDA okunur — burada bir
 (`H-58`: kopya = güncelleme borcu). O dosya değişirse bu kapı otomatik izler; parse hiçbir
 satır bulamazsa (desen kayboldu/dosya taşındı) kapı KÖR olduğunu söyler, sessizce geçmez.
 
-    python3 tools/validate_store_listing_limits.py            # EN/TR gerçek dosyalarla
+    python3 tools/validate_store_listing_limits.py            # 14 dil gerçek dosyalarla
     python3 tools/validate_store_listing_limits.py --selftest # sınırlar + sabotaj + vakum
 """
 import json
@@ -23,7 +23,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LISTING = ROOT / "docs" / "store" / "listing.json"
-LISTINGS = (LISTING, LISTING.with_name("listing.tr-TR.json"))
+# K-6 (2026-10-27): EN kaynak + her `listing.<dil>.json` (14 mağaza dili).
+LISTINGS = (LISTING, *sorted(LISTING.parent.glob("listing.*.json")))
 LIMITS_MD = ROOT.parent.parent / "motion-core" / "workspace" / "MAGAZA-ALAN-LIMITLERI.md"
 
 # Ostinato'da SEVK EDİLEN alanlar → MAGAZA-ALAN-LIMITLERI.md'deki karşılığı.

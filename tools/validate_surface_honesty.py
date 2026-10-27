@@ -1259,6 +1259,10 @@ STORE_TEXT_GLOBS = [
     "docs/store/**/*.json", "docs/store/**/*.txt",
     "fastlane/**/metadata/**/*.txt", "store/**/*.json",
 ]
+#: Ayrı adlandırılmış mağaza dili (`listing.<dil>.json`, en-* hariç). Kural F'nin
+#: "TR metin EN yüzeyde" denetimi bunlara uygulanmaz; diğer kurallar sürer.
+STORE_LOCALE_LISTING = re.compile(
+    r"^docs/store/listing\.(?!en\b)[a-z]{2,3}(?:-[A-Za-z0-9]+)?\.json:")
 
 
 #: SATICI (vendored) yolları — BİZİM metnimiz değil. Ölçüldü: `ios/**/
@@ -2130,7 +2134,9 @@ def main() -> int:
             # A separately named store locale is not governed by the English
             # content asset's language field. Keep every other honesty check
             # over this file; only the English-language mismatch rule skips it.
-            if where.startswith('docs/store/listing.tr-TR.json:'):
+            # K-6 (2026-10-27): 14 store locales; fr/pt-BR share ç/ã with
+            # TURKISH_CHARS. The EN source listing.json has no locale segment.
+            if STORE_LOCALE_LISTING.match(where):
                 continue
             if (journey_localized and
                 where.startswith('assets/content/guitar_journey.v1.json.') and

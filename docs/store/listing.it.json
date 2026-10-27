@@ -1,0 +1,23 @@
+{
+  "$doc": "Local translation draft of listing.json (K-6, 2026-10-27): same facts as the EN source at d007b2f, paragraph for paragraph. Not submitted or provider-accepted. Native-speaker, legal and store review remain UNRUN.",
+  "$storeLocales": {
+    "appStoreConnect": "it",
+    "playConsole": "it-IT"
+  },
+  "appStore": {
+    "name": "Ostinato: pratica musicale",
+    "subtitle": "Chitarra, dalla nota al brano",
+    "promotionalText": "Scopri un percorso completo per imparare la chitarra: note, accordi, ritmo, melodia ed esecuzioni finali originali. Esercitati al tuo ritmo e registra i progressi.",
+    "keywords": "chitarra,musica,esercizio,pianoforte,ukulele,basso,canto,note,ritmo,lezioni"
+  },
+  "playStore": {
+    "shortDescription": "Corso di chitarra progressivo con lezioni, esercizi e progressi locali."
+  },
+  "description": "Ostinato offre 60 lezioni di chitarra originali in 10 moduli, con presentazione scritta del corso in 14 lingue. Inizia con la preparazione dello strumento e le corde, poi sviluppa lettura, note singole, accordi, ritmo, armonia e fingerstyle. Due esecuzioni finali originali ti aiutano a combinare le abilità. Ogni lezione include spiegazioni, un esercizio pratico, autoverifiche e opzioni più semplici.\n\nAltri corsi introduttivi offrono pratica scritta per pianoforte, ukulele, basso e canto. Per questi corsi non è disponibile un riscontro dal vivo su note, tecnica delle dita o correttezza vocale.\n\nLeggi lezioni di testo originali, segui gli esercizi, valuta la tua pratica e riprendi dal registro locale delle lezioni. Puoi esplorare senza accedere e usare un account Motion condiviso facoltativo. L'account usa il tuo indirizzo email, un ID account e un nome visualizzato facoltativo; l'eliminazione dell'account è disponibile nell'app. I dati del corso restano sul dispositivo, nell'ambito ospite o account attuale. Completare una lezione non certifica la padronanza. Questa versione non include video dimostrativi.\n\nLa pratica facoltativa con il microfono mostra sul dispositivo osservazioni approssimative di singole note, dopo il tuo permesso. Non valuta correttezza né accordi. L'audio grezzo non viene salvato né caricato. Questo corso usa il tuo registro di pratica; non sono disponibili valutazioni della postura con la fotocamera.\n\nLe prime 12 lezioni di chitarra e le prime 8 lezioni di ogni altro corso sono gratuite. Le lezioni successive richiedono un abbonamento facoltativo a rinnovo automatico: Ostinato (questa app) o Motion+ (tutte e cinque le app Motion), mensile o annuale, con una prova gratuita di 14 giorni per i nuovi abbonati idonei. I prezzi sono mostrati nell'app prima dell'acquisto. Il pagamento viene addebitato sul tuo account dello store. L'abbonamento si rinnova automaticamente, a meno che tu non lo annulli nelle impostazioni del tuo account dello store prima della data di rinnovo. Termini: https://yulalab.com/terms",
+  "cameraPermissionRationale": {
+    "ios": "La pratica con fotocamera è chiusa in questa versione. L'accesso alla fotocamera è riservato all'osservazione posturale sul dispositivo; i video non vengono salvati né caricati online.",
+    "$source": "ios/Runner/it.lproj/InfoPlist.strings NSCameraUsageDescription (verbatim)."
+  },
+  "supportUrl": "https://yulalab.com/support",
+  "privacyPolicyUrl": "https://yulalab.com/privacy/motion"
+}
