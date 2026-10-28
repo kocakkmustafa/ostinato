@@ -1,0 +1,40 @@
+{
+  "version": "guitar-observation.v2",
+  "evidenceState": "studio_single_note_only_physical_phone_acceptance_open",
+  "pitchGate": {
+    "windowSize": 4096,
+    "hopSize": 2048,
+    "minReliableWindows": 2,
+    "minHz": 70,
+    "maxHz": 1200,
+    "yinThreshold": 0.15,
+    "minPeriodicity": 0.55,
+    "minLevelAboveFloorDb": 6,
+    "attackWindowUs": 100000,
+    "maxSpreadCents": 35,
+    "maxCenterErrorCents": 35
+  },
+  "guard": {
+    "maxResidualPowerRatio": 0.15,
+    "clippingPeak": 0.995,
+    "maxClippedFraction": 0.001,
+    "harmonicToleranceCents": 20,
+    "minAnalysisHz": 50,
+    "maxAnalysisHz": 4000,
+    "minFftSamples": 4096,
+    "minFundamentalPowerRatio": 0.08,
+    "lowStringMaxMidi": 52,
+    "lowStringMinOddHarmonicPowerRatio": 0.1
+  },
+  "practice": {
+    "calibrationMs": 2000,
+    "windowSamples": 8192,
+    "analysisIntervalMs": 350,
+    "staleMs": 1200,
+    "initialSampleRate": 44100,
+    "supportedSampleRates": [
+      44100,
+      48000
+    ]
+  }
+}

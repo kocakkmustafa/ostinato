@@ -230,7 +230,12 @@ class _GuitarNoteObservationScreenState
   @override
   Widget build(BuildContext context) {
     final controller = _controller;
-    final value = controller?.observation;
+    final tuning = controller?.tuning ?? NoteTuning.unknown;
+    // A tuning far from note centres makes the nearest-note label misleading.
+    final value = tuning == NoteTuning.tuneFirst
+        ? null
+        : controller?.observation;
+    final tuningCents = controller?.tuningCents;
     final p = OstinatoPalette.of(context);
     final hue = p.guitar;
     const names = [
@@ -322,6 +327,31 @@ class _GuitarNoteObservationScreenState
                           },
                         ),
                         style: hankenText(size: 12.5, height: 1.5),
+                      ),
+                    ],
+                    if (tuning == NoteTuning.tuneFirst) ...[
+                      const SizedBox(height: 10),
+                      Text(
+                        localized(
+                          context,
+                          'Tune first: held notes sound more than 30 cents from the nearest note, so note names are hidden. Tune with an external tuner, then hold one open string.',
+                          'Önce akort et: tutulan notalar en yakın notadan 30 centten fazla uzak duyuluyor; bu yüzden nota adları gizlendi. Harici akort cihazıyla akort et, sonra bir açık teli tınlat.',
+                        ),
+                        key: const Key('observation-tuning'),
+                        style: hankenText(size: 13, height: 1.5),
+                      ),
+                    ] else if (tuning == NoteTuning.check &&
+                        tuningCents != null) ...[
+                      const SizedBox(height: 10),
+                      Text(
+                        localized(
+                          context,
+                          'Check tuning: held notes sound about {v0} cents from the nearest note. Use an external tuner.',
+                          'Akordu kontrol et: tutulan notalar en yakın notadan yaklaşık {v0} cent uzak duyuluyor. Harici akort cihazı kullan.',
+                          values: {'v0': AppDecimal(tuningCents.abs(), 0)},
+                        ),
+                        key: const Key('observation-tuning'),
+                        style: hankenText(size: 13, height: 1.5),
                       ),
                     ],
                     const SizedBox(height: 14),

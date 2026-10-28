@@ -2111,6 +2111,8 @@
     "b17b63ccf42baffe": "As aulas 1–{v0} são gratuitas. As seguintes exigem uma assinatura Ostinato ou Motion+; seus registros de progresso continuam sempre visíveis.",
     "5e95bb16d894c7e7": "Aula por assinatura",
     "cebdd1905c0acfe3": "Esta aula exige uma assinatura, e o serviço de conta está indisponível no momento.",
-    "503840cca53dc480": "Explore referências de postura para violão, voz e piano. Aulas com câmera não estão abertas nesta versão. O percurso de violão tem um observador opcional de notas isoladas no dispositivo."
+    "503840cca53dc480": "Explore referências de postura para violão, voz e piano. Aulas com câmera não estão abertas nesta versão. O percurso de violão tem um observador opcional de notas isoladas no dispositivo.",
+    "ba4af611303e98c1": "Afine primeiro: as notas sustentadas soam a mais de 30 cents da nota mais próxima, por isso os nomes das notas estão ocultos. Afine com um afinador externo e depois deixe soar uma corda solta.",
+    "c7769c4ab3c03fe1": "Confira a afinação: as notas sustentadas soam a cerca de {v0} cents da nota mais próxima. Use um afinador externo."
   }
 }

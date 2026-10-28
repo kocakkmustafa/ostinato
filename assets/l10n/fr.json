@@ -2111,6 +2111,8 @@
     "b17b63ccf42baffe": "Les leçons 1–{v0} sont gratuites. Les suivantes nécessitent un abonnement Ostinato ou Motion+ ; tes relevés de progression restent toujours visibles.",
     "5e95bb16d894c7e7": "Leçon avec abonnement",
     "cebdd1905c0acfe3": "Cette leçon nécessite un abonnement, et le service de compte est indisponible pour le moment.",
-    "503840cca53dc480": "Explore les références de posture pour guitare, voix et piano. Les leçons avec caméra ne sont pas ouvertes dans cette version. Le parcours de guitare dispose d'un observateur facultatif de notes seules sur l'appareil."
+    "503840cca53dc480": "Explore les références de posture pour guitare, voix et piano. Les leçons avec caméra ne sont pas ouvertes dans cette version. Le parcours de guitare dispose d'un observateur facultatif de notes seules sur l'appareil.",
+    "ba4af611303e98c1": "Accorde d'abord : les notes tenues sonnent à plus de 30 cents de la note la plus proche, les noms des notes sont donc masqués. Accorde avec un accordeur externe, puis laisse sonner une corde à vide.",
+    "c7769c4ab3c03fe1": "Vérifie l'accordage : les notes tenues sonnent à environ {v0} cents de la note la plus proche. Utilise un accordeur externe."
   }
 }

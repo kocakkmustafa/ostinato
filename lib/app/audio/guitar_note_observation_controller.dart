@@ -41,6 +41,24 @@ final class GuitarObservationConfig {
       minAnalysisHz: n(g, 'minAnalysisHz'),
       maxAnalysisHz: n(g, 'maxAnalysisHz'),
       minFftSamples: g['minFftSamples'] as int,
+      lowStringMaxMidi: g['lowStringMaxMidi'] as int?,
+      lowStringMinOddHarmonicPowerRatio:
+          (g['lowStringMinOddHarmonicPowerRatio'] as num?)?.toDouble(),
+    );
+    // Tuning reads keep cents up to the half-semitone so a guitar 30-40 cents
+    // off is measured, not refused; displayed notes keep the 35-cent gate.
+    tuningPitch = GuitarSingleNoteConfig(
+      windowSize: pitch.windowSize,
+      hopSize: pitch.hopSize,
+      minReliableWindows: pitch.minReliableWindows,
+      minHz: pitch.minHz,
+      maxHz: pitch.maxHz,
+      yinThreshold: pitch.yinThreshold,
+      minPeriodicity: pitch.minPeriodicity,
+      minLevelAboveFloorDb: pitch.minLevelAboveFloorDb,
+      attackWindowUs: pitch.attackWindowUs,
+      maxSpreadCents: pitch.maxSpreadCents,
+      maxCenterErrorCents: tuningMaxCenterErrorCents,
     );
     calibrationMs = s['calibrationMs'] as int;
     windowSamples = s['windowSamples'] as int;
@@ -59,8 +77,10 @@ final class GuitarObservationConfig {
       throw const FormatException('Invalid observation practice config');
     }
     GuitarPitchObserver(config: pitch, guard: guard);
+    GuitarPitchObserver(config: tuningPitch, guard: guard);
   }
-  late final GuitarSingleNoteConfig pitch;
+  static const tuningMaxCenterErrorCents = 50.0;
+  late final GuitarSingleNoteConfig pitch, tuningPitch;
   late final GuitarObservationGuardConfig guard;
   late final int calibrationMs,
       windowSamples,
@@ -96,8 +116,23 @@ enum NoteObservationPhase {
   unavailable,
 }
 
+/// Session tuning read from sustained notes, not an external tuner.
+enum NoteTuning { unknown, inTune, check, tuneFirst }
+
 typedef NoteAnalyzer =
     Future<GuitarNoteObservationResult> Function(
+      List<double>,
+      int,
+      int,
+      double,
+    );
+
+/// Tuning-only reading of the same window (wider centre limit).
+typedef TuningAnalyzer =
+    Future<GuitarNoteObservation?> Function(List<double>, int, int, double);
+
+typedef _NoteAnalysis =
+    Future<(GuitarNoteObservationResult, GuitarNoteObservation?)> Function(
       List<double>,
       int,
       int,
@@ -111,12 +146,27 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     required this.config,
     AudioSource? source,
     NoteAnalyzer? analyzer,
+    TuningAnalyzer? tuningAnalyzer,
   }) : _source = source ?? AudioInputController(),
        _ownsSource = source == null,
-       _analyzer =
-           analyzer ??
-           ((samples, rate, time, floor) =>
-               _analyzeOffMain(samples, rate, time, floor, config)) {
+       _analysis = analyzer == null && tuningAnalyzer == null
+           ? ((samples, rate, time, floor) =>
+                 _analyzeOffMain(samples, rate, time, floor, config))
+           : ((samples, rate, time, floor) async {
+               final result =
+                   await (analyzer ??
+                       (s, r, t, f) => _analyzeOffMain(
+                         s,
+                         r,
+                         t,
+                         f,
+                         config,
+                       ).then((v) => v.$1))(samples, rate, time, floor);
+               final tuning = tuningAnalyzer == null
+                   ? result.observation
+                   : await tuningAnalyzer(samples, rate, time, floor);
+               return (result, tuning);
+             }) {
     if (_source is AudioInputController) {
       unawaited(refreshCaptureStatus());
     }
@@ -124,7 +174,7 @@ final class GuitarNoteObservationController extends ChangeNotifier {
   final GuitarObservationConfig config;
   final AudioSource _source;
   final bool _ownsSource;
-  final NoteAnalyzer _analyzer;
+  final _NoteAnalysis _analysis;
   StreamSubscription<AudioChunk>? _chunks;
   StreamSubscription<AudioSurfaceState>? _status;
   final List<double> _window = [];
@@ -145,6 +195,39 @@ final class GuitarNoteObservationController extends ChangeNotifier {
   NoteObservationPhase phase = NoteObservationPhase.idle;
   GuitarNoteObservation? observation;
   GuitarSingleNoteReason? refusal;
+
+  /// Three consecutive tuning reads of one note within
+  /// [tuningRunSpreadCents] make one sustained-note measurement; a later
+  /// sustained note replaces it, so retuning is picked up without a control.
+  /// Leaving a state needs [tuningHysteresisCents] past its boundary.
+  static const tuningRunLength = 3;
+  static const tuningRunSpreadCents = 10.0;
+  static const tuningCheckCents = 20.0;
+  static const tuningFirstCents = 30.0;
+  static const tuningHysteresisCents = 2.0;
+
+  /// Open-string corrections from the E34 synthetic string model (B = 1e-4):
+  /// stiff strings read sharp. A modelling assumption, not a calibration of
+  /// real strings; the nearest open string (lower on a tie) applies.
+  static const tuningCorrectionCents = <int, double>{
+    40: -4.1,
+    45: -3.8,
+    50: -3.9,
+    55: -4.1,
+    59: -3.8,
+    64: -2.9,
+  };
+  static double tuningCorrection(int midi) {
+    var best = 40;
+    for (final open in tuningCorrectionCents.keys) {
+      if ((open - midi).abs() < (best - midi).abs()) best = open;
+    }
+    return tuningCorrectionCents[best]!;
+  }
+
+  NoteTuning tuning = NoteTuning.unknown;
+  double? tuningCents;
+  final List<GuitarNoteObservation> _tuningRun = [];
   bool get isActive => _active;
   bool get isCaptureStopping => _sourceClosing != null;
   bool get captureStopFailed => _sourceCloseFailed;
@@ -218,6 +301,44 @@ final class GuitarNoteObservationController extends ChangeNotifier {
     _analysisToken++;
     observation = null;
     refusal = null;
+    tuning = NoteTuning.unknown;
+    tuningCents = null;
+    _tuningRun.clear();
+  }
+
+  void _recordTuning(GuitarNoteObservation? reading) {
+    if (reading == null) {
+      _tuningRun.clear();
+      return;
+    }
+    _tuningRun.add(reading);
+    if (_tuningRun.length > tuningRunLength) _tuningRun.removeAt(0);
+    if (_tuningRun.length < tuningRunLength ||
+        _tuningRun.any((v) => v.midi != reading.midi)) {
+      return;
+    }
+    final cents = _tuningRun.map((v) => v.centsFromCenter).toList()..sort();
+    if (cents.last - cents.first > tuningRunSpreadCents) return;
+    final measured = cents[cents.length ~/ 2] + tuningCorrection(reading.midi);
+    tuningCents = measured;
+    tuning = _nextTuning(measured.abs());
+  }
+
+  NoteTuning _nextTuning(double cents) {
+    NoteTuning band(double a) => a > tuningFirstCents
+        ? NoteTuning.tuneFirst
+        : a > tuningCheckCents
+        ? NoteTuning.check
+        : NoteTuning.inTune;
+    final plain = band(cents);
+    if (tuning == NoteTuning.unknown || plain == tuning) return plain;
+    // Towards a worse state the value must clear that state's lower bound;
+    // towards a better state it must fall below its upper bound.
+    final worse = plain.index > tuning.index;
+    final shifted = band(
+      worse ? cents - tuningHysteresisCents : cents + tuningHysteresisCents,
+    );
+    return shifted == tuning ? tuning : shifted;
   }
 
   void _settlePendingStatus() {
@@ -445,9 +566,10 @@ final class GuitarNoteObservationController extends ChangeNotifier {
         chunk.tStartUs +
         ((chunk.samples.length - samples.length) * 1000000 / chunk.sampleRate)
             .round();
-    _analyzer(samples, chunk.sampleRate, startUs, _floor!)
+    _analysis(samples, chunk.sampleRate, startUs, _floor!)
         .then(
-          (result) {
+          (analysis) {
+            final (result, tuningReading) = analysis;
             if (_disposed ||
                 !_active ||
                 epoch != _epoch ||
@@ -464,6 +586,7 @@ final class GuitarNoteObservationController extends ChangeNotifier {
             });
             observation = result.observation;
             refusal = result.reason;
+            _recordTuning(tuningReading);
             phase = observation == null
                 ? NoteObservationPhase.noResult
                 : NoteObservationPhase.listening;
@@ -516,15 +639,17 @@ final class GuitarNoteObservationController extends ChangeNotifier {
   }
 }
 
-Future<GuitarNoteObservationResult> _analyzeOffMain(
+Future<(GuitarNoteObservationResult, GuitarNoteObservation?)> _analyzeOffMain(
   List<double> samples,
   int rate,
   int time,
   double floor,
   GuitarObservationConfig config,
-) => Isolate.run(
-  () => GuitarPitchObserver(
-    config: config.pitch,
-    guard: config.guard,
-  ).observe(samples, sampleRate: rate, tStartUs: time, roomFloorDb: floor),
-);
+) => Isolate.run(() {
+  GuitarNoteObservationResult observe(GuitarSingleNoteConfig pitch) =>
+      GuitarPitchObserver(
+        config: pitch,
+        guard: config.guard,
+      ).observe(samples, sampleRate: rate, tStartUs: time, roomFloorDb: floor);
+  return (observe(config.pitch), observe(config.tuningPitch).observation);
+});

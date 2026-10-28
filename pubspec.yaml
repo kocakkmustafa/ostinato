@@ -144,7 +144,7 @@ flutter:
     # Exact v2l source identities only; these assets contain no playable media.
     - assets/motion_content/ostinato.source-slice.v1.json
     - assets/motion_content/ostinato.source-projection.v1.json
-    - assets/config/guitar-observation.v1.json
+    - assets/config/guitar-observation.v2.json
     # OFL lisans metinleri — paketlenmiş font DOSYALARIYLA BİRLİKTE dağıtılmak
     # OFL §2'nin şartı (D1, H-34/H-40 bağı: google_fonts kalktı, yazı tipleri
     # artık gömülü — lisans de gömülü olmalı).

@@ -70,7 +70,7 @@ final class InferenceManifest {
 
   static const assetPath = 'assets/config/inference-manifest.v1.json';
   static const sha256 =
-      '031fd0584030ba2dbec5b2a25cbf1cf20b8f6d37c4c16d5336af7061133bb690';
+      '9f27d84b110e90c89f97126c26859b02e2ff3025932e7c8284292e7ad43c6198';
   static const poseProviderId = 'motion_camera.pose_landmarker';
   static const poseModelId = 'pose_landmarker_full/float16/1';
   static const poseModelPath = 'assets/models/pose_landmarker_full.v1.task';
@@ -106,8 +106,8 @@ final class InferenceManifest {
     final guitar = RuntimeArtifact.fromJson(json['guitarObservation']);
     if (reference.id != 'ostinato.posture-reference.v1' ||
         reference.path != 'assets/config/posture-contract.json' ||
-        guitar.id != 'guitar-observation.v1' ||
-        guitar.path != 'assets/config/guitar-observation.v1.json') {
+        guitar.id != 'guitar-observation.v2' ||
+        guitar.path != 'assets/config/guitar-observation.v2.json') {
       throw const FormatException('Unsupported calibration binding');
     }
     const maximum = {

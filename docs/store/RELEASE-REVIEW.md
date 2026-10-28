@@ -45,7 +45,10 @@ guest/account scope on this device. It is not synchronized across devices.
 
 Microphone observation is optional and appears only in the guitar note practice
 flow after Start and OS permission. It displays an approximate note/Hz/cents;
-it does not grade the target note, chords, rhythm, posture or mastery. Declining
+it does not grade the target note, chords, rhythm, posture or mastery. When held
+notes sound 20-30 cents from note centres it suggests checking tuning with an
+external tuner; beyond 30 cents it hides note names and asks the user to tune
+first. Declining
 permission leaves the written course available. Raw audio is processed in
 bounded temporary device memory; it is not saved or uploaded by this path.
 

@@ -2111,6 +2111,8 @@
     "b17b63ccf42baffe": "Lessons 1–{v0} are free. Later lessons need an Ostinato or Motion+ subscription; your progress records always stay visible.",
     "5e95bb16d894c7e7": "Subscription lesson",
     "cebdd1905c0acfe3": "This lesson needs a subscription, and the account service is unavailable right now.",
-    "503840cca53dc480": "Explore guitar, voice, and piano posture references. Camera lessons are not open in this release. The guitar learning path has an optional on-device single-note observer."
+    "503840cca53dc480": "Explore guitar, voice, and piano posture references. Camera lessons are not open in this release. The guitar learning path has an optional on-device single-note observer.",
+    "ba4af611303e98c1": "Tune first: held notes sound more than 30 cents from the nearest note, so note names are hidden. Tune with an external tuner, then hold one open string.",
+    "c7769c4ab3c03fe1": "Check tuning: held notes sound about {v0} cents from the nearest note. Use an external tuner."
   }
 }

@@ -75,4 +75,120 @@ void main() {
             .observation,
         isNull);
   });
+  lowStringTests();
+}
+
+const lowStringGuard = GuitarObservationGuardConfig(
+  maxResidualPowerRatio: .15,
+  minFundamentalPowerRatio: .08,
+  clippingPeak: .995,
+  maxClippedFraction: .001,
+  harmonicToleranceCents: 20,
+  minAnalysisHz: 50,
+  maxAnalysisHz: 4000,
+  minFftSamples: 4096,
+  lowStringMaxMidi: 52,
+  lowStringMinOddHarmonicPowerRatio: .10,
+);
+
+/// Harmonic tone whose k-th partial has amplitude [weights][k-1].
+List<double> partials(double hz, List<double> weights) {
+  final total = weights.fold<double>(0, (a, w) => a + w);
+  return List.generate(
+    8192,
+    (i) => List.generate(weights.length, (k) => k).fold<double>(
+      0,
+      (sum, k) =>
+          sum +
+          .65 *
+              weights[k] /
+              total *
+              math.sin(2 * math.pi * (k + 1) * hz * i / 44100),
+    ),
+  );
+}
+
+/// Pick near the bridge plus a phone-like low cut: partial 1 nearly gone.
+const weakFundamental = <double>[.12, 1, .9, .8, .7, .6, .5, .4, .3, .2];
+
+void lowStringTests() {
+  GuitarNoteObservationResult observeWith(
+    GuitarObservationGuardConfig g,
+    List<double> samples,
+  ) => GuitarPitchObserver(
+    config: fixture.config,
+    guard: g,
+  ).observe(samples, sampleRate: 44100, tStartUs: 200000, roomFloorDb: -60);
+  double hzOf(int midi) => (440 * math.pow(2, (midi - 69) / 12)).toDouble();
+
+  test(
+    'weak-fundamental low strings are refused without the low-string rule',
+    () {
+      for (final midi in [40, 45, 50]) {
+        final result = observeWith(
+          guard,
+          partials(hzOf(midi), weakFundamental),
+        );
+        expect(
+          result.reason,
+          GuitarSingleNoteReason.multipleSources,
+          reason: 'midi $midi',
+        );
+      }
+    },
+  );
+  test(
+    'weak-fundamental low strings are observed with consistent odd harmonics',
+    () {
+      for (final midi in [40, 45, 50, 52]) {
+        final result = observeWith(
+          lowStringGuard,
+          partials(hzOf(midi), weakFundamental),
+        );
+        expect(result.observation?.midi, midi, reason: 'midi $midi');
+      }
+    },
+  );
+  test('the low-string rule does not reach notes above its limit', () {
+    final result = observeWith(
+      lowStringGuard,
+      partials(hzOf(57), weakFundamental),
+    );
+    expect(result.observation, isNull);
+    expect(result.reason, GuitarSingleNoteReason.multipleSources);
+  });
+  test('an even-harmonic tone is never labelled an octave low', () {
+    // Energy only at even multiples of E2 is an E3 tone; a sub-octave label
+    // would have almost no power at its odd harmonics and must stay refused.
+    final samples = partials(hzOf(40), <double>[.01, 1, 0, .8, 0, .6, 0, .4, 0, .2]);
+    final result = observeWith(lowStringGuard, samples);
+    expect(result.observation?.midi, isNot(40));
+  });
+  test('the low-string rule needs both fields in range', () {
+    GuitarObservationGuardConfig variant({int? midi, double? odd}) =>
+        GuitarObservationGuardConfig(
+          maxResidualPowerRatio: .15,
+          minFundamentalPowerRatio: .08,
+          clippingPeak: .995,
+          maxClippedFraction: .001,
+          harmonicToleranceCents: 20,
+          minAnalysisHz: 50,
+          maxAnalysisHz: 4000,
+          minFftSamples: 4096,
+          lowStringMaxMidi: midi,
+          lowStringMinOddHarmonicPowerRatio: odd,
+        );
+    for (final g in [
+      variant(midi: 52),
+      variant(odd: .1),
+      variant(midi: 70, odd: .1),
+      variant(midi: 52, odd: 0),
+      variant(midi: 52, odd: 1),
+    ]) {
+      expect(
+        () => GuitarPitchObserver(config: fixture.config, guard: g),
+        throwsArgumentError,
+      );
+    }
+  });
 }

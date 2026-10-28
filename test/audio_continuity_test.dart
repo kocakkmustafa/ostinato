@@ -112,7 +112,7 @@ void main() {
         final config = GuitarObservationConfig.fromJson(
           jsonDecode(
                 File(
-                  'assets/config/guitar-observation.v1.json',
+                  'assets/config/guitar-observation.v2.json',
                 ).readAsStringSync(),
               )
               as Map<String, dynamic>,

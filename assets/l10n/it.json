@@ -2111,6 +2111,8 @@
     "b17b63ccf42baffe": "Le lezioni 1–{v0} sono gratuite. Le successive richiedono un abbonamento Ostinato o Motion+; i tuoi registri di avanzamento restano sempre visibili.",
     "5e95bb16d894c7e7": "Lezione in abbonamento",
     "cebdd1905c0acfe3": "Questa lezione richiede un abbonamento e il servizio account non è disponibile al momento.",
-    "503840cca53dc480": "Esplora i riferimenti posturali di chitarra, voce e pianoforte. Le lezioni con fotocamera non sono aperte in questa versione. Il percorso di chitarra include un osservatore facoltativo di note singole sul dispositivo."
+    "503840cca53dc480": "Esplora i riferimenti posturali di chitarra, voce e pianoforte. Le lezioni con fotocamera non sono aperte in questa versione. Il percorso di chitarra include un osservatore facoltativo di note singole sul dispositivo.",
+    "ba4af611303e98c1": "Prima accorda: le note tenute suonano a più di 30 cent dalla nota più vicina, quindi i nomi delle note sono nascosti. Accorda con un accordatore esterno, poi lascia suonare una corda a vuoto.",
+    "c7769c4ab3c03fe1": "Controlla l'accordatura: le note tenute suonano a circa {v0} cent dalla nota più vicina. Usa un accordatore esterno."
   }
 }
