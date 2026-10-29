@@ -13,7 +13,7 @@ import 'package:test/test.dart';
 /// `pubspec.lock`'un `motion_core` için çözdüğü `resolved-ref` birebir
 /// aynı olmalı.
 /// Public tüketici checkpoint'i: Motion Core
-/// R4 `0d29d1b` (CORE-SURUMLER.tr.md; R3 + app başına 13–17 satın alma politikası ve Built-in Kotlin eklentileri). Tüm tüketiciler aynı tam ref'i kullanır.
+/// R4.3 `5b15308` (CORE-SURUMLER.tr.md; R4 + boş e-posta koruması ve Motion+ fayda metni). Tüm tüketiciler aynı tam ref'i kullanır.
 ///
 /// **REF TAM 40-SHA OLMAK ZORUNDA** (M-F-263 zeyil-2, Choreia+Gravita ölçtü —
 /// ve burada da ÖLÇÜLDÜ): pub, git ref'lerini ÇÖZMEZ, STRING olarak
@@ -23,7 +23,7 @@ import 'package:test/test.dart';
 /// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
 /// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
 /// anlaşma, ancak iki taraf varken sınanabilir.)
-const String _mandatedRef = '0d29d1b019033f00828be741aa3e23e3923841be';
+const String _mandatedRef = '5b15308ea2a89dd5adebe29635f8e7b18fff68e4';
 const String _mandatedVersion = '0.13.0';
 
 void main() {
