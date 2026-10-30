@@ -162,7 +162,7 @@
     "consoleExistenceVerified": false
   },
   "$releaseCandidate20261025": {
-    "coreRef": "0d29d1b019033f00828be741aa3e23e3923841be (Motion Core R4; 2026-10-27 OST-11)",
+    "coreRef": "5b15308ea2a89dd5adebe29635f8e7b18fff68e4 (Motion Core R4.3; 2026-10-29, app 1.0.0+8 89764c1)",
     "courseCounts": {
       "guitar": 60,
       "piano": 25,

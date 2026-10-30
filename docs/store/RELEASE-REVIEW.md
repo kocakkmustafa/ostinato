@@ -1,4 +1,4 @@
-# Ostinato yayın inceleme taslağı — 21 Ekim 2026 (satış notu 25 Ekim 2026)
+# Ostinato yayın inceleme taslağı — 21 Ekim 2026 (satış notu 25 Ekim 2026; Core R4.3 pini 30 Ekim 2026)
 
 Bu dosya yerel submission taslağıdır. App Store Connect'e kaydetme, build
 upload, submit veya yayın kararı değildir. İmza/paket kanıtı model veya fiziksel
@@ -97,7 +97,7 @@ Original demonstration video is not included in this content version.
 | Konuk ders akışı, hesap kapsamlı yerel ayrım | Önceki host/widget testleri | Signed pakette kullanıcı cihazı kontrolü |
 | Gerçek mevcut hesap giriş/çıkış | Kaynak ve host kanıtı | Kullanıcı mevcut test hesabıyla güvenli giriş; parolayı sohbet/rapora verme |
 | Hesap silme | Kaynak ve başarısızlık/yerel temizlik testleri | Kalıcı silme ayrı açık onay ister; mevcut gerçek hesap silinmez |
-| Satış/üyelik/restore | Satış açık (kurucu kararı 2026-10-23); Core R4 `0d29d1b` pini (13–17 satın alma: mağaza aile denetimi, OST-K1), paywall A ve ücretli ders kapısı host testleriyle | Gerçek StoreKit/Play sandbox satın alma, restore, deneme ve iptal: `SALES-OPEN-REVIEW-AND-SANDBOX.md` §5 S1–S17 (kullanıcı/yönetim yürütür) |
+| Satış/üyelik/restore | Satış açık (kurucu kararı 2026-10-23); Core R4.3 `5b15308` pini (R4 + boş e-posta koruması ve Motion+ fayda metni; 13–17 satın alma: mağaza aile denetimi, OST-K1; aday `89764c1` 1.0.0+8), paywall A ve ücretli ders kapısı host testleriyle | Gerçek StoreKit/Play sandbox satın alma, restore, deneme ve iptal: `SALES-OPEN-REVIEW-AND-SANDBOX.md` §5 S1–S17 (kullanıcı/yönetim yürütür) |
 | Reviewer erişimi | Konuk yolu ve bu adımlar | Final cihaz yürüyüşü; gerekiyorsa mevcut demo hesabı güvenli ASC alanında |
 
 Apple/Google sandbox satın alma, yeni hesap/credential veya üretim ödemesi bu
