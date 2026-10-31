@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import '../dsp/fft.dart';
 import '../onset/attack_locator.dart';
+import '../onset/onset_detector.dart';
 import 'yin.dart';
 
 /// The three outcomes a practice note can get. "Could not hear" is a real
@@ -117,6 +118,8 @@ final class GuitarNoteVerifier {
     int? onsetIndex,
     double? roomFloorDb,
     double tuningOffsetCents = 0,
+    int? absoluteStartSample,
+    OnsetFrameCache? onsetCache,
   }) {
     final c = config;
     NoteVerification hear(NoteVerdictReason r) =>
@@ -133,7 +136,9 @@ final class GuitarNoteVerifier {
     final onset = onsetIndex ??
         attackLocator.lastUsableAttack(samples, sampleRate,
             requiredSamples:
-                skip + (c.minAnalysisMs * sampleRate / 1000).round());
+                skip + (c.minAnalysisMs * sampleRate / 1000).round(),
+            absoluteStartSample: absoluteStartSample,
+            cache: onsetCache);
     if (onset == null) return hear(NoteVerdictReason.insufficientSamples);
     final start = onset + skip;
     final end = math.min(

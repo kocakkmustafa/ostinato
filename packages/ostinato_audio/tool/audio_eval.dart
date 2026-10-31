@@ -43,6 +43,10 @@ void main(List<String> args) {
       runRealTuner(spec, ctx, shard, emit);
     case 'verify':
       runVerify(spec, ctx, shard, emit);
+    case 'stream-tuner':
+      runStreamTuner(spec, ctx, shard, emit);
+    case 'stream-verify':
+      runStreamVerify(spec, ctx, shard, emit);
     default:
       stderr.writeln('unknown command ${args[0]}');
       exit(64);
@@ -233,7 +237,11 @@ int? labelOnsetIndex(
 AttackLocator locatorFromSpec(Map<String, dynamic> spec) {
   final o = spec['locator'] as Map<String, dynamic>? ?? const {};
   const d = AttackLocator();
+  final hop = (o['hopMs'] as num?)?.toDouble();
   return AttackLocator(
+    detector: hop == null ? d.detector : OnsetDetector(hopMs: hop),
+    minRelativeStrength: d.minRelativeStrength,
+    minRiseDb: d.minRiseDb,
     bufferStartCandidate:
         o['bufferStartCandidate'] as bool? ?? d.bufferStartCandidate,
     maxBelowLoudestDb: o.containsKey('maxBelowLoudestDb')
@@ -254,6 +262,8 @@ PreciseTuner tunerFromSpec(
           o['adaptiveWindowPeriods'] == null,
       disableLateReadings: o.containsKey('maxLateSpreadCents') &&
           o['maxLateSpreadCents'] == null,
+      adaptiveWindowMinMidi: (o['adaptiveWindowMinMidi'] as num?)?.toDouble(),
+      lateFractionOpen: (o['lateFractionOpen'] as num?)?.toDouble(),
     ),
     attackLocator: locatorFromSpec(spec),
   );
@@ -519,6 +529,162 @@ void runVerify(
               : baselineObserverVerdict(observer, z, ctx.sampleRate, expected,
                   attackIndex: baselineAttack),
           'attackS': attack == null ? null : attack / ctx.sampleRate,
+        });
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// E43 product-like cut. Each item is a stream segment: 2 s of the audio that
+// really preceded the note in the source stream, the note, and its life up
+// to the next note (max 4 s). The phone channel runs over the whole segment
+// (AGC and reverb are warm when the note starts).
+//
+// Tuner: the app keeps the last 1.6 s (GuitarObservationConfig.tuningWindowMs)
+// and analyses every 350 ms (guitar-observation.v2.json analysisIntervalMs);
+// each analysis measures the whole tuning buffer; a refusal keeps the last
+// reading. Here: analysis instants onset + phase + k * 350 ms (phase per note,
+// 0–349 ms, from a stable hash) up to the note's end; the note's reading is
+// the last successful measurement (what the gate shows), success = any.
+//
+// Verifier: the lesson knows the expected time; window = expected - 150 ms
+// (MetronomeAligner.matchWindowMs) .. expected + 600 ms, where the player is
+// early/late by a stable per-note jitter of up to ±100 ms.
+//
+// spec['grid']: 'buffer' (default, frames from each buffer's start),
+// 'global' (frames on the stream's hop grid) or 'global+cache' (same, with an
+// OnsetFrameCache reused across a note's analyses; rows must equal 'global').
+
+int jitterMs(String id, int range) => stableHash('$id/phase') % range;
+
+({OnsetFrameCache? cache, bool global}) gridMode(Map<String, dynamic> spec) {
+  final g = spec['grid'] as String? ?? 'buffer';
+  return (
+    cache: g == 'global+cache' ? OnsetFrameCache() : null,
+    global: g != 'buffer'
+  );
+}
+
+void runStreamTuner(
+  Map<String, dynamic> spec,
+  EvalContext ctx,
+  List<int> shard,
+  void Function(Map<String, Object?>) emit,
+) {
+  final shifts = [
+    for (final s in spec['shiftsCents'] as List) (s as num).toDouble()
+  ];
+  final sr = ctx.sampleRate;
+  final interval = (0.35 * sr).round();
+  final bufferLen = (1.6 * sr).round();
+  var job = 0;
+  for (final it in spec['items'] as List) {
+    final item = it as Map<String, dynamic>;
+    if (!inGroups(spec, item)) continue;
+    if (job++ % shard[1] != shard[0]) continue;
+    final id = item['id'] as String;
+    final profile = profileNamed(item['profile'] as String);
+    final tuner = tunerFromSpec(spec, profile);
+    final seg = readF32(item['seg'] as String);
+    final ref =
+        tuner.measure(readF32(item['refRaw'] as String), sampleRate: sr);
+    final refF0 = ref.measurement?.f0Hz;
+    final phase = (jitterMs(id, 350) * sr / 1000).round();
+    for (final shift in shifts) {
+      final r = math.pow(2, shift / 1200).toDouble();
+      final y = shiftPitch(seg, shift);
+      final onset = ((item['onsetS'] as num) * sr / r).round();
+      final end = math.min(y.length, ((item['endS'] as num) * sr / r).round());
+      for (final c in ctx.conditions) {
+        final z = ctx.render(y, c, stableHash('$id/$shift/${c.name}/stream'));
+        final mode = gridMode(spec);
+        TuningMeasurement? last;
+        double? firstS;
+        var n = 0, measured = 0;
+        final sw = Stopwatch()..start();
+        for (var t = onset + phase; t <= end; t += interval) {
+          final a = math.max(0, t - bufferLen);
+          n++;
+          final res = tuner.measure(z.sublist(a, t),
+              sampleRate: sr,
+              absoluteStartSample: mode.global ? a : null,
+              onsetCache: mode.cache);
+          if (res.measured) {
+            measured++;
+            last = res.measurement;
+            firstS ??= (t - onset) / sr;
+          }
+        }
+        emit({
+          'id': id,
+          'group': item['group'],
+          'midi': item['midi'],
+          'shift': shift,
+          'cond': c.name,
+          'refMeasured': ref.measured,
+          'refF0': refF0,
+          'instants': n,
+          'measuredInstants': measured,
+          'measured': last != null,
+          'f0': last?.f0Hz,
+          'fromLate': last?.fromLateReadings,
+          'firstSuccessS': firstS,
+          'err': last == null || refF0 == null
+              ? null
+              : wrapCents(centsOf(last.f0Hz, refF0) - shift),
+          'ms': sw.elapsedMicroseconds / 1000,
+          'cacheHits': mode.cache?.hits,
+          'cacheMisses': mode.cache?.misses,
+        });
+      }
+    }
+  }
+}
+
+void runStreamVerify(
+  Map<String, dynamic> spec,
+  EvalContext ctx,
+  List<int> shard,
+  void Function(Map<String, Object?>) emit,
+) {
+  final offsets = (spec['offsets'] as List).cast<int>();
+  final verifier = verifierFromSpec(spec);
+  final sr = ctx.sampleRate;
+  var job = 0;
+  for (final it in spec['items'] as List) {
+    final item = it as Map<String, dynamic>;
+    if (!inGroups(spec, item)) continue;
+    if (job++ % shard[1] != shard[0]) continue;
+    final id = item['id'] as String;
+    final midi = item['midi'] as int;
+    final seg = readF32(item['seg'] as String);
+    final onset = ((item['onsetS'] as num) * sr).round();
+    // Player early (+) or late (-) by up to 100 ms relative to the expected time.
+    final early = ((jitterMs(id, 201) - 100) * sr / 1000).round();
+    final expected = onset + early;
+    final a = math.max(0, expected - (0.15 * sr).round());
+    final b = math.min(seg.length, expected + (0.60 * sr).round());
+    for (final c in ctx.conditions) {
+      final z = ctx.render(seg, c, stableHash('$id/${c.name}/stream'));
+      final window = z.sublist(a, b);
+      final mode = gridMode(spec);
+      for (final d in offsets) {
+        final v = verifier.verify(window,
+            sampleRate: sr,
+            expectedMidi: midi + d,
+            absoluteStartSample: mode.global ? a : null,
+            onsetCache: mode.cache);
+        emit({
+          'id': id,
+          'group': item['group'],
+          'midi': midi,
+          'offset': d,
+          'cond': c.name,
+          'verdict': v.verdict.name,
+          'reason': v.reason.name,
+          'observedMidi': v.observedMidi,
+          'earlyMs': early * 1000 / sr,
         });
       }
     }

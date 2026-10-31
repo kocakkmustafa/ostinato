@@ -52,12 +52,17 @@ final class AttackLocator {
   final double? minRiseDb;
 
   /// Sample indices of the retained attacks, in time order.
-  List<int> attacks(List<double> samples, int sampleRate) {
+  /// [absoluteStartSample] / [cache]: see [OnsetDetector.detect] (E43).
+  List<int> attacks(List<double> samples, int sampleRate,
+      {int? absoluteStartSample, OnsetFrameCache? cache}) {
     final rise = minRiseDb;
     int index(Onset o) => (o.tUs * sampleRate / 1000000).round();
     final onsets = [
-      for (final o
-          in detector.detect(samples, sampleRate: sampleRate, tStartUs: 0))
+      for (final o in detector.detect(samples,
+          sampleRate: sampleRate,
+          tStartUs: 0,
+          absoluteStartSample: absoluteStartSample,
+          cache: cache))
         if (rise == null || levelRiseDb(samples, sampleRate, index(o)) >= rise)
           o,
     ];
@@ -123,8 +128,11 @@ final class AttackLocator {
     List<double> samples,
     int sampleRate, {
     required int requiredSamples,
+    int? absoluteStartSample,
+    OnsetFrameCache? cache,
   }) {
-    var found = attacks(samples, sampleRate);
+    var found = attacks(samples, sampleRate,
+        absoluteStartSample: absoluteStartSample, cache: cache);
     if (bufferStartCandidate &&
         (found.isEmpty || found.first > 0) &&
         _opensLoud(samples, sampleRate)) {

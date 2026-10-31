@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import '../dsp/fft.dart';
 import '../onset/attack_locator.dart';
+import '../onset/onset_detector.dart';
 import 'yin.dart';
 
 /// Per-instrument settings of [PreciseTuner]. Values are engineering choices
@@ -35,6 +36,10 @@ final class PreciseTunerProfile {
     this.adaptiveWindowPeriods = 40,
     this.minReadingWindowMs = 150,
     this.maxLateSpreadCents = 10,
+    this.adaptiveWindowMinMidi,
+    this.lateFraction = 0.5,
+    this.lateFractionOpen,
+    this.openMaxMidi = 64,
   });
 
   final String name;
@@ -82,12 +87,25 @@ final class PreciseTunerProfile {
   final double? maxLateSpreadCents;
 
   /// `disable…` switches an E41 option off (reproduces the E40 engine).
+  /// E43 arm W65 (null = all pitches): apply [adaptiveWindowPeriods] only
+  /// when the coarse pitch is at or above this MIDI note.
+  final double? adaptiveWindowMinMidi;
+
+  /// Share of readings (the latest ones, at least two) averaged by the
+  /// later-readings rule; E43 arm L uses [lateFractionOpen] for notes up to
+  /// [openMaxMidi] (open-string range) when set.
+  final double lateFraction;
+  final double? lateFractionOpen;
+  final int openMaxMidi;
+
   PreciseTunerProfile copyWith({
     double? maxAnalysisHz,
     double? adaptiveWindowPeriods,
     double? maxLateSpreadCents,
     bool disableAdaptiveWindow = false,
     bool disableLateReadings = false,
+    double? adaptiveWindowMinMidi,
+    double? lateFractionOpen,
   }) =>
       PreciseTunerProfile(
         name: name,
@@ -120,6 +138,11 @@ final class PreciseTunerProfile {
         maxLateSpreadCents: disableLateReadings
             ? null
             : maxLateSpreadCents ?? this.maxLateSpreadCents,
+        adaptiveWindowMinMidi:
+            adaptiveWindowMinMidi ?? this.adaptiveWindowMinMidi,
+        lateFraction: lateFraction,
+        lateFractionOpen: lateFractionOpen ?? this.lateFractionOpen,
+        openMaxMidi: openMaxMidi,
       );
 
   /// Six-string guitar, drop tunings included (D2 73 Hz → 60 Hz floor).
@@ -255,6 +278,8 @@ final class PreciseTuner {
     int? attackIndex,
     double? roomFloorDb,
     double? targetHz,
+    int? absoluteStartSample,
+    OnsetFrameCache? onsetCache,
   }) {
     if (sampleRate <= 0) throw ArgumentError('Invalid sample rate');
     for (final s in samples) {
@@ -268,7 +293,9 @@ final class PreciseTuner {
     var hop = (p.readingHopMs * sampleRate / 1000).round();
     final attack = attackIndex ??
         attackLocator.lastUsableAttack(samples, sampleRate,
-            requiredSamples: skip + win + hop * (p.minReadings - 1));
+            requiredSamples: skip + win + hop * (p.minReadings - 1),
+            absoluteStartSample: absoluteStartSample,
+            cache: onsetCache);
     if (attack == null) {
       return const TunerResult.refused(TunerRefusal.insufficientSamples);
     }
@@ -279,7 +306,12 @@ final class PreciseTuner {
     final periods = p.adaptiveWindowPeriods;
     if (periods != null && start >= 0 && start < end) {
       earlyCoarse = targetHz ?? _yinCoarse(samples, sampleRate, start, end);
-      if (earlyCoarse != null) {
+      final minMidi = p.adaptiveWindowMinMidi;
+      final highEnough = earlyCoarse != null &&
+          (minMidi == null ||
+              69 + 12 * math.log(earlyCoarse / referenceA4Hz) / math.ln2 >=
+                  minMidi - 0.5);
+      if (earlyCoarse != null && highEnough) {
         final ms = (periods * 1000 / earlyCoarse).clamp(
             p.minReadingWindowMs.toDouble(), p.readingWindowMs.toDouble());
         win = (ms * sampleRate / 1000).round();
@@ -347,8 +379,15 @@ final class PreciseTuner {
         return const TunerResult.refused(TunerRefusal.unstable);
       }
       // Time order, later half (at least two readings), trimmed from five up.
+      final refMidi = 69 + 12 * math.log(ref / referenceA4Hz) / math.ln2;
+      final open = p.lateFractionOpen;
+      final fraction = open != null && refMidi <= p.openMaxMidi + 0.5
+          ? open
+          : p.lateFraction;
+      final count = math.max(2, (readings.length * fraction).ceil());
       final late = [
-        for (final r in readings.sublist(readings.length ~/ 2))
+        for (final r in readings
+            .sublist(readings.length - math.min(count, readings.length)))
           _cents(r.f0Hz, ref)
       ]..sort();
       final lateKept =
