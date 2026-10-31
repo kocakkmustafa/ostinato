@@ -75,6 +75,27 @@ final class EvalContext {
   final List<Condition> conditions;
   final List<Float64List> irs;
 
+  /// Calibrated room floor for [c] (see PhoneChannel.noiseFloorDb), same IR
+  /// and noise seed as [render].
+  double floorDb(List<double> x, Condition c, int seed) {
+    if (c.clean) return -180;
+    final ir = c.reverb && irs.isNotEmpty ? irs[seed % irs.length] : null;
+    return PhoneChannel.noiseFloorDb(
+      x,
+      sampleRate,
+      PhoneChannelConfig(
+        impulseResponse: ir,
+        directToReverbDb: c.drrDb,
+        noise: c.noise,
+        snrDb: c.snrDb,
+        lowCutHz: c.lowCutHz,
+        lowCutOrder: c.lowCutOrder,
+        agc: c.agc,
+      ),
+      seed: seed + 1,
+    );
+  }
+
   /// Applies [c]; the IR (if any) is drawn deterministically from [seed].
   Float64List render(List<double> x, Condition c, int seed) {
     if (c.clean) return Float64List.fromList(x);
@@ -597,8 +618,12 @@ void runStreamTuner(
       final onset = ((item['onsetS'] as num) * sr / r).round();
       final end = math.min(y.length, ((item['endS'] as num) * sr / r).round());
       for (final c in ctx.conditions) {
-        final z = ctx.render(y, c, stableHash('$id/$shift/${c.name}/stream'));
+        final seed = stableHash('$id/$shift/${c.name}/stream');
+        final z = ctx.render(y, c, seed);
         final mode = gridMode(spec);
+        // E44: the app passes its calibrated room floor to every measurement.
+        final floor =
+            spec['roomFloor'] == 'calibrated' ? ctx.floorDb(y, c, seed) : null;
         TuningMeasurement? last;
         double? firstS;
         var n = 0, measured = 0;
@@ -608,6 +633,7 @@ void runStreamTuner(
           n++;
           final res = tuner.measure(z.sublist(a, t),
               sampleRate: sr,
+              roomFloorDb: floor,
               absoluteStartSample: mode.global ? a : null,
               onsetCache: mode.cache);
           if (res.measured) {
@@ -636,6 +662,7 @@ void runStreamTuner(
           'ms': sw.elapsedMicroseconds / 1000,
           'cacheHits': mode.cache?.hits,
           'cacheMisses': mode.cache?.misses,
+          'roomFloorDb': floor,
         });
       }
     }
@@ -666,13 +693,17 @@ void runStreamVerify(
     final a = math.max(0, expected - (0.15 * sr).round());
     final b = math.min(seg.length, expected + (0.60 * sr).round());
     for (final c in ctx.conditions) {
-      final z = ctx.render(seg, c, stableHash('$id/${c.name}/stream'));
+      final seed = stableHash('$id/${c.name}/stream');
+      final z = ctx.render(seg, c, seed);
       final window = z.sublist(a, b);
+      final floor =
+          spec['roomFloor'] == 'calibrated' ? ctx.floorDb(seg, c, seed) : null;
       final mode = gridMode(spec);
       for (final d in offsets) {
         final v = verifier.verify(window,
             sampleRate: sr,
             expectedMidi: midi + d,
+            roomFloorDb: floor,
             absoluteStartSample: mode.global ? a : null,
             onsetCache: mode.cache);
         emit({

@@ -110,6 +110,67 @@ final class PhoneChannel {
     return x;
   }
 
+  /// The room floor the app would calibrate before the note (E44): the same
+  /// noise as [apply] would add to [reference] (level set by the note's active
+  /// RMS and [PhoneChannelConfig.snrDb]), but with no note, through the same
+  /// low cut / AGC / limiter / quantiser, for [seconds]; returned as the median
+  /// of per-chunk RMS in dBFS. Mirrors `GuitarNoteObservationController`
+  /// calibration (median chunk level over `calibrationMs` = 2000; iOS tap
+  /// chunks are 2048 samples).
+  static double noiseFloorDb(
+    List<double> reference,
+    int sampleRate,
+    PhoneChannelConfig config, {
+    int seed = 1,
+    double seconds = 2,
+    int chunk = 2048,
+  }) {
+    final n = (seconds * sampleRate).round();
+    var x = Float64List(n);
+    if (config.noise != ChannelNoise.none) {
+      var ref = Float64List.fromList(reference);
+      final ir = config.impulseResponse;
+      if (ir != null && ir.isNotEmpty) {
+        final shaped =
+            shapeImpulseResponse(ir, sampleRate, config.directToReverbDb);
+        final wet = fftConvolve(ref, shaped.ir);
+        ref = Float64List.fromList(
+            wet.sublist(shaped.directIndex, shaped.directIndex + ref.length));
+      }
+      final noise = generateNoise(config.noise, n, sampleRate, seed);
+      final sig = activeRms(ref, sampleRate);
+      final nr = _rms(noise);
+      if (sig > 0 && nr > 0) {
+        final g = sig / nr / math.pow(10, config.snrDb / 20);
+        for (var i = 0; i < n; i++) {
+          x[i] = g * noise[i];
+        }
+      }
+    }
+    final fc = config.lowCutHz;
+    if (fc != null) {
+      x = butterworthHighPass(x, sampleRate, fc, config.lowCutOrder);
+    }
+    if (config.agc) x = _agcAndCompress(x, sampleRate, config);
+    for (var i = 0; i < n; i++) {
+      x[i] = _softLimit(x[i]);
+      if (config.quantize16) {
+        x[i] = (x[i] * 32767).roundToDouble() / 32767;
+      }
+    }
+    final levels = <double>[];
+    for (var s = 0; s + chunk <= n; s += chunk) {
+      var e = 0.0;
+      for (var i = s; i < s + chunk; i++) {
+        e += x[i] * x[i];
+      }
+      levels
+          .add(20 * math.log(math.max(math.sqrt(e / chunk), 1e-9)) / math.ln10);
+    }
+    levels.sort();
+    return levels.isEmpty ? -180 : levels[levels.length ~/ 2];
+  }
+
   /// Splits an IR into direct path (±2.5 ms around its peak) and tail, and
   /// rescales the tail so direct/tail energy equals [drrDb].
   static ({Float64List ir, int directIndex}) shapeImpulseResponse(

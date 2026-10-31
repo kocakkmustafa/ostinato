@@ -99,4 +99,21 @@ void main() {
           lessThanOrEqualTo(adaptive.measurement!.readings.length));
     }
   });
+
+  test('E44: calibrated noise floor sits at the noise, not the note', () {
+    final note = SyntheticString.pluck(
+        f0Hz: hz(45), sampleRate: sr, seconds: 2, seed: 1);
+    const quiet =
+        PhoneChannelConfig(noise: ChannelNoise.pink, snrDb: 35, lowCutHz: 100);
+    final floor = PhoneChannel.noiseFloorDb(note, sr, quiet, seed: 2);
+    final y = PhoneChannel.apply(note, sr, quiet, seed: 2);
+    final noteDb = 20 * math.log(PhoneChannel.activeRms(y, sr)) / math.ln10;
+    expect(noteDb - floor, closeTo(35, 3));
+    expect(PhoneChannel.noiseFloorDb(note, sr, const PhoneChannelConfig()),
+        lessThan(-150));
+    // The tuner refuses a buffer whose segment is below floor + 6 dB.
+    expect(
+        PreciseTuner().measure(y, sampleRate: sr, roomFloorDb: noteDb).refusal,
+        TunerRefusal.tooQuiet);
+  });
 }
