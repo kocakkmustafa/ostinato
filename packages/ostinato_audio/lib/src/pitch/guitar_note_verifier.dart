@@ -14,6 +14,7 @@ enum NoteVerdictReason {
   matched,
   octaveResolvedToExpected,
   otherNote,
+  fifthResolved,
   otherOctave,
   invalidSamples,
   insufficientSamples,
@@ -44,6 +45,8 @@ final class NoteVerifierConfig {
     this.maxPartials = 8,
     this.maxAnalysisHz = 5000,
     this.minLevelAboveFloorDb = 6,
+    this.fifthRival = false,
+    this.fifthUniqueRatio = 0.3,
   });
 
   final int skipAfterOnsetMs, analysisMs, minAnalysisMs, yinWindowMs;
@@ -54,6 +57,14 @@ final class NoteVerifierConfig {
   final double maxExpectedToObservedShare, partialToleranceCents;
   final int maxPartials;
   final double maxAnalysisHz, minLevelAboveFloorDb;
+
+  /// E41 arm F: when observed and expected are a fifth apart (7 or 19
+  /// semitones) their partials overlap (3:2), so "explained power" cannot
+  /// separate them. Compare instead the partials each note does *not* share
+  /// with the other: "different note" when the expected note's own partials
+  /// carry at most [fifthUniqueRatio] of the observed note's own.
+  final bool fifthRival;
+  final double fifthUniqueRatio;
 }
 
 final class NoteVerification {
@@ -200,6 +211,15 @@ final class GuitarNoteVerifier {
           : result(NoteVerdict.differentNote, NoteVerdictReason.otherOctave);
     }
 
+    final semitones = (centsFromExpected / 100).round().abs();
+    if (c.fifthRival && (semitones == 7 || semitones == 19)) {
+      final ownObserved = _uniquePower(spec, binHz, observed, expectedHz);
+      final ownExpected = _uniquePower(spec, binHz, expectedHz, observed);
+      if (ownObserved > 0 && ownExpected <= c.fifthUniqueRatio * ownObserved) {
+        return result(
+            NoteVerdict.differentNote, NoteVerdictReason.fifthResolved);
+      }
+    }
     final total = _bandPower(spec, binHz, c.minHz * 0.9, c.maxAnalysisHz);
     if (total <= 0) return hear(NoteVerdictReason.ambiguous);
     final explainedObserved = _harmonicPower(spec, binHz, observed) / total;
@@ -223,6 +243,24 @@ final class GuitarNoteVerifier {
     for (var n = 1; n <= config.maxPartials; n++) {
       final hz = _partialHz(n, f0);
       if (hz > config.maxAnalysisHz) break;
+      p += _partialBand(spec, binHz, hz, f0);
+    }
+    return p;
+  }
+
+  /// Power at partials 1..maxPartials of [f0] that do not coincide (within
+  /// the partial tolerance) with any partial of [rival].
+  double _uniquePower(Float64List spec, double binHz, double f0, double rival) {
+    final r = math.pow(2, config.partialToleranceCents / 1200).toDouble();
+    var p = 0.0;
+    for (var n = 1; n <= config.maxPartials; n++) {
+      final hz = _partialHz(n, f0);
+      if (hz > config.maxAnalysisHz) break;
+      final m = (hz / rival).round();
+      if (m >= 1) {
+        final ratio = hz / _partialHz(m, rival);
+        if (ratio <= r && ratio >= 1 / r) continue; // shared partial
+      }
       p += _partialBand(spec, binHz, hz, f0);
     }
     return p;

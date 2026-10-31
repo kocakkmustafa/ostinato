@@ -27,7 +27,23 @@ final class AttackLocator {
     this.detector = const OnsetDetector(),
     this.minRelativeStrength = 0.2,
     this.minRiseDb = 0.5,
+    this.bufferStartCandidate = false,
+    this.startLoudWithinDb = 6,
+    this.maxBelowLoudestDb,
   });
+
+  /// E41 arm A1: when the buffer opens loud (first 50 ms within
+  /// [startLoudWithinDb] of the loudest 50 ms), index 0 is also a candidate:
+  /// a pluck that landed exactly at the buffer start has no frame before it
+  /// for the flux detector to compare with.
+  final bool bufferStartCandidate;
+  final double startLoudWithinDb;
+
+  /// E41 arm A2 (null = off): a candidate is kept only if its level (10–110 ms
+  /// after it) is within this many dB of the loudest candidate's. Noise that
+  /// AGC lifts after a note ends is spectral change with a rising level too,
+  /// but far quieter than a pluck.
+  final double? maxBelowLoudestDb;
 
   final OnsetDetector detector;
   final double minRelativeStrength;
@@ -72,6 +88,35 @@ final class AttackLocator {
         rmsDb(index - ms(60), index - ms(10));
   }
 
+  static double _postLevelDb(List<double> x, int sampleRate, int index) {
+    final a = index + (0.01 * sampleRate).round();
+    final b = math.min(x.length, index + (0.11 * sampleRate).round());
+    if (b <= a) return -160;
+    var e = 0.0;
+    for (var i = a; i < b; i++) {
+      e += x[i] * x[i];
+    }
+    return 10 * math.log(math.max(e / (b - a), 1e-16)) / math.ln10;
+  }
+
+  bool _opensLoud(List<double> x, int sampleRate) {
+    final frame = math.max(1, (0.05 * sampleRate).round());
+    if (x.length < frame) return false;
+    double db(int s) {
+      var e = 0.0;
+      for (var i = s; i < s + frame; i++) {
+        e += x[i] * x[i];
+      }
+      return 10 * math.log(math.max(e / frame, 1e-16)) / math.ln10;
+    }
+
+    var loudest = -160.0;
+    for (var s = 0; s + frame <= x.length; s += frame) {
+      loudest = math.max(loudest, db(s));
+    }
+    return db(0) >= loudest - startLoudWithinDb;
+  }
+
   /// The attack to measure from, or null when attacks exist but none leaves
   /// [requiredSamples] (the caller reports "not enough audio").
   int? lastUsableAttack(
@@ -79,7 +124,23 @@ final class AttackLocator {
     int sampleRate, {
     required int requiredSamples,
   }) {
-    final found = attacks(samples, sampleRate);
+    var found = attacks(samples, sampleRate);
+    if (bufferStartCandidate &&
+        (found.isEmpty || found.first > 0) &&
+        _opensLoud(samples, sampleRate)) {
+      found = [0, ...found];
+    }
+    final below = maxBelowLoudestDb;
+    if (below != null && found.length > 1) {
+      final levels = [
+        for (final i in found) _postLevelDb(samples, sampleRate, i)
+      ];
+      final loudest = levels.reduce(math.max);
+      found = [
+        for (var k = 0; k < found.length; k++)
+          if (levels[k] >= loudest - below) found[k],
+      ];
+    }
     if (found.isEmpty) {
       return samples.length >= requiredSamples ? 0 : null;
     }

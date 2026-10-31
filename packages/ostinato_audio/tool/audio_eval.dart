@@ -226,6 +226,53 @@ int? labelOnsetIndex(
   return (s * sampleRate).round();
 }
 
+/// E41 arm options from the spec; absent keys keep the E40 engine.
+AttackLocator locatorFromSpec(Map<String, dynamic> spec) {
+  final o = spec['locator'] as Map<String, dynamic>? ?? const {};
+  return AttackLocator(
+    bufferStartCandidate: o['bufferStartCandidate'] as bool? ?? false,
+    maxBelowLoudestDb: (o['maxBelowLoudestDb'] as num?)?.toDouble(),
+  );
+}
+
+PreciseTuner tunerFromSpec(
+    Map<String, dynamic> spec, PreciseTunerProfile profile) {
+  final o = spec['tunerOptions'] as Map<String, dynamic>? ?? const {};
+  return PreciseTuner(
+    profile: profile.copyWith(
+      maxAnalysisHz: (o['maxAnalysisHz'] as num?)?.toDouble(),
+      adaptiveWindowPeriods: (o['adaptiveWindowPeriods'] as num?)?.toDouble(),
+      maxLateSpreadCents: (o['maxLateSpreadCents'] as num?)?.toDouble(),
+    ),
+    attackLocator: locatorFromSpec(spec),
+  );
+}
+
+GuitarNoteVerifier verifierFromSpec(Map<String, dynamic> spec) {
+  final o = spec['verifierOptions'] as Map<String, dynamic>? ?? const {};
+  return GuitarNoteVerifier(
+    config: NoteVerifierConfig(fifthRival: o['fifthRival'] as bool? ?? false),
+    attackLocator: locatorFromSpec(spec),
+  );
+}
+
+/// Optional dataset-cut correction (E41 arm P): `padGroups: {group: s}`
+/// prepends s seconds of digital silence (the channel then adds its noise).
+Float64List readItem(
+    Map<String, dynamic> spec, Map<String, dynamic> item, String key, int sr) {
+  final x = readF32(item[key] as String);
+  final pad = (spec['padGroups'] as Map<String, dynamic>?)?[item['group']];
+  if (pad == null) return x;
+  final n = ((pad as num) * sr).round();
+  return Float64List(n + x.length)..setRange(n, n + x.length, x);
+}
+
+/// `groups: [...]` restricts a run to those item groups (null = all).
+bool inGroups(Map<String, dynamic> spec, Map<String, dynamic> item) {
+  final g = spec['groups'] as List?;
+  return g == null || g.contains(item['group']);
+}
+
 double wrapCents(double c) => c - (c / 1200).round() * 1200;
 double centsOf(double a, double b) => 1200 * math.log(a / b) / math.ln2;
 double midiHz(num midi) => 440 * math.pow(2, (midi - 69) / 12).toDouble();
@@ -260,6 +307,7 @@ Map<String, Object?> measurementRow(TunerResult r) {
         ? null
         : m.readings.where((e) => e.fundamentalFound).length /
             m.readings.length,
+    'fromLate': m?.fromLateReadings,
   };
 }
 
@@ -309,7 +357,7 @@ void runSynthTuner(
         );
         for (final c in ctx.conditions) {
           final y = ctx.render(x, c, seed + stableHash(c.name));
-          final r = PreciseTuner(profile: profile)
+          final r = tunerFromSpec(spec, profile)
               .measure(y, sampleRate: ctx.sampleRate);
           final m = r.measurement;
           final yinHz = baselineYinHz(y, ctx.sampleRate, profile);
@@ -348,15 +396,18 @@ void runRealTuner(
   var job = 0;
   for (final it in spec['items'] as List) {
     final item = it as Map<String, dynamic>;
+    if (!inGroups(spec, item)) continue;
     if (job++ % shard[1] != shard[0]) continue;
     final id = item['id'] as String;
     final profile = profileNamed(item['profile'] as String);
-    final tuner = PreciseTuner(profile: profile);
-    final x = readF32(item['raw'] as String);
+    final tuner = tunerFromSpec(spec, profile);
+    final x = readItem(spec, item, 'raw', ctx.sampleRate);
     final refRaw = item['refRaw'] as String?;
     final onset = labelOnsetIndex(spec, item, ctx.sampleRate);
-    final ref = tuner.measure(refRaw == null ? x : readF32(refRaw),
-        sampleRate: ctx.sampleRate, attackIndex: onset);
+    final ref = tuner.measure(
+        refRaw == null ? x : readItem(spec, item, 'refRaw', ctx.sampleRate),
+        sampleRate: ctx.sampleRate,
+        attackIndex: onset);
     final refF0 = ref.measurement?.f0Hz;
     final base = {
       'id': id,
@@ -405,7 +456,7 @@ void runVerify(
   void Function(Map<String, Object?>) emit,
 ) {
   final offsets = (spec['offsets'] as List).cast<int>();
-  final verifier = GuitarNoteVerifier();
+  final verifier = verifierFromSpec(spec);
   final baselineJson = spec['baselineObserverConfig'] as String?;
   final observer = baselineJson == null
       ? null
@@ -414,10 +465,11 @@ void runVerify(
   var job = 0;
   for (final it in spec['items'] as List) {
     final item = it as Map<String, dynamic>;
+    if (!inGroups(spec, item)) continue;
     if (job++ % shard[1] != shard[0]) continue;
     final id = item['id'] as String;
     final midi = item['midi'] as int;
-    final x = readF32(item['raw'] as String);
+    final x = readItem(spec, item, 'raw', ctx.sampleRate);
     for (final c in ctx.conditions) {
       final z = ctx.render(x, c, stableHash('$id/${c.name}'));
       // One attack per rendered recording: the dataset onset (label mode) or

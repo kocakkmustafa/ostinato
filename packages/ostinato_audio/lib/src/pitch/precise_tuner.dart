@@ -32,6 +32,9 @@ final class PreciseTunerProfile {
     this.yinThreshold = 0.15,
     this.minPeriodicity = 0.5,
     this.octaveOddPowerRatio = 0.1,
+    this.adaptiveWindowPeriods,
+    this.minReadingWindowMs = 150,
+    this.maxLateSpreadCents,
   });
 
   final String name;
@@ -65,6 +68,53 @@ final class PreciseTunerProfile {
   /// Power share the odd partials of f/2 need before an octave-high coarse
   /// estimate is moved down an octave.
   final double octaveOddPowerRatio;
+
+  /// E41 arm W1 (null = off): reading window of this many periods of the
+  /// coarse f0, between [minReadingWindowMs] and [readingWindowMs]; the hop
+  /// shrinks in proportion. High notes decay fast and get more readings.
+  final double? adaptiveWindowPeriods;
+  final int minReadingWindowMs;
+
+  /// E41 arm U (null = off): when readings spread more than [maxSpreadCents]
+  /// but no more than this, report the trimmed mean of the *later* half of
+  /// the readings (the string has settled) instead of refusing. Wider spread
+  /// is still "could not measure".
+  final double? maxLateSpreadCents;
+
+  PreciseTunerProfile copyWith({
+    double? maxAnalysisHz,
+    double? adaptiveWindowPeriods,
+    double? maxLateSpreadCents,
+  }) =>
+      PreciseTunerProfile(
+        name: name,
+        minHz: minHz,
+        maxHz: maxHz,
+        readingWindowMs: readingWindowMs,
+        defaultB: defaultB,
+        maxB: maxB,
+        skipAfterAttackMs: skipAfterAttackMs,
+        maxSegmentMs: maxSegmentMs,
+        readingHopMs: readingHopMs,
+        minReadings: minReadings,
+        maxPartials: maxPartials,
+        maxAnalysisHz: maxAnalysisHz ?? this.maxAnalysisHz,
+        partialSearchCents: partialSearchCents,
+        minPartialSnrDb: minPartialSnrDb,
+        minPartials: minPartials,
+        minPartialsForB: minPartialsForB,
+        maxSpreadCents: maxSpreadCents,
+        maxPartialResidualCents: maxPartialResidualCents,
+        minLevelAboveFloorDb: minLevelAboveFloorDb,
+        zeroPadFactor: zeroPadFactor,
+        yinThreshold: yinThreshold,
+        minPeriodicity: minPeriodicity,
+        octaveOddPowerRatio: octaveOddPowerRatio,
+        adaptiveWindowPeriods:
+            adaptiveWindowPeriods ?? this.adaptiveWindowPeriods,
+        minReadingWindowMs: minReadingWindowMs,
+        maxLateSpreadCents: maxLateSpreadCents ?? this.maxLateSpreadCents,
+      );
 
   /// Six-string guitar, drop tunings included (D2 73 Hz → 60 Hz floor).
   static const guitar = PreciseTunerProfile(
@@ -131,7 +181,12 @@ final class TuningMeasurement {
     required this.spreadCents,
     required this.readings,
     this.centsFromTarget,
+    this.fromLateReadings = false,
   });
+
+  /// True when the value is the later readings' mean because the full set
+  /// spread more than the strict limit (E41 arm U).
+  final bool fromLateReadings;
 
   /// Inharmonicity-free fundamental (f_n = n·f0·sqrt(1 + B·n²)).
   final double f0Hz;
@@ -203,8 +258,8 @@ final class PreciseTuner {
     }
     final p = profile;
     final skip = (p.skipAfterAttackMs * sampleRate / 1000).round();
-    final win = (p.readingWindowMs * sampleRate / 1000).round();
-    final hop = (p.readingHopMs * sampleRate / 1000).round();
+    var win = (p.readingWindowMs * sampleRate / 1000).round();
+    var hop = (p.readingHopMs * sampleRate / 1000).round();
     final attack = attackIndex ??
         attackLocator.lastUsableAttack(samples, sampleRate,
             requiredSamples: skip + win + hop * (p.minReadings - 1));
@@ -214,6 +269,20 @@ final class PreciseTuner {
     final start = attack + skip;
     final end = math.min(
         samples.length, start + (p.maxSegmentMs * sampleRate / 1000).round());
+    double? earlyCoarse;
+    final periods = p.adaptiveWindowPeriods;
+    if (periods != null && start >= 0 && start < end) {
+      earlyCoarse = targetHz ?? _yinCoarse(samples, sampleRate, start, end);
+      if (earlyCoarse != null) {
+        final ms = (periods * 1000 / earlyCoarse).clamp(
+            p.minReadingWindowMs.toDouble(), p.readingWindowMs.toDouble());
+        win = (ms * sampleRate / 1000).round();
+        hop = math.max(
+            1,
+            (p.readingHopMs * ms / p.readingWindowMs * sampleRate / 1000)
+                .round());
+      }
+    }
     if (start < 0 || end - start < win + hop * (p.minReadings - 1)) {
       return const TunerResult.refused(TunerRefusal.insufficientSamples);
     }
@@ -235,7 +304,7 @@ final class PreciseTuner {
     if (targetHz != null) {
       coarse = _harmonicSearch(spectra.first, binHz, targetHz, 150);
     } else {
-      final yin = _yinCoarse(samples, sampleRate, start, end);
+      final yin = earlyCoarse ?? _yinCoarse(samples, sampleRate, start, end);
       if (yin == null) return const TunerResult.refused(TunerRefusal.noPitch);
       coarse = _resolveOctave(spectra.first, binHz, yin);
       coarse = _harmonicSearch(spectra.first, binHz, coarse, 50);
@@ -262,12 +331,25 @@ final class PreciseTuner {
     final cs = [for (final r in readings) _cents(r.f0Hz, ref)]..sort();
     final kept = cs.length >= 5 ? cs.sublist(1, cs.length - 1) : cs;
     final spread = kept.last - kept.first;
-    if (spread > p.maxSpreadCents) {
-      return const TunerResult.refused(TunerRefusal.unstable);
-    }
-    final combinedCents = cs.length >= 5
+    var combinedCents = cs.length >= 5
         ? kept.reduce((a, b) => a + b) / kept.length
         : _median(cs);
+    var fromLate = false;
+    if (spread > p.maxSpreadCents) {
+      final lateLimit = p.maxLateSpreadCents;
+      if (lateLimit == null || spread > lateLimit) {
+        return const TunerResult.refused(TunerRefusal.unstable);
+      }
+      // Time order, later half (at least two readings), trimmed from five up.
+      final late = [
+        for (final r in readings.sublist(readings.length ~/ 2))
+          _cents(r.f0Hz, ref)
+      ]..sort();
+      final lateKept =
+          late.length >= 5 ? late.sublist(1, late.length - 1) : late;
+      combinedCents = lateKept.reduce((a, b) => a + b) / lateKept.length;
+      fromLate = true;
+    }
     final f0 = ref * math.pow(2, combinedCents / 1200);
     final midiExact = 69 + 12 * math.log(f0 / referenceA4Hz) / math.ln2;
     final midi = midiExact.round();
@@ -280,6 +362,7 @@ final class PreciseTuner {
           targetHz == null ? null : _cents(f0.toDouble(), targetHz),
       spreadCents: spread,
       readings: List.unmodifiable(readings),
+      fromLateReadings: fromLate,
     ));
   }
 
