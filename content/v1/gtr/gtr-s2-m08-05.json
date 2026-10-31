@@ -1,0 +1,75 @@
+{
+  "id": "gtr-s2-m08-05",
+  "title": { "en": "Keep fingers close", "tr": "Parmakları yakın tut" },
+  "goal": {
+    "en": "Plays 1-2-3-4 on string 4 at ♩=70 while keeping the unused fingers close to the strings.",
+    "tr": "4. telde 1-2-3-4'ü ♩=70'te çalarken kullanılmayan parmakları tellere yakın tutar."
+  },
+  "explanation": [
+    {
+      "en": "A finger that lifts far away needs more time to come back. Keep every fingertip a few millimetres above the strings.",
+      "tr": "Uzağa kalkan parmak geri dönmek için daha çok zaman ister. Her parmak ucunu tellerin birkaç milimetre üstünde tut."
+    },
+    {
+      "en": "Watch finger 4: it tends to fly up and curl back.",
+      "tr": "4. parmağı izle: yukarı fırlayıp geriye kıvrılmaya eğilimlidir."
+    },
+    {
+      "en": "Use a mirror to see the fretting hand from the side. The camera is not used here; you check yourself.",
+      "tr": "Sol eli yandan görmek için ayna kullan. Burada kamera kullanılmaz; kendin kontrol edersin."
+    },
+    {
+      "en": "Lift each finger only enough to release the string.",
+      "tr": "Her parmağı yalnız teli bırakacak kadar kaldır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "D♯3 E3 F3 F♯3 up and back down on string 4, quarter notes with a click at ♩=70 and ♩=45.",
+      "tr": "4. telde Re♯3 Mi3 Fa3 Fa♯3 çıkış ve iniş, klikle dörtlük; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the four bars in quarter notes with the click at ♩=70 while you watch your fretting hand in a mirror. The microphone checks notes and timing. Then tick the checklist.",
+      "tr": "Sol elini aynada izlerken dört ölçüyü klikle ♩=70'te dörtlük olarak çal. Mikrofon notaları ve zamanlamayı kontrol eder. Sonra kontrol listesini işaretle."
+    },
+    "sequence": "D♯3 E3 F3 F♯3 | F♯3 F3 E3 D♯3 | D♯3 E3 F3 F♯3 | F♯3 F3 E3 D♯3",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "In the mirror, my unused fingers stayed close to the strings.", "tr": "Aynada kullanmadığım parmaklar tellere yakın kaldı." },
+    { "en": "Finger 4 did not fly up while finger 1 played.", "tr": "1. parmak çalarken 4. parmak yukarı fırlamadı." },
+    { "en": "I lifted each finger just enough to release the string.", "tr": "Her parmağı yalnız teli bırakacak kadar kaldırdım." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The finger starts from too far away. Watch it in the mirror and keep it hovering over its fret.",
+        "tr": "Parmak çok uzaktan geliyor. Aynada izle ve onu perdesinin üstünde beklet."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "A hovering finger is touching the string and muting it. Keep it close, but not on the string.",
+        "tr": "Bekleyen parmak tele değip onu susturuyor. Yakın tut, ama telin üstüne koyma."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play at ♩=50 and watch only finger 4 in the mirror.",
+    "tr": "♩=50'de çal ve aynada yalnız 4. parmağı izle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}
