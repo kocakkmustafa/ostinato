@@ -238,6 +238,31 @@ internal class AudioCaptureStreamer(
         }
         coordinator.playCue(owner, id, samples, rate, methodReply(result))
       }
+      "startMetronome" -> {
+        val id = args?.get("attemptId") as? String
+        val rate = args?.get("sampleRate") as? Int
+        val framesPerBeat = args?.get("framesPerBeat") as? Int
+        val beatsPerBar = args?.get("beatsPerBar") as? Int
+        val accent = args?.get("accent") as? DoubleArray
+        val beat = args?.get("beat") as? DoubleArray
+        val leadInMs = args?.get("leadInMs") as? Int
+        if (id == null || rate == null || framesPerBeat == null || beatsPerBar == null ||
+          accent == null || beat == null || leadInMs == null || args?.size != 7) {
+          result.error("bad_args", null, null); return
+        }
+        if (id != ids.current || sink == null) {
+          result.error("playback_unavailable", null, null); return
+        }
+        val spec = MetronomeStreamSpec(rate, framesPerBeat, beatsPerBar,
+          FloatArray(accent.size) { accent[it].toFloat() },
+          FloatArray(beat.size) { beat[it].toFloat() }, leadInMs)
+        coordinator.startMetronome(owner, id, spec, methodReply(result))
+      }
+      "stopMetronome" -> {
+        val id = args?.get("attemptId") as? String
+        if (id == null) { result.error("bad_args", null, null); return }
+        coordinator.stopMetronome(owner, id, methodReply(result))
+      }
       "stop" -> {
         val id = args?.get("attemptId") as? String
         if (id == null) result.error("bad_args", null, null)

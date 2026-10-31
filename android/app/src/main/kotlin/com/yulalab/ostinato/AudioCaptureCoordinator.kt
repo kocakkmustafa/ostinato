@@ -43,6 +43,11 @@ internal class AudioCaptureCoordinator(
     fun unwatchRoute()
     /** Queues mono PCM16 at [sampleRate]. Must not block the caller for the cue's duration. */
     fun playCue(pcm: ShortArray): Unit = throw UnsupportedOperationException("playback_unavailable")
+    /** F2.2: starts (or replaces) the click stream. [onAnchor] receives (frame-0 presentation time
+     * in µs on the capture clock, extra output latency µs) once the output timestamp is known. */
+    fun startMetronome(spec: MetronomeStreamSpec, onAnchor: (Long, Long) -> Unit): Unit =
+      throw UnsupportedOperationException("playback_unavailable")
+    fun stopMetronome() {}
     /** True while app output was (or may still acoustically be) audible. Read on the reader thread. */
     fun playbackActive(): Boolean = false
     /** Audio focus loss (call, another app). The coordinator closes the attempt. */
@@ -442,6 +447,55 @@ internal class AudioCaptureCoordinator(
     } catch (_: Throwable) {
       response.error("playback_failed")
     }
+  }
+
+  /** F2.2: the click stream lives inside the caller's own running duplex attempt; releasing the
+   * port (every close path) stops it. The anchor is emitted on the attempt's event sink. */
+  fun startMetronome(owner: Any, id: String, spec: MetronomeStreamSpec, reply: Reply) {
+    val response = ReplyGate(reply)
+    val (attempt, port) = synchronized(gate) {
+      val attempt = current
+      if (!validId(id) || bindings[owner]?.contains(id) != true || attempt == null ||
+        attempt.owner !== owner || attempt.id != id || attempt.phase != "running" ||
+        !isLiveLocked(attempt)) {
+        response.error("playback_unavailable"); return
+      }
+      if (attempt.mode != CaptureSessionMode.PLAY_AND_RECORD) {
+        response.error("playback_not_enabled"); return
+      }
+      val held = attempt.port
+      if (held == null) { response.error("playback_unavailable"); return }
+      if (spec.sampleRate != attempt.rate || spec.sampleRate != held.sampleRate) {
+        response.error("unsupported_sample_rate"); return
+      }
+      if (!spec.isValid) { response.error("bad_args"); return }
+      attempt to held
+    }
+    try {
+      port.startMetronome(spec) { anchorUs, latencyUs ->
+        dispatch.main {
+          emit(attempt, mapOf("type" to "metronomeAnchor", "attemptId" to attempt.id,
+            "anchorUs" to anchorUs, "sampleRate" to spec.sampleRate,
+            "framesPerBeat" to spec.framesPerBeat, "outputLatencyUs" to latencyUs))
+        }
+      }
+      response.success()
+    } catch (_: Throwable) {
+      response.error("playback_failed")
+    }
+  }
+
+  fun stopMetronome(owner: Any, id: String, reply: Reply) {
+    val response = ReplyGate(reply)
+    val port = synchronized(gate) {
+      val attempt = current
+      if (attempt == null || attempt.owner !== owner || attempt.id != id) {
+        response.success(); return
+      }
+      attempt.port
+    }
+    try { port?.stopMetronome() } catch (_: Throwable) {}
+    response.success()
   }
 
   /** Process lifecycle and engine replacement, never a Dart MethodChannel. */
