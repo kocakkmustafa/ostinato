@@ -1,0 +1,90 @@
+{
+  "id": "gtr-s2-m05-01",
+  "title": { "en": "One-minute changes: the method", "tr": "Bir dakika geçişleri: yöntem" },
+  "goal": {
+    "en": "Changes between Em and Am at least 20 times in 60 seconds and tracks the count over sessions.",
+    "tr": "Em ile Am arasında 60 saniyede en az 20 kez geçer ve sayıyı oturumlar boyunca izler."
+  },
+  "explanation": [
+    {
+      "en": "A one-minute change is simple: strum one chord once, change, strum the next. The app counts every clean change.",
+      "tr": "Bir dakika geçişi basittir: bir akora bir kez vur, geç, sonrakine vur. Uygulama her temiz geçişi sayar."
+    },
+    {
+      "en": "Lift the fingers only a little above the strings; small moves are fast moves.",
+      "tr": "Parmakları tellerin yalnız biraz üstüne kaldır; küçük hareket hızlı harekettir."
+    },
+    {
+      "en": "Look at the next chord's spot before you move, then move all fingers together.",
+      "tr": "Hareket etmeden önce sonraki akorun yerine bak, sonra bütün parmakları birlikte taşı."
+    },
+    {
+      "en": "Em to Am: keep fingers 2 and 3 in the same shape and move them one string toward the floor. Then add finger 1 on string 2, fret 1.",
+      "tr": "Em'den Am'ye: 2. ve 3. parmağı aynı biçimde tut ve bir tel aşağı, yere doğru taşı. Sonra 1. parmağı 2. telin 1. perdesine ekle."
+    },
+    {
+      "en": "The app keeps your count for each chord pair. Repeat on later days and compare the numbers.",
+      "tr": "Uygulama her akor çifti için sayını saklar. Sonraki günlerde tekrarla ve sayıları karşılaştır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Em and Am, one strum each, changing every two beats at ♩=60, then at ♩=40.",
+      "tr": "Em ve Am, her birine bir vuruş, ♩=60'ta iki vuruşta bir geçiş, sonra ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Change back and forth for 60 seconds. Each change counts when every string of the new chord is heard. Strum each chord once, then change.",
+      "tr": "60 saniye boyunca ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır. Her akora bir kez vur, sonra geç."
+    },
+    "sequence": "Em ↔ Am · 60 s",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 20 changes in 60 seconds. A change counts when every string of the new chord is heard.",
+        "tr": "60 saniyede en az 20 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I strummed once per chord and changed without stopping.", "tr": "Her akora bir kez vurdum ve durmadan geçtim." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Lift the fingers less and look at the next spot first; aim for even changes, not fast ones.",
+        "tr": "Parmakları daha az kaldır ve önce sonraki yere bak; hızlı değil düzenli geçişe odaklan."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Am starts on string 5. Aim the strum at string 5 and let string 6 stay silent.",
+        "tr": "Am 5. telden başlar. Vuruşu 5. tele yönelt, 6. tel sessiz kalsın."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Strum a little firmer and keep the phone about one metre away.",
+        "tr": "Biraz daha net vur ve telefonu yaklaşık bir metre uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise the move silently ten times, then try 30 seconds before the full minute.",
+    "tr": "Hareketi sessizce on kez çalış; tam dakikadan önce 30 saniye dene."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

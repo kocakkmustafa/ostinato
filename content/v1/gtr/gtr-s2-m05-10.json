@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s2-m05-10",
+  "title": { "en": "Three chords: A–D–E", "tr": "Üç akor: A–D–E" },
+  "goal": {
+    "en": "Plays an 8-bar I–IV–V progression in A with the accompaniment at ♩=70.",
+    "tr": "La tonunda 8 ölçülük I–IV–V ilerlemesini eşlikle ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "In the key of A, A is chord I, D is chord IV and E is chord V. It is the same pattern as G–C–D, moved to a new key.",
+      "tr": "La tonunda A, I. akor; D, IV. akor; E ise V. akordur. G–C–D ile aynı kalıptır, yalnız yeni bir tona taşınmıştır."
+    },
+    {
+      "en": "A to D uses the guide finger on string 2. E to A keeps the hand at fret 2.",
+      "tr": "A'dan D'ye 2. teldeki kılavuz parmakla geçilir. E'den A'ya geçişte el 2. perdede kalır."
+    },
+    {
+      "en": "D to E is new: lift all three fingers together and land the E shape as one unit.",
+      "tr": "D'den E'ye geçiş yenidir: üç parmağı birlikte kaldır ve E biçimini tek parça olarak koy."
+    },
+    {
+      "en": "Each chord starts on a different string: A on 5, D on 4, E on 6.",
+      "tr": "Her akor farklı bir telden başlar: A 5. telden, D 4. telden, E 6. telden."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Original bass and drum loop with the A–D–E chart in quarter-note strums, at ♩=70 and ♩=50.",
+      "tr": "Dörtlük vuruşlu A–D–E çizelgesiyle özgün bas ve davul döngüsü, ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 8 bars with the accompaniment, four downstrokes per bar. Headphones help the microphone hear only your guitar.",
+      "tr": "8 ölçüyü eşlikle, ölçü başına dört aşağı vuruşla çal. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: A | D | A | E | A | D | E | A",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The D–E change is the slowest. Loop only that bar pair, then play the full chart.",
+        "tr": "En yavaş geçiş D–E. Yalnız bu iki ölçüyü döngüle, sonra bütün çizelgeyi çal."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "A starts on string 5. Aim the strum at string 5 and let string 6 stay silent.",
+        "tr": "A 5. telden başlar. Vuruşu 5. tele yönelt, 6. tel sessiz kalsın."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones or lower the accompaniment, and strum a little firmer.",
+        "tr": "Kulaklık kullan ya da eşliğin sesini kıs ve biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play at ♩=50 with two strums per bar on beats 1 and 3.",
+    "tr": "♩=50'de ölçü başına 1. ve 3. vuruşta iki vuruşla çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

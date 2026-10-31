@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s2-m05-13",
+  "title": { "en": "Changes checkpoint", "tr": "Geçiş kontrol noktası" },
+  "goal": {
+    "en": "Changes between eight chords on time in an original 16-bar chart at ♩=80.",
+    "tr": "Özgün 16 ölçülük çizelgede sekiz akor arasında ♩=80'de zamanında geçer."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "The chart uses eight chords: G, C, D, Em, Am, A, E and Dm. Each chord lasts one bar.",
+      "tr": "Çizelge sekiz akor kullanır: G, C, D, Em, Am, A, E ve Dm. Her akor bir ölçü sürer."
+    },
+    {
+      "en": "Read it as four lines of four bars. Line 1 is in G, line 2 brings in Em and Am, line 3 is in A, line 4 is in A minor.",
+      "tr": "Çizelgeyi dört ölçülük dört satır olarak oku. 1. satır Sol tonunda, 2. satır Em ve Am'yi getirir, 3. satır La tonunda, 4. satır La minördedir."
+    },
+    {
+      "en": "Use what you practised: anchor and guide fingers, and preparing on beat 4.",
+      "tr": "Çalıştıklarını kullan: sabit ve kılavuz parmak, 4. vuruşta hazırlanmak."
+    },
+    {
+      "en": "If you miss a chord, keep the strumming hand moving and join the next bar on beat 1.",
+      "tr": "Bir akoru kaçırırsan sağ eli durdurma ve sonraki ölçüye 1. vuruşta katıl."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Original bass and drum loop with the 16-bar chart in quarter-note strums, at ♩=80 and ♩=55.",
+      "tr": "Dörtlük vuruşlu 16 ölçülük çizelgeyle özgün bas ve davul döngüsü, ♩=80 ve ♩=55."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 16 bars with the accompaniment at ♩=80, four downstrokes per bar. Headphones help the microphone hear only your guitar.",
+      "tr": "16 ölçüyü eşlikle ♩=80'de, ölçü başına dört aşağı vuruşla çal. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: G | C | D | G | Em | Am | D | G | A | D | E | A | Am | Dm | E | Am",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Find the bar where the delay starts. Loop that change with the one-minute method, then play the chart again.",
+        "tr": "Gecikmenin başladığı ölçüyü bul. O geçişi bir dakika yöntemiyle döngüle, sonra çizelgeyi yeniden çal."
+      }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": {
+        "en": "The fingers land in a hurry. Look at the next chord on beat 3, then move on beat 4.",
+        "tr": "Parmaklar aceleyle konuyor. Sonraki akora 3. vuruşta bak, 4. vuruşta hareket et."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones or lower the accompaniment, and strum a little firmer.",
+        "tr": "Kulaklık kullan ya da eşliğin sesini kıs ve biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise one four-bar line at a time at ♩=60, then join the lines before going back to ♩=80.",
+    "tr": "♩=60'ta her seferinde dört ölçülük bir satır çalış, sonra ♩=80'e dönmeden satırları birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

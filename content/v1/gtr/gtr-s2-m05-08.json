@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s2-m05-08",
+  "title": { "en": "Prepare on beat four", "tr": "Dördüncü vuruşta hazırlan" },
+  "goal": {
+    "en": "Plays G–C–D in quarter-note strums for 8 bars and lands each new chord on beat 1 at ♩=70.",
+    "tr": "G–C–D'yi dörtlük vuruşla 8 ölçü çalar ve her yeni akoru ♩=70'te 1. vuruşa yerleştirir."
+  },
+  "explanation": [
+    {
+      "en": "A change that starts on beat 1 arrives late. Start it earlier, on beat 4.",
+      "tr": "1. vuruşta başlayan geçiş geç kalır. Geçişi daha önce, 4. vuruşta başlat."
+    },
+    {
+      "en": "Strum beats 1, 2 and 3 with the full chord. On beat 4, lift the fingers and strum the open strings while they travel.",
+      "tr": "1., 2. ve 3. vuruşta tam akora vur. 4. vuruşta parmakları kaldır ve onlar yoldayken açık tellere vur."
+    },
+    {
+      "en": "The open strings on beat 4 are planned. They keep the strumming hand moving and the beat steady.",
+      "tr": "4. vuruştaki açık teller planlıdır. Sağ elin hareketini ve vuruşun düzenini korur."
+    },
+    {
+      "en": "The strumming hand never waits for the fretting hand. Beat 1 comes on time, ready or not.",
+      "tr": "Sağ el sol eli hiç beklemez. 1. vuruş, hazır olsan da olmasan da zamanında gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "G–C–D–G twice in quarter-note strums with open strings on beat 4, at ♩=70 and ♩=50, with click.",
+      "tr": "4. vuruşta açık tellerle dörtlük vuruşla iki kez G–C–D–G, ♩=70 ve ♩=50, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 8 bars with four downstrokes per bar, along with the click. Leave the chord on beat 4. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "8 ölçüyü ölçü başına dört aşağı vuruşla klikle birlikte çal. Akoru 4. vuruşta bırak. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "4/4: G | C | D | G | G | C | D | G",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The change starts too late. Lift the fingers right on beat 4, not after it.",
+        "tr": "Geçiş çok geç başlıyor. Parmakları 4. vuruştan sonra değil, tam 4. vuruşta kaldır."
+      }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": {
+        "en": "The fingers land in a hurry. Look at the next chord on beat 3, then move on beat 4.",
+        "tr": "Parmaklar aceleyle konuyor. Sonraki akora 3. vuruşta bak, 4. vuruşta hareket et."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Strum a little firmer and keep the phone about one metre away.",
+        "tr": "Biraz daha net vur ve telefonu yaklaşık bir metre uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=50 and play each chord for two bars, changing only on the beat 4 of the second bar.",
+    "tr": "♩=50'ye in ve her akoru iki ölçü çal; yalnız ikinci ölçünün 4. vuruşunda geç."
+  },
+  "minutes": 12,
+  "expertPending": true
+}
