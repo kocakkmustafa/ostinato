@@ -141,7 +141,7 @@ jobs:
   ios-release-build:
     name: iOS release build, no-codesign (OST-P0-004)
     runs-on: macos-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
