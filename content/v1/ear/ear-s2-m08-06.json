@@ -1,0 +1,83 @@
+{
+  "id": "ear-s2-m08-06",
+  "title": { "en": "Musicianship checkpoint", "tr": "Müzisyenlik geçişi" },
+  "goal": {
+    "en": "Completes recognition, dictation and four-bar sight-singing at the checkpoint standard.",
+    "tr": "Tanıma, dikte ve dört ölçü deşifreyi geçiş ölçütünde yapar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint has three parts: 6 recognition questions, 2 dictations and one four-bar sight-singing line.",
+      "tr": "Bu geçişin üç bölümü var: 6 tanıma sorusu, 2 dikte ve bir dört ölçülük deşifre satırı."
+    },
+    {
+      "en": "Recognition mixes major and minor triads with key signatures (C, G, F).",
+      "tr": "Tanıma bölümü majör ve minör üçlüleri donanımlarla (Do, Sol, Fa) karışık sorar."
+    },
+    {
+      "en": "The dictations are three-note melodies with the first note given, as in the melodic dictation lesson.",
+      "tr": "Dikteler, ezgi diktesi dersindeki gibi ilk notası verilmiş üç notalık ezgilerdir."
+    },
+    {
+      "en": "The sight-singing line is new and moves by step, at ♩=60 with the click.",
+      "tr": "Deşifre satırı yenidir ve basamakla ilerler; ♩=60'ta klikle."
+    },
+    {
+      "en": "You can do the parts in separate sessions.",
+      "tr": "Bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Triads and cadences for the screen parts; for sight-singing, the tonic chord and do in your range, then a click count-in at ♩=60.",
+      "tr": "Ekran bölümleri için üçlüler ve kadanslar; deşifre için rahat menzilinde tonik akor ve do, ardından ♩=60'ta klik girişi."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Part 1: answer 6 questions (major or minor triad; key from the signature). Part 2: write 2 three-note dictations. At least 7 of these 8 items must be correct. Part 3: sight-sing one new four-bar line with the click at ♩=60. Sing in your own octave. If you'd rather not sing, choose the on-screen version: you hear a line and choose which of two staves it matches.",
+      "tr": "1. bölüm: 6 soruyu cevapla (majör mü minör mü üçlü; donanımdan ton). 2. bölüm: üç notalık 2 dikte yaz. Bu 8 maddeden en az 7'si doğru olmalı. 3. bölüm: yeni bir dört ölçülük satırı ♩=60'ta klikle deşifre et. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: bir satır dinler, iki porteden hangisine uyduğunu seçersin."
+    },
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true, "minCorrect": 7 }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I listened for the middle note of each triad.",
+      "tr": "Her üçlüde ortadaki notayı dinledim."
+    },
+    { "en": "I found do before sight-singing.", "tr": "Deşifreden önce do'yu buldum." },
+    { "en": "I kept going when a note slipped.", "tr": "Bir nota kaydığında devam ettim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer on a minor triad.", "tr": "Farklı cevap: minör bir üçlüde." },
+      "fix": {
+        "en": "Listen for the middle note; a half step below mi makes the triad minor.",
+        "tr": "Ortadaki notayı dinle; mi'nin yarım ses altı üçlüyü minör yapar."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the line drifted low by the last bar.",
+        "tr": "Farklı nota: satır son ölçüye doğru alçalmış."
+      },
+      "fix": {
+        "en": "At the start of each bar, check do in your head before you go on.",
+        "tr": "Her ölçünün başında devam etmeden önce do'yu içinden yokla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Do the three parts in separate sessions, screen parts first.",
+    "tr": "Üç bölümü ayrı oturumlarda yap; önce ekran bölümlerini."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

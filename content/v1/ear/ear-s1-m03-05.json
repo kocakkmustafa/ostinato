@@ -1,0 +1,78 @@
+{
+  "id": "ear-s1-m03-05",
+  "title": { "en": "Three-four", "tr": "Üç dörtlük" },
+  "goal": { "en": "Claps a line in 3/4.", "tr": "3/4'lük bir satırı alkışlar." },
+  "explanation": [
+    {
+      "en": "In 3/4 each bar has three beats, and a quarter note gets the beat.",
+      "tr": "3/4'te her ölçüde üç vuruş vardır ve vuruşu dörtlük alır."
+    },
+    {
+      "en": "Count '1 2 3, 1 2 3'. Beat 1 is strong, beats 2 and 3 are light: STRONG-light-light.",
+      "tr": "'1 2 3, 1 2 3' diye say. 1. vuruş güçlü, 2. ve 3. hafiftir: GÜÇLÜ-hafif-hafif."
+    },
+    {
+      "en": "A dotted half note (a half note with a dot) lasts three beats and fills a whole 3/4 bar.",
+      "tr": "Noktalı ikilik (yanında nokta olan ikilik) üç vuruş sürer ve 3/4'lük bir ölçüyü tek başına doldurur."
+    },
+    {
+      "en": "Waltzes and many folk dances move in three; you will feel a gentle sway.",
+      "tr": "Valsler ve birçok halk dansı üçlü akar; hafif bir salınım hissedersin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "Click at ♩=80 with a three-click count-in; beat 1 is accented.",
+      "tr": "♩=80'de klik, üç kliklik giriş; 1. vuruş vurgulu."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Read the four bars in 3/4 and clap them with the click at ♩=80, counting '1 2 3'.",
+      "tr": "3/4'lük dört ölçüyü oku ve '1 2 3' diye sayarak ♩=80'de klikle birlikte alkışla."
+    },
+    "sequence": "3/4: q q q | h. | ee q q | h q",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I counted to three in every bar, not to four.", "tr": "Her ölçüde dörde değil üçe kadar saydım." },
+    { "en": "I held the dotted half note for three beats.", "tr": "Noktalı ikiliği üç vuruş tuttum." },
+    { "en": "Beat 1 of each bar was a little firmer.", "tr": "Her ölçünün 1. vuruşu biraz daha güçlüydü." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but late after the dotted half note.", "tr": "Zamanında, ama noktalı ikilikten sonra geç." },
+      "fix": {
+        "en": "You may be counting to four; in 3/4 the count goes '3, 1'.",
+        "tr": "Dörde kadar sayıyor olabilirsin; 3/4'te sayım '3, 1' diye sürer."
+      }
+    },
+    {
+      "error": { "en": "On time, but late on the second eighth.", "tr": "Zamanında, ama ikinci sekizlikte geç." },
+      "fix": {
+        "en": "Say 'and' out loud and clap on it; it sits exactly halfway between two clicks.",
+        "tr": "'Ve'yi yüksek sesle söyle ve üstüne alkışla; tam iki klik arasının ortasındadır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or lower the click volume.",
+        "tr": "Telefona daha yakın alkışla ya da klik sesini kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=65 and count '1 2 3' out loud while you clap.",
+    "tr": "♩=65'e in ve alkışlarken '1 2 3'ü yüksek sesle say."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

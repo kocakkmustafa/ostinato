@@ -1,0 +1,91 @@
+{
+  "id": "ear-s1-m02-05",
+  "title": { "en": "Sing back a contour", "tr": "Konturu geri söyle" },
+  "goal": {
+    "en": "Sings back a three-note contour in the right direction.",
+    "tr": "Üç notalık konturu doğru yönde geri söyler."
+  },
+  "explanation": [
+    {
+      "en": "You will hear three notes. Sing them back in your own octave, on 'la' or 'mm'.",
+      "tr": "Üç nota duyacaksın. Onları kendi oktavında, 'la' ya da 'mm' ile geri söyle."
+    },
+    {
+      "en": "Here only the direction counts: up, down or same. Exact pitch is not scored yet.",
+      "tr": "Burada yalnız yön sayılır: yukarı, aşağı ya da aynı. Tam perde henüz puanlanmaz."
+    },
+    {
+      "en": "Draw the shape with your hand while you sing; it keeps the direction clear.",
+      "tr": "Söylerken biçimi elinle çiz; yön böylece netleşir."
+    },
+    {
+      "en": "Stay in your comfortable range. Small steps are enough.",
+      "tr": "Rahat menzilinde kal. Küçük adımlar yeterli."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Six three-note contours from your comfortable range, piano tone, at normal and slow speed.",
+      "tr": "Rahat menzilinden altı üç notalık kontur, piyano tınısı, normal ve yavaş hızda."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to 6 contours and sing each one back in your own octave. If you'd rather not sing, do the 'Up, down or same' drill instead.",
+      "tr": "6 konturu dinle ve her birini kendi oktavında geri söyle. Söylemek istemiyorsan bunun yerine 'Yukarı, aşağı, aynı' alıştırmasını yap."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 5 of 6 contours with both moves in the right direction; exact pitch is not scored.",
+        "tr": "6 konturun en az 5'inde iki hareket de doğru yönde; tam perde puanlanmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The shape I drew with my hand matched the reference.",
+      "tr": "Elimle çizdiğim biçim referansınkiyle aynıydı."
+    },
+    { "en": "I sang a repeated note without sliding.", "tr": "Tekrar eden notayı kaydırmadan söyledim." },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the second move went the other way.",
+        "tr": "Farklı nota: ikinci hareket ters yöne gitti."
+      },
+      "fix": {
+        "en": "Replay the contour slowly and sing only notes 2 and 3 first.",
+        "tr": "Konturu yavaş dinle ve önce yalnız 2. ve 3. notayı söyle."
+      }
+    },
+    {
+      "error": { "en": "Different note: a repeated note drifted.", "tr": "Farklı nota: tekrar eden nota kaydı." },
+      "fix": {
+        "en": "On a repeated note, keep your voice still; don't let effort push it up.",
+        "tr": "Tekrar eden notada sesini sabit tut; çabayla yukarı kaymasına izin verme."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use the slow version and sing one move at a time: notes 1–2, then 2–3.",
+    "tr": "Yavaş sürümü kullan ve her hareketi ayrı söyle: önce 1–2, sonra 2–3."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

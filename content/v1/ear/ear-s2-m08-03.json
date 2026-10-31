@@ -1,0 +1,80 @@
+{
+  "id": "ear-s2-m08-03",
+  "title": { "en": "Key signatures C, G and F", "tr": "C, G ve F donanımları" },
+  "goal": {
+    "en": "Names the major key from a key signature: C, G or F.",
+    "tr": "Donanıma bakarak tonu bulur: Do, Sol ya da Fa majör."
+  },
+  "explanation": [
+    {
+      "en": "The key signature is the group of sharps or flats right after the clef. It holds for the whole piece.",
+      "tr": "Donanım, anahtarın hemen yanındaki diyez ya da bemol grubudur. Bütün parça boyunca geçerlidir."
+    },
+    { "en": "No sharps or flats: C major.", "tr": "Diyez ya da bemol yoksa: Do majör." },
+    {
+      "en": "One sharp, on the F line: G major. Every F is played as F♯.",
+      "tr": "Bir diyez, Fa çizgisinde: Sol majör. Bütün Fa'lar Fa diyez çalınır."
+    },
+    {
+      "en": "One flat, on the B line: F major. Every B is played as B♭.",
+      "tr": "Bir bemol, Si çizgisinde: Fa majör. Bütün Si'ler Si bemol çalınır."
+    },
+    {
+      "en": "The sign keeps the whole-whole-half pattern: in G major, F♯ makes ti–do a half step; in F major, B♭ makes mi–fa a half step.",
+      "tr": "İşaret, tam-tam-yarım kalıbını korur: Sol majörde Fa diyez si–do'yu, Fa majörde Si bemol mi–fa'yı yarım ses yapar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Screen only; after each answer the key's tonic chord plays.",
+      "tr": "Yalnız ekran; her cevaptan sonra tonun tonik akoru çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Look at the key signature and choose the key: C, G or F major. Treble and bass clefs appear mixed.",
+      "tr": "Donanıma bak ve tonu seç: Do, Sol ya da Fa majör. Sol ve fa anahtarları karışık gelir."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 8 },
+    "drill": {
+      "type": "key_signature",
+      "count": 9,
+      "params": {
+        "keys": ["C", "G", "F"],
+        "clefs": ["treble", "bass"]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: G and F major swapped.",
+        "tr": "Farklı cevap: Sol ve Fa majör karıştı."
+      },
+      "fix": {
+        "en": "Sharp ♯ means G major; flat ♭ means F major. Remember: one sharp, G; one flat, F.",
+        "tr": "Diyez ♯ Sol majör, bemol ♭ Fa majördür. Aklında tut: bir diyez Sol, bir bemol Fa."
+      }
+    },
+    {
+      "error": { "en": "Different answer in the bass clef.", "tr": "Farklı cevap: fa anahtarında." },
+      "fix": {
+        "en": "In the bass clef the sign sits on another line, but the count is the same: one sharp is still G major.",
+        "tr": "Fa anahtarında işaret başka bir çizgidedir ama sayısı aynıdır: bir diyez yine Sol majördür."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Before you tap, say the rule aloud: none, C; one sharp, G; one flat, F.",
+    "tr": "Dokunmadan önce kuralı sesli söyle: hiç yok Do, bir diyez Sol, bir bemol Fa."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

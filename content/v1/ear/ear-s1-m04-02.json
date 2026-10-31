@@ -1,0 +1,71 @@
+{
+  "id": "ear-s1-m04-02",
+  "title": { "en": "Treble-clef notes", "tr": "Sol anahtarı notaları" },
+  "goal": { "en": "Reads notes in the treble clef.", "tr": "Sol anahtarındaki notaları okur." },
+  "explanation": [
+    {
+      "en": "The treble clef curls around line 2 and makes it G4. That is why it is also called the G clef.",
+      "tr": "Sol anahtarı 2. çizginin etrafında kıvrılır ve o çizgiyi Sol4 yapar. Adı da buradan gelir."
+    },
+    {
+      "en": "From G4, each line or space up or down is the next note: A, B, C… or F, E, D…",
+      "tr": "Sol4'ten başlayarak yukarı ya da aşağı her çizgi ve aralık bir sonraki notadır: La, Si, Do… ya da Fa, Mi, Re…"
+    },
+    {
+      "en": "The lines from bottom to top are E4, G4, B4, D5 and F5.",
+      "tr": "Çizgiler aşağıdan yukarıya Mi4, Sol4, Si4, Re5 ve Fa5'tir."
+    },
+    {
+      "en": "The spaces from bottom to top are F4, A4, C5 and E5.",
+      "tr": "Aralıklar aşağıdan yukarıya Fa4, La4, Do5 ve Mi5'tir."
+    },
+    {
+      "en": "Learn a few landmark notes, such as G4 and C5, and step from them instead of counting from the bottom each time.",
+      "tr": "Sol4 ve Do5 gibi birkaç işaret notasını öğren; her seferinde alttan saymak yerine onlardan adım at."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": { "en": "No sound; each question is shown on the staff.", "tr": "Ses yok; her soru portede gösterilir." }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Look at each note in the treble clef and choose its name.",
+      "tr": "Sol anahtarındaki her notaya bak ve adını seç."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 12 },
+    "drill": {
+      "type": "note_name",
+      "count": 15,
+      "params": { "clef": "treble", "range": ["E4", "F5"] }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer, one step off.", "tr": "Farklı cevap, bir basamak kaymış." },
+      "fix": {
+        "en": "Check line or space first, then step from G4 on line 2.",
+        "tr": "Önce çizgi mi aralık mı, ona bak; sonra 2. çizgideki Sol4'ten adım at."
+      }
+    },
+    {
+      "error": { "en": "Different answer near the top of the staff.", "tr": "Farklı cevap, portenin üst kısmında." },
+      "fix": {
+        "en": "Use C5 in the third space as a second landmark.",
+        "tr": "3. aralıktaki Do5'i ikinci işaret notası olarak kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Say the line notes out loud before each round: E, G, B, D, F.",
+    "tr": "Her turdan önce çizgi notalarını sesli say: Mi, Sol, Si, Re, Fa."
+  },
+  "minutes": 7,
+  "expertPending": true
+}

@@ -1,0 +1,74 @@
+{
+  "id": "ear-s1-m04-03",
+  "title": { "en": "Bass-clef notes", "tr": "Fa anahtarı notaları" },
+  "goal": { "en": "Reads notes in the bass clef.", "tr": "Fa anahtarındaki notaları okur." },
+  "explanation": [
+    {
+      "en": "The two dots of the bass clef sit either side of line 4 and make it F3. That is why it is also called the F clef.",
+      "tr": "Fa anahtarının iki noktası 4. çizginin iki yanında durur ve o çizgiyi Fa3 yapar. Adı da buradan gelir."
+    },
+    {
+      "en": "The bass clef is for lower notes: the piano's left hand, low voices, the bass guitar.",
+      "tr": "Fa anahtarı alçak sesler içindir: piyanoda sol el, kalın sesler, bas gitar."
+    },
+    {
+      "en": "The lines from bottom to top are G2, B2, D3, F3 and A3.",
+      "tr": "Çizgiler aşağıdan yukarıya Sol2, Si2, Re3, Fa3 ve La3'tür."
+    },
+    {
+      "en": "The spaces from bottom to top are A2, C3, E3 and G3.",
+      "tr": "Aralıklar aşağıdan yukarıya La2, Do3, Mi3 ve Sol3'tür."
+    },
+    {
+      "en": "The same place on the staff has a different name in each clef. Check the clef before you read.",
+      "tr": "Portede aynı yer her anahtarda farklı bir notadır. Okumadan önce anahtara bak."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": { "en": "No sound; each question is shown on the staff.", "tr": "Ses yok; her soru portede gösterilir." }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Look at each note in the bass clef and choose its name.",
+      "tr": "Fa anahtarındaki her notaya bak ve adını seç."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 12 },
+    "drill": {
+      "type": "note_name",
+      "count": 15,
+      "params": { "clef": "bass", "range": ["G2", "A3"] }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer, two steps low: read as if in the treble clef.",
+        "tr": "Farklı cevap, iki basamak aşağı: sol anahtarındaymış gibi okunmuş."
+      },
+      "fix": {
+        "en": "Find F3 between the two dots on line 4, then step from there.",
+        "tr": "4. çizgide iki noktanın arasındaki Fa3'ü bul, oradan adım at."
+      }
+    },
+    {
+      "error": { "en": "Different answer, one step off.", "tr": "Farklı cevap, bir basamak kaymış." },
+      "fix": {
+        "en": "Check line or space first, then step from F3 on line 4.",
+        "tr": "Önce çizgi mi aralık mı, ona bak; sonra 4. çizgideki Fa3'ten adım at."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Say the line notes out loud before each round: G, B, D, F, A.",
+    "tr": "Her turdan önce çizgi notalarını sesli say: Sol, Si, Re, Fa, La."
+  },
+  "minutes": 7,
+  "expertPending": true
+}

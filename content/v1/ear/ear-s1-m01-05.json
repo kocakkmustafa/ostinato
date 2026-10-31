@@ -1,0 +1,87 @@
+{
+  "id": "ear-s1-m01-05",
+  "title": { "en": "Quarters and eighths by clapping", "tr": "Alkışla dörtlük ve sekizlik" },
+  "goal": {
+    "en": "Tells quarter and eighth notes apart by clapping them.",
+    "tr": "Dörtlük ve sekizlik süreleri alkışla birbirinden ayırır."
+  },
+  "explanation": [
+    {
+      "en": "A quarter note lasts one beat. Clap once per click.",
+      "tr": "Dörtlük nota bir vuruş sürer. Her klikte bir kez alkışla."
+    },
+    {
+      "en": "Two eighth notes share one beat. Clap twice per click, evenly.",
+      "tr": "İki sekizlik bir vuruşu paylaşır. Her klikte iki kez, eşit aralıkla alkışla."
+    },
+    {
+      "en": "Count '1 and 2 and 3 and 4 and'. Quarters fall on the numbers; eighths fall on the numbers and the 'and's.",
+      "tr": "'1 ve 2 ve 3 ve 4 ve' diye say. Dörtlükler sayılara, sekizlikler hem sayılara hem 've'lere düşer."
+    },
+    {
+      "en": "Clap both at the same strength; only the spacing changes.",
+      "tr": "İkisini de aynı güçte alkışla; değişen yalnız aradaki boşluk."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Click at ♩=70; the four bars are played on a woodblock sound at ♩=70 and ♩=45.",
+      "tr": "♩=70'te klik; dört ölçü tahta blok sesiyle ♩=70 ve ♩=45'te çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Listen to the four-bar line, then clap it along with the click at ♩=70.",
+      "tr": "Dört ölçülük diziyi dinle, sonra ♩=70'te klikle birlikte alkışla."
+    },
+    "sequence": "4/4: q q ee q | ee ee q q | q ee q ee | ee ee ee q",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each quarter note landed on a click.", "tr": "Her dörtlük bir kliğe denk geldi." },
+    {
+      "en": "My two eighths were evenly spaced, not long-short.",
+      "tr": "İki sekizliğim eşit aralıklıydı, uzun-kısa değil."
+    },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but late on the second eighth.", "tr": "Zamanında, ama ikinci sekizlikte geç." },
+      "fix": {
+        "en": "Say 'and' out loud and clap on it; it sits exactly halfway between two clicks.",
+        "tr": "'Ve'yi yüksek sesle söyle ve üstüne alkışla; tam iki klik arasının ortasındadır."
+      }
+    },
+    {
+      "error": {
+        "en": "On time, but early when eighths turn back into quarters.",
+        "tr": "Zamanında, ama sekizlikten dörtlüğe dönerken erken."
+      },
+      "fix": {
+        "en": "After the quick claps, wait one full beat; the quarter feels slow on purpose.",
+        "tr": "Hızlı alkışlardan sonra tam bir vuruş bekle; dörtlük bilerek yavaş gelir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Some quick claps were too soft; clap the eighths as firmly as the quarters.",
+        "tr": "Bazı hızlı alkışlar çok yumuşak kaldı; sekizlikleri de dörtlükler kadar net alkışla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=55 and clap one bar at a time, looping it until it passes.",
+    "tr": "♩=55'e in ve her ölçüyü ayrı alkışla; geçene kadar döngüle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

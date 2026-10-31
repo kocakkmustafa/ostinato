@@ -1,0 +1,84 @@
+{
+  "id": "ear-s1-m03-01",
+  "title": { "en": "Quarter, half and whole notes", "tr": "Dörtlük, ikilik ve birlik" },
+  "goal": {
+    "en": "Reads and claps quarter, half and whole notes, counting through the long ones.",
+    "tr": "Dörtlük, ikilik ve birlik notaları okuyup alkışlar; uzun notalarda saymayı sürdürür."
+  },
+  "explanation": [
+    {
+      "en": "A quarter note (♩) lasts one beat, a half note two beats, a whole note four beats.",
+      "tr": "Dörtlük (♩) bir vuruş, ikilik iki vuruş, birlik dört vuruş sürer."
+    },
+    {
+      "en": "A half note has a hollow head and a stem. A whole note has a hollow head and no stem.",
+      "tr": "İkiliğin başı içi boştur ve sapı vardır. Birliğin başı içi boştur, sapı yoktur."
+    },
+    {
+      "en": "Clap once at the start of each note. On long notes, keep counting until the next clap.",
+      "tr": "Her notanın başında bir kez alkışla. Uzun notalarda sonraki alkışa kadar saymayı sürdür."
+    },
+    {
+      "en": "Most early claps come right after a long note; let the count finish first.",
+      "tr": "Erken alkışların çoğu uzun notanın hemen ardından gelir; önce sayımın bitmesini bekle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": { "en": "Click at ♩=60 with a four-click count-in.", "tr": "♩=60'ta klik, dört kliklik girişle." }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Read the two bars on the screen and clap them with the click at ♩=60, counting through the long notes.",
+      "tr": "Ekrandaki iki ölçüyü oku ve uzun notalarda saymayı sürdürerek ♩=60'ta klikle birlikte alkışla."
+    },
+    "sequence": "4/4: q h q | w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I clapped once per note, not once per beat.", "tr": "Her vuruşta değil, her notada bir kez alkışladım." },
+    { "en": "I counted through the half note and the whole note.", "tr": "İkilik ve birlik boyunca saymayı sürdürdüm." },
+    {
+      "en": "Where a note starts, my clap matched the click.",
+      "tr": "Notanın başladığı yerlerde alkışım klikle denk geldi."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but early after the half note.", "tr": "Zamanında, ama ikilikten sonra erken." },
+      "fix": {
+        "en": "Say 'two' out loud on the second beat of the half note before you clap again.",
+        "tr": "Yeniden alkışlamadan önce ikiliğin ikinci vuruşunda sesli olarak 'iki' de."
+      }
+    },
+    {
+      "error": {
+        "en": "Different: an extra clap was heard during a long note.",
+        "tr": "Farklı: uzun notada fazladan alkış duyuldu."
+      },
+      "fix": {
+        "en": "Keep your hands apart and still while you count; clap only where a new note starts.",
+        "tr": "Sayarken ellerini ayrık ve sabit tut; yalnız yeni bir nota başlarken alkışla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or lower the click volume.",
+        "tr": "Telefona daha yakın alkışla ya da klik sesini kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap bar 1 alone until it passes, then add bar 2.",
+    "tr": "Önce yalnız 1. ölçüyü alkışla; geçince 2. ölçüyü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,81 @@
+{
+  "id": "ear-s2-m05-02",
+  "title": { "en": "Movable do", "tr": "Hareketli do" },
+  "goal": {
+    "en": "Sings from do up to sol and back down in solfège.",
+    "tr": "Do'dan sol'e çıkıp geri iner, solfejle söyler."
+  },
+  "explanation": [
+    {
+      "en": "In movable do, “do” is the first degree of whatever key you are in. Change the key and do moves with it.",
+      "tr": "Hareketli do'da “do”, hangi tondaysan o tonun ilk derecesidir. Ton değişince do da onunla birlikte kayar."
+    },
+    {
+      "en": "So do is not a fixed note: in G major, do is the note G; in F major, it is F.",
+      "tr": "Yani buradaki do bir nota adı değil, derece adıdır: Sol majörde do, Sol notasıdır; Fa majörde Fa notasıdır."
+    },
+    {
+      "en": "In this course, syllables are written in lower case (do, re, mi) and note names as letters (C4).",
+      "tr": "Bu kursta heceler küçük harfle (do, re, mi), nota adları büyük harfle (Do4) yazılır."
+    },
+    {
+      "en": "The first five degrees are do, re, mi, fa, sol. Mi to fa is a half step; keep that step small.",
+      "tr": "İlk beş derece do, re, mi, fa, sol'dür. Mi ile fa arası yarım sestir; bu adımı küçük tut."
+    },
+    {
+      "en": "The app picks the starting do from your comfortable range.",
+      "tr": "Uygulama başlangıçtaki do'yu rahat menzilinden seçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "1-2-3-4-5-4-3-2-1 in solfège in your comfortable range, at ♩=60 and ♩=40, soft vocal or sine tone.",
+      "tr": "Rahat menzilinde solfejle 1-2-3-4-5-4-3-2-1; ♩=60 ve ♩=40, yumuşak vokal ya da sinüs tını."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Hear do, then sing from do up to sol and back down, one syllable per beat at ♩=60. Sing in your own octave. If you'd rather not sing, choose the on-screen version: you hear the line and mark the degree of each note.",
+      "tr": "Do'yu dinle, sonra do'dan sol'e çıkıp geri in; ♩=60'ta her vuruşa bir hece. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: diziyi dinler, her notanın hangi derece olduğunu işaretlersin."
+    },
+    "sequence": "1-2-3-4-5-4-3-2-1",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I sang each syllable on its own beat.", "tr": "Her heceyi kendi vuruşunda söyledim." },
+    {
+      "en": "Mi to fa felt smaller than the other steps.",
+      "tr": "Mi'den fa'ya adım, diğerlerinden küçük geldi."
+    },
+    { "en": "My sol matched the reference sol.", "tr": "Sol'üm referanstaki sol'le aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, fa a semitone high.", "tr": "Farklı nota: fa yarım ses yüksek." },
+      "fix": {
+        "en": "Mi to fa is a half step; keep fa close to mi.",
+        "tr": "Mi–fa yarım sestir; fa'yı mi'ye yakın tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only do-re-mi-re-do first, then add fa and sol.",
+    "tr": "Önce yalnız do-re-mi-re-do söyle, sonra fa ve sol'ü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

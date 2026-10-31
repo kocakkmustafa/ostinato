@@ -1,0 +1,85 @@
+{
+  "id": "ear-s2-m06-04",
+  "title": { "en": "Sing P5 and P8", "tr": "T5 ve T8 söyle" },
+  "goal": {
+    "en": "Sings a perfect fifth and an octave above a given note within a comfortable range.",
+    "tr": "Verilen notanın tam beşli ve oktav üstünü rahat menzilde söyler."
+  },
+  "explanation": [
+    {
+      "en": "Call the starting note do. P5 is sol; P8 is the top do.",
+      "tr": "Başlangıç notasına do de. T5 sol'dür; T8 üstteki do'dur."
+    },
+    {
+      "en": "For P5, think of the triad you already know, do-mi-sol, and land on sol.",
+      "tr": "T5 için bildiğin do-mi-sol üçlüsünü düşün ve sol'e kon."
+    },
+    {
+      "en": "For P8, the top note is the same note again, higher. Aim for “the same, but higher”.",
+      "tr": "T8'de üstteki nota yine aynı notadır, yalnız daha yüksek. “Aynısı, ama yukarıda” hissini hedefle."
+    },
+    {
+      "en": "The app starts low in your range so the top note stays easy. If it is not comfortable, sing the interval downward or skip the task.",
+      "tr": "Uygulama üst nota rahat kalsın diye menzilinin alt tarafından başlar. Rahat değilse aralığı aşağı doğru söyle ya da görevi atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Starting note low in your range; after each task the target interval plays once for comparison.",
+      "tr": "Rahat menzilinin alt tarafında başlangıç notası; her görevden sonra hedef aralık karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Eight tasks: sing the starting note, then the P5 or P8 above it shown on screen. Sing only where it feels easy. Sing in your own octave. If you'd rather not sing, choose the on-screen version: you hear each pair and mark P5 or P8.",
+      "tr": "Sekiz görev: başlangıç notasını söyle, sonra ekranda istenen T5 ya da T8 üstünü. Yalnız rahat olduğu yerde söyle. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: her çifti dinler, T5 mi T8 mi olduğunu işaretlersin."
+    },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The top notes felt easy, without pushing.",
+      "tr": "Üst notalar zorlamadan, rahat geldi."
+    },
+    { "en": "For P5 I thought do-mi-sol.", "tr": "T5 için içimden do-mi-sol dedim." },
+    {
+      "en": "For P8 the top note felt like the same note.",
+      "tr": "T8'de üst nota aynı nota gibi geldi."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, P5 a whole step low.", "tr": "Farklı nota: T5 bir tam ses alçak." },
+      "fix": {
+        "en": "You stopped at fa. Pass through mi in your head: do-mi-sol.",
+        "tr": "Fa'da kalmışsın. İçinden mi'den geç: do-mi-sol."
+      }
+    },
+    {
+      "error": { "en": "Different note, P8 a semitone low.", "tr": "Farklı nota: T8 yarım ses alçak." },
+      "fix": {
+        "en": "You landed on ti. Go a half step higher, until it feels like the starting note again.",
+        "tr": "Si'ye konmuşsun. Başlangıç notasıyla aynı hissi verene kadar yarım ses daha çık."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Don't push the top note louder; sing it lightly and hold it a little longer.",
+        "tr": "Üst notayı yüksek sesle zorlama; hafifçe söyle ve biraz daha uzun tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the octave downward: start on the top do and drop to the lower one.",
+    "tr": "Oktavı aşağı doğru söyle: üst do'dan başla, alttakine in."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

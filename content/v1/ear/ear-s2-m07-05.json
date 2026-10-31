@@ -1,0 +1,82 @@
+{
+  "id": "ear-s2-m07-05",
+  "title": { "en": "Clap back from memory", "tr": "Hafızadan geri alkışla" },
+  "goal": {
+    "en": "Claps back a heard two-bar rhythm from memory, in time.",
+    "tr": "Duyduğu iki ölçülük ritmi hafızadan, zamanında geri alkışlar."
+  },
+  "explanation": [
+    {
+      "en": "Call and response: the app plays two bars, then you clap the same two bars right after.",
+      "tr": "Soru-cevap: uygulama iki ölçü çalar, hemen ardından sen aynı iki ölçüyü alkışlarsın."
+    },
+    {
+      "en": "The click does not stop between call and response, so there is no pause to think. Keep counting.",
+      "tr": "Klik soru ile cevap arasında durmaz; düşünmek için ara yok. Saymaya devam et."
+    },
+    {
+      "en": "Hold the rhythm in your memory as syllables, for example “ta ta ti-ti ta”.",
+      "tr": "Ritmi hecelerle aklında tut, örneğin “ta ta ti-ti ta”."
+    },
+    {
+      "en": "If you lose it, don't stop: clap the beat until the next call.",
+      "tr": "Kaybedersen durma: bir sonraki soruya kadar vuruşu alkışla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "Click at ♩=70; each two-bar call plays on one synthesized note, then two bars of click only for your response.",
+      "tr": "♩=70'te klik; her iki ölçülük soru tek bir sentez notasında çalar, ardından cevabın için iki ölçü yalnız klik."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Six rhythms: hear two bars, then clap them back in the next two bars. Headphones help the microphone hear only your claps.",
+      "tr": "Altı ritim: iki ölçüyü dinle, sonraki iki ölçüde geri alkışla. Kulaklık, mikrofonun yalnız alkışını duymasına yardım eder."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I started my response right on beat 1.", "tr": "Cevabıma tam 1. vuruşta başladım." },
+    {
+      "en": "I kept counting between call and response.",
+      "tr": "Soru ile cevap arasında saymaya devam ettim."
+    },
+    {
+      "en": "My response had as many claps as the call.",
+      "tr": "Cevabımda soruyla aynı sayıda alkış vardı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late at the start of the response.",
+        "tr": "Doğru, ama cevabın başında geç."
+      },
+      "fix": {
+        "en": "Count “1-2-3-4” through the call so you are ready on beat 1.",
+        "tr": "Soru boyunca “1-2-3-4” diye say; böylece 1. vuruşta hazır olursun."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or turn the click down.",
+        "tr": "Telefona daha yakın alkışla ya da kliği kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap the call along with the app once, then respond.",
+    "tr": "Soruyu önce uygulamayla birlikte alkışla, sonra cevap ver."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

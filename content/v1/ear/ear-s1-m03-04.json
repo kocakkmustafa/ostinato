@@ -1,0 +1,92 @@
+{
+  "id": "ear-s1-m03-04",
+  "title": { "en": "Bars and four-four", "tr": "Ölçüler ve 4/4" },
+  "goal": {
+    "en": "Reads bar lines and the 4/4 time signature, then claps four bars.",
+    "tr": "Ölçü çizgilerini ve 4/4 ölçü sayısını okur, ardından dört ölçü alkışlar."
+  },
+  "explanation": [
+    {
+      "en": "Bar lines split music into bars. A double bar line marks the end.",
+      "tr": "Ölçü çizgileri müziği ölçülere böler. Çift çizgi sonu gösterir."
+    },
+    {
+      "en": "The time signature 4/4 sits at the start. The top 4 means four beats in each bar; the bottom 4 means a quarter note gets the beat.",
+      "tr": "Başta 4/4 ölçü sayısı yer alır. Üstteki 4 her ölçüde dört vuruş, alttaki 4 vuruşu dörtlüğün aldığı demektir."
+    },
+    {
+      "en": "Every bar in 4/4 adds up to four beats: four quarters, two halves, one whole, or a mix.",
+      "tr": "4/4'te her ölçü dört vuruş eder: dört dörtlük, iki ikilik, bir birlik ya da bunların karışımı."
+    },
+    {
+      "en": "Beat 1 of each bar is the strongest. Clap it a little firmer.",
+      "tr": "Her ölçünün 1. vuruşu en güçlüsüdür. Onu biraz daha güçlü alkışla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "Click at ♩=60 to 70 with a four-click count-in; beat 1 is accented.",
+      "tr": "♩=60'tan 70'e klik, dört kliklik giriş; 1. vuruş vurgulu."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "First answer 4 questions on bar lines and 4/4. Then read four bars and clap them with the click, starting at ♩=60 and moving up in steps of 5 to ♩=70.",
+      "tr": "Önce ölçü çizgileri ve 4/4 üzerine 4 soruyu cevapla. Sonra dört ölçüyü oku ve klikle birlikte alkışla; ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "4/4: q q h | ee q q q | q ee ee q | w",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 4,
+      "params": { "set": ["bar_line", "double_bar_line", "time_signature_4_4", "beats_in_bar_4_4"] }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Beat 1 of each bar was a little firmer.", "tr": "Her ölçünün 1. vuruşu biraz daha güçlüydü." },
+    {
+      "en": "I counted to four in every bar, then started again.",
+      "tr": "Her ölçüde dörde kadar sayıp yeniden başladım."
+    },
+    { "en": "I counted through the whole note at the end.", "tr": "Sondaki birlik boyunca saymayı sürdürdüm." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the top number was read as the note value.",
+        "tr": "Farklı cevap: üstteki sayı nota değeri sanıldı."
+      },
+      "fix": {
+        "en": "Top number: how many beats. Bottom number: which note gets the beat.",
+        "tr": "Üst sayı: kaç vuruş. Alt sayı: vuruşu hangi nota alır."
+      }
+    },
+    {
+      "error": { "en": "On time, but early at the start of a new bar.", "tr": "Zamanında, ama yeni ölçünün başında erken." },
+      "fix": {
+        "en": "A bar line is not a pause or a jump; the count simply goes '4, 1'.",
+        "tr": "Ölçü çizgisi bir duraklama ya da atlama değildir; sayım yalnızca '4, 1' diye sürer."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or lower the click volume.",
+        "tr": "Telefona daha yakın alkışla ya da klik sesini kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap bar 1 alone until it passes, then add one bar at a time.",
+    "tr": "Önce yalnız 1. ölçüyü alkışla; geçince ölçüleri birer birer ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}
