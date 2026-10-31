@@ -30,6 +30,7 @@ final class AudioChunk {
     required this.sampleRate,
     required this.tStartUs,
     required this.clockDomain,
+    this.playbackActive = false,
   });
 
   /// Mono float örnekler, `[-1, 1]` aralığında — `PitchSource.analyze`
@@ -44,6 +45,14 @@ final class AudioChunk {
   final int tStartUs;
 
   final AudioClockDomain clockDomain;
+
+  /// F2.1: bu pencere boyunca uygulamanın KENDİ çıkışı (metronom kliği,
+  /// referans ses) duyulabilir durumdaydı — hoparlör→mikrofon sızıntısı
+  /// olabilir. Native taraf muhafazakâr işaretler (çalma kuyruğu + kuyruk
+  /// süresi). Bu bir HÜKÜM değil, ölçüm güveni girdisidir: tüketici
+  /// "düşük güven" işaretlemek için kullanır. Yalnız-kayıt oturumunda her
+  /// zaman `false`.
+  final bool playbackActive;
 }
 
 /// Ses örneklerinin kaynağı. Gerçek mikrofon bunun BİR uygulamasıdır, tek
