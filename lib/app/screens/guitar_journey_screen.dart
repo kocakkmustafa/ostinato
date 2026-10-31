@@ -11,6 +11,8 @@ import '../guitar_journey.dart';
 import '../guitar_journey_progress.dart';
 import '../guitar_session_preparation.dart';
 import '../guitar_staff_diagram.dart';
+import '../retention/weekly_goal.dart';
+import '../retention/weekly_goal_store.dart';
 import 'guitar_note_observation_screen.dart';
 
 /// Self-guided learning path. No sensor result is converted into completion.
@@ -653,6 +655,16 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
         ),
         action: action,
       );
+      if (action == GuitarProgressAction.practiced) {
+        // F5.2: an existing lesson event counts toward the weekly goal.
+        recordLessonPracticeInBackground(
+          WeeklyGoalStore(
+            accountUserId: widget.store.accountUserId,
+            directoryProvider: widget.store.directoryProvider,
+          ),
+          PracticeCourse.guitar,
+        );
+      }
       if (mounted) setState(() => _record = next);
     } catch (_) {
       if (mounted) {

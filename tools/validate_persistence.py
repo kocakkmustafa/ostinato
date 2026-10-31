@@ -159,15 +159,22 @@ def detect(prod_sources):
 #
 # ⚠️ Bu bir MUAFİYET değil, KARAR NOKTASI.
 DECLARED = {
-    "writeCallSites": 7,
+    "writeCallSites": 8,
     "writeFiles": ["age_gate_store.dart", "app_locale_preferences.dart",
                    "app_theme_preferences.dart",
                    "guitar_journey_progress.dart", "onboarding_store.dart",
-                   "pose_model.dart", "session_store.dart"],
+                   "pose_model.dart", "session_store.dart",
+                   "weekly_goal_store.dart"],
     "userArtifactMayBePersisted": True,
     "userArtifactFiles": ["live_screen.dart", "review_screen.dart",
                           "session_store.dart"],
     "$why": (
+        "GÜNCEL ENVANTER 2026-11-01 (F5.2): `retention/weekly_goal_store.dart` "
+        "hesap dizinine `weekly_goal.v1.json` yazar: haftalık hedef "
+        "değişiklikleri (hafta + oturum sayısı) ve gün başına giriş (yerel "
+        "gün, giriş türü: ölçülen/ders/uygulama dışı/ses dinlenme günü, kurs "
+        "kimliği). Ders metni, ses, ölçüm değeri saklanmaz; Motion Core'a "
+        "ve ağa çıkmaz; hesap dizini silinince gider. "
         "GÜNCEL ENVANTER 2026-10-21: `app_locale_preferences.dart` ve "
         "`app_theme_preferences.dart` uygulama düzeyinde birer sunum tercihi "
         "dosyası yazar (`ostinato.locale.v1.json`: şema sürümü + desteklenen "
@@ -273,6 +280,12 @@ WRITE_CLASSES = {
         "zamanı. `self_report_only`; sensör sonucu, ham ses veya ölçülen "
         "ustalık değildir. Misafir kökü hesap-UUID dizinlerinden ayrıdır. "
         "Silinirse kullanıcının yerel gitar çalışma kaydı kaybolur."),
+    "weekly_goal_store.dart": (
+        "KULLANICI ÜRETİMİ (F5.2, 2026-11-01) — haftalık hedef ve seri: "
+        "hedef değişiklikleri ve gün başına giriş (yerel gün, giriş türü, "
+        "kurs kimliği). Ders metni, ses veya ölçüm değeri yazılmaz; Motion "
+        "Core'a ve ağa çıkmaz. Silinirse haftalık seri ve dondurma hakları "
+        "sıfırdan başlar; ders ilerlemesi etkilenmez."),
     "onboarding_store.dart": (
         "KULLANICI DURUMU (tek bit) — `onboarding-v1.done` işaretçisi. "
         "Kullanıcının ÜRETTİĞİ bir değer değil, uygulamanın onu bir kez "

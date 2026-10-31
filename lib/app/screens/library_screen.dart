@@ -10,6 +10,8 @@ import '../content.dart';
 import '../cue_text.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../retention/weekly_goal_card.dart';
+import '../retention/weekly_goal_store.dart';
 import 'course_screen.dart';
 import 'instrument_screen.dart';
 import 'settings_screen.dart';
@@ -20,10 +22,16 @@ import 'vocal_beginner_screen.dart';
 /// Kütüphane — kabuğun giriş ekranı. Üç canlı çalgı, her biri kendi gradyan
 /// kimliğinde bir kart. Zemin NÖTR kalır (§13); renk yalnız kartlarda.
 class LibraryScreen extends StatelessWidget {
-  const LibraryScreen({super.key, required this.repo, required this.cueText});
+  const LibraryScreen({
+    super.key,
+    required this.repo,
+    required this.cueText,
+    this.weeklyGoalStoreFactory,
+  });
 
   final ContentRepository repo;
   final CueTextResolver cueText;
+  final WeeklyGoalStore Function(String? accountUserId)? weeklyGoalStoreFactory;
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +212,7 @@ class LibraryScreen extends StatelessWidget {
                   ],
                 ],
                 const StudyReviewEntry(),
+                WeeklyGoalCard(storeFactory: weeklyGoalStoreFactory),
                 const SizedBox(height: 22),
                 kicker(localized(context, 'Your instruments', 'Çalgılarınız')),
                 const SizedBox(height: 11),

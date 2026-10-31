@@ -15,6 +15,8 @@ import '../cue_text.dart';
 import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../retention/weekly_goal.dart';
+import '../retention/weekly_goal_store.dart';
 import '../session_store.dart';
 import 'review_screen.dart';
 
@@ -213,6 +215,15 @@ class _LiveScreenRouteState extends State<LiveScreenRoute> {
       outCount: _outCount,
       history: List<double>.of(_hist),
     );
+    // F5.2: a finished camera practice of at least the measured minimum and
+    // with readable frames counts toward the weekly goal (local only).
+    if (summary.sampleCount > 0 &&
+        summary.elapsedSeconds >= kMinMeasuredPracticeDuration.inSeconds) {
+      recordLessonPracticeInBackground(
+        WeeklyGoalStore(accountUserId: _accountUserId),
+        PracticeCourse.forDiscipline(widget.discipline.id),
+      );
+    }
     Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
         builder: (_) => ReviewScreenRoute(
