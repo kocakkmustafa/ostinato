@@ -1,0 +1,82 @@
+{
+  "id": "gtr-s1-m04-11",
+  "title": { "en": "Four-chord loop", "tr": "Dört akorlu döngü" },
+  "goal": {
+    "en": "Plays the G–D–Em–C loop for eight bars in time at ♩=70.",
+    "tr": "G–D–Em–C döngüsünü ♩=70'te sekiz ölçü zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "The loop is G, D, Em, C, one bar each, played twice. Strum four downstrokes per bar.",
+      "tr": "Döngü G, D, Em, C'dir; her biri bir ölçü, iki kez çalınır. Her ölçüde dört aşağı vuruş yap."
+    },
+    {
+      "en": "Plan the preparation: use beat 4 of each bar to move to the next chord.",
+      "tr": "Hazırlığı planla: her ölçünün 4. vuruşunu sonraki akora geçmek için kullan."
+    },
+    {
+      "en": "Practise the loop from another start too, for example from Em. Then no change depends on starting at G.",
+      "tr": "Döngüyü başka bir yerden de, örneğin Em'den başlayarak çalış. Böylece hiçbir geçiş G'den başlamaya bağlı kalmaz."
+    },
+    {
+      "en": "If a change is late, keep counting and land the next chord on beat 1. Do not restart.",
+      "tr": "Bir geçiş geç kalırsa saymayı sürdür ve sonraki akoru 1. vuruşa koy. Baştan başlama."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "G–D–Em–C twice in quarter-note downstrokes over an original bass and drum loop, at ♩=70 and at ♩=50.",
+      "tr": "Özgün bas ve davul döngüsü üstünde dörtlük aşağı vuruşla iki kez G–D–Em–C; ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the loop twice, eight bars, with the accompaniment. Start at ♩=60 and move up in steps of 5 to ♩=70; the checkpoint passes at ♩=70. Headphones help the microphone hear only your guitar.",
+      "tr": "Eşlikle döngüyü iki kez, sekiz ölçü çal. ♩=60'tan başla, 5'er adımla ♩=70'e çık; geçiş ♩=70'te geçilir. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: G | D | Em | C | G | D | Em | C",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "One change is slower than the others. Loop just that pair, one bar before and one after, then rejoin the loop.",
+        "tr": "Bir geçiş diğerlerinden yavaş. Yalnız o çifti, bir ölçü önce ve bir ölçü sonrasıyla döngüle; sonra döngüye geri dön."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "On D, start the strum on string 4.",
+        "tr": "D'de vuruşa 4. telden başla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones for the accompaniment and keep the phone close to the guitar.",
+        "tr": "Eşlik için kulaklık kullan ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Give each chord two bars, making the loop sixteen bars, at ♩=60.",
+    "tr": "♩=60'ta her akora iki ölçü ver; döngü on altı ölçü olsun."
+  },
+  "legacy": "R: guitar.journey.chords.four_chord_loop",
+  "minutes": 12,
+  "expertPending": true
+}

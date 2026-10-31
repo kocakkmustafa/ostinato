@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s1-m04-09",
+  "title": { "en": "Am–E and C–Am changes", "tr": "Am–E ve C–Am geçişleri" },
+  "goal": {
+    "en": "Changes Am–E and C–Am at least 12 times each in 60 seconds, keeping shared fingers in place.",
+    "tr": "Ortak parmakları yerinde tutarak Am–E ve C–Am geçişlerini 60 saniyede her biri için en az 12 kez yapar."
+  },
+  "explanation": [
+    {
+      "en": "Am and E have the same finger shape. From Am, move the whole shape one string up toward your face, and you have E.",
+      "tr": "Am ve E aynı parmak şekline sahiptir. Am'den bütün şekli bir tel yukarı, yüzüne doğru taşı; E olur."
+    },
+    {
+      "en": "C and Am share two fingers: finger 1 on string 2, fret 1, and finger 2 on string 4, fret 2. Keep them down.",
+      "tr": "C ve Am iki parmağı paylaşır: 2. telin 1. perdesinde 1. parmak ve 4. telin 2. perdesinde 2. parmak. Onları kaldırma."
+    },
+    {
+      "en": "Between C and Am only finger 3 moves: string 5, fret 3 to string 3, fret 2.",
+      "tr": "C ile Am arasında yalnız 3. parmak hareket eder: 5. telin 3. perdesinden 3. telin 2. perdesine."
+    },
+    {
+      "en": "A finger that stays down is an anchor. It guides the hand and saves time.",
+      "tr": "Yerinde kalan parmak sabit parmaktır. Eli yönlendirir ve zaman kazandırır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Am and E alternating, then C and Am alternating, one strum each, at a slow and a moderate pace.",
+      "tr": "Önce Am ve E, sonra C ve Am sırayla, her birine bir vuruş, yavaş ve orta hızda."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Two sets. First Am and E, then C and Am. In each set, change back and forth for 60 seconds. Each change counts when every string of the new chord is heard.",
+      "tr": "İki set. Önce Am ve E, sonra C ve Am. Her sette 60 saniye boyunca ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 12 changes in 60 seconds for each pair. A change counts when every string of the new chord is heard.",
+        "tr": "Her çift için 60 saniyede en az 12 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Fingers 1 and 2 stayed down between C and Am.", "tr": "C ile Am arasında 1. ve 2. parmak yerinde kaldı." },
+    { "en": "The whole shape moved together between Am and E.", "tr": "Am ile E arasında bütün şekil birlikte hareket etti." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "The anchor fingers are lifting. Keep fingers 1 and 2 touching the strings and move only finger 3.",
+        "tr": "Sabit parmaklar kalkıyor. 1. ve 2. parmağı tellerde tut, yalnız 3. parmağı taşı."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "E uses string 6, but Am and C do not. After E, start the next strum on string 5.",
+        "tr": "E 6. teli kullanır, Am ve C kullanmaz. E'den sonra bir sonraki vuruşa 5. telden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with C–Am only; add Am–E in a later session.",
+    "tr": "Yalnız C–Am ile başla; Am–E'yi sonraki bir oturumda ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

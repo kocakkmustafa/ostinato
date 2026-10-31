@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s1-m04-02",
+  "title": { "en": "A minor", "tr": "La minör" },
+  "goal": {
+    "en": "Plays Am cleanly from string 5, leaving string 6 silent.",
+    "tr": "Am'yi 6. teli çalmadan, 5. telden başlayarak temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "Am: x-0-2-2-1-0. The x on string 6 means do not play it.",
+      "tr": "Am: x-0-2-2-1-0. 6. teldeki x o teli çalma demektir."
+    },
+    {
+      "en": "Put finger 1 on string 2, fret 1; finger 2 on string 4, fret 2; finger 3 on string 3, fret 2.",
+      "tr": "1. parmağı 2. telin 1. perdesine, 2. parmağı 4. telin 2. perdesine, 3. parmağı 3. telin 2. perdesine koy."
+    },
+    {
+      "en": "Start the strum on string 5, the open A. Aim the pick at string 5 before you move.",
+      "tr": "Vuruşa 5. telden, açık La'dan başla. Hareket etmeden önce penayı 5. tele hizala."
+    },
+    {
+      "en": "Keep finger 1 curved so open string 1 rings under it.",
+      "tr": "1. parmağı kavisli tut; altındaki açık 1. tel çalabilsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Am strummed once from string 5, then plucked string by string from 5 to 1, slowly.",
+      "tr": "Am 5. telden bir kez vurulur, sonra 5'ten 1'e tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum Am four times from string 5, in your own time. Then pluck the chord string by string; the app checks each string.",
+      "tr": "Am'yi kendi hızında 5. telden dört kez vur. Sonra akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "Am | Am | Am | Am",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My strum started on string 5.", "tr": "Vuruşum 5. telden başladı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Start the strum lower: let the pick pass over string 6 and land on string 5.",
+        "tr": "Vuruşa daha aşağıdan başla: pena 6. telin üstünden geçsin ve 5. tele insin."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "The underside of finger 1 is touching string 1. Arch it more and press with the tip.",
+        "tr": "1. parmağın alt kısmı 1. tele değiyor. Daha çok kavisle ve uçla bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Pluck strings 5 to 1 one by one instead of strumming until all five ring.",
+    "tr": "Beşi de çalana kadar vurmak yerine 5'ten 1'e telleri tek tek çek."
+  },
+  "legacy": "V: guitar.journey.chords.diagrams_em_am",
+  "minutes": 10,
+  "expertPending": true
+}
