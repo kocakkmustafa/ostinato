@@ -1,0 +1,85 @@
+{
+  "$about": "F5.2 weekly goal card copy (lib/app/retention/retention_copy.dart). EN+TR reviewed source pairs; ids via tool/build_message_ids.py --pending content/ui. The other 12 locales are pending translation, so the ids are not yet in lib/app/app_message_ids.dart.",
+  "messages": [
+    {
+      "id": "kicker",
+      "en": "THIS WEEK",
+      "tr": "BU HAFTA"
+    },
+    {
+      "id": "progress",
+      "en": "{v0} of {v1} sessions",
+      "tr": "{v1} oturumdan {v0}"
+    },
+    {
+      "id": "met",
+      "en": "This week's goal is done.",
+      "tr": "Bu haftanın hedefi tamam."
+    },
+    {
+      "id": "daysLeft",
+      "en": "Days left this week: {v0}",
+      "tr": "Bu hafta kalan gün: {v0}"
+    },
+    {
+      "id": "streak",
+      "en": "Weekly streak: {v0}",
+      "tr": "Haftalık seri: {v0}"
+    },
+    {
+      "id": "freezes",
+      "en": "Freezes: {v0}",
+      "tr": "Dondurma hakkı: {v0}"
+    },
+    {
+      "id": "startStreak",
+      "en": "Meet this week's goal to start a weekly streak.",
+      "tr": "Haftalık seriyi başlatmak için bu haftanın hedefini tamamla."
+    },
+    {
+      "id": "rules",
+      "en": "Each day you practise counts as one session. A freeze covers a short week automatically; every 5 goal weeks add one. This stays on this device.",
+      "tr": "Çalıştığın her gün bir oturum sayılır. Dondurma hakkı eksik kalan haftayı kendiliğinden korur; hedefi tutan her 5 hafta bir hak ekler. Bu bilgi cihazında kalır."
+    },
+    {
+      "id": "offApp",
+      "en": "I played outside the app",
+      "tr": "Uygulama dışında çaldım"
+    },
+    {
+      "id": "offAppSaved",
+      "en": "Saved for today.",
+      "tr": "Bugün için kaydedildi."
+    },
+    {
+      "id": "goalButton",
+      "en": "Weekly goal",
+      "tr": "Haftalık hedef"
+    },
+    {
+      "id": "goalTitle",
+      "en": "Sessions per week",
+      "tr": "Haftada oturum"
+    },
+    {
+      "id": "goalNote",
+      "en": "A new goal applies from this week.",
+      "tr": "Yeni hedef bu haftadan itibaren geçerli."
+    },
+    {
+      "id": "voiceRest",
+      "en": "Voice rest day today",
+      "tr": "Bugün ses dinlenme günü"
+    },
+    {
+      "id": "voiceRestNote",
+      "en": "Voice course: a rest day never breaks the streak. It counts toward the goal, but one session a week is still needed.",
+      "tr": "Ses kursu: dinlenme günü seriyi bozmaz. Hedefe sayılır, ama haftada en az bir oturum yine gerekir."
+    },
+    {
+      "id": "saveFailed",
+      "en": "Could not save. Try again.",
+      "tr": "Kaydedilemedi. Yeniden dene."
+    }
+  ]
+}
