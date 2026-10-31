@@ -2023,3 +2023,167 @@ final class PracticeAudioArbiterTests: XCTestCase {
     XCTAssertEqual(final["leaseSettled"] as? Bool, true)
   }
 }
+
+// MARK: - F2.1 play + record practice session
+
+private final class FakeDuplexHardware: DuplexCaptureHardware {
+  private(set) var modes: [PracticeAudioSessionMode] = []
+  private(set) var cues: [[Float]] = []
+  private(set) var stopCalls = 0
+  var playing = false
+  private var duplexChunk: ((Data, Int, Int64, Bool, @escaping () -> Void) -> Void)?
+  private var legacyChunk: ((Data, Int, Int64, @escaping () -> Void) -> Void)?
+
+  func start(rate: Int, fence: CaptureFence,
+             onChunk: @escaping (Data, Int, Int64, @escaping () -> Void) -> Void) throws -> String {
+    modes.append(.recordOnly)
+    legacyChunk = onChunk
+    return "ios:BuiltInMic"
+  }
+
+  func start(rate: Int, mode: PracticeAudioSessionMode, fence: CaptureFence,
+             onChunk: @escaping (Data, Int, Int64, Bool, @escaping () -> Void) -> Void) throws -> String {
+    modes.append(mode)
+    duplexChunk = onChunk
+    return "ios:BuiltInMic"
+  }
+
+  func playCue(samples: [Float], sampleRate: Int) throws { cues.append(samples) }
+  func stop() throws { stopCalls += 1 }
+
+  func emitChunk() {
+    let data = Data(repeating: 0, count: 8)
+    if let duplex = duplexChunk { duplex(data, 48000, 1, playing) {} }
+    else { legacyChunk?(data, 48000, 1) {} }
+  }
+}
+
+final class PracticeDuplexSessionTests: XCTestCase {
+  private let a = String(repeating: "a", count: 32)
+
+  private func onMain(_ work: () -> Void) {
+    if Thread.isMainThread { work() } else { DispatchQueue.main.sync(execute: work) }
+  }
+
+  private func call(_ handler: AudioCaptureStreamer, _ method: String,
+                    _ args: [String: Any]) -> Any? {
+    let replied = expectation(description: method)
+    var answer: Any?
+    onMain {
+      handler.handle(FlutterMethodCall(methodName: method, arguments: args)) {
+        answer = $0; replied.fulfill()
+      }
+    }
+    wait(for: [replied], timeout: 2)
+    return answer
+  }
+
+  private func code(_ value: Any?) -> String? { (value as? FlutterError)?.code }
+
+  private func running(_ hardware: CaptureHardware, mode: String?,
+                       events: @escaping FlutterEventSink) -> (AudioCaptureCoordinator, AudioCaptureStreamer) {
+    let coordinator = AudioCaptureCoordinator(hardware: hardware, deadline: 1, canCapture: { true })
+    let handler = AudioCaptureStreamer(coordinator: coordinator)
+    onMain { XCTAssertNil(handler.onListen(withArguments: ["attemptId": a], eventSink: events)) }
+    var args: [String: Any] = ["attemptId": a, "sampleRate": 48000]
+    if let mode = mode { args["sessionMode"] = mode }
+    XCTAssertNil(code(call(handler, "start", args)))
+    return (coordinator, handler)
+  }
+
+  private func cue(_ samples: [Double], rate: Int = 48000) -> [String: Any] {
+    let data = samples.withUnsafeBufferPointer { Data(buffer: $0) }
+    return ["attemptId": a, "samples": FlutterStandardTypedData(float64: data), "sampleRate": rate]
+  }
+
+  private func drainMain() {
+    let drained = expectation(description: "main drained")
+    DispatchQueue.main.async { drained.fulfill() }
+    wait(for: [drained], timeout: 1)
+  }
+
+  func testSessionModeConfigurationsAndWire() {
+    XCTAssertEqual(PracticeAudioSessionMode.recordOnly.configuration,
+      .init(category: .record, mode: .measurement, options: []))
+    let duplex = PracticeAudioSessionMode.playAndRecord.configuration
+    XCTAssertEqual(duplex.category, .playAndRecord)
+    XCTAssertEqual(duplex.mode, .measurement)
+    XCTAssertTrue(duplex.options.contains(.defaultToSpeaker))
+    XCTAssertTrue(duplex.options.contains(.allowBluetoothA2DP))
+    XCTAssertFalse(duplex.options.contains(.allowBluetooth))
+    XCTAssertFalse(duplex.options.contains(.mixWithOthers))
+    XCTAssertEqual(PracticeAudioSessionMode(wire: nil), .recordOnly)
+    XCTAssertEqual(PracticeAudioSessionMode(wire: "playAndRecord"), .playAndRecord)
+    XCTAssertNil(PracticeAudioSessionMode(wire: "recordOnly"))
+    XCTAssertNil(PracticeAudioSessionMode(wire: 1))
+  }
+
+  func testOverlapTrackerCoversScheduledCuesPlusTail() {
+    var now: UInt64 = 1_000
+    let tracker = PlaybackOverlapTracker(tailNs: 100, now: { now })
+    XCTAssertFalse(tracker.isActive)
+    tracker.scheduled()
+    now += 500
+    XCTAssertTrue(tracker.isActive)
+    tracker.playedBack()
+    now += 50
+    XCTAssertTrue(tracker.isActive)
+    now += 51
+    XCTAssertFalse(tracker.isActive)
+    tracker.scheduled(); tracker.reset()
+    XCTAssertFalse(tracker.isActive)
+  }
+
+  func testRecordOnlyStartKeepsLegacyChunkAndRefusesCue() {
+    let hardware = FakeDuplexHardware()
+    var chunks: [[String: Any]] = []
+    let (_, handler) = running(hardware, mode: nil) { event in
+      if let map = event as? [String: Any], map["type"] as? String == "chunk" { chunks.append(map) }
+    }
+    XCTAssertEqual(hardware.modes, [.recordOnly])
+    XCTAssertEqual(code(call(handler, "playCue", cue([0.1]))), "playback_not_enabled")
+    hardware.emitChunk(); drainMain()
+    XCTAssertEqual(chunks.count, 1)
+    XCTAssertNil(chunks.first?["playbackActive"])
+    XCTAssertTrue(hardware.cues.isEmpty)
+  }
+
+  func testDuplexStartReportsOverlapAndPlaysValidatedCues() {
+    let hardware = FakeDuplexHardware()
+    var chunks: [[String: Any]] = []
+    let (coordinator, handler) = running(hardware, mode: "playAndRecord") { event in
+      if let map = event as? [String: Any], map["type"] as? String == "chunk" { chunks.append(map) }
+    }
+    XCTAssertEqual(hardware.modes, [.playAndRecord])
+    hardware.playing = true
+    hardware.emitChunk(); drainMain()
+    XCTAssertEqual(chunks.first?["playbackActive"] as? Bool, true)
+
+    XCTAssertNil(code(call(handler, "playCue", cue([0, 0.5, -1]))))
+    XCTAssertEqual(hardware.cues, [[0, 0.5, -1]])
+    XCTAssertEqual(code(call(handler, "playCue", cue([0.1], rate: 44100))), "unsupported_sample_rate")
+    XCTAssertEqual(code(call(handler, "playCue", cue([1.5]))), "bad_args")
+    XCTAssertEqual(code(call(handler, "playCue", cue([.nan]))), "bad_args")
+    XCTAssertEqual(code(call(handler, "playCue", cue([]))), "bad_args")
+    XCTAssertEqual(code(call(handler, "playCue",
+      cue([Double](repeating: 0, count: 48000 * maxCueSeconds + 1)))), "bad_args")
+
+    XCTAssertNil(code(call(handler, "stop", ["attemptId": a])))
+    XCTAssertEqual(coordinator.closeState()["phase"] as? String, "clear")
+    XCTAssertEqual(hardware.stopCalls, 1)
+    XCTAssertEqual(code(call(handler, "playCue", cue([0.1]))), "playback_unavailable")
+    XCTAssertEqual(hardware.cues.count, 1)
+  }
+
+  func testDuplexOnRecordOnlyHardwareFailsClosed() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), deadline: 1,
+                                              canCapture: { true })
+    let handler = AudioCaptureStreamer(coordinator: coordinator)
+    onMain { XCTAssertNil(handler.onListen(withArguments: ["attemptId": a], eventSink: { _ in })) }
+    XCTAssertEqual(code(call(handler, "start",
+      ["attemptId": a, "sampleRate": 48000, "sessionMode": "playAndRecord"])), "playback_unavailable")
+    XCTAssertEqual(code(call(handler, "start",
+      ["attemptId": a, "sampleRate": 48000, "sessionMode": "bogus"])), "bad_args")
+    XCTAssertEqual(coordinator.closeState()["phase"] as? String, "clear")
+  }
+}

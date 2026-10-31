@@ -2,6 +2,19 @@ package com.yulalab.ostinato
 
 import java.util.IdentityHashMap
 import java.util.concurrent.atomic.AtomicBoolean
+import kotlin.math.abs
+import kotlin.math.roundToInt
+
+/** F2.1: a capture attempt either only records (legacy note observation and tuner gate) or
+ * records while the same hardware port may play short app cues (practice screen). The mode is
+ * fixed for the attempt's whole lifetime; playback can never outlive its capture lease. */
+internal enum class CaptureSessionMode(val wire: String) {
+  RECORD_ONLY("recordOnly"),
+  PLAY_AND_RECORD("playAndRecord"),
+}
+
+/** A cue longer than this is rejected rather than queued (bounded RAM and close latency). */
+internal const val MAX_CUE_SECONDS = 2
 
 /** Hardware-independent capture state machine. All public calls arrive on the platform thread;
  * hardware and reads use separate workers. A timed-out method reply never proves release. */
@@ -12,7 +25,13 @@ internal class AudioCaptureCoordinator(
   private val readExitBudgetMs: Long = 500,
   private val arbiter: PracticeAudioArbiter? = null,
 ) {
-  internal interface RecorderFactory { fun create(sampleRate: Int): RecorderPort }
+  internal interface RecorderFactory {
+    fun create(sampleRate: Int): RecorderPort
+    /** Only a duplex-capable factory overrides this; record-only ports fail closed. */
+    fun create(sampleRate: Int, mode: CaptureSessionMode): RecorderPort =
+      if (mode == CaptureSessionMode.RECORD_ONLY) create(sampleRate)
+      else throw UnsupportedOperationException("playback_unavailable")
+  }
   internal interface RecorderPort {
     val sampleRate: Int
     fun start()
@@ -22,6 +41,13 @@ internal class AudioCaptureCoordinator(
     fun route(): String
     fun watchRoute(changed: () -> Unit)
     fun unwatchRoute()
+    /** Queues mono PCM16 at [sampleRate]. Must not block the caller for the cue's duration. */
+    fun playCue(pcm: ShortArray): Unit = throw UnsupportedOperationException("playback_unavailable")
+    /** True while app output was (or may still acoustically be) audible. Read on the reader thread. */
+    fun playbackActive(): Boolean = false
+    /** Audio focus loss (call, another app). The coordinator closes the attempt. */
+    fun watchInterruption(interrupted: (String) -> Unit) {}
+    fun unwatchInterruption() {}
   }
   internal interface ReadHandle { fun awaitExit(timeoutMs: Long): Boolean }
   internal interface CaptureDispatch {
@@ -49,6 +75,7 @@ internal class AudioCaptureCoordinator(
     val generation: Long,
     var output: Output?,
     val startReply: ReplyGate,
+    val mode: CaptureSessionMode,
   ) {
     var port: RecorderPort? = null
     var reader: ReadHandle? = null
@@ -117,7 +144,8 @@ internal class AudioCaptureCoordinator(
   }
 
   fun start(owner: Any, id: String, rate: Int, output: Output, reply: Reply,
-            claim: PracticeAudioArbiter.CaptureClaim? = null) {
+            claim: PracticeAudioArbiter.CaptureClaim? = null,
+            mode: CaptureSessionMode = CaptureSessionMode.RECORD_ONLY) {
     val response = ReplyGate(reply)
     val attempt = synchronized(gate) {
       if (!validId(id) || rate !in setOf(44100, 48000)) {
@@ -135,7 +163,7 @@ internal class AudioCaptureCoordinator(
       if (arbiter != null && !arbiter.claimCaptureStartLocked(owner, claim)) {
         response.error("capture_close_unconfirmed"); return
       }
-      Attempt(owner, id, rate, ++generation, output, response).also { current = it }
+      Attempt(owner, id, rate, ++generation, output, response, mode).also { current = it }
     }
     dispatch.after(closeDeadlineMs) {
       synchronized(gate) {
@@ -147,7 +175,7 @@ internal class AudioCaptureCoordinator(
     }
     dispatch.hardware {
       try {
-        val port = factory.create(rate)
+        val port = factory.create(rate, attempt.mode)
         synchronized(gate) {
           attempt.port = port
           if (attempt.stopRequested || current !== attempt) return@synchronized
@@ -192,6 +220,20 @@ internal class AudioCaptureCoordinator(
           }
         }
       } catch (_: Throwable) { /* event is optional */ }
+      if (attempt.mode == CaptureSessionMode.PLAY_AND_RECORD) {
+        try {
+          port.watchInterruption { reason ->
+            dispatch.main {
+              synchronized(gate) interrupted@{
+                if (!isLiveLocked(attempt)) return@interrupted
+                emit(attempt, mapOf("type" to "interrupted", "attemptId" to attempt.id,
+                  "reason" to reason))
+                requestCloseLocked(attempt)
+              }
+            }
+          }
+        } catch (_: Throwable) { /* focus loss still surfaces as a route/read failure */ }
+      }
       emitRoute(attempt)
       attempt.reader = dispatch.reader { readLoop(attempt, port) }
       attempt.startReply.success()
@@ -208,9 +250,18 @@ internal class AudioCaptureCoordinator(
         if (!attempt.pendingBuffer.compareAndSet(false, true)) { pcm.fill(0); continue }
         val samples = DoubleArray(count) { pcm[it] / 32768.0 }
         val time = System.nanoTime() / 1000 - count.toLong() * 1_000_000 / port.sampleRate
+        // Record-only chunks keep their exact legacy shape. A duplex chunk says whether app
+        // output may have leaked into this window (conservative: unreadable state = true).
+        val message = if (attempt.mode == CaptureSessionMode.PLAY_AND_RECORD) {
+          val overlap = try { port.playbackActive() } catch (_: Throwable) { true }
+          mapOf("type" to "chunk", "attemptId" to attempt.id, "samples" to samples,
+            "sampleRate" to port.sampleRate, "t" to time, "playbackActive" to overlap)
+        } else {
+          mapOf("type" to "chunk", "attemptId" to attempt.id,
+            "samples" to samples, "sampleRate" to port.sampleRate, "t" to time)
+        }
         dispatch.main {
-          emit(attempt, mapOf("type" to "chunk", "attemptId" to attempt.id,
-            "samples" to samples, "sampleRate" to port.sampleRate, "t" to time))
+          emit(attempt, message)
           samples.fill(0.0)
           attempt.pendingBuffer.set(false)
         }
@@ -362,6 +413,37 @@ internal class AudioCaptureCoordinator(
 
   fun requestClose(owner: Any, id: String) = stop(owner, id, null)
 
+  /** Plays one short cue inside the caller's own running duplex attempt. It never allocates
+   * output hardware: the port was opened (and will be released) by the capture attempt. */
+  fun playCue(owner: Any, id: String, samples: DoubleArray, sampleRate: Int, reply: Reply) {
+    val response = ReplyGate(reply)
+    val port = synchronized(gate) {
+      val attempt = current
+      if (!validId(id) || bindings[owner]?.contains(id) != true || attempt == null ||
+        attempt.owner !== owner || attempt.id != id || attempt.phase != "running" ||
+        !isLiveLocked(attempt)) {
+        response.error("playback_unavailable"); return
+      }
+      if (attempt.mode != CaptureSessionMode.PLAY_AND_RECORD) {
+        response.error("playback_not_enabled"); return
+      }
+      val held = attempt.port
+      if (held == null) { response.error("playback_unavailable"); return }
+      if (sampleRate != attempt.rate || sampleRate != held.sampleRate) {
+        response.error("unsupported_sample_rate"); return
+      }
+      if (!validCue(samples, sampleRate)) { response.error("bad_args"); return }
+      held
+    }
+    val pcm = ShortArray(samples.size) { (samples[it] * 32767.0).roundToInt().toShort() }
+    try {
+      port.playCue(pcm)
+      response.success()
+    } catch (_: Throwable) {
+      response.error("playback_failed")
+    }
+  }
+
   /** Process lifecycle and engine replacement, never a Dart MethodChannel. */
   fun requestCloseGlobal() = synchronized(gate) {
     current?.takeUnless {
@@ -381,6 +463,9 @@ internal class AudioCaptureCoordinator(
       ++generation
       attempt.output = null // fence queued chunks and detach old EventSink immediately.
       try { attempt.port?.unwatchRoute() } catch (_: Throwable) { attempt.closeFailure = true }
+      if (attempt.mode == CaptureSessionMode.PLAY_AND_RECORD) {
+        try { attempt.port?.unwatchInterruption() } catch (_: Throwable) { attempt.closeFailure = true }
+      }
       attempt.startReply.error("capture_start_cancelled")
     }
     if (!attempt.closeDeadlineSet) {
@@ -487,6 +572,10 @@ internal class AudioCaptureCoordinator(
   private fun isLive(attempt: Attempt): Boolean = synchronized(gate) { isLiveLocked(attempt) }
   private fun isLiveLocked(attempt: Attempt): Boolean =
     current === attempt && !attempt.stopRequested && generation == attempt.generation
+
+  private fun validCue(samples: DoubleArray, sampleRate: Int): Boolean =
+    samples.isNotEmpty() && samples.size <= sampleRate * MAX_CUE_SECONDS &&
+      samples.all { it.isFinite() && abs(it) <= 1.0 }
 
   private fun validId(id: String): Boolean = id.length == 32 && id.all { it in '0'..'9' || it in 'a'..'f' }
 }

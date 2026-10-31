@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
@@ -30,6 +31,43 @@ final class AudioCaptureContextClaim {
   };
 }
 
+/// F2.1 — bir yakalama denemesinin ses oturumu modu. Deneme boyunca SABİT.
+///
+/// - [recordOnly]: eski davranış (nota gözlemi, akort kapısı). Tel biçimi
+///   birebir aynı kalır: `start` çağrısına `sessionMode` anahtarı EKLENMEZ.
+/// - [playAndRecord]: pratik ekranı. Aynı native deneme mikrofonu dinlerken
+///   kısa ipuçları (klik/test tonu; ileride metronom ve referans ses) çalabilir.
+///   Çalma, girdi kirasının İÇİNDEDİR: ayrı sahibi yoktur, yakalama kapanınca
+///   (durdurma, arka plan, rota değişimi, kesinti, motor değişimi) o da kapanır.
+enum AudioSessionMode { recordOnly, playAndRecord }
+
+/// Tek bir ipucunun üst sınırı; daha uzunu kuyruğa alınmaz, reddedilir.
+const int kMaxCueSeconds = 2;
+
+/// Bir ipucu PCM'inin native'e gönderilmeden önceki biçim denetimi.
+bool isValidCuePcm(List<double> samples, int sampleRate) =>
+    (sampleRate == 44100 || sampleRate == 48000) &&
+    samples.isNotEmpty &&
+    samples.length <= sampleRate * kMaxCueSeconds &&
+    samples.every((v) => v.isFinite && v.abs() <= 1.0);
+
+/// Çal + dinle yeteneği olan kanal. [AudioCaptureChannel] arayüzü bilerek
+/// değiştirilmedi (yalnız-kayıt uygulamaları etkilenmesin).
+abstract interface class AudioCuePlaybackChannel {
+  /// [AudioSessionMode.playAndRecord] modunda yakalamayı başlatır.
+  Future<void> startPlayAndRecord({
+    required int sampleRate,
+    AudioCaptureContextClaim? claim,
+  });
+
+  /// Çalışan çal+dinle denemesinin İÇİNDE mono PCM çalar. [sampleRate],
+  /// başlatmada istenen hızla aynı olmalı. Hata kodları:
+  /// `playback_not_enabled` (yalnız-kayıt denemesi), `playback_unavailable`
+  /// (çalışan deneme yok / kapanıyor), `unsupported_sample_rate`, `bad_args`,
+  /// `playback_failed`.
+  Future<void> playCue(Float64List samples, {required int sampleRate});
+}
+
 /// Native yakalama katmanının HAM olayı — henüz [AudioRoute]e çözülmemiş
 /// (bkz. `audio_route_state.dart`), henüz tampon/izin/yaşam-döngüsü mantığı
 /// uygulanmamış. Bu ayrım `motion_camera.CameraFrameEnvelope` ile
@@ -50,10 +88,15 @@ final class RawAudioChunkEvent extends RawAudioEvent {
     required this.samples,
     required this.sampleRate,
     required this.tNativeUs,
+    this.playbackActive = false,
   });
   final List<double> samples;
   final int sampleRate;
   final int tNativeUs;
+
+  /// Yalnız çal+dinle denemesinde native'in gönderdiği bayrak: bu pencerede
+  /// uygulama çıkışı duyulabilirdi (bkz. `AudioChunk.playbackActive`).
+  final bool playbackActive;
 }
 
 /// Route değişti — [platformRouteTag] HAM platform adı (`audio_route_state.
@@ -236,6 +279,7 @@ abstract interface class AudioCaptureReadbackCancellation {
 final class MethodChannelAudioCaptureChannel
     implements
         AudioCaptureChannel,
+        AudioCuePlaybackChannel,
         PreparedAudioCaptureChannel,
         AudioCaptureCloseControl,
         AudioCaptureReadbackCancellation {
@@ -360,7 +404,19 @@ final class MethodChannelAudioCaptureChannel
   Future<void> start({
     required int sampleRate,
     AudioCaptureContextClaim? claim,
-  }) async {
+  }) => _start(sampleRate, claim, AudioSessionMode.recordOnly);
+
+  @override
+  Future<void> startPlayAndRecord({
+    required int sampleRate,
+    AudioCaptureContextClaim? claim,
+  }) => _start(sampleRate, claim, AudioSessionMode.playAndRecord);
+
+  Future<void> _start(
+    int sampleRate,
+    AudioCaptureContextClaim? claim,
+    AudioSessionMode mode,
+  ) async {
     if (claim == null || !claim.isValid) {
       throw PlatformException(code: 'capture_context_required');
     }
@@ -374,7 +430,28 @@ final class MethodChannelAudioCaptureChannel
       'attemptId': id,
       'sampleRate': sampleRate,
       ...claim.wireFields,
+      // Record-only keeps the exact legacy key set (native parsers are strict).
+      if (mode == AudioSessionMode.playAndRecord)
+        'sessionMode': AudioSessionMode.playAndRecord.name,
     });
+  }
+
+  @override
+  Future<void> playCue(Float64List samples, {required int sampleRate}) async {
+    final id = _attemptId;
+    if (id == null || !_acceptEvents || _closeBlocked) {
+      throw PlatformException(code: 'playback_unavailable');
+    }
+    if (!isValidCuePcm(samples, sampleRate)) {
+      throw PlatformException(code: 'bad_args');
+    }
+    await _method
+        .invokeMethod<void>('playCue', <String, Object?>{
+          'attemptId': id,
+          'samples': samples,
+          'sampleRate': sampleRate,
+        })
+        .timeout(_transportTimeout);
   }
 
   void _onMessage(dynamic message) {
@@ -389,11 +466,17 @@ final class MethodChannelAudioCaptureChannel
           // başına binlerce örneği tek tek `NSNumber`/`Object` kutulamak
           // yerine ham bayt kopyası. `Float64List` zaten `List<double>`
           // sözleşmesini karşılar, ayrı bir dönüşüm GEREKMEZ.
+          // Absent on record-only attempts; when present it must be a bool.
+          final playback = map['playbackActive'];
+          if (playback != null && playback is! bool) {
+            throw const FormatException('playbackActive');
+          }
           _events.add(
             RawAudioChunkEvent(
               samples: map['samples']! as List<double>,
               sampleRate: map['sampleRate']! as int,
               tNativeUs: map['t']! as int,
+              playbackActive: playback == true,
             ),
           );
         case 'routeChanged':
@@ -564,7 +647,10 @@ final class MethodChannelAudioCaptureChannel
 /// Testlerin ve sim-kanıtının kaynağı: gerçek platform kanalı YOK, olaylar
 /// elle tetiklenir. `ostinato_posture.FakePoseSource` ile aynı disiplin.
 final class FakeAudioCaptureChannel
-    implements AudioCaptureChannel, AudioCaptureCloseControl {
+    implements
+        AudioCaptureChannel,
+        AudioCuePlaybackChannel,
+        AudioCaptureCloseControl {
   FakeAudioCaptureChannel({
     this.supportedSampleRates = const <int>{44100, 48000},
   });
@@ -577,6 +663,17 @@ final class FakeAudioCaptureChannel
   String? _attemptId;
   String? _lastClosedAttemptId;
   int _nextAttempt = 0;
+  int _startedRate = 0;
+  AudioSessionMode? _sessionMode;
+
+  /// Son başlatılan denemenin modu (`null`: hiç başlatılmadı).
+  AudioSessionMode? get sessionMode => _sessionMode;
+
+  /// Çalınan ipuçları (test gözlemi).
+  final List<Float64List> playedCues = <Float64List>[];
+
+  /// `true` ise bir sonraki `playCue` `playback_failed` ile düşer.
+  bool failNextCue = false;
 
   @override
   String? get attemptId => _attemptId;
@@ -598,15 +695,45 @@ final class FakeAudioCaptureChannel
   bool get isRunning => _running;
 
   @override
-  Future<void> start({required int sampleRate}) async {
+  Future<void> start({required int sampleRate}) =>
+      _start(sampleRate, AudioSessionMode.recordOnly);
+
+  @override
+  Future<void> startPlayAndRecord({
+    required int sampleRate,
+    AudioCaptureContextClaim? claim,
+  }) => _start(sampleRate, AudioSessionMode.playAndRecord);
+
+  Future<void> _start(int sampleRate, AudioSessionMode mode) async {
     _attemptId = 'fake-${++_nextAttempt}';
+    _sessionMode = mode;
     if (!supportedSampleRates.contains(sampleRate)) {
       throw PlatformException(
         code: 'unsupported_sample_rate',
         message: '$sampleRate',
       );
     }
+    _startedRate = sampleRate;
     _running = true;
+  }
+
+  @override
+  Future<void> playCue(Float64List samples, {required int sampleRate}) async {
+    if (!_running) throw PlatformException(code: 'playback_unavailable');
+    if (_sessionMode != AudioSessionMode.playAndRecord) {
+      throw PlatformException(code: 'playback_not_enabled');
+    }
+    if (sampleRate != _startedRate) {
+      throw PlatformException(code: 'unsupported_sample_rate');
+    }
+    if (!isValidCuePcm(samples, sampleRate)) {
+      throw PlatformException(code: 'bad_args');
+    }
+    if (failNextCue) {
+      failNextCue = false;
+      throw PlatformException(code: 'playback_failed');
+    }
+    playedCues.add(Float64List.fromList(samples));
   }
 
   /// Testte tek parça itmek için — `FakePoseSource.pushOne()` deseni.
@@ -614,6 +741,7 @@ final class FakeAudioCaptureChannel
     List<double> samples, {
     required int sampleRate,
     required int tNativeUs,
+    bool playbackActive = false,
   }) {
     if (!_running) return;
     _events.add(
@@ -621,6 +749,7 @@ final class FakeAudioCaptureChannel
         samples: samples,
         sampleRate: sampleRate,
         tNativeUs: tNativeUs,
+        playbackActive: playbackActive,
       ),
     );
   }

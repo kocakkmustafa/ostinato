@@ -27,7 +27,7 @@ internal object AudioCaptureRuntime {
 
   @Synchronized fun coordinator(context: Context): AudioCaptureCoordinator =
     coordinator ?: AudioCaptureCoordinator(
-      AndroidRecorderFactory(), AndroidCaptureDispatch(), arbiter = arbiter,
+      AndroidRecorderFactory(context.applicationContext), AndroidCaptureDispatch(), arbiter = arbiter,
     ).also {
       coordinator = it
       arbiter.attachCapture(it)
@@ -83,18 +83,33 @@ private class AndroidCaptureDispatch : AudioCaptureCoordinator.CaptureDispatch {
   override fun after(delayMs: Long, task: () -> Unit) { main.postDelayed(task, delayMs) }
 }
 
-private class AndroidRecorderFactory : AudioCaptureCoordinator.RecorderFactory {
-  override fun create(sampleRate: Int): AudioCaptureCoordinator.RecorderPort {
+/** Holds only the application context (no Activity). */
+private class AndroidRecorderFactory(
+  private val appContext: Context,
+) : AudioCaptureCoordinator.RecorderFactory {
+  override fun create(sampleRate: Int): AudioCaptureCoordinator.RecorderPort =
+    createRecorder(sampleRate)
+
+  private fun createRecorder(sampleRate: Int): AndroidRecorderPort {
     val min = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO,
       AudioFormat.ENCODING_PCM_16BIT)
     if (min <= 0) throw IllegalStateException("unsupported_sample_rate")
+    // F2.1: both modes keep VOICE_RECOGNITION (CDD: AGC/noise suppression off). UNPROCESSED
+    // is deliberately not switched in yet: the E44 calibrated floors were measured on this source.
     val record = AudioRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION, sampleRate,
       AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, min * 2)
     return AndroidRecorderPort(record)
   }
+
+  override fun create(sampleRate: Int, mode: CaptureSessionMode): AudioCaptureCoordinator.RecorderPort =
+    when (mode) {
+      CaptureSessionMode.RECORD_ONLY -> createRecorder(sampleRate)
+      CaptureSessionMode.PLAY_AND_RECORD ->
+        AndroidDuplexPort.create(appContext, createRecorder(sampleRate), sampleRate)
+    }
 }
 
-private class AndroidRecorderPort(private val record: AudioRecord) : AudioCaptureCoordinator.RecorderPort {
+internal class AndroidRecorderPort(private val record: AudioRecord) : AudioCaptureCoordinator.RecorderPort {
   private var routing: AudioRecord.OnRoutingChangedListener? = null
   override val sampleRate: Int get() = record.sampleRate
   override fun start() {
@@ -132,6 +147,19 @@ private class AndroidRecorderPort(private val record: AudioRecord) : AudioCaptur
     }
   }
 }
+
+/** F2.1: `sessionMode` is optional and orthogonal to the claim. Absent = the legacy
+ * record-only attempt; the only accepted explicit value is `playAndRecord`. */
+internal fun parseCaptureSessionMode(args: Map<*, *>?): CaptureSessionMode? {
+  val fields = args ?: return null
+  if (!fields.containsKey("sessionMode")) return CaptureSessionMode.RECORD_ONLY
+  return if (fields["sessionMode"] == CaptureSessionMode.PLAY_AND_RECORD.wire) {
+    CaptureSessionMode.PLAY_AND_RECORD
+  } else null
+}
+
+internal fun withoutSessionMode(args: Map<*, *>?): Map<*, *>? =
+  args?.filterKeys { it != "sessionMode" }
 
 /** A legacy start has three context fields; a leased input adds two lease fields. */
 internal fun parseCaptureStartClaim(args: Map<*, *>?): PracticeAudioArbiter.CaptureClaim? {
@@ -182,8 +210,10 @@ internal class AudioCaptureStreamer(
       "start" -> {
         val id = args?.get("attemptId") as? String
         val rate = args?.get("sampleRate") as? Int
-        val claim = parseCaptureStartClaim(args)
-        if (id == null || rate == null || claim == null || id != ids.current || sink == null) {
+        val mode = parseCaptureSessionMode(args)
+        val claim = parseCaptureStartClaim(withoutSessionMode(args))
+        if (id == null || rate == null || mode == null || claim == null || id != ids.current ||
+          sink == null) {
           result.error("bad_args", null, null); return
         }
         if (!coordinator.isForeground(owner) ||
@@ -194,7 +224,19 @@ internal class AudioCaptureStreamer(
           override fun event(message: Map<String, Any>) {
             if (ids.current == id) sink?.success(message)
           }
-        }, methodReply(result), claim)
+        }, methodReply(result), claim, mode)
+      }
+      "playCue" -> {
+        val id = args?.get("attemptId") as? String
+        val samples = args?.get("samples") as? DoubleArray
+        val rate = args?.get("sampleRate") as? Int
+        if (id == null || samples == null || rate == null || args?.size != 3) {
+          result.error("bad_args", null, null); return
+        }
+        if (id != ids.current || sink == null) {
+          result.error("playback_unavailable", null, null); return
+        }
+        coordinator.playCue(owner, id, samples, rate, methodReply(result))
       }
       "stop" -> {
         val id = args?.get("attemptId") as? String
