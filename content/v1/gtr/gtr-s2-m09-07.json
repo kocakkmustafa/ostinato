@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s2-m09-07",
+  "title": { "en": "Play back one note by ear", "tr": "Kulaktan tek nota" },
+  "goal": {
+    "en": "Finds a heard note on the guitar within three tries.",
+    "tr": "Duyduğu notayı en fazla üç denemede gitarda bulur."
+  },
+  "explanation": [
+    {
+      "en": "The app plays one note from first position, B2 to G4. Your job is to find it on the strings.",
+      "tr": "Uygulama birinci pozisyondan, Si2 ile Sol4 arasından bir nota çalar. Senin işin onu tellerde bulmak."
+    },
+    {
+      "en": "Start from a nearby open string. Is the note higher or lower? Move one fret at a time in that direction.",
+      "tr": "Yakın bir açık telden başla. Nota daha yüksek mi, alçak mı? O yöne perde perde ilerle."
+    },
+    {
+      "en": "If you like, hum the note softly before you search. It helps you keep it in mind.",
+      "tr": "İstersen aramadan önce notayı hafifçe mırıldan. Aklında tutmana yardım eder."
+    },
+    {
+      "en": "After each try you see the result: correct, or a different note with its direction. Replay the note as often as you need.",
+      "tr": "Her denemeden sonra sonucu görürsün: doğru ya da yönüyle birlikte farklı nota. Notayı istediğin kadar yeniden dinle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "One target note per question from B2 to G4, string-model synthesis, replayable.",
+      "tr": "Her soruda Si2 ile Sol4 arasından bir hedef nota, tel modeli sentezi, yeniden dinlenebilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Listen to a note, then find and play it. You have up to 3 tries per note, 8 notes in all. No click.",
+      "tr": "Bir notayı dinle, sonra bul ve çal. Her nota için en fazla 3 deneme hakkın var; toplam 8 nota. Klik yok."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 7 of 8 notes found within 3 tries each.",
+        "tr": "8 notanın en az 7'si, her biri en fazla 3 denemede bulunur."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I decided higher or lower before moving my hand.", "tr": "Elimi kıpırdatmadan önce yüksek mi alçak mı olduğuna karar verdim." },
+    { "en": "I moved one fret at a time instead of guessing.", "tr": "Tahmin etmek yerine perde perde ilerledim." },
+    { "en": "My note sounded the same as the reference.", "tr": "Notam referansla aynı duyuldu." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "You are one fret past it. Move one fret toward the nut.", "tr": "Bir perde geçmişsin. Bir perde üst eşiğe doğru kay." }
+    },
+    {
+      "error": { "en": "Different note: the right letter, one octave off.", "tr": "Farklı nota: harf aynı, oktav farklı." },
+      "fix": { "en": "Compare the register first: is it near your low strings or your high strings?", "tr": "Önce bölgeyi karşılaştır: pes tellerine mi yakın, tiz tellerine mi?" }
+    }
+  ],
+  "adaptation": {
+    "en": "Choose the 'one string' option: every note is on string 1 or string 2.",
+    "tr": "'Tek tel' seçeneğini seç: bütün notalar 1. ya da 2. teldedir."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

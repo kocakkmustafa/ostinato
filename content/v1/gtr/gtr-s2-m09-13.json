@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s2-m09-13",
+  "title": { "en": "Fretboard checkpoint", "tr": "Klavye geçişi" },
+  "goal": {
+    "en": "Reads a new eight-bar line at ♩=76 and plays back three motifs by ear.",
+    "tr": "Yeni bir sekiz ölçülük diziyi ♩=76'da okur ve üç motifi kulaktan geri çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint has two parts. Each part must pass on its own; a passed part is kept.",
+      "tr": "Bu geçişin iki bölümü var. Her bölüm kendi başına geçmeli; geçtiğin bölüm saklanır."
+    },
+    {
+      "en": "Part 1, reading: a new eight-bar line in C major or G major, first position, shown as TAB with note names.",
+      "tr": "1. bölüm, okuma: Do majör ya da Sol majörde, birinci pozisyonda yeni bir sekiz ölçülük dizi; nota adlarıyla tab olarak gösterilir."
+    },
+    {
+      "en": "Before you play, scan the line: find the key, any F♯, and the string changes.",
+      "tr": "Çalmadan önce diziye göz at: tonu, varsa Fa♯'yi ve tel geçişlerini bul."
+    },
+    {
+      "en": "Part 2, by ear: three new three-note motifs, up to 3 tries each.",
+      "tr": "2. bölüm, kulaktan: üç yeni üç notalık motif, her biri için en fazla 3 deneme."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Click at ♩=76 for part 1; the reading line is not played before you try it. Original motifs from C4 to G4 for part 2.",
+      "tr": "1. bölüm için ♩=76'da klik; okuma dizisi denemenden önce çalınmaz. 2. bölüm için Do4 ile Sol4 arasında özgün motifler."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Part 1: read the new eight-bar line once with the click at ♩=76. Part 2: listen to a three-note motif and play it back, up to 3 tries; do this for 3 motifs.",
+      "tr": "1. bölüm: yeni sekiz ölçülük diziyi ♩=76'da klikle bir kez oku ve çal. 2. bölüm: üç notalık bir motifi dinle ve geri çal, en fazla 3 deneme; bunu 3 motif için yap."
+    },
+    "tempo": { "open": 76, "target": 76 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Reading: Level 2 note and timing accuracy. By ear: at least 2 of 3 motifs within 3 tries each.",
+        "tr": "Her bölüm kendi başına geçer. Okuma: Seviye 2 nota ve zamanlama ölçütü. Kulaktan: 3 motifin en az 2'si, her biri en fazla 3 denemede."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "In G major lines, every F is F♯. Mark the F♯ before you start.", "tr": "Sol majör dizilerde Fa, Fa♯ olur. Başlamadan önce Fa♯'yi işaretle." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "Keep going after a slip. Look one bar ahead, not at your hand.", "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Find a quieter spot and keep the phone about an arm's length away.", "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut." }
+    }
+  ],
+  "adaptation": {
+    "en": "If reading did not pass, practise at ♩=60 with new lines, then retake only that part at ♩=76.",
+    "tr": "Okuma geçmediyse yeni dizilerle ♩=60'ta çalış, sonra yalnız o bölümü ♩=76'da yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

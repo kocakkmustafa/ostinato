@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s2-m09-09",
+  "title": { "en": "Question and answer", "tr": "Soru ve cevap" },
+  "goal": {
+    "en": "Answers a two-bar question with a two-bar phrase from a given note pool at ♩=70.",
+    "tr": "İki ölçülük soruya verilen nota havuzundan iki ölçülük bir cümleyle ♩=70'te cevap verir."
+  },
+  "explanation": [
+    {
+      "en": "A motif is a short idea you can recognise when it comes back. A question and answer are two motifs that belong together.",
+      "tr": "Motif, geri geldiğinde tanıdığın kısa bir fikirdir. Soru ve cevap birbirine ait iki motiftir."
+    },
+    {
+      "en": "The pool has five notes: A3 3/2, C4 2/1, D4 2/3, E4 1/0, G4 1/3. Use only these.",
+      "tr": "Havuzda beş nota var: La3 3/2, Do4 2/1, Re4 2/3, Mi4 1/0, Sol4 1/3. Yalnız bunları kullan."
+    },
+    {
+      "en": "Keep the rhythm of the question and change only the last note. That is the simplest answer.",
+      "tr": "Sorunun ritmini koru, yalnız son notayı değiştir. En basit cevap budur."
+    },
+    {
+      "en": "For a second answer, keep the notes and change the rhythm. Change one thing at a time, not everything.",
+      "tr": "İkinci cevapta notaları koru, ritmi değiştir. Her şeyi değil, bir seferde tek şeyi değiştir."
+    },
+    {
+      "en": "Leave a rest at the end of your answer. A rest makes the phrase end clearly.",
+      "tr": "Cevabının sonunda bir sus bırak. Sus cümlenin net bitmesini sağlar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Original two-bar questions over an Am–C accompaniment loop at ♩=70, followed by two open bars for your answer.",
+      "tr": "♩=70'te Am–C eşlik döngüsü üzerinde özgün iki ölçülük sorular, ardından cevabın için iki boş ölçü."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "The app plays a two-bar question. Answer in the next two bars with notes from the pool. Do this for 4 questions. Headphones help the microphone hear only your guitar.",
+      "tr": "Uygulama iki ölçülük bir soru çalar. Sonraki iki ölçüde havuzdaki notalarla cevap ver. Bunu 4 soru için yap. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes are in the pool, and your answers start and end inside their two bars at Level 2 timing.",
+        "tr": "Notalarının en az %90'ı havuzdan gelir; cevapların Seviye 2 zamanlama ölçütüyle kendi iki ölçüsü içinde başlar ve biter."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I used only the five pool notes.", "tr": "Yalnız havuzdaki beş notayı kullandım." },
+    { "en": "My answer kept one thing from the question.", "tr": "Cevabım sorudan bir şeyi korudu." },
+    { "en": "I ended each answer with a rest before the next question.", "tr": "Her cevabı sonraki sorudan önce bir susla bitirdim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: outside the pool.", "tr": "Farklı nota: havuzun dışında." },
+      "fix": { "en": "Usually B3 or F4 slipped in. Keep finger 1 off fret 1 on string 1, and avoid open string 2.", "tr": "Genelde Si3 ya da Fa4 karışıyor. 1. telde 1. perdeye basma, açık 2. teli kullanma." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "Start your answer on beat 1 of bar 3. Plan the first note while the question plays.", "tr": "Cevabına 3. ölçünün 1. vuruşunda başla. Soru çalarken ilk notanı planla." }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only A3, C4 and E4, and answer with one bar instead of two.",
+    "tr": "Yalnız La3, Do4 ve Mi4'ü kullan; iki ölçü yerine bir ölçüyle cevap ver."
+  },
+  "legacy": "R: guitar.journey.melody.phrasing",
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s2-test",
+  "title": { "en": "Level 2 test", "tr": "Seviye 2 testi" },
+  "goal": {
+    "en": "Shows the Level 2 skills: chord changes, accompaniment, technique, reading and playing by ear.",
+    "tr": "Seviye 2 becerilerini gösterir: akor geçişi, eşlik, teknik, okuma ve kulaktan çalma."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, change speed: three chord pairs, 60 seconds each. Part 2, accompaniment: an original 16-bar chart with a 'D-DU-UDU' section and a 3/4 section at ♩=80.",
+      "tr": "1. bölüm, geçiş hızı: üç akor çifti, her biri 60 saniye. 2. bölüm, eşlik: 'D-DU-UDU' bölümü ve 3/4 bölümü olan özgün 16 ölçülük çizelge, ♩=80."
+    },
+    {
+      "en": "Part 3, technique: chromatic frets 1–4 across six strings, up and down, in eighth notes at ♩=80.",
+      "tr": "3. bölüm, teknik: 1–4. perdelerde altı telde kromatik çıkış-iniş, sekizliklerle, ♩=80."
+    },
+    {
+      "en": "Part 4, reading: a new eight-bar TAB line with a C major or G major passage at ♩=76. Part 5, by ear: play back 3 motifs, up to 3 tries each.",
+      "tr": "4. bölüm, okuma: Do majör ya da Sol majör pasajlı yeni bir sekiz ölçülük tab dizisi, ♩=76. 5. bölüm, kulaktan: 3 motifi geri çal, her biri için en fazla 3 deneme."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Click and an original accompaniment loop for parts 1–3; click only for reading; original motifs for part 5. Headphones recommended.",
+      "tr": "1–3. bölümler için klik ve özgün eşlik döngüsü; okumada yalnız klik; 5. bölüm için özgün motifler. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3", "A4"],
+    "task": {
+      "en": "Complete five parts. 1 Change speed: three chord pairs, 60 seconds each. 2 Accompaniment: 16 bars at ♩=80, 'D-DU-UDU' then a 3/4 section. 3 Technique: chromatic frets 1–4, six strings up and down, eighths at ♩=80. 4 Reading: a new eight-bar line at ♩=76. 5 By ear: 3 motifs, up to 3 tries each.",
+      "tr": "Beş bölümü tamamla. 1 Geçiş hızı: üç akor çifti, her biri 60 saniye. 2 Eşlik: ♩=80'de 16 ölçü, önce 'D-DU-UDU' sonra 3/4 bölümü. 3 Teknik: 1–4. perdelerde kromatik, altı telde çıkış-iniş, ♩=80'de sekizlik. 4 Okuma: ♩=76'da yeni bir sekiz ölçülük dizi. 5 Kulaktan: 3 motif, her biri için en fazla 3 deneme."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Change speed: at least 20 changes per pair. Accompaniment: Level 2 chord and timing accuracy. Technique and reading: Level 2 note and timing accuracy. By ear: at least 2 of 3 motifs within 3 tries each.",
+        "tr": "Her bölüm kendi başına geçer. Geçiş hızı: her çiftte en az 20 geçiş. Eşlik: Seviye 2 akor ve zamanlama ölçütü. Teknik ve okuma: Seviye 2 nota ve zamanlama ölçütü. Kulaktan: 3 motifin en az 2'si, her biri en fazla 3 denemede."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": { "en": "Redo the one-minute method from the chord changes module for that pair, then retake part 1.", "tr": "O çift için akor geçişleri modülündeki bir dakika yöntemini tekrarla, sonra 1. bölümü yeniden dene." }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "Keep the strumming hand moving through the change; land the new chord on beat 1 even if a string is missing.", "tr": "Geçiş sırasında sağ eli durdurma; bir tel eksik olsa bile yeni akoru 1. vuruşa yerleştir." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.", "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan." }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "legacy": "V: guitar.journey.independent.rhythm_final",
+  "minutes": 15,
+  "expertPending": true
+}
