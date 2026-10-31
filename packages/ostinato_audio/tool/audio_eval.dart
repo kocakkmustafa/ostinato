@@ -165,9 +165,10 @@ String baselineObserverVerdict(
   GuitarPitchObserver observer,
   List<double> x,
   int sampleRate,
-  int expectedMidi,
-) {
-  final peak = PreciseTuner.envelopePeakIndex(x, sampleRate);
+  int expectedMidi, {
+  int? attackIndex,
+}) {
+  final peak = attackIndex ?? PreciseTuner.envelopePeakIndex(x, sampleRate);
   final start = peak + (0.08 * sampleRate).round();
   final end = math.min(x.length, start + (0.32 * sampleRate).round());
   if (end <= start) return NoteVerdict.couldNotHear.name;
@@ -419,13 +420,25 @@ void runVerify(
     final x = readF32(item['raw'] as String);
     for (final c in ctx.conditions) {
       final z = ctx.render(x, c, stableHash('$id/${c.name}'));
+      // One attack per rendered recording: the dataset onset (label mode) or
+      // the verifier's own rule, identical to its default path.
+      final cfg = verifier.config;
+      final attack = labelOnsetIndex(spec, item, ctx.sampleRate) ??
+          verifier.attackLocator.lastUsableAttack(z, ctx.sampleRate,
+              requiredSamples:
+                  (cfg.skipAfterOnsetMs * ctx.sampleRate / 1000).round() +
+                      (cfg.minAnalysisMs * ctx.sampleRate / 1000).round());
+      // Baseline observer: E36–E38 used the loudest frame; with
+      // `baselineAttack: "verifier"` it gets the verifier's attack.
+      final baselineAttack =
+          spec['baselineAttack'] == 'verifier' ? attack : null;
       for (final d in offsets) {
         final expected = midi + d;
         if (expected < 0 || expected > 127) continue;
         final v = verifier.verify(z,
             sampleRate: ctx.sampleRate,
             expectedMidi: expected,
-            onsetIndex: labelOnsetIndex(spec, item, ctx.sampleRate));
+            onsetIndex: attack);
         emit({
           'id': id,
           'group': item['group'],
@@ -438,7 +451,9 @@ void runVerify(
           'centsFromExpected': v.centsFromExpected,
           'baseline': observer == null
               ? null
-              : baselineObserverVerdict(observer, z, ctx.sampleRate, expected),
+              : baselineObserverVerdict(observer, z, ctx.sampleRate, expected,
+                  attackIndex: baselineAttack),
+          'attackS': attack == null ? null : attack / ctx.sampleRate,
         });
       }
     }

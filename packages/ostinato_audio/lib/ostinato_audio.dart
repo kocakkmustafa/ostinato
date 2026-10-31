@@ -27,6 +27,7 @@ export 'src/gate/guitar_chord_drill_evaluator.dart';
 export 'src/harmony/chord_detector.dart';
 export 'src/harmony/chroma.dart';
 export 'src/harmony/midi_chord_detector.dart';
+export 'src/onset/attack_locator.dart';
 export 'src/onset/onset_detector.dart';
 export 'src/pitch/pitch_source.dart';
 export 'src/pitch/precise_tuner.dart';

@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 
 import '../dsp/fft.dart';
+import '../onset/attack_locator.dart';
 import 'yin.dart';
 
 /// Per-instrument settings of [PreciseTuner]. Values are engineering choices
@@ -174,11 +175,18 @@ final class _Partial {
 ///
 /// Pure DSP: no trained weights, nothing leaves the device.
 final class PreciseTuner {
-  PreciseTuner(
-      {this.profile = PreciseTunerProfile.guitar, this.referenceA4Hz = 440});
+  PreciseTuner({
+    this.profile = PreciseTunerProfile.guitar,
+    this.referenceA4Hz = 440,
+    this.attackLocator = const AttackLocator(),
+  });
 
   final PreciseTunerProfile profile;
   final double referenceA4Hz;
+
+  /// Used when the caller does not pass `attackIndex`: the last pluck that
+  /// still leaves a full measurement (E39; was the loudest frame until E38).
+  final AttackLocator attackLocator;
 
   TunerResult measure(
     List<double> samples, {
@@ -194,10 +202,16 @@ final class PreciseTuner {
       }
     }
     final p = profile;
-    final attack = attackIndex ?? envelopePeakIndex(samples, sampleRate);
-    final start = attack + (p.skipAfterAttackMs * sampleRate / 1000).round();
+    final skip = (p.skipAfterAttackMs * sampleRate / 1000).round();
     final win = (p.readingWindowMs * sampleRate / 1000).round();
     final hop = (p.readingHopMs * sampleRate / 1000).round();
+    final attack = attackIndex ??
+        attackLocator.lastUsableAttack(samples, sampleRate,
+            requiredSamples: skip + win + hop * (p.minReadings - 1));
+    if (attack == null) {
+      return const TunerResult.refused(TunerRefusal.insufficientSamples);
+    }
+    final start = attack + skip;
     final end = math.min(
         samples.length, start + (p.maxSegmentMs * sampleRate / 1000).round());
     if (start < 0 || end - start < win + hop * (p.minReadings - 1)) {
@@ -269,8 +283,8 @@ final class PreciseTuner {
     ));
   }
 
-  /// Start of the loudest 10 ms frame: the pluck, or the start of a note that
-  /// was already ringing when the buffer began.
+  /// Start of the loudest 10 ms frame. The E36–E38 attack rule, kept for
+  /// baselines: under AGC it can pick a later note's attack (E38).
   static int envelopePeakIndex(List<double> x, int sampleRate) {
     final frame = math.max(1, (0.01 * sampleRate).round());
     var best = 0, bestE = -1.0;

@@ -2,7 +2,7 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 
 import '../dsp/fft.dart';
-import 'precise_tuner.dart';
+import '../onset/attack_locator.dart';
 import 'yin.dart';
 
 /// The three outcomes a practice note can get. "Could not hear" is a real
@@ -86,11 +86,18 @@ final class NoteVerification {
 ///    partials explain the spectrum and the expected note's do not;
 ///    otherwise "could not hear".
 final class GuitarNoteVerifier {
-  GuitarNoteVerifier(
-      {this.config = const NoteVerifierConfig(), this.referenceA4Hz = 440});
+  GuitarNoteVerifier({
+    this.config = const NoteVerifierConfig(),
+    this.referenceA4Hz = 440,
+    this.attackLocator = const AttackLocator(),
+  });
 
   final NoteVerifierConfig config;
   final double referenceA4Hz;
+
+  /// Used when the caller does not pass `onsetIndex` (E39): the last attack
+  /// that leaves the minimum analysis span.
+  final AttackLocator attackLocator;
 
   NoteVerification verify(
     List<double> samples, {
@@ -111,9 +118,13 @@ final class GuitarNoteVerifier {
         return hear(NoteVerdictReason.invalidSamples);
       }
     }
-    final onset =
-        onsetIndex ?? PreciseTuner.envelopePeakIndex(samples, sampleRate);
-    final start = onset + (c.skipAfterOnsetMs * sampleRate / 1000).round();
+    final skip = (c.skipAfterOnsetMs * sampleRate / 1000).round();
+    final onset = onsetIndex ??
+        attackLocator.lastUsableAttack(samples, sampleRate,
+            requiredSamples:
+                skip + (c.minAnalysisMs * sampleRate / 1000).round());
+    if (onset == null) return hear(NoteVerdictReason.insufficientSamples);
+    final start = onset + skip;
     final end = math.min(
         samples.length, start + (c.analysisMs * sampleRate / 1000).round());
     if (end - start < (c.minAnalysisMs * sampleRate / 1000).round()) {

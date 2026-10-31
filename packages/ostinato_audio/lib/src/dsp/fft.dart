@@ -128,3 +128,69 @@ Float64List fftConvolve(List<double> a, List<double> b) {
   }
   return out;
 }
+
+/// Exact DFT of any length N (Bluestein / chirp-z through power-of-two FFTs).
+///
+/// Gives the same bins as the textbook O(N²) sum `Σ x[n]·e^(−2πikn/N)` up to
+/// floating-point rounding, in O(M log M) with M ≥ 2N − 1. Exists so a
+/// detector whose frame length is set in *milliseconds* (and therefore is
+/// rarely a power of two) can keep its exact bin frequencies while running
+/// fast enough for a phone.
+final class DftPlan {
+  DftPlan(this.n) : _m = nextPowerOfTwo(2 * n - 1) {
+    if (n <= 0) throw ArgumentError('DFT length must be positive');
+    _chirpRe = Float64List(n);
+    _chirpIm = Float64List(n);
+    for (var k = 0; k < n; k++) {
+      // k² mod 2N keeps the angle small, so large k lose no precision.
+      final angle = math.pi * ((k * k) % (2 * n)) / n;
+      _chirpRe[k] = math.cos(angle);
+      _chirpIm[k] = math.sin(angle);
+    }
+    _kernelRe = Float64List(_m);
+    _kernelIm = Float64List(_m);
+    for (var k = 0; k < n; k++) {
+      _kernelRe[k] = _chirpRe[k];
+      _kernelIm[k] = _chirpIm[k];
+      if (k > 0) {
+        _kernelRe[_m - k] = _chirpRe[k];
+        _kernelIm[_m - k] = _chirpIm[k];
+      }
+    }
+    fftInPlace(_kernelRe, _kernelIm);
+  }
+
+  final int n;
+  final int _m;
+  late final Float64List _chirpRe, _chirpIm, _kernelRe, _kernelIm;
+
+  /// DFT of the real sequence [x] (length [n]); returns bins 0..[bins]-1.
+  ({Float64List re, Float64List im}) transformReal(List<double> x,
+      {int? bins}) {
+    if (x.length != n) throw ArgumentError('Expected $n samples');
+    final count = math.min(bins ?? n, n);
+    final ar = Float64List(_m), ai = Float64List(_m);
+    for (var k = 0; k < n; k++) {
+      // a_k = x_k · conj(chirp_k)
+      ar[k] = x[k] * _chirpRe[k];
+      ai[k] = -x[k] * _chirpIm[k];
+    }
+    fftInPlace(ar, ai);
+    for (var k = 0; k < _m; k++) {
+      final r = ar[k] * _kernelRe[k] - ai[k] * _kernelIm[k];
+      final i = ar[k] * _kernelIm[k] + ai[k] * _kernelRe[k];
+      // Conjugate so the forward FFT below acts as an inverse.
+      ar[k] = r;
+      ai[k] = -i;
+    }
+    fftInPlace(ar, ai);
+    final re = Float64List(count), im = Float64List(count);
+    for (var k = 0; k < count; k++) {
+      final cr = ar[k] / _m, ci = -ai[k] / _m;
+      // X_k = conj(chirp_k) · conv_k
+      re[k] = cr * _chirpRe[k] + ci * _chirpIm[k];
+      im[k] = ci * _chirpRe[k] - cr * _chirpIm[k];
+    }
+    return (re: re, im: im);
+  }
+}
