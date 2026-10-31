@@ -226,12 +226,19 @@ int? labelOnsetIndex(
   return (s * sampleRate).round();
 }
 
-/// E41 arm options from the spec; absent keys keep the E40 engine.
+/// Arm options from the spec. Since E42 an absent key means the *product
+/// default*; an explicit key overrides it (`false` / `null` switches an option
+/// off, which reproduces the E40 engine). E41 specs were run at commit
+/// 0f22744, where absent keys meant "off".
 AttackLocator locatorFromSpec(Map<String, dynamic> spec) {
   final o = spec['locator'] as Map<String, dynamic>? ?? const {};
+  const d = AttackLocator();
   return AttackLocator(
-    bufferStartCandidate: o['bufferStartCandidate'] as bool? ?? false,
-    maxBelowLoudestDb: (o['maxBelowLoudestDb'] as num?)?.toDouble(),
+    bufferStartCandidate:
+        o['bufferStartCandidate'] as bool? ?? d.bufferStartCandidate,
+    maxBelowLoudestDb: o.containsKey('maxBelowLoudestDb')
+        ? (o['maxBelowLoudestDb'] as num?)?.toDouble()
+        : d.maxBelowLoudestDb,
   );
 }
 
@@ -243,6 +250,10 @@ PreciseTuner tunerFromSpec(
       maxAnalysisHz: (o['maxAnalysisHz'] as num?)?.toDouble(),
       adaptiveWindowPeriods: (o['adaptiveWindowPeriods'] as num?)?.toDouble(),
       maxLateSpreadCents: (o['maxLateSpreadCents'] as num?)?.toDouble(),
+      disableAdaptiveWindow: o.containsKey('adaptiveWindowPeriods') &&
+          o['adaptiveWindowPeriods'] == null,
+      disableLateReadings: o.containsKey('maxLateSpreadCents') &&
+          o['maxLateSpreadCents'] == null,
     ),
     attackLocator: locatorFromSpec(spec),
   );
@@ -251,7 +262,9 @@ PreciseTuner tunerFromSpec(
 GuitarNoteVerifier verifierFromSpec(Map<String, dynamic> spec) {
   final o = spec['verifierOptions'] as Map<String, dynamic>? ?? const {};
   return GuitarNoteVerifier(
-    config: NoteVerifierConfig(fifthRival: o['fifthRival'] as bool? ?? false),
+    config: NoteVerifierConfig(
+        fifthRival:
+            o['fifthRival'] as bool? ?? const NoteVerifierConfig().fifthRival),
     attackLocator: locatorFromSpec(spec),
   );
 }

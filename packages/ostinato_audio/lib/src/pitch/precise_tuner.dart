@@ -32,9 +32,9 @@ final class PreciseTunerProfile {
     this.yinThreshold = 0.15,
     this.minPeriodicity = 0.5,
     this.octaveOddPowerRatio = 0.1,
-    this.adaptiveWindowPeriods,
+    this.adaptiveWindowPeriods = 40,
     this.minReadingWindowMs = 150,
-    this.maxLateSpreadCents,
+    this.maxLateSpreadCents = 10,
   });
 
   final String name;
@@ -69,22 +69,25 @@ final class PreciseTunerProfile {
   /// estimate is moved down an octave.
   final double octaveOddPowerRatio;
 
-  /// E41 arm W1 (null = off): reading window of this many periods of the
+  /// E41 arm W1, default since E42 (null = off): reading window of this many periods of the
   /// coarse f0, between [minReadingWindowMs] and [readingWindowMs]; the hop
   /// shrinks in proportion. High notes decay fast and get more readings.
   final double? adaptiveWindowPeriods;
   final int minReadingWindowMs;
 
-  /// E41 arm U (null = off): when readings spread more than [maxSpreadCents]
+  /// E41 arm U, default since E42 (null = off): when readings spread more than [maxSpreadCents]
   /// but no more than this, report the trimmed mean of the *later* half of
   /// the readings (the string has settled) instead of refusing. Wider spread
   /// is still "could not measure".
   final double? maxLateSpreadCents;
 
+  /// `disable…` switches an E41 option off (reproduces the E40 engine).
   PreciseTunerProfile copyWith({
     double? maxAnalysisHz,
     double? adaptiveWindowPeriods,
     double? maxLateSpreadCents,
+    bool disableAdaptiveWindow = false,
+    bool disableLateReadings = false,
   }) =>
       PreciseTunerProfile(
         name: name,
@@ -110,10 +113,13 @@ final class PreciseTunerProfile {
         yinThreshold: yinThreshold,
         minPeriodicity: minPeriodicity,
         octaveOddPowerRatio: octaveOddPowerRatio,
-        adaptiveWindowPeriods:
-            adaptiveWindowPeriods ?? this.adaptiveWindowPeriods,
+        adaptiveWindowPeriods: disableAdaptiveWindow
+            ? null
+            : adaptiveWindowPeriods ?? this.adaptiveWindowPeriods,
         minReadingWindowMs: minReadingWindowMs,
-        maxLateSpreadCents: maxLateSpreadCents ?? this.maxLateSpreadCents,
+        maxLateSpreadCents: disableLateReadings
+            ? null
+            : maxLateSpreadCents ?? this.maxLateSpreadCents,
       );
 
   /// Six-string guitar, drop tunings included (D2 73 Hz → 60 Hz floor).

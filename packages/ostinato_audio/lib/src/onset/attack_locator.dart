@@ -27,12 +27,12 @@ final class AttackLocator {
     this.detector = const OnsetDetector(),
     this.minRelativeStrength = 0.2,
     this.minRiseDb = 0.5,
-    this.bufferStartCandidate = false,
+    this.bufferStartCandidate = true,
     this.startLoudWithinDb = 6,
     this.maxBelowLoudestDb,
   });
 
-  /// E41 arm A1: when the buffer opens loud (first 50 ms within
+  /// E41 arm A1, default since E42: when the buffer opens loud (first 50 ms within
   /// [startLoudWithinDb] of the loudest 50 ms), index 0 is also a candidate:
   /// a pluck that landed exactly at the buffer start has no frame before it
   /// for the flux detector to compare with.

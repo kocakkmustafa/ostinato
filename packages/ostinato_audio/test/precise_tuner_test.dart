@@ -238,12 +238,13 @@ void main() {
       expect(
           tuner.measure(pluck(hz(45)), sampleRate: sr, roomFloorDb: 0).refusal,
           TunerRefusal.tooQuiet);
-      // A strong pitch glide (hard pluck) keeps moving across readings.
+      // A strong pitch glide (hard pluck) keeps moving across readings: more
+      // than the 10-cent late-readings limit, so still "could not measure".
       final drifting = SyntheticString.pluck(
           f0Hz: hz(45),
           sampleRate: sr,
           seconds: 2.2,
-          glideCents: 40,
+          glideCents: 60,
           fundamentalDecaySeconds: 1.2,
           preRollSeconds: 0.2);
       expect(tuner.measure(drifting, sampleRate: sr).refusal,

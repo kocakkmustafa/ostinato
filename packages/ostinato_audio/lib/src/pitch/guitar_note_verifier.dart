@@ -45,7 +45,7 @@ final class NoteVerifierConfig {
     this.maxPartials = 8,
     this.maxAnalysisHz = 5000,
     this.minLevelAboveFloorDb = 6,
-    this.fifthRival = false,
+    this.fifthRival = true,
     this.fifthUniqueRatio = 0.3,
   });
 
@@ -58,7 +58,7 @@ final class NoteVerifierConfig {
   final int maxPartials;
   final double maxAnalysisHz, minLevelAboveFloorDb;
 
-  /// E41 arm F: when observed and expected are a fifth apart (7 or 19
+  /// E41 arm F, default since E42: when observed and expected are a fifth apart (7 or 19
   /// semitones) their partials overlap (3:2), so "explained power" cannot
   /// separate them. Compare instead the partials each note does *not* share
   /// with the other: "different note" when the expected note's own partials

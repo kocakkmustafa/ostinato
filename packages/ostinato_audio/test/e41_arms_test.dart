@@ -10,19 +10,29 @@ const q = PhoneChannelConfig(
     noise: ChannelNoise.pink, snrDb: 35, lowCutHz: 100, agc: true);
 
 void main() {
-  test('all E41 options off reproduces the default engine', () {
+  test('the E40 engine stays available with every E41 option off', () {
     final x = SyntheticString.pluck(
         f0Hz: hz(50) * math.pow(2, 7 / 1200),
         sampleRate: sr,
         seconds: 2,
         preRollSeconds: 0.2,
         seed: 3);
-    final a = PreciseTuner().measure(x, sampleRate: sr).measurement!;
-    final b = PreciseTuner(profile: PreciseTunerProfile.guitar.copyWith())
-        .measure(x, sampleRate: sr)
-        .measurement!;
-    expect(b.f0Hz, a.f0Hz);
-    expect(b.fromLateReadings, isFalse);
+    final f0 = hz(50) * math.pow(2, 7 / 1200);
+    final e40 = PreciseTuner(
+      profile: PreciseTunerProfile.guitar
+          .copyWith(disableAdaptiveWindow: true, disableLateReadings: true),
+      attackLocator: const AttackLocator(bufferStartCandidate: false),
+    ).measure(x, sampleRate: sr).measurement!;
+    final now = PreciseTuner().measure(x, sampleRate: sr).measurement!;
+    expect(centsOf(e40.f0Hz, f0).abs(), lessThan(0.5));
+    expect(centsOf(now.f0Hz, f0).abs(), lessThan(0.5));
+    expect(e40.fromLateReadings, isFalse);
+    expect(
+        PreciseTunerProfile.guitar
+            .copyWith(disableAdaptiveWindow: true)
+            .adaptiveWindowPeriods,
+        isNull);
+    expect(const NoteVerifierConfig().fifthRival, isTrue);
   });
 
   test('A1/A2: a pluck at the very first sample is found', () {
@@ -52,7 +62,10 @@ void main() {
         fundamentalDecaySeconds: 1.0,
         preRollSeconds: 0.2,
         seed: 5);
-    final strict = PreciseTuner().measure(x, sampleRate: sr);
+    final strict = PreciseTuner(
+            profile:
+                PreciseTunerProfile.guitar.copyWith(disableLateReadings: true))
+        .measure(x, sampleRate: sr);
     expect(strict.refusal, TunerRefusal.unstable);
     final lenient = PreciseTuner(
             profile:
