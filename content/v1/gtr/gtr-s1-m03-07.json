@@ -1,0 +1,75 @@
+{
+  "id": "gtr-s1-m03-07",
+  "title": { "en": "Muted strum in time", "tr": "Susturulmuş vuruşla zaman" },
+  "goal": {
+    "en": "Strums four bars of muted quarter-note downstrokes in time at ♩=70.",
+    "tr": "♩=70'te dört ölçü susturulmuş dörtlük aşağı vuruşu zamanında yapar."
+  },
+  "explanation": [
+    {
+      "en": "Lay your fretting hand flat across all six strings without pressing. The strings now give a short \"chk\" instead of a note.",
+      "tr": "Sol elini bastırmadan altı telin üstüne düz koy. Teller artık nota yerine kısa bir \"çık\" sesi verir."
+    },
+    {
+      "en": "With no notes to think about, all your attention goes to time.",
+      "tr": "Düşünecek nota olmayınca bütün dikkatin zamana gider."
+    },
+    {
+      "en": "Strum down across the strings once on every click. Move from the wrist and elbow together, loosely.",
+      "tr": "Her klikte tellerin üstünden bir kez aşağı vur. Bilekle dirseği birlikte, gevşek hareket ettir."
+    },
+    {
+      "en": "Bring the hand back up above the strings without touching them, ready for the next beat.",
+      "tr": "Eli tellere dokunmadan yukarı geri getir; bir sonraki vuruşa hazır olsun."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Muted downstrokes in quarter notes for four bars with a click, at ♩=70 and at ♩=50.",
+      "tr": "Klikle dört ölçü dörtlük susturulmuş aşağı vuruş, ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Mute the strings with your fretting hand and strum one downstroke per click for four bars. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "Telleri sol elinle sustur ve dört ölçü boyunca her klikte bir aşağı vuruş yap. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "4/4: q q q q | q q q q | q q q q | q q q q",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every strum was a short \"chk\" with no ringing note.", "tr": "Her vuruş çınlayan nota olmadan kısa bir \"çık\" oldu." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The hand stops between strums. Keep it moving down and up in one smooth loop.",
+        "tr": "El vuruşlar arasında duruyor. Aşağı ve yukarı tek akıcı döngüde hareket ettirmeyi sürdür."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Strum a little firmer so the muted strings give a clear click.",
+        "tr": "Susturulmuş teller net bir ses versin diye biraz daha güçlü vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Strum on beats 1 and 3 only at ♩=50, then fill in beats 2 and 4.",
+    "tr": "♩=50'de yalnız 1. ve 3. vuruşta vur, sonra 2. ve 4. vuruşu ekle."
+  },
+  "legacy": "V: guitar.foundations.strum_timing",
+  "minutes": 10,
+  "expertPending": true
+}
