@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "La práctica con cámara está cerrada en esta versión. Su acceso está reservado para observar postura en el dispositivo; el video no se guarda ni se sube.";
-"NSMicrophoneUsageDescription" = "El acceso al micrófono permite observar una nota de guitarra durante la práctica opcional. El audio se procesa en memoria temporal del dispositivo y no se guarda ni se sube.";
+"NSCameraUsageDescription" = "El acceso a la cámara sirve para revisar la posición de tu mano y tu muñeca en las lecciones que lo piden. Las imágenes se procesan solo en este dispositivo; no se guardan ni se suben.";
+"NSMicrophoneUsageDescription" = "El acceso al micrófono sirve para escuchar las notas que tocas durante la práctica y la afinación. El audio se procesa en este dispositivo y no se sube. Si activas escuchar tu propia grabación, se guarda solo en este dispositivo y se borra al terminar la sesión.";
