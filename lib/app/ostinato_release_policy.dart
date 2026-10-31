@@ -17,3 +17,8 @@ const bool ostinatoCameraPracticeAvailable = false;
 /// features stay closed until consent and under-13 accounts cannot buy.
 const MotionTeenPurchasePolicy ostinatoTeenPurchasePolicy =
     MotionTeenPurchasePolicy.storeFamilyControls;
+
+/// K16 progress sync (founder decision 2026-11-01: in v1, local-first). Closed
+/// until the schema, identity and store-label changes are approved; nothing
+/// reads `lib/app/sync/` yet and no network call exists for it.
+const bool ostinatoProgressSyncAvailable = false;
