@@ -87,3 +87,36 @@ yakalamayı durdurmaz. Native yoksa ya da çapa gelmezse pratik **sessiz
   eşkenar dörtgen ◆, kesik çizgili daire ?. Kırmızı yok (testte denetlenir);
   renk körü paleti mavi/turuncu/gri. Solak modu şeridi yatay aynalar (ŞİMDİ
   çizgisi sağda). Ayarlara bağlanması F2.7'nin işi.
+
+## F2.4 Doğrulayıcı bağlantısı
+
+- `practice_judge.dart` (saf): `CaptureBuffer` (yalnız RAM, ~8 sn, temizlikte
+  sıfırlanır), 6 kHz kliği dışarıda tutan süzgeç (4,8 kHz 4. derece alçak
+  geçiren + 6 kHz çentik; testte klik ≥20 dB bastırılıyor), `judgeNote`.
+- Kurallar: pencerede atak yoksa **duyamadım** (sessizlik asla "doğru"
+  değil); pencerede `playbackActive` varsa **duyamadım / uygulama sesi**
+  (düşük güven, hüküm yok); perde notaları `GuitarNoteVerifier`'a (atak
+  `AttackLocator` ile, beklenen zamana en yakın); şüphe "duyamadım"a düşer.
+  Ritim notaları atak varlığıyla; derece notaları (ses) bu turda motor yok →
+  duyamadım.
+- Pencere: beklenen (duyulan) zamanın −160/+260 ms'i, komşu notaya olan
+  aralığın yarısını aşmaz; analiz notanın içinde kalır (en çok 320 ms).
+  Gecikme kalibrasyonu yokken zamanlama hükmü verilmez, gösterilmez.
+- "Beni bekle": nota tutulur, son 1,5 sn'deki en yeni atak dinlenir; doğru
+  gelince bırakılır. İlk kesin sonuç (doğru ya da farklı) kaydedilir.
+  4 sn → ipucu balonu, 8 sn → [Atla] [Bu notayı dinle]; kilit yok.
+  "Bu notayı dinle" beklenen notayı cihazda sentezler (tel modeli; kayıt
+  değil) ve `playCue` ile çalar; çaldığı sürece ölçüm düşük güvenlidir.
+- `HearingMonitor`: mikrofon şeridi (Sessiz / Seni duyuyorum / Duyuyorum ama
+  ayırt edemiyorum), oda tabanı ön sayımdan (medyan), üst üste 3 "duyamadım"
+  ya da 8+ notada >%25 → kurulum kartı; kapatılınca 5 dk tekrar etmez.
+- `practice_session_controller.dart`: çal+dinle yakalama, metronom akışı,
+  çapa (1,2 sn içinde gelmezse sessiz ızgara), taşıyıcı, analiz kuyruğu
+  (üretimde `Isolate.run`), rota/saat değişiminde tur iptal
+  (`input_changed`). Tur sonunda `activeDuration` (dinleme süresi) tutulur.
+- `PracticeSessionFinished` (`practice_outcome.dart`): seri/haftalık hedef
+  (PR #12) için "oturum bitti" olayı: `lessonId`, `course`, `activeDuration`,
+  `heardEvents` (duyamadım hariç), özet. Bu dal yalnız olayı verir; PR #12'ye
+  bağımlılık yok.
+- Akort kapısı (sözleşme §5 kural 2) bu döngüde **yok**: F4.1 akort ekranı
+  ayrı iştir; doğrulayıcı ±50 c toleransla çalışır.
