@@ -10,6 +10,44 @@ protocol PracticeOutputHardware: AnyObject {
   func stop() throws
 }
 
+/// F2.1: a capture attempt either only records (legacy note observation and
+/// tuner gate) or records while the same engine may play short app cues
+/// (practice screen). Playback lives inside the input lease; it never has an
+/// independent owner and is released with the capture attempt.
+enum PracticeAudioSessionMode: String {
+  case recordOnly
+  case playAndRecord
+
+  struct Configuration: Equatable {
+    let category: AVAudioSession.Category
+    let mode: AVAudioSession.Mode
+    let options: AVAudioSession.CategoryOptions
+  }
+
+  /// `.measurement` asks iOS to minimise system input/output processing
+  /// (AGC included). Not verified on a device (E44 finding).
+  /// Duplex: `.defaultToSpeaker` (otherwise playAndRecord plays from the
+  /// receiver), `.allowBluetoothA2DP` (high-quality output to wireless
+  /// headphones), and deliberately NO `.allowBluetooth`: HFP would make the
+  /// headset's narrow-band microphone the practice input.
+  var configuration: Configuration {
+    switch self {
+    case .recordOnly:
+      return Configuration(category: .record, mode: .measurement, options: [])
+    case .playAndRecord:
+      return Configuration(category: .playAndRecord, mode: .measurement,
+                           options: [.defaultToSpeaker, .allowBluetoothA2DP])
+    }
+  }
+
+  /// Absent key = legacy record-only start. Only `playAndRecord` may be sent.
+  init?(wire: Any?) {
+    guard let wire = wire else { self = .recordOnly; return }
+    guard wire as? String == PracticeAudioSessionMode.playAndRecord.rawValue else { return nil }
+    self = .playAndRecord
+  }
+}
+
 /// The arbiter's shared session policy is the only production writer of
 /// AVAudioSession activation. Capture hardware merely requests the input mode.
 final class PracticeAudioSessionPolicy {
@@ -24,9 +62,17 @@ final class PracticeAudioSessionPolicy {
     return !inputActive
   }
 
-  func activateInput(rate: Int, fence: CaptureFence) throws {
+  func activateInput(rate: Int, fence: CaptureFence,
+                     mode: PracticeAudioSessionMode = .recordOnly) throws {
     if fence.isCancelled { throw CaptureHardwareError.cancelled }
-    try session.setCategory(.record, mode: .measurement)
+    let configuration = mode.configuration
+    if mode == .recordOnly {
+      // The legacy call is kept verbatim (default options are empty).
+      try session.setCategory(.record, mode: .measurement)
+    } else {
+      try session.setCategory(configuration.category, mode: configuration.mode,
+                              options: configuration.options)
+    }
     if fence.isCancelled { throw CaptureHardwareError.cancelled }
     try session.setPreferredSampleRate(Double(rate))
     if fence.isCancelled { throw CaptureHardwareError.cancelled }
