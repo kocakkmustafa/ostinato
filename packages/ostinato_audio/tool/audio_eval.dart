@@ -752,35 +752,46 @@ void runStreamVerify(
 PreciseTuner cleanTuner(Map<String, dynamic> spec, PreciseTunerProfile p) =>
     PreciseTuner(profile: p);
 
-/// E46 note gate (controller policy, simulated; draft until the E46 plan is
-/// sealed). A reading counts only if its attack is at most [maxAgeMs] old and
-/// it stays within [lockCents] of the first reading after that attack; a
-/// different attack starts a new note. Null when the spec has no gate.
+/// E46 note gate (controller policy, simulated). A measurement counts only if
+/// its attack is inside the buffer, at least [minAttackMs] after the buffer
+/// start (E45: 95 % of shown readings came from buffers with no attack in
+/// view, attack index 0), at most [maxAgeMs] old at the analysis instant, and
+/// within [lockCents] of the first counted reading after that attack; a
+/// different attack (more than [sameAttackMs] away) starts a new note.
+/// Null when the spec has no gate.
 final class NoteGate {
-  NoteGate(this.sampleRate, this.maxAgeMs, this.lockCents, this.sameAttackMs);
+  NoteGate(this.sampleRate, this.maxAgeMs, this.lockCents, this.sameAttackMs,
+      this.minAttackMs);
 
   static NoteGate? fromSpec(Map<String, dynamic> spec, int sampleRate) {
     final g = spec['noteGate'] as Map<String, dynamic>?;
     if (g == null) return null;
-    return NoteGate(sampleRate, g['maxAgeMs'] as int, (g['lockCents'] as num).toDouble(),
-        g['sameAttackMs'] as int? ?? 50);
+    return NoteGate(
+        sampleRate,
+        g['maxAgeMs'] as int,
+        (g['lockCents'] as num).toDouble(),
+        g['sameAttackMs'] as int? ?? 50,
+        g['minAttackMs'] as int? ?? 0);
   }
 
-  final int sampleRate, maxAgeMs, sameAttackMs;
+  final int sampleRate, maxAgeMs, sameAttackMs, minAttackMs;
   final double lockCents;
   int? _attack;
   double? _f0;
 
   bool accept(TuningMeasurement m, int bufferStart, int t) {
-    final att = bufferStart + (m.attackIndex ?? 0);
+    final idx = m.attackIndex;
+    if (idx == null || idx < minAttackMs * sampleRate / 1000) return false;
+    final att = bufferStart + idx;
+    if ((t - att) > maxAgeMs * sampleRate / 1000) return false;
     final same = _attack != null &&
         (att - _attack!).abs() <= sameAttackMs * sampleRate / 1000;
     if (!same) {
-      // A new attack anchors a new note at its first reading.
+      // A new attack anchors a new note at its first counted reading.
       _attack = att;
       _f0 = m.f0Hz;
+      return true;
     }
-    if ((t - _attack!) > maxAgeMs * sampleRate / 1000) return false;
     return centsOf(m.f0Hz, _f0!).abs() <= lockCents;
   }
 }
