@@ -1,0 +1,73 @@
+{
+  "id": "ear-s1-m03-06",
+  "title": { "en": "Rhythm-reading checkpoint", "tr": "Ritim okuma geçişi" },
+  "goal": { "en": "Claps rhythm lines they have not seen before.", "tr": "Daha önce görmediği ritim satırlarını alkışlar." },
+  "explanation": [
+    {
+      "en": "You will read 4 new two-bar lines. They change with every attempt.",
+      "tr": "4 yeni iki ölçülük satır okuyacaksın. Satırlar her denemede değişir."
+    },
+    {
+      "en": "The lines use what you have learned: whole, half, quarter and eighth notes, rests, 4/4 and 3/4.",
+      "tr": "Satırlar öğrendiklerinden oluşur: birlik, ikilik, dörtlük, sekizlik, suslar, 4/4 ve 3/4."
+    },
+    {
+      "en": "Before the count-in, scan the line: find the time signature, the long notes and the rests.",
+      "tr": "Girişten önce satıra göz at: ölçü sayısını, uzun notaları ve susları bul."
+    },
+    {
+      "en": "Clap every line at ♩=70. The checkpoint is passed at this tempo.",
+      "tr": "Her satırı ♩=70'te alkışla. Geçiş bu tempoda geçilir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "Click at ♩=70 with a count-in that matches each line's time signature.",
+      "tr": "♩=70'te klik; giriş her satırın ölçü sayısına göre."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Read 4 new two-bar lines and clap each one with the click at ♩=70.",
+      "tr": "4 yeni iki ölçülük satırı oku ve her birini ♩=70'te klikle birlikte alkışla."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but early after the half note.", "tr": "Zamanında, ama ikilikten sonra erken." },
+      "fix": {
+        "en": "Say 'two' out loud on the second beat of the half note before you clap again.",
+        "tr": "Yeniden alkışlamadan önce ikiliğin ikinci vuruşunda sesli olarak 'iki' de."
+      }
+    },
+    {
+      "error": { "en": "Different: a clap was heard on a rest.", "tr": "Farklı: susta alkış duyuldu." },
+      "fix": {
+        "en": "Whisper 'sh' on each rest; it keeps your hands still.",
+        "tr": "Her susta fısıltıyla 'şş' de; ellerin böylece durur."
+      }
+    },
+    {
+      "error": { "en": "On time, but late on the second eighth.", "tr": "Zamanında, ama ikinci sekizlikte geç." },
+      "fix": {
+        "en": "Say 'and' out loud and clap on it; it sits exactly halfway between two clicks.",
+        "tr": "'Ve'yi yüksek sesle söyle ve üstüne alkışla; tam iki klik arasının ortasındadır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Go back to the lesson for the symbol that tripped you, then try a fresh set.",
+    "tr": "Seni zorlayan sembolün dersine dön, sonra yeni bir set dene."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

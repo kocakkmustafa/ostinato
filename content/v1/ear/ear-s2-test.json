@@ -1,0 +1,81 @@
+{
+  "id": "ear-s2-test",
+  "title": { "en": "Level 2 test", "tr": "Seviye 2 testi" },
+  "goal": {
+    "en": "Passes four components: scale and solfège, intervals, rhythm dictation, melody and chords.",
+    "tr": "Dört bileşeni geçer: gam ve solfej, aralık, ritim diktesi, ezgi ve akor."
+  },
+  "explanation": [
+    {
+      "en": "The test has four components. Each one must pass on its own; there is no average.",
+      "tr": "Test dört bileşenden oluşur. Her biri kendi ölçütünü ayrı geçmeli; ortalama alınmaz."
+    },
+    {
+      "en": "A component you pass is kept. If one does not pass, repeat only that one, as often as you like.",
+      "tr": "Geçtiğin bileşen saklanır. Geçmeyen olursa yalnız onu tekrarla, istediğin kadar."
+    },
+    {
+      "en": "All material is new: lines, rhythms and melodies you have not met in the lessons.",
+      "tr": "Malzemenin hepsi yenidir: derslerde karşılaşmadığın satırlar, ritimler ve ezgiler."
+    },
+    {
+      "en": "You can do the components in separate sessions. The whole test takes about 15 minutes.",
+      "tr": "Bileşenleri ayrı oturumlarda yapabilirsin. Testin tamamı yaklaşık 15 dakika sürer."
+    },
+    {
+      "en": "Singing stays in your comfortable range. Stop at any discomfort; the result is then not written.",
+      "tr": "Söyleme görevleri rahat menzilinde kalır. Herhangi bir rahatsızlıkta dur; o zaman sonuç yazılmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL", "DR"],
+    "brief": {
+      "en": "Click count-ins at the target tempos, a tonic drone for the degrees, synthesized intervals, rhythms, triads and cadences; nothing from the lessons is reused.",
+      "tr": "Hedef tempolarda klik girişi, dereceler için tonik dron; sentez aralıklar, ritimler, üçlüler ve kadanslar. Derslerdeki malzeme yeniden kullanılmaz."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "1 Scale and solfège: sing the major scale up and down at ♩=70 with the click, then 6 degrees from the tonic over a drone. 2 Intervals: name 12 intervals, then sing 6. 3 Rhythm dictation: write 2 two-bar rhythms, then clap one two-bar rhythm back from memory at ♩=70. 4 Melody and chords: 6 major-or-minor questions, 1 three-note dictation and one new four-bar sight-singing line at ♩=60. Sing in your own octave. If you'd rather not sing, choose the on-screen version: the singing tasks then come as screen questions.",
+      "tr": "1 Gam ve solfej: majör gamı ♩=70'te klikle çık ve in, sonra dronun üstünde tonikten 6 derece söyle. 2 Aralık: 12 aralığı adlandır, sonra 6 aralık söyle. 3 Ritim diktesi: iki ölçülük 2 ritim yaz, sonra iki ölçülük bir ritmi ♩=70'te hafızadan geri alkışla. 4 Ezgi ve akor: 6 majör-minör sorusu, 1 üç notalık dikte ve ♩=60'ta yeni bir dört ölçülük deşifre satırı. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: söyleme görevleri o zaman ekranda soru olarak gelir."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each component passes on its own. 1: level 2 pitch and timing. 2: at least 10 of 12 named; singing at level 2 pitch. 3: dictation at least 80% of note values; clapping at level 2 timing. 4: at least 80% of the screen items; sight-singing at level 2 pitch and timing.",
+        "tr": "Her bileşen ayrı geçilir. 1: S2 perde ve zamanlama ölçütü. 2: 12 aralıktan en az 10'u doğru; söyleme S2 perde ölçütünde. 3: dikte, nota değerlerinin en az %80'i; alkış S2 zamanlama ölçütünde. 4: ekran maddelerinin en az %80'i; deşifre S2 perde ve zamanlama ölçütünde."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "E1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear in more than one note in five: the component was not scored.",
+        "tr": "Duyamadım, notaların beşte birinden fazlasında: bileşen puanlanmadı."
+      },
+      "fix": {
+        "en": "Check the room: less noise, phone at arm's length, headphones for the drone and click. Then repeat only this component.",
+        "tr": "Ortamı kontrol et: daha az gürültü, telefon kol mesafesinde, dron ve klik için kulaklık. Sonra yalnız bu bileşeni tekrarla."
+      }
+    },
+    {
+      "error": { "en": "Different note, ti a semitone low.", "tr": "Farklı nota: si yarım ses alçak." },
+      "fix": {
+        "en": "Ti is a half step below do; aim it close to the top do.",
+        "tr": "Si, do'nun yarım ses altındadır; onu üstteki do'ya yakın hedefle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Do one component per session and warm up with its lessons first.",
+    "tr": "Her oturumda tek bileşen yap; önce o bileşenin dersleriyle ısın."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

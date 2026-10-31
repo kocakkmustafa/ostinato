@@ -1,0 +1,78 @@
+{
+  "id": "ear-s2-m06-05",
+  "title": { "en": "Mixed recognition", "tr": "Karışık tanıma" },
+  "goal": {
+    "en": "Names M2, M3, P5 and P8 in mixed order, going up or down.",
+    "tr": "B2, B3, T5 ve T8'i karışık sırada, yukarı ya da aşağı giderken adlandırır."
+  },
+  "explanation": [
+    {
+      "en": "All four intervals now come mixed, from a different starting note each time.",
+      "tr": "Dört aralık artık karışık gelir, her seferinde başka bir başlangıçtan."
+    },
+    {
+      "en": "Some go down. A descending interval keeps its name: sol down to do is still a perfect fifth.",
+      "tr": "Bazıları aşağı iner. İnen aralık adını korur: sol'den do'ya inmek yine tam beşlidir."
+    },
+    {
+      "en": "Sort by size first: narrow (M2, M3) or wide (P5, P8). Then decide inside the pair.",
+      "tr": "Önce boyuta göre ayır: dar mı (B2, B3), geniş mi (T5, T8)? Sonra çiftin içinde karar ver."
+    },
+    {
+      "en": "Use the anchors: do-re, do-mi, do-sol, do to the top do.",
+      "tr": "Dayanakları kullan: do-re, do-mi, do-sol, do'dan üst do'ya."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays two notes, up or down, from a random starting note; the drill synthesizes them.",
+      "tr": "Her soruda rastgele bir başlangıçtan yukarı ya da aşağı iki nota çalar; alıştırma bunları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Hear the two notes and choose one of four: M2, M3, P5 or P8. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "İki notayı dinle ve dördünden birini seç: B2, B3, T5 ya da T8. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 13 },
+    "drill": {
+      "type": "interval_name",
+      "count": 16,
+      "params": {
+        "intervals": ["M2", "M3", "P5", "P8"],
+        "direction": ["ascending", "descending"],
+        "cadence": false,
+        "range": "C3-C5"
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer on a descending interval.", "tr": "Farklı cevap: inen bir aralıkta." },
+      "fix": {
+        "en": "Sing the pair upward in your head, from the lower note to the higher, then name it.",
+        "tr": "Çifti içinden alttaki notadan üsttekine doğru söyle, sonra adlandır."
+      }
+    },
+    {
+      "error": { "en": "Different answer: M3 chosen for P5.", "tr": "Farklı cevap: T5 yerine B3 seçildi." },
+      "fix": {
+        "en": "Sort by size first. Do-sol skips three notes (re, mi, fa); do-mi skips only one.",
+        "tr": "Önce boyuta göre ayır. Do-sol arasında üç nota atlanır (re, mi, fa); do-mi arasında yalnız biri."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each pair as often as you like and sing the anchors in your head before you answer.",
+    "tr": "Her çifti istediğin kadar tekrar dinle; cevaplamadan önce dayanakları içinden söyle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

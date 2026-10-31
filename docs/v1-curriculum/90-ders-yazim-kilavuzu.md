@@ -29,7 +29,7 @@ Bu belge plan satırından ders dosyasına geçişi tarif eder. Sözleşmedeki b
 | `practice.sequence` | 6.1 | Bilimsel perde; gitar sesli perde; ses kursunda derece (`1-2-3-2-1`) |
 | `practice.tempo` | 6.3 | `{open, target}`; serbest tempoda alan yazılmaz |
 | `practice.pass` | 6.2 | `{"levelDefault": true}` ya da `{"levelDefault": false, "text": {…}}`; D'de `minCorrect` |
-| `practice.drill` | 3 (D) | Yalnız D derslerinde: `type`, `count`, `params` (§3) |
+| `practice.drill` | 3 (D) | D derslerinde zorunlu; geçiş/test (M!) derslerinin ekran bölümünde isteğe bağlı: `type`, `count`, `params` (§3) |
 | `fallback` | 9 | Ölçümden türer: `selfCheck` (M), `held` (M!), `experimental` (M~), `camera` (K), `noEngine` (D/Ö) |
 | `safety` | 10 | Kurs varsayılanı (`Ç`+`G1`/`V1`/`P1`/`E1`) + satırdaki ek kodlar |
 | `prerequisites` | 11 | Boş liste = varsayılan kural (§9); yalnız istisna yazılır |
@@ -86,6 +86,31 @@ Sorular çalışma anında `params`'tan üretilir. Dosyada cevap anahtarı yoktu
 - Süre puanı yok (S1).
 
 Yeni tür gerekirse `V1Drill.types` listesine ve bu tabloya birlikte eklenir.
+
+**`params` anahtarları geçicidir.** Alıştırma üreteci uygulamada yazılınca (PLAN F2.6) anahtarlar orada sabitlenir ve bu tablo güncellenir. Birden çok türü birleştiren geçiş ve test bölümleri (ör. akor rengi + dikte) şimdilik yalnız görev metninde tanımlıdır. Bileşen listesi F2.6 ile gelir.
+
+### 3.1 Ritim dizisi gösterimi (`practice.sequence`)
+
+Biçim: `4/4: q q ee q | ee q h`.
+
+| Simge | Anlamı |
+|---|---|
+| `w` | Birlik |
+| `h` | İkilik |
+| `q` | Dörtlük |
+| `e` | Sekizlik |
+| `ee` | Birbirine bağlı iki sekizlik |
+| Noktalı süre | Simgenin sonuna `.` eklenir (`h.`) |
+| Sus | Simgenin sonuna `r` eklenir (`qr`, `hr`) |
+| Bağ | Bağlı iki süre arasına `~` konur |
+| Ölçü çizgisi | Ölçüler `\|` ile ayrılır |
+
+Her denemede değişen (üretilen) satırlarda `sequence` yazılmaz.
+
+### 3.2 Solfej ve nota adları
+
+- **Türkçe:** Nota adları sabit-do'dur (Do = C) ve büyük harfle yazılır (Do4). Ton içindeki basamak heceleri hareketli-do'dur ve küçük harfle yazılır (do, re, mi). İlk kullanıldığı ders (`ear-s2-m05-02`) bu farkı açıklar. **Öğretmen incelemesi bekliyor.**
+- **İngilizce:** Harf adları (C4) ve hece (do, re, mi) kullanılır.
 
 ## 4. İş akışı
 

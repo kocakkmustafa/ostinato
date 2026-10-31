@@ -192,7 +192,7 @@ final class V1Practice {
   final V1Tempo? tempo;
   final V1Pass pass;
 
-  /// Generated on-screen questions for D lessons.
+  /// Generated on-screen questions: required for D, optional for M!.
   final V1Drill? drill;
 
   static const Set<String> measurementCodes = {
@@ -222,8 +222,13 @@ final class V1Practice {
       throw const FormatException('A0 iff measurement is D/Ö only');
     }
     final drill = m['drill'] == null ? null : V1Drill.fromJson(m['drill']);
-    if (measurement.contains('D') != (drill != null)) {
-      throw const FormatException('D measurement needs exactly one drill');
+    // D lessons need a drill; checkpoints (M!) may carry one for their
+    // on-screen part; nothing else may.
+    if (measurement.contains('D') && drill == null ||
+        drill != null &&
+            !measurement.contains('D') &&
+            !measurement.contains('M!')) {
+      throw const FormatException('Drill only on D lessons and checkpoints');
     }
     return V1Practice(
       measurement: measurement,

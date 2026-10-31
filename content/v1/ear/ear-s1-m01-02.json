@@ -1,0 +1,83 @@
+{
+  "id": "ear-s1-m01-02",
+  "title": { "en": "Clap with the metronome", "tr": "Metronomla alkışla" },
+  "goal": {
+    "en": "Keeps the beat with the metronome at 60, 80 and 100 bpm.",
+    "tr": "Metronomla 60, 80 ve 100 bpm'de vuruşu tutar."
+  },
+  "explanation": [
+    {
+      "en": "A metronome clicks a steady beat. Your clap should land on the click, so the two sound as one.",
+      "tr": "Metronom düzenli bir vuruş tıklatır. Alkışın klikle aynı anda gelmeli; ikisi tek ses gibi duyulsun."
+    },
+    {
+      "en": "Listen to four clicks before you start and count them silently: 1, 2, 3, 4.",
+      "tr": "Başlamadan önce dört klik dinle ve içinden say: 1, 2, 3, 4."
+    },
+    {
+      "en": "At ♩=60 the gap between clicks feels long. Do not fill it; wait for the next click.",
+      "tr": "♩=60'ta klikler arası uzun gelir. Arayı doldurma; sonraki kliği bekle."
+    },
+    {
+      "en": "At ♩=100 keep your claps small; big arm movements fall behind.",
+      "tr": "♩=100'de alkışı küçük tut; büyük kol hareketleri geride kalır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "Click only at ♩=60, 80 and 100, each with a four-click count-in.",
+      "tr": "♩=60, 80 ve 100'de yalnız klik, her birinde dört kliklik giriş."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Clap 8 beats with the click at ♩=60, then at 80, then at 100. Move to the next tempo once the one before it passes.",
+      "tr": "Klikle birlikte ♩=60'ta 8 vuruş alkışla, sonra 80'de, sonra 100'de. Bir tempo geçince sonrakine geç."
+    },
+    "tempo": { "open": 60, "target": 100 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My claps and the clicks sounded as one at each tempo.",
+      "tr": "Her tempoda alkışımla klik tek ses gibi duyuldu."
+    },
+    { "en": "I waited through the long gaps at ♩=60.", "tr": "♩=60'taki uzun aralarda bekledim." },
+    { "en": "I did not fall behind at ♩=100.", "tr": "♩=100'de geride kalmadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but early at ♩=60.", "tr": "Zamanında, ama ♩=60'ta erken." },
+      "fix": {
+        "en": "Slow tempos invite rushing. Count '1-and' inside each beat and clap on the number.",
+        "tr": "Yavaş tempo acele ettirir. Her vuruşun içinde '1-ve' say ve sayıda alkışla."
+      }
+    },
+    {
+      "error": { "en": "On time, but late at ♩=100.", "tr": "Zamanında, ama ♩=100'de geç." },
+      "fix": {
+        "en": "Make the clap smaller and keep your hands close together.",
+        "tr": "Alkışı küçült, ellerini birbirine yakın tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or lower the click volume.",
+        "tr": "Telefona daha yakın alkışla ya da klik sesini kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Repeat the ♩=60 set until it passes twice, then try 80; 100 can wait for another day.",
+    "tr": "♩=60 setini iki kez geçene kadar tekrarla, sonra 80'i dene; 100 başka bir güne kalabilir."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,89 @@
+{
+  "id": "ear-s1-test",
+  "title": { "en": "Level 1 test", "tr": "Seviye 1 testi" },
+  "goal": {
+    "en": "Shows the Level 1 skills: pulse, pitch, rhythm reading and note reading.",
+    "tr": "Seviye 1 becerilerini gösterir: vuruş, perde, ritim okuma ve nota okuma."
+  },
+  "explanation": [
+    {
+      "en": "The test has four parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test dört bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, pulse: clap 8 beats at ♩=60, 80 and 100, then a four-bar rhythm at ♩=70.",
+      "tr": "1. bölüm, vuruş: ♩=60, 80 ve 100'de 8'er vuruş, ardından ♩=70'te dört ölçülük bir ritim alkışla."
+    },
+    {
+      "en": "Part 2, pitch: 10 on-screen questions on high or low and contours, then sing back 6 notes in your own octave. If you'd rather not sing, choose the on-screen alternative.",
+      "tr": "2. bölüm, perde: yüksek-alçak ve kontur üzerine ekranda 10 soru, ardından 6 notayı kendi oktavında geri söyle. Söylemek istemiyorsan ekrandaki alternatifi seç."
+    },
+    {
+      "en": "Part 3, rhythm reading: clap 4 new two-bar lines at ♩=70.",
+      "tr": "3. bölüm, ritim okuma: 4 yeni iki ölçülük satırı ♩=70'te alkışla."
+    },
+    {
+      "en": "Part 4, note reading: name 20 notes from both clefs, up to 3 seconds each.",
+      "tr": "4. bölüm, nota okuma: iki anahtardan 20 notayı, her biri en fazla 3 saniyede adlandır."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at the test tempos; piano-tone notes and contours for part 2, from your comfortable range.",
+      "tr": "Test tempolarında klik; 2. bölüm için rahat menzilinden piyano tınısıyla notalar ve konturlar."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Complete four parts. 1 Pulse: 8 claps each at ♩=60, 80 and 100, plus a four-bar rhythm at ♩=70. 2 Pitch: 10 questions on high or low and contour, plus 6 notes sung back in your own octave, or the on-screen 'Same or different?' set instead. 3 Rhythm reading: 4 new two-bar lines at ♩=70. 4 Note reading: 20 notes from both clefs.",
+      "tr": "Dört bölümü tamamla. 1 Vuruş: ♩=60, 80 ve 100'de 8'er alkış, ardından ♩=70'te dört ölçülük ritim. 2 Perde: yüksek-alçak ve kontur üzerine 10 soru, ardından kendi oktavında geri söylenen 6 nota ya da onun yerine ekranda 'Aynı mı farklı mı?' seti. 3 Ritim okuma: ♩=70'te 4 yeni iki ölçülük satır. 4 Nota okuma: iki anahtardan 20 nota."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Pulse and rhythm reading: Level 1 timing. Pitch: at least 8 of 10 questions, and at least 5 of 6 sung notes within 50 cents (or the on-screen alternative). Note reading: at least 18 of 20, each within 3 seconds.",
+        "tr": "Her bölüm kendi başına geçer. Vuruş ve ritim okuma: Seviye 1 zamanlama ölçütü. Perde: 10 sorunun en az 8'i ve söylenen 6 notanın en az 5'i 50 cent içinde (ya da ekrandaki alternatif). Nota okuma: 20 notanın en az 18'i, her biri 3 saniye içinde."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but early at ♩=60.", "tr": "Zamanında, ama ♩=60'ta erken." },
+      "fix": {
+        "en": "Slow tempos invite rushing. Count '1-and' inside each beat and clap on the number.",
+        "tr": "Yavaş tempo acele ettirir. Her vuruşun içinde '1-ve' say ve sayıda alkışla."
+      }
+    },
+    {
+      "error": { "en": "Different note, a little low.", "tr": "Farklı nota, biraz alçak." },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the click.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve klik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint or the speed check, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini ya da hız kontrolünü tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -58,6 +58,15 @@ void main() {
     test('a D lesson without a drill', () {
       rejects((m) => (m['practice'] as Map)['measurement'] = ['D', 'M']);
     });
+    test('a drill on a plain microphone lesson', () {
+      rejects(
+        (m) => (m['practice'] as Map)['drill'] = {
+          'type': 'note_name',
+          'count': 4,
+          'params': <String, Object?>{},
+        },
+      );
+    });
     test('a tempo ladder that goes down', () {
       rejects(
         (m) => (m['practice'] as Map)['tempo'] = {'open': 60, 'target': 50},

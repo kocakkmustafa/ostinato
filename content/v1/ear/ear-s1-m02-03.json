@@ -1,0 +1,76 @@
+{
+  "id": "ear-s1-m02-03",
+  "title": { "en": "Up, down or same", "tr": "Yukarı, aşağı, aynı" },
+  "goal": { "en": "Chooses the shape of a three-note contour.", "tr": "Üç notalık konturun biçimini seçer." },
+  "explanation": [
+    {
+      "en": "A contour is the shape of a melody: where it goes up, goes down or stays.",
+      "tr": "Kontur, ezginin biçimidir: nerede yükselir, nerede alçalır, nerede aynı kalır."
+    },
+    {
+      "en": "Three notes make two moves: from note 1 to note 2, and from note 2 to note 3.",
+      "tr": "Üç nota iki hareket yapar: 1. notadan 2.'ye ve 2. notadan 3.'ye."
+    },
+    {
+      "en": "Judge each move on its own, then pick the shape that matches both.",
+      "tr": "Her hareketi ayrı değerlendir, sonra ikisine de uyan biçimi seç."
+    },
+    {
+      "en": "Draw the shape in the air with your finger while you listen.",
+      "tr": "Dinlerken parmağınla havada biçimi çiz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays three piano-tone notes in a row.",
+      "tr": "Her soruda piyano tınısıyla üç nota art arda çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Listen to three notes and choose the matching shape: up, down or same for each move.",
+      "tr": "Üç notayı dinle ve uyan biçimi seç: her hareket için yukarı, aşağı ya da aynı."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 8 },
+    "drill": {
+      "type": "pitch_direction",
+      "count": 10,
+      "params": { "range": ["C3", "C5"], "minSemitones": 2, "notes": 3, "allowSame": true }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the second move was heard the other way round.",
+        "tr": "Farklı cevap: ikinci hareket ters yönde duyuldu."
+      },
+      "fix": {
+        "en": "Replay and compare only notes 2 and 3, as in 'High or low?'.",
+        "tr": "Yeniden dinle ve yalnız 2. ve 3. notayı karşılaştır, 'Yüksek mi alçak mı?' dersindeki gibi."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: a repeated note was heard as a move.",
+        "tr": "Farklı cevap: tekrar eden nota hareket gibi duyuldu."
+      },
+      "fix": {
+        "en": "A repeated note is a flat line; listen for whether the pitch changes at all.",
+        "tr": "Tekrar eden nota düz bir çizgidir; perde hiç değişiyor mu, ona kulak ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each contour as often as you like, at normal or slow speed.",
+    "tr": "Her konturu istediğin kadar, normal ya da yavaş hızda tekrar dinle."
+  },
+  "minutes": 7,
+  "expertPending": true
+}

@@ -1,0 +1,94 @@
+{
+  "id": "ear-s2-m07-04",
+  "title": { "en": "Ties", "tr": "Bağlar" },
+  "goal": { "en": "Claps and writes rhythms with ties.", "tr": "Bağlı ritmi alkışlar ve yazar." },
+  "explanation": [
+    {
+      "en": "A tie joins two notes of the same pitch into one longer sound. Only the first note is played.",
+      "tr": "Bağ, aynı perdedeki iki notayı tek uzun seste birleştirir. Yalnız ilk nota çalınır."
+    },
+    {
+      "en": "Add up the values: a quarter tied to a quarter lasts two beats.",
+      "tr": "Değerleri topla: dörtlüğe bağlı dörtlük iki vuruş sürer."
+    },
+    {
+      "en": "Ties can cross the bar line. You clap once and keep counting into the next bar.",
+      "tr": "Bağ ölçü çizgisini geçebilir. Bir kez alkışlar, sayarak sonraki ölçüye geçersin."
+    },
+    {
+      "en": "Clap on the first note, then keep your hands apart while you count the tied beat.",
+      "tr": "İlk notada alkışla, bağlı vuruşu sayarken ellerini açık tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "One-bar click count-in; the dictation rhythms play on one synthesized note at ♩=60.",
+      "tr": "Bir ölçülük klik girişi; dikte ritimleri ♩=60'ta tek bir sentez notasında çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "D"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Part 1: clap four two-bar lines with ties along with the click. Start at ♩=60 and move up in steps of 5 to ♩=70. Headphones help the microphone hear only your claps. Part 2: hear four two-bar rhythms and write them, ties included. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "1. bölüm: bağlı dört iki ölçülük satırı klikle birlikte alkışla. ♩=60'tan başla, 5'er adımla ♩=70'e çık. Kulaklık, mikrofonun yalnız alkışını duymasına yardım eder. 2. bölüm: dört iki ölçülük ritmi dinle ve bağlarıyla birlikte yaz. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "rhythm_dictation",
+      "count": 4,
+      "params": {
+        "values": ["half", "quarter", "eighthPair", "quarterRest"],
+        "ties": true,
+        "bars": 2,
+        "bpm": 60,
+        "meter": "4/4"
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I clapped once for each tied pair.", "tr": "Her bağlı çift için bir kez alkışladım." },
+    {
+      "en": "I kept counting across the bar line.",
+      "tr": "Ölçü çizgisini geçerken saymaya devam ettim."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early on the note after the tie.",
+        "tr": "Doğru, ama bağdan sonraki notada erken."
+      },
+      "fix": {
+        "en": "The tie adds time; count it to the end before the next clap.",
+        "tr": "Bağ süre ekler; sonraki alkıştan önce onu sonuna kadar say."
+      }
+    },
+    {
+      "error": { "en": "Different answer: a tie was left out.", "tr": "Farklı cevap: bağ unutuldu." },
+      "fix": {
+        "en": "If a sound lasts across a beat or bar line with no new attack, write it with a tie.",
+        "tr": "Ses yeni bir vuruş sesi olmadan bir vuruşa ya da ölçü çizgisine taşıyorsa bağla yaz."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or turn the click down.",
+        "tr": "Telefona daha yakın alkışla ya da kliği kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap the line once without the ties, then again with them.",
+    "tr": "Satırı önce bağsız, sonra bağlı alkışla."
+  },
+  "minutes": 12,
+  "expertPending": true
+}
