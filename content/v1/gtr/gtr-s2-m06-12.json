@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s2-m06-12",
+  "title": { "en": "Strumming in six-eight", "tr": "6/8'de vuruş" },
+  "goal": {
+    "en": "Strums Am–E in 6/8 with two clear big beats per bar at ♩.=50.",
+    "tr": "Am–E'yi 6/8'de, ölçüde iki belirgin büyük vuruşla ♩.=50'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "6/8 has six eighths in a bar, felt as two big beats: 1-2-3 4-5-6.",
+      "tr": "6/8'de ölçüde altı sekizlik var; iki büyük vuruş olarak hissedilir: 1-2-3 4-5-6."
+    },
+    {
+      "en": "Lean on 1 and 4. The small counts in between are lighter.",
+      "tr": "1 ve 4'e yaslan. Aradaki küçük sayılar daha hafiftir."
+    },
+    {
+      "en": "Strum long-short in each big beat: down on 1, up on 3; down on 4, up on 6.",
+      "tr": "Her büyük vuruşta uzun-kısa çal: 1'de aşağı, 3'te yukarı; 4'te aşağı, 6'da yukarı."
+    },
+    {
+      "en": "The tempo counts the big beats: ♩.=40 means 40 big beats a minute.",
+      "tr": "Tempo büyük vuruşları sayar: ♩.=40, dakikada 40 büyük vuruş demektir."
+    },
+    {
+      "en": "Am is x-0-2-2-1-0 and E is 0-2-2-1-0-0. Fingers 1, 2 and 3 keep their shape and move one string toward string 6.",
+      "tr": "Am x-0-2-2-1-0, E 0-2-2-1-0-0'dır. 1., 2. ve 3. parmak şeklini korur ve bir tel 6. tele doğru kayar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Eight bars of Am and E in 6/8, long-short strums, at ♩.=50 and ♩.=35, with a light bass and drum loop.",
+      "tr": "6/8'de sekiz ölçü Am ve E, uzun-kısa vuruş, ♩.=50 ve ♩.=35, hafif bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the eight bars with the accompaniment. The tempo counts dotted quarters (big beats): start at ♩.=40 and move up in steps of 5 to ♩.=50. Headphones help the microphone hear only your guitar.",
+      "tr": "Sekiz ölçüyü eşlikle çal. Tempo noktalı dörtlükleri (büyük vuruşları) sayar: ♩.=40'tan başla, 5'er adımla ♩.=50'ye çık. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "6/8: Am q e q e | Am q e q e | E q e q e | E q e q e | Am q e q e | Am q e q e | E q e q e | Am q e q e",
+    "tempo": { "open": 40, "target": 50 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I felt two big beats in every bar.", "tr": "Her ölçüde iki büyük vuruş hissettim." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": { "en": "The upstroke on 3 came early. Count all six small beats aloud.", "tr": "3'teki yukarı vuruş erken geldi. Altı küçük sayının hepsini sesli say." }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": { "en": "On Am, start the strum on string 5.", "tr": "Am'de vuruşa 5. telden başla." }
+    }
+  ],
+  "adaptation": {
+    "en": "Strum only down on 1 and 4 until the two big beats feel even.",
+    "tr": "İki büyük vuruş eşit gelene kadar yalnız 1 ve 4'te aşağı vur."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

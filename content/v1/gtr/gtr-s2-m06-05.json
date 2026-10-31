@@ -1,0 +1,69 @@
+{
+  "id": "gtr-s2-m06-05",
+  "title": { "en": "Offbeats and planned silence", "tr": "Ara vuruşlar ve planlı sessizlik" },
+  "goal": {
+    "en": "Places offbeat strums, held sounds and rests on Em at ♩=70 without moving the beat.",
+    "tr": "Em'de ara vuruşları, tutulan sesleri ve susları vuruşu kaydırmadan ♩=70'te yerleştirir."
+  },
+  "explanation": [
+    {
+      "en": "An offbeat is an attack on an 'and'. A held sound continues over the next beat without a new strum.",
+      "tr": "Ara vuruş, bir 've'ye düşen vuruştur. Tutulan ses yeni vuruş olmadan sonraki vuruşun üstünden sürer."
+    },
+    {
+      "en": "Tap quarters with your foot and clap on 1, the 'and' of 2, and 4.",
+      "tr": "Ayağınla dörtlük vur; 1'de, 2'nin 've'sinde ve 4'te alkışla."
+    },
+    {
+      "en": "Play the same rhythm on Em: down on 1, up on the 'and' of 2, and let that sound ring through beat 3. Down again on 4.",
+      "tr": "Aynı ritmi Em'de çal: 1'de aşağı, 2'nin 've'sinde yukarı; bu ses 3. vuruş boyunca çalsın. 4'te yine aşağı."
+    },
+    {
+      "en": "A planned rest is silence you count. Stop the strings at the rest and keep counting.",
+      "tr": "Planlı sus, saydığın sessizliktir. Susta telleri durdur ve saymayı sürdür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The four Em bars with offbeats and rests, at ♩=70 and ♩=45, with click.",
+      "tr": "Ara vuruşlu ve suslu dört Em ölçüsü, ♩=70 ve ♩=45, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Play the four bars on Em with the click at ♩=70. Strum up on the 'and' beats and down on the numbers. Stop the strings on the rests.",
+      "tr": "Dört ölçüyü klikle ♩=70'te Em'de çal. 've'lerde yukarı, sayılarda aşağı vur. Suslarda telleri durdur."
+    },
+    "sequence": "4/4: q. q. q | er e er e q qr | q. q. q | er e er e h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I kept counting through the rests.", "tr": "Suslarda da saymayı sürdürdüm." },
+    { "en": "The held sound rang over beat 3 without a new strum.", "tr": "Tutulan ses yeni vuruş olmadan 3. vuruşun üstünden çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The offbeat slid toward the next number. Say 'and' aloud and strum exactly on it.", "tr": "Ara vuruş sonraki sayıya kaydı. 've'yi sesli söyle ve tam onun üstünde vur." }
+    },
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": { "en": "Lay the side of your strumming hand on the strings as the rest begins.", "tr": "Sus başlarken sağ elinin yanını tellerin üstüne koy." }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap the rhythm first, then play only bars 1 and 3 until the held sound is steady.",
+    "tr": "Önce ritmi alkışla, sonra tutulan ses oturana kadar yalnız 1. ve 3. ölçüyü çal."
+  },
+  "legacy": "R: guitar.journey.strum.offbeat",
+  "minutes": 12,
+  "expertPending": true
+}
