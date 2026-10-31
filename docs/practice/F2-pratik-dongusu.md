@@ -63,3 +63,27 @@ yakalamayı durdurmaz. Native yoksa ya da çapa gelmezse pratik **sessiz
 5. Android: 256 örneklik blokla alt akış (underrun) oluyor mu. Olursa
    sonraki klikler kayar; yazıcı çapayı ~2 sn'de bir yeniden ölçer ve 1 ms'den
    büyük farkta yeni `metronomeAnchor` gönderir (Dart en sonuncuyu kullanır).
+
+## F2.3 Akan notasyon
+
+- `practice_score.dart`: `practice.sequence` ayrıştırıcı. Perde (`E2`,
+  `C#4:h`), ritim (`q h. ee qr h~q`), derece (`1-3-5`), ölçü öneki (`3/4:`),
+  `×N` tekrar. Her `|` parçası sonraki ölçü çizgisinde başlar (gitar
+  dersindeki `E2 F2 G2 F2 E2 | …` iki ölçü olur). Yazılmış bütün v1 dersleri
+  ayrıştırılıyor (testte denetlenir).
+- Tab konumu: standart akort, sesli perde; 0–4. perdeler içinde en düşük
+  perde (önce boş tel), yoksa en düşük perde.
+- `practice_transport.dart`: ders vuruşu `L = m − ön sayım − kaydırma`.
+  Döngü (ölçü aralığı) her turda notaları yeniden bildirir; "Beni bekle"
+  notada durur, duyulunca bir sonraki notayı **sonraki bir klike** oturtur
+  (ızgara bozulmaz). Tempo: hedefin %40–120'si, açılış tempo varsayılan,
+  ±5 BPM merdiveni.
+- `practice_tab_strip.dart`: sabit ŞİMDİ çizgisi, notalar akar; tab'da 1. tel
+  üstte. Farklı notada duyulan konum hayalet ◆ olarak kendi telinde.
+  Ekran okuyucu: "Şimdi: Fa2, 1. perde, 6. tel". Gitar dışı dersler için tek
+  çizgili ritim şeridi (ses/piyano rulosunun temeli).
+- Tema kancası (F2.7 için): `PracticeVisualTheme(leftHanded, colorBlindSafe)`
+  + `PracticeVisualThemeScope`. Durumlar şekil + renk + etiket: dolu daire ✓,
+  eşkenar dörtgen ◆, kesik çizgili daire ?. Kırmızı yok (testte denetlenir);
+  renk körü paleti mavi/turuncu/gri. Solak modu şeridi yatay aynalar (ŞİMDİ
+  çizgisi sağda). Ayarlara bağlanması F2.7'nin işi.
