@@ -12,6 +12,8 @@ import '../audio/practice_audio_root.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../guitar_session_preparation.dart';
+import '../tuner/session_tuning_gate.dart';
+import '../tuner/tuner_screen.dart';
 
 /// Optional practice instrument; no target prompt, assessment or progress write.
 class GuitarNoteObservationScreen extends StatefulWidget {
@@ -285,6 +287,10 @@ class _GuitarNoteObservationScreenState
               ),
               const SizedBox(height: 18),
               _sessionPreparationCard(context),
+              const SizedBox(height: 18),
+              // F4.1 session-start tuning gate, beside (not replacing) the
+              // held-note tuning check below.
+              SessionTuningGateCard(onTune: (context) => openTuner(context)),
               const SizedBox(height: 18),
               GlassCard(
                 gradientColors: hue.grad,

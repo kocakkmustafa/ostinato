@@ -12,6 +12,9 @@ import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../retention/weekly_goal_card.dart';
 import '../retention/weekly_goal_store.dart';
+import '../tuner/tuner_copy.dart';
+import '../tuner/tuner_screen.dart';
+import '../ui_copy.dart';
 import 'course_screen.dart';
 import 'instrument_screen.dart';
 import 'settings_screen.dart';
@@ -213,6 +216,16 @@ class LibraryScreen extends StatelessWidget {
                 ],
                 const StudyReviewEntry(),
                 WeeklyGoalCard(storeFactory: weeklyGoalStoreFactory),
+                // F4.1: the tuner is a free tool, reachable from home.
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: OutlinedButton.icon(
+                    key: const Key('tuner-entry'),
+                    icon: const Icon(Icons.tune),
+                    label: Text(uiText(context, TunerCopy.title)),
+                    onPressed: () => openTuner(context),
+                  ),
+                ),
                 const SizedBox(height: 22),
                 kicker(localized(context, 'Your instruments', 'Çalgılarınız')),
                 const SizedBox(height: 11),

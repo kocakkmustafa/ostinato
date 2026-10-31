@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/retention/retention_copy.dart';
+import 'package:ostinato/app/tuner/tuner_copy.dart';
 import 'package:ostinato/app/ui_copy.dart';
 
 /// New UI copy lives in Dart (`*_copy.dart`) and in a JSON source under
@@ -11,6 +12,7 @@ import 'package:ostinato/app/ui_copy.dart';
 void main() {
   final catalogs = <String, List<UiCopy>>{
     'content/ui/retention.json': RetentionCopy.all,
+    'content/ui/tuner.json': TunerCopy.all,
   };
 
   for (final entry in catalogs.entries) {
