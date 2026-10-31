@@ -42,6 +42,15 @@ GuitarNoteObservationResult heldNote(int midi, double cents) =>
       ),
     );
 
+TuningMeasurement tuned(int midi, double cents) => TuningMeasurement(
+  f0Hz: 440 * math.pow(2, (midi - 69 + cents / 100) / 12).toDouble(),
+  inharmonicityB: 1e-4,
+  midi: midi,
+  centsFromNearest: cents,
+  spreadCents: 1,
+  readings: const [],
+);
+
 /// One analysis per call: 16384 samples are past the 350 ms analysis interval.
 Future<void> nextWindow(WidgetTester t, FakeAudioSource source) async {
   source.pushChunk(List.filled(16384, .2));
@@ -360,73 +369,74 @@ void main() {
       await source.dispose();
     },
   );
-  testWidgets('sustained tuning reads set session tuning with hysteresis', (
-    t,
-  ) async {
-    final source = FakeAudioSource();
-    // Raw tuning reads; A2 (45) carries a -3.8 cent open-string correction.
-    double raw(double measured) => measured + 3.8;
-    final reads = <GuitarNoteObservation?>[
-      for (final m in [24.0, 26.0, 23.0]) heldNote(45, raw(m)).observation,
-      for (final m in [21.0, 21.0, 21.0]) heldNote(45, raw(m)).observation,
-      for (final m in [19.0, 19.0, 19.0]) heldNote(45, raw(m)).observation,
-      for (final m in [17.0, 17.0, 17.0]) heldNote(45, raw(m)).observation,
-      heldNote(50, 5).observation,
-      null,
-      for (final m in [36.0, 34.0, 35.0]) heldNote(45, raw(m)).observation,
-      for (final m in [29.0, 29.0, 29.0]) heldNote(45, raw(m)).observation,
-      for (final m in [10.0, -2.0, 4.0]) heldNote(45, raw(m)).observation,
-    ];
-    var call = 0;
-    final controller = GuitarNoteObservationController(
-      config: config(),
-      source: source,
-      analyzer: (_, _, _, _) async => observed,
-      tuningAnalyzer: (_, _, _, _) async => reads[call++],
-    );
-    final seen = <(NoteTuning, double?)>[];
-    await controller.start();
-    await t.pump();
-    await calibrate(t, source);
-    for (var i = 0; i < reads.length; i++) {
-      await nextWindow(t, source);
-      seen.add((
-        controller.tuning,
-        controller.tuningCents == null
-            ? null
-            : (controller.tuningCents! * 10).round() / 10,
-      ));
-    }
-    expect(call, reads.length);
-    expect(seen[1], (NoteTuning.unknown, null));
-    expect(seen[2], (NoteTuning.check, 24));
-    // 21 and 19 stay within 2 cents of the 20-cent boundary: no flip.
-    expect(seen[5], (NoteTuning.check, 21));
-    expect(seen[8], (NoteTuning.check, 19));
-    expect(seen[11], (NoteTuning.inTune, 17));
-    // A different note or a refusal breaks the run.
-    expect(seen[13], (NoteTuning.inTune, 17));
-    expect(seen[16], (NoteTuning.tuneFirst, 35));
-    expect(seen[19], (NoteTuning.tuneFirst, 29));
-    // More than 10 cents of spread is not a sustained-note measurement.
-    expect(seen[22], (NoteTuning.tuneFirst, 29));
-    expect(GuitarNoteObservationController.tuningCorrection(47), -3.8);
-    expect(GuitarNoteObservationController.tuningCorrection(52), -3.9);
-    expect(GuitarNoteObservationController.tuningCorrection(76), -2.9);
-    await controller.stop();
-    expect(controller.tuning, NoteTuning.unknown);
-    expect(controller.tuningCents, isNull);
-    controller.dispose();
-    await source.dispose();
-  });
+  testWidgets(
+    'precise tuning measurements set session tuning with hysteresis',
+    (t) async {
+      final source = FakeAudioSource();
+      final reads = <TuningMeasurement?>[
+        tuned(45, 24),
+        null,
+        tuned(45, 21),
+        tuned(45, 19),
+        tuned(45, 17),
+        null,
+        tuned(45, 35),
+        tuned(50, 29),
+        tuned(45, -31),
+      ];
+      var call = 0;
+      final lengths = <int>[];
+      final controller = GuitarNoteObservationController(
+        config: config(),
+        source: source,
+        analyzer: (_, _, _, _) async => observed,
+        tuningAnalyzer: (samples, _, _, _) async {
+          lengths.add(samples.length);
+          return reads[call++];
+        },
+      );
+      final seen = <(NoteTuning, double?)>[];
+      await controller.start();
+      await t.pump();
+      await calibrate(t, source);
+      for (var i = 0; i < reads.length; i++) {
+        await nextWindow(t, source);
+        seen.add((
+          controller.tuning,
+          controller.tuningCents == null
+              ? null
+              : (controller.tuningCents! * 10).round() / 10,
+        ));
+      }
+      expect(call, reads.length);
+      expect(seen[0], (NoteTuning.check, 24));
+      // A refusal keeps the last measurement.
+      expect(seen[1], (NoteTuning.check, 24));
+      // 21 and 19 stay within 2 cents of the 20-cent boundary: no flip.
+      expect(seen[2], (NoteTuning.check, 21));
+      expect(seen[3], (NoteTuning.check, 19));
+      expect(seen[4], (NoteTuning.inTune, 17));
+      expect(seen[5], (NoteTuning.inTune, 17));
+      expect(seen[6], (NoteTuning.tuneFirst, 35));
+      expect(seen[7], (NoteTuning.tuneFirst, 29));
+      expect(seen[8], (NoteTuning.tuneFirst, -31));
+      // The tuning buffer grows to 1.6 s and then slides.
+      final limit = GuitarObservationConfig.tuningWindowSamples(44100);
+      expect(lengths.first, 16384);
+      expect(lengths.last, limit);
+      expect(lengths.every((n) => n <= limit), isTrue);
+      await controller.stop();
+      expect(controller.tuning, NoteTuning.unknown);
+      expect(controller.tuningCents, isNull);
+      controller.dispose();
+      await source.dispose();
+    },
+  );
   testWidgets('tune-first hides the note name; check shows the cents', (
     t,
   ) async {
     final source = FakeAudioSource();
-    final reads = <GuitarNoteObservation?>[
-      for (var i = 0; i < 3; i++) heldNote(45, 28.8).observation,
-      for (var i = 0; i < 3; i++) heldNote(45, 43.8).observation,
-    ];
+    final reads = <TuningMeasurement?>[tuned(45, 25), tuned(45, 40)];
     var call = 0;
     final controller = GuitarNoteObservationController(
       config: config(),
@@ -441,18 +451,14 @@ void main() {
     await controller.start();
     await t.pump();
     await calibrate(t, source);
-    for (var i = 0; i < 3; i++) {
-      await nextWindow(t, source);
-    }
+    await nextWindow(t, source);
     Text tuningText() =>
         t.widget<Text>(find.byKey(const Key('observation-tuning')));
     Text noteText() => t.widget<Text>(find.byKey(const Key('observed-note')));
     expect(controller.tuning, NoteTuning.check);
     expect(noteText().data, startsWith('A2'));
     expect(tuningText().data, contains('25 cents'));
-    for (var i = 0; i < 3; i++) {
-      await nextWindow(t, source);
-    }
+    await nextWindow(t, source);
     expect(controller.tuning, NoteTuning.tuneFirst);
     expect(controller.observation?.midi, 45);
     expect(noteText().data, '—');
@@ -462,12 +468,31 @@ void main() {
     controller.dispose();
     await source.dispose();
   });
-  test('the tuning pass widens only the centre limit', () {
-    final c = config();
-    expect(c.tuningPitch.maxCenterErrorCents, 50);
-    expect(c.pitch.maxCenterErrorCents, 35);
-    expect(c.tuningPitch.windowSize, c.pitch.windowSize);
-    expect(c.tuningPitch.minPeriodicity, c.pitch.minPeriodicity);
+  test('session tuning is the precise tuner on a held string', () {
+    const rate = 44100;
+    for (final (midi, detune) in [(40, 12.0), (45, -7.0), (64, 25.0)]) {
+      final f0 = 440 * math.pow(2, (midi - 69 + detune / 100) / 12).toDouble();
+      final x = SyntheticString.pluck(
+        f0Hz: f0,
+        sampleRate: rate,
+        seconds: 1.4,
+        inharmonicityB: 2e-4,
+        preRollSeconds: 0.2,
+      );
+      final m = measureSessionTuning(x, rate, -90);
+      expect(m, isNotNull, reason: 'midi $midi');
+      expect(m!.midi, midi);
+      // No per-string correction table: inharmonicity is fitted.
+      expect(m.centsFromNearest, closeTo(detune, 1));
+      expect(
+        x.length,
+        lessThanOrEqualTo(GuitarObservationConfig.tuningWindowSamples(rate)),
+      );
+    }
+    // A buffer shorter than one measurement is declined, not guessed.
+    expect(measureSessionTuning(List.filled(8192, .1), rate, -90), isNull);
+    expect(measureSessionTuning(const [], rate, -90), isNull);
+    expect(GuitarObservationConfig.tuningProfile.name, 'guitar');
   });
   testWidgets('late analysis after stale TTL cannot revive a note', (t) async {
     final source = FakeAudioSource();
