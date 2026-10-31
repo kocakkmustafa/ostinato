@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s2-m09-02",
+  "title": { "en": "Natural notes on strings 6 and 5", "tr": "6. ve 5. telde doğal notalar" },
+  "goal": {
+    "en": "Finds any natural note on strings 6 and 5 up to fret 12 and plays it.",
+    "tr": "6. ve 5. telde 12. perdeye kadar istenen doğal notayı bulur ve çalar."
+  },
+  "explanation": [
+    {
+      "en": "String 6 starts on E2, string 5 on A2. Both reach the same letter one octave higher at fret 12.",
+      "tr": "6. tel Mi2'den, 5. tel La2'den başlar. İkisi de 12. perdede bir oktav yukarıdaki aynı harfe ulaşır."
+    },
+    {
+      "en": "String 6 naturals: E2 0, F2 1, G2 3, A2 5, B2 7, C3 8, D3 10, E3 12.",
+      "tr": "6. telde doğal notalar: Mi2 0, Fa2 1, Sol2 3, La2 5, Si2 7, Do3 8, Re3 10, Mi3 12."
+    },
+    {
+      "en": "String 5 naturals: A2 0, B2 2, C3 3, D3 5, E3 7, F3 8, G3 10, A3 12.",
+      "tr": "5. telde doğal notalar: La2 0, Si2 2, Do3 3, Re3 5, Mi3 7, Fa3 8, Sol3 10, La3 12."
+    },
+    {
+      "en": "Use the dots on the neck as anchors: fret 3 is G on string 6 and C on string 5; fret 5 is A and D; fret 7 is B and E.",
+      "tr": "Saptaki noktaları dayanak al: 3. perde 6. telde Sol, 5. telde Do; 5. perde La ve Re; 7. perde Si ve Mi."
+    },
+    {
+      "en": "These two strings later give the root of most movable chords and scales.",
+      "tr": "Bu iki tel ileride taşınabilir akor ve gamların çoğunun kökünü verir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each requested note is played once after your attempt, string-model synthesis.",
+      "tr": "İstenen her nota, denemenden sonra bir kez çalınır; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Part 1: answer 8 questions on a fretboard diagram, naming the marked note or tapping where a note is. Part 2: the screen names 7 notes on strings 6 and 5; find and play each one.",
+      "tr": "1. bölüm: klavye şemasında 8 soruyu cevapla; işaretli notayı adlandır ya da notanın yerine dokun. 2. bölüm: ekran 6. ve 5. telde 7 nota söyler; her birini bul ve çal."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 8,
+      "params": {
+        "set": "fretboard_natural_notes",
+        "diagram": "fretboard",
+        "strings": [6, 5],
+        "frets": [0, 12],
+        "bothDirections": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found each note without counting up from the open string every time.", "tr": "Her notayı her seferinde açık telden saymadan buldum." },
+    { "en": "I used the fret dots as anchors.", "tr": "Perde noktalarını dayanak olarak kullandım." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "Check B–C and E–F: they sit on neighbouring frets.", "tr": "Si–Do ve Mi–Fa'yı kontrol et: komşu perdelerdedir." }
+    },
+    {
+      "error": { "en": "Different note: the right fret on the other string.", "tr": "Farklı nota: doğru perde, diğer tel." },
+      "fix": { "en": "Say the string name first, then the fret. String 6 is the thickest.", "tr": "Önce telin adını, sonra perdeyi söyle. 6. tel en kalın teldir." }
+    }
+  ],
+  "adaptation": {
+    "en": "Work on frets 0 to 5 only, then add frets 7 to 12 in a later session.",
+    "tr": "Yalnız 0–5. perdeleri çalış; 7–12. perdeleri sonraki oturumda ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

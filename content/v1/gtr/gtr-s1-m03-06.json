@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s1-m03-06",
+  "title": { "en": "Three-four time", "tr": "Üç dörtlük ölçü" },
+  "goal": {
+    "en": "Plays four bars of 3/4 at ♩=70 with beat 1 clearly stronger than beats 2 and 3.",
+    "tr": "♩=70'te dört ölçü 3/4 çalar; 1. vuruş 2. ve 3. vuruştan belirgin biçimde güçlüdür."
+  },
+  "explanation": [
+    {
+      "en": "In 3/4 one bar has three quarter-note beats, counted 1 2 3.",
+      "tr": "3/4'te bir ölçüde üç dörtlük vuruş vardır; 1 2 3 diye sayılır."
+    },
+    {
+      "en": "Beat 1 is the strong beat. Play it a little louder so the ear hears groups of three.",
+      "tr": "1. vuruş güçlü vuruştur. Kulak üçlü grupları duysun diye onu biraz daha güçlü çal."
+    },
+    {
+      "en": "Make the accent with a slightly bigger stroke, not with a tighter hand.",
+      "tr": "Vurguyu sıkı bir elle değil, biraz daha büyük bir hareketle yap."
+    },
+    {
+      "en": "Keep beats 2 and 3 light and even. The tempo stays the same on every beat.",
+      "tr": "2. ve 3. vuruşu hafif ve eşit tut. Tempo her vuruşta aynı kalır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Open A2 on every beat of four 3/4 bars, beat 1 accented, with a click at ♩=70 and at ♩=50.",
+      "tr": "Dört ölçü 3/4'te her vuruşta açık La2, 1. vuruş vurgulu; klikle ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Pluck open A2 on every beat for four bars of 3/4 with the click at ♩=70. Make beat 1 stronger than beats 2 and 3.",
+      "tr": "Klikle ♩=70'te dört ölçü 3/4 boyunca her vuruşta açık La2'yi çal. 1. vuruşu 2. ve 3. vuruştan güçlü yap."
+    },
+    "sequence": "3/4: q q q | q q q | q q q | q q q",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 1 timing, and beat 1 at least 4 dB stronger than beats 2 and 3.",
+        "tr": "Seviye 1 zamanlama ölçütü; 1. vuruş 2. ve 3. vuruştan en az 4 dB güçlü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I could hear groups of three in my playing.", "tr": "Çalışımda üçlü grupları duyabildim." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: the accent was under 4 dB.", "tr": "Farklı: vurgu 4 dB'nin altında kaldı." },
+      "fix": {
+        "en": "Play beats 2 and 3 softer instead of forcing beat 1. The difference is what counts.",
+        "tr": "1. vuruşu zorlamak yerine 2. ve 3. vuruşu daha yumuşak çal. Önemli olan farktır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "The accented beat is rushing. Keep the bigger stroke but start it with the click.",
+        "tr": "Vurgulu vuruş acele ediyor. Büyük hareketi koru ama kliğe birlikte başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Count \"ONE two three\" aloud and clap it first, then play only two bars at ♩=55.",
+    "tr": "Önce \"BİR iki üç\" diye sesli say ve alkışla, sonra ♩=55'te yalnız iki ölçü çal."
+  },
+  "legacy": "V: guitar.journey.reading.meters",
+  "minutes": 10,
+  "expertPending": true
+}

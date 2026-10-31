@@ -1,0 +1,82 @@
+{
+  "id": "gtr-s1-m02-10",
+  "title": { "en": "Eight-bar note study", "tr": "Sekiz ölçülük nota çalışması" },
+  "goal": {
+    "en": "Plays an original eight-bar study that uses notes on all six strings at ♩=72.",
+    "tr": "Altı telin hepsindeki notaları kullanan özgün sekiz ölçülük çalışmayı ♩=72'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "The study climbs from E2 on string 6 to G4 on string 1 in bars 1–3, then works back down to E2 by bar 8.",
+      "tr": "Çalışma 1–3. ölçülerde 6. teldeki Mi2'den 1. teldeki Sol4'e çıkar, sonra 8. ölçüde Mi2'ye kadar geri iner."
+    },
+    {
+      "en": "Count one bar in before you start. Every note is one beat.",
+      "tr": "Başlamadan önce bir ölçü say. Her nota bir vuruştur."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    },
+    {
+      "en": "To practise a hard spot, start at bar 3 or bar 5 instead of always at the beginning.",
+      "tr": "Zor bir yeri çalışmak için her zaman baştan değil, 3. ya da 5. ölçüden başla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original eight-bar study at ♩=72 and ♩=50, string-model synthesis.",
+      "tr": "Özgün sekiz ölçülük çalışma, ♩=72 ve ♩=50, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the eight-bar study along with the click at ♩=72, one note per beat. Practise slower first if you like; the checkpoint counts at ♩=72.",
+      "tr": "Sekiz ölçülük çalışmayı ♩=72'de klikle birlikte çal; her vuruşa bir nota. İstersen önce yavaş çalış; geçiş ♩=72'de sayılır."
+    },
+    "sequence": "E2 G2 A2 C3 | D3 E3 G3 A3 | B3 C4 D4 E4 | G4 E4 C4 A3 | G3 E3 D3 C3 | A2 C3 E3 G3 | F3 D3 B2 G2 | A2 G2 E2 E2",
+    "tempo": { "open": 72, "target": 72 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Bar 4 has the widest moves. Loop bars 3–4 at ♩=55, then go back to ♩=72.",
+        "tr": "En geniş hareketler 4. ölçüde. 3–4. ölçüleri ♩=55'te döngüle, sonra ♩=72'ye dön."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "In bar 7, F3 is string 4 at fret 3 and B2 is string 5 at fret 2. Check the string before the fret.",
+        "tr": "7. ölçüde Fa3 4. telin 3. perdesi, Si2 5. telin 2. perdesidir. Perdeden önce teli kontrol et."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Low notes fade quickly. Pluck strings 5 and 6 a little firmer and keep the phone close to the guitar.",
+        "tr": "Pes notalar çabuk söner. 5. ve 6. telleri biraz daha net çek ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 and bars 5–8 as two separate four-bar studies at ♩=55, then join them.",
+    "tr": "1–4. ve 5–8. ölçüleri ♩=55'te iki ayrı dört ölçülük çalışma olarak çal, sonra birleştir."
+  },
+  "legacy": "R: guitar.journey.notes.note_checkpoint",
+  "minutes": 15,
+  "expertPending": true
+}

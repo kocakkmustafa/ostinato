@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s1-m01-06",
+  "title": { "en": "One clear sound", "tr": "Tek temiz ses" },
+  "goal": {
+    "en": "Plays one chosen open string cleanly and stops it on purpose without sounding its neighbours.",
+    "tr": "Seçilen açık teli komşularını çalmadan temiz çalar ve bilerek susturur."
+  },
+  "explanation": [
+    {
+      "en": "Use a pick or a bare fingertip. With a pick, hold it lightly and let only a small tip show.",
+      "tr": "Pena ya da çıplak parmak ucu kullan. Penayı hafifçe tut; yalnız küçük bir ucu dışarıda kalsın."
+    },
+    {
+      "en": "Pluck open string 1 with a small stroke. First listen as the sound fades on its own.",
+      "tr": "Açık 1. teli küçük bir hareketle çal. Önce sesin kendiliğinden sönüşünü dinle."
+    },
+    {
+      "en": "Play it again, then end the sound on purpose: touch only that string lightly with a free fingertip.",
+      "tr": "Yeniden çal, sonra sesi bilerek bitir: boştaki bir parmak ucunu yalnız o tele hafifçe değdir."
+    },
+    {
+      "en": "Repeat on strings 2 and 3. Pause after each sound and listen for any neighbour that rang by accident.",
+      "tr": "2. ve 3. telde tekrarla. Her sesten sonra dur ve istemeden çalan komşu tel var mı dinle."
+    },
+    {
+      "en": "Keep the stroke small. A large stroke easily crosses several strings.",
+      "tr": "Hareketi küçük tut. Büyük hareket kolayca birkaç teli birden geçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Single open strings, each played and then stopped after two seconds, string-model synthesis.",
+      "tr": "Tek tek açık teller; her biri çalınır ve iki saniye sonra susturulur, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "The screen names 12 open strings in random order, from E2 to E4. Play each one cleanly, let it ring, then stop it before the next.",
+      "tr": "Ekran Mi2'den Mi4'e kadar rastgele sırayla 12 açık tel gösterir. Her birini temiz çal, çınlamaya bırak, sonrakinden önce sustur."
+    },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Only the chosen string rang each time.", "tr": "Her seferinde yalnız seçilen tel çaldı." },
+    { "en": "I stopped each sound on purpose before the next one.", "tr": "Her sesi sonrakinden önce bilerek susturdum." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the neighbouring string was heard.", "tr": "Farklı nota: komşu tel duyuldu." },
+      "fix": {
+        "en": "Make the stroke smaller and show less of the pick tip; find the string again and play slowly.",
+        "tr": "Hareketi küçült ve penanın ucunu daha az çıkar; teli yeniden bul ve yavaş çal."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Pluck a little firmer and check that no finger rests on the string.",
+        "tr": "Biraz daha net çek ve tele hiçbir parmağın değmediğini kontrol et."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only string 1 and one gentle stroke per try before adding two more strings.",
+    "tr": "İki tel daha eklemeden önce yalnız 1. teli ve deneme başına tek hafif hareketi kullan."
+  },
+  "legacy": "R: guitar.journey.start.pluck",
+  "minutes": 10,
+  "expertPending": true
+}

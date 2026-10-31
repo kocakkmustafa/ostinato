@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s2-m08-04",
+  "title": { "en": "Finger permutations", "tr": "Parmak permütasyonları" },
+  "goal": {
+    "en": "Plays the finger patterns 1-3-2-4 and 1-4-2-3 on strings 6 and 5 at ♩=60.",
+    "tr": "1-3-2-4 ve 1-4-2-3 parmak kalıplarını 6. ve 5. telde ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Permutations mix the finger order, so each finger learns to move on its own.",
+      "tr": "Permütasyonlar parmak sırasını karıştırır; böylece her parmak kendi başına hareket etmeyi öğrenir."
+    },
+    {
+      "en": "1-3-2-4 on string 6 gives F2 G2 F♯2 G♯2; on string 5 it gives A♯2 C3 B2 C♯3.",
+      "tr": "1-3-2-4, 6. telde Fa2 Sol2 Fa♯2 Sol♯2; 5. telde La♯2 Do3 Si2 Do♯3 eder."
+    },
+    {
+      "en": "1-4-2-3 is harder: finger 4 comes second. Say the finger numbers aloud before you play.",
+      "tr": "1-4-2-3 daha zordur: 4. parmak ikinci sırada gelir. Çalmadan önce parmak numaralarını sesli söyle."
+    },
+    {
+      "en": "Each finger hovers over its own fret, even when it is not playing.",
+      "tr": "Her parmak çalmadığı anda da kendi perdesinin üstünde bekler."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "1-3-2-4 and 1-4-2-3 on strings 6 and 5, quarter notes with a click at ♩=60 and ♩=40.",
+      "tr": "6. ve 5. telde 1-3-2-4 ve 1-4-2-3, klikle dörtlük; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the four bars in quarter notes with the click: 1-3-2-4 on strings 6 and 5, then 1-4-2-3 on strings 6 and 5. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Dört ölçüyü klikle dörtlük olarak çal: 6. ve 5. telde 1-3-2-4, sonra 6. ve 5. telde 1-4-2-3. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "F2 G2 F♯2 G♯2 | A♯2 C3 B2 C♯3 | F2 G♯2 F♯2 G2 | A♯2 C♯3 B2 C3",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "I used the planned finger for every note.", "tr": "Her nota için planlanan parmağı kullandım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "Finger 3 played where finger 2 was due. Slow down and name each finger before it lands.",
+        "tr": "2. parmağın sırasında 3. parmak çaldı. Yavaşla ve her parmağı basmadan önce adlandır."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Finger 4 starts too far away. Keep it hovering over fret 4 the whole time.",
+        "tr": "4. parmak çok uzaktan geliyor. Onu baştan sona 4. perdenin üstünde beklet."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each pattern on string 6 only, at ♩=45, before adding string 5.",
+    "tr": "5. teli eklemeden önce her kalıbı yalnız 6. telde, ♩=45'te çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

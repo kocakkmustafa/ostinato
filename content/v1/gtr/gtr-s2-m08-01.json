@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s2-m08-01",
+  "title": { "en": "One finger per fret", "tr": "Perde başına bir parmak" },
+  "goal": {
+    "en": "Plays frets 1–4 on string 6 with fingers 1–4 in quarter notes at ♩=60.",
+    "tr": "6. telde 1.–4. perdeleri 1.–4. parmakla dörtlük olarak ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "In first position each finger owns one fret: finger 1 on fret 1, finger 2 on fret 2, finger 3 on fret 3, finger 4 on fret 4.",
+      "tr": "Birinci pozisyonda her parmağın bir perdesi vardır: 1. parmak 1. perde, 2. parmak 2. perde, 3. parmak 3. perde, 4. parmak 4. perde."
+    },
+    {
+      "en": "On string 6 this gives F2, F♯2, G2 and G♯2.",
+      "tr": "6. telde bu Fa2, Fa♯2, Sol2 ve Sol♯2 eder."
+    },
+    {
+      "en": "Going up, leave the lower fingers down. Going down, lift one finger at a time.",
+      "tr": "Çıkarken alttaki parmakları basılı bırak. İnerken parmakları birer birer kaldır."
+    },
+    {
+      "en": "Keep the thumb behind the neck, roughly behind finger 2. The hand stays still; only the fingers move.",
+      "tr": "Başparmağı sapın arkasında, yaklaşık 2. parmağın arkasında tut. El yerinde kalır; yalnız parmaklar oynar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "F2 F♯2 G2 G♯2 up and back down, quarter notes with a click at ♩=60 and ♩=40.",
+      "tr": "Fa2 Fa♯2 Sol2 Sol♯2 çıkış ve iniş, klikle dörtlük; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the four bars in quarter notes with the click. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Dört ölçüyü klikle dörtlük olarak çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "F2 F♯2 G2 G♯2 | G♯2 G2 F♯2 F2 | F2 F♯2 G2 G♯2 | G♯2 G2 F♯2 F2",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "Each finger stayed on its own fret.", "tr": "Her parmak kendi perdesinde kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "Finger 4 landed on fret 3. Open the hand a little so finger 4 reaches its own fret.",
+        "tr": "4. parmak 3. perdeye düştü. 4. parmak kendi perdesine ulaşsın diye eli biraz aç."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Finger 4 is pressing with its flat pad. Stand it up on the tip, close to the fret.",
+        "tr": "4. parmak düz iç yüzüyle basıyor. Onu ucuna dik, perdeye yakın koy."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start on frets 5–8, where the frets are closer together, then move back to frets 1–4.",
+    "tr": "Perdelerin daha sık olduğu 5.–8. perdelerde başla, sonra 1.–4. perdeye dön."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

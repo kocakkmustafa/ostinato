@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s2-m08-08",
+  "title": { "en": "Speed ladder method", "tr": "Hız merdiveni yöntemi" },
+  "goal": {
+    "en": "Raises a chromatic line from ♩=60 to ♩=90 in steps of 5 while keeping it clean.",
+    "tr": "Kromatik bir diziyi temizliğini koruyarak ♩=60'tan ♩=90'a 5'er adımla hızlandırır."
+  },
+  "explanation": [
+    {
+      "en": "Speed comes from clean repeats, not from pushing. Raise the tempo only after a clean set.",
+      "tr": "Hız itmekle değil, temiz tekrarla gelir. Tempoyu yalnız temiz bir setten sonra artır."
+    },
+    {
+      "en": "The ladder: ♩=60, then +5 each step up to ♩=90. Each step needs the Level 2 note and timing rule.",
+      "tr": "Merdiven: ♩=60, sonra her adımda +5, ♩=90'a kadar. Her adım Seviye 2 nota ve zamanlama ölçütünü ister."
+    },
+    {
+      "en": "If a step does not pass twice in a row, go back one step. Going down is part of the method.",
+      "tr": "Bir adım üst üste iki kez geçmezse bir adım geri in. Geri inmek yöntemin parçasıdır."
+    },
+    {
+      "en": "Stop for the day when the hand tightens, even if the ladder is not finished.",
+      "tr": "El gerilince merdiven bitmese bile o günü bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Frets 1–4 on strings 6 and 5, up and back down in eighth notes, with a click at each ladder step from ♩=60 to ♩=90.",
+      "tr": "6. ve 5. telde 1.–4. perdeler, sekizlik çıkış ve iniş; ♩=60'tan ♩=90'a her merdiven adımında klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the two bars in eighth notes with the click. Start at ♩=60 and move up in steps of 5 to ♩=90. After a step that does not pass, go back one step.",
+      "tr": "İki ölçüyü klikle sekizlik olarak çal. ♩=60'tan başla, 5'er adımla ♩=90'a çık. Geçmeyen bir adımdan sonra bir adım geri in."
+    },
+    "sequence": "F2 F♯2 G2 G♯2 A♯2 B2 C3 C♯3 | C♯3 C3 B2 A♯2 G♯2 G2 F♯2 F2",
+    "tempo": { "open": 60, "target": 90 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I moved up only after a clean set.", "tr": "Yalnız temiz bir setten sonra yukarı çıktım." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "At higher tempos the hands rush ahead of the click. Go back one step and listen for the click on every beat.",
+        "tr": "Yüksek tempoda eller kliğin önüne geçiyor. Bir adım geri in ve her vuruşta kliği dinle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Notes get short and weak when you speed up. Keep each finger down until the next note starts.",
+        "tr": "Hızlanınca notalar kısalıp zayıflıyor. Her parmağı sonraki nota başlayana kadar basılı tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use steps of 3 bpm instead of 5, or stop the ladder at ♩=75 for today.",
+    "tr": "5 yerine 3 bpm'lik adımlar kullan ya da merdiveni bugün ♩=75'te bitir."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

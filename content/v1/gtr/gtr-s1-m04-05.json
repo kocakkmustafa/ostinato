@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s1-m04-05",
+  "title": { "en": "G major", "tr": "Sol majör" },
+  "goal": {
+    "en": "Plays G cleanly on all six strings with a three- or four-finger shape.",
+    "tr": "G'yi üç ya da dört parmaklı şekille altı telde temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "Three-finger G: 3-2-0-0-0-3. Finger 2 on string 6, fret 3; finger 1 on string 5, fret 2; finger 3 on string 1, fret 3.",
+      "tr": "Üç parmaklı G: 3-2-0-0-0-3. 2. parmak 6. telin 3. perdesinde, 1. parmak 5. telin 2. perdesinde, 3. parmak 1. telin 3. perdesinde."
+    },
+    {
+      "en": "Four-finger G: 3-2-0-0-3-3. Add finger 4 on string 1, fret 3, and move finger 3 to string 2, fret 3.",
+      "tr": "Dört parmaklı G: 3-2-0-0-3-3. 4. parmağı 1. telin 3. perdesine koy, 3. parmağı 2. telin 3. perdesine taşı."
+    },
+    {
+      "en": "Both are G. Choose one in the app before you play; it checks the version you chose.",
+      "tr": "İkisi de G'dir. Çalmadan önce uygulamada birini seç; uygulama seçtiğin şekli kontrol eder."
+    },
+    {
+      "en": "Strings 4 and 3 stay open in both. Keep fingers 1 and 2 arched so they ring.",
+      "tr": "4. ve 3. tel iki şekilde de açık kalır. Çalabilsinler diye 1. ve 2. parmağı kavisli tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "G in the chosen shape, strummed once from string 6, then plucked string by string, slowly.",
+      "tr": "Seçilen şekilde G, 6. telden bir kez vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Choose the three- or four-finger G. Strum it four times, in your own time. Then pluck the chord string by string; the app checks each string.",
+      "tr": "Üç ya da dört parmaklı G'yi seç. Kendi hızında dört kez vur. Sonra akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "G | G | G | G",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "Strings 4 and 3 rang open.", "tr": "4. ve 3. tel açık çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 4 not heard.", "tr": "Farklı akor: 4. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 1 on string 5 is touching string 4. Arch it and press with the tip.",
+        "tr": "5. teldeki 1. parmak 4. tele değiyor. Kavisle ve uçla bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 not heard.", "tr": "Farklı akor: 6. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 2 is far from fret 3. Move it right behind the fret wire.",
+        "tr": "2. parmak 3. perdeden uzak. Perde telinin hemen arkasına taşı."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Build the three-finger G one finger at a time: finger 3 first, then finger 2, then finger 1. Strum only when all three are down.",
+    "tr": "Üç parmaklı G'yi parmak parmak kur: önce 3., sonra 2., sonra 1. parmak. Üçü de yerindeyken vur."
+  },
+  "legacy": "V: guitar.journey.chords.d_g",
+  "minutes": 12,
+  "expertPending": true
+}

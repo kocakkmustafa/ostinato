@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s1-m03-10",
+  "title": { "en": "Rhythm checkpoint", "tr": "Ritim geçişi" },
+  "goal": {
+    "en": "Reads and plays an original eight-bar line of quarters, eighths and rests at ♩=72.",
+    "tr": "Dörtlük, sekizlik ve suslardan oluşan özgün sekiz ölçülük diziyi ♩=72'de okuyup çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint brings the module together: quarters, eighths, half notes, rests and a tie.",
+      "tr": "Bu geçiş modülü birleştirir: dörtlük, sekizlik, ikilik, sus ve bir bağ."
+    },
+    {
+      "en": "The line uses three open strings: bars 1–2 on A2, bars 3–5 on D3, bars 6–8 on G3.",
+      "tr": "Dizi üç açık tel kullanır: 1–2. ölçüler La2, 3–5. ölçüler Re3, 6–8. ölçüler Sol3."
+    },
+    {
+      "en": "Before playing, read each bar and count it aloud once. Mark where the rests fall.",
+      "tr": "Çalmadan önce her ölçüyü oku ve bir kez sesli say. Susların nereye düştüğünü işaretle."
+    },
+    {
+      "en": "If you miss a note, keep counting and come back in on the next beat. Do not restart.",
+      "tr": "Bir notayı kaçırırsan saymayı sürdür ve sonraki vuruşta yeniden gir. Baştan başlama."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The original eight-bar line on A2, D3 and G3 with a click, at ♩=72 and at ♩=50.",
+      "tr": "Klikle La2, Re3 ve Sol3 üzerinde özgün sekiz ölçülük dizi, ♩=72 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the eight bars with the click at ♩=72. Practise at a slower tempo first if you need to; the checkpoint passes at ♩=72.",
+      "tr": "Klikle ♩=72'de sekiz ölçüyü çal. Gerekirse önce daha yavaş tempoda çalış; geçiş ♩=72'de geçilir."
+    },
+    "sequence": "4/4: q q q q | ee ee q qr | h q qr | ee q q q~ | q q h | ee ee ee q | q qr ee q | w",
+    "tempo": { "open": 72, "target": 72 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "Notes after a rest are rushing. Say the rest beat aloud before coming back in.",
+        "tr": "Sustan sonraki notalar acele ediyor. Yeniden girmeden önce sus vuruşunu sesli söyle."
+      }
+    },
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": {
+        "en": "Stop the string with a light touch exactly on the rest beat.",
+        "tr": "Teli tam sus vuruşunda hafif bir dokunuşla durdur."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the click.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve klik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop bars 1–4 and 5–8 separately at ♩=60, then join them at ♩=72.",
+    "tr": "1–4. ve 5–8. ölçüleri ♩=60'ta ayrı ayrı döngüle, sonra ♩=72'de birleştir."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

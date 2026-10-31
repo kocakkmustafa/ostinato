@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s1-m03-08",
+  "title": { "en": "The tempo ladder", "tr": "Tempo merdiveni" },
+  "goal": {
+    "en": "Plays the low-string riff cleanly at ♩=60, 65, 70, 75 and 80, one step at a time.",
+    "tr": "Pes tel riff'ini adım adım ♩=60, 65, 70, 75 ve 80'de temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "A tempo ladder raises speed in small steps of 5 bpm. Each step must be clean before you climb.",
+      "tr": "Tempo merdiveni hızı 5 bpm'lik küçük adımlarla artırır. Çıkmadan önce her adım temiz olmalı."
+    },
+    {
+      "en": "Use the E2–G2–A2 riff from \"First riff on the low strings\". Same notes, same fingers on every step.",
+      "tr": "\"Pes tellerde ilk riff\" dersindeki Mi2–Sol2–La2 riff'ini kullan. Her adımda aynı notalar, aynı parmaklar."
+    },
+    {
+      "en": "If a step is not clean, go back one step and play it twice more. Going down is part of the method.",
+      "tr": "Bir adım temiz değilse bir adım geri in ve iki kez daha çal. Geri inmek yöntemin parçasıdır."
+    },
+    {
+      "en": "As the tempo rises, keep the movements small. A tense hand gets slower, not faster.",
+      "tr": "Tempo arttıkça hareketleri küçük tut. Gergin el hızlanmaz, yavaşlar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The riff twice at each step from ♩=60 to ♩=80 with a click, string-model synthesis.",
+      "tr": "Klikle ♩=60'tan ♩=80'e her adımda iki kez riff, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the riff twice with the click at ♩=60. When the step passes, the app moves you up by 5. Climb to ♩=80.",
+      "tr": "Klikle riff'i ♩=60'ta iki kez çal. Adım geçince uygulama seni 5 yukarı taşır. ♩=80'e kadar çık."
+    },
+    "sequence": "E2 G2 A2 G2 | E2 G2 E2 E2 | E2 G2 A2 G2 | E2 G2 E2 E2",
+    "tempo": { "open": 60, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": ["gtr-s1-m02-07"],
+  "selfCheck": [
+    { "en": "Each step sounded as clean as the one before.", "tr": "Her adım bir öncekisi kadar temiz çaldı." },
+    { "en": "I went back a step when the riff got messy.", "tr": "Riff dağılınca bir adım geri indim." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The string change from 6 to 5 is slow. Loop only G2–A2 at this step.",
+        "tr": "6. telden 5. tele geçiş yavaş. Bu adımda yalnız Sol2–La2'yi döngüle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "At higher speed the fretting finger lifts early. Keep it down until the next note.",
+        "tr": "Yüksek hızda sol eldeki parmak erken kalkıyor. Sonraki notaya kadar basılı tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Stop the ladder at ♩=70 today and climb further in another session.",
+    "tr": "Bugün merdiveni ♩=70'te bırak, başka bir oturumda devam et."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

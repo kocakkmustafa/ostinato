@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s1-m01-07",
+  "title": { "en": "Fret without squeezing", "tr": "Sıkmadan perde bas" },
+  "goal": {
+    "en": "Plays clean fretted notes by pressing close behind the fret with light pressure.",
+    "tr": "Perdenin hemen arkasına az baskıyla basarak temiz perdeli nota çalar."
+  },
+  "explanation": [
+    {
+      "en": "An open string is fret 0. From the nut toward the body, the first space is fret 1, then fret 2, then fret 3.",
+      "tr": "Açık tel 0. perdedir. Üst eşikten gövdeye doğru ilk aralık 1. perde, sonra 2. perde, sonra 3. perdedir."
+    },
+    {
+      "en": "Finger numbers are not fret numbers: index 1, middle 2, ring 3, little 4.",
+      "tr": "Parmak numarası perde numarası değildir: işaret 1, orta 2, yüzük 3, serçe 4."
+    },
+    {
+      "en": "Place the fingertip just behind the fret wire, on the nut side. Pluck once and release.",
+      "tr": "Parmak ucunu perde telinin hemen arkasına, üst eşik tarafına koy. Bir kez çal ve bırak."
+    },
+    {
+      "en": "Ease the pressure slowly until the note goes fuzzy. Then add back only enough pressure for a clean note.",
+      "tr": "Nota bulanıklaşana kadar baskıyı yavaşça azalt. Sonra yalnız temiz nota için yetecek kadar baskıyı geri ver."
+    },
+    {
+      "en": "If a note buzzes, move closer to the fret before pressing harder. Release the hand between tries.",
+      "tr": "Nota vızıldarsa daha sert basmadan önce perdeye yaklaş. Denemeler arasında eli gevşet."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C4 and D4 on string 2, F4 and G4 on string 1, each held for two seconds, string-model synthesis.",
+      "tr": "2. telde Do4 ve Re4, 1. telde Fa4 ve Sol4; her biri iki saniye tutulur, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Play 12 fretted notes as the screen shows them: C4 (string 2, fret 1), D4 (string 2, fret 3), F4 (string 1, fret 1) and G4 (string 1, fret 3). Take your time; there is no click.",
+      "tr": "Ekranın gösterdiği 12 perdeli notayı çal: Do4 (2. tel, 1. perde), Re4 (2. tel, 3. perde), Fa4 (1. tel, 1. perde) ve Sol4 (1. tel, 3. perde). Acele etme; klik yok."
+    },
+    "sequence": "C4 D4 C4 D4 F4 G4 F4 G4 C4 D4 F4 G4",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "I pressed just behind the fret, not on it or in the middle of the space.", "tr": "Perdenin üstüne ya da aralığın ortasına değil, hemen arkasına bastım." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The note is muffled. Move the fingertip closer to the fret and keep the finger curved so it does not touch the next string.",
+        "tr": "Nota boğuk çıkıyor. Parmak ucunu perdeye yaklaştır ve parmağı kıvrık tut; komşu tele değmesin."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "The finger slid one fret up; recheck fret 1 and fret 3.",
+        "tr": "Parmak bir perde yukarı kaymış; 1. ve 3. perdeyi yeniden kontrol et."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only C4 and F4 with finger 1 first. If pressing stays hard even close to the fret, have the guitar's setup checked instead of squeezing harder.",
+    "tr": "Önce yalnız 1. parmakla Do4 ve Fa4'ü kullan. Perdeye yakın basınca da zor geliyorsa daha sert sıkmak yerine gitarın ayarını kontrol ettir."
+  },
+  "legacy": "R: guitar.journey.start.fret",
+  "minutes": 12,
+  "expertPending": true
+}

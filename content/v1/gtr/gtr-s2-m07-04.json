@@ -1,0 +1,80 @@
+{
+  "id": "gtr-s2-m07-04",
+  "title": { "en": "A small F: Fmaj7", "tr": "Küçük Fa: Fmaj7" },
+  "goal": {
+    "en": "Plays Fmaj7 without a barre and changes from C to Fmaj7 at least 12 times in 60 seconds.",
+    "tr": "Fmaj7'yi barre'sız çalar ve C'den Fmaj7'ye 60 saniyede en az 12 kez geçer."
+  },
+  "explanation": [
+    {
+      "en": "A full F chord needs a barre. Fmaj7 gives an F sound with no barre.",
+      "tr": "Tam F akoru barre ister. Fmaj7, barre olmadan Fa sesi verir."
+    },
+    {
+      "en": "Fmaj7: x-x-3-2-1-0. Fingers 3, 2 and 1 on strings 4, 3 and 2. String 1 stays open. Play strings 4 to 1.",
+      "tr": "Fmaj7: x-x-3-2-1-0. 3., 2. ve 1. parmak 4., 3. ve 2. telde. 1. tel açık kalır. 4.–1. telleri çal."
+    },
+    {
+      "en": "The open E4 belongs to the chord: it is the major seventh. Fmaj7 is not the same chord as F, but it can take F's place in many progressions.",
+      "tr": "Açık Mi4 akora aittir: büyük yedilidir. Fmaj7, F ile aynı akor değildir; ama birçok ilerlemede F'nin yerini alabilir."
+    },
+    {
+      "en": "From C, finger 1 stays on string 2, fret 1. Fingers 2 and 3 each move one string toward the floor.",
+      "tr": "C'den geçerken 1. parmak 2. telde, 1. perdede kalır. 2. ve 3. parmak birer tel yere doğru kayar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Fmaj7 strummed and plucked string by string, then C–Fmaj7 changes at a steady pace.",
+      "tr": "Fmaj7 taranır ve tel tel çekilir, ardından düzenli hızda C–Fmaj7 geçişleri."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Strum Fmaj7 four times and pluck it string by string. Then change back and forth between C and Fmaj7 for 60 seconds. Each change counts when every string of the new chord is heard.",
+      "tr": "Fmaj7'yi dört kez tara ve tel tel çek. Sonra 60 saniye boyunca C ile Fmaj7 arasında ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+    },
+    "sequence": "Fmaj7 Fmaj7 Fmaj7 Fmaj7 | C Fmaj7 (60 s)",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Fmaj7 at the Level 2 chord rule, then at least 12 C–Fmaj7 changes in 60 seconds.",
+        "tr": "Fmaj7 Seviye 2 akor ölçütüyle, ardından 60 saniyede en az 12 C–Fmaj7 geçişi."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "Finger 1 stayed on string 2 between C and Fmaj7.", "tr": "C ile Fmaj7 arasında 1. parmak 2. telde kaldı." },
+    { "en": "I heard the open E4 on top of Fmaj7.", "tr": "Fmaj7'nin üstünde açık Mi4'ü duydum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "Fmaj7 starts on string 4. Start the strum there, or let finger 3 lightly touch string 5.",
+        "tr": "Fmaj7 4. telden başlar. Vuruşa oradan başla ya da 3. parmak 5. tele hafifçe değsin."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 1 leans on the open E string. Arch it and press with the tip.",
+        "tr": "1. parmak açık Mi teline yaslanıyor. Parmağı kavisli tut ve ucuyla bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Change C–Fmaj7 once per bar at ♩=50 before the 60-second set.",
+    "tr": "60 saniyelik setten önce ♩=50'de her ölçüde bir kez C–Fmaj7 geçişi yap."
+  },
+  "legacy": "V: guitar.journey.intermediate.f_chord",
+  "minutes": 12,
+  "expertPending": true
+}

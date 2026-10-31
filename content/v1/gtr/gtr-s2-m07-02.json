@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s2-m07-02",
+  "title": { "en": "D7 and B7", "tr": "D7 ve B7" },
+  "goal": {
+    "en": "Builds D7 and B7 cleanly and changes from B7 to E at least 10 times in 60 seconds.",
+    "tr": "D7 ve B7'yi temiz kurar ve B7'den E'ye 60 saniyede en az 10 kez geçer."
+  },
+  "explanation": [
+    {
+      "en": "D7: x-x-0-2-1-2. It looks like a D shape turned upside down: finger 1 on string 2, fret 1. Play strings 4 to 1.",
+      "tr": "D7: x-x-0-2-1-2. Ters dönmüş bir D şekli gibidir: 1. parmak 2. telde, 1. perdede. 4.–1. telleri çal."
+    },
+    {
+      "en": "B7: x-2-1-2-0-2. Finger 1 on string 4, fret 1; finger 2 on string 5, fret 2; finger 3 on string 3, fret 2; finger 4 on string 1, fret 2. String 2 stays open.",
+      "tr": "B7: x-2-1-2-0-2. 1. parmak 4. tel 1. perde; 2. parmak 5. tel 2. perde; 3. parmak 3. tel 2. perde; 4. parmak 1. tel 2. perde. 2. tel açık kalır."
+    },
+    {
+      "en": "B7 often leads to E. Finger 2 stays on string 5, fret 2, in both chords. Keep it down and move the others around it.",
+      "tr": "B7 çoğu zaman E'ye gider. 2. parmak iki akorda da 5. telde, 2. perdede kalır. Onu kaldırma; diğer parmakları çevresinde taşı."
+    },
+    {
+      "en": "Press each fingertip close to the fret. Four fingers do not need four times the force.",
+      "tr": "Her parmak ucunu perdeye yakın bas. Dört parmak, dört kat güç gerektirmez."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "D7 and B7 strummed and plucked string by string, then B7–E changes at a steady pace.",
+      "tr": "D7 ve B7 taranır ve tel tel çekilir, ardından düzenli hızda B7–E geçişleri."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Strum D7 four times, then B7 four times, and pluck each string by string. Then change back and forth between B7 and E for 60 seconds. Each change counts when every string of the new chord is heard.",
+      "tr": "D7'yi dört kez, sonra B7'yi dört kez tara ve her birini tel tel çek. Sonra 60 saniye boyunca B7 ile E arasında ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+    },
+    "sequence": "D7 D7 D7 D7 | B7 B7 B7 B7 | B7 E (60 s)",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "D7 and B7 at the Level 2 chord rule, then at least 10 B7–E changes in 60 seconds.",
+        "tr": "D7 ve B7 Seviye 2 akor ölçütüyle, ardından 60 saniyede en az 10 B7–E geçişi."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "Finger 2 stayed on string 5 between B7 and E.", "tr": "B7 ile E arasında 2. parmak 5. telde kaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "In B7, finger 3 leans on the open B string. Arch it more and press with the tip.",
+        "tr": "B7'de 3. parmak açık Si teline yaslanıyor. Parmağı daha kavisli tut ve ucuyla bas."
+      }
+    },
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Keep finger 2 down as the anchor. Practise ten silent changes, then strum again.",
+        "tr": "2. parmağı sabit tut. On kez sessiz geçiş yap, sonra yeniden tara."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play B7 without string 1 (x-2-1-2-0-x) and use 30-second sets until the shape feels familiar.",
+    "tr": "B7'yi 1. tel olmadan (x-2-1-2-0-x) çal; şekil tanıdık gelene kadar 30 saniyelik setler kullan."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

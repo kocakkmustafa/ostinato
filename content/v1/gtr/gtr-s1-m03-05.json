@@ -1,0 +1,80 @@
+{
+  "id": "gtr-s1-m03-05",
+  "title": { "en": "Half and whole notes", "tr": "İkilik ve birlik notalar" },
+  "goal": {
+    "en": "Holds G3 for its full length in half and whole notes at ♩=60.",
+    "tr": "Sol3'ü ♩=60'ta ikilik ve birlik notalarda tam süresince tutar."
+  },
+  "explanation": [
+    {
+      "en": "A half note has a hollow head and a stem. It lasts two beats.",
+      "tr": "İkiliğin içi boş başı ve sapı vardır. İki vuruş sürer."
+    },
+    {
+      "en": "A whole note has a hollow head and no stem. It lasts four beats, a full bar of 4/4.",
+      "tr": "Birliğin içi boş başı vardır, sapı yoktur. Dört vuruş, yani 4/4'te tam bir ölçü sürer."
+    },
+    {
+      "en": "Play open string 3 (G3) once and let it ring. Keep counting while the note sounds.",
+      "tr": "Açık 3. teli (Sol3) bir kez çal ve çınlamasına izin ver. Nota çalarken saymayı sürdür."
+    },
+    {
+      "en": "Keep your hands off the string until the next note. An early touch cuts the note short.",
+      "tr": "Sonraki notaya kadar ellerini telden uzak tut. Erken dokunuş notayı kısaltır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Open G3 in half and whole notes for four bars with a click, at ♩=60 and at ♩=45.",
+      "tr": "Klikle dört ölçü ikilik ve birlik açık Sol3, ♩=60 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the four bars on open G3 with the click at ♩=60. Pluck only at the start of each note and count every beat.",
+      "tr": "Klikle ♩=60'ta dört ölçüyü açık Sol3'te çal. Yalnız her notanın başında çal ve her vuruşu say."
+    },
+    "sequence": "4/4: h h | w | h h | w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 1 note and timing rules, and each note rings for at least 80% of its written length.",
+        "tr": "Seviye 1 nota ve zamanlama ölçütü; her nota yazılı süresinin en az %80'i boyunca çalar."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every whole note rang through all four beats.", "tr": "Her birlik dört vuruş boyunca çaldı." },
+    { "en": "I counted every beat while the note was ringing.", "tr": "Nota çalarken her vuruşu saydım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but too short.", "tr": "Doğru nota, ama çok kısa." },
+      "fix": {
+        "en": "A hand is resting on the string. Keep both hands clear until the next note.",
+        "tr": "Bir el tele dayanıyor. Sonraki notaya kadar iki eli de telden uzak tut."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "You left the long note too soon. Count \"1 2 3 4\" through the whole note before plucking again.",
+        "tr": "Uzun notayı erken bıraktın. Yeniden çalmadan birlik boyunca \"1 2 3 4\" say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the two half-note bars first, then add one whole-note bar.",
+    "tr": "Önce yalnız iki ikilik ölçüsünü çal, sonra bir birlik ölçüsü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

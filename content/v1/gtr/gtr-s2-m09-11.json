@@ -1,0 +1,73 @@
+{
+  "id": "gtr-s2-m09-11",
+  "title": { "en": "A minor pentatonic, open position", "tr": "Açık pozisyonda La minör pentatonik" },
+  "goal": {
+    "en": "Plays the A minor pentatonic from E2 to G4 and back in open position at ♩=70.",
+    "tr": "Açık pozisyonda La minör pentatoniği Mi2'den Sol4'e çıkıp iner, ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "A minor pentatonic has five note names: A, C, D, E and G.",
+      "tr": "La minör pentatoniğin beş nota adı vardır: La, Do, Re, Mi ve Sol."
+    },
+    {
+      "en": "Every string has two notes: E2 6/0, G2 6/3, A2 5/0, C3 5/3, D3 4/0, E3 4/2, G3 3/0, A3 3/2, C4 2/1, D4 2/3, E4 1/0, G4 1/3.",
+      "tr": "Her telde iki nota var: Mi2 6/0, Sol2 6/3, La2 5/0, Do3 5/3, Re3 4/0, Mi3 4/2, Sol3 3/0, La3 3/2, Do4 2/1, Re4 2/3, Mi4 1/0, Sol4 1/3."
+    },
+    {
+      "en": "A is the home note. Stop on each A and listen.",
+      "tr": "La merkez notadır. Her La'da dur ve dinle."
+    },
+    {
+      "en": "This is a note pool, not only a run. Try a short question with A C D and answer with E G A, leaving a rest between.",
+      "tr": "Bu yalnız bir koşu değil, bir nota havuzudur. La Do Re ile kısa bir soru dene, Mi Sol La ile cevap ver; arada bir sus bırak."
+    },
+    {
+      "en": "Start a phrase on C and end it on A on purpose. Hear how the ending settles.",
+      "tr": "Bir cümleye Do'dan başla ve bilerek La'da bitir. Bitişin nasıl oturduğunu dinle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "E2 up to G4 and back in quarter notes, at ♩=70 and ♩=45, string-model synthesis.",
+      "tr": "Mi2'den Sol4'e çıkış ve iniş, dörtlüklerle, ♩=70 ve ♩=45; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the pentatonic up from E2 to G4 and back down to E2 in quarter notes with the click. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "Pentatoniği Mi2'den Sol4'e çık ve Mi2'ye in; klikle birlikte dörtlüklerle çal. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "E2 G2 A2 C3 | D3 E3 G3 A3 | C4 D4 E4 G4 | E4 D4 C4 A3 | G3 E3 D3 C3 | A2 G2 E2",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I played exactly two notes on each string.", "tr": "Her telde tam iki nota çaldım." },
+    { "en": "I could name each A on the way up and down.", "tr": "Çıkarken ve inerken her La'yı adlandırabildim." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "Open string 2 (B3) slipped in. On string 2 use frets 1 and 3 only.", "tr": "Açık 2. tel (Si3) karıştı. 2. telde yalnız 1. ve 3. perdeyi kullan." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The string change is slow. Loop the last note of one string and the first of the next.", "tr": "Tel geçişi yavaş. Bir telin son notasını ve sonrakinin ilk notasını döngüle." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the top half only, A3 to G4 and back, at ♩=50.",
+    "tr": "Yalnız üst yarıyı, La3'ten Sol4'e çıkıp inerek ♩=50'de çal."
+  },
+  "legacy": "R: guitar.journey.melody.a_minor_pent",
+  "minutes": 12,
+  "expertPending": true
+}

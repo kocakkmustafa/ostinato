@@ -1,0 +1,95 @@
+{
+  "id": "gtr-s1-test",
+  "title": { "en": "Level 1 test", "tr": "Seviye 1 testi" },
+  "goal": {
+    "en": "Shows the Level 1 skills: tuning, single notes, open chords, chord changes in time and open strings by ear.",
+    "tr": "Seviye 1 becerilerini gösterir: akort, tek notalar, açık akorlar, zamanında akor geçişi ve kulaktan açık teller."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, tuning: tune all six strings. Part 2, single notes: play a new eight-bar line on all strings at ♩=72.",
+      "tr": "1. bölüm, akort: altı teli akort et. 2. bölüm, tek notalar: tüm tellerde yeni bir sekiz ölçülük diziyi ♩=72'de çal."
+    },
+    {
+      "en": "Part 3, chords: play Em, Am, E, A, D, G and C in order; each is checked string by string.",
+      "tr": "3. bölüm, akorlar: Em, Am, E, A, D, G ve C'yi sırayla çal; her biri tel tel kontrol edilir."
+    },
+    {
+      "en": "Part 4, changes and rhythm: strum G–D–Em–C for eight bars in quarter notes at ♩=70 with the accompaniment.",
+      "tr": "4. bölüm, geçiş ve ritim: eşlikle ♩=70'te sekiz ölçü dörtlük vuruşla G–D–Em–C çal."
+    },
+    {
+      "en": "Part 5, ear: listen to an open string and choose which string it is.",
+      "tr": "5. bölüm, kulak: bir açık teli dinle ve hangi tel olduğunu seç."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "Each new part-2 line once at ♩=72; the G–D–Em–C accompaniment loop at ♩=70; synthesized open strings E2 to E4 for part 5.",
+      "tr": "2. bölümün her yeni dizisi bir kez ♩=72'de; ♩=70'te G–D–Em–C eşlik döngüsü; 5. bölüm için Mi2'den Mi4'e sentez açık teller."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A1", "A2", "A3", "A4"],
+    "task": {
+      "en": "Complete five parts. 1 Tuning: six strings. 2 Single notes: a new eight-bar line on all strings at ♩=72. 3 Chords: Em, Am, E, A, D, G, C in order, string by string. 4 Changes and rhythm: G–D–Em–C, eight bars of quarter-note strums at ♩=70. 5 Ear: 6 questions, which open string did you hear? Headphones help the microphone hear only your guitar.",
+      "tr": "Beş bölümü tamamla. 1 Akort: altı tel. 2 Tek notalar: tüm tellerde ♩=72'de yeni bir sekiz ölçülük dizi. 3 Akorlar: Em, Am, E, A, D, G, C sırayla, tel tel. 4 Geçiş ve ritim: ♩=70'te sekiz ölçü dörtlük vuruşla G–D–Em–C. 5 Kulak: 6 soru, hangi açık teli duydun? Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Tuning: every string within 5 cents (within 20 cents while precise tuning is not ready). Single notes: Level 1 note and timing rules. Chords: at least 6 of 7 chords with every string heard. Changes and rhythm: Level 1 chord and timing rules. Ear: at least 5 of 6.",
+        "tr": "Her bölüm kendi başına geçer. Akort: her tel 5 cent içinde (hassas akort hazır değilken 20 cent içinde). Tek notalar: Seviye 1 nota ve zamanlama ölçütü. Akorlar: 7 akorun en az 6'sında bütün teller duyulur. Geçiş ve ritim: Seviye 1 akor ve zamanlama ölçütü. Kulak: 6 sorunun en az 5'i."
+      },
+      "minCorrect": 5
+    },
+    "drill": {
+      "type": "diagram_match",
+      "count": 6,
+      "params": { "set": "open_string_by_ear", "diagram": "guitar", "playNotes": true }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the string is more than 5 cents low.", "tr": "Farklı nota: tel 5 centten fazla alçak." },
+      "fix": {
+        "en": "Tune up from below: loosen a little past the note, then tighten slowly to it.",
+        "tr": "Aşağıdan yukarı akort et: notanın biraz altına gevşet, sonra yavaşça notaya kadar ger."
+      }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": {
+        "en": "Pluck the strings one by one, find the silent one and move the nearest finger closer to the fret.",
+        "tr": "Telleri tek tek çek, sessiz olanı bul ve en yakın parmağı perdeye yaklaştır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Start each change on beat 4 so the new chord lands on beat 1.",
+        "tr": "Yeni akor 1. vuruşa düşsün diye her geçişe 4. vuruşta başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

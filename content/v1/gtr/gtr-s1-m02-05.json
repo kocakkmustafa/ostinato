@@ -1,0 +1,75 @@
+{
+  "id": "gtr-s1-m02-05",
+  "title": { "en": "Notes on strings two and one", "tr": "İkinci ve birinci tel notaları" },
+  "goal": {
+    "en": "Plays B3, C4, D4 on string 2 and E4, F4, G4 on string 1 in a two-bar line at ♩=60.",
+    "tr": "2. telde Si3, Do4, Re4'ü ve 1. telde Mi4, Fa4, Sol4'ü iki ölçülük dizide ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "String 2 open is B3. Fret 1 is C4 with finger 1; fret 3 is D4 with finger 3.",
+      "tr": "2. tel açıkken Si3'tür. 1. perde 1. parmakla Do4, 3. perde 3. parmakla Re4'tür."
+    },
+    {
+      "en": "String 1 open is E4. Fret 1 is F4 with finger 1; fret 3 is G4 with finger 3.",
+      "tr": "1. tel açıkken Mi4'tür. 1. perde 1. parmakla Fa4, 3. perde 3. parmakla Sol4'tür."
+    },
+    {
+      "en": "Both strings use the same frets, 0-1-3. Only the string and the note names change.",
+      "tr": "İki tel de aynı perdeleri kullanır: 0-1-3. Yalnız tel ve nota adları değişir."
+    },
+    {
+      "en": "Use the open strings as anchors: B3 on string 2 and E4 on string 1. Count up from them to find the octave of each note.",
+      "tr": "Açık telleri dayanak olarak kullan: 2. telde Si3, 1. telde Mi4. Her notanın oktavını bulmak için onlardan yukarı say."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "B3 C4 D4 E4 | F4 G4 E4 C4 twice, at ♩=60 and at ♩=40, string-model synthesis.",
+      "tr": "Si3 Do4 Re4 Mi4 | Fa4 Sol4 Mi4 Do4 iki kez, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the two-bar line twice along with the click. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "İki ölçülük diziyi klikle birlikte iki kez çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "B3 C4 D4 E4 | F4 G4 E4 C4 | B3 C4 D4 E4 | F4 G4 E4 C4",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "I can say the string and fret of each of the six notes.", "tr": "Altı notanın her birinin telini ve perdesini söyleyebiliyorum." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: G4 was expected, D4 was heard.", "tr": "Farklı nota: Sol4 bekleniyordu, Re4 duyuldu." },
+      "fix": {
+        "en": "Fret 3 was played on string 2. Both strings use fret 3; check which string the TAB line shows.",
+        "tr": "3. perde 2. telde çalınmış. İki telde de 3. perde var; tab'ın hangi teli gösterdiğine bak."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "A finger is muting string 1. Curve finger 3 more so it touches only string 2.",
+        "tr": "Bir parmak 1. teli susturuyor. 3. parmağı daha çok kıvır; yalnız 2. tele değsin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Work on B3 C4 D4 alone first; add the string 1 notes in another short session.",
+    "tr": "Önce yalnız Si3 Do4 Re4 üzerinde çalış; 1. tel notalarını başka kısa bir oturumda ekle."
+  },
+  "legacy": "R: guitar.journey.notes.treble_strings",
+  "minutes": 12,
+  "expertPending": true
+}

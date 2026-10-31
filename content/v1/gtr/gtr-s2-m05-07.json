@@ -1,0 +1,91 @@
+{
+  "id": "gtr-s2-m05-07",
+  "title": { "en": "D minor", "tr": "Re minör" },
+  "goal": {
+    "en": "Plays Dm cleanly string by string and changes between Dm and Am at least 15 times in 60 seconds.",
+    "tr": "Dm'yi tel tel temiz çalar ve Dm ile Am arasında 60 saniyede en az 15 kez geçer."
+  },
+  "explanation": [
+    {
+      "en": "Dm is x-x-0-2-3-1: finger 2 on string 3, fret 2, finger 3 on string 2, fret 3, finger 1 on string 1, fret 1.",
+      "tr": "Dm, x-x-0-2-3-1'dir: 3. telin 2. perdesinde 2. parmak, 2. telin 3. perdesinde 3. parmak, 1. telin 1. perdesinde 1. parmak."
+    },
+    {
+      "en": "Compare D and Dm. Only string 1 changes: F♯4 in D becomes F4 in Dm. That one note is the minor third.",
+      "tr": "D ile Dm'yi karşılaştır. Yalnız 1. tel değişir: D'deki Fa♯4, Dm'de Fa4 olur. Bu tek nota minör üçlüdür."
+    },
+    {
+      "en": "Like D, Dm starts on string 4. Strings 5 and 6 stay silent.",
+      "tr": "D gibi Dm de 4. telden başlar. 5. ve 6. tel sessiz kalır."
+    },
+    {
+      "en": "Dm to Am: the shape moves one string toward the ceiling, and finger 1 stays at fret 1.",
+      "tr": "Dm'den Am'ye: biçim bir tel yukarı, tavana doğru kayar; 1. parmak 1. perdede kalır."
+    },
+    {
+      "en": "The reach from fret 1 to fret 3 is small but new. Do not twist the wrist to force it; a clear smaller sound is better.",
+      "tr": "1. perdeden 3. perdeye uzanma küçük ama yenidir. Zorlamak için bileği bükme; net ve küçük bir ses daha iyidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Dm plucked string by string, then strummed; then Dm and Am changing every two beats at ♩=60 and ♩=40.",
+      "tr": "Dm önce tel tel, sonra vuruşla; ardından ♩=60 ve ♩=40'ta iki vuruşta bir Dm–Am geçişi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "First strum Dm four times. Then pluck the chord string by string; the app checks each string. Then change between Dm and Am for 60 seconds.",
+      "tr": "Önce Dm'ye dört kez vur. Sonra akoru tel tel çek; uygulama her teli kontrol eder. Ardından 60 saniye Dm ile Am arasında geç."
+    },
+    "sequence": "Dm ×4 · Dm ↔ Am · 60 s",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Dm: the Level 2 chord rule, string by string. Dm–Am: at least 15 changes in 60 seconds. A change counts when every string of the new chord is heard.",
+        "tr": "Dm: tel tel Seviye 2 akor ölçütü. Dm–Am: 60 saniyede en az 15 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "Strings 5 and 6 stayed silent in Dm.", "tr": "Dm'de 5. ve 6. tel sessiz kaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 1 lies flat or sits far from the fret. Press with the tip, right behind fret 1.",
+        "tr": "1. parmak yatık ya da perdeden uzak. Ucuyla, 1. perdenin hemen arkasına bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 3 is not fully on fret 3. Bring the thumb a little lower behind the neck to help the reach.",
+        "tr": "3. parmak 3. perdeye tam ulaşmıyor. Uzanmaya yardım için başparmağı sapın arkasında biraz aşağı indir."
+      }
+    },
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Lift the fingers less and look at the next spot first; aim for even changes, not fast ones.",
+        "tr": "Parmakları daha az kaldır ve önce sonraki yere bak; hızlı değil düzenli geçişe odaklan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Build Dm finger by finger and pluck after each one. Try the Dm–Am change for 30 seconds before the full minute.",
+    "tr": "Dm'yi parmak parmak kur ve her parmaktan sonra çek. Tam dakikadan önce Dm–Am geçişini 30 saniye dene."
+  },
+  "legacy": "V: guitar.journey.chords.c_dm",
+  "minutes": 12,
+  "expertPending": true
+}

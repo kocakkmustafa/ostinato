@@ -1,0 +1,88 @@
+{
+  "id": "gtr-s1-m01-02",
+  "title": { "en": "A comfortable sitting position", "tr": "Rahat oturuş" },
+  "goal": {
+    "en": "Sets up a supported sitting position, guitar angle and foot support, and holds it for 60 seconds.",
+    "tr": "Destekli oturuşu, gitar açısını ve ayak desteğini kurar ve 60 saniye korur."
+  },
+  "explanation": [
+    {
+      "en": "Sit on a chair without armrests, near the front edge. Keep both feet on the floor or one foot on a low support.",
+      "tr": "Kolçaksız bir sandalyenin ön kenarına yakın otur. İki ayağın yerde olsun ya da bir ayağını alçak bir desteğe koy."
+    },
+    {
+      "en": "Let the guitar body rest on your leg and against your chest. Tilt the neck slightly upward.",
+      "tr": "Gitarın gövdesi bacağına ve göğsüne yaslansın. Sapı hafifçe yukarı eğ."
+    },
+    {
+      "en": "Let go with both hands for a moment. If the guitar stays in place, your setup carries it, not your fretting hand.",
+      "tr": "İki elini bir an bırak. Gitar yerinde kalıyorsa onu sol elin değil, oturuşun taşıyor."
+    },
+    {
+      "en": "Put the phone to your side at chest height, about two metres away, with light in front of you, not behind.",
+      "tr": "Telefonu yanına, göğüs hizasına, yaklaşık iki metre uzağa koy. Işık arkanda değil, önünde olsun."
+    },
+    {
+      "en": "The camera asks for permission when this lesson starts. The image is processed on your phone; it is not saved and not sent.",
+      "tr": "Kamera izni bu ders başlarken istenir. Görüntü telefonunda işlenir; kaydedilmez, gönderilmez."
+    },
+    {
+      "en": "The camera gives no score. It only shows a hint, and says \"I can't see\" when the image is not clear enough.",
+      "tr": "Kamera puan vermez. Yalnız ipucu gösterir; görüntü yeterince net değilse \"göremedim\" der."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; a side-view drawing shows the sitting position.",
+      "tr": "Referans ses yok; yandan bir çizim oturuşu gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["K"],
+    "engineSteps": ["A7"],
+    "task": {
+      "en": "Sit with the guitar in view of the camera and hold the position for 60 seconds. Follow any hint about your upper body or the guitar angle, then tick the checklist.",
+      "tr": "Gitarla kameranın gördüğü yerde otur ve 60 saniye bu konumu koru. Gövde ya da gitar açısıyla ilgili ipucu çıkarsa uygula, sonra kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Hold the position for 60 seconds and tick every checklist item. The camera only gives hints.",
+        "tr": "Konumu 60 saniye koru ve kontrol listesinin her maddesini işaretle. Kamera yalnız ipucu verir."
+      }
+    }
+  },
+  "fallback": "camera",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both feet were supported and my back was upright without strain.", "tr": "İki ayağım destekliydi, sırtım zorlanmadan dikti." },
+    { "en": "The guitar stayed in place when I let go with both hands.", "tr": "İki elimi bırakınca gitar yerinde kaldı." },
+    { "en": "The neck pointed slightly upward.", "tr": "Sap hafifçe yukarı bakıyordu." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Hint: upper body leaning over the guitar.", "tr": "İpucu: gövde gitarın üstüne eğilmiş." },
+      "fix": {
+        "en": "Tilt the guitar toward you a little instead of leaning over it to see the strings.",
+        "tr": "Telleri görmek için öne eğilme; bunun yerine gitarı biraz kendine doğru yatır."
+      }
+    },
+    {
+      "error": { "en": "I can't see.", "tr": "Göremedim." },
+      "fix": {
+        "en": "Move the phone back until your head, the guitar and your feet are in the frame, and turn on a light in front of you.",
+        "tr": "Başın, gitar ve ayakların kadraja girene kadar telefonu geri al ve önündeki ışığı aç."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Without a camera, use the checklist with a mirror. A strap or a guitar support is fine if it is more comfortable.",
+    "tr": "Kamera yoksa kontrol listesini aynayla kullan. Daha rahatsa askı ya da gitar desteği kullanabilirsin."
+  },
+  "legacy": "V: guitar.journey.start.setup + guitar.foundations.camera_space, guitar.foundations.posture, guitar.foundations.foot_support, guitar.foundations.light_and_frame",
+  "minutes": 10,
+  "expertPending": true
+}
