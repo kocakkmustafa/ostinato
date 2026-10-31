@@ -1,0 +1,73 @@
+{
+  "id": "gtr-s2-m09-12",
+  "title": { "en": "Original eight-bar melody", "tr": "Özgün sekiz ölçülük melodi" },
+  "goal": {
+    "en": "Plays an original eight-bar melody with a soft A section and a stronger B section at ♩=76.",
+    "tr": "Özgün sekiz ölçülük melodiyi yumuşak A bölümü ve daha güçlü B bölümüyle ♩=76'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "The melody uses the C major notes in first position, A3 to G4.",
+      "tr": "Melodi birinci pozisyonda Do majör notalarını kullanır, La3 ile Sol4 arası."
+    },
+    {
+      "en": "It has two four-bar sections. A (bars 1–4) asks a question and stops on D4. B (bars 5–8) answers and ends on C4.",
+      "tr": "İki dört ölçülük bölümü var. A (1–4. ölçüler) soru sorar ve Re4'te durur. B (5–8. ölçüler) cevap verir ve Do4'te biter."
+    },
+    {
+      "en": "Make one clear contrast: play A soft and B a little stronger. Keep the same tempo for both.",
+      "tr": "Tek ve net bir fark yap: A'yı yumuşak, B'yi biraz daha güçlü çal. İkisinde de aynı tempoyu koru."
+    },
+    {
+      "en": "Let the long notes at the end of bars 2, 4, 6 and 8 ring their full length. They mark the phrase endings.",
+      "tr": "2., 4., 6. ve 8. ölçü sonundaki uzun notaları tam süreleri boyunca çınlat. Cümle sonlarını onlar gösterir."
+    },
+    {
+      "en": "If one two-bar passage comes back with a different note, loop only those two bars, then play all eight again.",
+      "tr": "İki ölçülük bir bölüm farklı notayla dönerse yalnız o iki ölçüyü döngüle, sonra sekiz ölçünün hepsini yeniden çal."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The original melody over a soft C–G–Am–F accompaniment, at ♩=76 and ♩=50, with A soft and B stronger.",
+      "tr": "Özgün melodi yumuşak bir C–G–Am–F eşliği üzerinde, ♩=76 ve ♩=50; A yumuşak, B daha güçlü."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the eight bars with the accompaniment: bars 1–4 soft, bars 5–8 stronger. Start at ♩=70 and move up to ♩=76. Headphones help the microphone hear only your guitar.",
+      "tr": "Sekiz ölçüyü eşlikle çal: 1–4. ölçüler yumuşak, 5–8. ölçüler daha güçlü. ♩=70'ten başla, ♩=76'ya çık. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "E4 D4 C4 E4 | G4 E4 | A3 C4 D4 E4 | D4 | G4 E4 G4 E4 | D4 E4 C4 | A3 C4 D4 E4 | C4",
+    "tempo": { "open": 70, "target": 76 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Section B was clearly stronger than section A.", "tr": "B bölümü A bölümünden belirgin biçimde daha güçlüydü." },
+    { "en": "I let the long notes ring their full length.", "tr": "Uzun notaları tam süreleri boyunca çınlattım." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: the B section was under 5 dB stronger.", "tr": "Farklı: B bölümü 5 dB'den az güçlüydü." },
+      "fix": { "en": "Pick a little deeper into the string in B, not faster. Keep A truly soft.", "tr": "B'de teli daha hızlı değil, biraz daha derin çek. A'yı gerçekten yumuşak tut." }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": { "en": "Louder playing pulls you forward. Count the long notes to the end before moving on.", "tr": "Güçlü çalmak seni öne çeker. Devam etmeden önce uzun notaları sonuna kadar say." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play section A alone at ♩=60, then section B alone, then join them.",
+    "tr": "Önce A bölümünü tek başına ♩=60'ta, sonra B bölümünü tek başına çal, ardından birleştir."
+  },
+  "legacy": "R: guitar.journey.melody.melody_capstone",
+  "minutes": 14,
+  "expertPending": true
+}

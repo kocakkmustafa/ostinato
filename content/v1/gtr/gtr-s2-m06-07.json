@@ -1,0 +1,73 @@
+{
+  "id": "gtr-s2-m06-07",
+  "title": { "en": "Accompany in three", "tr": "Üç zamanda eşlik" },
+  "goal": {
+    "en": "Plays a bass-down-up-down-up accompaniment in 3/4 on C and G at ♩=90.",
+    "tr": "3/4'te C ve G üzerinde bas-aşağı-yukarı-aşağı-yukarı eşliği ♩=90'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "In 3/4 each bar has three beats. Beat 1 is the bass; beats 2 and 3 are the chord.",
+      "tr": "3/4'te her ölçüde üç vuruş var. 1. vuruş bas; 2. ve 3. vuruş akordur."
+    },
+    {
+      "en": "Bass: pick only the root. The root of C is on string 5, fret 3 (C3); the root of G is on string 6, fret 3 (G2).",
+      "tr": "Bas: yalnız kök notayı çek. C'nin kökü 5. telde 3. perdededir (Do3); G'nin kökü 6. telde 3. perdededir (Sol2)."
+    },
+    {
+      "en": "Then strum down-up on beat 2 and down-up on beat 3, on the top strings only. Keep these strums lighter than the bass.",
+      "tr": "Sonra 2. vuruşta aşağı-yukarı, 3. vuruşta aşağı-yukarı çal; yalnız üst tellerde. Bu vuruşlar bastan hafif olsun."
+    },
+    {
+      "en": "Count '1, 2-and, 3-and'. Play two bars of C and two bars of G.",
+      "tr": "'1, 2-ve, 3-ve' diye say. İki ölçü C, iki ölçü G çal."
+    },
+    {
+      "en": "End the phrase with the bass on 1 and silence on 2 and 3. Keep counting to the end of the bar.",
+      "tr": "Cümleyi 1'de bas, 2 ve 3'te sessizlikle bitir. Ölçünün sonuna kadar saymayı sürdür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Eight bars of C and G in 3/4, bass then down-up strums, at ♩=90 and ♩=60, with a light bass and drum loop.",
+      "tr": "3/4'te sekiz ölçü C ve G, bas ve ardından aşağı-yukarı vuruş, ♩=90 ve ♩=60, hafif bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the eight bars with the accompaniment. Start at ♩=80 and move up in steps of 5 to ♩=90. Headphones help the microphone hear only your guitar.",
+      "tr": "Sekiz ölçüyü eşlikle çal. ♩=80'den başla, 5'er adımla ♩=90'a çık. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "3/4: C q ee ee | C q ee ee | G q ee ee | G q ee ee | C q ee ee | C q ee ee | G q ee ee | C q hr",
+    "tempo": { "open": 80, "target": 90 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The bass on beat 1 was clearer than the strums.", "tr": "1. vuruştaki bas, vuruşlardan daha belirgindi." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": { "en": "The strums after the bass rushed. Count '2-and' and wait for the 2.", "tr": "Bastan sonraki vuruşlar acele etti. '2-ve' say ve 2'yi bekle." }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": { "en": "Hold the whole chord before you pick the bass, then check C and G string by string.", "tr": "Bası çekmeden önce akorun tamamını bas, sonra C ve G'yi tel tel kontrol et." }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only C, with the bass on 1 and one downstroke each on 2 and 3.",
+    "tr": "Yalnız C kullan; 1'de bas, 2 ve 3'te birer aşağı vuruş çal."
+  },
+  "legacy": "R: guitar.journey.strum.waltz",
+  "minutes": 12,
+  "expertPending": true
+}

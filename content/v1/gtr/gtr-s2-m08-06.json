@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s2-m08-06",
+  "title": { "en": "String skipping", "tr": "Tel atlama" },
+  "goal": {
+    "en": "Plays a pattern that skips one string (6→4, 5→3) cleanly at ♩=60.",
+    "tr": "Bir tel atlayan deseni (6→4, 5→3) ♩=60'ta temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "String skipping jumps over one string. The picking hand must land on the right string without looking.",
+      "tr": "Tel atlama bir teli atlar. Sağ el bakmadan doğru tele inmeli."
+    },
+    {
+      "en": "Make the jump with the forearm, not by reaching with the pick.",
+      "tr": "Atlamayı ön kolla yap, penayı uzatarak değil."
+    },
+    {
+      "en": "Keep the skipped string quiet: the fretting fingers or the side of the picking hand rest on it lightly.",
+      "tr": "Atlanan teli sessiz tut: sol el parmakları ya da sağ elin yanı ona hafifçe değsin."
+    },
+    {
+      "en": "Pattern: G2 E3 F2 D3 on strings 6 and 4, then C3 A3 B2 G3 on strings 5 and 3.",
+      "tr": "Desen: 6. ve 4. telde Sol2 Mi3 Fa2 Re3, sonra 5. ve 3. telde Do3 La3 Si2 Sol3."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The skipping pattern G2 E3 F2 D3 | C3 A3 B2 G3 twice, quarter notes with a click at ♩=60 and ♩=40.",
+      "tr": "Atlama deseni Sol2 Mi3 Fa2 Re3 | Do3 La3 Si2 Sol3 iki kez, klikle dörtlük; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the four bars in quarter notes with the click. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Dört ölçüyü klikle dörtlük olarak çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "G2 E3 F2 D3 | C3 A3 B2 G3 | G2 E3 F2 D3 | C3 A3 B2 G3",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The skipped string stayed quiet.", "tr": "Atlanan tel sessiz kaldı." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the open string in between was heard.", "tr": "Farklı nota: aradaki açık tel duyuldu." },
+      "fix": {
+        "en": "The pick hit the skipped string. Lift it slightly over that string and land past it.",
+        "tr": "Pena atlanan tele çarptı. Penayı o telin biraz üstünden geçir ve ötesine in."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The jump takes too long. Move the forearm a little earlier, right after the previous note.",
+        "tr": "Atlama çok uzun sürüyor. Ön kolu biraz erken, önceki notanın hemen ardından taşı."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only open strings 6 and 4, then 5 and 3, until the jump lands, then add the fretted notes.",
+    "tr": "Atlama oturana kadar yalnız açık 6. ve 4. teli, sonra 5. ve 3. teli çal; sonra perdeli notaları ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

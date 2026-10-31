@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s2-m09-01",
+  "title": { "en": "Whole and half steps", "tr": "Tam ve yarım aralıklar" },
+  "goal": {
+    "en": "Plays whole and half steps on one string and names the natural notes from A2 to A3.",
+    "tr": "Tek telde tam ve yarım aralıkları çalar, La2'den La3'e doğal notaları adlandırır."
+  },
+  "explanation": [
+    {
+      "en": "One fret is a half step (a semitone). Two frets are a whole step.",
+      "tr": "Bir perde yarım sestir. İki perde tam sestir."
+    },
+    {
+      "en": "On string 1, compare E4 to F4: one fret, a half step. Then F4 to G4: two frets, a whole step.",
+      "tr": "1. telde Mi4'ten Fa4'e geç: bir perde, yarım ses. Sonra Fa4'ten Sol4'e: iki perde, tam ses."
+    },
+    {
+      "en": "Neighbouring letters are not always a whole step apart. E–F and B–C are half steps; all other natural neighbours are whole steps.",
+      "tr": "Yan yana harfler her zaman tam ses değildir. Mi–Fa ve Si–Do yarım sestir; diğer doğal komşular tam sestir."
+    },
+    {
+      "en": "Count frets, not letters. From A2 on open string 5: whole, half, whole, whole, half, whole, whole brings you to A3 at fret 12.",
+      "tr": "Harfleri değil perdeleri say. Açık 5. teldeki La2'den: tam, yarım, tam, tam, yarım, tam, tam seni 12. perdedeki La3'e getirir."
+    },
+    {
+      "en": "Later, the same counting finds larger steps: three frets is a minor third, five frets a perfect fourth.",
+      "tr": "Aynı sayım daha büyük aralıkları da bulur: üç perde küçük üçlü, beş perde tam dörtlüdür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A2 B2 C3 D3 E3 F3 G3 A3 on string 5, slow and even, string-model synthesis; the two half steps are marked on screen.",
+      "tr": "5. telde La2 Si2 Do3 Re3 Mi3 Fa3 Sol3 La3, yavaş ve eşit, tel modeli sentezi; iki yarım ses ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "On string 5, play the natural notes from A2 up to A3 at frets 0-2-3-5-7-8-10-12. Say the note name before each one. No click; take your time.",
+      "tr": "5. telde La2'den La3'e doğal notaları 0-2-3-5-7-8-10-12. perdelerde çal. Her notadan önce adını söyle. Klik yok; acele etme."
+    },
+    "sequence": "A2 B2 C3 D3 E3 F3 G3 A3",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I moved one fret for B–C and E–F, two frets everywhere else.", "tr": "Si–Do ve Mi–Fa için bir perde, diğerlerinde iki perde ilerledim." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "You took a whole step at B–C or E–F. Move only one fret there.", "tr": "Si–Do ya da Mi–Fa'da tam ses atladın. Orada yalnız bir perde kay." }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "A whole step became a half step. Count two frets between all other letters.", "tr": "Tam ses yarım sese dönmüş. Diğer harfler arasında iki perde say." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only A2 B2 C3 (frets 0, 2, 3) until the half step B–C feels clear, then add the rest.",
+    "tr": "Si–Do yarım sesi netleşene kadar yalnız La2 Si2 Do3'ü (0, 2, 3. perde) çal, sonra gerisini ekle."
+  },
+  "legacy": "R: guitar.journey.melody.interval_map",
+  "minutes": 12,
+  "expertPending": true
+}

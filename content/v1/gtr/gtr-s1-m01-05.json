@@ -1,0 +1,90 @@
+{
+  "id": "gtr-s1-m01-05",
+  "title": { "en": "Checking tuning by ear", "tr": "Kulakla akort kontrolü" },
+  "goal": {
+    "en": "Compares two strings with the fifth-fret method and hears the beating when they differ.",
+    "tr": "5. perde yöntemiyle iki teli karşılaştırır ve farklı olduklarında vuruyu duyar."
+  },
+  "explanation": [
+    {
+      "en": "Fret 5 on string 6 gives A2, the same note as open string 5. Two strings can check each other this way.",
+      "tr": "6. telin 5. perdesi La2'dir; açık 5. telle aynı notadır. İki tel bu yolla birbirini kontrol eder."
+    },
+    {
+      "en": "Use fret 5 for the pairs 6–5, 5–4, 4–3 and 2–1. For the pair 3–2, use fret 4: string 3, fret 4 is B3.",
+      "tr": "6–5, 5–4, 4–3 ve 2–1 çiftleri için 5. perdeyi kullan. 3–2 çifti için 4. perdeyi kullan: 3. telin 4. perdesi Si3'tür."
+    },
+    {
+      "en": "Play both notes together and listen. A slow wah-wah pulse, the beating, means they are slightly apart.",
+      "tr": "İki notayı birlikte çal ve dinle. Yavaş bir \"vuu-vuu\" dalgalanması, yani vuru, iki notanın biraz farklı olduğunu gösterir."
+    },
+    {
+      "en": "The closer the notes get, the slower the beating. When it disappears, the two strings match.",
+      "tr": "Notalar yaklaştıkça vuru yavaşlar. Vuru kaybolunca iki tel eşleşmiş olur."
+    },
+    {
+      "en": "Adjust only the open string of each pair. Your ear decides first; the tuner then checks.",
+      "tr": "Her çiftte yalnız açık teli ayarla. Önce kulağın karar verir; sonra akort aleti kontrol eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "DR"],
+    "brief": {
+      "en": "Two A2 notes played together: first matched, then 10 cents apart so the beating is clear; a drone on each target note on demand.",
+      "tr": "Birlikte çalınan iki La2: önce eşleşmiş, sonra vurunun net duyulması için 10 cent farklı; istenirse her hedef notada dron."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A1"],
+    "task": {
+      "en": "Go through the five string pairs. For each pair, play the fretted note and the open string together, adjust the open string until the beating stops, then let the tuner check it.",
+      "tr": "Beş tel çiftini sırayla geç. Her çiftte perdeli notayı ve açık teli birlikte çal, vuru durana kadar açık teli ayarla, sonra akort aletinin kontrol etmesine izin ver."
+    },
+    "sequence": "A2/A2 D3/D3 G3/G3 B3/B3 E4/E4",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All five pairs within 10 cents of each other on the tuner.",
+        "tr": "Beş çiftin hepsi akort aletinde birbirinden en fazla 10 cent farklı."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I heard the beating before adjusting.", "tr": "Ayardan önce vuruyu duydum." },
+    { "en": "The beating slowed down and stopped as I turned the peg.", "tr": "Burguyu çevirdikçe vuru yavaşladı ve durdu." },
+    { "en": "I used fret 4 for the pair 3–2.", "tr": "3–2 çifti için 4. perdeyi kullandım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the open string is more than 10 cents low.", "tr": "Farklı nota: açık tel 10 centten fazla alçak." },
+      "fix": {
+        "en": "Tighten the open string slowly while both notes ring; stop when the beating disappears.",
+        "tr": "İki nota çalarken açık teli yavaşça sık; vuru kaybolunca dur."
+      }
+    },
+    {
+      "error": { "en": "Different note: the pair 3–2 is a semitone apart.", "tr": "Farklı nota: 3–2 çifti yarım ses farklı." },
+      "fix": {
+        "en": "On string 3 use fret 4, not fret 5.",
+        "tr": "3. telde 5. perdeyi değil, 4. perdeyi kullan."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Pluck both strings a little firmer and let them ring; keep the phone close to the guitar.",
+        "tr": "İki teli biraz daha net çek ve çınlamaya bırak; telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with the pair 6–5 and the drone on A2 only; add one pair per session.",
+    "tr": "Yalnız 6–5 çifti ve La2 dronuyla başla; her oturuma bir çift ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

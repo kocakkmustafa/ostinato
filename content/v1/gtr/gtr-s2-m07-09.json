@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s2-m07-09",
+  "title": { "en": "Capo basics", "tr": "Kapo temeli" },
+  "goal": {
+    "en": "Puts a capo at fret 2 and plays the G shape so that it sounds as A.",
+    "tr": "Kapoyu 2. perdeye takar ve G şeklini A sesi verecek şekilde çalar."
+  },
+  "explanation": [
+    {
+      "en": "A capo clamps all strings at one fret. The shapes stay the same; the sound moves up a semitone per fret.",
+      "tr": "Kapo bütün telleri bir perdede sıkıştırır. Şekiller aynı kalır; ses her perdede yarım ses yükselir."
+    },
+    {
+      "en": "With the capo at fret 2, the G shape sounds A. The TAB counts frets from the capo; the reference plays the sounding key, A.",
+      "tr": "Kapo 2. perdedeyken G şekli A sesi verir. Tab perdeleri kapodan sayar; referans sesli tonu, yani A'yı çalar."
+    },
+    {
+      "en": "Place the capo just behind fret 2, straight across the neck. Tight enough for clean notes, no tighter.",
+      "tr": "Kapoyu 2. perdenin hemen arkasına, sapa dik koy. Temiz ses verecek kadar sık, daha fazla değil."
+    },
+    {
+      "en": "A capo can pull the strings slightly sharp. Check the tuning after you put it on.",
+      "tr": "Kapo telleri biraz tizleştirebilir. Taktıktan sonra akordu kontrol et."
+    },
+    {
+      "en": "The app listens for the sounding notes: A2 C♯3 E3 A3 C♯4 A4.",
+      "tr": "Uygulama sesli notaları dinler: La2 Do♯3 Mi3 La3 Do♯4 La4."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A major as the capo-2 G shape sounds (A2 C♯3 E3 A3 C♯4 A4), strummed and then plucked string by string.",
+      "tr": "Kapo 2'de G şeklinin verdiği La majör (La2 Do♯3 Mi3 La3 Do♯4 La4), önce taranır, sonra tel tel çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A1", "A4"],
+    "task": {
+      "en": "Put the capo at fret 2 and check the tuning with the tuner. Strum the G shape four times, then pluck it string by string; the app checks the sounding A chord.",
+      "tr": "Kapoyu 2. perdeye tak ve akordu akort aletiyle kontrol et. G şeklini dört kez tara, sonra tel tel çek; uygulama sesli A akorunu kontrol eder."
+    },
+    "sequence": "Capo 2 · G shape ×4 · sounding: A2 C♯3 E3 A3 C♯4 A4",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I checked the tuning after putting on the capo.", "tr": "Kapoyu taktıktan sonra akordu kontrol ettim." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My chord sounded the same as the reference.", "tr": "Akorum referansla aynı duyuldu." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: G heard, not A.", "tr": "Farklı akor: A değil G duyuldu." },
+      "fix": {
+        "en": "The capo is not clamping or not at fret 2. Check that it sits just behind fret 2 and covers all six strings.",
+        "tr": "Kapo sıkıştırmıyor ya da 2. perdede değil. 2. perdenin hemen arkasında durduğunu ve altı teli kapladığını kontrol et."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The strings buzz under the capo. Move it closer to the fret and keep it straight.",
+        "tr": "Teller kaponun altında vızıldıyor. Kapoyu perdeye yaklaştır ve düz tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only strings 4 to 1 of the G shape (x-x-0-0-0-3); the app checks those four strings.",
+    "tr": "G şeklinin yalnız 4.–1. tellerini çal (x-x-0-0-0-3); uygulama bu dört teli kontrol eder."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s2-m06-13",
+  "title": { "en": "Rhythm II checkpoint", "tr": "Ritim II geçişi" },
+  "goal": {
+    "en": "Plays an original 16-bar piece joining two strumming patterns with chord changes at ♩=80.",
+    "tr": "İki vuruş kalıbını akor geçişleriyle birleştiren özgün 16 ölçülük parçayı ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint joins two patterns from this module in one original 16-bar piece.",
+      "tr": "Bu geçiş, bu modülün iki kalıbını özgün 16 ölçülük bir parçada birleştirir."
+    },
+    {
+      "en": "Bars 1–8: D-DU-UDU on G, Em, C and D, one chord per bar.",
+      "tr": "1–8. ölçüler: G, Em, C ve D'de D-DU-UDU, her ölçüde bir akor."
+    },
+    {
+      "en": "Bars 9–16: the root bass on beat 1, then down-up eighths on beats 2, 3 and 4.",
+      "tr": "9–16. ölçüler: 1. vuruşta kök bas, sonra 2., 3. ve 4. vuruşta aşağı-yukarı sekizlik."
+    },
+    {
+      "en": "The switch at bar 9 is the key moment. Find the C bass on string 5 during bar 8.",
+      "tr": "9. ölçüdeki değişim en önemli andır. C bası 5. telde, 8. ölçü sürerken bul."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The original 16 bars at ♩=80 and ♩=55, with a light bass and drum loop.",
+      "tr": "Özgün 16 ölçü, ♩=80 ve ♩=55, hafif bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 16 bars with the accompaniment at ♩=80. Slower tempos are open for practice; the checkpoint passes at ♩=80. Headphones help the microphone hear only your guitar.",
+      "tr": "16 ölçüyü eşlikle ♩=80'de çal. Daha yavaş tempolar pratik için açık; geçiş ♩=80'de geçilir. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: G | Em | C | D | G | Em | C | D | C | G | D | Em | C | G | D | G",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "Late at bar 9. Plan the bass note during bar 8 and keep the strumming hand moving.", "tr": "9. ölçüde geç. Bas notayı 8. ölçüde planla ve sağ eli hareket ettirmeyi sürdür." }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": { "en": "Check that chord string by string, then loop its bar with the bar before.", "tr": "O akoru tel tel kontrol et, sonra ölçüsünü bir önceki ölçüyle döngüle." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Lower the accompaniment or use headphones.", "tr": "Eşliğin sesini kıs ya da kulaklık kullan." }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise bars 1–8 and bars 9–16 separately at ♩=60, then join them across bars 8 and 9.",
+    "tr": "1–8. ve 9–16. ölçüleri ♩=60'ta ayrı çalış, sonra 8. ve 9. ölçüde birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

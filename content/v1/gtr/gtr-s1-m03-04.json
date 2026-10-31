@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s1-m03-04",
+  "title": { "en": "Rests: playing silence", "tr": "Suslar: sessizliği çalmak" },
+  "goal": {
+    "en": "Stops the string on every quarter rest while keeping the count.",
+    "tr": "Sayımı koruyarak her dörtlük susta teli susturur."
+  },
+  "explanation": [
+    {
+      "en": "A rest is silence for its written length. It still takes up counted time.",
+      "tr": "Sus, yazılı süresi boyunca sessizliktir. Yine de sayılan zamanda yer tutar."
+    },
+    {
+      "en": "A quarter rest lasts one beat in 4/4.",
+      "tr": "Dörtlük sus 4/4'te bir vuruş sürer."
+    },
+    {
+      "en": "A ringing string is not a rest. At the start of each rest, touch the string lightly with a free finger or the side of your picking hand.",
+      "tr": "Çınlayan tel sus değildir. Her susun başında teli boştaki bir parmakla ya da sağ elinin yanıyla hafifçe durdur."
+    },
+    {
+      "en": "Keep counting through the silence. The next note comes back exactly on its beat.",
+      "tr": "Sessizlik boyunca saymayı sürdür. Sonraki nota tam vuruşunda geri gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Open E4 on beats 1 and 3, silence on 2 and 4, for two bars with a click, at ♩=60 and at ♩=45.",
+      "tr": "Klikle iki ölçü: açık Mi4 1. ve 3. vuruşta, 2. ve 4. vuruşta sessizlik; ♩=60 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play open E4 on beats 1 and 3 and stop the string on beats 2 and 4, for two bars. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "İki ölçü boyunca açık Mi4'ü 1. ve 3. vuruşta çal, 2. ve 4. vuruşta teli sustur. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "4/4: q qr q qr | q qr q qr",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 1 note and timing rules, and the sound drops clearly at the start of every rest.",
+        "tr": "Seviye 1 nota ve zamanlama ölçütü; her susun başında ses belirgin biçimde düşer."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I kept counting through the rests.", "tr": "Suslarda da saymayı sürdürdüm." },
+    { "en": "The string was silent on beats 2 and 4.", "tr": "Tel 2. ve 4. vuruşta sessizdi." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": {
+        "en": "Touch the string on the rest beat itself, not later. A light touch is enough.",
+        "tr": "Teli tam sus vuruşunda durdur, sonra değil. Hafif bir dokunuş yeter."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The count stopped during the silence. Say \"2\" and \"4\" aloud on the rests.",
+        "tr": "Sessizlikte sayım durdu. Suslarda \"2\" ve \"4\"ü sesli söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Tap the pattern on your leg first, saying the rest beats aloud, then add the guitar at ♩=45.",
+    "tr": "Önce kalıbı dizine vur, sus vuruşlarını sesli söyle; sonra ♩=45'te gitarı ekle."
+  },
+  "legacy": "V: guitar.journey.reading.rests_ties",
+  "minutes": 10,
+  "expertPending": true
+}

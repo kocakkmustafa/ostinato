@@ -1,0 +1,75 @@
+{
+  "id": "gtr-s1-m02-03",
+  "title": { "en": "Notes on string five", "tr": "Beşinci tel notaları" },
+  "goal": {
+    "en": "Plays A2, B2 and C3 on string 5 cleanly at ♩=60.",
+    "tr": "5. telde La2, Si2 ve Do3'ü ♩=60'ta temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "String 5 is the second-thickest string and the second line from the bottom of the TAB. Open, it sounds A2.",
+      "tr": "5. tel kalınlıkta ikinci teldir ve tab'da alttan ikinci çizgidir. Açıkken La2 sesini verir."
+    },
+    {
+      "en": "Fret 2 is B2 with finger 2; fret 3 is C3 with finger 3.",
+      "tr": "2. perde 2. parmakla Si2, 3. perde 3. parmakla Do3'tür."
+    },
+    {
+      "en": "Name each note before you play it: A, B, C, B.",
+      "tr": "Her notayı çalmadan önce adlandır: La, Si, Do, Si."
+    },
+    {
+      "en": "When you move from string 6 to string 5, the picking hand moves too. Say the string change aloud and practise it on open strings first.",
+      "tr": "6. telden 5. tele geçerken sağ el de geçer. Tel geçişini sesli söyle ve önce açık tellerde çalış."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A2 B2 C3 B2 A2 twice, at ♩=60 and at ♩=40, string-model synthesis.",
+      "tr": "La2 Si2 Do3 Si2 La2 iki kez, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the five-note line twice along with the click. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Beş notalık diziyi klikle birlikte iki kez çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "A2 B2 C3 B2 A2 | A2 B2 C3 B2 A2",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "I used finger 2 for B2 and finger 3 for C3.", "tr": "Si2 için 2., Do3 için 3. parmağı kullandım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: string 6 was heard.", "tr": "Farklı nota: 6. tel duyuldu." },
+      "fix": {
+        "en": "The picking hand stayed on string 6. Rehearse the move to string 5 without fretting, then add the fretted notes.",
+        "tr": "Sağ el 6. telde kalmış. 5. tele geçişi perde basmadan prova et, sonra perdeli notaları ekle."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "C3 is at fret 3, not fret 2. Move finger 3 one fret toward the body.",
+        "tr": "Do3 2. perdede değil, 3. perdededir. 3. parmağı bir perde gövdeye doğru kaydır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play A2 and B2 as a two-note loop at ♩=40; add C3 when both ring clearly.",
+    "tr": "La2 ve Si2'yi ♩=40'ta iki notalık döngü olarak çal; ikisi de net çalınca Do3'ü ekle."
+  },
+  "legacy": "R: guitar.journey.notes.bass_a",
+  "minutes": 12,
+  "expertPending": true
+}

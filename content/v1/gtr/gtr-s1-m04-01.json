@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s1-m04-01",
+  "title": { "en": "Chord diagrams and E minor", "tr": "Akor şemaları ve Mi minör" },
+  "goal": {
+    "en": "Builds Em from a chord diagram and sounds all six strings cleanly.",
+    "tr": "Şemadan Em'i kurar ve altı teli temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "A chord diagram is the neck seen from the front. Vertical lines are strings, string 6 on the left. Horizontal lines are frets; the thick line at the top is the nut.",
+      "tr": "Akor şeması sapın önden görünüşüdür. Dikey çizgiler tellerdir, 6. tel soldadır. Yatay çizgiler perdelerdir; üstteki kalın çizgi üst eşiktir."
+    },
+    {
+      "en": "A dot is a fretted note, and the number in it is the finger. 0 above a string means play it open. x means do not play it.",
+      "tr": "Nokta basılan notadır, içindeki sayı parmaktır. Telin üstündeki 0 açık çal demektir. x o teli çalma demektir."
+    },
+    {
+      "en": "Em: 0-2-2-0-0-0. Put finger 2 on string 5, fret 2, and finger 3 on string 4, fret 2. All six strings sound.",
+      "tr": "Em: 0-2-2-0-0-0. 2. parmağı 5. telin 2. perdesine, 3. parmağı 4. telin 2. perdesine koy. Altı telin hepsi çalar."
+    },
+    {
+      "en": "Press with the fingertips, just behind the fret, so the open strings next to them can ring.",
+      "tr": "Parmak uçlarıyla, perdenin hemen arkasına bas; yanlarındaki açık teller de çalabilsin."
+    },
+    {
+      "en": "Pluck each string from 6 to 1 before you strum. A string that does not ring tells you which finger to adjust.",
+      "tr": "Vurmadan önce her teli 6'dan 1'e tek tek çek. Çalmayan tel hangi parmağı düzelteceğini söyler."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Em strummed once, then plucked string by string from 6 to 1, slowly.",
+      "tr": "Em bir kez vurulur, sonra 6'dan 1'e tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum Em four times, in your own time. Then pluck the chord string by string; the app checks each string.",
+      "tr": "Em'i kendi hızında dört kez vur. Sonra akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "Em | Em | Em | Em",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "I used fingers 2 and 3 on fret 2.", "tr": "2. perdede 2. ve 3. parmağı kullandım." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 3 is leaning on string 3. Arch the finger so only its tip touches string 4.",
+        "tr": "3. parmak 3. tele yaslanıyor. Parmağı kavisle; yalnız ucu 4. tele değsin."
+      }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": {
+        "en": "Pluck the strings one by one, find the silent one and move the nearest finger closer to the fret.",
+        "tr": "Telleri tek tek çek, sessiz olanı bul ve en yakın parmağı perdeye yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Place one finger at a time and pluck after each, then add the second finger.",
+    "tr": "Parmakları tek tek yerleştir ve her birinden sonra çek; sonra ikinci parmağı ekle."
+  },
+  "legacy": "V: guitar.journey.chords.diagrams_em_am + guitar.foundations.open_chords",
+  "minutes": 12,
+  "expertPending": true
+}

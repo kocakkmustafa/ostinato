@@ -1,0 +1,73 @@
+{
+  "id": "gtr-s2-m06-01",
+  "title": { "en": "Down and up strums", "tr": "Aşağı ve yukarı vuruş" },
+  "goal": {
+    "en": "Strums even down-up eighths on Em at ♩=60.",
+    "tr": "Em'de eşit aşağı-yukarı sekizlikleri ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Count 1-and 2-and 3-and 4-and. The hand moves down on each number and up on each 'and'.",
+      "tr": "1-ve 2-ve 3-ve 4-ve say. El her sayıda aşağı, her 've'de yukarı gider."
+    },
+    {
+      "en": "First mute the strings with your fretting hand and make gentle down-up motions. Listen only to the scratch.",
+      "tr": "Önce sol elinle telleri sustur ve hafif aşağı-yukarı hareket yap. Yalnız hışırtıyı dinle."
+    },
+    {
+      "en": "Then hold Em. Sound the downstrokes and let the upstrokes pass silently above the strings.",
+      "tr": "Sonra Em'i bas. Aşağı vuruşları çal, yukarı hareketi tellerin üstünden sessiz geçir."
+    },
+    {
+      "en": "Now let the upstrokes touch the strings too. An upstroke needs only the top three or four strings.",
+      "tr": "Şimdi yukarı vuruşlar da tellere değsin. Yukarı vuruş için üstteki üç-dört tel yeter."
+    },
+    {
+      "en": "Keep the wrist loose and the motion small. Down and up strokes sit at equal distances.",
+      "tr": "Bileği gevşek, hareketi küçük tut. Aşağı ve yukarı vuruşlar eşit aralıkta durur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Em in down-up eighths, 4 bars, at ♩=60 and ♩=40, with click.",
+      "tr": "Em'de aşağı-yukarı sekizlik, 4 ölçü, ♩=60 ve ♩=40, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Strum Em in down-up eighths for 4 bars along with the click. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Em'i klikle birlikte 4 ölçü aşağı-yukarı sekizlik çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "4/4: ee ee ee ee | ee ee ee ee | ee ee ee ee | ee ee ee ee",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The upstroke is too big. Keep both strokes the same small size.", "tr": "Yukarı hareket çok büyük. İki vuruşu da aynı küçük boyda tut." }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": { "en": "Press strings 5 and 4 just behind fret 2, then check Em string by string.", "tr": "5. ve 4. teli 2. perdenin hemen arkasına bas, sonra Em'i tel tel kontrol et." }
+    }
+  ],
+  "adaptation": {
+    "en": "Sound only the downstrokes and keep the upstrokes silent above the strings until the motion is even.",
+    "tr": "Hareket eşitlenene kadar yalnız aşağı vuruşları çal, yukarı hareketi tellerin üstünde sessiz tut."
+  },
+  "legacy": "R: guitar.journey.strum.down_up",
+  "minutes": 12,
+  "expertPending": true
+}

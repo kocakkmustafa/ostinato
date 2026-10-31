@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s1-m04-10",
+  "title": { "en": "Strumming chords on the beat", "tr": "Vuruşta akor çalmak" },
+  "goal": {
+    "en": "Strums Em–Am–D–G in quarter-note downstrokes and changes chord on beat 1 at ♩=60.",
+    "tr": "Em–Am–D–G'yi dörtlük aşağı vuruşla çalar ve ♩=60'ta akoru 1. vuruşta değiştirir."
+  },
+  "explanation": [
+    {
+      "en": "Each chord gets one bar: four downstrokes, one on each click.",
+      "tr": "Her akora bir ölçü düşer: her klikte bir tane, dört aşağı vuruş."
+    },
+    {
+      "en": "Beat 4 is your preparation time. Strum it lightly, or let it pass, and start moving the fingers.",
+      "tr": "4. vuruş hazırlık zamanındır. Onu hafif vur ya da geç, ve parmakları taşımaya başla."
+    },
+    {
+      "en": "The new chord must sound on beat 1. Being on time matters more than a perfect chord.",
+      "tr": "Yeni akor 1. vuruşta çalmalı. Zamanında olmak kusursuz akordan önemlidir."
+    },
+    {
+      "en": "Keep the strumming hand moving even if the fingers are late. Never stop the beat to fix a chord.",
+      "tr": "Parmaklar geç kalsa bile sağ el hareket etmeye devam etsin. Akoru düzeltmek için vuruşu durdurma."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Em, Am, D, G, one bar each in quarter-note downstrokes with a click, at ♩=60 and at ♩=45.",
+      "tr": "Klikle Em, Am, D, G, her biri bir ölçü dörtlük aşağı vuruş; ♩=60 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Strum four downstrokes per chord with the click: Em, Am, D, G. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Klikle her akorda dört aşağı vuruş yap: Em, Am, D, G. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "4/4: Em | Am | D | G",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The change starts too late. Begin moving the fingers on beat 4.",
+        "tr": "Geçiş çok geç başlıyor. Parmakları 4. vuruşta taşımaya başla."
+      }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": {
+        "en": "The chord is landing in a hurry. Slow down one step and check the shape on beat 1.",
+        "tr": "Akor aceleyle konuyor. Bir adım yavaşla ve şekli 1. vuruşta kontrol et."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Give each chord two bars instead of one at ♩=45.",
+    "tr": "♩=45'te her akora bir yerine iki ölçü ver."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

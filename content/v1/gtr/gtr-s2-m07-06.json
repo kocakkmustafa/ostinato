@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s2-m07-06",
+  "title": { "en": "Cadd9 and G shapes", "tr": "Cadd9 ve G şekilleri" },
+  "goal": {
+    "en": "Plays G–Cadd9–Dsus4 with shared fingers for 8 bars at ♩=70.",
+    "tr": "Ortak parmaklı G–Cadd9–Dsus4'ü ♩=70'te 8 ölçü çalar."
+  },
+  "explanation": [
+    {
+      "en": "These three shapes share fingers 3 and 4 on strings 2 and 1 at fret 3. Those two fingers stay down the whole time.",
+      "tr": "Bu üç şekil 3. ve 4. parmağı ortak kullanır: 2. ve 1. telde, 3. perdede. Bu iki parmak hep basılı kalır."
+    },
+    {
+      "en": "G: 3-2-0-0-3-3. Finger 2 on string 6, finger 1 on string 5.",
+      "tr": "G: 3-2-0-0-3-3. 2. parmak 6. telde, 1. parmak 5. telde."
+    },
+    {
+      "en": "Cadd9: x-3-2-0-3-3. Move fingers 2 and 1 one string toward the floor. Do not play string 6.",
+      "tr": "Cadd9: x-3-2-0-3-3. 2. ve 1. parmağı birer tel yere doğru taşı. 6. teli çalma."
+    },
+    {
+      "en": "Dsus4: x-x-0-2-3-3. Lift finger 2 and put finger 1 on string 3, fret 2. Play strings 4 to 1.",
+      "tr": "Dsus4: x-x-0-2-3-3. 2. parmağı kaldır, 1. parmağı 3. tel 2. perdeye koy. 4.–1. telleri çal."
+    },
+    {
+      "en": "Strum four down strokes per bar with the accompaniment.",
+      "tr": "Eşlikle her ölçüde dört aşağı vuruş yap."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 8-bar G–Cadd9–Dsus4 line, four down strums per bar, over an original bass and drum loop at ♩=70 and ♩=50.",
+      "tr": "8 ölçülük G–Cadd9–Dsus4 dizisi, ölçü başına dört aşağı vuruş; ♩=70 ve ♩=50'de özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 8 bars with the accompaniment, four down strums per bar, changing on beat 1. Headphones help the microphone hear only your guitar.",
+      "tr": "8 ölçüyü eşlikle çal; her ölçüde dört aşağı vuruş yap ve akoru 1. vuruşta değiştir. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: G | Cadd9 | Dsus4 | Cadd9 | G | Cadd9 | Dsus4 | G",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Fingers 3 and 4 stayed down through all three chords.", "tr": "3. ve 4. parmak üç akorda da basılı kaldı." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Fingers 3 and 4 are lifting. Leave them down and move only fingers 1 and 2.",
+        "tr": "3. ve 4. parmak kalkıyor. Onları basılı bırak ve yalnız 1. ve 2. parmağı oynat."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Cadd9 starts on string 5 and Dsus4 on string 4. Start the strum on the right string.",
+        "tr": "Cadd9 5. telden, Dsus4 4. telden başlar. Vuruşa doğru telden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the line at ♩=55 with two bars per chord.",
+    "tr": "Diziyi ♩=55'te, her akora iki ölçü vererek çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

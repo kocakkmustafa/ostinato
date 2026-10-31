@@ -15,7 +15,7 @@ v1 piyanosu **mikrofonla ölçülebilen seviyelerle** sınırlıdır. Bunu sağl
 - Kurala uymayan pratikler (blok akor, iki el farklı notalar aynı anda) `A6p` ile **deneysel** ölçülür (`M~`). İlerlemeyi kilitlemez. MIDI bağlıysa MIDI kesin sonuç verir.
 - Her piyano dersinde **MIDI** eşdeğer bir yoldur (USB/BLE). Tabloda MIDI yalnız `M~` derslerinde ayrıca yazılır.
 - Akustik piyano akortsuz olabilir: `pno-s1-m01-06` piyanonun genel sapmasını ölçer ve doğrulayıcıya ofset olarak verir. Notalar arası düzensizlik büyükse ölçüm "duyamadım"a kayar, kullanıcıya akort önerilir.
-- Pes notalar: C2 (65 Hz) bugünkü 70 Hz alt sınırın altında. S1–S3 en pes C2'ye iner; motor alt sınırı ≤60 Hz olmalı (`70-motor-bagimliligi.md`).
+- Pes notalar: S1–S3 en pes C2'ye (65,4 Hz) iner. Kurucu kararıyla (1 Kas) dersler yerinde kalır. Akort motorunun bas profili 28 Hz'e iniyor (PR #7). A6 piyano doğrulayıcısı da C2'yi kapsamalı; bu bir A6 gereksinimi, ders engeli değil (`70-motor-bagimliligi.md`).
 
 **Mevcut:** `R:`/`V:` kimlikleri `piano-NN` (yazılı kurs, 25 ders) ve `piano.foundations.` (`f.`, kamera kursu).
 

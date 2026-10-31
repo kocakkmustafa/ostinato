@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s2-m08-02",
+  "title": { "en": "Chromatic across six strings", "tr": "Altı telde kromatik" },
+  "goal": {
+    "en": "Plays frets 1–4 on all six strings, ascending, in eighth notes at ♩=60.",
+    "tr": "Altı telin hepsinde 1.–4. perdeleri çıkıcı olarak sekizlik ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Play frets 1-2-3-4 on string 6, then move to string 5 and repeat, all the way to string 1.",
+      "tr": "6. telde 1-2-3-4. perdeleri çal, sonra 5. tele geç ve tekrarla; 1. tele kadar devam et."
+    },
+    {
+      "en": "The hand stays in first position; only the fingertips move across the strings.",
+      "tr": "El birinci pozisyonda kalır; teller arasında yalnız parmak uçları hareket eder."
+    },
+    {
+      "en": "Count the eighths \"1 & 2 &\": four notes on each string take two beats.",
+      "tr": "Sekizlikleri \"1 ve 2 ve\" diye say: her teldeki dört nota iki vuruş sürer."
+    },
+    {
+      "en": "While finger 4 plays, get finger 1 ready above the next string.",
+      "tr": "4. parmak çalarken 1. parmağı sonraki telin üstünde hazırla."
+    },
+    {
+      "en": "Six strings in a row tire finger 4. Shake the hand loose after each set; if the thumb or wrist tightens, lower the tempo.",
+      "tr": "Altı tel üst üste 4. parmağı yorar. Her setten sonra eli silkeleyip gevşet; başparmak ya da bilek gerilirse tempoyu düşür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Frets 1–4 on strings 6 to 1 (F2 up to G♯4), eighth notes with a click at ♩=60 and ♩=40.",
+      "tr": "6.'dan 1. tele 1.–4. perdeler (Fa2'den Sol♯4'e), klikle sekizlik; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the ascending line in eighth notes with the click. Start at ♩=50 and move up in steps of 5 to ♩=60. Play three sets, with a short rest between them.",
+      "tr": "Çıkıcı diziyi klikle sekizlik olarak çal. ♩=50'den başla, 5'er adımla ♩=60'a çık. Aralarında kısa mola vererek üç set çal."
+    },
+    "sequence": "F2 F♯2 G2 G♯2 A♯2 B2 C3 C♯3 | D♯3 E3 F3 F♯3 G♯3 A3 A♯3 B3 | C4 C♯4 D4 D♯4 F4 F♯4 G4 G♯4",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The string change is late. Prepare finger 1 over the next string while finger 4 plays.",
+        "tr": "Tel geçişi geç kalıyor. 4. parmak çalarken 1. parmağı sonraki telin üstünde hazırla."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "Finger 4 dropped back to fret 3. Keep the hand open so each finger stays on its fret.",
+        "tr": "4. parmak 3. perdeye geri düştü. Her parmak kendi perdesinde kalsın diye eli açık tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only strings 6 to 4 first, or use quarter notes at ♩=50.",
+    "tr": "Önce yalnız 6.–4. telleri çal ya da ♩=50'de dörtlük kullan."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

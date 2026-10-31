@@ -1,0 +1,87 @@
+{
+  "id": "gtr-s1-m01-04",
+  "title": { "en": "Standard tuning with the tuner", "tr": "Akort aletiyle standart akort" },
+  "goal": {
+    "en": "Tunes the six strings to E2 A2 D3 G3 B3 E4 within 5 cents with the tuner.",
+    "tr": "Akort aletiyle altı teli Mi2 La2 Re3 Sol3 Si3 Mi4'e 5 cent içinde akort eder."
+  },
+  "explanation": [
+    {
+      "en": "Standard tuning from string 6 to 1 is E2 A2 D3 G3 B3 E4. Check both the letter and the octave on the tuner.",
+      "tr": "6. telden 1. tele standart akort Mi2 La2 Re3 Sol3 Si3 Mi4'tür. Akort aletinde hem notayı hem oktavı kontrol et."
+    },
+    {
+      "en": "Follow one string up to the headstock with your finger to find its peg before you turn anything.",
+      "tr": "Hiçbir şeyi çevirmeden önce teli parmağınla başa kadar izle ve burgusunu bul."
+    },
+    {
+      "en": "Pluck the string softly and wait until the display is steady. Then turn the peg a little at a time.",
+      "tr": "Teli hafifçe çek ve gösterge sabitlenene kadar bekle. Sonra burguyu azar azar çevir."
+    },
+    {
+      "en": "If the note is low, tighten a little; if it is high, loosen past it and come back up to the note.",
+      "tr": "Nota alçaksa biraz sık; yüksekse notanın biraz altına gevşet ve yeniden notaya çık."
+    },
+    {
+      "en": "After the first round, check all six strings again. Tuning one string can move the others slightly.",
+      "tr": "İlk turdan sonra altı teli yeniden kontrol et. Bir teli akort etmek diğerlerini biraz kaydırabilir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each open-string target, E2 A2 D3 G3 B3 E4, played on demand, string-model synthesis.",
+      "tr": "Her açık tel hedefi, Mi2 La2 Re3 Sol3 Si3 Mi4, istendiğinde çalınır; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A1"],
+    "task": {
+      "en": "Tune the strings in order from 6 to 1. For each string, pluck it and adjust until the tuner holds steady within 5 cents for at least 1 second.",
+      "tr": "Telleri 6'dan 1'e sırayla akort et. Her teli çek ve akort aleti en az 1 saniye 5 cent içinde sabit kalana kadar ayarla."
+    },
+    "sequence": "E2 A2 D3 G3 B3 E4",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All six strings within 5 cents, each steady for at least 1 second.",
+        "tr": "Altı telin hepsi 5 cent içinde, her biri en az 1 saniye sabit."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the string is more than 5 cents low.", "tr": "Farklı nota: tel 5 centten fazla alçak." },
+      "fix": {
+        "en": "Tighten the peg a very small amount, pluck again and wait for a steady display.",
+        "tr": "Burguyu çok az sık, teli yeniden çek ve göstergenin sabitlenmesini bekle."
+      }
+    },
+    {
+      "error": { "en": "Different note: an octave away from the target.", "tr": "Farklı nota: hedeften bir oktav uzakta." },
+      "fix": {
+        "en": "Stop turning. Check that you are on the right peg and compare with the reference note; ask an experienced player if the string feels very tight or very loose.",
+        "tr": "Çevirmeyi bırak. Doğru burguda olduğunu kontrol et ve referans notayla karşılaştır; tel çok gergin ya da çok gevşek geliyorsa deneyimli birine danış."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Pluck one string only, a little firmer, and keep the phone close to the guitar in a quiet room.",
+        "tr": "Yalnız bir teli biraz daha net çek ve telefonu sessiz bir odada gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Tune only string 6 and string 1 first, then the four middle strings in a second short round.",
+    "tr": "Önce yalnız 6. ve 1. teli akort et; ortadaki dört teli ikinci kısa turda yap."
+  },
+  "legacy": "V: guitar.journey.start.tuning",
+  "minutes": 10,
+  "expertPending": true
+}

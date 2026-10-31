@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s2-m09-10",
+  "title": { "en": "Unison and octave checks", "tr": "Unison ve oktav kontrolü" },
+  "goal": {
+    "en": "Compares each open string with its fret-12 octave and keeps the difference within 10 cents.",
+    "tr": "Her açık teli 12. perdedeki oktavıyla karşılaştırır ve farkı 10 cent içinde tutar."
+  },
+  "explanation": [
+    {
+      "en": "A unison is two sounds on the same pitch. An octave is the same note one register higher.",
+      "tr": "Unison, aynı perdedeki iki sestir. Oktav, aynı notanın bir bölge yukarıdaki hâlidir."
+    },
+    {
+      "en": "Fret 12 halves the string, so the note there is one octave above the open string: E2 open, E3 at fret 12.",
+      "tr": "12. perde teli ikiye böler; oradaki nota açık telin bir oktav üstüdür: açık Mi2, 12. perdede Mi3."
+    },
+    {
+      "en": "Play the open string, then fret 12. The app shows how many cents the octave is above or below a perfect octave.",
+      "tr": "Önce açık teli, sonra 12. perdeyi çal. Uygulama oktavın tam oktavdan kaç cent yukarıda ya da aşağıda olduğunu gösterir."
+    },
+    {
+      "en": "A high fret-12 note often means too much pressure or a sideways push. Press lightly, straight down, just behind the fret.",
+      "tr": "12. perdedeki nota yüksekse çoğu zaman fazla baskı ya da yana itme vardır. Hafif, düz ve perdenin hemen arkasına bas."
+    },
+    {
+      "en": "If one string stays off with a light press, the guitar may need a setup. Ask an experienced person; do not force the string.",
+      "tr": "Hafif basışta bile bir tel farklı kalıyorsa gitarın ayara ihtiyacı olabilir. Deneyimli birine sor; teli zorlama."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each open string followed by its exact octave, string-model synthesis.",
+      "tr": "Her açık tel ve ardından tam oktavı; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A1", "A2"],
+    "task": {
+      "en": "Tune first. Then, string by string from 6 to 1, play the open string and let it ring, then play fret 12 on the same string. Read the cent difference after each pair.",
+      "tr": "Önce akort et. Sonra 6. telden 1. tele, tel tel: açık teli çal ve çınlat, ardından aynı telde 12. perdeyi çal. Her çiftten sonra cent farkını oku."
+    },
+    "sequence": "E2 E3 | A2 A3 | D3 D4 | G3 G4 | B3 B4 | E4 E5",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "On all 6 strings, the fret-12 note is within 10 cents of a perfect octave above the open string.",
+        "tr": "6 telin hepsinde 12. perdedeki nota, açık telin tam oktavına 10 cent içinde yakındır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I pressed fret 12 lightly and straight down.", "tr": "12. perdeye hafif ve düz bastım." },
+    { "en": "Each fret-12 note sounded like its open string, only higher.", "tr": "12. perdedeki her nota açık telinin daha tiz hâli gibi duyuldu." },
+    { "en": "I tuned before I compared.", "tr": "Karşılaştırmadan önce akort ettim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the octave is more than 10 cents high.", "tr": "Farklı nota: oktav 10 centten fazla yüksek." },
+      "fix": { "en": "Press with less force and do not push the string sideways. Measure again.", "tr": "Daha az kuvvetle bas ve teli yana itme. Yeniden ölç." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Let the open string ring alone for a second before fret 12; keep other strings quiet.", "tr": "12. perdeden önce açık tel bir saniye tek başına çınlasın; diğer telleri sessiz tut." }
+    }
+  ],
+  "adaptation": {
+    "en": "Check strings 6, 5 and 4 in one session and strings 3, 2 and 1 in another.",
+    "tr": "6., 5. ve 4. telleri bir oturumda, 3., 2. ve 1. telleri başka bir oturumda kontrol et."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

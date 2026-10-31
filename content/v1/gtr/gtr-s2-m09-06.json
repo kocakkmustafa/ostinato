@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s2-m09-06",
+  "title": { "en": "Sharps, flats and enharmonics", "tr": "Diyez, bemol ve enharmonik" },
+  "goal": {
+    "en": "Matches sharp and flat names to the same fret and plays them.",
+    "tr": "Diyez ve bemol adlarını aynı perdeyle eşleştirir ve çalar."
+  },
+  "explanation": [
+    {
+      "en": "A sharp (♯) raises a note one fret. A flat (♭) lowers it one fret.",
+      "tr": "Diyez (♯) notayı bir perde yükseltir. Bemol (♭) bir perde alçaltır."
+    },
+    {
+      "en": "The fret between F and G has two names: F♯ and G♭. Two names for one sound are called enharmonic.",
+      "tr": "Fa ile Sol arasındaki perdenin iki adı vardır: Fa♯ ve Sol♭. Bir sesin iki adına enharmonik denir."
+    },
+    {
+      "en": "E–F and B–C have no fret between them. So E♯ sounds as F and C♭ as B.",
+      "tr": "Mi–Fa ve Si–Do arasında perde yoktur. Bu yüzden Mi♯, Fa gibi; Do♭, Si gibi çalar."
+    },
+    {
+      "en": "Which name to use depends on the key. G major writes F♯; F major writes B♭.",
+      "tr": "Hangi adın kullanılacağı tona bağlıdır. Sol majör Fa♯ yazar; Fa majör Si♭ yazar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each of the six notes is played once after your attempt, string-model synthesis.",
+      "tr": "Altı notanın her biri denemenden sonra bir kez çalınır; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Part 1: answer 6 questions, matching a sharp or flat name to its fret and its other name. Part 2: play F♯2, B♭2, C♯3, E♭3, G♯3 and D♭4 in first position.",
+      "tr": "1. bölüm: 6 soruyu cevapla; diyez ya da bemol adını perdesiyle ve öbür adıyla eşleştir. 2. bölüm: birinci pozisyonda Fa♯2, Si♭2, Do♯3, Mi♭3, Sol♯3 ve Re♭4'ü çal."
+    },
+    "sequence": "F♯2 B♭2 C♯3 E♭3 G♯3 D♭4",
+    "pass": { "levelDefault": true, "minCorrect": 5 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 6,
+      "params": {
+        "set": "enharmonic_names",
+        "diagram": "fretboard",
+        "strings": [6, 5, 4, 3, 2],
+        "frets": [0, 4]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found each sharp one fret above its letter.", "tr": "Her diyezi harfinin bir perde yukarısında buldum." },
+    { "en": "I found each flat one fret below its letter.", "tr": "Her bemolü harfinin bir perde aşağısında buldum." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "A flat was played as a sharp. Flat goes one fret toward the nut.", "tr": "Bemol diyez gibi çalındı. Bemol bir perde üst eşiğe doğru gider." }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "A sharp was played as the plain letter. Move one fret toward the body.", "tr": "Diyez, yalın harf gibi çalındı. Bir perde gövdeye doğru kay." }
+    }
+  ],
+  "adaptation": {
+    "en": "Do the six notes one at a time: find the letter first, then move one fret.",
+    "tr": "Altı notayı tek tek yap: önce harfi bul, sonra bir perde kay."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

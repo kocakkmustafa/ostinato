@@ -1,0 +1,75 @@
+{
+  "id": "gtr-s1-m02-04",
+  "title": { "en": "Notes on strings four and three", "tr": "Dördüncü ve üçüncü tel notaları" },
+  "goal": {
+    "en": "Plays D3, E3, F3 on string 4 and G3, A3 on string 3 in a two-bar line at ♩=60.",
+    "tr": "4. telde Re3, Mi3, Fa3'ü ve 3. telde Sol3, La3'ü iki ölçülük dizide ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "String 4 open is D3. Fret 2 is E3 with finger 2; fret 3 is F3 with finger 3.",
+      "tr": "4. tel açıkken Re3'tür. 2. perde 2. parmakla Mi3, 3. perde 3. parmakla Fa3'tür."
+    },
+    {
+      "en": "String 3 open is G3. Fret 2 is A3 with finger 2.",
+      "tr": "3. tel açıkken Sol3'tür. 2. perde 2. parmakla La3'tür."
+    },
+    {
+      "en": "Play each string's notes on their own first: D E F E, then G A G.",
+      "tr": "Önce her telin notalarını ayrı çal: Re Mi Fa Mi, sonra Sol La Sol."
+    },
+    {
+      "en": "Then join them. Keep one steady beat through the string change; the change must not take extra time.",
+      "tr": "Sonra birleştir. Tel geçişinde tek ve düzenli vuruşu koru; geçiş fazladan zaman almasın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "D3 E3 F3 E3 | G3 A3 G3 D3 twice, at ♩=60 and at ♩=40, string-model synthesis.",
+      "tr": "Re3 Mi3 Fa3 Mi3 | Sol3 La3 Sol3 Re3 iki kez, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the two-bar line twice along with the click. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "İki ölçülük diziyi klikle birlikte iki kez çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "D3 E3 F3 E3 | G3 A3 G3 D3 | D3 E3 F3 E3 | G3 A3 G3 D3",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "The string change did not break the beat.", "tr": "Tel geçişi vuruşu bozmadı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The string change takes too long. Loop E3 to G3 slowly until the picking hand finds string 3 without looking.",
+        "tr": "Tel geçişi uzun sürüyor. Sağ el 3. teli bakmadan bulana kadar Mi3'ten Sol3'e geçişi yavaşça döngüle."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "E3 is at fret 2. Finger 3 may be landing at fret 3 too early; place finger 2 first.",
+        "tr": "Mi3 2. perdededir. 3. parmak 3. perdeye erken iniyor olabilir; önce 2. parmağı koy."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play D3 E3 and open G3 only at ♩=40, then add F3 and A3.",
+    "tr": "♩=40'ta yalnız Re3, Mi3 ve açık Sol3'ü çal, sonra Fa3 ve La3'ü ekle."
+  },
+  "legacy": "R: guitar.journey.notes.middle_strings",
+  "minutes": 12,
+  "expertPending": true
+}

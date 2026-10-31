@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s2-m07-08",
+  "title": { "en": "Reading a chord chart", "tr": "Akor çizelgesi okuma" },
+  "goal": {
+    "en": "Follows repeat signs and 1st and 2nd endings in a chord chart and plays its 8 bars at ♩=70.",
+    "tr": "Akor çizelgesinde tekrar işaretlerini ve 1. ve 2. sonları izler; çizelgenin 8 ölçüsünü ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "A chord chart shows one bar per box and the chord names above the beats.",
+      "tr": "Akor çizelgesi her ölçüyü bir kutuda, akor adlarını vuruşların üstünde gösterir."
+    },
+    {
+      "en": "Repeat signs |: and :| mark a section that you play twice.",
+      "tr": "Tekrar işaretleri |: ve :| iki kez çalınan bölümü gösterir."
+    },
+    {
+      "en": "1st and 2nd endings: play the 1st ending the first time. The second time, skip it and go straight to the 2nd ending.",
+      "tr": "1. ve 2. son: ilk seferde 1. sonu çal. İkinci seferde onu atla ve doğrudan 2. sona geç."
+    },
+    {
+      "en": "Before you play, trace the path with your finger and count the bars. This chart has 5 written bars and 8 played bars.",
+      "tr": "Çalmadan önce yolu parmağınla izle ve ölçüleri say. Bu çizelgede 5 yazılı, 8 çalınan ölçü var."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The chart played in full, G–Em–C–D, then G–Em–C–G, four down strums per bar over an original loop at ♩=70 and ♩=50.",
+      "tr": "Çizelge baştan sona: G–Em–C–D, sonra G–Em–C–G; ölçü başına dört aşağı vuruş, ♩=70 ve ♩=50'de özgün döngü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "First answer 4 on-screen questions about the chart symbols. Then play the chart |: G | Em | C | 1. D :| 2. G || with the accompaniment, four down strums per bar. Headphones help the microphone hear only your guitar.",
+      "tr": "Önce çizelge işaretleriyle ilgili ekrandaki 4 soruyu yanıtla. Sonra |: G | Em | C | 1. D :| 2. G || çizelgesini eşlikle çal; her ölçüde dört aşağı vuruş. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: G | Em | C | D | G | Em | C | G",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 4,
+      "params": { "set": ["repeat_start", "repeat_end", "first_ending", "second_ending", "double_bar_line"] }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I played D in bar 4 and G in bar 8.", "tr": "4. ölçüde D, 8. ölçüde G çaldım." },
+    { "en": "I counted 8 played bars.", "tr": "Çalınan 8 ölçüyü saydım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord in bar 8.", "tr": "8. ölçüde farklı akor." },
+      "fix": {
+        "en": "The second time, skip the 1st ending and play the 2nd ending: G, not D.",
+        "tr": "İkinci seferde 1. sonu atla ve 2. sonu çal: D değil, G."
+      }
+    },
+    {
+      "error": { "en": "Different answer: 1st and 2nd endings swapped.", "tr": "Farklı cevap: 1. ve 2. son yer değiştirdi." },
+      "fix": {
+        "en": "The 1st ending sits under the bracket marked 1 and ends with :|. It is played only the first time.",
+        "tr": "1. son, 1 yazan parantezin altındadır ve :| ile biter. Yalnız ilk seferde çalınır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Say the chord names aloud along the path once, then play at ♩=55.",
+    "tr": "Akor adlarını yol boyunca bir kez sesli söyle, sonra ♩=55'te çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

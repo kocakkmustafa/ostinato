@@ -1,0 +1,73 @@
+{
+  "id": "gtr-s2-m09-05",
+  "title": { "en": "G major and the changed note", "tr": "Sol majör ve değişen ses" },
+  "goal": {
+    "en": "Plays G major from G2 to G4 and back at ♩=70 with F♯ in place of F.",
+    "tr": "Sol majörü Sol2'den Sol4'e çıkıp iner, Fa yerine Fa♯ ile ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "G major uses the same notes as C major with one change: F becomes F♯.",
+      "tr": "Sol majör Do majörle aynı notaları kullanır, tek fark var: Fa, Fa♯ olur."
+    },
+    {
+      "en": "Low octave: G2 6/3, A2 5/0, B2 5/2, C3 5/3, D3 4/0, E3 4/2, F♯3 4/4, G3 3/0. Play F♯3 with finger 4.",
+      "tr": "Pes oktav: Sol2 6/3, La2 5/0, Si2 5/2, Do3 5/3, Re3 4/0, Mi3 4/2, Fa♯3 4/4, Sol3 3/0. Fa♯3'ü 4. parmakla bas."
+    },
+    {
+      "en": "High octave: A3 3/2, B3 2/0, C4 2/1, D4 2/3, E4 1/0, F♯4 1/2, G4 1/3.",
+      "tr": "Tiz oktav: La3 3/2, Si3 2/0, Do4 2/1, Re4 2/3, Mi4 1/0, Fa♯4 1/2, Sol4 1/3."
+    },
+    {
+      "en": "Habit from C major pulls you to F. Before each F♯, think 'one fret higher'.",
+      "tr": "Do majör alışkanlığı seni Fa'ya çeker. Her Fa♯'den önce 'bir perde yukarı' diye düşün."
+    },
+    {
+      "en": "Play F♯4 then F4, then return to F♯4 and G4. Hear how F♯ leans into G.",
+      "tr": "Önce Fa♯4, sonra Fa4 çal; ardından Fa♯4 ve Sol4'e dön. Fa♯'nin Sol'e nasıl yaslandığını dinle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "G2 up to G4 and back in quarter notes, at ♩=70 and ♩=45, string-model synthesis.",
+      "tr": "Sol2'den Sol4'e çıkış ve iniş, dörtlüklerle, ♩=70 ve ♩=45; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the scale up from G2 to G4 and back down to G2 in quarter notes with the click. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "Gamı Sol2'den Sol4'e çık ve Sol2'ye in; klikle birlikte dörtlüklerle çal. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "G2 A2 B2 C3 | D3 E3 F♯3 G3 | A3 B3 C4 D4 | E4 F♯4 G4 F♯4 | E4 D4 C4 B3 | A3 G3 F♯3 E3 | D3 C3 B2 A2 | G2",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I played F♯ every time, never F.", "tr": "Her seferinde Fa♯ çaldım, hiç Fa çalmadım." },
+    { "en": "Finger 4 reached fret 4 without twisting my wrist.", "tr": "4. parmak bileğimi bükmeden 4. perdeye ulaştı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "That is F instead of F♯. Use 4/4 and 1/2 for the two F♯ notes.", "tr": "Fa♯ yerine Fa çaldın. İki Fa♯ için 4/4 ve 1/2'yi kullan." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Finger 4 is pressing lightly. Bring it close behind fret 4 and keep it curved.", "tr": "4. parmak hafif basıyor. Onu 4. perdenin hemen arkasına getir ve kıvrık tut." }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop E4 F♯4 G4 as a short cell at ♩=50, then play the full scale.",
+    "tr": "Mi4 Fa♯4 Sol4'ü kısa hücre olarak ♩=50'de döngüle, sonra tam gamı çal."
+  },
+  "legacy": "R: guitar.journey.melody.g_major",
+  "minutes": 12,
+  "expertPending": true
+}

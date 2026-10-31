@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s2-m06-06",
+  "title": { "en": "Stop a chord cleanly", "tr": "Akoru temiz sustur" },
+  "goal": {
+    "en": "Stops a ringing chord fully at the start of each rest.",
+    "tr": "Çalan akoru her susun başında tamamen susturur."
+  },
+  "explanation": [
+    {
+      "en": "A clean stop ends every string at the same moment, exactly where the rest begins.",
+      "tr": "Temiz susturma, bütün telleri aynı anda, susun başladığı yerde bitirir."
+    },
+    {
+      "en": "For a fretted chord, ease the fretting fingers off the frets but keep them touching the strings.",
+      "tr": "Basılı akorda sol el parmaklarının baskısını gevşet ama tellere değmeye devam etsinler."
+    },
+    {
+      "en": "Open strings keep ringing. Lay the side of your strumming hand on them at the same time.",
+      "tr": "Açık teller çalmaya devam eder. Aynı anda sağ elinin yanını üstlerine koy."
+    },
+    {
+      "en": "Do not press hard. A light touch stops the sound.",
+      "tr": "Sert bastırma. Hafif bir dokunuş sesi durdurur."
+    },
+    {
+      "en": "Palm muting is different: the palm rests near the bridge while you play, so the note is short but still heard. Here you stop the sound fully.",
+      "tr": "Avuçla kısma farklıdır: avuç çalarken köprü yanında durur, nota kısa ama duyulur. Burada sesi tamamen durdurursun."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Am and G with full stops on the rests, at ♩=70 and ♩=45, with click.",
+      "tr": "Suslarda tam susturmalı Am ve G, ♩=70 ve ♩=45, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "With the click at ♩=70, strum Am on beat 1 and stop it on beat 3 for two bars. Then on G: strum on 1 and 3 and stop on 2 and 4 for one bar, then strum on 1 and stop on 3.",
+      "tr": "Klik ♩=70'teyken iki ölçü Am'i 1. vuruşta çal, 3. vuruşta sustur. Sonra G'de: bir ölçü 1 ve 3'te çal, 2 ve 4'te sustur; ardından 1'de çal, 3'te sustur."
+    },
+    "sequence": "4/4: Am h hr | Am h hr | G q qr q qr | G h hr",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 2 timing, and at each rest the sound falls by at least 20 dB within 100 ms.",
+        "tr": "Seviye 2 zamanlama ölçütü; her susta ses 100 ms içinde en az 20 dB düşer."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "No string kept ringing into a rest.", "tr": "Hiçbir tel susun içine taşmadı." },
+    { "en": "I kept counting through the rests.", "tr": "Suslarda da saymayı sürdürdüm." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": { "en": "Usually the open strings. Bring the strumming-hand side down at the same moment as you ease the fretting fingers.", "tr": "Çoğu zaman açık teller. Sol el parmaklarını gevşettiğin anda sağ elinin yanını da tellere indir." }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The stop came after the rest began. Start moving both hands on the 'and' before it.", "tr": "Susturma sus başladıktan sonra geldi. İki eli de ondan önceki 've'de harekete geçir." }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise the stop on open strings with the strumming hand only, then add the fretting hand.",
+    "tr": "Susturmayı önce açık tellerde yalnız sağ elle çalış, sonra sol eli ekle."
+  },
+  "legacy": "R: guitar.journey.strum.mute",
+  "minutes": 12,
+  "expertPending": true
+}

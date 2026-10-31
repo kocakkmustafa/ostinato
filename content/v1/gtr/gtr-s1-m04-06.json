@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s1-m04-06",
+  "title": { "en": "C major", "tr": "Do majör" },
+  "goal": {
+    "en": "Plays C cleanly on five strings, with open G3 and E4 ringing.",
+    "tr": "C'yi açık Sol3 ve Mi4 de çalarak beş telde temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "C: x-3-2-0-1-0. Finger 3 on string 5, fret 3; finger 2 on string 4, fret 2; finger 1 on string 2, fret 1.",
+      "tr": "C: x-3-2-0-1-0. 3. parmak 5. telin 3. perdesinde, 2. parmak 4. telin 2. perdesinde, 1. parmak 2. telin 1. perdesinde."
+    },
+    {
+      "en": "Strings 3 and 1 stay open: G3 and E4. They sit between fretted notes, so every finger must stand on its tip.",
+      "tr": "3. ve 1. tel açık kalır: Sol3 ve Mi4. Basılan notaların arasında durdukları için her parmak ucunun üstünde durmalı."
+    },
+    {
+      "en": "Start the strum on string 5. String 6 is not played.",
+      "tr": "Vuruşa 5. telden başla. 6. tel çalınmaz."
+    },
+    {
+      "en": "C spreads the hand over three frets. Let the thumb sit lower behind the neck instead of squeezing.",
+      "tr": "C eli üç perdeye yayar. Sıkmak yerine başparmağı sapın arkasında daha aşağıda tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C strummed once from string 5, then plucked string by string from 5 to 1, slowly.",
+      "tr": "C 5. telden bir kez vurulur, sonra 5'ten 1'e tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum C four times from string 5, in your own time. Then pluck the chord string by string; the app checks each string.",
+      "tr": "C'yi kendi hızında 5. telden dört kez vur. Sonra akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "C | C | C | C",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "Open strings 3 and 1 rang.", "tr": "Açık 3. ve 1. tel çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 2 on string 4 is leaning on string 3. Arch it so the open G rings.",
+        "tr": "4. teldeki 2. parmak 3. tele yaslanıyor. Açık Sol çalsın diye parmağı kavisle."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 1 is flat. Stand it on its tip so string 1 is free.",
+        "tr": "1. parmak yatık. 1. tel serbest kalsın diye ucunun üstüne dik."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the small C (x-x-x-0-1-0, finger 1 only) first, then add fingers 2 and 3 one at a time.",
+    "tr": "Önce küçük C'yi (x-x-x-0-1-0, yalnız 1. parmak) çal, sonra 2. ve 3. parmağı tek tek ekle."
+  },
+  "legacy": "V: guitar.journey.chords.c_dm",
+  "minutes": 12,
+  "expertPending": true
+}

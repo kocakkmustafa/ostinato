@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s2-m07-05",
+  "title": { "en": "F with a partial barre", "tr": "Kısmi barre ile Fa" },
+  "goal": {
+    "en": "Plays F on the top four strings with a two-string barre, every string ringing.",
+    "tr": "Üst dört telde iki tellik barre ile F'yi bütün teller çalarak çalar."
+  },
+  "explanation": [
+    {
+      "en": "F (4 strings): x-x-3-2-1-1. Finger 1 lies flat across strings 2 and 1 at fret 1.",
+      "tr": "F (4 tel): x-x-3-2-1-1. 1. parmak 1. perdede 2. ve 1. telin üstüne düz yatar."
+    },
+    {
+      "en": "Roll finger 1 slightly onto its bony side, just behind the fret. Use the weight of the arm, not a thumb squeeze.",
+      "tr": "1. parmağı hafifçe kemikli yanına yatır, perdenin hemen arkasına koy. Başparmakla sıkma; kolun ağırlığını kullan."
+    },
+    {
+      "en": "Add finger 2 on string 3, fret 2, and finger 3 on string 4, fret 3.",
+      "tr": "2. parmağı 3. tel 2. perdeye, 3. parmağı 4. tel 3. perdeye ekle."
+    },
+    {
+      "en": "Check strings 2 and 1 first; they show whether the barre works.",
+      "tr": "Önce 2. ve 1. teli kontrol et; barre'ın oturup oturmadığını bunlar gösterir."
+    },
+    {
+      "en": "If the thumb or wrist feels strained, release the hand and use Fmaj7 for now.",
+      "tr": "Başparmak ya da bilekte gerilim hissedersen eli bırak ve şimdilik Fmaj7 kullan."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "F on four strings (F3 A3 C4 F4), strummed and then plucked string by string.",
+      "tr": "Dört telde F (Fa3 La3 Do4 Fa4), önce taranır, sonra tel tel çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum F four times. Then pluck the chord string by string; the app checks each string. Release the hand between tries and stop after four sets.",
+      "tr": "F'yi dört kez tara. Sonra akoru tel tel çek; uygulama her teli kontrol eder. Denemeler arasında eli bırak ve dört setten sonra dur."
+    },
+    "sequence": "F F F F",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My thumb rested behind the neck without squeezing.", "tr": "Başparmağım sıkmadan sapın arkasında durdu." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "Move the barre closer to the fret and roll finger 1 a little onto its side. Do not press harder.",
+        "tr": "Barre'ı perdeye yaklaştır ve 1. parmağı biraz yanına yatır. Daha sert bastırma."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Strings 2 and 1 are muffled under the finger crease. Slide finger 1 slightly up or down until both ring.",
+        "tr": "2. ve 1. tel parmak kıvrımının altında boğuluyor. İkisi de çalana kadar 1. parmağı hafifçe yukarı ya da aşağı kaydır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Barre only strings 2 and 1 at fret 1 and pluck them, then add fingers 2 and 3. Fmaj7 can stand in for F meanwhile.",
+    "tr": "1. perdede yalnız 2. ve 1. teli barre yap ve çek, sonra 2. ve 3. parmağı ekle. Bu arada F yerine Fmaj7 kullanılabilir."
+  },
+  "legacy": "V: guitar.journey.intermediate.partial_barre",
+  "minutes": 12,
+  "expertPending": true
+}
