@@ -17,9 +17,18 @@ import '../dsp/fft.dart';
 /// the same clicks can keep playing during a lesson without being counted as
 /// the student's notes (E49 arm M1).
 final class LoopbackLatencyEstimator {
-  const LoopbackLatencyEstimator({this.minCorrelation = 0.3});
+  const LoopbackLatencyEstimator(
+      {this.minCorrelation = 0.3, this.firstArrivalRatio});
 
   final double minCorrelation;
+
+  /// E50: when set, the lag is the **earliest** one whose raw (unnormalised)
+  /// correlation reaches this share of the window's raw maximum, instead of
+  /// the normalised maximum. Normalised correlation ignores amplitude, so in
+  /// a reverberant room it can lock onto a reflection (E49: 97 % of the Q
+  /// errors were late). The heard check still uses [minCorrelation] on the
+  /// chosen lag's normalised value.
+  final double? firstArrivalRatio;
 
   /// Median lag in samples, or null when fewer than half the clicks were
   /// heard.
@@ -51,13 +60,36 @@ final class LoopbackLatencyEstimator {
       var best = -1.0;
       var bestLag = -1;
       final n = template.length;
-      for (var i = 0; i + n <= seg.length; i++) {
+      double norm(int i) {
         final e = prefix[i + n] - prefix[i];
-        if (e <= 0) continue;
-        final r = conv[i + n - 1] / math.sqrt(e * tEnergy);
-        if (r > best) {
-          best = r;
-          bestLag = a + i - c;
+        return e <= 0 ? 0 : conv[i + n - 1] / math.sqrt(e * tEnergy);
+      }
+
+      final ratio = firstArrivalRatio;
+      if (ratio == null) {
+        for (var i = 0; i + n <= seg.length; i++) {
+          final r = norm(i);
+          if (r > best) {
+            best = r;
+            bestLag = a + i - c;
+          }
+        }
+      } else {
+        var rawMax = 0.0;
+        for (var i = 0; i + n <= seg.length; i++) {
+          rawMax = math.max(rawMax, conv[i + n - 1]);
+        }
+        for (var i = 0; rawMax > 0 && i + n <= seg.length; i++) {
+          if (conv[i + n - 1] < ratio * rawMax) continue;
+          // Earliest qualifying lag; the arrival's peak lies within one
+          // template length (the burst's correlation main lobe).
+          var j = i;
+          for (var k = i + 1; k <= i + n && k + n <= seg.length; k++) {
+            if (conv[k + n - 1] > conv[j + n - 1]) j = k;
+          }
+          best = norm(j);
+          bestLag = a + j - c;
+          break;
         }
       }
       if (bestLag >= 0 && best >= minCorrelation) lags.add(bestLag);

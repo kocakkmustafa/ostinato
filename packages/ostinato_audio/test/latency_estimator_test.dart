@@ -54,4 +54,18 @@ void main() {
         template: click, clickTimes: clicks, maxLagSamples: sr ~/ 2)!;
     expect(e.latencySamples, lat);
   });
+
+  test('first-arrival rule prefers the direct click over a cleaner echo', () {
+    final lat = 60 * sr ~/ 1000;
+    final y = recording(lat, noise: 0.002);
+    // A weaker but clean reflection 25 ms later.
+    for (final c in clicks) {
+      for (var i = 0; i < click.length; i++) {
+        y[c + lat + 1200 + i] += 0.12 * click[i];
+      }
+    }
+    final e = const LoopbackLatencyEstimator(firstArrivalRatio: 0.5).estimate(
+        y, template: click, clickTimes: clicks, maxLagSamples: sr ~/ 2)!;
+    expect(e.latencySamples, lat);
+  });
 }

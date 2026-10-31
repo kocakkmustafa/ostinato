@@ -47,6 +47,9 @@ void main(List<String> args) {
   final beats = spec['beats'] as int;
   final bleedDb = (spec['clickBleedDb'] as num).toDouble();
   final deltaUs = spec['detectorOffsetUs'] as int? ?? 0;
+  // E50: estimator options (null = E49 behaviour).
+  final estimator = LoopbackLatencyEstimator(
+      firstArrivalRatio: (spec['firstArrivalRatio'] as num?)?.toDouble());
   final sw = Stopwatch()..start();
   var job = 0, rows = 0;
   for (final arm in arms) {
@@ -71,6 +74,7 @@ void main(List<String> args) {
                 beats: beats,
                 bleedDb: bleedDb,
                 deltaUs: deltaUs,
+                estimator: estimator,
                 seed: seed);
             out.writeln(jsonEncode(row));
             rows++;
@@ -97,6 +101,7 @@ Map<String, Object?> trial({
   required int beats,
   required double bleedDb,
   required int deltaUs,
+  required LoopbackLatencyEstimator estimator,
   required int seed,
 }) {
   final rng = math.Random(seed * 7919 + latMs * 31 + betaMs);
@@ -111,7 +116,7 @@ Map<String, Object?> trial({
     _add(cal, click, t + lat, 0.25);
   }
   final calRec = _channel(cal, sr, cond, irs, seed);
-  final est = const LoopbackLatencyEstimator().estimate(calRec,
+  final est = estimator.estimate(calRec,
       template: click, clickTimes: calTimes, maxLagSamples: sr ~/ 2);
   final latHat = est?.latencySamples;
 
