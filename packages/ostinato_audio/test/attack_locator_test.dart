@@ -96,4 +96,33 @@ void main() {
             requiredSamples: sr),
         isNull);
   });
+
+  test('a note-off is not an attack: the note from index 0 is measured', () {
+    // E39: a damping transient at 3 s is spectral change, and "last usable"
+    // used to choose the silence after it.
+    final z = SyntheticString.pluck(
+        f0Hz: hz(64), sampleRate: sr, seconds: 4, seed: 7, peak: 0.4);
+    final rng = math.Random(7);
+    for (var k = 3 * sr; k < z.length; k++) {
+      z[k] *= math.exp(-(k - 3 * sr) / (0.03 * sr));
+      if (k < 3 * sr + 480) z[k] += 0.02 * (rng.nextDouble() * 2 - 1);
+    }
+    final q = PhoneChannel.apply(
+        z,
+        sr,
+        const PhoneChannelConfig(
+            noise: ChannelNoise.pink, snrDb: 35, lowCutHz: 100, agc: true),
+        seed: 7);
+    for (final signal in [z, q]) {
+      final attack = const AttackLocator()
+          .lastUsableAttack(signal, sr, requiredSamples: (0.28 * sr).round());
+      expect(attack, lessThan(0.05 * sr));
+    }
+    expect(AttackLocator.levelRiseDb(z, sr, 3 * sr), lessThan(-10));
+    expect(
+        GuitarNoteVerifier()
+            .verify(z, sampleRate: sr, expectedMidi: 64)
+            .verdict,
+        NoteVerdict.correct);
+  });
 }
