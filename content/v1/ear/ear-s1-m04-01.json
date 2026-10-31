@@ -1,0 +1,72 @@
+{
+  "id": "ear-s1-m04-01",
+  "title": { "en": "Lines and spaces", "tr": "Çizgiler ve aralıklar" },
+  "goal": { "en": "Names positions on the staff.", "tr": "Portedeki konumları adlandırır." },
+  "explanation": [
+    {
+      "en": "The staff has five lines and four spaces, counted from the bottom up.",
+      "tr": "Portede beş çizgi ve dört aralık vardır; aşağıdan yukarıya sayılır."
+    },
+    {
+      "en": "A note sits either on a line, with the line through its head, or in a space between two lines.",
+      "tr": "Nota ya çizgidedir, çizgi başının ortasından geçer, ya da iki çizgi arasındaki aralıktadır."
+    },
+    {
+      "en": "The higher a note sits on the staff, the higher it sounds.",
+      "tr": "Nota portede ne kadar yukarıdaysa o kadar yüksek ses verir."
+    },
+    {
+      "en": "Steps go line, space, line, space: each step up is the next note.",
+      "tr": "Basamaklar çizgi, aralık, çizgi, aralık diye ilerler: her yukarı adım bir sonraki notadır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": { "en": "No sound; each question is shown on the staff.", "tr": "Ses yok; her soru portede gösterilir." }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Look at the note and choose its place: which line or which space.",
+      "tr": "Notaya bak ve yerini seç: kaçıncı çizgi ya da kaçıncı aralık."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 8 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 10,
+      "params": {
+        "set": ["line_1", "line_2", "line_3", "line_4", "line_5", "space_1", "space_2", "space_3", "space_4"]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: counted from the top line.", "tr": "Farklı cevap: üst çizgiden sayıldı." },
+      "fix": {
+        "en": "Always count from the bottom up; the bottom line is line 1.",
+        "tr": "Her zaman aşağıdan yukarı say; en alttaki çizgi 1. çizgidir."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: a line note was read as a space note.",
+        "tr": "Farklı cevap: çizgideki nota aralıkta sanıldı."
+      },
+      "fix": {
+        "en": "If a line runs through the middle of the note head, the note is on that line.",
+        "tr": "Nota başının ortasından bir çizgi geçiyorsa nota o çizgidedir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Touch the lines with your finger and count up out loud before you answer.",
+    "tr": "Cevaplamadan önce çizgilere parmağınla dokunarak yukarı doğru sesli say."
+  },
+  "minutes": 5,
+  "expertPending": true
+}

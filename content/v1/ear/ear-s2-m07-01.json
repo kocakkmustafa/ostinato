@@ -1,0 +1,85 @@
+{
+  "id": "ear-s2-m07-01",
+  "title": { "en": "One-bar dictation", "tr": "Bir ölçülük dikte" },
+  "goal": {
+    "en": "Writes a heard one-bar rhythm on screen.",
+    "tr": "Duyduğu bir ölçülük ritmi ekranda yazar."
+  },
+  "explanation": [
+    {
+      "en": "Dictation is reading in reverse: you hear the rhythm and write the notes.",
+      "tr": "Dikte, okumanın tersidir: ritmi duyar, notalarını yazarsın."
+    },
+    {
+      "en": "A one-bar count-in sets the beat. Then the rhythm plays on a single note, in 4/4.",
+      "tr": "Bir ölçülük giriş sayımı vuruşu kurar. Sonra ritim tek bir notada, 4/4'te çalar."
+    },
+    {
+      "en": "Count the beats while you listen, 1-2-3-4. Notice on which beat each sound starts and how long it lasts.",
+      "tr": "Dinlerken vuruşları say, 1-2-3-4. Her sesin hangi vuruşta başladığını ve ne kadar sürdüğünü fark et."
+    },
+    {
+      "en": "Write beat by beat: whole, half, quarter, a pair of eighths or a quarter rest.",
+      "tr": "Vuruş vuruş yaz: birlik, ikilik, dörtlük, iki sekizlik ya da dörtlük sus."
+    },
+    {
+      "en": "Before you submit, check that the bar adds up to four beats.",
+      "tr": "Göndermeden önce ölçünün dört vuruşa tamamlandığını kontrol et."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "One-bar click count-in at ♩=70, then the rhythm on one synthesized note; replay as often as you like.",
+      "tr": "♩=70'te bir ölçülük klik girişi, ardından ritim tek bir sentez notasında; istediğin kadar tekrar dinleyebilirsin."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Hear each one-bar rhythm and write it with the note buttons. Eight dictations. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "Her bir ölçülük ritmi dinle ve nota düğmeleriyle yaz. Sekiz dikte. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "rhythm_dictation",
+      "count": 8,
+      "params": {
+        "values": ["whole", "half", "quarter", "eighthPair", "quarterRest"],
+        "bars": 1,
+        "bpm": 70,
+        "meter": "4/4"
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: a half note was written as two quarters.",
+        "tr": "Farklı cevap: ikilik, iki dörtlük olarak yazıldı."
+      },
+      "fix": {
+        "en": "Listen for a new attack: two quarters are two sounds, a half note is one long sound.",
+        "tr": "Yeni bir vuruş sesi var mı, dinle: iki dörtlük iki sestir, ikilik tek uzun sestir."
+      }
+    },
+    {
+      "error": { "en": "Different answer: a rest was missed.", "tr": "Farklı cevap: bir sus atlandı." },
+      "fix": {
+        "en": "Keep counting through the silence; a beat with no sound is a quarter rest.",
+        "tr": "Sessizlikte de saymaya devam et; sessiz geçen vuruş dörtlük sustur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap the rhythm back once before you write it.",
+    "tr": "Yazmadan önce ritmi bir kez geri alkışla."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

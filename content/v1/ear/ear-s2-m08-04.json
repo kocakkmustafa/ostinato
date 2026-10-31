@@ -1,0 +1,84 @@
+{
+  "id": "ear-s2-m08-04",
+  "title": { "en": "Three-note melodic dictation", "tr": "Üç notalık ezgi diktesi" },
+  "goal": { "en": "Writes three heard notes on the staff.", "tr": "Duyduğu üç notayı porteye yazar." },
+  "explanation": [
+    {
+      "en": "A cadence sets the key, then three notes play. The first note is given on the staff.",
+      "tr": "Bir kadans tonu kurar, sonra üç nota çalar. İlk nota portede verilir."
+    },
+    {
+      "en": "First hear the direction: up, down or the same, like the contours in level 1.",
+      "tr": "Önce yönü duy: yukarı, aşağı ya da aynı; 1. seviyedeki konturlar gibi."
+    },
+    {
+      "en": "Then the size: a step (the next line or space) or a skip (one line or space in between).",
+      "tr": "Sonra büyüklüğü: basamak mı (bir sonraki çizgi ya da aralık), atlama mı (arada bir çizgi ya da aralık)?"
+    },
+    {
+      "en": "Sing the notes back in your head as degrees: do-re-mi, mi-re-do, do-mi-sol.",
+      "tr": "Notaları içinden derece olarak geri söyle: do-re-mi, mi-re-do, do-mi-sol."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays a cadence, then three notes from degrees 1–5 in C, G or F major; the drill synthesizes them.",
+      "tr": "Her soruda bir kadans, ardından Do, Sol ya da Fa majörde 1–5. derecelerden üç nota çalar; alıştırma bunları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Hear the cadence and the three notes, then place notes 2 and 3 on the staff. Eight dictations. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "Kadansı ve üç notayı dinle, sonra 2. ve 3. notayı porteye yerleştir. Sekiz dikte. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "melodic_dictation",
+      "count": 8,
+      "params": {
+        "notes": 3,
+        "degrees": [1, 2, 3, 4, 5],
+        "key": ["C", "G", "F"],
+        "clef": "treble",
+        "range": "C4-D5",
+        "firstNoteGiven": true,
+        "cadenceEachQuestion": true
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the second note one step too high.",
+        "tr": "Farklı cevap: ikinci nota bir basamak yüksek."
+      },
+      "fix": {
+        "en": "Count the steps from the first note in your head: re is one step up, mi two.",
+        "tr": "İlk notadan basamakları içinden say: re bir basamak, mi iki basamak yukarıdadır."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: the direction was reversed.",
+        "tr": "Farklı cevap: yön ters yazıldı."
+      },
+      "fix": {
+        "en": "Replay and follow only the direction with your hand, up or down, before you write.",
+        "tr": "Yazmadan önce yeniden dinle ve yalnız yönü elinle izle: yukarı mı, aşağı mı?"
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay as often as you like and place one note at a time.",
+    "tr": "İstediğin kadar tekrar dinle ve notaları teker teker yerleştir."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

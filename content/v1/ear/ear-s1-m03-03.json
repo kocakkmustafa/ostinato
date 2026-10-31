@@ -1,0 +1,75 @@
+{
+  "id": "ear-s1-m03-03",
+  "title": { "en": "Rests", "tr": "Suslar" },
+  "goal": { "en": "Stays silent on rests while clapping a line.", "tr": "Satırı alkışlarken suslarda alkışlamaz." },
+  "explanation": [
+    {
+      "en": "A rest is a counted silence. A quarter rest lasts one beat, a half rest two.",
+      "tr": "Sus, sayılan bir sessizliktir. Dörtlük sus bir vuruş, ikilik sus iki vuruş sürer."
+    },
+    {
+      "en": "The quarter rest looks like a zigzag. The half rest is a small block sitting on the middle line.",
+      "tr": "Dörtlük sus zikzak gibi görünür. İkilik sus, orta çizginin üstüne oturan küçük bir kutudur."
+    },
+    {
+      "en": "On a rest, open your hands slightly and keep counting. Silence keeps time too.",
+      "tr": "Suslarda ellerini hafifçe aç ve saymayı sürdür. Sessizlik de zamanı tutar."
+    },
+    {
+      "en": "The note after a rest is easy to rush. Let the count reach it.",
+      "tr": "Sustan sonraki nota kolayca erken gelir. Sayımın ona varmasını bekle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": { "en": "Click at ♩=70 with a four-click count-in.", "tr": "♩=70'te klik, dört kliklik girişle." }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Read the two bars and clap them with the click at ♩=70. Stay silent on the rests and keep counting.",
+      "tr": "İki ölçüyü oku ve ♩=70'te klikle birlikte alkışla. Suslarda sessiz kal, saymayı sürdür."
+    },
+    "sequence": "4/4: q qr ee q | q q hr",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I made no sound on the rests.", "tr": "Suslarda hiç ses çıkarmadım." },
+    { "en": "I kept counting through the rests.", "tr": "Suslarda saymayı sürdürdüm." },
+    { "en": "The clap after each rest came on its click.", "tr": "Her sustan sonraki alkış kendi kliğine denk geldi." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: a clap was heard on a rest.", "tr": "Farklı: susta alkış duyuldu." },
+      "fix": {
+        "en": "Whisper 'sh' on each rest; it keeps your hands still.",
+        "tr": "Her susta fısıltıyla 'şş' de; ellerin böylece durur."
+      }
+    },
+    {
+      "error": { "en": "On time, but early after the rest.", "tr": "Zamanında, ama sustan sonra erken." },
+      "fix": {
+        "en": "Count the rest out loud, then clap on the next number.",
+        "tr": "Susu yüksek sesle say, sonra sıradaki sayıda alkışla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or lower the click volume.",
+        "tr": "Telefona daha yakın alkışla ya da klik sesini kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=60 and loop bar 1 until it passes, then add bar 2.",
+    "tr": "♩=60'a in ve 1. ölçüyü geçene kadar döngüle, sonra 2. ölçüyü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

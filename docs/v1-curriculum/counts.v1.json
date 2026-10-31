@@ -1,0 +1,213 @@
+{
+  "lessons": {
+    "gtr": 240,
+    "voc": 240,
+    "pno": 160,
+    "ear": 50,
+    "total": 690
+  },
+  "studentPath": 671,
+  "shippableWithoutEngine": 616,
+  "fallback": {
+    "selfCheck": 555,
+    "noEngine": 42,
+    "camera": 5,
+    "experimental": 14,
+    "held": 74
+  },
+  "heldByCourse": {
+    "gtr": 27,
+    "voc": 24,
+    "pno": 16,
+    "ear": 7,
+    "total": 74
+  },
+  "dependsOn": {
+    "A0": {
+      "gtr": 2,
+      "voc": 15,
+      "pno": 6,
+      "ear": 19,
+      "total": 42
+    },
+    "A1": {
+      "gtr": 7,
+      "voc": 0,
+      "pno": 1,
+      "ear": 0,
+      "total": 8
+    },
+    "A2": {
+      "gtr": 126,
+      "voc": 0,
+      "pno": 0,
+      "ear": 0,
+      "total": 126
+    },
+    "A3": {
+      "gtr": 182,
+      "voc": 130,
+      "pno": 124,
+      "ear": 19,
+      "total": 455
+    },
+    "A4": {
+      "gtr": 99,
+      "voc": 0,
+      "pno": 0,
+      "ear": 0,
+      "total": 99
+    },
+    "A5": {
+      "gtr": 8,
+      "voc": 213,
+      "pno": 0,
+      "ear": 17,
+      "total": 238
+    },
+    "A6": {
+      "gtr": 0,
+      "voc": 0,
+      "pno": 138,
+      "ear": 0,
+      "total": 138
+    },
+    "A6p": {
+      "gtr": 0,
+      "voc": 0,
+      "pno": 16,
+      "ear": 0,
+      "total": 16
+    },
+    "A7": {
+      "gtr": 2,
+      "voc": 1,
+      "pno": 2,
+      "ear": 0,
+      "total": 5
+    }
+  },
+  "opensAt": {
+    "A0": {
+      "gtr": 2,
+      "voc": 15,
+      "pno": 6,
+      "ear": 19,
+      "total": 42
+    },
+    "A1": {
+      "gtr": 2,
+      "voc": 0,
+      "pno": 0,
+      "ear": 0,
+      "total": 2
+    },
+    "A2": {
+      "gtr": 18,
+      "voc": 0,
+      "pno": 0,
+      "ear": 0,
+      "total": 18
+    },
+    "A3": {
+      "gtr": 110,
+      "voc": 11,
+      "pno": 0,
+      "ear": 14,
+      "total": 135
+    },
+    "A4": {
+      "gtr": 98,
+      "voc": 0,
+      "pno": 0,
+      "ear": 0,
+      "total": 98
+    },
+    "A5": {
+      "gtr": 8,
+      "voc": 213,
+      "pno": 0,
+      "ear": 17,
+      "total": 238
+    },
+    "A6": {
+      "gtr": 0,
+      "voc": 0,
+      "pno": 136,
+      "ear": 0,
+      "total": 136
+    },
+    "A6p": {
+      "gtr": 0,
+      "voc": 0,
+      "pno": 16,
+      "ear": 0,
+      "total": 16
+    },
+    "A7": {
+      "gtr": 2,
+      "voc": 1,
+      "pno": 2,
+      "ear": 0,
+      "total": 5
+    }
+  },
+  "measuredWhenReady": {
+    "A0": {
+      "gtr": 4,
+      "voc": 16,
+      "pno": 8,
+      "ear": 19,
+      "total": 47
+    },
+    "A1": {
+      "gtr": 6,
+      "voc": 16,
+      "pno": 8,
+      "ear": 19,
+      "total": 49
+    },
+    "A2": {
+      "gtr": 24,
+      "voc": 16,
+      "pno": 8,
+      "ear": 19,
+      "total": 67
+    },
+    "A3": {
+      "gtr": 134,
+      "voc": 27,
+      "pno": 8,
+      "ear": 33,
+      "total": 202
+    },
+    "A4": {
+      "gtr": 232,
+      "voc": 27,
+      "pno": 8,
+      "ear": 33,
+      "total": 300
+    },
+    "A5": {
+      "gtr": 240,
+      "voc": 240,
+      "pno": 8,
+      "ear": 50,
+      "total": 538
+    },
+    "A6": {
+      "gtr": 240,
+      "voc": 240,
+      "pno": 144,
+      "ear": 50,
+      "total": 674
+    },
+    "A6p": {
+      "gtr": 240,
+      "voc": 240,
+      "pno": 160,
+      "ear": 50,
+      "total": 690
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "ear-s1-m01-06",
+  "title": { "en": "Pulse checkpoint", "tr": "Vuruş geçişi" },
+  "goal": {
+    "en": "Keeps three steady tempos and a quarter-and-eighth rhythm by clapping.",
+    "tr": "Üç düzenli tempoyu ve dörtlük-sekizlik ritmi alkışla tutar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint has two parts. Each part must pass on its own; a passed part is kept.",
+      "tr": "Bu geçişin iki bölümü var. Her bölüm kendi başına geçmeli; geçtiğin bölüm saklanır."
+    },
+    {
+      "en": "Part 1: clap 8 beats with the click at ♩=60, 80 and 100.",
+      "tr": "1. bölüm: klikle ♩=60, 80 ve 100'de 8'er vuruş alkışla."
+    },
+    {
+      "en": "Part 2: clap a new four-bar line of quarters and eighths at ♩=70.",
+      "tr": "2. bölüm: dörtlük ve sekizliklerden oluşan yeni bir dört ölçülük diziyi ♩=70'te alkışla."
+    },
+    {
+      "en": "Before each set, listen to the four-click count-in and count along silently.",
+      "tr": "Her setten önce dört kliklik girişi dinle ve içinden birlikte say."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Click at ♩=60, 80, 100 and 70; the new line is played once on a woodblock sound before part 2.",
+      "tr": "♩=60, 80, 100 ve 70'te klik; yeni dizi 2. bölümden önce bir kez tahta blok sesiyle çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Part 1: clap 8 beats with the click at ♩=60, then 80, then 100. Part 2: listen to a new four-bar line once, then clap it with the click at ♩=70.",
+      "tr": "1. bölüm: klikle ♩=60'ta, sonra 80'de, sonra 100'de 8'er vuruş alkışla. 2. bölüm: yeni bir dört ölçülük diziyi bir kez dinle, sonra ♩=70'te klikle birlikte alkışla."
+    },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but early at ♩=60.", "tr": "Zamanında, ama ♩=60'ta erken." },
+      "fix": {
+        "en": "Slow tempos invite rushing. Count '1-and' inside each beat and clap on the number.",
+        "tr": "Yavaş tempo acele ettirir. Her vuruşun içinde '1-ve' say ve sayıda alkışla."
+      }
+    },
+    {
+      "error": { "en": "On time, but late on the two quick claps.", "tr": "Zamanında, ama iki hızlı alkışta geç." },
+      "fix": {
+        "en": "Think 'one-and': the second clap lands exactly halfway to the next click.",
+        "tr": "'Bir-ve' diye düşün: ikinci alkış sonraki kliğe giden yolun tam ortasına düşer."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or lower the click volume.",
+        "tr": "Telefona daha yakın alkışla ya da klik sesini kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise each part slower in its own lesson first; the checkpoint itself is passed at the tempos above.",
+    "tr": "Her bölümü önce kendi dersinde daha yavaş çalış; geçişin kendisi yukarıdaki tempolarda geçilir."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

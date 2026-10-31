@@ -1,0 +1,69 @@
+{
+  "id": "gtr-s1-m02-02",
+  "title": { "en": "Notes on string six", "tr": "Altıncı tel notaları" },
+  "goal": {
+    "en": "Plays E2, F2 and G2 on string 6 cleanly at ♩=60.",
+    "tr": "6. telde Mi2, Fa2 ve Sol2'yi ♩=60'ta temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "String 6 is the thickest string and the lowest line of the TAB. Open, it sounds E2.",
+      "tr": "6. tel en kalın teldir ve tab'ın en alt çizgisidir. Açıkken Mi2 sesini verir."
+    },
+    {
+      "en": "Fret 1 is F2 with finger 1; fret 3 is G2 with finger 3. Keep finger 2 hovering over fret 2.",
+      "tr": "1. perde 1. parmakla Fa2, 3. perde 3. parmakla Sol2'dir. 2. parmak 2. perdenin üstünde hazır bekler."
+    },
+    {
+      "en": "Press just behind the fret wire, not on top of it and not in the middle of the space.",
+      "tr": "Perde telinin hemen arkasına bas; telin üstüne ya da aralığın ortasına değil."
+    },
+    {
+      "en": "Before the next note, lift the finger only enough to release the string; the open E then rings on its own.",
+      "tr": "Sonraki notadan önce parmağı yalnız teli bırakacak kadar kaldır; açık Mi kendiliğinden çalar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "E2 F2 G2 F2 E2 twice, at ♩=60 and at ♩=40, string-model synthesis.",
+      "tr": "Mi2 Fa2 Sol2 Fa2 Mi2 iki kez, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the five-note line twice along with the click. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Beş notalık diziyi klikle birlikte iki kez çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "E2 F2 G2 F2 E2 | E2 F2 G2 F2 E2",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "I used finger 1 for F2 and finger 3 for G2.", "tr": "Fa2 için 1., Sol2 için 3. parmağı kullandım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "The finger slid one fret up; recheck fret 1 and fret 3.", "tr": "Parmak bir perde yukarı kaymış; 1. ve 3. perdeyi yeniden kontrol et." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "The fretted string is not pressed fully or is muted by another finger; press closer to the fret and pluck a little firmer.", "tr": "Basılan tel tam basılmıyor ya da başka bir parmak susturuyor; perdeye daha yakın bas ve biraz daha net çek." }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=40 and loop only E2–G2 until both notes ring, then add F2.",
+    "tr": "♩=40'a in ve yalnız Mi2–Sol2'yi döngüle; ikisi de çalınca Fa2'yi ekle."
+  },
+  "legacy": "R: guitar.journey.notes.bass_e",
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,63 @@
+{
+  "id": "ear-s1-m01-01",
+  "title": { "en": "Find the pulse", "tr": "Vuruşu bul" },
+  "goal": {
+    "en": "Claps the main beat of a piece of music.",
+    "tr": "Bir müzikteki ana vuruşu alkışla tutar."
+  },
+  "explanation": [
+    {
+      "en": "The pulse is the steady beat you would tap your foot to. It keeps going even when the melody pauses.",
+      "tr": "Vuruş, ayağınla tempo tutacağın düzenli zamandır. Ezgi dursa bile devam eder."
+    },
+    {
+      "en": "Listen for four beats first, then join in with one clap per beat.",
+      "tr": "Önce dört vuruş dinle, sonra her vuruşa bir alkışla katıl."
+    },
+    {
+      "en": "Clap short and crisp, palms flat; a soft clap is hard to hear.",
+      "tr": "Kısa ve net alkışla, avuçlar düz; yumuşak alkış zor duyulur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Original accompaniment loop at ♩=80 with a light click on the first bar.",
+      "tr": "♩=80'de özgün eşlik döngüsü, ilk ölçüde hafif klik."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Clap 16 beats along with the accompaniment. Headphones help the microphone hear only your claps.",
+      "tr": "Eşlikle birlikte 16 vuruş alkışla. Kulaklık, mikrofonun yalnız alkışını duymasına yardım eder."
+    },
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My claps landed with the click in the first bar.", "tr": "İlk ölçüde alkışlarım klikle aynı anda geldi." },
+    { "en": "I kept clapping when the click stopped.", "tr": "Klik durunca da alkışlamaya devam ettim." },
+    { "en": "I did not speed up over the 16 beats.", "tr": "16 vuruş boyunca hızlanmadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but early on most beats.", "tr": "Zamanında, ama çoğu vuruşta erken." },
+      "fix": { "en": "You are anticipating the beat; wait for it and clap right on it.", "tr": "Vuruşu önceden bekliyorsun; onu bekle ve tam üstüne alkışla." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Clap closer to the phone or lower the accompaniment volume.", "tr": "Telefona daha yakın alkışla ya da eşliğin sesini kıs." }
+    }
+  ],
+  "adaptation": {
+    "en": "Tap the beat on your leg first, then switch to clapping for the last eight beats.",
+    "tr": "Önce vuruşu dizine vur, son sekiz vuruşta alkışa geç."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

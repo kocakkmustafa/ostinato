@@ -1,0 +1,87 @@
+{
+  "id": "ear-s1-m01-04",
+  "title": { "en": "Beat and rhythm", "tr": "Vuruş ve ritim" },
+  "goal": {
+    "en": "Shows the difference between beat and rhythm by clapping a rhythm over a steady beat.",
+    "tr": "Düzenli vuruşun üstünde ritim alkışlayarak vuruşla ritmin farkını gösterir."
+  },
+  "explanation": [
+    {
+      "en": "The beat is steady, like a clock. The rhythm is the pattern of long and short sounds on top of it.",
+      "tr": "Vuruş saat gibi düzenlidir. Ritim, onun üstündeki uzun ve kısa seslerin dizilişidir."
+    },
+    {
+      "en": "A rhythm can put one sound on a beat, two quick sounds on a beat, or one long sound across two beats.",
+      "tr": "Ritimde bir vuruşa bir ses, iki hızlı ses ya da iki vuruşa yayılan tek uzun ses düşebilir."
+    },
+    {
+      "en": "Here the click keeps the beat for you. Your claps play the rhythm.",
+      "tr": "Burada vuruşu klik tutar. Sen ritmi alkışlarsın."
+    },
+    {
+      "en": "On a long sound, clap once and keep counting until the next clap.",
+      "tr": "Uzun seste bir kez alkışla, sonraki alkışa kadar saymaya devam et."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Click at ♩=70; the two-bar rhythm is played on a woodblock sound over it at ♩=70 and ♩=45.",
+      "tr": "♩=70'te klik; iki ölçülük ritim üstünde tahta blok sesiyle ♩=70 ve ♩=45'te çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Listen to the two-bar rhythm, then clap it over the click at ♩=70.",
+      "tr": "İki ölçülük ritmi dinle, sonra ♩=70'te klikin üstünde alkışla."
+    },
+    "sequence": "4/4: q q ee q | ee q h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Where the rhythm has one sound per beat, my clap fell on the click.",
+      "tr": "Ritimde vuruş başına tek ses olan yerlerde alkışım klikle denk geldi."
+    },
+    {
+      "en": "Where the rhythm doubles, I fit two even claps into one click.",
+      "tr": "Ritmin ikilendiği yerde bir kliğe iki eşit alkış sığdırdım."
+    },
+    { "en": "I held the long sound for two clicks.", "tr": "Uzun sesi iki klik boyunca tuttum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "On time, but early after the long sound.", "tr": "Zamanında, ama uzun sesten sonra erken." },
+      "fix": {
+        "en": "Count the long sound out loud, 'three, four', then clap on the next 'one'.",
+        "tr": "Uzun sesi yüksek sesle say, 'üç, dört', sonra sıradaki 'bir'de alkışla."
+      }
+    },
+    {
+      "error": { "en": "On time, but late on the two quick claps.", "tr": "Zamanında, ama iki hızlı alkışta geç." },
+      "fix": {
+        "en": "Think 'one-and': the second clap lands exactly halfway to the next click.",
+        "tr": "'Bir-ve' diye düşün: ikinci alkış sonraki kliğe giden yolun tam ortasına düşer."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or lower the click volume.",
+        "tr": "Telefona daha yakın alkışla ya da klik sesini kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap bar 1 alone until it passes, then add bar 2.",
+    "tr": "Önce yalnız 1. ölçüyü alkışla; geçince 2. ölçüyü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}
