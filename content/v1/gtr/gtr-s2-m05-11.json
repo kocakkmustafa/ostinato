@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s2-m05-11",
+  "title": { "en": "A minor progression", "tr": "La minör ilerleme" },
+  "goal": {
+    "en": "Plays an 8-bar Am–Dm–E progression with the accompaniment at ♩=70.",
+    "tr": "8 ölçülük Am–Dm–E ilerlemesini eşlikle ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "In A minor, Am is home, Dm is chord iv and E is chord V. The E chord is major on purpose.",
+      "tr": "La minörde Am evdir, Dm iv. akor, E ise V. akordur. E akoru bilerek majördür."
+    },
+    {
+      "en": "E contains G♯3, one semitone below A. That note pulls strongly back to Am.",
+      "tr": "E akorunda La'nın yarım ses altındaki Sol♯3 vardır. Bu nota güçlü biçimde Am'ye geri çeker."
+    },
+    {
+      "en": "Am and E are the same finger shape, one string apart. Move the whole shape one string toward the ceiling for E.",
+      "tr": "Am ile E aynı parmak biçimidir, aralarında bir tel vardır. E için bütün biçimi bir tel yukarı, tavana doğru taşı."
+    },
+    {
+      "en": "Dm to Am: the shape moves one string toward the ceiling, and finger 1 stays at fret 1.",
+      "tr": "Dm'den Am'ye: biçim bir tel yukarı, tavana doğru kayar; 1. parmak 1. perdede kalır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Original bass and drum loop with the Am–Dm–E chart in quarter-note strums, at ♩=70 and ♩=50.",
+      "tr": "Dörtlük vuruşlu Am–Dm–E çizelgesiyle özgün bas ve davul döngüsü, ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 8 bars with the accompaniment, four downstrokes per bar. Headphones help the microphone hear only your guitar.",
+      "tr": "8 ölçüyü eşlikle, ölçü başına dört aşağı vuruşla çal. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: Am | Dm | Am | E | Am | Dm | E | Am",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "I heard the pull from E back to Am.", "tr": "E'den Am'ye geri çekimi duydum." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Dm starts on string 4 and Am on string 5. Make the strum smaller for these two.",
+        "tr": "Dm 4. telden, Am 5. telden başlar. Bu ikisinde vuruşu küçült."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The change starts too late. Lift the fingers right on beat 4, not after it.",
+        "tr": "Geçiş çok geç başlıyor. Parmakları 4. vuruştan sonra değil, tam 4. vuruşta kaldır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones or lower the accompaniment, and strum a little firmer.",
+        "tr": "Kulaklık kullan ya da eşliğin sesini kıs ve biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play at ♩=50 with two strums per bar on beats 1 and 3.",
+    "tr": "♩=50'de ölçü başına 1. ve 3. vuruşta iki vuruşla çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

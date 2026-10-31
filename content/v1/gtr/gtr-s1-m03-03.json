@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s1-m03-03",
+  "title": { "en": "Eighth notes and counting \"1 &\"", "tr": "Sekizlikler ve \"1 ve\" sayımı" },
+  "goal": {
+    "en": "Plays 16 even eighth notes on open D3 at ♩=60 while counting \"1 &\".",
+    "tr": "\"1 ve\" diye sayarak açık Re3'te ♩=60'ta 16 eşit sekizlik çalar."
+  },
+  "explanation": [
+    {
+      "en": "An eighth note lasts half a beat. Two eighths fill one beat.",
+      "tr": "Sekizlik yarım vuruş sürer. İki sekizlik bir vuruşu doldurur."
+    },
+    {
+      "en": "An eighth has one flag on its stem, or two or more eighths share a beam.",
+      "tr": "Sekizliğin sapında tek bayrak vardır ya da iki veya daha çok sekizlik bir kirişle bağlanır."
+    },
+    {
+      "en": "Count 1 & 2 & 3 & 4 &. The number falls on the click; the \"&\" falls exactly halfway to the next click.",
+      "tr": "1 ve 2 ve 3 ve 4 ve diye say. Sayı kliğe düşer; \"ve\" sonraki kliğe giden yolun tam ortasına düşer."
+    },
+    {
+      "en": "The beat does not get faster. Only more notes fit inside it.",
+      "tr": "Vuruş hızlanmaz. Yalnız içine daha çok nota sığar."
+    },
+    {
+      "en": "Pick down on the number and up on the \"&\". Keep both strokes small.",
+      "tr": "Sayıda aşağı, \"ve\"de yukarı pena çal. İki hareketi de küçük tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Open D3 in eighth notes for two bars with a click, at ♩=60 and at ♩=40, string-model synthesis.",
+      "tr": "Klikle iki ölçü sekizlik açık Re3, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play 16 eighth notes on open D3 with the click, counting \"1 &\". Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "\"1 ve\" diye sayarak klikle açık Re3'te 16 sekizlik çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "4/4: ee ee ee ee | ee ee ee ee",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Two notes fitted inside every click.", "tr": "Her kliğin içine iki nota sığdı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The \"&\" is drifting toward the next click. Say \"1 &\" aloud and place the upstroke right on \"&\".",
+        "tr": "\"Ve\" sonraki kliğe doğru kayıyor. \"1 ve\"yi sesli söyle ve yukarı penayı tam \"ve\"ye koy."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The upstroke is too light. Let the pick catch the string a little more on the way up.",
+        "tr": "Yukarı pena çok hafif. Yukarı çıkarken pena teli biraz daha yakalasın."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap the eighths on one repeated sound first, then play them on the guitar at ♩=40.",
+    "tr": "Önce sekizlikleri tek bir sesle alkışla, sonra gitarda ♩=40'ta çal."
+  },
+  "legacy": "V: guitar.journey.reading.quarters_eighths",
+  "minutes": 10,
+  "expertPending": true
+}

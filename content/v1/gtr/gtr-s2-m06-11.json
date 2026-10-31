@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s2-m06-11",
+  "title": { "en": "Sixteen-bar accompaniment", "tr": "On altı ölçülük eşlik" },
+  "goal": {
+    "en": "Plays an original 16-bar accompaniment without stopping at ♩=76.",
+    "tr": "Özgün 16 ölçülük eşliği durmadan ♩=76'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "The piece is four phrases of four bars. Read it as a map: A, A, B, A.",
+      "tr": "Parça dört ölçülük dört cümleden oluşur. Onu bir harita gibi oku: A, A, B, A."
+    },
+    {
+      "en": "The A phrases use D-DU-UDU. Phrase 3 (B) uses plain down-up eighths for contrast.",
+      "tr": "A cümleleri D-DU-UDU kullanır. 3. cümle (B) fark için düz aşağı-yukarı sekizlik kullanır."
+    },
+    {
+      "en": "Accent beat 1 of each phrase lightly. End bar 16 with one strum and a clean stop on beat 3.",
+      "tr": "Her cümlenin 1. vuruşunu hafifçe vurgula. 16. ölçüyü tek vuruş ve 3. vuruşta temiz susturmayla bitir."
+    },
+    {
+      "en": "If a bar slips, keep counting and come back in on the next beat 1. Do not restart.",
+      "tr": "Bir ölçü kaçarsa saymayı sürdür ve sonraki 1. vuruşta yeniden gir. Baştan başlama."
+    },
+    {
+      "en": "Practise a hard change on its own: loop the bar before it and the bar after it, then play the full form.",
+      "tr": "Zor bir geçişi ayrı çalış: önceki ve sonraki ölçüyü döngüle, sonra tam biçimi çal."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The original 16 bars at ♩=76 and ♩=50, with a light bass and drum loop.",
+      "tr": "Özgün 16 ölçü, ♩=76 ve ♩=50, hafif bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play all 16 bars with the accompaniment: D-DU-UDU in bars 1–8 and 13–16, down-up eighths in bars 9–12. Start at ♩=70 and move up to ♩=76. Headphones help the microphone hear only your guitar.",
+      "tr": "16 ölçünün tamamını eşlikle çal: 1–8. ve 13–16. ölçülerde D-DU-UDU, 9–12. ölçülerde aşağı-yukarı sekizlik. ♩=70'ten başla, ♩=76'ya çık. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: G | D | Em | C | G | D | Em | C | Em | C | G | D | G | D | C | G",
+    "tempo": { "open": 70, "target": 76 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I played all 16 bars without restarting.", "tr": "16 ölçünün tamamını baştan başlamadan çaldım." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "Late after a change. Loop that change with one bar before and one after.", "tr": "Geçişten sonra geç. O geçişi bir önceki ve bir sonraki ölçüyle döngüle." }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": { "en": "Check that chord string by string, then play only its phrase.", "tr": "O akoru tel tel kontrol et, sonra yalnız onun cümlesini çal." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Lower the accompaniment or use headphones.", "tr": "Eşliğin sesini kıs ya da kulaklık kullan." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play phrases A and B separately at ♩=60, then join them.",
+    "tr": "A ve B cümlelerini ♩=60'ta ayrı çal, sonra birleştir."
+  },
+  "legacy": "R: guitar.journey.strum.accompaniment",
+  "minutes": 15,
+  "expertPending": true
+}

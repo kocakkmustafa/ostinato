@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s1-m01-08",
+  "title": { "en": "Healthy practice habits", "tr": "Sağlıklı çalışma alışkanlıkları" },
+  "goal": {
+    "en": "Starts practice with a short warm-up, takes planned breaks and stops when pain appears.",
+    "tr": "Çalışmaya kısa bir ısınmayla başlar, planlı mola verir ve ağrı olursa durur."
+  },
+  "explanation": [
+    {
+      "en": "Begin each session with three easy minutes: slow notes, light pressure, loose shoulders.",
+      "tr": "Her oturuma üç kolay dakikayla başla: yavaş notalar, hafif baskı, gevşek omuzlar."
+    },
+    {
+      "en": "Short and frequent beats long and rare. Take a break every 20–30 minutes; put the guitar down and shake out your hands.",
+      "tr": "Kısa ve sık, uzun ve seyrekten iyidir. 20–30 dakikada bir mola ver; gitarı bırak ve ellerini silkele."
+    },
+    {
+      "en": "Mild tenderness in the fingertips is common at the start. Sharp pain, numbness or tingling is a signal to stop for the day.",
+      "tr": "Başlarken parmak uçlarında hafif hassasiyet sık görülür. Keskin ağrı, uyuşma ya da karıncalanma o gün durma işaretidir."
+    },
+    {
+      "en": "When your hand feels tired, slow down or stop. Speed can wait for the next session.",
+      "tr": "Elin yorgun hissedince yavaşla ya da dur. Hız bir sonraki oturumu bekleyebilir."
+    },
+    {
+      "en": "Today's warm-up: frets 1-2-3-4 on string 1, one finger per fret, up and back down.",
+      "tr": "Bugünün ısınması: 1. telde 1-2-3-4. perdeler, her perdeye bir parmak, çıkış ve iniş."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "F4 F♯4 G4 G♯4 and back down, quarter notes at ♩=50 and ♩=40, string-model synthesis.",
+      "tr": "Fa4 Fa♯4 Sol4 Sol♯4 ve geri iniş, dörtlüklerle ♩=50 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Play the warm-up for 3 minutes at ♩=50: fingers 1-2-3-4 on frets 1 to 4 of string 1, then 4-3-2-1 back down. Stop at once if anything hurts.",
+      "tr": "Isınmayı ♩=50'de 3 dakika çal: 1. telde 1–4. perdelerde 1-2-3-4 parmaklar, sonra 4-3-2-1 geri iniş. Bir yerin ağrırsa hemen dur."
+    },
+    "sequence": "F4 F♯4 G4 G♯4 | G♯4 G4 F♯4 F4",
+    "tempo": { "open": 50, "target": 50 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Complete the 3-minute warm-up. Notes are checked at the Level 1 default.",
+        "tr": "3 dakikalık ısınmayı tamamla. Notalar Seviye 1 varsayılanıyla kontrol edilir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I warmed up slowly with light pressure.", "tr": "Hafif baskıyla yavaşça ısındım." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." },
+    { "en": "I know when I will take my next break.", "tr": "Bir sonraki molamı ne zaman vereceğimi biliyorum." },
+    { "en": "I stopped if anything felt sharp or numb.", "tr": "Keskin ya da uyuşuk bir his olursa durdum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "Two fingers moved together. Keep finger 1 at fret 1 and give each fret its own finger.",
+        "tr": "İki parmak birlikte kaymış. 1. parmağı 1. perdede tut ve her perdeye kendi parmağını ver."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Finger 4 may be landing on its pad. Curve it a little more and press just behind fret 4.",
+        "tr": "4. parmak düz yüzüyle basıyor olabilir. Biraz daha kıvır ve 4. perdenin hemen arkasına bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use frets 1 to 3 with fingers 1 to 3 only, or play for 1 minute and rest for 1 minute.",
+    "tr": "Yalnız 1–3. parmaklarla 1–3. perdeleri kullan ya da 1 dakika çalıp 1 dakika dinlen."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s1-m02-08",
+  "title": { "en": "Crossing strings", "tr": "Tel geçişi" },
+  "goal": {
+    "en": "Moves between neighbouring strings without a gap in a D3–A3 line at ♩=70.",
+    "tr": "Re3–La3 dizisinde komşu teller arasında boşluk bırakmadan geçer; ♩=70."
+  },
+  "explanation": [
+    {
+      "en": "This line goes up from D3 to A3 and back down: D3 E3 F3 on string 4, G3 A3 on string 3.",
+      "tr": "Bu dizi Re3'ten La3'e çıkıp geri iner: 4. telde Re3 Mi3 Fa3, 3. telde Sol3 La3."
+    },
+    {
+      "en": "The picking hand moves only the width of one string. Keep the pick close to the strings.",
+      "tr": "Sağ el yalnız bir tel genişliği kadar hareket eder. Penayı tellere yakın tut."
+    },
+    {
+      "en": "Prepare the next string while the last note on the old string is still sounding.",
+      "tr": "Eski teldeki son nota hâlâ çalarken bir sonraki teli hazırla."
+    },
+    {
+      "en": "On the way up, F3 to G3 is the crossing. On the way down, G3 to F3 crosses back.",
+      "tr": "Çıkarken geçiş Fa3'ten Sol3'e olur. İnerken Sol3'ten Fa3'e geri geçilir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "D3 E3 F3 G3 A3 G3 F3 E3 twice, at ♩=70 and at ♩=45, string-model synthesis.",
+      "tr": "Re3 Mi3 Fa3 Sol3 La3 Sol3 Fa3 Mi3 iki kez, ♩=70 ve ♩=45, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the eight-note line twice along with the click, one note per beat. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "Sekiz notalık diziyi klikle birlikte iki kez çal; her vuruşa bir nota. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "D3 E3 F3 G3 | A3 G3 F3 E3 | D3 E3 F3 G3 | A3 G3 F3 E3",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The string change did not break the beat.", "tr": "Tel geçişi vuruşu bozmadı." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The crossing takes extra time. Loop F3 G3 F3 G3 slowly until the move feels small.",
+        "tr": "Geçiş fazladan zaman alıyor. Hareket küçük gelene kadar Fa3 Sol3 Fa3 Sol3'ü yavaşça döngüle."
+      }
+    },
+    {
+      "error": { "en": "Different note: G3 was expected, D3 was heard.", "tr": "Farklı nota: Sol3 bekleniyordu, Re3 duyuldu." },
+      "fix": {
+        "en": "The pick stayed on string 4. Lift finger 3 off F3 and move the pick one string down toward the floor.",
+        "tr": "Pena 4. telde kalmış. 3. parmağı Fa3'ten kaldır ve penayı bir tel yere doğru kaydır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop the four notes around the crossing, E3 F3 G3 A3, at ♩=45.",
+    "tr": "Geçiş çevresindeki dört notayı, Mi3 Fa3 Sol3 La3, ♩=45'te döngüle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s2-m05-06",
+  "title": { "en": "E to A", "tr": "E'den A'ya" },
+  "goal": {
+    "en": "Changes between E and A at least 18 times in 60 seconds.",
+    "tr": "E ile A arasında 60 saniyede en az 18 kez geçer."
+  },
+  "explanation": [
+    {
+      "en": "E is 0-2-2-1-0-0 and A is x-0-2-2-2-0. Both shapes sit mostly on fret 2.",
+      "tr": "E, 0-2-2-1-0-0; A ise x-0-2-2-2-0'dır. İki biçim de çoğunlukla 2. perdededir."
+    },
+    {
+      "en": "Keep your hand at the same place on the neck. Only the fingers change strings.",
+      "tr": "Elini sapta aynı yerde tut. Yalnız parmaklar tel değiştirir."
+    },
+    {
+      "en": "Lead with the finger that goes to string 3, then let the others land beside it.",
+      "tr": "3. tele giden parmakla öne çık, diğerleri onun yanına konsun."
+    },
+    {
+      "en": "E starts on string 6, A on string 5. Make the strum a little smaller for A.",
+      "tr": "E 6. telden, A 5. telden başlar. A için vuruşu biraz küçült."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "E and A, one strum each, changing every two beats at ♩=60, then at ♩=40.",
+      "tr": "E ve A, her birine bir vuruş, ♩=60'ta iki vuruşta bir geçiş, sonra ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Change back and forth for 60 seconds. Each change counts when every string of the new chord is heard. Strum each chord once, then change.",
+      "tr": "60 saniye boyunca ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır. Her akora bir kez vur, sonra geç."
+    },
+    "sequence": "E ↔ A · 60 s",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 18 changes in 60 seconds. A change counts when every string of the new chord is heard.",
+        "tr": "60 saniyede en az 18 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I strummed once per chord and changed without stopping.", "tr": "Her akora bir kez vurdum ve durmadan geçtim." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "A starts on string 5. Aim the strum at string 5 and let string 6 stay silent.",
+        "tr": "A 5. telden başlar. Vuruşu 5. tele yönelt, 6. tel sessiz kalsın."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "In E, finger 1 on string 3 lands late. Place it together with the other two fingers.",
+        "tr": "E'de 3. teldeki 1. parmak geç konuyor. Onu diğer iki parmakla aynı anda koy."
+      }
+    },
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Lift the fingers less and look at the next spot first; aim for even changes, not fast ones.",
+        "tr": "Parmakları daha az kaldır ve önce sonraki yere bak; hızlı değil düzenli geçişe odaklan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise the move silently ten times, then try 30 seconds before the full minute.",
+    "tr": "Hareketi sessizce on kez çalış; tam dakikadan önce 30 saniye dene."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

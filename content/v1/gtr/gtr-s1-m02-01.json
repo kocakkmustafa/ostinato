@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s1-m02-01",
+  "title": { "en": "Reading TAB", "tr": "Tab okuma" },
+  "goal": {
+    "en": "Reads string and fret from a TAB line and plays four bars on strings 6 and 5 at ♩=60.",
+    "tr": "Tab satırından tel ve perdeyi okur ve 6. ile 5. telde dört ölçüyü ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "TAB has six lines, one per string. The top line is string 1, the thin high E; the bottom line is string 6.",
+      "tr": "Tab'da her tel için bir çizgi, toplam altı çizgi vardır. En üst çizgi 1. tel, yani ince tiz Mi'dir; en alt çizgi 6. teldir."
+    },
+    {
+      "en": "A number on a line is the fret to press on that string. 0 means play the string open.",
+      "tr": "Çizgideki sayı, o telde basılacak perdedir. 0, teli açık çal demektir."
+    },
+    {
+      "en": "Numbers are read left to right, like text. A number is not a finger number.",
+      "tr": "Sayılar yazı gibi soldan sağa okunur. Sayı parmak numarası değildir."
+    },
+    {
+      "en": "TAB spacing does not show rhythm. Take the rhythm from the count above the TAB; here every note is one beat.",
+      "tr": "Tab'daki boşluklar ritmi göstermez. Ritmi tab'ın üstündeki sayımdan al; burada her nota bir vuruştur."
+    },
+    {
+      "en": "Today's notes: string 6 open (E2) and fret 3 (G2), string 5 open (A2) and fret 3 (C3).",
+      "tr": "Bugünün notaları: 6. tel açık (Mi2) ve 3. perde (Sol2), 5. tel açık (La2) ve 3. perde (Do3)."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The four-bar TAB line in quarter notes at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Dört ölçülük tab satırı dörtlüklerle ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Read the four-bar TAB and play it along with the click, one note per beat. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Dört ölçülük tab'ı oku ve klikle birlikte çal; her vuruşa bir nota. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "E2 E2 G2 G2 | A2 A2 C3 C3 | E2 G2 A2 C3 | C3 A2 G2 E2",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I read the top TAB line as string 1.", "tr": "Tab'ın en üst çizgisini 1. tel olarak okudum." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: string 1 was heard instead of string 6.", "tr": "Farklı nota: 6. tel yerine 1. tel duyuldu." },
+      "fix": {
+        "en": "TAB is upside down compared with how you look at the strings. Mark the top line \"1, high E\" and check one open string first.",
+        "tr": "Tab, tellere bakışına göre ters durur. Üst çizgiye \"1, tiz Mi\" yaz ve önce bir açık teli kontrol et."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Read one note ahead: while one note rings, find the next string and fret.",
+        "tr": "Bir nota önden oku: bir nota çalarken sonraki teli ve perdeyi bul."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read only the open strings first (E2 and A2) at ♩=40, then add the fret-3 notes.",
+    "tr": "Önce yalnız açık telleri (Mi2 ve La2) ♩=40'ta oku, sonra 3. perde notalarını ekle."
+  },
+  "legacy": "V: guitar.journey.reading.tablature",
+  "minutes": 12,
+  "expertPending": true
+}

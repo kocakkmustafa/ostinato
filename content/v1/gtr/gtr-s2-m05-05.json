@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s2-m05-05",
+  "title": { "en": "G to C", "tr": "G'den C'ye" },
+  "goal": {
+    "en": "Changes between G and C at least 16 times in 60 seconds.",
+    "tr": "G ile C arasında 60 saniyede en az 16 kez geçer."
+  },
+  "explanation": [
+    {
+      "en": "This change has the longest path so far. A different G fingering makes it shorter.",
+      "tr": "Bu geçiş şimdiye kadarki en uzun yoldur. Farklı bir G parmaklaması yolu kısaltır."
+    },
+    {
+      "en": "Play G (3-2-0-0-0-3) with finger 3 on string 6, finger 2 on string 5 and finger 4 on string 1.",
+      "tr": "G'yi (3-2-0-0-0-3) 6. telde 3. parmak, 5. telde 2. parmak ve 1. telde 4. parmakla çal."
+    },
+    {
+      "en": "To reach C (x-3-2-0-1-0), move fingers 3 and 2 together one string toward the floor. Then drop finger 1 on string 2, fret 1.",
+      "tr": "C'ye (x-3-2-0-1-0) gitmek için 3. ve 2. parmağı birlikte bir tel aşağı, yere doğru taşı. Sonra 1. parmağı 2. telin 1. perdesine koy."
+    },
+    {
+      "en": "Keep the shape of fingers 3 and 2 during the move, like one block.",
+      "tr": "Hareket boyunca 3. ve 2. parmağın biçimini tek bir blok gibi koru."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "G and C, one strum each, changing every two beats at ♩=60, then at ♩=40.",
+      "tr": "G ve C, her birine bir vuruş, ♩=60'ta iki vuruşta bir geçiş, sonra ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Change back and forth for 60 seconds. Each change counts when every string of the new chord is heard. Use the G with fingers 3, 2 and 4.",
+      "tr": "60 saniye boyunca ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır. 3., 2. ve 4. parmaklı G'yi kullan."
+    },
+    "sequence": "G ↔ C · 60 s",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 16 changes in 60 seconds. A change counts when every string of the new chord is heard.",
+        "tr": "60 saniyede en az 16 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Fingers 3 and 2 moved together as one block.", "tr": "3. ve 2. parmak tek blok gibi birlikte hareket etti." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "C starts on string 5. Aim the strum at string 5 and let string 6 stay silent.",
+        "tr": "C 5. telden başlar. Vuruşu 5. tele yönelt, 6. tel sessiz kalsın."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "In C, the palm or finger 1 touches string 1. Arch finger 1 and move the palm slightly away from the neck.",
+        "tr": "C'de avuç ya da 1. parmak 1. tele değiyor. 1. parmağı kemerle ve avucu saptan biraz uzaklaştır."
+      }
+    },
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Lift the fingers less and look at the next spot first; aim for even changes, not fast ones.",
+        "tr": "Parmakları daha az kaldır ve önce sonraki yere bak; hızlı değil düzenli geçişe odaklan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Move only the block of fingers 3 and 2 between strings 6–5 and 5–4, then add finger 1 and the strum.",
+    "tr": "Yalnız 3. ve 2. parmak bloğunu 6–5. teller ile 5–4. teller arasında taşı; sonra 1. parmağı ve vuruşu ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

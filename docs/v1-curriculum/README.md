@@ -1,6 +1,6 @@
 # Ostinato v1 müfredat planı
 
-**Tarih:** 2026-10-31 · **Durum:** taslak, kurucu + müzik öğretmeni + hukuk incelemesi bekliyor
+**Tarih:** 2026-10-31 · **Durum:** kurucu kararları işlendi (1 Kas); müzik öğretmeni incelemesi ve Türk halk ezgileri için hukuk onayı bekliyor
 **Dayanak:** Kurucu kararları (31 Eki 2026): tek uygulama odağı Ostinato; v1 kapsamı ~690 ders; birinci taraf kayıt yok; kamera yalnız S1 duruş; pratik ekranda, nota başına mikrofon geri bildirimi (doğru / farklı nota / duyamadım).
 **Kaynak araştırma:** `scratch/2026-10-31-ostinato-derin/` (0 ürün önerisi, 1 talep ve müfredat §2–§5, 3 teknoloji §4). Mevcut dersler: `assets/content/*.v1.json`, `assets/content/library.json`.
 
@@ -72,13 +72,15 @@ Mikrofonla ölçülen ders oranı **%93** (643/690). Motor adımlarına göre d�
 
 1. ~~**Motor sırası**~~ **Kararlaştı (kurucu, 31 Eki; Yönetim iletti):** A3 → A5 → A4.
 2. **Ücretsiz kapsam:** ~~Kulak S1–S2'nin tamamı mı, yalnız S1 mi?~~ **Kararlaştı (kurucu, 31 Eki; Yönetim iletti):** kulak S1 ücretsiz, S2 premium; kulak ayrı satılmaz. Açık kalan: çalgı kurslarında ücretsiz çekirdek (ör. her kursun S1 M01–M02).
-3. **Amfisiz elektro gitar** mikrofonla test edilmedi. Elektro kol (`m19b`, 19 ders) amfi/kulaklık amfisi şartıyla mı açılsın, yoksa v1.x'e mi kalsın?
-4. **Piyano alt frekans sınırı** bugün 70 Hz; S1–S3 C2'ye (65,4 Hz) iniyor. Motorun ≤60 Hz'e inmesi gerekiyor ya da pes dersleri (`pno-s1-m03-08`, sol el 2 oktav gamlar) C3 üstüne kaydırılmalı.
-5. **Geçiş eşikleri** (`00-…` §6.2) pedagojik tahmin. Müzik öğretmeni incelemesi için bütçe/kişi kararı (ürün önerisi §6 madde 5) hâlâ açık.
-6. **Hukuk:** kamu malı liste onayı; Türk halk ezgilerinde derleme hakkı; geleneksel ezgilerde "eski varyant" yeterliliği (`60-…` §7).
-7. **Ses M18 armoni modülü** kulaklık olmadan güvenilir ölçülemez. Kulaklık şartı mı, Ö'ye düşüş mü?
-8. **Kamera el/bilek uyarısı** bugün yok (mevcut referans yalnız gövde hizası). `gtr-s1-m01-03` ve `pno-s1-m01-02` bu yüzden v1'de fiilen Ö olabilir.
-9. **Sayım konvansiyonu:** "~690" yazılan ders mi (bu plan), öğrencinin gördüğü ders mi (671)? Mağaza metninde hangisi kullanılacak?
+3. ~~**Amfisiz elektro gitar**~~ **Kararlaştı (kurucu, 1 Kas; Yönetim iletti):** elektro kol (`m19b`, 19 ders) v1'de.
+4. ~~**Piyano alt frekans sınırı**~~ **Kapandı (kurucu, 1 Kas):** motorun alt sınırı 28 Hz'e indi (PR #7); C2 (65,4 Hz) dersleri plandaki yerinde açık kalır.
+5. ~~**Geçiş eşikleri**~~ **Kararlaştı (kurucu, 1 Kas):** varsayılan %80 kalır, ders dosyalarındaki `expertPending` işareti durur. Müzik öğretmeni incelemesi sonraya bırakıldı.
+6. ~~**Hukuk**~~ **Kararlaştı (kurucu, 1 Kas):** kamu malı eserler (`60-…`) v1'de. **Türk halk ezgileri hukuk onayına kadar kilitli**; bu satırlar yazılabilir ama paketlenmez.
+7. ~~**Ses M18 armoni**~~ **Kararlaştı (kurucu, 1 Kas):** M18 (16 ders) v1'de; her dersin başında kulaklık uyarısı gösterilir.
+8. ~~**Kamera el/bilek uyarısı**~~ **Kararlaştı (kurucu, 1 Kas):** el/bilek duruşu uyarısı v1'de. Kamera izni yalnız `K` derslerinde istenir; görüntü cihazda işlenir, kaydedilmez ve gönderilmez.
+9. ~~**Sayım konvansiyonu**~~ **Kararlaştı (kurucu, 1 Kas):** mağaza metninde **690 ders** yazılır.
+
+Diğer kurucu kararları (1 Kas): atıflar ayrı ekranda değil, Ayarlar > Hakkında'daki tek lisans metninde ya da mağaza açıklamasında; 12 dil için anadili incelemesi şimdilik yok.
 
 ## Sonraki adımlar (bu PR'ın kapsamı dışında)
 

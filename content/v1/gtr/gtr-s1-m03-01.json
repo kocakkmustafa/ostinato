@@ -1,0 +1,84 @@
+{
+  "id": "gtr-s1-m03-01",
+  "title": { "en": "Pulse, metronome and the clap test", "tr": "Vuruş, metronom ve alkış testi" },
+  "goal": {
+    "en": "Claps 8 beats with the metronome at ♩=60 and ♩=80 after calibrating the click delay.",
+    "tr": "Klik gecikmesini ayarladıktan sonra metronomla ♩=60 ve ♩=80'de 8 vuruş alkışlar."
+  },
+  "explanation": [
+    {
+      "en": "The pulse is the steady beat under the music. It keeps going even when nothing sounds.",
+      "tr": "Vuruş, müziğin altındaki düzenli zamandır. Hiçbir ses yokken de devam eder."
+    },
+    {
+      "en": "In 4/4 one bar has four equal beats, counted 1 2 3 4. After 4 the next bar starts at 1.",
+      "tr": "4/4'te bir ölçüde dört eşit vuruş vardır; 1 2 3 4 diye sayılır. 4'ten sonra yeni ölçü 1 ile başlar."
+    },
+    {
+      "en": "The phone's speaker and microphone add a small delay. A short calibration measures it once, so later lessons judge your timing fairly.",
+      "tr": "Telefonun hoparlörü ve mikrofonu küçük bir gecikme ekler. Kısa bir kalibrasyon bunu bir kez ölçer; böylece sonraki dersler zamanlamanı adil değerlendirir."
+    },
+    {
+      "en": "Listen to four clicks first, then clap right on each click. Clap short and crisp, palms flat.",
+      "tr": "Önce dört klik dinle, sonra her kliğin tam üstüne alkışla. Kısa ve net alkışla, avuçlar düz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "Calibration clicks, then a metronome click at ♩=60 and at ♩=80 with a four-click count-in.",
+      "tr": "Kalibrasyon klikleri, ardından dört kliklik girişle ♩=60 ve ♩=80'de metronom kliği."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Run the click calibration and follow the on-screen steps. Then clap 8 beats with the click at ♩=60, and 8 more at ♩=80.",
+      "tr": "Klik kalibrasyonunu başlat ve ekrandaki adımları izle. Sonra klikle birlikte ♩=60'ta 8 vuruş, ♩=80'de 8 vuruş daha alkışla."
+    },
+    "sequence": "4/4: q q q q | q q q q",
+    "tempo": { "open": 60, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Median timing deviation at most 60 ms, at both ♩=60 and ♩=80.",
+        "tr": "Medyan zaman sapması hem ♩=60'ta hem ♩=80'de en çok 60 ms."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "You are guessing the beat. Wait for the click and clap right on it.",
+        "tr": "Vuruşu tahmin ediyorsun. Kliği bekle ve tam üstüne alkışla."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Count the beat silently with the count-in and start the clap a moment sooner.",
+        "tr": "Girişle birlikte vuruşu içinden say ve alkışa biraz daha erken başla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone, in a quieter room, and use headphones for the click.",
+        "tr": "Telefona daha yakın, daha sessiz bir odada alkışla; klik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Tap the beat on your leg for the first four clicks, then switch to clapping.",
+    "tr": "İlk dört klikte vuruşu dizine vur, sonra alkışa geç."
+  },
+  "legacy": "V: guitar.journey.start.first_pulse",
+  "minutes": 10,
+  "expertPending": true
+}

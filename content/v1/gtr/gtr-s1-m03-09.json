@@ -1,0 +1,75 @@
+{
+  "id": "gtr-s1-m03-09",
+  "title": { "en": "Ties and held notes", "tr": "Bağlar ve uzatmalar" },
+  "goal": {
+    "en": "Holds tied B3 notes across the beat and the barline at ♩=60 without plucking again.",
+    "tr": "♩=60'ta bağlı Si3 notalarını yeniden çalmadan vuruş ve ölçü çizgisi boyunca tutar."
+  },
+  "explanation": [
+    {
+      "en": "A tie is a curved line joining two notes of the same pitch. Add their lengths and pluck only the first note.",
+      "tr": "Bağ, aynı yükseklikteki iki notayı birleştiren eğri çizgidir. Sürelerini topla ve yalnız ilk notayı çal."
+    },
+    {
+      "en": "A tie can cross the barline. A note on beat 4 tied to beat 1 rings into the next bar.",
+      "tr": "Bağ ölçü çizgisini geçebilir. 4. vuruştaki nota 1. vuruşa bağlıysa yeni ölçüye taşar."
+    },
+    {
+      "en": "Keep counting \"4 | 1 2 3 4\" while the tied note rings. The count tells you when the next note comes.",
+      "tr": "Bağlı nota çalarken \"4 | 1 2 3 4\" saymayı sürdür. Sonraki notanın ne zaman geleceğini sayım söyler."
+    },
+    {
+      "en": "A tie is not a rest: the note keeps sounding. A rest is silence.",
+      "tr": "Bağ sus değildir: nota çalmaya devam eder. Sus ise sessizliktir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Open B3 in an original four-bar tied rhythm with a click, at ♩=60 and at ♩=45.",
+      "tr": "Klikle özgün dört ölçülük bağlı ritimde açık Si3, ♩=60 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the four bars on open B3 with the click at ♩=60. Pluck only the first note of each tie and let it ring.",
+      "tr": "Klikle ♩=60'ta dört ölçüyü açık Si3'te çal. Her bağın yalnız ilk notasını çal ve çınlamasına izin ver."
+    },
+    "sequence": "4/4: q q~q q | h q q~ | q q h | q~q h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I plucked only the first note of each tie.", "tr": "Her bağın yalnız ilk notasını çaldım." },
+    { "en": "I kept counting through the barline.", "tr": "Ölçü çizgisinde de saymayı sürdürdüm." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: an extra note was heard on a tie.", "tr": "Farklı: bağda fazladan bir nota duyuldu." },
+      "fix": {
+        "en": "The tied note was plucked again. Circle each tied pair and say \"hold\" on the second note.",
+        "tr": "Bağlı nota yeniden çalındı. Her bağlı çifti daire içine al ve ikinci notada \"tut\" de."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The note after the tie came too soon. Count every beat of the held note aloud.",
+        "tr": "Bağdan sonraki nota erken geldi. Tutulan notanın her vuruşunu sesli say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise bars 1 and 2 only, with the tie inside the bar, before the tie across the barline.",
+    "tr": "Ölçü çizgisini geçen bağdan önce yalnız ölçü içindeki bağı olan 1. ve 2. ölçüleri çalış."
+  },
+  "legacy": "V: guitar.journey.reading.rests_ties",
+  "minutes": 12,
+  "expertPending": true
+}

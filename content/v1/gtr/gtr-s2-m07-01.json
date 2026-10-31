@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s2-m07-01",
+  "title": { "en": "E7 and A7", "tr": "E7 ve A7" },
+  "goal": {
+    "en": "Plays the open dominant seventh chords E7 and A7 with every string ringing.",
+    "tr": "Açık dominant yedili E7 ve A7 akorlarını bütün teller çalarak çalar."
+  },
+  "explanation": [
+    {
+      "en": "A seventh chord adds a fourth note to the triad. It sounds open and wants to move on.",
+      "tr": "Yedili akor, üç sesli akora dördüncü bir ses ekler. Açık duyulur ve bir yere gitmek ister."
+    },
+    {
+      "en": "E7: 0-2-0-1-0-0. Hold E and lift finger 3 from string 4; the open D3 is the added seventh.",
+      "tr": "E7: 0-2-0-1-0-0. E akorunu bas ve 3. parmağı 4. telden kaldır; açık Re3 eklenen yedilidir."
+    },
+    {
+      "en": "A7: x-0-2-0-2-0. Hold A and leave string 3 open; the open G3 is the seventh. Start the strum on string 5.",
+      "tr": "A7: x-0-2-0-2-0. A akorundan 3. teli açık bırak; açık Sol3 yedilidir. Vuruşa 5. telden başla."
+    },
+    {
+      "en": "The open strings inside a chord must ring. Arch the fingers so no fingertip leans on an open string.",
+      "tr": "Akorun içindeki açık teller çalmalı. Parmakları kavisli tut; hiçbir parmak ucu açık tele yaslanmasın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "E7 and A7, each strummed once and then plucked string by string, string-model synthesis.",
+      "tr": "E7 ve A7, her biri bir kez taranır, sonra tel tel çekilir; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum E7 four times, then A7 four times. Then pluck the chord string by string; the app checks each string.",
+      "tr": "E7'yi dört kez, sonra A7'yi dört kez tara. Sonra akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "E7 E7 E7 E7 | A7 A7 A7 A7",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "I heard the open D3 in E7 and the open G3 in A7.", "tr": "E7'de açık Re3'ü, A7'de açık Sol3'ü duydum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 4 not heard.", "tr": "Farklı akor: 4. tel duyulmadı." },
+      "fix": {
+        "en": "In E7, finger 2 leans on the open D string. Arch it and play on the very tip.",
+        "tr": "E7'de 2. parmak açık Re teline yaslanıyor. Parmağı kavisli tut ve tam ucuyla bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "A7 starts on string 5. Aim the pick at string 5 before you strum.",
+        "tr": "A7 5. telden başlar. Taramadan önce penayı 5. tele yönelt."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only strings 4 to 1 of each chord until the open seventh rings, then add the bass strings.",
+    "tr": "Açık yedili çalana kadar her akorun yalnız 4.–1. tellerini çal; sonra bas tellerini ekle."
+  },
+  "legacy": "V: guitar.foundations.chords_beyond_eight",
+  "minutes": 12,
+  "expertPending": true
+}

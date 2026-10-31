@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s1-m04-03",
+  "title": { "en": "E and A major", "tr": "Mi ve La majör" },
+  "goal": {
+    "en": "Plays E and A cleanly and names the one note that makes each one major.",
+    "tr": "E ve A'yı temiz çalar ve her birini majör yapan tek notayı adlandırır."
+  },
+  "explanation": [
+    {
+      "en": "E: 0-2-2-1-0-0. It is Em with one more finger: finger 1 on string 3, fret 1.",
+      "tr": "E: 0-2-2-1-0-0. Em'e bir parmak eklenmiş hâlidir: 1. parmak 3. telin 1. perdesinde."
+    },
+    {
+      "en": "Compare Em and E on string 3: G3 in Em, G♯3 in E. Only this third changes; the other notes stay.",
+      "tr": "Em ile E'yi 3. telde karşılaştır: Em'de Sol3, E'de Sol♯3. Yalnız bu üçlü değişir; diğer notalar aynı kalır."
+    },
+    {
+      "en": "A: x-0-2-2-2-0. Put fingers 1, 2 and 3 on strings 4, 3 and 2, all at fret 2. Start on string 5.",
+      "tr": "A: x-0-2-2-2-0. 1., 2. ve 3. parmağı 4., 3. ve 2. tele, hepsi 2. perdeye koy. 5. telden başla."
+    },
+    {
+      "en": "Compare Am and A on string 2: C4 in Am, C♯4 in A. Again only the third changes.",
+      "tr": "Am ile A'yı 2. telde karşılaştır: Am'de Do4, A'da Do♯4. Yine yalnız üçlü değişir."
+    },
+    {
+      "en": "In A three fingers share fret 2. Angle them slightly so open string 1 still rings.",
+      "tr": "A'da üç parmak 2. perdeyi paylaşır. Açık 1. tel yine çalsın diye parmakları hafifçe eğik yerleştir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Em then E, Am then A, each strummed and then plucked string by string, slowly.",
+      "tr": "Önce Em sonra E, önce Am sonra A; her biri vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum E four times, then A four times, in your own time. Then pluck each chord string by string; the app checks each string.",
+      "tr": "Kendi hızında E'yi dört kez, sonra A'yı dört kez vur. Sonra her akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "E | E | E | E | A | A | A | A",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "I can point to the string that changes between Em and E, and between Am and A.", "tr": "Em ile E ve Am ile A arasında değişen teli gösterebiliyorum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "In A, finger 3 is touching string 1. Tilt the three fingers and press finger 3 with its very tip.",
+        "tr": "A'da 3. parmak 1. tele değiyor. Üç parmağı eğ ve 3. parmakla tam uçtan bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "A starts on string 5. Aim the pick at string 5 before you strum.",
+        "tr": "A 5. telden başlar. Vurmadan önce penayı 5. tele hizala."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Compare major and minor on the one changing string first, then hold the full chord.",
+    "tr": "Önce majör ve minörü yalnız değişen telde karşılaştır, sonra tam akoru tut."
+  },
+  "legacy": "R: guitar.journey.chords.e_a",
+  "minutes": 12,
+  "expertPending": true
+}

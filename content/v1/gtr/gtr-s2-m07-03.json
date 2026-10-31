@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s2-m07-03",
+  "title": { "en": "Sus2 and sus4", "tr": "Sus2 ve sus4" },
+  "goal": {
+    "en": "Changes the colour of D and A with sus chords, moving one finger on the beat at ♩=60.",
+    "tr": "D ve A akorlarının rengini sus akorlarıyla değiştirir; ♩=60'ta vuruşta tek parmak oynatır."
+  },
+  "explanation": [
+    {
+      "en": "A sus chord replaces the third with the 2nd or the 4th. It sounds open and unresolved.",
+      "tr": "Sus akor, üçlünün yerine 2'liyi ya da 4'lüyü koyar. Açık ve çözülmemiş duyulur."
+    },
+    {
+      "en": "Dsus4: x-x-0-2-3-3. From D, add finger 4 on string 1, fret 3. G4 replaces F♯4.",
+      "tr": "Dsus4: x-x-0-2-3-3. D'den 4. parmağı 1. tel 3. perdeye ekle. Sol4, Fa♯4'ün yerini alır."
+    },
+    {
+      "en": "Dsus2: x-x-0-2-3-0. From D, lift finger 2 from string 1. The open E4 replaces F♯4.",
+      "tr": "Dsus2: x-x-0-2-3-0. D'den 2. parmağı 1. telden kaldır. Açık Mi4, Fa♯4'ün yerini alır."
+    },
+    {
+      "en": "Asus4: x-0-2-2-3-0. From A, add finger 4 on string 2, fret 3; D4 replaces C♯4.",
+      "tr": "Asus4: x-0-2-2-3-0. A'dan 4. parmağı 2. tel 3. perdeye ekle; Re4, Do♯4'ün yerini alır."
+    },
+    {
+      "en": "The chord shape stays; only one finger moves. Return to the plain chord on the next bar.",
+      "tr": "Akor şekli kalır; yalnız bir parmak oynar. Sonraki ölçüde düz akora dön."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "D–Dsus4–D–Dsus2 and A–Asus4–A–A, four down strums per bar, at ♩=60 and ♩=40.",
+      "tr": "D–Dsus4–D–Dsus2 ve A–Asus4–A–A, ölçü başına dört aşağı vuruş, ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Strum four down strokes per bar with the click: D, Dsus4, D, Dsus2, then A, Asus4, A, A. Change on beat 1.",
+      "tr": "Klikle her ölçüde dört aşağı vuruş yap: D, Dsus4, D, Dsus2, sonra A, Asus4, A, A. Akoru 1. vuruşta değiştir."
+    },
+    "sequence": "4/4: D | Dsus4 | D | Dsus2 | A | Asus4 | A | A",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "Only one finger moved between each chord and its sus chord.", "tr": "Her akorla sus akoru arasında yalnız bir parmak oynadı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "In Dsus2, finger 3 touches the open E string. Arch finger 3 so string 1 rings.",
+        "tr": "Dsus2'de 3. parmak açık Mi teline değiyor. 1. tel çalsın diye 3. parmağı kavisli tut."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Move only the one finger. Get it ready over its fret on beat 4.",
+        "tr": "Yalnız o tek parmağı oynat. Onu 4. vuruşta perdesinin üstünde hazırla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Give each chord two bars at ♩=50 and play only strings 4 to 1.",
+    "tr": "♩=50'de her akora iki ölçü ver ve yalnız 4.–1. telleri çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}
