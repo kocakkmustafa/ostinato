@@ -120,3 +120,50 @@ yakalamayı durdurmaz. Native yoksa ya da çapa gelmezse pratik **sessiz
   bağımlılık yok.
 - Akort kapısı (sözleşme §5 kural 2) bu döngüde **yok**: F4.1 akort ekranı
   ayrı iştir; doğrulayıcı ±50 c toleransla çalışır.
+
+## F2.5 Sonuç ekranı ve geçiş kapısı
+
+- `practice_outcome.dart`: ✓/◆/◯ sayaçları; **doğruluk = doğru / (doğru +
+  farklı)** ("duyamadım" paydada yok), **duyulma = (doğru + farklı) / tümü**.
+- Kapı şemadaki `pass`'tan: `levelDefault` → sözleşme §6.2 seviye doğruluğu
+  (S1 %80, S2–S3 %85, S4 %90) + duyulma ≥%80 + hedef tempo; `minCorrect`
+  varsa ek koşul; özel kural metni (`levelDefault: false`) ekranda aynen
+  gösterilir, makinece denetlenen kısmı seviye varsayılanı + `minCorrect`'tir.
+  `expertPending` ise "eşikler öğretmen incelemesi bekliyor" yazar.
+- Kapı yalnız **tam tek turda** ölçülür: döngü, "Beni bekle" ya da yarıda
+  durdurma → "Pratik turu" (sayaçlar var, kapı yok). Sözleşme §6.3 açılış
+  temposunun da sonraki dersi açtığını söyler; görev tanımı hedef tempoyu
+  istediği için kapı **hedef tempoda** kuruldu (karar kurucuya açık).
+- Önerilen tek adım: geçti → "Sonraki derse geç"; duyulma düşük →
+  "Kurulumu kontrol et" ("Puanın değil, mikrofonun takıldı…"); doğruluk
+  düşük → "Bu ölçüleri %70 tempoda döngüle"; tempo altında → "+5"; pratik
+  turu → "Tüm diziyi hedef tempoda çal".
+- Hata haritası: ölçü başına işaretler; ölçüye dokununca o ölçü döngülenir;
+  farklı notalarda "Fa2 duydum · Sol2 bekleniyordu ↑".
+- `practice_progress_store.dart`: hesap başına yerel dosya
+  `v1_practice_progress.v1.json`, `evidence: measured_practice` (gitar
+  yolculuğunun öz beyan deposundan ayrı; ona dokunulmadı). Yalnız sayılar;
+  ses yok. Açma kuralı: sıradaki ilk ders açık; her ders öncekinin ölçülen
+  geçişiyle açılır. Geçişte "Sıradaki ders açıldı" ve doğrudan açılır.
+- `v1_practice_catalog.dart` + `pubspec.yaml`: `content/v1/gtr/` paketlendi;
+  katalog M/M! + perde dizisi olan gitar dersleri (bugün 1 ders:
+  `gtr-s1-m02-02`; sıradaki ders yazılınca kendiliğinden kilitli görünür).
+- Giriş: gitar yolculuğu ekranında "Ölçülü pratik" kartı → ders listesi →
+  pratik ekranı (`practice_loop_screen.dart`: tempo, döngü, Beni bekle, klik
+  sesi, akan tab, görsel vuruş, mikrofon şeridi + sayaçlar, kurulum kartı,
+  bekleme balonu) → sonuç.
+- Seri/haftalık hedef (PR #12) için `onSessionFinished` →
+  `PracticeSessionFinished(lessonId, course: guitar, activeDuration,
+  heardEvents, summary)`; bağlantıyı iki dal birleşince Yönetim yapar.
+
+## Metinler
+
+Yeni kullanıcı metinleri `localized(context, en, tr)` ile; liste
+`docs/practice/copy/practice-loop.copy.json` (86 çift; senkronu
+`test/practice_copy_test.dart` denetler). Kimlik tablosuna **eklenmedi**:
+mevcut test (`app_locale_preferences_test`) tablodaki her kimliğin 14
+katalogda da olmasını şart koşuyor. 81 metin yeni; 12 dilde (ar, de,
+es-419, fr, hi, id, it, ja, ko, pl, pt-BR, zh-Hans) **81 metin eksik**, o
+dillerde şimdilik İngilizce görünür. Çeviri adımı:
+`python3 tool/build_message_ids.py --pending docs/practice/copy`, sonra
+`--add` ve 12 katalog.
