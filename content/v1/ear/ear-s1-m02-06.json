@@ -1,0 +1,80 @@
+{
+  "id": "ear-s1-m02-06",
+  "title": { "en": "Do-re-mi", "tr": "Do-re-mi" },
+  "goal": {
+    "en": "Sings the first three steps of the scale as do-re-mi.",
+    "tr": "Gamın ilk üç basamağını do-re-mi diye söyler."
+  },
+  "explanation": [
+    {
+      "en": "Do, re and mi are the first three steps of a major scale. Each is a whole step above the one before.",
+      "tr": "Do, re ve mi majör gamın ilk üç basamağıdır. Her biri bir öncekinden bir tam ses yukarıdadır."
+    },
+    {
+      "en": "Here do is simply your starting note. The app picks it in your comfortable range, so it need not be the note C.",
+      "tr": "Burada 'do' senin başlangıç notandır. Uygulama onu rahat menzilinden seçer; piyanodaki Do notası olmak zorunda değildir."
+    },
+    {
+      "en": "Sing 1-2-3-2-1: do, re, mi, re, do. Come back down to the same do you started on.",
+      "tr": "1-2-3-2-1 söyle: do, re, mi, re, do. Başladığın do'ya geri dön."
+    },
+    {
+      "en": "Sing in your own octave and keep it light; these three notes should feel easy.",
+      "tr": "Kendi oktavında ve hafif söyle; bu üç nota kolay gelmeli."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do-re-mi-re-do from a starting note in your comfortable range, piano tone, at normal and slow speed.",
+      "tr": "Rahat menzilindeki bir başlangıç notasından do-re-mi-re-do, piyano tınısı, normal ve yavaş hızda."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to do, then sing do-re-mi-re-do three times in your own octave. If you'd rather not sing, do the 'Up, down or same' drill instead.",
+      "tr": "Do'yu dinle, sonra kendi oktavında üç kez do-re-mi-re-do söyle. Söylemek istemiyorsan bunun yerine 'Yukarı, aşağı, aynı' alıştırmasını yap."
+    },
+    "sequence": "1-2-3-2-1 | 1-2-3-2-1 | 1-2-3-2-1",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I came back to the same do I started on.", "tr": "Başladığım do'ya geri döndüm." },
+    {
+      "en": "Re and mi sounded like the reference, not squeezed together.",
+      "tr": "Re ve mi referans gibi geldi, birbirine sıkışmadı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, mi is a little low.", "tr": "Farklı nota, mi biraz alçak." },
+      "fix": {
+        "en": "Mi is a whole step above re; replay the reference and aim a touch higher.",
+        "tr": "Mi, re'den bir tam ses yukarıdadır; referansı yeniden dinle ve biraz daha yukarıyı hedefle."
+      }
+    },
+    {
+      "error": { "en": "Different note, the last do is lower than the first.", "tr": "Farklı nota, son do ilkinden alçak." },
+      "fix": {
+        "en": "Replay do before the last round and land on it softly.",
+        "tr": "Son turdan önce do'yu yeniden dinle ve yumuşakça üstüne in."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": { "en": "Sing only do-re-do until it passes, then add mi.", "tr": "Önce yalnız do-re-do söyle; geçince mi'yi ekle." },
+  "minutes": 8,
+  "expertPending": true
+}

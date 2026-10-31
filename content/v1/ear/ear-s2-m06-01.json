@@ -1,0 +1,71 @@
+{
+  "id": "ear-s2-m06-01",
+  "title": { "en": "Hearing M2 and M3", "tr": "B2 ve B3'ü duymak" },
+  "goal": {
+    "en": "Tells a major second from a major third by ear.",
+    "tr": "Büyük ikiliyi büyük üçlüden kulaktan ayırt eder."
+  },
+  "explanation": [
+    {
+      "en": "An interval is the distance between two notes. Here the two notes play one after the other, going up.",
+      "tr": "Aralık iki nota arasındaki uzaklıktır. Burada iki nota art arda, yukarı doğru çalar."
+    },
+    {
+      "en": "A major second (M2) is a whole step: do to re.",
+      "tr": "Büyük ikili (B2) bir tam sestir: do'dan re'ye."
+    },
+    {
+      "en": "A major third (M3) is two whole steps: do to mi. It skips one note in between.",
+      "tr": "Büyük üçlü (B3) iki tam sestir: do'dan mi'ye. Arada bir nota atlanır."
+    },
+    {
+      "en": "To check, call the first note do and step up in your head: one step to reach the second note means M2; two steps, M3.",
+      "tr": "Kontrol için ilk notaya do de ve içinden basamakla: ikinci notaya bir basamakta varıyorsan B2, ikide varıyorsan B3."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays two notes going up from a random starting note; the drill synthesizes them.",
+      "tr": "Her soruda rastgele bir başlangıçtan yukarı iki nota çalar; alıştırma bunları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Hear the two notes and choose: major second or major third. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "İki notayı dinle ve seç: büyük ikili mi, büyük üçlü mü? Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 10 },
+    "drill": {
+      "type": "interval_name",
+      "count": 12,
+      "params": {
+        "intervals": ["M2", "M3"],
+        "direction": "ascending",
+        "cadence": false,
+        "range": "C3-C5"
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: M3 chosen for M2.", "tr": "Farklı cevap: B2 yerine B3 seçildi." },
+      "fix": {
+        "en": "Step through it: do-re is one step. Only if you need a second step is it M3.",
+        "tr": "Basamakla: do-re tek adımdır. İkinci bir adım gerekiyorsa ancak o zaman B3'tür."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay the pair, then sing do-re and do-mi in your head to compare.",
+    "tr": "Çifti yeniden dinle; ardından içinden do-re ve do-mi'yi söyleyip karşılaştır."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

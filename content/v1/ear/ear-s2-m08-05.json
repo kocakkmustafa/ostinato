@@ -1,0 +1,83 @@
+{
+  "id": "ear-s2-m08-05",
+  "title": { "en": "Sight-sing four bars", "tr": "Dört ölçü deşifre" },
+  "goal": {
+    "en": "Sings a new stepwise four-bar line from the staff with the click.",
+    "tr": "Porteden, basamakla ilerleyen yeni bir dört ölçüyü klikle söyler."
+  },
+  "explanation": [
+    {
+      "en": "Sight-singing means singing a line you have never heard, straight from the staff.",
+      "tr": "Deşifre, hiç duymadığın bir satırı doğrudan porteden söylemektir."
+    },
+    {
+      "en": "Before you sing, find do: look at the key signature and at the last note, which is usually do.",
+      "tr": "Söylemeden önce do'yu bul: donanıma ve çoğunlukla do olan son notaya bak."
+    },
+    {
+      "en": "Scan the line. These lines move by step, so each note is the next line or space up or down.",
+      "tr": "Satırı göz gezdir. Bu satırlar basamakla ilerler; her nota bir üst ya da alt çizgi ya da aralıktır."
+    },
+    {
+      "en": "Read the rhythm in your head first, then sing on the syllables.",
+      "tr": "Önce ritmi içinden oku, sonra hecelerle söyle."
+    },
+    {
+      "en": "Keep going even if a note slips; the next beat is a fresh start.",
+      "tr": "Bir nota kaysa da devam et; sonraki vuruş yeni bir başlangıçtır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Tonic chord and do in your range, then a one-bar click count-in at ♩=60; the line itself plays only after you sing, for comparison.",
+      "tr": "Rahat menzilinde tonik akor ve do, ardından ♩=60'ta bir ölçülük klik girişi; satırın kendisi yalnız sen söyledikten sonra, karşılaştırma için çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Four new lines, four bars each, in C, G or F major. Hear do and the count-in, then sing the line with the click at ♩=60. Sing in your own octave. If you'd rather not sing, choose the on-screen version: you hear a line and choose which of two staves it matches.",
+      "tr": "Do, Sol ya da Fa majörde dörder ölçülük dört yeni satır. Do'yu ve giriş sayımını dinle, sonra satırı ♩=60'ta klikle söyle. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: bir satır dinler, iki porteden hangisine uyduğunu seçersin."
+    },
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    { "en": "I kept going when a note slipped.", "tr": "Bir nota kaydığında devam ettim." },
+    {
+      "en": "My line matched the comparison afterwards.",
+      "tr": "Satırım sonradan çalınan karşılaştırmayla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note from the first note on, one step off.",
+        "tr": "Farklı nota: ilk notadan itibaren bir basamak kaymış."
+      },
+      "fix": {
+        "en": "Find the first note's degree before the count-in and sing it against do.",
+        "tr": "Giriş sayımından önce ilk notanın derecesini bul ve do'ya göre söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late after a long note.", "tr": "Doğru, ama uzun bir notadan sonra geç." },
+      "fix": {
+        "en": "Keep counting through half notes; the next note comes right on the beat.",
+        "tr": "İkiliklerde saymaya devam et; sonraki nota tam vuruşta gelir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=50 and speak the rhythm on “ta” once before you sing.",
+    "tr": "♩=50'ye in ve söylemeden önce ritmi bir kez “ta” diye konuş."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

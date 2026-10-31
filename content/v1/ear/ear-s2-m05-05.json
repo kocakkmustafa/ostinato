@@ -1,0 +1,84 @@
+{
+  "id": "ear-s2-m05-05",
+  "title": { "en": "Hearing home", "tr": "Evi duymak" },
+  "goal": {
+    "en": "Finds the tonic by ear: tells whether a short melody ends at home.",
+    "tr": "Toniği kulaktan bulur: kısa bir ezginin evde bitip bitmediğini ayırt eder."
+  },
+  "explanation": [
+    {
+      "en": "The tonic, or do, is home: the note where a melody feels finished.",
+      "tr": "Tonik, yani do, evdir: ezginin bittiğini hissettiren notadır."
+    },
+    {
+      "en": "Each question first plays a short chord progression, a cadence. It sets the key, so you know where home is.",
+      "tr": "Her soru önce kısa bir akor dizisi, bir kadans çalar. Kadans tonu kurar; evin nerede olduğunu böylece bilirsin."
+    },
+    {
+      "en": "A melody that stops on another degree sounds open, as if a question is still hanging.",
+      "tr": "Başka bir derecede duran ezgi açık kalır, sanki bir soru havada asılı."
+    },
+    {
+      "en": "To check, imagine do right after the last note. If the last note already was do, nothing moves.",
+      "tr": "Kontrol için son notadan hemen sonra do'yu içinden duy. Son nota zaten do ise hiçbir şey kıpırdamaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays a cadence, then a short original melody; the drill synthesizes both.",
+      "tr": "Her soruda bir kadans, ardından kısa özgün bir ezgi çalar; alıştırma ikisini de sentezler."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Hear the cadence and the melody, then choose: ends at home, or not at home. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "Kadansı ve ezgiyi dinle, sonra seç: evde bitti mi, bitmedi mi? Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 8 },
+    "drill": {
+      "type": "scale_degree",
+      "count": 10,
+      "params": {
+        "key": ["C", "G", "F", "D"],
+        "degrees": [1, 2, 3, 5, 7],
+        "question": "tonic_or_not",
+        "cadenceEachQuestion": true
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: a melody ending on sol was heard as home.",
+        "tr": "Farklı cevap: sol'de biten ezgi evde bitmiş sanıldı."
+      },
+      "fix": {
+        "en": "Sol is stable too, but it still wants to go to do. Imagine do after it: does the note move?",
+        "tr": "Sol de oturaklıdır ama hâlâ do'ya gitmek ister. Ardından do'yu içinden duy: nota kıpırdıyor mu?"
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: home was missed when the melody ended low.",
+        "tr": "Farklı cevap: ezgi pesten bitince ev kaçırıldı."
+      },
+      "fix": {
+        "en": "Home can be the lower do too. Listen for the note, not its height.",
+        "tr": "Ev, alttaki do da olabilir. Yüksekliğe değil, notanın kendisine kulak ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay the cadence before you answer and hear do in your head along with it.",
+    "tr": "Cevaplamadan önce kadansı yeniden dinle ve do'yu içinden onunla birlikte duy."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,99 @@
+{
+  "id": "ear-s2-m06-06",
+  "title": { "en": "Intervals inside melodies", "tr": "Ezgi içindeki aralıklar" },
+  "goal": {
+    "en": "Finds a marked interval in a short melody, names it and sings it.",
+    "tr": "Kısa bir ezgide işaretli aralığı bulur, adlandırır ve söyler."
+  },
+  "explanation": [
+    {
+      "en": "Intervals live inside melodies. Each melody here has two neighbouring notes marked on screen.",
+      "tr": "Aralıklar ezgilerin içinde yaşar. Buradaki her ezgide yan yana iki nota ekranda işaretlidir."
+    },
+    {
+      "en": "A cadence sets the key first, so you can hear the marked notes as degrees.",
+      "tr": "Önce bir kadans tonu kurar; böylece işaretli notaları derece olarak duyabilirsin."
+    },
+    {
+      "en": "Not every interval starts on do. Re to mi is also M2; fa up to the top do is P5.",
+      "tr": "Her aralık do'dan başlamaz. Re'den mi'ye de B2'dir; fa'dan yukarı, üst do'ya da T5'tir."
+    },
+    {
+      "en": "Count from the first marked note: call it do in your head, then use the anchors.",
+      "tr": "İşaretli ilk notadan say: içinden ona do de, sonra dayanakları kullan."
+    },
+    {
+      "en": "In the singing part, the first marked note plays and you sing both notes.",
+      "tr": "Söyleme bölümünde işaretli ilk nota çalar, sen iki notayı da söylersin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Cadence, then six short original melodies in your range; the marked pair plays again before each singing task.",
+      "tr": "Kadans, ardından rahat menzilinde altı kısa özgün ezgi; her söyleme görevinden önce işaretli çift yeniden çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Part 1: hear each melody and name the marked interval (6 questions). If your answer differs, “your answer” and “correct” appear side by side; listen to both. Part 2: hear the first marked note, then sing both marked notes (6 tasks). Sing in your own octave. If you'd rather not sing, choose the on-screen version: you hear each pair again and name it.",
+      "tr": "1. bölüm: her ezgiyi dinle ve işaretli aralığı adlandır (6 soru). Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle. 2. bölüm: işaretli ilk notayı dinle, sonra işaretli iki notayı da söyle (6 görev). Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: her çifti yeniden dinler ve adlandırırsın."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 5 },
+    "drill": {
+      "type": "interval_name",
+      "count": 6,
+      "params": {
+        "intervals": ["M2", "M3", "P5", "P8"],
+        "direction": ["ascending", "descending"],
+        "context": "melody",
+        "keys": ["C", "G", "F"],
+        "cadence": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard the marked notes as degrees in the key.",
+      "tr": "İşaretli notaları tonun içinde derece olarak duydum."
+    },
+    { "en": "I sang the first note before the second.", "tr": "İkinci notadan önce ilkini söyledim." },
+    {
+      "en": "My second note matched the replayed pair.",
+      "tr": "İkinci notam yeniden çalınan çiftle aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the interval was counted from do, not from its own first note.",
+        "tr": "Farklı cevap: aralık kendi ilk notasından değil, do'dan sayıldı."
+      },
+      "fix": {
+        "en": "Start counting on the first marked note: re to mi is one step, so M2.",
+        "tr": "Saymaya işaretli ilk notadan başla: re'den mi'ye tek basamak, yani B2."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the second note one step off.",
+        "tr": "Farklı nota: ikinci nota bir basamak kaymış."
+      },
+      "fix": {
+        "en": "Name the interval first, then sing its anchor from your first note.",
+        "tr": "Önce aralığı adlandır, sonra ilk notandan onun dayanağını söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the melody at the slow tempo and sing only the marked pair along with it first.",
+    "tr": "Ezgiyi yavaş tempoda çal; önce yalnız işaretli çifti onunla birlikte söyle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

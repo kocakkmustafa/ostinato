@@ -1,0 +1,71 @@
+{
+  "id": "ear-s2-m06-02",
+  "title": { "en": "Hearing P5 and P8", "tr": "T5 ve T8'i duymak" },
+  "goal": {
+    "en": "Tells a perfect fifth from an octave by ear.",
+    "tr": "Tam beşliyi tam sekizliden (oktav) kulaktan ayırt eder."
+  },
+  "explanation": [
+    {
+      "en": "A perfect fifth (P5) is do to sol: five scale notes, counting both ends.",
+      "tr": "Tam beşli (T5) do'dan sol'edir: iki ucu da sayınca beş nota."
+    },
+    {
+      "en": "An octave (P8) is do to the next do up. The two notes sound almost like one note, higher.",
+      "tr": "Tam sekizli (T8), yani oktav, do'dan bir üstteki do'yadır. İki nota neredeyse aynı notanın yükseği gibi duyulur."
+    },
+    {
+      "en": "The fifth sounds open and wide, but the top note is a new note. The octave sounds like the same note coming back.",
+      "tr": "Beşli açık ve geniş duyulur ama üstteki nota yeni bir notadır. Oktavda aynı nota geri döner."
+    },
+    {
+      "en": "To check, sing the first note again in your head after the pair. If the top note feels like the same note higher, it is P8.",
+      "tr": "Kontrol için çiftten sonra ilk notayı içinden yeniden söyle. Üstteki nota aynı notanın yükseği gibiyse T8'dir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays two notes going up from a random starting note; the drill synthesizes them.",
+      "tr": "Her soruda rastgele bir başlangıçtan yukarı iki nota çalar; alıştırma bunları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Hear the two notes and choose: perfect fifth or octave. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "İki notayı dinle ve seç: tam beşli mi, oktav mı? Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 10 },
+    "drill": {
+      "type": "interval_name",
+      "count": 12,
+      "params": {
+        "intervals": ["P5", "P8"],
+        "direction": "ascending",
+        "cadence": false,
+        "range": "C3-C5"
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: P8 chosen for P5.", "tr": "Farklı cevap: T5 yerine T8 seçildi." },
+      "fix": {
+        "en": "Both are wide, but only the octave lands on the same note. Sing do-sol and do to the top do in your head and compare.",
+        "tr": "İkisi de geniştir ama yalnız oktav aynı notaya varır. İçinden do-sol'ü ve do'dan üst do'yu söyleyip karşılaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay the pair, then sing do-sol and do to the top do in your head to compare.",
+    "tr": "Çifti yeniden dinle; ardından içinden do-sol'ü ve do'dan üst do'yu söyleyip karşılaştır."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

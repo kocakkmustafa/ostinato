@@ -1,0 +1,81 @@
+{
+  "id": "ear-s2-m05-01",
+  "title": { "en": "Steps in the major scale", "tr": "Majör gamda basamaklar" },
+  "goal": {
+    "en": "Marks where the whole and half steps fall in a major scale.",
+    "tr": "Majör gamda tam ve yarım seslerin yerini işaretler."
+  },
+  "explanation": [
+    {
+      "en": "A half step is the smallest step on the keyboard: from one key to the very next, black or white.",
+      "tr": "Yarım ses klavyedeki en küçük adımdır: bir tuştan hemen yanındakine, siyah ya da beyaz."
+    },
+    {
+      "en": "A whole step is two half steps, with one key skipped in between.",
+      "tr": "Tam ses iki yarım sestir; arada bir tuş atlanır."
+    },
+    {
+      "en": "Every major scale follows the same pattern: whole, whole, half, whole, whole, whole, half.",
+      "tr": "Her majör gam aynı kalıbı izler: tam, tam, yarım, tam, tam, tam, yarım."
+    },
+    {
+      "en": "So the half steps always sit between degrees 3–4 and 7–8. In C major these are E–F and B–C, with no black key between them.",
+      "tr": "Yani yarım sesler hep 3–4 ve 7–8. dereceler arasındadır. Do majörde bunlar Mi–Fa ve Si–Do'dur; aralarında siyah tuş yoktur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question marks two neighbouring scale notes on a keyboard and plays them; the drill synthesizes the notes.",
+      "tr": "Her soruda klavyede gamın yan yana iki notası işaretlenir ve çalınır; alıştırma bu notaları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Look at the two marked keys in the scale and choose: whole step or half step. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "Gamda işaretli iki tuşa bak ve seç: tam ses mi, yarım ses mi? Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 8,
+      "params": {
+        "set": "major_scale_steps",
+        "diagram": "keyboard",
+        "keys": ["C", "G", "F", "D"],
+        "playNotes": true
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: a whole step was marked as half.",
+        "tr": "Farklı cevap: tam ses, yarım diye işaretlendi."
+      },
+      "fix": {
+        "en": "Count the keys in between, black ones too; one key in between means a whole step.",
+        "tr": "Aradaki tuşları say, siyahları da; arada bir tuş varsa tam sestir."
+      }
+    },
+    {
+      "error": { "en": "Different answer at E–F or B–C.", "tr": "Farklı cevap: Mi–Fa ya da Si–Do'da." },
+      "fix": {
+        "en": "These pairs have no black key between them, so they are half steps.",
+        "tr": "Bu çiftlerin arasında siyah tuş yok; yarım sestir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Write the pattern W-W-H-W-W-W-H on paper and point to each step as you answer.",
+    "tr": "Kalıbı (T-T-Y-T-T-T-Y) kâğıda yaz ve cevaplarken her adımı parmağınla göster."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,110 @@
+{
+  "id": "ear-s1-m02-07",
+  "title": {
+    "en": "Pitch checkpoint",
+    "tr": "Perde geçişi"
+  },
+  "goal": {
+    "en": "Tells high from low and contour shapes apart, and sings back single notes.",
+    "tr": "Yüksek-alçağı ve kontur biçimlerini ayırt eder, tek notaları geri söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint has two parts. Each part must pass on its own; a passed part is kept.",
+      "tr": "Bu geçişin iki bölümü var. Her bölüm kendi başına geçmeli; geçtiğin bölüm saklanır."
+    },
+    {
+      "en": "Part 1: 10 on-screen questions on high or low and three-note contours.",
+      "tr": "1. bölüm: yüksek-alçak ve üç notalık kontur üzerine ekranda 10 soru."
+    },
+    {
+      "en": "Part 2: sing back 6 single notes in your own octave, within 50 cents.",
+      "tr": "2. bölüm: 6 tek notayı kendi oktavında, 50 cent içinde geri söyle."
+    },
+    {
+      "en": "If you'd rather not sing, part 2 becomes an on-screen 'Same or different?' set.",
+      "tr": "Söylemek istemiyorsan 2. bölüm ekranda bir 'Aynı mı farklı mı?' setine dönüşür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Piano-tone notes and contours; the part 2 notes come from your comfortable range.",
+      "tr": "Piyano tınısıyla notalar ve konturlar; 2. bölümün notaları rahat menzilinden gelir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Part 1: answer 10 questions on high or low and contour shape. Part 2: sing back 6 notes in your own octave. If you'd rather not sing, choose the on-screen 'Same or different?' set for part 2.",
+      "tr": "1. bölüm: yüksek-alçak ve kontur biçimi üzerine 10 soruyu cevapla. 2. bölüm: 6 notayı kendi oktavında geri söyle. Söylemek istemiyorsan 2. bölüm için ekrandaki 'Aynı mı farklı mı?' setini seç."
+    },
+    "pass": {
+      "levelDefault": true
+    },
+    "drill": {
+      "type": "pitch_direction",
+      "count": 10,
+      "params": {
+        "notes": [
+          2,
+          3
+        ],
+        "range": "C3-C5",
+        "minSemitones": 2
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "E1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: close notes got mixed up.",
+        "tr": "Farklı cevap: birbirine yakın notalar karıştı."
+      },
+      "fix": {
+        "en": "Replay the pair and slide your hand up or down from the first note to the second.",
+        "tr": "Çifti yeniden dinle ve elini birinci notadan ikinciye yukarı ya da aşağı kaydır."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Redo 'Up, down or same' or 'Sing back one note' for the part that did not pass, then come back.",
+    "tr": "Geçmeyen bölüm için 'Yukarı, aşağı, aynı' ya da 'Tek notayı geri söyle' dersini tekrarla, sonra geri dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}
