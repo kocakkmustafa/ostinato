@@ -66,6 +66,13 @@ jobs:
       - name: Gitar kursu paket bütünlüğü
         run: dart run tool/build_guitar_integrity_manifest.dart --check
 
+      - name: v1 müfredat planı, ders kaynakları ve çeviri kimlikleri
+        run: |
+          python3 -m unittest discover -s tool -p 'test_curriculum_lint.py'
+          python3 tool/curriculum_lint.py --check
+          python3 -m unittest discover -s tool -p 'test_build_message_ids.py'
+          python3 tool/build_message_ids.py --check
+
       - name: Gizlilik beyanı ve kanıt özeti
         run: |
           python3 -m unittest discover -s tools -p 'test_validate_privacy_manifest.py'

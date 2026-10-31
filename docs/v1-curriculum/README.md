@@ -48,6 +48,14 @@ Mikrofonla ölçülen ders oranı **%93** (643/690). Motor adımlarına göre d�
 | [60-kamu-mali-repertuvar.md](60-kamu-mali-repertuvar.md) | Kamu malı eser listesi, besteci yaşam yılları, edisyon uyarıları |
 | [70-motor-bagimliligi.md](70-motor-bagimliligi.md) | Motor adımı başına ders sayısı, gecikme senaryoları, motor gereksinimleri |
 | [80-mevcut-ders-eslemesi.md](80-mevcut-ders-eslemesi.md) | Mevcut 135 dersin (107 yazılı + 28 kamera) R/V/X eşlemesi |
+| [90-ders-yazim-kilavuzu.md](90-ders-yazim-kilavuzu.md) | Plan satırından ders dosyasına: JSON alanları, yazım kuralları, D alıştırma türleri, iş akışı |
+| [counts.v1.json](counts.v1.json) | `tool/curriculum_lint.py`'nin plandan ürettiği sayılar (70-… ile aynı); `--check` CI'da |
+
+## Araçlar ve ders kaynakları
+
+- **`content/v1/<kurs>/<id>.json`:** ders gövdeleri (EN + TR). Henüz uygulamaya paketlenmez. Model: `lib/app/curriculum/v1_lesson.dart`; biçim testi: `test/v1_lesson_content_test.dart`.
+- **`tool/curriculum_lint.py --check`:** plan tablolarını denetler. Kontrol edilenler: kimlik, başlık sayıları, kod sözlükleri, A0 kuralı. Sayıları `counts.v1.json` ile karşılaştırır. Her ders dosyasını plan satırına bağlar: başlık, ölçüm, motor, yedek davranış, güvenlik, referans ve "yanlış" yasağı.
+- **`tool/build_message_ids.py`:** `(en, tr)` → `sha256[:16]` mesaj kimliği tablosunu (`lib/app/app_message_ids.dart`) bayt bayt yeniden üretir (`--check`). `--pending content/v1`: yeni kimlikleri ve 12 dilin eksiklerini listeler. `--add`: tabloya ekler.
 
 ## Bu planda alınan tasarım kararları
 
@@ -62,8 +70,8 @@ Mikrofonla ölçülen ders oranı **%93** (643/690). Motor adımlarına göre d�
 
 ## Açık sorular
 
-1. **Motor sırası:** A5 (ses perdesi) 238 dersi, A4 (gitar akor) 99 dersi açıyor. A5'in A4'ten önce ya da paralel gelmesi önerilir (`70-…` §5). Karar motor ekibi + kurucu.
-2. **Ücretsiz kapsam:** Kulak S1–S2'nin tamamı mı, yalnız S1 mi ücretsiz? Çalgı kurslarında ücretsiz çekirdek (ör. her kursun S1 M01–M02) ne olacak?
+1. ~~**Motor sırası**~~ **Kararlaştı (kurucu, 31 Eki; Yönetim iletti):** A3 → A5 → A4.
+2. **Ücretsiz kapsam:** ~~Kulak S1–S2'nin tamamı mı, yalnız S1 mi?~~ **Kararlaştı (kurucu, 31 Eki; Yönetim iletti):** kulak S1 ücretsiz, S2 premium; kulak ayrı satılmaz. Açık kalan: çalgı kurslarında ücretsiz çekirdek (ör. her kursun S1 M01–M02).
 3. **Amfisiz elektro gitar** mikrofonla test edilmedi. Elektro kol (`m19b`, 19 ders) amfi/kulaklık amfisi şartıyla mı açılsın, yoksa v1.x'e mi kalsın?
 4. **Piyano alt frekans sınırı** bugün 70 Hz; S1–S3 C2'ye (65,4 Hz) iniyor. Motorun ≤60 Hz'e inmesi gerekiyor ya da pes dersleri (`pno-s1-m03-08`, sol el 2 oktav gamlar) C3 üstüne kaydırılmalı.
 5. **Geçiş eşikleri** (`00-…` §6.2) pedagojik tahmin. Müzik öğretmeni incelemesi için bütçe/kişi kararı (ürün önerisi §6 madde 5) hâlâ açık.
@@ -74,7 +82,7 @@ Mikrofonla ölçülen ders oranı **%93** (643/690). Motor adımlarına göre d�
 
 ## Sonraki adımlar (bu PR'ın kapsamı dışında)
 
-- Sözleşmeyi içerik JSON şemasına çevirmek (mevcut `guitar_journey.v1.json` alanlarıyla eşleme `00-…` §2'de).
-- Ders gövde metinleri (EN + TR), sonra 12 dil katalog çevirisi.
+- ~~Sözleşmeyi içerik JSON şemasına çevirmek~~ → `v1_lesson.dart` + `90-ders-yazim-kilavuzu.md` (2026-10-31).
+- Ders gövde metinleri (EN + TR), sonra 12 dil katalog çevirisi. Örnek 3 ders `content/v1/`'de.
 - Özgün egzersiz havuzu (seviye testi başına bileşen başına ≥6 varyant).
 - Müzik öğretmeni incelemesi: sıra, tempo hedefleri, ses sağlığı notları.

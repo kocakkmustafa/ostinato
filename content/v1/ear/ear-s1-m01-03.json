@@ -1,0 +1,59 @@
+{
+  "id": "ear-s1-m01-03",
+  "title": { "en": "Faster or slower?", "tr": "Hızlı mı yavaş mı?" },
+  "goal": {
+    "en": "Tells by ear whether a second passage is faster or slower than the first.",
+    "tr": "İkinci parçanın birincisinden hızlı mı yavaş mı olduğunu kulaktan ayırt eder."
+  },
+  "explanation": [
+    {
+      "en": "Tempo is how fast the beat goes, counted in beats per minute (bpm).",
+      "tr": "Tempo, vuruşun ne kadar hızlı gittiğidir; dakikadaki vuruş (bpm) ile sayılır."
+    },
+    {
+      "en": "Tap the beat lightly on your leg while you listen; your hand feels a tempo change before your ears name it.",
+      "tr": "Dinlerken vuruşu dizine hafifçe vur; elin tempo değişimini, kulağın adlandırmadan önce hisseder."
+    },
+    {
+      "en": "Higher notes or more notes do not mean faster. Compare only the beat.",
+      "tr": "Daha ince ya da daha çok nota, daha hızlı demek değildir. Yalnız vuruşu karşılaştır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays two short original passages; the drill synthesizes them.",
+      "tr": "Her soruda iki kısa özgün parça çalınır; alıştırma bunları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Listen to two passages and choose: faster, slower or the same.",
+      "tr": "İki parçayı dinle ve seç: daha hızlı, daha yavaş ya da aynı."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 8 },
+    "drill": {
+      "type": "tempo_compare",
+      "count": 10,
+      "params": { "baseBpm": [70, 110], "deltaPercent": [10, 25], "allowSame": true }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "A busier passage was chosen as faster.", "tr": "Daha kalabalık parça daha hızlı seçildi." },
+      "fix": { "en": "Tap the beat, not the notes; replay both and count four beats each.", "tr": "Notalara değil vuruşa vur; ikisini de yeniden dinle ve dörder vuruş say." }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each passage as often as you like; the first rounds use larger tempo differences.",
+    "tr": "Her parçayı istediğin kadar tekrar dinle; ilk turlarda tempo farkları daha büyüktür."
+  },
+  "minutes": 6,
+  "expertPending": true
+}
