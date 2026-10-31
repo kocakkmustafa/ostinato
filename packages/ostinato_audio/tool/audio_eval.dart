@@ -214,6 +214,17 @@ GuitarPitchObserver observerFromJson(Map<String, dynamic> json) {
   );
 }
 
+/// With `useLabelOnset: true` the dataset's own onset (item `onsetSeconds`)
+/// is passed to the tuner/verifier, as a lesson or an onset detector would;
+/// otherwise both locate the attack themselves (loudest 10 ms frame).
+int? labelOnsetIndex(
+    Map<String, dynamic> spec, Map<String, dynamic> item, int sampleRate) {
+  if (spec['useLabelOnset'] != true) return null;
+  final s = item['onsetSeconds'] as num?;
+  if (s == null) throw ArgumentError('item ${item['id']} has no onsetSeconds');
+  return (s * sampleRate).round();
+}
+
 double wrapCents(double c) => c - (c / 1200).round() * 1200;
 double centsOf(double a, double b) => 1200 * math.log(a / b) / math.ln2;
 double midiHz(num midi) => 440 * math.pow(2, (midi - 69) / 12).toDouble();
@@ -342,8 +353,9 @@ void runRealTuner(
     final tuner = PreciseTuner(profile: profile);
     final x = readF32(item['raw'] as String);
     final refRaw = item['refRaw'] as String?;
+    final onset = labelOnsetIndex(spec, item, ctx.sampleRate);
     final ref = tuner.measure(refRaw == null ? x : readF32(refRaw),
-        sampleRate: ctx.sampleRate);
+        sampleRate: ctx.sampleRate, attackIndex: onset);
     final refF0 = ref.measurement?.f0Hz;
     final base = {
       'id': id,
@@ -361,7 +373,11 @@ void runRealTuner(
       for (final c in ctx.conditions) {
         final seed = stableHash('$id/$shift/${c.name}');
         final z = ctx.render(y, c, seed);
-        final r = tuner.measure(z, sampleRate: ctx.sampleRate);
+        // Resampling scales time by 1/r: move the known onset with it.
+        final shiftedOnset =
+            onset == null ? null : (onset / math.pow(2, shift / 1200)).round();
+        final r = tuner.measure(z,
+            sampleRate: ctx.sampleRate, attackIndex: shiftedOnset);
         final m = r.measurement;
         final yinHz = baselineYinHz(z, ctx.sampleRate, profile);
         emit({
@@ -407,7 +423,9 @@ void runVerify(
         final expected = midi + d;
         if (expected < 0 || expected > 127) continue;
         final v = verifier.verify(z,
-            sampleRate: ctx.sampleRate, expectedMidi: expected);
+            sampleRate: ctx.sampleRate,
+            expectedMidi: expected,
+            onsetIndex: labelOnsetIndex(spec, item, ctx.sampleRate));
         emit({
           'id': id,
           'group': item['group'],
