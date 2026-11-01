@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "Camera practice is closed in this release. Camera access is reserved for on-device posture observation; video is not saved or uploaded.";
-"NSMicrophoneUsageDescription" = "Microphone access lets you observe one guitar note during optional practice. Audio is processed on this device in temporary memory and is not saved or uploaded.";
+"NSCameraUsageDescription" = "Camera access is used to check your hand and wrist position in the lessons that ask for it. Images are processed only on this device; they are not saved or uploaded.";
+"NSMicrophoneUsageDescription" = "Microphone access is used to hear the notes you play during practice and tuning. Audio is processed on this device and is not uploaded. If you turn on listening to your own recording, it is kept only on this device and deleted when the session ends.";

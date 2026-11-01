@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "Bu sürümde kamera pratiği kapalıdır. Kamera erişimi cihazda duruş gözlemi içindir; video saklanmaz veya yüklenmez.";
-"NSMicrophoneUsageDescription" = "Mikrofon erişimi, isteğe bağlı pratikte tek gitar notasını gözlemlemenizi sağlar. Ses bu cihazda geçici bellekte işlenir; saklanmaz veya yüklenmez.";
+"NSCameraUsageDescription" = "Kamera erişimi, isteyen derslerde el ve bilek duruşunu kontrol etmek içindir. Görüntü yalnız bu cihazda işlenir; kaydedilmez ve yüklenmez.";
+"NSMicrophoneUsageDescription" = "Mikrofon erişimi, pratik ve akort sırasında çaldığın notaları duymak içindir. Ses bu cihazda işlenir; yüklenmez. Kendi kaydını dinlemeyi açarsan kayıt yalnız bu cihazda tutulur ve oturum sonunda silinir.";

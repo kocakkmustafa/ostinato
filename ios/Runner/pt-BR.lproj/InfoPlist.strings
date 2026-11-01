@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "A prática com câmera está fechada nesta versão. O acesso à câmera é reservado à observação de postura no dispositivo; o vídeo não é salvo nem enviado.";
-"NSMicrophoneUsageDescription" = "O acesso ao microfone permite observar uma nota de violão durante a prática opcional. O áudio é processado na memória temporária deste dispositivo e não é salvo nem enviado.";
+"NSCameraUsageDescription" = "O acesso à câmera serve para verificar a posição da sua mão e do seu pulso nas lições que pedem isso. As imagens são processadas somente neste dispositivo; não são salvas nem enviadas.";
+"NSMicrophoneUsageDescription" = "O acesso ao microfone serve para ouvir as notas que você toca durante a prática e a afinação. O áudio é processado neste dispositivo e não é enviado. Se você ativar ouvir a sua própria gravação, ela fica somente neste dispositivo e é apagada ao final da sessão.";

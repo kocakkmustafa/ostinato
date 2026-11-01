@@ -1,0 +1,81 @@
+{
+  "id": "ear-s2-m07-02",
+  "title": { "en": "Two-bar dictation", "tr": "İki ölçülük dikte" },
+  "goal": {
+    "en": "Writes a heard two-bar rhythm on screen.",
+    "tr": "Duyduğu iki ölçülük ritmi ekranda yazar."
+  },
+  "explanation": [
+    {
+      "en": "Two bars are twice as much to hold in memory. Listen once just for the overall shape, then for the details.",
+      "tr": "İki ölçü, akılda tutulacak iki kat şeydir. İlk dinleyişte yalnız genel biçimi, sonra ayrıntıları dinle."
+    },
+    {
+      "en": "Split the work: write bar 1 first, then bar 2.",
+      "tr": "İşi böl: önce 1. ölçüyü, sonra 2. ölçüyü yaz."
+    },
+    {
+      "en": "Many two-bar rhythms repeat or nearly repeat. Ask yourself: is bar 2 the same as bar 1?",
+      "tr": "Pek çok iki ölçülük ritim kendini tekrarlar ya da az farkla tekrarlar. Kendine sor: 2. ölçü 1. ölçüyle aynı mı?"
+    },
+    {
+      "en": "Count under your breath or in your head: 1-2-3-4, 1-2-3-4.",
+      "tr": "Alçak sesle ya da içinden say: 1-2-3-4, 1-2-3-4."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "One-bar click count-in at ♩=70, then the two-bar rhythm on one synthesized note; replay as often as you like.",
+      "tr": "♩=70'te bir ölçülük klik girişi, ardından iki ölçülük ritim tek bir sentez notasında; istediğin kadar tekrar dinleyebilirsin."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Hear each two-bar rhythm and write it with the note buttons. Six dictations. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "Her iki ölçülük ritmi dinle ve nota düğmeleriyle yaz. Altı dikte. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 5 },
+    "drill": {
+      "type": "rhythm_dictation",
+      "count": 6,
+      "params": {
+        "values": ["whole", "half", "quarter", "eighthPair", "quarterRest"],
+        "bars": 2,
+        "bpm": 70,
+        "meter": "4/4"
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer in bar 2 only.", "tr": "Farklı cevap: yalnız 2. ölçüde." },
+      "fix": {
+        "en": "Bar 1 is fine. Replay and listen from the start of bar 2, counting from 1 again.",
+        "tr": "1. ölçü tamam. Yeniden dinle; 2. ölçünün başından itibaren, yine 1'den sayarak dinle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: eighths written as quarters.",
+        "tr": "Farklı cevap: sekizlikler dörtlük yazıldı."
+      },
+      "fix": {
+        "en": "Two sounds inside one beat are two eighths. Count “1-and” to feel them.",
+        "tr": "Bir vuruşun içindeki iki ses iki sekizliktir. Hissetmek için “bir-ve” diye say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Write bar 1, then replay for bar 2 as often as you need.",
+    "tr": "1. ölçüyü yaz, sonra 2. ölçü için gerektiği kadar tekrar dinle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

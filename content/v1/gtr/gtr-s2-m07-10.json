@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s2-m07-10",
+  "title": { "en": "New chords checkpoint", "tr": "Yeni akorlar geçişi" },
+  "goal": {
+    "en": "Plays an original 8-bar progression with E7, A7, D7 and Fmaj7 in time at ♩=72.",
+    "tr": "E7, A7, D7 ve Fmaj7 içeren özgün 8 ölçülük ilerlemeyi ♩=72'de zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "The progression: E7 | A7 | D7 | A7 | Fmaj7 | E7 | A7 | E7. Each chord lasts one bar.",
+      "tr": "İlerleme: E7 | A7 | D7 | A7 | Fmaj7 | E7 | A7 | E7. Her akor bir ölçü sürer."
+    },
+    {
+      "en": "Strum \"D-DU-UDU\" in every bar and change on beat 1.",
+      "tr": "Her ölçüde \"D-DU-UDU\" kalıbını çal ve akoru 1. vuruşta değiştir."
+    },
+    {
+      "en": "Watch the bass strings: E7 starts on string 6, A7 on string 5, D7 and Fmaj7 on string 4.",
+      "tr": "Bas tellere dikkat et: E7 6. telden, A7 5. telden, D7 ve Fmaj7 4. telden başlar."
+    },
+    {
+      "en": "The checkpoint is played at the target tempo, ♩=72. Practise slower first if you need to.",
+      "tr": "Geçiş hedef tempoda, ♩=72'de çalınır. Gerekirse önce daha yavaş çalış."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 8-bar progression with the \"D-DU-UDU\" strum over an original bass and drum loop at ♩=72 and ♩=50.",
+      "tr": "8 ölçülük ilerleme, \"D-DU-UDU\" vuruşuyla; ♩=72 ve ♩=50'de özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 8 bars with the accompaniment at ♩=72, strumming \"D-DU-UDU\" and changing on beat 1. Headphones help the microphone hear only your guitar.",
+      "tr": "8 ölçüyü ♩=72'de eşlikle çal; \"D-DU-UDU\" vur ve akoru 1. vuruşta değiştir. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: E7 | A7 | D7 | A7 | Fmaj7 | E7 | A7 | E7",
+    "tempo": { "open": 72, "target": 72 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The change into Fmaj7 is usually the slow one. Loop bars 4 and 5 at ♩=60, then rejoin the full line.",
+        "tr": "Fmaj7'ye geçiş genelde en yavaş olanıdır. 4. ve 5. ölçüyü ♩=60'ta döngüle, sonra bütün diziye dön."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "A7, D7 and Fmaj7 do not use string 6. Start the down strum on their first string.",
+        "tr": "A7, D7 ve Fmaj7 6. teli kullanmaz. Aşağı vuruşa onların ilk telinden başla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones, and keep the phone close to the guitar.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan; telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise the progression at ♩=60 with four down strums per bar, then return to the checkpoint at ♩=72.",
+    "tr": "İlerlemeyi ♩=60'ta, ölçü başına dört aşağı vuruşla çalış; sonra ♩=72'de geçişe dön."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

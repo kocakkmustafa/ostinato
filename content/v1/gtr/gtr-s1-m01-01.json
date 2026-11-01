@@ -1,0 +1,90 @@
+{
+  "id": "gtr-s1-m01-01",
+  "title": { "en": "Parts and strings", "tr": "Bölümler ve teller" },
+  "goal": {
+    "en": "Matches the parts of the guitar and the six strings to their numbers and names.",
+    "tr": "Gitarın bölümlerini ve altı teli numaralarıyla ve adlarıyla eşleştirir."
+  },
+  "explanation": [
+    {
+      "en": "Find the headstock with its tuning pegs, the neck and the body. Point to each part without turning a peg.",
+      "tr": "Burguların bulunduğu başı, sapı ve gövdeyi bul. Burguyu çevirmeden her bölümü göster."
+    },
+    {
+      "en": "The nut is the small bar where the strings pass from the headstock onto the neck. The bridge holds them on the body. Metal fret wires cross the neck.",
+      "tr": "Üst eşik, tellerin baştan sapa geçtiği küçük çubuktur. Köprü telleri gövdede tutar. Metal perde telleri sapı enine keser."
+    },
+    {
+      "en": "Number the strings from the thinnest, string 1, to the thickest, string 6.",
+      "tr": "Telleri en inceden, 1. telden, en kalına, 6. tele numaralandır."
+    },
+    {
+      "en": "Open strings from 6 to 1: E2, A2, D3, G3, B3, E4. The letter names the note; the number names its octave.",
+      "tr": "6'dan 1'e açık teller: Mi2, La2, Re3, Sol3, Si3, Mi4. Harf ya da hece notayı, sayı oktavı adlandırır."
+    },
+    {
+      "en": "Choose a string number and name its open note. Then go the other way: choose a note and find its string.",
+      "tr": "Bir tel numarası seç ve açık sesini söyle. Sonra tersini yap: bir nota seç ve telini bul."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; the drill shows a guitar diagram.",
+      "tr": "Referans ses yok; alıştırma bir gitar şeması gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Answer 8 questions on the diagram: tap the named part, or match a string number to its open note.",
+      "tr": "Şemada 8 soruyu yanıtla: adı verilen bölüme dokun ya da tel numarasını açık sesiyle eşleştir."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 7 of 8 answers correct.",
+        "tr": "8 cevabın en az 7'si doğru."
+      },
+      "minCorrect": 7
+    },
+    "drill": {
+      "type": "diagram_match",
+      "count": 8,
+      "params": {
+        "set": "guitar_parts_strings",
+        "diagram": "guitar",
+        "parts": ["headstock", "tuning_peg", "nut", "neck", "fret_wire", "body", "bridge"],
+        "strings": ["E2", "A2", "D3", "G3", "B3", "E4"]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: string 1 and string 6 swapped.", "tr": "Farklı cevap: 1. ve 6. tel yer değiştirmiş." },
+      "fix": {
+        "en": "String 1 is the thinnest and highest-sounding string. Count from it toward string 6; do not count from the floor.",
+        "tr": "1. tel en ince ve en tiz teldir. Ondan 6. tele doğru say; yerden başlayarak sayma."
+      }
+    },
+    {
+      "error": { "en": "Different answer: nut and fret wire swapped.", "tr": "Farklı cevap: üst eşik ve perde teli yer değiştirmiş." },
+      "fix": {
+        "en": "The nut is the one bar at the headstock end. All the other bars across the neck are fret wires.",
+        "tr": "Üst eşik, baş tarafındaki tek çubuktur. Sapı enine kesen diğer bütün çubuklar perde telidir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read the string map aloud and learn only two neighbouring strings first; add the rest one pair at a time.",
+    "tr": "Tel haritasını sesli oku ve önce yalnız komşu iki teli öğren; kalanları birer çift olarak ekle."
+  },
+  "legacy": "R: guitar.journey.start.parts",
+  "minutes": 8,
+  "expertPending": true
+}

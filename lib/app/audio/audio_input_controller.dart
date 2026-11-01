@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -127,6 +128,7 @@ final class AudioInputController implements AudioSource {
   final Future<PermissionStatus> Function() _requestPermission;
   final _chunks = StreamController<AudioChunk>.broadcast();
   final _status = StreamController<AudioSurfaceState>.broadcast();
+  final _anchors = StreamController<MetronomeAnchor>.broadcast();
   StreamSubscription<RawAudioEvent>? _sub;
   Timer? _pcmDeliveryTimer;
   AudioLifecycleObserver? _lifecycle;
@@ -144,6 +146,10 @@ final class AudioInputController implements AudioSource {
   final Set<void Function()> _cancelCloseReadbacks = {};
   int _epoch = 0;
   AudioRoute _route = AudioRoute.unknown;
+  AudioSessionMode _sessionMode = AudioSessionMode.recordOnly;
+
+  /// F2.1: the mode of the current (or last requested) attempt.
+  AudioSessionMode get sessionMode => _sessionMode;
 
   @override
   Stream<AudioChunk> get chunks => _chunks.stream;
@@ -409,9 +415,18 @@ final class AudioInputController implements AudioSource {
   Future<void> start({
     required int sampleRate,
     PracticeAudioCaptureAction? captureAction,
+    AudioSessionMode sessionMode = AudioSessionMode.recordOnly,
   }) async {
     if (_disposed || _starting || _running) {
       captureAction?.retire();
+      return;
+    }
+    // F2.1: a play+record request on a record-only channel fails before any
+    // owner, lifecycle observer or native resource is claimed.
+    if (sessionMode == AudioSessionMode.playAndRecord &&
+        _channel is! AudioCuePlaybackChannel) {
+      captureAction?.retire();
+      _emit(const AudioSetupFailed('playback_unavailable'));
       return;
     }
     // Production's MethodChannel has no unclaimed start path. Fake sources
@@ -440,6 +455,7 @@ final class AudioInputController implements AudioSource {
     }
     _captureAction = captureAction;
     _audioCandidate = this;
+    _sessionMode = sessionMode;
     final epoch = ++_epoch;
     _starting = true;
     _route = AudioRoute.unknown;
@@ -523,7 +539,12 @@ final class AudioInputController implements AudioSource {
       }
       _audioOwner = this;
       _audioCandidate = null;
-      final nativeStart = channel is MethodChannelAudioCaptureChannel
+      final nativeStart = sessionMode == AudioSessionMode.playAndRecord
+          ? (channel as AudioCuePlaybackChannel).startPlayAndRecord(
+              sampleRate: sampleRate,
+              claim: captureAction?.claim,
+            )
+          : channel is MethodChannelAudioCaptureChannel
           ? channel.start(sampleRate: sampleRate, claim: captureAction?.claim)
           : channel.start(sampleRate: sampleRate);
       await _boundedNative(nativeStart);
@@ -584,6 +605,7 @@ final class AudioInputController implements AudioSource {
         :final samples,
         :final sampleRate,
         :final tNativeUs,
+        :final playbackActive,
       ):
         if (!_running) return;
         if (sampleRate <= 0 ||
@@ -615,6 +637,10 @@ final class AudioInputController implements AudioSource {
             sampleRate: sampleRate,
             tStartUs: tNativeUs,
             clockDomain: AudioClockDomain.monotonic,
+            // A record-only attempt never plays; ignore a stray native flag.
+            playbackActive:
+                _sessionMode == AudioSessionMode.playAndRecord &&
+                playbackActive,
           ),
         );
       case RawRouteChangedEvent(:final platformRouteTag):
@@ -624,8 +650,91 @@ final class AudioInputController implements AudioSource {
         if (_running) _emit(AudioCalibrating(_route));
       case RawInterruptedEvent(:final reason):
         _failCapture(reason);
+      case RawMetronomeAnchorEvent(
+        :final anchorUs,
+        :final sampleRate,
+        :final framesPerBeat,
+        :final outputLatencyUs,
+      ):
+        if (!_running || _sessionMode != AudioSessionMode.playAndRecord) {
+          return;
+        }
+        _anchors.add(
+          MetronomeAnchor(
+            anchorUs: anchorUs,
+            sampleRate: sampleRate,
+            framesPerBeat: framesPerBeat,
+            outputLatencyUs: outputLatencyUs,
+          ),
+        );
     }
   }
+
+  /// F2.1: plays one short mono cue inside the running play+record attempt.
+  /// A cue failure is reported to the caller only; it never stops capture
+  /// (a missing click must not end the learner's practice measurement).
+  /// Throws [PlatformException] with `playback_not_enabled` (record-only
+  /// attempt), `playback_unavailable` (not running), `bad_args`, or the
+  /// native code.
+  Future<void> playCue(Float64List samples, {required int sampleRate}) async {
+    if (_disposed || !_running) {
+      throw PlatformException(code: 'playback_unavailable');
+    }
+    if (_sessionMode != AudioSessionMode.playAndRecord) {
+      throw PlatformException(code: 'playback_not_enabled');
+    }
+    if (!isValidCuePcm(samples, sampleRate)) {
+      throw PlatformException(code: 'bad_args');
+    }
+    final channel = _channel as AudioCuePlaybackChannel;
+    try {
+      await channel
+          .playCue(samples, sampleRate: sampleRate)
+          .timeout(_nativeCallTimeout);
+    } on TimeoutException {
+      throw PlatformException(code: 'playback_failed');
+    }
+  }
+
+  /// F2.2: starts (or replaces) the click stream inside the running
+  /// play+record attempt. Same guards as [playCue]; a failure never stops
+  /// capture. The anchor arrives on [metronomeAnchors].
+  Future<void> startMetronome(MetronomeStreamRequest request) async {
+    if (_disposed || !_running) {
+      throw PlatformException(code: 'playback_unavailable');
+    }
+    if (_sessionMode != AudioSessionMode.playAndRecord) {
+      throw PlatformException(code: 'playback_not_enabled');
+    }
+    final channel = _channel;
+    if (channel is! AudioMetronomeChannel) {
+      throw PlatformException(code: 'playback_unavailable');
+    }
+    if (!request.isValid) throw PlatformException(code: 'bad_args');
+    try {
+      await (channel as AudioMetronomeChannel)
+          .startMetronome(request)
+          .timeout(_nativeCallTimeout);
+    } on TimeoutException {
+      throw PlatformException(code: 'playback_failed');
+    }
+  }
+
+  /// Stops the click stream; capture keeps running. No-op when idle.
+  Future<void> stopMetronome() async {
+    final channel = _channel;
+    if (_disposed || !_running || channel is! AudioMetronomeChannel) return;
+    try {
+      await (channel as AudioMetronomeChannel).stopMetronome().timeout(
+        _nativeCallTimeout,
+      );
+    } on Object {
+      // Closing capture stops the stream anyway.
+    }
+  }
+
+  /// F2.2: click-stream anchors of the current attempt.
+  Stream<MetronomeAnchor> get metronomeAnchors => _anchors.stream;
 
   @override
   Future<void> stop() => _stop(announce: true);
@@ -738,6 +847,21 @@ final class AudioInputController implements AudioSource {
     } finally {
       await _chunks.close();
       await _status.close();
+      await _anchors.close();
     }
   }
+}
+
+/// F2.2: where the click stream's frame 0 sits on the capture clock.
+final class MetronomeAnchor {
+  const MetronomeAnchor({
+    required this.anchorUs,
+    required this.sampleRate,
+    required this.framesPerBeat,
+    this.outputLatencyUs = 0,
+  });
+  final int anchorUs;
+  final int sampleRate;
+  final int framesPerBeat;
+  final int outputLatencyUs;
 }

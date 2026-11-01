@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s2-m05-09",
+  "title": { "en": "Three chords: G–C–D", "tr": "Üç akor: G–C–D" },
+  "goal": {
+    "en": "Plays an 8-bar I–IV–V progression in G with the accompaniment at ♩=70.",
+    "tr": "Sol tonunda 8 ölçülük I–IV–V ilerlemesini eşlikle ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "In the key of G, G is chord I, C is chord IV and D is chord V. Many songs use only these three.",
+      "tr": "Sol tonunda G, I. akor; C, IV. akor; D ise V. akordur. Pek çok şarkı yalnız bu üçünü kullanır."
+    },
+    {
+      "en": "Chord I feels like home. Chord V pulls back to it; listen for that pull from D to G.",
+      "tr": "I. akor ev gibi hissettirir. V. akor ona geri çeker; D'den G'ye bu çekimi dinle."
+    },
+    {
+      "en": "You already know these changes. Prepare each one on beat 4.",
+      "tr": "Bu geçişleri zaten biliyorsun. Her birini 4. vuruşta hazırla."
+    },
+    {
+      "en": "Play four downstrokes per bar and keep them even across the changes.",
+      "tr": "Ölçü başına dört aşağı vuruş çal ve geçişlerde de eşit tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Original bass and drum loop with the G–C–D chart in quarter-note strums, at ♩=70 and ♩=50.",
+      "tr": "Dörtlük vuruşlu G–C–D çizelgesiyle özgün bas ve davul döngüsü, ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 8 bars with the accompaniment, four downstrokes per bar. Headphones help the microphone hear only your guitar.",
+      "tr": "8 ölçüyü eşlikle, ölçü başına dört aşağı vuruşla çal. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: G | C | G | D | G | C | D | G",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The change starts too late. Lift the fingers right on beat 4, not after it.",
+        "tr": "Geçiş çok geç başlıyor. Parmakları 4. vuruştan sonra değil, tam 4. vuruşta kaldır."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "D starts on string 4. Aim the strum at string 4 and keep the stroke short.",
+        "tr": "D 4. telden başlar. Vuruşu 4. tele yönelt ve kısa tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones or lower the accompaniment, and strum a little firmer.",
+        "tr": "Kulaklık kullan ya da eşliğin sesini kıs ve biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play at ♩=50 with two strums per bar on beats 1 and 3.",
+    "tr": "♩=50'de ölçü başına 1. ve 3. vuruşta iki vuruşla çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

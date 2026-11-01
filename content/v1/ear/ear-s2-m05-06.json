@@ -1,0 +1,78 @@
+{
+  "id": "ear-s2-m05-06",
+  "title": { "en": "Degrees from the tonic", "tr": "Tonikten dereceler" },
+  "goal": {
+    "en": "Sings the requested degree (1–6) from the tonic over a drone.",
+    "tr": "Dronun üstünde tonikten istenen dereceyi (1–6) söyler."
+  },
+  "explanation": [
+    {
+      "en": "The drone holds do. The screen asks for one degree: do, re, mi, fa, sol or la.",
+      "tr": "Dron do'yu tutar. Ekran bir derece ister: do, re, mi, fa, sol ya da la."
+    },
+    {
+      "en": "Find the way by stepping up in your head, do-re-mi…, then sing only the requested note.",
+      "tr": "Yolu içinden basamak basamak bul, do-re-mi…, sonra yalnız istenen notayı söyle."
+    },
+    {
+      "en": "Use anchors: mi and sol come from the tonic triad; fa is a half step above mi, la a whole step above sol.",
+      "tr": "Dayanakları kullan: mi ve sol tonik üçlüsündendir; fa, mi'nin yarım ses, la ise sol'ün bir tam ses üstündedir."
+    },
+    {
+      "en": "Hold the note about two seconds so the microphone can decide.",
+      "tr": "Notayı yaklaşık iki saniye tut; mikrofon böylece karar verebilir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["DR", "S"],
+    "brief": {
+      "en": "Tonic drone in your range; after each task the requested degree plays once for comparison.",
+      "tr": "Rahat menzilinde tonik dron; her görevden sonra istenen derece karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Over the drone, sing the degree shown on screen and hold it for about two seconds. Eight tasks, degrees 1 to 6 in mixed order. Sing in your own octave. Headphones keep the drone out of the microphone. If you'd rather not sing, choose the on-screen version: you hear one note over the drone and mark its degree.",
+      "tr": "Dronun üstünde ekranda gösterilen dereceyi söyle ve yaklaşık iki saniye tut. Sekiz görev, 1'den 6'ya karışık sırayla. Kendi oktavında söyle. Kulaklık dronu mikrofondan uzak tutar. Söylemek istemezsen ekrandaki sürümü seç: dronun üstünde bir nota duyar, derecesini işaretlersin."
+    },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I found each degree by stepping up in my head.",
+      "tr": "Her dereceyi içimden basamak basamak buldum."
+    },
+    {
+      "en": "Each note sounded calm over the drone.",
+      "tr": "Her nota dronun üstünde durgun duyuldu."
+    },
+    { "en": "My note matched the comparison note.", "tr": "Notam karşılaştırma notasıyla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one step low.", "tr": "Farklı nota: bir basamak alçak." },
+      "fix": {
+        "en": "You stopped one step early. Count the steps again from do.",
+        "tr": "Bir basamak önce durmuşsun. Do'dan basamakları yeniden say."
+      }
+    },
+    {
+      "error": { "en": "Different note, fa a semitone high.", "tr": "Farklı nota: fa yarım ses yüksek." },
+      "fix": {
+        "en": "Mi to fa is a half step; sing mi in your head, then go just above it.",
+        "tr": "Mi–fa yarım sestir; mi'yi içinden söyle, sonra onun hemen üstüne çık."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the steps up to the degree out loud, then repeat only the last note.",
+    "tr": "İstenen dereceye kadar basamakları sesli söyle, sonra yalnız son notayı tekrarla."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

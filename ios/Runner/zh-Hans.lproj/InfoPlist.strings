@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "本版本关闭摄像头练习。摄像头权限预留用于设备端姿势观察；视频不会保存或上传。";
-"NSMicrophoneUsageDescription" = "麦克风权限用于可选练习中的吉他单音观察。音频在此设备的临时内存中处理，不会保存或上传。";
+"NSCameraUsageDescription" = "相机权限用于在需要的课程中检查你的手和手腕姿势。画面仅在本设备上处理，不会保存或上传。";
+"NSMicrophoneUsageDescription" = "麦克风权限用于在练习和调音时听你演奏的音。音频在本设备上处理，不会上传。如果你开启收听自己的录音，录音只保存在本设备上，并在本次练习结束时删除。";

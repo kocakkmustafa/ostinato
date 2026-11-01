@@ -1,0 +1,71 @@
+{
+  "id": "gtr-s2-m09-03",
+  "title": { "en": "Octave shapes", "tr": "Oktav şekilleri" },
+  "goal": {
+    "en": "Plays the octave shapes from string 6 to 4 and from string 5 to 3.",
+    "tr": "6. telden 4. tele ve 5. telden 3. tele oktav şekillerini çalar."
+  },
+  "explanation": [
+    {
+      "en": "An octave is the same note name, one register higher.",
+      "tr": "Oktav aynı notanın bir bölge yukarıdaki hâlidir."
+    },
+    {
+      "en": "Shape 6→4: finger 1 on string 6, finger 3 or 4 on string 4, two frets higher. F2 at 6/1 pairs with F3 at 4/3.",
+      "tr": "6→4 şekli: 1. parmak 6. telde, 3. ya da 4. parmak 4. telde, iki perde yukarıda. 6/1'deki Fa2, 4/3'teki Fa3 ile eşleşir."
+    },
+    {
+      "en": "Shape 5→3 is the same: string 5, then string 3 two frets higher. C3 at 5/3 pairs with C4 at 3/5.",
+      "tr": "5→3 şekli aynıdır: 5. tel, sonra iki perde yukarıda 3. tel. 5/3'teki Do3, 3/5'teki Do4 ile eşleşir."
+    },
+    {
+      "en": "Let the underside of finger 1 lightly touch the string in between so it stays silent.",
+      "tr": "Aradaki tel sessiz kalsın diye 1. parmağın alt yüzü ona hafifçe değsin."
+    },
+    {
+      "en": "Once you know one note, the shape finds it again an octave higher.",
+      "tr": "Bir notayı biliyorsan şekil onu bir oktav yukarıda yeniden bulur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Six octave pairs, low note then high note, string-model synthesis.",
+      "tr": "Altı oktav çifti, önce pes sonra tiz nota; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Play six octave pairs, low note first: F2–F3, G2–G3, A2–A3 with shape 6→4, then C3–C4, D3–D4, E3–E4 with shape 5→3. No click.",
+      "tr": "Altı oktav çiftini pes nota önce çal: 6→4 şekliyle Fa2–Fa3, Sol2–Sol3, La2–La3; sonra 5→3 şekliyle Do3–Do4, Re3–Re4, Mi3–Mi4. Klik yok."
+    },
+    "sequence": "F2 F3 | G2 G3 | A2 A3 | C3 C4 | D3 D4 | E3 E4",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The high note was always two frets above the low note.", "tr": "Tiz nota hep pes notanın iki perde yukarısındaydı." },
+    { "en": "The string in between stayed silent.", "tr": "Aradaki tel sessiz kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the high note is a whole step off.", "tr": "Farklı nota: tiz nota bir tam ses kaymış." },
+      "fix": { "en": "Keep exactly two frets between the fingers; do not use the same fret.", "tr": "Parmaklar arasında tam iki perde bırak; aynı perdeyi kullanma." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Pluck one string at a time and let each note ring for a full second.", "tr": "Telleri tek tek çek ve her nota tam bir saniye çalsın." }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only shape 6→4 with F2–F3 and G2–G3 until the reach feels easy.",
+    "tr": "Uzanma rahatlayana kadar yalnız 6→4 şeklini Fa2–Fa3 ve Sol2–Sol3 ile kullan."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

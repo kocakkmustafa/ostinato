@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s1-m04-04",
+  "title": { "en": "D major", "tr": "Re majör" },
+  "goal": {
+    "en": "Plays D cleanly on the top four strings.",
+    "tr": "D'yi üstteki dört telde temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "D: x-x-0-2-3-2. Strings 6 and 5 are not played.",
+      "tr": "D: x-x-0-2-3-2. 6. ve 5. tel çalınmaz."
+    },
+    {
+      "en": "Put finger 1 on string 3, fret 2; finger 3 on string 2, fret 3; finger 2 on string 1, fret 2. The shape is a small triangle.",
+      "tr": "1. parmağı 3. telin 2. perdesine, 3. parmağı 2. telin 3. perdesine, 2. parmağı 1. telin 2. perdesine koy. Şekil küçük bir üçgendir."
+    },
+    {
+      "en": "Start the strum on string 4, the open D. Find string 4 with the pick before you move.",
+      "tr": "Vuruşa 4. telden, açık Re'den başla. Hareket etmeden önce 4. teli penayla bul."
+    },
+    {
+      "en": "Make a short strum across four strings only. A smaller movement keeps the bass strings quiet.",
+      "tr": "Yalnız dört tel üstünde kısa bir vuruş yap. Küçük hareket pes telleri sessiz tutar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "D strummed once from string 4, then plucked string by string from 4 to 1, slowly.",
+      "tr": "D 4. telden bir kez vurulur, sonra 4'ten 1'e tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum D four times from string 4, in your own time. Then pluck the chord string by string; the app checks each string.",
+      "tr": "D'yi kendi hızında 4. telden dört kez vur. Sonra akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "D | D | D | D",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My strum started on string 4.", "tr": "Vuruşum 4. telden başladı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "The strum starts too low. Rest the pick on string 4 first, then strum down from there.",
+        "tr": "Vuruş çok aşağıdan başlıyor. Önce penayı 4. tele koy, sonra oradan aşağı vur."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 2 is flat on string 1. Bring the thumb lower behind the neck so the fingertip stands up.",
+        "tr": "2. parmak 1. telin üstünde yatık. Parmak ucu dik dursun diye başparmağı sapın arkasında aşağı indir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play strings 4 to 1 one by one at first; strum only when all four ring.",
+    "tr": "Önce 4'ten 1'e telleri tek tek çal; dördü de çalınca vur."
+  },
+  "legacy": "V: guitar.journey.chords.d_g",
+  "minutes": 10,
+  "expertPending": true
+}

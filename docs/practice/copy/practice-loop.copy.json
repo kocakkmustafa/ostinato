@@ -1,0 +1,405 @@
+{
+ "note": "Practice loop UI copy (F2.2–F2.5). EN+TR source pairs; ids not yet in lib/app/app_message_ids.dart, the other 12 catalogs are missing. Check: python3 tool/build_message_ids.py --pending docs/practice/copy",
+ "pairs": [
+  {
+   "en": "Count-in: {v0}",
+   "tr": "Ön sayım: {v0}"
+  },
+  {
+   "en": "Beat {v0}",
+   "tr": "Vuruş {v0}"
+  },
+  {
+   "en": "Metronome ready",
+   "tr": "Metronom hazır"
+  },
+  {
+   "en": "Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.",
+   "tr": "Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez."
+  },
+  {
+   "en": "Back",
+   "tr": "Geri"
+  },
+  {
+   "en": "Tempo ♩={v0} · {v1} % of the target {v2}",
+   "tr": "Tempo ♩={v0} · hedef {v2} temposunun %{v1}"
+  },
+  {
+   "en": "Slower",
+   "tr": "Daha yavaş"
+  },
+  {
+   "en": "Faster",
+   "tr": "Daha hızlı"
+  },
+  {
+   "en": "Wait for me: On",
+   "tr": "Beni bekle: Açık"
+  },
+  {
+   "en": "Wait for me: Off",
+   "tr": "Beni bekle: Kapalı"
+  },
+  {
+   "en": "Click sound: On",
+   "tr": "Klik sesi: Açık"
+  },
+  {
+   "en": "Click sound: Off",
+   "tr": "Klik sesi: Kapalı"
+  },
+  {
+   "en": "Loop: Off",
+   "tr": "Döngü: Kapalı"
+  },
+  {
+   "en": "Loop: bars {v0}–{v1}",
+   "tr": "Döngü: {v0}–{v1}. ölçüler"
+  },
+  {
+   "en": "Timing is shown only after latency calibration.",
+   "tr": "Zamanlama yalnız gecikme kalibrasyonundan sonra gösterilir."
+  },
+  {
+   "en": "Calibrate for timing",
+   "tr": "Zamanlama için kalibrasyon yap"
+  },
+  {
+   "en": "Listening for this note…",
+   "tr": "Bu notayı dinliyorum…"
+  },
+  {
+   "en": "I couldn't hear this note. Play it a little stronger and on its own.",
+   "tr": "Bu notayı duyamadım. Biraz daha güçlü ve tek başına çal."
+  },
+  {
+   "en": "Skip",
+   "tr": "Atla"
+  },
+  {
+   "en": "Listen to this note",
+   "tr": "Bu notayı dinle"
+  },
+  {
+   "en": "I can't hear you clearly: move the phone about 30 cm closer · lower the app volume or use headphones.",
+   "tr": "Seni net duyamıyorum: telefonu 30 cm yaklaştır · uygulama sesini kıs ya da kulaklık tak."
+  },
+  {
+   "en": "Close",
+   "tr": "Kapat"
+  },
+  {
+   "en": "Microphone off",
+   "tr": "Mikrofon kapalı"
+  },
+  {
+   "en": "Quiet — I listen once you play",
+   "tr": "Sessiz — çalmaya başlayınca dinliyorum"
+  },
+  {
+   "en": "I hear you",
+   "tr": "Seni duyuyorum"
+  },
+  {
+   "en": "I hear you but can't tell the note apart",
+   "tr": "Duyuyorum ama ayırt edemiyorum"
+  },
+  {
+   "en": "Correct",
+   "tr": "Doğru"
+  },
+  {
+   "en": "Different note",
+   "tr": "Farklı nota"
+  },
+  {
+   "en": "Couldn't hear",
+   "tr": "Duyamadım"
+  },
+  {
+   "en": "Opening the microphone…",
+   "tr": "Mikrofon açılıyor…"
+  },
+  {
+   "en": "Finish",
+   "tr": "Bitir"
+  },
+  {
+   "en": "Stop",
+   "tr": "Durdur"
+  },
+  {
+   "en": "Microphone access is off. You can allow it in Settings.",
+   "tr": "Mikrofon erişimi kapalı. Ayarlar’dan izin verebilirsin."
+  },
+  {
+   "en": "The microphone stopped (the input changed or another app took it). Start again.",
+   "tr": "Mikrofon durdu (giriş değişti ya da başka bir uygulama aldı). Yeniden başlat."
+  },
+  {
+   "en": "Start",
+   "tr": "Başlat"
+  },
+  {
+   "en": "Accuracy",
+   "tr": "Doğruluk"
+  },
+  {
+   "en": "Heard",
+   "tr": "Duyulma"
+  },
+  {
+   "en": "Tempo",
+   "tr": "Tempo"
+  },
+  {
+   "en": "Timing",
+   "tr": "Zamanlama"
+  },
+  {
+   "en": "calibrate first",
+   "tr": "önce kalibrasyon"
+  },
+  {
+   "en": "Accuracy counts only the notes I could decide; \"couldn't hear\" is reported apart.",
+   "tr": "Doğruluk yalnız karar verebildiğim notaları sayar; \"duyamadım\" ayrı raporlanır."
+  },
+  {
+   "en": "Try again",
+   "tr": "Tekrar dene"
+  },
+  {
+   "en": "This result could not be saved on the device.",
+   "tr": "Bu sonuç cihaza kaydedilemedi."
+  },
+  {
+   "en": "Couldn't hear",
+   "tr": "Duyulamadı"
+  },
+  {
+   "en": "Accuracy ≥ %{v0}",
+   "tr": "Doğruluk ≥ %{v0}"
+  },
+  {
+   "en": "Heard ≥ %{v0}",
+   "tr": "Duyulma ≥ %{v0}"
+  },
+  {
+   "en": "At least {v0} correct",
+   "tr": "En az {v0} doğru"
+  },
+  {
+   "en": "Practice round — the gate is measured on a full run",
+   "tr": "Pratik turu — geçiş tam bir turda ölçülür"
+  },
+  {
+   "en": "Not your score — the microphone got stuck. Let's check the setup and try again.",
+   "tr": "Puanın değil, mikrofonun takıldı. Kurulumu kontrol edip tekrar deneyelim."
+  },
+  {
+   "en": "met",
+   "tr": "sağlandı"
+  },
+  {
+   "en": "not met",
+   "tr": "sağlanmadı"
+  },
+  {
+   "en": "The run was stopped before the end.",
+   "tr": "Tur sonuna kadar çalınmadı."
+  },
+  {
+   "en": "Loop was on.",
+   "tr": "Döngü açıktı."
+  },
+  {
+   "en": "\"Wait for me\" was on.",
+   "tr": "\"Beni bekle\" açıktı."
+  },
+  {
+   "en": "Thresholds are defaults awaiting a music teacher’s review.",
+   "tr": "Eşikler varsayılandır; müzik öğretmeni incelemesi bekliyor."
+  },
+  {
+   "en": "The next lesson is open.",
+   "tr": "Sıradaki ders açıldı."
+  },
+  {
+   "en": "Where it happened",
+   "tr": "Nerede oldu"
+  },
+  {
+   "en": "Tap a bar to loop it.",
+   "tr": "Döngülemek için bir ölçüye dokun."
+  },
+  {
+   "en": "Bar {v0}",
+   "tr": "{v0}. ölçü"
+  },
+  {
+   "en": "Bar {v0}: heard {v1} · {v2} was expected {v3}",
+   "tr": "{v0}. ölçü: {v1} duydum · {v2} bekleniyordu {v3}"
+  },
+  {
+   "en": "Go to the next lesson",
+   "tr": "Sonraki derse geç"
+  },
+  {
+   "en": "Play it again",
+   "tr": "Bir kez daha çal"
+  },
+  {
+   "en": "Check the setup",
+   "tr": "Kurulumu kontrol et"
+  },
+  {
+   "en": "Loop these bars at 70 % tempo",
+   "tr": "Bu ölçüleri %70 tempoda döngüle"
+  },
+  {
+   "en": "Raise the tempo by 5",
+   "tr": "Tempoyu 5 artır"
+  },
+  {
+   "en": "Play the full line at the target tempo",
+   "tr": "Tüm diziyi hedef tempoda çal"
+  },
+  {
+   "en": "End of the line",
+   "tr": "Dizinin sonu"
+  },
+  {
+   "en": "Now: {v0}, fret {v1}, string {v2}",
+   "tr": "Şimdi: {v0}, {v1}. perde, {v2}. tel"
+  },
+  {
+   "en": "Now: {v0}",
+   "tr": "Şimdi: {v0}"
+  },
+  {
+   "en": "Now: degree {v0}",
+   "tr": "Şimdi: {v0}. derece"
+  },
+  {
+   "en": "Now: a beat",
+   "tr": "Şimdi: bir vuruş"
+  },
+  {
+   "en": "Lessons could not be loaded.",
+   "tr": "Dersler yüklenemedi."
+  },
+  {
+   "en": "Retry",
+   "tr": "Yeniden dene"
+  },
+  {
+   "en": "Measured practice",
+   "tr": "Ölçülü pratik"
+  },
+  {
+   "en": "Play with the click and the moving TAB. Each note gets one of three marks: correct, different note or couldn’t hear. Passing the gate opens the next lesson.",
+   "tr": "Klik ve akan tab ile çal. Her nota üç işaretten birini alır: doğru, farklı nota ya da duyamadım. Geçiş kapısını geçmek sıradaki dersi açar."
+  },
+  {
+   "en": "Progress unknown",
+   "tr": "İlerleme bilinmiyor"
+  },
+  {
+   "en": "PASSED · ♩={v0}",
+   "tr": "GEÇİLDİ · ♩={v0}"
+  },
+  {
+   "en": "LOCKED · pass the lesson before",
+   "tr": "KİLİTLİ · önceki dersi geç"
+  },
+  {
+   "en": "PLAYED ×{v0}",
+   "tr": "ÇALINDI ×{v0}"
+  },
+  {
+   "en": "OPEN",
+   "tr": "AÇIK"
+  },
+  {
+   "en": "Play a lesson with the click and the moving TAB; each note is marked correct, different note or couldn’t hear. Passing the measured gate opens the next lesson.",
+   "tr": "Bir dersi klik ve akan tab ile çal; her nota doğru, farklı nota ya da duyamadım diye işaretlenir. Ölçülen geçiş kapısını geçmek sıradaki dersi açar."
+  },
+  {
+   "en": "Open measured practice",
+   "tr": "Ölçülü pratiği aç"
+  },
+  {
+   "en": "Play it at the target tempo",
+   "tr": "Hedef tempoda çal"
+  },
+  {
+   "en": "Target tempo ♩={v0} (module transition)",
+   "tr": "Hedef tempo ♩={v0} (modül geçişi)"
+  },
+  {
+   "en": "Opening tempo ♩={v0} or faster",
+   "tr": "Açılış temposu ♩={v0} ya da üstü"
+  },
+  {
+   "en": "Completed at the target tempo",
+   "tr": "Hedef tempoda tamamlandı"
+  },
+  {
+   "en": "Passed at the opening tempo",
+   "tr": "Açılış temposunda geçtin"
+  },
+  {
+   "en": "Target tempo ♩={v0} marks the lesson completed",
+   "tr": "Hedef tempo ♩={v0} dersi \"tamamlandı\" yapar"
+  },
+  {
+   "en": "The opening tempo opens the next lesson. Pass at the target tempo ♩={v0} to mark this one completed.",
+   "tr": "Açılış temposu sıradaki dersi açar. Bu dersi \"tamamlandı\" yapmak için hedef tempoda (♩={v0}) geç."
+  },
+  {
+   "en": "COMPLETED · ♩={v0}",
+   "tr": "TAMAMLANDI · ♩={v0}"
+  },
+  {
+   "en": "PASSED · ♩={v0} · completes at ♩={v1}",
+   "tr": "GEÇİLDİ · ♩={v0} · ♩={v1} ile tamamlanır"
+  },
+  {
+   "en": "Placement, room, latency and tuning — about two minutes.",
+   "tr": "Yerleşim, oda, gecikme ve akort — yaklaşık iki dakika."
+  },
+  {
+   "en": "Latency not measured on this output: timing stays hidden.",
+   "tr": "Bu çıkışta gecikme ölçülmedi: zamanlama gizli kalır."
+  },
+  {
+   "en": "Latency {v0} ms ({v1}); timing is shown.",
+   "tr": "Gecikme {v0} ms ({v1}); zamanlama gösterilir."
+  },
+  {
+   "en": "speaker",
+   "tr": "hoparlör"
+  },
+  {
+   "en": "wired headphones",
+   "tr": "kablolu kulaklık"
+  },
+  {
+   "en": "Bluetooth",
+   "tr": "Bluetooth"
+  },
+  {
+   "en": "Setup",
+   "tr": "Kurulum"
+  },
+  {
+   "en": "Not passed this run",
+   "tr": "Bu turda geçilmedi"
+  },
+  {
+   "en": "No measured lessons in this build.",
+   "tr": "Bu sürümde ölçülü ders yok."
+  }
+ ]
+}

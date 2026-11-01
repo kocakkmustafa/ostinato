@@ -1,0 +1,105 @@
+{
+  "id": "gtr-s1-m01-03",
+  "title": { "en": "Pick and fretting hand", "tr": "Pena ve sol el" },
+  "goal": {
+    "en": "Holds the pick loosely, places the fretting hand on the neck and names the fretting-hand finger numbers.",
+    "tr": "Penayı gevşek tutar, sol elini sapa yerleştirir ve sol el parmak numaralarını söyler."
+  },
+  "explanation": [
+    {
+      "en": "Hold the pick between the side of your index finger and the pad of your thumb. Let only a small tip show.",
+      "tr": "Penayı işaret parmağının yanıyla başparmağının iç yüzü arasında tut. Yalnız küçük bir ucu dışarıda kalsın."
+    },
+    {
+      "en": "Fretting-hand fingers have numbers: index 1, middle 2, ring 3, little 4. The thumb has no number.",
+      "tr": "Sol el parmaklarının numarası vardır: işaret 1, orta 2, yüzük 3, serçe 4. Başparmağın numarası yoktur."
+    },
+    {
+      "en": "Rest the thumb behind the neck, roughly behind finger 2. Curve the fingers so the fingertips meet the strings. Keep the wrist loose and close to straight, with a small gap between the neck and your palm.",
+      "tr": "Başparmağı sapın arkasına, kabaca 2. parmağın arkasına koy. Parmakları kıvır; parmak uçları tellere değsin. Bileğin gevşek ve düze yakın olsun; sapla avucun arasında küçük bir boşluk kalsın."
+    },
+    {
+      "en": "If you play left-handed, the hands swap: the pick goes in your left hand and the right hand frets. The finger numbers stay the same.",
+      "tr": "Solaksan eller yer değiştirir: pena sol elinde olur, sağ elin perdeye basar. Parmak numaraları aynı kalır."
+    },
+    {
+      "en": "The camera asks for permission when this lesson starts. The image is processed on your phone; it is not saved and not sent.",
+      "tr": "Kamera izni bu ders başlarken istenir. Görüntü telefonunda işlenir; kaydedilmez, gönderilmez."
+    },
+    {
+      "en": "The camera gives no score. It only shows a hint, and says \"I can't see\" when the image is not clear enough.",
+      "tr": "Kamera puan vermez. Yalnız ipucu gösterir; görüntü yeterince net değilse \"göremedim\" der."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; drawings show the pick grip and the fretting hand from the front.",
+      "tr": "Referans ses yok; çizimler pena tutuşunu ve sol eli önden gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["K", "D"],
+    "engineSteps": ["A7"],
+    "task": {
+      "en": "Part 1: hold the pick and place the fretting hand on the neck in view of the camera for 30 seconds; follow any hint. Part 2: answer 6 questions on finger numbers.",
+      "tr": "1. bölüm: penayı tut ve sol elini kameranın gördüğü yerde 30 saniye sapa koy; ipucu çıkarsa uygula. 2. bölüm: parmak numaraları üzerine 6 soruyu yanıtla."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Hold the hand position for 30 seconds and tick the checklist, then answer at least 5 of 6 questions. The camera only gives hints.",
+        "tr": "El konumunu 30 saniye koru ve kontrol listesini işaretle, sonra 6 sorunun en az 5'ini doğru yanıtla. Kamera yalnız ipucu verir."
+      },
+      "minCorrect": 5
+    },
+    "drill": {
+      "type": "diagram_match",
+      "count": 6,
+      "params": {
+        "set": "fretting_finger_numbers",
+        "diagram": "hand",
+        "fingers": [1, 2, 3, 4]
+      }
+    }
+  },
+  "fallback": "camera",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Only a small tip of the pick showed.", "tr": "Penanın yalnız küçük bir ucu dışarıdaydı." },
+    { "en": "My thumb rested behind the neck, not over the top.", "tr": "Başparmağım sapın üstünden değil, arkasından duruyordu." },
+    { "en": "My fingertips, not the flat pads, touched the strings.", "tr": "Tellere parmaklarımın düz yüzü değil, uçları değdi." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Hint: wrist bent sharply.", "tr": "İpucu: bilek keskin bükülmüş." },
+      "fix": {
+        "en": "Bring your elbow a little closer to your body and let the guitar neck point slightly upward.",
+        "tr": "Dirseğini biraz gövdene yaklaştır ve gitarın sapı hafifçe yukarı baksın."
+      }
+    },
+    {
+      "error": { "en": "Different answer: ring and little finger swapped.", "tr": "Farklı cevap: yüzük ve serçe parmak yer değiştirmiş." },
+      "fix": {
+        "en": "Count from the index finger: 1, 2, 3, 4. The little finger is always 4.",
+        "tr": "İşaret parmağından say: 1, 2, 3, 4. Serçe parmak her zaman 4'tür."
+      }
+    },
+    {
+      "error": { "en": "I can't see.", "tr": "Göremedim." },
+      "fix": {
+        "en": "Bring the phone closer so both hands and the neck fill the frame, with light in front of you.",
+        "tr": "Telefonu iki elin ve sap kadrajı dolduracak kadar yaklaştır; ışık önünde olsun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Without a camera, use the checklist with a mirror. If a pick feels awkward, use the side of your thumb for now.",
+    "tr": "Kamera yoksa kontrol listesini aynayla kullan. Pena rahat gelmezse şimdilik başparmağının yan yüzünü kullan."
+  },
+  "legacy": "V: guitar.foundations.arms",
+  "minutes": 10,
+  "expertPending": true
+}

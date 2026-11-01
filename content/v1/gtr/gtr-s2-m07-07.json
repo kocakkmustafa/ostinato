@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s2-m07-07",
+  "title": { "en": "Slash chords and a walking bass", "tr": "Bölü akorlar ve yürüyen bas" },
+  "goal": {
+    "en": "Plays the G–G/B–C–D/F♯ bass walk with the right bass note under each chord at ♩=60.",
+    "tr": "G–G/B–C–D/F♯ bas yürüyüşünü ♩=60'ta her akorun altında doğru bas notasıyla çalar."
+  },
+  "explanation": [
+    {
+      "en": "A slash chord names a chord and its lowest note: G/B is G with B in the bass.",
+      "tr": "Bölü akor, akoru ve en pes notasını birlikte adlandırır: G/B, basta Si olan G'dir."
+    },
+    {
+      "en": "The bass walks up G2, B2, C3; then F♯2 leads back to G2.",
+      "tr": "Bas Sol2, Si2, Do3 diye yürür; sonra Fa♯2 yeniden Sol2'ye götürür."
+    },
+    {
+      "en": "G/B: x-2-0-0-0-3. Finger 1 on string 5, fret 2; finger 3 on string 1, fret 3. Do not play string 6.",
+      "tr": "G/B: x-2-0-0-0-3. 1. parmak 5. tel 2. perdede, 3. parmak 1. tel 3. perdede. 6. teli çalma."
+    },
+    {
+      "en": "D/F♯: 2-x-0-2-3-2. Finger 1 on string 6, fret 2; fingers 2, 4 and 3 make the D shape. Let finger 1 lean on string 5 to mute it.",
+      "tr": "D/F♯: 2-x-0-2-3-2. 1. parmak 6. tel 2. perdede; 2., 4. ve 3. parmak D şeklini kurar. 1. parmak 5. tele hafifçe yaslanıp onu sustursun."
+    },
+    {
+      "en": "Pick the bass note alone on beat 1, then strum the chord on beats 2, 3 and 4.",
+      "tr": "Bas notasını 1. vuruşta tek başına çal, sonra akoru 2., 3. ve 4. vuruşta tara."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Bass note on beat 1 and three strums for G, G/B, C, D/F♯ and G, at ♩=60 and ♩=40.",
+      "tr": "G, G/B, C, D/F♯ ve G için 1. vuruşta bas notası ve üç vuruş; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A4"],
+    "task": {
+      "en": "Play five bars with the click: bass note on beat 1, strum on beats 2, 3 and 4. The app checks the bass note and the chord.",
+      "tr": "Klikle beş ölçü çal: 1. vuruşta bas notası, 2., 3. ve 4. vuruşta vuruş. Uygulama bas notasını ve akoru kontrol eder."
+    },
+    "sequence": "4/4: G[G2] | G/B[B2] | C[C3] | D/F♯[F♯2] | G[G2]",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I heard the bass climb G, B, C before it returned through F♯.", "tr": "Basın Sol, Si, Do diye çıktığını ve Fa♯ üzerinden döndüğünü duydum." },
+    { "en": "String 5 stayed quiet in D/F♯.", "tr": "D/F♯'de 5. tel sessiz kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "On G/B the bass is B2 on string 5, fret 2, not A♯2 at fret 1. Recheck finger 1.",
+        "tr": "G/B'de bas 5. tel 2. perdedeki Si2'dir, 1. perdedeki La♯2 değil. 1. parmağı yeniden kontrol et."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "In D/F♯, string 5 must be muted. Let the pad of finger 1 touch it lightly.",
+        "tr": "D/F♯'de 5. tel susturulmalı. 1. parmağın iç yüzü ona hafifçe değsin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the bass notes G2 B2 C3 F♯2 G2 first, then add the strums.",
+    "tr": "Önce yalnız Sol2 Si2 Do3 Fa♯2 Sol2 bas notalarını çal, sonra vuruşları ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

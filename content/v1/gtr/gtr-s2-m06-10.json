@@ -1,0 +1,68 @@
+{
+  "id": "gtr-s2-m06-10",
+  "title": { "en": "Soft and strong strumming", "tr": "Yumuşak ve güçlü vuruş" },
+  "goal": {
+    "en": "Switches between soft (p) and strong (f) strumming at a steady ♩=70.",
+    "tr": "Yumuşak (p) ve güçlü (f) vuruş arasında ♩=70'i koruyarak geçer."
+  },
+  "explanation": [
+    {
+      "en": "p (piano) means soft; f (forte) means strong. Both are relative to your own playing.",
+      "tr": "p (piyano) yumuşak, f (forte) güçlü demektir. İkisi de kendi çalışına göredir."
+    },
+    {
+      "en": "For p, strum close to the strings with a small motion. For f, use a slightly bigger, faster motion.",
+      "tr": "p için tellere yakın, küçük hareketle çal. f için biraz daha büyük ve hızlı hareket kullan."
+    },
+    {
+      "en": "Keep the tempo the same. Strong strumming tends to rush; soft strumming tends to drag.",
+      "tr": "Tempoyu aynı tut. Güçlü vuruş hızlanmaya, yumuşak vuruş yavaşlamaya meyillidir."
+    },
+    {
+      "en": "Strong does not mean tense. Keep the wrist loose and the pick grip light.",
+      "tr": "Güçlü, gergin demek değildir. Bileği gevşek, pena tutuşunu hafif tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Em in down-up eighths, 2 bars p then 2 bars f, at ♩=70 and ♩=45.",
+      "tr": "Em'de aşağı-yukarı sekizlik, 2 ölçü p ve 2 ölçü f, ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Strum Em in down-up eighths at ♩=70: 2 bars p, then 2 bars f. Play the four bars twice. Strong bars need at least 5 dB more than soft bars.",
+      "tr": "Em'i ♩=70'te aşağı-yukarı sekizlikle çal: 2 ölçü p, sonra 2 ölçü f. Dört ölçüyü iki kez çal. Güçlü ölçüler yumuşaklardan en az 5 dB güçlü olmalı."
+    },
+    "sequence": "4/4: ee ee ee ee | ee ee ee ee | ee ee ee ee | ee ee ee ee",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The soft and strong bars were clearly different.", "tr": "Yumuşak ve güçlü ölçüler belirgin biçimde farklıydı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: soft and strong were less than 5 dB apart.", "tr": "Farklı: yumuşak ile güçlü arasındaki fark 5 dB'nin altında kaldı." },
+      "fix": { "en": "Make p softer rather than f louder. Strum with the pick closer to the strings.", "tr": "f'yi güçlendirmek yerine p'yi yumuşat. Penayı tellere daha yakın tutarak vur." }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": { "en": "The f bars rushed. Make the stroke bigger, not the tempo faster.", "tr": "f ölçüleri acele etti. Tempoyu değil, hareketi büyüt." }
+    }
+  ],
+  "adaptation": {
+    "en": "Use quarter-note downstrokes instead of eighths until the two levels are clearly different.",
+    "tr": "İki düzey belirginleşene kadar sekizlik yerine dörtlük aşağı vuruş kullan."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

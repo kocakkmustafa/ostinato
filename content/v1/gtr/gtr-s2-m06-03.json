@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s2-m06-03",
+  "title": { "en": "Accent and volume", "tr": "Vurgu ve ses düzeyi" },
+  "goal": {
+    "en": "Accents beats 2 and 4 on Am at ♩=70 without moving the beat.",
+    "tr": "Am'de 2. ve 4. vuruşu, vuruşu kaydırmadan ♩=70'te vurgular."
+  },
+  "explanation": [
+    {
+      "en": "An accent is one stroke played a little stronger than its neighbours. The beat stays in the same place.",
+      "tr": "Vurgu, komşularından biraz güçlü çalınan tek vuruştur. Vuruşun yeri değişmez."
+    },
+    {
+      "en": "Play four gentle Am downstrokes, then repeat with a small accent on beat 1.",
+      "tr": "Dört hafif Am aşağı vuruş çal, sonra 1. vuruşta küçük bir vurguyla tekrarla."
+    },
+    {
+      "en": "Move the accent to beats 2 and 4. Keep the same rhythm and the same comfortable stroke size.",
+      "tr": "Vurguyu 2. ve 4. vuruşa taşı. Aynı ritmi ve aynı rahat hareket boyunu koru."
+    },
+    {
+      "en": "Make the accent with a slightly faster stroke, not a bigger, tense one.",
+      "tr": "Vurguyu daha büyük ve gergin bir hareketle değil, biraz daha hızlı bir vuruşla yap."
+    },
+    {
+      "en": "Loudness here is relative. The app compares your accented and plain strokes; there is no loudness target.",
+      "tr": "Buradaki ses düzeyi görelidir. Uygulama vurgulu ve sade vuruşlarını karşılaştırır; mutlak bir ses hedefi yok."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Am downstrokes in quarters with accents on 2 and 4, 4 bars, at ♩=70 and ♩=45, with click.",
+      "tr": "Am'de dörtlük aşağı vuruş, 2 ve 4'te vurgu, 4 ölçü, ♩=70 ve ♩=45, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Strum Am in quarter-note downstrokes for 4 bars at ♩=70. Accent beats 2 and 4; keep beats 1 and 3 gentle.",
+      "tr": "Am'i ♩=70'te 4 ölçü dörtlük aşağı vuruşla çal. 2. ve 4. vuruşu vurgula; 1. ve 3. vuruş hafif kalsın."
+    },
+    "sequence": "4/4: q q q q | q q q q | q q q q | q q q q",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 2 timing, and beats 2 and 4 at least 4 dB stronger than beats 1 and 3.",
+        "tr": "Seviye 2 zamanlama ölçütü; 2. ve 4. vuruş, 1. ve 3. vuruştan en az 4 dB güçlü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Beats 2 and 4 stood out clearly.", "tr": "2. ve 4. vuruş belirgin biçimde öne çıktı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: the accent was under 4 dB.", "tr": "Farklı: vurgu 4 dB'nin altında kaldı." },
+      "fix": { "en": "Strike beats 2 and 4 a little faster and keep beats 1 and 3 softer.", "tr": "2. ve 4. vuruşa biraz daha hızlı vur, 1. ve 3. vuruşu daha yumuşak tut." }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": { "en": "The accented beats rushed. Make the contrast smaller and keep the count even.", "tr": "Vurgulu vuruşlar acele etti. Farkı küçült ve sayımı eşit tut." }
+    }
+  ],
+  "adaptation": {
+    "en": "Accent only beat 4 first; add beat 2 when beat 4 is steady.",
+    "tr": "Önce yalnız 4. vuruşu vurgula; 4. vuruş oturunca 2. vuruşu ekle."
+  },
+  "legacy": "R: guitar.journey.strum.accents",
+  "minutes": 12,
+  "expertPending": true
+}

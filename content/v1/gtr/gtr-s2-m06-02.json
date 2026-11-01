@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s2-m06-02",
+  "title": { "en": "The hand never stops", "tr": "El hiç durmaz" },
+  "goal": {
+    "en": "Keeps the strumming hand moving through air strokes in D-DU-UDU at ♩=60.",
+    "tr": "D-DU-UDU kalıbında boş vuruşlarla sağ elin hareketini ♩=60'ta sürdürür."
+  },
+  "explanation": [
+    {
+      "en": "The strumming hand keeps moving down and up on every eighth, even when it does not touch the strings.",
+      "tr": "Sağ el her sekizlikte aşağı-yukarı gitmeyi sürdürür; tellere değmediğinde bile."
+    },
+    {
+      "en": "A missed stroke is an air stroke: the hand passes just above the strings.",
+      "tr": "Atlanan vuruş havada geçer: el tellerin hemen üstünden geçer."
+    },
+    {
+      "en": "D-DU-UDU has eight motions: down, (up), down, up, (down), up, down, up. The ones in brackets miss the strings.",
+      "tr": "D-DU-UDU kalıbında sekiz hareket var: aşağı, (yukarı), aşağı, yukarı, (aşağı), yukarı, aşağı, yukarı. Parantezdekiler tele değmez."
+    },
+    {
+      "en": "Say it aloud first: '1 (and) 2 and (3) and 4 and'. The counts in brackets are air strokes.",
+      "tr": "Önce sesli say: '1 (ve) 2 ve (3) ve 4 ve'. Parantezdeki sayılar havada geçer."
+    },
+    {
+      "en": "If the hand stops on a missed stroke, the next upstroke comes early.",
+      "tr": "El atlanan vuruşta durursa sonraki yukarı vuruş erken gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Em in D-DU-UDU, 4 bars, at ♩=60 and ♩=40, with click.",
+      "tr": "Em'de D-DU-UDU, 4 ölçü, ♩=60 ve ♩=40, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Hold Em and play D-DU-UDU for 4 bars along with the click. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Em'i bas ve klikle birlikte 4 ölçü D-DU-UDU çal. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "4/4: q e q e e e | q e q e e e | q e q e e e | q e q e e e",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My hand kept moving on the air strokes.", "tr": "Boş vuruşlarda da elim hareket etti." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": { "en": "The hand paused on the missed beat 3. Keep it moving down in the air and wait for the 'and'.", "tr": "El atlanan 3. vuruşta durdu. Havada aşağı inmeye devam et ve 've'yi bekle." }
+    },
+    {
+      "error": { "en": "Different: a strum was heard on a missed beat.", "tr": "Farklı: atlanan vuruşta tel sesi duyuldu." },
+      "fix": { "en": "Lift the hand a little higher on the air strokes.", "tr": "Boş vuruşlarda eli biraz daha yukarıdan geçir." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the pattern on muted strings first, then let Em ring.",
+    "tr": "Kalıbı önce susturulmuş tellerde çal, sonra Em'i çaldır."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

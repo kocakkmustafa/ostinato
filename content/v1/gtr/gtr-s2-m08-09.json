@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s2-m08-09",
+  "title": { "en": "Hand care and stretch limits", "tr": "El bakımı ve esneme sınırları" },
+  "goal": {
+    "en": "Tells tender fingertips from pain, takes planned breaks and does a 2-minute loosening routine.",
+    "tr": "Parmak ucu hassasiyetini ağrıdan ayırır, planlı mola verir ve 2 dakikalık gevşeme rutinini yapar."
+  },
+  "explanation": [
+    {
+      "en": "Tender fingertips are normal while they toughen. Sharp pain, numbness or tingling are not: stop playing.",
+      "tr": "Parmak uçları sertleşirken hassasiyet olağandır. Keskin ağrı, uyuşma ya da karıncalanma olağan değildir: çalmayı bırak."
+    },
+    {
+      "en": "Tiredness feels like heavy, slow fingers and passes with a short break. Discomfort that stays after a break is a reason to stop for the day.",
+      "tr": "Yorgunluk ağır ve yavaş parmaklar gibi hissedilir; kısa bir molayla geçer. Moladan sonra da süren rahatsızlık, o günü bitirmek için bir nedendir."
+    },
+    {
+      "en": "Take a break every 20–30 minutes. Short, frequent sessions are better than one long one.",
+      "tr": "20–30 dakikada bir mola ver. Kısa ve sık oturumlar, tek uzun oturumdan iyidir."
+    },
+    {
+      "en": "No fret span or exercise has to be forced. If a reach is uncomfortable, use a higher fret or a smaller shape.",
+      "tr": "Hiçbir perde açıklığı ya da egzersiz zorlanmaz. Bir uzanma rahatsızsa daha yukarı bir perde ya da daha küçük bir şekil kullan."
+    },
+    {
+      "en": "The routine: open and close the hands slowly, roll the shoulders, shake the hands loose, rest them on your legs. Keep it gentle and skip any movement that hurts.",
+      "tr": "Rutin: elleri yavaşça açıp kapa, omuzları çevir, elleri silkeleyerek gevşet, dizlerine bırak. Yumuşak yap; acıtan hareketi atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No sound. An on-screen timer guides the 2-minute routine.",
+      "tr": "Ses yok. Ekrandaki zamanlayıcı 2 dakikalık rutine eşlik eder."
+    }
+  },
+  "practice": {
+    "measurement": ["Ö"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Set the guitar aside. Do the 2-minute loosening routine with the on-screen timer, then tick the checklist.",
+      "tr": "Gitarı kenara koy. Ekrandaki zamanlayıcıyla 2 dakikalık gevşeme rutinini yap, sonra kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Finish the routine and tick every item on the checklist. Progress is marked as self-reported.",
+        "tr": "Rutini bitir ve kontrol listesindeki her maddeyi işaretle. İlerleme kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can tell tender fingertips from sharp pain.", "tr": "Parmak ucu hassasiyetini keskin ağrıdan ayırabiliyorum." },
+    { "en": "I finished the routine without any movement that hurt.", "tr": "Rutini acıtan bir hareket olmadan bitirdim." },
+    { "en": "I plan a break every 20–30 minutes.", "tr": "20–30 dakikada bir mola planladım." },
+    { "en": "I know which reaches I keep optional for now.", "tr": "Şimdilik hangi uzanmaları isteğe bağlı bıraktığımı biliyorum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Checklist: an item stayed unticked.", "tr": "Kontrol listesi: bir madde işaretlenmedi." },
+      "fix": {
+        "en": "Read that item again and repeat only that part of the routine.",
+        "tr": "O maddeyi yeniden oku ve rutinin yalnız o bölümünü tekrarla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "On a busy day, one minute of the routine is enough.",
+    "tr": "Yoğun bir günde rutinin bir dakikası yeterlidir."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

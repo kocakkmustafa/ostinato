@@ -1,0 +1,90 @@
+{
+  "id": "gtr-s2-m05-02",
+  "title": { "en": "Anchor and guide fingers", "tr": "Sabit ve kılavuz parmak" },
+  "goal": {
+    "en": "Changes between Am and C at least 18 times in 60 seconds without lifting the shared fingers.",
+    "tr": "Ortak parmakları kaldırmadan Am ile C arasında 60 saniyede en az 18 kez geçer."
+  },
+  "explanation": [
+    {
+      "en": "An anchor finger stays pressed on the same string and fret in both chords. It holds your hand in place.",
+      "tr": "Sabit parmak iki akorda da aynı tel ve perdede basılı kalır. Elini yerinde tutar."
+    },
+    {
+      "en": "A guide finger stays on the same string and slides to a new fret. It never leaves the string.",
+      "tr": "Kılavuz parmak aynı telde kalır ve yeni perdeye kayar. Telden hiç ayrılmaz."
+    },
+    {
+      "en": "Am (x-0-2-2-1-0) and C (x-3-2-0-1-0) share two notes: finger 1 on string 2, fret 1 and finger 2 on string 4, fret 2. Keep both pressed lightly.",
+      "tr": "Am (x-0-2-2-1-0) ve C (x-3-2-0-1-0) iki notayı paylaşır: 2. telin 1. perdesinde 1. parmak, 4. telin 2. perdesinde 2. parmak. İkisini hafifçe basılı tut."
+    },
+    {
+      "en": "Only finger 3 travels: from string 3, fret 2 in Am to string 5, fret 3 in C.",
+      "tr": "Yalnız 3. parmak yol alır: Am'de 3. telin 2. perdesinden C'de 5. telin 3. perdesine."
+    },
+    {
+      "en": "Lift the fingers only a little above the strings; small moves are fast moves.",
+      "tr": "Parmakları tellerin yalnız biraz üstüne kaldır; küçük hareket hızlı harekettir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Am and C, one strum each, changing every two beats at ♩=60, then at ♩=40.",
+      "tr": "Am ve C, her birine bir vuruş, ♩=60'ta iki vuruşta bir geçiş, sonra ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Change back and forth for 60 seconds. Each change counts when every string of the new chord is heard. Keep fingers 1 and 2 down the whole time.",
+      "tr": "60 saniye boyunca ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır. 1. ve 2. parmağı baştan sona basılı tut."
+    },
+    "sequence": "Am ↔ C · 60 s",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 18 changes in 60 seconds. A change counts when every string of the new chord is heard.",
+        "tr": "60 saniyede en az 18 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Fingers 1 and 2 stayed on the strings during every change.", "tr": "Her geçişte 1. ve 2. parmak tellerde kaldı." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "In C, finger 2 leans on open string 3. Arch the finger and press with the tip.",
+        "tr": "C'de 2. parmak açık 3. tele yaslanıyor. Parmağı kemerle ve ucuyla bas."
+      }
+    },
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Lift the fingers less and look at the next spot first; aim for even changes, not fast ones.",
+        "tr": "Parmakları daha az kaldır ve önce sonraki yere bak; hızlı değil düzenli geçişe odaklan."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Strum a little firmer and keep the phone about one metre away.",
+        "tr": "Biraz daha net vur ve telefonu yaklaşık bir metre uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Move only finger 3 back and forth without strumming, then add the strum and try 30 seconds.",
+    "tr": "Vurmadan yalnız 3. parmağı ileri geri taşı; sonra vuruşu ekle ve 30 saniye dene."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

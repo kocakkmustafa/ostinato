@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s1-m04-07",
+  "title": { "en": "Changing Em to Am", "tr": "Em'den Am'ye geçiş" },
+  "goal": {
+    "en": "Changes between Em and Am at least 15 times in 60 seconds with every string ringing.",
+    "tr": "Em ile Am arasında 60 saniyede en az 15 kez, bütün teller çalarak geçer."
+  },
+  "explanation": [
+    {
+      "en": "Em uses fingers 2 and 3 on strings 5 and 4. Am uses the same two fingers on strings 4 and 3.",
+      "tr": "Em, 2. ve 3. parmağı 5. ve 4. telde kullanır. Am aynı iki parmağı 4. ve 3. telde kullanır."
+    },
+    {
+      "en": "So fingers 2 and 3 move together, one string down, as one block. Then finger 1 drops onto string 2, fret 1.",
+      "tr": "Yani 2. ve 3. parmak tek blok olarak birlikte bir tel aşağı kayar. Sonra 1. parmak 2. telin 1. perdesine iner."
+    },
+    {
+      "en": "Lift the fingers only a little. A small move is a fast move.",
+      "tr": "Parmakları yalnız biraz kaldır. Küçük hareket hızlı harekettir."
+    },
+    {
+      "en": "Speed comes from repeating clean changes, not from rushing. A change that does not ring does not count.",
+      "tr": "Hız acele etmekten değil, temiz geçişleri tekrarlamaktan gelir. Çalmayan geçiş sayılmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Em and Am alternating, one strum each, at a slow and a moderate pace.",
+      "tr": "Em ve Am sırayla, her birine bir vuruş, yavaş ve orta hızda."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Strum Em, then Am, once each. Change back and forth for 60 seconds. Each change counts when every string of the new chord is heard.",
+      "tr": "Em'i, sonra Am'yi birer kez vur. 60 saniye boyunca ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 15 changes in 60 seconds. A change counts when every string of the new chord is heard.",
+        "tr": "60 saniyede en az 15 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Fingers 2 and 3 moved together as one block.", "tr": "2. ve 3. parmak tek blok olarak birlikte hareket etti." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Your fingers lift too high. Keep them close to the strings and move the block in one motion.",
+        "tr": "Parmakların çok yükseğe kalkıyor. Tellere yakın tut ve bloğu tek harekette taşı."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "On Am, start the strum on string 5. Make the Am strum a little shorter.",
+        "tr": "Am'de vuruşa 5. telden başla. Am vuruşunu biraz kısalt."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Change without strumming for 30 seconds, looking at the fingers, then add the strum.",
+    "tr": "30 saniye vurmadan, parmaklarına bakarak geç; sonra vuruşu ekle."
+  },
+  "legacy": "V: guitar.journey.chords.two_chord_changes",
+  "minutes": 10,
+  "expertPending": true
+}

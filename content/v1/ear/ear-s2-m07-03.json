@@ -1,0 +1,102 @@
+{
+  "id": "ear-s2-m07-03",
+  "title": { "en": "Dotted quarter", "tr": "Noktalı dörtlük" },
+  "goal": {
+    "en": "Claps and writes rhythms with a dotted quarter.",
+    "tr": "Noktalı dörtlüklü ritmi alkışlar ve yazar."
+  },
+  "explanation": [
+    {
+      "en": "A dot adds half of the note's value. A dotted quarter lasts one and a half beats.",
+      "tr": "Nokta, notanın değerinin yarısını ekler. Noktalı dörtlük bir buçuk vuruş sürer."
+    },
+    {
+      "en": "It is usually followed by an eighth, so the pair fills two beats: long-short.",
+      "tr": "Ardından çoğunlukla bir sekizlik gelir; ikisi birlikte iki vuruşu doldurur: uzun-kısa."
+    },
+    {
+      "en": "Count in eighths, “1-and-2-and”. Clap on 1, hold through 2, clap again on the “and” of 2.",
+      "tr": "Sekizlikle say, “1 ve 2 ve”. 1'de alkışla, 2'yi tut, 2'nin “ve”sinde yeniden alkışla."
+    },
+    {
+      "en": "The eighth comes halfway through beat 2, not on it. Don't rush it.",
+      "tr": "Sekizlik 2. vuruşun üstünde değil, yarısında gelir. Acele etme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "One-bar click count-in; the dictation rhythms play on one synthesized note at ♩=60.",
+      "tr": "Bir ölçülük klik girişi; dikte ritimleri ♩=60'ta tek bir sentez notasında çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "D"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Part 1: clap four two-bar lines with dotted quarters along with the click. Start at ♩=60 and move up in steps of 5 to ♩=70. Headphones help the microphone hear only your claps. Part 2: hear four one-bar rhythms and write them. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "1. bölüm: noktalı dörtlüklü dört iki ölçülük satırı klikle birlikte alkışla. ♩=60'tan başla, 5'er adımla ♩=70'e çık. Kulaklık, mikrofonun yalnız alkışını duymasına yardım eder. 2. bölüm: dört bir ölçülük ritmi dinle ve yaz. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "rhythm_dictation",
+      "count": 4,
+      "params": {
+        "values": ["half", "quarter", "dottedQuarter", "eighth", "eighthPair", "quarterRest"],
+        "bars": 1,
+        "bpm": 60,
+        "meter": "4/4"
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I held through beat 2 instead of clapping on it.",
+      "tr": "2. vuruşta alkışlamadım, tuttum."
+    },
+    {
+      "en": "The eighth after the dot came late, not rushed.",
+      "tr": "Noktadan sonraki sekizlik acele etmeden, geç geldi."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early on the eighth after the dot.",
+        "tr": "Doğru, ama noktadan sonraki sekizlikte erken."
+      },
+      "fix": {
+        "en": "Count “1-and-2-AND” and clap only on the stressed “and”.",
+        "tr": "“1 ve 2 VE” diye say ve yalnız vurgulu “ve”de alkışla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: the dotted quarter was written as a plain quarter.",
+        "tr": "Farklı cevap: noktalı dörtlük, düz dörtlük yazıldı."
+      },
+      "fix": {
+        "en": "Count the length: does the sound last into beat 2? Then it needs the dot.",
+        "tr": "Süreyi say: ses 2. vuruşa taşıyor mu? Taşıyorsa nokta gerekir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap closer to the phone or turn the click down.",
+        "tr": "Telefona daha yakın alkışla ya da kliği kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=50 and clap only the first bar of each line until the long-short feels even.",
+    "tr": "♩=50'ye in ve uzun-kısa oturana kadar her satırın yalnız ilk ölçüsünü alkışla."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

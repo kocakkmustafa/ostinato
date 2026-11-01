@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s2-m08-03",
+  "title": { "en": "Alternate picking on one string", "tr": "Tek telde alternatif pena" },
+  "goal": {
+    "en": "Plays frets 1–4 on string 5 in eighth notes with strict down-up picking at ♩=70.",
+    "tr": "5. telde 1.–4. perdeleri sekizlik olarak, aşağı-yukarı sırayı bozmadan ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Alternate picking: down on the beat, up on the \"&\". The order never breaks, even when the note changes.",
+      "tr": "Alternatif pena: vuruşta aşağı, \"ve\"de yukarı. Nota değişse de sıra bozulmaz."
+    },
+    {
+      "en": "Keep the stroke small: the pick moves just past the string.",
+      "tr": "Hareketi küçük tut: pena telin hemen ötesine geçer."
+    },
+    {
+      "en": "Hold the pick lightly with only a small tip showing.",
+      "tr": "Penayı gevşek tut; ucunun yalnız küçük bir kısmı görünsün."
+    },
+    {
+      "en": "Both hands must land together. Slow down until each note starts exactly with its pick stroke.",
+      "tr": "İki el aynı anda gelmeli. Her nota kendi pena vuruşuyla tam aynı anda başlayana kadar yavaşla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "A♯2 B2 C3 C♯3 C3 B2 A♯2 B2 on string 5, eighth notes with a click at ♩=70 and ♩=45.",
+      "tr": "5. telde La♯2 Si2 Do3 Do♯3 Do3 Si2 La♯2 Si2, klikle sekizlik; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the two bars in eighth notes with the click, down-up all the way. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "İki ölçüyü klikle sekizlik olarak, baştan sona aşağı-yukarı çal. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "A♯2 B2 C3 C♯3 C3 B2 A♯2 B2 | A♯2 B2 C3 C♯3 C3 B2 A♯2 B2",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every note on a beat was a downstroke.", "tr": "Vuruştaki her nota aşağı penaydı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The pick is ahead of the fretting finger. Place the finger first, then pick.",
+        "tr": "Pena sol el parmağından önce davranıyor. Önce parmağı koy, sonra penayla çal."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The upstrokes are too light. Let the pick go through the string the same distance both ways.",
+        "tr": "Yukarı vuruşlar çok hafif. Pena teli iki yönde de aynı mesafeyle geçsin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Pick the open A string down-up for one bar, then add the fretted notes at ♩=50.",
+    "tr": "Bir ölçü açık La telinde aşağı-yukarı çal, sonra ♩=50'de perdeli notaları ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

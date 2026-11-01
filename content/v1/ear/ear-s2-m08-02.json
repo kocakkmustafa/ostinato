@@ -1,0 +1,76 @@
+{
+  "id": "ear-s2-m08-02",
+  "title": { "en": "Sing a major arpeggio", "tr": "Majör arpej söyle" },
+  "goal": {
+    "en": "Sings the major arpeggio 1-3-5-8 in four keys within a comfortable range.",
+    "tr": "1-3-5-8 majör arpejini dört tonda, rahat menzilde söyler."
+  },
+  "explanation": [
+    {
+      "en": "An arpeggio is a chord sung one note at a time: do-mi-sol, then the top do.",
+      "tr": "Arpej, akorun notalarının tek tek söylenmesidir: do-mi-sol, ardından üst do."
+    },
+    {
+      "en": "You already know do-mi-sol. The new leap is sol up to the top do: a fourth, smaller than it feels.",
+      "tr": "Do-mi-sol'ü biliyorsun. Yeni atlama sol'den üst do'yadır: bir dörtlü, hissettirdiğinden küçüktür."
+    },
+    {
+      "en": "Each of the four rounds starts on a new do inside your comfortable range. Hear it and sing it once before you begin.",
+      "tr": "Dört turun her biri rahat menzilinin içinde yeni bir do'dan başlar. Başlamadan onu dinle ve bir kez söyle."
+    },
+    {
+      "en": "Keep the top do light. If it is not comfortable, sing 1-3-5 and leave out the top note.",
+      "tr": "Üst do'yu hafif tut. Rahat değilse 1-3-5 söyle, üst notayı atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "In each of four keys: the new do, then 1-3-5-8 at a slow, even pace.",
+      "tr": "Dört tonun her birinde: yeni do, ardından 1-3-5-8 yavaş ve eşit."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Four rounds: hear the new do, then sing do-mi-sol-do, holding each note about one second. Sing in your own octave. If you'd rather not sing, choose the on-screen version: you hear each arpeggio and mark it major or minor.",
+      "tr": "Dört tur: yeni do'yu dinle, sonra do-mi-sol-do söyle; her notayı yaklaşık bir saniye tut. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: her arpeji dinler, majör mü minör mü olduğunu işaretlersin."
+    },
+    "sequence": "1-3-5-8 | ×4",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Sol to the top do felt small, not stretched.",
+      "tr": "Sol'den üst do'ya atlama küçük geldi, zorlamadım."
+    },
+    { "en": "The top do felt easy.", "tr": "Üst do rahat geldi." },
+    { "en": "Each round started on the new do.", "tr": "Her tur yeni do'dan başladı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, top do a semitone low.", "tr": "Farklı nota: üst do yarım ses alçak." },
+      "fix": {
+        "en": "You landed on ti. Think of it as the same do, higher, and go a little further.",
+        "tr": "Si'ye konmuşsun. Onu aynı do'nun yükseği gibi düşün ve biraz daha çık."
+      }
+    },
+    {
+      "error": { "en": "Different note, mi a semitone low.", "tr": "Farklı nota: mi yarım ses alçak." },
+      "fix": {
+        "en": "That makes the arpeggio minor. Brighten mi: do-re-mi, two whole steps.",
+        "tr": "Bu, arpeji minör yapar. Mi'yi parlat: do-re-mi, iki tam ses."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-3-5-3-1 in all four keys first, then add the top do.",
+    "tr": "Önce dört tonda da 1-3-5-3-1 söyle, sonra üst do'yu ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

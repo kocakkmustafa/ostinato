@@ -1,0 +1,78 @@
+{
+  "id": "ear-s1-m04-04",
+  "title": { "en": "Middle C and ledger lines", "tr": "Orta Do ve ek çizgiler" },
+  "goal": {
+    "en": "Reads notes on ledger lines, starting from middle C.",
+    "tr": "Orta Do'dan başlayarak ek çizgili notaları okur."
+  },
+  "explanation": [
+    {
+      "en": "Ledger lines are short extra lines above or below the staff for notes that do not fit on it.",
+      "tr": "Ek çizgiler, porteye sığmayan notalar için portenin altına ya da üstüne eklenen kısa çizgilerdir."
+    },
+    {
+      "en": "Middle C (C4) sits on one ledger line: just below the treble staff and just above the bass staff.",
+      "tr": "Orta Do (Do4) tek bir ek çizgide durur: sol anahtarı portesinin hemen altında, fa anahtarı portesinin hemen üstünde."
+    },
+    {
+      "en": "Ledger lines continue the line-space pattern. Count them like ordinary lines.",
+      "tr": "Ek çizgiler çizgi-aralık düzenini sürdürür. Onları normal çizgiler gibi say."
+    },
+    {
+      "en": "More landmarks: the first ledger line above the treble staff is A5; the first one below the bass staff is E2.",
+      "tr": "Başka işaret notaları: sol anahtarında portenin üstündeki ilk ek çizgi La5, fa anahtarında altındaki ilk ek çizgi Mi2'dir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": { "en": "No sound; each question is shown on the staff.", "tr": "Ses yok; her soru portede gösterilir." }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Look at each note on or near a ledger line and choose its name. Both clefs are mixed.",
+      "tr": "Ek çizgide ya da yakınındaki her notaya bak ve adını seç. İki anahtar karışık gelir."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 8 },
+    "drill": {
+      "type": "note_name",
+      "count": 10,
+      "params": {
+        "clef": ["treble", "bass"],
+        "range": { "treble": ["A3", "C6"], "bass": ["C2", "E4"] },
+        "ledgerLinesMax": 2,
+        "ledgerOnly": true
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer, one step off below the staff.",
+        "tr": "Farklı cevap, portenin altında bir basamak kaymış."
+      },
+      "fix": {
+        "en": "Count down from the bottom line: line, space, ledger line.",
+        "tr": "Alt çizgiden aşağı say: çizgi, aralık, ek çizgi."
+      }
+    },
+    {
+      "error": { "en": "Different answer: the clef was missed.", "tr": "Farklı cevap: anahtar gözden kaçtı." },
+      "fix": {
+        "en": "The same ledger line means a different note in each clef; look at the clef first.",
+        "tr": "Aynı ek çizgi her anahtarda farklı bir notadır; önce anahtara bak."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Find the nearest landmark first (C4, A5 or E2), then step from it.",
+    "tr": "Önce en yakın işaret notasını bul (Do4, La5 ya da Mi2), sonra ondan adım at."
+  },
+  "minutes": 7,
+  "expertPending": true
+}

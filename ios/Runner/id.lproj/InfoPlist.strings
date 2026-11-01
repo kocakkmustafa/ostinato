@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "Latihan kamera ditutup dalam rilis ini. Akses kamera disediakan untuk pengamatan postur di perangkat; video tidak disimpan atau diunggah.";
-"NSMicrophoneUsageDescription" = "Akses mikrofon memungkinkanmu mengamati satu nada gitar dalam latihan opsional. Audio diproses di perangkat ini dalam memori sementara dan tidak disimpan atau diunggah.";
+"NSCameraUsageDescription" = "Akses kamera digunakan untuk memeriksa posisi tangan dan pergelangan tanganmu di pelajaran yang memintanya. Gambar hanya diproses di perangkat ini; tidak disimpan atau diunggah.";
+"NSMicrophoneUsageDescription" = "Akses mikrofon digunakan untuk mendengar nada yang kamu mainkan saat latihan dan menyetem. Audio diproses di perangkat ini dan tidak diunggah. Jika kamu menyalakan fitur mendengarkan rekamanmu sendiri, rekaman hanya disimpan di perangkat ini dan dihapus saat sesi berakhir.";

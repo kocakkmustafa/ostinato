@@ -1,0 +1,85 @@
+{
+  "id": "ear-s2-m06-03",
+  "title": { "en": "Sing M2 and M3", "tr": "B2 ve B3 söyle" },
+  "goal": {
+    "en": "Sings a major second and a major third above a given note.",
+    "tr": "Verilen notanın büyük ikili ve büyük üçlü üstünü söyler."
+  },
+  "explanation": [
+    {
+      "en": "A starting note plays. The screen asks for the M2 or the M3 above it.",
+      "tr": "Bir başlangıç notası çalar. Ekran onun B2 ya da B3 üstünü ister."
+    },
+    {
+      "en": "Call the starting note do. M2 is re; M3 is mi.",
+      "tr": "Başlangıç notasına do de. B2 re'dir; B3 mi'dir."
+    },
+    {
+      "en": "Sing the starting note first, then the target, and hold the target about two seconds.",
+      "tr": "Önce başlangıç notasını söyle, sonra hedefi; hedefi yaklaşık iki saniye tut."
+    },
+    {
+      "en": "For M3, pass through re in your head before you land on mi.",
+      "tr": "B3 için mi'ye konmadan önce içinden re'den geç."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Starting note in your range; after each task the target interval plays once for comparison.",
+      "tr": "Rahat menzilinde başlangıç notası; her görevden sonra hedef aralık karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Eight tasks: sing the starting note, then the M2 or M3 above it shown on screen. Sing in your own octave. If you'd rather not sing, choose the on-screen version: you hear each pair and mark M2 or M3.",
+      "tr": "Sekiz görev: başlangıç notasını söyle, sonra ekranda istenen B2 ya da B3 üstünü. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: her çifti dinler, B2 mi B3 mü olduğunu işaretlersin."
+    },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I called the starting note do every time.",
+      "tr": "Başlangıç notasına her seferinde do dedim."
+    },
+    { "en": "For M3 I passed re in my head.", "tr": "B3 için içimden re'den geçtim." },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, M3 a semitone low.", "tr": "Farklı nota: B3 yarım ses alçak." },
+      "fix": {
+        "en": "That is a minor third. Aim mi brighter: do-re-mi, two whole steps.",
+        "tr": "Bu küçük üçlü olur. Mi'yi daha parlak hedefle: do-re-mi, iki tam ses."
+      }
+    },
+    {
+      "error": { "en": "Different note, M2 a semitone low.", "tr": "Farklı nota: B2 yarım ses alçak." },
+      "fix": {
+        "en": "Re is a whole step above do; open the step a little more.",
+        "tr": "Re, do'nun bir tam ses üstündedir; adımı biraz daha aç."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing do-re-mi step by step first, then leave out re for M3.",
+    "tr": "Önce do-re-mi'yi basamak basamak söyle, sonra B3 için re'yi atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -25,12 +25,112 @@ protocol CaptureHardware: AnyObject {
   func stop() throws
 }
 
+/// F2.1: capture hardware that can also play short cues inside the same
+/// attempt. The extra Bool on each chunk is "app output may have been audible
+/// during this window" (for a later low-confidence mark).
+protocol DuplexCaptureHardware: CaptureHardware {
+  func start(
+    rate: Int,
+    mode: PracticeAudioSessionMode,
+    fence: CaptureFence,
+    onChunk: @escaping (Data, Int, Int64, Bool, @escaping () -> Void) -> Void
+  ) throws -> String
+  /// Runs on the capture worker; must not block for the cue's duration.
+  func playCue(samples: [Float], sampleRate: Int) throws
+}
+
+enum CuePlaybackError: Error, Equatable { case unavailable, unsupportedRate }
+
+/// F2.2: one endless click stream. Beat `n` is output frame
+/// `n * framesPerBeat` of the stream (Dart reference:
+/// `lib/app/practice/loop/metronome.dart`).
+struct MetronomeStreamSpec {
+  let framesPerBeat: Int
+  let beatsPerBar: Int
+  let accent: [Float]
+  let beat: [Float]
+  let leadInSeconds: Double
+
+  var isValid: Bool {
+    func click(_ c: [Float]) -> Bool {
+      !c.isEmpty && c.count < framesPerBeat && c.allSatisfy { $0.isFinite && abs($0) <= 1 }
+    }
+    return framesPerBeat > 0 && (1...12).contains(beatsPerBar) &&
+      leadInSeconds >= 0 && leadInSeconds <= 2 && click(accent) && click(beat)
+  }
+
+  /// One bar, looped by the player: sample-exact beat spacing by construction.
+  func renderBar() -> [Float] {
+    var bar = [Float](repeating: 0, count: framesPerBeat * beatsPerBar)
+    for b in 0..<beatsPerBar {
+      let click = b == 0 ? accent : beat
+      let at = b * framesPerBeat
+      for (k, v) in click.enumerated() where at + k < bar.count { bar[at + k] += v }
+    }
+    return bar
+  }
+}
+
+/// Duplex hardware that can also run the click stream. A separate protocol so
+/// existing duplex fakes keep compiling. The click is band-limited (6 kHz, above
+/// the ≤4 kHz detector band, E50 M1), so it does NOT mark `playbackActive`.
+protocol MetronomeCaptureHardware: DuplexCaptureHardware {
+  /// Returns (anchor µs on the capture clock for frame 0, output latency µs not
+  /// included in the anchor).
+  func startMetronome(_ spec: MetronomeStreamSpec, sampleRate: Int) throws -> (Int64, Int64)
+  func stopMetronome()
+}
+
+/// A cue longer than this is rejected rather than queued.
+let maxCueSeconds = 2
+
+/// Hardware-free overlap bookkeeping. A cue counts as possibly audible from
+/// scheduling until its played-back callback plus [tail] (output latency and
+/// room decay; a per-route calibrated value replaces this in F3.5).
+final class PlaybackOverlapTracker {
+  private let lock = NSLock()
+  private let tailNs: UInt64
+  private let now: () -> UInt64
+  private var pending = 0
+  private var tailUntil: UInt64 = 0
+
+  init(tailNs: UInt64 = 300_000_000,
+       now: @escaping () -> UInt64 = { DispatchTime.now().uptimeNanoseconds }) {
+    self.tailNs = tailNs
+    self.now = now
+  }
+
+  func scheduled() {
+    lock.lock(); pending += 1; tailUntil = now() + tailNs; lock.unlock()
+  }
+
+  func playedBack() {
+    lock.lock(); pending = max(0, pending - 1); tailUntil = now() + tailNs; lock.unlock()
+  }
+
+  var isActive: Bool {
+    lock.lock(); defer { lock.unlock() }
+    return pending > 0 || now() < tailUntil
+  }
+
+  func reset() {
+    lock.lock(); pending = 0; tailUntil = 0; lock.unlock()
+  }
+}
+
 /// All AVAudioEngine/AVAudioSession calls run on one serial worker.
-final class AVEngineCaptureHardware: CaptureHardware {
-  private let engine = AVAudioEngine()
+final class AVEngineCaptureHardware: MetronomeCaptureHardware {
+  private var engine = AVAudioEngine()
+  // Touching mainMixerNode permanently wires the engine's output node. A later
+  // record-only (`.record`) attempt must not inherit that output graph.
+  private var outputGraphUsed = false
   private let sessionPolicy: PracticeAudioSessionPolicy
   private let pendingBuffer = DispatchSemaphore(value: 1)
   private var tapInstalled = false
+  private var player: AVAudioPlayerNode?
+  private var playerFormat: AVAudioFormat?
+  private var metronome: AVAudioPlayerNode?
+  private let overlap = PlaybackOverlapTracker()
 
   init(sessionPolicy: PracticeAudioSessionPolicy = .shared) {
     self.sessionPolicy = sessionPolicy
@@ -41,7 +141,22 @@ final class AVEngineCaptureHardware: CaptureHardware {
     fence: CaptureFence,
     onChunk: @escaping (Data, Int, Int64, @escaping () -> Void) -> Void
   ) throws -> String {
-    try sessionPolicy.activateInput(rate: rate, fence: fence)
+    try start(rate: rate, mode: .recordOnly, fence: fence) { data, rate, stamp, _, finish in
+      onChunk(data, rate, stamp, finish)
+    }
+  }
+
+  func start(
+    rate: Int,
+    mode: PracticeAudioSessionMode,
+    fence: CaptureFence,
+    onChunk: @escaping (Data, Int, Int64, Bool, @escaping () -> Void) -> Void
+  ) throws -> String {
+    if outputGraphUsed {
+      engine = AVAudioEngine()
+      outputGraphUsed = false
+    }
+    try sessionPolicy.activateInput(rate: rate, fence: fence, mode: mode)
 
     // The requested sample rate is only a preference; send the actual rate.
     let input = engine.inputNode
@@ -51,6 +166,22 @@ final class AVEngineCaptureHardware: CaptureHardware {
       throw CaptureHardwareError.unsupportedRate
     }
     if fence.isCancelled { throw CaptureHardwareError.cancelled }
+    if mode == .playAndRecord {
+      // Only the duplex attempt touches the output graph; a record-only
+      // session never instantiates mainMixerNode/outputNode.
+      guard let cueFormat = AVAudioFormat(standardFormatWithSampleRate: Double(rate),
+                                          channels: 1) else {
+        throw CaptureHardwareError.unsupportedRate
+      }
+      let node = AVAudioPlayerNode()
+      outputGraphUsed = true
+      engine.attach(node)
+      engine.connect(node, to: engine.mainMixerNode, format: cueFormat)
+      player = node
+      playerFormat = cueFormat
+    }
+    let overlap = self.overlap
+    let duplex = mode == .playAndRecord
     input.installTap(onBus: 0, bufferSize: 2048, format: format) { [weak self] buffer, time in
       guard let self = self, !fence.isCancelled,
             self.pendingBuffer.wait(timeout: .now()) == .success else { return }
@@ -70,7 +201,8 @@ final class AVEngineCaptureHardware: CaptureHardware {
       let data = mono.withUnsafeBufferPointer { Data(buffer: $0) }
       for index in mono.indices { mono[index] = 0 }
       let stamp = Int64(AVAudioTime.seconds(forHostTime: time.hostTime) * 1_000_000)
-      onChunk(data, Int(buffer.format.sampleRate), stamp) {
+      let playing = duplex && overlap.isActive
+      onChunk(data, Int(buffer.format.sampleRate), stamp, playing) {
         self.pendingBuffer.signal()
       }
     }
@@ -78,9 +210,69 @@ final class AVEngineCaptureHardware: CaptureHardware {
     if fence.isCancelled { throw CaptureHardwareError.cancelled }
     try engine.start()
     if fence.isCancelled { throw CaptureHardwareError.cancelled }
+    player?.play()
     let type = sessionPolicy.currentInputPort
     let port = type == .builtInMic ? "BuiltInMic" : (type?.rawValue ?? "Unknown")
     return "ios:\(port)"
+  }
+
+  func playCue(samples: [Float], sampleRate: Int) throws {
+    guard let player = player, let format = playerFormat, engine.isRunning else {
+      throw CuePlaybackError.unavailable
+    }
+    guard Int(format.sampleRate) == sampleRate else { throw CuePlaybackError.unsupportedRate }
+    guard let buffer = AVAudioPCMBuffer(pcmFormat: format,
+                                        frameCapacity: AVAudioFrameCount(samples.count)),
+          let channel = buffer.floatChannelData?[0] else { throw CuePlaybackError.unavailable }
+    buffer.frameLength = AVAudioFrameCount(samples.count)
+    samples.withUnsafeBufferPointer { source in
+      channel.update(from: source.baseAddress!, count: samples.count)
+    }
+    let overlap = self.overlap
+    overlap.scheduled()
+    player.scheduleBuffer(buffer, completionCallbackType: .dataPlayedBack) { _ in
+      overlap.playedBack()
+    }
+  }
+
+  func startMetronome(_ spec: MetronomeStreamSpec, sampleRate: Int) throws -> (Int64, Int64) {
+    guard player != nil, let format = playerFormat, engine.isRunning else {
+      throw CuePlaybackError.unavailable
+    }
+    guard Int(format.sampleRate) == sampleRate else { throw CuePlaybackError.unsupportedRate }
+    stopMetronome()
+    let bar = spec.renderBar()
+    guard let buffer = AVAudioPCMBuffer(pcmFormat: format,
+                                        frameCapacity: AVAudioFrameCount(bar.count)),
+          let channel = buffer.floatChannelData?[0] else { throw CuePlaybackError.unavailable }
+    buffer.frameLength = AVAudioFrameCount(bar.count)
+    bar.withUnsafeBufferPointer { source in
+      channel.update(from: source.baseAddress!, count: bar.count)
+    }
+    let node = AVAudioPlayerNode()
+    engine.attach(node)
+    engine.connect(node, to: engine.mainMixerNode, format: format)
+    // "Now" comes from the engine's own render clock, the same host clock the
+    // input tap stamps with; it trails real time by at most one I/O buffer,
+    // well inside the lead-in. No mach_absolute_time (Required-Reason API).
+    guard let rendered = engine.outputNode.lastRenderTime, rendered.isHostTimeValid else {
+      engine.detach(node)
+      throw CuePlaybackError.unavailable
+    }
+    node.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: nil)
+    let startHost = rendered.hostTime + AVAudioTime.hostTime(forSeconds: spec.leadInSeconds)
+    node.play(at: AVAudioTime(hostTime: startHost))
+    metronome = node
+    let anchorUs = Int64(AVAudioTime.seconds(forHostTime: startHost) * 1_000_000)
+    let latencyUs = Int64(sessionPolicy.outputLatencySeconds * 1_000_000)
+    return (anchorUs, latencyUs)
+  }
+
+  func stopMetronome() {
+    guard let node = metronome else { return }
+    metronome = nil
+    node.stop()
+    engine.detach(node)
   }
 
   func stop() throws {
@@ -88,7 +280,13 @@ final class AVEngineCaptureHardware: CaptureHardware {
       engine.inputNode.removeTap(onBus: 0)
       tapInstalled = false
     }
+    stopMetronome()
+    player?.stop()
     engine.stop()
+    if let node = player { engine.detach(node) }
+    player = nil
+    playerFormat = nil
+    overlap.reset()
     try sessionPolicy.deactivateInput()
   }
 }
@@ -140,6 +338,8 @@ final class AudioCaptureCoordinator {
     didSet { if oldValue != phase { processArbiter?.captureTransition() } }
   }
   private var attemptId: String?
+  private var attemptMode: PracticeAudioSessionMode = .recordOnly
+  private var attemptRate = 0
   private var fence: CaptureFence?
   private var startReply: CaptureMethodReply?
   private var stopReplies: [CaptureMethodReply] = []
@@ -231,9 +431,14 @@ final class AudioCaptureCoordinator {
 
   func start(
     id: String, rate: Int, result: @escaping FlutterResult,
-    owner: PracticeAudioOwner? = nil, permit: [String: Any]? = nil
+    owner: PracticeAudioOwner? = nil, permit: [String: Any]? = nil,
+    mode: PracticeAudioSessionMode = .recordOnly
   ) {
     guard valid(id) else { result(error("bad_args")); return }
+    let duplexHardware = hardware as? DuplexCaptureHardware
+    guard mode == .recordOnly || duplexHardware != nil else {
+      result(error("playback_unavailable")); return
+    }
     guard rate == 44100 || rate == 48000 else {
       result(error("unsupported_sample_rate")); return
     }
@@ -248,6 +453,8 @@ final class AudioCaptureCoordinator {
       result(rejected); return
     }
     attemptId = id
+    attemptMode = mode
+    attemptRate = rate
     phase = .starting
     uncertain = false
     closeScheduled = false
@@ -264,16 +471,31 @@ final class AudioCaptureCoordinator {
       guard let self = self else { return }
       let outcome: Result<String, Error>
       do {
-        let route = try self.hardware.start(rate: rate, fence: newFence) {
-          [weak self] data, actualRate, stamp, finish in
+        let deliver: (Data, Int, Int64, Bool?, @escaping () -> Void) -> Void = {
+          [weak self] data, actualRate, stamp, playing, finish in
           DispatchQueue.main.async {
             defer { finish() }
             guard let self = self, self.attemptId == id,
                   self.phase == .running, !newFence.isCancelled,
                   self.sinkAttemptId == id else { return }
-            self.sink?(["type": "chunk", "attemptId": id,
+            var message: [String: Any] = ["type": "chunk", "attemptId": id,
                         "samples": FlutterStandardTypedData(float64: data),
-                        "sampleRate": actualRate, "t": stamp])
+                        "sampleRate": actualRate, "t": stamp]
+            // Record-only chunks keep their exact legacy shape.
+            if let playing = playing { message["playbackActive"] = playing }
+            self.sink?(message)
+          }
+        }
+        let route: String
+        if mode == .playAndRecord, let duplex = duplexHardware {
+          route = try duplex.start(rate: rate, mode: mode, fence: newFence) {
+            data, actualRate, stamp, playing, finish in
+            deliver(data, actualRate, stamp, playing, finish)
+          }
+        } else {
+          route = try self.hardware.start(rate: rate, fence: newFence) {
+            data, actualRate, stamp, finish in
+            deliver(data, actualRate, stamp, nil, finish)
           }
         }
         outcome = .success(route)
@@ -397,9 +619,98 @@ final class AudioCaptureCoordinator {
     }
   }
 
+  /// Plays one short cue inside the caller's own running duplex attempt. The
+  /// output graph belongs to the capture attempt, so close/fence/background
+  /// paths that stop capture also stop playback.
+  func playCue(id: String, samples: [Float], sampleRate: Int,
+               result: @escaping FlutterResult) {
+    guard valid(id), attemptId == id, phase == .running,
+          let attemptFence = fence, !attemptFence.isCancelled,
+          let duplex = hardware as? DuplexCaptureHardware else {
+      result(error("playback_unavailable")); return
+    }
+    guard attemptMode == .playAndRecord else {
+      result(error("playback_not_enabled")); return
+    }
+    guard sampleRate == attemptRate else {
+      result(error("unsupported_sample_rate")); return
+    }
+    guard !samples.isEmpty, samples.count <= sampleRate * maxCueSeconds,
+          samples.allSatisfy({ $0.isFinite && abs($0) <= 1 }) else {
+      result(error("bad_args")); return
+    }
+    worker.async { [weak self] in
+      var code: String?
+      if attemptFence.isCancelled {
+        code = "playback_unavailable"
+      } else {
+        do { try duplex.playCue(samples: samples, sampleRate: sampleRate) }
+        catch CuePlaybackError.unsupportedRate { code = "unsupported_sample_rate" }
+        catch { code = "playback_failed" }
+      }
+      DispatchQueue.main.async {
+        guard let self = self else { return }
+        if let code = code { result(self.error(code)) } else { result(nil) }
+      }
+    }
+  }
+
+  /// F2.2: starts (or replaces) the click stream inside the caller's own running
+  /// duplex attempt and reports its anchor on the attempt's sink. Closing capture
+  /// stops it through `hardware.stop()`.
+  func startMetronome(id: String, spec: MetronomeStreamSpec, sampleRate: Int,
+                      result: @escaping FlutterResult) {
+    guard valid(id), attemptId == id, phase == .running,
+          let attemptFence = fence, !attemptFence.isCancelled,
+          let clicks = hardware as? MetronomeCaptureHardware else {
+      result(error("playback_unavailable")); return
+    }
+    guard attemptMode == .playAndRecord else {
+      result(error("playback_not_enabled")); return
+    }
+    guard sampleRate == attemptRate else {
+      result(error("unsupported_sample_rate")); return
+    }
+    guard spec.isValid else { result(error("bad_args")); return }
+    worker.async { [weak self] in
+      var code: String?
+      var anchor: (Int64, Int64)?
+      if attemptFence.isCancelled {
+        code = "playback_unavailable"
+      } else {
+        do { anchor = try clicks.startMetronome(spec, sampleRate: sampleRate) }
+        catch CuePlaybackError.unsupportedRate { code = "unsupported_sample_rate" }
+        catch { code = "playback_failed" }
+      }
+      DispatchQueue.main.async {
+        guard let self = self else { return }
+        if let code = code { result(self.error(code)); return }
+        result(nil)
+        guard let (anchorUs, latencyUs) = anchor, self.attemptId == id,
+              self.phase == .running, self.sinkAttemptId == id else { return }
+        self.sink?(["type": "metronomeAnchor", "attemptId": id, "anchorUs": anchorUs,
+                    "sampleRate": sampleRate, "framesPerBeat": spec.framesPerBeat,
+                    "outputLatencyUs": latencyUs])
+      }
+    }
+  }
+
+  func stopMetronome(id: String, result: @escaping FlutterResult) {
+    guard valid(id), attemptId == id, phase == .running,
+          let clicks = hardware as? MetronomeCaptureHardware else {
+      result(nil); return
+    }
+    worker.async {
+      clicks.stopMetronome()
+      DispatchQueue.main.async { result(nil) }
+    }
+  }
+
   private func clear() {
     closeGeneration &+= 1
     attemptId = nil
+    attemptMode = .recordOnly
+    attemptRate = 0
     fence = nil
     startReply = nil
     uncertain = false
@@ -480,7 +791,8 @@ final class AudioCaptureStreamer: NSObject, FlutterStreamHandler {
     case "start":
       guard let args = call.arguments as? [String: Any],
             let id = args["attemptId"] as? String,
-            let rate = args["sampleRate"] as? Int else {
+            let rate = args["sampleRate"] as? Int,
+            let mode = PracticeAudioSessionMode(wire: args["sessionMode"]) else {
         result(FlutterError(code: "bad_args", message: nil, details: nil)); return
       }
       var permit: [String: Any]?
@@ -488,14 +800,58 @@ final class AudioCaptureStreamer: NSObject, FlutterStreamHandler {
         let ownerKeys: Set<String> = ["ownerToken", "engineGeneration", "contextGeneration"]
         let startKeys = ownerKeys.union(["attemptId", "sampleRate"])
         let leasedKeys = startKeys.union(["leaseId", "leaseGeneration"])
-        let keys = Set(args.keys)
+        // `sessionMode` is orthogonal to the claim/lease key sets.
+        let keys = Set(args.keys).subtracting(["sessionMode"])
         guard keys == startKeys || keys == leasedKeys else {
           result(FlutterError(code: "bad_args", message: nil, details: nil)); return
         }
         permit = args.filter { ownerKeys.contains($0.key) ||
           (keys == leasedKeys && ($0.key == "leaseId" || $0.key == "leaseGeneration")) }
       }
-      coordinator.start(id: id, rate: rate, result: result, owner: owner, permit: permit)
+      coordinator.start(id: id, rate: rate, result: result, owner: owner, permit: permit,
+                        mode: mode)
+    case "playCue":
+      guard let args = call.arguments as? [String: Any], args.count == 3,
+            let id = args["attemptId"] as? String,
+            let typed = args["samples"] as? FlutterStandardTypedData,
+            typed.type == .float64,
+            let rate = args["sampleRate"] as? Int else {
+        result(FlutterError(code: "bad_args", message: nil, details: nil)); return
+      }
+      guard boundAttemptId == id else {
+        result(FlutterError(code: "playback_unavailable", message: nil, details: nil)); return
+      }
+      let samples: [Float] = typed.data.withUnsafeBytes { raw in
+        raw.bindMemory(to: Double.self).map { Float($0) }
+      }
+      coordinator.playCue(id: id, samples: samples, sampleRate: rate, result: result)
+    case "startMetronome":
+      guard let args = call.arguments as? [String: Any], args.count == 7,
+            let id = args["attemptId"] as? String,
+            let rate = args["sampleRate"] as? Int,
+            let framesPerBeat = args["framesPerBeat"] as? Int,
+            let beatsPerBar = args["beatsPerBar"] as? Int,
+            let accent = args["accent"] as? FlutterStandardTypedData, accent.type == .float64,
+            let beat = args["beat"] as? FlutterStandardTypedData, beat.type == .float64,
+            let leadInMs = args["leadInMs"] as? Int else {
+        result(FlutterError(code: "bad_args", message: nil, details: nil)); return
+      }
+      guard boundAttemptId == id else {
+        result(FlutterError(code: "playback_unavailable", message: nil, details: nil)); return
+      }
+      func floats(_ typed: FlutterStandardTypedData) -> [Float] {
+        typed.data.withUnsafeBytes { raw in raw.bindMemory(to: Double.self).map { Float($0) } }
+      }
+      let spec = MetronomeStreamSpec(framesPerBeat: framesPerBeat, beatsPerBar: beatsPerBar,
+                                     accent: floats(accent), beat: floats(beat),
+                                     leadInSeconds: Double(leadInMs) / 1000)
+      coordinator.startMetronome(id: id, spec: spec, sampleRate: rate, result: result)
+    case "stopMetronome":
+      guard let id = (call.arguments as? [String: Any])?["attemptId"] as? String else {
+        result(FlutterError(code: "bad_args", message: nil, details: nil)); return
+      }
+      guard boundAttemptId == id else { result(nil); return }
+      coordinator.stopMetronome(id: id, result: result)
     case "stop":
       guard let id = (call.arguments as? [String: Any])?["attemptId"] as? String else {
         result(FlutterError(code: "bad_args", message: nil, details: nil)); return

@@ -1,0 +1,88 @@
+{
+  "id": "ear-s1-m04-05",
+  "title": { "en": "Note-reading speed check", "tr": "Nota okuma hız kontrolü" },
+  "goal": {
+    "en": "Names notes in both clefs quickly and accurately.",
+    "tr": "İki anahtarda notaları hızlı ve doğru adlandırır."
+  },
+  "explanation": [
+    {
+      "en": "This is a check, not a new topic: 20 notes from the treble and bass clefs, ledger lines included.",
+      "tr": "Bu yeni bir konu değil, bir kontrol: sol ve fa anahtarından, ek çizgiler dahil 20 nota."
+    },
+    {
+      "en": "You have up to 3 seconds per note. Speed comes from landmarks, not from counting every line.",
+      "tr": "Her nota için en fazla 3 saniyen var. Hız, her çizgiyi saymaktan değil, işaret notalarından gelir."
+    },
+    {
+      "en": "Look at the clef first, then the nearest landmark, then the step.",
+      "tr": "Önce anahtara, sonra en yakın işaret notasına, sonra adıma bak."
+    },
+    {
+      "en": "If time runs out on a note, it counts as not answered.",
+      "tr": "Bir notada süre biterse o nota cevaplanmamış sayılır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": { "en": "No sound; each question is shown on the staff.", "tr": "Ses yok; her soru portede gösterilir." }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Name 20 notes from both clefs, with up to 3 seconds for each.",
+      "tr": "İki anahtardan 20 notayı, her biri için en fazla 3 saniyede adlandır."
+    },
+    "pass": {
+      "levelDefault": false,
+      "minCorrect": 18,
+      "text": {
+        "en": "At least 18 of 20 notes named correctly, each within 3 seconds.",
+        "tr": "20 notanın en az 18'i, her biri 3 saniye içinde doğru adlandırılır."
+      }
+    },
+    "drill": {
+      "type": "note_name",
+      "count": 20,
+      "params": {
+        "clef": ["treble", "bass"],
+        "range": { "treble": ["A3", "C6"], "bass": ["C2", "E4"] },
+        "ledgerLinesMax": 2,
+        "secondsPerNote": 3
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer under time pressure, one step off.",
+        "tr": "Farklı cevap, süre baskısında bir basamak kaymış."
+      },
+      "fix": {
+        "en": "Slow down a little; 3 seconds is enough to check line or space.",
+        "tr": "Biraz yavaşla; 3 saniye çizgi mi aralık mı diye bakmaya yeter."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: the clef changed and was missed.",
+        "tr": "Farklı cevap: anahtar değişti, fark edilmedi."
+      },
+      "fix": {
+        "en": "Glance at the clef before every note; the two clefs are mixed.",
+        "tr": "Her notadan önce anahtara göz at; iki anahtar karışık gelir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise without the timer in 'Treble-clef notes' and 'Bass-clef notes', then try again.",
+    "tr": "Süresiz pratik için 'Sol anahtarı notaları' ve 'Fa anahtarı notaları' derslerine dön, sonra yeniden dene."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

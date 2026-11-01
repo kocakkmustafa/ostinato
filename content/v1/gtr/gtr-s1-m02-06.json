@@ -1,0 +1,75 @@
+{
+  "id": "gtr-s1-m02-06",
+  "title": { "en": "Alternating strokes", "tr": "Aşağı-yukarı pena" },
+  "goal": {
+    "en": "Plays even eighth notes on one string with alternating down and up strokes at ♩=60.",
+    "tr": "Tek telde aşağı ve yukarı penayı sırayla kullanarak ♩=60'ta eşit sekizlik çalar."
+  },
+  "explanation": [
+    {
+      "en": "Alternate picking means down, up, down, up. The pick goes down on the beat and up between beats.",
+      "tr": "Aşağı-yukarı pena, aşağı, yukarı, aşağı, yukarı demektir. Pena vuruşta aşağı, vuruşlar arasında yukarı gider."
+    },
+    {
+      "en": "Keep each stroke small: just past the string and no further.",
+      "tr": "Her hareketi küçük tut: telin hemen ötesine kadar, daha fazla değil."
+    },
+    {
+      "en": "Count \"1 & 2 & 3 & 4 &\". Down on the numbers, up on \"&\".",
+      "tr": "\"1 ve 2 ve 3 ve 4 ve\" diye say. Sayılarda aşağı, \"ve\"lerde yukarı."
+    },
+    {
+      "en": "Later, on a new string, keep the same down-up order instead of starting again with a downstroke.",
+      "tr": "İleride yeni bir tele geçince yeniden aşağıyla başlamak yerine aynı aşağı-yukarı sırasını sürdür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Sixteen A2 eighth notes at ♩=60 and at ♩=40, with down and up strokes slightly different in tone, string-model synthesis.",
+      "tr": "On altı La2 sekizlik, ♩=60 ve ♩=40; aşağı ve yukarı vuruşların tınısı biraz farklı, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play 16 eighth notes on open string 5 along with the click, alternating down and up. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Açık 5. telde klikle birlikte 16 sekizlik çal; aşağı ve yukarıyı sırayla kullan. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "A2 A2 A2 A2 A2 A2 A2 A2 | A2 A2 A2 A2 A2 A2 A2 A2",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every downstroke landed on a number and every upstroke on \"&\".", "tr": "Her aşağı vuruş bir sayıya, her yukarı vuruş bir \"ve\"ye düştü." },
+    { "en": "The up notes were as clear as the down notes.", "tr": "Yukarı vuruşlu notalar aşağı vuruşlular kadar netti." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The upstroke is too big. Make both strokes the same small size so the up note arrives halfway between clicks.",
+        "tr": "Yukarı hareket fazla büyük. İki hareketi de aynı küçüklükte yap; yukarı nota iki klik arasının tam ortasına gelsin."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The upstroke misses the string. Let the pick tip pass through the string on the way up as well.",
+        "tr": "Yukarı hareket teli ıskalıyor. Penanın ucu yukarı giderken de telin içinden geçsin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Say \"down, up\" aloud at ♩=40 and play only 8 eighth notes before going to 16.",
+    "tr": "♩=40'ta \"aşağı, yukarı\" diye sesli söyle ve 16'ya geçmeden önce yalnız 8 sekizlik çal."
+  },
+  "legacy": "R: guitar.journey.notes.alternating_pick",
+  "minutes": 10,
+  "expertPending": true
+}

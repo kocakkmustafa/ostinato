@@ -1,0 +1,73 @@
+{
+  "id": "ear-s1-m02-01",
+  "title": { "en": "High or low?", "tr": "Yüksek mi alçak mı?" },
+  "goal": { "en": "Tells which of two notes is higher.", "tr": "İki sesten hangisinin daha yüksek olduğunu bulur." },
+  "explanation": [
+    {
+      "en": "A high note sounds thin and bright; a low note sounds deep and heavy.",
+      "tr": "Yüksek ses ince ve parlak, alçak ses kalın ve ağır duyulur. Günlük dilde de 'ince ses', 'kalın ses' deriz."
+    },
+    {
+      "en": "High and low here mean pitch, not volume. A soft note can be high and a loud note can be low.",
+      "tr": "Buradaki 'yüksek' perde demektir, sesi açmak değil. Kısık çalan bir nota yüksek, gür çalan bir nota alçak olabilir."
+    },
+    {
+      "en": "On a keyboard, low notes are on the left and high notes on the right.",
+      "tr": "Klavyede alçak sesler solda, yüksek sesler sağdadır."
+    },
+    {
+      "en": "Play both notes again in your head and raise your hand for the higher one.",
+      "tr": "İki notayı kafanda yeniden çal ve yüksek olanda elini kaldır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays two piano-tone notes, one after the other.",
+      "tr": "Her soruda piyano tınısıyla iki nota art arda çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Listen to two notes and choose which one is higher: the first or the second.",
+      "tr": "İki notayı dinle ve hangisinin daha yüksek olduğunu seç: birincisi mi, ikincisi mi?"
+    },
+    "pass": { "levelDefault": true, "minCorrect": 10 },
+    "drill": {
+      "type": "pitch_direction",
+      "count": 12,
+      "params": { "range": ["C3", "C5"], "minSemitones": 2, "notes": 2, "varyVolume": true }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "E1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the louder note was chosen as higher.",
+        "tr": "Farklı cevap: daha gür çalan nota yüksek seçildi."
+      },
+      "fix": {
+        "en": "Ignore the volume and listen for thin or deep. Replay both notes.",
+        "tr": "Gürlüğü boş ver; ince mi kalın mı, ona bak. İki notayı yeniden dinle."
+      }
+    },
+    {
+      "error": { "en": "Different answer: close notes got mixed up.", "tr": "Farklı cevap: birbirine yakın notalar karıştı." },
+      "fix": {
+        "en": "Replay the pair and slide your hand up or down from the first note to the second.",
+        "tr": "Çifti yeniden dinle ve elini birinci notadan ikinciye yukarı ya da aşağı kaydır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each pair as often as you like; the first rounds use wider gaps.",
+    "tr": "Her çifti istediğin kadar tekrar dinle; ilk turlarda aralar daha geniştir."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

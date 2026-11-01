@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s1-m04-08",
+  "title": { "en": "D–G and G–C changes", "tr": "D–G ve G–C geçişleri" },
+  "goal": {
+    "en": "Changes D–G and G–C at least 12 times each in 60 seconds with every string ringing.",
+    "tr": "D–G ve G–C geçişlerini 60 saniyede her biri için en az 12 kez, bütün teller çalarak yapar."
+  },
+  "explanation": [
+    {
+      "en": "D and G share no finger positions. Look at the new shape in your mind before you move.",
+      "tr": "D ile G'nin ortak parmak yeri yoktur. Hareket etmeden önce yeni şekli zihninde gör."
+    },
+    {
+      "en": "Lead with the bass finger. For G, aim finger 2 at string 6 first; for D, aim at the triangle on the top strings.",
+      "tr": "Bas parmağıyla önden git. G için önce 2. parmağı 6. tele hedefle; D için üst tellerdeki üçgeni hedefle."
+    },
+    {
+      "en": "G to C: fingers move one string down toward the floor. Finger 1 lands on string 2, fret 1.",
+      "tr": "G'den C'ye: parmaklar bir tel aşağı, yere doğru iner. 1. parmak 2. telin 1. perdesine konar."
+    },
+    {
+      "en": "Move all fingers at the same time, close to the strings. Each chord starts its strum on its own bass string: D on 4, G on 6, C on 5.",
+      "tr": "Bütün parmakları aynı anda, tellere yakın taşı. Her akor vuruşa kendi bas telinden başlar: D 4. telden, G 6. telden, C 5. telden."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "D and G alternating, then G and C alternating, one strum each, at a slow and a moderate pace.",
+      "tr": "Önce D ve G, sonra G ve C sırayla, her birine bir vuruş, yavaş ve orta hızda."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Two sets. First D and G, then G and C. In each set, change back and forth for 60 seconds. Each change counts when every string of the new chord is heard.",
+      "tr": "İki set. Önce D ve G, sonra G ve C. Her sette 60 saniye boyunca ileri geri geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 12 changes in 60 seconds for each pair. A change counts when every string of the new chord is heard.",
+        "tr": "Her çift için 60 saniyede en az 12 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "All fingers moved at the same time.", "tr": "Bütün parmaklar aynı anda hareket etti." },
+    { "en": "Each chord started on its own bass string.", "tr": "Her akor kendi bas telinden başladı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "The fingers land one by one. Practise placing all of them in one motion without strumming.",
+        "tr": "Parmaklar tek tek konuyor. Vurmadan hepsini tek harekette yerleştirmeyi çalış."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "On D, start the strum on string 4.",
+        "tr": "D'de vuruşa 4. telden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use the three-finger G and practise one pair per session.",
+    "tr": "Üç parmaklı G'yi kullan ve her oturumda tek bir çift çalış."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

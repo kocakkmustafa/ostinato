@@ -1,0 +1,82 @@
+{
+  "id": "gtr-s1-m03-02",
+  "title": { "en": "Quarter notes on one string", "tr": "Tek telde dörtlükler" },
+  "goal": {
+    "en": "Plays 16 even quarter notes on open A2 with the metronome at ♩=80.",
+    "tr": "Açık La2'de metronomla ♩=80'de 16 eşit dörtlük çalar."
+  },
+  "explanation": [
+    {
+      "en": "In 4/4 the upper 4 means four beats per bar. The lower 4 means the quarter note is the beat.",
+      "tr": "4/4'te üstteki 4, ölçüde dört vuruş olduğunu söyler. Alttaki 4, vuruş biriminin dörtlük olduğunu söyler."
+    },
+    {
+      "en": "A quarter note has a filled head and a stem. Here it lasts one beat.",
+      "tr": "Dörtlüğün dolu başı ve sapı vardır. Burada bir vuruş sürer."
+    },
+    {
+      "en": "Pluck open string 5 (A2) once on every click. Keep the stroke small and the same size each time.",
+      "tr": "Açık 5. teli (La2) her klikte bir kez çal. Hareketi küçük ve her seferinde aynı boyda tut."
+    },
+    {
+      "en": "Count 1 2 3 4 aloud or silently. The count keeps the bar, the click keeps the speed.",
+      "tr": "1 2 3 4'ü sesli ya da içinden say. Sayım ölçüyü, klik hızı tutar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Open A2 in quarter notes for four bars with a click, at ♩=80 and at ♩=55, string-model synthesis.",
+      "tr": "Klikle dört ölçü dörtlük açık La2, ♩=80 ve ♩=55, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play 16 quarter notes on open A2 with the click. Start at ♩=60 and move up in steps of 5 to ♩=80.",
+      "tr": "Klikle açık La2'de 16 dörtlük çal. ♩=60'tan başla, 5'er adımla ♩=80'e çık."
+    },
+    "sequence": "4/4: q q q q | q q q q | q q q q | q q q q",
+    "tempo": { "open": 60, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "You are rushing ahead of the click. Let the click sound first, then pluck right with it.",
+        "tr": "Kliğin önüne geçiyorsun. Klik gelsin, sonra tam onunla birlikte çal."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "A fretting finger is touching string 5. Lift the fretting hand away; this lesson uses the open string.",
+        "tr": "Sol eldeki bir parmak 5. tele değiyor. Sol eli telden uzaklaştır; bu ders açık teli kullanır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Pluck a little firmer and keep the phone within arm's reach.",
+        "tr": "Biraz daha net çek ve telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Stay at ♩=50 and play only two bars until the notes land with the click.",
+    "tr": "♩=50'de kal ve notalar klikle aynı anda gelene kadar yalnız iki ölçü çal."
+  },
+  "legacy": "V: guitar.journey.reading.quarters_eighths",
+  "minutes": 10,
+  "expertPending": true
+}

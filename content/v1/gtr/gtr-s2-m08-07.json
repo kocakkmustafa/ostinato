@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s2-m08-07",
+  "title": { "en": "The spider exercise", "tr": "Örümcek egzersizi" },
+  "goal": {
+    "en": "Alternates the finger pairs 1-3 and 2-4 on neighbouring strings at ♩=60.",
+    "tr": "1-3 ve 2-4 parmak çiftlerini komşu tellerde ♩=60'ta dönüşümlü çalar."
+  },
+  "explanation": [
+    {
+      "en": "Fingers 1 and 3 play on one string, fingers 2 and 4 on the next. They take turns like spider legs.",
+      "tr": "1. ve 3. parmak bir telde, 2. ve 4. parmak yanındaki telde çalar. Örümcek bacakları gibi sırayla basarlar."
+    },
+    {
+      "en": "Order: finger 1 on string 6, fret 1; finger 2 on string 5, fret 2; finger 3 on string 6, fret 3; finger 4 on string 5, fret 4.",
+      "tr": "Sıra: 1. parmak 6. tel 1. perde; 2. parmak 5. tel 2. perde; 3. parmak 6. tel 3. perde; 4. parmak 5. tel 4. perde."
+    },
+    {
+      "en": "Then move the pair one string toward the floor and repeat: strings 5 and 4, then strings 4 and 3.",
+      "tr": "Sonra çifti bir tel yere doğru taşı ve tekrarla: 5. ve 4. tel, sonra 4. ve 3. tel."
+    },
+    {
+      "en": "This stretch is demanding for the hand. Stop after three sets; if the thumb or wrist tightens, rest.",
+      "tr": "Bu esneme el için zorlayıcıdır. Üç setten sonra dur; başparmak ya da bilek gerilirse dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The spider on strings 6–5, 5–4 and 4–3, quarter notes with a click at ♩=60 and ♩=40.",
+      "tr": "6–5, 5–4 ve 4–3. tellerde örümcek, klikle dörtlük; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the three bars in quarter notes with the click. Start at ♩=50 and move up in steps of 5 to ♩=60. Play three sets at most.",
+      "tr": "Üç ölçüyü klikle dörtlük olarak çal. ♩=50'den başla, 5'er adımla ♩=60'a çık. En fazla üç set çal."
+    },
+    "sequence": "F2 B2 G2 C♯3 | A♯2 E3 C3 F♯3 | D♯3 A3 F3 B3",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." },
+    { "en": "Each finger stayed on its own fret.", "tr": "Her parmak kendi perdesinde kaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "Finger 4 landed on fret 3. Open the hand from the base of the fingers, not by pulling the wrist.",
+        "tr": "4. parmak 3. perdeye düştü. Eli bileği çekerek değil, parmak köklerinden açarak genişlet."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Lift the finger that just played as the next one lands; they move like a seesaw.",
+        "tr": "Sonraki parmak basarken az önce çalan parmağı kaldır; tahterevalli gibi hareket ederler."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Do the spider on frets 5–8, where the frets are closer together.",
+    "tr": "Örümceği perdelerin daha sık olduğu 5.–8. perdelerde yap."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

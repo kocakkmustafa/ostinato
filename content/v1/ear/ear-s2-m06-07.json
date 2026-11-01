@@ -1,0 +1,117 @@
+{
+  "id": "ear-s2-m06-07",
+  "title": {
+    "en": "Interval checkpoint",
+    "tr": "Aralık geçişi"
+  },
+  "goal": {
+    "en": "Recognizes and sings M2, M3, P5 and P8.",
+    "tr": "B2, B3, T5 ve T8'i kulaktan tanır ve söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint has two parts, and both must pass: 12 recognition questions and 8 singing tasks.",
+      "tr": "Bu geçişin iki bölümü var ve ikisi de geçilmeli: 12 tanıma sorusu ve 8 söyleme görevi."
+    },
+    {
+      "en": "Recognition mixes all four intervals, going up and down.",
+      "tr": "Tanıma bölümü dört aralığı yukarı ve aşağı karışık sorar."
+    },
+    {
+      "en": "Singing asks for each interval above a starting note, two of each, in your comfortable range.",
+      "tr": "Söyleme bölümü her aralığı bir başlangıç notasının üstünde ister; her birinden iki tane, rahat menzilinde."
+    },
+    {
+      "en": "Warm up with the anchors before you start: do-re, do-mi, do-sol, do to the top do.",
+      "tr": "Başlamadan dayanaklarla ısın: do-re, do-mi, do-sol, do'dan üst do'ya."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Interval pairs up and down for recognition; for singing, a starting note low in your range and the target played once afterwards.",
+      "tr": "Tanıma için yukarı ve aşağı aralık çiftleri; söyleme için rahat menzilinin alt tarafında başlangıç notası, hedef sonradan bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Part 1: name 12 intervals (M2, M3, P5, P8, up and down); at least 10 must be correct. Part 2: sing 8 intervals above a starting note, two of each. Sing in your own octave. If a top note is not comfortable, sing that interval downward. If you'd rather not sing, choose the on-screen version: you hear 8 more pairs and name them.",
+      "tr": "1. bölüm: 12 aralığı adlandır (B2, B3, T5, T8, yukarı ve aşağı); en az 10'u doğru olmalı. 2. bölüm: bir başlangıç notasının üstüne 8 aralık söyle, her birinden iki tane. Kendi oktavında söyle. Bir üst nota rahat değilse o aralığı aşağı doğru söyle. Söylemek istemezsen ekrandaki sürümü seç: 8 çift daha dinler ve adlandırırsın."
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 10
+    },
+    "drill": {
+      "type": "interval_name",
+      "count": 12,
+      "params": {
+        "intervals": [
+          "M2",
+          "M3",
+          "P5",
+          "P8"
+        ],
+        "direction": "both",
+        "cadence": false
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "E1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I sorted each interval by size before naming it.",
+      "tr": "Her aralığı adlandırmadan önce boyuta göre ayırdım."
+    },
+    {
+      "en": "The top notes felt easy, without pushing.",
+      "tr": "Üst notalar zorlamadan, rahat geldi."
+    },
+    {
+      "en": "I warmed up with the four anchors.",
+      "tr": "Dört dayanakla ısındım."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: P5 and P8 mixed up going down.",
+        "tr": "Farklı cevap: inişte T5 ile T8 karıştı."
+      },
+      "fix": {
+        "en": "Going down, the octave still lands on the same note; the fifth lands on a new one.",
+        "tr": "İnerken de oktav aynı notaya, beşli ise yeni bir notaya iner."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, M3 a semitone low.",
+        "tr": "Farklı nota: B3 yarım ses alçak."
+      },
+      "fix": {
+        "en": "Think do-re-mi and aim mi a little brighter.",
+        "tr": "İçinden do-re-mi de ve mi'yi biraz daha parlak hedefle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Rest between the two parts; you can do the singing part in a later session.",
+    "tr": "İki bölüm arasında dinlen; söyleme bölümünü sonraki bir oturumda yapabilirsin."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

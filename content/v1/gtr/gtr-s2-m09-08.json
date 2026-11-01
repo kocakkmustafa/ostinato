@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s2-m09-08",
+  "title": { "en": "Play back three notes by ear", "tr": "Kulaktan üç nota" },
+  "goal": {
+    "en": "Plays a heard three-note motif back on the guitar within three tries.",
+    "tr": "Duyduğu üç notalık motifi en fazla üç denemede gitarda çalar."
+  },
+  "explanation": [
+    {
+      "en": "The app plays a short motif from the C major notes in first position, C4 to G4.",
+      "tr": "Uygulama birinci pozisyonda Do majör notalarından, Do4 ile Sol4 arasından kısa bir motif çalar."
+    },
+    {
+      "en": "Find the first note as in the one-note lesson. It is the anchor for the rest.",
+      "tr": "İlk notayı tek nota dersindeki gibi bul. Diğerleri için dayanak odur."
+    },
+    {
+      "en": "Then follow the shape: up, down or the same, and by a step or a leap.",
+      "tr": "Sonra şekli izle: yukarı, aşağı ya da aynı; adım mı, atlama mı."
+    },
+    {
+      "en": "The first motifs move by step. Later ones include a leap of a third.",
+      "tr": "İlk motifler adım adım ilerler. Sonrakilerde üçlü atlama da vardır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Original three-note motifs from C4 to G4, string-model synthesis at ♩=70, replayable.",
+      "tr": "Do4 ile Sol4 arasında özgün üç notalık motifler, ♩=70'te tel modeli sentezi, yeniden dinlenebilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Listen to a three-note motif, then play it back. You have up to 3 tries per motif, 6 motifs in all. Rhythm is free; only the notes are checked.",
+      "tr": "Üç notalık bir motifi dinle, sonra geri çal. Her motif için en fazla 3 deneme hakkın var; toplam 6 motif. Ritim serbest; yalnız notalar kontrol edilir."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 5 of 6 motifs played back within 3 tries each.",
+        "tr": "6 motifin en az 5'i, her biri en fazla 3 denemede geri çalınır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found the first note before playing the motif.", "tr": "Motifi çalmadan önce ilk notayı buldum." },
+    { "en": "I could say if each move went up, down or stayed.", "tr": "Her hareketin yukarı mı, aşağı mı gittiğini ya da aynı mı kaldığını söyleyebildim." },
+    { "en": "My motif sounded the same as the reference.", "tr": "Motifim referansla aynı duyuldu." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note on the third note.", "tr": "Üçüncü notada farklı nota." },
+      "fix": { "en": "Replay only the last two notes. Is it a step or a leap?", "tr": "Yalnız son iki notayı yeniden dinle. Adım mı, atlama mı?" }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "Check E4–F4: it is a half step, open string 1 to fret 1.", "tr": "Mi4–Fa4'ü kontrol et: yarım sestir, açık 1. telden 1. perdeye." }
+    }
+  ],
+  "adaptation": {
+    "en": "Use the 'first note shown' option: the screen shows where the first note is.",
+    "tr": "'İlk nota gösterilsin' seçeneğini kullan: ekran ilk notanın yerini gösterir."
+  },
+  "minutes": 12,
+  "expertPending": true
+}
