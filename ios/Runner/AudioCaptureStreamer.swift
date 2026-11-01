@@ -252,8 +252,15 @@ final class AVEngineCaptureHardware: MetronomeCaptureHardware {
     let node = AVAudioPlayerNode()
     engine.attach(node)
     engine.connect(node, to: engine.mainMixerNode, format: format)
+    // "Now" comes from the engine's own render clock, the same host clock the
+    // input tap stamps with; it trails real time by at most one I/O buffer,
+    // well inside the lead-in. No mach_absolute_time (Required-Reason API).
+    guard let rendered = engine.outputNode.lastRenderTime, rendered.isHostTimeValid else {
+      engine.detach(node)
+      throw CuePlaybackError.unavailable
+    }
     node.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: nil)
-    let startHost = mach_absolute_time() + AVAudioTime.hostTime(forSeconds: spec.leadInSeconds)
+    let startHost = rendered.hostTime + AVAudioTime.hostTime(forSeconds: spec.leadInSeconds)
     node.play(at: AVAudioTime(hostTime: startHost))
     metronome = node
     let anchorUs = Int64(AVAudioTime.seconds(forHostTime: startHost) * 1_000_000)
