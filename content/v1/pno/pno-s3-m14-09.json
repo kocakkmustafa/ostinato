@@ -14,20 +14,20 @@
       "tr": "Cornelius Gurlitt (1820–1901) Alman bir besteci ve öğretmendi. Genç çalıcılar için çok sayıda kısa parça yazdı."
     },
     {
-      "en": "In this piece the right hand carries a song-like melody and the left hand accompanies it.",
-      "tr": "Bu parçada sağ el şarkı gibi bir ezgi taşır, sol el ona eşlik eder."
+      "en": "This lesson uses No. 1, 'Morgengruss' (Morning greeting), from his Op. 130 easy studies: Moderato, C major, 6/8, the first section, bars 1–8.",
+      "tr": "Bu ders, kolay etütlerinden Op. 130'un 1 numaralı 'Morgengruss' (Sabah selamı) parçasını kullanır: Moderato, Do majör, 6/8'lik, ilk bölüm, 1–8. ölçüler."
     },
     {
       "en": "Shape each phrase like a sung line: grow toward its high point, then relax at the end.",
       "tr": "Her cümleyi söylenen bir dize gibi biçimlendir: doruğuna doğru büyüt, sonunda gevşe."
     },
     {
-      "en": "Keep the accompaniment softer than the melody.",
-      "tr": "Eşliği ezgiden daha hafif tut."
+      "en": "The left hand plays short chords that start with melody notes. So the measured run is the melody alone, exactly as the line on screen; in bar 8 play only the top note of the two-note group. Then play both hands in a second run, which is not measured, with the accompaniment softer than the melody.",
+      "tr": "Sol el, ezgi notalarıyla birlikte başlayan kısa akorlar çalar. Bu yüzden ölçülen çalış, ekrandaki dizi gibi, yalnız ezgidir; 8. ölçüde iki sesli grubun yalnız üst notasını çal. Sonra iki eli ölçülmeyen ikinci bir çalışta, eşliği ezgiden hafif tutarak çal."
     },
     {
-      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
-      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition, made from the 1910 Augener edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları, 1910 Augener baskısından hazırlanan Ostinato düzenlemesidir."
     }
   ],
   "referenceAudio": {
@@ -35,8 +35,8 @@
       "S"
     ],
     "brief": {
-      "en": "The selected Gurlitt piece from the Ostinato edition, piano synthesis, at ♩=76 and at ♩=52.",
-      "tr": "Ostinato düzenlemesinden seçilen Gurlitt parçası, piyano sentezi, ♩=76 ve ♩=52."
+      "en": "Gurlitt, Op. 130 No. 1, bars 1–8, from the Ostinato edition, piano synthesis: the melody alone, then both hands, at ♩=76 and at ♩=52.",
+      "tr": "Ostinato düzenlemesinden Gurlitt, Op. 130 No. 1, 1–8. ölçüler, piyano sentezi: önce yalnız ezgi, sonra iki el, ♩=76 ve ♩=52."
     }
   },
   "practice": {
@@ -48,9 +48,10 @@
       "A3"
     ],
     "task": {
-      "en": "Play the melody alone once. Practise in two-bar sections, then play the piece from start to finish at ♩=76.",
-      "tr": "Ezgiyi bir kez tek başına çal. İki ölçülük bölümlerle çalış, sonra parçayı baştan sona ♩=76'da çal."
+      "en": "Run 1, measured: play the melody alone, bars 1–8, with the click: first in two-bar sections, then all 8 bars at ♩=76 (one click per quarter, so each eighth note is half a click). In bar 8 play only E5 of the E5–B4 pair. Run 2, not measured: play both hands as written.",
+      "tr": "1. çalış, ölçülür: ezgiyi tek başına 1–8. ölçüler boyunca klikle çal: önce iki ölçülük bölümlerle, sonra 8 ölçünün tamamını ♩=76'da (her dörtlükte bir klik, yani her sekizlik yarım klik). 8. ölçüde Mi5–Si4 çiftinin yalnız Mi5'ini çal. 2. çalış, ölçülmez: iki eli yazıldığı gibi çal."
     },
+    "sequence": "3/4: C5:e. B4:s C5:e G4:q G4:e | D5:e. C♯5:s D5:e G4:q G4:e | E5:e D5:e E5:e G5:e F5:e D5:e | C5:q. B4:q er | C5:e. B4:s C5:e G4:q G4:e | D5:e. C♯5:s D5:e G4:q G4:e | E5:e D5:e E5:e G5:e F5:e D5:e | C5:q E5:s D5:s C5:q er",
     "tempo": {
       "open": 76,
       "target": 76
@@ -109,7 +110,7 @@
     "en": "Learn the first half until it passes at ♩=76, then add the second half.",
     "tr": "Önce ilk yarıyı ♩=76'da geçene kadar çalış, sonra ikinci yarıyı ekle."
   },
-  "repertoire": "Cornelius Gurlitt (1820–1901): one short melodic piece from his easy pieces for young players; opus and number to be confirmed from a 19th-century edition. To be selected so that no two new notes start together (one-new-note rule), or with those notes left to the Ostinato edition. NEEDS TRANSCRIPTION from a public-domain edition scan; the opus, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1901; public domain, legal review pending.",
+  "repertoire": "Cornelius Gurlitt (1820–1901), Op. 130 (easy studies), No. 1, 'Morgengruss' / 'Morning Greeting' (C major, 6/8, Moderato), first section, bars 1–8. Source edition: London: Augener, 1910, plate 6552, revised by Otto Thümer, p. 1; scan via IMSLP (marked Public Domain), mirrored at https://archive.org/details/imslp-leichte-etden-op130-gurlitt-cornelius (file PMLP58173-Gurlitt_op.130_Leichte_Etueden.pdf; IMSLP: https://imslp.org/wiki/35_Leichte_Etüden,_Op.130_(Gurlitt,_Cornelius)); Thümer's fingering and phrasing are not used. Measured run: the melody (right hand) alone, 6/8 written as 3 quarter beats per bar; in bar 8 only the top note E5 of the E5/B4 sixteenth. The left-hand chords start with melody notes and are played in a second, unmeasured run. Composer died 1901; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

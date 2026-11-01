@@ -11,32 +11,33 @@
       "tr": "Daniel Gottlob Türk (1750–1813), Halle'de çalışan Alman bir öğretmen ve orgcuydu. 1792'de yeni başlayanlar için kısa parçalardan oluşan Handstücke für angehende Klavierspieler'i yayımladı."
     },
     {
-      "en": "This lesson uses one piece from that collection. It was chosen so that the two hands never start a new note together.",
-      "tr": "Bu ders o derlemeden bir parçayı kullanır. Parça, iki elin hiçbir zaman aynı anda yeni nota başlatmadığı biçimde seçildi."
+      "en": "This lesson uses No. 1, 'Aller Anfang ist schwer' (Every beginning is hard), in C major, 8 bars. The right hand plays quarter and half notes from C5 to G5, thumb on C5. The left hand holds one long note under each bar.",
+      "tr": "Bu ders 1 numaralı 'Aller Anfang ist schwer' (Her başlangıç zordur) parçasını kullanır: Do majör, 8 ölçü. Sağ el, başparmak Do5'te, Do5 ile Sol5 arasında dörtlük ve ikilikler çalar. Sol el her ölçünün altında tek bir uzun nota tutar."
     },
     {
-      "en": "Read it as in this module: find the time signature, clap the rhythm, then play hands separately before you join them.",
-      "tr": "Bu modüldeki gibi oku: ölçü işaretini bul, ritmi alkışla, sonra elleri birleştirmeden önce ayrı ayrı çal."
+      "en": "Each left-hand note starts together with a right-hand note. So the measured run is the right hand alone, exactly as the line on screen. Then add the left hand in a second run, which is not measured.",
+      "tr": "Sol elin her notası bir sağ el notasıyla birlikte başlar. Bu yüzden ölçülen çalış yalnız sağ eldir, ekrandaki dizi gibi. Sonra sol eli ölçülmeyen ikinci bir çalışta ekle."
     },
     {
-      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
-      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition, made from Türk's 1797 second edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları, Türk'ün 1797 tarihli ikinci baskısından hazırlanan Ostinato düzenlemesidir."
     }
   ],
   "referenceAudio": {
     "kinds": ["S"],
     "brief": {
-      "en": "The selected Handstück from the Ostinato edition, piano synthesis, at ♩=72 and at ♩=50.",
-      "tr": "Ostinato düzenlemesinden seçilen el parçası, piyano sentezi, ♩=72 ve ♩=50."
+      "en": "Türk, Handstücke No. 1, from the Ostinato edition, piano synthesis: the right hand alone, then both hands, at ♩=72 and at ♩=50.",
+      "tr": "Ostinato düzenlemesinden Türk, el parçası 1, piyano sentezi: önce yalnız sağ el, sonra iki el, ♩=72 ve ♩=50."
     }
   },
   "practice": {
     "measurement": ["M"],
     "engineSteps": ["A6", "A3"],
     "task": {
-      "en": "Clap the rhythm of the piece once with the click. Practise it in two-bar sections, then play it from start to finish at ♩=72.",
-      "tr": "Parçanın ritmini klikle bir kez alkışla. İki ölçülük bölümlerle çalış, sonra baştan sona ♩=72'de çal."
+      "en": "Run 1, measured: clap the rhythm once with the click. Then play the right hand alone, bars 1–8, thumb on C5: first in two-bar sections, then all 8 bars at ♩=72. Run 2, not measured: add the left hand. It holds C4 in bars 1, 2 and 5, B3 in bars 3, 4 and 6, C4 then G3 in bar 7, and C4 then C3 in bar 8.",
+      "tr": "1. çalış, ölçülür: ritmi klikle bir kez alkışla. Sonra sağ eli tek başına çal, 1–8. ölçüler, başparmak Do5'te: önce iki ölçülük bölümlerle, sonra 8 ölçünün tamamı ♩=72'de. 2. çalış, ölçülmez: sol eli ekle. Sol el 1, 2 ve 5. ölçülerde Do4, 3, 4 ve 6. ölçülerde Si3 tutar; 7. ölçüde Do4 sonra Sol3, 8. ölçüde Do4 sonra Do3 çalar."
     },
+    "sequence": "4/4: C5:q C5:q C5:q G5:q | E5:h C5:h | D5:q D5:q D5:q G5:q | F5:h D5:h | E5:q E5:q E5:q C5:q | D5:q D5:q D5:q G5:q | E5:q E5:q D5:q D5:q | C5:h hr",
     "tempo": { "open": 72, "target": 72 },
     "pass": { "levelDefault": true }
   },
@@ -68,7 +69,7 @@
     "en": "Learn the first half until it passes at ♩=72, then add the second half.",
     "tr": "Önce ilk yarıyı ♩=72'de geçene kadar çalış, sonra ikinci yarıyı ekle."
   },
-  "repertoire": "Daniel Gottlob Türk (1750–1813), Handstücke für angehende Klavierspieler (Leipzig and Halle, 1792): one short piece, to be selected so that no two new notes start together (one-new-note rule). NEEDS TRANSCRIPTION from a public-domain first-edition scan; the piece number, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1813; public domain, legal review pending.",
+  "repertoire": "Daniel Gottlob Türk (1750–1813), Handstücke für angehende Klavierspieler, first part (first published 1792), No. 1, 'Aller Anfang ist schwer' (C major, 4/4, Allegro, più tosto Presto), bars 1–8. Source edition: Sechzig Handstücke für angehende Klavierspieler, Erster Theil, Zweyte Auflage, Leipzig and Halle: auf Kosten des Verfassers, in Kommission bey Schwickert (Leipzig) und Hemmerde und Schwetschke (Halle), 1797, p. 1; scan: Bayerische Staatsbibliothek, 4 Mus.pr. 2009.2607-1/2, https://www.digitale-sammlungen.de/view/bsb00086024 (IIIF: https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00086024/manifest; also on IMSLP, marked Public Domain: https://imslp.org/wiki/120_Handstücke_für_angehende_Klavierspieler_(Türk,_Daniel_Gottlob)). The 1792 first edition was not found online and has not been compared. Measured run: the right hand alone; every left-hand note starts together with a right-hand note, so the left hand (one held note per bar) is played in a second, unmeasured run. Ostinato practice tempo ♩=72 (Türk marks Allegro, più tosto Presto). Composer died 1813; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

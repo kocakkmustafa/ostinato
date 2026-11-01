@@ -30,8 +30,8 @@
       "tr": "İkinci yarı Re majöre geçer ve Do♯ kullanır. Sekizlikleri eşit ve hafif, dörtlükleri biraz daha uzun çal."
     },
     {
-      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
-      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score on screen is the Ostinato engraving, made from a 1906 Munich edition; fingering and tempo are ours.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota, 1906 Münih baskısından hazırlanan Ostinato dizgisidir; parmak numaraları ve tempo bizimdir."
     }
   ],
   "referenceAudio": {
@@ -114,7 +114,7 @@
     "en": "Learn the first half until it passes at ♩=80, then add the second half.",
     "tr": "Önce ilk yarıyı ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
   },
-  "repertoire": "Christian Petzold (1677–1733), Menuet in G major, BWV Anh. 114, from the Notenbüchlein für Anna Magdalena Bach (1725 manuscript; 19th-century Bach-Gesellschaft edition). Long attributed to J. S. Bach. Right hand only, without repeats, ornaments left out. The sequence follows the standard melody and must be checked bar by bar against a public-domain source scan (scan id not yet recorded) before release. Notation, fingering and tempo by Ostinato. Composer died 1733; public domain, legal review pending.",
+  "repertoire": "Christian Petzold (1677–1733), Menuet in G major, BWV Anh. 114, from the Notenbüchlein für Anna Magdalena Bach (1725); long attributed to J. S. Bach. Right hand, bars 1–32 without repeats; the mordents, the appoggiatura in bar 8 and the lower notes of the final chord (bar 32) are left out. Source edition: Johann Sebastian Bachs Notenbüchlein für Anna Magdalena Bach (1725), preface by Richard Batka, München: G. D. W. Callwey, 1906, p. 44, \"Menuet\"; scan: University of Toronto Faculty of Music Library, https://archive.org/details/31761108662891 (PDF page 52). Every bar was checked twice against the scan (pitches and rhythm); the sequence written earlier from memory matched it in all 32 bars. Public domain: the music dates from 1725; the edition was published in 1906 (before 1931) and Batka died in 1922. Legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 20,
   "expertPending": true
 }

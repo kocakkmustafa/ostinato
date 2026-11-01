@@ -18,6 +18,10 @@
       "tr": "Musette küçük bir gaydadır. Sol el onun sürekli sesini taklit eder: bir süre tek bir bas notasında kalır ve oktavlarla sıçrar."
     },
     {
+      "en": "It is in 2/4 and D major, 28 bars long; bars 21–28 repeat bars 1–8. The middle part moves towards A major: it adds G♯ and D♯, and D♮ comes back right after a D♯.",
+      "tr": "2/4'lük ve Re majördedir, 28 ölçü sürer; 21–28. ölçüler 1–8. ölçüleri tekrarlar. Orta bölüm La majöre yönelir: Sol♯ ve Re♯ ekler ve Re♯'nin hemen ardından Re♮ geri gelir."
+    },
+    {
       "en": "For an octave leap, move the hand; do not stretch it. Let the arm carry the hand from one note to the other.",
       "tr": "Oktav sıçramasında eli taşı, germe. Kol eli bir notadan ötekine taşısın."
     },
@@ -26,8 +30,8 @@
       "tr": "Her el ayrı ölçülür. Eller birlikte serbest bir denemedir: o sonuç deneyseldir ve ilerlemeni kilitlemez."
     },
     {
-      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
-      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score on screen is the Ostinato engraving, made from a 1906 Munich edition; fingering and tempo are ours.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota, 1906 Münih baskısından hazırlanan Ostinato dizgisidir; parmak numaraları ve tempo bizimdir."
     }
   ],
   "referenceAudio": {
@@ -48,8 +52,8 @@
       "A3"
     ],
     "task": {
-      "en": "Play the right hand from start to finish at ♩=80, then the left hand. Then try both hands together; only the separate hands count.",
-      "tr": "Sağ eli baştan sona ♩=80'de çal, sonra sol eli. Sonra iki eli birlikte dene; yalnız ayrı eller sayılır."
+      "en": "Play the right hand from start to finish at ♩=80, then the left hand, without the repeats; the line on screen is the right hand (bars 1–28) followed by the left hand (bars 1–28). Then try both hands together; only the separate hands count.",
+      "tr": "Sağ eli tekrarlar olmadan baştan sona ♩=80'de çal, sonra sol eli; ekrandaki dizi önce sağ el (1–28. ölçüler), ardından sol eldir (1–28. ölçüler). Sonra iki eli birlikte dene; yalnız ayrı eller sayılır."
     },
     "tempo": {
       "open": 80,
@@ -57,7 +61,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "2/4: A5:q G5:s F♯5:s E5:s D5:s | A5:q G5:s F♯5:s E5:s D5:s | F♯4:s G4:s A4:e G4:e F♯4:e | E4:e A4:e F♯4:e D4:e | A5:q G5:s F♯5:s E5:s D5:s | A5:q G5:s F♯5:s E5:s D5:s | F♯4:s G4:s A4:e G4:e F♯4:e | E4:e A4:e D4:q | C♯5:s D5:s E5:e C♯5:s D5:s E5:e | A5:e E5:e E5:q | A5:e E5:e A5:e E5:e | D5:s C♯5:s B4:s A4:s B4:e E4:e | E5:e D♯5:e E4:e D5:e~e C♯5:e A5:e G♯5:e | E5:e D♯5:e E4:e D5:e~e C♯5:e A5:e G♯5:e | E5:s D♯5:s C♯5:s D♯5:s E5:s D♯5:s C♯5:s D♯5:s | E5:e G♯4:e A4:e D5:e | C♯5:s D5:s E5:e A4:e D4:e | C♯4:s D4:s E4:e A3:q | A5:q G5:s F♯5:s E5:s D5:s | A5:q G5:s F♯5:s E5:s D5:s | F♯4:s G4:s A4:e G4:e F♯4:e | E4:e A4:e F♯4:e D4:e | A5:q G5:s F♯5:s E5:s D5:s | A5:q G5:s F♯5:s E5:s D5:s | F♯4:s G4:s A4:e G4:e F♯4:e | E4:e A4:e D4:q | D2:e D3:e D2:e D3:e | D2:e D3:e D2:e D3:e | F♯3:s G3:s A3:e G3:e F♯3:e | E3:e A3:e F♯3:e D3:e | D2:e D3:e D2:e D3:e | D2:e D3:e D2:e D3:e | F♯3:s G3:s A3:e G3:e F♯3:e | E3:e A3:e D3:q | A2:e A3:e A2:e A3:e | A2:e A3:e A2:e A3:e | A2:e A3:e A2:e A3:e | A2:e A3:e E2:e E3:e | E2:e E3:e E2:e E3:e E2:e E3:e E2:e E3:e | E2:e E3:e E2:e E3:e E2:e E3:e E2:e E3:e | E2:e E3:e E2:e E3:e | E2:e D3:e C♯3:e D3:e | E3:q A2:e D3:e | C♯3:s D3:s E3:e A2:q | D2:e D3:e D2:e D3:e | D2:e D3:e D2:e D3:e | F♯3:s G3:s A3:e G3:e F♯3:e | E3:e A3:e F♯3:e D3:e | D2:e D3:e D2:e D3:e | D2:e D3:e D2:e D3:e | F♯3:s G3:s A3:e G3:e F♯3:e | E3:e A3:e D3:q"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -101,8 +106,8 @@
         "tr": "Farklı nota, yarım ses alçak."
       },
       "fix": {
-        "en": "F♯ or C♯ became a white key. D major has two sharps; name them before you start.",
-        "tr": "Fa♯ ya da Do♯ beyaz tuşa dönüştü. Re majörde iki diyez var; başlamadan önce adlarını söyle."
+        "en": "F♯ or C♯ became a white key, or a G♯ or D♯ in bars 13–20 was missed. D major has two sharps; name them before you start.",
+        "tr": "Fa♯ ya da Do♯ beyaz tuşa dönüştü ya da 13–20. ölçülerdeki bir Sol♯ veya Re♯ atlandı. Re majörde iki diyez var; başlamadan önce adlarını söyle."
       }
     }
   ],
@@ -110,7 +115,7 @@
     "en": "Learn the first half of each hand until it passes at ♩=80, then add the second half.",
     "tr": "Her elin önce ilk yarısını ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
   },
-  "repertoire": "Anonymous, Musette in D major, BWV Anh. 126, from the Notenbüchlein für Anna Magdalena Bach (1725 manuscript; 19th-century Bach-Gesellschaft edition). Hands measured separately with A6; hands together experimental. NEEDS TRANSCRIPTION from a public-domain source scan; the scan id and measured sequences are not yet written. Notation, fingering and tempo by Ostinato. Public domain (1725), legal review pending.",
+  "repertoire": "Anonymous, Musette in D major, BWV Anh. 126, from the Notenbüchlein für Anna Magdalena Bach (1725). 2/4, 28 bars (8 + 20), without repeats. Right hand then left hand in one measured line, each hand measured with A6; hands together experimental. The tie from bar 13 into 14 (and 15 into 16) is kept: those bar pairs are written as one four-beat group. Source edition: Johann Sebastian Bachs Notenbüchlein für Anna Magdalena Bach (1725), preface by Richard Batka, München: G. D. W. Callwey, 1906, p. 71, \"Musette\"; scan: University of Toronto Faculty of Music Library, https://archive.org/details/31761108662891 (PDF page 79). Every bar was checked twice against the scan (pitches and rhythm). In bar 17 the edition writes one ♯ before the first D; the later Ds in the bar are read as D♯ (modern accidental rule, which this 1906 edition follows). Public domain: the music dates from 1725; the edition was published in 1906 (before 1931) and Batka died in 1922. Legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 20,
   "expertPending": true
 }

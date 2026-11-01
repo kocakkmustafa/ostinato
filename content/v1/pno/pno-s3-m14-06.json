@@ -57,7 +57,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "3/4: G3/D5:q G4:e A4:e A3/B4:e C5:e | B3/D5:q G4:q G4:q | C4/E5:q C5:e D5:e E5:e F♯5:e | B3/G5:q G4:q G4:q | A3/C5:q D5:e C5:e B4:e A4:e | G3/B4:q C5:e B4:e A4:e G4:e | D4/F♯4:q B3/G4:e A4:e G3/B4:e G4:e | D4/A4:q D3:e C4:e B3:e A3:e | B3/D5:q G4:e A4:e A3/B4:e C5:e | G3/D5:q B3/G4:q G3/G4:q | C4/E5:q C5:e D5:e E5:e F♯5:e | B3/G5:q C4/G4:e B3:e A3/G4:e G3:e | A3/C5:q D5:e C5:e F♯3/B4:e A4:e | G3/B4:q C5:e B4:e B3/A4:e G4:e | C4/A4:q D4/B4:e A4:e D3/G4:e F♯4:e | G3/G4:h G2:q | G3/B5:q G5:e A5:e B5:e G5:e | F♯3/A5:q D5:e E5:e F♯5:e D5:e | E3/G5:q G3/E5:e F♯5:e E3/G5:e D5:e | A3/C♯5:q B4:e C♯5:e A2/A4:q | A3/A4:e B4:e C♯5:e D5:e E5:e F♯5:e | B3/G5:q D4/F♯5:q C♯4/E5:q | D4/F♯5:q F♯3/A4:q A3/C♯5:q | D4/D5:q D3:q C4:q | B3/D5:q D4/G4:e F♯4:e B3/G4:q | C4/E5:q E4/G4:e F♯4:e C4/G4:q | B3/D5:q A3/C5:q G3/B4:q | D4/A4:e G4:e F♯4:e G4:e A4:q | D3/D4:e E4:e F♯4:e G4:e F♯3/A4:e B4:e | E3/C5:q G3/B4:q F♯3/A4:q | G3/B4:e D5:e B2/G4:q D3/F♯4:q | G3/G4:q D3:q G2:q"
   },
   "fallback": "experimental",
   "safety": [
@@ -109,7 +110,7 @@
     "en": "Play the first eight bars hands together at ♩=60, then add the rest.",
     "tr": "İlk sekiz ölçüyü eller birlikte ♩=60'ta çal, sonra kalanı ekle."
   },
-  "repertoire": "Christian Petzold (1677–1733), Menuet in G major, BWV Anh. 114, from the Notenbüchlein für Anna Magdalena Bach (1725 manuscript; 19th-century Bach-Gesellschaft edition). Long attributed to J. S. Bach. Both hands, without repeats. NEEDS TRANSCRIPTION of the left hand from a public-domain source scan (the right hand is in pno-s3-m14-04); the scan id and the two-hand sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1733; public domain, legal review pending.",
+  "repertoire": "Christian Petzold (1677–1733), Menuet in G major, BWV Anh. 114, from the Notenbüchlein für Anna Magdalena Bach (1725); long attributed to J. S. Bach. Both hands, bars 1–32 without repeats: the right hand of pno-s3-m14-04 and the left hand of pno-s3-m14-05; each note start is written once and notes starting together are joined with '/'. Bar 1's left-hand chord is reduced to G3 and bar 32's right-hand chord to G4 (Ostinato edition); mordents and the bar-8 appoggiatura are left out. Source edition: Johann Sebastian Bachs Notenbüchlein für Anna Magdalena Bach (1725), preface by Richard Batka, München: G. D. W. Callwey, 1906, p. 44, \"Menuet\"; scan: University of Toronto Faculty of Music Library, https://archive.org/details/31761108662891 (PDF page 52). Every bar was checked twice against the scan. Public domain: the music dates from 1725; the edition was published in 1906 (before 1931) and Batka died in 1922. Legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 20,
   "expertPending": true
 }

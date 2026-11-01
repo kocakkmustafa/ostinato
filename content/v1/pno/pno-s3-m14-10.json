@@ -14,8 +14,8 @@
       "tr": "Carl Czerny (1791–1857) Beethoven'ın öğrencisi ve ünlü bir öğretmendi. Op. 599, yeni başlayanlar için kısa etütlerden oluşur."
     },
     {
-      "en": "A study trains one skill. Most studies in this book give the right hand even running notes over a simple left hand.",
-      "tr": "Etüt tek bir beceriyi çalıştırır. Bu kitaptaki etütlerin çoğunda sağ el, sade bir sol elin üstünde eşit notalarla koşar."
+      "en": "This lesson uses No. 12, one of the five-finger exercises 'with a quiet hand'. The right hand runs in eighth notes between C5 and G5 without moving the hand. The left hand holds one three-note chord in each bar.",
+      "tr": "Bu ders 'sakin elle' beş parmak alıştırmalarından 12 numarayı kullanır. Sağ el, eli kaydırmadan Do5 ile Sol5 arasında sekizliklerle koşar. Sol el her ölçüde üç sesli bir akor tutar."
     },
     {
       "en": "Evenness is the goal: every note at the same time distance and the same loudness.",
@@ -26,8 +26,8 @@
       "tr": "Yavaş başla. Tempoyu ancak yavaş olan geçtiğinde küçük adımlarla artır."
     },
     {
-      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
-      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+      "en": "Each left-hand chord starts together with a right-hand note. So the measured run is the right hand alone, exactly as the line on screen; add the chords in a second run, which is not measured. The score and fingering on screen are an Ostinato edition, made from the Holle edition of about 1850.",
+      "tr": "Sol elin her akoru bir sağ el notasıyla birlikte başlar. Bu yüzden ölçülen çalış, ekrandaki dizi gibi, yalnız sağ eldir; akorları ölçülmeyen ikinci bir çalışta ekle. Ekrandaki nota ve parmak numaraları, yaklaşık 1850 tarihli Holle baskısından hazırlanan Ostinato düzenlemesidir."
     }
   ],
   "referenceAudio": {
@@ -35,8 +35,8 @@
       "S"
     ],
     "brief": {
-      "en": "The selected Czerny study from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
-      "tr": "Ostinato düzenlemesinden seçilen Czerny etüdü, piyano sentezi, ♩=80 ve ♩=56."
+      "en": "Czerny, Op. 599 No. 12, from the Ostinato edition, piano synthesis: the right hand alone, then with the chords, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Czerny, Op. 599 No. 12, piyano sentezi: önce yalnız sağ el, sonra akorlarla, ♩=80 ve ♩=56."
     }
   },
   "practice": {
@@ -48,9 +48,10 @@
       "A3"
     ],
     "task": {
-      "en": "Practise in two-bar sections at ♩=56, then play the study from start to finish at ♩=80.",
-      "tr": "İki ölçülük bölümlerle ♩=56'da çalış, sonra etüdü baştan sona ♩=80'de çal."
+      "en": "Run 1, measured: play the right hand alone, bars 1–16 without the repeats, eighth notes two per beat. Practise in two-bar sections at ♩=56, then play all 16 bars at ♩=80. Run 2, not measured: add the left hand, one held chord per bar.",
+      "tr": "1. çalış, ölçülür: sağ eli tek başına çal, 1–16. ölçüler, tekrarlar olmadan; sekizlikler vuruş başına iki tane. İki ölçülük bölümlerle ♩=56'da çalış, sonra 16 ölçünün tamamını ♩=80'de çal. 2. çalış, ölçülmez: sol eli ekle, her ölçüde tutulan bir akor."
     },
+    "sequence": "4/4: C5:e D5:e E5:e F5:e G5:q G5:q | G5:e F5:e E5:e D5:e C5:q E5:q | D5:e E5:e F5:e D5:e G5:q F5:q | E5:e F5:e G5:e E5:e C5:h | C5:e D5:e E5:e D5:e C5:e D5:e E5:e F5:e | G5:e F5:e E5:e D5:e C5:q E5:q | D5:e E5:e F5:e E5:e G5:e F5:e E5:e D5:e | C5:e E5:e G5:e E5:e C5:h | D5:e E5:e F5:e E5:e G5:e F5:e E5:e D5:e | E5:e F5:e G5:e E5:e C5:q C5:q | D5:e E5:e F5:e E5:e G5:e F5:e E5:e D5:e | E5:e F5:e G5:e E5:e C5:q C5:q | C5:e D5:e E5:e F5:e G5:e G5:e G5:e G5:e | G5:e F5:e E5:e D5:e C5:e D5:e E5:e C5:e | D5:e E5:e F5:e E5:e G5:e F5:e E5:e D5:e | C5:e E5:e G5:e E5:e C5:h",
     "tempo": {
       "open": 80,
       "target": 80
@@ -110,7 +111,7 @@
     "en": "Play the study at ♩=66 until it passes, then go up in steps of 5 to ♩=80.",
     "tr": "Etüdü geçene kadar ♩=66'da çal, sonra 5'er adımlarla ♩=80'e çık."
   },
-  "repertoire": "Carl Czerny (1791–1857), Op. 599 (studies for beginners): one study, to be selected so that no two new notes start together (one-new-note rule), or with those notes left to the Ostinato edition. NEEDS TRANSCRIPTION from a public-domain 19th-century edition scan; the study number, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1857; public domain, legal review pending.",
+  "repertoire": "Carl Czerny (1791–1857), Erster Wiener Lehrmeister im Pianoforte-Spiel (Practical Method for Beginners), Op. 599, No. 12 (C major, 4/4; from 'Uebungen für die Finger mit ruhig stillstehender Hand'), bars 1–16 without repeats. Source edition: Wolfenbüttel: L. Holle, n.d. (ca. 1850), p. 4; scan: Bayerische Staatsbibliothek, 4 Mus.pr. 67071, https://www.digitale-sammlungen.de/view/bsb11155199 (urn:nbn:de:bvb:12-bsb11155199-9). Checked note for note against New York: G. Schirmer, 1893 (Library of Musical Classics 146, plate 11038, ed. Giuseppe Buonamici), p. 6, IMSLP scan mirrored at https://archive.org/details/imslp-exercises-for-beginners-op599-czerny-carl (that file is a later reprint of the 1893 plates). Measured run: the right hand alone; the left-hand chords start with right-hand notes and are played in a second, unmeasured run. Composer died 1857; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

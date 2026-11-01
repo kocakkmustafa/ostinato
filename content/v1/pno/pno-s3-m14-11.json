@@ -14,16 +14,16 @@
       "tr": "Ferdinand Beyer (1803–1863), adım adım ilerleyen bir başlangıç kitabı olan Vorschule im Klavierspiel, Op. 101'i yazdı. Seviye 2'de ondan erken bir etüt çaldın."
     },
     {
-      "en": "This study comes from the later part of the book. The hands move out of the five-finger position and the left hand takes a bigger part.",
-      "tr": "Bu etüt kitabın ileri bölümünden gelir. Eller beş parmak konumundan çıkar ve sol el daha büyük bir rol alır."
+      "en": "This study is No. 61, Allegro moderato, in G major, 16 bars. The right hand sings a dotted tune high up, between G5 and G6. The left hand plays a broken-chord accompaniment in quarter notes, G3 D4 B3 D4, with C4 in some bars.",
+      "tr": "Bu etüt 61 numaralı Allegro moderato'dur: Sol majör, 16 ölçü. Sağ el tizde, Sol5 ile Sol6 arasında noktalı bir ezgi söyler. Sol el dörtlüklerle kırık akor eşliği çalar: Sol3 Re4 Si3 Re4, bazı ölçülerde Do4 ile."
     },
     {
-      "en": "Mark every hand shift before you play. Shift during a rest or a long note when you can.",
-      "tr": "Çalmadan önce her el kaymasını işaretle. Elinden geldiğince bir susta ya da uzun bir notada kay."
+      "en": "The left hand plays on every beat. On beats 1 and 3 it usually starts together with the right hand: there the line on screen shows the right-hand note, and the left-hand note is not measured. The left-hand notes that start on their own, mostly D4 on beats 2 and 4, are measured.",
+      "tr": "Sol el her vuruşta çalar. 1. ve 3. vuruşlarda çoğunlukla sağ elle birlikte başlar: orada ekrandaki dizi sağ el notasını gösterir ve sol el notası ölçülmez. Tek başına başlayan sol el notaları, çoğunlukla 2. ve 4. vuruşlardaki Re4, ölçülür."
     },
     {
-      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
-      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition, made from the 1895 Peters edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları, 1895 Peters baskısından hazırlanan Ostinato düzenlemesidir."
     }
   ],
   "referenceAudio": {
@@ -31,8 +31,8 @@
       "S"
     ],
     "brief": {
-      "en": "The selected Beyer study from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
-      "tr": "Ostinato düzenlemesinden seçilen Beyer etüdü, piyano sentezi, ♩=80 ve ♩=56."
+      "en": "Beyer, Op. 101 No. 61, from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Beyer, Op. 101 No. 61, piyano sentezi, ♩=80 ve ♩=56."
     }
   },
   "practice": {
@@ -44,9 +44,10 @@
       "A3"
     ],
     "task": {
-      "en": "Practise in two-bar sections, then play the study from start to finish at ♩=80.",
-      "tr": "İki ölçülük bölümlerle çalış, sonra etüdü baştan sona ♩=80'de çal."
+      "en": "Play each hand alone once with the click. Then join the hands in two-bar sections, and play the study from start to finish, bars 1–16, at ♩=80. Both hands play every note; on beats where they start together, only the right-hand note is measured.",
+      "tr": "Her eli klikle bir kez ayrı çal. Sonra elleri iki ölçülük bölümlerle birleştir ve etüdü baştan sona, 1–16. ölçüleri ♩=80'de çal. İki el her notayı çalar; birlikte başladıkları vuruşlarda yalnız sağ el notası ölçülür."
     },
+    "sequence": "4/4: B5:q D4:e C6:e D6:q D4:q | G5:q D4:e A5:e B5:q D4:q | C6:q D4:e B5:e A5:q D4:q | B5:q D4:e A5:e G5:q D4:q | B5:q D4:e C6:e D6:q D4:e B5:e | G5:q D4:e A5:e B5:q D4:e G5:e | C6:q D4:e B5:e A5:q D4:e B5:e | G5:q D4:q B3:q D4:q | A5:q D4:e B5:e C6:q D4:e A5:e | B5:q D4:e G5:e D6:q D4:e B5:e | A5:q D4:e B5:e C6:q D4:e A5:e | B5:q D4:e G5:e D6:q D4:q | B5:q D4:e C6:e D6:q D4:e B5:e | G5:q D4:e A5:e B5:q D4:e G5:e | C6:q D4:e B5:e A5:q D4:e B5:e | G5:q D4:q G6:q qr",
     "tempo": {
       "open": 80,
       "target": 80
@@ -105,7 +106,7 @@
     "en": "Learn the first half until it passes at ♩=80, then add the second half.",
     "tr": "Önce ilk yarıyı ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
   },
-  "repertoire": "Ferdinand Beyer (1803–1863), Vorschule im Klavierspiel, Op. 101 (Mainz: Schott, mid-19th century): one study from the later part of the book, different from the one in pno-s2-m08-12. Notes where both hands start together are measured experimentally (A6p) and do not count; all other notes with A6. NEEDS TRANSCRIPTION from a public-domain edition scan; the study number, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1863; public domain, legal review pending.",
+  "repertoire": "Ferdinand Beyer (1803–1863), Vorschule im Klavierspiel, Op. 101 (first published Mainz: Schott, c. 1850), No. 61 (G major, 4/4, Allegro moderato, dolce), bars 1–16. Source edition: Leipzig: C. F. Peters (Edition Peters 2721), plate 8033, revised by Adolf Ruthardt, 1895, p. 44; scan (MIT project via IMSLP, marked Public Domain), mirrored at https://archive.org/details/imslp-im-klavierspiel-op101-beyer-ferdinand (file Beyer_-_Op.101_-_Vorschule_im_Klavierspiel.pdf; IMSLP: https://imslp.org/wiki/Vorschule_im_Klavierspiel,_Op.101_(Beyer,_Ferdinand)). Ruthardt's fingering is not used. Not yet compared with the Mainz: Schott first edition. Measured line: all note starts of both hands in time order; where both hands start together (beats 1 and 3) the right-hand note is measured and the left-hand note (G3, B3 or C4) is played but not measured. Composer died 1863; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }
