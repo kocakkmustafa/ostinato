@@ -94,6 +94,29 @@ void main() {
       expect(() => PracticeScore.parse('1-2-x3'), throwsFormatException);
     });
 
+    test('sixteenths and degree octave marks', () {
+      final s = PracticeScore.parse(
+        '6/8: A3:e. B3:s C4:e D4:s E4:s F4:e | 5,-1-3-5-1\' | b7,:h 5\'\':q',
+      );
+      expect(s.beatsPerBar, 3);
+      expect(s.events.take(6).map((e) => e.durationBeats), [
+        .75,
+        .25,
+        .5,
+        .25,
+        .25,
+        .5,
+      ]);
+      expect(s.events[6].startBeat, 3);
+      final deg = s.events
+          .where((e) => e.kind == PracticeEventKind.degree)
+          .toList();
+      expect(deg.map((e) => e.degree), [5, 1, 3, 5, 1, 7, 5]);
+      expect(deg.map((e) => e.degreeOctave), [-1, 0, 0, 0, 1, -1, 2]);
+      expect(deg[5].degreeShift, -1);
+      expect(deg[5].durationBeats, 2);
+    });
+
     test('rejects unknown tokens and meters', () {
       expect(() => PracticeScore.parse(''), throwsFormatException);
       expect(() => PracticeScore.parse('E2 zz'), throwsFormatException);
