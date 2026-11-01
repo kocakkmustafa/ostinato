@@ -1,0 +1,115 @@
+{
+  "id": "pno-s3-m14-09",
+  "title": {
+    "en": "Gurlitt: a melodic piece",
+    "tr": "Gurlitt: melodik parça"
+  },
+  "goal": {
+    "en": "Plays a short melodic piece by Cornelius Gurlitt at ♩=76 with a singing right hand.",
+    "tr": "Cornelius Gurlitt'in kısa melodik bir parçasını ♩=76'da, şarkı söyler gibi bir sağ elle çalar."
+  },
+  "explanation": [
+    {
+      "en": "Cornelius Gurlitt (1820–1901) was a German composer and teacher. He wrote many short pieces for young players.",
+      "tr": "Cornelius Gurlitt (1820–1901) Alman bir besteci ve öğretmendi. Genç çalıcılar için çok sayıda kısa parça yazdı."
+    },
+    {
+      "en": "In this piece the right hand carries a song-like melody and the left hand accompanies it.",
+      "tr": "Bu parçada sağ el şarkı gibi bir ezgi taşır, sol el ona eşlik eder."
+    },
+    {
+      "en": "Shape each phrase like a sung line: grow toward its high point, then relax at the end.",
+      "tr": "Her cümleyi söylenen bir dize gibi biçimlendir: doruğuna doğru büyüt, sonunda gevşe."
+    },
+    {
+      "en": "Keep the accompaniment softer than the melody.",
+      "tr": "Eşliği ezgiden daha hafif tut."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The selected Gurlitt piece from the Ostinato edition, piano synthesis, at ♩=76 and at ♩=52.",
+      "tr": "Ostinato düzenlemesinden seçilen Gurlitt parçası, piyano sentezi, ♩=76 ve ♩=52."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the melody alone once. Practise in two-bar sections, then play the piece from start to finish at ♩=76.",
+      "tr": "Ezgiyi bir kez tek başına çal. İki ölçülük bölümlerle çalış, sonra parçayı baştan sona ♩=76'da çal."
+    },
+    "tempo": {
+      "open": 76,
+      "target": 76
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The melody was louder than the accompaniment.",
+      "tr": "Ezgi eşlikten daha güçlüydü."
+    },
+    {
+      "en": "Each phrase had a high point and a soft ending.",
+      "tr": "Her cümlenin bir doruğu ve yumuşak bir sonu vardı."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=76, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=76'da geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Cornelius Gurlitt (1820–1901): one short melodic piece from his easy pieces for young players; opus and number to be confirmed from a 19th-century edition. To be selected so that no two new notes start together (one-new-note rule), or with those notes left to the Ostinato edition. NEEDS TRANSCRIPTION from a public-domain edition scan; the opus, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1901; public domain, legal review pending.",
+  "minutes": 15,
+  "expertPending": true
+}

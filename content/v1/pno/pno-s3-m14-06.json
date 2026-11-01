@@ -1,0 +1,115 @@
+{
+  "id": "pno-s3-m14-06",
+  "title": {
+    "en": "Petzold: Minuet in G, hands together",
+    "tr": "Petzold: Sol Majör Menuet, eller birlikte"
+  },
+  "goal": {
+    "en": "Plays the Minuet in G, BWV Anh. 114, with both hands together at ♩=80.",
+    "tr": "Sol Majör Menuet'i (BWV Anh. 114) iki el birlikte ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "Now the melody and the bass line meet. On many beats both hands start a note together.",
+      "tr": "Şimdi ezgi ile bas çizgisi buluşur. Birçok vuruşta iki el aynı anda nota başlatır."
+    },
+    {
+      "en": "Join the hands two bars at a time, slowly. Read the bass note first: it shows where the bar begins.",
+      "tr": "Elleri ikişer ölçü, yavaşça birleştir. Önce bas notasını oku: ölçünün nerede başladığını gösterir."
+    },
+    {
+      "en": "Keep the right hand a little louder than the left. The melody leads; the bass supports it.",
+      "tr": "Sağ eli soldan biraz daha güçlü tut. Ezgi önde gider, bas onu taşır."
+    },
+    {
+      "en": "Where the left hand holds a long note, keep counting it while the right hand moves.",
+      "tr": "Sol el uzun bir nota tutarken, sağ el hareket ederken o notayı saymayı sürdür."
+    },
+    {
+      "en": "The microphone result here is experimental: it does not lock your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Buradaki mikrofon sonucu deneyseldir: ilerlemeni kilitlemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The Minuet in G, both hands, from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Sol Majör Menuet, iki el, piyano sentezi, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M~",
+      "MIDI"
+    ],
+    "engineSteps": [
+      "A6p"
+    ],
+    "task": {
+      "en": "Join the hands two bars at a time at ♩=56. Then play the whole minuet hands together at ♩=80, without the repeats.",
+      "tr": "Elleri ♩=56'da ikişer ölçü birleştir. Sonra menuetin tamamını tekrarlar olmadan eller birlikte ♩=80'de çal."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "experimental",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Notes meant to start together started together.",
+      "tr": "Birlikte başlaması gereken notalar birlikte başladı."
+    },
+    {
+      "en": "The melody stayed louder than the bass.",
+      "tr": "Ezgi bastan daha güçlü kaldı."
+    },
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "My shoulders and wrists stayed loose.",
+      "tr": "Omuzlarım ve bileklerim gevşek kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: one hand ahead.",
+        "tr": "Farklı nota: bir el önde."
+      },
+      "fix": {
+        "en": "The right hand runs ahead of the bass. Play the two bars around the slip at ♩=50 and listen for the bass on each \"1\".",
+        "tr": "Sağ el basın önüne geçiyor. Kaçışın çevresindeki iki ölçüyü ♩=50'de çal ve her \"1\"de bası dinle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the first eight bars hands together at ♩=60, then add the rest.",
+    "tr": "İlk sekiz ölçüyü eller birlikte ♩=60'ta çal, sonra kalanı ekle."
+  },
+  "repertoire": "Christian Petzold (1677–1733), Menuet in G major, BWV Anh. 114, from the Notenbüchlein für Anna Magdalena Bach (1725 manuscript; 19th-century Bach-Gesellschaft edition). Long attributed to J. S. Bach. Both hands, without repeats. NEEDS TRANSCRIPTION of the left hand from a public-domain source scan (the right hand is in pno-s3-m14-04); the scan id and the two-hand sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1733; public domain, legal review pending.",
+  "minutes": 20,
+  "expertPending": true
+}

@@ -1,0 +1,79 @@
+{
+  "id": "pno-s3-m12-06",
+  "title": { "en": "A pedalled broken-chord study", "tr": "Pedallı kırık akor etüdü" },
+  "goal": {
+    "en": "Plays an original 8-bar broken-chord study in even eighths at ♩=66, shared between the hands, with one clean pedal per bar.",
+    "tr": "Eller arasında paylaşılan özgün 8 ölçülük kırık akor etüdünü eşit sekizliklerle ♩=66'da, ölçü başına bir temiz pedalla çalar."
+  },
+  "explanation": [
+    {
+      "en": "The app measures the notes and their timing with the microphone. It does not measure the pedal yet: you check that yourself with the checklist.",
+      "tr": "Uygulama mikrofonla notaları ve zamanlamalarını ölçer. Pedalı henüz ölçmez: onu kontrol listesiyle sen kontrol edersin."
+    },
+    {
+      "en": "Each bar is one chord in eight eighth notes: C, Am, F, G, C, F, G, C. The chord rises through both hands and comes back down.",
+      "tr": "Her ölçü sekiz sekizlikte tek bir akordur: C, Am, F, G, C, F, G, C. Akor iki elden geçerek yükselir ve geri iner."
+    },
+    {
+      "en": "Left hand: root with finger 5, fifth with finger 1. Right hand: root, third, fifth with fingers 1-3-5, then third and root. The left thumb plays the fifth again at the end of the bar.",
+      "tr": "Sol el: kök 5. parmakla, beşli 1. parmakla. Sağ el: kök, üçlü, beşli 1-3-5 parmaklarıyla, sonra üçlü ve kök. Ölçünün sonunda sol başparmak beşliyi yeniden çalar."
+    },
+    {
+      "en": "The pedal joins the hands. Change it just after each new bass note: play, up, down. Lift it at the end of bar 8.",
+      "tr": "Pedal elleri birbirine bağlar. Her yeni bas notasından hemen sonra değiştir: çal, kaldır, bas. 8. ölçünün sonunda kaldır."
+    },
+    {
+      "en": "Keep the eighths even across the hand change. The thumb-to-thumb crossing is where the line usually limps.",
+      "tr": "El değişiminde sekizlikleri eşit tut. Dizi genellikle başparmaktan başparmağa geçişte aksar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original 8-bar study in eighths with one pedal per bar, piano synthesis at ♩=66 and ♩=44; the pedal change points are marked on screen.",
+      "tr": "Özgün 8 ölçülük etüt sekizliklerle, ölçü başına bir pedal, piyano sentezi, ♩=66 ve ♩=44; pedal değişim yerleri ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the 8-bar study in even eighths at ♩=66. Each bar: left hand root and fifth, right hand root, third, fifth, third, root, left hand fifth. Bars 1–4: C, Am, F, G. Bars 5–8: C, F, G, C; the last bar ends on G4, held for two beats. Change the pedal just after each bass note. The microphone checks the notes and their timing. Then tick the pedal checklist.",
+      "tr": "8 ölçülük etüdü eşit sekizliklerle ♩=66'da çal. Her ölçü: sol el kök ve beşli, sağ el kök, üçlü, beşli, üçlü, kök, sol el beşli. 1–4. ölçüler: C, Am, F, G. 5–8. ölçüler: C, F, G, C; son ölçü iki vuruş tutulan Sol4'te biter. Pedalı her bas notasından hemen sonra değiştir. Mikrofon notaları ve zamanlamalarını kontrol eder. Sonra pedal kontrol listesini işaretle."
+    },
+    "sequence": "4/4: C3:e G3:e C4:e E4:e G4:e E4:e C4:e G3:e | A2:e E3:e A3:e C4:e E4:e C4:e A3:e E3:e | F2:e C3:e F3:e A3:e C4:e A3:e F3:e C3:e | G2:e D3:e G3:e B3:e D4:e B3:e G3:e D3:e | C3:e G3:e C4:e E4:e G4:e E4:e C4:e G3:e | F2:e C3:e F3:e A3:e C4:e A3:e F3:e C3:e | G2:e D3:e G3:e B3:e D4:e B3:e G3:e D3:e | C3:e G3:e C4:e E4:e G4:h",
+    "tempo": { "open": 66, "target": 66 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "At each bar line the old chord stopped and the new one rang alone.", "tr": "Her ölçü çizgisinde eski akor durdu ve yenisi tek başına çınladı." },
+    { "en": "The foot came up after the new bass note, not before it.", "tr": "Ayak yeni bas notasından önce değil, sonra kalktı." },
+    { "en": "The eighths stayed even where the hands met.", "tr": "Ellerin buluştuğu yerde sekizlikler eşit kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note on the first beat of a bar.", "tr": "Ölçünün ilk vuruşunda farklı nota." },
+      "fix": {
+        "en": "The old chord was still ringing over the new bass. Lift the foot right after the new bass note sounds.",
+        "tr": "Eski akor yeni basın üstünde hâlâ çınlıyordu. Yeni bas notası çalar çalmaz ayağı kaldır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The right thumb arrived late after the left thumb. Place the right hand over its root while the left hand plays.",
+        "tr": "Sağ başparmak sol başparmaktan sonra geç geldi. Sol el çalarken sağ eli kökünün üstüne yerleştir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 only at ♩=50, then add bars 5–8.",
+    "tr": "Yalnız 1–4. ölçüleri ♩=50'de çal, sonra 5–8. ölçüleri ekle."
+  },
+  "minutes": 18,
+  "expertPending": true
+}

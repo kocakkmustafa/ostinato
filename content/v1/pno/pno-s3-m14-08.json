@@ -1,0 +1,111 @@
+{
+  "id": "pno-s3-m14-08",
+  "title": {
+    "en": "Türk: a character piece",
+    "tr": "Türk: bir karakter parçası"
+  },
+  "goal": {
+    "en": "Plays a short character piece by Daniel Gottlob Türk at ♩=76, showing its mood.",
+    "tr": "Daniel Gottlob Türk'ün kısa bir karakter parçasını ♩=76'da, havasını göstererek çalar."
+  },
+  "explanation": [
+    {
+      "en": "You met Türk's Handstücke in Level 1. Many of these short pieces carry a title that names a mood or a scene.",
+      "tr": "Türk'ün el parçalarıyla Seviye 1'de tanıştın. Bu kısa parçaların çoğu bir havayı ya da sahneyi adlandıran bir başlık taşır."
+    },
+    {
+      "en": "This lesson uses one such character piece. It was chosen so that the two hands never start a new note together.",
+      "tr": "Bu ders böyle bir karakter parçasını kullanır. Parça, iki elin hiçbir zaman aynı anda yeni nota başlatmadığı biçimde seçildi."
+    },
+    {
+      "en": "Before you play, read the title and the markings. Decide how loud, how connected and how lively the piece should sound.",
+      "tr": "Çalmadan önce başlığı ve işaretleri oku. Parçanın ne kadar güçlü, ne kadar bağlı ve ne kadar canlı çalacağına karar ver."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The selected character piece from the Ostinato edition, piano synthesis, at ♩=76 and at ♩=52.",
+      "tr": "Ostinato düzenlemesinden seçilen karakter parçası, piyano sentezi, ♩=76 ve ♩=52."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Clap the rhythm of the piece once with the click. Practise it in two-bar sections, then play it from start to finish at ♩=76.",
+      "tr": "Parçanın ritmini klikle bir kez alkışla. İki ölçülük bölümlerle çalış, sonra baştan sona ♩=76'da çal."
+    },
+    "tempo": {
+      "open": 76,
+      "target": 76
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "The loud and soft places sounded different.",
+      "tr": "Güçlü ve hafif yerler farklı duyuldu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The soft passages were too quiet for the microphone. Play them a little louder, then shape them later.",
+        "tr": "Hafif bölümler mikrofon için fazla sessizdi. Onları biraz daha güçlü çal, nüansı sonra ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=76, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=76'da geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Daniel Gottlob Türk (1750–1813), Handstücke für angehende Klavierspieler (Leipzig and Halle, 1792): one titled character piece, different from those in pno-s1-m04-10 and pno-s2-m08-11, to be selected so that no two new notes start together (one-new-note rule). NEEDS TRANSCRIPTION from a public-domain first-edition scan; the piece number, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1813; public domain, legal review pending.",
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,111 @@
+{
+  "id": "pno-s3-m14-13",
+  "title": {
+    "en": "Leopold Mozart: a Minuet",
+    "tr": "Leopold Mozart: bir Menuet"
+  },
+  "goal": {
+    "en": "Plays a minuet from the music book Leopold Mozart made for his daughter Nannerl at ♩=80.",
+    "tr": "Leopold Mozart'ın kızı Nannerl için hazırladığı nota defterinden bir menueti ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "Leopold Mozart (1719–1787) was a violinist and teacher, and the father of Wolfgang Amadeus. In 1759 he made a music book for his daughter Nannerl.",
+      "tr": "Leopold Mozart (1719–1787) kemancı ve öğretmendi, Wolfgang Amadeus'un babasıydı. 1759'da kızı Nannerl için bir nota defteri hazırladı."
+    },
+    {
+      "en": "The book contains short minuets. Young Wolfgang learned to play from it too.",
+      "tr": "Defterde kısa menuetler var. Küçük Wolfgang da çalmayı ondan öğrendi."
+    },
+    {
+      "en": "Like the Minuet in G, this is a dance in 3/4 with two halves. Feel one strong beat in each bar.",
+      "tr": "Sol Majör Menuet gibi bu da iki yarıdan oluşan 3/4'lük bir danstır. Her ölçüde bir güçlü vuruş hisset."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The selected minuet from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden seçilen menuet, piyano sentezi, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Clap the rhythm of the minuet once with the click. Practise it in two-bar sections, then play it from start to finish at ♩=80.",
+      "tr": "Menuetin ritmini klikle bir kez alkışla. İki ölçülük bölümlerle çalış, sonra baştan sona ♩=80'de çal."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "The first beat of each bar was the strongest.",
+      "tr": "Her ölçünün ilk vuruşu en güçlüsüydü."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=80, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Leopold Mozart (1719–1787), Notenbuch für Nannerl (1759 manuscript; 19th–20th-century edition published before 1930): one minuet by Leopold Mozart, to be selected so that no two new notes start together (one-new-note rule). NEEDS TRANSCRIPTION from a public-domain source scan; the piece, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1787; public domain, legal review pending.",
+  "minutes": 15,
+  "expertPending": true
+}

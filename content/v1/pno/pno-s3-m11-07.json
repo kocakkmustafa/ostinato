@@ -1,0 +1,112 @@
+{
+  "id": "pno-s3-m11-07",
+  "title": {
+    "en": "A walking bass line",
+    "tr": "Yürüyen bas çizgisi"
+  },
+  "goal": {
+    "en": "Plays an original four-bar stepwise bass line over C, F, G and C with the left hand at ♩=70.",
+    "tr": "C, F, G ve C üzerinde özgün dört ölçülük basamaklı bas çizgisini sol elle ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "A walking bass moves mostly by step, one note per beat. It connects the chords instead of repeating them.",
+      "tr": "Yürüyen bas çoğunlukla basamakla, her vuruşta bir nota ilerler. Akorları tekrarlamak yerine birbirine bağlar."
+    },
+    {
+      "en": "Each bar starts on a note of its chord, and the last note leads by step into the next bar.",
+      "tr": "Her ölçü kendi akorunun bir notasıyla başlar; son nota sonraki ölçüye basamakla bağlanır."
+    },
+    {
+      "en": "Bars 1–2 lie in C position: finger 5 on C3, thumb on G3. In bar 3 the hand moves one white key down: finger 5 on B2, finger 4 on C3, finger 3 on D3.",
+      "tr": "1–2. ölçüler Do konumundadır: 5. parmak Do3'te, başparmak Sol3'te. 3. ölçüde el bir beyaz tuş aşağı iner: 5. parmak Si2'de, 4. parmak Do3'te, 3. parmak Re3'te."
+    },
+    {
+      "en": "Play every note legato and with the same weight, like steady footsteps.",
+      "tr": "Her notayı legato ve aynı ağırlıkla çal; düzenli ayak sesleri gibi."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The original four-bar bass line, with a click, at ♩=70 and at ♩=50, piano synthesis.",
+      "tr": "Özgün dört ölçülük bas çizgisi, klikle, ♩=70 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Left hand alone, with the click at ♩=70: C3 D3 E3 G3 | F3 E3 D3 C3 | B2 C3 D3 B2 | C3 for four beats. Fingers: 5 4 3 1 | 2 3 4 5 | 5 4 3 5 | 4.",
+      "tr": "Yalnız sol el, klikle ♩=70'te: Do3 Re3 Mi3 Sol3 | Fa3 Mi3 Re3 Do3 | Si2 Do3 Re3 Si2 | dört vuruş Do3. Parmaklar: 5 4 3 1 | 2 3 4 5 | 5 4 3 5 | 4."
+    },
+    "sequence": "4/4: C3 D3 E3 G3 | F3 E3 D3 C3 | B2 C3 D3 B2 | C3:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Every note was the same length and the same loudness.",
+      "tr": "Her nota aynı uzunlukta ve aynı gürlükteydi."
+    },
+    {
+      "en": "I moved finger 5 down to B2 without a gap.",
+      "tr": "5. parmağı boşluk bırakmadan Si2'ye indirdim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too high.",
+        "tr": "Farklı nota, bir beyaz tuş yukarıda."
+      },
+      "fix": {
+        "en": "In bar 3, finger 5 stayed on C3. Move it one white key down to B2 as bar 3 begins.",
+        "tr": "3. ölçüde 5. parmak Do3'te kaldı. 3. ölçü başlarken onu bir beyaz tuş aşağı, Si2'ye indir."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The skip from E3 to G3 is late. Keep the thumb resting over G3 from the start.",
+        "tr": "Mi3'ten Sol3'e atlama geç. Başparmağı baştan Sol3'ün üstünde beklet."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–2 only at ♩=55 until they are even, then add bars 3–4.",
+    "tr": "Eşit olana kadar yalnız 1–2. ölçüleri ♩=55'te çal, sonra 3–4. ölçüleri ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

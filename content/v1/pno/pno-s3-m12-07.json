@@ -1,0 +1,80 @@
+{
+  "id": "pno-s3-m12-07",
+  "title": { "en": "Pedal checkpoint", "tr": "Pedal geçişi" },
+  "goal": {
+    "en": "Plays an original 8-bar piece in 3/4 at ♩=70, a bass note on beat 1 and a melody above it, with one clean pedal per bar.",
+    "tr": "Özgün 8 ölçülük 3/4'lük parçayı ♩=70'te, 1. vuruşta bas notası ve üstünde ezgiyle, ölçü başına bir temiz pedalla çalar."
+  },
+  "explanation": [
+    {
+      "en": "The app measures the notes and their timing with the microphone. It does not measure the pedal yet: you check that yourself with the checklist.",
+      "tr": "Uygulama mikrofonla notaları ve zamanlamalarını ölçer. Pedalı henüz ölçmez: onu kontrol listesiyle sen kontrol edersin."
+    },
+    {
+      "en": "Each bar: the left hand plays one bass note on beat 1, and the right hand plays the melody on beats 2 and 3. The chords are C, G, Am, F, C, F, G, C.",
+      "tr": "Her ölçü: sol el 1. vuruşta tek bas notası çalar, sağ el ezgiyi 2. ve 3. vuruşlarda çalar. Akorlar C, G, Am, F, C, F, G, C."
+    },
+    {
+      "en": "Your left hand leaves the bass at once. The pedal keeps it ringing under the melody until the next bar.",
+      "tr": "Sol elin bastan hemen kalkar. Pedal onu sonraki ölçüye kadar ezginin altında çınlatır."
+    },
+    {
+      "en": "Change the pedal just after each new bass note: play, up, down. Lift it at the end of bar 8.",
+      "tr": "Pedalı her yeni bas notasından hemen sonra değiştir: çal, kaldır, bas. 8. ölçünün sonunda kaldır."
+    },
+    {
+      "en": "Keep the melody a little louder than the bass. The pedal adds sound, so the bass needs only a light touch.",
+      "tr": "Ezgiyi bastan biraz daha gür tut. Pedal ses ekler; bas için hafif bir dokunuş yeterlidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original 8-bar piece in 3/4 with one pedal per bar, piano synthesis at ♩=70 and ♩=46; the pedal change points are marked on screen.",
+      "tr": "Özgün 8 ölçülük 3/4'lük parça, ölçü başına bir pedal, piyano sentezi, ♩=70 ve ♩=46; pedal değişim yerleri ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the 8-bar piece in 3/4 at ♩=70. Left hand on beat 1: C3, G2, A2, F2, C3, F2, G2, C3. Right hand on beats 2 and 3: E4 G4 | D4 (two beats) | C4 E4 | F4 (two beats) | E4 G4 | A4 F4 | D4 B3 | C4 (two beats). Change the pedal just after each bass note. The microphone checks the notes and their timing. Then tick the pedal checklist.",
+      "tr": "8 ölçülük parçayı 3/4'te ♩=70'te çal. 1. vuruşta sol el: Do3, Sol2, La2, Fa2, Do3, Fa2, Sol2, Do3. 2. ve 3. vuruşlarda sağ el: Mi4 Sol4 | Re4 (iki vuruş) | Do4 Mi4 | Fa4 (iki vuruş) | Mi4 Sol4 | La4 Fa4 | Re4 Si3 | Do4 (iki vuruş). Pedalı her bas notasından hemen sonra değiştir. Mikrofon notaları ve zamanlamalarını kontrol eder. Sonra pedal kontrol listesini işaretle."
+    },
+    "sequence": "3/4: C3 E4 G4 | G2 D4:h | A2 C4 E4 | F2 F4:h | C3 E4 G4 | F2 A4 F4 | G2 D4 B3 | C3 C4:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each bass note rang under the melody until the next bar.", "tr": "Her bas notası sonraki ölçüye kadar ezginin altında çınladı." },
+    { "en": "At each bar line the old chord stopped and the new one rang alone.", "tr": "Her ölçü çizgisinde eski akor durdu ve yenisi tek başına çınladı." },
+    { "en": "The foot came up after the new bass note, not before it.", "tr": "Ayak yeni bas notasından önce değil, sonra kalktı." },
+    { "en": "The melody stayed louder than the bass.", "tr": "Ezgi bastan daha gür kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note on the first beat of a bar.", "tr": "Ölçünün ilk vuruşunda farklı nota." },
+      "fix": {
+        "en": "The old chord was still ringing over the new bass. Lift the foot right after the new bass note sounds.",
+        "tr": "Eski akor yeni basın üstünde hâlâ çınlıyordu. Yeni bas notası çalar çalmaz ayağı kaldır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "The right hand came in with the bass. Count \"one\" with the bass and play the melody on \"two\".",
+        "tr": "Sağ el basla birlikte girdi. Basla \"bir\" say ve ezgiyi \"iki\"de çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 only at ♩=56, then add bars 5–8.",
+    "tr": "Yalnız 1–4. ölçüleri ♩=56'da çal, sonra 5–8. ölçüleri ekle."
+  },
+  "minutes": 18,
+  "expertPending": true
+}

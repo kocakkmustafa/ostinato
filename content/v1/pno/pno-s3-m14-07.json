@@ -1,0 +1,116 @@
+{
+  "id": "pno-s3-m14-07",
+  "title": {
+    "en": "Musette in D",
+    "tr": "Re Majör Musette"
+  },
+  "goal": {
+    "en": "Plays the Musette in D, BWV Anh. 126, each hand separately at ♩=80, then tries hands together.",
+    "tr": "Re Majör Musette'i (BWV Anh. 126) her eli ayrı ♩=80'de çalar, sonra eller birlikte dener."
+  },
+  "explanation": [
+    {
+      "en": "This Musette is an anonymous piece from the same 1725 music book as the Minuet in G.",
+      "tr": "Bu Musette, Sol Majör Menuet ile aynı 1725 nota defterinden, bestecisi bilinmeyen bir parçadır."
+    },
+    {
+      "en": "A musette is a small bagpipe. The left hand copies its drone: it stays on one bass note for a while and leaps by octaves.",
+      "tr": "Musette küçük bir gaydadır. Sol el onun sürekli sesini taklit eder: bir süre tek bir bas notasında kalır ve oktavlarla sıçrar."
+    },
+    {
+      "en": "For an octave leap, move the hand; do not stretch it. Let the arm carry the hand from one note to the other.",
+      "tr": "Oktav sıçramasında eli taşı, germe. Kol eli bir notadan ötekine taşısın."
+    },
+    {
+      "en": "Each hand is measured on its own. Hands together is a free try: that result is experimental and does not lock your progress.",
+      "tr": "Her el ayrı ölçülür. Eller birlikte serbest bir denemedir: o sonuç deneyseldir ve ilerlemeni kilitlemez."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The Musette in D from the Ostinato edition: right hand, left hand, then both hands, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Re Majör Musette: sağ el, sol el, sonra iki el, piyano sentezi, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the right hand from start to finish at ♩=80, then the left hand. Then try both hands together; only the separate hands count.",
+      "tr": "Sağ eli baştan sona ♩=80'de çal, sonra sol eli. Sonra iki eli birlikte dene; yalnız ayrı eller sayılır."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The octave leaps landed on time without a stretch.",
+      "tr": "Oktav sıçramaları germeden zamanında indi."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The octave leap lands late. Look at the target note before you leave the first one.",
+        "tr": "Oktav sıçraması geç iniyor. İlk notadan ayrılmadan önce hedef notaya bak."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "F♯ or C♯ became a white key. D major has two sharps; name them before you start.",
+        "tr": "Fa♯ ya da Do♯ beyaz tuşa dönüştü. Re majörde iki diyez var; başlamadan önce adlarını söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half of each hand until it passes at ♩=80, then add the second half.",
+    "tr": "Her elin önce ilk yarısını ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Anonymous, Musette in D major, BWV Anh. 126, from the Notenbüchlein für Anna Magdalena Bach (1725 manuscript; 19th-century Bach-Gesellschaft edition). Hands measured separately with A6; hands together experimental. NEEDS TRANSCRIPTION from a public-domain source scan; the scan id and measured sequences are not yet written. Notation, fingering and tempo by Ostinato. Public domain (1725), legal review pending.",
+  "minutes": 20,
+  "expertPending": true
+}

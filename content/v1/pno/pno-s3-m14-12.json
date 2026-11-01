@@ -1,0 +1,111 @@
+{
+  "id": "pno-s3-m14-12",
+  "title": {
+    "en": "Schumann: Melodie",
+    "tr": "Schumann: Melodie"
+  },
+  "goal": {
+    "en": "Plays Melodie, Op. 68 No. 1, by Robert Schumann with a singing melody over a quiet accompaniment.",
+    "tr": "Robert Schumann'ın Melodie'sini (Op. 68 No. 1) sessiz bir eşlik üstünde şarkı söyler gibi bir ezgiyle çalar."
+  },
+  "explanation": [
+    {
+      "en": "Robert Schumann (1810–1856) wrote Album for the Young, Op. 68, in 1848 for his daughters. Melodie is the first piece.",
+      "tr": "Robert Schumann (1810–1856) Gençlik Albümü'nü (Op. 68) 1848'de kızları için yazdı. Melodie ilk parçadır."
+    },
+    {
+      "en": "The right hand sings the melody. The left hand plays a calm line below it, and the hands often start notes together.",
+      "tr": "Sağ el ezgiyi söyler. Sol el altında sakin bir çizgi çalar; eller sık sık birlikte nota başlatır."
+    },
+    {
+      "en": "Play legato and let the melody sound above the left hand.",
+      "tr": "Legato çal ve ezginin sol elin üstünde duyulmasını sağla."
+    },
+    {
+      "en": "There is no target tempo. Choose a calm tempo at which every note is clear.",
+      "tr": "Hedef tempo yok. Her notanın net olduğu sakin bir tempo seç."
+    },
+    {
+      "en": "The microphone result here is experimental: it does not lock your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Buradaki mikrofon sonucu deneyseldir: ilerlemeni kilitlemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Melodie, Op. 68 No. 1, from the Ostinato edition: melody alone, then both hands, calm and legato, piano synthesis.",
+      "tr": "Ostinato düzenlemesinden Melodie, Op. 68 No. 1: önce yalnız ezgi, sonra iki el, sakin ve legato, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M~",
+      "MIDI"
+    ],
+    "engineSteps": [
+      "A6p"
+    ],
+    "task": {
+      "en": "Play the right hand alone once, then the left hand. Then play the piece with both hands at a calm, steady tempo.",
+      "tr": "Sağ eli bir kez tek başına, sonra sol eli çal. Sonra parçayı iki elle sakin ve düzenli bir tempoda çal."
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "experimental",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The melody was louder than the accompaniment.",
+      "tr": "Ezgi eşlikten daha güçlüydü."
+    },
+    {
+      "en": "The notes were connected, with no gaps.",
+      "tr": "Notalar boşluksuz bağlandı."
+    },
+    {
+      "en": "Notes meant to start together started together.",
+      "tr": "Birlikte başlaması gereken notalar birlikte başladı."
+    },
+    {
+      "en": "My shoulders and wrists stayed loose.",
+      "tr": "Omuzlarım ve bileklerim gevşek kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: one hand ahead.",
+        "tr": "Farklı nota: bir el önde."
+      },
+      "fix": {
+        "en": "The hands drift apart. Play the two bars around the slip slowly and press both keys at the same moment.",
+        "tr": "Eller birbirinden kayıyor. Kaçışın çevresindeki iki ölçüyü yavaş çal ve iki tuşa aynı anda bas."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the melody with only the first left-hand note of each bar.",
+    "tr": "Ezgiyi, her ölçüde sol elin yalnız ilk notasıyla çal."
+  },
+  "repertoire": "Robert Schumann (1810–1856), Album für die Jugend, Op. 68 No. 1, \"Melodie\" (Hamburg: Schuberth, 1848; the Clara Schumann edition is also public domain, modern urtext is not used). Both hands, experimental (A6p) or MIDI. NEEDS TRANSCRIPTION from the 1848 first-edition scan; the scan id and sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1856; public domain, legal review pending.",
+  "minutes": 20,
+  "expertPending": true
+}

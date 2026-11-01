@@ -1,0 +1,116 @@
+{
+  "id": "pno-s3-m14-10",
+  "title": {
+    "en": "Czerny Op. 599: a study",
+    "tr": "Czerny Op. 599: bir etüt"
+  },
+  "goal": {
+    "en": "Plays a study from Czerny's Op. 599 evenly at ♩=80.",
+    "tr": "Czerny'nin Op. 599'undan bir etüdü ♩=80'de eşit çalar."
+  },
+  "explanation": [
+    {
+      "en": "Carl Czerny (1791–1857) was a pupil of Beethoven and a famous teacher. His Op. 599 is a set of short studies for beginners.",
+      "tr": "Carl Czerny (1791–1857) Beethoven'ın öğrencisi ve ünlü bir öğretmendi. Op. 599, yeni başlayanlar için kısa etütlerden oluşur."
+    },
+    {
+      "en": "A study trains one skill. Most studies in this book give the right hand even running notes over a simple left hand.",
+      "tr": "Etüt tek bir beceriyi çalıştırır. Bu kitaptaki etütlerin çoğunda sağ el, sade bir sol elin üstünde eşit notalarla koşar."
+    },
+    {
+      "en": "Evenness is the goal: every note at the same time distance and the same loudness.",
+      "tr": "Amaç eşitliktir: her nota aynı zaman aralığında ve aynı güçte."
+    },
+    {
+      "en": "Start slowly. Raise the tempo in small steps only when the slower one passes.",
+      "tr": "Yavaş başla. Tempoyu ancak yavaş olan geçtiğinde küçük adımlarla artır."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The selected Czerny study from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden seçilen Czerny etüdü, piyano sentezi, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Practise in two-bar sections at ♩=56, then play the study from start to finish at ♩=80.",
+      "tr": "İki ölçülük bölümlerle ♩=56'da çalış, sonra etüdü baştan sona ♩=80'de çal."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The running notes were even in time and loudness.",
+      "tr": "Koşan notalar zamanda ve güçte eşitti."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "A thumb crossing or a hand shift is late. Loop those four notes at ♩=56, then rejoin the study.",
+        "tr": "Bir başparmak geçişi ya da el kayması geç kalıyor. O dört notayı ♩=56'da döngüle, sonra etüde dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Soft fast notes are hard to separate. Play each note a little deeper into the key.",
+        "tr": "Hafif ve hızlı notalar zor ayrılır. Her notayı tuşa biraz daha derin bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the study at ♩=66 until it passes, then go up in steps of 5 to ♩=80.",
+    "tr": "Etüdü geçene kadar ♩=66'da çal, sonra 5'er adımlarla ♩=80'e çık."
+  },
+  "repertoire": "Carl Czerny (1791–1857), Op. 599 (studies for beginners): one study, to be selected so that no two new notes start together (one-new-note rule), or with those notes left to the Ostinato edition. NEEDS TRANSCRIPTION from a public-domain 19th-century edition scan; the study number, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1857; public domain, legal review pending.",
+  "minutes": 15,
+  "expertPending": true
+}

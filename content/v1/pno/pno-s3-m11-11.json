@@ -1,0 +1,111 @@
+{
+  "id": "pno-s3-m11-11",
+  "title": {
+    "en": "Gurlitt: an accompaniment study",
+    "tr": "Gurlitt: eşlik etüdü"
+  },
+  "goal": {
+    "en": "Plays a selected easy piece by Gurlitt with a left-hand accompaniment pattern, hands together.",
+    "tr": "Gurlitt'ten seçilmiş, sol el eşlik kalıplı kolay bir parçayı eller birlikte çalar."
+  },
+  "explanation": [
+    {
+      "en": "Cornelius Gurlitt (1820–1901) wrote many short teaching pieces. They are in the public domain.",
+      "tr": "Cornelius Gurlitt (1820–1901) çok sayıda kısa öğretim parçası yazdı. Bu parçalar kamu malıdır."
+    },
+    {
+      "en": "Many of them put a broken-chord or Alberti pattern in the left hand under a simple melody. You know these patterns from this module.",
+      "tr": "Birçoğu basit bir melodinin altında sol ele kırık akor ya da Alberti kalıbı verir. Bu kalıpları bu modülden tanıyorsun."
+    },
+    {
+      "en": "Before you play, find the pattern: name the chord of each bar and the left-hand shape it uses.",
+      "tr": "Çalmadan önce kalıbı bul: her ölçünün akorunu ve sol elin kullandığı şekli söyle."
+    },
+    {
+      "en": "Learn each hand alone, then put them together slowly. Keep the accompaniment softer than the melody.",
+      "tr": "Her eli ayrı öğren, sonra yavaşça birleştir. Eşliği melodiden yumuşak tut."
+    },
+    {
+      "en": "The microphone result for notes that start together is experimental and does not block your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Birlikte başlayan notalar için mikrofon sonucu deneyseldir ve ilerlemeni engellemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The selected piece from the public-domain score, at the marked tempo and at a slow tempo, piano synthesis.",
+      "tr": "Seçilen parça, kamu malı notadan, yazılı tempoda ve yavaş tempoda, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M~",
+      "MIDI"
+    ],
+    "engineSteps": [
+      "A6p"
+    ],
+    "task": {
+      "en": "Play the left hand alone through the piece with the click. Then play hands together slowly, and finally at the marked tempo.",
+      "tr": "Parça boyunca önce yalnız sol eli klikle çal. Sonra eller birlikte yavaş çal, en sonunda yazılı tempoda."
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "experimental",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I named the chord of each bar before I played.",
+      "tr": "Çalmadan önce her ölçünün akorunu söyledim."
+    },
+    {
+      "en": "The melody was louder than the accompaniment.",
+      "tr": "Melodi eşlikten daha gürdü."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The left hand stops when the right hand gets busy. Play the left hand alone with the click until it runs by itself.",
+        "tr": "Sağ el yoğunlaşınca sol el duruyor. Sol el kendiliğinden akana kadar onu klikle tek başına çal."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The accompaniment is too soft for the microphone. Keep it lighter than the melody, but take every key to the bottom.",
+        "tr": "Eşlik mikrofon için fazla yumuşak. Onu melodiden hafif tut ama her tuşu dibine kadar indir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the melody with only the first note of each left-hand group, then add the full pattern.",
+    "tr": "Melodiyi sol elin her grubunun yalnız ilk notasıyla çal, sonra kalıbın tamamını ekle."
+  },
+  "repertoire": "Cornelius Gurlitt (1820–1901), an easy teaching piece with a left-hand broken-chord or Alberti accompaniment (selection pending; opus and number to be confirmed from a 19th-century edition). Public domain, legal review pending. Needs transcription from a PD source. Notation, fingering and tempo by Ostinato.",
+  "minutes": 20,
+  "expertPending": true
+}

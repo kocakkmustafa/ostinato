@@ -1,0 +1,115 @@
+{
+  "id": "pno-s3-m14-05",
+  "title": {
+    "en": "Petzold: Minuet in G, left hand",
+    "tr": "Petzold: Sol Majör Menuet, sol el"
+  },
+  "goal": {
+    "en": "Plays the left hand of the Minuet in G, BWV Anh. 114, from start to finish at ♩=80.",
+    "tr": "Sol Majör Menuet'in (BWV Anh. 114) sol elini baştan sona ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "The left hand is a slower bass line below the melody, written in the bass clef.",
+      "tr": "Sol el, ezginin altında daha yavaş ilerleyen bir bas çizgisidir ve fa anahtarında yazılır."
+    },
+    {
+      "en": "Long notes still need counting. Count 1-2-3 through every dotted half note and release on time.",
+      "tr": "Uzun notalar da sayılır. Her noktalı ikilikte 1-2-3 say ve zamanında bırak."
+    },
+    {
+      "en": "Where the source has two bass notes together, the Ostinato edition keeps one, so only one new note starts at a time.",
+      "tr": "Kaynakta iki bas notası birlikteyse Ostinato düzenlemesi birini tutar; böylece aynı anda yalnız bir yeni nota başlar."
+    },
+    {
+      "en": "Learn the bass line well. In the next lesson it becomes the floor under the right hand.",
+      "tr": "Bas çizgisini iyi öğren. Sonraki derste sağ elin altındaki zemin olacak."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Left hand of the Minuet in G from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Sol Majör Menuet'in sol eli, piyano sentezi, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Practise in two-bar sections, then play the left hand from start to finish at ♩=80, without the repeats.",
+      "tr": "İki ölçülük bölümlerle çalış, sonra sol eli tekrarlar olmadan baştan sona ♩=80'de çal."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "I held each long note for its full count.",
+      "tr": "Her uzun notayı tam sayısı kadar tuttum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "A long note was cut short. Count the beats aloud and move only on \"1\".",
+        "tr": "Bir uzun nota kısa kesildi. Vuruşları sesli say ve yalnız \"1\"de ilerle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=80, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Christian Petzold (1677–1733), Menuet in G major, BWV Anh. 114, from the Notenbüchlein für Anna Magdalena Bach (1725 manuscript; 19th-century Bach-Gesellschaft edition). Long attributed to J. S. Bach. Left hand only, without repeats; where the source has two notes together, one is kept (Ostinato edition). NEEDS TRANSCRIPTION from a public-domain source scan; the scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1733; public domain, legal review pending.",
+  "minutes": 15,
+  "expertPending": true
+}
