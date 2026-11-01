@@ -20,8 +20,9 @@ ekran kararları `RAPOR.tr.md` (f), yerleşim `4-rakip-arayuzleri.md` §6.5–6.
   portların (iOS bar döngüsü, Android blok yazıcı) normatif karşılığı.
 - `MetronomeTimeline`: vuruş ↔ ölçüm saati (`AudioChunk.tStartUs` ile aynı
   saat). `anchorUs + outputLatencyUs + latencyCorrectionUs` = duyulan vuruş.
-  `latencyCorrectionUs` F4.2 kalibrasyonundan gelecek; sıfırken zamanlama
-  öğrenciye gösterilmez (rozet: "Zamanlama için kalibrasyon yap").
+  `latencyCorrectionUs` F4.2 kalibrasyonundan gelir (rota başına
+  gidiş-dönüş − `outputLatencyUs`, `calibrated` bayrağı); kalibrasyon yokken
+  zamanlama öğrenciye gösterilmez (rozet: "Zamanlama için kalibrasyon yap").
 - `MetronomeBeatState`: görsel vuruş + ön sayım (1–2 ölçü).
 - `CaptureClockEstimator`: parçalar arasında "şimdi"yi ölçüm saatinde tahmin
   eder, geri gitmez.
@@ -131,9 +132,11 @@ yakalamayı durdurmaz. Native yoksa ya da çapa gelmezse pratik **sessiz
   gösterilir, makinece denetlenen kısmı seviye varsayılanı + `minCorrect`'tir.
   `expertPending` ise "eşikler öğretmen incelemesi bekliyor" yazar.
 - Kapı yalnız **tam tek turda** ölçülür: döngü, "Beni bekle" ya da yarıda
-  durdurma → "Pratik turu" (sayaçlar var, kapı yok). Sözleşme §6.3 açılış
-  temposunun da sonraki dersi açtığını söyler; görev tanımı hedef tempoyu
-  istediği için kapı **hedef tempoda** kuruldu (karar kurucuya açık).
+  durdurma → "Pratik turu" (sayaçlar var, kapı yok).
+- **Tempo (F4.2 turunda düzeltildi, sözleşme §6.3):** açılış temposunda (ya
+  da üstünde) geçiş sıradaki dersi açar; hedef tempoda geçiş dersi
+  "tamamlandı" yapar; açılışın altı pratiktir. `M!` dersleri yalnız hedef
+  tempoda geçer. Ayrıntı: `F4.2-kurulum-sihirbazi.md`.
 - Önerilen tek adım: geçti → "Sonraki derse geç"; duyulma düşük →
   "Kurulumu kontrol et" ("Puanın değil, mikrofonun takıldı…"); doğruluk
   düşük → "Bu ölçüleri %70 tempoda döngüle"; tempo altında → "+5"; pratik

@@ -29,14 +29,27 @@ final class NoteOutcome {
   final double? timingMs;
 }
 
+/// Contract §6.3 (tempo rules): which tempo opens the next lesson.
+enum TempoGate {
+  /// "Açılış temposu sonraki dersi açar. Hedef tempo dersi 'tamamlandı'
+  /// yapar." A pass at the opening tempo (or faster) opens the next lesson;
+  /// a pass at the target tempo also marks this one completed.
+  openingOpensNext,
+
+  /// "`M!` dersleri (modül geçişleri, seviye testleri) hedef tempoda
+  /// geçilir." Only a pass at the target tempo opens (and completes).
+  targetOnly,
+}
+
 /// The measured gate. Default (contract §6.2, S1): accuracy ≥ 80 % over
 /// decided notes ("could not hear" excluded), heard ≥ 80 % (contract §5 rule
-/// 1: > 20 % unheard makes the set invalid), at the target tempo (§6.3).
+/// 1: > 20 % unheard makes the set invalid), tempo per [TempoGate] (§6.3).
+/// Below the opening tempo a run is "practice" and opens nothing.
 final class PassCriteria {
   const PassCriteria({
     required this.minAccuracy,
     this.minHeard = .8,
-    this.requireTargetTempo = true,
+    this.tempoGate = TempoGate.openingOpensNext,
     this.minCorrect,
     this.customText,
     this.expertPending = true,
@@ -44,7 +57,7 @@ final class PassCriteria {
 
   final double minAccuracy;
   final double minHeard;
-  final bool requireTargetTempo;
+  final TempoGate tempoGate;
   final int? minCorrect;
 
   /// A lesson-specific rule (`pass.levelDefault: false`) is shown as written;
@@ -61,6 +74,9 @@ final class PassCriteria {
 
   factory PassCriteria.forLesson(V1Lesson lesson) => PassCriteria(
     minAccuracy: levelAccuracy[lesson.level] ?? .8,
+    tempoGate: lesson.practice.measurement.contains('M!')
+        ? TempoGate.targetOnly
+        : TempoGate.openingOpensNext,
     minCorrect: lesson.practice.pass.minCorrect,
     customText: lesson.practice.pass.levelDefault
         ? null
@@ -95,14 +111,22 @@ final class PassGate {
     required this.checks,
     required this.ineligible,
     required this.criteria,
+    required this.bpm,
+    required this.targetBpm,
   });
 
   final List<GateCheck> checks;
   final List<GateIneligible> ineligible;
   final PassCriteria criteria;
+  final int bpm, targetBpm;
 
   bool get eligible => ineligible.isEmpty;
+
+  /// The measured gate is passed: the next lesson opens (§6.3).
   bool get passed => eligible && checks.every((c) => c.ok);
+
+  /// Passed at the target tempo: this lesson is "completed" (§6.3).
+  bool get completed => passed && bpm >= targetBpm;
   bool get heardTooLow =>
       checks.any((c) => c.kind == GateCheckKind.heard && !c.ok);
 }
@@ -183,6 +207,9 @@ final class PracticeRunSummary {
     }
     final accuracy = c + d == 0 ? 0.0 : c / (c + d);
     final total = c + d + u;
+    final gateBpm = criteria.tempoGate == TempoGate.targetOnly
+        ? targetBpm
+        : math.min(openBpm, targetBpm);
     final heard = total == 0 ? 0.0 : (c + d) / total;
     final checks = <GateCheck>[
       GateCheck(
@@ -197,13 +224,12 @@ final class PracticeRunSummary {
         heard,
         criteria.minHeard,
       ),
-      if (criteria.requireTargetTempo)
-        GateCheck(
-          GateCheckKind.tempo,
-          bpm >= targetBpm,
-          bpm.toDouble(),
-          targetBpm.toDouble(),
-        ),
+      GateCheck(
+        GateCheckKind.tempo,
+        bpm >= gateBpm,
+        bpm.toDouble(),
+        gateBpm.toDouble(),
+      ),
       if (criteria.minCorrect != null)
         GateCheck(
           GateCheckKind.minCorrect,
@@ -225,6 +251,8 @@ final class PracticeRunSummary {
       checks: checks,
       ineligible: ineligible,
       criteria: criteria,
+      bpm: bpm,
+      targetBpm: targetBpm,
     );
     final last = <int, NoteOutcome>{};
     for (final o in outcomes) {
@@ -247,7 +275,7 @@ final class PracticeRunSummary {
       next = NextStep.checkSetup;
     } else if (c + d > 0 && accuracy < criteria.minAccuracy) {
       next = NextStep.loopSlower;
-    } else if (bpm < targetBpm) {
+    } else if (bpm < gateBpm) {
       next = NextStep.raiseTempo;
     } else if (!gate.eligible) {
       next = NextStep.performanceRun;

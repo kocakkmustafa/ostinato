@@ -186,16 +186,8 @@
    "tr": "Duyulma ≥ %{v0}"
   },
   {
-   "en": "Target tempo ♩={v0}",
-   "tr": "Hedef tempo ♩={v0}"
-  },
-  {
    "en": "At least {v0} correct",
    "tr": "En az {v0} doğru"
-  },
-  {
-   "en": "Gate passed",
-   "tr": "Geçiş kapısı geçildi"
   },
   {
    "en": "Practice round — the gate is measured on a full run",
@@ -204,10 +196,6 @@
   {
    "en": "Not your score — the microphone got stuck. Let's check the setup and try again.",
    "tr": "Puanın değil, mikrofonun takıldı. Kurulumu kontrol edip tekrar deneyelim."
-  },
-  {
-   "en": "Not yet",
-   "tr": "Henüz değil"
   },
   {
    "en": "met",
@@ -318,10 +306,6 @@
    "tr": "İlerleme bilinmiyor"
   },
   {
-   "en": "No measured lessons yet.",
-   "tr": "Henüz ölçülü ders yok."
-  },
-  {
    "en": "PASSED · ♩={v0}",
    "tr": "GEÇİLDİ · ♩={v0}"
   },
@@ -344,6 +328,78 @@
   {
    "en": "Open measured practice",
    "tr": "Ölçülü pratiği aç"
+  },
+  {
+   "en": "Play it at the target tempo",
+   "tr": "Hedef tempoda çal"
+  },
+  {
+   "en": "Target tempo ♩={v0} (module transition)",
+   "tr": "Hedef tempo ♩={v0} (modül geçişi)"
+  },
+  {
+   "en": "Opening tempo ♩={v0} or faster",
+   "tr": "Açılış temposu ♩={v0} ya da üstü"
+  },
+  {
+   "en": "Completed at the target tempo",
+   "tr": "Hedef tempoda tamamlandı"
+  },
+  {
+   "en": "Passed at the opening tempo",
+   "tr": "Açılış temposunda geçtin"
+  },
+  {
+   "en": "Target tempo ♩={v0} marks the lesson completed",
+   "tr": "Hedef tempo ♩={v0} dersi \"tamamlandı\" yapar"
+  },
+  {
+   "en": "The opening tempo opens the next lesson. Pass at the target tempo ♩={v0} to mark this one completed.",
+   "tr": "Açılış temposu sıradaki dersi açar. Bu dersi \"tamamlandı\" yapmak için hedef tempoda (♩={v0}) geç."
+  },
+  {
+   "en": "COMPLETED · ♩={v0}",
+   "tr": "TAMAMLANDI · ♩={v0}"
+  },
+  {
+   "en": "PASSED · ♩={v0} · completes at ♩={v1}",
+   "tr": "GEÇİLDİ · ♩={v0} · ♩={v1} ile tamamlanır"
+  },
+  {
+   "en": "Placement, room, latency and tuning — about two minutes.",
+   "tr": "Yerleşim, oda, gecikme ve akort — yaklaşık iki dakika."
+  },
+  {
+   "en": "Latency not measured on this output: timing stays hidden.",
+   "tr": "Bu çıkışta gecikme ölçülmedi: zamanlama gizli kalır."
+  },
+  {
+   "en": "Latency {v0} ms ({v1}); timing is shown.",
+   "tr": "Gecikme {v0} ms ({v1}); zamanlama gösterilir."
+  },
+  {
+   "en": "speaker",
+   "tr": "hoparlör"
+  },
+  {
+   "en": "wired headphones",
+   "tr": "kablolu kulaklık"
+  },
+  {
+   "en": "Bluetooth",
+   "tr": "Bluetooth"
+  },
+  {
+   "en": "Setup",
+   "tr": "Kurulum"
+  },
+  {
+   "en": "Not passed this run",
+   "tr": "Bu turda geçilmedi"
+  },
+  {
+   "en": "No measured lessons in this build.",
+   "tr": "Bu sürümde ölçülü ders yok."
   }
  ]
 }

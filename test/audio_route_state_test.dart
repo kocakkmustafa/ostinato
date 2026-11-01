@@ -9,6 +9,7 @@ void main() {
       'BuiltInMic': AudioRoute.speaker,
       'Headphones': AudioRoute.wiredHeadset,
       'HeadsetMic': AudioRoute.wiredHeadset,
+      'MicrophoneWired': AudioRoute.wiredHeadset,
       'BluetoothHFP': AudioRoute.bluetooth,
       'BluetoothA2DP': AudioRoute.bluetooth,
       'USBAudio': AudioRoute.usbOrOther,

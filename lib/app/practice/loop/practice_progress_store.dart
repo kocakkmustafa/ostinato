@@ -21,6 +21,8 @@ final class V1PracticeRecord {
     this.lastRunAt,
     this.passedAt,
     this.passedBpm,
+    this.completedAt,
+    this.completedBpm,
   });
 
   final String lessonId;
@@ -29,11 +31,17 @@ final class V1PracticeRecord {
   final int? bestBpm;
   final DateTime? lastRunAt;
 
-  /// First measured pass of the gate; opens the next lesson.
+  /// First measured pass of the gate (opening tempo or faster, contract
+  /// §6.3); opens the next lesson.
   final DateTime? passedAt;
   final int? passedBpm;
 
+  /// First measured pass at the target tempo: the lesson is "completed".
+  final DateTime? completedAt;
+  final int? completedBpm;
+
   bool get passed => passedAt != null;
+  bool get completed => completedAt != null;
 
   Map<String, Object?> toJson() => {
     'lessonId': lessonId,
@@ -44,6 +52,8 @@ final class V1PracticeRecord {
     'lastRunAt': lastRunAt?.toUtc().toIso8601String(),
     'passedAt': passedAt?.toUtc().toIso8601String(),
     'passedBpm': passedBpm,
+    'completedAt': completedAt?.toUtc().toIso8601String(),
+    'completedBpm': completedBpm,
     'evidence': 'measured_practice',
   };
 
@@ -54,6 +64,11 @@ final class V1PracticeRecord {
     DateTime? date(String key) =>
         json[key] == null ? null : DateTime.parse(json[key] as String);
     double? number(String key) => (json[key] as num?)?.toDouble();
+    final passedAt = date('passedAt');
+    // Files written before the §6.3 fix have no completion keys; back then
+    // the gate was measured at the target tempo only, so a pass was also a
+    // completion.
+    final legacy = !json.containsKey('completedAt');
     return V1PracticeRecord(
       lessonId: json['lessonId'] as String,
       runs: json['runs'] as int,
@@ -61,8 +76,12 @@ final class V1PracticeRecord {
       bestHeard: number('bestHeard'),
       bestBpm: json['bestBpm'] as int?,
       lastRunAt: date('lastRunAt'),
-      passedAt: date('passedAt'),
+      passedAt: passedAt,
       passedBpm: json['passedBpm'] as int?,
+      completedAt: legacy ? passedAt : date('completedAt'),
+      completedBpm: legacy
+          ? json['passedBpm'] as int?
+          : json['completedBpm'] as int?,
     );
   }
 
@@ -74,6 +93,7 @@ final class V1PracticeRecord {
         ? next
         : old;
     final passes = s.gate.passed && passedAt == null;
+    final completes = s.gate.completed && completedAt == null;
     return V1PracticeRecord(
       lessonId: lessonId,
       runs: runs + 1,
@@ -85,6 +105,8 @@ final class V1PracticeRecord {
       lastRunAt: at.toUtc(),
       passedAt: passes ? at.toUtc() : passedAt,
       passedBpm: passes ? s.bpm : passedBpm,
+      completedAt: completes ? at.toUtc() : completedAt,
+      completedBpm: completes ? s.bpm : completedBpm,
     );
   }
 }
@@ -164,8 +186,9 @@ final class V1PracticeProgressStore implements V1PracticeProgress {
   }, writing: true);
 }
 
-/// Unlock rule (task F2.5): the first lesson in course order is open; each
-/// next one opens when the one before it has a measured pass.
+/// Unlock rule (task F2.5, contract §6.3): the first lesson in course order is
+/// open; each next one opens when the one before it has a measured pass (at
+/// its opening tempo, or at the target tempo for `M!` lessons).
 Set<String> unlockedLessons(
   List<String> orderedIds,
   Map<String, V1PracticeRecord> records,

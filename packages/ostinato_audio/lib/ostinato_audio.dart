@@ -35,4 +35,5 @@ export 'src/pitch/guitar_note_verifier.dart';
 export 'src/pitch/guitar_single_note_evaluator.dart';
 export 'src/pitch/guitar_pitch_observer.dart';
 export 'src/pitch/yin.dart';
+export 'src/rhythm/latency_estimator.dart';
 export 'src/rhythm/metronome_aligner.dart';

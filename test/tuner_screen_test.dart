@@ -108,6 +108,39 @@ void main() {
     expect(controller.isActive, isFalse);
   });
 
+  test('native order: start replies before the route; the tuner waits', () async {
+    // Real iOS/Android: the start reply lands first (route still unknown),
+    // the routeChanged event right after it.
+    source.route = AudioRoute.unknown;
+    script.queue.add(heard(midiToHz(45)));
+    await controller.start();
+    await Future<void>.delayed(Duration.zero);
+    expect(controller.phase, TunerPhase.calibrating);
+    source.simulateRouteChange(AudioRoute.speaker);
+    await Future<void>.delayed(Duration.zero);
+    source.pushChunk(List<double>.filled(sr, 0.0005));
+    for (var i = 0; i < 4; i++) {
+      source.pushChunk(List<double>.filled(sr ~/ 4, 0.001));
+      await Future<void>.delayed(Duration.zero);
+      await Future<void>.delayed(Duration.zero);
+    }
+    expect(controller.phase, TunerPhase.listening);
+    expect(controller.readout.stringIndex, 1);
+  });
+
+  test('a route that never resolves closes as unsupported', () async {
+    source.route = AudioRoute.unknown;
+    await controller.start();
+    await Future<void>.delayed(Duration.zero);
+    source.pushChunk(List<double>.filled(sr, 0.0005));
+    await Future<void>.delayed(Duration.zero);
+    expect(controller.phase, TunerPhase.calibrating);
+    source.pushChunk(List<double>.filled(sr, 0.0005));
+    await Future<void>.delayed(Duration.zero);
+    expect(controller.phase, TunerPhase.unsupportedInput);
+    expect(controller.isActive, isFalse);
+  });
+
   test('declined permission is reported without capture', () async {
     source.permissionGranted = false;
     await controller.start();

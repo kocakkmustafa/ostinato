@@ -156,8 +156,11 @@ void main() {
     await rig.close();
   });
 
-  test('below the target tempo the run cannot open the next lesson', () async {
+  test('below the opening tempo the run cannot open the next lesson', () async {
+    // Contract §6.3: the opening tempo (50) opens the next lesson; below it
+    // a run is practice.
     final rig = Rig('E2 E2', bpm: 50, target: 60, sound: false);
+    rig.controller.tempo = rig.controller.tempo.withBpm(45);
     // Silent grid: anchor = first capture time estimate + 0.4 s.
     await rig.play(performance(14, {}));
     final c = rig.controller;

@@ -30,6 +30,7 @@ class MainActivity : FlutterActivity() {
   ) {
     super.configureFlutterEngine(engine)
     binding.register(engine)
+    AudioEnvironmentChannel.register(engine, applicationContext)
     // Auto-registration happened in super only for an Activity-owned engine.
     // Cached/external engines may have no plugin or an already installed bridge.
     val videoInstall = VendorVideoPermitBridge.installForEngine(

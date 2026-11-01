@@ -8,6 +8,9 @@ import '../../curriculum/v1_lesson.dart';
 import '../../account_connection.dart';
 import '../../design/ostinato_theme.dart';
 import '../../design/widgets.dart';
+import '../setup/latency_calibration.dart';
+import '../setup/setup_profile_store.dart';
+import '../setup/setup_wizard_screen.dart';
 import 'practice_loop_screen.dart';
 import 'practice_outcome.dart';
 import 'practice_progress_store.dart';
@@ -22,7 +25,15 @@ class V1PracticeListScreen extends StatefulWidget {
     this.progressFactory,
     this.practiceScreenBuilder,
     this.onSessionFinished,
+    this.setupStore,
+    this.openSetup,
   });
+
+  /// F4.2 setup results; defaults to the device store.
+  final SetupProfileStore? setupStore;
+
+  /// Opens the setup wizard; tests replace it.
+  final Future<void> Function(BuildContext context)? openSetup;
 
   /// Forwarded to every practice screen (retention wiring, PR #12).
   final void Function(PracticeSessionFinished event)? onSessionFinished;
@@ -47,6 +58,26 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
   V1PracticeProgress? _progress;
   String? _accountId;
   Future<Map<String, V1PracticeRecord>>? _records;
+  late final SetupProfileStore _setup =
+      widget.setupStore ?? FileSetupProfileStore.device;
+  late Future<SetupProfile> _profile = _loadProfile();
+
+  Future<SetupProfile> _loadProfile() =>
+      _setup.load().catchError((Object _) => SetupProfile.empty);
+
+  Future<void> _openSetup() async {
+    final open = widget.openSetup;
+    if (open != null) {
+      await open(context);
+    } else {
+      await openSetupWizard(context, store: _setup);
+    }
+    if (!mounted) return;
+    final next = _loadProfile();
+    setState(() {
+      _profile = next;
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -69,6 +100,14 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
   }
 
   Future<void> _open(V1PracticeCatalog catalog, V1Lesson lesson) async {
+    // "Choose a lesson → setup → play": the wizard comes first until it has
+    // been gone through once (every step done or skipped).
+    final visited = (await _profile).visited;
+    if (!mounted) return;
+    if (!visited) {
+      await _openSetup();
+      if (!mounted) return;
+    }
     final progress = _progress!;
     final next = catalog.nextAfter(lesson.id);
     final exit = await Navigator.of(context).push<PracticeExit>(
@@ -84,11 +123,16 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
               progress: progress,
               hasNextLesson: next != null,
               onSessionFinished: widget.onSessionFinished,
+              setupStore: _setup,
             ),
       ),
     );
     if (!mounted) return;
     _reload();
+    final profile = _loadProfile();
+    setState(() {
+      _profile = profile;
+    });
     if (exit == PracticeExit.openNextLesson && next != null) {
       final records = await _records!;
       if (!mounted) return;
@@ -189,12 +233,14 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                         style: monoText(color: palette.warnInk),
                       ),
                     const SizedBox(height: 12),
+                    _setupCard(context),
+                    const SizedBox(height: 8),
                     if (catalog.lessons.isEmpty)
                       Text(
                         localized(
                           context,
-                          'No measured lessons yet.',
-                          'Henüz ölçülü ders yok.',
+                          'No measured lessons in this build.',
+                          'Bu sürümde ölçülü ders yok.',
                         ),
                       ),
                     for (final lesson in catalog.lessons)
@@ -215,6 +261,62 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     );
   }
 
+  Widget _setupCard(BuildContext context) => FutureBuilder<SetupProfile>(
+    future: _profile,
+    builder: (context, snap) {
+      final p = snap.data;
+      final latency = p?.latencyFor(p.lastRoute);
+      final line = p == null || !p.visited
+          ? localized(
+              context,
+              'Placement, room, latency and tuning — about two minutes.',
+              'Yerleşim, oda, gecikme ve akort — yaklaşık iki dakika.',
+            )
+          : latency == null
+          ? localized(
+              context,
+              'Latency not measured on this output: timing stays hidden.',
+              'Bu çıkışta gecikme ölçülmedi: zamanlama gizli kalır.',
+            )
+          : localized(
+              context,
+              'Latency {v0} ms ({v1}); timing is shown.',
+              'Gecikme {v0} ms ({v1}); zamanlama gösterilir.',
+              values: {
+                'v0': (latency.roundTripUs / 1000).round(),
+                'v1': switch (p.lastRoute!) {
+                  CalibrationRoute.speaker => localized(
+                    context,
+                    'speaker',
+                    'hoparlör',
+                  ),
+                  CalibrationRoute.wiredHeadset => localized(
+                    context,
+                    'wired headphones',
+                    'kablolu kulaklık',
+                  ),
+                  CalibrationRoute.bluetooth => localized(
+                    context,
+                    'Bluetooth',
+                    'Bluetooth',
+                  ),
+                },
+              },
+            );
+      return GlassCard(
+        padding: EdgeInsets.zero,
+        child: ListTile(
+          key: const Key('v1-practice-setup'),
+          leading: const Icon(Icons.tune),
+          title: Text(localized(context, 'Setup', 'Kurulum')),
+          subtitle: Text(line, key: const Key('v1-practice-setup-status')),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => unawaited(_openSetup()),
+        ),
+      );
+    },
+  );
+
   Widget _tile(
     BuildContext context,
     V1PracticeCatalog catalog,
@@ -222,13 +324,28 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     V1PracticeRecord? record,
     bool open,
   ) {
-    final status = record?.passed ?? false
+    final target = lesson.practice.tempo?.target;
+    final status = record?.completed ?? false
         ? localized(
             context,
-            'PASSED · ♩={v0}',
-            'GEÇİLDİ · ♩={v0}',
-            values: {'v0': record!.passedBpm ?? 0},
+            'COMPLETED · ♩={v0}',
+            'TAMAMLANDI · ♩={v0}',
+            values: {'v0': record!.completedBpm ?? 0},
           )
+        : record?.passed ?? false
+        ? target == null
+              ? localized(
+                  context,
+                  'PASSED · ♩={v0}',
+                  'GEÇİLDİ · ♩={v0}',
+                  values: {'v0': record!.passedBpm ?? 0},
+                )
+              : localized(
+                  context,
+                  'PASSED · ♩={v0} · completes at ♩={v1}',
+                  'GEÇİLDİ · ♩={v0} · ♩={v1} ile tamamlanır',
+                  values: {'v0': record!.passedBpm ?? 0, 'v1': target},
+                )
         : !open
         ? localized(
             context,
@@ -251,8 +368,10 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
           key: Key('v1-practice-${lesson.id}'),
           enabled: open,
           leading: Icon(
-            record?.passed ?? false
+            record?.completed ?? false
                 ? Icons.check_circle
+                : record?.passed ?? false
+                ? Icons.check_circle_outline
                 : open
                 ? Icons.play_circle_outline
                 : Icons.lock_outline,
