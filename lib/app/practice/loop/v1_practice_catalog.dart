@@ -31,6 +31,9 @@ final class V1PracticeCatalog {
     if (l.course != 'gtr' || seq == null) return false;
     final m = l.practice.measurement;
     if (!m.contains('M') && !m.contains('M!')) return false;
+    // Chord lessons need the A4 chord engine; their sequences are chord
+    // charts, not single notes.
+    if (l.practice.engineSteps.contains('A4')) return false;
     try {
       return PracticeScore.parse(seq).hasPitches;
     } on FormatException {

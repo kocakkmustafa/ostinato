@@ -57,12 +57,32 @@ void main() {
       expect(() => PracticeScore.parse('5/16: q'), throwsFormatException);
     });
 
-    test('every written v1 lesson sequence parses', () {
+    test('a tie across the bar line is one onset', () {
+      final s = PracticeScore.parse('4/4: h q q~ | q q h');
+      expect(s.events.map((e) => e.durationBeats), [2, 1, 2, 1, 2]);
+      expect(s.events[2].startBeat, 3);
+    });
+
+    test('a chord name before a bar is a label, not an event', () {
+      final s = PracticeScore.parse('4/4: Am h hr | G q qr q qr');
+      expect(
+        s.events.map((e) => e.kind),
+        everyElement(PracticeEventKind.onset),
+      );
+      expect(s.events.map((e) => e.startBeat), [0, 4, 6]);
+      expect(s.hasPitches, isFalse);
+    });
+
+    test('every written single-note v1 lesson sequence parses', () {
       for (final f in Directory('content/v1').listSync(recursive: true)) {
         if (f is! File || !f.path.endsWith('.json')) continue;
         final lesson = V1Lesson.fromJson(jsonDecode(f.readAsStringSync()));
         final seq = lesson.practice.sequence;
         if (seq == null) continue;
+        // Chord charts (A4) and tuning pairs (A1 only) are not note
+        // sequences; the practice loop does not run them yet.
+        final steps = lesson.practice.engineSteps;
+        if (steps.contains('A4') || steps.every((s) => s == 'A1')) continue;
         expect(() => PracticeScore.parse(seq), returnsNormally, reason: f.path);
       }
     });

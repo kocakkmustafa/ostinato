@@ -7,7 +7,9 @@ import 'dart:math' as math;
 /// written lessons):
 /// - pitch tokens, sounding pitch for guitar: `E2 F#3 Bb3`, optional rhythm
 ///   suffix `E2:h`, `C4:e.`; default one quarter;
-/// - rhythm tokens: `w h q e ee`, dotted `h.`, rest `qr`, tie `h~q`;
+/// - rhythm tokens: `w h q e ee`, dotted `h.`, rest `qr`, tie `h~q`, and a
+///   tie across the bar line `q~ | q`;
+/// - a chord name before a bar's rhythm (`Am h hr`) is a label only;
 /// - degree runs (voice/ear): `1-2-3-2-1`, one quarter each;
 /// - `|` separators; every segment starts on the next bar line;
 /// - optional meter prefix `3/4:` (default 4/4), and `×N`/`xN` = play
@@ -69,6 +71,11 @@ final class PracticeScore {
   static final RegExp _degrees = RegExp(r'^\d+(?:-\d+)*$');
   static final RegExp _repeat = RegExp(r'^[×x](\d{1,2})$');
 
+  /// A chord name before a bar's rhythm (`Am h hr`): a label, not an event.
+  static final RegExp _chordLabel = RegExp(
+    r'^[A-G][#b♯♭]?(?:m|maj7|m7|7|sus2|sus4|add9|dim|aug)?(?:/[A-G][#b♯♭]?)?$',
+  );
+
   static PracticeScore parse(String sequence) {
     var text = sequence.trim();
     if (text.isEmpty) throw const FormatException('Empty sequence');
@@ -91,6 +98,9 @@ final class PracticeScore {
     final raw = <_Raw>[];
     var position = 0.0;
     var repeats = 1;
+    // A rhythm token ending in `~` (`q~ | q`) ties into the next one, across
+    // the bar line: the tied note is one onset, not two.
+    var tieIn = false;
     final segments = text.split('|');
     for (var s = 0; s < segments.length; s++) {
       final tokens = segments[s].trim().split(RegExp(r'\s+'))
@@ -99,6 +109,7 @@ final class PracticeScore {
       // Each segment starts on a bar line.
       position = (position / beatsPerBar).ceil() * beatsPerBar.toDouble();
       for (final token in tokens) {
+        if (_chordLabel.hasMatch(token)) continue;
         final repeat = _repeat.firstMatch(token);
         if (repeat != null) {
           repeats = int.parse(repeat.group(1)!);
@@ -118,8 +129,11 @@ final class PracticeScore {
             ),
           );
           position += dur;
+          tieIn = false;
           continue;
         }
+        tieIn =
+            tieIn && _rhythm.hasMatch(token.replaceFirst(RegExp(r'~$'), ''));
         if (_degrees.hasMatch(token)) {
           for (final d in token.split('-')) {
             raw.add(
@@ -136,13 +150,23 @@ final class PracticeScore {
           }
           continue;
         }
-        if (_rhythm.hasMatch(token)) {
-          final rest = token.endsWith('r');
+        final tieOut = token.length > 1 && token.endsWith('~');
+        final body = tieOut ? token.substring(0, token.length - 1) : token;
+        if (_rhythm.hasMatch(body)) {
+          final rest = body.endsWith('r');
           final dur = _duration(
-            rest ? token.substring(0, token.length - 1) : token,
+            rest ? body.substring(0, body.length - 1) : body,
           );
-          if (!rest) raw.add(_Raw(PracticeEventKind.onset, position, dur));
+          if (rest) {
+            // A rest ends any open tie.
+          } else if (tieIn && raw.isNotEmpty) {
+            final last = raw.removeLast();
+            raw.add(_Raw(last.kind, last.start, last.duration + dur));
+          } else {
+            raw.add(_Raw(PracticeEventKind.onset, position, dur));
+          }
           position += dur;
+          tieIn = tieOut && !rest;
           continue;
         }
         throw FormatException('Unknown sequence token "$token" in $sequence');
