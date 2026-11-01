@@ -29,6 +29,19 @@ const double kHeardAboveFloorDb = 12;
 /// step still completes).
 const double kNoisyRoomDb = -45;
 
+/// Above this (and up to [kNoisyRoomDb]) the room is "a little noisy": notes
+/// still read, quiet ones may be missed. Below it the room is quiet.
+const double kSomeNoiseRoomDb = -55;
+
+/// The room floor in learner words; the number itself is never shown.
+enum RoomNoise { quiet, some, loud }
+
+RoomNoise roomNoiseFor(double floorDb) => floorDb > kNoisyRoomDb
+    ? RoomNoise.loud
+    : floorDb > kSomeNoiseRoomDb
+    ? RoomNoise.some
+    : RoomNoise.quiet;
+
 enum SetupAudioPhase {
   idle,
   starting,

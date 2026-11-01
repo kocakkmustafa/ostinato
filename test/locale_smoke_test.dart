@@ -43,16 +43,14 @@ void main() {
       ),
     );
     expect(find.textContaining('guitar teachers'), findsNothing);
-    expect(find.textContaining('gitar eğitmeni'), findsOneWidget);
     expect(
       find.textContaining('Put your phone where it can see you sitting'),
       findsNothing,
     );
-    expect(
-      find.textContaining('Gitar duruş referansları ve yazılı dersler'),
-      findsOneWidget,
-    );
-    expect(find.text('Yazılı dersler. Duruş referansları.'), findsOneWidget);
+    // v1 (2026-11-01): kartlar ölçülü pratiği ve "Yakında"yı Türkçe söyler.
+    expect(find.text('Ölçülü pratik. Akort. Haftalık hedef.'), findsOneWidget);
+    expect(find.textContaining('Ölçülü pratik açık'), findsOneWidget);
+    expect(find.textContaining('Yakında'), findsNWidgets(2));
     expect(find.text('ÖLÇÜM'), findsNothing);
     expect(find.text('SCORED'), findsNothing);
     expect(find.textContaining('GİTAR · REHBER'), findsOneWidget);
@@ -73,7 +71,7 @@ void main() {
         ),
       ),
     );
-    expect(find.text('Gitar çalışmanı geliştir.'), findsOneWidget);
+    expect(find.text('Gitarı çalarak öğren.'), findsOneWidget);
     expect(find.text('Devam et'), findsOneWidget);
     await tester.tap(find.byKey(const Key('onboarding-primary')));
     await tester.pumpAndSettle();

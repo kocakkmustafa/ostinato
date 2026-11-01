@@ -13,6 +13,8 @@ import '../guitar_session_preparation.dart';
 import '../guitar_staff_diagram.dart';
 import '../retention/weekly_goal.dart';
 import '../retention/weekly_goal_store.dart';
+import '../ui_copy.dart';
+import 'v1_home_copy.dart';
 import 'guitar_note_observation_screen.dart';
 import '../practice/loop/v1_practice_list_screen.dart';
 
@@ -224,7 +226,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  course.summary.of(context),
+                  uiText(context, V1HomeCopy.heroBody),
                   style: hankenText(size: 13.5, height: 1.5),
                 ),
                 const SizedBox(height: 16),
@@ -256,6 +258,8 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
               ],
             ),
           ),
+          const SizedBox(height: 17),
+          const MeasuredPracticeCard(),
           if (progress == null) ...[
             const SizedBox(height: 17),
             GlassCard(
@@ -303,11 +307,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                 ),
                 const SizedBox(height: 7),
                 Text(
-                  localized(
-                    context,
-                    'Observe an approximate note with microphone permission. This does not assess or complete a lesson.',
-                    'Mikrofon izniyle yaklaşık bir nota gözle. Bu araç dersi değerlendirmez veya tamamlamaz.',
-                  ),
+                  uiText(context, V1HomeCopy.noteToolBody),
                   style: hankenText(size: 12.5, height: 1.5),
                 ),
                 TextButton.icon(
@@ -325,58 +325,6 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                       context,
                       'Open note observation',
                       'Nota gözlemini aç',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 17),
-          GlassCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  localized(context, 'Measured practice', 'Ölçülü pratik'),
-                  style: hankenText(size: 18, weight: FontWeight.w600),
-                ),
-                const SizedBox(height: 7),
-                Text(
-                  localized(
-                    context,
-                    'Play a lesson with the click and the moving TAB; each note is marked correct, different note or couldn’t hear. Passing the measured gate opens the next lesson.',
-                    'Bir dersi klik ve akan tab ile çal; her nota doğru, farklı nota ya da duyamadım diye işaretlenir. Ölçülen geçiş kapısını geçmek sıradaki dersi açar.',
-                  ),
-                  style: hankenText(size: 12.5, height: 1.5),
-                ),
-                TextButton.icon(
-                  key: const Key('guitar-measured-practice-entry'),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => V1PracticeListScreen(
-                        // F5.2: a measured run counts toward the weekly goal
-                        // (≥60 s listening, ≥1 heard note). A failed write
-                        // must not interrupt the result screen.
-                        onSessionFinished: (e) =>
-                            WeeklyGoalStore(accountUserId: _accountId)
-                                .recordPracticeSession(
-                                  MeasuredPracticeSession(
-                                    course: PracticeCourse.guitar,
-                                    activeDuration: e.activeDuration,
-                                    heardEvents: e.heardEvents,
-                                    lessonId: e.lessonId,
-                                  ),
-                                )
-                                .then<void>((_) {}, onError: (_) {}),
-                      ),
-                    ),
-                  ),
-                  icon: const Icon(Icons.graphic_eq),
-                  label: Text(
-                    localized(
-                      context,
-                      'Open measured practice',
-                      'Ölçülü pratiği aç',
                     ),
                   ),
                 ),
@@ -1450,4 +1398,58 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
       ),
     ),
   );
+}
+
+/// Ölçülü pratik kartı (v1 metni C1, kurucu 2026-11-01): gitar sayfasının
+/// birincil kartı. Düğme ilk geçilmemiş açık dersi doğrudan açar.
+class MeasuredPracticeCard extends StatelessWidget {
+  const MeasuredPracticeCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final accountId = AccountScope.maybeOf(context)?.currentUserId;
+    return GlassCard(
+      key: const Key('measured-practice-card'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            uiText(context, V1HomeCopy.measuredTitle),
+            style: hankenText(size: 18, weight: FontWeight.w600),
+          ),
+          const SizedBox(height: 7),
+          Text(
+            uiText(context, V1HomeCopy.measuredBody),
+            style: hankenText(size: 12.5, height: 1.5),
+          ),
+          TextButton.icon(
+            key: const Key('guitar-measured-practice-entry'),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => V1PracticeListScreen(
+                  startNext: true,
+                  // F5.2: a measured run counts toward the weekly goal
+                  // (≥60 s listening, ≥1 heard note). A failed write must
+                  // not interrupt the result screen.
+                  onSessionFinished: (e) =>
+                      WeeklyGoalStore(accountUserId: accountId)
+                          .recordPracticeSession(
+                            MeasuredPracticeSession(
+                              course: PracticeCourse.guitar,
+                              activeDuration: e.activeDuration,
+                              heardEvents: e.heardEvents,
+                              lessonId: e.lessonId,
+                            ),
+                          )
+                          .then<void>((_) {}, onError: (_) {}),
+                ),
+              ),
+            ),
+            icon: const Icon(Icons.graphic_eq),
+            label: Text(uiText(context, V1HomeCopy.startNext)),
+          ),
+        ],
+      ),
+    );
+  }
 }

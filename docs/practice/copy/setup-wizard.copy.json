@@ -94,8 +94,16 @@
    "tr": "Şimdi bir boş tel çal."
   },
   {
-   "en": "I hear you ✓ · room {v0} dBFS",
-   "tr": "Seni duyuyorum ✓ · oda {v0} dBFS"
+   "en": "I hear you ✓ · the room is quiet",
+   "tr": "Seni duyuyorum ✓ · oda sessiz"
+  },
+  {
+   "en": "I hear you ✓ · the room is a little noisy",
+   "tr": "Seni duyuyorum ✓ · oda biraz gürültülü"
+  },
+  {
+   "en": "I hear you ✓ · the room is very noisy",
+   "tr": "Seni duyuyorum ✓ · oda çok gürültülü"
   },
   {
    "en": "I couldn’t hear the string. Move the phone closer and play a little stronger.",

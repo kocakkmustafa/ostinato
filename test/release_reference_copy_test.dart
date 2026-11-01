@@ -93,30 +93,21 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.byKey(const Key('onboarding-primary')));
         await tester.pumpAndSettle();
-        final demo = find.descendant(
-          of: find.byKey(const Key('onboarding-fact-demo')),
+        // v1 (2026-11-01): the scope step lists what the app has today;
+        // the legacy posture-preview counts are gone.
+        final written = find.descendant(
+          of: find.byKey(const Key('onboarding-fact-written')),
           matching: find.byType(Text),
         );
         final copy = tester
-            .widgetList<Text>(demo)
+            .widgetList<Text>(written)
             .map((w) => w.data ?? '')
             .join(' ');
         expect(
           copy,
-          contains(
-            language == 'tr'
-                ? 'kaydedilmiş eğitmen referanslarına'
-                : 'recorded teacher references',
-          ),
+          contains(language == 'tr' ? '60 derslik' : '60-lesson'),
         );
-        expect(
-          copy,
-          contains(
-            language == 'tr'
-                ? 'Bu sürüm duruşunuzu ölçmez veya puanlamaz'
-                : 'This release does not measure or grade your posture',
-          ),
-        );
+        expect(find.byKey(const Key('onboarding-fact-demo')), findsNothing);
         expect(copy, isNot(contains('are measured but never graded')));
         expect(copy, isNot(contains('ders ölçülür ama puanlanmaz')));
         expect(tester.takeException(), isNull);

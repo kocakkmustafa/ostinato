@@ -146,6 +146,7 @@ class _SetupWizardScreenState extends State<SetupWizardScreen> {
           c,
           preset: widget.preset,
           controller: debugFakeTunerController(widget.preset),
+          startOnOpen: true,
         );
     final check = await tune(context);
     if (!mounted) return;
@@ -405,12 +406,24 @@ class _SetupWizardScreenState extends State<SetupWizardScreen> {
         'Now play one open string.',
         'Şimdi bir boş tel çal.',
       ),
-      SetupAudioPhase.done when room != null && room.heard => localized(
-        context,
-        'I hear you ✓ · room {v0} dBFS',
-        'Seni duyuyorum ✓ · oda {v0} dBFS',
-        values: {'v0': room.floorDb.round()},
-      ),
+      SetupAudioPhase.done when room != null && room.heard =>
+        switch (roomNoiseFor(room.floorDb)) {
+          RoomNoise.quiet => localized(
+            context,
+            'I hear you ✓ · the room is quiet',
+            'Seni duyuyorum ✓ · oda sessiz',
+          ),
+          RoomNoise.some => localized(
+            context,
+            'I hear you ✓ · the room is a little noisy',
+            'Seni duyuyorum ✓ · oda biraz gürültülü',
+          ),
+          RoomNoise.loud => localized(
+            context,
+            'I hear you ✓ · the room is very noisy',
+            'Seni duyuyorum ✓ · oda çok gürültülü',
+          ),
+        },
       SetupAudioPhase.done when room != null => localized(
         context,
         'I couldn’t hear the string. Move the phone closer and play a little stronger.',

@@ -171,7 +171,7 @@ void main() {
       await tapIfPossible(t, find.byKey(const Key('onboarding-primary')));
     }
     note(t, '2 Library', 'LibraryScreen', arrival: 'root');
-    requireSubstance(t, 'Library', 'Written lessons. Posture references.');
+    requireSubstance(t, 'Library', 'Measured practice. Tuner. Weekly goal.');
 
     // Ayarlar
     if (await tapIfPossible(t, find.text('⚙'))) {

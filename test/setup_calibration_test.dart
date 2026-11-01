@@ -295,6 +295,19 @@ void main() {
       await audio.dispose();
     });
 
+    test('room floor is told in three learner words, never a number', () {
+      expect(roomNoiseFor(-70), RoomNoise.quiet);
+      expect(roomNoiseFor(-59), RoomNoise.quiet);
+      expect(roomNoiseFor(-50), RoomNoise.some);
+      expect(roomNoiseFor(-45), RoomNoise.some);
+      expect(roomNoiseFor(-40), RoomNoise.loud);
+      final wizard = File(
+        'lib/app/practice/setup/setup_wizard_screen.dart',
+      ).readAsStringSync();
+      expect(wizard, isNot(contains('dBFS')));
+      expect(wizard, isNot(contains('floorDb.round')));
+    });
+
     test('room: nothing played in 10 s → not heard (no score)', () async {
       final channel = FakeAudioCaptureChannel();
       final audio = audioOn(channel);

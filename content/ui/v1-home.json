@@ -1,0 +1,135 @@
+{
+  "$about": "v1 onboarding, home and guitar page copy (lib/app/screens/v1_home_copy.dart). Founder-approved EN+TR source pairs (2026-11-01); all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "welcomeTitle",
+      "en": "Learn guitar by playing.",
+      "tr": "Gitarı çalarak öğren."
+    },
+    {
+      "id": "welcomeBody",
+      "en": "Play along with a click and a scrolling tab; the app listens to each note and marks it correct, different note or couldn’t hear. The v1 programme has 690 lessons across guitar, voice, piano and ear training. Guitar is open in this release; the other courses follow.",
+      "tr": "Klik ve akan tabla çal; uygulama çaldığın her notayı dinler ve doğru, farklı nota ya da duyamadım diye işaretler. v1 programı 690 ders: gitar, ses, piyano ve kulak eğitimi. Bu sürümde gitar açık; diğer kurslar sırayla eklenecek."
+    },
+    {
+      "id": "welcomeNote",
+      "en": "To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato or Motion+ subscription.",
+      "tr": "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato veya Motion+ aboneliği gerektirir."
+    },
+    {
+      "id": "scopeTitle",
+      "en": "What’s inside",
+      "tr": "Neler var?"
+    },
+    {
+      "id": "scopePractice",
+      "en": "Measured practice — click, scrolling tab, feedback on every note.",
+      "tr": "Ölçülü pratik — klik, akan tab, nota başına geri bildirim."
+    },
+    {
+      "id": "scopeSetup",
+      "en": "Setup wizard — latency check, room noise, tuning.",
+      "tr": "Kurulum sihirbazı — gecikme ölçümü, oda sesi, akort."
+    },
+    {
+      "id": "scopeStreak",
+      "en": "Streak and weekly goal — every measured practice counts.",
+      "tr": "Seri ve haftalık hedef — her ölçülü pratik sayılır."
+    },
+    {
+      "id": "scopeWritten",
+      "en": "Written lessons — the earlier 60-lesson path to read and work through at your own pace.",
+      "tr": "Yazılı dersler — kendi hızında okuyup çalışabileceğin 60 derslik eski yol."
+    },
+    {
+      "id": "micTitle",
+      "en": "Microphone",
+      "tr": "Mikrofon"
+    },
+    {
+      "id": "micBody",
+      "en": "In measured practice the microphone listens to the notes you play. Audio is processed on this device and is not sent. What you play is not recorded; if you like, you can turn on listening back to your own recording — it stays on your device and is deleted at the end of the session. We ask for permission at your first measured lesson. Without it you can still read the lessons and use the self-checks.",
+      "tr": "Ölçülü pratikte mikrofon çaldığın notaları dinler. Ses bu cihazda işlenir; gönderilmez. Çaldığın kaydedilmez; istersen kendi kaydını dinleme seçeneğini açabilirsin, kayıt cihazında kalır ve oturum sonunda silinir. İzni ilk ölçülü derste isteriz. Vermezsen dersleri okuyup öz-kontrolle çalışabilirsin."
+    },
+    {
+      "id": "cameraTitle",
+      "en": "Camera",
+      "tr": "Kamera"
+    },
+    {
+      "id": "cameraBody",
+      "en": "The camera is used only in a few setup lessons, to look at hand and wrist posture. We ask for permission in that lesson. Video is processed on this device; it is not recorded or sent. All other lessons work without the camera.",
+      "tr": "Kamera yalnız birkaç kurulum dersinde, el ve bilek duruşuna bakmak için kullanılır. İzni o derste isteriz. Görüntü cihazda işlenir; kaydedilmez, gönderilmez. Diğer dersler kamerasız çalışır."
+    },
+    {
+      "id": "progressTitle",
+      "en": "Your progress",
+      "tr": "İlerlemen"
+    },
+    {
+      "id": "progressBody",
+      "en": "Your lesson results, streak and weekly goal are kept on this device. If you sign in to a Motion account and agree, they sync to your account so you can continue on another device.",
+      "tr": "Ders sonuçların, serin ve haftalık hedefin bu cihazda tutulur. Motion hesabına giriş yapıp onay verirsen hesabına eşitlenir ve başka cihazda devam edebilirsin."
+    },
+    {
+      "id": "homeSubtitle",
+      "en": "Measured practice. Tuner. Weekly goal.",
+      "tr": "Ölçülü pratik. Akort. Haftalık hedef."
+    },
+    {
+      "id": "homeIntro",
+      "en": "Play your next lesson with a click and a scrolling tab; we show what we heard on every note. Voice and piano courses open in turn.",
+      "tr": "Sıradaki dersini klik ve akan tabla çal; her notada ne duyduğumuzu gösteririz. Ses ve piyano kursları sırayla açılacak."
+    },
+    {
+      "id": "guitarCardOpen",
+      "en": "Measured practice open",
+      "tr": "Ölçülü pratik açık"
+    },
+    {
+      "id": "guitarCardNext",
+      "en": "Measured practice open · next lesson: {v0}",
+      "tr": "Ölçülü pratik açık · sıradaki ders: {v0}"
+    },
+    {
+      "id": "comingSoon",
+      "en": "Coming soon · This course opens in a later update.",
+      "tr": "Yakında · Bu kurs sonraki güncellemelerle açılacak."
+    },
+    {
+      "id": "measuredTitle",
+      "en": "Measured practice",
+      "tr": "Ölçülü pratik"
+    },
+    {
+      "id": "measuredBody",
+      "en": "Play with a click and a scrolling tab; every note is marked correct, different note or couldn’t hear. With 80% of notes correct, the next lesson opens.",
+      "tr": "Klik ve akan tabla çal; her nota doğru, farklı nota ya da duyamadım diye işaretlenir. Notaların %80’i doğruysa sıradaki ders açılır."
+    },
+    {
+      "id": "startNext",
+      "en": "Start next lesson",
+      "tr": "Sıradaki derse başla"
+    },
+    {
+      "id": "writtenLabel",
+      "en": "WRITTEN LESSONS · 60 LESSONS",
+      "tr": "YAZILI DERSLER · 60 DERS"
+    },
+    {
+      "id": "writtenBody",
+      "en": "A path from setup to two final performances that you read and work through at your own pace. In these lessons you mark completion yourself.",
+      "tr": "Kurulumdan iki bitirme performansına kadar okuyup kendi hızında çalışabileceğin yol. Bu derslerde tamamlamayı sen işaretlersin."
+    },
+    {
+      "id": "heroBody",
+      "en": "Settle the basic notes and rhythm with measured practice first; widen reading, chords, melody and fingerstyle with the written lessons.",
+      "tr": "Önce ölçülü pratikle temel notaları ve ritmi otur; yazılı derslerle okuma, akor, melodi ve parmak stilini genişlet."
+    },
+    {
+      "id": "noteToolBody",
+      "en": "Check the pitch of a single note with the microphone. It doesn’t count toward a lesson.",
+      "tr": "Mikrofonla tek bir notanın perdesine bak. Ders sonucu saymaz."
+    }
+  ]
+}

@@ -28,16 +28,7 @@ void main() {
         source.addAll(_pairs(f.readAsStringSync()));
       }
     }
-    source.addAll(
-      _pairs(
-        File('lib/app/screens/guitar_journey_screen.dart').readAsStringSync(),
-      ).where(
-        (p) =>
-            p.$1 == 'Measured practice' ||
-            p.$1 == 'Open measured practice' ||
-            p.$1.startsWith('Play a lesson with the click'),
-      ),
-    );
+    // The guitar page card moved to V1HomeCopy (content/ui/v1-home.json).
     final listed = {
       for (final p
           in (jsonDecode(

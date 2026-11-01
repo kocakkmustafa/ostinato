@@ -12,6 +12,8 @@ import 'course_screen.dart';
 import 'feedback_availability.dart';
 import 'guitar_journey_screen.dart';
 import 'piano_beginner_screen.dart';
+import 'v1_home_copy.dart';
+import '../ui_copy.dart';
 
 /// Çalgı sayfası — dürüstlük kutusu ürünün vitrini (§7). Tam genişlik,
 /// kurs listesinin ÜSTÜNDE, katlanabilir DEĞİL.
@@ -102,6 +104,10 @@ class InstrumentScreenRoute extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     FeedbackAvailability(instrumentId: discipline.id),
+                    if (discipline.id == 'guitar') ...<Widget>[
+                      const MeasuredPracticeCard(),
+                      const SizedBox(height: 14),
+                    ],
                     GlassCard(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,20 +295,12 @@ class InstrumentScreenRoute extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 7),
                                 Text(
-                                  localized(
-                                    context,
-                                    '10 MODULES · 60 LESSONS · SELF-GUIDED',
-                                    '10 MODÜL · 60 DERS · KENDİ ÇALIŞMAN',
-                                  ),
+                                  uiText(context, V1HomeCopy.writtenLabel),
                                   style: monoText(color: hue.ink),
                                 ),
                                 const SizedBox(height: 9),
                                 Text(
-                                  localized(
-                                    context,
-                                    'A complete original learning path with practice and two final performances. Progress is your own report; automatic note scoring is off.',
-                                    'Çalışmalar ve iki bitirme performansıyla tam özgün öğrenme yolu. İlerleme kendi beyanındır; otomatik nota puanı kapalıdır.',
-                                  ),
+                                  uiText(context, V1HomeCopy.writtenBody),
                                   style: hankenText(
                                     size: 13.5,
                                     color: OstinatoPalette.of(context).textBody,

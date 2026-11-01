@@ -27,7 +27,12 @@ class V1PracticeListScreen extends StatefulWidget {
     this.onSessionFinished,
     this.setupStore,
     this.openSetup,
+    this.startNext = false,
   });
+
+  /// Opens the first open lesson not yet passed as soon as the list loads
+  /// ("Start next lesson"); the list stays underneath for the way back.
+  final bool startNext;
 
   /// F4.2 setup results; defaults to the device store.
   final SetupProfileStore? setupStore;
@@ -89,6 +94,31 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
           widget.progressFactory?.call(id) ??
           V1PracticeProgressStore(accountUserId: id);
       _records = _progress!.load();
+      if (widget.startNext && !_startedNext) {
+        _startedNext = true;
+        unawaited(_openNext());
+      }
+    }
+  }
+
+  bool _startedNext = false;
+
+  Future<void> _openNext() async {
+    final V1PracticeCatalog catalog;
+    final Map<String, V1PracticeRecord> records;
+    try {
+      catalog = await _catalog;
+      records = await _records!;
+    } on Object {
+      return; // The list shows the error and a retry.
+    }
+    if (!mounted) return;
+    final open = unlockedLessons(catalog.orderedIds, records);
+    for (final l in catalog.lessons) {
+      if (open.contains(l.id) && !(records[l.id]?.passed ?? false)) {
+        await _open(catalog, l);
+        return;
+      }
     }
   }
 

@@ -21,14 +21,23 @@ import 'tunings.dart';
 /// this entry point; it resolves to today's tuner result when the screen
 /// closes (null if nothing was measured). The screen never closes itself
 /// when strings are in tune (anti-pattern 9).
+///
+/// [startOnOpen]: the caller's own button already said "tune now" (the setup
+/// wizard), so the microphone starts with the screen instead of asking for a
+/// second tap. The OS permission prompt still appears on first use.
 Future<TunerCheck?> openTuner(
   BuildContext context, {
   TuningPreset preset = TuningPresets.guitarStandard,
   TunerController? controller,
+  bool startOnOpen = false,
 }) async {
   await Navigator.of(context).push<void>(
     MaterialPageRoute<void>(
-      builder: (_) => TunerScreen(initialPreset: preset, controller: controller),
+      builder: (_) => TunerScreen(
+        initialPreset: preset,
+        controller: controller,
+        startOnOpen: startOnOpen,
+      ),
     ),
   );
   return TunerCheckMemory.instance.today;
@@ -39,10 +48,12 @@ class TunerScreen extends StatefulWidget {
     super.key,
     this.initialPreset = TuningPresets.guitarStandard,
     this.controller,
+    this.startOnOpen = false,
   });
 
   final TuningPreset initialPreset;
   final TunerController? controller;
+  final bool startOnOpen;
 
   @override
   State<TunerScreen> createState() => _TunerScreenState();
@@ -61,6 +72,16 @@ class _TunerScreenState extends State<TunerScreen> {
       _controller.setPreset(widget.initialPreset);
     }
     _controller.addListener(_changed);
+    if (widget.startOnOpen) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || _controller.isActive || !_controller.canStart) return;
+        unawaited(
+          _controller.start(
+            captureAction: PracticeAudioCaptureScope.actionFor(context),
+          ),
+        );
+      });
+    }
   }
 
   void _changed() {

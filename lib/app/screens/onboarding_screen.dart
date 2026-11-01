@@ -6,6 +6,8 @@ import '../content.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../onboarding_store.dart';
+import '../ui_copy.dart';
+import 'v1_home_copy.dart';
 
 /// İlk açılış — UI-BRIEF §2.1'den TÜRETİLDİ (icat edilmedi).
 ///
@@ -87,7 +89,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _LibraryFacts facts = _LibraryFacts.from(widget.repo);
     return Scaffold(
       backgroundColor: OstinatoPalette.of(context).shell,
       body: DecoratedBox(
@@ -112,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onPageChanged: (int i) => setState(() => _index = i),
                   children: <Widget>[
                     const _WelcomeStep(),
-                    _ScopeStep(facts: facts),
+                    const _ScopeStep(),
                     const _SensorsStep(),
                   ],
                 ),
@@ -131,39 +132,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-/// Kütüphaneden OKUNAN sayılar — bu ekranda elle yazılmış TEK bir içerik
-/// sayısı yoktur. Bir ders eklendiğinde/kilitlendiğinde karşılama ekranı
-/// kendiliğinden doğru kalır; elle yazsaydık ilk içerik turunda bayatlardı
-/// (O-029'un "vitrin korumasızdı" sınıfı).
-final class _LibraryFacts {
-  const _LibraryFacts({
-    required this.instruments,
-    required this.lessons,
-    required this.locked,
-    required this.demoOnly,
-  });
-
-  final int instruments;
-  final int lessons;
-  final int locked;
-  final int demoOnly;
-
-  static _LibraryFacts from(ContentRepository repo) {
-    final List<Discipline> live = repo.disciplines
-        .where((Discipline d) => d.status == 'live')
-        .toList();
-    final List<Lesson> all = <Lesson>[
-      for (final Discipline d in live) ...d.lessons,
-    ];
-    return _LibraryFacts(
-      instruments: live.length,
-      lessons: all.length,
-      locked: all.where((Lesson l) => l.kind == LessonKind.locked).length,
-      demoOnly: all.where((Lesson l) => l.kind == LessonKind.demoOnly).length,
     );
   }
 }
@@ -275,25 +243,13 @@ class _WelcomeStep extends StatelessWidget {
       kicker(localized(context, 'Welcome', 'Hoş geldin')),
       const SizedBox(height: 10),
       Text(
-        localized(
-          context,
-          'Build your guitar practice.',
-          'Gitar çalışmanı geliştir.',
-        ),
+        uiText(context, V1HomeCopy.welcomeTitle),
         key: const Key('onboarding-welcome-title'),
         style: hankenText(size: 30, weight: FontWeight.w600, height: 1.1),
       ),
       const SizedBox(height: 12),
       Text(
-        localized(
-          context,
-          'Learn guitar through progressive lessons, practice tasks and '
-              'self-checks. Free lessons work without an account, camera or '
-              'microphone. Your practice record stays on this device.',
-          'Gitarı sıralı dersler, çalışma görevleri ve öz denetimlerle öğrenin. '
-              'Ücretsiz dersler hesap, kamera veya mikrofon olmadan çalışır. Çalışma '
-              'kaydınız bu cihazda kalır.',
-        ),
+        uiText(context, V1HomeCopy.welcomeBody),
         style: hankenText(
           size: 15,
           height: 1.55,
@@ -305,18 +261,7 @@ class _WelcomeStep extends StatelessWidget {
         borderRadius: 18,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Text(
-          localized(
-            context,
-            'Optional microphone practice shows approximate single-note '
-                'observations after your permission. It does not grade your '
-                'playing. Live camera practice is closed in this release. The '
-                'first lessons of each course are free; later lessons need an '
-                'Ostinato or Motion+ subscription.',
-            'İsteğe bağlı mikrofon pratiği, izninizden sonra yaklaşık tek nota '
-                'gözlemi gösterir. Çalma başarınızı puanlamaz. Bu sürümde canlı '
-                'kamera pratiği kapalıdır. Her kursun ilk dersleri ücretsizdir; '
-                'sonraki dersler Ostinato veya Motion+ aboneliği gerektirir.',
-          ),
+          uiText(context, V1HomeCopy.welcomeNote),
           style: hankenText(
             size: 13.5,
             height: 1.55,
@@ -329,8 +274,7 @@ class _WelcomeStep extends StatelessWidget {
 }
 
 class _ScopeStep extends StatelessWidget {
-  const _ScopeStep({required this.facts});
-  final _LibraryFacts facts;
+  const _ScopeStep();
 
   @override
   Widget build(BuildContext context) => _Step(
@@ -338,80 +282,30 @@ class _ScopeStep extends StatelessWidget {
       kicker(localized(context, 'What is here', 'İçerik')),
       const SizedBox(height: 10),
       Text(
-        localized(
-          context,
-          'Small, and honest about it.',
-          'Kapsamı sınırlı, açıklaması açık.',
-        ),
+        uiText(context, V1HomeCopy.scopeTitle),
         key: const Key('onboarding-scope-title'),
         style: hankenText(size: 28, weight: FontWeight.w600, height: 1.12),
       ),
       const SizedBox(height: 14),
       _FactRow(
-        key: const Key('onboarding-fact-instruments'),
-        value: '${facts.instruments}',
-        label: localized(
-          context,
-          'instrument previews in the posture catalogue; live camera practice is closed',
-          'çalgı ön izlemesi duruş kataloğunda; canlı kamera pratiği kapalıdır',
-        ),
+        key: const Key('onboarding-fact-practice'),
+        value: '♩',
+        label: uiText(context, V1HomeCopy.scopePractice),
       ),
       _FactRow(
-        key: const Key('onboarding-fact-lessons'),
-        value: '${facts.lessons}',
-        label: localized(
-          context,
-          'legacy posture lesson previews',
-          'önceki duruş dersi ön izlemeleri',
-        ),
+        key: const Key('onboarding-fact-setup'),
+        value: '◎',
+        label: uiText(context, V1HomeCopy.scopeSetup),
       ),
       _FactRow(
-        key: const Key('onboarding-fact-locked'),
-        value: '${facts.locked}',
-        label: localized(
-          context,
-          'are locked legacy posture previews. Their pages explain the missing '
-              'reference or measurement evidence; live camera measurement and '
-              'posture grading are unavailable in this release.',
-          'kilitli eski duruş ön izlemesidir. Sayfaları eksik referans veya '
-              'ölçüm kanıtını açıklar; bu sürümde canlı kamera ölçümü ve '
-              'duruş puanlaması yoktur.',
-        ),
+        key: const Key('onboarding-fact-streak'),
+        value: '↻',
+        label: uiText(context, V1HomeCopy.scopeStreak),
       ),
       _FactRow(
-        key: const Key('onboarding-fact-demo'),
-        value: '${facts.demoOnly}',
-        label: localized(
-          context,
-          'are legacy demonstration-only posture previews based on recorded '
-              'teacher references. This release does not measure or grade '
-              'your posture.',
-          'ders, kaydedilmiş eğitmen referanslarına dayanan eski gösterim '
-              'ön izlemesidir. Bu sürüm duruşunuzu ölçmez veya puanlamaz.',
-        ),
-      ),
-      const SizedBox(height: 8),
-      GlassCard(
-        borderRadius: 18,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        child: Text(
-          localized(
-            context,
-            'Instrument pages describe recorded references and the measurement '
-                "engine's limits. These historical findings are not measurements "
-                'of your practice; live camera assessment and posture scoring '
-                'are unavailable in this release.',
-            'Çalgı sayfaları kaydedilmiş referansları ve ölçüm motorunun '
-                'sınırlarını açıklar. Bu tarihsel bulgular sizin pratiğinizin '
-                'ölçümü değildir; bu sürümde canlı kamera değerlendirmesi ve '
-                'duruş puanlaması kapalıdır.',
-          ),
-          style: hankenText(
-            size: 13.5,
-            height: 1.55,
-            color: OstinatoPalette.of(context).textBody,
-          ),
-        ),
+        key: const Key('onboarding-fact-written'),
+        value: '¶',
+        label: uiText(context, V1HomeCopy.scopeWritten),
       ),
     ],
   );
@@ -474,23 +368,17 @@ class _SensorsStep extends StatelessWidget {
       ),
       const SizedBox(height: 14),
       _SensorCard(
-        title: localized(context, 'The camera', 'Kamera'),
+        title: uiText(context, V1HomeCopy.micTitle),
+        key: const Key('onboarding-microphone-card'),
+        body: uiText(context, V1HomeCopy.micBody),
+      ),
+      const SizedBox(height: 12),
+      _SensorCard(
+        title: uiText(context, V1HomeCopy.cameraTitle),
         key: const Key('onboarding-camera-card'),
-        // DÜZELTME (O-099, koordinatör hükmü 2026-08-12): cümle "nine
-        // upper-body points — hips, shoulders, neck" diyordu. Ölçüldü:
-        // canlı zincir `specs:[trunkTilt]` = TEK açı, güven kapısı
-        // `required:LmRegion.torso` = DÖRT landmark, ve "neck" HİÇ
-        // okunmuyor. "Dokuz" figürün düğüm sayısıydı — sayı gerçek,
-        // BİRİMİ yanlış. Kural: her sayı saydığı şeyin yanında durur.
-        body: localized(
-          context,
-          'Live camera posture practice is closed in this release. The guitar '
-              'course does not ask for camera access and uses your own practice '
-              'record rather than an automatic posture grade.',
-          'Bu sürümde canlı kamera duruş pratiği kapalıdır. Gitar kursu kamera '
-              'izni istemez; otomatik duruş puanı yerine kendi çalışma '
-              'kaydınızı kullanır.',
-        ),
+        // K8 (kurucu, 2026-11-01): kamera yalnız birkaç S1 kurulum dersinde
+        // el/bilek duruşu için; izin o derste istenir, görüntü cihazda kalır.
+        body: uiText(context, V1HomeCopy.cameraBody),
       ),
       const SizedBox(height: 12),
       // Sıra DEĞİŞTİ (2026-08-07, ekran kanıtı O-046): bu kart en sondaydı
@@ -514,40 +402,9 @@ class _SensorsStep extends StatelessWidget {
       ),
       const SizedBox(height: 12),
       _SensorCard(
-        title: localized(
-          context,
-          'Optional single-note microphone',
-          'İsteğe bağlı tek nota mikrofonu',
-        ),
-        key: const Key('onboarding-microphone-card'),
-        body: localized(
-          context,
-          'The guitar learning path offers approximate single-note observation. '
-              'You choose when to start and grant microphone permission. Audio stays on this device '
-              'in temporary memory and is never recorded or uploaded. The course works without it; '
-              'no chord or playing-success score is produced.',
-          'Gitar öğrenme yolunda yaklaşık tek nota gözlemi vardır. Başlatmayı ve mikrofon '
-              'iznini siz seçersiniz. Ses bu cihazda geçici bellekte kalır; kaydedilmez veya yüklenmez. '
-              'Kurs mikrofonsuz çalışır; akor veya çalma başarısı puanı üretilmez.',
-        ),
-      ),
-      const SizedBox(height: 12),
-      _SensorCard(
-        title: localized(context, 'Your video', 'Videonuz'),
-        key: const Key('onboarding-video-card'),
-        // D14 (2026-08-16, O-153): "nothing is stored" DÜZELTİLDİ —
-        // oturum SONUCU artık saklanıyor. Video/ham ölçüm hâlâ
-        // saklanmıyor (bu iddia DOĞRU kaldı, o yüzden korundu);
-        // yalnız yeni gerçeği anlatan ikinci cümle YENİDEN yazıldı.
-        body: localized(
-          context,
-          'The course does not capture video. Lesson progress and self-checks '
-              'stay in local app storage. Existing posture-session summaries '
-              'also stay on this device; they are not uploaded to your account.',
-          'Kurs video yakalamaz. Ders ilerlemesi ve öz denetimler yerel uygulama '
-              'alanında kalır. Önceki duruş seansı özetleri de bu cihazda kalır; '
-              'hesabınıza yüklenmez.',
-        ),
+        title: uiText(context, V1HomeCopy.progressTitle),
+        key: const Key('onboarding-progress-card'),
+        body: uiText(context, V1HomeCopy.progressBody),
       ),
     ],
   );
