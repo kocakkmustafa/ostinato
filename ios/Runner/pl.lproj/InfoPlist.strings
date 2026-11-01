@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "Ćwiczenia z kamerą są wyłączone w tej wersji. Dostęp do kamery jest zarezerwowany dla obserwacji postawy na urządzeniu; wideo nie jest zapisywane ani przesyłane.";
-"NSMicrophoneUsageDescription" = "Dostęp do mikrofonu pozwala obserwować jedną nutę gitary podczas opcjonalnego ćwiczenia. Dźwięk jest przetwarzany w pamięci tymczasowej tego urządzenia i nie jest zapisywany ani przesyłany.";
+"NSCameraUsageDescription" = "Dostęp do aparatu służy do sprawdzania ułożenia dłoni i nadgarstka w lekcjach, które o to proszą. Obraz jest przetwarzany tylko na tym urządzeniu; nie jest zapisywany ani wysyłany.";
+"NSMicrophoneUsageDescription" = "Dostęp do mikrofonu służy do słuchania nut, które grasz podczas ćwiczeń i strojenia. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. Jeśli włączysz odsłuch własnego nagrania, zostaje ono tylko na tym urządzeniu i jest usuwane po zakończeniu sesji.";
