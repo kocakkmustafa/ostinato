@@ -1,0 +1,350 @@
+{
+  "$about": "F4.1 tuner screen and session tuning gate copy (lib/app/tuner/tuner_copy.dart). EN+TR reviewed source pairs; ids via tool/build_message_ids.py --pending content/ui. The other 12 locales are pending translation, so the ids are not yet in lib/app/app_message_ids.dart.",
+  "messages": [
+    {
+      "id": "title",
+      "en": "Tuner",
+      "tr": "Akort"
+    },
+    {
+      "id": "back",
+      "en": "Back",
+      "tr": "Geri"
+    },
+    {
+      "id": "guitar",
+      "en": "Guitar",
+      "tr": "Gitar"
+    },
+    {
+      "id": "bass",
+      "en": "Bass",
+      "tr": "Bas"
+    },
+    {
+      "id": "ukulele",
+      "en": "Ukulele",
+      "tr": "Ukulele"
+    },
+    {
+      "id": "presetStandard",
+      "en": "Standard",
+      "tr": "Standart"
+    },
+    {
+      "id": "presetDropD",
+      "en": "Drop D",
+      "tr": "Drop D"
+    },
+    {
+      "id": "presetHalfStepDown",
+      "en": "Half step down",
+      "tr": "Yarım ses aşağı"
+    },
+    {
+      "id": "presetDadgad",
+      "en": "DADGAD",
+      "tr": "DADGAD"
+    },
+    {
+      "id": "presetOpenG",
+      "en": "Open G",
+      "tr": "Open G"
+    },
+    {
+      "id": "presetBass4",
+      "en": "4-string",
+      "tr": "4 telli"
+    },
+    {
+      "id": "presetBass5",
+      "en": "5-string",
+      "tr": "5 telli"
+    },
+    {
+      "id": "presetUkuleleHighG",
+      "en": "Standard (high G)",
+      "tr": "Standart (yüksek Sol)"
+    },
+    {
+      "id": "presetUkuleleLowG",
+      "en": "Low G",
+      "tr": "Alçak Sol"
+    },
+    {
+      "id": "modeAuto",
+      "en": "Auto",
+      "tr": "Otomatik"
+    },
+    {
+      "id": "modeManual",
+      "en": "Manual",
+      "tr": "Elle"
+    },
+    {
+      "id": "modeChromatic",
+      "en": "Chromatic",
+      "tr": "Kromatik"
+    },
+    {
+      "id": "modeAutoHint",
+      "en": "Play any open string; the tuner guesses which one.",
+      "tr": "Herhangi bir açık teli çal; akort hangisi olduğunu tahmin eder."
+    },
+    {
+      "id": "modeManualHint",
+      "en": "Tap the string you will tune, then play only that string.",
+      "tr": "Akort edeceğin tele dokun, sonra yalnız o teli çal."
+    },
+    {
+      "id": "modeChromaticHint",
+      "en": "Shows the nearest note of any sound, without a string target.",
+      "tr": "Tel hedefi olmadan, her sesin en yakın notasını gösterir."
+    },
+    {
+      "id": "stringLabel",
+      "en": "String {v0} · {v1}",
+      "tr": "{v0}. tel · {v1}"
+    },
+    {
+      "id": "stringInTune",
+      "en": "in tune",
+      "tr": "akortlu"
+    },
+    {
+      "id": "stringWaiting",
+      "en": "waiting",
+      "tr": "bekliyor"
+    },
+    {
+      "id": "stringLow",
+      "en": "below",
+      "tr": "altında"
+    },
+    {
+      "id": "stringHigh",
+      "en": "above",
+      "tr": "üstünde"
+    },
+    {
+      "id": "centsUnit",
+      "en": "cents",
+      "tr": "cent"
+    },
+    {
+      "id": "band",
+      "en": "In-tune band: ±{v0} cents (A4 = {v1} Hz)",
+      "tr": "Akortlu bandı: ±{v0} cent (La4 = {v1} Hz)"
+    },
+    {
+      "id": "target",
+      "en": "Target {v0}",
+      "tr": "Hedef {v0}"
+    },
+    {
+      "id": "nearest",
+      "en": "Nearest note {v0}",
+      "tr": "En yakın nota {v0}"
+    },
+    {
+      "id": "listening",
+      "en": "Listening. Pluck one string once and let it ring.",
+      "tr": "Dinliyorum. Tek bir teli bir kez çal ve tınlamasını bekle."
+    },
+    {
+      "id": "inTune",
+      "en": "In tune",
+      "tr": "Akortlu"
+    },
+    {
+      "id": "tighten",
+      "en": "Tighten slowly",
+      "tr": "Yavaşça sık"
+    },
+    {
+      "id": "loosen",
+      "en": "Loosen",
+      "tr": "Gevşet"
+    },
+    {
+      "id": "above",
+      "en": "Above the note",
+      "tr": "Notanın üstünde"
+    },
+    {
+      "id": "below",
+      "en": "Below the note",
+      "tr": "Notanın altında"
+    },
+    {
+      "id": "tooHigh",
+      "en": "Too high — loosen",
+      "tr": "Çok yüksek — gevşet"
+    },
+    {
+      "id": "tooHighHint",
+      "en": "More than a semitone above the target. Loosen first; never tighten from here.",
+      "tr": "Hedefin bir yarım sesten fazla üstünde. Önce gevşet; buradan asla sıkma."
+    },
+    {
+      "id": "chooseString",
+      "en": "Which string are you playing?",
+      "tr": "Hangi teli çalıyorsun?"
+    },
+    {
+      "id": "chooseStringHint",
+      "en": "The sound is more than 4 semitones from every string, so no string is locked. Tap the string you are playing.",
+      "tr": "Ses her telden 4 yarım sesten fazla uzak; bu yüzden tel kilitlenmedi. Çaldığın tele dokun."
+    },
+    {
+      "id": "farFromSelected",
+      "en": "The sound is more than 4 semitones from the selected string. Check that you are playing that string.",
+      "tr": "Ses seçili telden 4 yarım sesten fazla uzak. O teli çaldığından emin ol."
+    },
+    {
+      "id": "octaveUnclear",
+      "en": "Could not measure — play the string once more, softly.",
+      "tr": "Ölçemedim — teli bir kez daha, yumuşak çal."
+    },
+    {
+      "id": "octaveUnclearHint",
+      "en": "The octave was unclear, so no direction is shown.",
+      "tr": "Oktav belirsizdi; bu yüzden yön gösterilmiyor."
+    },
+    {
+      "id": "playAgain",
+      "en": "Play again",
+      "tr": "Tekrar çal"
+    },
+    {
+      "id": "playAgainHint",
+      "en": "The reading was not steady enough to show a number. Pluck once and let the string ring.",
+      "tr": "Okuma sayı gösterecek kadar kararlı değildi. Bir kez çal ve telin tınlamasını bekle."
+    },
+    {
+      "id": "couldNotMeasure",
+      "en": "Could not measure",
+      "tr": "Ölçemedim"
+    },
+    {
+      "id": "tooQuiet",
+      "en": "Too quiet: move the phone closer to the instrument.",
+      "tr": "Çok sessiz: telefonu çalgıya yaklaştır."
+    },
+    {
+      "id": "unclear",
+      "en": "Too noisy or two strings at once: damp the other strings and play one.",
+      "tr": "Çok gürültülü ya da iki tel birden: diğer telleri sustur ve tek tel çal."
+    },
+    {
+      "id": "allInTune",
+      "en": "All strings are in tune. You can stay here or go back.",
+      "tr": "Bütün teller akortlu. Burada kalabilir ya da geri dönebilirsin."
+    },
+    {
+      "id": "progressCount",
+      "en": "In tune: {v0} of {v1} strings",
+      "tr": "Akortlu: {v1} telden {v0}"
+    },
+    {
+      "id": "trace",
+      "en": "Pitch trace · last 3 s",
+      "tr": "Perde izi · son 3 sn"
+    },
+    {
+      "id": "start",
+      "en": "Start with permission",
+      "tr": "İzinle başlat"
+    },
+    {
+      "id": "stop",
+      "en": "Stop microphone",
+      "tr": "Mikrofonu durdur"
+    },
+    {
+      "id": "openSettings",
+      "en": "Open Settings",
+      "tr": "Ayarları aç"
+    },
+    {
+      "id": "phaseIdle",
+      "en": "The tuner is stopped. Start it when you are ready to play.",
+      "tr": "Akort durdu. Çalmaya hazır olduğunda başlat."
+    },
+    {
+      "id": "phaseStarting",
+      "en": "Waiting for microphone permission and input…",
+      "tr": "Mikrofon izni ve giriş bekleniyor…"
+    },
+    {
+      "id": "phaseCalibrating",
+      "en": "Keep the strings silent for a moment while the room level is measured.",
+      "tr": "Oda seviyesi ölçülürken telleri bir an sessiz tut."
+    },
+    {
+      "id": "phaseDenied",
+      "en": "Microphone permission was declined. Lessons work without it; retry only if you choose.",
+      "tr": "Mikrofon izni verilmedi. Dersler mikrofonsuz çalışır; istersen yeniden deneyebilirsin."
+    },
+    {
+      "id": "phaseDeniedPermanent",
+      "en": "Microphone access is disabled in Settings.",
+      "tr": "Mikrofon erişimi Ayarlar’da kapalı."
+    },
+    {
+      "id": "phaseUnsupported",
+      "en": "The tuner supports the built-in microphone only. Change the input, then start again.",
+      "tr": "Akort yalnız dahili mikrofonu destekler. Girişi değiştir, sonra yeniden başlat."
+    },
+    {
+      "id": "phaseUnavailable",
+      "en": "The microphone stopped or could not open. Retry when the control enables.",
+      "tr": "Mikrofon durdu veya açılamadı. Düğme kullanılabilir olduğunda yeniden dene."
+    },
+    {
+      "id": "privacy",
+      "en": "Audio stays in temporary memory on this device. It is never recorded or uploaded. Leaving this screen stops the microphone.",
+      "tr": "Ses bu cihazda geçici bellekte kalır; kaydedilmez veya yüklenmez. Ekrandan çıkınca mikrofon durur."
+    },
+    {
+      "id": "accuracy",
+      "en": "Accuracy has been checked on simulated phone audio only, not on real phones yet. A new string stretches: check it again after a few minutes.",
+      "tr": "Doğruluk yalnız benzetilmiş telefon sesinde denendi, henüz gerçek telefonlarda değil. Yeni tel esner: birkaç dakika sonra yeniden kontrol et."
+    },
+    {
+      "id": "gateKicker",
+      "en": "TUNING",
+      "tr": "AKORT"
+    },
+    {
+      "id": "gateUnchecked",
+      "en": "Tune before you start? A tuned instrument makes note feedback clearer.",
+      "tr": "Başlamadan akort edelim mi? Akortlu çalgıda nota geri bildirimi daha net olur."
+    },
+    {
+      "id": "gateUntuned",
+      "en": "Strings not yet in tune: {v0} of {v1}.",
+      "tr": "Henüz akortlu olmayan tel: {v1} telden {v0}."
+    },
+    {
+      "id": "gateTuned",
+      "en": "Tuned today: all strings were in tune.",
+      "tr": "Bugün akort edildi: bütün teller akortluydu."
+    },
+    {
+      "id": "gateTune",
+      "en": "Tune",
+      "tr": "Akort et"
+    },
+    {
+      "id": "gateContinue",
+      "en": "Continue anyway",
+      "tr": "Yine de devam et"
+    },
+    {
+      "id": "gateContinued",
+      "en": "Continuing without tuning. Note feedback may be less clear.",
+      "tr": "Akort etmeden devam ediliyor. Nota geri bildirimi daha az net olabilir."
+    }
+  ]
+}
