@@ -1,0 +1,95 @@
+{
+  "id": "gtr-s3-m14-04",
+  "title": { "en": "I, IV and V in a key", "tr": "Tonda I, IV ve V" },
+  "goal": {
+    "en": "Finds chords I, IV and V in G, C, D and A and plays I–IV–V–I in each key at ♩=70.",
+    "tr": "Sol, Do, Re ve La tonlarında I, IV ve V akorlarını bulur; her tonda I–IV–V–I'yi ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Write the key's scale and number its notes 1 to 7. Chords I, IV and V are the major triads built on notes 1, 4 and 5.",
+      "tr": "Tonun dizisini yaz ve notalarını 1'den 7'ye numaralandır. I, IV ve V akorları 1., 4. ve 5. notaların üstüne kurulan majör üçlülerdir."
+    },
+    {
+      "en": "G major: G A B C D E F♯. So I = G, IV = C, V = D.",
+      "tr": "Sol majör: Sol La Si Do Re Mi Fa♯. Yani I = G, IV = C, V = D."
+    },
+    {
+      "en": "The same counting gives C: C F G, D: D G A and A: A D E. The numbers stay; the letters change with the key.",
+      "tr": "Aynı sayım Do'da C F G, Re'de D G A, La'da A D E verir. Sayılar aynı kalır; harfler tonla değişir."
+    },
+    {
+      "en": "In C, play F on four strings: x-x-3-2-1-1, as in the partial barre lesson.",
+      "tr": "Do tonunda F'yi dört telde çal: x-x-3-2-1-1, kısmi barre dersindeki gibi."
+    },
+    {
+      "en": "Chord I feels like home. Chord V pulls back to it; listen for that pull at the end of each key.",
+      "tr": "I. akor ev gibi hissettirir. V. akor ona geri çeker; her tonun sonunda bu çekimi dinle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "I–IV–V–I in G, C, D and A, four downstrokes per bar, at ♩=70 and ♩=45; the key name is shown before each group.",
+      "tr": "Sol, Do, Re ve La'da I–IV–V–I, ölçü başına dört aşağı vuruş, ♩=70 ve ♩=45; her grubun önünde ton adı gösterilir."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Part 1: answer 8 questions matching a Roman numeral in a key to its chord, for example IV in D. Part 2: play I–IV–V–I in G, C, D and A with the click at ♩=70, four downstrokes per bar.",
+      "tr": "1. bölüm: bir tondaki Romen sayısını akoruyla eşleştiren 8 soruyu cevapla; örneğin Re'de IV. 2. bölüm: Sol, Do, Re ve La'da I–IV–V–I'yi klikle ♩=70'te çal; ölçü başına dört aşağı vuruş."
+    },
+    "sequence": "4/4: G | C | D | G | C | F | G | C | D | G | A | D | A | D | E | A",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 8,
+      "params": {
+        "set": "roman_numeral_chords",
+        "keys": ["G", "C", "D", "A"],
+        "degrees": ["I", "IV", "V"]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can name I, IV and V in G, C, D and A without looking.", "tr": "Sol, Do, Re ve La'da I, IV ve V'yi bakmadan söyleyebiliyorum." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: chord from another key.", "tr": "Farklı cevap: başka tondan akor." },
+      "fix": {
+        "en": "Numerals are not fixed letters. Write the key's scale first, then count to notes 1, 4 and 5.",
+        "tr": "Romen sayıları sabit harfler değildir. Önce tonun dizisini yaz, sonra 1., 4. ve 5. notaya kadar say."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The change into a new key is the slow one. Name the next key's three chords during the last bar of the old one.",
+        "tr": "Yeni tona geçiş en yavaş olanıdır. Eski tonun son ölçüsünde yeni tonun üç akorunu içinden söyle."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "D and F start on string 4. Aim the strum at string 4 and keep the stroke short.",
+        "tr": "D ve F 4. telden başlar. Vuruşu 4. tele hizala ve kısa tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play one key at a time, with two strums per bar on beats 1 and 3, and use Fmaj7 in place of F.",
+    "tr": "Her seferinde tek bir ton çal, ölçü başına 1. ve 3. vuruşta iki vuruş yap ve F yerine Fmaj7 kullan."
+  },
+  "legacy": "R: guitar.journey.harmony.key_chords",
+  "minutes": 14,
+  "expertPending": true
+}

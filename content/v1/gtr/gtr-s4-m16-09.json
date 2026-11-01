@@ -1,0 +1,84 @@
+{
+  "id": "gtr-s4-m16-09",
+  "title": { "en": "Staccato barre accents", "tr": "Kesik barre vurguları" },
+  "goal": {
+    "en": "Plays short barre chords on beats 2 and 4 at ♩=80 and stops each one fully before the next beat.",
+    "tr": "♩=80'de 2. ve 4. vuruşta kısa barre akorlar çalar ve her birini sonraki vuruştan önce tamamen susturur."
+  },
+  "explanation": [
+    {
+      "en": "Staccato means short. Each chord sounds for half a beat and then stops; the silence is part of the rhythm.",
+      "tr": "Staccato kısa demektir. Her akor yarım vuruş çalar, sonra durur; sessizlik ritmin parçasıdır."
+    },
+    {
+      "en": "A barre chord has no open strings. Ease the fretting-hand pressure and every string stops at once. Keep the fingers touching the strings.",
+      "tr": "Barre akorda açık tel yoktur. Sol elin baskısını gevşet, bütün teller birden durur. Parmaklar tellere değmeye devam etsin."
+    },
+    {
+      "en": "Use D (x-5-7-7-7-5) and C (x-3-5-5-5-3). Rest on beats 1 and 3, strike on 2 and 4, release on the 'and' after each.",
+      "tr": "D (x-5-7-7-7-5) ve C (x-3-5-5-5-3) kullan. 1. ve 3. vuruşta sus, 2 ve 4'te vur, her birinden sonraki 've'de bırak."
+    },
+    {
+      "en": "Count the rests aloud: '1, 2-and, 3, 4-and'. Strike on the numbers 2 and 4 and release on the 'and'.",
+      "tr": "Susları sesli say: '1, 2-ve, 3, 4-ve'. 2 ve 4 sayılarında vur, 've'de bırak."
+    },
+    {
+      "en": "Do not press hard. A light touch stops the sound.",
+      "tr": "Sert bastırma. Hafif bir dokunuş sesi durdurur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Short D and C chords on beats 2 and 4 with full stops, at ♩=80 and ♩=50, with click.",
+      "tr": "2. ve 4. vuruşta tam susturmalı kısa D ve C akorları, ♩=80 ve ♩=50, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "With the click at ♩=80, play two bars of D and two bars of C. Strike short chords on beats 2 and 4 and stop each one on the 'and' that follows.",
+      "tr": "Klik ♩=80'deyken iki ölçü D ve iki ölçü C çal. 2. ve 4. vuruşta kısa akor vur, her birini ardından gelen 've'de sustur."
+    },
+    "sequence": "4/4: D qr e er qr e er | D qr e er qr e er | C qr e er qr e er | C qr e er qr e er",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 timing, and after each chord the sound falls by at least 20 dB within 100 ms.",
+        "tr": "Seviye 4 zamanlama ölçütü; her akordan sonra ses 100 ms içinde en az 20 dB düşer."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "No string kept ringing into a rest.", "tr": "Hiçbir tel susun içine taşmadı." },
+    { "en": "I kept counting through the rests.", "tr": "Suslarda da saymayı sürdürdüm." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": {
+        "en": "The fretting hand keeps pressing. Ease the barre on the 'and' but leave the fingers on the strings.",
+        "tr": "Sol el basmaya devam ediyor. 've'de barre'ı gevşet ama parmakları tellerin üstünde bırak."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "You are rushing the rest on beat 1 or 3. Count it aloud and wait for the click on 2 and 4.",
+        "tr": "1. ya da 3. vuruştaki susu aceleye getiriyorsun. Onu sesli say ve 2 ile 4'teki kliği bekle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Stay on D only and strike on beat 2 alone, then add beat 4.",
+    "tr": "Yalnız D'de kal ve önce yalnız 2. vuruşta vur, sonra 4. vuruşu ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

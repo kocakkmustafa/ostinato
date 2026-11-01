@@ -1,0 +1,99 @@
+{
+  "id": "gtr-s3-m13-01",
+  "title": { "en": "Twelve-bar form", "tr": "On iki ölçülük biçim" },
+  "goal": {
+    "en": "Counts the 12-bar blues form aloud and plays it with A7, D7 and E7 at ♩=70.",
+    "tr": "12 ölçülük blues biçimini sesli sayar ve A7, D7 ve E7 ile ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "The 12-bar blues is three lines of four bars. Our version in A: A7 A7 A7 A7 / D7 D7 A7 A7 / E7 D7 A7 E7.",
+      "tr": "12 ölçülük blues, dörder ölçülük üç satırdır. La'daki sürümümüz: A7 A7 A7 A7 / D7 D7 A7 A7 / E7 D7 A7 E7."
+    },
+    {
+      "en": "The chords are I, IV and V of the key: A7 is I, D7 is IV, E7 is V. Bars 1, 5 and 9 start the three lines.",
+      "tr": "Akorlar tonun I, IV ve V'idir: A7 I, D7 IV, E7 V'tir. 1., 5. ve 9. ölçüler üç satırı başlatır."
+    },
+    {
+      "en": "Bar 12 is the turnaround: E7 leads back to A7 in bar 1, and the form starts again.",
+      "tr": "12. ölçü dönüş ölçüsüdür: E7 seni 1. ölçüdeki A7'ye geri götürür ve biçim yeniden başlar."
+    },
+    {
+      "en": "Play one chord per bar and count the four-bar lines aloud. The four A7 bars at the start are easy to cut short; number them 1 to 4.",
+      "tr": "Ölçü başına tek akor çal ve dört ölçülük satırları sesli say. Baştaki dört A7 ölçüsü kolayca kısalır; onları 1'den 4'e numarala."
+    },
+    {
+      "en": "A7 is x-0-2-0-2-0, D7 is x-x-0-2-1-2 and E7 is 0-2-0-1-0-0. Start A7 on string 5 and D7 on string 4.",
+      "tr": "A7 x-0-2-0-2-0, D7 x-x-0-2-1-2, E7 0-2-0-1-0-0'dır. A7'ye 5. telden, D7'ye 4. telden başla."
+    },
+    {
+      "en": "If you get lost, keep counting and come back in at bar 5 or bar 9.",
+      "tr": "Kaybolursan saymayı sürdür ve 5. ya da 9. ölçüde yeniden gir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 12 bars in A, four down strums per bar, with bar numbers on screen, over an original bass and drum loop at ♩=70 and ♩=50.",
+      "tr": "La'da 12 ölçü, ölçü başına dört aşağı vuruş, ekranda ölçü numaralarıyla; ♩=70 ve ♩=50'de özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "First answer 3 on-screen questions about the form: put the three lines in order, or name the chord in a given bar. Then play the 12 bars with the accompaniment, four down strums per bar, and count the bars aloud. Headphones help the microphone hear only your guitar.",
+      "tr": "Önce biçimle ilgili ekrandaki 3 soruyu yanıtla: üç satırı sıraya koy ya da verilen ölçünün akorunu söyle. Sonra 12 ölçüyü eşlikle çal; ölçü başına dört aşağı vuruş yap ve ölçüleri sesli say. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: A7 | A7 | A7 | A7 | D7 | D7 | A7 | A7 | E7 | D7 | A7 | E7",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true, "minCorrect": 3 },
+    "drill": {
+      "type": "ordering",
+      "count": 3,
+      "params": {
+        "form": "twelve_bar_blues",
+        "items": ["A7 A7 A7 A7", "D7 D7 A7 A7", "E7 D7 A7 E7"],
+        "askChordInBar": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I counted 12 bars, not 11 or 13.", "tr": "11 ya da 13 değil, 12 ölçü saydım." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord in bar 4.", "tr": "4. ölçüde farklı akor." },
+      "fix": {
+        "en": "You moved to D7 one bar early. Number the first four A7 bars aloud: one, two, three, four.",
+        "tr": "D7'ye bir ölçü erken geçtin. İlk dört A7 ölçüsünü sesli numarala: bir, iki, üç, dört."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "A7 and D7 do not use string 6. Start A7 on string 5 and D7 on string 4.",
+        "tr": "A7 ve D7 6. teli kullanmaz. A7'ye 5. telden, D7'ye 4. telden başla."
+      }
+    },
+    {
+      "error": { "en": "Different answer: bars 9 and 10 swapped.", "tr": "Farklı cevap: 9. ve 10. ölçü yer değiştirdi." },
+      "fix": {
+        "en": "The last line steps down: E7 (V), then D7 (IV), then A7 and E7.",
+        "tr": "Son satır aşağı iner: E7 (V), sonra D7 (IV), sonra A7 ve E7."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Strum once per bar on beat 1 and count the four beats aloud, then return to four strums.",
+    "tr": "Her ölçüde 1. vuruşta bir kez vur ve dört vuruşu sesli say; sonra dört vuruşa dön."
+  },
+  "legacy": "R: guitar.journey.harmony.blues_form",
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s4-m16-02",
+  "title": { "en": "A-shape minor", "tr": "A-şekli minör" },
+  "goal": {
+    "en": "Plays Bm and Cm as A-shape barre chords with every string clear and names the note that makes each one minor.",
+    "tr": "Bm ve Cm'yi A-şekli barre olarak her teli net çalar ve her birini minör yapan notayı adlandırır."
+  },
+  "explanation": [
+    {
+      "en": "The A-shape minor is open Am (x-0-2-2-1-0) moved up the neck, with the index finger as the nut.",
+      "tr": "A-şekli minör, açık Am'nin (x-0-2-2-1-0) sapta yukarı taşınmış hâlidir; işaret parmağı eşik olur."
+    },
+    {
+      "en": "Bm is x-2-4-4-3-2. Barre fret 2 with the index finger. Finger 2 goes on string 2, fret 3. Fingers 3 and 4 go on strings 4 and 3, fret 4.",
+      "tr": "Bm x-2-4-4-3-2'dir. İşaret parmağıyla 2. perdede barre yap. 2. parmak 2. telin 3. perdesine gider. 3. ve 4. parmak 4. ve 3. telin 4. perdesine gider."
+    },
+    {
+      "en": "Cm is the same shape one fret higher: x-3-5-5-4-3. The root on string 5 is C3.",
+      "tr": "Cm aynı şeklin bir perde yukarısıdır: x-3-5-5-4-3. 5. teldeki kök Do3'tür."
+    },
+    {
+      "en": "Compare B and Bm on string 2: D♯4 in B, D4 in Bm. Only this third changes; the other notes stay.",
+      "tr": "B ile Bm'yi 2. telde karşılaştır: B'de Re♯4, Bm'de Re4. Yalnız bu üçlü değişir; diğer notalar aynı kalır."
+    },
+    {
+      "en": "Keep string 6 silent with the index tip. If the hand hurts, stop and rest.",
+      "tr": "6. teli işaret parmağının ucuyla sessiz tut. Elin ağrırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "B then Bm, then Cm, each strummed and then plucked string by string, slowly.",
+      "tr": "Önce B sonra Bm, ardından Cm; her biri vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum Bm four times, then Cm four times, in your own time. Then pluck each chord string by string from string 5; the app checks each string.",
+      "tr": "Kendi hızında Bm'yi dört kez, sonra Cm'yi dört kez vur. Sonra her akoru 5. telden başlayarak tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "Bm | Bm | Bm | Bm | Cm | Cm | Cm | Cm",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "I can point to the string that changes between B and Bm.", "tr": "B ile Bm arasında değişen teli gösterebiliyorum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "The index finger lifts at its tip. Move it closer to the fret and let its edge, not the soft pad, hold string 1.",
+        "tr": "İşaret parmağının ucu kalkıyor. Parmağı perdeye yaklaştır; 1. teli yumuşak iç kısım değil kenar tutsun."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 4 is flat and leans on string 2. Press string 3 with the very tip and arch the finger.",
+        "tr": "4. parmak düz duruyor ve 2. tele yaslanıyor. 3. teli tam uçla bas ve parmağı kemerle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only strings 4 to 1 (x-x-4-4-3-2 for Bm) until the shape feels secure, then add the root on string 5.",
+    "tr": "Şekil oturana kadar yalnız 4.–1. telleri çal (Bm için x-x-4-4-3-2), sonra 5. teldeki kökü ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

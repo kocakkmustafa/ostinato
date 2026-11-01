@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m19b-04",
+  "title": { "en": "Slides", "tr": "Kaydırmalar" },
+  "goal": {
+    "en": "Plays four slide figures and lands each slide on its target note, moving between the 5th-fret and 7th-fret boxes.",
+    "tr": "Dört kaydırma figürünü çalar ve her kaydırmayı hedef notasına indirir; 5. ve 7. perde kutuları arasında geçer."
+  },
+  "explanation": [
+    {
+      "en": "Slide on string 1 from 5 to 7 (A4→B4) slowly, then pick B4 directly to compare the target.",
+      "tr": "1. telde 5'ten 7'ye (La4→Si4) yavaş kaydır; hedefi karşılaştırmak için sonra Si4'ü doğrudan çal."
+    },
+    {
+      "en": "Pick only the first note. Keep the same pressure while the finger travels, so the string keeps sounding up to the target.",
+      "tr": "Yalnız ilk notayı penayla çal. Parmak ilerlerken aynı baskıyı koru ki tel hedefe kadar çalmayı sürdürsün."
+    },
+    {
+      "en": "Stop exactly on the target fret. Look at the target fret before you move, not at the finger.",
+      "tr": "Tam hedef perdede dur. Hareket etmeden önce parmağa değil, hedef perdeye bak."
+    },
+    {
+      "en": "A slide is also a way to change position. Sliding D4 to E4 on string 3 (frets 7→9) moves your hand from the 5th-fret box into the 7th-fret box.",
+      "tr": "Kaydırma aynı zamanda pozisyon değiştirmenin bir yoludur. 3. telde Re4'ü Mi4'e (7→9. perde) kaydırmak elini 5. perde kutusundan 7. perde kutusuna taşır."
+    },
+    {
+      "en": "In the task, '/' marks a slide, up or down. The note after it is the target.",
+      "tr": "Görevde '/' yukarı ya da aşağı bir kaydırmayı gösterir. Ondan sonraki nota hedeftir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each figure twice, slowly, string-model synthesis; the target note is then played picked for comparison.",
+      "tr": "Her figür iki kez, yavaş, tel modeli sentezi; ardından hedef nota karşılaştırma için penayla çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Play each figure twice, 8 slides in all, in your own time. 1 string 1, frets 5→7. 2 string 3, frets 7→9, then G4 at string 2, fret 8. 3 string 4, frets 7→10, then D4 at string 3, fret 7. 4 string 2, frets 8→5, then C4 at string 3, fret 5. The app checks the target note.",
+      "tr": "Her figürü kendi hızında iki kez çal, toplam 8 kaydırma. 1 1. tel, 5→7. perde. 2 3. tel, 7→9. perde, sonra 2. telin 8. perdesinde Sol4. 3 4. tel, 7→10. perde, sonra 3. telin 7. perdesinde Re4. 4 2. tel, 8→5. perde, sonra 3. telin 5. perdesinde Do4. Uygulama hedef notayı kontrol eder."
+    },
+    "sequence": "1: A4 / B4 ×2 · 2: D4 / E4 G4 ×2 · 3: A3 / C4 D4 ×2 · 4: G4 / E4 C4 ×2",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The string kept sounding all the way to the target.", "tr": "Tel hedefe kadar çalmayı sürdürdü." },
+    { "en": "My slide stopped on the target fret, not one fret before or after.", "tr": "Kaydırmam bir perde önce ya da sonra değil, hedef perdede durdu." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "The slide stopped one fret short. Look at the target fret before you move and travel the whole way.",
+        "tr": "Kaydırma bir perde erken durdu. Hareketten önce hedef perdeye bak ve yolun tamamını git."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Pressure dropped during the slide and the string died. Keep the finger pressing the same as on the first note.",
+        "tr": "Kaydırma sırasında baskı düştü ve tel sustu. Parmak ilk notadaki gibi basmayı sürdürsün."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use figure 1 only and pick the target note after each slide until the slides land on the target.",
+    "tr": "Kaydırmalar hedefe inene kadar yalnız 1. figürü kullan ve her kaydırmadan sonra hedef notayı penayla çal."
+  },
+  "legacy": "V: guitar.journey.intermediate.slides_bends",
+  "minutes": 12,
+  "expertPending": true
+}

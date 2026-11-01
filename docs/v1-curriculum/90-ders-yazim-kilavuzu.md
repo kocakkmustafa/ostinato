@@ -112,6 +112,29 @@ Her denemede değişen (üretilen) satırlarda `sequence` yazılmaz.
 - **Türkçe:** Nota adları sabit-do'dur (Do = C) ve büyük harfle yazılır (Do4). Ton içindeki basamak heceleri hareketli-do'dur ve küçük harfle yazılır (do, re, mi). İlk kullanıldığı ders (`ear-s2-m05-02`) bu farkı açıklar. **Öğretmen incelemesi bekliyor.**
 - **İngilizce:** Harf adları (C4) ve hece (do, re, mi) kullanılır.
 
+### 3.3 Perdeli dizi ve teknik gösterimi (W3, 2026-11-01)
+
+**Ölçülen tek nota dizisi.** Pratik ekranı `PracticeScore.parse` ile okur.
+- Perde ve süre iki noktayla birleşir: `C4:q E4:q. D4:e C4:h | qr`. Süresiz perde dörtlük sayılır; sekizlik ya da üçleme dizisinde süre **zorunludur** (çıplak perde yarı hızda zamanlanır).
+- Süreler: `w h q e`, üçleme sekizliği `t` (üçü bir vuruş), noktalı `q.`, bağ `q~e`, sus `qr`.
+- Ses/kulak dereceleri: `1-2-3-2-1` (her biri dörtlük). Derece arıza (`b3`, `#4`, `b7`) ve süre (`3:e`, `b7:h`) alabilir; tek tek (`5:e 4:e b3:q`) ya da tireli yazılır.
+- Ölçü başta tek kez yazılır (`3/4:`). 6/8 bölümleri aynı vuruş sayısıyla (3 dörtlük) `3/4:` altında yazılır.
+- `swing` gibi nitelikler, etiketler (`1:`, `G:`, `p:`) ve süre notları (`· 30 s`) dizide yer almaz; görev metninde anlatılır.
+- Birkaç alıştırma tek dizide `|` ile art arda yazılır. `×N` bütün diziyi tekrarlar; birden çok alıştırmalı dizide kullanılmaz.
+- Denetim: `test/v1_lesson_content_test.dart`, ölçülen her gitar dizisinin ayrıştığını sınar. Ayrışmayan ders ölçülü pratikten sessizce düşerdi.
+
+**Teknik gösterimi.** Bu gösterim tek nota motorunun ölçemediği hareketleri yazar. Böyle bir dizi kasıtlı olarak ayrıştırılmaz ve ders, motor bu hareketi ölçene kadar ölçülü pratikte yer almaz (`selfCheck` yedeği):
+
+| Simge | Anlamı |
+|---|---|
+| `C3/E4` (boşluksuz) | Birlikte çalınan iki nota (double stop) |
+| `h` / `p` | Hammer-on / pull-off |
+| ` / ` (boşluklu) | Slide |
+| `b`, `pb`, `r` | Bend, ön bend, bırakma |
+| `vib` | Vibrato |
+
+Hangi derslerin bu gruba girdiğini test listeler. Motor tarafı (A2'de legato/bend ve çift nota) ayrı ön kayıt ister.
+
 ## 4. İş akışı
 
 1. Plan satırını oku: kodlar, satırdaki referans ve güvenlik kodları, `Mevcut` sütunu.

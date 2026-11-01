@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m15-07",
+  "title": { "en": "Less pressure, same sound", "tr": "Az baskı, aynı ses" },
+  "goal": {
+    "en": "Lowers the barre pressure on F step by step while every string keeps ringing.",
+    "tr": "F'de barre baskısını adım adım azaltırken bütün tellerin çalmaya devam etmesini sağlar."
+  },
+  "explanation": [
+    {
+      "en": "Most barres use more force than they need. Extra force tires the hand and does not make the chord cleaner.",
+      "tr": "Barre'ların çoğu gerekenden fazla güç kullanır. Fazla güç eli yorar ve akoru daha temiz yapmaz."
+    },
+    {
+      "en": "Find the minimum: hold F, then ease off slowly until a string starts to buzz. Add back just enough pressure to clear it.",
+      "tr": "En azını bul: F'yi tut, sonra bir tel vızıldamaya başlayana kadar baskıyı yavaşça azalt. Vızıltıyı giderecek kadar baskıyı geri ver."
+    },
+    {
+      "en": "Let the arm do part of the work. A light pull back from the shoulder presses the barre without squeezing the thumb.",
+      "tr": "İşin bir kısmını kola bırak. Omuzdan hafif bir geri çekiş, başparmağı sıkmadan barre'ı bastırır."
+    },
+    {
+      "en": "Position beats force. Keep finger 1 close to the fret wire and slightly on its side.",
+      "tr": "Konum güçten önemlidir. 1. parmağı perde teline yakın ve hafifçe yanına yatmış tut."
+    },
+    {
+      "en": "Between strums, relax the hand fully for a moment without lifting it from the strings.",
+      "tr": "Vuruşlar arasında eli tellerden kaldırmadan bir an tamamen gevşet."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "F strummed four times, each strum followed by the strings plucked one by one from 6 to 1, slowly.",
+      "tr": "F dört kez taranır; her taramanın ardından teller 6'dan 1'e tek tek yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum F four times. After each strum, pluck the strings one by one while you lower the pressure a little more; the app checks each string. Then tick the checklist.",
+      "tr": "F'yi dört kez tara. Her taramadan sonra baskıyı biraz daha azaltarak telleri tek tek çek; uygulama her teli kontrol eder. Sonra kontrol listesini işaretle."
+    },
+    "sequence": "F | F | F | F",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found the point where a string starts to buzz.", "tr": "Bir telin vızıldamaya başladığı noktayı buldum." },
+    { "en": "On the fourth strum I pressed less than on the first.", "tr": "Dördüncü taramada ilkinden daha az bastım." },
+    { "en": "My thumb rested behind the neck without squeezing.", "tr": "Başparmağım sıkmadan sapın arkasında durdu." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "You eased off too far and the strings are muted. Add back a little pressure until each string rings.",
+        "tr": "Baskıyı fazla azalttın ve teller sustu. Her tel çalana kadar biraz baskı geri ver."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "With less force, finger position matters more. Move finger 1 closer to the fret wire.",
+        "tr": "Güç azalınca parmağın konumu daha çok önem kazanır. 1. parmağı perde teline yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise the same steps on the four-string F (x-x-3-2-1-1) first.",
+    "tr": "Aynı adımları önce dört telli F'de (x-x-3-2-1-1) çalış."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

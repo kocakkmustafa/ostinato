@@ -1,0 +1,115 @@
+{
+  "id": "gtr-s4-m19a-10",
+  "title": {
+    "en": "Rest stroke and free stroke",
+    "tr": "Dayanarak ve serbest vuruş"
+  },
+  "goal": {
+    "en": "Plays the same note with free stroke and rest stroke and makes the rest stroke fuller and louder.",
+    "tr": "Aynı notayı serbest ve dayanarak vuruşla çalar; dayanarak vuruşu daha dolgun ve gür yapar."
+  },
+  "explanation": [
+    {
+      "en": "Free stroke: the finger plucks the string and passes above the next string. Other strings keep ringing, so you use it for arpeggios.",
+      "tr": "Serbest vuruş: parmak teli çeker ve bir sonraki telin üstünden geçer. Diğer teller çalmayı sürdürür; bu yüzden arpejlerde kullanılır."
+    },
+    {
+      "en": "Rest stroke: the finger plucks through the string and comes to rest on the next thicker string.",
+      "tr": "Dayanarak vuruş: parmak telin içinden geçerek çeker ve bir kalın tele dayanıp durur."
+    },
+    {
+      "en": "The rest stroke pushes the string toward the top of the guitar. The tone is fuller and louder; use it for melody notes.",
+      "tr": "Dayanarak vuruş teli gövdeye doğru iter. Ton daha dolgun ve gürdür; melodi notalarında kullan."
+    },
+    {
+      "en": "Alternate i and m in both strokes. Keep the hand still; only the fingers move.",
+      "tr": "İki vuruşta da i ile m'yi sırayla kullan. Eli sabit tut; yalnız parmaklar hareket etsin."
+    },
+    {
+      "en": "The app compares the level of the two groups in dB. You judge the tone with the self-check and the reference.",
+      "tr": "Uygulama iki grubun gürlüğünü dB olarak karşılaştırır. Tonu kontrol listesi ve referansla sen değerlendirirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "E4 and C4, four notes each in free stroke and then in rest stroke, string-model synthesis, so the two tones can be compared.",
+      "tr": "Mi4 ve Do4, her biri önce serbest, sonra dayanarak vuruşla dörder nota; iki ton karşılaştırılsın diye tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M",
+      "Ö"
+    ],
+    "engineSteps": [
+      "A3"
+    ],
+    "task": {
+      "en": "On string 1, play E4 four times with free stroke, then four times with rest stroke, alternating i and m. Do the same on string 2 with C4. Then go through the self-check.",
+      "tr": "1. telde Mi4'ü i ve m'yi sırayla kullanarak dört kez serbest, sonra dört kez dayanarak vuruşla çal. Aynısını 2. telde Do4 ile yap. Sonra kontrol listesini işaretle."
+    },
+    "sequence": "E4 E4 E4 E4 | E4 E4 E4 E4 | C4 C4 C4 C4 | C4 C4 C4 C4",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "The rest-stroke notes are on average at least 3 dB louder than the free-stroke notes, and the self-check is complete.",
+        "tr": "Dayanarak vuruş notaları ortalamada serbest vuruş notalarından en az 3 dB daha gür ve kontrol listesi tamam."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "In rest stroke my finger stopped on the next thicker string.",
+      "tr": "Dayanarak vuruşta parmağım bir kalın telde durdu."
+    },
+    {
+      "en": "In free stroke my finger passed above the next string without touching it.",
+      "tr": "Serbest vuruşta parmağım bir sonraki tele değmeden üstünden geçti."
+    },
+    {
+      "en": "The rest-stroke notes sounded fuller than the free-stroke notes, as in the reference.",
+      "tr": "Dayanarak vuruş notaları, referanstaki gibi serbest vuruş notalarından daha dolgun duyuldu."
+    },
+    {
+      "en": "My hand stayed still and only the fingers moved.",
+      "tr": "Elim sabit kaldı, yalnız parmaklar hareket etti."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Level difference: below 3 dB.",
+        "tr": "Gürlük farkı: 3 dB'nin altında."
+      },
+      "fix": {
+        "en": "The rest stroke is too shallow. Push the string slightly toward the top before it leaves the finger.",
+        "tr": "Dayanarak vuruş çok yüzeysel. Tel parmaktan çıkmadan önce onu gövdeye doğru hafifçe it."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only finger i on string 1 until the two strokes sound clearly different.",
+    "tr": "İki vuruş belirgin şekilde farklı duyulana kadar yalnız i parmağını 1. telde kullan."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

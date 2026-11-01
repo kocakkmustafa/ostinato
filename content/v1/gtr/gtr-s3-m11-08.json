@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s3-m11-08",
+  "title": { "en": "Call and response over a backing", "tr": "Eşlik üstünde soru-cevap" },
+  "goal": {
+    "en": "Answers two-bar calls over a backing at ♩=80 with two-bar phrases from the A minor pentatonic shape.",
+    "tr": "Eşlik üstünde ♩=80'de iki ölçülük sorulara La minör pentatonik şeklinden iki ölçülük cümlelerle cevap verir."
+  },
+  "explanation": [
+    {
+      "en": "The app plays a two-bar call. You answer in the next two bars.",
+      "tr": "Uygulama iki ölçülük bir soru çalar. Sen sonraki iki ölçüde cevap verirsin."
+    },
+    {
+      "en": "Your pool is the whole shape: the 12 notes from A2 to C5. Use only these.",
+      "tr": "Havuzun şeklin tamamıdır: La2'den Do5'e 12 nota. Yalnız bunları kullan."
+    },
+    {
+      "en": "Start simple: copy the call's rhythm and change the notes. Then keep the notes and change the rhythm.",
+      "tr": "Basit başla: sorunun ritmini kopyala, notaları değiştir. Sonra notaları koru, ritmi değiştir."
+    },
+    {
+      "en": "End on a root, A3 or A4, to close the phrase. End on E4 to leave it open.",
+      "tr": "Cümleyi kapatmak için bir kökte, La3 ya da La4'te bitir. Açık bırakmak için Mi4'te bitir."
+    },
+    {
+      "en": "Leave a rest at the end of your answer. A rest makes the phrase end clearly.",
+      "tr": "Cevabının sonunda bir sus bırak. Sus cümlenin net bitmesini sağlar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Original two-bar calls over an original Am backing loop at ♩=80, each followed by two open bars for your answer.",
+      "tr": "♩=80'de özgün bir Am eşlik döngüsü üzerinde özgün iki ölçülük sorular; her birinin ardından cevabın için iki boş ölçü."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "The app plays a two-bar call over the backing. Answer in the next two bars with notes from the shape. Do this for 6 calls. Headphones help the microphone hear only your guitar.",
+      "tr": "Uygulama eşlik üstünde iki ölçülük bir soru çalar. Sonraki iki ölçüde şeklin notalarıyla cevap ver. Bunu 6 soru için yap. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes are in the pool, and your answers start and end inside their two bars at Level 3 timing.",
+        "tr": "Notalarının en az %90'ı havuzdan gelir; cevapların Seviye 3 zamanlama ölçütüyle kendi iki ölçüsü içinde başlar ve biter."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I used only notes from the shape.", "tr": "Yalnız şeklin notalarını kullandım." },
+    { "en": "My answer kept one thing from the call.", "tr": "Cevabım sorudan bir şeyi korudu." },
+    { "en": "I ended each answer with a rest before the next call.", "tr": "Her cevabı sonraki sorudan önce bir susla bitirdim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: outside the pool.", "tr": "Farklı nota: havuzun dışında." },
+      "fix": { "en": "Usually F♯4 slipped in at fret 7 on string 2. On string 2 use frets 5 and 8 only.", "tr": "Genelde 2. telin 7. perdesindeki Fa♯4 karışıyor. 2. telde yalnız 5. ve 8. perdeyi kullan." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "Start your answer on beat 1 of bar 3. Plan the first note while the call plays.", "tr": "Cevabına 3. ölçünün 1. vuruşunda başla. Soru çalarken ilk notanı planla." }
+    }
+  ],
+  "adaptation": {
+    "en": "Answer with one bar instead of two, using only A3, C4, D4 and E4.",
+    "tr": "İki ölçü yerine bir ölçüyle cevap ver; yalnız La3, Do4, Re4 ve Mi4'ü kullan."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

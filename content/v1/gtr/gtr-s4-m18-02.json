@@ -1,0 +1,83 @@
+{
+  "id": "gtr-s4-m18-02",
+  "title": { "en": "Staff notes on strings 4–6", "tr": "4–6. tellerde porte notaları" },
+  "goal": {
+    "en": "Reads an eight-bar staff line on strings 4–6, including ledger lines, and plays it in first position at ♩=60.",
+    "tr": "4–6. tellerde ek çizgili sekiz ölçülük bir porte dizisini okur ve birinci pozisyonda ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Notes for strings 4–6 sit low: at the bottom of the staff and below it on short ledger lines.",
+      "tr": "4–6. tellerin notaları aşağıdadır: portenin altında ve altındaki kısa ek çizgilerde."
+    },
+    {
+      "en": "Count ledger lines down from the staff: one, two, three. Each line or space further down is the next letter down.",
+      "tr": "Ek çizgileri porteden aşağı doğru say: bir, iki, üç. Aşağıdaki her çizgi ya da aralık bir alttaki harftir."
+    },
+    {
+      "en": "String 4: the space just below the staff is open D3; the bottom line is E3 at fret 2; the first space is F3 at fret 3.",
+      "tr": "4. tel: portenin hemen altındaki aralık açık Re3, en alt çizgi 2. perdedeki Mi3, birinci aralık 3. perdedeki Fa3'tür."
+    },
+    {
+      "en": "String 5: the second ledger line is open A2; the space under the first ledger line is B2 at fret 2; the first ledger line is C3 at fret 3.",
+      "tr": "5. tel: ikinci ek çizgi açık La2, birinci ek çizginin altındaki aralık 2. perdedeki Si2, birinci ek çizgi 3. perdedeki Do3'tür."
+    },
+    {
+      "en": "String 6: the space under three ledger lines is open E2; the third ledger line is F2 at fret 1; the space under the second ledger line is G2 at fret 3.",
+      "tr": "6. tel: üç ek çizginin altındaki aralık açık Mi2, üçüncü ek çizgi 1. perdedeki Fa2, ikinci ek çizginin altındaki aralık 3. perdedeki Sol2'dir."
+    },
+    {
+      "en": "As on strings 1–3, the written notes are an octave higher than they sound. When ledger lines get busy, anchor on open A2 at two lines.",
+      "tr": "1–3. tellerdeki gibi yazılı notalar duyulandan bir oktav yüksektir. Ek çizgiler kalabalıklaşınca iki çizgideki açık La2'yi dayanak al."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original eight-bar line on strings 4–6 in quarter notes, at ♩=60 and ♩=40, string-model synthesis; staff only, no TAB.",
+      "tr": "4–6. tellerde özgün sekiz ölçülük dizi, dörtlüklerle, ♩=60 ve ♩=40, tel modeli sentezi; yalnız porte, tab yok."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Read the eight bars from the staff; the TAB is hidden. Say each note name once before you play. Then play them in quarter notes with the click at ♩=60.",
+      "tr": "Sekiz ölçüyü porteden oku; tab gizli. Çalmadan önce her notanın adını bir kez söyle. Sonra klikle ♩=60'ta dörtlüklerle çal."
+    },
+    "sequence": "E2 G2 A2 G2 | F2 A2 C3 A2 | B2 D3 F3 D3 | E3 C3 A2 B2 | C3 E3 D3 B2 | A2 F2 G2 B2 | D3 F3 E3 C3 | B2 G2 F2 E2",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found each note from the staff, not from the TAB.", "tr": "Her notayı tabdan değil porteden buldum." },
+    { "en": "I counted ledger lines down from the staff instead of guessing.", "tr": "Ek çizgileri tahmin etmek yerine porteden aşağı doğru saydım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one letter away.", "tr": "Farklı nota, bir harf uzakta." },
+      "fix": {
+        "en": "A line was read as a space. Count down from the bottom line (E3), one letter for each line and each space.",
+        "tr": "Bir çizgi aralık diye okundu. En alt çizgiden (Mi3) aşağı, her çizgi ve her aralık için bir harf say."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "F2 or F3 came out as E. E–F is one fret: F2 is string 6, fret 1; F3 is string 4, fret 3.",
+        "tr": "Fa2 ya da Fa3, Mi olarak çıktı. Mi–Fa bir perdedir: Fa2 6. telde 1. perde, Fa3 4. telde 3. perdedir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read and play two bars at a time at ♩=45, then join them.",
+    "tr": "Her seferinde iki ölçüyü ♩=45'te okuyup çal, sonra birleştir."
+  },
+  "legacy": "V: guitar.journey.reading.staff",
+  "minutes": 15,
+  "expertPending": true
+}

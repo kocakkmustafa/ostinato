@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s4-test-b",
+  "title": { "en": "Level 4 test: Electric track", "tr": "Seviye 4 testi: Elektro kol" },
+  "goal": {
+    "en": "Shows the Level 4 skills of the electric track: barre chords, the major scale, reading, bends and an original lead solo.",
+    "tr": "Elektro kolun Seviye 4 becerilerini gösterir: barre akorlar, majör gam, okuma, bend'ler ve özgün bir lead solo."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Parts 1–3 are the same as in the acoustic track. Part 1, barre: 16 bars mixing E-shape and A-shape barre chords at ♩=80. Part 2, scale: G major over two octaves in eighths at ♩=80, then a sequence in thirds.",
+      "tr": "1–3. bölümler akustik koldakiyle aynıdır. 1. bölüm, barre: E- ve A-şekli barre akorları karıştıran 16 ölçü, ♩=80. 2. bölüm, gam: ♩=80'de sekizliklerle iki oktav Sol majör, ardından üçlü sekans."
+    },
+    {
+      "en": "Part 3, reading: a new eight-bar line in first position at ♩=66.",
+      "tr": "3. bölüm, okuma: birinci pozisyonda yeni bir sekiz ölçülük dizi, ♩=66."
+    },
+    {
+      "en": "Part 4, bends: 6 bends, half steps and whole steps, two of them pre-bends. Part 5, solo: a new 24-bar lead with bends, legato and two pentatonic boxes at ♩=84.",
+      "tr": "4. bölüm, bend'ler: yarım ve tam ses 6 bend, ikisi ön bend. 5. bölüm, solo: bend, legato ve iki pentatonik kutu içeren yeni bir 24 ölçülük lead, ♩=84."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions. Run the mic test from the first electric lesson again if you change your setup.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin. Kurulumunu değiştirirsen ilk elektro dersindeki mikrofon testini yeniden yap."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "Click and an original accompaniment loop for part 1; click only for parts 2 and 3; each bend target played first for part 4; an original backing for part 5. The reading line and the solo are not played before you try them. Headphones recommended.",
+      "tr": "1. bölüm için klik ve özgün eşlik döngüsü; 2. ve 3. bölümlerde yalnız klik; 4. bölümde her bend hedefi önce çalınır; 5. bölüm için özgün eşlik. Okuma dizisi ve solo denemenden önce çalınmaz. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3", "A4", "A5"],
+    "task": {
+      "en": "Complete five parts. 1 Barre: 16 bars of E-shape and A-shape chords at ♩=80. 2 Scale: G major two octaves, eighths at ♩=80, plus a sequence in thirds. 3 Reading: a new eight-bar line at ♩=66. 4 Bends: 6 bends, two of them pre-bends. 5 Solo: a new 24-bar lead at ♩=84.",
+      "tr": "Beş bölümü tamamla. 1 Barre: ♩=80'de E- ve A-şekli akorlarla 16 ölçü. 2 Gam: Sol majör iki oktav, ♩=80'de sekizlik, artı üçlü sekans. 3 Okuma: ♩=66'da yeni bir sekiz ölçülük dizi. 4 Bend'ler: ikisi ön bend olan 6 bend. 5 Solo: ♩=84'te yeni bir 24 ölçülük lead."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Barre: Level 4 chord and timing accuracy. Scale and reading: Level 4 note and timing accuracy. Bends: at least 5 of 6 within ±25 cents of the target. Solo: Level 4 note and timing accuracy, with bends within ±25 cents.",
+        "tr": "Her bölüm kendi başına geçer. Barre: Seviye 4 akor ve zamanlama ölçütü. Gam ve okuma: Seviye 4 nota ve zamanlama ölçütü. Bend'ler: 6 bend'in en az 5'i hedefin ±25 cent içinde. Solo: Seviye 4 nota ve zamanlama ölçütü, bend'ler ±25 cent içinde."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "In the A-shape, the barre finger is not reaching string 2 or finger 3 is muting it. Redo the A-shape checkpoint, then retake part 1.",
+        "tr": "A-şeklinde barre parmağı 2. tele ulaşmıyor ya da 3. parmak onu susturuyor. A-şekli geçişini tekrarla, sonra 1. bölümü yeniden dene."
+      }
+    },
+    {
+      "error": { "en": "Different note: the bend stops below the target.", "tr": "Farklı nota: bend hedefin altında kalıyor." },
+      "fix": {
+        "en": "Pick the target fret before each bend and use three fingers with the wrist turning. Then retake part 4.",
+        "tr": "Her bend'den önce hedef perdeyi çal ve bileği çevirerek üç parmak kullan. Sonra 4. bölümü yeniden dene."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "An unplugged electric guitar is quiet. Put the phone 15–20 cm from the strings and pick a little firmer.",
+        "tr": "Amfisiz elektro gitarın sesi kısıktır. Telefonu tellere 15–20 cm uzaklığa koy ve penayla biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

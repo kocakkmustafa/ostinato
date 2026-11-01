@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s4-m15-08",
+  "title": { "en": "Barre with strum patterns", "tr": "Barre ile vuruş kalıbı" },
+  "goal": {
+    "en": "Plays the D-DU-UDU pattern on barre F and Gm at ♩=80.",
+    "tr": "Barre'lı F ve Gm'de D-DU-UDU kalıbını ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "F is 1-3-3-2-1-1 at fret 1 and Gm is 3-5-5-3-3-3 at fret 3. Play two bars of each.",
+      "tr": "F 1. perdede 1-3-3-2-1-1, Gm 3. perdede 3-5-5-3-3-3'tür. Her birini iki ölçü çal."
+    },
+    {
+      "en": "To change, slide the whole hand two frets up and lift finger 2. Fingers 3 and 4 keep their shape.",
+      "tr": "Geçmek için bütün eli iki perde yukarı kaydır ve 2. parmağı kaldır. 3. ve 4. parmak biçimini korur."
+    },
+    {
+      "en": "Ease the pressure as you slide; press again when you land on beat 1.",
+      "tr": "Kayarken baskıyı azalt; 1. vuruşa inince yeniden bas."
+    },
+    {
+      "en": "Beat 3 is the skipped strum: the hand goes down in the air and the chord keeps ringing.",
+      "tr": "3. vuruş atlanan vuruştur: el havada aşağı iner, akor çalmaya devam eder."
+    },
+    {
+      "en": "If the thumb or wrist feels strained, release the hand and rest before the next set.",
+      "tr": "Başparmak ya da bilekte gerilim hissedersen eli bırak ve sonraki setten önce dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "D-DU-UDU on F for 2 bars and Gm for 2 bars over an original bass and drum loop, at ♩=80 and ♩=55.",
+      "tr": "Özgün bas ve davul döngüsü üstünde D-DU-UDU, 2 ölçü F ve 2 ölçü Gm; ♩=80 ve ♩=55."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play D-DU-UDU for 2 bars on F and 2 bars on Gm with the accompaniment. Start at ♩=70 and move up in steps of 5 to ♩=80. Headphones help the microphone hear only your guitar.",
+      "tr": "Eşlikle 2 ölçü F ve 2 ölçü Gm'de D-DU-UDU çal. ♩=70'ten başla, 5'er adımla ♩=80'e çık. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: F q e q e e e | F q e q e e e | Gm q e q e e e | Gm q e q e e e",
+    "tempo": { "open": 70, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The chord kept ringing through the skipped beat 3.", "tr": "Akor atlanan 3. vuruş boyunca çalmaya devam etti." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." },
+    { "en": "My thumb rested behind the neck without squeezing.", "tr": "Başparmağım sıkmadan sapın arkasında durdu." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The slide to Gm is late. Start it on the last upstroke of the bar and land on beat 1.",
+        "tr": "Gm'ye kayış geç kalıyor. Ona ölçünün son yukarı vuruşunda başla ve 1. vuruşa in."
+      }
+    },
+    {
+      "error": { "en": "Different chord: major heard.", "tr": "Farklı akor: majör duyuldu." },
+      "fix": {
+        "en": "Finger 2 is still down on Gm. Lift it as you slide.",
+        "tr": "Gm'de 2. parmak hâlâ basılı. Kayarken onu kaldır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play four down strums per bar at ♩=60 until the slide lands on time, then return to the pattern.",
+    "tr": "Kayış zamanında inene kadar ♩=60'ta ölçü başına dört aşağı vuruş çal, sonra kalıba dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

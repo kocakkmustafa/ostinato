@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s4-m16-10",
+  "title": { "en": "Transposing with barre shapes", "tr": "Barre şekilleriyle transpozisyon" },
+  "goal": {
+    "en": "Plays I–vi–IV–V in C, D and E with one barre pattern at ♩=70, moving the whole pattern to each new key.",
+    "tr": "I–vi–IV–V'i tek bir barre kalıbıyla Do, Re ve Mi majörde ♩=70'te çalar; kalıbın tamamını her yeni tona taşır."
+  },
+  "explanation": [
+    {
+      "en": "Transposing moves a progression to a new key. The roman numerals stay the same; only the chord names change.",
+      "tr": "Transpozisyon bir ilerlemeyi yeni bir tona taşır. Romen rakamları aynı kalır; yalnız akor adları değişir."
+    },
+    {
+      "en": "The pattern: I is the A shape at fret n. vi is the E-shape minor two frets higher. IV is the E shape two frets lower. V is the E shape at fret n.",
+      "tr": "Kalıp: I, n. perdede A-şeklidir. vi iki perde yukarıda E-şekli minördür. IV iki perde aşağıda E-şeklidir. V, n. perdede E-şeklidir."
+    },
+    {
+      "en": "In C (n = 3): C x-3-5-5-5-3, Am 5-7-7-5-5-5, F 1-3-3-2-1-1, G 3-5-5-4-3-3.",
+      "tr": "Do majörde (n = 3): C x-3-5-5-5-3, Am 5-7-7-5-5-5, F 1-3-3-2-1-1, G 3-5-5-4-3-3."
+    },
+    {
+      "en": "Move the whole pattern up two frets for D (n = 5): D, Bm, G, A. Two more for E (n = 7): E, C♯m, A, B.",
+      "tr": "Re majör için kalıbın tamamını iki perde yukarı taşı (n = 5): D, Bm, G, A. Mi majör için iki perde daha (n = 7): E, C♯m, A, B."
+    },
+    {
+      "en": "Before each key, find I on string 5. Every other chord follows from that one fret.",
+      "tr": "Her tondan önce I'i 5. telde bul. Diğer bütün akorlar o tek perdeden çıkar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "I–vi–IV–V in C, D and E in quarter-note downstrokes over an original bass and drum loop, at ♩=70 and at ♩=50.",
+      "tr": "Özgün bas ve davul döngüsü üstünde dörtlük aşağı vuruşla Do, Re ve Mi majörde I–vi–IV–V; ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play I–vi–IV–V in C, then D, then E, one bar per chord, four downstrokes per bar, with the accompaniment at ♩=70. Use the barre pattern in every key. Headphones help the microphone hear only your guitar.",
+      "tr": "Eşlikle ♩=70'te I–vi–IV–V'i önce Do'da, sonra Re'de, sonra Mi'de çal; her akora bir ölçü, her ölçüde dört aşağı vuruş. Her tonda barre kalıbını kullan. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: C | Am | F | G | D | Bm | G | A | E | C♯m | A | B",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found I on string 5 before each new key.", "tr": "Her yeni tondan önce I'i 5. telde buldum." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: major heard instead of minor.", "tr": "Farklı akor: minör yerine majör duyuldu." },
+      "fix": {
+        "en": "vi is minor. In the E-shape minor, lift finger 2 off string 3 so the barre alone covers it.",
+        "tr": "vi minördür. E-şekli minörde 2. parmağı 3. telden kaldır; o teli barre tek başına bassın."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The jump from V to the next key's I comes late. During V, look at the next I two frets higher on string 5.",
+        "tr": "V'ten sonraki tonun I'ine atlama geç kalıyor. V'i çalarken 5. telde iki perde yukarıdaki yeni I'e bak."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones for the accompaniment and keep the phone close to the guitar.",
+        "tr": "Eşlik için kulaklık kullan ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C and D, eight bars, at ♩=60, and give each chord two bars if a change is late.",
+    "tr": "♩=60'ta yalnız Do ve Re'yi, sekiz ölçü çal; bir geçiş geç kalırsa her akora iki ölçü ver."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

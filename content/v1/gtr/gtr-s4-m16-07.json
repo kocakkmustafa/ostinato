@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m16-07",
+  "title": { "en": "Palm-muted barre eighths", "tr": "Palm mute barre sekizlikler" },
+  "goal": {
+    "en": "Plays even palm-muted eighth notes on B♭ and C barre chords from ♩=80 to ♩=90.",
+    "tr": "B♭ ve C barre akorlarında eşit, palm mute sekizlikleri ♩=80'den ♩=90'a çalar."
+  },
+  "explanation": [
+    {
+      "en": "Palm muting: rest the side of your strumming hand on the strings right next to the bridge. The chord sounds short and dark but still heard.",
+      "tr": "Palm mute (avuçla kısma): sağ elinin yanını köprünün hemen yanında tellerin üstüne koy. Akor kısa ve koyu çıkar ama yine duyulur."
+    },
+    {
+      "en": "Move the hand toward the neck and the sound dies; move it onto the bridge and the mute disappears. Find the spot in between.",
+      "tr": "Eli sapa doğru kaydırırsan ses ölür; köprünün üstüne çıkarırsan kısma kaybolur. Aradaki noktayı bul."
+    },
+    {
+      "en": "Use B♭ (x-1-3-3-3-1) and C (x-3-5-5-5-3). Strike only strings 5, 4 and 3 with short downstrokes.",
+      "tr": "B♭ (x-1-3-3-3-1) ve C (x-3-5-5-5-3) kullan. Kısa aşağı vuruşlarla yalnız 5., 4. ve 3. tele vur."
+    },
+    {
+      "en": "Keep the fretting hand pressed. The mute comes from the strumming hand only.",
+      "tr": "Sol eli basılı tut. Kısma yalnız sağ elden gelir."
+    },
+    {
+      "en": "The app measures the timing of each eighth here, not the pitch. Keep the eighths even and the volume steady.",
+      "tr": "Uygulama burada perdeyi değil her sekizliğin zamanlamasını ölçer. Sekizlikleri eşit, ses düzeyini sabit tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Palm-muted eighths, two bars of B♭ and two bars of C, at ♩=90 and ♩=55, with click.",
+      "tr": "Palm mute sekizlikler, iki ölçü B♭ ve iki ölçü C, ♩=90 ve ♩=55, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Play palm-muted downstroke eighths, two bars on B♭ and two bars on C, along with the click. Start at ♩=80 and move up in steps of 5 to ♩=90.",
+      "tr": "Klikle birlikte iki ölçü B♭ ve iki ölçü C'de palm mute aşağı vuruş sekizlikler çal. ♩=80'den başla, 5'er adımla ♩=90'a çık."
+    },
+    "sequence": "4/4: B♭ ee ee ee ee | B♭ ee ee ee ee | C ee ee ee ee | C ee ee ee ee",
+    "tempo": { "open": 80, "target": 90 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every eighth sounded short and muted, but still clear.", "tr": "Her sekizlik kısa ve kısık ama yine net çıktı." },
+    { "en": "The eighths stayed even when I changed to C.", "tr": "C'ye geçerken sekizlikler eşit kaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The palm is too far toward the neck and kills the sound. Slide it back toward the bridge until each chord is heard.",
+        "tr": "Avuç sapa fazla yakın ve sesi öldürüyor. Her akor duyulana kadar köprüye doğru geri kaydır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The change to C costs time. Move the fretting hand on the last eighth of bar 2 and keep the strumming hand going.",
+        "tr": "C'ye geçiş zaman alıyor. Sol eli 2. ölçünün son sekizliğinde taşı; sağ eli durdurma."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play quarter notes at ♩=70 first, then switch to eighths.",
+    "tr": "Önce ♩=70'te dörtlük çal, sonra sekizliğe geç."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

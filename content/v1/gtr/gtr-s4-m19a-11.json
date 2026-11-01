@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m19a-11",
+  "title": { "en": "Giuliani right-hand studies", "tr": "Giuliani sağ el etütleri" },
+  "goal": {
+    "en": "Plays four arpeggio patterns selected from Giuliani's Op. 1 on C and G7 at ♩=72, including triplets and a pinch.",
+    "tr": "Giuliani'nin Op. 1'inden seçilmiş, üçleme ve çimdik içeren dört arpej kalıbını C ve G7'de ♩=72'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "Mauro Giuliani (1781–1829) kept the chords of his Op. 1 right-hand studies to C and G7, so all your attention goes to the plucking hand. You met four simple patterns in Level 3; these four are longer.",
+      "tr": "Mauro Giuliani (1781–1829), Op. 1 sağ el etütlerinde akorları C ve G7 ile sınırladı; böylece bütün dikkatin sağ elde kalır. Seviye 3'te dört basit kalıp gördün; bu dördü daha uzun."
+    },
+    {
+      "en": "C is x32010 with p on C3; G7 is 320001 with p on G2. Fingers: i on string 3, m on string 2, a on string 1.",
+      "tr": "C x32010'dur, p Do3'te; G7 320001'dir, p Sol2'de. Parmaklar: i 3. telde, m 2. telde, a 1. telde."
+    },
+    {
+      "en": "Pattern 1: p-i-m-a-m-i in triplet eighths, three notes per beat. Pattern 2: p-i-a-m in eighths; a skips over m.",
+      "tr": "1. kalıp: p-i-m-a-m-i, üçleme sekizliklerle, vuruş başına üç nota. 2. kalıp: p-i-a-m, sekizliklerle; a, m'nin üstünden atlar."
+    },
+    {
+      "en": "Pattern 3: p-i-m-i-a-i-m-i, one wave of eight eighths per bar. Pattern 4: a pinch of p and m, then i-a-i, twice per bar.",
+      "tr": "3. kalıp: p-i-m-i-a-i-m-i, ölçü başına sekiz sekizlikten tek bir dalga. 4. kalıp: p ile m'nin çimdiği, sonra i-a-i, ölçüde iki kez."
+    },
+    {
+      "en": "Each pattern runs over C | G7 | G7 | C. Change to G7 during the last note of the C bar; the thumb always lands on beat 1.",
+      "tr": "Her kalıp C | G7 | G7 | C üzerinde çalınır. G7'ye C ölçüsünün son notasında geç; başparmak her zaman 1. vuruşa düşer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The four patterns on C–G7–G7–C, Ostinato setting, string-model synthesis, with a click at ♩=72 and ♩=45.",
+      "tr": "Dört kalıp C–G7–G7–C üzerinde, Ostinato düzenlemesi, tel modeli sentezi; klikle ♩=72 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the 16 bars with the click at ♩=60: each pattern for four bars of C, G7, G7, C. Pattern 1 is in triplets, patterns 2–4 in eighths. A slash marks two notes plucked together. When it holds, move up to ♩=72 in steps of 5.",
+      "tr": "16 ölçüyü klikle ♩=60'ta çal: her kalıp C, G7, G7, C dört ölçüsünde. 1. kalıp üçlemeyle, 2–4. kalıplar sekizlikle. Eğik çizgi birlikte çekilen iki notayı gösterir. Oturunca 5'er adımla ♩=72'ye çık."
+    },
+    "sequence": "C3 G3 C4 E4 C4 G3 C3 G3 C4 E4 C4 G3 | G2 G3 B3 F4 B3 G3 G2 G3 B3 F4 B3 G3 | G2 G3 B3 F4 B3 G3 G2 G3 B3 F4 B3 G3 | C3 G3 C4 E4 C4 G3 C3 G3 C4 E4 C4 G3 || C3 G3 E4 C4 C3 G3 E4 C4 | G2 G3 F4 B3 G2 G3 F4 B3 | G2 G3 F4 B3 G2 G3 F4 B3 | C3 G3 E4 C4 C3 G3 E4 C4 || C3 G3 C4 G3 E4 G3 C4 G3 | G2 G3 B3 G3 F4 G3 B3 G3 | G2 G3 B3 G3 F4 G3 B3 G3 | C3 G3 C4 G3 E4 G3 C4 G3 || C3/C4 G3 E4 G3 C3/C4 G3 E4 G3 | G2/B3 G3 F4 G3 G2/B3 G3 F4 G3 | G2/B3 G3 F4 G3 G2/B3 G3 F4 G3 | C3/C4 G3 E4 G3 C3/C4 G3 E4 G3",
+    "tempo": { "open": 60, "target": 72 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each finger plucked only its own string.", "tr": "Her parmak yalnız kendi telini çekti." },
+    { "en": "The triplets in pattern 1 stayed even, three notes per click.", "tr": "1. kalıptaki üçlemeler eşit kaldı, her klikte üç nota." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "In G7, a played E4 instead of F4. Keep finger 1 on string 1, fret 1 for the whole bar.", "tr": "G7'de a, Fa4 yerine Mi4 çaldı. 1. parmağı ölçü boyunca 1. telin 1. perdesinde tut." }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The thumb waits for the change to G7. Move the fretting hand during the last note of the C bar so G2 lands on beat 1.", "tr": "Başparmak G7'ye geçişi bekliyor. Sol eli C ölçüsünün son notasında taşı ki Sol2 1. vuruşa düşsün." }
+    },
+    {
+      "error": { "en": "Different note: string 2 heard where string 1 is expected.", "tr": "Farklı nota: 1. tel beklenen yerde 2. tel duyuldu." },
+      "fix": { "en": "In pattern 2, a reaches over m and catches string 2. Rest a on string 1 before each bar.", "tr": "2. kalıpta a, m'nin üstünden uzanırken 2. teli yakalıyor. Her ölçüden önce a'yı 1. tele dayandır." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each pattern on C only until it is even, then add G7. Learn pattern 1 at ♩=45 before the others.",
+    "tr": "Her kalıbı eşitlenene kadar yalnız C'de çal, sonra G7'yi ekle. 1. kalıbı diğerlerinden önce ♩=45'te öğren."
+  },
+  "repertoire": "Mauro Giuliani (1781–1829), Studio per la chitarra, Op. 1, Part 1: right-hand arpeggios on C and G7 (selection of 4). Source: Vienna first edition, 1812. Public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 18,
+  "expertPending": true
+}

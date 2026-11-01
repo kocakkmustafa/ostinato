@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m17-10",
+  "title": { "en": "Major-scale checkpoint", "tr": "Majör gam geçişi" },
+  "goal": {
+    "en": "Plays G major over two octaves and the thirds sequence, both in eighth notes at ♩=80.",
+    "tr": "Sol majörü iki oktav ve üçlü sekansı, ikisini de ♩=80'de sekizliklerle çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint has two parts. Each part must pass on its own; a passed part is kept.",
+      "tr": "Bu geçişin iki bölümü var. Her bölüm kendi başına geçmeli; geçtiğin bölüm saklanır."
+    },
+    {
+      "en": "Part 1: G major from G2 to G4 and back in position II, eighth notes at ♩=80.",
+      "tr": "1. bölüm: II. pozisyonda Sol majör, Sol2'den Sol4'e çıkış ve iniş, ♩=80'de sekizlikler."
+    },
+    {
+      "en": "Part 2: the thirds sequence from G2 up to A3 and back down to G2, eighth notes at ♩=80.",
+      "tr": "2. bölüm: Sol2'den La3'e çıkıp Sol2'ye inen üçlü sekans, ♩=80'de sekizlikler."
+    },
+    {
+      "en": "Checkpoints pass at the target tempo. Warm up at ♩=60 and ♩=70 first; those runs count as practice.",
+      "tr": "Geçişler hedef tempoda geçilir. Önce ♩=60 ve ♩=70'te ısın; bu turlar pratik sayılır."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Both parts in eighth notes with a click, at ♩=80 and ♩=55, string-model synthesis.",
+      "tr": "Klikle iki bölüm de sekizliklerle, ♩=80 ve ♩=55; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Part 1: play G major from G2 to G4 and back in eighth notes with the click at ♩=80. Part 2: play the thirds sequence up and back in eighth notes at ♩=80.",
+      "tr": "1. bölüm: Sol majörü Sol2'den Sol4'e çıkıp in; klikle birlikte ♩=80'de sekizliklerle çal. 2. bölüm: üçlü sekansı ♩=80'de sekizliklerle çıkıp in."
+    },
+    "sequence": "G2:e A2:e B2:e C3:e D3:e E3:e F♯3:e G3:e | A3:e B3:e C4:e D4:e E4:e F♯4:e G4:e F♯4:e | E4:e D4:e C4:e B3:e A3:e G3:e F♯3:e E3:e | D3:e C3:e B2:e A2:e G2:h | G2:e B2:e A2:e C3:e B2:e D3:e C3:e E3:e | D3:e F♯3:e E3:e G3:e F♯3:e A3:e G3:e E3:e | F♯3:e D3:e E3:e C3:e D3:e B2:e C3:e A2:e | B2:e G2:e A2:e F♯2:e G2:h",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own at ♩=80. Both parts: Level 4 note and timing accuracy.",
+        "tr": "Her bölüm ♩=80'de kendi başına geçer. İki bölümde de: Seviye 4 nota ve zamanlama ölçütü."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The string change is slow. Loop the last note of one string and the first of the next.", "tr": "Tel geçişi yavaş. Bir telin son notasını ve sonrakinin ilk notasını döngüle." }
+    },
+    {
+      "error": { "en": "Different note, one scale step high.", "tr": "Farklı nota, bir gam basamağı yüksek." },
+      "fix": { "en": "In the thirds part you lost your place. Say the pair names as you go: 'G–B, A–C, B–D'.", "tr": "Üçlü bölümde yerini kaybettin. İlerlerken çiftlerin adını söyle: 'Sol–Si, La–Do, Si–Re'." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Find a quieter spot and keep the phone about an arm's length away.", "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut." }
+    }
+  ],
+  "adaptation": {
+    "en": "If a part did not pass, practise it at ♩=70 for a few rounds, then retake only that part at ♩=80.",
+    "tr": "Bir bölüm geçmediyse onu ♩=70'te birkaç tur çalış, sonra yalnız o bölümü ♩=80'de yeniden dene."
+  },
+  "minutes": 18,
+  "expertPending": true
+}

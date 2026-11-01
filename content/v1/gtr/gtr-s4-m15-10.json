@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s4-m15-10",
+  "title": { "en": "A barre progression", "tr": "Barre'lı ilerleme" },
+  "goal": {
+    "en": "Plays the F–Am–Gm–C progression for eight bars at ♩=70, mixing barre and open chords.",
+    "tr": "Barre ve açık akorları karıştırarak F–Am–Gm–C ilerlemesini ♩=70'te sekiz ölçü çalar."
+  },
+  "explanation": [
+    {
+      "en": "F and Gm are barre chords; Am and C are open chords. Play one chord per bar, twice through.",
+      "tr": "F ve Gm barre akorlardır; Am ve C açık akorlardır. Her ölçüde bir akor çal, iki tur."
+    },
+    {
+      "en": "F to Am: both use string 2, fret 1. Release the barre but keep that spot of finger 1 on string 2.",
+      "tr": "F'den Am'ye: ikisi de 2. tel 1. perdeyi kullanır. Barre'ı bırak ama 1. parmağın o noktasını 2. telde tut."
+    },
+    {
+      "en": "Am to Gm: lift the whole hand, lay the barre at fret 3 and set fingers 3 and 4 at fret 5.",
+      "tr": "Am'den Gm'ye: bütün eli kaldır, barre'ı 3. perdeye yatır ve 3. ile 4. parmağı 5. perdeye koy."
+    },
+    {
+      "en": "Gm to C: release the barre and land on x-3-2-0-1-0. Back to F, finger 3 stays on string 5, fret 3.",
+      "tr": "Gm'den C'ye: barre'ı bırak ve x-3-2-0-1-0'a in. F'ye dönerken 3. parmak 5. tel 3. perdede kalır."
+    },
+    {
+      "en": "Strum four downstrokes per bar. Use beat 4 to move to the next chord.",
+      "tr": "Her ölçüde dört aşağı vuruş yap. Sonraki akora geçmek için 4. vuruşu kullan."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "F–Am–Gm–C twice in quarter-note downstrokes over an original bass and drum loop, at ♩=70 and at ♩=50.",
+      "tr": "Özgün bas ve davul döngüsü üstünde dörtlük aşağı vuruşla iki kez F–Am–Gm–C; ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the progression twice, eight bars, with the accompaniment at ♩=70, four down strums per bar. Headphones help the microphone hear only your guitar.",
+      "tr": "Eşlikle ilerlemeyi ♩=70'te iki kez, sekiz ölçü çal; her ölçüde dört aşağı vuruş. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: F | Am | Gm | C | F | Am | Gm | C",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "One change is slower than the others. Loop just that pair, one bar before and one after, then rejoin the loop.",
+        "tr": "Bir geçiş diğerlerinden yavaş. Yalnız o çifti, bir ölçü önce ve bir ölçü sonrasıyla döngüle; sonra döngüye geri dön."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Am and C start on string 5. After the barre chords, aim the strum at string 5.",
+        "tr": "Am ve C 5. telden başlar. Barre akorlardan sonra vuruşu 5. tele yönelt."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones for the accompaniment and keep the phone close to the guitar.",
+        "tr": "Eşlik için kulaklık kullan ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use the four-string F and Gm (x-x-3-2-1-1, x-x-5-3-3-3) at ♩=60 first.",
+    "tr": "Önce ♩=60'ta dört telli F ve Gm'yi (x-x-3-2-1-1, x-x-5-3-3-3) kullan."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

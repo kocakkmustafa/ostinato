@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s3-m13-10",
+  "title": { "en": "Slow blues in twelve-eight", "tr": "12/8'de yavaş blues" },
+  "goal": {
+    "en": "Plays a slow 12-bar blues in 12/8 with four steady big beats per bar at ♩.=50.",
+    "tr": "12/8'de yavaş 12 ölçülük blues'u, ölçüde dört düzenli büyük vuruşla ♩.=50'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "12/8 has twelve eighths in a bar, felt as four big beats: 1-2-3 4-5-6 7-8-9 10-11-12.",
+      "tr": "12/8'de ölçüde on iki sekizlik var; dört büyük vuruş olarak hissedilir: 1-2-3 4-5-6 7-8-9 10-11-12."
+    },
+    {
+      "en": "It is the shuffle slowed down: each big beat holds a full triplet.",
+      "tr": "Bu, yavaşlatılmış shuffle'dır: her büyük vuruş tam bir üçleme taşır."
+    },
+    {
+      "en": "The tempo counts the big beats: ♩.=50 means 50 big beats a minute, so one bar lasts almost five seconds.",
+      "tr": "Tempo büyük vuruşları sayar: ♩.=50, dakikada 50 büyük vuruş demektir; bir ölçü yaklaşık beş saniye sürer."
+    },
+    {
+      "en": "Strum long-short in each big beat: down on the first eighth, up on the third.",
+      "tr": "Her büyük vuruşta uzun-kısa çal: ilk sekizlikte aşağı, üçüncüde yukarı."
+    },
+    {
+      "en": "The form uses the quick change: A7 D7 A7 A7 / D7 D7 A7 A7 / E7 D7 A7 E7. At this slow tempo, change chords calmly on the last up strum.",
+      "tr": "Biçimde hızlı IV var: A7 D7 A7 A7 / D7 D7 A7 A7 / E7 D7 A7 E7. Bu yavaş tempoda akoru son yukarı vuruşta sakince değiştir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 12 bars in 12/8 with long-short strums at ♩.=50 and ♩.=35, over an original bass and drum loop.",
+      "tr": "12/8'de 12 ölçü, uzun-kısa vuruşlarla, ♩.=50 ve ♩.=35; özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 12 bars with the accompaniment. The tempo counts dotted quarters (big beats): ♩.=50. Headphones help the microphone hear only your guitar.",
+      "tr": "12 ölçüyü eşlikle çal. Tempo noktalı dörtlükleri (büyük vuruşları) sayar: ♩.=50. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "12/8: A7 q e q e q e q e | D7 q e q e q e q e | A7 q e q e q e q e | A7 q e q e q e q e | D7 q e q e q e q e | D7 q e q e q e q e | A7 q e q e q e q e | A7 q e q e q e q e | E7 q e q e q e q e | D7 q e q e q e q e | A7 q e q e q e q e | E7 q e q e q e q e",
+    "tempo": { "open": 50, "target": 50 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I felt four big beats in every bar.", "tr": "Her ölçüde dört büyük vuruş hissettim." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "At a slow tempo it is easy to rush. Count all twelve small beats aloud for one bar.",
+        "tr": "Yavaş tempoda acele etmek kolaydır. Bir ölçü boyunca on iki küçük sayının hepsini sesli say."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The hand stopped between strums. Keep it moving down and up in every big beat, even when it misses the strings.",
+        "tr": "El vuruşlar arasında durdu. Her büyük vuruşta, telleri ıskalasa bile, aşağı-yukarı hareket etmeyi sürdür."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "A7 and D7 do not use string 6. Start A7 on string 5 and D7 on string 4.",
+        "tr": "A7 ve D7 6. teli kullanmaz. A7'ye 5. telden, D7'ye 4. telden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Strum only down on each big beat until the four beats feel even.",
+    "tr": "Dört vuruş eşit gelene kadar her büyük vuruşta yalnız aşağı vur."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

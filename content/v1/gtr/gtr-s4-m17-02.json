@@ -1,0 +1,76 @@
+{
+  "id": "gtr-s4-m17-02",
+  "title": { "en": "One octave from string six", "tr": "Altıncı telden bir oktav" },
+  "goal": {
+    "en": "Plays G major from G2 to G3 and back in position II, one finger per fret, at ♩=70.",
+    "tr": "II. pozisyonda Sol majörü Sol2'den Sol3'e çıkıp iner, parmak başına bir perdeyle ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "A position is where your index finger sits. In position II, finger 1 covers fret 2, finger 2 fret 3, finger 3 fret 4 and finger 4 fret 5.",
+      "tr": "Pozisyon, işaret parmağının durduğu yerdir. II. pozisyonda 1. parmak 2. perdeyi, 2. parmak 3. perdeyi, 3. parmak 4. perdeyi, 4. parmak 5. perdeyi karşılar."
+    },
+    {
+      "en": "G major from string 6: G2 6/3, A2 6/5, B2 5/2, C3 5/3, D3 5/5, E3 4/2, F♯3 4/4, G3 4/5.",
+      "tr": "6. telden Sol majör: Sol2 6/3, La2 6/5, Si2 5/2, Do3 5/3, Re3 5/5, Mi3 4/2, Fa♯3 4/4, Sol3 4/5."
+    },
+    {
+      "en": "The fret tells you the finger. G2 at fret 3 takes finger 2; A2 at fret 5 takes finger 4.",
+      "tr": "Perde, parmağı söyler. 3. perdedeki Sol2 2. parmakla, 5. perdedeki La2 4. parmakla basılır."
+    },
+    {
+      "en": "There are no open strings here. That is the point: later the whole shape moves up and down the neck.",
+      "tr": "Burada açık tel yok. Amaç da bu: ileride şeklin tamamı sap boyunca kayar."
+    },
+    {
+      "en": "Keep fingers 3 and 4 hovering close to their frets, even when they are not playing.",
+      "tr": "3. ve 4. parmağı çalmadıkları anda da perdelerine yakın, havada tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "G2 up to G3 and back in quarter notes with a click, at ♩=70 and ♩=45, string-model synthesis.",
+      "tr": "Klikle Sol2'den Sol3'e çıkış ve iniş, dörtlüklerle, ♩=70 ve ♩=45; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the scale up from G2 to G3 and back down to G2 in quarter notes with the click. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "Gamı Sol2'den Sol3'e çık ve Sol2'ye in; klikle birlikte dörtlüklerle çal. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "G2 A2 B2 C3 | D3 E3 F♯3 G3 | F♯3 E3 D3 C3 | B2 A2 G2",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My index finger stayed at fret 2 the whole time.", "tr": "İşaret parmağım baştan sona 2. perdede kaldı." },
+    { "en": "I used finger 4 for every note on fret 5.", "tr": "5. perdedeki her notada 4. parmağı kullandım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "That is F3 instead of F♯3. Use finger 3 on 4/4.", "tr": "Fa♯3 yerine Fa3 çaldın. 4/4'te 3. parmağı kullan." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "Your hand slides to reach fret 5. Keep finger 1 at fret 2 and open finger 4 instead of moving the hand.", "tr": "El 5. perdeye uzanmak için kayıyor. 1. parmağı 2. perdede tut; eli taşımak yerine 4. parmağı aç." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Finger 4 is pressing lightly. Bring it close behind fret 5 and keep it curved.", "tr": "4. parmak hafif basıyor. Onu 5. perdenin hemen arkasına getir ve kıvrık tut." }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop D3 E3 F♯3 G3 as a short cell at ♩=50, then play the full scale.",
+    "tr": "Re3 Mi3 Fa♯3 Sol3'ü kısa hücre olarak ♩=50'de döngüle, sonra tam gamı çal."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

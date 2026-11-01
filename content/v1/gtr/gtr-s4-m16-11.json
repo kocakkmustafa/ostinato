@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s4-m16-11",
+  "title": { "en": "A-shape checkpoint", "tr": "A-şekli geçişi" },
+  "goal": {
+    "en": "Plays an original 16-bar progression that mixes E-shape and A-shape barre chords with the D-DU-UDU pattern at ♩=80.",
+    "tr": "E-şekli ve A-şekli barre akorları karıştıran özgün 16 ölçülük ilerlemeyi D-DU-UDU kalıbıyla ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "The progression is in C: C | Am | F | G | C | Am | Dm | G | F | B♭ | C | Am | Dm | G | C | C.",
+      "tr": "İlerleme Do majördedir: C | Am | F | G | C | Am | Dm | G | F | B♭ | C | Am | Dm | G | C | C."
+    },
+    {
+      "en": "A shape: C x-3-5-5-5-3, Dm x-5-7-7-6-5, B♭ x-1-3-3-3-1. E shape: Am 5-7-7-5-5-5, F 1-3-3-2-1-1, G 3-5-5-4-3-3.",
+      "tr": "A-şekli: C x-3-5-5-5-3, Dm x-5-7-7-6-5, B♭ x-1-3-3-3-1. E-şekli: Am 5-7-7-5-5-5, F 1-3-3-2-1-1, G 3-5-5-4-3-3."
+    },
+    {
+      "en": "Three changes keep the barre on the same fret: Am to Dm at fret 5, F to B♭ at fret 1, G to C at fret 3. Move only the other fingers there.",
+      "tr": "Üç geçişte barre aynı perdede kalır: 5. perdede Am'den Dm'ye, 1. perdede F'den B♭'ye, 3. perdede G'den C'ye. Oralarda yalnız diğer parmakları taşı."
+    },
+    {
+      "en": "Strum D-DU-UDU in bars 1 to 15 and one long strum on C in bar 16. If a change is late, keep counting and land the next chord on beat 1.",
+      "tr": "1.–15. ölçülerde D-DU-UDU vur, 16. ölçüde C'ye tek uzun vuruş. Bir geçiş geç kalırsa saymayı sürdür ve sonraki akoru 1. vuruşa koy."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 16 bars with D-DU-UDU over an original bass and drum loop, at ♩=80 and at ♩=55.",
+      "tr": "Özgün bas ve davul döngüsü üstünde D-DU-UDU ile 16 ölçü; ♩=80 ve ♩=55."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 16 bars once with the accompaniment. You can practise at a lower tempo first; the checkpoint passes at ♩=80. Headphones help the microphone hear only your guitar.",
+      "tr": "Eşlikle 16 ölçüyü bir kez çal. Önce daha yavaş tempoda çalışabilirsin; geçiş ♩=80'de geçilir. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: C q e q e e e | Am q e q e e e | F q e q e e e | G q e q e e e | C q e q e e e | Am q e q e e e | Dm q e q e e e | G q e q e e e | F q e q e e e | B♭ q e q e e e | C q e q e e e | Am q e q e e e | Dm q e q e e e | G q e q e e e | C q e q e e e | C w",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "One change is slower than the others. Loop just that pair, one bar before and one after, then rejoin the loop.",
+        "tr": "Bir geçiş diğerlerinden yavaş. Yalnız o çifti, bir ölçü önce ve bir ölçü sonrasıyla döngüle; sonra döngüye geri dön."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "In C, Dm and B♭, let the index tip rest on string 6 and start the strum on string 5.",
+        "tr": "C, Dm ve B♭'de işaret parmağının ucu 6. telin üstünde dursun ve vuruşa 5. telden başla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones for the accompaniment and keep the phone close to the guitar.",
+        "tr": "Eşlik için kulaklık kullan ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise bars 1 to 8 and bars 9 to 16 as separate loops at ♩=65 with four downstrokes per bar, then join them.",
+    "tr": "1.–8. ve 9.–16. ölçüleri ♩=65'te, her ölçüde dört aşağı vuruşla ayrı döngüler olarak çalış, sonra birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

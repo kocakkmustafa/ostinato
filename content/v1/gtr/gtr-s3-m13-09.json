@@ -1,0 +1,92 @@
+{
+  "id": "gtr-s3-m13-09",
+  "title": { "en": "Twelve-bar call and response", "tr": "On iki ölçüde soru cevap" },
+  "goal": {
+    "en": "Improvises two-bar answers to two-bar calls through the 12-bar A blues at ♩=80.",
+    "tr": "12 ölçülük La blues boyunca iki ölçülük sorulara iki ölçülük cevaplar doğaçlar, ♩=80."
+  },
+  "explanation": [
+    {
+      "en": "Over the A blues, use A, C, D, E and G. The app plays a two-bar call; you answer in the next two bars.",
+      "tr": "La blues üstünde La, Do, Re, Mi ve Sol kullan. Uygulama iki ölçülük bir soru çalar; sen sonraki iki ölçüde cevap verirsin."
+    },
+    {
+      "en": "Each four-bar line holds one call and one answer: bars 1–2 call, bars 3–4 answer. One chorus has three pairs.",
+      "tr": "Her dört ölçülük satırda bir soru ve bir cevap var: 1–2. ölçü soru, 3–4. ölçü cevap. Bir turda üç çift olur."
+    },
+    {
+      "en": "Your answers fall on bars 3–4 and 7–8 over A7, and on bars 11–12 over A7 and E7. End the first two on A; end the last one on E, which leads back to bar 1.",
+      "tr": "Cevapların A7 üstünde 3–4. ve 7–8. ölçüye, A7 ve E7 üstünde 11–12. ölçüye düşer. İlk ikisini La'da bitir; sonuncusunu Mi'de bitir, o seni 1. ölçüye geri götürür."
+    },
+    {
+      "en": "Keep one thing from the call: its rhythm or its first note. Leave a counted rest before the next call.",
+      "tr": "Sorudan bir şeyi koru: ritmini ya da ilk notasını. Sonraki sorudan önce sayılan bir sus bırak."
+    },
+    {
+      "en": "When your eighths are steady, swing them. You may add E♭4 (string 3, fret 8) just before E4 as a passing blue note; it counts outside the pool, so use it rarely.",
+      "tr": "Sekizliklerin kararlıysa onları swing'li çal. Mi4'ten hemen önce geçici mavi nota olarak Mi♭4 (3. tel, 8. perde) ekleyebilirsin; havuz dışında sayılır, bu yüzden seyrek kullan."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Original two-bar calls over a 12-bar A blues loop at ♩=80 and ♩=55, each followed by two open bars for your answer.",
+      "tr": "♩=80 ve ♩=55'te 12 ölçülük La blues döngüsü üstünde özgün iki ölçülük sorular, her birinin ardından cevabın için iki boş ölçü."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "The app plays a two-bar call, and you answer in the next two bars with notes from the pool. One chorus has three calls and three answers; play two choruses. Headphones help the microphone hear only your guitar.",
+      "tr": "Uygulama iki ölçülük bir soru çalar, sen sonraki iki ölçüde havuzdaki notalarla cevap verirsin. Bir turda üç soru ve üç cevap var; iki tur çal. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes are in the pool, and your answers start and end inside their two bars at Level 3 timing.",
+        "tr": "Notalarının en az %90'ı havuzdan gelir; cevapların Seviye 3 zamanlama ölçütüyle kendi iki ölçüsü içinde başlar ve biter."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I used only the five pool notes.", "tr": "Yalnız havuzdaki beş notayı kullandım." },
+    { "en": "My answer kept one thing from the question.", "tr": "Cevabım sorudan bir şeyi korudu." },
+    { "en": "I ended each answer with a rest before the next question.", "tr": "Her cevabı sonraki sorudan önce bir susla bitirdim." },
+    { "en": "I ended the last answer of each chorus on E.", "tr": "Her turun son cevabını Mi'de bitirdim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: outside the pool.", "tr": "Farklı nota: havuzun dışında." },
+      "fix": {
+        "en": "A note just off the shape slipped in. Strings 6, 2 and 1 use frets 5 and 8; strings 5, 4 and 3 use frets 5 and 7.",
+        "tr": "Şeklin hemen yanındaki bir nota karıştı. 6., 2. ve 1. tel 5. ve 8. perdeyi; 5., 4. ve 3. tel 5. ve 7. perdeyi kullanır."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Start your answer on beat 1 of bar 3. Plan the first note while the question plays.",
+        "tr": "Cevabına 3. ölçünün 1. vuruşunda başla. Soru çalarken ilk notanı planla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Answer with two notes only, ending on A, until the form feels steady.",
+    "tr": "Biçim oturana kadar yalnız iki notayla, La'da biterek cevap ver."
+  },
+  "legacy": "R: guitar.journey.intermediate.blues_improv",
+  "minutes": 15,
+  "expertPending": true
+}

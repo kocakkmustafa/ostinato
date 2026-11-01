@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s3-m11-01",
+  "title": { "en": "The shape at fret five", "tr": "Beşinci perdede şekil" },
+  "goal": {
+    "en": "Plays one octave of the A minor pentatonic shape at fret 5, A2 to A3 and back, in quarter notes at ♩=60.",
+    "tr": "5. perdedeki La minör pentatonik şeklinin bir oktavını, La2'den La3'e çıkıp inerek ♩=60'ta dörtlüklerle çalar."
+  },
+  "explanation": [
+    {
+      "en": "Put finger 1 at fret 5 on string 6. That note is A2, the root of A minor pentatonic.",
+      "tr": "1. parmağı 6. telde 5. perdeye koy. Bu nota La2'dir, La minör pentatoniğin köküdür."
+    },
+    {
+      "en": "The shape spans frets 5 to 8. Give each fret its own finger: 1 on fret 5, 3 on fret 7, 4 on fret 8.",
+      "tr": "Şekil 5. ile 8. perde arasına yayılır. Her perdeye kendi parmağını ver: 5. perdeye 1, 7. perdeye 3, 8. perdeye 4."
+    },
+    {
+      "en": "One octave uses strings 6, 5 and 4: A2 6/5, C3 6/8, D3 5/5, E3 5/7, G3 4/5, A3 4/7.",
+      "tr": "Bir oktav 6., 5. ve 4. telleri kullanır: La2 6/5, Do3 6/8, Re3 5/5, Mi3 5/7, Sol3 4/5, La3 4/7."
+    },
+    {
+      "en": "These are the same five note names as in open position: A, C, D, E and G. Only the place on the neck changed.",
+      "tr": "Bunlar açık pozisyondaki beş nota adının aynısıdır: La, Do, Re, Mi ve Sol. Yalnız saptaki yer değişti."
+    },
+    {
+      "en": "Keep finger 1 resting near fret 5 as your anchor. Lift the other fingers only a little.",
+      "tr": "1. parmağı dayanak olarak 5. perdenin yakınında tut. Diğer parmakları yalnız biraz kaldır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "A2 up to A3 and back in quarter notes at ♩=60 and ♩=40, string-model synthesis, with click.",
+      "tr": "La2'den La3'e çıkış ve iniş, dörtlüklerle, ♩=60 ve ♩=40; tel modeli sentezi, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play from A2 up to A3 and back down to A2 in quarter notes with the click at ♩=60. Use finger 1 on fret 5, finger 3 on fret 7 and finger 4 on fret 8.",
+      "tr": "La2'den La3'e çık ve La2'ye in; klikle ♩=60'ta dörtlüklerle çal. 5. perdede 1., 7. perdede 3., 8. perdede 4. parmağı kullan."
+    },
+    "sequence": "A2 C3 D3 E3 | G3 A3 G3 E3 | D3 C3 A2",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I kept finger 1 near fret 5 the whole time.", "tr": "1. parmağı baştan sona 5. perdenin yakınında tuttum." },
+    { "en": "I played exactly two notes on each string.", "tr": "Her telde tam iki nota çaldım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "On string 6, C3 is at fret 8, not fret 7. Reach it with finger 4.", "tr": "6. telde Do3, 7. perdede değil 8. perdededir. Ona 4. parmakla uzan." }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "On strings 5 and 4, the second note is at fret 7. Finger 3 slipped to fret 8.", "tr": "5. ve 4. telde ikinci nota 7. perdededir. 3. parmak 8. perdeye kaymış." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play strings 6 and 5 only, A2 to E3 and back, at ♩=50.",
+    "tr": "Yalnız 6. ve 5. teli, La2'den Mi3'e çıkıp inerek ♩=50'de çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

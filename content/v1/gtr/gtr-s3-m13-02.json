@@ -1,0 +1,125 @@
+{
+  "id": "gtr-s3-m13-02",
+  "title": {
+    "en": "Shuffle feel",
+    "tr": "Shuffle hissi"
+  },
+  "goal": {
+    "en": "Plays swung eighths on the open A2 string with a swing ratio of 60–70% at ♩=70.",
+    "tr": "Açık La2 telinde swing'li sekizlikleri %60–70 swing oranıyla ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Straight eighths split each beat into two equal halves: 1-and-2-and.",
+      "tr": "Düz sekizlikler her vuruşu iki eşit yarıya böler: 1-ve-2-ve."
+    },
+    {
+      "en": "Swung eighths are long-short. Think of a triplet, 1-ta-ta, and play only on 1 and the last ta.",
+      "tr": "Swing'li sekizlikler uzun-kısadır. Bir üçleme düşün, 1-ta-ta, ve yalnız 1'de ve son 'ta'da çal."
+    },
+    {
+      "en": "The swing ratio is how much of the beat the first eighth takes. Straight is 50%; the triplet feel is about 67%. Aim for 60–70%.",
+      "tr": "Swing oranı, ilk sekizliğin vuruşun ne kadarını aldığıdır. Düz çalış %50, üçleme hissi yaklaşık %67'dir. %60–70'i hedefle."
+    },
+    {
+      "en": "Pick down on the long note and up on the short note. Keep the hand moving down-up even though the gaps are not equal.",
+      "tr": "Uzun notada aşağı, kısa notada yukarı pena vur. Aralıklar eşit olmasa da eli aşağı-yukarı hareket ettirmeyi sürdür."
+    },
+    {
+      "en": "A shuffle is a rhythm built on this swung feel. Every lesson in this module rests on it.",
+      "tr": "Shuffle, bu swing hissi üstüne kurulan ritimdir. Bu modüldeki her ders ona dayanır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "One bar of A2 in straight eighths, then four bars swung, with a click on every beat and a soft triplet click, at ♩=70 and ♩=50.",
+      "tr": "Bir ölçü düz sekizlik La2, sonra dört ölçü swing'li; her vuruşta klik ve hafif bir üçleme kliğiyle, ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3"
+    ],
+    "task": {
+      "en": "Play open string 5 (A2) in swung eighths for four bars with the click: down on the long note, up on the short one. The app measures the swing ratio of each pair.",
+      "tr": "Açık 5. teli (La2) klikle dört ölçü swing'li sekizliklerle çal: uzun notada aşağı, kısa notada yukarı. Uygulama her çiftin swing oranını ölçer."
+    },
+    "sequence": "4/4: A2:e A2:e A2:e A2:e A2:e A2:e A2:e A2:e | A2:e A2:e A2:e A2:e A2:e A2:e A2:e A2:e | A2:e A2:e A2:e A2:e A2:e A2:e A2:e A2:e | A2:e A2:e A2:e A2:e A2:e A2:e A2:e A2:e",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "A swing ratio of 60–70% on at least 80% of the pairs, and Level 3 timing on the beats.",
+        "tr": "Çiftlerin en az %80'inde %60–70 swing oranı ve vuruşlarda Seviye 3 zamanlama ölçütü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each pair sounded long-short, not even.",
+      "tr": "Her çift eşit değil, uzun-kısa duyuldu."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but too straight: swing ratio below 60%.",
+        "tr": "Doğru, ama fazla düz: swing oranı %60'ın altında."
+      },
+      "fix": {
+        "en": "Say 1-ta-ta aloud and play on 1 and the last ta. Let the long note ring longer.",
+        "tr": "1-ta-ta'yı sesli söyle ve 1'de ve son 'ta'da çal. Uzun notayı daha uzun bırak."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but too dotted: swing ratio above 70%.",
+        "tr": "Doğru, ama fazla noktalı: swing oranı %70'in üstünde."
+      },
+      "fix": {
+        "en": "The short note comes too late and sounds like a dotted rhythm. Play it right on the last triplet count.",
+        "tr": "Kısa nota çok geç geliyor ve noktalı ritim gibi duyuluyor. Onu tam son üçleme sayısında çal."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "The long note on the beat is late. Lock the down stroke to the click.",
+        "tr": "Vuruştaki uzun nota geç. Aşağı penayı kliğe oturt."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the long note on each beat for one bar, then add the short note softly.",
+    "tr": "Bir ölçü boyunca her vuruşta yalnız uzun notayı çal, sonra kısa notayı hafifçe ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

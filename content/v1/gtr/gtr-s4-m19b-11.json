@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m19b-11",
+  "title": { "en": "Connecting boxes 1 and 2", "tr": "1. ve 2. kutuyu bağlamak" },
+  "goal": {
+    "en": "Slides on string 3 from pentatonic box 1 into box 2 and back again, in eighth notes at ♩=70.",
+    "tr": "3. telde kaydırarak pentatonik 1. kutudan 2. kutuya geçer ve geri döner; sekizliklerle ♩=70."
+  },
+  "explanation": [
+    {
+      "en": "Box 1 is the 5th-fret box. Box 2 is position 2, around frets 7–10. Both hold the same notes: A, C, D, E, G.",
+      "tr": "1. kutu 5. perde kutusudur. 2. kutu 7–10. perdeler çevresindeki 2. pozisyondur. İkisi de aynı notaları taşır: La, Do, Re, Mi, Sol."
+    },
+    {
+      "en": "The bridge between them is string 3. Play C4 at fret 5 with finger 1 and slide it to D4 at fret 7. Your hand is now in box 2.",
+      "tr": "İkisi arasındaki köprü 3. teldir. 5. perdedeki Do4'ü 1. parmakla çal ve 7. perdedeki Re4'e kaydır. Elin artık 2. kutuda."
+    },
+    {
+      "en": "On the way back, play D4 at fret 7 with finger 1 and slide down to C4 at fret 5. You are back in box 1.",
+      "tr": "Dönüşte 7. perdedeki Re4'ü 1. parmakla çal ve 5. perdedeki Do4'e kaydır. Yeniden 1. kutudasın."
+    },
+    {
+      "en": "The slide takes one eighth like any other note. Do not stop to look; keep the eighths even through the shift.",
+      "tr": "Kaydırma diğer notalar gibi bir sekizlik sürer. Bakmak için durma; geçiş boyunca sekizlikleri eşit tut."
+    },
+    {
+      "en": "In the task, '/' marks a slide. Pick only the first note of the slide.",
+      "tr": "Görevde '/' kaydırmayı gösterir. Kaydırmanın yalnız ilk notasını penayla çal."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The connecting line in eighth notes with click at ♩=70 and ♩=45, string-model synthesis; the two slides are marked on screen.",
+      "tr": "Bağlantı dizisi sekizliklerle, klikle ♩=70 ve ♩=45, tel modeli sentezi; iki kaydırma ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the line in eighth notes with the click at ♩=70: up box 1, slide into box 2 on string 3, up to D5 and back, slide back into box 1, down to A2. Let the last A2 ring for the whole bar.",
+      "tr": "Diziyi klikle ♩=70'te sekizliklerle çal: 1. kutuda çık, 3. telde 2. kutuya kaydır, Re5'e kadar çık ve dön, 1. kutuya geri kaydır, La2'ye in. Son La2 bütün ölçü boyunca çalsın."
+    },
+    "sequence": "A2 C3 D3 E3 G3 A3 C4 / D4 | E4 G4 A4 C5 D5 C5 A4 G4 | E4 D4 / C4 A3 G3 E3 D3 C3 | A2",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I did not stop at the slides.", "tr": "Kaydırmalarda durmadım." },
+    { "en": "After each slide my hand was ready in the new box.", "tr": "Her kaydırmadan sonra elim yeni kutuda hazırdı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The shift is slow. Loop 'C4 / D4 E4 G4' at ♩=50 until the hand lands in box 2 without a pause.",
+        "tr": "Geçiş yavaş. El 2. kutuya duraksamadan inene kadar 'Do4 / Re4 Mi4 Sol4'ü ♩=50'de döngüle."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "After the slide up, E4 is at string 3, fret 9. The finger went to fret 10; in box 2, only string 3 tops out at fret 9.",
+        "tr": "Yukarı kaydırmadan sonra Mi4 3. telin 9. perdesindedir. Parmak 10. perdeye gitti; 2. kutuda yalnız 3. tel 9. perdede biter."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the line in quarter notes at ♩=60 and pause one beat after each slide.",
+    "tr": "Diziyi ♩=60'ta dörtlüklerle çal ve her kaydırmadan sonra bir vuruş dur."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

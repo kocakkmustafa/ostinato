@@ -1,0 +1,92 @@
+{
+  "id": "gtr-s4-m19b-05",
+  "title": { "en": "Half-step bends", "tr": "Yarım ses bend" },
+  "goal": {
+    "en": "Bends a string up one semitone and holds the target within ±20 cents on 8 bends.",
+    "tr": "Teli bir yarım ses yukarı çeker ve 8 bend'de hedefi ±20 cent içinde tutar."
+  },
+  "explanation": [
+    {
+      "en": "A bend raises the pitch by pushing the string across the fret. A half-step bend reaches the note one fret higher.",
+      "tr": "Bend, teli perde boyunca iterek perdeyi yükseltir. Yarım ses bend bir perde yukarıdaki notaya ulaşır."
+    },
+    {
+      "en": "Hear the target first. Pick the fret above, then go back one fret and bend up until the pitch matches.",
+      "tr": "Önce hedefi duy. Bir üst perdeyi çal, sonra bir perde geri gel ve perde eşleşene kadar yukarı çek."
+    },
+    {
+      "en": "Bend with finger 3 and put fingers 1 and 2 behind it on the same string. Three fingers push together.",
+      "tr": "3. parmakla çek; 1. ve 2. parmağı aynı tele, onun arkasına koy. Üç parmak birlikte iter."
+    },
+    {
+      "en": "On strings 1–3, push the string up toward the ceiling. Hook the thumb lightly over the neck and turn the wrist; the fingers alone tire quickly.",
+      "tr": "1–3. tellerde teli tavana doğru it. Başparmağı sapın üstüne hafifçe tak ve bileği çevir; yalnız parmaklar çabuk yorulur."
+    },
+    {
+      "en": "In the task, 'b' marks a bend: pick the first note, bend to the second. The app follows the pitch and shows how many cents you are from the target.",
+      "tr": "Görevde 'b' bend'i gösterir: ilk notayı penayla çal, ikinciye çek. Uygulama perdeyi izler ve hedeften kaç cent uzakta olduğunu gösterir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "For each bend: the target fret picked, then the bend from one fret below up to the target and held, string-model synthesis.",
+      "tr": "Her bend için: önce hedef perde penayla, sonra bir perde aşağıdan hedefe bend ve tutma, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A5"],
+    "task": {
+      "en": "Play each bend twice, 8 bends in all, in your own time. Hold each target for about one second. 1 string 3, fret 4. 2 string 3, fret 9. 3 string 2, fret 5. 4 string 1, fret 7.",
+      "tr": "Her bend'i kendi hızında iki kez çal, toplam 8 bend. Her hedefi yaklaşık bir saniye tut. 1 3. tel, 4. perde. 2 3. tel, 9. perde. 3 2. tel, 5. perde. 4 1. tel, 7. perde."
+    },
+    "sequence": "1: B3 b C4 ×2 · 2: E4 b F4 ×2 · 3: E4 b F4 ×2 · 4: B4 b C5 ×2",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "A bend is Correct when it settles within ±20 cents of the target. Pass: at least 7 of 8 bends.",
+        "tr": "Bend, hedefin ±20 cent içine oturunca Doğru sayılır. Geçiş: 8 bend'in en az 7'si."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I heard the target fret before each bend.", "tr": "Her bend'den önce hedef perdeyi duydum." },
+    { "en": "My bent note matched the target fret, not higher.", "tr": "Bend notam hedef perdeyle aynıydı, daha yüksek değil." },
+    { "en": "Three fingers pushed together, and my thumb stayed relaxed.", "tr": "Üç parmak birlikte itti ve başparmağım gevşek kaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the bend stops below the target.", "tr": "Farklı nota: bend hedefin altında kalıyor." },
+      "fix": {
+        "en": "Pick the target fret again and listen. Then push a little further and use the wrist, not only the finger.",
+        "tr": "Hedef perdeyi yeniden çal ve dinle. Sonra biraz daha it ve yalnız parmağı değil, bileği kullan."
+      }
+    },
+    {
+      "error": { "en": "Different note: the bend goes above the target.", "tr": "Farklı nota: bend hedefin üstüne çıkıyor." },
+      "fix": {
+        "en": "A half step is a short push. Bend slowly and stop as soon as the pitch matches the target.",
+        "tr": "Yarım ses kısa bir itiştir. Yavaş çek ve perde hedefle eşleşir eşleşmez dur."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "An unplugged electric guitar is quiet. Put the phone 15–20 cm from the strings and pick a little firmer.",
+        "tr": "Amfisiz elektro gitarın sesi kısıktır. Telefonu tellere 15–20 cm uzaklığa koy ve penayla biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Bend on string 3 only, where the string bends most easily, and do 4 bends with a short rest between them.",
+    "tr": "Yalnız en kolay bükülen 3. telde çek ve aralarda kısa mola vererek 4 bend yap."
+  },
+  "legacy": "V: guitar.journey.intermediate.slides_bends",
+  "minutes": 12,
+  "expertPending": true
+}

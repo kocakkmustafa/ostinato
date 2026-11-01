@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m19a-13",
+  "title": { "en": "Sor: a progressive lesson", "tr": "Sor: aşamalı bir ders" },
+  "goal": {
+    "en": "Plays a lesson selected from Sor's Op. 60 with both voices in time at ♩=60.",
+    "tr": "Sor'un Op. 60'ından seçilmiş bir dersi iki sesi de zamanında ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Fernando Sor (1778–1839) wrote Op. 60 as a set of progressive lessons for beginners. Each lesson adds one new idea to the one before.",
+      "tr": "Fernando Sor (1778–1839), Op. 60'ı yeni başlayanlar için aşamalı dersler olarak yazdı. Her ders bir öncekine tek bir yeni fikir ekler."
+    },
+    {
+      "en": "The score has two voices. Stems down: the bass, played with the thumb. Stems up: the melody, played with i and m.",
+      "tr": "Notada iki ses var. Sapı aşağı olanlar bastır, başparmakla çalınır. Sapı yukarı olanlar melodidir, i ve m ile çalınır."
+    },
+    {
+      "en": "Hold each bass note for its full value while the melody moves above it. Do not stop a ringing bass with the next finger.",
+      "tr": "Melodi üstte ilerlerken her bas notasını tam süresince tut. Çalan bir bası sonraki parmakla susturma."
+    },
+    {
+      "en": "Before you play, read the lesson once: find the key, the bass notes and any accidentals.",
+      "tr": "Çalmadan önce dersi bir kez oku: tonu, bas notalarını ve değiştirici işaretleri bul."
+    },
+    {
+      "en": "This is the Ostinato engraving, made from the 1837 Paris first edition. Fingering and tempo are ours, not an editor's.",
+      "tr": "Bu, 1837 Paris ilk baskısından hazırlanan Ostinato dizgisidir. Parmak numaraları ve tempo bizimdir, bir editörün değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The selected Op. 60 lesson from the Ostinato engraving, both voices, at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Ostinato dizgisinden seçilen Op. 60 dersi, iki ses, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Read the selected Op. 60 lesson on screen. Work in four-bar sections with the click at ♩=60, bass with p and melody with i and m. Then play the whole lesson.",
+      "tr": "Ekrandaki seçilmiş Op. 60 dersini oku. Klikle ♩=60'ta dört ölçülük bölümlerle çalış; bas p ile, melodi i ve m ile. Sonra dersin tamamını çal."
+    },
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each bass note rang for its full value.", "tr": "Her bas notası tam süresince çaldı." },
+    { "en": "I found each note from the staff, not from the TAB.", "tr": "Her notayı tab'dan değil porteden buldum." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "A sharp from the key signature or the bar was missed. Mark the sharps before you play.", "tr": "Donanımdaki ya da ölçüdeki bir diyez atlandı. Çalmadan önce diyezleri işaretle." }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The melody waits for the bass change. Look one bar ahead and prepare the next bass note early.", "tr": "Melodi bas değişimini bekliyor. Bir ölçü ileriye bak ve sonraki bas notasını erken hazırla." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the bass voice alone, then the melody alone, then join them at ♩=45.",
+    "tr": "Önce bas sesini tek başına, sonra melodiyi tek başına çal, sonra ikisini ♩=45'te birleştir."
+  },
+  "repertoire": "Fernando Sor (1778–1839), Introduction à l'étude de la guitare, Op. 60: one selected lesson. Source: Paris first edition, 1837. Public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 20,
+  "expertPending": true
+}

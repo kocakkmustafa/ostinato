@@ -1,0 +1,84 @@
+{
+  "id": "gtr-s3-m14-09",
+  "title": { "en": "Hearing chord quality", "tr": "Akor rengini duymak" },
+  "goal": {
+    "en": "Tells major, minor and dominant seventh chords apart by ear, then plays back the chord it hears.",
+    "tr": "Majör, minör ve dominant yedili akorları kulaktan ayırır, sonra duyduğu akoru geri çalar."
+  },
+  "explanation": [
+    {
+      "en": "Major sounds bright and settled. Minor sounds darker. The only change between them is the third, one fret.",
+      "tr": "Majör parlak ve yerleşik duyulur. Minör daha koyu duyulur. Aralarındaki tek fark üçlüdür, bir perde."
+    },
+    {
+      "en": "A dominant seventh like A7 sounds major with an extra tension. It seems to want to move on.",
+      "tr": "A7 gibi bir dominant yedili, ek bir gerilimle majör duyulur. Bir yere gitmek ister gibidir."
+    },
+    {
+      "en": "Listen to the top notes. In A, Am and A7 on the guitar, the change sits on strings 3 and 2.",
+      "tr": "Üstteki notaları dinle. Gitardaki A, Am ve A7'de değişim 3. ve 2. teldedir."
+    },
+    {
+      "en": "Each question keeps the same root, so only the quality changes. Sing the chord's lowest note first; it helps you hold the root.",
+      "tr": "Her soruda kök aynı kalır; yalnız akorun rengi değişir. Önce akorun en pes notasını söyle; kökü tutmana yardım eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A, Am and A7, then D, Dm and D7, then E, Em and E7, each strummed then arpeggiated in open shapes, string-model synthesis.",
+      "tr": "A, Am ve A7, sonra D, Dm ve D7, sonra E, Em ve E7; her biri açık şekillerde önce taranır sonra arpej çalınır, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Part 1: hear 10 chords and choose major, minor or seventh. If your answer differs, “your answer” and “correct” appear side by side; listen to both. Part 2: the app plays 4 chords on A, D or E; play back each one in its open shape.",
+      "tr": "1. bölüm: 10 akoru dinle ve majör, minör ya da yedili seç. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle. 2. bölüm: uygulama A, D ya da E üstünde 4 akor çalar; her birini açık şekliyle geri çal."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 9 },
+    "drill": {
+      "type": "triad_quality",
+      "count": 10,
+      "params": {
+        "qualities": ["major", "minor", "dominant7"],
+        "inversions": false,
+        "arpeggiate": true,
+        "voicing": "guitar_open",
+        "roots": ["A", "D", "E"],
+        "playBack": 4
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can say which string changes between A, Am and A7.", "tr": "A, Am ve A7 arasında hangi telin değiştiğini söyleyebiliyorum." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My chord sounded the same as the reference.", "tr": "Akorum referansla aynı duyuldu." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: major chosen for seventh.", "tr": "Farklı cevap: yedili yerine majör seçildi." },
+      "fix": {
+        "en": "Both have a major third. Listen for the extra note a whole step below the root's octave; it makes the chord lean forward.",
+        "tr": "İkisinde de büyük üçlü vardır. Kökün oktavının bir tam ses altındaki ek notayı dinle; akoru ileri doğru iter."
+      }
+    },
+    {
+      "error": { "en": "Different chord: major heard, minor expected.", "tr": "Farklı akor: minör beklenirken majör duyuldu." },
+      "fix": {
+        "en": "The third is one fret too high. In Am, Dm and Em, check the finger that makes the minor third.",
+        "tr": "Üçlü bir perde yüksek. Am, Dm ve Em'de minör üçlüyü yapan parmağı kontrol et."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with major and minor only on A, then add the seventh when you get 8 of 10.",
+    "tr": "Önce yalnız A üstünde majör ve minörle başla; 10'da 8 yapınca yediliyi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

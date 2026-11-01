@@ -1,0 +1,89 @@
+{
+  "id": "gtr-s3-m14-01",
+  "title": { "en": "Build major and minor triads", "tr": "Majör ve minör üçlüleri kur" },
+  "goal": {
+    "en": "Spells major and minor triads as root, third and fifth, and plays four of them note by note.",
+    "tr": "Majör ve minör üçlüleri kök, üçlü ve beşli olarak yazar; dördünü nota nota çalar."
+  },
+  "explanation": [
+    {
+      "en": "A triad has three notes: a root, a third and a fifth. C E G is C major. A C E is A minor.",
+      "tr": "Üçlü akorun üç notası vardır: kök, üçlü ve beşli. Do Mi Sol, Do majördür. La Do Mi, La minördür."
+    },
+    {
+      "en": "Count frets from the root. A major third is 4 frets up, a minor third 3 frets. The fifth is 7 frets up in both.",
+      "tr": "Kökten perde say. Büyük üçlü 4 perde yukarıdadır, küçük üçlü 3 perde. Beşli ikisinde de 7 perde yukarıdadır."
+    },
+    {
+      "en": "Only the third decides major or minor. C E G becomes C minor when E moves down to E♭.",
+      "tr": "Majör mü minör mü olduğuna yalnız üçlü karar verir. Mi, Mi♭'ye inince Do Mi Sol, Do minör olur."
+    },
+    {
+      "en": "Find the same three notes inside the C and Am shapes. The other strings repeat one of them in another octave.",
+      "tr": "Aynı üç notayı C ve Am şekillerinin içinde bul. Diğer teller bunlardan birini başka oktavda tekrar eder."
+    },
+    {
+      "en": "Reorder C E G as E G C or G C E and it is still C major. A new bass note makes an inversion, not a new chord.",
+      "tr": "Do Mi Sol'ü Mi Sol Do ya da Sol Do Mi diye sırala; yine Do majördür. Yeni bas notası çevrim yapar, yeni akor değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C, Cm, A and Am as slow root-third-fifth arpeggios and back, string-model synthesis; the changing third is marked on screen.",
+      "tr": "C, Cm, A ve Am, yavaş kök-üçlü-beşli arpej ve dönüş, tel modeli sentezi; değişen üçlü ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Part 1: answer 4 questions on a fretboard diagram, tapping the root, third and fifth of a named triad. Part 2: play four triads up and back: C, Cm, A and Am. No click; take your time.",
+      "tr": "1. bölüm: klavye şemasında 4 soruyu cevapla; adı verilen üçlünün kökünü, üçlüsünü ve beşlisini işaretle. 2. bölüm: dört üçlüyü çıkıp inerek çal: C, Cm, A ve Am. Klik yok; acele etme."
+    },
+    "sequence": "C3 E3 G3 E3 C3 | C3 E♭3 G3 E♭3 C3 | A2 C♯3 E3 C♯3 A2 | A2 C3 E3 C3 A2",
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 4,
+      "params": {
+        "set": "triad_tones",
+        "diagram": "fretboard",
+        "qualities": ["major", "minor"],
+        "roots": ["C", "G", "D", "A", "E"],
+        "frets": [0, 5]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can name the root, third and fifth of C major and A minor.", "tr": "Do majör ve La minörün kökünü, üçlüsünü ve beşlisini söyleyebiliyorum." },
+    { "en": "I moved the third by one fret to change major into minor.", "tr": "Majörü minöre çevirmek için üçlüyü bir perde kaydırdım." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "In a minor triad you played the major third. Count 3 frets from the root, not 4.",
+        "tr": "Minör üçlüde büyük üçlüyü çaldın. Kökten 4 değil 3 perde say."
+      }
+    },
+    {
+      "error": { "en": "Different answer: inversion named as a new chord.", "tr": "Farklı cevap: çevrim yeni akor sanıldı." },
+      "fix": {
+        "en": "List the three note names first. If they match, it is the same chord; the bass note only names the inversion.",
+        "tr": "Önce üç nota adını yaz. Aynıysa akor aynıdır; bas notası yalnız çevrimi adlandırır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Name and play each triad as separate notes on one string first, then use neighbouring strings.",
+    "tr": "Her üçlüyü önce tek telde ayrı notalar olarak adlandırıp çal, sonra komşu telleri kullan."
+  },
+  "legacy": "R: guitar.journey.harmony.triads",
+  "minutes": 14,
+  "expertPending": true
+}

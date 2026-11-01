@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s3-m11-11",
+  "title": { "en": "Improvising with three notes", "tr": "Üç notayla doğaçlama" },
+  "goal": {
+    "en": "Improvises eight bars over a backing using only A3, C4 and D4, with at least 90% of notes from the pool.",
+    "tr": "Eşlik üstünde yalnız La3, Do4 ve Re4 ile sekiz ölçü doğaçlama yapar; notaların en az %90'ı havuzdan gelir."
+  },
+  "explanation": [
+    {
+      "en": "With only three notes, the music comes from rhythm, repetition and space.",
+      "tr": "Yalnız üç notayla müzik ritimden, tekrardan ve boşluktan doğar."
+    },
+    {
+      "en": "Your pool: A3 4/7, C4 3/5, D4 3/7. Use only these.",
+      "tr": "Havuzun: La3 4/7, Do4 3/5, Re4 3/7. Yalnız bunları kullan."
+    },
+    {
+      "en": "Play one idea, repeat it, then change one thing: its rhythm, its order or its last note.",
+      "tr": "Bir fikir çal, tekrarla, sonra tek bir şeyi değiştir: ritmini, sırasını ya da son notasını."
+    },
+    {
+      "en": "Leave whole beats of rest. Silence is part of the phrase.",
+      "tr": "Tam vuruşluk suslar bırak. Sessizlik cümlenin bir parçasıdır."
+    },
+    {
+      "en": "End bar 4 on C4 or D4 so it sounds like a question. End bar 8 on A3 so it sounds like the answer.",
+      "tr": "4. ölçüyü soru gibi duyulsun diye Do4 ya da Re4'te bitir. 8. ölçüyü cevap gibi duyulsun diye La3'te bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "An original Am bass-and-drum loop at ♩=70 for eight bars with a one-bar count-in, plus a short original example phrase on A3, C4 and D4.",
+      "tr": "♩=70'te bir ölçü sayma girişiyle sekiz ölçülük özgün Am bas ve davul döngüsü; ayrıca La3, Do4 ve Re4 ile kısa özgün bir örnek cümle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Improvise for eight bars over the backing at ♩=70 using only the three pool notes. Do this twice. Headphones help the microphone hear only your guitar.",
+      "tr": "Eşlik üstünde ♩=70'te yalnız havuzdaki üç notayla sekiz ölçü doğaçlama yap. Bunu iki kez yap. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes are in the pool, across all eight bars.",
+        "tr": "Sekiz ölçünün tamamında notalarının en az %90'ı havuzdan gelir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I used only the three pool notes.", "tr": "Yalnız havuzdaki üç notayı kullandım." },
+    { "en": "I repeated an idea before I changed it.", "tr": "Bir fikri değiştirmeden önce tekrarladım." },
+    { "en": "I left at least one beat of rest in most bars.", "tr": "Çoğu ölçüde en az bir vuruşluk sus bıraktım." },
+    { "en": "My last phrase ended on A3.", "tr": "Son cümlem La3'te bitti." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: outside the pool.", "tr": "Farklı nota: havuzun dışında." },
+      "fix": { "en": "Usually G3 or E4 slipped in from a neighbouring string. Keep the pick on strings 4 and 3 only.", "tr": "Genelde komşu telden Sol3 ya da Mi4 karışıyor. Penayı yalnız 4. ve 3. telde tut." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Very short notes can be too quiet to judge. Let each note ring for at least half a beat.", "tr": "Çok kısa notalar karar verilemeyecek kadar kısık kalabilir. Her nota en az yarım vuruş çınlasın." }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only A3 and C4 for the first four bars, then add D4.",
+    "tr": "İlk dört ölçüde yalnız La3 ve Do4'ü kullan, sonra Re4'ü ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s4-m19b-12",
+  "title": { "en": "Blues licks I", "tr": "Blues lick'leri I" },
+  "goal": {
+    "en": "Plays four original one-bar blues licks over an A blues backing at ♩=70, each answered by a bar of rest.",
+    "tr": "La blues eşliği üstünde dört özgün bir ölçülük blues lick'ini ♩=70'te çalar; her birini bir ölçü sus izler."
+  },
+  "explanation": [
+    {
+      "en": "A lick is a short phrase you can reuse. These four are built from A minor pentatonic, with one extra note in lick 4: D♯3, the blue note.",
+      "tr": "Lick, yeniden kullanabileceğin kısa bir cümledir. Bu dördü La minör pentatonikten kurulu; 4. lick'te bir ek nota var: blue nota Re♯3."
+    },
+    {
+      "en": "Each lick is six eighth notes and a final quarter note. The final note is the landing; play it clearly and let it ring.",
+      "tr": "Her lick altı sekizlik ve son bir dörtlükten oluşur. Son nota iniş noktasıdır; net çal ve çalmasına izin ver."
+    },
+    {
+      "en": "Play the eighths with a shuffle feel: long-short, as in the shuffle lessons. The backing shows the feel.",
+      "tr": "Sekizlikleri shuffle hissiyle çal: uzun-kısa, shuffle derslerindeki gibi. Eşlik hissi gösterir."
+    },
+    {
+      "en": "Lick 2 uses a hammer-on and a pull-off (h, p); lick 3 starts with a slide (/) into the 7th-fret box and comes back to the 5th-fret box.",
+      "tr": "2. lick bir çekiç ve bir çekme (h, p) kullanır; 3. lick 7. perde kutusuna bir kaydırmayla (/) başlar ve 5. perde kutusuna döner."
+    },
+    {
+      "en": "The rest bar is part of the music. Let the backing answer before the next lick.",
+      "tr": "Sus ölçüsü müziğin parçasıdır. Sonraki lick'ten önce eşliğin cevap vermesine izin ver."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "Original 8-bar A blues backing in shuffle feel: A7 ×4, D7 ×2, A7 ×2, with bass and drums. Each lick played over it at ♩=70 and ♩=50. Headphones recommended.",
+      "tr": "Shuffle hissinde özgün 8 ölçülük La blues eşliği: A7 ×4, D7 ×2, A7 ×2, bas ve davulla. Her lick bunun üstünde ♩=70 ve ♩=50'de çalınır. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play lick 1 in bar 1, rest in bar 2; lick 2 in bar 3, rest in bar 4; and so on over the 8-bar backing at ♩=70. Each lick is six swung eighths and a quarter note.",
+      "tr": "♩=70'teki 8 ölçülük eşlik üstünde 1. lick'i 1. ölçüde çal, 2. ölçüde sus; 2. lick'i 3. ölçüde çal, 4. ölçüde sus; böyle devam et. Her lick altı shuffle sekizlik ve bir dörtlüktür."
+    },
+    "sequence": "1: A4 C5 A4 G4 E4 G4 A4 | rest · 2: C4 h D4 p C4 A3 G3 E3 A3 | rest · 3: D4 / E4 G4 E4 D4 C4 A3 | rest · 4: A2 C3 D3 D♯3 E3 C3 A2 | rest",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The last note of each lick rang clearly.", "tr": "Her lick'in son notası net çaldı." },
+    { "en": "I stayed silent in the rest bars.", "tr": "Sus ölçülerinde sessiz kaldım." },
+    { "en": "My eighths had the long-short shuffle feel.", "tr": "Sekizliklerimde uzun-kısa shuffle hissi vardı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The lick starts before beat 1. Count '3, 4' of the rest bar aloud and come in on '1'.",
+        "tr": "Lick 1. vuruştan önce başlıyor. Sus ölçüsünün '3, 4'ünü sesli say ve '1'de gir."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "In lick 4, D♯3 is only a passing note at string 5, fret 6. Move on to E3 at fret 7 right away.",
+        "tr": "4. lick'te Re♯3 yalnız 5. telin 6. perdesinde bir geçiş notasıdır. Hemen 7. perdedeki Mi3'e geç."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "An unplugged electric guitar is quiet. Put the phone 15–20 cm from the strings and pick a little firmer.",
+        "tr": "Amfisiz elektro gitarın sesi kısıktır. Telefonu tellere 15–20 cm uzaklığa koy ve penayla biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise one lick at a time over a looped two-bar backing at ♩=55.",
+    "tr": "♩=55'te döngülenen iki ölçülük eşlik üstünde her seferinde bir lick çalış."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

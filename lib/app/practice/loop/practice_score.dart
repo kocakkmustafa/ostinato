@@ -10,7 +10,8 @@ import 'dart:math' as math;
 /// - rhythm tokens: `w h q e ee`, dotted `h.`, rest `qr`, tie `h~q`, and a
 ///   tie across the bar line `q~ | q`;
 /// - a chord name before a bar's rhythm (`Am h hr`) is a label only;
-/// - degree runs (voice/ear): `1-2-3-2-1`, one quarter each;
+/// - degree runs (voice/ear): `1-2-3-2-1`, one quarter each; a degree may
+///   carry an accidental (`b3`, `#4`) and a rhythm suffix (`3:e`, `b7:h`);
 /// - `|` separators; every segment starts on the next bar line;
 /// - optional meter prefix `3/4:` (default 4/4), and `×N`/`xN` = play
 ///   everything so far N times in total.
@@ -26,6 +27,7 @@ final class PracticeEvent {
     this.midi,
     this.pitchName,
     this.degree,
+    this.degreeShift = 0,
   });
 
   final int index;
@@ -38,6 +40,9 @@ final class PracticeEvent {
   /// As written in the lesson (`E2`), for labels.
   final String? pitchName;
   final int? degree;
+
+  /// Accidental on [degree] in semitones: `b3` → −1, `#4` → +1.
+  final int degreeShift;
 
   double get endBeat => startBeat + durationBeats;
 }
@@ -65,10 +70,13 @@ final class PracticeScore {
 
   static final RegExp _meter = RegExp(r'^\s*(\d{1,2})/(\d{1,2})\s*:\s*');
   static final RegExp _pitch = RegExp(
-    r'^([A-G])([#b♯♭]?)(-?\d)(?::([whqe~.r]+))?$',
+    r'^([A-G])([#b♯♭]?)(-?\d)(?::([whqet~.r]+))?$',
   );
-  static final RegExp _rhythm = RegExp(r'^(?:[whqe]\.?)(?:~[whqe]\.?)*r?$');
-  static final RegExp _degrees = RegExp(r'^\d+(?:-\d+)*$');
+  static final RegExp _rhythm = RegExp(r'^(?:[whqet]\.?)(?:~[whqet]\.?)*r?$');
+  static final RegExp _degree = RegExp(r'^([b#♭♯]?)(\d+)(?::([whqet~.]+))?$');
+  static final RegExp _degrees = RegExp(
+    r'^[b#♭♯]?\d+(?::[whqet~.]+)?(?:-[b#♭♯]?\d+(?::[whqet~.]+)?)*$',
+  );
   static final RegExp _repeat = RegExp(r'^[×x](\d{1,2})$');
 
   /// A chord name before a bar's rhythm (`Am h hr`): a label, not an event.
@@ -136,10 +144,22 @@ final class PracticeScore {
             tieIn && _rhythm.hasMatch(token.replaceFirst(RegExp(r'~$'), ''));
         if (_degrees.hasMatch(token)) {
           for (final d in token.split('-')) {
+            final m = _degree.firstMatch(d)!;
+            final dur = m.group(3) == null ? 1.0 : _duration(m.group(3)!);
             raw.add(
-              _Raw(PracticeEventKind.degree, position, 1, degree: int.parse(d)),
+              _Raw(
+                PracticeEventKind.degree,
+                position,
+                dur,
+                degree: int.parse(m.group(2)!),
+                degreeShift: switch (m.group(1)) {
+                  'b' || '♭' => -1,
+                  '#' || '♯' => 1,
+                  _ => 0,
+                },
+              ),
             );
-            position += 1;
+            position += dur;
           }
           continue;
         }
@@ -188,6 +208,7 @@ final class PracticeScore {
             midi: e.midi,
             pitchName: e.name,
             degree: e.degree,
+            degreeShift: e.degreeShift,
           ),
         );
       }
@@ -208,6 +229,8 @@ final class PracticeScore {
         'h' => 2.0,
         'q' => 1.0,
         'e' => .5,
+        // Triplet eighth: three in one beat (`A2:t C3:t D3:t`).
+        't' => 1 / 3,
         _ => throw FormatException('Bad duration $token'),
       };
       if (part.length == 1) {
@@ -242,12 +265,14 @@ final class _Raw {
     this.midi,
     this.name,
     this.degree,
+    this.degreeShift = 0,
   });
   final PracticeEventKind kind;
   final double start, duration;
   final int? midi;
   final String? name;
   final int? degree;
+  final int degreeShift;
 }
 
 /// String (1 = high E … 6 = low E) and fret for one sounding pitch.

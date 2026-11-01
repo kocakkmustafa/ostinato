@@ -1,0 +1,122 @@
+{
+  "id": "gtr-s3-m12-04",
+  "title": {
+    "en": "Pattern p-i-m-i",
+    "tr": "p-i-m-i kalıbı"
+  },
+  "goal": {
+    "en": "Plays the p-i-m-i pattern in eighth notes on G and Em at ♩=60.",
+    "tr": "p-i-m-i kalıbını G ve Em'de sekizlik olarak ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "p-i-m-i turns back after m: thumb, index, middle, index. a rests.",
+      "tr": "p-i-m-i, m'den sonra geri döner: başparmak, işaret, orta, işaret. a dinlenir."
+    },
+    {
+      "en": "i plays string 3 twice in each round. Let it pluck the same string again without moving the hand.",
+      "tr": "i her turda 3. teli iki kez çalar. Eli oynatmadan aynı teli yeniden çeksin."
+    },
+    {
+      "en": "G is 3-2-0-0-0-3: p plays G2 on string 6, fret 3. Em is 0-2-2-0-0-0: p plays open E2.",
+      "tr": "G 3-2-0-0-0-3'tür: p 6. telin 3. perdesinde Sol2'yi çalar. Em 0-2-2-0-0-0'dır: p açık Mi2'yi çalar."
+    },
+    {
+      "en": "The upper notes are the same in both chords: G3 and B3 on open strings 3 and 2. Only the bass changes.",
+      "tr": "Üst notalar iki akorda da aynıdır: açık 3. ve 2. telde Sol3 ve Si3. Yalnız bas değişir."
+    },
+    {
+      "en": "Accent nothing. The four notes of each round are equally strong.",
+      "tr": "Hiçbir notayı vurgulama. Her turun dört notası eşit güçtedir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "p-i-m-i in eighth notes, two bars of G and two bars of Em, with a click at ♩=60 and ♩=40.",
+      "tr": "Sekizlik p-i-m-i, iki ölçü G ve iki ölçü Em; klikle ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play p-i-m-i in eighth notes with the click: two bars of G, then two bars of Em. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Klikle sekizlik p-i-m-i çal: iki ölçü G, sonra iki ölçü Em. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "G2:e G3:e B3:e G3:e G2:e G3:e B3:e G3:e | G2:e G3:e B3:e G3:e G2:e G3:e B3:e G3:e | E2:e G3:e B3:e G3:e E2:e G3:e B3:e G3:e | E2:e G3:e B3:e G3:e E2:e G3:e B3:e G3:e",
+    "tempo": {
+      "open": 50,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each note rang without buzzing.",
+      "tr": "Her nota vızıltısız çaldı."
+    },
+    {
+      "en": "The new chord sounded on beat 1.",
+      "tr": "Yeni akor 1. vuruşta çaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a minor third low.",
+        "tr": "Farklı nota, küçük üçlü alçak."
+      },
+      "fix": {
+        "en": "In G, the thumb heard open E2. Press the finger on string 6, fret 3 before beat 1.",
+        "tr": "G'de başparmak açık Mi2'yi çaldı. 1. vuruştan önce 6. telin 3. perdesine parmağını bas."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The second i comes too soon. Count \"1 and 2 and\": p and m on the beats, i on each \"and\".",
+        "tr": "İkinci i çok erken geliyor. \"1 ve 2 ve\" diye say: p ve m vuruşta, i her \"ve\"de."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Low notes fade quickly. Pluck strings 5 and 6 a little firmer and keep the phone close to the guitar.",
+        "tr": "Pes notalar çabuk söner. 5. ve 6. telleri biraz daha net çek ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only Em, where the fretting hand does not change, until the pattern is even. Then add G.",
+    "tr": "Kalıp eşitlenene kadar sol elin değişmediği Em'i çal. Sonra G'yi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

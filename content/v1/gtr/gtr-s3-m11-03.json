@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s3-m11-03",
+  "title": { "en": "Alternate picking the scale", "tr": "Gamda alternatif pena" },
+  "goal": {
+    "en": "Plays the two-octave A minor pentatonic shape with strict alternate picking in eighth notes at ♩=70.",
+    "tr": "İki oktavlık La minör pentatonik şeklini kesintisiz alternatif penayla ♩=70'te sekizliklerle çalar."
+  },
+  "explanation": [
+    {
+      "en": "Alternate picking means down, up, down, up, with no exceptions. The pick keeps the same order across every string.",
+      "tr": "Alternatif pena aşağı, yukarı, aşağı, yukarı demektir; istisnası yoktur. Pena her telde aynı sırayı sürdürür."
+    },
+    {
+      "en": "With two notes per string, every string on the way up starts with a down stroke.",
+      "tr": "Her telde iki nota olduğu için, çıkarken her tel aşağı vuruşla başlar."
+    },
+    {
+      "en": "On the way down, from string 2 on, every string starts with an up stroke. Keep the order strict even when it feels new.",
+      "tr": "İnerken, 2. telden itibaren her tel yukarı vuruşla başlar. Yeni gelse bile sırayı bozma."
+    },
+    {
+      "en": "Keep each motion small: just past the string, no further.",
+      "tr": "Her hareketi küçük tut: telin hemen ötesine kadar, daha fazla değil."
+    },
+    {
+      "en": "Make the up stroke as deep as the down stroke, so both notes sound equally strong.",
+      "tr": "Yukarı vuruşu aşağı vuruş kadar derin yap; iki nota da aynı güçte çıksın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "A2 up to C5 and back in eighth notes, twice, at ♩=70 and ♩=45, string-model synthesis, with click.",
+      "tr": "La2'den Do5'e çıkış ve iniş, sekizliklerle, iki kez, ♩=70 ve ♩=45; tel modeli sentezi, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the two-octave shape up and back twice without stopping, in eighth notes with the click. Pick down, up, down, up throughout. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "İki oktavlık şekli durmadan iki kez çıkıp in; klikle sekizliklerle çal. Baştan sona aşağı, yukarı, aşağı, yukarı pena kullan. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "A2:e C3:e D3:e E3:e G3:e A3:e C4:e D4:e | E4:e G4:e A4:e C5:e A4:e G4:e E4:e D4:e | C4:e A3:e G3:e E3:e D3:e C3:e A2:q",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I never played two down strokes in a row.", "tr": "Hiç arka arkaya iki aşağı vuruş çalmadım." },
+    { "en": "My up strokes sounded as strong as my down strokes.", "tr": "Yukarı vuruşlarım aşağı vuruşlarım kadar güçlü çıktı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "A second down stroke crept in at a string change. Say \"down, up\" aloud and loop the two strings where it happens.", "tr": "Tel geçişinde ikinci bir aşağı vuruş araya girdi. Sesli olarak \"aşağı, yukarı\" de ve bunun olduğu iki teli döngüle." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "The upstroke misses the string. Let the pick tip pass through the string on the way up as well.", "tr": "Yukarı hareket teli ıskalıyor. Penanın ucu yukarı giderken de telin içinden geçsin." }
+    }
+  ],
+  "adaptation": {
+    "en": "Alternate pick one string first: A2 and C3 on string 6, 16 eighth notes at ♩=50.",
+    "tr": "Önce tek telde alternatif pena çalış: 6. telde La2 ve Do3, 16 sekizlik, ♩=50."
+  },
+  "minutes": 14,
+  "expertPending": true
+}

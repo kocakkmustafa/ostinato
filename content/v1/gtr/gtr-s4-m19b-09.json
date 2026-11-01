@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m19b-09",
+  "title": { "en": "Double stops", "tr": "Çift sesler" },
+  "goal": {
+    "en": "Plays eight double stops in thirds and fourths on strings 3 and 2 at ♩=60, with both notes sounding.",
+    "tr": "3. ve 2. tellerde üçlü ve dörtlü sekiz çift sesi ♩=60'ta, iki nota da duyulacak şekilde çalar."
+  },
+  "explanation": [
+    {
+      "en": "A double stop is two notes played together. On strings 3 and 2 (G and B) the shapes are small and easy to move.",
+      "tr": "Çift ses, birlikte çalınan iki notadır. 3. ve 2. tellerde (Sol ve Si) şekiller küçüktür ve kolay taşınır."
+    },
+    {
+      "en": "Same fret on both strings gives a major third, for example C4 and E4 at fret 5. String 2 one fret lower gives a minor third, for example D4 (string 3, fret 7) and F4 (string 2, fret 6).",
+      "tr": "İki telde aynı perde büyük üçlü verir; örneğin 5. perdede Do4 ve Mi4. 2. tel bir perde aşağıda olursa küçük üçlü olur; örneğin Re4 (3. tel, 7. perde) ve Fa4 (2. tel, 6. perde)."
+    },
+    {
+      "en": "String 2 one fret higher gives a perfect fourth, for example E4 (string 3, fret 9) and A4 (string 2, fret 10).",
+      "tr": "2. tel bir perde yukarıda olursa tam dörtlü olur; örneğin Mi4 (3. tel, 9. perde) ve La4 (2. tel, 10. perde)."
+    },
+    {
+      "en": "Pick only the two strings. Rest the picking-hand palm on strings 4–6 and let the fretting fingers touch string 1 to keep it silent.",
+      "tr": "Yalnız iki teli çal. Sağ avucunu 4–6. tellere koy ve sol eldeki parmaklar 1. tele değerek onu sessiz tutsun."
+    },
+    {
+      "en": "In the task, '+' joins two notes played together. The app checks that both strings sound.",
+      "tr": "Görevde '+' birlikte çalınan iki notayı birleştirir. Uygulama iki telin de çaldığını kontrol eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The eight double stops in half notes at ♩=60 and ♩=40, string-model synthesis, each one then plucked string by string.",
+      "tr": "Sekiz çift ses ikiliklerle ♩=60 ve ♩=40, tel modeli sentezi; her biri ardından tel tel çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Play the eight double stops in half notes with the click at ♩=60. Frets (string 3 / string 2): 5/5, 7/6, 9/8, 7/6, 9/10, 7/8, 5/6, 5/5.",
+      "tr": "Sekiz çift sesi klikle ♩=60'ta ikiliklerle çal. Perdeler (3. tel / 2. tel): 5/5, 7/6, 9/8, 7/6, 9/10, 7/8, 5/6, 5/5."
+    },
+    "sequence": "C4+E4 D4+F4 | E4+G4 D4+F4 | E4+A4 D4+G4 | C4+F4 C4+E4",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both notes of every double stop rang.", "tr": "Her çift sesin iki notası da çaldı." },
+    { "en": "No other string sounded with them.", "tr": "Onlarla birlikte başka tel çalmadı." },
+    { "en": "I can tell which shapes are thirds and which are fourths.", "tr": "Hangi şekillerin üçlü, hangilerinin dörtlü olduğunu ayırt edebiliyorum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "The finger on string 3 is leaning on string 2. Arch it and press with the very tip.",
+        "tr": "3. teldeki parmak 2. tele yaslanıyor. Parmağı kavisli tut ve tam uçtan bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 also heard.", "tr": "Farklı akor: 1. tel de duyuldu." },
+      "fix": {
+        "en": "Stop the pick after string 2, and let a fretting finger lightly touch string 1.",
+        "tr": "Penayı 2. telden sonra durdur ve sol eldeki bir parmak 1. tele hafifçe değsin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the same-fret shape (5/5, then 7/7, 9/9) until both strings ring, then add the other shapes.",
+    "tr": "İki tel de çalana kadar yalnız aynı perde şeklini (5/5, sonra 7/7, 9/9) çal, sonra diğer şekilleri ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

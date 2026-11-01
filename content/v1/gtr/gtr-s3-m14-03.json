@@ -1,0 +1,84 @@
+{
+  "id": "gtr-s3-m14-03",
+  "title": { "en": "Cmaj7, Amaj7 and Dmaj7", "tr": "Cmaj7, Amaj7 ve Dmaj7" },
+  "goal": {
+    "en": "Plays Cmaj7, Amaj7 and Dmaj7 with every string ringing and names the added major seventh in each.",
+    "tr": "Cmaj7, Amaj7 ve Dmaj7'yi bütün teller çalarak çalar ve her birine eklenen büyük yediliyi adlandırır."
+  },
+  "explanation": [
+    {
+      "en": "A major seventh chord is a major triad plus a major seventh: 11 frets above the root, a half step below its octave.",
+      "tr": "Majör yedili akor, majör üçlüye büyük yedili eklenmiş hâlidir: kökün 11 perde yukarısı, oktavının yarım ses altı."
+    },
+    {
+      "en": "Cmaj7: x-3-2-0-0-0. Hold C and lift finger 1 from string 2; the open B3 is the major seventh.",
+      "tr": "Cmaj7: x-3-2-0-0-0. C'yi bas ve 1. parmağı 2. telden kaldır; açık Si3 büyük yedilidir."
+    },
+    {
+      "en": "Amaj7: x-0-2-1-2-0. Finger 2 on string 4, fret 2; finger 1 on string 3, fret 1; finger 3 on string 2, fret 2. The G♯3 is the major seventh.",
+      "tr": "Amaj7: x-0-2-1-2-0. 2. parmak 4. telin 2. perdesinde, 1. parmak 3. telin 1. perdesinde, 3. parmak 2. telin 2. perdesinde. Sol♯3 büyük yedilidir."
+    },
+    {
+      "en": "Dmaj7: x-x-0-2-2-2. Fingers 1, 2 and 3 on strings 3, 2 and 1, all at fret 2. The C♯4 on string 2 is the major seventh.",
+      "tr": "Dmaj7: x-x-0-2-2-2. 1., 2. ve 3. parmak 3., 2. ve 1. telde, hepsi 2. perdede. 2. teldeki Do♯4 büyük yedilidir."
+    },
+    {
+      "en": "Compare with the last lesson: maj7 is a half step below the octave, m7 a whole step. Do not swap the two.",
+      "tr": "Önceki dersle karşılaştır: maj7 oktavın yarım ses altında, m7 bir tam ses altındadır. İkisini karıştırma."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C then Cmaj7, A then Amaj7, D then Dmaj7, each strummed and then plucked string by string, slowly.",
+      "tr": "Önce C sonra Cmaj7, önce A sonra Amaj7, önce D sonra Dmaj7; her biri taranır, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum Cmaj7 four times, then Amaj7 four times, then Dmaj7 four times, in your own time. Then pluck each chord string by string; the app checks each string.",
+      "tr": "Kendi hızında Cmaj7'yi dört kez, sonra Amaj7'yi dört kez, sonra Dmaj7'yi dört kez tara. Sonra her akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "Cmaj7 Cmaj7 Cmaj7 Cmaj7 | Amaj7 Amaj7 Amaj7 Amaj7 | Dmaj7 Dmaj7 Dmaj7 Dmaj7",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "I can point to the major seventh in Cmaj7, Amaj7 and Dmaj7.", "tr": "Cmaj7, Amaj7 ve Dmaj7'de büyük yediliyi gösterebiliyorum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "In Cmaj7, finger 2 leans on the open B string. Arch it and press with the very tip.",
+        "tr": "Cmaj7'de 2. parmak açık Si teline yaslanıyor. Parmağı kavisli tut ve tam uçtan bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "In Amaj7, finger 3 touches string 1. Bring the wrist slightly forward and play on the fingertip.",
+        "tr": "Amaj7'de 3. parmak 1. tele değiyor. Bileği hafifçe öne al ve parmak ucuyla bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Cmaj7 and Amaj7 start on string 5, Dmaj7 on string 4. Aim the pick before you strum.",
+        "tr": "Cmaj7 ve Amaj7 5. telden, Dmaj7 4. telden başlar. Vurmadan önce penayı hizala."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For Dmaj7, lay finger 1 flat across strings 3 to 1 at fret 2 instead of using three fingers.",
+    "tr": "Dmaj7'de üç parmak yerine 1. parmağı 2. perdede 3.–1. tellerin üstüne yatır."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

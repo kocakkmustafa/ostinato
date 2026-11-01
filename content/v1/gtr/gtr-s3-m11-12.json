@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s3-m11-12",
+  "title": { "en": "Pentatonic checkpoint", "tr": "Pentatonik geçişi" },
+  "goal": {
+    "en": "Plays the two-octave A minor pentatonic shape in eighth notes at ♩=90 and improvises four bars over a backing from its notes.",
+    "tr": "İki oktavlık La minör pentatonik şeklini ♩=90'da sekizliklerle çalar ve eşlik üstünde şeklin notalarıyla dört ölçü doğaçlama yapar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint has two parts. Each part must pass on its own; a passed part is kept.",
+      "tr": "Bu geçişin iki bölümü var. Her bölüm kendi başına geçmeli; geçtiğin bölüm saklanır."
+    },
+    {
+      "en": "Part 1, scale: the shape from A2 up to C5 and back, in eighth notes with alternate picking at ♩=90.",
+      "tr": "1. bölüm, gam: şekil La2'den Do5'e çıkış ve iniş, alternatif penayla sekizliklerle, ♩=90."
+    },
+    {
+      "en": "Part 2, improvisation: four bars over the backing at ♩=90, using only the 12 notes of the shape.",
+      "tr": "2. bölüm, doğaçlama: eşlik üstünde ♩=90'da dört ölçü, yalnız şeklin 12 notasıyla."
+    },
+    {
+      "en": "In part 2, use one idea from your licks, leave space, and aim your last note at a root, A3 or A4.",
+      "tr": "2. bölümde lick'lerinden bir fikir kullan, boşluk bırak ve son notanı bir köke, La3 ya da La4'e yönelt."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Click at ♩=90 for part 1; an original Am backing loop at ♩=90 with a one-bar count-in for part 2. Headphones recommended.",
+      "tr": "1. bölüm için ♩=90'da klik; 2. bölüm için bir ölçü sayma girişiyle ♩=90'da özgün Am eşlik döngüsü. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Part 1: play the two-octave shape up and back once in eighth notes with the click at ♩=90. Part 2: improvise four bars over the backing at ♩=90 using only notes of the shape.",
+      "tr": "1. bölüm: iki oktavlık şekli klikle ♩=90'da sekizliklerle bir kez çıkıp in. 2. bölüm: eşlik üstünde ♩=90'da yalnız şeklin notalarıyla dört ölçü doğaçlama yap."
+    },
+    "sequence": "A2:e C3:e D3:e E3:e G3:e A3:e C4:e D4:e | E4:e G4:e A4:e C5:e A4:e G4:e E4:e D4:e | C4:e A3:e G3:e E3:e D3:e C3:e A2:q",
+    "tempo": { "open": 90, "target": 90 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Scale: Level 3 note and timing accuracy. Improvisation: at least 90% of your notes are in the shape's pool.",
+        "tr": "Her bölüm kendi başına geçer. Gam: Seviye 3 nota ve zamanlama ölçütü. Doğaçlama: notalarının en az %90'ı şeklin havuzundan gelir."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "At ♩=90 the string changes come fast. Keep the picking strictly down-up and loop the bar that slips.", "tr": "♩=90'da tel geçişleri hızlı gelir. Penayı kesin aşağı-yukarı tut ve kayan ölçüyü döngüle." }
+    },
+    {
+      "error": { "en": "Different note: outside the pool.", "tr": "Farklı nota: havuzun dışında." },
+      "fix": { "en": "In part 2, F♯4 often slips in at fret 7 on string 2. Use frets 5 and 8 there.", "tr": "2. bölümde 2. telin 7. perdesindeki Fa♯4 sık karışır. Orada 5. ve 8. perdeyi kullan." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.", "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan." }
+    }
+  ],
+  "adaptation": {
+    "en": "If the scale part did not pass, climb the speed ladder again up to ♩=90, then retake only that part.",
+    "tr": "Gam bölümü geçmediyse hız merdivenini yeniden ♩=90'a kadar çık, sonra yalnız o bölümü yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

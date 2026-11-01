@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s3-m10-10",
+  "title": { "en": "Stops and rests in riffs", "tr": "Riff'lerde durak ve sus" },
+  "goal": {
+    "en": "Plays an original four-bar riff at ♩=90 and silences the chord fully at every rest.",
+    "tr": "Özgün dört ölçülük riff'i ♩=90'da çalar ve her susta akoru tamamen susturur."
+  },
+  "explanation": [
+    {
+      "en": "A stop is a rest placed inside a riff. The silence is as much part of the riff as the chords.",
+      "tr": "Durak, riff'in içine yerleşmiş bir sustur. Sessizlik de akorlar kadar riff'in parçasıdır."
+    },
+    {
+      "en": "For a fretted power chord, ease the fingers off the frets but keep them touching the strings. The sound stops at once.",
+      "tr": "Basılı power chord'da parmakların baskısını gevşet ama tellere değmeye devam etsinler. Ses hemen durur."
+    },
+    {
+      "en": "E5 uses open string 6, which keeps ringing. Lay the palm on strings 6 and 5 at the same moment.",
+      "tr": "E5 açık 6. teli kullanır ve o tel çalmaya devam eder. Aynı anda avucu 6. ve 5. tellerin üstüne koy."
+    },
+    {
+      "en": "Each of bars 1–3 has two eighths and a quarter rest, twice: E5 or A5, then G5. A5 and G5 are the string-six shapes at frets 5 and 3.",
+      "tr": "1–3. ölçülerin her birinde iki kez iki sekizlik ve bir dörtlük sus var: E5 ya da A5, sonra G5. A5 ve G5, 6. teldeki 5. ve 3. perde şekilleridir."
+    },
+    {
+      "en": "Bar 4: D5 and C5 on string 5, then E5 on beat 3 and a final stop on beat 4. Keep counting through every rest.",
+      "tr": "4. ölçü: 5. telde D5 ve C5, sonra 3. vuruşta E5 ve 4. vuruşta son durak. Her susta saymayı sürdür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The original four-bar riff with clean stops, at ♩=90 and ♩=60, with a bass and drum loop that leaves the rests open.",
+      "tr": "Temiz duraklı özgün dört ölçülük riff, ♩=90 ve ♩=60; susları boş bırakan bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the four-bar riff with the accompaniment at ♩=90, all downstrokes. Silence every string at each rest and keep counting.",
+      "tr": "Dört ölçülük riff'i eşlikle ♩=90'da çal, hepsi aşağı pena. Her susta bütün telleri sustur ve saymayı sürdür."
+    },
+    "sequence": "4/4: E5 ee qr G5 ee qr | A5 ee qr G5 ee qr | E5 ee qr G5 ee qr | D5 q C5 q E5 q qr",
+    "tempo": { "open": 90, "target": 90 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 3 chord and timing accuracy, and at each rest the sound falls by at least 20 dB within 100 ms.",
+        "tr": "Seviye 3 akor ve zamanlama ölçütü; her susta ses 100 ms içinde en az 20 dB düşer."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "No string kept ringing into a rest.", "tr": "Hiçbir tel susun içine taşmadı." },
+    { "en": "I kept counting through the rests.", "tr": "Suslarda da saymayı sürdürdüm." },
+    { "en": "The chord after each rest came exactly on its beat.", "tr": "Her sustan sonraki akor tam vuruşunda geldi." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": {
+        "en": "Usually open string 6 after E5. Bring the palm down at the same moment as the rest begins.",
+        "tr": "Çoğu zaman E5'ten sonra açık 6. tel. Sus başladığı anda avucu tellere indir."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "The chord after the rest is rushing. Count the rest aloud and play on the next number.",
+        "tr": "Sustan sonraki akor acele ediyor. Susu sesli say ve sonraki sayıda çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only E5 and G5 with stops at ♩=65, then add A5 and bar 4.",
+    "tr": "♩=65'te yalnız E5 ve G5'i duraklarla çal, sonra A5'i ve 4. ölçüyü ekle."
+  },
+  "minutes": 14,
+  "expertPending": true
+}

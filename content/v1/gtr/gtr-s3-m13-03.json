@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s3-m13-03",
+  "title": { "en": "Two-string shuffle", "tr": "İki telli shuffle" },
+  "goal": {
+    "en": "Plays the A5–A6 boogie pattern in a shuffle feel for four bars, up to ♩=80.",
+    "tr": "A5–A6 boogie kalıbını shuffle hissiyle dört ölçü, ♩=80'e kadar çalar."
+  },
+  "explanation": [
+    {
+      "en": "The boogie pattern uses two strings. String 5 stays open on A2; string 4 moves between fret 2 and fret 4.",
+      "tr": "Boogie kalıbı iki tel kullanır. 5. tel La2'de açık kalır; 4. tel 2. ve 4. perde arasında gidip gelir."
+    },
+    {
+      "en": "A5 is A2 + E3: finger 1 on string 4, fret 2. A6 is A2 + F♯3: finger 3 on string 4, fret 4.",
+      "tr": "A5, La2 + Mi3'tür: 1. parmak 4. tel 2. perdede. A6, La2 + Fa♯3'tür: 3. parmak 4. tel 4. perdede."
+    },
+    {
+      "en": "Keep finger 1 down while finger 3 adds fret 4. Each shape sounds twice: A5 A5 A6 A6, two times per bar.",
+      "tr": "3. parmak 4. perdeyi eklerken 1. parmağı kaldırma. Her şekil iki kez çalar: A5 A5 A6 A6, ölçüde iki kez."
+    },
+    {
+      "en": "Play swung eighths and strike only strings 5 and 4. Let the underside of finger 1 touch string 3 lightly so it stays quiet.",
+      "tr": "Swing'li sekizlik çal ve yalnız 5. ve 4. tele vur. 1. parmağın alt yüzü 3. tele hafifçe değsin; böylece 3. tel sessiz kalır."
+    },
+    {
+      "en": "If the stretch from fret 2 to fret 4 tires your hand, stop and rest.",
+      "tr": "2. perdeden 4. perdeye açılma elini yorarsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Four bars of the A5–A6 boogie, swung, with a click at ♩=80 and ♩=55, string-model synthesis.",
+      "tr": "Dört ölçü A5–A6 boogie, swing'li, ♩=80 ve ♩=55'te klikle; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the four bars with the click in swung eighths. Start at ♩=70 and move up in steps of 5 to ♩=80.",
+      "tr": "Dört ölçüyü klikle swing'li sekizliklerle çal. ♩=70'ten başla, 5'er adımla ♩=80'e çık."
+    },
+    "sequence": "4/4 swing: A5 A5 A6 A6 A5 A5 A6 A6 | A5 A5 A6 A6 A5 A5 A6 A6 | A5 A5 A6 A6 A5 A5 A6 A6 | A5 A5 A6 A6 A5 A5 A6 A6",
+    "tempo": { "open": 70, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Only strings 5 and 4 rang.", "tr": "Yalnız 5. ve 4. tel çaldı." },
+    { "en": "Finger 1 stayed down through the whole bar.", "tr": "1. parmak ölçü boyunca basılı kaldı." },
+    { "en": "Each pair sounded long-short, not even.", "tr": "Her çift eşit değil, uzun-kısa duyuldu." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Aim the pick at string 5 and keep the stroke short.",
+        "tr": "Penayı 5. tele yönelt ve vuruşu kısa tut."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 4 not heard.", "tr": "Farklı akor: 4. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 3 at fret 4 is not pressing fully. Press on the tip, close behind the fret.",
+        "tr": "4. perdedeki 3. parmak tam basmıyor. Ucuyla, perdenin hemen arkasından bas."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The move to A6 is late. Keep finger 3 hovering just above fret 4.",
+        "tr": "A6'ya geçiş geç. 3. parmağı 4. perdenin hemen üstünde beklet."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the pattern in straight quarter notes first, A5 A5 A6 A6, then return to swung eighths.",
+    "tr": "Kalıbı önce düz dörtlüklerle çal, A5 A5 A6 A6; sonra swing'li sekizliklere dön."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

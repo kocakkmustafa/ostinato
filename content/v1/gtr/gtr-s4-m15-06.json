@@ -1,0 +1,90 @@
+{
+  "id": "gtr-s4-m15-06",
+  "title": { "en": "Open to barre changes", "tr": "Açıktan barre'a geçiş" },
+  "goal": {
+    "en": "Changes between open C and barre F at least 12 times in 60 seconds, keeping finger 3 as an anchor.",
+    "tr": "3. parmağı sabit tutarak açık C ile barre F arasında 60 saniyede en az 12 kez geçer."
+  },
+  "explanation": [
+    {
+      "en": "C is x-3-2-0-1-0 and F is 1-3-3-2-1-1. Finger 3 sits on string 5, fret 3 in both. Keep it down as an anchor.",
+      "tr": "C x-3-2-0-1-0, F 1-3-3-2-1-1'dir. 3. parmak ikisinde de 5. tel 3. perdededir. Onu sabit parmak olarak yerinde tut."
+    },
+    {
+      "en": "From C to F: finger 1 lies flat across fret 1, finger 2 moves one string toward the floor, and finger 4 joins on string 4, fret 3.",
+      "tr": "C'den F'ye: 1. parmak 1. perdeye düz yatar, 2. parmak bir tel yere doğru kayar, 4. parmak 4. tel 3. perdeye eklenir."
+    },
+    {
+      "en": "C starts on string 5; F uses all six strings. Aim the strum at the right string for each chord.",
+      "tr": "C 5. telden başlar; F altı telin hepsini kullanır. Her akorda vuruşu doğru tele yönelt."
+    },
+    {
+      "en": "Release the barre pressure as you leave F. Pressing only while the chord sounds saves strength.",
+      "tr": "F'den çıkarken barre baskısını bırak. Yalnız akor çalarken basmak gücünü korur."
+    },
+    {
+      "en": "If the thumb or wrist feels strained, release the hand and rest before the next set.",
+      "tr": "Başparmak ya da bilekte gerilim hissedersen eli bırak ve sonraki setten önce dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C and F alternating, one strum each, at a slow and a moderate pace.",
+      "tr": "C ve F sırayla, her birine bir vuruş, yavaş ve orta hızda."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Change back and forth between C and F for 60 seconds. Strum each chord once, then change. Each change counts when every string of the new chord is heard. Stop after two sets.",
+      "tr": "60 saniye boyunca C ile F arasında ileri geri geç. Her akora bir kez vur, sonra geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır. İki setten sonra dur."
+    },
+    "sequence": "C ↔ F · 60 s",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 12 changes in 60 seconds. A change counts when every string of the new chord is heard.",
+        "tr": "60 saniyede en az 12 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Finger 3 stayed on string 5 between C and F.", "tr": "C ile F arasında 3. parmak 5. telde kaldı." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Finger 3 is lifting. Keep it on string 5 and let the other fingers move around it.",
+        "tr": "3. parmak kalkıyor. Onu 5. telde tut, diğer parmaklar onun çevresinde hareket etsin."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "C starts on string 5. After F, aim the next strum at string 5.",
+        "tr": "C 5. telden başlar. F'den sonra bir sonraki vuruşu 5. tele yönelt."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "String 2 sits under the crease of finger 1. Slide the finger a little up or down, or roll it slightly onto its side.",
+        "tr": "2. tel 1. parmağın kıvrımına denk geliyor. Parmağı biraz yukarı ya da aşağı kaydır ya da hafifçe yanına yatır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use the four-string F (x-x-3-2-1-1) for the changes first, then the full F.",
+    "tr": "Geçişlerde önce dört telli F'yi (x-x-3-2-1-1) kullan, sonra tam F'ye geç."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

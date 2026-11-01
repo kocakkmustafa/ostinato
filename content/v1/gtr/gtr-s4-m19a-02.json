@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m19a-02",
+  "title": { "en": "Travis picking I: the thumb", "tr": "Travis I: başparmak" },
+  "goal": {
+    "en": "Keeps an alternating thumb bass on C in steady quarter notes at ♩=60.",
+    "tr": "C akorunda başparmakla değişen bası ♩=60'ta eşit dörtlüklerle sürdürür."
+  },
+  "explanation": [
+    {
+      "en": "Travis picking is a fingerstyle pattern named after the guitarist Merle Travis. The thumb keeps a steady bass while the fingers add notes above it.",
+      "tr": "Travis tekniği, adını gitarist Merle Travis'ten alan bir parmak stili kalıbıdır. Başparmak sabit bir bas tutar, parmaklar üstüne nota ekler."
+    },
+    {
+      "en": "The thumb alternates between two strings, one note per beat. On C: string 5 (C3, fret 3) on beats 1 and 3, string 4 (E3, fret 2) on beats 2 and 4.",
+      "tr": "Başparmak iki tel arasında gider gelir, her vuruşa bir nota. C'de: 1. ve 3. vuruşta 5. tel (Do3, 3. perde), 2. ve 4. vuruşta 4. tel (Mi3, 2. perde)."
+    },
+    {
+      "en": "Hold the full C shape (x32010), even though only two strings sound now. The fingers will need it in the next lesson.",
+      "tr": "Şimdi yalnız iki tel çalsa da tam C şeklini (x32010) tut. Sonraki derste parmaklar ona ihtiyaç duyacak."
+    },
+    {
+      "en": "Pluck downward with the side of the thumb. Move the whole thumb from its base, near the wrist; do not bend the tip joint. Rest i, m and a lightly on strings 3–1.",
+      "tr": "Başparmağın yanıyla aşağı doğru çek. Başparmağı bileğe yakın kökünden bütün olarak hareket ettir; uç eklemini bükme. i, m ve a 3–1. tellere hafifçe dayansın."
+    },
+    {
+      "en": "The bass must not wait or rush. Count '1 2 3 4' aloud with the click until the thumb runs on its own.",
+      "tr": "Bas beklememeli, acele etmemeli. Başparmak kendi kendine gidene kadar klikle birlikte sesli '1 2 3 4' say."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The alternating bass C3–E3 in quarter notes on C, at ♩=60 and ♩=40, with click.",
+      "tr": "C'de dörtlüklerle değişen bas Do3–Mi3, ♩=60 ve ♩=40, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Hold C. With the click at ♩=60, play the thumb alone for four bars: C3 on beats 1 and 3, E3 on beats 2 and 4.",
+      "tr": "C'yi tut. Klikle ♩=60'ta dört ölçü yalnız başparmakla çal: 1. ve 3. vuruşta Do3, 2. ve 4. vuruşta Mi3."
+    },
+    "sequence": "C3 E3 C3 E3 | C3 E3 C3 E3 | C3 E3 C3 E3 | C3 E3 C3 E3",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My thumb played string 5 on beats 1 and 3 and string 4 on beats 2 and 4.", "tr": "Başparmağım 1. ve 3. vuruşta 5. teli, 2. ve 4. vuruşta 4. teli çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: E3 heard on a beat that needs C3.", "tr": "Farklı nota: Do3 beklenen vuruşta Mi3 duyuldu." },
+      "fix": { "en": "The thumb landed one string too high. Rest it on string 5 just before beat 1 of each bar.", "tr": "Başparmak bir tel yukarı düştü. Her ölçünün 1. vuruşundan hemen önce onu 5. tele dayandır." }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": { "en": "The thumb rushes on beats 2 and 4. Let each bass note ring until the next click.", "tr": "Başparmak 2. ve 4. vuruşta acele ediyor. Her bas notası bir sonraki klike kadar çalsın." }
+    }
+  ],
+  "adaptation": {
+    "en": "At ♩=50, play only string 5 on beats 1 and 3, then add string 4 on beats 2 and 4.",
+    "tr": "♩=50'de yalnız 1. ve 3. vuruşta 5. teli çal, sonra 2. ve 4. vuruşta 4. teli ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

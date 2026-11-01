@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s3-m10-05",
+  "title": { "en": "Chugging eighths", "tr": "Palm mute sekizlikler" },
+  "goal": {
+    "en": "Plays four bars of even palm-muted E5 eighth notes at ♩=90 with downstrokes.",
+    "tr": "♩=90'da aşağı penayla dört ölçü eşit palm mute E5 sekizlik çalar."
+  },
+  "explanation": [
+    {
+      "en": "A chug is a steady line of palm-muted eighth notes. It drives a riff like a drum.",
+      "tr": "'Chug', palm mute sekizliklerin düzenli akışıdır. Bir riff'i davul gibi ileri taşır."
+    },
+    {
+      "en": "Hold E5 (0-2-x-x-x-x) and lay the palm on strings 6 and 5 at the bridge. Both strings must stay muted.",
+      "tr": "E5'i (0-2-x-x-x-x) tut ve avucu köprüde 6. ve 5. tellerin üstüne koy. İki tel de kısık kalmalı."
+    },
+    {
+      "en": "Play every eighth with a downstroke. Count '1 and 2 and 3 and 4 and'.",
+      "tr": "Her sekizliği aşağı penayla çal. '1 ve 2 ve 3 ve 4 ve' diye say."
+    },
+    {
+      "en": "Keep the stroke small, from the wrist. A small stroke is easier to keep even.",
+      "tr": "Hareketi küçük tut, bilekten çal. Küçük hareketi eşit tutmak daha kolaydır."
+    },
+    {
+      "en": "Even means the same distance and the same strength for every note. No note gets an accent yet.",
+      "tr": "Eşit, her notada aynı aralık ve aynı güç demektir. Henüz hiçbir nota vurgulu değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Four bars of palm-muted E5 eighth notes, all downstrokes, at ♩=90 and ♩=60, with click.",
+      "tr": "Dört ölçü palm mute E5 sekizlik, hepsi aşağı pena; ♩=90 ve ♩=60, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Play four bars of palm-muted E5 eighth notes with the click, all downstrokes. Start at ♩=80 and move up to ♩=90.",
+      "tr": "Klikle dört ölçü palm mute E5 sekizlik çal, hepsi aşağı pena. ♩=80'de başla, ♩=90'a çık."
+    },
+    "sequence": "4/4: E5 ee ee ee ee | E5 ee ee ee ee | E5 ee ee ee ee | E5 ee ee ee ee",
+    "tempo": { "open": 80, "target": 90 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every eighth note was a downstroke.", "tr": "Her sekizlik aşağı penaydı." },
+    { "en": "All notes sounded equally strong.", "tr": "Bütün notalar eşit güçte çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "Fast downstrokes tend to rush. Lift the pick only as far as you need and listen for the click on every beat.",
+        "tr": "Hızlı aşağı pena acele etmeye meyillidir. Penayı yalnız gerektiği kadar kaldır ve her vuruşta kliği dinle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The palm moved toward the neck and choked the strings. Bring it back to the bridge.",
+        "tr": "Avuç sapa doğru kayıp telleri boğdu. Onu köprüye geri getir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play two bars at ♩=70 on open string 6 only, then add string 5 for E5.",
+    "tr": "♩=70'te yalnız açık 6. telde iki ölçü çal, sonra E5 için 5. teli ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

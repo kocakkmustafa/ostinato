@@ -1,0 +1,71 @@
+{
+  "id": "gtr-s4-m19a-09",
+  "title": { "en": "Natural harmonics", "tr": "Doğal flajoleler" },
+  "goal": {
+    "en": "Plays the natural harmonics at frets 12, 7 and 5 on all six strings, 18 in all.",
+    "tr": "12., 7. ve 5. perdedeki doğal flajoleleri altı telde, toplam 18 tane çalar."
+  },
+  "explanation": [
+    {
+      "en": "A natural harmonic is a clear, bell-like tone. You touch the string lightly; you do not press it to the fret.",
+      "tr": "Doğal flajolet berrak, çan gibi bir sestir. Teli hafifçe dokunarak tutarsın; perdeye bastırmazsın."
+    },
+    {
+      "en": "Place the fingertip directly above the fret wire, not behind it. Pluck firmly near the bridge, then lift the finger.",
+      "tr": "Parmak ucunu perde telinin tam üstüne koy, arkasına değil. Köprüye yakın net çek, sonra parmağı kaldır."
+    },
+    {
+      "en": "Fret 12 sounds one octave above the open string: E3 on string 6, E5 on string 1.",
+      "tr": "12. perde açık telin bir oktav üstünü verir: 6. telde Mi3, 1. telde Mi5."
+    },
+    {
+      "en": "Fret 7 sounds an octave and a fifth above: B3 on string 6. Fret 5 sounds two octaves above: E4 on string 6.",
+      "tr": "7. perde bir oktav ve bir beşli üstü verir: 6. telde Si3. 5. perde iki oktav üstü verir: 6. telde Mi4."
+    },
+    {
+      "en": "Fret 7 needs the most exact spot. If the harmonic buzzes or dies, move the finger a little until it rings.",
+      "tr": "7. perde en hassas yeri ister. Flajolet vızıldar ya da sönerse parmağı çalana kadar azıcık kaydır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The 18 harmonics in order, fret 12, then 7, then 5, strings 6 to 1, synthesized harmonic tones, slowly.",
+      "tr": "18 flajolet sırayla, önce 12., sonra 7., sonra 5. perde, 6. telden 1. tele; sentezlenmiş flajolet sesleri, yavaş."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Play the harmonics at fret 12 on strings 6 to 1, then at fret 7, then at fret 5. Let each one ring for about a second. Take your time.",
+      "tr": "Flajoleleri önce 12. perdede 6. telden 1. tele, sonra 7. perdede, sonra 5. perdede çal. Her biri yaklaşık bir saniye çalsın. Acele etme."
+    },
+    "sequence": "E3 A3 D4 G4 B4 E5 | B3 E4 A4 D5 F♯5 B5 | E4 A4 D5 G5 B5 E6",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My finger touched the string right above the fret wire without pressing.", "tr": "Parmağım teli perde telinin tam üstünde, bastırmadan tuttu." },
+    { "en": "Each harmonic rang for about a second.", "tr": "Her flajolet yaklaşık bir saniye çaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the fretted pitch sounded.", "tr": "Farklı nota: perdeli ses duyuldu." },
+      "fix": { "en": "You pressed the string down. Only touch it, right above the fret wire.", "tr": "Teli bastırdın. Yalnız dokun, perde telinin tam üstünde." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Lift the touching finger right after the pluck, and pluck closer to the bridge.", "tr": "Dokunan parmağı çekişten hemen sonra kaldır ve köprüye daha yakın çek." }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with fret 12 on all six strings; add fret 5, then fret 7.",
+    "tr": "Önce altı telde 12. perdeyle başla; sonra 5. perdeyi, en son 7. perdeyi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

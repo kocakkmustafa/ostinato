@@ -1,0 +1,90 @@
+{
+  "id": "gtr-s3-m13-08",
+  "title": { "en": "Pentatonic over twelve bars", "tr": "On iki ölçüde pentatonik" },
+  "goal": {
+    "en": "Plays A minor pentatonic phrases through the 12-bar A blues and lands on the chord root at each change at ♩=80.",
+    "tr": "12 ölçülük La blues boyunca La minör pentatonik cümleler çalar ve her akor değişiminde köke iner, ♩=80."
+  },
+  "explanation": [
+    {
+      "en": "A minor pentatonic at fret 5 fits the whole A blues: A, C, D, E and G.",
+      "tr": "5. perdedeki La minör pentatonik bütün La blues'a uyar: La, Do, Re, Mi ve Sol."
+    },
+    {
+      "en": "Each chord root is in the shape: A over A7, D over D7, E over E7. When the chord changes, play its root on beat 1.",
+      "tr": "Her akorun kökü şeklin içindedir: A7 üstünde La, D7 üstünde Re, E7 üstünde Mi. Akor değiştiğinde 1. vuruşta onun kökünü çal."
+    },
+    {
+      "en": "Roots in the middle of the shape: A3 on string 4, fret 7; D4 on string 3, fret 7; E4 on string 2, fret 5.",
+      "tr": "Şeklin ortasındaki kökler: La3 4. tel 7. perde; Re4 3. tel 7. perde; Mi4 2. tel 5. perde."
+    },
+    {
+      "en": "The changes fall on bars 5, 7, 9, 10, 11 and 12. Plan the next root during the bar before.",
+      "tr": "Değişimler 5., 7., 9., 10., 11. ve 12. ölçüdedir. Sonraki kökü bir önceki ölçüde planla."
+    },
+    {
+      "en": "Play short phrases with rests between them: one or two bars of playing, then a pause.",
+      "tr": "Aralarında sus olan kısa cümleler çal: bir iki ölçü çal, sonra dur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "One chorus of an original A minor pentatonic line over the 12-bar A blues, roots marked at each change, over an original bass and drum loop at ♩=80 and ♩=55.",
+      "tr": "12 ölçülük La blues üstünde özgün bir La minör pentatonik dizinin bir turu, her değişimde kök işaretli; ♩=80 ve ♩=55'te özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play one 12-bar chorus with the accompaniment at ♩=80, using only A minor pentatonic at fret 5. On beat 1 of each chord change, play that chord's root. Headphones help the microphone hear only your guitar.",
+      "tr": "♩=80'de eşlikle 12 ölçülük bir tur çal; yalnız 5. perdedeki La minör pentatoniği kullan. Her akor değişiminin 1. vuruşunda o akorun kökünü çal. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes are in the A minor pentatonic pool, the note on beat 1 of each chord change is that chord's root (any octave), and your timing meets Level 3.",
+        "tr": "Notalarının en az %90'ı La minör pentatonik havuzundan gelir, her akor değişiminin 1. vuruşundaki nota o akorun köküdür (herhangi bir oktavda) ve zamanlaman Seviye 3 ölçütünü karşılar."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I landed on D in bar 5 and on E in bar 9.", "tr": "5. ölçüde Re'ye, 9. ölçüde Mi'ye indim." },
+    { "en": "I left rests between my phrases.", "tr": "Cümlelerimin arasında sus bıraktım." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: outside the pool.", "tr": "Farklı nota: havuzun dışında." },
+      "fix": {
+        "en": "A note just off the shape slipped in. Strings 6, 2 and 1 use frets 5 and 8; strings 5, 4 and 3 use frets 5 and 7.",
+        "tr": "Şeklin hemen yanındaki bir nota karıştı. 6., 2. ve 1. tel 5. ve 8. perdeyi; 5., 4. ve 3. tel 5. ve 7. perdeyi kullanır."
+      }
+    },
+    {
+      "error": { "en": "Different note on the chord change.", "tr": "Akor değişiminde farklı nota." },
+      "fix": {
+        "en": "You missed the root. Stop playing on the last beat of the bar before and aim for the root.",
+        "tr": "Kökü kaçırdın. Önceki ölçünün son vuruşunda çalmayı bırak ve köke nişan al."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The root came after beat 1. Start moving to it on beat 4 of the bar before.",
+        "tr": "Kök 1. vuruştan sonra geldi. Önceki ölçünün 4. vuruşunda ona doğru harekete başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the roots through the form, one per bar on beat 1, then add one more note per bar.",
+    "tr": "Biçim boyunca yalnız kökleri çal, her ölçüde 1. vuruşta bir tane; sonra her ölçüye bir nota daha ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m17-03",
+  "title": { "en": "One octave from string five", "tr": "Beşinci telden bir oktav" },
+  "goal": {
+    "en": "Plays C major from C3 to C4 and back from string 5 in position II at ♩=70.",
+    "tr": "II. pozisyonda Do majörü 5. telden, Do3'ten Do4'e çıkıp inerek ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "The root is on string 5 now: C3 at 5/3 with finger 2. Your hand stays in position II.",
+      "tr": "Kök artık 5. telde: Do3, 5/3'te 2. parmakla. Elin II. pozisyonda kalır."
+    },
+    {
+      "en": "C major from string 5: C3 5/3, D3 5/5, E3 4/2, F3 4/3, G3 4/5, A3 3/2, B3 3/4, C4 3/5.",
+      "tr": "5. telden Do majör: Do3 5/3, Re3 5/5, Mi3 4/2, Fa3 4/3, Sol3 4/5, La3 3/2, Si3 3/4, Do4 3/5."
+    },
+    {
+      "en": "Compare with G major from string 6: frets 3-5, then 2-3-5, then 2-4-5. It is the same shape, moved from strings 6-5-4 to strings 5-4-3.",
+      "tr": "6. telden Sol majörle karşılaştır: önce 3-5, sonra 2-3-5, sonra 2-4-5. perdeler. Bu aynı şekil; 6-5-4. tellerden 5-4-3. tellere kaydırılmış."
+    },
+    {
+      "en": "The shape stays the same because strings 6, 5, 4 and 3 are each a fourth apart. String 2 breaks this rule; you meet it in the next lesson.",
+      "tr": "Şekil aynı kalır, çünkü 6, 5, 4 ve 3. teller arası hep dörtlüdür. 2. tel bu kuralı bozar; onunla sonraki derste karşılaşacaksın."
+    },
+    {
+      "en": "The half steps are E3–F3 (4/2 to 4/3) and B3–C4 (3/4 to 3/5). Both sit on neighbouring frets.",
+      "tr": "Yarım sesler Mi3–Fa3 (4/2'den 4/3'e) ve Si3–Do4'tür (3/4'ten 3/5'e). İkisi de komşu perdelerdedir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "C3 up to C4 and back in quarter notes with a click, at ♩=70 and ♩=45, string-model synthesis.",
+      "tr": "Klikle Do3'ten Do4'e çıkış ve iniş, dörtlüklerle, ♩=70 ve ♩=45; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the scale up from C3 to C4 and back down to C3 in quarter notes with the click. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "Gamı Do3'ten Do4'e çık ve Do3'e in; klikle birlikte dörtlüklerle çal. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "C3 D3 E3 F3 | G3 A3 B3 C4 | B3 A3 G3 F3 | E3 D3 C3",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I started on fret 3 of string 5 with finger 2.", "tr": "5. telin 3. perdesinde 2. parmakla başladım." },
+    { "en": "I can show how this shape matches G major from string 6.", "tr": "Bu şeklin 6. telden Sol majörle nasıl eşleştiğini gösterebiliyorum." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "On string 4 you played F♯3 at fret 4. In C major, F3 is at fret 3 with finger 2.", "tr": "4. telde 4. perdede Fa♯3 çaldın. Do majörde Fa3, 3. perdede 2. parmakladır." }
+    },
+    {
+      "error": { "en": "Different note: the right fret on the other string.", "tr": "Farklı nota: doğru perde, diğer tel." },
+      "fix": { "en": "You started on string 6 out of habit. The root is on string 5 now.", "tr": "Alışkanlıkla 6. telden başladın. Kök artık 5. telde." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the first five notes, C3 to G3, at ♩=50, then add the top three.",
+    "tr": "İlk beş notayı, Do3'ten Sol3'e, ♩=50'de çal, sonra üstteki üç notayı ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

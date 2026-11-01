@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m15-01",
+  "title": { "en": "Preparing the barre", "tr": "Barre hazırlığı" },
+  "goal": {
+    "en": "Sets up a balanced index-finger and thumb barre and makes all six strings ring at fret 1.",
+    "tr": "İşaret parmağı ve başparmak dengesini kurar; 1. perdede barre ile altı telin hepsini çaldırır."
+  },
+  "explanation": [
+    {
+      "en": "A barre is one finger pressing several strings at the same fret. In the E shape, finger 1 does the job of the nut.",
+      "tr": "Barre, tek parmağın aynı perdede birden çok teli basmasıdır. E-şeklinde 1. parmak eşiğin işini yapar."
+    },
+    {
+      "en": "Lay finger 1 straight across all six strings at fret 1, just behind the fret wire. Roll it slightly onto its bony side.",
+      "tr": "1. parmağı 1. perdede, perde telinin hemen arkasında altı telin üstüne düz yatır. Hafifçe kemikli yanına yatır."
+    },
+    {
+      "en": "Place the thumb behind the neck, roughly behind finger 2. The pressure comes from thumb and finger together, plus a light pull of the arm. Do not squeeze.",
+      "tr": "Başparmağı sapın arkasına, kabaca 2. parmağın arkasına koy. Baskı başparmakla parmağın birlikte çalışmasından ve kolun hafif çekişinden gelir. Sıkma."
+    },
+    {
+      "en": "A string under a finger crease often stays quiet. Slide finger 1 a few millimetres up or down until each string rings.",
+      "tr": "Parmak kıvrımına denk gelen tel çoğu zaman sessiz kalır. Her tel çalana kadar 1. parmağı birkaç milimetre yukarı ya da aşağı kaydır."
+    },
+    {
+      "en": "A barre takes weeks to settle. Keep sets short and release the hand between tries. If the hand hurts, stop and rest.",
+      "tr": "Barre'ın oturması haftalar sürer. Setleri kısa tut ve denemeler arasında eli bırak. Elin ağrırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The fret-1 barre plucked string by string from 6 to 1 (F2 B♭2 E♭3 A♭3 C4 F4), slowly, then all six strummed once.",
+      "tr": "1. perde barre'ı 6'dan 1'e tel tel yavaşça çekilir (Fa2 Si♭2 Mi♭3 La♭3 Do4 Fa4), sonra altısı bir kez taranır."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Lay the barre at fret 1 and pluck strings 6 to 1 one by one; the app checks each string. Release the hand between tries and stop after four tries. Then tick the checklist.",
+      "tr": "1. perdeye barre'ı yatır ve 6'dan 1'e telleri tek tek çek; uygulama her teli kontrol eder. Denemeler arasında eli bırak ve dört denemeden sonra dur. Sonra kontrol listesini işaretle."
+    },
+    "sequence": "F2 B♭2 E♭3 A♭3 C4 F4",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Finger 1 lay straight, just behind the fret.", "tr": "1. parmak düz ve perdenin hemen arkasında durdu." },
+    { "en": "My thumb rested behind the neck without squeezing.", "tr": "Başparmağım sıkmadan sapın arkasında durdu." },
+    { "en": "I released the hand between tries.", "tr": "Denemeler arasında eli bıraktım." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "String 2 sits under the crease of finger 1. Slide the finger a little up or down, or roll it slightly onto its side.",
+        "tr": "2. tel 1. parmağın kıvrımına denk geliyor. Parmağı biraz yukarı ya da aşağı kaydır ya da hafifçe yanına yatır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Several strings are muffled. Move the barre closer to the fret wire instead of pressing harder.",
+        "tr": "Birkaç tel boğuluyor. Daha sert bastırmak yerine barre'ı perde teline yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Try the barre at fret 5 first, where the strings press down more easily, then move back to fret 1.",
+    "tr": "Barre'ı önce tellerin daha kolay basıldığı 5. perdede dene, sonra 1. perdeye dön."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

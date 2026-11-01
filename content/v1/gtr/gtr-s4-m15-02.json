@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s4-m15-02",
+  "title": { "en": "Full F major", "tr": "Tam Fa majör" },
+  "goal": {
+    "en": "Plays the E-shape F (1-3-3-2-1-1) with all six strings ringing.",
+    "tr": "E-şekli F'yi (1-3-3-2-1-1) altı telin hepsi çalarak temiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "Play an open E with fingers 2, 3 and 4 instead of 1, 2 and 3. Slide that shape up one fret and lay finger 1 across fret 1. That is F.",
+      "tr": "Açık E'yi 1., 2. ve 3. yerine 2., 3. ve 4. parmakla bas. Bu şekli bir perde yukarı kaydır ve 1. parmağı 1. perdeye yatır. Bu F'dir."
+    },
+    {
+      "en": "F: 1-3-3-2-1-1. Finger 3 on string 5, fret 3; finger 4 on string 4, fret 3; finger 2 on string 3, fret 2.",
+      "tr": "F: 1-3-3-2-1-1. 3. parmak 5. tel 3. perdede; 4. parmak 4. tel 3. perdede; 2. parmak 3. tel 2. perdede."
+    },
+    {
+      "en": "The barre only has to press strings 6, 2 and 1. The other fingers cover the middle strings.",
+      "tr": "Barre yalnız 6., 2. ve 1. teli basmak zorundadır. Ortadaki telleri diğer parmaklar basar."
+    },
+    {
+      "en": "Set the barre first, then add fingers 3, 4 and 2. Later, try to place all four at once.",
+      "tr": "Önce barre'ı kur, sonra 3., 4. ve 2. parmağı ekle. Daha sonra dördünü birden koymayı dene."
+    },
+    {
+      "en": "If the thumb or wrist feels strained, release the hand and rest before the next set.",
+      "tr": "Başparmak ya da bilekte gerilim hissedersen eli bırak ve sonraki setten önce dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "F (F2 C3 F3 A3 C4 F4) strummed once, then plucked string by string from 6 to 1, slowly.",
+      "tr": "F (Fa2 Do3 Fa3 La3 Do4 Fa4) bir kez taranır, sonra 6'dan 1'e tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum F four times in your own time. After each strum, pluck the chord string by string; the app names any string it does not hear. Release the hand between tries.",
+      "tr": "F'yi kendi hızında dört kez tara. Her taramadan sonra akoru tel tel çek; uygulama duymadığı teli söyler. Denemeler arasında eli bırak."
+    },
+    "sequence": "F | F | F | F",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "Finger 1 lay straight, just behind the fret.", "tr": "1. parmak düz ve perdenin hemen arkasında durdu." },
+    { "en": "My thumb rested behind the neck without squeezing.", "tr": "Başparmağım sıkmadan sapın arkasında durdu." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "String 2 sits under the crease of finger 1. Slide the finger a little up or down, or roll it slightly onto its side.",
+        "tr": "2. tel 1. parmağın kıvrımına denk geliyor. Parmağı biraz yukarı ya da aşağı kaydır ya da hafifçe yanına yatır."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 2 is flat or finger 3 is leaning on string 3. Arch both and press with the tips.",
+        "tr": "2. parmak düz kalmış ya da 3. parmak 3. tele yaslanıyor. İkisini de kavisle ve uçlarıyla bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 not heard.", "tr": "Farklı akor: 6. tel duyulmadı." },
+      "fix": {
+        "en": "The tip of finger 1 is short of string 6. Let it reach just past the string, and bring the elbow a little closer to your body.",
+        "tr": "1. parmağın ucu 6. tele yetişmiyor. Ucu telin biraz ötesine taşsın ve dirseğini gövdene biraz yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play F on four strings (x-x-3-2-1-1) first, then add strings 5 and 6.",
+    "tr": "Önce dört telli F'yi (x-x-3-2-1-1) çal, sonra 5. ve 6. teli ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

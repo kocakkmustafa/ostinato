@@ -41,7 +41,7 @@
       "en": "Play the ascending line in eighth notes with the click. Start at ♩=50 and move up in steps of 5 to ♩=60. Play three sets, with a short rest between them.",
       "tr": "Çıkıcı diziyi klikle sekizlik olarak çal. ♩=50'den başla, 5'er adımla ♩=60'a çık. Aralarında kısa mola vererek üç set çal."
     },
-    "sequence": "F2 F♯2 G2 G♯2 A♯2 B2 C3 C♯3 | D♯3 E3 F3 F♯3 G♯3 A3 A♯3 B3 | C4 C♯4 D4 D♯4 F4 F♯4 G4 G♯4",
+    "sequence": "F2:e F♯2:e G2:e G♯2:e A♯2:e B2:e C3:e C♯3:e | D♯3:e E3:e F3:e F♯3:e G♯3:e A3:e A♯3:e B3:e | C4:e C♯4:e D4:e D♯4:e F4:e F♯4:e G4:e G♯4:e",
     "tempo": { "open": 50, "target": 60 },
     "pass": { "levelDefault": true }
   },

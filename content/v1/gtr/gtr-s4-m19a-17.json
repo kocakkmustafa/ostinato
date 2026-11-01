@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m19a-17",
+  "title": { "en": "Carcassi: an easy piece", "tr": "Carcassi: kolay bir parça" },
+  "goal": {
+    "en": "Plays a 16-bar piece selected from Carcassi's Op. 59 in time at ♩=66.",
+    "tr": "Carcassi'nin Op. 59'undan seçilmiş 16 ölçülük parçayı ♩=66'da zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "Matteo Carcassi (1792–1853) wrote his Méthode complète, Op. 59, for learners. Its easy pieces mix scale runs, arpeggios and simple two-voice writing.",
+      "tr": "Matteo Carcassi (1792–1853), Méthode complète, Op. 59'u öğrenenler için yazdı. Kolay parçaları gam koşularını, arpejleri ve sade iki sesli yazıyı karıştırır."
+    },
+    {
+      "en": "Read the piece before you play: the key, the meter, any repeat signs and where the bass moves.",
+      "tr": "Çalmadan önce parçayı oku: tonu, ölçü birimini, varsa tekrar işaretlerini ve basın nerede değiştiğini bul."
+    },
+    {
+      "en": "Split the piece into four-bar phrases. Learn each phrase at ♩=50, then join two phrases, then all four.",
+      "tr": "Parçayı dört ölçülük cümlelere böl. Her cümleyi ♩=50'de öğren, sonra iki cümleyi birleştir, sonra dördünü."
+    },
+    {
+      "en": "Shape each phrase: let it grow toward its highest note and relax at the end. Use rest stroke for melody notes that need to sing.",
+      "tr": "Her cümleye biçim ver: en yüksek notasına doğru büyüsün, sonunda gevşesin. Öne çıkması gereken melodi notalarında dayanarak vuruş kullan."
+    },
+    {
+      "en": "This is the Ostinato engraving, made from the 1836 Paris first edition. Fingering and tempo are ours, not an editor's.",
+      "tr": "Bu, 1836 Paris ilk baskısından hazırlanan Ostinato dizgisidir. Parmak numaraları ve tempo bizimdir, bir editörün değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The selected 16-bar Op. 59 piece from the Ostinato engraving, at ♩=66 and ♩=45, string-model synthesis.",
+      "tr": "Ostinato dizgisinden seçilen 16 ölçülük Op. 59 parçası, ♩=66 ve ♩=45, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Read the selected 16-bar piece on screen. Work in four-bar phrases with the click, then play the whole piece at ♩=66.",
+      "tr": "Ekrandaki seçilmiş 16 ölçülük parçayı oku. Klikle dört ölçülük cümlelerle çalış, sonra parçanın tamamını ♩=66'da çal."
+    },
+    "tempo": { "open": 66, "target": 66 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found each note from the staff, not from the TAB.", "tr": "Her notayı tab'dan değil porteden buldum." },
+    { "en": "Each four-bar phrase had a clear shape and ending.", "tr": "Her dört ölçülük cümlenin belirgin bir biçimi ve sonu vardı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "Position shifts slow you down. Practise the bar before and the bar after each shift as a two-bar loop.", "tr": "Pozisyon değişimleri seni yavaşlatıyor. Her değişimin önceki ve sonraki ölçüsünü iki ölçülük döngü olarak çalış." }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "A sharp from the key signature or the bar was missed. Mark the sharps before you play.", "tr": "Donanımdaki ya da ölçüdeki bir diyez atlandı. Çalmadan önce diyezleri işaretle." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the first eight bars only at ♩=50, then add the second half.",
+    "tr": "Önce yalnız ilk sekiz ölçüyü ♩=50'de çal, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Matteo Carcassi (1792–1853), Méthode complète, Op. 59: one easy piece (selection, 16 bars). Source: Paris first edition, 1836. Public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 20,
+  "expertPending": true
+}

@@ -1,0 +1,83 @@
+{
+  "id": "gtr-s3-m11-06",
+  "title": { "en": "Roots and target notes", "tr": "Kökler ve hedef notalar" },
+  "goal": {
+    "en": "Finds the three roots in the A minor pentatonic shape on a diagram and plays each one on the guitar.",
+    "tr": "La minör pentatonik şeklindeki üç kökü şemada bulur ve her birini gitarda çalar."
+  },
+  "explanation": [
+    {
+      "en": "The root is the note that names the scale. In A minor pentatonic, every A is a root.",
+      "tr": "Kök, gama adını veren notadır. La minör pentatonikte her La bir köktür."
+    },
+    {
+      "en": "The shape has three roots: A2 6/5 with finger 1, A3 4/7 with finger 3, and A4 1/5 with finger 1.",
+      "tr": "Şekilde üç kök var: 1. parmakla La2 6/5, 3. parmakla La3 4/7 ve 1. parmakla La4 1/5."
+    },
+    {
+      "en": "The roots on strings 6 and 1 sit at the same fret. The middle root is two frets higher, on string 4.",
+      "tr": "6. ve 1. teldeki kökler aynı perdededir. Ortadaki kök iki perde yukarıda, 4. teldedir."
+    },
+    {
+      "en": "A target note is the note a phrase aims at. End a run on a root and it sounds finished.",
+      "tr": "Hedef nota, bir cümlenin yöneldiği notadır. Bir koşuyu kökte bitir; bitmiş gibi duyulur."
+    },
+    {
+      "en": "End on E, the fifth, and the phrase sounds open, like a question. E3 is at 5/7 and E4 at 2/5.",
+      "tr": "Beşli olan Mi'de bitir; cümle açık, soru gibi duyulur. Mi3 5/7'de, Mi4 2/5'tedir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each root is played once after your attempt, string-model synthesis.",
+      "tr": "Her kök, denemenden sonra bir kez çalınır; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Part 1: answer 8 questions on a diagram of the shape, marking the roots or naming a marked note. Part 2: play the three roots from low to high and back: A2, A3, A4, then A4, A3, A2.",
+      "tr": "1. bölüm: şeklin şemasında 8 soruyu cevapla; kökleri işaretle ya da işaretli notayı adlandır. 2. bölüm: üç kökü pesten tize ve geri çal: La2, La3, La4, sonra La4, La3, La2."
+    },
+    "sequence": "A2 A3 A4 | A4 A3 A2",
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 8,
+      "params": {
+        "set": "pentatonic_roots",
+        "diagram": "fretboard",
+        "shape": "minor_pentatonic_pos1",
+        "key": "A",
+        "frets": [5, 8],
+        "bothDirections": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found each root before I played it.", "tr": "Her kökü çalmadan önce buldum." },
+    { "en": "I can point to both E's in the shape.", "tr": "Şekildeki iki Mi'yi de gösterebilirim." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: A3 was expected, D4 was heard.", "tr": "Farklı nota: La3 bekleniyordu, Re4 duyuldu." },
+      "fix": { "en": "D4 is fret 7 on string 3. The middle root is one string lower, fret 7 on string 4.", "tr": "Re4, 3. telde 7. perdedir. Ortadaki kök bir tel aşağıda, 4. telde 7. perdededir." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "A4 on string 1 is thin and quiet. Press just behind fret 5 and pick a little firmer.", "tr": "1. teldeki La4 ince ve kısık çıkar. 5. perdenin hemen arkasına bas ve biraz daha kararlı çek." }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with the two outer roots at fret 5, A2 and A4, then add A3.",
+    "tr": "Önce 5. perdedeki iki dış kökle, La2 ve La4 ile başla; sonra La3'ü ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

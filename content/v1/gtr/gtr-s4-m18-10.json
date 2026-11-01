@@ -1,0 +1,80 @@
+{
+  "id": "gtr-s4-m18-10",
+  "title": { "en": "Sight-reading checkpoint", "tr": "Deşifre geçişi" },
+  "goal": {
+    "en": "Sight-reads a new eight-bar line in first position once at ♩=66.",
+    "tr": "Birinci pozisyonda yeni bir sekiz ölçülük diziyi ♩=66'da bir kez deşifre eder."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint gives you a new eight-bar line in first position. It is not played before your try.",
+      "tr": "Bu geçiş sana birinci pozisyonda yeni bir sekiz ölçülük dizi verir. Dizi denemenden önce çalınmaz."
+    },
+    {
+      "en": "The line can be in C, G or D major or A minor, in 4/4 or 3/4. It can use quarters, eighths, half and dotted notes, rests and accidentals.",
+      "tr": "Dizi Do, Sol ya da Re majörde veya La minörde, 4/4 ya da 3/4'te olabilir. Dörtlük, sekizlik, ikilik, noktalı nota, sus ve değiştirici işaret içerebilir."
+    },
+    {
+      "en": "Use the strategy: scan for 30 seconds, count one bar in, and play once without stopping.",
+      "tr": "Stratejiyi kullan: 30 saniye tara, bir ölçü say ve durmadan bir kez çal."
+    },
+    {
+      "en": "Every try uses a new line. Practise at a slower tempo with new lines if you need to; the checkpoint passes at ♩=66.",
+      "tr": "Her denemede dizi yenidir. Gerekirse yeni dizilerle daha yavaş tempoda çalış; geçiş ♩=66'da geçilir."
+    },
+    {
+      "en": "This checkpoint completes the reading module.",
+      "tr": "Bu geçiş okuma modülünü tamamlar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=66 with a one-bar count-in. The new line is played only after your try.",
+      "tr": "Bir ölçü girişli ♩=66 klik. Yeni dizi yalnız denemenden sonra çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Scan the new line for 30 seconds, then play all eight bars once with the click at ♩=66 without stopping.",
+      "tr": "Yeni diziyi 30 saniye tara, sonra sekiz ölçünün tamamını klikle ♩=66'da durmadan bir kez çal."
+    },
+    "tempo": { "open": 66, "target": 66 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "A sharp from the key signature was missed. Name every sharp aloud during the scan.",
+        "tr": "Donanımdaki bir diyez gözden kaçtı. Tarama sırasında her diyezi sesli söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Keep going after a slip. Look one bar ahead, not at your hand.",
+        "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the click.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve klik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If it did not pass, read new lines in the sight-reading strategy lesson at ♩=60, then retake at ♩=66.",
+    "tr": "Geçmediyse deşifre stratejisi dersinde yeni dizileri ♩=60'ta oku, sonra ♩=66'da yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

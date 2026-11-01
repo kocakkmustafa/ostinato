@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s4-m16-05",
+  "title": { "en": "Bm in context", "tr": "Bağlamda Bm" },
+  "goal": {
+    "en": "Plays the D–Bm–G–A progression for eight bars in time at ♩=70 with a clean A-shape Bm.",
+    "tr": "D–Bm–G–A ilerlemesini temiz bir A-şekli Bm ile ♩=70'te sekiz ölçü zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "In the key of D, Bm is the relative minor: chord vi. D–Bm–G–A is I–vi–IV–V.",
+      "tr": "Re majör tonunda Bm ilgili minördür: vi. akor. D–Bm–G–A, I–vi–IV–V'tir."
+    },
+    {
+      "en": "Shapes: D x-x-0-2-3-2, Bm x-2-4-4-3-2, G 3-2-0-0-0-3, A x-0-2-2-2-0.",
+      "tr": "Şekiller: D x-x-0-2-3-2, Bm x-2-4-4-3-2, G 3-2-0-0-0-3, A x-0-2-2-2-0."
+    },
+    {
+      "en": "D to Bm stays near fret 2. Keep the hand at the same height and lay the index finger down as the other fingers land.",
+      "tr": "D'den Bm'ye geçiş 2. perde civarında kalır. Eli aynı yükseklikte tut; diğer parmaklar yerine otururken işaret parmağını yatır."
+    },
+    {
+      "en": "Bm to G is the longest move. Release the barre on beat 4 and let the hand travel as one unit.",
+      "tr": "Bm'den G'ye geçiş en uzun yoldur. Barre'ı 4. vuruşta bırak ve eli tek parça hâlinde taşı."
+    },
+    {
+      "en": "If a change is late, keep counting and land the next chord on beat 1. Do not restart.",
+      "tr": "Bir geçiş geç kalırsa saymayı sürdür ve sonraki akoru 1. vuruşa koy. Baştan başlama."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "D–Bm–G–A twice in quarter-note downstrokes over an original bass and drum loop, at ♩=70 and at ♩=50.",
+      "tr": "Özgün bas ve davul döngüsü üstünde dörtlük aşağı vuruşla iki kez D–Bm–G–A; ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the progression twice, eight bars, with the accompaniment at ♩=70. Strum four downstrokes per bar. Headphones help the microphone hear only your guitar.",
+      "tr": "Eşlikle ilerlemeyi ♩=70'te iki kez, sekiz ölçü çal. Her ölçüde dört aşağı vuruş yap. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: D | Bm | G | A | D | Bm | G | A",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "Every string of Bm rang when I plucked them one by one.", "tr": "Bm'nin tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The change into G comes late. Lift the barre on beat 4 and loop only Bm–G until it lands on 1.",
+        "tr": "G'ye geçiş geç kalıyor. Barre'ı 4. vuruşta kaldır ve 1'e oturana kadar yalnız Bm–G'yi döngüle."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "In Bm the index tip lifts. Move it closer to the fret and press string 1 with its edge.",
+        "tr": "Bm'de işaret parmağının ucu kalkıyor. Parmağı perdeye yaklaştır ve 1. teli kenarıyla bas."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones for the accompaniment and keep the phone close to the guitar.",
+        "tr": "Eşlik için kulaklık kullan ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Give each chord two bars, making the progression sixteen bars, at ♩=60.",
+    "tr": "♩=60'ta her akora iki ölçü ver; ilerleme on altı ölçü olsun."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

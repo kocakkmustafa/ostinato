@@ -1,0 +1,73 @@
+{
+  "id": "gtr-s4-m17-04",
+  "title": { "en": "Two octaves in position", "tr": "Pozisyonda iki oktav" },
+  "goal": {
+    "en": "Plays G major over two octaves, G2 to G4 and back, in position II in eighth notes at ♩=60.",
+    "tr": "II. pozisyonda Sol majörü iki oktav, Sol2'den Sol4'e çıkıp inerek ♩=60'ta sekizliklerle çalar."
+  },
+  "explanation": [
+    {
+      "en": "The first octave is the shape you know: G2 at 6/3 up to G3 at 4/5.",
+      "tr": "İlk oktav bildiğin şekil: 6/3'teki Sol2'den 4/5'teki Sol3'e."
+    },
+    {
+      "en": "The second octave continues in the same position: A3 3/2, B3 3/4, C4 3/5, D4 2/3, E4 2/5, F♯4 1/2, G4 1/3.",
+      "tr": "İkinci oktav aynı pozisyonda sürer: La3 3/2, Si3 3/4, Do4 3/5, Re4 2/3, Mi4 2/5, Fa♯4 1/2, Sol4 1/3."
+    },
+    {
+      "en": "String 2 is tuned a major third above string 3, not a fourth. So the top two strings use different frets from the strings below. Your hand stays; only the fingers change.",
+      "tr": "2. tel, 3. telin dörtlü değil büyük üçlü üstüne akortludur. Bu yüzden üstteki iki tel, alttaki tellerden farklı perdeler kullanır. Elin yerinde kalır; yalnız parmaklar değişir."
+    },
+    {
+      "en": "Eighth notes: two notes per click. Count 'one-and, two-and', pick down on the number and up on 'and'.",
+      "tr": "Sekizlik: her klikte iki nota. 'Bir-ve, iki-ve' diye say; sayıda aşağı, 've'de yukarı çek."
+    },
+    {
+      "en": "Turn around on G4 without a pause. The top note gets one eighth, like all the others.",
+      "tr": "Sol4'te durmadan dön. En üst nota da diğerleri gibi bir sekizlik sürer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "G2 up to G4 and back in eighth notes with a click, at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Klikle Sol2'den Sol4'e çıkış ve iniş, sekizliklerle, ♩=60 ve ♩=40; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the scale up from G2 to G4 and back down to G2 in eighth notes with the click at ♩=60. Alternate down and up picks.",
+      "tr": "Gamı Sol2'den Sol4'e çık ve Sol2'ye in; klikle birlikte ♩=60'ta sekizliklerle çal. Aşağı ve yukarı çekişi sırayla kullan."
+    },
+    "sequence": "G2:e A2:e B2:e C3:e D3:e E3:e F♯3:e G3:e | A3:e B3:e C4:e D4:e E4:e F♯4:e G4:e F♯4:e | E4:e D4:e C4:e B3:e A3:e G3:e F♯3:e E3:e | D3:e C3:e B2:e A2:e G2:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My hand stayed in position II from G2 to G4.", "tr": "Elim Sol2'den Sol4'e kadar II. pozisyonda kaldı." },
+    { "en": "I alternated down and up picks the whole way.", "tr": "Baştan sona aşağı ve yukarı çekişi sırayla kullandım." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "On string 2, D4 is at fret 3 and E4 at fret 5. The habit from string 3 pulls the finger one fret too low.", "tr": "2. telde Re4 3. perdede, Mi4 5. perdededir. 3. teldeki alışkanlık parmağı bir perde fazla aşağı çeker." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The string change is slow. Loop the last note of one string and the first of the next.", "tr": "Tel geçişi yavaş. Bir telin son notasını ve sonrakinin ilk notasını döngüle." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the top octave alone, G3 to G4 and back, at ♩=50, then join both octaves.",
+    "tr": "Üst oktavı tek başına, Sol3'ten Sol4'e çıkıp inerek ♩=50'de çal, sonra iki oktavı birleştir."
+  },
+  "minutes": 16,
+  "expertPending": true
+}

@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s3-m11-09",
+  "title": { "en": "Moving the shape", "tr": "Şekli taşımak" },
+  "goal": {
+    "en": "Moves the minor pentatonic shape to E, G and D minor and plays one octave in each key at ♩=60.",
+    "tr": "Minör pentatonik şeklini Mi, Sol ve Re minöre taşır ve her tonda bir oktavı ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "The shape is movable. The note under finger 1 on string 6 names the key.",
+      "tr": "Şekil taşınabilir. 6. telde 1. parmağın altındaki nota tonun adını verir."
+    },
+    {
+      "en": "Name the root on string 6 first, then place the shape. On string 6, G is at fret 3, A at fret 5, D at fret 10 and E at fret 12.",
+      "tr": "Önce 6. teldeki kökü adlandır, sonra şekli yerleştir. 6. telde Sol 3. perdede, La 5. perdede, Re 10. perdede, Mi 12. perdededir."
+    },
+    {
+      "en": "E minor, fret 12: E3 6/12, G3 6/15, A3 5/12, B3 5/14, D4 4/12, E4 4/14.",
+      "tr": "Mi minör, 12. perde: Mi3 6/12, Sol3 6/15, La3 5/12, Si3 5/14, Re4 4/12, Mi4 4/14."
+    },
+    {
+      "en": "G minor, fret 3: G2 6/3, B♭2 6/6, C3 5/3, D3 5/5, F3 4/3, G3 4/5.",
+      "tr": "Sol minör, 3. perde: Sol2 6/3, Si♭2 6/6, Do3 5/3, Re3 5/5, Fa3 4/3, Sol3 4/5."
+    },
+    {
+      "en": "D minor, fret 10: D3 6/10, F3 6/13, G3 5/10, A3 5/12, C4 4/10, D4 4/12.",
+      "tr": "Re minör, 10. perde: Re3 6/10, Fa3 6/13, Sol3 5/10, La3 5/12, Do4 4/10, Re4 4/12."
+    },
+    {
+      "en": "The finger pattern never changes; only the fret under finger 1 does. Near fret 3 the frets are wider, so open the hand gently.",
+      "tr": "Parmak düzeni hiç değişmez; yalnız 1. parmağın altındaki perde değişir. 3. perdeye yakın perdeler daha geniştir; eli nazikçe aç."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "One octave up and back in E minor, G minor and D minor, quarter notes at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Mi minör, Sol minör ve Re minörde bir oktav çıkış ve iniş, dörtlüklerle, ♩=60 ve ♩=40; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play one octave up and back in each key in quarter notes with the click at ♩=60: E minor at fret 12, then G minor at fret 3, then D minor at fret 10. Use the free beat at the end of each key to move your hand.",
+      "tr": "Her tonda bir oktav çıkıp in; klikle ♩=60'ta dörtlüklerle çal: önce 12. perdede Mi minör, sonra 3. perdede Sol minör, sonra 10. perdede Re minör. Elini taşımak için her tonun sonundaki boş vuruşu kullan."
+    },
+    "sequence": "E3 G3 A3 B3 | D4 E4 D4 B3 | A3 G3 E3 | G2 B♭2 C3 D3 | F3 G3 F3 D3 | C3 B♭2 G2 | D3 F3 G3 A3 | C4 D4 C4 A3 | G3 F3 D3",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I said the root's name before I placed my hand.", "tr": "Elimi yerleştirmeden önce kökün adını söyledim." },
+    { "en": "My finger pattern stayed the same in every key.", "tr": "Parmak düzenim her tonda aynı kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "The shape landed one fret too high. Find the root's sounding note on string 6 first, then build the shape from it.", "tr": "Şekil bir perde yukarıya düştü. Önce 6. telde kökün duyulan notasını bul, sonra şekli ondan kur." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The jump to the next key is long. Look at the next root fret before you play the last note of the current key.", "tr": "Sonraki tona sıçrama uzun. Bulunduğun tonun son notasını çalmadan önce sonraki kökün perdesine bak." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play G minor and D minor first, then add E minor at fret 12 in a later session.",
+    "tr": "Önce Sol minör ve Re minörü çal, 12. perdedeki Mi minörü sonraki bir oturumda ekle."
+  },
+  "legacy": "V: guitar.journey.intermediate.movable_shape",
+  "minutes": 14,
+  "expertPending": true
+}

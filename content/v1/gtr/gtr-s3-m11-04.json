@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s3-m11-04",
+  "title": { "en": "Sequences in threes", "tr": "Üçlü sekanslar" },
+  "goal": {
+    "en": "Moves up and down the A minor pentatonic shape in groups of three, one triplet per beat, at ♩=60.",
+    "tr": "La minör pentatonik şeklinde üçlü gruplarla, her vuruşa bir triole düşecek biçimde ♩=60'ta çıkıp iner."
+  },
+  "explanation": [
+    {
+      "en": "A sequence repeats a small pattern as it moves through the scale. Number the shape's notes from 1 (A2) to 12 (C5).",
+      "tr": "Sekans, gamda ilerlerken küçük bir kalıbı tekrarlar. Şeklin notalarını 1'den (La2) 12'ye (Do5) kadar numarala."
+    },
+    {
+      "en": "In threes, play 1-2-3, then 2-3-4, then 3-4-5. Each group starts one note higher than the last.",
+      "tr": "Üçlülerde 1-2-3, sonra 2-3-4, sonra 3-4-5 çal. Her grup bir öncekinden bir nota yukarıda başlar."
+    },
+    {
+      "en": "Coming down, reverse it: 12-11-10, 11-10-9, and so on, until 3-2-1 lands on A2.",
+      "tr": "İnerken tersine çevir: 12-11-10, 11-10-9 ve böyle sürer; 3-2-1 La2'ye iner."
+    },
+    {
+      "en": "Play each group as a triplet: three even notes in one beat. Lean a little on the first note so it lands on the click.",
+      "tr": "Her grubu triole olarak çal: bir vuruşta üç eşit nota. İlk notaya hafifçe yüklen ki tam klike otursun."
+    },
+    {
+      "en": "Sequences make the shape sound like music and teach you each note's neighbours.",
+      "tr": "Sekanslar şekli müzik gibi duyurur ve her notanın komşularını öğretir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The groups of three up and down the shape in triplets at ♩=60 and ♩=40, string-model synthesis, with click.",
+      "tr": "Şekilde çıkan ve inen üçlü gruplar, triolelerle, ♩=60 ve ♩=40; tel modeli sentezi, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the sequence in threes with the click at ♩=60, one group per click: up from 1-2-3 to 10-11-12, then down from 12-11-10 to 3-2-1. Use alternate picking.",
+      "tr": "Üçlü sekansı klikle ♩=60'ta, her klikte bir grup olarak çal: 1-2-3'ten 10-11-12'ye çık, sonra 12-11-10'dan 3-2-1'e in. Alternatif pena kullan."
+    },
+    "sequence": "A2:t C3:t D3:t C3:t D3:t E3:t D3:t E3:t G3:t E3:t G3:t A3:t | G3:t A3:t C4:t A3:t C4:t D4:t C4:t D4:t E4:t D4:t E4:t G4:t | E4:t G4:t A4:t G4:t A4:t C5:t C5:t A4:t G4:t A4:t G4:t E4:t | G4:t E4:t D4:t E4:t D4:t C4:t D4:t C4:t A3:t C4:t A3:t G3:t | A3:t G3:t E3:t G3:t E3:t D3:t E3:t D3:t C3:t D3:t C3:t A2:t",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each group started on a click.", "tr": "Her grup bir klikte başladı." },
+    { "en": "I knew the first note of the next group before I played it.", "tr": "Sonraki grubun ilk notasını çalmadan önce biliyordum." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": { "en": "The triplets are rushing. Lean on the first note of each group and let it fall exactly on the click.", "tr": "Trioleler acele ediyor. Her grubun ilk notasına yüklen ve tam klike düşmesine izin ver." }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "On string 2, G4 is at fret 8. Fret 7 gives F♯4. Use finger 4 there.", "tr": "2. telde Sol4 8. perdededir. 7. perde Fa♯4 verir. Orada 4. parmağı kullan." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the way up, 1-2-3 to 10-11-12, at ♩=50.",
+    "tr": "Yalnız çıkışı, 1-2-3'ten 10-11-12'ye, ♩=50'de çal."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -37,7 +37,7 @@
       "en": "Play 16 eighth notes on open string 5 along with the click, alternating down and up. Start at ♩=50 and move up in steps of 5 to ♩=60.",
       "tr": "Açık 5. telde klikle birlikte 16 sekizlik çal; aşağı ve yukarıyı sırayla kullan. ♩=50'den başla, 5'er adımla ♩=60'a çık."
     },
-    "sequence": "A2 A2 A2 A2 A2 A2 A2 A2 | A2 A2 A2 A2 A2 A2 A2 A2",
+    "sequence": "A2:e A2:e A2:e A2:e A2:e A2:e A2:e A2:e | A2:e A2:e A2:e A2:e A2:e A2:e A2:e A2:e",
     "tempo": { "open": 50, "target": 60 },
     "pass": { "levelDefault": true }
   },

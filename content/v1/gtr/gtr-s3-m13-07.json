@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s3-m13-07",
+  "title": { "en": "Blues in E", "tr": "Mi'de blues" },
+  "goal": {
+    "en": "Plays a shuffle accompaniment through the 12-bar blues in E at ♩=80.",
+    "tr": "Mi'de 12 ölçülük blues boyunca shuffle eşlik çalar, ♩=80."
+  },
+  "explanation": [
+    {
+      "en": "In E the chords are E (I), A (IV) and B7 (V).",
+      "tr": "Mi'de akorlar E (I), A (IV) ve B7'dir (V)."
+    },
+    {
+      "en": "E and A use the boogie pattern on open strings: E5–E6 on strings 6 and 5, A5–A6 on strings 5 and 4.",
+      "tr": "E ve A açık tellerde boogie kalıbıyla çalınır: E5–E6 6. ve 5. telde, A5–A6 5. ve 4. telde."
+    },
+    {
+      "en": "B7 has no open root string here, so strum it: x-2-1-2-0-2, down on each beat and up on the short eighth.",
+      "tr": "B7'nin burada açık kök teli yok, bu yüzden onu tara: x-2-1-2-0-2; her vuruşta aşağı, kısa sekizlikte yukarı."
+    },
+    {
+      "en": "The form: E E E E / A A E E / B7 A E B7. Bar 12 is B7, the turnaround.",
+      "tr": "Biçim: E E E E / A A E E / B7 A E B7. 12. ölçü B7'dir, dönüş ölçüsü."
+    },
+    {
+      "en": "The move to B7 in bar 9 is the big change. Place finger 2 on string 5 first; it is the root, B2.",
+      "tr": "9. ölçüde B7'ye geçiş en büyük değişimdir. Önce 2. parmağı 5. tele koy; kök odur, Si2."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 12-bar blues in E, boogie on E and A and a strummed B7, swung, over an original bass and drum loop at ♩=80 and ♩=55.",
+      "tr": "Mi'de 12 ölçülük blues, E ve A'da boogie, B7'de vuruş, swing'li; ♩=80 ve ♩=55'te özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 12 bars with the accompaniment at ♩=80: the boogie pattern on E and A, a shuffle strum on B7. Headphones help the microphone hear only your guitar.",
+      "tr": "12 ölçüyü ♩=80'de eşlikle çal: E ve A'da boogie kalıbı, B7'de shuffle vuruşu. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4 swing: E5–E6 | E5–E6 | E5–E6 | E5–E6 | A5–A6 | A5–A6 | E5–E6 | E5–E6 | B7 | A5–A6 | E5–E6 | B7",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I played B7 in bars 9 and 12.", "tr": "9. ve 12. ölçüde B7 çaldım." },
+    { "en": "Only the two strings of each pattern rang.", "tr": "Her kalıbın yalnız iki teli çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "B7 starts on string 5. Aim the pick at string 5 before you strum.",
+        "tr": "B7 5. telden başlar. Taramadan önce penayı 5. tele yönelt."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "In B7, string 2 is open. Arch fingers 3 and 4 so they do not touch it.",
+        "tr": "B7'de 2. tel açıktır. 3. ve 4. parmağı kavisli tut; ona değmesinler."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Late into bar 9. Loop bars 8 and 9 at ♩=60, then rejoin the full form.",
+        "tr": "9. ölçüye geç girdin. 8. ve 9. ölçüyü ♩=60'ta döngüle, sonra bütün biçime dön."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Strum B5 (x-2-4-x-x-x) on two strings instead of B7 until the change feels smooth, then return to B7.",
+    "tr": "Geçiş rahatlayana kadar B7 yerine iki telde B5 (x-2-4-x-x-x) vur; sonra B7'ye dön."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

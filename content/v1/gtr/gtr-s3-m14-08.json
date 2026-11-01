@@ -1,0 +1,102 @@
+{
+  "id": "gtr-s3-m14-08",
+  "title": { "en": "Sevenths and your own chart", "tr": "Yedililer ve kendi çizelgen" },
+  "goal": {
+    "en": "Spells seventh chords by their notes, builds an original 8-bar chart in A and plays it at ♩=70.",
+    "tr": "Yedili akorları notalarıyla yazar, La tonunda özgün 8 ölçülük çizelge kurar ve ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "A seventh chord has four notes: root, third, fifth and seventh. A is A C♯ E; A7 is A C♯ E G. In x-0-2-0-2-0 the open G3 is the added note.",
+      "tr": "Yedili akorun dört notası vardır: kök, üçlü, beşli ve yedili. A, La Do♯ Mi'dir; A7, La Do♯ Mi Sol'dür. x-0-2-0-2-0'da açık Sol3 eklenen notadır."
+    },
+    {
+      "en": "The symbol tells you which seventh. Cmaj7 = C E G B, Am7 = A C E G, D7 = D F♯ A C.",
+      "tr": "Simge hangi yedili olduğunu söyler. Cmaj7 = Do Mi Sol Si, Am7 = La Do Mi Sol, D7 = Re Fa♯ La Do."
+    },
+    {
+      "en": "maj7 adds the seventh 11 frets above the root. 7 and m7 add it 10 frets above. Spell all four notes before you trust a symbol.",
+      "tr": "maj7, yediliyi kökün 11 perde yukarısına ekler. 7 ve m7 ise 10 perde yukarısına. Bir simgeye güvenmeden önce dört notayı da yaz."
+    },
+    {
+      "en": "Your chart: 8 bars in A, one chord per bar. Use A, Amaj7, A7, D, Dmaj7, D7, E and E7. Start and end on A or Amaj7 and use at least two seventh chords.",
+      "tr": "Çizelgen: La tonunda 8 ölçü, ölçü başına bir akor. A, Amaj7, A7, D, Dmaj7, D7, E ve E7'yi kullan. A ya da Amaj7 ile başla ve bitir; en az iki yedili akor kullan."
+    },
+    {
+      "en": "A7 leads well to D, and E7 leads well to A. Try those pulls in your chart.",
+      "tr": "A7, D'ye iyi bağlanır; E7 de A'ya iyi bağlanır. Bu çekimleri çizelgende dene."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Your finished chart, synthesized with four downstrokes per bar over an original bass and drum loop at ♩=70 and ♩=50.",
+      "tr": "Bitirdiğin çizelge, ölçü başına dört aşağı vuruşla; ♩=70 ve ♩=50'de özgün bas ve davul döngüsü üstünde sentezlenir."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Part 1: answer 6 questions matching a seventh-chord symbol to its four notes. Part 2: build your 8-bar chart on screen from the chord blocks. Part 3: play your chart with the accompaniment at ♩=70, four downstrokes per bar; the app listens for the chords you placed. Headphones help the microphone hear only your guitar.",
+      "tr": "1. bölüm: yedili akor simgesini dört notasıyla eşleştiren 6 soruyu cevapla. 2. bölüm: akor bloklarından ekranda 8 ölçülük çizelgeni kur. 3. bölüm: çizelgeni eşlikle ♩=70'te, ölçü başına dört aşağı vuruşla çal; uygulama yerleştirdiğin akorları dinler. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true, "minCorrect": 5 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 6,
+      "params": {
+        "set": "seventh_chord_spelling",
+        "symbols": ["A7", "Amaj7", "Am7", "D7", "Dmaj7", "Dm7", "E7", "Em7", "Cmaj7"],
+        "chartBuilder": {
+          "bars": 8,
+          "meter": "4/4",
+          "key": "A",
+          "chords": ["A", "Amaj7", "A7", "D", "Dmaj7", "D7", "E", "E7"],
+          "startEndOn": ["A", "Amaj7"],
+          "minSevenths": 2
+        }
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can spell A7, Amaj7 and Am7 note by note.", "tr": "A7, Amaj7 ve Am7'yi nota nota yazabiliyorum." },
+    { "en": "My chart has 8 bars and starts and ends on A or Amaj7.", "tr": "Çizelgem 8 ölçü; A ya da Amaj7 ile başlayıp bitiyor." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: maj7 and 7 swapped.", "tr": "Farklı cevap: maj7 ile 7 yer değiştirdi." },
+      "fix": {
+        "en": "Not every symbol ending in 7 has the same seventh. maj7 is a half step below the octave; 7 and m7 are a whole step below.",
+        "tr": "7 ile biten her simgede aynı yedili yoktur. maj7 oktavın yarım ses altındadır; 7 ve m7 bir tam ses altındadır."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 2 not heard.", "tr": "Farklı akor: 2. tel duyulmadı." },
+      "fix": {
+        "en": "In A7 and Amaj7, the finger on string 3 leans on string 2. Arch it and press with the tip.",
+        "tr": "A7 ve Amaj7'de 3. teldeki parmak 2. tele yaslanıyor. Parmağı kavisli tut ve uçtan bas."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Find the slowest change in your chart. Loop that pair at ♩=55, then play the whole chart again.",
+        "tr": "Çizelgendeki en yavaş geçişi bul. O çifti ♩=55'te döngüle, sonra bütün çizelgeyi yeniden çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Build the chart from A, D, E and A7 only, with A7 as the one seventh chord, before you add the others.",
+    "tr": "Diğerlerini eklemeden önce çizelgeyi yalnız A, D, E ve A7 ile kur; tek yedili akor A7 olsun."
+  },
+  "legacy": "R: guitar.journey.harmony.sevenths_chart",
+  "minutes": 16,
+  "expertPending": true
+}

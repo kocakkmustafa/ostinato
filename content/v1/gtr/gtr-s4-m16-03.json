@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s4-m16-03",
+  "title": { "en": "A-shape sevenths", "tr": "A-şekli 7'liler" },
+  "goal": {
+    "en": "Plays B7 and Bm7 as A-shape barre chords at fret 2 with every string clear.",
+    "tr": "B7 ve Bm7'yi 2. perdede A-şekli barre olarak her teli net çalar."
+  },
+  "explanation": [
+    {
+      "en": "A7 (x-0-2-0-2-0) and Am7 (x-0-2-0-1-0) also move up the neck. String 3 stays on the barre and gives the seventh.",
+      "tr": "A7 (x-0-2-0-2-0) ve Am7 (x-0-2-0-1-0) de sapta yukarı taşınır. 3. tel barre'da kalır ve 7'liyi verir."
+    },
+    {
+      "en": "B7 is x-2-4-2-4-2. Barre fret 2 with the index finger. Finger 3 goes on string 4, fret 4; finger 4 on string 2, fret 4.",
+      "tr": "B7 x-2-4-2-4-2'dir. İşaret parmağıyla 2. perdede barre yap. 3. parmak 4. telin 4. perdesine, 4. parmak 2. telin 4. perdesine gider."
+    },
+    {
+      "en": "Bm7 is x-2-4-2-3-2. Keep finger 3 on string 4, fret 4. Finger 2 goes on string 2, fret 3.",
+      "tr": "Bm7 x-2-4-2-3-2'dir. 3. parmak 4. telin 4. perdesinde kalsın. 2. parmak 2. telin 3. perdesine gider."
+    },
+    {
+      "en": "Both chords have A3 on string 3, the seventh above B2. Only string 2 changes: D♯4 in B7, D4 in Bm7.",
+      "tr": "İki akorda da 3. telde La3 vardır; Si2'nin 7'lisi. Yalnız 2. tel değişir: B7'de Re♯4, Bm7'de Re4."
+    },
+    {
+      "en": "This B7 is a different voicing from the open B7 (x-2-1-2-0-2). It moves to any fret. If the hand hurts, stop and rest.",
+      "tr": "Bu B7, açık B7'den (x-2-1-2-0-2) farklı bir seslendirmedir. Her perdeye taşınır. Elin ağrırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "B7 then Bm7 as A-shape barre chords, each strummed and then plucked string by string, slowly.",
+      "tr": "A-şekli barre ile önce B7 sonra Bm7; her biri vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum B7 four times, then Bm7 four times, in your own time. Then pluck each chord string by string from string 5; the app checks each string.",
+      "tr": "Kendi hızında B7'yi dört kez, sonra Bm7'yi dört kez vur. Sonra her akoru 5. telden başlayarak tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "B7 | B7 | B7 | B7 | Bm7 | Bm7 | Bm7 | Bm7",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "String 3 rang under the barre in both chords.", "tr": "3. tel iki akorda da barre'ın altında çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "String 3 falls in the crease of the index finger, or finger 3 leans on it. Shift the index finger a little along the fret, toward the floor or the ceiling, and arch finger 3.",
+        "tr": "3. tel işaret parmağının eklem çizgisine denk geliyor ya da 3. parmak ona yaslanıyor. İşaret parmağını perde boyunca biraz yere ya da tavana doğru kaydır ve 3. parmağı kemerle."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Let the index tip rest on string 6, and start the strum on string 5.",
+        "tr": "İşaret parmağının ucu 6. telin üstünde dursun ve vuruşa 5. telden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Pluck only strings 4, 3 and 2 of each chord until string 3 rings, then add strings 5 and 1.",
+    "tr": "3. tel çalana kadar her akorun yalnız 4., 3. ve 2. telini çek, sonra 5. ve 1. teli ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

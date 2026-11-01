@@ -1,0 +1,126 @@
+{
+  "id": "gtr-s4-m18-06",
+  "title": {
+    "en": "Reading in 3/4 and 6/8",
+    "tr": "3/4 ve 6/8'de okuma"
+  },
+  "goal": {
+    "en": "Reads an eight-bar line in 3/4 and one in 6/8 and plays both with the click at ♩=60.",
+    "tr": "3/4'te ve 6/8'de birer sekiz ölçülük diziyi okur ve ikisini de klikle ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "The top number of a time signature tells how many counts are in a bar. The bottom number tells which note gets one count.",
+      "tr": "Ölçü işaretinin üst sayısı ölçüde kaç sayım olduğunu söyler. Alt sayı hangi notanın bir sayım aldığını söyler."
+    },
+    {
+      "en": "3/4 has three quarter-note beats, counted \"1 2 3\". A dotted half fills the bar.",
+      "tr": "3/4'te üç dörtlük vuruş vardır, \"1 2 3\" diye sayılır. Noktalı ikilik ölçüyü doldurur."
+    },
+    {
+      "en": "6/8 has six eighths in a bar, felt as two big beats: 1-2-3 4-5-6.",
+      "tr": "6/8'de ölçüde altı sekizlik var; iki büyük vuruş olarak hissedilir: 1-2-3 4-5-6."
+    },
+    {
+      "en": "In 6/8 a dotted quarter fills one big beat. A quarter plus an eighth also fills one: long-short.",
+      "tr": "6/8'de noktalı dörtlük bir büyük vuruşu doldurur. Dörtlük artı sekizlik de birini doldurur: uzun-kısa."
+    },
+    {
+      "en": "The quarter note stays at ♩=60 in both lines, so eighths keep the same speed. In 6/8 the click marks the two big beats at ♩.=40.",
+      "tr": "Dörtlük iki dizide de ♩=60'ta kalır, böylece sekizlikler aynı hızda gider. 6/8'de klik iki büyük vuruşu ♩.=40'ta verir."
+    },
+    {
+      "en": "In 3/4, lean slightly on beat 1. In 6/8, lean on 1 and 4.",
+      "tr": "3/4'te 1. vuruşa hafifçe yaslan. 6/8'de 1 ve 4'e yaslan."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The original 3/4 line, then the 6/8 line, with a click, at ♩=60 and at ♩=40, string-model synthesis.",
+      "tr": "Klikle önce özgün 3/4 dizi, sonra 6/8 dizi, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Count one bar of each line aloud first. Then play the 3/4 line and the 6/8 line, eight bars each, with the click at ♩=60.",
+      "tr": "Önce her diziden bir ölçüyü sesli say. Sonra 3/4 diziyi ve 6/8 diziyi, her biri sekiz ölçü, klikle ♩=60'ta çal."
+    },
+    "sequence": "3/4: C4:q E4:q G4:q | F4:h D4:q | E4:q F4:e E4:e D4:q | C4:h. | A3:q C4:q E4:q | D4:h B3:q | C4:e D4:e E4:q G3:q | C4:h qr | E4:q G4:e F4:q D4:e | E4:q. G4:q. | F4:q E4:e D4:q E4:e | C4:h. | A3:e B3:e C4:e D4:q B3:e | C4:q. G3:q. | A3:q B3:e C4:e D4:e E4:e | C4:h.",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I counted \"1 2 3\" in the 3/4 line and \"1-2-3 4-5-6\" in the 6/8 line.",
+      "tr": "3/4 dizide \"1 2 3\", 6/8 dizide \"1-2-3 4-5-6\" diye saydım."
+    },
+    {
+      "en": "Dotted notes rang for their full length.",
+      "tr": "Noktalı notalar tam süresince çınladı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "In 6/8 the dotted quarters are rushing. Count \"1-2-3 4-5-6\" and hold each one for three eighths.",
+        "tr": "6/8'de noktalı dörtlükler acele ediyor. \"1-2-3 4-5-6\" diye say ve her birini üç sekizlik boyunca tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "In 3/4 the note after a dotted half comes late. Keep counting \"2 3\" while it rings, then play on the next \"1\".",
+        "tr": "3/4'te noktalı ikilikten sonraki nota geç geliyor. Nota çınlarken \"2 3\" saymayı sürdür, sonraki \"1\"de çal."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the click.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve klik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise each line alone at ♩=50, and switch meters only when both feel steady.",
+    "tr": "Her diziyi ayrı ayrı ♩=50'de çalış; ölçü değiştirmeye ikisi de oturunca geç."
+  },
+  "minutes": 18,
+  "expertPending": true
+}

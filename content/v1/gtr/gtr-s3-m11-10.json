@@ -1,0 +1,73 @@
+{
+  "id": "gtr-s3-m11-10",
+  "title": { "en": "Pentatonic speed ladder", "tr": "Pentatonik hız merdiveni" },
+  "goal": {
+    "en": "Raises the two-octave A minor pentatonic shape from ♩=60 to ♩=100 in steps of 5 while every step stays clean.",
+    "tr": "İki oktavlık La minör pentatonik şeklini, her basamak temiz kalarak 5'er adımla ♩=60'tan ♩=100'e çıkarır."
+  },
+  "explanation": [
+    {
+      "en": "A speed ladder raises the tempo in small steps. Each step adds 5, from ♩=60 to ♩=100.",
+      "tr": "Hız merdiveni tempoyu küçük adımlarla yükseltir. Her basamak 5 ekler: ♩=60'tan ♩=100'e."
+    },
+    {
+      "en": "Move up only after a clean pass. If notes start to blur, go back one step.",
+      "tr": "Yalnız temiz bir geçişten sonra yukarı çık. Notalar bulanıklaşmaya başlarsa bir basamak geri in."
+    },
+    {
+      "en": "Speed comes from small motions. Keep your fingers close to the strings and the pick motion short.",
+      "tr": "Hız küçük hareketlerden gelir. Parmaklarını tellere yakın, pena hareketini kısa tut."
+    },
+    {
+      "en": "If your forearm, thumb or wrist tightens, drop back two steps and shake the hand loose.",
+      "tr": "Ön kolun, başparmağın ya da bileğin gerilirse iki basamak geri in ve elini sallayarak gevşet."
+    },
+    {
+      "en": "Try each step at most three times. After that, stop the ladder for today; your top tempo is where you start next time.",
+      "tr": "Her basamağı en fazla üç kez dene. Sonra merdiveni bugünlük bırak; ulaştığın tempo bir dahaki başlangıcındır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "A2 up to C5 and back in eighth notes at each ladder step from ♩=60 to ♩=100, string-model synthesis, with click.",
+      "tr": "La2'den Do5'e çıkış ve iniş, sekizliklerle, ♩=60'tan ♩=100'e her merdiven basamağında; tel modeli sentezi, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the two-octave shape up and back in eighth notes with alternate picking. Start at ♩=60. After each clean pass the click rises by 5, up to ♩=100.",
+      "tr": "İki oktavlık şekli alternatif penayla sekizliklerle çıkıp in. ♩=60'tan başla. Her temiz geçişten sonra klik 5 yükselir; ♩=100'e kadar."
+    },
+    "sequence": "A2:e C3:e D3:e E3:e G3:e A3:e C4:e D4:e | E4:e G4:e A4:e C5:e A4:e G4:e E4:e D4:e | C4:e A3:e G3:e E3:e D3:e C3:e A2:q",
+    "tempo": { "open": 60, "target": 100 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My hand stayed loose at every step.", "tr": "Elim her basamakta gevşek kaldı." },
+    { "en": "I went back a step when the notes blurred.", "tr": "Notalar bulanıklaşınca bir basamak geri indim." },
+    { "en": "I stopped after three tries at the same step.", "tr": "Aynı basamakta üç denemeden sonra durdum." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": { "en": "At higher tempos you rush ahead of the click. Lean on beats 1 and 3 to lock in.", "tr": "Yüksek tempolarda klikin önüne geçiyorsun. Oturmak için 1. ve 3. vuruşa yüklen." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "At speed the fretting finger lifts before the note sounds. Hold each note until the next one starts.", "tr": "Hızda sol el parmağı nota çıkmadan kalkıyor. Her notayı bir sonraki başlayana kadar tut." }
+    }
+  ],
+  "adaptation": {
+    "en": "End the ladder at ♩=80 today and climb the rest in later sessions.",
+    "tr": "Merdiveni bugün ♩=80'de bitir, kalanını sonraki oturumlarda çık."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

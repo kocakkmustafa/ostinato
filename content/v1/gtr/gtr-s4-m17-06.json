@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m17-06",
+  "title": { "en": "Sequences in thirds", "tr": "Üçlü atlamalı sekans" },
+  "goal": {
+    "en": "Plays G major in thirds (1-3, 2-4, 3-5 …) up and back in position II, in eighth notes at ♩=60.",
+    "tr": "II. pozisyonda Sol majörü üçlü atlamalarla (1-3, 2-4, 3-5 …) çıkıp iner, ♩=60'ta sekizliklerle çalar."
+  },
+  "explanation": [
+    {
+      "en": "A sequence repeats one small pattern from each scale note. Here the pattern is a third: play a note, skip one, then start again from the next note.",
+      "tr": "Sekans, küçük bir kalıbı her gam notasından tekrarlar. Burada kalıp üçlüdür: bir nota çal, birini atla, sonra bir sonraki notadan yeniden başla."
+    },
+    {
+      "en": "Up: G2–B2, A2–C3, B2–D3, C3–E3, D3–F♯3, E3–G3, F♯3–A3.",
+      "tr": "Çıkış: Sol2–Si2, La2–Do3, Si2–Re3, Do3–Mi3, Re3–Fa♯3, Mi3–Sol3, Fa♯3–La3."
+    },
+    {
+      "en": "Down: G3–E3, F♯3–D3, E3–C3, D3–B2, C3–A2, B2–G2, A2–F♯2, then end on G2. The low F♯2 is at 6/2 with finger 1, still inside position II.",
+      "tr": "İniş: Sol3–Mi3, Fa♯3–Re3, Mi3–Do3, Re3–Si2, Do3–La2, Si2–Sol2, La2–Fa♯2, sonra Sol2'de bitir. Pes Fa♯2, 6/2'de 1. parmakladır; yine II. pozisyonun içindedir."
+    },
+    {
+      "en": "Many pairs cross strings. Prepare the second finger before you pick the first note.",
+      "tr": "Çiftlerin çoğu tel değiştirir. İlk notayı çekmeden önce ikinci parmağı hazırla."
+    },
+    {
+      "en": "Each pair is two eighths, one click. Accent the first note of each pair lightly to keep your place.",
+      "tr": "Her çift iki sekizliktir, bir klik. Yerini kaybetmemek için her çiftin ilk notasını hafifçe vurgula."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "G major in thirds, up and back, eighth notes with a click, at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Klikle Sol majörde üçlü sekans, çıkış ve iniş, sekizliklerle, ♩=60 ve ♩=40; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the thirds sequence up from G2 and back down to G2 in eighth notes with the click at ♩=60, one pair per click.",
+      "tr": "Üçlü sekansı Sol2'den çık ve Sol2'ye in; klikle birlikte ♩=60'ta sekizliklerle, her klikte bir çift çal."
+    },
+    "sequence": "G2:e B2:e A2:e C3:e B2:e D3:e C3:e E3:e | D3:e F♯3:e E3:e G3:e F♯3:e A3:e G3:e E3:e | F♯3:e D3:e E3:e C3:e D3:e B2:e C3:e A2:e | B2:e G2:e A2:e F♯2:e G2:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I started each pair one scale step from the last pair.", "tr": "Her çifte bir önceki çiftten bir basamak ötede başladım." },
+    { "en": "I played F♯ every time, never F.", "tr": "Her seferinde Fa♯ çaldım, hiç Fa çalmadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one scale step high.", "tr": "Farklı nota, bir gam basamağı yüksek." },
+      "fix": { "en": "You skipped two notes instead of one. Say the pair names before you play: 'G–B, A–C'.", "tr": "Bir yerine iki nota atladın. Çalmadan önce çiftlerin adını söyle: 'Sol–Si, La–Do'." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The string crossing inside the pair is slow. Loop that one pair at ♩=50, then play the full sequence.", "tr": "Çiftin içindeki tel geçişi yavaş. O çifti ♩=50'de döngüle, sonra tam sekansı çal." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the sequence in quarter notes at ♩=60, one note per click, then return to eighths.",
+    "tr": "Sekansı ♩=60'ta dörtlüklerle, her klikte bir nota çal; sonra sekizliklere dön."
+  },
+  "minutes": 16,
+  "expertPending": true
+}

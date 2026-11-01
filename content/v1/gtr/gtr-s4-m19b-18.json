@@ -1,0 +1,87 @@
+{
+  "id": "gtr-s4-m19b-18",
+  "title": { "en": "Original lead piece", "tr": "Özgün lead parçası" },
+  "goal": {
+    "en": "Plays an original 24-bar lead piece in A minor at ♩=84 that combines bends, legato, slides and two pentatonic boxes.",
+    "tr": "La minörde bend, legato, kaydırma ve iki pentatonik kutuyu birleştiren özgün 24 ölçülük lead parçasını ♩=84'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "The piece has three eight-bar sections over an original backing. Section A (bars 1–8) stays in the 5th-fret box with bends and legato. The chords are Am, F, G, Am, twice.",
+      "tr": "Parça özgün bir eşlik üstünde üç sekiz ölçülük bölümden oluşur. A bölümü (1–8. ölçüler) bend ve legatoyla 5. perde kutusunda kalır. Akorlar iki kez Am, F, G, Am."
+    },
+    {
+      "en": "Section B (bars 9–16) slides into the 7th-fret box on string 3, climbs to D5 and slides back down in bar 15. Bar 16 is a full bar of rest.",
+      "tr": "B bölümü (9–16. ölçüler) 3. telde 7. perde kutusuna kayar, Re5'e çıkar ve 15. ölçüde geri kayar. 16. ölçü tam bir sus ölçüsüdür."
+    },
+    {
+      "en": "Section C (bars 17–24) returns to the 5th-fret box, builds with more bends and ends on A3 with vibrato.",
+      "tr": "C bölümü (17–24. ölçüler) 5. perde kutusuna döner, daha çok bend'le yükselir ve vibratolu La3'te biter."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. To practise a hard spot, start at bar 9 or bar 17 instead of always at the beginning.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. Zor bir yeri çalışmak için her zaman baştan değil, 9. ya da 17. ölçüden başla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "Original 24-bar A minor rock backing with bass and drums, straight eighths: Am F G Am ×2, Dm Am Dm Am F G Am Am, Am F G Am F G Am Am. The piece played over it at ♩=84 and ♩=60. Headphones recommended.",
+      "tr": "Bas ve davullu, düz sekizlikli özgün 24 ölçülük La minör rock eşliği: Am F G Am ×2, Dm Am Dm Am F G Am Am, Am F G Am F G Am Am. Parça bunun üstünde ♩=84 ve ♩=60'ta çalınır. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3", "A5"],
+    "task": {
+      "en": "Play the 24 bars over the backing at ♩=84. Symbols: h hammer-on, p pull-off, / slide, b bend, r release, vib vibrato. Practise slower first if you like; the checkpoint counts at ♩=84.",
+      "tr": "24 ölçüyü ♩=84'te eşlik üstünde çal. Simgeler: h çekiç, p çekme, / kaydırma, b bend, r bırakma, vib vibrato. İstersen önce yavaş çalış; geçiş ♩=84'te sayılır."
+    },
+    "sequence": "A3 C4 D4 b E4 | D4 p C4 A3 C4 | G3 h A3 p G3 E3 D3 | E3 G3 A3 | C4 D4 b E4 r D4 | C4 A3 G3 A3 C4 | G4 E4 D4 C4 D4 | C4 A3 | C4 / D4 E4 G4 A4 | G4 b A4 G4 E4 | C5 h D5 p C5 A4 | G4 A4 C5 b D5 r C5 | A4 G4 E4 G4 A4 | G4 b A4 r G4 E4 D4 | E4 / D4 C4 A3 | rest | A4 C5 A4 G4 b A4 | G4 E4 D4 p C4 A3 | G3 h A3 p G3 D3 | E3 G3 A3 C4 D4 b E4 | D4 b E4 r D4 C4 A3 | C4 h D4 p C4 A3 G3 | A3 C4 D4 b E4 r D4 C4 | A3 vib",
+    "tempo": { "open": 84, "target": 84 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 note and timing accuracy at ♩=84, and each bend settles within ±25 cents of its target.",
+        "tr": "♩=84'te Seviye 4 nota ve zamanlama ölçütü; her bend hedefinin ±25 cent içine oturur."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The slides in bars 9 and 15 move the hand. Loop bars 8–9 and 14–15 at ♩=60, then go back to ♩=84.",
+        "tr": "9. ve 15. ölçülerdeki kaydırmalar eli taşır. 8–9. ve 14–15. ölçüleri ♩=60'ta döngüle, sonra ♩=84'e dön."
+      }
+    },
+    {
+      "error": { "en": "Different note: the bend stops below the target.", "tr": "Farklı nota: bend hedefin altında kalıyor." },
+      "fix": {
+        "en": "Before you play, pick each bend's target fret once: E4 at string 3, fret 9; A4 at string 2, fret 10; D5 at string 1, fret 10.",
+        "tr": "Çalmadan önce her bend'in hedef perdesini bir kez çal: 3. telin 9. perdesinde Mi4; 2. telin 10. perdesinde La4; 1. telin 10. perdesinde Re5."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "An unplugged electric guitar is quiet. Put the phone 15–20 cm from the strings and pick a little firmer.",
+        "tr": "Amfisiz elektro gitarın sesi kısıktır. Telefonu tellere 15–20 cm uzaklığa koy ve penayla biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each eight-bar section on its own at ♩=60 with the backing looped, then join them at ♩=84.",
+    "tr": "Her sekiz ölçülük bölümü ♩=60'ta, eşliği döngüleyerek tek başına çal, sonra ♩=84'te birleştir."
+  },
+  "minutes": 20,
+  "expertPending": true
+}

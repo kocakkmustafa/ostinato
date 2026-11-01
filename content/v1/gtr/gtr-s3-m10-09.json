@@ -1,0 +1,116 @@
+{
+  "id": "gtr-s3-m10-09",
+  "title": {
+    "en": "Downpicking endurance",
+    "tr": "Aşağı pena dayanıklılığı"
+  },
+  "goal": {
+    "en": "Keeps even E5 downstroke eighths for 30 seconds at ♩=100 without tightening the arm.",
+    "tr": "♩=100'de 30 saniye boyunca kolu germeden eşit E5 aşağı pena sekizlik sürdürür."
+  },
+  "explanation": [
+    {
+      "en": "Downstrokes sound heavier than alternate picking, but every note needs a full return of the hand. Endurance means a loose return.",
+      "tr": "Aşağı pena gidip gelen penadan daha ağır duyulur ama her nota için el tam geri dönmelidir. Dayanıklılık, gevşek bir dönüş demektir."
+    },
+    {
+      "en": "Play from the wrist with a small stroke. Bring the pick back up just over the strings, in a small loop.",
+      "tr": "Bilekten, küçük bir hareketle çal. Penayı küçük bir halka çizerek tellerin hemen üstünden geri getir."
+    },
+    {
+      "en": "Breathe normally and keep the shoulder low. Tension usually starts in the forearm or the thumb that holds the pick.",
+      "tr": "Normal nefes al ve omzunu aşağıda tut. Gerilim çoğu zaman ön kolda ya da penayı tutan başparmakta başlar."
+    },
+    {
+      "en": "Palm mute lightly. It keeps the sound tight and gives the hand a resting point.",
+      "tr": "Hafif palm mute kullan. Sesi sıkı tutar ve ele bir dayanak noktası verir."
+    },
+    {
+      "en": "Do three sets of 30 seconds with a one-minute rest between them. Stop early if the forearm or wrist tightens.",
+      "tr": "Aralarında bir dakika mola vererek 30 saniyelik üç set yap. Ön kol ya da bilek gerilirse erken bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "30 seconds of palm-muted E5 downstroke eighths, with a click at ♩=90, ♩=95 and ♩=100.",
+      "tr": "30 saniye palm mute E5 aşağı pena sekizlik; ♩=90, ♩=95 ve ♩=100'de klikle."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3"
+    ],
+    "task": {
+      "en": "Play palm-muted E5 eighth notes for 30 seconds with the click, downstrokes only. Start at ♩=90 and move up in steps of 5 to ♩=100. Rest one minute between sets and stop after three sets.",
+      "tr": "Klikle 30 saniye palm mute E5 sekizlik çal, yalnız aşağı pena. ♩=90'da başla, 5'er adımla ♩=100'e çık. Setler arasında bir dakika dinlen ve üç setten sonra dur."
+    },
+    "sequence": "4/4: E5 ee ee ee ee",
+    "tempo": {
+      "open": 90,
+      "target": 100
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1",
+    "G2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept downstrokes for the full 30 seconds.",
+      "tr": "30 saniyenin tamamında aşağı penayı sürdürdüm."
+    },
+    {
+      "en": "The last notes sounded as even as the first ones.",
+      "tr": "Son notalar ilk notalar kadar eşit çaldı."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My shoulders and fretting hand stayed loose.",
+      "tr": "Omuzlarım ve sol elim gevşek kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "Late in the second half: the arm is tiring. Make the stroke smaller, or go back one tempo step.",
+        "tr": "İkinci yarıda geç: kol yoruluyor. Hareketi küçült ya da bir tempo adımı geri in."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The pick barely touches the strings when the hand tires. Let the pick go a little deeper and lighten the palm.",
+        "tr": "El yorulunca pena tellere zar zor değiyor. Penayı biraz daha derine indir ve avucu hafiflet."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use 15-second sets at ♩=80, or stop the ladder at ♩=95 for today.",
+    "tr": "♩=80'de 15 saniyelik setler kullan ya da merdiveni bugün ♩=95'te bitir."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

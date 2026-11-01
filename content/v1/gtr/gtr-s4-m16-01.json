@@ -1,0 +1,84 @@
+{
+  "id": "gtr-s4-m16-01",
+  "title": { "en": "A-shape major", "tr": "A-şekli majör" },
+  "goal": {
+    "en": "Plays B♭, B and C as A-shape barre chords (fret 1, 2 and 3) with every string clear, using either the three-finger or the ring-finger option.",
+    "tr": "B♭, B ve C'yi A-şekli barre olarak (1., 2. ve 3. perde) her teli net çalar; üç parmak ya da yüzük parmağı seçeneğini kullanır."
+  },
+  "explanation": [
+    {
+      "en": "The A shape is open A (x-0-2-2-2-0) moved up the neck. Your index finger takes the place of the nut and the root sits on string 5.",
+      "tr": "A-şekli, açık A'nın (x-0-2-2-2-0) sapta yukarı taşınmış hâlidir. İşaret parmağın eşiğin yerini alır; kök 5. teldedir."
+    },
+    {
+      "en": "B♭ is x-1-3-3-3-1. Lay the index finger across strings 5 to 1 at fret 1. Put fingers 2, 3 and 4 on strings 4, 3 and 2 at fret 3.",
+      "tr": "B♭ x-1-3-3-3-1'dir. İşaret parmağını 1. perdede 5. telden 1. tele yatır. 2., 3. ve 4. parmağı 4., 3. ve 2. tele, 3. perdeye koy."
+    },
+    {
+      "en": "Move the same shape up: B is x-2-4-4-4-2, C is x-3-5-5-5-3. The note on string 5 names the chord: B♭2, B2, C3.",
+      "tr": "Aynı şekli yukarı taşı: B x-2-4-4-4-2, C x-3-5-5-5-3'tür. 5. teldeki nota akorun adını verir: Si♭2, Si2, Do3."
+    },
+    {
+      "en": "Ring-finger option: lay finger 3 flat across strings 4, 3 and 2. String 1 often stops ringing; x-1-3-3-3-x is a common, accepted voicing.",
+      "tr": "Yüzük parmağı seçeneği: 3. parmağı 4., 3. ve 2. telin üstüne düz yatır. 1. tel çoğu zaman susar; x-1-3-3-3-x yaygın ve kabul gören bir seslendirmedir."
+    },
+    {
+      "en": "Touch string 6 lightly with the tip of the index finger so it stays silent. If the hand hurts, stop and rest.",
+      "tr": "6. tele işaret parmağının ucuyla hafifçe dokun ki sessiz kalsın. Elin ağrırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "B♭, B and C as A-shape barre chords, each strummed and then plucked string by string, slowly.",
+      "tr": "A-şekli barre ile B♭, B ve C; her biri vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum B♭ four times, then B four times, then C four times, in your own time. Then pluck each chord string by string from string 5; the app checks each string. With the ring-finger option, pluck strings 5 to 2.",
+      "tr": "Kendi hızında B♭'yi dört kez, sonra B'yi dört kez, sonra C'yi dört kez vur. Sonra her akoru 5. telden başlayarak tel tel çek; uygulama her teli kontrol eder. Yüzük parmağı seçeneğinde 5. telden 2. tele kadar çek."
+    },
+    "sequence": "B♭ | B♭ | B♭ | B♭ | B | B | B | B | C | C | C | C",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "String 6 stayed silent in every chord.", "tr": "6. tel her akorda sessiz kaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "A finger at the higher fret is touching string 1. Arch finger 4, or with the ring-finger option bend its first joint back. If string 1 still stops, use x-1-3-3-3-x and pluck strings 5 to 2.",
+        "tr": "Üst perdedeki bir parmak 1. tele değiyor. 4. parmağı kemerle ya da yüzük parmağı seçeneğinde ilk eklemini geriye bük. 1. tel yine susarsa x-1-3-3-3-x kullan ve 5. telden 2. tele kadar çek."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Let the index tip rest on string 6, and start the strum on string 5.",
+        "tr": "İşaret parmağının ucu 6. telin üstünde dursun ve vuruşa 5. telden başla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The barre is pressing too lightly on string 5. Roll the index finger slightly toward its bony edge and keep the phone close.",
+        "tr": "Barre 5. teli fazla hafif basıyor. İşaret parmağını hafifçe kemikli kenarına doğru döndür ve telefonu yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play C at fret 3 first, where the frets are closer, and use the ring-finger option on strings 5 to 2 only.",
+    "tr": "Perdelerin daha yakın olduğu 3. perdedeki C ile başla ve yüzük parmağı seçeneğini yalnız 5.–2. tellerde kullan."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,76 @@
+{
+  "id": "gtr-s4-m19a-03",
+  "title": { "en": "Travis picking II: adding fingers", "tr": "Travis II: parmak eklemek" },
+  "goal": {
+    "en": "Adds i and m above the alternating thumb bass on C and plays the full pattern at ♩=60.",
+    "tr": "C'de değişen başparmak basının üstüne i ve m ekler, tam kalıbı ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "The thumb keeps the bass on the beats: C3, E3, C3, E3. The fingers fill the 'and' between them.",
+      "tr": "Başparmak bası vuruşlarda tutar: Do3, Mi3, Do3, Mi3. Parmaklar aradaki 've'leri doldurur."
+    },
+    {
+      "en": "Finger i plays string 2 (C4) on the 'and' of 1 and 3. Finger m plays string 1 (E4) on the 'and' of 2 and 4.",
+      "tr": "i parmağı 1'in ve 3'ün 've'sinde 2. teli (Do4) çalar. m parmağı 2'nin ve 4'ün 've'sinde 1. teli (Mi4) çalar."
+    },
+    {
+      "en": "Together: p i p m p i p m, eight even eighth notes per bar. Say it aloud once before you play.",
+      "tr": "Hepsi birlikte: p i p m p i p m, ölçü başına sekiz eşit sekizlik. Çalmadan önce bir kez sesli söyle."
+    },
+    {
+      "en": "Build it in steps: one bar of thumb alone, one bar of thumb with i, then the full pattern.",
+      "tr": "Adım adım kur: bir ölçü yalnız başparmak, bir ölçü başparmak ve i, sonra tam kalıp."
+    },
+    {
+      "en": "The thumb leads. If a finger slips, keep the bass going and let the finger join again on the next 'and'.",
+      "tr": "Başparmak önden gider. Bir parmak kaçarsa bası sürdür; parmak sonraki 've'de yeniden katılsın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The full p-i-p-m pattern on C in eighth notes, at ♩=60 and ♩=40, with click.",
+      "tr": "C'de sekizliklerle tam p-i-p-m kalıbı, ♩=60 ve ♩=40, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Hold C. With the click at ♩=50, play p i p m twice per bar for four bars. When it is steady, move up to ♩=60 in steps of 5.",
+      "tr": "C'yi tut. Klikle ♩=50'de dört ölçü boyunca her ölçüde iki kez p i p m çal. Oturunca 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "C3:e C4:e E3:e E4:e C3:e C4:e E3:e E4:e | C3:e C4:e E3:e E4:e C3:e C4:e E3:e E4:e | C3:e C4:e E3:e E4:e C3:e C4:e E3:e E4:e | C3:e C4:e E3:e E4:e C3:e C4:e E3:e E4:e",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The thumb notes fell on the clicks and the finger notes between them.", "tr": "Başparmak notaları kliklere, parmak notaları aralarına düştü." },
+    { "en": "All eight notes in each bar sounded even.", "tr": "Her ölçüdeki sekiz nota eşit duyuldu." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The thumb waits for the fingers. Play one bar of bass alone until the thumb leads again.", "tr": "Başparmak parmakları bekliyor. Başparmak yeniden önden gidene kadar bir ölçü yalnız bas çal." }
+    },
+    {
+      "error": { "en": "Different note: C4 heard where E4 is expected.", "tr": "Farklı nota: Mi4 beklenen yerde Do4 duyuldu." },
+      "fix": { "en": "i and m swapped strings. Rest i on string 2 and m on string 1 before you start.", "tr": "i ile m tel değiştirmiş. Başlamadan önce i'yi 2. tele, m'yi 1. tele dayandır." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "The finger notes are too soft next to the bass. Pluck i and m a little firmer than the thumb.", "tr": "Parmak notaları basın yanında çok zayıf. i ve m'yi başparmaktan biraz daha net çek." }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only p and i (C3 C4 E3 C4) until the bass stays steady, then add m.",
+    "tr": "Bas oturana kadar yalnız p ve i kullan (Do3 Do4 Mi3 Do4), sonra m'yi ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}
