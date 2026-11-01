@@ -626,7 +626,9 @@ void runStreamTuner(
             spec['roomFloor'] == 'calibrated' ? ctx.floorDb(y, c, seed) : null;
         TuningMeasurement? last;
         double? firstS;
+        int? lastT, lastA;
         var n = 0, measured = 0;
+        final gate = NoteGate.fromSpec(spec, sr);
         final sw = Stopwatch()..start();
         for (var t = onset + phase; t <= end; t += interval) {
           final a = math.max(0, t - bufferLen);
@@ -636,11 +638,26 @@ void runStreamTuner(
               roomFloorDb: floor,
               absoluteStartSample: mode.global ? a : null,
               onsetCache: mode.cache);
-          if (res.measured) {
+          final m = res.measurement;
+          if (m != null && (gate == null || gate.accept(m, a, t))) {
             measured++;
-            last = res.measurement;
+            last = m;
+            lastT = t;
+            lastA = a + (m.attackIndex ?? 0);
             firstS ??= (t - onset) / sr;
           }
+        }
+        sw.stop();
+        // E45: the clean (unrendered, same shift) buffer at the instant the
+        // shown reading was taken; separates the tuner's error from the
+        // string's own drift. Not timed.
+        double? cleanF0;
+        if (spec['cleanRef'] == true && lastT != null) {
+          cleanF0 = cleanTuner(spec, profile)
+              .measure(y.sublist(math.max(0, lastT - bufferLen), lastT),
+                  sampleRate: sr)
+              .measurement
+              ?.f0Hz;
         }
         emit({
           'id': id,
@@ -660,6 +677,14 @@ void runStreamTuner(
               ? null
               : wrapCents(centsOf(last.f0Hz, refF0) - shift),
           'ms': sw.elapsedMicroseconds / 1000,
+          'lastS': lastT == null ? null : (lastT - onset) / sr,
+          'lastAttackS': lastA == null ? null : (lastA - onset) / sr,
+          if (spec['cleanRef'] == true) ...{
+            'cleanF0': cleanF0,
+            'errClean': last == null || cleanF0 == null
+                ? null
+                : centsOf(last.f0Hz, cleanF0),
+          },
           'cacheHits': mode.cache?.hits,
           'cacheMisses': mode.cache?.misses,
           'roomFloorDb': floor,
@@ -719,5 +744,54 @@ void runStreamVerify(
         });
       }
     }
+  }
+}
+
+/// E45 clean reference: the default tuner (E42) on the clean buffer, so the
+/// reference does not move with an arm's tuner options.
+PreciseTuner cleanTuner(Map<String, dynamic> spec, PreciseTunerProfile p) =>
+    PreciseTuner(profile: p);
+
+/// E46 note gate (controller policy, simulated). A measurement counts only if
+/// its attack is inside the buffer, at least [minAttackMs] after the buffer
+/// start (E45: 95 % of shown readings came from buffers with no attack in
+/// view, attack index 0), at most [maxAgeMs] old at the analysis instant, and
+/// within [lockCents] of the first counted reading after that attack; a
+/// different attack (more than [sameAttackMs] away) starts a new note.
+/// Null when the spec has no gate.
+final class NoteGate {
+  NoteGate(this.sampleRate, this.maxAgeMs, this.lockCents, this.sameAttackMs,
+      this.minAttackMs);
+
+  static NoteGate? fromSpec(Map<String, dynamic> spec, int sampleRate) {
+    final g = spec['noteGate'] as Map<String, dynamic>?;
+    if (g == null) return null;
+    return NoteGate(
+        sampleRate,
+        g['maxAgeMs'] as int,
+        (g['lockCents'] as num).toDouble(),
+        g['sameAttackMs'] as int? ?? 50,
+        g['minAttackMs'] as int? ?? 0);
+  }
+
+  final int sampleRate, maxAgeMs, sameAttackMs, minAttackMs;
+  final double lockCents;
+  int? _attack;
+  double? _f0;
+
+  bool accept(TuningMeasurement m, int bufferStart, int t) {
+    final idx = m.attackIndex;
+    if (idx == null || idx < minAttackMs * sampleRate / 1000) return false;
+    final att = bufferStart + idx;
+    if ((t - att) > maxAgeMs * sampleRate / 1000) return false;
+    final same = _attack != null &&
+        (att - _attack!).abs() <= sameAttackMs * sampleRate / 1000;
+    if (!same) {
+      // A new attack anchors a new note at its first counted reading.
+      _attack = att;
+      _f0 = m.f0Hz;
+      return true;
+    }
+    return centsOf(m.f0Hz, _f0!).abs() <= lockCents;
   }
 }

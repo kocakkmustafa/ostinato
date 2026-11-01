@@ -211,7 +211,13 @@ final class TuningMeasurement {
     required this.readings,
     this.centsFromTarget,
     this.fromLateReadings = false,
+    this.attackIndex,
   });
+
+  /// Index (into the measured samples) of the attack the readings follow.
+  /// Diagnostic only; the E46 note gate uses it to tell a new note from a
+  /// later reading of the same note.
+  final int? attackIndex;
 
   /// True when the value is the later readings' mean because the full set
   /// spread more than the strict limit (E41 arm U).
@@ -408,6 +414,7 @@ final class PreciseTuner {
       spreadCents: spread,
       readings: List.unmodifiable(readings),
       fromLateReadings: fromLate,
+      attackIndex: attack,
     ));
   }
 
