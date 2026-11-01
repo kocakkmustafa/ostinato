@@ -171,6 +171,15 @@ DECLARED = {
     "userArtifactFiles": ["live_screen.dart", "review_screen.dart",
                           "session_store.dart"],
     "$why": (
+        "GÜNCEL ENVANTER 2026-11-02 (v1 tam gitar kursu): aynı "
+        "`practice/loop/practice_progress_store.dart`, aynı hesap dizinine "
+        "ikinci bir kardeş dosya yazar: `v1_lesson_checks.v1.json` — "
+        "ölçülü döngüde çalışmayan v1 dersleri için ders kimliği, kanıt "
+        "türü (`self_report` = öğrencinin öz-kontrol beyanı, ölçülmedi; "
+        "`tuner_check` = akort aleti altı teli akortlu ölçtü) ve zaman. "
+        "İşaretlenen maddeler, ses, ölçüm değeri yazılmaz; ağa ve Motion "
+        "Core'a çıkmaz. Yazma çağrısı ortak atomik yardımcıdan geçer (çağrı "
+        "sayısı değişmedi). "
         "GÜNCEL ENVANTER 2026-11-01 (FK2, kurucu onayı: \"Olsun, varsayılan "
         "kapalı\"): `practice/own_recording/own_recording.dart` ayar açıksa "
         "bir pratik turunun sesini RAM'de tutar, tur bitince geçici dizine "
@@ -311,7 +320,12 @@ WRITE_CLASSES = {
         "(sıradaki dersi açar) ve hedef tempoda tamamlanma zamanı. Yalnız "
         "sayılar; ses ve nota dizisi yazılmaz; hesap dizininde kalır, ağa "
         "ve Motion Core'a çıkmaz. Silinirse ölçülen ders kilitleri baştan "
-        "başlar."),
+        "başlar. 2026-11-02: kardeş dosya `v1_lesson_checks.v1.json` — "
+        "ölçülemeyen v1 derslerinde öz-kontrol beyanı (`self_report`, "
+        "ölçülmüş sayılmaz) ve akort dersinde akort aleti sonucu "
+        "(`tuner_check`); yalnız ders kimliği, kanıt türü, zaman. Silinirse "
+        "öz-kontrol tamamlamaları ve 'ölçülmedi' etiketli modül açılışları "
+        "kaybolur."),
     "setup_profile_store.dart": (
         "CİHAZ AYARI (F4.2, 2026-11-01) — kurulum sihirbazının sonucu: "
         "adımların yapıldı/atlandı durumu, oda seviyesi ve rota başına "

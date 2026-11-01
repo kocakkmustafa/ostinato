@@ -155,6 +155,21 @@ yakalamayı durdurmaz. Native yoksa ya da çapa gelmezse pratik **sessiz
   pratik ekranı (`practice_loop_screen.dart`: tempo, döngü, Beni bekle, klik
   sesi, akan tab, görsel vuruş, mikrofon şeridi + sayaçlar, kurulum kartı,
   bekleme balonu) → sonuç.
+- **Tam gitar kursu (2026-11-02, `feat/v1-full-guitar-course`):** liste artık
+  240 gitar dersinin tamamını seviye → modül → ders olarak gösterir
+  (`v1_course_catalog.dart`). Her ders bu sürümdeki durumuna göre sınıflanır:
+  ölçülü (A2/A3 tek nota dizisi → pratik ekranı), akort aleti (yalnız A1),
+  öz-kontrol (`M` ama motor/dizi yok: A4 akor, A5 bend/vibrato, teknik yazımı,
+  ritim-yalnız ya da dizisiz), öz-kontrol dersi (`Ö`), kamera kontrol listesi
+  (`K`), ekran alıştırması yakında (`D`), bekletilen geçiş (`M!` ölçülemiyor).
+  Ölçülü olmayanlar ders okuyucusunda açılır (`v1_lesson_reader_screen.dart`);
+  öz-kontrol tamamlaması `v1_lesson_checks.v1.json`a `self_report` olarak,
+  akort dersi `tuner_check` olarak yazılır (ölçülen pratik dosyasından ayrı).
+  Açma kuralı sözleşme §6.4/§9: modülün ilk dersi önceki modülün geçiş
+  dersiyle açılır, modül içi kilit yok; bekletilen geçiş öz-kontrolle
+  çalışılınca sonraki modül **"ölçülmedi"** etiketiyle açılır (§4.2'deki
+  seviye testi kuralının modül geçişine uygulanması). Eski ölçülü
+  ilerlemesi olan modül açık kalır.
 - Seri/haftalık hedef (PR #12) için `onSessionFinished` →
   `PracticeSessionFinished(lessonId, course: guitar, activeDuration,
   heardEvents, summary)`; bağlantıyı iki dal birleşince Yönetim yapar.
