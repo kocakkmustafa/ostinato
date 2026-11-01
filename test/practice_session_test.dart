@@ -14,6 +14,7 @@ import 'package:ostinato/app/practice/loop/practice_outcome.dart';
 import 'package:ostinato/app/practice/loop/practice_score.dart';
 import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
 import 'package:ostinato/app/practice/loop/practice_transport.dart';
+import 'package:ostinato/app/practice/own_recording/own_recording.dart';
 import 'package:ostinato_audio/ostinato_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -51,6 +52,7 @@ final class Rig {
     int target = 60,
     bool sound = true,
     NoteAnalyzer? analyzer,
+    OwnRecorder? ownRecorder,
   }) {
     channel = FakeAudioCaptureChannel();
     audio = AudioInputController(
@@ -66,6 +68,7 @@ final class Rig {
       audio: audio,
       analyzer: analyzer ?? (r) async => judgeNote(r),
       localClockUs: () => localUs,
+      ownRecorder: ownRecorder,
     )..metronomeSound = sound;
   }
 

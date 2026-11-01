@@ -159,17 +159,30 @@ def detect(prod_sources):
 #
 # ⚠️ Bu bir MUAFİYET değil, KARAR NOKTASI.
 DECLARED = {
-    "writeCallSites": 10,
+    "writeCallSites": 13,
     "writeFiles": ["age_gate_store.dart", "app_locale_preferences.dart",
                    "app_theme_preferences.dart",
                    "guitar_journey_progress.dart", "onboarding_store.dart",
+                   "own_recording.dart", "own_recording_preference.dart",
                    "pose_model.dart", "practice_progress_store.dart",
                    "session_store.dart", "setup_profile_store.dart",
-                   "weekly_goal_store.dart"],
+                   "tuner_check_memory.dart", "weekly_goal_store.dart"],
     "userArtifactMayBePersisted": True,
     "userArtifactFiles": ["live_screen.dart", "review_screen.dart",
                           "session_store.dart"],
     "$why": (
+        "GÜNCEL ENVANTER 2026-11-01 (FK2, kurucu onayı: \"Olsun, varsayılan "
+        "kapalı\"): `practice/own_recording/own_recording.dart` ayar açıksa "
+        "bir pratik turunun sesini RAM'de tutar, tur bitince geçici dizine "
+        "(`getTemporaryDirectory()/own_recording/take-N.wav`) yazar; sonuç "
+        "ekranında dinlenir. Sonraki tur, başarısız/terk edilen tur ve ders "
+        "ekranının kapanması dosyayı siler; çökme artığı ders açılışında "
+        "süpürülür. Yüklenmez, analize ve eğitime verilmez "
+        "(`test/own_recording_test.dart`). `own_recording_preference.dart` "
+        "yalnız aç/kapa anahtarını `ostinato.own_recording.v1.json`a yazar "
+        "(varsayılan kapalı). `tuner/tuner_check_memory.dart` (PR #16) "
+        "bugünkü akort sonucunu cihazda `tuner_check.v1.json`a yazar: akort "
+        "kimliği, akortlu/toplam tel ve zaman; ses yok. "
         "GÜNCEL ENVANTER 2026-11-01 (F2.5 + F4.2): "
         "`practice/loop/practice_progress_store.dart` hesap dizinine "
         "`v1_practice_progress.v1.json` yazar: ders başına ölçülen pratik "
@@ -206,6 +219,8 @@ DECLARED = {
         "JSONL satırı olarak eklenir. `SharedPreferences`/`Hive`/`sqflite`: "
         "hâlâ hiçbiri yok, düz dosya G/Ç (aile deseni, `M-F-650`)."),
     "$whatIsDiscarded": (
+        "FK2: kendi kayıt dosyası oturum sonunda ATILIR (sonraki tur / ders "
+        "çıkışı / çökme sonrası süpürme); ayar kapalıyken hiç oluşmaz. "
         "ATILAN, adıyla — D14 SONRASI: ham açı-örnekleri (`history`) hâlâ "
         "atılıyor, yalnız ÖZET saklanıyor. Video hiçbir zaman saklanmadı, "
         "hâlâ saklanmıyor. SAKLANAN: hangi ders, ne zaman, kaç saniye, "
@@ -310,6 +325,22 @@ WRITE_CLASSES = {
         "kurs kimliği). Ders metni, ses veya ölçüm değeri yazılmaz; Motion "
         "Core'a ve ağa çıkmaz. Silinirse haftalık seri ve dondurma hakları "
         "sıfırdan başlar; ders ilerlemesi etkilenmez."),
+    "own_recording.dart": (
+        "GEÇİCİ KULLANICI SESİ (FK2, 2026-11-01, kurucu onaylı) — ayar "
+        "açıkken bir pratik turunun 16-bit mono WAV'ı, yalnız uygulamanın "
+        "geçici dizininde ve yalnız oturum boyunca. Sonraki tur, terk ve "
+        "ders ekranının kapanması siler; çökme artığı ders açılışında "
+        "süpürülür. Ağ API'si yok; nota hakemi bu kaydı okumaz. Silinmesi "
+        "amaçtır; kullanıcı emeği kaybolmaz."),
+    "own_recording_preference.dart": (
+        "CİHAZ AYARI (FK2, 2026-11-01) — yalnız şema sürümü ve "
+        "`enabled` (varsayılan false). Ses veya hesap verisi taşımaz. "
+        "Silinirse ayar kapalıya döner."),
+    "tuner_check_memory.dart": (
+        "CİHAZ DURUMU (PR #16, 2026-11-01) — bugünkü akort sonucu: akort "
+        "kimliği, akortlu ve toplam tel sayısı, zaman. Çalgının durumunu "
+        "anlatır, kişiyi değil; ses yok; ertesi gün geçersiz sayılır. "
+        "Silinirse oturum kapısı akortu yeniden önerir."),
     "onboarding_store.dart": (
         "KULLANICI DURUMU (tek bit) — `onboarding-v1.done` işaretçisi. "
         "Kullanıcının ÜRETTİĞİ bir değer değil, uygulamanın onu bir kez "
