@@ -14,6 +14,7 @@ import '../guitar_staff_diagram.dart';
 import '../retention/weekly_goal.dart';
 import '../retention/weekly_goal_store.dart';
 import 'guitar_note_observation_screen.dart';
+import '../practice/loop/v1_practice_list_screen.dart';
 
 /// Self-guided learning path. No sensor result is converted into completion.
 class GuitarJourneyScreen extends StatefulWidget {
@@ -324,6 +325,58 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                       context,
                       'Open note observation',
                       'Nota gözlemini aç',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 17),
+          GlassCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  localized(context, 'Measured practice', 'Ölçülü pratik'),
+                  style: hankenText(size: 18, weight: FontWeight.w600),
+                ),
+                const SizedBox(height: 7),
+                Text(
+                  localized(
+                    context,
+                    'Play a lesson with the click and the moving TAB; each note is marked correct, different note or couldn’t hear. Passing the measured gate opens the next lesson.',
+                    'Bir dersi klik ve akan tab ile çal; her nota doğru, farklı nota ya da duyamadım diye işaretlenir. Ölçülen geçiş kapısını geçmek sıradaki dersi açar.',
+                  ),
+                  style: hankenText(size: 12.5, height: 1.5),
+                ),
+                TextButton.icon(
+                  key: const Key('guitar-measured-practice-entry'),
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => V1PracticeListScreen(
+                        // F5.2: a measured run counts toward the weekly goal
+                        // (≥60 s listening, ≥1 heard note). A failed write
+                        // must not interrupt the result screen.
+                        onSessionFinished: (e) =>
+                            WeeklyGoalStore(accountUserId: _accountId)
+                                .recordPracticeSession(
+                                  MeasuredPracticeSession(
+                                    course: PracticeCourse.guitar,
+                                    activeDuration: e.activeDuration,
+                                    heardEvents: e.heardEvents,
+                                    lessonId: e.lessonId,
+                                  ),
+                                )
+                                .then<void>((_) {}, onError: (_) {}),
+                      ),
+                    ),
+                  ),
+                  icon: const Icon(Icons.graphic_eq),
+                  label: Text(
+                    localized(
+                      context,
+                      'Open measured practice',
+                      'Ölçülü pratiği aç',
                     ),
                   ),
                 ),

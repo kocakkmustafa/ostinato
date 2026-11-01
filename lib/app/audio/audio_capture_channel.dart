@@ -68,6 +68,64 @@ abstract interface class AudioCuePlaybackChannel {
   Future<void> playCue(Float64List samples, {required int sampleRate});
 }
 
+/// F2.2: one continuous click stream inside the running play+record attempt.
+/// Beat `n` is output frame `n * framesPerBeat` of the stream (reference:
+/// `lib/app/practice/loop/metronome.dart`). Like cues, it has no owner of its
+/// own: every path that closes capture also stops the stream.
+final class MetronomeStreamRequest {
+  MetronomeStreamRequest({
+    required this.sampleRate,
+    required this.framesPerBeat,
+    required this.beatsPerBar,
+    required this.accent,
+    required this.beat,
+    this.leadInMs = 150,
+  });
+
+  final int sampleRate;
+  final int framesPerBeat;
+  final int beatsPerBar;
+  final Float64List accent;
+  final Float64List beat;
+
+  /// Delay before frame 0, so the stream can be anchored at a known time.
+  final int leadInMs;
+
+  bool get isValid {
+    bool click(Float64List c) =>
+        c.isNotEmpty &&
+        c.length < framesPerBeat &&
+        c.every((v) => v.isFinite && v.abs() <= 1.0);
+    return (sampleRate == 44100 || sampleRate == 48000) &&
+        framesPerBeat >= sampleRate * 60 ~/ 300 &&
+        framesPerBeat <= sampleRate * 60 ~/ 20 &&
+        beatsPerBar >= 1 &&
+        beatsPerBar <= 12 &&
+        leadInMs >= 0 &&
+        leadInMs <= 2000 &&
+        click(accent) &&
+        click(beat);
+  }
+
+  Map<String, Object?> wireFields() => <String, Object?>{
+    'sampleRate': sampleRate,
+    'framesPerBeat': framesPerBeat,
+    'beatsPerBar': beatsPerBar,
+    'accent': accent,
+    'beat': beat,
+    'leadInMs': leadInMs,
+  };
+}
+
+/// Optional metronome capability of a play+record channel. Error codes are
+/// the cue codes (`playback_not_enabled`, `playback_unavailable`,
+/// `unsupported_sample_rate`, `bad_args`, `playback_failed`). The anchor
+/// arrives later as a [RawMetronomeAnchorEvent].
+abstract interface class AudioMetronomeChannel {
+  Future<void> startMetronome(MetronomeStreamRequest request);
+  Future<void> stopMetronome();
+}
+
 /// Native yakalama katmanının HAM olayı — henüz [AudioRoute]e çözülmemiş
 /// (bkz. `audio_route_state.dart`), henüz tampon/izin/yaşam-döngüsü mantığı
 /// uygulanmamış. Bu ayrım `motion_camera.CameraFrameEnvelope` ile
@@ -105,6 +163,24 @@ final class RawAudioChunkEvent extends RawAudioEvent {
 final class RawRouteChangedEvent extends RawAudioEvent {
   const RawRouteChangedEvent(this.platformRouteTag);
   final String platformRouteTag;
+}
+
+/// F2.2: the click stream's frame 0 was (or will be) presented at
+/// [anchorUs] on the same native clock as chunk `tNativeUs`.
+/// [outputLatencyUs] is any native output-latency estimate NOT already
+/// included in [anchorUs] (iOS: `AVAudioSession.outputLatency`; Android
+/// timestamps are presentation times, so 0).
+final class RawMetronomeAnchorEvent extends RawAudioEvent {
+  const RawMetronomeAnchorEvent({
+    required this.anchorUs,
+    required this.sampleRate,
+    required this.framesPerBeat,
+    this.outputLatencyUs = 0,
+  });
+  final int anchorUs;
+  final int sampleRate;
+  final int framesPerBeat;
+  final int outputLatencyUs;
 }
 
 /// Akış native tarafından kesildi (telefon çağrısı, başka bir app mic'i
@@ -280,6 +356,7 @@ final class MethodChannelAudioCaptureChannel
     implements
         AudioCaptureChannel,
         AudioCuePlaybackChannel,
+        AudioMetronomeChannel,
         PreparedAudioCaptureChannel,
         AudioCaptureCloseControl,
         AudioCaptureReadbackCancellation {
@@ -454,6 +531,32 @@ final class MethodChannelAudioCaptureChannel
         .timeout(_transportTimeout);
   }
 
+  @override
+  Future<void> startMetronome(MetronomeStreamRequest request) async {
+    final id = _attemptId;
+    if (id == null || !_acceptEvents || _closeBlocked) {
+      throw PlatformException(code: 'playback_unavailable');
+    }
+    if (!request.isValid) throw PlatformException(code: 'bad_args');
+    await _method
+        .invokeMethod<void>('startMetronome', <String, Object?>{
+          'attemptId': id,
+          ...request.wireFields(),
+        })
+        .timeout(_transportTimeout);
+  }
+
+  @override
+  Future<void> stopMetronome() async {
+    final id = _attemptId;
+    if (id == null || !_acceptEvents || _closeBlocked) return;
+    await _method
+        .invokeMethod<void>('stopMetronome', <String, Object?>{
+          'attemptId': id,
+        })
+        .timeout(_transportTimeout);
+  }
+
   void _onMessage(dynamic message) {
     if (!_acceptEvents) return;
     try {
@@ -483,6 +586,15 @@ final class MethodChannelAudioCaptureChannel
           _events.add(RawRouteChangedEvent(map['route']! as String));
         case 'interrupted':
           _events.add(RawInterruptedEvent(map['reason']! as String));
+        case 'metronomeAnchor':
+          _events.add(
+            RawMetronomeAnchorEvent(
+              anchorUs: map['anchorUs']! as int,
+              sampleRate: map['sampleRate']! as int,
+              framesPerBeat: map['framesPerBeat']! as int,
+              outputLatencyUs: (map['outputLatencyUs'] as int?) ?? 0,
+            ),
+          );
       }
     } on Object {
       _events.add(const RawInterruptedEvent('invalid_capture_event'));
@@ -650,6 +762,7 @@ final class FakeAudioCaptureChannel
     implements
         AudioCaptureChannel,
         AudioCuePlaybackChannel,
+        AudioMetronomeChannel,
         AudioCaptureCloseControl {
   FakeAudioCaptureChannel({
     this.supportedSampleRates = const <int>{44100, 48000},
@@ -736,6 +849,48 @@ final class FakeAudioCaptureChannel
     playedCues.add(Float64List.fromList(samples));
   }
 
+  /// F2.2: the running click stream request (null = no stream).
+  MetronomeStreamRequest? metronome;
+
+  /// `true` ise bir sonraki `startMetronome` `playback_failed` ile düşer.
+  bool failNextMetronome = false;
+
+  @override
+  Future<void> startMetronome(MetronomeStreamRequest request) async {
+    if (!_running) throw PlatformException(code: 'playback_unavailable');
+    if (_sessionMode != AudioSessionMode.playAndRecord) {
+      throw PlatformException(code: 'playback_not_enabled');
+    }
+    if (request.sampleRate != _startedRate) {
+      throw PlatformException(code: 'unsupported_sample_rate');
+    }
+    if (!request.isValid) throw PlatformException(code: 'bad_args');
+    if (failNextMetronome) {
+      failNextMetronome = false;
+      throw PlatformException(code: 'playback_failed');
+    }
+    metronome = request;
+  }
+
+  @override
+  Future<void> stopMetronome() async {
+    metronome = null;
+  }
+
+  /// Simulates the native anchor report for the running stream.
+  void pushMetronomeAnchor(int anchorUs, {int outputLatencyUs = 0}) {
+    final m = metronome;
+    if (!_running || m == null) return;
+    _events.add(
+      RawMetronomeAnchorEvent(
+        anchorUs: anchorUs,
+        sampleRate: m.sampleRate,
+        framesPerBeat: m.framesPerBeat,
+        outputLatencyUs: outputLatencyUs,
+      ),
+    );
+  }
+
   /// Testte tek parça itmek için — `FakePoseSource.pushOne()` deseni.
   void pushChunk(
     List<double> samples, {
@@ -767,6 +922,7 @@ final class FakeAudioCaptureChannel
   @override
   Future<void> stop() async {
     _running = false;
+    metronome = null;
     _lastClosedAttemptId = _attemptId ?? _lastClosedAttemptId;
     _attemptId = null;
   }

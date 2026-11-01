@@ -94,6 +94,10 @@ final class PracticeAudioSessionPolicy {
   var currentInputPort: AVAudioSession.Port? {
     session.currentRoute.inputs.first?.portType
   }
+
+  /// F2.2: hardware output latency of the current route (read only; the session
+  /// configuration is unchanged).
+  var outputLatencySeconds: Double { session.outputLatency }
 }
 
 struct PracticeAudioOwner: Equatable {
