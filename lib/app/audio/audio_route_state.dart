@@ -48,6 +48,8 @@ AudioRoute mapIosPortType(String rawPortType) {
       return AudioRoute.speaker;
     case 'Headphones':
     case 'HeadsetMic':
+    // Raw `AVAudioSession.Port.headsetMic` — what the capture tag sends.
+    case 'MicrophoneWired':
     case 'LineIn':
     case 'LineOut':
       return AudioRoute.wiredHeadset;
