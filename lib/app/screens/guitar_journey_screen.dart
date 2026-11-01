@@ -353,7 +353,22 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
                   key: const Key('guitar-measured-practice-entry'),
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => const V1PracticeListScreen(),
+                      builder: (_) => V1PracticeListScreen(
+                        // F5.2: a measured run counts toward the weekly goal
+                        // (≥60 s listening, ≥1 heard note). A failed write
+                        // must not interrupt the result screen.
+                        onSessionFinished: (e) =>
+                            WeeklyGoalStore(accountUserId: _accountId)
+                                .recordPracticeSession(
+                                  MeasuredPracticeSession(
+                                    course: PracticeCourse.guitar,
+                                    activeDuration: e.activeDuration,
+                                    heardEvents: e.heardEvents,
+                                    lessonId: e.lessonId,
+                                  ),
+                                )
+                                .then<void>((_) {}, onError: (_) {}),
+                      ),
                     ),
                   ),
                   icon: const Icon(Icons.graphic_eq),
