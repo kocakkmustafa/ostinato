@@ -45,8 +45,9 @@ const double kFold = 812.0;
 /// metni kısalınca ilk kalem -373pt'ye yükseldi; ölçüm tekrarlandı. Bu,
 /// testin kendi disiplininin
 /// ikinci yönünün uygulanışı: "sayı küçülürse düzeltme inmiş demektir ve
-/// test öter — beyanı tazele, iyileşme de bir olaydır."
-const double kDeclaredFirstItemBelowFold = -373.0;
+/// test öter — beyanı tazele, iyileşme de bir olaydır." 2026-11-01 v1
+/// metni (ana sayfa girişi kısaldı) ilk kalemi -464pt'ye yükseltti.
+const double kDeclaredFirstItemBelowFold = -464.0;
 
 /// Yazı metrikleri sürüm/platformla birkaç pt oynayabilir; tolerans o kadar.
 /// **Yerleşim değişikliğini gizleyecek kadar geniş DEĞİL** (ölçülen fark

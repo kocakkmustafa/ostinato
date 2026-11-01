@@ -475,6 +475,45 @@ void main() {
     await tester.pumpAndSettle();
     expect(setupOpened, [1], reason: 'the wizard runs first only once');
   });
+
+  testWidgets('"Start next lesson" opens the first open lesson not passed', (
+    tester,
+  ) async {
+    final progress = _MemoryProgress();
+    await progress.recordRun('gtr-s1-m02-02', summary(List.filled(8, c)));
+    final catalog = V1PracticeCatalog([lesson(), lesson(id: 'gtr-s1-m02-03')]);
+    final opened = <String>[];
+    final at = DateTime.utc(2026, 11, 1);
+    final skip = SetupStepRecord(SetupStepState.skipped, at);
+    final setup = MemorySetupProfileStore(
+      SetupProfile.empty.copyWith(
+        placement: skip,
+        roomStep: skip,
+        latencyStep: skip,
+        tuningStep: skip,
+      ),
+    );
+    await tester.pumpWidget(
+      practiceHost(
+        V1PracticeListScreen(
+          startNext: true,
+          catalog: Future.value(catalog),
+          progressFactory: (_) => progress,
+          setupStore: setup,
+          practiceScreenBuilder: (l, p, hasNext) => _FakePractice(
+            onOpen: () => opened.add(l.id),
+            pass: () => p.recordRun(l.id, summary(List.filled(8, c))),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(opened, ['gtr-s1-m02-03']);
+    await tester.tap(find.text('close'));
+    await tester.pumpAndSettle();
+    expect(find.byType(V1PracticeListScreen), findsOneWidget);
+    expect(opened, ['gtr-s1-m02-03'], reason: 'opens once, not on return');
+  });
 }
 
 final class _MemoryProgress implements V1PracticeProgress {

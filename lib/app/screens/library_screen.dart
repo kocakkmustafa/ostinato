@@ -14,12 +14,17 @@ import '../retention/weekly_goal_card.dart';
 import '../retention/weekly_goal_store.dart';
 import '../tuner/tuner_copy.dart';
 import '../tuner/tuner_screen.dart';
+import '../account_connection.dart';
+import '../curriculum/v1_lesson.dart';
+import '../practice/loop/practice_progress_store.dart';
+import '../practice/loop/v1_practice_catalog.dart';
 import '../ui_copy.dart';
 import 'course_screen.dart';
 import 'instrument_screen.dart';
 import 'settings_screen.dart';
 import 'ukulele_beginner_screen.dart';
 import 'bass_beginner_screen.dart';
+import 'v1_home_copy.dart';
 import 'vocal_beginner_screen.dart';
 
 /// Kütüphane — kabuğun giriş ekranı. Üç canlı çalgı, her biri kendi gradyan
@@ -125,11 +130,7 @@ class LibraryScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        localized(
-                          context,
-                          'Written lessons. Posture references.',
-                          'Yazılı dersler. Duruş referansları.',
-                        ),
+                        uiText(context, V1HomeCopy.homeSubtitle),
                         style: hankenText(
                           size: 16.5,
                           weight: FontWeight.w500,
@@ -164,17 +165,7 @@ class LibraryScreen extends StatelessWidget {
                                     'okur; yalnız gövde eğiminizi ölçer. '
                                     'Bu duruş dersleri mikrofon kullanmaz.',
                               )
-                            : localized(
-                                context,
-                                'Explore guitar, voice, and piano posture '
-                                    'references. Camera lessons '
-                                    'are not open in this release. The guitar learning path has '
-                                    'an optional on-device single-note observer.',
-                                'Gitar, ses ve piyano için duruş referanslarını '
-                                    'incele. Kamera dersleri bu '
-                                    'sürümde açık değil. Gitar öğrenme yolunda isteğe bağlı '
-                                    'cihaz üstü tek nota gözlemi vardır.',
-                              ),
+                            : uiText(context, V1HomeCopy.homeIntro),
                         style: hankenText(
                           size: 13,
                           color: OstinatoPalette.of(context).textMuted,
@@ -294,33 +285,6 @@ class LibraryScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                // 0-24° PAYLAŞILAN ölçek açıklaması (DESIGN-AHEAD §1.3).
-                // Tasarımın taslak cümlesi piyanonun dar bandını "üç
-                // eğitmen en ince kanıt" diye AÇIKLIYORDU — o cümle
-                // yazılmadı: bant genişliği ölçülen ARALIKTAN gelir, kaynak
-                // SAYISINDAN değil, ve ikisini nedensel bağlamak
-                // ölçmediğimiz bir ilişkiyi iddia etmek olurdu. Sayılar
-                // yan yana duruyor; bağı kuran cümle KURULMADI.
-                const SizedBox(height: 6),
-                Text(
-                  localized(
-                    context,
-                    'The bar on each card is the range those teachers actually '
-                        'occupy, drawn on one shared 0–24° scale so the three can '
-                        'be compared. It is a range, not a target: no point inside '
-                        'it is more correct than another.',
-                    'Her karttaki çubuk, eğitmenlerin bulunduğu gerçek '
-                        'aralığı ortak 0–24° ölçeğinde gösterir. Bu bir hedef '
-                        'değil aralıktır; içindeki bir nokta diğerinden daha '
-                        'doğru değildir.',
-                  ),
-                  key: const Key('library-band-scale-note'),
-                  style: hankenText(
-                    size: 12,
-                    height: 1.5,
-                    color: OstinatoPalette.of(context).textMuted,
-                  ),
-                ),
               ],
             ),
           ),
@@ -413,13 +377,6 @@ class _StarterRow extends StatelessWidget {
   }
 }
 
-/// PAYLAŞILAN ölçeğin üst ucu (DESIGN-AHEAD §1.3). Bir EŞİK DEĞİL, bir
-/// ÇİZİM ölçeği: hiçbir hüküm bu sayıdan türemiyor, yalnız üç çalgının
-/// bandı AYNI eksende karşılaştırılabilsin diye sabit. Tasarımın verdiği
-/// 24° korundu; bugünkü en geniş bant 6.4° ve gözlem eşiği 14° — ikisi de
-/// ölçeğin içinde kalıyor, yani ölçek ölçümü kırpmıyor.
-double _sharedScaleMaxDeg = 24;
-
 class _InstrumentCard extends StatelessWidget {
   const _InstrumentCard({required this.discipline, required this.contract});
   final Discipline discipline;
@@ -480,39 +437,84 @@ class _InstrumentCard extends StatelessWidget {
                   Icon(Icons.chevron_right, color: hue.ink),
                 ],
               ),
-              const SizedBox(height: 6),
-              if (contract != null) ...<Widget>[
-                const SizedBox(height: 10),
-                HorizontalBandTrack(
-                  key: Key('band-scale-${discipline.id}'),
-                  lowDeg: contract!.bandLowDeg,
-                  highDeg: contract!.bandHighDeg,
-                  maxDeg: _sharedScaleMaxDeg,
-                  color: hue.ink,
-                  height: 8,
-                ),
-                const SizedBox(height: 6),
+              const SizedBox(height: 10),
+              // v1 (kurucu, 2026-11-01): eğitmen açı çubuğu kalktı. Gitar
+              // ölçülü pratiğe açılır; ses ve piyano "Yakında".
+              if (discipline.id == 'guitar')
+                _MeasuredNextLine(color: hue.ink)
+              else
                 Text(
-                  '${appInteger(context, contract!.teacherCount)} '
-                  '${catalogSourceClass(context, contract!.sourceClass)} · '
-                  '${appDecimal(context, contract!.bandLowDeg, 1)}–'
-                  '${appDecimal(context, contract!.bandHighDeg, 1)}° / '
-                  '${appDecimal(context, _sharedScaleMaxDeg, 0)}°',
-                  style: monoText(size: 8.5, color: hue.ink),
+                  uiText(context, V1HomeCopy.comingSoon),
+                  key: Key('coming-soon-${discipline.id}'),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: hankenText(size: 12.5, color: hue.ink),
                 ),
-                const SizedBox(height: 10),
-              ] else
-                const SizedBox(height: 6),
-              Text(
-                catalogBlurb(context, discipline.id, discipline.blurb),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: hankenText(size: 12.5, color: hue.ink),
-              ),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+/// Gitar kartının alt satırı: ölçülü pratikte açılan ilk geçilmemiş ders.
+/// Katalog veya kayıt okunamazsa yalnız "Ölçülü pratik açık" kalır.
+class _MeasuredNextLine extends StatefulWidget {
+  const _MeasuredNextLine({required this.color});
+  final Color color;
+
+  @override
+  State<_MeasuredNextLine> createState() => _MeasuredNextLineState();
+}
+
+class _MeasuredNextLineState extends State<_MeasuredNextLine> {
+  Future<V1Lesson?>? _next;
+  String? _accountId;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final id = AccountScope.maybeOf(context)?.currentUserId;
+    if (_next == null || id != _accountId) {
+      _accountId = id;
+      _next = _load(id);
+    }
+  }
+
+  Future<V1Lesson?> _load(String? accountId) async {
+    try {
+      final catalog = await V1PracticeCatalog.load();
+      final records = await V1PracticeProgressStore(
+        accountUserId: accountId,
+      ).load();
+      for (final l in catalog.lessons) {
+        if (!(records[l.id]?.passed ?? false)) return l;
+      }
+    } on Object {
+      // Fall back to the plain line.
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<V1Lesson?>(
+    future: _next,
+    builder: (context, snap) {
+      final lesson = snap.data;
+      return Text(
+        lesson == null
+            ? uiText(context, V1HomeCopy.guitarCardOpen)
+            : uiText(
+                context,
+                V1HomeCopy.guitarCardNext,
+                values: {'v0': lesson.title.of(context)},
+              ),
+        key: const Key('guitar-card-measured'),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: hankenText(size: 12.5, color: widget.color),
+      );
+    },
+  );
 }

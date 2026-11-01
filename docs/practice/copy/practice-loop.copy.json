@@ -322,14 +322,6 @@
    "tr": "AÇIK"
   },
   {
-   "en": "Play a lesson with the click and the moving TAB; each note is marked correct, different note or couldn’t hear. Passing the measured gate opens the next lesson.",
-   "tr": "Bir dersi klik ve akan tab ile çal; her nota doğru, farklı nota ya da duyamadım diye işaretlenir. Ölçülen geçiş kapısını geçmek sıradaki dersi açar."
-  },
-  {
-   "en": "Open measured practice",
-   "tr": "Ölçülü pratiği aç"
-  },
-  {
    "en": "Play it at the target tempo",
    "tr": "Hedef tempoda çal"
   },

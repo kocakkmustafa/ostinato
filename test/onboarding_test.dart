@@ -10,6 +10,8 @@ import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
 import 'package:ostinato/app/screens/settings_screen.dart';
+import 'package:ostinato/app/screens/v1_home_copy.dart';
+import 'package:ostinato/app/ui_copy.dart';
 import 'package:ostinato/main.dart';
 import 'support/localized_widget_ready.dart';
 
@@ -81,7 +83,7 @@ void main() {
 
   for (final language in ['en', 'tr']) {
     testWidgets(
-      'current course and closed camera copy is visible in $language',
+      'v1 course, three marks and camera-only-in-its-lesson copy in $language',
       (tester) async {
         Widget host(Widget child) => ContentRepositoryScope(
           repo: repo,
@@ -103,20 +105,11 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
+        String t(UiCopy c) => language == 'tr' ? c.$2 : c.$1;
+        expect(find.text(t(V1HomeCopy.welcomeTitle)), findsOneWidget);
+        expect(find.text(t(V1HomeCopy.welcomeBody)), findsOneWidget);
         expect(
-          find.textContaining(
-            language == 'tr'
-                ? 'Ücretsiz dersler hesap, kamera veya mikrofon olmadan çalışır'
-                : 'Free lessons work without an account, camera or microphone',
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.textContaining(
-            language == 'tr'
-                ? 'canlı kamera pratiği kapalıdır'
-                : 'Live camera practice is closed in this release',
-          ),
+          find.textContaining(language == 'tr' ? '690 ders' : '690 lessons'),
           findsOneWidget,
         );
         expect(
@@ -127,24 +120,20 @@ void main() {
           ),
           findsOneWidget,
         );
-        expect(find.textContaining('compares how you sit'), findsNothing);
+        expect(find.textContaining('does not grade'), findsNothing);
+        expect(find.textContaining('puanlamaz'), findsNothing);
         await tester.tap(find.byKey(const Key('onboarding-primary')));
         await settle(tester);
+        expect(find.text(t(V1HomeCopy.scopePractice)), findsOneWidget);
         await tester.tap(find.byKey(const Key('onboarding-primary')));
         await settle(tester);
+        expect(find.text(t(V1HomeCopy.cameraBody)), findsOneWidget);
+        expect(find.text(t(V1HomeCopy.micBody)), findsOneWidget);
         expect(
           find.textContaining(
-            language == 'tr'
-                ? 'Kurs video yakalamaz'
-                : 'The course does not capture video',
+            language == 'tr' ? 'kamera izni istemez' : 'does not ask for camera',
           ),
-          findsOneWidget,
-        );
-        expect(
-          find.textContaining(
-            language == 'tr' ? 'tek nota gözlemi' : 'single-note observation',
-          ),
-          findsWidgets,
+          findsNothing,
         );
         await tester.pumpWidget(host(const SettingsScreen()));
         await tester.pumpAndSettle();
@@ -247,65 +236,26 @@ void main() {
     );
   });
 
-  group('içerik türetimi', () {
-    /// Ekrandaki sayılar ELLE yazılmış olsaydı ilk içerik turunda bayatlardı.
-    /// Bu test onların kütüphaneden TÜREDİĞİNİ ölçer: beklenen değerler
-    /// burada da sabit DEĞİL, aynı `repo`dan hesaplanır — test ile ekran
-    /// aynı kaynağı okur, ikisi birlikte kayar ya da birlikte kalır.
-    testWidgets('kapsam sayıları library.json ile aynı', (
+  group('içerik adımı', () {
+    // v1 (kurucu, 2026-11-01): eski duruş kataloğu sayıları kalktı; adım
+    // bugün uygulamada olan dört şeyi sayar.
+    testWidgets('dört v1 satırı, duruş kataloğu sayısı yok', (
       WidgetTester t,
     ) async {
-      final List<Discipline> live = repo.disciplines
-          .where((Discipline d) => d.status == 'live')
-          .toList();
-      final List<Lesson> all = <Lesson>[
-        for (final Discipline d in live) ...d.lessons,
-      ];
-      final int locked = all
-          .where((Lesson l) => l.kind == LessonKind.locked)
-          .length;
-      final int demo = all
-          .where((Lesson l) => l.kind == LessonKind.demoOnly)
-          .length;
-
       await boot(t, InMemoryOnboardingStore());
       await t.tap(find.byKey(const Key('onboarding-primary')));
       await settle(t);
-
-      String valueOf(String key) => t
-          .widgetList<Text>(
-            find.descendant(
-              of: find.byKey(Key(key)),
-              matching: find.byType(Text),
-            ),
-          )
-          .first
-          .data!;
-
-      expect(valueOf('onboarding-fact-instruments'), '${live.length}');
-      expect(valueOf('onboarding-fact-lessons'), '${all.length}');
-      expect(valueOf('onboarding-fact-locked'), '$locked');
-      expect(valueOf('onboarding-fact-demo'), '$demo');
-
-      // Türetimin gerçekten BİR ŞEY saydığı ayrıca sınanır: sıfır sayan bir
-      // türetim de "eşleşir" ve sessizce geçerdi.
-      //
-      // ⚠️ Buradaki iddialar YAPISAL, içerik BOYUTUNA bağlı DEĞİL (JabLab
-      // dersi): önceki hâli `all.length >= 19` diyordu ve o gece 19→28'e
-      // çıktı. Taban bir kez doğruyken bile yanlış türden bir iddiaydı —
-      // ürünün büyüklüğünü değil, türetimin çalıştığını ölçmeliyiz.
-      expect(live.length, greaterThan(0));
-      expect(
-        all.length,
-        greaterThan(live.length),
-        reason: 'her çalgının en az bir dersi olmalı',
-      );
-      expect(
-        locked,
-        greaterThan(0),
-        reason: 'kilitli ders sayısı 0 ise "kilitli" satırı anlamsız',
-      );
-      expect(demo, greaterThan(0));
+      for (final key in [
+        'onboarding-fact-practice',
+        'onboarding-fact-setup',
+        'onboarding-fact-streak',
+        'onboarding-fact-written',
+      ]) {
+        expect(find.byKey(Key(key)), findsOneWidget, reason: key);
+      }
+      expect(find.text(V1HomeCopy.scopeWritten.$1), findsOneWidget);
+      expect(find.textContaining('posture'), findsNothing);
+      expect(find.byKey(const Key('onboarding-fact-locked')), findsNothing);
     });
   });
 
@@ -321,7 +271,7 @@ void main() {
       }
     });
 
-    testWidgets('mikrofon kartı YOKLUĞU söyler, yeteneği DEĞİL', (
+    testWidgets('mikrofon kartı beyanla uyumlu konuşur', (
       WidgetTester t,
     ) async {
       await boot(t, InMemoryOnboardingStore());
@@ -370,10 +320,14 @@ void main() {
               'mikrofon artık BEYAN EDİLMİŞ — yokluk cümlesi bugün '
               'yanlış, kart güncellenmeli',
         );
+        // v1: mikrofon ölçülü pratikte dinler; kart bunu ve sesin cihazda
+        // kaldığını, çalınanın kaydedilmediğini söyler.
+        expect(mic, contains('processed on this device'));
+        expect(mic, contains('not recorded'));
       } else {
         expect(mic, contains('no microphone input in this build'));
+        expect(mic.toLowerCase(), isNot(contains('listens')));
       }
-      expect(mic.toLowerCase(), isNot(contains('listens')));
     });
 
     testWidgets('wellness beyanı akışın İÇİNDE, ayarlara gömülü değil', (
