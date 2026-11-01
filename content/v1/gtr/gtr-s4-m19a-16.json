@@ -1,72 +1,112 @@
 {
   "id": "gtr-s4-m19a-16",
-  "title": { "en": "Arranging a folk melody", "tr": "Halk ezgisi düzenlemek" },
+  "title": {
+    "en": "Arranging a folk melody",
+    "tr": "Halk ezgisi düzenlemek"
+  },
   "goal": {
-    "en": "Adds a thumb bass to a traditional Scarborough Fair melody and plays 16 bars in time at ♩=70.",
-    "tr": "Geleneksel bir Scarborough Fair ezgisine başparmak bası ekler ve 16 ölçüyü ♩=70'te zamanında çalar."
+    "en": "Adds a thumb bass to the 1891 Kidson version of Scarborough Fair and plays 16 bars in time at ♩=70.",
+    "tr": "Scarborough Fair'in 1891 Kidson varyantına başparmak bası ekler ve 16 ölçüyü ♩=70'te zamanında çalar."
   },
   "explanation": [
     {
-      "en": "Scarborough Fair is a traditional English melody. You play an older printed variant of the tune; later arrangements and recordings are not used.",
-      "tr": "Scarborough Fair geleneksel bir İngiliz ezgisidir. Ezginin eski bir basılı varyantını çalarsın; sonraki düzenlemeler ve kayıtlar kullanılmaz."
+      "en": "Scarborough Fair is a traditional English ballad. You play the tune Frank Kidson printed in 1891 from a Whitby ballad singer; later tunes, arrangements and recordings are not used.",
+      "tr": "Scarborough Fair geleneksel bir İngiliz baladıdır. Frank Kidson'ın 1891'de Whitby'li bir sokak şarkıcısından derleyip bastığı ezgiyi çalarsın; sonraki ezgiler, düzenlemeler ve kayıtlar kullanılmaz."
     },
     {
       "en": "Find the home note first: the last note of the melody. The bass of the home chord is your main bass note; use an open string (E2, A2 or D3) when it fits.",
       "tr": "Önce ana notayı bul: ezginin son notası. Ana akorun bası senin temel bas notandır; uyduğunda açık tel kullan (Mi2, La2 ya da Re3)."
     },
     {
-      "en": "Each bar has a chord symbol above the staff. Play the root of that chord with the thumb on beat 1, in the low register (strings 6–4).",
-      "tr": "Her ölçünün portenin üstünde bir akor sembolü var. O akorun kökünü 1. vuruşta başparmakla, pes bölgede (6–4. teller) çal."
+      "en": "The task lists one chord for each bar. Play the root of that chord with the thumb on beat 1, in the low register (strings 6–4).",
+      "tr": "Görev metni her ölçü için bir akor verir. O akorun kökünü 1. vuruşta başparmakla, pes bölgede (6–4. teller) çal."
     },
     {
       "en": "Keep the bass below the melody and simple. One note per bar is enough; add a second on the middle beat only where the melody holds a long note.",
       "tr": "Bası melodinin altında ve sade tut. Ölçü başına bir nota yeter; ikinci notayı yalnız melodinin uzun nota tuttuğu yerde orta vuruşa ekle."
     },
     {
-      "en": "Play melody alone, then bass alone, then both. The melody stays louder than the bass.",
-      "tr": "Önce yalnız melodiyi, sonra yalnız bası, sonra ikisini çal. Melodi bastan güçlü kalır."
+      "en": "Play melody alone, then bass alone, then both. Only the melody alone is measured. The melody stays louder than the bass.",
+      "tr": "Önce yalnız ezgiyi, sonra yalnız bası, sonra ikisini çal. Yalnız tek başına çalınan ezgi ölçülür. Ezgi bastan güçlü kalır."
     }
   ],
   "referenceAudio": {
-    "kinds": ["S"],
+    "kinds": [
+      "S"
+    ],
     "brief": {
       "en": "The 16-bar melody alone at ♩=70 and ♩=45, then with the root bass on beat 1, string-model synthesis.",
       "tr": "16 ölçülük ezgi tek başına ♩=70 ve ♩=45'te, ardından 1. vuruşta kök basla; tel modeli sentezi."
     }
   },
   "practice": {
-    "measurement": ["M"],
-    "engineSteps": ["A2", "A3"],
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
     "task": {
-      "en": "The app shows the 16-bar melody with a chord symbol on each bar. Play the melody alone with the click at ♩=70. Then add the root of each chord with the thumb on beat 1 and play all 16 bars.",
-      "tr": "Uygulama 16 ölçülük ezgiyi her ölçüde bir akor sembolüyle gösterir. Ezgiyi klikle ♩=70'te tek başına çal. Sonra her akorun kökünü başparmakla 1. vuruşta ekle ve 16 ölçünün tamamını çal."
+      "en": "Run 1, measured: the app shows the 16-bar melody in G major, 3/4, starting with a one-beat pickup; play it alone with the click at ♩=70. Run 2, not measured: add the root of each bar's chord with the thumb on beat 1 and play all 16 bars. Chords, one per bar: G D G D | G C Em D | G D G D | C D G G.",
+      "tr": "1. çalış, ölçülür: uygulama 16 ölçülük ezgiyi Sol majörde, 3/4'te, bir vuruşluk öncüyle gösterir; ezgiyi klikle ♩=70'te tek başına çal. 2. çalış, ölçülmez: her ölçünün akor kökünü başparmakla 1. vuruşta ekle ve 16 ölçünün tamamını çal. Akorlar, ölçü başına bir: G D G D | G C Em D | G D G D | C D G G."
     },
-    "tempo": { "open": 70, "target": 70 },
-    "pass": { "levelDefault": true }
+    "sequence": "3/4: hr D3 | G3 G3 G3 | A3 B3 C4 | D4:h D4 | A3:h. | B3 B3 B3 | C4 B3 A3 | G3 G3 E3 | D3:h D3 | G3:h G3 | A3 B3 C4 | D4 D4 D4 | A3:h B3 | C4:h C4 | C4 B3 A3 | D3 G3 G3 | G3:h.",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
   },
   "fallback": "selfCheck",
-  "safety": ["Ç", "G1"],
+  "safety": [
+    "Ç",
+    "G1"
+  ],
   "prerequisites": [],
   "selfCheck": [
-    { "en": "Every bar had a bass note on beat 1.", "tr": "Her ölçünün 1. vuruşunda bir bas notası vardı." },
-    { "en": "The melody stood out above the bass, as in the reference.", "tr": "Melodi, referanstaki gibi basın üstünde öne çıktı." },
-    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+    {
+      "en": "Every bar had a bass note on beat 1.",
+      "tr": "Her ölçünün 1. vuruşunda bir bas notası vardı."
+    },
+    {
+      "en": "The melody stood out above the bass, as in the reference.",
+      "tr": "Melodi, referanstaki gibi basın üstünde öne çıktı."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    }
   ],
   "commonErrors": [
     {
-      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
-      "fix": { "en": "The thumb waits for the melody. Place the bass on beat 1 and let the melody note join it.", "tr": "Başparmak melodiyi bekliyor. Bası 1. vuruşa yerleştir, melodi notası ona katılsın." }
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "The thumb waits for the melody. Place the bass on beat 1 and let the melody note join it.",
+        "tr": "Başparmak melodiyi bekliyor. Bası 1. vuruşa yerleştir, melodi notası ona katılsın."
+      }
     },
     {
-      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
-      "fix": { "en": "The bass covers the melody. Play the bass lighter and the melody with rest stroke.", "tr": "Bas melodiyi örtüyor. Bası daha hafif, melodiyi dayanarak vuruşla çal." }
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The bass covers the melody. Play the bass lighter and the melody with rest stroke.",
+        "tr": "Bas melodiyi örtüyor. Bası daha hafif, melodiyi dayanarak vuruşla çal."
+      }
     }
   ],
   "adaptation": {
     "en": "Play the first eight bars only, at ♩=55, until the bass lands on every beat 1.",
     "tr": "Bas her 1. vuruşa düşene kadar yalnız ilk sekiz ölçüyü ♩=55'te çal."
   },
-  "repertoire": "Scarborough Fair, traditional English melody. Source: an older variant from a 19th-century collection (variant to be fixed with the source scan). The 20th-century popular arrangement and recording are not used or referenced. Public domain, legal review pending. Notation, chord symbols, bass and tempo by Ostinato.",
+  "repertoire": "Scarborough Fair, traditional English ballad: the tune as sung by a Whitby ballad singer, printed in Frank Kidson (1855–1926), Traditional Tunes, Oxford: Chas. Taphouse & Son, 1891, p. 43 (G major, 3/4, 16 bars). Scan: National Library of Scotland copy, https://archive.org/details/traditionaltunes00rugg (also on IMSLP: https://imslp.org/wiki/Traditional_Tunes_(Kidson,_Frank)). The 1947 tune and the 20th-century popular arrangement and recording are not used or referenced. Public domain, legal review pending. Notation, chord symbols, bass and tempo by Ostinato.",
   "minutes": 20,
   "expertPending": true
 }

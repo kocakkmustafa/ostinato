@@ -5,8 +5,8 @@
     "tr": "Carulli: kısa bir Andantino"
   },
   "goal": {
-    "en": "Plays a selected Andantino from Carulli's Op. 241, 8 to 16 bars, in time at ♩=60.",
-    "tr": "Carulli'nin Op. 241'inden seçilmiş 8–16 ölçülük bir Andantino'yu ♩=60'ta zamanında çalar."
+    "en": "Plays bars 1–10 of Carulli's Andantino Op. 241 No. 20 in time at ♩=60.",
+    "tr": "Carulli'nin Op. 241 No. 20 Andantino'sunun 1–10. ölçülerini ♩=60'ta zamanında çalar."
   },
   "explanation": [
     {
@@ -14,16 +14,16 @@
       "tr": "Ferdinando Carulli (1770–1841), Paris'te ders veren İtalyan bir gitaristti. Metodu Op. 241, öğrenciler için kısa parçalar içerir."
     },
     {
-      "en": "This lesson uses one of its Andantinos, 8 to 16 bars long. Andantino means a gentle walking pace.",
-      "tr": "Bu ders, metodun 8–16 ölçülük Andantino'larından birini kullanır. Andantino, yumuşak bir yürüyüş hızı demektir."
+      "en": "This lesson uses Andantino No. 20 in A minor, 6/8: the first section, bars 1–10, which starts with a one-eighth pickup. Andantino means a gentle walking pace.",
+      "tr": "Bu ders La minör, 6/8'lik 20 numaralı Andantino'yu kullanır: bir sekizlik öncüyle başlayan ilk bölüm, 1–10. ölçüler. Andantino, yumuşak bir yürüyüş hızı demektir."
     },
     {
-      "en": "The piece uses skills from this module: bass notes with the thumb and broken chords with p, i, m and a.",
-      "tr": "Parça bu modülün becerilerini kullanır: başparmakla bas notaları ve p, i, m, a ile arpejler."
+      "en": "The melody is the top note of each chord and each single upper note. Below it the thumb plays the bass and the fingers fill in the chord.",
+      "tr": "Ezgi, her akorun en üst notası ve tek başına çalınan üst notalardır. Altında başparmak bası çalar, parmaklar akoru tamamlar."
     },
     {
-      "en": "Before you play, read it through: find the chords, the bass string of each bar and any repeated bars.",
-      "tr": "Çalmadan önce parçayı baştan sona oku: akorları, her ölçünün bas telini ve tekrar eden ölçüleri bul."
+      "en": "The measured run plays the melody alone, exactly as the line on screen. Then play the full texture with bass and chords; that second run is not measured.",
+      "tr": "Ölçülen çalışta ezgiyi, ekrandaki dizi gibi, tek başına çalarsın. Sonra bası ve akorlarıyla bütün dokuyu çal; bu ikinci çalış ölçülmez."
     },
     {
       "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
@@ -35,8 +35,8 @@
       "S"
     ],
     "brief": {
-      "en": "The selected Andantino, string-model synthesis from the Ostinato edition, at ♩=60 and ♩=40.",
-      "tr": "Seçilen Andantino, Ostinato düzenlemesinden tel modeli sentezi, ♩=60 ve ♩=40."
+      "en": "Andantino No. 20, bars 1–10, string-model synthesis from the Ostinato edition: the melody alone, then the full texture, at ♩=60 and ♩=40.",
+      "tr": "Ostinato düzenlemesinden 20 numaralı Andantino, 1–10. ölçüler, tel modeli sentezi: önce yalnız ezgi, sonra bütün doku, ♩=60 ve ♩=40."
     }
   },
   "practice": {
@@ -48,9 +48,10 @@
       "A3"
     ],
     "task": {
-      "en": "Play the Andantino from the screen with the click. Work in two-bar sections first, then play the whole piece at ♩=60.",
-      "tr": "Andantino'yu ekrandan klikle çal. Önce iki ölçülük bölümlerle çalış, sonra bütün parçayı ♩=60'ta çal."
+      "en": "Run 1, measured: play the melody alone from the screen with the click, first in two-bar sections, then bars 1–10 at ♩=60. Run 2, not measured: play bars 1–10 as written, with the bass and the chord notes under the melody.",
+      "tr": "1. çalış, ölçülür: ezgiyi ekrandan klikle tek başına çal; önce iki ölçülük bölümlerle, sonra 1–10. ölçüleri ♩=60'ta. 2. çalış, ölçülmez: 1–10. ölçüleri yazıldığı gibi, ezginin altında bas ve akor notalarıyla çal."
     },
+    "sequence": "6/8: q.r qr E4:e | C4:q E4:e B3:q E4:e | C4:e. B3:s C4:e A3:q E4:e | F4:q E4:e D4:q C4:e | C4:q. B3:q E4:e | C4:q E4:e B3:q E4:e | C4:e. D4:s E4:e A3:q E4:e | F4:e D4:e B3:e A3:q G#3:e | F4:q. E4:q er | F4:e D4:e B3:e A3:q G#3:e | A3:q. A3:q G3:e",
     "tempo": {
       "open": 60,
       "target": 60
@@ -100,8 +101,8 @@
         "tr": "Farklı nota, yarım ses alçak."
       },
       "fix": {
-        "en": "A fretting finger lifted too early. Keep each chord shape down until its bar ends.",
-        "tr": "Bir sol el parmağı erken kalktı. Her akor şeklini ölçüsü bitene kadar basılı tut."
+        "en": "The G♯ in bars 7 and 9 was played as G. Mark both before you play.",
+        "tr": "7. ve 9. ölçülerdeki Sol♯ Sol olarak çalındı. Çalmadan önce ikisini de işaretle."
       }
     },
     {
@@ -116,10 +117,10 @@
     }
   ],
   "adaptation": {
-    "en": "Learn the first half of the piece until it passes at ♩=60, then add the second half.",
-    "tr": "Parçanın ilk yarısını ♩=60'ta geçene kadar çalış, sonra ikinci yarıyı ekle."
+    "en": "Learn bars 1–4 until they pass at ♩=60, then add bars 5–10.",
+    "tr": "Önce 1–4. ölçüleri ♩=60'ta geçene kadar çalış, sonra 5–10. ölçüleri ekle."
   },
-  "repertoire": "Ferdinando Carulli (1770–1841), Méthode, Op. 241: one Andantino (selection, 8–16 bars). Source: Paris edition, 1825. Public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "repertoire": "Ferdinando Carulli (1770–1841), Méthode complète, Op. 241, No. 20, Andantino (A minor, 6/8): first section, bars 1–10 with the one-eighth pickup. Source edition: Paris, Launer, n.d. (ca. 1825), plate 2250, p. 31; scan: Boston Public Library, https://archive.org/details/mthodecompltepou00caru (also on IMSLP, marked Public Domain: https://imslp.org/wiki/École_de_guitare,_Op.241_(Carulli,_Ferdinando)). The print omits the augmentation dots in bars 2, 6 and 10; they are restored from the beaming and the bar length. Composer died 1841; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 18,
   "expertPending": true
 }
