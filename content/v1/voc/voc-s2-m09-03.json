@@ -1,0 +1,90 @@
+{
+  "id": "voc-s2-m09-03",
+  "title": { "en": "Echo four notes", "tr": "Dört notayı yankıla" },
+  "goal": {
+    "en": "Hears a four-note motif on do to la and sings it back in their own octave.",
+    "tr": "Do ile la arasındaki dört notalık bir motifi duyar ve kendi oktavında geri söyler."
+  },
+  "explanation": [
+    {
+      "en": "Four notes are one more than you can hold as a single picture. Hear them as two pairs: the first two, then the last two.",
+      "tr": "Dört nota, tek bir resim olarak aklında tutabileceğinden bir fazladır. Onları iki çift olarak duy: ilk iki, sonra son iki."
+    },
+    {
+      "en": "The motifs use do, re, mi, fa, sol and la, with steps and one skip at most. The app plays do first as home.",
+      "tr": "Motifler do, re, mi, fa, sol ve la'yı kullanır; basamaklar ve en çok bir atlama vardır. Uygulama önce ev olarak do'yu çalar."
+    },
+    {
+      "en": "Notice the last note. Does it come back home to do, or does it stop somewhere open, like re or sol?",
+      "tr": "Son notaya dikkat et. Do'ya, eve mi dönüyor, yoksa re ya da sol gibi açık bir yerde mi duruyor?"
+    },
+    {
+      "en": "Wait until the motif ends, then sing all four notes on 'la' or in solfège, at your own pace.",
+      "tr": "Motif bitene kadar bekle, sonra dört notanın hepsini kendi hızında 'la' ile ya da solfejle söyle."
+    },
+    {
+      "en": "Sing in your own octave. The app compares your notes octave-folded.",
+      "tr": "Kendi oktavında söyle. Uygulama notalarını oktav katlanmış olarak karşılaştırır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do, then six generated four-note motifs on degrees 1–6 in your comfortable range, soft synthesized voice. Each motif can be replayed once.",
+      "tr": "Do, ardından rahat menzilinde 1–6. derecelerden üretilmiş altı dört notalık motif, yumuşak sentez ses. Her motif bir kez yeniden dinlenebilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to 6 motifs. After each one, sing its four notes back in your own octave. You may replay a motif once before you answer. The motifs change on every attempt.",
+      "tr": "6 motif dinle. Her birinin ardından dört notasını kendi oktavında geri söyle. Cevaplamadan önce bir motifi bir kez yeniden dinleyebilirsin. Motifler her denemede değişir."
+    },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard each motif as two pairs.",
+      "tr": "Her motifi iki çift olarak duydum."
+    },
+    {
+      "en": "I knew whether the last note came home to do.",
+      "tr": "Son notanın do'ya dönüp dönmediğini biliyordum."
+    },
+    { "en": "I sang in a comfortable octave.", "tr": "Rahat bir oktavda söyledim." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, the fourth note.", "tr": "Farklı nota: dördüncü nota." },
+      "fix": {
+        "en": "The second pair slipped. Replay the motif and sing only the last two notes, then all four.",
+        "tr": "İkinci çift kaymış. Motifi yeniden dinle ve yalnız son iki notayı söyle, sonra dördünü birden."
+      }
+    },
+    {
+      "error": { "en": "Different note, the skip a step too small.", "tr": "Farklı nota: atlama bir basamak kısa." },
+      "fix": {
+        "en": "Fill the skip in your head: if it goes do to fa, think do-re-mi-fa quietly, then sing the skip.",
+        "tr": "Atlamayı içinden doldur: do'dan fa'ya gidiyorsa sessizce do-re-mi-fa diye düşün, sonra atlamayı söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Echo the first pair, then the second pair, then the whole motif.",
+    "tr": "Önce ilk çifti, sonra ikinci çifti, sonra motifin tamamını yankıla."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

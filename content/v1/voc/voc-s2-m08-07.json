@@ -1,0 +1,101 @@
+{
+  "id": "voc-s2-m08-07",
+  "title": { "en": "Word stress", "tr": "Söz vurgusu" },
+  "goal": {
+    "en": "Sings four original sentences on one comfortable note and makes the stressed word the loudest in each.",
+    "tr": "Dört özgün cümleyi rahat tek bir notada söyler ve her birinde vurgulu sözcüğü en gür yapar."
+  },
+  "explanation": [
+    {
+      "en": "Moving the stress changes the meaning. “WE sing today” answers “who?”; “We sing TODAY” answers “when?”.",
+      "tr": "Vurguyu taşımak anlamı değiştirir. “BİZ bugün söyleriz” “kim?” sorusuna, “Biz BUGÜN söyleriz” “ne zaman?” sorusuna cevap verir."
+    },
+    {
+      "en": "The four sentences come in two pairs. Each pair has the same words with the stress on a different word, shown in capitals.",
+      "tr": "Dört cümle iki çift hâlinde gelir. Her çiftte sözcükler aynıdır, vurgu büyük harfle gösterilen farklı bir sözcüktedir."
+    },
+    {
+      "en": "Sing every sentence on your comfortable do, in an easy speaking rhythm. With the pitch fixed, only loudness carries the stress.",
+      "tr": "Her cümleyi rahat do'nda, rahat bir konuşma ritmiyle söyle. Perde sabit kalınca vurguyu yalnız gürlük taşır."
+    },
+    {
+      "en": "Give the stressed word a small lift and keep the other words easy and a little lighter. The lift is still your comfortable voice.",
+      "tr": "Vurgulu sözcüğe küçük bir kalkış ver; diğer sözcükleri rahat ve biraz daha hafif tut. Kalkış yine senin rahat sesindir."
+    },
+    {
+      "en": "The microphone compares the words of each sentence with one another. There is no absolute volume target.",
+      "tr": "Mikrofon her cümlenin sözcüklerini birbiriyle karşılaştırır. Mutlak bir ses düzeyi hedefi yoktur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each sentence sung on one comfortable note from your range, with a gentle lift on the word in capitals.",
+      "tr": "Her cümle menzilinden rahat tek bir notada, büyük harfli sözcükte hafif bir kalkışla söylenir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Sing each sentence on your comfortable do and rest between them: “WE sing today.” “We sing TODAY.” “This SONG is new.” “This song is NEW.” Lift only the word in capitals.",
+      "tr": "Her cümleyi rahat do'nda söyle ve aralarda dinlen: “BİZ bugün söyleriz.” “Biz BUGÜN söyleriz.” “Bu ŞARKI yeni.” “Bu şarkı YENİ.” Yalnız büyük harfli sözcüğü kaldır."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In at least 3 of the 4 sentences, the word in capitals is the loudest, at least 3 dB above the other words.",
+        "tr": "4 cümlenin en az 3'ünde büyük harfli sözcük en gür olanıdır; diğer sözcüklerden en az 3 dB yüksektir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each pair sounded like two different answers.",
+      "tr": "Her çift iki farklı cevap gibi duyuldu."
+    },
+    {
+      "en": "I lifted only the word in capitals.",
+      "tr": "Yalnız büyük harfli sözcüğü kaldırdım."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the first word is the loudest even when the stress comes later.",
+        "tr": "Doğru, ama vurgu sonra gelse de ilk sözcük en gür."
+      },
+      "fix": {
+        "en": "Start each sentence lightly. Ask yourself the question it answers, then sing the answer.",
+        "tr": "Her cümleye hafif başla. Cümlenin cevap verdiği soruyu kendine sor, sonra cevabı söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but the stressed word is less than 3 dB above the rest.",
+        "tr": "Doğru, ama vurgulu sözcük kalanından 3 dB'den az yüksek."
+      },
+      "fix": {
+        "en": "Make the other words lighter instead of pushing the stressed one.",
+        "tr": "Vurgulu sözcüğü itmek yerine diğer sözcükleri hafiflet."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone instead of louder; a whispered line is hard to read.",
+        "tr": "Daha gür değil, telefona biraz daha yakın söyle; fısıltılı bir dizi zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Speak each sentence at an easy volume first, then sing it on do.",
+    "tr": "Her cümleyi önce rahat bir sesle konuş, sonra do'da söyle."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

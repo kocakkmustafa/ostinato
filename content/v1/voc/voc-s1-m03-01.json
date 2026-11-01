@@ -1,0 +1,117 @@
+{
+  "id": "voc-s1-m03-01",
+  "title": {
+    "en": "Five small steps up and down",
+    "tr": "Beş küçük basamak çıkış ve iniş"
+  },
+  "goal": {
+    "en": "Steps up from 1 to 5 and back down to 1 in small, even steps.",
+    "tr": "1'den 5'e küçük ve eşit basamaklarla çıkar, 1'e geri iner."
+  },
+  "explanation": [
+    {
+      "en": "Think of a short stair with five small steps: 1 2 3 4 5. Each step is only a little higher than the one before.",
+      "tr": "Beş küçük basamaklı kısa bir merdiven düşün: 1 2 3 4 5. Her basamak bir öncekinden yalnız biraz tizdir."
+    },
+    {
+      "en": "The numbers are scale degrees: 1 2 3 4 5 are do, re, mi, fa, sol. 3 to 4 (mi to fa) is a half step; keep it small.",
+      "tr": "Sayılar dizi dereceleridir: 1 2 3 4 5, do, re, mi, fa, sol'dür. 3'ten 4'e (mi–fa) yarım sestir; küçük tut."
+    },
+    {
+      "en": "The app picks 1 from your comfortable range. Start near the low, easy part of your voice.",
+      "tr": "Uygulama 1'i rahat menzilinden seçer. Sesinin pes ve kolay bölgesine yakın başla."
+    },
+    {
+      "en": "Keep the volume the same on every step. Don't get louder as you climb.",
+      "tr": "Her basamakta gürlüğü aynı tut. Çıktıkça sesini yükseltme."
+    },
+    {
+      "en": "The microphone now checks each step against the reference. If the top step strains, stop at 3 and keep the smaller stair.",
+      "tr": "Mikrofon artık her basamağı referansla karşılaştırır. Üst basamak zorlarsa 3'te dur ve küçük merdiveni koru."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "1-2-3-4-5-4-3-2-1 in your comfortable range, slow and even, soft vocal or sine tone.",
+      "tr": "Rahat menzilinde 1-2-3-4-5-4-3-2-1, yavaş ve eşit; yumuşak vokal ya da sinüs tını."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Hum on 'mm' or sing 'la' on 1-2-3-4-5-4-3-2-1, about one second per step. No click; take your time. Sing in your own octave.",
+      "tr": "1-2-3-4-5-4-3-2-1'i 'mm' ile mırıldan ya da 'la' ile söyle; her basamak yaklaşık bir saniye. Klik yok; acele etme. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4-5-4-3-2-1",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I went up and back down without getting louder at the top.",
+      "tr": "Tepede gürleşmeden çıkıp geri indim."
+    },
+    {
+      "en": "My last 1 felt like the same note as my first 1.",
+      "tr": "Son 1'im ilk 1'imle aynı nota gibi geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, 4 a semitone high.",
+        "tr": "Farklı nota: 4 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "3 to 4 is a half step; keep 4 close to 3.",
+        "tr": "3–4 yarım sestir; 4'ü 3'e yakın tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the last 1 a little high.",
+        "tr": "Farklı nota: son 1 biraz yüksek."
+      },
+      "fix": {
+        "en": "Your home note drifted. Replay 1 before you start and listen for it at the end.",
+        "tr": "Ev sesin kaymış. Başlamadan 1'i yeniden dinle ve sonda onu ara."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If the steps blur, speak the numbers on one tone first, then hum only 1-2-1 and 2-3-2.",
+    "tr": "Basamaklar karışırsa önce sayıları tek seste konuş, sonra yalnız 1-2-1 ve 2-3-2'yi mırıldan."
+  },
+  "legacy": "R: vocal-16",
+  "minutes": 10,
+  "expertPending": true
+}

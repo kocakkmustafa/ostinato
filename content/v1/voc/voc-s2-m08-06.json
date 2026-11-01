@@ -1,0 +1,118 @@
+{
+  "id": "voc-s2-m08-06",
+  "title": { "en": "Planning breaths", "tr": "Nefes planlamak" },
+  "goal": {
+    "en": "Chooses and marks breath places in an original eight-bar line, then sings it breathing only at those places.",
+    "tr": "Özgün sekiz ölçülük bir dizide nefes yerlerini kendisi seçip işaretler, sonra yalnız o yerlerde nefes alarak söyler."
+  },
+  "explanation": [
+    {
+      "en": "This line has no rests. You decide where to breathe, the way singers do with real songs.",
+      "tr": "Bu dizide sus yok. Şarkıcıların gerçek şarkılarda yaptığı gibi nerede nefes alacağına sen karar verirsin."
+    },
+    {
+      "en": "Good breath places are the ends of phrases, usually after a long note. Avoid breaking a run of short notes or the middle of a word.",
+      "tr": "İyi nefes yerleri cümle sonlarıdır, genellikle uzun bir notadan sonra. Kısa notalardan oluşan bir koşuyu ya da bir sözcüğün ortasını bölmekten kaçın."
+    },
+    {
+      "en": "Take the breath from the end of the long note before it: release the note a little early, breathe, and start the next note on time.",
+      "tr": "Nefesi kendinden önceki uzun notanın sonundan al: notayı biraz erken bırak, nefes al ve sonraki notayı zamanında başlat."
+    },
+    {
+      "en": "Plan more breaths rather than fewer. A short phrase with easy breath is better than a long phrase that runs out.",
+      "tr": "Az değil, fazla nefes planla. Rahat nefesli kısa bir cümle, nefesi tükenen uzun bir cümleden iyidir."
+    },
+    {
+      "en": "The line is in four two-bar phrases: do-mi-sol-mi, fa-re-mi; mi-fa-sol-la, sol-fa-mi; la-sol-fa-mi, re-mi-fa; sol-fa-mi-re, do.",
+      "tr": "Dizi iki ölçülük dört cümleden oluşur: do-mi-sol-mi, fa-re-mi; mi-fa-sol-la, sol-fa-mi; la-sol-fa-mi, re-mi-fa; sol-fa-mi-re, do."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The eight-bar line on “loo” in your comfortable range, at an easy pace and slowly, with a soft breath sound at the end of bars 2, 4 and 6 as one possible plan.",
+      "tr": "Sekiz ölçülük dizi “lu” ile rahat menzilinde, rahat bir hızda ve yavaşça; olası bir plan olarak 2, 4 ve 6. ölçülerin sonunda yumuşak bir nefes sesiyle."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Part 1: 8 questions. A spot in a line is highlighted; choose “breathe here” or “keep singing”. Part 2: on the eight-bar line, tap the places where you will breathe. Then sing it on “loo”, breathing only at your marks. Sing in your own octave.",
+      "tr": "1. bölüm: 8 soru. Dizide bir yer işaretlenir; “burada nefes al” ya da “söylemeye devam et” seç. 2. bölüm: sekiz ölçülük dizide nefes alacağın yerlere dokun. Sonra diziyi “lu” ile söyle ve yalnız işaretlerinde nefes al. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-3 | 4-2-3:h | 3-4-5-6 | 5-4-3:h | 6-5-4-3 | 2-3-4:h | 5-4-3-2 | 1:w",
+    "pass": {
+      "levelDefault": false,
+      "minCorrect": 7,
+      "text": {
+        "en": "At least 7 of 8 questions. In the line, Level 2 pitch accuracy, and every silence falls at a place you marked.",
+        "tr": "8 sorunun en az 7'si. Dizide Seviye 2 perde ölçütü ve her sessizlik işaretlediğin bir yere düşer."
+      }
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 8,
+      "params": {
+        "set": "breath_places",
+        "choices": ["breathe_here", "keep_singing"],
+        "situations": [
+          "after_long_note_at_phrase_end",
+          "after_final_note_before_new_phrase",
+          "middle_of_a_word",
+          "inside_a_run_of_short_notes",
+          "between_two_tied_notes",
+          "after_a_comma_in_the_words",
+          "before_the_last_note_of_a_phrase"
+        ]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3", "V4"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I breathed only where I had marked.", "tr": "Yalnız işaretlediğim yerlerde nefes aldım." },
+    { "en": "No phrase ran out of breath.", "tr": "Hiçbir cümlede nefesim tükenmedi." },
+    { "en": "Each note after a breath started on time.", "tr": "Nefesten sonraki her nota zamanında başladı." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: a breath was placed inside a phrase.",
+        "tr": "Farklı cevap: nefes bir cümlenin içine kondu."
+      },
+      "fix": {
+        "en": "Look for the long notes first. A breath usually comes right after one.",
+        "tr": "Önce uzun notaları bul. Nefes genellikle hemen birinin arkasından gelir."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but a silence fell where nothing was marked.",
+        "tr": "Doğru, ama işaret olmayan bir yerde sessizlik oldu."
+      },
+      "fix": {
+        "en": "Your plan needs one more breath. Add a mark at the end of the phrase before that spot.",
+        "tr": "Planın bir nefes daha istiyor. O yerden önceki cümle sonuna bir işaret ekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the note after a breath is flat.",
+        "tr": "Farklı nota: nefesten sonraki nota pes."
+      },
+      "fix": {
+        "en": "Hear the next note while you breathe in, then start it with a clear tone.",
+        "tr": "Nefes alırken sonraki notayı içinden duy, sonra net bir sesle başlat."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Mark a breath after every two bars, then sing at a slower pace.",
+    "tr": "Her iki ölçüden sonra bir nefes işaretle, sonra daha yavaş bir hızda söyle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

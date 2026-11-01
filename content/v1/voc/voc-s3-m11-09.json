@@ -1,0 +1,119 @@
+{
+  "id": "voc-s3-m11-09",
+  "title": {
+    "en": "Finding your break notes",
+    "tr": "Geçiş notalarını bulmak"
+  },
+  "goal": {
+    "en": "Sings a slow scale up and down while the app watches for a pitch jump, and marks the note where the voice changes register.",
+    "tr": "Uygulama perde sıçramasını izlerken yavaş bir gamı çıkıp iner ve sesin register değiştirdiği notayı işaretler."
+  },
+  "explanation": [
+    {
+      "en": "Your break is where your voice changes register. Its place is personal and can move a little from day to day.",
+      "tr": "Geçiş bölgen sesinin register değiştirdiği yerdir. Yeri kişiseldir ve günden güne biraz kayabilir."
+    },
+    {
+      "en": "Sing a slow major scale up and back down on “ah” or “oo”. Don't hide the change; sing naturally and lightly.",
+      "tr": "“A” ya da “u” ile yavaş bir majör gam çık ve geri in. Değişimi saklamaya çalışma; doğal ve hafif söyle."
+    },
+    {
+      "en": "The screen draws your pitch. Where the curve jumps or wobbles, the app marks that note. Going up and going down may give different notes.",
+      "tr": "Ekran perdeni çizer. Eğrinin sıçradığı ya da titrediği yerde uygulama o notayı işaretler. Çıkarken ve inerken farklı notalar çıkabilir."
+    },
+    {
+      "en": "The app saves only the note name, nothing else. Later lessons in this module use it to place the exercises.",
+      "tr": "Uygulama yalnız nota adını saklar, başka bir şey saklamaz. Bu modüldeki sonraki dersler alıştırmaları yerleştirmek için onu kullanır."
+    },
+    {
+      "en": "No jump is a fine result too. It may mean your voice already blends smoothly in this part of your range.",
+      "tr": "Sıçrama olmaması da iyi bir sonuçtur. Sesinin menzilin bu bölümünde zaten yumuşakça harmanlandığını gösterebilir."
+    },
+    {
+      "en": "Go only as high as feels easy. If a top note feels tight, turn back earlier or skip it.",
+      "tr": "Yalnız rahat geldiği kadar yüksel. Bir üst nota sıkışık gelirse daha erken dön ya da onu atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "A slow major scale up to the top do and back in your range, about two seconds per note.",
+      "tr": "Rahat menzilinde üst do'ya çıkıp dönen yavaş bir majör gam; her nota yaklaşık iki saniye."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing the scale slowly on “ah”, about two seconds per note, up to the top do and back to 1; hold the last do. The app starts in the middle of your range, so the scale climbs through your upper middle.",
+      "tr": "Gamı “a” ile yavaşça söyle; her nota yaklaşık iki saniye, üst do'ya çık ve 1'e dön; son do'yu tut. Uygulama menzilinin ortasından başlar; böylece gam üst-orta bölgenden geçer."
+    },
+    "sequence": "1:h 2:h | 3:h 4:h | 5:h 6:h | 7:h 8:h | 7:h 6:h | 5:h 4:h | 3:h 2:h | 1:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Finish the scale up and down within the level's pitch criteria. The app marks a break note if it sees a jump; a scale with no jump passes too.",
+        "tr": "Gamı seviyenin perde ölçütü içinde çıkıp in. Uygulama bir sıçrama görürse geçiş notasını işaretler; sıçramasız bir gam da geçer."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I sang naturally, without hiding the change.",
+      "tr": "Değişimi saklamadan, doğal söyledim."
+    },
+    {
+      "en": "I noticed where the sound changed.",
+      "tr": "Sesin nerede değiştiğini fark ettim."
+    },
+    {
+      "en": "I stayed in a comfortable range.",
+      "tr": "Rahat menzilde kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the top notes a little low.",
+        "tr": "Farklı nota: üst notalar biraz alçak."
+      },
+      "fix": {
+        "en": "Lighten the sound and hear each top note a little higher. If they feel tight, turn back lower.",
+        "tr": "Sesi hafiflet ve her üst notayı kafanda biraz daha yüksek duy. Sıkışık gelirlerse daha aşağıda dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only up to sol and back first. If sol felt easy, try the whole scale.",
+    "tr": "Önce yalnız sol'e kadar çık ve dön. Sol rahat geldiyse bütün gamı dene."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

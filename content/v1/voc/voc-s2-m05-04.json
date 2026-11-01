@@ -1,0 +1,79 @@
+{
+  "id": "voc-s2-m05-04",
+  "title": { "en": "Arpeggio on vowels", "tr": "Ünlülerle arpej" },
+  "goal": {
+    "en": "Sings 1-3-5-3-1 on 'a' and on 'o' as accurately as in solfège.",
+    "tr": "1-3-5-3-1'i 'a' ve 'o' ile, solfejdeki kadar doğru perdede söyler."
+  },
+  "explanation": [
+    {
+      "en": "Solfège gives every note a different vowel. Now one vowel carries the whole arpeggio.",
+      "tr": "Solfej her notaya ayrı bir ünlü verir. Şimdi tek bir ünlü bütün arpeji taşır."
+    },
+    {
+      "en": "Keep the vowel the same shape from bottom to top. On sol, don't let 'a' spread wide or 'o' close up.",
+      "tr": "Ünlüyü alttan üste aynı biçimde tut. Sol'de 'a' yayılmasın, 'o' kapanmasın."
+    },
+    {
+      "en": "Let the jaw stay loose and still. The pitch moves; the mouth shape stays.",
+      "tr": "Çene gevşek ve sakin kalsın. Perde hareket eder; ağız biçimi aynı kalır."
+    },
+    {
+      "en": "If a note drifts on the vowel, sing the line once in solfège, then return to the vowel.",
+      "tr": "Ünlüde bir nota kayarsa diziyi bir kez solfejle söyle, sonra ünlüye dön."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "1-3-5-3-1 on 'a', then on 'o', in your range, slow and even.",
+      "tr": "Rahat menzilinde 1-3-5-3-1, önce 'a', sonra 'o' ile; yavaş ve eşit."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Sing 1-3-5-3-1 once on 'a', then once on 'o'. Hold each note about one second. Sing in your own octave.",
+      "tr": "1-3-5-3-1'i bir kez 'a', bir kez 'o' ile söyle. Her notayı yaklaşık bir saniye tut. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-3-1 | 1-3-5-3-1",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The vowel kept the same shape on every note.",
+      "tr": "Ünlü her notada aynı biçimde kaldı."
+    },
+    { "en": "My jaw stayed loose.", "tr": "Çenem gevşek kaldı." },
+    { "en": "Both vowels ended on the same do.", "tr": "İki ünlü de aynı do'da bitti." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, sol a semitone low on 'o'.",
+        "tr": "Farklı nota: 'o'da sol yarım ses alçak."
+      },
+      "fix": {
+        "en": "'O' can darken the sound and pull it down. Keep a little space and aim at the centre of sol.",
+        "tr": "'O' sesi koyulaştırıp aşağı çekebilir. Biraz boşluk bırak ve sol'ün ortasını hedefle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the arpeggio on 'mm' first, then open to 'a' on the same notes.",
+    "tr": "Arpeji önce 'mm' ile söyle, sonra aynı notalarda 'a'ya aç."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

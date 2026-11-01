@@ -1,0 +1,93 @@
+{
+  "id": "voc-s1-m04-03",
+  "title": { "en": "Open a vowel without forcing", "tr": "Ünlüyü zorlamadan aç" },
+  "goal": {
+    "en": "Changes vowels on one comfortable note while the pitch stays steady.",
+    "tr": "Rahat tek bir notada ünlü değiştirirken perdeyi sabit tutar."
+  },
+  "explanation": [
+    {
+      "en": "Start with an easy hum. Then open to 'oo' with gently rounded lips, and to 'ah' with a comfortable jaw opening.",
+      "tr": "Rahat bir mırıldanmayla başla. Sonra hafif yuvarlak dudakla 'u'ya, rahat bir çene açıklığıyla 'a'ya açıl."
+    },
+    {
+      "en": "Vowels are sound shapes. Do not force a resonance spot, stretch the tongue or push the throat up or down.",
+      "tr": "Ünlüler ses şekilleridir. Belirli bir rezonans yerini zorlama, dili esnetme, gırtlağı yukarı ya da aşağı itme."
+    },
+    {
+      "en": "A new vowel changes the colour of the sound. It does not need a higher note or a louder voice.",
+      "tr": "Yeni bir ünlü sesin rengini değiştirir. Daha yüksek bir nota ya da daha gür bir ses gerektirmez."
+    },
+    {
+      "en": "Keep the note where it is; only the mouth shape moves. On the screen, the pitch line should stay flat.",
+      "tr": "Notayı yerinde tut; yalnız ağız şekli değişir. Ekranda perde çizgisi düz kalmalı."
+    },
+    {
+      "en": "If opening a vowel adds effort, stop, rest and try again later with shorter vowels.",
+      "tr": "Bir ünlüyü açmak efor ekliyorsa dur, dinlen ve daha sonra daha kısa ünlülerle yeniden dene."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "One comfortable note from your range, sung slowly on ah-eh-ee-oh-oo with a soft synthesized voice, about one second per vowel.",
+      "tr": "Rahat menzilinden tek bir nota; yumuşak sentez sesle a-e-i-o-u ünlüleriyle yavaşça söylenir, her ünlü yaklaşık bir saniye."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to the note and hum it softly. Then, on one breath, sing it on ah-eh-ee-oh-oo, about one second per vowel, without a break. Rest, then do it 3 times in all. Sing in your own octave.",
+      "tr": "Notayı dinle ve hafifçe mırıldan. Sonra tek nefeste a-e-i-o-u ünlüleriyle, her ünlü yaklaşık bir saniye, kesmeden söyle. Dinlen; toplam 3 kez yap. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In each round, the pitch stays steady across all five vowels: a spread (IQR) of 40 cents or less.",
+        "tr": "Her turda perde beş ünlü boyunca sabit kalır: yayılım (IQR) 40 cent ya da altı."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The note stayed the same while the vowel changed.",
+      "tr": "Ünlü değişirken nota aynı kaldı."
+    },
+    {
+      "en": "I opened the vowels without pushing the jaw down or getting louder.",
+      "tr": "Ünlüleri çeneyi aşağı itmeden ve gürleşmeden açtım."
+    },
+    {
+      "en": "My vowels matched the reference in colour.",
+      "tr": "Ünlülerim renk olarak referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a little high on 'ee'.", "tr": "Farklı nota: 'i'de biraz yüksek." },
+      "fix": {
+        "en": "'Ee' feels brighter, so the voice tends to rise. Think of the note staying level and keep 'ee' as soft as 'ah'.",
+        "tr": "'İ' daha parlak gelir, ses yükselmeye eğilimlidir. Notayı aynı katta düşün ve 'i'yi 'a' kadar yumuşak tut."
+      }
+    },
+    {
+      "error": { "en": "Different note, a little low on 'oo'.", "tr": "Farklı nota: 'u'da biraz alçak." },
+      "fix": {
+        "en": "Rounding the lips can pull the note down. Keep the same energy as on 'ah' while the lips round.",
+        "tr": "Dudakları yuvarlamak notayı aşağı çekebilir. Dudaklar yuvarlanırken 'a'daki enerjiyi koru."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only two vowels per breath: 'mm-oo', then 'mm-ah', each as a separate short try.",
+    "tr": "Her nefeste yalnız iki ünlü kullan: önce 'mm-u', sonra 'mm-a'; her biri ayrı kısa bir deneme."
+  },
+  "legacy": "R: vocal-10",
+  "minutes": 10,
+  "expertPending": true
+}

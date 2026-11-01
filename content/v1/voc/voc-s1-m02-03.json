@@ -1,0 +1,125 @@
+{
+  "id": "voc-s1-m02-03",
+  "title": {
+    "en": "Match one note (±50 cents)",
+    "tr": "Tek nota eşleştir (±50 cent)"
+  },
+  "goal": {
+    "en": "Sings a note they hear in their own octave and holds it for 2 seconds within 50 cents.",
+    "tr": "Duyduğu notayı kendi oktavında söyler ve 2 saniye boyunca 50 cent içinde tutar."
+  },
+  "explanation": [
+    {
+      "en": "Listen to the note, take a calm breath and sing it back on 'la' or 'mm'.",
+      "tr": "Notayı dinle, sakin bir nefes al ve 'la' ya da 'mm' ile geri söyle."
+    },
+    {
+      "en": "Sing in your own octave. If a note is too high or too low for you, sing the same note an octave away; it counts the same.",
+      "tr": "Kendi oktavında söyle. Bir nota sana çok yüksek ya da alçaksa aynı notayı bir oktav aşağıda ya da yukarıda söyle; aynı sayılır."
+    },
+    {
+      "en": "Start softly and hold the note steady for about two seconds so the microphone can read it.",
+      "tr": "Yumuşak başla ve mikrofon okuyabilsin diye notayı yaklaşık iki saniye sabit tut."
+    },
+    {
+      "en": "A cent is a tiny step: 100 cents make a half step. Within 50 cents counts as the same note.",
+      "tr": "Cent çok küçük bir adımdır: 100 cent bir yarım ses eder. 50 cent içi aynı nota sayılır."
+    },
+    {
+      "en": "You can turn on a drone that keeps sounding the note while you sing. Headphones are recommended while the drone plays; from the speaker it leaks into the microphone.",
+      "tr": "Söylerken notayı çalmaya devam eden bir dron açabilirsin. Dron çalarken kulaklık önerilir; hoparlörden çalarsa mikrofona sızar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "DR"
+    ],
+    "brief": {
+      "en": "Six single notes from your comfortable range, soft synthesized voice, each played twice; an optional drone holds the note while you sing.",
+      "tr": "Rahat menzilinden altı tek nota, yumuşak sentez ses, her biri iki kez; isteğe bağlı dron sen söylerken notayı tutar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to each of 6 notes and sing it back in your own octave for about two seconds. Turn the drone on if it helps.",
+      "tr": "6 notanın her birini dinle ve kendi oktavında yaklaşık iki saniye geri söyle. İşine yararsa dronu aç."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 5 of 6 notes with a median within 50 cents of the target (octave-folded).",
+        "tr": "6 notanın en az 5'inde medyan sapma 50 cent ya da altında (oktav katlanmış)."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Sung right after the reference, my note felt like the same note.",
+      "tr": "Referansın hemen ardından söylediğim nota aynı nota gibi geldi."
+    },
+    {
+      "en": "I sang in a comfortable octave.",
+      "tr": "Rahat bir oktavda söyledim."
+    },
+    {
+      "en": "I held each note steady for about two seconds.",
+      "tr": "Her notayı yaklaşık iki saniye sabit tuttum."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the start, then it slides into place.",
+        "tr": "Başta farklı nota, sonra kayarak yerine oturuyor."
+      },
+      "fix": {
+        "en": "Hear the note in your head before you sing, then start softly right on it.",
+        "tr": "Söylemeden önce notayı kafanda duy, sonra yumuşakça tam üstünden başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hum on 'mm' instead of singing a vowel, and replay the note before each try.",
+    "tr": "Ünlü yerine 'mm' ile mırıldan ve her denemeden önce notayı yeniden dinle."
+  },
+  "legacy": "V: voice.foundations.sustained_note",
+  "minutes": 8,
+  "expertPending": true
+}

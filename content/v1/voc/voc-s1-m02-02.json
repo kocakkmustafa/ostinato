@@ -1,0 +1,109 @@
+{
+  "id": "voc-s1-m02-02",
+  "title": {
+    "en": "Find your speaking pitch",
+    "tr": "Konuşma perdeni bul"
+  },
+  "goal": {
+    "en": "Finds their comfortable speaking pitch with five relaxed 'mm-hm's.",
+    "tr": "Beş rahat 'mm-hm' ile rahat konuşma perdesini bulur."
+  },
+  "explanation": [
+    {
+      "en": "Your speaking pitch is where your voice sits when you talk casually. It is an easy place to start singing.",
+      "tr": "Konuşma perden, rahatça konuşurken sesinin durduğu yerdir. Şarkıya başlamak için kolay bir noktadır."
+    },
+    {
+      "en": "Say 'mm-hm' the way you agree with a friend: short, relaxed, not performed.",
+      "tr": "'Mm-hm'u bir arkadaşına hak verir gibi söyle: kısa, rahat, gösterişsiz."
+    },
+    {
+      "en": "Each try moves a little. The app takes the middle value of all five, so one odd try does not matter.",
+      "tr": "Her deneme biraz oynar. Uygulama beşinin ortanca değerini alır; tek bir farklı deneme sonucu bozmaz."
+    },
+    {
+      "en": "Only that one number is kept on your phone. Your voice is not stored.",
+      "tr": "Telefonunda yalnız bu tek sayı saklanır. Sesin saklanmaz."
+    },
+    {
+      "en": "Until you find your comfortable range in a later lesson, the app uses this number to choose your starting notes.",
+      "tr": "Sonraki bir derste rahat menzilini bulana kadar uygulama başlangıç notalarını bu sayıya göre seçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "One relaxed 'mm-hm' in a soft synthesized voice, to show the shape only; it is not a pitch to copy.",
+      "tr": "Yalnız biçimi göstermek için yumuşak sentez sesle rahat bir 'mm-hm'; kopyalanacak bir perde değildir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Say 'mm-hm' five times at your normal speaking level, with a short rest between tries. There is no note to match.",
+      "tr": "Normal konuşma seviyende beş kez 'mm-hm' de; denemeler arasında kısa ara ver. Eşleştirilecek bir nota yok."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All five 'mm-hm's are heard. Any comfortable pitch passes; there is no target.",
+        "tr": "Beş 'mm-hm'un hepsi duyulur. Rahat olan her perde geçer; hedef yok."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I spoke each 'mm-hm' rather than sang it.",
+      "tr": "Her 'mm-hm'u şarkı söyler gibi değil, konuşur gibi söyledim."
+    },
+    {
+      "en": "My volume stayed at a normal speaking level.",
+      "tr": "Gürlüğüm normal konuşma düzeyinde kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Make each 'mm-hm' last about a second and keep the phone at arm's length in a quiet room.",
+        "tr": "Her 'mm-hm' yaklaşık bir saniye sürsün; sessiz bir odada telefonu kol mesafesinde tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on one try: much higher than the others.",
+        "tr": "Bir denemede farklı nota: diğerlerinden çok daha yüksek."
+      },
+      "fix": {
+        "en": "That try was probably performed or excited. Say it again as a plain, calm agreement.",
+        "tr": "O deneme büyük olasılıkla gösterişli ya da heyecanlı çıktı. Sade ve sakin bir onay gibi yeniden söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Count '1, 2, 3' in your speaking voice, then say 'mm-hm' at the same level.",
+    "tr": "Konuşma sesinle '1, 2, 3' say, sonra aynı düzeyde 'mm-hm' de."
+  },
+  "minutes": 4,
+  "expertPending": true
+}

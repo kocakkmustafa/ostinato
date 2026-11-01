@@ -1,0 +1,82 @@
+{
+  "id": "voc-s1-m01-08",
+  "title": { "en": "Microphone and room for singing", "tr": "Şarkı için mikrofon ve oda" },
+  "goal": {
+    "en": "Sets the phone distance and the room so a 3-second hum is read with no “Couldn't hear”.",
+    "tr": "Telefon mesafesini ve odayı, 3 saniyelik bir mırıldanma “Duyamadım” olmadan okunacak şekilde ayarlar."
+  },
+  "explanation": [
+    {
+      "en": "Choose a quiet room. Turn off the TV, music and fans, and close the window if the street is loud.",
+      "tr": "Sessiz bir oda seç. Televizyonu, müziği ve vantilatörü kapat; sokak gürültülüyse pencereyi kapat."
+    },
+    {
+      "en": "Put the phone on a stable surface about an arm's length away, roughly at mouth height. Don't hold it in your hand.",
+      "tr": "Telefonu sabit bir yüzeye, yaklaşık bir kol boyu uzağa, kabaca ağız hizasına koy. Elinde tutma."
+    },
+    {
+      "en": "Keep the microphone uncovered. Check that no case or finger blocks it.",
+      "tr": "Mikrofonu açıkta bırak. Kılıfın ya da parmağın üstünü kapatmadığından emin ol."
+    },
+    {
+      "en": "First stay silent for a few seconds while the app measures the room's noise floor. Then hum at your easy volume for about 3 seconds.",
+      "tr": "Önce uygulama odanın gürültü tabanını ölçerken birkaç saniye sessiz kal. Sonra rahat ses seviyende yaklaşık 3 saniye mırıldan."
+    },
+    {
+      "en": "If the app says “Couldn't hear”, move closer or remove a noise. Don't sing louder to make up for distance.",
+      "tr": "Uygulama “Duyamadım” derse yaklaş ya da bir gürültüyü kaldır. Mesafeyi kapatmak için daha yüksek sesle söyleme."
+    },
+    {
+      "en": "In later lessons with an accompaniment or a drone, use headphones so the speaker doesn't leak into the microphone.",
+      "tr": "Sonraki derslerde eşlik ya da dron çalarken kulaklık kullan; hoparlör sesi mikrofona sızmasın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A soft example hum of about three seconds; you hum at your own pitch.",
+      "tr": "Yaklaşık üç saniyelik yumuşak bir örnek mırıldanma; sen kendi perdende mırıldanırsın."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Stay silent while the room is measured. Then hum on “mm” at your own comfortable pitch for about 3 seconds. If it doesn't pass, adjust the distance or the room and try again.",
+      "tr": "Oda ölçülürken sessiz kal. Sonra kendi rahat perdende “mm” ile yaklaşık 3 saniye mırıldan. Geçmezse mesafeyi ya da odayı ayarla ve yeniden dene."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "The noise floor is marked OK and a 3-second hum is read with no “Couldn't hear”.",
+        "tr": "Gürültü tabanı uygun görünür ve 3 saniyelik mırıldanma “Duyamadım” olmadan okunur."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Move the phone a little closer, keep the microphone uncovered and hum for the full 3 seconds.",
+        "tr": "Telefonu biraz yaklaştır, mikrofonu açıkta bırak ve 3 saniyenin tamamı boyunca mırıldan."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear: the room is too noisy.", "tr": "Duyamadım: oda çok gürültülü." },
+      "fix": {
+        "en": "Turn off the noise source or move to a quieter room, then measure the room again.",
+        "tr": "Gürültü kaynağını kapat ya da daha sessiz bir odaya geç, sonra odayı yeniden ölç."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Bring the phone closer, about a forearm's length away, and run the room check again.",
+    "tr": "Telefonu yaklaşık bir ön kol boyu uzaklığa getir ve oda kontrolünü yeniden yap."
+  },
+  "minutes": 5,
+  "expertPending": true
+}

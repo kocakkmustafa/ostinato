@@ -1,0 +1,88 @@
+{
+  "id": "voc-s2-m07-10",
+  "title": { "en": "Consonants on the beat", "tr": "Ünsüzleri vuruşa yerleştirmek" },
+  "goal": {
+    "en": "Places each consonant just before the beat so the vowel lands on the click, at ♩=80.",
+    "tr": "♩=80'de her ünsüzü vuruştan hemen önce yerleştirir; ünlü klikte duyulur."
+  },
+  "explanation": [
+    {
+      "en": "A sung syllable has two parts: the consonant and the vowel. The beat belongs to the vowel.",
+      "tr": "Söylenen hecenin iki parçası vardır: ünsüz ve ünlü. Vuruş ünlüye aittir."
+    },
+    {
+      "en": "Start 't', 'k' or 'p' a moment before the click, so the 'a' sounds exactly on it.",
+      "tr": "'t', 'k' ya da 'p'yi klikten bir an önce başlat; 'a' tam klikte duyulsun."
+    },
+    {
+      "en": "Keep the consonants quick and light. A long or pushed consonant makes the vowel late.",
+      "tr": "Ünsüzleri çabuk ve hafif tut. Uzun ya da itilen ünsüz ünlüyü geciktirir."
+    },
+    {
+      "en": "The microphone hears where the vowel starts. If the consonant starts on the click, the result shows late.",
+      "tr": "Mikrofon ünlünün başladığı anı duyar. Ünsüze klikte başlarsan sonuç geç görünür."
+    },
+    {
+      "en": "Sing on one comfortable note, your do. The microphone checks your timing here.",
+      "tr": "Tek rahat notada, kendi do'nda söyle. Burada mikrofon zamanlamanı ölçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then the two bars on one note in your range, sung on 'ta', 'ka' and 'pa' with the vowel on the click, at ♩=80 and ♩=50.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde tek notada 'ta', 'ka' ve 'pa' ile söylenen iki ölçü, ünlü klikte; ♩=80 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "After the count-in, sing the two bars twice on your comfortable do: 'ta ka pa ta | ta-ka pa-ta ka', then rest. The second bar has eighths: two syllables per click. Put each vowel on its beat.",
+      "tr": "Giriş sayımından sonra iki ölçüyü rahat do'nda iki kez söyle: 'ta ka pa ta | ta-ka pa-ta ka', ardından sus. İkinci ölçüde sekizlikler var: her klike iki hece. Her ünlüyü kendi vuruşuna koy."
+    },
+    "sequence": "4/4: q q q q | ee ee q qr | ×2",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The vowel, not the consonant, landed on the click.",
+      "tr": "Klikte ünsüz değil, ünlü duyuldu."
+    },
+    { "en": "My consonants were short and light.", "tr": "Ünsüzlerim kısa ve hafifti." },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Your consonant starts on the click. Move it a little earlier so the 'a' meets the click.",
+        "tr": "Ünsüzün klikte başlıyor. Onu biraz öne al; 'a' klikle buluşsun."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late on the eighths in bar 2.", "tr": "Doğru, ama 2. ölçüdeki sekizliklerde geç." },
+      "fix": {
+        "en": "'k' and 'p' are slowing you down. Keep the tongue and lips light and quick.",
+        "tr": "'k' ve 'p' seni yavaşlatıyor. Dilini ve dudaklarını hafif ve çabuk tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the same rhythm on 'ha' or 'ma' first, then add 't', 'k' and 'p'.",
+    "tr": "Aynı ritmi önce 'ha' ya da 'ma' ile söyle, sonra 't', 'k' ve 'p'yi ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

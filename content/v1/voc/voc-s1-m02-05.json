@@ -1,0 +1,104 @@
+{
+  "id": "voc-s1-m02-05",
+  "title": {
+    "en": "Same or different?",
+    "tr": "Aynı mı farklı mı"
+  },
+  "goal": {
+    "en": "Tells whether two notes are the same or different.",
+    "tr": "İki sesin aynı mı farklı mı olduğunu ayırt eder."
+  },
+  "explanation": [
+    {
+      "en": "Two notes are the same when they sit at exactly the same pitch.",
+      "tr": "İki ses tam olarak aynı perdedeyse aynıdır."
+    },
+    {
+      "en": "Hold the first note in your mind while the second one plays.",
+      "tr": "İkinci nota çalarken birinciyi aklında tut."
+    },
+    {
+      "en": "A small difference can feel like 'almost the same'. If you hesitate, ask whether the second note leans up or down.",
+      "tr": "Küçük bir fark 'neredeyse aynı' gibi gelir. Kararsız kalırsan ikinci notanın yukarı mı aşağı mı kaydığına kulak ver."
+    },
+    {
+      "en": "Singers use this skill all the time: before any meter tells you, your ear can hear whether your note matches the reference.",
+      "tr": "Şarkıcılar bu beceriyi sürekli kullanır: hiçbir gösterge söylemeden önce kulağın notanın referansla aynı olup olmadığını duyabilir."
+    },
+    {
+      "en": "Some pairs use a voice-like tone, some a plain tone. Judge only the pitch.",
+      "tr": "Bazı çiftler sese benzer bir tınıyla, bazıları düz bir tınıyla çalar. Yalnız perdeye bak."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays two notes one after the other, in a soft synthesized voice or a plain tone.",
+      "tr": "Her soruda iki nota art arda çalar; yumuşak sentez ses ya da düz bir tınıyla."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Listen to two notes and choose: same or different.",
+      "tr": "İki notayı dinle ve seç: aynı mı, farklı mı?"
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 8
+    },
+    "drill": {
+      "type": "same_different",
+      "count": 10,
+      "params": {
+        "range": [
+          "C3",
+          "C5"
+        ],
+        "minCents": 50,
+        "maxCents": 200,
+        "varyTimbre": true
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: a small gap was heard as the same.",
+        "tr": "Farklı cevap: küçük bir fark aynı duyuldu."
+      },
+      "fix": {
+        "en": "Replay the pair and focus on the very start of the second note.",
+        "tr": "Çifti yeniden dinle ve ikinci notanın tam başlangıcına odaklan."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: two equal notes were heard as different.",
+        "tr": "Farklı cevap: iki eş nota farklı duyuldu."
+      },
+      "fix": {
+        "en": "Equal notes can still differ in tone; judge only the pitch.",
+        "tr": "Eş notalar tınıda farklı olabilir; yalnız perdeye bak."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each pair as often as you like; the first rounds use wider gaps.",
+    "tr": "Her çifti istediğin kadar tekrar dinle; ilk turlarda aralar daha geniştir."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

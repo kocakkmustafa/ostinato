@@ -1,0 +1,95 @@
+{
+  "id": "voc-s1-m01-04",
+  "title": { "en": "A gentle, comfortable hum", "tr": "Hafif ve rahat mırıldanma" },
+  "goal": {
+    "en": "Hums three steady tones at a comfortable pitch, each held about 3 seconds.",
+    "tr": "Rahat bir perdede üç kararlı mırıldanma yapar; her biri yaklaşık 3 saniye sürer."
+  },
+  "explanation": [
+    {
+      "en": "Say a relaxed “mm-hm”, as if agreeing with someone. The pitch where it lands is a good place to hum.",
+      "tr": "Birine hak verir gibi rahat bir “mm-hm” de. Sesin düştüğü perde mırıldanmak için iyi bir yerdir."
+    },
+    {
+      "en": "Close the lips softly without pressing. Keep the teeth slightly apart and the tongue loose.",
+      "tr": "Dudaklarını bastırmadan hafifçe kapat. Dişlerin hafif aralık, dilin gevşek kalsın."
+    },
+    {
+      "en": "Your comfortable pitch is personal. This lesson has no target note and no voice-type label.",
+      "tr": "Rahat perden sana özeldir. Bu derste hedef nota ve ses tipi etiketi yok."
+    },
+    {
+      "en": "Hum at an easy speaking volume and keep the pitch level, like a flat line, for about three seconds.",
+      "tr": "Rahat konuşma seviyesinde mırıldan ve perdeyi yaklaşık üç saniye düz bir çizgi gibi sabit tut."
+    },
+    {
+      "en": "The screen draws your pitch as a line. A steady hum stays inside a narrow band of 40 cents.",
+      "tr": "Ekran perdeni bir çizgi olarak gösterir. Kararlı bir mırıldanma 40 centlik dar bir bandın içinde kalır."
+    },
+    {
+      "en": "Humming is a practice step, not a remedy. If it feels pressed or uncomfortable, skip it and rest.",
+      "tr": "Mırıldanma bir çalışma adımıdır, tedavi değildir. Baskılı ya da rahatsız hissettirirse atla ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A soft example hum of about three seconds, so you can hear a steady tone; you hum at your own pitch.",
+      "tr": "Kararlı sesi duyman için yaklaşık üç saniyelik yumuşak bir örnek mırıldanma; sen kendi perdende mırıldanırsın."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Hum 3 times on “mm” at your own comfortable pitch, about 3 seconds each. Breathe normally and rest briefly between hums.",
+      "tr": "Kendi rahat perdende “mm” ile 3 kez, her biri yaklaşık 3 saniye mırıldan. Aralarda normal nefes al ve kısa dinlen."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each of the 3 hums stays steady: pitch spread (IQR) within 40 cents. Any pitch counts; there is no target note.",
+        "tr": "3 mırıldanmanın her biri kararlı kalır: perde yayılımı (IQR) 40 cent içinde. Her perde geçerlidir; hedef nota yok."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I hummed at an easy speaking volume.", "tr": "Rahat konuşma seviyesinde mırıldandım." },
+    { "en": "My lips touched softly, without pressing.", "tr": "Dudaklarım bastırmadan hafifçe birleşti." },
+    { "en": "My hum sounded as steady as the reference.", "tr": "Mırıldanmam referans kadar kararlı geldi." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the pitch drifts during the hum.", "tr": "Farklı nota: perde mırıldanma boyunca kayıyor." },
+      "fix": {
+        "en": "Hum a little softer and picture the flat line on screen before you start.",
+        "tr": "Biraz daha hafif mırıldan ve başlamadan önce ekrandaki düz çizgiyi gözünün önüne getir."
+      }
+    },
+    {
+      "error": { "en": "Different note: the pitch sinks at the end.", "tr": "Farklı nota: perde sonda düşüyor." },
+      "fix": {
+        "en": "End the hum while you still have easy air; two seconds is fine for now.",
+        "tr": "Rahat havan bitmeden mırıldanmayı bitir; şimdilik iki saniye de olur."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hum for 2 seconds instead of 3 and rest longer between tries.",
+    "tr": "3 yerine 2 saniye mırıldan ve denemeler arasında daha uzun dinlen."
+  },
+  "legacy": "R: vocal-04",
+  "minutes": 8,
+  "expertPending": true
+}

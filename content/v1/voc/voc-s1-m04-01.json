@@ -1,0 +1,89 @@
+{
+  "id": "voc-s1-m04-01",
+  "title": { "en": "Read a four-count rhythm", "tr": "Dört sayımlı ritmi oku" },
+  "goal": {
+    "en": "Sings quarter and half notes on 'ta' in time with the click.",
+    "tr": "Dörtlük ve ikilik notaları klikle birlikte 'ta' hecesiyle zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "A 4/4 bar has four quarter beats, counted 1 2 3 4. A quarter note lasts one count.",
+      "tr": "4/4 ölçüde 1 2 3 4 diye sayılan dört dörtlük vuruş vardır. Dörtlük nota bir sayı sürer."
+    },
+    {
+      "en": "One syllable can last more than one count. A half note is one 'ta' held through two counts: 'taa'.",
+      "tr": "Tek hece birden çok sayı sürebilir. İkilik nota iki sayı boyunca tutulan tek bir 'ta'dır: 'taa'."
+    },
+    {
+      "en": "A rest is silence while the pulse goes on. Keep counting through it. Silence does not forbid breathing.",
+      "tr": "Sus, nabız sürerken sessizliktir. Sus boyunca saymayı sürdür. Sessizlik nefes almayı yasaklamaz."
+    },
+    {
+      "en": "Tap and read silently first. Add your voice only when the counting feels easy.",
+      "tr": "Önce vur ve sessizce oku. Sayım rahatlayınca sesini ekle."
+    },
+    {
+      "en": "Sing 'ta' on any comfortable note. The 't' gives a clear start, so each new note lands right on its count.",
+      "tr": "'Ta'yı rahat bir notada söyle. 't' sesi net bir başlangıç verir; her yeni nota tam sayısına oturur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Click at ♩=60 and ♩=70; the two bars sung on 'ta' with a soft synthesized voice on one comfortable note.",
+      "tr": "♩=60 ve ♩=70'te klik; iki ölçü, rahat tek bir notada yumuşak sentez sesle 'ta' diye söylenir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Listen to one bar of click, then sing the two bars on 'ta'. Bar 1: ta, ta, taa (held on 3 and 4). Bar 2: taa (held on 1 and 2), ta, then rest on 4. Start at ♩=60 and move up to ♩=70.",
+      "tr": "Bir ölçü klik dinle, sonra iki ölçüyü 'ta' ile söyle. 1. ölçü: ta, ta, taa (3 ve 4'te tutulur). 2. ölçü: taa (1 ve 2'de tutulur), ta, ardından 4'te sus. ♩=60'ta başla, ♩=70'e çık."
+    },
+    "sequence": "4/4: q q h | h q qr",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each 'ta' started together with its click.",
+      "tr": "Her 'ta' kendi klikiyle birlikte başladı."
+    },
+    {
+      "en": "I held each 'taa' for two full counts.",
+      "tr": "Her 'taa'yı tam iki sayı tuttum."
+    },
+    {
+      "en": "I kept counting through the rest.",
+      "tr": "Sus boyunca saymayı sürdürdüm."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early on beat 1 of bar 2.", "tr": "Doğru, ama 2. ölçünün 1. vuruşunda erken." },
+      "fix": {
+        "en": "The half note in bar 1 is short-changed. Count '3, 4' inside the held 'taa' before the next one.",
+        "tr": "1. ölçüdeki ikilik nota kısalmış. Sonrakinden önce tutulan 'taa'nın içinde '3, 4' diye say."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the click.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve klik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Tap the two bars on your knee at ♩=50 first, then sing only bar 1 until it lands on the clicks.",
+    "tr": "Önce iki ölçüyü ♩=50'de dizine vur, sonra kliklere oturana kadar yalnız 1. ölçüyü söyle."
+  },
+  "legacy": "R: vocal-06",
+  "minutes": 10,
+  "expertPending": true
+}

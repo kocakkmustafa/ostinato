@@ -1,0 +1,90 @@
+{
+  "id": "voc-s3-m10-02",
+  "title": { "en": "Vowel shape and pitch stability", "tr": "Ünlü şekli ve perde kararlılığı" },
+  "goal": {
+    "en": "Moves through 'ah-eh-ee-oh-oo' on one held note, on do, mi and sol, with the pitch spread (IQR) within 30 cents.",
+    "tr": "Do, mi ve sol'de tek bir tutulan notada 'a-e-i-o-u' arasında geçer; perde yayılımı (IQR) 30 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "Last lesson each vowel had its own note. Now the vowels change inside one long note, without a new start.",
+      "tr": "Geçen derste her ünlünün kendi notası vardı. Şimdi ünlüler yeni bir başlangıç olmadan tek uzun notanın içinde değişir."
+    },
+    {
+      "en": "Move only the tongue, lips and jaw. The breath keeps flowing and the volume stays even.",
+      "tr": "Yalnız dili, dudakları ve çeneyi hareket ettir. Nefes akmaya devam eder, gürlük eşit kalır."
+    },
+    {
+      "en": "The app measures how much the pitch wobbles while you hold the note. A small spread means the vowel changes did not move the note.",
+      "tr": "Uygulama notayı tutarken perdenin ne kadar oynadığını ölçer. Küçük yayılım, ünlü değişiminin notayı oynatmadığını gösterir."
+    },
+    {
+      "en": "Change the vowels slowly, about one per beat and a half. A quick snap often makes a small bump in the pitch.",
+      "tr": "Ünlüleri yavaş değiştir, aşağı yukarı bir buçuk vuruşta bir. Ani bir geçiş perdede çoğu zaman küçük bir sıçrama yapar."
+    },
+    {
+      "en": "If you run short of air, end the note early and breathe. Don't hold your breath to make it last.",
+      "tr": "Havan yetmezse notayı erken bitir ve nefes al. Uzatmak için nefesini tutma."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do, mi and sol in your range, each held for eight beats while a vowel-formant voice moves 'ah-eh-ee-oh-oo' on one steady pitch.",
+      "tr": "Rahat menzilinde do, mi ve sol; her biri sekiz vuruş tutulur, ünlü-formantlı sentez ses tek ve sabit perdede 'a-e-i-o-u' arasında geçer."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Hold do for eight beats and move slowly through 'ah-eh-ee-oh-oo' without a new start. Breathe, then do the same on mi and on sol. Sing in your own octave.",
+      "tr": "Do'yu sekiz vuruş tut ve yeni başlangıç yapmadan 'a-e-i-o-u' arasında yavaşça geç. Nefes al, sonra aynısını mi ve sol'de yap. Kendi oktavında söyle."
+    },
+    "sequence": "1:w~w | 3:w~w | 5:w~w",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The vowels changed but the note did not.",
+      "tr": "Ünlüler değişti ama nota değişmedi."
+    },
+    {
+      "en": "I made no new start between the vowels.",
+      "tr": "Ünlüler arasında yeni bir başlangıç yapmadım."
+    },
+    {
+      "en": "The volume stayed even through all five vowels.",
+      "tr": "Gürlük beş ünlü boyunca eşit kaldı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the pitch wobbles at the vowel changes.",
+        "tr": "Doğru, ama ünlü geçişlerinde perde oynuyor."
+      },
+      "fix": {
+        "en": "Slow the change down. Let the mouth move gently from one shape to the next while the breath keeps flowing.",
+        "tr": "Geçişi yavaşlat. Nefes akmaya devam ederken ağız bir biçimden ötekine yumuşakça geçsin."
+      }
+    },
+    {
+      "error": { "en": "Different note, a little low at the end.", "tr": "Farklı nota: sonda biraz alçak." },
+      "fix": {
+        "en": "The note sank as the air ran out. End a little earlier and keep 'oo' as bright in your mind as 'ah'.",
+        "tr": "Hava azalırken nota çökmüş. Biraz daha erken bitir ve 'u'yu zihninde 'a' kadar parlak tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only three vowels, 'ah-oh-oo', and hold each note for four beats.",
+    "tr": "Yalnız üç ünlü kullan, 'a-o-u', ve her notayı dört vuruş tut."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,125 @@
+{
+  "id": "voc-s3-m11-04",
+  "title": {
+    "en": "Five-note scales across the passaggio",
+    "tr": "Geçiş bölgesinde 5 notalık gam"
+  },
+  "goal": {
+    "en": "Sings the five-note scale 1-2-3-4-5-4-3-2-1 through the break at ♩=60 with even, connected notes.",
+    "tr": "♩=60'ta 5 notalık 1-2-3-4-5-4-3-2-1 gamını geçiş bölgesinden eşit ve bağlı notalarla söyler."
+  },
+  "explanation": [
+    {
+      "en": "The five-note scale is do re mi fa sol and back: 1-2-3-4-5-4-3-2-1.",
+      "tr": "5 notalık gam do, re, mi, fa, sol ve geri dönüştür: 1-2-3-4-5-4-3-2-1."
+    },
+    {
+      "en": "The app places the scale in the upper middle of your comfortable range, so the break falls inside it. After the break-notes lesson in this module, it uses the notes you marked.",
+      "tr": "Uygulama gamı rahat menzilinin üst-orta bölgesine yerleştirir; böylece geçiş bölgesi gamın içine düşer. Bu modüldeki geçiş notaları dersinden sonra senin işaretlediğin notaları kullanır."
+    },
+    {
+      "en": "Keep every note the same size and lightness. Don't lean harder on the notes above the break.",
+      "tr": "Her notayı aynı büyüklükte ve hafiflikte tut. Geçiş bölgesinin üstündeki notalara daha çok yüklenme."
+    },
+    {
+      "en": "Join the notes into one smooth line. At ♩=60 you have time to feel each step.",
+      "tr": "Notaları tek, yumuşak bir çizgide birleştir. ♩=60'ta her adımı hissedecek zamanın var."
+    },
+    {
+      "en": "A crack or a sudden flip is normal while you learn. Make the sound lighter and slower, never louder.",
+      "tr": "Öğrenirken sesin kırılması ya da birden değişmesi normaldir. Sesi daha hafif ve daha yavaş yap, asla daha gür değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "1-2-3-4-5-4-3-2-1 on “oo” in the upper middle of your range, at ♩=60 and ♩=40.",
+      "tr": "Menzilinin üst-orta bölgesinde “u” ile 1-2-3-4-5-4-3-2-1; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing the scale 4 times on “oo” or “ah” at ♩=60, one note per click, holding the last 1 for two clicks. Rest between rounds. If sol feels tight, turn back at mi for that round.",
+      "tr": "Gamı ♩=60'ta “u” ya da “a” ile 4 kez söyle; her klike bir nota, son 1'i iki klik tut. Turlar arasında dinlen. Sol sıkışık gelirse o turda mi'den dön."
+    },
+    "sequence": "1-2-3-4 | 5-4-3-2 | 1:h hr | ×4",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each note felt the same size, above and below the break.",
+      "tr": "Her nota geçiş bölgesinin altında da üstünde de aynı büyüklükte geldi."
+    },
+    {
+      "en": "I stayed in a comfortable range.",
+      "tr": "Rahat menzilde kaldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, fa and sol a little low.",
+        "tr": "Farklı nota: fa ve sol biraz alçak."
+      },
+      "fix": {
+        "en": "Keep the light sound, but hear each top note a little higher before you sing it.",
+        "tr": "Hafif sesi koru, ama her üst notayı söylemeden önce kafanda biraz daha yüksek duy."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the pitch jumps at the break.",
+        "tr": "Farklı nota: perde geçiş bölgesinde sıçrıyor."
+      },
+      "fix": {
+        "en": "Slow down just before the break and make the sound lighter there. Let the higher notes get a little quieter.",
+        "tr": "Geçiş bölgesinden hemen önce yavaşla ve sesi orada hafiflet. Üstteki notaların biraz kısılmasına izin ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-2-3-2-1 in the same place until it feels easy, then add fa and sol.",
+    "tr": "Rahat gelene kadar aynı yerde 1-2-3-2-1 söyle, sonra fa ve sol'ü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

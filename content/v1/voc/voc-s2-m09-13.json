@@ -1,0 +1,101 @@
+{
+  "id": "voc-s2-m09-13",
+  "title": { "en": "One issue, same task", "tr": "Tek sorun, aynı görev" },
+  "goal": {
+    "en": "Picks one issue from the note results of a four-bar line, makes one correction, and measures the identical line again to compare.",
+    "tr": "Dört ölçülük bir dizinin nota sonuçlarından tek bir sorun seçer, tek bir düzeltme yapar ve aynı diziyi yeniden ölçerek karşılaştırır."
+  },
+  "explanation": [
+    {
+      "en": "After each attempt the app shows a result for every note: Correct, Different note, Couldn't hear. Pick only one of them to work on, the one that came up most.",
+      "tr": "Her denemeden sonra uygulama her nota için bir sonuç gösterir: Doğru, Farklı nota, Duyamadım. Üzerinde çalışmak için bunlardan yalnız birini seç; en çok çıkanı."
+    },
+    {
+      "en": "Make one correction for that issue. For a different note, hear the note first and hum the bar on 'mm'. For couldn't hear, sing a little closer and hold the note longer.",
+      "tr": "O sorun için tek bir düzeltme yap. Farklı nota için önce notayı duy ve ölçüyü 'mm' ile mırıldan. Duyamadım için biraz daha yakın söyle ve notayı daha uzun tut."
+    },
+    {
+      "en": "Then sing the identical task again: same line, same start note. If you change the task, it is a new comparison, not the same one.",
+      "tr": "Sonra aynı görevi yeniden söyle: aynı dizi, aynı başlangıç notası. Görevi değiştirirsen bu aynı karşılaştırma değil, yeni bir karşılaştırma olur."
+    },
+    {
+      "en": "Compare the chosen note across the two attempts: improved, unchanged or uncertain. All three are honest results.",
+      "tr": "Seçtiğin notayı iki denemede karşılaştır: iyileşti, değişmedi ya da belirsiz. Üçü de dürüst sonuçlardır."
+    },
+    {
+      "en": "Comfort is a stop decision, not a score. If effort grows, end the session; you don't have to run it again today.",
+      "tr": "Rahatlık bir durma kararıdır, puan değildir. Zorlanma artarsa oturumu bitir; bugün yeniden denemek zorunda değilsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four-bar line in your comfortable range, soft synthesized voice, slowly; the same start note for both attempts.",
+      "tr": "Özgün dört ölçülük dizi rahat menzilinde, yumuşak sentez ses, yavaş; iki denemede de aynı başlangıç notası."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Sing the four-bar line once on 'la'. Read the note results and choose one issue. Make one correction, then sing the same line again from the same start note.",
+      "tr": "Dört ölçülük diziyi bir kez 'la' ile söyle. Nota sonuçlarını oku ve tek bir sorun seç. Tek bir düzeltme yap, sonra aynı diziyi aynı başlangıç notasından yeniden söyle."
+    },
+    "sequence": "1-3-2-4 | 3:h 5:h | 4-3-2-7, | 1:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Sing the line twice. On the note you chose, the deviation in the second attempt is smaller than in the first.",
+        "tr": "Diziyi iki kez söyle. Seçtiğin notada ikinci denemedeki sapma birincidekinden küçük."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I chose one issue only.",
+      "tr": "Yalnız tek bir sorun seçtim."
+    },
+    {
+      "en": "The second attempt used the same line and the same start note.",
+      "tr": "İkinci deneme aynı diziyi ve aynı başlangıç notasını kullandı."
+    },
+    {
+      "en": "I can say whether the chosen note improved, stayed unchanged or is uncertain.",
+      "tr": "Seçtiğim notanın iyileştiğini, değişmediğini ya da belirsiz olduğunu söyleyebiliyorum."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, the low ti a little high.", "tr": "Farklı nota: alçak si biraz yüksek." },
+      "fix": {
+        "en": "Ti sits just a semitone under do. Sing do-ti-do slowly once, then sing bar 3 again.",
+        "tr": "Si, do'nun yalnız yarım ses altındadır. Bir kez yavaşça do-si-do söyle, sonra 3. ölçüyü yeniden söyle."
+      }
+    },
+    {
+      "error": { "en": "Different note on both attempts, same note.", "tr": "İki denemede de farklı nota, aynı notada." },
+      "fix": {
+        "en": "Change the correction, not the task: hum that bar on 'mm' once, then measure again. If it stays unchanged, leave it for another day.",
+        "tr": "Görevi değil, düzeltmeyi değiştir: o ölçüyü bir kez 'mm' ile mırıldan, sonra yeniden ölç. Değişmezse başka bir güne bırak."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Work on bars 1–2 only, twice, then on the whole line another day.",
+    "tr": "Yalnız 1–2. ölçüler üzerinde iki kez çalış, bütün diziye başka bir gün geç."
+  },
+  "legacy": "V: vocal-15",
+  "minutes": 8,
+  "expertPending": true
+}

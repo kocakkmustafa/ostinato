@@ -1,0 +1,135 @@
+{
+  "id": "voc-s1-m02-01",
+  "title": {
+    "en": "Pitch is different from volume",
+    "tr": "Perde ses seviyesinden farklıdır"
+  },
+  "goal": {
+    "en": "Tells pitch from loudness and moves a hum up or down without getting louder.",
+    "tr": "Perdeyi gürlükten ayırır; mırıldanmayı gürleşmeden yukarı ya da aşağı götürür."
+  },
+  "explanation": [
+    {
+      "en": "Pitch is how high or low a sound is. Volume is how loud it is. They are two separate things.",
+      "tr": "Perde, sesin ne kadar yüksek ya da alçak olduğudur. Ses seviyesi ne kadar gür olduğudur. İkisi ayrı şeylerdir."
+    },
+    {
+      "en": "High and low here mean pitch, not volume. A soft note can be high and a loud note can be low.",
+      "tr": "Buradaki 'yüksek' perde demektir, sesi açmak değil. Kısık çalan bir nota yüksek, gür çalan bir nota alçak olabilir."
+    },
+    {
+      "en": "A slightly higher note does not need more volume. Keep the same easy, speaking-level loudness as you move.",
+      "tr": "Biraz daha yüksek bir nota daha fazla gürlük istemez. Hareket ederken aynı rahat, konuşma düzeyindeki gürlüğü koru."
+    },
+    {
+      "en": "Work in a small, easy part of your voice. This lesson does not test how high or low you can go.",
+      "tr": "Sesinin küçük ve rahat bir bölümünde çalış. Bu ders ne kadar yükseğe ya da alçağa çıkabildiğini sınamaz."
+    },
+    {
+      "en": "For the hums, the microphone reads only the direction of the move, not an exact note.",
+      "tr": "Mırıldanmalarda mikrofon yalnız hareketin yönünü okur, tam notayı değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Question pairs in your chosen reference tone at mixed volumes; for the hums, a short example glide up and back, then down and back, at an easy volume.",
+      "tr": "Seçtiğin referans tınısıyla, farklı gürlüklerde soru çiftleri; mırıldanmalar için rahat gürlükte kısa bir örnek kaydırma: yukarı ve geri, sonra aşağı ve geri."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D",
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Part 1: 8 questions. Two notes play, sometimes at different volumes; choose the higher one. Part 2: hum one easy tone, glide a little higher and come back. Rest, then hum again, glide a little lower and come back.",
+      "tr": "1. bölüm: 8 soru. İki nota çalar, bazen farklı gürlükte; yüksek olanı seç. 2. bölüm: rahat bir ses mırıldan, biraz yukarı kay ve geri dön. Dinlen, sonra yeniden mırıldan, biraz aşağı kay ve geri dön."
+    },
+    "pass": {
+      "levelDefault": false,
+      "minCorrect": 7,
+      "text": {
+        "en": "At least 7 of 8 questions, and both hums move in the asked direction. Exact pitch is not scored.",
+        "tr": "8 sorunun en az 7'si ve iki mırıldanmanın ikisi de istenen yönde hareket eder. Tam perde puanlanmaz."
+      }
+    },
+    "drill": {
+      "type": "pitch_direction",
+      "count": 8,
+      "params": {
+        "range": [
+          "C3",
+          "C5"
+        ],
+        "minSemitones": 2,
+        "notes": 2,
+        "varyVolume": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My higher hum was not louder than my starting hum.",
+      "tr": "Yüksek mırıldanmam başlangıçtakinden daha gür değildi."
+    },
+    {
+      "en": "I came back to my starting tone after each glide.",
+      "tr": "Her kaydırmadan sonra başlangıç sesime döndüm."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the louder note was chosen as higher.",
+        "tr": "Farklı cevap: daha gür çalan nota yüksek seçildi."
+      },
+      "fix": {
+        "en": "Ignore the volume and listen for thin or deep. Replay both notes.",
+        "tr": "Gürlüğü boş ver; ince mi kalın mı, ona bak. İki notayı yeniden dinle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different direction: the hum went down instead of up.",
+        "tr": "Farklı yön: mırıldanma yukarı yerine aşağı gitti."
+      },
+      "fix": {
+        "en": "Replay the example glide. Think of a small step up, as if asking a question: 'mm?'",
+        "tr": "Örnek kaydırmayı yeniden dinle. Soru sorar gibi küçük bir adım yukarı düşün: 'mm?'"
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Hum a little longer and keep the phone at arm's length; a very soft hum is hard to read.",
+        "tr": "Biraz daha uzun mırıldan ve telefonu kol mesafesinde tut; çok hafif bir mırıldanma zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each pair as often as you like; the first rounds use wider gaps.",
+    "tr": "Her çifti istediğin kadar tekrar dinle; ilk turlarda aralar daha geniştir."
+  },
+  "legacy": "R: vocal-07",
+  "minutes": 8,
+  "expertPending": true
+}

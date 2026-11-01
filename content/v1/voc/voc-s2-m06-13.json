@@ -1,0 +1,120 @@
+{
+  "id": "voc-s2-m06-13",
+  "title": {
+    "en": "Interval checkpoint",
+    "tr": "Aralık geçişi"
+  },
+  "goal": {
+    "en": "Sings ten mixed intervals up and down, at least eight within 40 cents.",
+    "tr": "Yukarı ve aşağı karışık on aralık söyler; en az sekizi 40 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint mixes the module's intervals: M2, M3, m3, P4 and P5, two of each, up and down.",
+      "tr": "Bu geçiş modülün aralıklarını karıştırır: B2, B3, K3, T4 ve T5, her birinden iki tane, yukarı ve aşağı."
+    },
+    {
+      "en": "Warm up with the anchors before you start: do-re, do-mi, mi-sol, do-fa, do-sol.",
+      "tr": "Başlamadan dayanaklarla ısın: do-re, do-mi, mi-sol, do-fa, do-sol."
+    },
+    {
+      "en": "Before each interval, hear the target in your head and name it.",
+      "tr": "Her aralıktan önce hedefi içinden duy ve adını söyle."
+    },
+    {
+      "en": "The octave stays out of this checkpoint so every note sits in the middle of your range.",
+      "tr": "Bütün notalar menzilinin ortasında kalsın diye oktav bu geçişte yok."
+    },
+    {
+      "en": "Rest whenever you need to; the pause between intervals does not count.",
+      "tr": "Gerektiğinde dinlen; aralıklar arasındaki bekleme sayılmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The starting note of each interval plays first; the whole interval plays once after you sing it.",
+      "tr": "Her aralığın başlangıç notası önce çalar; aralığın tamamı sen söyledikten sonra bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Ten intervals: do-re, mi-do, do-sol, sol-re, mi-sol, la-fa, low sol to do, la-re, do to low la, re-do. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "On aralık: do-re, mi-do, do-sol, sol-re, mi-sol, la-fa, alttaki sol'den do'ya, la-re, do'dan alttaki la'ya, re-do. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1:q 2:h qr | 3:q 1:h qr | 1:q 5:h qr | 5:q 2:h qr | 3:q 5:h qr | 6:q 4:h qr | 5,:q 1:h qr | 6:q 2:h qr | 1:q 6,:h qr | 2:q 1:h qr",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 8 of 10 intervals with both notes within 40 cents (octave-folded).",
+        "tr": "10 aralığın en az 8'inde iki nota da 40 cent içinde (oktav katlanmış)."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I named each interval in my head before singing it.",
+      "tr": "Her aralığı söylemeden önce içimden adlandırdım."
+    },
+    {
+      "en": "I warmed up with the anchors.",
+      "tr": "Dayanaklarla ısındım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, m3 a semitone high.",
+        "tr": "Farklı nota: K3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "That is a major third. Keep the top note a little lower: mi-fa-sol has a half step in it.",
+        "tr": "Bu büyük üçlü olur. Üst notayı biraz daha alçak tut: mi-fa-sol'ün içinde bir yarım ses var."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high on the way down.",
+        "tr": "Farklı nota: inişte yarım ses yüksek."
+      },
+      "fix": {
+        "en": "The interval shrank. Let the lower note drop the full distance.",
+        "tr": "Aralık küçülmüş. Alttaki nota bütün mesafeyi insin."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Take a short rest after the first five intervals.",
+    "tr": "İlk beş aralıktan sonra kısa bir mola ver."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

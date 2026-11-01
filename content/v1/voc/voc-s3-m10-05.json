@@ -1,0 +1,84 @@
+{
+  "id": "voc-s3-m10-05",
+  "title": { "en": "Vowels on higher notes", "tr": "Yüksek notalarda ünlüler" },
+  "goal": {
+    "en": "Sings 1-3-5-3-1 in the upper part of the comfortable range on 'ee', 'ah' and 'oo', easing the vowel on sol, every note within 35 cents.",
+    "tr": "Rahat menzilin üst bölgesinde 1-3-5-3-1'i 'i', 'a' ve 'u' ile söyler; sol'de ünlüyü hafifçe değiştirir, her nota 35 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "Higher notes need a little more space in the mouth. Holding a vowel exactly as you speak it often makes high notes tight.",
+      "tr": "Yüksek notalar ağızda biraz daha fazla yer ister. Ünlüyü tam konuşurken olduğu gibi tutmak yüksek notaları çoğu zaman sıkıştırır."
+    },
+    {
+      "en": "Ease the vowel slightly on the top note: 'ee' opens a little toward 'eh', 'ah' rounds a little toward 'oh', 'oo' drops the jaw a little.",
+      "tr": "Üst notada ünlüyü hafifçe değiştir: 'i' biraz 'e'ye doğru açılır, 'a' biraz 'o'ya doğru yuvarlanır, 'u'da çene biraz düşer."
+    },
+    {
+      "en": "This is a small change. The word should still be clear, and the note stays where it is.",
+      "tr": "Bu küçük bir değişikliktir. Kelime yine anlaşılır kalmalı, nota da yerinde kalır."
+    },
+    {
+      "en": "The app places do in the upper part of your comfortable range, so sol is high but still easy. If sol feels tight, ask for a lower start.",
+      "tr": "Uygulama do'yu rahat menzilinin üst bölgesine yerleştirir; böylece sol yüksek ama yine kolay olur. Sol zorlarsa daha alçak bir başlangıç seç."
+    },
+    {
+      "en": "Keep the volume easy on the way up. Higher does not mean louder.",
+      "tr": "Çıkarken gürlüğü rahat tut. Daha yüksek, daha gür demek değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "1-3-5-3-1 in the upper part of your comfortable range, three times: on 'ee', 'ah' and 'oo', with the vowel eased on sol; vowel-formant voice.",
+      "tr": "Rahat menzilinin üst bölgesinde 1-3-5-3-1, üç kez: 'i', 'a' ve 'u' ile; sol'de ünlü hafifçe değişir; ünlü-formantlı sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Sing 1-3-5-3-1 three times: first on 'ee', then 'ah', then 'oo'. Ease the vowel a little on sol and hold the last 1. Breathe between rounds. Sing in your own octave.",
+      "tr": "1-3-5-3-1'i üç kez söyle: önce 'i', sonra 'a', sonra 'u' ile. Sol'de ünlüyü biraz değiştir ve son 1'i tut. Turlar arasında nefes al. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-3 | 1:h hr | 1-3-5-3 | 1:h hr | 1-3-5-3 | 1:h hr",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Sol felt easy after I eased the vowel.",
+      "tr": "Ünlüyü değiştirince sol kolay geldi."
+    },
+    {
+      "en": "The vowel was still clear on the top note.",
+      "tr": "Üst notada ünlü yine anlaşılırdı."
+    },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, sol a little low on 'ah'.", "tr": "Farklı nota: 'a'da sol biraz alçak." },
+      "fix": {
+        "en": "Opening to 'ah' can pull the note down. Hear sol first, then open the vowel without changing the note.",
+        "tr": "'A'ya açılmak notayı aşağı çekebilir. Önce sol'ü duy, sonra notayı değiştirmeden ünlüyü aç."
+      }
+    },
+    {
+      "error": { "en": "Different note, a little high on 'ee'.", "tr": "Farklı nota: 'i'de biraz yüksek." },
+      "fix": {
+        "en": "'Ee' feels brighter, so the voice tends to rise. Think of the note staying level and keep 'ee' as soft as 'ah'.",
+        "tr": "'İ' daha parlak gelir, ses yükselmeye eğilimlidir. Notayı aynı katta düşün ve 'i'yi 'a' kadar yumuşak tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Let the app start a whole step lower and sing only 'ah' and 'oo'.",
+    "tr": "Uygulama bir tam ses aşağıdan başlasın ve yalnız 'a' ile 'u'yu söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

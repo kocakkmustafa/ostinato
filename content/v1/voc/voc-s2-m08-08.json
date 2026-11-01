@@ -1,0 +1,84 @@
+{
+  "id": "voc-s2-m08-08",
+  "title": { "en": "Soft singing without breathiness", "tr": "Hafif ama nefessiz olmayan ses" },
+  "goal": {
+    "en": "Sings four notes at p with a clear, non-breathy tone, each within 40 cents.",
+    "tr": "Dört notayı p'de, hışırtısız net bir sesle söyler; her biri 40 cent içinde kalır."
+  },
+  "explanation": [
+    {
+      "en": "Soft is not the same as breathy. A soft tone is small but clear; a breathy tone lets extra air hiss through.",
+      "tr": "Hafif ile hışırtılı aynı şey değildir. Hafif ses küçük ama nettir; hışırtılı seste fazladan hava ıslık gibi sızar."
+    },
+    {
+      "en": "Start each note on a gentle “mm”, then open to “oo”. The hum helps the tone stay focused as it gets softer.",
+      "tr": "Her notaya hafif bir “mm” ile başla, sonra “u”ya aç. Mırıldanma, ses hafifledikçe odaklı kalmasına yardım eder."
+    },
+    {
+      "en": "Soft notes tend to sink. Hear the note clearly in your head and keep the vowel bright.",
+      "tr": "Hafif notalar düşmeye meyillidir. Notayı içinden net duy ve ünlüyü parlak tut."
+    },
+    {
+      "en": "Aim for your p from the earlier lesson. If the meter says “Couldn't hear”, add a little tone, not more air.",
+      "tr": "Önceki dersteki p'ini hedefle. Gösterge “Duyamadım” derse daha fazla hava değil, biraz daha ses ekle."
+    },
+    {
+      "en": "The microphone checks the pitch. Whether the tone is clear or breathy, you judge by comparing with the reference.",
+      "tr": "Mikrofon perdeyi denetler. Sesin net mi hışırtılı mı olduğuna referansla karşılaştırarak sen karar verirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do, mi, sol and mi from your comfortable range, each sung softly on “mm-oo” with a clear tone, followed by a rest.",
+      "tr": "Rahat menzilinden do, mi, sol ve mi; her biri “mm-u” ile hafif ve net bir sesle söylenir, ardından sus gelir."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Sing do, mi, sol and mi softly on “mm-oo”, two counts each with a rest after. Then compare your tone with the reference and tick the checklist. Sing in your own octave.",
+      "tr": "Do, mi, sol ve mi'yi “mm-u” ile hafifçe söyle; her biri iki sayım, arkasından sus. Sonra sesini referansla karşılaştır ve kontrol listesini işaretle. Kendi oktavında söyle."
+    },
+    "sequence": "1:h hr | 3:h hr | 5:h hr | 3:h hr",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All 4 soft notes within 40 cents, and every item on the checklist ticked.",
+        "tr": "4 hafif notanın dördü de 40 cent içinde ve kontrol listesindeki her madde işaretli."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My soft notes sounded clear, like the reference, not airy.", "tr": "Hafif notalarım havalı değil, referans gibi net duyuldu." },
+    { "en": "I did not run out of air on any note.", "tr": "Hiçbir notada havam bitmedi." },
+    { "en": "My throat stayed relaxed while I sang softly.", "tr": "Hafif söylerken boğazım gevşek kaldı." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the soft note sinks.", "tr": "Farklı nota: hafif nota düşüyor." },
+      "fix": {
+        "en": "Think the note a touch higher and keep the “oo” bright, as if smiling slightly.",
+        "tr": "Notayı içinden bir tık yüksek düşün ve “u”yu hafif gülümser gibi parlak tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Too much air and too little tone. Hum the “mm” a little longer before opening the vowel.",
+        "tr": "Hava fazla, ses az. Ünlüyü açmadan önce “mm”yi biraz daha uzun mırıldan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the notes on “mm” only, without opening to “oo”.",
+    "tr": "Notaları “u”ya açmadan yalnız “mm” ile söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

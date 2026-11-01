@@ -1,0 +1,89 @@
+{
+  "id": "voc-s3-m10-03",
+  "title": { "en": "Forward resonance with \"ng\"", "tr": "\"ng\" ile öne yerleşim" },
+  "goal": {
+    "en": "Sings 1-2-3-2-1 on a light \"ng\" and keeps every note within 35 cents.",
+    "tr": "1-2-3-2-1'i hafif bir \"ng\" ile söyler ve her notayı 35 cent içinde tutar."
+  },
+  "explanation": [
+    {
+      "en": "\"Ng\" is the sound at the end of 'sing'. The back of the tongue touches the soft palate and the sound comes out through the nose.",
+      "tr": "\"Ng\", 'renk' kelimesindeki n sesidir. Dilin arkası yumuşak damağa değer ve ses burundan çıkar."
+    },
+    {
+      "en": "Keep the jaw loose and the lips lightly apart. Only the tongue closes the sound.",
+      "tr": "Çeneyi gevşek, dudakları hafif aralık tut. Sesi yalnız dil kapatır."
+    },
+    {
+      "en": "You may feel a light buzz around the nose and front teeth. Let it come; don't press to make it stronger.",
+      "tr": "Burnun ve ön dişlerin çevresinde hafif bir titreşim hissedebilirsin. Gelmesine izin ver; güçlendirmek için bastırma."
+    },
+    {
+      "en": "\"Ng\" needs little air and little volume. Keep it as soft as an easy hum.",
+      "tr": "\"Ng\" az hava ve az gürlük ister. Onu rahat bir mırıldanma kadar yumuşak tut."
+    },
+    {
+      "en": "Glide gently from note to note but arrive on each one; the app checks each note's pitch.",
+      "tr": "Notadan notaya yumuşakça geç ama her birine otur; uygulama her notanın perdesine bakar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "1-2-3-2-1 in your range on a soft hummed \"ng\" sound, about one second per note.",
+      "tr": "Rahat menzilinde yumuşak bir \"ng\" mırıltısıyla 1-2-3-2-1, nota başına yaklaşık bir saniye."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Say 'sing' and stay on the \"ng\". Then sing 1-2-3-2-1 on \"ng\", about one second per note, and hold the last 1. Do it three times with a breath between. Sing in your own octave.",
+      "tr": "'Renk' de ve \"ng\"de kal. Sonra 1-2-3-2-1'i \"ng\" ile söyle, nota başına yaklaşık bir saniye; son 1'i tut. Aralarda nefes alarak üç kez yap. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-2 | 1:h hr",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The jaw stayed loose and the tongue made the \"ng\".",
+      "tr": "Çene gevşek kaldı ve \"ng\"yi dil yaptı."
+    },
+    {
+      "en": "The sound stayed soft; I did not press for more buzz.",
+      "tr": "Ses yumuşak kaldı; daha çok titreşim için bastırmadım."
+    },
+    {
+      "en": "My last 1 felt like the same note as my first 1.",
+      "tr": "Son 1'im ilk 1'imle aynı nota gibi geldi."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "A soft \"ng\" is quiet. Move the phone a little closer instead of singing louder.",
+        "tr": "Yumuşak bir \"ng\" sessizdir. Daha yüksek söylemek yerine telefonu biraz yaklaştır."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the start, then it slides into place.",
+        "tr": "Farklı nota: başta, sonra yerine kayıyor."
+      },
+      "fix": {
+        "en": "Hear the note in your head before you sing, then start softly right on it.",
+        "tr": "Söylemeden önce notayı kafanda duy, sonra yumuşakça tam üstünden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only 1-2-1 on \"ng\", then the full line.",
+    "tr": "Önce yalnız 1-2-1'i \"ng\" ile söyle, sonra tam diziyi."
+  },
+  "minutes": 7,
+  "expertPending": true
+}

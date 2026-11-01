@@ -1,0 +1,95 @@
+{
+  "id": "voc-s2-m07-05",
+  "title": { "en": "Singing in three", "tr": "Üç zamanda söylemek" },
+  "goal": {
+    "en": "Sings an original eight-bar melody in 3/4 with the accompaniment at ♩=80.",
+    "tr": "Özgün sekiz ölçülük 3/4 ezgiyi ♩=80'de eşlikle söyler."
+  },
+  "explanation": [
+    {
+      "en": "3/4 has three beats in each bar. Count '1 2 3' and lean a little on 1.",
+      "tr": "3/4'te her ölçüde üç vuruş vardır. '1 2 3' diye say ve 1'e biraz yaslan."
+    },
+    {
+      "en": "A half note plus a quarter fills one bar. A dotted half fills it alone.",
+      "tr": "Bir ikilik ve bir dörtlük bir ölçüyü doldurur. Noktalı ikilik onu tek başına doldurur."
+    },
+    {
+      "en": "Bars 1–4: do-mi, sol-mi, fa-mi-re, then mi with a rest on beat 3 for a breath.",
+      "tr": "1–4. ölçüler: do-mi, sol-mi, fa-mi-re, sonra mi ve 3. vuruşta nefes için bir sus."
+    },
+    {
+      "en": "Bars 5–8 start the same way, rise to la, then step down and end on do for the whole bar.",
+      "tr": "5–8. ölçüler aynı başlar, la'ya çıkar, sonra basamakla iner ve bütün ölçü boyunca do'da biter."
+    },
+    {
+      "en": "The app picks the starting note from your comfortable range. Sing on 'la', or on the numbers.",
+      "tr": "Uygulama başlangıç notasını rahat menzilinden seçer. 'La' ile ya da sayılarla söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The original melody in your comfortable range, soft synthesized voice, at ♩=80 and ♩=55, over an original waltz accompaniment (bass on 1, chords on 2 and 3) with a click. Headphones recommended.",
+      "tr": "Özgün ezgi rahat menzilinde, yumuşak sentez ses, ♩=80 ve ♩=55; özgün vals eşliği (1'de bas, 2 ve 3'te akor) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the eight bars on 'la'. Start at ♩=55 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra sekiz ölçüyü 'la' ile söyle. İstersen ♩=55'te başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "3/4: 1:h 3:q | 5:h 3:q | 4-3-2 | 3:h qr | 1:h 3:q | 5:h 6:q | 5-4-2 | 1:h.",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I felt beat 1 of each bar a little stronger.",
+      "tr": "Her ölçünün 1. vuruşunu biraz daha güçlü hissettim."
+    },
+    {
+      "en": "The half notes lasted two full beats.",
+      "tr": "İkilikler tam iki vuruş sürdü."
+    },
+    { "en": "I breathed in the rest in bar 4.", "tr": "4. ölçüdeki susta nefes aldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early on beat 3.", "tr": "Doğru, ama 3. vuruşta erken." },
+      "fix": {
+        "en": "The half note is cut short. Hold it through beat 2, then sing beat 3.",
+        "tr": "İkilik kısalıyor. 2. vuruş boyunca tut, sonra 3. vuruşu söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, la in bar 6 a little low.",
+        "tr": "Farklı nota: 6. ölçüdeki la biraz alçak."
+      },
+      "fix": {
+        "en": "Hear la as one step above sol before you sing it.",
+        "tr": "Söylemeden önce la'yı sol'ün bir basamak üstü olarak duy."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop bars 1–4 at ♩=60, then bars 5–8, then join them.",
+    "tr": "1–4. ölçüleri ♩=60'ta döngüle, sonra 5–8. ölçüleri; ardından birleştir."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

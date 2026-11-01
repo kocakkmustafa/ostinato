@@ -1,0 +1,88 @@
+{
+  "id": "voc-s2-m09-15",
+  "title": { "en": "Melodic-memory checkpoint", "tr": "Ezgi hafızası geçişi" },
+  "goal": {
+    "en": "Echoes three new two-bar melodies and sings the sixteen-bar Ode to Joy theme in a personal key at ♩=90.",
+    "tr": "Üç yeni iki ölçülük ezgiyi yankılar ve on altı ölçülük Neşeye Övgü temasını kişisel tonda ♩=90'da söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the Level 2 test.",
+      "tr": "Bu geçiş Seviye 2 testini açar."
+    },
+    {
+      "en": "Part 1, echo: the app plays three new two-bar melodies at ♩=70. Sing each one back with its notes and rhythm, in your own octave.",
+      "tr": "1. bölüm, yankı: uygulama ♩=70'te üç yeni iki ölçülük ezgi çalar. Her birini notası ve ritmiyle kendi oktavında geri söyle."
+    },
+    {
+      "en": "Part 2, repertoire: the Ode to Joy theme, all sixteen bars, at ♩=90. Sing it from memory if you can; the line on screen is allowed.",
+      "tr": "2. bölüm, repertuvar: Neşeye Övgü temasının on altı ölçüsünün hepsi, ♩=90. Yapabiliyorsan ezberden söyle; ekrandaki diziye bakmak serbesttir."
+    },
+    {
+      "en": "Use your map: A stops open on re, A' closes on do, B drops to the sol below do. If that low sol is not comfortable, sing it an octave up; it counts the same.",
+      "tr": "Haritanı kullan: A açık olarak re'de durur, A' do'da kapanır, B do'nun altındaki sol'e iner. Alçak sol rahat değilse bir oktav yukarıda söyle; aynı sayılır."
+    },
+    {
+      "en": "Each part must pass on its own; a passed part is kept, so you only redo the other one.",
+      "tr": "Her bölüm kendi başına geçmeli; geçen bölüm saklanır, yalnız diğerini tekrarlarsın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S", "KL"],
+    "brief": {
+      "en": "Part 1: three generated two-bar melodies on degrees 1–5 at ♩=70 over the click, each followed by two bars for your answer. Part 2: the Ode to Joy theme in your comfortable range at ♩=90, over an original simple chord accompaniment (I, IV, V). Headphones recommended.",
+      "tr": "1. bölüm: ♩=70'te klik üzerinde 1–5. derecelerden üretilmiş üç iki ölçülük ezgi; her birinin ardından cevabın için iki ölçü. 2. bölüm: Neşeye Övgü teması rahat menzilinde ♩=90'da, özgün basit akor eşliğiyle (I, IV, V). Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Part 1: echo 3 new two-bar melodies on 'la' at ♩=70. Part 2: listen to one bar of the accompaniment, then sing the sixteen bars of the Ode to Joy theme on 'la' at ♩=90. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "1. bölüm: ♩=70'te 3 yeni iki ölçülük ezgiyi 'la' ile yankıla. 2. bölüm: eşlikten bir ölçü dinle, sonra Neşeye Övgü temasının on altı ölçüsünü ♩=90'da 'la' ile söyle. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "3-3-4-5 | 5-4-3-2 | 1-1-2-3 | 3:q. 2:e 2:h | 3-3-4-5 | 5-4-3-2 | 1-1-2-3 | 2:q. 1:e 1:h | 2-2-3-1 | 2:q 3:e 4:e 3:q 1:q | 2:q 3:e 4:e 3:q 2:q | 1:q 2:q 5,:h | 3-3-4-5 | 5-4-3-2 | 1-1-2-3 | 2:q. 1:e 1:h",
+    "tempo": { "open": 90, "target": 90 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Echo: at least 2 of 3 melodies at the Level 2 pitch and timing criteria. Melody: the sixteen bars at the Level 2 pitch and timing criteria at ♩=90.",
+        "tr": "Her bölüm kendi başına geçer. Yankı: 3 ezginin en az 2'si Seviye 2 perde ve zamanlama ölçütünde. Ezgi: on altı ölçü ♩=90'da Seviye 2 perde ve zamanlama ölçütünde."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note in bar 2 of an echo.", "tr": "Bir yankının 2. ölçüsünde farklı nota." },
+      "fix": {
+        "en": "Bar 1 filled your memory. Replay the melody and listen only to bar 2, then sing both bars.",
+        "tr": "1. ölçü belleğini doldurmuş. Ezgiyi yeniden dinle ve yalnız 2. ölçüye kulak ver, sonra iki ölçüyü birden söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early on the eighth after the dotted note.", "tr": "Doğru, ama noktalı notadan sonraki sekizlikte erken." },
+      "fix": {
+        "en": "Hold the dotted note through beat 2, then let the eighth slip in just before beat 3. Say 'laa-a la' in rhythm first.",
+        "tr": "Noktalı notayı 2. vuruş boyunca tut, sekizliği 3. vuruştan hemen önce sıkıştır. Önce ritimde 'laa-a la' diye konuş."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo 'Echo a two-bar melody' or 'Ode to Joy theme', then retake only that part.",
+    "tr": "Geçmeyen bölüm için 'İki ölçülük ezgiyi yankıla' ya da 'Neşeye Övgü teması' dersini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "repertoire": "Ode to Joy theme, Ludwig van Beethoven (1770–1827), Symphony No. 9 (1824; first edition 1826). Public domain, legal review pending. Theme only, no words, sung on 'la'; Ostinato simplification in even rhythm (the original's syncopated entry before the last phrase is not used). Degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

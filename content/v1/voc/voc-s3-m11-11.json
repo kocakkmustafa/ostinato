@@ -1,0 +1,143 @@
+{
+  "id": "voc-s3-m11-11",
+  "title": {
+    "en": "Vocal load and recovery",
+    "tr": "Ses yükü ve toparlanma"
+  },
+  "goal": {
+    "en": "Answers 5 voice-load questions and plans a practice week with short blocks, lighter days and rest.",
+    "tr": "5 ses yükü sorusunu yanıtlar ve kısa bloklar, hafif günler ve dinlenme içeren bir çalışma haftası planlar."
+  },
+  "explanation": [
+    {
+      "en": "Vocal load is all the voice use in your day: singing, talking, and talking over noise.",
+      "tr": "Ses yükü gün içindeki bütün ses kullanımıdır: şarkı söylemek, konuşmak ve gürültünün üstünden konuşmak."
+    },
+    {
+      "en": "Register work is light but focused. Spread it over short blocks rather than one long session.",
+      "tr": "Register çalışması hafif ama yoğundur. Onu tek uzun oturum yerine kısa bloklara yay."
+    },
+    {
+      "en": "After a heavy talking day, plan a shorter and lighter session, or a day without singing practice.",
+      "tr": "Yoğun konuşulan bir günün ardından daha kısa ve hafif bir oturum ya da şarkı çalışmasız bir gün planla."
+    },
+    {
+      "en": "Rest means quiet. Whispering or hard throat clearing is not rest; swallow or take a sip of water instead.",
+      "tr": "Dinlenme sessizlik demektir. Fısıldamak ya da boğazı sertçe temizlemek dinlenme değildir; onun yerine yutkun ya da bir yudum su iç."
+    },
+    {
+      "en": "Don't sing when you are hoarse, ill or very tired. End the session early when singing starts to take more effort.",
+      "tr": "Kısık, hasta ya da çok yorgunken söyleme. Söylemek daha çok çaba istemeye başlayınca oturumu erken bitir."
+    },
+    {
+      "en": "A simple plan helps: when you practise, in how many short blocks, and when you rest.",
+      "tr": "Basit bir plan yardımcı olur: ne zaman çalışacağın, kaç kısa blokta çalışacağın ve ne zaman dinleneceğin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; each question shows a short practice-day situation.",
+      "tr": "Referans ses yok; her soru kısa bir çalışma günü durumu gösterir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D",
+      "Ö"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Part 1: answer 5 questions. Each shows a practice-day situation; choose what to do: sip water and go on, take a quiet break, plan a shorter and lighter session, or end for today. Part 2: plan your coming week and tick each item on the checklist.",
+      "tr": "1. bölüm: 5 soruyu yanıtla. Her biri bir çalışma günü durumu gösterir; ne yapacağını seç: bir yudum su iç ve devam et, sessiz mola ver, daha kısa ve hafif bir oturum planla ya da bugünlük bitir. 2. bölüm: gelecek haftanı planla ve kontrol listesindeki her maddeyi işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "minCorrect": 5,
+      "text": {
+        "en": "All 5 questions correct, and every plan item ticked.",
+        "tr": "5 sorunun 5'i de doğru ve plan maddelerinin hepsi işaretli."
+      }
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 5,
+      "params": {
+        "set": "voice_load_plan",
+        "choices": [
+          "sip_and_go_on",
+          "quiet_break",
+          "shorter_lighter_session",
+          "end_for_today"
+        ],
+        "situations": [
+          "long_talking_day_before_practice",
+          "voice_tired_after_register_work",
+          "hoarse_or_ill_today",
+          "long_block_without_a_break",
+          "mouth_dry_voice_easy",
+          "effort_keeps_growing"
+        ]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I chose my practice days for the coming week.",
+      "tr": "Gelecek haftanın çalışma günlerini seçtim."
+    },
+    {
+      "en": "I split each session into short blocks with quiet breaks.",
+      "tr": "Her oturumu sessiz molalı kısa bloklara böldüm."
+    },
+    {
+      "en": "I planned a lighter session after a heavy talking day.",
+      "tr": "Yoğun konuşulan bir günün ardından daha hafif bir oturum planladım."
+    },
+    {
+      "en": "I planned at least one day without singing practice.",
+      "tr": "En az bir gün şarkı çalışmasız planladım."
+    },
+    {
+      "en": "I know when I will end a session early.",
+      "tr": "Bir oturumu ne zaman erken bitireceğimi biliyorum."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: “sip and go on” chosen after a long talking day.",
+        "tr": "Farklı cevap: uzun bir konuşma gününün ardından “yudum al ve devam et” seçildi."
+      },
+      "fix": {
+        "en": "Water does not replace rest. After a heavy talking day, plan a shorter, lighter session.",
+        "tr": "Su dinlenmenin yerini tutmaz. Yoğun konuşulan bir günün ardından daha kısa ve hafif bir oturum planla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: “quiet break” chosen for a hoarse voice.",
+        "tr": "Farklı cevap: kısık ses için “sessiz mola” seçildi."
+      },
+      "fix": {
+        "en": "A hoarse, ill or very tired voice means no singing today; a short break is not enough.",
+        "tr": "Kısık, hasta ya da çok yorgun bir ses bugün söylememek demektir; kısa bir mola yetmez."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Plan only the next three days first, then extend the plan to a week.",
+    "tr": "Önce yalnız önümüzdeki üç günü planla, sonra planı bir haftaya genişlet."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

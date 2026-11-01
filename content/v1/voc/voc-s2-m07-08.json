@@ -1,0 +1,91 @@
+{
+  "id": "voc-s2-m07-08",
+  "title": { "en": "Syncopation", "tr": "Senkop" },
+  "goal": {
+    "en": "Sings syncopated rhythms on one note, on time with the click at ♩=70.",
+    "tr": "♩=70'te senkoplu ritimleri tek notada, klikle zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "Syncopation puts a note on an off-beat, the 'and', and holds it over the next beat.",
+      "tr": "Senkop, notayı vuruş arasına, 've'ye koyar ve sonraki vuruşun üstünden tutar."
+    },
+    {
+      "en": "The basic pattern is short-long-short: an eighth, a quarter, an eighth. Say it 'ti-ta-ti'.",
+      "tr": "Temel kalıp kısa-uzun-kısadır: sekizlik, dörtlük, sekizlik. 'ti-ta-ti' diye söyle."
+    },
+    {
+      "en": "Count '1 and 2 and 3 and 4 and'. Each eighth falls on a number or on an 'and'.",
+      "tr": "'1 ve 2 ve 3 ve 4 ve' diye say. Her sekizlik ya bir sayıya ya da bir 've'ye düşer."
+    },
+    {
+      "en": "Don't sing again on the beat that a long note covers. Feel the beat pass inside the note.",
+      "tr": "Uzun notanın üstünden geçtiği vuruşta yeniden söyleme. Vuruşun notanın içinden geçtiğini hisset."
+    },
+    {
+      "en": "Sing on one comfortable note, your do. The microphone checks your timing here.",
+      "tr": "Tek rahat notada, kendi do'nda söyle. Burada mikrofon zamanlamanı ölçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then the four bars on one note in your range, sung on 'ta', at ♩=70 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde tek notada 'ta' ile söylenen dört ölçü; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "After the count-in, sing the four bars once on your comfortable do on 'ta'. Keep counting the eighths in your head so each off-beat note lands on its 'and'.",
+      "tr": "Giriş sayımından sonra dört ölçüyü rahat do'nda 'ta' ile bir kez söyle. Sekizlikleri içinden saymayı sürdür; vuruş arasındaki her nota kendi 've'sine düşsün."
+    },
+    "sequence": "4/4: e q e q q | e q e h | q e q e q | e q e q qr",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The off-beat notes landed on the 'and', between the clicks.",
+      "tr": "Vuruş arasındaki notalar kliklerin arasına, 've'ye düştü."
+    },
+    {
+      "en": "I did not sing again on the beat inside a long note.",
+      "tr": "Uzun notanın içindeki vuruşta yeniden söylemedim."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late on the off-beat note.", "tr": "Doğru, ama vuruş arasındaki notada geç." },
+      "fix": {
+        "en": "You are waiting for the next click. Sing on the 'and', halfway between two clicks.",
+        "tr": "Sonraki kliği bekliyorsun. İki klik arasının tam ortasında, 've'de söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early after the long note.", "tr": "Doğru, ama uzun notadan sonra erken." },
+      "fix": {
+        "en": "The long note is cut short. Hold it across the click before you move on.",
+        "tr": "Uzun nota kısalıyor. Devam etmeden önce onu klik boyunca tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Speak 'ti-ta-ti' at ♩=55 while you tap your foot on the beat, then sing it.",
+    "tr": "♩=55'te ayağınla vuruşa vururken 'ti-ta-ti' de, sonra söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

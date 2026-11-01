@@ -1,0 +1,100 @@
+{
+  "id": "voc-s1-m01-06",
+  "title": { "en": "Start and release a short tone", "tr": "Kısa sesi başlat ve bırak" },
+  "goal": {
+    "en": "Starts 4 short tones softly on the click at ♩=60 and releases each one gently.",
+    "tr": "♩=60'ta 4 kısa sesi klikte yumuşakça başlatır ve her birini hafifçe bırakır."
+  },
+  "explanation": [
+    {
+      "en": "Every tone has a start and an end. Aim for an easy start and a gentle release.",
+      "tr": "Her sesin bir başlangıcı ve bir sonu vardır. Rahat bir başlangıç ve hafif bir bırakış hedefle."
+    },
+    {
+      "en": "Avoid a hard click in the throat at the start, and avoid a big puff of air before the tone.",
+      "tr": "Başlangıçta boğazda sert bir tık sesinden ve sesten önce büyük bir hava patlamasından kaçın."
+    },
+    {
+      "en": "“mm” starts with closed lips; “ha” starts with a light breath. Let the tone begin together with the breath.",
+      "tr": "“mm” kapalı dudakla, “ha” hafif bir nefesle başlar. Ses nefesle birlikte başlasın."
+    },
+    {
+      "en": "Each tone lasts two beats, then two beats of silence. Release by simply stopping; don't push a final accent.",
+      "tr": "Her ses iki vuruş sürer, ardından iki vuruş sessizlik gelir. Bırakmak için yalnızca dur; sona vurgu yapma."
+    },
+    {
+      "en": "Ending a tone does not mean locking the breath. Keep breathing normally in the rests.",
+      "tr": "Sesi bitirmek nefesi kilitlemek demek değildir. Suslarda normal nefes almaya devam et."
+    },
+    {
+      "en": "Start each tone on the click. The screen shows whether you started early or late.",
+      "tr": "Her sese klikte başla. Ekran erken mi geç mi başladığını gösterir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=60 and ♩=40; a soft example tone on 1 for two beats, then two beats of silence.",
+      "tr": "♩=60 ve ♩=40'ta klik; 1 üzerinde iki vuruşluk yumuşak bir örnek ses, ardından iki vuruş sessizlik."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "With the click at ♩=60, sing 4 short tones on your comfortable 1: “mm”, “mm”, “ha”, “ha”. Each lasts two beats, followed by two beats of silence.",
+      "tr": "♩=60'taki klikle rahat 1'inde 4 kısa ses söyle: “mm”, “mm”, “ha”, “ha”. Her biri iki vuruş sürer, ardından iki vuruş sessizlik gelir."
+    },
+    "sequence": "1:h hr | 1:h hr | 1:h hr | 1:h hr",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 3 of the 4 tones start within 100 ms of the click, on a steady pitch.",
+        "tr": "4 sesin en az 3'ü kliğe 100 ms içinde ve kararlı bir perdede başlar."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each tone began without a click in my throat.", "tr": "Her ses boğazımda tık sesi olmadan başladı." },
+    { "en": "I ended each tone without a pushed final accent.", "tr": "Her sesi sona vurgu yapmadan bitirdim." },
+    { "en": "I breathed normally in the rests.", "tr": "Suslarda normal nefes aldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Breathe in during the last beat of the rest so the tone is ready on the click.",
+        "tr": "Susun son vuruşunda nefes al; ses kliğe hazır olsun."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "Wait for the click and let it start the tone; don't guess ahead of it.",
+        "tr": "Kliği bekle ve sesi onunla başlat; önceden tahmin etme."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the start, then it slides into place.",
+        "tr": "Başta farklı nota, sonra kayarak yerine oturuyor."
+      },
+      "fix": {
+        "en": "Hear the note in your head before you sing, then start softly right on it.",
+        "tr": "Söylemeden önce notayı kafanda duy, sonra yumuşakça tam üstünden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing for one beat and rest for three, at the slow tempo.",
+    "tr": "Yavaş tempoda bir vuruş söyle, üç vuruş dinlen."
+  },
+  "legacy": "R: vocal-05",
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,91 @@
+{
+  "id": "voc-s3-m10-06",
+  "title": { "en": "Vowels in your languages", "tr": "Dillerindeki ünlüler" },
+  "goal": {
+    "en": "Sings a four-bar original line with words in a language they speak, keeping that language's vowels clear and every note within 35 cents.",
+    "tr": "Konuştuğu bir dilde sözlerle dört ölçülük özgün bir dizi söyler; o dilin ünlülerini açık tutar ve her nota 35 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "Every language has its own vowels. Turkish has eight, English has more, and some languages have rounded vowels like 'ö' and 'ü'.",
+      "tr": "Her dilin kendi ünlüleri vardır. Türkçede sekiz ünlü vardır, İngilizcede daha fazla; bazı dillerde 'ö' ve 'ü' gibi yuvarlak ünlüler bulunur."
+    },
+    {
+      "en": "Sing each vowel the way it sounds in your language, held long and pure. Don't turn every vowel into 'ah'.",
+      "tr": "Her ünlüyü kendi dilinde nasıl duyuluyorsa öyle söyle; uzun ve saf tut. Her ünlüyü 'a'ya çevirme."
+    },
+    {
+      "en": "Speak the words slowly first and notice the vowel in each syllable. Then sing them on the line.",
+      "tr": "Önce sözleri yavaşça konuş ve her hecedeki ünlüyü fark et. Sonra onları dizinin üstünde söyle."
+    },
+    {
+      "en": "The line has one syllable per note: four in bars 1 and 3, three in bars 2 and 4, where the last note is held. Use the example words or write your own with the same count.",
+      "tr": "Dizide nota başına bir hece vardır: 1. ve 3. ölçüde dört, 2. ve 4. ölçüde üç; son nota tutulur. Örnek sözleri kullan ya da aynı sayıda kendi sözlerini yaz."
+    },
+    {
+      "en": "Example words: 'Wa-ter in the / ri-ver flows, / wind a-cross the / mea-dow goes.'",
+      "tr": "Örnek sözler: 'De-re-de-ki / su a-kar, / ça-yır-da-ki / yel e-ser.'"
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four-bar line in your range on 'la', then with the example words, vowel-formant voice, with a click at ♩=70 and ♩=50.",
+      "tr": "Özgün dört ölçülük dizi rahat menzilinde önce 'la' ile, sonra örnek sözlerle; ünlü-formantlı sentez ses, klikle ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Speak your words slowly once. Then sing the four bars with the click at ♩=70, one syllable per note, and hold the last note of bars 2 and 4. The microphone checks pitch and timing. Then compare with the reference and tick the checklist. Sing in your own octave.",
+      "tr": "Sözlerini bir kez yavaşça konuş. Sonra dört ölçüyü klikle ♩=70'te söyle, nota başına bir hece; 2. ve 4. ölçünün son notasını tut. Mikrofon perdeyi ve zamanlamayı kontrol eder. Sonra referansla karşılaştır ve kontrol listesini işaretle. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-3 | 4-3-2:h | 3-4-5-5 | 4-2-1:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each vowel sounded the way it does in my language.",
+      "tr": "Her ünlü kendi dilimdeki gibi duyuldu."
+    },
+    {
+      "en": "I held the vowels, not the consonants.",
+      "tr": "Ünsüzleri değil, ünlüleri tuttum."
+    },
+    {
+      "en": "Someone who speaks the language could follow the words.",
+      "tr": "O dili konuşan biri sözleri takip edebilirdi."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear the repeated note.",
+        "tr": "Tekrarlanan notayı duyamadım."
+      },
+      "fix": {
+        "en": "Two syllables on the same note need a clear restart. Give each one its consonant and a tiny gap.",
+        "tr": "Aynı notadaki iki hece net bir yeniden başlangıç ister. Her birine ünsüzünü ve küçük bir boşluk ver."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The consonant is taking too long. Start it a hair before the beat so the vowel lands on the beat.",
+        "tr": "Ünsüz çok uzun sürüyor. Ünlü vuruşa otursun diye ünsüzü vuruştan bir tık önce başlat."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the line on 'la' first, then on the vowels only, then with the words.",
+    "tr": "Diziyi önce 'la' ile, sonra yalnız ünlülerle, sonra sözlerle söyle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

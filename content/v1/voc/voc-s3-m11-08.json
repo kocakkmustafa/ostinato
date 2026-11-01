@@ -1,0 +1,127 @@
+{
+  "id": "voc-s3-m11-08",
+  "title": {
+    "en": "Volume near the break",
+    "tr": "Geçiş yakınında gürlük"
+  },
+  "goal": {
+    "en": "Sings three notes climbing into the break softly, each at least 6 dB below a medium do and within 35 cents.",
+    "tr": "Geçiş bölgesine çıkan üç notayı, her biri orta gürlükteki bir do'dan en az 6 dB hafif ve 35 cent içinde olacak biçimde yumuşak söyler."
+  },
+  "explanation": [
+    {
+      "en": "Near the break, many singers push harder to get through. That makes the jump bigger. Getting softer works better.",
+      "tr": "Geçiş bölgesine yaklaşınca birçok şarkıcı geçmek için daha çok zorlar. Bu sıçramayı büyütür. Hafiflemek daha iyi işler."
+    },
+    {
+      "en": "First sing do once at your comfortable medium volume. That note sets your own level; there is no fixed loudness target.",
+      "tr": "Önce do'yu rahat, orta gürlüğünde bir kez söyle. O nota senin kendi düzeyini belirler; sabit bir gürlük hedefi yoktur."
+    },
+    {
+      "en": "Then sing 1-2-3 softly, climbing into your break. Soft still means a clear, steady tone, not a whisper.",
+      "tr": "Sonra 1-2-3'ü yumuşak söyle; geçiş bölgene doğru çık. Yumuşak yine de net ve kararlı bir ses demektir, fısıltı değil."
+    },
+    {
+      "en": "The app compares your soft notes with your medium do and checks each pitch. Soft notes often sag a little, so hear them slightly higher.",
+      "tr": "Uygulama yumuşak notalarını orta gürlükteki do'nla karşılaştırır ve her perdeyi denetler. Yumuşak notalar çoğu zaman biraz düşer; onları kafanda biraz daha yüksek duy."
+    },
+    {
+      "en": "Never shout. Your strongest sound is only your comfortable strong voice.",
+      "tr": "Asla bağırma. En güçlü sesin yalnız rahat, güçlü sesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Do at a medium volume, then 1-2-3 softly, in your range, climbing into your break.",
+      "tr": "Rahat menzilinde, orta gürlükte bir do, ardından geçiş bölgene çıkan yumuşak 1-2-3."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Sing do once at your comfortable medium volume and hold it. Then sing 1-2-3 softly on “oo”, holding each note, with 3 the longest. The app places the notes so they climb into your break.",
+      "tr": "Do'yu rahat, orta gürlüğünde bir kez söyle ve tut. Sonra “u” ile 1-2-3'ü yumuşak söyle; her notayı tut, en uzun 3'ü tut. Uygulama notaları geçiş bölgene doğru çıkacak biçimde yerleştirir."
+    },
+    "sequence": "1:w | 1:h 2:h | 3:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each of the three soft notes is at least 6 dB softer than your medium do and within 35 cents of its target.",
+        "tr": "Üç yumuşak notanın her biri orta gürlükteki do'ndan en az 6 dB hafif ve hedefinin 35 cent içindedir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2",
+    "V3"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My soft notes were still clear, not breathy.",
+      "tr": "Yumuşak notalarım yine de netti, hışırtılı değildi."
+    },
+    {
+      "en": "I got softer, not harder, going into the break.",
+      "tr": "Geçiş bölgesine girerken zorlanmadım, hafifledim."
+    },
+    {
+      "en": "I stayed in a comfortable range.",
+      "tr": "Rahat menzilde kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but not soft enough: less than 6 dB below your medium do.",
+        "tr": "Doğru, ama yeterince yumuşak değil: orta gürlükteki do'nun 6 dB altına inmiyor."
+      },
+      "fix": {
+        "en": "Sing the medium do a little fuller, then let the soft notes really back off, as if singing to someone close by.",
+        "tr": "Orta gürlükteki do'yu biraz daha dolgun söyle, sonra yumuşak notalarda gerçekten geri çekil; yakınındaki birine söyler gibi."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota: biraz alçak."
+      },
+      "fix": {
+        "en": "Soft notes tend to sag. Keep the breath flowing and hear each note slightly higher.",
+        "tr": "Yumuşak notalar düşmeye eğilimlidir. Nefesi akışta tut ve her notayı kafanda biraz daha yüksek duy."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Soft is not a whisper. Keep a clear, steady tone and bring the phone a little closer.",
+        "tr": "Yumuşak, fısıltı değildir. Net ve kararlı bir ses tut ve telefonu biraz yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use two notes, 1-2, until the soft version feels easy, then add 3.",
+    "tr": "Yumuşak hâli rahat gelene kadar iki nota kullan, 1-2; sonra 3'ü ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

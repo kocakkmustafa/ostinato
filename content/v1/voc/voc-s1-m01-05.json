@@ -1,0 +1,83 @@
+{
+  "id": "voc-s1-m01-05",
+  "title": { "en": "Lip trills and gentle slides", "tr": "Dudak titreşimi ve yumuşak kaydırma" },
+  "goal": {
+    "en": "Slides smoothly from 1 up to 3 and back on a lip trill or hum, without a break, four times.",
+    "tr": "Dudak titreşimi ya da mırıldanmayla 1'den 3'e çıkıp geri iner; sesi kesmeden dört kez kayar."
+  },
+  "explanation": [
+    {
+      "en": "A lip trill is the “brr” sound of loose lips fluttering on the breath, like a child copying a motor.",
+      "tr": "Dudak titreşimi, gevşek dudakların nefesle titreyerek çıkardığı “brr” sesidir; çocukların motor taklidi gibi."
+    },
+    {
+      "en": "Keep the lips loose and the breath gentle. If the lips stop fluttering, press lightly on your cheeks with two fingers.",
+      "tr": "Dudaklarını gevşek, nefesini hafif tut. Dudaklar titremeyi bırakırsa iki parmakla yanaklarına hafifçe bastır."
+    },
+    {
+      "en": "If a trill doesn't come, hum on “mm” or sing a soft “vvv”. Each one counts the same.",
+      "tr": "Titreşim gelmezse “mm” ile mırıldan ya da hafif bir “vvv” söyle. Hepsi aynı sayılır."
+    },
+    {
+      "en": "Start on your comfortable 1 (do), slide up to 3 (mi) and back down without stopping the sound. Two whole steps is a small, easy distance.",
+      "tr": "Rahat 1'inden (do) başla, sesi kesmeden 3'e (mi) çık ve geri in. İki tam ses küçük ve rahat bir mesafedir."
+    },
+    {
+      "en": "The screen draws your pitch as a curve. Only the shape is checked: up first, then back down.",
+      "tr": "Ekran perdeni bir eğri olarak çizer. Yalnız biçime bakılır: önce yukarı, sonra aşağı."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A soft, slow 1→3→1 glide of about three seconds in your comfortable range.",
+      "tr": "Rahat menzilinde yaklaşık üç saniyelik yumuşak ve yavaş bir 1→3→1 kayması."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Do 4 slides on a lip trill (or “mm”): from 1 up to 3 and back to 1. Keep the sound going through each slide; breathe and rest between slides.",
+      "tr": "Dudak titreşimiyle (ya da “mm” ile) 4 kayma yap: 1'den 3'e çık ve 1'e dön. Her kaymada sesi kesme; kaymalar arasında nefes al ve dinlen."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In at least 3 of 4 slides the pitch curve goes up, then back down, without a break in the sound. Exact notes are not scored.",
+        "tr": "4 kaymanın en az 3'ünde perde eğrisi önce yükselir, sonra iner ve ses kesilmez. Notaların tam yeri puanlanmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The sound kept going from the start to the end of each slide.", "tr": "Ses her kaymanın başından sonuna kesilmedi." },
+    { "en": "My lips stayed loose.", "tr": "Dudaklarım gevşek kaldı." },
+    { "en": "The top of each slide felt easy.", "tr": "Her kaymanın tepesi rahat geldi." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear: the trill breaks off.", "tr": "Duyamadım: titreşim kesiliyor." },
+      "fix": {
+        "en": "Let a little more gentle breath through, or switch to “mm” for now.",
+        "tr": "Biraz daha hafif nefes ver ya da şimdilik “mm”e geç."
+      }
+    },
+    {
+      "error": { "en": "Different note: the curve goes up but does not come back down.", "tr": "Farklı nota: eğri yükseliyor ama geri inmiyor." },
+      "fix": {
+        "en": "Picture the whole shape before you start: up, then straight back home to 1.",
+        "tr": "Başlamadan önce bütün biçimi düşün: yukarı, sonra doğrudan 1'e, eve dönüş."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Slide only from 1 to 2 and back until it feels easy, then go up to 3.",
+    "tr": "Rahat gelene kadar yalnız 1'den 2'ye kayıp dön, sonra 3'e çık."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

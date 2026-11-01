@@ -1,0 +1,91 @@
+{
+  "id": "voc-s2-m07-02",
+  "title": { "en": "Rests and breaths in rhythm", "tr": "Ritimde sus ve nefes" },
+  "goal": {
+    "en": "Breathes in the rests and comes back in on the click across four bars at ♩=70.",
+    "tr": "♩=70'te dört ölçü boyunca suslarda nefes alır ve klikte yeniden girer."
+  },
+  "explanation": [
+    {
+      "en": "A rest is silence that still counts. The beat keeps going while you are quiet.",
+      "tr": "Sus, sayılan sessizliktir. Sen sustuğunda da vuruş devam eder."
+    },
+    {
+      "en": "Rests are your breathing places. Breathe in quietly during the rest, not in a quick gasp just before the next note.",
+      "tr": "Suslar nefes yerlerindir. Susta sessizce nefes al; sonraki notadan hemen önce telaşla değil."
+    },
+    {
+      "en": "End the note before a rest cleanly. Let it stop on the beat where the rest begins.",
+      "tr": "Sustan önceki notayı temiz bitir. Sus hangi vuruşta başlıyorsa nota orada dursun."
+    },
+    {
+      "en": "Bar 3 begins with a rest. Breathe on beat 1 and come in on beat 2.",
+      "tr": "3. ölçü susla başlar. 1. vuruşta nefes al, 2. vuruşta gir."
+    },
+    {
+      "en": "A breath is not a breath hold. Keep the air moving and your shoulders loose.",
+      "tr": "Nefes almak nefes tutmak değildir. Hava aksın, omuzların gevşek kalsın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then the four bars on one note in your range, sung on 'ta' and 'ti-ti', at ♩=70 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde tek notada 'ta' ve 'ti-ti' ile söylenen dört ölçü; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "After the count-in, sing the four bars twice on your comfortable do, with 'ta' for quarters and 'ti-ti' for eighths. Breathe in every rest and come back in on the click.",
+      "tr": "Giriş sayımından sonra dört ölçüyü rahat do'nda iki kez söyle: dörtlüklerde 'ta', sekizliklerde 'ti-ti'. Her susta nefes al ve klikte yeniden gir."
+    },
+    "sequence": "4/4: q q q qr | ee ee h | qr q q q | h hr | ×2",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I breathed during the rests, not just before a note.",
+      "tr": "Nefesi notadan hemen önce değil, susta aldım."
+    },
+    {
+      "en": "I came back in on the click after each rest.",
+      "tr": "Her sustan sonra klikte yeniden girdim."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late after a rest.", "tr": "Doğru, ama sustan sonra geç." },
+      "fix": {
+        "en": "Start the breath as soon as the rest begins, so you are ready before the click.",
+        "tr": "Nefese sus başlar başlamaz başla; klikten önce hazır ol."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early in bar 3.", "tr": "Doğru, ama 3. ölçüde erken." },
+      "fix": {
+        "en": "Bar 3 starts with silence. Count '1' as your breath and sing on '2'.",
+        "tr": "3. ölçü sessizlikle başlar. '1'i nefesin olarak say ve '2'de söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only bars 3–4 at ♩=55 until the entry on beat 2 feels easy, then sing the whole line.",
+    "tr": "2. vuruştaki giriş rahatlayana kadar yalnız 3–4. ölçüleri ♩=55'te söyle, sonra bütün diziyi söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

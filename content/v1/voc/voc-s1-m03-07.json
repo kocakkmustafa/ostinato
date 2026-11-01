@@ -1,0 +1,113 @@
+{
+  "id": "voc-s1-m03-07",
+  "title": {
+    "en": "Descending first",
+    "tr": "Önce iniş"
+  },
+  "goal": {
+    "en": "Sings the descending lines 5-4-3-2-1 and 8-7-6-5, starting on the top note.",
+    "tr": "5-4-3-2-1 ve 8-7-6-5 inen dizilerini üst notadan başlayarak söyler."
+  },
+  "explanation": [
+    {
+      "en": "Starting at the top is a new skill: you have to hear the top note before you sing.",
+      "tr": "Üstten başlamak yeni bir beceridir: söylemeden önce üst notayı duyman gerekir."
+    },
+    {
+      "en": "The reference plays the starting note first. Hear it in your head, then start softly right on it.",
+      "tr": "Referans önce başlangıç notasını çalar. Onu kafanda duy, sonra yumuşakça tam üstünden başla."
+    },
+    {
+      "en": "Coming down, the half steps are do–ti and fa–mi. They tend to drift wide, so keep them small.",
+      "tr": "İnerken yarım sesler do–si ve fa–mi'dir. Açılmaya meyillidirler; küçük tut."
+    },
+    {
+      "en": "Let the voice get lighter as it goes down; don't press on the low notes.",
+      "tr": "İnerken sesi hafiflet; pes notalara bastırma."
+    },
+    {
+      "en": "8-7-6-5 starts on the top do. If 8 is not comfortable, sing that line an octave lower.",
+      "tr": "8-7-6-5 üstteki do'dan başlar. 8 rahat değilse o diziyi bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "5-4-3-2-1 and 8-7-6-5 in your comfortable range, slow; each line's first note plays alone first.",
+      "tr": "Rahat menzilinde 5-4-3-2-1 ve 8-7-6-5, yavaş; her dizinin ilk notası önce tek başına çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Hear the starting note, then sing 5-4-3-2-1. Rest, hear 8, then sing 8-7-6-5. About one second per note. Sing in your own octave.",
+      "tr": "Başlangıç notasını dinle, sonra 5-4-3-2-1'i söyle. Dinlen, 8'i dinle, sonra 8-7-6-5'i söyle. Her nota yaklaşık bir saniye. Kendi oktavında söyle."
+    },
+    "sequence": "5-4-3-2-1 | 8-7-6-5",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard the first note in my head before I started.",
+      "tr": "Başlamadan önce ilk notayı içimden duydum."
+    },
+    {
+      "en": "Fa to mi on the way down stayed small.",
+      "tr": "İnerken fa'dan mi'ye adım küçük kaldı."
+    },
+    {
+      "en": "The low notes stayed light.",
+      "tr": "Pes notalar hafif kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Descending lines tend to sink. Think each step slightly higher on the way down.",
+        "tr": "İnen diziler çökmeye meyillidir. İnerken her basamağı biraz daha yüksek düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, ti a semitone low.",
+        "tr": "Farklı nota: si yarım ses alçak."
+      },
+      "fix": {
+        "en": "Ti is a half step below do; aim it close to the top do.",
+        "tr": "Si, do'nun yarım ses altındadır; onu üstteki do'ya yakın hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the start, then it slides into place.",
+        "tr": "Başta farklı nota, sonra kayarak yerine oturuyor."
+      },
+      "fix": {
+        "en": "Hear the note in your head before you sing, then start softly right on it.",
+        "tr": "Söylemeden önce notayı kafanda duy, sonra yumuşakça tam üstünden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 3-2-1 first, then 5-4-3-2-1. For the top line, start with 8-7 only.",
+    "tr": "Önce 3-2-1'i söyle, sonra 5-4-3-2-1'i. Üst dizide önce yalnız 8-7 ile başla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

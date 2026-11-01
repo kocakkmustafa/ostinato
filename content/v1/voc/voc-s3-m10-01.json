@@ -1,0 +1,90 @@
+{
+  "id": "voc-s3-m10-01",
+  "title": { "en": "Five pure vowels", "tr": "Beş saf ünlü" },
+  "goal": {
+    "en": "Sings the five vowels 'ah', 'eh', 'ee', 'oh', 'oo' on one note, each one within 35 cents.",
+    "tr": "Beş ünlüyü, 'a', 'e', 'i', 'o', 'u'yu tek notada söyler; her biri 35 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "A pure vowel keeps one shape from start to end. 'Oh' does not slide into 'oo', and 'eh' does not slide into 'ee'.",
+      "tr": "Saf ünlü baştan sona tek bir biçimde kalır. 'O' 'u'ya, 'e' 'i'ye kaymaz."
+    },
+    {
+      "en": "Each vowel has its own mouth shape: 'ah' open, 'eh' a little narrower, 'ee' with the tongue high, 'oh' rounded, 'oo' rounded and small.",
+      "tr": "Her ünlünün kendi ağız biçimi vardır: 'a' açık, 'e' biraz daha dar, 'i'de dil yüksek, 'o' yuvarlak, 'u' yuvarlak ve küçük."
+    },
+    {
+      "en": "Change only the mouth. The note, the volume and the breath stay the same for all five.",
+      "tr": "Yalnız ağzı değiştir. Nota, gürlük ve nefes beşinde de aynı kalır."
+    },
+    {
+      "en": "Some vowels pull the note: 'ee' tends to rise, 'oo' tends to sink. Hear the note before each vowel.",
+      "tr": "Bazı ünlüler notayı çeker: 'i' yükselmeye, 'u' alçalmaya eğilimlidir. Her ünlüden önce notayı içinden duy."
+    },
+    {
+      "en": "The app picks one comfortable note in the middle of your range. Sing at your easy volume.",
+      "tr": "Uygulama menzilinin ortasından rahat bir nota seçer. Rahat ses seviyende söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "One comfortable note in your range, sung on 'ah', 'eh', 'ee', 'oh', 'oo' with a vowel-formant voice, two beats each with a rest between.",
+      "tr": "Rahat menzilinde tek bir nota; ünlü-formantlı sentez sesle 'a', 'e', 'i', 'o', 'u', her biri iki vuruş, aralarında sus."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to the note, then sing it five times: 'ah', 'eh', 'ee', 'oh', 'oo'. Hold each vowel for two beats and rest for two. Keep each vowel the same from start to end. Sing in your own octave.",
+      "tr": "Notayı dinle, sonra beş kez söyle: 'a', 'e', 'i', 'o', 'u'. Her ünlüyü iki vuruş tut, iki vuruş dinlen. Her ünlü baştan sona aynı kalsın. Kendi oktavında söyle."
+    },
+    "sequence": "1:h hr | 1:h hr | 1:h hr | 1:h hr | 1:h hr",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each vowel kept one shape from start to end.",
+      "tr": "Her ünlü baştan sona tek biçimde kaldı."
+    },
+    {
+      "en": "All five vowels sounded like the same note.",
+      "tr": "Beş ünlü de aynı nota gibi duyuldu."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a little high on 'ee'.", "tr": "Farklı nota: 'i'de biraz yüksek." },
+      "fix": {
+        "en": "'Ee' feels brighter, so the voice tends to rise. Think of the note staying level and keep 'ee' as soft as 'ah'.",
+        "tr": "'İ' daha parlak gelir, ses yükselmeye eğilimlidir. Notayı aynı katta düşün ve 'i'yi 'a' kadar yumuşak tut."
+      }
+    },
+    {
+      "error": { "en": "Different note, a little low on 'oo'.", "tr": "Farklı nota: 'u'da biraz alçak." },
+      "fix": {
+        "en": "Rounding the lips can pull the note down. Keep the same energy as on 'ah' while the lips round.",
+        "tr": "Dudakları yuvarlamak notayı aşağı çekebilir. Dudaklar yuvarlanırken 'a'daki enerjiyi koru."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only 'ah', 'oh' and 'oo' first, then add 'eh' and 'ee'.",
+    "tr": "Önce yalnız 'a', 'o' ve 'u'yu söyle, sonra 'e' ve 'i'yi ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

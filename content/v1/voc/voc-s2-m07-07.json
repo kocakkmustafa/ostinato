@@ -1,0 +1,88 @@
+{
+  "id": "voc-s2-m07-07",
+  "title": { "en": "Upbeats", "tr": "Öncü vuruş" },
+  "goal": {
+    "en": "Starts four short original phrases on an upbeat, on time with the click at ♩=70.",
+    "tr": "Dört kısa özgün cümleye öncü vuruşla, ♩=70'te klikle zamanında başlar."
+  },
+  "explanation": [
+    {
+      "en": "An upbeat is a note before the first strong beat. The phrase starts in the middle of a bar and leans into the next beat 1.",
+      "tr": "Öncü vuruş, ilk güçlü vuruştan önce gelen notadır. Cümle ölçünün ortasında başlar ve sonraki 1. vuruşa yaslanır."
+    },
+    {
+      "en": "Count the rests before your entry. Breathe while you count, so the air is ready for the upbeat.",
+      "tr": "Girişinden önceki susları say. Sayarken nefes al; hava öncü vuruşa hazır olsun."
+    },
+    {
+      "en": "Keep the upbeat light. The weight goes to the beat 1 after it.",
+      "tr": "Öncü vuruşu hafif tut. Ağırlık arkasından gelen 1. vuruşa gider."
+    },
+    {
+      "en": "Phrase 1: the sol below do on beat 4, then do. Phrase 2: do on beat 4. Phrase 3: two eighths, mi-fa, on beat 4. Phrase 4: a two-beat upbeat, sol-fa.",
+      "tr": "1. cümle: 4. vuruşta do'nun altındaki sol, sonra do. 2. cümle: 4. vuruşta do. 3. cümle: 4. vuruşta iki sekizlik, mi-fa. 4. cümle: iki vuruşluk öncü, sol-fa."
+    },
+    {
+      "en": "If the low sol is not comfortable, sing it an octave up; it counts the same.",
+      "tr": "Alçak sol rahat değilse bir oktav yukarıda söyle; aynı sayılır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then the four two-bar phrases in your range at ♩=70 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde dört iki ölçülük cümle; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing the four phrases on 'la' or in solfège. Each one starts after rests: count them, breathe, and come in on the upbeat with the click. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra dört cümleyi 'la' ile ya da solfejle söyle. Her biri suslardan sonra başlar: onları say, nefes al ve klikle öncü vuruşta gir. Kendi oktavında söyle."
+    },
+    "sequence": "hr qr 5,:q | 1:h hr | hr qr 1:q | 3:q 2:q 1:h | hr qr 3:e 4:e | 5:h hr | hr 5:q 4:q | 3:q 2:q 1:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I counted the rests before each entry.", "tr": "Her girişten önce susları saydım." },
+    {
+      "en": "Each upbeat was light and led into beat 1.",
+      "tr": "Her öncü vuruş hafifti ve 1. vuruşa götürdü."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early on the upbeat.", "tr": "Doğru, ama öncü vuruşta erken." },
+      "fix": {
+        "en": "You come in before beat 4. Count '1 2 3' while you breathe and sing on '4'.",
+        "tr": "4. vuruştan önce giriyorsun. Nefes alırken '1 2 3' diye say ve '4'te söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late on the upbeat.", "tr": "Doğru, ama öncü vuruşta geç." },
+      "fix": {
+        "en": "Start the breath on beat 3, not on beat 4.",
+        "tr": "Nefese 4. vuruşta değil, 3. vuruşta başla."
+      }
+    },
+    {
+      "error": { "en": "Different note, the low sol is a step high.", "tr": "Farklı nota: alçak sol bir basamak yüksek." },
+      "fix": {
+        "en": "You sang la below do. Hear do, then drop a fourth to sol, like the reference.",
+        "tr": "Do'nun altındaki la'yı söylemişsin. Do'yu duy, sonra referanstaki gibi dörtlü inerek sol'e geç."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise one phrase at a time at ♩=55, then sing all four.",
+    "tr": "♩=55'te cümleleri tek tek çalış, sonra dördünü birden söyle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

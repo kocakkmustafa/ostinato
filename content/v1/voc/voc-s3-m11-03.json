@@ -1,0 +1,118 @@
+{
+  "id": "voc-s3-m11-03",
+  "title": {
+    "en": "Octave slides on \"oo\"",
+    "tr": "\"u\" ile oktav kaydırma"
+  },
+  "goal": {
+    "en": "Slides up an octave and back on “oo” without a break in the sound, four times.",
+    "tr": "“u” ile bir oktav yukarı kayıp geri döner; dört kez, sesi kesmeden."
+  },
+  "explanation": [
+    {
+      "en": "Start on a comfortable 1 (do), slide up to the top do and slide back. An octave spans eight degrees.",
+      "tr": "Rahat bir 1'den (do) başla, üst do'ya kay ve geri kay. Oktav sekiz dereceye uzanır."
+    },
+    {
+      "en": "“Oo” keeps the mouth small and the sound light. Round your lips as for a soft “who”.",
+      "tr": "“U” ağzı küçük, sesi hafif tutar. Dudaklarını yumuşak bir “hu” der gibi yuvarla."
+    },
+    {
+      "en": "The app starts the slide low in your range, so the top do stays easy and the break falls in the middle of the slide.",
+      "tr": "Uygulama kaymayı menzilinin alt tarafından başlatır; böylece üst do rahat kalır ve geçiş bölgesi kaymanın ortasına düşer."
+    },
+    {
+      "en": "Slide at an even speed. Don't rush the middle; that is where the voice wants to jump.",
+      "tr": "Eşit hızla kay. Ortada acele etme; ses en çok orada sıçramak ister."
+    },
+    {
+      "en": "Go only as high as feels easy. If a top note feels tight, turn back earlier or skip it.",
+      "tr": "Yalnız rahat geldiği kadar yüksel. Bir üst nota sıkışık gelirse daha erken dön ya da onu atla."
+    },
+    {
+      "en": "A crack or a sudden flip is normal while you learn. Make the sound lighter and slower, never louder.",
+      "tr": "Öğrenirken sesin kırılması ya da birden değişmesi normaldir. Sesi daha hafif ve daha yavaş yap, asla daha gür değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "A soft “oo” slide from 1 up to the top do and back, about four seconds, starting low in your comfortable range.",
+      "tr": "Rahat menzilinin alt tarafından başlayan, 1'den üst do'ya ve geri, yaklaşık dört saniyelik yumuşak bir “u” kayması."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Do 4 octave slides on “oo”: start on 1, slide up to the top do, hold it briefly and slide back to 1. Keep the sound going; rest between slides. If the top do is not comfortable, turn back earlier.",
+      "tr": "“U” ile 4 oktav kayması yap: 1'den başla, üst do'ya kay, kısa tut ve 1'e geri kay. Sesi kesme; kaymalar arasında dinlen. Üst do rahat değilse daha erken dön."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In at least 3 of 4 slides the curve rises about an octave and comes back to your starting note, with no break in the sound and no jump larger than a half step.",
+        "tr": "4 kaymanın en az 3'ünde eğri yaklaşık bir oktav yükselir ve başlangıç notana döner; ses kesilmez, yarım sesten büyük sıçrama olmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The sound kept going through each slide.",
+      "tr": "Ses her kaymada kesilmedi."
+    },
+    {
+      "en": "The top do felt light, not pushed.",
+      "tr": "Üst do hafif geldi, zorlanmadı."
+    },
+    {
+      "en": "I came back to my starting note.",
+      "tr": "Başlangıç notama döndüm."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the pitch jumps at the break.",
+        "tr": "Farklı nota: perde geçiş bölgesinde sıçrıyor."
+      },
+      "fix": {
+        "en": "Slow down just before the break and make the sound lighter there. Let the higher notes get a little quieter.",
+        "tr": "Geçiş bölgesinden hemen önce yavaşla ve sesi orada hafiflet. Üstteki notaların biraz kısılmasına izin ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the slide stops short of the top do.",
+        "tr": "Farklı nota: kayma üst do'ya varmadan duruyor."
+      },
+      "fix": {
+        "en": "That is fine for today. Turn back where it feels easy; the top grows with easy practice, not with force.",
+        "tr": "Bugün için sorun değil. Rahat olduğu yerde dön; üst bölge zorlamayla değil, rahat çalışmayla gelişir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Slide a fifth instead, from 1 up to 5 and back, until the octave feels within reach.",
+    "tr": "Oktav ulaşılabilir gelene kadar onun yerine bir beşli kay: 1'den 5'e ve geri."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

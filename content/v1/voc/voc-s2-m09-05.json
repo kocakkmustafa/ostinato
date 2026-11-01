@@ -1,0 +1,84 @@
+{
+  "id": "voc-s2-m09-05",
+  "title": { "en": "Direction of three notes", "tr": "Üç notanın yönü" },
+  "goal": {
+    "en": "Hears three notes and chooses their contour: up, down or same for each move.",
+    "tr": "Üç notayı duyar ve konturunu seçer: her hareket için yukarı, aşağı ya da aynı."
+  },
+  "explanation": [
+    {
+      "en": "The contour is the outline of a melody: where it goes up, where it goes down and where it stays.",
+      "tr": "Kontur bir ezginin dış çizgisidir: nerede çıkar, nerede iner ve nerede aynı kalır."
+    },
+    {
+      "en": "Three notes make two moves. Each move is up, down or same, so a contour reads like 'up, down' or 'same, up'.",
+      "tr": "Üç nota iki hareket yapar. Her hareket yukarı, aşağı ya da aynıdır; böylece bir kontur 'yukarı, aşağı' ya da 'aynı, yukarı' diye okunur."
+    },
+    {
+      "en": "When you echo, the contour is the first thing to keep. If the shape is right, the sizes are easier to fix.",
+      "tr": "Yankılarken korunacak ilk şey konturdur. Biçim doğruysa büyüklükleri düzeltmek kolaylaşır."
+    },
+    {
+      "en": "If you are unsure, hum the three notes quietly after you hear them and feel which way your voice moves.",
+      "tr": "Emin değilsen üç notayı duyduktan sonra sessizce mırıldan ve sesinin hangi yöne gittiğini hisset."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays three notes in a row in your chosen reference tone.",
+      "tr": "Her soruda seçtiğin referans tınısıyla üç nota art arda çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Answer 10 questions. Listen to three notes and choose the matching shape: up, down or same for each move.",
+      "tr": "10 soruyu yanıtla. Üç notayı dinle ve uyan biçimi seç: her hareket için yukarı, aşağı ya da aynı."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 8 },
+    "drill": {
+      "type": "pitch_direction",
+      "count": 10,
+      "params": {
+        "range": ["C3", "C5"],
+        "minSemitones": 1,
+        "notes": 3,
+        "allowSame": true
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: “up, up” chosen for “up, same”.",
+        "tr": "Farklı cevap: “yukarı, aynı” için “yukarı, yukarı” seçildi."
+      },
+      "fix": {
+        "en": "A repeated note can feel like a small step. Replay and listen only to the last two notes.",
+        "tr": "Tekrarlanan bir nota küçük bir basamak gibi gelebilir. Yeniden dinle ve yalnız son iki notaya kulak ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: the direction of a semitone move.",
+        "tr": "Farklı cevap: yarım seslik bir hareketin yönü."
+      },
+      "fix": {
+        "en": "Half steps are the smallest moves. Hum the two notes slowly and feel your voice rise or fall.",
+        "tr": "Yarım sesler en küçük hareketlerdir. İki notayı yavaşça mırıldan ve sesinin çıktığını ya da indiğini hisset."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each question once and hum the three notes before you choose.",
+    "tr": "Her soruyu bir kez yeniden dinle ve seçmeden önce üç notayı mırıldan."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

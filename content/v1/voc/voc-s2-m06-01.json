@@ -1,0 +1,100 @@
+{
+  "id": "voc-s2-m06-01",
+  "title": {
+    "en": "What is an interval?",
+    "tr": "Aralık nedir?"
+  },
+  "goal": {
+    "en": "Describes an interval as the distance between two notes and names its number by counting degrees.",
+    "tr": "Aralığı iki nota arasındaki uzaklık olarak tanımlar ve dereceleri sayarak numarasını söyler."
+  },
+  "explanation": [
+    {
+      "en": "An interval is the distance between two notes. It tells you how far your voice moves.",
+      "tr": "Aralık iki nota arasındaki uzaklıktır. Sesinin ne kadar yol aldığını söyler."
+    },
+    {
+      "en": "Count the degrees with both ends included. Do to re is a second; do to mi, a third; do to sol, a fifth; do to the top do, an octave.",
+      "tr": "Dereceleri iki uç dahil say. Do'dan re'ye ikili, do'dan mi'ye üçlü, do'dan sol'e beşli, do'dan üst do'ya oktavdır."
+    },
+    {
+      "en": "A second is a step: the next note of the scale. A third or larger is a skip: you jump over notes.",
+      "tr": "İkili bir basamaktır: gamın bir sonraki notası. Üçlü ve daha büyüğü atlamadır: aradaki notaların üstünden geçersin."
+    },
+    {
+      "en": "An interval can go up or down. Mi down to do is still a third.",
+      "tr": "Aralık yukarı ya da aşağı gidebilir. Mi'den do'ya inmek de üçlüdür."
+    },
+    {
+      "en": "The number is only the first part of the name. Seconds and thirds come in major and minor sizes; fourths, fifths and octaves are called perfect. This module sings each one.",
+      "tr": "Numara adın yalnız ilk parçasıdır. İkili ve üçlülerin büyük ve küçük boyları vardır; dörtlü, beşli ve oktava tam denir. Bu modül her birini tek tek söyletir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Questions that ask by ear play two notes one after the other; the drill synthesizes them.",
+      "tr": "Kulakla sorulan sorularda iki nota art arda çalar; alıştırma bunları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Six questions. Some show two degrees on screen, some play two notes. Choose the interval number (second, third, fourth, fifth or octave), or say whether it is a step or a skip. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "Altı soru. Bazıları ekranda iki derece gösterir, bazıları iki nota çalar. Aralığın numarasını seç (ikili, üçlü, dörtlü, beşli ya da oktav) ya da basamak mı atlama mı olduğunu söyle. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 5
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 6,
+      "params": {
+        "set": [
+          "interval_number_2",
+          "interval_number_3",
+          "interval_number_4",
+          "interval_number_5",
+          "interval_number_8",
+          "step",
+          "skip"
+        ],
+        "show": [
+          "degrees",
+          "audio"
+        ]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: a third named a second.",
+        "tr": "Farklı cevap: üçlüye ikili denildi."
+      },
+      "fix": {
+        "en": "Count both ends: do, re, mi are three notes, so do to mi is a third.",
+        "tr": "İki ucu da say: do, re, mi üç notadır; do'dan mi'ye üçlüdür."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Say the scale names from the lower note to the upper one and count them on your fingers.",
+    "tr": "Alttaki notadan üstteki notaya kadar gam adlarını söyle ve parmaklarınla say."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

@@ -1,0 +1,112 @@
+{
+  "id": "voc-s2-m06-03",
+  "title": {
+    "en": "Major third",
+    "tr": "Büyük üçlü"
+  },
+  "goal": {
+    "en": "Sings a major third up and down.",
+    "tr": "Büyük üçlüyü çıkıcı ve inici söyler."
+  },
+  "explanation": [
+    {
+      "en": "A major third (M3) is two whole steps: do to mi. It skips one note in between.",
+      "tr": "Büyük üçlü (B3) iki tam sestir: do'dan mi'ye. Arada bir nota atlanır."
+    },
+    {
+      "en": "In the major scale you find it in three places: do-mi, fa-la and sol-ti.",
+      "tr": "Majör gamda üç yerde bulursun: do-mi, fa-la ve sol-si."
+    },
+    {
+      "en": "For M3, pass through re in your head before you land on mi.",
+      "tr": "B3 için mi'ye konmadan önce içinden re'den geç."
+    },
+    {
+      "en": "Aim the top note bright. A major third that sags becomes a minor third.",
+      "tr": "Üst notayı parlak hedefle. Sarkan büyük üçlü küçük üçlüye döner."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Each pair in your personal key, played once before you sing and once after for comparison.",
+      "tr": "Her çift kişisel tonunda; söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Six intervals: do-mi, mi-do, fa-la, la-fa, low sol to low ti, low ti to low sol. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "Altı aralık: do-mi, mi-do, fa-la, la-fa, alttaki sol'den alttaki si'ye, alttaki si'den alttaki sol'e. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1:q 3:h qr | 3:q 1:h qr | 4:q 6:h qr | 6:q 4:h qr | 5,:q 7,:h qr | 7,:q 5,:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "For M3 I passed re in my head.",
+      "tr": "B3 için içimden re'den geçtim."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, M3 a semitone low.",
+        "tr": "Farklı nota: B3 yarım ses alçak."
+      },
+      "fix": {
+        "en": "That is a minor third. Aim mi brighter: do-re-mi, two whole steps.",
+        "tr": "Bu küçük üçlü olur. Mi'yi daha parlak hedefle: do-re-mi, iki tam ses."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high on the way down.",
+        "tr": "Farklı nota: inişte yarım ses yüksek."
+      },
+      "fix": {
+        "en": "Going down, let the lower note drop two whole steps: mi-re-do.",
+        "tr": "İnerken alttaki notayı iki tam ses indir: mi-re-do."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing do-re-mi step by step first, then leave out re for M3.",
+    "tr": "Önce do-re-mi'yi basamak basamak söyle, sonra B3 için re'yi atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

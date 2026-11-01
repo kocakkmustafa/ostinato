@@ -1,0 +1,96 @@
+{
+  "id": "voc-s1-m04-06",
+  "title": { "en": "Folk melody: Frère Jacques", "tr": "Halk ezgisi: Frère Jacques" },
+  "goal": {
+    "en": "Sings the first eight bars of the traditional melody Frère Jacques in a personal key at ♩=80.",
+    "tr": "Geleneksel Frère Jacques ezgisinin ilk sekiz ölçüsünü kişisel tonda ♩=80'de söyler."
+  },
+  "explanation": [
+    {
+      "en": "Frère Jacques is a traditional French melody. Every bar comes twice, so you learn four short ideas, not eight.",
+      "tr": "Frère Jacques geleneksel bir Fransız ezgisidir. Her ölçü iki kez gelir; sekiz değil, dört kısa fikir öğrenirsin."
+    },
+    {
+      "en": "Bars 1–2: do-re-mi-do, steps up and back home. Bars 3–4: mi-fa-sol, with sol held for two beats.",
+      "tr": "1–2. ölçüler: do-re-mi-do, basamakla çıkıp eve dönüş. 3–4. ölçüler: mi-fa-sol; sol iki vuruş tutulur."
+    },
+    {
+      "en": "Bars 5–6 are the quick part: four eighth notes, sol-la-sol-fa, two per beat, then mi and do as quarters.",
+      "tr": "5–6. ölçüler hızlı bölümdür: dört sekizlik, sol-la-sol-fa, her vuruşa iki nota; ardından dörtlük olarak mi ve do."
+    },
+    {
+      "en": "Bars 7–8: do, the sol below do, then do held for two beats. If the low sol is not comfortable, sing it an octave up; it counts the same.",
+      "tr": "7–8. ölçüler: do, do'nun altındaki sol, sonra iki vuruş tutulan do. Alçak sol rahat değilse bir oktav yukarıda söyle; aynı sayılır."
+    },
+    {
+      "en": "The app picks the starting note from your comfortable range. Sing on 'la', or on the numbers.",
+      "tr": "Uygulama başlangıç notasını rahat menzilinden seçer. 'La' ile ya da sayılarla söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The first eight bars in your comfortable range, soft synthesized voice, at ♩=80 and ♩=55, over an original tonic-chord accompaniment with a soft beat. Headphones recommended.",
+      "tr": "İlk sekiz ölçü rahat menzilinde, yumuşak sentez ses, ♩=80 ve ♩=55; özgün tonik akor eşliği ve hafif vuruşla. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the eight bars on 'la'. Start at ♩=55 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra sekiz ölçüyü 'la' ile söyle. İstersen ♩=55'te başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "1-2-3-1 | 1-2-3-1 | 3-4 5:h | 3-4 5:h | 5:e 6:e 5:e 4:e 3:q 1:q | 5:e 6:e 5:e 4:e 3:q 1:q | 1-5, 1:h | 1-5, 1:h",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Bars 5–6 had two notes per beat, evenly.",
+      "tr": "5–6. ölçülerde her vuruşa eşit iki nota düştü."
+    },
+    {
+      "en": "I held sol in bars 3–4 and do in bars 7–8 for two full beats.",
+      "tr": "3–4. ölçülerde sol'ü, 7–8. ölçülerde do'yu tam iki vuruş tuttum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late in bars 5–6.", "tr": "Doğru, ama 5–6. ölçülerde geç." },
+      "fix": {
+        "en": "The eighths are rushing the breath. Say 'sol-la sol-fa mi do' in rhythm on one note first, then sing it.",
+        "tr": "Sekizlikler nefesi sıkıştırıyor. Önce 'sol-la sol-fa mi do'yu tek notada ritimde konuş, sonra söyle."
+      }
+    },
+    {
+      "error": { "en": "Different note, the low sol is a step high.", "tr": "Farklı nota: alçak sol bir basamak yüksek." },
+      "fix": {
+        "en": "You sang la below do. Hear do, then drop a fourth to sol, like the reference.",
+        "tr": "Do'nun altındaki la'yı söylemişsin. Do'yu duy, sonra referanstaki gibi dörtlü inerek sol'e geç."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop bars 5–6 at ♩=55 until the eighths are even, then sing all eight bars.",
+    "tr": "Sekizlikler eşitlenene kadar 5–6. ölçüleri ♩=55'te döngüle, sonra sekiz ölçünün hepsini söyle."
+  },
+  "repertoire": "Frère Jacques, traditional French melody (18th century). Public domain, legal review pending. Sung on 'la'; degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 12,
+  "expertPending": true
+}

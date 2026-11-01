@@ -1,0 +1,96 @@
+{
+  "id": "voc-s2-m09-07",
+  "title": { "en": "Au clair de la lune", "tr": "Au clair de la lune" },
+  "goal": {
+    "en": "Sings the first eight bars of the traditional melody Au clair de la lune in a personal key at ♩=80.",
+    "tr": "Geleneksel Au clair de la lune ezgisinin ilk sekiz ölçüsünü kişisel tonda ♩=80'de söyler."
+  },
+  "explanation": [
+    {
+      "en": "Au clair de la lune is a traditional French melody from the 18th century. Its first eight bars are one four-bar phrase sung twice.",
+      "tr": "Au clair de la lune 18. yüzyıldan geleneksel bir Fransız ezgisidir. İlk sekiz ölçüsü, iki kez söylenen tek bir dört ölçülük cümledir."
+    },
+    {
+      "en": "The phrase stays close to home: do, re and mi only. Bars 1–2: do-do-do-re, then mi and re for two beats each.",
+      "tr": "Cümle eve yakın kalır: yalnız do, re ve mi. 1–2. ölçüler: do-do-do-re, sonra ikişer vuruş mi ve re."
+    },
+    {
+      "en": "Bars 3–4: do-mi-re-re, then do held for a whole bar. Breathe at the end of bar 4, then sing the phrase again.",
+      "tr": "3–4. ölçüler: do-mi-re-re, sonra bütün bir ölçü tutulan do. 4. ölçünün sonunda nefes al, sonra cümleyi yeniden söyle."
+    },
+    {
+      "en": "Three repeated do's open the melody. Restart each one with a light 'l' so all three are heard, and keep them on the same pitch.",
+      "tr": "Ezgi üç tekrarlanan do ile açılır. Üçü de duyulsun diye her birini hafif bir 'l' ile yeniden başlat ve aynı perdede tut."
+    },
+    {
+      "en": "The app picks the starting note from your comfortable range. Sing on 'la', or on the numbers.",
+      "tr": "Uygulama başlangıç notasını rahat menzilinden seçer. 'La' ile ya da sayılarla söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The first eight bars in your comfortable range, soft synthesized voice, at ♩=80 and ♩=55, over an original simple chord accompaniment (I, V) with a soft beat. Headphones recommended.",
+      "tr": "İlk sekiz ölçü rahat menzilinde, yumuşak sentez ses, ♩=80 ve ♩=55; özgün basit akor eşliği (I, V) ve hafif vuruşla. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the eight bars on 'la'. Start at ♩=55 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra sekiz ölçüyü 'la' ile söyle. İstersen ♩=55'te başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "1-1-1-2 | 3:h 2:h | 1-3-2-2 | 1:w | 1-1-1-2 | 3:h 2:h | 1-3-2-2 | 1:w",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The three opening do's stayed on one pitch.",
+      "tr": "Açılıştaki üç do aynı perdede kaldı."
+    },
+    {
+      "en": "I held the last do of each phrase for a whole bar.",
+      "tr": "Her cümlenin son do'sunu bütün bir ölçü tuttum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, the repeated do's creep up.", "tr": "Farklı nota: tekrarlanan do'lar yükseliyor." },
+      "fix": {
+        "en": "Each restart pushes a little higher. Sing the three do's softly, as if speaking 'la la la' on one note.",
+        "tr": "Her yeniden başlangıç biraz yukarı itiyor. Üç do'yu hafifçe, tek notada 'la la la' der gibi söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early after the long do.", "tr": "Doğru, ama uzun do'dan sonra erken." },
+      "fix": {
+        "en": "The whole note lasts four beats. Count them inside and breathe on 4, then start the second phrase on 1.",
+        "tr": "Birlik nota dört vuruş sürer. İçinden say ve 4'te nefes al, sonra ikinci cümleye 1'de başla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the first four bars alone at ♩=55, then sing all eight.",
+    "tr": "♩=55'te yalnız ilk dört ölçüyü söyle, sonra sekizini birden."
+  },
+  "repertoire": "Au clair de la lune, traditional French melody (18th century). Public domain, legal review pending. First eight bars, sung on 'la'; degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,102 @@
+{
+  "id": "voc-s2-m08-05",
+  "title": { "en": "Phrase lengths and breathing windows", "tr": "Cümle süresi ve nefes araları" },
+  "goal": {
+    "en": "Sings an original four-bar line at ♩=70 and breathes only in the marked rests.",
+    "tr": "Özgün dört ölçülük diziyi ♩=70'te söyler ve yalnız işaretli suslarda nefes alır."
+  },
+  "explanation": [
+    {
+      "en": "Count “1 and 2 and 3 and 4 and”: each number is a beat, and each “and” is halfway to the next number. An eighth note lasts from a number to its “and”.",
+      "tr": "“1 ve 2 ve 3 ve 4 ve” say: her sayı bir vuruştur; her “ve” sonraki sayıya giden sürenin ortasındadır. Sekizlik nota bir sayıdan onun “ve”sine kadar sürer."
+    },
+    {
+      "en": "The line has two phrases of two bars. Each phrase ends with a quarter rest: that is your breathing window.",
+      "tr": "Dizide iki ölçülük iki cümle var. Her cümle bir dörtlük susla biter: orası senin nefes aralığındır."
+    },
+    {
+      "en": "Bar 3 has one short eighth rest. Use it only for a small top-up breath if you need it, or simply let the sound stop.",
+      "tr": "3. ölçüde kısa bir sekizlik sus var. Gerekirse yalnız küçük bir ek nefes için kullan ya da sadece sesin durmasına izin ver."
+    },
+    {
+      "en": "Before singing, find both breathing windows on the screen. Breathe in during the rest so the next note starts on time.",
+      "tr": "Söylemeden önce ekranda iki nefes aralığını bul. Nefesi sus sırasında al ki sonraki nota zamanında başlasın."
+    },
+    {
+      "en": "A long note never means hold your breath. Normal breathing is allowed whenever you need it; the written lengths are suggestions, not a target for your lungs.",
+      "tr": "Uzun nota hiçbir zaman nefes tut demek değildir. Gerektiğinde normal nefes her zaman serbesttir; yazılı süreler öneridir, ciğerlerin için hedef değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The four-bar line on “loo” in your comfortable range at ♩=70 and ♩=45, with a soft breath sound in each window and a click.",
+      "tr": "Dört ölçülük dizi “lu” ile rahat menzilinde ♩=70 ve ♩=45'te; her aralıkta yumuşak bir nefes sesi ve klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the click, then sing the four bars on “loo” at ♩=70. Breathe in the quarter rests at the end of bars 2 and 4. Sing in your own octave.",
+      "tr": "Bir ölçü klik dinle, sonra dört ölçüyü “lu” ile ♩=70'te söyle. 2. ve 4. ölçülerin sonundaki dörtlük suslarda nefes al. Kendi oktavında söyle."
+    },
+    "sequence": "1:q 2:q 3:q 5:q | 4:q 3:e 2:e 1:q qr | 3:q 4:q 5:q er 4:e | 3:e 3:e 2:e 2:e 1:q qr",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 2 pitch and timing accuracy, and the sound stops in both marked rests so the next phrase starts on time.",
+        "tr": "Seviye 2 perde ve zamanlama ölçütü; ses iki işaretli susta da durur ve sonraki cümle zamanında başlar."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3", "V4"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I breathed in the rests, not in the middle of a phrase.", "tr": "Nefesi cümlenin ortasında değil, suslarda aldım." },
+    { "en": "I breathed normally in the rests.", "tr": "Suslarda normal nefes aldım." },
+    { "en": "The second phrase started on time after the breath.", "tr": "İkinci cümle nefesten sonra zamanında başladı." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late after the rest in bar 2.",
+        "tr": "Doğru, ama 2. ölçüdeki sustan sonra geç."
+      },
+      "fix": {
+        "en": "Release do exactly on beat 4 and breathe in during that beat. Come in on the next 1.",
+        "tr": "Do'yu tam 4. vuruşta bırak ve nefesi o vuruşta al. Sonraki 1'de gir."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but the sound runs into the rest.",
+        "tr": "Doğru, ama ses susun içine taşıyor."
+      },
+      "fix": {
+        "en": "The last do is one beat only. Count “3 and” on it and stop on “4”.",
+        "tr": "Son do yalnız bir vuruştur. Üstünde “3 ve” say ve “4”te dur."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the eighths in bar 4 slide together.",
+        "tr": "Farklı nota: 4. ölçüdeki sekizlikler birbirine kayıyor."
+      },
+      "fix": {
+        "en": "Give each “loo” a small new start: mi, mi, re, re. Practise bar 4 alone at ♩=45.",
+        "tr": "Her “lu”ya küçük, yeni bir başlangıç ver: mi, mi, re, re. 4. ölçüyü tek başına ♩=45'te çalış."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If a phrase uses up your breath, slow to ♩=50, or stop sooner and sing only the first phrase. Take a full breath in every rest.",
+    "tr": "Bir cümle nefesini bitiriyorsa ♩=50'ye yavaşla ya da daha erken dur ve yalnız ilk cümleyi söyle. Her susta tam nefes al."
+  },
+  "legacy": "R: vocal-13",
+  "minutes": 10,
+  "expertPending": true
+}

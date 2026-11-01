@@ -1,0 +1,117 @@
+{
+  "id": "voc-s2-m09-10",
+  "title": { "en": "Map a short melody", "tr": "Kısa bir ezgiyi haritala" },
+  "goal": {
+    "en": "Maps the full Au clair de la lune melody into phrases, breath points, repeats and its lowest part, then sings the first phrase at ♩=80.",
+    "tr": "Au clair de la lune ezgisinin tamamını cümlelere, nefes yerlerine, tekrarlara ve en pes bölümüne ayırarak haritalar, sonra ilk cümleyi ♩=80'de söyler."
+  },
+  "explanation": [
+    {
+      "en": "A map makes a melody practisable in small parts. It answers four questions: where do the phrases end, where do you breathe, which phrases repeat, and where does the line go highest or lowest?",
+      "tr": "Harita bir ezgiyi küçük parçalarda çalışılabilir yapar. Dört soruyu cevaplar: cümleler nerede biter, nerede nefes alırsın, hangi cümleler tekrar eder ve dizi en tize ya da en pese nerede gider?"
+    },
+    {
+      "en": "You know the first eight bars of Au clair de la lune. The full melody has sixteen bars: four phrases of four bars each.",
+      "tr": "Au clair de la lune'un ilk sekiz ölçüsünü biliyorsun. Ezginin tamamı on altı ölçüdür: her biri dört ölçülük dört cümle."
+    },
+    {
+      "en": "Phrase 3 is the new one. It repeats re four times, drops to the la below do, then walks down re-do-ti-la to the sol below do. If those low notes are not comfortable, sing them an octave up.",
+      "tr": "3. cümle yenidir. Re'yi dört kez tekrarlar, do'nun altındaki la'ya iner, sonra re-do-si-la ile do'nun altındaki sol'e yürür. Bu pes notalar rahat değilse bir oktav yukarıda söyle."
+    },
+    {
+      "en": "A phrase usually ends on a long note. That long note is your breath point, and it often tells you whether the melody is home (do) or still open (sol).",
+      "tr": "Bir cümle çoğu zaman uzun bir notayla biter. O uzun nota nefes yerindir; çoğu zaman ezginin evde mi (do) yoksa hâlâ açık mı (sol) olduğunu da söyler."
+    },
+    {
+      "en": "Once the map is done, practise one phrase at a time, resting between phrases. Today you sing phrase 1 only.",
+      "tr": "Harita bitince her seferinde bir cümle çalış, cümleler arasında dinlen. Bugün yalnız 1. cümleyi söylersin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The full sixteen bars in your comfortable range, soft synthesized voice, at ♩=80, with each phrase highlighted on screen; then phrase 1 alone at ♩=80 and ♩=55 over an original simple chord accompaniment (I, V). Headphones recommended.",
+      "tr": "On altı ölçünün tamamı rahat menzilinde, yumuşak sentez ses, ♩=80, her cümle ekranda vurgulanarak; ardından yalnız 1. cümle ♩=80 ve ♩=55'te, özgün basit akor eşliğiyle (I, V). Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Part 1: listen to the full melody and answer 5 map questions on screen. Part 2: listen to one bar of the accompaniment, then sing phrase 1 on 'la' at ♩=80 in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "1. bölüm: ezginin tamamını dinle ve ekranda 5 harita sorusunu yanıtla. 2. bölüm: eşlikten bir ölçü dinle, sonra 1. cümleyi kendi oktavında ♩=80'de 'la' ile söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "1-1-1-2 | 3:h 2:h | 1-3-2-2 | 1:w",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "minCorrect": 4,
+      "text": {
+        "en": "At least 4 of 5 map questions, and phrase 1 at the Level 2 pitch and timing criteria.",
+        "tr": "5 harita sorusunun en az 4'ü ve 1. cümle Seviye 2 perde ve zamanlama ölçütünde."
+      }
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 5,
+      "params": {
+        "set": "melody_map",
+        "melody": "au_clair_de_la_lune",
+        "bars": 16,
+        "questions": ["phrase_end", "breath_point", "repeated_phrases", "new_phrase", "lowest_phrase"]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I can show where each phrase ends and where I breathe.",
+      "tr": "Her cümlenin nerede bittiğini ve nerede nefes aldığımı gösterebiliyorum."
+    },
+    {
+      "en": "I know which phrases are the same and which one is new.",
+      "tr": "Hangi cümlelerin aynı, hangisinin yeni olduğunu biliyorum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: phrase 3 marked as a repeat.",
+        "tr": "Farklı cevap: 3. cümle tekrar olarak işaretlendi."
+      },
+      "fix": {
+        "en": "Phrases 1, 2 and 4 are the same. Phrase 3 starts on re and goes lower; listen for where it leaves home.",
+        "tr": "1., 2. ve 4. cümleler aynıdır. 3. cümle re'den başlar ve daha pese iner; evden nerede ayrıldığını dinle."
+      }
+    },
+    {
+      "error": { "en": "Different note, mi in bar 2 a little low.", "tr": "Farklı nota: 2. ölçüdeki mi biraz alçak." },
+      "fix": {
+        "en": "Mi is the top of phrase 1. Sing do-re-mi slowly once, then give mi its full two beats without letting it sink.",
+        "tr": "Mi, 1. cümlenin tepesidir. Bir kez yavaşça do-re-mi söyle, sonra mi'yi düşürmeden tam iki vuruş tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Map only the first two phrases; a short complete map is better than a long guess.",
+    "tr": "Yalnız ilk iki cümleyi haritala; kısa ve tam bir harita uzun bir tahminden iyidir."
+  },
+  "repertoire": "Au clair de la lune, traditional French melody (18th century). Public domain, legal review pending. Full sixteen bars mapped, first phrase sung on 'la'; degrees, key, accompaniment and tempo by Ostinato.",
+  "legacy": "V: vocal-20",
+  "minutes": 12,
+  "expertPending": true
+}

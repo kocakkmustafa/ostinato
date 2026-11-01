@@ -1,0 +1,113 @@
+{
+  "id": "voc-s1-m03-09",
+  "title": {
+    "en": "Warm-up routine 2",
+    "tr": "Isınma rutini 2"
+  },
+  "goal": {
+    "en": "Does a three-step warm-up: lip trill, a 1–5 slide and a five-note scale.",
+    "tr": "Üç adımlı ısınmayı uygular: dudak titreşimi, 1–5 kaydırma ve beş notalık gam."
+  },
+  "explanation": [
+    {
+      "en": "This warm-up takes about four minutes. Use it before any singing session.",
+      "tr": "Bu ısınma yaklaşık dört dakika sürer. Her söyleme oturumundan önce kullan."
+    },
+    {
+      "en": "Step 1, lip trill: let your lips buzz on a steady breath, on a comfortable note, for a few seconds.",
+      "tr": "1. adım, dudak titreşimi: dudaklarını düzenli bir nefesle, rahat bir notada birkaç saniye titreştir."
+    },
+    {
+      "en": "Step 2, slide: glide smoothly from 1 up to 5 and back down, with no gaps or jumps.",
+      "tr": "2. adım, kaydırma: 1'den 5'e kesintisiz kay ve geri in; boşluk ya da sıçrama olmasın."
+    },
+    {
+      "en": "Step 3, scale: sing 1-2-3-4-5-4-3-2-1 on 'la'.",
+      "tr": "3. adım, gam: 1-2-3-4-5-4-3-2-1'i 'la' ile söyle."
+    },
+    {
+      "en": "Keep everything soft and easy. A warm-up prepares the voice; it is not a workout.",
+      "tr": "Her şeyi yumuşak ve kolay tut. Isınma sesi hazırlar; antrenman değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "A short model of each step in your comfortable range: a trill on 1, a slide 1→5→1, then 1-2-3-4-5-4-3-2-1.",
+      "tr": "Rahat menzilinde her adım için kısa bir örnek: 1'de titreşim, 1→5→1 kaydırma, ardından 1-2-3-4-5-4-3-2-1."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Do each step three times. 1 Lip trill on a comfortable note. 2 Slide 1→5→1 on a lip trill or 'oo'. 3 Sing 1-2-3-4-5-4-3-2-1 on 'la'. Sing in your own octave.",
+      "tr": "Her adımı üç kez yap. 1 Rahat bir notada dudak titreşimi. 2 Dudak titreşimi ya da 'u' ile 1→5→1 kaydırma. 3 1-2-3-4-5-4-3-2-1'i 'la' ile söyle. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All three steps done. Slide: the contour rises to 5 and comes back down without a break. Scale: Level 1 pitch accuracy.",
+        "tr": "Üç adım da tamamlanır. Kaydırma: kontur kesintisiz 5'e çıkar ve geri iner. Gam: Seviye 1 perde ölçütü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My lips buzzed evenly on the trill.",
+      "tr": "Titreşimde dudaklarım düzenli titreşti."
+    },
+    {
+      "en": "The slide had no gaps or jumps.",
+      "tr": "Kaydırmada boşluk ya da sıçrama olmadı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    },
+    {
+      "en": "My voice felt easier at the end than at the start.",
+      "tr": "Sesim sonda başlangıçtakinden daha rahattı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "A lip trill is quiet and breathy. Hold the phone a little closer, or switch to a hum on 'mm'.",
+        "tr": "Dudak titreşimi sessiz ve hışırtılıdır. Telefonu biraz yaklaştır ya da 'mm' mırıldanmasına geç."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the slide stopped below 5.",
+        "tr": "Farklı nota: kaydırma 5'in altında kaldı."
+      },
+      "fix": {
+        "en": "Hear 5 in your head first, then glide all the way up to it.",
+        "tr": "Önce 5'i içinden duy, sonra ona kadar sonuna dek kay."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If your lips won't trill, hum on 'mm' or 'vv' for steps 1 and 2.",
+    "tr": "Dudakların titreşmezse 1. ve 2. adımda 'mm' ya da 'vv' ile mırıldan."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

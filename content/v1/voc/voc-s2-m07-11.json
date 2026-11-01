@@ -1,0 +1,85 @@
+{
+  "id": "voc-s2-m07-11",
+  "title": { "en": "Rhythm checkpoint", "tr": "Ritim geçişi" },
+  "goal": {
+    "en": "Sings an original eight-bar melody with mixed rhythms, in tune and on time, at ♩=76.",
+    "tr": "Karışık ritimli özgün sekiz ölçülük ezgiyi ♩=76'da doğru perdede ve zamanında söyler."
+  },
+  "explanation": [
+    { "en": "This checkpoint opens the next module.", "tr": "Bu geçiş sonraki modülü açar." },
+    {
+      "en": "The melody brings the module together: an upbeat, eighths, a dotted quarter, rests, syncopation and a tie.",
+      "tr": "Ezgi modülü birleştirir: öncü vuruş, sekizlikler, noktalı dörtlük, suslar, senkop ve bağ."
+    },
+    {
+      "en": "It starts on an upbeat: two eighths, do-re, on beat 4 of bar 1. Bar 4 is syncopated. In bars 5–6, fa is tied across the bar line.",
+      "tr": "Ezgi öncü vuruşla başlar: 1. ölçünün 4. vuruşunda iki sekizlik, do-re. 4. ölçü senkopludur. 5–6. ölçülerde fa ölçü çizgisinin üstünden bağlanır."
+    },
+    {
+      "en": "Breathe in the rests at the end of bars 3 and 6.",
+      "tr": "3. ve 6. ölçülerin sonundaki suslarda nefes al."
+    },
+    {
+      "en": "If you miss a note, keep going and sing the next one on its click. Do not restart.",
+      "tr": "Bir notayı kaçırırsan devam et ve sonrakini kendi klikinde söyle. Baştan başlama."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The original melody in your comfortable range, soft synthesized voice, at ♩=76 and ♩=50, over an original soft chord accompaniment (I, IV, V) with a click. Headphones recommended.",
+      "tr": "Özgün ezgi rahat menzilinde, yumuşak sentez ses, ♩=76 ve ♩=50; özgün yumuşak akor eşliği (I, IV, V) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the eight bars at ♩=76 on 'la' or in solfège. Practise slower first if you like; the checkpoint counts at ♩=76. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra sekiz ölçüyü ♩=76'da 'la' ile ya da solfejle söyle. İstersen önce yavaş çalış; geçiş ♩=76'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "hr qr 1:e 2:e | 3:q. 2:e 1:q 3:q | 5:q 4:e 3:e 2:q qr | 1:e 2:q 3:e 4:q 5:q | 6:q 5:q 4:h~q 3:q 2:q qr | 3:e 3:e 4:q 5:q. 3:e | 2:q. 2:e 1:h",
+    "tempo": { "open": 76, "target": 76 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I came in on the upbeat in bar 1.", "tr": "1. ölçüdeki öncü vuruşta girdim." },
+    {
+      "en": "I held fa across the bar line in bars 5–6.",
+      "tr": "5–6. ölçülerde fa'yı ölçü çizgisinin üstünden tuttum."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late in bar 4.", "tr": "Doğru, ama 4. ölçüde geç." },
+      "fix": {
+        "en": "Bar 4 is syncopated: re and mi fall on the 'and'. Count the eighths in your head and don't wait for the click.",
+        "tr": "4. ölçü senkopludur: re ve mi 've'ye düşer. Sekizlikleri içinden say ve kliği bekleme."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early in bar 6.", "tr": "Doğru, ama 6. ölçüde erken." },
+      "fix": {
+        "en": "You are cutting the tied fa short. Hold it through beat 1 of bar 6 and move to mi on beat 2.",
+        "tr": "Bağlı fa'yı kısaltıyorsun. 6. ölçünün 1. vuruşu boyunca tut ve 2. vuruşta mi'ye geç."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise bars 1–4 and bars 5–8 separately at ♩=60, then take the checkpoint at ♩=76.",
+    "tr": "1–4. ve 5–8. ölçüleri ♩=60'ta ayrı ayrı çalış, sonra geçişi ♩=76'da dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

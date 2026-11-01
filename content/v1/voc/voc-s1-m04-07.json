@@ -1,0 +1,99 @@
+{
+  "id": "voc-s1-m04-07",
+  "title": {
+    "en": "Folk melody: \"Ah! vous dirai-je, maman\"",
+    "tr": "Halk ezgisi: \"Ah! vous dirai-je, maman\""
+  },
+  "goal": {
+    "en": "Sings the twelve bars of the traditional melody \"Ah! vous dirai-je, maman\" in a personal key at ♩=80.",
+    "tr": "Geleneksel \"Ah! vous dirai-je, maman\" ezgisinin on iki ölçüsünü kişisel tonda ♩=80'de söyler."
+  },
+  "explanation": [
+    {
+      "en": "\"Ah! vous dirai-je, maman\" is a traditional French melody, first printed in 1761. It has three four-bar parts: A, B, A.",
+      "tr": "\"Ah! vous dirai-je, maman\" ilk kez 1761'de basılmış geleneksel bir Fransız ezgisidir. Üç dört ölçülük bölümü vardır: A, B, A."
+    },
+    {
+      "en": "Part A leaps from do up to sol, touches la, then walks down by steps to do: do-do-sol-sol | la-la-sol | fa-fa-mi-mi | re-re-do.",
+      "tr": "A bölümü do'dan sol'e sıçrar, la'ya dokunur, sonra basamakla do'ya iner: do-do-sol-sol | la-la-sol | fa-fa-mi-mi | re-re-do."
+    },
+    {
+      "en": "Part B steps down from sol to re, twice: sol-sol-fa-fa | mi-mi-re. Then part A comes back unchanged.",
+      "tr": "B bölümü sol'den re'ye iki kez basamakla iner: sol-sol-fa-fa | mi-mi-re. Ardından A bölümü aynen geri gelir."
+    },
+    {
+      "en": "Most notes come in pairs on the same pitch. Restart the second one with a light 'l' so each note is heard.",
+      "tr": "Notaların çoğu aynı perdede çift gelir. Her nota duyulsun diye ikinciyi hafif bir 'l' ile yeniden başlat."
+    },
+    {
+      "en": "In every part, bars 2 and 4 end on a note held for two beats. Take a quick breath after it.",
+      "tr": "Her bölümde 2. ve 4. ölçüler iki vuruş tutulan bir notayla biter. Ondan sonra kısa bir nefes al."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The twelve bars in your comfortable range, soft synthesized voice, at ♩=80 and ♩=55, over an original simple chord accompaniment (I, IV, V) with a soft beat. Headphones recommended.",
+      "tr": "On iki ölçü rahat menzilinde, yumuşak sentez ses, ♩=80 ve ♩=55; özgün basit akor eşliği (I, IV, V) ve hafif vuruşla. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the twelve bars on 'la'. Start at ♩=55 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra on iki ölçüyü 'la' ile söyle. İstersen ♩=55'te başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "1-1-5-5 | 6-6 5:h | 4-4-3-3 | 2-2 1:h | 5-5-4-4 | 3-3 2:h | 5-5-4-4 | 3-3 2:h | 1-1-5-5 | 6-6 5:h | 4-4-3-3 | 2-2 1:h",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The leap from do to sol landed without sliding.",
+      "tr": "Do'dan sol'e sıçrama kaymadan yerine oturdu."
+    },
+    {
+      "en": "Each repeated note had its own clear start.",
+      "tr": "Tekrarlanan her notanın kendi net başlangıcı vardı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, sol a little low after the leap.", "tr": "Farklı nota: sıçramadan sonra sol biraz alçak." },
+      "fix": {
+        "en": "Hear sol in your head before bar 1, beat 3. Think do-mi-sol quietly, then sing the leap.",
+        "tr": "1. ölçünün 3. vuruşundan önce sol'ü içinden duy. Sessizce do-mi-sol diye düşün, sonra sıçramayı söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear the repeated note.", "tr": "Tekrarlanan notayı duyamadım." },
+      "fix": {
+        "en": "Two syllables on the same note need a clear restart. Give each one its consonant and a tiny gap.",
+        "tr": "Aynı notadaki iki hece net bir yeniden başlangıç ister. Her birine ünsüzünü ve küçük bir boşluk ver."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing part A alone (bars 1–4) at ♩=55, then add part B.",
+    "tr": "♩=55'te yalnız A bölümünü (1–4. ölçüler) söyle, sonra B bölümünü ekle."
+  },
+  "repertoire": "\"Ah! vous dirai-je, maman\", traditional French melody (first printed 1761). Public domain, legal review pending. Sung on 'la'; degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 12,
+  "expertPending": true
+}

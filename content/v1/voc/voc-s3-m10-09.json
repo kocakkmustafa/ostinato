@@ -1,0 +1,99 @@
+{
+  "id": "voc-s3-m10-09",
+  "title": { "en": "Resonance without pushing", "tr": "İtmeden rezonans" },
+  "goal": {
+    "en": "Sings 1-2-3-2-1 softly (p), then moderately strong (mf), at least 4 dB louder, with every note within 35 cents.",
+    "tr": "1-2-3-2-1'i önce hafif (p), sonra orta güçlü (mf) söyler; mf en az 4 dB daha gürdür ve her nota 35 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "A fuller sound comes from easy resonance, not from pushing harder. Start from the light \"ng\" you found earlier.",
+      "tr": "Daha dolgun ses daha çok itmekten değil, rahat rezonanstan gelir. Daha önce bulduğun hafif \"ng\"den başla."
+    },
+    {
+      "en": "Round 1 is p: soft and easy. Round 2 is mf: your comfortable stronger voice, a step up, not a shout.",
+      "tr": "1. tur p: hafif ve rahat. 2. tur mf: rahat güçlü sesin, bir basamak yukarısı; bağırma değil."
+    },
+    {
+      "en": "To grow, give a little more steady breath and let the 'ah' open. Keep the throat and neck as loose as in the soft round.",
+      "tr": "Büyümek için biraz daha düzenli nefes ver ve 'a'nın açılmasına izin ver. Boğazını ve boynunu hafif turdaki kadar gevşek tut."
+    },
+    {
+      "en": "The app compares your two rounds with each other. There is no fixed loudness target.",
+      "tr": "Uygulama iki turunu birbiriyle karşılaştırır. Sabit bir gürlük hedefi yoktur."
+    },
+    {
+      "en": "A louder sound often goes sharp. Keep the notes in the same place in both rounds.",
+      "tr": "Gür ses çoğu zaman tizleşir. Notaları iki turda da aynı yerde tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "1-2-3-2-1 in your range on 'ah', once softly and once moderately strong, on the same pitches; vowel-formant voice.",
+      "tr": "Rahat menzilinde 'a' ile 1-2-3-2-1; bir kez hafif, bir kez orta güçlü, aynı perdelerde; ünlü-formantlı sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Hum \"ng\" on 1 to find an easy buzz. Then sing 1-2-3-2-1 on 'ah' softly (p). Breathe and sing it again a little stronger (mf), without pushing. Sing in your own octave.",
+      "tr": "Rahat bir titreşim bulmak için 1'de \"ng\" mırıldan. Sonra 1-2-3-2-1'i 'a' ile hafif (p) söyle. Nefes al ve itmeden biraz daha güçlü (mf) yeniden söyle. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-2 | 1:h hr | 1-2-3-2 | 1:h hr",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "The mf round is at least 4 dB louder than the p round, and at least 80% of the notes are within 35 cents (octave-folded).",
+        "tr": "mf turu p turundan en az 4 dB daha gürdür ve notaların en az %80'i 35 cent içindedir (oktav katlanmış)."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The second round was clearly fuller than the first.",
+      "tr": "İkinci tur birincisinden açıkça daha dolgundu."
+    },
+    {
+      "en": "My throat and neck stayed as loose as in the soft round.",
+      "tr": "Boğazım ve boynum hafif turdaki kadar gevşek kaldı."
+    },
+    {
+      "en": "The notes stayed in the same place in both rounds.",
+      "tr": "Notalar iki turda da aynı yerde kaldı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the two rounds are almost equally loud.",
+        "tr": "Doğru, ama iki tur neredeyse aynı gürlükte."
+      },
+      "fix": {
+        "en": "Make the first round softer rather than the second one harder. The difference counts, not the loudness.",
+        "tr": "İkinci turu zorlamak yerine ilk turu daha hafif söyle. Gürlük değil, fark sayılır."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little high in the mf round.",
+        "tr": "Farklı nota: mf turunda biraz yüksek."
+      },
+      "fix": {
+        "en": "More breath pressure lifted the note. Grow with more space in the mouth, not more push.",
+        "tr": "Artan nefes basıncı notayı yükseltti. Daha çok iterek değil, ağızda daha çok boşlukla büyü."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use one held note instead of the line: four beats p, a breath, then four beats mf.",
+    "tr": "Dizi yerine tek bir tutulan nota kullan: dört vuruş p, bir nefes, sonra dört vuruş mf."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

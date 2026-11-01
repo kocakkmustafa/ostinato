@@ -1,0 +1,119 @@
+{
+  "id": "voc-s1-m02-07",
+  "title": {
+    "en": "Sliding into the target",
+    "tr": "Hedefe kayarak yerleşmek"
+  },
+  "goal": {
+    "en": "Starts a little below the target and slides up to settle on it within half a second.",
+    "tr": "Hedefin biraz altından başlar ve yarım saniye içinde kayarak üstüne yerleşir."
+  },
+  "explanation": [
+    {
+      "en": "Some notes are easier to find from below. Start a little under the target, then glide up and stop on it.",
+      "tr": "Bazı notaları aşağıdan bulmak daha kolaydır. Hedefin biraz altında başla, sonra kayarak çık ve üstünde dur."
+    },
+    {
+      "en": "Keep the slide short and quick: it should last less than half a second.",
+      "tr": "Kaydırmayı kısa ve çabuk tut: yarım saniyeden kısa sürmeli."
+    },
+    {
+      "en": "Stop at the target and stay there. Do not go past it and come back down.",
+      "tr": "Hedefte dur ve orada kal. Hedefi geçip geri inme."
+    },
+    {
+      "en": "The meter times how long you take to settle within 50 cents and stay there.",
+      "tr": "Gösterge 50 cent içine yerleşip orada kalman ne kadar sürdü, onu ölçer."
+    },
+    {
+      "en": "This is a practice tool. Later you will start right on the note; a slow slide on every note blurs a melody.",
+      "tr": "Bu bir çalışma aracıdır. İleride notanın tam üstünden başlayacaksın; her notada yavaş kaydırma ezgiyi bulanıklaştırır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Six notes from your comfortable range, soft synthesized voice; each is shown once with a quick slide up into it.",
+      "tr": "Rahat menzilinden altı nota, yumuşak sentez ses; her biri bir kez, aşağıdan çabuk bir kaydırmayla gösterilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "For each of 6 notes: listen, start a little below it in your own octave, slide up and hold the target for about two seconds.",
+      "tr": "6 notanın her biri için: dinle, kendi oktavında biraz altından başla, kayarak çık ve hedefi yaklaşık iki saniye tut."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 5 of 6 notes settle within 50 cents in 500 ms or less, then stay there.",
+        "tr": "6 notanın en az 5'i 500 ms ya da daha kısa sürede 50 cent içine yerleşir ve orada kalır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each slide was short, not a long siren.",
+      "tr": "Her kaydırma uzun bir siren değil, kısaydı."
+    },
+    {
+      "en": "I stopped on the target without going past it.",
+      "tr": "Hedefi geçmeden üstünde durdum."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late: the slide took too long.",
+        "tr": "Doğru, ama geç: kaydırma çok uzun sürdü."
+      },
+      "fix": {
+        "en": "Start closer to the target, about a half step below, and move quickly.",
+        "tr": "Hedefe daha yakın başla, yaklaşık yarım ses aşağıdan, ve çabuk kay."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little high.",
+        "tr": "Farklı nota, biraz yüksek."
+      },
+      "fix": {
+        "en": "You slid past the target. Slow the end of the slide and stop when it blends with the reference.",
+        "tr": "Hedefi geçtin. Kaydırmanın sonunu yavaşlat ve referansla kaynaştığında dur."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The slide stopped short. Replay the note and let the glide go all the way up.",
+        "tr": "Kaydırma erken durdu. Notayı yeniden dinle ve kaymayı sonuna kadar götür."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hum the slide on 'mm' before you sing it on 'la'.",
+    "tr": "Kaydırmayı 'la' ile söylemeden önce 'mm' ile mırıldan."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

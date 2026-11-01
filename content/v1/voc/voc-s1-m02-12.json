@@ -1,0 +1,106 @@
+{
+  "id": "voc-s1-m02-12",
+  "title": {
+    "en": "Pitch-matching checkpoint",
+    "tr": "Perde eşleştirme geçişi"
+  },
+  "goal": {
+    "en": "Matches 10 random notes from across their comfortable range within 35 cents.",
+    "tr": "Rahat menzilinin her yerinden 10 rastgele notayı 35 cent içinde eşleştirir."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "Ten notes come in random order from across your comfortable range. Some are close together, some far apart.",
+      "tr": "On nota rahat menzilinin her yerinden rastgele sırayla gelir. Kimi birbirine yakın, kimi uzaktır."
+    },
+    {
+      "en": "Sing in your own octave. If a note is too high or too low for you, sing the same note an octave away; it counts the same.",
+      "tr": "Kendi oktavında söyle. Bir nota sana çok yüksek ya da alçaksa aynı notayı bir oktav aşağıda ya da yukarıda söyle; aynı sayılır."
+    },
+    {
+      "en": "Start softly and hold the note steady for about two seconds so the microphone can read it.",
+      "tr": "Yumuşak başla ve mikrofon okuyabilsin diye notayı yaklaşık iki saniye sabit tut."
+    },
+    {
+      "en": "Use what you learned: hear the note first, start softly, slide in if you need to, then hold still.",
+      "tr": "Öğrendiklerini kullan: önce notayı duy, yumuşak başla, gerekirse kayarak yerleş, sonra sabit tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Ten single notes in random order from across your comfortable range, soft synthesized voice, each played twice.",
+      "tr": "Rahat menzilinin her yerinden rastgele sırayla on tek nota, yumuşak sentez ses, her biri iki kez."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to each of 10 notes and sing it back in your own octave for about two seconds. The checkpoint counts all 10 notes.",
+      "tr": "10 notanın her birini dinle ve kendi oktavında yaklaşık iki saniye geri söyle. Geçiş 10 notanın hepsini sayar."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 8 of 10 notes with a median within 35 cents (octave-folded).",
+        "tr": "10 notanın en az 8'inde medyan sapma 35 cent ya da altında (oktav katlanmış)."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a fifth away.",
+        "tr": "Farklı nota, bir beşli uzakta."
+      },
+      "fix": {
+        "en": "A fifth also blends well and is easy to confuse with an octave. Replay the note, hum it, then slide slowly until it blends completely.",
+        "tr": "Beşli de iyi kaynaşır ve oktavla kolayca karışır. Notayı yeniden dinle, mırıldan, sonra tamamen kaynaşana kadar yavaşça kay."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Redo 'Match one note (±35 cents)' or 'Sliding into the target' for the notes that did not pass, then come back.",
+    "tr": "Geçmeyen notalar için 'Tek nota eşleştir (±35 cent)' ya da 'Hedefe kayarak yerleşmek' dersini tekrarla, sonra geri dön."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

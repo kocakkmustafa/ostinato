@@ -1,0 +1,122 @@
+{
+  "id": "voc-s1-m03-08",
+  "title": {
+    "en": "Light detached steps",
+    "tr": "Hafif kesik basamaklar"
+  },
+  "goal": {
+    "en": "Sings 1-2-3-4-5 as short, light, separate notes with the click at ♩=60.",
+    "tr": "1-2-3-4-5'i klikle ♩=60'ta kısa, hafif ve ayrı notalarla söyler."
+  },
+  "explanation": [
+    {
+      "en": "Detached means each note is short, with a small silence after it.",
+      "tr": "Kesik söylemek, her notanın kısa olması ve ardından küçük bir sessizlik gelmesi demektir."
+    },
+    {
+      "en": "Each note lasts half a click; the other half is silence. On screen these are eighth notes, each followed by an eighth rest.",
+      "tr": "Her nota bir klikin yarısı kadar sürer; diğer yarısı sessizliktir. Ekranda bunlar sekizlik notalardır, her birinin ardından sekizlik sus gelir."
+    },
+    {
+      "en": "Start each note gently, with no hard click in the throat. A light 'hoo' helps.",
+      "tr": "Her notaya yumuşakça başla; boğazda sert bir vuruş olmasın. Hafif bir 'hu' yardımcı olur."
+    },
+    {
+      "en": "End the sound by stopping the air, not by squeezing the throat.",
+      "tr": "Sesi boğazı sıkarak değil, havayı durdurarak bitir."
+    },
+    {
+      "en": "Short notes still need a clear pitch. Aim right at the note from the start.",
+      "tr": "Kısa notaların da perdesi net olmalı. Baştan tam notaya hedefle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then 1-2-3-4-5 detached in your range at ♩=60 and ♩=40.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde kesik 1-2-3-4-5; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in, sing 1-2-3-4-5 on a light 'hoo', one short note on each click, silent between notes. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra 1-2-3-4-5'i hafif bir 'hu' ile söyle; her klikte bir kısa nota, notalar arasında sessizlik. Kendi oktavında söyle."
+    },
+    "sequence": "1:e er 2:e er 3:e er 4:e er | 5:e er qr hr",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each note was short, with silence after it.",
+      "tr": "Her nota kısaydı ve ardından sessizlik geldi."
+    },
+    {
+      "en": "I started each note without a hard click in my throat.",
+      "tr": "Her notaya boğazda sert bir vuruş olmadan başladım."
+    },
+    {
+      "en": "Each short note still had a clear pitch.",
+      "tr": "Her kısa notanın perdesi yine netti."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Very short notes are hard to read. Make each note a little longer and keep the gap after it.",
+        "tr": "Çok kısa notalar zor okunur. Her notayı biraz uzat ve ardındaki boşluğu koru."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "A soft start can lag behind the click. Breathe in before the click and start the note right on it.",
+        "tr": "Yumuşak başlangıç klikten geri kalabilir. Klikten önce nefes al ve notaya tam klikte başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the start, then it slides into place.",
+        "tr": "Başta farklı nota, sonra kayarak yerine oturuyor."
+      },
+      "fix": {
+        "en": "Hear the note in your head before you sing, then start softly right on it.",
+        "tr": "Söylemeden önce notayı kafanda duy, sonra yumuşakça tam üstünden başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the notes connected first, then shorten them one at a time.",
+    "tr": "Önce notaları bağlı söyle, sonra teker teker kısalt."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

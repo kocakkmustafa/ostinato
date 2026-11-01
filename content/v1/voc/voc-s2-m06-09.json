@@ -1,0 +1,107 @@
+{
+  "id": "voc-s2-m06-09",
+  "title": {
+    "en": "Intervals in melodies",
+    "tr": "Ezgilerde aralıklar"
+  },
+  "goal": {
+    "en": "Sings the intervals inside an original four-bar melody in time.",
+    "tr": "Özgün dört ölçülük bir ezginin içindeki aralıkları tempoda söyler."
+  },
+  "explanation": [
+    {
+      "en": "Melodies are chains of intervals. The ones you know (M2, M3, P4, P5) appear here in one short line.",
+      "tr": "Ezgiler aralık zincirleridir. Bildiğin aralıklar (B2, B3, T4, T5) burada kısa bir dizide karşına çıkar."
+    },
+    {
+      "en": "Bar 1 steps up: do-re-mi. Bar 2 drops a major third to do, leaps a fourth to fa and steps up to sol.",
+      "tr": "1. ölçü basamakla çıkar: do-re-mi. 2. ölçü büyük üçlüyle do'ya iner, dörtlüyle fa'ya atlar ve basamakla sol'e çıkar."
+    },
+    {
+      "en": "Bar 3 falls a fifth to do, leaps back up to sol, then la-sol. Bar 4 drops a fourth to re, another fourth to low sol, and rises a fourth to do.",
+      "tr": "3. ölçü beşliyle do'ya iner, yeniden sol'e atlar, sonra la-sol. 4. ölçü dörtlüyle re'ye, bir dörtlüyle daha alttaki sol'e iner ve dörtlüyle do'ya çıkar."
+    },
+    {
+      "en": "Before each leap, hear the target in your head. Then sing it on the beat.",
+      "tr": "Her atlamadan önce hedefi içinden duy. Sonra vuruşta söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The four bars at ♩=60 and ♩=70 in your personal key, with a one-bar count-in.",
+      "tr": "Dört ölçü kişisel tonunda ♩=60 ve ♩=70'te, bir ölçü girişli."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Sing the four bars on 'la' or on the syllables: do-re-mi (held) | do-fa-sol (held) | do-sol-la-sol | re-low sol-do (held). Start at ♩=60 and move up to ♩=70. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "Dört ölçüyü 'la' ile ya da hecelerle söyle: do-re-mi (uzun) | do-fa-sol (uzun) | do-sol-la-sol | re-alttaki sol-do (uzun). ♩=60'ta başla, ♩=70'e çık. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3:h | 1-4-5:h | 1-5-6-5 | 2-5,-1:h",
+    "tempo": {
+      "open": 60,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard each leap in my head before I sang it.",
+      "tr": "Her atlamayı söylemeden önce içimden duydum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I breathed at the end of bar 2 and came in on time.",
+      "tr": "2. ölçünün sonunda nefes aldım ve zamanında girdim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, P4 a semitone low in bar 2.",
+        "tr": "Farklı nota: 2. ölçüde T4 yarım ses alçak."
+      },
+      "fix": {
+        "en": "You landed on mi. Fa is a half step above it: think do-mi-fa.",
+        "tr": "Mi'ye konmuşsun. Fa onun yarım ses üstündedir: içinden do-mi-fa de."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "Breathe near the end of the long note before, so the leap starts on the beat.",
+        "tr": "Atlama vuruşta başlasın diye nefesi önceki uzun notanın sonunda al."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing one bar at a time at ♩=50, then join them.",
+    "tr": "Her ölçüyü ♩=50'de tek tek söyle, sonra birleştir."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,115 @@
+{
+  "id": "voc-s1-m02-04",
+  "title": {
+    "en": "Matching in your own octave",
+    "tr": "Kendi oktavında eşleştirmek"
+  },
+  "goal": {
+    "en": "Recognises an octave difference and sings the note in their own octave.",
+    "tr": "Oktav farkını tanır ve notayı kendi oktavında söyler."
+  },
+  "explanation": [
+    {
+      "en": "Two notes an octave apart share the same name and blend almost into one sound. One is simply higher.",
+      "tr": "Bir oktav aralıklı iki nota aynı adı taşır ve neredeyse tek ses gibi kaynaşır. Biri yalnızca daha yüksektir."
+    },
+    {
+      "en": "Voices differ. Many people speak and sing about an octave apart, so you will often hear a note outside your own octave.",
+      "tr": "Sesler farklıdır. Birçok kişi yaklaşık bir oktav arayla konuşur ve söyler; bu yüzden çoğu zaman kendi oktavının dışında bir nota duyarsın."
+    },
+    {
+      "en": "In this lesson the notes play in different octaves on purpose: some low, some high. Do not copy the octave; find the same note where your voice is easy.",
+      "tr": "Bu derste notalar bilerek farklı oktavlarda çalar: kimi alçak, kimi yüksek. Oktavı kopyalama; aynı notayı sesinin rahat olduğu yerde bul."
+    },
+    {
+      "en": "Hum softly first. If the note feels strained, try one octave away.",
+      "tr": "Önce hafifçe mırıldan. Nota zorluyorsa bir oktav öteyi dene."
+    },
+    {
+      "en": "The app compares notes octave-folded: the same note in any octave counts as correct.",
+      "tr": "Uygulama notaları oktav katlanmış karşılaştırır: aynı nota hangi oktavda olursa olsun doğru sayılır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Six notes from your range, each moved up or down an octave at random, soft synthesized voice; after each try the note plays once in your octave for comparison.",
+      "tr": "Rahat menzilinden altı nota, her biri rastgele bir oktav yukarı ya da aşağı taşınmış, yumuşak sentez ses; her denemeden sonra nota karşılaştırma için senin oktavında bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Six notes play, some in a low octave and some in a high one. Sing each back in your own octave for about two seconds.",
+      "tr": "Altı nota çalar; kimi alçak, kimi yüksek oktavda. Her birini kendi oktavında yaklaşık iki saniye geri söyle."
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I sang where my voice was easy, not in the octave I heard.",
+      "tr": "Duyduğum oktavda değil, sesimin rahat olduğu yerde söyledim."
+    },
+    {
+      "en": "Sung right after the reference, my note felt like the same note.",
+      "tr": "Referansın hemen ardından söylediğim nota aynı nota gibi geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a fifth away.",
+        "tr": "Farklı nota, bir beşli uzakta."
+      },
+      "fix": {
+        "en": "A fifth also blends well and is easy to confuse with an octave. Replay the note, hum it, then slide slowly until it blends completely.",
+        "tr": "Beşli de iyi kaynaşır ve oktavla kolayca karışır. Notayı yeniden dinle, mırıldan, sonra tamamen kaynaşana kadar yavaşça kay."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Before you sing, play the comparison note in your octave, then match that.",
+    "tr": "Söylemeden önce karşılaştırma notasını kendi oktavında dinle, sonra onu eşleştir."
+  },
+  "minutes": 8,
+  "expertPending": true
+}
