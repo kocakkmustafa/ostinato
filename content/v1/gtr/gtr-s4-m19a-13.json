@@ -1,9 +1,12 @@
 {
   "id": "gtr-s4-m19a-13",
-  "title": { "en": "Sor: a progressive lesson", "tr": "Sor: aşamalı bir ders" },
+  "title": {
+    "en": "Sor: a progressive lesson",
+    "tr": "Sor: aşamalı bir ders"
+  },
   "goal": {
-    "en": "Plays a lesson selected from Sor's Op. 60 with both voices in time at ♩=60.",
-    "tr": "Sor'un Op. 60'ından seçilmiş bir dersi iki sesi de zamanında ♩=60'ta çalar."
+    "en": "Plays Lesson 1 from Sor's Op. 60, 16 bars, in time at ♩=60.",
+    "tr": "Sor'un Op. 60'ından 1. dersi, 16 ölçüyü ♩=60'ta zamanında çalar."
   },
   "explanation": [
     {
@@ -11,62 +14,103 @@
       "tr": "Fernando Sor (1778–1839), Op. 60'ı yeni başlayanlar için aşamalı dersler olarak yazdı. Her ders bir öncekine tek bir yeni fikir ekler."
     },
     {
-      "en": "The score has two voices. Stems down: the bass, played with the thumb. Stems up: the melody, played with i and m.",
-      "tr": "Notada iki ses var. Sapı aşağı olanlar bastır, başparmakla çalınır. Sapı yukarı olanlar melodidir, i ve m ile çalınır."
+      "en": "Lesson 1 is one melodic line in C major. It moves from the treble strings down to open bass strings and back.",
+      "tr": "1. ders Do majörde tek bir ezgi çizgisidir. İnce tellerden açık bas tellerine iner ve geri çıkar."
     },
     {
-      "en": "Hold each bass note for its full value while the melody moves above it. Do not stop a ringing bass with the next finger.",
-      "tr": "Melodi üstte ilerlerken her bas notasını tam süresince tut. Çalan bir bası sonraki parmakla susturma."
+      "en": "Play notes on strings 6–4 with the thumb (p) and notes on strings 3–1 with i and m. Let each low note ring for its full value.",
+      "tr": "6–4. tellerdeki notaları başparmakla (p), 3–1. tellerdeki notaları i ve m ile çal. Her pes nota tam süresince çınlasın."
     },
     {
-      "en": "Before you play, read the lesson once: find the key, the bass notes and any accidentals.",
-      "tr": "Çalmadan önce dersi bir kez oku: tonu, bas notalarını ve değiştirici işaretleri bul."
+      "en": "Bars 8 and 16 end with a chord. The measured run plays only its top note; pluck the full chord with p, i and m in the second run, which is not measured.",
+      "tr": "8. ve 16. ölçüler bir akorla biter. Ölçülen çalışta yalnız en üst notasını çal; akorun tamamını p, i ve m ile ölçülmeyen ikinci çalışta çek."
     },
     {
-      "en": "This is the Ostinato engraving, made from the 1837 Paris first edition. Fingering and tempo are ours, not an editor's.",
-      "tr": "Bu, 1837 Paris ilk baskısından hazırlanan Ostinato dizgisidir. Parmak numaraları ve tempo bizimdir, bir editörün değil."
+      "en": "Before you play, read the lesson once: find the F♯ in bar 7 and each jump to a bass string.",
+      "tr": "Çalmadan önce dersi bir kez oku: 7. ölçüdeki Fa♯'yi ve bas teline her atlamayı bul."
+    },
+    {
+      "en": "This is the Ostinato engraving, made from the Berlin Gitarrefreund edition (about 1924). Fingering and tempo are ours.",
+      "tr": "Bu, Berlin Gitarrefreund baskısından (yaklaşık 1924) hazırlanan Ostinato dizgisidir. Parmak numaraları ve tempo bizimdir."
     }
   ],
   "referenceAudio": {
-    "kinds": ["S"],
+    "kinds": [
+      "S"
+    ],
     "brief": {
-      "en": "The selected Op. 60 lesson from the Ostinato engraving, both voices, at ♩=60 and ♩=40, string-model synthesis.",
-      "tr": "Ostinato dizgisinden seçilen Op. 60 dersi, iki ses, ♩=60 ve ♩=40, tel modeli sentezi."
+      "en": "Op. 60, Lesson 1 from the Ostinato engraving, 16 bars, at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Ostinato dizgisinden Op. 60, 1. ders, 16 ölçü, ♩=60 ve ♩=40, tel modeli sentezi."
     }
   },
   "practice": {
-    "measurement": ["M"],
-    "engineSteps": ["A2", "A3"],
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
     "task": {
-      "en": "Read the selected Op. 60 lesson on screen. Work in four-bar sections with the click at ♩=60, bass with p and melody with i and m. Then play the whole lesson.",
-      "tr": "Ekrandaki seçilmiş Op. 60 dersini oku. Klikle ♩=60'ta dört ölçülük bölümlerle çalış; bas p ile, melodi i ve m ile. Sonra dersin tamamını çal."
+      "en": "Run 1, measured: play the line on screen alone, bars 1–16, each half once, in four-bar sections with the click at ♩=60 and then all 16 bars; in bars 8 and 16 play only the top note of the chord. Low strings with p, treble strings with i and m. Run 2, not measured: play the lesson as written, with the full chords in bars 8 and 16.",
+      "tr": "1. çalış, ölçülür: ekrandaki diziyi tek başına çal, 1–16. ölçüler, her yarı bir kez; önce klikle ♩=60'ta dört ölçülük bölümlerle, sonra 16 ölçünün tamamı. 8. ve 16. ölçülerde akorun yalnız en üst notasını çal. Pes teller p ile, ince teller i ve m ile. 2. çalış, ölçülmez: dersi yazıldığı gibi, 8. ve 16. ölçülerdeki akorların tamamıyla çal."
     },
-    "tempo": { "open": 60, "target": 60 },
-    "pass": { "levelDefault": true }
+    "sequence": "4/4: C4:h B3 G3 | C4:h B3 G3 | C4 D4 E4 G4 | F4 E4 D4 G3 | C4:h B3 G3 | C4 E4 D4 B3 | A3 C4 D3 F#4 | G4 B3 G2 qr | G4 G3 E4 G4 | F4 G3 D4 F4 | E4 G3 C4 E4 | D4 B3 G3 F3 | E3 G3 C4 E3 | F3 A3 D3 F3 | E3 G3 G2 B2 | C3 E4 C3 qr",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
   },
   "fallback": "selfCheck",
-  "safety": ["Ç", "G1"],
+  "safety": [
+    "Ç",
+    "G1"
+  ],
   "prerequisites": [],
   "selfCheck": [
-    { "en": "Each bass note rang for its full value.", "tr": "Her bas notası tam süresince çaldı." },
-    { "en": "I found each note from the staff, not from the TAB.", "tr": "Her notayı tab'dan değil porteden buldum." },
-    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+    {
+      "en": "Each low note rang for its full value.",
+      "tr": "Her pes nota tam süresince çınladı."
+    },
+    {
+      "en": "I found each note from the staff, not from the TAB.",
+      "tr": "Her notayı tab'dan değil porteden buldum."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    }
   ],
   "commonErrors": [
     {
-      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
-      "fix": { "en": "A sharp from the key signature or the bar was missed. Mark the sharps before you play.", "tr": "Donanımdaki ya da ölçüdeki bir diyez atlandı. Çalmadan önce diyezleri işaretle." }
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "The F♯ in bar 7 was played as F. Mark it before you play.",
+        "tr": "7. ölçüdeki Fa♯ Fa olarak çalındı. Çalmadan önce onu işaretle."
+      }
     },
     {
-      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
-      "fix": { "en": "The melody waits for the bass change. Look one bar ahead and prepare the next bass note early.", "tr": "Melodi bas değişimini bekliyor. Bir ölçü ileriye bak ve sonraki bas notasını erken hazırla." }
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "The jump to a bass string comes late. Look one note ahead and move the thumb early.",
+        "tr": "Bas teline atlama geç kalıyor. Bir nota ileriye bak ve başparmağı erken hazırla."
+      }
     }
   ],
   "adaptation": {
-    "en": "Play the bass voice alone, then the melody alone, then join them at ♩=45.",
-    "tr": "Önce bas sesini tek başına, sonra melodiyi tek başına çal, sonra ikisini ♩=45'te birleştir."
+    "en": "Play bars 1–8 alone at ♩=45 until they pass, then add bars 9–16.",
+    "tr": "Önce yalnız 1–8. ölçüleri ♩=45'te geçene kadar çal, sonra 9–16. ölçüleri ekle."
   },
-  "repertoire": "Fernando Sor (1778–1839), Introduction à l'étude de la guitare, Op. 60: one selected lesson. Source: Paris first edition, 1837. Public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "repertoire": "Fernando Sor (1778–1839), Introduction à l'étude de la guitare, Op. 60, Lesson 1 (C major, 4/4), bars 1–16 without repeats. Source edition: 'Einleitende Gitarre-Etüden, Op. 60', Spielmusik für Gitarre vol. 2, Berlin: Verlag Gitarrefreund, n.d. (ca. 1924), plate S.10217, no editor named; scan: Gaylord Music Library, Washington University in St. Louis, https://archive.org/details/b50313538 (Public Domain Mark 1.0). Not yet compared with the Paris first edition (1837; IMSLP: https://imslp.org/wiki/Introduction_à_l'étude_de_la_guitare,_Op.60_(Sor,_Fernando)). Composer died 1839; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
   "minutes": 20,
   "expertPending": true
 }
