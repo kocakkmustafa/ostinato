@@ -602,6 +602,12 @@ final class Scorer {
       thetaX: d('thetaX'),
       tauFit: d('tauFit'),
       levelAboveFloorDb: d('levelAboveFloorDb'),
+      tuningSearchCents: d('tuningSearchCents'),
+      tuningStepCents: d('tuningStepCents'),
+      evidenceBandCents: d('evidenceBandCents'),
+      evidencePartials: k['evidencePartials'] as int,
+      sharedToleranceCents: d('sharedToleranceCents'),
+      sharedMaxPartial: k['sharedMaxPartial'] as int,
     );
   }
 
@@ -666,7 +672,15 @@ final class Scorer {
         if (j != null) ...{
           'strings': [
             for (final s in j.strings)
-              [s.string, s.midi, s.activation, s.heard, s.possiblyMuted]
+              [
+                s.string,
+                s.midi,
+                s.activation,
+                s.heard,
+                s.possiblyMuted,
+                s.shared,
+                s.evidence
+              ]
           ],
           'unexpected': [
             for (final u in j.unexpected) [u.$1, u.$2]
@@ -678,6 +692,8 @@ final class Scorer {
         if (r.verdict == ChordVerdict.differentChord) ...nearest(r.fit!),
         if (r.fit != null) 'act': r.fit!.activations,
         if (r.fit != null) 'fl': r.fit!.floor,
+        if (r.fit != null) 'offset': r.fit!.offsetCents,
+        if (r.fit != null) 'ev': r.fit!.evidence,
         if (ee != null) 'early': ee,
       }
     ];
@@ -948,7 +964,7 @@ Map<String, Object?> selfTest(Map<String, dynamic> spec) {
   // §9.1 dictionary identity: S = D·a for known a → NNLS returns a (1e-6,
   // relative to max a); removing one string's atom → that string not heard.
   final rng = math.Random(53);
-  var maxErr = 0.0, dropOk = 0, dropN = 0;
+  var maxErr = 0.0, dropOk = 0, dropN = 0, sharedN = 0;
   final cases = <Map<String, Object?>>[];
   for (final v in table) {
     final a = Float64List(k1.nPitch);
@@ -973,19 +989,31 @@ Map<String, Object?> selfTest(Map<String, dynamic> spec) {
       final jd = k1.judge(f2, v.voicing);
       final st = jd.strings.firstWhere((s) => s.string == 6 - i);
       dropN++;
-      final ok = !st.heard &&
+      // Shared strings have no evidence of their own and stay heard by design
+      // (PLAN §13); every other dropped string must be not heard.
+      final ok = (st.shared ? st.heard : !st.heard) &&
+          f2.offsetCents == 0 &&
           jd.strings.where((s) => s.string != 6 - i).every((s) => s.heard);
+      if (st.shared) sharedN++;
       if (ok) dropOk++;
     }
-    cases.add({'voicing': v.id, 'err': err, 'full': verdictCode(full.verdict)});
+    cases.add({
+      'voicing': v.id,
+      'err': err,
+      'offset': fit.offsetCents,
+      'full': verdictCode(full.verdict)
+    });
   }
   final c1 = {
     'maxRelErr': maxErr,
     'dropStringNotHeard': dropOk,
     'dropN': dropN,
+    'dropShared': sharedN,
+    'offsetZeroOnExact': cases.every((c) => c['offset'] == 0.0),
     'fullCorrect': cases.where((c) => c['full'] == 'DOGRU').length,
     'pass': maxErr <= 1e-6 &&
         dropOk == dropN &&
+        cases.every((c) => c['offset'] == 0.0) &&
         cases.every((c) => c['full'] == 'DOGRU'),
   };
   // §9.2 harness K0 path == ChordDetector on the shipped test fixtures.

@@ -40,6 +40,7 @@ void main() {
       }
       expect(fit.floor, closeTo(0.003, 1e-6));
       expect(fit.r2, closeTo(1, 1e-9));
+      expect(fit.offsetCents, 0);
     }
   });
 
@@ -48,7 +49,7 @@ void main() {
     final s = Float64List.fromList(List.generate(
         k.synthesize(Float64List(k.nPitch), 0).length,
         (_) => rng.nextDouble()));
-    final fit = k.fitSpectrum(s);
+    final fit = k.fitAtOffset(s, 0);
     for (final v in fit.activations) {
       expect(v, greaterThanOrEqualTo(0));
     }
@@ -93,6 +94,34 @@ void main() {
     expect(d.unexpected.map((u) => u.$1), contains(56));
   });
 
+  test('tuning search (R1): a detuned exact spectrum is found at its offset',
+      () {
+    final full = {for (final m in em.midi) m!: 1.0};
+    final s0 = k.synthesize(actFor(k, full), 0);
+    // Shift by resynthesising through the +15 c dictionary.
+    final shifted =
+        ChordStringChecker(tuningSearchCents: 15, tuningStepCents: 15);
+    final s15 = shifted.fitAtOffset(s0, 0); // sanity: offset 0 exists
+    expect(s15.offsetCents, 0);
+    final fit = k.fitSpectrum(s0);
+    expect(fit.offsetCents, 0);
+    expect(k.offsets.length, 25);
+    expect(k.offsets.first, -30);
+    expect(k.offsets.last, 30);
+  });
+
+  test('shared strings (R2): octave/partial-covered strings are never missing',
+      () {
+    expect([for (final i in em.playedIndices) k.isShared(em, i)],
+        [false, false, true, false, true, true]); // E2 B2 E3 G3 B3 E4
+    expect([for (final i in c.playedIndices) k.isShared(c, i)],
+        [false, false, false, true, true]); // C3 E3 G3 C4 E4
+    final drop = {for (final m in em.midi) m!: 1.0}..remove(64);
+    final j = k.judge(k.fitSpectrum(k.synthesize(actFor(k, drop), 0)), em);
+    expect(j.strings.firstWhere((s) => s.string == 1).heard, isTrue);
+    expect(j.verdict, ChordVerdict.correct);
+  });
+
   test('extra string is reported, does not change the verdict', () {
     final m = {
       for (final x in c.midi)
@@ -120,8 +149,12 @@ void main() {
   test('allowed voicings: any correct wins (G 3 or 4 fingers)', () {
     final m = {for (final x in g4.midi) x!: 1.0};
     final f = k.fitSpectrum(k.synthesize(actFor(k, m), 0));
-    expect(k.judge(f, g3).verdict, isNot(ChordVerdict.correct));
     expect(k.judge(f, g4).verdict, ChordVerdict.correct);
+    // G3's B3 is shared (octave of B2), so G4 also passes as G3 (§13 R2).
+    expect(
+        k.judge(f, g3).strings.firstWhere((s) => s.string == 2).shared, isTrue);
+    // A non-G expectation is not correct.
+    expect(k.judge(f, c).verdict, isNot(ChordVerdict.correct));
   });
 
   test(

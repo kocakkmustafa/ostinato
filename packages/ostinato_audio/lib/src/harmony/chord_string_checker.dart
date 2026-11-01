@@ -5,13 +5,14 @@ import '../dsp/fft.dart';
 import '../gate/audio_confidence_gate.dart' show rmsDb;
 
 /// E53 arm K1: string-by-string check of a strummed chord against the
-/// voicing the lesson expects (PLAN E53 §2, §4).
+/// voicing the lesson expects (PLAN E53 §2, §4, revised in §13 before
+/// sealing).
 ///
 /// EXPERIMENT CODE. Deliberately not exported from `ostinato_audio.dart` and
 /// not wired to any controller (PLAN §10.7): only `tool/chord_eval.dart` and
 /// its tests import it. Whether it may ever reach the app is what E53 decides.
 ///
-/// Method, frozen by the plan:
+/// Method (PLAN §4 as revised in §13; the revision is marked R):
 /// 1. the caller cuts the strum window (strum + 80 ms … min(+480 ms,
 ///    next strum − 20 ms), ≥ 200 ms);
 /// 2. Hann, zero padding to [fftSize] (2^16 → 0.73 Hz at 48 kHz), magnitude,
@@ -21,7 +22,20 @@ import '../gate/audio_confidence_gate.dart' show rmsDb;
 ///    frequency (σ = [sigmaCents]); plus one flat floor atom;
 /// 4. non-negative least squares (Lawson–Hanson) → a_p ≥ 0, explained energy
 ///    R² = 1 − ‖S − D·a‖² / ‖S‖²;
-/// 5. string s (pitch p_s) is heard ⇔ a_{p_s} ≥ θ_rel · max_{s'} a_{p_{s'}};
+///    R1 (tuning): the dictionary is built at global offsets
+///    −[tuningSearchCents] … +[tuningSearchCents] in [tuningStepCents]
+///    steps; the fit with the highest R² is kept (first on ties, ascending
+///    offset). Everything below uses that fit;
+/// 5. R2 (string evidence): own-band evidence of pitch p =
+///    Σ over bins within ±[evidenceBandCents] of its partials
+///    1–[evidencePartials] of max(0, S − (D·a − a_p·d_p)), i.e. the part of
+///    its own bands not explained by the other atoms. String s is *shared*
+///    when its fundamental and its 2nd partial both lie within
+///    ±[sharedToleranceCents] of a partial 1–[sharedMaxPartial] (nominal,
+///    equal temperament) of a lower expected string: a shared string has no
+///    spectral evidence of its own and is never declared missing (reported
+///    as shared). Any other string is heard ⇔
+///    ev_s ≥ θ_rel · max_{s'} ev_{s'} (max over all expected strings);
 /// 6. unexpected pitch: p not expected, pitch class outside the chord's, and
 ///    a_p ≥ θ_x · max_s a_{p_s};
 /// 7. extra string (information only): p in the chord's pitch classes, not
@@ -57,8 +71,8 @@ final class StringVoicing {
 }
 
 final class StringCheck {
-  const StringCheck(
-      this.string, this.midi, this.activation, this.heard, this.possiblyMuted);
+  const StringCheck(this.string, this.midi, this.activation, this.heard,
+      this.possiblyMuted, this.shared, this.evidence);
   final int string; // 6…1
   final int midi;
   final double activation;
@@ -67,6 +81,10 @@ final class StringCheck {
   /// Not heard in the window, but energy at its pitch in the first 80 ms
   /// (report only; PLAN §2).
   final bool possiblyMuted;
+
+  /// No spectral evidence of its own (step 5): never declared missing.
+  final bool shared;
+  final double evidence;
 }
 
 final class VoicingJudgement {
@@ -111,12 +129,30 @@ final class ChordStringResult {
 }
 
 final class SpectrumFit {
-  const SpectrumFit(this.activations, this.floor, this.r2);
+  const SpectrumFit(
+      this.activations, this.floor, this.r2, this.offsetCents, this.evidence);
 
   /// a_p for MIDI midiLow + i.
   final Float64List activations;
   final double floor;
   final double r2;
+
+  /// Global tuning offset of the kept fit (step 4, R1).
+  final double offsetCents;
+
+  /// Own-band evidence per pitch (step 5, R2); null when not computed.
+  final Float64List? evidence;
+}
+
+final class _Dictionary {
+  _Dictionary(this.offsetCents, this.bins, this.vals, this.gram, this.evBins,
+      this.evVals);
+  final double offsetCents;
+  final List<Int32List> bins; // per pitch atom, sorted
+  final List<Float64List> vals;
+  final Float64List gram; // (n+1)², last = floor atom
+  final List<Int32List> evBins; // per pitch: own-band bins (sorted, unique)
+  final List<Float64List> evVals; // own atom value at those bins
 }
 
 final class ChordStringChecker {
@@ -130,10 +166,16 @@ final class ChordStringChecker {
     this.partials = 8,
     this.inharmonicityB = 1e-4,
     this.sigmaCents = 15,
-    this.thetaRel = 0.12,
-    this.thetaX = 0.30,
+    this.thetaRel = 0.05,
+    this.thetaX = 0.35,
     this.tauFit = 0.40,
     this.levelAboveFloorDb = 6,
+    this.tuningSearchCents = 30,
+    this.tuningStepCents = 2.5,
+    this.evidenceBandCents = 30,
+    this.evidencePartials = 2,
+    this.sharedToleranceCents = 30,
+    this.sharedMaxPartial = 8,
   }) {
     _build();
   }
@@ -141,13 +183,16 @@ final class ChordStringChecker {
   final int sampleRate, fftSize, midiLow, midiHigh, partials;
   final double minHz, maxHz, inharmonicityB, sigmaCents;
   final double thetaRel, thetaX, tauFit, levelAboveFloorDb;
+  final double tuningSearchCents, tuningStepCents, evidenceBandCents;
+  final int evidencePartials, sharedMaxPartial;
+  final double sharedToleranceCents;
 
   late final int _k0, _k1; // band bins [k0, k1]
-  late final List<Int32List> _atomBins; // per pitch atom
-  late final List<Float64List> _atomVals;
-  late final Float64List _gram; // (n+1)², last = floor atom
+  late final List<_Dictionary> _dicts; // ascending offset
+  late final int _zeroIndex; // dictionary at offset 0
   int get nPitch => midiHigh - midiLow + 1;
   int get nAtoms => nPitch + 1;
+  List<double> get offsets => [for (final d in _dicts) d.offsetCents];
 
   static double midiHz(num m) => 440 * math.pow(2, (m - 69) / 12).toDouble();
 
@@ -155,10 +200,20 @@ final class ChordStringChecker {
     final df = sampleRate / fftSize;
     _k0 = (minHz / df).ceil();
     _k1 = (maxHz / df).floor();
+    final steps = (tuningSearchCents / tuningStepCents).round();
+    _dicts = [
+      for (var k = -steps; k <= steps; k++) _buildAt(k * tuningStepCents, df)
+    ];
+    _zeroIndex = steps;
+  }
+
+  _Dictionary _buildAt(double offset, double df) {
     final bins = <Int32List>[], vals = <Float64List>[];
+    final evBins = <Int32List>[], evVals = <Float64List>[];
     final reach = 4 * sigmaCents; // cents
+    final shift = math.pow(2, offset / 1200).toDouble();
     for (var p = midiLow; p <= midiHigh; p++) {
-      final f0 = midiHz(p);
+      final f0 = midiHz(p) * shift;
       final acc = <int, double>{};
       for (var n = 1; n <= partials; n++) {
         final fn = n * f0 * math.sqrt(1 + inharmonicityB * n * n);
@@ -173,34 +228,48 @@ final class ChordStringChecker {
       final ks = acc.keys.toList()..sort();
       bins.add(Int32List.fromList(ks));
       vals.add(Float64List.fromList([for (final k in ks) acc[k]!]));
+      // Own bands (R2): bins within ±evidenceBandCents of partials 1…E.
+      final band = <int>{};
+      for (var n = 1; n <= evidencePartials; n++) {
+        final fn = n * f0 * math.sqrt(1 + inharmonicityB * n * n);
+        final lo = math.max(
+            _k0, (fn * math.pow(2, -evidenceBandCents / 1200) / df).floor());
+        final hi = math.min(
+            _k1, (fn * math.pow(2, evidenceBandCents / 1200) / df).ceil());
+        for (var k = lo; k <= hi; k++) {
+          final c = (1200 * math.log(k * df / fn) / math.ln2).abs();
+          if (c <= evidenceBandCents) band.add(k);
+        }
+      }
+      final eb = band.toList()..sort();
+      evBins.add(Int32List.fromList(eb));
+      evVals.add(Float64List.fromList([for (final k in eb) acc[k] ?? 0.0]));
     }
-    _atomBins = bins;
-    _atomVals = vals;
     final n = nAtoms;
     final g = Float64List(n * n);
     final dense = Float64List(_k1 + 1);
     for (var i = 0; i < nPitch; i++) {
       dense.fillRange(0, dense.length, 0);
-      for (var j = 0; j < _atomBins[i].length; j++) {
-        dense[_atomBins[i][j]] = _atomVals[i][j];
+      for (var j = 0; j < bins[i].length; j++) {
+        dense[bins[i][j]] = vals[i][j];
       }
       for (var k = i; k < nPitch; k++) {
         var s = 0.0;
-        for (var j = 0; j < _atomBins[k].length; j++) {
-          s += dense[_atomBins[k][j]] * _atomVals[k][j];
+        for (var j = 0; j < bins[k].length; j++) {
+          s += dense[bins[k][j]] * vals[k][j];
         }
         g[i * n + k] = s;
         g[k * n + i] = s;
       }
       var s = 0.0;
-      for (final v in _atomVals[i]) {
+      for (final v in vals[i]) {
         s += v;
       }
       g[i * n + nPitch] = s;
       g[nPitch * n + i] = s;
     }
     g[nPitch * n + nPitch] = (_k1 - _k0 + 1).toDouble();
-    _gram = g;
+    return _Dictionary(offset, bins, vals, g, evBins, evVals);
   }
 
   /// Band magnitude spectrum of [window] (Hann, zero-padded), bins k0…k1.
@@ -219,22 +288,48 @@ final class ChordStringChecker {
     return s;
   }
 
-  /// D·a for given pitch activations and floor (band bins), for tests and
-  /// the identity check (PLAN §9.1).
-  Float64List synthesize(List<double> activations, double floor) {
+  /// D·a at tuning offset 0 for given pitch activations and floor (band
+  /// bins), for tests and the identity check (PLAN §9.1).
+  Float64List synthesize(List<double> activations, double floor) =>
+      _synth(_dicts[_zeroIndex], activations, floor);
+
+  Float64List _synth(_Dictionary d, List<double> activations, double floor) {
     final s = Float64List(_k1 - _k0 + 1)..fillRange(0, _k1 - _k0 + 1, floor);
     for (var i = 0; i < nPitch; i++) {
       final a = activations[i];
       if (a == 0) continue;
-      for (var j = 0; j < _atomBins[i].length; j++) {
-        s[_atomBins[i][j] - _k0] += a * _atomVals[i][j];
+      for (var j = 0; j < d.bins[i].length; j++) {
+        s[d.bins[i][j] - _k0] += a * d.vals[i][j];
       }
     }
     return s;
   }
 
-  /// NNLS fit of a band spectrum (length k1 − k0 + 1).
+  /// NNLS fit of a band spectrum with the tuning search (R1) and the own-band
+  /// evidence (R2) of the kept fit.
   SpectrumFit fitSpectrum(Float64List s) {
+    SpectrumFit? best;
+    _Dictionary? bestD;
+    for (final d in _dicts) {
+      final f = _fitAt(d, s);
+      if (best == null || f.r2 > best.r2) {
+        best = f;
+        bestD = d;
+      }
+    }
+    return SpectrumFit(best!.activations, best.floor, best.r2,
+        bestD!.offsetCents, _evidence(bestD, s, best));
+  }
+
+  /// Fit at one tuning offset only (tests, identity check).
+  SpectrumFit fitAtOffset(Float64List s, double offsetCents) {
+    final d = _dicts.firstWhere((d) => d.offsetCents == offsetCents);
+    final f = _fitAt(d, s);
+    return SpectrumFit(
+        f.activations, f.floor, f.r2, d.offsetCents, _evidence(d, s, f));
+  }
+
+  SpectrumFit _fitAt(_Dictionary d, Float64List s) {
     final n = nAtoms;
     final b = Float64List(n);
     var ss = 0.0;
@@ -244,12 +339,12 @@ final class ChordStringChecker {
     }
     for (var i = 0; i < nPitch; i++) {
       var acc = 0.0;
-      for (var j = 0; j < _atomBins[i].length; j++) {
-        acc += s[_atomBins[i][j] - _k0] * _atomVals[i][j];
+      for (var j = 0; j < d.bins[i].length; j++) {
+        acc += s[d.bins[i][j] - _k0] * d.vals[i][j];
       }
       b[i] = acc;
     }
-    final x = nnlsGram(_gram, b, n);
+    final x = nnlsGram(d.gram, b, n);
     // ‖S − Dx‖² = sᵀs − 2xᵀb + xᵀGx
     var xb = 0.0, xgx = 0.0;
     for (var i = 0; i < n; i++) {
@@ -257,13 +352,49 @@ final class ChordStringChecker {
       xb += x[i] * b[i];
       var gi = 0.0;
       for (var k = 0; k < n; k++) {
-        gi += _gram[i * n + k] * x[k];
+        gi += d.gram[i * n + k] * x[k];
       }
       xgx += x[i] * gi;
     }
     final resid = math.max(0.0, ss - 2 * xb + xgx);
     final r2 = ss > 0 ? 1 - resid / ss : 0.0;
-    return SpectrumFit(Float64List.sublistView(x, 0, nPitch), x[nPitch], r2);
+    return SpectrumFit(Float64List.sublistView(x, 0, nPitch), x[nPitch], r2,
+        d.offsetCents, null);
+  }
+
+  Float64List _evidence(_Dictionary d, Float64List s, SpectrumFit f) {
+    final pred = _synth(d, f.activations, f.floor);
+    final ev = Float64List(nPitch);
+    for (var p = 0; p < nPitch; p++) {
+      final a = f.activations[p];
+      var e = 0.0;
+      for (var j = 0; j < d.evBins[p].length; j++) {
+        final k = d.evBins[p][j] - _k0;
+        final other = pred[k] - a * d.evVals[p][j];
+        final u = s[k] - other;
+        if (u > 0) e += u;
+      }
+      ev[p] = e;
+    }
+    return ev;
+  }
+
+  /// Step 5 (R2): string index [i] of [v] has no spectral evidence of its own.
+  bool isShared(StringVoicing v, int i) {
+    final m = v.midi[i]!;
+    bool covered(double c) {
+      for (final l in v.midi) {
+        if (l == null || l >= m) continue;
+        for (var n = 1; n <= sharedMaxPartial; n++) {
+          final cp = 100.0 * (l - 69) + 1200 * math.log(n) / math.ln2;
+          if ((c - cp).abs() <= sharedToleranceCents) return true;
+        }
+      }
+      return false;
+    }
+
+    final c1 = 100.0 * (m - 69);
+    return covered(c1) && covered(c1 + 1200);
   }
 
   /// Energy at each pitch's first four partials in [early] (Hann, Goertzel),
@@ -303,13 +434,20 @@ final class ChordStringChecker {
     double act(int midi) => midi >= midiLow && midi <= midiHigh
         ? fit.activations[midi - midiLow]
         : 0.0;
+    final evid = fit.evidence;
+    if (evid == null) throw ArgumentError('fit without evidence');
+    double ev(int midi) =>
+        midi >= midiLow && midi <= midiHigh ? evid[midi - midiLow] : 0.0;
     final played = v.playedIndices.toList();
-    var ref = 0.0;
+    var ref = 0.0, eref = 0.0;
     for (final i in played) {
       ref = math.max(ref, act(v.midi[i]!));
+      eref = math.max(eref, ev(v.midi[i]!));
     }
+    final shared = {for (final i in played) i: isShared(v, i)};
     final heard = <int, bool>{
-      for (final i in played) i: ref > 0 && act(v.midi[i]!) >= thetaRel * ref
+      for (final i in played)
+        i: shared[i]! || (eref > 0 && ev(v.midi[i]!) >= thetaRel * eref)
     };
     // Report-only muted flag: early energy ≥ half the median early energy of
     // the heard strings.
@@ -334,7 +472,9 @@ final class ChordStringChecker {
                 medHeard > 0 &&
                 v.midi[i]! >= midiLow &&
                 v.midi[i]! <= midiHigh &&
-                early![v.midi[i]! - midiLow] >= 0.5 * medHeard)
+                early![v.midi[i]! - midiLow] >= 0.5 * medHeard,
+            shared[i]!,
+            ev(v.midi[i]!))
     ];
     final expected = {for (final i in played) v.midi[i]!};
     final pcs = v.pitchClasses;
