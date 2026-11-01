@@ -1,0 +1,99 @@
+{
+  "id": "voc-s3-m14-10",
+  "title": { "en": "Phrase endings", "tr": "Cümle sonları" },
+  "goal": {
+    "en": "Sings four short original phrases and ends each one gently, with the last note within 35 cents to its very end.",
+    "tr": "Dört kısa özgün cümle söyler ve her birini yumuşakça bitirir; son nota sonuna kadar 35 cent içinde kalır."
+  },
+  "explanation": [
+    {
+      "en": "The end of a phrase is where the listener hears your care. A good ending holds the pitch to the end and then simply stops.",
+      "tr": "Cümlenin sonu, dinleyicinin senin özenini duyduğu yerdir. İyi bir son perdeyi sonuna kadar tutar, sonra yalnızca durur."
+    },
+    {
+      "en": "The last note often sags or fades away too early. Keep the energy to the last moment, a little lighter but not weaker.",
+      "tr": "Son nota çoğu zaman düşer ya da çok erken söner. Enerjiyi son ana kadar koru; biraz daha hafif, ama zayıf değil."
+    },
+    {
+      "en": "Release by stopping the air. Do not add a breathy 'h', a push or a drop in pitch at the end.",
+      "tr": "Bırakışı havayı durdurarak yap. Sonda nefesli bir 'h', bir itiş ya da perde düşüşü ekleme."
+    },
+    {
+      "en": "The four phrases end on do, mi, sol and do. Each last note lasts two counts and stops before the rest bar.",
+      "tr": "Dört cümle do, mi, sol ve do'da biter. Her son nota iki sayım sürer ve sus ölçüsünden önce durur."
+    },
+    {
+      "en": "Breathe in the rest bar after each phrase, so the next one starts fresh.",
+      "tr": "Her cümleden sonraki sus ölçüsünde nefes al; sonraki cümle taze başlasın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The four phrases in your comfortable range on 'ah', soft synthesized voice, each ending held steady and released cleanly, with a soft count.",
+      "tr": "Dört cümle rahat menzilinde 'a' ile, yumuşak sentez ses; her son nota sabit tutulur ve temizce bırakılır, yumuşak sayımla."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Sing each phrase on 'ah', one note per count, and hold the last note for two counts. Stop the sound cleanly, then breathe during the rest bar. Sing all four phrases. Sing in your own octave.",
+      "tr": "Her cümleyi 'a' ile, her sayıma bir nota söyle ve son notayı iki sayım tut. Sesi temizce durdur, sonra sus ölçüsünde nefes al. Dört cümlenin hepsini söyle. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 3-2 1:h | wr | 3-4-5-6 | 5-4 3:h | wr | 5-4-3-2 | 3-4 5:h | wr | 5-6-5-4 | 3-2 1:h",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "The last note of each phrase stays within 35 cents to its end and stops before the rest bar. The other notes meet Level 3 pitch accuracy.",
+        "tr": "Her cümlenin son notası sonuna kadar 35 cent içinde kalır ve sus ölçüsünden önce durur. Diğer notalar Seviye 3 perde ölçütünü sağlar."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each last note held its pitch to the end.",
+      "tr": "Her son nota perdesini sonuna kadar korudu."
+    },
+    {
+      "en": "I stopped each phrase by stopping the air, with no extra sound.",
+      "tr": "Her cümleyi havayı durdurarak, fazladan bir ses olmadan bitirdim."
+    },
+    {
+      "en": "I breathed in the rests, not inside the phrases.",
+      "tr": "Nefesi cümlelerin içinde değil, suslarda aldım."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the pitch sinks at the end of the phrase.",
+        "tr": "Farklı nota: perde cümle sonunda düşüyor."
+      },
+      "fix": {
+        "en": "Keep the note in mind to the very end. Make the last note a little lighter instead of letting it fade.",
+        "tr": "Notayı sonuna kadar içinde duy. Son notayı söndürmek yerine biraz hafiflet."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but the last note runs into the rest bar.",
+        "tr": "Doğru, ama son nota sus ölçüsüne taşıyor."
+      },
+      "fix": {
+        "en": "Count the two beats of the last note and stop on the next count.",
+        "tr": "Son notanın iki vuruşunu say ve bir sonraki sayımda dur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only the first and last phrases, which both end on do.",
+    "tr": "Yalnız ikisi de do'da biten ilk ve son cümleyi söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

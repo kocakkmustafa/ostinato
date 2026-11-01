@@ -1,0 +1,123 @@
+{
+  "id": "voc-s3-m12-10",
+  "title": {
+    "en": "Scarborough Fair",
+    "tr": "Scarborough Fair"
+  },
+  "goal": {
+    "en": "Sings an older variant of the traditional melody Scarborough Fair, 16 bars at ♩=80, keeping its Dorian colour in tune.",
+    "tr": "Geleneksel Scarborough Fair ezgisinin eski bir varyantını, 16 ölçü ♩=80'de, Dorian rengini doğru perdede koruyarak söyler."
+  },
+  "explanation": [
+    {
+      "en": "Scarborough Fair is a traditional English melody. You sing an older printed variant of the tune; later arrangements and recordings are not used.",
+      "tr": "Scarborough Fair geleneksel bir İngiliz ezgisidir. Ezginin eski bir basılı varyantını söylersin; sonraki düzenlemeler ve kayıtlar kullanılmaz."
+    },
+    {
+      "en": "The tune has a Dorian colour: it is natural minor with one note raised. 6 takes the place of ♭6.",
+      "tr": "Ezginin Dorian rengi vardır: bir notası yükseltilmiş doğal minördür. ♭6'nın yerini 6 alır."
+    },
+    {
+      "en": "So the scale reads 1-2-♭3-4-5-6-♭7-8. Against the minor triad, 6 sounds brighter.",
+      "tr": "Böylece gam 1-2-♭3-4-5-6-♭7-8 olur. Minör üçlünün üstünde 6 daha parlak duyulur."
+    },
+    {
+      "en": "Before you start, sing 5-6-♭7-8 slowly and hear the whole step from 5 to 6.",
+      "tr": "Başlamadan önce 5-6-♭7-8'i yavaşça söyle ve 5'ten 6'ya tam sesi duy."
+    },
+    {
+      "en": "Sing the melody only, on “la”. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Yalnız ezgiyi “la” ile söyle. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The melody in your comfortable range, soft synthesized voice, at ♩=80 and ♩=55, over an original soft accompaniment with a click. Headphones recommended.",
+      "tr": "Ezgi rahat menzilinde, yumuşak sentez ses, ♩=80 ve ♩=55; özgün yumuşak eşlik ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the 16-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on “la” at ♩=80. Start at ♩=55 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama 16 ölçülük ezgiyi derecelerle gösterir. Eşliğin bir ölçüsünü dinle, sonra ezgiyi “la” ile ♩=80'de söyle. İstersen ♩=55'te başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "6 sounded brighter than the ♭6 of natural minor.",
+      "tr": "6, doğal minördeki ♭6'dan daha parlak duyuldu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, 6 a semitone low.",
+        "tr": "Farklı nota: 6 yarım ses alçak."
+      },
+      "fix": {
+        "en": "That is the ♭6 of natural minor. Take a full whole step from 5 to 6.",
+        "tr": "Bu doğal minördeki ♭6 olur. 5'ten 6'ya tam bir tam ses çık."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late after a long note.",
+        "tr": "Doğru, ama uzun notadan sonra geç."
+      },
+      "fix": {
+        "en": "Count the beats of the long note inside and move on the next click.",
+        "tr": "Uzun notanın vuruşlarını içinden say ve bir sonraki klikte geç."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the first 8 bars alone at ♩=55, then the last 8, then all 16.",
+    "tr": "♩=55'te önce yalnız ilk 8 ölçüyü, sonra son 8 ölçüyü, sonra 16'sını birden söyle."
+  },
+  "repertoire": "Scarborough Fair, traditional English melody. Source: an older variant from a 19th-century collection (variant to be fixed with the source scan). The 20th-century popular arrangement and recording are not used or referenced. Public domain, legal review pending. Melody only, sung on \"la\"; degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

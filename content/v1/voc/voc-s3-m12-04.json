@@ -1,0 +1,112 @@
+{
+  "id": "voc-s3-m12-04",
+  "title": {
+    "en": "Minor third in context",
+    "tr": "Bağlamda küçük üçlü"
+  },
+  "goal": {
+    "en": "Sings eight minor thirds inside a minor key, up and down.",
+    "tr": "Minör tonda sekiz küçük üçlüyü çıkıcı ve inici söyler."
+  },
+  "explanation": [
+    {
+      "en": "A minor third (m3) is a whole step plus a half step: a half step smaller than a major third.",
+      "tr": "Küçük üçlü (K3) bir tam ses ve bir yarım sestir: büyük üçlüden yarım ses küçüktür."
+    },
+    {
+      "en": "In natural minor you find it at 1-♭3, 2-4, 4-♭6 and 5-♭7.",
+      "tr": "Doğal minörde 1-♭3, 2-4, 4-♭6 ve 5-♭7'de bulursun."
+    },
+    {
+      "en": "Before the tasks, the app plays the minor triad to set the key. Keep 1 in your ear; every task belongs to that key.",
+      "tr": "Görevlerden önce uygulama tonu kurmak için minör üçlüyü çalar. 1'i kulağında tut; her görev o tona aittir."
+    },
+    {
+      "en": "To find the top note, pass through the step in between in your head: 1-2-♭3, 4-5-♭6.",
+      "tr": "Üst notayı bulmak için içinden aradaki basamaktan geç: 1-2-♭3, 4-5-♭6."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The minor triad in your personal key, then each pair, played once before you sing and once after for comparison.",
+      "tr": "Kişisel tonunda minör üçlü, ardından her çift; söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Eight intervals: 1-♭3, ♭3-1, 2-4, 4-2, 4-♭6, ♭6-4, 5-♭7, ♭7-5. Sing the first note short and hold the second. The app picks 1 from your comfortable range. Sing in your own octave.",
+      "tr": "Sekiz aralık: 1-♭3, ♭3-1, 2-4, 4-2, 4-♭6, ♭6-4, 5-♭7, ♭7-5. İlk notayı kısa söyle, ikinciyi tut. Uygulama 1'i rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1:q b3:h qr | b3:q 1:h qr | 2:q 4:h qr | 4:q 2:h qr | 4:q b6:h qr | b6:q 4:h qr | 5:q b7:h qr | b7:q 5:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept 1 of the key in my ear.",
+      "tr": "Tonun 1'ini kulağımda tuttum."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, m3 a semitone high.",
+        "tr": "Farklı nota: K3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "That is a major third. In minor the top note is lower: keep ♭3, ♭6 and ♭7 a half step down.",
+        "tr": "Bu büyük üçlü olur. Minörde üst nota daha alçaktır: ♭3, ♭6 ve ♭7'yi yarım ses aşağıda tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, m3 a semitone low.",
+        "tr": "Farklı nota: K3 yarım ses alçak."
+      },
+      "fix": {
+        "en": "That is only a whole step. Reach a half step further.",
+        "tr": "Bu yalnız bir tam ses. Yarım ses daha uzan."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the step in between aloud first (1-2-♭3), then leave it out.",
+    "tr": "Önce aradaki basamağı sesli söyle (1-2-♭3), sonra onu atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

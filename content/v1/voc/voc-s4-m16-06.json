@@ -1,0 +1,114 @@
+{
+  "id": "voc-s4-m16-06",
+  "title": {
+    "en": "Blue notes",
+    "tr": "Blues perdeleri"
+  },
+  "goal": {
+    "en": "Sings four figures that approach ♭3 on purpose, each sliding in the direction the figure asks for.",
+    "tr": "♭3'e bilerek yaklaşan dört figürü, her birini figürün istediği yönde kaydırarak söyler."
+  },
+  "explanation": [
+    {
+      "en": "Blues singers often slide into ♭3 or let it lean up toward 3. This in-between colour is called a blue note.",
+      "tr": "Blues şarkıcıları ♭3'e çoğu zaman kayarak girer ya da onu 3'e doğru hafifçe yükseltir. Bu arada kalan renge blues perdesi denir."
+    },
+    {
+      "en": "A blue note is a choice, not an accident. You decide where the slide starts and where it ends.",
+      "tr": "Blues perdesi kaza değil, seçimdir. Kaymanın nerede başlayıp nerede biteceğine sen karar verirsin."
+    },
+    {
+      "en": "Figure 1: start on 2 and slide up into ♭3. Figure 2: hold ♭3, then lean slowly up toward 3.",
+      "tr": "1. figür: 2'den başla ve ♭3'e kayarak çık. 2. figür: ♭3'ü tut, sonra yavaşça 3'e doğru yüksel."
+    },
+    {
+      "en": "Figure 3: start on 3 and fall back to ♭3. Figure 4: from ♭3 slide down to 1 and rest there.",
+      "tr": "3. figür: 3'ten başla ve ♭3'e geri düş. 4. figür: ♭3'ten 1'e kayarak in ve orada dur."
+    },
+    {
+      "en": "The app checks the shape of each slide, up or down, not an exact pitch.",
+      "tr": "Uygulama her kaymanın şeklini, yukarı ya da aşağı oluşunu ölçer; tam perdeyi ölçmez."
+    },
+    {
+      "en": "Keep the slides light and slow. If your throat tightens, stop and rest.",
+      "tr": "Kaymaları hafif ve yavaş tut. Boğazın sıkışırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Do, then the four figures in your range on a soft synthesized voice, slowly.",
+      "tr": "Do, ardından rahat menzilinde dört figür; yumuşak sentez sesle, yavaş."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Hear do, then sing each of the four figures on 'ah' or 'oo', two to three seconds each. Rest between figures. Sing in your own octave.",
+      "tr": "Do'yu duy, sonra dört figürün her birini 'a' ya da 'u' ile, her biri iki üç saniye, söyle. Figürler arasında dinlen. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each of the four figures moves in the asked direction and settles on a steady tone at the end. Exact pitch is not scored.",
+        "tr": "Dört figürün her biri istenen yönde hareket eder ve sonunda kararlı bir tonda durur. Tam perde puanlanmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I chose where each slide started and ended.",
+      "tr": "Her kaymanın nerede başlayıp bittiğini ben seçtim."
+    },
+    {
+      "en": "My throat stayed loose during the slides.",
+      "tr": "Kaymalar sırasında boğazım gevşek kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the slide goes the other way.",
+        "tr": "Farklı nota: kayma ters yöne gidiyor."
+      },
+      "fix": {
+        "en": "Hear the figure again and trace it with your hand: up for figures 1 and 2, down for figures 3 and 4.",
+        "tr": "Figürü yeniden dinle ve elinle çiz: 1. ve 2. figürde yukarı, 3. ve 4. figürde aşağı."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with figures 1 and 4 only; add figures 2 and 3 when the slides feel easy.",
+    "tr": "Önce yalnız 1. ve 4. figürle başla; kaymalar rahatlayınca 2. ve 3. figürü ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

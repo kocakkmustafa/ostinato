@@ -1,0 +1,127 @@
+{
+  "id": "voc-s3-m12-12",
+  "title": {
+    "en": "Minor checkpoint",
+    "tr": "Minör geçişi"
+  },
+  "goal": {
+    "en": "Sings the natural minor scale, the minor arpeggio and an original 8-bar minor melody in one run, in tune and on time at ♩=76.",
+    "tr": "Doğal minör gamı, minör arpeji ve özgün 8 ölçülük minör ezgiyi tek seferde ♩=76'da doğru perdede ve zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint brings the module together: the minor scale, the minor triad and a minor melody.",
+      "tr": "Bu geçiş modülü birleştirir: minör gam, minör üçlü ve minör bir ezgi."
+    },
+    {
+      "en": "Part 1 is the scale 1→8→1. Part 2 is the arpeggio 1-♭3-5-♭3-1. A bar of rest comes before each new part; breathe there.",
+      "tr": "1. bölüm 1→8→1 gamıdır. 2. bölüm 1-♭3-5-♭3-1 arpejidir. Her yeni bölümden önce bir ölçü sus gelir; orada nefes al."
+    },
+    {
+      "en": "Part 3 is an original 8-bar melody. It starts on 5, steps down to 1 and climbs back through ♭6 and ♭7. Bar 7 dips to low ♭7 before the last 1.",
+      "tr": "3. bölüm özgün 8 ölçülük bir ezgidir. 5'ten başlar, 1'e iner ve ♭6 ile ♭7'den geçerek yeniden çıkar. 7. ölçü son 1'den önce alttaki ♭7'ye iner."
+    },
+    {
+      "en": "If you miss a note, keep going and sing the next one on its click. Do not restart.",
+      "tr": "Bir notayı kaçırırsan devam et ve sonrakini kendi klikinde söyle. Baştan başlama."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "All three parts in your comfortable range, soft synthesized voice, at ♩=76 and ♩=55, over an original soft minor chord accompaniment (i, iv, v) with a click. Headphones recommended.",
+      "tr": "Üç bölümün tamamı rahat menzilinde, yumuşak sentez ses, ♩=76 ve ♩=55; özgün yumuşak minör akor eşliği (i, iv, v) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the three parts on “la” at ♩=76 without stopping. Practise at a slower tempo first if you need to; the checkpoint passes at ♩=76. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşliğin bir ölçüsünü dinle, sonra üç bölümü durmadan “la” ile ♩=76'da söyle. Gerekirse önce daha yavaş tempoda çalış; geçiş ♩=76'da geçilir. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "sequence": "1-2-b3-4 | 5-b6-b7-8 | b7-b6-5-4 | b3-2-1:h | wr | 1-b3-5-b3 | 1:h hr | wr | 5:q 4:q b3:q 2:q | 1:q 2:e b3:e 4:h | 5:q b6:q 5:q 4:q | b3:h. qr | 1:q b3:q 5:q b7:q | b6:q. 5:e 4:h | b3:q 2:e 1:e b7,:q 2:q | 1:w",
+    "tempo": {
+      "open": 76,
+      "target": 76
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "♭3, ♭6 and ♭7 kept their darker colour.",
+      "tr": "♭3, ♭6 ve ♭7 koyu renklerini korudu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭3 a semitone high.",
+        "tr": "Farklı nota: ♭3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "That is the major 3. Keep ♭3 a half step above 2.",
+        "tr": "Bu majördeki 3 olur. ♭3'ü 2'nin yalnız yarım ses üstünde tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, ♭6 or ♭7 a semitone high.",
+        "tr": "Farklı nota: ♭6 ya da ♭7 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "The ear pulls toward the major scale. Keep ♭6 close to 5, then take a whole step to ♭7 and another to 8.",
+        "tr": "Kulak majör gama çeker. ♭6'yı 5'e yakın tut, sonra ♭7'ye bir tam ses, 8'e bir tam ses daha çık."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise at ♩=55 and ♩=65 first, then take the checkpoint at ♩=76.",
+    "tr": "Önce ♩=55 ve ♩=65'te çalış, sonra geçişi ♩=76'da dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

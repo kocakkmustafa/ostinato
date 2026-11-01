@@ -1,0 +1,132 @@
+{
+  "id": "voc-s4-m16-12",
+  "title": {
+    "en": "Amazing Grace (pentatonic)",
+    "tr": "Amazing Grace (pentatonik)"
+  },
+  "goal": {
+    "en": "Sings the sixteen bars of the traditional tune of Amazing Grace in a personal key at ♩=80.",
+    "tr": "Amazing Grace'in geleneksel ezgisinin on altı ölçüsünü kişisel tonda ♩=80'de söyler."
+  },
+  "explanation": [
+    {
+      "en": "Amazing Grace is sung to an anonymous American hymn tune, New Britain, first printed in 1831. It uses only the five notes of the major pentatonic.",
+      "tr": "Amazing Grace, ilk kez 1831'de basılmış anonim bir Amerikan ilahi ezgisiyle, New Britain ile söylenir. Yalnız majör pentatoniğin beş notasını kullanır."
+    },
+    {
+      "en": "It is in 3/4: three beats per bar. It starts with a pickup, a single low sol on beat 3.",
+      "tr": "3/4'lüktür: ölçüde üç vuruş. Bir öncü notayla başlar: 3. vuruşta tek bir alçak sol."
+    },
+    {
+      "en": "Bars 1–4: do, mi-do as two eighths, mi, re, do, the la below do, and the low sol twice.",
+      "tr": "1–4. ölçüler: do, iki sekizlik olarak mi-do, mi, re, do, do'nun altındaki la ve iki kez alçak sol."
+    },
+    {
+      "en": "Bars 5–8 start the same way, then climb to the high sol and hold it for five beats. Mi on beat 3 of bar 8 leads on.",
+      "tr": "5–8. ölçüler aynı başlar, sonra yüksek sol'e çıkar ve onu beş vuruş tutar. 8. ölçünün 3. vuruşundaki mi devam ettirir."
+    },
+    {
+      "en": "Bar 9 starts on the high sol, bars 10–14 repeat bars 2–6, and the tune ends on a long do.",
+      "tr": "9. ölçü yüksek sol'le başlar, 10–14. ölçüler 2–6. ölçüleri tekrarlar ve ezgi uzun bir do'da biter."
+    },
+    {
+      "en": "The app picks the starting note from your comfortable range. Sing on 'la', or on the numbers.",
+      "tr": "Uygulama başlangıç notasını rahat menzilinden seçer. 'La' ile ya da sayılarla söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The sixteen bars in your comfortable range, soft synthesized voice, at ♩=80 and ♩=60, over an original accompaniment in 3/4. Headphones recommended.",
+      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=80 ve ♩=60; 3/4'lük özgün bir eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the pickup and the 16 bars on 'la'. Start at ♩=60 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra öncü notayı ve 16 ölçüyü 'la' ile söyle. İstersen ♩=60'ta başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "3/4: hr 5,:q | 1:h 3:e 1:e | 3:h 2:q | 1:h 6,:q | 5,:h 5,:q | 1:h 3:e 1:e | 3:h 2:q | 5:h.~h 3:q | 5:h 3:e 1:e | 3:h 2:q | 1:h 6,:q | 5,:h 5,:q | 1:h 3:e 1:e | 3:h 2:q | 1:h.~h.",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I sang the pickup on beat 3, before bar 1.",
+      "tr": "Öncü notayı 1. ölçüden önce, 3. vuruşta söyledim."
+    },
+    {
+      "en": "I held the high sol in bars 7–8 to the end.",
+      "tr": "7–8. ölçülerdeki yüksek sol'ü sonuna kadar tuttum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the low sol is a step high.",
+        "tr": "Farklı nota: alçak sol bir basamak yüksek."
+      },
+      "fix": {
+        "en": "You sang la below do. Hear do, then drop a fourth to sol, like the reference.",
+        "tr": "Do'nun altındaki la'yı söylemişsin. Do'yu duy, sonra referanstaki gibi dörtlü inerek sol'e geç."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but early in bar 8.",
+        "tr": "Doğru, ama 8. ölçüde erken."
+      },
+      "fix": {
+        "en": "The high sol lasts five beats. Count 1-2-3, 1-2, and sing mi on the next beat.",
+        "tr": "Yüksek sol beş vuruş sürer. 1-2-3, 1-2 say ve mi'yi sonraki vuruşta söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop bars 1–8 at ♩=60 until the long sol is steady, then sing all 16 bars.",
+    "tr": "Uzun sol kararlı olana kadar 1–8. ölçüleri ♩=60'ta döngüle, sonra 16 ölçünün hepsini söyle."
+  },
+  "repertoire": "Amazing Grace, hymn tune New Britain (anonymous, Virginia Harmony, 1831); words John Newton (1725–1807). Public domain, legal review pending. Sung on 'la'; degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 12,
+  "expertPending": true
+}

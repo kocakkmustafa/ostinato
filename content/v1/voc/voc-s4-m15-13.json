@@ -1,0 +1,124 @@
+{
+  "id": "voc-s4-m15-13",
+  "title": {
+    "en": "Fatigue signs and cool-down",
+    "tr": "Yorgunluk işaretleri ve soğuma"
+  },
+  "goal": {
+    "en": "Recognises signs of vocal fatigue and ends a session with a soft humming cool-down.",
+    "tr": "Ses yorgunluğunun işaretlerini tanır ve oturumu yumuşak bir mırıldanma soğumasıyla bitirir."
+  },
+  "explanation": [
+    {
+      "en": "After range work, end with a cool-down: a few minutes of soft, easy sound that brings the voice back to speaking.",
+      "tr": "Menzil çalışmasından sonra bir soğumayla bitir: sesi konuşmaya geri getiren birkaç dakikalık yumuşak ve rahat ses."
+    },
+    {
+      "en": "Signs of fatigue: a voice that feels heavy, a scratchy throat, notes that need more effort than at the start, or a top note that keeps getting lower. When you notice one, stop range work for today.",
+      "tr": "Yorgunluk işaretleri: ağır hissettiren bir ses, gıcıklanan bir boğaz, başlangıçtakinden fazla çaba isteyen notalar ya da giderek alçalan bir üst nota. Birini fark edince bugünlük menzil çalışmasını bırak."
+    },
+    {
+      "en": "Stop at once for pain, burning, dizziness or effort that keeps growing. Don't try to fix it with an exercise.",
+      "tr": "Ağrı, yanma, baş dönmesi ya da giderek artan zorlanmada hemen dur. Bunu bir alıştırmayla düzeltmeye çalışma."
+    },
+    {
+      "en": "The cool-down: hum 5-4-3-2-1 softly on “mm” twice, in the lower middle of your range. Then say a few ordinary words.",
+      "tr": "Soğuma: menzilinin alt-orta bölgesinde “mm” ile 5-4-3-2-1'i iki kez yumuşakça mırıldan. Sonra birkaç sıradan kelime söyle."
+    },
+    {
+      "en": "Keep the hum small and easy. The microphone only checks that the notes come in order; the cool-down is not a test.",
+      "tr": "Mırıldanmayı küçük ve rahat tut. Mikrofon yalnız notaların sırayla geldiğine bakar; soğuma bir sınav değildir."
+    },
+    {
+      "en": "If a voice problem lasts or keeps coming back, ask a suitable professional. The app does not assess your voice.",
+      "tr": "Bir ses sorunu sürerse ya da tekrar ederse uygun bir uzmana danış. Uygulama sesini değerlendirmez."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "5-4-3-2-1 hummed softly on “mm” in the lower middle of your range, slow and unhurried; twice.",
+      "tr": "Menzilinin alt-orta bölgesinde “mm” ile yumuşakça mırıldanan 5-4-3-2-1, yavaş ve acelesiz; iki kez."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M",
+      "Ö"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Hum 5-4-3-2-1 softly on “mm” twice and hold the last do. Rest, then say a few ordinary words. Then tick the checklist. Sing in your own octave.",
+      "tr": "“mm” ile 5-4-3-2-1'i iki kez yumuşakça mırıldan ve son do'yu tut. Dinlen, sonra birkaç sıradan kelime söyle. Sonra kontrol listesini işaretle. Kendi oktavında söyle."
+    },
+    "sequence": "5-4-3-2 | 1:w | 5-4-3-2 | 1:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Finish both hums with the notes in order, each within 50 cents, and tick every item on the checklist. The checklist part is marked as self-reported.",
+        "tr": "İki mırıldanmayı da notalar sırayla ve her biri 50 cent içinde gelecek şekilde bitir ve kontrol listesindeki her maddeyi işaretle. Kontrol listesi bölümü kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I checked my voice for fatigue signs before the cool-down.",
+      "tr": "Soğumadan önce sesimde yorgunluk işareti olup olmadığına baktım."
+    },
+    {
+      "en": "I stopped range work when I noticed a fatigue sign.",
+      "tr": "Bir yorgunluk işareti fark edince menzil çalışmasını bıraktım."
+    },
+    {
+      "en": "The hum stayed soft and easy.",
+      "tr": "Mırıldanma yumuşak ve rahat kaldı."
+    },
+    {
+      "en": "My speaking voice felt easy after the cool-down.",
+      "tr": "Soğumadan sonra konuşma sesim rahat geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Checklist: my speaking voice still felt heavy.",
+        "tr": "Kontrol listesi: konuşma sesim hâlâ ağır geldi."
+      },
+      "fix": {
+        "en": "Rest your voice for the rest of the day. If it lasts, ask a suitable professional.",
+        "tr": "Günün geri kalanında sesini dinlendir. Sürerse uygun bir uzmana danış."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "A very soft hum is hard to read. Hum a little closer to the phone, not louder.",
+        "tr": "Çok yumuşak bir mırıldanma zor okunur. Daha gür değil, telefona biraz daha yakın mırıldan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hum only 3-2-1 once, then say a few ordinary words.",
+    "tr": "Yalnız bir kez 3-2-1 mırıldan, sonra birkaç sıradan kelime söyle."
+  },
+  "minutes": 5,
+  "expertPending": true
+}

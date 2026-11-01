@@ -1,0 +1,99 @@
+{
+  "id": "voc-s3-m14-05",
+  "title": { "en": "Portamento or clean change", "tr": "Kaydırma mı temiz geçiş mi" },
+  "goal": {
+    "en": "Sings four intervals twice each, once with an audible slide and once with a clean change, and chooses each on purpose.",
+    "tr": "Dört aralığı ikişer kez söyler; bir kez duyulur bir kaydırmayla, bir kez temiz geçişle ve her birini bilerek seçer."
+  },
+  "explanation": [
+    {
+      "en": "Portamento is a deliberate slide from one note to the next. The voice passes through the pitches in between.",
+      "tr": "Portamento bir notadan sonrakine bilerek yapılan kaydırmadır. Ses aradaki perdelerin içinden geçer."
+    },
+    {
+      "en": "A clean change goes straight to the new note. You hear the first note, then the second, with nothing in between.",
+      "tr": "Temiz geçiş doğrudan yeni notaya gider. Önce ilk notayı, sonra ikinciyi duyarsın; arada başka bir şey yoktur."
+    },
+    {
+      "en": "Both are legato: the sound does not stop. The difference is only in how you travel.",
+      "tr": "İkisi de bağlıdır: ses kesilmez. Fark yalnız yolculuğun biçimindedir."
+    },
+    {
+      "en": "Make the slide late and short, in the last moment of the first note. Then land right on the second note and hold it still.",
+      "tr": "Kaydırmayı geç ve kısa yap; ilk notanın son anında. Sonra ikinci notanın tam üstüne in ve onu sabit tut."
+    },
+    {
+      "en": "A slide is a choice, not a habit. In most lines a clean change is the default; save the slide for a special moment.",
+      "tr": "Kaydırma bir seçimdir, alışkanlık değil. Çoğu dizide varsayılan temiz geçiştir; kaydırmayı özel bir an için sakla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each interval in your comfortable range on 'ah', soft synthesized voice: once with a short late slide, once with a clean change. Intervals: 1→3, 1→4, 1→5 and 5→1.",
+      "tr": "Her aralık rahat menzilinde 'a' ile, yumuşak sentez ses: bir kez kısa ve geç bir kaydırmayla, bir kez temiz geçişle. Aralıklar: 1→3, 1→4, 1→5 ve 5→1."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "For each interval, 1→3, 1→4, 1→5 and 5→1, sing two rounds on 'ah', two counts per note: first with a slide into the second note, then with a clean change. Sing in your own octave.",
+      "tr": "Her aralık için, 1→3, 1→4, 1→5 ve 5→1, 'a' ile nota başına iki sayım iki tur söyle: önce ikinci notaya kayarak, sonra temiz geçişle. Kendi oktavında söyle."
+    },
+    "sequence": "1:h 3:h | 1:h 3:h | 1:h 4:h | 1:h 4:h | 1:h 5:h | 1:h 5:h | 5:h 1:h | 5:h 1:h",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Both notes of every interval within 35 cents. In slide rounds the pitch line moves without a break between the notes; in clean rounds the second note settles within 150 ms.",
+        "tr": "Her aralığın iki notası da 35 cent içinde. Kaydırma turlarında perde çizgisi notalar arasında kesintisiz ilerler; temiz turlarda ikinci nota 150 ms içinde yerleşir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear the difference between my slide and my clean change.",
+      "tr": "Kaydırmamla temiz geçişim arasındaki farkı duyabildim."
+    },
+    {
+      "en": "My slides were short and came at the end of the first note.",
+      "tr": "Kaydırmalarım kısaydı ve ilk notanın sonunda geldi."
+    },
+    {
+      "en": "After each slide the second note stayed still.",
+      "tr": "Her kaydırmadan sonra ikinci nota sabit kaldı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the start, then it slides into place.",
+        "tr": "Başta farklı nota, sonra kayarak yerine oturuyor."
+      },
+      "fix": {
+        "en": "In the clean round, hear the second note in your head before you move, then go straight to it.",
+        "tr": "Temiz turda geçmeden önce ikinci notayı kafanda duy, sonra doğrudan ona git."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the slide overshoots the target.",
+        "tr": "Farklı nota: kaydırma hedefi aşıyor."
+      },
+      "fix": {
+        "en": "Slow the slide down as you arrive and stop exactly on the note.",
+        "tr": "Varırken kaydırmayı yavaşlat ve tam notanın üstünde dur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise only 1→3 and 5→1 until the two kinds feel clearly different.",
+    "tr": "İki tür belirgin biçimde farklı gelene kadar yalnız 1→3 ve 5→1'i çalış."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

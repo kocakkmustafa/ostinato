@@ -1,0 +1,133 @@
+{
+  "id": "voc-s4-m16-13",
+  "title": {
+    "en": "Improvising over twelve bars",
+    "tr": "On iki ölçüde doğaçlama"
+  },
+  "goal": {
+    "en": "Improvises one twelve-bar chorus over a backing at ♩=80 with notes from the blues scale.",
+    "tr": "Eşlik üstünde ♩=80'de blues gamının notalarıyla 12 ölçülük bir tur doğaçlama yapar."
+  },
+  "explanation": [
+    {
+      "en": "Now you improvise through the whole 12-bar form, one chorus over the backing.",
+      "tr": "Şimdi bütün 12 ölçülük biçim boyunca, eşlik üstünde bir tur doğaçlama yaparsın."
+    },
+    {
+      "en": "Your pool is the blues scale: 1, ♭3, 4, ♭5, 5 and ♭7, in any comfortable octave.",
+      "tr": "Havuzun blues gamıdır: 1, ♭3, 4, ♭5, 5 ve ♭7; herhangi bir rahat oktavda."
+    },
+    {
+      "en": "Think in three lines. Line 1: a short idea. Line 2: the same idea over IV. Line 3: an answer that ends on 1.",
+      "tr": "Üç satır düşün. 1. satır: kısa bir fikir. 2. satır: aynı fikir IV üstünde. 3. satır: 1'de biten bir cevap."
+    },
+    {
+      "en": "Leave space. Two bars of rest inside a chorus are fine and make the lines clearer.",
+      "tr": "Boşluk bırak. Bir turda iki ölçü sus olması iyidir ve satırları netleştirir."
+    },
+    {
+      "en": "Use ♭5 only in passing, between 4 and 5.",
+      "tr": "♭5'i yalnız geçerken, 4 ile 5 arasında kullan."
+    },
+    {
+      "en": "If you get lost, keep counting and come back in at bar 5 or bar 9.",
+      "tr": "Kaybolursan saymayı sürdür ve 5. ya da 9. ölçüde yeniden gir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "An original twelve-bar shuffle backing on I, IV and V in your key at ♩=80 with a one-bar count-in, plus one example chorus on a soft synthesized voice. Headphones recommended.",
+      "tr": "Kişisel tonunda I, IV ve V üstünde özgün 12 ölçülük shuffle eşlik, bir ölçü sayma girişiyle ♩=80; yumuşak sentez sesle bir örnek tur. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the backing, then improvise for 12 bars on 'doo' or 'la' at ♩=80, using only notes from the pool. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra yalnız havuzdaki notalarla 'du' ya da 'la' ile ♩=80'de 12 ölçü doğaçlama yap. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes are in the pool, and your phrases start and end inside the 12 bars.",
+        "tr": "Notalarının en az %90'ı havuzdan gelir; cümlelerin 12 ölçü içinde başlar ve biter."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used only notes from the pool.",
+      "tr": "Yalnız havuzdaki notaları kullandım."
+    },
+    {
+      "en": "I knew where bar 5 and bar 9 were.",
+      "tr": "5. ve 9. ölçünün nerede olduğunu bildim."
+    },
+    {
+      "en": "My last phrase ended on 1.",
+      "tr": "Son cümlem 1'de bitti."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: outside the pool.",
+        "tr": "Farklı nota: havuzun dışında."
+      },
+      "fix": {
+        "en": "The major mi slipped in, often over IV. Keep 3 flat; aim for ♭3 or 4 instead.",
+        "tr": "Majör mi karışmış, çoğu zaman IV üstünde. 3'ü bemol tut; yerine ♭3'ü ya da 4'ü hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but early: the chorus ended before bar 12.",
+        "tr": "Doğru, ama erken: tur 12. ölçüden önce bitti."
+      },
+      "fix": {
+        "en": "You lost a bar in the first line. Count the four I bars 1 to 4 and listen for IV in bar 5.",
+        "tr": "İlk satırda bir ölçü kaybetmişsin. Dört I ölçüsünü 1'den 4'e say ve 5. ölçüde IV'ü dinle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Improvise with only three notes, 1, ♭3 and 4, then open the full pool.",
+    "tr": "Önce yalnız üç notayla, 1, ♭3 ve 4 ile doğaçla; sonra bütün havuzu aç."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

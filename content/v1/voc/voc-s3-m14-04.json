@@ -1,0 +1,99 @@
+{
+  "id": "voc-s3-m14-04",
+  "title": { "en": "Accents without pushing", "tr": "İtmeden vurgu" },
+  "goal": {
+    "en": "Sings an original four-bar line with one accented note per bar, each at least 3 dB above the notes around it, at a comfortable volume.",
+    "tr": "Her ölçüde bir vurgulu nota bulunan özgün dört ölçülük diziyi söyler; her vurgu çevresindeki notalardan en az 3 dB yüksektir ve gürlük rahattır."
+  },
+  "explanation": [
+    {
+      "en": "An accent (>) gives one note a little more weight at its start. The note right after it goes back to your easy volume.",
+      "tr": "Vurgu (>) bir notanın başına biraz daha ağırlık verir. Hemen sonraki nota rahat gürlüğüne geri döner."
+    },
+    {
+      "en": "Make the accent with a little more air, not with a tighter throat or a hard click at the start.",
+      "tr": "Vurguyu biraz daha fazla havayla yap; daha sıkı bir boğazla ya da başta sert bir vuruşla değil."
+    },
+    {
+      "en": "The line is 1-3-2-1 | 2-4-3-2 | 3-5-4-3 | 1. The accents fall on beat 1 in bar 1, beat 3 in bar 2, beat 4 in bar 3 and the long 1 in bar 4.",
+      "tr": "Dizi 1-3-2-1 | 2-4-3-2 | 3-5-4-3 | 1. Vurgular 1. ölçüde 1. vuruşta, 2. ölçüde 3. vuruşta, 3. ölçüde 4. vuruşta ve 4. ölçüdeki uzun 1'dedir."
+    },
+    {
+      "en": "The accents are not on the highest notes. The weight goes where the mark is, not where the line climbs.",
+      "tr": "Vurgular en yüksek notalarda değildir. Ağırlık dizinin çıktığı yere değil, işaretin olduğu yere gider."
+    },
+    {
+      "en": "The microphone compares loudness within the line only. There is no absolute volume target, so keep the whole line easy and let the accents stand out.",
+      "tr": "Mikrofon yalnız dizinin içindeki gürlükleri karşılaştırır. Mutlak bir ses düzeyi hedefi yoktur; bütün diziyi rahat tut ve vurguların öne çıkmasına izin ver."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The four bars in your comfortable range on 'da', soft synthesized voice with a gentle accent on each marked note, with a soft count.",
+      "tr": "Dört ölçü rahat menzilinde 'da' ile, yumuşak sentez ses; her işaretli notada hafif bir vurgu, yumuşak sayımla."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Sing the four bars on 'da' at an easy volume, one note per count, and give each marked note a little more air. Then sing it once more. Sing in your own octave.",
+      "tr": "Dört ölçüyü 'da' ile rahat bir gürlükte, her sayıma bir nota söyle ve her işaretli notaya biraz daha hava ver. Sonra bir kez daha söyle. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-2-1 | 2-4-3-2 | 3-5-4-3 | 1:w | ×2",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each accented note is at least 3 dB louder than the notes around it. Loudness is compared within your own line only.",
+        "tr": "Her vurgulu nota çevresindeki notalardan en az 3 dB daha gür. Gürlük yalnız kendi dizin içinde karşılaştırılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The note after each accent went back to my easy volume.",
+      "tr": "Her vurgudan sonraki nota rahat gürlüğüme döndü."
+    },
+    {
+      "en": "My throat stayed easy on the accents.",
+      "tr": "Vurgularda boğazım rahat kaldı."
+    },
+    {
+      "en": "The top step was no louder than easy speech.",
+      "tr": "Üst basamak rahat konuşmadan daha gür değildi."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the accent is less than 3 dB above the notes around it.",
+        "tr": "Doğru, ama vurgu çevresindeki notalardan 3 dB'den az yüksek."
+      },
+      "fix": {
+        "en": "Make the other notes a little lighter instead of making the accent bigger.",
+        "tr": "Vurguyu büyütmek yerine diğer notaları biraz hafiflet."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but the whole line got louder.",
+        "tr": "Doğru, ama bütün dizi gürleşti."
+      },
+      "fix": {
+        "en": "Return to your easy volume right after each accent. Only one note per bar gets the extra air.",
+        "tr": "Her vurgudan hemen sonra rahat gürlüğüne dön. Ölçü başına yalnız bir nota fazladan hava alır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Speak the line on 'da' with the accents first, then sing it.",
+    "tr": "Önce diziyi vurgularıyla 'da' diye konuş, sonra söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,97 @@
+{
+  "id": "voc-s3-m13-08",
+  "title": { "en": "Leaps of a fourth and fifth", "tr": "Dörtlü ve beşli atlamalar" },
+  "goal": {
+    "en": "Sings an original four-bar line of fourths and fifths in C major from the staff, in their own octave.",
+    "tr": "Do majörde dörtlü ve beşli atlamalı özgün dört ölçülük satırı porteden kendi oktavında söyler."
+  },
+  "explanation": [
+    {
+      "en": "A fifth spans five notes. On the staff it goes from a line to the line after next, or from a space to the space after next. Do to sol is a fifth.",
+      "tr": "Beşli beş notayı kapsar. Portede bir çizgiden iki üstteki çizgiye ya da bir aralıktan iki üstteki aralığa gider. Do'dan sol'e beşlidir."
+    },
+    {
+      "en": "A fourth spans four notes. On the staff it always goes from a line to a space, or from a space to a line. Do to fa is a fourth.",
+      "tr": "Dörtlü dört notayı kapsar. Portede her zaman bir çizgiden bir aralığa ya da bir aralıktan bir çizgiye gider. Do'dan fa'ya dörtlüdür."
+    },
+    {
+      "en": "Use anchors you know. For a fifth, hear do-mi-sol and drop mi. For a fourth, hear sol going up to do, or do going up to fa.",
+      "tr": "Bildiğin dayanakları kullan. Beşli için do-mi-sol'ü duy ve mi'yi at. Dörtlü için sol'den do'ya ya da do'dan fa'ya çıkışı duy."
+    },
+    {
+      "en": "Bar 1: do up a fifth to sol, down a fourth to re, up a fifth to la. Bar 2: down to mi, up to la, step to sol, down to re. Bar 3: up to sol, down to do, up to fa, down to do. Bar 4: sol, then do.",
+      "tr": "1. ölçü: do'dan beşli çıkıp sol, dörtlü inip re, beşli çıkıp la. 2. ölçü: mi'ye iner, la'ya çıkar, sol'e basamakla geçer, re'ye iner. 3. ölçü: sol'e çıkar, do'ya iner, fa'ya çıkar, do'ya iner. 4. ölçü: sol, sonra do."
+    },
+    {
+      "en": "Find do first, then sing the line once without hearing it. The line plays after your try so you can compare.",
+      "tr": "Önce do'yu bul, sonra satırı duymadan bir kez söyle. Satır, karşılaştırabilmen için denemenden sonra çalar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do and the tonic chord in your comfortable range; the line itself plays only after your try, for comparison, at an easy pace and slowly.",
+      "tr": "Rahat menzilinde do ve tonik akor; satırın kendisi yalnız denemenden sonra, karşılaştırma için, rahat hızda ve yavaş çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Hear do, then sing the four bars from the staff on solfège or numbers, at your own pace. Only pitch is measured here. Sing in your own octave.",
+      "tr": "Do'yu dinle, sonra dört ölçüyü porteden solfejle ya da derecelerle, kendi hızında söyle. Burada yalnız perde ölçülür. Kendi oktavında söyle."
+    },
+    "sequence": "1-5-2-6 | 3-6-5-2 | 5-1-4-1 | 5:h 1:h",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    {
+      "en": "I checked line or space before each leap.",
+      "tr": "Her atlamadan önce çizgi mi aralık mı diye baktım."
+    },
+    {
+      "en": "My line matched the comparison afterwards.",
+      "tr": "Satırım sonradan çalınan karşılaştırmayla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: a fifth landed one step short, on a fourth.",
+        "tr": "Farklı nota: beşli bir basamak kısa, dörtlüde kaldı."
+      },
+      "fix": {
+        "en": "Check the staff: a fifth lands line to line or space to space. Hear the middle note, then sing the leap.",
+        "tr": "Porteye bak: beşli çizgiden çizgiye ya da aralıktan aralığa düşer. Aradaki notayı duy, sonra atlamayı söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the leap down from sol to re.",
+        "tr": "Sol'den re'ye inen atlamada farklı nota."
+      },
+      "fix": {
+        "en": "Leaps down tend to drift low. Hear sol-fa-mi-re in your head, then sing sol-re.",
+        "tr": "Aşağı atlamalar alçağa kaymaya yatkındır. İçinden sol-fa-mi-re'yi duy, sonra sol-re söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing each leap with the middle note filled in first, then sing the line as written.",
+    "tr": "Her atlamayı önce aradaki notayı doldurarak söyle, sonra satırı yazıldığı gibi söyle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

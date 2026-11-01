@@ -1,0 +1,123 @@
+{
+  "id": "voc-s4-m15-01",
+  "title": {
+    "en": "What range work is (and is not)",
+    "tr": "Menzil çalışması nedir, ne değildir"
+  },
+  "goal": {
+    "en": "Tells safe range work apart from forcing in at least 5 of 6 practice situations.",
+    "tr": "Altı çalışma durumunun en az beşinde güvenli menzil çalışmasını zorlamadan ayırır."
+  },
+  "explanation": [
+    {
+      "en": "Range work means singing easily near the edges of your comfortable range, so those notes grow familiar. It is not reaching for notes you cannot sing easily.",
+      "tr": "Menzil çalışması, rahat menzilinin kenarlarına yakın notaları kolayca söyleyip onları tanıdık hâle getirmektir. Kolayca söyleyemediğin notalara uzanmak değildir."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    },
+    {
+      "en": "Near the edges, sing softer and lighter, not louder. A note that needs a push, a lifted chin or a tight throat is outside your range today.",
+      "tr": "Kenarlara yakın daha hafif ve daha yumuşak söyle, daha gür değil. İtme, kalkan bir çene ya da sıkışan bir boğaz isteyen nota bugün menzilinin dışındadır."
+    },
+    {
+      "en": "Range is not a contest. The app never scores how high or how low you go, and it does not sort voices into types.",
+      "tr": "Menzil bir yarış değildir. Uygulama ne kadar tize ya da pese gittiğini asla puanlamaz ve sesleri türlere ayırmaz."
+    },
+    {
+      "en": "Range can grow slowly with short, regular, easy practice. Some days it is smaller; that is normal.",
+      "tr": "Menzil kısa, düzenli ve kolay çalışmayla yavaşça gelişebilir. Bazı günler daha dardır; bu normaldir."
+    },
+    {
+      "en": "Warm up first. Stop for tightness, a scratchy throat, pain or effort that keeps growing.",
+      "tr": "Önce ısın. Sıkışma, gıcıklanan boğaz, ağrı ya da giderek artan zorlanmada dur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; each question shows a short range-practice situation.",
+      "tr": "Referans ses yok; her soru kısa bir menzil çalışması durumu gösterir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Answer 6 questions. Each shows a short practice situation; choose: safe range work, or forcing.",
+      "tr": "6 soruyu yanıtla. Her biri kısa bir çalışma durumu gösterir; seç: güvenli menzil çalışması mı, zorlama mı."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 5 of 6 answers correct.",
+        "tr": "6 cevabın en az 5'i doğru."
+      },
+      "minCorrect": 5
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 6,
+      "params": {
+        "set": "range_work_principles",
+        "choices": [
+          "safe_range_work",
+          "forcing"
+        ],
+        "situations": [
+          "softer_and_lighter_near_the_top",
+          "skip_or_change_octave_when_tight",
+          "stop_at_first_tight_note",
+          "short_regular_sessions",
+          "warm_up_before_range_work",
+          "push_louder_to_reach_a_note",
+          "lift_chin_for_high_note",
+          "press_down_for_low_note",
+          "beat_last_weeks_top_note",
+          "keep_going_through_scratchy_throat"
+        ]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: “safe range work” chosen for pushing louder to reach a note.",
+        "tr": "Farklı cevap: bir notaya ulaşmak için daha gür itmeye “güvenli menzil çalışması” denildi."
+      },
+      "fix": {
+        "en": "Pushing louder is forcing. Near the edges, get softer, or turn back.",
+        "tr": "Daha gür itmek zorlamadır. Kenarlara yakın hafifle ya da geri dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: “forcing” chosen for skipping a tight note.",
+        "tr": "Farklı cevap: sıkışan bir notayı atlamaya “zorlama” denildi."
+      },
+      "fix": {
+        "en": "Skipping a note or changing its octave is part of safe range work. It never counts as a different note.",
+        "tr": "Bir notayı atlamak ya da oktavını değiştirmek güvenli menzil çalışmasının parçasıdır. Asla farklı nota sayılmaz."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Answer with the explanation points open on screen, then try once more without them.",
+    "tr": "Önce anlatım maddeleri ekranda açıkken yanıtla, sonra onlar olmadan bir kez daha dene."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

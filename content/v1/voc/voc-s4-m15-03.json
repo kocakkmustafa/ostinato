@@ -1,0 +1,119 @@
+{
+  "id": "voc-s4-m15-03",
+  "title": {
+    "en": "Upward five-note scales",
+    "tr": "Yükselen 5 notalık gamlar"
+  },
+  "goal": {
+    "en": "Sings the five-note scale 1-2-3-4-5-4-3-2-1 in up to six keys, a half step higher each time, and stops at the first round that feels tight.",
+    "tr": "5 notalık 1-2-3-4-5-4-3-2-1 gamını her seferinde yarım ses yukarıda, en fazla altı tonda söyler; sıkışan ilk turda durur."
+  },
+  "explanation": [
+    {
+      "en": "The five-note scale keeps its shape in every key: do re mi fa sol and back. Only the starting note moves.",
+      "tr": "5 notalık gam her tonda aynı biçimi korur: do re mi fa sol ve geri. Yalnız başlangıç notası kayar."
+    },
+    {
+      "en": "Each round starts a half step higher. The app starts low enough that the top of round 6 is the high note you saved, never above it.",
+      "tr": "Her tur yarım ses yukarıda başlar. Uygulama öyle aşağıdan başlar ki 6. turun tepesi sakladığın üst nota olur, asla onun üstü değil."
+    },
+    {
+      "en": "The screen writes the line from your first do, so the new keys show accidentals. You still think do-re-mi-fa-sol in each new key.",
+      "tr": "Ekran diziyi ilk do'na göre yazar; bu yüzden yeni tonlarda arızalar görünür. Sen her yeni tonda yine do-re-mi-fa-sol diye düşün."
+    },
+    {
+      "en": "Stop at the first round where sol feels tight, scratchy or pushed. Stopping there is the goal of this lesson, not a failure.",
+      "tr": "Sol'ün sıkışık, cızırtılı ya da itilmiş geldiği ilk turda dur. Orada durmak bu dersin hedefidir, başarısızlık değil."
+    },
+    {
+      "en": "Keep every round as light as the first. Higher does not mean louder.",
+      "tr": "Her turu ilki kadar hafif tut. Daha tiz, daha gür demek değildir."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Before each round the new do sounds, then 1-2-3-4-5-4-3-2-1 on “ah” as a model. Six keys, each a half step higher, inside your saved range.",
+      "tr": "Her turdan önce yeni do çalar, ardından örnek olarak “a” ile 1-2-3-4-5-4-3-2-1. Sakladığın menzilin içinde altı ton, her biri yarım ses yukarıda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing the scale on “ah” or in solfège, one note per beat, and hold the last do. Before each round, listen to the new do. Go up a half step each round, up to six rounds. Stop at the first round that feels tight. Sing in your own octave.",
+      "tr": "Gamı “a” ile ya da solfejle söyle, her vuruşa bir nota; son do'yu tut. Her turdan önce yeni do'yu dinle. Her turda yarım ses yukarı çık, en fazla altı tur. Sıkışan ilk turda dur. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5-4-3-2 | 1:h hr | b2-b3-4-b5 | b6-b5-4-b3 | b2:h hr | 2-3-#4-5 | 6-5-#4-3 | 2:h hr | b3-4-5-b6 | b7-b6-5-4 | b3:h hr | 3-#4-#5-6 | 7-6-#5-#4 | 3:h hr | 4-5-6-b7 | 8-b7-6-5 | 4:h hr",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Sing at least the first 2 rounds. Every round you sing meets the Level 4 pitch criteria. Stopping before round 6 is fine: the number of rounds is not scored.",
+        "tr": "En az ilk 2 turu söyle. Söylediğin her tur Seviye 4 perde ölçütünü karşılar. 6. turdan önce durmak sorun değildir: tur sayısı puanlanmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I stopped at the first round that felt tight.",
+      "tr": "Sıkışan ilk turda durdum."
+    },
+    {
+      "en": "Each round sounded like the same shape in a new place.",
+      "tr": "Her tur yeni bir yerde aynı biçim gibi duyuldu."
+    },
+    {
+      "en": "The top rounds were as light as the first.",
+      "tr": "Üst turlar ilki kadar hafifti."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the round a semitone low: it stayed in the old key.",
+        "tr": "Farklı nota, tur yarım ses alçak: eski tonda kaldı."
+      },
+      "fix": {
+        "en": "Hum the new do before you start the round, and begin from that note.",
+        "tr": "Tura başlamadan yeni do'yu mırıldan ve o notadan başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, sol a little low in the top rounds.",
+        "tr": "Farklı nota: üst turlarda sol biraz alçak."
+      },
+      "fix": {
+        "en": "The top of the scale is close to your edge. Make it lighter; if it still sags, stop there for today.",
+        "tr": "Gamın tepesi kenarına yakın. Onu hafiflet; yine düşüyorsa bugünlük orada dur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing three rounds only, and use 1-2-3-2-1 instead of the full five notes.",
+    "tr": "Yalnız üç tur söyle ve tam beş nota yerine 1-2-3-2-1 kullan."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,92 @@
+{
+  "id": "voc-s3-m13-06",
+  "title": { "en": "Rhythm and pitch at sight", "tr": "İlk görüşte ritim ve perde" },
+  "goal": {
+    "en": "Sings an original four-bar line in C major from the staff, rhythm and degrees together, with the click at ♩=70.",
+    "tr": "Do majörde özgün dört ölçülük satırı porteden, ritim ve dereceleri birlikte, ♩=70'te klikle söyler."
+  },
+  "explanation": [
+    {
+      "en": "Now the line has rhythm too. Read it in two passes before you sing: first the rhythm, then the notes.",
+      "tr": "Artık satırın ritmi de var. Söylemeden önce iki kez oku: önce ritmi, sonra notaları."
+    },
+    {
+      "en": "Speak the rhythm on 'ta' with the click. Eighths are two to a beat; the dotted quarter in bar 3 is long-short with the eighth after it.",
+      "tr": "Ritmi klikle 'ta' diye konuş. Sekizlikler bir vuruşta ikidir; 3. ölçüdeki noktalı dörtlük, ardındaki sekizlikle uzun-kısa gider."
+    },
+    {
+      "en": "Bar 1: do, re-mi as two eighths, fa, mi. Bar 2 holds sol for two beats, then mi and a rest. Bar 3: fa dotted, mi, re, fa. Bar 4 ends mi, re, do.",
+      "tr": "1. ölçü: do, iki sekizlik re-mi, fa, mi. 2. ölçü sol'ü iki vuruş tutar, sonra mi ve sus. 3. ölçü: noktalı fa, mi, re, fa. 4. ölçü mi, re, do diye biter."
+    },
+    {
+      "en": "Keep counting through the long notes and the rest. Breathe in the rest of bar 2.",
+      "tr": "Uzun notalarda ve susta saymaya devam et. 2. ölçüdeki susta nefes al."
+    },
+    {
+      "en": "Start at ♩=60. Move up to ♩=70 when the line is in tune and on time.",
+      "tr": "♩=60'ta başla. Satır perdesinde ve zamanında olunca ♩=70'e çık."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Do and the tonic chord in your comfortable range, then a one-bar click count-in; the line itself plays only after your try, for comparison, at ♩=70 and ♩=45.",
+      "tr": "Rahat menzilinde do ve tonik akor, ardından bir ölçülük klik girişi; satırın kendisi yalnız denemenden sonra, karşılaştırma için, ♩=70 ve ♩=45'te çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Speak the rhythm on 'ta' once. Hear do and the count-in, then sing the four bars from the staff on solfège or numbers with the click. Sing in your own octave.",
+      "tr": "Ritmi bir kez 'ta' diye konuş. Do'yu ve giriş sayımını dinle, sonra dört ölçüyü porteden solfejle ya da derecelerle klikle söyle. Kendi oktavında söyle."
+    },
+    "sequence": "1:q 2:e 3:e 4:q 3:q | 5:h 3:q qr | 4:q. 3:e 2:q 4:q | 3:q 2:q 1:h",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I spoke the rhythm before I sang it.", "tr": "Ritmi söylemeden önce konuştum." },
+    { "en": "The eighths were even and in tune.", "tr": "Sekizlikler eşit ve perdesindeydi." },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early on the eighth after the dotted quarter.",
+        "tr": "Doğru, ama noktalı dörtlükten sonraki sekizlikte erken."
+      },
+      "fix": {
+        "en": "Hold fa through the next click. Say 'taa-a ta' on one note first, then sing bar 3.",
+        "tr": "Fa'yı bir sonraki klik boyunca tut. Önce tek notada 'taa-a ta' de, sonra 3. ölçüyü söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the last fa of bar 3, a step low.",
+        "tr": "3. ölçünün son fa'sında farklı nota, bir basamak alçak."
+      },
+      "fix": {
+        "en": "Re to fa is a skip. Hear mi in between, then sing re-fa.",
+        "tr": "Re'den fa'ya bir atlamadır. Aradaki mi'yi duy, sonra re-fa söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the degrees in steady quarter notes first, one per click, then add the rhythm.",
+    "tr": "Dereceleri önce düz dörtlüklerle, her klike bir tane söyle; sonra ritmi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

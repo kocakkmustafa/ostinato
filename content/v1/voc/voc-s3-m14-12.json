@@ -1,0 +1,114 @@
+{
+  "id": "voc-s3-m14-12",
+  "title": { "en": "Articulation checkpoint", "tr": "Artikülasyon geçişi" },
+  "goal": {
+    "en": "Sings an original sixteen-bar melody that mixes legato, staccato and accents, in tune and on time at ♩=80.",
+    "tr": "Legato, staccato ve vurguyu karıştıran özgün on altı ölçülük bir ezgiyi ♩=80'de doğru perdede ve zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint brings the module together: connected lines, short light notes and accents without pushing, in one melody.",
+      "tr": "Bu geçiş modülü birleştirir: bağlı çizgiler, kısa ve hafif notalar ve itmeden vurgular, tek bir ezgide."
+    },
+    {
+      "en": "The melody has four phrases of four bars. Phrases 1, 2 and 4 start with a slurred do-re-mi-fa; phrase 3 starts with staccato notes climbing to la.",
+      "tr": "Ezginin dört ölçülük dört cümlesi vardır. 1., 2. ve 4. cümleler bağlı bir do-re-mi-fa ile başlar; 3. cümle la'ya tırmanan staccato notalarla başlar."
+    },
+    {
+      "en": "The staccato bars are eighth notes, each followed by an eighth rest. The accents fall on the sol in bar 2, the la in bar 10 and the fa in bar 15.",
+      "tr": "Staccato ölçüleri, her birinin ardından sekizlik sus gelen sekizlik notalardır. Vurgular 2. ölçüdeki sol'e, 10. ölçüdeki la'ya ve 15. ölçüdeki fa'ya düşer."
+    },
+    {
+      "en": "Breathe at the end of each phrase. Hold the long notes steady to the end and release them gently.",
+      "tr": "Her cümlenin sonunda nefes al. Uzun notaları sonuna kadar sabit tut ve yumuşakça bırak."
+    },
+    {
+      "en": "If you miss a note, keep going and sing the next one on its click. Do not restart.",
+      "tr": "Bir notayı kaçırırsan devam et ve sonrakini kendi klikinde söyle. Baştan başlama."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The original melody in your comfortable range on 'la', soft synthesized voice, at ♩=80 and ♩=60, over an original soft chord accompaniment (I, IV, V) with a click. Headphones recommended.",
+      "tr": "Özgün ezgi rahat menzilinde 'la' ile, yumuşak sentez ses, ♩=80 ve ♩=60; özgün yumuşak akor eşliği (I, IV, V) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the sixteen bars on 'la' at ♩=80, following every slur, dot and accent. Practise at a slower tempo first if you need to; the checkpoint passes at ♩=80. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşliğin bir ölçüsünü dinle, sonra on altı ölçüyü 'la' ile ♩=80'de her bağa, noktaya ve vurguya uyarak söyle. Gerekirse önce daha yavaş tempoda çalış; geçiş ♩=80'de geçilir. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "sequence": "1-2-3-4 | 5:h 3:h | 4:e er 4:e er 3:e er 3:e er | 2:w | 1-2-3-4 | 5:h 6:h | 5:e er 4:e er 3:e er 2:e er | 1:w | 3:e er 3:e er 4:e er 5:e er | 6:h 5:h | 4:e er 4:e er 3:e er 2:e er | 3:h 2:h | 1-2-3-4 | 5-6-5-3 | 4-2-7,-2 | 1:w",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 3 pitch and timing accuracy. Staccato notes end in silence, legato bars have no gaps, and each accent is at least 3 dB above the notes around it.",
+        "tr": "Seviye 3 perde ve zamanlama ölçütü. Staccato notalar sessizlikle biter, bağlı ölçülerde boşluk olmaz ve her vurgu çevresindeki notalardan en az 3 dB yüksektir."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear the change from connected to short in every bar.",
+      "tr": "Her ölçüde bağlıdan kısaya geçişi duyabildim."
+    },
+    {
+      "en": "The note after each accent went back to my easy volume.",
+      "tr": "Her vurgudan sonraki nota rahat gürlüğüme döndü."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late after the staccato bar.",
+        "tr": "Doğru, ama kesik ölçüden sonra geç."
+      },
+      "fix": {
+        "en": "Use the silence after the last short note to get ready, and start the next bar right on the click.",
+        "tr": "Son kısa notadan sonraki sessizliği hazırlanmak için kullan ve sonraki ölçüye tam klikte başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but the notes run together.",
+        "tr": "Doğru, ama notalar birbirine karışıyor."
+      },
+      "fix": {
+        "en": "Stop the air right after each note so the gap is clear. Think 'la' and then quiet.",
+        "tr": "Havayı her notadan hemen sonra durdur ki boşluk net olsun. 'La' de ve sus diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise at ♩=60 and ♩=70 first, then take the checkpoint at ♩=80.",
+    "tr": "Önce ♩=60 ve ♩=70'te çalış, sonra geçişi ♩=80'de dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

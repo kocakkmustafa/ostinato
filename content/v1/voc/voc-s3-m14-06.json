@@ -1,0 +1,101 @@
+{
+  "id": "voc-s3-m14-06",
+  "title": { "en": "First agility", "tr": "İlk çeviklik" },
+  "goal": {
+    "en": "Sings the five-note scale 1-2-3-4-5-4-3-2-1 in eighth notes, lightly and evenly, with the click from ♩=60 up to ♩=80.",
+    "tr": "Beş notalık 1-2-3-4-5-4-3-2-1 gamını sekizliklerle, hafif ve eşit biçimde, klikle ♩=60'tan ♩=80'e kadar söyler."
+  },
+  "explanation": [
+    {
+      "en": "Agility is moving the voice quickly and clearly from note to note. It starts small, light and slow.",
+      "tr": "Çeviklik, sesi notadan notaya çabuk ve net taşımaktır. Küçük, hafif ve yavaş başlar."
+    },
+    {
+      "en": "Each note is an eighth: two notes per click. The run is connected, but every note must still be heard on its own.",
+      "tr": "Her nota bir sekizliktir: her klike iki nota. Koşu bağlıdır ama her nota yine de tek başına duyulmalıdır."
+    },
+    {
+      "en": "Keep the sound small, like singing to someone next to you. A big sound makes a fast run heavy and blurred.",
+      "tr": "Sesi küçük tut; yanındaki birine söyler gibi. Büyük ses hızlı koşuyu ağırlaştırır ve bulanıklaştırır."
+    },
+    {
+      "en": "Feel a slight pulse on the first note of each click. Do not push every note.",
+      "tr": "Her klikin ilk notasında hafif bir nabız hisset. Her notayı itme."
+    },
+    {
+      "en": "Raise the tempo only when the slower one is easy. If the throat tightens or you get tired, end the lesson for today.",
+      "tr": "Tempoyu yalnız yavaş olan rahat geldiğinde artır. Boğaz sıkışırsa ya da yorulursan dersi bugünlük bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then 1-2-3-4-5-4-3-2-1 in eighth notes on 'ah' in your range at ♩=60, ♩=70 and ♩=80, light synthesized voice.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 'a' ile sekizlik 1-2-3-4-5-4-3-2-1; ♩=60, ♩=70 ve ♩=80, hafif sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing 1-2-3-4-5-4-3-2 in eighth notes on 'ah', two notes per click, land on 1 for two clicks, then rest. Do it four times. Start at ♩=60; the lesson counts at ♩=80. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra 1-2-3-4-5-4-3-2'yi 'a' ile sekizliklerle, her klike iki nota söyle; 1'e iki klik in, sonra dinlen. Bunu dört kez yap. ♩=60'ta başla; ders ♩=80'de sayılır. Kendi oktavında söyle."
+    },
+    "sequence": "1:e 2:e 3:e 4:e 5:e 4:e 3:e 2:e | 1:h hr | ×4",
+    "tempo": { "open": 60, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V5"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear every note of the run on its own.",
+      "tr": "Koşunun her notasını tek başına duyabildim."
+    },
+    {
+      "en": "The sound stayed small and light.",
+      "tr": "Ses küçük ve hafif kaldı."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early: the run speeds up.",
+        "tr": "Doğru, ama erken: koşu hızlanıyor."
+      },
+      "fix": {
+        "en": "Feel the first note of each click land with the click. Go back to ♩=60 for a few rounds.",
+        "tr": "Her klikin ilk notasının klikle birlikte oturduğunu hisset. Birkaç tur ♩=60'a dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the way up, a little low.",
+        "tr": "Çıkarken farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Fast notes tend to sag. Make the sound lighter and think of each step up as clearly higher.",
+        "tr": "Hızlı notalar düşmeye meyillidir. Sesi hafiflet ve her çıkış basamağını belirgin biçimde daha yüksek düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear the separate notes.",
+        "tr": "Ayrı notaları duyamadım."
+      },
+      "fix": {
+        "en": "Give each note a tiny pulse of air, like a very soft 'ha', without stopping the sound.",
+        "tr": "Sesi kesmeden her notaya çok yumuşak bir 'ha' gibi küçük bir hava itkisi ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-2-3-2-1 in eighth notes at ♩=60, then add 4 and 5.",
+    "tr": "♩=60'ta 1-2-3-2-1'i sekizliklerle söyle, sonra 4 ve 5'i ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

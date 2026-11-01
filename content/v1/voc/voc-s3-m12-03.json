@@ -1,0 +1,104 @@
+{
+  "id": "voc-s3-m12-03",
+  "title": {
+    "en": "Major or minor?",
+    "tr": "Majör mü minör mü?"
+  },
+  "goal": {
+    "en": "Tells major from minor by ear in 12 questions, in triads and short scales.",
+    "tr": "12 soruda üçlülerde ve kısa gamlarda majörü minörden kulaktan ayırır."
+  },
+  "explanation": [
+    {
+      "en": "Major and minor share 1 and 5. The main difference is the third: 3 in major, ♭3 in minor.",
+      "tr": "Majör ve minör 1 ile 5'i paylaşır. Asıl fark üçüncü derecededir: majörde 3, minörde ♭3."
+    },
+    {
+      "en": "Many listeners hear major as bright and minor as darker. Trust your ear, then check by singing the three notes in your head.",
+      "tr": "Çoğu dinleyici majörü aydınlık, minörü daha koyu duyar. Kulağına güven, sonra üç notayı içinden söyleyerek kontrol et."
+    },
+    {
+      "en": "Some questions play a triad, others the first five notes of a scale. In a scale, listen to the step from 2 to 3: a whole step in major, a half step in minor.",
+      "tr": "Bazı sorular bir üçlü, bazıları bir gamın ilk beş notasını çalar. Gamda 2'den 3'e adımı dinle: majörde tam ses, minörde yarım ses."
+    },
+    {
+      "en": "Tempo and volume do not decide the answer. A slow, soft example can be major; a fast one can be minor.",
+      "tr": "Cevabı tempo ya da gürlük belirlemez. Yavaş ve hafif bir örnek majör, hızlı bir örnek minör olabilir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays a triad or a five-note scale in a new key; the drill synthesizes them.",
+      "tr": "Her soru yeni bir tonda bir üçlü ya da beş notalık bir gam çalar; alıştırma bunları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Hear each example and choose: major or minor. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "Her örneği dinle ve seç: majör mü, minör mü? Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 11
+    },
+    "drill": {
+      "type": "triad_quality",
+      "count": 12,
+      "params": {
+        "qualities": [
+          "major",
+          "minor"
+        ],
+        "inversions": false,
+        "arpeggiate": true,
+        "material": [
+          "triad",
+          "five_note_scale"
+        ],
+        "range": "C3-C5"
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: minor chosen for major.",
+        "tr": "Farklı cevap: majör yerine minör seçildi."
+      },
+      "fix": {
+        "en": "Replay it and sing 1-2-3 in your head along with it. If 2 to 3 is a whole step, it is major.",
+        "tr": "Yeniden dinle ve içinden 1-2-3'ü birlikte söyle. 2'den 3'e tam sesse majördür."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: major chosen for minor.",
+        "tr": "Farklı cevap: minör yerine majör seçildi."
+      },
+      "fix": {
+        "en": "Listen to the middle note of the triad: a half step lower makes it minor.",
+        "tr": "Üçlünün ortadaki notasını dinle: yarım ses alçak olması onu minör yapar."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each example and sing it softly before you answer.",
+    "tr": "Her örneği yeniden dinle ve cevaplamadan önce hafifçe söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

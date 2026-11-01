@@ -1,0 +1,111 @@
+{
+  "id": "voc-s3-m12-02",
+  "title": {
+    "en": "The minor triad",
+    "tr": "Minör üçlü"
+  },
+  "goal": {
+    "en": "Sings the minor arpeggio 1-♭3-5-♭3-1 four times over a drone, in tune.",
+    "tr": "Minör arpeji 1-♭3-5-♭3-1'i dron üzerinde dört kez doğru perdede söyler."
+  },
+  "explanation": [
+    {
+      "en": "A minor triad stacks 1, ♭3 and 5 of the minor scale.",
+      "tr": "Minör üçlü, minör gamın 1, ♭3 ve 5. derecelerini üst üste koyar."
+    },
+    {
+      "en": "1 to ♭3 is a minor third (m3). ♭3 to 5 is a major third (M3). Together they make a perfect fifth, as in major.",
+      "tr": "1'den ♭3'e küçük üçlüdür (K3). ♭3'ten 5'e büyük üçlüdür (B3). İkisi birlikte, majördeki gibi tam beşli eder."
+    },
+    {
+      "en": "Only the middle note differs from major: ♭3 sits a half step below 3. That one note gives minor its darker colour.",
+      "tr": "Majörden yalnız ortadaki nota farklıdır: ♭3, 3'ün yarım ses altındadır. Minöre koyu rengini bu tek nota verir."
+    },
+    {
+      "en": "A drone holds 1 underneath. When 5 is in tune it blends with the drone; ♭3 sounds soft and shaded above it.",
+      "tr": "Dron altta 1'i tutar. 5 akortluyken dronla kaynaşır; ♭3 onun üstünde yumuşak ve gölgeli duyulur."
+    },
+    {
+      "en": "Use headphones for the drone so the microphone hears only your voice.",
+      "tr": "Dronu kulaklıkla dinle; mikrofon yalnız senin sesini duysun."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "DR"
+    ],
+    "brief": {
+      "en": "A drone on 1 in your personal key; the arpeggio plays once before you sing.",
+      "tr": "Kişisel tonunda 1 üzerinde dron; arpej söylemeden önce bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Over the drone, sing 1-♭3-5-♭3-1 on “la” four times and hold the last 1. Rest between rounds. The app picks 1 from your comfortable range. Sing in your own octave.",
+      "tr": "Dron üzerinde 1-♭3-5-♭3-1'i “la” ile dört kez söyle, son 1'i tut. Turlar arasında dinlen. Uygulama 1'i rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1-b3-5-b3 | 1:h hr | ×4",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "5 blended with the drone.",
+      "tr": "5 dronla kaynaştı."
+    },
+    {
+      "en": "My ♭3 sounded darker than a major 3.",
+      "tr": "♭3'üm majördeki 3'ten daha koyu duyuldu."
+    },
+    {
+      "en": "My last 1 felt like the same note as my first 1.",
+      "tr": "Son 1'im ilk 1'imle aynı nota gibi geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭3 a semitone high.",
+        "tr": "Farklı nota: ♭3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "That makes the triad major. Aim ♭3 lower: a whole step and a half step above 1.",
+        "tr": "Bu üçlüyü majör yapar. ♭3'ü daha alçak hedefle: 1'in bir tam ve bir yarım ses üstü."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Use headphones for the drone and keep the phone at arm's length.",
+        "tr": "Dronu kulaklıkla dinle ve telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-2-♭3-4-5 step by step first, then leave out 2 and 4.",
+    "tr": "Önce 1-2-♭3-4-5'i basamak basamak söyle, sonra 2 ile 4'ü atla."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

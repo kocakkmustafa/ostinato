@@ -1,0 +1,106 @@
+{
+  "id": "voc-s3-m13-09",
+  "title": { "en": "Solfège or numbers", "tr": "Solfej mi derece mi" },
+  "goal": {
+    "en": "Matches syllables to degree numbers, then sings an original four-bar line from the staff in one chosen system throughout.",
+    "tr": "Heceleri derece numaralarıyla eşleştirir, sonra özgün dört ölçülük satırı porteden baştan sona seçtiği tek sistemle söyler."
+  },
+  "explanation": [
+    {
+      "en": "There are two ways to name what you read: syllables (do re mi fa sol la ti) or numbers (1 to 7). Both name the degree, not a fixed note.",
+      "tr": "Okuduğunu adlandırmanın iki yolu var: heceler (do re mi fa sol la si) ya da numaralar (1'den 7'ye). İkisi de sabit bir notayı değil, dereceyi adlandırır."
+    },
+    {
+      "en": "Syllables are easy to sing because each ends on a vowel. Numbers show distance at a glance: 1 to 5 is a fifth.",
+      "tr": "Heceler kolay söylenir, çünkü her biri ünlüyle biter. Numaralar mesafeyi bir bakışta gösterir: 1'den 5'e beşlidir."
+    },
+    {
+      "en": "In Turkish lessons, lower-case do, re, mi are degrees in the key; a capital with an octave number, like Do4, is a fixed note name.",
+      "tr": "Türkçe derslerde küçük harfli do, re, mi tondaki derecelerdir; büyük harfli ve oktav numaralı ad, örneğin Do4, sabit nota adıdır."
+    },
+    {
+      "en": "Pick one system and keep it for this module. Switching in the middle of a line costs you time.",
+      "tr": "Bir sistem seç ve bu modül boyunca onu kullan. Satırın ortasında sistem değiştirmek zaman kaybettirir."
+    },
+    {
+      "en": "The line is in F major: do is the first space. It dips to ti below do in bar 4 before it ends on do.",
+      "tr": "Satır Fa majördedir: do birinci aralıktır. 4. ölçüde do'ya bitmeden önce do'nun altındaki si'ye iner."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do and the tonic chord in your comfortable range; the line itself plays only after your try, for comparison, at an easy pace and slowly.",
+      "tr": "Rahat menzilinde do ve tonik akor; satırın kendisi yalnız denemenden sonra, karşılaştırma için, rahat hızda ve yavaş çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Part 1: 4 questions. Match each degree number to its syllable. Part 2: choose syllables or numbers. Hear do, then sing the four bars from the staff in that system, at your own pace. Sing in your own octave.",
+      "tr": "1. bölüm: 4 soru. Her derece numarasını hecesiyle eşleştir. 2. bölüm: heceyi ya da numarayı seç. Do'yu dinle, sonra dört ölçüyü porteden o sistemle, kendi hızında söyle. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-1 | 4-3-2-5 | 6-5-4-3 | 2:q 7,:q 1:h",
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 4,
+      "params": {
+        "set": "degree_syllables",
+        "degrees": [1, 2, 3, 4, 5, 6, 7],
+        "syllables": ["do", "re", "mi", "fa", "sol", "la", "ti"]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used the same system from the first note to the last.",
+      "tr": "İlk notadan sonuncuya kadar aynı sistemi kullandım."
+    },
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    {
+      "en": "My line matched the comparison afterwards.",
+      "tr": "Satırım sonradan çalınan karşılaştırmayla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: la and ti were swapped.",
+        "tr": "Farklı cevap: la ile si yer değiştirdi."
+      },
+      "fix": {
+        "en": "Count up from sol: sol is 5, la is 6, ti is 7.",
+        "tr": "Sol'den yukarı say: sol 5, la 6, si 7."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on ti in bar 4, a little low.",
+        "tr": "4. ölçüdeki si'de farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Ti is only a half step below do. Sing do-ti-do slowly and keep ti leaning up.",
+        "tr": "Si, do'nun yalnızca yarım ses altıdır. Do-si-do'yu yavaş söyle ve si'yi yukarı doğru eğik tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Speak the names in the line once, in order, without singing. Then sing it.",
+    "tr": "Satırdaki adları önce şarkı söylemeden, sırayla bir kez konuş. Sonra söyle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

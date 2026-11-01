@@ -1,0 +1,119 @@
+{
+  "id": "voc-s4-m15-08",
+  "title": {
+    "en": "Low-register resonance",
+    "tr": "Pes bölgede rezonans"
+  },
+  "goal": {
+    "en": "Sings 1-3-1 low in the comfortable range four times with a clear, ringing tone, keeping the notes within 35 cents.",
+    "tr": "Rahat menzilinin pes bölgesinde 1-3-1'i net ve çınlayan bir sesle dört kez söyler; notaları 35 cent içinde tutar."
+  },
+  "explanation": [
+    {
+      "en": "Low notes can lose their ring and turn dull or pressed. This lesson keeps them clear.",
+      "tr": "Pes notalar çınlamalarını yitirip donuk ya da bastırılmış bir sese dönebilir. Bu ders onları net tutar."
+    },
+    {
+      "en": "Start each round on a gentle “mm”. Feel a light buzz on the lips and around the nose, then open to “mah”.",
+      "tr": "Her tura hafif bir “mm” ile başla. Dudaklarında ve burnunun çevresinde hafif bir titreşim hisset, sonra “ma”ya aç."
+    },
+    {
+      "en": "Keep that buzz as you open the vowel. A ringing tone is easier to hear than a loud one.",
+      "tr": "Ünlüyü açarken o titreşimi koru. Çınlayan bir ses, gür bir sesten daha kolay duyulur."
+    },
+    {
+      "en": "The app places do a few notes above the low note you saved. Never press or tuck your chin to make the notes darker.",
+      "tr": "Uygulama do'yu sakladığın alt notanın birkaç nota üstüne yerleştirir. Notaları koyulaştırmak için asla bastırma ya da çeneni içeri çekme."
+    },
+    {
+      "en": "The meter is stricter here: 35 cents. Low notes tend to sag, so hear mi clearly before you sing it.",
+      "tr": "Gösterge burada daha sıkıdır: 35 cent. Pes notalar düşmeye meyillidir; bu yüzden mi'yi söylemeden önce net duy."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "1-3-1 on “mm-mah” low in your comfortable range, with a clear, ringing tone; four rounds.",
+      "tr": "Rahat menzilinin pes bölgesinde “mm-ma” ile 1-3-1, net ve çınlayan bir sesle; dört tur."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 1-3-1 on “mm-mah” 4 times: do and mi two beats each, then do again for two beats. Rest between rounds. Sing in your own octave.",
+      "tr": "1-3-1'i “mm-ma” ile 4 kez söyle: do ve mi ikişer vuruş, sonra yine iki vuruş do. Turlar arasında dinlen. Kendi oktavında söyle."
+    },
+    "sequence": "1:h 3:h | 1:h hr | ×4",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 11 of 12 notes within 35 cents.",
+        "tr": "12 notanın en az 11'i 35 cent içinde."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I felt a light buzz on my lips on every note.",
+      "tr": "Her notada dudaklarımda hafif bir titreşim hissettim."
+    },
+    {
+      "en": "The low notes rang without pressing.",
+      "tr": "Pes notalar bastırmadan çınladı."
+    },
+    {
+      "en": "My chin stayed level on the low notes.",
+      "tr": "Pes notalarda çenem düz kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Dull or breathy low notes are hard to read. Hum on “mm” a little closer to the phone and keep the buzz.",
+        "tr": "Donuk ya da hışırtılı pes notalar zor okunur. Telefona biraz daha yakın “mm” ile mırıldan ve titreşimi koru."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, mi a little low.",
+        "tr": "Farklı nota: mi biraz alçak."
+      },
+      "fix": {
+        "en": "Hear mi before you sing it and keep the buzz forward; a darker sound pulls the note down.",
+        "tr": "Mi'yi söylemeden önce içinden duy ve titreşimi önde tut; koyulaşan ses notayı aşağı çeker."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Stay on “mm” for all three notes, without opening to “mah”.",
+    "tr": "Üç notada da “ma”ya açmadan “mm”de kal."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,137 @@
+{
+  "id": "voc-s3-m12-07",
+  "title": {
+    "en": "Relative major and minor",
+    "tr": "Paralel majör ve minör"
+  },
+  "goal": {
+    "en": "Finds the minor home that shares a major scale's notes, and the other way round, then sings a major scale and its relative minor one after the other.",
+    "tr": "Bir majör gamla aynı notaları paylaşan minörün evini ve bunun tersini bulur; sonra majör gamı ve paralel minörünü art arda söyler."
+  },
+  "explanation": [
+    {
+      "en": "A major key and its relative minor use exactly the same notes. Only the home note changes.",
+      "tr": "Bir majör ton ve paralel minörü tamamen aynı notaları kullanır. Yalnız ana nota değişir."
+    },
+    {
+      "en": "Counting in major, the minor home is la, 6. From do, go down a minor third to find it.",
+      "tr": "Majörde sayarsak minörün evi la'dır, yani 6. Do'dan bir küçük üçlü inerek onu bulursun."
+    },
+    {
+      "en": "The other way round: in minor, the major home is ♭3, a minor third above 1.",
+      "tr": "Tersinden: minörde majörün evi ♭3'tür, 1'in küçük üçlü üstü."
+    },
+    {
+      "en": "In the singing part, numbers count from the major do. The minor scale runs from low la to la: 6-7-1-2-3-4-5-6.",
+      "tr": "Söyleme bölümünde sayılar majördeki do'dan sayılır. Minör gam alttaki la'dan la'ya uzanır: 6-7-1-2-3-4-5-6."
+    },
+    {
+      "en": "The two scales together cover more than an octave. If a note is not comfortable, sing it an octave lower or skip it.",
+      "tr": "İki gam birlikte bir oktavdan geniş bir alan tutar. Bir nota rahat değilse onu bir oktav aşağıda söyle ya da atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Part 1: a short cadence in each question's key. Part 2: both scales in your personal key, played once before you sing.",
+      "tr": "1. bölüm: her soruda o tonun kısa kadansı. 2. bölüm: iki gam kişisel tonunda, söylemeden önce bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D",
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Part 1: 4 questions. A cadence sets a major or minor key; choose the home note of the key that shares its notes. Part 2: sing the major scale up and down on “la”, breathe, then sing the relative minor scale up and down from low la. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "1. bölüm: 4 soru. Bir kadans majör ya da minör bir ton kurar; aynı notaları paylaşan tonun ana notasını seç. 2. bölüm: majör gamı “la” ile çık ve in, nefes al, sonra paralel minör gamı alttaki la'dan çık ve in. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5-6-7-8 | 7-6-5-4 | 3-2-1:h | wr | 6,-7,-1-2 | 3-4-5-6 | 5-4-3-2 | 1-7,-6,:h",
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 4
+    },
+    "drill": {
+      "type": "scale_degree",
+      "count": 4,
+      "params": {
+        "key": [
+          "C",
+          "G",
+          "F",
+          "D"
+        ],
+        "question": "relative_home",
+        "directions": [
+          "major_to_minor",
+          "minor_to_major"
+        ],
+        "cadenceEachQuestion": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Both scales used the same notes; only home changed.",
+      "tr": "İki gam da aynı notaları kullandı; yalnız ev değişti."
+    },
+    {
+      "en": "The minor scale ended on la and felt like home.",
+      "tr": "Minör gam la'da bitti ve ev gibi geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the minor home was placed above do.",
+        "tr": "Farklı cevap: minörün evi do'nun üstüne kondu."
+      },
+      "fix": {
+        "en": "From the major do, go down a minor third to la: do-ti-la.",
+        "tr": "Majördeki do'dan bir küçük üçlü in, la'ya: do-si-la."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, sol a semitone high in the minor scale.",
+        "tr": "Farklı nota: minör gamda sol yarım ses yüksek."
+      },
+      "fix": {
+        "en": "The ear wants a note that leans into la. Keep sol where it is in the major scale: a whole step below la.",
+        "tr": "Kulak la'ya yaslanan bir nota ister. Sol'ü majör gamdaki yerinde tut: la'nın bir tam ses altında."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing five-note versions first: do to sol and back, then la to mi and back.",
+    "tr": "Önce beş notalık sürümleri söyle: do'dan sol'e ve geri, sonra la'dan mi'ye ve geri."
+  },
+  "minutes": 12,
+  "expertPending": true
+}
