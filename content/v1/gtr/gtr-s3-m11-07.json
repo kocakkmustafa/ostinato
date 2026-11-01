@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s3-m11-07",
+  "title": { "en": "First licks", "tr": "İlk lick'ler" },
+  "goal": {
+    "en": "Plays four original two-bar licks from the A minor pentatonic shape over a backing at ♩=70.",
+    "tr": "La minör pentatonik şeklinden dört özgün iki ölçülük lick'i eşlik üstünde ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "A lick is a short phrase you can reuse. These four are two bars long and use only notes from the shape.",
+      "tr": "Lick, yeniden kullanabileceğin kısa bir cümledir. Bu dördü iki ölçü uzunluğundadır ve yalnız şeklin notalarını kullanır."
+    },
+    {
+      "en": "Lick 1 steps down from E4 and lands on A3. Lick 2 climbs from A3 and stops on E4, the open-sounding fifth.",
+      "tr": "1. lick Mi4'ten adım adım iner ve La3'e konar. 2. lick La3'ten tırmanır ve açık duyulan beşli Mi4'te durur."
+    },
+    {
+      "en": "Lick 3 stays on the low strings and ends on A2. Lick 4 starts at the top with A4 and C5 and comes back to A4.",
+      "tr": "3. lick pes tellerde kalır ve La2'de biter. 4. lick tepede La4 ve Do5 ile başlar ve La4'e döner."
+    },
+    {
+      "en": "Every lick ends on a long note. Let it ring until the next bar starts.",
+      "tr": "Her lick uzun bir notayla biter. Sonraki ölçü başlayana kadar çınlamasına izin ver."
+    },
+    {
+      "en": "Listen to which endings sound finished and which sound open. You will use both when you answer phrases.",
+      "tr": "Hangi bitişlerin bitmiş, hangilerinin açık duyulduğunu dinle. Cümlelere cevap verirken ikisini de kullanacaksın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The four original licks at ♩=70 and ♩=45 over an original Am bass-and-drum loop, string-model synthesis.",
+      "tr": "Dört özgün lick, ♩=70 ve ♩=45, özgün bir Am bas ve davul döngüsü üzerinde; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Learn the licks one at a time. Play each lick four times in a row with the backing at ♩=70, then move to the next. Headphones help the microphone hear only your guitar.",
+      "tr": "Lick'leri tek tek öğren. Her lick'i eşlikle ♩=70'te arka arkaya dört kez çal, sonra sıradakine geç. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "E4 D4 C4 A3 | C4 A3 | A3 C4 D4 E4 | D4 E4 | D3 E3 G3 E3 | D3 C3 A2 | A4 C5 A4 G4 | E4 G4 A4",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I let the last note of each lick ring.", "tr": "Her lick'in son notasını çınlattım." },
+    { "en": "I could hear which licks sound finished and which sound open.", "tr": "Hangi lick'lerin bitmiş, hangilerinin açık duyulduğunu duyabildim." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "In lick 4, C5 is at fret 8 on string 1. Reach with finger 4, not finger 3.", "tr": "4. lick'te Do5, 1. telde 8. perdededir. 3. parmakla değil, 4. parmakla uzan." }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": { "en": "The long last note was cut short and the next lick started early. Count the long note to the end of the bar.", "tr": "Son uzun nota kısa kesildi ve sonraki lick erken başladı. Uzun notayı ölçünün sonuna kadar say." }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn licks 1 and 3 first at ♩=55, then add licks 2 and 4.",
+    "tr": "Önce 1. ve 3. lick'i ♩=55'te öğren, sonra 2. ve 4. lick'i ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

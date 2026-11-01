@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s4-m16-08",
+  "title": { "en": "Move a root and shape", "tr": "Kök ve şekli taşı" },
+  "goal": {
+    "en": "Plays the same I–IV–V–I barre pattern in G, A, B♭ and C at ♩=70, naming each root before playing it.",
+    "tr": "Aynı I–IV–V–I barre kalıbını Sol, La, Si♭ ve Do majörde ♩=70'te çalar; her kökü çalmadan önce adlandırır."
+  },
+  "explanation": [
+    {
+      "en": "A barre shape has no open strings, so it works at any fret. The root string's note names the chord: string 6 for the E shape, string 5 for the A shape.",
+      "tr": "Barre şeklinde açık tel yoktur; bu yüzden her perdede çalışır. Kök telin notası akorun adını verir: E-şeklinde 6. tel, A-şeklinde 5. tel."
+    },
+    {
+      "en": "E shape: G is 3-5-5-4-3-3 and Gm is 3-5-5-3-3-3. A shape: B is x-2-4-4-4-2 and Bm is x-2-4-4-3-2.",
+      "tr": "E-şekli: G 3-5-5-4-3-3, Gm 3-5-5-3-3-3'tür. A-şekli: B x-2-4-4-4-2, Bm x-2-4-4-3-2'dir."
+    },
+    {
+      "en": "One hand pattern gives I–IV–V in any major key: I is the E shape at fret n, IV is the A shape at the same fret, V is the A shape two frets higher.",
+      "tr": "Tek el kalıbı her majör tonda I–IV–V'i verir: I, n. perdede E-şekli; IV aynı perdede A-şekli; V iki perde yukarıda A-şeklidir."
+    },
+    {
+      "en": "In G (fret 3): G, C, D. In A (fret 5): A, D, E. In B♭ (fret 6): B♭, E♭, F. In C (fret 8): C, F, G.",
+      "tr": "Sol majörde (3. perde): G, C, D. La majörde (5. perde): A, D, E. Si♭ majörde (6. perde): B♭, E♭, F. Do majörde (8. perde): C, F, G."
+    },
+    {
+      "en": "Name the root string's sounding note first, then move the shape. Do not name a chord from the fret number alone.",
+      "tr": "Önce kök telin duyulan notasını adlandır, sonra şekli taşı. Akoru yalnız perde numarasından adlandırma."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The 16-bar pattern through G, A, B♭ and C in quarter-note downstrokes, at ♩=70 and at ♩=45.",
+      "tr": "Sol, La, Si♭ ve Do'dan geçen 16 ölçülük kalıp, dörtlük aşağı vuruşla; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play I–IV–V–I in G, then A, then B♭, then C, one bar per chord, four downstrokes per bar, at ♩=70. Say the next key's root while you play its last bar.",
+      "tr": "♩=70'te I–IV–V–I'i önce Sol'da, sonra La'da, sonra Si♭'de, sonra Do'da çal; her akora bir ölçü, her ölçüde dört aşağı vuruş. Bir tonun son ölçüsünü çalarken sonraki tonun kökünü söyle."
+    },
+    "sequence": "4/4: G | C | D | G | A | D | E | A | B♭ | E♭ | F | B♭ | C | F | G | C",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I named each root before I moved the shape.", "tr": "Şekli taşımadan önce her kökü adlandırdım." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord, a semitone low.", "tr": "Farklı akor, yarım ses alçak." },
+      "fix": {
+        "en": "The shape landed one fret too low. Find the root on its string first: B♭ is at fret 6 on string 6, E♭ at fret 6 on string 5.",
+        "tr": "Şekil bir perde aşağıya oturdu. Önce kökü kendi telinde bul: Si♭ 6. telde 6. perdede, Mi♭ 5. telde 6. perdededir."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The jump into a new key comes late. Look at the next root fret during the last bar, then move on beat 4.",
+        "tr": "Yeni tona atlama geç kalıyor. Son ölçüde sonraki kök perdesine bak, sonra 4. vuruşta hareket et."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only G and A, two keys and eight bars, and use comfortable three-string voicings on strings 4 to 2 if a full barre tires the hand.",
+    "tr": "Yalnız Sol ve La'yı, iki ton ve sekiz ölçü çal; tam barre eli yorarsa 4.–2. tellerde rahat üç telli seslendirmeler kullan."
+  },
+  "legacy": "V: guitar.journey.intermediate.movable_shape",
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s3-m10-11",
+  "title": { "en": "Syncopated riff II", "tr": "Senkoplu riff II" },
+  "goal": {
+    "en": "Plays an original four-bar riff at ♩=90 with chord changes on the 'and' of beat 2, held across beat 3.",
+    "tr": "Akor geçişleri 2. vuruşun 've'sine düşen ve 3. vuruşun üstünden tutulan özgün dört ölçülük riff'i ♩=90'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "Syncopation puts an attack on an 'and' and holds it over the next beat. The beat is felt, not played.",
+      "tr": "Senkop, vuruşu bir 've'ye koyar ve sonraki vuruşun üstünden tutar. Vuruş çalınmaz, hissedilir."
+    },
+    {
+      "en": "Bars 1 and 3: E5 on 1 and its 'and', rest on 2, G5 on the 'and' of 2. Let G5 ring through beat 3, then strike it again on 4.",
+      "tr": "1. ve 3. ölçü: 1'de ve onun 've'sinde E5, 2'de sus, 2'nin 've'sinde G5. G5 3. vuruş boyunca çalsın, sonra 4'te yeniden vur."
+    },
+    {
+      "en": "Bar 2: A5 (x-0-2-x-x-x) on 1 and its 'and', rest on 2, then C5 (x-3-5-x-x-x) on the 'and' of 2, held to the end of the bar.",
+      "tr": "2. ölçü: 1'de ve onun 've'sinde A5 (x-0-2-x-x-x), 2'de sus, sonra 2'nin 've'sinde C5 (x-3-5-x-x-x), ölçü sonuna kadar tutulur."
+    },
+    {
+      "en": "Bar 4: D5 on 1 held for a beat and a half, C5 on the 'and' of 2 held over 3, E5 on 4.",
+      "tr": "4. ölçü: 1'de bir buçuk vuruş tutulan D5, 2'nin 've'sinde 3'ün üstünden tutulan C5, 4'te E5."
+    },
+    {
+      "en": "Count eighths aloud: '1 and 2 and 3 and 4 and'. Keep the strumming hand moving on the rests and held beats, just above the strings.",
+      "tr": "Sekizlikleri sesli say: '1 ve 2 ve 3 ve 4 ve'. Suslarda ve tutulan vuruşlarda sağ el tellerin hemen üstünde hareket etmeyi sürdürsün."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The original syncopated four-bar riff at ♩=90 and ♩=60, with a bass and drum loop that marks beat 3.",
+      "tr": "Özgün senkoplu dört ölçülük riff, ♩=90 ve ♩=60; 3. vuruşu belirten bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the four-bar riff with the accompaniment, all downstrokes. Strike the syncopated chords on the 'and' and let them ring over the next beat. Start at ♩=80 and move up to ♩=90.",
+      "tr": "Dört ölçülük riff'i eşlikle çal, hepsi aşağı pena. Senkoplu akorları 've'de vur ve sonraki vuruşun üstünden çalsınlar. ♩=80'de başla, ♩=90'a çık."
+    },
+    "sequence": "4/4: E5 ee er G5 e~q q | A5 ee er C5 e~h | E5 ee er G5 e~q q | D5 q. C5 e~q E5 q",
+    "tempo": { "open": 80, "target": 90 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The syncopated chords rang over beat 3 without a new strike.", "tr": "Senkoplu akorlar yeni vuruş olmadan 3. vuruşun üstünden çaldı." },
+    { "en": "I kept counting through the rests.", "tr": "Suslarda da saymayı sürdürdüm." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The syncopated chord slid toward beat 3. Say 'and' aloud and strike exactly on it.",
+        "tr": "Senkoplu akor 3. vuruşa doğru kaydı. 've'yi sesli söyle ve tam onun üstünde vur."
+      }
+    },
+    {
+      "error": { "en": "Different: a strum was heard on a held beat.", "tr": "Farklı: tutulan vuruşta tel sesi duyuldu." },
+      "fix": {
+        "en": "The hand struck again on beat 3. Keep it moving, but just above the strings.",
+        "tr": "El 3. vuruşta yeniden vurdu. Hareket etmeyi sürdürsün ama tellerin hemen üstünden."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap the rhythm of bar 1 first, then loop bars 1 and 2 at ♩=60 before adding bars 3 and 4.",
+    "tr": "Önce 1. ölçünün ritmini alkışla, sonra 3. ve 4. ölçüyü eklemeden önce ♩=60'ta 1. ve 2. ölçüyü döngüle."
+  },
+  "minutes": 14,
+  "expertPending": true
+}

@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s3-m14-05",
+  "title": { "en": "The vi chord and common progressions", "tr": "vi akoru ve yaygın ilerlemeler" },
+  "goal": {
+    "en": "Plays four common progressions in G, I–V–vi–IV, I–vi–IV–V, vi–IV–I–V and ii–V–I, in time at ♩=70.",
+    "tr": "Sol tonunda dört yaygın ilerlemeyi, I–V–vi–IV, I–vi–IV–V, vi–IV–I–V ve ii–V–I'yi ♩=70'te zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "Triads on notes 2, 3 and 6 of a major key are minor. Small Roman numerals show them: ii, iii, vi.",
+      "tr": "Majör tonun 2., 3. ve 6. notaları üstündeki üçlüler minördür. Küçük Romen sayılarıyla yazılır: ii, iii, vi."
+    },
+    {
+      "en": "In G: ii = Am, vi = Em. Em shares two notes with G, so vi can stand near I without a jump in sound.",
+      "tr": "Sol'de ii = Am, vi = Em. Em, G ile iki notayı paylaşır; bu yüzden vi, I'in yanında sesi sıçratmadan durabilir."
+    },
+    {
+      "en": "Many songs reuse a handful of orders. Today: G–D–Em–C, G–Em–C–D, Em–C–G–D and Am–D–G.",
+      "tr": "Pek çok şarkı birkaç sıralamayı tekrar kullanır. Bugün: G–D–Em–C, G–Em–C–D, Em–C–G–D ve Am–D–G."
+    },
+    {
+      "en": "vi–IV–I–V starts on Em. The same chords now feel darker because the loop begins on the minor chord.",
+      "tr": "vi–IV–I–V Em ile başlar. Döngü minör akorla başladığı için aynı akorlar şimdi daha koyu duyulur."
+    },
+    {
+      "en": "ii–V–I closes on G. The last G lasts two bars; let it ring and count through.",
+      "tr": "ii–V–I G'de kapanır. Son G iki ölçü sürer; çalmasına izin ver ve saymayı sürdür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The four progressions in G, one bar per chord, four downstrokes per bar over an original bass and drum loop at ♩=70 and ♩=50.",
+      "tr": "Sol tonunda dört ilerleme, ölçü başına bir akor ve dört aşağı vuruş; ♩=70 ve ♩=50'de özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 16 bars with the accompaniment at ♩=70, four downstrokes per bar: the four progressions back to back. Headphones help the microphone hear only your guitar.",
+      "tr": "16 ölçüyü eşlikle ♩=70'te, ölçü başına dört aşağı vuruşla çal: dört ilerleme arka arkaya. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: G | D | Em | C | G | Em | C | D | Em | C | G | D | Am | D | G | G",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can say the Roman numeral of every chord as I play it.", "tr": "Çaldığım her akorun Romen sayısını söyleyebiliyorum." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The jump between progressions is the slow change. Loop bars 4 to 5 and 8 to 9 at ♩=60, then rejoin.",
+        "tr": "İlerlemeler arasındaki atlama en yavaş geçiştir. 4.–5. ve 8.–9. ölçüleri ♩=60'ta döngüle, sonra bütüne dön."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "On D, start the strum on string 4.",
+        "tr": "D'de vuruşa 4. telden başla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise one progression at a time as a 4-bar loop at ♩=55, then join them.",
+    "tr": "Her ilerlemeyi tek başına 4 ölçülük döngü olarak ♩=55'te çalış, sonra birleştir."
+  },
+  "minutes": 14,
+  "expertPending": true
+}

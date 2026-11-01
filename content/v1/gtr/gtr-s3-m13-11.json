@@ -1,0 +1,88 @@
+{
+  "id": "gtr-s3-m13-11",
+  "title": { "en": "Blues checkpoint", "tr": "Blues geçişi" },
+  "goal": {
+    "en": "Plays one 12-bar chorus of shuffle accompaniment and one 12-bar chorus of an original lead in A at ♩=90.",
+    "tr": "La'da 12 ölçülük bir tur shuffle eşlik ve 12 ölçülük bir tur özgün lead'i ♩=90'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "Chorus 1, accompaniment: the boogie pattern on A, D and E through the 12 bars, swung, as in the boogie lesson.",
+      "tr": "1. tur, eşlik: 12 ölçü boyunca A, D ve E'de boogie kalıbı, swing'li, boogie dersindeki gibi."
+    },
+    {
+      "en": "Chorus 2, lead: an original A minor pentatonic melody at fret 5. It lands on D in bar 5, E in bar 9 and D in bar 10, and ends on E3 in bar 12.",
+      "tr": "2. tur, lead: 5. perdede özgün bir La minör pentatonik ezgi. 5. ölçüde Re'ye, 9. ölçüde Mi'ye, 10. ölçüde Re'ye iner ve 12. ölçüde Mi3'te biter."
+    },
+    {
+      "en": "There is no gap between the choruses. During the last beat of chorus 1, move your hand to fret 5; the lead starts on A3, string 4, fret 7.",
+      "tr": "İki tur arasında boşluk yok. 1. turun son vuruşunda elini 5. perdeye taşı; lead La3'te, 4. tel 7. perdede başlar."
+    },
+    {
+      "en": "The checkpoint passes at ♩=90. Slower tempos are open for practice.",
+      "tr": "Geçiş ♩=90'da geçilir. Daha yavaş tempolar pratik için açık."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Both choruses, boogie then lead, swung, over an original bass and drum loop at ♩=90 and ♩=60.",
+      "tr": "İki tur, önce boogie sonra lead, swing'li; ♩=90 ve ♩=60'ta özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3", "A4"],
+    "task": {
+      "en": "Play two choruses with the accompaniment at ♩=90 shuffle: first the boogie accompaniment, then the lead. Slower tempos are open for practice; the checkpoint passes at ♩=90. Headphones help the microphone hear only your guitar.",
+      "tr": "♩=90 shuffle'da eşlikle iki tur çal: önce boogie eşliği, sonra lead'i. Daha yavaş tempolar pratik için açık; geçiş ♩=90'da geçilir. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4 swing, chorus 1: A5–A6 | A5–A6 | A5–A6 | A5–A6 | D5–D6 | D5–D6 | A5–A6 | A5–A6 | E5–E6 | D5–D6 | A5–A6 | E5–E6 · chorus 2: A3 C4 D4 E4 | D4 C4 A3 | G3 A3 C4 A3 | A3 | D4 C4 A3 D4 | C4 D4 C4 A3 | A3 C4 E4 D4 | C4 A3 | E4 D4 E4 G4 E4 | D4 C4 D4 | C4 A3 G3 A3 | G3 E3",
+    "tempo": { "open": 90, "target": 90 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each chorus passes on its own. Accompaniment: Level 3 chord and timing accuracy, with a swing ratio of 60–70%. Lead: Level 3 note and timing accuracy.",
+        "tr": "Her tur kendi başına geçer. Eşlik: Seviye 3 akor ve zamanlama ölçütü, %60–70 swing oranıyla. Lead: Seviye 3 nota ve zamanlama ölçütü."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Late at the start of chorus 2. Lift the hand from the boogie on the last eighth of bar 12 and place finger 3 on string 4, fret 7.",
+        "tr": "2. turun başında geç. 12. ölçünün son sekizliğinde eli boogie'den kaldır ve 3. parmağı 4. tel 7. perdeye koy."
+      }
+    },
+    {
+      "error": { "en": "Correct, but too straight: swing ratio below 60%.", "tr": "Doğru, ama fazla düz: swing oranı %60'ın altında." },
+      "fix": {
+        "en": "Say 1-ta-ta aloud for one bar before you start, then play on 1 and the last ta.",
+        "tr": "Başlamadan önce bir ölçü boyunca 1-ta-ta'yı sesli söyle, sonra 1'de ve son 'ta'da çal."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones, and keep the phone close to the guitar.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan; telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise each chorus alone at ♩=70, then join them across bars 12 and 13 before you return to ♩=90.",
+    "tr": "Her turu ♩=70'te ayrı çalış, sonra ♩=90'a dönmeden önce 12. ve 13. ölçüde birleştir."
+  },
+  "legacy": "V: guitar.journey.independent.melody_final",
+  "minutes": 15,
+  "expertPending": true
+}

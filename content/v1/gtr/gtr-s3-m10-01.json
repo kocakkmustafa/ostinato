@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s3-m10-01",
+  "title": { "en": "Root-and-fifth on string six", "tr": "Altıncı telde kök ve beşli" },
+  "goal": {
+    "en": "Plays E5, G5 and A5 with the root on string 6 while the other strings stay silent.",
+    "tr": "Kökü 6. telde olan E5, G5 ve A5'i diğer teller sessizken çalar."
+  },
+  "explanation": [
+    {
+      "en": "A power chord has only two notes: the root and the fifth above it. It is neither major nor minor.",
+      "tr": "Power chord yalnız iki notadan oluşur: kök ve onun üstündeki beşli. Ne majördür ne minör."
+    },
+    {
+      "en": "E5: 0-2-x-x-x-x. Open string 6 gives E2, string 5 at fret 2 gives B2. The 5 in E5 means root plus fifth; it is not an octave number.",
+      "tr": "E5: 0-2-x-x-x-x. Açık 6. tel Mi2'yi, 5. telin 2. perdesi Si2'yi verir. E5'teki 5, kök artı beşli demektir; oktav numarası değildir."
+    },
+    {
+      "en": "G5: 3-5-x-x-x-x. Finger 1 on string 6, fret 3 (G2); finger 3 on string 5, fret 5 (D3).",
+      "tr": "G5: 3-5-x-x-x-x. 1. parmak 6. telin 3. perdesinde (Sol2); 3. parmak 5. telin 5. perdesinde (Re3)."
+    },
+    {
+      "en": "A5: 5-7-x-x-x-x. Keep the same two-finger shape and move it up two frets: A2 and E3.",
+      "tr": "A5: 5-7-x-x-x-x. Aynı iki parmak şeklini koru ve iki perde yukarı taşı: La2 ve Mi3."
+    },
+    {
+      "en": "Only two strings sound. Let the underside of finger 1 lie lightly on strings 4 to 1 so a loose strum stays quiet.",
+      "tr": "Yalnız iki tel çalar. 1. parmağın alt yüzü 4.–1. tellere hafifçe değsin; taşan bir vuruş da sessiz kalır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "E5, G5 and A5 on strings 6 and 5, each struck and then plucked string by string, slowly.",
+      "tr": "6. ve 5. telde E5, G5 ve A5; her biri vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strike E5 four times, then G5 four times, then A5 four times, in your own time. Then pluck each chord string by string; the app checks each string.",
+      "tr": "Kendi hızında E5'i dört kez, sonra G5'i dört kez, sonra A5'i dört kez vur. Sonra her akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "E5 E5 E5 E5 | G5 G5 G5 G5 | A5 A5 A5 A5",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "Strings 4 to 1 stayed silent.", "tr": "4.–1. teller sessiz kaldı." },
+    { "en": "I can name the two sounding notes of each chord.", "tr": "Her akorun çalan iki notasını adlandırabiliyorum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 4 also heard.", "tr": "Farklı akor: 4. tel de duyuldu." },
+      "fix": {
+        "en": "The strum went past string 5. Make a smaller stroke and let finger 1 rest lightly on the higher strings.",
+        "tr": "Vuruş 5. telin ötesine geçti. Hareketi küçült ve 1. parmak ince tellere hafifçe değsin."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 not heard.", "tr": "Farklı akor: 5. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 3 is flat or too far from the fret. Press with its tip, just behind the fret.",
+        "tr": "3. parmak yatık ya da perdeden uzak. Ucuyla, perdenin hemen arkasından bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with open E5 only, then add G5. The fifth on string 5 can be plucked alone first.",
+    "tr": "Önce yalnız açık E5'le başla, sonra G5'i ekle. 5. teldeki beşliyi önce tek başına çekebilirsin."
+  },
+  "legacy": "R: guitar.journey.harmony.power_chords",
+  "minutes": 12,
+  "expertPending": true
+}

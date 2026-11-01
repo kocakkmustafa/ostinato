@@ -1,0 +1,121 @@
+{
+  "id": "gtr-s3-m12-08",
+  "title": {
+    "en": "Fingerpicking through changes",
+    "tr": "Akor geçişinde parmak"
+  },
+  "goal": {
+    "en": "Keeps the p-i-m-a pattern going through C–Am–Dm–G at ♩=60 with the accompaniment.",
+    "tr": "p-i-m-a kalıbını C–Am–Dm–G boyunca eşlikle ♩=60'ta bozmadan sürdürür."
+  },
+  "explanation": [
+    {
+      "en": "The right hand never stops for a chord change. If the fretting hand is late, the pattern keeps going.",
+      "tr": "Sağ el akor geçişi için hiç durmaz. Sol el geç kalırsa kalıp yine sürer."
+    },
+    {
+      "en": "The bass changes string: C3 on string 5, A2 on open string 5, D3 on open string 4, G2 on string 6.",
+      "tr": "Bas tel değiştirir: Do3 5. telde, La2 açık 5. telde, Re3 açık 4. telde, Sol2 6. telde."
+    },
+    {
+      "en": "Dm is x-x-0-2-3-1: i plays A3, m plays D4, a plays F4. G is 3-2-0-0-0-3: a plays G4.",
+      "tr": "Dm x-x-0-2-3-1'dir: i La3'ü, m Re4'ü, a Fa4'ü çalar. G 3-2-0-0-0-3'tür: a Sol4'ü çalar."
+    },
+    {
+      "en": "Use the last note of each bar for the change. While a plays it, start moving the fretting fingers.",
+      "tr": "Her ölçünün son notasını geçiş için kullan. a onu çalarken sol el parmaklarını hareket ettirmeye başla."
+    },
+    {
+      "en": "The new bass note lands on beat 1. Look at the next chord one beat early.",
+      "tr": "Yeni bas notası 1. vuruşa düşer. Sonraki akora bir vuruş önce bak."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE"
+    ],
+    "brief": {
+      "en": "p-i-m-a in eighth notes through C–Am–Dm–G, one bar each, over an original bass and soft drum loop at ♩=60 and ♩=40. Headphones recommended.",
+      "tr": "C–Am–Dm–G boyunca, her biri bir ölçü, sekizlik p-i-m-a; ♩=60 ve ♩=40'ta özgün bas ve hafif davul döngüsü üstünde. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play p-i-m-a in eighth notes, one bar per chord, C–Am–Dm–G, four times through with the accompaniment at ♩=60. Headphones help the microphone hear only your guitar.",
+      "tr": "Sekizlik p-i-m-a çal, her akora bir ölçü, C–Am–Dm–G; eşlikle ♩=60'ta dört kez baştan sona. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "C3:e G3:e C4:e E4:e C3:e G3:e C4:e E4:e | A2:e A3:e C4:e E4:e A2:e A3:e C4:e E4:e | D3:e A3:e D4:e F4:e D3:e A3:e D4:e F4:e | G2:e G3:e B3:e G4:e G2:e G3:e B3:e G4:e",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The new chord sounded on beat 1.",
+      "tr": "Yeni akor 1. vuruşta çaldı."
+    },
+    {
+      "en": "The right hand did not stop during the changes.",
+      "tr": "Sağ el geçişlerde durmadı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The bass after the change is late. Start the change on the last eighth note of the bar, not on beat 1.",
+        "tr": "Geçişten sonraki bas geç kalıyor. Geçişe 1. vuruşta değil, ölçünün son sekizliğinde başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a fourth low.",
+        "tr": "Farklı nota, bir dörtlü alçak."
+      },
+      "fix": {
+        "en": "On Dm the thumb hit string 5. Dm starts on string 4; aim the thumb there.",
+        "tr": "Dm'de başparmak 5. tele vurdu. Dm 4. telden başlar; başparmağı oraya yönelt."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop one pair at a time, C to Am, then Dm to G, at ♩=45. Then play all four chords.",
+    "tr": "Her seferinde bir çifti döngüle, önce C'den Am'ye, sonra Dm'den G'ye, ♩=45'te. Sonra dört akoru birlikte çal."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

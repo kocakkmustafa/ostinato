@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s4-m19b-01",
+  "title": { "en": "Amp, headphones and the mic test", "tr": "Amfi, kulaklık ve mikrofon testi" },
+  "goal": {
+    "en": "Sets up an electric guitar so the phone hears all six open strings, with 'Couldn't hear' on at most 1 of 12 plucks.",
+    "tr": "Elektro gitarı telefonun altı açık teli duyacağı şekilde kurar; 12 çekişin en fazla 1'inde 'Duyamadım' çıkar."
+  },
+  "explanation": [
+    {
+      "en": "The app listens through the phone microphone, not through a cable. It hears the strings themselves, so an electric guitar works without an amp.",
+      "tr": "Uygulama kabloyla değil, telefon mikrofonuyla dinler. Tellerin kendi sesini duyar; bu yüzden elektro gitar amfisiz de çalışır."
+    },
+    {
+      "en": "An unplugged electric guitar is quiet. Put the phone 15–20 cm from the strings, between the neck and the bridge, in a quiet room.",
+      "tr": "Amfisiz elektro gitarın sesi kısıktır. Telefonu tellere 15–20 cm uzaklığa, sap ile köprü arasına koy ve sessiz bir odada çalış."
+    },
+    {
+      "en": "If you use a small amp, choose a clean sound at low volume. Distortion and effects blur the notes for the microphone.",
+      "tr": "Küçük bir amfi kullanırsan temiz bir ses ve düşük seviye seç. Distorsiyon ve efektler notaları mikrofon için bulanıklaştırır."
+    },
+    {
+      "en": "A headphone amp is for your own ears. The phone does not hear your headphones; it still listens to the strings. Keep the headphone volume low.",
+      "tr": "Kulaklık amfisi senin kulağın içindir. Telefon kulaklığını duymaz; yine tellerin sesini dinler. Kulaklık sesini düşük tut."
+    },
+    {
+      "en": "This test opens measured feedback for the whole electric track. If you change guitar, room or setup later, run it again.",
+      "tr": "Bu test elektro kolun tamamında ölçülü geri bildirimi açar. Sonra gitarı, odayı ya da kurulumu değiştirirsen testi yeniden yap."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The six open strings E2 A2 D3 G3 B3 E4, up and back down, slowly, string-model synthesis.",
+      "tr": "Altı açık tel Mi2 La2 Re3 Sol3 Si3 Mi4, çıkış ve iniş, yavaş, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Tune first. Place the phone, then pluck the six open strings from string 6 to string 1 and back, 12 plucks in your own time. Let each string ring for about one second.",
+      "tr": "Önce akort et. Telefonu yerleştir, sonra altı açık teli 6. telden 1. tele ve geri, kendi hızında 12 kez çek. Her tel yaklaşık bir saniye çalsın."
+    },
+    "sequence": "E2 A2 D3 G3 B3 E4 | E4 B3 G3 D3 A2 E2",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At most 1 of the 12 plucks is 'Couldn't hear', and every heard string is Correct. If not, the app suggests moving the phone closer or using a small amp at low volume, then you retake the test.",
+        "tr": "12 çekişin en fazla 1'i 'Duyamadım' olur ve duyulan her tel Doğru çıkar. Olmazsa uygulama telefonu yaklaştırmayı ya da düşük seviyede küçük bir amfi kullanmayı önerir, sonra testi yeniden yaparsın."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": ["gtr-s4-m15-11", "gtr-s4-m17-10"],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "An unplugged electric guitar is quiet. Put the phone 15–20 cm from the strings and pick a little firmer.",
+        "tr": "Amfisiz elektro gitarın sesi kısıktır. Telefonu tellere 15–20 cm uzaklığa koy ve penayla biraz daha net vur."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "A fretting finger is resting on a string. Take the fretting hand off the neck for this test.",
+        "tr": "Sol eldeki bir parmak tele değiyor. Bu test için sol elini saptan çek."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear: only on strings 5 and 6.", "tr": "Duyamadım: yalnız 5. ve 6. tellerde." },
+      "fix": {
+        "en": "Low strings fade fast on a solid body. Move the phone a little toward the neck pickup and pick those strings closer to the neck.",
+        "tr": "Gövdesi dolu gitarda pes teller çabuk söner. Telefonu biraz sap manyetiğine doğru kaydır ve bu telleri sapa yakın çek."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If the test still does not pass, play through a small amp on a clean sound at low volume and retake it.",
+    "tr": "Test yine geçmezse temiz seste, düşük seviyede küçük bir amfiden çal ve testi yeniden yap."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

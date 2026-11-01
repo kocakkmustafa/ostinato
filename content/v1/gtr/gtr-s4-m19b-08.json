@@ -1,0 +1,84 @@
+{
+  "id": "gtr-s4-m19b-08",
+  "title": { "en": "Finger vibrato", "tr": "Parmak vibratosu" },
+  "goal": {
+    "en": "Holds four notes for 4 seconds each with a steady finger vibrato.",
+    "tr": "Dört notanın her birini düzenli bir parmak vibratosuyla 4 saniye tutar."
+  },
+  "explanation": [
+    {
+      "en": "Guitar vibrato is a series of tiny bends. Push the string up a little and let it come back, again and again.",
+      "tr": "Gitar vibratosu küçük bend'lerden oluşur. Teli biraz yukarı it ve geri bırak; bunu tekrar tekrar yap."
+    },
+    {
+      "en": "Move from the wrist, as when you turn a door handle. Hook the thumb lightly over the neck as the pivot; the finger stays on its fret.",
+      "tr": "Kapı kolu çevirir gibi bilekten hareket et. Başparmağı dönme noktası olarak sapın üstüne hafifçe tak; parmak perdesinde kalır."
+    },
+    {
+      "en": "Aim for an even pulse, about 5 to 6 waves per second. Regular is more important than wide.",
+      "tr": "Saniyede yaklaşık 5–6 dalgalık eşit bir nabız hedefle. Düzenli olmak geniş olmaktan önemlidir."
+    },
+    {
+      "en": "The app shows the speed (waves per second) and the width (cents) of your vibrato. A typical range is 4–7 per second and 20–60 cents; these numbers are information, not a grade.",
+      "tr": "Uygulama vibratonun hızını (saniyedeki dalga) ve genişliğini (cent) gösterir. Tipik aralık saniyede 4–7 ve 20–60 centtir; bu sayılar bilgi içindir, not değildir."
+    },
+    {
+      "en": "Let the note sound first, then start the vibrato. Keep the pressure into the fret so the note does not die.",
+      "tr": "Önce nota çalsın, sonra vibratoyu başlat. Nota sönmesin diye perdeye basmayı sürdür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each of the four notes held 4 seconds with a steady vibrato of about 5.5 waves per second and 35 cents, string-model synthesis.",
+      "tr": "Dört notanın her biri 4 saniye, saniyede yaklaşık 5,5 dalga ve 35 centlik düzenli vibratoyla, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Pick each note and hold it for 4 seconds with vibrato; the app counts the time. 1 D4, string 3, fret 7, finger 3. 2 G4, string 2, fret 8, finger 3. 3 A4, string 1, fret 5, finger 1. 4 E4, string 2, fret 5, finger 1.",
+      "tr": "Her notayı penayla çal ve vibratoyla 4 saniye tut; uygulama süreyi sayar. 1 Re4, 3. tel, 7. perde, 3. parmak. 2 Sol4, 2. tel, 8. perde, 3. parmak. 3 La4, 1. tel, 5. perde, 1. parmak. 4 Mi4, 2. tel, 5. perde, 1. parmak."
+    },
+    "sequence": "D4 vib 4 s · G4 vib 4 s · A4 vib 4 s · E4 vib 4 s",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each note is Correct and keeps sounding with vibrato for 4 seconds. Speed and width are shown as information only.",
+        "tr": "Her nota Doğru çıkar ve vibratoyla 4 saniye çalmayı sürdürür. Hız ve genişlik yalnız bilgi olarak gösterilir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The waves were even from start to end.", "tr": "Dalgalar baştan sona eşitti." },
+    { "en": "The movement came from my wrist, not from squeezing.", "tr": "Hareket sıkmaktan değil, bileğimden geldi." },
+    { "en": "Each note kept sounding for the full 4 seconds.", "tr": "Her nota 4 saniyenin tamamında çalmayı sürdürdü." },
+    { "en": "My vibrato sounded like the reference.", "tr": "Vibratom referans gibi duyuldu." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear: the note dies before 4 seconds.", "tr": "Duyamadım: nota 4 saniyeden önce sönüyor." },
+      "fix": {
+        "en": "Pick a little firmer and keep pressing into the fret during the vibrato. Start the waves after the attack.",
+        "tr": "Biraz daha net vur ve vibrato sırasında perdeye basmayı sürdür. Dalgaları ataktan sonra başlat."
+      }
+    },
+    {
+      "error": { "en": "Different note: the pitch drifts upward and stays there.", "tr": "Farklı nota: perde yukarı kayıp orada kalıyor." },
+      "fix": {
+        "en": "Let the string come all the way back after each push. The vibrato returns to the fret pitch every time.",
+        "tr": "Her itişten sonra teli tamamen geri bırak. Vibrato her seferinde perde sesine döner."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use note 1 only and hold it for 2 seconds; add time as the waves get even.",
+    "tr": "Yalnız 1. notayı kullan ve 2 saniye tut; dalgalar eşitlendikçe süreyi uzat."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

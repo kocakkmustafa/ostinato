@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s3-m10-04",
+  "title": { "en": "Palm mute basics", "tr": "Palm mute temeli" },
+  "goal": {
+    "en": "Plays palm-muted quarter notes on open string 6 at ♩=70, short and dark but still heard.",
+    "tr": "Açık 6. telde ♩=70'te kısa, boğuk ama duyulan palm mute dörtlükler çalar."
+  },
+  "explanation": [
+    {
+      "en": "Palm muting shortens and darkens the note. The palm rests on the strings while you pick, so the note is short but still heard.",
+      "tr": "Palm mute (avuçla kısma) notayı kısaltır ve boğuklaştırır. Avuç sen çalarken tellerin üstünde durur; nota kısa ama duyulur."
+    },
+    {
+      "en": "Use the fleshy edge of the strumming hand, below the little finger. Lay it on string 6 right where the string leaves the bridge.",
+      "tr": "Sağ elin serçe parmak altındaki yumuşak kenarını kullan. Onu 6. telin köprüden çıktığı yere koy."
+    },
+    {
+      "en": "Find the spot by sliding: closer to the neck the note turns into a thud; onto the bridge it rings open. Stop where you hear a short, dark E2.",
+      "tr": "Yeri kaydırarak bul: sapa yaklaştıkça nota boğuk bir 'tok' sese döner; köprünün üstünde açık çalar. Kısa ve boğuk bir Mi2 duyduğun yerde dur."
+    },
+    {
+      "en": "Rest the palm, do not press. Keep it in place and pick down from the wrist.",
+      "tr": "Avucu bırak, bastırma. Yerinde tut ve bilekten aşağı pena vur."
+    },
+    {
+      "en": "Here only your timing is measured. A muted note is too short for a pitch decision.",
+      "tr": "Burada yalnız zamanlaman ölçülür. Kısık nota perde kararı için fazla kısadır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Open E2 played open for one bar, then palm-muted quarter notes for four bars, at ♩=70 and ♩=50, with click.",
+      "tr": "Açık Mi2 önce bir ölçü açık, sonra dört ölçü palm mute dörtlük; ♩=70 ve ♩=50, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "With the click at ♩=70, pick open string 6 (E2) on every beat for four bars, all downstrokes, palm muted.",
+      "tr": "Klik ♩=70'teyken dört ölçü boyunca her vuruşta açık 6. teli (Mi2) çal; hepsi aşağı pena, palm mute ile."
+    },
+    "sequence": "4/4: q q q q | q q q q | q q q q | q q q q",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each note was short and dark, but I could still hear its pitch.", "tr": "Her nota kısa ve boğuktu ama perdesini yine duyabildim." },
+    { "en": "My palm stayed in the same place on every beat.", "tr": "Avucum her vuruşta aynı yerde kaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The palm is too far toward the neck or presses too hard. Slide it back toward the bridge and let it rest lightly.",
+        "tr": "Avuç sapa fazla yakın ya da fazla bastırıyor. Köprüye doğru geri kaydır ve hafifçe bırak."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Keeping the palm down slows the pick. Move only the wrist and start the stroke with the click.",
+        "tr": "Avucu tutmak penayı yavaşlatıyor. Yalnız bileği oynat ve vuruşa kliğe birlikte başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Alternate one bar open and one bar muted at ♩=55 until the palm finds its spot.",
+    "tr": "Avuç yerini bulana kadar ♩=55'te bir ölçü açık, bir ölçü kısık çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

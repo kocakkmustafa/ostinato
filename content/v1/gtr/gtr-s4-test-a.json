@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s4-test-a",
+  "title": { "en": "Level 4 test: Acoustic track", "tr": "Seviye 4 testi: Akustik kol" },
+  "goal": {
+    "en": "Shows the Level 4 skills of the acoustic track: barre chords, the major scale, reading, Travis picking and a public-domain study.",
+    "tr": "Akustik kolun Seviye 4 becerilerini gösterir: barre akorlar, majör gam, okuma, Travis tekniği ve kamu malı bir etüt."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, barre: 16 bars mixing E-shape and A-shape barre chords at ♩=80. Part 2, scale: G major over two octaves in eighths at ♩=80, then a sequence in thirds.",
+      "tr": "1. bölüm, barre: E- ve A-şekli barre akorları karıştıran 16 ölçü, ♩=80. 2. bölüm, gam: ♩=80'de sekizliklerle iki oktav Sol majör, ardından üçlü sekans."
+    },
+    {
+      "en": "Part 3, reading: a new eight-bar line in first position at ♩=66.",
+      "tr": "3. bölüm, okuma: birinci pozisyonda yeni bir sekiz ölçülük dizi, ♩=66."
+    },
+    {
+      "en": "Part 4, Travis: a new 16-bar Travis piece with chord changes at ♩=72. Part 5, study: a public-domain study by Sor, Carcassi or Aguado, in the Ostinato engraving.",
+      "tr": "4. bölüm, Travis: akor geçişli yeni bir 16 ölçülük Travis parçası, ♩=72. 5. bölüm, etüt: Sor, Carcassi ya da Aguado'dan kamu malı bir etüt, Ostinato dizgisiyle."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "Click and an original accompaniment loop for part 1; click only for parts 2–4; the study played at its target tempo for part 5. The reading line and the Travis piece are not played before you try them. Headphones recommended.",
+      "tr": "1. bölüm için klik ve özgün eşlik döngüsü; 2–4. bölümlerde yalnız klik; 5. bölümde etüt hedef temposunda çalınır. Okuma dizisi ve Travis parçası denemenden önce çalınmaz. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3", "A4"],
+    "task": {
+      "en": "Complete five parts. 1 Barre: 16 bars of E-shape and A-shape chords at ♩=80. 2 Scale: G major two octaves, eighths at ♩=80, plus a sequence in thirds. 3 Reading: a new eight-bar line at ♩=66. 4 Travis: a new 16-bar piece with the p-i-p-m pattern, pinches and chord changes at ♩=72. 5 Study: play the study the screen shows at the tempo marked on it.",
+      "tr": "Beş bölümü tamamla. 1 Barre: ♩=80'de E- ve A-şekli akorlarla 16 ölçü. 2 Gam: Sol majör iki oktav, ♩=80'de sekizlik, artı üçlü sekans. 3 Okuma: ♩=66'da yeni bir sekiz ölçülük dizi. 4 Travis: ♩=72'de p-i-p-m kalıbı, çimdik ve akor geçişli yeni bir 16 ölçülük parça. 5 Etüt: ekrandaki etüdü üzerinde yazan tempoda çal."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Barre: Level 4 chord and timing accuracy. Scale, reading, Travis and study: Level 4 note and timing accuracy.",
+        "tr": "Her bölüm kendi başına geçer. Barre: Seviye 4 akor ve zamanlama ölçütü. Gam, okuma, Travis ve etüt: Seviye 4 nota ve zamanlama ölçütü."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 not heard.", "tr": "Farklı akor: 6. tel duyulmadı." },
+      "fix": {
+        "en": "In the E-shape, the barre finger is not pressing string 6 near the fret. Roll it slightly onto its side, redo the E-shape checkpoint, then retake part 1.",
+        "tr": "E-şeklinde barre parmağı 6. teli perdeye yakın basmıyor. Parmağı hafifçe yan tarafına yatır, E-şekli geçişini tekrarla, sonra 1. bölümü yeniden dene."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "In the Travis piece the thumb stops at a chord change. Keep the bass going and move the fretting hand during the last eighth of the bar.",
+        "tr": "Travis parçasında başparmak akor geçişinde duruyor. Bası sürdür ve sol eli ölçünün son sekizliğinde taşı."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "repertoire": "Part 5 pool: Fernando Sor (1778–1839), Introduction à l'étude de la guitare, Op. 60 (Paris first edition, 1837); Matteo Carcassi (1792–1853), Méthode complète, Op. 59 (Paris first edition, 1836); Dionisio Aguado (1784–1849), Nuevo método para guitarra (Madrid, 1843). Public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

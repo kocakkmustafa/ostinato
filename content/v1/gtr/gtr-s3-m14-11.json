@@ -1,0 +1,80 @@
+{
+  "id": "gtr-s3-m14-11",
+  "title": { "en": "Build an introduction and ending", "tr": "Giriş ve bitiş kur" },
+  "goal": {
+    "en": "Adds an original 4-bar introduction and 4-bar ending around the G–D–Em–C loop and plays all three parts in time at ♩=70.",
+    "tr": "G–D–Em–C döngüsünün çevresine özgün 4 ölçülük giriş ve 4 ölçülük bitiş ekler; üç bölümü ♩=70'te zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "An introduction prepares the listener. Build it from the loop's own chords, coloured with sevenths: Em7 | Cmaj7 | Em7 | D.",
+      "tr": "Giriş dinleyiciyi hazırlar. Onu döngünün kendi akorlarından, yedililerle renklendirerek kur: Em7 | Cmaj7 | Em7 | D."
+    },
+    {
+      "en": "Change the texture so the intro sounds different: one strum per bar, let it ring. The D in bar 4 gets two strums and pulls into G.",
+      "tr": "Giriş farklı duyulsun diye dokuyu değiştir: ölçü başına bir vuruş, çalmasına izin ver. 4. ölçüdeki D iki vuruş alır ve G'ye çeker."
+    },
+    {
+      "en": "The loop in the middle is G | D | Em | C with four downstrokes per bar.",
+      "tr": "Ortadaki döngü G | D | Em | C'dir; ölçü başına dört aşağı vuruş."
+    },
+    {
+      "en": "A planned ending names its last chord and its cutoff beat. Ours: G | C | D7 | G, with one strum on beat 1 of the last bar and a stop on beat 2.",
+      "tr": "Planlı bitiş son akorunu ve kesiş vuruşunu belirtir. Bizimki: G | C | D7 | G; son ölçünün 1. vuruşunda tek vuruş, 2. vuruşta duruş."
+    },
+    {
+      "en": "Count the cutoff aloud before you play. Stop the strings with the side of your strumming hand exactly on beat 2.",
+      "tr": "Çalmadan önce kesişi sesli say. Telleri sağ elinin yanıyla tam 2. vuruşta durdur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Intro, loop and ending, 12 bars over an original bass and drum loop that drops out on the cutoff, at ♩=70 and ♩=50.",
+      "tr": "Giriş, döngü ve bitiş; kesişte susan özgün bas ve davul döngüsü üstünde 12 ölçü, ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 12 bars with the accompaniment at ♩=70: the 4-bar intro with one strum per bar, the loop with four downstrokes, and the 4-bar ending with the cutoff on beat 2. Headphones help the microphone hear only your guitar.",
+      "tr": "12 ölçüyü eşlikle ♩=70'te çal: ölçü başına bir vuruşla 4 ölçülük giriş, dört aşağı vuruşla döngü ve 2. vuruşta kesişli 4 ölçülük bitiş. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: Em7 w | Cmaj7 w | Em7 w | D h h | G q q q q | D q q q q | Em q q q q | C q q q q | G q q q q | C q q q q | D7 q q q q | G q qr hr",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The intro sounded different from the loop.", "tr": "Giriş döngüden farklı duyuldu." },
+    { "en": "I stopped the strings exactly on beat 2 of the last bar.", "tr": "Son ölçünün 2. vuruşunda telleri tam zamanında durdurdum." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": {
+        "en": "The last G kept ringing past the cutoff. Lay the side of your strumming hand on the strings on beat 2.",
+        "tr": "Son G kesişten sonra da çaldı. 2. vuruşta sağ elinin yanını tellerin üstüne koy."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "The intro's long notes made you rush. Count all four beats of each ringing bar before the next strum.",
+        "tr": "Girişin uzun sesleri seni aceleye itti. Sonraki vuruştan önce çalan her ölçünün dört vuruşunu da say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use a one-bar intro (D) and a one-bar ending (G with the cutoff) before you play the full four bars of each.",
+    "tr": "Her birinin dört ölçüsünü çalmadan önce bir ölçülük giriş (D) ve bir ölçülük bitiş (kesişli G) kullan."
+  },
+  "legacy": "R: guitar.journey.independent.arrange",
+  "minutes": 14,
+  "expertPending": true
+}

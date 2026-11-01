@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s3-m10-08",
+  "title": { "en": "Power-chord riff I", "tr": "Power chord riff I" },
+  "goal": {
+    "en": "Plays an original four-bar power-chord riff at ♩=90, muted eighths against open chords.",
+    "tr": "Özgün dört ölçülük power chord riff'ini ♩=90'da, kısık sekizlikleri açık akorlara karşı çalar."
+  },
+  "explanation": [
+    {
+      "en": "A riff is a short figure that repeats. This one is original and uses the shapes from this module.",
+      "tr": "Riff, tekrar eden kısa bir figürdür. Bu riff özgündür ve bu modüldeki şekilleri kullanır."
+    },
+    {
+      "en": "Each bar starts with four palm-muted E5 eighths on beats 1 and 2. Then lift the palm for the open chords.",
+      "tr": "Her ölçü, 1. ve 2. vuruşta dört palm mute E5 sekizlikle başlar. Sonra açık akorlar için avucu kaldır."
+    },
+    {
+      "en": "Bars 1–2: A5 (x-0-2-x-x-x), then G5 (3-5-x-x-x-x), each held as a half note on beat 3.",
+      "tr": "1–2. ölçüler: 3. vuruşta ikilik olarak tutulan A5 (x-0-2-x-x-x), sonra G5 (3-5-x-x-x-x)."
+    },
+    {
+      "en": "Bar 3: A5 on beat 3, then C5 (x-3-5-x-x-x) on beat 4. Bar 4: D5 (x-5-7-x-x-x), C5, and E5 held to the end.",
+      "tr": "3. ölçü: 3. vuruşta A5, 4. vuruşta C5 (x-3-5-x-x-x). 4. ölçü: D5 (x-5-7-x-x-x), C5 ve sona kadar tutulan E5."
+    },
+    {
+      "en": "Plan each chord during the muted eighths. The fretting hand moves while the palm keeps the time.",
+      "tr": "Her akoru kısık sekizlikler sürerken planla. Avuç zamanı tutarken sol el hareket eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The original four-bar riff at ♩=90 and ♩=60, with a bass and drum loop.",
+      "tr": "Özgün dört ölçülük riff, ♩=90 ve ♩=60, bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the four-bar riff with the accompaniment, all downstrokes. Mute the E5 eighths and let the other chords ring. Start at ♩=80 and move up to ♩=90.",
+      "tr": "Dört ölçülük riff'i eşlikle çal, hepsi aşağı pena. E5 sekizlikleri kıs, diğer akorlar çalsın. ♩=80'de başla, ♩=90'a çık."
+    },
+    "sequence": "4/4: E5 ee ee A5 h | E5 ee ee G5 h | E5 ee ee A5 q C5 q | D5 q C5 q E5 h",
+    "tempo": { "open": 80, "target": 90 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The E5 eighths were muted and the other chords rang open.", "tr": "E5 sekizlikler kısıktı, diğer akorlar açık çaldı." },
+    { "en": "Each chord change landed on its beat.", "tr": "Her akor geçişi kendi vuruşuna düştü." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Late on beat 3. Move the fretting hand to the next chord during the last muted eighth.",
+        "tr": "3. vuruşta geç. Sol eli son kısık sekizlik sürerken sonraki akora taşı."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "A5, C5 and D5 start on string 5. Aim the pick there and let the tip of finger 1 touch string 6.",
+        "tr": "A5, C5 ve D5 5. telden başlar. Penayı oraya hizala ve 1. parmağın ucu 6. tele değsin."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop bars 1 and 2 at ♩=65 until the changes feel easy, then add bars 3 and 4.",
+    "tr": "Geçişler kolaylaşana kadar ♩=65'te 1. ve 2. ölçüyü döngüle, sonra 3. ve 4. ölçüyü ekle."
+  },
+  "minutes": 14,
+  "expertPending": true
+}

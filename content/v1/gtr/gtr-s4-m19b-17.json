@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s4-m19b-17",
+  "title": { "en": "Soloing over twelve bars", "tr": "On iki ölçüde solo" },
+  "goal": {
+    "en": "Plays an original 12-bar blues solo in A at ♩=80 with bends, legato and a planned shape: question, answer and turnaround.",
+    "tr": "La'da özgün 12 ölçülük blues soloyu ♩=80'de çalar; bend, legato ve planlı bir yapıyla: soru, cevap ve dönüş."
+  },
+  "explanation": [
+    {
+      "en": "The 12-bar form in A: A7 for bars 1–4, D7 for bars 5–6, A7 for bars 7–8, then E7, D7, A7, E7.",
+      "tr": "La'da 12 ölçülük form: 1–4. ölçüler A7, 5–6. ölçüler D7, 7–8. ölçüler A7, sonra E7, D7, A7, E7."
+    },
+    {
+      "en": "The solo has three four-bar phrases. Bars 1–4 ask a question with a bend and repeat it with a release. Bars 5–8 climb to C5 and D5 over D7 and come back to A3.",
+      "tr": "Solo üç dört ölçülük cümleden oluşur. 1–4. ölçüler bir bend'le soru sorar ve onu bir bırakmayla tekrarlar. 5–8. ölçüler D7 üstünde Do5 ve Re5'e çıkar ve La3'e döner."
+    },
+    {
+      "en": "Bars 9–12 answer: two bends to E4 over E7, a pull-off back to A3, and a chromatic walk C3–D3–D♯3–E3 that leads back to the top of the form.",
+      "tr": "9–12. ölçüler cevap verir: E7 üstünde Mi4'e iki bend, La3'e dönen bir çekme ve formun başına götüren Do3–Re3–Re♯3–Mi3 kromatik yürüyüşü."
+    },
+    {
+      "en": "Notice the target notes. Each phrase ends on a note of the chord under it: A3 over A7 in bars 4 and 8, E3 over E7 in bar 12.",
+      "tr": "Hedef notalara dikkat et. Her cümle altındaki akorun bir notasında biter: 4. ve 8. ölçülerde A7 üstünde La3, 12. ölçüde E7 üstünde Mi3."
+    },
+    {
+      "en": "Play the eighths with a shuffle feel. The last note of each bar is longer; the screen shows the full rhythm.",
+      "tr": "Sekizlikleri shuffle hissiyle çal. Her ölçünün son notası daha uzundur; tam ritim ekranda görünür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "Original 12-bar A blues backing in shuffle feel with bass and drums; the solo played over it at ♩=80 and ♩=55. Headphones recommended.",
+      "tr": "Bas ve davullu, shuffle hissinde özgün 12 ölçülük La blues eşliği; solo bunun üstünde ♩=80 ve ♩=55'te çalınır. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3", "A5"],
+    "task": {
+      "en": "Play the 12-bar solo over the backing at ♩=80. Symbols: b bend, r release, p pull-off. Work in the 5th-fret box; bars 5, 6 and 10 reach C5 on string 1, and bar 6 bends it up to D5.",
+      "tr": "12 ölçülük soloyu ♩=80'de eşlik üstünde çal. Simgeler: b bend, r bırakma, p çekme. 5. perde kutusunda çalış; 5., 6. ve 10. ölçüler 1. telde Do5'e ulaşır, 6. ölçü onu Re5'e çeker."
+    },
+    "sequence": "A3 C4 D4 b E4 | D4 C4 A3 | C4 D4 b E4 r D4 | C4 A3 G3 A3 | E4 G4 A4 C5 A4 | C5 b D5 C5 A4 | G4 E4 D4 C4 | A3 | D4 b E4 D4 b E4 | C5 A4 G4 E4 | D4 p C4 A3 G3 A3 | C3 D3 D♯3 E3",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I knew which chord was under me in every bar.", "tr": "Her ölçüde altımda hangi akorun olduğunu biliyordum." },
+    { "en": "Each bend reached its target on the beat.", "tr": "Her bend hedefine vuruşta ulaştı." },
+    { "en": "I kept going after a slip instead of stopping.", "tr": "Bir kaçıştan sonra durmak yerine devam ettim." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the bend stops below the target.", "tr": "Farklı nota: bend hedefin altında kalıyor." },
+      "fix": {
+        "en": "Bar 6 bends on string 1, which feels stiffer. Use three fingers and turn the wrist; check the target at string 1, fret 10.",
+        "tr": "6. ölçü 1. telde çeker; bu tel daha sert gelir. Üç parmak kullan ve bileği çevir; hedefi 1. telin 10. perdesinde kontrol et."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The bars after a long note start late. Count the beats of the held note aloud and come in on time.",
+        "tr": "Uzun notadan sonraki ölçüler geç başlıyor. Tutulan notanın vuruşlarını sesli say ve zamanında gir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "An unplugged electric guitar is quiet. Put the phone 15–20 cm from the strings and pick a little firmer.",
+        "tr": "Amfisiz elektro gitarın sesi kısıktır. Telefonu tellere 15–20 cm uzaklığa koy ve penayla biraz daha net vur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the solo one four-bar phrase at a time at ♩=60, with the backing looped.",
+    "tr": "Soloyu ♩=60'ta, eşliği döngüleyerek her seferinde bir dört ölçülük cümle olarak öğren."
+  },
+  "minutes": 20,
+  "expertPending": true
+}

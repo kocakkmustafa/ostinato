@@ -1,0 +1,83 @@
+{
+  "id": "gtr-s4-m18-01",
+  "title": { "en": "Staff notes on strings 1–3", "tr": "1–3. tellerde porte notaları" },
+  "goal": {
+    "en": "Reads an eight-bar staff line on strings 1–3 and plays it in first position at ♩=60.",
+    "tr": "1–3. tellerde sekiz ölçülük bir porte dizisini okur ve birinci pozisyonda ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "A staff has five lines and four spaces. In treble clef the lines from bottom to top are E G B D F; the spaces are F A C E.",
+      "tr": "Porte beş çizgi ve dört aralıktan oluşur. Sol anahtarında çizgiler alttan üste Mi Sol Si Re Fa, aralıklar Fa La Do Mi'dir."
+    },
+    {
+      "en": "Guitar music is written one octave higher than it sounds. The app names and checks the sounding pitch.",
+      "tr": "Gitar notası duyulandan bir oktav yüksek yazılır. Uygulama duyulan perdeyi adlandırır ve kontrol eder."
+    },
+    {
+      "en": "String 3: the second line is open G3; the second space is A3 at fret 2.",
+      "tr": "3. tel: ikinci çizgi açık Sol3, ikinci aralık 2. perdedeki La3'tür."
+    },
+    {
+      "en": "String 2: the middle line is open B3; the third space is C4 at fret 1; the fourth line is D4 at fret 3.",
+      "tr": "2. tel: orta çizgi açık Si3, üçüncü aralık 1. perdedeki Do4, dördüncü çizgi 3. perdedeki Re4'tür."
+    },
+    {
+      "en": "String 1: the top space is open E4; the top line is F4 at fret 1; the space above the staff is G4 at fret 3.",
+      "tr": "1. tel: en üst aralık açık Mi4, en üst çizgi 1. perdedeki Fa4, portenin üstündeki aralık 3. perdedeki Sol4'tür."
+    },
+    {
+      "en": "In first position the finger matches the fret: finger 1 on fret 1, finger 2 on fret 2, finger 3 on fret 3.",
+      "tr": "Birinci pozisyonda parmak perdeyle aynı numaradır: 1. perdeye 1. parmak, 2. perdeye 2. parmak, 3. perdeye 3. parmak."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original eight-bar line on strings 1–3 in quarter notes, at ♩=60 and ♩=40, string-model synthesis; staff only, no TAB.",
+      "tr": "1–3. tellerde özgün sekiz ölçülük dizi, dörtlüklerle, ♩=60 ve ♩=40, tel modeli sentezi; yalnız porte, tab yok."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Read the eight bars from the staff; the TAB is hidden. Say each note name once before you play. Then play them in quarter notes with the click at ♩=60.",
+      "tr": "Sekiz ölçüyü porteden oku; tab gizli. Çalmadan önce her notanın adını bir kez söyle. Sonra klikle ♩=60'ta dörtlüklerle çal."
+    },
+    "sequence": "G3 B3 D4 B3 | C4 E4 G4 E4 | F4 D4 B3 D4 | C4 A3 G3 A3 | B3 C4 D4 F4 | E4 C4 A3 C4 | B3 D4 F4 D4 | E4 D4 B3 C4",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found each note from the staff, not from the TAB.", "tr": "Her notayı tabdan değil porteden buldum." },
+    { "en": "I used finger 1 for fret 1 and finger 3 for fret 3.", "tr": "1. perdede 1. parmağı, 3. perdede 3. parmağı kullandım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "C4 or F4 was played open. B–C and E–F are one fret apart: press fret 1.",
+        "tr": "Do4 ya da Fa4 açık tel olarak çalındı. Si–Do ve Mi–Fa arasında bir perde var: 1. perdeye bas."
+      }
+    },
+    {
+      "error": { "en": "Different note, an octave high.", "tr": "Farklı nota, bir oktav yüksek." },
+      "fix": {
+        "en": "You played the written pitch. Guitar sounds an octave lower: the second line is open string 3 (G3), not G4 on string 1.",
+        "tr": "Yazılı perdeyi çaldın. Gitar bir oktav pes duyulur: ikinci çizgi 1. teldeki Sol4 değil, açık 3. teldeki Sol3'tür."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read and play two bars at a time at ♩=45, then join them.",
+    "tr": "Her seferinde iki ölçüyü ♩=45'te okuyup çal, sonra birleştir."
+  },
+  "legacy": "V: guitar.journey.reading.staff",
+  "minutes": 15,
+  "expertPending": true
+}

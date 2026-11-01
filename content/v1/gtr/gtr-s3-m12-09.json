@@ -1,0 +1,127 @@
+{
+  "id": "gtr-s3-m12-09",
+  "title": {
+    "en": "Melody above bass",
+    "tr": "Bas üzerinde melodi"
+  },
+  "goal": {
+    "en": "Plays an original four-bar melody over a thumb bass at ♩=60, pinching bass and melody on beats 1 and 3.",
+    "tr": "Özgün dört ölçülük melodiyi başparmak bası üstünde ♩=60'ta çalar; 1. ve 3. vuruşta bas ile melodiyi birlikte çeker."
+  },
+  "explanation": [
+    {
+      "en": "Fingerstyle can play two parts at once: a bass with the thumb and a melody with the fingers on the high strings.",
+      "tr": "Parmak stili iki partiyi aynı anda çalabilir: başparmakla bas, ince tellerde parmaklarla melodi."
+    },
+    {
+      "en": "Start with separate events: A2 on beat 1, then A3, C4 and E4 on beats 2, 3 and 4.",
+      "tr": "Ayrı seslerle başla: 1. vuruşta La2, sonra 2., 3. ve 4. vuruşta La3, Do4 ve Mi4."
+    },
+    {
+      "en": "In this melody the thumb plays on beats 1 and 3, together with a melody note. On beats 2 and 4 the melody plays alone.",
+      "tr": "Bu melodide başparmak 1. ve 3. vuruşta bir melodi notasıyla birlikte çalar. 2. ve 4. vuruşta melodi tek başına çalar."
+    },
+    {
+      "en": "The chords are Am | C | G | Am. Fret only the notes you need; you do not have to hold the full chord.",
+      "tr": "Akorlar Am | C | G | Am. Yalnız gereken notalara bas; tam akoru tutman gerekmez."
+    },
+    {
+      "en": "The melody must stand out. Pluck the melody a little firmer and the bass a little softer.",
+      "tr": "Melodi öne çıkmalı. Melodiyi biraz daha net, bası biraz daha yumuşak çek."
+    },
+    {
+      "en": "Hum the melody on its own. If you cannot follow it while playing, the bass is covering it.",
+      "tr": "Melodiyi tek başına mırıldan. Çalarken onu izleyemiyorsan bas onu örtüyor."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The original four-bar melody with its thumb bass, string-model synthesis, at ♩=60 and ♩=40; the melody slightly louder than the bass.",
+      "tr": "Özgün dört ölçülük melodi başparmak basıyla, tel modeli sentezi, ♩=60 ve ♩=40; melodi bastan biraz daha güçlü."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3",
+      "A4"
+    ],
+    "task": {
+      "en": "Play the four bars in quarter notes with the click at ♩=60. A slash marks a bass note and a melody note plucked together; the last pinch lasts two beats.",
+      "tr": "Dört ölçüyü klikle ♩=60'ta dörtlük çal. Eğik çizgi birlikte çekilen bir bas ve bir melodi notasını gösterir; son çimdik iki vuruş sürer."
+    },
+    "sequence": "A2/E4 D4 A2/C4 D4 | C3/E4 G4 C3/E4 D4 | G2/D4 C4 G2/B3 A3 | A2/C4 B3 A2/A3",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Both notes of each pinch started together.",
+      "tr": "Her çimdiğin iki notası birlikte başladı."
+    },
+    {
+      "en": "I can hum the melody on its own.",
+      "tr": "Melodiyi tek başına mırıldanabiliyorum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different chord: the melody note not heard.",
+        "tr": "Farklı akor: melodi notası duyulmadı."
+      },
+      "fix": {
+        "en": "The bass covers the melody. Soften the bass, play the melody alone, then join the two more slowly.",
+        "tr": "Bas melodiyi örtüyor. Bası yumuşat, melodiyi tek başına çal, sonra ikisini daha yavaş birleştir."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "In bar 3, B3 is open string 2. Lift finger 1 from string 2 after C4.",
+        "tr": "3. ölçüde Si3 açık 2. teldir. Do4'ten sonra 1. parmağı 2. telden kaldır."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The note after a pinch is late. Have i or m ready on its string while the pinch rings.",
+        "tr": "Çimdikten sonraki nota geç kalıyor. Çimdik çınlarken i ya da m'yi teline hazır tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Place bass and melody on separate beats first: the bass on beat 1, the melody on beats 2 to 4.",
+    "tr": "Önce bas ve melodiyi ayrı vuruşlara koy: bas 1. vuruşta, melodi 2.–4. vuruşlarda."
+  },
+  "legacy": "R: guitar.journey.fingerstyle.melody_bass",
+  "minutes": 15,
+  "expertPending": true
+}

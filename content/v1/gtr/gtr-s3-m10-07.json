@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s3-m10-07",
+  "title": { "en": "Three-note power chords", "tr": "Üç notalı power chord" },
+  "goal": {
+    "en": "Plays E5, A5 and D5 as root, fifth and octave while the unused strings stay silent.",
+    "tr": "E5, A5 ve D5'i kök, beşli ve oktav olarak, kullanılmayan teller sessizken çalar."
+  },
+  "explanation": [
+    {
+      "en": "Add the root again one octave higher. The chord gets fuller, but it is still a power chord: no third.",
+      "tr": "Kökü bir oktav yukarıda yeniden ekle. Akor dolgunlaşır ama yine power chord'dur: üçlü yok."
+    },
+    {
+      "en": "E5: 0-2-2-x-x-x. Fingers 2 and 3 on strings 5 and 4 at fret 2: E2, B2, E3.",
+      "tr": "E5: 0-2-2-x-x-x. 2. ve 3. parmak 5. ve 4. telin 2. perdesinde: Mi2, Si2, Mi3."
+    },
+    {
+      "en": "A5: x-0-2-2-x-x. The same two fingers move to strings 4 and 3: A2, E3, A3.",
+      "tr": "A5: x-0-2-2-x-x. Aynı iki parmak 4. ve 3. tele geçer: La2, Mi3, La3."
+    },
+    {
+      "en": "D5: x-x-0-2-3-x. Finger 1 on string 3, fret 2; finger 3 on string 2, fret 3: D3, A3, D4. Start the stroke on string 4.",
+      "tr": "D5: x-x-0-2-3-x. 1. parmak 3. telin 2. perdesinde, 3. parmak 2. telin 3. perdesinde: Re3, La3, Re4. Vuruşa 4. telden başla."
+    },
+    {
+      "en": "The movable form adds finger 4: G5 is 3-5-5-x-x-x. Use it later in riffs; here keep to the open shapes.",
+      "tr": "Taşınır biçim 4. parmağı ekler: G5, 3-5-5-x-x-x. Onu sonra riff'lerde kullan; burada açık şekillerde kal."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "E5, A5 and D5 with root, fifth and octave, each struck and then plucked string by string, slowly.",
+      "tr": "Kök, beşli ve oktavla E5, A5 ve D5; her biri vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strike E5 four times, then A5 four times, then D5 four times, in your own time. Then pluck each chord string by string; the app checks each string.",
+      "tr": "Kendi hızında E5'i dört kez, sonra A5'i dört kez, sonra D5'i dört kez vur. Sonra her akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "E5 E5 E5 E5 | A5 A5 A5 A5 | D5 D5 D5 D5",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "Only the three chord strings sounded.", "tr": "Yalnız akorun üç teli çaldı." },
+    { "en": "I can point to the root, the fifth and the octave in each chord.", "tr": "Her akorda kökü, beşliyi ve oktavı gösterebiliyorum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "D5 starts on string 4. Aim the pick at string 4 before you strike.",
+        "tr": "D5 4. telden başlar. Vurmadan önce penayı 4. tele hizala."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "In A5 the two fingers crowd each other at fret 2. Angle them slightly and press with the tips.",
+        "tr": "A5'te iki parmak 2. perdede birbirini sıkıştırıyor. Hafifçe eğ ve uçlarıyla bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each chord as two notes first, root and fifth, then add the octave.",
+    "tr": "Her akoru önce iki nota olarak, kök ve beşli, çal; sonra oktavı ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,84 @@
+{
+  "id": "gtr-s3-m14-02",
+  "title": { "en": "Am7, Em7 and Dm7", "tr": "Am7, Em7 ve Dm7" },
+  "goal": {
+    "en": "Plays Am7, Em7 and Dm7 with every string ringing and names the added seventh in each.",
+    "tr": "Am7, Em7 ve Dm7'yi bütün teller çalarak çalar ve her birine eklenen yediliyi adlandırır."
+  },
+  "explanation": [
+    {
+      "en": "A minor seventh chord is a minor triad plus a minor seventh: 10 frets above the root, a whole step below its octave.",
+      "tr": "Minör yedili akor, minör üçlüye küçük yedili eklenmiş hâlidir: kökün 10 perde yukarısı, oktavının bir tam ses altı."
+    },
+    {
+      "en": "Am7: x-0-2-0-1-0. Hold Am and lift finger 3 from string 3; the open G3 is the seventh.",
+      "tr": "Am7: x-0-2-0-1-0. Am'yi bas ve 3. parmağı 3. telden kaldır; açık Sol3 yedilidir."
+    },
+    {
+      "en": "Em7: 0-2-0-0-0-0. Hold Em and lift the finger from string 4; the open D3 is the seventh.",
+      "tr": "Em7: 0-2-0-0-0-0. Em'i bas ve parmağı 4. telden kaldır; açık Re3 yedilidir."
+    },
+    {
+      "en": "Dm7: x-x-0-2-1-1. Finger 2 on string 3, fret 2. Lay finger 1 flat across strings 2 and 1 at fret 1. The C4 on string 2 is the seventh.",
+      "tr": "Dm7: x-x-0-2-1-1. 2. parmak 3. telin 2. perdesinde. 1. parmağı 2. ve 1. telin 1. perdesine yatır. 2. teldeki Do4 yedilidir."
+    },
+    {
+      "en": "All three sound softer than the plain minor chord. Start Am7 on string 5 and Dm7 on string 4.",
+      "tr": "Üçü de yalın minör akordan daha yumuşak duyulur. Am7'ye 5. telden, Dm7'ye 4. telden başla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Am then Am7, Em then Em7, Dm then Dm7, each strummed and then plucked string by string, slowly.",
+      "tr": "Önce Am sonra Am7, önce Em sonra Em7, önce Dm sonra Dm7; her biri taranır, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strum Am7 four times, then Em7 four times, then Dm7 four times, in your own time. Then pluck each chord string by string; the app checks each string.",
+      "tr": "Kendi hızında Am7'yi dört kez, sonra Em7'yi dört kez, sonra Dm7'yi dört kez tara. Sonra her akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "Am7 Am7 Am7 Am7 | Em7 Em7 Em7 Em7 | Dm7 Dm7 Dm7 Dm7",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "I can point to the seventh in Am7, Em7 and Dm7.", "tr": "Am7, Em7 ve Dm7'de yediliyi gösterebiliyorum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "In Am7, finger 2 leans on the open G string. Arch it and press with the very tip.",
+        "tr": "Am7'de 2. parmak açık Sol teline yaslanıyor. Parmağı kavisli tut ve tam uçtan bas."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 1 not heard.", "tr": "Farklı akor: 1. tel duyulmadı." },
+      "fix": {
+        "en": "In Dm7, finger 1 is not flat enough. Roll it slightly onto its side so it covers strings 2 and 1.",
+        "tr": "Dm7'de 1. parmak yeterince yatık değil. 2. ve 1. teli kaplasın diye parmağı hafifçe yan tarafına çevir."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "Dm7 starts on string 4. Aim the pick at string 4 before you strum.",
+        "tr": "Dm7 4. telden başlar. Vurmadan önce penayı 4. tele hizala."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the plain minor chord, then lift or move the one finger that makes the seventh, and repeat until the change feels clear.",
+    "tr": "Önce yalın minör akoru çal, sonra yediliyi yapan tek parmağı kaldır ya da kaydır; geçiş netleşene kadar tekrarla."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

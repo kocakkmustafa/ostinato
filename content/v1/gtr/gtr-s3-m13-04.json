@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s3-m13-04",
+  "title": { "en": "Boogie in A, D and E", "tr": "A, D ve E'de boogie" },
+  "goal": {
+    "en": "Moves the boogie pattern to A, D and E through the 12-bar form at ♩=80.",
+    "tr": "Boogie kalıbını 12 ölçülük biçim boyunca A, D ve E'ye taşır ve ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "The pattern keeps its shape on every pair of strings: an open root, then fret 2 and fret 4 on the next thinner string.",
+      "tr": "Kalıp her tel çiftinde şeklini korur: açık bir kök, sonra bir ince telde 2. ve 4. perde."
+    },
+    {
+      "en": "A: strings 5 and 4 (A2 with E3 and F♯3). D: strings 4 and 3 (D3 with A3 and B3). E: strings 6 and 5 (E2 with B2 and C♯3).",
+      "tr": "A: 5. ve 4. tel (La2 ile Mi3 ve Fa♯3). D: 4. ve 3. tel (Re3 ile La3 ve Si3). E: 6. ve 5. tel (Mi2 ile Si2 ve Do♯3)."
+    },
+    {
+      "en": "The form is the one from the first lesson: A A A A / D D A A / E D A E, one pattern per bar.",
+      "tr": "Biçim ilk dersteki gibidir: A A A A / D D A A / E D A E, her ölçüde bir kalıp."
+    },
+    {
+      "en": "Your fretting hand moves across the strings at each change. Most changes move one string; E to D in bar 10 jumps two.",
+      "tr": "Sol elin her geçişte teller boyunca kayar. Çoğu geçiş bir tel kayar; 10. ölçüde E'den D'ye geçiş iki tel atlar."
+    },
+    {
+      "en": "Aim the pick at the new root string: string 5 for A, string 4 for D, string 6 for E.",
+      "tr": "Penayı yeni kök teline yönelt: A için 5. tel, D için 4. tel, E için 6. tel."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 12-bar boogie in A, swung, over an original bass and drum loop at ♩=80 and ♩=55.",
+      "tr": "La'da 12 ölçülük boogie, swing'li; ♩=80 ve ♩=55'te özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 12 bars with the accompaniment at ♩=80: the boogie pattern on A, D or E as the chart shows, in swung eighths. Headphones help the microphone hear only your guitar.",
+      "tr": "12 ölçüyü ♩=80'de eşlikle çal: çizelgeye göre A, D ya da E'de boogie kalıbı, swing'li sekizliklerle. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4 swing: A5–A6 | A5–A6 | A5–A6 | A5–A6 | D5–D6 | D5–D6 | A5–A6 | A5–A6 | E5–E6 | D5–D6 | A5–A6 | E5–E6",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I moved to D in bar 5 and to E in bar 9.", "tr": "5. ölçüde D'ye, 9. ölçüde E'ye geçtim." },
+    { "en": "Only the two strings of each pattern rang.", "tr": "Her kalıbın yalnız iki teli çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "On D, start the stroke on string 4 and skip string 5.",
+        "tr": "D'de vuruşa 4. telden başla, 5. teli atla."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 3 not heard.", "tr": "Farklı akor: 3. tel duyulmadı." },
+      "fix": {
+        "en": "On D, finger 1 presses string 3 at fret 2. Move the whole hand one string, not only the fingertips.",
+        "tr": "D'de 1. parmak 3. teli 2. perdede basar. Yalnız parmak uçlarını değil, bütün eli bir tel kaydır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "E to D in bar 10 jumps two strings. Loop bars 9 and 10 at ♩=60, then rejoin the full form.",
+        "tr": "10. ölçüde E'den D'ye geçiş iki tel atlar. 9. ve 10. ölçüyü ♩=60'ta döngüle, sonra bütün biçime dön."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only A5, D5 or E5 on beat 1 of each bar, then add the full pattern.",
+    "tr": "Her ölçüde 1. vuruşta yalnız A5, D5 ya da E5'i çal; sonra tam kalıbı ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

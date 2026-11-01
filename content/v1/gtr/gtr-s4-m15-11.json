@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s4-m15-11",
+  "title": { "en": "E-shape checkpoint", "tr": "E-şekli geçişi" },
+  "goal": {
+    "en": "Plays an original 16-bar progression with E-shape major, minor and seventh barre chords at ♩=80.",
+    "tr": "E-şekli majör, minör ve 7'li barre akorlarıyla özgün 16 ölçülük ilerlemeyi ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint joins the barre chords from this module in one original 16-bar progression.",
+      "tr": "Bu geçiş, bu modülün barre akorlarını özgün 16 ölçülük bir ilerlemede birleştirir."
+    },
+    {
+      "en": "Bars 1–8: F, Am, Gm, C, then F, Fm, C, C. From F to Fm only finger 2 lifts.",
+      "tr": "1–8. ölçüler: F, Am, Gm, C, sonra F, Fm, C, C. F'den Fm'ye geçişte yalnız 2. parmak kalkar."
+    },
+    {
+      "en": "Bars 9–16: Am, Gm, F, G, then A7, Dm, G7, C. G and G7 sit at fret 3, A7 at fret 5. Dm is open: x-x-0-2-3-1.",
+      "tr": "9–16. ölçüler: Am, Gm, F, G, sonra A7, Dm, G7, C. G ve G7 3. perdede, A7 5. perdededir. Dm açıktır: x-x-0-2-3-1."
+    },
+    {
+      "en": "Strum D-DU-UDU in bars 1–15. In bar 16, strum C once and let it ring.",
+      "tr": "1–15. ölçülerde D-DU-UDU vur. 16. ölçüde C'ye bir kez vur ve çalmaya bırak."
+    },
+    {
+      "en": "If the thumb or wrist feels strained, release the hand and rest before the next set.",
+      "tr": "Başparmak ya da bilekte gerilim hissedersen eli bırak ve sonraki setten önce dinlen."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The original 16 bars in D-DU-UDU at ♩=80 and ♩=55, with a light bass and drum loop.",
+      "tr": "Özgün 16 ölçü D-DU-UDU ile, ♩=80 ve ♩=55, hafif bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 16 bars with the accompaniment at ♩=80. Slower tempos are open for practice; the checkpoint passes at ♩=80. Headphones help the microphone hear only your guitar.",
+      "tr": "16 ölçüyü eşlikle ♩=80'de çal. Daha yavaş tempolar pratik için açık; geçiş ♩=80'de geçilir. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: F | Am | Gm | C | F | Fm | C | C | Am | Gm | F | G | A7 | Dm | G7 | C",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Late at bar 13. Slide from G at fret 3 to A7 at fret 5 during the last upstroke of bar 12.",
+        "tr": "13. ölçüde geç. 12. ölçünün son yukarı vuruşunda 3. perdedeki G'den 5. perdedeki A7'ye kay."
+      }
+    },
+    {
+      "error": { "en": "Different chord: one string not heard.", "tr": "Farklı akor: bir tel duyulmadı." },
+      "fix": {
+        "en": "Check that chord string by string, then loop its bar with the bar before.",
+        "tr": "O akoru tel tel kontrol et, sonra ölçüsünü bir önceki ölçüyle döngüle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise bars 1–8 and bars 9–16 separately at ♩=60, then join them across bars 8 and 9.",
+    "tr": "1–8. ve 9–16. ölçüleri ♩=60'ta ayrı çalış, sonra 8. ve 9. ölçüde birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

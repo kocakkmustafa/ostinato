@@ -1,0 +1,116 @@
+{
+  "id": "gtr-s4-m18-03",
+  "title": {
+    "en": "Pitch and rhythm together",
+    "tr": "Perde ve ritim birlikte"
+  },
+  "goal": {
+    "en": "Reads an original eight-bar staff line with mixed rhythms and plays its pitches and rhythm together at ♩=70.",
+    "tr": "Karışık ritimli özgün sekiz ölçülük porte dizisini okur ve perdelerini ritmiyle birlikte ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Each note on the staff gives two facts: its height is the pitch, its shape is the length.",
+      "tr": "Portedeki her nota iki bilgi verir: yüksekliği perdedir, şekli süredir."
+    },
+    {
+      "en": "Read in two passes. First tap the rhythm while counting. Then play the pitches in that rhythm.",
+      "tr": "İki turda oku. Önce sayarak ritmi tıkla. Sonra perdeleri o ritimle çal."
+    },
+    {
+      "en": "A dot adds half the value: a dotted half lasts three beats, a dotted quarter one and a half.",
+      "tr": "Nokta, sürenin yarısını ekler: noktalı ikilik üç vuruş, noktalı dörtlük bir buçuk vuruş sürer."
+    },
+    {
+      "en": "Count eighths as \"1 & 2 &\". After a dotted quarter on beat 1, the eighth falls on the \"&\" of beat 2.",
+      "tr": "Sekizlikleri \"1 ve 2 ve\" diye say. 1. vuruştaki noktalı dörtlükten sonra sekizlik, 2. vuruşun \"ve\"sine düşer."
+    },
+    {
+      "en": "Let long notes ring their full length. On a rest, stop the string.",
+      "tr": "Uzun notalar tam süresince çınlasın. Susta teli durdur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The original eight-bar line on strings 1–3 with a click, at ♩=70 and at ♩=45, string-model synthesis.",
+      "tr": "Klikle 1–3. tellerde özgün sekiz ölçülük dizi, ♩=70 ve ♩=45, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "First tap the rhythm of the eight bars with the click. Then play them from the staff, starting at ♩=60 and moving up in steps of 5 to ♩=70.",
+      "tr": "Önce sekiz ölçünün ritmini klikle tıkla. Sonra ölçüleri porteden çal; ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "4/4: C4:q E4:q G4:h | F4:e E4:e D4:q E4:h | C4:q qr A3:q B3:q | C4:h. qr | G3:e A3:e B3:e C4:e D4:q B3:q | E4:q. D4:e C4:h | D4:q F4:q E4:e D4:e B3:q | C4:w",
+    "tempo": {
+      "open": 60,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I tapped the rhythm once before playing.",
+      "tr": "Çalmadan önce ritmi bir kez tıkladım."
+    },
+    {
+      "en": "Half and dotted notes rang for their full length.",
+      "tr": "İkilik ve noktalı notalar tam süresince çınladı."
+    },
+    {
+      "en": "I stopped the string on each rest.",
+      "tr": "Her susta teli durdurdum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The note after a long note is rushing. Count every beat of the long note aloud.",
+        "tr": "Uzun notadan sonraki nota acele ediyor. Uzun notanın her vuruşunu sesli say."
+      }
+    },
+    {
+      "error": {
+        "en": "Different: sound still heard during the rest.",
+        "tr": "Farklı: susta ses hâlâ duyuldu."
+      },
+      "fix": {
+        "en": "Stop the string with a light touch exactly on the rest beat.",
+        "tr": "Teli tam sus vuruşunda hafif bir dokunuşla durdur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the written rhythm on open string 1 (E4) first, then add the pitches.",
+    "tr": "Önce yazılı ritmi açık 1. telde (Mi4) çal, sonra perdeleri ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

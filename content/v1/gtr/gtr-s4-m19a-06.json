@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m19a-06",
+  "title": { "en": "Pinches in Travis", "tr": "Travis'te çimdik" },
+  "goal": {
+    "en": "Adds a pinch on beat 1 of the Travis pattern for four bars at ♩=60.",
+    "tr": "Travis kalıbının 1. vuruşuna çimdik ekleyerek dört ölçü ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "A pinch is the thumb and a finger plucking at the same moment. In Travis picking it marks the start of the bar.",
+      "tr": "Çimdik, başparmak ile bir parmağın aynı anda çekmesidir. Travis tekniğinde ölçünün başını belirler."
+    },
+    {
+      "en": "On beat 1, play p and m together: the bass and string 1 sound as one. On C that is C3 with E4; on G it is G2 with G4.",
+      "tr": "1. vuruşta p ile m'yi birlikte çal: bas ve 1. tel tek ses gibi duyulur. C'de bu Do3 ile Mi4, G'de Sol2 ile Sol4'tür."
+    },
+    {
+      "en": "The rest of the bar stays the same: i, p, m, p, i, p, m.",
+      "tr": "Ölçünün geri kalanı aynı kalır: i, p, m, p, i, p, m."
+    },
+    {
+      "en": "Move thumb and finger toward each other, like a small pinch, then release. Both notes should be equally loud.",
+      "tr": "Başparmak ile parmağı küçük bir çimdik gibi birbirine doğru hareket ettir, sonra bırak. İki nota eşit gürlükte olmalı."
+    },
+    {
+      "en": "Keep the pinch exactly on the click. It is the anchor; the eighths that follow hang from it.",
+      "tr": "Çimdiği tam klikin üstünde tut. O bir çapadır; ardından gelen sekizlikler ona bağlıdır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The four bars C–C–G–C with a pinch on each beat 1, at ♩=60 and ♩=40, with click.",
+      "tr": "Her 1. vuruşta çimdikli C–C–G–C dört ölçüsü, ♩=60 ve ♩=40, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "With the click at ♩=60, play two bars of C, one bar of G and one bar of C. Start each bar with a pinch, then continue the p-i-p-m pattern. A slash in the line marks two notes plucked together.",
+      "tr": "Klikle ♩=60'ta iki ölçü C, bir ölçü G ve bir ölçü C çal. Her ölçüye çimdikle başla, sonra p-i-p-m kalıbını sürdür. Dizideki eğik çizgi birlikte çekilen iki notayı gösterir."
+    },
+    "sequence": "C3/E4 C4 E3 E4 C3 C4 E3 E4 | C3/E4 C4 E3 E4 C3 C4 E3 E4 | G2/G4 B3 D3 G4 G2 B3 D3 G4 | C3/E4 C4 E3 E4 C3 C4 E3 E4",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both notes of the pinch started at the same moment.", "tr": "Çimdiğin iki notası aynı anda başladı." },
+    { "en": "The pinch fell exactly on beat 1.", "tr": "Çimdik tam 1. vuruşa düştü." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: only the bass heard on beat 1.", "tr": "Farklı akor: 1. vuruşta yalnız bas duyuldu." },
+      "fix": { "en": "m plucked too softly or too late. Place p and m on their strings first, then pinch.", "tr": "m çok zayıf ya da geç çekti. Önce p ile m'yi tellerine koy, sonra çimdikle." }
+    },
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": { "en": "The pinch rushes beat 1. Count '1' aloud and pinch exactly on it.", "tr": "Çimdik 1. vuruşa acele ediyor. '1'i sesli say ve tam onun üstünde çimdikle." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the pinch on beat 1 and let it ring for the bar until p and m land together; then add the pattern.",
+    "tr": "p ile m birlikte düşene kadar yalnız 1. vuruştaki çimdiği çal ve ölçü boyunca çalsın; sonra kalıbı ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

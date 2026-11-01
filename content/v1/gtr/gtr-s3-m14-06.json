@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s3-m14-06",
+  "title": { "en": "Move a short progression", "tr": "Kısa diziyi başka tona taşı" },
+  "goal": {
+    "en": "Moves a four-bar I–V–IV–I progression from G to D and from C to A and plays both versions at ♩=70.",
+    "tr": "Dört ölçülük I–V–IV–I ilerlemesini Sol'den Re'ye ve Do'dan La'ya taşır; iki sürümü de ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "To move a progression, turn every chord into a Roman numeral first. G–D–C–G in G is I–V–IV–I.",
+      "tr": "Bir ilerlemeyi taşımak için önce her akoru Romen sayısına çevir. Sol tonunda G–D–C–G, I–V–IV–I'dir."
+    },
+    {
+      "en": "Then rebuild every numeral in the new key. In D, I–V–IV–I is D–A–G–D.",
+      "tr": "Sonra her sayıyı yeni tonda yeniden kur. Re tonunda I–V–IV–I, D–A–G–D'dir."
+    },
+    {
+      "en": "Check by distance: every chord moves the same number of frets. G to D is 7 frets up, so D becomes A and C becomes G.",
+      "tr": "Uzaklıkla kontrol et: her akor aynı sayıda perde kayar. G'den D'ye 7 perde yukarıdır; yani D, A olur ve C, G olur."
+    },
+    {
+      "en": "C–G–F–C in C moves to A–E–D–A in A. Play F on four strings: x-x-3-2-1-1.",
+      "tr": "Do tonundaki C–G–F–C, La tonunda A–E–D–A olur. F'yi dört telde çal: x-x-3-2-1-1."
+    },
+    {
+      "en": "The same idea moves a melody. G3 A3 B3 in G becomes A3 B3 C♯4 in A.",
+      "tr": "Aynı fikir bir ezgiyi de taşır. Sol tonundaki Sol3 La3 Si3, La tonunda La3 Si3 Do♯4 olur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "I–V–IV–I in G, D, C and A, four downstrokes per bar, at ♩=70 and ♩=45; the key and the numerals are shown above the bars.",
+      "tr": "Sol, Re, Do ve La'da I–V–IV–I, ölçü başına dört aşağı vuruş, ♩=70 ve ♩=45; ton ve sayılar ölçülerin üstünde gösterilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play I–V–IV–I in G, then the same in D, then in C, then in A, with the click at ♩=70: 16 bars, four downstrokes per bar. Say the numeral of each chord before you play it.",
+      "tr": "Klikle ♩=70'te I–V–IV–I'yi önce Sol'de, sonra Re'de, sonra Do'da, sonra La'da çal: 16 ölçü, ölçü başına dört aşağı vuruş. Her akoru çalmadan önce sayısını söyle."
+    },
+    "sequence": "4/4: G | D | C | G | D | A | G | D | C | G | F | C | A | E | D | A",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I wrote each new key from the numerals before I played it.", "tr": "Her yeni tonu çalmadan önce sayılardan yazdım." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: chord from the old key.", "tr": "Farklı akor: eski tondan akor." },
+      "fix": {
+        "en": "One chord stayed in the old key. Turn every chord into a numeral, then rebuild all of them in the new key.",
+        "tr": "Bir akor eski tonda kaldı. Her akoru sayıya çevir, sonra hepsini yeni tonda yeniden kur."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The first chord of each new key is the slow one. Look at the next four chords during the last bar of the old key.",
+        "tr": "Her yeni tonun ilk akoru en yavaş olanıdır. Eski tonun son ölçüsünde sonraki dört akora bak."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Move only G to D first, as 8 bars with two strums per bar, then add C to A.",
+    "tr": "Önce yalnız Sol'den Re'ye taşı, ölçü başına iki vuruşla 8 ölçü; sonra Do'dan La'ya ekle."
+  },
+  "legacy": "R: guitar.journey.harmony.transpose",
+  "minutes": 14,
+  "expertPending": true
+}

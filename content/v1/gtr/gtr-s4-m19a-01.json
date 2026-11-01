@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s4-m19a-01",
+  "title": { "en": "Acoustic setup and tone", "tr": "Akustik kurulum ve ton" },
+  "goal": {
+    "en": "Sets the phone distance and the flesh or nail tone so that no more than 10% of open-string notes come back as 'Couldn't hear'.",
+    "tr": "Telefon mesafesini ve et ya da tırnak tonunu ayarlar; açık tel notalarının en fazla %10'u 'Duyamadım' olarak döner."
+  },
+  "explanation": [
+    {
+      "en": "Plucked notes are quieter than strummed chords. Before this track, place the phone so the app hears every single note.",
+      "tr": "Parmakla çekilen notalar vuruştan daha sessizdir. Bu kola başlamadan telefonu, uygulama her notayı duyacak şekilde yerleştir."
+    },
+    {
+      "en": "Put the phone 30–50 cm away, pointing at the spot where the neck meets the body. Right in front of the soundhole, the low strings boom and cover the others.",
+      "tr": "Telefonu 30–50 cm uzağa koy; sapın gövdeyle birleştiği noktaya baksın. Ses deliğinin tam önünde pes teller uğuldar ve diğerlerini örter."
+    },
+    {
+      "en": "Flesh tone: pluck with the pad of the fingertip. The sound is warm and round, with a soft attack.",
+      "tr": "Et tonu: parmak ucunun yastığıyla çek. Ses sıcak ve yuvarlaktır, atağı yumuşaktır."
+    },
+    {
+      "en": "Nail tone: the pad touches the string first, then the string slides off a short, smooth nail. The sound is brighter and the attack clearer. If you have no nails, flesh tone is fine.",
+      "tr": "Tırnak tonu: tel önce yastığa değer, sonra kısa ve pürüzsüz tırnaktan kayar. Ses daha parlak, atak daha nettir. Tırnağın yoksa et tonu yeterli."
+    },
+    {
+      "en": "The thumb (p) plays strings 6–4, the fingers i, m and a play strings 3–1. Keep the plucking hand still near the back edge of the soundhole; only the fingers move.",
+      "tr": "Başparmak (p) 6–4. telleri, i, m ve a parmakları 3–1. telleri çalar. Sağ eli ses deliğinin arka kenarına yakın sabit tut; yalnız parmaklar hareket etsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The six open strings plucked one by one, first in flesh tone, then in nail tone, string-model synthesis.",
+      "tr": "Altı açık tel tek tek çekilir, önce et tonuyla, sonra tırnak tonuyla; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Tune first. Pluck the six open strings from E2 to E4 one by one in flesh tone and let each ring. Then do the same in nail tone. If more than one of the 12 notes shows 'Couldn't hear', move the phone and try again.",
+      "tr": "Önce akort et. Altı açık teli Mi2'den Mi4'e et tonuyla tek tek çek ve her biri çalsın. Sonra aynısını tırnak tonuyla yap. 12 notadan birden fazlası 'Duyamadım' gösterirse telefonu kaydır ve yeniden dene."
+    },
+    "sequence": "E2 A2 D3 G3 B3 E4 | E2 A2 D3 G3 B3 E4",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "'Couldn't hear' on at most 10% of the notes (1 of 12), with Level 4 note accuracy.",
+        "tr": "Notaların en fazla %10'unda (12'de 1) 'Duyamadım', Seviye 4 nota ölçütüyle."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The phone points at the spot where the neck meets the body.", "tr": "Telefon sapın gövdeyle birleştiği noktaya bakıyor." },
+    { "en": "I can hear the difference between flesh tone and nail tone, as in the reference.", "tr": "Et tonu ile tırnak tonu arasındaki farkı referanstaki gibi duyuyorum." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "Bring the phone closer, about 30 cm, and pluck a little firmer. Turn off fans or music in the room.", "tr": "Telefonu yaklaşık 30 cm'ye yaklaştır ve biraz daha net çek. Odadaki vantilatörü ya da müziği kapat." }
+    },
+    {
+      "error": { "en": "Couldn't hear on strings 1–3.", "tr": "1–3. tellerde duyamadım." },
+      "fix": { "en": "The fingers brush the string instead of plucking it. Press the string slightly toward the top of the guitar before you release it.", "tr": "Parmaklar teli çekmek yerine sıyırıyor. Bırakmadan önce teli gövdeye doğru hafifçe bastır." }
+    }
+  ],
+  "adaptation": {
+    "en": "Use flesh tone and the thumb on all six strings until the setup passes; add nail tone in a later session.",
+    "tr": "Kurulum geçene kadar altı telde de başparmakla et tonu kullan; tırnak tonunu sonraki bir oturumda ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

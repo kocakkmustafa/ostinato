@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s4-m19a-15",
+  "title": { "en": "Melody–bass balance", "tr": "Melodi–bas dengesi" },
+  "goal": {
+    "en": "Plays an original eight-bar piece in time with the melody clearly louder than the bass.",
+    "tr": "Özgün sekiz ölçülük parçayı zamanında, melodi bastan belirgin şekilde güçlü olacak şekilde çalar."
+  },
+  "explanation": [
+    {
+      "en": "In fingerstyle the melody must sing above the bass. A listener should be able to hum the top line.",
+      "tr": "Parmak stilinde melodi basın üstünde şarkı söylemelidir. Dinleyen kişi üst çizgiyi mırıldanabilmeli."
+    },
+    {
+      "en": "Play the melody with rest stroke or a firm free stroke. Play the bass lighter, with the side of the thumb.",
+      "tr": "Melodiyi dayanarak vuruşla ya da net bir serbest vuruşla çal. Bası başparmağın yanıyla, daha hafif çal."
+    },
+    {
+      "en": "Melody and bass often start together. Pluck them as one pinch, but give the finger more weight than the thumb.",
+      "tr": "Melodi ve bas çoğu zaman birlikte başlar. Onları tek bir çimdik gibi çek, ama parmağa başparmaktan daha çok ağırlık ver."
+    },
+    {
+      "en": "Practise in layers: melody alone, bass alone, then both. Check that the melody still stands out.",
+      "tr": "Katman katman çalış: yalnız melodi, yalnız bas, sonra ikisi. Melodinin hâlâ öne çıktığını kontrol et."
+    },
+    {
+      "en": "The app measures notes and timing. You judge the balance with the self-check and the reference.",
+      "tr": "Uygulama notaları ve zamanlamayı ölçer. Dengeyi kontrol listesi ve referansla sen değerlendirirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The eight bars with the melody clearly above the bass, at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Melodi basın belirgin üstünde, sekiz ölçü, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the eight bars in G with the click at ♩=60. The bass falls on beats 1 and 3 with p; the melody moves in quarter notes with i and m. A slash marks a bass note and a melody note plucked together. Then go through the self-check.",
+      "tr": "Sol majördeki sekiz ölçüyü klikle ♩=60'ta çal. Bas p ile 1. ve 3. vuruşa düşer; melodi i ve m ile dörtlüklerle ilerler. Eğik çizgi birlikte çekilen bir bas ve bir melodi notasını gösterir. Sonra kontrol listesini işaretle."
+    },
+    "sequence": "G2/B3 D4 D3/G4 D4 | C3/E4 D4 E3/C4 E4 | G2/D4 B3 D3/G4 F♯4 | D3/F♯4 E4 A2/D4 | G2/B3 D4 D3/G4 D4 | C3/E4 G4 E3/E4 C4 | D3/A3 D4 A2/F♯4 E4 | G2/G4",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 note and timing accuracy, and the balance self-check is complete.",
+        "tr": "Seviye 4 nota ve zamanlama ölçütü ve denge kontrol listesi tamam."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The melody stood out above the bass, as in the reference.", "tr": "Melodi, referanstaki gibi basın üstünde öne çıktı." },
+    { "en": "The bass stayed lighter but still steady.", "tr": "Bas daha hafif kaldı ama yine de düzenliydi." },
+    { "en": "Bass and melody notes that start together sounded at the same moment.", "tr": "Birlikte başlayan bas ve melodi notaları aynı anda duyuldu." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The melody note lags the bass when they start together. Pluck p and the finger as one pinch.", "tr": "Birlikte başladıklarında melodi notası bastan geri kalıyor. p ile parmağı tek bir çimdik gibi çek." }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": { "en": "The melody is too soft in places. Use rest stroke on the long melody notes in bars 4 and 8.", "tr": "Melodi yer yer çok zayıf. 4. ve 8. ölçülerdeki uzun melodi notalarında dayanarak vuruş kullan." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the bass only on beat 1 of each bar until the melody stands out, then add beat 3.",
+    "tr": "Melodi öne çıkana kadar bası yalnız her ölçünün 1. vuruşunda çal, sonra 3. vuruşu ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

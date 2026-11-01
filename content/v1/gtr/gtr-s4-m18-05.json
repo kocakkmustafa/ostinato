@@ -1,0 +1,115 @@
+{
+  "id": "gtr-s4-m18-05",
+  "title": {
+    "en": "Key signatures G and D",
+    "tr": "Sol ve Re donanımları"
+  },
+  "goal": {
+    "en": "Reads an eight-bar line in G major and one in D major, playing every F and C as the key signature says, at ♩=60.",
+    "tr": "Sol majörde ve Re majörde birer sekiz ölçülük diziyi okur; her Fa ve Do'yu donanımın söylediği gibi ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "A key signature sits at the start of every line. Its sharps apply to every note of that letter, in every octave, for the whole piece.",
+      "tr": "Donanım her satırın başında durur. Diyezleri o harfin her notasına, her oktavda, parçanın tamamı boyunca uygulanır."
+    },
+    {
+      "en": "G major has one sharp, F♯. In first position: F♯2 6/2, F♯3 4/4, F♯4 1/2.",
+      "tr": "Sol majörün tek diyezi var: Fa♯. Birinci pozisyonda: Fa♯2 6/2, Fa♯3 4/4, Fa♯4 1/2."
+    },
+    {
+      "en": "D major has two sharps, F♯ and C♯. C♯ in first position: C♯3 5/4, C♯4 2/2.",
+      "tr": "Re majörün iki diyezi var: Fa♯ ve Do♯. Birinci pozisyonda Do♯: Do♯3 5/4, Do♯4 2/2."
+    },
+    {
+      "en": "Notes changed by the key signature carry no sign on the staff. Find them before you play: every F, and in D major every C.",
+      "tr": "Donanımın değiştirdiği notaların portede işareti yoktur. Çalmadan önce onları bul: her Fa'yı, Re majörde her Do'yu."
+    },
+    {
+      "en": "A natural sign inside a bar cancels the key signature until the barline.",
+      "tr": "Ölçü içindeki natürel işareti donanımı ölçü çizgisine kadar iptal eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The original G major line, then the D major line, in quarter notes, at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Özgün Sol majör dizi, ardından Re majör dizi, dörtlüklerle, ♩=60 ve ♩=40, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Read the G major line, then the D major line, eight bars each, in quarter notes with the click at ♩=60. Before each line, name the sharps in its key signature.",
+      "tr": "Önce Sol majör diziyi, sonra Re majör diziyi, her biri sekiz ölçü, klikle ♩=60'ta dörtlüklerle oku ve çal. Her diziden önce donanımdaki diyezleri söyle."
+    },
+    "sequence": "G3 A3 B3 G3 | D4 C4 B3 A3 | G3 F♯3 G3 A3 | B3 D4 G4 F♯4 | E4 F♯4 G4 D4 | E4 C4 A3 F♯3 | D3 F♯3 A3 C4 | B3 A3 F♯3 G3 | D3 F♯3 A3 F♯3 | D4 C♯4 B3 A3 | G3 A3 B3 C♯4 | D4 E4 F♯4 D4 | E4 C♯4 A3 C♯4 | D4 B3 G3 B3 | A3 G3 F♯3 E3 | A3 C♯4 E4 D4",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I named the sharps of the key signature before each line.",
+      "tr": "Her diziden önce donanımın diyezlerini söyledim."
+    },
+    {
+      "en": "I played F♯ every time, never F.",
+      "tr": "Her seferinde Fa♯ çaldım, hiç Fa çalmadım."
+    },
+    {
+      "en": "In the D major line I also played every C as C♯.",
+      "tr": "Re majör dizide her Do'yu da Do♯ olarak çaldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "F or C was played natural. The key signature makes them sharp: F♯4 is 1/2, C♯4 is 2/2.",
+        "tr": "Fa ya da Do doğal çalındı. Donanım onları diyez yapar: Fa♯4 1/2, Do♯4 2/2'dir."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Finger 4 is pressing lightly. Bring it close behind fret 4 and keep it curved.",
+        "tr": "4. parmak hafif basıyor. Onu 4. perdenin hemen arkasına getir ve kıvrık tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the G major line until F♯ comes without thinking, then add the D major line.",
+    "tr": "Fa♯ düşünmeden gelene kadar yalnız Sol majör diziyi çal, sonra Re majör diziyi ekle."
+  },
+  "minutes": 18,
+  "expertPending": true
+}

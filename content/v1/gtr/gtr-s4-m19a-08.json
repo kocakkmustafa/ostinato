@@ -1,0 +1,75 @@
+{
+  "id": "gtr-s4-m19a-08",
+  "title": { "en": "Slides in fingerstyle", "tr": "Fingerstyle'da kaydırma" },
+  "goal": {
+    "en": "Joins two notes with a slide in four figures and lands on each target note.",
+    "tr": "Dört figürde iki notayı kaydırmayla bağlar ve her hedef notaya ulaşır."
+  },
+  "explanation": [
+    {
+      "en": "A slide connects two notes on one string with one pluck. The finger keeps pressing while it travels.",
+      "tr": "Kaydırma, tek telde iki notayı tek çekişle bağlar. Parmak yol boyunca basmayı sürdürür."
+    },
+    {
+      "en": "Pluck the start note, then glide to the target fret. Keep the same pressure all the way; if it drops, the note dies.",
+      "tr": "Başlangıç notasını çek, sonra hedef perdeye kay. Baskıyı yol boyunca aynı tut; baskı düşerse nota söner."
+    },
+    {
+      "en": "Stop just behind the target fret. The app checks the start note and the target note.",
+      "tr": "Hedef perdenin hemen arkasında dur. Uygulama başlangıç ve hedef notayı kontrol eder."
+    },
+    {
+      "en": "Slides go up or down. A downward slide needs the same pressure; do not lift on the way.",
+      "tr": "Kaydırma yukarı ya da aşağı gider. Aşağı kaydırma da aynı baskıyı ister; yolda parmağı kaldırma."
+    },
+    {
+      "en": "Look at the target fret before you move, not at your finger.",
+      "tr": "Hareket etmeden önce parmağına değil, hedef perdeye bak."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The four slides, each twice, slowly, string-model synthesis with a continuous glide between the two notes.",
+      "tr": "Dört kaydırma, her biri iki kez, yavaş; iki nota arasında kesintisiz kayışla tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Play each figure twice in your own time. 1 string 3, frets 2→4 (A3 to B3). 2 string 2, frets 3→5 (D4 to E4). 3 string 2, frets 5→3 (E4 to D4). 4 open E2 with the thumb, then string 4, frets 2→5 (E3 to G3). A spaced slash marks a slide.",
+      "tr": "Her figürü kendi hızında iki kez çal. 1 3. tel, 2→4. perde (La3'ten Si3'e). 2 2. tel, 3→5. perde (Re4'ten Mi4'e). 3 2. tel, 5→3. perde (Mi4'ten Re4'e). 4 başparmakla açık Mi2, sonra 4. tel, 2→5. perde (Mi3'ten Sol3'e). Boşluklu eğik çizgi kaydırmayı gösterir."
+    },
+    "sequence": "1: A3 / B3 ×2 · 2: D4 / E4 ×2 · 3: E4 / D4 ×2 · 4: E2 E3 / G3 ×2",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The string kept sounding all the way to the target.", "tr": "Tel hedefe kadar çalmayı sürdürdü." },
+    { "en": "I stopped right behind the target fret.", "tr": "Hedef perdenin hemen arkasında durdum." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear the target note.", "tr": "Hedef notayı duyamadım." },
+      "fix": { "en": "Pressure dropped during the slide. Keep pressing until the target note rings.", "tr": "Kaydırma sırasında baskı düştü. Hedef nota çalana kadar basmayı sürdür." }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "The upward slide stopped one fret short. Look at the target fret before you move.", "tr": "Yukarı kaydırma bir perde önce durdu. Hareket etmeden önce hedef perdeye bak." }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "The downward slide stopped one fret early, or the upward one went too far. Slow the last part of the move.", "tr": "Aşağı kaydırma bir perde erken durdu ya da yukarı kaydırma fazla gitti. Hareketin son kısmını yavaşlat." }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with the two-fret slides on string 2 only; add the three-fret slide on string 4 last.",
+    "tr": "Önce yalnız 2. teldeki iki perdelik kaydırmalarla başla; 4. teldeki üç perdelik kaydırmayı en son ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

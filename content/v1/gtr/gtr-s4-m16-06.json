@@ -1,0 +1,90 @@
+{
+  "id": "gtr-s4-m16-06",
+  "title": { "en": "E-shape to A-shape", "tr": "E-şeklinden A-şekline" },
+  "goal": {
+    "en": "Changes between F and B♭, and between G and C, at least 12 times in 60 seconds each, keeping the barre in place.",
+    "tr": "F ile B♭ ve G ile C arasında, barre'ı yerinde tutarak her çiftte 60 saniyede en az 12 kez geçer."
+  },
+  "explanation": [
+    {
+      "en": "F (1-3-3-2-1-1) is an E-shape at fret 1. B♭ (x-1-3-3-3-1) is an A-shape at the same fret. The index finger never moves.",
+      "tr": "F (1-3-3-2-1-1), 1. perdede E-şeklidir. B♭ (x-1-3-3-3-1) aynı perdede A-şeklidir. İşaret parmağı hiç yer değiştirmez."
+    },
+    {
+      "en": "This is chord I to chord IV in F. The E-shape root is on string 6, the A-shape root is on string 5 at the same fret.",
+      "tr": "Bu, Fa majörde I. akordan IV. akora geçiştir. E-şekli kökü 6. telde, A-şekli kökü aynı perdede 5. teldedir."
+    },
+    {
+      "en": "Ease the barre pressure without lifting it, move the other three fingers together, then press again.",
+      "tr": "Barre'ı kaldırmadan baskısını gevşet, diğer üç parmağı birlikte taşı, sonra yeniden bas."
+    },
+    {
+      "en": "G (3-5-5-4-3-3) to C (x-3-5-5-5-3) is the same move at fret 3. The frets there are closer, so it often feels easier.",
+      "tr": "G'den (3-5-5-4-3-3) C'ye (x-3-5-5-5-3) geçiş, 3. perdede aynı harekettir. Orada perdeler daha yakındır; çoğu zaman daha kolay gelir."
+    },
+    {
+      "en": "If the hand hurts, stop and rest. A short rest between the two minutes is part of the exercise.",
+      "tr": "Elin ağrırsa dur ve dinlen. İki dakika arasında kısa bir mola alıştırmanın parçasıdır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "F and B♭, then G and C, one strum each, changing every two beats at ♩=60, then at ♩=40.",
+      "tr": "Önce F ve B♭, sonra G ve C; her birine bir vuruş, ♩=60'ta iki vuruşta bir geçiş, sonra ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Change between F and B♭ for 60 seconds. Rest, then change between G and C for 60 seconds. Each change counts when every string of the new chord is heard. Keep the index finger on its fret the whole time.",
+      "tr": "60 saniye boyunca F ile B♭ arasında geç. Dinlen, sonra 60 saniye G ile C arasında geç. Yeni akorun bütün telleri duyulduğunda geçiş sayılır. İşaret parmağını baştan sona perdesinde tut."
+    },
+    "sequence": "F ↔ B♭ · 60 s | G ↔ C · 60 s",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 12 changes in 60 seconds for each pair. A change counts when every string of the new chord is heard.",
+        "tr": "Her çiftte 60 saniyede en az 12 geçiş. Yeni akorun bütün telleri duyulduğunda geçiş sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The index finger stayed on its fret during every change.", "tr": "İşaret parmağı her geçişte perdesinde kaldı." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "In B♭ and C, string 6 is not part of the chord. Let the index tip rest on it and start the strum on string 5.",
+        "tr": "B♭ ve C'de 6. tel akora dahil değildir. İşaret parmağının ucu üstünde dursun ve vuruşa 5. telden başla."
+      }
+    },
+    {
+      "error": { "en": "Changes counted: below the target.", "tr": "Sayılan geçiş: hedefin altında." },
+      "fix": {
+        "en": "Move the three fingers as one block, not one by one. Aim for even changes, not fast ones.",
+        "tr": "Üç parmağı tek tek değil, tek blok hâlinde taşı. Hızlı değil düzenli geçişe odaklan."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Strum a little firmer and keep the phone about one metre away.",
+        "tr": "Biraz daha net vur ve telefonu yaklaşık bir metre uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with G and C at fret 3 for 30 seconds, then try F and B♭.",
+    "tr": "3. perdede G ve C ile 30 saniye başla, sonra F ve B♭'yi dene."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

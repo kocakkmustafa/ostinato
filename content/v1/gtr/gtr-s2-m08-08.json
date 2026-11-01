@@ -37,7 +37,7 @@
       "en": "Play the two bars in eighth notes with the click. Start at ♩=60 and move up in steps of 5 to ♩=90. After a step that does not pass, go back one step.",
       "tr": "İki ölçüyü klikle sekizlik olarak çal. ♩=60'tan başla, 5'er adımla ♩=90'a çık. Geçmeyen bir adımdan sonra bir adım geri in."
     },
-    "sequence": "F2 F♯2 G2 G♯2 A♯2 B2 C3 C♯3 | C♯3 C3 B2 A♯2 G♯2 G2 F♯2 F2",
+    "sequence": "F2:e F♯2:e G2:e G♯2:e A♯2:e B2:e C3:e C♯3:e | C♯3:e C3:e B2:e A♯2:e G♯2:e G2:e F♯2:e F2:e",
     "tempo": { "open": 60, "target": 90 },
     "pass": { "levelDefault": true }
   },

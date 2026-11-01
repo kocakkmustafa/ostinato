@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m19a-04",
+  "title": { "en": "Travis on G, Am, D and E", "tr": "G, Am, D ve E'de Travis" },
+  "goal": {
+    "en": "Moves the Travis pattern to G, Am, D and E, two bars each, at ♩=60.",
+    "tr": "Travis kalıbını G, Am, D ve E'ye taşır, her biri iki ölçü, ♩=60."
+  },
+  "explanation": [
+    {
+      "en": "The pattern stays p i p m. Only the strings under the thumb change, following the root of the chord. The fingers always stay on strings 2 and 1.",
+      "tr": "Kalıp yine p i p m. Yalnız başparmağın telleri akorun köküne göre değişir. Parmaklar her zaman 2. ve 1. telde kalır."
+    },
+    {
+      "en": "G (320003): root on string 6. The thumb plays G2 and D3 (strings 6 and 4); the fingers play B3 and G4.",
+      "tr": "G (320003): kök 6. telde. Başparmak Sol2 ve Re3'ü (6. ve 4. tel) çalar; parmaklar Si3 ve Sol4'ü çalar."
+    },
+    {
+      "en": "Am (x02210): root on string 5, like C. The thumb plays A2 and E3; the fingers play C4 and E4.",
+      "tr": "Am (x02210): kök C'deki gibi 5. telde. Başparmak La2 ve Mi3'ü çalar; parmaklar Do4 ve Mi4'ü çalar."
+    },
+    {
+      "en": "D (xx0232): root on string 4. The thumb moves over to strings 4 and 3: D3 and A3. The fingers play D4 and F♯4.",
+      "tr": "D (xx0232): kök 4. telde. Başparmak 4. ve 3. tele geçer: Re3 ve La3. Parmaklar Re4 ve Fa♯4'ü çalar."
+    },
+    {
+      "en": "E (022100): root on string 6, like G. The thumb plays E2 and E3; the fingers play B3 and E4. Before each new chord, find the root string with the thumb first.",
+      "tr": "E (022100): kök G'deki gibi 6. telde. Başparmak Mi2 ve Mi3'ü çalar; parmaklar Si3 ve Mi4'ü çalar. Her yeni akordan önce kök teli önce başparmakla bul."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The p-i-p-m pattern on G, Am, D and E, two bars each, at ♩=60 and ♩=40, with click.",
+      "tr": "G, Am, D ve E'de p-i-p-m kalıbı, her biri iki ölçü, ♩=60 ve ♩=40, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "With the click at ♩=60, play the pattern for two bars each on G, Am, D and E. Move the thumb to the new root string during the last eighth of the bar.",
+      "tr": "Klikle ♩=60'ta kalıbı G, Am, D ve E'de ikişer ölçü çal. Başparmağı ölçünün son sekizliğinde yeni kök tele taşı."
+    },
+    "sequence": "G2:e B3:e D3:e G4:e G2:e B3:e D3:e G4:e | G2:e B3:e D3:e G4:e G2:e B3:e D3:e G4:e | A2:e C4:e E3:e E4:e A2:e C4:e E3:e E4:e | A2:e C4:e E3:e E4:e A2:e C4:e E3:e E4:e | D3:e D4:e A3:e F♯4:e D3:e D4:e A3:e F♯4:e | D3:e D4:e A3:e F♯4:e D3:e D4:e A3:e F♯4:e | E2:e B3:e E3:e E4:e E2:e B3:e E3:e E4:e | E2:e B3:e E3:e E4:e E2:e B3:e E3:e E4:e",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The thumb found the root string of each chord on beat 1.", "tr": "Başparmak her akorun kök telini 1. vuruşta buldu." },
+    { "en": "The fingers stayed on strings 2 and 1 for all four chords.", "tr": "Parmaklar dört akorda da 2. ve 1. telde kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: string 5 heard on beat 1 of G or E.", "tr": "Farklı nota: G ya da E'nin 1. vuruşunda 5. tel duyuldu." },
+      "fix": { "en": "In G and E the root is on string 6. Move the thumb to string 6 before beat 1.", "tr": "G ve E'de kök 6. teldedir. 1. vuruştan önce başparmağı 6. tele taşı." }
+    },
+    {
+      "error": { "en": "Different note in D: string 5 or 6 heard.", "tr": "D'de farklı nota: 5. ya da 6. tel duyuldu." },
+      "fix": { "en": "D starts on string 4. Move the thumb to strings 4 and 3 for the two D bars.", "tr": "D 4. telden başlar. İki D ölçüsü için başparmağı 4. ve 3. tele taşı." }
+    }
+  ],
+  "adaptation": {
+    "en": "On each new chord, play one bar of thumb alone first, then the full pattern.",
+    "tr": "Her yeni akorda önce bir ölçü yalnız başparmak çal, sonra tam kalıbı."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

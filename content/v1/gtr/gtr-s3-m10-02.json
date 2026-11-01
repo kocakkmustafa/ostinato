@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s3-m10-02",
+  "title": { "en": "Root-and-fifth on string five", "tr": "Beşinci telde kök ve beşli" },
+  "goal": {
+    "en": "Plays A5, C5 and D5 with the root on string 5 while string 6 and the higher strings stay silent.",
+    "tr": "Kökü 5. telde olan A5, C5 ve D5'i 6. tel ve ince teller sessizken çalar."
+  },
+  "explanation": [
+    {
+      "en": "The string-six shape works one string higher. The root is now on string 5, the fifth on string 4.",
+      "tr": "6. tel şekli bir tel yukarıda da çalışır. Kök artık 5. telde, beşli 4. telde."
+    },
+    {
+      "en": "A5: x-0-2-x-x-x. Open string 5 gives A2, string 4 at fret 2 gives E3.",
+      "tr": "A5: x-0-2-x-x-x. Açık 5. tel La2'yi, 4. telin 2. perdesi Mi3'ü verir."
+    },
+    {
+      "en": "C5: x-3-5-x-x-x. Finger 1 on string 5, fret 3 (C3); finger 3 on string 4, fret 5 (G3).",
+      "tr": "C5: x-3-5-x-x-x. 1. parmak 5. telin 3. perdesinde (Do3); 3. parmak 4. telin 5. perdesinde (Sol3)."
+    },
+    {
+      "en": "D5: x-5-7-x-x-x. Move the same shape up two frets: D3 and A3.",
+      "tr": "D5: x-5-7-x-x-x. Aynı şekli iki perde yukarı taşı: Re3 ve La3."
+    },
+    {
+      "en": "String 6 must stay quiet. Let the tip of finger 1 touch it lightly, and start each stroke on string 5.",
+      "tr": "6. tel sessiz kalmalı. 1. parmağın ucu ona hafifçe değsin ve her vuruşa 5. telden başla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A5, C5 and D5 on strings 5 and 4, each struck and then plucked string by string, slowly.",
+      "tr": "5. ve 4. telde A5, C5 ve D5; her biri vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Strike A5 four times, then C5 four times, then D5 four times, in your own time. Then pluck each chord string by string; the app checks each string.",
+      "tr": "Kendi hızında A5'i dört kez, sonra C5'i dört kez, sonra D5'i dört kez vur. Sonra her akoru tel tel çek; uygulama her teli kontrol eder."
+    },
+    "sequence": "A5 A5 A5 A5 | C5 C5 C5 C5 | D5 D5 D5 D5",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." },
+    { "en": "String 6 stayed silent.", "tr": "6. tel sessiz kaldı." },
+    { "en": "I can name the two sounding notes of each chord.", "tr": "Her akorun çalan iki notasını adlandırabiliyorum." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: string 6 also heard.", "tr": "Farklı akor: 6. tel de duyuldu." },
+      "fix": {
+        "en": "Aim the pick at string 5 before you strike, and let the tip of finger 1 touch string 6.",
+        "tr": "Vurmadan önce penayı 5. tele hizala ve 1. parmağın ucu 6. tele değsin."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 4 not heard.", "tr": "Farklı akor: 4. tel duyulmadı." },
+      "fix": {
+        "en": "Finger 3 is too far from the fret or lies flat. Press with its tip, just behind the fret.",
+        "tr": "3. parmak perdeden uzak ya da yatık. Ucuyla, perdenin hemen arkasından bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with open A5 only, then add C5. Pluck the two strings one after the other before striking them together.",
+    "tr": "Önce yalnız açık A5'le başla, sonra C5'i ekle. İki teli birlikte vurmadan önce art arda çek."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

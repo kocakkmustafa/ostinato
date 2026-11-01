@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s4-m19b-10",
+  "title": { "en": "Pentatonic position 2", "tr": "Pentatonik 2. pozisyon" },
+  "goal": {
+    "en": "Plays A minor pentatonic position 2, from C3 to D5 and back, in eighth notes at ♩=70.",
+    "tr": "La minör pentatonik 2. pozisyonu Do3'ten Re5'e ve geri, sekizliklerle ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Position 2 uses the same five notes as the 5th-fret box: A, C, D, E, G. It starts where position 1 ends, on C3 at string 6, fret 8.",
+      "tr": "2. pozisyon 5. perde kutusuyla aynı beş notayı kullanır: La, Do, Re, Mi, Sol. 1. pozisyonun bittiği yerde, 6. telin 8. perdesindeki Do3'te başlar."
+    },
+    {
+      "en": "Frets per string, from string 6 to string 1: 8-10, 7-10, 7-10, 7-9, 8-10, 8-10.",
+      "tr": "6. telden 1. tele, her teldeki perdeler: 8-10, 7-10, 7-10, 7-9, 8-10, 8-10."
+    },
+    {
+      "en": "Keep finger 1 around fret 7 and let it reach to fret 8 on strings 6, 2 and 1. Fingers 3 and 4 share frets 9 and 10.",
+      "tr": "1. parmağı 7. perde civarında tut; 6., 2. ve 1. tellerde 8. perdeye uzansın. 3. ve 4. parmak 9. ve 10. perdeleri paylaşır."
+    },
+    {
+      "en": "In this position the root notes are A3 at string 4, fret 7, and A4 at string 2, fret 10. Find them before you start.",
+      "tr": "Bu pozisyonda kök La notaları 4. telin 7. perdesindeki La3 ve 2. telin 10. perdesindeki La4'tür. Başlamadan önce onları bul."
+    },
+    {
+      "en": "Use alternate picking: down on the beat, up on the 'and'.",
+      "tr": "Aşağı-yukarı pena kullan: vuruşta aşağı, 've'de yukarı."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Position 2 up and down in eighth notes with click at ♩=70 and ♩=45, string-model synthesis.",
+      "tr": "2. pozisyon çıkış ve iniş, sekizliklerle, klikle ♩=70 ve ♩=45, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the four bars in eighth notes with the click. The last A3 rings to the end of bar 4. Start at ♩=60 and move up in steps of 5 to ♩=70.",
+      "tr": "Dört ölçüyü klikle sekizliklerle çal. Son La3 4. ölçünün sonuna kadar çalsın. ♩=60'tan başla, 5'er adımla ♩=70'e çık."
+    },
+    "sequence": "C3:e D3:e E3:e G3:e A3:e C4:e D4:e E4:e | G4:e A4:e C5:e D5:e C5:e A4:e G4:e E4:e | D4:e C4:e A3:e G3:e E3:e D3:e C3:e D3:e | E3:e G3:e A3:h.",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can show the two A notes in this position.", "tr": "Bu pozisyondaki iki La notasını gösterebiliyorum." },
+    { "en": "I picked down on the beat and up on the 'and'.", "tr": "Vuruşta aşağı, 've'de yukarı pena vurdum." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "On string 3 the top note is E4 at fret 9, not 10. String 3 is the only string with frets 7-9 here.",
+        "tr": "3. telde üst nota 10. değil, 9. perdedeki Mi4'tür. Burada 7-9 perdeli tek tel 3. teldir."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "On strings 6, 2 and 1 the lower note is at fret 8. On strings 5 and 4 it is at fret 7.",
+        "tr": "6., 2. ve 1. tellerde alt nota 8. perdededir. 5. ve 4. tellerde 7. perdededir."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The string changes slow you down. Loop bar 2 at ♩=50, then go back to the full line.",
+        "tr": "Tel geçişleri seni yavaşlatıyor. 2. ölçüyü ♩=50'de döngüle, sonra tüm diziye dön."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the position in quarter notes at ♩=60 first, then switch to eighths.",
+    "tr": "Pozisyonu önce ♩=60'ta dörtlüklerle çal, sonra sekizliklere geç."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

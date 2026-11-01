@@ -1,0 +1,88 @@
+{
+  "id": "gtr-s4-m16-04",
+  "title": { "en": "Root names on string five", "tr": "Beşinci telde kök adları" },
+  "goal": {
+    "en": "Finds a chord's root on string 5 and plays the A-shape barre chord there: D at fret 5 and E at fret 7.",
+    "tr": "Akorun kökünü 5. telde bulur ve A-şekli barre akoru orada çalar: 5. perdede D, 7. perdede E."
+  },
+  "explanation": [
+    {
+      "en": "An A-shape chord takes its name from the note under the index finger on string 5.",
+      "tr": "A-şekli akor adını 5. telde işaret parmağının altındaki notadan alır."
+    },
+    {
+      "en": "String 5 naturals: A2 0, B2 2, C3 3, D3 5, E3 7, F3 8, G3 10, A3 12.",
+      "tr": "5. telde doğal notalar: La2 0, Si2 2, Do3 3, Re3 5, Mi3 7, Fa3 8, Sol3 10, La3 12."
+    },
+    {
+      "en": "Sharps and flats sit in between: B♭2 at fret 1, C♯3 at fret 4, E♭3 at fret 6.",
+      "tr": "Diyezler ve bemoller aradadır: 1. perdede Si♭2, 4. perdede Do♯3, 6. perdede Mi♭3."
+    },
+    {
+      "en": "D is x-5-7-7-7-5 and E is x-7-9-9-9-7. Same shape, new root.",
+      "tr": "D x-5-7-7-7-5, E x-7-9-9-9-7'dir. Aynı şekil, yeni kök."
+    },
+    {
+      "en": "Use the dots on the neck as anchors: fret 3 is C, fret 5 is D, fret 7 is E on string 5.",
+      "tr": "Saptaki noktaları dayanak al: 5. telde 3. perde Do, 5. perde Re, 7. perde Mi."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "D at fret 5 and E at fret 7 as A-shape barre chords, each strummed and then plucked string by string, slowly.",
+      "tr": "5. perdede D ve 7. perdede E, A-şekli barre; her biri vurulur, sonra tel tel yavaşça çekilir."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A4"],
+    "task": {
+      "en": "Part 1: answer 6 questions on a fretboard diagram of string 5, naming the marked note or tapping where a root is. Part 2: play D at fret 5 four times, then E at fret 7 four times, and pluck each one string by string.",
+      "tr": "1. bölüm: 5. telin klavye şemasında 6 soruyu cevapla; işaretli notayı adlandır ya da kökün yerine dokun. 2. bölüm: 5. perdede D'yi dört kez, sonra 7. perdede E'yi dört kez çal ve her birini tel tel çek."
+    },
+    "sequence": "D | D | D | D | E | E | E | E",
+    "pass": { "levelDefault": true, "minCorrect": 6 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 6,
+      "params": {
+        "set": "fretboard_root_names",
+        "diagram": "fretboard",
+        "strings": [5],
+        "frets": [0, 12],
+        "bothDirections": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found each root without counting up from the open string every time.", "tr": "Her kökü her seferinde açık telden saymadan buldum." },
+    { "en": "I used the fret dots as anchors.", "tr": "Perde noktalarını dayanak olarak kullandım." },
+    { "en": "Every string of the chord rang when I plucked them one by one.", "tr": "Akorun tellerini tek tek çekince hepsi çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord, a semitone high.", "tr": "Farklı akor, yarım ses yüksek." },
+      "fix": {
+        "en": "The barre is one fret too high. Find the root on string 5 first, then build the shape on it.",
+        "tr": "Barre bir perde fazla yukarıda. Önce 5. telde kökü bul, sonra şekli onun üstüne kur."
+      }
+    },
+    {
+      "error": { "en": "Different chord: right fret, but the root was on string 6.", "tr": "Farklı akor: perde doğru ama kök 6. telde." },
+      "fix": {
+        "en": "An A-shape root is on string 5. Say the string name first, then the fret.",
+        "tr": "A-şekli kökü 5. teldedir. Önce telin adını, sonra perdeyi söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Work on frets 0 to 7 only, then add frets 8 to 12 in a later session.",
+    "tr": "Yalnız 0–7. perdeleri çalış; 8–12. perdeleri sonraki oturumda ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

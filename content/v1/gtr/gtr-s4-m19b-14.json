@@ -1,0 +1,89 @@
+{
+  "id": "gtr-s4-m19b-14",
+  "title": { "en": "Riffing at speed", "tr": "Hızlı riff" },
+  "goal": {
+    "en": "Plays an original eight-bar palm-muted power-chord riff in E minor at ♩=110.",
+    "tr": "Mi minörde özgün sekiz ölçülük palm mute power chord riff'ini ♩=110'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "The riff mixes two sounds: palm-muted eighth-note chugs on E5 or A5, and open, ringing power chords on the accents.",
+      "tr": "Riff iki sesi karıştırır: E5 ya da A5 üstünde palm mute sekizlik vuruşlar ve vurgularda açık, çınlayan power chord'lar."
+    },
+    {
+      "en": "Shapes: E5 0-2-2-x-x-x, G5 3-5-5-x-x-x, A5 5-7-7-x-x-x, C5 x-3-5-5-x-x, D5 x-5-7-7-x-x.",
+      "tr": "Şekiller: E5 0-2-2-x-x-x, G5 3-5-5-x-x-x, A5 5-7-7-x-x-x, C5 x-3-5-5-x-x, D5 x-5-7-7-x-x."
+    },
+    {
+      "en": "For the chugs, rest the side of the picking hand on the strings right at the bridge. Lift it for the accented chords so they ring.",
+      "tr": "Boğuk vuruşlar için sağ elin yanını tam köprünün üstünde tellere koy. Vurgulu akorlarda eli kaldır ki çınlasınlar."
+    },
+    {
+      "en": "Use only downstrokes and keep them small: the pick moves just across the three low strings. Small strokes are what make speed possible.",
+      "tr": "Yalnız aşağı vuruş kullan ve küçük tut: pena yalnız üç pes telin üstünden geçsin. Hızı mümkün kılan küçük vuruşlardır."
+    },
+    {
+      "en": "The app checks the timing of every stroke and the shape of the ringing chords. Palm-muted notes get no pitch check.",
+      "tr": "Uygulama her vuruşun zamanlamasını ve çınlayan akorların şeklini kontrol eder. Palm mute notalara perde kontrolü yapılmaz."
+    },
+    {
+      "en": "Fast downstrokes tire the forearm. Play in short sets; if the forearm or wrist tightens, lower the tempo and shake the hand loose.",
+      "tr": "Hızlı aşağı vuruşlar ön kolu yorar. Kısa setlerle çal; ön kol ya da bilek gerilirse tempoyu düşür ve elini silkeleyerek gevşet."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "The original riff over a rock drum and bass loop at ♩=110 and ♩=70, palm-muted chugs and open accents clearly different. Headphones recommended.",
+      "tr": "Özgün riff rock davul ve bas döngüsü üstünde ♩=110 ve ♩=70, palm mute vuruşlar ve açık vurgular belirgin farklı. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the eight bars along with the backing, all downstrokes. '(pm)' means palm-muted eighths; the other chords ring open. Start at ♩=100 and move up in steps of 5 to ♩=110.",
+      "tr": "Sekiz ölçüyü eşlikle birlikte, hep aşağı vuruşla çal. '(pm)' palm mute sekizlik demektir; diğer akorlar açık çınlar. ♩=100'den başla, 5'er adımla ♩=110'a çık."
+    },
+    "sequence": "4/4: E5(pm) ee ee ee G5 q | E5(pm) ee ee A5 q G5 q | E5(pm) ee ee ee G5 q | E5(pm) ee ee D5 q C5 q | A5(pm) ee ee ee C5 q | A5(pm) ee ee D5 q C5 q | E5(pm) ee ee ee G5 q | A5 q G5 q E5 h",
+    "tempo": { "open": 100, "target": 110 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The chugs sounded muted and the accents rang open.", "tr": "Boğuk vuruşlar susturulmuş, vurgular açık çınladı." },
+    { "en": "My downstrokes stayed small and even.", "tr": "Aşağı vuruşlarım küçük ve eşit kaldı." },
+    { "en": "My forearm stayed loose at the target tempo.", "tr": "Ön kolum hedef tempoda gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The jump from E5 to G5 is slow. Look at fret 3 during the chugs and move on the last eighth.",
+        "tr": "E5'ten G5'e atlama yavaş. Boğuk vuruşlar sırasında 3. perdeye bak ve son sekizlikte hareket et."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 4 not heard.", "tr": "Farklı akor: 4. tel duyulmadı." },
+      "fix": {
+        "en": "The palm is still on the strings on the accents. Lift it a little for the open chords.",
+        "tr": "Vurgularda avuç hâlâ tellerin üstünde. Açık akorlar için biraz kaldır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Palm-muted strings on an unplugged guitar are very quiet. Move the palm a little toward the bridge, pick firmly and keep the phone close.",
+        "tr": "Amfisiz gitarda palm mute teller çok kısık çalar. Avucu biraz köprüye doğru kaydır, net vur ve telefonu yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–2 only at ♩=80, then add two bars at a time.",
+    "tr": "Yalnız 1–2. ölçüleri ♩=80'de çal, sonra ikişer ölçü ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

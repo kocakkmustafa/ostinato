@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m17-07",
+  "title": { "en": "Major scale in A and D", "tr": "La ve Re majör" },
+  "goal": {
+    "en": "Moves the two-octave major-scale shape to A major (position IV) and D major (position IX) and plays each up and back in eighth notes at ♩=60.",
+    "tr": "İki oktavlık majör gam şeklini La majöre (IV. pozisyon) ve Re majöre (IX. pozisyon) taşır, her birini ♩=60'ta sekizliklerle çıkıp inerek çalar."
+  },
+  "explanation": [
+    {
+      "en": "The G major shape has no open strings, so it moves. Put finger 2 on a new root on string 6 and the same pattern gives that note's major scale.",
+      "tr": "Sol majör şeklinde açık tel yoktur, bu yüzden taşınabilir. 2. parmağı 6. telde yeni bir köke koy; aynı düzen o notanın majör gamını verir."
+    },
+    {
+      "en": "A major: root A2 at 6/5, hand in position IV. Notes: A2 B2 C♯3 D3 E3 F♯3 G♯3 A3 B3 C♯4 D4 E4 F♯4 G♯4 A4.",
+      "tr": "La majör: kök La2 6/5'te, el IV. pozisyonda. Notalar: La2 Si2 Do♯3 Re3 Mi3 Fa♯3 Sol♯3 La3 Si3 Do♯4 Re4 Mi4 Fa♯4 Sol♯4 La4."
+    },
+    {
+      "en": "D major: root D3 at 6/10, hand in position IX. Notes: D3 E3 F♯3 G3 A3 B3 C♯4 D4 E4 F♯4 G4 A4 B4 C♯5 D5.",
+      "tr": "Re majör: kök Re3 6/10'da, el IX. pozisyonda. Notalar: Re3 Mi3 Fa♯3 Sol3 La3 Si3 Do♯4 Re4 Mi4 Fa♯4 Sol4 La4 Si4 Do♯5 Re5."
+    },
+    {
+      "en": "The fingering does not change; only the frets do. Add 2 to every G major fret for A, and 7 for D.",
+      "tr": "Parmaklama değişmez; yalnız perdeler değişir. La için her Sol majör perdesine 2, Re için 7 ekle."
+    },
+    {
+      "en": "Higher on the neck the frets are closer together. Keep the same light pressure; you need less stretch there.",
+      "tr": "Sapın yukarısında perdeler birbirine daha yakındır. Aynı hafif baskıyı koru; orada daha az açman gerekir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "A major then D major, two octaves up and back, eighth notes with a click, at ♩=60 and ♩=40, string-model synthesis.",
+      "tr": "Klikle önce La majör, sonra Re majör, iki oktav çıkış ve iniş, sekizliklerle, ♩=60 ve ♩=40; tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play A major from A2 to A4 and back, then D major from D3 to D5 and back, in eighth notes with the click at ♩=60. Use the short gap after the last A2 to move your hand to position IX.",
+      "tr": "La majörü La2'den La4'e çıkıp in, sonra Re majörü Re3'ten Re5'e çıkıp in; klikle birlikte ♩=60'ta sekizliklerle çal. Son La2'den sonraki kısa boşlukta elini IX. pozisyona taşı."
+    },
+    "sequence": "A2:e B2:e C♯3:e D3:e E3:e F♯3:e G♯3:e A3:e | B3:e C♯4:e D4:e E4:e F♯4:e G♯4:e A4:e G♯4:e | F♯4:e E4:e D4:e C♯4:e B3:e A3:e G♯3:e F♯3:e | E3:e D3:e C♯3:e B2:e A2:q qr | D3:e E3:e F♯3:e G3:e A3:e B3:e C♯4:e D4:e | E4:e F♯4:e G4:e A4:e B4:e C♯5:e D5:e C♯5:e | B4:e A4:e G4:e F♯4:e E4:e D4:e C♯4:e B3:e | A3:e G3:e F♯3:e E3:e D3:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I used the same fingers as in G major in both keys.", "tr": "İki tonda da Sol majördeki parmakları kullandım." },
+    { "en": "I played every sharp in place: F♯, C♯ and G♯ in A; F♯ and C♯ in D.", "tr": "Her diyezi yerinde çaldım: La'da Fa♯, Do♯ ve Sol♯; Re'de Fa♯ ve Do♯." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "A finger slipped back towards the old position. Check finger 1: fret 4 for A, fret 9 for D.", "tr": "Bir parmak eski pozisyona doğru kaydı. 1. parmağı kontrol et: La için 4., Re için 9. perde." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The jump to position IX takes too long. Look at fret 10 on string 6 while you play the last notes of A major.", "tr": "IX. pozisyona geçiş uzun sürüyor. La majörün son notalarını çalarken 6. telin 10. perdesine bak." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play one octave in each key, A2 to A3 and D3 to D4, then add the second octave.",
+    "tr": "Her tonda tek oktav çal, La2'den La3'e ve Re3'ten Re4'e; sonra ikinci oktavı ekle."
+  },
+  "minutes": 18,
+  "expertPending": true
+}

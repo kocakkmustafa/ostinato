@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s4-m18-08",
+  "title": { "en": "Sight-reading strategy", "tr": "Deşifre stratejisi" },
+  "goal": {
+    "en": "Uses scan, count and keep going to play four new four-bar lines once each at ♩=60.",
+    "tr": "Tara, say ve durma adımlarıyla dört yeni dört ölçülük diziyi birer kez ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Sight-reading means playing a line you have never seen, once, without stopping.",
+      "tr": "Deşifre, hiç görmediğin bir diziyi bir kez ve durmadan çalmaktır."
+    },
+    {
+      "en": "Scan for 30 seconds: time signature, key signature, accidentals, highest and lowest note, and the hardest bar.",
+      "tr": "30 saniye tara: ölçü işareti, donanım, değiştirici işaretler, en yüksek ve en alçak nota, en zor ölçü."
+    },
+    {
+      "en": "Count one bar in aloud before you start, and keep counting while you play.",
+      "tr": "Başlamadan önce bir ölçü sesli say ve çalarken saymayı sürdür."
+    },
+    {
+      "en": "Don't stop. If you miss a note, skip it and come in on the next beat. The beat matters more than one note.",
+      "tr": "Durma. Bir notayı kaçırırsan atla ve sonraki vuruşta gir. Vuruş tek bir notadan daha önemlidir."
+    },
+    {
+      "en": "Look one beat ahead of the note you are playing, not at your hand.",
+      "tr": "Çaldığın notanın bir vuruş ilerisine bak, eline değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=60 with a one-bar count-in. Each new line is played only after your try, so you can compare; it is not played before.",
+      "tr": "Bir ölçü girişli ♩=60 klik. Her yeni dizi yalnız denemenden sonra çalınır, böylece karşılaştırabilirsin; önceden çalınmaz."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "You get four new four-bar lines in first position. For each one: scan for 30 seconds, count one bar in, then play it once with the click at ♩=60 without stopping.",
+      "tr": "Birinci pozisyonda dört yeni dört ölçülük dizi alırsın. Her biri için: 30 saniye tara, bir ölçü say, sonra klikle ♩=60'ta durmadan bir kez çal."
+    },
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I scanned each line before I played it.", "tr": "Her diziyi çalmadan önce taradım." },
+    { "en": "I counted one bar in aloud.", "tr": "Bir ölçüyü sesli sayarak girdim." },
+    { "en": "I kept going after a slip instead of restarting.", "tr": "Bir kaçıştan sonra baştan başlamak yerine devam ettim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "You stopped to fix a note. Let it go and land the next note on its beat.",
+        "tr": "Bir notayı düzeltmek için durdun. Onu bırak ve sonraki notayı kendi vuruşuna yerleştir."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "A sharp from the key signature was missed. Name every sharp aloud during the scan.",
+        "tr": "Donanımdaki bir diyez gözden kaçtı. Tarama sırasında her diyezi sesli söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Scan and play only the first two bars of each line at ♩=50, then all four bars at ♩=60.",
+    "tr": "Her dizinin yalnız ilk iki ölçüsünü ♩=50'de tara ve çal, sonra dört ölçünün tamamını ♩=60'ta çal."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

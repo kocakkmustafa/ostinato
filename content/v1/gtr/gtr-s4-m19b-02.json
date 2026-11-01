@@ -1,0 +1,92 @@
+{
+  "id": "gtr-s4-m19b-02",
+  "title": { "en": "Muting unused strings", "tr": "Kullanılmayan telleri susturmak" },
+  "goal": {
+    "en": "Plays an eight-bar single-note line in A minor pentatonic at ♩=70 while both hands keep the unused strings silent.",
+    "tr": "La minör pentatonikte sekiz ölçülük tek nota dizisini ♩=70'te çalarken iki eliyle kullanılmayan telleri sessiz tutar."
+  },
+  "explanation": [
+    {
+      "en": "On an electric guitar, a string you do not play can still ring. The microphone hears it as an extra pitch and may report a Different note.",
+      "tr": "Elektro gitarda çalmadığın bir tel de titreşebilir. Mikrofon bunu fazladan bir perde olarak duyar ve Farklı nota diyebilir."
+    },
+    {
+      "en": "Picking hand: rest the side of your palm lightly on the strings below the one you play, the thicker ones. Move the palm along as you cross strings.",
+      "tr": "Sağ el: avucunun yanını çaldığın telin altındaki, daha kalın tellere hafifçe koy. Tel değiştirdikçe avucu da kaydır."
+    },
+    {
+      "en": "Fretting hand: let the underside of the fretting finger touch the thinner strings just enough to stop them.",
+      "tr": "Sol el: basan parmağın alt yüzü ince tellere onları durduracak kadar hafifçe değsin."
+    },
+    {
+      "en": "When you skip a string, the skipped string is the one that rings most. Check it first.",
+      "tr": "Bir teli atladığında en çok çalan, atlanan teldir. Önce onu kontrol et."
+    },
+    {
+      "en": "Muting is light contact, not pressure. If the played note goes dull, lift the palm a little.",
+      "tr": "Susturma hafif temastır, baskı değildir. Çaldığın nota boğuklaşırsa avucu biraz kaldır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The eight-bar line in quarter notes, cleanly muted, with click at ♩=70 and ♩=50, string-model synthesis.",
+      "tr": "Sekiz ölçülük dizi dörtlüklerle, temiz susturulmuş, klikle ♩=70 ve ♩=50, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the eight bars in quarter notes with the click at ♩=70, in the 5th-fret box of A minor pentatonic. The app counts Different note results caused by ringing strings. Then tick the checklist.",
+      "tr": "Sekiz ölçüyü La minör pentatoniğin 5. perde kutusunda, klikle ♩=70'te dörtlüklerle çal. Uygulama çalan tellerden gelen Farklı nota sonuçlarını sayar. Sonra kontrol listesini işaretle."
+    },
+    "sequence": "A2 D3 G3 C4 | E4 C4 G3 D3 | A2 E3 A3 E4 | G4 E4 A3 E3 | C3 G3 D4 A4 | G4 D4 A3 E3 | D3 G3 C4 E4 | A3 E3 C3 A2",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 note and timing accuracy. The app also shows how many Different note results came from strings left ringing; aim for fewer on each try.",
+        "tr": "Seviye 4 nota ve zamanlama ölçütü. Uygulama ayrıca kaç Farklı nota sonucunun çalmaya devam eden tellerden geldiğini gösterir; her denemede daha azını hedefle."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "After each note, the string I left stopped ringing.", "tr": "Her notadan sonra bıraktığım tel çalmayı kesti." },
+    { "en": "On string skips, the skipped string stayed silent.", "tr": "Tel atlamalarında atlanan tel sessiz kaldı." },
+    { "en": "My picking-hand palm moved with me across the strings.", "tr": "Sağ avucum teller boyunca benimle birlikte kaydı." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: a lower string is still ringing.", "tr": "Farklı nota: daha pes bir tel hâlâ çalıyor." },
+      "fix": {
+        "en": "Let the picking-hand palm follow you down onto the thicker strings as you move to higher strings.",
+        "tr": "İnce tellere geçerken sağ avucun kalın tellerin üstüne doğru seni izlesin."
+      }
+    },
+    {
+      "error": { "en": "Different note: a higher string is still ringing.", "tr": "Farklı nota: daha tiz bir tel hâlâ çalıyor." },
+      "fix": {
+        "en": "Flatten the fretting finger a little so its underside touches the thinner strings.",
+        "tr": "Sol eldeki parmağı biraz yatır ki alt yüzü ince tellere değsin."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The palm is pressing on the string you play. Move it back toward the bridge and touch more lightly.",
+        "tr": "Avuç çaldığın telin üstüne bastırıyor. Onu köprüye doğru geri kaydır ve daha hafif dokun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 3–4 only, at ♩=55, and mute with the picking hand first; add the fretting-hand mute after.",
+    "tr": "Yalnız 3–4. ölçüleri ♩=55'te çal ve önce sağ elle sustur; sol el susturmasını sonra ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

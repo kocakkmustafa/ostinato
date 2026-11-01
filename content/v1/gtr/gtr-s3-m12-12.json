@@ -1,0 +1,113 @@
+{
+  "id": "gtr-s3-m12-12",
+  "title": {
+    "en": "Sixteen-bar fingerstyle piece",
+    "tr": "On altı ölçülük parmak stili parça"
+  },
+  "goal": {
+    "en": "Plays an original 16-bar fingerstyle piece that joins patterns, alternating bass and melody, in time at ♩=66.",
+    "tr": "Kalıp, değişen bas ve melodiyi birleştiren özgün 16 ölçülük parmak stili parçayı ♩=66'da zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "The piece has four phrases of four bars, built on C, G, Am and Fmaj7. Map the phrases before you play.",
+      "tr": "Parça dörder ölçülük dört cümleden oluşur; C, G, Am ve Fmaj7 üzerine kuruludur. Çalmadan önce cümlelerin haritasını çıkar."
+    },
+    {
+      "en": "Phrase 1: p-i-m-a in eighth notes. Phrase 2: alternating bass with string 2 on beats 2 and 4. Phrase 3: a bass note on beat 1 and a melody on beats 2 to 4. Phrase 4: patterns again, ending on C.",
+      "tr": "1. cümle: sekizlik p-i-m-a. 2. cümle: 2. ve 4. vuruşta 2. telle değişen bas. 3. cümle: 1. vuruşta bas, 2.–4. vuruşlarda melodi. 4. cümle: yine kalıplar, C ile biter."
+    },
+    {
+      "en": "Fmaj7 is x-x-3-2-1-0: p plays F3 on string 4, fret 3. Its fifth in phrase 2 is C3 on string 5, fret 3.",
+      "tr": "Fmaj7 x-x-3-2-1-0'dır: p 4. telin 3. perdesinde Fa3'ü çalar. 2. cümledeki beşlisi 5. telin 3. perdesindeki Do3'tür."
+    },
+    {
+      "en": "Mark the places that need bass-only or melody-only practice, and loop them first.",
+      "tr": "Yalnız bas ya da yalnız melodi çalışması gereken yerleri işaretle ve önce onları döngüle."
+    },
+    {
+      "en": "The checkpoint is played at the target tempo, ♩=66. Practise slower first if you need to.",
+      "tr": "Geçiş hedef tempoda, ♩=66'da çalınır. Gerekirse önce daha yavaş çalış."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The whole 16-bar piece, string-model synthesis, with a click at ♩=66 and ♩=45.",
+      "tr": "16 ölçülük parçanın tamamı, tel modeli sentezi; klikle ♩=66 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the 16 bars with the click at ♩=66. Phrases 1 and 4 move in eighth notes, phrases 2 and 3 in quarter notes. The last bar is four quarter notes; let the final note ring.",
+      "tr": "16 ölçüyü klikle ♩=66'da çal. 1. ve 4. cümle sekizlik, 2. ve 3. cümle dörtlük ilerler. Son ölçü dört dörtlüktür; son nota çınlasın."
+    },
+    "sequence": "C3:e G3:e C4:e E4:e C3:e G3:e C4:e E4:e | G2:e G3:e B3:e G4:e G2:e G3:e B3:e G4:e | A2:e A3:e C4:e E4:e A2:e A3:e C4:e E4:e | F3:e A3:e C4:e E4:e F3:e A3:e C4:e E4:e | C3 C4 G2 C4 | G2 B3 D3 B3 | A2 C4 E3 C4 | F3 C4 C3 C4 | C3 E4 D4 C4 | G2 D4 C4 B3 | A2 C4 B3 A3 | F3 A3 C4 E4 | A2:e A3:e C4:e E4:e A2:e A3:e C4:e E4:e | F3:e E4:e C4:e A3:e F3:e E4:e C4:e A3:e | G2:e G3:e B3:e G3:e G2:e G3:e B3:e G3:e | C3 G3 C4 E4",
+    "tempo": {
+      "open": 66,
+      "target": 66
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Phrase joins are the risky spots. Loop bars 4–5, 8–9 and 12–13 at ♩=50, then rejoin the full piece.",
+        "tr": "Cümle bağlantıları riskli yerlerdir. 4–5, 8–9 ve 12–13. ölçüleri ♩=50'de döngüle, sonra bütün parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "In bars 10 and 11, B3 is open string 2. Lift finger 1 from string 2 after C4.",
+        "tr": "10. ve 11. ölçüde Si3 açık 2. teldir. Do4'ten sonra 1. parmağı 2. telden kaldır."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play one phrase at a time at ♩=50. When each one is steady, join two phrases, then all four.",
+    "tr": "Her seferinde bir cümleyi ♩=50'de çal. Her biri oturunca iki cümleyi, sonra dördünü birleştir."
+  },
+  "legacy": "R: guitar.journey.fingerstyle.finger_arrangement",
+  "minutes": 18,
+  "expertPending": true
+}

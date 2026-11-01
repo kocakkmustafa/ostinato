@@ -1,0 +1,76 @@
+{
+  "id": "gtr-s4-m19a-07",
+  "title": { "en": "Hammer-ons and pull-offs", "tr": "Çekiç ve çekme" },
+  "goal": {
+    "en": "Plays four original fingerstyle figures with hammer-ons and pull-offs over a thumb bass at ♩=60.",
+    "tr": "Başparmak bası üstünde çekiç ve çekmeli dört özgün parmak stili figürü ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Legato joins two notes with one pluck. The plucking hand starts the first note; the fretting hand makes the second.",
+      "tr": "Legato iki notayı tek çekişle bağlar. İlk notayı sağ el başlatır, ikincisini sol el üretir."
+    },
+    {
+      "en": "Hammer-on: pluck the lower note, then bring a finger down fast and firm right behind the higher fret. The string keeps sounding.",
+      "tr": "Çekiç: alçak notayı çek, sonra bir parmağı tiz perdenin hemen arkasına hızlı ve sağlam indir. Tel çalmayı sürdürür."
+    },
+    {
+      "en": "Pull-off: put both fingers down, pluck the higher note, then pull the top finger slightly sideways off the string, like a small pluck.",
+      "tr": "Çekme: iki parmağı da bas, tiz notayı çek, sonra üstteki parmağı küçük bir çekiş gibi telden hafifçe yana çekerek kaldır."
+    },
+    {
+      "en": "Both notes count. The hammered or pulled note should be almost as loud as the plucked one.",
+      "tr": "İki nota da sayılır. Çekiçle ya da çekmeyle çıkan nota, çekilen notaya yakın gürlükte olmalı."
+    },
+    {
+      "en": "The thumb keeps the bass on beats 1 and 3 while the fretting hand plays the legato. In figure 3, use finger 4 for D4, because finger 3 holds C3.",
+      "tr": "Sol el legatoyu çalarken başparmak bası 1. ve 3. vuruşta tutar. 3. figürde Re4 için 4. parmağı kullan, çünkü 3. parmak Do3'ü tutar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The four figures, each twice, in eighth notes at ♩=60 and ♩=40, string-model synthesis with soft legato attacks.",
+      "tr": "Dört figür, her biri iki kez, sekizliklerle ♩=60 ve ♩=40; yumuşak legato ataklı tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play each one-bar figure twice in eighth notes with the click at ♩=60, then all four in a row. 1 Am: hammer G3 to A3 on string 3. 2 Am: pull C4 to B3 on string 2. 3 C: hammer C4 to D4, then pull back. 4 Em: hammer B3 to D4, then pull back. In the line, h marks a hammer-on and p a pull-off.",
+      "tr": "Her bir ölçülük figürü klikle ♩=60'ta sekizliklerle iki kez çal, sonra dördünü art arda. 1 Am: 3. telde Sol3'ten La3'e çekiç. 2 Am: 2. telde Do4'ten Si3'e çekme. 3 C: Do4'ten Re4'e çekiç, sonra geri çekme. 4 Em: Si3'ten Re4'e çekiç, sonra geri çekme. Dizide h çekici, p çekmeyi gösterir."
+    },
+    "sequence": "A2 G3 h A3 C4 E3 G3 h A3 C4 | A2 C4 p B3 G3 E3 C4 p B3 G3 | C3 G3 C4 h D4 E3 G3 D4 p C4 | E2 G3 B3 h D4 E3 G3 D4 p B3",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The second note of each legato pair sounded without a new pluck.", "tr": "Her legato çiftinin ikinci notası yeni bir çekiş olmadan duyuldu." },
+    { "en": "The thumb kept beats 1 and 3 during the legato.", "tr": "Legato sırasında başparmak 1. ve 3. vuruşu korudu." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear the second note.", "tr": "İkinci notayı duyamadım." },
+      "fix": { "en": "The hammer is too soft or too far from the fret. Bring the finger down from higher, right behind the fret.", "tr": "Çekiç çok zayıf ya da perdeden uzak. Parmağı daha yukarıdan, perdenin hemen arkasına indir." }
+    },
+    {
+      "error": { "en": "Different note, a semitone low, after the pull-off in figure 3.", "tr": "3. figürde çekmeden sonra farklı nota, yarım ses alçak." },
+      "fix": { "en": "Open B3 sounded instead of C4. Keep finger 1 on string 2, fret 1 while finger 4 pulls off.", "tr": "Do4 yerine açık Si3 çaldı. 4. parmak çekerken 1. parmağı 2. telin 1. perdesinde tut." }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The legato note drags. Count the eighths aloud; the hammered note falls on the beat.", "tr": "Legato notası sürükleniyor. Sekizlikleri sesli say; çekiçle çıkan nota vuruşa düşer." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each figure without the bass first; add the thumb when the legato notes sound even.",
+    "tr": "Önce her figürü bas olmadan çal; legato notaları eşit duyulunca başparmağı ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

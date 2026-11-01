@@ -1,0 +1,123 @@
+{
+  "id": "gtr-s3-m12-02",
+  "title": {
+    "en": "A repeating bass note",
+    "tr": "Yinelenen bas nota"
+  },
+  "goal": {
+    "en": "Keeps a steady thumb bass on E2 while i and m add upper notes, at ♩=60.",
+    "tr": "i ve m üst notaları eklerken başparmakla Mi2'de sabit bas tutar, ♩=60."
+  },
+  "explanation": [
+    {
+      "en": "The thumb keeps time. It plays open E2 on every beat, whatever the fingers do.",
+      "tr": "Başparmak zamanı tutar. Parmaklar ne yaparsa yapsın her vuruşta açık Mi2'yi çalar."
+    },
+    {
+      "en": "First play E2 alone with p in four quarter notes. Rest i and m on strings 3 and 2.",
+      "tr": "Önce Mi2'yi yalnız başparmakla dört dörtlük çal. i ve m'yi 3. ve 2. telde dinlendir."
+    },
+    {
+      "en": "Then add the fingers between the beats: i plays G3 after beats 1 and 3, m plays B3 after beats 2 and 4. Count \"1 and 2 and\".",
+      "tr": "Sonra parmakları vuruşların arasına ekle: i 1. ve 3. vuruştan sonra Sol3'ü, m 2. ve 4. vuruştan sonra Si3'ü çalar. \"1 ve 2 ve\" diye say."
+    },
+    {
+      "en": "The thumb never waits for a finger. If the bass slips, go back to one upper note per bar.",
+      "tr": "Başparmak hiçbir parmağı beklemez. Bas kayarsa ölçü başına tek üst notaya dön."
+    },
+    {
+      "en": "The same rhythm works with A2 on string 5. Only the bass string changes.",
+      "tr": "Aynı ritim 5. teldeki La2 ile de çalışır. Yalnız bas teli değişir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "Thumb on E2 in quarter notes with i on G3 and m on B3 in between, eighth notes, with a click at ♩=60 and ♩=40.",
+      "tr": "Başparmak Mi2'de dörtlük, aralarda i ile Sol3 ve m ile Si3; sekizlik, klikle ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the four bars in eighth notes with the click at ♩=60: the thumb on E2 on every beat, i on G3 and m on B3 in between.",
+      "tr": "Dört ölçüyü klikle ♩=60'ta sekizlik çal: başparmak her vuruşta Mi2'de, aralarda i Sol3'te ve m Si3'te."
+    },
+    "sequence": "E2:e G3:e E2:e B3:e E2:e G3:e E2:e B3:e | E2:e G3:e E2:e B3:e E2:e G3:e E2:e B3:e | E2:e G3:e E2:e B3:e E2:e G3:e E2:e B3:e | E2:e G3:e E2:e B3:e E2:e G3:e E2:e B3:e",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The thumb played on every beat, even when a finger came late.",
+      "tr": "Başparmak her vuruşta çaldı, bir parmak geciktiğinde bile."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The thumb waits for the fingers. Play one bar of bass alone, then add one upper note per bar.",
+        "tr": "Başparmak parmakları bekliyor. Bir ölçü yalnız bası çal, sonra ölçü başına bir üst nota ekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a fourth high.",
+        "tr": "Farklı nota, bir dörtlü yüksek."
+      },
+      "fix": {
+        "en": "The thumb landed on string 5. Keep it close to string 6 between the bass notes.",
+        "tr": "Başparmak 5. tele düştü. Bas notaları arasında başparmağı 6. tele yakın tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Low notes fade quickly. Pluck strings 5 and 6 a little firmer and keep the phone close to the guitar.",
+        "tr": "Pes notalar çabuk söner. 5. ve 6. telleri biraz daha net çek ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Keep the thumb alone on four quarter notes and add only one upper note near the end of the bar.",
+    "tr": "Başparmağı tek başına dört dörtlükte tut ve yalnız ölçü sonuna yakın tek bir üst nota ekle."
+  },
+  "legacy": "R: guitar.journey.fingerstyle.steady_bass",
+  "minutes": 12,
+  "expertPending": true
+}

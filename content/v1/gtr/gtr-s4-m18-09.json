@@ -1,0 +1,112 @@
+{
+  "id": "gtr-s4-m18-09",
+  "title": {
+    "en": "Read and revise a short score",
+    "tr": "Kısa notayı oku ve düzelt"
+  },
+  "goal": {
+    "en": "Reads an eight-bar line, picks one bar to fix from the note results, and gets fewer \"Different note\" results on the second try.",
+    "tr": "Sekiz ölçülük bir diziyi okur, nota sonuçlarından düzeltilecek tek ölçüyü seçer ve ikinci denemede daha az \"Farklı nota\" sonucu alır."
+  },
+  "explanation": [
+    {
+      "en": "This lesson reads one eight-bar line twice. The first try shows where the \"Different note\" results fall.",
+      "tr": "Bu ders bir sekiz ölçülük diziyi iki kez okur. İlk deneme \"Farklı nota\" sonuçlarının nereye düştüğünü gösterir."
+    },
+    {
+      "en": "Before the first try, scan the meter, notes, rests and the hardest string change.",
+      "tr": "İlk denemeden önce ölçüyü, notaları, susları ve en zor tel geçişini tara."
+    },
+    {
+      "en": "After the first try, open the note results. Pick the one bar with the most \"Different note\" results.",
+      "tr": "İlk denemeden sonra nota sonuçlarını aç. En çok \"Farklı nota\" sonucu olan tek ölçüyü seç."
+    },
+    {
+      "en": "Fix only that bar: name each note with its string and fret, then play the bar slowly three times.",
+      "tr": "Yalnız o ölçüyü düzelt: her notayı teli ve perdesiyle söyle, sonra ölçüyü yavaşça üç kez çal."
+    },
+    {
+      "en": "Then play all eight bars again. Keep reading the page; don't play from memory.",
+      "tr": "Sonra sekiz ölçünün tamamını yeniden çal. Sayfayı okumayı sürdür; ezberden çalma."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The original eight-bar line at ♩=60 and ♩=40, string-model synthesis; the chosen bar can be looped alone.",
+      "tr": "Özgün sekiz ölçülük dizi, ♩=60 ve ♩=40, tel modeli sentezi; seçilen ölçü tek başına döngülenebilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the eight bars once with the click at a tempo you choose between ♩=50 and ♩=60. Pick one bar from the note results and fix it. Then play all eight bars again at the same tempo.",
+      "tr": "Sekiz ölçüyü klikle, ♩=50 ile ♩=60 arasında seçtiğin bir tempoda bir kez çal. Nota sonuçlarından bir ölçü seç ve düzelt. Sonra sekiz ölçünün tamamını aynı tempoda yeniden çal."
+    },
+    "sequence": "4/4: E4:q G4:q F4:q E4:q | B3:q D4:e C4:e B3:q qr | G3:q A3:q B3:q D4:q | C4:q B3:q E4:q qr | F4:q E4:q D4:q C4:q | B3:q G3:q A3:e B3:e C4:q | D4:q F4:q E4:q D4:q | C4:h hr",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Two tries at the same tempo. Passes when the second try has fewer \"Different note\" results than the first, or when both tries have none.",
+        "tr": "Aynı tempoda iki deneme. İkinci denemedeki \"Farklı nota\" sayısı ilkinden azsa ya da iki denemede de hiç yoksa geçer."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I picked one bar from the results, not the whole line.",
+      "tr": "Sonuçlardan dizinin tamamını değil, tek bir ölçüyü seçtim."
+    },
+    {
+      "en": "I named the notes of that bar before I played it again.",
+      "tr": "O ölçüyü yeniden çalmadan önce notalarını söyledim."
+    },
+    {
+      "en": "On the second try I read the page, not my memory.",
+      "tr": "İkinci denemede ezberimi değil sayfayı okudum."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, again in the bar you fixed.",
+        "tr": "Farklı nota, düzelttiğin ölçüde yine."
+      },
+      "fix": {
+        "en": "Slow that bar down further and say each note with its string and fret before you play it.",
+        "tr": "O ölçüyü daha da yavaşlat ve her notayı çalmadan önce teli ve perdesiyle söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Keep going after a slip. Look one bar ahead, not at your hand.",
+        "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only bars 1–4 for both tries, and add bars 5–8 in a later session.",
+    "tr": "İki denemede de yalnız 1–4. ölçüleri kullan; 5–8. ölçüleri sonraki bir oturumda ekle."
+  },
+  "legacy": "V: guitar.journey.reading.reading_checkpoint",
+  "minutes": 15,
+  "expertPending": true
+}

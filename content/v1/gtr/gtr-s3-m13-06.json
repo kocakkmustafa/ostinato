@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s3-m13-06",
+  "title": { "en": "The quick change", "tr": "Hızlı IV" },
+  "goal": {
+    "en": "Plays the 12-bar blues with the quick change to D7 in bar 2, in a shuffle strum at ♩=80.",
+    "tr": "2. ölçüde D7'ye geçen hızlı IV'lü 12 ölçülük blues'u shuffle vuruşuyla ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "The quick change moves to IV in bar 2 and back to I in bar 3. Everything else stays the same.",
+      "tr": "Hızlı IV, 2. ölçüde IV'e gider ve 3. ölçüde I'e döner. Geri kalan her şey aynı kalır."
+    },
+    {
+      "en": "In A: A7 D7 A7 A7 / D7 D7 A7 A7 / E7 D7 A7 E7.",
+      "tr": "La'da: A7 D7 A7 A7 / D7 D7 A7 A7 / E7 D7 A7 E7."
+    },
+    {
+      "en": "The shuffle strum: down on each beat, a light up on the short swung eighth. Long-short, as on the A2 string.",
+      "tr": "Shuffle vuruşu: her vuruşta aşağı, kısa swing'li sekizlikte hafif yukarı. La2 telindeki gibi uzun-kısa."
+    },
+    {
+      "en": "Bar 2 comes fast. Look at D7 during beat 4 of bar 1 and lift the A7 fingers on the last up strum.",
+      "tr": "2. ölçü çabuk gelir. 1. ölçünün 4. vuruşunda D7'ye bak ve A7 parmaklarını son yukarı vuruşta kaldır."
+    },
+    {
+      "en": "Count the bars aloud. After the quick change, bars 3 and 4 are still A7; the line still has four bars.",
+      "tr": "Ölçüleri sesli say. Hızlı IV'ten sonra 3. ve 4. ölçü yine A7'dir; satır yine dört ölçüdür."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 12 bars with the quick change in a shuffle strum, over an original bass and drum loop at ♩=80 and ♩=55.",
+      "tr": "Hızlı IV'lü 12 ölçü, shuffle vuruşuyla; ♩=80 ve ♩=55'te özgün bas ve davul döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 12 bars with the accompaniment at ♩=80 in a shuffle strum, changing to D7 in bar 2. Headphones help the microphone hear only your guitar.",
+      "tr": "12 ölçüyü ♩=80'de eşlikle, shuffle vuruşuyla çal; 2. ölçüde D7'ye geç. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4 swing: A7 | D7 | A7 | A7 | D7 | D7 | A7 | A7 | E7 | D7 | A7 | E7",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I changed to D7 in bar 2 and back to A7 in bar 3.", "tr": "2. ölçüde D7'ye geçtim, 3. ölçüde A7'ye döndüm." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Late in bar 2. Lift the A7 fingers on the last up strum of bar 1, even if open strings sound.",
+        "tr": "2. ölçüde geç. A7 parmaklarını 1. ölçünün son yukarı vuruşunda kaldır; açık teller duyulsa bile."
+      }
+    },
+    {
+      "error": { "en": "Different chord in bar 2.", "tr": "2. ölçüde farklı akor." },
+      "fix": {
+        "en": "The quick change puts D7 in bar 2. Say the chord names aloud once before you play.",
+        "tr": "Hızlı IV'te 2. ölçü D7'dir. Çalmadan önce akor adlarını bir kez sesli söyle."
+      }
+    },
+    {
+      "error": { "en": "Different chord: string 5 also heard.", "tr": "Farklı akor: 5. tel de duyuldu." },
+      "fix": {
+        "en": "D7 starts on string 4. Aim the strum at string 4 and keep the stroke short.",
+        "tr": "D7 4. telden başlar. Vuruşu 4. tele yönelt ve kısa tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop bars 1–4 at ♩=60 with one down strum per beat, then play the full form.",
+    "tr": "1–4. ölçüleri ♩=60'ta, her vuruşta bir aşağı vuruşla döngüle; sonra bütün biçimi çal."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

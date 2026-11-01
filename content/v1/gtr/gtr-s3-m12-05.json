@@ -1,0 +1,122 @@
+{
+  "id": "gtr-s3-m12-05",
+  "title": {
+    "en": "The pinch",
+    "tr": "Çimdik"
+  },
+  "goal": {
+    "en": "Plucks the bass and string 1 together (p+a) on C and Am at ♩=60.",
+    "tr": "C ve Am'de bası ve 1. teli birlikte (p+a) çeker, ♩=60."
+  },
+  "explanation": [
+    {
+      "en": "A pinch is two strings plucked at the same moment: the thumb on the bass and a on string 1. They sound as one event.",
+      "tr": "Çimdik, iki telin aynı anda çekilmesidir: başparmak basta, a 1. telde. İkisi tek bir ses gibi duyulur."
+    },
+    {
+      "en": "Move p and a toward each other, like a small pinch, then release. Do not pull the hand away from the guitar.",
+      "tr": "p ve a'yı küçük bir çimdik gibi birbirine doğru getir, sonra bırak. Eli gitardan uzaklaştırma."
+    },
+    {
+      "en": "On C, pinch C3 and E4. On Am, pinch A2 and E4. String 1 is open in both chords.",
+      "tr": "C'de Do3 ile Mi4'ü, Am'de La2 ile Mi4'ü birlikte çek. 1. tel iki akorda da açıktır."
+    },
+    {
+      "en": "After the pinch, i and m play strings 3 and 2: pinch, i, m, i in quarter notes.",
+      "tr": "Çimdikten sonra i ve m 3. ve 2. telleri çalar: dörtlüklerle çimdik, i, m, i."
+    },
+    {
+      "en": "Both notes of the pinch start together. If one comes first, play the pinch alone until they match.",
+      "tr": "Çimdiğin iki notası birlikte başlar. Biri önce geliyorsa ikisi eşleşene kadar yalnız çimdiği çal."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "Pinch, i, m, i in quarter notes, two bars of C and two bars of Am, with a click at ♩=60 and ♩=40.",
+      "tr": "Dörtlük çimdik, i, m, i; iki ölçü C ve iki ölçü Am; klikle ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A4"
+    ],
+    "task": {
+      "en": "Play pinch, i, m, i in quarter notes with the click at ♩=60: two bars of C, then two bars of Am. A slash in the line marks two notes plucked together.",
+      "tr": "Klikle ♩=60'ta dörtlük çimdik, i, m, i çal: iki ölçü C, sonra iki ölçü Am. Dizideki eğik çizgi birlikte çekilen iki notayı gösterir."
+    },
+    "sequence": "C3/E4 G3 C4 G3 | C3/E4 G3 C4 G3 | A2/E4 A3 C4 A3 | A2/E4 A3 C4 A3",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Both notes of each pinch started together.",
+      "tr": "Her çimdiğin iki notası birlikte başladı."
+    },
+    {
+      "en": "Each note rang without buzzing.",
+      "tr": "Her nota vızıltısız çaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different chord: string 1 not heard.",
+        "tr": "Farklı akor: 1. tel duyulmadı."
+      },
+      "fix": {
+        "en": "a missed string 1. Place a on string 1 before the pinch, then close it toward the thumb.",
+        "tr": "a 1. teli ıskaladı. Çimdikten önce a'yı 1. tele koy, sonra başparmağa doğru kapat."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "The hand gets ready for the pinch too late. Place p and a on their strings while i plays beat 4.",
+        "tr": "El çimdiğe geç hazırlanıyor. i 4. vuruşu çalarken p ve a'yı tellerine yerleştir."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Pluck a little firmer and keep the phone close to the guitar.",
+        "tr": "Biraz daha net çek ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the pinch on beat 1 and rest on beats 2 to 4. Then add i and m.",
+    "tr": "Yalnız 1. vuruştaki çimdiği çal, 2.–4. vuruşlarda dinlen. Sonra i ve m'yi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,86 @@
+{
+  "id": "gtr-s4-m17-01",
+  "title": { "en": "The major-scale formula", "tr": "Majör gam formülü" },
+  "goal": {
+    "en": "Builds a major scale from the W-W-H-W-W-W-H formula and plays G major on string 3.",
+    "tr": "T-T-Y-T-T-T-Y formülüyle majör gam kurar ve 3. telde Sol majörü çalar."
+  },
+  "explanation": [
+    {
+      "en": "Every major scale follows the same step pattern: whole, whole, half, whole, whole, whole, half (W-W-H-W-W-W-H).",
+      "tr": "Her majör gam aynı aralık düzenini izler: tam, tam, yarım, tam, tam, tam, yarım (T-T-Y-T-T-T-Y)."
+    },
+    {
+      "en": "One fret is a half step (a semitone). Two frets are a whole step.",
+      "tr": "Bir perde yarım sestir. İki perde tam sestir."
+    },
+    {
+      "en": "Start on open string 3, G3, and follow the formula: frets 0-2-4-5-7-9-11-12. You land on G4 at fret 12.",
+      "tr": "Açık 3. telde, Sol3'te başla ve formülü izle: 0-2-4-5-7-9-11-12. perdeler. 12. perdede Sol4'e varırsın."
+    },
+    {
+      "en": "The half steps fall between degrees 3–4 (B3–C4) and 7–8 (F♯4–G4). The note on fret 11 is F♯4, not F4.",
+      "tr": "Yarım sesler 3–4. dereceler (Si3–Do4) ile 7–8. dereceler (Fa♯4–Sol4) arasına düşer. 11. perdedeki nota Fa4 değil, Fa♯4'tür."
+    },
+    {
+      "en": "The formula works from any note. Start on another fret and the same step pattern gives you that note's major scale.",
+      "tr": "Formül her notadan işler. Başka bir perdeden başla; aynı düzen o notanın majör gamını verir."
+    },
+    {
+      "en": "One string shows the pattern clearly. In the next lessons you play the same notes across the strings, in one position.",
+      "tr": "Tek tel düzeni açıkça gösterir. Sonraki derslerde aynı notaları tek pozisyonda, teller arasında çalacaksın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "G3 to G4 and back on string 3, slow and even, string-model synthesis; the two half steps are marked on screen.",
+      "tr": "3. telde Sol3'ten Sol4'e çıkış ve iniş, yavaş ve eşit, tel modeli sentezi; iki yarım ses ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A2"],
+    "task": {
+      "en": "Part 1: answer 4 questions on a fretboard diagram: name the step between two scale degrees, or tap the next note of the scale. Part 2: play G major on string 3 from G3 up to G4 and back, at frets 0-2-4-5-7-9-11-12. No click; take your time.",
+      "tr": "1. bölüm: klavye şemasında 4 soruyu cevapla: iki derece arasındaki aralığı adlandır ya da gamın sonraki notasına dokun. 2. bölüm: 3. telde Sol majörü Sol3'ten Sol4'e çık ve geri in; 0-2-4-5-7-9-11-12. perdeler. Klik yok; acele etme."
+    },
+    "sequence": "G3 A3 B3 C4 D4 E4 F♯4 G4 F♯4 E4 D4 C4 B3 A3 G3",
+    "pass": { "levelDefault": true },
+    "drill": {
+      "type": "diagram_match",
+      "count": 4,
+      "params": {
+        "set": "major_scale_steps",
+        "diagram": "fretboard",
+        "strings": [3],
+        "frets": [0, 12],
+        "keys": ["G"]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I moved one fret for B3–C4 and F♯4–G4, two frets everywhere else.", "tr": "Si3–Do4 ve Fa♯4–Sol4 için bir perde, diğerlerinde iki perde ilerledim." },
+    { "en": "I can say the formula W-W-H-W-W-W-H without looking.", "tr": "T-T-Y-T-T-T-Y formülünü bakmadan söyleyebiliyorum." },
+    { "en": "Each note rang without buzzing.", "tr": "Her nota vızıltısız çaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "That is F4 instead of F♯4. Play fret 11, not fret 10.", "tr": "Fa♯4 yerine Fa4 çaldın. 10. değil, 11. perdeyi bas." }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "You took a whole step between B3 and C4. Move only one fret there, from fret 4 to fret 5.", "tr": "Si3 ile Do4 arasında tam ses atladın. Orada yalnız bir perde kay, 4. perdeden 5. perdeye." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the first half, G3 to C4 (frets 0, 2, 4, 5), until the half step B3–C4 feels clear, then add the rest.",
+    "tr": "Si3–Do4 yarım sesi netleşene kadar yalnız ilk yarıyı, Sol3'ten Do4'e (0, 2, 4, 5. perde) çal, sonra gerisini ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

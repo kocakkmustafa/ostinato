@@ -1,0 +1,125 @@
+{
+  "id": "gtr-s3-m12-11",
+  "title": {
+    "en": "Carulli: a short Andantino",
+    "tr": "Carulli: kısa bir Andantino"
+  },
+  "goal": {
+    "en": "Plays a selected Andantino from Carulli's Op. 241, 8 to 16 bars, in time at ♩=60.",
+    "tr": "Carulli'nin Op. 241'inden seçilmiş 8–16 ölçülük bir Andantino'yu ♩=60'ta zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "Ferdinando Carulli (1770–1841) was an Italian guitarist who taught in Paris. His method, Op. 241, contains short pieces for students.",
+      "tr": "Ferdinando Carulli (1770–1841), Paris'te ders veren İtalyan bir gitaristti. Metodu Op. 241, öğrenciler için kısa parçalar içerir."
+    },
+    {
+      "en": "This lesson uses one of its Andantinos, 8 to 16 bars long. Andantino means a gentle walking pace.",
+      "tr": "Bu ders, metodun 8–16 ölçülük Andantino'larından birini kullanır. Andantino, yumuşak bir yürüyüş hızı demektir."
+    },
+    {
+      "en": "The piece uses skills from this module: bass notes with the thumb and broken chords with p, i, m and a.",
+      "tr": "Parça bu modülün becerilerini kullanır: başparmakla bas notaları ve p, i, m, a ile arpejler."
+    },
+    {
+      "en": "Before you play, read it through: find the chords, the bass string of each bar and any repeated bars.",
+      "tr": "Çalmadan önce parçayı baştan sona oku: akorları, her ölçünün bas telini ve tekrar eden ölçüleri bul."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The selected Andantino, string-model synthesis from the Ostinato edition, at ♩=60 and ♩=40.",
+      "tr": "Seçilen Andantino, Ostinato düzenlemesinden tel modeli sentezi, ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the Andantino from the screen with the click. Work in two-bar sections first, then play the whole piece at ♩=60.",
+      "tr": "Andantino'yu ekrandan klikle çal. Önce iki ölçülük bölümlerle çalış, sonra bütün parçayı ♩=60'ta çal."
+    },
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each note rang without buzzing.",
+      "tr": "Her nota vızıltısız çaldı."
+    },
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=45, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=45'te döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "A fretting finger lifted too early. Keep each chord shape down until its bar ends.",
+        "tr": "Bir sol el parmağı erken kalktı. Her akor şeklini ölçüsü bitene kadar basılı tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Pluck a little firmer and keep the phone close to the guitar.",
+        "tr": "Biraz daha net çek ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half of the piece until it passes at ♩=60, then add the second half.",
+    "tr": "Parçanın ilk yarısını ♩=60'ta geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Ferdinando Carulli (1770–1841), Méthode, Op. 241: one Andantino (selection, 8–16 bars). Source: Paris edition, 1825. Public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 18,
+  "expertPending": true
+}

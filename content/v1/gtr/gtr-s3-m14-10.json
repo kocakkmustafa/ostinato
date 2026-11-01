@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s3-m14-10",
+  "title": { "en": "Bass walks between chords", "tr": "Akorlar arası bas yürüyüşü" },
+  "goal": {
+    "en": "Connects G–Em–C–D with a single walking bass note on beat 4 of each bar, in time at ♩=70.",
+    "tr": "G–Em–C–D'yi her ölçünün 4. vuruşunda tek bir yürüyen bas notasıyla bağlar ve ♩=70'te zamanında çalar."
+  },
+  "explanation": [
+    {
+      "en": "A bass walk is a passing note that steps into the next chord's root. Each bar: bass root on beat 1, strum on beats 2 and 3, passing note on beat 4.",
+      "tr": "Bas yürüyüşü, sonraki akorun köküne adım atan bir geçiş notasıdır. Her ölçüde: 1. vuruşta kök bas, 2. ve 3. vuruşta vuruş, 4. vuruşta geçiş notası."
+    },
+    {
+      "en": "G to Em: G2, then F♯2 on string 6, fret 2, steps down to E2.",
+      "tr": "G'den Em'e: Sol2, sonra 6. telin 2. perdesindeki Fa♯2, Mi2'ye iner."
+    },
+    {
+      "en": "Em to C: B2 on string 5, fret 2, steps up a half step to C3. You already hold B2 in the Em shape.",
+      "tr": "Em'den C'ye: 5. telin 2. perdesindeki Si2, yarım ses çıkarak Do3'e varır. Si2'yi Em şeklinde zaten basıyorsun."
+    },
+    {
+      "en": "C to D: E3 on string 4, fret 2, steps down to the open D3. E3 is already inside the C shape.",
+      "tr": "C'den D'ye: 4. telin 2. perdesindeki Mi3, açık Re3'e iner. Mi3 zaten C şeklinin içindedir."
+    },
+    {
+      "en": "D back to G: open A2 steps down to G2. Pick the passing note alone; let the chord stop under it.",
+      "tr": "D'den G'ye dönüş: açık La2, Sol2'ye iner. Geçiş notasını tek başına çal; altında akorun susmasına izin ver."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The 9 bars with bass root, two strums and the passing note, at ♩=70 and ♩=45; the bass notes are marked on screen.",
+      "tr": "Kök bas, iki vuruş ve geçiş notasıyla 9 ölçü, ♩=70 ve ♩=45; bas notaları ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A4"],
+    "task": {
+      "en": "Play G–Em–C–D twice and end on G, with the click at ♩=70: bass root on beat 1, strum on beats 2 and 3, the passing note on beat 4. The app checks the bass notes and the chords.",
+      "tr": "Klikle ♩=70'te G–Em–C–D'yi iki kez çal ve G'de bitir: 1. vuruşta kök bas, 2. ve 3. vuruşta vuruş, 4. vuruşta geçiş notası. Uygulama bas notalarını ve akorları kontrol eder."
+    },
+    "sequence": "4/4: G[G2] G G F♯2 | Em[E2] Em Em B2 | C[C3] C C E3 | D[D3] D D A2 | G[G2] G G F♯2 | Em[E2] Em Em B2 | C[C3] C C E3 | D[D3] D D A2 | G[G2]",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Every passing note led by one step into the next root.", "tr": "Her geçiş notası bir adımla sonraki köke götürdü." },
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "On beat 4 of the G bar you played G2 again. Move the bass finger back to string 6, fret 2 for F♯2.",
+        "tr": "G ölçüsünün 4. vuruşunda yine Sol2 çaldın. Fa♯2 için bas parmağını 6. telin 2. perdesine geri çek."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Leave the chord on beat 4 and play the passing note right then. The next chord forms while the passing note rings.",
+        "tr": "Akoru 4. vuruşta bırak ve geçiş notasını tam o anda çal. Geçiş notası çalarken sonraki akor kurulur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the bass notes alone first, G2 F♯2 E2 B2 C3 E3 D3 A2 G2, one per beat at ♩=50, then add the strums.",
+    "tr": "Önce yalnız bas notalarını çal, Sol2 Fa♯2 Mi2 Si2 Do3 Mi3 Re3 La2 Sol2, ♩=50'de vuruş başına bir nota; sonra vuruşları ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

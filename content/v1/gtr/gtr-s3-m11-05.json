@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s3-m11-05",
+  "title": { "en": "Sequences in fours", "tr": "Dörtlü sekanslar" },
+  "goal": {
+    "en": "Moves up and down the A minor pentatonic shape in groups of four, in eighth notes at ♩=60.",
+    "tr": "La minör pentatonik şeklinde dörtlü gruplarla ♩=60'ta sekizliklerle çıkıp iner."
+  },
+  "explanation": [
+    {
+      "en": "Now each group has four notes: 1-2-3-4, then 2-3-4-5, then 3-4-5-6. Use the same numbers, 1 (A2) to 12 (C5).",
+      "tr": "Artık her grupta dört nota var: 1-2-3-4, sonra 2-3-4-5, sonra 3-4-5-6. Aynı numaraları kullan: 1 (La2) ile 12 (Do5)."
+    },
+    {
+      "en": "Play eighth notes. Each group fills two beats, so a new group starts on beat 1 and on beat 3.",
+      "tr": "Sekizlik çal. Her grup iki vuruşu doldurur; yeni grup 1. ve 3. vuruşta başlar."
+    },
+    {
+      "en": "Coming down: 12-11-10-9, 11-10-9-8, and so on, until 4-3-2-1 lands on A2.",
+      "tr": "İnerken: 12-11-10-9, 11-10-9-8 ve böyle sürer; 4-3-2-1 La2'ye iner."
+    },
+    {
+      "en": "Groups of four change string at different points. Look where each group crosses to the next string before you play it.",
+      "tr": "Dörtlü gruplar teli farklı yerlerde değiştirir. Çalmadan önce her grubun hangi noktada sonraki tele geçtiğine bak."
+    },
+    {
+      "en": "If you lose your place, stop at the end of a group and restart from its first note.",
+      "tr": "Yerini kaybedersen bir grubun sonunda dur ve o grubun ilk notasından yeniden başla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The groups of four up and down the shape in eighth notes at ♩=60 and ♩=40, string-model synthesis, with click.",
+      "tr": "Şekilde çıkan ve inen dörtlü gruplar, sekizliklerle, ♩=60 ve ♩=40; tel modeli sentezi, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the sequence in fours in eighth notes with the click at ♩=60: up from 1-2-3-4 to 9-10-11-12, then down from 12-11-10-9 to 4-3-2-1. Use alternate picking.",
+      "tr": "Dörtlü sekansı klikle ♩=60'ta sekizliklerle çal: 1-2-3-4'ten 9-10-11-12'ye çık, sonra 12-11-10-9'dan 4-3-2-1'e in. Alternatif pena kullan."
+    },
+    "sequence": "A2:e C3:e D3:e E3:e C3:e D3:e E3:e G3:e | D3:e E3:e G3:e A3:e E3:e G3:e A3:e C4:e | G3:e A3:e C4:e D4:e A3:e C4:e D4:e E4:e | C4:e D4:e E4:e G4:e D4:e E4:e G4:e A4:e | E4:e G4:e A4:e C5:e C5:e A4:e G4:e E4:e | A4:e G4:e E4:e D4:e G4:e E4:e D4:e C4:e | E4:e D4:e C4:e A3:e D4:e C4:e A3:e G3:e | C4:e A3:e G3:e E3:e A3:e G3:e E3:e D3:e | G3:e E3:e D3:e C3:e E3:e D3:e C3:e A2:e",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each group started on beat 1 or beat 3.", "tr": "Her grup 1. ya da 3. vuruşta başladı." },
+    { "en": "The groups on the way down were as even as the groups on the way up.", "tr": "İnişteki gruplar çıkıştakiler kadar eşitti." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The string change in the middle of a group is slow. Loop that one group until it is even.", "tr": "Grubun ortasındaki tel geçişi yavaş. O tek grubu eşit olana kadar döngüle." }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "On strings 5, 4 and 3, the second note is at fret 7. Finger 3 slipped to fret 8.", "tr": "5., 4. ve 3. telde ikinci nota 7. perdededir. 3. parmak 8. perdeye kaymış." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play one octave only: 1-2-3-4 up to 3-4-5-6, then 6-5-4-3 down to 4-3-2-1, at ♩=50.",
+    "tr": "Yalnız bir oktav çal: 1-2-3-4'ten 3-4-5-6'ya çık, sonra 6-5-4-3'ten 4-3-2-1'e in; ♩=50."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

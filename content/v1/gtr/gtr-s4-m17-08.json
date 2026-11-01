@@ -1,0 +1,73 @@
+{
+  "id": "gtr-s4-m17-08",
+  "title": { "en": "Link two pentatonic areas", "tr": "İki pentatonik bölgeyi bağla" },
+  "goal": {
+    "en": "Links A minor pentatonic position 1 and position 2 through shared notes, up and back at ♩=70.",
+    "tr": "La minör pentatonikte 1. ve 2. pozisyonu ortak notalar üzerinden bağlar, ♩=70'te çıkıp iner."
+  },
+  "explanation": [
+    {
+      "en": "Map position 1 at fret 5 with the notes A C D E G: 6: 5, 8 / 5: 5, 7 / 4: 5, 7 / 3: 5, 7 / 2: 5, 8 / 1: 5, 8.",
+      "tr": "La Do Re Mi Sol sesleriyle 5. perdedeki 1. pozisyonu haritala: 6: 5, 8 / 5: 5, 7 / 4: 5, 7 / 3: 5, 7 / 2: 5, 8 / 1: 5, 8."
+    },
+    {
+      "en": "Position 2 starts on the upper notes of position 1: 6: 8, 10 / 5: 7, 10 / 4: 7, 10 / 3: 7, 9 / 2: 8, 10 / 1: 8, 10.",
+      "tr": "2. pozisyon, 1. pozisyonun üst notalarından başlar: 6: 8, 10 / 5: 7, 10 / 4: 7, 10 / 3: 7, 9 / 2: 8, 10 / 1: 8, 10."
+    },
+    {
+      "en": "Shared notes are travel points: C3 6/8, E3 5/7, A3 4/7, D4 3/7, G4 2/8 and C5 1/8 belong to both positions.",
+      "tr": "Ortak notalar geçiş noktalarıdır: Do3 6/8, Mi3 5/7, La3 4/7, Re4 3/7, Sol4 2/8 ve Do5 1/8 iki pozisyona da aittir."
+    },
+    {
+      "en": "Shift the hand between notes, not by a forced reach. Going up, after D4 at 3/7, play E4 at 3/9 with finger 3; your index now sits at fret 7.",
+      "tr": "Eli zorla uzatmak yerine notalar arasında taşı. Çıkarken 3/7'deki Re4'ten sonra Mi4'ü 3/9'da 3. parmakla çal; işaret parmağın artık 7. perdededir."
+    },
+    {
+      "en": "Coming down, D4 at 3/7 is now under finger 1. Shift back and play C4 at 3/5 with finger 1; you are in position 1 again.",
+      "tr": "İnerken 3/7'deki Re4 artık 1. parmağın altındadır. Geri kay ve Do4'ü 3/5'te 1. parmakla çal; yeniden 1. pozisyondasın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The linking line in quarter notes, at ♩=70 and ♩=45, string-model synthesis; the two shift points are marked on screen.",
+      "tr": "Bağlantı dizisi dörtlüklerle, ♩=70 ve ♩=45; tel modeli sentezi. İki geçiş noktası ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play up through position 1, shift to position 2 on string 3, reach D5, then come back down and shift back to position 1. Quarter notes with the click at ♩=70.",
+      "tr": "1. pozisyonda çık, 3. telde 2. pozisyona kay, Re5'e ulaş; sonra in ve 1. pozisyona geri kay. Klikle birlikte ♩=70'te dörtlüklerle çal."
+    },
+    "sequence": "A2 C3 D3 E3 | G3 A3 C4 D4 | E4 G4 A4 C5 | D5 C5 A4 G4 | E4 D4 C4 A3 | G3 E3 D3 C3 | A2",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can name the five note names and play the line without adding outside notes.", "tr": "Beş nota adını söyleyip diziyi dışarıdan nota eklemeden çalabiliyorum." },
+    { "en": "I moved the hand at the shift points instead of stretching.", "tr": "Uzanmak yerine elimi geçiş noktalarında taşıdım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The shift turned into a stretch. Release the pressure, move the whole hand on the shared note, then press again.", "tr": "Geçiş uzanmaya dönmüş. Baskıyı bırak, ortak notada bütün eli taşı, sonra yeniden bas." }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": { "en": "The hand did not shift back far enough. C4 is at 3/5; slide finger 1 the full two frets.", "tr": "El yeterince geri kaymadı. Do4 3/5'tedir; 1. parmağı tam iki perde kaydır." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the top half, C4 at 3/5 up to D5 at 1/10 and back, at ♩=50. Add the lower strings in a later session.",
+    "tr": "Yalnız üst yarıyı, 3/5'teki Do4'ten 1/10'daki Re5'e çıkıp inerek ♩=50'de çal. Alt telleri sonraki bir oturumda ekle."
+  },
+  "legacy": "R: guitar.journey.intermediate.pentatonic_link",
+  "minutes": 16,
+  "expertPending": true
+}

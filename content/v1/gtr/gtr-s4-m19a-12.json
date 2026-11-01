@@ -1,0 +1,74 @@
+{
+  "id": "gtr-s4-m19a-12",
+  "title": { "en": "Greensleeves with thumb bass", "tr": "Başparmak basıyla Greensleeves" },
+  "goal": {
+    "en": "Plays 16 bars of Greensleeves in the Ostinato arrangement, melody on top and a thumb bass on each beat, at ♩.=40.",
+    "tr": "Greensleeves'in Ostinato düzenlemesindeki 16 ölçüsünü, melodi üstte ve her vuruşta başparmak basıyla ♩.=40'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Greensleeves is a traditional English melody from the 16th century. The melody is public domain; the bass and chords in this arrangement are by Ostinato.",
+      "tr": "Greensleeves 16. yüzyıldan geleneksel bir İngiliz ezgisidir. Ezgi kamu malıdır; bu düzenlemedeki bas ve akorlar Ostinato'nundur."
+    },
+    {
+      "en": "The piece is in 6/8: two beats per bar, each a dotted quarter. Count '1 2 3 4 5 6' and feel the beats on 1 and 4.",
+      "tr": "Parça 6/8'liktir: ölçüde iki vuruş, her biri noktalı dörtlük. '1 2 3 4 5 6' diye say ve vuruşları 1 ile 4'te hisset."
+    },
+    {
+      "en": "The thumb plays one bass note on each beat: A2 for Am, C3 for C, G2 for G, E2 for Em and E. The melody starts alone on A3 before bar 1.",
+      "tr": "Başparmak her vuruşta bir bas notası çalar: Am için La2, C için Do3, G için Sol2, Em ve E için Mi2. Melodi 1. ölçüden önce tek başına La3 ile başlar."
+    },
+    {
+      "en": "The melody lies in first position on strings 1–4, from E3 to G4. G♯3 (string 3, fret 1) and F♯3 (string 4, fret 4) lead up to A.",
+      "tr": "Melodi birinci pozisyonda 1–4. tellerde, Mi3 ile Sol4 arasındadır. Sol♯3 (3. tel, 1. perde) ve Fa♯3 (4. tel, 4. perde) La'ya doğru çıkar."
+    },
+    {
+      "en": "Let the melody sing above the bass: pluck the melody a little firmer and the bass lighter.",
+      "tr": "Melodi basın üstünde şarkı söylesin: melodiyi biraz daha net, bası daha hafif çek."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The 16 bars of the Ostinato arrangement, melody and thumb bass, at ♩.=40 and ♩.=28, string-model synthesis.",
+      "tr": "Ostinato düzenlemesinin 16 ölçüsü, melodi ve başparmak bası, ♩.=40 ve ♩.=28, tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the 16 bars with the click on the dotted-quarter beat at ♩.=40. Pluck the bass with p on beats 1 and 4, the melody with i and m. A slash marks a bass note and a melody note plucked together.",
+      "tr": "16 ölçüyü noktalı dörtlük vuruşunda klikle ♩.=40'ta çal. Bası p ile 1. ve 4. vuruşta, melodiyi i ve m ile çek. Eğik çizgi birlikte çekilen bir bas ve bir melodi notasını gösterir."
+    },
+    "sequence": "6/8: A3 | A2/C4 D4 C3/E4 F4 E4 | G2/D4 B3 E2/G3 A3 B3 | A2/C4 A3 E2/A3 G♯3 A3 | E2/B3 G♯3 E2/E3 A3 | A2/C4 D4 C3/E4 F4 E4 | G2/D4 B3 E2/G3 A3 B3 | A2/C4 B3 A3 E2/G♯3 F♯3 G♯3 | A2/A3 | C3/G4 E2/G4 F♯4 E4 | G2/D4 B3 E2/G3 A3 B3 | A2/C4 A3 E2/A3 G♯3 A3 | E2/B3 G♯3 E2/E3 | C3/G4 E2/G4 F♯4 E4 | G2/D4 B3 E2/G3 A3 B3 | A2/C4 B3 A3 E2/G♯3 F♯3 G♯3 | A2/A3",
+    "tempo": { "open": 40, "target": 40 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The bass fell on beats 1 and 4 of every bar.", "tr": "Bas her ölçünün 1. ve 4. vuruşuna düştü." },
+    { "en": "The melody stood out above the bass, as in the reference.", "tr": "Melodi, referanstaki gibi basın üstünde öne çıktı." },
+    { "en": "I played G♯3 where the line asks for it and G3 elsewhere.", "tr": "Dizinin istediği yerde Sol♯3, diğer yerlerde Sol3 çaldım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "G♯3 became G3. Over the E bass the G is sharp: string 3, fret 1.", "tr": "Sol♯3, Sol3 oldu. Mi basının üstünde Sol diyezdir: 3. tel, 1. perde." }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The bass waits for the melody. Let the thumb land on 1 and 4 even if a melody note is late.", "tr": "Bas melodiyi bekliyor. Bir melodi notası geç kalsa bile başparmak 1 ve 4'e düşsün." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the melody alone first, then add the bass only on beat 1 of each bar.",
+    "tr": "Önce melodiyi tek başına çal, sonra bası yalnız her ölçünün 1. vuruşunda ekle."
+  },
+  "repertoire": "Greensleeves, traditional English melody (16th century). Source: 19th-century collections. Ostinato arrangement: bass, harmony, fingering and tempo by Ostinato. Public domain, legal review pending.",
+  "minutes": 20,
+  "expertPending": true
+}

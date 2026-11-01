@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s3-test",
+  "title": { "en": "Level 3 test", "tr": "Seviye 3 testi" },
+  "goal": {
+    "en": "Shows the Level 3 skills: riffs, the pentatonic scale, fingerstyle, blues and harmony.",
+    "tr": "Seviye 3 becerilerini gösterir: riff, pentatonik gam, parmak stili, blues ve armoni."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, riff: an original 16-bar riff with power chords and palm mute at ♩=100. Part 2, pentatonic: A minor pentatonic over two octaves, up and down, in eighth notes at ♩=90.",
+      "tr": "1. bölüm, riff: power chord ve palm mute içeren özgün 16 ölçülük riff, ♩=100. 2. bölüm, pentatonik: iki oktav La minör pentatonik çıkış-iniş, sekizliklerle, ♩=90."
+    },
+    {
+      "en": "Part 3, fingerstyle: an original 16-bar piece with p-i-m-a and an alternating bass at ♩=66.",
+      "tr": "3. bölüm, parmak stili: p-i-m-a ve değişen baslı özgün 16 ölçülük parça, ♩=66."
+    },
+    {
+      "en": "Part 4, blues: 12 bars of shuffle accompaniment, then 12 bars of pentatonic answers at ♩=90. Part 5, harmony: 8 bars with seventh chords, then a capo task.",
+      "tr": "4. bölüm, blues: 12 ölçü shuffle eşlik, sonra 12 ölçü pentatonik cevap, ♩=90. 5. bölüm, armoni: 7'li akorlu 8 ölçü, sonra bir kapo görevi."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "Click and an original drum loop for the riff; click only for the scale and the fingerstyle piece; an original shuffle loop with two-bar calls for the blues; an original accompaniment for the harmony part. Headphones recommended.",
+      "tr": "Riff için klik ve özgün davul döngüsü; gam ve parmak stili parça için yalnız klik; blues için iki ölçülük sorularla özgün shuffle döngüsü; armoni bölümü için özgün eşlik. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3", "A4"],
+    "task": {
+      "en": "Complete five parts. 1 Riff: 16 bars of power chords and palm mute at ♩=100. 2 Pentatonic: A minor pentatonic, two octaves up and down, eighths at ♩=90. 3 Fingerstyle: 16 bars of p-i-m-a with an alternating bass at ♩=66. 4 Blues: 12 bars of shuffle accompaniment, then 12 bars of answers to the app's calls at ♩=90. 5 Harmony: 8 bars with seventh chords at ♩=80, then play a shape with the capo at the fret the screen names.",
+      "tr": "Beş bölümü tamamla. 1 Riff: ♩=100'de 16 ölçü power chord ve palm mute. 2 Pentatonik: La minör pentatonik, iki oktav çıkış-iniş, ♩=90'da sekizlik. 3 Parmak stili: ♩=66'da değişen baslı 16 ölçü p-i-m-a. 4 Blues: ♩=90'da 12 ölçü shuffle eşlik, sonra uygulamanın sorularına 12 ölçü cevap. 5 Armoni: ♩=80'de 7'li akorlu 8 ölçü, sonra ekranın söylediği perdede kapoyla bir şekil çal."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Riff: Level 3 chord and timing accuracy. Pentatonic and fingerstyle: Level 3 note and timing accuracy. Blues: a swing ratio of 60–70%, at least 90% of your answer notes in the pool, and Level 3 timing. Harmony: Level 3 chord accuracy, and the capo shape sounds in the named key.",
+        "tr": "Her bölüm kendi başına geçer. Riff: Seviye 3 akor ve zamanlama ölçütü. Pentatonik ve parmak stili: Seviye 3 nota ve zamanlama ölçütü. Blues: %60–70 swing oranı, cevap notalarının en az %90'ı havuzdan ve Seviye 3 zamanlama ölçütü. Armoni: Seviye 3 akor ölçütü ve kapolu şekil istenen tonda duyulur."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "In the riff, the late spot is usually right after a rest. Count the rest aloud and land the next chord on its beat.",
+        "tr": "Riff'te geç kalınan yer genelde bir susun hemen ardıdır. Susu sesli say ve sonraki akoru kendi vuruşuna yerleştir."
+      }
+    },
+    {
+      "error": { "en": "Different note: outside the pool.", "tr": "Farklı nota: havuzun dışında." },
+      "fix": {
+        "en": "A note just off the shape slipped in. Strings 6, 2 and 1 use frets 5 and 8; strings 5, 4 and 3 use frets 5 and 7.",
+        "tr": "Şeklin hemen yanındaki bir nota karıştı. 6., 2. ve 1. tel 5. ve 8. perdeyi; 5., 4. ve 3. tel 5. ve 7. perdeyi kullanır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

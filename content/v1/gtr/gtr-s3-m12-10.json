@@ -1,0 +1,124 @@
+{
+  "id": "gtr-s3-m12-10",
+  "title": {
+    "en": "Tone and dynamics with fingers",
+    "tr": "Parmakla ton ve dinamik"
+  },
+  "goal": {
+    "en": "Switches between soft (p) and strong (f) fingerpicking, at least 5 dB apart, at a steady ♩=60.",
+    "tr": "Parmakla yumuşak (p) ve güçlü (f) çalış arasında, en az 5 dB farkla ve ♩=60'ı koruyarak geçer."
+  },
+  "explanation": [
+    {
+      "en": "p (piano) means soft; f (forte) means strong. Both are relative to your own playing.",
+      "tr": "p (piyano) yumuşak, f (forte) güçlü demektir. İkisi de kendi çalışına göredir."
+    },
+    {
+      "en": "With the fingers, volume comes from how far you press the string before you release it, not from pulling harder.",
+      "tr": "Parmakla ses gücü, teli bırakmadan önce ne kadar bastırdığından gelir; daha sert çekmekten değil."
+    },
+    {
+      "en": "For p, touch the string lightly and release it with a small motion. For f, press it a little toward the soundboard, then let it go.",
+      "tr": "p için tele hafifçe dokun ve küçük bir hareketle bırak. f için teli biraz gövdeye doğru bastır, sonra bırak."
+    },
+    {
+      "en": "Tone changes with hand position: over the soundhole the sound is warm, near the bridge it is brighter. Play this lesson over the soundhole.",
+      "tr": "Ton elin konumuyla değişir: ses deliğinin üstünde sıcak, köprüye yakın daha parlaktır. Bu dersi ses deliğinin üstünde çal."
+    },
+    {
+      "en": "Strong does not mean tense. Keep the wrist loose and the fingers curved.",
+      "tr": "Güçlü, gergin demek değildir. Bileği gevşek, parmakları kıvrık tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "p-i-m-a on Am in eighth notes, 2 bars p then 2 bars f, over the soundhole, at ♩=60 and ♩=40.",
+      "tr": "Am'de sekizlik p-i-m-a, 2 ölçü p ve 2 ölçü f, ses deliğinin üstünde; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3"
+    ],
+    "task": {
+      "en": "Play p-i-m-a on Am in eighth notes at ♩=60: 2 bars p, then 2 bars f. Play the four bars twice. Strong bars need at least 5 dB more than soft bars.",
+      "tr": "Am'de p-i-m-a'yı ♩=60'ta sekizlik çal: 2 ölçü p, sonra 2 ölçü f. Dört ölçüyü iki kez çal. Güçlü ölçüler yumuşaklardan en az 5 dB güçlü olmalı."
+    },
+    "sequence": "4/4: ee ee ee ee | ee ee ee ee | ee ee ee ee | ee ee ee ee",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 3 timing accuracy, and strong bars at least 5 dB louder than soft bars.",
+        "tr": "Seviye 3 zamanlama ölçütü; güçlü ölçüler yumuşaklardan en az 5 dB güçlü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The soft and strong bars were clearly different.",
+      "tr": "Yumuşak ve güçlü ölçüler belirgin biçimde farklıydı."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different: soft and strong were less than 5 dB apart.",
+        "tr": "Farklı: yumuşak ile güçlü arasındaki fark 5 dB'nin altında kaldı."
+      },
+      "fix": {
+        "en": "Make p softer rather than f louder. Touch the strings more lightly.",
+        "tr": "f'yi güçlendirmek yerine p'yi yumuşat. Tellere daha hafif dokun."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but early.",
+        "tr": "Doğru, ama erken."
+      },
+      "fix": {
+        "en": "The f bars rushed. Press the string further, but keep the tempo.",
+        "tr": "f ölçüleri acele etti. Teli daha çok bastır ama tempoyu koru."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The p bars are too quiet for the microphone. Keep the phone close to the guitar and make p soft but clear.",
+        "tr": "p ölçüleri mikrofon için fazla sessiz. Telefonu gitara yakın tut; p'yi yumuşak ama net çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the thumb on A2 in quarter notes, 2 bars soft and 2 bars strong. Then add the fingers.",
+    "tr": "Yalnız başparmakla La2'yi dörtlük çal, 2 ölçü yumuşak ve 2 ölçü güçlü. Sonra parmakları ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

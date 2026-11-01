@@ -1,0 +1,77 @@
+{
+  "id": "gtr-s3-m14-07",
+  "title": { "en": "Capo and transposition", "tr": "Kapo ve transpozisyon" },
+  "goal": {
+    "en": "Chooses capo frets 2, 3 and 5 to reach a target key and plays I–IV–V–I so that it sounds in that key.",
+    "tr": "Hedef tona ulaşmak için kapoyu 2., 3. ve 5. perdeye seçer ve I–IV–V–I'yi o tonda duyulacak şekilde çalar."
+  },
+  "explanation": [
+    {
+      "en": "Each capo fret raises every chord shape by a half step. Capo fret = the frets from the shape key up to the target key.",
+      "tr": "Kapo her perdede bütün akor şekillerini yarım ses yükseltir. Kapo perdesi = şekil tonundan hedef tona kadar olan perde sayısı."
+    },
+    {
+      "en": "Target A: G shapes with capo 2. G–C–D–G sounds A–D–E–A.",
+      "tr": "Hedef La: kapo 2 ile G şekilleri. G–C–D–G, A–D–E–A sesi verir."
+    },
+    {
+      "en": "Target C: A shapes with capo 3. A–D–E–A sounds C–F–G–C.",
+      "tr": "Hedef Do: kapo 3 ile A şekilleri. A–D–E–A, C–F–G–C sesi verir."
+    },
+    {
+      "en": "Target D minor: Am shapes with capo 5. Am–Dm–E–Am sounds Dm–Gm–A–Dm.",
+      "tr": "Hedef Re minör: kapo 5 ile Am şekilleri. Am–Dm–E–Am, Dm–Gm–A–Dm sesi verir."
+    },
+    {
+      "en": "Check the tuning after each capo move. The app listens for the sounding chords, not the shapes.",
+      "tr": "Kapoyu her taşıyışında akordu kontrol et. Uygulama şekilleri değil, sesli akorları dinler."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The three progressions at sounding pitch, A–D–E–A, C–F–G–C and Dm–Gm–A–Dm, four strums per chord; the shapes and capo fret are shown on screen.",
+      "tr": "Üç ilerleme sesli perdede, A–D–E–A, C–F–G–C ve Dm–Gm–A–Dm, akor başına dört vuruş; şekiller ve kapo perdesi ekranda gösterilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A1", "A4"],
+    "task": {
+      "en": "For each target key, set the capo, check the tuning with the tuner, then strum each chord of the progression four times in your own time. Target A: capo 2. Target C: capo 3. Target D minor: capo 5.",
+      "tr": "Her hedef ton için kapoyu tak, akordu akort aletiyle kontrol et, sonra kendi hızında ilerlemenin her akorunu dört kez tara. Hedef La: kapo 2. Hedef Do: kapo 3. Hedef Re minör: kapo 5."
+    },
+    "sequence": "Capo 2 · G C D G shapes · sounding: A D E A | Capo 3 · A D E A shapes · sounding: C F G C | Capo 5 · Am Dm E Am shapes · sounding: Dm Gm A Dm",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I checked the tuning after putting on the capo.", "tr": "Kapoyu taktıktan sonra akordu kontrol ettim." },
+    { "en": "I can say which capo fret turns G shapes into A.", "tr": "G şekillerini A'ya çeviren kapo perdesini söyleyebiliyorum." },
+    { "en": "My chord sounded the same as the reference.", "tr": "Akorum referansla aynı duyuldu." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different chord: a semitone low.", "tr": "Farklı akor: yarım ses alçak." },
+      "fix": {
+        "en": "The capo is one fret too low. Count the half steps from the shape key to the target key again.",
+        "tr": "Kapo bir perde aşağıda. Şekil tonundan hedef tona kadar yarım sesleri yeniden say."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The strings buzz under the capo. Move it closer to the fret and keep it straight.",
+        "tr": "Teller kaponun altında vızıldıyor. Kapoyu perdeye yaklaştır ve düz tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Do capo 2 only, and strum each chord twice, before you try capo 3 and 5.",
+    "tr": "Kapo 3 ve 5'i denemeden önce yalnız kapo 2'yi yap ve her akoru iki kez tara."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

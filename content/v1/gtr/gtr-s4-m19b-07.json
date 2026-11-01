@@ -1,0 +1,84 @@
+{
+  "id": "gtr-s4-m19b-07",
+  "title": { "en": "Pre-bend and release", "tr": "Ön bend ve bırakma" },
+  "goal": {
+    "en": "Bends a string silently to the target, picks it and releases it to the fret pitch, with start and end within ±25 cents on 6 figures.",
+    "tr": "Teli sessizce hedefe çeker, penayla çalar ve perde sesine bırakır; 6 figürde başlangıç ve bitiş ±25 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "A pre-bend starts from above. Bend the string before you pick it, so the first sound you hear is already the target.",
+      "tr": "Ön bend yukarıdan başlar. Teli çalmadan önce çek; duyduğun ilk ses zaten hedef olsun."
+    },
+    {
+      "en": "You cannot hear a pre-bend while you make it, so the hand must remember the distance. Practise the same bend from lessons 5 and 6 first, with sound.",
+      "tr": "Ön bend'i yaparken duyamazsın; mesafeyi el hatırlamalıdır. Önce 5. ve 6. derslerdeki aynı bend'i sesli çalış."
+    },
+    {
+      "en": "Release slowly and evenly. Keep the fingers pressing until the string is back on the fret pitch, or the note dies.",
+      "tr": "Yavaş ve eşit bırak. Tel perde sesine dönene kadar parmaklar basmayı sürdürsün; yoksa nota söner."
+    },
+    {
+      "en": "Figure 6 is a bend and release: pick D4, bend up to E4, then let it come back down to D4 without picking again.",
+      "tr": "6. figür bend ve bırakmadır: Re4'ü çal, Mi4'e çek, sonra yeniden çalmadan Re4'e geri bırak."
+    },
+    {
+      "en": "In the task, 'pb' marks a pre-bend to the note after it, and 'r' a release. The app checks the starting pitch and the ending pitch.",
+      "tr": "Görevde 'pb' kendisinden sonraki notaya ön bend'i, 'r' bırakmayı gösterir. Uygulama başlangıç ve bitiş perdesini kontrol eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each of the six figures slowly, string-model synthesis with a smooth release; the target fret is played first for comparison.",
+      "tr": "Altı figürün her biri yavaş, yumuşak bırakmalı tel modeli sentezi; karşılaştırma için önce hedef perde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Play the six figures in your own time. 1 string 3, fret 7 (whole step). 2 string 2, fret 8 (whole). 3 string 1, fret 8 (whole). 4 string 3, fret 4 (half). 5 string 2, fret 5 (half). 6 string 3, fret 7: bend and release.",
+      "tr": "Altı figürü kendi hızında çal. 1 3. tel, 7. perde (tam ses). 2 2. tel, 8. perde (tam). 3 1. tel, 8. perde (tam). 4 3. tel, 4. perde (yarım). 5 2. tel, 5. perde (yarım). 6 3. tel, 7. perde: bend ve bırakma."
+    },
+    "sequence": "1: pb E4 r D4 · 2: pb A4 r G4 · 3: pb D5 r C5 · 4: pb C4 r B3 · 5: pb F4 r E4 · 6: D4 b E4 r D4",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "A figure is Correct when both the starting pitch and the ending pitch are within ±25 cents. Pass: at least 5 of 6 figures.",
+        "tr": "Bir figür, başlangıç ve bitiş perdesi ±25 cent içindeyse Doğru sayılır. Geçiş: 6 figürün en az 5'i."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G2", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The first sound of each pre-bend was already the target.", "tr": "Her ön bend'in ilk sesi zaten hedefti." },
+    { "en": "The release came back to the fret pitch without dying.", "tr": "Bırakma sönmeden perde sesine döndü." },
+    { "en": "My release was slow and even, not a sudden drop.", "tr": "Bırakmam ani bir düşüş değil, yavaş ve eşitti." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: the start is below the target.", "tr": "Farklı nota: başlangıç hedefin altında." },
+      "fix": {
+        "en": "The silent bend is too short. Play the same bend with sound once, notice how far the string moves, then repeat it silently.",
+        "tr": "Sessiz bend çok kısa. Aynı bend'i bir kez sesli çal, telin ne kadar gittiğine dikkat et, sonra sessizce tekrarla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear: the note dies during the release.", "tr": "Duyamadım: nota bırakma sırasında sönüyor." },
+      "fix": {
+        "en": "Keep pressing into the fret while you release. Only the sideways push goes away.",
+        "tr": "Bırakırken perdeye basmayı sürdür. Yalnız yana doğru itiş azalır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with figure 6, where you hear the bend going up, then try figures 1 and 2 as pre-bends.",
+    "tr": "Bend'in yükselişini duyduğun 6. figürle başla, sonra 1. ve 2. figürü ön bend olarak dene."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

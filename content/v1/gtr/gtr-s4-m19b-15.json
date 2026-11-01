@@ -1,0 +1,126 @@
+{
+  "id": "gtr-s4-m19b-15",
+  "title": {
+    "en": "Pick attack and dynamics",
+    "tr": "Pena atağı ve dinamik"
+  },
+  "goal": {
+    "en": "Plays a two-bar figure three times at ♩=70, soft, medium and loud, with each level at least 4 dB louder than the one before.",
+    "tr": "İki ölçülük bir figürü ♩=70'te üç kez, hafif, orta ve güçlü çalar; her düzey bir öncekinden en az 4 dB daha güçlüdür."
+  },
+  "explanation": [
+    {
+      "en": "Loudness comes from the picking hand. p is soft, mf is medium, f is loud. Without an amp, your pick is the only volume control.",
+      "tr": "Gürlük sağ elden gelir. p hafif, mf orta, f güçlüdür. Amfi olmadan tek ses düğmen penandır."
+    },
+    {
+      "en": "For p, let only the tip of the pick touch the string and move it a short distance. For f, let a little more of the pick meet the string and start the stroke from further away.",
+      "tr": "p için penanın yalnız ucu tele değsin ve kısa bir yol gitsin. f için penanın biraz daha fazlası tele değsin ve vuruş daha uzaktan başlasın."
+    },
+    {
+      "en": "Loud is speed, not squeeze. Keep the grip relaxed and let the hand move faster through the string.",
+      "tr": "Güçlü çalmak sıkmak değil, hızdır. Tutuşu gevşek tut ve eli telin içinden daha hızlı geçir."
+    },
+    {
+      "en": "Keep the tempo the same at every level. Loud playing often rushes; soft playing often drags.",
+      "tr": "Her düzeyde tempoyu aynı tut. Güçlü çalım çoğu zaman acele eder; hafif çalım çoğu zaman geride kalır."
+    },
+    {
+      "en": "The app compares your three levels with each other, not with a fixed number. Keep the phone in the same place for all six bars.",
+      "tr": "Uygulama üç düzeyini sabit bir sayıyla değil, birbiriyle karşılaştırır. Altı ölçü boyunca telefonu aynı yerde tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The two-bar figure played p, mf and f in a row, with click at ♩=70, string-model synthesis with clear level steps.",
+      "tr": "İki ölçülük figür arka arkaya p, mf ve f çalınır, klikle ♩=70, belirgin düzey adımlarıyla tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3"
+    ],
+    "task": {
+      "en": "Play the figure three times with the click at ♩=70: bars 1–2 p, bars 3–4 mf, bars 5–6 f. Eighth notes; the last A2 of each figure is a half note.",
+      "tr": "Figürü klikle ♩=70'te üç kez çal: 1–2. ölçüler p, 3–4. ölçüler mf, 5–6. ölçüler f. Sekizlikler; her figürün son La2'si ikiliktir."
+    },
+    "sequence": "A2:e C3:e D3:e E3:e G3:e E3:e D3:e C3:e | A2:e C3:e D3:e C3:e A2:h | A2:e C3:e D3:e E3:e G3:e E3:e D3:e C3:e | A2:e C3:e D3:e C3:e A2:h | A2:e C3:e D3:e E3:e G3:e E3:e D3:e C3:e | A2:e C3:e D3:e C3:e A2:h",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "mf is at least 4 dB louder than p, and f at least 4 dB louder than mf, on average. Timing: Level 4 default.",
+        "tr": "Ortalamada mf p'den, f de mf'den en az 4 dB daha güçlüdür. Zamanlama: Seviye 4 varsayılanı."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1",
+    "G3"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear three clearly different levels.",
+      "tr": "Belirgin şekilde farklı üç düzey duyabildim."
+    },
+    {
+      "en": "My grip stayed relaxed on the loud bars.",
+      "tr": "Güçlü ölçülerde tutuşum gevşek kaldı."
+    },
+    {
+      "en": "The tempo stayed the same at every level.",
+      "tr": "Tempo her düzeyde aynı kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the levels are too close.",
+        "tr": "Doğru, ama düzeyler birbirine çok yakın."
+      },
+      "fix": {
+        "en": "Make p softer rather than f harder. A very light p leaves room for the other two levels.",
+        "tr": "f'yi daha güçlü yapmak yerine p'yi daha hafif yap. Çok hafif bir p diğer iki düzeye yer açar."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but early.",
+        "tr": "Doğru, ama erken."
+      },
+      "fix": {
+        "en": "The f bars are rushing. Keep the stroke fast but wait for each click.",
+        "tr": "f ölçüleri acele ediyor. Vuruşu hızlı tut ama her kliği bekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Your p is too soft for an unplugged guitar. Play it a little firmer and keep the phone 15–20 cm from the strings.",
+        "tr": "p'n amfisiz gitar için fazla hafif. Biraz daha net çal ve telefonu tellere 15–20 cm uzaklıkta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only two levels, p and f, until the difference is clear, then add mf in between.",
+    "tr": "Fark belirginleşene kadar yalnız iki düzey, p ve f kullan, sonra araya mf'yi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

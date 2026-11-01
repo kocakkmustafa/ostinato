@@ -1,0 +1,111 @@
+{
+  "id": "gtr-s3-m13-05",
+  "title": {
+    "en": "A turnaround",
+    "tr": "Dönüş cümlesi"
+  },
+  "goal": {
+    "en": "Plays an original two-bar single-note turnaround in A over A7 and E7 at ♩=70.",
+    "tr": "La'da A7 ve E7 üstünde özgün, iki ölçülük tek notalı bir dönüş cümlesini ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "A turnaround fills bars 11 and 12 and leads the form back to bar 1.",
+      "tr": "Dönüş cümlesi 11. ve 12. ölçüyü doldurur ve biçimi 1. ölçüye geri götürür."
+    },
+    {
+      "en": "Bar 11, over A7, walks down from A3: A3, G3, F♯3, F3, one note per beat. The last three are half steps.",
+      "tr": "11. ölçü, A7 üstünde La3'ten aşağı yürür: La3, Sol3, Fa♯3, Fa3, her vuruşta bir nota. Son üçü yarım sestir."
+    },
+    {
+      "en": "Bar 11 fingering: A3 on string 3, fret 2; G3 on open string 3; F♯3 on string 4, fret 4; F3 on string 4, fret 3.",
+      "tr": "11. ölçünün parmak yerleri: La3 3. tel 2. perde; Sol3 açık 3. tel; Fa♯3 4. tel 4. perde; Fa3 4. tel 3. perde."
+    },
+    {
+      "en": "Bar 12, over E7, steps down through the chord to its root: E3 (quarter), D3 and B2 (swung eighths), G♯2 and E2 (quarters).",
+      "tr": "12. ölçü, E7 üstünde akorun içinden köküne iner: Mi3 (dörtlük), Re3 ve Si2 (swing'li sekizlik), Sol♯2 ve Mi2 (dörtlük)."
+    },
+    {
+      "en": "Bar 12 fingering: E3 on string 4, fret 2; D3 on open string 4; B2 on string 5, fret 2; G♯2 on string 6, fret 4; E2 on open string 6. Ending on E makes the ear wait for A.",
+      "tr": "12. ölçünün parmak yerleri: Mi3 4. tel 2. perde; Re3 açık 4. tel; Si2 5. tel 2. perde; Sol♯2 6. tel 4. perde; Mi2 açık 6. tel. Mi'de bitmek kulağı La'yı beklemeye bırakır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE"
+    ],
+    "brief": {
+      "en": "The two-bar turnaround after bars 9 and 10 of an original A blues accompaniment loop, swung, at ♩=70 and ♩=50.",
+      "tr": "Özgün bir La blues eşlik döngüsünün 9. ve 10. ölçüsünden sonra iki ölçülük dönüş cümlesi, swing'li, ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "The app plays bars 9 and 10 of the blues. You play bars 11 and 12, the turnaround, and the loop starts again. Play it four times. Headphones help the microphone hear only your guitar.",
+      "tr": "Uygulama blues'un 9. ve 10. ölçüsünü çalar. Sen 11. ve 12. ölçüyü, yani dönüş cümlesini çalarsın ve döngü yeniden başlar. Dört kez çal. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: A3 G3 F♯3 F3 | E3:q D3:e B2:e G♯2:q E2:q",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I played the turnaround in exactly two bars.",
+      "tr": "Dönüş cümlesini tam iki ölçüde çaldım."
+    },
+    {
+      "en": "Each note rang without buzzing.",
+      "tr": "Her nota vızıltısız çaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "F3 came out as F♯3. For the last note of bar 11, move back to fret 3 on string 4.",
+        "tr": "Fa3, Fa♯3 olarak çıktı. 11. ölçünün son notası için 4. telde 3. perdeye geri gel."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The swung eighths in bar 12 are rushed. The first eighth is long; say 2-ta-ta on beat 2.",
+        "tr": "12. ölçüdeki swing'li sekizlikler aceleye geliyor. İlk sekizlik uzundur; 2. vuruşta 2-ta-ta say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only bar 11 for four loops, then add bar 12.",
+    "tr": "Dört tur yalnız 11. ölçüyü çal, sonra 12. ölçüyü ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

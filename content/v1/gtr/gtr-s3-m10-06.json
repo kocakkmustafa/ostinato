@@ -1,0 +1,85 @@
+{
+  "id": "gtr-s3-m10-06",
+  "title": { "en": "Open versus muted", "tr": "Açık ve susturulmuş" },
+  "goal": {
+    "en": "Plays three palm-muted beats and one open, accented beat of E5 per bar at ♩=80, with the open beat at least 5 dB louder.",
+    "tr": "♩=80'de her ölçüde üç palm mute ve bir açık, vurgulu E5 vuruşu çalar; açık vuruş en az 5 dB güçlüdür."
+  },
+  "explanation": [
+    {
+      "en": "Contrast makes a riff speak. Muted notes stay low and tight; one open note jumps out.",
+      "tr": "Zıtlık riff'i konuşturur. Kısık notalar alçak ve sıkı kalır; tek bir açık nota öne fırlar."
+    },
+    {
+      "en": "Beats 1, 2 and 3: E5 palm muted. Beat 4: lift the palm and strike E5 open with a slightly bigger stroke.",
+      "tr": "1., 2. ve 3. vuruş: E5 palm mute ile. 4. vuruş: avucu kaldır ve E5'i biraz daha büyük bir hareketle açık vur."
+    },
+    {
+      "en": "Lift the palm just off the strings, a few millimetres. Then it can land again on beat 1 without searching.",
+      "tr": "Avucu tellerden yalnız birkaç milimetre kaldır. Böylece 1. vuruşta aramadan yeniden yerine iner."
+    },
+    {
+      "en": "The open note rings until the palm lands again. That landing on beat 1 also ends it.",
+      "tr": "Açık nota avuç yeniden inene kadar çalar. 1. vuruştaki bu iniş onu da bitirir."
+    },
+    {
+      "en": "Keep the muted beats soft. The difference counts, not the loudness of the accent.",
+      "tr": "Kısık vuruşları yumuşak tut. Önemli olan farktır, vurgunun gürlüğü değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Four bars of E5: three palm-muted quarter notes and one open accented quarter note per bar, at ♩=80 and ♩=55, with click.",
+      "tr": "Dört ölçü E5: her ölçüde üç palm mute dörtlük ve bir açık vurgulu dörtlük; ♩=80 ve ♩=55, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "With the click at ♩=80, play four bars of E5 in quarter notes. Mute beats 1, 2 and 3 with the palm. Play beat 4 open and accented.",
+      "tr": "Klik ♩=80'deyken dört ölçü E5'i dörtlüklerle çal. 1., 2. ve 3. vuruşu avuçla kıs. 4. vuruşu açık ve vurgulu çal."
+    },
+    "sequence": "4/4: E5 q q q q | E5 q q q q | E5 q q q q | E5 q q q q",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 3 timing, and each open beat at least 5 dB louder than the muted beats.",
+        "tr": "Seviye 3 zamanlama ölçütü; her açık vuruş kısık vuruşlardan en az 5 dB güçlü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Beat 4 clearly stood out from the muted beats.", "tr": "4. vuruş kısık vuruşlardan belirgin biçimde ayrıldı." },
+    { "en": "The palm landed in the same place on every beat 1.", "tr": "Avuç her 1. vuruşta aynı yere indi." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My strumming matched the reference at the slow tempo.", "tr": "Vuruşum yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: the accent was under 5 dB.", "tr": "Farklı: vurgu 5 dB'nin altında kaldı." },
+      "fix": {
+        "en": "Play the muted beats softer instead of forcing beat 4. The difference is what counts.",
+        "tr": "4. vuruşu zorlamak yerine kısık vuruşları daha yumuşak çal. Önemli olan farktır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Beat 1 comes late after the open note. Start bringing the palm down during beat 4.",
+        "tr": "Açık notadan sonra 1. vuruş geç geliyor. Avucu indirmeye 4. vuruş sürerken başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play two muted beats and two open beats per bar at ♩=60 first, then go back to three and one.",
+    "tr": "Önce ♩=60'ta her ölçüde iki kısık ve iki açık vuruş çal, sonra üç ve bire dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

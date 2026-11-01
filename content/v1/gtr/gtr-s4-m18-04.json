@@ -1,0 +1,78 @@
+{
+  "id": "gtr-s4-m18-04",
+  "title": { "en": "Accidentals in first position", "tr": "Birinci pozisyonda değiştirici işaretler" },
+  "goal": {
+    "en": "Reads sharps, flats and naturals in an eight-bar staff line and plays them in first position at ♩=60.",
+    "tr": "Sekiz ölçülük porte dizisindeki diyez, bemol ve natürelleri okur ve birinci pozisyonda ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "A sharp (♯) raises a note one fret. A flat (♭) lowers it one fret. A natural (♮) cancels either one.",
+      "tr": "Diyez (♯) notayı bir perde yükseltir. Bemol (♭) bir perde alçaltır. Natürel (♮) ikisini de iptal eder."
+    },
+    {
+      "en": "An accidental lasts until the barline. In the next bar it must be written again.",
+      "tr": "Değiştirici işaret ölçü çizgisine kadar geçerlidir. Sonraki ölçüde yeniden yazılması gerekir."
+    },
+    {
+      "en": "Sharps in first position: G♯3 3/1, C♯4 2/2, F♯4 1/2. Each one is the natural note plus one fret.",
+      "tr": "Birinci pozisyonda diyezler: Sol♯3 3/1, Do♯4 2/2, Fa♯4 1/2. Her biri doğal nota artı bir perdedir."
+    },
+    {
+      "en": "A flat on an open-string note moves to the next thicker string: B♭3 is string 3, fret 3; E♭4 is string 2, fret 4.",
+      "tr": "Açık tel notasının bemolü bir kalın tele geçer: Si♭3 3. telde 3. perde, Mi♭4 2. telde 4. perdedir."
+    },
+    {
+      "en": "Press fret 4 with finger 4 so your hand stays in first position.",
+      "tr": "Elin birinci pozisyonda kalsın diye 4. perdeye 4. parmakla bas."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original eight-bar line with sharps and flats in quarter notes, at ♩=60 and ♩=40, string-model synthesis; accidentals highlighted on the staff.",
+      "tr": "Diyez ve bemollü özgün sekiz ölçülük dizi, dörtlüklerle, ♩=60 ve ♩=40, tel modeli sentezi; değiştirici işaretler portede vurgulu."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Before you play, find every accidental and say its note name and fret. Then play the eight bars in quarter notes with the click at ♩=60.",
+      "tr": "Çalmadan önce her değiştirici işareti bul, notanın adını ve perdesini söyle. Sonra sekiz ölçüyü klikle ♩=60'ta dörtlüklerle çal."
+    },
+    "sequence": "A3 B3 C4 C♯4 | D4 C♯4 D4 E4 | F4 F♯4 G4 F♯4 | E4 D4 C♯4 A3 | G3 G♯3 A3 B♭3 | B♭3 A3 G♯3 A3 | C4 E♭4 D4 C4 | B♭3 G3 G♯3 A3",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I named every accidental before I played.", "tr": "Çalmadan önce her değiştirici işareti adlandırdım." },
+    { "en": "I kept a sharp until the barline and dropped it in the next bar.", "tr": "Diyezi ölçü çizgisine kadar korudum, sonraki ölçüde bıraktım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": {
+        "en": "A sharp was dropped inside the bar. In bar 3 the second F♯4 has no sign, but the sharp still holds until the barline.",
+        "tr": "Ölçü içinde bir diyez unutuldu. 3. ölçüdeki ikinci Fa♯4'ün işareti yok, ama diyez ölçü çizgisine kadar geçerli."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "A sharp was carried past the barline. In bar 7, C4 is natural: the sharp from bar 4 ended at its barline.",
+        "tr": "Bir diyez ölçü çizgisinin ötesine taşındı. 7. ölçüde Do4 doğaldır: 4. ölçüdeki diyez kendi ölçü çizgisinde bitti."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4, which use only sharps, until they feel easy, then add the flats in bars 5–8.",
+    "tr": "Yalnız diyez içeren 1–4. ölçüleri rahatlayana kadar çal, sonra 5–8. ölçülerdeki bemolleri ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

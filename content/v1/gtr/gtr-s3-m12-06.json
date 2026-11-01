@@ -1,0 +1,123 @@
+{
+  "id": "gtr-s3-m12-06",
+  "title": {
+    "en": "Alternating bass",
+    "tr": "Değişen bas"
+  },
+  "goal": {
+    "en": "Alternates root and fifth with the thumb on C and G while a plays string 1, at ♩=60.",
+    "tr": "a 1. teli çalarken C ve G'de başparmakla kök ve beşliyi sırayla çalar, ♩=60."
+  },
+  "explanation": [
+    {
+      "en": "In alternating bass the thumb moves between the root and the fifth of the chord: root on beat 1, fifth on beat 3.",
+      "tr": "Değişen basta başparmak akorun kökü ile beşlisi arasında gidip gelir: 1. vuruşta kök, 3. vuruşta beşli."
+    },
+    {
+      "en": "On C the root is C3 (string 5, fret 3) and the fifth is G2 (string 6, fret 3). Finger 3 hops between the two strings.",
+      "tr": "C'de kök Do3 (5. tel, 3. perde), beşli Sol2'dir (6. tel, 3. perde). 3. parmak iki tel arasında atlar."
+    },
+    {
+      "en": "On G the root is G2 (string 6, fret 3) and the fifth is D3 (open string 4). The fretting hand does not move.",
+      "tr": "G'de kök Sol2 (6. tel, 3. perde), beşli Re3'tür (açık 4. tel). Sol el hareket etmez."
+    },
+    {
+      "en": "First play the thumb path alone, counting the rests on beats 2 and 4. Then add a on string 1 on beats 2 and 4: E4 on C, G4 on G.",
+      "tr": "Önce başparmak yolunu tek başına çal, 2. ve 4. vuruştaki susları say. Sonra 2. ve 4. vuruşa 1. telde a ekle: C'de Mi4, G'de Sol4."
+    },
+    {
+      "en": "Name each bass note with its string and fret before you play. Do not rely on a fixed hand position.",
+      "tr": "Çalmadan önce her bas notasını teli ve perdesiyle adlandır. Sabit bir el konumuna güvenme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "Alternating bass with a on string 1 on beats 2 and 4, two bars of C and two bars of G, with a click at ♩=60 and ♩=40.",
+      "tr": "2. ve 4. vuruşta 1. telde a ile değişen bas, iki ölçü C ve iki ölçü G; klikle ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the four bars in quarter notes with the click at ♩=60: root, string 1, fifth, string 1. Two bars of C, then two bars of G.",
+      "tr": "Dört ölçüyü klikle ♩=60'ta dörtlük çal: kök, 1. tel, beşli, 1. tel. İki ölçü C, sonra iki ölçü G."
+    },
+    "sequence": "C3 E4 G2 E4 | C3 E4 G2 E4 | G2 G4 D3 G4 | G2 G4 D3 G4",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I alternated root and fifth on the strings I named.",
+      "tr": "Kök ve beşliyi adlandırdığım tellerde sırayla çaldım."
+    },
+    {
+      "en": "The note on string 1 stayed on beats 2 and 4.",
+      "tr": "1. teldeki nota 2. ve 4. vuruşta kaldı."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a fourth high.",
+        "tr": "Farklı nota, bir dörtlü yüksek."
+      },
+      "fix": {
+        "en": "On C, the fifth was picked on the root's string. Say the string of each bass note and practise the thumb path alone before adding string 1.",
+        "tr": "C'de beşli kökün telinde çekildi. Her bas notasının telini söyle ve 1. teli eklemeden önce yalnız başparmak yolunu çalış."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "On C, finger 3 hops too late. Move it to string 6 right after beat 2.",
+        "tr": "C'de 3. parmak geç atlıyor. Onu 2. vuruştan hemen sonra 6. tele taşı."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Low notes fade quickly. Pluck strings 5 and 6 a little firmer and keep the phone close to the guitar.",
+        "tr": "Pes notalar çabuk söner. 5. ve 6. telleri biraz daha net çek ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Alternate the two bass notes alone. Add string 1 in another session.",
+    "tr": "İki bas notasını tek başına sırayla çal. 1. teli başka bir oturumda ekle."
+  },
+  "legacy": "R: guitar.journey.fingerstyle.alternating_bass",
+  "minutes": 14,
+  "expertPending": true
+}

@@ -1,0 +1,123 @@
+{
+  "id": "gtr-s3-m12-01",
+  "title": {
+    "en": "Thumb and three fingers",
+    "tr": "Başparmak ve üç parmak"
+  },
+  "goal": {
+    "en": "Plays open strings with p, i, m and a, each finger on its own string, at ♩=60.",
+    "tr": "Açık telleri p, i, m ve a ile, her parmak kendi telinde, ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "The right-hand fingers have letter names: p is the thumb, i the index, m the middle and a the ring finger. The little finger rests.",
+      "tr": "Sağ el parmaklarının harf adları var: p başparmak, i işaret, m orta, a yüzük parmağıdır. Serçe parmak dinlenir."
+    },
+    {
+      "en": "Rest p on string 5, i on string 3, m on string 2 and a on string 1. Pluck each string separately, then let the hand relax.",
+      "tr": "Başparmağı (p) 5. tele, işaret parmağını (i) 3. tele, orta parmağı (m) 2. tele, yüzük parmağını (a) 1. tele koy. Her teli ayrı çek, sonra eli gevşet."
+    },
+    {
+      "en": "The thumb covers the bass strings 6, 5 and 4 and moves toward the floor. The fingers pluck up into the palm, not away from the guitar.",
+      "tr": "Başparmak 6., 5. ve 4. bas tellerini çalar ve yere doğru hareket eder. Parmaklar teli avuca doğru çeker, gitardan dışarı doğru değil."
+    },
+    {
+      "en": "Keep the guitar in its support. The fingers move; the hand and the guitar stay still.",
+      "tr": "Gitarı desteğinde tut. Parmaklar hareket eder; el ve gitar yerinde kalır."
+    },
+    {
+      "en": "When p-i-m-a feels even, try the reverse order p-a-m-i slowly. Each finger keeps its own string.",
+      "tr": "p-i-m-a eşit gelince ters sırayı, p-a-m-i'yi yavaşça dene. Her parmak kendi telinde kalır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "Open strings p-i-m-a in quarter notes, thumb on A2, D3 and E2, with a click at ♩=60 and ♩=40.",
+      "tr": "Açık tellerde dörtlük p-i-m-a, başparmak La2, Re3 ve Mi2'de; klikle ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play p-i-m-a on open strings in quarter notes with the click: two bars with the thumb on A2, one bar on D3, one bar on E2. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Açık tellerde p-i-m-a'yı klikle dörtlük olarak çal: iki ölçü başparmak La2'de, bir ölçü Re3'te, bir ölçü Mi2'de. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "A2 G3 B3 E4 | A2 G3 B3 E4 | D3 G3 B3 E4 | E2 G3 B3 E4",
+    "tempo": {
+      "open": 50,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each finger plucked only its own string.",
+      "tr": "Her parmak yalnız kendi telini çekti."
+    },
+    {
+      "en": "My hand stayed loose and the guitar did not move.",
+      "tr": "Elim gevşek kaldı, gitar yerinden oynamadı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a fourth low.",
+        "tr": "Farklı nota, bir dörtlü alçak."
+      },
+      "fix": {
+        "en": "The thumb hit the string next to the one you meant, toward your face. Rest the thumb on the planned bass string before beat 1.",
+        "tr": "Başparmak hedef telin yüzüne yakın komşusuna vurdu. 1. vuruştan önce başparmağı planlanan bas teline koy."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The fingers pull away and the hand tightens. Make the movement smaller and restart with p and i only.",
+        "tr": "Parmaklar dışarı çekiyor ve el kasılıyor. Hareketi küçült ve yalnız p ile i ile yeniden başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Pluck a little firmer and keep the phone close to the guitar.",
+        "tr": "Biraz daha net çek ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use p and i on two strings first. Add m, then a, one at a time once the hand releases easily.",
+    "tr": "Önce iki telde yalnız p ve i kullan. El rahat bırakınca m'yi, sonra a'yı tek tek ekle."
+  },
+  "legacy": "R: guitar.journey.fingerstyle.finger_names",
+  "minutes": 12,
+  "expertPending": true
+}

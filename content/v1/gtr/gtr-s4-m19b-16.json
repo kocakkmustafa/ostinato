@@ -1,0 +1,83 @@
+{
+  "id": "gtr-s4-m19b-16",
+  "title": { "en": "Phrasing: space and repetition", "tr": "Cümleleme: boşluk ve tekrar" },
+  "goal": {
+    "en": "Improvises eight bars over an A minor backing at ♩=80 with at least two bars of rest and at least 90% of notes from A minor pentatonic.",
+    "tr": "La minör eşlik üstünde ♩=80'de sekiz ölçü doğaçlama yapar; en az iki ölçü sus bırakır ve notaların en az %90'ı La minör pentatonikten gelir."
+  },
+  "explanation": [
+    {
+      "en": "A solo is like speech: short sentences with pauses. Silence gives the listener time to hear what you just played.",
+      "tr": "Solo konuşmaya benzer: araları olan kısa cümleler. Sessizlik dinleyiciye az önce çaldığını duyma zamanı verir."
+    },
+    {
+      "en": "Repetition makes an idea stick. Play a short motif, then play it again with one small change: a new last note, a bend, or a different rhythm.",
+      "tr": "Tekrar bir fikri akılda tutar. Kısa bir motif çal, sonra onu küçük bir değişiklikle yeniden çal: yeni bir son nota, bir bend ya da farklı bir ritim."
+    },
+    {
+      "en": "A simple plan for 8 bars: motif (bar 1), rest (bar 2), motif again (bar 3), rest (bar 4), changed motif (bars 5–6), an answer that ends on A (bar 7), rest (bar 8).",
+      "tr": "8 ölçü için basit bir plan: motif (1. ölçü), sus (2. ölçü), yine motif (3. ölçü), sus (4. ölçü), değişmiş motif (5–6. ölçüler), La'da biten bir cevap (7. ölçü), sus (8. ölçü)."
+    },
+    {
+      "en": "Use the notes of A minor pentatonic in box 1 or box 2: A, C, D, E, G. A rest bar means no notes at all; let the strings stop.",
+      "tr": "1. ya da 2. kutuda La minör pentatoniğin notalarını kullan: La, Do, Re, Mi, Sol. Sus ölçüsü hiç nota yok demektir; tellerin susmasına izin ver."
+    },
+    {
+      "en": "Every try is new music. The app checks which notes you used, where you left space, and your timing.",
+      "tr": "Her deneme yeni bir müziktir. Uygulama hangi notaları kullandığını, nerede boşluk bıraktığını ve zamanlamanı kontrol eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "Original 8-bar A minor backing with bass and drums at ♩=80: Am, Am, Dm, Dm, Am, Am, Dm, Am. One example phrase played over it with clear rests. Headphones recommended.",
+      "tr": "Bas ve davullu özgün 8 ölçülük La minör eşlik, ♩=80: Am, Am, Dm, Dm, Am, Am, Dm, Am. Üstünde belirgin suslarla örnek bir cümle çalınır. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Improvise over the 8-bar backing at ♩=80. Use only A, C, D, E and G. Leave at least two full bars empty, and repeat at least one motif with a small change.",
+      "tr": "♩=80'deki 8 ölçülük eşlik üstünde doğaçlama yap. Yalnız La, Do, Re, Mi ve Sol kullan. En az iki tam ölçüyü boş bırak ve en az bir motifi küçük bir değişiklikle tekrarla."
+    },
+    "tempo": { "open": 80, "target": 80 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes come from A minor pentatonic, and at least 2 of the 8 bars are silent. Timing is shown as information.",
+        "tr": "Notalarının en az %90'ı La minör pentatonikten gelir ve 8 ölçünün en az 2'si sessizdir. Zamanlama bilgi olarak gösterilir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1", "G3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I left at least two bars completely silent.", "tr": "En az iki ölçüyü tamamen sessiz bıraktım." },
+    { "en": "I repeated a motif and changed one thing in it.", "tr": "Bir motifi tekrarladım ve içinde bir şeyi değiştirdim." },
+    { "en": "My last phrase ended on an A.", "tr": "Son cümlem bir La'da bitti." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: outside the pentatonic pool.", "tr": "Farklı nota: pentatonik havuzun dışında." },
+      "fix": {
+        "en": "A finger slipped to a neighbouring fret, often B or F. Stay inside one box and use fewer notes.",
+        "tr": "Bir parmak komşu perdeye kaydı; çoğu zaman Si ya da Fa. Tek bir kutuda kal ve daha az nota kullan."
+      }
+    },
+    {
+      "error": { "en": "Different: a note was heard in a rest bar.", "tr": "Farklı: sus ölçüsünde nota duyuldu." },
+      "fix": {
+        "en": "The last note kept ringing into the rest. Lift the fretting finger and touch the strings with the picking hand to stop them.",
+        "tr": "Son nota susun içine kadar çaldı. Sol eldeki parmağı kaldır ve telleri durdurmak için sağ elle onlara dokun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only three notes, A3, C4 and D4, for the whole improvisation.",
+    "tr": "Bütün doğaçlama için yalnız üç nota kullan: La3, Do4 ve Re4."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

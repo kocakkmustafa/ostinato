@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s3-m14-12",
+  "title": { "en": "Harmony checkpoint", "tr": "Armoni geçişi" },
+  "goal": {
+    "en": "Plays an original 16-bar seventh-chord progression in D in time at ♩=80, then plays its last line with a capo so that it sounds in F.",
+    "tr": "Re tonunda özgün 16 ölçülük yedili akor ilerlemesini ♩=80'de zamanında çalar, sonra son satırını kapoyla Fa tonunda duyulacak şekilde çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "Part 1, the progression: Dmaj7 | Em7 | A7 | Dmaj7 | D7 | G | E7 | A7 | Dmaj7 | Em7 | A7 | D | G | A7 | D | D. Each chord lasts one bar.",
+      "tr": "1. bölüm, ilerleme: Dmaj7 | Em7 | A7 | Dmaj7 | D7 | G | E7 | A7 | Dmaj7 | Em7 | A7 | D | G | A7 | D | D. Her akor bir ölçü sürer."
+    },
+    {
+      "en": "Strum \"D-DU-UDU\" in every bar and change on beat 1. Em7 to A7 is ii–V; A7 to D is V–I.",
+      "tr": "Her ölçüde \"D-DU-UDU\" kalıbını çal ve akoru 1. vuruşta değiştir. Em7'den A7'ye ii–V, A7'den D'ye V–I'dir."
+    },
+    {
+      "en": "Part 2, the capo task: play the last four bars, G | A7 | D | D, so that they sound in F. D shapes reach F with the capo at fret 3; the app listens for B♭ | C7 | F | F.",
+      "tr": "2. bölüm, kapo görevi: son dört ölçüyü, G | A7 | D | D, Fa tonunda duyulacak şekilde çal. D şekilleri kapo 3. perdedeyken Fa'ya ulaşır; uygulama B♭ | C7 | F | F dinler."
+    },
+    {
+      "en": "The checkpoint is played at the target tempo, ♩=80. Practise slower first if you need to.",
+      "tr": "Geçiş hedef tempoda, ♩=80'de çalınır. Gerekirse önce daha yavaş çalış."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The 16 bars with the \"D-DU-UDU\" strum over an original bass and drum loop at ♩=80 and ♩=55, then the four capo bars at sounding pitch in F.",
+      "tr": "16 ölçü, \"D-DU-UDU\" vuruşuyla; ♩=80 ve ♩=55'te özgün bas ve davul döngüsü üstünde; ardından dört kapo ölçüsü Fa'da sesli perdede."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Part 1: play the 16 bars with the accompaniment at ♩=80, strumming \"D-DU-UDU\" and changing on beat 1. Part 2: put the capo at fret 3, check the tuning, and play G | A7 | D | D with the accompaniment in F at ♩=80. Headphones help the microphone hear only your guitar.",
+      "tr": "1. bölüm: 16 ölçüyü ♩=80'de eşlikle çal; \"D-DU-UDU\" vur ve akoru 1. vuruşta değiştir. 2. bölüm: kapoyu 3. perdeye tak, akordu kontrol et ve G | A7 | D | D'yi Fa'daki eşlikle ♩=80'de çal. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: Dmaj7 | Em7 | A7 | Dmaj7 | D7 | G | E7 | A7 | Dmaj7 | Em7 | A7 | D | G | A7 | D | D · Capo 3 · G | A7 | D | D shapes · sounding: B♭ | C7 | F | F",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The changes D7–G–E7 in bars 5 to 7 are usually the slow ones. Loop bars 4 to 8 at ♩=65, then rejoin the full line.",
+        "tr": "5.–7. ölçülerdeki D7–G–E7 geçişleri genelde en yavaş olanlardır. 4.–8. ölçüleri ♩=65'te döngüle, sonra bütün diziye dön."
+      }
+    },
+    {
+      "error": { "en": "Different chord: a semitone low.", "tr": "Farklı akor: yarım ses alçak." },
+      "fix": {
+        "en": "In part 2 the capo sits at fret 2. D to F is three half steps; move the capo to fret 3.",
+        "tr": "2. bölümde kapo 2. perdede duruyor. Re'den Fa'ya üç yarım sestir; kapoyu 3. perdeye al."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones, and keep the phone close to the guitar.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan; telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise the progression at ♩=65 with four down strums per bar, then return to the checkpoint at ♩=80.",
+    "tr": "İlerlemeyi ♩=65'te, ölçü başına dört aşağı vuruşla çalış; sonra ♩=80'de geçişe dön."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

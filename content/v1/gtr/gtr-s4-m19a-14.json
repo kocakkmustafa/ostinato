@@ -1,0 +1,126 @@
+{
+  "id": "gtr-s4-m19a-14",
+  "title": {
+    "en": "Drop D tuning",
+    "tr": "Drop D akort"
+  },
+  "goal": {
+    "en": "Tunes string 6 down to D2 within ±5 cents and plays an original four-bar bass riff at ♩=70.",
+    "tr": "6. teli ±5 cent içinde Re2'ye indirir ve özgün dört ölçülük bas riff'ini ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Drop D lowers only string 6, from E2 to D2: one whole step. The other five strings stay the same.",
+      "tr": "Drop D yalnız 6. teli Mi2'den Re2'ye, bir tam ses indirir. Diğer beş tel aynı kalır."
+    },
+    {
+      "en": "Turn the peg slowly toward a lower pitch while you pluck. Stop at D2 on the tuner; if you go past it, come back up from below.",
+      "tr": "Teli çekerken burguyu yavaşça pesleşme yönüne çevir. Akort aletinde Re2'de dur; geçersen aşağıdan yukarı doğru geri gel."
+    },
+    {
+      "en": "Check by ear: fret 7 on string 6 now matches open string 5 (A2), and the harmonic at fret 12 on string 6 (D3) matches open string 4.",
+      "tr": "Kulakla kontrol et: 6. telin 7. perdesi artık açık 5. telle (La2) aynıdır; 6. telin 12. perde flajoleti (Re3) açık 4. telle aynıdır."
+    },
+    {
+      "en": "Open strings 6, 5 and 4 are now D2, A2 and D3: a deep bass for pieces in D.",
+      "tr": "Açık 6., 5. ve 4. teller artık Re2, La2 ve Re3'tür: Re tonundaki parçalar için derin bir bas."
+    },
+    {
+      "en": "On string 6 every note sits two frets higher than before: E2 is now at fret 2, F2 at fret 3, G2 at fret 5. Tune back to E2 when you finish.",
+      "tr": "6. telde her nota eskisinden iki perde yukarıdadır: Mi2 artık 2. perdede, Fa2 3. perdede, Sol2 5. perdede. Bitirince teli yine Mi2'ye akort et."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "A D2 tuning tone, then the four-bar riff in eighth notes at ♩=70 and ♩=45, string-model synthesis in Drop D.",
+      "tr": "Re2 akort sesi, ardından dört ölçülük riff sekizliklerle ♩=70 ve ♩=45; Drop D'de tel modeli sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Tune string 6 to D2 until the tuner holds within ±5 cents for one second. Then play the riff with the thumb in eighth notes with the click at ♩=70; the last D2 falls on beat 4 of bar 4. Use i for D3 on open string 4.",
+      "tr": "6. teli, akort aleti bir saniye ±5 cent içinde kalana kadar Re2'ye akort et. Sonra riff'i klikle ♩=70'te başparmakla sekizlik çal; son Re2 4. ölçünün 4. vuruşuna düşer. Açık 4. teldeki Re3 için i'yi kullan."
+    },
+    "sequence": "D2:e D3:e A2:e D2:e C3:e A2:e G2:e A2:e | D2:e D3:e A2:e D2:e F2:e G2:e F2:e E2:e | D2:e D3:e A2:e D2:e C3:e A2:e G2:e A2:e | D2:e F2:e G2:e A2:e C3:e D3:e D2:q",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "String 6 holds D2 within ±5 cents for one second; the riff meets Level 4 note and timing accuracy.",
+        "tr": "6. tel bir saniye ±5 cent içinde Re2'de kalır; riff Seviye 4 nota ve zamanlama ölçütünü karşılar."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Fret 7 on string 6 sounded the same as open string 5.",
+      "tr": "6. telin 7. perdesi açık 5. telle aynı duyuldu."
+    },
+    {
+      "en": "I played G2 at fret 5 and F2 at fret 3 on string 6.",
+      "tr": "6. telde Sol2'yi 5. perdede, Fa2'yi 3. perdede çaldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a whole step high, on open string 6.",
+        "tr": "Açık 6. telde farklı nota, bir tam ses yüksek."
+      },
+      "fix": {
+        "en": "String 6 is still at E2. Lower it to D2 with the tuner.",
+        "tr": "6. tel hâlâ Mi2'de. Akort aletiyle Re2'ye indir."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a whole step low.",
+        "tr": "Farklı nota, bir tam ses alçak."
+      },
+      "fix": {
+        "en": "Old fret habits. In Drop D, G2 is at fret 5 and F2 at fret 3 on string 6.",
+        "tr": "Eski perde alışkanlığı. Drop D'de 6. telde Sol2 5. perdede, Fa2 3. perdededir."
+      }
+    },
+    {
+      "error": {
+        "en": "Tuning outside ±5 cents.",
+        "tr": "Akort ±5 cent dışında."
+      },
+      "fix": {
+        "en": "Come up to D2 from below and let the string settle for a moment before you read the tuner.",
+        "tr": "Re2'ye aşağıdan yukarı gel ve akort aletine bakmadan önce telin bir an oturmasını bekle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only bars 1 and 2 at ♩=55 until they are clean, then add bars 3 and 4.",
+    "tr": "Temizlenene kadar yalnız 1. ve 2. ölçüyü ♩=55'te çal, sonra 3. ve 4. ölçüyü ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s3-m11-02",
+  "title": { "en": "Two octaves", "tr": "İki oktav" },
+  "goal": {
+    "en": "Plays the full A minor pentatonic shape at fret 5 from A2 to C5 and back in eighth notes at ♩=60.",
+    "tr": "5. perdedeki La minör pentatonik şeklinin tamamını La2'den Do5'e çıkıp inerek ♩=60'ta sekizliklerle çalar."
+  },
+  "explanation": [
+    {
+      "en": "The full shape uses all six strings and reaches from A2 to C5.",
+      "tr": "Şeklin tamamı altı telin hepsini kullanır ve La2'den Do5'e uzanır."
+    },
+    {
+      "en": "Strings 6, 2 and 1 use frets 5 and 8, with fingers 1 and 4. Strings 5, 4 and 3 use frets 5 and 7, with fingers 1 and 3.",
+      "tr": "6., 2. ve 1. teller 5. ve 8. perdeyi, 1. ve 4. parmakla kullanır. 5., 4. ve 3. teller 5. ve 7. perdeyi, 1. ve 3. parmakla kullanır."
+    },
+    {
+      "en": "The upper notes: C4 3/5, D4 3/7, E4 2/5, G4 2/8, A4 1/5, C5 1/8.",
+      "tr": "Üst notalar: Do4 3/5, Re4 3/7, Mi4 2/5, Sol4 2/8, La4 1/5, Do5 1/8."
+    },
+    {
+      "en": "The shape has three A's: A2 6/5, A3 4/7 and A4 1/5. Name each one as you pass it.",
+      "tr": "Şekilde üç La var: La2 6/5, La3 4/7 ve La4 1/5. Her birinin üstünden geçerken adını söyle."
+    },
+    {
+      "en": "Play two notes per click. Count \"1 and 2 and\" aloud once before you start.",
+      "tr": "Her klikte iki nota çal. Başlamadan önce bir kez sesli olarak \"1 ve 2 ve\" diye say."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "A2 up to C5 and back in eighth notes at ♩=60 and ♩=40, string-model synthesis, with click.",
+      "tr": "La2'den Do5'e çıkış ve iniş, sekizliklerle, ♩=60 ve ♩=40; tel modeli sentezi, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the shape from A2 up to C5 and back down to A2 in eighth notes with the click at ♩=60. Hold the last A2 for one beat.",
+      "tr": "Şekli La2'den Do5'e çık ve La2'ye in; klikle ♩=60'ta sekizliklerle çal. Son La2'yi bir vuruş boyunca tut."
+    },
+    "sequence": "A2:e C3:e D3:e E3:e G3:e A3:e C4:e D4:e | E4:e G4:e A4:e C5:e A4:e G4:e E4:e D4:e | C4:e A3:e G3:e E3:e D3:e C3:e A2:q",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I could name each A on the way up and down.", "tr": "Çıkarken ve inerken her La'yı adlandırabildim." },
+    { "en": "I used fingers 1 and 4 on strings 6, 2 and 1.", "tr": "6., 2. ve 1. tellerde 1. ve 4. parmağı kullandım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses alçak." },
+      "fix": { "en": "On string 2, G4 is at fret 8. Fret 7 gives F♯4. Use finger 4 there.", "tr": "2. telde Sol4 8. perdededir. 7. perde Fa♯4 verir. Orada 4. parmağı kullan." }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": { "en": "The finger pattern changes between strings 3 and 2. Loop D4 E4 G4 slowly until it feels even.", "tr": "Parmak düzeni 3. ve 2. tel arasında değişir. Re4 Mi4 Sol4'ü eşit gelene kadar yavaşça döngüle." }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the top octave only, A3 to C5 and back, at ♩=50.",
+    "tr": "Yalnız üst oktavı, La3'ten Do5'e çıkıp inerek ♩=50'de çal."
+  },
+  "minutes": 14,
+  "expertPending": true
+}

@@ -51,6 +51,49 @@ void main() {
       expect(d.events[4].startBeat, 4);
     });
 
+    test('triplet eighths: three notes fill one beat', () {
+      final s = PracticeScore.parse(
+        'A2:t C3:t D3:t E3:q G3:h | A3:t tr A3:t q h',
+      );
+      expect(s.events.map((e) => e.startBeat).take(5), [
+        0, closeTo(1 / 3, 1e-9), closeTo(2 / 3, 1e-9), 1, 2, //
+      ]);
+      expect(s.events[5].startBeat, 4, reason: 'the bar is exactly full');
+      expect(s.events[6].startBeat, closeTo(4 + 2 / 3, 1e-9));
+      expect(s.totalBeats, 8);
+    });
+
+    test('degrees: accidentals and rhythm suffixes', () {
+      final s = PracticeScore.parse(
+        '1-2-b3-4-5 | 5:e 4:e b3:q 1:h | #4:q. b7:e',
+      );
+      expect(s.events.map((e) => e.degree), [1, 2, 3, 4, 5, 5, 4, 3, 1, 4, 7]);
+      expect(s.events.map((e) => e.degreeShift), [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        1,
+        -1,
+      ]);
+      expect(s.events[5].startBeat, 8);
+      expect(s.events.sublist(5, 9).map((e) => e.durationBeats), [
+        .5,
+        .5,
+        1,
+        2,
+      ]);
+      expect(s.events[9].durationBeats, 1.5);
+      expect(s.events[9].startBeat, 12);
+      expect(s.totalBeats, 16);
+      expect(() => PracticeScore.parse('1-2-x3'), throwsFormatException);
+    });
+
     test('rejects unknown tokens and meters', () {
       expect(() => PracticeScore.parse(''), throwsFormatException);
       expect(() => PracticeScore.parse('E2 zz'), throwsFormatException);
@@ -73,7 +116,16 @@ void main() {
       expect(s.hasPitches, isFalse);
     });
 
-    test('every written single-note v1 lesson sequence parses', () {
+    test('every written single-note v1 lesson sequence parses and fits '
+        'its bars', () {
+      // Technique notation the single-note line cannot carry yet: double
+      // stops `C3/E4`, hammer-on `h`, pull-off `p`, slide ` / `, bend
+      // `b`/`pb`, release `r`, vibrato `vib` (90-ders-yazim-kilavuzu §3.3).
+      // Those lessons stay out of measured practice until the engine
+      // measures them.
+      final technique = RegExp(
+        r'(?:^|\s)(?:h|p|b|pb|r|vib|/)(?=\s|$)|[A-G][#b♯♭]?\d/[A-G]',
+      );
       for (final f in Directory('content/v1').listSync(recursive: true)) {
         if (f is! File || !f.path.endsWith('.json')) continue;
         final lesson = V1Lesson.fromJson(jsonDecode(f.readAsStringSync()));
@@ -83,7 +135,22 @@ void main() {
         // sequences; the practice loop does not run them yet.
         final steps = lesson.practice.engineSteps;
         if (steps.contains('A4') || steps.every((s) => s == 'A1')) continue;
+        if (technique.hasMatch(seq)) continue;
         expect(() => PracticeScore.parse(seq), returnsNormally, reason: f.path);
+        // A line the lesson describes as eighths or triplets must carry
+        // its durations: bare pitches are quarters, i.e. half the speed.
+        final text = [
+          lesson.practice.task.en,
+          ...lesson.explanation.map((e) => e.en),
+        ].join(' ').toLowerCase();
+        final pitchOnly = !RegExp(
+          r':[whqet]|(?:^|\s)(?:ee|[whqet]\.?r?)(?=\s|$)',
+        ).hasMatch(seq);
+        expect(
+          pitchOnly && RegExp(r'\beighth|\btriplet').hasMatch(text),
+          isFalse,
+          reason: '${f.path}: eighths/triplets need durations (C4:e, A2:t)',
+        );
       }
     });
   });

@@ -1,0 +1,79 @@
+{
+  "id": "gtr-s3-m10-03",
+  "title": { "en": "Moving power chords", "tr": "Power chord kaydırma" },
+  "goal": {
+    "en": "Moves between E5, G5 and A5 in quarter notes at ♩=80 without losing the shape or the beat.",
+    "tr": "E5, G5 ve A5 arasında dörtlüklerle ♩=80'de şekli ve vuruşu bozmadan geçer."
+  },
+  "explanation": [
+    {
+      "en": "A movable shape keeps its fingers locked. Only the arm moves along the neck.",
+      "tr": "Taşınır şekilde parmaklar kilitli kalır. Sap boyunca yalnız kol hareket eder."
+    },
+    {
+      "en": "G5 at fret 3 and A5 at fret 5 use the same shape, fingers 1 and 3. Slide it two frets without lifting it off the strings.",
+      "tr": "3. perdedeki G5 ile 5. perdedeki A5 aynı şekli kullanır: 1. ve 3. parmak. Şekli tellerden kaldırmadan iki perde kaydır."
+    },
+    {
+      "en": "Ease the pressure during the slide, then press again when you arrive. A pressed slide squeaks and slows you down.",
+      "tr": "Kayarken baskıyı gevşet, varınca yeniden bas. Basılı kaydırma gıcırdar ve seni yavaşlatır."
+    },
+    {
+      "en": "E5 uses open string 6. Keep fingers 1 and 3 in shape above the neck so G5 is ready.",
+      "tr": "E5 açık 6. teli kullanır. G5 hazır olsun diye 1. ve 3. parmağı şekliyle sapın üstünde tut."
+    },
+    {
+      "en": "Move on beat 4 of each bar so the new chord lands on beat 1.",
+      "tr": "Yeni akor 1. vuruşa düşsün diye her ölçünün 4. vuruşunda hareket et."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "E5, G5, A5 and G5, four quarter notes each, at ♩=80 and ♩=50, with click.",
+      "tr": "E5, G5, A5 ve G5, her biri dört dörtlük; ♩=80 ve ♩=50, klikle."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play four quarter notes on each chord with the click: E5, G5, A5, G5. Start at ♩=70 and move up to ♩=80. Slide between G5 and A5 without lifting the shape.",
+      "tr": "Klikle her akorda dört dörtlük çal: E5, G5, A5, G5. ♩=70'te başla, ♩=80'e çık. G5 ile A5 arasında şekli kaldırmadan kay."
+    },
+    "sequence": "4/4: E5 q q q q | G5 q q q q | A5 q q q q | G5 q q q q",
+    "tempo": { "open": 70, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The new chord sounded on beat 1.", "tr": "Yeni akor 1. vuruşta çaldı." },
+    { "en": "Fingers 1 and 3 kept the same shape during each slide.", "tr": "1. ve 3. parmak her kaydırmada aynı şekli korudu." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My shoulders and fretting hand stayed loose.", "tr": "Omuzlarım ve sol elim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The move starts too late. Begin the slide on beat 4 and keep the strumming hand moving.",
+        "tr": "Hareket geç başlıyor. Kaydırmaya 4. vuruşta başla ve sağ eli hareket ettirmeyi sürdür."
+      }
+    },
+    {
+      "error": { "en": "Different chord: a semitone off.", "tr": "Farklı akor: yarım ses kaymış." },
+      "fix": {
+        "en": "The slide stopped one fret short or long. Watch finger 1 and aim it at fret 3 or fret 5.",
+        "tr": "Kaydırma bir perde eksik ya da fazla durdu. 1. parmağa bak ve onu 3. ya da 5. perdeye hedefle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop only G5 and A5, two quarter notes each, at ♩=55, then add E5.",
+    "tr": "♩=55'te yalnız G5 ve A5'i, her biri iki dörtlük, döngüle; sonra E5'i ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

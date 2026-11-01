@@ -1,0 +1,122 @@
+{
+  "id": "gtr-s3-m12-03",
+  "title": {
+    "en": "Pattern p-i-m-a",
+    "tr": "p-i-m-a kalıbı"
+  },
+  "goal": {
+    "en": "Plays the p-i-m-a pattern in eighth notes on C and Am at ♩=60.",
+    "tr": "p-i-m-a kalıbını C ve Am'de sekizlik olarak ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "A fingerpicking pattern is a fixed finger order that repeats in every bar. The fretting hand holds the chord; the right hand plays it one string at a time.",
+      "tr": "Parmak kalıbı, her ölçüde tekrar eden sabit bir parmak sırasıdır. Sol el akoru tutar; sağ el onu tel tel çalar."
+    },
+    {
+      "en": "p-i-m-a: the thumb plays the bass, then i plays string 3, m string 2 and a string 1. Two rounds fill a bar of eighth notes.",
+      "tr": "p-i-m-a: başparmak bası çalar, sonra i 3. teli, m 2. teli, a 1. teli çalar. İki tur bir ölçü sekizliği doldurur."
+    },
+    {
+      "en": "C is x-3-2-0-1-0: p plays C3 on string 5. Am is x-0-2-2-1-0: p plays open A2 on string 5.",
+      "tr": "C x-3-2-0-1-0'dır: p 5. telde Do3'ü çalar. Am x-0-2-2-1-0'dır: p açık 5. telde La2'yi çalar."
+    },
+    {
+      "en": "Between C and Am only finger 3 moves: from string 5, fret 3 to string 3, fret 2. Fingers 1 and 2 stay.",
+      "tr": "C ile Am arasında yalnız 3. parmak oynar: 5. telin 3. perdesinden 3. telin 2. perdesine. 1. ve 2. parmak yerinde kalır."
+    },
+    {
+      "en": "Let all the notes ring. Keep the fretting fingers down for the whole bar.",
+      "tr": "Bütün notalar çınlasın. Sol el parmaklarını ölçü boyunca basılı tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "p-i-m-a in eighth notes, two bars of C and two bars of Am, with a click at ♩=60 and ♩=40.",
+      "tr": "Sekizlik p-i-m-a, iki ölçü C ve iki ölçü Am; klikle ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A2",
+      "A3"
+    ],
+    "task": {
+      "en": "Play p-i-m-a in eighth notes with the click: two bars of C, then two bars of Am. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Klikle sekizlik p-i-m-a çal: iki ölçü C, sonra iki ölçü Am. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "C3:e G3:e C4:e E4:e C3:e G3:e C4:e E4:e | C3:e G3:e C4:e E4:e C3:e G3:e C4:e E4:e | A2:e A3:e C4:e E4:e A2:e A3:e C4:e E4:e | A2:e A3:e C4:e E4:e A2:e A3:e C4:e E4:e",
+    "tempo": {
+      "open": 50,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "G1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each note rang without buzzing.",
+      "tr": "Her nota vızıltısız çaldı."
+    },
+    {
+      "en": "The new chord sounded on beat 1.",
+      "tr": "Yeni akor 1. vuruşta çaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "m played B3 instead of C4. Press finger 1 on string 2, fret 1, just behind the fret.",
+        "tr": "m, Do4 yerine Si3 çaldı. 1. parmağı 2. telin 1. perdesine, perdenin hemen arkasına bas."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Finger 3 is needed only for the bass C3. Move it to Am right after the last thumb note of the C bar.",
+        "tr": "3. parmak yalnız bas Do3 için gerekir. C ölçüsündeki son başparmak notasından hemen sonra onu Am'ye taşı."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Pluck a little firmer and keep the phone close to the guitar.",
+        "tr": "Biraz daha net çek ve telefonu gitara yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=40 and play p-i-m-a in quarter notes, one round per bar.",
+    "tr": "♩=40'a in ve p-i-m-a'yı dörtlük olarak, ölçü başına bir tur çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

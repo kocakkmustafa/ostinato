@@ -1,0 +1,81 @@
+{
+  "id": "gtr-s3-m10-12",
+  "title": { "en": "Power-chord checkpoint", "tr": "Power chord geçişi" },
+  "goal": {
+    "en": "Plays an original 16-bar piece joining palm-muted chugs, stops and syncopated power chords at ♩=100.",
+    "tr": "Palm mute sekizlikleri, durakları ve senkoplu power chord'ları birleştiren özgün 16 ölçülük parçayı ♩=100'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint joins the riff skills of this module in one original 16-bar piece, all downstrokes.",
+      "tr": "Bu geçiş, bu modülün riff becerilerini özgün 16 ölçülük bir parçada birleştirir; hepsi aşağı pena."
+    },
+    {
+      "en": "Bars 1–4 and 13–16: palm-muted E5 eighths, opened up for the held chords. Bars 5–8: two eighths and a stop, twice per bar.",
+      "tr": "1–4. ve 13–16. ölçüler: palm mute E5 sekizlikler, tutulan akorlarda açılır. 5–8. ölçüler: her ölçüde iki kez iki sekizlik ve bir durak."
+    },
+    {
+      "en": "Bars 9–12: the syncopated chords on the 'and' of beat 2, held over beat 3.",
+      "tr": "9–12. ölçüler: 2. vuruşun 've'sine düşen, 3. vuruşun üstünden tutulan senkoplu akorlar."
+    },
+    {
+      "en": "In bars 5–8, A5 and G5 are the string-six shapes at frets 5 and 3. Everywhere else A5 is the open shape x-0-2-x-x-x.",
+      "tr": "5–8. ölçülerde A5 ve G5, 6. teldeki 5. ve 3. perde şekilleridir. Diğer her yerde A5 açık şekildir: x-0-2-x-x-x."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE"],
+    "brief": {
+      "en": "The original 16 bars at ♩=100 and ♩=65, with a bass and drum loop that leaves the stops open.",
+      "tr": "Özgün 16 ölçü, ♩=100 ve ♩=65; durakları boş bırakan bas ve davul döngüsüyle."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A4"],
+    "task": {
+      "en": "Play the 16 bars with the accompaniment at ♩=100. Slower tempos are open for practice; the checkpoint passes at ♩=100. Headphones help the microphone hear only your guitar.",
+      "tr": "16 ölçüyü eşlikle ♩=100'de çal. Daha yavaş tempolar pratik için açık; geçiş ♩=100'de geçilir. Kulaklık, mikrofonun yalnız gitarını duymasına yardım eder."
+    },
+    "sequence": "4/4: E5 ee ee ee ee | E5 ee ee G5 h | E5 ee ee ee ee | E5 ee ee A5 h | E5 ee qr G5 ee qr | A5 ee qr G5 ee qr | E5 ee qr G5 ee qr | D5 q C5 q D5 h | E5 ee er G5 e~q q | A5 ee er C5 e~h | E5 ee er G5 e~q q | D5 q. C5 e~q D5 q | E5 ee ee ee ee | E5 ee ee G5 h | E5 ee ee A5 q C5 q | D5 q C5 q E5 q qr",
+    "tempo": { "open": 100, "target": 100 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Late where the sections change, at bars 5, 9 and 13. Plan the next shape during the last beat of the bar before.",
+        "tr": "Bölüm değişimlerinde, 5., 9. ve 13. ölçüde geç. Sonraki şekli bir önceki ölçünün son vuruşunda planla."
+      }
+    },
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": {
+        "en": "Loop bars 5–8 alone at ♩=70. Ease the fretting fingers and bring the palm down at each stop.",
+        "tr": "♩=70'te yalnız 5–8. ölçüleri döngüle. Her durakta sol el parmaklarını gevşet ve avucu tellere indir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Lower the accompaniment or use headphones.",
+        "tr": "Eşliğin sesini kıs ya da kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise each four-bar section alone at ♩=75, then join them two at a time.",
+    "tr": "Her dört ölçülük bölümü ♩=75'te ayrı çalış, sonra ikişer ikişer birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

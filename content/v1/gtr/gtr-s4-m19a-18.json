@@ -1,0 +1,72 @@
+{
+  "id": "gtr-s4-m19a-18",
+  "title": { "en": "Original acoustic piece", "tr": "Özgün akustik parça" },
+  "goal": {
+    "en": "Plays an original 24-bar piece at ♩=72 that joins Travis picking, legato and melody over bass.",
+    "tr": "Travis tekniğini, legatoyu ve bas üstünde melodiyi birleştiren özgün 24 ölçülük parçayı ♩=72'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint joins the track's main skills in one original 24-bar piece in C major, in three eight-bar sections.",
+      "tr": "Bu geçiş, kolun temel becerilerini Do majörde, sekizer ölçülük üç bölümden oluşan özgün 24 ölçülük bir parçada birleştirir."
+    },
+    {
+      "en": "Bars 1–8, section A: the p-i-p-m Travis pattern over C–Am–F–G, two bars per chord, with a pinch on beat 1 of every other bar.",
+      "tr": "1–8. ölçüler, A bölümü: C–Am–F–G üzerinde p-i-p-m Travis kalıbı, her akor iki ölçü, iki ölçüde bir 1. vuruşta çimdik."
+    },
+    {
+      "en": "Bars 9–16, section B: a melody over a thumb bass on beats 1 and 3, with hammer-ons and pull-offs from the legato figures. Bar 15 is Dm (xx0231); bar 16 brings back G.",
+      "tr": "9–16. ölçüler, B bölümü: 1. ve 3. vuruşta başparmak bası üstünde, legato figürlerinden çekiç ve çekmeli bir melodi. 15. ölçü Dm'dir (xx0231); 16. ölçü G'yi geri getirir."
+    },
+    {
+      "en": "Bars 17–24, section A again: one chord per bar with a pinch on every bar. Bar 23 splits F and G; the piece ends on a ringing C pinch.",
+      "tr": "17–24. ölçüler, yine A bölümü: ölçü başına bir akor, her ölçüde çimdik. 23. ölçü F ile G'yi böler; parça çalan bir C çimdiğiyle biter."
+    },
+    {
+      "en": "Learn each section on its own before you join them. Passing this checkpoint completes the Acoustic track lessons; the track test comes next.",
+      "tr": "Birleştirmeden önce her bölümü ayrı öğren. Bu geçiş, Akustik kol derslerini tamamlar; sırada kol testi var."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The 24-bar piece at ♩=72 and ♩=48, string-model synthesis; each section can be looped on its own.",
+      "tr": "24 ölçülük parça ♩=72 ve ♩=48, tel modeli sentezi; her bölüm ayrı döngüye alınabilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A2", "A3"],
+    "task": {
+      "en": "Play the 24 bars with the click at ♩=72 in eighth notes. A slash marks two notes plucked together; h marks a hammer-on and p a pull-off. The last C pinch rings for the whole bar.",
+      "tr": "24 ölçüyü klikle ♩=72'de sekizliklerle çal. Eğik çizgi birlikte çekilen iki notayı, h çekici, p çekmeyi gösterir. Son C çimdiği ölçünün tamamı boyunca çalsın."
+    },
+    "sequence": "C3/E4 C4 E3 E4 C3 C4 E3 E4 | C3 C4 E3 E4 C3 C4 E3 E4 | A2/E4 C4 E3 E4 A2 C4 E3 E4 | A2 C4 E3 E4 A2 C4 E3 E4 | F2/F4 C4 F3 F4 F2 C4 F3 F4 | F2 C4 F3 F4 F2 C4 F3 F4 | G2/G4 B3 D3 G4 G2 B3 D3 G4 | G2 B3 D3 G4 G2 B3 D3 G4 || A2 G3 h A3 C4 E3 G3 h A3 C4 | E2 G3 B3 h D4 E3 G3 D4 p B3 | A2 C4 p B3 G3 E3 C4 p B3 G3 | E2 G♯3 B3 E4 E3 G♯3 B3 G♯3 | A2 G3 h A3 C4 E3 G3 h A3 E4 | E2 G3 B3 h D4 E3 G3 D4 E4 | D3 A3 D4 F4 A2 A3 D4 F4 | G2 B3 D3 G4 G2 B3 D3 G4 || C3/E4 C4 E3 E4 C3 C4 E3 E4 | A2/E4 C4 E3 E4 A2 C4 E3 E4 | F2/F4 C4 F3 F4 F2 C4 F3 F4 | G2/G4 B3 D3 G4 G2 B3 D3 G4 | C3/E4 C4 E3 E4 C3 C4 E3 E4 | A2/E4 C4 E3 E4 A2 C4 E3 E4 | F2/F4 C4 F3 F4 G2/G4 B3 D3 G4 | C3/E4",
+    "tempo": { "open": 72, "target": 72 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "G1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": { "en": "The thumb stops at the section changes. Loop bars 8–9 and 16–17 until the bass runs straight through.", "tr": "Başparmak bölüm geçişlerinde duruyor. Bas kesintisiz akana kadar 8–9. ve 16–17. ölçüleri döngüye al." }
+    },
+    {
+      "error": { "en": "Couldn't hear the second note.", "tr": "İkinci notayı duyamadım." },
+      "fix": { "en": "A hammer-on in section B is too soft. Bring the finger down from higher, right behind the fret.", "tr": "B bölümündeki bir çekiç çok zayıf. Parmağı daha yukarıdan, perdenin hemen arkasına indir." }
+    },
+    {
+      "error": { "en": "Different note on F: F3 not heard.", "tr": "F'de farklı nota: Fa3 duyulmadı." },
+      "fix": { "en": "Finger 4 is not pressing string 4 at fret 3. Press it closer to the fret, or use the four-string F.", "tr": "4. parmak 4. teli 3. perdede basmıyor. Perdeye daha yakın bas ya da dört telli F kullan." }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise one section at a time at ♩=55, then join A and B, then play all 24 bars at ♩=72.",
+    "tr": "Her seferinde bir bölümü ♩=55'te çalış, sonra A ile B'yi birleştir, sonra 24 ölçünün tamamını ♩=72'de çal."
+  },
+  "minutes": 20,
+  "expertPending": true
+}
