@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "La pratique avec caméra est fermée dans cette version. L'accès à la caméra est réservé à l'observation de posture sur l'appareil ; la vidéo n'est ni sauvegardée ni envoyée.";
-"NSMicrophoneUsageDescription" = "L'accès au microphone permet d'observer une note de guitare pendant la pratique facultative. L'audio est traité sur cet appareil en mémoire temporaire, sans sauvegarde ni envoi.";
+"NSCameraUsageDescription" = "L'accès à la caméra sert à vérifier la position de ta main et de ton poignet dans les leçons qui le demandent. Les images sont traitées uniquement sur cet appareil ; elles ne sont ni enregistrées ni envoyées.";
+"NSMicrophoneUsageDescription" = "L'accès au microphone sert à entendre les notes que tu joues pendant la pratique et l'accordage. L'audio est traité sur cet appareil et n'est pas envoyé. Si tu actives l'écoute de ton propre enregistrement, il reste uniquement sur cet appareil et est supprimé à la fin de la séance.";
