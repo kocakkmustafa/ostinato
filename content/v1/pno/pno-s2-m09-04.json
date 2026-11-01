@@ -1,0 +1,78 @@
+{
+  "id": "pno-s2-m09-04",
+  "title": { "en": "Reading in G position", "tr": "Sol pozisyonunda okuma" },
+  "goal": {
+    "en": "Reads four new four-bar lines in G position and plays each one once at ♩=60 without hearing it first.",
+    "tr": "Sol konumunda dört yeni dört ölçülük diziyi okur ve her birini önceden dinlemeden ♩=60'ta bir kez çalar."
+  },
+  "explanation": [
+    {
+      "en": "G position: right hand thumb on G4, so the fingers cover G4 A4 B4 C5 D5. Left hand finger 5 on G2, so the fingers cover G2 A2 B2 C3 D3.",
+      "tr": "Sol konumu: sağ el başparmağı Sol4'te, parmaklar Sol4 La4 Si4 Do5 Re5'i kapsar. Sol el 5. parmağı Sol2'de, parmaklar Sol2 La2 Si2 Do3 Re3'ü kapsar."
+    },
+    {
+      "en": "New anchors help here. Treble clef: G4 is on line 2 and D5 on line 4. Bass clef: G2 is on the bottom line and D3 on the middle line.",
+      "tr": "Burada yeni dayanaklar işe yarar. Sol anahtarı: Sol4 2. çizgide, Re5 4. çizgidedir. Fa anahtarı: Sol2 alt çizgide, Re3 orta çizgidedir."
+    },
+    {
+      "en": "Before you play, scan the line: the clef, the first note, the long notes and the rests. Then clap the rhythm once.",
+      "tr": "Çalmadan önce diziye göz at: anahtarı, ilk notayı, uzun notaları ve susları bul. Sonra ritmi bir kez alkışla."
+    },
+    {
+      "en": "Keep going after a slip. Look one bar ahead, not at your hand.",
+      "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak."
+    },
+    {
+      "en": "Each line is new and is not played to you before you try it.",
+      "tr": "Her dizi yenidir ve denemenden önce sana çalınmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=60; each line is played by piano synthesis only after your attempt, to compare.",
+      "tr": "♩=60'ta klik; her dizi yalnız denemenden sonra, karşılaştırman için piyano sentezinde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Read four new four-bar lines, one after another. For each line: place the hand in G position, take 30 seconds to scan it and clap its rhythm, then play it once with the click at ♩=60. The lines use G position in either hand, in 4/4, with quarters, halves, a dotted half, eighth pairs and rests.",
+      "tr": "Dört yeni dört ölçülük diziyi art arda oku. Her dizide: eli Sol konumuna yerleştir, 30 saniye göz at ve ritmini alkışla, sonra ♩=60'ta klikle bir kez çal. Diziler iki elden birinde Sol konumunu, 4/4'ü; dörtlük, ikilik, noktalı ikilik, sekizlik çiftleri ve susları kullanır."
+    },
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I placed the hand in G position before I scanned.", "tr": "Göz atmadan önce eli Sol konumuna yerleştirdim." },
+    { "en": "I scanned each line and clapped its rhythm before playing.", "tr": "Çalmadan önce her diziye göz attım ve ritmini alkışladım." },
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "I looked at the music, not at my hands.", "tr": "Ellerime değil, notaya baktım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a fifth low.", "tr": "Farklı nota, bir beşli alçak." },
+      "fix": {
+        "en": "The right hand stayed in C position. Before each line, put the thumb on G4 and check it against line 2.",
+        "tr": "Sağ el Do konumunda kalmış. Her diziden önce başparmağı Sol4'e koy ve 2. çizgiyle karşılaştır."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Read ahead during the long notes: while you hold one, find the next.",
+        "tr": "Uzun notalarda ileriyi oku: birini tutarken sonrakini bul."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read new lines at ♩=50 first, then come back to ♩=60.",
+    "tr": "Önce yeni dizileri ♩=50'de oku, sonra ♩=60'a dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

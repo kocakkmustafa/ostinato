@@ -1,0 +1,82 @@
+{
+  "id": "pno-s2-m09-06",
+  "title": { "en": "Ledger lines around middle C", "tr": "Orta Do çevresinde ek çizgiler" },
+  "goal": {
+    "en": "Names the notes from A3 to E4 written on ledger lines in both clefs and plays each one with the matching hand.",
+    "tr": "İki anahtarda ek çizgilerle yazılan La3–Mi4 arası notaları adlandırır ve her birini uygun elle çalar."
+  },
+  "explanation": [
+    {
+      "en": "A ledger line is a short extra line for a note above or below the staff. Count it like a staff line: line, space, line.",
+      "tr": "Ek çizgi, portenin üstündeki ya da altındaki bir nota için kısa ek bir çizgidir. Onu porte çizgisi gibi say: çizgi, aralık, çizgi."
+    },
+    {
+      "en": "Treble clef, going down: D4 hangs just below the staff, C4 is on one ledger line, B3 hangs below it and A3 sits on a second ledger line.",
+      "tr": "Sol anahtarı, aşağı doğru: Re4 portenin hemen altında asılı durur, Do4 bir ek çizgidedir, Si3 onun altında asılıdır, La3 ikinci ek çizgidedir."
+    },
+    {
+      "en": "Bass clef, going up: B3 sits just above the staff, C4 is on one ledger line, D4 sits above it and E4 is on a second ledger line.",
+      "tr": "Fa anahtarı, yukarı doğru: Si3 portenin hemen üstünde durur, Do4 bir ek çizgidedir, Re4 onun üstünde durur, Mi4 ikinci ek çizgidedir."
+    },
+    {
+      "en": "The same key can be written in either clef. Middle C below the treble staff and middle C above the bass staff are one key.",
+      "tr": "Aynı tuş iki anahtarda da yazılabilir. Sol anahtarı portesinin altındaki orta Do ile fa anahtarı portesinin üstündeki orta Do aynı tuştur."
+    },
+    {
+      "en": "Do not count every ledger line from scratch. Start from middle C, the note you already know, and step from there.",
+      "tr": "Her ek çizgiyi baştan sayma. Zaten bildiğin orta Do'dan başla ve oradan adım at."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each note in part 2 is played once after your attempt, piano synthesis.",
+      "tr": "2. bölümdeki her nota, denemenden sonra bir kez çalınır; piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "Part 1: answer 8 questions; name the ledger-line note shown on the grand staff. Part 2: read six notes and play each one. Treble-clef notes with the right hand, bass-clef notes with the left. In order: C4 below the treble staff, B3 below the treble staff, D4 above the bass staff, A3 below the treble staff, E4 above the bass staff, C4 above the bass staff. Move the hand to each note as needed. No click; take your time.",
+      "tr": "1. bölüm: 8 soruyu cevapla; büyük portede gösterilen ek çizgili notayı adlandır. 2. bölüm: altı notayı oku ve her birini çal. Sol anahtarındaki notaları sağ elle, fa anahtarındakileri sol elle çal. Sırasıyla: sol anahtarı portesinin altında Do4, sol anahtarı portesinin altında Si3, fa anahtarı portesinin üstünde Re4, sol anahtarı portesinin altında La3, fa anahtarı portesinin üstünde Mi4, fa anahtarı portesinin üstünde Do4. Eli gerektikçe her notaya taşı. Klik yok; acele etme."
+    },
+    "sequence": "C4 B3 D4 A3 E4 C4",
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "note_name",
+      "count": 8,
+      "params": { "clef": "grand", "range": ["A3", "E4"], "ledgerLines": true, "landmarks": ["C4"] }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I checked the clef before naming each note.", "tr": "Her notayı adlandırmadan önce anahtara baktım." },
+    { "en": "I started from middle C and stepped from there.", "tr": "Orta Do'dan başladım ve oradan adım attım." },
+    { "en": "I played treble-clef notes with the right hand and bass-clef notes with the left.", "tr": "Sol anahtarındaki notaları sağ elle, fa anahtarındakileri sol elle çaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a third off.", "tr": "Farklı nota, bir üçlü kaymış." },
+      "fix": {
+        "en": "A note on the second ledger line was read as the first. Find middle C on one ledger line, then step two more.",
+        "tr": "İkinci ek çizgideki nota birinci gibi okunmuş. Orta Do'yu tek ek çizgide bul, sonra iki adım daha at."
+      }
+    },
+    {
+      "error": { "en": "Different answer, in the other clef's reading.", "tr": "Farklı cevap, diğer anahtara göre okunmuş." },
+      "fix": {
+        "en": "Below the treble staff the notes go down from C4; above the bass staff they go up from C4. Check the clef first.",
+        "tr": "Sol anahtarı portesinin altında notalar Do4'ten aşağı, fa anahtarı portesinin üstünde Do4'ten yukarı gider. Önce anahtara bak."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read only middle C in both clefs first, then add one note above and one below it.",
+    "tr": "Önce yalnız iki anahtardaki orta Do'yu oku, sonra onun bir üstündeki ve bir altındaki notayı ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

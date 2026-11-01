@@ -1,0 +1,78 @@
+{
+  "id": "pno-s2-m09-03",
+  "title": { "en": "Reading in C position", "tr": "Do pozisyonunda okuma" },
+  "goal": {
+    "en": "Reads four new four-bar lines in C position and plays each one once at ♩=60 without hearing it first.",
+    "tr": "Do konumunda dört yeni dört ölçülük diziyi okur ve her birini önceden dinlemeden ♩=60'ta bir kez çalar."
+  },
+  "explanation": [
+    {
+      "en": "Sight-reading means playing a line the first time you see it. You get better at it by reading many short new lines, not by repeating one.",
+      "tr": "Deşifre, bir diziyi ilk gördüğünde çalmak demektir. Bunu tek diziyi tekrarlayarak değil, çok sayıda kısa yeni dizi okuyarak geliştirirsin."
+    },
+    {
+      "en": "Before you play, scan the line: the clef, the first note, the long notes and the rests. Then clap the rhythm once.",
+      "tr": "Çalmadan önce diziye göz at: anahtarı, ilk notayı, uzun notaları ve susları bul. Sonra ritmi bir kez alkışla."
+    },
+    {
+      "en": "In C position each finger has one key: right hand C4 to G4, left hand C3 to G3. Read steps and skips, and let the fingers follow.",
+      "tr": "Do konumunda her parmağın bir tuşu vardır: sağ el Do4'ten Sol4'e, sol el Do3'ten Sol3'e. Basamak ve atlamaları oku, parmaklar izlesin."
+    },
+    {
+      "en": "Keep going after a slip. Look one bar ahead, not at your hand.",
+      "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak."
+    },
+    {
+      "en": "Each line is new and is not played to you before you try it.",
+      "tr": "Her dizi yenidir ve denemenden önce sana çalınmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=60; each line is played by piano synthesis only after your attempt, to compare.",
+      "tr": "♩=60'ta klik; her dizi yalnız denemenden sonra, karşılaştırman için piyano sentezinde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Read four new four-bar lines, one after another. For each line: take 30 seconds to scan it and clap its rhythm, then play it once with the click at ♩=60. The lines use C position in either hand, in 4/4, with quarters, halves, a dotted half, eighth pairs and rests.",
+      "tr": "Dört yeni dört ölçülük diziyi art arda oku. Her dizide: 30 saniye göz at ve ritmini alkışla, sonra ♩=60'ta klikle bir kez çal. Diziler iki elden birinde Do konumunu, 4/4'ü; dörtlük, ikilik, noktalı ikilik, sekizlik çiftleri ve susları kullanır."
+    },
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I scanned each line and clapped its rhythm before playing.", "tr": "Çalmadan önce her diziye göz attım ve ritmini alkışladım." },
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "I looked at the music, not at my hands.", "tr": "Ellerime değil, notaya baktım." },
+    { "en": "My line matched the reference that played after my attempt.", "tr": "Dizim, denememden sonra çalınan referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one step high.", "tr": "Farklı nota, bir basamak yüksek." },
+      "fix": {
+        "en": "Find the clef anchor again and count lines and spaces from it.",
+        "tr": "Anahtar dayanağını yeniden bul ve çizgi ile aralıkları oradan say."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Read ahead during the long notes: while you hold one, find the next.",
+        "tr": "Uzun notalarda ileriyi oku: birini tutarken sonrakini bul."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read new lines at ♩=50 first, then come back to ♩=60.",
+    "tr": "Önce yeni dizileri ♩=50'de oku, sonra ♩=60'a dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

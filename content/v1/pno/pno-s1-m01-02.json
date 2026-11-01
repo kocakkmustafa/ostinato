@@ -1,0 +1,95 @@
+{
+  "id": "pno-s1-m01-02",
+  "title": { "en": "Hand shape and wrists", "tr": "El şekli ve bilekler" },
+  "goal": {
+    "en": "Places both hands on the keys with a rounded hand and a level wrist, and holds the position for 30 seconds.",
+    "tr": "İki elini yuvarlak el ve düz bilekle tuşlara yerleştirir ve bu konumu 30 saniye korur."
+  },
+  "explanation": [
+    {
+      "en": "Let your arms hang loose at your sides for a moment. Notice the gentle curve your fingers take on their own: that is your hand shape.",
+      "tr": "Kollarını bir an iki yanına gevşekçe bırak. Parmakların kendiliğinden aldığı hafif kıvrımı fark et: el şeklin budur."
+    },
+    {
+      "en": "Bring that shape to the keys. Rest the fingertips on the keys and let the thumb touch with its side edge.",
+      "tr": "Bu şekli tuşlara getir. Parmak uçlarını tuşlara koy; başparmak tuşa yan kenarıyla değsin."
+    },
+    {
+      "en": "Keep the wrist about level with the back of the hand and the forearm. It does not drop below the keys and does not rise high.",
+      "tr": "Bileği elin sırtı ve önkolla aşağı yukarı aynı hizada tut. Bilek tuşların altına düşmesin, yukarı da kalkmasın."
+    },
+    {
+      "en": "Keep the wrist mobile, not locked. Do not force a fixed hand shape; hands differ, and a natural curve is enough.",
+      "tr": "Bilek hareketli kalsın, kilitlenmesin. Sabit bir el şeklini zorlama; eller farklıdır, doğal bir kıvrım yeter."
+    },
+    {
+      "en": "The camera asks for permission when this lesson starts. The image is processed on your phone; it is not saved and not sent.",
+      "tr": "Kamera izni bu ders başlarken istenir. Görüntü telefonunda işlenir; kaydedilmez, gönderilmez."
+    },
+    {
+      "en": "The camera gives no score. It only shows a hint, and says \"I can't see\" when the image is not clear enough. It watches the wrist and forearm line; the finger curve is on your checklist.",
+      "tr": "Kamera puan vermez. Yalnız ipucu gösterir; görüntü yeterince net değilse \"göremedim\" der. Bilek ve önkol hizasına bakar; parmak kıvrımı kontrol listende."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; drawings show a rounded hand on the keys from the side and from above.",
+      "tr": "Referans ses yok; çizimler tuşlardaki yuvarlak eli yandan ve üstten gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["K"],
+    "engineSteps": ["A7"],
+    "task": {
+      "en": "Place both hands on the keys in view of the camera, with the fingertips resting on five neighbouring white keys each, and hold for 30 seconds. Follow any hint about the wrist, then tick the checklist.",
+      "tr": "İki elini kameranın gördüğü yerde tuşlara koy; her elin parmak uçları yan yana beş beyaz tuşta dursun ve 30 saniye koru. Bilekle ilgili ipucu çıkarsa uygula, sonra kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Hold the hand position for 30 seconds and tick every checklist item. The camera only gives hints.",
+        "tr": "El konumunu 30 saniye koru ve kontrol listesinin her maddesini işaretle. Kamera yalnız ipucu verir."
+      }
+    }
+  },
+  "fallback": "camera",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My fingers kept a natural curve and the fingertips touched the keys.", "tr": "Parmaklarım doğal kıvrımını korudu, parmak uçlarım tuşlara değdi." },
+    { "en": "My thumb rested on its side edge, not flat.", "tr": "Başparmağım düz değil, yan kenarıyla duruyordu." },
+    { "en": "My wrists stayed about level with my forearms.", "tr": "Bileklerim önkollarımla aşağı yukarı aynı hizada kaldı." },
+    { "en": "My shoulders and wrists stayed loose.", "tr": "Omuzlarım ve bileklerim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Hint: wrist below the keys.", "tr": "İpucu: bilek tuşların altında." },
+      "fix": {
+        "en": "Raise the bench a little or sit a little further back, then let the wrist float level with the forearm.",
+        "tr": "Bankı biraz yükselt ya da biraz geriye otur; sonra bilek önkolla aynı hizada dursun."
+      }
+    },
+    {
+      "error": { "en": "Hint: wrist raised high.", "tr": "İpucu: bilek yukarı kalkmış." },
+      "fix": {
+        "en": "Drop your shoulders, breathe out and let the wrist settle until it is level with the back of the hand.",
+        "tr": "Omuzlarını indir, nefes ver ve bilek elin sırtıyla aynı hizaya gelene kadar yerine otursun."
+      }
+    },
+    {
+      "error": { "en": "I can't see.", "tr": "Göremedim." },
+      "fix": {
+        "en": "Bring the phone closer so both hands and forearms fill the frame, with light in front of you.",
+        "tr": "Telefonu iki elin ve önkolların kadrajı dolduracak kadar yaklaştır; ışık önünde olsun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Without a camera, use the checklist with a mirror. Start with one hand at a time.",
+    "tr": "Kamera yoksa kontrol listesini aynayla kullan. Önce tek elle başla."
+  },
+  "legacy": "V: piano.foundations.hands_and_wrists + piano.foundations.arms",
+  "minutes": 10,
+  "expertPending": true
+}

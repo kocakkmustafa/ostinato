@@ -1,0 +1,75 @@
+{
+  "id": "pno-s2-m08-07",
+  "title": { "en": "Left-hand fifths under a melody", "tr": "Melodi altında sol el beşlileri" },
+  "goal": {
+    "en": "Holds a left-hand fifth through each bar while the right hand plays an original four-bar melody.",
+    "tr": "Sağ el özgün dört ölçülük melodiyi çalarken her ölçü boyunca sol elde bir beşliyi tutar."
+  },
+  "explanation": [
+    {
+      "en": "A fifth is two notes five letter names apart, such as C and G. In C position, left fingers 5 and 1 play C3 and G3 together.",
+      "tr": "Beşli, aralarında beş nota adı olan iki notadır; Do ile Sol gibi. Do konumunda sol elin 5. ve 1. parmakları Do3 ile Sol3'ü birlikte çalar."
+    },
+    {
+      "en": "Play the fifth on beat 1 and hold it through the bar. The right hand plays the melody above it.",
+      "tr": "Beşliyi 1. vuruşta çal ve ölçü boyunca tut. Sağ el melodiyi onun üstünde çalar."
+    },
+    {
+      "en": "Keep the fifth soft. The melody should sound louder than the left hand.",
+      "tr": "Beşliyi yumuşak tut. Melodi sol elden daha gür duyulmalı."
+    },
+    {
+      "en": "The microphone result for notes that start together is experimental and does not block your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Birlikte başlayan notalar için mikrofon sonucu deneyseldir ve ilerlemeni engellemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four-bar melody over held C3+G3 fifths, at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Tutulan Do3+Sol3 beşlileri üstünde özgün dört ölçülük melodi, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M~", "MIDI"],
+    "engineSteps": ["A6p"],
+    "task": {
+      "en": "Play the four bars with the click at ♩=60. Each bar: left hand C3+G3 (5+1) on beat 1, held for the whole bar. Right hand: E4 D4 E4 F4 | G4 for two beats, F4 E4 | D4 E4 F4 D4 | C4 for four beats.",
+      "tr": "Dört ölçüyü ♩=60'ta klikle çal. Her ölçüde sol el 1. vuruşta Do3+Sol3 (5+1), bütün ölçü boyunca tutulur. Sağ el: Mi4 Re4 Mi4 Fa4 | iki vuruş Sol4, Fa4 Mi4 | Re4 Mi4 Fa4 Re4 | dört vuruş Do4."
+    },
+    "sequence": "C3/G3/E4 D4 E4 F4 | C3/G3/G4:h F4 E4 | C3/G3/D4 E4 F4 D4 | C3/G3/C4:w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "experimental",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both notes of the fifth sounded together.", "tr": "Beşlinin iki notası birlikte duyuldu." },
+    { "en": "The fifth kept sounding for the whole bar.", "tr": "Beşli bütün ölçü boyunca sürdü." },
+    { "en": "The melody was louder than the fifth.", "tr": "Melodi beşliden daha gürdü." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The melody note on beat 1 is lost under the fifth. Play the fifth softer and the melody note a little stronger.",
+        "tr": "1. vuruştaki melodi notası beşlinin altında kayboluyor. Beşliyi daha yumuşak, melodi notasını biraz daha güçlü çal."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The right hand waits for the fifth. Place both hands on their keys before beat 1 and press together.",
+        "tr": "Sağ el beşliyi bekliyor. 1. vuruştan önce iki eli tuşlarına yerleştir ve birlikte bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the left-hand fifths alone for four bars with the click, then add the right hand in bar 1 only.",
+    "tr": "Önce sol el beşlilerini dört ölçü boyunca klikle tek başına çal, sonra yalnız 1. ölçüde sağ eli ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

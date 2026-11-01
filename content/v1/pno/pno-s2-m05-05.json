@@ -1,0 +1,116 @@
+{
+  "id": "pno-s2-m05-05",
+  "title": {
+    "en": "A pentascale",
+    "tr": "La pentaskal"
+  },
+  "goal": {
+    "en": "Plays the A major pentascale hands separately at ♩=70, with C♯ under finger 3 in both hands.",
+    "tr": "La majör pentaskalı eller ayrı ♩=70'te çalar; Do♯ iki elde de 3. parmağın altındadır."
+  },
+  "explanation": [
+    {
+      "en": "The major pentascale pattern is whole step, whole step, half step, whole step. The half step lies between notes 3 and 4.",
+      "tr": "Majör pentaskal kalıbı tam, tam, yarım, tam'dır. Yarım ses 3. ve 4. notalar arasındadır."
+    },
+    {
+      "en": "From A, the pattern needs C♯. B to C is only a half step; C♯ makes the whole step, and C♯–D is the half step.",
+      "tr": "La'dan başlayınca kalıp Do♯ ister. Si'den Do'ya yalnız yarım ses var; Do♯ tam sesi kurar, Do♯–Re da yarım ses olur."
+    },
+    {
+      "en": "Right hand: A4 B4 C♯5 D5 E5 with fingers 1-2-3-4-5. Left hand: A2 B2 C♯3 D3 E3 with fingers 5-4-3-2-1. In both hands finger 3 plays C♯.",
+      "tr": "Sağ el: La4 Si4 Do♯5 Re5 Mi5, parmaklar 1-2-3-4-5. Sol el: La2 Si2 Do♯3 Re3 Mi3, parmaklar 5-4-3-2-1. İki elde de Do♯'yi 3. parmak çalar."
+    },
+    {
+      "en": "C♯ is the black key just to the right of C: the first key of the group of two.",
+      "tr": "Do♯, Do'nun hemen sağındaki siyah tuştur: ikili grubun ilk tuşu."
+    },
+    {
+      "en": "A is between the second and third black keys of the group of three. Find A2 there before you start the left hand.",
+      "tr": "La, üçlü siyah tuş grubunun ikinci ve üçüncü tuşları arasındadır. Sol ele başlamadan La2'yi orada bul."
+    },
+    {
+      "en": "When the position has a black key, move the whole hand a little forward into the keys so that no finger has to reach.",
+      "tr": "Konumda siyah tuş varsa, hiçbir parmak uzanmak zorunda kalmasın diye bütün eli biraz tuşların içine doğru ilerlet."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The A pentascale up and down, right hand then left hand, with a click, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "La pentaskalı çıkış ve iniş, önce sağ el sonra sol el, klikle, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "With the click at ♩=70, play the right-hand line, then the left-hand line. Use the half rest to place the left hand.",
+      "tr": "Klikle ♩=70'te önce sağ el dizisini, sonra sol el dizisini çal. Sol eli ikilik susta yerleştir."
+    },
+    "sequence": "4/4: A4 B4 C♯5 D5 | E5 D5 C♯5 B4 | A4:h hr | A2 B2 C♯3 D3 | E3 D3 C♯3 B2 | A2:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Finger 3 played C♯ every time, going up and coming down.",
+      "tr": "3. parmak çıkarken de inerken de her seferinde Do♯ çaldı."
+    },
+    {
+      "en": "Each finger stayed over its own key.",
+      "tr": "Her parmak kendi tuşunun üstünde kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "You played C instead of C♯. Finger 3 sits on the black key; keep it there on the way down too.",
+        "tr": "Do♯ yerine Do çaldın. 3. parmak siyah tuşun üstünde durur; inişte de orada kalsın."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "A2 and B2 were too soft. Play from the arm, and move the phone closer to the left end of the keyboard.",
+        "tr": "La2 ve Si2 çok hafifti. Koldan çal ve telefonu klavyenin sol ucuna yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "In each hand, play only B C♯ D C♯ B at ♩=50, then add A and E.",
+    "tr": "Her elde ♩=50'de yalnız Si Do♯ Re Do♯ Si çal, sonra La ve Mi'yi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

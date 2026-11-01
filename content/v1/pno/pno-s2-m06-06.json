@@ -1,0 +1,117 @@
+{
+  "id": "pno-s2-m06-06",
+  "title": {
+    "en": "D major",
+    "tr": "Re majör"
+  },
+  "goal": {
+    "en": "Plays the D major scale one octave, hands separate, with F♯ and C♯ in place, at ♩=60.",
+    "tr": "Re majör gamı bir oktav, eller ayrı, Fa♯ ve Do♯ notalarını yerinde çalarak ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "D major has two sharps: F♯ and C♯.",
+      "tr": "Re majörün iki diyezi vardır: Fa♯ ve Do♯."
+    },
+    {
+      "en": "Right hand D4 to D5: 1-2-3-1-2-3-4-5. Finger 3 plays F♯4, the thumb passes under to G4, and finger 4 plays C♯5.",
+      "tr": "Sağ el Re4'ten Re5'e: 1-2-3-1-2-3-4-5. Fa♯4'ü 3. parmak çalar, başparmak altından Sol4'e geçer, Do♯5'i 4. parmak çalar."
+    },
+    {
+      "en": "Left hand D3 to D4: 5-4-3-2-1-3-2-1. Finger 3 plays F♯3, the thumb plays A3, and finger 2 plays C♯4.",
+      "tr": "Sol el Re3'ten Re4'e: 5-4-3-2-1-3-2-1. Fa♯3'ü 3. parmak, La3'ü başparmak, Do♯4'ü 2. parmak çalar."
+    },
+    {
+      "en": "Here the right thumb passes under finger 3 while it is on a black key (F♯4 to G4). That helps: the black key lifts the hand and leaves room for the thumb.",
+      "tr": "Burada sağ başparmak, siyah tuştaki 3. parmağın altından geçer (Fa♯4'ten Sol4'e). Bu işi kolaylaştırır: siyah tuş eli kaldırır ve başparmağa yer bırakır."
+    },
+    {
+      "en": "Say the key before you start: 'D major, F sharp and C sharp'.",
+      "tr": "Başlamadan tonu söyle: 'Re majör, Fa diyez ve Do diyez'."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "D4 to D5 and back, an empty bar, then D3 to D4 and back, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.",
+      "tr": "Klikle dörtlüklerle Re4'ten Re5'e ve geri, bir boş ölçü, sonra Re3'ten Re4'e ve geri, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the right hand from D4 to D5 and back. Use the empty bar to move to the left hand, then play D3 to D4 and back. One note per beat at ♩=60.",
+      "tr": "Sağ elle Re4'ten Re5'e çık ve geri in. Boş ölçüde sol ele geç, sonra Re3'ten Re4'e çık ve geri in. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "D4 E4 F♯4 G4 | A4 B4 C♯5 D5 | C♯5 B4 A4 G4 | F♯4 E4 D4:h | wr | D3 E3 F♯3 G3 | A3 B3 C♯4 D4 | C♯4 B3 A3 G3 | F♯3 E3 D3:h",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I played both sharps every time, going up and coming down.",
+      "tr": "İki diyezi de her seferinde, çıkarken ve inerken çaldım."
+    },
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "C♯ or F♯ became a white key. There are two sharps; look for both black keys before you start.",
+        "tr": "Do♯ ya da Fa♯ beyaz tuşa dönüştü. İki diyez var; başlamadan iki siyah tuşu da gözünle bul."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "In the left hand, finger 3 is late crossing from A3 to B3. Loop A3 B3 C♯4 D4 with 1-3-2-1 at ♩=50.",
+        "tr": "Sol elde 3. parmak La3'ten Si3'e geç geçiyor. La3 Si3 Do♯4 Re4'ü 1-3-2-1 ile ♩=50'de döngüle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each hand alone at ♩=50, only up the scale, then add the way down.",
+    "tr": "Her eli ayrı ayrı ♩=50'de, yalnız gamın çıkışını çal, sonra inişi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

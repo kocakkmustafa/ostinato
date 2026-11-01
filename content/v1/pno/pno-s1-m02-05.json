@@ -1,0 +1,113 @@
+{
+  "id": "pno-s1-m02-05",
+  "title": {
+    "en": "Steady pulse and rests",
+    "tr": "Düzenli vuruş ve sus"
+  },
+  "goal": {
+    "en": "Plays four bars of notes and rests at ♩=60 and lifts off the key on every rest.",
+    "tr": "Nota ve sus içeren dört ölçüyü ♩=60'ta çalar, her susta tuştan kalkar."
+  },
+  "explanation": [
+    {
+      "en": "In 4/4, count 1 2 3 4. A quarter note lasts one beat, a half note two, a whole note four.",
+      "tr": "4/4 ölçüde 1 2 3 4 say. Dörtlük bir, ikilik iki, birlik dört vuruş sürer."
+    },
+    {
+      "en": "A rest is counted silence, not an extra pause. A quarter rest lasts one beat, a half rest two.",
+      "tr": "Sus sayılan sessizliktir, fazladan ara değildir. Dörtlük sus bir, ikilik sus iki vuruş sürer."
+    },
+    {
+      "en": "On a rest, lift the finger so the key comes up and the sound stops. Keep the fingertip on the key surface.",
+      "tr": "Susta parmağı kaldır; tuş yukarı çıkar ve ses durur. Parmak ucu tuş yüzeyinde kalsın."
+    },
+    {
+      "en": "Keep counting through the rest. A bar line starts the next group at 1 without adding silence.",
+      "tr": "Sus boyunca saymayı sürdür. Ölçü çizgisi sessizlik eklemeden sonraki grubu 1'den başlatır."
+    },
+    {
+      "en": "Before you start, count one silent bar: 1 2 3 4.",
+      "tr": "Başlamadan önce sessiz bir ölçü say: 1 2 3 4."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The four bars of notes and rests with a click, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Klikle nota ve suslu dört ölçü, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the four bars with the click at ♩=60. Say the count aloud and lift the finger on every rest.",
+      "tr": "Dört ölçüyü klikle ♩=60'ta çal. Sayımı sesli söyle ve her susta parmağı kaldır."
+    },
+    "sequence": "4/4: C4 D4 E4 qr | E4 D4 C4 qr | D4 qr E4 qr | C4:h hr",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My count continued through the silence.",
+      "tr": "Sessizlikte sayımım sürdü."
+    },
+    {
+      "en": "The sound stopped on every rest.",
+      "tr": "Her susta ses durdu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "You are rushing after a rest. Speak the count and tap it before you touch the keys. Restart at a bar line.",
+        "tr": "Sustan sonra hızlanıyorsun. Tuşlara geçmeden sayarak vur. Ölçü başında yeniden başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The rest grew longer than one beat. Count it like a note: the next note comes on the next click.",
+        "tr": "Sus bir vuruştan uzun sürdü. Onu nota gibi say: sonraki nota bir sonraki klikte gelir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap the four bars first and stay silent on each rest, then play them at ♩=50.",
+    "tr": "Önce dört ölçüyü alkışla ve her susta sessiz kal, sonra ♩=50'de çal."
+  },
+  "legacy": "R: piano-04",
+  "minutes": 10,
+  "expertPending": true
+}

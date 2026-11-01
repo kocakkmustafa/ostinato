@@ -1,0 +1,111 @@
+{
+  "id": "pno-s2-m07-10",
+  "title": {
+    "en": "Triads across the hands",
+    "tr": "Eller arasında üçlü"
+  },
+  "goal": {
+    "en": "Plays four triads with the root in the left hand and the third and fifth in the right hand, one note at a time, at ♩=70.",
+    "tr": "Dört üçlüyü kök sol elde, üçlü ve beşli sağ elde olacak şekilde, notaları tek tek ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Split the triad between the hands: the left hand plays the root low, the right hand plays the third and the fifth.",
+      "tr": "Üçlüyü eller arasında paylaştır: sol el kökü pesten, sağ el üçlüyü ve beşliyi çalar."
+    },
+    {
+      "en": "The left hand stays in C position: C3 with finger 5, F3 with finger 2, G3 with finger 1.",
+      "tr": "Sol el Do konumunda kalır: Do3 5. parmakla, Fa3 2. parmakla, Sol3 1. parmakla."
+    },
+    {
+      "en": "The right hand uses fingers 3 and 5, with the thumb resting lightly over the root: E4–G4 for C, A4–C5 for F, B4–D5 for G.",
+      "tr": "Sağ el 3. ve 5. parmakları kullanır, başparmak kökün üstünde hafifçe durur: C için Mi4–Sol4, F için La4–Do5, G için Si4–Re5."
+    },
+    {
+      "en": "Keep the left-hand key down through the bar. The bass rings under the right hand.",
+      "tr": "Sol el tuşunu ölçü boyunca basılı tut. Bas, sağ elin altında çınlasın."
+    },
+    {
+      "en": "Each new note starts alone, so the microphone measures the whole line.",
+      "tr": "Her yeni nota tek başına başlar; bu yüzden mikrofon dizinin tamamını ölçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "C, F, G and C split between the hands (left-hand root held, right hand 3-5-3), at ♩=70 and at ♩=50, piano synthesis.",
+      "tr": "C, F, G ve C eller arasında (sol el kökü tutar, sağ el 3-5-3), ♩=70 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Each bar: the left hand plays the root and holds it, then the right hand plays third, fifth, third. Play C, F, G and C at ♩=70 with the click. In the last bar, hold the fifth for two beats.",
+      "tr": "Her ölçüde sol el kökü çalar ve tutar, sonra sağ el üçlü, beşli, üçlü çalar. C, F, G ve C'yi ♩=70'te klikle çal. Son ölçüde beşliyi iki vuruş tut."
+    },
+    "sequence": "4/4: C3 E4 G4 E4 | F3 A4 C5 A4 | G3 B4 D5 B4 | C3 E4 G4:h",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The left-hand note kept sounding through the bar.",
+      "tr": "Sol el notası ölçü boyunca çınladı."
+    },
+    {
+      "en": "My right-hand thumb rested over the root without pressing.",
+      "tr": "Sağ el başparmağım basmadan kökün üstünde durdu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The right hand waits for the left. Bring the right hand above its next keys before beat 1.",
+        "tr": "Sağ el solu bekliyor. 1. vuruştan önce sağ eli sonraki tuşlarının üstüne getir."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "The right hand did not move with the chord. For F and G, shift the whole right hand so finger 3 lands on A4 or B4.",
+        "tr": "Sağ el akorla birlikte taşınmadı. F ve G için bütün sağ eli kaydır ki 3. parmak La4'e ya da Si4'e düşsün."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the left-hand roots alone for one round, then add only the right-hand third, then the fifth.",
+    "tr": "Bir tur yalnız sol el köklerini çal, sonra yalnız sağ el üçlüsünü, ardından beşliyi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

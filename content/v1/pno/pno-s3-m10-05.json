@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m10-05",
+  "title": {
+    "en": "D major, two octaves",
+    "tr": "İki oktav Re majör"
+  },
+  "goal": {
+    "en": "Plays the D major scale over two octaves, hands separate, at ♩=60.",
+    "tr": "Re majör gamı iki oktav, eller ayrı, ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "D major has two sharps: F♯ and C♯.",
+      "tr": "Re majörün iki diyezi vardır: Fa♯ ve Do♯."
+    },
+    {
+      "en": "Right hand D4 to D6: 1-2-3-1-2-3-4, 1-2-3-1-2-3-4-5. Finger 3 plays each F♯ and finger 4 plays each C♯.",
+      "tr": "Sağ el Re4'ten Re6'ya: 1-2-3-1-2-3-4, 1-2-3-1-2-3-4-5. Her Fa♯ notasını 3. parmak, her Do♯ notasını 4. parmak çalar."
+    },
+    {
+      "en": "Left hand D2 to D4: 5-4-3-2-1-3-2-1-4-3-2-1-3-2-1. Finger 3 plays F♯2 and F♯3; finger 2 plays C♯3 and C♯4.",
+      "tr": "Sol el Re2'den Re4'e: 5-4-3-2-1-3-2-1-4-3-2-1-3-2-1. Fa♯2 ve Fa♯3'ü 3. parmak, Do♯3 ve Do♯4'ü 2. parmak çalar."
+    },
+    {
+      "en": "The black keys under fingers 3 and 4 lift the hand a little. That leaves room for the thumb to pass under.",
+      "tr": "3. ve 4. parmağın altındaki siyah tuşlar eli biraz kaldırır. Bu, başparmağın altından geçmesine yer açar."
+    },
+    {
+      "en": "Say the key before you start: 'D major, F sharp and C sharp'.",
+      "tr": "Başlamadan tonu söyle: 'Re majör, Fa diyez ve Do diyez'."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "D4 to D6 and back, an empty bar, then D2 to D4 and back, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.",
+      "tr": "Klikle dörtlüklerle Re4'ten Re6'ya ve geri, bir boş ölçü, sonra Re2'den Re4'e ve geri, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the right hand from D4 to D6 and back. Use the empty bar to move to the left hand, then play D2 to D4 and back. One note per beat at ♩=60.",
+      "tr": "Sağ elle Re4'ten Re6'ya çık ve geri in. Boş ölçüde sol ele geç, sonra Re2'den Re4'e çık ve geri in. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "D4 E4 F♯4 G4 | A4 B4 C♯5 D5 | E5 F♯5 G5 A5 | B5 C♯6 D6 C♯6 | B5 A5 G5 F♯5 | E5 D5 C♯5 B4 | A4 G4 F♯4 E4 | D4:w | wr | D2 E2 F♯2 G2 | A2 B2 C♯3 D3 | E3 F♯3 G3 A3 | B3 C♯4 D4 C♯4 | B3 A3 G3 F♯3 | E3 D3 C♯3 B2 | A2 G2 F♯2 E2 | D2:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I played both sharps every time, going up and coming down.",
+      "tr": "İki diyezi de her seferinde, çıkarken ve inerken çaldım."
+    },
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "C♯ or F♯ became a white key. There are two sharps; look for both black keys before you start.",
+        "tr": "Do♯ ya da Fa♯ beyaz tuşa dönüştü. İki diyez var; başlamadan iki siyah tuşu da gözünle bul."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "In the left hand, finger 4 is late crossing over from D3 to E3. Loop C♯3 D3 E3 F♯3 with 2-1-4-3 at ♩=50.",
+        "tr": "Sol elde 4. parmak Re3'ten Mi3'e geç geçiyor. Do♯3 Re3 Mi3 Fa♯3'ü 2-1-4-3 ile ♩=50'de döngüle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each hand over one octave first, as in the one-octave lesson. Then add the second octave at ♩=50.",
+    "tr": "Önce her eli tek oktavlık dersteki gibi bir oktav çal. Sonra ♩=50'de ikinci oktavı ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

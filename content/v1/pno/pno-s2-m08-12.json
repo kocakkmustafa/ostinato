@@ -1,0 +1,75 @@
+{
+  "id": "pno-s2-m08-12",
+  "title": { "en": "Beyer: a first study", "tr": "Beyer: ilk etüt" },
+  "goal": {
+    "en": "Plays an early two-hand study from Ferdinand Beyer's Op. 101 with a steady pulse at ♩=72.",
+    "tr": "Ferdinand Beyer'in Op. 101'inden erken bir iki elli etüdü ♩=72'de düzenli vuruşla çalar."
+  },
+  "explanation": [
+    {
+      "en": "Ferdinand Beyer (1803–1863) was a German pianist and teacher. His Vorschule im Klavierspiel, Op. 101, is a beginner's method still used in many countries.",
+      "tr": "Ferdinand Beyer (1803–1863), Alman bir piyanist ve öğretmendi. Vorschule im Klavierspiel, Op. 101 adlı başlangıç yöntemi bugün de birçok ülkede kullanılır."
+    },
+    {
+      "en": "This lesson uses one early study from Op. 101 for both hands.",
+      "tr": "Bu ders Op. 101'den iki el için erken bir etüdü kullanır."
+    },
+    {
+      "en": "In some bars both hands start a note together. The microphone measures those notes experimentally, and they do not count against you. All other notes are measured as usual.",
+      "tr": "Bazı ölçülerde iki el bir notaya birlikte başlar. Mikrofon bu notaları deneysel ölçer ve aleyhine sayılmaz. Diğer bütün notalar her zamanki gibi ölçülür."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The selected Beyer study from the Ostinato edition, piano synthesis, at ♩=72 and at ♩=50.",
+      "tr": "Ostinato düzenlemesinden seçilen Beyer etüdü, piyano sentezi, ♩=72 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play each hand alone once with the click. Then join the hands in two-bar sections, and play the study from start to finish at ♩=72.",
+      "tr": "Her eli klikle bir kez ayrı çal. Sonra elleri iki ölçülük bölümlerle birleştir ve etüdü baştan sona ♩=72'de çal."
+    },
+    "tempo": { "open": 72, "target": 72 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "Notes meant to start together started together.", "tr": "Birlikte başlaması gereken notalar birlikte başladı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=72, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=72'de geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Ferdinand Beyer (1803–1863), Vorschule im Klavierspiel, Op. 101 (Mainz: Schott, mid-19th century): one early two-hand study, to be selected. Notes where both hands start together are measured experimentally (A6p) and do not count; all other notes with A6. NEEDS TRANSCRIPTION from a public-domain edition scan; the study number, scan id and measured sequence are not yet written. Notation, fingering and tempo by Ostinato. Composer died 1863; public domain, legal review pending.",
+  "minutes": 15,
+  "expertPending": true
+}

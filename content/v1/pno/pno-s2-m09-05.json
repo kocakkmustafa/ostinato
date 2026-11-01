@@ -1,0 +1,78 @@
+{
+  "id": "pno-s2-m09-05",
+  "title": { "en": "Reading with hand changes", "tr": "El değiştirerek okuma" },
+  "goal": {
+    "en": "Reads four new four-bar lines that pass between the hands and plays each one once at ♩=60 without hearing it first.",
+    "tr": "Eller arasında geçen dört yeni dört ölçülük diziyi okur ve her birini önceden dinlemeden ♩=60'ta bir kez çalar."
+  },
+  "explanation": [
+    {
+      "en": "In these lines the melody moves between the staves. Notes on the upper staff are for the right hand, notes on the lower staff for the left.",
+      "tr": "Bu dizilerde ezgi porteler arasında gezer. Üst portedeki notalar sağ el, alt portedeki notalar sol el içindir."
+    },
+    {
+      "en": "Both hands stay in C position the whole time: left hand C3 to G3, right hand C4 to G4. The hands take turns and never start a note together.",
+      "tr": "İki el de baştan sona Do konumunda kalır: sol el Do3'ten Sol3'e, sağ el Do4'ten Sol4'e. Eller sırayla çalar ve hiçbir zaman aynı anda nota başlatmaz."
+    },
+    {
+      "en": "While one hand plays, hold the other just above its first key. Then the change costs no time.",
+      "tr": "Bir el çalarken diğerini ilk tuşunun hemen üstünde tut. Böylece el değişimi zaman kaybettirmez."
+    },
+    {
+      "en": "In your scan, mark where the music crosses to the other staff. That is where the next hand must be ready.",
+      "tr": "Göz atarken müziğin diğer porteye geçtiği yeri işaretle. Sonraki elin hazır olması gereken yer orasıdır."
+    },
+    {
+      "en": "Each line is new and is not played to you before you try it.",
+      "tr": "Her dizi yenidir ve denemenden önce sana çalınmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=60; each line is played by piano synthesis only after your attempt, to compare.",
+      "tr": "♩=60'ta klik; her dizi yalnız denemenden sonra, karşılaştırman için piyano sentezinde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Read four new four-bar lines, one after another. For each line: take 30 seconds to scan it, find every change of staff and clap the rhythm, then play it once with the click at ♩=60. Both hands stay in C position. The hand can change at a bar line or in the middle of a bar.",
+      "tr": "Dört yeni dört ölçülük diziyi art arda oku. Her dizide: 30 saniye göz at, her porte değişimini bul ve ritmi alkışla, sonra ♩=60'ta klikle bir kez çal. İki el de Do konumunda kalır. El, ölçü çizgisinde ya da ölçünün ortasında değişebilir."
+    },
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found every change of staff before I played.", "tr": "Çalmadan önce her porte değişimini buldum." },
+    { "en": "The waiting hand was ready above its first key.", "tr": "Bekleyen el ilk tuşunun üstünde hazırdı." },
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "I looked at the music, not at my hands.", "tr": "Ellerime değil, notaya baktım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The hand change is slow. While one hand plays, hold the other just above its first key.",
+        "tr": "El değişimi yavaş. Bir el çalarken diğerini ilk tuşunun hemen üstünde tut."
+      }
+    },
+    {
+      "error": { "en": "Different note, an octave off.", "tr": "Farklı nota, bir oktav kaymış." },
+      "fix": {
+        "en": "You read the right letter on the other staff. Go back to the G4 and F3 anchors and middle C.",
+        "tr": "Doğru harfi diğer portede okudun. Sol4 ve Fa3 dayanaklarına ve orta Do'ya dön."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read new lines at ♩=50 first, then come back to ♩=60.",
+    "tr": "Önce yeni dizileri ♩=50'de oku, sonra ♩=60'a dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

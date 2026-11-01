@@ -1,0 +1,117 @@
+{
+  "id": "pno-s2-m06-09",
+  "title": {
+    "en": "Evenness",
+    "tr": "Eşitlik"
+  },
+  "goal": {
+    "en": "Plays the C major scale hands separate at ♩=70 with even spacing and even loudness.",
+    "tr": "Do majör gamı eller ayrı ♩=70'te eşit aralıkla ve eşit gürlükte çalar."
+  },
+  "explanation": [
+    {
+      "en": "An even scale sounds like one line: every note the same length and the same loudness.",
+      "tr": "Eşit bir gam tek çizgi gibi duyulur: her nota aynı uzunlukta ve aynı gürlükte."
+    },
+    {
+      "en": "After you play, the screen shows two numbers. Timing spread: how much the gaps between notes differ, in milliseconds. Loudness spread: how much the notes differ in level, in decibels.",
+      "tr": "Çaldıktan sonra ekran iki sayı gösterir. Zaman yayılımı: notalar arasındaki boşlukların ne kadar farklı olduğu, milisaniye olarak. Gürlük yayılımı: notaların düzeyinin ne kadar farklı olduğu, desibel olarak."
+    },
+    {
+      "en": "Smaller numbers mean a more even scale. They are for you; the lesson passes on the usual note and timing marks.",
+      "tr": "Küçük sayı daha eşit bir gam demektir. Bu sayılar senin için; ders olağan nota ve zaman ölçütleriyle geçilir."
+    },
+    {
+      "en": "The bumps usually sit at the crossings: the note after the thumb lands late or too loud. The screen marks the notes that stand out.",
+      "tr": "Pürüzler çoğunlukla geçişlerdedir: başparmaktan sonraki nota geç ya da fazla gür düşer. Ekran öne çıkan notaları işaretler."
+    },
+    {
+      "en": "Play from the arm, not from a single finger: the same small weight into every key.",
+      "tr": "Tek parmaktan değil koldan çal: her tuşa aynı küçük ağırlık."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C4 to C5 and back, an empty bar, then C3 to C4 and back, perfectly even, quarter notes with a click, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "Klikle dörtlüklerle Do4'ten Do5'e ve geri, bir boş ölçü, sonra Do3'ten Do4'e ve geri, tam eşit, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A6"
+    ],
+    "task": {
+      "en": "Play the right hand from C4 to C5 and back. Use the empty bar to move to the left hand and play C3 to C4 and back. One note per beat at ♩=70. Read the two spread numbers, then play again and try to lower them.",
+      "tr": "Sağ elle Do4'ten Do5'e çık ve geri in. Boş ölçüde sol ele geç ve Do3'ten Do4'e çık ve geri in. ♩=70'te vuruş başına bir nota. İki yayılım sayısını oku, sonra yeniden çal ve onları düşürmeye çalış."
+    },
+    "sequence": "C4 D4 E4 F4 | G4 A4 B4 C5 | B4 A4 G4 F4 | E4 D4 C4:h | wr | C3 D3 E3 F3 | G3 A3 B3 C4 | B3 A3 G3 F3 | E3 D3 C3:h",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "Fingers 4 and 5 sounded as clear as fingers 1–3.",
+      "tr": "4. ve 5. parmaklar 1–3. parmaklar kadar net çaldı."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The note after the crossing rushes. Give the crossing note its full beat. Loop bars 1–2 at ♩=60.",
+        "tr": "Geçişten sonraki nota acele ediyor. Geçiş notasına tam vuruşunu ver. 1–2. ölçüleri ♩=60'ta döngüle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Finger 5 pressed too lightly. Let it sink to the bottom of the key.",
+        "tr": "5. parmak çok hafif bastı. Tuşun dibine kadar insin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only bars 1–2 of each hand (the way up) at ♩=60 and watch the two numbers, then add the way down.",
+    "tr": "♩=60'ta her elin yalnız 1–2. ölçülerini (çıkışı) çal ve iki sayıyı izle, sonra inişi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,109 @@
+{
+  "id": "pno-s2-m07-08",
+  "title": {
+    "en": "Left-hand C, F and G7",
+    "tr": "Sol elde C, F ve G7"
+  },
+  "goal": {
+    "en": "Plays C, F, G7 and C as left-hand blocked chords, moving only the fingers that change.",
+    "tr": "C, F, G7 ve C'yi sol elde, yalnız değişen parmakları kıpırdatarak blok akor olarak çalar."
+  },
+  "explanation": [
+    {
+      "en": "In C major the main chords are I (C), IV (F) and V7 (G7).",
+      "tr": "Do majörde ana akorlar I (C), IV (F) ve V7 (G7)'dir."
+    },
+    {
+      "en": "A close left-hand pattern avoids big jumps: C is C3 E3 G3 with fingers 5-3-1; F is C3 F3 A3 with 5-2-1; G7 is B2 F3 G3 with 5-2-1.",
+      "tr": "Yakın bir sol el düzeni büyük atlamaları önler: C Do3 Mi3 Sol3, parmaklar 5-3-1; F Do3 Fa3 La3, 5-2-1; G7 Si2 Fa3 Sol3, 5-2-1."
+    },
+    {
+      "en": "C3 is shared between C and F; G3 is shared between C and G7. Keep a shared note under the same finger and move only the fingers that change.",
+      "tr": "Do3, C ile F arasında ortaktır; Sol3, C ile G7 arasında ortaktır. Ortak nota aynı parmakta kalsın, yalnız değişen parmakları kıpırdat."
+    },
+    {
+      "en": "This G7 leaves out D. B and F are the notes that pull back to C.",
+      "tr": "Bu G7'de Re yoktur. Si ve Fa, C'ye geri çeken notalardır."
+    },
+    {
+      "en": "The microphone result here is experimental: it does not lock your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Buradaki mikrofon sonucu deneyseldir: ilerlemeni kilitlemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Left-hand C, F, G7 and C blocked in close position, one whole-note chord per bar, slow, piano synthesis.",
+      "tr": "Sol elde yakın konumda C, F, G7 ve C blok, ölçü başına bir birlik akor, yavaş, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M~",
+      "MIDI"
+    ],
+    "engineSteps": [
+      "A6p"
+    ],
+    "task": {
+      "en": "Left hand alone. Play one chord per bar and hold it for four beats: C, F, G7, C. Move only the fingers that change. Count a slow, steady beat; there is no target tempo.",
+      "tr": "Sol el ayrı. Ölçü başına bir akor çal ve dört vuruş tut: C, F, G7, C. Yalnız değişen parmakları kıpırdat. Yavaş ve düzenli say; hedef tempo yok."
+    },
+    "sequence": "4/4: C3/E3/G3:w | C3/F3/A3:w | B2/F3/G3:w | C3/E3/G3:w",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "experimental",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Shared notes stayed under the same finger.",
+      "tr": "Ortak notalar aynı parmakta kaldı."
+    },
+    {
+      "en": "The new chord sounded on beat 1.",
+      "tr": "Yeni akor 1. vuruşta çaldı."
+    },
+    {
+      "en": "All three notes of each blocked chord started together.",
+      "tr": "Her blok akorun üç notası birlikte başladı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different chord: one note not heard.",
+        "tr": "Farklı akor: bir nota duyulmadı."
+      },
+      "fix": {
+        "en": "Finger 5 on the bass note is too light. Let the hand lean slightly toward the little finger as you press.",
+        "tr": "Bastaki 5. parmak hafif kalıyor. Basarken eli serçe parmağa doğru hafifçe yasla."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Soft or rolled chords are hard to separate. Play a little louder and start all three fingers together.",
+        "tr": "Hafif ya da dağınık akorlar zor ayrılır. Biraz daha güçlü çal, üç parmağı birlikte başlat."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise C to F only, then C to G7, before playing the whole line.",
+    "tr": "Bütün diziden önce yalnız C–F'yi, sonra C–G7'yi çalış."
+  },
+  "legacy": "R: piano-22",
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,127 @@
+{
+  "id": "pno-s2-m07-11",
+  "title": {
+    "en": "Triads checkpoint",
+    "tr": "Üçlüler geçişi"
+  },
+  "goal": {
+    "en": "Plays six broken triads in C and the C inversion chain at ♩=80.",
+    "tr": "Do'da altı kırık üçlüyü ve C çevrim zincirini ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "Bars 1–6 climb through the white-key triads: C, Dm, Em, F, G, Am. Use fingers 1-3-5 throughout.",
+      "tr": "1–6. ölçüler beyaz tuş üçlülerinden yukarı çıkar: C, Dm, Em, F, G, Am. Hep 1-3-5. parmakları kullan."
+    },
+    {
+      "en": "Bars 7–10 are the inversion chain: C, C6 with fingers 1-2-5, C64, then C an octave up.",
+      "tr": "7–10. ölçüler çevrim zinciridir: C, 1-2-5. parmaklarla C6, C64, sonra bir oktav yukarıda C."
+    },
+    {
+      "en": "Listen for the third. C, F and G are major; Dm, Em and Am are minor.",
+      "tr": "Üçlüyü dinle. C, F ve G majör; Dm, Em ve Am minördür."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    },
+    {
+      "en": "The blocked part is optional and does not count: after the line, play the six triads blocked if you like.",
+      "tr": "Blok bölüm isteğe bağlıdır ve sayılmaz: diziden sonra istersen altı üçlüyü blok çal."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The ten-bar line (six triads, then the inversion chain) at ♩=80 and at ♩=55, piano synthesis with click.",
+      "tr": "On ölçülük dizi (altı üçlü, sonra çevrim zinciri), ♩=80 ve ♩=55, klikli piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand. Play the ten-bar line with the click at ♩=80. In each bar play three notes bottom to top, then rest on beat 4. In the last bar, hold G5 for two beats. Practise slower first if you like; the checkpoint counts at ♩=80.",
+      "tr": "Sağ el. On ölçülük diziyi ♩=80'de klikle çal. Her ölçüde üç notayı alttan üste çal, sonra 4. vuruşta sus. Son ölçüde Sol5'i iki vuruş tut. İstersen önce yavaş çalış; geçiş ♩=80'de sayılır."
+    },
+    "sequence": "4/4: C4 E4 G4 qr | D4 F4 A4 qr | E4 G4 B4 qr | F4 A4 C5 qr | G4 B4 D5 qr | A4 C5 E5 qr | C4 E4 G4 qr | E4 G4 C5 qr | G4 C5 E5 qr | C5 E5 G5:h",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used 1-2-5 only for C6.",
+      "tr": "1-2-5'i yalnız C6'da kullandım."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "I kept counting through the rests.",
+      "tr": "Suslarda da saymayı sürdürdüm."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The hand arrives late after the rest. Move during the rest itself, not on the next beat.",
+        "tr": "El sustan sonra geç geliyor. Taşınmayı sonraki vuruşta değil, susun içinde yap."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "A minor triad got a major third. In Dm, Em and Am the middle note is a white key: F4, G4, C5.",
+        "tr": "Bir minör üçlü majör üçlü aldı. Dm, Em ve Am'de orta nota beyaz tuştur: Fa4, Sol4, Do5."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "In C6 finger 5 fell on B4 instead of C5. The top of a first inversion is a sixth above the bottom.",
+        "tr": "C6'da 5. parmak Do5 yerine Si4'e düştü. Birinci çevrimin üst notası alt notanın altılı üstündedir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–6 and bars 7–10 as two separate lines at ♩=60, then join them.",
+    "tr": "1–6. ve 7–10. ölçüleri ♩=60'ta iki ayrı dizi olarak çal, sonra birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

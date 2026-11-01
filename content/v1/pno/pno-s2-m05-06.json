@@ -1,0 +1,116 @@
+{
+  "id": "pno-s2-m05-06",
+  "title": {
+    "en": "E pentascale",
+    "tr": "Mi pentaskal"
+  },
+  "goal": {
+    "en": "Plays the E major pentascale hands separately at ♩=70, with F♯ and G♯ in place.",
+    "tr": "Mi majör pentaskalı eller ayrı ♩=70'te Fa♯ ve Sol♯ yerinde olarak çalar."
+  },
+  "explanation": [
+    {
+      "en": "The major pentascale pattern is whole step, whole step, half step, whole step. The half step lies between notes 3 and 4.",
+      "tr": "Majör pentaskal kalıbı tam, tam, yarım, tam'dır. Yarım ses 3. ve 4. notalar arasındadır."
+    },
+    {
+      "en": "From E, the pattern needs two black keys: E F♯ G♯ A B. G♯–A is the half step.",
+      "tr": "Mi'den başlayınca kalıp iki siyah tuş ister: Mi Fa♯ Sol♯ La Si. Sol♯–La yarım sestir."
+    },
+    {
+      "en": "Right hand: E4 F♯4 G♯4 A4 B4 with fingers 1-2-3-4-5; fingers 2 and 3 play black keys. Left hand: E3 F♯3 G♯3 A3 B3 with fingers 5-4-3-2-1; fingers 4 and 3 play black keys.",
+      "tr": "Sağ el: Mi4 Fa♯4 Sol♯4 La4 Si4, parmaklar 1-2-3-4-5; siyah tuşları 2. ve 3. parmak çalar. Sol el: Mi3 Fa♯3 Sol♯3 La3 Si3, parmaklar 5-4-3-2-1; siyah tuşları 4. ve 3. parmak çalar."
+    },
+    {
+      "en": "F♯ and G♯ are the first two black keys of the group of three. Finger 3 always plays G♯, the middle one.",
+      "tr": "Fa♯ ve Sol♯, üçlü grubun ilk iki siyah tuşudur. Ortadaki Sol♯'yi her zaman 3. parmak çalar."
+    },
+    {
+      "en": "When the position has a black key, move the whole hand a little forward into the keys so that no finger has to reach.",
+      "tr": "Konumda siyah tuş varsa, hiçbir parmak uzanmak zorunda kalmasın diye bütün eli biraz tuşların içine doğru ilerlet."
+    },
+    {
+      "en": "Hands separate: play the right hand first, then the left. In the left hand the fingers go 5-4-3-2-1 on the way up.",
+      "tr": "Eller ayrı: önce sağ el, sonra sol el çalar. Sol elde yukarı çıkarken parmaklar 5-4-3-2-1 sırasıyla gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The E pentascale up and down, right hand then left hand, with a click, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "Mi pentaskalı çıkış ve iniş, önce sağ el sonra sol el, klikle, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "With the click at ♩=70, play the right-hand line, then the left-hand line. Use the half rest to place the left hand.",
+      "tr": "Klikle ♩=70'te önce sağ el dizisini, sonra sol el dizisini çal. Sol eli ikilik susta yerleştir."
+    },
+    "sequence": "4/4: E4 F♯4 G♯4 A4 | B4 A4 G♯4 F♯4 | E4:h hr | E3 F♯3 G♯3 A3 | B3 A3 G♯3 F♯3 | E3:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Finger 3 played G♯ every time, going up and coming down.",
+      "tr": "3. parmak çıkarken de inerken de her seferinde Sol♯ çaldı."
+    },
+    {
+      "en": "Each finger stayed over its own key.",
+      "tr": "Her parmak kendi tuşunun üstünde kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "You played G instead of G♯. Keep finger 3 on the black key, next to the finger on F♯.",
+        "tr": "Sol♯ yerine Sol çaldın. 3. parmağı Fa♯'deki parmağın yanında, siyah tuşta tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The black key was played too lightly. Take it to the bottom with the weight of the hand.",
+        "tr": "Siyah tuş çok hafif çalındı. Elin ağırlığıyla onu dibe kadar indir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "In each hand, play only F♯ G♯ A G♯ F♯ at ♩=50, then add E and B.",
+    "tr": "Her elde ♩=50'de yalnız Fa♯ Sol♯ La Sol♯ Fa♯ çal, sonra Mi ve Si'yi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

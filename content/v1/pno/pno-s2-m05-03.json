@@ -1,0 +1,116 @@
+{
+  "id": "pno-s2-m05-03",
+  "title": {
+    "en": "F pentascale",
+    "tr": "Fa pentaskal"
+  },
+  "goal": {
+    "en": "Plays the F major pentascale hands separately at ♩=70, with B♭ under finger 4 in the right hand and finger 2 in the left.",
+    "tr": "Fa majör pentaskalı eller ayrı ♩=70'te çalar; Si♭ sağ elde 4., sol elde 2. parmağın altındadır."
+  },
+  "explanation": [
+    {
+      "en": "A pentascale is the first five notes of a scale: one finger on each key.",
+      "tr": "Pentaskal bir gamın ilk beş notasıdır: her tuşta bir parmak."
+    },
+    {
+      "en": "The major pentascale pattern is whole step, whole step, half step, whole step. The half step lies between notes 3 and 4.",
+      "tr": "Majör pentaskal kalıbı tam, tam, yarım, tam'dır. Yarım ses 3. ve 4. notalar arasındadır."
+    },
+    {
+      "en": "From F, the pattern needs B♭. A to B would be a whole step; B♭ makes the half step.",
+      "tr": "Fa'dan başlayınca kalıp Si♭ ister. La'dan Si'ye tam ses olurdu; Si♭ yarım sesi kurar."
+    },
+    {
+      "en": "Right hand: F4 G4 A4 B♭4 C5 with fingers 1-2-3-4-5; finger 4 plays the black key. Left hand: F3 G3 A3 B♭3 C4 with fingers 5-4-3-2-1; finger 2 plays the black key.",
+      "tr": "Sağ el: Fa4 Sol4 La4 Si♭4 Do5, parmaklar 1-2-3-4-5; siyah tuşu 4. parmak çalar. Sol el: Fa3 Sol3 La3 Si♭3 Do4, parmaklar 5-4-3-2-1; siyah tuşu 2. parmak çalar."
+    },
+    {
+      "en": "When the position has a black key, move the whole hand a little forward into the keys so that no finger has to reach.",
+      "tr": "Konumda siyah tuş varsa, hiçbir parmak uzanmak zorunda kalmasın diye bütün eli biraz tuşların içine doğru ilerlet."
+    },
+    {
+      "en": "Hands separate: play the right hand first, then the left. In the left hand the fingers go 5-4-3-2-1 on the way up.",
+      "tr": "Eller ayrı: önce sağ el, sonra sol el çalar. Sol elde yukarı çıkarken parmaklar 5-4-3-2-1 sırasıyla gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The F pentascale up and down, right hand then left hand, with a click, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "Fa pentaskalı çıkış ve iniş, önce sağ el sonra sol el, klikle, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "With the click at ♩=70, play the right-hand line, then the left-hand line. Use the half rest to place the left hand.",
+      "tr": "Klikle ♩=70'te önce sağ el dizisini, sonra sol el dizisini çal. Sol eli ikilik susta yerleştir."
+    },
+    "sequence": "4/4: F4 G4 A4 B♭4 | C5 B♭4 A4 G4 | F4:h hr | F3 G3 A3 B♭3 | C4 B♭3 A3 G3 | F3:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "B♭ was the only black key I played.",
+      "tr": "Çaldığım tek siyah tuş Si♭'ydi."
+    },
+    {
+      "en": "Each finger stayed over its own key.",
+      "tr": "Her parmak kendi tuşunun üstünde kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "You played B instead of B♭. Take the black key just to the left of B.",
+        "tr": "Si♭ yerine Si çaldın. Si'nin hemen solundaki siyah tuşa bas."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The black key was played too lightly. Take it to the bottom with the weight of the hand.",
+        "tr": "Siyah tuş çok hafif çalındı. Elin ağırlığıyla onu dibe kadar indir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "In each hand, play only A B♭ C B♭ A at ♩=50, then add F and G.",
+    "tr": "Her elde ♩=50'de yalnız La Si♭ Do Si♭ La çal, sonra Fa ve Sol'ü ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}
