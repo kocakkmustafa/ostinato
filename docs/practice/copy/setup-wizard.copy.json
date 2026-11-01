@@ -1,5 +1,5 @@
 {
- "note": "Setup wizard UI copy (F4.2). EN+TR source pairs; ids not yet in lib/app/app_message_ids.dart, the other 12 catalogs are missing. Check: python3 tool/build_message_ids.py --pending docs/practice/copy",
+ "note": "Setup wizard UI copy (F4.2). EN+TR source pairs; ids in lib/app/app_message_ids.dart and all 14 catalogs (2026-11-01). Check: python3 tool/build_message_ids.py --pending docs/practice/copy",
  "pairs": [
   {
    "en": "Back",

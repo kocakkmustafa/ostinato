@@ -69,4 +69,68 @@ void main() {
       }
     }
   });
+
+  group('translation coverage (backlog closed 2026-11-01)', () {
+    Map<String, dynamic> catalog(String tag) =>
+        (jsonDecode(File('assets/l10n/$tag.json').readAsStringSync())
+                as Map<String, dynamic>)['messages']
+            as Map<String, dynamic>;
+
+    List<UiCopy> sourcePairs() {
+      final pairs = <UiCopy>{};
+      void walk(Object? v) {
+        if (v is Map) {
+          if (v['en'] is String && v['tr'] is String) {
+            pairs.add((v['en'] as String, v['tr'] as String));
+          }
+          v.values.forEach(walk);
+        } else if (v is List) {
+          v.forEach(walk);
+        }
+      }
+
+      for (final root in ['content/v1', 'content/ui', 'docs/practice/copy']) {
+        for (final f in Directory(root).listSync(recursive: true)) {
+          if (f is File && f.path.endsWith('.json')) {
+            walk(jsonDecode(f.readAsStringSync()));
+          }
+        }
+      }
+      return pairs.toList();
+    }
+
+    test('all 14 catalogs have the same keys as the id table', () {
+      final ids = appMessageIds.values.toSet();
+      for (final tag in supportedLanguageTags) {
+        final keys = catalog(tag).keys.toSet();
+        expect(ids.difference(keys), isEmpty, reason: '$tag lacks ids');
+        expect(keys.difference(ids), isEmpty, reason: '$tag has stray keys');
+      }
+    });
+
+    test('every lesson and UI source pair is translated in 14 languages, '
+        'with the same placeholders', () {
+      final pairs = sourcePairs();
+      expect(pairs.length, greaterThan(2000));
+      final placeholder = RegExp(r'\{\w+\}');
+      List<String> names(String s) =>
+          placeholder.allMatches(s).map((m) => m[0]!).toList()..sort();
+      final catalogs = {
+        for (final tag in supportedLanguageTags) tag: catalog(tag),
+      };
+      for (final pair in pairs) {
+        final id = appMessageIds[pair];
+        expect(id, isNotNull, reason: 'no id: ${pair.$1}');
+        for (final MapEntry(key: tag, value: messages) in catalogs.entries) {
+          final text = messages[id];
+          expect(text, isA<String>(), reason: '$tag $id');
+          expect(
+            names(text as String),
+            names(pair.$1),
+            reason: '$tag $id placeholders',
+          );
+        }
+      }
+    });
+  });
 }

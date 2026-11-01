@@ -1,5 +1,5 @@
 {
-  "$about": "F5.2 weekly goal card copy (lib/app/retention/retention_copy.dart). EN+TR reviewed source pairs; ids via tool/build_message_ids.py --pending content/ui. The other 12 locales are pending translation, so the ids are not yet in lib/app/app_message_ids.dart.",
+  "$about": "F5.2 weekly goal card copy (lib/app/retention/retention_copy.dart). EN+TR reviewed source pairs; ids via tool/build_message_ids.py --pending content/ui. All 14 catalogs carry them (translation backlog closed 2026-11-01).",
   "messages": [
     {
       "id": "kicker",
