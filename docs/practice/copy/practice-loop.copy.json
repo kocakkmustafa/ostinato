@@ -198,10 +198,6 @@
    "tr": "Puanın değil, mikrofonun takıldı. Kurulumu kontrol edip tekrar deneyelim."
   },
   {
-   "en": "Not yet",
-   "tr": "Henüz değil"
-  },
-  {
    "en": "met",
    "tr": "sağlandı"
   },
@@ -310,10 +306,6 @@
    "tr": "İlerleme bilinmiyor"
   },
   {
-   "en": "No measured lessons yet.",
-   "tr": "Henüz ölçülü ders yok."
-  },
-  {
    "en": "PASSED · ♩={v0}",
    "tr": "GEÇİLDİ · ♩={v0}"
   },
@@ -400,6 +392,14 @@
   {
    "en": "Setup",
    "tr": "Kurulum"
+  },
+  {
+   "en": "Not passed this run",
+   "tr": "Bu turda geçilmedi"
+  },
+  {
+   "en": "No measured lessons in this build.",
+   "tr": "Bu sürümde ölçülü ders yok."
   }
  ]
 }

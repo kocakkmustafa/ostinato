@@ -310,7 +310,7 @@ class PracticeResultScreen extends StatelessWidget {
             "Not your score — the microphone got stuck. Let's check the setup and try again.",
             'Puanın değil, mikrofonun takıldı. Kurulumu kontrol edip tekrar deneyelim.',
           )
-        : localized(context, 'Not yet', 'Henüz değil');
+        : localized(context, 'Not passed this run', 'Bu turda geçilmedi');
     return GlassCard(
       key: const Key('result-gate'),
       child: Column(

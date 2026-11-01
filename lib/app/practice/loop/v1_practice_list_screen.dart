@@ -239,8 +239,8 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                       Text(
                         localized(
                           context,
-                          'No measured lessons yet.',
-                          'Henüz ölçülü ders yok.',
+                          'No measured lessons in this build.',
+                          'Bu sürümde ölçülü ders yok.',
                         ),
                       ),
                     for (final lesson in catalog.lessons)

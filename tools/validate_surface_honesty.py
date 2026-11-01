@@ -329,7 +329,17 @@ RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
 # content version, practice count, self-report timestamps and evidence type.
 # It writes no raw sound, angle, landmark, measurement array or video. Its
 # account-scoped path is removed by the existing deleteAccountData flow.
-RETENTION_WRITERS_RECONCILED = {"session_store.dart", "guitar_journey_progress.dart"}
+# 2026-11-01 (F2.5/F5.2/F4.2 yeniden-ölçüm, alan listeleri okunarak):
+# practice_progress_store.dart ders başına yalnız SAYILAR yazar (tur, en iyi
+# doğruluk/duyulma oranı, tempo, geçiş/tamamlanma zamanı); weekly_goal_store
+# .dart hedef değişikliği (gün + haftalık oturum) ve gün başına giriş (gün,
+# tür, kurs kimliği); setup_profile_store.dart cihaz kurulumu (adım durumu,
+# oda dBFS, rota başına gecikme µs). Hiçbiri ses, açı, landmark, nota/kare
+# dizisi, video veya ham geçmiş yazmaz; altı öznenin `False`u değişmedi.
+RETENTION_WRITERS_RECONCILED = {"session_store.dart", "guitar_journey_progress.dart",
+                                "practice_progress_store.dart",
+                                "weekly_goal_store.dart",
+                                "setup_profile_store.dart"}
 
 # ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────
 #
