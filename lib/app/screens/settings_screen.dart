@@ -11,6 +11,9 @@ import '../account_connection.dart';
 import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../practice/own_recording/own_recording_copy.dart';
+import '../practice/own_recording/own_recording_preference.dart';
+import '../ui_copy.dart';
 
 /// Ayarlar — statik dürüstlük beyanları. Çocuk rejimi BİLEREK YOK:
 /// kurucu kararı gelmedi, tasarım paneli de bunu KASITLI kapsam-dışı
@@ -46,7 +49,10 @@ String _liveSentence(BuildContext context) {
 }
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({super.key, this.ownRecordingPreference});
+
+  /// FK2 setting store; defaults to the device file.
+  final OwnRecordingPreference? ownRecordingPreference;
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +171,12 @@ class SettingsScreen extends StatelessWidget {
                       'ön plandan ayrılma yakalamayı kapatır. Akor, doğruluk veya ustalık puanı üretilmez. '
                       'Gerçek telefon doğruluğu doğrulanmadı.',
                 ),
+              ),
+              const SizedBox(height: 14),
+              OwnRecordingSettingCard(
+                preference:
+                    ownRecordingPreference ??
+                    const FileOwnRecordingPreference(),
               ),
               const SizedBox(height: 14),
               _SettingsCard(
@@ -322,6 +334,102 @@ class _LanguageSettings extends StatelessWidget {
       ],
     ),
   );
+}
+
+/// FK2: "listen to my own recording", off until the learner turns it on.
+class OwnRecordingSettingCard extends StatefulWidget {
+  const OwnRecordingSettingCard({super.key, required this.preference});
+  final OwnRecordingPreference preference;
+
+  @override
+  State<OwnRecordingSettingCard> createState() =>
+      OwnRecordingSettingCardState();
+}
+
+class OwnRecordingSettingCardState extends State<OwnRecordingSettingCard> {
+  bool _on = false;
+  bool _loaded = false;
+  bool _saveFailed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    unawaited(_load());
+  }
+
+  Future<void> _load() async {
+    final on = await widget.preference.read();
+    if (mounted) {
+      setState(() {
+        _on = on;
+        _loaded = true;
+      });
+    }
+  }
+
+  Future<void> _set(bool on) async {
+    setState(() {
+      _on = on;
+      _saveFailed = false;
+    });
+    try {
+      await widget.preference.write(on);
+    } on Object {
+      if (mounted) {
+        setState(() {
+          _on = !on;
+          _saveFailed = true;
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = OstinatoPalette.of(context);
+    return Container(
+      key: const Key('settings-own-recording'),
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: palette.controlSurface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: palette.glassBorder),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: [
+              Expanded(
+                child: kicker(uiText(context, OwnRecordingCopy.settingTitle)),
+              ),
+              Switch(
+                key: const Key('settings-own-recording-switch'),
+                value: _on,
+                onChanged: _loaded ? _set : null,
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            uiText(context, OwnRecordingCopy.settingBody),
+            style: hankenText(
+              size: 13.5,
+              height: 1.55,
+              color: palette.textBody,
+            ),
+          ),
+          if (_saveFailed) ...[
+            const SizedBox(height: 8),
+            Text(
+              uiText(context, OwnRecordingCopy.settingSaveFailed),
+              style: hankenText(size: 12, color: palette.warnInk),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
 }
 
 class _SettingsCard extends StatelessWidget {

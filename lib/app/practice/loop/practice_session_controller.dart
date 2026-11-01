@@ -10,6 +10,7 @@ import '../../audio/audio_input_controller.dart';
 import '../../audio/practice_audio_root.dart';
 import '../setup/audio_environment.dart';
 import '../setup/latency_calibration.dart';
+import '../own_recording/own_recording.dart';
 import '../setup/setup_profile_store.dart';
 import 'metronome.dart';
 import 'practice_judge.dart';
@@ -29,7 +30,9 @@ enum PracticePhase { idle, starting, running, finished, failed }
 
 /// F2.2–F2.4 wiring: play+record capture, click stream, timeline, transport,
 /// judge. The logic lives in the pure files; this class only schedules.
-/// Audio stays in RAM ([CaptureBuffer]); nothing is written or sent.
+/// Audio stays in RAM ([CaptureBuffer]); nothing is written or sent. The
+/// one exception is FK2: with the setting on, [ownRecorder] keeps a copy of
+/// the run for the learner to listen to (temporary, on device, see there).
 final class PracticeSessionController extends ChangeNotifier {
   PracticeSessionController({
     required this.score,
@@ -45,6 +48,7 @@ final class PracticeSessionController extends ChangeNotifier {
     this.criteria = const PassCriteria(minAccuracy: .8),
     this.setup,
     this.environment = const AudioEnvironmentProbe(),
+    this.ownRecorder,
   }) : _tempo = tempo,
        _waitMode = freeTempo,
        _metronomeSound = !freeTempo,
@@ -68,6 +72,9 @@ final class PracticeSessionController extends ChangeNotifier {
   /// F4.2 results (latency per route). Null: timing is never calibrated.
   final SetupProfileStore? setup;
   final AudioEnvironmentProbe environment;
+
+  /// FK2: null or disabled keeps nothing. The judge never reads it.
+  final OwnRecorder? ownRecorder;
   final NoteAnalyzer _analyze;
   final int Function() _localUs;
 
@@ -190,6 +197,7 @@ final class PracticeSessionController extends ChangeNotifier {
   }
 
   void _reset() {
+    unawaited(ownRecorder?.reset());
     _buffer.clear();
     _clock.reset();
     _floorLevels.clear();
@@ -251,6 +259,7 @@ final class PracticeSessionController extends ChangeNotifier {
       localNowUs: _localUs(),
     );
     _listenStartUs ??= c.tStartUs;
+    ownRecorder?.add(c);
     final level = _buffer.push(c);
     hearing.observeLevel(level);
     final t = timeline, p = plan;
@@ -685,6 +694,7 @@ final class PracticeSessionController extends ChangeNotifier {
     if (!running) return;
     if (outcomes.isEmpty) {
       ++_runEpoch;
+      unawaited(ownRecorder?.discard());
       phase = PracticePhase.idle;
       await _closeAudio();
       _notify();
@@ -712,6 +722,7 @@ final class PracticeSessionController extends ChangeNotifier {
       criteria: criteria,
     );
     phase = PracticePhase.finished;
+    unawaited(ownRecorder?.seal());
     _pending.clear();
     _wait = null;
     heldEvent = null;
@@ -723,6 +734,7 @@ final class PracticeSessionController extends ChangeNotifier {
     ++_runEpoch;
     failure = reason;
     phase = PracticePhase.failed;
+    unawaited(ownRecorder?.discard());
     _pending.clear();
     _wait = null;
     heldEvent = null;
@@ -748,6 +760,7 @@ final class PracticeSessionController extends ChangeNotifier {
     unawaited(_chunkSub?.cancel());
     unawaited(_statusSub?.cancel());
     unawaited(_anchorSub?.cancel());
+    unawaited(ownRecorder?.discard());
     _buffer.clear();
     super.dispose();
   }

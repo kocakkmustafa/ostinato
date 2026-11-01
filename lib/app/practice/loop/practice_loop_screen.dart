@@ -12,6 +12,8 @@ import '../../design/widgets.dart';
 import '../../tuner/session_tuning_gate.dart';
 import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
+import '../own_recording/own_recording.dart';
+import '../own_recording/own_recording_preference.dart';
 import '../practice_audio_input.dart';
 import '../setup/setup_profile_store.dart';
 import '../setup/setup_wizard_screen.dart';
@@ -43,6 +45,7 @@ class PracticeLoopScreen extends StatefulWidget {
     this.onSessionFinished,
     this.setupStore,
     this.openSetup,
+    this.ownRecordingPreference,
   });
 
   final V1Lesson lesson;
@@ -58,6 +61,9 @@ class PracticeLoopScreen extends StatefulWidget {
   final void Function(PracticeSessionFinished event)? onSessionFinished;
   final V1PracticeProgress progress;
   final bool hasNextLesson;
+
+  /// FK2 setting; defaults to the device file (off unless turned on).
+  final OwnRecordingPreference? ownRecordingPreference;
 
   /// Tests inject a controller on a fake channel.
   final PracticeSessionController Function(
@@ -89,6 +95,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   SetupProfile? _profile;
   bool _ranOnce = false;
   AudioInputController? _ownedAudio;
+  OwnRecorder? _ownedRecorder;
   late final PracticeSessionController _c = _createController();
   late final Ticker _ticker = createTicker((_) => _c.tick());
   bool _resultShown = false;
@@ -114,6 +121,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       freeTempo: _freeTempo,
       criteria: _criteria,
       setup: _setup,
+      ownRecorder: _ownedRecorder = OwnRecorder(),
     );
   }
 
@@ -122,6 +130,19 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     super.initState();
     _c.addListener(_changed);
     unawaited(_loadProfile());
+    unawaited(_prepareOwnRecording());
+  }
+
+  /// FK2: sweep takes a crash may have left, then follow the setting.
+  Future<void> _prepareOwnRecording() async {
+    final recorder = _c.ownRecorder;
+    if (recorder == null) return;
+    await recorder.sweep();
+    final on =
+        await (widget.ownRecordingPreference ??
+                const FileOwnRecordingPreference())
+            .read();
+    if (mounted) recorder.enabled = on;
   }
 
   Future<void> _loadProfile() async {
@@ -173,6 +194,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     _ticker.dispose();
     unawaited(_c.stop());
     _c.dispose();
+    _ownedRecorder?.dispose();
     unawaited(_ownedAudio?.dispose());
     super.dispose();
   }
@@ -208,6 +230,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           progressSaved: record != null,
           nextLessonOpened: newlyPassed && widget.hasNextLesson,
           hasNextLesson: widget.hasNextLesson,
+          ownRecorder: _c.ownRecorder,
         ),
       ),
     );
