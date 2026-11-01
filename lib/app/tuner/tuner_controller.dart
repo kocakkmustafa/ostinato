@@ -60,6 +60,11 @@ final class TunerController extends ChangeNotifier {
   static const int sampleRate = 44100;
   static const Set<int> supportedSampleRates = {44100, 48000};
   static const int calibrationMs = 1000;
+
+  /// Native start replies before it reports the input route, so the first
+  /// calibrating status carries `unknown`. Wait this long (audio time) for
+  /// the route before treating it as unsupported.
+  static const int routeResolveMs = 2000;
   static const int analysisIntervalMs = 250;
   static const int staleMs = 2500;
   static const int traceMs = 3000;
@@ -88,6 +93,7 @@ final class TunerController extends ChangeNotifier {
   double? _floor;
   int? _lastAnalysisUs, _lastReadingUs, _latestUs;
   bool _jobRunning = false, _active = false, _disposed = false;
+  bool _routeConfirmed = false;
   int _epoch = 0;
 
   TuningPreset get preset => _preset;
@@ -162,6 +168,7 @@ final class TunerController extends ChangeNotifier {
       return;
     }
     _clearAll();
+    _routeConfirmed = false;
     _active = true;
     phase = TunerPhase.starting;
     _notify();
@@ -201,9 +208,14 @@ final class TunerController extends ChangeNotifier {
     switch (status) {
       case AudioCalibrating(:final route):
         _clearAll();
-        if (route != AudioRoute.speaker) {
+        if (route == AudioRoute.unknown) {
+          // Not reported yet (or unrecognised): hold until it resolves.
+          _routeConfirmed = false;
+          phase = TunerPhase.calibrating;
+        } else if (route != AudioRoute.speaker) {
           _close(TunerPhase.unsupportedInput);
         } else {
+          _routeConfirmed = true;
           phase = TunerPhase.calibrating;
         }
       case AudioPermissionDeniedPermanent():
@@ -271,6 +283,13 @@ final class TunerController extends ChangeNotifier {
       );
       _floorLevels.add(20 * math.log(math.max(rms, 1e-9)) / math.ln10);
       _calibrationSamples += chunk.samples.length;
+      if (!_routeConfirmed) {
+        if (_calibrationSamples >= chunk.sampleRate * routeResolveMs / 1000) {
+          _close(TunerPhase.unsupportedInput);
+          _notify();
+        }
+        return;
+      }
       if (_calibrationSamples >= chunk.sampleRate * calibrationMs / 1000) {
         _floorLevels.sort();
         _floor = _floorLevels[_floorLevels.length ~/ 2];

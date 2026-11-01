@@ -227,8 +227,12 @@ final class PracticeSessionController extends ChangeNotifier {
         _fail('stopped');
       case AudioCalibrating(:final route):
         // Route or clock change after the grid exists: the grid is invalid
-        // (and so is the route's latency).
-        if (timeline != null) {
+        // (and so is the route's latency). The first report (unknown →
+        // known) is not a change: native start replies before it, and a
+        // free-tempo grid can already exist by then.
+        final firstReport =
+            inputRoute == AudioRoute.unknown && route != AudioRoute.unknown;
+        if (timeline != null && !firstReport) {
           _fail('input_changed');
         } else if (route != AudioRoute.unknown) {
           inputRoute = route;
