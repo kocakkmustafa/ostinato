@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/tuner/session_tuning_gate.dart';
@@ -178,6 +180,54 @@ void main() {
       expect(sessionTuningGateState(m), SessionTuningGateState.unchecked);
     });
 
+    test('"tuned today" survives a restart the same day only', () async {
+      final dir = await Directory.systemTemp.createTemp('tuner_check');
+      addTearDown(() => dir.delete(recursive: true));
+      final f = File('${dir.path}/${TunerCheckMemory.fileName}');
+      var now = DateTime(2026, 11, 2, 9);
+      final before = TunerCheckMemory(now: () => now, file: () async => f);
+      before.record(presetId: 'guitar.standard', inTune: 6, total: 6);
+      await before.saved;
+      expect(f.readAsStringSync(), isNot(contains('samples')));
+
+      final after = TunerCheckMemory(now: () => now, file: () async => f);
+      expect(sessionTuningGateState(after), SessionTuningGateState.unchecked);
+      await after.restore();
+      expect(sessionTuningGateState(after), SessionTuningGateState.tuned);
+      expect(after.today!.presetId, 'guitar.standard');
+
+      now = DateTime(2026, 11, 3, 9);
+      final tomorrow = TunerCheckMemory(now: () => now, file: () async => f);
+      await tomorrow.restore();
+      expect(
+        sessionTuningGateState(tomorrow),
+        SessionTuningGateState.unchecked,
+      );
+    });
+
+    test(
+      'a newer check beats the file; a damaged file is "no check"',
+      () async {
+        final dir = await Directory.systemTemp.createTemp('tuner_check');
+        addTearDown(() => dir.delete(recursive: true));
+        final f = File('${dir.path}/${TunerCheckMemory.fileName}');
+        final old = TunerCheckMemory(file: () async => f);
+        old.record(presetId: 'guitar.dropD', inTune: 2, total: 6);
+        await old.saved;
+
+        final m = TunerCheckMemory(file: () async => f);
+        m.record(presetId: 'guitar.standard', inTune: 6, total: 6);
+        await m.restore();
+        expect(m.today!.presetId, 'guitar.standard');
+        await m.saved;
+
+        f.writeAsStringSync('{not json');
+        final damaged = TunerCheckMemory(file: () async => f);
+        await damaged.restore();
+        expect(damaged.today, isNull);
+      },
+    );
+
     testWidgets('gate card offers tune and continue', (tester) async {
       final m = TunerCheckMemory();
       var tuned = 0;
@@ -212,10 +262,7 @@ void main() {
       MaterialApp(home: TunerScreen(controller: controller)),
     );
     expect(find.byKey(const Key('tuner-cents')), findsOneWidget);
-    expect(
-      tester.widget<Text>(find.byKey(const Key('tuner-cents'))).data,
-      '—',
-    );
+    expect(tester.widget<Text>(find.byKey(const Key('tuner-cents'))).data, '—');
     expect(find.textContaining('±5 cents'), findsOneWidget);
     for (final label in ['Auto', 'Manual', 'Chromatic']) {
       expect(find.text(label), findsOneWidget);
@@ -300,6 +347,43 @@ void main() {
     await tester.pump();
   });
 
+  testWidgets('from the setup wizard the microphone starts with the screen', (
+    tester,
+  ) async {
+    Future<void> open({required bool startOnOpen}) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => TextButton(
+              onPressed: () => openTuner(
+                context,
+                controller: controller,
+                startOnOpen: startOnOpen,
+              ),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.runAsync(() async {
+        await tester.pump();
+        await tester.pump();
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+      });
+      await tester.pump();
+    }
+
+    await open(startOnOpen: true);
+    expect(source.isRunning, isTrue, reason: 'one tap, not two');
+    expect(controller.isActive, isTrue);
+    await tester.runAsync(controller.stop);
+    await tester.pumpWidget(const SizedBox());
+
+    await open(startOnOpen: false);
+    expect(source.isRunning, isFalse, reason: 'other entry points wait');
+  });
+
   testWidgets('openTuner returns today\'s check and never pops itself', (
     tester,
   ) async {
@@ -308,10 +392,8 @@ void main() {
       MaterialApp(
         home: Builder(
           builder: (context) => TextButton(
-            onPressed: () async => result = await openTuner(
-              context,
-              controller: controller,
-            ),
+            onPressed: () async =>
+                result = await openTuner(context, controller: controller),
             child: const Text('open'),
           ),
         ),
