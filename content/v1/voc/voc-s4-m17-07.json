@@ -1,0 +1,120 @@
+{
+  "id": "voc-s4-m17-07",
+  "title": {
+    "en": "A controlled scoop",
+    "tr": "Kontrollü scoop"
+  },
+  "goal": {
+    "en": "Enters 6 notes from just below with a short scoop and settles on each within 200 ms.",
+    "tr": "6 notaya hemen altından kısa bir scoop'la girer ve her birine 200 ms içinde yerleşir."
+  },
+  "explanation": [
+    {
+      "en": "A scoop starts a little below the note and slides up into it. In many singing styles it adds warmth and a speech-like ease.",
+      "tr": "Scoop notanın biraz altından başlar ve kayarak ona girer. Pek çok söyleme üslubunda sıcaklık ve konuşur gibi bir rahatlık katar."
+    },
+    {
+      "en": "You met the slide as a practice tool in level 1. Now it is a style choice, so it must be short: under 200 ms, a fifth of a second.",
+      "tr": "Kaydırmayı 1. seviyede bir çalışma aracı olarak tanıdın. Şimdi bir üslup seçimidir; bu yüzden kısa olmalı: 200 ms'nin, yani saniyenin beşte birinin altında."
+    },
+    {
+      "en": "Start about a half step below. A deeper scoop sounds heavy and takes too long.",
+      "tr": "Yaklaşık yarım ses aşağıdan başla. Daha derin bir scoop ağır duyulur ve çok uzun sürer."
+    },
+    {
+      "en": "Arrive and stay. Do not go past the note and come back down.",
+      "tr": "Var ve orada kal. Notayı geçip geri inme."
+    },
+    {
+      "en": "Use scoops on a few chosen notes, not on every note. Keep the voice light; if the throat tightens, stop and rest.",
+      "tr": "Scoop'u her notada değil, seçtiğin birkaç notada kullan. Sesi hafif tut; boğaz sıkışırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Six notes from your comfortable range on 'ah', soft synthesized voice; each is shown once without and once with a short scoop into it.",
+      "tr": "Rahat menzilinden altı nota, 'a' ile yumuşak sentez ses; her biri bir kez scoop'suz, bir kez kısa bir scoop'la gösterilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "For each of 6 notes: listen, then sing it on 'ah' in your own octave with a short scoop from just below, and hold the note for about two seconds.",
+      "tr": "6 notanın her biri için: dinle, sonra kendi oktavında 'a' ile hemen altından kısa bir scoop'la söyle ve notayı yaklaşık iki saniye tut."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 pitch accuracy on the held notes, and each scoop settles on its note within 200 ms.",
+        "tr": "Tutulan notalarda 4. seviye perde ölçütü; her scoop notasına 200 ms içinde yerleşir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each scoop was short, not a slow slide.",
+      "tr": "Her scoop yavaş bir kaydırma değil, kısaydı."
+    },
+    {
+      "en": "I stopped on the target without going past it.",
+      "tr": "Hedefi geçmeden üstünde durdum."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late: the scoop took too long.",
+        "tr": "Doğru, ama geç: scoop çok uzun sürdü."
+      },
+      "fix": {
+        "en": "Start closer to the target, about a half step below, and move quickly.",
+        "tr": "Hedefe daha yakın başla, yaklaşık yarım ses aşağıdan, ve çabuk kay."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little high.",
+        "tr": "Farklı nota, biraz yüksek."
+      },
+      "fix": {
+        "en": "You slid past the target. Slow the end of the slide and stop when it blends with the reference.",
+        "tr": "Hedefi geçtin. Kaydırmanın sonunu yavaşlat ve referansla kaynaştığında dur."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The slide stopped short. Replay the note and let the glide go all the way up.",
+        "tr": "Kaydırma erken durdu. Notayı yeniden dinle ve kaymayı sonuna kadar götür."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hum each scoop on 'mm' first, then open to 'ah'.",
+    "tr": "Her scoop'u önce 'mm' ile mırıldan, sonra 'a'ya aç."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

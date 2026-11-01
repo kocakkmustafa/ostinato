@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-10",
+  "title": {
+    "en": "Concone Op. 9: lesson A",
+    "tr": "Concone Op. 9: ders A"
+  },
+  "goal": {
+    "en": "Sings one whole selected lesson from Concone's Op. 9, start to finish, on one vowel at ♩=72, breathing only at the marks.",
+    "tr": "Concone'nin Op. 9'undan seçilmiş bir dersin tamamını baştan sona tek ünlüyle ♩=72'de, yalnız işaretlerde nefes alarak söyler."
+  },
+  "explanation": [
+    {
+      "en": "In Level 3 you sang a short passage from Concone's 50 lessons, Op. 9. Now you sing a whole lesson, start to finish.",
+      "tr": "Seviye 3'te Concone'nin 50 dersinden (Op. 9) kısa bir bölüm söyledin. Şimdi bir dersin tamamını baştan sona söylersin."
+    },
+    {
+      "en": "A whole lesson has a form: phrases that return, a middle part that moves away, and an ending. Map it before you sing: mark the phrases that repeat.",
+      "tr": "Bir dersin tamamının bir biçimi vardır: geri dönen cümleler, uzaklaşan bir orta bölüm ve bir bitiş. Söylemeden önce haritala: tekrar eden cümleleri işaretle."
+    },
+    {
+      "en": "Pace your energy. A whole lesson is longer than a passage; keep the sound easy in the first phrases so the last ones stay on pitch.",
+      "tr": "Enerjini dağıt. Bir dersin tamamı bir bölümden uzundur; ilk cümlelerde sesi rahat tut ki son cümleler perdede kalsın."
+    },
+    {
+      "en": "Breathe only at the marks, and take an easy breath, not a big one. Shape each phrase toward its end and finish it gently.",
+      "tr": "Yalnız işaretlerde nefes al; büyük değil, rahat bir nefes. Her cümleyi sonuna doğru biçimlendir ve yumuşakça bitir."
+    },
+    {
+      "en": "The app moves the lesson into your personal key, and the accompaniment follows. Sing on 'ah', or on 'oo' if 'ah' feels spread. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Uygulama dersi kişisel tonuna taşır; eşlik de onu izler. 'a' ile söyle; 'a' dağınık geliyorsa 'u' ile. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The selected lesson from the Ostinato edition in your comfortable range, soft synthesized voice on 'ah', at ♩=72 and ♩=50, over a soft accompaniment with a click. Headphones recommended.",
+      "tr": "Ostinato baskısından seçilen ders rahat menzilinde, 'a' ile yumuşak sentez ses, ♩=72 ve ♩=50; klikli yumuşak eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase first, then the whole lesson at ♩=72. Breathe only at the marks. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranın gösterdiği bölümü oku. Eşlikten bir ölçü dinle, sonra onu 'a' ile, önce cümle cümle, sonra bütün dersi ♩=72'de söyle. Yalnız işaretlerde nefes al. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 72,
+      "target": 72
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I breathed only at the breath marks.",
+      "tr": "Yalnız nefes işaretlerinde nefes aldım."
+    },
+    {
+      "en": "The last phrases stayed as easy as the first ones.",
+      "tr": "Son cümleler ilk cümleler kadar rahat kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the end of a long phrase, a little low.",
+        "tr": "Uzun cümlenin sonunda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Keep the energy to the last note. Sing the phrase at ♩=50 and think 'up' on the final note.",
+        "tr": "Enerjiyi son notaya kadar koru. Cümleyi ♩=50'de söyle ve son notada 'yukarı' diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late after a breath.",
+        "tr": "Doğru, ama nefesten sonra geç."
+      },
+      "fix": {
+        "en": "Take the breath from the time of the note before the mark, so the next phrase starts on its beat.",
+        "tr": "Nefesi işaretten önceki notanın süresinden al; böylece sonraki cümle kendi vuruşunda başlar."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the lesson in two halves at ♩=50, resting between them, then join them.",
+    "tr": "Dersi ♩=50'de, aralarında dinlenerek iki yarıda söyle, sonra iki yarıyı birleştir."
+  },
+  "repertoire": "Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9: one selected whole lesson (A) (lesson number to be fixed with the transcription). Source: 19th-century edition. Vocalise, no words. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,126 @@
+{
+  "id": "voc-s4-m18-13",
+  "title": {
+    "en": "An original two-part study",
+    "tr": "Özgün iki sesli etüt"
+  },
+  "goal": {
+    "en": "Reads and sings the lower part of an original eight-bar two-part study at ♩=70.",
+    "tr": "Özgün sekiz ölçülük iki sesli bir etüdün alt partisini okuyup ♩=70'te söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "The screen shows both parts. Yours is the lower one. Read it before you sing: look for steps, jumps and long notes.",
+      "tr": "Ekranda iki parti birden görünür. Seninki alttakidir. Söylemeden önce oku: basamakları, sıçramaları ve uzun notaları bul."
+    },
+    {
+      "en": "Bars 1–2: thirds under the melody. Bars 3–4: you hold do, then ti, while the melody moves. This is oblique motion.",
+      "tr": "1–2. ölçüler: ezginin altında üçlüler. 3–4. ölçüler: ezgi hareket ederken sen do'yu, sonra si'yi tutarsın. Buna eğik hareket denir."
+    },
+    {
+      "en": "Bars 5–6: sixths, and your part dips below do. Bars 7–8: thirds again, down to do.",
+      "tr": "5–6. ölçüler: altılılar; partin do'nun altına iner. 7–8. ölçüler: yine üçlüler, do'ya iniş."
+    },
+    {
+      "en": "Between bars 6 and 7 you jump from ti up to mi. Hear mi before you sing it.",
+      "tr": "6. ölçüden 7. ölçüye si'den mi'ye sıçrarsın. Mi'yi söylemeden önce içinde duy."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Your part alone on 'la' in your comfortable range, soft synthesized voice, at ♩=70 and ♩=50. Then the upper part (5-4-3-5 | 6-5 4:h | 3-4-5-6 | 5:w | 1'-7-6-5 | 4-3 2:h | 5-4-3-2 | 3:w) on a second synthesized voice over soft original chords with a click, once with your part and once without. Headphones recommended.",
+      "tr": "Partin tek başına, rahat menzilinde 'la' ile, yumuşak sentez ses, ♩=70 ve ♩=50. Sonra üst parti (5-4-3-5 | 6-5 4:h | 3-4-5-6 | 5:w | 1'-7-6-5 | 4-3 2:h | 5-4-3-2 | 3:w) ikinci bir sentez seste, yumuşak özgün akorlar ve klikle; bir kez partinle, bir kez partin olmadan. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Read your part on screen. Then listen to one bar of the accompaniment and sing your eight bars on 'la' under the upper part at ♩=70. Sing in your own octave.",
+      "tr": "Partini ekranda oku. Sonra eşlikten bir ölçü dinle ve sekiz ölçülük partini üst partinin altında 'la' ile ♩=70'te söyle. Kendi oktavında söyle."
+    },
+    "sequence": "3-2-1-3 | 4-3 2:h | 1:w | 7,:w | 3-2-1-7, | 6,-5, 7,:h | 3-2-1-7, | 1:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I read my part before I sang.",
+      "tr": "Söylemeden önce partimi okudum."
+    },
+    {
+      "en": "While I held do and ti, the moving melody did not pull me.",
+      "tr": "Do ile si'yi tutarken hareket eden ezgi beni çekmedi."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note in bars 3–4: your held note moved with the melody.",
+        "tr": "Farklı nota: 3–4. ölçülerde tuttuğun nota ezgiyle kaydı."
+      },
+      "fix": {
+        "en": "Settle on do before bar 3 and keep the air even. Listen to the melody less and feel your own note more.",
+        "tr": "3. ölçüden önce do'ya yerleş ve havayı eşit tut. Ezgiye daha az, kendi notana daha çok odaklan."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the start of bar 7.",
+        "tr": "Farklı nota: 7. ölçünün başında."
+      },
+      "fix": {
+        "en": "From ti, think ti-do-re-mi quickly and land on mi.",
+        "tr": "Si'den içinden hızlıca si-do-re-mi de ve mi'ye kon."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the lower part alone at ♩=50 first, then with the upper part.",
+    "tr": "Alt partiyi önce tek başına ♩=50'de söyle, sonra üst partiyle birlikte."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

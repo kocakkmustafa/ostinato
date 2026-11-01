@@ -1,0 +1,128 @@
+{
+  "id": "voc-s4-m19-11",
+  "title": {
+    "en": "Concone Op. 9: lesson B",
+    "tr": "Concone Op. 9: ders B"
+  },
+  "goal": {
+    "en": "Sings a second, contrasting lesson from Concone's Op. 9 on one vowel at ♩=72, with the dynamics of the Ostinato edition.",
+    "tr": "Concone'nin Op. 9'undan ikinci ve karşıt bir dersi tek ünlüyle ♩=72'de, Ostinato baskısının dinamikleriyle söyler."
+  },
+  "explanation": [
+    {
+      "en": "Lesson B has a different character from lesson A. Before you sing, listen to the reference once and name the difference: faster notes, a different mood, or a different shape.",
+      "tr": "B dersinin karakteri A dersinden farklıdır. Söylemeden önce referansı bir kez dinle ve farkı adlandır: daha hızlı notalar, farklı bir duygu ya da farklı bir biçim."
+    },
+    {
+      "en": "Map it as you did lesson A: phrases, repeats, breath marks, and the highest and lowest points.",
+      "tr": "A dersinde yaptığın gibi haritala: cümleler, tekrarlar, nefes işaretleri ve en yüksek ve en pes noktalar."
+    },
+    {
+      "en": "The screen shows soft and strong marks from the Ostinato edition. Strong means your comfortable strong voice, never shouting; soft means a smaller sound with the same breath flow.",
+      "tr": "Ekran Ostinato baskısından yumuşak ve güçlü işaretleri gösterir. Güçlü, rahat güçlü sesin demektir, asla bağırma değil; yumuşak, aynı nefes akışıyla daha küçük bir sestir."
+    },
+    {
+      "en": "Keep the pitch steady when the volume changes. A note sung softer should not sink, and a note sung stronger should not rise.",
+      "tr": "Ses düzeyi değişirken perdeyi kararlı tut. Daha yumuşak söylenen nota düşmemeli, daha güçlü söylenen nota yükselmemeli."
+    },
+    {
+      "en": "Sing on 'ah', or on 'oo' if 'ah' feels spread. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "'a' ile söyle; 'a' dağınık geliyorsa 'u' ile. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The selected lesson from the Ostinato edition in your comfortable range, soft synthesized voice on 'ah', at ♩=72 and ♩=50, over a soft accompaniment with a click. Headphones recommended.",
+      "tr": "Ostinato baskısından seçilen ders rahat menzilinde, 'a' ile yumuşak sentez ses, ♩=72 ve ♩=50; klikli yumuşak eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase first, then the whole lesson at ♩=72. Breathe only at the marks. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranın gösterdiği bölümü oku. Eşlikten bir ölçü dinle, sonra onu 'a' ile, önce cümle cümle, sonra bütün dersi ♩=72'de söyle. Yalnız işaretlerde nefes al. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 72,
+      "target": 72
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2",
+    "V3"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The soft and strong places were different, without shouting.",
+      "tr": "Yumuşak ve güçlü yerler bağırmadan birbirinden farklıydı."
+    },
+    {
+      "en": "The pitch stayed steady when the volume changed.",
+      "tr": "Ses düzeyi değişirken perde kararlı kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note on a soft passage, a little low.",
+        "tr": "Yumuşak bir bölümde farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The breath stopped flowing. Keep the air moving on the soft notes; sing that phrase at ♩=50, then at the target tempo.",
+        "tr": "Nefes akmayı bırakmış. Yumuşak notalarda havayı hareket ettirmeye devam et; o cümleyi ♩=50'de, sonra hedef tempoda söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on a strong passage, a little high.",
+        "tr": "Güçlü bir bölümde farklı nota, biraz yüksek."
+      },
+      "fix": {
+        "en": "More volume pushed the pitch up. Make the strong place a little smaller and keep the same easy space.",
+        "tr": "Daha çok ses perdeyi yukarı itmiş. Güçlü yeri biraz küçült ve aynı rahat açıklığı koru."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the lesson at one even volume first; add the soft and strong places when the notes are secure.",
+    "tr": "Önce dersi tek ve eşit bir ses düzeyinde söyle; notalar oturunca yumuşak ve güçlü yerleri ekle."
+  },
+  "repertoire": "Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9: a second selected whole lesson (B), contrasting with lesson A (lesson number to be fixed with the transcription). Source: 19th-century edition. Vocalise, no words. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 15,
+  "expertPending": true
+}

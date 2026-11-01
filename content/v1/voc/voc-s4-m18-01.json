@@ -1,0 +1,107 @@
+{
+  "id": "voc-s4-m18-01",
+  "title": {
+    "en": "Singing against a drone",
+    "tr": "Dron üstünde söylemek"
+  },
+  "goal": {
+    "en": "Sings do, mi and sol over a drone on do, each note within 30 cents.",
+    "tr": "Do üzerindeki dronun karşısında do, mi ve sol'ü, her notayı 30 cent içinde söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "A drone is one note that keeps sounding. Here it is do, in your personal key.",
+      "tr": "Dron, sürekli çalan tek bir notadır. Burada kişisel tonundaki do'dur."
+    },
+    {
+      "en": "When your note is in tune with the drone, the two sounds blend and feel calm. When it is a little off, you hear a slow wobble.",
+      "tr": "Notan dronla akortluysa iki ses kaynaşır ve sakin gelir. Biraz kaymışsa yavaş bir dalgalanma duyarsın."
+    },
+    {
+      "en": "Do melts into the drone. Sol is the next smoothest. Mi sounds sweet and full.",
+      "tr": "Do dronla tek ses olur. En pürüzsüz ikinci nota sol'dür. Mi tatlı ve dolgun duyulur."
+    },
+    {
+      "en": "While you hold mi or sol, you may feel pulled back to do. Hear the drone, then aim for your own note.",
+      "tr": "Mi ya da sol'ü tutarken do'ya geri çekildiğini hissedebilirsin. Dronu duy, sonra kendi notana yönel."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "DR",
+      "S"
+    ],
+    "brief": {
+      "en": "A drone on do in your personal key. Before you start, a soft synthesized voice sings do, mi and sol once over the drone. Headphones recommended.",
+      "tr": "Kişisel tonunda do üzerinde dron. Başlamadan önce yumuşak bir sentez ses dronun üstünde do, mi ve sol'ü bir kez söyler. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Start the drone and listen for a few seconds. Then sing do, mi and sol on 'la', about two seconds each, and rest. Do this 4 times. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "Dronu başlat ve birkaç saniye dinle. Sonra do, mi ve sol'ü 'la' ile, her birini yaklaşık iki saniye söyle ve dinlen. Bunu 4 kez yap. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1:h 3:h 5:h hr | ×4",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Do blended into one sound with the drone.",
+      "tr": "Do dronla tek bir ses gibi kaynaştı."
+    },
+    {
+      "en": "I heard no slow wobble on mi and sol.",
+      "tr": "Mi ve sol'de yavaş bir dalgalanma duymadım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, mi is low.",
+        "tr": "Farklı nota: mi pes."
+      },
+      "fix": {
+        "en": "The drone pulls you back to do. Think do-re-mi on the way up so mi lands higher.",
+        "tr": "Dron seni do'ya geri çekiyor. Çıkarken içinden do-re-mi de ki mi yerine otursun."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Use headphones for the drone and keep the phone at arm's length.",
+        "tr": "Dronu kulaklıkla dinle ve telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only do over the drone until it blends, then add sol, then mi.",
+    "tr": "Önce yalnız do'yu dronla kaynaşana kadar söyle, sonra sol'ü, en son mi'yi ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

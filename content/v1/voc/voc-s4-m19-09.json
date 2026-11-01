@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-09",
+  "title": {
+    "en": "Caro mio ben",
+    "tr": "Caro mio ben"
+  },
+  "goal": {
+    "en": "Sings the first section of the 18th-century aria Caro mio ben in a personal key at ♩=60, first on 'ah', then with the Italian words.",
+    "tr": "18. yüzyıl aryası Caro mio ben'in ilk bölümünü kişisel tonda ♩=60'ta, önce 'a' ile, sonra İtalyanca sözleriyle söyler."
+  },
+  "explanation": [
+    {
+      "en": "Caro mio ben is an 18th-century Italian aria, credited to Giuseppe or Tommaso Giordani. Generations of singers have learned it as a first Italian song.",
+      "tr": "Caro mio ben, Giuseppe ya da Tommaso Giordani'ye atfedilen 18. yüzyıl İtalyan aryasıdır. Kuşaklar boyu şarkıcılar onu ilk İtalyanca şarkı olarak öğrendi."
+    },
+    {
+      "en": "The aria has three sections: a first section, a contrasting middle and the first section again. You learn the first section, which begins \"Caro mio ben, credimi almen\".",
+      "tr": "Arya üç bölümlüdür: ilk bölüm, karşıt bir orta bölüm ve yeniden ilk bölüm. İlk bölümü öğrenirsin; \"Caro mio ben, credimi almen\" diye başlar."
+    },
+    {
+      "en": "It is slow and connected. Keep the line legato and move on the vowels; place each consonant quickly, just before its beat.",
+      "tr": "Yavaş ve bağlıdır. Çizgiyi legato tut ve ünlüler üzerinde ilerle; her ünsüzü vuruşundan hemen önce, çabucak yerleştir."
+    },
+    {
+      "en": "Italian vowels are pure, like the five you practised: 'a', 'e', 'i', 'o', 'u'. Keep every consonant short so the vowels stay long.",
+      "tr": "İtalyanca ünlüler, çalıştığın beş ünlü gibi saftır: 'a', 'e', 'i', 'o', 'u'. Her ünsüzü kısa tut ki ünlüler uzun kalsın."
+    },
+    {
+      "en": "Sing it on 'ah' until the notes are secure, then add the words. The screen shows them under the notes with the breath marks. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Notalar oturana kadar 'a' ile söyle, sonra sözleri ekle. Ekran sözleri notaların altında, nefes işaretleriyle gösterir. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The first section in your comfortable range, soft synthesized voice, at ♩=60 and ♩=42, over an original simple accompaniment. Headphones recommended.",
+      "tr": "İlk bölüm rahat menzilinde, yumuşak sentez ses, ♩=60 ve ♩=42; özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the first section in degrees. Listen to one bar of the accompaniment, then sing it once on 'ah', then once with the words, at ♩=60. Start at ♩=42 if you like; the lesson counts at ♩=60. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ilk bölümü derecelerle gösterir. Eşlikten bir ölçü dinle, sonra onu bir kez 'a' ile, sonra bir kez sözlerle ♩=60'ta söyle. İstersen ♩=42'de başla; ders ♩=60'ta sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The line stayed connected through the consonants.",
+      "tr": "Çizgi ünsüzlerin içinden geçerken bağlı kaldı."
+    },
+    {
+      "en": "I breathed only at the breath marks.",
+      "tr": "Yalnız nefes işaretlerinde nefes aldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the end of a long phrase, a little low.",
+        "tr": "Uzun cümlenin sonunda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Keep the energy to the last note. Sing the phrase at ♩=42 and think 'up' on the final note.",
+        "tr": "Enerjiyi son notaya kadar koru. Cümleyi ♩=42'de söyle ve son notada 'yukarı' diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late on the words.",
+        "tr": "Doğru, ama sözlerde geç."
+      },
+      "fix": {
+        "en": "Put the consonant just before the click so the vowel lands on it. Speak the words in rhythm once, then sing.",
+        "tr": "Ünsüzü klikten hemen önce yerleştir ki ünlü tam klike otursun. Sözleri bir kez ritimle konuş, sonra söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the whole section on 'ah' only; add the words on another day.",
+    "tr": "Bütün bölümü yalnız 'a' ile söyle; sözleri başka bir gün ekle."
+  },
+  "repertoire": "Caro mio ben, aria attributed to Giuseppe or Tommaso Giordani (18th century). Source: Alessandro Parisotti (1853–1913), Arie antiche (1885–1900); country-by-country confirmation pending. Public domain, legal review pending. First section, on 'ah' and with the Italian words. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 15,
+  "expertPending": true
+}

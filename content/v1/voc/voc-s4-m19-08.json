@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-08",
+  "title": {
+    "en": "Mozart: Komm, lieber Mai",
+    "tr": "Mozart: Komm, lieber Mai"
+  },
+  "goal": {
+    "en": "Sings the first verse of Mozart's Komm, lieber Mai, KV 596, in a personal key at ♩.=56, first on 'la', then with the German words.",
+    "tr": "Mozart'ın Komm, lieber Mai'ının (KV 596) ilk kıtasını kişisel tonda ♩.=56'da, önce 'la' ile, sonra Almanca sözleriyle söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wolfgang Amadeus Mozart wrote this spring song in 1791, to a poem by Christian Adolph Overbeck. It is a simple strophic song: every verse uses the same music.",
+      "tr": "Wolfgang Amadeus Mozart bu bahar şarkısını 1791'de, Christian Adolph Overbeck'in bir şiiri üzerine yazdı. Basit, strofik bir şarkıdır: her kıta aynı müziği kullanır."
+    },
+    {
+      "en": "It is in 6/8: two big beats per bar, each a dotted quarter. The tempo counts the big beats: ♩.=56.",
+      "tr": "Parça 6/8'liktir: ölçüde iki büyük vuruş, her biri noktalı dörtlük. Tempo büyük vuruşları sayar: ♩.=56."
+    },
+    {
+      "en": "Let it swing gently. Lean a little on each big beat and keep the small notes between them light.",
+      "tr": "Hafifçe salınmasına izin ver. Her büyük vuruşa biraz yaslan, aralarındaki küçük notaları hafif tut."
+    },
+    {
+      "en": "Learn it in two steps. Sing the verse on 'la' until the notes are secure, then add the words, which begin \"Komm, lieber Mai\".",
+      "tr": "İki adımda öğren. Notalar oturana kadar kıtayı 'la' ile söyle, sonra \"Komm, lieber Mai\" diye başlayan sözleri ekle."
+    },
+    {
+      "en": "The screen shows the words under the notes. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Ekran sözleri notaların altında gösterir. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The first verse in your comfortable range, soft synthesized voice, at ♩.=56 and ♩.=38, over an original simple accompaniment that marks the two big beats. Headphones recommended.",
+      "tr": "İlk kıta rahat menzilinde, yumuşak sentez ses, ♩.=56 ve ♩.=38; iki büyük vuruşu belirten özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the first verse in degrees. Listen to one bar of the accompaniment, then sing it once on 'la', then once with the words, at ♩.=56. Start at ♩.=38 if you like; the lesson counts at ♩.=56. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ilk kıtayı derecelerle gösterir. Eşlikten bir ölçü dinle, sonra onu bir kez 'la' ile, sonra bir kez sözlerle ♩.=56'da söyle. İstersen ♩.=38'de başla; ders ♩.=56'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 56,
+      "target": 56
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I felt two big beats in each bar, not six equal ones.",
+      "tr": "Her ölçüde altı eşit değil, iki büyük vuruş hissettim."
+    },
+    {
+      "en": "The vowels stayed pure when I added the words.",
+      "tr": "Sözleri eklediğimde ünlüler saf kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early on the short eighth.",
+        "tr": "Doğru, ama kısa sekizlikte erken."
+      },
+      "fix": {
+        "en": "The quarter is cut short. Hold it for two small counts, then sing the eighth on count 3.",
+        "tr": "Dörtlük kısalıyor. İki küçük sayı boyunca tut, sonra sekizliği 3. sayıda söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late on the words.",
+        "tr": "Doğru, ama sözlerde geç."
+      },
+      "fix": {
+        "en": "Put the consonant just before the click so the vowel lands on it. Speak the words in rhythm once, then sing.",
+        "tr": "Ünsüzü klikten hemen önce yerleştir ki ünlü tam klike otursun. Sözleri bir kez ritimle konuş, sonra söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the verse on 'la' at ♩.=38 first, then raise the tempo and add the words.",
+    "tr": "Önce kıtayı ♩.=38'de 'la' ile söyle, sonra tempoyu artır ve sözleri ekle."
+  },
+  "repertoire": "Komm, lieber Mai (Sehnsucht nach dem Frühling), KV 596, Wolfgang Amadeus Mozart (1756–1791); words Christian Adolph Overbeck (1755–1821). Source: 1791 edition. Public domain, legal review pending. First verse, on 'la' and with the words. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 14,
+  "expertPending": true
+}

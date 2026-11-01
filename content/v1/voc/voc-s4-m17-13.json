@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m17-13",
+  "title": {
+    "en": "An original melisma study",
+    "tr": "Özgün melisma etüdü"
+  },
+  "goal": {
+    "en": "Sings an original eight-bar study that joins eighth-note runs and two scoops, in tune and on time, from ♩=80 up to ♩=90.",
+    "tr": "Sekizlik koşuları ve iki scoop'u birleştiren özgün sekiz ölçülük bir etüdü ♩=80'den ♩=90'a kadar doğru perdede ve zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "This study puts the runs and scoops of this module into one original melody of eight bars.",
+      "tr": "Bu etüt bu modülün koşularını ve scoop'larını sekiz ölçülük özgün bir ezgide birleştirir."
+    },
+    {
+      "en": "Bars 2, 4, 6 and 7 hold the melismas: groups of eighth notes on one 'ah'. Keep them even and light.",
+      "tr": "2., 4., 6. ve 7. ölçüler melismaları taşır: tek 'a' üzerinde sekizlik grupları. Onları eşit ve hafif tut."
+    },
+    {
+      "en": "Scoop into the long sol in bar 1 and the long la in bar 5. Every other note starts right on its pitch.",
+      "tr": "1. ölçüdeki uzun sol'e ve 5. ölçüdeki uzun la'ya scoop'la gir. Diğer her nota tam kendi perdesinde başlar."
+    },
+    {
+      "en": "The study has two phrases of four bars. Breathe at the end of bar 4, taking the time from the long do.",
+      "tr": "Etüdün dört ölçülük iki cümlesi vardır. 4. ölçünün sonunda, zamanı uzun do'dan alarak nefes al."
+    },
+    {
+      "en": "Raise the tempo only when the slower one is easy. If the throat tightens or you get tired, end the lesson for today.",
+      "tr": "Tempoyu yalnız yavaş olan rahat geldiğinde artır. Boğaz sıkışırsa ya da yorulursan dersi bugünlük bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The original study in your comfortable range on 'ah', soft synthesized voice, at ♩=90 and ♩=60, over an original soft chord accompaniment (I, IV, V) with a click. Headphones recommended.",
+      "tr": "Özgün etüt rahat menzilinde 'a' ile, yumuşak sentez ses, ♩=90 ve ♩=60; özgün yumuşak akor eşliği (I, IV, V) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the eight bars on 'ah', with the scoops in bars 1 and 5. Breathe after bar 4. Start at ♩=80; the lesson counts at ♩=90. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşliğin bir ölçüsünü dinle, sonra sekiz ölçüyü 1. ve 5. ölçülerdeki scoop'larla 'a' ile söyle. 4. ölçüden sonra nefes al. ♩=80'de başla; ders ♩=90'da sayılır. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "sequence": "1:q 3:q 5:h | 6:e 5:e 4:e 3:e 2:e 3:e 4:e 2:e | 3:q 1:q 2:h | 2:e 3:e 2:e 7,:e 1:h | 3:q 5:q 6:h | 5:e 6:e 5:e 4:e 3:e 4:e 3:e 2:e | 1:e 2:e 3:e 4:e 3:q 2:q | 1:w",
+    "tempo": {
+      "open": 80,
+      "target": 90
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear every note of the run on its own.",
+      "tr": "Koşunun her notasını tek başına duyabildim."
+    },
+    {
+      "en": "Each scoop was short, not a slow slide.",
+      "tr": "Her scoop yavaş bir kaydırma değil, kısaydı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late after the scoop.",
+        "tr": "Doğru, ama scoop'tan sonra geç."
+      },
+      "fix": {
+        "en": "Start the scoop right on the click and keep it short, so the note arrives almost at once.",
+        "tr": "Scoop'a tam klikte başla ve kısa tut; nota neredeyse hemen gelsin."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but early: the run speeds up.",
+        "tr": "Doğru, ama erken: koşu hızlanıyor."
+      },
+      "fix": {
+        "en": "Feel the first note of each click land with the click. Go back to ♩=60 for a few rounds.",
+        "tr": "Her klikin ilk notasının klikle birlikte oturduğunu hisset. Birkaç tur ♩=60'a dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the study without the scoops at ♩=80 first, then add them.",
+    "tr": "Etüdü önce scoop'suz ♩=80'de söyle, sonra onları ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

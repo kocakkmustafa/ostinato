@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m17-11",
+  "title": {
+    "en": "Vaccai: an ornamented lesson",
+    "tr": "Vaccai: süslü bir ders"
+  },
+  "goal": {
+    "en": "Sings a selected ornamented passage from Vaccai's method in a personal key at ♩=72, landing every ornament on its main note.",
+    "tr": "Vaccai'nin yönteminden seçilmiş süslemeli bir bölümü kişisel tonda ♩=72'de, her süslemeyi asıl notasına indirerek söyler."
+  },
+  "explanation": [
+    {
+      "en": "Nicola Vaccai published his practical method of Italian singing in London in 1832. Several of its lessons teach ornaments, one kind at a time.",
+      "tr": "Nicola Vaccai, İtalyan şarkı söyleme üzerine pratik yöntemini 1832'de Londra'da yayımladı. Derslerinin birkaçı süslemeleri, her seferinde bir tür olmak üzere öğretir."
+    },
+    {
+      "en": "The selected passage has ornaments like the ones in this module: short grace notes or small turns on one syllable. The screen marks each one.",
+      "tr": "Seçilen bölümde bu modüldekilere benzer süslemeler vardır: tek hecede kısa süs notaları ya da küçük dönüşler. Ekran her birini işaretler."
+    },
+    {
+      "en": "An ornament decorates a note; it never replaces it. Keep the beat on the main note and touch the ornament lightly.",
+      "tr": "Süsleme bir notayı süsler; asla onun yerini almaz. Vuruşu asıl notada tut ve süslemeye hafifçe dokun."
+    },
+    {
+      "en": "The words are an Italian verse by Pietro Metastasio. Learn the passage on 'ah' first, then add the words.",
+      "tr": "Sözler Pietro Metastasio'nun İtalyanca bir dizesidir. Bölümü önce 'a' ile öğren, sonra sözleri ekle."
+    },
+    {
+      "en": "The app moves the lesson into your personal key, and the accompaniment follows. Start light; if the throat tightens or you get tired, end the lesson for today.",
+      "tr": "Uygulama dersi kişisel tonuna taşır; eşlik de onu izler. Hafif başla; boğaz sıkışırsa ya da yorulursan dersi bugünlük bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The selected passage from the Ostinato edition in your comfortable range, soft synthesized voice, once on 'ah' and once with the words, at ♩=72 and ♩=54, over a soft accompaniment with a click. Headphones recommended.",
+      "tr": "Ostinato baskısından seçilen bölüm rahat menzilinde, yumuşak sentez ses, bir kez 'a' ile ve bir kez sözlerle, ♩=72 ve ♩=54; klikli yumuşak eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, sing it once on 'ah', then once with the words. Practise at a slower tempo first if you need to; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranın gösterdiği bölümü oku. Eşliğin bir ölçüsünü dinle, bir kez 'a' ile, sonra bir kez sözlerle söyle. Gerekirse önce daha yavaş tempoda çalış; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 72,
+      "target": 72
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each ornament was lighter and shorter than its main note.",
+      "tr": "Her süsleme asıl notasından daha hafif ve kısaydı."
+    },
+    {
+      "en": "The vowels stayed pure when I added the words.",
+      "tr": "Sözleri eklediğimde ünlüler saf kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late after an ornament.",
+        "tr": "Doğru, ama süslemeden sonra geç."
+      },
+      "fix": {
+        "en": "The ornament took time from the beat. Start it a little earlier, so the main note lands on its click.",
+        "tr": "Süsleme vuruştan zaman aldı. Onu biraz daha erken başlat ki asıl nota kendi klikine otursun."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the main note after an ornament.",
+        "tr": "Süslemeden sonra asıl notada farklı nota."
+      },
+      "fix": {
+        "en": "Sing that bar without the ornament first and find the main note, then add the ornament back.",
+        "tr": "O ölçüyü önce süslemesiz söyle ve asıl notayı bul, sonra süslemeyi geri ekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the passage on 'ah' without the ornaments first; add them back one at a time.",
+    "tr": "Bölümü önce süslemesiz 'a' ile söyle; süslemeleri birer birer geri ekle."
+  },
+  "repertoire": "Nicola Vaccai (1790–1848), Metodo pratico di canto italiano per camera: one selected lesson with ornaments (selection; lesson to be chosen and its notes checked against the source edition). Words by Pietro Metastasio (1698–1782). Source: London first edition, 1832. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

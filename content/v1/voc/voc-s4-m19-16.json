@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-16",
+  "title": {
+    "en": "De Colores",
+    "tr": "De Colores"
+  },
+  "goal": {
+    "en": "Sings the traditional melody De Colores, 16 bars, in a personal key at ♩=100, bright and steady.",
+    "tr": "Geleneksel De Colores ezgisini, 16 ölçü, kişisel tonda ♩=100'de parlak ve dengeli söyler."
+  },
+  "explanation": [
+    {
+      "en": "De Colores is a traditional song from Spain and Mexico. It is sung in many Spanish-speaking countries. You sing the melody only, on 'la'.",
+      "tr": "De Colores, İspanya ve Meksika'dan geleneksel bir şarkıdır. Birçok İspanyolca konuşulan ülkede söylenir. Yalnız ezgiyi 'la' ile söylersin."
+    },
+    {
+      "en": "At ♩=100 it is the fastest song in this module. Keep the sound light and the tongue loose, so each 'la' is short and clear.",
+      "tr": "♩=100 ile bu modülün en hızlı şarkısıdır. Sesi hafif, dili gevşek tut ki her 'la' kısa ve net olsun."
+    },
+    {
+      "en": "Feel the beat in your body before you start. A small nod or a tap of the foot on each beat helps you stay with the accompaniment.",
+      "tr": "Başlamadan önce vuruşu bedeninde hisset. Her vuruşta küçük bir baş sallama ya da ayak vuruşu eşlikle birlikte kalmana yardım eder."
+    },
+    {
+      "en": "Use your map: find the phrases that repeat. A fast song leaves little time to think, so knowing the repeats saves effort.",
+      "tr": "Haritanı kullan: tekrar eden cümleleri bul. Hızlı bir şarkı düşünmeye az zaman bırakır; tekrarları bilmek çaba kazandırır."
+    },
+    {
+      "en": "If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The 16 bars in your comfortable range, soft synthesized voice, at ♩=100 and ♩=65, over an original simple accompaniment. Headphones recommended.",
+      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=100 ve ♩=65; özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the 16-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=100. Start at ♩=65 if you like; the lesson counts at ♩=100. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama 16 ölçülük ezgiyi derecelerle gösterir. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=100'de söyle. İstersen ♩=65'te başla; ders ♩=100'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 100,
+      "target": 100
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each 'la' was short and clear at the fast tempo.",
+      "tr": "Hızlı tempoda her 'la' kısa ve netti."
+    },
+    {
+      "en": "I stayed with the accompaniment to the end.",
+      "tr": "Sonuna kadar eşlikle birlikte kaldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late as the song goes on.",
+        "tr": "Doğru, ama şarkı ilerledikçe geç."
+      },
+      "fix": {
+        "en": "You are dragging behind the accompaniment. Tap the beat with your foot and sing the song at ♩=80 once, then return to ♩=100.",
+        "tr": "Eşliğin gerisine düşüyorsun. Ayağınla vuruşu tut ve şarkıyı bir kez ♩=80'de söyle, sonra ♩=100'e dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the quick notes.",
+        "tr": "Hızlı notalarda farklı nota."
+      },
+      "fix": {
+        "en": "The notes blur together. Sing that bar at ♩=65 on 'la', giving each note a light new start, then raise the tempo.",
+        "tr": "Notalar birbirine karışıyor. O ölçüyü ♩=65'te 'la' ile söyle, her notaya hafif yeni bir başlangıç ver, sonra tempoyu artır."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the melody at ♩=65, then raise the tempo by 5 at a time.",
+    "tr": "Ezgiyi ♩=65'te söyle, sonra tempoyu her seferinde 5 artır."
+  },
+  "repertoire": "De Colores, traditional Spanish/Mexican song. Public domain, legal review pending. Melody only, sung on 'la'; the words are not used (word variants to be confirmed per country). Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,128 @@
+{
+  "id": "voc-s4-m19-02",
+  "title": {
+    "en": "Shenandoah",
+    "tr": "Shenandoah"
+  },
+  "goal": {
+    "en": "Sings the traditional melody Shenandoah, 16 bars, in a personal key at ♩=66, with long, calm phrases.",
+    "tr": "Geleneksel Shenandoah ezgisini, 16 ölçü, kişisel tonda ♩=66'da uzun ve sakin cümlelerle söyler."
+  },
+  "explanation": [
+    {
+      "en": "Shenandoah is a traditional American song from the 19th century. River boatmen and later sailors sang it. You sing the melody only, on 'la'.",
+      "tr": "Shenandoah 19. yüzyıldan geleneksel bir Amerikan şarkısıdır. Önce nehir kayıkçıları, sonra denizciler söyledi. Yalnız ezgiyi 'la' ile söylersin."
+    },
+    {
+      "en": "The phrases are long and slow, and most of them end on a held note. The whole song is one wide, calm line.",
+      "tr": "Cümleler uzun ve yavaştır; çoğu tutulan bir notayla biter. Bütün şarkı geniş ve sakin tek bir çizgidir."
+    },
+    {
+      "en": "Breathe only at the ends of phrases. Take an easy breath and let it last the phrase; you don't need a big one.",
+      "tr": "Yalnız cümle sonlarında nefes al. Rahat bir nefes al ve cümle boyunca yetmesine izin ver; büyük bir nefese gerek yok."
+    },
+    {
+      "en": "Keep the held notes steady and soft to their end. Let the sound stop gently instead of pushing out the last of your air.",
+      "tr": "Tutulan notaları sonuna kadar kararlı ve yumuşak tut. Son havanı dışarı itmek yerine sesin yumuşakça bitmesine izin ver."
+    },
+    {
+      "en": "The tune covers a wide span. The app places it in your comfortable range. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Ezgi geniş bir alan tutar. Uygulama onu rahat menziline yerleştirir. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The 16 bars in your comfortable range, soft synthesized voice, at ♩=66 and ♩=45, over an original simple accompaniment. Headphones recommended.",
+      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=66 ve ♩=45; özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the 16-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=66. Start at ♩=45 if you like; the lesson counts at ♩=66. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama 16 ölçülük ezgiyi derecelerle gösterir. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=66'da söyle. İstersen ♩=45'te başla; ders ♩=66'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 66,
+      "target": 66
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2",
+    "V4"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I breathed only at the breath marks.",
+      "tr": "Yalnız nefes işaretlerinde nefes aldım."
+    },
+    {
+      "en": "The held notes stayed steady to their end.",
+      "tr": "Tutulan notalar sonuna kadar kararlı kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the end of a long phrase, a little low.",
+        "tr": "Uzun cümlenin sonunda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Keep the energy to the last note. Sing the phrase at ♩=45 and think 'up' on the final note.",
+        "tr": "Enerjiyi son notaya kadar koru. Cümleyi ♩=45'te söyle ve son notada 'yukarı' diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late after a breath.",
+        "tr": "Doğru, ama nefesten sonra geç."
+      },
+      "fix": {
+        "en": "Take the breath from the time of the note before the mark, so the next phrase starts on its beat.",
+        "tr": "Nefesi işaretten önceki notanın süresinden al; böylece sonraki cümle kendi vuruşunda başlar."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the first two phrases at ♩=45, resting between them, then add the rest one phrase at a time.",
+    "tr": "İlk iki cümleyi aralarında dinlenerek ♩=45'te söyle, sonra kalanını her seferinde bir cümle ekleyerek söyle."
+  },
+  "repertoire": "Shenandoah, traditional American song (19th century). Public domain, legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 14,
+  "expertPending": true
+}

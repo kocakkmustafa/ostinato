@@ -1,0 +1,108 @@
+{
+  "id": "voc-s4-m18-14",
+  "title": {
+    "en": "Chord tones",
+    "tr": "Akor sesleri"
+  },
+  "goal": {
+    "en": "Sings the root, third and fifth of 8 chords played in turn.",
+    "tr": "Sırayla çalınan 8 akorun kökünü, 3'lüsünü ve 5'lisini söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "A chord is three notes stacked in thirds: the root, the third and the fifth. The root names the chord.",
+      "tr": "Akor, üçlü aralıklarla üst üste dizilmiş üç notadır: kök, 3'lü ve 5'li. Kök akora adını verir."
+    },
+    {
+      "en": "Do-mi-sol is the I chord. Fa-la-do is IV, sol-ti-re is V and la-do-mi is vi.",
+      "tr": "Do-mi-sol I akorudur. Fa-la-do IV, sol-si-re V, la-do-mi vi akorudur."
+    },
+    {
+      "en": "The accompaniment plays each chord and holds it. Sing its root, then its third, then its fifth, about two seconds each.",
+      "tr": "Eşlik her akoru çalar ve tutar. Önce kökünü, sonra 3'lüsünü, sonra 5'lisini söyle; her biri yaklaşık iki saniye."
+    },
+    {
+      "en": "The 8 chords: I, IV, V, I, vi, IV, V, I. For IV, V and vi you start below do. If a note is not comfortable, sing it an octave higher; it counts the same.",
+      "tr": "8 akor: I, IV, V, I, vi, IV, V, I. IV, V ve vi'de do'nun altından başlarsın. Bir nota rahat değilse bir oktav yukarıda söyle; aynı sayılır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Each chord as a soft sustained accompaniment in your personal key. For the first chord, a soft synthesized voice sings root, third and fifth over it once, slowly. Headphones recommended.",
+      "tr": "Her akor kişisel tonunda yumuşak, uzun süren bir eşlik olarak. İlk akorda yumuşak bir sentez ses kökü, 3'lüyü ve 5'liyi üstünde bir kez, yavaşça söyler. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "When a chord sounds, sing its root, third and fifth on 'la', about two seconds each, then rest while the next chord starts. Sing in your own octave.",
+      "tr": "Bir akor çalınca kökünü, 3'lüsünü ve 5'lisini 'la' ile, her birini yaklaşık iki saniye söyle; sonraki akor başlarken dinlen. Kendi oktavında söyle."
+    },
+    "sequence": "1:h 3:h 5:h hr | 4,:h 6,:h 1:h hr | 5,:h 7,:h 2:h hr | 1:h 3:h 5:h hr | 6,:h 1:h 3:h hr | 4,:h 6,:h 1:h hr | 5,:h 7,:h 2:h hr | 1:h 3:h 5:h hr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear which chord note I was singing.",
+      "tr": "Akorun hangi sesini söylediğimi duyabildim."
+    },
+    {
+      "en": "Each of my notes blended into the chord.",
+      "tr": "Her notam akora karıştı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a step away on the third.",
+        "tr": "Farklı nota: 3'lüde bir basamak uzakta."
+      },
+      "fix": {
+        "en": "From the root, count two steps up: do-re-mi, fa-sol-la. Sing the steps quietly, then only the third.",
+        "tr": "Kökten iki basamak yukarı say: do-re-mi, fa-sol-la. Basamakları hafifçe söyle, sonra yalnız 3'lüyü."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only the roots of all 8 chords first, then add the thirds, then the fifths.",
+    "tr": "Önce 8 akorun yalnız köklerini söyle, sonra 3'lüleri, en son 5'lileri ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

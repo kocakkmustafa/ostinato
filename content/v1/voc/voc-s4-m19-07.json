@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-07",
+  "title": {
+    "en": "Schubert: Heidenröslein",
+    "tr": "Schubert: Heidenröslein"
+  },
+  "goal": {
+    "en": "Sings the first verse of Schubert's Heidenröslein, D 257, in a personal key at ♩=76, first on 'la', then with Goethe's German words.",
+    "tr": "Schubert'in Heidenröslein'ının (D 257) ilk kıtasını kişisel tonda ♩=76'da, önce 'la' ile, sonra Goethe'nin Almanca sözleriyle söyler."
+  },
+  "explanation": [
+    {
+      "en": "Franz Schubert set Goethe's poem in 1815; it was first printed in 1821. It is a lied, a German art song for voice and piano.",
+      "tr": "Franz Schubert, Goethe'nin şiirini 1815'te besteledi; ilk kez 1821'de basıldı. Bir lied'dir: ses ve piyano için Alman sanat şarkısı."
+    },
+    {
+      "en": "The song is strophic: all three verses use the same music. You learn the first verse, which begins \"Sah ein Knab' ein Röslein stehn\".",
+      "tr": "Şarkı strofiktir: üç kıtanın hepsi aynı müziği kullanır. İlk kıtayı öğrenirsin; \"Sah ein Knab' ein Röslein stehn\" diye başlar."
+    },
+    {
+      "en": "The character is light and sweet. Keep the sound small and bright, with clear, short consonants.",
+      "tr": "Karakteri hafif ve tatlıdır. Sesi küçük ve parlak tut; ünsüzler net ve kısa olsun."
+    },
+    {
+      "en": "German vowels are pure, like the five you practised. The 'ö' in Röslein is an 'e' sung with rounded lips; keep it steady.",
+      "tr": "Almanca ünlüler, çalıştığın beş ünlü gibi saftır. Röslein'daki 'ö', Türkçedeki 'ö' gibidir; onu kararlı tut."
+    },
+    {
+      "en": "Learn the notes on 'la' first, then add the words. The screen shows the words under the notes. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Önce notaları 'la' ile öğren, sonra sözleri ekle. Ekran sözleri notaların altında gösterir. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The first verse in your comfortable range, soft synthesized voice, at ♩=76 and ♩=52, over an original simple accompaniment. Headphones recommended.",
+      "tr": "İlk kıta rahat menzilinde, yumuşak sentez ses, ♩=76 ve ♩=52; özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the first verse in degrees. Listen to one bar of the accompaniment, then sing it once on 'la', then once with the words, at ♩=76. Start at ♩=52 if you like; the lesson counts at ♩=76. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ilk kıtayı derecelerle gösterir. Eşlikten bir ölçü dinle, sonra onu bir kez 'la' ile, sonra bir kez sözlerle ♩=76'da söyle. İstersen ♩=52'de başla; ders ♩=76'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 76,
+      "target": 76
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The sound stayed light and bright.",
+      "tr": "Ses hafif ve parlak kaldı."
+    },
+    {
+      "en": "The vowels stayed pure when I added the words.",
+      "tr": "Sözleri eklediğimde ünlüler saf kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late on the words.",
+        "tr": "Doğru, ama sözlerde geç."
+      },
+      "fix": {
+        "en": "Put the consonant just before the click so the vowel lands on it. Speak the words in rhythm once, then sing.",
+        "tr": "Ünsüzü klikten hemen önce yerleştir ki ünlü tam klike otursun. Sözleri bir kez ritimle konuş, sonra söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the highest notes, a little low.",
+        "tr": "En üst notalarda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Don't push up to them. Sing that phrase at ♩=52 with the same easy space you use lower down. If a note is still not comfortable, sing it an octave lower.",
+        "tr": "Onlara doğru itme. O cümleyi ♩=52'de, alt notalardaki rahat açıklıkla söyle. Bir nota yine rahat değilse onu bir oktav aşağıda söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the whole verse on 'la' only; add the words on another day.",
+    "tr": "Bütün kıtayı yalnız 'la' ile söyle; sözleri başka bir gün ekle."
+  },
+  "repertoire": "Heidenröslein, D 257, Franz Schubert (1797–1828); words Johann Wolfgang von Goethe (1749–1832). Source: first edition, 1821. Public domain, legal review pending. First verse, on 'la' and with the words. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 14,
+  "expertPending": true
+}

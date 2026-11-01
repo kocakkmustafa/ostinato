@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-14",
+  "title": {
+    "en": "Panofka: an easy vocalise",
+    "tr": "Panofka: kolay bir vokaliz"
+  },
+  "goal": {
+    "en": "Sings an easy vocalise by Panofka, start to finish, on one vowel at ♩=72, with an even tone across its range.",
+    "tr": "Panofka'nın kolay bir vokalizini baştan sona tek ünlüyle ♩=72'de, menzili boyunca eşit bir tınıyla söyler."
+  },
+  "explanation": [
+    {
+      "en": "Heinrich Panofka was a 19th-century violinist and singing teacher. He wrote vocalises: melodies sung on a vowel, with no words, to train an even, singing tone.",
+      "tr": "Heinrich Panofka 19. yüzyılda yaşamış bir kemancı ve şan öğretmeniydi. Vokalizler yazdı: eşit ve şarkı söyleyen bir tını geliştirmek için sözsüz, bir ünlüyle söylenen ezgiler."
+    },
+    {
+      "en": "This one is easy in its notes, so your attention can go to the tone. Aim for the same colour on low, middle and high notes.",
+      "tr": "Bu vokalizin notaları kolaydır; böylece dikkatin tınıya gidebilir. Pes, orta ve yüksek notalarda aynı rengi hedefle."
+    },
+    {
+      "en": "Map it first: phrases, repeats and breath marks. Then sing it phrase by phrase at the slow tempo.",
+      "tr": "Önce haritala: cümleler, tekrarlar ve nefes işaretleri. Sonra onu yavaş tempoda cümle cümle söyle."
+    },
+    {
+      "en": "Breathe only at the marks, and take an easy breath, not a big one. Shape each phrase toward its end and finish it gently.",
+      "tr": "Yalnız işaretlerde nefes al; büyük değil, rahat bir nefes. Her cümleyi sonuna doğru biçimlendir ve yumuşakça bitir."
+    },
+    {
+      "en": "The app moves the vocalise into your personal key, and the accompaniment follows. Sing on 'ah', or on 'oo' if 'ah' feels spread. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Uygulama vokalizi kişisel tonuna taşır; eşlik de onu izler. 'a' ile söyle; 'a' dağınık geliyorsa 'u' ile. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The selected lesson from the Ostinato edition in your comfortable range, soft synthesized voice on 'ah', at ♩=72 and ♩=50, over a soft accompaniment with a click. Headphones recommended.",
+      "tr": "Ostinato baskısından seçilen ders rahat menzilinde, 'a' ile yumuşak sentez ses, ♩=72 ve ♩=50; klikli yumuşak eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase first, then the whole lesson at ♩=72. Breathe only at the marks. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranın gösterdiği bölümü oku. Eşlikten bir ölçü dinle, sonra onu 'a' ile, önce cümle cümle, sonra bütün dersi ♩=72'de söyle. Yalnız işaretlerde nefes al. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 72,
+      "target": 72
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The tone kept the same colour on low and high notes.",
+      "tr": "Tını pes ve yüksek notalarda aynı rengi korudu."
+    },
+    {
+      "en": "I breathed only at the breath marks.",
+      "tr": "Yalnız nefes işaretlerinde nefes aldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note on the highest notes, a little low.",
+        "tr": "En üst notalarda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Don't push up to them. Sing that phrase at ♩=50 with the same easy space you use lower down. If a note is still not comfortable, sing it an octave lower.",
+        "tr": "Onlara doğru itme. O cümleyi ♩=50'de, alt notalardaki rahat açıklıkla söyle. Bir nota yine rahat değilse onu bir oktav aşağıda söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late after a breath.",
+        "tr": "Doğru, ama nefesten sonra geç."
+      },
+      "fix": {
+        "en": "Take the breath from the time of the note before the mark, so the next phrase starts on its beat.",
+        "tr": "Nefesi işaretten önceki notanın süresinden al; böylece sonraki cümle kendi vuruşunda başlar."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only the first phrase at ♩=50 until it feels easy, then add one phrase at a time.",
+    "tr": "İlk cümleyi rahat gelene kadar ♩=50'de tek başına söyle, sonra her seferinde bir cümle ekle."
+  },
+  "repertoire": "Heinrich Panofka (1807–1887), an easy vocalise (opus and number to be confirmed from the first edition). Source: 19th-century edition. Vocalise, no words. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 14,
+  "expertPending": true
+}

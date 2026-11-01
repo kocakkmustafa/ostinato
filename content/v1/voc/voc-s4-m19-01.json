@@ -1,0 +1,143 @@
+{
+  "id": "voc-s4-m19-01",
+  "title": {
+    "en": "How to learn a song",
+    "tr": "Bir şarkı nasıl öğrenilir"
+  },
+  "goal": {
+    "en": "Answers 5 questions on the steps of learning a song and plans how to learn the next piece: map, phrases, breath points, tempo steps and rest.",
+    "tr": "Bir şarkıyı öğrenme adımları üzerine 5 soruyu yanıtlar ve sıradaki parçayı nasıl öğreneceğini planlar: harita, cümleler, nefes yerleri, tempo basamakları ve dinlenme."
+  },
+  "explanation": [
+    {
+      "en": "This module is your first repertoire: folk songs, art songs and vocalises. The same steps work for each of them.",
+      "tr": "Bu modül ilk repertuvarındır: halk ezgileri, sanat şarkıları ve vokalizler. Aynı adımlar hepsinde işe yarar."
+    },
+    {
+      "en": "Step 1, map: listen to the whole piece once. Find where the phrases end, which phrases repeat, and where the line goes highest and lowest.",
+      "tr": "1. adım, harita: parçanın tamamını bir kez dinle. Cümlelerin nerede bittiğini, hangilerinin tekrar ettiğini ve dizinin en tize ve en pese nerede gittiğini bul."
+    },
+    {
+      "en": "Step 2, breath: mark a breath point at the end of each phrase. Take an easy breath there, not a big one.",
+      "tr": "2. adım, nefes: her cümlenin sonuna bir nefes yeri işaretle. Orada büyük değil, rahat bir nefes al."
+    },
+    {
+      "en": "Step 3, notes first: sing one phrase at a time on 'la' at the slow tempo. Add the words only when the notes feel secure.",
+      "tr": "3. adım, önce notalar: her seferinde bir cümleyi yavaş tempoda 'la' ile söyle. Sözleri ancak notalar oturunca ekle."
+    },
+    {
+      "en": "Step 4, tempo and joins: raise the tempo in small steps, then join the phrases. Hard spots get their own short practice.",
+      "tr": "4. adım, tempo ve bağlantılar: tempoyu küçük basamaklarla artır, sonra cümleleri birleştir. Zor yerler kendi kısa çalışmasını alır."
+    },
+    {
+      "en": "Comfort decides the length. Spread a new piece over several short sessions, and stop when singing takes more effort.",
+      "tr": "Süreyi rahatlık belirler. Yeni bir parçayı birkaç kısa oturuma yay ve söylemek daha çok çaba istemeye başlayınca dur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; each question shows a short practice situation with a new piece.",
+      "tr": "Referans ses yok; her soru yeni bir parçayla ilgili kısa bir çalışma durumu gösterir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D",
+      "Ö"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Part 1: answer 5 questions. Each shows a moment in learning a new piece; choose the next step: map the piece, mark the breath points, practise one phrase slowly, add the words, or rest. Part 2: pick the piece you will learn next in this module, write its learning plan and tick each item on the checklist.",
+      "tr": "1. bölüm: 5 soruyu yanıtla. Her biri yeni bir parçayı öğrenirken bir anı gösterir; sonraki adımı seç: parçayı haritala, nefes yerlerini işaretle, bir cümleyi yavaşça çalış, sözleri ekle ya da dinlen. 2. bölüm: bu modülde sıradaki öğreneceğin parçayı seç, öğrenme planını yaz ve kontrol listesindeki her maddeyi işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "minCorrect": 5,
+      "text": {
+        "en": "All 5 questions correct, and every plan item ticked.",
+        "tr": "5 sorunun 5'i de doğru ve plan maddelerinin hepsi işaretli."
+      }
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 5,
+      "params": {
+        "set": "song_learning_plan",
+        "choices": [
+          "map_the_piece",
+          "mark_breath_points",
+          "one_phrase_slowly",
+          "add_the_words",
+          "rest_now"
+        ],
+        "situations": [
+          "new_piece_never_heard",
+          "phrases_known_no_breath_marks",
+          "one_phrase_keeps_slipping",
+          "notes_secure_on_la",
+          "effort_keeps_growing",
+          "joins_between_phrases_break"
+        ]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I know where each phrase of my next piece ends.",
+      "tr": "Sıradaki parçamın her cümlesinin nerede bittiğini biliyorum."
+    },
+    {
+      "en": "I marked a breath point for each phrase.",
+      "tr": "Her cümle için bir nefes yeri işaretledim."
+    },
+    {
+      "en": "I will learn the notes on 'la' before the words.",
+      "tr": "Notaları sözlerden önce 'la' ile öğreneceğim."
+    },
+    {
+      "en": "My plan raises the tempo in small steps.",
+      "tr": "Planım tempoyu küçük basamaklarla artırıyor."
+    },
+    {
+      "en": "My sessions are short, with rest days between them.",
+      "tr": "Oturumlarım kısa ve aralarında dinlenme günleri var."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: “add the words” chosen before the notes are secure.",
+        "tr": "Farklı cevap: notalar oturmadan “sözleri ekle” seçildi."
+      },
+      "fix": {
+        "en": "Words add a second task. Sing the phrase on 'la' at the slow tempo until it matches the reference, then add the words.",
+        "tr": "Sözler ikinci bir görev ekler. Cümleyi referansla aynı olana kadar yavaş tempoda 'la' ile söyle, sonra sözleri ekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: the whole piece at the target tempo chosen as the first step.",
+        "tr": "Farklı cevap: ilk adım olarak parçanın tamamı hedef tempoda seçildi."
+      },
+      "fix": {
+        "en": "Start with the map. Knowing the phrases first makes every later step shorter.",
+        "tr": "Haritayla başla. Önce cümleleri bilmek sonraki her adımı kısaltır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Plan only the first phrase of your next piece: its map, its breath point and one slow run.",
+    "tr": "Sıradaki parçanın yalnız ilk cümlesini planla: haritasını, nefes yerini ve bir yavaş söyleyişini."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

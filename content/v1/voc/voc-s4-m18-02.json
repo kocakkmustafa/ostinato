@@ -1,0 +1,111 @@
+{
+  "id": "voc-s4-m18-02",
+  "title": {
+    "en": "Holding while another moves",
+    "tr": "Diğeri hareket ederken tutmak"
+  },
+  "goal": {
+    "en": "Holds a note steady for 4 seconds, within a 25-cent spread, while a second voice moves around it.",
+    "tr": "İkinci bir ses çevresinde hareket ederken bir notayı 4 saniye, 25 cent yayılım içinde sabit tutar."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "In harmony you often hold a note while the other voice moves. Your note must not follow it.",
+      "tr": "Armonide sık sık sen bir notayı tutarken diğer ses hareket eder. Senin notan onu izlememeli."
+    },
+    {
+      "en": "Some of its notes rub against yours. That rub is part of the sound; stay where you are.",
+      "tr": "Diğer sesin bazı notaları seninkine sürtünür. Bu sürtünme sesin bir parçasıdır; yerinde kal."
+    },
+    {
+      "en": "Take a breath before each hold. Keep the air flowing evenly to the end of the four seconds.",
+      "tr": "Her tutmadan önce nefes al. Havayı dört saniyenin sonuna kadar eşit akıt."
+    },
+    {
+      "en": "If you run short of air, stop, breathe and start the next hold.",
+      "tr": "Havan biterse dur, nefes al ve sonraki tutmaya geç."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Each note you hold, sung once alone by a soft synthesized voice in your comfortable range. Then a second synthesized voice moves in one-second steps while you hold: over do it sings 3-4-5-3, over mi 5-6-5-4, over sol 1'-7-6-7, and under the last do 5,-6,-7,-6,. Headphones recommended.",
+      "tr": "Tutacağın her nota, rahat menzilinde yumuşak bir sentez sesle önce tek başına bir kez. Sonra sen tutarken ikinci bir sentez ses bir saniyelik adımlarla hareket eder: do üzerinde 3-4-5-3, mi üzerinde 5-6-5-4, sol üzerinde 1'-7-6-7, son do'nun altında 5,-6,-7,-6,. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to your note, then hold it on 'oo' for about 4 seconds while the other voice moves. Rest, then do the next one: do, mi, sol, then do again. Sing in your own octave.",
+      "tr": "Notanı dinle, sonra diğer ses hareket ederken onu 'u' ile yaklaşık 4 saniye tut. Dinlen, sonra sıradakine geç: do, mi, sol ve yine do. Kendi oktavında söyle."
+    },
+    "sequence": "1:w | wr | 3:w | wr | 5:w | wr | 1:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All 4 holds last about 4 seconds with a pitch spread (IQR) of 25 cents or less, each within 30 cents of its note.",
+        "tr": "4 tutmanın dördü de yaklaşık 4 saniye sürer; perde yayılımı (IQR) 25 cent ya da altındadır ve her biri notasına 30 cent içinde yakındır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept my own part while the other voice sang.",
+      "tr": "Diğer ses söylerken kendi partimde kaldım."
+    },
+    {
+      "en": "My note stayed level to the end of each hold.",
+      "tr": "Notam her tutmanın sonuna kadar düz kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: your note drifted toward the other voice.",
+        "tr": "Farklı nota: notan diğer sese doğru kaydı."
+      },
+      "fix": {
+        "en": "Before the hold, hum your note softly and settle on it. Listen to the other voice less and feel your own note more.",
+        "tr": "Tutmadan önce notanı hafifçe mırıldan ve ona yerleş. Diğer sese daha az, kendi notana daha çok odaklan."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hold for 2 seconds first, then 3, then 4.",
+    "tr": "Önce 2 saniye tut, sonra 3, sonra 4."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

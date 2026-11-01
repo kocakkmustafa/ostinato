@@ -1,0 +1,135 @@
+{
+  "id": "voc-s4-m17-14",
+  "title": {
+    "en": "Melisma checkpoint",
+    "tr": "Melisma geçişi"
+  },
+  "goal": {
+    "en": "Sings an original sixteen-bar melody with runs, turns, scoops and fall-offs, in tune and on time at ♩=90.",
+    "tr": "Koşular, dönüşler, scoop'lar ve düşüşler içeren özgün on altı ölçülük bir ezgiyi ♩=90'da doğru perdede ve zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint brings the module together: runs, turns, scoops and fall-offs, in one melody.",
+      "tr": "Bu geçiş modülü birleştirir: koşular, dönüşler, scoop'lar ve düşüşler, tek bir ezgide."
+    },
+    {
+      "en": "The melody has four phrases of four bars. Bars 2, 6, 10, 14 and 15 are eighth-note runs on one 'ah'; bars 3, 7 and 12 hold small turns.",
+      "tr": "Ezginin dört ölçülük dört cümlesi vardır. 2., 6., 10., 14. ve 15. ölçüler tek 'a' üzerinde sekizlik koşulardır; 3., 7. ve 12. ölçüler küçük dönüşler taşır."
+    },
+    {
+      "en": "Scoop into the long notes of bars 1, 5 and 13. End bars 4 and 16 with a short fall-off. Every other note starts right on its pitch.",
+      "tr": "1., 5. ve 13. ölçülerin uzun notalarına scoop'la gir. 4. ve 16. ölçüleri kısa bir düşüşle bitir. Diğer her nota tam kendi perdesinde başlar."
+    },
+    {
+      "en": "Breathe at the end of each phrase. If you miss a note, keep going and sing the next one on its click. Do not restart.",
+      "tr": "Her cümlenin sonunda nefes al. Bir notayı kaçırırsan devam et ve sonrakini kendi klikinde söyle. Baştan başlama."
+    },
+    {
+      "en": "Keep the voice light all the way through. If the throat tightens or you get tired, end the lesson for today.",
+      "tr": "Sesi baştan sona hafif tut. Boğaz sıkışırsa ya da yorulursan dersi bugünlük bitir."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The original melody in your comfortable range on 'ah', soft synthesized voice, at ♩=90 and ♩=60, over an original soft chord accompaniment (I, IV, V) with a click. Headphones recommended.",
+      "tr": "Özgün ezgi rahat menzilinde 'a' ile, yumuşak sentez ses, ♩=90 ve ♩=60; özgün yumuşak akor eşliği (I, IV, V) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the sixteen bars on 'ah' at ♩=90, with the scoops and fall-offs where the screen marks them. Practise at a slower tempo first if you need to; the checkpoint passes at ♩=90. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşliğin bir ölçüsünü dinle, sonra on altı ölçüyü ekranın işaretlediği scoop'lar ve düşüşlerle 'a' ile ♩=90'da söyle. Gerekirse önce daha yavaş tempoda çalış; geçiş ♩=90'da geçilir. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "sequence": "1:q 2:q 3:h | 4:e 3:e 2:e 3:e 4:e 5:e 4:e 3:e | 2:q 3:e 2:e 1:h | 7,:q 2:q 1:h | 3:q 4:q 5:h | 6:e 5:e 4:e 5:e 6:e 5:e 4:e 3:e | 4:q 3:e 2:e 3:h | 2:w | 5:q 6:q 5:h | 4:e 5:e 4:e 3:e 2:e 3:e 4:e 5:e | 6:h 5:e 4:e 3:q | 2:e 3:e 2:e 1:e 2:h | 1:q 3:q 5:h | 6:e 5:e 4:e 3:e 4:e 5:e 6:e 5:e | 4:e 3:e 2:e 3:e 2:q 7,:q | 1:w",
+    "tempo": {
+      "open": 90,
+      "target": 90
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 pitch and timing accuracy at ♩=90. Each scoop settles on its note within 200 ms, and each fall-off starts only after the note's full length.",
+        "tr": "♩=90'da 4. seviye perde ve zamanlama ölçütü. Her scoop notasına 200 ms içinde yerleşir ve her düşüş ancak notanın tam süresinden sonra başlar."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear every note of the run on its own.",
+      "tr": "Koşunun her notasını tek başına duyabildim."
+    },
+    {
+      "en": "Each scoop was short, not a slow slide.",
+      "tr": "Her scoop yavaş bir kaydırma değil, kısaydı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early: the run speeds up.",
+        "tr": "Doğru, ama erken: koşu hızlanıyor."
+      },
+      "fix": {
+        "en": "Feel the first note of each click land with the click. Go back to ♩=60 for a few rounds.",
+        "tr": "Her klikin ilk notasının klikle birlikte oturduğunu hisset. Birkaç tur ♩=60'a dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the end of a run, a little low.",
+        "tr": "Koşunun sonunda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The last notes of a run sag when the air runs low. Breathe at every phrase end and keep the run light.",
+        "tr": "Hava azaldığında koşunun son notaları düşer. Her cümle sonunda nefes al ve koşuyu hafif tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise at ♩=70 and ♩=80 first, then take the checkpoint at ♩=90.",
+    "tr": "Önce ♩=70 ve ♩=80'de çalış, sonra geçişi ♩=90'da dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

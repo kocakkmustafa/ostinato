@@ -1,0 +1,110 @@
+{
+  "id": "voc-s4-m17-08",
+  "title": {
+    "en": "Fall-offs and releases",
+    "tr": "Düşüşler ve bırakışlar"
+  },
+  "goal": {
+    "en": "Holds 6 notes in tune and ends each with a short, controlled fall-off.",
+    "tr": "Altı notayı doğru perdede tutar ve her birini kısa, kontrollü bir düşüşle bitirir."
+  },
+  "explanation": [
+    {
+      "en": "A fall-off lets the pitch drop at the very end of a note, like a sigh. It is one way to release a note, often at the end of a phrase.",
+      "tr": "Düşüş, perdeyi notanın en sonunda bir iç çekiş gibi aşağı bırakır. Notayı bırakmanın bir yoludur; çoğu zaman cümle sonunda kullanılır."
+    },
+    {
+      "en": "First the note, then the fall. Hold the note steady for its full length; the fall starts only at the end.",
+      "tr": "Önce nota, sonra düşüş. Notayı tam süresi boyunca sabit tut; düşüş ancak sonda başlar."
+    },
+    {
+      "en": "Let the pitch drop as the air and the volume fade together. Do not push the fall; let it go.",
+      "tr": "Hava ve gürlük birlikte azalırken perdenin düşmesine izin ver. Düşüşü itme; bırak gitsin."
+    },
+    {
+      "en": "Keep it short and small: a quick drop that fades out. A long, deep fall sounds heavy.",
+      "tr": "Kısa ve küçük tut: sönerek biten çabuk bir iniş. Uzun ve derin bir düşüş ağır duyulur."
+    },
+    {
+      "en": "A clean release is the other choice: stop the sound on pitch, with no drop. Knowing both lets you choose. If the throat tightens, stop and rest.",
+      "tr": "Temiz bırakış diğer seçenektir: sesi perdede, düşüş olmadan kes. İkisini de bilmek seçmeni sağlar. Boğaz sıkışırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Six notes from your comfortable range on 'ah', soft synthesized voice; each is held for about two seconds and ends with a short fall-off.",
+      "tr": "Rahat menzilinden altı nota, 'a' ile yumuşak sentez ses; her biri yaklaşık iki saniye tutulur ve kısa bir düşüşle biter."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "For each of 6 notes: listen, then sing it on 'ah' in your own octave, hold it steady for about two seconds and end with a short fall-off.",
+      "tr": "6 notanın her biri için: dinle, sonra kendi oktavında 'a' ile söyle, yaklaşık iki saniye sabit tut ve kısa bir düşüşle bitir."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 pitch accuracy on the held part of each note; each fall starts only after the held part and moves down.",
+        "tr": "Her notanın tutulan bölümünde 4. seviye perde ölçütü; her düşüş ancak tutulan bölümden sonra başlar ve aşağı iner."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The note stayed steady before the fall.",
+      "tr": "Düşüşten önce nota sabit kaldı."
+    },
+    {
+      "en": "Each fall was short and faded out.",
+      "tr": "Her düşüş kısaydı ve sönerek bitti."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low: the note drops too early.",
+        "tr": "Farklı nota, biraz alçak: nota çok erken düşüyor."
+      },
+      "fix": {
+        "en": "Hold the full length on pitch first, then let go. Think 'hold, then sigh'.",
+        "tr": "Önce tam süreyi perdede tut, sonra bırak. 'Tut, sonra iç çek' diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear the fall.",
+        "tr": "Düşüşü duyamadım."
+      },
+      "fix": {
+        "en": "The sound stopped before it could fall. Keep a little air flowing while the pitch drops.",
+        "tr": "Ses düşemeden kesildi. Perde inerken biraz havayı akıtmaya devam et."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise the fall as a gentle sigh on 'ha' first, then put the held note in front of it.",
+    "tr": "Düşüşü önce 'ha' ile hafif bir iç çekiş olarak çalış, sonra önüne tutulan notayı ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

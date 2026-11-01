@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-15",
+  "title": {
+    "en": "A Turkish folk melody",
+    "tr": "Bir Türk halk ezgisi"
+  },
+  "goal": {
+    "en": "Sings an eight-bar melody in Turkish folk style in a personal key at ♩=72, with clear eighths and a clean ♭2.",
+    "tr": "Türk halk ezgisi tarzında sekiz ölçülük bir ezgiyi kişisel tonda ♩=72'de, net sekizlikler ve temiz bir ♭2 ile söyler."
+  },
+  "explanation": [
+    {
+      "en": "Turkish folk songs, türküler, are anonymous melodies passed on from singer to singer. Many were later written down in printed collections.",
+      "tr": "Türküler, ağızdan ağza aktarılan anonim ezgilerdir. Birçoğu sonradan basılı derlemelerde notaya alındı."
+    },
+    {
+      "en": "Many türküler use uneven meters, such as 7/8 or 9/8, and pitches between the piano's half steps. This lesson uses an even 2/4 meter and a scale the app can measure.",
+      "tr": "Birçok türkü 7/8 ya da 9/8 gibi aksak usuller ve piyanonun yarım sesleri arasında kalan perdeler kullanır. Bu ders düz bir 2/4 ve uygulamanın ölçebildiği bir dizi kullanır."
+    },
+    {
+      "en": "The scale is like natural minor with a lowered second step: 1-♭2-♭3-4-5. The half step from 1 to ♭2 gives the tune its colour; keep ♭2 close to 1.",
+      "tr": "Dizi, ikinci basamağı pesleştirilmiş doğal minör gibidir: 1-♭2-♭3-4-5. 1'den ♭2'ye yarım ses ezgiye rengini verir; ♭2'yi 1'e yakın tut."
+    },
+    {
+      "en": "Until the source collection is cleared, you sing an original eight-bar study in the same style. Phrase 1 climbs to 5 and rests on 4; phrase 2 walks down, dips to ♭7 below 1 and closes on 1.",
+      "tr": "Kaynak derleme onaylanana kadar aynı tarzda özgün, sekiz ölçülük bir etüt söylersin. 1. cümle 5'e çıkar ve 4'te durur; 2. cümle iner, 1'in altındaki ♭7'ye dokunur ve 1'de kapanır."
+    },
+    {
+      "en": "Most notes are eighths: two to a beat. Keep them light and even, and give the last note of each phrase its full two beats.",
+      "tr": "Notaların çoğu sekizliktir: vuruş başına iki. Onları hafif ve eşit tut; her cümlenin son notasına iki vuruşunun tamamını ver."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The study in your comfortable range, soft synthesized voice, at ♩=72 and ♩=50, over an original accompaniment with a drum pattern in 2/4. Headphones recommended.",
+      "tr": "Etüt rahat menzilinde, yumuşak sentez ses, ♩=72 ve ♩=50; 2/4'lük davul kalıbıyla özgün eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the eight bars in degrees. Listen to one bar of the accompaniment, then sing the study on 'la' at ♩=72. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama sekiz ölçüyü derecelerle gösterir. Eşlikten bir ölçü dinle, sonra etüdü 'la' ile ♩=72'de söyle. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "2/4: 1:e b2:e b3:e 4:e | 5:q 4:e b3:e | 4:e b3:e b2:e b3:e | 4:h | 5:e 4:e b3:e 4:e | b3:q b2:e 1:e | b2:e b3:e b2:e b7,:e | 1:h",
+    "tempo": {
+      "open": 72,
+      "target": 72
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "♭2 stayed close to 1.",
+      "tr": "♭2, 1'e yakın kaldı."
+    },
+    {
+      "en": "The eighths were light and even.",
+      "tr": "Sekizlikler hafif ve eşitti."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭2 a semitone high.",
+        "tr": "Farklı nota: ♭2 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "That is the 2 of the major scale. Sing 1-♭2-1 slowly a few times and keep the step small.",
+        "tr": "Bu majör gamın 2'si olur. Birkaç kez yavaşça 1-♭2-1 söyle ve adımı küçük tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but early on the eighths.",
+        "tr": "Doğru, ama sekizliklerde erken."
+      },
+      "fix": {
+        "en": "The eighths are rushing. Say 'la-la' twice per click at ♩=50, then sing the bar.",
+        "tr": "Sekizlikler acele ediyor. ♩=50'de her klike iki kez 'la-la' de, sonra ölçüyü söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing phrase 1 alone at ♩=50, then add phrase 2.",
+    "tr": "1. cümleyi tek başına ♩=50'de söyle, sonra 2. cümleyi ekle."
+  },
+  "repertoire": "LOCKED pending legal review — anonymous Turkish folk melody (türkü) from a printed collection published before 1955, not the TRT folk music repertoire; collection, tune and compilation/notation rights to be cleared (60-kamu-mali-repertuvar.md §4, §7.1). Until approval the measured line is an original folk-style study by Ostinato (8 bars, 2/4; practice.sequence). Degrees, personal key, accompaniment and tempo by Ostinato. The folk melody itself needs transcription from the cleared source.",
+  "minutes": 12,
+  "expertPending": true
+}

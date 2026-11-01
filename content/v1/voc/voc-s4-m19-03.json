@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-03",
+  "title": {
+    "en": "Londonderry Air",
+    "tr": "Londonderry Air"
+  },
+  "goal": {
+    "en": "Sings the traditional melody Londonderry Air, 16 bars, in a personal key at ♩=66, keeping the wide leaps easy.",
+    "tr": "Geleneksel Londonderry Air ezgisini, 16 ölçü, kişisel tonda ♩=66'da geniş sıçramaları rahat tutarak söyler."
+  },
+  "explanation": [
+    {
+      "en": "Londonderry Air is a traditional Irish melody. George Petrie printed it in his collection of 1855. You sing the melody only, on 'la'; later words set to it are not used.",
+      "tr": "Londonderry Air geleneksel bir İrlanda ezgisidir. George Petrie onu 1855'teki derlemesinde yayımladı. Yalnız ezgiyi 'la' ile söylersin; sonradan ona yazılan sözler kullanılmaz."
+    },
+    {
+      "en": "It has four long phrases. The first half stays in the middle of the range; the second half climbs to the highest notes of the tune.",
+      "tr": "Dört uzun cümlesi vardır. İlk yarı menzilin ortasında kalır; ikinci yarı ezginin en yüksek notalarına tırmanır."
+    },
+    {
+      "en": "The melody moves in wide leaps. Hear the top note before you leave the lower one, then move on the vowel with no scoop.",
+      "tr": "Ezgi geniş sıçramalarla ilerler. Alttaki notadan ayrılmadan önce üstteki notayı içinden duy, sonra kaydırmadan ünlü üzerinde geç."
+    },
+    {
+      "en": "Keep the same easy space on the high notes that you use lower down. A high note sung lightly counts the same as a loud one.",
+      "tr": "Yüksek notalarda alttakilerde kullandığın rahat açıklığı koru. Hafif söylenen yüksek nota, gür söylenenle aynı sayılır."
+    },
+    {
+      "en": "The tune spans more than an octave. The app places it in your comfortable range. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Ezgi bir oktavdan geniş bir alan tutar. Uygulama onu rahat menziline yerleştirir. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The 16 bars in your comfortable range, soft synthesized voice, at ♩=66 and ♩=45, over an original simple accompaniment. Headphones recommended.",
+      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=66 ve ♩=45; özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the 16-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=66. Start at ♩=45 if you like; the lesson counts at ♩=66. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama 16 ölçülük ezgiyi derecelerle gösterir. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=66'da söyle. İstersen ♩=45'te başla; ders ♩=66'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 66,
+      "target": 66
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard each leap before I sang it.",
+      "tr": "Her sıçramayı söylemeden önce içimde duydum."
+    },
+    {
+      "en": "The high notes felt as easy as the middle ones.",
+      "tr": "Yüksek notalar orta notalar kadar rahat geldi."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note on the highest notes, a little low.",
+        "tr": "En üst notalarda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Don't push up to them. Sing that phrase at ♩=45 with the same easy space you use lower down. If a note is still not comfortable, sing it an octave lower.",
+        "tr": "Onlara doğru itme. O cümleyi ♩=45'te, alt notalardaki rahat açıklıkla söyle. Bir nota yine rahat değilse onu bir oktav aşağıda söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note after a leap, a little low, then sliding up.",
+        "tr": "Sıçramadan sonra farklı nota: biraz alçak, sonra yukarı kayıyor."
+      },
+      "fix": {
+        "en": "That is a scoop. Hear the top note first, then start it right on pitch. Sing the two notes of the leap slowly a few times.",
+        "tr": "Bu bir kaydırma. Önce üstteki notayı duy, sonra onu tam perdesinde başlat. Sıçramanın iki notasını birkaç kez yavaşça söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the first half at ♩=45 until it feels easy, then add the second half one phrase at a time.",
+    "tr": "İlk yarıyı rahat gelene kadar ♩=45'te söyle, sonra ikinci yarıyı her seferinde bir cümle ekleyerek söyle."
+  },
+  "repertoire": "Londonderry Air, traditional Irish melody (Petrie collection, 1855). Public domain, legal review pending. Melody only, sung on 'la'; the \"Danny Boy\" words (F. Weatherly) are not used. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 15,
+  "expertPending": true
+}

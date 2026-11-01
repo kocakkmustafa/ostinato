@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m17-10",
+  "title": {
+    "en": "Trill preparation",
+    "tr": "Tril hazırlığı"
+  },
+  "goal": {
+    "en": "Alternates do and re evenly in eighth notes on one 'ah', with the click from ♩=60 up to ♩=80.",
+    "tr": "Do ile re'yi tek 'a' ile sekizliklerle, klikle ♩=60'tan ♩=80'e kadar eşit biçimde değiştirir."
+  },
+  "explanation": [
+    {
+      "en": "A trill is a fast, even alternation between two neighbouring notes. Control comes before speed: slow, even and in tune.",
+      "tr": "Tril, iki komşu nota arasında hızlı ve eşit bir gidip gelmedir. Hızdan önce kontrol gelir: yavaş, eşit ve doğru perdede."
+    },
+    {
+      "en": "Here you alternate do and re in eighth notes, two notes per click, for one bar, then land on do.",
+      "tr": "Burada do ile re'yi sekizliklerle, her klike iki nota, bir ölçü boyunca değiştirir, sonra do'ya inersin."
+    },
+    {
+      "en": "Both notes must be heard. Keep re a full step above do; as the alternation speeds up, re tends to shrink toward do.",
+      "tr": "İki nota da duyulmalı. Re'yi do'nun bir tam ses üstünde tut; gidip gelme hızlandıkça re do'ya doğru küçülmeye meyillidir."
+    },
+    {
+      "en": "Keep the voice light and the jaw still. The movement is in the pitch, not in the jaw or the throat.",
+      "tr": "Sesi hafif, çeneyi sabit tut. Hareket perdededir; çenede ya da boğazda değil."
+    },
+    {
+      "en": "Raise the tempo only when the slower one is easy. If the throat tightens or you get tired, end the lesson for today.",
+      "tr": "Tempoyu yalnız yavaş olan rahat geldiğinde artır. Boğaz sıkışırsa ya da yorulursan dersi bugünlük bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then do-re alternation in eighth notes on 'ah' in your range at ♩=60, ♩=70 and ♩=80, light synthesized voice.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 'a' ile sekizlik do-re gidip gelmesi; ♩=60, ♩=70 ve ♩=80, hafif sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in, alternate 1-2 in eighth notes on one 'ah' for one bar, land on 1 for two clicks, then rest. Do it four times. Start at ♩=60; the lesson counts at ♩=80. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra 1-2'yi tek 'a' ile bir ölçü boyunca sekizliklerle değiştir; 1'e iki klik in, sonra dinlen. Bunu dört kez yap. ♩=60'ta başla; ders ♩=80'de sayılır. Kendi oktavında söyle."
+    },
+    "sequence": "1:e 2:e 1:e 2:e 1:e 2:e 1:e 2:e | 1:h hr | ×4",
+    "tempo": {
+      "open": 60,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear both notes on every click.",
+      "tr": "Her klikte iki notayı da duyabildim."
+    },
+    {
+      "en": "Re stayed a full step above do.",
+      "tr": "Re, do'nun bir tam ses üstünde kaldı."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note on re, a little low.",
+        "tr": "Re'de farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The step is shrinking. Sing do-re slowly at ♩=60 and hear the full step, then speed up again.",
+        "tr": "Adım küçülüyor. Do-re'yi ♩=60'ta yavaşça söyle ve tam sesi duy, sonra yeniden hızlan."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear the separate notes.",
+        "tr": "Ayrı notaları duyamadım."
+      },
+      "fix": {
+        "en": "Give each note a tiny pulse of air, like a very soft 'ha', without stopping the sound.",
+        "tr": "Sesi kesmeden her notaya çok yumuşak bir 'ha' gibi küçük bir hava itkisi ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but early: the run speeds up.",
+        "tr": "Doğru, ama erken: koşu hızlanıyor."
+      },
+      "fix": {
+        "en": "Feel the first note of each click land with the click. Go back to ♩=60 for a few rounds.",
+        "tr": "Her klikin ilk notasının klikle birlikte oturduğunu hisset. Birkaç tur ♩=60'a dön."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Alternate in quarter notes at ♩=60 first, then switch to eighths.",
+    "tr": "Önce ♩=60'ta dörtlüklerle değiştir, sonra sekizliklere geç."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-05",
+  "title": {
+    "en": "Early One Morning",
+    "tr": "Early One Morning"
+  },
+  "goal": {
+    "en": "Sings the traditional melody Early One Morning, 16 bars, in a personal key at ♩=80, light and clear.",
+    "tr": "Geleneksel Early One Morning ezgisini, 16 ölçü, kişisel tonda ♩=80'de hafif ve net söyler."
+  },
+  "explanation": [
+    {
+      "en": "Early One Morning is a traditional English melody from the late 18th century. You sing the melody only, on 'la'.",
+      "tr": "Early One Morning 18. yüzyılın sonlarından geleneksel bir İngiliz ezgisidir. Yalnız ezgiyi 'la' ile söylersin."
+    },
+    {
+      "en": "It is a bright major tune, a little faster than the songs before it. Keep the sound light so the quick notes stay clear.",
+      "tr": "Önceki şarkılardan biraz daha hızlı, parlak ve majör bir ezgidir. Hızlı notalar net kalsın diye sesi hafif tut."
+    },
+    {
+      "en": "Use your map: find the phrase endings and the phrases that repeat. Repeated phrases need learning only once.",
+      "tr": "Haritanı kullan: cümle sonlarını ve tekrar eden cümleleri bul. Tekrar eden cümleleri yalnız bir kez öğrenmen yeter."
+    },
+    {
+      "en": "At ♩=80 the breaths are short. Breathe in the time of the note before each phrase, so the next phrase starts on its beat.",
+      "tr": "♩=80'de nefesler kısadır. Her cümleden önceki notanın süresinde nefes al ki sonraki cümle kendi vuruşunda başlasın."
+    },
+    {
+      "en": "If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The 16 bars in your comfortable range, soft synthesized voice, at ♩=80 and ♩=55, over an original simple accompaniment. Headphones recommended.",
+      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=80 ve ♩=55; özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the 16-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=80. Start at ♩=55 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama 16 ölçülük ezgiyi derecelerle gösterir. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=80'de söyle. İstersen ♩=55'te başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The quick notes stayed light and clear.",
+      "tr": "Hızlı notalar hafif ve net kaldı."
+    },
+    {
+      "en": "Each phrase started on its beat after the breath.",
+      "tr": "Her cümle nefesten sonra kendi vuruşunda başladı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late after a breath.",
+        "tr": "Doğru, ama nefesten sonra geç."
+      },
+      "fix": {
+        "en": "Take the breath from the time of the note before the mark, so the next phrase starts on its beat.",
+        "tr": "Nefesi işaretten önceki notanın süresinden al; böylece sonraki cümle kendi vuruşunda başlar."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the quick notes.",
+        "tr": "Hızlı notalarda farklı nota."
+      },
+      "fix": {
+        "en": "The notes blur together. Sing that bar at ♩=55 on 'la', giving each note a light new start, then raise the tempo.",
+        "tr": "Notalar birbirine karışıyor. O ölçüyü ♩=55'te 'la' ile söyle, her notaya hafif yeni bir başlangıç ver, sonra tempoyu artır."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the melody at ♩=55, then raise the tempo by 5 at a time.",
+    "tr": "Ezgiyi ♩=55'te söyle, sonra tempoyu her seferinde 5 artır."
+  },
+  "repertoire": "Early One Morning, traditional English melody (late 18th century). Public domain, legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 12,
+  "expertPending": true
+}

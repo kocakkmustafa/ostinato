@@ -1,0 +1,116 @@
+{
+  "id": "voc-s4-m18-06",
+  "title": {
+    "en": "Sixths",
+    "tr": "Altılılar"
+  },
+  "goal": {
+    "en": "Sings an original four-bar part a sixth below a melody at ♩=70.",
+    "tr": "Bir ezginin bir altılı altında özgün dört ölçülük bir partiyi ♩=70'te söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "A sixth is five scale steps apart, like low sol and mi. A third turned upside down becomes a sixth, so sixths sound as sweet as thirds.",
+      "tr": "Altılı, dizide beş basamak uzaklıktır; alçak sol ile mi gibi. Ters çevrilmiş üçlü altılı olur; bu yüzden altılılar da üçlüler kadar tatlı duyulur."
+    },
+    {
+      "en": "The melody sits high: top do-ti-la-sol, la-sol-fa, mi-fa-sol-ti, top do. You sing under it, dipping below do: mi-re-do-ti, do-ti-la, sol-la-ti-re, mi.",
+      "tr": "Ezgi yukarıdadır: üst do-si-la-sol, la-sol-fa, mi-fa-sol-si, üst do. Sen altında, do'nun altına inerek söylersin: mi-re-do-si, do-si-la, sol-la-si-re, mi."
+    },
+    {
+      "en": "The gap is wide, so your part sounds separate from the melody. Use that: it makes your own part easier to hold.",
+      "tr": "Aralık geniştir; partin ezgiden ayrı duyulur. Bundan yararlan: kendi partini tutmak kolaylaşır."
+    },
+    {
+      "en": "Bar 3 ends with a jump from ti up to re. Hear re before you sing it.",
+      "tr": "3. ölçü si'den re'ye bir sıçramayla biter. Re'yi söylemeden önce içinde duy."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Your part alone on 'la' in your comfortable range, soft synthesized voice, at ♩=70 and ♩=50. Then the melody (1'-7-6-5 | 6-5 4:h | 3-4-5-7 | 1':w) on a second synthesized voice over soft original chords with a click, once with your part and once without. Headphones recommended.",
+      "tr": "Partin tek başına, rahat menzilinde 'la' ile, yumuşak sentez ses, ♩=70 ve ♩=50. Sonra ezgi (1'-7-6-5 | 6-5 4:h | 3-4-5-7 | 1':w) ikinci bir sentez seste, yumuşak özgün akorlar ve klikle; bir kez partinle, bir kez partin olmadan. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Learn your part alone with the slow reference. Then listen to one bar of the accompaniment and sing your four bars on 'la' under the melody at ♩=70. Sing in your own octave.",
+      "tr": "Partini önce yavaş referansla tek başına öğren. Sonra eşlikten bir ölçü dinle ve four ölçülük partini ezginin altında 'la' ile ♩=70'te söyle. Kendi oktavında söyle."
+    },
+    "sequence": "3-2-1-7, | 1-7, 6,:h | 5,-6,-7,-2 | 3:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept my own part while the other voice sang.",
+      "tr": "Diğer ses söylerken kendi partimde kaldım."
+    },
+    {
+      "en": "The low notes felt easy, without pressing.",
+      "tr": "Pes notalar bastırmadan, rahat geldi."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the end of bar 3.",
+        "tr": "Farklı nota: 3. ölçünün sonunda."
+      },
+      "fix": {
+        "en": "From ti, step through do in your head and land on re.",
+        "tr": "Si'den içinden do'ya bas ve re'ye kon."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing at ♩=50 and loop bars 3–4 until the jump to re feels safe.",
+    "tr": "♩=50'de söyle ve re'ye sıçrama oturana kadar 3–4. ölçüleri döngüle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

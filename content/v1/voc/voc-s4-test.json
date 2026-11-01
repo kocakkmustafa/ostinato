@@ -1,0 +1,90 @@
+{
+  "id": "voc-s4-test",
+  "title": { "en": "Level 4 test", "tr": "Seviye 4 testi" },
+  "goal": {
+    "en": "Shows the Level 4 skills: range with a steady hold, pentatonic singing and improvisation, melisma, a second voice in harmony and two public-domain pieces.",
+    "tr": "Seviye 4 becerilerini gösterir: kararlı tutmayla menzil, pentatonik söyleme ve doğaçlama, melisma, armonide ikinci ses ve iki kamu malı parça."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, range: 1-3-5-8-9-8-5-3-1 at ♩=76 in your comfortable range, then one comfortable note held for 4 seconds. Part 2, pentatonic: a pentatonic scale up and back at ♩=80, then eight bars of improvisation over the backing.",
+      "tr": "1. bölüm, menzil: rahat menzilinde ♩=76'da 1-3-5-8-9-8-5-3-1, ardından rahat bir notayı 4 saniye tutmak. 2. bölüm, pentatonik: ♩=80'de bir pentatonik gamı çıkıp inmek, ardından eşlik üstünde sekiz ölçü doğaçlama."
+    },
+    {
+      "en": "Part 3, melisma: a new original eight-bar line with runs at ♩=90. Start light and keep your throat loose.",
+      "tr": "3. bölüm, melisma: ♩=90'da koşulu, yeni bir özgün sekiz ölçülük dizi. Hafif başla, boğazını sıkma."
+    },
+    {
+      "en": "Part 4, harmony: a new original two-part study of eight bars at ♩=76. The app plays the upper part and you sing the lower part. Use headphones for this part. Without headphones, this part falls back to a self-check.",
+      "tr": "4. bölüm, armoni: ♩=76'da yeni bir özgün sekiz ölçülük iki sesli etüt. Uygulama üst partiyi çalar, sen alt partiyi söylersin. Bu bölüm için kulaklık kullan. Kulaklık yoksa bu bölüm öz-kontrole düşer."
+    },
+    {
+      "en": "Part 5, repertoire: two public-domain pieces from Level 4, one of them a vocalise by Concone, Vaccai or Panofka.",
+      "tr": "5. bölüm, repertuvar: Seviye 4'ten iki kamu malı parça; biri Concone, Vaccai ya da Panofka'dan bir vokaliz."
+    },
+    {
+      "en": "Every task is moved into your personal key and compared in your own octave. No note outside your comfortable range is asked for. If anything feels uncomfortable, stop. The test ends without a result, and you can come back another day. Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her görev kişisel tonuna taşınır ve kendi oktavında karşılaştırılır. Rahat menzilinin dışında nota istenmez. Herhangi bir rahatsızlıkta dur. Test sonuç yazılmadan biter; başka bir gün dönebilirsin. Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S", "KL"],
+    "brief": {
+      "en": "Click at ♩=76 for the range line; click at ♩=80 for the scale, then an original blues-style backing for the improvisation; an original soft chord accompaniment with click for the melisma line; the upper part in synth voice for the harmony part; an original soft accompaniment for the two pieces. Headphones recommended, and needed for part 4.",
+      "tr": "Menzil dizisi için ♩=76'da klik; gam için ♩=80'de klik, doğaçlama için özgün blues tarzı eşlik; melisma dizisi için klikli özgün yumuşak akor eşliği; armoni bölümünde sentez sesle üst parti; iki parça için özgün yumuşak eşlik. Kulaklık önerilir; 4. bölümde gereklidir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Warm up first, then complete five parts. 1 Range: 1-3-5-8-9-8-5-3-1 with the click at ♩=76, then hold one comfortable note for 4 seconds. 2 Pentatonic: a major or minor pentatonic scale up and back at ♩=80, then improvise eight bars over the backing with notes from the scale. 3 Melisma: a new original eight-bar line with runs at ♩=90. 4 Harmony: sing the lower part of a new original two-part study, eight bars at ♩=76, with headphones. 5 Repertoire: two Level 4 public-domain pieces, one of them a vocalise, with the accompaniment. Sing in your own octave.",
+      "tr": "Önce ısın, sonra beş bölümü tamamla. 1 Menzil: ♩=76'da klikle 1-3-5-8-9-8-5-3-1, ardından rahat bir notayı 4 saniye tut. 2 Pentatonik: ♩=80'de majör ya da minör pentatonik gamı çık ve geri in, sonra eşlik üstünde gamın notalarıyla sekiz ölçü doğaçla. 3 Melisma: ♩=90'da koşulu, yeni bir özgün sekiz ölçülük dizi. 4 Armoni: yeni bir özgün iki sesli etüdün alt partisini kulaklıkla söyle; sekiz ölçü, ♩=76. 5 Repertuvar: biri vokaliz olan iki Seviye 4 kamu malı parça, eşlikle. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Range: Level 4 pitch and timing accuracy, and the held note stays within an IQR of 25 cents. Pentatonic: the scale meets Level 4 accuracy and at least 90% of your improvised notes are in the scale pool. Melisma, harmony and repertoire: Level 4 pitch accuracy, and Level 4 timing accuracy where a click or accompaniment plays.",
+        "tr": "Her bölüm kendi başına geçer. Menzil: Seviye 4 perde ve zamanlama ölçütü; tutulan notanın IQR'si 25 cent içinde kalır. Pentatonik: gam Seviye 4 ölçütünü sağlar ve doğaçladığın notaların en az %90'ı gam havuzundan gelir. Melisma, armoni ve repertuvar: Seviye 4 perde ölçütü; klik ya da eşlik çalıyorsa Seviye 4 zamanlama ölçütü."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1", "V2", "V4", "V5"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a little low.", "tr": "Farklı nota, biraz alçak." },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Take your breath on the beat before and start each note with its click, not after it.",
+        "tr": "Nefesini bir önceki vuruşta al ve her notayı klikinden sonra değil, klikle birlikte başlat."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "repertoire": "Part 5 pool: Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9 (19th-century edition); Nicola Vaccai (1790–1848), Metodo pratico di canto italiano, words by Pietro Metastasio (1698–1782) (London, 1832); Heinrich Panofka (1807–1887), an easy vocalise (19th-century edition, opus to be confirmed); and the Level 4 songs: Shenandoah, Londonderry Air (no 'Danny Boy' words), The Water Is Wide, Early One Morning, De Colores, Sakura Sakura (traditional); Brahms, Wiegenlied, Op. 49 No. 4; Schubert, Heidenröslein, D 257; Mozart, Komm, lieber Mai, KV 596; Caro mio ben (attr. Giordani, Parisotti edition). The Turkish folk melody stays out of the pool until legal review. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

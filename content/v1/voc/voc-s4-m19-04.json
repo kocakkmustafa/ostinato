@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-04",
+  "title": {
+    "en": "The Water Is Wide",
+    "tr": "The Water Is Wide"
+  },
+  "goal": {
+    "en": "Sings the traditional melody The Water Is Wide, 16 bars, in a personal key at ♩=72, with a smooth, flowing line.",
+    "tr": "Geleneksel The Water Is Wide ezgisini, 16 ölçü, kişisel tonda ♩=72'de pürüzsüz ve akan bir çizgiyle söyler."
+  },
+  "explanation": [
+    {
+      "en": "The Water Is Wide is a traditional Scottish and English melody. You sing an older variant of the tune; 20th-century arrangements are not used.",
+      "tr": "The Water Is Wide geleneksel bir İskoç ve İngiliz ezgisidir. Ezginin eski bir varyantını söylersin; 20. yüzyıl düzenlemeleri kullanılmaz."
+    },
+    {
+      "en": "It is a gentle song in four phrases. Each phrase rises, turns, and settles again.",
+      "tr": "Dört cümlelik yumuşak bir şarkıdır. Her cümle yükselir, döner ve yeniden yerine oturur."
+    },
+    {
+      "en": "Sing it legato: keep the sound going from note to note inside a phrase, as you practised in the legato module.",
+      "tr": "Onu legato söyle: legato modülünde çalıştığın gibi bir cümlenin içinde sesi notadan notaya kesmeden sürdür."
+    },
+    {
+      "en": "Give each phrase a shape. Grow a little toward its highest note, then let it relax to the end.",
+      "tr": "Her cümleye bir biçim ver. En yüksek notasına doğru biraz büyü, sonra sonuna doğru gevşemesine izin ver."
+    },
+    {
+      "en": "Sing the melody only, on 'la'. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Yalnız ezgiyi 'la' ile söyle. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The 16 bars in your comfortable range, soft synthesized voice, at ♩=72 and ♩=50, over an original simple accompaniment. Headphones recommended.",
+      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=72 ve ♩=50; özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the 16-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=72. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama 16 ölçülük ezgiyi derecelerle gösterir. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=72'de söyle. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 72,
+      "target": 72
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The notes inside each phrase stayed connected.",
+      "tr": "Her cümlenin içindeki notalar birbirine bağlı kaldı."
+    },
+    {
+      "en": "I breathed only at the breath marks.",
+      "tr": "Yalnız nefes işaretlerinde nefes aldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the end of a long phrase, a little low.",
+        "tr": "Uzun cümlenin sonunda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Keep the energy to the last note. Sing the phrase at ♩=50 and think 'up' on the final note.",
+        "tr": "Enerjiyi son notaya kadar koru. Cümleyi ♩=50'de söyle ve son notada 'yukarı' diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late after a breath.",
+        "tr": "Doğru, ama nefesten sonra geç."
+      },
+      "fix": {
+        "en": "Take the breath from the time of the note before the mark, so the next phrase starts on its beat.",
+        "tr": "Nefesi işaretten önceki notanın süresinden al; böylece sonraki cümle kendi vuruşunda başlar."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the first two phrases at ♩=50, then add the last two.",
+    "tr": "İlk iki cümleyi ♩=50'de söyle, sonra son iki cümleyi ekle."
+  },
+  "repertoire": "The Water Is Wide, traditional Scottish/English melody. Source: an older variant from a 19th-century collection (variant to be fixed with the source scan). 20th-century arrangements are not used or referenced. Public domain, legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 14,
+  "expertPending": true
+}

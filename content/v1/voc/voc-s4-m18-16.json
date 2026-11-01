@@ -1,0 +1,134 @@
+{
+  "id": "voc-s4-m18-16",
+  "title": {
+    "en": "Harmony checkpoint",
+    "tr": "Armoni geçişi"
+  },
+  "goal": {
+    "en": "Keeps the lower part of an original sixteen-bar two-part study in tune and on time at ♩=76.",
+    "tr": "Özgün on altı ölçülük iki sesli bir etüdün alt partisini ♩=76'da doğru perdede ve zamanında sürdürür."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "This checkpoint brings the module together: thirds, sixths, a held note, contrary motion and fifths, in one sixteen-bar study.",
+      "tr": "Bu geçiş modülü birleştirir: üçlüler, altılılar, tutulan nota, zıt hareket ve beşliler, on altı ölçülük tek bir etütte."
+    },
+    {
+      "en": "You sing the lower part. Bars 1–4: thirds. Bars 5–8: sixths, ending on re. Bars 9–12: you hold do, rise against the falling melody, then sing fifths.",
+      "tr": "Alt partiyi sen söylersin. 1–4. ölçüler: üçlüler. 5–8. ölçüler: altılılar, re'de biter. 9–12. ölçüler: do'yu tutar, inen ezgiye karşı çıkar, sonra beşliler söylersin."
+    },
+    {
+      "en": "Bars 13–16 close the study: bar 13 starts with two eighths, do-re, then thirds and sixths lead home to do.",
+      "tr": "13–16. ölçüler etüdü kapatır: 13. ölçü iki sekizlikle, do-re ile başlar; ardından üçlüler ve altılılar do'ya götürür."
+    },
+    {
+      "en": "If you miss a note, keep going and find your note on the next bar line. Do not restart.",
+      "tr": "Bir notayı kaçırırsan devam et ve notanı sonraki ölçü çizgisinde bul. Baştan başlama."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Your part alone on 'la' in your comfortable range, soft synthesized voice, at ♩=76 and ♩=55. Then the upper part (5-6-5-3 | 4-3 2:h | 3-4-5-4 | 3:w | 1'-7-6-5 | 4-5 6:h | 5-6-7-1' | 7:w | 3-4-5-3 | 1'-7 5:h | 5-6-5-2 | 3-2 5:h | 3:e 4:e 5:q 6:q 5:q | 1':h 7:q 6:q | 5:q 4:q 2:h | 3:w) on a second synthesized voice over soft original chords with a click, once with your part and once without. Headphones recommended.",
+      "tr": "Partin tek başına, rahat menzilinde 'la' ile, yumuşak sentez ses, ♩=76 ve ♩=55. Sonra üst parti (5-6-5-3 | 4-3 2:h | 3-4-5-4 | 3:w | 1'-7-6-5 | 4-5 6:h | 5-6-7-1' | 7:w | 3-4-5-3 | 1'-7 5:h | 5-6-5-2 | 3-2 5:h | 3:e 4:e 5:q 6:q 5:q | 1':h 7:q 6:q | 5:q 4:q 2:h | 3:w) ikinci bir sentez seste, yumuşak özgün akorlar ve klikle; bir kez partinle, bir kez partin olmadan. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Read your part, then listen to one bar of the accompaniment and sing the sixteen bars on 'la' under the upper part at ♩=76. Practise at a slower tempo first if you need to; the checkpoint passes at ♩=76. Without headphones you can practise with the checklist, but only a measured run passes the checkpoint. Sing in your own octave.",
+      "tr": "Partini oku, sonra eşlikten bir ölçü dinle ve on altı ölçüyü üst partinin altında 'la' ile ♩=76'da söyle. Gerekirse önce daha yavaş tempoda çalış; geçiş ♩=76'da geçilir. Kulaklık yoksa kontrol listesiyle çalışabilirsin, ama geçişi yalnız ölçülen bir deneme geçer. Kendi oktavında söyle."
+    },
+    "sequence": "3-4-3-1 | 2-1 7,:h | 1-2-3-2 | 1:w | 3-2-1-7, | 6,-7, 1:h | 7,-1-2-3 | 2:w | 1:w | 1-2 3:h | 1-2-1-5, | 6,-5, 1:h | 1:e 2:e 3:q 4:q 3:q | 3:h 2:q 1:q | 7,:q 6,:q 7,:h | 1:w",
+    "tempo": {
+      "open": 76,
+      "target": 76
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 pitch and timing accuracy on your part across all sixteen bars at ♩=76, measured with headphones.",
+        "tr": "On altı ölçünün tamamında partinde Seviye 4 perde ve zamanlama ölçütü, ♩=76'da ve kulaklıkla ölçülerek."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept my own part while the other voice sang.",
+      "tr": "Diğer ses söylerken kendi partimde kaldım."
+    },
+    {
+      "en": "When I lost my place, I came back in on the next bar.",
+      "tr": "Yerimi kaybettiğimde sonraki ölçüde yeniden girdim."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note in bar 9: your held do moved with the melody.",
+        "tr": "Farklı nota: 9. ölçüde tuttuğun do ezgiyle kaydı."
+      },
+      "fix": {
+        "en": "Step from re down to do at the bar line, settle on it and keep the air even while the melody moves.",
+        "tr": "Ölçü çizgisinde re'den do'ya in, ona yerleş ve ezgi hareket ederken havayı eşit tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late in bar 13.",
+        "tr": "Doğru, ama 13. ölçüde geç."
+      },
+      "fix": {
+        "en": "Bar 13 starts with two quick eighths. Breathe at the end of bar 12 and come in right on the click.",
+        "tr": "13. ölçü iki hızlı sekizlikle başlar. 12. ölçünün sonunda nefes al ve tam klikte gir."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise each four-bar phrase at ♩=60 first, then join them and take the checkpoint at ♩=76.",
+    "tr": "Önce her dört ölçülük cümleyi ♩=60'ta çalış, sonra birleştir ve geçişi ♩=76'da dene."
+  },
+  "minutes": 18,
+  "expertPending": true
+}

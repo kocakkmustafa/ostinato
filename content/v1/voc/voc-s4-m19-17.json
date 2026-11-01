@@ -1,0 +1,131 @@
+{
+  "id": "voc-s4-m19-17",
+  "title": {
+    "en": "Sakura Sakura",
+    "tr": "Sakura Sakura"
+  },
+  "goal": {
+    "en": "Sings the traditional Japanese melody Sakura Sakura, 14 bars, in a personal key at ♩=66, with clean half steps.",
+    "tr": "Geleneksel Japon ezgisi Sakura Sakura'yı, 14 ölçü, kişisel tonda ♩=66'da temiz yarım seslerle söyler."
+  },
+  "explanation": [
+    {
+      "en": "Sakura Sakura is a traditional Japanese melody from the Edo period. It was printed in a collection of koto pieces in 1888. You sing the melody only, on 'la'.",
+      "tr": "Sakura Sakura, Edo döneminden geleneksel bir Japon ezgisidir. 1888'de bir koto parçaları derlemesinde basıldı. Yalnız ezgiyi 'la' ile söylersin."
+    },
+    {
+      "en": "It uses a five-note scale with two half steps. In movable do, its notes are la, ti, do, mi and fa.",
+      "tr": "Ezgi iki yarım sesli beş notalık bir dizi kullanır. Hareketli do ile notaları la, si, do, mi ve fa'dır."
+    },
+    {
+      "en": "The half steps are ti–do and mi–fa. Keep them small; these two pairs give the tune its colour.",
+      "tr": "Yarım sesler si–do ve mi–fa'dır. Onları küçük tut; bu iki çift ezgiye rengini verir."
+    },
+    {
+      "en": "The tune is slow and calm. Give each note its full length, and let the long notes at the ends of phrases rest.",
+      "tr": "Ezgi yavaş ve sakindir. Her notaya tam süresini ver ve cümle sonlarındaki uzun notaların dinlenmesine izin ver."
+    },
+    {
+      "en": "Before you start, sing la-ti-do-ti-la and mi-fa-mi slowly, and hear the small steps.",
+      "tr": "Başlamadan önce la-si-do-si-la ve mi-fa-mi'yi yavaşça söyle ve küçük adımları duy."
+    },
+    {
+      "en": "If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The 14 bars in your comfortable range, soft synthesized voice, at ♩=66 and ♩=45, over an original simple accompaniment. Headphones recommended.",
+      "tr": "On dört ölçü rahat menzilinde, yumuşak sentez ses, ♩=66 ve ♩=45; özgün basit eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "The app shows the 14-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=66. Start at ♩=45 if you like; the lesson counts at ♩=66. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama 14 ölçülük ezgiyi derecelerle gösterir. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=66'da söyle. İstersen ♩=45'te başla; ders ♩=66'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 66,
+      "target": 66
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The half steps ti–do and mi–fa stayed small.",
+      "tr": "si–do ve mi–fa yarım sesleri küçük kaldı."
+    },
+    {
+      "en": "The long notes rested for their full length.",
+      "tr": "Uzun notalar tam süreleri boyunca dinlendi."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, fa a semitone high.",
+        "tr": "Farklı nota: fa yarım ses yüksek."
+      },
+      "fix": {
+        "en": "Fa sits just above mi. Sing mi-fa-mi slowly a few times and keep the step small.",
+        "tr": "Fa, mi'nin hemen üstündedir. Birkaç kez yavaşça mi-fa-mi söyle ve adımı küçük tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late after a long note.",
+        "tr": "Doğru, ama uzun notadan sonra geç."
+      },
+      "fix": {
+        "en": "Count the beats of the long note inside and move on the next click.",
+        "tr": "Uzun notanın vuruşlarını içinden say ve bir sonraki klikte geç."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the first half at ♩=45, then add the second half.",
+    "tr": "İlk yarıyı ♩=45'te söyle, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Sakura Sakura, traditional Japanese melody (Edo period; printed in an 1888 koto collection). Public domain, legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-20",
+  "title": {
+    "en": "Your program",
+    "tr": "Programın"
+  },
+  "goal": {
+    "en": "Chooses a two-piece program from this module and sings both pieces back to back, each at its target tempo.",
+    "tr": "Bu modülden iki parçalık bir program seçer ve iki parçayı ardı ardına, her birini kendi hedef temposunda söyler."
+  },
+  "explanation": [
+    {
+      "en": "A program is a short set of pieces sung one after the other. Yours has two pieces from this module.",
+      "tr": "Program, art arda söylenen kısa bir parça dizisidir. Seninkinde bu modülden iki parça var."
+    },
+    {
+      "en": "Choose two that contrast: slow and fast, or a song and a vocalise. Contrast keeps the listener with you and rests your voice.",
+      "tr": "Birbirine karşıt iki parça seç: yavaş ve hızlı ya da bir şarkı ve bir vokaliz. Karşıtlık dinleyiciyi seninle tutar ve sesini dinlendirir."
+    },
+    {
+      "en": "Put the easier piece first. It settles your breath and your nerves before the harder one.",
+      "tr": "Daha kolay parçayı başa koy. Zor parçadan önce nefesini ve heyecanını yatıştırır."
+    },
+    {
+      "en": "Between the pieces, take a short pause: relax the shoulders, breathe quietly, and hear the start of the next piece inside before its accompaniment begins.",
+      "tr": "Parçalar arasında kısa bir ara ver: omuzlarını gevşet, sessizce nefes al ve sıradaki parçanın başlangıcını eşliği başlamadan önce içinden duy."
+    },
+    {
+      "en": "Use your performance routine: stance, eye line, one easy breath, and a calm ending. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Performans rutinini kullan: duruş, bakış, rahat bir nefes ve sakin bir bitiş. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Each chosen piece in your comfortable range over its original accompaniment at its target tempo, with a short pause between them. Headphones recommended.",
+      "tr": "Seçilen her parça rahat menzilinde, kendi özgün eşliğiyle hedef temposunda; aralarında kısa bir arayla. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Choose two contrasting pieces you passed in this module and set their order. Listen to one bar of the accompaniment and sing the first piece; after the short pause, sing the second. Each counts at its own target tempo. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Bu modülde geçtiğin birbirine karşıt iki parçayı seç ve sıralarını belirle. Eşlikten bir ölçü dinle ve ilk parçayı söyle; kısa aradan sonra ikincisini söyle. Her biri kendi hedef temposunda sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Both pieces in one go, each at the Level 4 pitch and timing criteria at its target tempo.",
+        "tr": "İki parça tek seferde, her biri hedef temposunda Seviye 4 perde ve zamanlama ölçütünde."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The two pieces in my program contrast.",
+      "tr": "Programımdaki iki parça birbirine karşıt."
+    },
+    {
+      "en": "I heard the start of the second piece before its accompaniment began.",
+      "tr": "İkinci parçanın başlangıcını eşliği başlamadan önce içimde duydum."
+    },
+    {
+      "en": "The second piece felt as easy as the first.",
+      "tr": "İkinci parça ilki kadar rahat geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the start of the second piece.",
+        "tr": "İkinci parçanın başında farklı nota."
+      },
+      "fix": {
+        "en": "The first key is still in your ear. In the pause, listen to the first bar of the new accompaniment and hum the first note before you sing.",
+        "tr": "İlk parçanın tonu hâlâ kulağında. Arada yeni eşliğin ilk ölçüsünü dinle ve söylemeden önce ilk notayı mırıldan."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note late in the second piece, a little low.",
+        "tr": "İkinci parçanın sonlarına doğru farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The voice is tiring. Put the lighter piece second, or lengthen the pause between the pieces.",
+        "tr": "Ses yoruluyor. Daha hafif parçayı ikinci sıraya koy ya da parçalar arasındaki arayı uzat."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the two pieces on two different days, then join them in one go.",
+    "tr": "İki parçayı iki ayrı günde söyle, sonra tek seferde birleştir."
+  },
+  "repertoire": "Two pieces of the learner's choice from this module (voc-s4-m19-02…17); see those lessons' sources. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "minutes": 20,
+  "expertPending": true
+}

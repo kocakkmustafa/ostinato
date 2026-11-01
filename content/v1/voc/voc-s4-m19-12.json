@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-12",
+  "title": {
+    "en": "Vaccai: an interval lesson",
+    "tr": "Vaccai: aralık dersi"
+  },
+  "goal": {
+    "en": "Sings one of Vaccai's interval lessons in a personal key at ♩=72, landing each leap on pitch, first on 'ah', then with the Italian words.",
+    "tr": "Vaccai'nin aralık derslerinden birini kişisel tonda ♩=72'de, her sıçramayı perdesine oturtarak, önce 'a' ile, sonra İtalyanca sözleriyle söyler."
+  },
+  "explanation": [
+    {
+      "en": "After the scale lesson, Vaccai's method moves through the intervals one lesson at a time: thirds, fourths, fifths and wider. Each lesson is a short song built on one interval.",
+      "tr": "Gam dersinden sonra Vaccai'nin yöntemi aralıkları her derste bir tane olmak üzere işler: üçlüler, dörtlüler, beşliler ve daha genişleri. Her ders tek bir aralık üzerine kurulu kısa bir şarkıdır."
+    },
+    {
+      "en": "Before you sing, find the interval of this lesson on screen and sing it slowly on 'ah' a few times, up and down.",
+      "tr": "Söylemeden önce bu dersin aralığını ekranda bul ve onu 'a' ile birkaç kez yavaşça, çıkarak ve inerek söyle."
+    },
+    {
+      "en": "Hear the top note before you leave the lower one. Then move on the vowel and start the new note right on pitch, with no scoop.",
+      "tr": "Alttaki notadan ayrılmadan önce üstteki notayı içinden duy. Sonra ünlü üzerinde geç ve yeni notayı kaydırmadan, tam perdesinde başlat."
+    },
+    {
+      "en": "The words are a short Italian verse by Pietro Metastasio. Keep the vowels pure and the consonants quick, as in the scale lesson.",
+      "tr": "Sözler Pietro Metastasio'nun kısa bir İtalyanca dizesidir. Gam dersinde olduğu gibi ünlüleri saf, ünsüzleri çabuk tut."
+    },
+    {
+      "en": "The app moves the lesson into your personal key. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Uygulama dersi kişisel tonuna taşır. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The selected lesson from the Ostinato edition in your comfortable range, soft synthesized voice, once on 'ah' and once with the words, at ♩=72 and ♩=50, over a soft accompaniment with a click. Headphones recommended.",
+      "tr": "Ostinato baskısından seçilen ders rahat menzilinde, yumuşak sentez ses, bir kez 'a' ile ve bir kez sözlerle, ♩=72 ve ♩=50; klikli yumuşak eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it once on 'ah', then once with the words, at ♩=72. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranın gösterdiği bölümü oku. Eşlikten bir ölçü dinle, sonra onu bir kez 'a' ile, sonra bir kez sözlerle ♩=72'de söyle. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 72,
+      "target": 72
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard each leap before I sang it.",
+      "tr": "Her sıçramayı söylemeden önce içimde duydum."
+    },
+    {
+      "en": "The vowels stayed pure when I added the words.",
+      "tr": "Sözleri eklediğimde ünlüler saf kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note after a leap, a little low, then sliding up.",
+        "tr": "Sıçramadan sonra farklı nota: biraz alçak, sonra yukarı kayıyor."
+      },
+      "fix": {
+        "en": "That is a scoop. Hear the top note first, then start it right on pitch. Sing the two notes of the leap slowly a few times.",
+        "tr": "Bu bir kaydırma. Önce üstteki notayı duy, sonra onu tam perdesinde başlat. Sıçramanın iki notasını birkaç kez yavaşça söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on a downward leap, a little low.",
+        "tr": "İnen bir sıçramada farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Going down, the note overshoots. Think of the lower note as close to the upper one, and keep the same easy space.",
+        "tr": "İnerken nota hedefi aşıyor. Alttaki notayı üsttekine yakın düşün ve aynı rahat açıklığı koru."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the whole lesson on 'ah' only; add the words on another day.",
+    "tr": "Bütün dersi yalnız 'a' ile söyle; sözleri başka bir gün ekle."
+  },
+  "repertoire": "Nicola Vaccai (1790–1848), Metodo pratico di canto italiano per camera: one selected interval lesson (lesson to be fixed with the transcription). Words by Pietro Metastasio (1698–1782). Source: London first edition, 1832. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "minutes": 15,
+  "expertPending": true
+}

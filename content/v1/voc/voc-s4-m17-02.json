@@ -1,0 +1,107 @@
+{
+  "id": "voc-s4-m17-02",
+  "title": {
+    "en": "Two-note slurs",
+    "tr": "İki notalı bağlar"
+  },
+  "goal": {
+    "en": "Sings 8 two-note slurs on one 'ah' each, moving to the second note without a gap or a new start.",
+    "tr": "Her biri tek 'a' ile 8 iki notalı bağı, ikinci notaya boşluksuz ve yeniden başlamadan geçerek söyler."
+  },
+  "explanation": [
+    {
+      "en": "A slur joins two notes on one syllable. It is the smallest melisma.",
+      "tr": "Bağ iki notayı tek hecede birleştirir. En küçük melismadır."
+    },
+    {
+      "en": "Start the vowel once. Keep the air flowing and change only the pitch; do not restart the sound on the second note.",
+      "tr": "Ünlüye bir kez başla. Havayı akıtmaya devam et ve yalnız perdeyi değiştir; ikinci notada sesi yeniden başlatma."
+    },
+    {
+      "en": "Move to the second note cleanly and quickly. Do not slide slowly through the space between the notes.",
+      "tr": "İkinci notaya temiz ve çabuk geç. Notaların arasındaki boşlukta yavaşça kayma."
+    },
+    {
+      "en": "The eight slurs walk up from do to sol in steps, then back down: 1-2, 2-3, 3-4, 4-5, then 5-4, 4-3, 3-2, 2-1. Rest after each one.",
+      "tr": "Sekiz bağ do'dan sol'e basamakla çıkar, sonra geri iner: 1-2, 2-3, 3-4, 4-5, ardından 5-4, 4-3, 3-2, 2-1. Her birinden sonra dinlen."
+    },
+    {
+      "en": "Keep the sound light, at about speaking volume. If the throat tightens, stop and rest.",
+      "tr": "Sesi hafif, aşağı yukarı konuşma gürlüğünde tut. Boğaz sıkışırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The eight slurs in your comfortable range on 'ah', soft synthesized voice: a short first note, a longer second note, then a rest.",
+      "tr": "Sekiz bağ rahat menzilinde 'a' ile, yumuşak sentez ses: kısa bir ilk nota, daha uzun bir ikinci nota, sonra sus."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to each slur, then sing it on one 'ah' in your own octave: a short first note, a longer second note, then rest. Sing all eight.",
+      "tr": "Her bağı dinle, sonra kendi oktavında tek 'a' ile söyle: kısa bir ilk nota, daha uzun bir ikinci nota, sonra dinlen. Sekizini de söyle."
+    },
+    "sequence": "1:q 2:h qr | 2:q 3:h qr | 3:q 4:h qr | 4:q 5:h qr | 5:q 4:h qr | 4:q 3:h qr | 3:q 2:h qr | 2:q 1:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each slur was one sound, with no new start on the second note.",
+      "tr": "Her bağ tek bir sesti; ikinci notada yeni bir başlangıç yoktu."
+    },
+    {
+      "en": "Fa to mi on the way down stayed small.",
+      "tr": "İnerken fa'dan mi'ye adım küçük kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear the second note.",
+        "tr": "İkinci notayı duyamadım."
+      },
+      "fix": {
+        "en": "The air faded after the first note. Think of the slur as one long note and keep the air flowing through both.",
+        "tr": "Hava ilk notadan sonra azaldı. Bağı tek uzun bir nota gibi düşün ve havayı iki notada da akıt."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the second note, a little low.",
+        "tr": "İkinci notada farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The step stopped short. Replay the slur and hear the second note in your head before you sing.",
+        "tr": "Adım erken durdu. Bağı yeniden dinle ve söylemeden önce ikinci notayı içinden duy."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing each slur on 'mm' first, then open to 'ah'.",
+    "tr": "Her bağı önce 'mm' ile söyle, sonra 'a'ya aç."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

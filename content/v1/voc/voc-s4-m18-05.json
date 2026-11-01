@@ -1,0 +1,117 @@
+{
+  "id": "voc-s4-m18-05",
+  "title": {
+    "en": "Parallel thirds above",
+    "tr": "Üstten paralel üçlüler"
+  },
+  "goal": {
+    "en": "Sings an original four-bar part a third above a melody at ♩=70.",
+    "tr": "Bir ezginin bir üçlü üstünde özgün dört ölçülük bir partiyi ♩=70'te söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "Now you sing above the melody, two scale steps higher on every note.",
+      "tr": "Bu kez ezginin üstünde, her notada iki basamak yukarıda söylersin."
+    },
+    {
+      "en": "The melody: do-mi-re-fa, mi-sol-fa, mi-re-do-re, do. Your part: mi-sol-fa-la, sol-ti-la, sol-fa-mi-fa, mi.",
+      "tr": "Ezgi: do-mi-re-fa, mi-sol-fa, mi-re-do-re, do. Senin partin: mi-sol-fa-la, sol-si-la, sol-fa-mi-fa, mi."
+    },
+    {
+      "en": "Singing above is harder: the melody pulls you down onto its notes. Keep your part light and stay on top.",
+      "tr": "Üstte söylemek daha zordur: ezgi seni kendi notalarına çeker. Partini hafif tut ve üstte kal."
+    },
+    {
+      "en": "Your highest note is ti. Sing it lightly; if it is not comfortable, sing the whole part an octave lower. It counts the same.",
+      "tr": "En yüksek notan si'dir. Hafif söyle; rahat değilse bütün partiyi bir oktav aşağıda söyle. Aynı sayılır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Your part alone on 'la' in your comfortable range, soft synthesized voice, at ♩=70 and ♩=50. Then the melody (1-3-2-4 | 3-5 4:h | 3-2-1-2 | 1:w) on a second synthesized voice over soft original chords with a click, once with your part and once without. Headphones recommended.",
+      "tr": "Partin tek başına, rahat menzilinde 'la' ile, yumuşak sentez ses, ♩=70 ve ♩=50. Sonra ezgi (1-3-2-4 | 3-5 4:h | 3-2-1-2 | 1:w) ikinci bir sentez seste, yumuşak özgün akorlar ve klikle; bir kez partinle, bir kez partin olmadan. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Learn your part alone with the slow reference. Then listen to one bar of the accompaniment and sing your four bars on 'la' over the melody at ♩=70. Sing in your own octave.",
+      "tr": "Partini önce yavaş referansla tek başına öğren. Sonra eşlikten bir ölçü dinle ve four ölçülük partini ezginin üstünde 'la' ile ♩=70'te söyle. Kendi oktavında söyle."
+    },
+    "sequence": "3-5-4-6 | 5-7 6:h | 5-4-3-4 | 3:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept my own part while the other voice sang.",
+      "tr": "Diğer ses söylerken kendi partimde kaldım."
+    },
+    {
+      "en": "I stayed above the melody without dropping onto it.",
+      "tr": "Ezginin üstünde kaldım, ona düşmedim."
+    },
+    {
+      "en": "The top notes felt easy, without pushing.",
+      "tr": "Üst notalar zorlamadan, rahat geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: you dropped down to the melody.",
+        "tr": "Farklı nota: ezgiye düştün."
+      },
+      "fix": {
+        "en": "Sing your part alone with the slow reference until it feels like its own tune, then add the melody.",
+        "tr": "Partini yavaş referansla, kendi başına bir ezgi gibi gelene kadar tek başına söyle; sonra ezgiyi ekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, ti is low.",
+        "tr": "Farklı nota: si pes."
+      },
+      "fix": {
+        "en": "Ti sits just under top do. Think sol-la-ti and lift it lightly.",
+        "tr": "Si, üst do'nun hemen altındadır. İçinden sol-la-si de ve hafifçe kaldır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing at ♩=50, or sing the whole part an octave lower.",
+    "tr": "♩=50'de söyle ya da bütün partiyi bir oktav aşağıda söyle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

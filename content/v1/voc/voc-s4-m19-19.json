@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m19-19",
+  "title": {
+    "en": "Memory and run-through",
+    "tr": "Ezber ve baştan sona"
+  },
+  "goal": {
+    "en": "Sings one piece from this module from memory, start to finish, with no stops, at its lesson's target tempo.",
+    "tr": "Bu modülden bir parçayı ezberden, baştan sona ve hiç durmadan, kendi dersinin hedef temposunda söyler."
+  },
+  "explanation": [
+    {
+      "en": "A run-through means singing the whole piece once without stopping, the way you would for listeners.",
+      "tr": "Baştan sona söylemek, parçanın tamamını dinleyiciler için söyleyeceğin gibi hiç durmadan bir kez söylemek demektir."
+    },
+    {
+      "en": "Choose a piece you have already passed in this module. Memory builds on a piece you know, not one you are still learning.",
+      "tr": "Bu modülde zaten geçtiğin bir parçayı seç. Ezber bildiğin bir parçanın üstüne kurulur, hâlâ öğrendiğin bir parçanın değil."
+    },
+    {
+      "en": "Memorise with your map. Say the order of the phrases out loud: which repeat, where the new part starts, how it ends. Then sing one phrase at a time with the screen hidden.",
+      "tr": "Haritanla ezberle. Cümlelerin sırasını yüksek sesle söyle: hangileri tekrar ediyor, yeni bölüm nerede başlıyor, nasıl bitiyor. Sonra ekran gizliyken her seferinde bir cümle söyle."
+    },
+    {
+      "en": "In a run-through, a slip is not a reason to stop. Keep the beat, find the next phrase start, and sing on. The result shows where to practise afterwards.",
+      "tr": "Baştan sona söylerken bir kayma durmak için neden değildir. Vuruşu koru, sonraki cümlenin başını bul ve devam et. Sonuç, ardından nerede çalışacağını gösterir."
+    },
+    {
+      "en": "The screen hides the line and shows only the phrase numbers. If the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Ekran diziyi gizler ve yalnız cümle numaralarını gösterir. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The chosen piece in your comfortable range over its original accompaniment at the lesson's target tempo; the soft synthesized voice is available before the run, not during it. Headphones recommended.",
+      "tr": "Seçilen parça rahat menzilinde, kendi özgün eşliğiyle dersin hedef temposunda; yumuşak sentez ses söylemeden önce dinlenebilir, söylerken çalmaz. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Choose a piece you passed in this module. Practise it from memory phrase by phrase with the screen hidden. Then listen to one bar of the accompaniment and sing the whole piece once from memory, without stopping, at its target tempo. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Bu modülde geçtiğin bir parçayı seç. Ekran gizliyken onu cümle cümle ezberden çalış. Sonra eşlikten bir ölçü dinle ve parçanın tamamını hedef temposunda, hiç durmadan, ezberden bir kez söyle. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "The whole piece from memory with no stop, at the Level 4 pitch and timing criteria at its target tempo.",
+        "tr": "Parçanın tamamı ezberden ve hiç durmadan, hedef temposunda Seviye 4 perde ve zamanlama ölçütünde."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I sang the whole piece without stopping.",
+      "tr": "Parçanın tamamını hiç durmadan söyledim."
+    },
+    {
+      "en": "After a slip I found the next phrase and went on.",
+      "tr": "Bir kaymadan sonra sonraki cümleyi bulup devam ettim."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear in the middle of the piece.",
+        "tr": "Parçanın ortasında duyamadım."
+      },
+      "fix": {
+        "en": "The line stopped there. Say the phrase order out loud once, then sing from the phrase before the gap to the end.",
+        "tr": "Dizi orada durmuş. Cümle sırasını bir kez yüksek sesle söyle, sonra boşluktan önceki cümleden sonuna kadar söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at a phrase start.",
+        "tr": "Bir cümle başında farklı nota."
+      },
+      "fix": {
+        "en": "Memory slipped at the join. Practise only the last note of one phrase and the first note of the next, a few times.",
+        "tr": "Ezber bağlantı yerinde kaymış. Yalnız bir cümlenin son notasını ve sonrakinin ilk notasını birkaç kez çalış."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Run the piece from memory with the phrase starts shown on screen, then try again with the screen hidden.",
+    "tr": "Parçayı ekranda cümle başları görünürken ezberden söyle, sonra ekran gizliyken yeniden dene."
+  },
+  "repertoire": "One piece of the learner's choice from this module (voc-s4-m19-02…17); see that lesson's source. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}
