@@ -55,4 +55,29 @@ void main() {
       expect(tr.toLowerCase(), isNot(contains('yanlış')));
     }
   });
+
+  test('setup wizard copy list matches the source pairs (F4.2)', () {
+    final source = <(String, String)>{};
+    for (final f in Directory('lib/app/practice/setup').listSync()) {
+      if (f is File && f.path.endsWith('.dart')) {
+        source.addAll(_pairs(f.readAsStringSync()));
+      }
+    }
+    final listed = {
+      for (final p
+          in (jsonDecode(
+                    File(
+                      'docs/practice/copy/setup-wizard.copy.json',
+                    ).readAsStringSync(),
+                  )
+                  as Map<String, dynamic>)['pairs']
+              as List<dynamic>)
+        ((p as Map<String, dynamic>)['en'] as String, p['tr'] as String),
+    };
+    expect(listed, source);
+    for (final (en, tr) in source) {
+      expect(en.toLowerCase(), isNot(contains('wrong')));
+      expect(tr.toLowerCase(), isNot(contains('yanlış')));
+    }
+  });
 }

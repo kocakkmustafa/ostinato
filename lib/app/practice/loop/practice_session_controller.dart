@@ -8,6 +8,9 @@ import 'package:ostinato_audio/ostinato_audio.dart';
 import '../../audio/audio_capture_channel.dart';
 import '../../audio/audio_input_controller.dart';
 import '../../audio/practice_audio_root.dart';
+import '../setup/audio_environment.dart';
+import '../setup/latency_calibration.dart';
+import '../setup/setup_profile_store.dart';
 import 'metronome.dart';
 import 'practice_judge.dart';
 import 'practice_marks.dart';
@@ -40,6 +43,8 @@ final class PracticeSessionController extends ChangeNotifier {
     this.anchorTimeout = const Duration(milliseconds: 1200),
     this.requestedSampleRate = 48000,
     this.criteria = const PassCriteria(minAccuracy: .8),
+    this.setup,
+    this.environment = const AudioEnvironmentProbe(),
   }) : _tempo = tempo,
        _waitMode = freeTempo,
        _metronomeSound = !freeTempo,
@@ -59,6 +64,10 @@ final class PracticeSessionController extends ChangeNotifier {
   final Duration anchorTimeout;
   final int requestedSampleRate;
   final PassCriteria criteria;
+
+  /// F4.2 results (latency per route). Null: timing is never calibrated.
+  final SetupProfileStore? setup;
+  final AudioEnvironmentProbe environment;
   final NoteAnalyzer _analyze;
   final int Function() _localUs;
 
@@ -112,6 +121,16 @@ final class PracticeSessionController extends ChangeNotifier {
   Map<int, StripMark> marks = const {};
   final List<NoteOutcome> outcomes = [];
   HearingMonitor hearing = HearingMonitor();
+
+  /// Input route reported by capture for this run (before the grid exists).
+  AudioRoute inputRoute = AudioRoute.unknown;
+
+  /// Calibration route of this run; null until known or when unknown.
+  CalibrationRoute? calibrationRoute;
+  RouteLatency? _routeLatency;
+
+  /// The current run judges and shows timing (calibration for its route).
+  bool get timingCalibrated => timeline?.calibrated ?? false;
   PracticeRunSummary? summary;
   int? heldEvent;
   WaitStage waitStage = WaitStage.listening;
@@ -182,6 +201,9 @@ final class PracticeSessionController extends ChangeNotifier {
     failure = null;
     plan = null;
     timeline = null;
+    inputRoute = AudioRoute.unknown;
+    calibrationRoute = null;
+    _routeLatency = null;
     _transport = null;
     heldEvent = null;
     _wait = null;
@@ -203,9 +225,14 @@ final class PracticeSessionController extends ChangeNotifier {
         _fail(reason);
       case AudioStopped():
         _fail('stopped');
-      case AudioCalibrating():
-        // Route or clock change after the grid exists: the grid is invalid.
-        if (timeline != null) _fail('input_changed');
+      case AudioCalibrating(:final route):
+        // Route or clock change after the grid exists: the grid is invalid
+        // (and so is the route's latency).
+        if (timeline != null) {
+          _fail('input_changed');
+        } else if (route != AudioRoute.unknown) {
+          inputRoute = route;
+        }
       case AudioStarting() || AudioStreaming():
         break;
     }
@@ -242,6 +269,8 @@ final class PracticeSessionController extends ChangeNotifier {
       beatsPerBar: score.beatsPerBar,
     );
     plan = p;
+    // Route and stored latency are read while the click stream starts.
+    final setupRead = _readSetup();
     MetronomeAnchor? anchor;
     if (_metronomeSound) {
       final clicks = MetronomeClicks.forSampleRate(sampleRate);
@@ -266,7 +295,14 @@ final class PracticeSessionController extends ChangeNotifier {
       _anchorWait = null;
     }
     if (epoch != _runEpoch || !running) return;
+    // The route is read once the clicks play (capture has reported it by
+    // then); environment and stored values were loaded meanwhile.
+    if (anchor != null) _applyRoute(await setupRead);
+    if (epoch != _runEpoch || !running) return;
+    final latency = _routeLatency;
     final now = _clock.nowUs(_localUs()) ?? 0;
+    // Calibration applies only to an audible click stream: a silent grid
+    // has no heard click to be early or late against.
     timeline = anchor == null
         ? MetronomeTimeline(
             anchorUs: now + 400000,
@@ -279,6 +315,12 @@ final class PracticeSessionController extends ChangeNotifier {
             sampleRate: sampleRate,
             framesPerBeat: anchor.framesPerBeat,
             outputLatencyUs: anchor.outputLatencyUs,
+            latencyCorrectionUs:
+                latency?.latencyCorrectionUs(
+                  outputLatencyUs: anchor.outputLatencyUs,
+                ) ??
+                0,
+            calibrated: latency != null,
             source: MetronomeAnchorSource.native,
           );
     _transport = PracticeTransport(
@@ -306,8 +348,48 @@ final class PracticeSessionController extends ChangeNotifier {
         sampleRate: t.sampleRate,
         framesPerBeat: t.framesPerBeat,
         outputLatencyUs: a.outputLatencyUs,
-        latencyCorrectionUs: t.latencyCorrectionUs,
+        latencyCorrectionUs:
+            _routeLatency?.latencyCorrectionUs(
+              outputLatencyUs: a.outputLatencyUs,
+            ) ??
+            0,
+        calibrated: t.calibrated,
         source: MetronomeAnchorSource.native,
+      );
+    }
+  }
+
+  /// Which route this run is on and whether it has a stored calibration.
+  /// Never throws: a missing store or probe means "not calibrated".
+  Future<({AudioEnvironment env, SetupProfile profile})?> _readSetup() async {
+    final store = setup;
+    if (store == null) return null;
+    try {
+      final results = await Future.wait<Object?>([
+        environment.read(),
+        store.load(),
+      ]);
+      return (
+        env: results[0]! as AudioEnvironment,
+        profile: results[1]! as SetupProfile,
+      );
+    } on Object {
+      return null;
+    }
+  }
+
+  void _applyRoute(({AudioEnvironment env, SetupProfile profile})? read) {
+    final store = setup;
+    if (read == null || store == null) return;
+    final profile = read.profile;
+    final route = calibrationRouteOf(inputRoute, read.env);
+    calibrationRoute = route;
+    _routeLatency = profile.latencyFor(route);
+    if (route != null && profile.lastRoute != route) {
+      unawaited(
+        store
+            .update((p) => p.copyWith(lastRoute: route))
+            .then((_) {}, onError: (Object _) {}),
       );
     }
   }

@@ -164,6 +164,7 @@ final class MetronomeTimeline {
     required this.source,
     this.outputLatencyUs = 0,
     this.latencyCorrectionUs = 0,
+    this.calibrated = false,
   });
 
   /// Device-clock time (µs) of the stream's frame 0.
@@ -175,11 +176,14 @@ final class MetronomeTimeline {
   /// Native estimate of output latency not already inside [anchorUs].
   final int outputLatencyUs;
 
-  /// Measured round-trip correction from latency calibration (F4.2 / E50).
-  /// Zero until calibration exists; timing is then not shown to the learner.
+  /// Measured round-trip correction from latency calibration (F4.2 / E50):
+  /// the route's round trip minus [outputLatencyUs]. Zero without a
+  /// calibration for the current route.
   final int latencyCorrectionUs;
 
-  bool get calibrated => latencyCorrectionUs != 0;
+  /// A calibration of the current route is applied. Without it, timing is
+  /// neither judged nor shown (badge "Calibrate for timing").
+  final bool calibrated;
 
   double get beatUs => framesPerBeat * 1e6 / sampleRate;
 

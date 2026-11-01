@@ -1,0 +1,213 @@
+{
+ "note": "Setup wizard UI copy (F4.2). EN+TR source pairs; ids not yet in lib/app/app_message_ids.dart, the other 12 catalogs are missing. Check: python3 tool/build_message_ids.py --pending docs/practice/copy",
+ "pairs": [
+  {
+   "en": "Back",
+   "tr": "Geri"
+  },
+  {
+   "en": "Setup",
+   "tr": "Kurulum"
+  },
+  {
+   "en": "Four short steps. Each can be skipped; results stay on this phone.",
+   "tr": "Dört kısa adım. Her biri atlanabilir; sonuçlar bu telefonda kalır."
+  },
+  {
+   "en": "Audio stays in memory on this device; nothing is recorded or sent.",
+   "tr": "Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez."
+  },
+  {
+   "en": "Placement",
+   "tr": "Yerleşim"
+  },
+  {
+   "en": "Room and level",
+   "tr": "Oda ve seviye"
+  },
+  {
+   "en": "Latency",
+   "tr": "Gecikme"
+  },
+  {
+   "en": "Tuning",
+   "tr": "Akort"
+  },
+  {
+   "en": "Done",
+   "tr": "Bitti"
+  },
+  {
+   "en": "Step {v0} of 4 · {v1}",
+   "tr": "Adım {v0}/4 · {v1}"
+  },
+  {
+   "en": "Skip",
+   "tr": "Atla"
+  },
+  {
+   "en": "Put the phone in front of you, about 50 cm from the sound hole, microphone towards the guitar. Keep the case off the microphone.",
+   "tr": "Telefonu önüne koy: ses deliğine yaklaşık 50 cm, mikrofon gitara dönük. Kılıf mikrofonu kapatmasın."
+  },
+  {
+   "en": "Headphones are recommended, not required. Bluetooth headphones add delay: measure latency again with them on.",
+   "tr": "Kulaklık önerilir, zorunlu değil. Bluetooth kulaklık gecikme ekler: onunla gecikmeyi ayrıca ölç."
+  },
+  {
+   "en": "If Sound Recognition is on (Settings › Accessibility), turn it off while you practise; it can take the microphone.",
+   "tr": "Ses Tanıma açıksa (Ayarlar › Erişilebilirlik), pratik sırasında kapat; mikrofonu kullanabilir."
+  },
+  {
+   "en": "Ready",
+   "tr": "Hazır"
+  },
+  {
+   "en": "Mic Mode is Voice Isolation: it filters the guitar out. Control Center › Mic Mode › Standard.",
+   "tr": "Mikrofon Modu Ses Yalıtımı: gitarı süzüp atar. Denetim Merkezi › Mikrofon Modu › Standart."
+  },
+  {
+   "en": "Mic Mode is Wide Spectrum: room sound is boosted. Choose Standard in Control Center.",
+   "tr": "Mikrofon Modu Geniş Spektrum: oda sesi yükseltilir. Denetim Merkezi’nde Standart seç."
+  },
+  {
+   "en": "The headset microphone is in use. The phone’s own microphone hears the guitar better.",
+   "tr": "Kulaklığın mikrofonu kullanılıyor. Telefonun kendi mikrofonu gitarı daha iyi duyar."
+  },
+  {
+   "en": "A Bluetooth headset microphone is in use; it hears the guitar poorly.",
+   "tr": "Bluetooth kulaklık mikrofonu kullanılıyor; gitarı zayıf duyar."
+  },
+  {
+   "en": "Input level",
+   "tr": "Giriş seviyesi"
+  },
+  {
+   "en": "Opening the microphone…",
+   "tr": "Mikrofon açılıyor…"
+  },
+  {
+   "en": "Stay quiet for 2 seconds — measuring the room…",
+   "tr": "2 saniye sessiz kal — oda ölçülüyor…"
+  },
+  {
+   "en": "Now play one open string.",
+   "tr": "Şimdi bir boş tel çal."
+  },
+  {
+   "en": "I hear you ✓ · room {v0} dBFS",
+   "tr": "Seni duyuyorum ✓ · oda {v0} dBFS"
+  },
+  {
+   "en": "I couldn’t hear the string. Move the phone closer and play a little stronger.",
+   "tr": "Teli duyamadım. Telefonu yaklaştır ve biraz daha güçlü çal."
+  },
+  {
+   "en": "First stay quiet for 2 seconds while I measure the room. Then play one open string.",
+   "tr": "Önce 2 saniye sessiz kal; odanın sesini ölçüyorum. Sonra bir boş tel çal."
+  },
+  {
+   "en": "The room is loud; a quieter place makes notes clearer.",
+   "tr": "Oda gürültülü; daha sessiz bir yer notaları netleştirir."
+  },
+  {
+   "en": "Measure",
+   "tr": "Ölç"
+  },
+  {
+   "en": "Continue",
+   "tr": "Devam"
+  },
+  {
+   "en": "Measure again",
+   "tr": "Tekrar ölç"
+  },
+  {
+   "en": "speaker",
+   "tr": "hoparlör"
+  },
+  {
+   "en": "wired headphones",
+   "tr": "kablolu kulaklık"
+  },
+  {
+   "en": "Bluetooth",
+   "tr": "Bluetooth"
+  },
+  {
+   "en": "Microphone access is off. You can allow it in Settings.",
+   "tr": "Mikrofon erişimi kapalı. Ayarlar’dan izin verebilirsin."
+  },
+  {
+   "en": "The clicks could not be played. Try again.",
+   "tr": "Klikler çalınamadı. Tekrar dene."
+  },
+  {
+   "en": "I couldn’t tell which output this is, so the latency was not kept.",
+   "tr": "Bu çıkışı tanıyamadım; gecikme kaydedilmedi."
+  },
+  {
+   "en": "The microphone stopped (the input changed or another app took it). Start again.",
+   "tr": "Mikrofon durdu (giriş değişti ya da başka bir uygulama aldı). Yeniden başlat."
+  },
+  {
+   "en": "Playing 8 clicks — stay quiet…",
+   "tr": "8 klik çalıyor — sessiz kal…"
+  },
+  {
+   "en": "Calculating…",
+   "tr": "Hesaplanıyor…"
+  },
+  {
+   "en": "Latency {v0} ms ({v1}). Timing is now shown on this output.",
+   "tr": "Gecikme {v0} ms ({v1}). Zamanlama artık bu çıkışta gösterilir."
+  },
+  {
+   "en": "I heard {v0} of 8 clicks. Turn the volume up and try again.",
+   "tr": "8 klikten {v0} tanesini duydum. Sesi aç ve tekrar dene."
+  },
+  {
+   "en": "The clicks arrived at different delays (echo or movement). Keep the phone still and try again.",
+   "tr": "Klikler farklı gecikmelerle geldi (yankı ya da hareket). Telefonu sabit bırakıp tekrar dene."
+  },
+  {
+   "en": "Leave the phone where it is. I play 8 clicks and measure when the microphone hears them. Stay quiet; no tapping or clapping needed.",
+   "tr": "Telefonu yerinde bırak. 8 klik çalıp mikrofonun onları ne zaman duyduğunu ölçeceğim. Sessiz kal; dokunman ya da alkışlaman gerekmez."
+  },
+  {
+   "en": "Volume up. If you will practise with headphones, put them on now: each output is measured on its own.",
+   "tr": "Ses açık olsun. Kulaklıkla çalışacaksan şimdi tak: her çıkış ayrı ölçülür."
+  },
+  {
+   "en": "No tuning measured.",
+   "tr": "Akort ölçülmedi."
+  },
+  {
+   "en": "In tune: {v0} of {v1} strings",
+   "tr": "Akortlu tel: {v1} telden {v0}"
+  },
+  {
+   "en": "Tune the strings ({v0}). The tuner marks each string once it is in tune.",
+   "tr": "Telleri akort et ({v0}). Akort ekranı her teli akortlu olunca işaretler."
+  },
+  {
+   "en": "Tune",
+   "tr": "Akort et"
+  },
+  {
+   "en": "Tune again",
+   "tr": "Yeniden akort et"
+  },
+  {
+   "en": "done",
+   "tr": "yapıldı"
+  },
+  {
+   "en": "skipped",
+   "tr": "atlandı"
+  },
+  {
+   "en": "Measured latency: {v0}",
+   "tr": "Ölçülen gecikme: {v0}"
+  }
+ ]
+}

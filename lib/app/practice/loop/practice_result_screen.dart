@@ -23,6 +23,11 @@ final class ResultActionRetry extends ResultAction {
   const ResultActionRetry();
 }
 
+/// Open the setup wizard (heard rate too low: the microphone, not the player).
+final class ResultActionCheckSetup extends ResultAction {
+  const ResultActionCheckSetup();
+}
+
 final class ResultActionRaiseTempo extends ResultAction {
   const ResultActionRaiseTempo();
 }
@@ -144,12 +149,27 @@ class PracticeResultScreen extends StatelessWidget {
               const SizedBox(height: 16),
               _nextStep(context),
               const SizedBox(height: 8),
-              OutlinedButton(
-                key: const Key('result-retry'),
-                onPressed: () =>
-                    Navigator.of(context).pop(const ResultActionRetry()),
-                child: Text(localized(context, 'Try again', 'Tekrar dene')),
-              ),
+              if (gate.passed && !gate.completed)
+                OutlinedButton(
+                  key: const Key('result-target-run'),
+                  onPressed: () => Navigator.of(
+                    context,
+                  ).pop(const ResultActionPerformance()),
+                  child: Text(
+                    localized(
+                      context,
+                      'Play it at the target tempo',
+                      'Hedef tempoda çal',
+                    ),
+                  ),
+                )
+              else
+                OutlinedButton(
+                  key: const Key('result-retry'),
+                  onPressed: () =>
+                      Navigator.of(context).pop(const ResultActionRetry()),
+                  child: Text(localized(context, 'Try again', 'Tekrar dene')),
+                ),
               if (!progressSaved)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
@@ -245,10 +265,18 @@ class PracticeResultScreen extends StatelessWidget {
         'Duyulma ≥ %{v0}',
         values: {'v0': _pct(c.threshold)},
       ),
+      GateCheckKind.tempo
+          when gate.criteria.tempoGate == TempoGate.targetOnly =>
+        localized(
+          context,
+          'Target tempo ♩={v0} (module transition)',
+          'Hedef tempo ♩={v0} (modül geçişi)',
+          values: {'v0': c.threshold.round()},
+        ),
       GateCheckKind.tempo => localized(
         context,
-        'Target tempo ♩={v0}',
-        'Hedef tempo ♩={v0}',
+        'Opening tempo ♩={v0} or faster',
+        'Açılış temposu ♩={v0} ya da üstü',
         values: {'v0': c.threshold.round()},
       ),
       GateCheckKind.minCorrect => localized(
@@ -258,8 +286,18 @@ class PracticeResultScreen extends StatelessWidget {
         values: {'v0': c.threshold.round()},
       ),
     };
-    final title = gate.passed
-        ? localized(context, 'Gate passed', 'Geçiş kapısı geçildi')
+    final title = gate.completed
+        ? localized(
+            context,
+            'Completed at the target tempo',
+            'Hedef tempoda tamamlandı',
+          )
+        : gate.passed
+        ? localized(
+            context,
+            'Passed at the opening tempo',
+            'Açılış temposunda geçtin',
+          )
         : !gate.eligible
         ? localized(
             context,
@@ -300,6 +338,52 @@ class PracticeResultScreen extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(child: Text(check(c), style: hankenText(size: 13))),
                 ],
+              ),
+            ),
+          if (gate.criteria.tempoGate == TempoGate.openingOpensNext &&
+              summary.openBpm < summary.targetBpm)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Row(
+                children: [
+                  Icon(
+                    gate.completed
+                        ? Icons.check_circle
+                        : Icons.radio_button_unchecked,
+                    size: 16,
+                    color: palette.ink,
+                    semanticLabel: gate.completed
+                        ? localized(context, 'met', 'sağlandı')
+                        : localized(context, 'not met', 'sağlanmadı'),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      localized(
+                        context,
+                        'Target tempo ♩={v0} marks the lesson completed',
+                        'Hedef tempo ♩={v0} dersi "tamamlandı" yapar',
+                        values: {'v0': summary.targetBpm},
+                      ),
+                      key: const Key('result-completion-rule'),
+                      style: hankenText(size: 13),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          if (gate.passed && !gate.completed)
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Text(
+                localized(
+                  context,
+                  'The opening tempo opens the next lesson. Pass at the target tempo ♩={v0} to mark this one completed.',
+                  'Açılış temposu sıradaki dersi açar. Bu dersi "tamamlandı" yapmak için hedef tempoda (♩={v0}) geç.',
+                  values: {'v0': summary.targetBpm},
+                ),
+                key: const Key('result-opening-pass'),
+                style: hankenText(size: 12.5),
               ),
             ),
           for (final reason in gate.ineligible)
@@ -484,7 +568,7 @@ class PracticeResultScreen extends StatelessWidget {
       ),
       NextStep.checkSetup => (
         localized(context, 'Check the setup', 'Kurulumu kontrol et'),
-        const ResultActionRetry(),
+        const ResultActionCheckSetup(),
       ),
       NextStep.loopSlower when loop != null => (
         localized(

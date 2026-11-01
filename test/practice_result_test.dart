@@ -14,6 +14,7 @@ import 'package:ostinato/app/practice/loop/practice_result_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_score.dart';
 import 'package:ostinato/app/practice/loop/v1_practice_catalog.dart';
 import 'package:ostinato/app/practice/loop/v1_practice_list_screen.dart';
+import 'package:ostinato/app/practice/setup/setup_profile_store.dart';
 
 import 'support/practice_host.dart';
 
@@ -90,9 +91,51 @@ void main() {
       expect(s.nextStep, NextStep.checkSetup);
     });
 
-    test('below target tempo, loop, wait or stopped never open', () {
+    test('contract §6.3: opening tempo opens, target tempo completes', () {
       final all = List.filled(8, c);
-      expect(summary(all, bpm: 55).nextStep, NextStep.raiseTempo);
+      // Opening 50, target 60.
+      final open = summary(all, bpm: 50);
+      expect(open.gate.passed, isTrue, reason: 'opening tempo opens next');
+      expect(open.gate.completed, isFalse);
+      expect(open.nextStep, NextStep.nextLesson);
+      final mid = summary(all, bpm: 55);
+      expect((mid.gate.passed, mid.gate.completed), (true, false));
+      final target = summary(all, bpm: 60);
+      expect((target.gate.passed, target.gate.completed), (true, true));
+      // Below the opening tempo it is practice: nothing opens.
+      final slow = summary(all, bpm: 45);
+      expect(slow.gate.passed, isFalse);
+      expect(slow.nextStep, NextStep.raiseTempo);
+      // `M!` lessons (module transitions) pass at the target tempo only.
+      const gateOnly = PassCriteria(
+        minAccuracy: .8,
+        tempoGate: TempoGate.targetOnly,
+      );
+      expect(summary(all, bpm: 55, criteria: gateOnly).gate.passed, isFalse);
+      expect(
+        summary(all, bpm: 55, criteria: gateOnly).nextStep,
+        NextStep.raiseTempo,
+      );
+      expect(summary(all, bpm: 60, criteria: gateOnly).gate.completed, isTrue);
+      expect(
+        PassCriteria.forLesson(lesson()).tempoGate,
+        TempoGate.openingOpensNext,
+      );
+      final transition = V1Lesson.fromJson(
+        jsonDecode(
+              File('content/v1/gtr/gtr-s1-m02-10.json').readAsStringSync(),
+            )
+            as Map<String, dynamic>,
+      );
+      expect(transition.practice.measurement, ['M!']);
+      expect(
+        PassCriteria.forLesson(transition).tempoGate,
+        TempoGate.targetOnly,
+      );
+    });
+
+    test('loop, wait or stopped never open', () {
+      final all = List.filled(8, c);
       expect(summary(all, loop: true).gate.ineligible, [
         GateIneligible.loopUsed,
       ]);
@@ -169,6 +212,7 @@ void main() {
       expect(r.runs, 3);
       expect(r.passedAt, DateTime.utc(2026, 11, 1));
       expect(r.passedBpm, 60);
+      expect(r.completedAt, DateTime.utc(2026, 11, 1));
       expect(r.bestAccuracy, 1);
       final raw = File(
         '${dir.path}/v1_practice_progress.v1.json',
@@ -176,6 +220,38 @@ void main() {
       expect(raw, contains('measured_practice'));
       // Counts only: no audio, no pitch lists.
       expect(raw, isNot(contains('samples')));
+    });
+
+    test('opening-tempo pass opens; a later target pass completes', () async {
+      final store = V1PracticeProgressStore(directoryProvider: () async => dir);
+      final all = List.filled(8, c);
+      await store.recordRun(
+        'a',
+        summary(all, bpm: 50),
+        at: DateTime.utc(2026, 11, 1),
+      );
+      var r = (await store.load())['a']!;
+      expect((r.passed, r.completed, r.passedBpm), (true, false, 50));
+      expect(unlockedLessons(const ['a', 'b'], {'a': r}), {'a', 'b'});
+      await store.recordRun(
+        'a',
+        summary(all, bpm: 60),
+        at: DateTime.utc(2026, 11, 2),
+      );
+      r = (await store.load())['a']!;
+      expect(r.passedAt, DateTime.utc(2026, 11, 1), reason: 'first pass kept');
+      expect((r.completedAt, r.completedBpm), (DateTime.utc(2026, 11, 2), 60));
+    });
+
+    test('files written before the fix read a pass as completed', () {
+      final r = V1PracticeRecord.fromJson({
+        'lessonId': 'a',
+        'runs': 1,
+        'passedAt': '2026-10-31T10:00:00.000Z',
+        'passedBpm': 60,
+        'evidence': 'measured_practice',
+      });
+      expect((r.passed, r.completed, r.completedBpm), (true, true, 60));
     });
 
     test('first lesson open; next opens after a pass', () {
@@ -249,14 +325,42 @@ void main() {
       expect(find.text('◆ 0'), findsOneWidget);
       expect(find.text('? 0'), findsOneWidget);
       expect(find.text('%100'), findsNWidgets(2));
-      expect(find.text('Gate passed'), findsOneWidget);
+      expect(find.text('Completed at the target tempo'), findsOneWidget);
       expect(find.text('The next lesson is open.'), findsOneWidget);
       expect(find.text('Accuracy ≥ %80'), findsOneWidget);
       expect(find.text('Heard ≥ %80'), findsOneWidget);
-      expect(find.text('Target tempo ♩=60'), findsOneWidget);
+      expect(find.text('Opening tempo ♩=50 or faster'), findsOneWidget);
+      expect(
+        find.text('Target tempo ♩=60 marks the lesson completed'),
+        findsOneWidget,
+      );
+      expect(find.byKey(const Key('result-opening-pass')), findsNothing);
       await tester.tap(find.byKey(const Key('result-next-step')));
       await tester.pumpAndSettle();
       expect(find.byType(PracticeResultScreen), findsNothing);
+    });
+
+    testWidgets('opening-tempo pass: next lesson opens, target still to go', (
+      tester,
+    ) async {
+      final s = summary(List.filled(8, c), bpm: 50);
+      final action = await show(
+        tester,
+        s,
+        locale: 'tr',
+        tap: find.byKey(const Key('result-target-run')),
+      );
+      expect(action, isA<ResultActionPerformance>());
+      await show(tester, s, locale: 'tr');
+      expect(find.text('Açılış temposunda geçtin'), findsOneWidget);
+      expect(find.text('Sıradaki ders açıldı.'), findsOneWidget);
+      expect(
+        find.text(
+          'Açılış temposu sıradaki dersi açar. Bu dersi "tamamlandı" yapmak için hedef tempoda (♩=60) geç.',
+        ),
+        findsOneWidget,
+      );
+      expect(find.text('Sonraki derse geç'), findsOneWidget);
     });
 
     testWidgets('Turkish copy: different note, heard low, never "wrong"', (
@@ -297,11 +401,28 @@ void main() {
     final progress = _MemoryProgress();
     final catalog = V1PracticeCatalog([lesson(), lesson(id: 'gtr-s1-m02-03')]);
     final opened = <String>[];
+    final setupOpened = <int>[];
+    final at = DateTime.utc(2026, 11, 1);
+    final setup = MemorySetupProfileStore();
     await tester.pumpWidget(
       practiceHost(
         V1PracticeListScreen(
           catalog: Future.value(catalog),
           progressFactory: (_) => progress,
+          setupStore: setup,
+          // The wizard: every step skipped.
+          openSetup: (_) async {
+            setupOpened.add(1);
+            final skip = SetupStepRecord(SetupStepState.skipped, at);
+            await setup.update(
+              (p) => p.copyWith(
+                placement: skip,
+                roomStep: skip,
+                latencyStep: skip,
+                tuningStep: skip,
+              ),
+            );
+          },
           practiceScreenBuilder: (l, p, hasNext) => _FakePractice(
             onOpen: () => opened.add(l.id),
             pass: () => p.recordRun(l.id, summary(List.filled(8, c))),
@@ -315,16 +436,29 @@ void main() {
     await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m02-03')));
     await tester.pumpAndSettle();
     expect(opened, isEmpty, reason: 'locked lesson does not open');
+    expect(
+      find.text('Placement, room, latency and tuning — about two minutes.'),
+      findsOneWidget,
+    );
     await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m02-02')));
     await tester.pumpAndSettle();
+    // Choose a lesson → setup first (once) → practice.
+    expect(setupOpened, [1]);
     await tester.tap(find.text('pass'));
     await tester.pumpAndSettle();
     // The next lesson opened straight away after the pass.
     expect(opened, ['gtr-s1-m02-02', 'gtr-s1-m02-03']);
     await tester.tap(find.text('close'));
     await tester.pumpAndSettle();
-    expect(find.text('PASSED · ♩=60'), findsOneWidget);
+    expect(find.text('COMPLETED · ♩=60'), findsOneWidget);
     expect(find.text('LOCKED · pass the lesson before'), findsNothing);
+    expect(
+      find.text('Latency not measured on this output: timing stays hidden.'),
+      findsOneWidget,
+    );
+    await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m02-02')));
+    await tester.pumpAndSettle();
+    expect(setupOpened, [1], reason: 'the wizard runs first only once');
   });
 }
 

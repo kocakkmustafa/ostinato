@@ -6,10 +6,15 @@ import 'package:flutter/scheduler.dart';
 import '../../app_locale.dart';
 import '../../app_theme.dart';
 import '../../audio/audio_input_controller.dart';
-import '../../audio/practice_audio_root.dart';
 import '../../curriculum/v1_lesson.dart';
 import '../../design/ostinato_theme.dart';
 import '../../design/widgets.dart';
+import '../../tuner/session_tuning_gate.dart';
+import '../../tuner/tuner_screen.dart';
+import '../../tuner/tunings.dart';
+import '../practice_audio_input.dart';
+import '../setup/setup_profile_store.dart';
+import '../setup/setup_wizard_screen.dart';
 import 'metronome_beat_view.dart';
 import 'practice_judge.dart';
 import 'practice_marks.dart';
@@ -36,9 +41,17 @@ class PracticeLoopScreen extends StatefulWidget {
     this.hasNextLesson = false,
     this.controllerFactory,
     this.onSessionFinished,
+    this.setupStore,
+    this.openSetup,
   });
 
   final V1Lesson lesson;
+
+  /// F4.2 results (latency per route); defaults to the device store.
+  final SetupProfileStore? setupStore;
+
+  /// Opens the setup wizard at a step; tests replace it.
+  final Future<void> Function(BuildContext context, SetupStep start)? openSetup;
 
   /// "Session finished" for retention (weekly goal / streak). Fired once per
   /// run that has a summary, before the result screen opens.
@@ -71,6 +84,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           targetBpm: widget.lesson.practice.tempo!.target,
         );
   late final PassCriteria _criteria = PassCriteria.forLesson(widget.lesson);
+  late final SetupProfileStore _setup =
+      widget.setupStore ?? FileSetupProfileStore.device;
+  SetupProfile? _profile;
+  bool _ranOnce = false;
   AudioInputController? _ownedAudio;
   late final PracticeSessionController _c = _createController();
   late final Ticker _ticker = createTicker((_) => _c.tick());
@@ -79,13 +96,21 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   PracticeSessionController _createController() {
     final factory = widget.controllerFactory;
     if (factory != null) return factory(_score, _initialTempo, _criteria);
-    final audio = _ownedAudio = AudioInputController();
+    final audio = _ownedAudio = createPracticeAudioInput(
+      // Debug fake microphone only (`--dart-define=OSTINATO_FAKE_MIC`).
+      lesson: () => (
+        score: _score,
+        countInBeats: _c.plan?.countInBeats ?? _score.beatsPerBar,
+        loop: _c.loopRange,
+      ),
+    );
     return PracticeSessionController(
       score: _score,
       tempo: _initialTempo,
       audio: audio,
       freeTempo: _freeTempo,
       criteria: _criteria,
+      setup: _setup,
     );
   }
 
@@ -93,6 +118,36 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   void initState() {
     super.initState();
     _c.addListener(_changed);
+    unawaited(_loadProfile());
+  }
+
+  Future<void> _loadProfile() async {
+    SetupProfile? p;
+    try {
+      p = await _setup.load();
+    } on Object {
+      p = null;
+    }
+    if (mounted) setState(() => _profile = p);
+  }
+
+  /// Timing is judged and shown: the run's own route when a run exists,
+  /// otherwise the last measured route of this phone.
+  bool get _timingReady {
+    if (_c.timeline != null) return _c.timingCalibrated;
+    final p = _profile;
+    return p != null && p.latencyFor(p.lastRoute) != null;
+  }
+
+  Future<void> _openSetup(SetupStep start) async {
+    if (_c.running) return;
+    final open = widget.openSetup;
+    if (open != null) {
+      await open(context, start);
+    } else {
+      await openSetupWizard(context, start: start, store: _setup);
+    }
+    if (mounted) await _loadProfile();
   }
 
   void _changed() {
@@ -168,6 +223,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         }
       case ResultActionRaiseTempo():
         _c.tempo = _c.tempo.stepped(5);
+      case ResultActionCheckSetup():
+        await _openSetup(SetupStep.placement);
       case ResultActionPerformance():
         _c.loopBars = null;
         _c.waitMode = false;
@@ -178,8 +235,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   }
 
   void _start() {
-    final action = PracticeAudioCaptureScope.actionFor(context);
-    unawaited(_c.start(captureAction: action));
+    _ranOnce = true;
+    unawaited(_c.start(captureAction: practiceCaptureActionFor(context)));
   }
 
   @override
@@ -204,6 +261,21 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                     style: hankenText(size: 13.5, height: 1.45),
                   ),
                   const SizedBox(height: 10),
+                  if (!_ranOnce && _c.phase == PracticePhase.idle)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      // Contract §5 rule 2: tuning at session start. The
+                      // card never blocks ([Continue anyway]).
+                      child: SessionTuningGateCard(
+                        preset: TuningPresets.guitarStandard,
+                        onTune: (context) => openTuner(
+                          context,
+                          controller: debugFakeTunerController(
+                            TuningPresets.guitarStandard,
+                          ),
+                        ),
+                      ),
+                    ),
                   if (_c.canEditSettings) _settings(context),
                   if (_c.hearing.setupCardDue && _c.running)
                     _setupCard(context),
@@ -405,23 +477,34 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
               Expanded(
                 child: Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: Tooltip(
-                    message: localized(
-                      context,
-                      'Timing is shown only after latency calibration.',
-                      'Zamanlama yalnız gecikme kalibrasyonundan sonra gösterilir.',
-                    ),
-                    child: Text(
-                      localized(
-                        context,
-                        'Calibrate for timing',
-                        'Zamanlama için kalibrasyon yap',
-                      ),
-                      key: const Key('practice-calibration-badge'),
-                      textAlign: TextAlign.end,
-                      style: monoText(size: 10, color: palette.textMuted),
-                    ),
-                  ),
+                  child: _timingReady
+                      ? const SizedBox.shrink()
+                      : Tooltip(
+                          message: localized(
+                            context,
+                            'Timing is shown only after latency calibration.',
+                            'Zamanlama yalnız gecikme kalibrasyonundan sonra gösterilir.',
+                          ),
+                          child: InkWell(
+                            onTap: _c.running
+                                ? null
+                                : () =>
+                                      unawaited(_openSetup(SetupStep.latency)),
+                            child: Text(
+                              localized(
+                                context,
+                                'Calibrate for timing',
+                                'Zamanlama için kalibrasyon yap',
+                              ),
+                              key: const Key('practice-calibration-badge'),
+                              textAlign: TextAlign.end,
+                              style: monoText(
+                                size: 10,
+                                color: palette.textMuted,
+                              ),
+                            ),
+                          ),
+                        ),
                 ),
               ),
             ],

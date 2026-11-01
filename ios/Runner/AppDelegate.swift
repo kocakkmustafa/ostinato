@@ -1,3 +1,4 @@
+import AVFoundation
 import Flutter
 import UIKit
 import video_player_avfoundation
@@ -8,6 +9,7 @@ import video_player_avfoundation
   private var audioMethods: FlutterMethodChannel?
   private var audioEvents: FlutterEventChannel?
   private var practiceAudioMethods: FlutterMethodChannel?
+  private var audioEnvironmentMethods: FlutterMethodChannel?
   #if DEBUG
   private var qaVideoMethods: FlutterMethodChannel?
   private var qaVideoProbe: QASilentVideoProbeHandler?
@@ -32,6 +34,7 @@ import video_player_avfoundation
     audioMethods?.setMethodCallHandler(nil)
     audioEvents?.setStreamHandler(nil)
     practiceAudioMethods?.setMethodCallHandler(nil)
+    audioEnvironmentMethods?.setMethodCallHandler(nil)
     #if DEBUG
     qaVideoProbe?.invalidate()
     qaVideoMethods?.setMethodCallHandler(nil)
@@ -73,6 +76,14 @@ import video_player_avfoundation
     practiceAudioMethods?.setMethodCallHandler { call, result in
       practice.handle(call, result: result)
     }
+    // F4.2 setup wizard: read-only route + Mic Mode report. It changes no
+    // session setting and asks for no permission.
+    audioEnvironmentMethods = FlutterMethodChannel(name: "com.yulalab.ostinato/audio_environment",
+                                                   binaryMessenger: messenger)
+    audioEnvironmentMethods?.setMethodCallHandler { call, result in
+      guard call.method == "read" else { result(FlutterMethodNotImplemented); return }
+      result(AudioEnvironmentReport.read())
+    }
     #if DEBUG
     let probe = QASilentVideoProbeHandler()
     qaVideoProbe = probe
@@ -83,5 +94,48 @@ import video_player_avfoundation
       probe.handle(call, result: result)
     }
     #endif
+  }
+}
+
+/// F4.2: what the setup wizard may warn about. Port names use the capture
+/// route-tag vocabulary of `audio_route_state.dart` (`BuiltInMic`,
+/// `HeadsetMic`, …); anything else is sent raw and maps to unknown in Dart.
+/// `preferredMicrophoneMode` is the user's Control Center choice (iOS 15+);
+/// reading it needs no camera or microphone permission.
+enum AudioEnvironmentReport {
+  static func read() -> [String: Any] {
+    let route = AVAudioSession.sharedInstance().currentRoute
+    var micMode = "unknown"
+    if #available(iOS 15.0, *) {
+      switch AVCaptureDevice.preferredMicrophoneMode {
+      case .standard: micMode = "standard"
+      case .voiceIsolation: micMode = "voiceIsolation"
+      case .wideSpectrum: micMode = "wideSpectrum"
+      @unknown default: micMode = "unknown"
+      }
+    }
+    return [
+      "platform": "ios",
+      "inputs": route.inputs.map { name($0.portType) },
+      "outputs": route.outputs.map { name($0.portType) },
+      "micMode": micMode,
+    ]
+  }
+
+  private static func name(_ port: AVAudioSession.Port) -> String {
+    switch port {
+    case .builtInMic: return "BuiltInMic"
+    case .builtInSpeaker: return "Speaker"
+    case .builtInReceiver: return "Receiver"
+    case .headsetMic: return "HeadsetMic"
+    case .headphones: return "Headphones"
+    case .lineIn: return "LineIn"
+    case .lineOut: return "LineOut"
+    case .bluetoothHFP: return "BluetoothHFP"
+    case .bluetoothA2DP: return "BluetoothA2DP"
+    case .bluetoothLE: return "BluetoothLE"
+    case .usbAudio: return "USBAudio"
+    default: return port.rawValue
+    }
   }
 }
