@@ -102,6 +102,9 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         score: _score,
         countInBeats: _c.plan?.countInBeats ?? _score.beatsPerBar,
         loop: _c.loopRange,
+        heldMidi: _c.heldEvent == null
+            ? null
+            : _score.events[_c.heldEvent!].midi,
       ),
     );
     return PracticeSessionController(
@@ -134,6 +137,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   /// Timing is judged and shown: the run's own route when a run exists,
   /// otherwise the last measured route of this phone.
   bool get _timingReady {
+    // Free tempo has no click, so timing is never judged: nothing to ask.
+    if (_freeTempo) return true;
     if (_c.timeline != null) return _c.timingCalibrated;
     final p = _profile;
     return p != null && p.latencyFor(p.lastRoute) != null;

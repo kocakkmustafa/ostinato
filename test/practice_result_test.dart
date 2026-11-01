@@ -278,6 +278,7 @@ void main() {
       String locale = 'en',
       bool hasNext = true,
       Finder? tap,
+      V1Lesson? forLesson,
     }) async {
       tester.view.physicalSize = const Size(420, 2400);
       tester.view.devicePixelRatio = 1;
@@ -294,7 +295,7 @@ void main() {
                   got = await Navigator.of(context).push<ResultAction>(
                     MaterialPageRoute(
                       builder: (_) => PracticeResultScreen(
-                        lesson: lesson(),
+                        lesson: forLesson ?? lesson(),
                         score: score,
                         summary: s,
                         hasNextLesson: hasNext,
@@ -325,6 +326,7 @@ void main() {
       expect(find.text('◆ 0'), findsOneWidget);
       expect(find.text('? 0'), findsOneWidget);
       expect(find.text('%100'), findsNWidgets(2));
+      expect(find.text('Timing'), findsOneWidget);
       expect(find.text('Completed at the target tempo'), findsOneWidget);
       expect(find.text('The next lesson is open.'), findsOneWidget);
       expect(find.text('Accuracy ≥ %80'), findsOneWidget);
@@ -338,6 +340,19 @@ void main() {
       await tester.tap(find.byKey(const Key('result-next-step')));
       await tester.pumpAndSettle();
       expect(find.byType(PracticeResultScreen), findsNothing);
+    });
+
+    testWidgets('free tempo: no tempo or timing rows (there is no click)', (
+      tester,
+    ) async {
+      final s = summary(List.filled(8, c));
+      final j = _lessonJson();
+      (j['practice'] as Map<String, dynamic>).remove('tempo');
+      final free = V1Lesson.fromJson(j);
+      expect(free.practice.tempo, isNull);
+      await show(tester, s, forLesson: free);
+      expect(find.text('Timing'), findsNothing);
+      expect(find.text('calibrate first'), findsNothing);
     });
 
     testWidgets('opening-tempo pass: next lesson opens, target still to go', (

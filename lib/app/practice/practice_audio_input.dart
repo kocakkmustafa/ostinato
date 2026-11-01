@@ -26,6 +26,7 @@ typedef PracticeLessonTimeline = ({
   PracticeScore score,
   int countInBeats,
   ({double start, double end})? loop,
+  int? heldMidi,
 });
 
 /// Capture controller for the practice loop and the setup wizard.
@@ -44,6 +45,7 @@ AudioInputController createPracticeAudioInput({
                 score: l.score,
                 countInBeats: l.countInBeats,
                 loop: l.loop,
+                heldMidi: l.heldMidi,
               );
             },
     );

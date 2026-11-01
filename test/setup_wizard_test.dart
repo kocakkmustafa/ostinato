@@ -159,21 +159,22 @@ void main() {
   });
 
   group('practice screen', () {
-    V1Lesson lesson() => V1Lesson.fromJson(
-      jsonDecode(File('content/v1/gtr/gtr-s1-m02-02.json').readAsStringSync()),
+    V1Lesson lesson([String id = 'gtr-s1-m02-02']) => V1Lesson.fromJson(
+      jsonDecode(File('content/v1/gtr/$id.json').readAsStringSync()),
     );
 
     Future<List<SetupStep>> pump(
       WidgetTester tester,
-      SetupProfileStore store,
-    ) async {
+      SetupProfileStore store, {
+      String lessonId = 'gtr-s1-m02-02',
+    }) async {
       _tall(tester);
       final opened = <SetupStep>[];
       final audio = _audio();
       await tester.pumpWidget(
         practiceHost(
           PracticeLoopScreen(
-            lesson: lesson(),
+            lesson: lesson(lessonId),
             progress: _Progress(),
             setupStore: store,
             openSetup: (_, step) async => opened.add(step),
@@ -221,6 +222,18 @@ void main() {
             ),
           ),
         ),
+      );
+      expect(find.byKey(const Key('practice-calibration-badge')), findsNothing);
+    });
+
+    testWidgets('free tempo (no click, timing not judged): no badge', (
+      tester,
+    ) async {
+      expect(lesson('gtr-s1-m01-04').practice.tempo, isNull);
+      await pump(
+        tester,
+        MemorySetupProfileStore(),
+        lessonId: 'gtr-s1-m01-04',
       );
       expect(find.byKey(const Key('practice-calibration-badge')), findsNothing);
     });

@@ -33,8 +33,12 @@ import '../loop/practice_score.dart';
 ///   string every 3 s after the first 3 s, so the room/level step and the
 ///   tuner have something to hear.
 ///
-/// Limits: "Wait for me" and runs without the click are not followed (the
-/// performer plays to the click grid only).
+/// - with a performance but no click (free-tempo lessons, which run in
+///   "Wait for me"), every 2 s it plucks the note the screen is holding on,
+///   as written, which releases it.
+///
+/// Limits: a timed lesson with the click switched off is not followed (the
+/// performer plays to the click grid, or to the 2 s free-play pace).
 enum FakeMicMode {
   /// Every note as written (a gate pass is possible).
   clean,
@@ -50,11 +54,15 @@ final class FakeMicPerformance {
     required this.score,
     required this.countInBeats,
     this.loop,
+    this.heldMidi,
   });
 
   final PracticeScore score;
   final int countInBeats;
   final ({double start, double end})? loop;
+
+  /// The note "Wait for me" is holding on, if any (free play answers it).
+  final int? heldMidi;
 }
 
 final class DebugFakeMicChannel
@@ -116,6 +124,7 @@ final class DebugFakeMicChannel
   List<_Note> _notes = const [];
   int _nextNote = 0;
   int _nextIdlePluck = 0;
+  int _nextFreePluck = 0;
   int _idleString = 0;
 
   @override
@@ -160,6 +169,7 @@ final class DebugFakeMicChannel
     _notes = const [];
     _playbackUntil = -1;
     _nextIdlePluck = 3 * sampleRate;
+    _nextFreePluck = 2 * sampleRate;
     _idleString = 0;
     // After start returns, like the native route report.
     Timer.run(() {
@@ -244,7 +254,21 @@ final class DebugFakeMicChannel
       }
       return;
     }
-    if (performance != null) return;
+    final lesson = performance;
+    if (lesson != null) {
+      // No click: free play. Every 2 s, the held note as written. The lesson
+      // is read only when a pluck is due; a timed run has its click by then.
+      while (_nextFreePluck < horizon) {
+        final held = lesson()?.heldMidi;
+        if (held != null) {
+          _voices.add(
+            _Voice(_nextFreePluck, _pluck(held, seed: 5, seconds: 1.8), 1),
+          );
+        }
+        _nextFreePluck += 2 * _rate;
+      }
+      return;
+    }
     // Idle: open strings in turn, in tune (room step, tuner).
     const open = [40, 45, 50, 55, 59, 64];
     while (_nextIdlePluck < horizon) {

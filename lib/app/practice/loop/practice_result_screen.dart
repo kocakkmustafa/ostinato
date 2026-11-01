@@ -114,22 +114,25 @@ class PracticeResultScreen extends StatelessWidget {
                       '%${_pct(s.heard)}',
                       key: const Key('result-heard'),
                     ),
-                    _line(
-                      context,
-                      localized(context, 'Tempo', 'Tempo'),
-                      '♩=${s.bpm} / ${s.targetBpm}',
-                    ),
-                    _line(
-                      context,
-                      localized(context, 'Timing', 'Zamanlama'),
-                      s.medianTimingMs == null
-                          ? localized(
-                              context,
-                              'calibrate first',
-                              'önce kalibrasyon',
-                            )
-                          : '${s.medianTimingMs!.round()} ms',
-                    ),
+                    // Free tempo: no click, so neither tempo nor timing exists.
+                    if (lesson.practice.tempo != null) ...[
+                      _line(
+                        context,
+                        localized(context, 'Tempo', 'Tempo'),
+                        '♩=${s.bpm} / ${s.targetBpm}',
+                      ),
+                      _line(
+                        context,
+                        localized(context, 'Timing', 'Zamanlama'),
+                        s.medianTimingMs == null
+                            ? localized(
+                                context,
+                                'calibrate first',
+                                'önce kalibrasyon',
+                              )
+                            : '${s.medianTimingMs!.round()} ms',
+                      ),
+                    ],
                     const SizedBox(height: 4),
                     Text(
                       localized(

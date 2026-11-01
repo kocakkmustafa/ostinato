@@ -153,6 +153,51 @@ void main() {
     await audio.dispose();
   }, timeout: const Timeout(Duration(minutes: 3)));
 
+  test('free tempo (no click, "Wait for me"): the fake plays each written '
+      'pitch in turn and the run finishes', () async {
+    final score = PracticeScore.parse('E2 A2 D3 G3 B3 E4');
+    final clock = Clock();
+    late PracticeSessionController c;
+    final channel = DebugFakeMicChannel(
+      mode: FakeMicMode.clean,
+      clockUs: () => clock.us,
+      autoPump: false,
+      performance: () => FakeMicPerformance(
+        score: score,
+        countInBeats: 4,
+        heldMidi: c.heldEvent == null ? null : score.events[c.heldEvent!].midi,
+      ),
+    );
+    final audio = onFake(channel);
+    c = PracticeSessionController(
+      score: score,
+      tempo: PracticeTempo(openBpm: 60, targetBpm: 60),
+      audio: audio,
+      freeTempo: true,
+      analyzer: (r) async => judgeNote(r),
+      localClockUs: () => clock.us,
+      setup: MemorySetupProfileStore(),
+      environment: const _NoNative(),
+    );
+    await c.start();
+    await advance(
+      clock,
+      channel,
+      () =>
+          c.phase == PracticePhase.finished || c.phase == PracticePhase.failed,
+      each: c.tick,
+      limitMs: 30000,
+    );
+    expect(c.failure, isNull);
+    expect(c.phase, PracticePhase.finished);
+    expect(
+      c.outcomes.map((o) => o.mark),
+      everyElement(PracticeMark.correct),
+    );
+    c.dispose();
+    await audio.dispose();
+  }, timeout: const Timeout(Duration(minutes: 3)));
+
   test('the fake never reaches the product surface', () {
     final debugImports = <String>[];
     for (final f in Directory('lib').listSync(recursive: true)) {
