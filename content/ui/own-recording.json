@@ -1,0 +1,45 @@
+{
+  "$about": "FK2 own-recording copy (lib/app/practice/own_recording/own_recording_copy.dart). EN+TR source pairs; all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "settingTitle",
+      "en": "Listen to my own recording",
+      "tr": "Kendi kaydımı dinle"
+    },
+    {
+      "id": "settingBody",
+      "en": "Off by default. When on, your playing in a measured practice run is kept on this device only, so you can listen to it on the result screen. It is deleted when you start the next run or leave the lesson. It is never uploaded and never used for analysis or training.",
+      "tr": "Varsayılan olarak kapalı. Açıkken ölçülü pratik turunda çaldığın yalnız bu cihazda tutulur; sonuç ekranında dinleyebilirsin. Sonraki tura başlayınca ya da dersten çıkınca silinir. Hiçbir yere yüklenmez; analiz ya da eğitim için kullanılmaz."
+    },
+    {
+      "id": "settingSaveFailed",
+      "en": "The setting could not be saved. Try again.",
+      "tr": "Ayar kaydedilemedi. Tekrar dene."
+    },
+    {
+      "id": "takeTitle",
+      "en": "Your recording",
+      "tr": "Kendi kaydın"
+    },
+    {
+      "id": "takeNote",
+      "en": "Only on this device · deleted when you start the next run or leave the lesson",
+      "tr": "Yalnız bu cihazda · sonraki tura başlayınca ya da dersten çıkınca silinir"
+    },
+    {
+      "id": "listen",
+      "en": "Listen",
+      "tr": "Dinle"
+    },
+    {
+      "id": "pause",
+      "en": "Pause",
+      "tr": "Duraklat"
+    },
+    {
+      "id": "playFailed",
+      "en": "The recording could not be played.",
+      "tr": "Kayıt çalınamadı."
+    }
+  ]
+}

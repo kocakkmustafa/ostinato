@@ -5,6 +5,8 @@ import '../../app_theme.dart';
 import '../../curriculum/v1_lesson.dart';
 import '../../design/ostinato_theme.dart';
 import '../../design/widgets.dart';
+import '../own_recording/own_recording.dart';
+import '../own_recording/own_take_player.dart';
 import 'practice_marks.dart';
 import 'practice_outcome.dart';
 import 'practice_score.dart';
@@ -55,6 +57,7 @@ class PracticeResultScreen extends StatelessWidget {
     this.progressSaved = true,
     this.nextLessonOpened = false,
     this.hasNextLesson = false,
+    this.ownRecorder,
   });
 
   final V1Lesson lesson;
@@ -63,6 +66,9 @@ class PracticeResultScreen extends StatelessWidget {
   final bool progressSaved;
   final bool nextLessonOpened;
   final bool hasNextLesson;
+
+  /// FK2: the run's own recording, when the setting is on.
+  final OwnRecorder? ownRecorder;
 
   String _pct(double v) => '${(v * 100).round()}';
 
@@ -149,6 +155,7 @@ class PracticeResultScreen extends StatelessWidget {
               _gate(context, gate),
               const SizedBox(height: 12),
               _errorMap(context),
+              if (ownRecorder != null) OwnTakeSection(recorder: ownRecorder!),
               const SizedBox(height: 16),
               _nextStep(context),
               const SizedBox(height: 8),
