@@ -117,7 +117,10 @@ void main() {
       final second = (await r.seal())!;
       expect(filesOnDisk(), [second.path]);
       r.dispose();
-      await pumpEventQueue();
+      // dispose() deletes with real file IO; give it a bounded moment.
+      for (var i = 0; i < 100 && second.existsSync(); i++) {
+        await Future<void>.delayed(const Duration(milliseconds: 10));
+      }
       expect(second.existsSync(), isFalse, reason: 'dispose deletes too');
     });
 
