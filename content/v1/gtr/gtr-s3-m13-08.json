@@ -69,8 +69,8 @@
     {
       "error": { "en": "Different note on the chord change.", "tr": "Akor değişiminde farklı nota." },
       "fix": {
-        "en": "You missed the root. Stop playing on the last beat of the bar before and aim for the root.",
-        "tr": "Kökü kaçırdın. Önceki ölçünün son vuruşunda çalmayı bırak ve köke nişan al."
+        "en": "The root didn't sound. Stop playing on the last beat of the bar before and aim for the root.",
+        "tr": "Kök duyulmadı. Önceki ölçünün son vuruşunda çalmayı bırak ve köke nişan al."
       }
     },
     {

@@ -72,7 +72,7 @@
       }
     },
     {
-      "error": { "en": "Different chord: the right fret on string 6.", "tr": "Farklı akor: doğru perde, 6. tel." },
+      "error": { "en": "Different chord: right fret, but the root was on string 6.", "tr": "Farklı akor: perde doğru ama kök 6. telde." },
       "fix": {
         "en": "An A-shape root is on string 5. Say the string name first, then the fret.",
         "tr": "A-şekli kökü 5. teldedir. Önce telin adını, sonra perdeyi söyle."

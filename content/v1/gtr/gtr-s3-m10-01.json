@@ -11,8 +11,8 @@
       "tr": "Power chord yalnız iki notadan oluşur: kök ve onun üstündeki beşli. Ne majördür ne minör."
     },
     {
-      "en": "E5: 0-2-x-x-x-x. Open string 6 gives E2, string 5 at fret 2 gives B2. The 5 in E5 names the fifth chord, not the octave of a note.",
-      "tr": "E5: 0-2-x-x-x-x. Açık 6. tel Mi2'yi, 5. telin 2. perdesi Si2'yi verir. E5'teki 5 beşli akoru anlatır, bir notanın oktavını değil."
+      "en": "E5: 0-2-x-x-x-x. Open string 6 gives E2, string 5 at fret 2 gives B2. The 5 in E5 means root plus fifth; it is not an octave number.",
+      "tr": "E5: 0-2-x-x-x-x. Açık 6. tel Mi2'yi, 5. telin 2. perdesi Si2'yi verir. E5'teki 5, kök artı beşli demektir; oktav numarası değildir."
     },
     {
       "en": "G5: 3-5-x-x-x-x. Finger 1 on string 6, fret 3 (G2); finger 3 on string 5, fret 5 (D3).",
