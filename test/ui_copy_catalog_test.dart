@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/app_message_ids.dart';
 import 'package:ostinato/app/app_translation_catalog.dart';
+import 'package:ostinato/app/practice/own_recording/own_recording_copy.dart';
 import 'package:ostinato/app/retention/retention_copy.dart';
 import 'package:ostinato/app/screens/v1_home_copy.dart';
 import 'package:ostinato/app/tuner/tuner_copy.dart';
@@ -17,6 +18,7 @@ void main() {
     'content/ui/retention.json': RetentionCopy.all,
     'content/ui/tuner.json': TunerCopy.all,
     'content/ui/v1-home.json': V1HomeCopy.all,
+    'content/ui/own-recording.json': OwnRecordingCopy.all,
   };
 
   for (final entry in catalogs.entries) {
@@ -50,13 +52,13 @@ void main() {
     });
   }
 
-  test('v1 home copy is in all 14 catalogs (founder-approved, 2026-11-01)', () {
+  test('v1 home and FK2 copy are in all 14 catalogs', () {
     for (final tag in supportedLanguageTags) {
       final messages =
           (jsonDecode(File('assets/l10n/$tag.json').readAsStringSync())
                   as Map<String, dynamic>)['messages']
               as Map<String, dynamic>;
-      for (final pair in V1HomeCopy.all) {
+      for (final pair in [...V1HomeCopy.all, ...OwnRecordingCopy.all]) {
         final id = appMessageIds[pair];
         expect(id, isNotNull, reason: pair.$1);
         expect(messages[id], isA<String>(), reason: '$tag ${pair.$1}');
