@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/app_message_ids.dart';
 import 'package:ostinato/app/app_translation_catalog.dart';
+import 'package:ostinato/app/practice/display/practice_display_copy.dart';
 import 'package:ostinato/app/practice/loop/v1_course_copy.dart';
 import 'package:ostinato/app/practice/own_recording/own_recording_copy.dart';
 import 'package:ostinato/app/retention/retention_copy.dart';
@@ -21,6 +22,7 @@ void main() {
     'content/ui/v1-home.json': V1HomeCopy.all,
     'content/ui/own-recording.json': OwnRecordingCopy.all,
     'content/ui/v1-course.json': V1CourseCopy.all,
+    'content/ui/practice-display.json': PracticeDisplayCopy.all,
   };
 
   for (final entry in catalogs.entries) {
@@ -54,7 +56,7 @@ void main() {
     });
   }
 
-  test('v1 home, FK2 and course copy are in all 14 catalogs', () {
+  test('v1 home, FK2, course and FK4 copy are in all 14 catalogs', () {
     for (final tag in supportedLanguageTags) {
       final messages =
           (jsonDecode(File('assets/l10n/$tag.json').readAsStringSync())
@@ -64,6 +66,7 @@ void main() {
         ...V1HomeCopy.all,
         ...OwnRecordingCopy.all,
         ...V1CourseCopy.all,
+        ...PracticeDisplayCopy.all,
       ]) {
         final id = appMessageIds[pair];
         expect(id, isNotNull, reason: pair.$1);

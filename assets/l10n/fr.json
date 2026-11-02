@@ -6397,6 +6397,12 @@
     "9018c99c633a8ac1": "J’ai gardé un tempo régulier et confortable.",
     "1adcc5eddf3bcec8": "Les notes sonnaient clairement, sans frisement.",
     "c8254e775e62b6bd": "J’ai fait toute la tâche avec la guitare devant moi.",
-    "b2416478bce4b256": "Je peux montrer chaque point de l’explication sur la guitare."
+    "b2416478bce4b256": "Je peux montrer chaque point de l’explication sur la guitare.",
+    "7574fe3c5bbd04e7": "Gaucher",
+    "4c34c9b984b0a0e8": "Inverse la bande de TAB : les notes arrivent par la gauche et rejoignent la ligne de jeu à droite. Les cordes gardent l’ordre écrit, corde 1 en haut. L’écoute et la mesure ne changent pas.",
+    "b96fb47477b1946d": "Couleurs adaptées au daltonisme",
+    "9c62f872670547a7": "Bleu et orange au lieu de bleu canard et ambre. Chaque état de note garde aussi sa forme et son symbole : ✓ juste, ◆ autre note, ? pas entendue.",
+    "39e46a8da3b6c151": "Pas encore jouée",
+    "d203e854b1b0c135": "Dernière note : {v0}"
   }
 }

@@ -6397,6 +6397,12 @@
     "9018c99c633a8ac1": "Mantuve un tempo estable y cómodo.",
     "1adcc5eddf3bcec8": "Las notas sonaron claras, sin trasteo.",
     "c8254e775e62b6bd": "Hice toda la tarea con la guitarra frente a mí.",
-    "b2416478bce4b256": "Puedo mostrar en la guitarra cada punto de la explicación."
+    "b2416478bce4b256": "Puedo mostrar en la guitarra cada punto de la explicación.",
+    "7574fe3c5bbd04e7": "Zurdo",
+    "4c34c9b984b0a0e8": "Refleja la franja de TAB: las notas llegan desde la izquierda y se encuentran con la línea de ejecución a la derecha. Las cuerdas mantienen el orden escrito, la cuerda 1 arriba. La escucha y la medición no cambian.",
+    "b96fb47477b1946d": "Colores aptos para daltonismo",
+    "9c62f872670547a7": "Azul y naranja en lugar de verde azulado y ámbar. Cada estado de nota mantiene además su propia forma y símbolo: ✓ correcta, ◆ otra nota, ? no se oyó.",
+    "39e46a8da3b6c151": "Aún no tocada",
+    "d203e854b1b0c135": "Última nota: {v0}"
   }
 }

@@ -5,6 +5,7 @@ import '../../app_theme.dart';
 import '../../curriculum/v1_lesson.dart';
 import '../../design/ostinato_theme.dart';
 import '../../design/widgets.dart';
+import '../display/practice_display_copy.dart';
 import '../own_recording/own_recording.dart';
 import '../own_recording/own_take_player.dart';
 import 'practice_marks.dart';
@@ -515,7 +516,17 @@ class PracticeResultScreen extends StatelessWidget {
                         '{v0}. ölçü',
                         values: {'v0': bar + 1},
                       ),
+                      // FK4: each note's state in words, in playing order.
+                      value: [
+                        for (final e in byBar[bar]!)
+                          practiceMarkLabel(
+                            context,
+                            summary.lastMarks[e.index]?.mark ??
+                                PracticeMark.pending,
+                          ),
+                      ].join(', '),
                       button: true,
+                      excludeSemantics: true,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

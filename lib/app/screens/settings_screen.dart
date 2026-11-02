@@ -11,6 +11,8 @@ import '../account_connection.dart';
 import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../practice/display/practice_display_copy.dart';
+import '../practice/display/practice_display_preferences.dart';
 import '../practice/own_recording/own_recording_copy.dart';
 import '../practice/own_recording/own_recording_preference.dart';
 import '../ui_copy.dart';
@@ -49,14 +51,22 @@ String _liveSentence(BuildContext context) {
 }
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key, this.ownRecordingPreference});
+  const SettingsScreen({
+    super.key,
+    this.ownRecordingPreference,
+    this.practiceDisplay,
+  });
 
   /// FK2 setting store; defaults to the device file.
   final OwnRecordingPreference? ownRecordingPreference;
 
+  /// FK4 settings; defaults to the app's [PracticeDisplayScope].
+  final PracticeDisplayController? practiceDisplay;
+
   @override
   Widget build(BuildContext context) {
     final localeController = AppLocaleScope.maybeOf(context);
+    final display = practiceDisplay ?? PracticeDisplayScope.maybeOf(context);
     return Scaffold(
       backgroundColor: OstinatoPalette.of(context).surface,
       body: SafeArea(
@@ -179,6 +189,10 @@ class SettingsScreen extends StatelessWidget {
                     const FileOwnRecordingPreference(),
               ),
               const SizedBox(height: 14),
+              if (display != null) ...<Widget>[
+                PracticeDisplaySettingCard(controller: display),
+                const SizedBox(height: 14),
+              ],
               _SettingsCard(
                 title: localized(context, 'Sharing', 'Paylaşım'),
                 body: localized(
@@ -428,6 +442,93 @@ class OwnRecordingSettingCardState extends State<OwnRecordingSettingCard> {
           ],
         ],
       ),
+    );
+  }
+}
+
+/// FK4 (F2.7): left-handed strip and colour-blind-safe colours, both off
+/// until the learner turns them on. Changes apply to practice screens at once.
+class PracticeDisplaySettingCard extends StatelessWidget {
+  const PracticeDisplaySettingCard({super.key, required this.controller});
+  final PracticeDisplayController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = OstinatoPalette.of(context);
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (context, _) {
+        final settings = controller.settings;
+        Widget toggle({
+          required Key key,
+          required UiCopy title,
+          required UiCopy body,
+          required bool value,
+          required Future<void> Function(bool) onChanged,
+        }) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MergeSemantics(
+              child: Row(
+                children: [
+                  Expanded(child: kicker(uiText(context, title))),
+                  Switch(
+                    key: key,
+                    value: value,
+                    onChanged: (v) => unawaited(onChanged(v)),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              uiText(context, body),
+              style: hankenText(
+                size: 13.5,
+                height: 1.55,
+                color: palette.textBody,
+              ),
+            ),
+          ],
+        );
+        return Container(
+          key: const Key('settings-practice-display'),
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: palette.controlSurface,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: palette.glassBorder),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              toggle(
+                key: const Key('settings-left-handed-switch'),
+                title: PracticeDisplayCopy.leftHandedTitle,
+                body: PracticeDisplayCopy.leftHandedBody,
+                value: settings.leftHanded,
+                onChanged: controller.setLeftHanded,
+              ),
+              const SizedBox(height: 14),
+              toggle(
+                key: const Key('settings-color-blind-switch'),
+                title: PracticeDisplayCopy.colorBlindTitle,
+                body: PracticeDisplayCopy.colorBlindBody,
+                value: settings.colorBlindSafe,
+                onChanged: controller.setColorBlindSafe,
+              ),
+              if (controller.saveFailed) ...[
+                const SizedBox(height: 8),
+                Text(
+                  uiText(context, OwnRecordingCopy.settingSaveFailed),
+                  key: const Key('settings-practice-display-save-failed'),
+                  style: hankenText(size: 12, color: palette.warnInk),
+                ),
+              ],
+            ],
+          ),
+        );
+      },
     );
   }
 }

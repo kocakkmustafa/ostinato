@@ -6397,6 +6397,12 @@
     "9018c99c633a8ac1": "I kept a steady, comfortable tempo.",
     "1adcc5eddf3bcec8": "The notes rang clearly, without buzzing.",
     "c8254e775e62b6bd": "I worked through the task with the guitar in front of me.",
-    "b2416478bce4b256": "I can show each point of the explanation on the guitar."
+    "b2416478bce4b256": "I can show each point of the explanation on the guitar.",
+    "7574fe3c5bbd04e7": "Left-handed",
+    "4c34c9b984b0a0e8": "Mirrors the TAB strip: notes come in from the left and meet the playing line on the right. Strings keep the written order, string 1 on top. Listening and measuring do not change.",
+    "b96fb47477b1946d": "Colour-blind friendly colours",
+    "9c62f872670547a7": "Blue and orange instead of teal and amber. Every note state also keeps its own shape and symbol: ✓ correct, ◆ different note, ? couldn't hear.",
+    "39e46a8da3b6c151": "Not played yet",
+    "d203e854b1b0c135": "Last note: {v0}"
   }
 }

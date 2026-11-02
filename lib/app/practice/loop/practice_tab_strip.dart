@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../app_locale.dart';
 import '../../app_theme.dart';
+import '../../ui_copy.dart';
+import '../display/practice_display_copy.dart';
 import 'practice_marks.dart';
 import 'practice_score.dart';
 import 'practice_visual_theme.dart';
@@ -87,7 +89,8 @@ class PracticeTabStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = OstinatoPalette.of(context);
     final theme = PracticeVisualThemeScope.of(context);
-    return Semantics(
+    final last = lastMarkedEvent(marks);
+    final strip = Semantics(
       label: _nowLabel(context),
       container: true,
       child: ExcludeSemantics(
@@ -114,7 +117,44 @@ class PracticeTabStrip extends StatelessWidget {
         ),
       ),
     );
+    // FK4: the newest mark is spoken as a state ("Correct", "Different
+    // note", "Couldn't hear"), never "wrong". A live region of its own so the
+    // NOW label is not re-read on every note. One stable tree shape.
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        strip,
+        if (last != null)
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 24,
+            child: Semantics(
+              key: const Key('practice-tab-strip-last-mark'),
+              container: true,
+              liveRegion: true,
+              label: uiText(
+                context,
+                PracticeDisplayCopy.lastNote,
+                values: {'v0': practiceMarkLabel(context, marks[last]!.mark)},
+              ),
+              child: const SizedBox.expand(),
+            ),
+          ),
+      ],
+    );
   }
+}
+
+/// Index of the most recently judged note (the highest marked index).
+int? lastMarkedEvent(Map<int, StripMark> marks) {
+  int? last;
+  for (final entry in marks.entries) {
+    if (entry.value.mark == PracticeMark.pending) continue;
+    if (last == null || entry.key > last) last = entry.key;
+  }
+  return last;
 }
 
 class TabStripPainter extends CustomPainter {
@@ -144,12 +184,16 @@ class TabStripPainter extends CustomPainter {
   final PracticeVisualTheme theme;
   final Color ink, paper, muted, now;
 
+  StripGeometry geometry(double width) => StripGeometry(
+    width: width,
+    displayBeat: displayBeat,
+    pixelsPerBeat: pixelsPerBeat,
+    nowFraction: nowFraction,
+    leftHanded: theme.leftHanded,
+  );
+
   /// X of lesson beat [beat] for a strip of [width] (mirrored when left-handed).
-  double xOf(double beat, double width) {
-    final nowX = width * nowFraction;
-    final x = nowX + (beat - displayBeat) * pixelsPerBeat;
-    return theme.leftHanded ? width - x : x;
-  }
+  double xOf(double beat, double width) => geometry(width).xOf(beat);
 
   int get _lines => guitar ? 6 : 1;
 
@@ -223,7 +267,11 @@ class TabStripPainter extends CustomPainter {
           if (ghost != null) {
             _drawGhost(
               canvas,
-              Offset(x + radius * .6, yOfString(ghost.string, size)),
+              // Just after the note in reading direction (mirrored too).
+              Offset(
+                x + geometry(size.width).forward * radius * .6,
+                yOfString(ghost.string, size),
+              ),
               radius * .8,
               '${ghost.fret}',
             );
@@ -231,9 +279,7 @@ class TabStripPainter extends CustomPainter {
         }
       }
     }
-    final nowX = theme.leftHanded
-        ? size.width - size.width * nowFraction
-        : size.width * nowFraction;
+    final nowX = geometry(size.width).nowX;
     canvas.drawLine(
       Offset(nowX, 0),
       Offset(nowX, size.height),
@@ -349,7 +395,6 @@ class TabStripPainter extends CustomPainter {
       !identical(old.marks, marks) ||
       old.heldEvent != heldEvent ||
       old.loop != loop ||
-      old.theme.leftHanded != theme.leftHanded ||
-      old.theme.colorBlindSafe != theme.colorBlindSafe ||
+      old.theme != theme ||
       old.pixelsPerBeat != pixelsPerBeat;
 }
