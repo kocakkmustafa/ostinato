@@ -125,6 +125,7 @@ abstract interface class PracticeVideoExactAckPort {
   Future<NativeVideoDisposeReceipt> readVideoDisposeReceipt(
     NativeAudioPermit permit,
   );
+
   /// Pins an explicit current-handler retry to this exact old video claim.
   /// A blocked snapshot is only a retry dispatch receipt, never release proof.
   Future<NativeAllAudioState> recoverRetiredVideo(
@@ -146,15 +147,27 @@ final class PracticeAudioLease {
   PracticeAudioLease({
     required PracticeAudioLeasePort port,
     this.operationTimeout = const Duration(seconds: 3),
+    this.closeSettle = const Duration(seconds: 2),
+    this.closeSettlePoll = const Duration(milliseconds: 50),
   }) : _port = port {
     if (operationTimeout <= Duration.zero) {
       throw ArgumentError.value(operationTimeout, 'operationTimeout');
+    }
+    if (closeSettlePoll <= Duration.zero) {
+      throw ArgumentError.value(closeSettlePoll, 'closeSettlePoll');
     }
   }
 
   final PracticeAudioLeasePort _port;
   PracticeAudioLeasePort get port => _port;
   final Duration operationTimeout;
+
+  /// Native `fenceContext` stops a running capture or output asynchronously,
+  /// so its receipt can show that close still in flight. A fence re-reads the
+  /// native state for up to [closeSettle] before it calls the close
+  /// unconfirmed; a close that needs an explicit retry is never waited on.
+  final Duration closeSettle;
+  final Duration closeSettlePoll;
   static PracticeAudioLease? _isolateOwner;
   static int _isolateEpoch = 0;
   PracticeAudioLeasePhase _phase = PracticeAudioLeasePhase.idle;
@@ -561,6 +574,33 @@ final class PracticeAudioLease {
     return completion.future;
   }
 
+  /// [receipt] itself, or the first fresh state of the same context in which
+  /// a non-video close is no longer in flight (bounded by [closeSettle]).
+  Future<NativeAllAudioState> _settleClosing(
+    NativeAllAudioState receipt,
+  ) async {
+    bool closing(NativeAllAudioState s) =>
+        !s.allClear &&
+        s.nativeOperationInFlight &&
+        !s.requiresExplicitRetry &&
+        s.activeSide != PracticeAudioSide.video;
+    var state = receipt;
+    var waited = Duration.zero;
+    while (closing(state) && waited < closeSettle) {
+      await Future<void>.delayed(closeSettlePoll);
+      waited += closeSettlePoll;
+      final fresh = await _native(_port.readAllAudioState);
+      if (fresh.ownerToken != receipt.ownerToken ||
+          fresh.engineGeneration != receipt.engineGeneration ||
+          fresh.contextGeneration != receipt.contextGeneration ||
+          fresh.stateRevision < receipt.stateRevision) {
+        return receipt;
+      }
+      state = fresh;
+    }
+    return state;
+  }
+
   Future<PracticeAudioReleaseStatus> _fenceAndVerify({
     required Future<PracticeAudioAcquireResult>? opening,
     required Future<PracticeAudioReleaseStatus>? closing,
@@ -574,7 +614,9 @@ final class PracticeAudioLease {
       Future<void> drainFences() async {
         while (_fenceQueue.isNotEmpty) {
           final reason = _fenceQueue.removeAt(0);
-          final receipt = await _native(() => _port.fenceContext(reason));
+          final receipt = await _settleClosing(
+            await _native(() => _port.fenceContext(reason)),
+          );
           _lastNativeState = receipt;
           final videoSettler = _videoFenceSettler;
           final videoPending = receipt.activeSide == PracticeAudioSide.video;
