@@ -15,7 +15,9 @@ import 'account_ownership_epoch.dart';
 import 'age_gate_store.dart';
 import 'app_locale.dart';
 import 'app_locale_preferences.dart';
+import 'membership_resume.dart';
 import 'ostinato_membership_page.dart';
+import 'ostinato_paid_access.dart';
 import 'ostinato_release_policy.dart';
 import 'ownership_guarded_account_client.dart';
 
@@ -83,15 +85,6 @@ AccountConnection bindMotionAccountRuntime(
     onAgeBlocked?.call().ignore();
   }
 
-  // v1: Core's membership page always shows Motion+, so while Motion+ is not
-  // offered the app opens its own page with the Ostinato plans only.
-  final WidgetBuilder? membershipPage = ostinatoMotionPlusOffered
-      ? null
-      : (_) => OstinatoMembershipPage(
-          account: runtime.account,
-          teenPurchasePolicy: ostinatoTeenPurchasePolicy,
-        );
-
   Widget accountPage(BuildContext _) {
     final pageOwnership = ownership.capturePage();
     return MotionAccountPage(
@@ -121,6 +114,19 @@ AccountConnection bindMotionAccountRuntime(
     );
   }
 
+  // v1: Core's membership page always shows Motion+, so while Motion+ is not
+  // offered the app opens its own page with the Ostinato plans only. A plan
+  // chosen while signed out is carried across sign-in by [resume].
+  final resume = MembershipResume();
+  final WidgetBuilder? membershipPage = ostinatoMotionPlusOffered
+      ? null
+      : (_) => OstinatoMembershipPage(
+          account: runtime.account,
+          accountPageBuilder: accountPage,
+          resume: resume,
+          teenPurchasePolicy: ostinatoTeenPurchasePolicy,
+        );
+
   return AccountConnection(
     userId: runtime.userId,
     passwordRecovery: runtime.passwordRecovery,
@@ -136,13 +142,22 @@ AccountConnection bindMotionAccountRuntime(
     membershipPageBuilder: ostinatoPaidFeaturesAvailable
         ? membershipPage
         : null,
-    requirePaidAccess: (context) => requireMotionPaidAccess(
+    membershipResume: membershipPage == null ? null : resume,
+    // Signed out, the app's membership page comes first (plans and prices,
+    // then sign-in on purchase); signed in, Core's gate runs unchanged.
+    requirePaidAccess: (context) => requireOstinatoPaidAccess(
       context,
       account: runtime.account,
-      accountPageBuilder: accountPage,
       membershipPageBuilder: membershipPage,
       salesAvailable: ostinatoPaidFeaturesAvailable,
-      teenPurchasePolicy: ostinatoTeenPurchasePolicy,
+      coreGate: () => requireMotionPaidAccess(
+        context,
+        account: runtime.account,
+        accountPageBuilder: accountPage,
+        membershipPageBuilder: membershipPage,
+        salesAvailable: ostinatoPaidFeaturesAvailable,
+        teenPurchasePolicy: ostinatoTeenPurchasePolicy,
+      ),
     ),
     requireCameraAccess: (context) => requireMotionCameraAccess(
       context,
