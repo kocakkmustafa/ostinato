@@ -26,6 +26,11 @@ final class FakePracticeAudioPort implements PracticeAudioLeasePort {
   Future<void> Function(PracticeAudioSide)? beforeReserve;
   Future<void> Function()? stop;
   Future<void> Function(NativeAudioContextReason)? onFence;
+
+  /// Native stops a running legacy capture asynchronously: right after
+  /// `fenceContext` the input is still closing. While this returns true the
+  /// snapshot reports that close in flight (not clear, no retry required).
+  bool Function()? closingInFlight;
   final opens = <PracticeAudioSide>[];
   final fences = <NativeAudioContextReason>[];
   int closeCalls = 0;
@@ -90,7 +95,8 @@ final class FakePracticeAudioPort implements PracticeAudioLeasePort {
     final confirmed = await (clear?.call() ?? Future.value(true));
     final side = _activeSide;
     final hasLease = side != null;
-    final clearNow = confirmed && !hasLease && !_retryWithoutLease;
+    final closing = closingInFlight?.call() ?? false;
+    final clearNow = confirmed && !hasLease && !_retryWithoutLease && !closing;
     return NativeAllAudioState.fromWire({
       'schemaVersion': 1,
       'ownerToken': ownerToken,
@@ -101,6 +107,8 @@ final class FakePracticeAudioPort implements PracticeAudioLeasePort {
       'activeLeaseGeneration': hasLease ? _leaseGeneration : null,
       'inputPhase': side == PracticeAudioSide.input
           ? 'reserved'
+          : closing
+          ? 'closing'
           : hasLease || clearNow || _retryWithoutLease
           ? 'clear'
           : 'releasedAwaitingExplicitRetry',
@@ -116,13 +124,15 @@ final class FakePracticeAudioPort implements PracticeAudioLeasePort {
                 ? 'closing'
                 : 'reserved'
           : 'clear',
-      'inputReleased': side != PracticeAudioSide.input,
+      'inputReleased': side != PracticeAudioSide.input && !closing,
       'outputReleased': side != PracticeAudioSide.output,
       'videoReleased': side != PracticeAudioSide.video,
-      'sessionReleased': !hasLease,
-      'nativeOperationInFlight': false,
+      'sessionReleased': !hasLease && !closing,
+      'nativeOperationInFlight': closing,
       'requiresExplicitRetry':
-          _videoUnconfirmed || _retryWithoutLease || (!clearNow && !hasLease),
+          _videoUnconfirmed ||
+          _retryWithoutLease ||
+          (!clearNow && !hasLease && !closing),
       'allClear': clearNow,
     });
   }

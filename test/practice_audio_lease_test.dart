@@ -393,6 +393,55 @@ void main() {
     );
   });
 
+  // Simulator 2026-11-02: leaving the tuner while it listened showed "Audio
+  // shutdown could not be confirmed". Native fenceContext stops the running
+  // capture asynchronously, so its receipt still shows the input closing.
+  test('a fence waits for a capture close that is still in flight', () async {
+    var closing = false;
+    final port = _Port();
+    port.onFence = (_) async {
+      closing = true;
+      Timer(const Duration(milliseconds: 120), () => closing = false);
+    };
+    port.closingInFlight = () => closing;
+    final lease = PracticeAudioLease(
+      port: port,
+      closeSettle: const Duration(seconds: 1),
+      closeSettlePoll: const Duration(milliseconds: 20),
+    );
+    expect(
+      await lease.invalidateAndFence(
+        PracticeAudioInvalidationReason.routeChange,
+      ),
+      PracticeAudioReleaseStatus.confirmedClosed,
+    );
+    expect(lease.phase, PracticeAudioLeasePhase.idle);
+  });
+
+  test(
+    'a close still in flight after the settle budget stays blocked',
+    () async {
+      final port = _Port();
+      var stillClosing = true;
+      port.closingInFlight = () => stillClosing;
+      final lease = PracticeAudioLease(
+        port: port,
+        closeSettle: const Duration(milliseconds: 100),
+        closeSettlePoll: const Duration(milliseconds: 20),
+      );
+      expect(
+        await lease.invalidateAndFence(
+          PracticeAudioInvalidationReason.routeChange,
+        ),
+        PracticeAudioReleaseStatus.blockedUnconfirmed,
+      );
+      expect(lease.phase, PracticeAudioLeasePhase.blockedUnconfirmed);
+      // Once native settles, only an explicit recovery clears the block.
+      stillClosing = false;
+      expect(await lease.recover(), PracticeAudioReleaseStatus.confirmedClosed);
+    },
+  );
+
   test(
     'native idle fence closes a legacy-only input before a new grant',
     () async {
