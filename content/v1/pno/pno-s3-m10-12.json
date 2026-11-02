@@ -1,0 +1,114 @@
+{
+  "id": "pno-s3-m10-12",
+  "title": {
+    "en": "Scale checkpoint",
+    "tr": "Gam geçişi"
+  },
+  "goal": {
+    "en": "Plays C, G, F and D major and A harmonic minor over two octaves, hands separate, in eighth notes at ♩=69.",
+    "tr": "Do, Sol, Fa ve Re majör ile armonik La minör gamlarını iki oktav, eller ayrı, sekizliklerle ♩=69'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "You play five scales over two octaves, each hand separately, in eighth notes: C, G, F and D major, then A harmonic minor.",
+      "tr": "Beş gamı iki oktav, her eli ayrı, sekizliklerle çalarsın: Do, Sol, Fa ve Re majör, sonra armonik La minör."
+    },
+    {
+      "en": "Before each scale, say the key and its black keys: G has F♯, F has B♭, D has F♯ and C♯, A harmonic minor has G♯.",
+      "tr": "Her gamdan önce tonu ve siyah tuşlarını söyle: Sol majörde Fa♯, Fa majörde Si♭, Re majörde Fa♯ ve Do♯, armonik La minörde Sol♯ var."
+    },
+    {
+      "en": "Watch the right hand in F major: finger 4 plays every B♭ and the top F6; finger 5 is not used.",
+      "tr": "Fa majörde sağ ele dikkat: her Si♭ notasını ve en üstteki Fa6'yı 4. parmak çalar; 5. parmak kullanılmaz."
+    },
+    {
+      "en": "Use the empty bar between scales to move the hand and read the next key.",
+      "tr": "Gamlar arasındaki boş ölçüyü eli taşımak ve sonraki tonu okumak için kullan."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C, G, F, D major and A harmonic minor over two octaves, each right hand then left hand with an empty bar between, eighth notes with a click, at ♩=69 and at ♩=50, piano synthesis.",
+      "tr": "Klikle sekizliklerle iki oktav Do, Sol, Fa, Re majör ve armonik La minör, her biri önce sağ sonra sol el, aralarında birer boş ölçü, ♩=69 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the five scales in order, right hand then left hand, in eighth notes along with the click at ♩=69. Practise slower first if you like; the checkpoint counts at ♩=69.",
+      "tr": "Beş gamı sırayla, önce sağ sonra sol elle, sekizliklerle ♩=69'da klikle birlikte çal. İstersen önce yavaş çalış; geçiş ♩=69'da sayılır."
+    },
+    "sequence": "C4:e D4:e E4:e F4:e G4:e A4:e B4:e C5:e | D5:e E5:e F5:e G5:e A5:e B5:e C6:e B5:e | A5:e G5:e F5:e E5:e D5:e C5:e B4:e A4:e | G4:e F4:e E4:e D4:e C4:h | wr | C2:e D2:e E2:e F2:e G2:e A2:e B2:e C3:e | D3:e E3:e F3:e G3:e A3:e B3:e C4:e B3:e | A3:e G3:e F3:e E3:e D3:e C3:e B2:e A2:e | G2:e F2:e E2:e D2:e C2:h | wr | G4:e A4:e B4:e C5:e D5:e E5:e F♯5:e G5:e | A5:e B5:e C6:e D6:e E6:e F♯6:e G6:e F♯6:e | E6:e D6:e C6:e B5:e A5:e G5:e F♯5:e E5:e | D5:e C5:e B4:e A4:e G4:h | wr | G2:e A2:e B2:e C3:e D3:e E3:e F♯3:e G3:e | A3:e B3:e C4:e D4:e E4:e F♯4:e G4:e F♯4:e | E4:e D4:e C4:e B3:e A3:e G3:e F♯3:e E3:e | D3:e C3:e B2:e A2:e G2:h | wr | F4:e G4:e A4:e B♭4:e C5:e D5:e E5:e F5:e | G5:e A5:e B♭5:e C6:e D6:e E6:e F6:e E6:e | D6:e C6:e B♭5:e A5:e G5:e F5:e E5:e D5:e | C5:e B♭4:e A4:e G4:e F4:h | wr | F2:e G2:e A2:e B♭2:e C3:e D3:e E3:e F3:e | G3:e A3:e B♭3:e C4:e D4:e E4:e F4:e E4:e | D4:e C4:e B♭3:e A3:e G3:e F3:e E3:e D3:e | C3:e B♭2:e A2:e G2:e F2:h | wr | D4:e E4:e F♯4:e G4:e A4:e B4:e C♯5:e D5:e | E5:e F♯5:e G5:e A5:e B5:e C♯6:e D6:e C♯6:e | B5:e A5:e G5:e F♯5:e E5:e D5:e C♯5:e B4:e | A4:e G4:e F♯4:e E4:e D4:h | wr | D2:e E2:e F♯2:e G2:e A2:e B2:e C♯3:e D3:e | E3:e F♯3:e G3:e A3:e B3:e C♯4:e D4:e C♯4:e | B3:e A3:e G3:e F♯3:e E3:e D3:e C♯3:e B2:e | A2:e G2:e F♯2:e E2:e D2:h | wr | A4:e B4:e C5:e D5:e E5:e F5:e G♯5:e A5:e | B5:e C6:e D6:e E6:e F6:e G♯6:e A6:e G♯6:e | F6:e E6:e D6:e C6:e B5:e A5:e G♯5:e F5:e | E5:e D5:e C5:e B4:e A4:h | wr | A2:e B2:e C3:e D3:e E3:e F3:e G♯3:e A3:e | B3:e C4:e D4:e E4:e F4:e G♯4:e A4:e G♯4:e | F4:e E4:e D4:e C4:e B3:e A3:e G♯3:e F3:e | E3:e D3:e C3:e B2:e A2:h",
+    "tempo": {
+      "open": 69,
+      "target": 69
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "A sharp became a white key: F♯ in G or D major, C♯ in D major or G♯ in A minor. Say the black keys aloud in the empty bar before the scale.",
+        "tr": "Bir diyez beyaz tuşa dönüştü: Sol ya da Re majörde Fa♯, Re majörde Do♯ ya da La minörde Sol♯. Gamdan önceki boş ölçüde siyah tuşları sesli söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "In F major, B♭ became B. The right hand changes fingering here; finger 4 lands on the black key.",
+        "tr": "Fa majörde Si♭, Si'ye dönüştü. Sağ elin parmakları burada değişir; 4. parmak siyah tuşa iner."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "A thumb crossing is late at ♩=69. Loop that scale alone at ♩=60, then go back to ♩=69.",
+        "tr": "♩=69'da bir başparmak geçişi geç kalıyor. O gamı tek başına ♩=60'ta döngüle, sonra ♩=69'a dön."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise each scale as its own run at ♩=60: right hand, empty bar, left hand. Then join all five.",
+    "tr": "Her gamı ♩=60'ta ayrı bir tur olarak çalış: sağ el, boş ölçü, sol el. Sonra beşini birleştir."
+  },
+  "minutes": 20,
+  "expertPending": true
+}

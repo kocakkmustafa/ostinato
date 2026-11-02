@@ -1,0 +1,117 @@
+{
+  "id": "pno-s2-m06-07",
+  "title": {
+    "en": "A minor, natural and harmonic",
+    "tr": "Doğal ve armonik La minör"
+  },
+  "goal": {
+    "en": "Plays A natural minor and A harmonic minor one octave, hands separate, at ♩=60.",
+    "tr": "Doğal ve armonik La minör gamlarını bir oktav, eller ayrı, ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "A minor shares the key signature of C major: the same white keys, starting on A.",
+      "tr": "La minör, Do majörle aynı donanımı paylaşır: aynı beyaz tuşlar, La'dan başlayarak."
+    },
+    {
+      "en": "Natural minor uses only those keys: A B C D E F G A.",
+      "tr": "Doğal minör yalnız bu tuşları kullanır: La Si Do Re Mi Fa Sol La."
+    },
+    {
+      "en": "Harmonic minor raises the seventh note: G becomes G♯, going up and coming down. The step from F to G♯ is wider than a whole step; listen for it.",
+      "tr": "Armonik minör yedinci notayı yükseltir: Sol, hem çıkarken hem inerken Sol♯ olur. Fa'dan Sol♯ notasına adım tam sesten geniştir; onu dinle."
+    },
+    {
+      "en": "The fingering is the same as in C major. Right hand A4 to A5: 1-2-3-1-2-3-4-5, G♯5 with finger 4. Left hand A3 to A4: 5-4-3-2-1-3-2-1, G♯4 with finger 2.",
+      "tr": "Parmaklar Do majördekiyle aynıdır. Sağ el La4'ten La5'e: 1-2-3-1-2-3-4-5, Sol♯5'i 4. parmak çalar. Sol el La3'ten La4'e: 5-4-3-2-1-3-2-1, Sol♯4'ü 2. parmak çalar."
+    },
+    {
+      "en": "Each hand plays the natural form first, then the harmonic form. Only one note changes.",
+      "tr": "Her el önce doğal biçimi, sonra armonik biçimi çalar. Yalnız bir nota değişir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "Right hand A4–A5 natural then harmonic, an empty bar, then left hand A3–A4 natural then harmonic, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Klikle dörtlüklerle sağ el La4–La5 önce doğal sonra armonik, bir boş ölçü, sonra sol el La3–La4 önce doğal sonra armonik, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand: play the natural form, then the harmonic form, from A4 to A5 and back. Use the empty bar to move to the left hand and play both forms from A3. One note per beat at ♩=60.",
+      "tr": "Sağ el: önce doğal biçimi, sonra armonik biçimi La4'ten La5'e ve geri çal. Boş ölçüde sol ele geç ve iki biçimi La3'ten çal. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "A4 B4 C5 D5 | E5 F5 G5 A5 | G5 F5 E5 D5 | C5 B4 A4:h | A4 B4 C5 D5 | E5 F5 G♯5 A5 | G♯5 F5 E5 D5 | C5 B4 A4:h | wr | A3 B3 C4 D4 | E4 F4 G4 A4 | G4 F4 E4 D4 | C4 B3 A3:h | A3 B3 C4 D4 | E4 F4 G♯4 A4 | G♯4 F4 E4 D4 | C4 B3 A3:h",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The natural form stayed on white keys; the harmonic form had G♯ both ways.",
+      "tr": "Doğal biçim beyaz tuşlarda kaldı; armonik biçimde iki yönde de Sol♯ vardı."
+    },
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "In the harmonic form G♯ became G. The second pass of each hand raises G; find the black key first.",
+        "tr": "Armonik biçimde Sol♯ yerine beyaz Sol çaldın. Her elin ikinci turu Sol notasını yükseltir; önce siyah tuşu bul."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "In the natural form you played G♯. The first pass of each hand stays on white keys.",
+        "tr": "Doğal biçimde Sol♯ çaldın. Her elin ilk turu beyaz tuşlarda kalır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the right hand, natural then harmonic, at ♩=50. Add the left hand when both forms are clear.",
+    "tr": "♩=50'de yalnız sağ eli, önce doğal sonra armonik çal. İki biçim de netleşince sol eli ekle."
+  },
+  "minutes": 14,
+  "expertPending": true
+}

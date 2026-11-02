@@ -1,0 +1,79 @@
+{
+  "id": "pno-s3-m13-10",
+  "title": { "en": "Transposing a lead sheet", "tr": "Lead sheet'i taşımak" },
+  "goal": {
+    "en": "Transposes an original eight-bar lead sheet from C to G, names the new chords, and plays the G version, melody and roots, at ♩=70.",
+    "tr": "Özgün sekiz ölçülük lead sheet'i Do'dan Sol'e taşır, yeni akorları adlandırır ve Sol hâlini, melodi ve köklerle, ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Transposing means moving a whole piece to a new key. Every note and every chord moves by the same distance.",
+      "tr": "Taşımak, bütün bir parçayı yeni bir tona götürmek demektir. Her nota ve her akor aynı uzaklıkta kayar."
+    },
+    {
+      "en": "From C to G is up five letters: C→G, D→A, E→B, F→C, G→D, A→E, B→F♯. B becomes F♯ because G major has one sharp.",
+      "tr": "Do'dan Sol'e geçiş beş harf yukarıdır: Do→Sol, Re→La, Mi→Si, Fa→Do, Sol→Re, La→Mi, Si→Fa♯. Si, Fa♯ olur, çünkü Sol majörün bir diyezi vardır."
+    },
+    {
+      "en": "Chord symbols move the same way and keep their quality: C→G, F→C, G→D, Am→Em. The original chart C | F | G | C | Am | F | G | C becomes G | C | D | G | Em | C | D | G.",
+      "tr": "Akor sembolleri de aynı şekilde kayar ve türlerini korur: C→G, F→C, G→D, Am→Em. Özgün şema C | F | G | C | Am | F | G | C, G | C | D | G | Em | C | D | G olur."
+    },
+    {
+      "en": "The original melody in C, after the root on beat 1: E4 G4 E4 | F4 (two beats) C4 | D4 G4 F4 | E4 (three beats) | C4 D4 E4 | F4 E4 D4 | D4 C4 B3 | C4 (three beats).",
+      "tr": "Do'daki özgün melodi, 1. vuruştaki kökten sonra: Mi4 Sol4 Mi4 | Fa4 (iki vuruş) Do4 | Re4 Sol4 Fa4 | Mi4 (üç vuruş) | Do4 Re4 Mi4 | Fa4 Mi4 Re4 | Re4 Do4 Si3 | Do4 (üç vuruş)."
+    },
+    {
+      "en": "In G the right hand sits in G position: G4 with finger 1 up to D5 with 5. In bar 7 the thumb reaches down to F♯4. The left hand plays the roots in C position: C3 with 5, D3 with 4, E3 with 3, G3 with 1.",
+      "tr": "Sol'de sağ el Sol konumundadır: Sol4 1. parmakla, Re5 5. parmakla. 7. ölçüde başparmak Fa♯4'e iner. Sol el kökleri Do konumunda çalar: Do3 5. parmakla, Re3 4. parmakla, Mi3 3. parmakla, Sol3 1. parmakla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original lead sheet in C, then the same eight bars transposed to G, root on beat 1 and melody on beats 2–4, at ♩=70 and ♩=50, piano synthesis.",
+      "tr": "Önce Do'daki özgün lead sheet, sonra aynı sekiz ölçünün Sol'e taşınmış hâli, kök 1. vuruşta, melodi 2–4. vuruşlarda, ♩=70 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "First say the new chart aloud: G, C, D, G, Em, C, D, G. Then work out the melody in G bar by bar. Play the G version with the click at ♩=70: the root alone on beat 1, then the melody. The screen shows the G version as you play, so you can check your answer.",
+      "tr": "Önce yeni şemayı sesli söyle: G, C, D, G, Em, C, D, G. Sonra melodiyi ölçü ölçü Sol'e taşı. Sol hâlini ♩=70'te klikle çal: 1. vuruşta tek başına kök, sonra melodi. Ekran çalarken Sol hâlini gösterir; böylece cevabını kontrol edebilirsin."
+    },
+    "sequence": "4/4: G3 B4 D5 B4 | C3 C5:h G4 | D3 A4 D5 C5 | G3 B4:h. | E3 G4 A4 B4 | C3 C5 B4 A4 | D3 A4 G4 F#4 | G3 G4:h.",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I named all eight chords in G before playing.", "tr": "Çalmadan önce sekiz akorun hepsini Sol'de adlandırdım." },
+    { "en": "I played F♯, not F, in bar 7.", "tr": "7. ölçüde Fa değil, Fa♯ çaldım." },
+    { "en": "The root sounded alone on every beat 1.", "tr": "Kök her 1. vuruşta tek başına duyuldu." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone low.", "tr": "Farklı nota, yarım ses pes." },
+      "fix": {
+        "en": "In bar 7 you played F4. In G every F is F♯: the black key just above F.",
+        "tr": "7. ölçüde Fa4 çaldın. Sol'de her Fa, Fa♯'dir: Fa'nın hemen üstündeki siyah tuş."
+      }
+    },
+    {
+      "error": { "en": "Different note, one white key away.", "tr": "Farklı nota, bir beyaz tuş ötede." },
+      "fix": {
+        "en": "A note moved by four or six letters instead of five. Count on your fingers: C, D, E, F, G is five.",
+        "tr": "Bir nota beş yerine dört ya da altı harf kaydı. Parmaklarında say: Do, Re, Mi, Fa, Sol beş eder."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Transpose and play the first four bars only. Add bars 5–8 once the first half sits in G position.",
+    "tr": "Yalnız ilk dört ölçüyü taşı ve çal. İlk yarı Sol konumuna oturunca 5–8. ölçüleri ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

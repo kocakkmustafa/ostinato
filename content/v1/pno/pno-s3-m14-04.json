@@ -1,0 +1,120 @@
+{
+  "id": "pno-s3-m14-04",
+  "title": {
+    "en": "Petzold: Minuet in G, right hand",
+    "tr": "Petzold: Sol Majör Menuet, sağ el"
+  },
+  "goal": {
+    "en": "Plays the right hand of the Minuet in G, BWV Anh. 114, from start to finish at ♩=80.",
+    "tr": "Sol Majör Menuet'in (BWV Anh. 114) sağ elini baştan sona ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This minuet comes from a music book Bach gave his wife Anna Magdalena in 1725. For a long time it was called Bach's; today it is credited to Christian Petzold (1677–1733).",
+      "tr": "Bu menuet, Bach'ın 1725'te eşi Anna Magdalena'ya verdiği nota defterinden gelir. Uzun süre Bach'ın sanıldı; bugün Christian Petzold'a (1677–1733) atfedilir."
+    },
+    {
+      "en": "A minuet is a dance in 3/4. Feel one strong beat at the start of each bar.",
+      "tr": "Menuet 3/4'lük bir danstır. Her ölçünün başında bir güçlü vuruş hisset."
+    },
+    {
+      "en": "Start in G position: thumb on G4, finger 5 on D5. In bar 3 the hand moves up to reach E5 to G5.",
+      "tr": "Sol konumunda başla: başparmak Sol4'te, 5. parmak Re5'te. 3. ölçüde el Mi5–Sol5'e ulaşmak için yukarı kayar."
+    },
+    {
+      "en": "Bar 4 jumps down an octave, from G5 to G4. Move the whole hand, not only a finger.",
+      "tr": "4. ölçü Sol5'ten Sol4'e bir oktav iner. Yalnız parmağı değil, bütün eli taşı."
+    },
+    {
+      "en": "The second half moves to D major and uses C♯. Play the eighth notes evenly and light, the quarter notes a little longer.",
+      "tr": "İkinci yarı Re majöre geçer ve Do♯ kullanır. Sekizlikleri eşit ve hafif, dörtlükleri biraz daha uzun çal."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score on screen is the Ostinato engraving, made from a 1906 Munich edition; fingering and tempo are ours.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota, 1906 Münih baskısından hazırlanan Ostinato dizgisidir; parmak numaraları ve tempo bizimdir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Right hand of the Minuet in G from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Sol Majör Menuet'in sağ eli, piyano sentezi, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Practise in two-bar sections, then play the right hand from start to finish at ♩=80, without the repeats. Eighth notes are two per beat.",
+      "tr": "İki ölçülük bölümlerle çalış, sonra sağ eli tekrarlar olmadan baştan sona ♩=80'de çal. Sekizlikler vuruş başına ikidir."
+    },
+    "sequence": "3/4: D5:q G4:e A4:e B4:e C5:e | D5:q G4:q G4:q | E5:q C5:e D5:e E5:e F♯5:e | G5:q G4:q G4:q | C5:q D5:e C5:e B4:e A4:e | B4:q C5:e B4:e A4:e G4:e | F♯4:q G4:e A4:e B4:e G4:e | A4:h. | D5:q G4:e A4:e B4:e C5:e | D5:q G4:q G4:q | E5:q C5:e D5:e E5:e F♯5:e | G5:q G4:q G4:q | C5:q D5:e C5:e B4:e A4:e | B4:q C5:e B4:e A4:e G4:e | A4:q B4:e A4:e G4:e F♯4:e | G4:h. | B5:q G5:e A5:e B5:e G5:e | A5:q D5:e E5:e F♯5:e D5:e | G5:q E5:e F♯5:e G5:e D5:e | C♯5:q B4:e C♯5:e A4:q | A4:e B4:e C♯5:e D5:e E5:e F♯5:e | G5:q F♯5:q E5:q | F♯5:q A4:q C♯5:q | D5:h. | D5:q G4:e F♯4:e G4:q | E5:q G4:e F♯4:e G4:q | D5:q C5:q B4:q | A4:e G4:e F♯4:e G4:e A4:q | D4:e E4:e F♯4:e G4:e A4:e B4:e | C5:q B4:q A4:q | B4:e D5:e G4:q F♯4:q | G4:h.",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "The first beat of each bar was the strongest.",
+      "tr": "Her ölçünün ilk vuruşu en güçlüsüydü."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The octave jump in bar 4 lands late. Look at G4 while you play G5, then move the hand.",
+        "tr": "4. ölçüdeki oktav atlaması geç iniyor. Sol5'i çalarken Sol4'e bak, sonra eli taşı."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "In the second half C♯ became C, or F♯ became F. Mark the black keys of bars 17 to 24 before you start.",
+        "tr": "İkinci yarıda Do♯, Do'ya ya da Fa♯, Fa'ya dönüştü. Başlamadan önce 17–24. ölçülerin siyah tuşlarını işaretle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=80, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Christian Petzold (1677–1733), Menuet in G major, BWV Anh. 114, from the Notenbüchlein für Anna Magdalena Bach (1725); long attributed to J. S. Bach. Right hand, bars 1–32 without repeats; the mordents, the appoggiatura in bar 8 and the lower notes of the final chord (bar 32) are left out. Source edition: Johann Sebastian Bachs Notenbüchlein für Anna Magdalena Bach (1725), preface by Richard Batka, München: G. D. W. Callwey, 1906, p. 44, \"Menuet\"; scan: University of Toronto Faculty of Music Library, https://archive.org/details/31761108662891 (PDF page 52). Every bar was checked twice against the scan (pitches and rhythm); the sequence written earlier from memory matched it in all 32 bars. Public domain: the music dates from 1725; the edition was published in 1906 (before 1931) and Batka died in 1922. Legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 20,
+  "expertPending": true
+}

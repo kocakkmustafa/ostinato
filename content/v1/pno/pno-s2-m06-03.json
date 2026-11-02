@@ -1,0 +1,121 @@
+{
+  "id": "pno-s2-m06-03",
+  "title": {
+    "en": "Thumb-under drills",
+    "tr": "Başparmak geçiş alıştırmaları"
+  },
+  "goal": {
+    "en": "Passes the thumb under without a gap in the 1-2-3-1 and 1-2-3-4-1 patterns, in each hand, at ♩=60.",
+    "tr": "Her iki elde 1-2-3-1 ve 1-2-3-4-1 kalıplarında başparmağı boşluksuz altından geçirir, ♩=60."
+  },
+  "explanation": [
+    {
+      "en": "Every one-octave scale joins two finger groups with a thumb crossing: 1-2-3 and 1-2-3-4.",
+      "tr": "Her bir oktavlık gam iki parmak grubunu başparmak geçişiyle bağlar: 1-2-3 ve 1-2-3-4."
+    },
+    {
+      "en": "These drills practise only the joins. Right hand: C4 D4 E4 F4 with 1-2-3-1, then C4 to G4 with 1-2-3-4-1.",
+      "tr": "Bu alıştırmalar yalnız bu bağlantıları çalıştırır. Sağ el: Do4 Re4 Mi4 Fa4'ü 1-2-3-1 ile, sonra Do4'ten Sol4'e 1-2-3-4-1 ile çal."
+    },
+    {
+      "en": "Left hand: the same patterns going down from C4. C4 B3 A3 G3 with 1-2-3-1, then C4 to F3 with 1-2-3-4-1.",
+      "tr": "Sol el: aynı kalıplar Do4'ten aşağı. Do4 Si3 La3 Sol3'ü 1-2-3-1 ile, sonra Do4'ten Fa3'e 1-2-3-4-1 ile çal."
+    },
+    {
+      "en": "On the way back, the long finger crosses over the thumb: 3 over 1, or 4 over 1.",
+      "tr": "Dönüşte uzun parmak başparmağın üstünden geçer: 1'in üstünden 3 ya da 4."
+    },
+    {
+      "en": "Bend the thumb from its base joint, under the palm. Do not twist the wrist or push the elbow out.",
+      "tr": "Başparmağı kökündeki eklemden, avucun altına doğru bük. Bileği bükme, dirseği dışarı itme."
+    },
+    {
+      "en": "Listen to the crossing note: it should be as loud and as long as its neighbours.",
+      "tr": "Geçiş notasını dinle: komşuları kadar gür ve uzun olmalı."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The three right-hand drills, an empty bar, then the three left-hand drills, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.",
+      "tr": "Klikle dörtlüklerle üç sağ el alıştırması, bir boş ölçü, sonra üç sol el alıştırması, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand: play 1-2-3-1 twice, then 1-2-3-4-1 once. Use the empty bar to move to the left hand and play the same three drills going down from C4. One note per beat at ♩=60.",
+      "tr": "Sağ el: 1-2-3-1'i iki kez, sonra 1-2-3-4-1'i bir kez çal. Boş ölçüde sol ele geç ve aynı üç alıştırmayı Do4'ten aşağı çal. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "C4 D4 E4 F4 | E4 D4 C4:h | C4 D4 E4 F4 | E4 D4 C4:h | C4 D4 E4 F4 | G4 F4 E4 D4 | C4:w | wr | C4 B3 A3 G3 | A3 B3 C4:h | C4 B3 A3 G3 | A3 B3 C4:h | C4 B3 A3 G3 | F3 G3 A3 B3 | C4:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "My elbow moved sideways with the hand; it did not lift.",
+      "tr": "Dirseğim elle birlikte yana gitti; kalkmadı."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The crossing note comes late. Move the thumb toward its key while the finger before it is still playing. Loop that one bar at ♩=50.",
+        "tr": "Geçiş notası geç geliyor. Önceki parmak hâlâ çalarken başparmağı tuşuna doğru götür. O ölçüyü ♩=50'de döngüle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too high.",
+        "tr": "Farklı nota, bir beyaz tuş yukarıda."
+      },
+      "fix": {
+        "en": "In the right hand the thumb reached too far and landed on G4 instead of F4. Keep it close to finger 3 as it passes under.",
+        "tr": "Sağ elde başparmak fazla uzandı ve Fa4 yerine Sol4'e indi. Altından geçerken onu 3. parmağa yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop only the two notes of the crossing (E4–F4 with 3-1, or F4–G4 with 4-1) at ♩=40, then go back to the full pattern.",
+    "tr": "♩=40'ta yalnız geçişin iki notasını döngüle (3-1 ile Mi4–Fa4 ya da 4-1 ile Fa4–Sol4), sonra kalıbın tamamına dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

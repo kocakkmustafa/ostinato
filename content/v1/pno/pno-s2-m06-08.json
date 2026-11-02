@@ -1,0 +1,117 @@
+{
+  "id": "pno-s2-m06-08",
+  "title": {
+    "en": "E minor and D minor",
+    "tr": "Mi minör ve Re minör"
+  },
+  "goal": {
+    "en": "Plays E harmonic minor and D harmonic minor one octave, hands separate, at ♩=60.",
+    "tr": "Armonik Mi minör ve armonik Re minör gamlarını bir oktav, eller ayrı, ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Both scales are played here in the harmonic form: the seventh note is raised a semitone.",
+      "tr": "Burada iki gam da armonik biçimde çalınır: yedinci nota yarım ses yükseltilir."
+    },
+    {
+      "en": "E minor has one sharp, F♯. Its harmonic form adds D♯: E F♯ G A B C D♯ E.",
+      "tr": "Mi minörün bir diyezi vardır, Fa♯. Armonik biçimi Re♯ ekler: Mi Fa♯ Sol La Si Do Re♯ Mi."
+    },
+    {
+      "en": "D minor has one flat, B♭. Its harmonic form adds C♯: D E F G A B♭ C♯ D.",
+      "tr": "Re minörün bir bemolü vardır, Si♭. Armonik biçimi Do♯ ekler: Re Mi Fa Sol La Si♭ Do♯ Re."
+    },
+    {
+      "en": "Both use the C major fingering. Right hand 1-2-3-1-2-3-4-5: finger 4 plays D♯5 or C♯5. Left hand 5-4-3-2-1-3-2-1: finger 2 plays D♯4 or C♯4.",
+      "tr": "İkisi de Do majör parmaklarını kullanır. Sağ el 1-2-3-1-2-3-4-5: Re♯5'i ya da Do♯5'i 4. parmak çalar. Sol el 5-4-3-2-1-3-2-1: Re♯4'ü ya da Do♯4'ü 2. parmak çalar."
+    },
+    {
+      "en": "In D minor, B♭ and C♯ sit side by side: a flat and a sharp next to each other. Say both before you start.",
+      "tr": "Re minörde Si♭ ve Do♯ yan yanadır: bir bemol ve bir diyez komşu. Başlamadan ikisini de söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "E harmonic minor right hand then left hand, then D harmonic minor right hand then left hand, an empty bar between each, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Klikle dörtlüklerle armonik Mi minör önce sağ sonra sol el, ardından armonik Re minör önce sağ sonra sol el, aralarında birer boş ölçü, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play E harmonic minor, right hand from E4 then left hand from E3. Then play D harmonic minor, right hand from D4 then left hand from D3. Use each empty bar to change hands. One note per beat at ♩=60.",
+      "tr": "Armonik Mi minörü önce sağ elle Mi4'ten, sonra sol elle Mi3'ten çal. Ardından armonik Re minörü önce sağ elle Re4'ten, sonra sol elle Re3'ten çal. Her boş ölçüde el değiştir. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "E4 F♯4 G4 A4 | B4 C5 D♯5 E5 | D♯5 C5 B4 A4 | G4 F♯4 E4:h | wr | E3 F♯3 G3 A3 | B3 C4 D♯4 E4 | D♯4 C4 B3 A3 | G3 F♯3 E3:h | wr | D4 E4 F4 G4 | A4 B♭4 C♯5 D5 | C♯5 B♭4 A4 G4 | F4 E4 D4:h | wr | D3 E3 F3 G3 | A3 B♭3 C♯4 D4 | C♯4 B♭3 A3 G3 | F3 E3 D3:h",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I raised the seventh note both going up and coming down.",
+      "tr": "Yedinci notayı hem çıkarken hem inerken yükselttim."
+    },
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "The raised seventh (D♯ or C♯) became a white key. Find the black key below the top note before you start.",
+        "tr": "Yükseltilmiş yedinci (Re♯ ya da Do♯) beyaz tuşa dönüştü. Başlamadan en üst notanın altındaki siyah tuşu bul."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "In D minor, B♭ became B. Finger 3 plays B♭ in both hands; keep it on the black key left of B.",
+        "tr": "Re minörde Si♭, Si'ye dönüştü. Si♭ notasını iki elde de 3. parmak çalar; onu Si'nin solundaki siyah tuşta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play one scale per session: E minor today, D minor next time, each hand at ♩=50.",
+    "tr": "Her oturumda tek gam çal: bugün Mi minör, sonra Re minör, her el ♩=50'de."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m14-01",
+  "title": {
+    "en": "Chromatic scale, two octaves",
+    "tr": "İki oktav kromatik gam"
+  },
+  "goal": {
+    "en": "Plays the chromatic scale over two octaves, up and down, each hand separately at ♩=60.",
+    "tr": "Kromatik gamı iki oktav, çıkıp inerek, her eli ayrı ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "The chromatic scale uses every key, white and black, in order. Each step is a semitone, so two octaves have 24 steps.",
+      "tr": "Kromatik gam beyaz ve siyah bütün tuşları sırayla kullanır. Her adım yarım sestir; iki oktavda 24 adım vardır."
+    },
+    {
+      "en": "Every black key gets finger 3. Most white keys get the thumb.",
+      "tr": "Her siyah tuşu 3. parmak çalar. Beyaz tuşların çoğunu başparmak çalar."
+    },
+    {
+      "en": "Where two white keys sit side by side, E–F and B–C, finger 2 takes one of them. Right hand: 2 on F and C, except the first C. Left hand: 2 on E and B.",
+      "tr": "Yan yana iki beyaz tuşun olduğu yerde, Mi–Fa ve Si–Do'da, birini 2. parmak alır. Sağ el: ilk Do dışında Fa ve Do'da 2. Sol el: Mi ve Si'de 2."
+    },
+    {
+      "en": "Keep the hand close to the black keys and let finger 3 lead. The thumb passes under in small, quick moves; the arm glides along.",
+      "tr": "Eli siyah tuşlara yakın tut, 3. parmak yol göstersin. Başparmak küçük ve hızlı hareketlerle alttan geçer; kol yana kayar."
+    },
+    {
+      "en": "Sharps are written going up and flats coming down. They are the same black keys.",
+      "tr": "Çıkarken diyez, inerken bemol yazılır. Aynı siyah tuşlardır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "Chromatic scale C4 to C6 and back, right hand, then C3 to C5 and back, left hand, quarter notes with a click, at ♩=60 and at ♩=45, piano synthesis.",
+      "tr": "Klikle dörtlüklerle kromatik gam, sağ el Do4'ten Do6'ya ve geri, sonra sol el Do3'ten Do5'e ve geri, ♩=60 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand: play C4 up to C6 and back, one note per beat at ♩=60. Rest one bar. Left hand: play C3 up to C5 and back.",
+      "tr": "Sağ el: Do4'ten Do6'ya çık ve geri in, ♩=60'ta vuruş başına bir nota. Bir ölçü dinlen. Sol el: Do3'ten Do5'e çık ve geri in."
+    },
+    "sequence": "C4 C♯4 D4 D♯4 | E4 F4 F♯4 G4 | G♯4 A4 A♯4 B4 | C5 C♯5 D5 D♯5 | E5 F5 F♯5 G5 | G♯5 A5 A♯5 B5 | C6 B5 B♭5 A5 | A♭5 G5 G♭5 F5 | E5 E♭5 D5 D♭5 | C5 B4 B♭4 A4 | A♭4 G4 G♭4 F4 | E4 E♭4 D4 D♭4 | C4:w | wr | C3 C♯3 D3 D♯3 | E3 F3 F♯3 G3 | G♯3 A3 A♯3 B3 | C4 C♯4 D4 D♯4 | E4 F4 F♯4 G4 | G♯4 A4 A♯4 B4 | C5 B4 B♭4 A4 | A♭4 G4 G♭4 F4 | E4 E♭4 D4 D♭4 | C4 B3 B♭3 A3 | A♭3 G3 G♭3 F3 | E3 E♭3 D3 D♭3 | C3:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Finger 3 played every black key.",
+      "tr": "Her siyah tuşu 3. parmak çaldı."
+    },
+    {
+      "en": "The E–F and B–C steps were as even as the others.",
+      "tr": "Mi–Fa ve Si–Do adımları diğerleri kadar eşitti."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "A semitone was skipped, often after E or B. Say \"E, F\" or \"B, C\" as you play those two white keys.",
+        "tr": "Bir yarım ses atlandı, çoğunlukla Mi ya da Si'den sonra. O iki beyaz tuşu çalarken \"Mi, Fa\" ya da \"Si, Do\" de."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The thumb reaches the white key late. Keep it moving under the hand while finger 3 plays the black key.",
+        "tr": "Başparmak beyaz tuşa geç varıyor. 3. parmak siyah tuşu çalarken başparmağı elin altında hareket ettir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play one octave, C4 to C5 and back, at ♩=50 until it passes. Then play two octaves.",
+    "tr": "Geçene kadar ♩=50'de bir oktav, Do4'ten Do5'e ve geri çal. Sonra iki oktav çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

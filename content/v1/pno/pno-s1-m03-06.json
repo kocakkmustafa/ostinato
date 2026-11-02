@@ -1,0 +1,76 @@
+{
+  "id": "pno-s1-m03-06",
+  "title": { "en": "Alternating hands", "tr": "Elleri sırayla kullanmak" },
+  "goal": {
+    "en": "Plays an original four-bar line that passes between the hands, one bar each, at ♩=60.",
+    "tr": "Eller arasında ölçü ölçü el değiştiren özgün dört ölçülük diziyi ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Prepare both five-note positions: right hand on C4 to G4, left hand on C3 to G3.",
+      "tr": "İki beş nota konumunu hazırla: sağ el Do4–Sol4'te, sol el Do3–Sol3'te."
+    },
+    {
+      "en": "Alternate short phrases before playing with both hands together. No hand crosses or shares a key.",
+      "tr": "Eşzamanlı çalmadan önce kısa cümleleri sırayla çal. Eller çaprazlaşmaz veya aynı tuşu paylaşmaz."
+    },
+    {
+      "en": "The resting hand stays on its keys, loose and ready. It does not leave the keyboard.",
+      "tr": "Bekleyen el tuşlarının üstünde, gevşek ve hazır kalır. Klavyeden ayrılmaz."
+    },
+    {
+      "en": "The hand change comes right after beat 4. Keep counting so the new hand starts on beat 1.",
+      "tr": "El değişimi 4. vuruşun hemen ardından gelir. Saymayı sürdür ki yeni el 1. vuruşta başlasın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four-bar line at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Özgün dört ölçülük dizi, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the four bars with the click at ♩=60. Bar 1: right hand C4 D4 E4 G4 (1 2 3 5). Bar 2: left hand C3 D3 E3 G3 (5 4 3 1). Bar 3: right hand G4 F4 E4 D4 (5 4 3 2). Bar 4: left hand G3 E3, then C3 for two beats (1 3 5).",
+      "tr": "Dört ölçüyü ♩=60'ta klikle çal. 1. ölçü: sağ el Do4 Re4 Mi4 Sol4 (1 2 3 5). 2. ölçü: sol el Do3 Re3 Mi3 Sol3 (5 4 3 1). 3. ölçü: sağ el Sol4 Fa4 Mi4 Re4 (5 4 3 2). 4. ölçü: sol el Sol3 Mi3, sonra iki vuruş Do3 (1 3 5)."
+    },
+    "sequence": "C4 D4 E4 G4 | C3 D3 E3 G3 | G4 F4 E4 D4 | G3 E3 C3:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The resting hand stayed easy and ready on its keys.", "tr": "Bekleyen el tuşlarının üstünde rahat ve hazır kaldı." },
+    { "en": "Each new hand started on beat 1, with no gap.", "tr": "Her yeni el boşluk bırakmadan 1. vuruşta başladı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The first note after a hand change is late. Say \"right\" or \"left\" on beat 4 so the next hand is ready.",
+        "tr": "El değişiminden sonraki ilk nota geç. Sonraki el hazır olsun diye 4. vuruşta \"sağ\" ya da \"sol\" de."
+      }
+    },
+    {
+      "error": { "en": "Different note, an octave off.", "tr": "Farklı nota, bir oktav kaymış." },
+      "fix": {
+        "en": "The other hand played the bar. Check which hand each bar uses before you start.",
+        "tr": "Ölçüyü öbür el çaldı. Başlamadan önce her ölçünün hangi elle çalındığına bak."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–2 only, with a bar of rest between them, until each change is on time.",
+    "tr": "Her değişim zamanında olana kadar yalnız 1–2. ölçüleri, araya bir ölçü sus koyarak çal."
+  },
+  "legacy": "R: piano-09",
+  "minutes": 10,
+  "expertPending": true
+}

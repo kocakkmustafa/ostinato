@@ -170,6 +170,23 @@ yakalamayı durdurmaz. Native yoksa ya da çapa gelmezse pratik **sessiz
   çalışılınca sonraki modül **"ölçülmedi"** etiketiyle açılır (§4.2'deki
   seviye testi kuralının modül geçişine uygulanması). Eski ölçülü
   ilerlemesi olan modül açık kalır.
+- **Ritim-yalnız diziler (2026-11-02, `feat/rhythm-only-lines`):** A3'lü,
+  A4 içermeyen ve perdesiz dizili `M`/`M!` dersler (`4/4: q q ee q | h h`,
+  `Am h hr` gibi akor etiketli ritim, gitar power chord etiketi `E5 ee ee`)
+  artık ölçülü (21 ders; s1-m03-01 ve m03-10 geçişleri dahil). Onset yargısı
+  (`practice_rhythm.dart`, sözleşme §5/§6.2): saldırı seviyenin "zamanında"
+  penceresindeyse (S1 ±90, S2 ±75, S3 ±60, S4 ±50 ms) **doğru**; net duyulup
+  pencere dışındaysa **erken ya da geç** (`differentNote`, hiçbir zaman
+  "yanlış"); saldırı yoksa **duyamadım**. Kapının doğruluk ölçütü
+  "zamanında" oranıdır (S1 %75, S2–S3 %80, S4 %85; `GateCheckKind.onTime`).
+  Kalibrasyonlu rotada başvuru ızgaranın kendisidir; kalibrasyonsuzken
+  turun kendi medyan kayması başvuru olur (sabit gecikme gecikmeden ayırt
+  edilemez; sonuçta "göreli" diye yazılır), tur sonunda tüm vuruşlar bu
+  medyanla yeniden yargılanır. Akorun kendisini isteyen (A4) ritimler
+  öz-kontrol kalır. Dinamik (dB) ve sus düşüşü gibi özel ölçütler yazıldığı
+  gibi gösterilir, makine denetimi yoktur (önceki ölçülü derslerle aynı).
+  Kurs ekranında "Sıradaki dersi başlat" kuralının seçtiği ders **Sıradaki**
+  rozeti taşır; modül içinde diğer dersler dokunulabilir kalır.
 - Seri/haftalık hedef (PR #12) için `onSessionFinished` →
   `PracticeSessionFinished(lessonId, course: guitar, activeDuration,
   heardEvents, summary)`; bağlantıyı iki dal birleşince Yönetim yapar.

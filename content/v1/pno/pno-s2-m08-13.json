@@ -1,0 +1,81 @@
+{
+  "id": "pno-s2-m08-13",
+  "title": { "en": "Two-hand checkpoint", "tr": "İki el geçişi" },
+  "goal": {
+    "en": "Plays an original eight-bar two-hand study, one new note at a time, at ♩=76.",
+    "tr": "Özgün sekiz ölçülük iki el çalışmasını, her an tek yeni notayla, ♩=76'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "Bars 1–2: both hands an octave apart, right hand from C4, left hand from C3.",
+      "tr": "1–2. ölçüler: iki el bir oktav arayla, sağ el Do4'ten, sol el Do3'ten."
+    },
+    {
+      "en": "Bars 3–4 and 7–8: a bass on beat 1, held, with the melody after it.",
+      "tr": "3–4. ve 7–8. ölçüler: 1. vuruşta tutulan bas ve ardından melodi."
+    },
+    {
+      "en": "Bars 5–6: the hands take turns, one bar each. The right hand ends bar 5; the left hand plays bar 6 alone.",
+      "tr": "5–6. ölçüler: eller ölçü ölçü sırayla çalar. Sağ el 5. ölçüyü bitirir; sol el 6. ölçüyü tek başına çalar."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original eight-bar study at ♩=76 and ♩=50, piano synthesis.",
+      "tr": "Özgün sekiz ölçülük çalışma, ♩=76 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the eight bars with the click at ♩=76. Bar 1 both hands C D E F; bar 2 both hands G F, then E for two beats; bar 3 left hand C3, held, right hand G4 F4 E4; bar 4 left hand G3, held, right hand D4 E4 F4; bar 5 right hand E4 D4, then C4 for two beats; bar 6 left hand G3 F3, then E3 for two beats; bar 7 left hand G3, held, right hand F4 E4 D4; bar 8 left hand C3, held, right hand E4, then C4 for two beats. Practise slower first if you like; the checkpoint counts at ♩=76.",
+      "tr": "Sekiz ölçüyü ♩=76'da klikle çal. 1. ölçü iki el Do Re Mi Fa; 2. ölçü iki el Sol Fa, sonra iki vuruş Mi; 3. ölçü sol el Do3, tutulur, sağ el Sol4 Fa4 Mi4; 4. ölçü sol el Sol3, tutulur, sağ el Re4 Mi4 Fa4; 5. ölçü sağ el Mi4 Re4, sonra iki vuruş Do4; 6. ölçü sol el Sol3 Fa3, sonra iki vuruş Mi3; 7. ölçü sol el Sol3, tutulur, sağ el Fa4 Mi4 Re4; 8. ölçü sol el Do3, tutulur, sağ el Mi4, sonra iki vuruş Do4. İstersen önce yavaş çalış; geçiş ♩=76'da sayılır."
+    },
+    "sequence": "C4 D4 E4 F4 | G4 F4 E4:h | C3 G4 F4 E4 | G3 D4 E4 F4 | E4 D4 C4:h | G3 F3 E3:h | G3 F4 E4 D4 | C3 E4 C4:h",
+    "tempo": { "open": 76, "target": 76 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "P1", "P2"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Bar 3 comes late after the octave bars. Move the left hand to C3 during the held E in bar 2. Loop bars 2–3 at ♩=55.",
+        "tr": "Oktav ölçülerinden sonra 3. ölçü geç geliyor. 2. ölçüdeki tutulan Mi sırasında sol eli Do3'e taşı. 2–3. ölçüleri ♩=55'te döngüle."
+      }
+    },
+    {
+      "error": { "en": "Different note, an octave away.", "tr": "Farklı nota, bir oktav uzakta." },
+      "fix": {
+        "en": "In bars 1–2 the right hand dropped out, or in bar 6 the right hand took the left-hand line. Check which hand plays each bar before you start.",
+        "tr": "1–2. ölçülerde sağ el sustu ya da 6. ölçüde sol elin dizisini sağ el çaldı. Başlamadan önce her ölçüyü hangi elin çaldığına bak."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 and bars 5–8 as two separate four-bar studies at ♩=55, then join them.",
+    "tr": "1–4. ve 5–8. ölçüleri ♩=55'te iki ayrı dört ölçülük çalışma olarak çal, sonra birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

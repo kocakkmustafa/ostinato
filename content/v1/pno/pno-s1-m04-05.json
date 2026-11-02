@@ -1,0 +1,76 @@
+{
+  "id": "pno-s1-m04-05",
+  "title": { "en": "Three-four time and dotted notes", "tr": "Üç dörtlük ve noktalı notalar" },
+  "goal": {
+    "en": "Plays an original eight-bar right-hand line in 3/4 with dotted half notes at ♩=70.",
+    "tr": "Noktalı ikilikli, 3/4'lük özgün sekiz ölçülük sağ el dizisini ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "In 3/4 each bar has three quarter-note beats, counted 1 2 3, with beat 1 slightly stronger.",
+      "tr": "3/4'te her ölçüde üç dörtlük vuruş vardır; 1 2 3 diye sayılır ve 1. vuruş biraz daha güçlüdür."
+    },
+    {
+      "en": "A dot adds half the value: a dotted half lasts three beats, a dotted quarter one and a half.",
+      "tr": "Nokta, sürenin yarısını ekler: noktalı ikilik üç vuruş, noktalı dörtlük bir buçuk vuruş sürer."
+    },
+    {
+      "en": "A dotted half fills a whole 3/4 bar. Hold the key through 1 2 3 and release it as the next bar starts.",
+      "tr": "Noktalı ikilik 3/4'lük bir ölçüyü doldurur. Tuşu 1 2 3 boyunca tut ve sonraki ölçü başlarken bırak."
+    },
+    {
+      "en": "A dotted quarter is often followed by an eighth: count 1 (2) and; the eighth falls on the \"and\" of beat 2. You will play it after the eighth-note lesson.",
+      "tr": "Noktalı dörtlüğü çoğu zaman sekizlik izler: 1 (2) ve diye say; sekizlik 2. vuruşun \"ve\"sine düşer. Onu sekizlik dersinden sonra çalarsın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The original eight-bar 3/4 line with a click accenting beat 1, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "1. vuruşu vurgulayan klikle özgün sekiz ölçülük 3/4 dizi, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Clap and count the eight bars once with the click. Then play them with the right hand in C position at ♩=70, counting 1 2 3 aloud.",
+      "tr": "Sekiz ölçüyü klikle bir kez alkışla ve say. Sonra sağ el Do konumunda ♩=70'te, 1 2 3 diye yüksek sesle sayarak çal."
+    },
+    "sequence": "3/4: C4:q E4:q G4:q | G4:h. | F4:q E4:q D4:q | E4:h. | E4:q F4:q G4:q | E4:h D4:q | C4:q D4:q E4:q | C4:h.",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I clapped the rhythm once before playing.", "tr": "Çalmadan önce ritmi bir kez alkışladım." },
+    { "en": "I held each dotted half for three full beats.", "tr": "Her noktalı ikiliği tam üç vuruş tuttum." },
+    { "en": "Every bar added up to three beats.", "tr": "Her ölçü üç vuruş etti." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The dotted half is cut short. Count 1 2 3 aloud and play again only on the next 1.",
+        "tr": "Noktalı ikilik kısa kalıyor. 1 2 3 diye sesli say ve ancak sonraki 1'de yeniden çal."
+      }
+    },
+    {
+      "error": { "en": "Different note, one step high.", "tr": "Farklı nota, bir basamak yüksek." },
+      "fix": {
+        "en": "Your hand slid one key up. Put finger 1 back on C4 before you start.",
+        "tr": "Elin bir tuş yukarı kaymış. Başlamadan önce 1. parmağı yeniden Do4'e koy."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 at ♩=60 until they feel steady, then add bars 5–8 and move to ♩=70.",
+    "tr": "1–4. ölçüleri oturana kadar ♩=60'ta çal, sonra 5–8. ölçüleri ekle ve ♩=70'e geç."
+  },
+  "legacy": "R: piano-20",
+  "minutes": 12,
+  "expertPending": true
+}

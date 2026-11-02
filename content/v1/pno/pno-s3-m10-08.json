@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m10-08",
+  "title": {
+    "en": "The chromatic scale",
+    "tr": "Kromatik gam"
+  },
+  "goal": {
+    "en": "Plays the chromatic scale over one octave and back, hands separate, at ♩=60.",
+    "tr": "Kromatik gamı bir oktav çıkıp inerek, eller ayrı, ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "The chromatic scale plays every key, white and black, in order. Each step is a semitone; 12 steps make an octave.",
+      "tr": "Kromatik gam bütün tuşları, beyaz ve siyah, sırayla çalar. Her adım yarım sestir; 12 adım bir oktav eder."
+    },
+    {
+      "en": "Finger 3 plays every black key. The thumb plays most white keys.",
+      "tr": "Her siyah tuşu 3. parmak çalar. Beyaz tuşların çoğunu başparmak çalar."
+    },
+    {
+      "en": "Where two white keys sit side by side (E–F and B–C), finger 2 takes one of them. Right hand: finger 2 on F4 and C5. Left hand: finger 2 on E3 and B3.",
+      "tr": "İki beyaz tuşun yan yana olduğu yerde (Mi–Fa ve Si–Do) birini 2. parmak alır. Sağ el: Fa4 ve Do5'te 2. parmak. Sol el: Mi3 ve Si3'te 2. parmak."
+    },
+    {
+      "en": "Each key keeps the same finger going down. Keep the hand close to the black keys so finger 3 does not have to reach in.",
+      "tr": "İnerken her tuş aynı parmakta kalır. Eli siyah tuşlara yakın tut ki 3. parmak içeri uzanmak zorunda kalmasın."
+    },
+    {
+      "en": "Going up, the black keys are named as sharps (C♯, D♯…). Coming down, they are named as flats (B♭, A♭…). Same keys, different names.",
+      "tr": "Çıkarken siyah tuşlara diyezli adlar verilir (Do♯, Re♯…). İnerken bemollü adlar verilir (Si♭, La♭…). Tuşlar aynı, adlar farklı."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C4 to C5 and back in the right hand, an empty bar, then C3 to C4 and back in the left hand, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.",
+      "tr": "Klikle dörtlüklerle sağ elde Do4'ten Do5'e ve geri, bir boş ölçü, sonra sol elde Do3'ten Do4'e ve geri, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the right hand from C4 to C5 and back, every key in order. Use the empty bar to move to the left hand, then play C3 to C4 and back. One note per beat at ♩=60.",
+      "tr": "Sağ elle Do4'ten Do5'e çık ve geri in, her tuşu sırayla. Boş ölçüde sol ele geç, sonra Do3'ten Do4'e çık ve geri in. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "C4 C♯4 D4 D♯4 | E4 F4 F♯4 G4 | G♯4 A4 A♯4 B4 | C5 B4 B♭4 A4 | A♭4 G4 G♭4 F4 | E4 E♭4 D4 D♭4 | C4:w | wr | C3 C♯3 D3 D♯3 | E3 F3 F♯3 G3 | G♯3 A3 A♯3 B3 | C4 B3 B♭3 A3 | A♭3 G3 G♭3 F3 | E3 E♭3 D3 D♭3 | C3:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Finger 3 played every black key.",
+      "tr": "3. parmak her siyah tuşu çaldı."
+    },
+    {
+      "en": "Every step was a semitone; I skipped no key.",
+      "tr": "Her adım yarım sesti; hiçbir tuşu atlamadım."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "A key was skipped, usually at E–F or B–C where two white keys sit side by side. Use finger 2 there and say the note names slowly.",
+        "tr": "Bir tuş atlandı, çoğunlukla iki beyaz tuşun yan yana olduğu Mi–Fa ya da Si–Do'da. Orada 2. parmağı kullan ve nota adlarını yavaşça söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The thumb is late on the white key after a black key. Keep finger 3 and the thumb close together. Loop E4 F4 F♯4 G4 with 1-2-3-1 at ♩=50.",
+        "tr": "Siyah tuştan sonraki beyaz tuşta başparmak geç kalıyor. 3. parmakla başparmağı birbirine yakın tut. Mi4 Fa4 Fa♯4 Sol4'ü 1-2-3-1 ile ♩=50'de döngüle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C4 to E4 and back with 1-3-1-3-1 at ♩=50. Then extend to G4, and then to C5.",
+    "tr": "♩=50'de yalnız Do4'ten Mi4'e ve geri 1-3-1-3-1 ile çal. Sonra Sol4'e, ardından Do5'e uzat."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

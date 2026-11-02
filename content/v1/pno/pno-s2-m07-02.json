@@ -1,0 +1,111 @@
+{
+  "id": "pno-s2-m07-02",
+  "title": {
+    "en": "Minor triads, broken",
+    "tr": "Kırık minör üçlüler"
+  },
+  "goal": {
+    "en": "Plays the Am, Dm and Em triads broken with right-hand fingers 1-3-5 at ♩=60.",
+    "tr": "Am, Dm ve Em üçlülerini sağ elde 1-3-5. parmaklarla ♩=60'ta kırık çalar."
+  },
+  "explanation": [
+    {
+      "en": "A minor triad has a lower third: three semitones above the root. The fifth stays seven semitones up.",
+      "tr": "Minör üçlünün üçlüsü daha pestir: kökün üç yarım ses üstü. Beşli yine yedi yarım ses üsttedir."
+    },
+    {
+      "en": "Am is A4 C5 E5, Dm is D4 F4 A4 and Em is E4 G4 B4. All white keys again.",
+      "tr": "Am La4 Do5 Mi5, Dm Re4 Fa4 La4, Em Mi4 Sol4 Si4'tür. Yine hepsi beyaz tuş."
+    },
+    {
+      "en": "Compare with major: C major has E4, C minor would have E♭4. Only the middle note changes.",
+      "tr": "Majörle karşılaştır: C majörde Mi4 var, C minörde Mi♭4 olurdu. Yalnız ortadaki nota değişir."
+    },
+    {
+      "en": "The hand shape is the same as for major triads: fingers 1-3-5, the whole hand moves to each root.",
+      "tr": "El şekli majör üçlülerdeki gibidir: 1-3-5. parmaklar, bütün el her köke taşınır."
+    },
+    {
+      "en": "Listen to the colour: a minor triad sounds darker than a major triad.",
+      "tr": "Rengi dinle: minör üçlü, majör üçlüden daha koyu duyulur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Am, Dm, Em and Am broken (root-3-5-3, then the root held), at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Am, Dm, Em ve Am kırık (kök-3-5-3, sonra kök tutulur), ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand, fingers 1-3-5. Play each triad root-third-fifth-third, then hold the root for four beats: Am, Dm, Em and back to Am, at ♩=60 with the click.",
+      "tr": "Sağ el, 1-3-5. parmaklar. Her üçlüyü kök-üçlü-beşli-üçlü çal, sonra kökü dört vuruş tut: Am, Dm, Em ve yeniden Am, ♩=60'ta klikle."
+    },
+    "sequence": "4/4: A4 C5 E5 C5 | A4:w | D4 F4 A4 F4 | D4:w | E4 G4 B4 G4 | E4:w | A4 C5 E5 C5 | A4:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used fingers 1-3-5 for every triad.",
+      "tr": "Her üçlüde 1-3-5. parmakları kullandım."
+    },
+    {
+      "en": "I heard the darker minor colour in each triad.",
+      "tr": "Her üçlüde daha koyu minör rengi duydum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "The middle note went to the black key above. In Am, Dm and Em the third is a white key: C5, F4, G4.",
+        "tr": "Orta nota üstteki siyah tuşa kaydı. Am, Dm ve Em'de üçlü beyaz tuştur: Do5, Fa4, Sol4."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The first note after the hand move is late. Lift the hand at the end of the held note and land on the new root on beat 1.",
+        "tr": "El taşındıktan sonraki ilk nota geç. Tutulan notanın sonunda eli kaldır ve 1. vuruşta yeni köke kon."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only Dm and Em at ♩=45; they sit next to each other. Then add the Am triad.",
+    "tr": "♩=45'te yalnız Dm ve Em'i çal; yan yanadırlar. Sonra Am üçlüsünü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

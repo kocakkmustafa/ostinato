@@ -1,0 +1,108 @@
+{
+  "id": "pno-s1-m02-10",
+  "title": {
+    "en": "Right-hand checkpoint",
+    "tr": "Sağ el geçişi"
+  },
+  "goal": {
+    "en": "Plays an original eight-bar right-hand study in C position at ♩=80.",
+    "tr": "Do konumunda özgün sekiz ölçülük sağ el çalışmasını ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "The study uses every right-hand skill so far: steps, skips, repeated notes, rests, quarter and half notes.",
+      "tr": "Çalışma şimdiye kadarki bütün sağ el becerilerini kullanır: basamak, atlama, tekrar nota, sus, dörtlük ve ikilik."
+    },
+    {
+      "en": "Bars 3 and 4 repeat a note and end on a rest. Let the key rise between the repeats and lift on the rest.",
+      "tr": "3. ve 4. ölçüler bir notayı tekrarlar ve susla biter. Tekrarlar arasında tuş yukarı çıksın, susta parmağı kaldır."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    },
+    {
+      "en": "To practise a hard spot, start at bar 3 or bar 5 instead of always at the beginning.",
+      "tr": "Zor bir yeri çalışmak için her zaman baştan değil, 3. ya da 5. ölçüden başla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The original eight-bar study at ♩=80 and at ♩=55, piano synthesis.",
+      "tr": "Özgün sekiz ölçülük çalışma, ♩=80 ve ♩=55, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the eight-bar study along with the click at ♩=80. Practise slower first if you like; the checkpoint counts at ♩=80.",
+      "tr": "Sekiz ölçülük çalışmayı ♩=80'de klikle birlikte çal. İstersen önce yavaş çalış; geçiş ♩=80'de sayılır."
+    },
+    "sequence": "4/4: E4 D4 E4 F4 | G4:h E4:h | F4 F4 D4 qr | E4 E4 C4 qr | C4 E4 G4 E4 | F4 E4 D4:h | E4 qr D4 qr | C4:w",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The rests in bars 3, 4 and 7 are getting short. Count them aloud. Loop bars 3–4 at ♩=60, then go back to ♩=80.",
+        "tr": "3, 4 ve 7. ölçülerdeki suslar kısalıyor. Onları sesli say. 3–4. ölçüleri ♩=60'ta döngüle, sonra ♩=80'e dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "In bars 3 and 4 the key did not rise between the repeated notes. Let it come all the way up before you play again.",
+        "tr": "3. ve 4. ölçülerde tekrar notalar arasında tuş yukarı çıkmadı. Yeniden çalmadan önce tamamen çıkmasını bekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "The hand slipped out of C position. Keep the thumb over C4 so that C4-E4-G4 in bar 5 falls under fingers 1-3-5.",
+        "tr": "El Do konumundan kaydı. Başparmağı Do4'ün üstünde tut ki 5. ölçüdeki Do4-Mi4-Sol4 1-3-5. parmaklara düşsün."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 and bars 5–8 as two separate four-bar studies at ♩=60, then join them.",
+    "tr": "1–4. ve 5–8. ölçüleri ♩=60'ta iki ayrı dört ölçülük çalışma olarak çal, sonra birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -9,7 +9,8 @@ import 'v1_practice_catalog.dart';
 /// How a v1 lesson runs in this build (contract
 /// docs/v1-curriculum/00-ders-format-sozlesmesi.md §3, §4.2).
 enum V1LessonAvailability {
-  /// The measured practice loop runs it (A2 single notes + A3 timing).
+  /// The measured practice loop runs it (A2 single notes + A3 timing, or an
+  /// A3 rhythm-only line judged on onset timing).
   measured,
 
   /// A1 tuning lesson: the precise tuner (±5 c) is the practice.

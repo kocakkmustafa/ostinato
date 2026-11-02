@@ -1,0 +1,79 @@
+{
+  "id": "pno-s3-m13-08",
+  "title": { "en": "Block comping on beat one", "tr": "Birinci vuruşta blok eşlik" },
+  "goal": {
+    "en": "Comps eight bars of chord symbols with left-hand block chords on beat 1, using the nearest inversions, over a backing track.",
+    "tr": "Sekiz ölçülük akor sembollerine eşlik kaydı üstünde, sol elde en yakın çevrimlerle 1. vuruşta blok akor basarak eşlik eder."
+  },
+  "explanation": [
+    {
+      "en": "Comping means accompanying: you play the chords while the melody happens somewhere else. Here the backing track carries the beat.",
+      "tr": "Comping eşlik etmek demektir: melodi başka yerde akarken sen akorları çalarsın. Burada vuruşu eşlik kaydı taşır."
+    },
+    {
+      "en": "Play all three notes of each chord together on beat 1 and hold them for the whole bar. Lift just before the next beat 1.",
+      "tr": "Her akorun üç notasını 1. vuruşta birlikte çal ve bütün ölçü boyunca tut. Sonraki 1. vuruştan hemen önce kaldır."
+    },
+    {
+      "en": "Use the nearest inversions so the left hand barely moves. C: C3-E3-G3. Am: C3-E3-A3. F: C3-F3-A3. G: B2-D3-G3.",
+      "tr": "Sol el neredeyse hiç kıpırdamasın diye en yakın çevrimleri kullan. C: Do3-Mi3-Sol3. Am: Do3-Mi3-La3. F: Do3-Fa3-La3. G: Si2-Re3-Sol3."
+    },
+    {
+      "en": "Fingers: 5-3-1 for C, Am and G, 5-2-1 for F. Finger 5 stays on C3 for three of the four chords.",
+      "tr": "Parmaklar: C, Am ve G için 5-3-1, F için 5-2-1. 5. parmak dört akordan üçünde Do3'te kalır."
+    },
+    {
+      "en": "The microphone result for notes that start together is experimental and does not block your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Birlikte başlayan notalar için mikrofon sonucu deneyseldir ve ilerlemeni engellemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "C | Am | F | G | C | F | G | C as left-hand block chords on beat 1 in close inversions, piano synthesis at ♩=70 and ♩=50, over a soft drum and bass loop.",
+      "tr": "C | Am | F | G | C | F | G | C, sol elde yakın çevrimlerle 1. vuruşta blok akor, piyano sentezi, ♩=70 ve ♩=50, yumuşak davul ve bas döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M~", "MIDI"],
+    "engineSteps": ["A6p"],
+    "task": {
+      "en": "Read the chart C | Am | F | G | C | F | G | C and play one left-hand block chord on each beat 1 with the backing track at ♩=70. Hold each chord for four beats.",
+      "tr": "C | Am | F | G | C | F | G | C şemasını oku ve eşlikle ♩=70'te her 1. vuruşta sol elle bir blok akor çal. Her akoru dört vuruş tut."
+    },
+    "sequence": "4/4: C3/E3/G3:w | C3/E3/A3:w | C3/F3/A3:w | B2/D3/G3:w | C3/E3/G3:w | C3/F3/A3:w | B2/D3/G3:w | C3/E3/G3:w",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "experimental",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "All three notes of each chord sounded together.", "tr": "Her akorun üç notası birlikte duyuldu." },
+    { "en": "Each chord came exactly on beat 1 with the backing.", "tr": "Her akor eşlikle tam 1. vuruşta geldi." },
+    { "en": "Finger 5 stayed on C3 for C, Am and F.", "tr": "5. parmak C, Am ve F'de Do3'te kaldı." },
+    { "en": "My shoulders stayed loose.", "tr": "Omuzlarım gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one white key too low.", "tr": "Farklı nota, bir beyaz tuş aşağıda." },
+      "fix": {
+        "en": "In Am the top note stayed on G3. Only the thumb moves: from G3 up to A3.",
+        "tr": "Am'de üst nota Sol3'te kaldı. Yalnız başparmak hareket eder: Sol3'ten La3'e."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "You held the chord until beat 1 and then searched. Read the next symbol on beat 4 and move just before beat 1.",
+        "tr": "Akoru 1. vuruşa kadar tutup sonra aradın. Sonraki sembolü 4. vuruşta oku ve 1. vuruştan hemen önce geç."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Comp only C and Am, two bars each, until the change is easy; then play the full chart at ♩=60.",
+    "tr": "Geçiş kolaylaşana kadar yalnız C ve Am ile, ikişer ölçü eşlik et; sonra şemanın tamamını ♩=60'ta çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,88 @@
+{
+  "id": "pno-s3-m12-01",
+  "title": { "en": "What the sustain pedal does", "tr": "Uzatma pedalı ne yapar" },
+  "goal": {
+    "en": "Explains what the sustain pedal does, finds it, and reads the pedal marks in a score.",
+    "tr": "Uzatma pedalının ne yaptığını açıklar, pedalı bulur ve notadaki pedal işaretlerini okur."
+  },
+  "explanation": [
+    {
+      "en": "An acoustic piano can have up to three pedals. The right one is the sustain pedal. The left one makes the sound softer. The middle one differs from piano to piano.",
+      "tr": "Akustik piyanoda üç pedala kadar olabilir. Sağdaki uzatma pedalıdır. Soldaki sesi yumuşatır. Ortadaki piyanodan piyanoya değişir."
+    },
+    {
+      "en": "Inside the piano, a damper rests on each string and stops it when you let go of the key. The sustain pedal lifts all the dampers at once.",
+      "tr": "Piyanonun içinde her telin üstünde bir susturucu durur ve tuşu bıraktığında teli durdurur. Uzatma pedalı bütün susturucuları birden kaldırır."
+    },
+    {
+      "en": "So with the pedal down, a note keeps ringing after your finger leaves the key. Lift the pedal and the sound stops.",
+      "tr": "Bu yüzden pedal basılıyken parmağın tuştan kalksa da nota çalmayı sürdürür. Pedalı kaldır, ses durur."
+    },
+    {
+      "en": "Use your right foot. Keep the heel on the floor and press with the front of the foot, all the way down and all the way up.",
+      "tr": "Sağ ayağını kullan. Topuğun yerde kalsın; ayağın ön kısmıyla bas, sonuna kadar indir ve sonuna kadar kaldır."
+    },
+    {
+      "en": "In a score, \"Ped.\" means pedal down and \"*\" means pedal up. A bracket line under the bass staff shows the same thing; a notch in the line means up and down again quickly.",
+      "tr": "Notada \"Ped.\" pedal bas, \"*\" pedal kaldır demektir. Fa portesinin altındaki köşeli çizgi de aynısını gösterir; çizgideki çentik hızlıca kaldırıp yeniden basmak demektir."
+    },
+    {
+      "en": "On a digital piano, plug a sustain pedal into the pedal or sustain socket. If it works in reverse, switch the keyboard off, plug the pedal in, and switch on without pressing the pedal.",
+      "tr": "Dijital piyanoda uzatma pedalını pedal ya da sustain girişine tak. Ters çalışıyorsa klavyeyi kapat, pedalı tak ve pedala basmadan aç."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference line. Questions about the pedal and its marks are shown on screen.",
+      "tr": "Referans dizi yok. Pedal ve işaretleriyle ilgili sorular ekranda gösterilir."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Answer 5 on-screen questions: which pedal sustains, what it does to the strings, and what \"Ped.\", \"*\" and the notch in a pedal line mean.",
+      "tr": "Ekrandaki 5 soruyu yanıtla: hangi pedal sesi uzatır, tellere ne yapar ve \"Ped.\", \"*\" ile pedal çizgisindeki çentik ne demektir."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 5 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 5,
+      "params": {
+        "set": "sustain_pedal",
+        "items": ["right_pedal", "dampers_lift", "ped_mark", "release_mark", "change_notch"]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can show the sustain pedal and press it with my right foot, heel on the floor.", "tr": "Uzatma pedalını gösterebiliyor ve topuğum yerdeyken sağ ayağımla basabiliyorum." },
+    { "en": "I can say what the pedal does to the dampers.", "tr": "Pedalın susturuculara ne yaptığını söyleyebiliyorum." },
+    { "en": "I can read \"Ped.\", \"*\" and a pedal line.", "tr": "\"Ped.\", \"*\" ve pedal çizgisini okuyabiliyorum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: the left pedal was chosen as the sustain pedal.", "tr": "Farklı cevap: uzatma pedalı olarak sol pedal seçildi." },
+      "fix": {
+        "en": "The sustain pedal is always on the right, under your right foot. The left pedal only softens the sound.",
+        "tr": "Uzatma pedalı her zaman sağdadır, sağ ayağının altında. Sol pedal yalnız sesi yumuşatır."
+      }
+    },
+    {
+      "error": { "en": "Different answer: the notch was read as pedal up.", "tr": "Farklı cevap: çentik pedal kaldır diye okundu." },
+      "fix": {
+        "en": "A notch is up and straight down again. The line goes on, so the pedal stays in use.",
+        "tr": "Çentik, kaldırıp hemen yeniden basmaktır. Çizgi sürer, yani pedal kullanımda kalır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Before the questions, press a key with the pedal down, let the key go, and listen; then lift the pedal.",
+    "tr": "Sorulardan önce pedal basılıyken bir tuşa bas, tuşu bırak ve dinle; sonra pedalı kaldır."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

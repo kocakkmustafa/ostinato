@@ -1,0 +1,121 @@
+{
+  "id": "pno-s3-m14-15",
+  "title": {
+    "en": "Preparing a performance",
+    "tr": "Performansa hazırlık"
+  },
+  "goal": {
+    "en": "Uses a practice plan, a score map, slow tempo, loops and a tempo ladder to prepare eight bars of a piece.",
+    "tr": "Bir parçanın sekiz ölçüsünü hazırlamak için çalışma planı, nota haritası, yavaş tempo, döngü ve tempo merdiveni kullanır."
+  },
+  "explanation": [
+    {
+      "en": "Map the score first. Mark the sections, the repeats, the hand shifts and the hard bars.",
+      "tr": "Önce notanın haritasını çıkar. Bölümleri, tekrarları, el kaymalarını ve zor ölçüleri işaretle."
+    },
+    {
+      "en": "Start slowly enough to play with no slips. A slow clean try teaches more than a fast messy one.",
+      "tr": "Kaçış olmadan çalabileceğin kadar yavaş başla. Yavaş ve temiz bir deneme, hızlı ve dağınık birinden çok şey öğretir."
+    },
+    {
+      "en": "Loop the hard spots. Play two bars around the slip three times clean, then join them to the bars before and after.",
+      "tr": "Zor yerleri döngüle. Kaçışın çevresindeki iki ölçüyü üç kez temiz çal, sonra önceki ve sonraki ölçülere bağla."
+    },
+    {
+      "en": "Climb the tempo ladder: from ♩=60 up in steps of 5. Go to the next step only when the current one passes.",
+      "tr": "Tempo merdivenini çık: ♩=60'tan 5'er adımla yukarı. Bir sonraki basamağa ancak bulunduğun basamak geçince çık."
+    },
+    {
+      "en": "Finish with a run-through: play the eight bars once without stopping, as if someone were listening.",
+      "tr": "Baştan sona bir çalışla bitir: sekiz ölçüyü biri dinliyormuş gibi durmadan bir kez çal."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Minuet in G, right hand, bars 1 to 8, from the Ostinato edition, piano synthesis, at ♩=60, ♩=70 and ♩=80.",
+      "tr": "Ostinato düzenlemesinden Sol Majör Menuet, sağ el, 1–8. ölçüler, piyano sentezi, ♩=60, ♩=70 ve ♩=80."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M",
+      "Ö"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Make your plan on the checklist. Then play bars 1 to 8 of the Minuet in G, right hand: start at ♩=60 and climb in steps of 5 to ♩=80. The microphone checks the notes and the timing.",
+      "tr": "Planını kontrol listesinde yap. Sonra Sol Majör Menuet'in sağ elinin 1–8. ölçülerini çal: ♩=60'ta başla ve 5'er adımla ♩=80'e çık. Mikrofon notaları ve zamanlamayı kontrol eder."
+    },
+    "sequence": "3/4: D5:q G4:e A4:e B4:e C5:e | D5:q G4:q G4:q | E5:q C5:e D5:e E5:e F♯5:e | G5:q G4:q G4:q | C5:q D5:e C5:e B4:e A4:e | B4:q C5:e B4:e A4:e G4:e | F♯4:q G4:e A4:e B4:e G4:e | A4:h.",
+    "tempo": {
+      "open": 60,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I marked the sections and the hard bars before I played.",
+      "tr": "Çalmadan önce bölümleri ve zor ölçüleri işaretledim."
+    },
+    {
+      "en": "I started at a tempo with no slips.",
+      "tr": "Kaçışsız çalabildiğim bir tempoda başladım."
+    },
+    {
+      "en": "I looped each hard spot until it was clean three times.",
+      "tr": "Her zor yeri üç kez temiz olana kadar döngüledim."
+    },
+    {
+      "en": "I moved up the tempo ladder only after a pass.",
+      "tr": "Tempo merdiveninde ancak bir geçişten sonra yukarı çıktım."
+    },
+    {
+      "en": "I played one run-through without stopping.",
+      "tr": "Durmadan baştan sona bir kez çaldım."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The tempo step is too big. Go back 5 and loop the late bars there.",
+        "tr": "Tempo adımı fazla büyük. 5 geri in ve geç kalan ölçüleri orada döngüle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use four bars instead of eight, and climb only from ♩=60 to ♩=70.",
+    "tr": "Sekiz yerine dört ölçü kullan ve yalnız ♩=60'tan ♩=70'e çık."
+  },
+  "repertoire": "Christian Petzold (1677–1733), Menuet in G major, BWV Anh. 114, from the Notenbüchlein für Anna Magdalena Bach (1725 manuscript; 19th-century Bach-Gesellschaft edition). Long attributed to J. S. Bach. Bars 1 to 8, right hand, as in pno-s3-m14-04 (same source check pending). Composer died 1733; public domain, legal review pending.",
+  "minutes": 20,
+  "expertPending": true
+}

@@ -1,0 +1,74 @@
+{
+  "id": "pno-s1-m03-08",
+  "title": { "en": "Low notes", "tr": "Pes notalar" },
+  "goal": {
+    "en": "Plays C2 to G2 and back with the left hand at ♩=60.",
+    "tr": "Sol elle Do2'den Sol2'ye ve geri ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "C2 is two octaves below middle C. Count the Cs down from C4: C4, C3, C2.",
+      "tr": "Do2, orta Do'nun iki oktav altındadır. Do4'ten aşağı Do'ları say: Do4, Do3, Do2."
+    },
+    {
+      "en": "Move the whole C position down one octave: finger 5 on C2, thumb on G2.",
+      "tr": "Bütün Do konumunu bir oktav aşağı taşı: 5. parmak Do2'de, başparmak Sol2'de."
+    },
+    {
+      "en": "Lean a little to the left from the hips. Do not twist the shoulders or reach with the wrist.",
+      "tr": "Kalçadan biraz sola eğil. Omuzları döndürme, bilekle uzanma."
+    },
+    {
+      "en": "Low notes sound dark and ring for a long time. Hold each one for two beats and let it speak.",
+      "tr": "Pes notalar koyu duyulur ve uzun süre çınlar. Her birini iki vuruş tut ve tınlamasına izin ver."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C2 D2 E2 F2 G2 F2 E2 D2 C2 in half notes at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "İkilik notalarla Do2 Re2 Mi2 Fa2 Sol2 Fa2 Mi2 Re2 Do2, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "With the left hand on C2 to G2, play C2 D2 | E2 F2 | G2 F2 | E2 D2 | C2 held four beats. Each note before the last lasts two beats. Fingers 5 4 3 2 1 2 3 4 5, with the click at ♩=60.",
+      "tr": "Sol el Do2–Sol2'deyken Do2 Re2 | Mi2 Fa2 | Sol2 Fa2 | Mi2 Re2 | Do2 dört vuruş çal. Sondan önceki her nota iki vuruş sürer. Parmaklar 5 4 3 2 1 2 3 4 5, klikle ♩=60."
+    },
+    "sequence": "C2:h D2:h | E2:h F2:h | G2:h F2:h | E2:h D2:h | C2:w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found C2 by counting the Cs down from middle C.", "tr": "Do2'yi orta Do'dan aşağı Do'ları sayarak buldum." },
+    { "en": "I leaned from the hips and my shoulders stayed loose.", "tr": "Kalçadan eğildim ve omuzlarım gevşek kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, an octave high.", "tr": "Farklı nota, bir oktav yüksek." },
+      "fix": {
+        "en": "You played in the C3 position. Count the Cs down again: C4, C3, C2.",
+        "tr": "Do3 konumunda çaldın. Do'ları yeniden aşağı say: Do4, Do3, Do2."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Low notes need a clear start. Press each key fully and move the phone toward the left end of the keyboard.",
+        "tr": "Pes notalar net bir başlangıç ister. Her tuşa tam bas ve telefonu klavyenin sol ucuna doğru yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C2 D2 E2 and back, holding each note for four beats.",
+    "tr": "Yalnız Do2 Re2 Mi2'yi çal ve geri dön; her notayı dört vuruş tut."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

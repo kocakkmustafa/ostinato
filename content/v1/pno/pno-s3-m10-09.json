@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m10-09",
+  "title": {
+    "en": "Even eighths at 69",
+    "tr": "♩=69'da eşit sekizlikler"
+  },
+  "goal": {
+    "en": "Plays the C and G major scales over two octaves, hands separate, in even eighth notes at ♩=69.",
+    "tr": "Do ve Sol majör gamlarını iki oktav, eller ayrı, eşit sekizliklerle ♩=69'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "Two eighth notes fill one beat. At ♩=69 that is more than two notes per second.",
+      "tr": "İki sekizlik bir vuruşu doldurur. ♩=69'da bu saniyede ikiden fazla nota eder."
+    },
+    {
+      "en": "A two-octave scale in eighths takes four bars. The top note falls on beat 4 of bar 2, and the scale ends on beat 3 of bar 4 with a half note.",
+      "tr": "Sekizliklerle iki oktav gam dört ölçü sürer. En üst nota 2. ölçünün 4. vuruşuna düşer, gam 4. ölçünün 3. vuruşunda bir ikilikle biter."
+    },
+    {
+      "en": "Evenness matters more than speed. Every eighth gets the same length and the same weight, the thumb crossings too.",
+      "tr": "Eşitlik hızdan önemlidir. Her sekizlik aynı uzunluğu ve aynı ağırlığı alır, başparmak geçişleri de."
+    },
+    {
+      "en": "Start at ♩=60. Move up by 5 only after a clean run: ♩=60, 65, then 69.",
+      "tr": "♩=60'tan başla. Ancak temiz bir turdan sonra 5 artır: ♩=60, 65, sonra 69."
+    },
+    {
+      "en": "If the hand tightens, go back to ♩=50 or to quarter notes. Speed comes from ease, not force.",
+      "tr": "El gerilirse ♩=50'ye ya da dörtlüklere dön. Hız güçten değil rahatlıktan gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C major right hand, left hand, then G major right hand, left hand, two octaves in eighth notes with an empty bar between, with a click, at ♩=69 and at ♩=50, piano synthesis.",
+      "tr": "Klikle sekizliklerle iki oktav Do majör sağ el, sol el, sonra Sol majör sağ el, sol el, aralarında birer boş ölçü, ♩=69 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play C major with the right hand from C4, then the left hand from C2. Then play G major with the right hand from G4, then the left hand from G2. Each run goes up two octaves and back in eighth notes; use the empty bar to change hands. Start at ♩=60 and move up to ♩=69.",
+      "tr": "Do majörü önce sağ elle Do4'ten, sonra sol elle Do2'den çal. Ardından Sol majörü önce sağ elle Sol4'ten, sonra sol elle Sol2'den çal. Her tur sekizliklerle iki oktav çıkar ve geri iner; boş ölçüde el değiştir. ♩=60'tan başla, ♩=69'a çık."
+    },
+    "sequence": "C4:e D4:e E4:e F4:e G4:e A4:e B4:e C5:e | D5:e E5:e F5:e G5:e A5:e B5:e C6:e B5:e | A5:e G5:e F5:e E5:e D5:e C5:e B4:e A4:e | G4:e F4:e E4:e D4:e C4:h | wr | C2:e D2:e E2:e F2:e G2:e A2:e B2:e C3:e | D3:e E3:e F3:e G3:e A3:e B3:e C4:e B3:e | A3:e G3:e F3:e E3:e D3:e C3:e B2:e A2:e | G2:e F2:e E2:e D2:e C2:h | wr | G4:e A4:e B4:e C5:e D5:e E5:e F♯5:e G5:e | A5:e B5:e C6:e D6:e E6:e F♯6:e G6:e F♯6:e | E6:e D6:e C6:e B5:e A5:e G5:e F♯5:e E5:e | D5:e C5:e B4:e A4:e G4:h | wr | G2:e A2:e B2:e C3:e D3:e E3:e F♯3:e G3:e | A3:e B3:e C4:e D4:e E4:e F♯4:e G4:e F♯4:e | E4:e D4:e C4:e B3:e A3:e G3:e F♯3:e E3:e | D3:e C3:e B2:e A2:e G2:h",
+    "tempo": {
+      "open": 60,
+      "target": 69
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The two eighths in each beat were equal.",
+      "tr": "Her vuruştaki iki sekizlik eşitti."
+    },
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The eighths rush on the way down. Count \"and\" aloud and land the last note exactly on beat 3.",
+        "tr": "İnişte sekizlikler acele ediyor. 've'yi sesli say ve son notayı tam 3. vuruşa düşür."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "A thumb crossing makes a small gap at the faster tempo. Start the thumb moving while finger 2 plays. Loop that bar at ♩=60.",
+        "tr": "Hızlı tempoda bir başparmak geçişi küçük bir boşluk bırakıyor. 2. parmak çalarken başparmağı yola çıkar. O ölçüyü ♩=60'ta döngüle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each scale once in quarter notes, then in eighths at ♩=50.",
+    "tr": "Her gamı önce bir kez dörtlüklerle çal, sonra ♩=50'de sekizliklerle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

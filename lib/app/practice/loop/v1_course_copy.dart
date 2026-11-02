@@ -70,6 +70,14 @@ abstract final class V1CourseCopy {
     'Geçiş bekletiliyor · ölçüm yakında',
   );
 
+  // The suggested next lesson ("Start next lesson" rule); nothing is locked
+  // inside a module.
+  static const UiCopy nextChip = ('Next', 'Sıradaki');
+  static const UiCopy nextChipSemantics = (
+    'Suggested next lesson',
+    'Önerilen sıradaki ders',
+  );
+
   // Lesson statuses (measured statuses reuse the practice list's copy).
   static const UiCopy statusLocked = (
     'LOCKED · CLEAR THE CHECKPOINT BEFORE',
@@ -279,5 +287,7 @@ abstract final class V1CourseCopy {
     genericClear,
     genericTaskDone,
     genericExplain,
+    nextChip,
+    nextChipSemantics,
   ];
 }

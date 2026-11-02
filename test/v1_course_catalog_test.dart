@@ -105,16 +105,77 @@ void main() {
       }
     });
 
-    test('rhythm-only and no-sequence M lessons → self-check (notation)', () {
-      expect(a('gtr-s1-m03-02'), V1LessonAvailability.selfCheck);
-      expect(r('gtr-s1-m03-02'), V1PendingReason.notation);
+    test('A3 rhythm-only lines → measured on onset timing', () {
+      // These were self-check / held until the loop could run a line with
+      // no pitches (`h` is a half note there, not a hammer-on).
+      const movedToMeasured = [
+        'gtr-s1-m03-01', // first S1 checkpoint (M!)
+        'gtr-s1-m03-02',
+        'gtr-s1-m03-03',
+        'gtr-s1-m03-04',
+        'gtr-s1-m03-05',
+        'gtr-s1-m03-06',
+        'gtr-s1-m03-07',
+        'gtr-s1-m03-09',
+        'gtr-s1-m03-10', // M03 checkpoint (M!)
+        'gtr-s2-m06-02',
+        'gtr-s2-m06-03',
+        'gtr-s2-m06-05',
+        'gtr-s2-m06-06', // chord labels, A3 only
+        'gtr-s2-m06-10',
+        'gtr-s3-m10-04',
+        'gtr-s3-m12-10',
+        'gtr-s4-m16-07', // chord labels, A3 only
+        'gtr-s4-m16-09', // chord labels, A3 only
+      ];
+      // Power-chord labels (`E5 ee ee`) were read as the pitch E5.
+      const powerChordRhythm = [
+        'gtr-s3-m10-05',
+        'gtr-s3-m10-06',
+        'gtr-s3-m10-09',
+      ];
+      final rhythm = [
+        for (final l in catalog.lessons)
+          if (l.availability == V1LessonAvailability.measured &&
+              V1PracticeCatalog.scoreOf(l.lesson)!.isRhythmOnly)
+            l.id,
+      ];
+      expect(rhythm, [...movedToMeasured, ...powerChordRhythm]..sort());
+      for (final id in rhythm) {
+        final steps = catalog.lesson(id)!.lesson.practice.engineSteps;
+        expect(steps, contains('A3'), reason: id);
+        expect(steps, isNot(contains('A4')), reason: id);
+      }
+      expect(a('gtr-s1-m03-01'), V1LessonAvailability.measured);
+      expect(a('gtr-s1-m03-10'), V1LessonAvailability.measured);
+    });
+
+    test('rhythm that needs the chord itself (A4) stays self-check', () {
+      for (final id in [
+        'gtr-s2-m06-01',
+        'gtr-s2-m06-04',
+        'gtr-s2-m06-07',
+        'gtr-s2-m06-12',
+        'gtr-s3-m13-10',
+        'gtr-s3-m14-11',
+        'gtr-s4-m15-08',
+      ]) {
+        expect(a(id), V1LessonAvailability.selfCheck, reason: id);
+        expect(r(id), V1PendingReason.chords, reason: id);
+      }
+      expect(a('gtr-s4-m16-11'), V1LessonAvailability.held);
+    });
+
+    test('no-sequence M lessons → self-check (notation)', () {
       expect(a('gtr-s1-m01-06'), V1LessonAvailability.selfCheck);
+      expect(r('gtr-s1-m01-06'), V1PendingReason.notation);
+      expect(a('gtr-s2-m09-09'), V1LessonAvailability.selfCheck);
     });
 
     test('M! that cannot be measured → held; tests too', () {
       expect(a('gtr-s1-m04-11'), V1LessonAvailability.held);
       expect(r('gtr-s1-m04-11'), V1PendingReason.chords);
-      expect(a('gtr-s1-m03-10'), V1LessonAvailability.held);
+      expect(a('gtr-s2-m06-13'), V1LessonAvailability.held);
       expect(a('gtr-s1-test'), V1LessonAvailability.held);
       expect(a('gtr-s4-test-b'), V1LessonAvailability.held);
       expect(a('gtr-s4-m19b-18'), V1LessonAvailability.held);
@@ -190,6 +251,18 @@ void main() {
       expect(s.units['gtr-s1-m03'], V1UnitOpen.locked);
     });
 
+    test('M03 checkpoint is measured: only a measured pass opens M04', () {
+      final records = {
+        for (final id in ['gtr-s1-m01-08', 'gtr-s1-m02-10']) id: passed(id),
+      };
+      final gate = catalog.lesson('gtr-s1-m03-10')!;
+      var s = state(records: records, checks: {gate.id: self(gate.id)});
+      expect(s.gateClear(gate), V1GateClear.none);
+      expect(s.units['gtr-s1-m04'], V1UnitOpen.locked);
+      s = state(records: {...records, gate.id: passed(gate.id)});
+      expect(s.units['gtr-s1-m04'], V1UnitOpen.open);
+    });
+
     test('a self-report never clears a measurable gate', () {
       final s = state(
         records: {'gtr-s1-m01-08': passed('gtr-s1-m01-08')},
@@ -205,20 +278,21 @@ void main() {
 
     test('held gate: self-check opens the next module "not measured"', () {
       final records = {
-        for (final id in ['gtr-s1-m01-08', 'gtr-s1-m02-10']) id: passed(id),
+        for (final id in ['gtr-s1-m01-08', 'gtr-s1-m02-10', 'gtr-s1-m03-10'])
+          id: passed(id),
       };
       var s = state(records: records);
-      final held = catalog.lesson('gtr-s1-m03-10')!;
-      expect(s.units['gtr-s1-m03'], V1UnitOpen.open);
+      final held = catalog.lesson('gtr-s1-m04-11')!;
+      expect(s.units['gtr-s1-m04'], V1UnitOpen.open);
       expect(s.status(held), V1LessonStatus.held);
-      expect(s.units['gtr-s1-m04'], V1UnitOpen.locked);
+      expect(s.units['gtr-s1-test'], V1UnitOpen.locked);
       s = state(records: records, checks: {held.id: self(held.id)});
       expect(s.gateClear(held), V1GateClear.selfReported);
       expect(s.status(held), V1LessonStatus.heldSelfReported);
-      expect(s.units['gtr-s1-m04'], V1UnitOpen.openNotMeasured);
-      expect(s.isOpen('gtr-s1-m04-01'), isTrue);
-      // The label does not travel on: a later measured gate opens normally.
-      expect(s.units['gtr-s1-test'], V1UnitOpen.locked);
+      expect(s.units['gtr-s1-test'], V1UnitOpen.openNotMeasured);
+      expect(s.isOpen('gtr-s1-test'), isTrue);
+      // The label does not travel on: the next gate must clear on its own.
+      expect(s.units['gtr-s2-m05'], V1UnitOpen.locked);
     });
 
     test('S4 track opens "not measured" when one of M15/M17 is held', () {

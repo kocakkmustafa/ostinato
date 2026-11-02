@@ -1,0 +1,74 @@
+{
+  "id": "pno-s1-m04-06",
+  "title": { "en": "Paired eighth notes", "tr": "Çift sekizlikler" },
+  "goal": {
+    "en": "Plays pairs of eighth notes evenly in an original four-bar right-hand line at ♩=60.",
+    "tr": "Özgün dört ölçülük sağ el dizisinde sekizlik çiftlerini ♩=60'ta eşit çalar."
+  },
+  "explanation": [
+    {
+      "en": "An eighth note lasts half a beat. Two eighths beamed together fill one beat.",
+      "tr": "Sekizlik yarım vuruş sürer. Kirişle bağlı iki sekizlik bir vuruşu doldurur."
+    },
+    {
+      "en": "Count eighths as \"1 & 2 &\". The first eighth falls on the number, the second on the \"&\".",
+      "tr": "Sekizlikleri \"1 ve 2 ve\" diye say. İlk sekizlik sayıya, ikincisi \"ve\"ye düşer."
+    },
+    {
+      "en": "Keep each pair even: both notes the same length, like a ticking clock. Do not let the second one rush.",
+      "tr": "Her çifti eşit tut: iki nota aynı uzunlukta, saat tıkırtısı gibi. İkincisi acele etmesin."
+    },
+    {
+      "en": "Each pair uses neighbouring fingers. Stay close to the keys, so the second note needs no big movement.",
+      "tr": "Her çift komşu parmaklarla çalınır. Tuşlara yakın dur; ikinci nota büyük bir hareket istemesin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The original four-bar line with a click, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Klikle özgün dört ölçülük dizi, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Say \"1 & 2 & 3 & 4 &\" with the click for one bar. Then play the four bars with the right hand in C position at ♩=60.",
+      "tr": "Bir ölçü boyunca klikle \"1 ve 2 ve 3 ve 4 ve\" de. Sonra dört ölçüyü sağ el Do konumunda ♩=60'ta çal."
+    },
+    "sequence": "4/4: C4:e D4:e E4:q E4:e F4:e G4:q | G4:e F4:e E4:q D4:h | E4:e F4:e E4:e D4:e C4:q E4:q | D4:e C4:e D4:q C4:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both eighths of each pair were the same length.", "tr": "Her çiftteki iki sekizlik aynı uzunluktaydı." },
+    { "en": "I counted \"1 & 2 &\" through the line.", "tr": "Dizi boyunca \"1 ve 2 ve\" diye saydım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The second eighth is rushing. Say \"&\" clearly and play on it, not before.",
+        "tr": "İkinci sekizlik acele ediyor. \"Ve\"yi net söyle ve onun üstünde çal, önce değil."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The quarter after a pair comes late. Keep counting: the next number comes right after the \"&\".",
+        "tr": "Çiftten sonraki dörtlük geç geliyor. Saymayı sürdür: sonraki sayı \"ve\"den hemen sonra gelir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap the rhythm while saying \"1 & 2 &\", then play it on C4 only, then add the pitches.",
+    "tr": "\"1 ve 2 ve\" diyerek ritmi alkışla, sonra yalnız Do4'te çal, sonra perdeleri ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}
