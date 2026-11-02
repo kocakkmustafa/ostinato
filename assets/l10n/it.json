@@ -8444,6 +8444,8 @@
     "6afa082a5c331043": "Nella pratica misurata il microfono ascolta le note che suoni. Una lezione è superata quando una quota sufficiente delle sue note viene sentita come corretta; la quota richiesta cresce con il livello. Il permesso viene chiesto alla prima misurazione. L’audio viene elaborato su questo dispositivo e non viene caricato; ciò che suoni non viene registrato, a meno che tu non attivi l’ascolto della tua registrazione. Fermare, uscire dalla schermata, cambiare account o portare l’app in secondo piano chiude il microfono.",
     "2458f83652e85824": "La precisione dipende dal microfono del telefono e dalla stanza; i risultati misurati possono variare.",
     "4360eb5d0a20a482": "{v0} Ogni riferimento posturale deriva da riprese didattiche dalla vita in su: per questo non viene rilevato nulla sotto i fianchi.",
-    "a51b8da5ff450285": "Una corda nuova si allunga: controllala di nuovo dopo qualche minuto."
+    "a51b8da5ff450285": "Una corda nuova si allunga: controllala di nuovo dopo qualche minuto.",
+    "649ba097da874350": "Il corso di voce tratterà un inizio comodo e sano, l’intonazione delle note, scale ed estensione, intervalli, ritmo e lettura cantata, e le prime canzoni.",
+    "c722e9fcc9046c7d": "Il corso di pianoforte tratterà postura e forma della mano, lettura in entrambe le chiavi, ritmo, scale e triadi, suonare a due mani, schemi di accompagnamento e primi brani."
   }
 }

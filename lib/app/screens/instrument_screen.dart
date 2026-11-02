@@ -9,6 +9,7 @@ import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../ostinato_release_policy.dart';
+import 'coming_soon_instrument_screen.dart';
 import 'course_screen.dart';
 import 'feedback_availability.dart';
 import 'guitar_journey_screen.dart';
@@ -24,6 +25,11 @@ class InstrumentScreenRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // v1: an instrument whose course is not open shows only "Coming soon"
+    // and what the course will cover; no lessons open from it.
+    if (!ostinatoOpenInstruments.contains(discipline.id)) {
+      return ComingSoonInstrumentScreen(discipline: discipline);
+    }
     final InstrumentHue hue = OstinatoPalette.of(
       context,
     ).instrument(discipline.id);

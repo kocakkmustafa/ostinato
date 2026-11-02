@@ -11,6 +11,7 @@ import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'package:ostinato/app/practice/loop/v1_practice_list_screen.dart';
+import 'package:ostinato/app/screens/coming_soon_instrument_screen.dart';
 import 'package:ostinato/app/screens/instrument_screen.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 
@@ -157,6 +158,38 @@ void main() {
       await tester.pump(const Duration(milliseconds: 500));
       expect(find.byType(V1PracticeListScreen), findsOneWidget);
     });
+
+    // Store review 2026-11-02 (screens 38–42): voice and piano opened a
+    // "Foundations" course of nine posture-reference lessons.
+    for (final id in ['voice', 'piano']) {
+      testWidgets('$id page is a Coming soon page with no lessons', (
+        tester,
+      ) async {
+        tester.view.physicalSize = const Size(390, 3000);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        await load(tester);
+        expect(ostinatoOpenInstruments.contains(id), isFalse);
+        await tester.pumpWidget(
+          host(
+            InstrumentScreenRoute(
+              discipline: repo.disciplines.firstWhere((d) => d.id == id),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byKey(Key('coming-soon-page-$id')), findsOneWidget);
+        expect(find.byKey(const Key('coming-soon-line')), findsOneWidget);
+        expect(
+          find.text(ComingSoonInstrumentScreen.coverage(id)!.$1),
+          findsOneWidget,
+        );
+        // No course or lesson entries (they carry a chevron).
+        expect(find.byIcon(Icons.chevron_right), findsNothing);
+        expect(find.text('Foundations'), findsNothing);
+        expect(find.textContaining('posture'), findsNothing);
+      });
+    }
 
     testWidgets('piano page has no written-course link', (tester) async {
       tester.view.physicalSize = const Size(390, 3000);

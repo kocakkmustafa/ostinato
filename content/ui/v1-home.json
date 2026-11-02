@@ -102,6 +102,16 @@
       "tr": "Yakında · Bu kurs sonraki güncellemelerle açılacak."
     },
     {
+      "id": "comingSoonVoice",
+      "en": "The voice course will cover a comfortable, healthy start, pitch matching, scales and range, intervals, rhythm and sight-singing, and first songs.",
+      "tr": "Ses kursu rahat ve sağlıklı bir başlangıç, perde eşleştirme, gamlar ve menzil, aralıklar, ritim ve deşifre ile ilk şarkıları kapsayacak."
+    },
+    {
+      "id": "comingSoonPiano",
+      "en": "The piano course will cover seating and hand shape, reading both clefs, rhythm, scales and triads, playing with both hands, accompaniment patterns and first pieces.",
+      "tr": "Piyano kursu oturuş ve el şekli, iki anahtarda okuma, ritim, gamlar ve üçlüler, iki elle çalma, eşlik kalıpları ve ilk eserleri kapsayacak."
+    },
+    {
       "id": "measuredTitle",
       "en": "Measured practice",
       "tr": "Ölçülü pratik"

@@ -16,7 +16,10 @@ abstract final class V1HomeCopy {
     'To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato or Motion+ subscription.',
     'Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato veya Motion+ aboneliği gerektirir.',
   );
-  static const UiCopy scopeTitle = ('What’s inside', 'Neler var?');
+  static const UiCopy scopeTitle = (
+    'What’s inside',
+    'Neler var?',
+  );
   static const UiCopy scopePractice = (
     'Measured practice — click, scrolling tab, feedback on every note.',
     'Ölçülü pratik — klik, akan tab, nota başına geri bildirim.',
@@ -33,17 +36,26 @@ abstract final class V1HomeCopy {
     'Written lessons — the earlier 60-lesson path to read and work through at your own pace.',
     'Yazılı dersler — kendi hızında okuyup çalışabileceğin 60 derslik eski yol.',
   );
-  static const UiCopy micTitle = ('Microphone', 'Mikrofon');
+  static const UiCopy micTitle = (
+    'Microphone',
+    'Mikrofon',
+  );
   static const UiCopy micBody = (
     'In measured practice the microphone listens to the notes you play. Audio is processed on this device and is not sent. What you play is not recorded; if you like, you can turn on listening back to your own recording — it stays on your device and is deleted at the end of the session. We ask for permission at your first measured lesson. Without it you can still read the lessons and use the self-checks.',
     'Ölçülü pratikte mikrofon çaldığın notaları dinler. Ses bu cihazda işlenir; gönderilmez. Çaldığın kaydedilmez; istersen kendi kaydını dinleme seçeneğini açabilirsin, kayıt cihazında kalır ve oturum sonunda silinir. İzni ilk ölçülü derste isteriz. Vermezsen dersleri okuyup öz-kontrolle çalışabilirsin.',
   );
-  static const UiCopy cameraTitle = ('Camera', 'Kamera');
+  static const UiCopy cameraTitle = (
+    'Camera',
+    'Kamera',
+  );
   static const UiCopy cameraBody = (
     'The camera is used only in a few setup lessons, to look at hand and wrist posture. We ask for permission in that lesson. Video is processed on this device; it is not recorded or sent. All other lessons work without the camera.',
     'Kamera yalnız birkaç kurulum dersinde, el ve bilek duruşuna bakmak için kullanılır. İzni o derste isteriz. Görüntü cihazda işlenir; kaydedilmez, gönderilmez. Diğer dersler kamerasız çalışır.',
   );
-  static const UiCopy progressTitle = ('Your progress', 'İlerlemen');
+  static const UiCopy progressTitle = (
+    'Your progress',
+    'İlerlemen',
+  );
   static const UiCopy progressBody = (
     'Your lesson results, streak and weekly goal are kept on this device. If you sign in to a Motion account and agree, they sync to your account so you can continue on another device.',
     'Ders sonuçların, serin ve haftalık hedefin bu cihazda tutulur. Motion hesabına giriş yapıp onay verirsen hesabına eşitlenir ve başka cihazda devam edebilirsin.',
@@ -75,12 +87,30 @@ abstract final class V1HomeCopy {
     'Coming soon · This course opens in a later update.',
     'Yakında · Bu kurs sonraki güncellemelerle açılacak.',
   );
-  static const UiCopy measuredTitle = ('Measured practice', 'Ölçülü pratik');
+  /// What the voice course will cover; shown on its "Coming soon" page
+  /// while voice is not in `ostinatoOpenInstruments` (docs/v1-curriculum).
+  static const UiCopy comingSoonVoice = (
+    'The voice course will cover a comfortable, healthy start, pitch matching, scales and range, intervals, rhythm and sight-singing, and first songs.',
+    'Ses kursu rahat ve sağlıklı bir başlangıç, perde eşleştirme, gamlar ve menzil, aralıklar, ritim ve deşifre ile ilk şarkıları kapsayacak.',
+  );
+
+  /// What the piano course will cover; shown on its "Coming soon" page.
+  static const UiCopy comingSoonPiano = (
+    'The piano course will cover seating and hand shape, reading both clefs, rhythm, scales and triads, playing with both hands, accompaniment patterns and first pieces.',
+    'Piyano kursu oturuş ve el şekli, iki anahtarda okuma, ritim, gamlar ve üçlüler, iki elle çalma, eşlik kalıpları ve ilk eserleri kapsayacak.',
+  );
+  static const UiCopy measuredTitle = (
+    'Measured practice',
+    'Ölçülü pratik',
+  );
   static const UiCopy measuredBody = (
     'Play with a click and a scrolling tab; every note is marked correct, different note or couldn’t hear. With 80% of notes correct, the next lesson opens.',
     'Klik ve akan tabla çal; her nota doğru, farklı nota ya da duyamadım diye işaretlenir. Notaların %80’i doğruysa sıradaki ders açılır.',
   );
-  static const UiCopy startNext = ('Start next lesson', 'Sıradaki derse başla');
+  static const UiCopy startNext = (
+    'Start next lesson',
+    'Sıradaki derse başla',
+  );
   static const UiCopy writtenLabel = (
     'WRITTEN LESSONS · 60 LESSONS',
     'YAZILI DERSLER · 60 DERS',
@@ -119,6 +149,8 @@ abstract final class V1HomeCopy {
     guitarCardOpen,
     guitarCardNext,
     comingSoon,
+    comingSoonVoice,
+    comingSoonPiano,
     measuredTitle,
     measuredBody,
     startNext,
