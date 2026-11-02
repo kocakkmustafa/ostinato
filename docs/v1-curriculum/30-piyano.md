@@ -158,7 +158,7 @@ Ek güvenlik: tüm modül **P2**.
 | pno-s2-m08-08 | Staccato against legato / Legatoya karşı staccato | Bir el legato, diğeri staccato çalar | Özgün 4 ölçü | M~ / MIDI | A6p | — | — |
 | pno-s2-m08-09 | Original two-hand study / Özgün iki el etüdü | Dört ölçülük iki el etüdünü çalar | Özgün 4 ölçü (tek yeni nota) · ♩=70 | M | A6+A3 | — | R: piano-15 |
 | pno-s2-m08-10 | Map a new piece on your own / Yeni parçayı kendin haritala | Parçayı bölümlere ayırıp ilk bölümü öğrenir | D: bölümleri işaretle + 4 ölçü çal | D+M | A6+A3 | — | R: piano-23 |
-| pno-s2-m08-11 | Türk: a two-hand Handstück / Türk: iki elli el parçası | Kamu malı iki elli parçayı çalar | Seçme (tek yeni nota uyumlu) · ♩=72 | M | A6+A3 | — | — |
+| pno-s2-m08-11 | Türk: a two-hand Handstück / Türk: iki elli el parçası | Kamu malı iki elli parçayı çalar | Türk No. 9 (1797), anacrusis + 8 ölçü (tek yeni nota uyumlu) · ♩=60 (Largo molto) | M | A6+A3 | — | — |
 | pno-s2-m08-12 | Beyer: a first study / Beyer: ilk etüt | Beyer Op. 101'den bir etüdü çalar | Seçme · ♩=72 (çakışan ataklar deneysel) | M | A6+A3 | — | — |
 | pno-s2-m08-13 | Two-hand checkpoint / İki el geçişi | İki elli parçayı çalar | Özgün 8 ölçü (tek yeni nota) · ♩=76 · geçiş | M! | A6+A3 | — | — |
 
@@ -250,7 +250,7 @@ Mikrofon pedalı doğrudan ölçmez; pedal **Ö** ile, notalar **A6** ile değer
 | pno-s3-m13-06 | Slash chords and bass notes / Bölü akorlar ve bas | Bölü akorda basın yerini bulur | 4 bölü akor kırık | M | A6 | — | — |
 | pno-s3-m13-07 | C7, G7 and Dm7 / C7, G7 ve Dm7 | 7'li akorları kırık çalar | 3 akor · ♩=60 | M | A6+A3 | — | — |
 | pno-s3-m13-08 | Block comping on beat one / Birinci vuruşta blok eşlik | Sol elde blok akorla eşlik eder | 8 ölçü | M~ / MIDI | A6p | SE | — |
-| pno-s3-m13-09 | Amazing Grace from a lead sheet / Lead sheet'ten Amazing Grace | Geleneksel ezgiyi semboller üstünden çalar | 16 ölçü; melodi + kök (ölçülür), blok (deneysel) | M | A6+A3 | — | — |
+| pno-s3-m13-09 | Amazing Grace from a lead sheet / Lead sheet'ten Amazing Grace | Geleneksel ezgiyi semboller üstünden çalar | Anacrusis + 14 ölçü (Southern Harmony 1847); melodi + kök (ölçülür), blok (deneysel) | M | A6+A3 | — | — |
 | pno-s3-m13-10 | Transposing a lead sheet / Lead sheet'i taşımak | Kısa lead sheet'i yeni tona taşır | Özgün 8 ölçü, C→G | M | A6+A3 | — | — |
 | pno-s3-m13-11 | An unseen lead sheet / Görülmemiş lead sheet | İlk görüşte melodi + kök çalar | Görülmemiş 8 ölçü · ♩=66 | M | A6+A3 | — | — |
 | pno-s3-m13-12 | Lead-sheet checkpoint / Lead sheet geçişi | Lead sheet'ten melodi ve kök çalar | Görülmemiş 16 ölçü · ♩=72 · geçiş | M! | A6+A3 | — | — |
@@ -271,7 +271,7 @@ Mikrofon pedalı doğrudan ölçmez; pedal **Ö** ile, notalar **A6** ile değer
 | pno-s3-m14-10 | Czerny Op. 599: a study / Czerny Op. 599: bir etüt | Czerny etüdünü çalar | Op. 599'dan seçme · ♩=80 | M | A6+A3 | P2 | — |
 | pno-s3-m14-11 | Beyer Op. 101: a later study / Beyer Op. 101: ileri bir etüt | Beyer'in ileri etüdünü çalar | Seçme · ♩=80 | M | A6+A3 | — | — |
 | pno-s3-m14-12 | Schumann: Melodie / Schumann: Melodie | Op. 68 No. 1'i çalar | Op. 68 No. 1 | M~ / MIDI | A6p | — | — |
-| pno-s3-m14-13 | Leopold Mozart: a Minuet / Leopold Mozart: bir Menuet | Nannerl defterinden menueti çalar | Seçme · ♩=80 | M | A6+A3 | — | — |
+| pno-s3-m14-13 | Minuet in G minor (Notebook for Anna Magdalena) / Sol minör Menuet (Anna Magdalena için Defter) | Anna Magdalena defterinden sol minör menueti çalar (BWV Anh. 115; Callwey 1906) | 32 ölçü, sağ el ölçülür · ♩=80 | M | A6+A3 | — | — |
 | pno-s3-m14-14 | Hanon No. 1, carefully / Dikkatle Hanon No. 1 | Hanon No. 1'i eller ayrı, gerilimsiz çalar | İlk 4 ölçü ×2 el · ♩=60 | M | A6+A3 | KL, P2 | — |
 | pno-s3-m14-15 | Preparing a performance / Performansa hazırlık | Harita, yavaş tempo, döngü ve tempo merdivenini uygular | Ö plan + seçilen parçanın 8 ölçüsü | M+Ö | A6+A3 | — | — |
 | pno-s3-m14-16 | Repertoire checkpoint / Repertuvar geçişi | Bir kamu malı eseri çalar | Seçilen eser, tek yeni nota sürümü ölçülür (tam sürüm MIDI/deneysel) · geçiş | M! | A6+A3 | — | — |

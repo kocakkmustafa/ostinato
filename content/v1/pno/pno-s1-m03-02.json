@@ -1,0 +1,85 @@
+{
+  "id": "pno-s1-m03-02",
+  "title": { "en": "The bass clef", "tr": "Fa anahtarı" },
+  "goal": {
+    "en": "Names F3 and C3 in the bass clef and plays notes read from it with the left hand.",
+    "tr": "Fa anahtarında Fa3 ve Do3'ü adlandırır, okuduğu notaları sol elle çalar."
+  },
+  "explanation": [
+    {
+      "en": "The two dots of the bass clef sit either side of line 4 and make it F3. That is why it is also called the F clef.",
+      "tr": "Fa anahtarının iki noktası 4. çizginin iki yanında durur ve o çizgiyi Fa3 yapar. Adı da buradan gelir."
+    },
+    {
+      "en": "The bass clef is for lower notes: the piano's left hand, low voices, the bass guitar.",
+      "tr": "Fa anahtarı alçak sesler içindir: piyanoda sol el, kalın sesler, bas gitar."
+    },
+    {
+      "en": "C3 sits in space 2. Your left-hand position C3 D3 E3 F3 G3 is space 2, line 3, space 3, line 4, space 4.",
+      "tr": "Do3 2. aralıktadır. Sol el konumun Do3 Re3 Mi3 Fa3 Sol3; 2. aralık, 3. çizgi, 3. aralık, 4. çizgi, 4. aralıktır."
+    },
+    {
+      "en": "The lines from bottom to top are G2, B2, D3, F3 and A3.",
+      "tr": "Çizgiler aşağıdan yukarıya Sol2, Si2, Re3, Fa3 ve La3'tür."
+    },
+    {
+      "en": "The same place on the staff has a different name in each clef. Check the clef before you read.",
+      "tr": "Portede aynı yer her anahtarda farklı bir notadır. Okumadan önce anahtara bak."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each note in part 2 is played once after your attempt, piano synthesis.",
+      "tr": "2. bölümdeki her nota, denemenden sonra bir kez çalınır; piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "Part 1: answer 8 questions; name the note shown in the bass clef. Part 2: the screen shows four notes in the bass clef. Read each one and play it with the left hand in C position. No click; take your time.",
+      "tr": "1. bölüm: 8 soruyu cevapla; fa anahtarında gösterilen notayı adlandır. 2. bölüm: ekran fa anahtarında dört nota gösterir. Her birini oku ve sol elle Do konumunda çal. Klik yok; acele etme."
+    },
+    "sequence": "F3 C3 G3 E3",
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "note_name",
+      "count": 8,
+      "params": { "clef": "bass", "range": ["C3", "G3"], "landmarks": ["F3", "C3"] }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found F3 between the two dots before reading the other notes.", "tr": "Diğer notaları okumadan önce iki noktanın arasındaki Fa3'ü buldum." },
+    { "en": "I checked line or space before naming each note.", "tr": "Her notayı adlandırmadan önce çizgi mi aralık mı, ona baktım." },
+    { "en": "I played each note below middle C, in the left-hand position.", "tr": "Her notayı orta Do'nun altında, sol el konumunda çaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer, two steps low: read as if in the treble clef.",
+        "tr": "Farklı cevap, iki basamak aşağı: sol anahtarındaymış gibi okunmuş."
+      },
+      "fix": {
+        "en": "Find F3 between the two dots on line 4, then step from there.",
+        "tr": "4. çizgide iki noktanın arasındaki Fa3'ü bul, oradan adım at."
+      }
+    },
+    {
+      "error": { "en": "Different note, an octave high.", "tr": "Farklı nota, bir oktav yüksek." },
+      "fix": {
+        "en": "Bass-clef notes here sit below middle C. Play them with the left hand, from C3 to G3.",
+        "tr": "Buradaki fa anahtarı notaları orta Do'nun altındadır. Onları sol elle, Do3'ten Sol3'e çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Say the line notes out loud before each round: G, B, D, F, A.",
+    "tr": "Her turdan önce çizgi notalarını sesli say: Sol, Si, Re, Fa, La."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,114 @@
+{
+  "id": "pno-s2-m06-12",
+  "title": {
+    "en": "Scale checkpoint",
+    "tr": "Gam geçişi"
+  },
+  "goal": {
+    "en": "Plays C, G and F major and A harmonic minor one octave, hands separate, at ♩=80.",
+    "tr": "Do, Sol ve Fa majör ile armonik La minör gamlarını bir oktav, eller ayrı, ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "You play four scales, each hand separately: C, G and F major, then A harmonic minor.",
+      "tr": "Dört gam çalarsın, her eli ayrı: Do, Sol ve Fa majör, sonra armonik La minör."
+    },
+    {
+      "en": "Before each scale, say the key and its black keys: G has F♯, F has B♭, A harmonic minor has G♯.",
+      "tr": "Her gamdan önce tonu ve siyah tuşlarını söyle: Sol majörde Fa♯, Fa majörde Si♭, armonik La minörde Sol♯ var."
+    },
+    {
+      "en": "Watch the right hand in F major: 1-2-3-4-1-2-3-4, finger 4 on B♭4.",
+      "tr": "Fa majörde sağ ele dikkat: 1-2-3-4-1-2-3-4, Si♭4'te 4. parmak."
+    },
+    {
+      "en": "Use the empty bar between scales to move the hand and read the next key.",
+      "tr": "Gamlar arasındaki boş ölçüyü eli taşımak ve sonraki tonu okumak için kullan."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C, G, F major and A harmonic minor, each right hand then left hand with an empty bar between, quarter notes with a click, at ♩=80 and at ♩=55, piano synthesis.",
+      "tr": "Klikle dörtlüklerle Do, Sol, Fa majör ve armonik La minör, her biri önce sağ sonra sol el, aralarında birer boş ölçü, ♩=80 ve ♩=55, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the four scales in order, right hand then left hand, along with the click at ♩=80. Practise slower first if you like; the checkpoint counts at ♩=80.",
+      "tr": "Dört gamı sırayla, önce sağ sonra sol elle, ♩=80'de klikle birlikte çal. İstersen önce yavaş çalış; geçiş ♩=80'de sayılır."
+    },
+    "sequence": "C4 D4 E4 F4 | G4 A4 B4 C5 | B4 A4 G4 F4 | E4 D4 C4:h | wr | C3 D3 E3 F3 | G3 A3 B3 C4 | B3 A3 G3 F3 | E3 D3 C3:h | wr | G4 A4 B4 C5 | D5 E5 F♯5 G5 | F♯5 E5 D5 C5 | B4 A4 G4:h | wr | G3 A3 B3 C4 | D4 E4 F♯4 G4 | F♯4 E4 D4 C4 | B3 A3 G3:h | wr | F4 G4 A4 B♭4 | C5 D5 E5 F5 | E5 D5 C5 B♭4 | A4 G4 F4:h | wr | F3 G3 A3 B♭3 | C4 D4 E4 F4 | E4 D4 C4 B♭3 | A3 G3 F3:h | wr | A4 B4 C5 D5 | E5 F5 G♯5 A5 | G♯5 F5 E5 D5 | C5 B4 A4:h | wr | A3 B3 C4 D4 | E4 F4 G♯4 A4 | G♯4 F4 E4 D4 | C4 B3 A3:h",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "A sharp became a white key: F♯ in G major or G♯ in A minor. Say the black key aloud in the empty bar before the scale.",
+        "tr": "Bir diyez beyaz tuşa dönüştü: Sol majörde Fa♯ ya da La minörde Sol♯. Gamdan önceki boş ölçüde siyah tuşu sesli söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "In F major, B♭ became B. The right hand changes fingering here; finger 4 lands on the black key.",
+        "tr": "Fa majörde Si♭, Si'ye dönüştü. Sağ elin parmakları burada değişir; 4. parmak siyah tuşa iner."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "A thumb crossing is late at ♩=80. Loop that scale alone at ♩=65, then go back to ♩=80.",
+        "tr": "♩=80'de bir başparmak geçişi geç kalıyor. O gamı tek başına ♩=65'te döngüle, sonra ♩=80'e dön."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise each scale as its own run at ♩=70: right hand, empty bar, left hand. Then join all four.",
+    "tr": "Her gamı ♩=70'te ayrı bir tur olarak çalış: sağ el, boş ölçü, sol el. Sonra dördünü birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

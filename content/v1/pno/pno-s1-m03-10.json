@@ -1,0 +1,81 @@
+{
+  "id": "pno-s1-m03-10",
+  "title": { "en": "Left-hand checkpoint", "tr": "Sol el geçişi" },
+  "goal": {
+    "en": "Plays an original eight-bar study that passes between the hands and ends low in the left hand, at ♩=76.",
+    "tr": "Eller arasında geçen ve sol elde peste biten özgün sekiz ölçülük çalışmayı ♩=76'da çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "Bars 1–4 alternate hands, one bar each: right hand from C4, left hand from C3.",
+      "tr": "1–4. ölçülerde eller ölçü ölçü sırayla çalar: sağ el Do4'ten, sol el Do3'ten."
+    },
+    {
+      "en": "Bars 5–6 are a left-hand melody in C position. The quarter rest at the end of bar 6 is your time to move the left hand down one octave.",
+      "tr": "5–6. ölçüler Do konumunda sol el melodisidir. 6. ölçünün sonundaki dörtlük sus, sol eli bir oktav aşağı taşıma zamanındır."
+    },
+    {
+      "en": "Bars 7–8 sit low: thumb on G2, ending on C2 with finger 5.",
+      "tr": "7–8. ölçüler pestedir: başparmak Sol2'de, 5. parmakla Do2'de biter."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original eight-bar study at ♩=76 and ♩=50, piano synthesis.",
+      "tr": "Özgün sekiz ölçülük çalışma, ♩=76 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the eight-bar study with the click at ♩=76. Bar 1 right hand C4 E4 G4 E4; bar 2 left hand C3 E3 G3 E3; bar 3 right hand D4 F4 E4 D4; bar 4 left hand C3 D3, then E3 for two beats; bar 5 left hand E3 F3 G3 F3; bar 6 E3 D3 C3, rest; bar 7 G2 F2 E2 D2; bar 8 C2 held four beats. Practise slower first if you like; the checkpoint counts at ♩=76.",
+      "tr": "Sekiz ölçülük çalışmayı ♩=76'da klikle çal. 1. ölçü sağ el Do4 Mi4 Sol4 Mi4; 2. ölçü sol el Do3 Mi3 Sol3 Mi3; 3. ölçü sağ el Re4 Fa4 Mi4 Re4; 4. ölçü sol el Do3 Re3, sonra iki vuruş Mi3; 5. ölçü sol el Mi3 Fa3 Sol3 Fa3; 6. ölçü Mi3 Re3 Do3, sus; 7. ölçü Sol2 Fa2 Mi2 Re2; 8. ölçü dört vuruş Do2. İstersen önce yavaş çalış; geçiş ♩=76'da sayılır."
+    },
+    "sequence": "C4 E4 G4 E4 | C3 E3 G3 E3 | D4 F4 E4 D4 | C3 D3 E3:h | E3 F3 G3 F3 | E3 D3 C3 qr | G2 F2 E2 D2 | C2:w",
+    "tempo": { "open": 76, "target": 76 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Bar 7 comes late after the octave move. Lift the hand on the rest in bar 6 and land with the thumb on G2. Loop bars 6–7 at ♩=55.",
+        "tr": "Oktav taşımasından sonra 7. ölçü geç geliyor. 6. ölçüdeki susta eli kaldır ve başparmakla Sol2'ye kon. 6–7. ölçüleri ♩=55'te döngüle."
+      }
+    },
+    {
+      "error": { "en": "Different note, an octave high.", "tr": "Farklı nota, bir oktav yüksek." },
+      "fix": {
+        "en": "Bars 7–8 stayed in the C3 position. Move the whole hand down to C2 to G2.",
+        "tr": "7–8. ölçüler Do3 konumunda kalmış. Bütün eli Do2–Sol2'ye indir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Low notes need a clear start. Press each key fully and move the phone toward the left end of the keyboard.",
+        "tr": "Pes notalar net bir başlangıç ister. Her tuşa tam bas ve telefonu klavyenin sol ucuna doğru yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 and bars 5–8 as two separate four-bar studies at ♩=55, then join them.",
+    "tr": "1–4. ve 5–8. ölçüleri ♩=55'te iki ayrı dört ölçülük çalışma olarak çal, sonra birleştir."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

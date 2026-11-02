@@ -1,0 +1,127 @@
+{
+  "id": "pno-s3-m11-12",
+  "title": {
+    "en": "Accompaniment checkpoint",
+    "tr": "Eşlik geçişi"
+  },
+  "goal": {
+    "en": "Plays 16 bars of left-hand accompaniment in three patterns, broken-chord bass, walking bass and Alberti, at ♩=80.",
+    "tr": "Üç kalıpta 16 ölçülük sol el eşliğini çalar: kırık akor bası, yürüyen bas ve Alberti, ♩=80'de."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "Three patterns in a row, left hand alone: bars 1–4 root-fifth-octave on C, F, G, C; bars 5–8 the walking bass; bars 9–16 Alberti on C, F, G, C, C, F, G7, C.",
+      "tr": "Art arda üç kalıp, yalnız sol el: 1–4. ölçüler C, F, G, C üzerinde kök-beşli-oktav; 5–8. ölçüler yürüyen bas; 9–16. ölçüler C, F, G, C, C, F, G7, C üzerinde Alberti."
+    },
+    {
+      "en": "The checkpoint measures the left hand. The right hand is optional: add a melody of your own afterwards if you like, outside the measured run.",
+      "tr": "Geçiş sol eli ölçer. Sağ el isteğe bağlıdır: istersen ölçülen turdan sonra kendi melodini ekle."
+    },
+    {
+      "en": "Bar 8 ends with a half rest. Use it to place the hand for the Alberti: finger 5 on C3, thumb on G3.",
+      "tr": "8. ölçü ikilik susla biter. Onu Alberti için eli yerleştirmekte kullan: 5. parmak Do3'te, başparmak Sol3'te."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The 16 bars in order, broken-chord bass, walking bass and Alberti, with a click, at ♩=80 and at ♩=55, piano synthesis.",
+      "tr": "16 ölçü sırayla, kırık akor bası, yürüyen bas ve Alberti, klikle, ♩=80 ve ♩=55, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the 16 bars with the left hand along with the click at ♩=80: bars 1–8 in quarters, bars 9–16 in eighths. Practise slower first if you like; the checkpoint counts at ♩=80.",
+      "tr": "16 ölçüyü sol elle ♩=80'de klikle birlikte çal: 1–8. ölçüler dörtlük, 9–16. ölçüler sekizlik. İstersen önce yavaş çalış; geçiş ♩=80'de sayılır."
+    },
+    "sequence": "4/4: C3 G3 C4 G3 | F2 C3 F3 C3 | G2 D3 G3 D3 | C3 G3 C4 G3 | C3 D3 E3 G3 | F3 E3 D3 C3 | B2 C3 D3 B2 | C3:h hr | C3:e G3:e E3:e G3:e C3:e G3:e E3:e G3:e | C3:e A3:e F3:e A3:e C3:e A3:e F3:e A3:e | B2:e G3:e D3:e G3:e B2:e G3:e D3:e G3:e | C3:e G3:e E3:e G3:e C3:e G3:e E3:e G3:e | C3:e G3:e E3:e G3:e C3:e G3:e E3:e G3:e | C3:e A3:e F3:e A3:e C3:e A3:e F3:e A3:e | B2:e G3:e F3:e G3:e B2:e G3:e F3:e G3:e | C3:e G3:e E3:e G3:e C3:h",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Every note was the same length and the same loudness.",
+      "tr": "Her nota aynı uzunlukta ve aynı gürlükteydi."
+    },
+    {
+      "en": "I moved to the new position during the rest without rushing the count.",
+      "tr": "Sayımı hızlandırmadan sus sırasında yeni konuma geçtim."
+    },
+    {
+      "en": "The eighths did not stop at the chord changes.",
+      "tr": "Sekizlikler akor değişimlerinde durmadı."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The first Alberti bar is late after the rest. Place finger 5 on C3 and the thumb on G3 during the half rest.",
+        "tr": "Sustan sonra ilk Alberti ölçüsü geç. İkilik sus sırasında 5. parmağı Do3'e, başparmağı Sol3'e yerleştir."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "The thumb fell short of the octave, landing one white key below the root's name. Feel the octave as finger 5 and thumb on two keys with the same name.",
+        "tr": "Başparmak oktava ulaşmadı, kökün adından bir beyaz tuş aşağıya indi. Oktavı, aynı adlı iki tuşta 5. parmak ve başparmak olarak hisset."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The eighths in bars 9–16 rush. Count \"1 and 2 and\" from the start of bar 9.",
+        "tr": "9–16. ölçülerdeki sekizlikler aceleye geliyor. 9. ölçünün başından itibaren \"1 ve 2 ve\" say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each pattern as a separate run at ♩=70, then join them at ♩=80.",
+    "tr": "Her kalıbı ♩=70'te ayrı bir tur olarak çal, sonra ♩=80'de birleştir."
+  },
+  "minutes": 20,
+  "expertPending": true
+}

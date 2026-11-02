@@ -1,0 +1,107 @@
+{
+  "id": "pno-s2-m07-04",
+  "title": {
+    "en": "Broken then blocked",
+    "tr": "Önce kırık sonra blok"
+  },
+  "goal": {
+    "en": "Plays C, Am, F and G broken, then the same four triads blocked.",
+    "tr": "C, Am, F ve G üçlülerini önce kırık, sonra aynı dördünü blok çalar."
+  },
+  "explanation": [
+    {
+      "en": "Broken and blocked are two ways to play the same three notes. The hand shape does not change.",
+      "tr": "Kırık ve blok aynı üç notayı çalmanın iki yoludur. El şekli değişmez."
+    },
+    {
+      "en": "Play the broken triad first. It shows each finger where its key is.",
+      "tr": "Önce kırık üçlüyü çal. Her parmağa tuşunun yerini gösterir."
+    },
+    {
+      "en": "C is C4 E4 G4, Am is A4 C5 E5, F is F4 A4 C5 and G is G4 B4 D5. Use fingers 1-3-5 throughout.",
+      "tr": "C Do4 Mi4 Sol4, Am La4 Do5 Mi5, F Fa4 La4 Do5, G Sol4 Si4 Re5'tir. Hep 1-3-5. parmakları kullan."
+    },
+    {
+      "en": "The broken pass is measured and counts. The blocked pass is experimental and does not lock your progress; with MIDI it is exact.",
+      "tr": "Kırık bölüm ölçülür ve sayılır. Blok bölüm deneyseldir ve ilerlemeni kilitlemez; MIDI'yle kesindir."
+    },
+    {
+      "en": "G leads back to C. Loop the four triads to hear it.",
+      "tr": "G seni C'ye geri götürür. Bunu duymak için dört üçlüyü döngüle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "C, Am, F and G broken (root-3-5, the fifth held), then the same triads blocked, slow, piano synthesis.",
+      "tr": "C, Am, F ve G kırık (kök-3-5, beşli tutulur), sonra aynı üçlüler blok, yavaş, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A6p"
+    ],
+    "task": {
+      "en": "Right hand, fingers 1-3-5. Part 1, measured: play each triad broken, root-third-fifth, and hold the fifth for two beats: C, Am, F, G. Part 2, experimental: play the same four triads blocked, one per bar, held for four beats. Take your own steady tempo.",
+      "tr": "Sağ el, 1-3-5. parmaklar. 1. bölüm, ölçülür: her üçlüyü kök-üçlü-beşli kırık çal, beşliyi iki vuruş tut: C, Am, F, G. 2. bölüm, deneysel: aynı dört üçlüyü ölçü başına bir tane, dört vuruş tutarak blok çal. Kendi düzenli temponu seç."
+    },
+    "sequence": "4/4: C4 E4 G4:h | A4 C5 E5:h | F4 A4 C5:h | G4 B4 D5:h",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each blocked chord used the same fingers as its broken version.",
+      "tr": "Her blok akor, kırık hâliyle aynı parmakları kullandı."
+    },
+    {
+      "en": "All three notes of each blocked chord started together.",
+      "tr": "Her blok akorun üç notası birlikte başladı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "Place the thumb on the new root first. Then skip one white key for finger 3 and one more for finger 5.",
+        "tr": "Önce başparmağı yeni köke koy. Sonra 3. parmak için bir beyaz tuş, 5. parmak için bir beyaz tuş daha atla."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "A broken note was too soft after the hand move. Play each note to the bottom of the key.",
+        "tr": "El taşındıktan sonra kırık bir nota çok hafif kaldı. Her notayı tuşun dibine kadar çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only C and F, broken then blocked, before adding Am and G.",
+    "tr": "Am ve G'yi eklemeden önce yalnız C ve F'yi kırık sonra blok çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

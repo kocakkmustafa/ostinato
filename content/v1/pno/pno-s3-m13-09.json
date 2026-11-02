@@ -1,0 +1,126 @@
+{
+  "id": "pno-s3-m13-09",
+  "title": {
+    "en": "Amazing Grace from a lead sheet",
+    "tr": "Lead sheet'ten Amazing Grace"
+  },
+  "goal": {
+    "en": "Plays the traditional hymn tune \"Amazing Grace\" from a 14-bar lead sheet in G at ♩=80: the right hand plays the melody and the left hand plays each chord root.",
+    "tr": "Geleneksel ilahi ezgisi \"Amazing Grace\"i Sol'de 14 ölçülük lead sheet'ten ♩=80'de çalar: sağ el melodiyi, sol el her akorun kökünü çalar."
+  },
+  "explanation": [
+    {
+      "en": "\"Amazing Grace\" is sung to an old American tune called \"New Britain\". The melody here follows an 1847 printing of William Walker's Southern Harmony. The tune is public domain. The lead sheet and its chord symbols are Ostinato's.",
+      "tr": "\"Amazing Grace\", \"New Britain\" adlı eski bir Amerikan ezgisiyle söylenir. Buradaki melodi, William Walker'ın Southern Harmony kitabının 1847 baskısını izler. Ezgi kamu malıdır. Lead sheet ve akor sembolleri Ostinato'nundur."
+    },
+    {
+      "en": "It is in 3/4 and in G major, so every F is F♯; this melody never uses one. It starts with a one-beat pickup on D4 before bar 1.",
+      "tr": "3/4'te ve Sol majördedir; bu yüzden her Fa, Fa♯'dir, ama bu melodide hiç Fa yok. 1. ölçüden önce Re4 üstünde bir vuruşluk ön çekimle başlar."
+    },
+    {
+      "en": "The chords are G | G | C | G | G | Em | G | D | C | Em | G | G | D | G. Left hand in C position: C3 with finger 5, D3 with 4, E3 with 3, G3 with 1.",
+      "tr": "Akorlar G | G | C | G | G | Em | G | D | C | Em | G | G | D | G. Sol el Do konumunda: Do3 5. parmakla, Re3 4. parmakla, Mi3 3. parmakla, Sol3 1. parmakla."
+    },
+    {
+      "en": "Every bar starts with a long melody note. Play the root on beat 2, under that held note, so only one new note starts at a time.",
+      "tr": "Her ölçü uzun bir melodi notasıyla başlar. Kökü 2. vuruşta, tutulan o notanın altında çal; böylece her an yalnız bir yeni nota başlar."
+    },
+    {
+      "en": "Right hand: thumb on D4, then E4 with 2, G4 with 3, A4 with 4, B4 with 5. For bars 6–8 move up: thumb on G4, A4 with 2, B4 with 3, D5 with 5. Move back down in bar 9.",
+      "tr": "Sağ el: başparmak Re4'te, sonra Mi4 2. parmakla, Sol4 3. parmakla, La4 4. parmakla, Si4 5. parmakla. 6–8. ölçülerde yukarı kay: başparmak Sol4'te, La4 2. parmakla, Si4 3. parmakla, Re5 5. parmakla. 9. ölçüde geri in."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The 14-bar lead sheet in G, melody with the left-hand root on beat 2, at ♩=80 and ♩=56, piano synthesis; chord symbols shown above the staff. Then once with left-hand block chords instead of roots.",
+      "tr": "Sol'de 14 ölçülük lead sheet, melodi ve 2. vuruşta sol el kökü, ♩=80 ve ♩=56, piyano sentezi; akor sembolleri portenin üstünde. Ardından bir kez kökler yerine sol elde blok akorlarla."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Count \"one, two\" and play the pickup D4 on beat 3. Then play the 14 bars with the click, ♩=70 first, then ♩=80. Hold each long melody note while the left hand plays the root under it on beat 2. The microphone measures the melody and the roots. Optional second pass: play the full chord as a left-hand block instead of the root; that result is experimental and does not count.",
+      "tr": "\"Bir, iki\" diye say ve ön çekim Re4'ü 3. vuruşta çal. Sonra 14 ölçüyü klikle, önce ♩=70'te, sonra ♩=80'de çal. Her uzun melodi notasını, sol el altında 2. vuruşta kökü çalarken tut. Mikrofon melodiyi ve kökleri ölçer. İsteğe bağlı ikinci tur: kök yerine akorun tamamını sol elde blok çal; bu sonuç deneyseldir ve sayılmaz."
+    },
+    "sequence": "3/4: hr D4:q | G4:q G3:q B4:e G4:e | B4:q G3:q A4:q | G4:q C3:q E4:q | D4:q G3:q D4:q | G4:q G3:q B4:e G4:e | B4:q E3:q A4:e B4:e | D5:q G3:q A4:e B4:e | D5:q D3:q B4:e A4:e | G4:q C3:q E4:e D4:e | G4:q E3:q E4:e D4:e | D4:q G3:q D4:q | G4:q G3:q B4:e G4:e | B4:q D3:q A4:q | G4:q G3:h",
+    "tempo": {
+      "open": 70,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each long melody note kept sounding while the root came in.",
+      "tr": "Her uzun melodi notası kök girerken çınlamayı sürdürdü."
+    },
+    {
+      "en": "The root came on beat 2 in every bar.",
+      "tr": "Kök her ölçüde 2. vuruşta geldi."
+    },
+    {
+      "en": "The melody sang above the left hand.",
+      "tr": "Melodi sol elin üstünde şarkı söyler gibi duyuldu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The root is rushed onto beat 1 with the melody. Say \"long, root, short\" through each bar.",
+        "tr": "Kök melodiyle birlikte 1. vuruşa kaçıyor. Her ölçüde \"uzun, kök, kısa\" diye say."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "In bars 7 and 8 finger 5 did not reach D5. Move the right hand up at the start of bar 6, thumb to G4.",
+        "tr": "7. ve 8. ölçülerde 5. parmak Re5'e yetişmedi. Sağ eli 6. ölçünün başında yukarı kaydır, başparmak Sol4'e."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the melody alone at ♩=60 until it is fluent. Then add the roots in bars 1–7 only, and later in all 14 bars.",
+    "tr": "Akıcı olana kadar melodiyi tek başına ♩=60'ta çal. Sonra kökleri yalnız 1–7. ölçülere, daha sonra 14 ölçünün tamamına ekle."
+  },
+  "repertoire": "\"Amazing Grace\", hymn tune \"New Britain\": anonymous American tune; words by John Newton (1725–1807), not used. Melody as printed in William Walker, The Southern Harmony, and Musical Companion, new edition (Philadelphia: E. W. Miller, 1847), p. 8, \"New Britain. C. M.\" (tune in the middle part, key C, 3/4); scan: https://archive.org/details/southernharmonym00walk (scan page 46). Reading taken from the voice lesson voc-s4-m16-12, which checked each pitch against its shape-note syllable, and transposed from C to G. Walker repeats the last two lines with first and second endings; this lesson plays them once and takes the second ending, so the tune is a one-beat pickup and 14 bars. Lead sheet, chord symbols, fingering and tempo by Ostinato. Public domain: published before 1931; Walker (1809–1875). Legal review pending.",
+  "minutes": 20,
+  "expertPending": true
+}

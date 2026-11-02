@@ -1,0 +1,76 @@
+{
+  "id": "pno-s2-m08-11",
+  "title": { "en": "Türk: a two-hand Handstück", "tr": "Türk: iki elli el parçası" },
+  "goal": {
+    "en": "Plays a short two-hand beginner piece by Daniel Gottlob Türk with a steady pulse at ♩=60.",
+    "tr": "Daniel Gottlob Türk'ün başlangıç düzeyindeki iki elli kısa bir parçasını ♩=60'ta düzenli vuruşla çalar."
+  },
+  "explanation": [
+    {
+      "en": "Daniel Gottlob Türk (1750–1813) was a German teacher and organist in Halle. In 1792 he published Handstücke für angehende Klavierspieler, short pieces for beginning players.",
+      "tr": "Daniel Gottlob Türk (1750–1813), Halle'de çalışan Alman bir öğretmen ve orgcuydu. 1792'de yeni başlayanlar için kısa parçalardan oluşan Handstücke für angehende Klavierspieler'i yayımladı."
+    },
+    {
+      "en": "This lesson uses No. 9, 'Ich bin so matt und krank' (I am so weary and ill): E minor, 3/4, Largo molto e tenero, very slow and tender, with a one-beat upbeat. The hands take turns: the right hand holds a long note while the left hand answers between its notes.",
+      "tr": "Bu ders 9 numaralı 'Ich bin so matt und krank' (Öyle yorgun ve hastayım) parçasını kullanır: Mi minör, 3/4'lük, Largo molto e tenero, çok yavaş ve şefkatli, bir vuruşluk öncüyle. Eller sırayla çalar: sağ el uzun bir nota tutarken sol el notaların arasında cevap verir."
+    },
+    {
+      "en": "A held note in one hand keeps sounding while the other hand moves. Count through every held note.",
+      "tr": "Bir eldeki tutulan nota, öteki el hareket ederken sürer. Her tutulan notayı sonuna kadar say."
+    },
+    {
+      "en": "In bars 3, 4 and 7 five left-hand notes start together with a right-hand note; leave them out in the measured run. In bar 8 both hands play E an octave apart, which counts as one note. The score and fingering on screen are an Ostinato edition, made from Türk's 1797 second edition.",
+      "tr": "3, 4 ve 7. ölçülerde beş sol el notası bir sağ el notasıyla birlikte başlar; ölçülen çalışta bunları çalma. 8. ölçüde iki el Mi'yi bir oktav arayla çalar; bu tek nota sayılır. Ekrandaki nota ve parmak numaraları, Türk'ün 1797 tarihli ikinci baskısından hazırlanan Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Türk, Handstücke No. 9, from the Ostinato edition, piano synthesis: the measured line, then the full piece, at ♩=60 and at ♩=44.",
+      "tr": "Ostinato düzenlemesinden Türk, el parçası 9, piyano sentezi: önce ölçülen dizi, sonra parçanın tamamı, ♩=60 ve ♩=44."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play each hand alone once with the click. Run 1, measured: play the line on screen with both hands at ♩=60, from the right-hand upbeat B4 to the end of bar 8. Leave out the left-hand notes that start with a right-hand note: D♯3 and E3 in bar 3, C3 in bar 4, B3 and B2 in bar 7. In bar 8 play E4 and E3 together, then E2. Run 2, not measured: play the piece as written, with those five left-hand notes.",
+      "tr": "Her eli klikle bir kez ayrı çal. 1. çalış, ölçülür: ekrandaki diziyi iki elle ♩=60'ta çal, sağ eldeki Si4 öncüsünden 8. ölçünün sonuna kadar. Bir sağ el notasıyla birlikte başlayan sol el notalarını çalma: 3. ölçüde Re♯3 ve Mi3, 4. ölçüde Do3, 7. ölçüde Si3 ve Si2. 8. ölçüde Mi4 ile Mi3'ü birlikte, sonra Mi2'yi çal. 2. çalış, ölçülmez: parçayı yazıldığı gibi, bu beş sol el notasıyla çal."
+    },
+    "sequence": "3/4: hr B4:q | E4:q G3:q B4:q | D♯4:q F♯3:q D♯4:q | E4:e G3:e F♯4:q G4:q | A4:q F♯2:q A4:q | C5:q A3:q D♯4:q | B4:q G3:q E4:q | A4:e F♯3:e G4:q F♯4:q | E4:q E2:q",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "Held notes kept sounding for their full length.", "tr": "Tutulan notalar tam süreleri boyunca sürdü." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Late notes gather where the melody passes from one hand to the other. Loop those two bars at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar melodinin bir elden ötekine geçtiği yerlerde toplanıyor. O iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=60, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=60'ta geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Daniel Gottlob Türk (1750–1813), Handstücke für angehende Klavierspieler, first part (first published 1792), No. 9, 'Ich bin so matt und krank' (title from Gottfried August Bürger; E minor, 3/4, Largo molto e tenero), one-beat upbeat and bars 1–8. Source edition: Sechzig Handstücke für angehende Klavierspieler, Erster Theil, Zweyte Auflage, Leipzig and Halle: auf Kosten des Verfassers, in Kommission bey Schwickert (Leipzig) und Hemmerde und Schwetschke (Halle), 1797, p. 3; scan: Bayerische Staatsbibliothek, 4 Mus.pr. 2009.2607-1/2, https://www.digitale-sammlungen.de/view/bsb00086024 (IIIF: https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00086024/manifest; also on IMSLP, marked Public Domain: https://imslp.org/wiki/120_Handstücke_für_angehende_Klavierspieler_(Türk,_Daniel_Gottlob)). The 1792 first edition was not found online and has not been compared. Measured line: all note starts of both hands in time order; where a left-hand note starts together with a right-hand note (bar 3: D♯3, E3; bar 4: C3; bar 7: B3, B2) the right-hand note is measured and the left-hand note is left out of the measured run and played in the unmeasured second run; the E4/E3 octave in bar 8 counts as one note (E4). Ostinato practice tempo ♩=60 (plan row ♩=72 lowered for Largo molto). Composer died 1813; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

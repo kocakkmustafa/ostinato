@@ -1,0 +1,78 @@
+{
+  "id": "pno-s2-m09-08",
+  "title": { "en": "Reading in three", "tr": "Üç zamanda okuma" },
+  "goal": {
+    "en": "Reads four new four-bar lines in 3/4 and plays each one once at ♩=70 without hearing it first.",
+    "tr": "3/4'te dört yeni dört ölçülük diziyi okur ve her birini önceden dinlemeden ♩=70'te bir kez çalar."
+  },
+  "explanation": [
+    {
+      "en": "In 3/4 each bar has three quarter-note beats. Count \"1 2 3\" and lean a little on beat 1.",
+      "tr": "3/4'te her ölçüde üç dörtlük vuruş vardır. \"1 2 3\" diye say ve 1. vuruşa biraz yaslan."
+    },
+    {
+      "en": "A dotted half fills a whole bar of 3/4. A half plus a quarter also fills it; check which comes first.",
+      "tr": "Noktalı ikilik 3/4'lük bir ölçünün tamamını doldurur. İkilik artı dörtlük de doldurur; hangisinin önce geldiğine bak."
+    },
+    {
+      "en": "Before you play, scan the line: the time signature, the first note, the long notes and the rests. Then clap the rhythm once.",
+      "tr": "Çalmadan önce diziye göz at: ölçü sayısını, ilk notayı, uzun notaları ve susları bul. Sonra ritmi bir kez alkışla."
+    },
+    {
+      "en": "Keep going after a slip. Look one bar ahead, not at your hand.",
+      "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak."
+    },
+    {
+      "en": "Each line is new and is not played to you before you try it.",
+      "tr": "Her dizi yenidir ve denemenden önce sana çalınmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=70 in 3/4 with beat 1 marked; each line is played by piano synthesis only after your attempt, to compare.",
+      "tr": "1. vuruşu belirgin ♩=70 klik, 3/4; her dizi yalnız denemenden sonra, karşılaştırman için piyano sentezinde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Read four new four-bar lines in 3/4, one after another. For each line: take 30 seconds to scan it and clap its rhythm, then play it once with the click at ♩=70. The lines use C or G position in either hand, with quarters, halves, dotted halves, eighth pairs and rests.",
+      "tr": "3/4'te dört yeni dört ölçülük diziyi art arda oku. Her dizide: 30 saniye göz at ve ritmini alkışla, sonra ♩=70'te klikle bir kez çal. Diziler iki elden birinde Do ya da Sol konumunu; dörtlük, ikilik, noktalı ikilik, sekizlik çiftleri ve susları kullanır."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I counted three beats in every bar.", "tr": "Her ölçüde üç vuruş saydım." },
+    { "en": "Dotted halves lasted the whole bar.", "tr": "Noktalı ikilikler bütün ölçü boyunca sürdü." },
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "I looked at the music, not at my hands.", "tr": "Ellerime değil, notaya baktım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The bar was counted in four out of habit, or a dotted half was cut short. Count \"1 2 3\" aloud and hold long notes to the next \"1\".",
+        "tr": "Ölçü alışkanlıkla dörtte sayılmış ya da noktalı ikilik kısa kesilmiş. Sesli \"1 2 3\" say ve uzun notaları sonraki \"1\"e kadar tut."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Read ahead during the long notes: while you hold one, find the next.",
+        "tr": "Uzun notalarda ileriyi oku: birini tutarken sonrakini bul."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read new lines at ♩=60 first, then come back to ♩=70.",
+    "tr": "Önce yeni dizileri ♩=60'ta oku, sonra ♩=70'e dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

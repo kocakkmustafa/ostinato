@@ -1,0 +1,80 @@
+{
+  "id": "pno-s1-m04-08",
+  "title": { "en": "Phrasing and dynamics", "tr": "Cümleleme ve gürlük" },
+  "goal": {
+    "en": "Plays an original two-bar phrase f and then p as an echo, with a clear loudness difference and a steady pulse.",
+    "tr": "Özgün iki ölçülük cümleyi önce f, sonra yankı gibi p çalar; gürlük farkı net, vuruş düzenli kalır."
+  },
+  "explanation": [
+    {
+      "en": "p (piano) means soft, f (forte) means strong. A crescendo grows gradually louder.",
+      "tr": "p (piano) hafif, f (forte) güçlü demektir. Crescendo giderek gürleşir."
+    },
+    {
+      "en": "f is your comfortable strong sound. Let the weight of the arm sink into the key; do not strike hard.",
+      "tr": "f, senin rahat güçlü sesindir. Kolun ağırlığı tuşa insin; sert vurma."
+    },
+    {
+      "en": "A slur groups notes into a phrase. Play the phrase legato: release each key as the next one goes down, not before and not after.",
+      "tr": "Cümle bağı notaları bir cümle olarak gruplar. Cümleyi legato çal: her tuşu, bir sonraki inerken bırak; ne önce ne sonra."
+    },
+    {
+      "en": "A tie looks like a slur but joins two notes of the same pitch into one longer note.",
+      "tr": "Uzatma bağı cümle bağına benzer ama aynı perdedeki iki notayı tek uzun notada birleştirir."
+    },
+    {
+      "en": "On an electronic keyboard, touch response must be on, or every note sounds the same. Keep the main volume fixed while you play.",
+      "tr": "Elektronik klavyede tuş hassasiyeti açık olmalı; yoksa her nota aynı gürlükte çıkar. Çalarken ana ses düzeyini sabit tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The phrase f then p with a click, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Klikle önce f sonra p cümle, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A6"],
+    "task": {
+      "en": "Right hand in C position. Bars 1–2: play the phrase f and legato. Bars 3–4: play the same phrase p, like an echo. Keep the click at ♩=60 and the same pulse in both phrases.",
+      "tr": "Sağ el Do konumunda. 1–2. ölçüler: cümleyi f ve legato çal. 3–4. ölçüler: aynı cümleyi yankı gibi p çal. Klik ♩=60'ta; iki cümlede de vuruş aynı kalsın."
+    },
+    "sequence": "4/4: C4:q D4:q E4:q G4:q | E4:q D4:q C4:h | C4:q D4:q E4:q G4:q | E4:q D4:q C4:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The echo was clearly softer than the first phrase.", "tr": "Yankı ilk cümleden belirgin biçimde hafifti." },
+    { "en": "I did not slow down in the soft phrase.", "tr": "Hafif cümlede yavaşlamadım." },
+    { "en": "Each key came up as the next one went down.", "tr": "Her tuş, bir sonraki inerken kalktı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but p and f sound almost the same.", "tr": "Doğru, ama p ve f neredeyse aynı gürlükte." },
+      "fix": {
+        "en": "Play f with the weight of the arm and p with only the weight of the fingertip. On an electronic keyboard, check that touch response is on.",
+        "tr": "f'yi kolun ağırlığıyla, p'yi yalnız parmak ucunun ağırlığıyla çal. Elektronik klavyede tuş hassasiyetinin açık olduğunu kontrol et."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Soft playing often slows down. Keep the count steady; only the weight changes.",
+        "tr": "Hafif çalarken tempo sık sık düşer. Sayımı sabit tut; yalnız ağırlık değişsin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only bar 1, f and then p, until you hear a clear difference; then play all four bars.",
+    "tr": "Net bir fark duyana kadar yalnız 1. ölçüyü önce f sonra p çal; sonra dört ölçünün tamamını çal."
+  },
+  "legacy": "R: piano-13",
+  "minutes": 10,
+  "expertPending": true
+}

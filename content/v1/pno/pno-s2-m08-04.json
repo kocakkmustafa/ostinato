@@ -1,0 +1,75 @@
+{
+  "id": "pno-s2-m08-04",
+  "title": { "en": "Bass on one, melody after", "tr": "Bas birde, melodi sonra" },
+  "goal": {
+    "en": "Plays an original four-bar line with the bass on beat 1 and the melody on beats 2–4, at ♩=70.",
+    "tr": "Basın 1. vuruşta, melodinin 2–4. vuruşlarda olduğu özgün dört ölçülük diziyi ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "In this lesson the bass always speaks first. The left hand plays on beat 1; the right hand answers on beats 2, 3 and 4.",
+      "tr": "Bu derste bas hep önce konuşur. Sol el 1. vuruşta çalar; sağ el 2, 3 ve 4. vuruşlarda cevap verir."
+    },
+    {
+      "en": "Because the hands never start together, only one new note starts at a time.",
+      "tr": "Eller hiçbir zaman birlikte başlamadığı için her an yalnız bir yeni nota başlar."
+    },
+    {
+      "en": "Let the bass ring under the melody. Lift it only when the next bass note comes.",
+      "tr": "Bas melodinin altında çınlasın. Onu yalnız sonraki bas notası gelince kaldır."
+    },
+    {
+      "en": "Left hand: C3 with finger 5, G3 with finger 1. The right hand stays in C position, thumb on C4.",
+      "tr": "Sol el: 5. parmakla Do3, 1. parmakla Sol3. Sağ el Do konumunda kalır, başparmak Do4'te."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four bars at ♩=70 and ♩=50, piano synthesis.",
+      "tr": "Özgün dört ölçü, ♩=70 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the four bars with the click at ♩=70. Each bar: bass on beat 1, melody on beats 2–4. Bar 1: C3, then E4 F4 G4 (3 4 5). Bar 2: G3, then F4 E4 D4 (4 3 2). Bar 3: C3, then G4 F4 E4 (5 4 3). Bar 4: C3, then D4, then C4 for two beats (2 1).",
+      "tr": "Dört ölçüyü ♩=70'te klikle çal. Her ölçüde bas 1. vuruşta, melodi 2–4. vuruşlarda. 1. ölçü: Do3, sonra Mi4 Fa4 Sol4 (3 4 5). 2. ölçü: Sol3, sonra Fa4 Mi4 Re4 (4 3 2). 3. ölçü: Do3, sonra Sol4 Fa4 Mi4 (5 4 3). 4. ölçü: Do3, sonra Re4, sonra iki vuruş Do4 (2 1)."
+    },
+    "sequence": "C3 E4 F4 G4 | G3 F4 E4 D4 | C3 G4 F4 E4 | C3 D4 C4:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The bass sounded alone on every beat 1.", "tr": "Bas her 1. vuruşta tek başına duyuldu." },
+    { "en": "The bass kept ringing under the melody.", "tr": "Bas melodinin altında çınlamayı sürdürdü." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The melody on beat 2 is rushed. Count \"one\" aloud with the bass and wait for \"two\".",
+        "tr": "2. vuruştaki melodi aceleye geliyor. Basla birlikte sesli \"bir\" say ve \"iki\"yi bekle."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The bass comes late after the melody. Move the left hand to the next bass note during beat 4.",
+        "tr": "Bas melodiden sonra geç geliyor. 4. vuruş sırasında sol eli sonraki bas notasına götür."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the bass with the click for four bars, then add the melody one bar at a time at ♩=55.",
+    "tr": "Önce dört ölçü boyunca yalnız bası klikle çal, sonra melodiyi ♩=55'te ölçü ölçü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

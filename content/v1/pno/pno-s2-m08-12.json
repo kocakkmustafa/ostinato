@@ -1,0 +1,76 @@
+{
+  "id": "pno-s2-m08-12",
+  "title": { "en": "Beyer: a first study", "tr": "Beyer: ilk etüt" },
+  "goal": {
+    "en": "Plays an early two-hand study from Ferdinand Beyer's Op. 101 with a steady pulse at ♩=72.",
+    "tr": "Ferdinand Beyer'in Op. 101'inden erken bir iki elli etüdü ♩=72'de düzenli vuruşla çalar."
+  },
+  "explanation": [
+    {
+      "en": "Ferdinand Beyer (1803–1863) was a German pianist and teacher. His Vorschule im Klavierspiel, Op. 101, is a beginner's method still used in many countries.",
+      "tr": "Ferdinand Beyer (1803–1863), Alman bir piyanist ve öğretmendi. Vorschule im Klavierspiel, Op. 101 adlı başlangıç yöntemi bugün de birçok ülkede kullanılır."
+    },
+    {
+      "en": "This lesson uses No. 17, Allegretto, in C major, 24 bars. The right hand holds long notes in C position from C5. Below it the left hand, also in the treble clef, plays steady quarter notes such as E4 G4 E4 G4.",
+      "tr": "Bu ders 17 numaralı Allegretto'yu kullanır: Do majör, 24 ölçü. Sağ el Do5'ten Do konumunda uzun notalar tutar. Altında sol el, o da sol anahtarında, Mi4 Sol4 Mi4 Sol4 gibi düzenli dörtlükler çalar."
+    },
+    {
+      "en": "On the first beat of most bars both hands start a note together. There the line on screen shows the right-hand note; the left-hand note on that beat is not measured and does not count against you. All other notes are measured as usual.",
+      "tr": "Çoğu ölçünün ilk vuruşunda iki el bir notaya birlikte başlar. Orada ekrandaki dizi sağ el notasını gösterir; o vuruştaki sol el notası ölçülmez ve aleyhine sayılmaz. Diğer bütün notalar her zamanki gibi ölçülür."
+    },
+    {
+      "en": "Practise in four-bar sections at a slow tempo, then join them. Bars 17–24 repeat bars 1–8. The score and fingering on screen are an Ostinato edition, made from the 1895 Peters edition.",
+      "tr": "Önce yavaş tempoda dört ölçülük bölümlerle çalış, sonra birleştir. 17–24. ölçüler 1–8. ölçülerin tekrarıdır. Ekrandaki nota ve parmak numaraları, 1895 Peters baskısından hazırlanan Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Beyer, Op. 101 No. 17, from the Ostinato edition, piano synthesis, at ♩=72 and at ♩=50.",
+      "tr": "Ostinato düzenlemesinden Beyer, Op. 101 No. 17, piyano sentezi, ♩=72 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play each hand alone once with the click. Then join the hands in four-bar sections, and play the study from start to finish, bars 1–24, at ♩=72. Both hands play every note; on beats where they start together, only the right-hand note is measured.",
+      "tr": "Her eli klikle bir kez ayrı çal. Sonra elleri dört ölçülük bölümlerle birleştir ve etüdü baştan sona, 1–24. ölçüleri ♩=72'de çal. İki el her notayı çalar; birlikte başladıkları vuruşlarda yalnız sağ el notası ölçülür."
+    },
+    "sequence": "4/4: C5:q G4:q E4:q G4:q | G5:q G4:q E4:q G4:q | F5:q G4:q D4:q G4:q | E5:q G4:q C4:q G4:q | C5:q G4:q E4:q G4:q | G5:q G4:q E4:q G4:q | F5:q G4:q D5:q G4:q | C5:q G4:q C4:h | D5:q G4:q F4:q G4:q | C5:q G4:q E4:q G4:q | F5:q G4:q D4:q G4:q | E5:q G4:q C4:q G4:q | D5:q G4:q C5:q G4:q | F5:q G4:q E5:q E4:q | D5:q E5:q D5:q E5:q | D5:q F5:q E5:q D5:q | C5:q G4:q E4:q G4:q | G5:q G4:q E4:q G4:q | F5:q G4:q D4:q G4:q | E5:q G4:q C4:q G4:q | C5:q G4:q E4:q G4:q | G5:q G4:q E4:q G4:q | F5:q G4:q D5:q G4:q | C5:q G4:q C4:h",
+    "tempo": { "open": 72, "target": 72 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "Notes meant to start together started together.", "tr": "Birlikte başlaması gereken notalar birlikte başladı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=72, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=72'de geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Ferdinand Beyer (1803–1863), Vorschule im Klavierspiel, Op. 101 (first published Mainz: Schott, c. 1850), No. 17 (C major, 4/4, Allegretto, both hands in the treble clef), bars 1–24. Source edition: Leipzig: C. F. Peters (Edition Peters 2721), plate 8033, revised by Adolf Ruthardt, 1895, p. 25; scan (MIT project via IMSLP, marked Public Domain), mirrored at https://archive.org/details/imslp-im-klavierspiel-op101-beyer-ferdinand (file Beyer_-_Op.101_-_Vorschule_im_Klavierspiel.pdf; IMSLP: https://imslp.org/wiki/Vorschule_im_Klavierspiel,_Op.101_(Beyer,_Ferdinand)). Ruthardt's fingering is not used. Not yet compared with the Mainz: Schott first edition. Measured line: all note starts of both hands in time order; where both hands start together (beat 1 of most bars, beat 3 of bars 7 and 13, and the left-hand whole note in bar 15) the right-hand note is measured and the left-hand note is played but not measured. Composer died 1863; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

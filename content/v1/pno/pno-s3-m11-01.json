@@ -1,0 +1,127 @@
+{
+  "id": "pno-s3-m11-01",
+  "title": {
+    "en": "Broken-chord bass",
+    "tr": "Kırık akor bası"
+  },
+  "goal": {
+    "en": "Plays the root-fifth-octave broken-chord bass on C, F and G with the left hand at ♩=70.",
+    "tr": "Sol elle C, F ve G üzerinde kök-beşli-oktav kırık akor basını ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "An accompaniment pattern turns a chord into a steady moving bass. The left hand plays it; later the right hand adds the melody.",
+      "tr": "Eşlik kalıbı bir akoru düzenli hareket eden bir basa çevirir. Onu sol el çalar; melodiyi sonra sağ el ekler."
+    },
+    {
+      "en": "The root-fifth-octave pattern uses three notes: the root, the fifth above it and the root an octave higher. Then it comes back to the fifth.",
+      "tr": "Kök-beşli-oktav kalıbı üç nota kullanır: kök, onun beşli üstü ve bir oktav yukarıdaki kök. Sonra beşliye geri döner."
+    },
+    {
+      "en": "C: C3 G3 C4 G3. F: F2 C3 F3 C3. G: G2 D3 G3 D3. Fingers 5-2-1-2 in every chord.",
+      "tr": "C: Do3 Sol3 Do4 Sol3. F: Fa2 Do3 Fa3 Do3. G: Sol2 Re3 Sol3 Re3. Her akorda parmaklar 5-2-1-2."
+    },
+    {
+      "en": "The octave is wider than a five-finger position. Let the hand open from finger 5 to the thumb without locking the wrist. Release the low note as the thumb lands.",
+      "tr": "Oktav beş parmak konumundan geniştir. Bileği kilitlemeden eli 5. parmaktan başparmağa doğru aç. Başparmak inerken pes notayı bırak."
+    },
+    {
+      "en": "After the last note of each chord, move the whole hand to the next root. The shape stays the same.",
+      "tr": "Her akorun son notasından sonra bütün eli sonraki köke taşı. Şekil aynı kalır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The root-fifth-octave pattern on C, F, G and C, with a click, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "C, F, G ve C üzerinde kök-beşli-oktav kalıbı, klikle, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Left hand alone, fingers 5-2-1-2, with the click at ♩=70: two bars of C, two bars of F, two bars of G, one bar of C, then hold C3 for four beats.",
+      "tr": "Yalnız sol el, 5-2-1-2. parmaklar, klikle ♩=70'te: iki ölçü C, iki ölçü F, iki ölçü G, bir ölçü C, sonra Do3'ü dört vuruş tut."
+    },
+    "sequence": "4/4: C3 G3 C4 G3 | C3 G3 C4 G3 | F2 C3 F3 C3 | F2 C3 F3 C3 | G2 D3 G3 D3 | G2 D3 G3 D3 | C3 G3 C4 G3 | C3:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My hand opened without strain.",
+      "tr": "Elim zorlanmadan açıldı."
+    },
+    {
+      "en": "The low root sounded as clearly as the thumb note.",
+      "tr": "Pes kök başparmak notası kadar net duyuldu."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "The thumb fell short of the octave, landing one white key below the root's name. Feel the octave as finger 5 and thumb on two keys with the same name.",
+        "tr": "Başparmak oktava ulaşmadı, kökün adından bir beyaz tuş aşağıya indi. Oktavı, aynı adlı iki tuşta 5. parmak ve başparmak olarak hisset."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The first note after the hand move is late. Look at the next root during the last note and move the hand in one motion.",
+        "tr": "El taşındıktan sonraki ilk nota geç. Son nota sırasında sonraki köke bak ve eli tek harekette taşı."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Finger 5 pressed too lightly. Let it sink to the bottom of the key.",
+        "tr": "5. parmak çok hafif bastı. Tuşun dibine kadar insin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play root and fifth only (C3 G3 C3 G3, fingers 5-2) at ♩=55, then add the octave.",
+    "tr": "♩=55'te yalnız kök ve beşliyi çal (Do3 Sol3 Do3 Sol3, 5-2. parmaklar), sonra oktavı ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

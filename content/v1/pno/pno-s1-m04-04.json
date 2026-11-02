@@ -1,0 +1,75 @@
+{
+  "id": "pno-s1-m04-04",
+  "title": { "en": "Rests in both hands", "tr": "İki elde sus" },
+  "goal": {
+    "en": "Plays an original four-bar line in which the hands take turns, keeping every rest silent, at ♩=60.",
+    "tr": "Ellerin sırayla çaldığı özgün dört ölçülük diziyi her susu sessiz tutarak ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "A rest is counted silence. Lift the finger so the key comes up and the sound stops.",
+      "tr": "Sus sayılan sessizliktir. Parmağını kaldır; tuş yukarı kalksın ve ses dursun."
+    },
+    {
+      "en": "Each staff has its own rests. A whole rest in the bass staff means the left hand is silent for the whole bar.",
+      "tr": "Her portenin kendi susları vardır. Fa anahtarındaki birlik sus, sol elin bütün ölçü boyunca sustuğunu gösterir."
+    },
+    {
+      "en": "The resting hand stays near its keys, loose and ready, without pressing.",
+      "tr": "Susan el tuşlarının yakınında, gevşek ve hazır bekler; basmaz."
+    },
+    {
+      "en": "In this line the hands never start a note together. When one hand plays, the other rests.",
+      "tr": "Bu dizide iki el hiçbir zaman aynı anda nota başlatmaz. Bir el çalarken diğeri susar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The original four-bar line with a click, at ♩=60 and at ♩=40, piano synthesis; the playing hand is marked on screen.",
+      "tr": "Klikle özgün dört ölçülük dizi, ♩=60 ve ♩=40, piyano sentezi; çalan el ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Right hand in C position from C4, left hand in C position from C3. Play the four bars at ♩=60. Bar 1 is the right hand, bar 2 the left hand; in bars 3 and 4 the hands take turns. Lift the finger on every rest.",
+      "tr": "Sağ el Do4'ten, sol el Do3'ten Do konumunda. Dört ölçüyü ♩=60'ta çal. 1. ölçü sağ el, 2. ölçü sol el; 3. ve 4. ölçülerde eller sırayla çalar. Her susta parmağını kaldır."
+    },
+    "sequence": "4/4: C4:q D4:q E4:q qr | C3:q D3:q E3:q qr | G4:q qr G3:q qr | E4:q G3:q C4:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I lifted my finger on every rest.", "tr": "Her susta parmağımı kaldırdım." },
+    { "en": "The resting hand stayed loose and did not press.", "tr": "Susan el gevşek kaldı ve basmadı." },
+    { "en": "I counted through the rests.", "tr": "Suslar boyunca saymaya devam ettim." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different: sound still heard during the rest.", "tr": "Farklı: susta ses hâlâ duyuldu." },
+      "fix": {
+        "en": "Lift the finger exactly on the rest beat, so the key comes up.",
+        "tr": "Parmağını tam sus vuruşunda kaldır; tuş yukarı kalksın."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The hand change is slow. While one hand plays, hold the other just above its first key.",
+        "tr": "El değişimi yavaş. Bir el çalarken diğerini ilk tuşunun hemen üstünde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the right-hand notes with the rests counted, then only the left-hand notes, then both.",
+    "tr": "Önce susları sayarak yalnız sağ el notalarını, sonra yalnız sol el notalarını, sonra ikisini birlikte çal."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

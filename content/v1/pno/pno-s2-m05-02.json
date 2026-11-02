@@ -1,0 +1,112 @@
+{
+  "id": "pno-s2-m05-02",
+  "title": {
+    "en": "G pentascale, left hand",
+    "tr": "Sol el G pentaskal"
+  },
+  "goal": {
+    "en": "Moves the left hand from C position to G position and plays the G major pentascale from G2 to D3 at ♩=70.",
+    "tr": "Sol eli Do konumundan Sol konumuna taşır ve Sol majör pentaskalı Sol2'den Re3'e ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "In left-hand G position, fingers 5–1 cover G2 A2 B2 C3 D3.",
+      "tr": "Sol el Sol konumunda 5–1 parmaklar Sol2 La2 Si2 Do3 Re3'ü kaplar."
+    },
+    {
+      "en": "From C position, finger 5 moves from C3 down to G2, three white keys lower. Move the whole hand, not only finger 5.",
+      "tr": "Do konumundan çıkınca 5. parmak Do3'ten üç beyaz tuş aşağıdaki Sol2'ye iner. Yalnız 5. parmağı değil, bütün eli taşı."
+    },
+    {
+      "en": "The pattern is the same as in the right hand: whole, whole, half, whole. The half step B2–C3 lies under fingers 3 and 2.",
+      "tr": "Kalıp sağ eldekiyle aynıdır: tam, tam, yarım, tam. Si2–Do3 yarım sesi 3. ve 2. parmakların altındadır."
+    },
+    {
+      "en": "G is between the first two black keys of the group of three. Use it to find G2 without counting keys.",
+      "tr": "Sol, üçlü siyah tuş grubunun ilk iki tuşu arasındadır. Sol2'yi tuş saymadan bulmak için bunu kullan."
+    },
+    {
+      "en": "Low notes need a full key stroke. Let the weight of the arm sink into each key and hold it for its whole beat.",
+      "tr": "Pes notalar tuşun sonuna kadar inmesini ister. Kolun ağırlığı her tuşa insin ve tuşu vuruşun sonuna kadar tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C3–G3 in left-hand C position, a half rest, then the G pentascale from G2 up and down, with a click, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "Sol el Do konumunda Do3–Sol3, ikilik sus, ardından Sol2'den Sol pentaskalı çıkış ve iniş, klikle, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "With the click at ♩=70, play C3 D3 E3 F3 G3 in left-hand C position. During the half rest, move the hand so finger 5 is on G2. Then play G2 A2 B2 C3 D3 and come back down to G2.",
+      "tr": "Klikle ♩=70'te sol el Do konumunda Do3 Re3 Mi3 Fa3 Sol3 çal. İkilik susta eli taşı, 5. parmak Sol2'ye gelsin. Sonra Sol2 La2 Si2 Do3 Re3 çal ve Sol2'ye geri in."
+    },
+    "sequence": "4/4: C3 D3 E3 F3 | G3:h hr | G2 A2 B2 C3 | D3 C3 B2 A2 | G2:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Finger 5 played G2 and finger 1 played D3.",
+      "tr": "Sol2'yi 5. parmak, Re3'ü 1. parmak çaldı."
+    },
+    {
+      "en": "I moved to the new position during the rest without rushing the count.",
+      "tr": "Sayımı hızlandırmadan sus sırasında yeni konuma geçtim."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too high.",
+        "tr": "Farklı nota, bir beyaz tuş yukarıda."
+      },
+      "fix": {
+        "en": "Finger 5 landed on A2. Find G2 between the first two black keys of the group of three.",
+        "tr": "5. parmak La2'ye indi. Sol2'yi üçlü siyah tuş grubunun ilk iki tuşu arasında bul."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The low notes were too soft. Play from the arm, and move the phone closer to the left end of the keyboard.",
+        "tr": "Pes notalar çok hafifti. Koldan çal ve telefonu klavyenin sol ucuna yaklaştır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only G2 A2 B2 A2 G2 at ♩=50 until finger 5 finds G2 without looking.",
+    "tr": "5. parmak Sol2'yi bakmadan bulana kadar ♩=50'de yalnız Sol2 La2 Si2 La2 Sol2 çal."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

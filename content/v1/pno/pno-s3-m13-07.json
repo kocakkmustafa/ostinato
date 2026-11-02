@@ -1,0 +1,79 @@
+{
+  "id": "pno-s3-m13-07",
+  "title": { "en": "C7, G7 and Dm7", "tr": "C7, G7 ve Dm7" },
+  "goal": {
+    "en": "Reads Dm7, G7 and C7 and plays each four-note chord broken, up and back down, at ♩=60.",
+    "tr": "Dm7, G7 ve C7'yi okur ve her dört notalı akoru ♩=60'ta kırık olarak çıkıp inerek çalar."
+  },
+  "explanation": [
+    {
+      "en": "A 7 after the letter adds a fourth note on top of the triad: one more skip above the fifth. The chord now has root, third, fifth and seventh.",
+      "tr": "Harften sonraki 7, üçlünün üstüne dördüncü bir nota ekler: beşlinin üstünde bir atlama daha. Akorda artık kök, üçlü, beşli ve yedili vardır."
+    },
+    {
+      "en": "G7 is G-B-D-F. Dm7 is D-F-A-C. Both use only white keys.",
+      "tr": "G7 Sol-Si-Re-Fa'dır. Dm7 Re-Fa-La-Do'dur. İkisi de yalnız beyaz tuş kullanır."
+    },
+    {
+      "en": "A plain 7 always means the seventh a whole step below the root's octave. For C that is B♭, a black key: C7 is C-E-G-B♭.",
+      "tr": "Yalın 7 her zaman kökün oktavından bir tam ses aşağıdaki yedili demektir. Do için bu Si♭'dir, bir siyah tuş: C7 Do-Mi-Sol-Si♭'dir."
+    },
+    {
+      "en": "Play the four notes with right-hand fingers 1, 2, 3 and 5. Come back down 3, 2, 1.",
+      "tr": "Dört notayı sağ elin 1, 2, 3 ve 5. parmaklarıyla çal. 3, 2, 1 ile geri in."
+    },
+    {
+      "en": "Dm7 to G7 is ii–V in C. G7 pulls back to C; C7 pulls on towards F. You will meet these chords often in lead sheets.",
+      "tr": "Dm7'den G7'ye geçiş Do'da ii–V'dir. G7 Do'ya geri çeker; C7 Fa'ya doğru çeker. Bu akorlarla lead sheet'lerde sık karşılaşacaksın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Dm7, G7 and C7 broken up and down in the right hand, two bars each, at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Dm7, G7 ve C7 sağ elde kırık olarak çıkıp inerek, her biri iki ölçü, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play each chord for two bars with the click at ♩=60: up in quarters, then down, the root for two beats. Dm7: D4 F4 A4 C5, A4 F4 D4. G7: G3 B3 D4 F4, D4 B3 G3. C7: C4 E4 G4 B♭4, G4 E4 C4.",
+      "tr": "Her akoru ♩=60'ta klikle iki ölçü çal: dörtlüklerle çık, sonra in, kök iki vuruş. Dm7: Re4 Fa4 La4 Do5, La4 Fa4 Re4. G7: Sol3 Si3 Re4 Fa4, Re4 Si3 Sol3. C7: Do4 Mi4 Sol4 Si♭4, Sol4 Mi4 Do4."
+    },
+    "sequence": "4/4: D4 F4 A4 C5 | A4 F4 D4:h | G3 B3 D4 F4 | D4 B3 G3:h | C4 E4 G4 Bb4 | G4 E4 C4:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can say the four notes of Dm7, G7 and C7.", "tr": "Dm7, G7 ve C7'nin dört notasını söyleyebiliyorum." },
+    { "en": "Finger 5 took the seventh every time.", "tr": "Yedili her seferinde 5. parmağa düştü." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "In C7 you played B instead of B♭. The 7 in C7 is the black key just below B.",
+        "tr": "C7'de Si♭ yerine Si çaldın. C7'deki 7, Si'nin hemen altındaki siyah tuştur."
+      }
+    },
+    {
+      "error": { "en": "Different note, one white key too high.", "tr": "Farklı nota, bir beyaz tuş yukarıda." },
+      "fix": {
+        "en": "The seventh landed on the octave. Count the skips: root, skip, third, skip, fifth, skip, seventh.",
+        "tr": "Yedili oktava düştü. Atlamaları say: kök, atla, üçlü, atla, beşli, atla, yedili."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each triad first, then add the seventh on top, one chord at a time at ♩=50.",
+    "tr": "Önce her üçlüyü çal, sonra yediliyi üste ekle; ♩=50'de akor akor çalış."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

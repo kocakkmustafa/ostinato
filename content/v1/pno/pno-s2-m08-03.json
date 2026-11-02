@@ -1,0 +1,73 @@
+{
+  "id": "pno-s2-m08-03",
+  "title": { "en": "Changing bass and two-note harmony", "tr": "Değişen bas ve iki sesli armoni" },
+  "goal": {
+    "en": "Plays two right-hand notes at once over a changing left-hand bass in an original four-bar line.",
+    "tr": "Özgün dört ölçülük dizide değişen sol el basının üstünde sağ elle iki notayı aynı anda çalar."
+  },
+  "explanation": [
+    {
+      "en": "A chord combines notes; C major contains C, E and G. Here the right hand plays two notes at once, a third apart.",
+      "tr": "Akor notaları birleştirir; Do majör Do, Mi ve Sol içerir. Burada sağ el iki notayı, üçlü aralıkla aynı anda çalar."
+    },
+    {
+      "en": "Right-hand pairs: C4+E4 with fingers 1+3, D4+F4 with 2+4, E4+G4 with 3+5. No stretched reach is required.",
+      "tr": "Sağ el çiftleri: 1+3 ile Do4+Mi4, 2+4 ile Re4+Fa4, 3+5 ile Mi4+Sol4. Geniş uzanış gerekmez."
+    },
+    {
+      "en": "The left hand changes between C3 (finger 5) and G3 (finger 1) every two beats.",
+      "tr": "Sol el her iki vuruşta bir Do3 (5. parmak) ile Sol3 (1. parmak) arasında değişir."
+    },
+    {
+      "en": "Both keys of a pair go down together and come up together, when the bass changes on beat 3.",
+      "tr": "Bir çiftin iki tuşu birlikte iner ve bas 3. vuruşta değişirken birlikte kalkar."
+    },
+    {
+      "en": "The microphone result for notes that start together is experimental and does not block your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Birlikte başlayan notalar için mikrofon sonucu deneyseldir ve ilerlemeni engellemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four bars, bass with right-hand thirds, at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Özgün dört ölçü, bas ve sağ el üçlüleri, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M~", "MIDI"],
+    "engineSteps": ["A6p"],
+    "task": {
+      "en": "Play the four bars with the click at ♩=60; every note is a half note. Bar 1: C3 with C4+E4, then G3 alone. Bar 2: G3 with D4+F4, then C3 alone. Bar 3: C3 with E4+G4, then G3 alone. Bar 4: G3 with D4+F4, then C3 with C4+E4. Try each hand alone first.",
+      "tr": "Dört ölçüyü ♩=60'ta klikle çal; her nota ikiliktir. 1. ölçü: Do3 ile Do4+Mi4, sonra tek başına Sol3. 2. ölçü: Sol3 ile Re4+Fa4, sonra tek başına Do3. 3. ölçü: Do3 ile Mi4+Sol4, sonra tek başına Sol3. 4. ölçü: Sol3 ile Re4+Fa4, sonra Do3 ile Do4+Mi4. Önce her eli ayrı dene."
+    },
+    "sequence": "C3/C4/E4:h G3:h | G3/D4/F4:h C3:h | C3/E4/G4:h G3:h | G3/D4/F4:h C3/C4/E4:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "experimental",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both notes of each pair sounded together.", "tr": "Her çiftin iki notası birlikte duyuldu." },
+    { "en": "The pair lifted when the bass changed on beat 3.", "tr": "Bas 3. vuruşta değişince çift kalktı." },
+    { "en": "My hand stayed loose; I did not stretch.", "tr": "Elim gevşek kaldı; zorlanarak açmadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one note of the pair missing.", "tr": "Farklı nota, çiftin bir notası eksik." },
+      "fix": {
+        "en": "One finger pressed less. Place both fingers on their keys first, then press with the same weight.",
+        "tr": "Bir parmak daha az bastı. Önce iki parmağı tuşlarına yerleştir, sonra aynı ağırlıkla bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the right hand as single notes (C4, D4, E4, D4) over the bass, then add the upper note of each pair.",
+    "tr": "Basın üstünde sağ eli tek notalarla (Do4, Re4, Mi4, Re4) çal, sonra her çiftin üst notasını ekle."
+  },
+  "legacy": "R: piano-12",
+  "minutes": 10,
+  "expertPending": true
+}
