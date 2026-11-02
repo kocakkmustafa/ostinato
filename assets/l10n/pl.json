@@ -6411,6 +6411,17 @@
     "9018c99c633a8ac1": "Utrzymałem równe, wygodne tempo.",
     "1adcc5eddf3bcec8": "Dźwięki brzmiały czysto, bez brzęczenia.",
     "c8254e775e62b6bd": "Przerobiłem całe zadanie z gitarą przed sobą.",
-    "b2416478bce4b256": "Umiem pokazać na gitarze każdy punkt wyjaśnienia."
+    "b2416478bce4b256": "Umiem pokazać na gitarze każdy punkt wyjaśnienia.",
+    "992d6ade7ce199a5": "Drabina tempa: wł.",
+    "16cdaba08210efce": "Drabina tempa: wył.",
+    "a9198dedf13916d2": "Po pełnym przebiegu, który spełnia kryteria, następny jest szybszy o {v0} BPM, aż do tempa docelowego ♩={v1}.",
+    "3a5f83734acbbd06": "Drabina tempa",
+    "6c8cfc0642830513": "Następny przebieg w tempie ♩={v0}",
+    "43921a381564e5f5": "Następny przebieg w tempie docelowym ♩={v0} — ten przebieg liczy się do zaliczenia",
+    "72d2c16d7b73ba67": "Następny przebieg zostaje w tempie ♩={v0} — drabina rośnie po pełnym przebiegu, który spełnia kryteria",
+    "c26eae7f0aece97b": "Cel osiągnięty — ten przebieg liczy się do zaliczenia",
+    "fece3d7db90be59e": "Cel osiągnięty — pełny przebieg w tym tempie liczy się do zaliczenia",
+    "3cf235f0a516306d": "Lekcję kończy tylko przebieg w tempie docelowym ♩={v0}.",
+    "14fb5991656683a8": "Graj w tempie ♩={v0}"
   }
 }

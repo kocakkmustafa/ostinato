@@ -6397,6 +6397,17 @@
     "9018c99c633a8ac1": "Mantive um andamento estável e confortável.",
     "1adcc5eddf3bcec8": "As notas soaram limpas, sem trastejar.",
     "c8254e775e62b6bd": "Fiz a tarefa inteira com o violão à minha frente.",
-    "b2416478bce4b256": "Consigo mostrar no violão cada ponto da explicação."
+    "b2416478bce4b256": "Consigo mostrar no violão cada ponto da explicação.",
+    "992d6ade7ce199a5": "Escada de andamento: ligada",
+    "16cdaba08210efce": "Escada de andamento: desligada",
+    "a9198dedf13916d2": "Depois de uma passada completa que cumpre os critérios, a próxima fica {v0} BPM mais rápida, até o andamento-alvo ♩={v1}.",
+    "3a5f83734acbbd06": "Escada de andamento",
+    "6c8cfc0642830513": "Próxima passada a ♩={v0}",
+    "43921a381564e5f5": "Próxima passada no andamento-alvo ♩={v0} — essa passada conta para a aprovação",
+    "72d2c16d7b73ba67": "A próxima passada continua a ♩={v0} — a escada sobe depois de uma passada completa que cumpre os critérios",
+    "c26eae7f0aece97b": "Alvo alcançado — esta passada conta para a aprovação",
+    "fece3d7db90be59e": "Alvo alcançado — uma passada completa neste andamento conta para a aprovação",
+    "3cf235f0a516306d": "Só uma passada no andamento-alvo ♩={v0} conclui a lição.",
+    "14fb5991656683a8": "Tocar a ♩={v0}"
   }
 }

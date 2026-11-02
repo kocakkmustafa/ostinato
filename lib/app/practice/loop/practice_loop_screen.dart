@@ -12,6 +12,7 @@ import '../../design/widgets.dart';
 import '../../tuner/session_tuning_gate.dart';
 import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
+import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
 import '../own_recording/own_recording_preference.dart';
 import '../practice_audio_input.dart';
@@ -26,8 +27,10 @@ import 'practice_result_screen.dart';
 import 'practice_score.dart';
 import 'practice_session_controller.dart';
 import 'practice_tab_strip.dart';
+import 'practice_tempo_ladder.dart';
 import 'practice_transport.dart';
 import 'practice_visual_theme.dart';
+import 'tempo_ladder_copy.dart';
 
 /// What the practice screen hands back to the lesson list.
 enum PracticeExit { closed, openNextLesson }
@@ -90,6 +93,12 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           targetBpm: widget.lesson.practice.tempo!.target,
         );
   late final PassCriteria _criteria = PassCriteria.forLesson(widget.lesson);
+
+  /// FK6: per lesson session, never stored; starts at the current tempo.
+  late final TempoLadder _ladder = TempoLadder.forLesson(
+    freeTempo: _freeTempo,
+    tempo: _initialTempo,
+  );
   late final SetupProfileStore _setup =
       widget.setupStore ?? FileSetupProfileStore.device;
   SetupProfile? _profile;
@@ -98,7 +107,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   OwnRecorder? _ownedRecorder;
   late final PracticeSessionController _c = _createController();
   late final Ticker _ticker = createTicker((_) => _c.tick());
-  bool _resultShown = false;
+
+  /// The run whose result screen was opened: each run's result opens once,
+  /// so a setting changed after it (tempo, loop) never reopens it.
+  PracticeRunSummary? _resultShownFor;
 
   PracticeSessionController _createController() {
     final factory = widget.controllerFactory;
@@ -181,8 +193,11 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     final running = _c.running;
     if (running && !_ticker.isActive) _ticker.start();
     if (!running && _ticker.isActive) _ticker.stop();
-    if (_c.phase == PracticePhase.finished && !_resultShown) {
-      _resultShown = true;
+    final summary = _c.summary;
+    if (_c.phase == PracticePhase.finished &&
+        summary != null &&
+        !identical(summary, _resultShownFor)) {
+      _resultShownFor = summary;
       unawaited(_showResult());
     }
     setState(() {});
@@ -221,6 +236,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       record = null;
     }
     if (!mounted) return;
+    // FK6: the next run's tempo is set before the result opens, so the
+    // result screen states exactly what the next run will be.
+    final ladder = _ladder.afterRun(summary);
+    _c.tempo = TempoLadder.apply(ladder, _c.tempo);
     final action = await Navigator.of(context).push<ResultAction>(
       MaterialPageRoute(
         builder: (_) => PracticeResultScreen(
@@ -231,11 +250,11 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           nextLessonOpened: newlyPassed && widget.hasNextLesson,
           hasNextLesson: widget.hasNextLesson,
           ownRecorder: _c.ownRecorder,
+          ladder: ladder,
         ),
       ),
     );
     if (!mounted) return;
-    _resultShown = false;
     switch (action) {
       case ResultActionNextLesson():
         Navigator.of(context).pop(PracticeExit.openNextLesson);
@@ -250,7 +269,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           );
         }
       case ResultActionRaiseTempo():
-        _c.tempo = _c.tempo.stepped(5);
+        // The ladder already raised it: never two steps for one run.
+        if (ladder is! TempoLadderStepped) _c.tempo = _c.tempo.stepped(5);
       case ResultActionCheckSetup():
         await _openSetup(SetupStep.placement);
       case ResultActionPerformance():
@@ -404,6 +424,32 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                 ),
               ],
             ),
+            if (_ladder.available)
+              SwitchListTile(
+                key: const Key('practice-tempo-ladder'),
+                contentPadding: EdgeInsets.zero,
+                dense: true,
+                title: Text(
+                  uiText(
+                    context,
+                    _ladder.enabled
+                        ? TempoLadderCopy.switchOn
+                        : TempoLadderCopy.switchOff,
+                  ),
+                ),
+                subtitle: _ladder.enabled
+                    ? Text(
+                        uiText(
+                          context,
+                          TempoLadderCopy.switchHint,
+                          values: {'v0': _ladder.step, 'v1': t.targetBpm},
+                        ),
+                        key: const Key('practice-tempo-ladder-hint'),
+                      )
+                    : null,
+                value: _ladder.enabled,
+                onChanged: (v) => setState(() => _ladder.enabled = v),
+              ),
           ],
           SwitchListTile(
             key: const Key('practice-wait-mode'),

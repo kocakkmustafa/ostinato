@@ -6397,6 +6397,17 @@
     "9018c99c633a8ac1": "Mantuve un tempo estable y cómodo.",
     "1adcc5eddf3bcec8": "Las notas sonaron claras, sin trasteo.",
     "c8254e775e62b6bd": "Hice toda la tarea con la guitarra frente a mí.",
-    "b2416478bce4b256": "Puedo mostrar en la guitarra cada punto de la explicación."
+    "b2416478bce4b256": "Puedo mostrar en la guitarra cada punto de la explicación.",
+    "992d6ade7ce199a5": "Escalera de tempo: activada",
+    "16cdaba08210efce": "Escalera de tempo: desactivada",
+    "a9198dedf13916d2": "Después de una pasada completa que cumple los criterios, la siguiente es {v0} BPM más rápida, hasta el tempo objetivo ♩={v1}.",
+    "3a5f83734acbbd06": "Escalera de tempo",
+    "6c8cfc0642830513": "Siguiente pasada a ♩={v0}",
+    "43921a381564e5f5": "Siguiente pasada al tempo objetivo ♩={v0}: esa pasada cuenta para la prueba",
+    "72d2c16d7b73ba67": "La siguiente pasada sigue a ♩={v0}: la escalera sube después de una pasada completa que cumple los criterios",
+    "c26eae7f0aece97b": "Objetivo alcanzado: esta pasada cuenta para la prueba",
+    "fece3d7db90be59e": "Objetivo alcanzado: una pasada completa a este tempo cuenta para la prueba",
+    "3cf235f0a516306d": "Solo una pasada al tempo objetivo ♩={v0} completa la lección.",
+    "14fb5991656683a8": "Tocar a ♩={v0}"
   }
 }

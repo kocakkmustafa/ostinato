@@ -6397,6 +6397,17 @@
     "9018c99c633a8ac1": "I kept a steady, comfortable tempo.",
     "1adcc5eddf3bcec8": "The notes rang clearly, without buzzing.",
     "c8254e775e62b6bd": "I worked through the task with the guitar in front of me.",
-    "b2416478bce4b256": "I can show each point of the explanation on the guitar."
+    "b2416478bce4b256": "I can show each point of the explanation on the guitar.",
+    "992d6ade7ce199a5": "Tempo ladder: On",
+    "16cdaba08210efce": "Tempo ladder: Off",
+    "a9198dedf13916d2": "After a full run that meets the checks, the next run is {v0} BPM faster, up to the target ♩={v1}.",
+    "3a5f83734acbbd06": "Tempo ladder",
+    "6c8cfc0642830513": "Next run at ♩={v0}",
+    "43921a381564e5f5": "Next run at the target ♩={v0} — that run counts for the gate",
+    "72d2c16d7b73ba67": "Next run stays at ♩={v0} — the ladder moves up after a full run that meets the checks",
+    "c26eae7f0aece97b": "Target reached — this run counts for the gate",
+    "fece3d7db90be59e": "Target reached — a full run here counts for the gate",
+    "3cf235f0a516306d": "Only a run at the target ♩={v0} completes the lesson.",
+    "14fb5991656683a8": "Play at ♩={v0}"
   }
 }

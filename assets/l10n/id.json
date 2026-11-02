@@ -6390,6 +6390,17 @@
     "9018c99c633a8ac1": "Aku menjaga tempo yang stabil dan nyaman.",
     "1adcc5eddf3bcec8": "Not berbunyi jernih, tanpa dengung.",
     "c8254e775e62b6bd": "Aku mengerjakan seluruh tugas dengan gitar di depanku.",
-    "b2416478bce4b256": "Aku bisa menunjukkan setiap poin penjelasan di gitar."
+    "b2416478bce4b256": "Aku bisa menunjukkan setiap poin penjelasan di gitar.",
+    "992d6ade7ce199a5": "Tangga tempo: Aktif",
+    "16cdaba08210efce": "Tangga tempo: Nonaktif",
+    "a9198dedf13916d2": "Setelah satu putaran penuh yang memenuhi kriteria, putaran berikutnya {v0} BPM lebih cepat, hingga tempo target ♩={v1}.",
+    "3a5f83734acbbd06": "Tangga tempo",
+    "6c8cfc0642830513": "Putaran berikutnya di ♩={v0}",
+    "43921a381564e5f5": "Putaran berikutnya di tempo target ♩={v0} — putaran itu dihitung untuk kelulusan",
+    "72d2c16d7b73ba67": "Putaran berikutnya tetap di ♩={v0} — tangga naik setelah satu putaran penuh yang memenuhi kriteria",
+    "c26eae7f0aece97b": "Target tercapai — putaran ini dihitung untuk kelulusan",
+    "fece3d7db90be59e": "Target tercapai — satu putaran penuh di tempo ini dihitung untuk kelulusan",
+    "3cf235f0a516306d": "Hanya putaran di tempo target ♩={v0} yang menyelesaikan pelajaran.",
+    "14fb5991656683a8": "Mainkan di ♩={v0}"
   }
 }

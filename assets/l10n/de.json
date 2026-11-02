@@ -6397,6 +6397,17 @@
     "9018c99c633a8ac1": "Ich habe ein gleichmäßiges, bequemes Tempo gehalten.",
     "1adcc5eddf3bcec8": "Die Töne klangen klar, ohne Schnarren.",
     "c8254e775e62b6bd": "Ich habe die Aufgabe mit der Gitarre vor mir durchgearbeitet.",
-    "b2416478bce4b256": "Ich kann jeden Punkt der Erklärung auf der Gitarre zeigen."
+    "b2416478bce4b256": "Ich kann jeden Punkt der Erklärung auf der Gitarre zeigen.",
+    "992d6ade7ce199a5": "Tempoleiter: An",
+    "16cdaba08210efce": "Tempoleiter: Aus",
+    "a9198dedf13916d2": "Nach einer vollständigen Runde, die die Kriterien erfüllt, ist die nächste Runde {v0} BPM schneller, bis zum Zieltempo ♩={v1}.",
+    "3a5f83734acbbd06": "Tempoleiter",
+    "6c8cfc0642830513": "Nächste Runde mit ♩={v0}",
+    "43921a381564e5f5": "Nächste Runde im Zieltempo ♩={v0} — diese Runde zählt für die Prüfung",
+    "72d2c16d7b73ba67": "Die nächste Runde bleibt bei ♩={v0} — die Leiter steigt nach einer vollständigen Runde, die die Kriterien erfüllt",
+    "c26eae7f0aece97b": "Ziel erreicht — diese Runde zählt für die Prüfung",
+    "fece3d7db90be59e": "Ziel erreicht — eine vollständige Runde in diesem Tempo zählt für die Prüfung",
+    "3cf235f0a516306d": "Nur eine Runde im Zieltempo ♩={v0} schließt die Lektion ab.",
+    "14fb5991656683a8": "Mit ♩={v0} spielen"
   }
 }

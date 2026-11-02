@@ -6397,6 +6397,17 @@
     "9018c99c633a8ac1": "J’ai gardé un tempo régulier et confortable.",
     "1adcc5eddf3bcec8": "Les notes sonnaient clairement, sans frisement.",
     "c8254e775e62b6bd": "J’ai fait toute la tâche avec la guitare devant moi.",
-    "b2416478bce4b256": "Je peux montrer chaque point de l’explication sur la guitare."
+    "b2416478bce4b256": "Je peux montrer chaque point de l’explication sur la guitare.",
+    "992d6ade7ce199a5": "Échelle de tempo : activée",
+    "16cdaba08210efce": "Échelle de tempo : désactivée",
+    "a9198dedf13916d2": "Après un passage complet qui remplit les critères, le suivant est plus rapide de {v0} BPM, jusqu’au tempo cible ♩={v1}.",
+    "3a5f83734acbbd06": "Échelle de tempo",
+    "6c8cfc0642830513": "Prochain passage à ♩={v0}",
+    "43921a381564e5f5": "Prochain passage au tempo cible ♩={v0} — ce passage compte pour la validation",
+    "72d2c16d7b73ba67": "Le prochain passage reste à ♩={v0} — l’échelle monte après un passage complet qui remplit les critères",
+    "c26eae7f0aece97b": "Cible atteinte — ce passage compte pour la validation",
+    "fece3d7db90be59e": "Cible atteinte — un passage complet à ce tempo compte pour la validation",
+    "3cf235f0a516306d": "Seul un passage au tempo cible ♩={v0} termine la leçon.",
+    "14fb5991656683a8": "Jouer à ♩={v0}"
   }
 }
