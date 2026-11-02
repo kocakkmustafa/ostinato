@@ -6,6 +6,7 @@ import '../content.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../onboarding_store.dart';
+import '../ostinato_release_policy.dart';
 import '../ui_copy.dart';
 import 'v1_home_copy.dart';
 
@@ -302,11 +303,13 @@ class _ScopeStep extends StatelessWidget {
         value: '↻',
         label: uiText(context, V1HomeCopy.scopeStreak),
       ),
-      _FactRow(
-        key: const Key('onboarding-fact-written'),
-        value: '¶',
-        label: uiText(context, V1HomeCopy.scopeWritten),
-      ),
+      // The pre-v1 written lessons are not linked in the v1 store build.
+      if (ostinatoLegacyWrittenCoursesVisible)
+        _FactRow(
+          key: const Key('onboarding-fact-written'),
+          value: '¶',
+          label: uiText(context, V1HomeCopy.scopeWritten),
+        ),
     ],
   );
 }

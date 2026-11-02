@@ -6,6 +6,7 @@ import 'package:motion_account/motion_account.dart'
     show motionCameraCoachingAvailable;
 
 import '../app_locale.dart';
+import '../ostinato_release_policy.dart';
 import '../content.dart';
 import '../cue_text.dart';
 import '../design/ostinato_theme.dart';
@@ -205,7 +206,10 @@ class LibraryScreen extends StatelessWidget {
                     const SizedBox(height: 9),
                   ],
                 ],
-                const StudyReviewEntry(),
+                if (ostinatoLegacyWrittenCoursesVisible)
+                  const StudyReviewEntry()
+                else
+                  const SizedBox(height: 12),
                 WeeklyGoalCard(storeFactory: weeklyGoalStoreFactory),
                 // F4.1: the tuner is a free tool, reachable from home.
                 Padding(
@@ -227,64 +231,67 @@ class LibraryScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 11),
                 ],
-                ListTile(
-                  key: const Key('ukulele-beginner-entry'),
-                  title: Text(localized(context, 'Ukulele', 'Ukulele')),
-                  subtitle: Text(
-                    localized(
-                      context,
-                      'Written beginner course · high-G GCEA · self-observation',
-                      'Yazılı başlangıç kursu · yüksek Sol GCEA · öz gözlem',
+                // Pre-v1 written courses: hidden in the v1 store build.
+                if (ostinatoLegacyWrittenCoursesVisible) ...<Widget>[
+                  ListTile(
+                    key: const Key('ukulele-beginner-entry'),
+                    title: Text(localized(context, 'Ukulele', 'Ukulele')),
+                    subtitle: Text(
+                      localized(
+                        context,
+                        'Written beginner course · high-G GCEA · self-observation',
+                        'Yazılı başlangıç kursu · yüksek Sol GCEA · öz gözlem',
+                      ),
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const UkuleleBeginnerScreen(),
+                      ),
                     ),
                   ),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const UkuleleBeginnerScreen(),
+                  ListTile(
+                    key: const Key('bass-beginner-entry'),
+                    title: Text(localized(context, 'Bass', 'Bas')),
+                    subtitle: Text(
+                      localized(
+                        context,
+                        'Written beginner course · four-string EADG · self-observation',
+                        'Yazılı başlangıç kursu · dört telli EADG · öz gözlem',
+                      ),
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const BassBeginnerScreen(),
+                      ),
                     ),
                   ),
-                ),
-                ListTile(
-                  key: const Key('bass-beginner-entry'),
-                  title: Text(localized(context, 'Bass', 'Bas')),
-                  subtitle: Text(
-                    localized(
-                      context,
-                      'Written beginner course · four-string EADG · self-observation',
-                      'Yazılı başlangıç kursu · dört telli EADG · öz gözlem',
+                  ListTile(
+                    key: const Key('vocal-written-course'),
+                    leading: const Icon(Icons.menu_book_outlined),
+                    title: Text(
+                      localized(
+                        context,
+                        'Voice · written practice',
+                        'Vokal · yazılı çalışma',
+                      ),
+                    ),
+                    subtitle: Text(
+                      localized(
+                        context,
+                        'Comfortable beginner course · personal pitch direction · self-observation',
+                        'Rahat başlangıç kursu · kişisel perde yönü · öz gözlem',
+                      ),
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const VocalBeginnerScreen(),
+                      ),
                     ),
                   ),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const BassBeginnerScreen(),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  key: const Key('vocal-written-course'),
-                  leading: const Icon(Icons.menu_book_outlined),
-                  title: Text(
-                    localized(
-                      context,
-                      'Voice · written practice',
-                      'Vokal · yazılı çalışma',
-                    ),
-                  ),
-                  subtitle: Text(
-                    localized(
-                      context,
-                      'Comfortable beginner course · personal pitch direction · self-observation',
-                      'Rahat başlangıç kursu · kişisel perde yönü · öz gözlem',
-                    ),
-                  ),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const VocalBeginnerScreen(),
-                    ),
-                  ),
-                ),
+                ],
               ],
             ),
           ),
@@ -488,9 +495,7 @@ class _MeasuredNextLineState extends State<_MeasuredNextLine> {
       final records = await V1PracticeProgressStore(
         accountUserId: accountId,
       ).load();
-      final checks = await V1LessonCheckStore(
-        accountUserId: accountId,
-      ).load();
+      final checks = await V1LessonCheckStore(accountUserId: accountId).load();
       // Same pick as "Start next lesson": first open lesson not done.
       return V1CourseState(catalog, records, checks).next?.lesson;
     } on Object {

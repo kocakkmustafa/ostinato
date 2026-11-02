@@ -8,6 +8,7 @@ import '../catalog_copy_tr.dart';
 import '../design/app_scope.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../ostinato_release_policy.dart';
 import 'course_screen.dart';
 import 'feedback_availability.dart';
 import 'guitar_journey_screen.dart';
@@ -221,7 +222,8 @@ class InstrumentScreenRoute extends StatelessWidget {
                     const SizedBox(height: 20),
                     kicker(localized(context, 'Courses', 'Kurslar')),
                     const SizedBox(height: 10),
-                    if (discipline.id == 'piano')
+                    if (discipline.id == 'piano' &&
+                        ostinatoLegacyWrittenCoursesVisible)
                       ListTile(
                         key: const Key('piano-beginner-entry'),
                         title: Text(
@@ -245,7 +247,16 @@ class InstrumentScreenRoute extends StatelessWidget {
                           ),
                         ),
                       ),
-                    if (discipline.id == 'guitar') ...<Widget>[
+                    // v1: the v1 course opens from the measured-practice card
+                    // above; the pre-v1 60-lesson journey is not linked. The
+                    // note tool that lived on the journey page moves here.
+                    if (discipline.id == 'guitar' &&
+                        !ostinatoLegacyWrittenCoursesVisible) ...<Widget>[
+                      const NoteObservationCard(),
+                      const SizedBox(height: 10),
+                    ],
+                    if (discipline.id == 'guitar' &&
+                        ostinatoLegacyWrittenCoursesVisible) ...<Widget>[
                       Material(
                         color: Colors.transparent,
                         child: InkWell(

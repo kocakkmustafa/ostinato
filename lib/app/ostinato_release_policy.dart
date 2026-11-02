@@ -6,6 +6,14 @@ import 'package:motion_account/motion_account.dart';
 /// the paid-access gate and the membership page it opens.
 const bool ostinatoPaidFeaturesAvailable = true;
 
+/// v1 store scope (founder, 2026-11-02): the guitar course (v1, 240 lessons)
+/// is open; voice and piano show "Coming soon". The pre-v1 written courses
+/// (60-lesson guitar journey, ukulele 24, bass 24, voice 22, piano 25) and
+/// the written recall page that links to them are not reachable from the
+/// home, library or guitar page. Their code and stored progress stay; this
+/// flag only removes the entry points.
+const bool ostinatoLegacyWrittenCoursesVisible = false;
+
 /// Live camera practice stays closed in this release (unchanged).
 const bool ostinatoCameraPracticeAvailable = false;
 
