@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m11-06",
+  "title": {
+    "en": "Wider broken chords",
+    "tr": "Geniş kırık akorlar"
+  },
+  "goal": {
+    "en": "Plays the root-fifth-tenth broken chord on C and F with the left hand at ♩=60, without straining the hand.",
+    "tr": "Sol elle C ve F üzerinde kök-beşli-onlu kırık akoru ♩=60'ta, eli zorlamadan çalar."
+  },
+  "explanation": [
+    {
+      "en": "A tenth is an octave plus a third: C3 to E4. Few hands can hold it, so this pattern plays it broken, one note at a time.",
+      "tr": "Onlu, bir oktav artı bir üçlüdür: Do3'ten Mi4'e. Az el onu tutabilir; bu yüzden bu kalıp onu kırık, nota nota çalar."
+    },
+    {
+      "en": "C: C3 G3 E4 G3. F: F2 C3 A3 C3. Fingers 5-2-1-2.",
+      "tr": "C: Do3 Sol3 Mi4 Sol3. F: Fa2 Do3 La3 Do3. Parmaklar 5-2-1-2."
+    },
+    {
+      "en": "The hand travels; it does not stretch. After finger 2 plays the fifth, roll the hand to the right so the thumb lands on the tenth. Finger 5 leaves the root.",
+      "tr": "El gezer, gerilmez. 2. parmak beşliyi çaldıktan sonra eli sağa doğru yuvarla; başparmak onluya insin. 5. parmak kökü bırakır."
+    },
+    {
+      "en": "Roll back the same way: finger 2 returns to the fifth and the hand is ready for the next root.",
+      "tr": "Aynı yoldan geri yuvarlan: 2. parmak beşliye döner ve el sonraki köke hazır olur."
+    },
+    {
+      "en": "If the hand feels tight, stop and rest. The pedal, which joins these notes into one sound, comes in the next module.",
+      "tr": "El gerilirse dur ve dinlen. Bu notaları tek sese bağlayan pedal sonraki modülde gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The root-fifth-tenth pattern on C and F, with a click, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "C ve F üzerinde kök-beşli-onlu kalıbı, klikle, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Left hand alone, fingers 5-2-1-2, with the click at ♩=60: two bars of C, two bars of F, then one bar each of C, F and C, and hold C3 for four beats.",
+      "tr": "Yalnız sol el, 5-2-1-2. parmaklar, klikle ♩=60'ta: iki ölçü C, iki ölçü F, sonra birer ölçü C, F ve C; Do3'ü dört vuruş tut."
+    },
+    "sequence": "4/4: C3 G3 E4 G3 | C3 G3 E4 G3 | F2 C3 A3 C3 | F2 C3 A3 C3 | C3 G3 E4 G3 | F2 C3 A3 C3 | C3 G3 E4 G3 | C3:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My hand opened without strain.",
+      "tr": "Elim zorlanmadan açıldı."
+    },
+    {
+      "en": "Finger 5 let go of the root before the thumb reached the tenth.",
+      "tr": "Başparmak onluya ulaşmadan önce 5. parmak kökü bıraktı."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "The thumb fell short of the tenth: D4 instead of E4. Let the hand travel further; do not reach with the thumb alone.",
+        "tr": "Başparmak onluya ulaşmadı: Mi4 yerine Re4. El daha ileri gitsin; yalnız başparmakla uzanma."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The tenth comes late because the hand stretches before it moves. Play bar 1 at ♩=45 and feel one smooth roll to the right.",
+        "tr": "Onlu geç geliyor, çünkü el hareket etmeden önce geriliyor. 1. ölçüyü ♩=45'te çal ve sağa doğru tek, yumuşak bir yuvarlanma hisset."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play root-fifth-octave first (C3 G3 C4 G3), then replace the octave with the tenth.",
+    "tr": "Önce kök-beşli-oktav çal (Do3 Sol3 Do4 Sol3), sonra oktavın yerine onluyu koy."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

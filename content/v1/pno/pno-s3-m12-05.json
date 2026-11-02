@@ -1,0 +1,86 @@
+{
+  "id": "pno-s3-m12-05",
+  "title": { "en": "When not to pedal", "tr": "Ne zaman pedalsız" },
+  "goal": {
+    "en": "Chooses between pedal and no pedal for a passage, by ear and from the score, and plays a short passage both ways.",
+    "tr": "Bir bölüm için pedallı ya da pedalsız çalmayı kulakla ve notadan seçer, kısa bir bölümü iki türlü çalar."
+  },
+  "explanation": [
+    {
+      "en": "The pedal makes everything ring together. That is good for one chord and bad for notes that should stay apart.",
+      "tr": "Pedal her şeyi birlikte çınlatır. Bu, tek akor için iyidir; ayrı kalması gereken notalar için iyi değildir."
+    },
+    {
+      "en": "Leave the pedal off for scale steps. Neighbouring notes held together make a blur.",
+      "tr": "Gam basamaklarında pedalı kullanma. Birlikte tutulan komşu notalar bulanıklık yapar."
+    },
+    {
+      "en": "Leave it off for staccato and for rests. The pedal would fill the silence you are meant to hear.",
+      "tr": "Staccato ve suslarda da kullanma. Pedal, duyulması gereken sessizliği doldurur."
+    },
+    {
+      "en": "If the score shows no pedal marks, start without pedal. Add it only where it helps and the sound stays clear.",
+      "tr": "Notada pedal işareti yoksa pedalsız başla. Yalnız yardım ettiği ve sesin net kaldığı yerde ekle."
+    },
+    {
+      "en": "When in doubt, play the passage both ways and keep the clearer one.",
+      "tr": "Emin değilsen bölümü iki türlü çal ve daha net olanı seç."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays a short original passage with and without pedal, or shows it in the score; the drill synthesizes both versions.",
+      "tr": "Her soruda kısa özgün bir bölüm pedallı ve pedalsız çalınır ya da notada gösterilir; alıştırma iki sürümü de sentezler."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "Ö"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Answer 4 on-screen questions: for each passage, choose pedal or no pedal. Then play C4 D4 E4 F4 G4 slowly twice, once with the pedal held and once without, and C4 E4 G4 staccato the same way. The app scores only the questions; the playing part is a self-check, so tick the checklist.",
+      "tr": "Ekrandaki 4 soruyu yanıtla: her bölüm için pedallı ya da pedalsız seç. Sonra Do4 Re4 Mi4 Fa4 Sol4'ü yavaşça iki kez çal, bir kez pedal basılıyken bir kez pedalsız; Do4 Mi4 Sol4'ü staccato aynı biçimde çal. Uygulama yalnız soruları puanlar; çalma bölümü öz denetimdir, bu yüzden kontrol listesini işaretle."
+    },
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 4,
+      "params": {
+        "set": "pedal_or_dry",
+        "items": ["scale_steps", "staccato", "rests", "one_chord_broken", "chord_change"],
+        "playBothVersions": true
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "With the pedal held, the scale steps blurred together.", "tr": "Pedal basılıyken gam basamakları birbirine karıştı." },
+    { "en": "Without the pedal, each step sounded clear.", "tr": "Pedalsız her basamak net duyuldu." },
+    { "en": "With the pedal, the staccato notes lost their silences.", "tr": "Pedallıyken staccato notalar sessizliklerini kaybetti." },
+    { "en": "I can say why I chose pedal or no pedal for each passage.", "tr": "Her bölüm için neden pedallı ya da pedalsız seçtiğimi söyleyebiliyorum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: pedal was chosen for a stepwise line.", "tr": "Farklı cevap: basamaklı bir dizi için pedal seçildi." },
+      "fix": {
+        "en": "Replay both versions and listen to the neighbouring notes. With pedal they ring on top of each other.",
+        "tr": "İki sürümü yeniden dinle ve komşu notalara kulak ver. Pedallıyken üst üste çınlarlar."
+      }
+    },
+    {
+      "error": { "en": "Checklist: an item stayed unticked.", "tr": "Kontrol listesi: bir madde işaretlenmedi." },
+      "fix": {
+        "en": "Read that item again and play only that passage both ways once more.",
+        "tr": "O maddeyi yeniden oku ve yalnız o bölümü bir kez daha iki türlü çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Compare only the scale steps, with and without pedal, before the staccato notes.",
+    "tr": "Staccato notalardan önce yalnız gam basamaklarını pedallı ve pedalsız karşılaştır."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

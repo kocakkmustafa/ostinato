@@ -1,0 +1,109 @@
+{
+  "id": "pno-s2-m06-11",
+  "title": {
+    "en": "Scale fingering maps",
+    "tr": "Gam parmak haritaları"
+  },
+  "goal": {
+    "en": "Matches finger numbers to the keys of the scales in this module.",
+    "tr": "Bu modüldeki gamların tuşlarına parmak numaralarını eşleştirir."
+  },
+  "explanation": [
+    {
+      "en": "Most one-octave scales in this module use one map. Right hand: 1-2-3-1-2-3-4-5. Left hand: 5-4-3-2-1-3-2-1.",
+      "tr": "Bu modüldeki bir oktavlık gamların çoğu tek bir haritayı kullanır. Sağ el: 1-2-3-1-2-3-4-5. Sol el: 5-4-3-2-1-3-2-1."
+    },
+    {
+      "en": "That map fits C, G and D major, and A, E and D minor.",
+      "tr": "Bu harita Do, Sol ve Re majöre, La, Mi ve Re minöre uyar."
+    },
+    {
+      "en": "F major is the exception in the right hand: 1-2-3-4-1-2-3-4, so that finger 4 plays B♭.",
+      "tr": "Fa majör sağ elde istisnadır: 1-2-3-4-1-2-3-4; böylece Si♭ notasını 4. parmak çalar."
+    },
+    {
+      "en": "Two quick checks: the thumb never plays a black key here, and in the right hand going up the thumb comes after finger 3 or finger 4.",
+      "tr": "İki hızlı kontrol: burada başparmak hiç siyah tuş çalmaz; sağ elde çıkarken başparmak 3. ya da 4. parmaktan sonra gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference playing; each question can play the scale it shows, piano synthesis.",
+      "tr": "Referans çalış yok; her soru gösterdiği gamı çalabilir, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Answer 8 questions. The screen shows a scale on the keyboard with one key marked; choose the finger that plays it. Some questions ask the reverse: tap the key that a given finger plays.",
+      "tr": "Sekiz soruyu yanıtla. Ekran klavyede bir gam gösterir ve bir tuşu işaretler; o tuşu çalan parmağı seç. Bazı sorular tersini sorar: verilen parmağın çaldığı tuşa dokun."
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 7
+    },
+    "drill": {
+      "type": "diagram_match",
+      "count": 8,
+      "params": {
+        "set": "scale_fingerings",
+        "diagram": "keyboard",
+        "keys": [
+          "C",
+          "G",
+          "F",
+          "D",
+          "Am",
+          "Em",
+          "Dm"
+        ],
+        "hands": [
+          "right",
+          "left"
+        ],
+        "playNotes": true
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the thumb was chosen for B♭ in F major.",
+        "tr": "Farklı cevap: Fa majörde Si♭ için başparmak seçildi."
+      },
+      "fix": {
+        "en": "The thumb does not play a black key in these scales. In the right hand, finger 4 plays B♭.",
+        "tr": "Bu gamlarda başparmak siyah tuş çalmaz. Sağ elde Si♭ notasını 4. parmak çalar."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: the left hand got the right-hand map.",
+        "tr": "Farklı cevap: sol ele sağ elin haritası verildi."
+      },
+      "fix": {
+        "en": "Mirror it. Going up, the left hand starts on finger 5 and the thumb comes in the middle.",
+        "tr": "Aynala. Çıkarken sol el 5. parmakla başlar, başparmak ortada gelir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Keep the hand maps from the explanation open beside the questions for the first round.",
+    "tr": "İlk turda anlatımdaki el haritalarını soruların yanında açık tut."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

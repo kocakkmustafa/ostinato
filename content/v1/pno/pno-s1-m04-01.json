@@ -1,0 +1,74 @@
+{
+  "id": "pno-s1-m04-01",
+  "title": { "en": "Quarter, half and whole notes", "tr": "Dörtlük, ikilik ve birlik" },
+  "goal": {
+    "en": "Claps and plays quarter, half and whole notes in time at ♩=60.",
+    "tr": "Dörtlük, ikilik ve birlik notaları ♩=60'ta zamanında alkışlar ve çalar."
+  },
+  "explanation": [
+    {
+      "en": "A note's shape shows its length. In 4/4 a quarter note lasts one beat, a half note two beats, a whole note four beats.",
+      "tr": "Notanın şekli süresini gösterir. 4/4'te dörtlük bir vuruş, ikilik iki vuruş, birlik dört vuruş sürer."
+    },
+    {
+      "en": "Filled head with a stem: quarter. Hollow head with a stem: half. Hollow head, no stem: whole.",
+      "tr": "Saplı dolu baş: dörtlük. Saplı boş baş: ikilik. Sapsız boş baş: birlik."
+    },
+    {
+      "en": "Count 1 2 3 4 in every bar. The click marks each beat.",
+      "tr": "Her ölçüde 1 2 3 4 say. Klik her vuruşu gösterir."
+    },
+    {
+      "en": "A clap is short. On a half or whole note, clap once and keep counting. On the piano, hold the key down for the whole count.",
+      "tr": "Alkış kısadır. İkilik ya da birlikte bir kez alkışla ve saymaya devam et. Piyanoda tuşu sayım bitene kadar basılı tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=60 for the claps, then the two C4 bars at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Alkışlar için ♩=60'ta klik, sonra Do4'lü iki ölçü ♩=60 ve ♩=40'ta, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A6"],
+    "task": {
+      "en": "Bars 1–2: clap with the click: quarter, quarter, half, then a whole note. Bars 3–4: play C4 with right-hand finger 1: half, quarter, quarter, then a whole note. Release the key when its count ends.",
+      "tr": "1–2. ölçüler: klikle alkışla: dörtlük, dörtlük, ikilik, sonra birlik. 3–4. ölçüler: sağ elin 1. parmağıyla Do4 çal: ikilik, dörtlük, dörtlük, sonra birlik. Sayımı bitince tuşu bırak."
+    },
+    "sequence": "4/4: q q h | w | C4:h C4:q C4:q | C4:w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I clapped once on each half and whole note and kept counting.", "tr": "Her ikilik ve birlikte bir kez alkışladım ve saymaya devam ettim." },
+    { "en": "I held C4 down for its full count.", "tr": "Do4'ü sayımının sonuna kadar basılı tuttum." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The note after a long note is rushing. Count every beat of the long note aloud.",
+        "tr": "Uzun notadan sonraki nota acele ediyor. Uzun notanın her vuruşunu sesli say."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Clap short and crisp, palms flat, and keep the phone near the keyboard.",
+        "tr": "Kısa ve net alkışla, avuçlar düz; telefonu klavyenin yakınında tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Clap bars 1–2 alone until they pass, then add the two C4 bars.",
+    "tr": "1–2. ölçüleri geçene kadar tek başına alkışla, sonra Do4'lü iki ölçüyü ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

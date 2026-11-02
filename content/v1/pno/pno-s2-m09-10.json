@@ -1,0 +1,78 @@
+{
+  "id": "pno-s2-m09-10",
+  "title": { "en": "Your own practice cycle", "tr": "Kendi çalışma döngün" },
+  "goal": {
+    "en": "Plans a short weekly practice cycle with a warm-up, one focus, one play-through and a note for next time.",
+    "tr": "Isınma, tek odak, bir baştan sona çalma ve sonraki sefer için bir nottan oluşan kısa haftalık çalışma döngüsü planlar."
+  },
+  "explanation": [
+    {
+      "en": "A practice cycle has four parts: a short warm-up, focused work on one problem, a full play-through at the chosen tempo, and a note for next time.",
+      "tr": "Bir çalışma döngüsünün dört parçası vardır: kısa ısınma, tek bir soruna odaklı çalışma, seçilen tempoda baştan sona çalma ve bir sonraki sefer için not."
+    },
+    {
+      "en": "Warm up with something you can already play: a pentascale, a one-octave scale or broken triads.",
+      "tr": "Zaten çalabildiğin bir şeyle ısın: bir pentaskal, bir oktav gam ya da kırık üçlüler."
+    },
+    {
+      "en": "Pick one focus: the bar where the app showed \"different note\" or \"late\" most often. Work on that bar alone, slowly.",
+      "tr": "Tek bir odak seç: uygulamanın en sık \"farklı nota\" ya da \"geç\" gösterdiği ölçü. O ölçüyü tek başına, yavaş çalış."
+    },
+    {
+      "en": "Write the note in one line: the bar, the beat, and what the app measured. Next time, start from that note.",
+      "tr": "Notu tek satırda yaz: ölçü, vuruş ve uygulamanın ölçtüğü sonuç. Bir dahaki sefere o nottan başla."
+    },
+    {
+      "en": "Short regular sessions usually help more than one long session. Rest when hands or shoulders feel tense.",
+      "tr": "Kısa düzenli oturumlar çoğu zaman tek uzun oturumdan daha çok yardım eder. Eller ya da omuzlar gerilince dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No sound. The screen shows a weekly plan with four slots per session.",
+      "tr": "Ses yok. Ekran, oturum başına dört bölmeli haftalık bir plan gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["Ö"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Plan three short sessions for this week on screen. For each one, choose a warm-up, one focus bar from a lesson you are working on, the tempo for the play-through, and leave a line for the note. Then tick the checklist.",
+      "tr": "Bu hafta için ekranda üç kısa oturum planla. Her biri için bir ısınma, üzerinde çalıştığın bir dersten tek bir odak ölçü ve baştan sona çalma temposunu seç; not için bir satır bırak. Sonra kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Fill in the plan and tick every item on the checklist. Progress is marked as self-reported.",
+        "tr": "Planı doldur ve kontrol listesindeki her maddeyi işaretle. İlerleme kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each session has a warm-up I can already play.", "tr": "Her oturumda zaten çalabildiğim bir ısınma var." },
+    { "en": "Each session has only one focus.", "tr": "Her oturumda yalnız bir odak var." },
+    { "en": "I chose a play-through tempo I can keep without stopping.", "tr": "Durmadan koruyabileceğim bir baştan sona çalma temposu seçtim." },
+    { "en": "I left a line for the note after each session.", "tr": "Her oturumdan sonra not için bir satır bıraktım." },
+    { "en": "The sessions are short enough to stay loose.", "tr": "Oturumlar gevşek kalabileceğim kadar kısa." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Checklist: an item stayed unticked.", "tr": "Kontrol listesi: bir madde işaretlenmedi." },
+      "fix": {
+        "en": "Read that item again and change only that part of the plan.",
+        "tr": "O maddeyi yeniden oku ve planın yalnız o bölümünü değiştir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If a session goes badly, shorten it to the warm-up and one bar; a finished small cycle still counts.",
+    "tr": "Bir oturum kötü geçerse onu ısınma ve tek ölçüye indir; bitmiş küçük bir döngü yine sayılır."
+  },
+  "legacy": "R: piano-24",
+  "minutes": 8,
+  "expertPending": true
+}

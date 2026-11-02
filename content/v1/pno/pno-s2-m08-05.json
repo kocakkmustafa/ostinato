@@ -1,0 +1,75 @@
+{
+  "id": "pno-s2-m08-05",
+  "title": { "en": "Parallel octaves", "tr": "Paralel oktavlar" },
+  "goal": {
+    "en": "Plays an original four-bar melody with both hands an octave apart, at ♩=70.",
+    "tr": "Özgün dört ölçülük melodiyi iki elle bir oktav arayla ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Both hands play the same melody, an octave apart. The right hand plays from C4, the left hand from C3.",
+      "tr": "İki el aynı melodiyi bir oktav arayla çalar. Sağ el Do4'ten, sol el Do3'ten çalar."
+    },
+    {
+      "en": "The microphone hears the two keys of an octave as one note. Aim to land both keys at the same moment.",
+      "tr": "Mikrofon bir oktavın iki tuşunu tek nota olarak duyar. İki tuşu aynı anda indirmeyi hedefle."
+    },
+    {
+      "en": "This melody has skips as well as steps. The fingers mirror: when the right hand skips from 1 to 3, the left hand skips from 5 to 3.",
+      "tr": "Bu melodide basamakların yanında atlamalar da var. Parmaklar aynalanır: sağ el 1'den 3'e atlarken sol el 5'ten 3'e atlar."
+    },
+    {
+      "en": "Learn each hand alone first, then play them together at a slow tempo.",
+      "tr": "Önce her eli ayrı öğren, sonra yavaş tempoda birlikte çal."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four-bar melody in octaves at ♩=70 and ♩=50, piano synthesis.",
+      "tr": "Oktavlarla özgün dört ölçülük melodi, ♩=70 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the four bars with both hands an octave apart, with the click at ♩=70: C E D F | E G, then F for two beats | G F E D | E D, then C for two beats. Right hand from C4 (1 3 2 4 | 3 5 4 | 5 4 3 2 | 3 2 1). Left hand from C3 (5 3 4 2 | 3 1 2 | 1 2 3 4 | 3 4 5).",
+      "tr": "Dört ölçüyü iki elle bir oktav arayla, ♩=70'te klikle çal: Do Mi Re Fa | Mi Sol, sonra iki vuruş Fa | Sol Fa Mi Re | Mi Re, sonra iki vuruş Do. Sağ el Do4'ten (1 3 2 4 | 3 5 4 | 5 4 3 2 | 3 2 1). Sol el Do3'ten (5 3 4 2 | 3 1 2 | 1 2 3 4 | 3 4 5)."
+    },
+    "sequence": "C4 E4 D4 F4 | E4 G4 F4:h | G4 F4 E4 D4 | E4 D4 C4:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1", "P2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both hands started each note together.", "tr": "İki el her notaya birlikte başladı." },
+    { "en": "Both hands played the same note name every time.", "tr": "İki el her seferinde aynı nota adını çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one white key away.", "tr": "Farklı nota, bir beyaz tuş ötede." },
+      "fix": {
+        "en": "In the skips (C to E, D to F) one hand landed on the neighbour key. Play bar 1 hands alone and say the finger numbers.",
+        "tr": "Atlamalarda (Do'dan Mi'ye, Re'den Fa'ya) bir el komşu tuşa indi. 1. ölçüyü eller ayrı çal ve parmak numaralarını söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "One hand lags behind the other. Play the melody at ♩=50 and listen for one sound per note.",
+        "tr": "Bir el ötekinin gerisinde kalıyor. Melodiyi ♩=50'de çal ve her notada tek ses duymaya çalış."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–2 in octaves at ♩=50 until each pair lands together, then add bars 3–4.",
+    "tr": "Her çift birlikte inene kadar 1–2. ölçüleri ♩=50'de oktavlarla çal, sonra 3–4. ölçüleri ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

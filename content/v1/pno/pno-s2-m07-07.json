@@ -1,0 +1,113 @@
+{
+  "id": "pno-s2-m07-07",
+  "title": {
+    "en": "The inversion chain",
+    "tr": "Çevrim zinciri"
+  },
+  "goal": {
+    "en": "Plays C in root position, first inversion, second inversion and root position an octave up, broken, at ♩=60→80.",
+    "tr": "C'yi kök durumda, birinci çevrimde, ikinci çevrimde ve bir oktav yukarıda kök durumda kırık olarak ♩=60→80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "The chain climbs through C: C4 E4 G4, then E4 G4 C5, then G4 C5 E5, then C5 E5 G5.",
+      "tr": "Zincir C'nin içinden yukarı çıkar: Do4 Mi4 Sol4, sonra Mi4 Sol4 Do5, sonra Sol4 Do5 Mi5, sonra Do5 Mi5 Sol5."
+    },
+    {
+      "en": "Each step moves the lowest note to the top. Two notes stay, one note jumps up.",
+      "tr": "Her adımda en alttaki nota en üste çıkar. İki nota yerinde kalır, biri yukarı atlar."
+    },
+    {
+      "en": "Fingering: 1-3-5, 1-2-5, 1-3-5, 1-3-5. Only the first inversion uses finger 2.",
+      "tr": "Parmaklar: 1-3-5, 1-2-5, 1-3-5, 1-3-5. Yalnız birinci çevrim 2. parmağı kullanır."
+    },
+    {
+      "en": "Use the rest at the end of each bar to move the hand. Look at the new thumb key before you land.",
+      "tr": "Her ölçünün sonundaki susu eli taşımak için kullan. Konmadan önce başparmağın yeni tuşuna bak."
+    },
+    {
+      "en": "Start at ♩=60. Raise the tempo in steps of 5 only when the bar changes are on time.",
+      "tr": "♩=60'tan başla. Ölçü geçişleri zamanında olunca tempoyu 5'er artır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C, C6, C64 and C an octave up, broken bottom to top with a rest on beat 4, at ♩=80 and at ♩=55, piano synthesis with click.",
+      "tr": "C, C6, C64 ve bir oktav yukarıda C, alttan üste kırık, 4. vuruşta sus, ♩=80 ve ♩=55, klikli piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand. Play each position broken, bottom to top, then rest on beat 4: C, C6, C64, C an octave up. Start at ♩=60 with the click and climb to ♩=80.",
+      "tr": "Sağ el. Her konumu alttan üste kırık çal, sonra 4. vuruşta sus: C, C6, C64, bir oktav yukarıda C. Klikle ♩=60'tan başla, ♩=80'e çık."
+    },
+    "sequence": "4/4: C4 E4 G4 qr | E4 G4 C5 qr | G4 C5 E5 qr | C5 E5 G5 qr",
+    "tempo": {
+      "open": 60,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used 1-2-5 only for C6.",
+      "tr": "1-2-5'i yalnız C6'da kullandım."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The hand arrives late after the rest. Move during the rest itself, not on the next beat.",
+        "tr": "El sustan sonra geç geliyor. Taşınmayı sonraki vuruşta değil, susun içinde yap."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "In C6 finger 5 fell on B4 instead of C5. The top of a first inversion is a sixth above the bottom.",
+        "tr": "C6'da 5. parmak Do5 yerine Si4'e düştü. Birinci çevrimin üst notası alt notanın altılı üstündedir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the first two bars (C and C6) at ♩=50, then add one bar at a time.",
+    "tr": "Önce ♩=50'de yalnız ilk iki ölçüyü (C ve C6) çal, sonra her seferinde bir ölçü ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

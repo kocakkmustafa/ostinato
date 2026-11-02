@@ -1,0 +1,77 @@
+{
+  "id": "pno-s3-m13-06",
+  "title": { "en": "Slash chords and bass notes", "tr": "Bölü akorlar ve bas" },
+  "goal": {
+    "en": "Reads four slash chords and plays each one broken, the bass note after the slash in the left hand and the chord in the right hand.",
+    "tr": "Dört bölü akoru okur ve her birini kırık çalar: bölüden sonraki bas notası sol elde, akor sağ elde."
+  },
+  "explanation": [
+    {
+      "en": "A slash chord has two parts. The letter before the slash is the chord. The letter after the slash is the bass note.",
+      "tr": "Bölü akorun iki parçası vardır. Bölüden önceki harf akordur. Bölüden sonraki harf bas notasıdır."
+    },
+    {
+      "en": "C/E means a C chord over E in the bass. The left hand plays E, the right hand plays C-E-G.",
+      "tr": "C/E, basta Mi olan bir C akoru demektir. Sol el Mi'yi, sağ el Do-Mi-Sol'ü çalar."
+    },
+    {
+      "en": "The bass note can be a chord note (C/E, F/C, G/B) or a note outside the chord (Am/G). Either way, the left hand plays the letter after the slash.",
+      "tr": "Bas notası akorun bir notası olabilir (C/E, F/C, G/B) ya da akorun dışında bir nota (Am/G). Her iki durumda da sol el bölüden sonraki harfi çalar."
+    },
+    {
+      "en": "Slash chords often make a smooth bass line. Here the bass walks down: E3, C3, B2, G2.",
+      "tr": "Bölü akorlar çoğu zaman akıcı bir bas çizgisi kurar. Burada bas aşağı yürür: Mi3, Do3, Si2, Sol2."
+    },
+    {
+      "en": "There is no click in this lesson. Take your time to find each bass note; the microphone checks the notes.",
+      "tr": "Bu derste klik yok. Her bas notasını bulmak için acele etme; mikrofon notaları kontrol eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C/E, F/C, G/B and Am/G broken: left-hand bass note, then the right-hand root-position chord one note at a time, slow, piano synthesis.",
+      "tr": "C/E, F/C, G/B ve Am/G kırık: önce sol el bas notası, sonra sağ elde kök konumundaki akor notaları tek tek, yavaş, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "For each symbol, play the bass note with the left hand and hold it, then the chord with the right hand, root-third-fifth with fingers 1-3-5. C/E: E3, then C4 E4 G4. F/C: C3, then F4 A4 C5. G/B: B2, then G4 B4 D5. Am/G: G2, then A4 C5 E5.",
+      "tr": "Her sembolde bas notasını sol elle çal ve tut, sonra akoru sağ elle kök-üçlü-beşli sırasıyla 1-3-5 parmaklarıyla çal. C/E: Mi3, sonra Do4 Mi4 Sol4. F/C: Do3, sonra Fa4 La4 Do5. G/B: Si2, sonra Sol4 Si4 Re5. Am/G: Sol2, sonra La4 Do5 Mi5."
+    },
+    "sequence": "4/4: E3 C4 E4 G4 | C3 F4 A4 C5 | B2 G4 B4 D5 | G2 A4 C5 E5",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The left hand played the letter after the slash every time.", "tr": "Sol el her seferinde bölüden sonraki harfi çaldı." },
+    { "en": "The bass note kept ringing under the chord.", "tr": "Bas notası akorun altında çınlamayı sürdürdü." },
+    { "en": "I can say which bass note in this lesson is outside its chord.", "tr": "Bu dersteki hangi bas notasının akorunun dışında olduğunu söyleyebiliyorum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, the chord's root instead of the bass.", "tr": "Farklı nota, bas yerine akorun kökü." },
+      "fix": {
+        "en": "The left hand read the first letter. Read the symbol from the right: the bass first, then the chord.",
+        "tr": "Sol el ilk harfi okudu. Sembolü sağdan oku: önce bas, sonra akor."
+      }
+    },
+    {
+      "error": { "en": "Different note, one white key too high.", "tr": "Farklı nota, bir beyaz tuş yukarıda." },
+      "fix": {
+        "en": "For G/B the left hand found C3 instead of B2. B is the white key just below C.",
+        "tr": "G/B'de sol el Si2 yerine Do3'ü buldu. Si, Do'nun hemen altındaki beyaz tuştur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the bass line E3, C3, B2, G2 first while you say the four symbols, then add the right hand.",
+    "tr": "Önce dört sembolü söylerken yalnız Mi3, Do3, Si2, Sol2 bas çizgisini çal, sonra sağ eli ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,90 @@
+{
+  "id": "pno-s2-test",
+  "title": { "en": "Level 2 test", "tr": "Seviye 2 testi" },
+  "goal": {
+    "en": "Shows the Level 2 skills: pentascales, one-octave scales, triads, simple two-hand playing and sight-reading.",
+    "tr": "Seviye 2 becerilerini gösterir: pentaskallar, bir oktav gamlar, üçlüler, basit iki el ve deşifre."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, pentascales: four major and two minor, hands separate, at ♩=100. Part 2, scales: C, G and F major and A minor, one octave, hands separate, at ♩=80.",
+      "tr": "1. bölüm, pentaskallar: dört majör ve iki minör, eller ayrı, ♩=100. 2. bölüm, gamlar: Do, Sol ve Fa majör ile La minör, bir oktav, eller ayrı, ♩=80."
+    },
+    {
+      "en": "Part 3, triads: broken triads and the inversion chain at ♩=80. A blocked version is optional and experimental; it never decides the result.",
+      "tr": "3. bölüm, üçlüler: kırık üçlüler ve çevrim zinciri, ♩=80. Blok sürümü isteğe bağlı ve deneyseldir; sonucu hiçbir zaman belirlemez."
+    },
+    {
+      "en": "Part 4, two hands: a new eight-bar piece at ♩=76. Part 5, sight-reading: a new eight-bar line at ♩=66, not played before your try.",
+      "tr": "4. bölüm, iki el: yeni bir sekiz ölçülük parça, ♩=76. 5. bölüm, deşifre: denemenden önce çalınmayan yeni bir sekiz ölçülük dizi, ♩=66."
+    },
+    {
+      "en": "In every part only one new note starts at a time. With a MIDI keyboard connected, MIDI gives the result.",
+      "tr": "Her bölümde aynı anda yalnız bir yeni nota başlar. MIDI klavye bağlıysa sonucu MIDI verir."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click for all parts. Parts 1–3 can be heard first by piano synthesis at the target tempo; the part 4 and part 5 lines are played only after your try.",
+      "tr": "Tüm bölümler için klik. 1–3. bölümler önce hedef tempoda piyano sentezinde dinlenebilir; 4. ve 5. bölüm dizileri yalnız denemenden sonra çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A6"],
+    "task": {
+      "en": "Complete five parts. 1 Pentascales: four major and two minor, hands separate, at ♩=100. 2 Scales: C, G, F major and A minor, one octave, hands separate, at ♩=80. 3 Triads: broken triads and the inversion chain at ♩=80. 4 Two hands: a new eight-bar piece at ♩=76. 5 Sight-reading: a new eight-bar line at ♩=66.",
+      "tr": "Beş bölümü tamamla. 1 Pentaskallar: dört majör ve iki minör, eller ayrı, ♩=100. 2 Gamlar: Do, Sol, Fa majör ve La minör, bir oktav, eller ayrı, ♩=80. 3 Üçlüler: ♩=80'de kırık üçlüler ve çevrim zinciri. 4 İki el: ♩=76'da yeni bir sekiz ölçülük parça. 5 Deşifre: ♩=66'da yeni bir sekiz ölçülük dizi."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own: Level 2 note and timing accuracy at that part's target tempo. The optional blocked triads in part 3 do not count.",
+        "tr": "Her bölüm kendi başına geçer: o bölümün hedef temposunda Seviye 2 nota ve zamanlama ölçütü. 3. bölümdeki isteğe bağlı blok üçlüler sayılmaz."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "P1", "P2"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The thumb crossing is slow. Move the thumb under while the finger before it is still down.",
+        "tr": "Başparmak geçişi yavaş. Başparmağı, ondan önceki parmak hâlâ bastayken alttan geçir."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "In F major or the F position line, B was played instead of B♭. Rest the finger for B♭ on the black key before you start.",
+        "tr": "Fa majörde ya da Fa konumundaki dizide Si♭ yerine Si çalınmış. Başlamadan önce Si♭ parmağını siyah tuşa koy."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "legacy": "V: piano-25",
+  "minutes": 15,
+  "expertPending": true
+}

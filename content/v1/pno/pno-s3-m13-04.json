@@ -1,0 +1,79 @@
+{
+  "id": "pno-s3-m13-04",
+  "title": { "en": "Melody with chord roots", "tr": "Akor kökleriyle melodi" },
+  "goal": {
+    "en": "Plays an original eight-bar lead sheet at ♩=70: the left hand plays each chord root on beat 1 and the right hand plays the melody after it.",
+    "tr": "Özgün sekiz ölçülük lead sheet'i ♩=70'te çalar: sol el her akor kökünü 1. vuruşta çalar, sağ el melodiyi ondan sonra çalar."
+  },
+  "explanation": [
+    {
+      "en": "The simplest way to play a lead sheet: the right hand plays the melody, the left hand plays only the root of each chord symbol.",
+      "tr": "Lead sheet çalmanın en basit yolu: sağ el melodiyi çalar, sol el her akor sembolünün yalnız kökünü çalar."
+    },
+    {
+      "en": "The chords are C | G | Am | F | C | F | G | C. The root is the letter: C, G, A, F.",
+      "tr": "Akorlar C | G | Am | F | C | F | G | C. Kök harfin kendisidir: Do, Sol, La, Fa."
+    },
+    {
+      "en": "In this lead sheet the root comes on beat 1 and the melody starts on beat 2, so only one new note starts at a time. Let the root ring through the bar.",
+      "tr": "Bu lead sheet'te kök 1. vuruşta gelir, melodi 2. vuruşta başlar; böylece her an yalnız bir yeni nota başlar. Kök ölçü boyunca çınlasın."
+    },
+    {
+      "en": "Left hand in F position: F2 with finger 5, G2 with 4, A2 with 3, C3 with 1. Right hand in C position, thumb on C4.",
+      "tr": "Sol el Fa konumunda: Fa2 5. parmakla, Sol2 4. parmakla, La2 3. parmakla, Do3 1. parmakla. Sağ el Do konumunda, başparmak Do4'te."
+    },
+    {
+      "en": "Read the symbol first, then the melody. The symbol tells the left hand where to go before the bar starts.",
+      "tr": "Önce sembolü, sonra melodiyi oku. Sembol, ölçü başlamadan sol ele nereye gideceğini söyler."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original eight-bar lead sheet, root on beat 1 and melody on beats 2–4, at ♩=70 and ♩=50, piano synthesis; chord symbols shown above the staff.",
+      "tr": "Özgün sekiz ölçülük lead sheet, kök 1. vuruşta, melodi 2–4. vuruşlarda, ♩=70 ve ♩=50, piyano sentezi; akor sembolleri portenin üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the eight bars with the click at ♩=70. Each bar: the root alone on beat 1, then the melody. C: C3, E4 F4 G4. G: G2, G4 F4 D4. Am: A2, C4 D4 E4. F: F2, F4 for two beats, C4. C: C3, E4 G4 E4. F: F2, F4 E4 D4. G: G2, D4 G4 F4. C: C3, E4, then C4 for two beats.",
+      "tr": "Sekiz ölçüyü ♩=70'te klikle çal. Her ölçüde 1. vuruşta tek başına kök, sonra melodi. C: Do3, Mi4 Fa4 Sol4. G: Sol2, Sol4 Fa4 Re4. Am: La2, Do4 Re4 Mi4. F: Fa2, iki vuruş Fa4, Do4. C: Do3, Mi4 Sol4 Mi4. F: Fa2, Fa4 Mi4 Re4. G: Sol2, Re4 Sol4 Fa4. C: Do3, Mi4, sonra iki vuruş Do4."
+    },
+    "sequence": "4/4: C3 E4 F4 G4 | G2 G4 F4 D4 | A2 C4 D4 E4 | F2 F4:h C4 | C3 E4 G4 E4 | F2 F4 E4 D4 | G2 D4 G4 F4 | C3 E4 C4:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The root sounded alone on every beat 1.", "tr": "Kök her 1. vuruşta tek başına duyuldu." },
+    { "en": "The bass kept ringing under the melody.", "tr": "Bas melodinin altında çınlamayı sürdürdü." },
+    { "en": "I read each chord symbol before its bar.", "tr": "Her akor sembolünü ölçüsünden önce okudum." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one white key away.", "tr": "Farklı nota, bir beyaz tuş ötede." },
+      "fix": {
+        "en": "The left hand played the melody's first note instead of the root. Look at the letter above the bar, not at the staff, for the left hand.",
+        "tr": "Sol el kök yerine melodinin ilk notasını çaldı. Sol el için porteye değil, ölçünün üstündeki harfe bak."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The melody is rushed onto beat 1 with the root. Count \"one\" aloud with the root and wait for \"two\".",
+        "tr": "Melodi kökle birlikte 1. vuruşa kaçıyor. Kökle birlikte sesli \"bir\" say ve \"iki\"yi bekle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 only at ♩=55. Add bars 5–8 when the roots come without looking.",
+    "tr": "Yalnız 1–4. ölçüleri ♩=55'te çal. Kökler bakmadan gelince 5–8. ölçüleri ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,79 @@
+{
+  "id": "pno-s1-m03-01",
+  "title": { "en": "Left-hand five notes", "tr": "Sol elde beş nota" },
+  "goal": {
+    "en": "Plays C3 to G3 and back with the left hand, fingers 5 to 1, at ♩=60.",
+    "tr": "Sol elle Do3'ten Sol3'e ve geri, 5'ten 1'e parmaklarla ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Place left-hand fingers 5 to 1 on C3 D3 E3 F3 G3. C3 is the C just below middle C.",
+      "tr": "Sol elin 5–1. parmaklarını Do3 Re3 Mi3 Fa3 Sol3'e koy. Do3, orta Do'nun hemen altındaki Do'dur."
+    },
+    {
+      "en": "Finger numbers run opposite to the right hand when pitch rises: going up, the left hand counts 5, 4, 3, 2, 1.",
+      "tr": "Ses yükselirken parmak numaraları sağ elin tersine gider: yukarı çıkarken sol el 5, 4, 3, 2, 1 sayar."
+    },
+    {
+      "en": "The little finger (5) sits on C3 and the thumb (1) on G3.",
+      "tr": "Serçe parmak (5) Do3'te, başparmak (1) Sol3'te durur."
+    },
+    {
+      "en": "Move one finger at a time and release the previous key.",
+      "tr": "Bir parmağı hareket ettir ve önceki tuşu bırak."
+    },
+    {
+      "en": "Count four beats on the last C3 before you lift the hand.",
+      "tr": "Son Do3'te elini kaldırmadan önce dört vuruş say."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C3 D3 E3 F3 G3 F3 E3 D3 C3 at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Do3 Re3 Mi3 Fa3 Sol3 Fa3 Mi3 Re3 Do3, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play C3 D3 E3 F3 | G3 F3 E3 D3 | C3 held four beats with the left hand. Use fingers 5 4 3 2 | 1 2 3 4 | 5. One note per beat with the click; start at ♩=50 and move up to ♩=60.",
+      "tr": "Sol elle Do3 Re3 Mi3 Fa3 | Sol3 Fa3 Mi3 Re3 | Do3 dört vuruş çal. 5 4 3 2 | 1 2 3 4 | 5 parmaklarını kullan. Klikle her vuruşa bir nota; ♩=50'de başla, ♩=60'a çık."
+    },
+    "sequence": "C3 D3 E3 F3 | G3 F3 E3 D3 | C3:w",
+    "tempo": { "open": 50, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I chose each finger by the left hand, not by copying right-hand numbers.", "tr": "Parmağı sol ele göre seçtim, sağ el numaralarını kopyalamadım." },
+    { "en": "My shoulders and wrists stayed loose.", "tr": "Omuzlarım ve bileklerim gevşek kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one key off.", "tr": "Farklı nota, bir tuş kaymış." },
+      "fix": {
+        "en": "Set all five fingers on C3 to G3 before the first note and keep them there. Finger 5 is on C3.",
+        "tr": "İlk notadan önce beş parmağı Do3–Sol3'e yerleştir ve orada tut. 5. parmak Do3'tedir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Press each key all the way down and keep the phone near the middle of the keyboard.",
+        "tr": "Her tuşa sonuna kadar bas ve telefonu klavyenin ortasına yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise C3 D3 with fingers 5 4 only, then add one note at a time.",
+    "tr": "Yalnız Do3 Re3'ü 5 4 ile çalış, sonra her seferinde bir nota ekle."
+  },
+  "legacy": "R: piano-06",
+  "minutes": 10,
+  "expertPending": true
+}

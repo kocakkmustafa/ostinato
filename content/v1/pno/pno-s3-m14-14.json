@@ -1,0 +1,118 @@
+{
+  "id": "pno-s3-m14-14",
+  "title": {
+    "en": "Hanon No. 1, carefully",
+    "tr": "Dikkatle Hanon No. 1"
+  },
+  "goal": {
+    "en": "Plays the first four bars of Hanon No. 1, each hand separately, in even eighth notes at ♩=60 without tension.",
+    "tr": "Hanon No. 1'in ilk dört ölçüsünü her eli ayrı, ♩=60'ta eşit sekizliklerle ve gerilimsiz çalar."
+  },
+  "explanation": [
+    {
+      "en": "Charles-Louis Hanon (1819–1900) published Le Pianiste virtuose in 1873. Exercise 1 repeats one pattern, one step higher each bar.",
+      "tr": "Charles-Louis Hanon (1819–1900) Le Pianiste virtuose'u 1873'te yayımladı. 1. alıştırma tek bir kalıbı her ölçüde bir basamak yukarıda tekrarlar."
+    },
+    {
+      "en": "The pattern from C: C E F G A G F E. Right hand 1-2-3-4-5-4-3-2. Left hand, an octave lower, 5-4-3-2-1-2-3-4.",
+      "tr": "Do'dan kalıp: Do Mi Fa Sol La Sol Fa Mi. Sağ el 1-2-3-4-5-4-3-2. Sol el, bir oktav pes, 5-4-3-2-1-2-3-4."
+    },
+    {
+      "en": "The hand spans a sixth, wider than a five-finger position. Open the hand gently between fingers 1 and 2; do not force it.",
+      "tr": "El bir altılı açılır, beş parmak konumundan geniştir. 1. ve 2. parmak arasını nazikçe aç; zorlama."
+    },
+    {
+      "en": "Hanon writes these notes in sixteenths. Here you play them in eighths at ♩=60, a careful first tempo.",
+      "tr": "Hanon bu notaları on altılıklarla yazar. Burada ♩=60'ta sekizliklerle, dikkatli bir ilk tempoda çalarsın."
+    },
+    {
+      "en": "Fast repetition builds tension quickly. Keep the wrist loose, and stop and shake the hand out if the forearm tightens.",
+      "tr": "Hızlı tekrar gerilimi çabuk biriktirir. Bileği gevşek tut; önkol gerilirse dur ve eli gevşetip salla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "Hanon No. 1, bars 1 to 4, right hand from C4, then left hand from C3, eighth notes with a click, at ♩=60 and at ♩=45, piano synthesis.",
+      "tr": "Klikle sekizliklerle Hanon No. 1, 1–4. ölçüler, sağ el Do4'ten, sonra sol el Do3'ten, ♩=60 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand from C4: play bars 1 to 4 in eighth notes at ♩=60, two notes per beat. Rest one bar. Left hand from C3: the same four bars.",
+      "tr": "Sağ el Do4'ten: 1–4. ölçüleri ♩=60'ta sekizliklerle, vuruş başına iki nota çal. Bir ölçü dinlen. Sol el Do3'ten: aynı dört ölçü."
+    },
+    "sequence": "4/4: C4:e E4:e F4:e G4:e A4:e G4:e F4:e E4:e | D4:e F4:e G4:e A4:e B4:e A4:e G4:e F4:e | E4:e G4:e A4:e B4:e C5:e B4:e A4:e G4:e | F4:e A4:e B4:e C5:e D5:e C5:e B4:e A4:e | wr | C3:e E3:e F3:e G3:e A3:e G3:e F3:e E3:e | D3:e F3:e G3:e A3:e B3:e A3:e G3:e F3:e | E3:e G3:e A3:e B3:e C4:e B3:e A3:e G3:e | F3:e A3:e B3:e C4:e D4:e C4:e B3:e A3:e",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Every note was as loud as its neighbours, fingers 4 and 5 too.",
+      "tr": "Her nota komşuları kadar güçlüydü, 4. ve 5. parmaklar da."
+    },
+    {
+      "en": "My hand opened for the sixth without strain.",
+      "tr": "Elim altılı için zorlanmadan açıldı."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Finger 4 or 5 is too light. Let the arm weight lean slightly toward the little finger.",
+        "tr": "4. ya da 5. parmak fazla hafif. Kol ağırlığını hafifçe serçe parmağa doğru yasla."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The jump back to the next start note is late. Move the hand on the last eighth of each bar.",
+        "tr": "Sonraki başlangıç notasına dönüş geç kalıyor. Eli her ölçünün son sekizliğinde taşı."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1 and 2 only, in quarter notes at ♩=60, then go back to eighths.",
+    "tr": "Yalnız 1. ve 2. ölçüleri ♩=60'ta dörtlüklerle çal, sonra sekizliklere dön."
+  },
+  "repertoire": "Charles-Louis Hanon (1819–1900), Le Pianiste virtuose (Paris, 1873), Exercise No. 1, bars 1 to 4 (ascending pattern from C), each hand separately. Original in sixteenths; Ostinato edition in eighths at ♩=60. Source scan id not yet recorded. Notation, fingering and tempo by Ostinato. Composer died 1900; public domain, legal review pending.",
+  "minutes": 8,
+  "expertPending": true
+}

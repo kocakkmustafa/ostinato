@@ -1,0 +1,95 @@
+{
+  "id": "pno-s1-m01-03",
+  "title": { "en": "Keyboard map", "tr": "Klavye haritası" },
+  "goal": {
+    "en": "Finds C, D, E, F, G, A and B from the black-key groups and plays five Cs in order across the keyboard.",
+    "tr": "Siyah tuş gruplarından Do, Re, Mi, Fa, Sol, La ve Si'yi bulur ve klavyede beş Do'yu sırayla çalar."
+  },
+  "explanation": [
+    {
+      "en": "Black keys repeat in groups of two and three. These groups are your map.",
+      "tr": "Siyah tuşlar ikili ve üçlü gruplarla tekrarlanır. Bu gruplar senin haritandır."
+    },
+    {
+      "en": "C is the white key immediately left of a pair. F is the white key immediately left of a group of three.",
+      "tr": "Do, ikili grubun hemen solundaki beyaz tuştur. Fa, üçlü grubun hemen solundaki beyaz tuştur."
+    },
+    {
+      "en": "White keys repeat C D E F G A B (Do Re Mi Fa Sol La Si), then start again at the next C.",
+      "tr": "Beyaz tuşlar Do Re Mi Fa Sol La Si (C D E F G A B) sırasında tekrarlanır, sonra bir sonraki Do'da yeniden başlar."
+    },
+    {
+      "en": "Moving right raises pitch; moving left lowers it.",
+      "tr": "Sağa gitmek sesi inceltir, sola gitmek kalınlaştırır."
+    },
+    {
+      "en": "If you get lost, find a pair of black keys again; do not guess from a group of three.",
+      "tr": "Kaybolursan yeniden iki siyah tuş bul; üçlü gruptan tahmin etme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C2 C3 C4 C5 C6 and back down to C2, one note at a time with a pause between, piano synthesis; the drill plays each key it asks about.",
+      "tr": "Do2 Do3 Do4 Do5 Do6 ve geri Do2'ye; notalar tek tek, aralarında kısa duraklama, piyano sentezi. Alıştırma sorduğu her tuşu çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "Part 1: answer 8 questions on the keyboard drawing: tap the named white key. Part 2: play the five Cs the drawing marks, from C2 up to C6 and back down, one at a time. The middle one is middle C (C4); you meet it properly in the next lesson. Take your time; there is no click.",
+      "tr": "1. bölüm: klavye çiziminde 8 soruyu yanıtla: adı verilen beyaz tuşa dokun. 2. bölüm: çizimin işaretlediği beş Do'yu Do2'den Do6'ya ve geri, tek tek çal. Ortadaki orta Do'dur (Do4); onu bir sonraki derste yakından tanıyacaksın. Acele etme; klik yok."
+    },
+    "sequence": "C2 C3 C4 C5 C6 C5 C4 C3 C2",
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 8,
+      "params": {
+        "set": "white_key_names",
+        "diagram": "keyboard",
+        "notes": ["C", "D", "E", "F", "G", "A", "B"],
+        "playNotes": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found each C from a pair of black keys, without counting from the end.", "tr": "Her Do'yu baştan saymadan, iki siyah tuştan buldum." },
+    { "en": "Each C sounded higher as I moved right and lower as I moved left.", "tr": "Sağa gittikçe her Do daha ince, sola gittikçe daha kalın çıktı." },
+    { "en": "My Cs matched the reference sound.", "tr": "Do'larım referans sesle aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a whole step high: D instead of C.", "tr": "Farklı nota, bir tam ses yüksek: Do yerine Re." },
+      "fix": {
+        "en": "C is left of the pair of black keys, not between them.",
+        "tr": "Do, iki siyah tuşun arasında değil, solundadır."
+      }
+    },
+    {
+      "error": { "en": "Different note, a perfect fourth high: F instead of C.", "tr": "Farklı nota, bir tam dörtlü yüksek: Do yerine Fa." },
+      "fix": {
+        "en": "You started from a group of three. Find a pair of black keys and take the white key on its left.",
+        "tr": "Üçlü gruptan başladın. İki siyah tuş bul ve solundaki beyaz tuşu al."
+      }
+    },
+    {
+      "error": { "en": "Different answer: a white key one step away.", "tr": "Farklı cevap: bir adım ötedeki beyaz tuş." },
+      "fix": {
+        "en": "Find C first, then say the names to the right aloud: C, D, E, F, G, A, B.",
+        "tr": "Önce Do'yu bul, sonra sağa doğru adları sesli söyle: Do, Re, Mi, Fa, Sol, La, Si."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C3, C4 and C5 first. On a small keyboard, play the Cs you have.",
+    "tr": "Önce yalnız Do3, Do4 ve Do5'i çal. Küçük bir klavyede sende olan Do'ları çal."
+  },
+  "legacy": "R: piano-02",
+  "minutes": 12,
+  "expertPending": true
+}

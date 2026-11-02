@@ -1,0 +1,123 @@
+{
+  "id": "pno-s2-m05-12",
+  "title": {
+    "en": "Pentascale checkpoint",
+    "tr": "Pentaskal geçişi"
+  },
+  "goal": {
+    "en": "Plays F, D, A and E major and C and E minor pentascales hands separately at ♩=100.",
+    "tr": "Fa, Re, La ve Mi majör ile Do ve Mi minör pentaskallarını eller ayrı ♩=100'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "Six pentascales in a row, hands separate: F, D, A and E major, then C and E minor.",
+      "tr": "Eller ayrı, art arda altı pentaskal: Fa, Re, La ve Mi majör, ardından Do ve Mi minör."
+    },
+    {
+      "en": "Know each key's black keys before you start: F has B♭, D has F♯, A has C♯, E has F♯ and G♯, C minor has E♭, E minor has F♯.",
+      "tr": "Başlamadan her tonun siyah tuşlarını bil: Fa'da Si♭, Re'de Fa♯, La'da Do♯, Mi'de Fa♯ ve Sol♯, Do minörde Mi♭, Mi minörde Fa♯ var."
+    },
+    {
+      "en": "For each key, play the right hand, then the left hand. Move both hands during the half rest after the left-hand line.",
+      "tr": "Her tonda önce sağ eli, sonra sol eli çal. Sol el dizisinden sonraki ikilik susta iki eli birlikte taşı."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The six pentascales in order, each right hand then left hand, with a click, at ♩=100 and at ♩=65, piano synthesis.",
+      "tr": "Altı pentaskal sırayla, her biri önce sağ el sonra sol el, klikle, ♩=100 ve ♩=65, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the six pentascales along with the click at ♩=100: F, D, A, E major, then C and E minor, each right hand then left hand. Practise slower first if you like; the checkpoint counts at ♩=100.",
+      "tr": "Altı pentaskalı ♩=100'de klikle birlikte çal: Fa, Re, La, Mi majör, sonra Do ve Mi minör; her birinde önce sağ el, sonra sol el. İstersen önce yavaş çalış; geçiş ♩=100'de sayılır."
+    },
+    "sequence": "4/4: F4 G4 A4 B♭4 | C5 B♭4 A4 G4 | F4:h hr | F3 G3 A3 B♭3 | C4 B♭3 A3 G3 | F3:h hr | D4 E4 F♯4 G4 | A4 G4 F♯4 E4 | D4:h hr | D3 E3 F♯3 G3 | A3 G3 F♯3 E3 | D3:h hr | A4 B4 C♯5 D5 | E5 D5 C♯5 B4 | A4:h hr | A2 B2 C♯3 D3 | E3 D3 C♯3 B2 | A2:h hr | E4 F♯4 G♯4 A4 | B4 A4 G♯4 F♯4 | E4:h hr | E3 F♯3 G♯3 A3 | B3 A3 G♯3 F♯3 | E3:h hr | C4 D4 E♭4 F4 | G4 F4 E♭4 D4 | C4:h hr | C3 D3 E♭3 F3 | G3 F3 E♭3 D3 | C3:h hr | E4 F♯4 G4 A4 | B4 A4 G4 F♯4 | E4:h hr | E3 F♯3 G3 A3 | B3 A3 G3 F♯3 | E3:w",
+    "tempo": {
+      "open": 100,
+      "target": 100
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I named the black keys of each key before I played it.",
+      "tr": "Her tonu çalmadan önce siyah tuşlarını söyledim."
+    },
+    {
+      "en": "Every note was the same length and the same loudness.",
+      "tr": "Her nota aynı uzunlukta ve aynı gürlükteydi."
+    },
+    {
+      "en": "I moved to the new position during the rest without rushing the count.",
+      "tr": "Sayımı hızlandırmadan sus sırasında yeni konuma geçtim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "A black key became the white key next to it: F instead of F♯, or C instead of C♯. Name the black keys of the next key during the rest.",
+        "tr": "Bir siyah tuş yanındaki beyaz tuşa dönüştü: Fa♯ yerine Fa ya da Do♯ yerine Do. Susta sonraki tonun siyah tuşlarını söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "A minor pentascale kept the major third: E instead of E♭, or G♯ instead of G. In minor, finger 3 goes down a half step.",
+        "tr": "Minör pentaskal majör üçlüyü korudu: Mi♭ yerine Mi ya da Sol yerine Sol♯. Minörde 3. parmak yarım ses iner."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The move to the next key is late. Look at the next starting note while you hold the last one.",
+        "tr": "Sonraki tona geçiş geç kalıyor. Son notayı tutarken sonraki başlangıç notasına bak."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the four major pentascales and the two minor ones as two separate runs at ♩=85, then join them at ♩=100.",
+    "tr": "Dört majör ve iki minör pentaskalı ♩=85'te iki ayrı tur olarak çal, sonra ♩=100'de birleştir."
+  },
+  "minutes": 20,
+  "expertPending": true
+}
