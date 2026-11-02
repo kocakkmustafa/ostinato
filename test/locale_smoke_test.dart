@@ -171,7 +171,12 @@ void main() {
           locale: const Locale('tr'),
           supportedLocales: appSupportedLocales,
           localizationsDelegates: appLocalizationsDelegates,
-          home: InstrumentScreenRoute(discipline: discipline),
+          // The engineering notes are off in the store build; their
+          // translations are still checked here.
+          home: InstrumentScreenRoute(
+            discipline: discipline,
+            showEngineeringNotes: true,
+          ),
         ),
       ),
     );

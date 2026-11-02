@@ -159,6 +159,46 @@ void main() {
       expect(find.byType(V1PracticeListScreen), findsOneWidget);
     });
 
+    // Store review 2026-11-02 (screens 06–08): the guitar page carried long
+    // engineering notes; the store build shows one short line instead.
+    testWidgets('guitar page: no engineering notes in the store build', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(390, 3000);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await load(tester);
+      expect(ostinatoEngineeringNotesVisible, isFalse);
+      await tester.pumpWidget(
+        host(
+          InstrumentScreenRoute(
+            discipline: repo.disciplines.firstWhere((d) => d.id == 'guitar'),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('instrument-short-line')), findsOneWidget);
+      for (final gone in [
+        'Posture reference notes',
+        'What we do not judge',
+        'Not here',
+        '24 chords',
+        'AGREE TO',
+        'Demonstrations and calibration',
+      ]) {
+        expect(find.textContaining(gone), findsNothing, reason: gone);
+      }
+      expect(find.byKey(const Key('not-measured-frame')), findsNothing);
+      expect(
+        find.byKey(const Key('feedback-availability-guitar')),
+        findsNothing,
+      );
+      expect(
+        find.byKey(const Key('guitar-measured-practice-entry')),
+        findsOneWidget,
+      );
+    });
+
     // Store review 2026-11-02 (screens 38–42): voice and piano opened a
     // "Foundations" course of nine posture-reference lessons.
     for (final id in ['voice', 'piano']) {

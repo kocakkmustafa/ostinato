@@ -20,8 +20,17 @@ import '../ui_copy.dart';
 /// Çalgı sayfası — dürüstlük kutusu ürünün vitrini (§7). Tam genişlik,
 /// kurs listesinin ÜSTÜNDE, katlanabilir DEĞİL.
 class InstrumentScreenRoute extends StatelessWidget {
-  const InstrumentScreenRoute({super.key, required this.discipline});
+  const InstrumentScreenRoute({
+    super.key,
+    required this.discipline,
+    this.showEngineeringNotes = ostinatoEngineeringNotesVisible,
+  });
   final Discipline discipline;
+
+  /// The posture-reference notes, teacher agreement, feedback capability and
+  /// "not here — and why" lists. Off in the store build
+  /// ([ostinatoEngineeringNotesVisible]): one short line replaces them.
+  final bool showEngineeringNotes;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +83,18 @@ class InstrumentScreenRoute extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 9),
-                      if (contract != null)
+                      if (!showEngineeringNotes)
+                        Text(
+                          uiText(context, V1HomeCopy.homeSubtitle),
+                          key: const Key('instrument-short-line'),
+                          style: hankenText(
+                            size: 14.5,
+                            color: OstinatoPalette.of(
+                              context,
+                            ).inkSoft.withValues(alpha: .85),
+                          ),
+                        ),
+                      if (showEngineeringNotes && contract != null)
                         Text(
                           localized(
                             context,
@@ -91,16 +111,22 @@ class InstrumentScreenRoute extends StatelessWidget {
                           ),
                           style: monoText(color: hue.ink),
                         ),
-                      const SizedBox(height: 14),
-                      Text(
-                        catalogBlurb(context, discipline.id, discipline.blurb),
-                        style: hankenText(
-                          size: 14.5,
-                          color: OstinatoPalette.of(
+                      if (showEngineeringNotes) ...<Widget>[
+                        const SizedBox(height: 14),
+                        Text(
+                          catalogBlurb(
                             context,
-                          ).inkSoft.withValues(alpha: .85),
+                            discipline.id,
+                            discipline.blurb,
+                          ),
+                          style: hankenText(
+                            size: 14.5,
+                            color: OstinatoPalette.of(
+                              context,
+                            ).inkSoft.withValues(alpha: .85),
+                          ),
                         ),
-                      ),
+                      ],
                     ],
                   ),
                 ),
@@ -110,121 +136,123 @@ class InstrumentScreenRoute extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    FeedbackAvailability(instrumentId: discipline.id),
+                    if (showEngineeringNotes)
+                      FeedbackAvailability(instrumentId: discipline.id),
                     if (discipline.id == 'guitar') ...<Widget>[
                       const MeasuredPracticeCard(),
                       const SizedBox(height: 14),
                     ],
-                    GlassCard(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            localized(
-                              context,
-                              'Posture reference notes',
-                              'Duruş referansı notları',
-                            ),
-                            style: hankenText(
-                              size: 18,
-                              weight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            localized(
-                              context,
-                              'Written courses support self-guided practice. Camera assessment '
-                                  'and posture scoring are unavailable in this version.',
-                              'Yazılı kurslar öz denetimli çalışmayı destekler. Bu sürümde '
-                                  'kamera değerlendirmesi ve duruş puanlaması kapalı.',
-                            ),
-                            style: hankenText(
-                              size: 13,
-                              color: OstinatoPalette.of(context).textMuted,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          kicker(
-                            localized(
-                              context,
-                              'Recorded references',
-                              'Kayıtlı referanslar',
-                            ),
-                            color: hue.ink,
-                          ),
-                          const SizedBox(height: 10),
-                          _HonestyRow(
-                            text: localized(
-                              context,
-                              'These notes describe historical posture references. '
-                                  'Playable teaching demonstrations are not included.',
-                              'Bu notlar tarihsel duruş referanslarını açıklar. '
-                                  'Oynatılabilir öğretim gösterimleri eklenmedi.',
-                            ),
-                            filled: true,
-                          ),
-                          const SizedBox(height: 6),
-                          const Divider(height: 1),
-                          const SizedBox(height: 12),
-                          // ÇERÇEVE DÜZELTİLDİ (O-069 · JabLab J-153).
-                          // Başlık "Not measured" idi ve TEK bir sebep ilan
-                          // ediyordu: "ölçmeye çalıştık, olmadı" — yani
-                          // TEKNİK KISIT. Teknik kısıt örtük bir VAAT taşır
-                          // ("daha iyi teknoloji çözer"); kasıtlı bir karar
-                          // taşımaz. Ölçüldü: bu listedeki 27 sınır EN AZ
-                          // DÖRT ayrı sınıftan — alet yok · kabuk eksik ·
-                          // referans yok · KARAR bize ait değil. Hiçbir
-                          // cümle yalan söylemiyordu; kusur CÜMLE düzeyinde
-                          // görünmüyordu, çünkü çerçeve KÜMENİN KENDİSİ
-                          // hakkında bir iddiaydı ve hiçbir öğesinde yazılı
-                          // değildi.
-                          kicker(
-                            localized(
-                              context,
-                              'What we do not judge — and why',
-                              'Neyi değerlendirmiyoruz ve neden',
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            localized(
-                              context,
-                              'These are not all the same kind of gap. Some '
-                                  'need a tool we do not have, some need teacher '
-                                  'data nobody has collected, some are simply not '
-                                  'built here, and at least one is not a data '
-                                  'problem at all — it is a judgement we do not '
-                                  'think is ours to make. Each line says which.',
-                              'Bu sınırların nedenleri farklıdır: eksik araç, '
-                                  'toplanmamış eğitmen verisi, burada kurulmayan '
-                                  'özellikler veya bize ait olmayan bir değerlendirme. '
-                                  'Her satır kendi nedenini açıklar.',
-                            ),
-                            key: const Key('not-measured-frame'),
-                            style: hankenText(
-                              size: 12,
-                              height: 1.5,
-                              color: OstinatoPalette.of(context).textMuted,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          for (
-                            var i = 0;
-                            i < discipline.notMeasured.length;
-                            i++
-                          )
-                            _HonestyRow(
-                              text: catalogCopy(
+                    if (showEngineeringNotes)
+                      GlassCard(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              localized(
                                 context,
-                                '${discipline.id}.notMeasured.$i',
-                                discipline.notMeasured[i],
+                                'Posture reference notes',
+                                'Duruş referansı notları',
                               ),
-                              filled: false,
+                              style: hankenText(
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
                             ),
-                        ],
+                            const SizedBox(height: 4),
+                            Text(
+                              localized(
+                                context,
+                                'Written courses support self-guided practice. Camera assessment '
+                                    'and posture scoring are unavailable in this version.',
+                                'Yazılı kurslar öz denetimli çalışmayı destekler. Bu sürümde '
+                                    'kamera değerlendirmesi ve duruş puanlaması kapalı.',
+                              ),
+                              style: hankenText(
+                                size: 13,
+                                color: OstinatoPalette.of(context).textMuted,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            kicker(
+                              localized(
+                                context,
+                                'Recorded references',
+                                'Kayıtlı referanslar',
+                              ),
+                              color: hue.ink,
+                            ),
+                            const SizedBox(height: 10),
+                            _HonestyRow(
+                              text: localized(
+                                context,
+                                'These notes describe historical posture references. '
+                                    'Playable teaching demonstrations are not included.',
+                                'Bu notlar tarihsel duruş referanslarını açıklar. '
+                                    'Oynatılabilir öğretim gösterimleri eklenmedi.',
+                              ),
+                              filled: true,
+                            ),
+                            const SizedBox(height: 6),
+                            const Divider(height: 1),
+                            const SizedBox(height: 12),
+                            // ÇERÇEVE DÜZELTİLDİ (O-069 · JabLab J-153).
+                            // Başlık "Not measured" idi ve TEK bir sebep ilan
+                            // ediyordu: "ölçmeye çalıştık, olmadı" — yani
+                            // TEKNİK KISIT. Teknik kısıt örtük bir VAAT taşır
+                            // ("daha iyi teknoloji çözer"); kasıtlı bir karar
+                            // taşımaz. Ölçüldü: bu listedeki 27 sınır EN AZ
+                            // DÖRT ayrı sınıftan — alet yok · kabuk eksik ·
+                            // referans yok · KARAR bize ait değil. Hiçbir
+                            // cümle yalan söylemiyordu; kusur CÜMLE düzeyinde
+                            // görünmüyordu, çünkü çerçeve KÜMENİN KENDİSİ
+                            // hakkında bir iddiaydı ve hiçbir öğesinde yazılı
+                            // değildi.
+                            kicker(
+                              localized(
+                                context,
+                                'What we do not judge — and why',
+                                'Neyi değerlendirmiyoruz ve neden',
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              localized(
+                                context,
+                                'These are not all the same kind of gap. Some '
+                                    'need a tool we do not have, some need teacher '
+                                    'data nobody has collected, some are simply not '
+                                    'built here, and at least one is not a data '
+                                    'problem at all — it is a judgement we do not '
+                                    'think is ours to make. Each line says which.',
+                                'Bu sınırların nedenleri farklıdır: eksik araç, '
+                                    'toplanmamış eğitmen verisi, burada kurulmayan '
+                                    'özellikler veya bize ait olmayan bir değerlendirme. '
+                                    'Her satır kendi nedenini açıklar.',
+                              ),
+                              key: const Key('not-measured-frame'),
+                              style: hankenText(
+                                size: 12,
+                                height: 1.5,
+                                color: OstinatoPalette.of(context).textMuted,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            for (
+                              var i = 0;
+                              i < discipline.notMeasured.length;
+                              i++
+                            )
+                              _HonestyRow(
+                                text: catalogCopy(
+                                  context,
+                                  '${discipline.id}.notMeasured.$i',
+                                  discipline.notMeasured[i],
+                                ),
+                                filled: false,
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
                     const SizedBox(height: 20),
                     kicker(localized(context, 'Courses', 'Kurslar')),
                     const SizedBox(height: 10),
@@ -414,8 +442,11 @@ class InstrumentScreenRoute extends StatelessWidget {
                           ),
                         ),
                       ),
-                    if (discipline.comingSoon.isNotEmpty ||
-                        discipline.outOfScopeDerived.isNotEmpty) ...<Widget>[
+                    if (showEngineeringNotes &&
+                        (discipline.comingSoon.isNotEmpty ||
+                            discipline
+                                .outOfScopeDerived
+                                .isNotEmpty)) ...<Widget>[
                       const SizedBox(height: 12),
                       // DÜZELTME (koordinatör, 2026-08-07, M-F-186): "yet"
                       // çıkarıldı. Bu başlığın altındaki liste KAPSAM-DIŞI
