@@ -188,11 +188,16 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    uiText(
-                      context,
-                      _banner,
-                      values: {'v0': kDefaultTunerToleranceCents.round()},
-                    ),
+                    // Only the tuner banner has {v0}. A value the message
+                    // does not use trips the catalog's placeholder check and
+                    // the banner falls back to English (12 locales).
+                    _banner == V1CourseCopy.bannerTuner
+                        ? uiText(
+                            context,
+                            _banner,
+                            values: {'v0': kDefaultTunerToleranceCents.round()},
+                          )
+                        : uiText(context, _banner),
                     style: body,
                   ),
                   if (_reason != null) ...[
