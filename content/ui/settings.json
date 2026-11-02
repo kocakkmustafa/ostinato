@@ -5,6 +5,11 @@
       "id": "micBody",
       "en": "In measured practice the microphone listens to the notes you play. A lesson is passed when a high enough share of its notes is heard as correct; the share needed rises with the level. Permission is asked the first time something is measured. Audio is processed on this device and is not uploaded; what you play is not recorded unless you turn on listening back to your own recording. Stopping, leaving the screen, changing account or moving the app to the background closes the microphone.",
       "tr": "Ölçülü pratikte mikrofon çaldığın notaları dinler. Notalarının yeterli bir kısmı doğru duyulduğunda ders geçilir; gereken oran seviyeyle artar. İzin, ilk ölçümde istenir. Ses bu cihazda işlenir ve yüklenmez; kendi kaydını dinleme seçeneğini açmadıkça çaldığın kaydedilmez. Durdurmak, ekrandan çıkmak, hesap değiştirmek veya uygulamayı arka plana almak mikrofonu kapatır."
+    },
+    {
+      "id": "aboutPosture",
+      "en": "{v0} Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read.",
+      "tr": "{v0} Tüm duruş referansları belden yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden kalçanızın altı okunmaz."
     }
   ]
 }

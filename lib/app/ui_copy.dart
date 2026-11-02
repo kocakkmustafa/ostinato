@@ -12,3 +12,11 @@ String uiText(
   UiCopy copy, {
   Map<String, Object?> values = const {},
 }) => localized(context, copy.$1, copy.$2, values: values);
+
+/// Joins two already localized sentences: Chinese and Japanese sentences
+/// follow each other without a space.
+String joinSentences(BuildContext context, String first, String second) {
+  final language = Localizations.maybeLocaleOf(context)?.languageCode;
+  final gap = language == 'ja' || language == 'zh' ? '' : ' ';
+  return '$first$gap$second';
+}

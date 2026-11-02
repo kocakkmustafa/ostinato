@@ -8441,6 +8441,9 @@
     "6946560ebac6e08d": "To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato membership.",
     "8c35a3bffb5f6829": "Sign in or create an account first: your membership is tied to your account, so it works on every device where you sign in.",
     "545f6c0a16d5c54c": "Your lesson results, streak and weekly goal stay on this device; this release does not sync them to an account. Your account is used for your membership.",
-    "6afa082a5c331043": "In measured practice the microphone listens to the notes you play. A lesson is passed when a high enough share of its notes is heard as correct; the share needed rises with the level. Permission is asked the first time something is measured. Audio is processed on this device and is not uploaded; what you play is not recorded unless you turn on listening back to your own recording. Stopping, leaving the screen, changing account or moving the app to the background closes the microphone."
+    "6afa082a5c331043": "In measured practice the microphone listens to the notes you play. A lesson is passed when a high enough share of its notes is heard as correct; the share needed rises with the level. Permission is asked the first time something is measured. Audio is processed on this device and is not uploaded; what you play is not recorded unless you turn on listening back to your own recording. Stopping, leaving the screen, changing account or moving the app to the background closes the microphone.",
+    "2458f83652e85824": "Accuracy depends on your phone's microphone and the room; measured results may vary.",
+    "4360eb5d0a20a482": "{v0} Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read.",
+    "a51b8da5ff450285": "A new string stretches: check it again after a few minutes."
   }
 }

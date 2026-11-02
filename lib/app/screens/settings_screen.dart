@@ -17,6 +17,7 @@ import '../practice/display/practice_display_copy.dart';
 import '../practice/display/practice_display_preferences.dart';
 import '../practice/own_recording/own_recording_copy.dart';
 import '../practice/own_recording/own_recording_preference.dart';
+import '../device_accuracy_copy.dart';
 import '../ui_copy.dart';
 import 'settings_copy.dart';
 import 'v1_home_copy.dart';
@@ -184,7 +185,11 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: 14),
               _SettingsCard(
                 title: uiText(context, V1HomeCopy.micTitle),
-                body: uiText(context, SettingsCopy.micBody),
+                body: joinSentences(
+                  context,
+                  uiText(context, SettingsCopy.micBody),
+                  uiText(context, DeviceAccuracyCopy.note),
+                ),
               ),
               const SizedBox(height: 14),
               OwnRecordingSettingCard(
@@ -225,11 +230,14 @@ class SettingsScreen extends StatelessWidget {
                 // düzeltmek, onu ürünün geri kalanında düzeltmek değildir.*
                 // Dördüncü çalgı canlıya geçtiği gün burası sessizce "Three"
                 // demeye devam ederdi.
-                body: localized(
+                body: joinSentences(
                   context,
-                  "{v0} Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read. Nothing here has been verified on real hardware.",
-                  "{v0} Tüm duruş referansları belden yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden kalçanızın altı okunmaz. Buradaki işlevler gerçek cihazda doğrulanmadı.",
-                  values: {"v0": _liveSentence(context)},
+                  uiText(
+                    context,
+                    SettingsCopy.aboutPosture,
+                    values: {"v0": _liveSentence(context)},
+                  ),
+                  uiText(context, DeviceAccuracyCopy.note),
                 ),
               ),
             ],

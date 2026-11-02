@@ -8455,6 +8455,9 @@
     "6946560ebac6e08d": "Aby zaliczyć lekcję, co najmniej 80% jej dźwięków musi być poprawnych; wtedy otwiera się następna lekcja. Pierwsze lekcje każdego kursu są bezpłatne; kolejne wymagają członkostwa Ostinato.",
     "8c35a3bffb5f6829": "Najpierw zaloguj się lub załóż konto: członkostwo jest powiązane z kontem, więc działa na każdym urządzeniu, na którym się zalogujesz.",
     "545f6c0a16d5c54c": "Wyniki lekcji, seria i cel tygodniowy zostają na tym urządzeniu; ta wersja nie synchronizuje ich z kontem. Konto służy do członkostwa.",
-    "6afa082a5c331043": "W mierzonej praktyce mikrofon słucha granych przez ciebie nut. Lekcja jest zaliczona, gdy wystarczająco duża część jej nut zostanie usłyszana jako poprawna; wymagana część rośnie z poziomem. O zgodę prosimy przy pierwszym pomiarze. Dźwięk jest przetwarzany na tym urządzeniu i nie jest przesyłany; to, co grasz, nie jest nagrywane, chyba że włączysz odsłuch własnego nagrania. Zatrzymanie, opuszczenie ekranu, zmiana konta lub przeniesienie aplikacji w tło zamyka mikrofon."
+    "6afa082a5c331043": "W mierzonej praktyce mikrofon słucha granych przez ciebie nut. Lekcja jest zaliczona, gdy wystarczająco duża część jej nut zostanie usłyszana jako poprawna; wymagana część rośnie z poziomem. O zgodę prosimy przy pierwszym pomiarze. Dźwięk jest przetwarzany na tym urządzeniu i nie jest przesyłany; to, co grasz, nie jest nagrywane, chyba że włączysz odsłuch własnego nagrania. Zatrzymanie, opuszczenie ekranu, zmiana konta lub przeniesienie aplikacji w tło zamyka mikrofon.",
+    "2458f83652e85824": "Dokładność zależy od mikrofonu telefonu i pomieszczenia; zmierzone wyniki mogą się różnić.",
+    "4360eb5d0a20a482": "{v0} Każdy wzorzec postawy powstał z nagrań dydaktycznych od pasa w górę, dlatego nic poniżej bioder nie jest odczytywane.",
+    "a51b8da5ff450285": "Nowa struna się rozciąga: sprawdź ją ponownie po kilku minutach."
   }
 }

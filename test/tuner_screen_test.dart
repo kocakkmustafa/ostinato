@@ -264,6 +264,17 @@ void main() {
     expect(find.byKey(const Key('tuner-cents')), findsOneWidget);
     expect(tester.widget<Text>(find.byKey(const Key('tuner-cents'))).data, '—');
     expect(find.textContaining('±5 cents'), findsOneWidget);
+    // Founder decision 2026-11-02: the device-accuracy sentence replaces the
+    // "simulated phone audio only, not on real phones" note.
+    expect(
+      find.text(
+        "Accuracy depends on your phone's microphone and the room; measured "
+        'results may vary. A new string stretches: check it again after a '
+        'few minutes.',
+      ),
+      findsOneWidget,
+    );
+    expect(find.textContaining('real phones'), findsNothing);
     for (final label in ['Auto', 'Manual', 'Chromatic']) {
       expect(find.text(label), findsOneWidget);
     }

@@ -11,5 +11,12 @@ abstract final class SettingsCopy {
     'Ölçülü pratikte mikrofon çaldığın notaları dinler. Notalarının yeterli bir kısmı doğru duyulduğunda ders geçilir; gereken oran seviyeyle artar. İzin, ilk ölçümde istenir. Ses bu cihazda işlenir ve yüklenmez; kendi kaydını dinleme seçeneğini açmadıkça çaldığın kaydedilmez. Durdurmak, ekrandan çıkmak, hesap değiştirmek veya uygulamayı arka plana almak mikrofonu kapatır.',
   );
 
-  static const List<UiCopy> all = [micBody];
+  /// Settings → About this build, after the live-instrument sentence
+  /// ({v0}); followed by [DeviceAccuracyCopy.note].
+  static const UiCopy aboutPosture = (
+    '{v0} Every posture reference is built from teaching footage filmed waist-up, which is why nothing below your hips is read.',
+    '{v0} Tüm duruş referansları belden yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden kalçanızın altı okunmaz.',
+  );
+
+  static const List<UiCopy> all = [micBody, aboutPosture];
 }
