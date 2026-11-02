@@ -2647,6 +2647,7 @@ const appMessageIds = <(String, String), String>{
   ("Separate bass, inner notes and melody in a short arrangement.", "Kısa düzenlemede bası, iç sesleri ve melodiyi ayır."): "691ee9a48a59e342",
   ("Finger order is correct but grouping drifts from 6/8 to six unrelated beats. Tap two large pulses and fit p–i–m and a–m–i into their respective pulses before changing chords.", "Parmak sırası doğru fakat gruplama 6/8'den altı bağımsız vuruşa kayıyor. İki büyük vuruş vur; akor değiştirmeden p–i–m ve a–m–i gruplarını her vuruşa sığdır."): "6922233b61a602a6",
   ("Click sound: Off", "Klik sesi: Kapalı"): "693fff7c904d6e15",
+  ("To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato membership.", "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato üyeliği gerektirir."): "6946560ebac6e08d",
   ("Correct note, but late.", "Doğru nota, ama geç."): "6950749114fbd1d6",
   ("The four patterns on C and G7 in eighth notes, Ostinato edition, string-model synthesis, with a click at ♩=60 and ♩=40.", "Dört örüntü C ve G7'de sekizlik, Ostinato düzenlemesi, tel modeli sentezi; klikle ♩=60 ve ♩=40."): "6956a2e10d3f75fc",
   ("Sounding and written octave", "Gerçek ve yazılı oktav"): "695b4d32e41b9c7e",

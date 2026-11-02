@@ -113,14 +113,16 @@ void main() {
           find.textContaining(language == 'tr' ? '690 ders' : '690 lessons'),
           findsOneWidget,
         );
+        // v1 submission (2026-11-02): only the Ostinato plans are sold.
         expect(
           find.textContaining(
             language == 'tr'
-                ? 'sonraki dersler Ostinato veya Motion+ aboneliği gerektirir'
-                : 'later lessons need an Ostinato or Motion+ subscription',
+                ? 'sonraki dersler Ostinato üyeliği gerektirir'
+                : 'later lessons need an Ostinato membership',
           ),
           findsOneWidget,
         );
+        expect(find.textContaining('Motion+'), findsNothing);
         expect(find.textContaining('does not grade'), findsNothing);
         expect(find.textContaining('puanlamaz'), findsNothing);
         await tester.tap(find.byKey(const Key('onboarding-primary')));

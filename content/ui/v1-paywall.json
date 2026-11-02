@@ -1,5 +1,5 @@
 {
-  "$about": "v1 paywall copy: free-scope notice above the v1 course list and the mark on paid lessons (lib/app/practice/loop/v1_paywall_copy.dart). The free scope itself is ostinatoV1FreeStages in lib/app/course_access.dart; all 14 catalogs carry these pairs.",
+  "$about": "v1 paywall copy: free-scope notice above the v1 course list, the mark on paid lessons and the onboarding note without Motion+ (lib/app/practice/loop/v1_paywall_copy.dart). The free scope itself is ostinatoV1FreeStages in lib/app/course_access.dart; all 14 catalogs carry these pairs.",
   "messages": [
     {
       "id": "freeScope",
@@ -10,6 +10,11 @@
       "id": "membershipMark",
       "en": "Membership",
       "tr": "Üyelik"
+    },
+    {
+      "id": "welcomeNoteOstinatoOnly",
+      "en": "To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato membership.",
+      "tr": "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato üyeliği gerektirir."
     }
   ]
 }
