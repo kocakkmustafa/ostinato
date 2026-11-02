@@ -8429,6 +8429,12 @@
     "c26eae7f0aece97b": "Target reached — this run counts for the gate",
     "fece3d7db90be59e": "Target reached — a full run here counts for the gate",
     "3cf235f0a516306d": "Only a run at the target ♩={v0} completes the lesson.",
-    "14fb5991656683a8": "Play at ♩={v0}"
+    "14fb5991656683a8": "Play at ♩={v0}",
+    "7574fe3c5bbd04e7": "Left-handed",
+    "4c34c9b984b0a0e8": "Mirrors the TAB strip: notes come in from the left and meet the playing line on the right. Strings keep the written order, string 1 on top. Listening and measuring do not change.",
+    "b96fb47477b1946d": "Colour-blind friendly colours",
+    "9c62f872670547a7": "Blue and orange instead of teal and amber. Every note state also keeps its own shape and symbol: ✓ correct, ◆ different note, ? couldn't hear.",
+    "39e46a8da3b6c151": "Not played yet",
+    "d203e854b1b0c135": "Last note: {v0}"
   }
 }

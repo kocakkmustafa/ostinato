@@ -8429,6 +8429,12 @@
     "c26eae7f0aece97b": "Alvo alcançado — esta passada conta para a aprovação",
     "fece3d7db90be59e": "Alvo alcançado — uma passada completa neste andamento conta para a aprovação",
     "3cf235f0a516306d": "Só uma passada no andamento-alvo ♩={v0} conclui a lição.",
-    "14fb5991656683a8": "Tocar a ♩={v0}"
+    "14fb5991656683a8": "Tocar a ♩={v0}",
+    "7574fe3c5bbd04e7": "Canhoto",
+    "4c34c9b984b0a0e8": "Espelha a faixa de TAB: as notas chegam pela esquerda e encontram a linha de execução à direita. As cordas mantêm a ordem escrita, corda 1 em cima. A escuta e a medição não mudam.",
+    "b96fb47477b1946d": "Cores adequadas ao daltonismo",
+    "9c62f872670547a7": "Azul e laranja em vez de verde-azulado e âmbar. Cada estado de nota também mantém sua própria forma e símbolo: ✓ certa, ◆ outra nota, ? não ouvida.",
+    "39e46a8da3b6c151": "Ainda não tocada",
+    "d203e854b1b0c135": "Última nota: {v0}"
   }
 }

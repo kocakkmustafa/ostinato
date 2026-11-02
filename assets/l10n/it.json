@@ -8429,6 +8429,12 @@
     "c26eae7f0aece97b": "Obiettivo raggiunto: questo giro conta per la verifica",
     "fece3d7db90be59e": "Obiettivo raggiunto: un giro completo a questo tempo conta per la verifica",
     "3cf235f0a516306d": "Solo un giro al tempo obiettivo ♩={v0} completa la lezione.",
-    "14fb5991656683a8": "Suona a ♩={v0}"
+    "14fb5991656683a8": "Suona a ♩={v0}",
+    "7574fe3c5bbd04e7": "Mancino",
+    "4c34c9b984b0a0e8": "Specchia la striscia TAB: le note arrivano da sinistra e incontrano la linea di esecuzione a destra. Le corde mantengono l’ordine scritto, corda 1 in alto. Ascolto e misurazione non cambiano.",
+    "b96fb47477b1946d": "Colori adatti al daltonismo",
+    "9c62f872670547a7": "Blu e arancione al posto di verde acqua e ambra. Ogni stato della nota mantiene anche la propria forma e il proprio simbolo: ✓ corretta, ◆ nota diversa, ? non sentita.",
+    "39e46a8da3b6c151": "Non ancora suonata",
+    "d203e854b1b0c135": "Ultima nota: {v0}"
   }
 }

@@ -13,6 +13,7 @@ import 'app/app_theme.dart';
 import 'app/app_theme_preferences.dart';
 import 'app/guitar_journey.dart';
 import 'app/onboarding_store.dart';
+import 'app/practice/display/practice_display_preferences.dart';
 import 'app/motion_account_bootstrap.dart';
 import 'app/ostinato_identity_gate.dart';
 import 'app/screens/library_screen.dart';
@@ -25,26 +26,33 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final theme = AppThemeController();
   final themeReady = theme.load();
+  // FK4: left-handed strip + colour-blind palette, read once at start.
+  final practiceDisplay = PracticeDisplayController();
+  final practiceDisplayReady = practiceDisplay.load();
   try {
     final (runtime, accountConnection) = await initializeMotionAccount();
     bindCameraResourceAdmission(accountConnection.resourceAdmission);
     await themeReady;
+    await practiceDisplayReady;
     runApp(
       AppThemeHost(
         controller: theme,
-        child: AppLocaleHost(
-          child: OstinatoAudioRoot(
-            userId: runtime.userId,
-            phase: runtime.phase,
-            passwordRecovery: accountConnection.passwordRecovery,
-            identityBoundary: accountConnection.identityBoundary,
-            resourceAdmission: accountConnection.resourceAdmission,
-            disposeAccountBinding: accountConnection.disposeBinding,
-            builder: (audioNavigatorHost) => OstinatoIdentityGate(
-              runtime: runtime,
-              child: OstinatoApp(
-                accountConnection: accountConnection,
-                audioNavigatorHost: audioNavigatorHost,
+        child: PracticeDisplayHost(
+          controller: practiceDisplay,
+          child: AppLocaleHost(
+            child: OstinatoAudioRoot(
+              userId: runtime.userId,
+              phase: runtime.phase,
+              passwordRecovery: accountConnection.passwordRecovery,
+              identityBoundary: accountConnection.identityBoundary,
+              resourceAdmission: accountConnection.resourceAdmission,
+              disposeAccountBinding: accountConnection.disposeBinding,
+              builder: (audioNavigatorHost) => OstinatoIdentityGate(
+                runtime: runtime,
+                child: OstinatoApp(
+                  accountConnection: accountConnection,
+                  audioNavigatorHost: audioNavigatorHost,
+                ),
               ),
             ),
           ),

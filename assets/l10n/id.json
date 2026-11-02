@@ -8422,6 +8422,12 @@
     "c26eae7f0aece97b": "Target tercapai — putaran ini dihitung untuk kelulusan",
     "fece3d7db90be59e": "Target tercapai — satu putaran penuh di tempo ini dihitung untuk kelulusan",
     "3cf235f0a516306d": "Hanya putaran di tempo target ♩={v0} yang menyelesaikan pelajaran.",
-    "14fb5991656683a8": "Mainkan di ♩={v0}"
+    "14fb5991656683a8": "Mainkan di ♩={v0}",
+    "7574fe3c5bbd04e7": "Kidal",
+    "4c34c9b984b0a0e8": "Mencerminkan jalur TAB: nada datang dari kiri dan bertemu garis main di kanan. Senar tetap dalam urutan tertulis, senar 1 di atas. Cara mendengar dan mengukur tidak berubah.",
+    "b96fb47477b1946d": "Warna ramah buta warna",
+    "9c62f872670547a7": "Biru dan oranye sebagai ganti hijau toska dan kuning amber. Setiap status nada juga tetap punya bentuk dan simbolnya sendiri: ✓ benar, ◆ nada lain, ? tidak terdengar.",
+    "39e46a8da3b6c151": "Belum dimainkan",
+    "d203e854b1b0c135": "Nada terakhir: {v0}"
   }
 }

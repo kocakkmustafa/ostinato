@@ -8429,6 +8429,12 @@
     "c26eae7f0aece97b": "Cible atteinte — ce passage compte pour la validation",
     "fece3d7db90be59e": "Cible atteinte — un passage complet à ce tempo compte pour la validation",
     "3cf235f0a516306d": "Seul un passage au tempo cible ♩={v0} termine la leçon.",
-    "14fb5991656683a8": "Jouer à ♩={v0}"
+    "14fb5991656683a8": "Jouer à ♩={v0}",
+    "7574fe3c5bbd04e7": "Gaucher",
+    "4c34c9b984b0a0e8": "Inverse la bande de TAB : les notes arrivent par la gauche et rejoignent la ligne de jeu à droite. Les cordes gardent l’ordre écrit, corde 1 en haut. L’écoute et la mesure ne changent pas.",
+    "b96fb47477b1946d": "Couleurs adaptées au daltonisme",
+    "9c62f872670547a7": "Bleu et orange au lieu de bleu canard et ambre. Chaque état de note garde aussi sa forme et son symbole : ✓ juste, ◆ autre note, ? pas entendue.",
+    "39e46a8da3b6c151": "Pas encore jouée",
+    "d203e854b1b0c135": "Dernière note : {v0}"
   }
 }

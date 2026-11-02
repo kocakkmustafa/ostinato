@@ -8429,6 +8429,12 @@
     "c26eae7f0aece97b": "Objetivo alcanzado: esta pasada cuenta para la prueba",
     "fece3d7db90be59e": "Objetivo alcanzado: una pasada completa a este tempo cuenta para la prueba",
     "3cf235f0a516306d": "Solo una pasada al tempo objetivo ♩={v0} completa la lección.",
-    "14fb5991656683a8": "Tocar a ♩={v0}"
+    "14fb5991656683a8": "Tocar a ♩={v0}",
+    "7574fe3c5bbd04e7": "Zurdo",
+    "4c34c9b984b0a0e8": "Refleja la franja de TAB: las notas llegan desde la izquierda y se encuentran con la línea de ejecución a la derecha. Las cuerdas mantienen el orden escrito, la cuerda 1 arriba. La escucha y la medición no cambian.",
+    "b96fb47477b1946d": "Colores aptos para daltonismo",
+    "9c62f872670547a7": "Azul y naranja en lugar de verde azulado y ámbar. Cada estado de nota mantiene además su propia forma y símbolo: ✓ correcta, ◆ otra nota, ? no se oyó.",
+    "39e46a8da3b6c151": "Aún no tocada",
+    "d203e854b1b0c135": "Última nota: {v0}"
   }
 }

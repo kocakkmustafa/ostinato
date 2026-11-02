@@ -8443,6 +8443,12 @@
     "c26eae7f0aece97b": "Cel osiągnięty — ten przebieg liczy się do zaliczenia",
     "fece3d7db90be59e": "Cel osiągnięty — pełny przebieg w tym tempie liczy się do zaliczenia",
     "3cf235f0a516306d": "Lekcję kończy tylko przebieg w tempie docelowym ♩={v0}.",
-    "14fb5991656683a8": "Graj w tempie ♩={v0}"
+    "14fb5991656683a8": "Graj w tempie ♩={v0}",
+    "7574fe3c5bbd04e7": "Leworęczny",
+    "4c34c9b984b0a0e8": "Odwraca pasek TAB w poziomie: dźwięki nadchodzą z lewej i spotykają linię gry po prawej. Struny zachowują zapisaną kolejność, struna 1 na górze. Słuchanie i pomiar się nie zmieniają.",
+    "b96fb47477b1946d": "Kolory przyjazne daltonistom",
+    "9c62f872670547a7": "Niebieski i pomarańczowy zamiast morskiego i bursztynowego. Każdy stan dźwięku zachowuje też własny kształt i symbol: ✓ poprawny, ◆ inny dźwięk, ? niesłyszany.",
+    "39e46a8da3b6c151": "Jeszcze niezagrany",
+    "d203e854b1b0c135": "Ostatni dźwięk: {v0}"
   }
 }

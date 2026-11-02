@@ -1,0 +1,50 @@
+{
+  "$about": "FK4 practice display copy (lib/app/practice/display/practice_display_copy.dart): left-handed mode, colour-blind palette, spoken mark states. EN+TR source pairs; all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "leftHandedTitle",
+      "en": "Left-handed",
+      "tr": "Solak"
+    },
+    {
+      "id": "leftHandedBody",
+      "en": "Mirrors the TAB strip: notes come in from the left and meet the playing line on the right. Strings keep the written order, string 1 on top. Listening and measuring do not change.",
+      "tr": "TAB şeridini aynalar: notalar soldan gelir ve sağdaki çalma çizgisinde buluşur. Teller yazılı sırasını korur, 1. tel üstte. Dinleme ve ölçüm değişmez."
+    },
+    {
+      "id": "colorBlindTitle",
+      "en": "Colour-blind friendly colours",
+      "tr": "Renk körlüğüne uygun renkler"
+    },
+    {
+      "id": "colorBlindBody",
+      "en": "Blue and orange instead of teal and amber. Every note state also keeps its own shape and symbol: ✓ correct, ◆ different note, ? couldn't hear.",
+      "tr": "Camgöbeği ve kehribar yerine mavi ve turuncu. Her nota durumu kendi şeklini ve simgesini de korur: ✓ doğru, ◆ farklı nota, ? duyamadım."
+    },
+    {
+      "id": "markCorrect",
+      "en": "Correct",
+      "tr": "Doğru"
+    },
+    {
+      "id": "markDifferent",
+      "en": "Different note",
+      "tr": "Farklı nota"
+    },
+    {
+      "id": "markUnheard",
+      "en": "Couldn't hear",
+      "tr": "Duyamadım"
+    },
+    {
+      "id": "markPending",
+      "en": "Not played yet",
+      "tr": "Henüz çalınmadı"
+    },
+    {
+      "id": "lastNote",
+      "en": "Last note: {v0}",
+      "tr": "Son nota: {v0}"
+    }
+  ]
+}

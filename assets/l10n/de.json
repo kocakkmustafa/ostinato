@@ -8429,6 +8429,12 @@
     "c26eae7f0aece97b": "Ziel erreicht — diese Runde zählt für die Prüfung",
     "fece3d7db90be59e": "Ziel erreicht — eine vollständige Runde in diesem Tempo zählt für die Prüfung",
     "3cf235f0a516306d": "Nur eine Runde im Zieltempo ♩={v0} schließt die Lektion ab.",
-    "14fb5991656683a8": "Mit ♩={v0} spielen"
+    "14fb5991656683a8": "Mit ♩={v0} spielen",
+    "7574fe3c5bbd04e7": "Linkshänder",
+    "4c34c9b984b0a0e8": "Spiegelt die TAB-Leiste: Die Töne kommen von links und treffen rechts auf die Spiellinie. Die Saiten behalten die notierte Reihenfolge, Saite 1 oben. Hören und Messen ändern sich nicht.",
+    "b96fb47477b1946d": "Farbenblind-freundliche Farben",
+    "9c62f872670547a7": "Blau und Orange statt Petrol und Bernstein. Jeder Notenzustand behält außerdem seine eigene Form und sein Symbol: ✓ richtig, ◆ anderer Ton, ? nicht gehört.",
+    "39e46a8da3b6c151": "Noch nicht gespielt",
+    "d203e854b1b0c135": "Letzter Ton: {v0}"
   }
 }

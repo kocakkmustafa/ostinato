@@ -159,18 +159,24 @@ def detect(prod_sources):
 #
 # ⚠️ Bu bir MUAFİYET değil, KARAR NOKTASI.
 DECLARED = {
-    "writeCallSites": 13,
+    "writeCallSites": 14,
     "writeFiles": ["age_gate_store.dart", "app_locale_preferences.dart",
                    "app_theme_preferences.dart",
                    "guitar_journey_progress.dart", "onboarding_store.dart",
                    "own_recording.dart", "own_recording_preference.dart",
-                   "pose_model.dart", "practice_progress_store.dart",
+                   "pose_model.dart", "practice_display_preferences.dart",
+                   "practice_progress_store.dart",
                    "session_store.dart", "setup_profile_store.dart",
                    "tuner_check_memory.dart", "weekly_goal_store.dart"],
     "userArtifactMayBePersisted": True,
     "userArtifactFiles": ["live_screen.dart", "review_screen.dart",
                           "session_store.dart"],
     "$why": (
+        "GÜNCEL ENVANTER 2026-11-02 (FK4 / plan F2.7): "
+        "`practice/display/practice_display_preferences.dart` uygulama "
+        "düzeyinde `ostinato.practice_display.v1.json` yazar: şema sürümü + "
+        "`leftHanded` + `colorBlindSafe` (ikisi de varsayılan false). Sunum "
+        "tercihidir; ses, ölçüm, ilerleme veya hesap verisi taşımaz. "
         "GÜNCEL ENVANTER 2026-11-02 (v1 tam gitar kursu): aynı "
         "`practice/loop/practice_progress_store.dart`, aynı hesap dizinine "
         "ikinci bir kardeş dosya yazar: `v1_lesson_checks.v1.json` — "
@@ -346,6 +352,12 @@ WRITE_CLASSES = {
         "ders ekranının kapanması siler; çökme artığı ders açılışında "
         "süpürülür. Ağ API'si yok; nota hakemi bu kaydı okumaz. Silinmesi "
         "amaçtır; kullanıcı emeği kaybolmaz."),
+    "practice_display_preferences.dart": (
+        "SUNUM TERCİHİ (FK4, 2026-11-02) — yalnız şema sürümü, `leftHanded` "
+        "(TAB şeridi aynalanır) ve `colorBlindSafe` (Okabe–Ito paleti); "
+        "ikisi de varsayılan false. Ses, ölçüm, ilerleme veya hesap verisi "
+        "taşımaz. Silinirse iki ayar kapalıya döner; kullanıcı emeği "
+        "kaybolmaz."),
     "own_recording_preference.dart": (
         "CİHAZ AYARI (FK2, 2026-11-01) — yalnız şema sürümü ve "
         "`enabled` (varsayılan false). Ses veya hesap verisi taşımaz. "

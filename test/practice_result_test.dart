@@ -119,9 +119,7 @@ void main() {
         TempoGate.openingOpensNext,
       );
       final transition = V1Lesson.fromJson(
-        jsonDecode(
-              File('content/v1/gtr/gtr-s1-m02-10.json').readAsStringSync(),
-            )
+        jsonDecode(File('content/v1/gtr/gtr-s1-m02-10.json').readAsStringSync())
             as Map<String, dynamic>,
       );
       expect(transition.practice.measurement, ['M!']);
@@ -406,6 +404,26 @@ void main() {
       );
       expect(action, isA<ResultActionLoop>());
       expect((action! as ResultActionLoop).first, 1);
+    });
+
+    testWidgets('FK4: a bar announces each note state in words', (
+      tester,
+    ) async {
+      final handle = tester.ensureSemantics();
+      final s = summary([c, d, u, c, c, c, c, c]);
+      await show(tester, s);
+      final bar = tester.getSemantics(find.byKey(const Key('result-bar-0')));
+      expect(bar.label, 'Bar 1');
+      expect(bar.value, "Correct, Different note, Couldn't hear, Correct");
+      expect(bar.value.toLowerCase(), isNot(contains('wrong')));
+      await tester.tap(find.byKey(const Key('result-bar-0')));
+      await tester.pumpAndSettle();
+      await show(tester, s, locale: 'tr');
+      expect(
+        tester.getSemantics(find.byKey(const Key('result-bar-0'))).value,
+        'Doğru, Farklı nota, Duyamadım, Doğru',
+      );
+      handle.dispose();
     });
   });
   // The course screen (formerly the measured list) is covered in
