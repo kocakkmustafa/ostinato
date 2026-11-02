@@ -13,6 +13,8 @@
 // `seedSalt` (string) salts the channel seed, condition `seedOf` reuses
 // another condition's channel draw, `displayRule: "confident-first"` adds
 // arm T (t* fields) computed in the same pass as arm C.
+// E56: `displayRule: "confident-first+tail-rule"` adds arm TL (l* fields) on
+// top of T in the same pass; T rows stay byte-for-byte unchanged.
 //
 // E51 (harness only; the engine is unchanged):
 //   stream-tuner / stream-verify accept `seedSalt` (int, 0 = the E43–E45
@@ -915,18 +917,24 @@ int streamTunerSeed(
 /// measurement (arm C) when the note has none. A tail reading never replaces
 /// an earlier confident reading of the same note. Null when the spec has no
 /// display rule.
+///
+/// E56 arm TL (`displayRule: "confident-first+tail-rule"`, [tailRule]): as T,
+/// but a reading from the late-readings rule is never shown. The note shows its
+/// last confident measurement, else its last measurement not from the
+/// late-readings rule, else nothing ("play again"; the note is not measured).
 final class ConfidentFirst {
-  ConfidentFirst(this.sampleRate);
+  ConfidentFirst(this.sampleRate, {this.tailRule = false});
 
   static const minVisibleAttackMs = 20;
 
   static ConfidentFirst? fromSpec(Map<String, dynamic> spec, int sampleRate) {
     final r = spec['displayRule'] as String?;
     if (r == null) return null;
-    if (r != 'confident-first') {
+    if (r != 'confident-first' && r != 'confident-first+tail-rule') {
       throw ArgumentError('unknown displayRule $r');
     }
-    return ConfidentFirst(sampleRate);
+    return ConfidentFirst(sampleRate,
+        tailRule: r == 'confident-first+tail-rule');
   }
 
   static bool isConfident(TuningMeasurement m, int sampleRate) {
@@ -937,12 +945,22 @@ final class ConfidentFirst {
   }
 
   final int sampleRate;
+  final bool tailRule;
   TuningMeasurement? conf;
   int? confT, confA;
   var confidentInstants = 0;
 
+  /// TL fallback: the last measurement not from the late-readings rule.
+  TuningMeasurement? early;
+  int? earlyT, earlyA;
+
   /// Called with every measurement arm C counts, in time order.
   void offer(TuningMeasurement m, int bufferStart, int t) {
+    if (tailRule && !m.fromLateReadings) {
+      early = m;
+      earlyT = t;
+      earlyA = bufferStart + (m.attackIndex ?? 0);
+    }
     if (!isConfident(m, sampleRate)) return;
     confidentInstants++;
     conf = m;
@@ -970,6 +988,14 @@ final class ConfidentFirst {
     final tClean = cleanAt == null || t == null
         ? null
         : (t == lastT ? cleanF0 : cleanAt(t));
+    // TL: confident first, else the last early (not late-rule) reading.
+    final l = conf ?? early;
+    final lt = conf != null ? confT : earlyT;
+    final la = conf != null ? confA : earlyA;
+    final lExtra = cleanAt != null && lt != null && lt != lastT && lt != t;
+    final lClean = cleanAt == null || lt == null
+        ? null
+        : (lt == lastT ? cleanF0 : (lt == t ? tClean : cleanAt(lt)));
     return {
       'tMeasured': m != null,
       'tConfident': conf != null,
@@ -988,6 +1014,25 @@ final class ConfidentFirst {
         'tCleanExtra': extra,
         'tErrClean':
             m == null || tClean == null ? null : centsOf(m.f0Hz, tClean),
+      },
+      if (tailRule) ...{
+        'lMeasured': l != null,
+        'lConfident': conf != null,
+        'lF0': l?.f0Hz,
+        'lFromLate': l?.fromLateReadings,
+        'lAttackIndexMs':
+            l?.attackIndex == null ? null : l!.attackIndex! * 1000 / sr,
+        'lLastS': lt == null ? null : (lt - onset) / sr,
+        'lLastAttackS': la == null ? null : (la - onset) / sr,
+        'lErr': l == null || refF0 == null
+            ? null
+            : wrapCents(centsOf(l.f0Hz, refF0) - shift),
+        if (cleanAt != null) ...{
+          'lCleanF0': lClean,
+          'lCleanExtra': lExtra,
+          'lErrClean':
+              l == null || lClean == null ? null : centsOf(l.f0Hz, lClean),
+        },
       },
     };
   }
