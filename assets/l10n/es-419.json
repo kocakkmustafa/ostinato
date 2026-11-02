@@ -2228,7 +2228,6 @@
     "7a2477ac8d998e1b": "Tiempo {v0}",
     "90e657580e74e233": "Metrónomo listo",
     "eef59fdf837b60bb": "Detente si sientes dolor, entumecimiento u hormigueo. El audio queda en la memoria de este dispositivo; no se graba ni se envía nada.",
-    "5875c6bfc47fc5e3": "Tempo ♩={v0} · {v1} % del objetivo {v2}",
     "8d3ba744cbbe04e5": "Más lento",
     "d585f811814b6ee1": "Más rápido",
     "43fadabe8baf4bee": "Espérame: activado",
@@ -2266,8 +2265,6 @@
     "e95988caccee0130": "La precisión cuenta solo las notas que pude decidir; las que «no se oyeron» se informan aparte.",
     "9d90cd87ab628359": "No se pudo guardar este resultado en el dispositivo.",
     "3caf2aa9ac6ebeac": "No se oyó",
-    "6feb932a1a066fa1": "Precisión ≥ %{v0}",
-    "b3bcb97568674f01": "Escuchadas ≥ %{v0}",
     "08e525ea97429c36": "Al menos {v0} correctas",
     "bdeecf247e6de479": "Ronda de práctica — el requisito se mide en una pasada completa",
     "24776b72bbc4006f": "No es tu resultado: el micrófono se atoró. Revisemos la configuración e intentemos de nuevo.",
@@ -8412,7 +8409,6 @@
     "c07dd0139205a762": "El patrón de Alberti se apresura. Mantén ligeras las notas del pulgar y cuenta las corcheas dentro de cada tiempo.",
     "187d877bbe6a9deb": "{v0} ms · relativo",
     "3a50750f75bbec90": "A tiempo",
-    "9c1759e9a0fbf1b7": "A tiempo ≥ %{v0} (dentro de ±{v1} ms)",
     "af00508cd74bb410": "Siguiente",
     "b83b59297cbade08": "Antes o después",
     "c19affc136daedd5": "«A tiempo» cuenta solo los golpes que pude oír; los que «no se oyeron» se informan aparte.",
@@ -8447,6 +8443,10 @@
     "a51b8da5ff450285": "Una cuerda nueva se estira: vuelve a revisarla después de unos minutos.",
     "649ba097da874350": "El curso de voz cubrirá un inicio cómodo y saludable, afinación de notas, escalas y registro, intervalos, ritmo y lectura cantada, y primeras canciones.",
     "c722e9fcc9046c7d": "El curso de piano cubrirá la postura al sentarse y la forma de la mano, la lectura en ambas claves, ritmo, escalas y tríadas, tocar con las dos manos, patrones de acompañamiento y primeras piezas.",
-    "96717d21ef2d504a": "Opcional · una cuerda de guitarra · habitación silenciosa. Los sonidos superpuestos pueden mostrar una nota plausible, pero engañosa. La precisión depende del micrófono de tu teléfono y de la habitación; los resultados medidos pueden variar. No determina afinación ni éxito al tocar."
+    "96717d21ef2d504a": "Opcional · una cuerda de guitarra · habitación silenciosa. Los sonidos superpuestos pueden mostrar una nota plausible, pero engañosa. La precisión depende del micrófono de tu teléfono y de la habitación; los resultados medidos pueden variar. No determina afinación ni éxito al tocar.",
+    "e4308bfcfd9feec7": "Precisión ≥ {v0}",
+    "7bcc4b2762e4f409": "Escuchadas ≥ {v0}",
+    "1f03be7a9155e8b5": "A tiempo ≥ {v0} (dentro de ±{v1} ms)",
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} del objetivo {v2}"
   }
 }

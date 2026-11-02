@@ -2228,7 +2228,6 @@
     "7a2477ac8d998e1b": "Tempo {v0}",
     "90e657580e74e233": "Metrônomo pronto",
     "eef59fdf837b60bb": "Pare se sentir dor, dormência ou formigamento. O áudio fica na memória deste aparelho; nada é gravado nem enviado.",
-    "5875c6bfc47fc5e3": "Andamento ♩={v0} · {v1} % do alvo {v2}",
     "8d3ba744cbbe04e5": "Mais devagar",
     "d585f811814b6ee1": "Mais rápido",
     "43fadabe8baf4bee": "Esperar por mim: ligado",
@@ -2266,8 +2265,6 @@
     "e95988caccee0130": "A precisão conta só as notas que consegui decidir; as “não ouvidas” são informadas à parte.",
     "9d90cd87ab628359": "Não foi possível salvar este resultado no aparelho.",
     "3caf2aa9ac6ebeac": "Não ouvida",
-    "6feb932a1a066fa1": "Precisão ≥ %{v0}",
-    "b3bcb97568674f01": "Ouvidas ≥ %{v0}",
     "08e525ea97429c36": "Pelo menos {v0} certas",
     "bdeecf247e6de479": "Rodada de prática — o critério é medido em uma execução completa",
     "24776b72bbc4006f": "Não é a sua pontuação — o microfone travou. Vamos conferir a preparação e tentar de novo.",
@@ -8412,7 +8409,6 @@
     "c07dd0139205a762": "O padrão de Alberti está acelerando. Mantenha as notas do polegar leves e conte as colcheias dentro de cada tempo.",
     "187d877bbe6a9deb": "{v0} ms · relativo",
     "3a50750f75bbec90": "No tempo",
-    "9c1759e9a0fbf1b7": "No tempo ≥ %{v0} (dentro de ±{v1} ms)",
     "af00508cd74bb410": "Próxima",
     "b83b59297cbade08": "Adiantado ou atrasado",
     "c19affc136daedd5": "“No tempo” conta só as batidas que consegui ouvir; as “não ouvidas” são informadas à parte.",
@@ -8447,6 +8443,10 @@
     "a51b8da5ff450285": "Uma corda nova estica: confira de novo depois de alguns minutos.",
     "649ba097da874350": "O curso de voz vai abordar um começo confortável e saudável, afinação de notas, escalas e extensão vocal, intervalos, ritmo e solfejo à primeira vista, e as primeiras canções.",
     "c722e9fcc9046c7d": "O curso de piano vai abordar postura ao sentar e formato da mão, leitura nas duas claves, ritmo, escalas e tríades, tocar com as duas mãos, padrões de acompanhamento e as primeiras peças.",
-    "96717d21ef2d504a": "Opcional · uma corda de violão · sala silenciosa. Sons sobrepostos podem mostrar uma nota plausível, mas enganosa. A precisão depende do microfone do seu celular e do ambiente; os resultados medidos podem variar. Isso não decide afinação nem sucesso ao tocar."
+    "96717d21ef2d504a": "Opcional · uma corda de violão · sala silenciosa. Sons sobrepostos podem mostrar uma nota plausível, mas enganosa. A precisão depende do microfone do seu celular e do ambiente; os resultados medidos podem variar. Isso não decide afinação nem sucesso ao tocar.",
+    "e4308bfcfd9feec7": "Precisão ≥ {v0}",
+    "7bcc4b2762e4f409": "Ouvidas ≥ {v0}",
+    "1f03be7a9155e8b5": "No tempo ≥ {v0} (dentro de ±{v1} ms)",
+    "5905c9ef79a3ec11": "Andamento ♩={v0} · {v1} do alvo {v2}"
   }
 }

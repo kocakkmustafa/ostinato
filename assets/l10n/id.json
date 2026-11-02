@@ -2221,7 +2221,6 @@
     "7a2477ac8d998e1b": "Ketukan {v0}",
     "90e657580e74e233": "Metronom siap",
     "eef59fdf837b60bb": "Berhentilah jika terasa nyeri, mati rasa, atau kesemutan. Audio hanya berada di memori perangkat ini; tidak ada yang direkam atau dikirim.",
-    "5875c6bfc47fc5e3": "Tempo ♩={v0} · {v1} % dari sasaran {v2}",
     "8d3ba744cbbe04e5": "Lebih lambat",
     "d585f811814b6ee1": "Lebih cepat",
     "43fadabe8baf4bee": "Tunggu aku: Aktif",
@@ -2259,8 +2258,6 @@
     "e95988caccee0130": "Akurasi hanya menghitung nada yang bisa aku tentukan; “tidak terdengar” dilaporkan terpisah.",
     "9d90cd87ab628359": "Hasil ini tidak dapat disimpan di perangkat.",
     "3caf2aa9ac6ebeac": "Tidak terdengar",
-    "6feb932a1a066fa1": "Akurasi ≥ %{v0}",
-    "b3bcb97568674f01": "Terdengar ≥ %{v0}",
     "08e525ea97429c36": "Minimal {v0} benar",
     "bdeecf247e6de479": "Ronde latihan — gerbang diukur pada permainan penuh",
     "24776b72bbc4006f": "Ini bukan skormu — mikrofonnya tersendat. Mari periksa persiapannya dan coba lagi.",
@@ -8405,7 +8402,6 @@
     "c07dd0139205a762": "Pola Alberti terburu-buru. Jaga nada ibu jari tetap ringan dan hitung not seperdelapan di setiap ketukan.",
     "187d877bbe6a9deb": "{v0} ms · relatif",
     "3a50750f75bbec90": "Tepat waktu",
-    "9c1759e9a0fbf1b7": "Tepat waktu ≥ %{v0} (dalam ±{v1} ms)",
     "af00508cd74bb410": "Berikutnya",
     "b83b59297cbade08": "Terlalu cepat atau lambat",
     "c19affc136daedd5": "“Tepat waktu” hanya menghitung ketukan yang bisa aku dengar; “tidak terdengar” dilaporkan terpisah.",
@@ -8440,6 +8436,10 @@
     "a51b8da5ff450285": "Senar baru akan melar: periksa lagi setelah beberapa menit.",
     "649ba097da874350": "Kursus vokal akan mencakup awal yang nyaman dan sehat, mencocokkan nada, tangga nada dan jangkauan suara, interval, ritme dan menyanyi dengan membaca not, serta lagu-lagu pertama.",
     "c722e9fcc9046c7d": "Kursus piano akan mencakup cara duduk dan bentuk tangan, membaca kedua kunci, ritme, tangga nada dan trinada, bermain dengan dua tangan, pola iringan, serta karya-karya pertama.",
-    "96717d21ef2d504a": "Opsional · satu senar gitar · ruangan tenang. Bunyi yang tumpang tindih dapat menampilkan nada yang masuk akal tetapi menyesatkan. Akurasi bergantung pada mikrofon ponselmu dan ruangan; hasil pengukuran bisa berbeda. Ini tidak menentukan keberhasilan penyetelan atau permainan."
+    "96717d21ef2d504a": "Opsional · satu senar gitar · ruangan tenang. Bunyi yang tumpang tindih dapat menampilkan nada yang masuk akal tetapi menyesatkan. Akurasi bergantung pada mikrofon ponselmu dan ruangan; hasil pengukuran bisa berbeda. Ini tidak menentukan keberhasilan penyetelan atau permainan.",
+    "e4308bfcfd9feec7": "Akurasi ≥ {v0}",
+    "7bcc4b2762e4f409": "Terdengar ≥ {v0}",
+    "1f03be7a9155e8b5": "Tepat waktu ≥ {v0} (dalam ±{v1} ms)",
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} dari sasaran {v2}"
   }
 }

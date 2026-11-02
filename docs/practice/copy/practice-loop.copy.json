@@ -22,8 +22,8 @@
    "tr": "Geri"
   },
   {
-   "en": "Tempo ♩={v0} · {v1} % of the target {v2}",
-   "tr": "Tempo ♩={v0} · hedef {v2} temposunun %{v1}"
+   "en": "Tempo ♩={v0} · {v1} of the target {v2}",
+   "tr": "Tempo ♩={v0} · hedef {v2} temposunun {v1}"
   },
   {
    "en": "Slower",
@@ -178,12 +178,12 @@
    "tr": "Duyulamadı"
   },
   {
-   "en": "Accuracy ≥ %{v0}",
-   "tr": "Doğruluk ≥ %{v0}"
+   "en": "Accuracy ≥ {v0}",
+   "tr": "Doğruluk ≥ {v0}"
   },
   {
-   "en": "Heard ≥ %{v0}",
-   "tr": "Duyulma ≥ %{v0}"
+   "en": "Heard ≥ {v0}",
+   "tr": "Duyulma ≥ {v0}"
   },
   {
    "en": "At least {v0} correct",

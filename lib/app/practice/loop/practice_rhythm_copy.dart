@@ -8,8 +8,8 @@ abstract final class RhythmCopy {
   static const UiCopy earlyOrLate = ('Early or late', 'Erken ya da geç');
   static const UiCopy onTime = ('On time', 'Zamanında');
   static const UiCopy gateOnTime = (
-    'On time ≥ %{v0} (within ±{v1} ms)',
-    'Zamanında ≥ %{v0} (±{v1} ms içinde)',
+    'On time ≥ {v0} (within ±{v1} ms)',
+    'Zamanında ≥ {v0} (±{v1} ms içinde)',
   );
   static const UiCopy onTimeNote = (
     'On time counts only the beats I could hear; "couldn\'t hear" is reported apart.',

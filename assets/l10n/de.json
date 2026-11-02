@@ -2228,7 +2228,6 @@
     "7a2477ac8d998e1b": "Schlag {v0}",
     "90e657580e74e233": "Metronom bereit",
     "eef59fdf837b60bb": "Höre bei Schmerz, Taubheit oder Kribbeln auf. Der Ton bleibt im Speicher dieses Geräts; nichts wird aufgenommen oder gesendet.",
-    "5875c6bfc47fc5e3": "Tempo ♩={v0} · {v1} % des Ziels {v2}",
     "8d3ba744cbbe04e5": "Langsamer",
     "d585f811814b6ee1": "Schneller",
     "43fadabe8baf4bee": "Warte auf mich: An",
@@ -2266,8 +2265,6 @@
     "e95988caccee0130": "Die Genauigkeit zählt nur die Töne, über die ich entscheiden konnte; „nicht gehört“ wird getrennt ausgewiesen.",
     "9d90cd87ab628359": "Dieses Ergebnis konnte nicht auf dem Gerät gespeichert werden.",
     "3caf2aa9ac6ebeac": "Nicht gehört",
-    "6feb932a1a066fa1": "Genauigkeit ≥ %{v0}",
-    "b3bcb97568674f01": "Gehört ≥ %{v0}",
     "08e525ea97429c36": "Mindestens {v0} richtig",
     "bdeecf247e6de479": "Übungsrunde — die Hürde wird bei einem vollständigen Durchgang gemessen",
     "24776b72bbc4006f": "Das ist nicht deine Wertung — das Mikrofon hat sich aufgehängt. Prüfen wir die Einrichtung und versuchen es noch einmal.",
@@ -8412,7 +8409,6 @@
     "c07dd0139205a762": "Das Alberti-Muster eilt voraus. Halte die Daumentöne leicht und zähle die Achtel in jedem Schlag.",
     "187d877bbe6a9deb": "{v0} ms · relativ",
     "3a50750f75bbec90": "Im Takt",
-    "9c1759e9a0fbf1b7": "Im Takt ≥ %{v0} (innerhalb ±{v1} ms)",
     "af00508cd74bb410": "Als Nächstes",
     "b83b59297cbade08": "Zu früh oder zu spät",
     "c19affc136daedd5": "„Im Takt“ zählt nur die Schläge, die ich hören konnte; „nicht gehört“ wird getrennt ausgewiesen.",
@@ -8447,6 +8443,10 @@
     "a51b8da5ff450285": "Eine neue Saite dehnt sich: Prüfe sie nach einigen Minuten noch einmal.",
     "649ba097da874350": "Der Stimmkurs wird einen bequemen, gesunden Einstieg, Tonhöhen treffen, Tonleitern und Stimmumfang, Intervalle, Rhythmus und Vom-Blatt-Singen sowie erste Lieder behandeln.",
     "c722e9fcc9046c7d": "Der Klavierkurs wird Sitzhaltung und Handform, Lesen in beiden Schlüsseln, Rhythmus, Tonleitern und Dreiklänge, beidhändiges Spiel, Begleitmuster und erste Stücke behandeln.",
-    "96717d21ef2d504a": "Optional · eine Gitarrensaite · ruhiger Raum. Überlagerte Klänge können eine plausible, aber irreführende Note anzeigen. Die Genauigkeit hängt vom Mikrofon deines Telefons und vom Raum ab; gemessene Ergebnisse können abweichen. Dies entscheidet weder über Stimmung noch Spielerfolg."
+    "96717d21ef2d504a": "Optional · eine Gitarrensaite · ruhiger Raum. Überlagerte Klänge können eine plausible, aber irreführende Note anzeigen. Die Genauigkeit hängt vom Mikrofon deines Telefons und vom Raum ab; gemessene Ergebnisse können abweichen. Dies entscheidet weder über Stimmung noch Spielerfolg.",
+    "e4308bfcfd9feec7": "Genauigkeit ≥ {v0}",
+    "7bcc4b2762e4f409": "Gehört ≥ {v0}",
+    "1f03be7a9155e8b5": "Im Takt ≥ {v0} (innerhalb ±{v1} ms)",
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} des Ziels {v2}"
   }
 }
