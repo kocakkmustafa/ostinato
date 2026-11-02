@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'membership_resume.dart';
+
 /// A captured app resource, retired synchronously before its close is awaited.
 /// waitForClosed must reject uncertain or unsuccessful close readback.
 abstract interface class AccountResourceDrain {
@@ -39,6 +41,7 @@ class AccountConnection {
     this.requirePaidAccess,
     this.requireCameraAccess,
     this.membershipPageBuilder,
+    this.membershipResume,
   });
 
   final ValueListenable<String?> userId;
@@ -68,6 +71,10 @@ class AccountConnection {
   /// The membership page (status, plans, restore) shown from Settings; null
   /// when the account page itself links to it or nothing is sold.
   final WidgetBuilder? membershipPageBuilder;
+
+  /// A purchase or restore a signed-out user started on the membership page;
+  /// the signed-in shell reopens that page to continue it after sign-in.
+  final MembershipResume? membershipResume;
 }
 
 class AccountScope extends InheritedWidget {

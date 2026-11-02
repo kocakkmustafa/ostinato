@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../app_locale.dart';
+
 /// Ostinato'nun görsel kimliği — Claude Design paneli çıktısının (2026-08-05,
 /// proje `4352ea41-…`) sabitleri. Renk/malzeme İCAT edilmedi: panelin ürettiği
 /// hex değerler birebir taşındı; buradaki tek "hüküm" hangi rengin hangi
@@ -137,6 +139,92 @@ abstract final class ArmRangeHints {
   };
 }
 
+/// Letter spacing (tracking) adds space between glyph clusters. In joined
+/// and Indic scripts that pulls ligatures and conjuncts apart ("कै मरा",
+/// "ट्यू नि ंग") and breaks Arabic joins, so these languages get none.
+/// CJK, Latin, Cyrillic and Greek keep the design's tracking.
+const Set<String> _untrackedLanguages = {
+  // Arabic script.
+  'ar', 'fa', 'ur', 'ps', 'sd', 'ug', 'ckb',
+  // Devanagari and other Indic scripts.
+  'hi', 'mr', 'ne', 'sa', 'bn', 'as', 'pa', 'gu', 'or', 'ta', 'te', 'kn',
+  'ml', 'si',
+  // Other scripts with stacked or reordered marks.
+  'th', 'lo', 'km', 'my', 'bo',
+};
+const Set<String> _untrackedScripts = {
+  'Arab',
+  'Deva',
+  'Beng',
+  'Guru',
+  'Gujr',
+  'Orya',
+  'Taml',
+  'Telu',
+  'Knda',
+  'Mlym',
+  'Sinh',
+  'Thai',
+  'Laoo',
+  'Khmr',
+  'Mymr',
+  'Tibt',
+};
+
+/// Whether letter spacing breaks text shaping in [locale]'s script.
+bool trackingBreaksShaping(Locale locale) =>
+    _untrackedScripts.contains(locale.scriptCode) ||
+    _untrackedLanguages.contains(locale.languageCode);
+
+bool _untracked = false;
+
+/// The text-style helpers below have no BuildContext, so the app's
+/// MaterialApp [ostinatoAppBuilder] records the resolved locale here before
+/// any route builds.
+void setTypographyLocale(Locale locale) {
+  _untracked = trackingBreaksShaping(locale);
+}
+
+double? _tracking(double? value) => _untracked && value != null ? 0 : value;
+
+TextStyle? _flat(TextStyle? style) => style?.copyWith(letterSpacing: 0);
+
+TextTheme _flatTextTheme(TextTheme t) => t.copyWith(
+  displayLarge: _flat(t.displayLarge),
+  displayMedium: _flat(t.displayMedium),
+  displaySmall: _flat(t.displaySmall),
+  headlineLarge: _flat(t.headlineLarge),
+  headlineMedium: _flat(t.headlineMedium),
+  headlineSmall: _flat(t.headlineSmall),
+  titleLarge: _flat(t.titleLarge),
+  titleMedium: _flat(t.titleMedium),
+  titleSmall: _flat(t.titleSmall),
+  bodyLarge: _flat(t.bodyLarge),
+  bodyMedium: _flat(t.bodyMedium),
+  bodySmall: _flat(t.bodySmall),
+  labelLarge: _flat(t.labelLarge),
+  labelMedium: _flat(t.labelMedium),
+  labelSmall: _flat(t.labelSmall),
+);
+
+/// `MaterialApp.builder` for every app shell: records the resolved locale
+/// for [hankenText]/[monoText] and, where tracking breaks shaping, removes
+/// the Material text theme's letter spacing (buttons, list tiles, app bars).
+Widget ostinatoAppBuilder(BuildContext context, Widget? child) {
+  final locale = Localizations.localeOf(context);
+  setTypographyLocale(locale);
+  final content = child ?? const SizedBox.shrink();
+  if (!trackingBreaksShaping(locale)) return content;
+  final theme = Theme.of(context);
+  return Theme(
+    data: theme.copyWith(
+      textTheme: _flatTextTheme(theme.textTheme),
+      primaryTextTheme: _flatTextTheme(theme.primaryTextTheme),
+    ),
+    child: content,
+  );
+}
+
 TextStyle hankenText({
   double size = 14,
   FontWeight weight = FontWeight.w400,
@@ -149,7 +237,7 @@ TextStyle hankenText({
   fontWeight: weight,
   color: color,
   height: height,
-  letterSpacing: letterSpacing,
+  letterSpacing: _tracking(letterSpacing),
 );
 
 TextStyle monoText({
@@ -162,7 +250,7 @@ TextStyle monoText({
   fontSize: size,
   fontWeight: weight,
   color: color,
-  letterSpacing: letterSpacing,
+  letterSpacing: _tracking(letterSpacing),
 );
 
 /// Uygulamanın TEK `ThemeData`sı.
@@ -186,7 +274,7 @@ ThemeData ostinatoTheme() => ThemeData(
 /// Bölüm başlığı — "SCREENS" / "YOUR INSTRUMENTS" tarzı mono kicker.
 Widget kicker(String text, {Color? color}) => Builder(
   builder: (context) => Text(
-    text.toUpperCase(),
+    appUpperCase(context, text),
     style: monoText(
       color: color ?? Theme.of(context).colorScheme.onSurfaceVariant,
     ),

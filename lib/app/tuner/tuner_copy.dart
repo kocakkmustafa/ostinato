@@ -154,9 +154,10 @@ abstract final class TunerCopy {
     'Audio stays in temporary memory on this device. It is never recorded or uploaded. Leaving this screen stops the microphone.',
     'Ses bu cihazda geçici bellekte kalır; kaydedilmez veya yüklenmez. Ekrandan çıkınca mikrofon durur.',
   );
-  static const UiCopy accuracy = (
-    'Accuracy has been checked on simulated phone audio only, not on real phones yet. A new string stretches: check it again after a few minutes.',
-    'Doğruluk yalnız benzetilmiş telefon sesinde denendi, henüz gerçek telefonlarda değil. Yeni tel esner: birkaç dakika sonra yeniden kontrol et.',
+  /// Shown after [DeviceAccuracyCopy.note] on the tuner.
+  static const UiCopy newString = (
+    'A new string stretches: check it again after a few minutes.',
+    'Yeni tel esner: birkaç dakika sonra yeniden kontrol et.',
   );
 
   static const UiCopy gateKicker = ('TUNING', 'AKORT');
@@ -241,7 +242,7 @@ abstract final class TunerCopy {
     phaseUnsupported,
     phaseUnavailable,
     privacy,
-    accuracy,
+    newString,
     gateKicker,
     gateUnchecked,
     gateUntuned,

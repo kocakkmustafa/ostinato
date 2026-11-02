@@ -6,7 +6,10 @@ import 'package:motion_entitlements/motion_entitlements.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' show AuthState, Session;
 import 'package:url_launcher/url_launcher.dart';
 
+import 'membership_copy.dart';
+import 'membership_resume.dart';
 import 'ostinato_release_policy.dart';
+import 'ui_copy.dart';
 
 /// The Ostinato plans this build sells: one subscription, monthly and yearly.
 /// App Store: two products. Play: one subscription whose base plans are
@@ -33,16 +36,32 @@ bool isMotionPlusOffer(StoreProductRef offer) =>
 ///
 /// Entitlement is unchanged: a Motion+ right the server already verified
 /// still counts as active membership (Core `membershipStatus`).
+///
+/// Signed out (store review 2026-11-02, screen 30), the page still shows the
+/// plans with store prices, terms, privacy and restore. Choosing a plan or
+/// restoring first asks the user to sign in or create an account (purchases
+/// belong to the account); after sign-in the page binds to that account,
+/// reloads its status and continues. Server verification is unchanged.
 class OstinatoMembershipPage extends StatefulWidget {
   const OstinatoMembershipPage({
     super.key,
     required this.account,
+    this.accountPageBuilder,
+    this.resume,
     this.purchaseAdapter,
     this.serverAdapter,
     this.teenPurchasePolicy = ostinatoTeenPurchasePolicy,
   });
 
   final MotionAccountClient account;
+
+  /// The shared sign-in / create-account page, opened when a signed-out
+  /// user chooses a plan or restores.
+  final WidgetBuilder? accountPageBuilder;
+
+  /// Carries the chosen plan (or restore) across sign-in, which resets the
+  /// app's navigation and closes this page; the signed-in shell reopens it.
+  final MembershipResume? resume;
   final PurchaseAdapter? purchaseAdapter;
   final ServerAdapter? serverAdapter;
   final MotionTeenPurchasePolicy teenPurchasePolicy;
@@ -56,8 +75,10 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
   late final PurchaseCoordinator _coordinator;
   StreamSubscription<StorePurchaseUpdate>? _subscription;
   StreamSubscription<AuthState>? _authSubscription;
-  late final String? _openingUserId;
-  late final Session? _openingSession;
+  // The account this page acts for: the one signed in when it opened, or
+  // the one the user signs in to from this page. Null while signed out.
+  String? _openingUserId;
+  Session? _openingSession;
   List<StoreProductRef> _offers = const [];
   bool _busy = true;
   bool _active = false;
@@ -67,6 +88,7 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
   MotionAccountString? _message;
 
   String get _appId => widget.account.app.name;
+  bool get _signedOut => _openingUserId == null;
   bool get _sameUser =>
       !_authStreamFailed &&
       _openingUserId != null &&
@@ -107,7 +129,9 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
     );
     _authSubscription = widget.account.authChanges.listen(
       (_) {
-        if (!mounted || _authStreamFailed || _sameUser) return;
+        // Signed out, the page shows only store offers; a sign-in started
+        // here is adopted when the account page returns.
+        if (!mounted || _authStreamFailed || _sameUser || _signedOut) return;
         setState(() {
           _offers = const [];
           _active = false;
@@ -140,6 +164,7 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
       MotionAccountLocalizations.of(context).text(key);
 
   Future<void> _load() async {
+    if (_signedOut && !_authStreamFailed) return _loadSignedOutOffers();
     if (!_sameUser) {
       if (mounted) setState(() => _busy = false);
       return;
@@ -160,6 +185,7 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
           _consentRequired = true;
           _offers = const [];
         });
+        _resumeAfterLoad = true;
         return;
       }
       final status = await widget.account.membershipStatus();
@@ -177,6 +203,7 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
             if (!isMotionPlusOffer(o)) o,
         ];
       });
+      _resumeAfterLoad = true;
     } catch (_) {
       if (!mounted || !_sameUser) return;
       setState(
@@ -184,7 +211,118 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
       );
     } finally {
       if (mounted) setState(() => _busy = false);
+      // Runs after the early return of the consent branch too.
+      if (_resumeAfterLoad && mounted && _sameUser) {
+        _resumeAfterLoad = false;
+        unawaited(_continuePending());
+      }
     }
+  }
+
+  bool _resumeAfterLoad = false;
+
+  /// The step chosen on this page before a sign-in that did not reset
+  /// navigation (the page stayed open).
+  MembershipIntent? _localIntent;
+
+  /// Continues the plan (or restore) chosen before sign-in, once the page
+  /// knows this account's status. An active membership or a purchase
+  /// restriction ends it without buying.
+  Future<void> _continuePending() async {
+    final intent = widget.resume?.take() ?? _localIntent;
+    _localIntent = null;
+    if (intent == null || !mounted || !_sameUser) return;
+    if (intent.restore) return _restore();
+    if (_active || _consentRequired) return;
+    final offer = _offers.where(
+      (o) => o.productId == intent.productId && o.planId == intent.planId,
+    );
+    if (offer.isNotEmpty) await _buy(offer.first);
+  }
+
+  /// Plans and store prices for someone not signed in. Nothing here is tied
+  /// to an account; buying and restoring ask for sign-in first.
+  Future<void> _loadSignedOutOffers() async {
+    // Called from initState: read the theme once the State is mounted.
+    await Future<void>.value();
+    if (!mounted) return;
+    setState(() {
+      _busy = true;
+      _message = null;
+    });
+    try {
+      final offers = await _store.fetchProducts(
+        ostinatoOfferedProductIds(Theme.of(context).platform),
+      );
+      if (!mounted || !_signedOut) return;
+      setState(() {
+        _offers = [
+          for (final o in offers)
+            if (!isMotionPlusOffer(o)) o,
+        ];
+      });
+    } catch (_) {
+      if (!mounted || !_signedOut) return;
+      setState(
+        () => _message = MotionAccountString.membershipDetailsUnavailable,
+      );
+    } finally {
+      if (mounted && _signedOut) setState(() => _busy = false);
+    }
+  }
+
+  /// Signed out: explains why an account is needed, opens the account page
+  /// and binds the page to the account signed in there. [intent] is held
+  /// across sign-in, which normally resets navigation and closes this page;
+  /// if the page is still open afterwards it continues itself.
+  Future<void> _signInFromPage(MembershipIntent intent) async {
+    if (_busy || _authStreamFailed || !_signedOut) return;
+    if (widget.account.currentUser == null) {
+      final builder = widget.accountPageBuilder;
+      if (builder == null) {
+        setState(() => _message = MotionAccountString.signInFirst);
+        return;
+      }
+      final go = await showDialog<bool>(
+        context: context,
+        builder: (dialogContext) => AlertDialog(
+          key: const Key('ostinato-membership-sign-in-prompt'),
+          content: Text(uiText(dialogContext, MembershipCopy.signInFirst)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: Text(_text(MotionAccountString.cancel)),
+            ),
+            FilledButton(
+              key: const Key('ostinato-membership-sign-in'),
+              onPressed: () => Navigator.of(dialogContext).pop(true),
+              child: Text(_text(MotionAccountString.signIn)),
+            ),
+          ],
+        ),
+      );
+      if (go != true || !mounted) return;
+      widget.resume?.hold(intent);
+      await Navigator.of(
+        context,
+      ).push<void>(MaterialPageRoute<void>(builder: builder));
+      if (!mounted) return;
+      if (widget.account.currentUser == null) {
+        widget.resume?.clear();
+        return;
+      }
+    }
+    if (!_signedOut) return;
+    // Still open after sign-in (no navigation reset): continue here.
+    widget.resume?.clear();
+    _localIntent = intent;
+    setState(() {
+      _openingUserId = widget.account.currentUser!.id;
+      _openingSession = widget.account.supabase.auth.currentSession;
+      _offers = const [];
+      _message = null;
+    });
+    await _load();
   }
 
   Future<MotionAgeStatus?> _ageStatus() async {
@@ -196,6 +334,14 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
   }
 
   Future<void> _buy(StoreProductRef offer) async {
+    if (_signedOut) {
+      return _signInFromPage(
+        MembershipIntent.purchase(
+          productId: offer.productId,
+          planId: offer.planId,
+        ),
+      );
+    }
     if (_busy || _active || _consentRequired || !_sameUser) return;
     setState(() {
       _busy = true;
@@ -224,6 +370,9 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
   }
 
   Future<void> _restore() async {
+    if (_signedOut) {
+      return _signInFromPage(const MembershipIntent.restore());
+    }
     if (_busy || !_sameUser) return;
     setState(() {
       _busy = true;
@@ -334,7 +483,7 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
               const SizedBox(height: 12),
               Semantics(liveRegion: true, child: Text(_text(_message!))),
             ],
-            if (!_sameUser)
+            if (!_signedOut && !_sameUser)
               Text(_text(MotionAccountString.signInFirst))
             else if (_consentRequired)
               Text(_text(MotionAccountString.parentalConsentNeeded))
@@ -360,7 +509,7 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
             ],
             const SizedBox(height: 16),
             OutlinedButton(
-              onPressed: _busy || !_sameUser ? null : _restore,
+              onPressed: _busy || (!_signedOut && !_sameUser) ? null : _restore,
               child: Text(_text(MotionAccountString.restorePurchases)),
             ),
             TextButton(

@@ -140,7 +140,12 @@ void main() {
         ),
       ),
     );
-    expect(find.text('GİTAR · TEMELLER'), findsOneWidget);
+    expect(find.text('GİTAR'), findsOneWidget);
+    // The heading is the short course title, not its description.
+    expect(
+      tester.widget<Text>(find.byKey(const Key('course-title'))).data,
+      'Temeller',
+    );
     expect(find.text('Kamera ve alan'), findsOneWidget);
     expect(find.textContaining('BAŞLANGIÇ'), findsOneWidget);
     expect(find.textContaining('DK'), findsWidgets);
@@ -171,7 +176,12 @@ void main() {
           locale: const Locale('tr'),
           supportedLocales: appSupportedLocales,
           localizationsDelegates: appLocalizationsDelegates,
-          home: InstrumentScreenRoute(discipline: discipline),
+          // The engineering notes are off in the store build; their
+          // translations are still checked here.
+          home: InstrumentScreenRoute(
+            discipline: discipline,
+            showEngineeringNotes: true,
+          ),
         ),
       ),
     );

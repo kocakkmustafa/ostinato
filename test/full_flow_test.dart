@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
@@ -133,7 +134,13 @@ void main() {
 
     // ── ② SEÇİM ──────────────────────────────────────────────────────
     await tap(find.text('Guitar'), 'Gitar');
-    substance('Çalgı', 'not all the same kind of gap');
+    // Store build (2026-11-02): the engineering notes are off; the page's
+    // own line stands in for them.
+    substance(
+        'Çalgı',
+        ostinatoEngineeringNotesVisible
+            ? 'not all the same kind of gap'
+            : 'Measured practice. Tuner. Weekly goal.');
 
     final Course course = guitar.courses.first;
     await tap(find.text(course.displayName), 'kurs: ${course.displayName}');

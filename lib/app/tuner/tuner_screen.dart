@@ -10,6 +10,7 @@ import '../app_theme.dart';
 import '../audio/practice_audio_root.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
+import '../device_accuracy_copy.dart';
 import '../ui_copy.dart';
 import 'tuner_check_memory.dart';
 import 'tuner_controller.dart';
@@ -359,7 +360,11 @@ class _TunerScreenState extends State<TunerScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                _t(TunerCopy.accuracy),
+                joinSentences(
+                  context,
+                  _t(DeviceAccuracyCopy.note),
+                  _t(TunerCopy.newString),
+                ),
                 style: hankenText(size: 12.5, height: 1.5, color: p.textMuted),
               ),
             ],

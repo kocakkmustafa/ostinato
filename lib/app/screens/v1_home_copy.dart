@@ -60,6 +60,13 @@ abstract final class V1HomeCopy {
     'Your lesson results, streak and weekly goal are kept on this device. If you sign in to a Motion account and agree, they sync to your account so you can continue on another device.',
     'Ders sonuçların, serin ve haftalık hedefin bu cihazda tutulur. Motion hesabına giriş yapıp onay verirsen hesabına eşitlenir ve başka cihazda devam edebilirsin.',
   );
+
+  /// [progressBody] while `ostinatoProgressSyncAvailable` is false: this
+  /// release keeps progress on the device (store review 2026-11-02).
+  static const UiCopy progressBodyLocal = (
+    'Your lesson results, streak and weekly goal stay on this device; this release does not sync them to an account. Your account is used for your membership.',
+    'Ders sonuçların, serin ve haftalık hedefin bu cihazda kalır; bu sürüm bunları hesaba eşitlemez. Hesabın üyeliğin için kullanılır.',
+  );
   static const UiCopy homeSubtitle = (
     'Measured practice. Tuner. Weekly goal.',
     'Ölçülü pratik. Akort. Haftalık hedef.',
@@ -79,6 +86,18 @@ abstract final class V1HomeCopy {
   static const UiCopy comingSoon = (
     'Coming soon · This course opens in a later update.',
     'Yakında · Bu kurs sonraki güncellemelerle açılacak.',
+  );
+  /// What the voice course will cover; shown on its "Coming soon" page
+  /// while voice is not in `ostinatoOpenInstruments` (docs/v1-curriculum).
+  static const UiCopy comingSoonVoice = (
+    'The voice course will cover a comfortable, healthy start, pitch matching, scales and range, intervals, rhythm and sight-singing, and first songs.',
+    'Ses kursu rahat ve sağlıklı bir başlangıç, perde eşleştirme, gamlar ve menzil, aralıklar, ritim ve deşifre ile ilk şarkıları kapsayacak.',
+  );
+
+  /// What the piano course will cover; shown on its "Coming soon" page.
+  static const UiCopy comingSoonPiano = (
+    'The piano course will cover seating and hand shape, reading both clefs, rhythm, scales and triads, playing with both hands, accompaniment patterns and first pieces.',
+    'Piyano kursu oturuş ve el şekli, iki anahtarda okuma, ritim, gamlar ve üçlüler, iki elle çalma, eşlik kalıpları ve ilk eserleri kapsayacak.',
   );
   static const UiCopy measuredTitle = (
     'Measured practice',
@@ -124,11 +143,14 @@ abstract final class V1HomeCopy {
     cameraBody,
     progressTitle,
     progressBody,
+    progressBodyLocal,
     homeSubtitle,
     homeIntro,
     guitarCardOpen,
     guitarCardNext,
     comingSoon,
+    comingSoonVoice,
+    comingSoonPiano,
     measuredTitle,
     measuredBody,
     startNext,

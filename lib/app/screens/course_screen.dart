@@ -70,16 +70,33 @@ class CourseScreenRoute extends StatelessWidget {
               ),
               const SizedBox(height: 22),
               Text(
-                '${catalogUpperName(context, discipline.id, discipline.displayName)} · ${localized(context, 'FOUNDATIONS', 'TEMELLER')}',
+                catalogUpperName(
+                  context,
+                  discipline.id,
+                  discipline.displayName,
+                ),
                 style: monoText(color: hue.ink),
               ),
               const SizedBox(height: 9),
+              // Store review 2026-11-02 (screen 40): the heading is the
+              // course's short title; its long description follows as body.
               Text(
-                catalogGoal(context, course.id, course.goal),
+                catalogName(context, course.id, course.displayName),
+                key: const Key('course-title'),
                 style: hankenText(
                   size: 28,
                   weight: FontWeight.w600,
                   height: 1.1,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                catalogGoal(context, course.id, course.goal),
+                key: const Key('course-goal'),
+                style: hankenText(
+                  size: 14.5,
+                  height: 1.45,
+                  color: OstinatoPalette.of(context).textBody,
                 ),
               ),
               const SizedBox(height: 12),

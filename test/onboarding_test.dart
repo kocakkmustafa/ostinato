@@ -10,6 +10,8 @@ import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
 import 'package:ostinato/app/screens/settings_screen.dart';
+import 'package:ostinato/app/device_accuracy_copy.dart';
+import 'package:ostinato/app/screens/settings_copy.dart';
 import 'package:ostinato/app/screens/v1_home_copy.dart';
 import 'package:ostinato/app/ui_copy.dart';
 import 'package:ostinato/main.dart';
@@ -132,6 +134,11 @@ void main() {
         await settle(tester);
         expect(find.text(t(V1HomeCopy.cameraBody)), findsOneWidget);
         expect(find.text(t(V1HomeCopy.micBody)), findsOneWidget);
+        // Store review 2026-11-02 (screen 03): sync is closed in this
+        // release, so the card must not promise account sync.
+        expect(ostinatoProgressSyncAvailable, isFalse);
+        expect(find.text(t(V1HomeCopy.progressBodyLocal)), findsOneWidget);
+        expect(find.text(t(V1HomeCopy.progressBody)), findsNothing);
         expect(
           find.textContaining(
             language == 'tr' ? 'kamera izni istemez' : 'does not ask for camera',
@@ -140,6 +147,27 @@ void main() {
         );
         await tester.pumpWidget(host(const SettingsScreen()));
         await tester.pumpAndSettle();
+        // Store review 2026-11-02: the microphone card describes measured
+        // practice as it is (share of notes heard as correct; permission at
+        // the first measurement), not "no accuracy score / only after Start".
+        expect(find.textContaining(t(SettingsCopy.micBody)), findsOneWidget);
+        expect(find.textContaining('accuracy or mastery score'), findsNothing);
+        expect(find.textContaining('only after you press Start'), findsNothing);
+        // Founder decision 2026-11-02: one device-accuracy sentence replaces
+        // the "not verified on real hardware / phones" notes (About and
+        // Microphone here; the tuner has its own test).
+        expect(
+          find.textContaining(t(DeviceAccuracyCopy.note)),
+          findsNWidgets(2),
+        );
+        for (final old in [
+          'real hardware',
+          'Physical phone accuracy',
+          'gerçek cihazda doğrulanmadı',
+          'Gerçek telefon doğruluğu',
+        ]) {
+          expect(find.textContaining(old), findsNothing, reason: old);
+        }
         expect(
           find.textContaining(
             language == 'tr'

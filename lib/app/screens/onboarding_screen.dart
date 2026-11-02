@@ -413,7 +413,13 @@ class _SensorsStep extends StatelessWidget {
       _SensorCard(
         title: uiText(context, V1HomeCopy.progressTitle),
         key: const Key('onboarding-progress-card'),
-        body: uiText(context, V1HomeCopy.progressBody),
+        // Sync is closed in this release: progress stays on the device.
+        body: uiText(
+          context,
+          ostinatoProgressSyncAvailable
+              ? V1HomeCopy.progressBody
+              : V1HomeCopy.progressBodyLocal,
+        ),
       ),
     ],
   );

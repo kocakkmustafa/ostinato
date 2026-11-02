@@ -1,4 +1,5 @@
 import '../app_theme.dart';
+import '../design/ostinato_theme.dart' show ostinatoAppBuilder;
 import '../app_theme_preferences.dart';
 import 'dart:async';
 
@@ -1130,6 +1131,7 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
         localeListResolutionCallback: resolveAppLocales,
         supportedLocales: appSupportedLocales,
         localizationsDelegates: appLocalizationsDelegates,
+        builder: ostinatoAppBuilder,
         home: Builder(
           builder: (statusContext) => Scaffold(
             body: SafeArea(

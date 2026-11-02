@@ -271,6 +271,8 @@ class PracticeResultScreen extends StatelessWidget {
                 Text(
                   '${st.symbol} $n',
                   key: Key('result-count-${m.name}'),
+                  // Glyph before number in every locale (RTL put it after).
+                  textDirection: TextDirection.ltr,
                   style: hankenText(
                     size: 26,
                     weight: FontWeight.w600,

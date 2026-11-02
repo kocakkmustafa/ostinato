@@ -8438,6 +8438,15 @@
     "d203e854b1b0c135": "Última nota: {v0}",
     "f62205b8e7993e50": "O nível {v0} é gratuito · os níveis seguintes exigem assinatura",
     "1d68a089af11083e": "Assinatura",
-    "6946560ebac6e08d": "Para passar em uma aula, pelo menos 80% das notas precisam estar certas; aí a próxima aula abre. As primeiras aulas de cada curso são gratuitas; as seguintes exigem assinatura do Ostinato."
+    "6946560ebac6e08d": "Para passar em uma aula, pelo menos 80% das notas precisam estar certas; aí a próxima aula abre. As primeiras aulas de cada curso são gratuitas; as seguintes exigem assinatura do Ostinato.",
+    "8c35a3bffb5f6829": "Primeiro entre ou crie uma conta: sua assinatura fica vinculada à sua conta, então funciona em todos os dispositivos em que você entrar.",
+    "545f6c0a16d5c54c": "Seus resultados das aulas, sua sequência e sua meta semanal ficam neste aparelho; esta versão não os sincroniza com uma conta. Sua conta é usada para sua assinatura.",
+    "6afa082a5c331043": "Na prática medida, o microfone ouve as notas que você toca. Uma aula é aprovada quando uma parte suficiente das notas é ouvida como correta; a parte exigida aumenta com o nível. A permissão é pedida na primeira medição. O áudio é processado neste aparelho e não é enviado; o que você toca não é gravado, a menos que você ative ouvir sua própria gravação. Parar, sair da tela, trocar de conta ou levar o app para segundo plano fecha o microfone.",
+    "2458f83652e85824": "A precisão depende do microfone do seu celular e do ambiente; os resultados medidos podem variar.",
+    "4360eb5d0a20a482": "{v0} Todas as referências de postura vêm de vídeos de ensino filmados da cintura para cima; por isso nada abaixo dos quadris é lido.",
+    "a51b8da5ff450285": "Uma corda nova estica: confira de novo depois de alguns minutos.",
+    "649ba097da874350": "O curso de voz vai abordar um começo confortável e saudável, afinação de notas, escalas e extensão vocal, intervalos, ritmo e solfejo à primeira vista, e as primeiras canções.",
+    "c722e9fcc9046c7d": "O curso de piano vai abordar postura ao sentar e formato da mão, leitura nas duas claves, ritmo, escalas e tríades, tocar com as duas mãos, padrões de acompanhamento e as primeiras peças.",
+    "96717d21ef2d504a": "Opcional · uma corda de violão · sala silenciosa. Sons sobrepostos podem mostrar uma nota plausível, mas enganosa. A precisão depende do microfone do seu celular e do ambiente; os resultados medidos podem variar. Isso não decide afinação nem sucesso ao tocar."
   }
 }
