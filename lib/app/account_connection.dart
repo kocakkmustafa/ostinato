@@ -38,6 +38,7 @@ class AccountConnection {
     this.disposeBinding,
     this.requirePaidAccess,
     this.requireCameraAccess,
+    this.membershipPageBuilder,
   });
 
   final ValueListenable<String?> userId;
@@ -63,6 +64,10 @@ class AccountConnection {
   /// Camera setup, measurement and scoring (Core `requireMotionCameraAccess`);
   /// closed in this release whatever the membership.
   final Future<bool> Function(BuildContext)? requireCameraAccess;
+
+  /// The membership page (status, plans, restore) shown from Settings; null
+  /// when the account page itself links to it or nothing is sold.
+  final WidgetBuilder? membershipPageBuilder;
 }
 
 class AccountScope extends InheritedWidget {

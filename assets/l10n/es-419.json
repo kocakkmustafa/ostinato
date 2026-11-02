@@ -8435,6 +8435,9 @@
     "b96fb47477b1946d": "Colores aptos para daltonismo",
     "9c62f872670547a7": "Azul y naranja en lugar de verde azulado y ámbar. Cada estado de nota mantiene además su propia forma y símbolo: ✓ correcta, ◆ otra nota, ? no se oyó.",
     "39e46a8da3b6c151": "Aún no tocada",
-    "d203e854b1b0c135": "Última nota: {v0}"
+    "d203e854b1b0c135": "Última nota: {v0}",
+    "f62205b8e7993e50": "El nivel {v0} es gratis · los niveles siguientes requieren membresía",
+    "1d68a089af11083e": "Membresía",
+    "6946560ebac6e08d": "Para aprobar una lección, al menos el 80 % de sus notas debe ser correcto; entonces se abre la siguiente lección. Las primeras lecciones de cada curso son gratis; las siguientes requieren una membresía de Ostinato."
   }
 }

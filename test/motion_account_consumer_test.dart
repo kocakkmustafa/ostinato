@@ -19,6 +19,7 @@ import 'package:ostinato/app/app_theme_preferences.dart';
 import 'package:ostinato/app/app_translation_catalog.dart';
 import 'package:ostinato/app/motion_account_bootstrap.dart';
 import 'package:ostinato/app/ownership_guarded_account_client.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 const _id = '00000000-0000-4000-8000-000000000001';
@@ -403,7 +404,9 @@ Future<void> _mount(WidgetTester tester, _Fixture f, String tag) async {
   expect(page.account, isA<OwnershipGuardedAccountClient>());
   expect(page.account.app, MotionApp.ostinato);
   expect(page.account.currentUser?.id, _id);
-  expect(page.membershipAvailable, isTrue);
+  // Core's account page can only open Core's membership page (Motion+);
+  // while Motion+ is not offered, Settings links the Ostinato page instead.
+  expect(page.membershipAvailable, ostinatoMotionPlusOffered);
 }
 
 Finder _name(MotionAccountLocalizations strings) => find.byWidgetPredicate(
@@ -454,15 +457,19 @@ void main() {
         'actual profile payload published',
       );
       // The page asks motion-check-membership once when it opens; its answer
-      // arrives asynchronously, so wait for it before the locale walk.
-      await _ready(
-        tester,
-        () => find
-            .text(strings.text(MotionAccountString.membershipActiveInApp))
-            .evaluate()
-            .isNotEmpty,
-        'actual membership answer published',
-      );
+      // arrives asynchronously, so wait for it before the locale walk. In the
+      // v1 build (Motion+ not offered) Core's account page has no membership
+      // row; the Ostinato membership page is linked from Settings.
+      if (ostinatoMotionPlusOffered) {
+        await _ready(
+          tester,
+          () => find
+              .text(strings.text(MotionAccountString.membershipActiveInApp))
+              .evaluate()
+              .isNotEmpty,
+          'actual membership answer published',
+        );
+      }
       final page = find.byType(MotionAccountPage);
       final pageState = tester.state(page);
       final pageKey = tester.widget<MotionAccountPage>(page).key;
@@ -514,13 +521,16 @@ void main() {
         );
         expect(Directionality.of(tester.element(page)), strings.textDirection);
         expect(Theme.of(tester.element(page)).brightness, Brightness.light);
+        final membershipRow = ostinatoMotionPlusOffered
+            ? findsOneWidget
+            : findsNothing;
         expect(
           _button(FilledButton, strings, MotionAccountString.membershipOptions),
-          findsOneWidget,
+          membershipRow,
         );
         expect(
           find.text(strings.text(MotionAccountString.membershipActiveInApp)),
-          findsOneWidget,
+          membershipRow,
         );
         expect(find.byType(MotionMembershipPage), findsNothing);
 

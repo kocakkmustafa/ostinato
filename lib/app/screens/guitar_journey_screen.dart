@@ -16,6 +16,8 @@ import '../retention/weekly_goal_store.dart';
 import '../ui_copy.dart';
 import 'v1_home_copy.dart';
 import 'guitar_note_observation_screen.dart';
+import '../practice/loop/practice_outcome.dart';
+import '../practice/loop/v1_course_copy.dart';
 import '../practice/loop/v1_practice_list_screen.dart';
 
 /// Self-guided learning path. No sensor result is converted into completion.
@@ -293,44 +295,7 @@ class _GuitarJourneyScreenState extends State<GuitarJourneyScreen> {
             ),
           ],
           const SizedBox(height: 17),
-          GlassCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  localized(
-                    context,
-                    'Optional single-note practice',
-                    'İsteğe bağlı tek nota pratiği',
-                  ),
-                  style: hankenText(size: 18, weight: FontWeight.w600),
-                ),
-                const SizedBox(height: 7),
-                Text(
-                  uiText(context, V1HomeCopy.noteToolBody),
-                  style: hankenText(size: 12.5, height: 1.5),
-                ),
-                TextButton.icon(
-                  key: const Key('guitar-note-observation-entry'),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => GuitarNoteObservationScreen(
-                        preparation: _preparation,
-                      ),
-                    ),
-                  ),
-                  icon: const Icon(Icons.music_note_outlined),
-                  label: Text(
-                    localized(
-                      context,
-                      'Open note observation',
-                      'Nota gözlemini aç',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          NoteObservationCard(preparation: _preparation),
           const SizedBox(height: 17),
           if (next != null)
             GlassCard(
@@ -1400,10 +1365,69 @@ class _GuitarJourneyLessonScreenState extends State<GuitarJourneyLessonScreen> {
   );
 }
 
+/// Optional single-note practice: the note observation tool (v1 guitar page).
+class NoteObservationCard extends StatelessWidget {
+  const NoteObservationCard({super.key, this.preparation});
+
+  final GuitarSessionPreparation? preparation;
+
+  @override
+  Widget build(BuildContext context) => GlassCard(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          localized(
+            context,
+            'Optional single-note practice',
+            'İsteğe bağlı tek nota pratiği',
+          ),
+          style: hankenText(size: 18, weight: FontWeight.w600),
+        ),
+        const SizedBox(height: 7),
+        Text(
+          uiText(context, V1HomeCopy.noteToolBody),
+          style: hankenText(size: 12.5, height: 1.5),
+        ),
+        TextButton.icon(
+          key: const Key('guitar-note-observation-entry'),
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) =>
+                  GuitarNoteObservationScreen(preparation: preparation),
+            ),
+          ),
+          icon: const Icon(Icons.music_note_outlined),
+          label: Text(
+            localized(context, 'Open note observation', 'Nota gözlemini aç'),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 /// Ölçülü pratik kartı (v1 metni C1, kurucu 2026-11-01): gitar sayfasının
-/// birincil kartı. Düğme ilk geçilmemiş açık dersi doğrudan açar.
+/// birincil kartı. Düğme ilk geçilmemiş açık dersi doğrudan açar; ikinci
+/// düğme v1 kursunun tam listesini (seviye → modül → ders) açar.
 class MeasuredPracticeCard extends StatelessWidget {
   const MeasuredPracticeCard({super.key});
+
+  /// F5.2: a measured run counts toward the weekly goal (≥60 s listening,
+  /// ≥1 heard note). A failed write must not interrupt the result screen.
+  static void Function(PracticeSessionFinished) _weeklyGoal(
+    String? accountId,
+  ) =>
+      (e) => WeeklyGoalStore(accountUserId: accountId)
+          .recordPracticeSession(
+            MeasuredPracticeSession(
+              course: PracticeCourse.guitar,
+              activeDuration: e.activeDuration,
+              heardEvents: e.heardEvents,
+              lessonId: e.lessonId,
+            ),
+          )
+          .then<void>((_) {}, onError: (_) {});
 
   @override
   Widget build(BuildContext context) {
@@ -1428,25 +1452,24 @@ class MeasuredPracticeCard extends StatelessWidget {
               MaterialPageRoute<void>(
                 builder: (_) => V1PracticeListScreen(
                   startNext: true,
-                  // F5.2: a measured run counts toward the weekly goal
-                  // (≥60 s listening, ≥1 heard note). A failed write must
-                  // not interrupt the result screen.
-                  onSessionFinished: (e) =>
-                      WeeklyGoalStore(accountUserId: accountId)
-                          .recordPracticeSession(
-                            MeasuredPracticeSession(
-                              course: PracticeCourse.guitar,
-                              activeDuration: e.activeDuration,
-                              heardEvents: e.heardEvents,
-                              lessonId: e.lessonId,
-                            ),
-                          )
-                          .then<void>((_) {}, onError: (_) {}),
+                  onSessionFinished: _weeklyGoal(accountId),
                 ),
               ),
             ),
             icon: const Icon(Icons.graphic_eq),
             label: Text(uiText(context, V1HomeCopy.startNext)),
+          ),
+          TextButton.icon(
+            key: const Key('guitar-course-entry'),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => V1PracticeListScreen(
+                  onSessionFinished: _weeklyGoal(accountId),
+                ),
+              ),
+            ),
+            icon: const Icon(Icons.list_alt),
+            label: Text(uiText(context, V1CourseCopy.title)),
           ),
         ],
       ),

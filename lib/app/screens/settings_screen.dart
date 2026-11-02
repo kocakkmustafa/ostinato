@@ -3,6 +3,8 @@ import '../app_theme.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:motion_account/motion_account.dart'
+    show MotionAccountLocalizations, MotionAccountString;
 
 import '../app_locale.dart';
 import '../app_locale_preferences.dart';
@@ -110,6 +112,22 @@ class SettingsScreen extends StatelessWidget {
                   label: Text(localized(context, 'Account', 'Hesap')),
                 ),
                 const SizedBox(height: 14),
+                if (account.membershipPageBuilder
+                    case final WidgetBuilder membership) ...<Widget>[
+                  OutlinedButton.icon(
+                    key: const Key('settings-membership'),
+                    onPressed: () => Navigator.of(context).push<void>(
+                      MaterialPageRoute<void>(builder: membership),
+                    ),
+                    icon: const Icon(Icons.workspace_premium_outlined),
+                    label: Text(
+                      MotionAccountLocalizations.of(
+                        context,
+                      ).text(MotionAccountString.membershipTitle),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                ],
               ],
               // DÜZELTME (2026-08-07): tek kart "Camera and microphone"
               // deyip "the microphone reads level and pitch" diyordu — bu

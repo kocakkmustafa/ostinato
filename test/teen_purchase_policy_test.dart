@@ -45,7 +45,13 @@ void main() {
         find.byType(MotionAccountPage),
       );
       expect(page.teenPurchasePolicy, ostinatoTeenPurchasePolicy);
-      expect(page.membershipAvailable, isTrue);
+      // Core's account page links only to Core's membership page, which
+      // shows Motion+; the v1 build links the Ostinato page from Settings.
+      expect(page.membershipAvailable, ostinatoMotionPlusOffered);
+      expect(
+        connection.membershipPageBuilder,
+        ostinatoMotionPlusOffered ? isNull : isNotNull,
+      );
     } finally {
       await tester.pumpWidget(const SizedBox());
       await tester.runAsync(() async {
@@ -55,15 +61,17 @@ void main() {
     }
   });
 
-  // The paid and camera gates open Core's default MotionMembershipPage, which
+  // The paid and camera gates open the membership page (the app's
+  // OstinatoMembershipPage while Motion+ is not offered, else Core's), which
   // takes the policy from these calls (Core R4 tests that forwarding). Guard
-  // the app side: each Core entry point in the bootstrap passes the policy.
+  // the app side: each purchase entry point in the bootstrap passes it.
   test('every Core purchase entry point in the bootstrap passes the policy', () {
     final source = File(
       'lib/app/motion_account_bootstrap.dart',
     ).readAsStringSync();
     for (final entry in [
       'MotionAccountPage(',
+      'OstinatoMembershipPage(',
       'requireMotionPaidAccess(',
       'requireMotionCameraAccess(',
     ]) {

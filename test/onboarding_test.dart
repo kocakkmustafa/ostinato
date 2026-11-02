@@ -13,6 +13,7 @@ import 'package:ostinato/app/screens/settings_screen.dart';
 import 'package:ostinato/app/screens/v1_home_copy.dart';
 import 'package:ostinato/app/ui_copy.dart';
 import 'package:ostinato/main.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'support/localized_widget_ready.dart';
 
 /// İlk açılış akışı — O-039.
@@ -112,14 +113,16 @@ void main() {
           find.textContaining(language == 'tr' ? '690 ders' : '690 lessons'),
           findsOneWidget,
         );
+        // v1 submission (2026-11-02): only the Ostinato plans are sold.
         expect(
           find.textContaining(
             language == 'tr'
-                ? 'sonraki dersler Ostinato veya Motion+ aboneliği gerektirir'
-                : 'later lessons need an Ostinato or Motion+ subscription',
+                ? 'sonraki dersler Ostinato üyeliği gerektirir'
+                : 'later lessons need an Ostinato membership',
           ),
           findsOneWidget,
         );
+        expect(find.textContaining('Motion+'), findsNothing);
         expect(find.textContaining('does not grade'), findsNothing);
         expect(find.textContaining('puanlamaz'), findsNothing);
         await tester.tap(find.byKey(const Key('onboarding-primary')));
@@ -249,11 +252,16 @@ void main() {
         'onboarding-fact-practice',
         'onboarding-fact-setup',
         'onboarding-fact-streak',
-        'onboarding-fact-written',
       ]) {
         expect(find.byKey(Key(key)), findsOneWidget, reason: key);
       }
-      expect(find.text(V1HomeCopy.scopeWritten.$1), findsOneWidget);
+      // v1 store build: the pre-v1 written lessons are not linked, so the
+      // scope list does not promise them.
+      final written = ostinatoLegacyWrittenCoursesVisible
+          ? findsOneWidget
+          : findsNothing;
+      expect(find.byKey(const Key('onboarding-fact-written')), written);
+      expect(find.text(V1HomeCopy.scopeWritten.$1), written);
       expect(find.textContaining('posture'), findsNothing);
       expect(find.byKey(const Key('onboarding-fact-locked')), findsNothing);
     });

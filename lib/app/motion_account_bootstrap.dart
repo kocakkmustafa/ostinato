@@ -14,6 +14,7 @@ import 'account_ownership_epoch.dart';
 import 'age_gate_store.dart';
 import 'app_locale.dart';
 import 'app_locale_preferences.dart';
+import 'ostinato_membership_page.dart';
 import 'ostinato_release_policy.dart';
 import 'ownership_guarded_account_client.dart';
 
@@ -81,6 +82,15 @@ AccountConnection bindMotionAccountRuntime(
     onAgeBlocked?.call().ignore();
   }
 
+  // v1: Core's membership page always shows Motion+, so while Motion+ is not
+  // offered the app opens its own page with the Ostinato plans only.
+  final WidgetBuilder? membershipPage = ostinatoMotionPlusOffered
+      ? null
+      : (_) => OstinatoMembershipPage(
+          account: runtime.account,
+          teenPurchasePolicy: ostinatoTeenPurchasePolicy,
+        );
+
   Widget accountPage(BuildContext _) {
     final pageOwnership = ownership.capturePage();
     return MotionAccountPage(
@@ -101,7 +111,11 @@ AccountConnection bindMotionAccountRuntime(
       onRetryIdentity: runtime.refreshIdentity,
       ageBlocked: underAgeBlocked,
       onAgeBlocked: blockUnderAge,
-      membershipAvailable: ostinatoPaidFeaturesAvailable,
+      // Core's account page links only to Core's membership page (with
+      // Motion+); while Motion+ is not offered, Settings links to the
+      // Ostinato page instead.
+      membershipAvailable:
+          ostinatoPaidFeaturesAvailable && ostinatoMotionPlusOffered,
       teenPurchasePolicy: ostinatoTeenPurchasePolicy,
     );
   }
@@ -118,10 +132,12 @@ AccountConnection bindMotionAccountRuntime(
       runtime.dispose();
     },
     pageBuilder: accountPage,
+    membershipPageBuilder: ostinatoPaidFeaturesAvailable ? membershipPage : null,
     requirePaidAccess: (context) => requireMotionPaidAccess(
       context,
       account: runtime.account,
       accountPageBuilder: accountPage,
+      membershipPageBuilder: membershipPage,
       salesAvailable: ostinatoPaidFeaturesAvailable,
       teenPurchasePolicy: ostinatoTeenPurchasePolicy,
     ),
@@ -129,6 +145,7 @@ AccountConnection bindMotionAccountRuntime(
       context,
       account: runtime.account,
       accountPageBuilder: accountPage,
+      membershipPageBuilder: membershipPage,
       cameraCoachingAvailable: ostinatoCameraPracticeAvailable,
       teenPurchasePolicy: ostinatoTeenPurchasePolicy,
     ),

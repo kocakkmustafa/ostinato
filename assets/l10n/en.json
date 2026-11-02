@@ -8435,6 +8435,9 @@
     "b96fb47477b1946d": "Colour-blind friendly colours",
     "9c62f872670547a7": "Blue and orange instead of teal and amber. Every note state also keeps its own shape and symbol: ✓ correct, ◆ different note, ? couldn't hear.",
     "39e46a8da3b6c151": "Not played yet",
-    "d203e854b1b0c135": "Last note: {v0}"
+    "d203e854b1b0c135": "Last note: {v0}",
+    "f62205b8e7993e50": "Level {v0} is free · later levels need a membership",
+    "1d68a089af11083e": "Membership",
+    "6946560ebac6e08d": "To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato membership."
   }
 }

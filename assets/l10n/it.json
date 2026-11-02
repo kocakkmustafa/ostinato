@@ -8435,6 +8435,9 @@
     "b96fb47477b1946d": "Colori adatti al daltonismo",
     "9c62f872670547a7": "Blu e arancione al posto di verde acqua e ambra. Ogni stato della nota mantiene anche la propria forma e il proprio simbolo: ✓ corretta, ◆ nota diversa, ? non sentita.",
     "39e46a8da3b6c151": "Non ancora suonata",
-    "d203e854b1b0c135": "Ultima nota: {v0}"
+    "d203e854b1b0c135": "Ultima nota: {v0}",
+    "f62205b8e7993e50": "Il livello {v0} è gratuito · i livelli successivi richiedono un abbonamento",
+    "1d68a089af11083e": "Abbonamento",
+    "6946560ebac6e08d": "Per superare una lezione, almeno l’80% delle note deve essere corretto; allora si apre la lezione successiva. Le prime lezioni di ogni corso sono gratuite; le successive richiedono un abbonamento Ostinato."
   }
 }

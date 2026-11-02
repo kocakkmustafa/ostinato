@@ -12,6 +12,7 @@ import 'package:ostinato/app/screens/course_screen.dart';
 import 'package:ostinato/app/screens/instrument_screen.dart';
 import 'package:ostinato/app/screens/lesson_demo_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
 
 import 'support/localized_widget_ready.dart';
 
@@ -103,9 +104,13 @@ void main() {
             .widgetList<Text>(written)
             .map((w) => w.data ?? '')
             .join(' ');
+        // v1 store build: the pre-v1 written lessons are not linked, so
+        // the scope step does not list them.
         expect(
           copy,
-          contains(language == 'tr' ? '60 derslik' : '60-lesson'),
+          ostinatoLegacyWrittenCoursesVisible
+              ? contains(language == 'tr' ? '60 derslik' : '60-lesson')
+              : isEmpty,
         );
         expect(find.byKey(const Key('onboarding-fact-demo')), findsNothing);
         expect(copy, isNot(contains('are measured but never graded')));

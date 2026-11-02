@@ -14,6 +14,7 @@ import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/screens/instrument_screen.dart';
 import 'package:ostinato/app/screens/piano_beginner_screen.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
 
 import 'support/localized_widget_ready.dart';
 import 'support/paid_access_scope.dart';
@@ -364,7 +365,7 @@ void main() {
     }
   }
 
-  testWidgets('actual piano instrument page opens packaged written course', (
+  testWidgets('actual piano page links the written course only in legacy builds', (
     tester,
   ) async {
     final repo = (await tester.runAsync(ContentRepository.load))!;
@@ -383,6 +384,11 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+    // v1 store build: the pre-v1 written course is not linked.
+    if (!ostinatoLegacyWrittenCoursesVisible) {
+      expect(find.byKey(const Key('piano-beginner-entry')), findsNothing);
+      return;
+    }
     await tester.scrollUntilVisible(
       find.byKey(const Key('piano-beginner-entry')),
       250,

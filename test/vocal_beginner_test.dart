@@ -14,6 +14,7 @@ import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/vocal_beginner_screen.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
 
 import 'support/localized_widget_ready.dart';
 import 'support/paid_access_scope.dart';
@@ -446,7 +447,7 @@ void main() {
         },
       );
     }
-    testWidgets('$locale actual Library written voice entry', (tester) async {
+    testWidgets('$locale actual Library written voice entry (legacy builds)', (tester) async {
       final repo = (await tester.runAsync(ContentRepository.load))!;
       final cueText = (await tester.runAsync(CueTextResolver.load))!;
       await tester.pumpWidget(
@@ -464,6 +465,11 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+      // v1 store build: the pre-v1 written course is not linked.
+      if (!ostinatoLegacyWrittenCoursesVisible) {
+        expect(find.byKey(const Key('vocal-written-course')), findsNothing);
+        return;
+      }
       final entry = find.byKey(const Key('vocal-written-course'));
       await _centre(tester, entry);
       await tester.tap(entry);

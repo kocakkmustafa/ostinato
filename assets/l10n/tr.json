@@ -8435,6 +8435,9 @@
     "b96fb47477b1946d": "Renk körlüğüne uygun renkler",
     "9c62f872670547a7": "Camgöbeği ve kehribar yerine mavi ve turuncu. Her nota durumu kendi şeklini ve simgesini de korur: ✓ doğru, ◆ farklı nota, ? duyamadım.",
     "39e46a8da3b6c151": "Henüz çalınmadı",
-    "d203e854b1b0c135": "Son nota: {v0}"
+    "d203e854b1b0c135": "Son nota: {v0}",
+    "f62205b8e7993e50": "Seviye {v0} ücretsiz · sonraki seviyeler üyelik gerektirir",
+    "1d68a089af11083e": "Üyelik",
+    "6946560ebac6e08d": "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato üyeliği gerektirir."
   }
 }

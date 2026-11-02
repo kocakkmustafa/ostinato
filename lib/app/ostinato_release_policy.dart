@@ -1,10 +1,25 @@
 import 'package:motion_account/motion_account.dart';
 
-/// Founder decision 2026-10-23: subscriptions are sold in the first release
-/// (the app's own subscription and the shared Motion+ plan). Core keeps its own
-/// default closed; Ostinato opts in here, in one place, for the account page,
-/// the paid-access gate and the membership page it opens.
+/// Founder decision 2026-10-23: subscriptions are sold in the first release.
+/// Core keeps its own default closed; Ostinato opts in here, in one place, for
+/// the account page, the paid-access gate and the membership page it opens.
 const bool ostinatoPaidFeaturesAvailable = true;
+
+/// Founder decision 2026-11-02: the v1 store submission sells only the two
+/// Ostinato plans (monthly, yearly); Motion+ is neither offered nor mentioned.
+/// While false the app opens its own `OstinatoMembershipPage` (Ostinato
+/// products only) instead of Core's page, which always shows a Motion+
+/// section. A Motion+ right the server already verified still unlocks paid
+/// lessons: entitlement checks are unchanged.
+const bool ostinatoMotionPlusOffered = false;
+
+/// v1 store scope (founder, 2026-11-02): the guitar course (v1, 240 lessons)
+/// is open; voice and piano show "Coming soon". The pre-v1 written courses
+/// (60-lesson guitar journey, ukulele 24, bass 24, voice 22, piano 25) and
+/// the written recall page that links to them are not reachable from the
+/// home, library or guitar page. Their code and stored progress stay; this
+/// flag only removes the entry points.
+const bool ostinatoLegacyWrittenCoursesVisible = false;
 
 /// Live camera practice stays closed in this release (unchanged).
 const bool ostinatoCameraPracticeAvailable = false;

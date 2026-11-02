@@ -6,6 +6,8 @@ import '../content.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../onboarding_store.dart';
+import '../ostinato_release_policy.dart';
+import '../practice/loop/v1_paywall_copy.dart';
 import '../ui_copy.dart';
 import 'v1_home_copy.dart';
 
@@ -261,7 +263,12 @@ class _WelcomeStep extends StatelessWidget {
         borderRadius: 18,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Text(
-          uiText(context, V1HomeCopy.welcomeNote),
+          uiText(
+            context,
+            ostinatoMotionPlusOffered
+                ? V1HomeCopy.welcomeNote
+                : V1PaywallCopy.welcomeNoteOstinatoOnly,
+          ),
           style: hankenText(
             size: 13.5,
             height: 1.55,
@@ -302,11 +309,13 @@ class _ScopeStep extends StatelessWidget {
         value: '↻',
         label: uiText(context, V1HomeCopy.scopeStreak),
       ),
-      _FactRow(
-        key: const Key('onboarding-fact-written'),
-        value: '¶',
-        label: uiText(context, V1HomeCopy.scopeWritten),
-      ),
+      // The pre-v1 written lessons are not linked in the v1 store build.
+      if (ostinatoLegacyWrittenCoursesVisible)
+        _FactRow(
+          key: const Key('onboarding-fact-written'),
+          value: '¶',
+          label: uiText(context, V1HomeCopy.scopeWritten),
+        ),
     ],
   );
 }
