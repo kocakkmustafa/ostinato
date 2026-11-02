@@ -6397,6 +6397,15 @@
     "9018c99c633a8ac1": "I kept a steady, comfortable tempo.",
     "1adcc5eddf3bcec8": "The notes rang clearly, without buzzing.",
     "c8254e775e62b6bd": "I worked through the task with the guitar in front of me.",
-    "b2416478bce4b256": "I can show each point of the explanation on the guitar."
+    "b2416478bce4b256": "I can show each point of the explanation on the guitar.",
+    "187d877bbe6a9deb": "{v0} ms · relative",
+    "3a50750f75bbec90": "On time",
+    "9c1759e9a0fbf1b7": "On time ≥ %{v0} (within ±{v1} ms)",
+    "af00508cd74bb410": "Next",
+    "b83b59297cbade08": "Early or late",
+    "c19affc136daedd5": "On time counts only the beats I could hear; \"couldn't hear\" is reported apart.",
+    "dcc80d521759d7d1": "Latency is not calibrated on this output, so timing was measured against your own steady offset. Calibrate it to compare with the click exactly.",
+    "df2c333764d05b9b": "Early: {v0} · Late: {v1}",
+    "ee80e7f71794e5f5": "Suggested next lesson"
   }
 }

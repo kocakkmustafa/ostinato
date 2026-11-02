@@ -6390,6 +6390,15 @@
     "9018c99c633a8ac1": "Aku menjaga tempo yang stabil dan nyaman.",
     "1adcc5eddf3bcec8": "Not berbunyi jernih, tanpa dengung.",
     "c8254e775e62b6bd": "Aku mengerjakan seluruh tugas dengan gitar di depanku.",
-    "b2416478bce4b256": "Aku bisa menunjukkan setiap poin penjelasan di gitar."
+    "b2416478bce4b256": "Aku bisa menunjukkan setiap poin penjelasan di gitar.",
+    "187d877bbe6a9deb": "{v0} ms · relatif",
+    "3a50750f75bbec90": "Tepat waktu",
+    "9c1759e9a0fbf1b7": "Tepat waktu ≥ %{v0} (dalam ±{v1} ms)",
+    "af00508cd74bb410": "Berikutnya",
+    "b83b59297cbade08": "Terlalu cepat atau lambat",
+    "c19affc136daedd5": "“Tepat waktu” hanya menghitung ketukan yang bisa aku dengar; “tidak terdengar” dilaporkan terpisah.",
+    "dcc80d521759d7d1": "Latensi belum dikalibrasi untuk output ini, jadi waktu diukur terhadap pergeseran tetapmu sendiri. Kalibrasi agar bisa dibandingkan persis dengan klik.",
+    "df2c333764d05b9b": "Terlalu cepat: {v0} · Terlalu lambat: {v1}",
+    "ee80e7f71794e5f5": "Pelajaran berikutnya yang disarankan"
   }
 }

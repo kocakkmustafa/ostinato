@@ -6411,6 +6411,15 @@
     "9018c99c633a8ac1": "Utrzymałem równe, wygodne tempo.",
     "1adcc5eddf3bcec8": "Dźwięki brzmiały czysto, bez brzęczenia.",
     "c8254e775e62b6bd": "Przerobiłem całe zadanie z gitarą przed sobą.",
-    "b2416478bce4b256": "Umiem pokazać na gitarze każdy punkt wyjaśnienia."
+    "b2416478bce4b256": "Umiem pokazać na gitarze każdy punkt wyjaśnienia.",
+    "187d877bbe6a9deb": "{v0} ms · względnie",
+    "3a50750f75bbec90": "Na czas",
+    "9c1759e9a0fbf1b7": "Na czas ≥ %{v0} (w granicach ±{v1} ms)",
+    "af00508cd74bb410": "Następna",
+    "b83b59297cbade08": "Za wcześnie lub za późno",
+    "c19affc136daedd5": "„Na czas” liczy tylko uderzenia, które dało się usłyszeć; „niesłyszane” są podawane osobno.",
+    "dcc80d521759d7d1": "Opóźnienie nie jest skalibrowane dla tego wyjścia, więc rytm zmierzono względem twojego stałego przesunięcia. Skalibruj je, aby porównać dokładnie z klikiem.",
+    "df2c333764d05b9b": "Za wcześnie: {v0} · Za późno: {v1}",
+    "ee80e7f71794e5f5": "Proponowana następna lekcja"
   }
 }

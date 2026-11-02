@@ -6397,6 +6397,15 @@
     "9018c99c633a8ac1": "Sabit ve rahat bir tempoda çaldım.",
     "1adcc5eddf3bcec8": "Notalar cızırtısız ve net çınladı.",
     "c8254e775e62b6bd": "Görevi gitar önümdeyken baştan sona yaptım.",
-    "b2416478bce4b256": "Anlatımdaki her maddeyi gitar üzerinde gösterebiliyorum."
+    "b2416478bce4b256": "Anlatımdaki her maddeyi gitar üzerinde gösterebiliyorum.",
+    "187d877bbe6a9deb": "{v0} ms · göreli",
+    "3a50750f75bbec90": "Zamanında",
+    "9c1759e9a0fbf1b7": "Zamanında ≥ %{v0} (±{v1} ms içinde)",
+    "af00508cd74bb410": "Sıradaki",
+    "b83b59297cbade08": "Erken ya da geç",
+    "c19affc136daedd5": "Zamanında oranı yalnız duyabildiğim vuruşları sayar; \"duyamadım\" ayrı raporlanır.",
+    "dcc80d521759d7d1": "Bu çıkışta gecikme kalibre edilmedi; zamanlama senin sabit kaymana göre ölçüldü. Klikle tam karşılaştırmak için kalibrasyon yap.",
+    "df2c333764d05b9b": "Erken: {v0} · Geç: {v1}",
+    "ee80e7f71794e5f5": "Önerilen sıradaki ders"
   }
 }

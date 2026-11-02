@@ -6397,6 +6397,15 @@
     "9018c99c633a8ac1": "J’ai gardé un tempo régulier et confortable.",
     "1adcc5eddf3bcec8": "Les notes sonnaient clairement, sans frisement.",
     "c8254e775e62b6bd": "J’ai fait toute la tâche avec la guitare devant moi.",
-    "b2416478bce4b256": "Je peux montrer chaque point de l’explication sur la guitare."
+    "b2416478bce4b256": "Je peux montrer chaque point de l’explication sur la guitare.",
+    "187d877bbe6a9deb": "{v0} ms · relatif",
+    "3a50750f75bbec90": "En place",
+    "9c1759e9a0fbf1b7": "En place ≥ {v0} % (à ±{v1} ms près)",
+    "af00508cd74bb410": "À suivre",
+    "b83b59297cbade08": "En avance ou en retard",
+    "c19affc136daedd5": "« En place » ne compte que les temps que j'ai pu entendre ; « pas entendu » est indiqué à part.",
+    "dcc80d521759d7d1": "La latence n'est pas étalonnée sur cette sortie : le timing a donc été mesuré par rapport à ton propre décalage régulier. Étalonne-la pour comparer exactement avec le clic.",
+    "df2c333764d05b9b": "En avance : {v0} · En retard : {v1}",
+    "ee80e7f71794e5f5": "Leçon suivante suggérée"
   }
 }

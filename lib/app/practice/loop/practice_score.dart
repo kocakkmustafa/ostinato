@@ -70,6 +70,12 @@ final class PracticeScore {
 
   bool get hasPitches => events.any((e) => e.kind == PracticeEventKind.pitch);
 
+  /// Every event is a rhythm onset (`4/4: q q ee q | h h`, chord labels
+  /// allowed): the line is judged on attack timing alone (A3).
+  bool get isRhythmOnly =>
+      events.isNotEmpty &&
+      events.every((e) => e.kind == PracticeEventKind.onset);
+
   /// Events whose start lies in `[fromBeat, toBeat)`.
   Iterable<PracticeEvent> startingIn(double fromBeat, double toBeat) =>
       events.where((e) => e.startBeat >= fromBeat && e.startBeat < toBeat);
@@ -92,7 +98,13 @@ final class PracticeScore {
     r'^[A-G][#b♯♭]?(?:m|maj7|m7|7|sus2|sus4|add9|dim|aug)?(?:/[A-G][#b♯♭]?)?$',
   );
 
-  static PracticeScore parse(String sequence) {
+  /// A guitar power chord (`E5`, `A5`) before a bar's rhythm.
+  static final RegExp _powerChord = RegExp(r'^[A-G][#b♯♭]?5$');
+
+  /// [powerChordLabels]: guitar lines write power chords as `E5 ee ee`; a
+  /// `X5` token followed by a bare rhythm token is then a label like `Am h`,
+  /// not the pitch X5 (a pitch with a duration is written `E5:h`).
+  static PracticeScore parse(String sequence, {bool powerChordLabels = false}) {
     var text = sequence.trim();
     if (text.isEmpty) throw const FormatException('Empty sequence');
     var beatsPerBar = 4;
@@ -124,8 +136,15 @@ final class PracticeScore {
       if (tokens.isEmpty) continue;
       // Each segment starts on a bar line.
       position = (position / beatsPerBar).ceil() * beatsPerBar.toDouble();
-      for (final token in tokens) {
+      for (var t = 0; t < tokens.length; t++) {
+        final token = tokens[t];
         if (_chordLabel.hasMatch(token)) continue;
+        if (powerChordLabels &&
+            _powerChord.hasMatch(token) &&
+            t + 1 < tokens.length &&
+            _isRhythmToken(tokens[t + 1])) {
+          continue;
+        }
         final repeat = _repeat.firstMatch(token);
         if (repeat != null) {
           repeats = int.parse(repeat.group(1)!);
@@ -231,6 +250,9 @@ final class PracticeScore {
       totalBeats: passBeats * repeats,
     );
   }
+
+  static bool _isRhythmToken(String token) =>
+      token == 'ee' || _rhythm.hasMatch(token.replaceFirst(RegExp(r'~$'), ''));
 
   static double _duration(String token) {
     var total = 0.0;

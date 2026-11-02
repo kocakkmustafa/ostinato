@@ -12,6 +12,7 @@ import '../../design/widgets.dart';
 import '../../tuner/session_tuning_gate.dart';
 import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
+import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
 import '../own_recording/own_recording_preference.dart';
 import '../practice_audio_input.dart';
@@ -23,11 +24,13 @@ import 'practice_marks.dart';
 import 'practice_outcome.dart';
 import 'practice_progress_store.dart';
 import 'practice_result_screen.dart';
+import 'practice_rhythm_copy.dart';
 import 'practice_score.dart';
 import 'practice_session_controller.dart';
 import 'practice_tab_strip.dart';
 import 'practice_transport.dart';
 import 'practice_visual_theme.dart';
+import 'v1_practice_catalog.dart';
 
 /// What the practice screen hands back to the lesson list.
 enum PracticeExit { closed, openNextLesson }
@@ -79,9 +82,7 @@ class PracticeLoopScreen extends StatefulWidget {
 
 class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     with SingleTickerProviderStateMixin {
-  late final PracticeScore _score = PracticeScore.parse(
-    widget.lesson.practice.sequence!,
-  );
+  late final PracticeScore _score = V1PracticeCatalog.scoreOf(widget.lesson)!;
   late final bool _freeTempo = widget.lesson.practice.tempo == null;
   late final PracticeTempo _initialTempo = _freeTempo
       ? PracticeTempo(openBpm: 60, targetBpm: 60)
@@ -89,7 +90,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           openBpm: widget.lesson.practice.tempo!.open,
           targetBpm: widget.lesson.practice.tempo!.target,
         );
-  late final PassCriteria _criteria = PassCriteria.forLesson(widget.lesson);
+  late final PassCriteria _criteria = PassCriteria.forLesson(
+    widget.lesson,
+    score: _score,
+  );
   late final SetupProfileStore _setup =
       widget.setupStore ?? FileSetupProfileStore.device;
   SetupProfile? _profile;
@@ -548,7 +552,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                 marks: _c.marks,
                 heldEvent: _c.heldEvent,
                 loop: _c.loopRange,
-                guitar: true,
+                // A rhythm-only line is one lane of strokes, not six strings.
+                guitar: !_score.isRhythmOnly,
               ),
             ),
           ),
@@ -715,7 +720,9 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           count(PracticeMark.correct, localized(context, 'Correct', 'Doğru')),
           count(
             PracticeMark.differentNote,
-            localized(context, 'Different note', 'Farklı nota'),
+            _criteria.rhythm
+                ? uiText(context, RhythmCopy.earlyOrLate)
+                : localized(context, 'Different note', 'Farklı nota'),
           ),
           count(
             PracticeMark.couldNotHear,

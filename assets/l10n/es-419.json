@@ -6397,6 +6397,15 @@
     "9018c99c633a8ac1": "Mantuve un tempo estable y cómodo.",
     "1adcc5eddf3bcec8": "Las notas sonaron claras, sin trasteo.",
     "c8254e775e62b6bd": "Hice toda la tarea con la guitarra frente a mí.",
-    "b2416478bce4b256": "Puedo mostrar en la guitarra cada punto de la explicación."
+    "b2416478bce4b256": "Puedo mostrar en la guitarra cada punto de la explicación.",
+    "187d877bbe6a9deb": "{v0} ms · relativo",
+    "3a50750f75bbec90": "A tiempo",
+    "9c1759e9a0fbf1b7": "A tiempo ≥ %{v0} (dentro de ±{v1} ms)",
+    "af00508cd74bb410": "Siguiente",
+    "b83b59297cbade08": "Antes o después",
+    "c19affc136daedd5": "«A tiempo» cuenta solo los golpes que pude oír; los que «no se oyeron» se informan aparte.",
+    "dcc80d521759d7d1": "La latencia no está calibrada en esta salida, así que el ritmo se midió respecto a tu propio desfase constante. Calíbrala para comparar exactamente con el clic.",
+    "df2c333764d05b9b": "Antes: {v0} · Después: {v1}",
+    "ee80e7f71794e5f5": "Siguiente lección sugerida"
   }
 }

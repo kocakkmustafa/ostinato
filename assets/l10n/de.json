@@ -6397,6 +6397,15 @@
     "9018c99c633a8ac1": "Ich habe ein gleichmäßiges, bequemes Tempo gehalten.",
     "1adcc5eddf3bcec8": "Die Töne klangen klar, ohne Schnarren.",
     "c8254e775e62b6bd": "Ich habe die Aufgabe mit der Gitarre vor mir durchgearbeitet.",
-    "b2416478bce4b256": "Ich kann jeden Punkt der Erklärung auf der Gitarre zeigen."
+    "b2416478bce4b256": "Ich kann jeden Punkt der Erklärung auf der Gitarre zeigen.",
+    "187d877bbe6a9deb": "{v0} ms · relativ",
+    "3a50750f75bbec90": "Im Takt",
+    "9c1759e9a0fbf1b7": "Im Takt ≥ %{v0} (innerhalb ±{v1} ms)",
+    "af00508cd74bb410": "Als Nächstes",
+    "b83b59297cbade08": "Zu früh oder zu spät",
+    "c19affc136daedd5": "„Im Takt“ zählt nur die Schläge, die ich hören konnte; „nicht gehört“ wird getrennt ausgewiesen.",
+    "dcc80d521759d7d1": "Die Latenz ist für diese Ausgabe nicht kalibriert, deshalb wurde das Timing an deinem eigenen gleichmäßigen Versatz gemessen. Kalibriere sie, um genau mit dem Klick zu vergleichen.",
+    "df2c333764d05b9b": "Zu früh: {v0} · Zu spät: {v1}",
+    "ee80e7f71794e5f5": "Vorgeschlagene nächste Lektion"
   }
 }

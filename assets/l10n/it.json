@@ -6397,6 +6397,15 @@
     "9018c99c633a8ac1": "Ho mantenuto un tempo regolare e comodo.",
     "1adcc5eddf3bcec8": "Le note suonavano pulite, senza ronzii.",
     "c8254e775e62b6bd": "Ho svolto tutto il compito con la chitarra davanti a me.",
-    "b2416478bce4b256": "So mostrare sulla chitarra ogni punto della spiegazione."
+    "b2416478bce4b256": "So mostrare sulla chitarra ogni punto della spiegazione.",
+    "187d877bbe6a9deb": "{v0} ms · relativo",
+    "3a50750f75bbec90": "A tempo",
+    "9c1759e9a0fbf1b7": "A tempo ≥ {v0} % (entro ±{v1} ms)",
+    "af00508cd74bb410": "Prossima",
+    "b83b59297cbade08": "In anticipo o in ritardo",
+    "c19affc136daedd5": "\"A tempo\" conta solo i colpi che ho potuto sentire; quelli \"non sentiti\" sono riportati a parte.",
+    "dcc80d521759d7d1": "La latenza non è calibrata su questa uscita, quindi il ritmo è stato misurato rispetto al tuo scarto costante. Calibrala per confrontarlo esattamente con il clic.",
+    "df2c333764d05b9b": "In anticipo: {v0} · In ritardo: {v1}",
+    "ee80e7f71794e5f5": "Prossima lezione suggerita"
   }
 }

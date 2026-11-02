@@ -6,7 +6,8 @@ import '../../curriculum/v1_lesson.dart';
 import 'practice_score.dart';
 
 /// The v1 guitar lessons the measured practice loop can run: microphone
-/// lessons (`M`, `M!`) with a written pitch sequence. Course order = lesson id
+/// lessons (`M`, `M!`) with a written pitch sequence, or a rhythm-only line
+/// in an A3 lesson (onset timing). Course order = lesson id
 /// order (`gtr-s1-m02-02` < `gtr-s1-m02-03` < … < `gtr-s1-test`).
 final class V1PracticeCatalog {
   V1PracticeCatalog(Iterable<V1Lesson> lessons)
@@ -33,21 +34,44 @@ final class V1PracticeCatalog {
     r'(?:^|\s)(?:h|p|b|pb|r|vib|/)(?=\s|$)|[A-G][#b♯♭]?\d/[A-G]',
   );
 
+  /// The lesson's line as the practice screen runs it (guitar power chords
+  /// before a rhythm are labels); null without a sequence or when the line
+  /// does not parse.
+  static PracticeScore? scoreOf(V1Lesson l) {
+    final seq = l.practice.sequence;
+    if (seq == null) return null;
+    try {
+      return PracticeScore.parse(seq, powerChordLabels: l.course == 'gtr');
+    } on FormatException {
+      return null;
+    }
+  }
+
+  /// Engine steps a rhythm-only line can carry: A3 judges the onsets; A1
+  /// (tuning) and A2 (which open string) are not in a line without pitches.
+  static const Set<String> _rhythmSteps = {'A1', 'A2', 'A3'};
+
   static bool isPracticable(V1Lesson l) {
     final seq = l.practice.sequence;
     if (l.course != 'gtr' || seq == null) return false;
     final m = l.practice.measurement;
     if (!m.contains('M') && !m.contains('M!')) return false;
+    final steps = l.practice.engineSteps;
     // Chord lessons need the A4 chord engine; their sequences are chord
-    // charts, not single notes.
-    if (l.practice.engineSteps.contains('A4')) return false;
-    // Technique notation (`h` would otherwise parse as a half-note onset).
-    if (technique.hasMatch(seq)) return false;
-    try {
-      return PracticeScore.parse(seq).hasPitches;
-    } on FormatException {
-      return false;
+    // charts, not single notes, and a chord-labelled rhythm still needs the
+    // chord itself checked.
+    if (steps.contains('A4')) return false;
+    final score = scoreOf(l);
+    if (score == null) return false;
+    if (score.hasPitches) {
+      // Technique notation (`h` would otherwise parse as a half-note onset).
+      return !technique.hasMatch(seq);
     }
+    // Rhythm-only line (`4/4: q q ee q | h h`): A3 onset timing. Here `h` is
+    // a half note, never a hammer-on.
+    return score.isRhythmOnly &&
+        steps.contains('A3') &&
+        steps.every(_rhythmSteps.contains);
   }
 
   static Future<V1PracticeCatalog> load({AssetBundle? bundle}) async {
