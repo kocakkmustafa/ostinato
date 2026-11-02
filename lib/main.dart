@@ -10,6 +10,7 @@ import 'app/camera_session.dart';
 import 'app/audio/practice_audio_root.dart';
 import 'app/design/app_scope.dart';
 import 'app/app_theme.dart';
+import 'app/design/ostinato_theme.dart' show ostinatoAppBuilder;
 import 'app/app_theme_preferences.dart';
 import 'app/guitar_journey.dart';
 import 'app/onboarding_store.dart';
@@ -226,6 +227,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
+            builder: ostinatoAppBuilder,
             home: Builder(
               builder: (errorContext) => Scaffold(
                 body: Center(
@@ -273,6 +275,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
+            builder: ostinatoAppBuilder,
             home: const Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
@@ -300,6 +303,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
+            builder: ostinatoAppBuilder,
             navigatorObservers: observer == null
                 ? const <NavigatorObserver>[]
                 : <NavigatorObserver>[observer],

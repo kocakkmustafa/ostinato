@@ -1,4 +1,5 @@
 import 'app_theme.dart';
+import 'design/ostinato_theme.dart' show ostinatoAppBuilder;
 import 'app_theme_preferences.dart';
 
 import 'dart:async';
@@ -132,7 +133,9 @@ AccountConnection bindMotionAccountRuntime(
       runtime.dispose();
     },
     pageBuilder: accountPage,
-    membershipPageBuilder: ostinatoPaidFeaturesAvailable ? membershipPage : null,
+    membershipPageBuilder: ostinatoPaidFeaturesAvailable
+        ? membershipPage
+        : null,
     requirePaidAccess: (context) => requireMotionPaidAccess(
       context,
       account: runtime.account,
@@ -169,6 +172,7 @@ class AccountStartupFailure extends StatelessWidget {
     localeListResolutionCallback: resolveAppLocales,
     supportedLocales: appSupportedLocales,
     localizationsDelegates: appLocalizationsDelegates,
+    builder: ostinatoAppBuilder,
     home: Builder(
       builder: (context) => Scaffold(
         body: Center(
