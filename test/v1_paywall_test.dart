@@ -238,14 +238,44 @@ void main() {
       );
     });
 
-    testWidgets('the module gate still applies before the paywall', (
-      tester,
-    ) async {
+    testWidgets('a paid lesson in a closed module still shows the '
+        'membership page to a non-member', (tester) async {
+      final paid = PaidAccessProbe(member: false);
+      addTearDown(paid.dispose);
+      await pump(tester, paid: paid, checks: const {});
+      await tapLesson(tester, 'gtr-s2-m05-01');
+      expect(paid.calls, 1, reason: 'the paid scope is reachable (App Review)');
+      expect(find.text('practice gtr-s2-m05-01'), findsNothing);
+      expect(find.byType(V1LessonReaderScreen), findsNothing);
+      expect(find.byType(V1PracticeListScreen), findsOneWidget);
+    });
+
+    testWidgets('the module gate still applies to a member', (tester) async {
       final paid = PaidAccessProbe();
       addTearDown(paid.dispose);
       await pump(tester, paid: paid, checks: const {});
       await tapLesson(tester, 'gtr-s2-m05-01');
-      expect(paid.calls, 0, reason: 'a locked module never reaches the guard');
+      expect(paid.calls, 1);
+      expect(find.text('practice gtr-s2-m05-01'), findsNothing);
+      expect(find.byType(V1LessonReaderScreen), findsNothing);
+      expect(find.byType(V1PracticeListScreen), findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byType(SnackBar),
+          matching: find.text('Locked · clear the checkpoint before'),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('a free lesson in a closed module stays closed', (
+      tester,
+    ) async {
+      final paid = PaidAccessProbe(member: false);
+      addTearDown(paid.dispose);
+      await pump(tester, paid: paid, checks: const {});
+      await tapLesson(tester, 'gtr-s1-m04-01');
+      expect(paid.calls, 0);
       expect(find.byType(V1PracticeListScreen), findsOneWidget);
     });
 

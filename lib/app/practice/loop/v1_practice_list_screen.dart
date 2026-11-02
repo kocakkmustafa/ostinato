@@ -599,9 +599,13 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
       lesson.id,
       paidFeaturesAvailable: widget.paidFeaturesAvailable,
     );
+    // A paid lesson in a module that is not open yet still opens the
+    // membership page, so the paid scope is reachable before the checkpoints
+    // (App Review); after that the module gate applies as usual.
+    final previewPaid = !open && paid;
     return ListTile(
       key: Key('v1-practice-${lesson.id}'),
-      enabled: open,
+      enabled: open || previewPaid,
       leading: Icon(switch (status) {
         V1LessonStatus.completed || V1LessonStatus.tuned => Icons.check_circle,
         V1LessonStatus.passed => Icons.check_circle_outline,
@@ -652,7 +656,25 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
         (false, true) => _membershipMark(context, lesson.id),
         (false, false) => null,
       },
-      onTap: open ? () => unawaited(_open(state.catalog, lesson)) : null,
+      onTap: open
+          ? () => unawaited(_open(state.catalog, lesson))
+          : previewPaid
+          ? () => unawaited(_previewPaid(lesson))
+          : null,
+    );
+  }
+
+  /// Closed paid lesson: the paid-access guard first (sign-in, membership
+  /// page); a member then hears why the lesson is still closed.
+  Future<void> _previewPaid(V1CourseLesson lesson) async {
+    final admitted = await admitV1Lesson(
+      context,
+      lesson.id,
+      paidFeaturesAvailable: widget.paidFeaturesAvailable,
+    );
+    if (!admitted || !mounted) return;
+    ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+      SnackBar(content: Text(uiText(context, V1CourseCopy.unitLocked))),
     );
   }
 
