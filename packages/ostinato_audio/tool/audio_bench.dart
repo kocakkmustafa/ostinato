@@ -5,12 +5,23 @@
 //
 // Prints median and p95 milliseconds per call. Run on an otherwise idle
 // machine; this is a desktop measurement, not a device measurement.
+//
+// E51: `audio_bench.exe e51 <outdir> [reps]` times D's tuner call on the
+// product's 1.6 s buffer and its verifier call on the 0.75 s window (3 warm-ups
+// + reps, median), writes both inputs as f32le so the model arms are timed on
+// the same audio, and writes `<outdir>/bench-D.json`.
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:math' as math;
 
 import 'package:ostinato_audio/ostinato_audio.dart';
 
 void main(List<String> args) {
+  if (args.isNotEmpty && args.first == 'e51') {
+    benchE51(args[1], args.length > 2 ? int.parse(args[2]) : 20);
+    return;
+  }
   final reps = args.isEmpty ? 50 : int.parse(args.first);
   const sr = 48000;
   const q = PhoneChannelConfig(
@@ -123,4 +134,95 @@ void main(List<String> args) {
     stdout.writeln('$name ${v[v.length ~/ 2].toStringAsFixed(1)} / '
         '${v[((v.length - 1) * 0.95).round()].toStringAsFixed(1)}');
   }
+}
+
+/// E51 bench inputs: a guitar A2 pluck at 0.15 s in the 1.6 s tuning buffer,
+/// an A3 pluck at 0.15 s (expected time) in the 0.75 s verifier window, both
+/// through the quiet-phone channel (seed 0).
+({Float64List tuner, Float64List verify}) e51BenchInputs() {
+  const sr = 48000;
+  const q = PhoneChannelConfig(
+      noise: ChannelNoise.pink, snrDb: 35, lowCutHz: 100, agc: true);
+  double hz(num m) => 440 * math.pow(2, (m - 69) / 12).toDouble();
+  return (
+    tuner: PhoneChannel.apply(
+        SyntheticString.pluck(
+            f0Hz: hz(45), sampleRate: sr, seconds: 1.45, preRollSeconds: 0.15),
+        sr,
+        q),
+    verify: PhoneChannel.apply(
+        SyntheticString.pluck(
+            f0Hz: hz(57), sampleRate: sr, seconds: 0.6, preRollSeconds: 0.15),
+        sr,
+        q),
+  );
+}
+
+void benchE51(String outDir, int reps) {
+  const sr = 48000;
+  final x = e51BenchInputs();
+  Directory(outDir).createSync(recursive: true);
+  for (final (name, v) in [
+    ('tuner-1600ms', x.tuner),
+    ('verify-750ms', x.verify)
+  ]) {
+    File('$outDir/bench-$name.f32')
+        .writeAsBytesSync(Float32List.fromList(v).buffer.asUint8List());
+  }
+  // The arm reads the f32 file, as the models do.
+  Float64List back(String name) {
+    final b = File('$outDir/bench-$name.f32').readAsBytesSync();
+    return Float64List.fromList(
+        b.buffer.asFloat32List(b.offsetInBytes, b.lengthInBytes ~/ 4));
+  }
+
+  final tb = back('tuner-1600ms'), vb = back('verify-750ms');
+  final tuner = PreciseTuner(), verifier = GuitarNoteVerifier();
+  Map<String, num> time(void Function() f) {
+    for (var i = 0; i < 3; i++) {
+      f();
+    }
+    final ms = <double>[];
+    for (var i = 0; i < reps; i++) {
+      final sw = Stopwatch()..start();
+      f();
+      ms.add(sw.elapsedMicroseconds / 1000);
+    }
+    ms.sort();
+    return {
+      'medianMs': ms[ms.length ~/ 2],
+      'p95Ms': ms[((ms.length - 1) * 0.95).round()],
+      'reps': reps
+    };
+  }
+
+  final t = time(() => tuner.measure(tb, sampleRate: sr));
+  final v = time(() => verifier.verify(vb, sampleRate: sr, expectedMidi: 57));
+  // The CREPE / SwiftF0 verifier arms use D's attack front end; its cost is
+  // added to theirs.
+  final required = (verifier.config.skipAfterOnsetMs * sr / 1000).round() +
+      (verifier.config.minAnalysisMs * sr / 1000).round();
+  final att = time(() => verifier.attackLocator
+      .lastUsableAttack(vb, sr, requiredSamples: required));
+  final res = {
+    'arm': 'D',
+    'tuner': {
+      ...t,
+      'audioS': tb.length / sr,
+      'msPerAudioS': t['medianMs']! / (tb.length / sr),
+      'f0': tuner.measure(tb, sampleRate: sr).measurement?.f0Hz,
+    },
+    'verify': {
+      ...v,
+      'audioS': vb.length / sr,
+      'msPerAudioS': v['medianMs']! / (vb.length / sr),
+      'attackMs': att['medianMs'],
+      'attackIndex': verifier.attackLocator
+          .lastUsableAttack(vb, sr, requiredSamples: required),
+      'verdict':
+          verifier.verify(vb, sampleRate: sr, expectedMidi: 57).verdict.name,
+    },
+  };
+  File('$outDir/bench-D.json').writeAsStringSync(jsonEncode(res));
+  stdout.writeln(jsonEncode(res));
 }

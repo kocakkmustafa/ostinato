@@ -7,6 +7,21 @@
 //   dart run tool/audio_eval.dart synth-tuner <spec.json> <out.jsonl> [k/n]
 //   dart run tool/audio_eval.dart real-tuner  <spec.json> <out.jsonl> [k/n]
 //   dart run tool/audio_eval.dart verify      <spec.json> <out.jsonl> [k/n]
+//   dart run tool/audio_eval.dart stream-tuner|stream-verify <spec> <out> [k/n]
+//
+// E52 stream-tuner flags (absent = E45 behaviour, rows unchanged):
+// `seedSalt` (string) salts the channel seed, condition `seedOf` reuses
+// another condition's channel draw, `displayRule: "confident-first"` adds
+// arm T (t* fields) computed in the same pass as arm C.
+//
+// E51 (harness only; the engine is unchanged):
+//   stream-tuner / stream-verify accept `seedSalt` (int, 0 = the E43–E45
+//   hashes), `lastOnly` (stream-tuner) and `gShift` (stream-tuner, C0 rows).
+//   dart run tool/audio_eval.dart stream-render <spec.json> <outdir> [k/n] [from:to]
+//   dart run tool/audio_eval.dart synth-render  <spec.json> <outdir> [k/n]
+//   The render commands write the channel output (f32le) and a
+//   `manifest.jsonl` into <outdir> for the model arms; `from:to` selects the
+//   shard-local item range (chunks).
 //
 // Spec keys: sampleRate, conditions[], irs[] (f32le paths at sampleRate),
 // plus synth `instruments[]` or real `items[]`, `shiftsCents[]`, `offsets[]`.
@@ -27,7 +42,9 @@ void main(List<String> args) {
       jsonDecode(File(args[1]).readAsStringSync()) as Map<String, dynamic>;
   final shard =
       args.length > 3 ? args[3].split('/').map(int.parse).toList() : [0, 1];
-  final out = File(args[2]).openWrite();
+  final render = args[0] == 'stream-render' || args[0] == 'synth-render';
+  if (render) Directory(args[2]).createSync(recursive: true);
+  final out = File(render ? '${args[2]}/manifest.jsonl' : args[2]).openWrite();
   final ctx = EvalContext.fromSpec(spec);
   final sw = Stopwatch()..start();
   var rows = 0;
@@ -47,6 +64,13 @@ void main(List<String> args) {
       runStreamTuner(spec, ctx, shard, emit);
     case 'stream-verify':
       runStreamVerify(spec, ctx, shard, emit);
+    case 'stream-render':
+      final range = args.length > 4
+          ? args[4].split(':').map(int.parse).toList()
+          : [0, 1 << 30];
+      runStreamRender(spec, ctx, shard, range, args[2], emit);
+    case 'synth-render':
+      runSynthRender(spec, ctx, shard, args[2], emit);
     default:
       stderr.writeln('unknown command ${args[0]}');
       exit(64);
@@ -124,8 +148,13 @@ final class Condition {
         snrDb = (j['snrDb'] as num? ?? 60).toDouble(),
         lowCutHz = (j['lowCutHz'] as num?)?.toDouble(),
         lowCutOrder = j['lowCutOrder'] as int? ?? 2,
-        agc = j['agc'] as bool? ?? false;
+        agc = j['agc'] as bool? ?? false,
+        seedOf = j['seedOf'] as String?;
   final String name;
+
+  /// E52: an ablation condition reuses another condition's channel draw (IR
+  /// index and noise sequence) by naming it here; null = its own name.
+  final String? seedOf;
   final bool clean, reverb, agc;
   final double drrDb, snrDb;
   final ChannelNoise noise;
@@ -355,6 +384,60 @@ Map<String, Object?> measurementRow(TunerResult r) {
   };
 }
 
+/// One E36 synthetic string note (draw order fixed: detune, B, pluck, decay,
+/// glide). Shared by `synth-tuner` and the E51 `synth-render`.
+({
+  int seed,
+  double f0,
+  double detune,
+  double b,
+  double pluck,
+  double decay,
+  double glide,
+  Float64List x
+}) synthNote(
+    Map<String, dynamic> i, int seedBase, int midi, int rep, int sampleRate) {
+  final family = i['family'] as String;
+  List<double> range(String k) =>
+      [for (final v in i[k] as List) (v as num).toDouble()];
+  final seconds = (i['seconds'] as num? ?? 2.4).toDouble();
+  final seed = seedBase + stableHash('$family/$midi/$rep');
+  final rng = math.Random(seed);
+  double draw(List<double> r) => r[0] + (r[1] - r[0]) * rng.nextDouble();
+  final detune = draw(range('detuneRange'));
+  final f0 = midiHz(midi) * math.pow(2, detune / 1200);
+  final b = draw(range('bRange')),
+      pluck = draw(range('pluckRange')),
+      decay = draw(range('decayRange')),
+      glide = draw(range('glideRange'));
+  final x = SyntheticString.pluck(
+    f0Hz: f0,
+    sampleRate: sampleRate,
+    seconds: seconds,
+    inharmonicityB: b,
+    pluckPosition: pluck,
+    fundamentalDecaySeconds: decay,
+    glideCents: glide,
+    polarizationDetuneCents: 0.3,
+    polarizationLevel: 0.2,
+    preRollSeconds: synthPreRollS,
+    seed: seed,
+  );
+  return (
+    seed: seed,
+    f0: f0,
+    detune: detune,
+    b: b,
+    pluck: pluck,
+    decay: decay,
+    glide: glide,
+    x: x
+  );
+}
+
+/// Onset of every E36 synthetic note (pre-roll before the pluck).
+const synthPreRollS = 0.25;
+
 void runSynthTuner(
   Map<String, dynamic> spec,
   EvalContext ctx,
@@ -367,38 +450,11 @@ void runSynthTuner(
     final i = inst as Map<String, dynamic>;
     final family = i['family'] as String;
     final profile = profileNamed(i['profile'] as String);
-    List<double> range(String k) =>
-        [for (final v in i[k] as List) (v as num).toDouble()];
-    final bR = range('bRange'),
-        pR = range('pluckRange'),
-        dR = range('decayRange');
-    final gR = range('glideRange'), tR = range('detuneRange');
-    final seconds = (i['seconds'] as num? ?? 2.4).toDouble();
     for (final midi in (i['strings'] as List).cast<int>()) {
       for (var rep = 0; rep < (i['repeats'] as int); rep++) {
         if (job++ % shard[1] != shard[0]) continue;
-        final seed = seedBase + stableHash('$family/$midi/$rep');
-        final rng = math.Random(seed);
-        double draw(List<double> r) => r[0] + (r[1] - r[0]) * rng.nextDouble();
-        final detune = draw(tR);
-        final f0 = midiHz(midi) * math.pow(2, detune / 1200);
-        final b = draw(bR),
-            pluck = draw(pR),
-            decay = draw(dR),
-            glide = draw(gR);
-        final x = SyntheticString.pluck(
-          f0Hz: f0,
-          sampleRate: ctx.sampleRate,
-          seconds: seconds,
-          inharmonicityB: b,
-          pluckPosition: pluck,
-          fundamentalDecaySeconds: decay,
-          glideCents: glide,
-          polarizationDetuneCents: 0.3,
-          polarizationLevel: 0.2,
-          preRollSeconds: 0.25,
-          seed: seed,
-        );
+        final n = synthNote(i, seedBase, midi, rep, ctx.sampleRate);
+        final (:seed, :f0, :detune, :b, :pluck, :decay, :glide, :x) = n;
         for (final c in ctx.conditions) {
           final y = ctx.render(x, c, seed + stableHash(c.name));
           final r = tunerFromSpec(spec, profile)
@@ -577,7 +633,82 @@ void runVerify(
 // 'global' (frames on the stream's hop grid) or 'global+cache' (same, with an
 // OnsetFrameCache reused across a note's analyses; rows must equal 'global').
 
-int jitterMs(String id, int range) => stableHash('$id/phase') % range;
+int jitterMs(String id, int range, [String salt = '']) =>
+    stableHash('$id/phase$salt') % range;
+
+/// E51 seeds: `seedSalt` s > 0 appends `/s{s}` to every stableHash key of the
+/// cut (render seed, player jitter, tuner phase); 0 or absent keeps the E43–E45
+/// keys bit for bit.
+String seedSalt(Map<String, dynamic> spec) {
+  // A string salt is E52's (streamTunerSeed); E51 keys stay unsalted for it.
+  final v = spec['seedSalt'];
+  if (v is String) return '';
+  final s = v as int? ?? 0;
+  if (s < 0) throw ArgumentError('seedSalt must be >= 0');
+  return s > 0 ? '/s$s' : '';
+}
+
+/// IR index the channel uses for [seed] (null: no reverb).
+int? irIndexOf(EvalContext ctx, Condition c, int seed) =>
+    c.clean || !c.reverb || ctx.irs.isEmpty ? null : seed % ctx.irs.length;
+
+/// Tuner analysis instants of one note: onset + phase + k × interval, ≤ end.
+List<int> analysisInstants(int onset, int phase, int end, int interval) =>
+    [for (var t = onset + phase; t <= end; t += interval) t];
+
+/// The note's shown reading = the last successful measurement over
+/// [instants] (E43). Forward: every instant is measured (`n`, `measured`,
+/// `firstK` are diagnostics). With [lastOnly] the instants are visited
+/// backwards and the walk stops at the first success: the same reading and
+/// instant, because a measurement depends only on its own buffer. Not exact
+/// with a stateful [accept] (note gate), so that combination is rejected.
+({TuningMeasurement? m, int? k, int n, int? measured, int? firstK})
+    shownReading(
+        List<int> instants, TuningMeasurement? Function(int t) measureAt,
+        {bool lastOnly = false,
+        bool Function(TuningMeasurement m, int t)? accept}) {
+  if (lastOnly) {
+    if (accept != null) {
+      throw ArgumentError('lastOnly is exact only without a note gate');
+    }
+    var n = 0;
+    for (var k = instants.length - 1; k >= 0; k--) {
+      n++;
+      final m = measureAt(instants[k]);
+      if (m != null) return (m: m, k: k, n: n, measured: null, firstK: null);
+    }
+    return (m: null, k: null, n: n, measured: null, firstK: null);
+  }
+  TuningMeasurement? last;
+  int? lastK, firstK;
+  var measured = 0;
+  for (var k = 0; k < instants.length; k++) {
+    final m = measureAt(instants[k]);
+    if (m != null && (accept == null || accept(m, instants[k]))) {
+      measured++;
+      last = m;
+      lastK = k;
+      firstK ??= k;
+    }
+  }
+  return (
+    m: last,
+    k: lastK,
+    n: instants.length,
+    measured: measured,
+    firstK: firstK
+  );
+}
+
+/// Writes x[from:to] as float32 little-endian.
+void writeF32(String path, List<double> x, [int from = 0, int? to]) {
+  final end = to ?? x.length;
+  final f = Float32List(end - from);
+  for (var i = from; i < end; i++) {
+    f[i - from] = x[i];
+  }
+  File(path).writeAsBytesSync(f.buffer.asUint8List());
+}
 
 ({OnsetFrameCache? cache, bool global}) gridMode(Map<String, dynamic> spec) {
   final g = spec['grid'] as String? ?? 'buffer';
@@ -599,6 +730,12 @@ void runStreamTuner(
   final sr = ctx.sampleRate;
   final interval = (0.35 * sr).round();
   final bufferLen = (1.6 * sr).round();
+  final salt = seedSalt(spec);
+  final e51 = spec['seedSalt'] is int;
+  final lastOnly = spec['lastOnly'] == true;
+  if (lastOnly && spec['noteGate'] != null) {
+    throw ArgumentError('lastOnly is exact only without noteGate');
+  }
   var job = 0;
   for (final it in spec['items'] as List) {
     final item = it as Map<String, dynamic>;
@@ -611,53 +748,82 @@ void runStreamTuner(
     final ref =
         tuner.measure(readF32(item['refRaw'] as String), sampleRate: sr);
     final refF0 = ref.measurement?.f0Hz;
-    final phase = (jitterMs(id, 350) * sr / 1000).round();
+    final phase = (jitterMs(id, 350, salt) * sr / 1000).round();
+    final onset0 = ((item['onsetS'] as num) * sr).round();
     for (final shift in shifts) {
       final r = math.pow(2, shift / 1200).toDouble();
       final y = shiftPitch(seg, shift);
       final onset = ((item['onsetS'] as num) * sr / r).round();
       final end = math.min(y.length, ((item['endS'] as num) * sr / r).round());
+      final instants = analysisInstants(onset, phase, end, interval);
       for (final c in ctx.conditions) {
-        final seed = stableHash('$id/$shift/${c.name}/stream');
+        // E51 (int salt) and E52 (string salt, seedOf) keep their own keys.
+        final seed = spec['seedSalt'] is int
+            ? stableHash('$id/$shift/${c.name}/stream$salt')
+            : streamTunerSeed(spec, id, shift, c);
         final z = ctx.render(y, c, seed);
         final mode = gridMode(spec);
         // E44: the app passes its calibrated room floor to every measurement.
         final floor =
             spec['roomFloor'] == 'calibrated' ? ctx.floorDb(y, c, seed) : null;
-        TuningMeasurement? last;
-        double? firstS;
-        int? lastT, lastA;
-        var n = 0, measured = 0;
         final gate = NoteGate.fromSpec(spec, sr);
+        // E52 arm T: same measurements, only the shown one differs.
+        final display = ConfidentFirst.fromSpec(spec, sr);
         final sw = Stopwatch()..start();
-        for (var t = onset + phase; t <= end; t += interval) {
-          final a = math.max(0, t - bufferLen);
-          n++;
-          final res = tuner.measure(z.sublist(a, t),
-              sampleRate: sr,
-              roomFloorDb: floor,
-              absoluteStartSample: mode.global ? a : null,
-              onsetCache: mode.cache);
-          final m = res.measurement;
-          if (m != null && (gate == null || gate.accept(m, a, t))) {
-            measured++;
-            last = m;
-            lastT = t;
-            lastA = a + (m.attackIndex ?? 0);
-            firstS ??= (t - onset) / sr;
+        final shown = shownReading(
+            instants,
+            (t) => tuner
+                .measure(z.sublist(math.max(0, t - bufferLen), t),
+                    sampleRate: sr,
+                    roomFloorDb: floor,
+                    absoluteStartSample:
+                        mode.global ? math.max(0, t - bufferLen) : null,
+                    onsetCache: mode.cache)
+                .measurement,
+            lastOnly: lastOnly,
+            accept: gate == null && display == null
+                ? null
+                : (m, t) {
+                    final a = math.max(0, t - bufferLen);
+                    if (gate != null && !gate.accept(m, a, t)) return false;
+                    display?.offer(m, a, t);
+                    return true;
+                  });
+        sw.stop();
+        final last = shown.m;
+        final lastT = shown.k == null ? null : instants[shown.k!];
+        final lastA = lastT == null
+            ? null
+            : math.max(0, lastT - bufferLen) + (last!.attackIndex ?? 0);
+        final firstS = shown.firstK == null
+            ? null
+            : (instants[shown.firstK!] - onset) / sr;
+        // E51 G-shift: in C0 the shifted note's reading against the unshifted
+        // clean buffer at the same analysis instant (same k).
+        double? gShiftF0;
+        if (spec['gShift'] == true &&
+            c.clean &&
+            shift != 0 &&
+            shown.k != null) {
+          final t0 = onset0 + phase + shown.k! * interval;
+          if (t0 <= seg.length) {
+            gShiftF0 = cleanTuner(spec, profile)
+                .measure(seg.sublist(math.max(0, t0 - bufferLen), t0),
+                    sampleRate: sr)
+                .measurement
+                ?.f0Hz;
           }
         }
-        sw.stop();
         // E45: the clean (unrendered, same shift) buffer at the instant the
         // shown reading was taken; separates the tuner's error from the
         // string's own drift. Not timed.
+        double? cleanAt(int t) => cleanTuner(spec, profile)
+            .measure(y.sublist(math.max(0, t - bufferLen), t), sampleRate: sr)
+            .measurement
+            ?.f0Hz;
         double? cleanF0;
         if (spec['cleanRef'] == true && lastT != null) {
-          cleanF0 = cleanTuner(spec, profile)
-              .measure(y.sublist(math.max(0, lastT - bufferLen), lastT),
-                  sampleRate: sr)
-              .measurement
-              ?.f0Hz;
+          cleanF0 = cleanAt(lastT);
         }
         emit({
           'id': id,
@@ -667,8 +833,8 @@ void runStreamTuner(
           'cond': c.name,
           'refMeasured': ref.measured,
           'refF0': refF0,
-          'instants': n,
-          'measuredInstants': measured,
+          'instants': lastOnly ? null : shown.n,
+          'measuredInstants': shown.measured,
           'measured': last != null,
           'f0': last?.f0Hz,
           'fromLate': last?.fromLateReadings,
@@ -688,9 +854,142 @@ void runStreamTuner(
           'cacheHits': mode.cache?.hits,
           'cacheMisses': mode.cache?.misses,
           'roomFloorDb': floor,
+          if (e51) ...{
+            'seedSalt': spec['seedSalt'],
+            'renderSeed': seed,
+            'irIndex': irIndexOf(ctx, c, seed),
+            'k': shown.k,
+            'calls': shown.n,
+          },
+          if (spec['gShift'] == true && c.clean && shift != 0) ...{
+            'gShiftF0': gShiftF0,
+            'gShift': last == null || gShiftF0 == null
+                ? null
+                : centsOf(last.f0Hz, gShiftF0) - shift,
+          },
+          // E52 fields only when an E52 flag is set (rows of older specs are
+          // byte-for-byte unchanged).
+          if (spec['seedSalt'] is String || display != null) ...{
+            'seed': seed,
+            'irIndex': ctx.irs.isEmpty ? null : seed % ctx.irs.length,
+            'irUsed': !c.clean && c.reverb && ctx.irs.isNotEmpty,
+            'attackIndexMs': last?.attackIndex == null
+                ? null
+                : last!.attackIndex! * 1000 / sr,
+            'confident':
+                last == null ? null : ConfidentFirst.isConfident(last, sr),
+          },
+          if (display != null)
+            ...display.row(
+              last: last,
+              lastT: lastT,
+              lastA: lastA,
+              cleanF0: cleanF0,
+              cleanAt: spec['cleanRef'] == true ? cleanAt : null,
+              onset: onset,
+              refF0: refF0,
+              shift: shift,
+            ),
         });
       }
     }
+  }
+}
+
+/// Channel seed of a stream-tuner row. Without `seedSalt` this is the E43–E45
+/// formula (a condition's own name); E52 (`seedSalt: "E52"`) appends the salt
+/// so the IR draw and noise differ from every earlier run, and `seedOf` lets
+/// an ablation reuse another condition's draw.
+int streamTunerSeed(
+    Map<String, dynamic> spec, String id, double shift, Condition c) {
+  final salt = spec['seedSalt'] as String?;
+  final key = '$id/$shift/${c.seedOf ?? c.name}/stream';
+  return stableHash(salt == null ? key : '$key/$salt');
+}
+
+/// E52 arm T (`displayRule: "confident-first"`): the note shows its last
+/// *confident* measurement — the tuner screen's `confident` rule
+/// (lib/app/tuner/tuner_analysis.dart: attack at least kMinVisibleAttackMs =
+/// 20 ms inside the buffer, not from the late-readings rule; the spread limit
+/// follows from the latter) — and falls back to the last successful
+/// measurement (arm C) when the note has none. A tail reading never replaces
+/// an earlier confident reading of the same note. Null when the spec has no
+/// display rule.
+final class ConfidentFirst {
+  ConfidentFirst(this.sampleRate);
+
+  static const minVisibleAttackMs = 20;
+
+  static ConfidentFirst? fromSpec(Map<String, dynamic> spec, int sampleRate) {
+    final r = spec['displayRule'] as String?;
+    if (r == null) return null;
+    if (r != 'confident-first') {
+      throw ArgumentError('unknown displayRule $r');
+    }
+    return ConfidentFirst(sampleRate);
+  }
+
+  static bool isConfident(TuningMeasurement m, int sampleRate) {
+    final idx = m.attackIndex;
+    return idx != null &&
+        idx >= minVisibleAttackMs * sampleRate / 1000 &&
+        !m.fromLateReadings;
+  }
+
+  final int sampleRate;
+  TuningMeasurement? conf;
+  int? confT, confA;
+  var confidentInstants = 0;
+
+  /// Called with every measurement arm C counts, in time order.
+  void offer(TuningMeasurement m, int bufferStart, int t) {
+    if (!isConfident(m, sampleRate)) return;
+    confidentInstants++;
+    conf = m;
+    confT = t;
+    confA = bufferStart + m.attackIndex!;
+  }
+
+  Map<String, Object?> row({
+    required TuningMeasurement? last,
+    required int? lastT,
+    required int? lastA,
+    required double? cleanF0,
+    required double? Function(int t)? cleanAt,
+    required int onset,
+    required double? refF0,
+    required double shift,
+  }) {
+    final sr = sampleRate;
+    final m = conf ?? last;
+    final t = conf != null ? confT : lastT;
+    final a = conf != null ? confA : lastA;
+    // Clean reference: reused when T shows C's instant, else one extra
+    // measurement of the clean buffer at T's instant.
+    final extra = cleanAt != null && t != null && t != lastT;
+    final tClean = cleanAt == null || t == null
+        ? null
+        : (t == lastT ? cleanF0 : cleanAt(t));
+    return {
+      'tMeasured': m != null,
+      'tConfident': conf != null,
+      'tConfidentInstants': confidentInstants,
+      'tF0': m?.f0Hz,
+      'tFromLate': m?.fromLateReadings,
+      'tAttackIndexMs':
+          m?.attackIndex == null ? null : m!.attackIndex! * 1000 / sr,
+      'tLastS': t == null ? null : (t - onset) / sr,
+      'tLastAttackS': a == null ? null : (a - onset) / sr,
+      'tErr': m == null || refF0 == null
+          ? null
+          : wrapCents(centsOf(m.f0Hz, refF0) - shift),
+      if (cleanAt != null) ...{
+        'tCleanF0': tClean,
+        'tCleanExtra': extra,
+        'tErrClean':
+            m == null || tClean == null ? null : centsOf(m.f0Hz, tClean),
+      },
+    };
   }
 }
 
@@ -703,6 +1002,8 @@ void runStreamVerify(
   final offsets = (spec['offsets'] as List).cast<int>();
   final verifier = verifierFromSpec(spec);
   final sr = ctx.sampleRate;
+  final salt = seedSalt(spec);
+  final e51 = spec['seedSalt'] is int;
   var job = 0;
   for (final it in spec['items'] as List) {
     final item = it as Map<String, dynamic>;
@@ -711,14 +1012,9 @@ void runStreamVerify(
     final id = item['id'] as String;
     final midi = item['midi'] as int;
     final seg = readF32(item['seg'] as String);
-    final onset = ((item['onsetS'] as num) * sr).round();
-    // Player early (+) or late (-) by up to 100 ms relative to the expected time.
-    final early = ((jitterMs(id, 201) - 100) * sr / 1000).round();
-    final expected = onset + early;
-    final a = math.max(0, expected - (0.15 * sr).round());
-    final b = math.min(seg.length, expected + (0.60 * sr).round());
+    final (:a, :b, :early) = verifyWindow(item, seg.length, sr, salt);
     for (final c in ctx.conditions) {
-      final seed = stableHash('$id/${c.name}/stream');
+      final seed = stableHash('$id/${c.name}/stream$salt');
       final z = ctx.render(seg, c, seed);
       final window = z.sublist(a, b);
       final floor =
@@ -741,7 +1037,205 @@ void runStreamVerify(
           'reason': v.reason.name,
           'observedMidi': v.observedMidi,
           'earlyMs': early * 1000 / sr,
+          if (e51) ...{
+            'seedSalt': spec['seedSalt'],
+            'renderSeed': seed,
+            'irIndex': irIndexOf(ctx, c, seed),
+          },
         });
+      }
+    }
+  }
+}
+
+/// E43 verifier window of one stream item: the player is early (+) or late
+/// (−) by up to 100 ms relative to the expected time; window = expected −
+/// 150 ms .. expected + 600 ms.
+({int a, int b, int early}) verifyWindow(
+    Map<String, dynamic> item, int length, int sr, String salt) {
+  final onset = ((item['onsetS'] as num) * sr).round();
+  final early =
+      ((jitterMs(item['id'] as String, 201, salt) - 100) * sr / 1000).round();
+  final expected = onset + early;
+  return (
+    a: math.max(0, expected - (0.15 * sr).round()),
+    b: math.min(length, expected + (0.60 * sr).round()),
+    early: early
+  );
+}
+
+// ---------------------------------------------------------------------------
+// E51: inputs for the model arms. Same items, shifts, seeds, channel and
+// windows as stream-tuner / stream-verify; the models run in Python on the
+// written f32 files (48 kHz). No measurement happens here except D's synthetic
+// reading in synth-render.
+
+/// Tuner spec (has `shiftsCents`): per (item, shift) the clean shifted
+/// segment from the first buffer's start to its end (`_clean.f32`), per
+/// condition the channel output from the same start to the note's end;
+/// manifest offsets are relative to the shifted segment. Verifier spec (has
+/// `offsets`): per (item, condition) the 0.75 s window and the verifier's own
+/// attack (`AttackLocator.lastUsableAttack`, required 80 + 200 ms).
+void runStreamRender(
+  Map<String, dynamic> spec,
+  EvalContext ctx,
+  List<int> shard,
+  List<int> range,
+  String outDir,
+  void Function(Map<String, Object?>) emit,
+) {
+  final sr = ctx.sampleRate;
+  final salt = seedSalt(spec);
+  final interval = (0.35 * sr).round();
+  final bufferLen = (1.6 * sr).round();
+  final tunerSpec = spec.containsKey('shiftsCents');
+  final verifier = verifierFromSpec(spec);
+  final vc = verifier.config;
+  final required = (vc.skipAfterOnsetMs * sr / 1000).round() +
+      (vc.minAnalysisMs * sr / 1000).round();
+  var job = 0, index = -1;
+  for (final it in spec['items'] as List) {
+    index++;
+    final item = it as Map<String, dynamic>;
+    if (!inGroups(spec, item)) continue;
+    if (job++ % shard[1] != shard[0]) continue;
+    final local = (job - 1) ~/ shard[1];
+    if (local < range[0] || local >= range[1]) continue;
+    final id = item['id'] as String;
+    final seg = readF32(item['seg'] as String);
+    final base = {
+      'id': id,
+      'group': item['group'],
+      'midi': item['midi'],
+      'profile': item['profile'],
+      'seedSalt': spec['seedSalt'] ?? 0,
+      'item': index,
+    };
+    if (tunerSpec) {
+      final phase = (jitterMs(id, 350, salt) * sr / 1000).round();
+      final onset0 = ((item['onsetS'] as num) * sr).round();
+      for (final s in spec['shiftsCents'] as List) {
+        final shift = (s as num).toDouble();
+        final r = math.pow(2, shift / 1200).toDouble();
+        final y = shiftPitch(seg, shift);
+        final onset = ((item['onsetS'] as num) * sr / r).round();
+        final end =
+            math.min(y.length, ((item['endS'] as num) * sr / r).round());
+        final first = math.max(0, math.min(onset + phase, end) - bufferLen);
+        final tag = '$index${shift < 0 ? 'm' : 'p'}${shift.abs().round()}';
+        final cleanFile = '$outDir/${tag}_clean.f32';
+        writeF32(cleanFile, y, first);
+        for (final (ci, c) in ctx.conditions.indexed) {
+          final seed = stableHash('$id/$shift/${c.name}/stream$salt');
+          final z = ctx.render(y, c, seed);
+          final file = '$outDir/${tag}_c$ci.f32';
+          writeF32(file, z, first, end);
+          emit({
+            ...base,
+            'kind': 'tuner',
+            'shift': shift,
+            'cond': c.name,
+            'renderSeed': seed,
+            'irIndex': irIndexOf(ctx, c, seed),
+            'offset': first,
+            'onset': onset,
+            'onset0': onset0,
+            'phase': phase,
+            'end': end,
+            'interval': interval,
+            'bufferLen': bufferLen,
+            'instants': analysisInstants(onset, phase, end, interval),
+            'file': file,
+            'n': end - first,
+            'cleanFile': cleanFile,
+            'cleanN': y.length - first,
+          });
+        }
+      }
+    } else {
+      final (:a, :b, :early) = verifyWindow(item, seg.length, sr, salt);
+      for (final (ci, c) in ctx.conditions.indexed) {
+        final seed = stableHash('$id/${c.name}/stream$salt');
+        final z = ctx.render(seg, c, seed);
+        final window = z.sublist(a, b);
+        final attack = verifier.attackLocator
+            .lastUsableAttack(window, sr, requiredSamples: required);
+        final file = '$outDir/${index}v_c$ci.f32';
+        writeF32(file, window);
+        emit({
+          ...base,
+          'kind': 'verify',
+          'cond': c.name,
+          'renderSeed': seed,
+          'irIndex': irIndexOf(ctx, c, seed),
+          'a': a,
+          'b': b,
+          'earlyMs': early * 1000 / sr,
+          'attack': attack,
+          'file': file,
+          'n': b - a,
+        });
+      }
+    }
+  }
+}
+
+/// E51 G-abs: E36 synthetic families (spec `instruments`, `seedBase`), the
+/// buffer [onset − `bufferPreS`, onset + `bufferPostS`] after the channel,
+/// written for the model arms, with D's reading of the same buffer (default
+/// tuner of the family's profile) and the true f0.
+void runSynthRender(
+  Map<String, dynamic> spec,
+  EvalContext ctx,
+  List<int> shard,
+  String outDir,
+  void Function(Map<String, Object?>) emit,
+) {
+  final sr = ctx.sampleRate;
+  final seedBase = spec['seedBase'] as int;
+  final pre = (spec['bufferPreS'] as num? ?? 0.1).toDouble();
+  final post = (spec['bufferPostS'] as num? ?? 1.5).toDouble();
+  final a = ((synthPreRollS - pre) * sr).round();
+  final b = ((synthPreRollS + post) * sr).round();
+  var job = 0;
+  for (final inst in spec['instruments'] as List) {
+    final i = inst as Map<String, dynamic>;
+    final family = i['family'] as String;
+    final profile = profileNamed(i['profile'] as String);
+    for (final midi in (i['strings'] as List).cast<int>()) {
+      for (var rep = 0; rep < (i['repeats'] as int); rep++) {
+        if (job++ % shard[1] != shard[0]) continue;
+        final n = synthNote(i, seedBase, midi, rep, sr);
+        for (final (ci, c) in ctx.conditions.indexed) {
+          final renderSeed = n.seed + stableHash(c.name);
+          final y = ctx.render(n.x, c, renderSeed);
+          final buf = y.sublist(a, math.min(b, y.length));
+          final file = '$outDir/${family}_${midi}_${rep}_c$ci.f32';
+          writeF32(file, buf);
+          final m = tunerFromSpec(spec, profile)
+              .measure(buf, sampleRate: sr)
+              .measurement;
+          emit({
+            'kind': 'synth',
+            'family': family,
+            'profile': profile.name,
+            'midi': midi,
+            'rep': rep,
+            'cond': c.name,
+            'seedBase': seedBase,
+            'seed': n.seed,
+            'renderSeed': renderSeed,
+            'irIndex': irIndexOf(ctx, c, renderSeed),
+            'truthF0': n.f0,
+            'detune': n.detune,
+            'b': n.b,
+            'file': file,
+            'n': buf.length,
+            'dMeasured': m != null,
+            'dF0': m?.f0Hz,
+            'dErr': m == null ? null : centsOf(m.f0Hz, n.f0),
+          });
+        }
       }
     }
   }
