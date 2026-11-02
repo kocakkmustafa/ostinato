@@ -10,6 +10,8 @@ import 'app/camera_session.dart';
 import 'app/audio/practice_audio_root.dart';
 import 'app/design/app_scope.dart';
 import 'app/app_theme.dart';
+import 'app/design/ostinato_theme.dart' show ostinatoAppBuilder;
+import 'app/membership_resume.dart';
 import 'app/app_theme_preferences.dart';
 import 'app/guitar_journey.dart';
 import 'app/onboarding_store.dart';
@@ -226,6 +228,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
+            builder: ostinatoAppBuilder,
             home: Builder(
               builder: (errorContext) => Scaffold(
                 body: Center(
@@ -273,6 +276,7 @@ class _OstinatoAppState extends State<OstinatoApp> {
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
+            builder: ostinatoAppBuilder,
             home: const Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
@@ -300,16 +304,23 @@ class _OstinatoAppState extends State<OstinatoApp> {
             localeListResolutionCallback: resolveAppLocales,
             supportedLocales: appSupportedLocales,
             localizationsDelegates: appLocalizationsDelegates,
+            builder: ostinatoAppBuilder,
             navigatorObservers: observer == null
                 ? const <NavigatorObserver>[]
                 : <NavigatorObserver>[observer],
             home: _accountNavigationState.recovery && account != null
                 ? Builder(builder: account.pageBuilder)
-                : OstinatoHome(
-                    repo: repo,
-                    cueText: cue,
-                    store: widget.store,
-                    alreadyOnboarded: onboarded,
+                // A plan chosen while signed out continues after sign-in,
+                // which rebuilds this shell (MembershipResume).
+                : MembershipResumeHost(
+                    connection: account,
+                    userId: userId,
+                    child: OstinatoHome(
+                      repo: repo,
+                      cueText: cue,
+                      store: widget.store,
+                      alreadyOnboarded: onboarded,
+                    ),
                   ),
           );
           final navigator = widget._audioNavigatorHost == null

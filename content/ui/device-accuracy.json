@@ -1,0 +1,15 @@
+{
+  "$about": "The device-accuracy sentence shared by Settings → About, Settings → Microphone and the tuner (lib/app/device_accuracy_copy.dart). All 14 catalogs carry these pairs.",
+  "messages": [
+    {
+      "id": "note",
+      "en": "Accuracy depends on your phone's microphone and the room; measured results may vary.",
+      "tr": "Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir."
+    },
+    {
+      "id": "observationNote",
+      "en": "Optional · one guitar string · a quiet room. Overlapping sounds can show a plausible but misleading note. Accuracy depends on your phone's microphone and the room; measured results may vary. This does not decide tuning or playing success.",
+      "tr": "İsteğe bağlı · tek gitar teli · sessiz oda. Üst üste binen sesler inandırıcı ama yanıltıcı bir nota gösterebilir. Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir. Akort veya çalma başarısına karar vermez."
+    }
+  ]
+}

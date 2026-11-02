@@ -72,6 +72,11 @@
       "tr": "Ders sonuçların, serin ve haftalık hedefin bu cihazda tutulur. Motion hesabına giriş yapıp onay verirsen hesabına eşitlenir ve başka cihazda devam edebilirsin."
     },
     {
+      "id": "progressBodyLocal",
+      "en": "Your lesson results, streak and weekly goal stay on this device; this release does not sync them to an account. Your account is used for your membership.",
+      "tr": "Ders sonuçların, serin ve haftalık hedefin bu cihazda kalır; bu sürüm bunları hesaba eşitlemez. Hesabın üyeliğin için kullanılır."
+    },
+    {
       "id": "homeSubtitle",
       "en": "Measured practice. Tuner. Weekly goal.",
       "tr": "Ölçülü pratik. Akort. Haftalık hedef."
@@ -95,6 +100,16 @@
       "id": "comingSoon",
       "en": "Coming soon · This course opens in a later update.",
       "tr": "Yakında · Bu kurs sonraki güncellemelerle açılacak."
+    },
+    {
+      "id": "comingSoonVoice",
+      "en": "The voice course will cover a comfortable, healthy start, pitch matching, scales and range, intervals, rhythm and sight-singing, and first songs.",
+      "tr": "Ses kursu rahat ve sağlıklı bir başlangıç, perde eşleştirme, gamlar ve menzil, aralıklar, ritim ve deşifre ile ilk şarkıları kapsayacak."
+    },
+    {
+      "id": "comingSoonPiano",
+      "en": "The piano course will cover seating and hand shape, reading both clefs, rhythm, scales and triads, playing with both hands, accompaniment patterns and first pieces.",
+      "tr": "Piyano kursu oturuş ve el şekli, iki anahtarda okuma, ritim, gamlar ve üçlüler, iki elle çalma, eşlik kalıpları ve ilk eserleri kapsayacak."
     },
     {
       "id": "measuredTitle",

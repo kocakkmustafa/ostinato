@@ -1,0 +1,10 @@
+{
+  "$about": "Ostinato membership page copy (lib/app/membership_copy.dart): the reason shown when a signed-out user chooses a plan or restores purchases. All 14 catalogs carry these pairs.",
+  "messages": [
+    {
+      "id": "signInFirst",
+      "en": "Sign in or create an account first: your membership is tied to your account, so it works on every device where you sign in.",
+      "tr": "Önce giriş yap ya da hesap oluştur: üyeliğin hesabına bağlıdır, böylece giriş yaptığın her cihazda geçerli olur."
+    }
+  ]
+}

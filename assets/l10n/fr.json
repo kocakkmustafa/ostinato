@@ -8438,6 +8438,15 @@
     "d203e854b1b0c135": "Dernière note : {v0}",
     "f62205b8e7993e50": "Le niveau {v0} est gratuit · les niveaux suivants nécessitent un abonnement",
     "1d68a089af11083e": "Abonnement",
-    "6946560ebac6e08d": "Pour réussir une leçon, au moins 80 % de ses notes doivent être justes ; la leçon suivante s’ouvre alors. Les premières leçons de chaque cours sont gratuites ; les suivantes nécessitent un abonnement Ostinato."
+    "6946560ebac6e08d": "Pour réussir une leçon, au moins 80 % de ses notes doivent être justes ; la leçon suivante s’ouvre alors. Les premières leçons de chaque cours sont gratuites ; les suivantes nécessitent un abonnement Ostinato.",
+    "8c35a3bffb5f6829": "Connecte-toi ou crée d’abord un compte : ton abonnement est lié à ton compte et fonctionne ainsi sur chaque appareil où tu te connectes.",
+    "545f6c0a16d5c54c": "Tes résultats de leçons, ta série et ton objectif hebdomadaire restent sur cet appareil ; cette version ne les synchronise avec aucun compte. Ton compte sert à ton abonnement.",
+    "6afa082a5c331043": "En pratique mesurée, le microphone écoute les notes que tu joues. Une leçon est réussie quand une part suffisante de ses notes est entendue comme correcte ; la part requise augmente avec le niveau. L’autorisation est demandée lors de la première mesure. L’audio est traité sur cet appareil et n’est pas envoyé ; ce que tu joues n’est pas enregistré, sauf si tu actives l’écoute de ton propre enregistrement. Arrêter, quitter l’écran, changer de compte ou passer l’app en arrière-plan ferme le microphone.",
+    "2458f83652e85824": "La précision dépend du microphone de ton téléphone et de la pièce ; les résultats mesurés peuvent varier.",
+    "4360eb5d0a20a482": "{v0} Toutes les références de posture viennent de vidéos pédagogiques cadrées au-dessus de la taille ; rien sous tes hanches n'est donc lu.",
+    "a51b8da5ff450285": "Une corde neuve s'étire : revérifie-la après quelques minutes.",
+    "649ba097da874350": "Le cours de voix couvrira un début confortable et sain, la justesse, les gammes et la tessiture, les intervalles, le rythme et le déchiffrage chanté, et les premières chansons.",
+    "c722e9fcc9046c7d": "Le cours de piano couvrira la position assise et la forme de la main, la lecture dans les deux clés, le rythme, les gammes et les accords parfaits, le jeu à deux mains, les motifs d’accompagnement et les premiers morceaux.",
+    "96717d21ef2d504a": "Facultatif · une corde de guitare · une pièce calme. Des sons superposés peuvent afficher une note plausible mais trompeuse. La précision dépend du microphone de ton téléphone et de la pièce ; les résultats mesurés peuvent varier. Cela ne décide ni de l'accordage ni de la réussite du jeu."
   }
 }

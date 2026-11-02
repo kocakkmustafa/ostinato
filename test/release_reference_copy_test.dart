@@ -313,7 +313,10 @@ void main() {
       (tester) async {
         final guitar = repo.disciplines.singleWhere((d) => d.id == 'guitar');
         await tester.pumpWidget(
-          host(InstrumentScreenRoute(discipline: guitar)),
+          // Engineering notes are off in the store build; checked here.
+          host(
+            InstrumentScreenRoute(discipline: guitar, showEngineeringNotes: true),
+          ),
         );
         await waitForLocalizedFixture(tester,
           languageTag: language,

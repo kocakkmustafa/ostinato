@@ -10,10 +10,12 @@ import '../audio/audio_capture_channel.dart';
 import '../audio/guitar_note_observation_controller.dart';
 import '../audio/practice_audio_root.dart';
 import '../design/ostinato_theme.dart';
+import '../device_accuracy_copy.dart';
 import '../design/widgets.dart';
 import '../guitar_session_preparation.dart';
 import '../tuner/session_tuning_gate.dart';
 import '../tuner/tuner_screen.dart';
+import '../ui_copy.dart';
 
 /// Optional practice instrument; no target prompt, assessment or progress write.
 class GuitarNoteObservationScreen extends StatefulWidget {
@@ -278,11 +280,7 @@ class _GuitarNoteObservationScreenState
               ),
               const SizedBox(height: 12),
               Text(
-                localized(
-                  context,
-                  'Optional · one guitar string · a quiet room. Overlapping sounds can show a plausible but misleading note. Evaluated on isolated studio notes; real phone accuracy has not been verified. This does not decide tuning or playing success.',
-                  'İsteğe bağlı · tek gitar teli · sessiz oda. Üst üste binen sesler inandırıcı ama yanıltıcı bir nota gösterebilir. Ayrı stüdyo notalarında ölçüldü; gerçek telefon doğruluğu doğrulanmadı. Akort veya çalma başarısına karar vermez.',
-                ),
+                uiText(context, DeviceAccuracyCopy.observationNote),
                 style: hankenText(size: 13, height: 1.5),
               ),
               const SizedBox(height: 18),

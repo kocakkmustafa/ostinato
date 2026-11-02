@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
@@ -191,7 +192,13 @@ void main() {
     // Çalgı → Kurs → Ders sınıfları
     if (await tapIfPossible(t, find.text('Guitar'))) {
       note(t, '4 Instrument', 'InstrumentScreenRoute');
-      requireSubstance(t, 'Instrument', 'not all the same kind of gap');
+      // Store build (2026-11-02): engineering notes off, one short line.
+      requireSubstance(
+          t,
+          'Instrument',
+          ostinatoEngineeringNotesVisible
+              ? 'not all the same kind of gap'
+              : 'Measured practice. Tuner. Weekly goal.');
       final Discipline g =
           repo.disciplines.firstWhere((Discipline d) => d.id == 'guitar');
       if (await tapIfPossible(t, find.text(g.courses.first.displayName))) {

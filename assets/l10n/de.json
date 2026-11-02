@@ -8438,6 +8438,15 @@
     "d203e854b1b0c135": "Letzter Ton: {v0}",
     "f62205b8e7993e50": "Stufe {v0} ist kostenlos · spätere Stufen brauchen eine Mitgliedschaft",
     "1d68a089af11083e": "Mitgliedschaft",
-    "6946560ebac6e08d": "Um eine Lektion zu bestehen, müssen mindestens 80 % ihrer Töne richtig sein; dann öffnet sich die nächste Lektion. Die ersten Lektionen jedes Kurses sind kostenlos; spätere Lektionen erfordern eine Ostinato-Mitgliedschaft."
+    "6946560ebac6e08d": "Um eine Lektion zu bestehen, müssen mindestens 80 % ihrer Töne richtig sein; dann öffnet sich die nächste Lektion. Die ersten Lektionen jedes Kurses sind kostenlos; spätere Lektionen erfordern eine Ostinato-Mitgliedschaft.",
+    "8c35a3bffb5f6829": "Melde dich zuerst an oder erstelle ein Konto: Deine Mitgliedschaft ist an dein Konto gebunden und gilt so auf jedem Gerät, auf dem du angemeldet bist.",
+    "545f6c0a16d5c54c": "Deine Lektionsergebnisse, deine Serie und dein Wochenziel bleiben auf diesem Gerät; diese Version synchronisiert sie nicht mit einem Konto. Dein Konto wird für deine Mitgliedschaft verwendet.",
+    "6afa082a5c331043": "Beim gemessenen Üben hört das Mikrofon die Töne, die du spielst. Eine Lektion ist bestanden, wenn ein ausreichend großer Anteil ihrer Töne als richtig erkannt wird; der nötige Anteil steigt mit der Stufe. Die Berechtigung wird bei der ersten Messung angefragt. Audio wird auf diesem Gerät verarbeitet und nicht hochgeladen; was du spielst, wird nicht aufgezeichnet, außer du schaltest das Anhören deiner eigenen Aufnahme ein. Stoppen, den Bildschirm verlassen, das Konto wechseln oder die App in den Hintergrund legen schließt das Mikrofon.",
+    "2458f83652e85824": "Die Genauigkeit hängt vom Mikrofon deines Telefons und vom Raum ab; gemessene Ergebnisse können abweichen.",
+    "4360eb5d0a20a482": "{v0} Alle Haltungsreferenzen stammen aus Lehrvideos mit Aufnahmen ab der Taille, deshalb wird nichts unterhalb deiner Hüften erfasst.",
+    "a51b8da5ff450285": "Eine neue Saite dehnt sich: Prüfe sie nach einigen Minuten noch einmal.",
+    "649ba097da874350": "Der Stimmkurs wird einen bequemen, gesunden Einstieg, Tonhöhen treffen, Tonleitern und Stimmumfang, Intervalle, Rhythmus und Vom-Blatt-Singen sowie erste Lieder behandeln.",
+    "c722e9fcc9046c7d": "Der Klavierkurs wird Sitzhaltung und Handform, Lesen in beiden Schlüsseln, Rhythmus, Tonleitern und Dreiklänge, beidhändiges Spiel, Begleitmuster und erste Stücke behandeln.",
+    "96717d21ef2d504a": "Optional · eine Gitarrensaite · ruhiger Raum. Überlagerte Klänge können eine plausible, aber irreführende Note anzeigen. Die Genauigkeit hängt vom Mikrofon deines Telefons und vom Raum ab; gemessene Ergebnisse können abweichen. Dies entscheidet weder über Stimmung noch Spielerfolg."
   }
 }

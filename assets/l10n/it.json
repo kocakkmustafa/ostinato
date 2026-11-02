@@ -8438,6 +8438,15 @@
     "d203e854b1b0c135": "Ultima nota: {v0}",
     "f62205b8e7993e50": "Il livello {v0} è gratuito · i livelli successivi richiedono un abbonamento",
     "1d68a089af11083e": "Abbonamento",
-    "6946560ebac6e08d": "Per superare una lezione, almeno l’80% delle note deve essere corretto; allora si apre la lezione successiva. Le prime lezioni di ogni corso sono gratuite; le successive richiedono un abbonamento Ostinato."
+    "6946560ebac6e08d": "Per superare una lezione, almeno l’80% delle note deve essere corretto; allora si apre la lezione successiva. Le prime lezioni di ogni corso sono gratuite; le successive richiedono un abbonamento Ostinato.",
+    "8c35a3bffb5f6829": "Prima accedi o crea un account: l’abbonamento è legato al tuo account, così funziona su ogni dispositivo in cui accedi.",
+    "545f6c0a16d5c54c": "I risultati delle lezioni, la serie e l’obiettivo settimanale restano su questo dispositivo; questa versione non li sincronizza con un account. Il tuo account serve per l’abbonamento.",
+    "6afa082a5c331043": "Nella pratica misurata il microfono ascolta le note che suoni. Una lezione è superata quando una quota sufficiente delle sue note viene sentita come corretta; la quota richiesta cresce con il livello. Il permesso viene chiesto alla prima misurazione. L’audio viene elaborato su questo dispositivo e non viene caricato; ciò che suoni non viene registrato, a meno che tu non attivi l’ascolto della tua registrazione. Fermare, uscire dalla schermata, cambiare account o portare l’app in secondo piano chiude il microfono.",
+    "2458f83652e85824": "La precisione dipende dal microfono del telefono e dalla stanza; i risultati misurati possono variare.",
+    "4360eb5d0a20a482": "{v0} Ogni riferimento posturale deriva da riprese didattiche dalla vita in su: per questo non viene rilevato nulla sotto i fianchi.",
+    "a51b8da5ff450285": "Una corda nuova si allunga: controllala di nuovo dopo qualche minuto.",
+    "649ba097da874350": "Il corso di voce tratterà un inizio comodo e sano, l’intonazione delle note, scale ed estensione, intervalli, ritmo e lettura cantata, e le prime canzoni.",
+    "c722e9fcc9046c7d": "Il corso di pianoforte tratterà postura e forma della mano, lettura in entrambe le chiavi, ritmo, scale e triadi, suonare a due mani, schemi di accompagnamento e primi brani.",
+    "96717d21ef2d504a": "Facoltativo · una corda di chitarra · stanza silenziosa. Suoni sovrapposti possono mostrare una nota plausibile ma fuorviante. La precisione dipende dal microfono del telefono e dalla stanza; i risultati misurati possono variare. Questo non decide la riuscita dell'accordatura o dell'esecuzione."
   }
 }

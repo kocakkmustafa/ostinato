@@ -307,9 +307,9 @@
       "tr": "Ses bu cihazda geçici bellekte kalır; kaydedilmez veya yüklenmez. Ekrandan çıkınca mikrofon durur."
     },
     {
-      "id": "accuracy",
-      "en": "Accuracy has been checked on simulated phone audio only, not on real phones yet. A new string stretches: check it again after a few minutes.",
-      "tr": "Doğruluk yalnız benzetilmiş telefon sesinde denendi, henüz gerçek telefonlarda değil. Yeni tel esner: birkaç dakika sonra yeniden kontrol et."
+      "id": "newString",
+      "en": "A new string stretches: check it again after a few minutes.",
+      "tr": "Yeni tel esner: birkaç dakika sonra yeniden kontrol et."
     },
     {
       "id": "gateKicker",

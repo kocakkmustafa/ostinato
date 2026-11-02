@@ -21,6 +21,20 @@ const bool ostinatoMotionPlusOffered = false;
 /// flag only removes the entry points.
 const bool ostinatoLegacyWrittenCoursesVisible = false;
 
+/// v1 store scope (founder, 2026-11-02; store review screens 38–42): only
+/// these instruments open their course in this release. Any other
+/// instrument page (voice, piano) is a simple "Coming soon" page that says
+/// what the course will cover and opens no lessons; the earlier posture
+/// reference "Foundations" courses are not reachable from it.
+const Set<String> ostinatoOpenInstruments = {'guitar'};
+
+/// Store review 2026-11-02 (screens 06–08): the instrument page carried long
+/// engineering notes (posture-reference catalogue, teacher agreement, engine
+/// history, "what we do not judge", "not here and why"). They stay in the
+/// code and content for development builds; while false the page shows one
+/// short line instead.
+const bool ostinatoEngineeringNotesVisible = false;
+
 /// Live camera practice stays closed in this release (unchanged).
 const bool ostinatoCameraPracticeAvailable = false;
 

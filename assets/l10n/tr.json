@@ -8438,6 +8438,15 @@
     "d203e854b1b0c135": "Son nota: {v0}",
     "f62205b8e7993e50": "Seviye {v0} ücretsiz · sonraki seviyeler üyelik gerektirir",
     "1d68a089af11083e": "Üyelik",
-    "6946560ebac6e08d": "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato üyeliği gerektirir."
+    "6946560ebac6e08d": "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato üyeliği gerektirir.",
+    "8c35a3bffb5f6829": "Önce giriş yap ya da hesap oluştur: üyeliğin hesabına bağlıdır, böylece giriş yaptığın her cihazda geçerli olur.",
+    "545f6c0a16d5c54c": "Ders sonuçların, serin ve haftalık hedefin bu cihazda kalır; bu sürüm bunları hesaba eşitlemez. Hesabın üyeliğin için kullanılır.",
+    "6afa082a5c331043": "Ölçülü pratikte mikrofon çaldığın notaları dinler. Notalarının yeterli bir kısmı doğru duyulduğunda ders geçilir; gereken oran seviyeyle artar. İzin, ilk ölçümde istenir. Ses bu cihazda işlenir ve yüklenmez; kendi kaydını dinleme seçeneğini açmadıkça çaldığın kaydedilmez. Durdurmak, ekrandan çıkmak, hesap değiştirmek veya uygulamayı arka plana almak mikrofonu kapatır.",
+    "2458f83652e85824": "Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir.",
+    "4360eb5d0a20a482": "{v0} Tüm duruş referansları belden yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden kalçanızın altı okunmaz.",
+    "a51b8da5ff450285": "Yeni tel esner: birkaç dakika sonra yeniden kontrol et.",
+    "649ba097da874350": "Ses kursu rahat ve sağlıklı bir başlangıç, perde eşleştirme, gamlar ve menzil, aralıklar, ritim ve deşifre ile ilk şarkıları kapsayacak.",
+    "c722e9fcc9046c7d": "Piyano kursu oturuş ve el şekli, iki anahtarda okuma, ritim, gamlar ve üçlüler, iki elle çalma, eşlik kalıpları ve ilk eserleri kapsayacak.",
+    "96717d21ef2d504a": "İsteğe bağlı · tek gitar teli · sessiz oda. Üst üste binen sesler inandırıcı ama yanıltıcı bir nota gösterebilir. Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir. Akort veya çalma başarısına karar vermez."
   }
 }
