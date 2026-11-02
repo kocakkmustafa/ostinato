@@ -1,0 +1,116 @@
+{
+  "id": "pno-s3-m14-12",
+  "title": {
+    "en": "Schumann: Melodie",
+    "tr": "Schumann: Melodie"
+  },
+  "goal": {
+    "en": "Plays Melodie, Op. 68 No. 1, by Robert Schumann with a singing melody over a quiet accompaniment.",
+    "tr": "Robert Schumann'ın Melodie'sini (Op. 68 No. 1) sessiz bir eşlik üstünde şarkı söyler gibi bir ezgiyle çalar."
+  },
+  "explanation": [
+    {
+      "en": "Robert Schumann (1810–1856) wrote Album for the Young, Op. 68, in 1848 for his daughters. Melodie is the first piece.",
+      "tr": "Robert Schumann (1810–1856) Gençlik Albümü'nü (Op. 68) 1848'de kızları için yazdı. Melodie ilk parçadır."
+    },
+    {
+      "en": "The right hand sings the melody. The left hand plays a calm line below it, and the hands often start notes together.",
+      "tr": "Sağ el ezgiyi söyler. Sol el altında sakin bir çizgi çalar; eller sık sık birlikte nota başlatır."
+    },
+    {
+      "en": "It is in C major and 4/4, 20 bars long. The left hand plays eighth notes almost all the way; the right hand mostly plays quarter notes, with a few two-note chords.",
+      "tr": "Do majör ve 4/4'lüktür, 20 ölçü sürer. Sol el neredeyse baştan sona sekizlik çalar; sağ el çoğunlukla dörtlük çalar, birkaç yerde iki notalı akor vardır."
+    },
+    {
+      "en": "Play legato and let the melody sound above the left hand.",
+      "tr": "Legato çal ve ezginin sol elin üstünde duyulmasını sağla."
+    },
+    {
+      "en": "There is no target tempo. Choose a calm tempo at which every note is clear.",
+      "tr": "Hedef tempo yok. Her notanın net olduğu sakin bir tempo seç."
+    },
+    {
+      "en": "The microphone result here is experimental: it does not lock your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Buradaki mikrofon sonucu deneyseldir: ilerlemeni kilitlemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Melodie, Op. 68 No. 1, from the Ostinato edition: melody alone, then both hands, calm and legato, piano synthesis.",
+      "tr": "Ostinato düzenlemesinden Melodie, Op. 68 No. 1: önce yalnız ezgi, sonra iki el, sakin ve legato, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M~",
+      "MIDI"
+    ],
+    "engineSteps": [
+      "A6p"
+    ],
+    "task": {
+      "en": "Play the right hand alone once, then the left hand. Then play the piece with both hands at a calm, steady tempo, without the repeat of bars 1–4.",
+      "tr": "Sağ eli bir kez tek başına, sonra sol eli çal. Sonra parçayı iki elle, 1–4. ölçülerin tekrarı olmadan, sakin ve düzenli bir tempoda çal."
+    },
+    "pass": {
+      "levelDefault": true
+    },
+    "sequence": "4/4: C4/E5:e G4:e F4/D5:e G4:e E4/C5:e G4:e C4/B4:e E4:e | F4/A4:e D4/C5:e G4/B4:e F4/D5:e E4/C5:e F4:e E4/G4:e D4:e | E4/G5:e G4:e D4/F5:e G4:e C4/E5:e G4:e E4/C5:e G4:e | D4/B4:e G4:e C4/F♯4/A4:e D4:e B3/G4:e D4:e G3:q | F4/D5:e G4:e E4/C5:e G4:e D4/B4:e G4:e F♯4:e G4:e | D4/F5:e G4:e C4/E5:e G4:e B3/D5:e G4:e F♯4:e G4:e | F4/A5:e G4:e E4/G5:e G4:e D4/F5:e G4:e C4/E5:e G4:e | B3/D5:e G4/F5:e C4/E5:e C♯4/G5:e D4/A4/F5:e C5:e G4/B4:e D5:e | C4/C5/E5:e G4:e F4/D5:e G4:e E4/C5:e G4:e C4/B4:e E4:e | F4/A4:e D4/C5:e G4/B4:e F4/D5:e E4/C5:e F4:e E4/G4:e C4:e | F4/A5:e C5:e E4/G5:e C5:e D4/B4/F5:e G4:e C4/C5/E5:e G4:e | F4/D5:e A4/F5:e G4/B4:e F4/D5:e E4/C5:e G4:e C4:e E4:e | F4/D5:e G4:e E4/C5:e G4:e D4/B4:e G4:e F♯4:e G4:e | D4/F5:e G4:e C4/E5:e G4:e B3/D5:e G4:e F♯4:e G4:e | F4/A5:e G4:e E4/G5:e G4:e D4/F5:e G4:e C4/E5:e G4:e | B3/D5:e G4/F5:e C4/E5:e C♯4/G5:e D4/A4/F5:e C5:e G4/B4:e D5:e | C4/C5/E5:e G4:e F4/D5:e G4:e E4/C5:e G4:e C4/B4:e E4:e | F4/A4:e D4/C5:e G4/B4:e F4/D5:e E4/C5:e F4:e E4/G4:e C4:e | F4/A5:e C5:e E4/G5:e C5:e D4/B4/F5:e G4:e C4/C5/E5:e G4:e | F4/D5:e A4/F5:e G4/B4:e F4/D5:e E4/C5:e G4:e C4:q"
+  },
+  "fallback": "experimental",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The melody was louder than the accompaniment.",
+      "tr": "Ezgi eşlikten daha güçlüydü."
+    },
+    {
+      "en": "The notes were connected, with no gaps.",
+      "tr": "Notalar boşluksuz bağlandı."
+    },
+    {
+      "en": "Notes meant to start together started together.",
+      "tr": "Birlikte başlaması gereken notalar birlikte başladı."
+    },
+    {
+      "en": "My shoulders and wrists stayed loose.",
+      "tr": "Omuzlarım ve bileklerim gevşek kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: one hand ahead.",
+        "tr": "Farklı nota: bir el önde."
+      },
+      "fix": {
+        "en": "The hands drift apart. Play the two bars around the slip slowly and press both keys at the same moment.",
+        "tr": "Eller birbirinden kayıyor. Kaçışın çevresindeki iki ölçüyü yavaş çal ve iki tuşa aynı anda bas."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the melody with only the first left-hand note of each bar.",
+    "tr": "Ezgiyi, her ölçüde sol elin yalnız ilk notasıyla çal."
+  },
+  "repertoire": "Robert Schumann (1810–1856), Album für die Jugend, Op. 68 No. 1, \"Melodie\" (composed 1848; C major, 4/4, 20 bars). Source edition: Erstes Album für die Jugend, Op. 68, new teaching edition arranged progressively with fingering by Karl Klauser, Leipzig: J. Schuberth & Co., [1867], plate 4359, p. 3; scan: Gaylord Music Library, Washington University in St. Louis, https://archive.org/details/b26976821 (Public Domain Mark 1.0). Klauser's fingering is not used. Not yet compared with the 1848 Schuberth first edition. Both hands, without the repeat of bars 1–4; the sequence lists every note start, notes starting together joined with '/' (right-hand chords in bars 4, 9, 11, 17 and 19; in bars 8 and 16 the upper F5 is held while the lower voice moves). Every bar was checked twice against the scan (pitches and rhythm). Public domain: composer died 1856; edition published 1867; Klauser died 1905. Legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 20,
+  "expertPending": true
+}

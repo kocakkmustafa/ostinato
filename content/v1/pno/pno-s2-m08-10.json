@@ -1,0 +1,87 @@
+{
+  "id": "pno-s2-m08-10",
+  "title": { "en": "Map a new piece on your own", "tr": "Yeni parçayı kendin haritala" },
+  "goal": {
+    "en": "Orders the steps of a practice map, maps an original eight-bar piece, and plays its first four bars at ♩=60.",
+    "tr": "Bir çalışma haritasının adımlarını sıralar, özgün sekiz ölçülük parçayı haritalar ve ilk dört ölçüsünü ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Independent practice starts before playing. A map turns a page into small, ordered tasks.",
+      "tr": "Bağımsız çalışma çalmadan önce başlar. Harita bir sayfayı küçük, sıralı görevlere çevirir."
+    },
+    {
+      "en": "Map the piece: the key and its sharps or flats, the time signature, the hand positions and where they move, the sections, and the hardest two bars.",
+      "tr": "Parçayı haritala: ton ve diyez ya da bemolleri, ölçü işareti, el konumları ve nerede değiştikleri, bölümler ve en zor iki ölçü."
+    },
+    {
+      "en": "Then choose the order: the hardest bars first, hands separately, slowly; then connect bars in pairs.",
+      "tr": "Sonra sırayı seç: önce en zor ölçüler, eller ayrı, yavaş; sonra ölçüleri ikişer bağla."
+    },
+    {
+      "en": "Set a starting tempo you can keep without stopping. Reading and counting are the goal here.",
+      "tr": "Durmadan koruyabileceğin bir başlangıç temposu belirle. Buradaki amaç okumak ve saymaktır."
+    },
+    {
+      "en": "If a piece feels too hard, learn fewer bars. A smaller complete map is better than a long unfinished one.",
+      "tr": "Parça çok zor geliyorsa daha az ölçü öğren. Küçük ama tam bir harita, uzun ve yarım bir haritadan iyidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original eight-bar piece at ♩=60 and ♩=40, piano synthesis; bars 5–8: G3 D4 E4 F4 | C3 E4 G4 (half) | G3 F4 E4 D4 | C3 E4 C4 (half).",
+      "tr": "Özgün sekiz ölçülük parça, ♩=60 ve ♩=40, piyano sentezi; 5–8. ölçüler: Sol3 Re4 Mi4 Fa4 | Do3 Mi4 Sol4 (ikilik) | Sol3 Fa4 Mi4 Re4 | Do3 Mi4 Do4 (ikilik)."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "First answer 5 on-screen questions that put the steps of a practice map in order. Then map the original eight-bar piece on screen and mark its sections. Learn bars 1–4 your own way and play them at ♩=60. Bar 1: left hand C3, held for the bar; right hand E4 G4 E4. Bar 2: right hand F4 E4, then D4 for two beats. Bar 3: left hand G3, held for the bar; right hand D4 F4 D4. Bar 4: right hand E4 D4, then C4 for two beats.",
+      "tr": "Önce bir çalışma haritasının adımlarını sıraya koyan ekrandaki 5 soruyu yanıtla. Sonra ekrandaki özgün sekiz ölçülük parçayı haritala ve bölümlerini işaretle. 1–4. ölçüleri kendi yolunla öğren ve ♩=60'ta çal. 1. ölçü: sol el Do3, ölçü boyunca tutulur; sağ el Mi4 Sol4 Mi4. 2. ölçü: sağ el Fa4 Mi4, sonra iki vuruş Re4. 3. ölçü: sol el Sol3, ölçü boyunca tutulur; sağ el Re4 Fa4 Re4. 4. ölçü: sağ el Mi4 Re4, sonra iki vuruş Do4."
+    },
+    "sequence": "C3 E4 G4 E4 | F4 E4 D4:h | G3 D4 F4 D4 | E4 D4 C4:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "ordering",
+      "count": 5,
+      "params": {
+        "items": ["key_and_accidentals", "time_signature", "hand_positions", "sections", "hardest_bars", "practice_order"]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My map names the key, the time signature and the hand positions.", "tr": "Haritam tonu, ölçü işaretini ve el konumlarını gösteriyor." },
+    { "en": "My map marks the sections and the hardest two bars.", "tr": "Haritam bölümleri ve en zor iki ölçüyü işaretliyor." },
+    { "en": "I practised the hardest bars first, hands separately.", "tr": "Önce en zor ölçüleri eller ayrı çalıştım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: playing the whole piece came before the hardest bars.", "tr": "Farklı cevap: parçanın tamamını çalmak en zor ölçülerden önce gelmiş." },
+      "fix": {
+        "en": "Start with the smallest hard part. Run-throughs of the whole piece come last.",
+        "tr": "En küçük zor bölümle başla. Parçanın baştan sona çalınması en sona kalır."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "In bars 1 and 3 the right hand starts with the bass. Count \"one\" with the bass and play the right hand on \"two\".",
+        "tr": "1. ve 3. ölçülerde sağ el basla birlikte başlıyor. Basla \"bir\" say ve sağ eli \"iki\"de çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Map and learn only bars 1–2, then add bars 3–4.",
+    "tr": "Önce yalnız 1–2. ölçüleri haritala ve öğren, sonra 3–4. ölçüleri ekle."
+  },
+  "legacy": "R: piano-23",
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,108 @@
+{
+  "id": "pno-s2-m07-09",
+  "title": {
+    "en": "Primary chords in C and G",
+    "tr": "Do ve Sol'de ana akorlar"
+  },
+  "goal": {
+    "en": "Plays I–IV–V–I in C and in G in close position, broken and then blocked.",
+    "tr": "Do ve Sol tonlarında I–IV–V–I'i yakın konumda, önce kırık sonra blok çalar."
+  },
+  "explanation": [
+    {
+      "en": "The primary chords of a key are built on degrees 1, 4 and 5: I, IV and V. In C they are C, F and G; in G they are G, C and D.",
+      "tr": "Bir tonun ana akorları 1., 4. ve 5. derecelerin üstüne kurulur: I, IV ve V. Do'da C, F ve G; Sol'de G, C ve D'dir."
+    },
+    {
+      "en": "Close position keeps the hand in one place by using inversions: I in root position, IV in second inversion, V in first inversion.",
+      "tr": "Yakın konum, çevrimlerle eli tek yerde tutar: I kök durumda, IV ikinci çevrimde, V birinci çevrimde."
+    },
+    {
+      "en": "In C: C4 E4 G4 (1-3-5), C4 F4 A4 (1-3-5), B3 D4 G4 (1-2-5).",
+      "tr": "Do'da: Do4 Mi4 Sol4 (1-3-5), Do4 Fa4 La4 (1-3-5), Si3 Re4 Sol4 (1-2-5)."
+    },
+    {
+      "en": "In G: G3 B3 D4 (1-3-5), G3 C4 E4 (1-3-5), F♯3 A3 D4 (1-2-5). F♯ is the one black key.",
+      "tr": "Sol'de: Sol3 Si3 Re4 (1-3-5), Sol3 Do4 Mi4 (1-3-5), Fa♯3 La3 Re4 (1-2-5). Fa♯ tek siyah tuştur."
+    },
+    {
+      "en": "The broken pass is measured and counts. The blocked pass is experimental and does not lock your progress; with MIDI it is exact.",
+      "tr": "Kırık bölüm ölçülür ve sayılır. Blok bölüm deneyseldir ve ilerlemeni kilitlemez; MIDI'yle kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "I–IV–V–I in C, then in G, in close position: broken with the top note held, then blocked, slow, piano synthesis.",
+      "tr": "Do'da, sonra Sol'de yakın konumda I–IV–V–I: üst nota tutularak kırık, sonra blok, yavaş, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A6p"
+    ],
+    "task": {
+      "en": "Right hand. Part 1, measured: play each chord broken, bottom to top, and hold the top note for two beats: I–IV–V–I in C, then in G. Part 2, experimental: play the same eight chords blocked, one per bar. Take your own steady tempo.",
+      "tr": "Sağ el. 1. bölüm, ölçülür: her akoru alttan üste kırık çal, üst notayı iki vuruş tut: Do'da I–IV–V–I, sonra Sol'de. 2. bölüm, deneysel: aynı sekiz akoru ölçü başına bir tane blok çal. Kendi düzenli temponu seç."
+    },
+    "sequence": "4/4: C4 E4 G4:h | C4 F4 A4:h | B3 D4 G4:h | C4 E4 G4:h | G3 B3 D4:h | G3 C4 E4:h | F#3 A3 D4:h | G3 B3 D4:h",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My thumb moved only for the V chord.",
+      "tr": "Başparmağım yalnız V akorunda yer değiştirdi."
+    },
+    {
+      "en": "All three notes of each blocked chord started together.",
+      "tr": "Her blok akorun üç notası birlikte başladı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "In G, the V chord needs F♯3, not F3. Put the thumb on the black key.",
+        "tr": "Sol'de V akoru Fa3 değil Fa♯3 ister. Başparmağı siyah tuşa koy."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "In IV, finger 3 stayed on the third of I. From I to IV only fingers 3 and 5 move, each one white key up.",
+        "tr": "IV'te 3. parmak I'in üçlüsünde kaldı. I'den IV'e yalnız 3. ve 5. parmaklar birer beyaz tuş yukarı gider."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the chords in C first. Add G only when C feels easy.",
+    "tr": "Önce Do'daki akorları öğren. Do rahat gelince Sol'ü ekle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

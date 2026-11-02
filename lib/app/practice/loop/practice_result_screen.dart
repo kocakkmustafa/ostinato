@@ -10,6 +10,7 @@ import '../own_recording/own_recording.dart';
 import '../own_recording/own_take_player.dart';
 import 'practice_marks.dart';
 import 'practice_outcome.dart';
+import 'practice_rhythm_copy.dart';
 import 'practice_score.dart';
 import 'practice_tempo_ladder.dart';
 import 'practice_visual_theme.dart';
@@ -80,6 +81,9 @@ class PracticeResultScreen extends StatelessWidget {
 
   String _pct(double v) => '${(v * 100).round()}';
 
+  /// Rhythm-only line: "different" means early or late (A3 onset timing).
+  bool get _rhythm => summary.gate.criteria.rhythm;
+
   @override
   Widget build(BuildContext context) {
     final palette = OstinatoPalette.of(context);
@@ -118,7 +122,9 @@ class PracticeResultScreen extends StatelessWidget {
                   children: [
                     _line(
                       context,
-                      localized(context, 'Accuracy', 'Doğruluk'),
+                      _rhythm
+                          ? uiText(context, RhythmCopy.onTime)
+                          : localized(context, 'Accuracy', 'Doğruluk'),
                       s.accuracy == null ? '—' : '%${_pct(s.accuracy!)}',
                       key: const Key('result-accuracy'),
                     ),
@@ -144,18 +150,40 @@ class PracticeResultScreen extends StatelessWidget {
                                 'calibrate first',
                                 'önce kalibrasyon',
                               )
+                            : _rhythm && !s.timingCalibrated
+                            ? uiText(
+                                context,
+                                RhythmCopy.timingRelative,
+                                values: {'v0': s.medianTimingMs!.round()},
+                              )
                             : '${s.medianTimingMs!.round()} ms',
                       ),
                     ],
                     const SizedBox(height: 4),
                     Text(
-                      localized(
-                        context,
-                        "Accuracy counts only the notes I could decide; \"couldn't hear\" is reported apart.",
-                        'Doğruluk yalnız karar verebildiğim notaları sayar; "duyamadım" ayrı raporlanır.',
-                      ),
+                      _rhythm
+                          ? uiText(context, RhythmCopy.onTimeNote)
+                          : localized(
+                              context,
+                              "Accuracy counts only the notes I could decide; \"couldn't hear\" is reported apart.",
+                              'Doğruluk yalnız karar verebildiğim notaları sayar; "duyamadım" ayrı raporlanır.',
+                            ),
                       style: hankenText(size: 11.5, color: palette.textMuted),
                     ),
+                    if (_rhythm &&
+                        !s.timingCalibrated &&
+                        lesson.practice.tempo != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          uiText(context, RhythmCopy.relativeNote),
+                          key: const Key('result-relative-timing'),
+                          style: hankenText(
+                            size: 11.5,
+                            color: palette.textMuted,
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -267,7 +295,9 @@ class PracticeResultScreen extends StatelessWidget {
           cell(
             PracticeMark.differentNote,
             summary.different,
-            localized(context, 'Different note', 'Farklı nota'),
+            _rhythm
+                ? uiText(context, RhythmCopy.earlyOrLate)
+                : localized(context, 'Different note', 'Farklı nota'),
           ),
           cell(
             PracticeMark.couldNotHear,
@@ -298,6 +328,11 @@ class PracticeResultScreen extends StatelessWidget {
         'Accuracy ≥ %{v0}',
         'Doğruluk ≥ %{v0}',
         values: {'v0': _pct(c.threshold)},
+      ),
+      GateCheckKind.onTime => uiText(
+        context,
+        RhythmCopy.gateOnTime,
+        values: {'v0': _pct(c.threshold), 'v1': gate.criteria.onTimeMs ?? 0},
       ),
       GateCheckKind.heard => localized(
         context,
@@ -626,6 +661,7 @@ class PracticeResultScreen extends StatelessWidget {
                 ),
             ],
           ),
+          if (_rhythm) _earlyLate(context),
           for (final o in summary.lastMarks.values)
             if (o.mark == PracticeMark.differentNote &&
                 o.observedMidi != null &&
@@ -648,6 +684,29 @@ class PracticeResultScreen extends StatelessWidget {
                 ),
               ),
         ],
+      ),
+    );
+  }
+
+  /// Rhythm line: how many off-window beats came early and how many late.
+  Widget _earlyLate(BuildContext context) {
+    var early = 0, late = 0;
+    for (final o in summary.lastMarks.values) {
+      final t = o.timingMs;
+      if (o.mark != PracticeMark.differentNote || t == null) continue;
+      t < 0 ? early++ : late++;
+    }
+    if (early + late == 0) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Text(
+        uiText(
+          context,
+          RhythmCopy.earlyLate,
+          values: {'v0': early, 'v1': late},
+        ),
+        key: const Key('result-early-late'),
+        style: hankenText(size: 12.5),
       ),
     );
   }

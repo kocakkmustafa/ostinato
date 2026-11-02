@@ -1,0 +1,89 @@
+{
+  "id": "pno-s1-m01-07",
+  "title": { "en": "Black keys, sharps and flats", "tr": "Siyah tuşlar, diyez ve bemoller" },
+  "goal": {
+    "en": "Names black keys with sharps and flats and plays C♯4, E♭4, F♯4, A♭4 and B♭4 by name.",
+    "tr": "Siyah tuşları diyez ve bemollerle adlandırır ve Do♯4, Mi♭4, Fa♯4, La♭4 ve Si♭4'ü adlarıyla çalar."
+  },
+  "explanation": [
+    {
+      "en": "A semitone is the nearest key to the right or left, black or white.",
+      "tr": "Yarım ses, sağdaki ya da soldaki en yakın tuştur; siyah ya da beyaz."
+    },
+    {
+      "en": "A sharp ♯ raises a note by one semitone: F♯ is the black key right of F. A flat ♭ lowers it: B♭ is the black key left of B.",
+      "tr": "Diyez ♯ notayı bir yarım ses yükseltir: Fa♯, Fa'nın sağındaki siyah tuştur. Bemol ♭ alçaltır: Si♭, Si'nin solundaki siyah tuştur."
+    },
+    {
+      "en": "One black key has two names, so F♯ and G♭ share a key. The black key between C and D is C♯ or D♭.",
+      "tr": "Bir siyah tuşun iki adı vardır; Fa♯ ile Sol♭ aynı tuştur. Do ile Re arasındaki siyah tuş Do♯ ya da Re♭'dir."
+    },
+    {
+      "en": "E–F and B–C are semitones with no black key between them.",
+      "tr": "Mi–Fa ve Si–Do arasında siyah tuş yoktur; ikisi de yarım sestir."
+    },
+    {
+      "en": "To find a black key, find its white neighbour first, then say the direction before the name: right of C is C♯, left of E is E♭.",
+      "tr": "Bir siyah tuşu bulmak için önce beyaz komşusunu bul, sonra adı söylemeden önce yönü söyle: Do'nun sağı Do♯, Mi'nin solu Mi♭."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C♯4 E♭4 F♯4 A♭4 B♭4, one note at a time with even spacing, piano synthesis; the drill plays each key it asks about.",
+      "tr": "Do♯4 Mi♭4 Fa♯4 La♭4 Si♭4; notalar tek tek ve eşit aralıklı, piyano sentezi. Alıştırma sorduğu her tuşu çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "Part 1: answer 6 questions on the keyboard drawing: tap the named black key, or choose a name for the marked key. Part 2: with right-hand finger 2, play C♯4, E♭4, F♯4, A♭4 and B♭4, one at a time. Take your time; there is no click.",
+      "tr": "1. bölüm: klavye çiziminde 6 soruyu yanıtla: adı verilen siyah tuşa dokun ya da işaretli tuş için bir ad seç. 2. bölüm: sağ elin 2. parmağıyla Do♯4, Mi♭4, Fa♯4, La♭4 ve Si♭4'ü tek tek çal. Acele etme; klik yok."
+    },
+    "sequence": "C♯4 E♭4 F♯4 A♭4 B♭4",
+    "pass": { "levelDefault": true, "minCorrect": 5 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 6,
+      "params": {
+        "set": "black_key_names",
+        "diagram": "keyboard",
+        "names": ["C♯", "D♭", "D♯", "E♭", "F♯", "G♭", "G♯", "A♭", "A♯", "B♭"],
+        "playNotes": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I can give both names of a black key.", "tr": "Bir siyah tuşun iki adını da söyleyebiliyorum." },
+    { "en": "I can find E–F and B–C, where no black key sits between.", "tr": "Arada siyah tuş olmayan Mi–Fa ve Si–Do'yu bulabiliyorum." },
+    { "en": "Each black key matched the reference sound.", "tr": "Her siyah tuş referans sesle aynıydı." },
+    { "en": "My shoulders and wrists stayed loose.", "tr": "Omuzlarım ve bileklerim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone away.", "tr": "Farklı nota, yarım ses uzakta." },
+      "fix": {
+        "en": "You played the white key. For a sharp, move one key right from the white note; for a flat, one key left.",
+        "tr": "Beyaz tuşa bastın. Diyez için beyaz notadan bir tuş sağa, bemol için bir tuş sola git."
+      }
+    },
+    {
+      "error": { "en": "Different note, a whole step away.", "tr": "Farklı nota, bir tam ses uzakta." },
+      "fix": {
+        "en": "Sharp and flat were swapped. Say the direction first: sharp is right, flat is left.",
+        "tr": "Diyez ile bemolün yönü karışmış. Önce yönü söyle: diyez sağ, bemol sol."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise only the sharps first, C♯4 and F♯4, then add the flats one at a time.",
+    "tr": "Önce yalnız diyezleri, Do♯4 ve Fa♯4'ü çalış; sonra bemolleri birer birer ekle."
+  },
+  "legacy": "R: piano-16",
+  "minutes": 12,
+  "expertPending": true
+}

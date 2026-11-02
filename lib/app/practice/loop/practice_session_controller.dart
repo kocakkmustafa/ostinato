@@ -16,6 +16,7 @@ import 'metronome.dart';
 import 'practice_judge.dart';
 import 'practice_marks.dart';
 import 'practice_outcome.dart';
+import 'practice_rhythm.dart';
 import 'practice_score.dart';
 import 'practice_tab_strip.dart';
 import 'practice_transport.dart';
@@ -172,6 +173,12 @@ final class PracticeSessionController extends ChangeNotifier {
   /// Microphone listening time of the last run (first chunk → finish).
   Duration get activeDuration => _activeDuration;
 
+  /// Rhythm-only line judged on onset timing (A3, [PassCriteria.onTimeMs]).
+  bool get rhythm => criteria.rhythm && score.isRhythmOnly;
+
+  /// This run's "on time" reference (rhythm lines; created with the grid).
+  OnsetTimingReference? _onsets;
+
   void _notify() {
     if (!_disposed) notifyListeners();
   }
@@ -220,6 +227,7 @@ final class PracticeSessionController extends ChangeNotifier {
     _stopping = false;
     _listenStartUs = null;
     _activeDuration = Duration.zero;
+    _onsets = null;
   }
 
   void _onStatus(AudioSurfaceState s) {
@@ -336,6 +344,12 @@ final class PracticeSessionController extends ChangeNotifier {
             calibrated: latency != null,
             source: MetronomeAnchorSource.native,
           );
+    if (rhythm) {
+      _onsets = OnsetTimingReference(
+        calibrated: timeline!.calibrated,
+        windowMs: criteria.onTimeMs!,
+      );
+    }
     _transport = PracticeTransport(
       score: score,
       countInBeats: p.countInBeats,
@@ -658,28 +672,40 @@ final class PracticeSessionController extends ChangeNotifier {
     bool observed = true,
   }) {
     final t = timeline;
-    final timing =
-        t != null &&
-            t.calibrated &&
-            attackUs != null &&
-            j.mark == PracticeMark.correct
-        ? (attackUs - expectedUs) / 1000
-        : null;
+    final onsets = _onsets;
+    var mark = j.mark;
+    double? timing, offset;
+    if (onsets != null) {
+      // Rhythm line: a heard attack is judged on its timing (flow mode only;
+      // "Wait for me" holds the grid, so a held beat has no timing).
+      if (observed && attackUs != null && j.mark == PracticeMark.correct) {
+        offset = (attackUs - expectedUs) / 1000;
+        final r = onsets.add(offset);
+        mark = r.mark;
+        timing = r.timingMs;
+      }
+    } else if (t != null &&
+        t.calibrated &&
+        attackUs != null &&
+        j.mark == PracticeMark.correct) {
+      timing = (attackUs - expectedUs) / 1000;
+    }
     outcomes.add(
       NoteOutcome(
         eventIndex: e.index,
         bar: e.bar,
         pass: pass,
-        mark: j.mark,
+        mark: mark,
         reason: j.reason,
         expectedMidi: e.midi,
         observedMidi: j.observedMidi,
         centsFromExpected: j.centsFromExpected,
         timingMs: timing,
+        offsetMs: offset,
       ),
     );
     marks = Map.of(marks)
-      ..[e.index] = StripMark(j.mark, observedMidi: j.observedMidi);
+      ..[e.index] = StripMark(mark, observedMidi: j.observedMidi);
     if (observed) hearing.observe(j, _clock.nowUs(_localUs()) ?? 0);
   }
 
@@ -709,6 +735,23 @@ final class PracticeSessionController extends ChangeNotifier {
     _activeDuration = start == null || now == null
         ? Duration.zero
         : Duration(microseconds: math.max(0, now - start));
+    final onsets = _onsets;
+    if (onsets != null && !onsets.calibrated) {
+      // Uncalibrated rhythm run: every onset against the whole run's median.
+      final remarked = onsets.remark(outcomes);
+      outcomes
+        ..clear()
+        ..addAll(remarked);
+      final latest = <int, NoteOutcome>{};
+      for (final o in outcomes) {
+        final prev = latest[o.eventIndex];
+        if (prev == null || o.pass >= prev.pass) latest[o.eventIndex] = o;
+      }
+      marks = {
+        ...marks,
+        for (final o in latest.values) o.eventIndex: StripMark(o.mark),
+      };
+    }
     summary = PracticeRunSummary.of(
       score: score,
       outcomes: List.of(outcomes),

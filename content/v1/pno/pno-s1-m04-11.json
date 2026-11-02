@@ -1,0 +1,81 @@
+{
+  "id": "pno-s1-m04-11",
+  "title": { "en": "Rhythm-reading checkpoint", "tr": "Ritim okuma geçişi" },
+  "goal": {
+    "en": "Reads and plays an original eight-bar line with mixed rhythms in both hands at ♩=80.",
+    "tr": "İki elde karışık ritimli özgün sekiz ölçülük diziyi okur ve ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint joins the rhythms of this module in one original eight-bar line: quarters, halves, a dotted half, eighth pairs, a whole note and rests.",
+      "tr": "Bu geçiş, modülün ritimlerini özgün tek bir sekiz ölçülük dizide birleştirir: dörtlükler, ikilikler, bir noktalı ikilik, sekizlik çiftleri, bir birlik ve suslar."
+    },
+    {
+      "en": "Both hands take part. They take turns and never start a note together.",
+      "tr": "İki el de çalar. Sırayla çalarlar ve hiçbir zaman aynı anda nota başlatmazlar."
+    },
+    {
+      "en": "Scan the line first: find the eighth pairs, the dotted half and the rests. Then clap the rhythm once.",
+      "tr": "Önce diziye göz at: sekizlik çiftlerini, noktalı ikiliği ve susları bul. Sonra ritmi bir kez alkışla."
+    },
+    {
+      "en": "The checkpoint passes at the target tempo, ♩=80. Slower runs are practice.",
+      "tr": "Geçiş hedef tempoda, ♩=80'de geçilir. Daha yavaş çalışlar pratik sayılır."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The original eight-bar line with a click, at ♩=80 and at ♩=55, piano synthesis; the playing hand is marked on screen.",
+      "tr": "Klikle özgün sekiz ölçülük dizi, ♩=80 ve ♩=55, piyano sentezi; çalan el ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Clap the eight bars once with the click. Then play them at ♩=80: right hand in C position from C4, left hand in C position from C3. Bars 3 and 4 are the left hand; in bar 6 the left hand plays G3.",
+      "tr": "Sekiz ölçüyü klikle bir kez alkışla. Sonra ♩=80'de çal: sağ el Do4'ten, sol el Do3'ten Do konumunda. 3. ve 4. ölçüler sol eldir; 6. ölçüde Sol3'ü sol el çalar."
+    },
+    "sequence": "4/4: C4:q E4:q G4:h | F4:e E4:e D4:q E4:q qr | C3:q E3:q G3:q qr | F3:e E3:e D3:e E3:e C3:h | E4:h. D4:q | C4:e D4:e E4:q G3:q qr | E4:q G4:q F4:e E4:e D4:q | C4:w",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The second eighth is rushing. Say \"&\" clearly and play on it, not before.",
+        "tr": "İkinci sekizlik acele ediyor. \"Ve\"yi net söyle ve onun üstünde çal, önce değil."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The hand change is slow. While one hand plays, hold the other just above its first key.",
+        "tr": "El değişimi yavaş. Bir el çalarken diğerini ilk tuşunun hemen üstünde tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If the line did not pass, practise it at ♩=60, then ♩=70, then retake it at ♩=80.",
+    "tr": "Dizi geçmediyse ♩=60'ta, sonra ♩=70'te çalış, sonra ♩=80'de yeniden dene."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

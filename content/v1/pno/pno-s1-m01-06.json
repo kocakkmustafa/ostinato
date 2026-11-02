@@ -1,0 +1,86 @@
+{
+  "id": "pno-s1-m01-06",
+  "title": { "en": "Microphone and piano check", "tr": "Mikrofon ve piyano kontrolü" },
+  "goal": {
+    "en": "Places the phone so it hears the piano clearly, measures the piano's overall tuning offset with A4, C4 and C3, and knows the MIDI option.",
+    "tr": "Telefonu piyanoyu net duyacak şekilde yerleştirir, La4, Do4 ve Do3 ile piyanonun genel akort sapmasını ölçer ve MIDI seçeneğini bilir."
+  },
+  "explanation": [
+    {
+      "en": "Put the phone on the music stand or on top of the piano, about an arm's length from the middle of the keys, microphone facing you. Do not put it on the keys.",
+      "tr": "Telefonu nota sehpasına ya da piyanonun üstüne, tuşların ortasından yaklaşık bir kol boyu uzağa koy; mikrofon sana baksın. Tuşların üstüne koyma."
+    },
+    {
+      "en": "Play in a quiet room. On a digital piano, use its speakers: with headphones plugged into the piano, the phone hears nothing.",
+      "tr": "Sessiz bir odada çal. Dijital piyanoda hoparlörlerini kullan: piyanoya kulaklık takılıysa telefon hiçbir şey duymaz."
+    },
+    {
+      "en": "An acoustic piano is often tuned a little above or below standard pitch. This check measures that overall offset once, and later lessons judge your notes relative to your piano.",
+      "tr": "Akustik piyano çoğu zaman standart perdenin biraz üstüne ya da altına akortludur. Bu kontrol genel sapmayı bir kez ölçer; sonraki dersler notalarını kendi piyanona göre değerlendirir."
+    },
+    {
+      "en": "If the three notes disagree a lot with each other, the piano needs tuning, and notes may often show \"Couldn't hear\". A piano tuner can fix this; the lessons still work with a MIDI keyboard.",
+      "tr": "Üç nota birbirinden çok farklı çıkarsa piyanonun akorda ihtiyacı vardır ve notalar sık sık \"Duyamadım\" gösterebilir. Bunu bir piyano akortçusu düzeltir; dersler MIDI klavyeyle de çalışır."
+    },
+    {
+      "en": "MIDI option: a keyboard connected by USB or Bluetooth MIDI sends exact notes and timing. You can choose it in any piano lesson instead of the microphone.",
+      "tr": "MIDI seçeneği: USB ya da Bluetooth MIDI ile bağlanan bir klavye notaları ve zamanlamayı kesin olarak gönderir. Her piyano dersinde mikrofon yerine bunu seçebilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A4, C4 and C3 at standard pitch, each held for three seconds, piano synthesis.",
+      "tr": "Standart perdede La4, Do4 ve Do3; her biri üç saniye tutulur, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A1", "A6"],
+    "task": {
+      "en": "Play A4, then C4, then C3, one at a time with a firm, steady touch. Hold each key down until the screen shows the reading. The overall offset is saved for later lessons.",
+      "tr": "La4, sonra Do4, sonra Do3'ü tek tek, net ve dengeli bir tuşeyle çal. Ekran ölçümü gösterene kadar her tuşu basılı tut. Genel sapma sonraki dersler için kaydedilir."
+    },
+    "sequence": "A4 C4 C3",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All three notes heard, with no \"Couldn't hear\". The overall tuning offset is saved.",
+        "tr": "Üç notanın üçü de duyuldu, hiç \"Duyamadım\" yok. Genel akort sapması kaydedildi."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Move the phone a little closer, close windows and switch off other sound sources. Play one key only and hold it down.",
+        "tr": "Telefonu biraz yaklaştır, pencereleri kapat ve diğer ses kaynaklarını kapat. Yalnız bir tuşa bas ve basılı tut."
+      }
+    },
+    {
+      "error": { "en": "Different note, an octave away.", "tr": "Farklı nota, bir oktav uzakta." },
+      "fix": {
+        "en": "Find middle C again by counting Cs from the left. On an electronic keyboard, set transpose and octave shift to zero.",
+        "tr": "Orta Do'yu soldan Do sayarak yeniden bul. Elektronik klavyede transpoze ve oktav kaydırmayı sıfıra getir."
+      }
+    },
+    {
+      "error": { "en": "Different note, a semitone away or more.", "tr": "Farklı nota, yarım ses ya da daha fazla uzakta." },
+      "fix": {
+        "en": "Check the key against the reference. If the key is right, the piano is far from standard pitch; ask a piano tuner, or use a MIDI keyboard for now.",
+        "tr": "Tuşu referansla karşılaştır. Tuş doğruysa piyano standart perdeden çok uzaktır; bir piyano akortçusuna danış ya da şimdilik MIDI klavye kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If the microphone keeps showing \"Couldn't hear\", connect a MIDI keyboard and run the check with MIDI.",
+    "tr": "Mikrofon sürekli \"Duyamadım\" gösteriyorsa bir MIDI klavye bağla ve kontrolü MIDI ile yap."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

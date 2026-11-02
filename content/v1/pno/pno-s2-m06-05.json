@@ -1,0 +1,117 @@
+{
+  "id": "pno-s2-m06-05",
+  "title": {
+    "en": "F major",
+    "tr": "Fa majör"
+  },
+  "goal": {
+    "en": "Plays the F major scale one octave, hands separate, with B♭ under right-hand finger 4, at ♩=60.",
+    "tr": "Fa majör gamı bir oktav, eller ayrı, sağ elde Si♭ notasını 4. parmakla çalarak ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "F major has one flat: B♭. Every B becomes the black key to its left.",
+      "tr": "Fa majörün bir bemolü vardır: Si♭. Her Si, solundaki siyah tuşa dönüşür."
+    },
+    {
+      "en": "The right-hand fingering changes: 1-2-3-4-1-2-3-4. Finger 4 plays B♭4, then the thumb passes under to C5.",
+      "tr": "Sağ elin parmakları değişir: 1-2-3-4-1-2-3-4. Si♭4'ü 4. parmak çalar, sonra başparmak altından Do5'e geçer."
+    },
+    {
+      "en": "Why not the thumb on B♭? A thumb on a black key pushes the hand forward. Finger 4 on B♭ keeps the thumb on white keys.",
+      "tr": "Neden başparmak Si♭'de değil? Siyah tuştaki başparmak eli öne iter. Si♭'de 4. parmak, başparmağı beyaz tuşlarda tutar."
+    },
+    {
+      "en": "Descending in the right hand: 4-3-2-1-4-3-2-1. Finger 4 crosses over the thumb from C5 to B♭4.",
+      "tr": "Sağ elde inerken: 4-3-2-1-4-3-2-1. 4. parmak başparmağın üstünden Do5'ten Si♭4'e geçer."
+    },
+    {
+      "en": "The left hand keeps 5-4-3-2-1-3-2-1 from F3 to F4: finger 2 plays B♭3 and the thumb plays C4.",
+      "tr": "Sol el Fa3'ten Fa4'e 5-4-3-2-1-3-2-1'i korur: Si♭3'ü 2. parmak, Do4'ü başparmak çalar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "F4 to F5 and back, an empty bar, then F3 to F4 and back, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.",
+      "tr": "Klikle dörtlüklerle Fa4'ten Fa5'e ve geri, bir boş ölçü, sonra Fa3'ten Fa4'e ve geri, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the right hand from F4 to F5 and back. Use the empty bar to move to the left hand, then play F3 to F4 and back. One note per beat at ♩=60.",
+      "tr": "Sağ elle Fa4'ten Fa5'e çık ve geri in. Boş ölçüde sol ele geç, sonra Fa3'ten Fa4'e çık ve geri in. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "F4 G4 A4 B♭4 | C5 D5 E5 F5 | E5 D5 C5 B♭4 | A4 G4 F4:h | wr | F3 G3 A3 B♭3 | C4 D4 E4 F4 | E4 D4 C4 B♭3 | A3 G3 F3:h",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Finger 4 played every B♭ in the right hand.",
+      "tr": "Sağ elde her Si♭ notasını 4. parmak çaldı."
+    },
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "You played B instead of B♭. Place finger 4 on the black key before the thumb crosses.",
+        "tr": "Si♭ yerine Si çaldın. Başparmak geçmeden önce 4. parmağı siyah tuşa koy."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The right-hand crossing after B♭4 is late. Loop A4 B♭4 C5 D5 with 3-4-1-2 at ♩=50.",
+        "tr": "Sağ elde Si♭4'ten sonraki geçiş geç. La4 Si♭4 Do5 Re5'i 3-4-1-2 ile ♩=50'de döngüle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the right hand from F4 to C5 only, with 1-2-3-4-1, at ♩=50 until finger 4 finds B♭4 every time, then play the full octave.",
+    "tr": "4. parmak Si♭4'ü her seferinde bulana kadar ♩=50'de sağ elle yalnız Fa4'ten Do5'e 1-2-3-4-1 ile çal, sonra oktavın tamamını çal."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

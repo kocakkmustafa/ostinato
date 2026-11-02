@@ -1,0 +1,112 @@
+{
+  "id": "pno-s3-m14-08",
+  "title": {
+    "en": "Türk: a character piece",
+    "tr": "Türk: bir karakter parçası"
+  },
+  "goal": {
+    "en": "Plays a short character piece by Daniel Gottlob Türk at ♩=76, showing its mood.",
+    "tr": "Daniel Gottlob Türk'ün kısa bir karakter parçasını ♩=76'da, havasını göstererek çalar."
+  },
+  "explanation": [
+    {
+      "en": "You met Türk's Handstücke in Level 1. Many of these short pieces carry a title that names a mood or a scene.",
+      "tr": "Türk'ün el parçalarıyla Seviye 1'de tanıştın. Bu kısa parçaların çoğu bir havayı ya da sahneyi adlandıran bir başlık taşır."
+    },
+    {
+      "en": "This lesson uses No. 4, 'Hans ohne Sorgen' (Carefree Hans), in G major, 4/4, Allegro moderato, 8 bars. The right hand has the tune. The left hand holds long notes and walks in quarter notes in bars 4, 7 and 8.",
+      "tr": "Bu ders 4 numaralı 'Hans ohne Sorgen' (Kaygısız Hans) parçasını kullanır: Sol majör, 4/4'lük, Allegro moderato, 8 ölçü. Ezgi sağ eldedir. Sol el uzun notalar tutar; 4, 7 ve 8. ölçülerde dörtlüklerle yürür."
+    },
+    {
+      "en": "Before you play, read the title and the markings. Decide how loud, how connected and how lively the piece should sound.",
+      "tr": "Çalmadan önce başlığı ve işaretleri oku. Parçanın ne kadar güçlü, ne kadar bağlı ve ne kadar canlı çalacağına karar ver."
+    },
+    {
+      "en": "Almost every left-hand note starts together with a right-hand note. So the measured run is the right-hand tune alone, exactly as the line on screen. Then play both hands in a second run, which is not measured. The score and fingering on screen are an Ostinato edition, made from Türk's 1797 second edition.",
+      "tr": "Sol elin neredeyse her notası bir sağ el notasıyla birlikte başlar. Bu yüzden ölçülen çalış, ekrandaki dizi gibi, yalnız sağ el ezgisidir. Sonra iki eli ölçülmeyen ikinci bir çalışta çal. Ekrandaki nota ve parmak numaraları, Türk'ün 1797 tarihli ikinci baskısından hazırlanan Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Türk, Handstücke No. 4, 'Hans ohne Sorgen', from the Ostinato edition, piano synthesis: the right hand alone, then both hands, at ♩=76 and at ♩=52.",
+      "tr": "Ostinato düzenlemesinden Türk, el parçası 4, 'Hans ohne Sorgen', piyano sentezi: önce yalnız sağ el, sonra iki el, ♩=76 ve ♩=52."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Run 1, measured: clap the rhythm once with the click. Practise the right hand in two-bar sections, then play it alone, bars 1–8, at ♩=76. Run 2, not measured: play both hands as written, and show the carefree mood.",
+      "tr": "1. çalış, ölçülür: ritmi klikle bir kez alkışla. Sağ eli iki ölçülük bölümlerle çalış, sonra tek başına 1–8. ölçüleri ♩=76'da çal. 2. çalış, ölçülmez: iki eli yazıldığı gibi çal ve kaygısız havayı göster."
+    },
+    "sequence": "4/4: B4:q B4:q B4:q C5:e D5:e | A4:q A4:q A4:q B4:e A4:e | G4:q A4:q B4:q C♯5:q | D5:h D4:q qr | B4:q B4:q B4:q C5:e D5:e | A4:q A4:q A4:q D5:e C5:e | B4:q A4:e G4:e A4:q A4:e B4:e | G4:h G4:q qr",
+    "tempo": {
+      "open": 76,
+      "target": 76
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "The loud and soft places sounded different.",
+      "tr": "Güçlü ve hafif yerler farklı duyuldu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The soft passages were too quiet for the microphone. Play them a little louder, then shape them later.",
+        "tr": "Hafif bölümler mikrofon için fazla sessizdi. Onları biraz daha güçlü çal, nüansı sonra ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=76, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=76'da geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Daniel Gottlob Türk (1750–1813), Handstücke für angehende Klavierspieler, first part (first published 1792), No. 4, 'Hans ohne Sorgen' (G major, 4/4, Allegro moderato), bars 1–8. Source edition: Sechzig Handstücke für angehende Klavierspieler, Erster Theil, Zweyte Auflage, Leipzig and Halle: auf Kosten des Verfassers, in Kommission bey Schwickert (Leipzig) und Hemmerde und Schwetschke (Halle), 1797, p. 2; scan: Bayerische Staatsbibliothek, 4 Mus.pr. 2009.2607-1/2, https://www.digitale-sammlungen.de/view/bsb00086024 (IIIF: https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00086024/manifest; also on IMSLP, marked Public Domain: https://imslp.org/wiki/120_Handstücke_für_angehende_Klavierspieler_(Türk,_Daniel_Gottlob)). The 1792 first edition was not found online and has not been compared. Measured run: the right hand alone (C♯5 in bar 3, C♮5 in bar 5); all but three left-hand notes start together with a right-hand note, so the left hand is played in a second, unmeasured run. Composer died 1813; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

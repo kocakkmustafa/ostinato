@@ -1,0 +1,112 @@
+{
+  "id": "pno-s3-m14-11",
+  "title": {
+    "en": "Beyer Op. 101: a later study",
+    "tr": "Beyer Op. 101: ileri bir etüt"
+  },
+  "goal": {
+    "en": "Plays a later study from Beyer's Op. 101 at ♩=80.",
+    "tr": "Beyer'in Op. 101'inden ileri bir etüdü ♩=80'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "Ferdinand Beyer (1803–1863) wrote Vorschule im Klavierspiel, Op. 101, a step-by-step beginner book. You played an early study from it in Level 2.",
+      "tr": "Ferdinand Beyer (1803–1863), adım adım ilerleyen bir başlangıç kitabı olan Vorschule im Klavierspiel, Op. 101'i yazdı. Seviye 2'de ondan erken bir etüt çaldın."
+    },
+    {
+      "en": "This study is No. 61, Allegro moderato, in G major, 16 bars. The right hand sings a dotted tune high up, between G5 and G6. The left hand plays a broken-chord accompaniment in quarter notes, G3 D4 B3 D4, with C4 in some bars.",
+      "tr": "Bu etüt 61 numaralı Allegro moderato'dur: Sol majör, 16 ölçü. Sağ el tizde, Sol5 ile Sol6 arasında noktalı bir ezgi söyler. Sol el dörtlüklerle kırık akor eşliği çalar: Sol3 Re4 Si3 Re4, bazı ölçülerde Do4 ile."
+    },
+    {
+      "en": "The left hand plays on every beat. On beats 1 and 3 it usually starts together with the right hand: there the line on screen shows the right-hand note, and the left-hand note is not measured. The left-hand notes that start on their own, mostly D4 on beats 2 and 4, are measured.",
+      "tr": "Sol el her vuruşta çalar. 1. ve 3. vuruşlarda çoğunlukla sağ elle birlikte başlar: orada ekrandaki dizi sağ el notasını gösterir ve sol el notası ölçülmez. Tek başına başlayan sol el notaları, çoğunlukla 2. ve 4. vuruşlardaki Re4, ölçülür."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score and fingering on screen are an Ostinato edition, made from the 1895 Peters edition.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota ve parmak numaraları, 1895 Peters baskısından hazırlanan Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Beyer, Op. 101 No. 61, from the Ostinato edition, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Beyer, Op. 101 No. 61, piyano sentezi, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play each hand alone once with the click. Then join the hands in two-bar sections, and play the study from start to finish, bars 1–16, at ♩=80. Both hands play every note; on beats where they start together, only the right-hand note is measured.",
+      "tr": "Her eli klikle bir kez ayrı çal. Sonra elleri iki ölçülük bölümlerle birleştir ve etüdü baştan sona, 1–16. ölçüleri ♩=80'de çal. İki el her notayı çalar; birlikte başladıkları vuruşlarda yalnız sağ el notası ölçülür."
+    },
+    "sequence": "4/4: B5:q D4:e C6:e D6:q D4:q | G5:q D4:e A5:e B5:q D4:q | C6:q D4:e B5:e A5:q D4:q | B5:q D4:e A5:e G5:q D4:q | B5:q D4:e C6:e D6:q D4:e B5:e | G5:q D4:e A5:e B5:q D4:e G5:e | C6:q D4:e B5:e A5:q D4:e B5:e | G5:q D4:q B3:q D4:q | A5:q D4:e B5:e C6:q D4:e A5:e | B5:q D4:e G5:e D6:q D4:e B5:e | A5:q D4:e B5:e C6:q D4:e A5:e | B5:q D4:e G5:e D6:q D4:q | B5:q D4:e C6:e D6:q D4:e B5:e | G5:q D4:e A5:e B5:q D4:e G5:e | C6:q D4:e B5:e A5:q D4:e B5:e | G5:q D4:q G6:q qr",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "Every hand shift was ready before the note.",
+      "tr": "Her el kayması notadan önce hazırdı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=80, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Ferdinand Beyer (1803–1863), Vorschule im Klavierspiel, Op. 101 (first published Mainz: Schott, c. 1850), No. 61 (G major, 4/4, Allegro moderato, dolce), bars 1–16. Source edition: Leipzig: C. F. Peters (Edition Peters 2721), plate 8033, revised by Adolf Ruthardt, 1895, p. 44; scan (MIT project via IMSLP, marked Public Domain), mirrored at https://archive.org/details/imslp-im-klavierspiel-op101-beyer-ferdinand (file Beyer_-_Op.101_-_Vorschule_im_Klavierspiel.pdf; IMSLP: https://imslp.org/wiki/Vorschule_im_Klavierspiel,_Op.101_(Beyer,_Ferdinand)). Ruthardt's fingering is not used. Not yet compared with the Mainz: Schott first edition. Measured line: all note starts of both hands in time order; where both hands start together (beats 1 and 3) the right-hand note is measured and the left-hand note (G3, B3 or C4) is played but not measured. Composer died 1863; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

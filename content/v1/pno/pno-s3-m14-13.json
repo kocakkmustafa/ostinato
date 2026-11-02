@@ -1,0 +1,116 @@
+{
+  "id": "pno-s3-m14-13",
+  "title": {
+    "en": "Minuet in G minor (Notebook for Anna Magdalena)",
+    "tr": "Sol minör Menuet (Anna Magdalena için Defter)"
+  },
+  "goal": {
+    "en": "Plays the right hand of the Minuet in G minor, BWV Anh. 115, from start to finish at ♩=80, then tries it with both hands.",
+    "tr": "Sol minör Menuet'in (BWV Anh. 115) sağ elini baştan sona ♩=80'de çalar, sonra iki elle dener."
+  },
+  "explanation": [
+    {
+      "en": "This minuet comes from the music book Anna Magdalena Bach started in 1725. In the book it comes right after the Minuet in G. Like that minuet, it was long called Bach's; today it is credited to Christian Petzold (1677–1733).",
+      "tr": "Bu menuet, Anna Magdalena Bach'ın 1725'te başladığı nota defterinden gelir. Defterde Sol Majör Menuet'in hemen ardından yer alır. O menuet gibi uzun süre Bach'ın sanıldı; bugün Christian Petzold'a (1677–1733) atfedilir."
+    },
+    {
+      "en": "It is in G minor and 3/4, with two halves of 16 bars. The key signature has B♭ and E♭. Watch the extra signs: E♮ in bars 17 and 29, F♯ in bars 27, 29 and 31.",
+      "tr": "Sol minör ve 3/4'lüktür; 16'şar ölçülük iki yarısı vardır. Donanımda Si♭ ve Mi♭ bulunur. Ek işaretlere dikkat et: 17. ve 29. ölçülerde Mi♮, 27., 29. ve 31. ölçülerde Fa♯."
+    },
+    {
+      "en": "The right hand is measured. The left hand plays a slow bass line, mostly half and quarter notes with a few two-note chords. Add it in a second run; that run is not measured.",
+      "tr": "Sağ el ölçülür. Sol el, çoğunlukla ikilik ve dörtlüklerden oluşan, birkaç iki notalı akor içeren yavaş bir bas çizgisi çalar. Onu ikinci bir çalışta ekle; o çalış ölçülmez."
+    },
+    {
+      "en": "Bar 31 has a quick figure: B♭4 as an eighth, then C5 and D5 as two sixteenths. Play it light and land on G4 on beat 2.",
+      "tr": "31. ölçüde hızlı bir figür var: sekizlik Si♭4, ardından iki onaltılık Do5 ve Re5. Hafif çal ve 2. vuruşta Sol4'e in."
+    },
+    {
+      "en": "Practise in two-bar sections at a slow tempo, then join them. The score on screen is the Ostinato engraving, made from a 1906 Munich edition; fingering and tempo are ours.",
+      "tr": "Önce yavaş tempoda iki ölçülük bölümlerle çalış, sonra birleştir. Ekrandaki nota, 1906 Münih baskısından hazırlanan Ostinato dizgisidir; parmak numaraları ve tempo bizimdir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The Minuet in G minor from the Ostinato edition: right hand alone, then both hands, piano synthesis, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Sol minör Menuet: önce yalnız sağ el, sonra iki el, piyano sentezi, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Run 1, measured: play the right hand alone with the click, first in two-bar sections, then bars 1–32 at ♩=80, without the repeats. Run 2, not measured: play the minuet with both hands from the score.",
+      "tr": "1. çalış, ölçülür: sağ eli klikle tek başına çal; önce iki ölçülük bölümlerle, sonra 1–32. ölçüleri tekrarlar olmadan ♩=80'de. 2. çalış, ölçülmez: menueti notadan iki elle çal."
+    },
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    },
+    "sequence": "3/4: B♭5:q A5:q G5:q | A5:q D5:q D5:q | G5:q G4:e A4:e B♭4:e C5:e | D5:h. | E♭5:q F5:e E♭5:e D5:e C5:e | D5:q E♭5:e D5:e C5:e B♭4:e | C5:q D5:e C5:e B♭4:e C5:e | A4:h. | B♭5:q A5:q G5:q | A5:q D5:q D5:q | G5:q G4:e A4:e B♭4:e C5:e | D5:h. | F5:q G5:e F5:e E♭5:e D5:e | E♭5:q F5:e E♭5:e D5:e C5:e | D5:q G5:q C5:q | B♭4:h. | D5:q B♭4:e C5:e D5:e E5:e | F5:q G5:q A5:q | B♭5:q G5:e A5:e B♭5:e G5:e | A5:q G5:e A5:e F5:q | F4:e G4:e A4:e B♭4:e C5:e D5:e | E♭5:q D5:q C5:q | F5:q B♭4:q A4:q | B♭4:h. | G4:q D5:e C5:e D5:q | G4:q E♭5:e D5:e E♭5:q | G4:e D5:e F♯4:e C5:e G4:e B♭4:e | A4:h. | D4:e E4:e F♯4:e G4:e A4:e B♭4:e | C5:q B♭4:q A4:q | B♭4:e C5:s D5:s G4:q F♯4:q | G4:h."
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept going after a slip.",
+      "tr": "Bir kaçıştan sonra devam ettim."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "The first beat of each bar was the strongest.",
+      "tr": "Her ölçünün ilk vuruşu en güçlüsüydü."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn the first half until it passes at ♩=80, then add the second half.",
+    "tr": "Önce ilk yarıyı ♩=80'de geçene kadar çalış, sonra ikinci yarıyı ekle."
+  },
+  "repertoire": "Christian Petzold (1677–1733), Menuet in G minor, BWV Anh. 115, from the Notenbüchlein für Anna Magdalena Bach (1725); long attributed to J. S. Bach. Replaces the earlier plan for a Leopold Mozart minuet from Nannerl's Notenbuch: no usable pre-1930 edition was found, and the critical edition (NMA IX/27/1, 1982) lists those minuets as anonymous. Right hand measured, bars 1–32 without repeats; the mordents and the lower notes of the right-hand chords in bars 16 and 32 are left out. The left hand is played in an unmeasured second run and is not in the sequence. Source edition: Johann Sebastian Bachs Notenbüchlein für Anna Magdalena Bach (1725), preface by Richard Batka, München: G. D. W. Callwey, 1906, p. 45, \"Menuet\"; scan: University of Toronto Faculty of Music Library, https://archive.org/details/31761108662891 (PDF page 53). Every right-hand bar was checked twice against the scan (pitches and rhythm). Public domain: the music dates from 1725; the edition was published in 1906 (before 1931) and Batka died in 1922. Legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

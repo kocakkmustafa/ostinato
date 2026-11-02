@@ -1,0 +1,121 @@
+{
+  "id": "pno-s2-m06-02",
+  "title": {
+    "en": "C major, left hand",
+    "tr": "Sol elde Do majör"
+  },
+  "goal": {
+    "en": "Plays the C major scale from C3 to C4 and back with the left hand at ♩=60.",
+    "tr": "Sol elle Do majör gamı Do3'ten Do4'e ve geri ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "The left hand mirrors the right. Its crossings fall in other places.",
+      "tr": "Sol el sağ elin aynadaki görüntüsüdür. Geçişleri başka yerlere düşer."
+    },
+    {
+      "en": "Going up, the fingering is 5-4-3-2-1-3-2-1: after the thumb plays G3, finger 3 crosses over to A3.",
+      "tr": "Çıkarken parmaklar 5-4-3-2-1-3-2-1'dir: başparmak Sol3'ü çaldıktan sonra 3. parmak üstünden La3'e geçer."
+    },
+    {
+      "en": "Going down, the fingering is 1-2-3-1-2-3-4-5: after finger 3 plays A3, the thumb passes under to G3.",
+      "tr": "İnerken parmaklar 1-2-3-1-2-3-4-5'tir: 3. parmak La3'ü çaldıktan sonra başparmak altından Sol3'e geçer."
+    },
+    {
+      "en": "Let finger 3 arc over the thumb, close to the keys. The hand turns a little; the wrist stays level.",
+      "tr": "3. parmak başparmağın üstünden, tuşlara yakın bir yay çizsin. El biraz döner; bilek düz kalır."
+    },
+    {
+      "en": "Fingers 4 and 5 are weaker. Let the weight of the hand help them; do not press harder.",
+      "tr": "4. ve 5. parmaklar daha zayıftır. Elin ağırlığı onlara yardım etsin; daha sert bastırma."
+    },
+    {
+      "en": "Keep the wrist level and let the arm travel. The elbow moves sideways with the hand; it does not lift.",
+      "tr": "Bileği düz tut, kolun ilerlemesine izin ver. Dirsek elle birlikte yana gider; kalkmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C3 to C4 and back, twice, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; the screen shows the finger number over each note.",
+      "tr": "Klikle dörtlüklerle iki kez Do3'ten Do4'e ve geri, ♩=60 ve ♩=40, piyano sentezi; ekran her notanın üstünde parmak numarasını gösterir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play C3 up to C4 and back down with the left hand, twice, one note per beat. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Sol elle Do3'ten Do4'e çık ve geri in, iki kez, vuruş başına bir nota. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "C3 D3 E3 F3 | G3 A3 B3 C4 | B3 A3 G3 F3 | E3 D3 C3:h | ×2",
+    "tempo": {
+      "open": 50,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "Fingers 4 and 5 sounded as clear as fingers 1–3.",
+      "tr": "4. ve 5. parmaklar 1–3. parmaklar kadar net çaldı."
+    },
+    {
+      "en": "My elbow moved sideways with the hand; it did not lift.",
+      "tr": "Dirseğim elle birlikte yana gitti; kalkmadı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Finger 3 hesitated before crossing to A3. Loop G3–A3 slowly, then the whole of bar 2.",
+        "tr": "3. parmak La3'e geçmeden önce duraksadı. Sol3–La3'ü yavaşça döngüle, sonra 2. ölçünün tamamını."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Finger 5 pressed too lightly. Let it sink to the bottom of the key.",
+        "tr": "5. parmak çok hafif bastı. Tuşun dibine kadar insin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C3 to A3 and back with 5-4-3-2-1-3 at ♩=40 until the crossing is smooth, then add B3 and C4.",
+    "tr": "Geçiş pürüzsüzleşene kadar ♩=40'ta yalnız Do3'ten La3'e ve geri 5-4-3-2-1-3 ile çal, sonra Si3 ve Do4'ü ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

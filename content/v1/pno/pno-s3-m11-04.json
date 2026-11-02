@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m11-04",
+  "title": {
+    "en": "Waltz bass",
+    "tr": "Vals bası"
+  },
+  "goal": {
+    "en": "Plays an eight-bar waltz bass on C and G7 in 3/4: the root on beat 1, a two-note chord on beats 2 and 3.",
+    "tr": "C ve G7 üzerinde 3/4'lük sekiz ölçülük vals basını çalar: 1. vuruşta kök, 2. ve 3. vuruşlarda iki sesli akor."
+  },
+  "explanation": [
+    {
+      "en": "A waltz is in 3/4. The bass plays the root on beat 1, then a short chord on beats 2 and 3: \"oom-pah-pah\".",
+      "tr": "Vals 3/4'lüktür. Bas 1. vuruşta kökü, 2. ve 3. vuruşlarda kısa bir akor çalar: \"um-pa-pa\"."
+    },
+    {
+      "en": "C: C3 with finger 5, then E3+G3 with fingers 3+1.",
+      "tr": "C: 5. parmakla Do3, sonra 3+1 ile Mi3+Sol3."
+    },
+    {
+      "en": "G7: G2 with finger 5, then B2+F3 with fingers 4+1. The hand opens a little; if it feels wide, lift it after the root and place the chord.",
+      "tr": "G7: 5. parmakla Sol2, sonra 4+1 ile Si2+Fa3. El biraz açılır; geniş gelirse kökten sonra eli kaldır ve akoru yerleştir."
+    },
+    {
+      "en": "Beat 1 sounds alone. The chords on beats 2 and 3 are lighter and shorter than the root.",
+      "tr": "1. vuruş tek başına duyulur. 2. ve 3. vuruştaki akorlar kökten daha hafif ve kısadır."
+    },
+    {
+      "en": "The microphone result for notes that start together is experimental and does not block your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Birlikte başlayan notalar için mikrofon sonucu deneyseldir ve ilerlemeni engellemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The eight-bar waltz bass on C and G7 in 3/4, with a click, at ♩=90 and at ♩=60, piano synthesis.",
+      "tr": "C ve G7 üzerinde 3/4'lük sekiz ölçülük vals bası, klikle, ♩=90 ve ♩=60, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M~",
+      "MIDI"
+    ],
+    "engineSteps": [
+      "A6p"
+    ],
+    "task": {
+      "en": "Left hand alone, with the click at ♩=90 in 3/4. Bars 1–2 C, bars 3–4 G7, bars 5–6 C, bar 7 G7, then C3 for three beats in bar 8.",
+      "tr": "Yalnız sol el, klikle ♩=90'da, 3/4. 1–2. ölçüler C, 3–4. ölçüler G7, 5–6. ölçüler C, 7. ölçü G7, sonra 8. ölçüde üç vuruş Do3."
+    },
+    "sequence": "3/4: C3 E3/G3 E3/G3 | C3 E3/G3 E3/G3 | G2 B2/F3 B2/F3 | G2 B2/F3 B2/F3 | C3 E3/G3 E3/G3 | C3 E3/G3 E3/G3 | G2 B2/F3 B2/F3 | C3:h.",
+    "tempo": {
+      "open": 90,
+      "target": 90
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "experimental",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Both notes of each pair sounded together.",
+      "tr": "Her çiftin iki notası birlikte duyuldu."
+    },
+    {
+      "en": "The root on beat 1 was the strongest note in each bar.",
+      "tr": "Her ölçüde 1. vuruştaki kök en güçlü notaydı."
+    },
+    {
+      "en": "My hand stayed loose; I did not stretch.",
+      "tr": "Elim gevşek kaldı; zorlanarak açmadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one note of the pair missing.",
+        "tr": "Farklı nota, çiftin bir notası eksik."
+      },
+      "fix": {
+        "en": "One finger pressed less. Place both fingers on their keys first, then press with the same weight.",
+        "tr": "Bir parmak daha az bastı. Önce iki parmağı tuşlarına yerleştir, sonra aynı ağırlıkla bas."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The G7 chord comes late after the low G2. Look at B2 and F3 while you play the root.",
+        "tr": "Pes Sol2'den sonra G7 akoru geç geliyor. Kökü çalarken Si2 ve Fa3'e bak."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the roots alone on beat 1 with rests on beats 2 and 3, then add the chords at ♩=70.",
+    "tr": "Kökleri 1. vuruşta tek başına çal, 2. ve 3. vuruşlarda sus; sonra ♩=70'te akorları ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

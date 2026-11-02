@@ -1,0 +1,79 @@
+{
+  "id": "pno-s3-m12-02",
+  "title": { "en": "Pedal down, pedal up", "tr": "Pedal bas, pedal kaldır" },
+  "goal": {
+    "en": "Plays C4 in quarter notes for 4 bars at ♩=60 and moves the sustain pedal down and up in time with the beat.",
+    "tr": "Do4'ü 4 ölçü boyunca dörtlüklerle ♩=60'ta çalar ve uzatma pedalını vuruşla birlikte basıp kaldırır."
+  },
+  "explanation": [
+    {
+      "en": "The app measures the notes and their timing with the microphone. It does not measure the pedal yet: you check that yourself with the checklist.",
+      "tr": "Uygulama mikrofonla notaları ve zamanlamalarını ölçer. Pedalı henüz ölçmez: onu kontrol listesiyle sen kontrol edersin."
+    },
+    {
+      "en": "Count every beat as \"one-and\". The note starts on the number; the sound stops on \"and\".",
+      "tr": "Her vuruşu \"bir-ve\" diye say. Nota sayıda başlar; ses \"ve\"de durur."
+    },
+    {
+      "en": "Bars 1–2: finger and foot go down together on the beat and come up together on \"and\".",
+      "tr": "1–2. ölçüler: parmak ve ayak vuruşta birlikte iner, \"ve\"de birlikte kalkar."
+    },
+    {
+      "en": "Bars 3–4: the finger plays and lifts at once. The foot goes down with the key and holds the sound until \"and\", then lifts.",
+      "tr": "3–4. ölçüler: parmak çalar ve hemen kalkar. Ayak tuşla birlikte iner, sesi \"ve\"ye kadar tutar, sonra kalkar."
+    },
+    {
+      "en": "Both halves should sound the same. In the second half the pedal does the holding.",
+      "tr": "İki yarı da aynı duyulmalı. İkinci yarıda sesi pedal tutar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL"],
+    "brief": {
+      "en": "Metronome click at ♩=60 with \"one-and\" counted on screen; the pedal down and up points are marked on the beat line.",
+      "tr": "♩=60'ta metronom kliği; ekranda \"bir-ve\" sayımı; pedalın inip kalktığı yerler vuruş çizgisinde işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play C4 with right-hand finger 3 on every beat for 4 bars with the click at ♩=60. In bars 1–2, finger and pedal go down together on the beat and up together on \"and\". In bars 3–4, lift the finger at once and let the pedal hold each note until \"and\". The microphone checks the notes and their timing. Then tick the pedal checklist.",
+      "tr": "Do4'ü sağ el 3. parmakla 4 ölçü boyunca her vuruşta, klikle ♩=60'ta çal. 1–2. ölçülerde parmak ve pedal vuruşta birlikte iner, \"ve\"de birlikte kalkar. 3–4. ölçülerde parmağı hemen kaldır; her notayı \"ve\"ye kadar pedal tutsun. Mikrofon notaları ve zamanlamalarını kontrol eder. Sonra pedal kontrol listesini işaretle."
+    },
+    "sequence": "4/4: C4 C4 C4 C4 | C4 C4 C4 C4 | C4 C4 C4 C4 | C4 C4 C4 C4",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My heel stayed on the floor the whole time.", "tr": "Topuğum baştan sona yerde kaldı." },
+    { "en": "The pedal went down on the beat, not before it.", "tr": "Pedal vuruştan önce değil, vuruşta indi." },
+    { "en": "In bars 3–4 the sound lasted until \"and\" with my finger already up.", "tr": "3–4. ölçülerde parmağım kalkmışken ses \"ve\"ye kadar sürdü." },
+    { "en": "The sound stopped on every \"and\".", "tr": "Ses her \"ve\"de durdu." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The pedal was still down, so the next C4 did not start fresh. Lift the foot fully on \"and\" before the next beat.",
+        "tr": "Pedal hâlâ basılıydı, bu yüzden sonraki Do4 yeniden başlamadı. Sonraki vuruştan önce \"ve\"de ayağı tam kaldır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Thinking about the foot held the finger back. Let the finger lead on the beat; the foot follows with it.",
+        "tr": "Ayağı düşünmek parmağı geciktirdi. Vuruşta parmak öne geçsin; ayak onunla birlikte gelsin."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise bars 1–2 only, then add bars 3–4 when finger and foot move together without thinking.",
+    "tr": "Yalnız 1–2. ölçüleri çalış; parmak ve ayak düşünmeden birlikte hareket edince 3–4. ölçüleri ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

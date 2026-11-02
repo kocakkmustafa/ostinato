@@ -1,0 +1,113 @@
+{
+  "id": "pno-s3-test",
+  "title": {
+    "en": "Level 3 test",
+    "tr": "Seviye 3 testi"
+  },
+  "goal": {
+    "en": "Shows the Level 3 skills: two-octave and chromatic scales, left-hand accompaniment, lead sheets and a public-domain piece.",
+    "tr": "Seviye 3 becerilerini gösterir: iki oktav ve kromatik gamlar, sol el eşliği, lead sheet ve kamu malı bir eser."
+  },
+  "explanation": [
+    {
+      "en": "The test has four parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test dört bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, scales: C, G, F and D major and A harmonic minor over two octaves, hands separate, in eighth notes at ♩=69, then the chromatic scale over two octaves.",
+      "tr": "1. bölüm, gamlar: Do, Sol, Fa ve Re majör ile armonik La minör, iki oktav, eller ayrı, ♩=69'da sekizliklerle, ardından iki oktav kromatik gam."
+    },
+    {
+      "en": "Part 2, accompaniment: a new sixteen-bar left-hand part with Alberti and broken-chord patterns at ♩=80.",
+      "tr": "2. bölüm, eşlik: Alberti ve kırık akor kalıplarıyla yeni bir on altı ölçülük sol el bölümü, ♩=80."
+    },
+    {
+      "en": "Part 3, lead sheet: a new sixteen-bar melody with chord symbols at ♩=72. Play the melody and the chord roots; the line is not played before your try.",
+      "tr": "3. bölüm, lead sheet: akor sembolleriyle yeni bir on altı ölçülük ezgi, ♩=72. Ezgiyi ve akor köklerini çal; dizi denemenden önce çalınmaz."
+    },
+    {
+      "en": "Part 4, piece: one public-domain piece from Level 3 in its one-new-note version. The full version can be played with MIDI and does not decide the result.",
+      "tr": "4. bölüm, eser: Seviye 3'ten kamu malı bir eser, tek yeni nota sürümünde. Tam sürüm MIDI ile çalınabilir ve sonucu belirlemez."
+    },
+    {
+      "en": "In every part only one new note starts at a time. With a MIDI keyboard connected, MIDI gives the result.",
+      "tr": "Her bölümde aynı anda yalnız bir yeni nota başlar. MIDI klavye bağlıysa sonucu MIDI verir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "Click for all parts. Parts 1, 2 and 4 can be heard first by piano synthesis at the target tempo; the part 3 line is played only after your try.",
+      "tr": "Tüm bölümler için klik. 1., 2. ve 4. bölümler önce hedef tempoda piyano sentezinde dinlenebilir; 3. bölüm dizisi yalnız denemenden sonra çalınır."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A3",
+      "A6"
+    ],
+    "task": {
+      "en": "Complete four parts. 1 Scales: C, G, F, D major and A harmonic minor, two octaves, hands separate, eighth notes at ♩=69, plus the chromatic scale over two octaves. 2 Accompaniment: a new sixteen-bar left-hand part, Alberti and broken chords, at ♩=80. 3 Lead sheet: a new sixteen-bar melody with chord roots at ♩=72. 4 Piece: a Level 3 public-domain piece, one-new-note version, at its target tempo.",
+      "tr": "Dört bölümü tamamla. 1 Gamlar: Do, Sol, Fa, Re majör ve armonik La minör, iki oktav, eller ayrı, ♩=69'da sekizlikler, ardından iki oktav kromatik gam. 2 Eşlik: ♩=80'de Alberti ve kırık akorlu yeni bir on altı ölçülük sol el bölümü. 3 Lead sheet: ♩=72'de akor kökleriyle yeni bir on altı ölçülük ezgi. 4 Eser: Seviye 3'ten kamu malı bir eser, tek yeni nota sürümü, kendi hedef temposunda."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own: Level 3 note and timing accuracy at that part's target tempo. The full version of the piece in part 4 does not count.",
+        "tr": "Her bölüm kendi başına geçer: o bölümün hedef temposunda Seviye 3 nota ve zamanlama ölçütü. 4. bölümdeki eserin tam sürümü sayılmaz."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "A thumb crossing is late at ♩=69. Loop that scale alone at ♩=60, then go back to ♩=69.",
+        "tr": "♩=69'da bir başparmak geçişi geç kalıyor. O gamı tek başına ♩=60'ta döngüle, sonra ♩=69'a dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The Alberti pattern rushes. Keep the thumb notes light and count the eighths in each beat.",
+        "tr": "Alberti kalıbı aceleye geliyor. Başparmak notalarını hafif tut ve her vuruştaki sekizlikleri say."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

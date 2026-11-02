@@ -1,0 +1,85 @@
+{
+  "id": "pno-s2-m09-07",
+  "title": { "en": "Keep going", "tr": "Durmadan devam" },
+  "goal": {
+    "en": "Plays an original eight-bar line once at ♩=60 from start to finish without stopping, even after a slip.",
+    "tr": "Özgün sekiz ölçülük diziyi ♩=60'ta baştan sona bir kez, bir kaçıştan sonra bile durmadan çalar."
+  },
+  "explanation": [
+    {
+      "en": "In sight-reading the pulse matters more than any single note. The click does not wait, so neither do you.",
+      "tr": "Deşifrede vuruş, tek tek notalardan daha önemlidir. Klik beklemez; sen de bekleme."
+    },
+    {
+      "en": "After a slip, do not go back to fix it. Let the note go and play the next beat on time.",
+      "tr": "Bir kaçıştan sonra düzeltmek için geri dönme. O notayı bırak ve sonraki vuruşu zamanında çal."
+    },
+    {
+      "en": "If you get lost, find beat 1 of the next bar and come back in there. A missed note costs less than a stop.",
+      "tr": "Kaybolursan sonraki ölçünün 1. vuruşunu bul ve oradan gir. Kaçan bir nota, bir duraklamadan daha az kaybettirir."
+    },
+    {
+      "en": "Keep going after a slip. Look one bar ahead, not at your hand.",
+      "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak."
+    },
+    {
+      "en": "The line is not played to you before your first try. Play it once, then compare it with the reference.",
+      "tr": "Dizi ilk denemenden önce sana çalınmaz. Bir kez çal, sonra referansla karşılaştır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=60 with a one-bar count-in. The original eight bars are played by piano synthesis only after your first try, at ♩=60 and at ♩=45.",
+      "tr": "Bir ölçü girişli ♩=60 klik. Özgün sekiz ölçü yalnız ilk denemenden sonra piyano sentezinde çalınır, ♩=60 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Scan the eight bars for 30 seconds, then play them once with the click at ♩=60, without stopping. Both hands stay in C position: right hand from C4, left hand from C3. Bars 3 and 4 are the left hand; in bar 6 the left hand plays G3 and in bar 8 C3. If you slip, keep going to the next beat.",
+      "tr": "Sekiz ölçüye 30 saniye göz at, sonra ♩=60'ta klikle durmadan bir kez çal. İki el de Do konumunda kalır: sağ el Do4'ten, sol el Do3'ten. 3. ve 4. ölçüler sol eldir; 6. ölçüde Sol3'ü, 8. ölçüde Do3'ü sol el çalar. Kaçırırsan sonraki vuruşa devam et."
+    },
+    "sequence": "4/4: E4:q F4:q G4:h | E4:q D4:q C4:h | C3:q E3:q G3:q E3:q | F3:q E3:q D3:h | E4:e F4:e G4:q F4:q E4:q | D4:h G3:h | C4:q E4:q D4:e C4:e D4:q | C4:h C3:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 2 note and timing accuracy at ♩=60, played once through to the last bar with no stop longer than one beat.",
+        "tr": "♩=60'ta Seviye 2 nota ve zamanlama ölçütü; dizi son ölçüye kadar bir kez, bir vuruştan uzun duraklama olmadan çalınır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I reached the last bar together with the click.", "tr": "Son ölçüye klikle birlikte ulaştım." },
+    { "en": "I did not go back to fix a note.", "tr": "Bir notayı düzeltmek için geri dönmedim." },
+    { "en": "When I got lost, I came back in on a beat 1.", "tr": "Kaybolduğumda bir 1. vuruşta yeniden girdim." },
+    { "en": "I looked at the music, not at my hands.", "tr": "Ellerime değil, notaya baktım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late, and every note after it late too.", "tr": "Doğru nota, ama geç; ondan sonraki her nota da geç." },
+      "fix": {
+        "en": "You stopped after a slip and the click moved on. Drop the missed note and join the click on the next beat.",
+        "tr": "Bir kaçıştan sonra durdun ve klik ilerledi. Kaçan notayı bırak ve sonraki vuruşta kliğe katıl."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear, for a whole bar.", "tr": "Duyamadım, bütün bir ölçü boyunca." },
+      "fix": {
+        "en": "A bar was left out while you searched. Find beat 1 of the next bar and come back in there.",
+        "tr": "Ararken bir ölçü boş kaldı. Sonraki ölçünün 1. vuruşunu bul ve oradan gir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the line at ♩=50 first, still without stopping, then come back to ♩=60.",
+    "tr": "Önce diziyi ♩=50'de, yine durmadan çal, sonra ♩=60'a dön."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,75 @@
+{
+  "id": "pno-s1-m03-04",
+  "title": { "en": "Left-hand five-finger pattern", "tr": "Sol el beş parmak kalıbı" },
+  "goal": {
+    "en": "Plays the left-hand five-finger pattern 5-4-3-2-1-2-3-4-5 evenly with the click at ♩=80.",
+    "tr": "Sol el beş parmak kalıbını 5-4-3-2-1-2-3-4-5 klikle ♩=80'de eşit çalar."
+  },
+  "explanation": [
+    {
+      "en": "The pattern goes up from C3 with fingers 5 4 3 2 1 and comes back with 2 3 4 5.",
+      "tr": "Kalıp Do3'ten 5 4 3 2 1 parmaklarıyla çıkar, 2 3 4 5 ile geri döner."
+    },
+    {
+      "en": "Fingers 4 and 5 are the weakest. Let the weight of the arm help them instead of pushing harder.",
+      "tr": "4. ve 5. parmak en zayıf parmaklardır. Daha sert basmak yerine kolun ağırlığı onlara yardım etsin."
+    },
+    {
+      "en": "Even means every note has the same length and the same loudness.",
+      "tr": "Eşit demek, her notanın aynı uzunlukta ve aynı gürlükte olması demek."
+    },
+    {
+      "en": "Start at ♩=60. When a round is even, raise the tempo by 5 up to ♩=80.",
+      "tr": "♩=60'ta başla. Bir tur eşit olunca tempoyu 5'er artırarak ♩=80'e çık."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "C3 D3 E3 F3 G3 F3 E3 D3 C3 twice with a click, at ♩=80 and ♩=50, piano synthesis.",
+      "tr": "Klikle iki kez Do3 Re3 Mi3 Fa3 Sol3 Fa3 Mi3 Re3 Do3, ♩=80 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play C3 D3 E3 F3 | G3 F3 E3 D3 | C3 for two beats and a two-beat rest, twice through, with the left hand and the click. Fingers 5 4 3 2 1 2 3 4 5. Start at ♩=60 and move up to ♩=80.",
+      "tr": "Sol elle klikle Do3 Re3 Mi3 Fa3 | Sol3 Fa3 Mi3 Re3 | iki vuruş Do3 ve iki vuruş sus; bunu iki kez çal. Parmaklar 5 4 3 2 1 2 3 4 5. ♩=60'ta başla, ♩=80'e çık."
+    },
+    "sequence": "C3 D3 E3 F3 | G3 F3 E3 D3 | C3:h hr | ×2",
+    "tempo": { "open": 60, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Fingers 4 and 5 sounded as clearly as the thumb.", "tr": "4. ve 5. parmak başparmak kadar net çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My shoulders and wrists stayed loose.", "tr": "Omuzlarım ve bileklerim gevşek kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Fingers 4 and 5 may barely press the key. Let the arm weight sink into each key to the bottom.",
+        "tr": "4. ve 5. parmak tuşa zor basıyor olabilir. Kolun ağırlığı her tuşa sonuna kadar insin."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The way down from G3 rushes. Count aloud and wait for each click; go back 5 bpm.",
+        "tr": "Sol3'ten iniş acele ediyor. Sesli say ve her kliği bekle; 5 bpm geri in."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Stay at ♩=60 and play the pattern once, with a full bar of rest between rounds.",
+    "tr": "♩=60'ta kal ve kalıbı bir kez çal; turlar arasında bir ölçü sus."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

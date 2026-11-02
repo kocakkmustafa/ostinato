@@ -1,0 +1,111 @@
+{
+  "id": "pno-s2-m07-01",
+  "title": {
+    "en": "Major triads, broken",
+    "tr": "Kırık majör üçlüler"
+  },
+  "goal": {
+    "en": "Plays the C, F and G major triads broken, root-third-fifth, with right-hand fingers 1-3-5 at ♩=60.",
+    "tr": "C, F ve G majör üçlülerini kök-üçlü-beşli sırasıyla, sağ elde 1-3-5. parmaklarla ♩=60'ta kırık çalar."
+  },
+  "explanation": [
+    {
+      "en": "A triad is three notes stacked in thirds: the root, the third and the fifth.",
+      "tr": "Üçlü akor, aralarında üçlü aralık olan üç notadır: kök, üçlü ve beşli."
+    },
+    {
+      "en": "In a major triad the third is four semitones above the root and the fifth is seven. C major is C4 E4 G4.",
+      "tr": "Majör üçlüde üçlü kökün dört yarım ses, beşli yedi yarım ses üstündedir. C majör Do4 Mi4 Sol4'tür."
+    },
+    {
+      "en": "F major is F4 A4 C5 and G major is G4 B4 D5. All three use only white keys.",
+      "tr": "F majör Fa4 La4 Do5, G majör Sol4 Si4 Re5'tir. Üçü de yalnız beyaz tuş kullanır."
+    },
+    {
+      "en": "Use fingers 1-3-5 for every triad. Keep the same hand shape and move the whole hand to the new root.",
+      "tr": "Her üçlüde 1-3-5. parmakları kullan. El şeklini koru, bütün eli yeni köke taşı."
+    },
+    {
+      "en": "Broken means one note at a time. Play root, third, fifth and the third again, then hold the root.",
+      "tr": "Kırık, notaların tek tek çalınması demektir. Kök, üçlü, beşli ve yine üçlü çal, sonra kökü tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "C, F, G and C major broken (root-3-5-3, then the root held), at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "C, F, G ve C majör kırık (kök-3-5-3, sonra kök tutulur), ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand, fingers 1-3-5. Play each triad root-third-fifth-third, then hold the root for four beats: C, F, G and back to C, at ♩=60 with the click. Move the hand at the end of the held note.",
+      "tr": "Sağ el, 1-3-5. parmaklar. Her üçlüyü kök-üçlü-beşli-üçlü çal, sonra kökü dört vuruş tut: C, F, G ve yeniden C, ♩=60'ta klikle. Eli tutulan notanın sonunda taşı."
+    },
+    "sequence": "4/4: C4 E4 G4 E4 | C4:w | F4 A4 C5 A4 | F4:w | G4 B4 D5 B4 | G4:w | C4 E4 G4 E4 | C4:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used fingers 1-3-5 for every triad.",
+      "tr": "Her üçlüde 1-3-5. parmakları kullandım."
+    },
+    {
+      "en": "My hand kept the same shape when it moved.",
+      "tr": "El taşınırken şeklini korudu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "Place the thumb on the new root first. Then skip one white key for finger 3 and one more for finger 5.",
+        "tr": "Önce başparmağı yeni köke koy. Sonra 3. parmak için bir beyaz tuş, 5. parmak için bir beyaz tuş daha atla."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The first note after the hand move is late. Lift the hand at the end of the held note and land on the new root on beat 1.",
+        "tr": "El taşındıktan sonraki ilk nota geç. Tutulan notanın sonunda eli kaldır ve 1. vuruşta yeni köke kon."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C and F at ♩=45, then add G.",
+    "tr": "♩=45'te yalnız C ve F'yi çal, sonra G'yi ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

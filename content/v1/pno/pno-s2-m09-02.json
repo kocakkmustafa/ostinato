@@ -1,0 +1,88 @@
+{
+  "id": "pno-s2-m09-02",
+  "title": { "en": "Intervals by sight", "tr": "Görerek aralık" },
+  "goal": {
+    "en": "Names seconds to fifths from their shape on the staff and plays them in G position and left-hand C position.",
+    "tr": "Portedeki ikiliden beşliye aralıkları şekillerinden adlandırır ve Sol konumunda ve sol el Do konumunda çalar."
+  },
+  "explanation": [
+    {
+      "en": "A sight-reader does not name every note. Read the first note, then read the distance to the next one.",
+      "tr": "Deşifre eden her notayı adlandırmaz. İlk notayı oku, sonra bir sonrakine olan uzaklığı oku."
+    },
+    {
+      "en": "Seconds and fourths go from a line to a space or from a space to a line. Thirds and fifths stay on lines or stay in spaces.",
+      "tr": "İkili ve dörtlüler çizgiden aralığa ya da aralıktan çizgiye gider. Üçlü ve beşliler çizgide ya da aralıkta kalır."
+    },
+    {
+      "en": "Tell them apart by size: a third skips one position, a fifth skips three. A second is a neighbour, a fourth skips two.",
+      "tr": "Onları boyla ayır: üçlü bir konum, beşli üç konum atlar. İkili komşudur, dörtlü iki konum atlar."
+    },
+    {
+      "en": "The shape is the same in both clefs and in every position. Down the staff means down the keyboard.",
+      "tr": "Şekil iki anahtarda ve her konumda aynıdır. Portede aşağı, klavyede aşağı demektir."
+    },
+    {
+      "en": "In a five-finger position, the finger difference plus one gives the interval: fingers 1 and 3 make a third.",
+      "tr": "Beş parmak konumunda parmak farkının bir fazlası aralığı verir: 1. ve 3. parmak üçlü yapar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each interval in part 2 is played once after your attempt, piano synthesis.",
+      "tr": "2. bölümdeki her aralık, denemenden sonra bir kez çalınır; piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "Part 1: answer 8 questions; name the interval shown on the staff, going up or down, in either clef. Part 2: read eight intervals and play the two notes one after the other. The first six are right hand in G position, thumb on G4: G4–B4, G4–D5, A4–D5, B4–C5, D5–G4, C5–A4. The last two are left hand in C position, finger 5 on C3: C3–F3, G3–D3. Find each second note from the shape and the finger, not from its name. No click; take your time.",
+      "tr": "1. bölüm: 8 soruyu cevapla; portede gösterilen aralığı adlandır; aralık yukarı ya da aşağı, iki anahtardan birinde olabilir. 2. bölüm: sekiz aralığı oku ve iki notayı art arda çal. İlk altısı sağ el Sol konumunda, başparmak Sol4'te: Sol4–Si4, Sol4–Re5, La4–Re5, Si4–Do5, Re5–Sol4, Do5–La4. Son ikisi sol el Do konumunda, 5. parmak Do3'te: Do3–Fa3, Sol3–Re3. Her ikinci notayı adından değil, şeklinden ve parmağından bul. Klik yok; acele etme."
+    },
+    "sequence": "G4:h B4:h | G4:h D5:h | A4:h D5:h | B4:h C5:h | D5:h G4:h | C5:h A4:h | C3:h F3:h | G3:h D3:h",
+    "pass": { "levelDefault": true, "minCorrect": 7 },
+    "drill": {
+      "type": "interval_name",
+      "count": 8,
+      "params": {
+        "intervals": ["2", "3", "4", "5"],
+        "display": "staff",
+        "direction": "both",
+        "clef": "grand",
+        "range": ["C3", "D5"]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I read the distance, not each note name.", "tr": "Her notanın adını değil, uzaklığı okudum." },
+    { "en": "I checked line or space before I judged the size.", "tr": "Boyuna karar vermeden önce çizgi mi aralık mı diye baktım." },
+    { "en": "I went down the keyboard when the notes went down the staff.", "tr": "Notalar portede indiğinde klavyede aşağı gittim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer, a third read as a fifth.", "tr": "Farklı cevap, üçlü beşli olarak okunmuş." },
+      "fix": {
+        "en": "Both stay on lines or in spaces. Count the skipped positions: one for a third, three for a fifth.",
+        "tr": "İkisi de çizgide ya da aralıkta kalır. Atlanan konumları say: üçlüde bir, beşlide üç."
+      }
+    },
+    {
+      "error": { "en": "Different note, in the other direction.", "tr": "Farklı nota, ters yönde." },
+      "fix": {
+        "en": "Look at the direction first: up the staff moves to the right on the keyboard, down moves to the left.",
+        "tr": "Önce yöne bak: portede yukarı klavyede sağa, aşağı sola gider."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with seconds and thirds only, then add fourths and fifths.",
+    "tr": "Önce yalnız ikili ve üçlülerle başla, sonra dörtlü ve beşlileri ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

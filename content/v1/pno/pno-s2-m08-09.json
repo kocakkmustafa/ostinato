@@ -1,0 +1,76 @@
+{
+  "id": "pno-s2-m08-09",
+  "title": { "en": "Original two-hand study", "tr": "Özgün iki el etüdü" },
+  "goal": {
+    "en": "Plays an original four-bar two-hand study, one new note at a time, at ♩=70.",
+    "tr": "Özgün dört ölçülük iki el etüdünü, her an tek yeni notayla, ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "Prepare C3–G3 in the left hand and C4–G4 in the right. All four bars are 4/4, no pedal.",
+      "tr": "Sol eli Do3–Sol3'e, sağ eli Do4–Sol4'e hazırla. Dört ölçü 4/4, pedal yok."
+    },
+    {
+      "en": "The study joins this module's moves: a bass on beat 1 with the melody after it (bars 1, 2 and 4), and a left-hand note under a held right-hand note (bar 3).",
+      "tr": "Etüt bu modülün hareketlerini birleştirir: 1. vuruşta bas ve ardından melodi (1, 2 ve 4. ölçüler), tutulan sağ el notasının altında sol el notası (3. ölçü)."
+    },
+    {
+      "en": "Only one new note starts at a time. A held note keeps sounding until the next note in the same hand.",
+      "tr": "Her an yalnız bir yeni nota başlar. Tutulan nota, aynı elin sonraki notasına kadar sürer."
+    },
+    {
+      "en": "Practise a single bar separately, then together, then connect bars.",
+      "tr": "Tek ölçüyü önce ayrı, sonra birlikte çalış, sonra ölçüleri bağla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four-bar study at ♩=70 and ♩=50, piano synthesis.",
+      "tr": "Özgün dört ölçülük etüt, ♩=70 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the four bars with the click at ♩=70. Bar 1: left hand C3, held; right hand D4 E4 G4 (2 3 5). Bar 2: left hand G3, held; right hand E4 D4 C4 (3 2 1). Bar 3: right hand E4 F4, then G4 held (3 4 5); left hand G3 on beat 4. Bar 4: left hand C3, held; right hand E4 D4 C4 (3 2 1).",
+      "tr": "Dört ölçüyü ♩=70'te klikle çal. 1. ölçü: sol el Do3, tutulur; sağ el Re4 Mi4 Sol4 (2 3 5). 2. ölçü: sol el Sol3, tutulur; sağ el Mi4 Re4 Do4 (3 2 1). 3. ölçü: sağ el Mi4 Fa4, sonra tutulan Sol4 (3 4 5); sol el 4. vuruşta Sol3. 4. ölçü: sol el Do3, tutulur; sağ el Mi4 Re4 Do4 (3 2 1)."
+    },
+    "sequence": "C3 D4 E4 G4 | G3 E4 D4 C4 | E4 F4 G4 G3 | C3 E4 D4 C4",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The left-hand note kept sounding while the right hand moved.", "tr": "Sağ el hareket ederken sol eldeki nota sürdü." },
+    { "en": "The two hands never started a note together.", "tr": "İki el hiçbir zaman bir notaya birlikte başlamadı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, an octave away.", "tr": "Farklı nota, bir oktav uzakta." },
+      "fix": {
+        "en": "On beat 4 of bar 3 the G comes from the left hand, an octave below the right-hand G4. Keep the right finger 5 down and play G3 with the left thumb.",
+        "tr": "3. ölçünün 4. vuruşundaki Sol sol elden gelir, sağ eldeki Sol4'ün bir oktav altında. Sağ 5. parmağı basılı tut ve Sol3'ü sol başparmakla çal."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The bass on beat 1 comes late after a right-hand bar. Move the left hand during beat 4 and count aloud.",
+        "tr": "Sağ el ölçüsünden sonra 1. vuruştaki bas geç geliyor. Sol eli 4. vuruş sırasında taşı ve sesli say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the left-hand notes with the click, counting aloud, then add the right hand one bar at a time.",
+    "tr": "Önce yalnız sol el notalarını sesli sayarak klikle çal, sonra sağ eli ölçü ölçü ekle."
+  },
+  "legacy": "R: piano-15",
+  "minutes": 15,
+  "expertPending": true
+}

@@ -230,6 +230,98 @@ void main() {
     expect(setupOpened, [1], reason: 'the wizard runs first only once');
   });
 
+  testWidgets('"Next" chip: the "Start next lesson" lesson, others tappable', (
+    tester,
+  ) async {
+    _tall(tester);
+    final progress = _MemoryProgress();
+    final checks = _MemoryChecks();
+    for (final id in ['gtr-s1-m01-08', 'gtr-s1-m02-10']) {
+      await progress.recordRun(id, _passing());
+    }
+    // M01 and M02 done otherwise too: the next lesson is M03's first.
+    for (final unit in ['gtr-s1-m01', 'gtr-s1-m02']) {
+      for (final l in course.unit(unit)!.lessons) {
+        if (l.availability == V1LessonAvailability.measured ||
+            l.availability == V1LessonAvailability.tuner) {
+          await progress.recordRun(l.id, _passing());
+        } else {
+          await checks.record(l.id, V1CheckEvidence.selfReport);
+        }
+      }
+    }
+    final opened = <String>[];
+    await tester.pumpWidget(
+      practiceHost(
+        V1PracticeListScreen(
+          catalog: Future.value(course),
+          progressFactory: (_) => progress,
+          checksFactory: (_) => checks,
+          setupStore: _visitedSetup(),
+          practiceScreenBuilder: (l, p, hasNext) => _FakePractice(
+            onOpen: () => opened.add(l.id),
+            pass: () => p.recordRun(l.id, _passing()),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    final state = V1CourseState(
+      course,
+      await progress.load(),
+      await checks.load(),
+    );
+    expect(state.next!.id, 'gtr-s1-m03-01');
+    // The unit holding the next lesson is expanded; exactly one chip.
+    expect(find.byKey(const Key('v1-course-next-gtr-s1-m03-01')), findsOne);
+    expect(find.text('Next'), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp('Suggested next lesson')), findsOne);
+    // The rhythm checkpoint is measured now and opens the practice loop.
+    expect(
+      tester
+          .widget<Text>(find.byKey(const Key('v1-course-chip-gtr-s1-m03-01')))
+          .data,
+      'Measured',
+    );
+    // No lock inside the module: a later lesson opens directly.
+    await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m03-05')));
+    await tester.pumpAndSettle();
+    expect(opened, ['gtr-s1-m03-05']);
+    await tester.tap(find.text('pass'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('close'));
+    await tester.pumpAndSettle();
+    // Passing another lesson does not move the chip past an open one.
+    expect(find.byKey(const Key('v1-course-next-gtr-s1-m03-01')), findsOne);
+    await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m03-01')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('pass'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('close'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('v1-course-next-gtr-s1-m03-01')), findsNothing);
+    expect(find.byKey(const Key('v1-course-next-gtr-s1-m03-02')), findsOne);
+    expect(find.text('Next'), findsOneWidget);
+  });
+
+  testWidgets('Turkish "Next" chip reads "Sıradaki"', (tester) async {
+    _tall(tester);
+    await tester.pumpWidget(
+      practiceHost(
+        locale: 'tr',
+        V1PracticeListScreen(
+          catalog: Future.value(course),
+          progressFactory: (_) => _MemoryProgress(),
+          checksFactory: (_) => _MemoryChecks(),
+          setupStore: _visitedSetup(),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('v1-course-next-gtr-s1-m01-01')), findsOne);
+    expect(find.text('Sıradaki'), findsOneWidget);
+  });
+
   testWidgets('"Start next lesson": first open lesson not done, course order', (
     tester,
   ) async {
@@ -401,7 +493,7 @@ void main() {
       '"not measured"', (tester) async {
     _tall(tester);
     final progress = _MemoryProgress();
-    for (final id in ['gtr-s1-m01-08', 'gtr-s1-m02-10']) {
+    for (final id in ['gtr-s1-m01-08', 'gtr-s1-m02-10', 'gtr-s1-m03-10']) {
       await progress.recordRun(id, _passing());
     }
     final checks = _MemoryChecks();
@@ -416,20 +508,20 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('v1-course-unit-gtr-s1-m03')));
+    await tester.tap(find.byKey(const Key('v1-course-unit-gtr-s1-m04')));
     await tester.pumpAndSettle();
     expect(
       tester
-          .widget<Text>(find.byKey(const Key('v1-course-status-gtr-s1-m03-10')))
+          .widget<Text>(find.byKey(const Key('v1-course-status-gtr-s1-m04-11')))
           .data,
       'HELD · CANNOT BE PASSED YET',
     );
-    await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m03-10')));
+    await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m04-11')));
     await tester.pumpAndSettle();
     expect(find.textContaining('cannot be passed now'), findsOneWidget);
     // No checklist of its own: the generic one, with the target tempo.
     final target = course
-        .lesson('gtr-s1-m03-10')!
+        .lesson('gtr-s1-m04-11')!
         .lesson
         .practice
         .tempo!
@@ -446,11 +538,19 @@ void main() {
     await tester.pumpAndSettle();
     expect(
       tester
-          .widget<Text>(find.byKey(const Key('v1-course-status-gtr-s1-m03-10')))
+          .widget<Text>(find.byKey(const Key('v1-course-status-gtr-s1-m04-11')))
           .data,
       'PRACTISED · SELF-REPORTED · NOT MEASURED',
     );
-    expect(find.text('Open · not measured · 0 of 11 done'), findsOneWidget);
+    // The level test after M04 opens, labelled "not measured".
+    final testStatus = find.byKey(
+      const Key('v1-course-unit-status-gtr-s1-test'),
+    );
+    await tester.scrollUntilVisible(testStatus, 300);
+    expect(
+      tester.widget<Text>(testStatus).data,
+      'Open · not measured · 0 of 1 done',
+    );
   });
 
   testWidgets('tuner lesson: only an all-in-tune tuner check completes it', (

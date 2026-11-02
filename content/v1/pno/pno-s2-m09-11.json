@@ -1,0 +1,84 @@
+{
+  "id": "pno-s2-m09-11",
+  "title": { "en": "Sight-reading checkpoint", "tr": "Deşifre geçişi" },
+  "goal": {
+    "en": "Sight-reads a new eight-bar line once at ♩=66, with only one new note starting at a time.",
+    "tr": "Yeni bir sekiz ölçülük diziyi, her an yalnız bir yeni nota başlayarak ♩=66'da bir kez deşifre eder."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint gives you a new eight-bar line. It is not played before your try.",
+      "tr": "Bu geçiş sana yeni bir sekiz ölçülük dizi verir. Dizi denemenden önce çalınmaz."
+    },
+    {
+      "en": "The line can be in C, G or F position, in 4/4 or 3/4. It can pass between the hands, use ledger notes around middle C, and carry staccato, legato and accents.",
+      "tr": "Dizi Do, Sol ya da Fa konumunda, 4/4 ya da 3/4'te olabilir. Eller arasında geçebilir, orta Do çevresindeki ek çizgili notaları kullanabilir, staccato, legato ve aksan taşıyabilir."
+    },
+    {
+      "en": "The hands take turns and never start a note together.",
+      "tr": "Eller sırayla çalar ve hiçbir zaman aynı anda nota başlatmaz."
+    },
+    {
+      "en": "Use the routine: scan for 30 seconds, name the key signature, clap the rhythm, count one bar in, and play once without stopping.",
+      "tr": "Rutini kullan: 30 saniye göz at, donanımı söyle, ritmi alkışla, bir ölçü say ve durmadan bir kez çal."
+    },
+    {
+      "en": "Every try uses a new line. Practise at a slower tempo with new lines if you need to; the checkpoint passes at ♩=66.",
+      "tr": "Her denemede dizi yenidir. Gerekirse yeni dizilerle daha yavaş tempoda çalış; geçiş ♩=66'da geçilir."
+    },
+    {
+      "en": "This checkpoint completes the sight-reading module.",
+      "tr": "Bu geçiş deşifre modülünü tamamlar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=66 with a one-bar count-in. The new line is played by piano synthesis only after your try.",
+      "tr": "Bir ölçü girişli ♩=66 klik. Yeni dizi yalnız denemenden sonra piyano sentezinde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Scan the new line for 30 seconds and clap its rhythm, then play all eight bars once with the click at ♩=66 without stopping.",
+      "tr": "Yeni diziye 30 saniye göz at ve ritmini alkışla, sonra sekiz ölçünün tamamını klikle ♩=66'da durmadan bir kez çal."
+    },
+    "tempo": { "open": 66, "target": 66 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "A flat from the key signature was missed. Name the key signature aloud during the scan and find every B.",
+        "tr": "Donanımdaki bir bemol gözden kaçtı. Tarama sırasında donanımı sesli söyle ve her Si'yi bul."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Keep going after a slip. Look one bar ahead, not at your hand.",
+        "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If it did not pass, read new lines in the reading lessons of this module at ♩=60, then retake at ♩=66.",
+    "tr": "Geçmediyse bu modülün okuma derslerinde yeni dizileri ♩=60'ta oku, sonra ♩=66'da yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

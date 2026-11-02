@@ -1,0 +1,76 @@
+{
+  "id": "pno-s2-m08-02",
+  "title": { "en": "Melody over a held bass", "tr": "Tutulan bas üstünde melodi" },
+  "goal": {
+    "en": "Holds a left-hand bass note while the right hand plays an original four-bar melody, at ♩=60.",
+    "tr": "Sağ el özgün dört ölçülük melodiyi çalarken sol elde bas notayı tutar, ♩=60'ta."
+  },
+  "explanation": [
+    {
+      "en": "The left hand holds a note while the right hand moves. Keep counting; a held note does not need repeated pressure.",
+      "tr": "Sağ el hareket ederken sol el bir notayı tutar. Saymayı sürdür; tutulan notaya yeniden basınç gerekmez."
+    },
+    {
+      "en": "The left hand plays first, on beat 1. The right hand starts on beat 2, so only one new note starts at a time.",
+      "tr": "Sol el önce, 1. vuruşta çalar. Sağ el 2. vuruşta başlar; böylece her an yalnız bir yeni nota başlar."
+    },
+    {
+      "en": "Left hand: C3 with finger 5, held through bars 1 and 2. G3 with finger 1 in bar 3. C3 again in bar 4.",
+      "tr": "Sol el: 5. parmakla Do3, 1. ve 2. ölçü boyunca tutulur. 3. ölçüde 1. parmakla Sol3. 4. ölçüde yine Do3."
+    },
+    {
+      "en": "Keep the held key down with the weight of the finger alone. Do not press harder while the right hand plays.",
+      "tr": "Tutulan tuşu yalnız parmağın ağırlığıyla aşağıda tut. Sağ el çalarken daha sert bastırma."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four bars, held bass and melody, at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Özgün dört ölçü, tutulan bas ve melodi, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the four bars with the click at ♩=60. Bar 1: left hand C3 on beat 1, held through bar 2; right hand E4 F4 G4 on beats 2–4 (3 4 5). Bar 2: right hand F4 E4 D4 E4 (4 3 2 3) over the held C3. Bar 3: left hand G3 on beat 1, held; right hand D4 E4 F4 (2 3 4). Bar 4: left hand C3 on beat 1, held; right hand E4 on beat 2, then C4 for two beats (3 1).",
+      "tr": "Dört ölçüyü ♩=60'ta klikle çal. 1. ölçü: sol el 1. vuruşta Do3, 2. ölçünün sonuna kadar tutulur; sağ el 2–4. vuruşlarda Mi4 Fa4 Sol4 (3 4 5). 2. ölçü: tutulan Do3'ün üstünde sağ el Fa4 Mi4 Re4 Mi4 (4 3 2 3). 3. ölçü: sol el 1. vuruşta Sol3, tutulur; sağ el Re4 Mi4 Fa4 (2 3 4). 4. ölçü: sol el 1. vuruşta Do3, tutulur; sağ el 2. vuruşta Mi4, sonra iki vuruş Do4 (3 1)."
+    },
+    "sequence": "C3 E4 F4 G4 | F4 E4 D4 E4 | G3 D4 E4 F4 | C3 E4 C4:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The left-hand note kept sounding while the right hand moved.", "tr": "Sağ el hareket ederken sol eldeki nota sürdü." },
+    { "en": "The right hand started on beat 2, after the bass.", "tr": "Sağ el 2. vuruşta, bastan sonra başladı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The right hand comes in with the bass on beat 1. Say \"bass\" on 1 and start the right hand on 2.",
+        "tr": "Sağ el 1. vuruşta basla birlikte giriyor. 1'de \"bas\" de ve sağ eli 2'de başlat."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The bass in bar 3 comes late. Move the left thumb over G3 during beat 4 of bar 2.",
+        "tr": "3. ölçüdeki bas geç geliyor. 2. ölçünün 4. vuruşunda sol başparmağı Sol3'ün üstüne getir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hold C3 and say the right-hand note names in rhythm, then play only bars 1–2 at ♩=45.",
+    "tr": "Do3'ü tut ve sağ elin nota adlarını ritimle söyle, sonra yalnız 1–2. ölçüleri ♩=45'te çal."
+  },
+  "legacy": "R: piano-11",
+  "minutes": 10,
+  "expertPending": true
+}

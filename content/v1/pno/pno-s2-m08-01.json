@@ -1,0 +1,80 @@
+{
+  "id": "pno-s2-m08-01",
+  "title": { "en": "Together: matching pulse", "tr": "Birlikte: ortak vuruş" },
+  "goal": {
+    "en": "Plays the C pentascale with both hands an octave apart, both keys landing together, at ♩=60.",
+    "tr": "Do pentaskalı iki elle bir oktav arayla, iki tuş birlikte inerek ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "Hands first share the same rhythm in separate octaves. This simplifies timing before independence.",
+      "tr": "Eller önce ayrı oktavlarda aynı ritmi paylaşır. Bu, bağımsızlıktan önce zamanlamayı kolaylaştırır."
+    },
+    {
+      "en": "Right hand on C4 to G4, thumb on C4. Left hand on C3 to G3, finger 5 on C3.",
+      "tr": "Sağ el Do4–Sol4'te, başparmak Do4'te. Sol el Do3–Sol3'te, 5. parmak Do3'te."
+    },
+    {
+      "en": "The note names match, but the fingers mirror. Going up, the right hand plays 1-2-3-4-5 and the left hand 5-4-3-2-1.",
+      "tr": "Nota adları aynıdır, parmaklar ise aynalanır. Yukarı çıkarken sağ el 1-2-3-4-5, sol el 5-4-3-2-1 çalar."
+    },
+    {
+      "en": "The microphone hears the two keys of an octave as one note. Aim to land both keys at the same moment.",
+      "tr": "Mikrofon bir oktavın iki tuşunu tek nota olarak duyar. İki tuşu aynı anda indirmeyi hedefle."
+    },
+    {
+      "en": "Release both keys together too, just before the next pair.",
+      "tr": "İki tuşu da birlikte bırak, bir sonraki çiftten hemen önce."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The C pentascale in octaves, up and down twice, with a click at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Oktavlarla Do pentaskalı, iki kez çıkıp inen, klikle ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play the C pentascale up and down with both hands an octave apart, with the click at ♩=60: C D E F | G F E D | C for two beats, then two beats of rest. Right hand from C4, left hand from C3. Play it twice without stopping.",
+      "tr": "Do pentaskalını iki elle bir oktav arayla, ♩=60'ta klikle çıkıp in: Do Re Mi Fa | Sol Fa Mi Re | iki vuruş Do, sonra iki vuruş sus. Sağ el Do4'ten, sol el Do3'ten. Durmadan iki kez çal."
+    },
+    "sequence": "C4 D4 E4 F4 | G4 F4 E4 D4 | C4:h hr | ×2",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1", "P2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both hands started each note together.", "tr": "İki el her notaya birlikte başladı." },
+    { "en": "Both hands released each note together.", "tr": "İki el her notayı birlikte bıraktı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "One hand lands after the other, so each pair sounds like two taps. Play bar 1 at ♩=40 and listen for one sound per beat.",
+        "tr": "Bir el ötekinden sonra iniyor, bu yüzden her çift iki vuruş gibi duyuluyor. 1. ölçüyü ♩=40'ta çal ve her vuruşta tek ses duymaya çalış."
+      }
+    },
+    {
+      "error": { "en": "Different note, one step high.", "tr": "Farklı nota, bir basamak yüksek." },
+      "fix": {
+        "en": "One hand moved ahead of the other. Say the note names aloud as you play; both hands play the same name.",
+        "tr": "Bir el ötekinin önüne geçti. Çalarken nota adlarını sesli söyle; iki el aynı adı çalar."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C, D and E with both hands, then rest one beat. Loop this bar until each pair lands together, then add F and G.",
+    "tr": "İki elle yalnız Do, Re ve Mi çal, sonra bir vuruş sus. Her çift birlikte inene kadar bu ölçüyü döngüle, sonra Fa ve Sol'ü ekle."
+  },
+  "legacy": "R: piano-10",
+  "minutes": 10,
+  "expertPending": true
+}

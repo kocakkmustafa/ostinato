@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import '../../curriculum/v1_lesson.dart';
 import 'practice_marks.dart';
+import 'practice_rhythm.dart';
 import 'practice_score.dart';
 
 /// F2.5 — what one run produced and whether it opens the next lesson
@@ -17,6 +18,7 @@ final class NoteOutcome {
     this.observedMidi,
     this.centsFromExpected,
     this.timingMs,
+    this.offsetMs,
   });
 
   final int eventIndex, bar, pass;
@@ -25,8 +27,14 @@ final class NoteOutcome {
   final int? expectedMidi, observedMidi;
   final double? centsFromExpected;
 
-  /// Only with latency calibration; negative = early.
+  /// Only with latency calibration; negative = early. Rhythm-only lines
+  /// also report it without calibration, against the run's own steady
+  /// offset (`OnsetTimingReference`).
   final double? timingMs;
+
+  /// Rhythm-only lines: attack − grid time in ms as heard (flow mode only),
+  /// kept so the run can be re-judged at the end.
+  final double? offsetMs;
 }
 
 /// Contract §6.3 (tempo rules): which tempo opens the next lesson.
@@ -53,8 +61,10 @@ final class PassCriteria {
     this.minCorrect,
     this.customText,
     this.expertPending = true,
+    this.onTimeMs,
   });
 
+  /// For a rhythm-only line ([onTimeMs] set) this is the on-time ratio.
   final double minAccuracy;
   final double minHeard;
   final TempoGate tempoGate;
@@ -65,6 +75,13 @@ final class PassCriteria {
   final GuitarTextLike? customText;
   final bool expertPending;
 
+  /// Rhythm-only line (A3): an onset is correct within ± this many ms
+  /// (contract §6.2), and [minAccuracy] is the on-time ratio. Null for
+  /// note lines.
+  final int? onTimeMs;
+
+  bool get rhythm => onTimeMs != null;
+
   static const Map<int, double> levelAccuracy = {
     1: .80,
     2: .85,
@@ -72,20 +89,28 @@ final class PassCriteria {
     4: .90,
   };
 
-  factory PassCriteria.forLesson(V1Lesson lesson) => PassCriteria(
-    minAccuracy: levelAccuracy[lesson.level] ?? .8,
-    tempoGate: lesson.practice.measurement.contains('M!')
-        ? TempoGate.targetOnly
-        : TempoGate.openingOpensNext,
-    minCorrect: lesson.practice.pass.minCorrect,
-    customText: lesson.practice.pass.levelDefault
-        ? null
-        : GuitarTextLike(
-            lesson.practice.pass.text!.en,
-            lesson.practice.pass.text!.tr,
-          ),
-    expertPending: lesson.expertPending,
-  );
+  /// [score]: the line as the practice screen runs it; a rhythm-only line
+  /// gets the level's timing criteria (§6.2) instead of note accuracy.
+  factory PassCriteria.forLesson(V1Lesson lesson, {PracticeScore? score}) {
+    final rhythm = score != null && score.isRhythmOnly;
+    return PassCriteria(
+      minAccuracy: rhythm
+          ? RhythmTiming.onTimeRatio[lesson.level] ?? .75
+          : levelAccuracy[lesson.level] ?? .8,
+      onTimeMs: rhythm ? RhythmTiming.onTimeWindowMs[lesson.level] ?? 90 : null,
+      tempoGate: lesson.practice.measurement.contains('M!')
+          ? TempoGate.targetOnly
+          : TempoGate.openingOpensNext,
+      minCorrect: lesson.practice.pass.minCorrect,
+      customText: lesson.practice.pass.levelDefault
+          ? null
+          : GuitarTextLike(
+              lesson.practice.pass.text!.en,
+              lesson.practice.pass.text!.tr,
+            ),
+      expertPending: lesson.expertPending,
+    );
+  }
 }
 
 /// EN/TR pair without a Flutter dependency.
@@ -94,7 +119,8 @@ final class GuitarTextLike {
   final String en, tr;
 }
 
-enum GateCheckKind { accuracy, heard, tempo, minCorrect }
+/// [onTime] replaces [accuracy] on a rhythm-only line.
+enum GateCheckKind { accuracy, onTime, heard, tempo, minCorrect }
 
 final class GateCheck {
   const GateCheck(this.kind, this.ok, this.value, this.threshold);
@@ -213,7 +239,7 @@ final class PracticeRunSummary {
     final heard = total == 0 ? 0.0 : (c + d) / total;
     final checks = <GateCheck>[
       GateCheck(
-        GateCheckKind.accuracy,
+        criteria.rhythm ? GateCheckKind.onTime : GateCheckKind.accuracy,
         c + d > 0 && accuracy >= criteria.minAccuracy - 1e-9,
         accuracy,
         criteria.minAccuracy,

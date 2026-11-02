@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/app_message_ids.dart';
 import 'package:ostinato/app/app_translation_catalog.dart';
+import 'package:ostinato/app/practice/loop/practice_rhythm_copy.dart';
 import 'package:ostinato/app/practice/loop/v1_course_copy.dart';
 import 'package:ostinato/app/practice/loop/tempo_ladder_copy.dart';
 import 'package:ostinato/app/practice/own_recording/own_recording_copy.dart';
@@ -23,6 +24,7 @@ void main() {
     'content/ui/own-recording.json': OwnRecordingCopy.all,
     'content/ui/v1-course.json': V1CourseCopy.all,
     'content/ui/tempo-ladder.json': TempoLadderCopy.all,
+    'content/ui/practice-rhythm.json': RhythmCopy.all,
   };
 
   for (final entry in catalogs.entries) {
@@ -67,6 +69,7 @@ void main() {
         ...OwnRecordingCopy.all,
         ...V1CourseCopy.all,
         ...TempoLadderCopy.all,
+        ...RhythmCopy.all,
       ]) {
         final id = appMessageIds[pair];
         expect(id, isNotNull, reason: pair.$1);

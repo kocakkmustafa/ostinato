@@ -1,0 +1,116 @@
+{
+  "id": "pno-s2-m05-04",
+  "title": {
+    "en": "D pentascale",
+    "tr": "Re pentaskal"
+  },
+  "goal": {
+    "en": "Plays the D major pentascale hands separately at ♩=70, with F♯ under finger 3 in both hands.",
+    "tr": "Re majör pentaskalı eller ayrı ♩=70'te çalar; Fa♯ iki elde de 3. parmağın altındadır."
+  },
+  "explanation": [
+    {
+      "en": "The major pentascale pattern is whole step, whole step, half step, whole step. The half step lies between notes 3 and 4.",
+      "tr": "Majör pentaskal kalıbı tam, tam, yarım, tam'dır. Yarım ses 3. ve 4. notalar arasındadır."
+    },
+    {
+      "en": "From D, the pattern needs F♯. E to F is only a half step; F♯ makes the whole step, and F♯–G is the half step.",
+      "tr": "Re'den başlayınca kalıp Fa♯ ister. Mi'den Fa'ya yalnız yarım ses var; Fa♯ tam sesi kurar, Fa♯–Sol da yarım ses olur."
+    },
+    {
+      "en": "Right hand: D4 E4 F♯4 G4 A4 with fingers 1-2-3-4-5. Left hand: D3 E3 F♯3 G3 A3 with fingers 5-4-3-2-1. In both hands finger 3 plays F♯.",
+      "tr": "Sağ el: Re4 Mi4 Fa♯4 Sol4 La4, parmaklar 1-2-3-4-5. Sol el: Re3 Mi3 Fa♯3 Sol3 La3, parmaklar 5-4-3-2-1. İki elde de Fa♯'yi 3. parmak çalar."
+    },
+    {
+      "en": "F♯ is the black key just to the right of F: the first key of the group of three.",
+      "tr": "Fa♯, Fa'nın hemen sağındaki siyah tuştur: üçlü grubun ilk tuşu."
+    },
+    {
+      "en": "When the position has a black key, move the whole hand a little forward into the keys so that no finger has to reach.",
+      "tr": "Konumda siyah tuş varsa, hiçbir parmak uzanmak zorunda kalmasın diye bütün eli biraz tuşların içine doğru ilerlet."
+    },
+    {
+      "en": "Hands separate: play the right hand first, then the left. In the left hand the fingers go 5-4-3-2-1 on the way up.",
+      "tr": "Eller ayrı: önce sağ el, sonra sol el çalar. Sol elde yukarı çıkarken parmaklar 5-4-3-2-1 sırasıyla gelir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The D pentascale up and down, right hand then left hand, with a click, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "Re pentaskalı çıkış ve iniş, önce sağ el sonra sol el, klikle, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "With the click at ♩=70, play the right-hand line, then the left-hand line. Use the half rest to place the left hand.",
+      "tr": "Klikle ♩=70'te önce sağ el dizisini, sonra sol el dizisini çal. Sol eli ikilik susta yerleştir."
+    },
+    "sequence": "4/4: D4 E4 F♯4 G4 | A4 G4 F♯4 E4 | D4:h hr | D3 E3 F♯3 G3 | A3 G3 F♯3 E3 | D3:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Finger 3 played F♯ every time, going up and coming down.",
+      "tr": "3. parmak çıkarken de inerken de her seferinde Fa♯ çaldı."
+    },
+    {
+      "en": "Each finger stayed over its own key.",
+      "tr": "Her parmak kendi tuşunun üstünde kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "You played F instead of F♯. Finger 3 sits on the black key; keep it there on the way down too.",
+        "tr": "Fa♯ yerine Fa çaldın. 3. parmak siyah tuşun üstünde durur; inişte de orada kalsın."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Finger 3 hesitates before the black key. Move the hand forward before you start, so that F♯ is already under the finger.",
+        "tr": "3. parmak siyah tuştan önce duraksıyor. Başlamadan eli ileri al ki Fa♯ zaten parmağın altında olsun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "In each hand, play only E F♯ G F♯ E at ♩=50, then add D and A.",
+    "tr": "Her elde ♩=50'de yalnız Mi Fa♯ Sol Fa♯ Mi çal, sonra Re ve La'yı ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

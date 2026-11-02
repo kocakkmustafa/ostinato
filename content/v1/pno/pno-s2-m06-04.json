@@ -1,0 +1,117 @@
+{
+  "id": "pno-s2-m06-04",
+  "title": {
+    "en": "G major",
+    "tr": "Sol majör"
+  },
+  "goal": {
+    "en": "Plays the G major scale one octave, hands separate, with F♯ in place, at ♩=60.",
+    "tr": "Sol majör gamı bir oktav, eller ayrı, Fa♯ notasını yerinde çalarak ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "G major has one sharp: F♯. Every F becomes the black key to its right.",
+      "tr": "Sol majörün bir diyezi vardır: Fa♯. Her Fa, sağındaki siyah tuşa dönüşür."
+    },
+    {
+      "en": "The fingering is the same as in C major. Right hand G4 to G5: 1-2-3-1-2-3-4-5. The thumb passes under to C5 and finger 4 plays F♯5.",
+      "tr": "Parmaklar Do majördekiyle aynıdır. Sağ el Sol4'ten Sol5'e: 1-2-3-1-2-3-4-5. Başparmak altından Do5'e geçer, Fa♯5'i 4. parmak çalar."
+    },
+    {
+      "en": "Left hand G3 to G4: 5-4-3-2-1-3-2-1. Finger 3 crosses over to E4 and finger 2 plays F♯4.",
+      "tr": "Sol el Sol3'ten Sol4'e: 5-4-3-2-1-3-2-1. 3. parmak üstünden Mi4'e geçer, Fa♯4'ü 2. parmak çalar."
+    },
+    {
+      "en": "Play the black key a little further in, toward the fallboard. Keep the hand in one line; do not jump in and out.",
+      "tr": "Siyah tuşu biraz daha içeriden, kapağa doğru çal. Eli tek çizgide tut; içeri dışarı sıçrama."
+    },
+    {
+      "en": "Say the key before you start: 'G major, F sharp'.",
+      "tr": "Başlamadan tonu söyle: 'Sol majör, Fa diyez'."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "G4 to G5 and back, an empty bar, then G3 to G4 and back, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.",
+      "tr": "Klikle dörtlüklerle Sol4'ten Sol5'e ve geri, bir boş ölçü, sonra Sol3'ten Sol4'e ve geri, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the right hand from G4 to G5 and back. Use the empty bar to move to the left hand, then play G3 to G4 and back. One note per beat at ♩=60.",
+      "tr": "Sağ elle Sol4'ten Sol5'e çık ve geri in. Boş ölçüde sol ele geç, sonra Sol3'ten Sol4'e çık ve geri in. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "G4 A4 B4 C5 | D5 E5 F♯5 G5 | F♯5 E5 D5 C5 | B4 A4 G4:h | wr | G3 A3 B3 C4 | D4 E4 F♯4 G4 | F♯4 E4 D4 C4 | B3 A3 G3:h",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I played F♯ every time, going up and coming down.",
+      "tr": "Fa♯ notasını her seferinde, çıkarken ve inerken çaldım."
+    },
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone low.",
+        "tr": "Farklı nota, yarım ses alçak."
+      },
+      "fix": {
+        "en": "You played F instead of F♯. Find the black key with your eyes before the scale reaches it.",
+        "tr": "Fa♯ yerine Fa çaldın. Gam oraya varmadan siyah tuşu gözünle bul."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The right-hand crossing to C5 is late. Loop bars 1–2 at ♩=50.",
+        "tr": "Sağ eldeki Do5 geçişi geç. 1–2. ölçüleri ♩=50'de döngüle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each hand alone at ♩=50, only up the scale, then add the way down.",
+    "tr": "Her eli ayrı ayrı ♩=50'de, yalnız gamın çıkışını çal, sonra inişi ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,78 @@
+{
+  "id": "pno-s3-m13-11",
+  "title": { "en": "An unseen lead sheet", "tr": "Görülmemiş lead sheet" },
+  "goal": {
+    "en": "Reads a new eight-bar lead sheet at sight and plays the melody with the chord roots once at ♩=66, with only one new note starting at a time.",
+    "tr": "Yeni bir sekiz ölçülük lead sheet'i ilk görüşte okur ve melodiyi akor kökleriyle, her an yalnız bir yeni nota başlayarak ♩=66'da bir kez çalar."
+  },
+  "explanation": [
+    {
+      "en": "This lesson gives you a new eight-bar lead sheet each time. It is not played before your try.",
+      "tr": "Bu ders her seferinde sana yeni bir sekiz ölçülük lead sheet verir. Lead sheet denemenden önce çalınmaz."
+    },
+    {
+      "en": "The lead sheet is in C, G or F, in 4/4 or 3/4. The chords come from this module: major and minor triads, slash chords and 7th chords.",
+      "tr": "Lead sheet Do, Sol ya da Fa'da, 4/4 ya da 3/4'tedir. Akorlar bu modülden gelir: majör ve minör üçlüler, bölü akorlar ve 7'li akorlar."
+    },
+    {
+      "en": "The left hand plays only the bass: the root, or the letter after the slash. The root and the melody never start together.",
+      "tr": "Sol el yalnız bası çalar: kökü ya da bölüden sonraki harfi. Kök ve melodi hiçbir zaman birlikte başlamaz."
+    },
+    {
+      "en": "Use the routine: scan for 30 seconds, name the key, say the chord symbols in order, find the first root and the first melody note, count one bar in, and play once without stopping.",
+      "tr": "Rutini kullan: 30 saniye göz at, tonu söyle, akor sembollerini sırayla söyle, ilk kökü ve ilk melodi notasını bul, bir ölçü say ve durmadan bir kez çal."
+    },
+    {
+      "en": "If you lose your place, keep the left hand going on the next root and join the melody at the next bar.",
+      "tr": "Yerini kaybedersen sol eli sonraki kökte sürdür ve melodiye bir sonraki ölçüde katıl."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Click at ♩=66 with a one-bar count-in. The new lead sheet is played by piano synthesis only after your try.",
+      "tr": "Bir ölçü girişli ♩=66 klik. Yeni lead sheet yalnız denemenden sonra piyano sentezinde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Scan the new lead sheet for 30 seconds and say its chord symbols aloud, then play all eight bars once with the click at ♩=66: melody in the right hand, bass notes in the left hand.",
+      "tr": "Yeni lead sheet'e 30 saniye göz at ve akor sembollerini sesli söyle, sonra sekiz ölçünün tamamını klikle ♩=66'da bir kez çal: melodi sağ elde, bas notaları sol elde."
+    },
+    "tempo": { "open": 66, "target": 66 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I said all the chord symbols before I played.", "tr": "Çalmadan önce bütün akor sembollerini söyledim." },
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "The left hand played the letter after the slash in every slash chord.", "tr": "Sol el her bölü akorda bölüden sonraki harfi çaldı." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "A flat from the key signature was missed. Name the key during the scan and find every B in F major.",
+        "tr": "Donanımdaki bir bemol gözden kaçtı. Tarama sırasında tonu söyle ve Fa majörde her Si'yi bul."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The left hand searched for the root on beat 1. Read the next chord symbol one bar ahead.",
+        "tr": "Sol el kökü 1. vuruşta aradı. Sonraki akor sembolünü bir ölçü önceden oku."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read new lead sheets at ♩=56 with the left hand only, saying the symbols, before adding the melody.",
+    "tr": "Melodiyi eklemeden önce yeni lead sheet'leri ♩=56'da yalnız sol elle, sembolleri söyleyerek oku."
+  },
+  "minutes": 12,
+  "expertPending": true
+}
