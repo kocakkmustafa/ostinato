@@ -67,6 +67,23 @@ void main() {
     }
   });
 
+  test('ear training is not shipped: not bundled, no screen loads it', () {
+    // Build 9: ear training is "coming soon" like voice and piano. Its
+    // paywall constant exists, but its lessons are not packaged.
+    expect(
+      File('pubspec.yaml').readAsStringSync(),
+      isNot(contains('content/v1/ear')),
+    );
+    for (final f in Directory('lib').listSync(recursive: true)) {
+      if (f is! File || !f.path.endsWith('.dart')) continue;
+      expect(
+        f.readAsStringSync(),
+        isNot(contains('content/v1/ear')),
+        reason: f.path,
+      );
+    }
+  });
+
   group('real screens', () {
     late ContentRepository repo;
     late CueTextResolver cue;
