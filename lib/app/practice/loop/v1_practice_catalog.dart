@@ -26,6 +26,13 @@ final class V1PracticeCatalog {
     return i < 0 || i + 1 >= lessons.length ? null : lessons[i + 1];
   }
 
+  /// Technique tokens the single-note judge cannot carry (guide §3.3):
+  /// double stops `C3/E4`, hammer-on `h`, pull-off `p`, slide ` / `, bend
+  /// `b`/`pb`, release `r`, vibrato `vib`.
+  static final RegExp technique = RegExp(
+    r'(?:^|\s)(?:h|p|b|pb|r|vib|/)(?=\s|$)|[A-G][#b♯♭]?\d/[A-G]',
+  );
+
   static bool isPracticable(V1Lesson l) {
     final seq = l.practice.sequence;
     if (l.course != 'gtr' || seq == null) return false;
@@ -34,6 +41,8 @@ final class V1PracticeCatalog {
     // Chord lessons need the A4 chord engine; their sequences are chord
     // charts, not single notes.
     if (l.practice.engineSteps.contains('A4')) return false;
+    // Technique notation (`h` would otherwise parse as a half-note onset).
+    if (technique.hasMatch(seq)) return false;
     try {
       return PracticeScore.parse(seq).hasPitches;
     } on FormatException {

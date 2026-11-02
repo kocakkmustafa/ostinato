@@ -17,7 +17,7 @@ import '../tuner/tuner_screen.dart';
 import '../account_connection.dart';
 import '../curriculum/v1_lesson.dart';
 import '../practice/loop/practice_progress_store.dart';
-import '../practice/loop/v1_practice_catalog.dart';
+import '../practice/loop/v1_course_catalog.dart';
 import '../ui_copy.dart';
 import 'course_screen.dart';
 import 'instrument_screen.dart';
@@ -484,13 +484,15 @@ class _MeasuredNextLineState extends State<_MeasuredNextLine> {
 
   Future<V1Lesson?> _load(String? accountId) async {
     try {
-      final catalog = await V1PracticeCatalog.load();
+      final catalog = await V1CourseCatalog.load();
       final records = await V1PracticeProgressStore(
         accountUserId: accountId,
       ).load();
-      for (final l in catalog.lessons) {
-        if (!(records[l.id]?.passed ?? false)) return l;
-      }
+      final checks = await V1LessonCheckStore(
+        accountUserId: accountId,
+      ).load();
+      // Same pick as "Start next lesson": first open lesson not done.
+      return V1CourseState(catalog, records, checks).next?.lesson;
     } on Object {
       // Fall back to the plain line.
     }

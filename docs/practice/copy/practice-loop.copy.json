@@ -294,24 +294,12 @@
    "tr": "Yeniden dene"
   },
   {
-   "en": "Measured practice",
-   "tr": "Ölçülü pratik"
-  },
-  {
-   "en": "Play with the click and the moving TAB. Each note gets one of three marks: correct, different note or couldn’t hear. Passing the gate opens the next lesson.",
-   "tr": "Klik ve akan tab ile çal. Her nota üç işaretten birini alır: doğru, farklı nota ya da duyamadım. Geçiş kapısını geçmek sıradaki dersi açar."
-  },
-  {
    "en": "Progress unknown",
    "tr": "İlerleme bilinmiyor"
   },
   {
    "en": "PASSED · ♩={v0}",
    "tr": "GEÇİLDİ · ♩={v0}"
-  },
-  {
-   "en": "LOCKED · pass the lesson before",
-   "tr": "KİLİTLİ · önceki dersi geç"
   },
   {
    "en": "PLAYED ×{v0}",
