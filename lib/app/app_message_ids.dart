@@ -2823,6 +2823,7 @@ const appMessageIds = <(String, String), String>{
   ("Play 5/0–5/2–5/3–5/2 and name A B C B before each sound.", "5/0–5/2–5/3–5/2 çal ve her sesten önce La Si Do Si adlarını söyle."): "543f2c43758f7bc4",
   ("Open G3 in half and whole notes for four bars with a click, at ♩=60 and at ♩=45.", "Klikle dört ölçü ikilik ve birlik açık Sol3, ♩=60 ve ♩=45."): "544e68129cbe4586",
   ("Both hands now play the same scale at the same time, an octave apart. The microphone hears the two hands as one note.", "İki el artık aynı gamı aynı anda, bir oktav arayla çalar. Mikrofon iki eli tek nota olarak duyar."): "544ff3f1ea9acf74",
+  ("Your lesson results, streak and weekly goal stay on this device; this release does not sync them to an account. Your account is used for your membership.", "Ders sonuçların, serin ve haftalık hedefin bu cihazda kalır; bu sürüm bunları hesaba eşitlemez. Hesabın üyeliğin için kullanılır."): "545f6c0a16d5c54c",
   ("Bars 7–8 stayed in the C3 position. Move the whole hand down to C2 to G2.", "7–8. ölçüler Do3 konumunda kalmış. Bütün eli Do2–Sol2'ye indir."): "54639a44d5f9fd5f",
   ("Final performance I: accompaniment", "Bitirme I: eşlik"): "546ef371279e4305",
   ("Beats 1, 2 and 3: E5 palm muted. Beat 4: lift the palm and strike E5 open with a slightly bigger stroke.", "1., 2. ve 3. vuruş: E5 palm mute ile. 4. vuruş: avucu kaldır ve E5'i biraz daha büyük bir hareketle açık vur."): "546fc1cd9b6f0454",

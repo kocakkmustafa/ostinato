@@ -8439,6 +8439,7 @@
     "f62205b8e7993e50": "Level {v0} is free · later levels need a membership",
     "1d68a089af11083e": "Membership",
     "6946560ebac6e08d": "To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato membership.",
-    "8c35a3bffb5f6829": "Sign in or create an account first: your membership is tied to your account, so it works on every device where you sign in."
+    "8c35a3bffb5f6829": "Sign in or create an account first: your membership is tied to your account, so it works on every device where you sign in.",
+    "545f6c0a16d5c54c": "Your lesson results, streak and weekly goal stay on this device; this release does not sync them to an account. Your account is used for your membership."
   }
 }

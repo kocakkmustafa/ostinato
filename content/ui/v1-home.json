@@ -72,6 +72,11 @@
       "tr": "Ders sonuçların, serin ve haftalık hedefin bu cihazda tutulur. Motion hesabına giriş yapıp onay verirsen hesabına eşitlenir ve başka cihazda devam edebilirsin."
     },
     {
+      "id": "progressBodyLocal",
+      "en": "Your lesson results, streak and weekly goal stay on this device; this release does not sync them to an account. Your account is used for your membership.",
+      "tr": "Ders sonuçların, serin ve haftalık hedefin bu cihazda kalır; bu sürüm bunları hesaba eşitlemez. Hesabın üyeliğin için kullanılır."
+    },
+    {
       "id": "homeSubtitle",
       "en": "Measured practice. Tuner. Weekly goal.",
       "tr": "Ölçülü pratik. Akort. Haftalık hedef."

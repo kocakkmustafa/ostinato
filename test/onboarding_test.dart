@@ -132,6 +132,11 @@ void main() {
         await settle(tester);
         expect(find.text(t(V1HomeCopy.cameraBody)), findsOneWidget);
         expect(find.text(t(V1HomeCopy.micBody)), findsOneWidget);
+        // Store review 2026-11-02 (screen 03): sync is closed in this
+        // release, so the card must not promise account sync.
+        expect(ostinatoProgressSyncAvailable, isFalse);
+        expect(find.text(t(V1HomeCopy.progressBodyLocal)), findsOneWidget);
+        expect(find.text(t(V1HomeCopy.progressBody)), findsNothing);
         expect(
           find.textContaining(
             language == 'tr' ? 'kamera izni istemez' : 'does not ask for camera',
