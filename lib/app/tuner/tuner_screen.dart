@@ -7,7 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../account_connection.dart';
 import '../app_locale.dart';
 import '../app_theme.dart';
-import '../audio/practice_audio_root.dart';
+import '../audio/mic_permission_gate.dart';
 import '../design/ostinato_theme.dart';
 import '../design/widgets.dart';
 import '../device_accuracy_copy.dart';
@@ -77,8 +77,9 @@ class _TunerScreenState extends State<TunerScreen> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted || _controller.isActive || !_controller.canStart) return;
         unawaited(
-          _controller.start(
-            captureAction: PracticeAudioCaptureScope.actionFor(context),
+          MicPermissionGate.startAfterPermission(
+            context,
+            (action) => _controller.start(captureAction: action),
           ),
         );
       });
@@ -146,9 +147,10 @@ class _TunerScreenState extends State<TunerScreen> {
         _t(TunerCopy.octaveUnclear),
         _t(TunerCopy.octaveUnclearHint),
       ),
-      TunerReadoutKind.chooseString => _controller.mode == TunerMode.manual
-          ? (_t(TunerCopy.chooseString), _t(TunerCopy.farFromSelected))
-          : (_t(TunerCopy.chooseString), _t(TunerCopy.chooseStringHint)),
+      TunerReadoutKind.chooseString =>
+        _controller.mode == TunerMode.manual
+            ? (_t(TunerCopy.chooseString), _t(TunerCopy.farFromSelected))
+            : (_t(TunerCopy.chooseString), _t(TunerCopy.chooseStringHint)),
       TunerReadoutKind.tooHigh => (
         _t(TunerCopy.tooHigh),
         _t(TunerCopy.tooHighHint),
@@ -238,7 +240,11 @@ class _TunerScreenState extends State<TunerScreen> {
                     ),
                     Text(
                       r.showsNumber
-                          ? '${r.cents! >= 0.5 ? '+' : r.cents! <= -0.5 ? '−' : ''}'
+                          ? '${r.cents! >= 0.5
+                                    ? '+'
+                                    : r.cents! <= -0.5
+                                    ? '−'
+                                    : ''}'
                                 '${appInteger(context, r.cents!.abs().round())}'
                           : '—',
                       key: const Key('tuner-cents'),
@@ -335,12 +341,12 @@ class _TunerScreenState extends State<TunerScreen> {
                         ? () => unawaited(c.stop())
                         : !c.canStart
                         ? null
-                        : () {
-                            final action = PracticeAudioCaptureScope.actionFor(
+                        : () => unawaited(
+                            MicPermissionGate.startAfterPermission(
                               context,
-                            );
-                            unawaited(c.start(captureAction: action));
-                          },
+                              (action) => c.start(captureAction: action),
+                            ),
+                          ),
                     icon: Icon(c.isActive ? Icons.stop : Icons.mic_none),
                     label: Text(
                       _t(c.isActive ? TunerCopy.stop : TunerCopy.start),
@@ -530,7 +536,8 @@ class _NeedlePainter extends CustomPainter {
     );
     final value = cents;
     if (value == null) return;
-    final angle = -math.pi / 2 + sweep / 2 * (value.clamp(-range, range) / range);
+    final angle =
+        -math.pi / 2 + sweep / 2 * (value.clamp(-range, range) / range);
     canvas.drawLine(
       centre,
       centre + Offset(math.cos(angle), math.sin(angle)) * (radius - 4),

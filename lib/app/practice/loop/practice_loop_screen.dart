@@ -287,7 +287,12 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
 
   void _start() {
     _ranOnce = true;
-    unawaited(_c.start(captureAction: practiceCaptureActionFor(context)));
+    unawaited(
+      startPracticeCapture(
+        context,
+        (action) => _c.start(captureAction: action),
+      ),
+    );
   }
 
   @override
