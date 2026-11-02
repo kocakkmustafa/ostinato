@@ -487,9 +487,9 @@ void main() {
       expect(find.text('Accuracy'), findsNothing);
       expect(
         tester.widget<Text>(find.byKey(const Key('result-accuracy'))).data,
-        '%57',
+        '57%',
       );
-      expect(find.text('On time ≥ %75 (within ±90 ms)'), findsOneWidget);
+      expect(find.text('On time ≥ 75% (within ±90 ms)'), findsOneWidget);
       expect(find.textContaining('Median timing deviation'), findsOneWidget);
       expect(find.textContaining('beats I could hear'), findsOneWidget);
       expect(find.byKey(const Key('result-relative-timing')), findsOneWidget);
@@ -621,7 +621,7 @@ void main() {
       expect(find.byType(PracticeResultScreen), findsOneWidget);
       expect(find.text('Passed at the opening tempo'), findsNothing);
       expect(find.text('Completed at the target tempo'), findsOneWidget);
-      expect(find.text('On time ≥ %75 (within ±90 ms)'), findsOneWidget);
+      expect(find.text('On time ≥ 75% (within ±90 ms)'), findsOneWidget);
       expect(find.text('The next lesson is open.'), findsOneWidget);
       final record = (await progress.load())['gtr-s1-m03-01']!;
       expect(record.passed, isTrue);

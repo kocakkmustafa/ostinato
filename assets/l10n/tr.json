@@ -2228,7 +2228,6 @@
     "7a2477ac8d998e1b": "Vuruş {v0}",
     "90e657580e74e233": "Metronom hazır",
     "eef59fdf837b60bb": "Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.",
-    "5875c6bfc47fc5e3": "Tempo ♩={v0} · hedef {v2} temposunun %{v1}",
     "8d3ba744cbbe04e5": "Daha yavaş",
     "d585f811814b6ee1": "Daha hızlı",
     "43fadabe8baf4bee": "Beni bekle: Açık",
@@ -2266,8 +2265,6 @@
     "e95988caccee0130": "Doğruluk yalnız karar verebildiğim notaları sayar; \"duyamadım\" ayrı raporlanır.",
     "9d90cd87ab628359": "Bu sonuç cihaza kaydedilemedi.",
     "3caf2aa9ac6ebeac": "Duyulamadı",
-    "6feb932a1a066fa1": "Doğruluk ≥ %{v0}",
-    "b3bcb97568674f01": "Duyulma ≥ %{v0}",
     "08e525ea97429c36": "En az {v0} doğru",
     "bdeecf247e6de479": "Pratik turu — geçiş tam bir turda ölçülür",
     "24776b72bbc4006f": "Puanın değil, mikrofonun takıldı. Kurulumu kontrol edip tekrar deneyelim.",
@@ -8412,7 +8409,6 @@
     "c07dd0139205a762": "Alberti kalıbı aceleye geliyor. Başparmak notalarını hafif tut ve her vuruştaki sekizlikleri say.",
     "187d877bbe6a9deb": "{v0} ms · göreli",
     "3a50750f75bbec90": "Zamanında",
-    "9c1759e9a0fbf1b7": "Zamanında ≥ %{v0} (±{v1} ms içinde)",
     "af00508cd74bb410": "Sıradaki",
     "b83b59297cbade08": "Erken ya da geç",
     "c19affc136daedd5": "Zamanında oranı yalnız duyabildiğim vuruşları sayar; \"duyamadım\" ayrı raporlanır.",
@@ -8447,6 +8443,10 @@
     "a51b8da5ff450285": "Yeni tel esner: birkaç dakika sonra yeniden kontrol et.",
     "649ba097da874350": "Ses kursu rahat ve sağlıklı bir başlangıç, perde eşleştirme, gamlar ve menzil, aralıklar, ritim ve deşifre ile ilk şarkıları kapsayacak.",
     "c722e9fcc9046c7d": "Piyano kursu oturuş ve el şekli, iki anahtarda okuma, ritim, gamlar ve üçlüler, iki elle çalma, eşlik kalıpları ve ilk eserleri kapsayacak.",
-    "96717d21ef2d504a": "İsteğe bağlı · tek gitar teli · sessiz oda. Üst üste binen sesler inandırıcı ama yanıltıcı bir nota gösterebilir. Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir. Akort veya çalma başarısına karar vermez."
+    "96717d21ef2d504a": "İsteğe bağlı · tek gitar teli · sessiz oda. Üst üste binen sesler inandırıcı ama yanıltıcı bir nota gösterebilir. Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir. Akort veya çalma başarısına karar vermez.",
+    "e4308bfcfd9feec7": "Doğruluk ≥ {v0}",
+    "7bcc4b2762e4f409": "Duyulma ≥ {v0}",
+    "1f03be7a9155e8b5": "Zamanında ≥ {v0} (±{v1} ms içinde)",
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · hedef {v2} temposunun {v1}"
   }
 }

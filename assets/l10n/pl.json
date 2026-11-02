@@ -2242,7 +2242,6 @@
     "7a2477ac8d998e1b": "Miara {v0}",
     "90e657580e74e233": "Metronom gotowy",
     "eef59fdf837b60bb": "Przerwij przy bólu, drętwieniu lub mrowieniu. Dźwięk pozostaje w pamięci tego urządzenia; nic nie jest nagrywane ani wysyłane.",
-    "5875c6bfc47fc5e3": "Tempo ♩={v0} · {v1} % tempa docelowego {v2}",
     "8d3ba744cbbe04e5": "Wolniej",
     "d585f811814b6ee1": "Szybciej",
     "43fadabe8baf4bee": "Poczekaj na mnie: włączone",
@@ -2280,8 +2279,6 @@
     "e95988caccee0130": "Dokładność liczy tylko dźwięki, które dało się rozstrzygnąć; „niesłyszane” są podawane osobno.",
     "9d90cd87ab628359": "Nie udało się zapisać tego wyniku na urządzeniu.",
     "3caf2aa9ac6ebeac": "Niesłyszane",
-    "6feb932a1a066fa1": "Dokładność ≥ %{v0}",
-    "b3bcb97568674f01": "Usłyszane ≥ %{v0}",
     "08e525ea97429c36": "Co najmniej {v0} poprawnych",
     "bdeecf247e6de479": "Runda ćwiczebna — próg jest mierzony w pełnym przejściu",
     "24776b72bbc4006f": "To nie Twój wynik — mikrofon się zawiesił. Sprawdźmy ustawienia i spróbujmy jeszcze raz.",
@@ -8426,7 +8423,6 @@
     "c07dd0139205a762": "Wzór Albertiego przyspiesza. Trzymaj dźwięki kciuka lekko i licz ósemki w każdej mierze.",
     "187d877bbe6a9deb": "{v0} ms · względnie",
     "3a50750f75bbec90": "Na czas",
-    "9c1759e9a0fbf1b7": "Na czas ≥ %{v0} (w granicach ±{v1} ms)",
     "af00508cd74bb410": "Następna",
     "b83b59297cbade08": "Za wcześnie lub za późno",
     "c19affc136daedd5": "„Na czas” liczy tylko uderzenia, które dało się usłyszeć; „niesłyszane” są podawane osobno.",
@@ -8461,6 +8457,10 @@
     "a51b8da5ff450285": "Nowa struna się rozciąga: sprawdź ją ponownie po kilku minutach.",
     "649ba097da874350": "Kurs śpiewu obejmie wygodny i zdrowy start, dopasowywanie wysokości dźwięku, gamy i skalę głosu, interwały, rytm i śpiew a vista oraz pierwsze piosenki.",
     "c722e9fcc9046c7d": "Kurs gry na fortepianie obejmie sposób siedzenia i ułożenie dłoni, czytanie w obu kluczach, rytm, gamy i trójdźwięki, grę obiema rękami, wzory akompaniamentu oraz pierwsze utwory.",
-    "96717d21ef2d504a": "Opcjonalnie · jedna struna gitary · ciche pomieszczenie. Nakładające się dźwięki mogą dawać wiarygodną z pozoru, ale mylącą nutę. Dokładność zależy od mikrofonu telefonu i pomieszczenia; zmierzone wyniki mogą się różnić. To nie rozstrzyga stroju ani powodzenia gry."
+    "96717d21ef2d504a": "Opcjonalnie · jedna struna gitary · ciche pomieszczenie. Nakładające się dźwięki mogą dawać wiarygodną z pozoru, ale mylącą nutę. Dokładność zależy od mikrofonu telefonu i pomieszczenia; zmierzone wyniki mogą się różnić. To nie rozstrzyga stroju ani powodzenia gry.",
+    "e4308bfcfd9feec7": "Dokładność ≥ {v0}",
+    "7bcc4b2762e4f409": "Usłyszane ≥ {v0}",
+    "1f03be7a9155e8b5": "Na czas ≥ {v0} (w granicach ±{v1} ms)",
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} tempa docelowego {v2}"
   }
 }

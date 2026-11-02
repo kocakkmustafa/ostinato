@@ -2228,7 +2228,6 @@
     "7a2477ac8d998e1b": "Beat {v0}",
     "90e657580e74e233": "Metronome ready",
     "eef59fdf837b60bb": "Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.",
-    "5875c6bfc47fc5e3": "Tempo ♩={v0} · {v1} % of the target {v2}",
     "8d3ba744cbbe04e5": "Slower",
     "d585f811814b6ee1": "Faster",
     "43fadabe8baf4bee": "Wait for me: On",
@@ -2266,8 +2265,6 @@
     "e95988caccee0130": "Accuracy counts only the notes I could decide; \"couldn't hear\" is reported apart.",
     "9d90cd87ab628359": "This result could not be saved on the device.",
     "3caf2aa9ac6ebeac": "Couldn't hear",
-    "6feb932a1a066fa1": "Accuracy ≥ %{v0}",
-    "b3bcb97568674f01": "Heard ≥ %{v0}",
     "08e525ea97429c36": "At least {v0} correct",
     "bdeecf247e6de479": "Practice round — the gate is measured on a full run",
     "24776b72bbc4006f": "Not your score — the microphone got stuck. Let's check the setup and try again.",
@@ -8412,7 +8409,6 @@
     "c07dd0139205a762": "The Alberti pattern rushes. Keep the thumb notes light and count the eighths in each beat.",
     "187d877bbe6a9deb": "{v0} ms · relative",
     "3a50750f75bbec90": "On time",
-    "9c1759e9a0fbf1b7": "On time ≥ %{v0} (within ±{v1} ms)",
     "af00508cd74bb410": "Next",
     "b83b59297cbade08": "Early or late",
     "c19affc136daedd5": "On time counts only the beats I could hear; \"couldn't hear\" is reported apart.",
@@ -8447,6 +8443,10 @@
     "a51b8da5ff450285": "A new string stretches: check it again after a few minutes.",
     "649ba097da874350": "The voice course will cover a comfortable, healthy start, pitch matching, scales and range, intervals, rhythm and sight-singing, and first songs.",
     "c722e9fcc9046c7d": "The piano course will cover seating and hand shape, reading both clefs, rhythm, scales and triads, playing with both hands, accompaniment patterns and first pieces.",
-    "96717d21ef2d504a": "Optional · one guitar string · a quiet room. Overlapping sounds can show a plausible but misleading note. Accuracy depends on your phone's microphone and the room; measured results may vary. This does not decide tuning or playing success."
+    "96717d21ef2d504a": "Optional · one guitar string · a quiet room. Overlapping sounds can show a plausible but misleading note. Accuracy depends on your phone's microphone and the room; measured results may vary. This does not decide tuning or playing success.",
+    "e4308bfcfd9feec7": "Accuracy ≥ {v0}",
+    "7bcc4b2762e4f409": "Heard ≥ {v0}",
+    "1f03be7a9155e8b5": "On time ≥ {v0} (within ±{v1} ms)",
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} of the target {v2}"
   }
 }

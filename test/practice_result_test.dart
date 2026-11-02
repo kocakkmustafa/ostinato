@@ -320,12 +320,12 @@ void main() {
       expect(find.text('✓ 8'), findsOneWidget);
       expect(find.text('◆ 0'), findsOneWidget);
       expect(find.text('? 0'), findsOneWidget);
-      expect(find.text('%100'), findsNWidgets(2));
+      expect(find.text('100%'), findsNWidgets(2));
       expect(find.text('Timing'), findsOneWidget);
       expect(find.text('Completed at the target tempo'), findsOneWidget);
       expect(find.text('The next lesson is open.'), findsOneWidget);
-      expect(find.text('Accuracy ≥ %80'), findsOneWidget);
-      expect(find.text('Heard ≥ %80'), findsOneWidget);
+      expect(find.text('Accuracy ≥ 80%'), findsOneWidget);
+      expect(find.text('Heard ≥ 80%'), findsOneWidget);
       expect(find.text('Opening tempo ♩=50 or faster'), findsOneWidget);
       expect(
         find.text('Target tempo ♩=60 marks the lesson completed'),

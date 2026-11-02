@@ -80,8 +80,6 @@ class PracticeResultScreen extends StatelessWidget {
   /// or the lesson has none.
   final TempoLadderOutcome? ladder;
 
-  String _pct(double v) => '${(v * 100).round()}';
-
   /// Rhythm-only line: "different" means early or late (A3 onset timing).
   bool get _rhythm => summary.gate.criteria.rhythm;
 
@@ -126,13 +124,15 @@ class PracticeResultScreen extends StatelessWidget {
                       _rhythm
                           ? uiText(context, RhythmCopy.onTime)
                           : localized(context, 'Accuracy', 'Doğruluk'),
-                      s.accuracy == null ? '—' : '%${_pct(s.accuracy!)}',
+                      s.accuracy == null
+                          ? '—'
+                          : appPercent(context, s.accuracy!),
                       key: const Key('result-accuracy'),
                     ),
                     _line(
                       context,
                       localized(context, 'Heard', 'Duyulma'),
-                      '%${_pct(s.heard)}',
+                      appPercent(context, s.heard),
                       key: const Key('result-heard'),
                     ),
                     // Free tempo: no click, so neither tempo nor timing exists.
@@ -328,20 +328,23 @@ class PracticeResultScreen extends StatelessWidget {
     String check(GateCheck c) => switch (c.kind) {
       GateCheckKind.accuracy => localized(
         context,
-        'Accuracy ≥ %{v0}',
-        'Doğruluk ≥ %{v0}',
-        values: {'v0': _pct(c.threshold)},
+        'Accuracy ≥ {v0}',
+        'Doğruluk ≥ {v0}',
+        values: {'v0': appPercent(context, c.threshold)},
       ),
       GateCheckKind.onTime => uiText(
         context,
         RhythmCopy.gateOnTime,
-        values: {'v0': _pct(c.threshold), 'v1': gate.criteria.onTimeMs ?? 0},
+        values: {
+          'v0': appPercent(context, c.threshold),
+          'v1': gate.criteria.onTimeMs ?? 0,
+        },
       ),
       GateCheckKind.heard => localized(
         context,
-        'Heard ≥ %{v0}',
-        'Duyulma ≥ %{v0}',
-        values: {'v0': _pct(c.threshold)},
+        'Heard ≥ {v0}',
+        'Duyulma ≥ {v0}',
+        values: {'v0': appPercent(context, c.threshold)},
       ),
       GateCheckKind.tempo
           when gate.criteria.tempoGate == TempoGate.targetOnly =>

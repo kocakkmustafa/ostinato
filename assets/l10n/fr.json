@@ -2228,7 +2228,6 @@
     "7a2477ac8d998e1b": "Temps {v0}",
     "90e657580e74e233": "Métronome prêt",
     "eef59fdf837b60bb": "Arrête-toi en cas de douleur, d'engourdissement ou de fourmillements. L'audio reste en mémoire sur cet appareil ; rien n'est enregistré ni envoyé.",
-    "5875c6bfc47fc5e3": "Tempo ♩={v0} · {v1} % de la cible {v2}",
     "8d3ba744cbbe04e5": "Plus lent",
     "d585f811814b6ee1": "Plus vite",
     "43fadabe8baf4bee": "Attends-moi : activé",
@@ -2266,8 +2265,6 @@
     "e95988caccee0130": "La précision ne compte que les notes que j'ai pu trancher ; « pas entendue » est indiquée à part.",
     "9d90cd87ab628359": "Ce résultat n'a pas pu être enregistré sur l'appareil.",
     "3caf2aa9ac6ebeac": "Pas entendue",
-    "6feb932a1a066fa1": "Précision ≥ {v0} %",
-    "b3bcb97568674f01": "Entendues ≥ {v0} %",
     "08e525ea97429c36": "Au moins {v0} justes",
     "bdeecf247e6de479": "Tour d'entraînement — le seuil est mesuré sur un passage complet",
     "24776b72bbc4006f": "Ce n'est pas ton score — le microphone s'est bloqué. Vérifions l'installation et réessayons.",
@@ -8412,7 +8409,6 @@
     "c07dd0139205a762": "Le motif d'Alberti se précipite. Garde les notes du pouce légères et compte les croches dans chaque temps.",
     "187d877bbe6a9deb": "{v0} ms · relatif",
     "3a50750f75bbec90": "En place",
-    "9c1759e9a0fbf1b7": "En place ≥ {v0} % (à ±{v1} ms près)",
     "af00508cd74bb410": "À suivre",
     "b83b59297cbade08": "En avance ou en retard",
     "c19affc136daedd5": "« En place » ne compte que les temps que j'ai pu entendre ; « pas entendu » est indiqué à part.",
@@ -8447,6 +8443,10 @@
     "a51b8da5ff450285": "Une corde neuve s'étire : revérifie-la après quelques minutes.",
     "649ba097da874350": "Le cours de voix couvrira un début confortable et sain, la justesse, les gammes et la tessiture, les intervalles, le rythme et le déchiffrage chanté, et les premières chansons.",
     "c722e9fcc9046c7d": "Le cours de piano couvrira la position assise et la forme de la main, la lecture dans les deux clés, le rythme, les gammes et les accords parfaits, le jeu à deux mains, les motifs d’accompagnement et les premiers morceaux.",
-    "96717d21ef2d504a": "Facultatif · une corde de guitare · une pièce calme. Des sons superposés peuvent afficher une note plausible mais trompeuse. La précision dépend du microphone de ton téléphone et de la pièce ; les résultats mesurés peuvent varier. Cela ne décide ni de l'accordage ni de la réussite du jeu."
+    "96717d21ef2d504a": "Facultatif · une corde de guitare · une pièce calme. Des sons superposés peuvent afficher une note plausible mais trompeuse. La précision dépend du microphone de ton téléphone et de la pièce ; les résultats mesurés peuvent varier. Cela ne décide ni de l'accordage ni de la réussite du jeu.",
+    "e4308bfcfd9feec7": "Précision ≥ {v0}",
+    "7bcc4b2762e4f409": "Entendues ≥ {v0}",
+    "1f03be7a9155e8b5": "En place ≥ {v0} (à ±{v1} ms près)",
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} de la cible {v2}"
   }
 }

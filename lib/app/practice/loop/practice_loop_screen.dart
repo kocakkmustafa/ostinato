@@ -395,9 +395,13 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
             Text(
               localized(
                 context,
-                'Tempo ♩={v0} · {v1} % of the target {v2}',
-                'Tempo ♩={v0} · hedef {v2} temposunun %{v1}',
-                values: {'v0': t.bpm, 'v1': t.percent, 'v2': t.targetBpm},
+                'Tempo ♩={v0} · {v1} of the target {v2}',
+                'Tempo ♩={v0} · hedef {v2} temposunun {v1}',
+                values: {
+                  'v0': t.bpm,
+                  'v1': appPercent(context, t.percent / 100),
+                  'v2': t.targetBpm,
+                },
               ),
               style: hankenText(size: 13),
             ),

@@ -13,8 +13,8 @@
     },
     {
       "id": "gateOnTime",
-      "en": "On time ≥ %{v0} (within ±{v1} ms)",
-      "tr": "Zamanında ≥ %{v0} (±{v1} ms içinde)"
+      "en": "On time ≥ {v0} (within ±{v1} ms)",
+      "tr": "Zamanında ≥ {v0} (±{v1} ms içinde)"
     },
     {
       "id": "onTimeNote",

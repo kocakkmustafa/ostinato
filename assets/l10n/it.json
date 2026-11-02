@@ -2228,7 +2228,6 @@
     "7a2477ac8d998e1b": "Battito {v0}",
     "90e657580e74e233": "Metronomo pronto",
     "eef59fdf837b60bb": "Fermati se senti dolore, intorpidimento o formicolio. L'audio resta in memoria su questo dispositivo; nulla viene registrato né inviato.",
-    "5875c6bfc47fc5e3": "Tempo ♩={v0} · {v1} % del target {v2}",
     "8d3ba744cbbe04e5": "Più lento",
     "d585f811814b6ee1": "Più veloce",
     "43fadabe8baf4bee": "Aspettami: sì",
@@ -2266,8 +2265,6 @@
     "e95988caccee0130": "La precisione conta solo le note che ho potuto valutare; le note \"non sentite\" sono riportate a parte.",
     "9d90cd87ab628359": "Non è stato possibile salvare questo risultato sul dispositivo.",
     "3caf2aa9ac6ebeac": "Non sentita",
-    "6feb932a1a066fa1": "Precisione ≥ {v0} %",
-    "b3bcb97568674f01": "Sentite ≥ {v0} %",
     "08e525ea97429c36": "Almeno {v0} corrette",
     "bdeecf247e6de479": "Giro di prova — la soglia si misura su un'esecuzione completa",
     "24776b72bbc4006f": "Non è il tuo punteggio — il microfono si è bloccato. Controlliamo la configurazione e riproviamo.",
@@ -8412,7 +8409,6 @@
     "c07dd0139205a762": "Lo schema albertino accelera. Tieni leggere le note del pollice e conta le crome in ogni battito.",
     "187d877bbe6a9deb": "{v0} ms · relativo",
     "3a50750f75bbec90": "A tempo",
-    "9c1759e9a0fbf1b7": "A tempo ≥ {v0} % (entro ±{v1} ms)",
     "af00508cd74bb410": "Prossima",
     "b83b59297cbade08": "In anticipo o in ritardo",
     "c19affc136daedd5": "\"A tempo\" conta solo i colpi che ho potuto sentire; quelli \"non sentiti\" sono riportati a parte.",
@@ -8447,6 +8443,10 @@
     "a51b8da5ff450285": "Una corda nuova si allunga: controllala di nuovo dopo qualche minuto.",
     "649ba097da874350": "Il corso di voce tratterà un inizio comodo e sano, l’intonazione delle note, scale ed estensione, intervalli, ritmo e lettura cantata, e le prime canzoni.",
     "c722e9fcc9046c7d": "Il corso di pianoforte tratterà postura e forma della mano, lettura in entrambe le chiavi, ritmo, scale e triadi, suonare a due mani, schemi di accompagnamento e primi brani.",
-    "96717d21ef2d504a": "Facoltativo · una corda di chitarra · stanza silenziosa. Suoni sovrapposti possono mostrare una nota plausibile ma fuorviante. La precisione dipende dal microfono del telefono e dalla stanza; i risultati misurati possono variare. Questo non decide la riuscita dell'accordatura o dell'esecuzione."
+    "96717d21ef2d504a": "Facoltativo · una corda di chitarra · stanza silenziosa. Suoni sovrapposti possono mostrare una nota plausibile ma fuorviante. La precisione dipende dal microfono del telefono e dalla stanza; i risultati misurati possono variare. Questo non decide la riuscita dell'accordatura o dell'esecuzione.",
+    "e4308bfcfd9feec7": "Precisione ≥ {v0}",
+    "7bcc4b2762e4f409": "Sentite ≥ {v0}",
+    "1f03be7a9155e8b5": "A tempo ≥ {v0} (entro ±{v1} ms)",
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} del target {v2}"
   }
 }

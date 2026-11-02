@@ -56,6 +56,13 @@ String appDecimal(BuildContext context, num value, int digits) {
 String appInteger(BuildContext context, int value) =>
     appDecimal(context, value, 0);
 
+/// Whole-number percent of [fraction] in the app locale: 80% (en), %80 (tr),
+/// 80 % (de, fr). Copy passes the result as a value, never a literal sign.
+String appPercent(BuildContext context, num fraction) =>
+    NumberFormat.percentPattern(
+      intlLocaleName(Localizations.localeOf(context)),
+    ).format(fraction);
+
 /// Technical pitch symbols remain explicit when conventional local names differ.
 String musicPitch(BuildContext context, String pitch) {
   final match = RegExp(r'^([A-G])([#♯b♭]?)(-?\d+)$').firstMatch(pitch);
