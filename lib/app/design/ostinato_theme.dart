@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../app_locale.dart';
+
 /// Ostinato'nun görsel kimliği — Claude Design paneli çıktısının (2026-08-05,
 /// proje `4352ea41-…`) sabitleri. Renk/malzeme İCAT edilmedi: panelin ürettiği
 /// hex değerler birebir taşındı; buradaki tek "hüküm" hangi rengin hangi
@@ -186,7 +188,7 @@ ThemeData ostinatoTheme() => ThemeData(
 /// Bölüm başlığı — "SCREENS" / "YOUR INSTRUMENTS" tarzı mono kicker.
 Widget kicker(String text, {Color? color}) => Builder(
   builder: (context) => Text(
-    text.toUpperCase(),
+    appUpperCase(context, text),
     style: monoText(
       color: color ?? Theme.of(context).colorScheme.onSurfaceVariant,
     ),

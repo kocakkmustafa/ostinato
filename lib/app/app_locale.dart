@@ -28,6 +28,22 @@ String localized(
             ))
         .text(english, turkish, values: values, pluralCount: pluralCount);
 
+/// Uppercases UI text (small-caps kickers, catalog tags) for [locale].
+/// Dart's `toUpperCase` ignores the locale, so Turkish and Azerbaijani
+/// "Hoş geldin" became "HOŞ GELDIN"; there i → İ and ı → I.
+String localeUpperCase(Locale locale, String text) =>
+    switch (locale.languageCode) {
+      'tr' || 'az' =>
+        text.replaceAll('i', '\u0130').replaceAll('\u0131', 'I').toUpperCase(),
+      _ => text.toUpperCase(),
+    };
+
+/// [localeUpperCase] for the app locale of [context].
+String appUpperCase(BuildContext context, String text) => localeUpperCase(
+  Localizations.maybeLocaleOf(context) ?? const Locale('en'),
+  text,
+);
+
 String appDecimal(BuildContext context, num value, int digits) {
   final format = NumberFormat.decimalPattern(
     intlLocaleName(Localizations.localeOf(context)),
@@ -62,7 +78,7 @@ String catalogTag(BuildContext context, String source) => switch (source) {
   'beginner' => localized(context, 'BEGINNER', 'BAŞLANGIÇ'),
   'setup' => localized(context, 'SETUP', 'KURULUM'),
   'posture' => localized(context, 'POSTURE', 'DURUŞ'),
-  _ => source.toUpperCase(),
+  _ => appUpperCase(context, source),
 };
 
 /// Display-only labels keyed by stable content IDs. The content contract and
@@ -183,10 +199,7 @@ String catalogName(BuildContext context, String id, String english) {
 }
 
 String catalogUpperName(BuildContext context, String id, String english) {
-  final name = catalogName(context, id, english);
-  return Localizations.localeOf(context).languageCode == 'tr'
-      ? name.replaceAll('i', 'İ').replaceAll('ı', 'I').toUpperCase()
-      : name.toUpperCase();
+  return appUpperCase(context, catalogName(context, id, english));
 }
 
 // Exact source binding prevents stale translated metadata after edits.
