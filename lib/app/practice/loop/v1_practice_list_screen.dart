@@ -6,8 +6,10 @@ import '../../app_locale.dart';
 import '../../app_theme.dart';
 import '../../curriculum/v1_lesson.dart';
 import '../../account_connection.dart';
+import '../../course_access.dart';
 import '../../design/ostinato_theme.dart';
 import '../../design/widgets.dart';
+import '../../ostinato_release_policy.dart';
 import '../../tuner/tuner_check_memory.dart';
 import '../../ui_copy.dart';
 import '../setup/latency_calibration.dart';
@@ -19,12 +21,15 @@ import 'practice_progress_store.dart';
 import 'v1_course_catalog.dart';
 import 'v1_course_copy.dart';
 import 'v1_lesson_reader_screen.dart';
+import 'v1_paywall_copy.dart';
 
 /// The full v1 guitar course (levels → modules → lessons; contract §6.4,
 /// §9). Measured lessons open the practice loop; the others open the lesson
 /// reader (self-check, held checkpoint, tuner, drill-soon, camera checklist).
 /// A module opens when the previous module's checkpoint clears; inside an
-/// open module every lesson is open.
+/// open module every lesson is open. Independently of that module gate,
+/// lessons outside the free scope (`ostinatoV1FreeStages`) open only through
+/// the paid-access guard; titles, chips and progress stay readable.
 class V1PracticeListScreen extends StatefulWidget {
   const V1PracticeListScreen({
     super.key,
@@ -37,7 +42,11 @@ class V1PracticeListScreen extends StatefulWidget {
     this.openSetup,
     this.tuner,
     this.startNext = false,
+    this.paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
   });
+
+  /// Whether the v1 paywall applies (release policy; tests turn it off).
+  final bool paidFeaturesAvailable;
 
   /// Opens the first open lesson not yet done (course order) as soon as the
   /// course loads ("Start next lesson"); the course stays underneath.
@@ -160,6 +169,15 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
   }
 
   Future<void> _open(V1CourseCatalog catalog, V1CourseLesson lesson) async {
+    // Paywall gate (independent of the module gate the caller checked).
+    if (!await admitV1Lesson(
+          context,
+          lesson.id,
+          paidFeaturesAvailable: widget.paidFeaturesAvailable,
+        ) ||
+        !mounted) {
+      return;
+    }
     final next = catalog.nextAfter(lesson.id);
     final bool openNext;
     if (lesson.availability == V1LessonAvailability.measured) {
@@ -318,6 +336,19 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                         ),
                         style: monoText(color: palette.warnInk),
                       ),
+                    if (widget.paidFeaturesAvailable &&
+                        v1FreeLevel('gtr') != null) ...[
+                      const SizedBox(height: 8),
+                      Text(
+                        uiText(
+                          context,
+                          V1PaywallCopy.freeScope,
+                          values: {'v0': v1FreeLevel('gtr')},
+                        ),
+                        key: const Key('v1-course-free-scope'),
+                        style: monoText(size: 10.5),
+                      ),
+                    ],
                     const SizedBox(height: 12),
                     _setupCard(context),
                     const SizedBox(height: 8),
@@ -554,9 +585,14 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     final record = state.records[lesson.id];
     final status = state.status(lesson);
     final open = state.isOpen(lesson.id);
+    final paid = !isFreeV1Lesson(
+      lesson.id,
+      paidFeaturesAvailable: widget.paidFeaturesAvailable,
+    );
     return ListTile(
       key: Key('v1-practice-${lesson.id}'),
       enabled: open,
+      trailing: paid ? _membershipMark(context, lesson.id) : null,
       leading: Icon(switch (status) {
         V1LessonStatus.completed || V1LessonStatus.tuned => Icons.check_circle,
         V1LessonStatus.passed => Icons.check_circle_outline,
@@ -591,6 +627,23 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
         ],
       ),
       onTap: open ? () => unawaited(_open(state.catalog, lesson)) : null,
+    );
+  }
+
+  /// Small mark on a lesson that needs a membership to open.
+  Widget _membershipMark(BuildContext context, String id) {
+    final palette = OstinatoPalette.of(context);
+    return Row(
+      key: Key('v1-course-paid-$id'),
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.lock_outline, size: 15, color: palette.textMuted),
+        const SizedBox(width: 3),
+        Text(
+          uiText(context, V1PaywallCopy.membershipMark),
+          style: monoText(size: 10, color: palette.textMuted),
+        ),
+      ],
     );
   }
 

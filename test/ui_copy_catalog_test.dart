@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/app_message_ids.dart';
 import 'package:ostinato/app/app_translation_catalog.dart';
 import 'package:ostinato/app/practice/loop/v1_course_copy.dart';
+import 'package:ostinato/app/practice/loop/v1_paywall_copy.dart';
 import 'package:ostinato/app/practice/own_recording/own_recording_copy.dart';
 import 'package:ostinato/app/retention/retention_copy.dart';
 import 'package:ostinato/app/screens/v1_home_copy.dart';
@@ -21,6 +22,7 @@ void main() {
     'content/ui/v1-home.json': V1HomeCopy.all,
     'content/ui/own-recording.json': OwnRecordingCopy.all,
     'content/ui/v1-course.json': V1CourseCopy.all,
+    'content/ui/v1-paywall.json': V1PaywallCopy.all,
   };
 
   for (final entry in catalogs.entries) {
@@ -64,6 +66,7 @@ void main() {
         ...V1HomeCopy.all,
         ...OwnRecordingCopy.all,
         ...V1CourseCopy.all,
+        ...V1PaywallCopy.all,
       ]) {
         final id = appMessageIds[pair];
         expect(id, isNotNull, reason: pair.$1);

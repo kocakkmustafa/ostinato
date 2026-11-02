@@ -70,6 +70,60 @@ Future<bool> admitLesson(
   )) {
     return true;
   }
+  return _requirePaidAccess(context);
+}
+
+/// v1 paywall (founder decision 2026-11-02): every lesson of the listed
+/// stages is free, for each v1 course (`gtr`, `ear`); later stages need a
+/// membership. Guitar S1 = modules 1–4 plus `gtr-s1-test` (40 lessons); ear
+/// S1 = 25 lessons. This map is the single place the free scope lives: add or
+/// remove a stage id here and the gate, the list marks and the tests follow.
+/// A course missing from the map has no free lessons (closed by default).
+const Map<String, Set<String>> ostinatoV1FreeStages = {
+  'gtr': {'s1'},
+  'ear': {'s1'},
+};
+
+final RegExp _v1LessonId = RegExp(r'^([a-z]+)-(s\d+)-');
+
+/// Whether a v1 lesson (`gtr-s1-m01-03`, `gtr-s1-test`, `ear-s2-m05-01`)
+/// opens without a membership. An id that is not a v1 lesson id is paid.
+/// With sales closed nothing is gated.
+bool isFreeV1Lesson(
+  String lessonId, {
+  bool paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
+  Map<String, Set<String>> freeStages = ostinatoV1FreeStages,
+}) {
+  if (!paidFeaturesAvailable) return true;
+  final m = _v1LessonId.firstMatch(lessonId);
+  if (m == null) return false;
+  return freeStages[m.group(1)]?.contains(m.group(2)) ?? false;
+}
+
+/// The single free level number shown in the v1 free-scope notice (`s1` → 1),
+/// or null when the course's free scope is not exactly one stage.
+int? v1FreeLevel(String course) {
+  final stages = ostinatoV1FreeStages[course];
+  if (stages == null || stages.length != 1) return null;
+  return int.tryParse(stages.single.substring(1));
+}
+
+/// Admits opening a v1 lesson: free lessons open at once (no account
+/// needed); a paid one goes through the same paid-access guard as
+/// [admitLesson]. Independent of the course's module gate, which the caller
+/// checks as before.
+Future<bool> admitV1Lesson(
+  BuildContext context,
+  String lessonId, {
+  bool paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
+}) async {
+  if (isFreeV1Lesson(lessonId, paidFeaturesAvailable: paidFeaturesAvailable)) {
+    return true;
+  }
+  return _requirePaidAccess(context);
+}
+
+Future<bool> _requirePaidAccess(BuildContext context) async {
   final guard = AccountScope.maybeOf(context)?.connection?.requirePaidAccess;
   if (guard == null) {
     ScaffoldMessenger.maybeOf(context)?.showSnackBar(

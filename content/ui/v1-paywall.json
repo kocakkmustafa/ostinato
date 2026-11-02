@@ -1,0 +1,15 @@
+{
+  "$about": "v1 paywall copy: free-scope notice above the v1 course list and the mark on paid lessons (lib/app/practice/loop/v1_paywall_copy.dart). The free scope itself is ostinatoV1FreeStages in lib/app/course_access.dart; all 14 catalogs carry these pairs.",
+  "messages": [
+    {
+      "id": "freeScope",
+      "en": "Level {v0} is free · later levels need a membership",
+      "tr": "Seviye {v0} ücretsiz · sonraki seviyeler üyelik gerektirir"
+    },
+    {
+      "id": "membershipMark",
+      "en": "Membership",
+      "tr": "Üyelik"
+    }
+  ]
+}
