@@ -45,13 +45,18 @@ class PrivacyManifestSummaryTest(unittest.TestCase):
             "NSPrivacyAccessedAPITypeReasons": ["CA92.1"],
         }
 
-    def test_account_manifest_reports_all_seven_collected_types(self):
+    def test_account_manifest_reports_all_nine_collected_types(self):
         # Six account/provider types plus PurchaseHistory since subscription
-        # sales opened (2026-10-23 founder decision).
-        self.assertEqual(len(self.current_manifest["NSPrivacyCollectedDataTypes"]), 7)
+        # sales opened (2026-10-23 founder decision), plus DeviceID and
+        # ProductInteraction for the v1 store submission (2026-11-02).
+        types = [entry["NSPrivacyCollectedDataType"]
+                 for entry in self.current_manifest["NSPrivacyCollectedDataTypes"]]
+        self.assertEqual(len(types), 9)
+        self.assertIn("NSPrivacyCollectedDataTypeDeviceID", types)
+        self.assertIn("NSPrivacyCollectedDataTypeProductInteraction", types)
         result, output = self.run_gate(self.current_manifest)
         self.assertEqual(result, 0)
-        self.assertIn("toplama 7 veri türü", output)
+        self.assertIn("toplama 9 veri türü", output)
         self.assertNotIn("toplama yok", output)
 
     def test_empty_collection_is_reported_as_zero(self):

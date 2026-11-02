@@ -12,7 +12,10 @@
 	<array/>
 	<!-- 2026-09-27: Sağlayıcıda saklanan IP/user-agent güvenlik günlükleri,
 	     yaklaşık konum ve Auth parola hash’i de beyanlıdır. Eşleme ve kanıt:
-	     docs/store/account-data-safety-draft.md. -->
+	     docs/store/account-data-safety-draft.md.
+	     2026-11-02 (v1 mağaza gönderimi): cihaz kimliği (DeviceID) ve ürün
+	     etkileşimi (ProductInteraction) de beyanlı — kullanıcıya bağlı, izleme
+	     yok, yalnız uygulama işlevi. -->
 	<key>NSPrivacyCollectedDataTypes</key>
 	<array>
 		<dict>
@@ -78,6 +81,26 @@
 		<dict>
 			<key>NSPrivacyCollectedDataType</key>
 			<string>NSPrivacyCollectedDataTypePurchaseHistory</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array><string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string></array>
+		</dict>
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypeDeviceID</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array><string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string></array>
+		</dict>
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypeProductInteraction</string>
 			<key>NSPrivacyCollectedDataTypeLinked</key>
 			<true/>
 			<key>NSPrivacyCollectedDataTypeTracking</key>
