@@ -6,15 +6,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/curriculum/v1_lesson.dart';
-import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_marks.dart';
 import 'package:ostinato/app/practice/loop/practice_outcome.dart';
 import 'package:ostinato/app/practice/loop/practice_progress_store.dart';
 import 'package:ostinato/app/practice/loop/practice_result_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_score.dart';
 import 'package:ostinato/app/practice/loop/v1_practice_catalog.dart';
-import 'package:ostinato/app/practice/loop/v1_practice_list_screen.dart';
-import 'package:ostinato/app/practice/setup/setup_profile_store.dart';
 
 import 'support/practice_host.dart';
 
@@ -411,160 +408,6 @@ void main() {
       expect((action! as ResultActionLoop).first, 1);
     });
   });
-
-  testWidgets('list: locks, and a pass opens the next lesson', (tester) async {
-    final progress = _MemoryProgress();
-    final catalog = V1PracticeCatalog([lesson(), lesson(id: 'gtr-s1-m02-03')]);
-    final opened = <String>[];
-    final setupOpened = <int>[];
-    final at = DateTime.utc(2026, 11, 1);
-    final setup = MemorySetupProfileStore();
-    await tester.pumpWidget(
-      practiceHost(
-        V1PracticeListScreen(
-          catalog: Future.value(catalog),
-          progressFactory: (_) => progress,
-          setupStore: setup,
-          // The wizard: every step skipped.
-          openSetup: (_) async {
-            setupOpened.add(1);
-            final skip = SetupStepRecord(SetupStepState.skipped, at);
-            await setup.update(
-              (p) => p.copyWith(
-                placement: skip,
-                roomStep: skip,
-                latencyStep: skip,
-                tuningStep: skip,
-              ),
-            );
-          },
-          practiceScreenBuilder: (l, p, hasNext) => _FakePractice(
-            onOpen: () => opened.add(l.id),
-            pass: () => p.recordRun(l.id, summary(List.filled(8, c))),
-          ),
-        ),
-      ),
-    );
-    await tester.pumpAndSettle();
-    expect(find.text('OPEN'), findsOneWidget);
-    expect(find.text('LOCKED · pass the lesson before'), findsOneWidget);
-    await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m02-03')));
-    await tester.pumpAndSettle();
-    expect(opened, isEmpty, reason: 'locked lesson does not open');
-    expect(
-      find.text('Placement, room, latency and tuning — about two minutes.'),
-      findsOneWidget,
-    );
-    await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m02-02')));
-    await tester.pumpAndSettle();
-    // Choose a lesson → setup first (once) → practice.
-    expect(setupOpened, [1]);
-    await tester.tap(find.text('pass'));
-    await tester.pumpAndSettle();
-    // The next lesson opened straight away after the pass.
-    expect(opened, ['gtr-s1-m02-02', 'gtr-s1-m02-03']);
-    await tester.tap(find.text('close'));
-    await tester.pumpAndSettle();
-    expect(find.text('COMPLETED · ♩=60'), findsOneWidget);
-    expect(find.text('LOCKED · pass the lesson before'), findsNothing);
-    expect(
-      find.text('Latency not measured on this output: timing stays hidden.'),
-      findsOneWidget,
-    );
-    await tester.tap(find.byKey(const Key('v1-practice-gtr-s1-m02-02')));
-    await tester.pumpAndSettle();
-    expect(setupOpened, [1], reason: 'the wizard runs first only once');
-  });
-
-  testWidgets('"Start next lesson" opens the first open lesson not passed', (
-    tester,
-  ) async {
-    final progress = _MemoryProgress();
-    await progress.recordRun('gtr-s1-m02-02', summary(List.filled(8, c)));
-    final catalog = V1PracticeCatalog([lesson(), lesson(id: 'gtr-s1-m02-03')]);
-    final opened = <String>[];
-    final at = DateTime.utc(2026, 11, 1);
-    final skip = SetupStepRecord(SetupStepState.skipped, at);
-    final setup = MemorySetupProfileStore(
-      SetupProfile.empty.copyWith(
-        placement: skip,
-        roomStep: skip,
-        latencyStep: skip,
-        tuningStep: skip,
-      ),
-    );
-    await tester.pumpWidget(
-      practiceHost(
-        V1PracticeListScreen(
-          startNext: true,
-          catalog: Future.value(catalog),
-          progressFactory: (_) => progress,
-          setupStore: setup,
-          practiceScreenBuilder: (l, p, hasNext) => _FakePractice(
-            onOpen: () => opened.add(l.id),
-            pass: () => p.recordRun(l.id, summary(List.filled(8, c))),
-          ),
-        ),
-      ),
-    );
-    await tester.pumpAndSettle();
-    expect(opened, ['gtr-s1-m02-03']);
-    await tester.tap(find.text('close'));
-    await tester.pumpAndSettle();
-    expect(find.byType(V1PracticeListScreen), findsOneWidget);
-    expect(opened, ['gtr-s1-m02-03'], reason: 'opens once, not on return');
-  });
-}
-
-final class _MemoryProgress implements V1PracticeProgress {
-  final Map<String, V1PracticeRecord> records = {};
-  @override
-  Future<Map<String, V1PracticeRecord>> load() async => Map.of(records);
-  @override
-  Future<V1PracticeRecord> recordRun(
-    String lessonId,
-    PracticeRunSummary summary, {
-    DateTime? at,
-  }) async => records[lessonId] =
-      (records[lessonId] ?? V1PracticeRecord(lessonId: lessonId)).withRun(
-        summary,
-        at ?? DateTime.utc(2026, 11, 1),
-      );
-}
-
-class _FakePractice extends StatefulWidget {
-  const _FakePractice({required this.onOpen, required this.pass});
-  final VoidCallback onOpen;
-  final Future<Object?> Function() pass;
-  @override
-  State<_FakePractice> createState() => _FakePracticeState();
-}
-
-class _FakePracticeState extends State<_FakePractice> {
-  @override
-  void initState() {
-    super.initState();
-    widget.onOpen();
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    body: Column(
-      children: [
-        TextButton(
-          onPressed: () async {
-            await widget.pass();
-            if (context.mounted) {
-              Navigator.of(context).pop(PracticeExit.openNextLesson);
-            }
-          },
-          child: const Text('pass'),
-        ),
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(PracticeExit.closed),
-          child: const Text('close'),
-        ),
-      ],
-    ),
-  );
+  // The course screen (formerly the measured list) is covered in
+  // test/v1_course_screen_test.dart.
 }

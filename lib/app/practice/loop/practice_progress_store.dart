@@ -175,16 +175,159 @@ final class V1PracticeProgressStore implements V1PracticeProgress {
     final next = (records[lessonId] ?? V1PracticeRecord(lessonId: lessonId))
         .withRun(summary, at ?? DateTime.now());
     records[lessonId] = next;
-    await file.parent.create(recursive: true);
-    final temp = File('${file.path}.tmp');
-    await temp.writeAsString(
-      '${jsonEncode({'schemaVersion': 1, 'records': records.values.map((r) => r.toJson()).toList()})}\n',
-      flush: true,
-    );
-    await temp.rename(file.path);
+    await _writeRecords(file, records.values.map((r) => r.toJson()));
     return next;
   }, writing: true);
 }
+
+/// Atomic write of `{schemaVersion: 1, records: [...]}` (temp + rename).
+Future<void> _writeRecords(
+  File file,
+  Iterable<Map<String, Object?>> records,
+) async {
+  await file.parent.create(recursive: true);
+  final temp = File('${file.path}.tmp');
+  await temp.writeAsString(
+    '${jsonEncode({'schemaVersion': 1, 'records': records.toList()})}\n',
+    flush: true,
+  );
+  await temp.rename(file.path);
+}
+
+/// What a non-loop lesson completion rests on. Kept apart from
+/// `measured_practice` on purpose: a self-report never reads as measured.
+enum V1CheckEvidence {
+  /// The learner ticked the lesson's self-check (contract §3 Ö: "kendi
+  /// beyanı"). Not measured.
+  selfReport('self_report'),
+
+  /// The tuner measured every string in tune (A1 tuning lessons).
+  tunerCheck('tuner_check');
+
+  const V1CheckEvidence(this.json);
+  final String json;
+
+  static V1CheckEvidence parse(Object? value) => values.firstWhere(
+    (e) => e.json == value,
+    orElse: () => throw const FormatException('Unknown check evidence'),
+  );
+}
+
+/// One completed v1 lesson outside the practice loop: self-check lessons,
+/// held checkpoints practised as a self-check, tuner lessons. No audio, no
+/// ticked items, no network — only which lesson, on what evidence, when.
+final class V1LessonCheck {
+  const V1LessonCheck({
+    required this.lessonId,
+    required this.evidence,
+    required this.at,
+  });
+
+  final String lessonId;
+  final V1CheckEvidence evidence;
+  final DateTime at;
+
+  bool get measured => evidence == V1CheckEvidence.tunerCheck;
+
+  Map<String, Object?> toJson() => {
+    'lessonId': lessonId,
+    'evidence': evidence.json,
+    'at': at.toUtc().toIso8601String(),
+  };
+
+  factory V1LessonCheck.fromJson(Map<String, dynamic> json) => V1LessonCheck(
+    lessonId: json['lessonId'] as String,
+    evidence: V1CheckEvidence.parse(json['evidence']),
+    at: DateTime.parse(json['at'] as String),
+  );
+}
+
+abstract interface class V1LessonChecks {
+  Future<Map<String, V1LessonCheck>> load();
+
+  /// Records a completion. The first record of a lesson is kept, except that
+  /// a measured tuner check replaces a self-report.
+  Future<V1LessonCheck> record(
+    String lessonId,
+    V1CheckEvidence evidence, {
+    DateTime? at,
+  });
+}
+
+/// Sibling of [V1PracticeProgressStore] in the same account directory:
+/// `v1_lesson_checks.v1.json`.
+final class V1LessonCheckStore implements V1LessonChecks {
+  V1LessonCheckStore({this.directoryProvider, this.accountUserId})
+    : _operations = AccountDataOperations(() async {
+        final root =
+            await (directoryProvider ?? getApplicationSupportDirectory)();
+        return accountDataDirectory(root, accountUserId);
+      });
+
+  static const String fileName = 'v1_lesson_checks.v1.json';
+
+  final Future<Directory> Function()? directoryProvider;
+  final String? accountUserId;
+  final AccountDataOperations _operations;
+
+  Future<T> _run<T>(
+    Future<T> Function(File file) operation, {
+    bool writing = false,
+  }) => _operations.run(
+    (directory) => operation(File('${directory.path}/$fileName')),
+    writing: writing,
+  );
+
+  @override
+  Future<Map<String, V1LessonCheck>> load() => _run(_load);
+
+  Future<Map<String, V1LessonCheck>> _load(File file) async {
+    if (!await file.exists()) return {};
+    final decoded =
+        jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+    if (decoded['schemaVersion'] != 1) {
+      throw const FormatException('Unsupported lesson check schema');
+    }
+    final result = <String, V1LessonCheck>{};
+    for (final item in decoded['records'] as List<dynamic>) {
+      final c = V1LessonCheck.fromJson(item as Map<String, dynamic>);
+      if (result.containsKey(c.lessonId)) {
+        throw const FormatException('Duplicate lesson check');
+      }
+      result[c.lessonId] = c;
+    }
+    return result;
+  }
+
+  @override
+  Future<V1LessonCheck> record(
+    String lessonId,
+    V1CheckEvidence evidence, {
+    DateTime? at,
+  }) => _run((file) async {
+    if (lessonId.isEmpty || lessonId.contains('|')) {
+      throw ArgumentError('Invalid lesson id');
+    }
+    final checks = await _load(file);
+    final next = mergeLessonCheck(
+      checks[lessonId],
+      V1LessonCheck(
+        lessonId: lessonId,
+        evidence: evidence,
+        at: (at ?? DateTime.now()).toUtc(),
+      ),
+    );
+    if (identical(next, checks[lessonId])) return next;
+    checks[lessonId] = next;
+    await _writeRecords(file, checks.values.map((c) => c.toJson()));
+    return next;
+  }, writing: true);
+}
+
+/// The first completion is kept; a measured tuner check replaces a
+/// self-report.
+V1LessonCheck mergeLessonCheck(V1LessonCheck? old, V1LessonCheck next) =>
+    old == null || (!old.measured && next.measured) ? next : old;
 
 /// Unlock rule (task F2.5, contract §6.3): the first lesson in course order is
 /// open; each next one opens when the one before it has a measured pass (at

@@ -8,30 +8,39 @@ import '../../curriculum/v1_lesson.dart';
 import '../../account_connection.dart';
 import '../../design/ostinato_theme.dart';
 import '../../design/widgets.dart';
+import '../../tuner/tuner_check_memory.dart';
+import '../../ui_copy.dart';
 import '../setup/latency_calibration.dart';
 import '../setup/setup_profile_store.dart';
 import '../setup/setup_wizard_screen.dart';
 import 'practice_loop_screen.dart';
 import 'practice_outcome.dart';
 import 'practice_progress_store.dart';
-import 'v1_practice_catalog.dart';
+import 'v1_course_catalog.dart';
+import 'v1_course_copy.dart';
+import 'v1_lesson_reader_screen.dart';
 
-/// F2.5 entry: measured-practice lessons in course order. The first is open;
-/// each next one opens after a measured pass of the one before.
+/// The full v1 guitar course (levels → modules → lessons; contract §6.4,
+/// §9). Measured lessons open the practice loop; the others open the lesson
+/// reader (self-check, held checkpoint, tuner, drill-soon, camera checklist).
+/// A module opens when the previous module's checkpoint clears; inside an
+/// open module every lesson is open.
 class V1PracticeListScreen extends StatefulWidget {
   const V1PracticeListScreen({
     super.key,
     this.catalog,
     this.progressFactory,
+    this.checksFactory,
     this.practiceScreenBuilder,
     this.onSessionFinished,
     this.setupStore,
     this.openSetup,
+    this.tuner,
     this.startNext = false,
   });
 
-  /// Opens the first open lesson not yet passed as soon as the list loads
-  /// ("Start next lesson"); the list stays underneath for the way back.
+  /// Opens the first open lesson not yet done (course order) as soon as the
+  /// course loads ("Start next lesson"); the course stays underneath.
   final bool startNext;
 
   /// F4.2 setup results; defaults to the device store.
@@ -44,8 +53,9 @@ class V1PracticeListScreen extends StatefulWidget {
   final void Function(PracticeSessionFinished event)? onSessionFinished;
 
   /// Tests pass a catalog; production loads the bundled lessons.
-  final Future<V1PracticeCatalog>? catalog;
+  final Future<V1CourseCatalog>? catalog;
   final V1PracticeProgress Function(String? accountId)? progressFactory;
+  final V1LessonChecks Function(String? accountId)? checksFactory;
   final Widget Function(
     V1Lesson lesson,
     V1PracticeProgress progress,
@@ -53,22 +63,37 @@ class V1PracticeListScreen extends StatefulWidget {
   )?
   practiceScreenBuilder;
 
+  /// Forwarded to tuner lessons; defaults to the real tuner.
+  final Future<TunerCheck?> Function(BuildContext context)? tuner;
+
   @override
   State<V1PracticeListScreen> createState() => _V1PracticeListScreenState();
 }
 
+typedef _Progress = (
+  Map<String, V1PracticeRecord> records,
+  Map<String, V1LessonCheck> checks,
+);
+
 class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
-  late Future<V1PracticeCatalog> _catalog =
-      widget.catalog ?? V1PracticeCatalog.load();
+  late Future<V1CourseCatalog> _catalog =
+      widget.catalog ?? V1CourseCatalog.load();
   V1PracticeProgress? _progress;
+  V1LessonChecks? _checks;
   String? _accountId;
-  Future<Map<String, V1PracticeRecord>>? _records;
+  Future<_Progress>? _state;
   late final SetupProfileStore _setup =
       widget.setupStore ?? FileSetupProfileStore.device;
   late Future<SetupProfile> _profile = _loadProfile();
 
   Future<SetupProfile> _loadProfile() =>
       _setup.load().catchError((Object _) => SetupProfile.empty);
+
+  Future<_Progress> _loadState() async {
+    final records = _progress!.load();
+    final checks = _checks!.load();
+    return (await records, await checks);
+  }
 
   Future<void> _openSetup() async {
     final open = widget.openSetup;
@@ -93,7 +118,10 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
       _progress =
           widget.progressFactory?.call(id) ??
           V1PracticeProgressStore(accountUserId: id);
-      _records = _progress!.load();
+      _checks =
+          widget.checksFactory?.call(id) ??
+          V1LessonCheckStore(accountUserId: id);
+      _state = _loadState();
       if (widget.startNext && !_startedNext) {
         _startedNext = true;
         unawaited(_openNext());
@@ -103,73 +131,96 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
 
   bool _startedNext = false;
 
-  Future<void> _openNext() async {
-    final V1PracticeCatalog catalog;
-    final Map<String, V1PracticeRecord> records;
+  /// Units the learner opened or that held the next lesson; kept across
+  /// reloads.
+  final Set<String> _expanded = {};
+
+  Future<V1CourseState?> _courseState() async {
     try {
-      catalog = await _catalog;
-      records = await _records!;
+      final catalog = await _catalog;
+      final (records, checks) = await _state!;
+      return V1CourseState(catalog, records, checks);
     } on Object {
-      return; // The list shows the error and a retry.
+      return null; // The course shows the error and a retry.
     }
-    if (!mounted) return;
-    final open = unlockedLessons(catalog.orderedIds, records);
-    for (final l in catalog.lessons) {
-      if (open.contains(l.id) && !(records[l.id]?.passed ?? false)) {
-        await _open(catalog, l);
-        return;
-      }
-    }
+  }
+
+  Future<void> _openNext() async {
+    final state = await _courseState();
+    if (!mounted || state == null) return;
+    final next = state.next;
+    if (next != null) await _open(state.catalog, next);
   }
 
   void _reload() {
-    final next = _progress!.load();
+    final next = _loadState();
     setState(() {
-      _records = next;
+      _state = next;
     });
   }
 
-  Future<void> _open(V1PracticeCatalog catalog, V1Lesson lesson) async {
+  Future<void> _open(V1CourseCatalog catalog, V1CourseLesson lesson) async {
+    final next = catalog.nextAfter(lesson.id);
+    final bool openNext;
+    if (lesson.availability == V1LessonAvailability.measured) {
+      openNext = await _openPractice(lesson.lesson, next != null);
+    } else {
+      final (_, checks) = await _state!.catchError(
+        (Object _) => (<String, V1PracticeRecord>{}, <String, V1LessonCheck>{}),
+      );
+      if (!mounted) return;
+      final exit = await Navigator.of(context).push<V1ReaderExit>(
+        MaterialPageRoute(
+          builder: (_) => V1LessonReaderScreen(
+            lesson: lesson,
+            checks: _checks!,
+            existing: checks[lesson.id],
+            hasNextLesson: next != null,
+            tuner: widget.tuner,
+          ),
+        ),
+      );
+      openNext = exit == V1ReaderExit.openNextLesson;
+    }
+    if (!mounted) return;
+    _reload();
+    if (openNext && next != null) {
+      final state = await _courseState();
+      if (!mounted || state == null) return;
+      if (state.isOpen(next.id)) unawaited(_open(catalog, next));
+    }
+  }
+
+  /// Returns whether the learner asked for the next lesson.
+  Future<bool> _openPractice(V1Lesson lesson, bool hasNext) async {
     // "Choose a lesson → setup → play": the wizard comes first until it has
     // been gone through once (every step done or skipped).
     final visited = (await _profile).visited;
-    if (!mounted) return;
+    if (!mounted) return false;
     if (!visited) {
       await _openSetup();
-      if (!mounted) return;
+      if (!mounted) return false;
     }
     final progress = _progress!;
-    final next = catalog.nextAfter(lesson.id);
     final exit = await Navigator.of(context).push<PracticeExit>(
       MaterialPageRoute(
         builder: (_) =>
-            widget.practiceScreenBuilder?.call(
-              lesson,
-              progress,
-              next != null,
-            ) ??
+            widget.practiceScreenBuilder?.call(lesson, progress, hasNext) ??
             PracticeLoopScreen(
               lesson: lesson,
               progress: progress,
-              hasNextLesson: next != null,
+              hasNextLesson: hasNext,
               onSessionFinished: widget.onSessionFinished,
               setupStore: _setup,
             ),
       ),
     );
-    if (!mounted) return;
-    _reload();
+    if (!mounted) return false;
     final profile = _loadProfile();
     setState(() {
       _profile = profile;
     });
-    if (exit == PracticeExit.openNextLesson && next != null) {
-      final records = await _records!;
-      if (!mounted) return;
-      if (unlockedLessons(catalog.orderedIds, records).contains(next.id)) {
-        unawaited(_open(catalog, next));
-      }
-    }
+    return exit == PracticeExit.openNextLesson;
   }
 
   @override
@@ -178,7 +229,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     return Scaffold(
       backgroundColor: palette.surface,
       body: SafeArea(
-        child: FutureBuilder<V1PracticeCatalog>(
+        child: FutureBuilder<V1CourseCatalog>(
           future: _catalog,
           builder: (context, catalogSnap) {
             if (catalogSnap.hasError) {
@@ -195,7 +246,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                     ),
                     OutlinedButton(
                       onPressed: () {
-                        final next = V1PracticeCatalog.load();
+                        final next = V1CourseCatalog.load();
                         setState(() {
                           _catalog = next;
                         });
@@ -210,14 +261,23 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             final catalog = catalogSnap.data!;
-            return FutureBuilder<Map<String, V1PracticeRecord>>(
-              future: _records,
-              builder: (context, recordSnap) {
-                if (recordSnap.connectionState != ConnectionState.done) {
+            return FutureBuilder<_Progress>(
+              future: _state,
+              builder: (context, snap) {
+                // A reload keeps the previous data on screen (no flash).
+                if (snap.connectionState != ConnectionState.done &&
+                    !snap.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                final records = recordSnap.data ?? const {};
-                final open = unlockedLessons(catalog.orderedIds, records);
+                final (records, checks) =
+                    snap.data ??
+                    (
+                      const <String, V1PracticeRecord>{},
+                      const <String, V1LessonCheck>{},
+                    );
+                final state = V1CourseState(catalog, records, checks);
+                final nextUnit = state.next?.unitId;
+                if (nextUnit != null) _expanded.add(nextUnit);
                 return ListView(
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 24),
                   children: [
@@ -231,11 +291,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            localized(
-                              context,
-                              'Measured practice',
-                              'Ölçülü pratik',
-                            ),
+                            uiText(context, V1CourseCopy.title),
                             style: hankenText(
                               size: 20,
                               weight: FontWeight.w600,
@@ -246,14 +302,14 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      localized(
+                      uiText(
                         context,
-                        'Play with the click and the moving TAB. Each note gets one of three marks: correct, different note or couldn’t hear. Passing the gate opens the next lesson.',
-                        'Klik ve akan tab ile çal. Her nota üç işaretten birini alır: doğru, farklı nota ya da duyamadım. Geçiş kapısını geçmek sıradaki dersi açar.',
+                        V1CourseCopy.intro,
+                        values: {'v0': catalog.lessons.length},
                       ),
                       style: hankenText(size: 13, height: 1.45),
                     ),
-                    if (recordSnap.hasError)
+                    if (snap.hasError)
                       Text(
                         localized(
                           context,
@@ -273,14 +329,11 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                           'Bu sürümde ölçülü ders yok.',
                         ),
                       ),
-                    for (final lesson in catalog.lessons)
-                      _tile(
-                        context,
-                        catalog,
-                        lesson,
-                        records[lesson.id],
-                        open.contains(lesson.id),
-                      ),
+                    for (final level in catalog.levels) ...[
+                      _levelHeader(context, state, level),
+                      for (final unit in level.units)
+                        _unit(context, state, unit, unit.id == nextUnit),
+                    ],
                   ],
                 );
               },
@@ -288,6 +341,256 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
           },
         ),
       ),
+    );
+  }
+
+  Widget _levelHeader(
+    BuildContext context,
+    V1CourseState state,
+    V1CourseLevel level,
+  ) {
+    var done = 0, total = 0;
+    for (final u in level.units) {
+      final (d, t) = state.unitProgress(u);
+      done += d;
+      total += t;
+    }
+    return Padding(
+      key: Key('v1-course-level-${level.level}'),
+      padding: const EdgeInsets.fromLTRB(4, 18, 4, 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              uiText(
+                context,
+                V1CourseCopy.levelTitle,
+                values: {'v0': level.level},
+              ),
+              style: hankenText(size: 17, weight: FontWeight.w600),
+            ),
+          ),
+          Text(
+            uiText(
+              context,
+              V1CourseCopy.levelProgress,
+              values: {'v0': done, 'v1': total},
+            ),
+            style: monoText(size: 10.5),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _unitTitle(BuildContext context, V1CourseUnit u) {
+    final module = u.module;
+    if (module == null) {
+      return uiText(
+        context,
+        switch (u.track) {
+          'a' => V1CourseCopy.levelTestAcoustic,
+          'b' => V1CourseCopy.levelTestElectric,
+          _ => V1CourseCopy.levelTest,
+        },
+        values: {'v0': u.level},
+      );
+    }
+    return uiText(
+      context,
+      switch (u.track) {
+        'a' => V1CourseCopy.trackAcoustic,
+        'b' => V1CourseCopy.trackElectric,
+        _ => V1CourseCopy.moduleTitle,
+      },
+      values: {'v0': '$module${u.track?.toUpperCase() ?? ''}'},
+    );
+  }
+
+  Widget _unit(
+    BuildContext context,
+    V1CourseState state,
+    V1CourseUnit unit,
+    bool expanded,
+  ) {
+    final palette = OstinatoPalette.of(context);
+    final open = state.units[unit.id] ?? V1UnitOpen.locked;
+    final (done, total) = state.unitProgress(unit);
+    final values = {'v0': done, 'v1': total};
+    final line = switch (open) {
+      V1UnitOpen.locked => uiText(context, V1CourseCopy.unitLocked),
+      V1UnitOpen.openNotMeasured => uiText(
+        context,
+        V1CourseCopy.unitNotMeasured,
+        values: values,
+      ),
+      V1UnitOpen.open || V1UnitOpen.openEarlierProgress => uiText(
+        context,
+        V1CourseCopy.unitOpen,
+        values: values,
+      ),
+    };
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: GlassCard(
+        padding: EdgeInsets.zero,
+        child: Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            key: PageStorageKey('v1-course-unit-${unit.id}'),
+            initiallyExpanded: expanded || _expanded.contains(unit.id),
+            onExpansionChanged: (open) =>
+                open ? _expanded.add(unit.id) : _expanded.remove(unit.id),
+            leading: Icon(
+              open == V1UnitOpen.locked
+                  ? Icons.lock_outline
+                  : done == total
+                  ? Icons.check_circle
+                  : Icons.menu_book_outlined,
+            ),
+            title: Text(
+              _unitTitle(context, unit),
+              key: Key('v1-course-unit-${unit.id}'),
+            ),
+            subtitle: Text(
+              line,
+              key: Key('v1-course-unit-status-${unit.id}'),
+              style: monoText(
+                color: open == V1UnitOpen.openNotMeasured
+                    ? palette.warnInk
+                    : null,
+              ),
+            ),
+            children: [
+              if (open == V1UnitOpen.openNotMeasured)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: Text(
+                    uiText(context, V1CourseCopy.notMeasuredNote),
+                    style: hankenText(
+                      size: 12.5,
+                      color: palette.textMuted,
+                      height: 1.4,
+                    ),
+                  ),
+                ),
+              for (final lesson in unit.lessons) _tile(context, state, lesson),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  UiCopy _chip(V1LessonAvailability a) => switch (a) {
+    V1LessonAvailability.measured => V1CourseCopy.chipMeasured,
+    V1LessonAvailability.tuner => V1CourseCopy.chipTuner,
+    V1LessonAvailability.selfCheck => V1CourseCopy.chipSelfCheck,
+    V1LessonAvailability.selfCheckLesson => V1CourseCopy.chipSelfCheckLesson,
+    V1LessonAvailability.camera => V1CourseCopy.chipCamera,
+    V1LessonAvailability.drillSoon => V1CourseCopy.chipDrill,
+    V1LessonAvailability.held => V1CourseCopy.chipHeld,
+  };
+
+  String _status(
+    BuildContext context,
+    V1CourseLesson lesson,
+    V1LessonStatus status,
+    V1PracticeRecord? record,
+  ) {
+    final target = lesson.lesson.practice.tempo?.target;
+    return switch (status) {
+      V1LessonStatus.completed => localized(
+        context,
+        'COMPLETED · ♩={v0}',
+        'TAMAMLANDI · ♩={v0}',
+        values: {'v0': record?.completedBpm ?? 0},
+      ),
+      V1LessonStatus.passed =>
+        target == null
+            ? localized(
+                context,
+                'PASSED · ♩={v0}',
+                'GEÇİLDİ · ♩={v0}',
+                values: {'v0': record?.passedBpm ?? 0},
+              )
+            : localized(
+                context,
+                'PASSED · ♩={v0} · completes at ♩={v1}',
+                'GEÇİLDİ · ♩={v0} · ♩={v1} ile tamamlanır',
+                values: {'v0': record?.passedBpm ?? 0, 'v1': target},
+              ),
+      V1LessonStatus.played => localized(
+        context,
+        'PLAYED ×{v0}',
+        'ÇALINDI ×{v0}',
+        values: {'v0': record?.runs ?? 0},
+      ),
+      V1LessonStatus.open => localized(context, 'OPEN', 'AÇIK'),
+      V1LessonStatus.locked => uiText(context, V1CourseCopy.statusLocked),
+      V1LessonStatus.tuned => uiText(context, V1CourseCopy.statusTuned),
+      V1LessonStatus.selfReported => uiText(
+        context,
+        V1CourseCopy.statusSelfReported,
+      ),
+      V1LessonStatus.repeatWithMeasurement => uiText(
+        context,
+        V1CourseCopy.statusRepeat,
+      ),
+      V1LessonStatus.held => uiText(context, V1CourseCopy.statusHeld),
+      V1LessonStatus.heldSelfReported => uiText(
+        context,
+        V1CourseCopy.statusHeldSelfReported,
+      ),
+    };
+  }
+
+  Widget _tile(
+    BuildContext context,
+    V1CourseState state,
+    V1CourseLesson lesson,
+  ) {
+    final palette = OstinatoPalette.of(context);
+    final record = state.records[lesson.id];
+    final status = state.status(lesson);
+    final open = state.isOpen(lesson.id);
+    return ListTile(
+      key: Key('v1-practice-${lesson.id}'),
+      enabled: open,
+      leading: Icon(switch (status) {
+        V1LessonStatus.completed || V1LessonStatus.tuned => Icons.check_circle,
+        V1LessonStatus.passed => Icons.check_circle_outline,
+        V1LessonStatus.selfReported ||
+        V1LessonStatus.heldSelfReported => Icons.task_alt,
+        V1LessonStatus.locked => Icons.lock_outline,
+        V1LessonStatus.held => Icons.pause_circle_outline,
+        _ =>
+          lesson.availability == V1LessonAvailability.measured
+              ? Icons.play_circle_outline
+              : Icons.menu_book_outlined,
+      }),
+      title: Text(lesson.lesson.title.of(context)),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            uiText(context, _chip(lesson.availability)),
+            key: Key('v1-course-chip-${lesson.id}'),
+            style: hankenText(
+              size: 11.5,
+              color: lesson.availability == V1LessonAvailability.measured
+                  ? palette.success
+                  : palette.textMuted,
+            ),
+          ),
+          Text(
+            _status(context, lesson, status, record),
+            key: Key('v1-course-status-${lesson.id}'),
+            style: monoText(),
+          ),
+        ],
+      ),
+      onTap: open ? () => unawaited(_open(state.catalog, lesson)) : null,
     );
   }
 
@@ -346,71 +649,4 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
       );
     },
   );
-
-  Widget _tile(
-    BuildContext context,
-    V1PracticeCatalog catalog,
-    V1Lesson lesson,
-    V1PracticeRecord? record,
-    bool open,
-  ) {
-    final target = lesson.practice.tempo?.target;
-    final status = record?.completed ?? false
-        ? localized(
-            context,
-            'COMPLETED · ♩={v0}',
-            'TAMAMLANDI · ♩={v0}',
-            values: {'v0': record!.completedBpm ?? 0},
-          )
-        : record?.passed ?? false
-        ? target == null
-              ? localized(
-                  context,
-                  'PASSED · ♩={v0}',
-                  'GEÇİLDİ · ♩={v0}',
-                  values: {'v0': record!.passedBpm ?? 0},
-                )
-              : localized(
-                  context,
-                  'PASSED · ♩={v0} · completes at ♩={v1}',
-                  'GEÇİLDİ · ♩={v0} · ♩={v1} ile tamamlanır',
-                  values: {'v0': record!.passedBpm ?? 0, 'v1': target},
-                )
-        : !open
-        ? localized(
-            context,
-            'LOCKED · pass the lesson before',
-            'KİLİTLİ · önceki dersi geç',
-          )
-        : (record?.runs ?? 0) > 0
-        ? localized(
-            context,
-            'PLAYED ×{v0}',
-            'ÇALINDI ×{v0}',
-            values: {'v0': record!.runs},
-          )
-        : localized(context, 'OPEN', 'AÇIK');
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: GlassCard(
-        padding: EdgeInsets.zero,
-        child: ListTile(
-          key: Key('v1-practice-${lesson.id}'),
-          enabled: open,
-          leading: Icon(
-            record?.completed ?? false
-                ? Icons.check_circle
-                : record?.passed ?? false
-                ? Icons.check_circle_outline
-                : open
-                ? Icons.play_circle_outline
-                : Icons.lock_outline,
-          ),
-          title: Text(lesson.title.of(context)),
-          subtitle: Text(status, style: monoText()),
-          onTap: open ? () => unawaited(_open(catalog, lesson)) : null,
-        ),
-      ),
-    );
-  }
 }
