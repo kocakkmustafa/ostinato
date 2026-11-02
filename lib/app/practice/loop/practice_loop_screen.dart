@@ -717,13 +717,13 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
               'Duyuyorum ama ayırt edemiyorum',
             ),
           };
-    Widget count(PracticeMark m, String name) {
+    Widget count(PracticeMark m, String name, {bool first = false}) {
       final style = theme.style(m);
       return Semantics(
         label: '$name ${_c.countOf(m)}',
         child: ExcludeSemantics(
           child: Padding(
-            padding: const EdgeInsets.only(left: 8),
+            padding: EdgeInsets.only(left: first ? 0 : 8),
             child: Text(
               '${style.symbol}${_c.countOf(m)}',
               key: Key('practice-count-${m.name}'),
@@ -762,16 +762,33 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
               style: hankenText(size: 12.5),
             ),
           ),
-          count(PracticeMark.correct, localized(context, 'Correct', 'Doğru')),
-          count(
-            PracticeMark.differentNote,
-            _criteria.rhythm
-                ? uiText(context, RhythmCopy.earlyOrLate)
-                : localized(context, 'Different note', 'Farklı nota'),
-          ),
-          count(
-            PracticeMark.couldNotHear,
-            localized(context, "Couldn't hear", 'Duyamadım'),
+          const SizedBox(width: 8),
+          // Each counter is a glyph and a number. In a right-to-left locale
+          // the bidi algorithm put the glyph after the number ("0✓") and
+          // mirrored the row; the group reads left to right everywhere.
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: Row(
+              key: const Key('practice-counts'),
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                count(
+                  PracticeMark.correct,
+                  localized(context, 'Correct', 'Doğru'),
+                  first: true,
+                ),
+                count(
+                  PracticeMark.differentNote,
+                  _criteria.rhythm
+                      ? uiText(context, RhythmCopy.earlyOrLate)
+                      : localized(context, 'Different note', 'Farklı nota'),
+                ),
+                count(
+                  PracticeMark.couldNotHear,
+                  localized(context, "Couldn't hear", 'Duyamadım'),
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -50,6 +50,41 @@ void main() {
     expect(catalog.lessons.every(V1PracticeCatalog.isPracticable), isTrue);
   });
 
+  testWidgets('right-to-left: each counter keeps its glyph before the '
+      'number, in the same order as other locales', (tester) async {
+    tester.view.physicalSize = const Size(420, 1600);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(
+      practiceHost(
+        Directionality(
+          textDirection: TextDirection.rtl,
+          child: PracticeLoopScreen(lesson: lesson(), progress: _Memory()),
+        ),
+      ),
+    );
+    await tester.pump();
+    final keys = [
+      for (final m in [
+        PracticeMark.correct,
+        PracticeMark.differentNote,
+        PracticeMark.couldNotHear,
+      ])
+        Key('practice-count-${m.name}'),
+    ];
+    final xs = [for (final k in keys) tester.getTopLeft(find.byKey(k)).dx];
+    expect(xs, orderedEquals([...xs]..sort()), reason: 'left to right');
+    for (final k in keys) {
+      expect(
+        Directionality.of(tester.element(find.byKey(k))),
+        TextDirection.ltr,
+      );
+      expect(tester.widget<Text>(find.byKey(k)).data, endsWith('0'));
+    }
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('settings, flow, mic strip, result and the finished event', (
     tester,
   ) async {
