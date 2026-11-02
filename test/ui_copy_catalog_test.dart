@@ -12,6 +12,7 @@ import 'package:ostinato/app/practice/loop/v1_paywall_copy.dart';
 import 'package:ostinato/app/practice/loop/tempo_ladder_copy.dart';
 import 'package:ostinato/app/practice/own_recording/own_recording_copy.dart';
 import 'package:ostinato/app/retention/retention_copy.dart';
+import 'package:ostinato/app/screens/settings_copy.dart';
 import 'package:ostinato/app/screens/v1_home_copy.dart';
 import 'package:ostinato/app/tuner/tuner_copy.dart';
 import 'package:ostinato/app/ui_copy.dart';
@@ -31,6 +32,7 @@ void main() {
     'content/ui/tempo-ladder.json': TempoLadderCopy.all,
     'content/ui/practice-rhythm.json': RhythmCopy.all,
     'content/ui/membership.json': MembershipCopy.all,
+    'content/ui/settings.json': SettingsCopy.all,
   };
 
   for (final entry in catalogs.entries) {
@@ -79,6 +81,7 @@ void main() {
         ...TempoLadderCopy.all,
         ...RhythmCopy.all,
         ...MembershipCopy.all,
+        ...SettingsCopy.all,
       ]) {
         final id = appMessageIds[pair];
         expect(id, isNotNull, reason: pair.$1);

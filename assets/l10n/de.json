@@ -8440,6 +8440,7 @@
     "1d68a089af11083e": "Mitgliedschaft",
     "6946560ebac6e08d": "Um eine Lektion zu bestehen, müssen mindestens 80 % ihrer Töne richtig sein; dann öffnet sich die nächste Lektion. Die ersten Lektionen jedes Kurses sind kostenlos; spätere Lektionen erfordern eine Ostinato-Mitgliedschaft.",
     "8c35a3bffb5f6829": "Melde dich zuerst an oder erstelle ein Konto: Deine Mitgliedschaft ist an dein Konto gebunden und gilt so auf jedem Gerät, auf dem du angemeldet bist.",
-    "545f6c0a16d5c54c": "Deine Lektionsergebnisse, deine Serie und dein Wochenziel bleiben auf diesem Gerät; diese Version synchronisiert sie nicht mit einem Konto. Dein Konto wird für deine Mitgliedschaft verwendet."
+    "545f6c0a16d5c54c": "Deine Lektionsergebnisse, deine Serie und dein Wochenziel bleiben auf diesem Gerät; diese Version synchronisiert sie nicht mit einem Konto. Dein Konto wird für deine Mitgliedschaft verwendet.",
+    "6afa082a5c331043": "Beim gemessenen Üben hört das Mikrofon die Töne, die du spielst. Eine Lektion ist bestanden, wenn ein ausreichend großer Anteil ihrer Töne als richtig erkannt wird; der nötige Anteil steigt mit der Stufe. Die Berechtigung wird bei der ersten Messung angefragt. Audio wird auf diesem Gerät verarbeitet und nicht hochgeladen; was du spielst, wird nicht aufgezeichnet, außer du schaltest das Anhören deiner eigenen Aufnahme ein. Stoppen, den Bildschirm verlassen, das Konto wechseln oder die App in den Hintergrund legen schließt das Mikrofon."
   }
 }

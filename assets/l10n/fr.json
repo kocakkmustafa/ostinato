@@ -8440,6 +8440,7 @@
     "1d68a089af11083e": "Abonnement",
     "6946560ebac6e08d": "Pour réussir une leçon, au moins 80 % de ses notes doivent être justes ; la leçon suivante s’ouvre alors. Les premières leçons de chaque cours sont gratuites ; les suivantes nécessitent un abonnement Ostinato.",
     "8c35a3bffb5f6829": "Connecte-toi ou crée d’abord un compte : ton abonnement est lié à ton compte et fonctionne ainsi sur chaque appareil où tu te connectes.",
-    "545f6c0a16d5c54c": "Tes résultats de leçons, ta série et ton objectif hebdomadaire restent sur cet appareil ; cette version ne les synchronise avec aucun compte. Ton compte sert à ton abonnement."
+    "545f6c0a16d5c54c": "Tes résultats de leçons, ta série et ton objectif hebdomadaire restent sur cet appareil ; cette version ne les synchronise avec aucun compte. Ton compte sert à ton abonnement.",
+    "6afa082a5c331043": "En pratique mesurée, le microphone écoute les notes que tu joues. Une leçon est réussie quand une part suffisante de ses notes est entendue comme correcte ; la part requise augmente avec le niveau. L’autorisation est demandée lors de la première mesure. L’audio est traité sur cet appareil et n’est pas envoyé ; ce que tu joues n’est pas enregistré, sauf si tu actives l’écoute de ton propre enregistrement. Arrêter, quitter l’écran, changer de compte ou passer l’app en arrière-plan ferme le microphone."
   }
 }

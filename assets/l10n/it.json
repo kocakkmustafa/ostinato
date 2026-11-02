@@ -8440,6 +8440,7 @@
     "1d68a089af11083e": "Abbonamento",
     "6946560ebac6e08d": "Per superare una lezione, almeno l’80% delle note deve essere corretto; allora si apre la lezione successiva. Le prime lezioni di ogni corso sono gratuite; le successive richiedono un abbonamento Ostinato.",
     "8c35a3bffb5f6829": "Prima accedi o crea un account: l’abbonamento è legato al tuo account, così funziona su ogni dispositivo in cui accedi.",
-    "545f6c0a16d5c54c": "I risultati delle lezioni, la serie e l’obiettivo settimanale restano su questo dispositivo; questa versione non li sincronizza con un account. Il tuo account serve per l’abbonamento."
+    "545f6c0a16d5c54c": "I risultati delle lezioni, la serie e l’obiettivo settimanale restano su questo dispositivo; questa versione non li sincronizza con un account. Il tuo account serve per l’abbonamento.",
+    "6afa082a5c331043": "Nella pratica misurata il microfono ascolta le note che suoni. Una lezione è superata quando una quota sufficiente delle sue note viene sentita come corretta; la quota richiesta cresce con il livello. Il permesso viene chiesto alla prima misurazione. L’audio viene elaborato su questo dispositivo e non viene caricato; ciò che suoni non viene registrato, a meno che tu non attivi l’ascolto della tua registrazione. Fermare, uscire dalla schermata, cambiare account o portare l’app in secondo piano chiude il microfono."
   }
 }

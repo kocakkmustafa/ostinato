@@ -10,6 +10,7 @@ import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/screens/onboarding_screen.dart';
 import 'package:ostinato/app/screens/settings_screen.dart';
+import 'package:ostinato/app/screens/settings_copy.dart';
 import 'package:ostinato/app/screens/v1_home_copy.dart';
 import 'package:ostinato/app/ui_copy.dart';
 import 'package:ostinato/main.dart';
@@ -145,6 +146,12 @@ void main() {
         );
         await tester.pumpWidget(host(const SettingsScreen()));
         await tester.pumpAndSettle();
+        // Store review 2026-11-02: the microphone card describes measured
+        // practice as it is (share of notes heard as correct; permission at
+        // the first measurement), not "no accuracy score / only after Start".
+        expect(find.text(t(SettingsCopy.micBody)), findsOneWidget);
+        expect(find.textContaining('accuracy or mastery score'), findsNothing);
+        expect(find.textContaining('only after you press Start'), findsNothing);
         expect(
           find.textContaining(
             language == 'tr'

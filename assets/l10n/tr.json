@@ -8440,6 +8440,7 @@
     "1d68a089af11083e": "Üyelik",
     "6946560ebac6e08d": "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato üyeliği gerektirir.",
     "8c35a3bffb5f6829": "Önce giriş yap ya da hesap oluştur: üyeliğin hesabına bağlıdır, böylece giriş yaptığın her cihazda geçerli olur.",
-    "545f6c0a16d5c54c": "Ders sonuçların, serin ve haftalık hedefin bu cihazda kalır; bu sürüm bunları hesaba eşitlemez. Hesabın üyeliğin için kullanılır."
+    "545f6c0a16d5c54c": "Ders sonuçların, serin ve haftalık hedefin bu cihazda kalır; bu sürüm bunları hesaba eşitlemez. Hesabın üyeliğin için kullanılır.",
+    "6afa082a5c331043": "Ölçülü pratikte mikrofon çaldığın notaları dinler. Notalarının yeterli bir kısmı doğru duyulduğunda ders geçilir; gereken oran seviyeyle artar. İzin, ilk ölçümde istenir. Ses bu cihazda işlenir ve yüklenmez; kendi kaydını dinleme seçeneğini açmadıkça çaldığın kaydedilmez. Durdurmak, ekrandan çıkmak, hesap değiştirmek veya uygulamayı arka plana almak mikrofonu kapatır."
   }
 }

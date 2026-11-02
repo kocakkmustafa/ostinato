@@ -8440,6 +8440,7 @@
     "1d68a089af11083e": "Membresía",
     "6946560ebac6e08d": "Para aprobar una lección, al menos el 80 % de sus notas debe ser correcto; entonces se abre la siguiente lección. Las primeras lecciones de cada curso son gratis; las siguientes requieren una membresía de Ostinato.",
     "8c35a3bffb5f6829": "Primero inicia sesión o crea una cuenta: tu membresía está vinculada a tu cuenta, así funciona en cada dispositivo donde inicies sesión.",
-    "545f6c0a16d5c54c": "Tus resultados de lecciones, tu racha y tu meta semanal quedan en este dispositivo; esta versión no los sincroniza con ninguna cuenta. Tu cuenta se usa para tu membresía."
+    "545f6c0a16d5c54c": "Tus resultados de lecciones, tu racha y tu meta semanal quedan en este dispositivo; esta versión no los sincroniza con ninguna cuenta. Tu cuenta se usa para tu membresía.",
+    "6afa082a5c331043": "En la práctica medida, el micrófono escucha las notas que tocas. Una lección se aprueba cuando una proporción suficiente de sus notas se oye como correcta; la proporción necesaria sube con el nivel. El permiso se pide la primera vez que algo se mide. El audio se procesa en este dispositivo y no se sube; lo que tocas no se graba a menos que actives escuchar tu propia grabación. Detener, salir de la pantalla, cambiar de cuenta o pasar la app a segundo plano cierra el micrófono."
   }
 }
