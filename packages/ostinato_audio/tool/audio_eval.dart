@@ -7,6 +7,12 @@
 //   dart run tool/audio_eval.dart synth-tuner <spec.json> <out.jsonl> [k/n]
 //   dart run tool/audio_eval.dart real-tuner  <spec.json> <out.jsonl> [k/n]
 //   dart run tool/audio_eval.dart verify      <spec.json> <out.jsonl> [k/n]
+//   dart run tool/audio_eval.dart stream-tuner|stream-verify <spec> <out> [k/n]
+//
+// E52 stream-tuner flags (absent = E45 behaviour, rows unchanged):
+// `seedSalt` (string) salts the channel seed, condition `seedOf` reuses
+// another condition's channel draw, `displayRule: "confident-first"` adds
+// arm T (t* fields) computed in the same pass as arm C.
 //
 // Spec keys: sampleRate, conditions[], irs[] (f32le paths at sampleRate),
 // plus synth `instruments[]` or real `items[]`, `shiftsCents[]`, `offsets[]`.
@@ -124,8 +130,13 @@ final class Condition {
         snrDb = (j['snrDb'] as num? ?? 60).toDouble(),
         lowCutHz = (j['lowCutHz'] as num?)?.toDouble(),
         lowCutOrder = j['lowCutOrder'] as int? ?? 2,
-        agc = j['agc'] as bool? ?? false;
+        agc = j['agc'] as bool? ?? false,
+        seedOf = j['seedOf'] as String?;
   final String name;
+
+  /// E52: an ablation condition reuses another condition's channel draw (IR
+  /// index and noise sequence) by naming it here; null = its own name.
+  final String? seedOf;
   final bool clean, reverb, agc;
   final double drrDb, snrDb;
   final ChannelNoise noise;
@@ -618,7 +629,7 @@ void runStreamTuner(
       final onset = ((item['onsetS'] as num) * sr / r).round();
       final end = math.min(y.length, ((item['endS'] as num) * sr / r).round());
       for (final c in ctx.conditions) {
-        final seed = stableHash('$id/$shift/${c.name}/stream');
+        final seed = streamTunerSeed(spec, id, shift, c);
         final z = ctx.render(y, c, seed);
         final mode = gridMode(spec);
         // E44: the app passes its calibrated room floor to every measurement.
@@ -629,6 +640,8 @@ void runStreamTuner(
         int? lastT, lastA;
         var n = 0, measured = 0;
         final gate = NoteGate.fromSpec(spec, sr);
+        // E52 arm T: same measurements, only the shown one differs.
+        final display = ConfidentFirst.fromSpec(spec, sr);
         final sw = Stopwatch()..start();
         for (var t = onset + phase; t <= end; t += interval) {
           final a = math.max(0, t - bufferLen);
@@ -645,19 +658,20 @@ void runStreamTuner(
             lastT = t;
             lastA = a + (m.attackIndex ?? 0);
             firstS ??= (t - onset) / sr;
+            display?.offer(m, a, t);
           }
         }
         sw.stop();
         // E45: the clean (unrendered, same shift) buffer at the instant the
         // shown reading was taken; separates the tuner's error from the
         // string's own drift. Not timed.
+        double? cleanAt(int t) => cleanTuner(spec, profile)
+            .measure(y.sublist(math.max(0, t - bufferLen), t), sampleRate: sr)
+            .measurement
+            ?.f0Hz;
         double? cleanF0;
         if (spec['cleanRef'] == true && lastT != null) {
-          cleanF0 = cleanTuner(spec, profile)
-              .measure(y.sublist(math.max(0, lastT - bufferLen), lastT),
-                  sampleRate: sr)
-              .measurement
-              ?.f0Hz;
+          cleanF0 = cleanAt(lastT);
         }
         emit({
           'id': id,
@@ -688,9 +702,129 @@ void runStreamTuner(
           'cacheHits': mode.cache?.hits,
           'cacheMisses': mode.cache?.misses,
           'roomFloorDb': floor,
+          // E52 fields only when an E52 flag is set (rows of older specs are
+          // byte-for-byte unchanged).
+          if (spec['seedSalt'] != null || display != null) ...{
+            'seed': seed,
+            'irIndex': ctx.irs.isEmpty ? null : seed % ctx.irs.length,
+            'irUsed': !c.clean && c.reverb && ctx.irs.isNotEmpty,
+            'attackIndexMs': last?.attackIndex == null
+                ? null
+                : last!.attackIndex! * 1000 / sr,
+            'confident':
+                last == null ? null : ConfidentFirst.isConfident(last, sr),
+          },
+          if (display != null)
+            ...display.row(
+              last: last,
+              lastT: lastT,
+              lastA: lastA,
+              cleanF0: cleanF0,
+              cleanAt: spec['cleanRef'] == true ? cleanAt : null,
+              onset: onset,
+              refF0: refF0,
+              shift: shift,
+            ),
         });
       }
     }
+  }
+}
+
+/// Channel seed of a stream-tuner row. Without `seedSalt` this is the E43–E45
+/// formula (a condition's own name); E52 (`seedSalt: "E52"`) appends the salt
+/// so the IR draw and noise differ from every earlier run, and `seedOf` lets
+/// an ablation reuse another condition's draw.
+int streamTunerSeed(
+    Map<String, dynamic> spec, String id, double shift, Condition c) {
+  final salt = spec['seedSalt'] as String?;
+  final key = '$id/$shift/${c.seedOf ?? c.name}/stream';
+  return stableHash(salt == null ? key : '$key/$salt');
+}
+
+/// E52 arm T (`displayRule: "confident-first"`): the note shows its last
+/// *confident* measurement — the tuner screen's `confident` rule
+/// (lib/app/tuner/tuner_analysis.dart: attack at least kMinVisibleAttackMs =
+/// 20 ms inside the buffer, not from the late-readings rule; the spread limit
+/// follows from the latter) — and falls back to the last successful
+/// measurement (arm C) when the note has none. A tail reading never replaces
+/// an earlier confident reading of the same note. Null when the spec has no
+/// display rule.
+final class ConfidentFirst {
+  ConfidentFirst(this.sampleRate);
+
+  static const minVisibleAttackMs = 20;
+
+  static ConfidentFirst? fromSpec(Map<String, dynamic> spec, int sampleRate) {
+    final r = spec['displayRule'] as String?;
+    if (r == null) return null;
+    if (r != 'confident-first') {
+      throw ArgumentError('unknown displayRule $r');
+    }
+    return ConfidentFirst(sampleRate);
+  }
+
+  static bool isConfident(TuningMeasurement m, int sampleRate) {
+    final idx = m.attackIndex;
+    return idx != null &&
+        idx >= minVisibleAttackMs * sampleRate / 1000 &&
+        !m.fromLateReadings;
+  }
+
+  final int sampleRate;
+  TuningMeasurement? conf;
+  int? confT, confA;
+  var confidentInstants = 0;
+
+  /// Called with every measurement arm C counts, in time order.
+  void offer(TuningMeasurement m, int bufferStart, int t) {
+    if (!isConfident(m, sampleRate)) return;
+    confidentInstants++;
+    conf = m;
+    confT = t;
+    confA = bufferStart + m.attackIndex!;
+  }
+
+  Map<String, Object?> row({
+    required TuningMeasurement? last,
+    required int? lastT,
+    required int? lastA,
+    required double? cleanF0,
+    required double? Function(int t)? cleanAt,
+    required int onset,
+    required double? refF0,
+    required double shift,
+  }) {
+    final sr = sampleRate;
+    final m = conf ?? last;
+    final t = conf != null ? confT : lastT;
+    final a = conf != null ? confA : lastA;
+    // Clean reference: reused when T shows C's instant, else one extra
+    // measurement of the clean buffer at T's instant.
+    final extra = cleanAt != null && t != null && t != lastT;
+    final tClean = cleanAt == null || t == null
+        ? null
+        : (t == lastT ? cleanF0 : cleanAt(t));
+    return {
+      'tMeasured': m != null,
+      'tConfident': conf != null,
+      'tConfidentInstants': confidentInstants,
+      'tF0': m?.f0Hz,
+      'tFromLate': m?.fromLateReadings,
+      'tAttackIndexMs':
+          m?.attackIndex == null ? null : m!.attackIndex! * 1000 / sr,
+      'tLastS': t == null ? null : (t - onset) / sr,
+      'tLastAttackS': a == null ? null : (a - onset) / sr,
+      'tErr': m == null || refF0 == null
+          ? null
+          : wrapCents(centsOf(m.f0Hz, refF0) - shift),
+      if (cleanAt != null) ...{
+        'tCleanF0': tClean,
+        'tCleanExtra': extra,
+        'tErrClean':
+            m == null || tClean == null ? null : centsOf(m.f0Hz, tClean),
+      },
+    };
   }
 }
 
