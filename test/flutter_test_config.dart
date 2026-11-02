@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:ostinato/app/audio/mic_permission_gate.dart';
+
 /// Repo-geneli test girişi — HER `test/*.dart` dosyası bundan geçer
 /// (Flutter `flutter_test_config.dart`ı `test/` kökünde arar, tüm alt
 /// dosyalara otomatik uygulanır).
@@ -17,14 +19,19 @@ class _ZeroNetworkOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     throw StateError(
-        'Testler sırasında AĞ BAĞLANTISI denendi. Bu depoda hiçbir test '
-        'ağa çıkmamalı (D1: fontlar paketli; Auth E2E ayrı koşulur). Gerçekten '
-        'ağ gerektiren yeni bir test yazıyorsan bu istisna SESSİZCE '
-        'geçilmez: kapsamı adıyla genişlet, sabote etme.');
+      'Testler sırasında AĞ BAĞLANTISI denendi. Bu depoda hiçbir test '
+      'ağa çıkmamalı (D1: fontlar paketli; Auth E2E ayrı koşulur). Gerçekten '
+      'ağ gerektiren yeni bir test yazıyorsan bu istisna SESSİZCE '
+      'geçilmez: kapsamı adıyla genişlet, sabote etme.',
+    );
   }
 }
 
 Future<void> testExecutable(Future<void> Function() testMain) async {
   HttpOverrides.global = _ZeroNetworkOverrides();
+  // Widget tests inject their own audio sources and permission replies; the
+  // UI-level microphone gate (test/mic_permission_gate_test.dart) is tested
+  // on its own, so screens start capture synchronously as on a granted phone.
+  MicPermissionGate.knownGranted = true;
   await testMain();
 }

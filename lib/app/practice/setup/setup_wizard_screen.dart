@@ -469,8 +469,9 @@ class _SetupWizardScreenState extends State<SetupWizardScreen> {
           onPrimary: running
               ? null
               : () => unawaited(
-                  m.measureRoom(
-                    captureAction: practiceCaptureActionFor(context),
+                  startPracticeCapture(
+                    context,
+                    (action) => m.measureRoom(captureAction: action),
                   ),
                 ),
         )
@@ -481,7 +482,10 @@ class _SetupWizardScreenState extends State<SetupWizardScreen> {
           onPrimary: () => _next(skipped: false),
           secondary: localized(context, 'Measure again', 'Tekrar ölç'),
           onSecondary: () => unawaited(
-            m.measureRoom(captureAction: practiceCaptureActionFor(context)),
+            startPracticeCapture(
+              context,
+              (action) => m.measureRoom(captureAction: action),
+            ),
           ),
           canSkip: false,
         ),
@@ -601,8 +605,9 @@ class _SetupWizardScreenState extends State<SetupWizardScreen> {
           onPrimary: () => _next(skipped: false),
           secondary: localized(context, 'Measure again', 'Tekrar ölç'),
           onSecondary: () => unawaited(
-            m.calibrateLatency(
-              captureAction: practiceCaptureActionFor(context),
+            startPracticeCapture(
+              context,
+              (action) => m.calibrateLatency(captureAction: action),
             ),
           ),
           canSkip: false,
@@ -614,8 +619,9 @@ class _SetupWizardScreenState extends State<SetupWizardScreen> {
           onPrimary: running
               ? null
               : () => unawaited(
-                  m.calibrateLatency(
-                    captureAction: practiceCaptureActionFor(context),
+                  startPracticeCapture(
+                    context,
+                    (action) => m.calibrateLatency(captureAction: action),
                   ),
                 ),
         ),

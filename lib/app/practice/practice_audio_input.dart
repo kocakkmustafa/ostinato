@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import '../audio/audio_input_controller.dart';
+import '../audio/mic_permission_gate.dart';
 import '../audio/practice_audio_root.dart';
 import '../tuner/tuner_controller.dart';
 import '../tuner/tunings.dart';
@@ -63,6 +64,18 @@ PracticeAudioCaptureAction? practiceCaptureActionFor(BuildContext context) {
   }
   return action;
 }
+
+/// Starts practice capture after the microphone permission settles
+/// ([MicPermissionGate]); the debug fake asks nothing and gets no action.
+Future<void> startPracticeCapture(
+  BuildContext context,
+  Future<void> Function(PracticeAudioCaptureAction? action) start,
+) => MicPermissionGate.startAfterPermission(
+  context,
+  start,
+  mint: practiceCaptureActionFor,
+  skip: kFakeMicEnabled,
+);
 
 /// A tuner controller on the debug fake, or null (production tuner).
 TunerController? debugFakeTunerController(TuningPreset preset) {

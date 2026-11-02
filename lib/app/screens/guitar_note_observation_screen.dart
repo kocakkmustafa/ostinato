@@ -8,7 +8,7 @@ import '../app_locale.dart';
 import '../app_theme.dart';
 import '../audio/audio_capture_channel.dart';
 import '../audio/guitar_note_observation_controller.dart';
-import '../audio/practice_audio_root.dart';
+import '../audio/mic_permission_gate.dart';
 import '../design/ostinato_theme.dart';
 import '../device_accuracy_copy.dart';
 import '../design/widgets.dart';
@@ -388,14 +388,15 @@ class _GuitarNoteObservationScreenState
                                 : () {
                                     if (_preparation.isAcknowledged &&
                                         controller.canStart) {
-                                      // Capture the top-route/account/native
-                                      // context before permission can suspend.
-                                      final action =
-                                          PracticeAudioCaptureScope.actionFor(
-                                            context,
-                                          );
+                                      // Permission first; the action is
+                                      // minted for this route afterwards.
                                       unawaited(
-                                        controller.start(captureAction: action),
+                                        MicPermissionGate.startAfterPermission(
+                                          context,
+                                          (action) => controller.start(
+                                            captureAction: action,
+                                          ),
+                                        ),
                                       );
                                     }
                                   },
