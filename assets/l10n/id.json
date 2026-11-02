@@ -8411,6 +8411,17 @@
     "c19affc136daedd5": "“Tepat waktu” hanya menghitung ketukan yang bisa aku dengar; “tidak terdengar” dilaporkan terpisah.",
     "dcc80d521759d7d1": "Latensi belum dikalibrasi untuk output ini, jadi waktu diukur terhadap pergeseran tetapmu sendiri. Kalibrasi agar bisa dibandingkan persis dengan klik.",
     "df2c333764d05b9b": "Terlalu cepat: {v0} · Terlalu lambat: {v1}",
-    "ee80e7f71794e5f5": "Pelajaran berikutnya yang disarankan"
+    "ee80e7f71794e5f5": "Pelajaran berikutnya yang disarankan",
+    "992d6ade7ce199a5": "Tangga tempo: Aktif",
+    "16cdaba08210efce": "Tangga tempo: Nonaktif",
+    "a9198dedf13916d2": "Setelah satu putaran penuh yang memenuhi kriteria, putaran berikutnya {v0} BPM lebih cepat, hingga tempo target ♩={v1}.",
+    "3a5f83734acbbd06": "Tangga tempo",
+    "6c8cfc0642830513": "Putaran berikutnya di ♩={v0}",
+    "43921a381564e5f5": "Putaran berikutnya di tempo target ♩={v0} — putaran itu dihitung untuk kelulusan",
+    "72d2c16d7b73ba67": "Putaran berikutnya tetap di ♩={v0} — tangga naik setelah satu putaran penuh yang memenuhi kriteria",
+    "c26eae7f0aece97b": "Target tercapai — putaran ini dihitung untuk kelulusan",
+    "fece3d7db90be59e": "Target tercapai — satu putaran penuh di tempo ini dihitung untuk kelulusan",
+    "3cf235f0a516306d": "Hanya putaran di tempo target ♩={v0} yang menyelesaikan pelajaran.",
+    "14fb5991656683a8": "Mainkan di ♩={v0}"
   }
 }

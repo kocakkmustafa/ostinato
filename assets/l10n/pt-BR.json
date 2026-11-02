@@ -8418,6 +8418,17 @@
     "c19affc136daedd5": "“No tempo” conta só as batidas que consegui ouvir; as “não ouvidas” são informadas à parte.",
     "dcc80d521759d7d1": "A latência não está calibrada nesta saída, então o tempo foi medido em relação ao seu próprio deslocamento constante. Calibre para comparar exatamente com o clique.",
     "df2c333764d05b9b": "Adiantado: {v0} · Atrasado: {v1}",
-    "ee80e7f71794e5f5": "Próxima aula sugerida"
+    "ee80e7f71794e5f5": "Próxima aula sugerida",
+    "992d6ade7ce199a5": "Escada de andamento: ligada",
+    "16cdaba08210efce": "Escada de andamento: desligada",
+    "a9198dedf13916d2": "Depois de uma passada completa que cumpre os critérios, a próxima fica {v0} BPM mais rápida, até o andamento-alvo ♩={v1}.",
+    "3a5f83734acbbd06": "Escada de andamento",
+    "6c8cfc0642830513": "Próxima passada a ♩={v0}",
+    "43921a381564e5f5": "Próxima passada no andamento-alvo ♩={v0} — essa passada conta para a aprovação",
+    "72d2c16d7b73ba67": "A próxima passada continua a ♩={v0} — a escada sobe depois de uma passada completa que cumpre os critérios",
+    "c26eae7f0aece97b": "Alvo alcançado — esta passada conta para a aprovação",
+    "fece3d7db90be59e": "Alvo alcançado — uma passada completa neste andamento conta para a aprovação",
+    "3cf235f0a516306d": "Só uma passada no andamento-alvo ♩={v0} conclui a lição.",
+    "14fb5991656683a8": "Tocar a ♩={v0}"
   }
 }

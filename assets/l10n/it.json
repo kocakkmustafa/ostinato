@@ -8418,6 +8418,17 @@
     "c19affc136daedd5": "\"A tempo\" conta solo i colpi che ho potuto sentire; quelli \"non sentiti\" sono riportati a parte.",
     "dcc80d521759d7d1": "La latenza non è calibrata su questa uscita, quindi il ritmo è stato misurato rispetto al tuo scarto costante. Calibrala per confrontarlo esattamente con il clic.",
     "df2c333764d05b9b": "In anticipo: {v0} · In ritardo: {v1}",
-    "ee80e7f71794e5f5": "Prossima lezione suggerita"
+    "ee80e7f71794e5f5": "Prossima lezione suggerita",
+    "992d6ade7ce199a5": "Scala di tempo: attiva",
+    "16cdaba08210efce": "Scala di tempo: disattivata",
+    "a9198dedf13916d2": "Dopo un giro completo che soddisfa i criteri, il giro successivo è più veloce di {v0} BPM, fino al tempo obiettivo ♩={v1}.",
+    "3a5f83734acbbd06": "Scala di tempo",
+    "6c8cfc0642830513": "Prossimo giro a ♩={v0}",
+    "43921a381564e5f5": "Prossimo giro al tempo obiettivo ♩={v0}: quel giro conta per la verifica",
+    "72d2c16d7b73ba67": "Il prossimo giro resta a ♩={v0}: la scala sale dopo un giro completo che soddisfa i criteri",
+    "c26eae7f0aece97b": "Obiettivo raggiunto: questo giro conta per la verifica",
+    "fece3d7db90be59e": "Obiettivo raggiunto: un giro completo a questo tempo conta per la verifica",
+    "3cf235f0a516306d": "Solo un giro al tempo obiettivo ♩={v0} completa la lezione.",
+    "14fb5991656683a8": "Suona a ♩={v0}"
   }
 }

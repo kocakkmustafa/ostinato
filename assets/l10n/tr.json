@@ -8418,6 +8418,17 @@
     "c19affc136daedd5": "Zamanında oranı yalnız duyabildiğim vuruşları sayar; \"duyamadım\" ayrı raporlanır.",
     "dcc80d521759d7d1": "Bu çıkışta gecikme kalibre edilmedi; zamanlama senin sabit kaymana göre ölçüldü. Klikle tam karşılaştırmak için kalibrasyon yap.",
     "df2c333764d05b9b": "Erken: {v0} · Geç: {v1}",
-    "ee80e7f71794e5f5": "Önerilen sıradaki ders"
+    "ee80e7f71794e5f5": "Önerilen sıradaki ders",
+    "992d6ade7ce199a5": "Tempo merdiveni: Açık",
+    "16cdaba08210efce": "Tempo merdiveni: Kapalı",
+    "a9198dedf13916d2": "Ölçütleri karşılayan tam bir turdan sonra sonraki tur {v0} BPM hızlanır; en fazla hedef ♩={v1} temposuna kadar.",
+    "3a5f83734acbbd06": "Tempo merdiveni",
+    "6c8cfc0642830513": "Sonraki tur ♩={v0}",
+    "43921a381564e5f5": "Sonraki tur hedef tempoda (♩={v0}) — o tur geçiş için sayılır",
+    "72d2c16d7b73ba67": "Sonraki tur ♩={v0} temposunda kalır — merdiven, ölçütleri karşılayan tam bir turdan sonra yükselir",
+    "c26eae7f0aece97b": "Hedefe ulaşıldı — bu tur geçiş için sayılır",
+    "fece3d7db90be59e": "Hedefe ulaşıldı — bu tempoda tam bir tur geçiş için sayılır",
+    "3cf235f0a516306d": "Dersi yalnız hedef tempodaki (♩={v0}) bir tur tamamlar.",
+    "14fb5991656683a8": "♩={v0} temposunda çal"
   }
 }

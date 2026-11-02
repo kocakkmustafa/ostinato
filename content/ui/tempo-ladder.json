@@ -1,0 +1,60 @@
+{
+  "$about": "FK6 tempo ladder copy (lib/app/practice/loop/tempo_ladder_copy.dart). EN+TR source pairs; all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "switchOn",
+      "en": "Tempo ladder: On",
+      "tr": "Tempo merdiveni: Açık"
+    },
+    {
+      "id": "switchOff",
+      "en": "Tempo ladder: Off",
+      "tr": "Tempo merdiveni: Kapalı"
+    },
+    {
+      "id": "switchHint",
+      "en": "After a full run that meets the checks, the next run is {v0} BPM faster, up to the target ♩={v1}.",
+      "tr": "Ölçütleri karşılayan tam bir turdan sonra sonraki tur {v0} BPM hızlanır; en fazla hedef ♩={v1} temposuna kadar."
+    },
+    {
+      "id": "resultTitle",
+      "en": "Tempo ladder",
+      "tr": "Tempo merdiveni"
+    },
+    {
+      "id": "nextRun",
+      "en": "Next run at ♩={v0}",
+      "tr": "Sonraki tur ♩={v0}"
+    },
+    {
+      "id": "nextRunTarget",
+      "en": "Next run at the target ♩={v0} — that run counts for the gate",
+      "tr": "Sonraki tur hedef tempoda (♩={v0}) — o tur geçiş için sayılır"
+    },
+    {
+      "id": "held",
+      "en": "Next run stays at ♩={v0} — the ladder moves up after a full run that meets the checks",
+      "tr": "Sonraki tur ♩={v0} temposunda kalır — merdiven, ölçütleri karşılayan tam bir turdan sonra yükselir"
+    },
+    {
+      "id": "targetReached",
+      "en": "Target reached — this run counts for the gate",
+      "tr": "Hedefe ulaşıldı — bu tur geçiş için sayılır"
+    },
+    {
+      "id": "targetReachedNeedsFullRun",
+      "en": "Target reached — a full run here counts for the gate",
+      "tr": "Hedefe ulaşıldı — bu tempoda tam bir tur geçiş için sayılır"
+    },
+    {
+      "id": "onlyTargetCompletes",
+      "en": "Only a run at the target ♩={v0} completes the lesson.",
+      "tr": "Dersi yalnız hedef tempodaki (♩={v0}) bir tur tamamlar."
+    },
+    {
+      "id": "playAt",
+      "en": "Play at ♩={v0}",
+      "tr": "♩={v0} temposunda çal"
+    }
+  ]
+}

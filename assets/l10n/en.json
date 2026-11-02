@@ -8418,6 +8418,17 @@
     "c19affc136daedd5": "On time counts only the beats I could hear; \"couldn't hear\" is reported apart.",
     "dcc80d521759d7d1": "Latency is not calibrated on this output, so timing was measured against your own steady offset. Calibrate it to compare with the click exactly.",
     "df2c333764d05b9b": "Early: {v0} · Late: {v1}",
-    "ee80e7f71794e5f5": "Suggested next lesson"
+    "ee80e7f71794e5f5": "Suggested next lesson",
+    "992d6ade7ce199a5": "Tempo ladder: On",
+    "16cdaba08210efce": "Tempo ladder: Off",
+    "a9198dedf13916d2": "After a full run that meets the checks, the next run is {v0} BPM faster, up to the target ♩={v1}.",
+    "3a5f83734acbbd06": "Tempo ladder",
+    "6c8cfc0642830513": "Next run at ♩={v0}",
+    "43921a381564e5f5": "Next run at the target ♩={v0} — that run counts for the gate",
+    "72d2c16d7b73ba67": "Next run stays at ♩={v0} — the ladder moves up after a full run that meets the checks",
+    "c26eae7f0aece97b": "Target reached — this run counts for the gate",
+    "fece3d7db90be59e": "Target reached — a full run here counts for the gate",
+    "3cf235f0a516306d": "Only a run at the target ♩={v0} completes the lesson.",
+    "14fb5991656683a8": "Play at ♩={v0}"
   }
 }
