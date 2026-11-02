@@ -8409,6 +8409,15 @@
     "145551a13e2bf6a0": "Klick für alle Teile. Die Teile 1, 2 und 4 kannst du zuerst per Klaviersynthese im Zieltempo hören; die Linie von Teil 3 wird erst nach deinem Versuch gespielt.",
     "43acf1722b3d54e7": "Schließe vier Teile ab. 1 Tonleitern: C-, G-, F-, D-Dur und a-Moll harmonisch, zwei Oktaven, Hände getrennt, Achtelnoten bei ♩=69, dazu die chromatische Tonleiter über zwei Oktaven. 2 Begleitung: ein neuer sechzehntaktiger Part der linken Hand, Alberti und gebrochene Akkorde, bei ♩=80. 3 Leadsheet: eine neue sechzehntaktige Melodie mit Akkord-Grundtönen bei ♩=72. 4 Stück: ein gemeinfreies Stück aus Level 3, Fassung mit jeweils nur einem neuen Ton, in seinem Zieltempo.",
     "3c7e76ea046a04ad": "Jeder Teil wird für sich gewertet: Ton- und Timing-Genauigkeit von Level 3 im Zieltempo dieses Teils. Die vollständige Fassung des Stücks in Teil 4 zählt nicht.",
-    "c07dd0139205a762": "Das Alberti-Muster eilt voraus. Halte die Daumentöne leicht und zähle die Achtel in jedem Schlag."
+    "c07dd0139205a762": "Das Alberti-Muster eilt voraus. Halte die Daumentöne leicht und zähle die Achtel in jedem Schlag.",
+    "187d877bbe6a9deb": "{v0} ms · relativ",
+    "3a50750f75bbec90": "Im Takt",
+    "9c1759e9a0fbf1b7": "Im Takt ≥ %{v0} (innerhalb ±{v1} ms)",
+    "af00508cd74bb410": "Als Nächstes",
+    "b83b59297cbade08": "Zu früh oder zu spät",
+    "c19affc136daedd5": "„Im Takt“ zählt nur die Schläge, die ich hören konnte; „nicht gehört“ wird getrennt ausgewiesen.",
+    "dcc80d521759d7d1": "Die Latenz ist für diese Ausgabe nicht kalibriert, deshalb wurde das Timing an deinem eigenen gleichmäßigen Versatz gemessen. Kalibriere sie, um genau mit dem Klick zu vergleichen.",
+    "df2c333764d05b9b": "Zu früh: {v0} · Zu spät: {v1}",
+    "ee80e7f71794e5f5": "Vorgeschlagene nächste Lektion"
   }
 }

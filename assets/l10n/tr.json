@@ -8409,6 +8409,15 @@
     "145551a13e2bf6a0": "Tüm bölümler için klik. 1., 2. ve 4. bölümler önce hedef tempoda piyano sentezinde dinlenebilir; 3. bölüm dizisi yalnız denemenden sonra çalınır.",
     "43acf1722b3d54e7": "Dört bölümü tamamla. 1 Gamlar: Do, Sol, Fa, Re majör ve armonik La minör, iki oktav, eller ayrı, ♩=69'da sekizlikler, ardından iki oktav kromatik gam. 2 Eşlik: ♩=80'de Alberti ve kırık akorlu yeni bir on altı ölçülük sol el bölümü. 3 Lead sheet: ♩=72'de akor kökleriyle yeni bir on altı ölçülük ezgi. 4 Eser: Seviye 3'ten kamu malı bir eser, tek yeni nota sürümü, kendi hedef temposunda.",
     "3c7e76ea046a04ad": "Her bölüm kendi başına geçer: o bölümün hedef temposunda Seviye 3 nota ve zamanlama ölçütü. 4. bölümdeki eserin tam sürümü sayılmaz.",
-    "c07dd0139205a762": "Alberti kalıbı aceleye geliyor. Başparmak notalarını hafif tut ve her vuruştaki sekizlikleri say."
+    "c07dd0139205a762": "Alberti kalıbı aceleye geliyor. Başparmak notalarını hafif tut ve her vuruştaki sekizlikleri say.",
+    "187d877bbe6a9deb": "{v0} ms · göreli",
+    "3a50750f75bbec90": "Zamanında",
+    "9c1759e9a0fbf1b7": "Zamanında ≥ %{v0} (±{v1} ms içinde)",
+    "af00508cd74bb410": "Sıradaki",
+    "b83b59297cbade08": "Erken ya da geç",
+    "c19affc136daedd5": "Zamanında oranı yalnız duyabildiğim vuruşları sayar; \"duyamadım\" ayrı raporlanır.",
+    "dcc80d521759d7d1": "Bu çıkışta gecikme kalibre edilmedi; zamanlama senin sabit kaymana göre ölçüldü. Klikle tam karşılaştırmak için kalibrasyon yap.",
+    "df2c333764d05b9b": "Erken: {v0} · Geç: {v1}",
+    "ee80e7f71794e5f5": "Önerilen sıradaki ders"
   }
 }

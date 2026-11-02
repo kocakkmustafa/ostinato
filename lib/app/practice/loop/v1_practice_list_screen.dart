@@ -276,7 +276,8 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                       const <String, V1LessonCheck>{},
                     );
                 final state = V1CourseState(catalog, records, checks);
-                final nextUnit = state.next?.unitId;
+                final next = state.next;
+                final nextUnit = next?.unitId;
                 if (nextUnit != null) _expanded.add(nextUnit);
                 return ListView(
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 24),
@@ -332,7 +333,13 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                     for (final level in catalog.levels) ...[
                       _levelHeader(context, state, level),
                       for (final unit in level.units)
-                        _unit(context, state, unit, unit.id == nextUnit),
+                        _unit(
+                          context,
+                          state,
+                          unit,
+                          unit.id == nextUnit,
+                          next?.id,
+                        ),
                     ],
                   ],
                 );
@@ -412,6 +419,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     V1CourseState state,
     V1CourseUnit unit,
     bool expanded,
+    String? nextId,
   ) {
     final palette = OstinatoPalette.of(context);
     final open = state.units[unit.id] ?? V1UnitOpen.locked;
@@ -474,7 +482,8 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                     ),
                   ),
                 ),
-              for (final lesson in unit.lessons) _tile(context, state, lesson),
+              for (final lesson in unit.lessons)
+                _tile(context, state, lesson, isNext: lesson.id == nextId),
             ],
           ),
         ),
@@ -548,8 +557,9 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
   Widget _tile(
     BuildContext context,
     V1CourseState state,
-    V1CourseLesson lesson,
-  ) {
+    V1CourseLesson lesson, {
+    bool isNext = false,
+  }) {
     final palette = OstinatoPalette.of(context);
     final record = state.records[lesson.id];
     final status = state.status(lesson);
@@ -590,7 +600,37 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
           ),
         ],
       ),
+      // The suggested next lesson ("Start next lesson" rule); the others in
+      // an open module stay tappable.
+      trailing: isNext ? _nextChip(context, lesson) : null,
       onTap: open ? () => unawaited(_open(state.catalog, lesson)) : null,
+    );
+  }
+
+  Widget _nextChip(BuildContext context, V1CourseLesson lesson) {
+    final palette = OstinatoPalette.of(context);
+    return Semantics(
+      label: uiText(context, V1CourseCopy.nextChipSemantics),
+      child: ExcludeSemantics(
+        child: Container(
+          key: Key('v1-course-next-${lesson.id}'),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          decoration: BoxDecoration(
+            // The hue's chip/ink pair (contrast-checked in both themes).
+            color: palette.guitar.chip,
+            border: Border.all(color: palette.guitar.ink),
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Text(
+            uiText(context, V1CourseCopy.nextChip),
+            style: hankenText(
+              size: 12,
+              weight: FontWeight.w600,
+              color: palette.guitar.ink,
+            ),
+          ),
+        ),
+      ),
     );
   }
 

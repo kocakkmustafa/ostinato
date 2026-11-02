@@ -8402,6 +8402,15 @@
     "145551a13e2bf6a0": "Klik untuk semua bagian. Bagian 1, 2, dan 4 bisa didengar dulu lewat sintesis piano pada tempo target; alur bagian 3 dimainkan hanya setelah percobaanmu.",
     "43acf1722b3d54e7": "Selesaikan empat bagian. 1 Tangga nada: C, G, F, D mayor dan A minor harmonik, dua oktaf, tangan terpisah, not seperdelapan pada ♩=69, ditambah tangga nada kromatik sepanjang dua oktaf. 2 Iringan: bagian tangan kiri enam belas birama yang baru, Alberti dan akor terpecah, pada ♩=80. 3 Lead sheet: melodi enam belas birama yang baru dengan nada dasar akor pada ♩=72. 4 Karya: satu karya domain publik Level 3, versi satu-nada-baru, pada tempo targetnya.",
     "3c7e76ea046a04ad": "Setiap bagian dinilai sendiri-sendiri: ketepatan nada dan waktu Level 3 pada tempo target bagian itu. Versi lengkap karya di bagian 4 tidak dihitung.",
-    "c07dd0139205a762": "Pola Alberti terburu-buru. Jaga nada ibu jari tetap ringan dan hitung not seperdelapan di setiap ketukan."
+    "c07dd0139205a762": "Pola Alberti terburu-buru. Jaga nada ibu jari tetap ringan dan hitung not seperdelapan di setiap ketukan.",
+    "187d877bbe6a9deb": "{v0} ms · relatif",
+    "3a50750f75bbec90": "Tepat waktu",
+    "9c1759e9a0fbf1b7": "Tepat waktu ≥ %{v0} (dalam ±{v1} ms)",
+    "af00508cd74bb410": "Berikutnya",
+    "b83b59297cbade08": "Terlalu cepat atau lambat",
+    "c19affc136daedd5": "“Tepat waktu” hanya menghitung ketukan yang bisa aku dengar; “tidak terdengar” dilaporkan terpisah.",
+    "dcc80d521759d7d1": "Latensi belum dikalibrasi untuk output ini, jadi waktu diukur terhadap pergeseran tetapmu sendiri. Kalibrasi agar bisa dibandingkan persis dengan klik.",
+    "df2c333764d05b9b": "Terlalu cepat: {v0} · Terlalu lambat: {v1}",
+    "ee80e7f71794e5f5": "Pelajaran berikutnya yang disarankan"
   }
 }

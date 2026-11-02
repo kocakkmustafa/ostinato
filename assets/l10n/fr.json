@@ -8409,6 +8409,15 @@
     "145551a13e2bf6a0": "Clic pour toutes les parties. Les parties 1, 2 et 4 peuvent d'abord s'écouter en synthèse piano au tempo cible ; la ligne de la partie 3 n'est jouée qu'après ton essai.",
     "43acf1722b3d54e7": "Termine quatre parties. 1 Gammes : C, G, F, D majeur et A mineur harmonique, deux octaves, mains séparées, croches à ♩=69, plus la gamme chromatique sur deux octaves. 2 Accompagnement : une nouvelle partie de main gauche de seize mesures, Alberti et accords brisés, à ♩=80. 3 Lead sheet : une nouvelle mélodie de seize mesures avec fondamentales d'accords à ♩=72. 4 Pièce : une pièce du domaine public du niveau 3, version à une nouvelle note à la fois, à son tempo cible.",
     "3c7e76ea046a04ad": "Chaque partie est validée séparément : justesse des notes et du rythme niveau 3 au tempo cible de cette partie. La version complète de la pièce de la partie 4 ne compte pas.",
-    "c07dd0139205a762": "Le motif d'Alberti se précipite. Garde les notes du pouce légères et compte les croches dans chaque temps."
+    "c07dd0139205a762": "Le motif d'Alberti se précipite. Garde les notes du pouce légères et compte les croches dans chaque temps.",
+    "187d877bbe6a9deb": "{v0} ms · relatif",
+    "3a50750f75bbec90": "En place",
+    "9c1759e9a0fbf1b7": "En place ≥ {v0} % (à ±{v1} ms près)",
+    "af00508cd74bb410": "À suivre",
+    "b83b59297cbade08": "En avance ou en retard",
+    "c19affc136daedd5": "« En place » ne compte que les temps que j'ai pu entendre ; « pas entendu » est indiqué à part.",
+    "dcc80d521759d7d1": "La latence n'est pas étalonnée sur cette sortie : le timing a donc été mesuré par rapport à ton propre décalage régulier. Étalonne-la pour comparer exactement avec le clic.",
+    "df2c333764d05b9b": "En avance : {v0} · En retard : {v1}",
+    "ee80e7f71794e5f5": "Leçon suivante suggérée"
   }
 }

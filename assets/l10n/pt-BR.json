@@ -8409,6 +8409,15 @@
     "145551a13e2bf6a0": "Clique em todas as partes. As partes 1, 2 e 4 podem ser ouvidas antes pela síntese de piano no andamento-alvo; a linha da parte 3 só é tocada depois da sua tentativa.",
     "43acf1722b3d54e7": "Complete quatro partes. 1 Escalas: C, G, F, D maior e A menor harmônica, duas oitavas, mãos separadas, colcheias a ♩=69, mais a escala cromática em duas oitavas. 2 Acompanhamento: uma parte nova de dezesseis compassos para a mão esquerda, Alberti e acordes arpejados, a ♩=80. 3 Lead sheet: uma melodia nova de dezesseis compassos com fundamentais de acordes a ♩=72. 4 Peça: uma peça de domínio público do Nível 3, versão com uma nota nova por vez, no andamento-alvo.",
     "3c7e76ea046a04ad": "Cada parte é aprovada por si só: precisão de notas e tempo do Nível 3 no andamento-alvo daquela parte. A versão completa da peça na parte 4 não conta.",
-    "c07dd0139205a762": "O padrão de Alberti está acelerando. Mantenha as notas do polegar leves e conte as colcheias dentro de cada tempo."
+    "c07dd0139205a762": "O padrão de Alberti está acelerando. Mantenha as notas do polegar leves e conte as colcheias dentro de cada tempo.",
+    "187d877bbe6a9deb": "{v0} ms · relativo",
+    "3a50750f75bbec90": "No tempo",
+    "9c1759e9a0fbf1b7": "No tempo ≥ %{v0} (dentro de ±{v1} ms)",
+    "af00508cd74bb410": "Próxima",
+    "b83b59297cbade08": "Adiantado ou atrasado",
+    "c19affc136daedd5": "“No tempo” conta só as batidas que consegui ouvir; as “não ouvidas” são informadas à parte.",
+    "dcc80d521759d7d1": "A latência não está calibrada nesta saída, então o tempo foi medido em relação ao seu próprio deslocamento constante. Calibre para comparar exatamente com o clique.",
+    "df2c333764d05b9b": "Adiantado: {v0} · Atrasado: {v1}",
+    "ee80e7f71794e5f5": "Próxima aula sugerida"
   }
 }

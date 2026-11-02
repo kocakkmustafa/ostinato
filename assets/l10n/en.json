@@ -8409,6 +8409,15 @@
     "145551a13e2bf6a0": "Click for all parts. Parts 1, 2 and 4 can be heard first by piano synthesis at the target tempo; the part 3 line is played only after your try.",
     "43acf1722b3d54e7": "Complete four parts. 1 Scales: C, G, F, D major and A harmonic minor, two octaves, hands separate, eighth notes at ♩=69, plus the chromatic scale over two octaves. 2 Accompaniment: a new sixteen-bar left-hand part, Alberti and broken chords, at ♩=80. 3 Lead sheet: a new sixteen-bar melody with chord roots at ♩=72. 4 Piece: a Level 3 public-domain piece, one-new-note version, at its target tempo.",
     "3c7e76ea046a04ad": "Each part passes on its own: Level 3 note and timing accuracy at that part's target tempo. The full version of the piece in part 4 does not count.",
-    "c07dd0139205a762": "The Alberti pattern rushes. Keep the thumb notes light and count the eighths in each beat."
+    "c07dd0139205a762": "The Alberti pattern rushes. Keep the thumb notes light and count the eighths in each beat.",
+    "187d877bbe6a9deb": "{v0} ms · relative",
+    "3a50750f75bbec90": "On time",
+    "9c1759e9a0fbf1b7": "On time ≥ %{v0} (within ±{v1} ms)",
+    "af00508cd74bb410": "Next",
+    "b83b59297cbade08": "Early or late",
+    "c19affc136daedd5": "On time counts only the beats I could hear; \"couldn't hear\" is reported apart.",
+    "dcc80d521759d7d1": "Latency is not calibrated on this output, so timing was measured against your own steady offset. Calibrate it to compare with the click exactly.",
+    "df2c333764d05b9b": "Early: {v0} · Late: {v1}",
+    "ee80e7f71794e5f5": "Suggested next lesson"
   }
 }

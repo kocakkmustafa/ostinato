@@ -1,0 +1,40 @@
+{
+  "$about": "Rhythm-only lines (A3 onset timing) on the practice and result screens (lib/app/practice/loop/practice_rhythm_copy.dart). EN+TR source pairs; all 14 catalogs carry them. Off the window is \"early or late\", never \"wrong\".",
+  "messages": [
+    {
+      "id": "earlyOrLate",
+      "en": "Early or late",
+      "tr": "Erken ya da geç"
+    },
+    {
+      "id": "onTime",
+      "en": "On time",
+      "tr": "Zamanında"
+    },
+    {
+      "id": "gateOnTime",
+      "en": "On time ≥ %{v0} (within ±{v1} ms)",
+      "tr": "Zamanında ≥ %{v0} (±{v1} ms içinde)"
+    },
+    {
+      "id": "onTimeNote",
+      "en": "On time counts only the beats I could hear; \"couldn't hear\" is reported apart.",
+      "tr": "Zamanında oranı yalnız duyabildiğim vuruşları sayar; \"duyamadım\" ayrı raporlanır."
+    },
+    {
+      "id": "timingRelative",
+      "en": "{v0} ms · relative",
+      "tr": "{v0} ms · göreli"
+    },
+    {
+      "id": "relativeNote",
+      "en": "Latency is not calibrated on this output, so timing was measured against your own steady offset. Calibrate it to compare with the click exactly.",
+      "tr": "Bu çıkışta gecikme kalibre edilmedi; zamanlama senin sabit kaymana göre ölçüldü. Klikle tam karşılaştırmak için kalibrasyon yap."
+    },
+    {
+      "id": "earlyLate",
+      "en": "Early: {v0} · Late: {v1}",
+      "tr": "Erken: {v0} · Geç: {v1}"
+    }
+  ]
+}

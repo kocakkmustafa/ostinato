@@ -8409,6 +8409,15 @@
     "145551a13e2bf6a0": "Clic per tutte le parti. Le parti 1, 2 e 4 si possono ascoltare prima con la sintesi di pianoforte al tempo obiettivo; la linea della parte 3 viene suonata solo dopo il tuo tentativo.",
     "43acf1722b3d54e7": "Completa quattro parti. 1 Scale: C, G, F, D maggiore e A minore armonica, due ottave, a mani separate, crome a ♩=69, più la scala cromatica su due ottave. 2 Accompagnamento: una nuova parte di sedici battute per la mano sinistra, albertino e accordi spezzati, a ♩=80. 3 Lead sheet: una nuova melodia di sedici battute con le fondamentali a ♩=72. 4 Brano: un brano di pubblico dominio del Livello 3, versione con una sola nota nuova alla volta, al suo tempo obiettivo.",
     "3c7e76ea046a04ad": "Ogni parte si supera da sola: precisione di note e di tempo del Livello 3 al tempo obiettivo di quella parte. La versione completa del brano nella parte 4 non conta.",
-    "c07dd0139205a762": "Lo schema albertino accelera. Tieni leggere le note del pollice e conta le crome in ogni battito."
+    "c07dd0139205a762": "Lo schema albertino accelera. Tieni leggere le note del pollice e conta le crome in ogni battito.",
+    "187d877bbe6a9deb": "{v0} ms · relativo",
+    "3a50750f75bbec90": "A tempo",
+    "9c1759e9a0fbf1b7": "A tempo ≥ {v0} % (entro ±{v1} ms)",
+    "af00508cd74bb410": "Prossima",
+    "b83b59297cbade08": "In anticipo o in ritardo",
+    "c19affc136daedd5": "\"A tempo\" conta solo i colpi che ho potuto sentire; quelli \"non sentiti\" sono riportati a parte.",
+    "dcc80d521759d7d1": "La latenza non è calibrata su questa uscita, quindi il ritmo è stato misurato rispetto al tuo scarto costante. Calibrala per confrontarlo esattamente con il clic.",
+    "df2c333764d05b9b": "In anticipo: {v0} · In ritardo: {v1}",
+    "ee80e7f71794e5f5": "Prossima lezione suggerita"
   }
 }

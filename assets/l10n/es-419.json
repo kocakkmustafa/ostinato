@@ -8409,6 +8409,15 @@
     "145551a13e2bf6a0": "Clic en todas las partes. Las partes 1, 2 y 4 se pueden escuchar antes con síntesis de piano al tempo objetivo; la línea de la parte 3 suena solo después de tu intento.",
     "43acf1722b3d54e7": "Completa cuatro partes. 1 Escalas: C, G, F, D mayor y A menor armónica, dos octavas, con las manos por separado, corcheas a ♩=69, más la escala cromática en dos octavas. 2 Acompañamiento: una parte nueva de dieciséis compases para la mano izquierda, Alberti y acordes quebrados, a ♩=80. 3 Partitura con cifrado: una melodía nueva de dieciséis compases con fundamentales de acordes a ♩=72. 4 Pieza: una pieza de dominio público del Nivel 3, versión con una sola nota nueva a la vez, a su tempo objetivo.",
     "3c7e76ea046a04ad": "Cada parte se supera por sí sola: precisión de notas y de tiempo del Nivel 3 al tempo objetivo de esa parte. La versión completa de la pieza de la parte 4 no cuenta.",
-    "c07dd0139205a762": "El patrón de Alberti se apresura. Mantén ligeras las notas del pulgar y cuenta las corcheas dentro de cada tiempo."
+    "c07dd0139205a762": "El patrón de Alberti se apresura. Mantén ligeras las notas del pulgar y cuenta las corcheas dentro de cada tiempo.",
+    "187d877bbe6a9deb": "{v0} ms · relativo",
+    "3a50750f75bbec90": "A tiempo",
+    "9c1759e9a0fbf1b7": "A tiempo ≥ %{v0} (dentro de ±{v1} ms)",
+    "af00508cd74bb410": "Siguiente",
+    "b83b59297cbade08": "Antes o después",
+    "c19affc136daedd5": "«A tiempo» cuenta solo los golpes que pude oír; los que «no se oyeron» se informan aparte.",
+    "dcc80d521759d7d1": "La latencia no está calibrada en esta salida, así que el ritmo se midió respecto a tu propio desfase constante. Calíbrala para comparar exactamente con el clic.",
+    "df2c333764d05b9b": "Antes: {v0} · Después: {v1}",
+    "ee80e7f71794e5f5": "Siguiente lección sugerida"
   }
 }

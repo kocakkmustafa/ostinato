@@ -8423,6 +8423,15 @@
     "145551a13e2bf6a0": "Klik we wszystkich częściach. Części 1, 2 i 4 można najpierw usłyszeć w syntezowanym fortepianie w docelowym tempie; linia z części 3 jest odtwarzana dopiero po twojej próbie.",
     "43acf1722b3d54e7": "Wykonaj cztery części. 1 Skale: C-dur, G-dur, F-dur, D-dur i a-moll harmoniczna, dwie oktawy, ręce osobno, ósemki przy ♩=69, plus skala chromatyczna w dwóch oktawach. 2 Akompaniament: nowa szesnastotaktowa partia lewej ręki, Alberti i rozłożone akordy, przy ♩=80. 3 Lead sheet: nowa szesnastotaktowa melodia z dźwiękami podstawowymi akordów przy ♩=72. 4 Utwór: utwór z domeny publicznej z Poziomu 3, wersja z jednym nowym dźwiękiem naraz, w jego docelowym tempie.",
     "3c7e76ea046a04ad": "Każda część jest zaliczana osobno: dokładność dźwięków i rytmu na Poziomie 3 w docelowym tempie tej części. Pełna wersja utworu w części 4 się nie liczy.",
-    "c07dd0139205a762": "Wzór Albertiego przyspiesza. Trzymaj dźwięki kciuka lekko i licz ósemki w każdej mierze."
+    "c07dd0139205a762": "Wzór Albertiego przyspiesza. Trzymaj dźwięki kciuka lekko i licz ósemki w każdej mierze.",
+    "187d877bbe6a9deb": "{v0} ms · względnie",
+    "3a50750f75bbec90": "Na czas",
+    "9c1759e9a0fbf1b7": "Na czas ≥ %{v0} (w granicach ±{v1} ms)",
+    "af00508cd74bb410": "Następna",
+    "b83b59297cbade08": "Za wcześnie lub za późno",
+    "c19affc136daedd5": "„Na czas” liczy tylko uderzenia, które dało się usłyszeć; „niesłyszane” są podawane osobno.",
+    "dcc80d521759d7d1": "Opóźnienie nie jest skalibrowane dla tego wyjścia, więc rytm zmierzono względem twojego stałego przesunięcia. Skalibruj je, aby porównać dokładnie z klikiem.",
+    "df2c333764d05b9b": "Za wcześnie: {v0} · Za późno: {v1}",
+    "ee80e7f71794e5f5": "Proponowana następna lekcja"
   }
 }
