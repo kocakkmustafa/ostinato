@@ -1169,7 +1169,10 @@ void main() {
       ),
     );
     final start = find.byKey(const Key('observation-start-stop'));
-    expect(find.textContaining('real phone accuracy'), findsOneWidget);
+    expect(
+      find.textContaining("Accuracy depends on your phone's microphone"),
+      findsOneWidget,
+    );
     expect(
       find.textContaining('Audio stays in temporary memory'),
       findsOneWidget,

@@ -11,5 +11,12 @@ abstract final class DeviceAccuracyCopy {
     'Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir.',
   );
 
-  static const List<UiCopy> all = [note];
+  /// Note-observation screen (guitar page): the same sentence inside the
+  /// screen's own guidance line.
+  static const UiCopy observationNote = (
+    'Optional · one guitar string · a quiet room. Overlapping sounds can show a plausible but misleading note. Accuracy depends on your phone\'s microphone and the room; measured results may vary. This does not decide tuning or playing success.',
+    'İsteğe bağlı · tek gitar teli · sessiz oda. Üst üste binen sesler inandırıcı ama yanıltıcı bir nota gösterebilir. Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir. Akort veya çalma başarısına karar vermez.',
+  );
+
+  static const List<UiCopy> all = [note, observationNote];
 }
