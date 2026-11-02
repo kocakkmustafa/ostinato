@@ -1,0 +1,97 @@
+{
+  "id": "pno-s1-test",
+  "title": { "en": "Level 1 test", "tr": "Seviye 1 testi" },
+  "goal": {
+    "en": "Shows the Level 1 skills: finding keys, the right hand, the left hand with alternating hands, and reading rhythm.",
+    "tr": "Seviye 1 becerilerini gösterir: tuş bulma, sağ el, sol el ve sırayla çalan eller, ritim okuma."
+  },
+  "explanation": [
+    {
+      "en": "The test has four parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test dört bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, keyboard: the screen names 8 notes; find each key and play it. Part 2, right hand: a new eight-bar line in C position at ♩=80.",
+      "tr": "1. bölüm, klavye: ekran 8 nota söyler; her tuşu bul ve çal. 2. bölüm, sağ el: Do konumunda yeni bir sekiz ölçülük dizi, ♩=80."
+    },
+    {
+      "en": "Part 3, left hand and alternating hands: a new eight-bar line at ♩=76. Part 4, rhythm reading: a new four-bar line at ♩=70.",
+      "tr": "3. bölüm, sol el ve sırayla çalan eller: yeni bir sekiz ölçülük dizi, ♩=76. 4. bölüm, ritim okuma: yeni bir dört ölçülük dizi, ♩=70."
+    },
+    {
+      "en": "In every part only one new note starts at a time. With a MIDI keyboard connected, MIDI gives the result.",
+      "tr": "Her bölümde aynı anda yalnız bir yeni nota başlar. MIDI klavye bağlıysa sonucu MIDI verir."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click for parts 2–4; the test lines are not played before you try them. In part 1, each named note is played by piano synthesis after your attempt.",
+      "tr": "2–4. bölümler için klik; test dizileri denemenden önce çalınmaz. 1. bölümde söylenen her nota denemenden sonra piyano sentezinde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A6"],
+    "task": {
+      "en": "Complete four parts. 1 Keyboard: 8 note names; tap the key on screen, then play it. 2 Right hand: a new eight-bar line in C position at ♩=80. 3 Left hand and alternating hands: a new eight-bar line at ♩=76. 4 Rhythm reading: a new four-bar line at ♩=70.",
+      "tr": "Dört bölümü tamamla. 1 Klavye: 8 nota adı; tuşa ekranda dokun, sonra çal. 2 Sağ el: ♩=80'de Do konumunda yeni bir sekiz ölçülük dizi. 3 Sol el ve sırayla çalan eller: ♩=76'da yeni bir sekiz ölçülük dizi. 4 Ritim okuma: ♩=70'te yeni bir dört ölçülük dizi."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Keyboard: at least 7 of 8 notes found and played. Right hand, left hand and rhythm reading: Level 1 note and timing accuracy at the target tempo.",
+        "tr": "Her bölüm kendi başına geçer. Klavye: 8 notanın en az 7'si bulunup çalınır. Sağ el, sol el ve ritim okuma: hedef tempoda Seviye 1 nota ve zamanlama ölçütü."
+      },
+      "minCorrect": 7
+    },
+    "drill": {
+      "type": "diagram_match",
+      "count": 8,
+      "params": {
+        "set": "keyboard_note_names",
+        "diagram": "keyboard",
+        "range": ["C2", "C5"],
+        "accidentals": true,
+        "playNotes": true
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, an octave away.", "tr": "Farklı nota, bir oktav uzakta." },
+      "fix": {
+        "en": "Find middle C (C4) first, then count octaves up or down from it.",
+        "tr": "Önce orta Do'yu (Do4) bul, sonra oktavları oradan yukarı ya da aşağı say."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Keep going after a slip. Look one bar ahead, not at your hand.",
+        "tr": "Bir kaçıştan sonra devam et. Eline değil, bir ölçü ileriye bak."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,87 @@
+{
+  "id": "pno-s2-m09-01",
+  "title": { "en": "Staccato, legato and accents", "tr": "Staccato, legato ve aksanlar" },
+  "goal": {
+    "en": "Reads legato, staccato and accent marks in an original four-bar line and plays them at ♩=70, each accent at least 3 dB above its neighbours.",
+    "tr": "Özgün dört ölçülük dizideki legato, staccato ve aksan işaretlerini okur ve ♩=70'te çalar; her aksan komşularından en az 3 dB gür olur."
+  },
+  "explanation": [
+    {
+      "en": "Legato connects notes: release one key exactly as the next one sounds.",
+      "tr": "Legato notaları bağlar: bir tuşu tam bir sonraki ses çıkarken bırak."
+    },
+    {
+      "en": "Staccato, a dot above or below the notehead, means short and detached. The key rises quickly, but the beat keeps its full length.",
+      "tr": "Staccato, notanın üstünde ya da altında nokta, kısa ve ayrık demektir. Tuş hızla kalkar ama vuruş tam süresini korur."
+    },
+    {
+      "en": "An accent > asks for one note a little stronger than its neighbours. The screen shows how many decibels the accented note stands out.",
+      "tr": "Aksan > bir notanın komşularından biraz daha güçlü olmasını ister. Ekran, aksanlı notanın kaç desibel öne çıktığını gösterir."
+    },
+    {
+      "en": "These are touch choices, not force. Keep the hand loose and let a little more arm weight into the accented key.",
+      "tr": "Bunlar kuvvet değil dokunuş seçimleridir. Eli gevşek tut ve aksanlı tuşa biraz daha kol ağırlığı ver."
+    },
+    {
+      "en": "On an electronic keyboard, touch response must be on, or every note sounds the same. Keep the main volume fixed while you play.",
+      "tr": "Elektronik klavyede tuş hassasiyeti açık olmalı; yoksa her nota aynı gürlükte çıkar. Çalarken ana ses düzeyini sabit tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four bars with their touch marks, at ♩=70 and at ♩=50, piano synthesis.",
+      "tr": "Dokunuş işaretleriyle özgün dört ölçü, ♩=70 ve ♩=50, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Right hand in C position, thumb on C4. Play the four bars with the click at ♩=70 and an accent on beat 1 of every bar. Bar 1: C4 D4 E4 F4 legato (1 2 3 4). Bar 2: G4 F4 E4 D4 staccato (5 4 3 2). Bar 3: E4 F4 G4 E4 legato (3 4 5 3). Bar 4: D4 and E4 staccato, then C4 legato for two beats (2 3 1).",
+      "tr": "Sağ el Do konumunda, başparmak Do4'te. Dört ölçüyü ♩=70'te klikle çal; her ölçünün 1. vuruşunda aksan var. 1. ölçü: Do4 Re4 Mi4 Fa4 legato (1 2 3 4). 2. ölçü: Sol4 Fa4 Mi4 Re4 staccato (5 4 3 2). 3. ölçü: Mi4 Fa4 Sol4 Mi4 legato (3 4 5 3). 4. ölçü: Re4 ve Mi4 staccato, sonra iki vuruş legato Do4 (2 3 1)."
+    },
+    "sequence": "4/4: C4 D4 E4 F4 | G4 F4 E4 D4 | E4 F4 G4 E4 | D4 E4 C4:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 2 note and timing accuracy at ♩=70, and each accented note at least 3 dB louder than the notes next to it.",
+        "tr": "♩=70'te Seviye 2 nota ve zamanlama ölçütü; her aksanlı nota yanındaki notalardan en az 3 dB gür."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Staccato notes left a short silence, but the count went on.", "tr": "Staccato notalar kısa bir sessizlik bıraktı ama sayım sürdü." },
+    { "en": "Legato notes joined without a gap or an overlap.", "tr": "Legato notalar boşluksuz ve üst üste binmeden bağlandı." },
+    { "en": "Every beat 1 stood out a little from its neighbours.", "tr": "Her 1. vuruş komşularından biraz öne çıktı." },
+    { "en": "I kept the same tempo while changing only the touch.", "tr": "Yalnız dokunuşu değiştirirken aynı tempoyu korudum." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "Staccato is pulling you ahead. The key comes up early, but the next note still waits for its beat.",
+        "tr": "Staccato seni öne çekiyor. Tuş erken kalkar ama sonraki nota yine kendi vuruşunu bekler."
+      }
+    },
+    {
+      "error": { "en": "Correct, but the accent is less than 3 dB.", "tr": "Doğru, ama aksan 3 dB'den az." },
+      "fix": {
+        "en": "Play the notes around the accent a little softer instead of hitting the accent harder.",
+        "tr": "Aksana daha sert vurmak yerine çevresindeki notaları biraz daha hafif çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If staccato speeds you up, tap the pulse with the other hand or foot and play staccato only on every other beat first.",
+    "tr": "Staccato seni hızlandırırsa diğer elle ya da ayakla nabzı vur ve önce yalnız iki vuruşta bir staccato çal."
+  },
+  "legacy": "R: piano-21",
+  "minutes": 12,
+  "expertPending": true
+}

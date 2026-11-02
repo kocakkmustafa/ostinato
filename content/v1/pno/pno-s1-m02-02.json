@@ -1,0 +1,111 @@
+{
+  "id": "pno-s1-m02-02",
+  "title": {
+    "en": "Steps",
+    "tr": "Basamaklar"
+  },
+  "goal": {
+    "en": "Moves by step between neighbouring keys in an original two-bar line at ♩=60.",
+    "tr": "Özgün iki ölçülük dizide komşu tuşlar arasında basamakla ♩=60'ta ilerler."
+  },
+  "explanation": [
+    {
+      "en": "A step moves to the next white key, up or down. In C position it also moves to the next finger.",
+      "tr": "Basamak, yukarı ya da aşağı bir sonraki beyaz tuşa geçmektir. Do konumunda bir sonraki parmağa da geçer."
+    },
+    {
+      "en": "On the staff, a step goes from a line to the next space, or from a space to the next line.",
+      "tr": "Portede basamak, çizgiden bir sonraki aralığa ya da aralıktan bir sonraki çizgiye gider."
+    },
+    {
+      "en": "The line climbs E4 F4 G4, turns at G4 and steps down to C4. Fingers: 3-4-5-4 | 3-2-1.",
+      "tr": "Dizi Mi4 Fa4 Sol4 diye çıkar, Sol4'te döner ve Do4'e basamakla iner. Parmaklar: 3-4-5-4 | 3-2-1."
+    },
+    {
+      "en": "The last C4 is a half note. Hold it for two beats.",
+      "tr": "Son Do4 ikiliktir. İki vuruş tut."
+    },
+    {
+      "en": "Keep your hand still. Only the fingers move.",
+      "tr": "Elini sabit tut. Yalnız parmaklar hareket eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "E4 F4 G4 F4 | E4 D4 C4 (half note), at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Mi4 Fa4 Sol4 Fa4 | Mi4 Re4 Do4 (ikilik), ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the two bars with the click at ♩=60, fingers 3-4-5-4 | 3-2-1. Hold the last C4 for two beats.",
+      "tr": "İki ölçüyü klikle ♩=60'ta çal, parmaklar 3-4-5-4 | 3-2-1. Son Do4'ü iki vuruş tut."
+    },
+    "sequence": "E4 F4 G4 F4 | E4 D4 C4:h",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each note moved to the next key and never skipped one.",
+      "tr": "Her nota bir sonraki tuşa geçti, hiç tuş atlamadı."
+    },
+    {
+      "en": "My hand stayed still; only the fingers moved.",
+      "tr": "Elim sabit kaldı; yalnız parmaklar hareket etti."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "You skipped a key on the way down. Say the finger numbers aloud: 3-4-5-4, 3-2-1.",
+        "tr": "İnerken bir tuş atladın. Parmak numaralarını sesli söyle: 3-4-5-4, 3-2-1."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The way down is rushing. Wait for the click before each note.",
+        "tr": "İniş acele ediyor. Her notadan önce kliği bekle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop only bar 1 at ♩=45, then add bar 2.",
+    "tr": "Yalnız 1. ölçüyü ♩=45'te döngüle, sonra 2. ölçüyü ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

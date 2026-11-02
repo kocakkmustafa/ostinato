@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m10-11",
+  "title": {
+    "en": "Scale sequences",
+    "tr": "Gam sekansları"
+  },
+  "goal": {
+    "en": "Plays C major in groups of three, moving up and down the scale one step at a time, hands separate, at ♩=60.",
+    "tr": "Do majörü üçlü gruplarla, gamda adım adım çıkıp inerek, eller ayrı, ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "A sequence repeats a small pattern, one step higher each time. Here the pattern is three notes up the scale: C D E, then D E F, then E F G.",
+      "tr": "Sekans küçük bir kalıbı her seferinde bir basamak yukarıda tekrarlar. Burada kalıp gamda üç nota yukarıdır: Do Re Mi, sonra Re Mi Fa, sonra Mi Fa Sol."
+    },
+    {
+      "en": "Each note keeps the finger it has in the scale. Right hand: C4 D4 E4 is 1-2-3, D4 E4 F4 is 2-3-1, E4 F4 G4 is 3-1-2.",
+      "tr": "Her nota gamdaki parmağını korur. Sağ el: Do4 Re4 Mi4 1-2-3, Re4 Mi4 Fa4 2-3-1, Mi4 Fa4 Sol4 3-1-2."
+    },
+    {
+      "en": "Coming down, the pattern goes three notes down: C5 B4 A4, then B4 A4 G4, and so on.",
+      "tr": "İnerken kalıp üç nota aşağı gider: Do5 Si4 La4, sonra Si4 La4 Sol4, böyle sürer."
+    },
+    {
+      "en": "Each group fills one bar of 3/4. Give its first note a little more weight and the groups become clear.",
+      "tr": "Her grup 3/4'lük bir ölçüyü doldurur. İlk notasına biraz daha ağırlık ver, gruplar belirginleşir."
+    },
+    {
+      "en": "The left hand plays the same groups an octave lower with its own scale fingering: C3 D3 E3 is 5-4-3, D3 E3 F3 is 4-3-2.",
+      "tr": "Sol el aynı grupları bir oktav aşağıda kendi gam parmaklarıyla çalar: Do3 Re3 Mi3 5-4-3, Re3 Mi3 Fa3 4-3-2."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The right-hand groups from C4 up to C5 and back down, an empty bar, then the left-hand groups from C3, quarter notes in 3/4 with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.",
+      "tr": "Klikle 3/4'te dörtlüklerle sağ elin grupları Do4'ten Do5'e çıkıp geri inerek, bir boş ölçü, sonra sol elin grupları Do3'ten, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the groups of three with the right hand, up from C4 to C5 and back down. Use the empty bar to move to the left hand and play the same groups from C3. One note per beat at ♩=60; each group fills one bar.",
+      "tr": "Üçlü grupları sağ elle Do4'ten Do5'e çıkarak ve geri inerek çal. Boş ölçüde sol ele geç ve aynı grupları Do3'ten çal. ♩=60'ta vuruş başına bir nota; her grup bir ölçüyü doldurur."
+    },
+    "sequence": "3/4: C4 D4 E4 | D4 E4 F4 | E4 F4 G4 | F4 G4 A4 | G4 A4 B4 | A4 B4 C5 | C5 B4 A4 | B4 A4 G4 | A4 G4 F4 | G4 F4 E4 | F4 E4 D4 | E4 D4 C4 | h.r | C3 D3 E3 | D3 E3 F3 | E3 F3 G3 | F3 G3 A3 | G3 A3 B3 | A3 B3 C4 | C4 B3 A3 | B3 A3 G3 | A3 G3 F3 | G3 F3 E3 | F3 E3 D3 | E3 D3 C3",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each note kept its scale finger.",
+      "tr": "Her nota gamdaki parmağını korudu."
+    },
+    {
+      "en": "The first note of each group was a little stronger.",
+      "tr": "Her grubun ilk notası biraz daha güçlüydü."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, two white keys too high.",
+        "tr": "Farklı nota, iki beyaz tuş yukarıda."
+      },
+      "fix": {
+        "en": "You went on up the scale instead of stepping back. Each new group starts on the second note of the group before.",
+        "tr": "Geri dönmek yerine gamda yukarı devam ettin. Her yeni grup bir öncekinin ikinci notasından başlar."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "A group starts late when its first finger has to cross. Loop D4 E4 F4 and E4 F4 G4 with 2-3-1 and 3-1-2 at ♩=50.",
+        "tr": "İlk parmağı geçiş yapacaksa grup geç başlıyor. Re4 Mi4 Fa4 ve Mi4 Fa4 Sol4'ü 2-3-1 ve 3-1-2 ile ♩=50'de döngüle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the right hand going up at ♩=50, and say the first note of each group aloud.",
+    "tr": "♩=50'de yalnız sağ elle çıkışı çal ve her grubun ilk notasını sesli söyle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,79 @@
+{
+  "id": "pno-s3-m12-03",
+  "title": { "en": "Legato pedalling", "tr": "Legato pedal" },
+  "goal": {
+    "en": "Plays a 4-bar half-note line with one finger at ♩=60 and joins the notes by changing the pedal just after each new note.",
+    "tr": "4 ölçülük ikilik dizisini tek parmakla ♩=60'ta çalar ve pedalı her yeni notadan hemen sonra değiştirerek notaları bağlar."
+  },
+  "explanation": [
+    {
+      "en": "The app measures the notes and their timing with the microphone. It does not measure the pedal yet: you check that yourself with the checklist.",
+      "tr": "Uygulama mikrofonla notaları ve zamanlamalarını ölçer. Pedalı henüz ölçmez: onu kontrol listesiyle sen kontrol edersin."
+    },
+    {
+      "en": "Legato pedalling joins notes your fingers cannot join. The pedal changes just after the new note, not with it.",
+      "tr": "Legato pedal, parmaklarının bağlayamadığı notaları bağlar. Pedal yeni notayla birlikte değil, hemen ardından değişir."
+    },
+    {
+      "en": "The order is: play, up, down. The new key goes down, the foot comes up, and the foot goes straight down again.",
+      "tr": "Sıra şudur: çal, kaldır, bas. Yeni tuş iner, ayak kalkar ve ayak hemen yeniden iner."
+    },
+    {
+      "en": "Count \"one-and\": play on \"one\", lift the foot right after it, press it again by \"and\".",
+      "tr": "\"Bir-ve\" diye say: \"bir\"de çal, hemen ardından ayağı kaldır, \"ve\"ye kadar yeniden bas."
+    },
+    {
+      "en": "Use only finger 3, so the finger has to leave each key. If the pedal works, you hear no gap and no blur.",
+      "tr": "Yalnız 3. parmağı kullan; parmak her tuştan kalkmak zorunda kalır. Pedal doğru çalışırsa ne boşluk ne bulanıklık duyarsın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C4 D4 | E4 F4 | G4 E4 | D4 C4 in half notes, legato with sustain pedal, piano synthesis at ♩=60 and ♩=40; the pedal change points are marked on screen.",
+      "tr": "Do4 Re4 | Mi4 Fa4 | Sol4 Mi4 | Re4 Do4 ikiliklerle, uzatma pedalıyla legato, piyano sentezi, ♩=60 ve ♩=40; pedal değişim yerleri ekranda işaretli."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play C4 D4 | E4 F4 | G4 E4 | D4 C4 in half notes with right-hand finger 3 only, at ♩=60. Press the pedal after the first note. On every next note: play, lift the pedal, press it again. Lift the pedal at the end of bar 4. The microphone checks the notes and their timing. Then tick the pedal checklist.",
+      "tr": "Do4 Re4 | Mi4 Fa4 | Sol4 Mi4 | Re4 Do4'ü ikiliklerle, yalnız sağ el 3. parmakla ♩=60'ta çal. İlk notadan sonra pedala bas. Sonraki her notada: çal, pedalı kaldır, yeniden bas. 4. ölçünün sonunda pedalı kaldır. Mikrofon notaları ve zamanlamalarını kontrol eder. Sonra pedal kontrol listesini işaretle."
+    },
+    "sequence": "4/4: C4:h D4:h | E4:h F4:h | G4:h E4:h | D4:h C4:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I heard no gap of silence between the notes.", "tr": "Notalar arasında sessiz bir boşluk duymadım." },
+    { "en": "Two notes never rang over each other.", "tr": "İki nota hiç üst üste çalmadı." },
+    { "en": "The foot came up after the new note, not before it.", "tr": "Ayak yeni notadan önce değil, sonra kalktı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one white key too low.", "tr": "Farklı nota, bir beyaz tuş aşağıda." },
+      "fix": {
+        "en": "The pedal stayed down and the old note blurred into the new one. Lift the foot right after the new note sounds.",
+        "tr": "Pedal basılı kaldı ve eski nota yenisine karıştı. Yeni nota çalar çalmaz ayağı kaldır."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "You waited for the foot before playing. The finger plays first on the beat; the foot moves after it.",
+        "tr": "Çalmadan önce ayağı bekledin. Vuruşta önce parmak çalar; ayak ondan sonra hareket eder."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Change the pedal between two notes only, C4 to D4, until play, up, down feels automatic.",
+    "tr": "Çal, kaldır, bas kendiliğinden gelene kadar pedalı yalnız iki nota arasında değiştir: Do4'ten Re4'e."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

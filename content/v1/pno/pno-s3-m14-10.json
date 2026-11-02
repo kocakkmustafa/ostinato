@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m14-10",
+  "title": {
+    "en": "Czerny Op. 599: a study",
+    "tr": "Czerny Op. 599: bir etüt"
+  },
+  "goal": {
+    "en": "Plays a study from Czerny's Op. 599 evenly at ♩=80.",
+    "tr": "Czerny'nin Op. 599'undan bir etüdü ♩=80'de eşit çalar."
+  },
+  "explanation": [
+    {
+      "en": "Carl Czerny (1791–1857) was a pupil of Beethoven and a famous teacher. His Op. 599 is a set of short studies for beginners.",
+      "tr": "Carl Czerny (1791–1857) Beethoven'ın öğrencisi ve ünlü bir öğretmendi. Op. 599, yeni başlayanlar için kısa etütlerden oluşur."
+    },
+    {
+      "en": "This lesson uses No. 12, one of the five-finger exercises 'with a quiet hand'. The right hand runs in eighth notes between C5 and G5 without moving the hand. The left hand holds one three-note chord in each bar.",
+      "tr": "Bu ders 'sakin elle' beş parmak alıştırmalarından 12 numarayı kullanır. Sağ el, eli kaydırmadan Do5 ile Sol5 arasında sekizliklerle koşar. Sol el her ölçüde üç sesli bir akor tutar."
+    },
+    {
+      "en": "Evenness is the goal: every note at the same time distance and the same loudness.",
+      "tr": "Amaç eşitliktir: her nota aynı zaman aralığında ve aynı güçte."
+    },
+    {
+      "en": "Start slowly. Raise the tempo in small steps only when the slower one passes.",
+      "tr": "Yavaş başla. Tempoyu ancak yavaş olan geçtiğinde küçük adımlarla artır."
+    },
+    {
+      "en": "Each left-hand chord starts together with a right-hand note. So the measured run is the right hand alone, exactly as the line on screen; add the chords in a second run, which is not measured. The score and fingering on screen are an Ostinato edition, made from the Holle edition of about 1850.",
+      "tr": "Sol elin her akoru bir sağ el notasıyla birlikte başlar. Bu yüzden ölçülen çalış, ekrandaki dizi gibi, yalnız sağ eldir; akorları ölçülmeyen ikinci bir çalışta ekle. Ekrandaki nota ve parmak numaraları, yaklaşık 1850 tarihli Holle baskısından hazırlanan Ostinato düzenlemesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Czerny, Op. 599 No. 12, from the Ostinato edition, piano synthesis: the right hand alone, then with the chords, at ♩=80 and at ♩=56.",
+      "tr": "Ostinato düzenlemesinden Czerny, Op. 599 No. 12, piyano sentezi: önce yalnız sağ el, sonra akorlarla, ♩=80 ve ♩=56."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Run 1, measured: play the right hand alone, bars 1–16 without the repeats, eighth notes two per beat. Practise in two-bar sections at ♩=56, then play all 16 bars at ♩=80. Run 2, not measured: add the left hand, one held chord per bar.",
+      "tr": "1. çalış, ölçülür: sağ eli tek başına çal, 1–16. ölçüler, tekrarlar olmadan; sekizlikler vuruş başına iki tane. İki ölçülük bölümlerle ♩=56'da çalış, sonra 16 ölçünün tamamını ♩=80'de çal. 2. çalış, ölçülmez: sol eli ekle, her ölçüde tutulan bir akor."
+    },
+    "sequence": "4/4: C5:e D5:e E5:e F5:e G5:q G5:q | G5:e F5:e E5:e D5:e C5:q E5:q | D5:e E5:e F5:e D5:e G5:q F5:q | E5:e F5:e G5:e E5:e C5:h | C5:e D5:e E5:e D5:e C5:e D5:e E5:e F5:e | G5:e F5:e E5:e D5:e C5:q E5:q | D5:e E5:e F5:e E5:e G5:e F5:e E5:e D5:e | C5:e E5:e G5:e E5:e C5:h | D5:e E5:e F5:e E5:e G5:e F5:e E5:e D5:e | E5:e F5:e G5:e E5:e C5:q C5:q | D5:e E5:e F5:e E5:e G5:e F5:e E5:e D5:e | E5:e F5:e G5:e E5:e C5:q C5:q | C5:e D5:e E5:e F5:e G5:e G5:e G5:e G5:e | G5:e F5:e E5:e D5:e C5:e D5:e E5:e C5:e | D5:e E5:e F5:e E5:e G5:e F5:e E5:e D5:e | C5:e E5:e G5:e E5:e C5:h",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The running notes were even in time and loudness.",
+      "tr": "Koşan notalar zamanda ve güçte eşitti."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "A thumb crossing or a hand shift is late. Loop those four notes at ♩=56, then rejoin the study.",
+        "tr": "Bir başparmak geçişi ya da el kayması geç kalıyor. O dört notayı ♩=56'da döngüle, sonra etüde dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Soft fast notes are hard to separate. Play each note a little deeper into the key.",
+        "tr": "Hafif ve hızlı notalar zor ayrılır. Her notayı tuşa biraz daha derin bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the study at ♩=66 until it passes, then go up in steps of 5 to ♩=80.",
+    "tr": "Etüdü geçene kadar ♩=66'da çal, sonra 5'er adımlarla ♩=80'e çık."
+  },
+  "repertoire": "Carl Czerny (1791–1857), Erster Wiener Lehrmeister im Pianoforte-Spiel (Practical Method for Beginners), Op. 599, No. 12 (C major, 4/4; from 'Uebungen für die Finger mit ruhig stillstehender Hand'), bars 1–16 without repeats. Source edition: Wolfenbüttel: L. Holle, n.d. (ca. 1850), p. 4; scan: Bayerische Staatsbibliothek, 4 Mus.pr. 67071, https://www.digitale-sammlungen.de/view/bsb11155199 (urn:nbn:de:bvb:12-bsb11155199-9). Checked note for note against New York: G. Schirmer, 1893 (Library of Musical Classics 146, plate 11038, ed. Giuseppe Buonamici), p. 6, IMSLP scan mirrored at https://archive.org/details/imslp-exercises-for-beginners-op599-czerny-carl (that file is a later reprint of the 1893 plates). Measured run: the right hand alone; the left-hand chords start with right-hand notes and are played in a second, unmeasured run. Composer died 1857; public domain, legal review pending. Notation, fingering and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

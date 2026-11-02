@@ -1,0 +1,117 @@
+{
+  "id": "pno-s3-m10-04",
+  "title": {
+    "en": "F major, two octaves",
+    "tr": "İki oktav Fa majör"
+  },
+  "goal": {
+    "en": "Plays the F major scale over two octaves, hands separate, with B♭ under right-hand finger 4, at ♩=60.",
+    "tr": "Fa majör gamı iki oktav, eller ayrı, sağ elde Si♭ notasını 4. parmakla çalarak ♩=60'ta çalar."
+  },
+  "explanation": [
+    {
+      "en": "F major has one flat: B♭. Every B becomes the black key to its left.",
+      "tr": "Fa majörün bir bemolü vardır: Si♭. Her Si, solundaki siyah tuşa dönüşür."
+    },
+    {
+      "en": "Right hand F4 to F6: 1-2-3-4-1-2-3-1-2-3-4-1-2-3-4. Finger 4 plays every B♭ and also the top note, F6. Finger 5 is not used.",
+      "tr": "Sağ el Fa4'ten Fa6'ya: 1-2-3-4-1-2-3-1-2-3-4-1-2-3-4. Her Si♭ notasını ve en üstteki Fa6'yı 4. parmak çalar. 5. parmak kullanılmaz."
+    },
+    {
+      "en": "Going up, the right thumb passes under three times: to C5, to F5 and to C6.",
+      "tr": "Çıkarken sağ başparmak üç kez altından geçer: Do5'e, Fa5'e ve Do6'ya."
+    },
+    {
+      "en": "Coming down in the right hand: 4-3-2-1-4-3-2-1-3-2-1-4-3-2-1. Finger 4 crosses over the thumb to each B♭, finger 3 from F5 to E5.",
+      "tr": "Sağ elde inerken: 4-3-2-1-4-3-2-1-3-2-1-4-3-2-1. 4. parmak başparmağın üstünden her Si♭ notasına, 3. parmak Fa5'ten Mi5'e geçer."
+    },
+    {
+      "en": "The left hand keeps the C major pattern from F2 to F4: 5-4-3-2-1-3-2-1-4-3-2-1-3-2-1. Finger 2 plays B♭2 and B♭3.",
+      "tr": "Sol el Fa2'den Fa4'e Do majör kalıbını korur: 5-4-3-2-1-3-2-1-4-3-2-1-3-2-1. Si♭2 ve Si♭3'ü 2. parmak çalar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "F4 to F6 and back, an empty bar, then F2 to F4 and back, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.",
+      "tr": "Klikle dörtlüklerle Fa4'ten Fa6'ya ve geri, bir boş ölçü, sonra Fa2'den Fa4'e ve geri, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play the right hand from F4 to F6 and back. Use the empty bar to move to the left hand, then play F2 to F4 and back. One note per beat at ♩=60.",
+      "tr": "Sağ elle Fa4'ten Fa6'ya çık ve geri in. Boş ölçüde sol ele geç, sonra Fa2'den Fa4'e çık ve geri in. ♩=60'ta vuruş başına bir nota."
+    },
+    "sequence": "F4 G4 A4 B♭4 | C5 D5 E5 F5 | G5 A5 B♭5 C6 | D6 E6 F6 E6 | D6 C6 B♭5 A5 | G5 F5 E5 D5 | C5 B♭4 A4 G4 | F4:w | wr | F2 G2 A2 B♭2 | C3 D3 E3 F3 | G3 A3 B♭3 C4 | D4 E4 F4 E4 | D4 C4 B♭3 A3 | G3 F3 E3 D3 | C3 B♭2 A2 G2 | F2:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Finger 4 played every B♭ in the right hand.",
+      "tr": "Sağ elde her Si♭ notasını 4. parmak çaldı."
+    },
+    {
+      "en": "The crossing note was as even as its neighbours.",
+      "tr": "Geçiş notası komşuları kadar eşitti."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone high.",
+        "tr": "Farklı nota, yarım ses yüksek."
+      },
+      "fix": {
+        "en": "You played B instead of B♭. Place finger 4 on the black key before the thumb crosses.",
+        "tr": "Si♭ yerine Si çaldın. Başparmak geçmeden önce 4. parmağı siyah tuşa koy."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "In the right hand, the join on F5 comes late. Loop D5 E5 F5 G5 with 2-3-1-2 at ♩=50.",
+        "tr": "Sağ elde Fa5'teki birleşme geç geliyor. Re5 Mi5 Fa5 Sol5'i 2-3-1-2 ile ♩=50'de döngüle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each hand over one octave first, as in the one-octave lesson. Then add the second octave at ♩=50.",
+    "tr": "Önce her eli tek oktavlık dersteki gibi bir oktav çal. Sonra ♩=50'de ikinci oktavı ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

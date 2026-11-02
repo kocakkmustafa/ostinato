@@ -1,0 +1,83 @@
+{
+  "id": "pno-s1-m04-07",
+  "title": { "en": "Bar lines and repeats", "tr": "Ölçü çizgileri ve tekrarlar" },
+  "goal": {
+    "en": "Names bar lines and repeat signs, then plays a four-bar line with its repeat, eight bars without a pause.",
+    "tr": "Ölçü çizgilerini ve tekrar işaretlerini tanır, sonra dört ölçülük diziyi tekrarıyla, ara vermeden sekiz ölçü çalar."
+  },
+  "explanation": [
+    {
+      "en": "Bar lines divide the music into bars. They add no silence: after the last beat the next bar starts on 1.",
+      "tr": "Ölçü çizgileri müziği ölçülere böler. Sessizlik eklemez: son vuruştan sonra yeni ölçü 1'den başlar."
+    },
+    {
+      "en": "A double bar line marks the end of a section. A thin line followed by a thick one marks the end of the piece.",
+      "tr": "Çift ölçü çizgisi bir bölümün sonunu gösterir. İnce çizgiyi izleyen kalın çizgi parçanın sonunu gösterir."
+    },
+    {
+      "en": "Repeat signs |: and :| mark a section that you play twice.",
+      "tr": "Tekrar işaretleri |: ve :| iki kez çalınan bölümü gösterir."
+    },
+    {
+      "en": "At :| go back to |:, or to the beginning if there is no |:. Go from the last beat straight into the first bar again, without a pause.",
+      "tr": ":| işaretinde |: işaretine, o yoksa en başa dön. Son vuruştan ara vermeden doğrudan ilk ölçüye geç."
+    },
+    {
+      "en": "Before you play, trace the path with your finger and count the bars. This line has 4 written bars and 8 played bars.",
+      "tr": "Çalmadan önce yolu parmağınla izle ve ölçüleri say. Bu dizide 4 yazılı, 8 çalınan ölçü var."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The four-bar line played with its repeat, eight bars with a click, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Dört ölçülük dizi tekrarıyla, klikle sekiz ölçü, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "First answer 4 on-screen questions about bar lines and repeat signs. Then play the line |: E4 D4 C4 | D4 E4 F4 | E4 G4 F4 D4 | C4 :| with the right hand in C position at ♩=60 and take the repeat: 8 bars in all.",
+      "tr": "Önce ölçü çizgileri ve tekrar işaretleriyle ilgili ekrandaki 4 soruyu yanıtla. Sonra |: Mi4 Re4 Do4 | Re4 Mi4 Fa4 | Mi4 Sol4 Fa4 Re4 | Do4 :| dizisini sağ el Do konumunda ♩=60'ta çal ve tekrarı uygula: toplam 8 ölçü."
+    },
+    "sequence": "4/4: E4:q D4:q C4:h | D4:q E4:q F4:h | E4:q G4:q F4:q D4:q | C4:w | ×2",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true, "minCorrect": 4 },
+    "drill": {
+      "type": "symbol_match",
+      "count": 4,
+      "params": { "set": ["bar_line", "double_bar_line", "final_bar_line", "repeat_start", "repeat_end"] }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I played the four bars twice.", "tr": "Dört ölçüyü iki kez çaldım." },
+    { "en": "I went back to bar 1 without a pause.", "tr": "1. ölçüye ara vermeden döndüm." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different answer: repeat start and repeat end swapped.", "tr": "Farklı cevap: tekrar başı ve tekrar sonu yer değiştirmiş." },
+      "fix": {
+        "en": "The dots face the music that repeats: |: opens the section, :| closes it.",
+        "tr": "Noktalar tekrarlanan müziğe bakar: |: bölümü açar, :| kapatır."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "You paused at the repeat. During bar 4, look at bar 1 and count 4 straight into 1.",
+        "tr": "Tekrarda durdun. 4. ölçüyü çalarken 1. ölçüye bak ve 4'ten doğrudan 1'e say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the four bars once, stop, and play them once more; join the two runs when the path is clear.",
+    "tr": "Dört ölçüyü bir kez çal, dur ve bir kez daha çal; yol netleşince iki turu birleştir."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

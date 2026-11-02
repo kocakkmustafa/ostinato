@@ -1,0 +1,112 @@
+{
+  "id": "pno-s1-m02-01",
+  "title": {
+    "en": "Right-hand five notes",
+    "tr": "Sağ elde beş nota"
+  },
+  "goal": {
+    "en": "Plays C4 up to G4 and back to C4 with the right hand at ♩=60.",
+    "tr": "Sağ elle Do4'ten Sol4'e çıkıp Do4'e ♩=60'ta geri iner."
+  },
+  "explanation": [
+    {
+      "en": "Place right-hand fingers 1–5 on C4 D4 E4 F4 G4. Finger 1, the thumb, sits on middle C.",
+      "tr": "Sağ elin 1–5. parmaklarını Do4 Re4 Mi4 Fa4 Sol4'e koy. 1. parmak, yani başparmak, orta Do'dadır."
+    },
+    {
+      "en": "This is a small five-note position, not a full scale. Each finger has its own key.",
+      "tr": "Bu küçük beş nota konumudur, tam dizi değildir. Her parmağın kendi tuşu var."
+    },
+    {
+      "en": "Move one finger at a time. Release the previous key as the next one goes down.",
+      "tr": "Bir seferde bir parmağı hareket ettir. Sonraki tuş inerken önceki tuşu bırak."
+    },
+    {
+      "en": "Keep the fingers curved and resting lightly on their keys. Play from the fingertip; do not push with the arm.",
+      "tr": "Parmaklar kıvrık kalsın ve tuşlarının üstünde hafifçe dursun. Parmak ucuyla çal; kolla itme."
+    },
+    {
+      "en": "Every note lasts one beat, except the last C4. Hold it for four beats while you count.",
+      "tr": "Son Do4 dışında her nota bir vuruş sürer. Son Do4'ü sayarak dört vuruş tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "C4 D4 E4 F4 G4 F4 E4 D4 C4, the last C4 held four beats, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Do4 Re4 Mi4 Fa4 Sol4 Fa4 Mi4 Re4 Do4, son Do4 dört vuruş, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play from C4 up to G4 and back down to C4 with the click, one note per beat, fingers 1-2-3-4-5-4-3-2-1. Start at ♩=50 and move up in steps of 5 to ♩=60.",
+      "tr": "Klikle Do4'ten Sol4'e çık ve Do4'e geri in; her vuruşa bir nota, parmaklar 1-2-3-4-5-4-3-2-1. ♩=50'den başla, 5'er adımla ♩=60'a çık."
+    },
+    "sequence": "C4 D4 E4 F4 | G4 F4 E4 D4 | C4:w",
+    "tempo": {
+      "open": 50,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each finger stayed on its own key.",
+      "tr": "Her parmak kendi tuşunda kaldı."
+    },
+    {
+      "en": "I counted every bar and held the last C4 for four beats.",
+      "tr": "Her ölçüyü saydım ve son Do4'ü dört vuruş tuttum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too high.",
+        "tr": "Farklı nota, bir beyaz tuş yukarıda."
+      },
+      "fix": {
+        "en": "Your hand shifted to the right. Put the thumb back on middle C and check that finger 5 lands on G4.",
+        "tr": "Elin sağa kaymış. Başparmağı orta Do'ya geri koy ve 5. parmağın Sol4'e düştüğünü kontrol et."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Finger 4 often lags. Slow down; do not hammer the key or hold the other fingers stiff.",
+        "tr": "4. parmak sık sık geride kalır. Yavaşla; tuşa vurma ve diğer parmakları katı tutma."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C4 D4 E4 D4 C4 with fingers 1-2-3 at ♩=40, then add F4 and G4.",
+    "tr": "♩=40'ta 1-2-3. parmaklarla yalnız Do4 Re4 Mi4 Re4 Do4 çal, sonra Fa4 ve Sol4'ü ekle."
+  },
+  "legacy": "R: piano-05",
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,96 @@
+{
+  "id": "pno-s1-m01-05",
+  "title": { "en": "Finger numbers and touch", "tr": "Parmak numaraları ve tuşe" },
+  "goal": {
+    "en": "Names the finger numbers of both hands and plays C4 to G4 with right-hand fingers 1 to 5, one key at a time.",
+    "tr": "İki elin parmak numaralarını söyler ve sağ elin 1–5. parmaklarıyla Do4'ten Sol4'e tuşları tek tek çalar."
+  },
+  "explanation": [
+    {
+      "en": "Both hands use the same numbers: thumb 1, index 2, middle 3, ring 4, little 5.",
+      "tr": "İki el de aynı numaraları kullanır: başparmak 1, işaret 2, orta 3, yüzük 4, serçe 5."
+    },
+    {
+      "en": "In the right hand, 1 is on the left. In the left hand, 1 is on the right. The thumbs point toward each other.",
+      "tr": "Sağ elde 1 soldadır. Sol elde 1 sağdadır. Başparmaklar birbirine bakar."
+    },
+    {
+      "en": "Right-hand C position: thumb on C4, then one finger per white key up to finger 5 on G4.",
+      "tr": "Sağ el Do pozisyonu: başparmak Do4'te, sonra her beyaz tuşa bir parmak; 5. parmak Sol4'te."
+    },
+    {
+      "en": "Touch: press one key down to the bottom, then release it fully so it rises. Let fingers curve naturally; wrists stay mobile, not locked.",
+      "tr": "Tuşe: bir tuşu dibine kadar bas, sonra tamamen bırak ki tuş yukarı kalksın. Parmaklar doğal kıvrılsın; bilek hareketli olsun, kilitlenmesin."
+    },
+    {
+      "en": "Each new key starts as the last one is released. Only one key sounds at a time.",
+      "tr": "Her yeni tuş, öncekini bırakırken başlar. Aynı anda yalnız bir tuş çalar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C4 D4 E4 F4 G4 and back down to C4, one note at a time with even spacing, piano synthesis; the drill shows a hand diagram.",
+      "tr": "Do4 Re4 Mi4 Fa4 Sol4 ve geri Do4'e; notalar tek tek ve eşit aralıklı, piyano sentezi. Alıştırma bir el şeması gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "Part 1: answer 6 questions on the hand diagram: match a finger to its number, in either hand. Part 2: put your right thumb on C4 and play C4 D4 E4 F4 G4 with fingers 1 2 3 4 5, then come back down to C4. Take your time; there is no click.",
+      "tr": "1. bölüm: el şemasında 6 soruyu yanıtla: iki elden birinde parmağı numarasıyla eşleştir. 2. bölüm: sağ başparmağını Do4'e koy ve 1 2 3 4 5. parmaklarla Do4 Re4 Mi4 Fa4 Sol4 çal, sonra Do4'e geri in. Acele etme; klik yok."
+    },
+    "sequence": "C4 D4 E4 F4 G4 F4 E4 D4 C4",
+    "pass": { "levelDefault": true, "minCorrect": 5 },
+    "drill": {
+      "type": "diagram_match",
+      "count": 6,
+      "params": {
+        "set": "piano_finger_numbers",
+        "diagram": "hand",
+        "fingers": [1, 2, 3, 4, 5],
+        "hands": ["right", "left"]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Each finger stayed over its own key.", "tr": "Her parmak kendi tuşunun üstünde kaldı." },
+    { "en": "I released each key fully before the next one sounded.", "tr": "Bir sonraki tuş çalmadan önce her tuşu tamamen bıraktım." },
+    { "en": "My fingertip joints did not collapse.", "tr": "Parmak ucu eklemlerim içe çökmedi." },
+    { "en": "My shoulders and wrists stayed loose.", "tr": "Omuzlarım ve bileklerim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The key did not reach the bottom. Let the weight of the arm press it, without squeezing.",
+        "tr": "Tuş dibine kadar inmedi. Sıkmadan, kolun ağırlığıyla bastır."
+      }
+    },
+    {
+      "error": { "en": "Different note, one white key away.", "tr": "Farklı nota, bir beyaz tuş ötede." },
+      "fix": {
+        "en": "The hand moved. Put the thumb back on C4 and keep one finger over each key.",
+        "tr": "El kaymış. Başparmağı yeniden Do4'e koy ve her tuşun üstünde bir parmak tut."
+      }
+    },
+    {
+      "error": { "en": "Different answer: the hands' numbers mirrored.", "tr": "Farklı cevap: ellerin numaraları ters çevrilmiş." },
+      "fix": {
+        "en": "Start from the thumb in either hand: the thumb is always 1, the little finger always 5.",
+        "tr": "İki elde de başparmaktan başla: başparmak her zaman 1, serçe her zaman 5'tir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C4, D4 and E4 with fingers 1, 2 and 3 first. If finger joints collapse or the wrist stiffens, use less pressure and pause.",
+    "tr": "Önce yalnız 1, 2 ve 3. parmaklarla Do4, Re4 ve Mi4'ü çal. Parmak eklemi çöker ya da bilek sertleşirse baskıyı azalt ve ara ver."
+  },
+  "legacy": "R: piano-03",
+  "minutes": 12,
+  "expertPending": true
+}

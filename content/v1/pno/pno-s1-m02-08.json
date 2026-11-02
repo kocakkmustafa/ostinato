@@ -1,0 +1,111 @@
+{
+  "id": "pno-s1-m02-08",
+  "title": {
+    "en": "Legato: connecting keys",
+    "tr": "Legato: tuşları bağlamak"
+  },
+  "goal": {
+    "en": "Plays C4 to G4 legato, with no gap and no overlap between notes.",
+    "tr": "Do4'ten Sol4'e notalar arasında boşluk ve çakışma olmadan legato çalar."
+  },
+  "explanation": [
+    {
+      "en": "Legato means connected. Each note joins the next with no silence between them.",
+      "tr": "Legato bağlı demektir. Her nota, arada sessizlik olmadan bir sonrakine bağlanır."
+    },
+    {
+      "en": "Pass the sound from finger to finger: the next key goes down at the moment the previous key comes up.",
+      "tr": "Sesi parmaktan parmağa aktar: önceki tuş kalkarken sonraki tuş iner."
+    },
+    {
+      "en": "Think of walking. One foot lands as the other lifts.",
+      "tr": "Yürümeyi düşün. Bir ayak yere basarken diğeri kalkar."
+    },
+    {
+      "en": "Do not hold the old key after the new one sounds. The two notes would blur together.",
+      "tr": "Yeni nota çaldıktan sonra eski tuşu basılı tutma. İki nota birbirine karışır."
+    },
+    {
+      "en": "Play slowly. There is no click; listen to the joins.",
+      "tr": "Yavaş çal. Klik yok; geçişleri dinle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "C4 D4 E4 F4 G4 slow and legato, piano synthesis.",
+      "tr": "Do4 Re4 Mi4 Fa4 Sol4, yavaş ve legato, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M",
+      "Ö"
+    ],
+    "engineSteps": [
+      "A6"
+    ],
+    "task": {
+      "en": "Play C4 D4 E4 F4 G4 slowly and legato with fingers 1 to 5. The microphone checks the notes. Then tick the checklist.",
+      "tr": "Do4 Re4 Mi4 Fa4 Sol4'ü 1'den 5'e parmaklarla yavaş ve legato çal. Mikrofon notaları kontrol eder. Sonra kontrol listesini işaretle."
+    },
+    "sequence": "C4 D4 E4 F4 G4",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard no gap of silence between the notes.",
+      "tr": "Notalar arasında sessiz bir boşluk duymadım."
+    },
+    {
+      "en": "Each key came up as the next one went down.",
+      "tr": "Sonraki tuş inerken her tuş kalktı."
+    },
+    {
+      "en": "Two notes never rang over each other.",
+      "tr": "İki nota hiç üst üste çalmadı."
+    },
+    {
+      "en": "My wrist stayed level and loose.",
+      "tr": "Bileğim düz ve gevşek kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "The previous key was still down and the two notes blurred. Release it as the next key goes down.",
+        "tr": "Önceki tuş hâlâ basılıydı ve iki nota karıştı. Sonraki tuş inerken onu bırak."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Focusing on the join, you pressed too gently. Take each key all the way to the bottom.",
+        "tr": "Geçişe odaklanırken çok hafif bastın. Her tuşu dibine kadar indir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Connect only two notes at a time: C4–D4, then D4–E4, and so on up to G4.",
+    "tr": "Bir seferde yalnız iki notayı bağla: Do4–Re4, sonra Re4–Mi4 ve böylece Sol4'e kadar."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

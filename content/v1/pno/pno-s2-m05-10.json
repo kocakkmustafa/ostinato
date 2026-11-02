@@ -1,0 +1,124 @@
+{
+  "id": "pno-s2-m05-10",
+  "title": {
+    "en": "Intervals from a second to a fifth",
+    "tr": "İkiliden beşliye aralıklar"
+  },
+  "goal": {
+    "en": "Names seconds, thirds, fourths and fifths on the staff and plays them in right-hand C position.",
+    "tr": "Portedeki ikili, üçlü, dörtlü ve beşlileri adlandırır ve sağ el Do konumunda çalar."
+  },
+  "explanation": [
+    {
+      "en": "An interval counts letter names from one note to another, including both. C to D is a second, C to E a third, C to F a fourth, C to G a fifth.",
+      "tr": "Aralık, iki nota arasındaki nota adlarını ikisi dahil sayar. Do–Re ikili, Do–Mi üçlü, Do–Fa dörtlü, Do–Sol beşlidir."
+    },
+    {
+      "en": "On the staff a second moves to the next position: line to space or space to line.",
+      "tr": "Portede ikili sonraki konuma gider: çizgiden aralığa ya da aralıktan çizgiye."
+    },
+    {
+      "en": "A third skips one position: line to line or space to space.",
+      "tr": "Üçlü bir konum atlar: çizgiden çizgiye ya da aralıktan aralığa."
+    },
+    {
+      "en": "A fourth skips two positions; a fifth skips three.",
+      "tr": "Dörtlü iki konum, beşli üç konum atlar."
+    },
+    {
+      "en": "In a five-finger position, the finger difference plus one gives the interval: fingers 1 and 3 make a third.",
+      "tr": "Beş parmak konumunda parmak farkının bir fazlası aralığı verir: 1. ve 3. parmak üçlü yapar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Each interval in part 2 is played once after your attempt, piano synthesis.",
+      "tr": "2. bölümdeki her aralık, denemenden sonra bir kez çalınır; piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D",
+      "M"
+    ],
+    "engineSteps": [
+      "A6"
+    ],
+    "task": {
+      "en": "Part 1: answer 8 questions; name the interval shown on the staff. Part 2: in right-hand C position, read and play eight intervals, one note after the other: C4–D4, C4–E4, C4–F4, C4–G4, E4–G4, D4–G4, F4–G4, C4–F4. Name each interval before you play it. No click; take your time.",
+      "tr": "1. bölüm: 8 soruyu cevapla; portede gösterilen aralığı adlandır. 2. bölüm: sağ el Do konumunda sekiz aralığı oku ve notaları art arda çal: Do4–Re4, Do4–Mi4, Do4–Fa4, Do4–Sol4, Mi4–Sol4, Re4–Sol4, Fa4–Sol4, Do4–Fa4. Her aralığı çalmadan önce adlandır. Klik yok; acele etme."
+    },
+    "sequence": "C4:h D4:h | C4:h E4:h | C4:h F4:h | C4:h G4:h | E4:h G4:h | D4:h G4:h | F4:h G4:h | C4:h F4:h",
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 7
+    },
+    "drill": {
+      "type": "interval_name",
+      "count": 8,
+      "params": {
+        "intervals": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "display": "staff",
+        "direction": "ascending",
+        "range": "C4-G4"
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I named each interval from the staff before I played it.",
+      "tr": "Her aralığı çalmadan önce porteden adlandırdım."
+    },
+    {
+      "en": "I counted both the first and the last letter.",
+      "tr": "Hem ilk hem son harfi saydım."
+    },
+    {
+      "en": "Every third I read was line to line or space to space.",
+      "tr": "Okuduğum her üçlü çizgiden çizgiye ya da aralıktan aralığaydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer, one size too small.",
+        "tr": "Farklı cevap, bir boy küçük."
+      },
+      "fix": {
+        "en": "The first note was not counted. Count letter names on your fingers including the first note, then check the line and space pattern.",
+        "tr": "İlk nota sayılmamış. İlk nota dahil nota adlarını parmaklarında say, sonra çizgi ve aralık düzenine bak."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too high.",
+        "tr": "Farklı nota, bir beyaz tuş yukarıda."
+      },
+      "fix": {
+        "en": "Use the finger rule before you play: a third is fingers 1 and 3, a fifth is fingers 1 and 5.",
+        "tr": "Çalmadan önce parmak kuralını kullan: üçlü 1. ve 3. parmak, beşli 1. ve 5. parmaktır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start with seconds and thirds only, then add fourths and fifths.",
+    "tr": "Önce yalnız ikili ve üçlülerle başla, sonra dörtlü ve beşlileri ekle."
+  },
+  "legacy": "R: piano-17",
+  "minutes": 12,
+  "expertPending": true
+}

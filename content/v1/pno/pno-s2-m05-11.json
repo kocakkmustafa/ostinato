@@ -1,0 +1,117 @@
+{
+  "id": "pno-s2-m05-11",
+  "title": {
+    "en": "Pentascales at 100",
+    "tr": "♩=100'de pentaskal"
+  },
+  "goal": {
+    "en": "Plays C, G, F and D major pentascales hands separately with even quarter notes at ♩=100.",
+    "tr": "Do, Sol, Fa ve Re majör pentaskallarını eller ayrı, eşit dörtlüklerle ♩=100'de çalar."
+  },
+  "explanation": [
+    {
+      "en": "Speed comes from a loose hand, not from pressing harder. Keep the wrist level and the fingers close to the keys.",
+      "tr": "Hız daha sert basmaktan değil, gevşek elden gelir. Bileği düz tut, parmaklar tuşlara yakın kalsın."
+    },
+    {
+      "en": "Even means every note has the same length and the same loudness. The thumb tends to play louder and fingers 4 and 5 softer; aim for one level.",
+      "tr": "Eşit, her notanın aynı uzunlukta ve aynı gürlükte olması demektir. Başparmak daha gür, 4. ve 5. parmaklar daha hafif çalmaya eğilimlidir; tek bir düzey hedefle."
+    },
+    {
+      "en": "Raise the tempo in steps: start at ♩=80 and add 5 each time the line is clean.",
+      "tr": "Tempoyu adım adım artır: ♩=80'den başla, dizi her temiz çıktığında 5 ekle."
+    },
+    {
+      "en": "For each key, play the right hand, then the left hand. Move both hands during the half rest after the left-hand line.",
+      "tr": "Her tonda önce sağ eli, sonra sol eli çal. Sol el dizisinden sonraki ikilik susta iki eli birlikte taşı."
+    },
+    {
+      "en": "If the hand tightens, stop, let the arm hang for a moment and go back one tempo step.",
+      "tr": "El kasılırsa dur, kolu bir an serbest bırak ve bir tempo adımı geri dön."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C, G, F and D major pentascales, each right hand then left hand, with a click, at ♩=100 and at ♩=65, piano synthesis.",
+      "tr": "Do, Sol, Fa ve Re majör pentaskalları, her biri önce sağ el sonra sol el, klikle, ♩=100 ve ♩=65, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "With the click, play the four pentascales in order: C, G, F, D, each right hand then left hand. Start at ♩=80 and raise the tempo to ♩=100.",
+      "tr": "Klikle dört pentaskalı sırayla çal: Do, Sol, Fa, Re; her birinde önce sağ el, sonra sol el. ♩=80'den başla ve tempoyu ♩=100'e çıkar."
+    },
+    "sequence": "4/4: C4 D4 E4 F4 | G4 F4 E4 D4 | C4:h hr | C3 D3 E3 F3 | G3 F3 E3 D3 | C3:h hr | G4 A4 B4 C5 | D5 C5 B4 A4 | G4:h hr | G2 A2 B2 C3 | D3 C3 B2 A2 | G2:h hr | F4 G4 A4 B♭4 | C5 B♭4 A4 G4 | F4:h hr | F3 G3 A3 B♭3 | C4 B♭3 A3 G3 | F3:h hr | D4 E4 F♯4 G4 | A4 G4 F♯4 E4 | D4:h hr | D3 E3 F♯3 G3 | A3 G3 F♯3 E3 | D3:w",
+    "tempo": {
+      "open": 80,
+      "target": 100
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Every note was the same length and the same loudness.",
+      "tr": "Her nota aynı uzunlukta ve aynı gürlükteydi."
+    },
+    {
+      "en": "My wrist stayed loose at the top tempo.",
+      "tr": "En yüksek tempoda bileğim gevşek kaldı."
+    },
+    {
+      "en": "I raised the tempo only after a clean run.",
+      "tr": "Tempoyu yalnız temiz bir turdan sonra artırdım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "You rush on the way down. Count the beat and let each finger wait for the click.",
+        "tr": "İnişte acele ediyorsun. Vuruşu say ve her parmak kliki beklesin."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Fingers 4 and 5 are too soft at speed. Go back one tempo step and give them the same weight as finger 3.",
+        "tr": "Hızda 4. ve 5. parmaklar çok hafif. Bir tempo adımı geri dön ve onlara 3. parmakla aynı ağırlığı ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Stay at ♩=90 and play only C and G until every note is even.",
+    "tr": "♩=90'da kal ve her nota eşit olana kadar yalnız Do ve Sol'ü çal."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

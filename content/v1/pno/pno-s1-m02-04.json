@@ -1,0 +1,112 @@
+{
+  "id": "pno-s1-m02-04",
+  "title": {
+    "en": "Repeated notes",
+    "tr": "Tekrar notalar"
+  },
+  "goal": {
+    "en": "Repeats E4 eight times evenly with finger 3 at ♩=60.",
+    "tr": "Mi4'ü 3. parmakla ♩=60'ta sekiz kez eşit tekrar eder."
+  },
+  "explanation": [
+    {
+      "en": "A repeated note plays the same key again. On the staff, the notes stay on the same line or space.",
+      "tr": "Tekrar nota aynı tuşu yeniden çalmaktır. Portede notalar aynı çizgide ya da aralıkta kalır."
+    },
+    {
+      "en": "Play E4 with finger 3. Before each new note, let the key rise all the way up.",
+      "tr": "Mi4'ü 3. parmakla çal. Her yeni notadan önce tuşun tamamen yukarı çıkmasını bekle."
+    },
+    {
+      "en": "Stay on the key surface. Do not lift the finger high into the air.",
+      "tr": "Tuş yüzeyinde kal. Parmağı havaya yükseğe kaldırma."
+    },
+    {
+      "en": "Make all eight notes equally loud. Listen for an even row of sounds.",
+      "tr": "Sekiz notanın hepsini aynı gürlükte çal. Eşit bir ses sırası duymaya çalış."
+    },
+    {
+      "en": "Repeats on one key are hard for the microphone to tell apart. If a note shows Couldn't hear, it does not count against you. Keep going.",
+      "tr": "Aynı tuştaki tekrarları mikrofon zor ayırır. Bir nota Duyamadım gösterirse sana karşı sayılmaz. Devam et."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "E4 eight times in quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Klikle dörtlük olarak sekiz kez Mi4, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Play E4 eight times with finger 3, one note on each click, at ♩=60.",
+      "tr": "Mi4'ü 3. parmakla sekiz kez çal; her klikte bir nota, ♩=60."
+    },
+    "sequence": "E4 E4 E4 E4 | E4 E4 E4 E4",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The key rose fully before each new note.",
+      "tr": "Her yeni notadan önce tuş tamamen yukarı çıktı."
+    },
+    {
+      "en": "All eight notes were equally loud.",
+      "tr": "Sekiz notanın hepsi aynı gürlükteydi."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "The key did not rise before you played again. Let it come all the way up, then press.",
+        "tr": "Tekrar çalmadan önce tuş yukarı çıkmadı. Tamamen yukarı çıkmasını bekle, sonra bas."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but early.",
+        "tr": "Doğru nota, ama erken."
+      },
+      "fix": {
+        "en": "The repeats are rushing. Count 1 2 3 4 aloud and play only on the click.",
+        "tr": "Tekrarlar acele ediyor. 1 2 3 4'ü sesli say ve yalnız klikte çal."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play E4 only on beats 1 and 3 at ♩=60, then fill in all four beats.",
+    "tr": "♩=60'ta Mi4'ü yalnız 1. ve 3. vuruşta çal, sonra dört vuruşun hepsini doldur."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

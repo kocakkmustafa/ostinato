@@ -49,11 +49,11 @@
 |---|---|---|---|---|
 | Menuet Sol majör, BWV Anh. 114 | Christian Petzold (1677–1733) | Notenbüchlein für Anna Magdalena Bach (1725) el yazması / 19. yy BGA baskısı | pno-s3-m14-04/05/06 | Uzun süre J.S. Bach'a atfedildi |
 | Musette Re majör, BWV Anh. 126 | Anonim (Notenbüchlein, 1725) | Aynı | pno-s3-m14-07 | |
-| Handstücke für angehende Klavierspieler (seçme) | Daniel Gottlob Türk (1750–1813) | Leipzig/Halle, 1792 | pno-s1-m04-10, pno-s2-m08-11, pno-s3-m14-08 | Tek yeni nota kuralına uyan parçalar seçilir |
-| Vorschule im Klavierspiel, Op. 101 (seçme) | Ferdinand Beyer (1803–1863) | Mainz, Schott, 19. yy ortası | pno-s2-m08-12, pno-s3-m14-11 | Asya'da standart başlangıç kitabı |
-| Op. 599 (seçme etüt) | Carl Czerny (1791–1857) | 19. yy baskısı | pno-s3-m14-10 | |
-| Kolay parçalar (opus ilk baskıdan doğrulanacak) | Cornelius Gurlitt (1820–1901) | 19. yy baskısı | pno-s3-m11-11, pno-s3-m14-09 | Opus numaraları baskıdan teyit edilecek |
-| Notenbuch für Nannerl — Menuet (seçme) | Leopold Mozart (1719–1787) | 1759 el yazması / 19.–20. yy baskısı (1930 öncesi) | pno-s3-m14-13 | |
+| Handstücke für angehende Klavierspieler (seçme) | Daniel Gottlob Türk (1750–1813) | Leipzig/Halle, 1792; kullanılan: 2. baskı 1797, BSB bsb00086024 | pno-s1-m04-10 (No. 1), pno-s2-m08-11 (No. 9), pno-s3-m14-08 (No. 4) | Ölçülen turda tek el; diğer el ölçüsüz ikinci tur |
+| Vorschule im Klavierspiel, Op. 101 (seçme) | Ferdinand Beyer (1803–1863) | Mainz, Schott, 19. yy ortası; kullanılan: Peters 1895, levha 8033 (archive.org imslp-im-klavierspiel-op101-beyer-ferdinand) | pno-s2-m08-12 (No. 17), pno-s3-m14-11 (No. 61) | Asya'da standart başlangıç kitabı |
+| Op. 599 (seçme etüt) | Carl Czerny (1791–1857) | Holle, Wolfenbüttel, ~1850 (BSB bsb11155199); Schirmer 1893 ile karşılaştırıldı | pno-s3-m14-10 (No. 12) | |
+| Kolay parçalar | Cornelius Gurlitt (1820–1901) | Op. 130, Augener 1910, levha 6552 (archive.org imslp-leichte-etden-op130-gurlitt-cornelius) | pno-s3-m14-09 (Op. 130 No. 1); pno-s3-m11-11 seçilmedi | m11-11 için kırık akor/Alberti sol el eşlikli parça (ör. Op. 117 / Op. 187) 1930 öncesi taramada aranıyor |
+| Menuet in g, BWV Anh. 115 (Notenbüchlein für Anna Magdalena Bach, 1725) | Christian Petzold'a atfedilir (1677–1733) | Callwey, München, 1906 (Batka önsözü), s. 45 — archive.org/details/31761108662891 | pno-s3-m14-13 | Leopold Mozart menueti çıkarıldı: Neue Mozart-Ausgabe Nannerl defterindeki menuetleri anonim sayıyor, 1930 öncesi baskı bulunamadı |
 | Album für die Jugend, Op. 68 No. 1 "Melodie" | Robert Schumann (1810–1856) | Hamburg, Schuberth, 1848 | pno-s3-m14-12 | Clara Schumann edisyonu da kamu malı; modern urtext değil |
 | Le Pianiste virtuose, No. 1 | Charles-Louis Hanon (1819–1900) | Paris, 1873 | pno-s3-m14-14 | |
 | Amazing Grace (ezgi: "New Britain") | Ezgi anonim (Virginia Harmony, 1831); söz John Newton (1725–1807) | 19. yy ilahi kitapları | pno-s3-m13-09 | Lead sheet ve akor sembolleri Ostinato'nun |

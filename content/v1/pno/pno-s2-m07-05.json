@@ -1,0 +1,112 @@
+{
+  "id": "pno-s2-m07-05",
+  "title": {
+    "en": "First inversion",
+    "tr": "Birinci çevrim"
+  },
+  "goal": {
+    "en": "Plays C, F and G in first inversion broken, with right-hand fingers 1-2-5 at ♩=60.",
+    "tr": "C, F ve G'yi birinci çevrimde, sağ elde 1-2-5. parmaklarla ♩=60'ta kırık çalar."
+  },
+  "explanation": [
+    {
+      "en": "An inversion uses the same three notes with a different note at the bottom.",
+      "tr": "Çevrim aynı üç notayı kullanır, ama en alta başka bir nota gelir."
+    },
+    {
+      "en": "In first inversion the third is at the bottom: C becomes E4 G4 C5. The root moves to the top.",
+      "tr": "Birinci çevrimde üçlü en alttadır: C, Mi4 Sol4 Do5 olur. Kök en üste çıkar."
+    },
+    {
+      "en": "From the bottom: a third, then a fourth. The outer notes are a sixth apart, so the shorthand is C6, also written C/E. Here C6 does not mean the added-sixth chord.",
+      "tr": "Alttan: önce üçlü, sonra dörtlü. Dış notalar arası altılıdır; bu yüzden kısa adı C6'dır, C/E diye de yazılır. Burada C6 altılı eklenmiş akor demek değildir."
+    },
+    {
+      "en": "F in first inversion is A3 C4 F4; G is B3 D4 G4. Use fingers 1-2-5: the gap of a fourth falls between 2 and 5.",
+      "tr": "F'nin birinci çevrimi La3 Do4 Fa4, G'ninki Si3 Re4 Sol4'tür. 1-2-5. parmakları kullan: dörtlü aralık 2 ile 5 arasına düşer."
+    },
+    {
+      "en": "A sixth is wider than a five-finger position. Open the hand gently; do not force it.",
+      "tr": "Altılı, beş parmak konumundan geniştir. Eli nazikçe aç; zorlama."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "C6, F6, G6 and C6 broken (bottom-middle-top-middle, then the bottom note held), at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "C6, F6, G6 ve C6 kırık (alt-orta-üst-orta, sonra alt nota tutulur), ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Right hand, fingers 1-2-5. Play each triad bottom-middle-top-middle, then hold the bottom note for four beats: C6, F6, G6 and back to C6, at ♩=60 with the click.",
+      "tr": "Sağ el, 1-2-5. parmaklar. Her üçlüyü alt-orta-üst-orta çal, sonra alt notayı dört vuruş tut: C6, F6, G6 ve yeniden C6, ♩=60'ta klikle."
+    },
+    "sequence": "4/4: E4 G4 C5 G4 | E4:w | A3 C4 F4 C4 | A3:w | B3 D4 G4 D4 | B3:w | E4 G4 C5 G4 | E4:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used fingers 1-2-5 for every inversion.",
+      "tr": "Her çevrimde 1-2-5. parmakları kullandım."
+    },
+    {
+      "en": "My hand opened without strain.",
+      "tr": "Elim zorlanmadan açıldı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "Finger 5 stopped a fifth above the bottom note. In first inversion the top note is a sixth up: one white key further.",
+        "tr": "5. parmak alt notanın beşli üstünde kaldı. Birinci çevrimde üst nota altılı yukarıdadır: bir beyaz tuş daha ötede."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The first note after the hand move is late. Lift the hand at the end of the held note and land on the new root on beat 1.",
+        "tr": "El taşındıktan sonraki ilk nota geç. Tutulan notanın sonunda eli kaldır ve 1. vuruşta yeni köke kon."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only the bottom and top notes (E4 and C5) a few times to feel the sixth, then add the middle note.",
+    "tr": "Altılıyı hissetmek için önce yalnız alt ve üst notayı (Mi4 ve Do5) birkaç kez çal, sonra ortadakini ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

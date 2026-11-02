@@ -1,0 +1,113 @@
+{
+  "id": "pno-s2-m05-01",
+  "title": {
+    "en": "G position and moving the hand",
+    "tr": "Sol konumu ve eli taşımak"
+  },
+  "goal": {
+    "en": "Moves the right hand from C position to G position during a rest and plays the G major pentascale at ♩=70.",
+    "tr": "Sağ eli bir sus sırasında Do konumundan Sol konumuna taşır ve Sol majör pentaskalı ♩=70'te çalar."
+  },
+  "explanation": [
+    {
+      "en": "A five-finger position is named by the lowest note it covers. In right-hand G position, fingers 1–5 cover G4 A4 B4 C5 D5.",
+      "tr": "Beş parmak konumu kapladığı en pes notayla adlandırılır. Sağ el Sol konumunda 1–5 parmaklar Sol4 La4 Si4 Do5 Re5'i kaplar."
+    },
+    {
+      "en": "In left-hand G position, fingers 5–1 cover G2 A2 B2 C3 D3.",
+      "tr": "Sol el Sol konumunda 5–1 parmaklar Sol2 La2 Si2 Do3 Re3'ü kaplar."
+    },
+    {
+      "en": "Moving position means lifting the whole hand during a rest or a held note, not stretching one finger.",
+      "tr": "Konum değiştirmek bir parmağı germek değil, sus ya da tutulan nota sırasında bütün eli kaldırıp taşımaktır."
+    },
+    {
+      "en": "G A B C D is the G major pentascale. It uses only white keys and has the same pattern as C D E F G: whole, whole, half, whole.",
+      "tr": "Sol La Si Do Re, Sol majör pentaskalıdır. Yalnız beyaz tuş kullanır ve Do Re Mi Fa Sol ile aynı kalıba sahiptir: tam, tam, yarım, tam."
+    },
+    {
+      "en": "G major uses F♯; when a melody meets F, play the black key F♯ unless a natural is written. F♯ lies outside these five notes; you will use it later.",
+      "tr": "Sol majör Fa♯ kullanır; melodide Fa gelirse natürel yazmadıkça siyah tuş Fa♯'yi çal. Fa♯ bu beş notanın dışındadır; onu ileride kullanacaksın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "C4–G4 in C position, a half rest, then the G pentascale up and down, with a click, at ♩=70 and at ♩=45, piano synthesis.",
+      "tr": "Do konumunda Do4–Sol4, ikilik sus, ardından Sol pentaskalı çıkış ve iniş, klikle, ♩=70 ve ♩=45, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "With the click at ♩=70, play C4 D4 E4 F4 G4 in C position. During the half rest, lift the hand and put finger 1 on G4. Then play G4 A4 B4 C5 D5 and come back down to G4.",
+      "tr": "Klikle ♩=70'te Do konumunda Do4 Re4 Mi4 Fa4 Sol4 çal. İkilik susta eli kaldır ve 1. parmağı Sol4'e koy. Sonra Sol4 La4 Si4 Do5 Re5 çal ve Sol4'e geri in."
+    },
+    "sequence": "4/4: C4 D4 E4 F4 | G4:h hr | G4 A4 B4 C5 | D5 C5 B4 A4 | G4:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I moved to the new position during the rest without rushing the count.",
+      "tr": "Sayımı hızlandırmadan sus sırasında yeni konuma geçtim."
+    },
+    {
+      "en": "I lifted the whole hand; I did not stretch one finger.",
+      "tr": "Bütün eli kaldırdım; tek bir parmağı germedim."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The move took longer than the rest. Practise only G4, the rest and the first note of G position, counting aloud. Place the hand silently before you play.",
+        "tr": "Geçiş sustan uzun sürdü. Yalnız Sol4'ü, susu ve Sol konumunun ilk notasını sesli sayarak çalış. Çalmadan önce eli sessizce yerleştir."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, one white key too low.",
+        "tr": "Farklı nota, bir beyaz tuş aşağıda."
+      },
+      "fix": {
+        "en": "Finger 1 landed on F4. G is between the first two black keys of the group of three.",
+        "tr": "1. parmak Fa4'e indi. Sol, üçlü siyah tuş grubunun ilk iki tuşu arasındadır."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise the move alone at ♩=50: G4, the half rest, then G4 A4 B4 in the new position. Then play the whole line.",
+    "tr": "Geçişi ♩=50'de tek başına çalış: Sol4, ikilik sus, sonra yeni konumda Sol4 La4 Si4. Ardından bütün diziyi çal."
+  },
+  "legacy": "R: piano-18",
+  "minutes": 12,
+  "expertPending": true
+}

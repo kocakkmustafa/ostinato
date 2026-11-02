@@ -1,0 +1,88 @@
+{
+  "id": "pno-s1-m01-01",
+  "title": { "en": "Setup and limits", "tr": "Kurulum ve sınırlar" },
+  "goal": {
+    "en": "Sets the bench height, the distance to the keys and a supported sitting position, and holds it for 60 seconds.",
+    "tr": "Bank yüksekliğini, tuşlara mesafeyi ve destekli oturuşu kurar ve 60 saniye korur."
+  },
+  "explanation": [
+    {
+      "en": "Use a stable seat and a stable keyboard. Sit on the front half of the bench, facing the middle of the keyboard. Start with five comfortable minutes and a quiet volume; no pedal yet.",
+      "tr": "Sabit bir oturak ve sabit bir klavye kullan. Bankın ön yarısına, klavyenin ortasına dönük otur. Rahat beş dakika ve düşük sesle başla; pedal henüz yok."
+    },
+    {
+      "en": "Adjust the height so your forearms reach the keys without raised shoulders. Your forearms stay about level with the keys.",
+      "tr": "Yüksekliği, omuzlarını kaldırmadan önkolların tuşlara ulaşacak şekilde ayarla. Önkolların tuşlarla aşağı yukarı aynı hizada kalsın."
+    },
+    {
+      "en": "Set the distance: with your fingertips on the keys, your elbows sit a little in front of your body. Support your feet on the floor or on a footrest.",
+      "tr": "Mesafeyi ayarla: parmak uçların tuşlardayken dirseklerin gövdenin biraz önünde olsun. Ayaklarını yere ya da bir ayak desteğine koy."
+    },
+    {
+      "en": "Put the phone to your side at chest height, about two metres away, with light in front of you, not behind.",
+      "tr": "Telefonu yanına, göğüs hizasına, yaklaşık iki metre uzağa koy. Işık arkanda değil, önünde olsun."
+    },
+    {
+      "en": "The camera asks for permission when this lesson starts. The image is processed on your phone; it is not saved and not sent.",
+      "tr": "Kamera izni bu ders başlarken istenir. Görüntü telefonunda işlenir; kaydedilmez, gönderilmez."
+    },
+    {
+      "en": "The camera gives no score. It only shows a hint, and says \"I can't see\" when the image is not clear enough.",
+      "tr": "Kamera puan vermez. Yalnız ipucu gösterir; görüntü yeterince net değilse \"göremedim\" der."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; a side-view drawing shows the bench height, the distance and the forearm line.",
+      "tr": "Referans ses yok; yandan bir çizim bank yüksekliğini, mesafeyi ve önkol hizasını gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["K"],
+    "engineSteps": ["A7"],
+    "task": {
+      "en": "Sit at the keyboard in view of the camera, rest your fingertips on a few keys near the middle and hold the position for 60 seconds. Follow any hint about your upper body, then tick the checklist.",
+      "tr": "Klavyenin başına kameranın gördüğü yerde otur, parmak uçlarını ortadaki birkaç tuşa koy ve 60 saniye bu konumu koru. Gövdenle ilgili ipucu çıkarsa uygula, sonra kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Hold the position for 60 seconds and tick every checklist item. The camera only gives hints.",
+        "tr": "Konumu 60 saniye koru ve kontrol listesinin her maddesini işaretle. Kamera yalnız ipucu verir."
+      }
+    }
+  },
+  "fallback": "camera",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both feet were supported and my back was upright without strain.", "tr": "İki ayağım destekliydi, sırtım zorlanmadan dikti." },
+    { "en": "I reached the keys without leaning or raising my shoulders.", "tr": "Tuşlara eğilmeden ve omuzlarımı kaldırmadan ulaştım." },
+    { "en": "My forearms were about level with the keys.", "tr": "Önkollarım tuşlarla aşağı yukarı aynı hizadaydı." },
+    { "en": "My shoulders and wrists stayed loose.", "tr": "Omuzlarım ve bileklerim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Hint: upper body leaning toward the keys.", "tr": "İpucu: gövde tuşlara doğru eğilmiş." },
+      "fix": {
+        "en": "Move the bench a little closer instead of leaning in. Your elbows stay just in front of your body.",
+        "tr": "Öne eğilmek yerine bankı biraz yaklaştır. Dirseklerin gövdenin hemen önünde kalsın."
+      }
+    },
+    {
+      "error": { "en": "I can't see.", "tr": "Göremedim." },
+      "fix": {
+        "en": "Move the phone back until your head, the keyboard and your feet are in the frame, and turn on a light in front of you.",
+        "tr": "Başın, klavye ve ayakların kadraja girene kadar telefonu geri al ve önündeki ışığı aç."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Without a camera, use the checklist with a mirror. If the bench does not adjust, sit on a firm cushion or use a footrest.",
+    "tr": "Kamera yoksa kontrol listesini aynayla kullan. Bank ayarlanmıyorsa sert bir minder üstüne otur ya da ayak desteği kullan."
+  },
+  "legacy": "V: piano-01 + piano.foundations.camera_space, piano.foundations.posture, piano.foundations.light_and_frame",
+  "minutes": 10,
+  "expertPending": true
+}

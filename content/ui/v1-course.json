@@ -300,6 +300,16 @@
       "id": "genericExplain",
       "en": "I can show each point of the explanation on the guitar.",
       "tr": "Anlatımdaki her maddeyi gitar üzerinde gösterebiliyorum."
+    },
+    {
+      "id": "nextChip",
+      "en": "Next",
+      "tr": "Sıradaki"
+    },
+    {
+      "id": "nextChipSemantics",
+      "en": "Suggested next lesson",
+      "tr": "Önerilen sıradaki ders"
     }
   ]
 }

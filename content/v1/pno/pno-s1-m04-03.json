@@ -1,0 +1,74 @@
+{
+  "id": "pno-s1-m04-03",
+  "title": { "en": "Counting aloud while playing", "tr": "Çalarken yüksek sesle saymak" },
+  "goal": {
+    "en": "Plays an original four-bar left-hand line at ♩=60 while counting every beat aloud.",
+    "tr": "Özgün dört ölçülük sol el dizisini ♩=60'ta her vuruşu yüksek sesle sayarak çalar."
+  },
+  "explanation": [
+    {
+      "en": "Counting aloud keeps the beat when a note is long. Say every beat, also the ones without a new note.",
+      "tr": "Yüksek sesle saymak uzun notada vuruşu korur. Her vuruşu söyle; yeni nota gelmeyenleri de."
+    },
+    {
+      "en": "On a half note say \"1 2\" while you hold it. On a whole note say \"1 2 3 4\". On a rest keep counting; only the hand is silent.",
+      "tr": "İkilikte tutarken \"1 2\" de. Birlikte \"1 2 3 4\" de. Susta saymaya devam et; yalnız el susar."
+    },
+    {
+      "en": "Count softly in a speaking voice. The microphone listens for the piano; your counting is not scored.",
+      "tr": "Konuşur gibi, alçak sesle say. Mikrofon piyanoyu dinler; sayımın puanlanmaz."
+    },
+    {
+      "en": "This line is for the left hand in C position: finger 5 on C3, finger 1 on G3.",
+      "tr": "Bu dizi Do konumundaki sol el içindir: 5. parmak Do3'te, 1. parmak Sol3'te."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "The original four-bar left-hand line with a click and a spoken count, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Klik ve sesli sayımla özgün dört ölçülük sol el dizisi, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Count one bar aloud with the click. Then play the four bars with the left hand at ♩=60 and count every beat aloud. Fingers: 5 3 1 | 2 3 4 | 3 2 4 | 5.",
+      "tr": "Bir ölçüyü klikle yüksek sesle say. Sonra dört ölçüyü sol elle ♩=60'ta çal ve her vuruşu yüksek sesle say. Parmaklar: 5 3 1 | 2 3 4 | 3 2 4 | 5."
+    },
+    "sequence": "4/4: C3:q E3:q G3:h | F3:q E3:q D3:h | E3:q qr F3:q D3:q | C3:w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I counted every beat aloud, also on long notes and rests.", "tr": "Uzun notalarda ve suslarda da her vuruşu yüksek sesle saydım." },
+    { "en": "I did not speed up or slow down.", "tr": "Hızlanmadım ya da yavaşlamadım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct note, but early.", "tr": "Doğru nota, ama erken." },
+      "fix": {
+        "en": "The note after a long note is rushing. Count every beat of the long note aloud.",
+        "tr": "Uzun notadan sonraki nota acele ediyor. Uzun notanın her vuruşunu sesli say."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Your counting may be louder than the piano. Count more softly and press each key clearly.",
+        "tr": "Sayımın piyanodan yüksek olabilir. Daha alçak sesle say ve her tuşa net bas."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Count one run aloud without playing, then play while you only whisper the count.",
+    "tr": "Bir tur çalmadan yalnız yüksek sesle say, sonra sayımı fısıldayarak çal."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

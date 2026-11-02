@@ -1,0 +1,116 @@
+{
+  "id": "pno-s3-m11-08",
+  "title": {
+    "en": "Classical-style melody and Alberti",
+    "tr": "Klasik üslupta melodi ve Alberti"
+  },
+  "goal": {
+    "en": "Plays an original eight-bar classical-style piece: a right-hand melody over a left-hand Alberti bass on C, F, G and G7, at ♩=60.",
+    "tr": "Özgün sekiz ölçülük klasik üslupta parçayı çalar: C, F, G ve G7 üzerinde sol el Alberti basının üstünde sağ el melodisi, ♩=60'ta."
+  },
+  "explanation": [
+    {
+      "en": "Classical-style pieces often have two four-bar phrases. The first ends open on G (a half cadence); the second ends closed on C.",
+      "tr": "Klasik üsluptaki parçalar çoğu zaman iki dört ölçülük cümleden oluşur. Birincisi G'de açık biter (yarım kadans); ikincisi C'de kapanır."
+    },
+    {
+      "en": "Left-hand Alberti, with the hand staying near C position: C = C3 G3 E3 G3 (5-1-3-1), F = C3 A3 F3 A3 (5-1-2-1), G = B2 G3 D3 G3 (5-1-3-1), G7 = B2 G3 F3 G3 (5-1-2-1).",
+      "tr": "Sol el Alberti, el Do konumuna yakın kalır: C = Do3 Sol3 Mi3 Sol3 (5-1-3-1), F = Do3 La3 Fa3 La3 (5-1-2-1), G = Si2 Sol3 Re3 Sol3 (5-1-3-1), G7 = Si2 Sol3 Fa3 Sol3 (5-1-2-1)."
+    },
+    {
+      "en": "Right hand in C position, thumb on C4. Bars 5–8 begin like bars 1–4 and then change to close the piece.",
+      "tr": "Sağ el Do konumunda, başparmak Do4'te. 5–8. ölçüler 1–4. ölçüler gibi başlar, sonra parçayı kapatmak için değişir."
+    },
+    {
+      "en": "Shape each phrase: grow a little towards its middle and relax towards its end. Keep the left hand softer than the melody throughout.",
+      "tr": "Her cümleyi biçimlendir: ortasına doğru biraz büyüt, sonuna doğru gevşet. Sol eli baştan sona melodiden yumuşak tut."
+    },
+    {
+      "en": "The microphone result for notes that start together is experimental and does not block your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Birlikte başlayan notalar için mikrofon sonucu deneyseldir ve ilerlemeni engellemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The original eight bars, melody over Alberti bass, at ♩=60 and at ♩=40, piano synthesis.",
+      "tr": "Özgün sekiz ölçü, Alberti bası üstünde melodi, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M~",
+      "MIDI"
+    ],
+    "engineSteps": [
+      "A6p"
+    ],
+    "task": {
+      "en": "Learn each hand alone first, then play the eight bars together with the click at ♩=60. Chords: C | F | C | G | C | F | G7 | C. Right hand: E4 for two beats, G4 E4 | F4 for two beats, C4 F4 | E4 D4 C4 E4 | D4 for four beats | E4 for two beats, G4 E4 | F4 G4 F4 E4 | D4 for two beats, F4 D4 | C4 for four beats. The left hand plays eighths in bars 1–7 and ends on C3 with the right hand's C4.",
+      "tr": "Önce her eli ayrı öğren, sonra sekiz ölçüyü klikle ♩=60'ta birlikte çal. Akorlar: C | F | C | G | C | F | G7 | C. Sağ el: iki vuruş Mi4, Sol4 Mi4 | iki vuruş Fa4, Do4 Fa4 | Mi4 Re4 Do4 Mi4 | dört vuruş Re4 | iki vuruş Mi4, Sol4 Mi4 | Fa4 Sol4 Fa4 Mi4 | iki vuruş Re4, Fa4 Re4 | dört vuruş Do4. Sol el 1–7. ölçülerde sekizlik çalar ve sağ elin Do4'üyle birlikte Do3'te biter."
+    },
+    "sequence": "4/4: C3/E4:e G3:e E3:e G3:e C3/G4:e G3:e E3/E4:e G3:e | C3/F4:e A3:e F3:e A3:e C3/C4:e A3:e F3/F4:e A3:e | C3/E4:e G3:e E3/D4:e G3:e C3/C4:e G3:e E3/E4:e G3:e | B2/D4:e G3:e D3:e G3:e B2:e G3:e D3:e G3:e | C3/E4:e G3:e E3:e G3:e C3/G4:e G3:e E3/E4:e G3:e | C3/F4:e A3:e F3/G4:e A3:e C3/F4:e A3:e F3/E4:e A3:e | B2/D4:e G3:e F3:e G3:e B2/F4:e G3:e F3/D4:e G3:e | C3/C4:w",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "experimental",
+  "safety": [
+    "Ç",
+    "P1",
+    "P2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The melody was louder than the accompaniment.",
+      "tr": "Melodi eşlikten daha gürdü."
+    },
+    {
+      "en": "The left-hand eighths stayed even under the melody.",
+      "tr": "Sol el sekizlikleri melodinin altında eşit kaldı."
+    },
+    {
+      "en": "Bar 4 sounded open and bar 8 sounded finished.",
+      "tr": "4. ölçü açık, 8. ölçü bitmiş gibi duyuldu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, one white key away.",
+        "tr": "Farklı nota, bir beyaz tuş ötede."
+      },
+      "fix": {
+        "en": "A left-hand finger stayed in the previous chord. Say the next chord name on the last beat of each bar.",
+        "tr": "Bir sol el parmağı önceki akorda kaldı. Her ölçünün son vuruşunda sonraki akorun adını söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "The left hand slows down when the melody moves. Play the left hand alone at ♩=60 for all eight bars, then add the melody.",
+        "tr": "Melodi hareket edince sol el yavaşlıyor. Sekiz ölçünün hepsini ♩=60'ta yalnız sol elle çal, sonra melodiyi ekle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play bars 1–4 only, hands together at ♩=50, then add bars 5–8.",
+    "tr": "Yalnız 1–4. ölçüleri ♩=50'de eller birlikte çal, sonra 5–8. ölçüleri ekle."
+  },
+  "minutes": 20,
+  "expertPending": true
+}

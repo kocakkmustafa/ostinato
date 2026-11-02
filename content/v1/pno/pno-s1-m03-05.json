@@ -1,0 +1,86 @@
+{
+  "id": "pno-s1-m03-05",
+  "title": { "en": "Reading the grand staff", "tr": "Büyük porteyi okumak" },
+  "goal": {
+    "en": "Names notes on both staves of the grand staff and plays each one with the matching hand.",
+    "tr": "Büyük portenin iki portesindeki notaları adlandırır ve her birini uygun elle çalar."
+  },
+  "explanation": [
+    {
+      "en": "The grand staff joins two staves with a brace. The upper staff has the treble clef and is usually for the right hand; the lower staff has the bass clef and is usually for the left hand.",
+      "tr": "Büyük porte iki porteyi bir kuşakla birleştirir. Üst portede sol anahtarı vardır ve çoğunlukla sağ el içindir; alt portede fa anahtarı vardır ve çoğunlukla sol el içindir."
+    },
+    {
+      "en": "Treble clef: line 2 is G4, the bottom line is E4 and the space above it is F4.",
+      "tr": "Sol anahtarı: 2. çizgi Sol4, alt çizgi Mi4, onun üstündeki aralık Fa4'tür."
+    },
+    {
+      "en": "Bass clef: line 4 is F3 and the top space is G3.",
+      "tr": "Fa anahtarı: 4. çizgi Fa3, en üst aralık Sol3'tür."
+    },
+    {
+      "en": "Middle C (C4) sits on one ledger line: below the treble staff or above the bass staff. Both are the same key.",
+      "tr": "Orta Do (Do4) bir ek çizgide durur: sol anahtarı portesinin altında ya da fa anahtarı portesinin üstünde. İkisi de aynı tuştur."
+    },
+    {
+      "en": "Piano notes sound at the written pitch. Read the clef first, then the line or space.",
+      "tr": "Piyano notaları yazıldığı yükseklikte duyulur. Önce anahtarı, sonra çizgiyi ya da aralığı oku."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Each note in part 2 is played once after your attempt, piano synthesis.",
+      "tr": "2. bölümdeki her nota, denemenden sonra bir kez çalınır; piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "Part 1: answer 10 questions; name the note shown on the grand staff. Part 2: the screen shows six notes, some on the upper staff and some on the lower. Read each one and play it: upper staff with the right hand from C4, lower staff with the left hand from C3. No click; take your time.",
+      "tr": "1. bölüm: 10 soruyu cevapla; büyük portede gösterilen notayı adlandır. 2. bölüm: ekran bir kısmı üst, bir kısmı alt portede altı nota gösterir. Her birini oku ve çal: üst porteyi sağ elle Do4'ten, alt porteyi sol elle Do3'ten. Klik yok; acele etme."
+    },
+    "sequence": "E4 G3 C4 F3 G4 C3",
+    "pass": { "levelDefault": true, "minCorrect": 8 },
+    "drill": {
+      "type": "note_name",
+      "count": 10,
+      "params": { "clef": "grand", "range": ["C3", "G4"] }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I checked the clef before naming each note.", "tr": "Her notayı adlandırmadan önce anahtara baktım." },
+    { "en": "I played upper-staff notes with the right hand and lower-staff notes with the left.", "tr": "Üst porte notalarını sağ elle, alt porte notalarını sol elle çaldım." },
+    { "en": "I found middle C on its ledger line in both clefs.", "tr": "Orta Do'yu iki anahtarda da ek çizgisinde buldum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, an octave off.", "tr": "Farklı nota, bir oktav kaymış." },
+      "fix": {
+        "en": "You read the right letter on the other staff. Go back to the G4 and F3 anchors and middle C.",
+        "tr": "Doğru harfi diğer portede okudun. Sol4 ve Fa3 dayanaklarına ve orta Do'ya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer, two steps low: read as if in the treble clef.",
+        "tr": "Farklı cevap, iki basamak aşağı: sol anahtarındaymış gibi okunmuş."
+      },
+      "fix": {
+        "en": "Find F3 between the two dots on line 4, then step from there.",
+        "tr": "4. çizgide iki noktanın arasındaki Fa3'ü bul, oradan adım at."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read only the three anchors first, G4, middle C and F3, then add the notes next to them.",
+    "tr": "Önce yalnız üç dayanağı oku: Sol4, orta Do ve Fa3. Sonra yanlarındaki notaları ekle."
+  },
+  "legacy": "R: piano-07",
+  "minutes": 12,
+  "expertPending": true
+}

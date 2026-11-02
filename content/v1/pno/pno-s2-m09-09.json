@@ -1,0 +1,78 @@
+{
+  "id": "pno-s2-m09-09",
+  "title": { "en": "Reading in F position", "tr": "Fa pozisyonunda okuma" },
+  "goal": {
+    "en": "Reads four new four-bar lines in F position with B♭ and plays each one once at ♩=60 without hearing it first.",
+    "tr": "Si♭'li Fa konumunda dört yeni dört ölçülük diziyi okur ve her birini önceden dinlemeden ♩=60'ta bir kez çalar."
+  },
+  "explanation": [
+    {
+      "en": "F position: right hand thumb on F4, so the fingers cover F4 G4 A4 B♭4 C5. Left hand finger 5 on F3, so the fingers cover F3 G3 A3 B♭3 C4.",
+      "tr": "Fa konumu: sağ el başparmağı Fa4'te, parmaklar Fa4 Sol4 La4 Si♭4 Do5'i kapsar. Sol el 5. parmağı Fa3'te, parmaklar Fa3 Sol3 La3 Si♭3 Do4'ü kapsar."
+    },
+    {
+      "en": "A flat in the key signature, at the start of each staff, makes every B in the line a B♭. It is not written again before each note.",
+      "tr": "Donanımdaki, yani her portenin başındaki bemol, dizideki her Si'yi Si♭ yapar. Her notanın önünde yeniden yazılmaz."
+    },
+    {
+      "en": "B♭ is the black key just left of B. In the right hand it is finger 4, in the left hand finger 2. Rest that finger on the black key before you start.",
+      "tr": "Si♭, Si'nin hemen solundaki siyah tuştur. Sağ elde 4., sol elde 2. parmaktır. Başlamadan önce o parmağı siyah tuşa koy."
+    },
+    {
+      "en": "In your scan, name the key signature aloud and find every B. Then clap the rhythm once.",
+      "tr": "Göz atarken donanımı sesli söyle ve her Si'yi bul. Sonra ritmi bir kez alkışla."
+    },
+    {
+      "en": "Each line is new and is not played to you before you try it.",
+      "tr": "Her dizi yenidir ve denemenden önce sana çalınmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "Click at ♩=60; each line is played by piano synthesis only after your attempt, to compare.",
+      "tr": "♩=60'ta klik; her dizi yalnız denemenden sonra, karşılaştırman için piyano sentezinde çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Read four new four-bar lines with one flat in the key signature, one after another. For each line: place the hand in F position, take 30 seconds to scan it, find every B and clap the rhythm, then play it once with the click at ♩=60. The lines use F position in either hand, in 4/4, with quarters, halves, a dotted half, eighth pairs and rests.",
+      "tr": "Donanımında bir bemol olan dört yeni dört ölçülük diziyi art arda oku. Her dizide: eli Fa konumuna yerleştir, 30 saniye göz at, her Si'yi bul ve ritmi alkışla, sonra ♩=60'ta klikle bir kez çal. Diziler iki elden birinde Fa konumunu, 4/4'ü; dörtlük, ikilik, noktalı ikilik, sekizlik çiftleri ve susları kullanır."
+    },
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I named the key signature before I played.", "tr": "Çalmadan önce donanımı söyledim." },
+    { "en": "Every B I played was B♭.", "tr": "Çaldığım her Si, Si♭ idi." },
+    { "en": "I kept going after a slip.", "tr": "Bir kaçıştan sonra devam ettim." },
+    { "en": "I looked at the music, not at my hands.", "tr": "Ellerime değil, notaya baktım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a semitone high.", "tr": "Farklı nota, yarım ses yüksek." },
+      "fix": {
+        "en": "B was played instead of B♭. The flat in the key signature counts for every B; keep finger 4 of the right hand or finger 2 of the left on the black key.",
+        "tr": "Si♭ yerine Si çalınmış. Donanımdaki bemol her Si için geçerlidir; sağ elin 4. ya da sol elin 2. parmağını siyah tuşta tut."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "Read ahead during the long notes: while you hold one, find the next.",
+        "tr": "Uzun notalarda ileriyi oku: birini tutarken sonrakini bul."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Read new lines at ♩=50 first, then come back to ♩=60.",
+    "tr": "Önce yeni dizileri ♩=50'de oku, sonra ♩=60'a dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

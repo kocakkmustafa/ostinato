@@ -1,0 +1,72 @@
+{
+  "id": "pno-s2-m08-06",
+  "title": { "en": "Contrary motion, five fingers", "tr": "Zıt hareket, beş parmak" },
+  "goal": {
+    "en": "Plays five fingers in contrary motion from C4, the right hand up to G4 and the left hand down to F3, and back.",
+    "tr": "Do4'ten başlayarak beş parmağı zıt yönde çalar: sağ el Sol4'e çıkar, sol el Fa3'e iner ve geri döner."
+  },
+  "explanation": [
+    {
+      "en": "In contrary motion the hands move in opposite directions: the right hand goes up while the left hand goes down.",
+      "tr": "Zıt harekette eller ters yönlere gider: sağ el çıkarken sol el iner."
+    },
+    {
+      "en": "Both thumbs start on C4. The right hand covers C4 to G4. The left hand covers C4 down to F3, finger 5 on F3.",
+      "tr": "İki başparmak Do4'te başlar. Sağ el Do4–Sol4'ü kapsar. Sol el Do4'ten Fa3'e kadar iner, 5. parmak Fa3'te."
+    },
+    {
+      "en": "Both hands use the same finger at the same time: 1 with 1, 2 with 2, up to 5 with 5. The mirror is easy to feel.",
+      "tr": "İki el aynı anda aynı parmağı kullanır: 1 ile 1, 2 ile 2, 5 ile 5'e kadar. Ayna kolayca hissedilir."
+    },
+    {
+      "en": "The thumbs share C4. Play it with the right thumb and keep the left thumb ready beside it.",
+      "tr": "Başparmaklar Do4'ü paylaşır. Onu sağ başparmakla çal, sol başparmağı yanında hazır tut."
+    },
+    {
+      "en": "The microphone result for notes that start together is experimental and does not block your progress. With a MIDI keyboard the result is exact.",
+      "tr": "Birlikte başlayan notalar için mikrofon sonucu deneyseldir ve ilerlemeni engellemez. MIDI klavyeyle sonuç kesindir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Contrary motion from C4 out to G4 and F3 and back, at ♩=60 and ♩=40, piano synthesis.",
+      "tr": "Do4'ten Sol4 ve Fa3'e açılıp dönen zıt hareket, ♩=60 ve ♩=40, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M~", "MIDI"],
+    "engineSteps": ["A6p"],
+    "task": {
+      "en": "Play with the click at ♩=60, one step per beat. Going out: C4, then D4 with B3, E4 with A3, F4 with G3, G4 with F3. Coming back: F4 with G3, E4 with A3, D4 with B3, and C4 for four beats.",
+      "tr": "♩=60'ta klikle, her vuruşta bir adım çal. Açılırken: Do4, sonra Re4 ile Si3, Mi4 ile La3, Fa4 ile Sol3, Sol4 ile Fa3. Dönerken: Fa4 ile Sol3, Mi4 ile La3, Re4 ile Si3 ve dört vuruş Do4."
+    },
+    "sequence": "C4 B3/D4 A3/E4 G3/F4 | F3/G4 G3/F4 A3/E4 B3/D4 | C4:w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "experimental",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "Both hands used the same finger number at the same time.", "tr": "İki el aynı anda aynı parmak numarasını kullandı." },
+    { "en": "Both notes of each pair sounded together.", "tr": "Her çiftin iki notası birlikte duyuldu." },
+    { "en": "My shoulders stayed loose.", "tr": "Omuzlarım gevşek kaldı." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one white key away.", "tr": "Farklı nota, bir beyaz tuş ötede." },
+      "fix": {
+        "en": "One hand moved the same way as the other. Say \"out\" while the hands move away from C4 and \"in\" on the way back.",
+        "tr": "Bir el ötekiyle aynı yöne gitti. Eller Do4'ten uzaklaşırken \"dışarı\", dönüşte \"içeri\" de."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play each hand alone first. Then play together only out to E4 and A3 and back, before going all the way.",
+    "tr": "Önce her eli ayrı çal. Sonra sonuna kadar gitmeden önce birlikte yalnız Mi4 ve La3'e kadar açılıp dön."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,78 @@
+{
+  "id": "pno-s1-m01-08",
+  "title": { "en": "Loose fingers, no tension", "tr": "Gevşek parmak, gerilimsiz çalış" },
+  "goal": {
+    "en": "Notices tension in the shoulders and wrists, lets it go and does a 1-minute loosening routine.",
+    "tr": "Omuz ve bilekteki gerilimi fark eder, bırakır ve 1 dakikalık gevşeme rutinini yapar."
+  },
+  "explanation": [
+    {
+      "en": "Shoulder tension is a habit piano teachers often point out. Shoulders creep up toward the ears while you concentrate.",
+      "tr": "Omuz gerginliği, piyano eğitmenlerinin sık gösterdiği bir alışkanlıktır. Dikkatini toplarken omuzlar sessizce kulaklara doğru yükselir."
+    },
+    {
+      "en": "Check three places while you play: are the shoulders down, is the wrist mobile, are you breathing?",
+      "tr": "Çalarken üç yeri kontrol et: omuzlar aşağıda mı, bilek hareketli mi, nefes alıyor musun?"
+    },
+    {
+      "en": "To find the difference, lift your shoulders for a moment, then let them drop. The dropped position is where you play from.",
+      "tr": "Farkı bulmak için omuzlarını bir an kaldır, sonra bırak. Bıraktığın konum, çaldığın konumdur."
+    },
+    {
+      "en": "Press a key only as hard as the sound needs, then release. A finger that stays pressed keeps the hand tight.",
+      "tr": "Bir tuşa yalnız sesin gerektirdiği kadar bas, sonra bırak. Basılı kalan parmak eli gergin tutar."
+    },
+    {
+      "en": "The routine: roll the shoulders slowly, let the arms hang and shake the hands loose, then rest the hands on your legs. Keep it gentle and skip any movement that hurts.",
+      "tr": "Rutin: omuzları yavaşça çevir, kolları sarkıt ve elleri silkeleyerek gevşet, sonra ellerini dizlerine bırak. Yumuşak yap; acıtan hareketi atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No sound. An on-screen timer guides the 1-minute routine.",
+      "tr": "Ses yok. Ekrandaki zamanlayıcı 1 dakikalık rutine eşlik eder."
+    }
+  },
+  "practice": {
+    "measurement": ["Ö"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Take your hands off the keys. Do the 1-minute loosening routine with the on-screen timer, then put your right thumb on C4 and play C4 to G4 slowly once, checking your shoulders. Tick the checklist.",
+      "tr": "Ellerini tuşlardan çek. Ekrandaki zamanlayıcıyla 1 dakikalık gevşeme rutinini yap, sonra sağ başparmağını Do4'e koy ve omuzlarını kontrol ederek Do4'ten Sol4'e bir kez yavaşça çal. Kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Finish the routine and tick every item on the checklist. Progress is marked as self-reported.",
+        "tr": "Rutini bitir ve kontrol listesindeki her maddeyi işaretle. İlerleme kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I noticed when my shoulders rose and let them drop.", "tr": "Omuzlarım yükseldiğinde fark ettim ve bıraktım." },
+    { "en": "I finished the routine without any movement that hurt.", "tr": "Rutini acıtan bir hareket olmadan bitirdim." },
+    { "en": "I released each key after it sounded.", "tr": "Her tuşu çaldıktan sonra bıraktım." },
+    { "en": "I kept breathing while I played.", "tr": "Çalarken nefes almayı sürdürdüm." },
+    { "en": "My shoulders and wrists stayed loose.", "tr": "Omuzlarım ve bileklerim gevşek kaldı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Checklist: an item stayed unticked.", "tr": "Kontrol listesi: bir madde işaretlenmedi." },
+      "fix": {
+        "en": "Read that item again and repeat only that part of the routine.",
+        "tr": "O maddeyi yeniden oku ve rutinin yalnız o bölümünü tekrarla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "On a busy day, three slow shoulder rolls before you play are enough.",
+    "tr": "Yoğun bir günde çalmadan önce üç yavaş omuz çevirme yeterlidir."
+  },
+  "legacy": "V: piano.foundations.shoulder_tension",
+  "minutes": 6,
+  "expertPending": true
+}

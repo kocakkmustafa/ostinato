@@ -1,0 +1,86 @@
+{
+  "id": "pno-s3-m13-03",
+  "title": { "en": "The I–V–vi–IV progression", "tr": "I–V–vi–IV ilerlemesi" },
+  "goal": {
+    "en": "Plays C–G–Am–F broken over a backing track at ♩=70, the left hand on the roots and the right hand on the third and fifth.",
+    "tr": "C–G–Am–F ilerlemesini eşlik üstünde ♩=70'te kırık çalar; sol el kökleri, sağ el üçlü ve beşliyi çalar."
+  },
+  "explanation": [
+    {
+      "en": "Roman numerals name chords by their place in the key. In C, I is C, IV is F, V is G and vi is Am. Small numerals mean minor.",
+      "tr": "Romen rakamları akorları tondaki yerlerine göre adlandırır. Do'da I C, IV F, V G ve vi Am'dir. Küçük rakam minör demektir."
+    },
+    {
+      "en": "I–V–vi–IV is one of the most common progressions in songs. In C it reads C–G–Am–F, one chord per bar.",
+      "tr": "I–V–vi–IV, şarkılardaki en yaygın ilerlemelerden biridir. Do'da C–G–Am–F diye okunur, her ölçüde bir akor."
+    },
+    {
+      "en": "Split each chord between the hands. The left hand plays the root on beat 1 and holds it. The right hand plays third, fifth, third on beats 2, 3 and 4.",
+      "tr": "Her akoru eller arasında paylaştır. Sol el kökü 1. vuruşta çalar ve tutar. Sağ el 2, 3 ve 4. vuruşlarda üçlü, beşli, üçlü çalar."
+    },
+    {
+      "en": "Left hand in F position: F2 with finger 5, G2 with 4, A2 with 3, C3 with 1. The right hand stays near middle C and uses fingers 1 and 3.",
+      "tr": "Sol el Fa konumunda: Fa2 5. parmakla, Sol2 4. parmakla, La2 3. parmakla, Do3 1. parmakla. Sağ el orta Do yakınında kalır ve 1. ile 3. parmakları kullanır."
+    },
+    {
+      "en": "The backing track plays drums and bass under you. Use headphones so the microphone hears only the piano.",
+      "tr": "Eşlik kaydı altında davul ve bas çalar. Mikrofonun yalnız piyanoyu duyması için kulaklık kullan."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "SE"],
+    "brief": {
+      "en": "C–G–Am–F twice, left-hand root held and right hand third-fifth-third, piano synthesis at ♩=70 and ♩=50, over a soft drum and bass loop.",
+      "tr": "C–G–Am–F iki kez, sol el kökü tutar ve sağ el üçlü-beşli-üçlü çalar, piyano sentezi, ♩=70 ve ♩=50, yumuşak davul ve bas döngüsü üstünde."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6", "A3"],
+    "task": {
+      "en": "Play C–G–Am–F twice with the backing track at ♩=70. Each bar: left-hand root on beat 1, held; then the right hand. C: C3, then E4 G4 E4. G: G2, then B3 D4 B3. Am: A2, then C4 E4 C4. F: F2, then A3 C4 A3.",
+      "tr": "C–G–Am–F'yi eşlikle ♩=70'te iki kez çal. Her ölçüde sol el kökü 1. vuruşta çalar ve tutar; sonra sağ el gelir. C: Do3, sonra Mi4 Sol4 Mi4. G: Sol2, sonra Si3 Re4 Si3. Am: La2, sonra Do4 Mi4 Do4. F: Fa2, sonra La3 Do4 La3."
+    },
+    "sequence": "4/4: C3 E4 G4 E4 | G2 B3 D4 B3 | A2 C4 E4 C4 | F2 A3 C4 A3 ×2",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The root sounded alone on every beat 1.", "tr": "Kök her 1. vuruşta tek başına duyuldu." },
+    { "en": "The bass kept ringing under the right hand.", "tr": "Bas sağ elin altında çınlamayı sürdürdü." },
+    { "en": "I stayed with the backing track to the end.", "tr": "Sonuna kadar eşlikle birlikte kaldım." },
+    { "en": "My line matched the reference at the slow tempo.", "tr": "Dizim yavaş tempoda referansla aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, one white key too high.", "tr": "Farklı nota, bir beyaz tuş yukarıda." },
+      "fix": {
+        "en": "In the G and F bars the right hand goes below middle C. Thumb on B3 for G and on A3 for F.",
+        "tr": "G ve F ölçülerinde sağ el orta Do'nun altına iner. G'de başparmak Si3'te, F'de La3'te."
+      }
+    },
+    {
+      "error": { "en": "Correct note, but late.", "tr": "Doğru nota, ama geç." },
+      "fix": {
+        "en": "The left hand jumps late to the next root. Move it during beat 4, while the right hand plays.",
+        "tr": "Sol el sonraki köke geç atlıyor. Onu sağ el çalarken, 4. vuruş sırasında taşı."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "The backing track may be leaking into the microphone. Use headphones or turn the backing down.",
+        "tr": "Eşlik mikrofona sızıyor olabilir. Kulaklık kullan ya da eşliğin sesini kıs."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play the left-hand roots alone with the backing for two rounds, then add the right hand at ♩=55.",
+    "tr": "Önce iki tur boyunca eşlikle yalnız sol el köklerini çal, sonra sağ eli ♩=55'te ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

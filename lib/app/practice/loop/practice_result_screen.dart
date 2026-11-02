@@ -6,12 +6,16 @@ import '../../curriculum/v1_lesson.dart';
 import '../../design/ostinato_theme.dart';
 import '../../design/widgets.dart';
 import '../display/practice_display_copy.dart';
+import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
 import '../own_recording/own_take_player.dart';
 import 'practice_marks.dart';
 import 'practice_outcome.dart';
+import 'practice_rhythm_copy.dart';
 import 'practice_score.dart';
+import 'practice_tempo_ladder.dart';
 import 'practice_visual_theme.dart';
+import 'tempo_ladder_copy.dart';
 
 /// What the learner chose on the result screen.
 sealed class ResultAction {
@@ -59,6 +63,7 @@ class PracticeResultScreen extends StatelessWidget {
     this.nextLessonOpened = false,
     this.hasNextLesson = false,
     this.ownRecorder,
+    this.ladder,
   });
 
   final V1Lesson lesson;
@@ -71,7 +76,14 @@ class PracticeResultScreen extends StatelessWidget {
   /// FK2: the run's own recording, when the setting is on.
   final OwnRecorder? ownRecorder;
 
+  /// FK6: what the tempo ladder set for the next run; null when it is off
+  /// or the lesson has none.
+  final TempoLadderOutcome? ladder;
+
   String _pct(double v) => '${(v * 100).round()}';
+
+  /// Rhythm-only line: "different" means early or late (A3 onset timing).
+  bool get _rhythm => summary.gate.criteria.rhythm;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +123,9 @@ class PracticeResultScreen extends StatelessWidget {
                   children: [
                     _line(
                       context,
-                      localized(context, 'Accuracy', 'Doğruluk'),
+                      _rhythm
+                          ? uiText(context, RhythmCopy.onTime)
+                          : localized(context, 'Accuracy', 'Doğruluk'),
                       s.accuracy == null ? '—' : '%${_pct(s.accuracy!)}',
                       key: const Key('result-accuracy'),
                     ),
@@ -137,29 +151,73 @@ class PracticeResultScreen extends StatelessWidget {
                                 'calibrate first',
                                 'önce kalibrasyon',
                               )
+                            : _rhythm && !s.timingCalibrated
+                            ? uiText(
+                                context,
+                                RhythmCopy.timingRelative,
+                                values: {'v0': s.medianTimingMs!.round()},
+                              )
                             : '${s.medianTimingMs!.round()} ms',
                       ),
                     ],
                     const SizedBox(height: 4),
                     Text(
-                      localized(
-                        context,
-                        "Accuracy counts only the notes I could decide; \"couldn't hear\" is reported apart.",
-                        'Doğruluk yalnız karar verebildiğim notaları sayar; "duyamadım" ayrı raporlanır.',
-                      ),
+                      _rhythm
+                          ? uiText(context, RhythmCopy.onTimeNote)
+                          : localized(
+                              context,
+                              "Accuracy counts only the notes I could decide; \"couldn't hear\" is reported apart.",
+                              'Doğruluk yalnız karar verebildiğim notaları sayar; "duyamadım" ayrı raporlanır.',
+                            ),
                       style: hankenText(size: 11.5, color: palette.textMuted),
                     ),
+                    if (_rhythm &&
+                        !s.timingCalibrated &&
+                        lesson.practice.tempo != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          uiText(context, RhythmCopy.relativeNote),
+                          key: const Key('result-relative-timing'),
+                          style: hankenText(
+                            size: 11.5,
+                            color: palette.textMuted,
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
               const SizedBox(height: 12),
               _gate(context, gate),
+              if (ladder != null) ...[
+                const SizedBox(height: 12),
+                _ladder(context, ladder!),
+              ],
               const SizedBox(height: 12),
               _errorMap(context),
               if (ownRecorder != null) OwnTakeSection(recorder: ownRecorder!),
               const SizedBox(height: 16),
               _nextStep(context),
               const SizedBox(height: 8),
+              if (ladder case TempoLadderStepped(
+                :final nextBpm,
+              ) when s.nextStep != NextStep.raiseTempo)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: OutlinedButton(
+                    key: const Key('result-ladder-play'),
+                    onPressed: () =>
+                        Navigator.of(context).pop(const ResultActionRetry()),
+                    child: Text(
+                      uiText(
+                        context,
+                        TempoLadderCopy.playAt,
+                        values: {'v0': nextBpm},
+                      ),
+                    ),
+                  ),
+                ),
               if (gate.passed && !gate.completed)
                 OutlinedButton(
                   key: const Key('result-target-run'),
@@ -238,7 +296,9 @@ class PracticeResultScreen extends StatelessWidget {
           cell(
             PracticeMark.differentNote,
             summary.different,
-            localized(context, 'Different note', 'Farklı nota'),
+            _rhythm
+                ? uiText(context, RhythmCopy.earlyOrLate)
+                : localized(context, 'Different note', 'Farklı nota'),
           ),
           cell(
             PracticeMark.couldNotHear,
@@ -269,6 +329,11 @@ class PracticeResultScreen extends StatelessWidget {
         'Accuracy ≥ %{v0}',
         'Doğruluk ≥ %{v0}',
         values: {'v0': _pct(c.threshold)},
+      ),
+      GateCheckKind.onTime => uiText(
+        context,
+        RhythmCopy.gateOnTime,
+        values: {'v0': _pct(c.threshold), 'v1': gate.criteria.onTimeMs ?? 0},
       ),
       GateCheckKind.heard => localized(
         context,
@@ -457,6 +522,64 @@ class PracticeResultScreen extends StatelessWidget {
     );
   }
 
+  /// FK6: the next run's tempo, said plainly (contract §6.3: only the
+  /// target tempo completes the lesson).
+  Widget _ladder(BuildContext context, TempoLadderOutcome outcome) {
+    final palette = OstinatoPalette.of(context);
+    final line = switch (outcome) {
+      TempoLadderStepped(:final nextBpm) when nextBpm >= summary.targetBpm =>
+        uiText(context, TempoLadderCopy.nextRunTarget, values: {'v0': nextBpm}),
+      TempoLadderStepped(:final nextBpm) => uiText(
+        context,
+        TempoLadderCopy.nextRun,
+        values: {'v0': nextBpm},
+      ),
+      TempoLadderHeld(:final bpm) => uiText(
+        context,
+        TempoLadderCopy.held,
+        values: {'v0': bpm},
+      ),
+      TempoLadderAtTarget() when summary.gate.eligible => uiText(
+        context,
+        TempoLadderCopy.targetReached,
+      ),
+      TempoLadderAtTarget() => uiText(
+        context,
+        TempoLadderCopy.targetReachedNeedsFullRun,
+      ),
+    };
+    return GlassCard(
+      key: const Key('result-ladder'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            uiText(context, TempoLadderCopy.resultTitle),
+            style: hankenText(size: 15, weight: FontWeight.w600),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            line,
+            key: const Key('result-ladder-line'),
+            style: hankenText(size: 13.5),
+          ),
+          if (outcome is! TempoLadderAtTarget)
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                uiText(
+                  context,
+                  TempoLadderCopy.onlyTargetCompletes,
+                  values: {'v0': summary.targetBpm},
+                ),
+                style: hankenText(size: 12, color: palette.textMuted),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
   Widget _errorMap(BuildContext context) {
     final theme = PracticeVisualThemeScope.of(context);
     final palette = OstinatoPalette.of(context);
@@ -549,6 +672,7 @@ class PracticeResultScreen extends StatelessWidget {
                 ),
             ],
           ),
+          if (_rhythm) _earlyLate(context),
           for (final o in summary.lastMarks.values)
             if (o.mark == PracticeMark.differentNote &&
                 o.observedMidi != null &&
@@ -571,6 +695,29 @@ class PracticeResultScreen extends StatelessWidget {
                 ),
               ),
         ],
+      ),
+    );
+  }
+
+  /// Rhythm line: how many off-window beats came early and how many late.
+  Widget _earlyLate(BuildContext context) {
+    var early = 0, late = 0;
+    for (final o in summary.lastMarks.values) {
+      final t = o.timingMs;
+      if (o.mark != PracticeMark.differentNote || t == null) continue;
+      t < 0 ? early++ : late++;
+    }
+    if (early + late == 0) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Text(
+        uiText(
+          context,
+          RhythmCopy.earlyLate,
+          values: {'v0': early, 'v1': late},
+        ),
+        key: const Key('result-early-late'),
+        style: hankenText(size: 12.5),
       ),
     );
   }
@@ -601,6 +748,15 @@ class PracticeResultScreen extends StatelessWidget {
       ),
       NextStep.loopSlower => (
         localized(context, 'Try again', 'Tekrar dene'),
+        const ResultActionRetry(),
+      ),
+      // FK6: the ladder already set the faster tempo for the next run.
+      NextStep.raiseTempo when ladder is TempoLadderStepped => (
+        uiText(
+          context,
+          TempoLadderCopy.playAt,
+          values: {'v0': (ladder! as TempoLadderStepped).nextBpm},
+        ),
         const ResultActionRetry(),
       ),
       NextStep.raiseTempo => (

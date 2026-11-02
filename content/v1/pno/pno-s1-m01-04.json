@@ -1,0 +1,76 @@
+{
+  "id": "pno-s1-m01-04",
+  "title": { "en": "Middle C and registers", "tr": "Orta Do ve bölgeler" },
+  "goal": {
+    "en": "Finds middle C (C4), plays C3, C4 and C5, and finds named white keys in the low and high registers.",
+    "tr": "Orta Do'yu (Do4) bulur, Do3, Do4 ve Do5'i çalar ve pes ve tiz bölgede adı verilen beyaz tuşları bulur."
+  },
+  "explanation": [
+    {
+      "en": "The number after a note name is its octave. C4 is middle C. C3 is one octave below it, C5 one octave above. A new octave number starts at every C.",
+      "tr": "Nota adından sonraki sayı oktavıdır. Do4 orta Do'dur. Do3 bir oktav altında, Do5 bir oktav üstündedir. Her Do'da yeni bir oktav numarası başlar."
+    },
+    {
+      "en": "On an 88-key piano, middle C is the fourth C from the left; the first key is A0. On a shorter keyboard, check the manufacturer's key map for middle C (MIDI note 60).",
+      "tr": "88 tuşlu piyanoda orta Do soldan dördüncü Do'dur; ilk tuş La0'dır. Daha kısa bir klavyede orta Do'yu (MIDI nota 60) üreticinin tuş haritasında bul."
+    },
+    {
+      "en": "Do not choose a C only because it looks central. Manufacturers may label middle C as C3, C4 or C5; in Ostinato it is always C4.",
+      "tr": "Yalnız ortada göründüğü için bir Do seçme. Üreticiler orta Do'yu C3, C4 ya da C5 diye etiketleyebilir; Ostinato'da her zaman Do4'tür."
+    },
+    {
+      "en": "On an electronic keyboard, check in its manual that transpose and octave shift are set to zero. Otherwise the sound does not match the key you press.",
+      "tr": "Elektronik klavyede, kılavuzundan transpoze ve oktav kaydırma ayarlarının sıfır olduğunu kontrol et. Yoksa duyulan ses bastığın tuşla eşleşmez."
+    },
+    {
+      "en": "Left of middle C is the low register, where the left hand usually plays. Right of it is the high register, usually for the right hand.",
+      "tr": "Orta Do'nun solu pes bölgedir; sol el genelde orada çalar. Sağı tiz bölgedir; genelde sağ elin yeridir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "C3, C4 and C5, each held for two seconds, then each named note on demand, piano synthesis.",
+      "tr": "Do3, Do4 ve Do5, her biri iki saniye tutulur; sonra adı verilen her nota istendiğinde çalınır, piyano sentezi."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A6"],
+    "task": {
+      "en": "Play C3, C4 and C5, one at a time. Then the screen names 4 white keys in random order between C3 and C5, each with its octave number; find and play each one. Take your time; there is no click.",
+      "tr": "Do3, Do4 ve Do5'i tek tek çal. Sonra ekran Do3 ile Do5 arasında rastgele sırayla 4 beyaz tuşu oktav numarasıyla birlikte gösterir; her birini bul ve çal. Acele etme; klik yok."
+    },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "P1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found middle C by counting Cs from the left or from the key map, not by guessing.", "tr": "Orta Do'yu tahminle değil, soldan Do sayarak ya da tuş haritasından buldum." },
+    { "en": "C3, C4 and C5 matched the reference sound.", "tr": "Do3, Do4 ve Do5 referans sesle aynıydı." },
+    { "en": "I found each named note in the right octave.", "tr": "Adı verilen her notayı doğru oktavda buldum." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, an octave away.", "tr": "Farklı nota, bir oktav uzakta." },
+      "fix": {
+        "en": "Find C4 again by counting Cs from the left. If the key is right, check transpose and octave shift on your keyboard.",
+        "tr": "Do4'ü soldan Do sayarak yeniden bul. Tuş doğruysa klavyende transpoze ve oktav kaydırmayı kontrol et."
+      }
+    },
+    {
+      "error": { "en": "Different note, one white key away.", "tr": "Farklı nota, bir beyaz tuş ötede." },
+      "fix": {
+        "en": "Start from the nearest C and say the names aloud as you move right: C, D, E, F, G, A, B.",
+        "tr": "En yakın Do'dan başla ve sağa giderken adları sesli söyle: Do, Re, Mi, Fa, Sol, La, Si."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Play only C3, C4 and C5 and leave the random notes for later. Place a small sticker beside middle C if it helps.",
+    "tr": "Yalnız Do3, Do4 ve Do5'i çal, rastgele notaları sonraya bırak. İşine yararsa orta Do'nun yanına küçük bir etiket koy."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

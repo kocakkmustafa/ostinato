@@ -1,0 +1,94 @@
+{
+  "id": "pno-s3-m14-16",
+  "title": {
+    "en": "Repertoire checkpoint",
+    "tr": "Repertuvar geçişi"
+  },
+  "goal": {
+    "en": "Plays one public-domain piece from this module from start to finish at its target tempo.",
+    "tr": "Bu modüldeki kamu malı eserlerden birini baştan sona hedef temposunda çalar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint closes the last module of Level 3. You choose one piece you have learned in this module.",
+      "tr": "Bu geçiş Seviye 3'ün son modülünü kapatır. Bu modülde öğrendiğin bir parçayı seçersin."
+    },
+    {
+      "en": "The microphone measures the one-new-note version of the piece: only one new note starts at a time.",
+      "tr": "Mikrofon parçanın tek yeni nota sürümünü ölçer: aynı anda yalnız bir yeni nota başlar."
+    },
+    {
+      "en": "The full version, with both hands starting together, can be played with a MIDI keyboard or as an experimental try. It does not decide the result.",
+      "tr": "İki elin birlikte başladığı tam sürüm MIDI klavyeyle ya da deneysel bir denemeyle çalınabilir. Sonucu belirlemez."
+    },
+    {
+      "en": "The piece passes at the target tempo of its own lesson. Use your plan from the last lesson: map, slow tempo, loops, tempo ladder.",
+      "tr": "Parça kendi dersinin hedef temposunda geçer. Önceki dersteki planını kullan: harita, yavaş tempo, döngü, tempo merdiveni."
+    },
+    {
+      "en": "If a note does not sound, keep counting and come in on the next beat. Do not go back to bar 1.",
+      "tr": "Bir nota çalmazsa saymayı sürdür ve sonraki vuruşta gir. 1. ölçüye dönme."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The chosen piece in its one-new-note Ostinato edition, piano synthesis, at its target tempo and slower.",
+      "tr": "Seçilen parça, tek yeni nota Ostinato düzenlemesinde, piyano sentezi, hedef temposunda ve daha yavaş."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A6",
+      "A3"
+    ],
+    "task": {
+      "en": "Choose one piece from this module. Play its one-new-note version from start to finish at the target tempo of its lesson, without stopping.",
+      "tr": "Bu modülden bir parça seç. Tek yeni nota sürümünü baştan sona, kendi dersinin hedef temposunda ve durmadan çal."
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "P1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct note, but late.",
+        "tr": "Doğru nota, ama geç."
+      },
+      "fix": {
+        "en": "Late notes gather around the bar lines. Loop the two bars around the slip at ♩=50, then rejoin the piece.",
+        "tr": "Geç notalar ölçü çizgilerinin çevresinde toplanıyor. Kaçışın olduğu iki ölçüyü ♩=50'de döngüle, sonra parçaya dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot and keep the phone about an arm's length away.",
+        "tr": "Daha sessiz bir yer bul ve telefonu yaklaşık bir kol boyu uzakta tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Choose the right hand of the Minuet in G, the piece with the most practice behind it, and pass it first.",
+    "tr": "Önce en çok çalıştığın parçayı, Sol Majör Menuet'in sağ elini seç ve onu geç."
+  },
+  "repertoire": "Pool: the public-domain pieces of this module, each in its one-new-note Ostinato edition: Petzold, Menuet in G, BWV Anh. 114 (right hand written in pno-s3-m14-04); Musette in D, BWV Anh. 126; Türk, Handstücke (1792); Gurlitt, a melodic piece; Czerny, Op. 599; Beyer, Op. 101; Leopold Mozart, Notenbuch für Nannerl (1759). Pieces still marked NEEDS TRANSCRIPTION in their lessons join the pool once written. Full versions MIDI or experimental (A6p). Public domain, legal review pending.",
+  "minutes": 15,
+  "expertPending": true
+}
