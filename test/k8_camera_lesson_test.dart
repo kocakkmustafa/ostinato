@@ -12,6 +12,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:motion_account/motion_account.dart'
     show motionCameraCoachingAvailable;
 import 'package:ostinato/app/cue_text.dart';
+import 'package:ostinato/app/curriculum/v1_lesson.dart';
+import 'package:ostinato/app/drill/drill_generator.dart';
+import 'package:ostinato/app/drill/drill_hand.dart';
+import 'package:ostinato/app/drill/drill_screen.dart';
 import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'package:ostinato/app/practice/camera/camera_hold_screen.dart';
 import 'package:ostinato/app/practice/camera/camera_lesson.dart';
@@ -198,6 +202,7 @@ void main() {
 
         expect(find.text(V1CourseCopy.bannerCamera.$1), findsOneWidget);
         expect(find.byKey(const Key('v1-reader-camera')), findsNothing);
+        expect(find.byKey(const Key('v1-reader-drill')), findsNothing);
         for (final item in l.lesson.selfCheck) {
           expect(find.text(item.en), findsOneWidget);
         }
@@ -445,6 +450,107 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(CameraHoldScreen), findsNothing);
       expect(source.stops, 1);
+    });
+  });
+
+  group('hand lesson: finger-number questions', () {
+    V1Drill handDrill() => gtr.lesson(_hand)!.lesson.practice.anyDrill!;
+
+    test('the set runs with the hand diagram only', () {
+      final d = handDrill();
+      expect(d.params['set'], 'fretting_finger_numbers');
+      expect(supportsDrill(d), isTrue);
+      // The camera lesson's availability keeps it out of drillReady.
+      expect(gtr.lesson(_hand)!.drillReady, isFalse);
+      V1Drill drillWith(Map<String, Object?> params) => V1Drill.fromJson({
+        'type': 'diagram_match',
+        'count': 6,
+        'params': params,
+      });
+      expect(
+        supportsDrill(drillWith({'set': 'fretting_finger_numbers'})),
+        isFalse,
+        reason: 'needs the hand diagram',
+      );
+      expect(
+        supportsDrill(
+          drillWith({'set': 'piano_finger_numbers', 'diagram': 'hand'}),
+        ),
+        isFalse,
+        reason: 'piano numbers (thumb = 1) are another set',
+      );
+    });
+
+    test('six questions, the marked finger is the answer, no repeats', () {
+      for (final seed in [1, 2, 3, 4, 5]) {
+        final qs = generateDrill(handDrill(), seed: seed);
+        expect(qs, hasLength(6));
+        for (var i = 0; i < qs.length; i++) {
+          final q = qs[i];
+          expect(q.kind, DrillPromptKind.fingerNumber);
+          expect(q.options, ['1', '2', '3', '4']);
+          expect(q.expected, '${q.finger}');
+          if (i > 0) expect(q.expected, isNot(qs[i - 1].expected));
+        }
+      }
+    });
+
+    testWidgets('flag open: questions, then the checklist completes it', (
+      tester,
+    ) async {
+      _tall(tester);
+      final checks = _MemoryChecks();
+      final l = gtr.lesson(_hand)!;
+      await tester.pumpWidget(
+        practiceHost(
+          V1LessonReaderScreen(
+            lesson: l,
+            checks: checks,
+            cameraLessonsOpen: true,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('v1-reader-camera')), findsNothing);
+      for (var i = 0; i < l.lesson.selfCheck.length; i++) {
+        await tester.tap(find.byKey(Key('v1-reader-check-$i')));
+      }
+      await tester.pump();
+      FilledButton mark() => tester.widget<FilledButton>(
+        find.byKey(const Key('v1-reader-mark-done')),
+      );
+      expect(mark().onPressed, isNull, reason: 'questions not passed yet');
+      expect(find.text(CameraLessonCopy.drillFirst.$1), findsOneWidget);
+
+      await tester.tap(find.byKey(const Key('v1-reader-drill')));
+      await tester.pumpAndSettle();
+      final session = tester
+          .state<DrillScreenState>(find.byType(DrillScreen))
+          .session;
+      while (!session.finished) {
+        final painter =
+            tester
+                    .widget<CustomPaint>(find.byKey(const Key('drill-hand')))
+                    .painter!
+                as DrillHandPainter;
+        expect('${painter.marked}', session.current.expected);
+        final key = Key('drill-option-${session.current.answer}');
+        await tester.ensureVisible(find.byKey(key));
+        await tester.tap(find.byKey(key));
+        await tester.pump();
+        await tester.ensureVisible(find.byKey(const Key('drill-next')));
+        await tester.tap(find.byKey(const Key('drill-next')));
+        await tester.pumpAndSettle();
+      }
+      await tester.tap(find.byKey(const Key('drill-back')));
+      await tester.pumpAndSettle();
+
+      // Passing the questions alone saves nothing.
+      expect(checks.saved, isEmpty);
+      expect(find.text(CameraLessonCopy.drillFirst.$1), findsNothing);
+      await tester.tap(find.byKey(const Key('v1-reader-mark-done')));
+      await tester.pumpAndSettle();
+      expect(checks.saved.single.evidence, V1CheckEvidence.selfReport);
     });
   });
 }

@@ -48,6 +48,10 @@ abstract final class CameraLessonCopy {
     'Kamera açılamadı. Kontrol listesini kamerasız kullanabilirsin.',
   );
   static const UiCopy back = ('Back to the lesson', 'Derse dön');
+  static const UiCopy drillFirst = (
+    'Pass the questions first; then the lesson can be marked done.',
+    'Önce soruları geç; sonra ders tamamlandı olarak işaretlenebilir.',
+  );
 
   static const List<UiCopy> all = [
     section,
@@ -64,5 +68,6 @@ abstract final class CameraLessonCopy {
     denied,
     unavailable,
     back,
+    drillFirst,
   ];
 }

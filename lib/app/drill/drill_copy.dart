@@ -269,6 +269,12 @@ abstract final class DrillCopy {
     'Listen to the line. Which staff matches it?',
     'Satırı dinle. Hangi porte ona uyuyor?',
   );
+
+  /// K8: the fretting-hand diagram (finger numbers 1–4).
+  static const UiCopy fingerNumber = (
+    'Which finger number is marked on the fretting hand?',
+    'Sol elde işaretli parmak kaç numara?',
+  );
   static const UiCopy betweenNotes = (
     'Between notes {v0} and {v1}',
     '{v0}. ve {v1}. nota arasında',
@@ -310,6 +316,7 @@ abstract final class DrillCopy {
     halfStepPlace,
     degreeOverDrone,
     staffMatch,
+    fingerNumber,
     betweenNotes,
     noHalfStep,
     staffLabel,

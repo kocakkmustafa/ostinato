@@ -137,7 +137,6 @@ void main() {
   test('sets needing art, audio or a keyboard stay closed', () {
     for (final id in [
       'gtr-s1-m01-01', // guitar parts illustration
-      'gtr-s1-m01-03', // hand diagram
       'gtr-s1-test', // open strings by ear
       'gtr-s2-m07-08', // repeat-sign glyphs
     ]) {
@@ -145,6 +144,18 @@ void main() {
       expect(supportsDrill(drill), isFalse, reason: id);
       expect(() => generateDrill(drill, seed: 1), throwsUnsupportedError);
     }
+    // K8 opened the hand diagram for guitar finger numbers (gtr-s1-m01-03,
+    // test/k8_camera_lesson_test.dart); piano numbers (thumb = 1) stay
+    // closed.
+    expect(
+      supportsDrill(
+        const V1Drill('diagram_match', 6, {
+          'set': 'piano_finger_numbers',
+          'diagram': 'hand',
+        }),
+      ),
+      isFalse,
+    );
     // The keyboard opens only for scale steps (ear-s2-m05-01); other
     // keyboard sets stay closed.
     expect(

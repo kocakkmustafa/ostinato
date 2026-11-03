@@ -10,6 +10,7 @@ import '../design/ostinato_theme.dart';
 import '../ui_copy.dart';
 import 'drill_copy.dart';
 import 'drill_dictation.dart';
+import 'drill_hand.dart';
 import 'drill_keyboard.dart';
 import 'drill_theory.dart';
 import 'drill_generator.dart';
@@ -217,6 +218,19 @@ class DrillScreenState extends State<DrillScreen> {
             ),
           ),
         ],
+        if (q.finger case final finger?) ...[
+          const SizedBox(height: 14),
+          Center(
+            child: SizedBox(
+              width: 200,
+              height: 220,
+              child: CustomPaint(
+                key: const Key('drill-hand'),
+                painter: DrillHandPainter(marked: finger, palette: palette),
+              ),
+            ),
+          ),
+        ],
         if (q.keys.isNotEmpty) ...[
           const SizedBox(height: 14),
           AspectRatio(
@@ -415,6 +429,7 @@ class DrillScreenState extends State<DrillScreen> {
     DrillPromptKind.halfStepPlace => DrillCopy.halfStepPlace,
     DrillPromptKind.degreeOverDrone => DrillCopy.degreeOverDrone,
     DrillPromptKind.staffMatch => DrillCopy.staffMatch,
+    DrillPromptKind.fingerNumber => DrillCopy.fingerNumber,
     DrillPromptKind.melodicDictation =>
       (_s.current.entry?.given.isNotEmpty ?? false)
           ? DrillCopy.melodicDictationGiven
@@ -520,6 +535,7 @@ class DrillScreenState extends State<DrillScreen> {
           DrillCopy.staffLabel,
           values: {'v0': option},
         ),
+        DrillPromptKind.fingerNumber => option,
         DrillPromptKind.beatsInBar => uiText(
           context,
           DrillCopy.beatsOption,
