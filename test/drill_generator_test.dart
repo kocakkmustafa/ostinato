@@ -104,6 +104,8 @@ void main() {
                 DrillPromptKind.bluesLine ||
                 DrillPromptKind.bluesBar:
               break;
+            default:
+              fail('heard kind in a silent set: ${q.kind}');
           }
           if (q.marks.isNotEmpty) {
             final (first, last) = q.fretWindow!;
@@ -138,7 +140,6 @@ void main() {
       'gtr-s1-m01-03', // hand diagram
       'gtr-s1-test', // open strings by ear
       'gtr-s2-m07-08', // repeat-sign glyphs
-      'gtr-s3-m14-09', // triad quality by ear
     ]) {
       final drill = lesson(id).practice.drill!;
       expect(supportsDrill(drill), isFalse, reason: id);

@@ -150,3 +150,19 @@ List<SpelledNote> minorPentatonic(SpelledNote root) => [
   root.up(4, 7),
   root.up(6, 10),
 ];
+
+/// Interval names (quality + number) → semitones.
+const Map<String, int> intervalSemitones = {
+  'm2': 1, 'M2': 2, 'm3': 3, 'M3': 4, 'P4': 5, 'TT': 6, //
+  'P5': 7, 'm6': 8, 'M6': 9, 'm7': 10, 'M7': 11, 'P8': 12,
+};
+
+/// `C4` → 60, `F#3` → 54, `Bb2` → 46.
+int noteMidi(String pitch) {
+  final m = RegExp(r'^([A-G](?:#|b)?)(-?\d)$').firstMatch(pitch.trim());
+  if (m == null) throw FormatException('Not a pitch: $pitch');
+  final note = SpelledNote.parse(m.group(1)!);
+  return (int.parse(m.group(2)!) + 1) * 12 +
+      _letterPc[note.letter] +
+      note.accidental;
+}

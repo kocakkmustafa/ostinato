@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 
 import '../app_locale.dart';
@@ -7,7 +10,10 @@ import '../design/ostinato_theme.dart';
 import '../ui_copy.dart';
 import 'drill_copy.dart';
 import 'drill_generator.dart';
+import '../practice/loop/reference_copy.dart';
+import '../practice/loop/reference_listen.dart';
 import 'drill_session.dart';
+import 'drill_sound.dart';
 
 /// F2.6 on-screen drill: one question at a time, immediate feedback, a
 /// second try for mixed-up questions, a result with the 80% first-try rule.
@@ -18,6 +24,7 @@ class DrillScreen extends StatefulWidget {
     required this.drill,
     required this.title,
     this.seed,
+    this.port,
   });
 
   final V1Drill drill;
@@ -25,6 +32,9 @@ class DrillScreen extends StatefulWidget {
 
   /// Tests fix the seed; each new set otherwise draws a fresh one.
   final int? seed;
+
+  /// Where heard drills play; defaults to the route's reference output.
+  final ReferencePlaybackPort? Function(BuildContext context)? port;
 
   @override
   State<DrillScreen> createState() => DrillScreenState();
@@ -38,10 +48,77 @@ class DrillScreenState extends State<DrillScreen> {
   @visibleForTesting
   DrillSession get session => _s;
 
+  /// F2.6b: heard questions play through the FK1 reference output.
+  final ReferenceListenController _listen = ReferenceListenController();
+
+  @override
+  void dispose() {
+    _listen.dispose();
+    super.dispose();
+  }
+
+  void _play(DrillSound sound, String tag) => unawaited(
+    _listen.playClip(
+      (widget.port ?? ReferenceRoutePort.of)(context),
+      () async => (
+        samples: await Isolate.run(
+          () => renderDrillSound(sound, sampleRate: kReferenceSampleRate),
+        ),
+        sampleRate: kReferenceSampleRate,
+      ),
+      tag: tag,
+    ),
+  );
+
+  Widget _sounds(BuildContext context, DrillQuestion q) => ListenableBuilder(
+    listenable: _listen,
+    builder: (context, _) {
+      final sounds = q.optionSounds;
+      final differs = _s.answered && !_s.matchedCurrent;
+      final DrillSound? mine = sounds != null && differs
+          ? sounds[_s.chosen!]
+          : null;
+      final DrillSound? expected = sounds == null ? null : sounds[q.answer];
+      Widget button(String tag, UiCopy copy, DrillSound sound) =>
+          OutlinedButton.icon(
+            key: Key('drill-play-$tag'),
+            onPressed: () => _listen.busy && _listen.tag == tag
+                ? unawaited(_listen.stop())
+                : _play(sound, tag),
+            icon: Icon(
+              _listen.busy && _listen.tag == tag
+                  ? Icons.stop
+                  : Icons.volume_up_outlined,
+            ),
+            label: Text(uiText(context, copy)),
+          );
+      return Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          button(
+            'question',
+            _s.answered ? DrillCopy.playAgain : DrillCopy.play,
+            q.sound!,
+          ),
+          if (mine != null) button('mine', DrillCopy.playMine, mine),
+          if (mine != null && expected != null)
+            button('expected', DrillCopy.playExpected, expected),
+          if (_listen.state == ReferenceListenState.unavailable)
+            Text(
+              uiText(context, ReferenceCopy.unavailable),
+              key: const Key('drill-audio-unavailable'),
+            ),
+        ],
+      );
+    },
+  );
+
   DrillSession _newSession() =>
       DrillSession(generateDrill(widget.drill, seed: _seed));
 
   void _newSet() => setState(() {
+    unawaited(_listen.stop());
     _seed++;
     _s = _newSession();
   });
@@ -95,6 +172,10 @@ class DrillScreenState extends State<DrillScreen> {
           key: const Key('drill-prompt'),
           style: hankenText(size: 18, weight: FontWeight.w600, height: 1.35),
         ),
+        if (q.sound != null) ...[
+          const SizedBox(height: 14),
+          _sounds(context, q),
+        ],
         if (q.fretWindow case final window?) ...[
           const SizedBox(height: 14),
           AspectRatio(
@@ -135,7 +216,10 @@ class DrillScreenState extends State<DrillScreen> {
           const SizedBox(height: 12),
           FilledButton(
             key: const Key('drill-next'),
-            onPressed: () => setState(_s.next),
+            onPressed: () {
+              unawaited(_listen.stop());
+              setState(_s.next);
+            },
             child: Text(
               uiText(context, _s.onLast ? DrillCopy.seeResult : DrillCopy.next),
             ),
@@ -247,6 +331,15 @@ class DrillScreenState extends State<DrillScreen> {
     DrillPromptKind.romanNumeral => DrillCopy.romanNumeral,
     DrillPromptKind.bluesLine => DrillCopy.bluesLine,
     DrillPromptKind.bluesBar => DrillCopy.bluesBar,
+    DrillPromptKind.tempoCompare => DrillCopy.tempoCompare,
+    DrillPromptKind.pitchDirection => DrillCopy.pitchDirection,
+    DrillPromptKind.pitchContour => DrillCopy.pitchContour,
+    DrillPromptKind.sameDifferent => DrillCopy.sameDifferent,
+    DrillPromptKind.intervalName =>
+      _s.current.values['v0'] == 'descending'
+          ? DrillCopy.intervalDown
+          : DrillCopy.intervalUp,
+    DrillPromptKind.chordQuality => DrillCopy.chordQuality,
   };
 
   /// Note names in values get the local name in Turkish (`C# (Do#)`).
@@ -286,7 +379,44 @@ class DrillScreenState extends State<DrillScreen> {
         DrillPromptKind.romanNumeral ||
         DrillPromptKind.bluesLine ||
         DrillPromptKind.bluesBar => option,
+        DrillPromptKind.tempoCompare ||
+        DrillPromptKind.pitchDirection ||
+        DrillPromptKind.sameDifferent ||
+        DrillPromptKind.intervalName ||
+        DrillPromptKind.chordQuality => uiText(context, _heardWord(option)),
+        DrillPromptKind.pitchContour =>
+          option
+              .split('-')
+              .map((w) => uiText(context, _heardWord(w)))
+              .join(' → '),
       };
+
+  static UiCopy _heardWord(String key) => switch (key) {
+    'faster' => DrillCopy.faster,
+    'slower' => DrillCopy.slower,
+    'same' => DrillCopy.same,
+    'higher' => DrillCopy.higher,
+    'lower' => DrillCopy.lower,
+    'different' => DrillCopy.different,
+    'up' => DrillCopy.moveUp,
+    'down' => DrillCopy.moveDown,
+    'm2' => DrillCopy.minor2,
+    'M2' => DrillCopy.major2,
+    'm3' => DrillCopy.minor3,
+    'M3' => DrillCopy.major3,
+    'P4' => DrillCopy.perfect4,
+    'TT' => DrillCopy.tritone,
+    'P5' => DrillCopy.perfect5,
+    'm6' => DrillCopy.minor6,
+    'M6' => DrillCopy.major6,
+    'm7' => DrillCopy.minor7,
+    'M7' => DrillCopy.major7,
+    'P8' => DrillCopy.octave,
+    'major' => DrillCopy.qualityMajor,
+    'minor' => DrillCopy.qualityMinor,
+    'dominant7' => DrillCopy.qualityDominant7,
+    _ => throw ArgumentError.value(key, 'key'),
+  };
 }
 
 /// A note letter with accidental and no octave, localized like
