@@ -8,8 +8,8 @@
     },
     {
       "id": "welcomeBody",
-      "en": "Play along with a click and a scrolling tab; the app listens to each note and marks it correct, different note or couldn’t hear. The v1 programme has 690 lessons across guitar, voice, piano and ear training. Guitar is open in this release; the other courses follow.",
-      "tr": "Klik ve akan tabla çal; uygulama çaldığın her notayı dinler ve doğru, farklı nota ya da duyamadım diye işaretler. v1 programı 690 ders: gitar, ses, piyano ve kulak eğitimi. Bu sürümde gitar açık; diğer kurslar sırayla eklenecek."
+      "en": "Play along with a click and a scrolling tab; the app listens to each note and marks it correct, different note or couldn’t hear. The v1 programme has 690 lessons across guitar, voice, piano and ear training. Guitar and ear training are open in this release; voice and piano follow.",
+      "tr": "Klik ve akan tabla çal; uygulama çaldığın her notayı dinler ve doğru, farklı nota ya da duyamadım diye işaretler. v1 programı 690 ders: gitar, ses, piyano ve kulak eğitimi. Bu sürümde gitar ve kulak eğitimi açık; ses ve piyano sırayla eklenecek."
     },
     {
       "id": "welcomeNote",
@@ -25,6 +25,11 @@
       "id": "scopePractice",
       "en": "Measured practice — click, scrolling tab, feedback on every note.",
       "tr": "Ölçülü pratik — klik, akan tab, nota başına geri bildirim."
+    },
+    {
+      "id": "scopeEar",
+      "en": "Ear training — on-screen drills, clapping with the click and part-by-part tests.",
+      "tr": "Kulak eğitimi — ekran alıştırmaları, klikle alkış ve bölüm bölüm testler."
     },
     {
       "id": "scopeSetup",
@@ -83,8 +88,8 @@
     },
     {
       "id": "homeIntro",
-      "en": "Play your next lesson with a click and a scrolling tab; we show what we heard on every note. Voice and piano courses open in turn.",
-      "tr": "Sıradaki dersini klik ve akan tabla çal; her notada ne duyduğumuzu gösteririz. Ses ve piyano kursları sırayla açılacak."
+      "en": "Play your next lesson with a click and a scrolling tab; we show what we heard on every note. Ear training is open too; voice and piano courses open in turn.",
+      "tr": "Sıradaki dersini klik ve akan tabla çal; her notada ne duyduğumuzu gösteririz. Kulak eğitimi de açık; ses ve piyano kursları sırayla açılacak."
     },
     {
       "id": "guitarCardOpen",
@@ -95,6 +100,21 @@
       "id": "guitarCardNext",
       "en": "Measured practice open · next lesson: {v0}",
       "tr": "Ölçülü pratik açık · sıradaki ders: {v0}"
+    },
+    {
+      "id": "earCardTitle",
+      "en": "Ear training",
+      "tr": "Kulak eğitimi"
+    },
+    {
+      "id": "earCardOpen",
+      "en": "Drills, clapping and tests open",
+      "tr": "Alıştırmalar, alkış ve testler açık"
+    },
+    {
+      "id": "earCardNext",
+      "en": "Ear training open · next lesson: {v0}",
+      "tr": "Kulak eğitimi açık · sıradaki ders: {v0}"
     },
     {
       "id": "comingSoon",

@@ -12,6 +12,41 @@
       "tr": "Gitar kursunun {v0} dersinin tamamı, seviye ve modüle göre. Ölçülü dersler her notayı dinler. Diğerleri şimdilik öz-kontroldür: kontrol listesini işaretlersin, ders ölçülmüş değil kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al."
     },
     {
+      "id": "earTitle",
+      "en": "Ear training course",
+      "tr": "Kulak eğitimi kursu"
+    },
+    {
+      "id": "earIntro",
+      "en": "All {v0} lessons of the ear training course, by level and module. Drills run on the screen and check your answers; clapping lessons listen to your claps. Singing is not measured: you check it yourself and it is saved as self-reported. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order.",
+      "tr": "Kulak eğitimi kursunun {v0} dersinin tamamı, seviye ve modüle göre. Alıştırmalar ekranda çalışır ve cevaplarını kontrol eder; alkış dersleri alkışlarını dinler. Şarkı söyleme ölçülmez: kendin kontrol edersin ve kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al."
+    },
+    {
+      "id": "chipDrillReady",
+      "en": "On-screen drill",
+      "tr": "Ekran alıştırması"
+    },
+    {
+      "id": "earTaskDone",
+      "en": "I worked through the whole task.",
+      "tr": "Görevi baştan sona yaptım."
+    },
+    {
+      "id": "earExplain",
+      "en": "I can explain each point of the explanation in my own words.",
+      "tr": "Anlatımdaki her maddeyi kendi sözlerimle açıklayabiliyorum."
+    },
+    {
+      "id": "earTempo",
+      "en": "I kept the target tempo, ♩={v0}.",
+      "tr": "Hedef tempoyu, ♩={v0}, korudum."
+    },
+    {
+      "id": "earSteady",
+      "en": "I kept a steady, comfortable tempo.",
+      "tr": "Sabit ve rahat bir tempoda kaldım."
+    },
+    {
       "id": "levelTitle",
       "en": "Level {v0}",
       "tr": "Seviye {v0}"

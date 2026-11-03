@@ -2115,7 +2115,6 @@
     "ba4af611303e98c1": "Afine primeiro: as notas sustentadas soam a mais de 30 cents da nota mais próxima, por isso os nomes das notas estão ocultos. Afine com um afinador externo e depois deixe soar uma corda solta.",
     "c7769c4ab3c03fe1": "Confira a afinação: as notas sustentadas soam a cerca de {v0} cents da nota mais próxima. Use um afinador externo.",
     "0016fa7101b9f732": "Aprenda violão tocando.",
-    "180a8f814e1bb4ad": "Toque com um clique e uma tablatura que rola; o app escuta cada nota e marca como certa, outra nota ou não ouvida. O programa v1 tem 690 aulas de violão, voz, piano e percepção musical. Nesta versão o violão está aberto; os outros cursos vêm em seguida.",
     "e17ac651a15448e1": "Para passar em uma aula, pelo menos 80% das notas precisam estar certas; aí a próxima aula abre. As primeiras aulas de cada curso são gratuitas; as seguintes exigem assinatura do Ostinato ou do Motion+.",
     "0b453d0d09f5dd1d": "O que tem aqui",
     "f27fdd332417616d": "Prática medida — clique, tablatura que rola, retorno em cada nota.",
@@ -2128,7 +2127,6 @@
     "311bd36458c5a126": "Seu progresso",
     "1ba7a84412607102": "Seus resultados das aulas, sua sequência e sua meta semanal ficam guardados neste aparelho. Se você entrar em uma conta Motion e concordar, eles são sincronizados com sua conta para você continuar em outro aparelho.",
     "93f893c58bac726c": "Prática medida. Afinador. Meta semanal.",
-    "ce68d6fd9e983ef0": "Toque sua próxima aula com um clique e uma tablatura que rola; mostramos o que ouvimos em cada nota. Os cursos de voz e piano abrem em sequência.",
     "1f6e7089408c3c42": "Prática medida aberta",
     "dcc90cc2c83fa78e": "Prática medida aberta · próxima aula: {v0}",
     "070a1b3ea7d8199b": "Em breve · Este curso abre em uma atualização futura.",
@@ -8605,6 +8603,20 @@
     "ddf0ffc99533192a": "Leitura de notas: 20 notas das duas claves",
     "ea86d7b7dd346f42": "Intervalos: nomeie 12",
     "f41a741b42c1d4ed": "Altura: cante de volta 6 notas",
-    "f87d7265ebf58fb0": "Ritmo: bata palmas num ritmo de dois compassos a ♩=70"
+    "f87d7265ebf58fb0": "Ritmo: bata palmas num ritmo de dois compassos a ♩=70",
+    "10817563d1ea6e55": "Mantive um andamento constante e confortável.",
+    "1781764c396896ca": "Mantive o andamento-alvo, ♩={v0}.",
+    "187584ba7a65889e": "Todas as {v0} aulas do curso de percepção musical, por nível e módulo. Os exercícios rodam na tela e conferem suas respostas; as aulas de palmas escutam suas palmas. O canto não é medido: você mesmo confere e fica salvo como autoavaliação. Um módulo abre quando o ponto de verificação do módulo anterior é concluído; dentro de um módulo, faça as aulas na ordem que quiser.",
+    "45926957dd915bc3": "Exercícios, palmas e testes abertos",
+    "45f7ee31d8fcdd8d": "Consigo explicar cada ponto da explicação com minhas próprias palavras.",
+    "4cf9d8864205198c": "Esta lição é um exercício na tela. Passar nele salva a lição como feita.",
+    "569b2956b052eb05": "Toque sua próxima aula com um clique e uma tablatura que rola; mostramos o que ouvimos em cada nota. A percepção musical também está aberta; os cursos de voz e piano abrem em sequência.",
+    "945c2a3390f288de": "Percepção musical",
+    "b234200b75ea59a0": "Toque com um clique e uma tablatura que rola; o app escuta cada nota e marca como certa, outra nota ou não ouvida. O programa v1 tem 690 aulas de violão, voz, piano e percepção musical. Nesta versão o violão e a percepção musical estão abertos; voz e piano vêm em seguida.",
+    "b5b3f089d44db8bc": "Percepção musical — exercícios na tela, palmas com o clique e testes parte por parte.",
+    "b92f7673beb3377a": "Curso de percepção musical",
+    "ba989be6d5ba56e9": "Fiz a tarefa inteira do começo ao fim.",
+    "c6974974513f8778": "Percepção musical aberta · próxima aula: {v0}",
+    "5f3058d78884fd92": "Esta lição tem um exercício na tela. Passar nele salva a lição como feita; a parte de canto não é medida, então confira você mesmo."
   }
 }

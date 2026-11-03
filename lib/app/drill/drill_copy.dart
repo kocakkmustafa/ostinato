@@ -82,6 +82,18 @@ abstract final class DrillCopy {
     'DONE · DRILL PASSED',
     'YAPILDI · ALIŞTIRMA GEÇİLDİ',
   );
+
+  /// [bannerReady] for an ear lesson that is only a drill.
+  static const UiCopy bannerReadyDrillOnly = (
+    'This lesson is an on-screen drill. Passing it saves the lesson as done.',
+    'Bu ders bir ekran alıştırmasıdır. Geçince ders yapıldı olarak kaydedilir.',
+  );
+
+  /// [bannerReady] for an ear lesson whose other part is singing.
+  static const UiCopy bannerReadySinging = (
+    'This lesson has an on-screen drill. Passing it saves the lesson as done; the singing part is not measured, so check it yourself.',
+    'Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; şarkı söyleme bölümü ölçülmez, onu kendin kontrol et.',
+  );
   static const UiCopy bannerReady = (
     'This lesson has an on-screen drill. Passing it saves the lesson as done; the playing part is not measured yet.',
     'Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; çalma bölümü henüz ölçülmüyor.',
@@ -293,6 +305,8 @@ abstract final class DrillCopy {
     statusPassed,
     bannerSingingAlternative,
     bannerReady,
+    bannerReadyDrillOnly,
+    bannerReadySinging,
     halfStepPlace,
     degreeOverDrone,
     staffMatch,

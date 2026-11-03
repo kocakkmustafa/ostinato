@@ -45,7 +45,11 @@ class V1PracticeListScreen extends StatefulWidget {
     this.tuner,
     this.startNext = false,
     this.paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
+    this.course = 'gtr',
   });
+
+  /// The v1 course shown: `gtr` (guitar) or `ear` (ear training).
+  final String course;
 
   /// Whether the v1 paywall applies (release policy; tests turn it off).
   final bool paidFeaturesAvailable;
@@ -88,7 +92,8 @@ typedef _Progress = (
 
 class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
   late Future<V1CourseCatalog> _catalog =
-      widget.catalog ?? V1CourseCatalog.load();
+      widget.catalog ?? V1CourseCatalog.load(course: widget.course);
+  bool get _ear => widget.course == 'ear';
   V1PracticeProgress? _progress;
   V1LessonChecks? _checks;
   String? _accountId;
@@ -266,7 +271,9 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                     ),
                     OutlinedButton(
                       onPressed: () {
-                        final next = V1CourseCatalog.load();
+                        final next = V1CourseCatalog.load(
+                          course: widget.course,
+                        );
                         setState(() {
                           _catalog = next;
                         });
@@ -312,7 +319,10 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            uiText(context, V1CourseCopy.title),
+                            uiText(
+                              context,
+                              _ear ? V1CourseCopy.earTitle : V1CourseCopy.title,
+                            ),
                             style: hankenText(
                               size: 20,
                               weight: FontWeight.w600,
@@ -325,7 +335,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                     Text(
                       uiText(
                         context,
-                        V1CourseCopy.intro,
+                        _ear ? V1CourseCopy.earIntro : V1CourseCopy.intro,
                         values: {'v0': catalog.lessons.length},
                       ),
                       style: hankenText(size: 13, height: 1.45),
@@ -340,13 +350,13 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
                         style: monoText(color: palette.warnInk),
                       ),
                     if (widget.paidFeaturesAvailable &&
-                        v1FreeLevel('gtr') != null) ...[
+                        v1FreeLevel(widget.course) != null) ...[
                       const SizedBox(height: 8),
                       Text(
                         uiText(
                           context,
                           V1PaywallCopy.freeScope,
-                          values: {'v0': v1FreeLevel('gtr')},
+                          values: {'v0': v1FreeLevel(widget.course)},
                         ),
                         key: const Key('v1-course-free-scope'),
                         style: monoText(size: 10.5),
@@ -524,13 +534,14 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     );
   }
 
-  UiCopy _chip(V1LessonAvailability a) => switch (a) {
+  UiCopy _chip(V1CourseLesson lesson) => switch (lesson.availability) {
     V1LessonAvailability.measured => V1CourseCopy.chipMeasured,
     V1LessonAvailability.tuner => V1CourseCopy.chipTuner,
     V1LessonAvailability.selfCheck => V1CourseCopy.chipSelfCheck,
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.chipSelfCheckLesson,
     V1LessonAvailability.camera => V1CourseCopy.chipCamera,
-    V1LessonAvailability.drillSoon => V1CourseCopy.chipDrill,
+    V1LessonAvailability.drillSoon =>
+      lesson.drillReady ? V1CourseCopy.chipDrillReady : V1CourseCopy.chipDrill,
     V1LessonAvailability.held => V1CourseCopy.chipHeld,
   };
 
@@ -630,7 +641,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            uiText(context, _chip(lesson.availability)),
+            uiText(context, _chip(lesson)),
             key: Key('v1-course-chip-${lesson.id}'),
             style: hankenText(
               size: 11.5,

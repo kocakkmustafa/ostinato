@@ -142,6 +142,16 @@
       "tr": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; çalma bölümü henüz ölçülmüyor."
     },
     {
+      "id": "bannerReadyDrillOnly",
+      "en": "This lesson is an on-screen drill. Passing it saves the lesson as done.",
+      "tr": "Bu ders bir ekran alıştırmasıdır. Geçince ders yapıldı olarak kaydedilir."
+    },
+    {
+      "id": "bannerReadySinging",
+      "en": "This lesson has an on-screen drill. Passing it saves the lesson as done; the singing part is not measured, so check it yourself.",
+      "tr": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; şarkı söyleme bölümü ölçülmez, onu kendin kontrol et."
+    },
+    {
       "id": "tempoCompare",
       "en": "Listen to both parts. Was the second one faster, slower or the same?",
       "tr": "İki bölümü dinle. İkincisi daha hızlı mı, daha yavaş mı, aynı mı?"

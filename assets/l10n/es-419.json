@@ -2115,7 +2115,6 @@
     "ba4af611303e98c1": "Afina primero: las notas sostenidas suenan a más de 30 cents de la nota más cercana, así que los nombres de las notas están ocultos. Afina con un afinador externo y luego deja sonar una cuerda al aire.",
     "c7769c4ab3c03fe1": "Revisa la afinación: las notas sostenidas suenan a unos {v0} cents de la nota más cercana. Usa un afinador externo.",
     "0016fa7101b9f732": "Aprende guitarra tocando.",
-    "180a8f814e1bb4ad": "Toca con un clic y una tablatura que avanza; la app escucha cada nota y la marca como correcta, otra nota o no se oyó. El programa v1 tiene 690 lecciones de guitarra, voz, piano y entrenamiento auditivo. En esta versión está abierta la guitarra; los demás cursos llegarán después.",
     "e17ac651a15448e1": "Para aprobar una lección, al menos el 80 % de sus notas debe ser correcto; entonces se abre la siguiente lección. Las primeras lecciones de cada curso son gratis; las siguientes requieren una suscripción a Ostinato o Motion+.",
     "0b453d0d09f5dd1d": "Qué incluye",
     "f27fdd332417616d": "Práctica medida — clic, tablatura que avanza, retroalimentación en cada nota.",
@@ -2128,7 +2127,6 @@
     "311bd36458c5a126": "Tu progreso",
     "1ba7a84412607102": "Tus resultados de lecciones, tu racha y tu meta semanal se guardan en este dispositivo. Si inicias sesión en una cuenta de Motion y lo aceptas, se sincronizan con tu cuenta para que puedas continuar en otro dispositivo.",
     "93f893c58bac726c": "Práctica medida. Afinador. Meta semanal.",
-    "ce68d6fd9e983ef0": "Toca tu próxima lección con un clic y una tablatura que avanza; te mostramos lo que escuchamos en cada nota. Los cursos de voz y piano se abrirán uno tras otro.",
     "1f6e7089408c3c42": "Práctica medida abierta",
     "dcc90cc2c83fa78e": "Práctica medida abierta · próxima lección: {v0}",
     "070a1b3ea7d8199b": "Próximamente · Este curso se abrirá en una actualización futura.",
@@ -8605,6 +8603,20 @@
     "ddf0ffc99533192a": "Lectura de notas: 20 notas de ambas claves",
     "ea86d7b7dd346f42": "Intervalos: nombra 12",
     "f41a741b42c1d4ed": "Altura: canta de vuelta 6 notas",
-    "f87d7265ebf58fb0": "Ritmo: palmea un ritmo de dos compases a ♩=70"
+    "f87d7265ebf58fb0": "Ritmo: palmea un ritmo de dos compases a ♩=70",
+    "10817563d1ea6e55": "Mantuve un tempo constante y cómodo.",
+    "1781764c396896ca": "Mantuve el tempo objetivo, ♩={v0}.",
+    "187584ba7a65889e": "Las {v0} lecciones del curso de entrenamiento auditivo, por nivel y módulo. Los ejercicios se hacen en pantalla y revisan tus respuestas; las lecciones de palmas escuchan tus palmadas. El canto no se mide: lo revisas tú y se guarda como autoevaluación. Un módulo se abre al superar el punto de control del módulo anterior; dentro de un módulo, haz las lecciones en el orden que quieras.",
+    "45926957dd915bc3": "Ejercicios, palmas y pruebas abiertos",
+    "45f7ee31d8fcdd8d": "Puedo explicar cada punto de la explicación con mis propias palabras.",
+    "4cf9d8864205198c": "Esta lección es un ejercicio en pantalla. Aprobarlo guarda la lección como hecha.",
+    "569b2956b052eb05": "Toca tu próxima lección con un clic y una tablatura que avanza; te mostramos lo que escuchamos en cada nota. El entrenamiento auditivo también está abierto; los cursos de voz y piano se abrirán uno tras otro.",
+    "945c2a3390f288de": "Entrenamiento auditivo",
+    "b234200b75ea59a0": "Toca con un clic y una tablatura que avanza; la app escucha cada nota y la marca como correcta, otra nota o no se oyó. El programa v1 tiene 690 lecciones de guitarra, voz, piano y entrenamiento auditivo. En esta versión están abiertos la guitarra y el entrenamiento auditivo; voz y piano llegarán después.",
+    "b5b3f089d44db8bc": "Entrenamiento auditivo: ejercicios en pantalla, palmas con el clic y pruebas parte por parte.",
+    "b92f7673beb3377a": "Curso de entrenamiento auditivo",
+    "ba989be6d5ba56e9": "Hice toda la tarea de principio a fin.",
+    "c6974974513f8778": "Entrenamiento auditivo abierto · próxima lección: {v0}",
+    "5f3058d78884fd92": "Esta lección tiene un ejercicio en pantalla. Aprobarlo guarda la lección como hecha; la parte de canto no se mide, así que revísala tú."
   }
 }

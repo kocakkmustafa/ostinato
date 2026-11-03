@@ -2115,7 +2115,6 @@
     "ba4af611303e98c1": "Tune first: held notes sound more than 30 cents from the nearest note, so note names are hidden. Tune with an external tuner, then hold one open string.",
     "c7769c4ab3c03fe1": "Check tuning: held notes sound about {v0} cents from the nearest note. Use an external tuner.",
     "0016fa7101b9f732": "Learn guitar by playing.",
-    "180a8f814e1bb4ad": "Play along with a click and a scrolling tab; the app listens to each note and marks it correct, different note or couldn’t hear. The v1 programme has 690 lessons across guitar, voice, piano and ear training. Guitar is open in this release; the other courses follow.",
     "e17ac651a15448e1": "To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato or Motion+ subscription.",
     "0b453d0d09f5dd1d": "What’s inside",
     "f27fdd332417616d": "Measured practice — click, scrolling tab, feedback on every note.",
@@ -2128,7 +2127,6 @@
     "311bd36458c5a126": "Your progress",
     "1ba7a84412607102": "Your lesson results, streak and weekly goal are kept on this device. If you sign in to a Motion account and agree, they sync to your account so you can continue on another device.",
     "93f893c58bac726c": "Measured practice. Tuner. Weekly goal.",
-    "ce68d6fd9e983ef0": "Play your next lesson with a click and a scrolling tab; we show what we heard on every note. Voice and piano courses open in turn.",
     "1f6e7089408c3c42": "Measured practice open",
     "dcc90cc2c83fa78e": "Measured practice open · next lesson: {v0}",
     "070a1b3ea7d8199b": "Coming soon · This course opens in a later update.",
@@ -8605,6 +8603,20 @@
     "ddf0ffc99533192a": "Note reading: 20 notes from both clefs",
     "ea86d7b7dd346f42": "Intervals: name 12",
     "f41a741b42c1d4ed": "Pitch: sing 6 notes back",
-    "f87d7265ebf58fb0": "Rhythm: clap a two-bar rhythm at ♩=70"
+    "f87d7265ebf58fb0": "Rhythm: clap a two-bar rhythm at ♩=70",
+    "10817563d1ea6e55": "I kept a steady, comfortable tempo.",
+    "1781764c396896ca": "I kept the target tempo, ♩={v0}.",
+    "187584ba7a65889e": "All {v0} lessons of the ear training course, by level and module. Drills run on the screen and check your answers; clapping lessons listen to your claps. Singing is not measured: you check it yourself and it is saved as self-reported. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order.",
+    "45926957dd915bc3": "Drills, clapping and tests open",
+    "45f7ee31d8fcdd8d": "I can explain each point of the explanation in my own words.",
+    "4cf9d8864205198c": "This lesson is an on-screen drill. Passing it saves the lesson as done.",
+    "569b2956b052eb05": "Play your next lesson with a click and a scrolling tab; we show what we heard on every note. Ear training is open too; voice and piano courses open in turn.",
+    "945c2a3390f288de": "Ear training",
+    "b234200b75ea59a0": "Play along with a click and a scrolling tab; the app listens to each note and marks it correct, different note or couldn’t hear. The v1 programme has 690 lessons across guitar, voice, piano and ear training. Guitar and ear training are open in this release; voice and piano follow.",
+    "b5b3f089d44db8bc": "Ear training — on-screen drills, clapping with the click and part-by-part tests.",
+    "b92f7673beb3377a": "Ear training course",
+    "ba989be6d5ba56e9": "I worked through the whole task.",
+    "c6974974513f8778": "Ear training open · next lesson: {v0}",
+    "5f3058d78884fd92": "This lesson has an on-screen drill. Passing it saves the lesson as done; the singing part is not measured, so check it yourself."
   }
 }

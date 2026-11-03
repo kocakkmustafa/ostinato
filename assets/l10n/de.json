@@ -2115,7 +2115,6 @@
     "ba4af611303e98c1": "Zuerst stimmen: Gehaltene Töne klingen mehr als 30 Cent vom nächsten Ton entfernt, daher werden Tonnamen ausgeblendet. Stimme mit einem externen Stimmgerät und lass dann eine leere Saite klingen.",
     "c7769c4ab3c03fe1": "Stimmung prüfen: Gehaltene Töne klingen etwa {v0} Cent vom nächsten Ton entfernt. Verwende ein externes Stimmgerät.",
     "0016fa7101b9f732": "Lerne Gitarre, indem du spielst.",
-    "180a8f814e1bb4ad": "Spiel mit Klick und mitlaufender Tabulatur; die App hört jeden Ton und markiert ihn als richtig, anderer Ton oder nicht gehört. Das v1-Programm umfasst 690 Lektionen in Gitarre, Gesang, Klavier und Gehörbildung. In dieser Version ist Gitarre verfügbar; die anderen Kurse folgen.",
     "e17ac651a15448e1": "Um eine Lektion zu bestehen, müssen mindestens 80 % ihrer Töne richtig sein; dann öffnet sich die nächste Lektion. Die ersten Lektionen jedes Kurses sind kostenlos; spätere Lektionen erfordern ein Ostinato- oder Motion+-Abo.",
     "0b453d0d09f5dd1d": "Was drin ist",
     "f27fdd332417616d": "Gemessenes Üben — Klick, mitlaufende Tabulatur, Rückmeldung zu jedem Ton.",
@@ -2128,7 +2127,6 @@
     "311bd36458c5a126": "Dein Fortschritt",
     "1ba7a84412607102": "Deine Lektionsergebnisse, deine Serie und dein Wochenziel werden auf diesem Gerät gespeichert. Wenn du dich bei einem Motion-Konto anmeldest und zustimmst, werden sie mit deinem Konto synchronisiert, sodass du auf einem anderen Gerät weitermachen kannst.",
     "93f893c58bac726c": "Gemessenes Üben. Stimmgerät. Wochenziel.",
-    "ce68d6fd9e983ef0": "Spiel deine nächste Lektion mit Klick und mitlaufender Tabulatur; wir zeigen bei jedem Ton, was wir gehört haben. Gesangs- und Klavierkurse öffnen nacheinander.",
     "1f6e7089408c3c42": "Gemessenes Üben verfügbar",
     "dcc90cc2c83fa78e": "Gemessenes Üben verfügbar · nächste Lektion: {v0}",
     "070a1b3ea7d8199b": "Demnächst · Dieser Kurs öffnet mit einem späteren Update.",
@@ -8605,6 +8603,20 @@
     "ddf0ffc99533192a": "Notenlesen: 20 Noten aus beiden Schlüsseln",
     "ea86d7b7dd346f42": "Intervalle: 12 benennen",
     "f41a741b42c1d4ed": "Tonhöhe: 6 Töne nachsingen",
-    "f87d7265ebf58fb0": "Rhythmus: einen zweitaktigen Rhythmus bei ♩=70 klatschen"
+    "f87d7265ebf58fb0": "Rhythmus: einen zweitaktigen Rhythmus bei ♩=70 klatschen",
+    "10817563d1ea6e55": "Ich habe ein gleichmäßiges, angenehmes Tempo gehalten.",
+    "1781764c396896ca": "Ich habe das Zieltempo gehalten, ♩={v0}.",
+    "187584ba7a65889e": "Alle {v0} Lektionen des Gehörbildungskurses, nach Stufe und Modul. Übungen laufen auf dem Bildschirm und prüfen deine Antworten; Klatschlektionen hören deinem Klatschen zu. Singen wird nicht gemessen: Du prüfst es selbst, und es wird als Selbstangabe gespeichert. Ein Modul öffnet sich, wenn der Checkpoint des vorherigen Moduls geschafft ist; innerhalb eines Moduls nimm die Lektionen in beliebiger Reihenfolge.",
+    "45926957dd915bc3": "Übungen, Klatschen und Tests offen",
+    "45f7ee31d8fcdd8d": "Ich kann jeden Punkt der Erklärung in eigenen Worten erklären.",
+    "4cf9d8864205198c": "Diese Lektion ist eine Übung am Bildschirm. Wer sie besteht, hat die Lektion erledigt.",
+    "569b2956b052eb05": "Spiel deine nächste Lektion mit Klick und mitlaufender Tabulatur; wir zeigen bei jedem Ton, was wir gehört haben. Gehörbildung ist ebenfalls offen; Gesangs- und Klavierkurse öffnen nacheinander.",
+    "945c2a3390f288de": "Gehörbildung",
+    "b234200b75ea59a0": "Spiel mit Klick und mitlaufender Tabulatur; die App hört jeden Ton und markiert ihn als richtig, anderer Ton oder nicht gehört. Das v1-Programm umfasst 690 Lektionen in Gitarre, Gesang, Klavier und Gehörbildung. In dieser Version sind Gitarre und Gehörbildung verfügbar; Gesang und Klavier folgen.",
+    "b5b3f089d44db8bc": "Gehörbildung — Bildschirmübungen, Klatschen zum Klick und Tests Teil für Teil.",
+    "b92f7673beb3377a": "Gehörbildungskurs",
+    "ba989be6d5ba56e9": "Ich habe die ganze Aufgabe durchgearbeitet.",
+    "c6974974513f8778": "Gehörbildung offen · nächste Lektion: {v0}",
+    "5f3058d78884fd92": "Diese Lektion hat eine Übung am Bildschirm. Wer sie besteht, hat die Lektion erledigt; der Gesangsteil wird nicht gemessen, prüfe ihn also selbst."
   }
 }
