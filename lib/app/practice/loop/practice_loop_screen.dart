@@ -53,6 +53,7 @@ class PracticeLoopScreen extends StatefulWidget {
     this.setupStore,
     this.openSetup,
     this.ownRecordingPreference,
+    this.seed,
   });
 
   final V1Lesson lesson;
@@ -72,6 +73,9 @@ class PracticeLoopScreen extends StatefulWidget {
   /// FK2 setting; defaults to the device file (off unless turned on).
   final OwnRecordingPreference? ownRecordingPreference;
 
+  /// Fixes generated clapping lines (tests); null = a fresh draw.
+  final int? seed;
+
   /// Tests inject a controller on a fake channel.
   final PracticeSessionController Function(
     PracticeScore score,
@@ -86,14 +90,17 @@ class PracticeLoopScreen extends StatefulWidget {
 
 class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     with SingleTickerProviderStateMixin {
-  late final PracticeScore _score = V1PracticeCatalog.scoreOf(widget.lesson)!;
-  late final bool _freeTempo = widget.lesson.practice.tempo == null;
+  /// Lessons with generated clapping lines draw new lines each time the
+  /// screen opens; written lines ignore the seed.
+  late final PracticeScore _score = V1PracticeCatalog.scoreOf(
+    widget.lesson,
+    seed: widget.seed ?? DateTime.now().microsecondsSinceEpoch,
+  )!;
+  late final V1Tempo? _tempo = widget.lesson.practice.practiceTempo;
+  late final bool _freeTempo = _tempo == null;
   late final PracticeTempo _initialTempo = _freeTempo
       ? PracticeTempo(openBpm: 60, targetBpm: 60)
-      : PracticeTempo(
-          openBpm: widget.lesson.practice.tempo!.open,
-          targetBpm: widget.lesson.practice.tempo!.target,
-        );
+      : PracticeTempo(openBpm: _tempo!.open, targetBpm: _tempo.target);
   late final PassCriteria _criteria = PassCriteria.forLesson(
     widget.lesson,
     score: _score,

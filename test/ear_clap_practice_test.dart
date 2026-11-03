@@ -58,14 +58,15 @@ void main() {
       'ear-s1-m03-03',
       'ear-s1-m03-04',
       'ear-s1-m03-05', // 3/4
+      // Generated per attempt from a module-derived clap block.
+      'ear-s1-m01-06',
+      'ear-s1-m03-06',
+      'ear-s2-m07-03',
+      'ear-s2-m07-04',
+      'ear-s2-m07-05',
     });
     // Singing (A5) and lines generated per attempt stay out.
-    for (final id in [
-      'ear-s1-m02-04',
-      'ear-s2-m05-02',
-      'ear-s1-m03-06',
-      'ear-s2-m07-05',
-    ]) {
+    for (final id in ['ear-s1-m02-04', 'ear-s2-m05-02', 'ear-s1-test']) {
       expect(V1PracticeCatalog.isPracticable(ear(id)), isFalse, reason: id);
     }
   });
@@ -80,6 +81,59 @@ void main() {
       hasLength(8),
     );
     expect(V1PracticeCatalog.scoreOf(ear('ear-s1-m03-05'))!.beatsPerBar, 3);
+  });
+
+  test('clap blocks: new lines per seed, only the block\'s values', () {
+    const tokens = {
+      'whole': 'w',
+      'half': 'h',
+      'dottedQuarter': 'q.',
+      'quarter': 'q',
+      'eighthPair': 'ee',
+      'eighth': 'e',
+      'quarterRest': 'qr',
+      'halfRest': 'hr',
+    };
+    for (final id in [
+      'ear-s1-m01-06',
+      'ear-s1-m03-06',
+      'ear-s2-m07-03',
+      'ear-s2-m07-04',
+      'ear-s2-m07-05',
+    ]) {
+      final l = ear(id);
+      final clap = l.practice.clap!;
+      expect(
+        clap.derivedFrom,
+        startsWith('Modülden türetildi, kaynak satırlar:'),
+      );
+      expect(clap.tempo.open, 60, reason: id);
+      final allowed = {for (final v in clap.values) tokens[v]!};
+      // A tied pair is written `e e~` so the tie sits on one eighth.
+      if (clap.ties && clap.values.contains('eighthPair')) allowed.add('e');
+      final seen = <String>{};
+      var tied = 0;
+      for (var seed = 0; seed < 25; seed++) {
+        final seq = V1PracticeCatalog.clapSequence(l, seed: seed)!;
+        seen.add(seq);
+        expect(seq, V1PracticeCatalog.clapSequence(l, seed: seed));
+        final score = V1PracticeCatalog.scoreOf(l, seed: seed)!;
+        expect(score.isRhythmOnly, isTrue, reason: seq);
+        expect(score.totalBeats, clap.bars * clap.lines * 4, reason: seq);
+        final body = seq.substring('4/4: '.length);
+        for (final t in body.split(RegExp(r'[\s|]+'))) {
+          if (t.isEmpty) continue;
+          if (t.endsWith('~')) tied++;
+          expect(allowed, contains(t.replaceAll('~', '')), reason: '$id $t');
+        }
+      }
+      expect(seen.length, greaterThan(15), reason: '$id draws new lines');
+      if (clap.ties) {
+        expect(tied, greaterThanOrEqualTo(25 * clap.lines), reason: id);
+      } else {
+        expect(tied, 0, reason: id);
+      }
+    }
   });
 
   testWidgets('an ear clapping lesson opens without the guitar tuning card', (

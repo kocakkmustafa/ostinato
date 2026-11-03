@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:math' as math;
 
 import 'package:flutter/services.dart';
 
 import '../../curriculum/v1_lesson.dart';
+import '../../drill/drill_dictation.dart';
 import 'practice_score.dart';
 
 /// The v1 guitar lessons the measured practice loop can run: microphone
@@ -37,8 +39,8 @@ final class V1PracticeCatalog {
   /// The lesson's line as the practice screen runs it (guitar power chords
   /// before a rhythm are labels); null without a sequence or when the line
   /// does not parse.
-  static PracticeScore? scoreOf(V1Lesson l) {
-    final seq = l.practice.sequence;
+  static PracticeScore? scoreOf(V1Lesson l, {int seed = 0}) {
+    final seq = l.practice.sequence ?? clapSequence(l, seed: seed);
     if (seq == null) return null;
     try {
       return PracticeScore.parse(seq, powerChordLabels: l.course == 'gtr');
@@ -47,12 +49,66 @@ final class V1PracticeCatalog {
     }
   }
 
+  /// A clap block's lines as one written rhythm line (lesson guide §3.1
+  /// notation): each attempt draws new lines from [seed]. Null without one.
+  static String? clapSequence(V1Lesson l, {int seed = 0}) {
+    final clap = l.practice.clap;
+    if (clap == null) return null;
+    final rng = math.Random(seed);
+    final bars = <String>[];
+    for (var i = 0; i < clap.lines; i++) {
+      final line = generateRhythm(
+        rng,
+        clap.values,
+        bars: clap.bars,
+        ties: clap.ties,
+      );
+      var bar = <String>[];
+      var at = 0.0;
+      for (var k = 0; k < line.length; k++) {
+        final v = line[k];
+        if (v == kTie) {
+          // A tie across the bar line closes the previous bar (`q~ | q`);
+          // a pair is written as two eighths so the tie sits on one note.
+          String tie(String token) => token == 'ee' ? 'e e~' : '$token~';
+          if (bar.isEmpty) {
+            final last = bars.removeLast().split(' ');
+            bars.add(
+              [...last.sublist(0, last.length - 1), tie(last.last)].join(' '),
+            );
+          } else {
+            bar[bar.length - 1] = tie(bar.last);
+          }
+          continue;
+        }
+        bar.add(_token[v]!);
+        at += rhythmBeats[v]!;
+        if (at % 4 == 0) {
+          bars.add(bar.join(' '));
+          bar = <String>[];
+        }
+      }
+    }
+    return '4/4: ${bars.join(' | ')}';
+  }
+
+  static const Map<String, String> _token = {
+    'whole': 'w',
+    'half': 'h',
+    'dottedQuarter': 'q.',
+    'quarter': 'q',
+    'eighthPair': 'ee',
+    'eighth': 'e',
+    'quarterRest': 'qr',
+    'halfRest': 'hr',
+  };
+
   /// Engine steps a rhythm-only line can carry: A3 judges the onsets; A1
   /// (tuning) and A2 (which open string) are not in a line without pitches.
   static const Set<String> _rhythmSteps = {'A1', 'A2', 'A3'};
 
   static bool isPracticable(V1Lesson l) {
-    final seq = l.practice.sequence;
+    final seq = l.practice.sequence ?? clapSequence(l);
     if (seq == null) return false;
     // Ear course: clapping lessons only (a rhythm-only line, A3 onsets).
     if (l.course == 'ear') return _isClapLine(l);
@@ -80,6 +136,8 @@ final class V1PracticeCatalog {
   /// An ear-course lesson the practice loop can run: microphone (`M`,
   /// `M!`), only the A3 onset engine, and a rhythm-only written line.
   static bool _isClapLine(V1Lesson l) {
+    // A clap block passed the model's checks (A3, microphone, no sequence).
+    if (l.practice.clap != null) return true;
     final m = l.practice.measurement;
     if (!m.contains('M') && !m.contains('M!')) return false;
     final steps = l.practice.engineSteps;
