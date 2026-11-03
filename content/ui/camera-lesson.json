@@ -1,0 +1,75 @@
+{
+  "$about": "K8 camera lesson copy (lib/app/practice/camera/camera_lesson_copy.dart). EN+TR source pairs; all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "Petunjuk kamera",
+      "en": "Camera hint",
+      "tr": "Kamera ipucu"
+    },
+    {
+      "id": "Selama kamu menahan posisi, kamera bisa memberi petunjuk seberapa jauh tubuh bagian atasmu condong. Kamera tidak memberi nilai. Gambar diproses di perangkat ini; tidak direkam dan tidak dikirim.",
+      "en": "While you hold the position, the camera can give a hint about how far your upper body leans. It gives no score. The image is processed on this device; it is not recorded or sent.",
+      "tr": "Konumu korurken kamera, gövdenin ne kadar eğildiğine dair ipucu verebilir. Puan vermez. Görüntü bu cihazda işlenir; kaydedilmez, gönderilmez."
+    },
+    {
+      "id": "Mulai dengan kamera",
+      "en": "Start with the camera",
+      "tr": "Kamerayla başla"
+    },
+    {
+      "id": "Pelajaran ini punya petunjuk kamera untuk tubuh bagian atasmu. Kamera hanya memberi petunjuk: centang daftar periksa sendiri; penyelesaianmu disimpan sebagai laporan sendiri.",
+      "en": "This lesson has a camera hint for your upper body. The camera only gives hints: tick the checklist yourself; your completion is saved as self-reported.",
+      "tr": "Bu derste gövden için kamera ipucu var. Kamera yalnız ipucu verir: kontrol listesini kendin işaretle; tamamlaman kendi beyanı olarak kaydedilir."
+    },
+    {
+      "id": "Daftar periksa · petunjuk kamera",
+      "en": "Checklist · camera hint",
+      "tr": "Kontrol listesi · kamera ipucu"
+    },
+    {
+      "id": "Membuka kamera…",
+      "en": "Opening the camera…",
+      "tr": "Kamera açılıyor…"
+    },
+    {
+      "id": "Kamera tidak bisa melihatmu. Kedua bahu dan kedua pinggulmu perlu terlihat.",
+      "en": "The camera can’t see you. Both shoulders and both hips need to be in view.",
+      "tr": "Kamera seni göremiyor. İki omzun ve iki kalçan görüntüde olmalı."
+    },
+    {
+      "id": "Kamera aktif · belum ada petunjuk",
+      "en": "Camera on · no hint so far",
+      "tr": "Kamera açık · şimdilik ipucu yok"
+    },
+    {
+      "id": "Tidak satu pun dari {v0} guru gitar yang kami rekam condong lebih dari {v1}° dari posisi tegak. Kamu sekarang di {v2}°.",
+      "en": "None of the {v0} guitar teachers we recorded leaned more than {v1}° from upright. You are at {v2}° right now.",
+      "tr": "Kaydettiğimiz {v0} gitar eğitmeninin hiçbiri dik duruştan {v1}°’den fazla eğilmedi. Şu an {v2}°’desin."
+    },
+    {
+      "id": "Sisa {v0} dtk",
+      "en": "{v0} s left",
+      "tr": "{v0} sn kaldı"
+    },
+    {
+      "id": "Waktu habis. Kembali dan centang daftar periksa.",
+      "en": "Time is up. Go back and tick the checklist.",
+      "tr": "Süre doldu. Derse dönüp kontrol listesini işaretle."
+    },
+    {
+      "id": "Akses kamera nonaktif. Kamu bisa mengaktifkannya di Pengaturan, atau memakai daftar periksa tanpa kamera.",
+      "en": "Camera access is off. You can turn it on in Settings, or use the checklist without the camera.",
+      "tr": "Kamera izni kapalı. Ayarlar’dan açabilir ya da kontrol listesini kamerasız kullanabilirsin."
+    },
+    {
+      "id": "Kamera tidak bisa dimulai. Kamu bisa memakai daftar periksa tanpa kamera.",
+      "en": "The camera could not start. You can use the checklist without the camera.",
+      "tr": "Kamera açılamadı. Kontrol listesini kamerasız kullanabilirsin."
+    },
+    {
+      "id": "Kembali ke pelajaran",
+      "en": "Back to the lesson",
+      "tr": "Derse dön"
+    }
+  ]
+}

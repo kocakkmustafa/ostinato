@@ -8617,6 +8617,19 @@
     "5f3058d78884fd92": "Questa lezione ha un esercizio sullo schermo. Superarlo salva la lezione come fatta; la parte cantata non viene misurata, quindi controllala tu.",
     "fd926468a8904dc5": "L'accesso al microfono serve ad ascoltare le note che suoni e i ritmi che batti con le mani durante la pratica e l'accordatura. L'audio viene elaborato su questo dispositivo e non viene caricato. Se attivi l'ascolto della tua registrazione, resta solo su questo dispositivo e viene eliminata alla fine della sessione.",
     "266fa6a1ededa59d": "Nella pratica misurata il microfono ascolta le note che suoni e i ritmi che batti con le mani. L’audio viene elaborato su questo dispositivo e non viene inviato. Ciò che suoni non viene registrato; se vuoi, puoi attivare l’ascolto della tua registrazione: resta sul tuo dispositivo e viene eliminata alla fine della sessione. Chiediamo il permesso alla tua prima lezione misurata. Senza, puoi comunque leggere le lezioni e usare le autoverifiche.",
-    "f5767a8eb5ad7adb": "Nella pratica misurata il microfono ascolta le note che suoni e i ritmi che batti con le mani. Una lezione è superata quando una quota sufficiente delle sue note viene sentita come corretta; la quota richiesta cresce con il livello. Il permesso viene chiesto alla prima misurazione. L’audio viene elaborato su questo dispositivo e non viene caricato; ciò che suoni non viene registrato, a meno che tu non attivi l’ascolto della tua registrazione. Fermare, uscire dalla schermata, cambiare account o portare l’app in secondo piano chiude il microfono."
+    "f5767a8eb5ad7adb": "Nella pratica misurata il microfono ascolta le note che suoni e i ritmi che batti con le mani. Una lezione è superata quando una quota sufficiente delle sue note viene sentita come corretta; la quota richiesta cresce con il livello. Il permesso viene chiesto alla prima misurazione. L’audio viene elaborato su questo dispositivo e non viene caricato; ciò che suoni non viene registrato, a meno che tu non attivi l’ascolto della tua registrazione. Fermare, uscire dalla schermata, cambiare account o portare l’app in secondo piano chiude il microfono.",
+    "bc30695b79fb0840": "Suggerimento della fotocamera",
+    "13ec35aec83c6453": "Mentre mantieni la posizione, la fotocamera può darti un suggerimento su quanto si inclina la parte superiore del corpo. Non dà punteggi. L’immagine viene elaborata su questo dispositivo; non viene registrata né inviata.",
+    "dd51c85917a02386": "Inizia con la fotocamera",
+    "831a2d08ee12f4e9": "Questa lezione ha un suggerimento della fotocamera per la parte superiore del corpo. La fotocamera dà solo suggerimenti: spunta tu la lista di controllo; la lezione viene salvata come dichiarata da te.",
+    "21f2bf42f0b0bb3f": "Lista di controllo · suggerimento della fotocamera",
+    "4cd08e23fe77341a": "Apertura della fotocamera…",
+    "bf625db396d46a47": "La fotocamera non ti vede. Entrambe le spalle ed entrambi i fianchi devono essere inquadrati.",
+    "e6eddbb0f2dc90d9": "Fotocamera attiva · nessun suggerimento finora",
+    "2d286be2a7b9430f": "Nessuno dei {v0} insegnanti di chitarra che abbiamo registrato si è inclinato più di {v1}° rispetto alla verticale. Ora sei a {v2}°.",
+    "3e634da92fc6a63b": "Mancano {v0} s",
+    "26dd5b2a787f0bba": "Tempo scaduto. Torna indietro e spunta la lista di controllo.",
+    "6c97155e72ce3d9e": "L’accesso alla fotocamera è disattivato. Puoi attivarlo nelle Impostazioni o usare la lista di controllo senza fotocamera.",
+    "641ed9591380c542": "Non è stato possibile avviare la fotocamera. Puoi usare la lista di controllo senza fotocamera."
   }
 }
