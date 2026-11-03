@@ -155,7 +155,6 @@
     "159722b3a50a81b7": "tam beşli, 7 yarım ses",
     "15a4ca4c17f4fb3b": "Açık pes Mi'de köprü yakınında küçük avuç temasıyla susturulmamış notayı karşılaştır; sert bastırma. İki kısa rahat tur, sonra aktarım görevini bir kez dene; ara ver ve hepsini bugün zorlamak yerine sonraki oturumlarda tekrarla.",
     "15fd624447c420a1": "Dışlanan teller sessizken iki duyulan notayı adlandırıp kök-beşli çiftini taşıyabiliyorum.",
-    "1b63ddcfdfec9b1c": "Mikrofon erişimi, pratik ve akort sırasında çaldığın notaları duymak içindir. Ses bu cihazda işlenir; yüklenmez. Kendi kaydını dinlemeyi açarsan kayıt yalnız bu cihazda tutulur ve oturum sonunda silinir.",
     "1640780890f6460e": "Sol Re Mi minör Do'yu dörder ölçülük cümleler olarak haritala; değişimleri, vurgu planını ve son kesişi işaretle.\n16 ölçüyü rahat tek vuruşta çal; yerel hata sonrasında sonraki ölçüye devam et.\nArmoni veya uzunluğu değiştirmeden üçüncü cümlede farklı tarama yoğunluğuyla tekrarla.",
     "1654e86c824de4c9": "On iki ölçüde soru cevap",
     "166d8c112384f70f": "Açık telleri p–i–m–a sırasıyla çal; dört notalı grubu yinelemeden bir ölçü dinlen.",
@@ -2122,7 +2121,6 @@
     "d35e81e9406238d4": "Seri ve haftalık hedef — her ölçülü pratik sayılır.",
     "a4b9ccbb2954ca26": "Yazılı dersler — kendi hızında okuyup çalışabileceğin 60 derslik eski yol.",
     "41fb99cf6ac3bddc": "Mikrofon",
-    "0d923a411f318b98": "Ölçülü pratikte mikrofon çaldığın notaları dinler. Ses bu cihazda işlenir; gönderilmez. Çaldığın kaydedilmez; istersen kendi kaydını dinleme seçeneğini açabilirsin, kayıt cihazında kalır ve oturum sonunda silinir. İzni ilk ölçülü derste isteriz. Vermezsen dersleri okuyup öz-kontrolle çalışabilirsin.",
     "7131a28589c377fb": "Kamera yalnız birkaç kurulum dersinde, el ve bilek duruşuna bakmak için kullanılır. İzni o derste isteriz. Görüntü cihazda işlenir; kaydedilmez, gönderilmez. Diğer dersler kamerasız çalışır.",
     "311bd36458c5a126": "İlerlemen",
     "1ba7a84412607102": "Ders sonuçların, serin ve haftalık hedefin bu cihazda tutulur. Motion hesabına giriş yapıp onay verirsen hesabına eşitlenir ve başka cihazda devam edebilirsin.",
@@ -8435,7 +8433,6 @@
     "6946560ebac6e08d": "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato üyeliği gerektirir.",
     "8c35a3bffb5f6829": "Önce giriş yap ya da hesap oluştur: üyeliğin hesabına bağlıdır, böylece giriş yaptığın her cihazda geçerli olur.",
     "545f6c0a16d5c54c": "Ders sonuçların, serin ve haftalık hedefin bu cihazda kalır; bu sürüm bunları hesaba eşitlemez. Hesabın üyeliğin için kullanılır.",
-    "6afa082a5c331043": "Ölçülü pratikte mikrofon çaldığın notaları dinler. Notalarının yeterli bir kısmı doğru duyulduğunda ders geçilir; gereken oran seviyeyle artar. İzin, ilk ölçümde istenir. Ses bu cihazda işlenir ve yüklenmez; kendi kaydını dinleme seçeneğini açmadıkça çaldığın kaydedilmez. Durdurmak, ekrandan çıkmak, hesap değiştirmek veya uygulamayı arka plana almak mikrofonu kapatır.",
     "2458f83652e85824": "Doğruluk telefonunun mikrofonuna ve odaya bağlıdır; ölçülen sonuçlar değişebilir.",
     "4360eb5d0a20a482": "{v0} Tüm duruş referansları belden yukarı çekilmiş eğitim görüntülerine dayanır; bu yüzden kalçanızın altı okunmaz.",
     "a51b8da5ff450285": "Yeni tel esner: birkaç dakika sonra yeniden kontrol et.",
@@ -8617,6 +8614,9 @@
     "b92f7673beb3377a": "Kulak eğitimi kursu",
     "ba989be6d5ba56e9": "Görevi baştan sona yaptım.",
     "c6974974513f8778": "Kulak eğitimi açık · sıradaki ders: {v0}",
-    "5f3058d78884fd92": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; şarkı söyleme bölümü ölçülmez, onu kendin kontrol et."
+    "5f3058d78884fd92": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; şarkı söyleme bölümü ölçülmez, onu kendin kontrol et.",
+    "fd926468a8904dc5": "Mikrofon erişimi, pratik ve akort sırasında çaldığın notaları ve alkışladığın ritimleri duymak içindir. Ses bu cihazda işlenir; yüklenmez. Kendi kaydını dinlemeyi açarsan kayıt yalnız bu cihazda tutulur ve oturum sonunda silinir.",
+    "266fa6a1ededa59d": "Ölçülü pratikte mikrofon çaldığın notaları ve alkışladığın ritimleri dinler. Ses bu cihazda işlenir; gönderilmez. Çaldığın kaydedilmez; istersen kendi kaydını dinleme seçeneğini açabilirsin, kayıt cihazında kalır ve oturum sonunda silinir. İzni ilk ölçülü derste isteriz. Vermezsen dersleri okuyup öz-kontrolle çalışabilirsin.",
+    "f5767a8eb5ad7adb": "Ölçülü pratikte mikrofon çaldığın notaları ve alkışladığın ritimleri dinler. Notalarının yeterli bir kısmı doğru duyulduğunda ders geçilir; gereken oran seviyeyle artar. İzin, ilk ölçümde istenir. Ses bu cihazda işlenir ve yüklenmez; kendi kaydını dinleme seçeneğini açmadıkça çaldığın kaydedilmez. Durdurmak, ekrandan çıkmak, hesap değiştirmek veya uygulamayı arka plana almak mikrofonu kapatır."
   }
 }

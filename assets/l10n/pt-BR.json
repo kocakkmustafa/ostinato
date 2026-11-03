@@ -1861,7 +1861,6 @@
     "fdaa2ce62c9c815b": "Direita: permaneça em pausa. Esquerda: continue sustentando {v0}; não toque novamente.",
     "0044bc1077ff95c1": "{v0} {v1} (tempo {v2})",
     "9f0b6309e1e9195d": "{v0} {v1} (tempos {v2}–{v3})",
-    "1b63ddcfdfec9b1c": "O acesso ao microfone serve para ouvir as notas que você toca durante a prática e a afinação. O áudio é processado neste dispositivo e não é enviado. Se você ativar ouvir a sua própria gravação, ela fica somente neste dispositivo e é apagada ao final da sessão.",
     "c5870489b762e72f": "O acesso à câmera serve para verificar a posição da sua mão e do seu pulso nas lições que pedem isso. As imagens são processadas somente neste dispositivo; não são salvas nem enviadas.",
     "f775a273be1ae29d": "C4 = C central / MIDI 60",
     "778f0163167eb850": "corda {v0}: solta",
@@ -2122,7 +2121,6 @@
     "d35e81e9406238d4": "Sequência e meta semanal — cada prática medida conta.",
     "a4b9ccbb2954ca26": "Aulas escritas — o percurso anterior de 60 aulas para ler e praticar no seu ritmo.",
     "41fb99cf6ac3bddc": "Microfone",
-    "0d923a411f318b98": "Na prática medida, o microfone escuta as notas que você toca. O áudio é processado neste aparelho e não é enviado. O que você toca não é gravado; se quiser, você pode ativar a opção de ouvir sua própria gravação — ela fica no seu aparelho e é apagada no fim da sessão. Pedimos a permissão na sua primeira aula medida. Sem ela, você ainda pode ler as aulas e usar as autoavaliações.",
     "7131a28589c377fb": "A câmera é usada só em algumas aulas de preparação, para observar a postura da mão e do punho. Pedimos a permissão nessa aula. A imagem é processada neste aparelho; não é gravada nem enviada. Todas as outras aulas funcionam sem câmera.",
     "311bd36458c5a126": "Seu progresso",
     "1ba7a84412607102": "Seus resultados das aulas, sua sequência e sua meta semanal ficam guardados neste aparelho. Se você entrar em uma conta Motion e concordar, eles são sincronizados com sua conta para você continuar em outro aparelho.",
@@ -8435,7 +8433,6 @@
     "6946560ebac6e08d": "Para passar em uma aula, pelo menos 80% das notas precisam estar certas; aí a próxima aula abre. As primeiras aulas de cada curso são gratuitas; as seguintes exigem assinatura do Ostinato.",
     "8c35a3bffb5f6829": "Primeiro entre ou crie uma conta: sua assinatura fica vinculada à sua conta, então funciona em todos os dispositivos em que você entrar.",
     "545f6c0a16d5c54c": "Seus resultados das aulas, sua sequência e sua meta semanal ficam neste aparelho; esta versão não os sincroniza com uma conta. Sua conta é usada para sua assinatura.",
-    "6afa082a5c331043": "Na prática medida, o microfone ouve as notas que você toca. Uma aula é aprovada quando uma parte suficiente das notas é ouvida como correta; a parte exigida aumenta com o nível. A permissão é pedida na primeira medição. O áudio é processado neste aparelho e não é enviado; o que você toca não é gravado, a menos que você ative ouvir sua própria gravação. Parar, sair da tela, trocar de conta ou levar o app para segundo plano fecha o microfone.",
     "2458f83652e85824": "A precisão depende do microfone do seu celular e do ambiente; os resultados medidos podem variar.",
     "4360eb5d0a20a482": "{v0} Todas as referências de postura vêm de vídeos de ensino filmados da cintura para cima; por isso nada abaixo dos quadris é lido.",
     "a51b8da5ff450285": "Uma corda nova estica: confira de novo depois de alguns minutos.",
@@ -8617,6 +8614,9 @@
     "b92f7673beb3377a": "Curso de percepção musical",
     "ba989be6d5ba56e9": "Fiz a tarefa inteira do começo ao fim.",
     "c6974974513f8778": "Percepção musical aberta · próxima aula: {v0}",
-    "5f3058d78884fd92": "Esta lição tem um exercício na tela. Passar nele salva a lição como feita; a parte de canto não é medida, então confira você mesmo."
+    "5f3058d78884fd92": "Esta lição tem um exercício na tela. Passar nele salva a lição como feita; a parte de canto não é medida, então confira você mesmo.",
+    "fd926468a8904dc5": "O acesso ao microfone serve para ouvir as notas que você toca e os ritmos que você marca com palmas durante a prática e a afinação. O áudio é processado neste dispositivo e não é enviado. Se você ativar ouvir a sua própria gravação, ela fica somente neste dispositivo e é apagada ao final da sessão.",
+    "266fa6a1ededa59d": "Na prática medida, o microfone escuta as notas que você toca e os ritmos que você marca com palmas. O áudio é processado neste aparelho e não é enviado. O que você toca não é gravado; se quiser, você pode ativar a opção de ouvir sua própria gravação — ela fica no seu aparelho e é apagada no fim da sessão. Pedimos a permissão na sua primeira aula medida. Sem ela, você ainda pode ler as aulas e usar as autoavaliações.",
+    "f5767a8eb5ad7adb": "Na prática medida, o microfone ouve as notas que você toca e os ritmos que você marca com palmas. Uma aula é aprovada quando uma parte suficiente das notas é ouvida como correta; a parte exigida aumenta com o nível. A permissão é pedida na primeira medição. O áudio é processado neste aparelho e não é enviado; o que você toca não é gravado, a menos que você ative ouvir sua própria gravação. Parar, sair da tela, trocar de conta ou levar o app para segundo plano fecha o microfone."
   }
 }

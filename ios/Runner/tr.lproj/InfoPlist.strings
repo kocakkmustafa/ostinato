@@ -1,2 +1,2 @@
 "NSCameraUsageDescription" = "Kamera erişimi, isteyen derslerde el ve bilek duruşunu kontrol etmek içindir. Görüntü yalnız bu cihazda işlenir; kaydedilmez ve yüklenmez.";
-"NSMicrophoneUsageDescription" = "Mikrofon erişimi, pratik ve akort sırasında çaldığın notaları duymak içindir. Ses bu cihazda işlenir; yüklenmez. Kendi kaydını dinlemeyi açarsan kayıt yalnız bu cihazda tutulur ve oturum sonunda silinir.";
+"NSMicrophoneUsageDescription" = "Mikrofon erişimi, pratik ve akort sırasında çaldığın notaları ve alkışladığın ritimleri duymak içindir. Ses bu cihazda işlenir; yüklenmez. Kendi kaydını dinlemeyi açarsan kayıt yalnız bu cihazda tutulur ve oturum sonunda silinir.";
