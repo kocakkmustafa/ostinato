@@ -57,6 +57,10 @@ void main() {
     'ear-s2-m06-03',
     'ear-s2-m06-04',
     'ear-s2-m08-02',
+    'ear-s2-m05-03', // half-step place
+    'ear-s2-m05-04', // degree over drone (1, 3, 5)
+    'ear-s2-m05-06', // degree over drone (1–6)
+    'ear-s2-m08-05', // staff match
   };
 
   test('singing lessons carry the on-screen version their task names', () {

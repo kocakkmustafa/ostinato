@@ -540,6 +540,36 @@
       "id": "beatsOption",
       "en": "{v0} beats",
       "tr": "{v0} vuruş"
+    },
+    {
+      "id": "halfStepPlace",
+      "en": "Listen to four neighbouring notes of the {v0} major scale. Where is the half step?",
+      "tr": "{v0} majör dizisinin dört komşu notasını dinle. Yarım ses nerede?"
+    },
+    {
+      "id": "degreeOverDrone",
+      "en": "Listen to the note over the drone. Which degree of {v0} major is it?",
+      "tr": "Drone üstündeki notayı dinle. {v0} majörün kaçıncı derecesi?"
+    },
+    {
+      "id": "staffMatch",
+      "en": "Listen to the line. Which staff matches it?",
+      "tr": "Satırı dinle. Hangi porte ona uyuyor?"
+    },
+    {
+      "id": "betweenNotes",
+      "en": "Between notes {v0} and {v1}",
+      "tr": "{v0}. ve {v1}. nota arasında"
+    },
+    {
+      "id": "noHalfStep",
+      "en": "No half step",
+      "tr": "Yarım ses yok"
+    },
+    {
+      "id": "staffLabel",
+      "en": "Staff {v0}",
+      "tr": "{v0} portesi"
     }
   ]
 }

@@ -244,6 +244,26 @@ abstract final class DrillCopy {
   );
   static const UiCopy beatsOption = ('{v0} beats', '{v0} vuruş');
 
+  // ---- singing alternatives: half steps, drone degrees, staff match ----
+  static const UiCopy halfStepPlace = (
+    'Listen to four neighbouring notes of the {v0} major scale. Where is the half step?',
+    '{v0} majör dizisinin dört komşu notasını dinle. Yarım ses nerede?',
+  );
+  static const UiCopy degreeOverDrone = (
+    'Listen to the note over the drone. Which degree of {v0} major is it?',
+    'Drone üstündeki notayı dinle. {v0} majörün kaçıncı derecesi?',
+  );
+  static const UiCopy staffMatch = (
+    'Listen to the line. Which staff matches it?',
+    'Satırı dinle. Hangi porte ona uyuyor?',
+  );
+  static const UiCopy betweenNotes = (
+    'Between notes {v0} and {v1}',
+    '{v0}. ve {v1}. nota arasında',
+  );
+  static const UiCopy noHalfStep = ('No half step', 'Yarım ses yok');
+  static const UiCopy staffLabel = ('Staff {v0}', '{v0} portesi');
+
   static const List<UiCopy> all = [
     noteAtFret,
     fretOfNote,
@@ -273,6 +293,12 @@ abstract final class DrillCopy {
     statusPassed,
     bannerSingingAlternative,
     bannerReady,
+    halfStepPlace,
+    degreeOverDrone,
+    staffMatch,
+    betweenNotes,
+    noHalfStep,
+    staffLabel,
     stepSize,
     staffPlace,
     staffSymbol,

@@ -8558,6 +8558,12 @@
     "b09059cbf09f42a9": "Stanghetta",
     "35b0cfca503264c9": "Doppia stanghetta (la fine)",
     "70275dd6ccec233c": "Indicazione di tempo 4/4",
-    "aed8868722fcb964": "{v0} movimenti"
+    "aed8868722fcb964": "{v0} movimenti",
+    "a66cc24b60efb152": "Ascolta quattro note vicine della scala di {v0} maggiore. Dov’è il semitono?",
+    "8d386a919816032b": "Ascolta la nota sopra il bordone. Quale grado di {v0} maggiore è?",
+    "6bab74a4b623bca8": "Ascolta la linea. Quale pentagramma corrisponde?",
+    "2a19ebf639f55a8d": "Tra la nota {v0} e la {v1}",
+    "a51a313c05aafcef": "Nessun semitono",
+    "8104611cdd816f4d": "Pentagramma {v0}"
   }
 }

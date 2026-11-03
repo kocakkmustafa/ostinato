@@ -43,6 +43,10 @@
     },
     "sequence": "1-2-3-4-5-6-7-8-7-6-5-4-3-2-1",
     "tempo": { "open": 60, "target": 70 },
+    "alternative": {
+      "drill": { "type": "half_step_place", "count": 8, "params": { "key": ["C", "G", "F", "D"], "notes": 4 } },
+      "source": "Görev metni: \"choose the on-screen version: you hear the scale and mark where the half steps fall.\" Dizi dört komşu notalık parçalarla sorulur; tonlar ear-s2-m05-05'ten."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",

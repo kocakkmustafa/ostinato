@@ -8558,6 +8558,12 @@
     "b09059cbf09f42a9": "Barre de mesure",
     "35b0cfca503264c9": "Double barre (la fin)",
     "70275dd6ccec233c": "Chiffrage 4/4",
-    "aed8868722fcb964": "{v0} temps"
+    "aed8868722fcb964": "{v0} temps",
+    "a66cc24b60efb152": "Écoute quatre notes voisines de la gamme de {v0} majeur. Où est le demi-ton ?",
+    "8d386a919816032b": "Écoute la note sur le bourdon. Quel degré de {v0} majeur est-ce ?",
+    "6bab74a4b623bca8": "Écoute la ligne. Quelle portée lui correspond ?",
+    "2a19ebf639f55a8d": "Entre les notes {v0} et {v1}",
+    "a51a313c05aafcef": "Pas de demi-ton",
+    "8104611cdd816f4d": "Portée {v0}"
   }
 }

@@ -8558,6 +8558,12 @@
     "b09059cbf09f42a9": "Barra de compasso",
     "35b0cfca503264c9": "Barra dupla (o fim)",
     "70275dd6ccec233c": "Fórmula de compasso 4/4",
-    "aed8868722fcb964": "{v0} tempos"
+    "aed8868722fcb964": "{v0} tempos",
+    "a66cc24b60efb152": "Ouça quatro notas vizinhas da escala de {v0} maior. Onde está o semitom?",
+    "8d386a919816032b": "Ouça a nota sobre o bordão. Qual grau de {v0} maior é?",
+    "6bab74a4b623bca8": "Ouça a linha. Qual pauta corresponde?",
+    "2a19ebf639f55a8d": "Entre as notas {v0} e {v1}",
+    "a51a313c05aafcef": "Sem semitom",
+    "8104611cdd816f4d": "Pauta {v0}"
   }
 }

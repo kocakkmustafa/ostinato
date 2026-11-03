@@ -42,6 +42,10 @@
       "tr": "Do, Sol ya da Fa majörde dörder ölçülük dört yeni satır. Do'yu ve giriş sayımını dinle, sonra satırı ♩=60'ta klikle söyle. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: bir satır dinler, iki porteden hangisine uyduğunu seçersin."
     },
     "tempo": { "open": 60, "target": 60 },
+    "alternative": {
+      "drill": { "type": "staff_match", "count": 4, "params": { "key": ["C", "G", "F"], "notes": 16, "degrees": [1, 2, 3, 4, 5, 6, 7, 8], "range": "C4-G5" } },
+      "source": "Görev metni: \"you hear a line and choose which of two staves it matches.\" Dört satır, dört ölçü dörtlük, Do/Sol/Fa majör (görev metni)."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",

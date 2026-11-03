@@ -8572,6 +8572,12 @@
     "b09059cbf09f42a9": "Kreska taktowa",
     "35b0cfca503264c9": "Podwójna kreska (koniec)",
     "70275dd6ccec233c": "Metrum 4/4",
-    "aed8868722fcb964": "{v0} miary"
+    "aed8868722fcb964": "{v0} miary",
+    "a66cc24b60efb152": "Posłuchaj czterech sąsiednich dźwięków skali {v0}-dur. Gdzie jest półton?",
+    "8d386a919816032b": "Posłuchaj dźwięku nad burdonem. Który to stopień {v0}-dur?",
+    "6bab74a4b623bca8": "Posłuchaj linii. Która pięciolinia do niej pasuje?",
+    "2a19ebf639f55a8d": "Między dźwiękiem {v0} a {v1}",
+    "a51a313c05aafcef": "Brak półtonu",
+    "8104611cdd816f4d": "Pięciolinia {v0}"
   }
 }

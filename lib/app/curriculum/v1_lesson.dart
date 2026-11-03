@@ -402,7 +402,7 @@ final class V1Drill {
     'tempo_compare', 'pitch_direction', 'same_different', 'interval_name',
     'triad_quality', 'scale_degree', 'key_signature', 'note_name',
     'rhythm_dictation', 'melodic_dictation', 'symbol_match', 'diagram_match',
-    'ordering', //
+    'ordering', 'half_step_place', 'degree_over_drone', 'staff_match', //
   };
 
   factory V1Drill.fromJson(Object? json) {

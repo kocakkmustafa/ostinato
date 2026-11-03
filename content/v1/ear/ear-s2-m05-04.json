@@ -38,6 +38,10 @@
       "tr": "Dronun üstünde do-mi-sol-mi-do'yu üç kez söyle; her notayı yaklaşık bir saniye tut. Kendi oktavında söyle. Kulaklık dronu mikrofondan uzak tutar. Söylemek istemezsen ekrandaki sürümü seç: dronun üstünde bir nota duyar, 1, 3 ya da 5 olduğunu işaretlersin."
     },
     "sequence": "1-3-5-3-1 | 1-3-5-3-1 | 1-3-5-3-1",
+    "alternative": {
+      "drill": { "type": "degree_over_drone", "count": 8, "params": { "key": ["C", "G", "F", "D"], "degrees": [1, 3, 5] } },
+      "source": "Görev metni: \"you hear one note over the drone and mark whether it is 1, 3 or 5.\" Tonlar ear-s2-m05-05'ten."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",

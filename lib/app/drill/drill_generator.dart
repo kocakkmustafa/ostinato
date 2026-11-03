@@ -87,6 +87,15 @@ enum DrillPromptKind {
 
   /// "How many beats are in each bar of 4/4?"
   beatsInBar,
+
+  /// Singing alternatives: where is the half step in four scale notes?
+  halfStepPlace,
+
+  /// Which degree is the note over the drone?
+  degreeOverDrone,
+
+  /// Which of two staves (A/B) matches the line heard?
+  staffMatch,
 }
 
 enum DrillEntryKind { rhythm, melody }
@@ -194,7 +203,10 @@ bool isHeard(DrillPromptKind k) => switch (k) {
   DrillPromptKind.intervalName ||
   DrillPromptKind.chordQuality ||
   DrillPromptKind.tonicOrNot ||
-  DrillPromptKind.stepSize => true,
+  DrillPromptKind.stepSize ||
+  DrillPromptKind.halfStepPlace ||
+  DrillPromptKind.degreeOverDrone ||
+  DrillPromptKind.staffMatch => true,
   _ => false,
 };
 
@@ -214,6 +226,7 @@ final class DrillQuestion {
     this.staff,
     this.entry,
     this.keys = const [],
+    this.staves = const [],
   });
 
   final DrillPromptKind kind;
@@ -250,6 +263,9 @@ final class DrillQuestion {
 
   /// Keyboard diagram: marked keys (MIDI); empty = no keyboard.
   final List<int> keys;
+
+  /// Staff match: the staves the options name (A, B), in order.
+  final List<DrillStaff> staves;
 
   String get expected => options[answer];
 
@@ -317,7 +333,9 @@ bool supportsDrill(V1Drill drill) {
       return names.isNotEmpty &&
           names.every((i) => intervalSemitones.containsKey(i)) &&
           (p['context'] == null || p['context'] == 'melody');
-    case 'note_name':
+    case 'note_name' || 'half_step_place' || 'degree_over_drone':
+      return true;
+    case 'staff_match':
       return true;
     case 'key_signature':
       return (p['keys'] as List?)?.every(keySignatures.containsKey) == true;
@@ -377,7 +395,10 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
     'key_signature' ||
     'scale_degree' ||
     'rhythm_dictation' ||
-    'melodic_dictation' => drill.type,
+    'melodic_dictation' ||
+    'half_step_place' ||
+    'degree_over_drone' ||
+    'staff_match' => drill.type,
     _ when drill.params['set'] is List =>
       (drill.params['set'] as List).every(staffPlaceNames.contains)
           ? 'staff_places'
@@ -403,6 +424,9 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
     'scale_degree' => g.tonicOrNot,
     'rhythm_dictation' => g.rhythmDictation,
     'melodic_dictation' => g.melodicDictation,
+    'half_step_place' => g.halfStepPlace,
+    'degree_over_drone' => g.degreeOverDrone,
+    'staff_match' => g.staffMatch,
     'triad_quality' => g.chordQuality,
     'fretboard_natural_notes' => () => g.fretNote(naturalOnly: true),
     'fretboard_root_names' => () => g.fretNote(naturalOnly: false),
@@ -1350,6 +1374,128 @@ final class _Gen {
         doubleBarEnd: true,
         highlight: symbol,
       ),
+    );
+  }
+
+  // ---- Singing alternatives: half steps, drone degrees, staff match --------
+
+  SpelledNote keyParam() {
+    final k = p['key'];
+    return SpelledNote.parse(
+      k is List ? pick(k.cast<String>()) : (k as String? ?? 'C'),
+    );
+  }
+
+  DrillQuestion halfStepPlace() {
+    final key = keyParam();
+    final count = (p['notes'] as int?) ?? 4;
+    const steps = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17];
+    final start = rng.nextInt(8 - count + 1); // 0-based first degree
+    final tonic = 60 + key.pitchClass;
+    final midis = [for (var i = 0; i < count; i++) tonic + steps[start + i]];
+    final places = [
+      for (var i = 1; i < count; i++)
+        if (midis[i] - midis[i - 1] == 1) '$i-${i + 1}',
+    ];
+    final answer = places.isEmpty ? 'none' : places.first;
+    final options = [for (var i = 1; i < count; i++) '$i-${i + 1}', 'none'];
+    return heard(
+      kind: DrillPromptKind.halfStepPlace,
+      answer: answer,
+      options: options,
+      sound: DrillSound([
+        for (var i = 0; i < count; i++)
+          tone(i * 0.75, midis[i].toDouble(), seconds: 0.7, gain: 1),
+      ]),
+      values: {'v0': key.name},
+    );
+  }
+
+  /// A low tonic + fifth held under the clip (no cadence).
+  List<DrillNote> drone(SpelledNote key, double seconds) {
+    final t = 48 + key.pitchClass;
+    return [
+      DrillNote(at: 0, midi: t.toDouble(), seconds: seconds, gain: 0.35),
+      DrillNote(at: 0, midi: (t + 7).toDouble(), seconds: seconds, gain: 0.3),
+    ];
+  }
+
+  DrillQuestion degreeOverDrone() {
+    final key = keyParam();
+    final degrees = ints('degrees', [1, 2, 3, 4, 5, 6]);
+    final degree = pick(degrees);
+    const steps = [0, 2, 4, 5, 7, 9, 11];
+    final tonic = 60 + key.pitchClass;
+    DrillSound play(int d) => DrillSound([
+      ...drone(key, 3.2),
+      DrillNote(at: 1.0, midi: (tonic + steps[d - 1]).toDouble(), seconds: 1.8),
+    ]);
+    final options = [for (final d in degrees) '$d'];
+    return heard(
+      kind: DrillPromptKind.degreeOverDrone,
+      answer: '$degree',
+      options: options,
+      sound: play(degree),
+      optionSounds: [for (final d in degrees) play(d)],
+      values: {'v0': key.name},
+    );
+  }
+
+  DrillQuestion staffMatch() {
+    final key = keyParam();
+    final count = (p['notes'] as int?) ?? 8;
+    final degrees = ints('degrees', [1, 2, 3, 4, 5, 6, 7, 8]);
+    final (lo, hi) = range('C4-G5');
+    final midis = degreeMidis(key, lo, hi);
+    int midiOf(int d) => d == 8 ? midis[0] + 12 : midis[d - 1];
+    String pitchOf(int d) => d == 8
+        ? degreePitch(key, 1, midis[0] + 12)
+        : degreePitch(key, d, midis[d - 1]);
+    // Stepwise line; the other staff differs in one or two notes.
+    final line = <int>[pick(degrees)];
+    while (line.length < count) {
+      final near = degrees
+          .where((d) => (d - line.last).abs() <= 2 && d != line.last)
+          .toList();
+      line.add(near.isEmpty ? pick(degrees) : pick(near));
+    }
+    final other = List.of(line);
+    final changes = 1 + rng.nextInt(2);
+    final spots = [for (var i = 1; i < count; i++) i]..shuffle(rng);
+    for (final i in spots.take(changes)) {
+      final alt = degrees
+          .where((d) => d != line[i] && (d - line[i]).abs() <= 2)
+          .toList();
+      other[i] = alt.isEmpty
+          ? degrees.firstWhere((d) => d != line[i])
+          : pick(alt);
+    }
+    final heardFirst = rng.nextBool();
+    final staves = [
+      for (final l in heardFirst ? [line, other] : [other, line])
+        DrillStaff(
+          clef: 'treble',
+          notes: [for (final d in l) pitchOf(d)],
+          keySignature: keySignatures[key.name]!,
+          // Four quarters a bar, so a long line stays readable.
+          bars: count % 4 == 0 ? count ~/ 4 : 0,
+        ),
+    ];
+    DrillSound play(List<int> l) => DrillSound([
+      for (var i = 0; i < l.length; i++)
+        DrillNote(at: i * 0.6, midi: midiOf(l[i]).toDouble(), seconds: 0.55),
+    ]);
+    return DrillQuestion(
+      kind: DrillPromptKind.staffMatch,
+      values: {'v0': key.name},
+      options: const ['A', 'B'],
+      answer: heardFirst ? 0 : 1,
+      sound: play(line),
+      optionSounds: [
+        play(heardFirst ? line : other),
+        play(heardFirst ? other : line),
+      ],
+      staves: staves,
     );
   }
 }

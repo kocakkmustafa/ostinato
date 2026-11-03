@@ -8551,6 +8551,12 @@
     "b09059cbf09f42a9": "Garis birama",
     "35b0cfca503264c9": "Garis birama ganda (akhir)",
     "70275dd6ccec233c": "Tanda birama 4/4",
-    "aed8868722fcb964": "{v0} ketukan"
+    "aed8868722fcb964": "{v0} ketukan",
+    "a66cc24b60efb152": "Dengarkan empat nada bertetangga dari tangga nada {v0} mayor. Di mana setengah larasnya?",
+    "8d386a919816032b": "Dengarkan nada di atas dengung. Tingkat berapa dalam {v0} mayor?",
+    "6bab74a4b623bca8": "Dengarkan barisnya. Paranada mana yang cocok?",
+    "2a19ebf639f55a8d": "Antara nada {v0} dan {v1}",
+    "a51a313c05aafcef": "Tidak ada setengah laras",
+    "8104611cdd816f4d": "Paranada {v0}"
   }
 }
