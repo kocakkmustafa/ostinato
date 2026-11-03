@@ -8514,6 +8514,22 @@
     "fc4628afb5c89fdc": "Play",
     "ef0d77bf96a1ca30": "Play again",
     "4bb570d4e07196b4": "Play my answer",
-    "e3f1f1ebd860f241": "Play the expected"
+    "e3f1f1ebd860f241": "Play the expected",
+    "98f3ec917dc561b1": "Which note is this?",
+    "04a688f3ab68452e": "Which major key has this key signature?",
+    "db7c4c7c72b943ee": "Which interval is this?",
+    "2c93951467cb8cc7": "Listen to the cadence, then the note. Is the note the tonic of {v0} major?",
+    "7760e8447563fb33": "{v0} major",
+    "50887ac0fcbdfe1c": "2nd",
+    "a683f2184f3c9aac": "3rd",
+    "7874fd0c9398a4df": "4th",
+    "2d8dc862fa78bf7d": "5th",
+    "68e939425d34327e": "6th",
+    "25acb0c7bbe5e6ad": "7th",
+    "eff8b82277eff936": "8th (octave)",
+    "09e193a6c3f5034b": "Yes, the tonic",
+    "4e27dd67f82d2706": "No, another note",
+    "75852fd4c89e6618": "Treble clef",
+    "631ff30baaa57577": "Bass clef"
   }
 }

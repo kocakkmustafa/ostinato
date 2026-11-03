@@ -8514,6 +8514,22 @@
     "fc4628afb5c89fdc": "Écouter",
     "ef0d77bf96a1ca30": "Réécouter",
     "4bb570d4e07196b4": "Écouter ma réponse",
-    "e3f1f1ebd860f241": "Écouter la réponse attendue"
+    "e3f1f1ebd860f241": "Écouter la réponse attendue",
+    "98f3ec917dc561b1": "Quelle est cette note ?",
+    "04a688f3ab68452e": "Quelle tonalité majeure a cette armure ?",
+    "db7c4c7c72b943ee": "Quel intervalle est-ce ?",
+    "2c93951467cb8cc7": "Écoute la cadence, puis la note. La note est-elle la tonique de {v0} majeur ?",
+    "7760e8447563fb33": "{v0} majeur",
+    "50887ac0fcbdfe1c": "seconde",
+    "a683f2184f3c9aac": "tierce",
+    "7874fd0c9398a4df": "quarte",
+    "2d8dc862fa78bf7d": "quinte",
+    "68e939425d34327e": "sixte",
+    "25acb0c7bbe5e6ad": "septième",
+    "eff8b82277eff936": "octave",
+    "09e193a6c3f5034b": "Oui, la tonique",
+    "4e27dd67f82d2706": "Non, une autre note",
+    "75852fd4c89e6618": "Clé de sol",
+    "631ff30baaa57577": "Clé de fa"
   }
 }

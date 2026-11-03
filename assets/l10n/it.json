@@ -8514,6 +8514,22 @@
     "fc4628afb5c89fdc": "Ascolta",
     "ef0d77bf96a1ca30": "Riascolta",
     "4bb570d4e07196b4": "Ascolta la mia risposta",
-    "e3f1f1ebd860f241": "Ascolta quella attesa"
+    "e3f1f1ebd860f241": "Ascolta quella attesa",
+    "98f3ec917dc561b1": "Che nota è questa?",
+    "04a688f3ab68452e": "Quale tonalità maggiore ha questa armatura?",
+    "db7c4c7c72b943ee": "Che intervallo è questo?",
+    "2c93951467cb8cc7": "Ascolta la cadenza, poi la nota. La nota è la tonica di {v0} maggiore?",
+    "7760e8447563fb33": "{v0} maggiore",
+    "50887ac0fcbdfe1c": "seconda",
+    "a683f2184f3c9aac": "terza",
+    "7874fd0c9398a4df": "quarta",
+    "2d8dc862fa78bf7d": "quinta",
+    "68e939425d34327e": "sesta",
+    "25acb0c7bbe5e6ad": "settima",
+    "eff8b82277eff936": "ottava",
+    "09e193a6c3f5034b": "Sì, la tonica",
+    "4e27dd67f82d2706": "No, un’altra nota",
+    "75852fd4c89e6618": "Chiave di violino",
+    "631ff30baaa57577": "Chiave di basso"
   }
 }

@@ -56,6 +56,33 @@ enum DrillPromptKind {
 
   /// "Which chord quality was it?" (`major`, `minor`, `dominant7`)
   chordQuality,
+
+  /// F2.6c, read: "Which note is this?" on a staff.
+  staffNote,
+
+  /// "Which major key has this key signature?"
+  keySignature,
+
+  /// "Which interval number is this?" (2nd…8th) on a staff.
+  staffInterval,
+
+  /// Heard after a cadence: "Was the last note the tonic?"
+  tonicOrNot,
+}
+
+/// A staff to draw: clef, notes (natural pitches, left to right) and the
+/// key signature (+n sharps, −n flats).
+final class DrillStaff {
+  const DrillStaff({
+    required this.clef,
+    required this.notes,
+    this.keySignature = 0,
+  });
+
+  /// `treble` or `bass`.
+  final String clef;
+  final List<String> notes;
+  final int keySignature;
 }
 
 /// Prompts that are heard: the screen shows Play and "play my answer".
@@ -65,7 +92,8 @@ bool isHeard(DrillPromptKind k) => switch (k) {
   DrillPromptKind.pitchContour ||
   DrillPromptKind.sameDifferent ||
   DrillPromptKind.intervalName ||
-  DrillPromptKind.chordQuality => true,
+  DrillPromptKind.chordQuality ||
+  DrillPromptKind.tonicOrNot => true,
   _ => false,
 };
 
@@ -82,6 +110,7 @@ final class DrillQuestion {
     this.fretWindow,
     this.sound,
     this.optionSounds,
+    this.staff,
   });
 
   final DrillPromptKind kind;
@@ -109,7 +138,18 @@ final class DrillQuestion {
   /// (null where it cannot be heard, e.g. "same" in tempo comparison).
   final List<DrillSound?>? optionSounds;
 
+  /// A staff to draw (read kinds), or null.
+  final DrillStaff? staff;
+
   String get expected => options[answer];
+
+  DrillQuestion withStaff(DrillStaff staff) => DrillQuestion(
+    kind: kind,
+    values: values,
+    options: options,
+    answer: answer,
+    staff: staff,
+  );
 
   DrillQuestion withSound(DrillSound sound) => DrillQuestion(
     kind: kind,
@@ -119,6 +159,7 @@ final class DrillQuestion {
     marks: marks,
     fretWindow: fretWindow,
     sound: sound,
+    staff: staff,
   );
 }
 
@@ -143,14 +184,21 @@ bool supportsDrill(V1Drill drill) {
     case 'tempo_compare' || 'pitch_direction' || 'same_different':
       return true;
     case 'interval_name':
-      // Staff display (piano) and cadence/melody context come with (c).
-      return p['display'] == null &&
-          p['context'] == null &&
-          p['cadence'] != true &&
-          (p['intervals'] as List?)?.every(
-                (i) => intervalSemitones.containsKey(i),
-              ) ==
-              true;
+      final names = (p['intervals'] as List?)?.cast<Object?>() ?? const [];
+      if (p['display'] == 'staff') {
+        // Numbers only (2…8): read on the staff, no quality.
+        return names.isNotEmpty &&
+            names.every((i) => i is String && _staffNumbers.contains(i));
+      }
+      return names.isNotEmpty &&
+          names.every((i) => intervalSemitones.containsKey(i)) &&
+          (p['context'] == null || p['context'] == 'melody');
+    case 'note_name':
+      return true;
+    case 'key_signature':
+      return (p['keys'] as List?)?.every(keySignatures.containsKey) == true;
+    case 'scale_degree':
+      return p['question'] == 'tonic_or_not';
     case 'triad_quality':
       return p['inversions'] != true &&
           (p['qualities'] as List?)?.every(
@@ -182,13 +230,25 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
     'pitch_direction' ||
     'same_different' ||
     'interval_name' ||
-    'triad_quality' => drill.type,
+    'triad_quality' ||
+    'note_name' ||
+    'key_signature' ||
+    'scale_degree' => drill.type,
     _ => drill.params['set'] as String,
   }) {
     'tempo_compare' => g.tempoCompare,
     'pitch_direction' => g.pitchDirection,
     'same_different' => g.sameDifferent,
-    'interval_name' => g.intervalName,
+    'interval_name' => switch (drill.params['display']) {
+      'staff' => g.staffInterval,
+      _ =>
+        drill.params['cadence'] == true || drill.params['context'] != null
+            ? g.cadenceInterval
+            : g.intervalName,
+    },
+    'note_name' => g.staffNote,
+    'key_signature' => g.keySignature,
+    'scale_degree' => g.tonicOrNot,
     'triad_quality' => g.chordQuality,
     'fretboard_natural_notes' => () => g.fretNote(naturalOnly: true),
     'fretboard_root_names' => () => g.fretNote(naturalOnly: false),
@@ -217,6 +277,8 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
   }
   return out;
 }
+
+const Set<String> _staffNumbers = {'2', '3', '4', '5', '6', '7', '8'};
 
 bool _sameMarks(List<FretMark> a, List<FretMark> b) =>
     a.length == b.length &&
@@ -738,5 +800,218 @@ final class _Gen {
       if (m % 12 == pc) return m;
     }
     throw StateError('unreachable');
+  }
+
+  // ---- F2.6c read on the staff, heard after a cadence ----------------------
+
+  /// Natural pitches (no accidentals) from [lo] to [hi] MIDI, as `E4`.
+  List<String> naturals(int lo, int hi) => [
+    for (var m = lo; m <= hi; m++)
+      if (sharpName(m % 12).natural) '${sharpName(m % 12).name}${m ~/ 12 - 1}',
+  ];
+
+  /// Staff step from the bottom line (treble E4 = 0, bass G2 = 0).
+  static int staffStep(String pitch, String clef) =>
+      'CDEFGAB'.indexOf(pitch[0]) +
+      int.parse(pitch.substring(1)) * 7 -
+      (clef == 'treble' ? 30 : 18);
+
+  /// Clef for one question: a single clef, a choice, or `grand` (treble
+  /// from C4 up, bass below).
+  String clefFor(String pitch) {
+    final c = p['clef'];
+    if (c == 'grand') return noteMidi(pitch) >= 60 ? 'treble' : 'bass';
+    return c is String ? c : 'treble';
+  }
+
+  List<String> clefChoices() {
+    final c = p['clef'];
+    if (c is List) return c.cast<String>();
+    if (c == 'grand') return const ['grand'];
+    return [c is String ? c : 'treble'];
+  }
+
+  (int, int) clefRange(String clef) {
+    final r = p['range'];
+    if (r is Map) {
+      final pair = (r[clef] as List).cast<String>();
+      return (noteMidi(pair[0]), noteMidi(pair[1]));
+    }
+    return range(clef == 'bass' ? 'C2-E4' : 'A3-C6');
+  }
+
+  DrillQuestion staffNote() {
+    final clefChoice = pick(clefChoices());
+    final (lo, hi) = clefRange(clefChoice == 'grand' ? 'treble' : clefChoice);
+    final maxLedger = (p['ledgerLinesMax'] as int?) ?? 3;
+    final ledgerOnly = p['ledgerOnly'] == true;
+    final candidates = [
+      for (final n in naturals(lo, hi))
+        if (() {
+          final clef = clefChoice == 'grand' ? clefFor(n) : clefChoice;
+          final step = staffStep(n, clef);
+          final ledger = step < -1
+              ? (-step) ~/ 2
+              : step > 9
+              ? (step - 8) ~/ 2
+              : 0;
+          return ledger <= maxLedger && (!ledgerOnly || ledger > 0);
+        }())
+          n,
+    ];
+    if (candidates.isEmpty) {
+      throw const FormatException('No notes fit the clef, range and ledgers');
+    }
+    final pitch = pick(candidates);
+    final clef = clefChoice == 'grand' ? clefFor(pitch) : clefChoice;
+    return choice(
+      kind: DrillPromptKind.staffNote,
+      answer: pitch[0],
+      pool: _naturals,
+    ).withStaff(DrillStaff(clef: clef, notes: [pitch]));
+  }
+
+  DrillQuestion keySignature() {
+    final keys = strings('keys');
+    final clefs = p['clefs'] is List ? strings('clefs') : const ['treble'];
+    final key = pick(keys);
+    final pool = {...keys, ...keySignatures.keys};
+    return choice(
+      kind: DrillPromptKind.keySignature,
+      answer: key,
+      pool: pool,
+    ).withStaff(
+      DrillStaff(
+        clef: pick(clefs),
+        notes: const [],
+        keySignature: keySignatures[key]!,
+      ),
+    );
+  }
+
+  DrillQuestion staffInterval() {
+    final numbers = strings('intervals');
+    final clefChoice = pick(clefChoices());
+    final (lo, hi) = range(clefChoice == 'bass' ? 'C3-C4' : 'C4-G5');
+    final notes = naturals(lo, hi);
+    final dirs = switch (p['direction']) {
+      'both' => ['ascending', 'descending'],
+      final List<Object?> l => l.cast<String>(),
+      final String d => [d],
+      _ => ['ascending'],
+    };
+    final number = int.parse(pick(numbers));
+    final direction = pick(dirs);
+    final starts = [
+      for (var i = 0; i < notes.length; i++)
+        if (direction == 'ascending'
+            ? i + number - 1 < notes.length
+            : i - number + 1 >= 0)
+          i,
+    ];
+    final i = pick(starts);
+    final j = direction == 'ascending' ? i + number - 1 : i - number + 1;
+    final first = notes[i], second = notes[j];
+    final clef = clefChoice == 'grand'
+        ? clefFor(noteMidi(first) <= noteMidi(second) ? first : second)
+        : clefChoice;
+    return choice(
+      kind: DrillPromptKind.staffInterval,
+      answer: '$number',
+      pool: numbers,
+      options: numbers.length,
+    ).withStaff(DrillStaff(clef: clef, notes: [first, second]));
+  }
+
+  /// I–IV–V–I in [key], root-position block chords around C4.
+  List<DrillNote> cadence(SpelledNote key) {
+    final t = 48 + key.pitchClass;
+    const chords = [
+      [0, 4, 7, 12],
+      [5, 9, 12, 17],
+      [7, 11, 14, 19],
+      [0, 4, 7, 12],
+    ];
+    return [
+      for (var c = 0; c < chords.length; c++)
+        for (final s in chords[c])
+          DrillNote(
+            at: c * 0.7,
+            midi: (t + s).toDouble(),
+            seconds: c == chords.length - 1 ? 1.0 : 0.65,
+            gain: 0.55,
+          ),
+    ];
+  }
+
+  static const double _afterCadence = 3.4;
+
+  DrillQuestion tonicOrNot() {
+    final key = SpelledNote.parse(pick(strings('key')));
+    final degrees = ints('degrees', [1, 2, 3, 4, 5, 6, 7]);
+    final others = degrees.where((d) => d != 1).toList();
+    // About two in five questions are the tonic, so "no" is not a safe guess.
+    final degree = rng.nextInt(5) < 2 || others.isEmpty ? 1 : pick(others);
+    const steps = [0, 2, 4, 5, 7, 9, 11];
+    final midi = 60 + key.pitchClass + steps[degree - 1];
+    return heard(
+      kind: DrillPromptKind.tonicOrNot,
+      answer: degree == 1 ? 'tonic' : 'notTonic',
+      options: const ['tonic', 'notTonic'],
+      sound: DrillSound([
+        ...cadence(key),
+        DrillNote(at: _afterCadence, midi: midi.toDouble(), seconds: 1.0),
+      ]),
+      values: {'v0': key.name},
+    );
+  }
+
+  DrillQuestion cadenceInterval() {
+    final names = strings('intervals');
+    final key = SpelledNote.parse(
+      p['keys'] is List ? pick(strings('keys')) : 'C',
+    );
+    final dirs = switch (p['direction']) {
+      'both' => ['ascending', 'descending'],
+      final List<Object?> l => l.cast<String>(),
+      final String d => [d],
+      _ => ['ascending'],
+    };
+    final name = pick(names);
+    final direction = pick(dirs);
+    final semis = intervalSemitones[name]!;
+    // Melody context: both notes belong to the key.
+    final scalePcs = majorScale(key).map((n) => n.pitchClass).toSet();
+    final tonic = 60 + key.pitchClass;
+    final starts = [
+      for (var m = tonic - 5; m <= tonic + 7; m++)
+        if (scalePcs.contains(m % 12) &&
+            scalePcs.contains(
+              (direction == 'ascending' ? m + semis : m - semis) % 12,
+            ))
+          m,
+    ];
+    final start = pick(starts);
+    DrillSound play(int s) {
+      final other = direction == 'ascending' ? start + s : start - s;
+      return DrillSound([
+        ...cadence(key),
+        DrillNote(at: _afterCadence, midi: start.toDouble(), seconds: 0.8),
+        DrillNote(
+          at: _afterCadence + 0.9,
+          midi: other.toDouble(),
+          seconds: 0.8,
+        ),
+      ]);
+    }
+
+    return heard(
+      kind: DrillPromptKind.intervalName,
+      answer: name,
+      options: names,
+      sound: play(semis),
+      optionSounds: [for (final n in names) play(intervalSemitones[n]!)],
+      values: {'v0': direction},
+    );
   }
 }

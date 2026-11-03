@@ -144,6 +144,33 @@ abstract final class DrillCopy {
     'Beklenen cevabı çal',
   );
 
+  // ---- F2.6c read on the staff, tonic after a cadence ----
+  static const UiCopy staffNote = ('Which note is this?', 'Bu nota hangisi?');
+  static const UiCopy keySignature = (
+    'Which major key has this key signature?',
+    'Bu donanım hangi majör tonun?',
+  );
+  static const UiCopy staffInterval = (
+    'Which interval is this?',
+    'Bu aralık kaçlı?',
+  );
+  static const UiCopy tonicOrNot = (
+    'Listen to the cadence, then the note. Is the note the tonic of {v0} major?',
+    'Kadansı, sonra notayı dinle. Nota {v0} majörün durağı mı?',
+  );
+  static const UiCopy keyOption = ('{v0} major', '{v0} majör');
+  static const UiCopy number2 = ('2nd', '2’li');
+  static const UiCopy number3 = ('3rd', '3’lü');
+  static const UiCopy number4 = ('4th', '4’lü');
+  static const UiCopy number5 = ('5th', '5’li');
+  static const UiCopy number6 = ('6th', '6’lı');
+  static const UiCopy number7 = ('7th', '7’li');
+  static const UiCopy number8 = ('8th (octave)', '8’li (oktav)');
+  static const UiCopy tonicYes = ('Yes, the tonic', 'Evet, durak');
+  static const UiCopy tonicNo = ('No, another note', 'Hayır, başka bir nota');
+  static const UiCopy trebleClef = ('Treble clef', 'Sol anahtarı');
+  static const UiCopy bassClef = ('Bass clef', 'Fa anahtarı');
+
   static const List<UiCopy> all = [
     noteAtFret,
     fretOfNote,
@@ -207,5 +234,21 @@ abstract final class DrillCopy {
     playAgain,
     playMine,
     playExpected,
+    staffNote,
+    keySignature,
+    staffInterval,
+    tonicOrNot,
+    keyOption,
+    number2,
+    number3,
+    number4,
+    number5,
+    number6,
+    number7,
+    number8,
+    tonicYes,
+    tonicNo,
+    trebleClef,
+    bassClef,
   ];
 }

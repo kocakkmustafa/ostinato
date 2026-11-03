@@ -143,16 +143,6 @@ void main() {
     }
   });
 
-  test('cadence, melody context and staff display wait for slice (c)', () {
-    for (final path in [
-      'ear/ear-s2-m06-06',
-      'pno/pno-s2-m05-10',
-      'pno/pno-s2-m09-02',
-    ]) {
-      expect(supportsDrill(drillOf(path)), isFalse, reason: path);
-    }
-  });
-
   test('rendering is deterministic, bounded and as long as the sound', () {
     final q = generateDrill(drillOf('ear/ear-s2-m08-01'), seed: 5).first;
     final a = renderDrillSound(q.sound!, sampleRate: 44100);

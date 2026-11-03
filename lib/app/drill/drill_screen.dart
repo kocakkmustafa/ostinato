@@ -14,6 +14,7 @@ import '../practice/loop/reference_copy.dart';
 import '../practice/loop/reference_listen.dart';
 import 'drill_session.dart';
 import 'drill_sound.dart';
+import 'drill_staff.dart';
 
 /// F2.6 on-screen drill: one question at a time, immediate feedback, a
 /// second try for mixed-up questions, a result with the 80% first-try rule.
@@ -175,6 +176,24 @@ class DrillScreenState extends State<DrillScreen> {
         if (q.sound != null) ...[
           const SizedBox(height: 14),
           _sounds(context, q),
+        ],
+        if (q.staff case final staff?) ...[
+          const SizedBox(height: 14),
+          Semantics(
+            label: uiText(
+              context,
+              staff.clef == 'treble'
+                  ? DrillCopy.trebleClef
+                  : DrillCopy.bassClef,
+            ),
+            child: AspectRatio(
+              aspectRatio: 2.4,
+              child: CustomPaint(
+                key: const Key('drill-staff'),
+                painter: DrillStaffPainter(staff: staff, palette: palette),
+              ),
+            ),
+          ),
         ],
         if (q.fretWindow case final window?) ...[
           const SizedBox(height: 14),
@@ -340,6 +359,10 @@ class DrillScreenState extends State<DrillScreen> {
           ? DrillCopy.intervalDown
           : DrillCopy.intervalUp,
     DrillPromptKind.chordQuality => DrillCopy.chordQuality,
+    DrillPromptKind.staffNote => DrillCopy.staffNote,
+    DrillPromptKind.keySignature => DrillCopy.keySignature,
+    DrillPromptKind.staffInterval => DrillCopy.staffInterval,
+    DrillPromptKind.tonicOrNot => DrillCopy.tonicOrNot,
   };
 
   /// Note names in values get the local name in Turkish (`C# (Do#)`).
@@ -350,6 +373,7 @@ class DrillScreenState extends State<DrillScreen> {
         (DrillPromptKind.enharmonic, 'v0') ||
         (DrillPromptKind.scaleStep, 'v0') ||
         (DrillPromptKind.pentatonicNote, 'v0') ||
+        (DrillPromptKind.tonicOrNot, 'v0') ||
         (
           DrillPromptKind.romanNumeral,
           'v0',
@@ -384,6 +408,25 @@ class DrillScreenState extends State<DrillScreen> {
         DrillPromptKind.sameDifferent ||
         DrillPromptKind.intervalName ||
         DrillPromptKind.chordQuality => uiText(context, _heardWord(option)),
+        DrillPromptKind.staffNote => drillNoteName(context, option),
+        DrillPromptKind.keySignature => uiText(
+          context,
+          DrillCopy.keyOption,
+          values: {'v0': drillNoteName(context, option)},
+        ),
+        DrillPromptKind.staffInterval => uiText(context, switch (option) {
+          '2' => DrillCopy.number2,
+          '3' => DrillCopy.number3,
+          '4' => DrillCopy.number4,
+          '5' => DrillCopy.number5,
+          '6' => DrillCopy.number6,
+          '7' => DrillCopy.number7,
+          _ => DrillCopy.number8,
+        }),
+        DrillPromptKind.tonicOrNot => uiText(
+          context,
+          option == 'tonic' ? DrillCopy.tonicYes : DrillCopy.tonicNo,
+        ),
         DrillPromptKind.pitchContour =>
           option
               .split('-')

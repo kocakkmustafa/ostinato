@@ -310,6 +310,86 @@
       "id": "playExpected",
       "en": "Play the expected",
       "tr": "Beklenen cevabı çal"
+    },
+    {
+      "id": "staffNote",
+      "en": "Which note is this?",
+      "tr": "Bu nota hangisi?"
+    },
+    {
+      "id": "keySignature",
+      "en": "Which major key has this key signature?",
+      "tr": "Bu donanım hangi majör tonun?"
+    },
+    {
+      "id": "staffInterval",
+      "en": "Which interval is this?",
+      "tr": "Bu aralık kaçlı?"
+    },
+    {
+      "id": "tonicOrNot",
+      "en": "Listen to the cadence, then the note. Is the note the tonic of {v0} major?",
+      "tr": "Kadansı, sonra notayı dinle. Nota {v0} majörün durağı mı?"
+    },
+    {
+      "id": "keyOption",
+      "en": "{v0} major",
+      "tr": "{v0} majör"
+    },
+    {
+      "id": "number2",
+      "en": "2nd",
+      "tr": "2’li"
+    },
+    {
+      "id": "number3",
+      "en": "3rd",
+      "tr": "3’lü"
+    },
+    {
+      "id": "number4",
+      "en": "4th",
+      "tr": "4’lü"
+    },
+    {
+      "id": "number5",
+      "en": "5th",
+      "tr": "5’li"
+    },
+    {
+      "id": "number6",
+      "en": "6th",
+      "tr": "6’lı"
+    },
+    {
+      "id": "number7",
+      "en": "7th",
+      "tr": "7’li"
+    },
+    {
+      "id": "number8",
+      "en": "8th (octave)",
+      "tr": "8’li (oktav)"
+    },
+    {
+      "id": "tonicYes",
+      "en": "Yes, the tonic",
+      "tr": "Evet, durak"
+    },
+    {
+      "id": "tonicNo",
+      "en": "No, another note",
+      "tr": "Hayır, başka bir nota"
+    },
+    {
+      "id": "trebleClef",
+      "en": "Treble clef",
+      "tr": "Sol anahtarı"
+    },
+    {
+      "id": "bassClef",
+      "en": "Bass clef",
+      "tr": "Fa anahtarı"
     }
   ]
 }
