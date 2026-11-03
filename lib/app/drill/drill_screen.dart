@@ -163,6 +163,8 @@ class DrillScreenState extends State<DrillScreen> {
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
         side: border == null ? null : BorderSide(color: border, width: 2),
+        // Answered options stay readable: the result is shown on them.
+        disabledForegroundColor: palette.textBody,
       ),
       onPressed: answered ? null : () => setState(() => _s.choose(i)),
       child: Row(
@@ -170,7 +172,12 @@ class DrillScreenState extends State<DrillScreen> {
           Expanded(
             child: Text(
               _label(context, q, q.options[i]),
-              style: hankenText(size: 15),
+              style: hankenText(
+                size: 15,
+                color: answered && !isExpected && !isChosen
+                    ? palette.textMuted
+                    : palette.textBody,
+              ),
             ),
           ),
           if (answered && isExpected)
