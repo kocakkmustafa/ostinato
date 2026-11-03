@@ -85,6 +85,8 @@ final class DrillEntry {
     required this.palette,
     required this.bars,
     required this.bpm,
+    required this.answer,
+    this.ties = false,
   }) : kind = DrillEntryKind.rhythm,
        length = 0,
        given = const [],
@@ -102,10 +104,12 @@ final class DrillEntry {
     required this.midis,
     required this.pitches,
     required this.keySignature,
+    required this.answer,
     this.cadence = true,
   }) : kind = DrillEntryKind.melody,
        bars = 0,
-       bpm = 0;
+       bpm = 0,
+       ties = false;
 
   final DrillEntryKind kind;
 
@@ -124,12 +128,19 @@ final class DrillEntry {
   final int keySignature;
   final bool cadence;
 
+  /// Rhythm: the palette offers a tie (`~`) between two notes.
+  final bool ties;
+
+  /// The expected answer as written (labels, "play the expected").
+  final List<String> answer;
+
   /// The canonical answer key of [entered] (see [DrillQuestion.expected]).
   String keyOf(List<String> entered) =>
       kind == DrillEntryKind.rhythm ? rhythmKey(entered) : entered.join(' ');
 
   bool complete(List<String> entered) => kind == DrillEntryKind.rhythm
-      ? (rhythmLength(entered) - bars * 4).abs() < 1e-9
+      ? (rhythmLength(entered) - bars * 4).abs() < 1e-9 &&
+            (entered.isEmpty || entered.last != kTie)
       : entered.length == length;
 }
 
@@ -270,7 +281,6 @@ bool supportsDrill(V1Drill drill) {
     case 'rhythm_dictation':
       // Ties across beats need a tie entry; they come later.
       return (p['meter'] ?? '4/4') == '4/4' &&
-          p['ties'] != true &&
           (p['values'] as List?)?.every(rhythmBeats.containsKey) == true;
     case 'melodic_dictation':
       return (p['degrees'] as List?)?.every(
@@ -1118,7 +1128,8 @@ final class _Gen {
     final values = strings('values');
     final bars = (p['bars'] as int?) ?? 1;
     final bpm = (p['bpm'] as int?) ?? 70;
-    final rhythm = generateRhythm(rng, values, bars: bars);
+    final ties = p['ties'] == true;
+    final rhythm = generateRhythm(rng, values, bars: bars, ties: ties);
     final key = rhythmKey(rhythm);
     return DrillQuestion(
       kind: DrillPromptKind.rhythmDictation,
@@ -1126,7 +1137,13 @@ final class _Gen {
       options: [key],
       answer: 0,
       sound: rhythmSound(rhythm, bpm: bpm),
-      entry: DrillEntry.rhythm(palette: values, bars: bars, bpm: bpm),
+      entry: DrillEntry.rhythm(
+        palette: values,
+        bars: bars,
+        bpm: bpm,
+        ties: ties,
+        answer: rhythm,
+      ),
     );
   }
 
@@ -1177,6 +1194,7 @@ final class _Gen {
         pitches: pitches,
         keySignature: keySignatures[key.name]!,
         cadence: cadence,
+        answer: [for (final d in melody) '$d'],
       ),
     );
   }

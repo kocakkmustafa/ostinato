@@ -47,8 +47,44 @@ void main() {
     }
   });
 
-  test('ties wait for a tie entry', () {
-    expect(supportsDrill(drillOf('ear-s2-m07-04')), isFalse);
+  test('tied rhythms: one tie at mid-bar or a bar line, between notes', () {
+    final drill = drillOf('ear-s2-m07-04');
+    expect(supportsDrill(drill), isTrue);
+    final values = (drill.params['values']! as List).cast<String>();
+    for (var seed = 0; seed < 40; seed++) {
+      final r = generateRhythm(math.Random(seed), values, bars: 2, ties: true);
+      expect(r.where((v) => v == kTie), hasLength(1), reason: '$r');
+      final i = r.indexOf(kTie);
+      expect(isRest(r[i - 1]) || isRest(r[i + 1]), isFalse, reason: '$r');
+      final at = rhythmLength(r.sublist(0, i));
+      expect(at % 4 == 0 || at % 4 == 2, isTrue, reason: '$r');
+      expect(rhythmLength(r), 8);
+      // Re-entering it with the tie button is allowed step by step.
+      final entered = <String>[];
+      for (final v in r) {
+        expect(rhythmFits(entered, v, bars: 2), isTrue, reason: '$r $v');
+        entered.add(v);
+      }
+    }
+    // A tie never follows a rest, never precedes one, never ends the line.
+    expect(rhythmFits(['quarterRest'], kTie, bars: 1), isFalse);
+    expect(rhythmFits(['quarter', kTie], 'quarterRest', bars: 1), isFalse);
+    expect(rhythmFits(['whole'], kTie, bars: 1), isFalse);
+  });
+
+  test('a tie merges notes: quarter~quarter is heard as a half', () {
+    expect(
+      rhythmKey(['quarter', kTie, 'quarter', 'half']),
+      rhythmKey(['half', 'half']),
+    );
+    expect(
+      rhythmKey(['quarter', 'quarter', 'half']),
+      isNot(rhythmKey(['half', 'half'])),
+    );
+    final s = rhythmSound(['quarter', kTie, 'quarter', 'half'], bpm: 60);
+    final taps = s.notes.where((n) => n.timbre != DrillTimbre.click).toList();
+    expect(taps, hasLength(2));
+    expect(taps.first.seconds, closeTo(2 * 0.9, 1e-9));
   });
 
   test('two eighths equal an eighth pair; the sound has the count-in', () {
@@ -158,5 +194,36 @@ void main() {
     await tester.tap(find.byKey(const Key('drill-clear')));
     await tester.pump();
     expect(find.text('1 of 3 notes written'), findsOneWidget);
+  });
+
+  testWidgets('tie button: only after a note, and the line cannot end on it', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(900, 2400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      practiceHost(
+        DrillScreen(drill: drillOf('ear-s2-m07-04'), title: 'Ties', seed: 1),
+      ),
+    );
+    await tester.pumpAndSettle();
+    final tie = find.byKey(const Key('drill-add-tie'));
+    expect(tester.widget<OutlinedButton>(tie).onPressed, isNull);
+    await tester.tap(find.byKey(const Key('drill-add-quarter')));
+    await tester.pump();
+    expect(tester.widget<OutlinedButton>(tie).onPressed, isNotNull);
+    await tester.tap(tie);
+    await tester.pump();
+    expect(find.text('tie'), findsWidgets);
+    // After a tie, a rest cannot follow.
+    expect(
+      tester
+          .widget<OutlinedButton>(
+            find.byKey(const Key('drill-add-quarterRest')),
+          )
+          .onPressed,
+      isNull,
+    );
   });
 }

@@ -8544,6 +8544,7 @@
     "5b172a0bf0d2651f": "Clear",
     "a42907c0af3776de": "Check",
     "3ab238f1fd15837e": "{v0} of {v1} beats written",
-    "70292b8579bad88b": "{v0} of {v1} notes written"
+    "70292b8579bad88b": "{v0} of {v1} notes written",
+    "7ade8187f831661f": "tie"
   }
 }

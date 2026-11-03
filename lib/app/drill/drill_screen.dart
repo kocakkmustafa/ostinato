@@ -244,11 +244,7 @@ class DrillScreenState extends State<DrillScreen> {
                           ? writtenLabel(context, q.entry!, _s.written!)
                           : _label(context, q, q.options[_s.chosen!]),
                       'v1': q.entry != null
-                          ? writtenLabel(
-                              context,
-                              q.entry!,
-                              q.expected.split(' '),
-                            )
+                          ? writtenLabel(context, q.entry!, q.entry!.answer)
                           : _label(context, q, q.expected),
                     },
                   ),
@@ -615,6 +611,7 @@ UiCopy _valueCopy(String v) => switch (v) {
   'eighth' => DrillCopy.valueEighth,
   'quarterRest' => DrillCopy.valueQuarterRest,
   'halfRest' => DrillCopy.valueHalfRest,
+  kTie => DrillCopy.valueTie,
   _ => throw ArgumentError.value(v, 'value'),
 };
 
@@ -728,9 +725,9 @@ class _DictationInputState extends State<DictationInput> {
           spacing: 8,
           runSpacing: 8,
           children: [
-            for (final v in _e.palette)
+            for (final v in [..._e.palette, if (_e.ties) kTie])
               OutlinedButton(
-                key: Key('drill-add-$v'),
+                key: Key(v == kTie ? 'drill-add-tie' : 'drill-add-$v'),
                 onPressed: widget.enabled && _canAdd(v)
                     ? () => setState(() => _entered.add(v))
                     : null,
