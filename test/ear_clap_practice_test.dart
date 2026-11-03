@@ -1,0 +1,107 @@
+// Kulak kursu alkış dersleri: yazılı ritim satırı olan A3 dersleri ölçülü
+// pratik ekranında açılır; şarkı ve üretilen satırlı dersler açılmaz;
+// gitar akort kartı görünmez.
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/audio/audio_capture_channel.dart';
+import 'package:ostinato/app/audio/audio_input_controller.dart';
+import 'package:ostinato/app/curriculum/v1_lesson.dart';
+import 'package:ostinato/app/practice/loop/practice_judge.dart';
+import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
+import 'package:ostinato/app/practice/loop/practice_outcome.dart';
+import 'package:ostinato/app/practice/loop/practice_progress_store.dart';
+import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
+import 'package:ostinato/app/practice/loop/v1_practice_catalog.dart';
+import 'package:ostinato/app/tuner/session_tuning_gate.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import 'support/practice_host.dart';
+
+V1Lesson ear(String id) => V1Lesson.fromJson(
+  jsonDecode(File('content/v1/ear/$id.json').readAsStringSync()),
+);
+
+final class _Memory implements V1PracticeProgress {
+  @override
+  Future<Map<String, V1PracticeRecord>> load() async => {};
+  @override
+  Future<V1PracticeRecord> recordRun(
+    String id,
+    PracticeRunSummary s, {
+    DateTime? at,
+  }) async => V1PracticeRecord(lessonId: id).withRun(s, DateTime.utc(2026));
+}
+
+void main() {
+  test('written clapping lines in the ear course are practicable', () {
+    final practicable = <String>{};
+    for (final f in Directory('content/v1/ear').listSync()) {
+      if (f is! File || !f.path.endsWith('.json')) continue;
+      final l = V1Lesson.fromJson(jsonDecode(f.readAsStringSync()));
+      if (V1PracticeCatalog.isPracticable(l)) {
+        practicable.add(l.id);
+        final score = V1PracticeCatalog.scoreOf(l)!;
+        expect(score.isRhythmOnly, isTrue, reason: l.id);
+        expect(l.practice.engineSteps, ['A3'], reason: l.id);
+      }
+    }
+    expect(practicable, {
+      'ear-s1-m01-04',
+      'ear-s1-m01-05',
+      'ear-s1-m03-01',
+      'ear-s1-m03-02',
+      'ear-s1-m03-03',
+      'ear-s1-m03-04',
+      'ear-s1-m03-05', // 3/4
+    });
+    // Singing (A5) and lines generated per attempt stay out.
+    for (final id in [
+      'ear-s1-m02-04',
+      'ear-s2-m05-02',
+      'ear-s1-m03-06',
+      'ear-s2-m07-05',
+    ]) {
+      expect(V1PracticeCatalog.isPracticable(ear(id)), isFalse, reason: id);
+    }
+  });
+
+  test('3/4 clapping lines keep their meter', () {
+    expect(V1PracticeCatalog.scoreOf(ear('ear-s1-m03-05'))!.beatsPerBar, 3);
+  });
+
+  testWidgets('an ear clapping lesson opens without the guitar tuning card', (
+    tester,
+  ) async {
+    final audio = AudioInputController(
+      channel: FakeAudioCaptureChannel(),
+      requestMicrophonePermission: () async => PermissionStatus.granted,
+    );
+    PassCriteria? criteria;
+    await tester.pumpWidget(
+      practiceHost(
+        PracticeLoopScreen(
+          lesson: ear('ear-s1-m03-01'),
+          progress: _Memory(),
+          controllerFactory: (score, tempo, c) {
+            criteria = c;
+            return PracticeSessionController(
+              score: score,
+              tempo: tempo,
+              audio: audio,
+              criteria: c,
+              analyzer: (r) async => judgeNote(r),
+            );
+          },
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(criteria!.rhythm, isTrue);
+    expect(find.byType(SessionTuningGateCard), findsNothing);
+    expect(find.byKey(const Key('practice-start')), findsOneWidget);
+    await audio.dispose();
+  });
+}

@@ -229,7 +229,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     widget.onSessionFinished?.call(
       PracticeSessionFinished(
         lessonId: widget.lesson.id,
-        course: 'guitar',
+        course: widget.lesson.course == 'ear' ? 'ear' : 'guitar',
         activeDuration: _c.activeDuration,
         heardEvents: summary.correct + summary.different,
         summary: summary,
@@ -327,7 +327,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                     style: hankenText(size: 13.5, height: 1.45),
                   ),
                   const SizedBox(height: 10),
-                  if (!_ranOnce && _c.phase == PracticePhase.idle)
+                  // The tuning card is for guitar lines; clapping needs none.
+                  if (!_ranOnce &&
+                      _c.phase == PracticePhase.idle &&
+                      widget.lesson.course == 'gtr')
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       // Contract §5 rule 2: tuning at session start. The
