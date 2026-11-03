@@ -53,7 +53,10 @@ final class V1PracticeCatalog {
 
   static bool isPracticable(V1Lesson l) {
     final seq = l.practice.sequence;
-    if (l.course != 'gtr' || seq == null) return false;
+    if (seq == null) return false;
+    // Ear course: clapping lessons only (a rhythm-only line, A3 onsets).
+    if (l.course == 'ear') return _isClapLine(l);
+    if (l.course != 'gtr') return false;
     final m = l.practice.measurement;
     if (!m.contains('M') && !m.contains('M!')) return false;
     final steps = l.practice.engineSteps;
@@ -72,6 +75,17 @@ final class V1PracticeCatalog {
     return score.isRhythmOnly &&
         steps.contains('A3') &&
         steps.every(_rhythmSteps.contains);
+  }
+
+  /// An ear-course lesson the practice loop can run: microphone (`M`,
+  /// `M!`), only the A3 onset engine, and a rhythm-only written line.
+  static bool _isClapLine(V1Lesson l) {
+    final m = l.practice.measurement;
+    if (!m.contains('M') && !m.contains('M!')) return false;
+    final steps = l.practice.engineSteps;
+    if (steps.isEmpty || steps.any((s) => s != 'A3')) return false;
+    final score = scoreOf(l);
+    return score != null && score.isRhythmOnly;
   }
 
   static Future<V1PracticeCatalog> load({AssetBundle? bundle}) async {
