@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart'
-    show TargetPlatform, defaultTargetPlatform;
+import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter/services.dart';
 
 import 'native_audio_state.dart';
@@ -364,8 +363,7 @@ final class NativeAudioArbiterChannel
         (receipt.nativeReleaseRecorded && !exact.nativeReleaseRecorded) ||
         exact.snapshot.ownerToken != receipt.snapshot.ownerToken ||
         exact.snapshot.engineGeneration != receipt.snapshot.engineGeneration ||
-        exact.snapshot.contextGeneration !=
-            receipt.snapshot.contextGeneration ||
+        exact.snapshot.contextGeneration != receipt.snapshot.contextGeneration ||
         exact.snapshot.stateRevision < receipt.snapshot.stateRevision) {
       throw const NativeAudioProtocolException('Changed exact video receipt');
     }
@@ -399,13 +397,11 @@ final class NativeAudioArbiterChannel
         before.activeSide == PracticeAudioSide.video &&
         before.activeLeaseGeneration == permit.leaseGeneration &&
         before.videoPhase == 'unconfirmedQuiescent';
-    final noVideoHeld =
-        before.activeSide == null &&
+    final noVideoHeld = before.activeSide == null &&
         before.videoPhase == 'clear' &&
         before.videoReleased &&
         before.sessionReleased;
-    final settle =
-        exact.nativeReleaseRecorded &&
+    final settle = exact.nativeReleaseRecorded &&
         (settledVideoHeld || noVideoHeld) &&
         before.inputPhase == 'clear' &&
         before.outputPhase == 'clear' &&
@@ -414,8 +410,7 @@ final class NativeAudioArbiterChannel
         !before.nativeOperationInFlight &&
         before.requiresExplicitRetry &&
         !before.allClear;
-    final retryClose =
-        !exact.nativeReleaseRecorded &&
+    final retryClose = !exact.nativeReleaseRecorded &&
         before.activeSide == PracticeAudioSide.video &&
         before.activeLeaseGeneration == permit.leaseGeneration &&
         before.videoPhase == 'unconfirmedQuiescent' &&
@@ -445,9 +440,7 @@ final class NativeAudioArbiterChannel
         after.contextGeneration != before.contextGeneration ||
         after.stateRevision < before.stateRevision ||
         (status == 'closed' && after.stateRevision == before.stateRevision)) {
-      throw const NativeAudioProtocolException(
-        'Invalid exact recovery receipt',
-      );
+      throw const NativeAudioProtocolException('Invalid exact recovery receipt');
     }
     // Blocked or pending is dispatch state, never a native release receipt.
     return after;
@@ -485,20 +478,19 @@ final class NativeAudioArbiterChannel
           reboundMap['bridgeReady'] != true) {
         throw const NativeAudioProtocolException('Video bridge did not rebind');
       }
-      rebound = NativeVideoDisposeReceipt.fromWire(reboundMap['ack'], original);
+      rebound = NativeVideoDisposeReceipt.fromWire(
+        reboundMap['ack'],
+        original,
+      );
       if (!rebound.ackRecorded ||
           !rebound.nativeReleaseRecorded ||
           !rebound.leaseSettled ||
           !rebound.snapshot.allClear ||
           rebound.snapshot.ownerToken != receipt.snapshot.ownerToken ||
-          rebound.snapshot.engineGeneration !=
-              receipt.snapshot.engineGeneration ||
-          rebound.snapshot.contextGeneration !=
-              receipt.snapshot.contextGeneration ||
+          rebound.snapshot.engineGeneration != receipt.snapshot.engineGeneration ||
+          rebound.snapshot.contextGeneration != receipt.snapshot.contextGeneration ||
           rebound.snapshot.stateRevision < receipt.snapshot.stateRevision) {
-        throw const NativeAudioProtocolException(
-          'Changed video bridge receipt',
-        );
+        throw const NativeAudioProtocolException('Changed video bridge receipt');
       }
     } on Object {
       _refreshInProgress = false;
@@ -565,8 +557,7 @@ final class NativeAudioArbiterChannel
                 cached.requiresExplicitRetry ||
                 (cached.stateRevision < _revisionFloor &&
                     _quiescentRetryOwner == null))) ||
-        (cached == null &&
-            _quiescentRetryOwner == null &&
+        (cached == null && _quiescentRetryOwner == null &&
             _revisionFloor > retired.stateRevision)) {
       throw const NativeAudioProtocolException('Old owner is not quiescent');
     }
@@ -574,12 +565,14 @@ final class NativeAudioArbiterChannel
     final priorEpoch = _bindingEpoch;
     late final NativeQuiescentOwnerHandoff handoff;
     try {
-      final wire = await _channel
-          .invokeMethod<Object?>('rebindQuiescentOwner', {
-            'retiredOwnerToken': retired.ownerToken,
-            'retiredEngineGeneration': retired.engineGeneration,
-            'reason': 'userRetry',
-          });
+      final wire = await _channel.invokeMethod<Object?>(
+        'rebindQuiescentOwner',
+        {
+          'retiredOwnerToken': retired.ownerToken,
+          'retiredEngineGeneration': retired.engineGeneration,
+          'reason': 'userRetry',
+        },
+      );
       if (priorEpoch != _bindingEpoch) {
         throw const NativeAudioProtocolException('Superseded owner retry');
       }
