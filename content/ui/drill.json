@@ -480,6 +480,66 @@
       "id": "notesWritten",
       "en": "{v0} of {v1} notes written",
       "tr": "{v1} notanın {v0} tanesi yazıldı"
+    },
+    {
+      "id": "stepSize",
+      "en": "The two marked keys are neighbours in the {v0} major scale. Whole step or half step?",
+      "tr": "İşaretli iki tuş {v0} majör dizisinde komşu. Tam ses mi, yarım ses mi?"
+    },
+    {
+      "id": "staffPlace",
+      "en": "Where is the note: on which line or in which space? Count from the bottom.",
+      "tr": "Nota nerede: hangi çizgide ya da hangi aralıkta? Aşağıdan say."
+    },
+    {
+      "id": "staffSymbol",
+      "en": "What is the highlighted sign?",
+      "tr": "İşaretli simge nedir?"
+    },
+    {
+      "id": "beatsInBar",
+      "en": "How many beats are in each bar of 4/4?",
+      "tr": "4/4’lük her ölçüde kaç vuruş var?"
+    },
+    {
+      "id": "wholeStep",
+      "en": "Whole step",
+      "tr": "Tam ses"
+    },
+    {
+      "id": "halfStep",
+      "en": "Half step",
+      "tr": "Yarım ses"
+    },
+    {
+      "id": "lineN",
+      "en": "Line {v0}",
+      "tr": "{v0}. çizgi"
+    },
+    {
+      "id": "spaceN",
+      "en": "Space {v0}",
+      "tr": "{v0}. aralık"
+    },
+    {
+      "id": "barLine",
+      "en": "Bar line",
+      "tr": "Ölçü çizgisi"
+    },
+    {
+      "id": "doubleBarLine",
+      "en": "Double bar line (the end)",
+      "tr": "Çift ölçü çizgisi (bitiş)"
+    },
+    {
+      "id": "timeSignature44",
+      "en": "Time signature 4/4",
+      "tr": "4/4 ölçü sayısı"
+    },
+    {
+      "id": "beatsOption",
+      "en": "{v0} beats",
+      "tr": "{v0} vuruş"
     }
   ]
 }

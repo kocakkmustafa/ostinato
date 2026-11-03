@@ -75,6 +75,18 @@ enum DrillPromptKind {
 
   /// "Write the melody you heard" (scale degrees; the first is given).
   melodicDictation,
+
+  /// Remaining drills: two marked keys in a scale — whole or half step?
+  stepSize,
+
+  /// "On which line or in which space is the note?"
+  staffPlace,
+
+  /// "What is the highlighted sign?" (bar line, double bar, 4/4)
+  staffSymbol,
+
+  /// "How many beats are in each bar of 4/4?"
+  beatsInBar,
 }
 
 enum DrillEntryKind { rhythm, melody }
@@ -151,7 +163,21 @@ final class DrillStaff {
     required this.clef,
     required this.notes,
     this.keySignature = 0,
+    this.timeSignature,
+    this.bars = 0,
+    this.doubleBarEnd = false,
+    this.highlight,
   });
+
+  /// `4/4` drawn after the clef, or null.
+  final String? timeSignature;
+
+  /// Bars drawn with bar lines (each note one bar); 0 = notes only.
+  final int bars;
+  final bool doubleBarEnd;
+
+  /// `bar_line`, `double_bar_line` or `time_signature_4_4` to highlight.
+  final String? highlight;
 
   /// `treble` or `bass`.
   final String clef;
@@ -167,7 +193,8 @@ bool isHeard(DrillPromptKind k) => switch (k) {
   DrillPromptKind.sameDifferent ||
   DrillPromptKind.intervalName ||
   DrillPromptKind.chordQuality ||
-  DrillPromptKind.tonicOrNot => true,
+  DrillPromptKind.tonicOrNot ||
+  DrillPromptKind.stepSize => true,
   _ => false,
 };
 
@@ -186,6 +213,7 @@ final class DrillQuestion {
     this.optionSounds,
     this.staff,
     this.entry,
+    this.keys = const [],
   });
 
   final DrillPromptKind kind;
@@ -220,6 +248,9 @@ final class DrillQuestion {
   /// canonical key.
   final DrillEntry? entry;
 
+  /// Keyboard diagram: marked keys (MIDI); empty = no keyboard.
+  final List<int> keys;
+
   String get expected => options[answer];
 
   DrillQuestion withStaff(DrillStaff staff) => DrillQuestion(
@@ -228,6 +259,20 @@ final class DrillQuestion {
     options: options,
     answer: answer,
     staff: staff,
+  );
+
+  DrillQuestion withKeys(
+    List<int> keys,
+    DrillSound sound,
+    List<DrillSound?> optionSounds,
+  ) => DrillQuestion(
+    kind: kind,
+    values: values,
+    options: options,
+    answer: answer,
+    keys: keys,
+    sound: sound,
+    optionSounds: optionSounds,
   );
 
   DrillQuestion withSound(DrillSound sound) => DrillQuestion(
@@ -301,10 +346,16 @@ bool supportsDrill(V1Drill drill) {
     return drill.params['form'] == 'twelve_bar_blues';
   }
   final set = drill.params['set'];
+  if (drill.type == 'symbol_match' && set is List) {
+    return set.isNotEmpty &&
+        (set.every(staffPlaceNames.contains) ||
+            set.every(barSymbolNames.contains));
+  }
   if (set is! String || !(_supportedSets[drill.type]?.contains(set) ?? false)) {
     return false;
   }
   final diagram = drill.params['diagram'];
+  if (diagram == 'keyboard') return set == 'major_scale_steps';
   return diagram == null || diagram == 'fretboard';
 }
 
@@ -327,8 +378,16 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
     'scale_degree' ||
     'rhythm_dictation' ||
     'melodic_dictation' => drill.type,
+    _ when drill.params['set'] is List =>
+      (drill.params['set'] as List).every(staffPlaceNames.contains)
+          ? 'staff_places'
+          : 'bar_symbols',
+    _ when drill.params['diagram'] == 'keyboard' => 'keyboard_steps',
     _ => drill.params['set'] as String,
   }) {
+    'staff_places' => g.staffPlace,
+    'bar_symbols' => g.barSymbol,
+    'keyboard_steps' => g.stepSize,
     'tempo_compare' => g.tempoCompare,
     'pitch_direction' => g.pitchDirection,
     'same_different' => g.sameDifferent,
@@ -407,6 +466,17 @@ DrillSound melodyAnswerSound(DrillEntry e, List<String> degrees) => DrillSound([
       seconds: 0.7,
     ),
 ]);
+
+/// Staff places counted from the bottom (symbol_match sets).
+const Set<String> staffPlaceNames = {
+  'line_1', 'line_2', 'line_3', 'line_4', 'line_5', //
+  'space_1', 'space_2', 'space_3', 'space_4',
+};
+
+/// Bar-line and 4/4 symbols (symbol_match sets).
+const Set<String> barSymbolNames = {
+  'bar_line', 'double_bar_line', 'time_signature_4_4', 'beats_in_bar_4_4', //
+};
 
 const Set<String> _staffNumbers = {'2', '3', '4', '5', '6', '7', '8'};
 
@@ -1195,6 +1265,90 @@ final class _Gen {
         keySignature: keySignatures[key.name]!,
         cadence: cadence,
         answer: [for (final d in melody) '$d'],
+      ),
+    );
+  }
+
+  // ---- Remaining drills: keyboard steps, staff places, bar symbols --------
+
+  DrillQuestion stepSize() {
+    final key = SpelledNote.parse(pick(strings('keys')));
+    const steps = [0, 2, 4, 5, 7, 9, 11, 12];
+    final tonic = 60 + key.pitchClass;
+    final degree = rng.nextInt(7); // 0-based: degrees d and d+1
+    final a = tonic + steps[degree], b = tonic + steps[degree + 1];
+    final answer = b - a == 1 ? 'half' : 'whole';
+    DrillSound pair(int up) => DrillSound([
+      tone(0, a.toDouble(), seconds: 0.8, gain: 1),
+      tone(0.9, (a + up).toDouble(), seconds: 0.8, gain: 1),
+    ]);
+    return DrillQuestion(
+      kind: DrillPromptKind.stepSize,
+      values: {'v0': key.name},
+      options: const ['whole', 'half'],
+      answer: answer == 'whole' ? 0 : 1,
+    ).withKeys([a, b], pair(b - a), [pair(2), pair(1)]);
+  }
+
+  /// Treble staff steps 0…8 (E4 bottom line … F5 top line) as pitches.
+  static const _trebleSteps = [
+    'E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5', 'F5', //
+  ];
+
+  DrillQuestion staffPlace() {
+    final set = strings('set');
+    final place = pick(set);
+    final n = int.parse(place.split('_').last);
+    final step = place.startsWith('line') ? 2 * (n - 1) : 2 * n - 1;
+    // Distractors: neighbouring places first, so lines and spaces mix.
+    final near = set.toList()
+      ..sort((x, y) {
+        int st(String p) {
+          final k = int.parse(p.split('_').last);
+          return p.startsWith('line') ? 2 * (k - 1) : 2 * k - 1;
+        }
+
+        return (st(x) - step).abs().compareTo((st(y) - step).abs());
+      });
+    return choice(
+      kind: DrillPromptKind.staffPlace,
+      answer: place,
+      pool: near.take(5),
+    ).withStaff(DrillStaff(clef: 'treble', notes: [_trebleSteps[step]]));
+  }
+
+  DrillQuestion barSymbol() {
+    final set = strings('set');
+    final symbol = pick(set);
+    if (symbol == 'beats_in_bar_4_4') {
+      return choice(
+        kind: DrillPromptKind.beatsInBar,
+        answer: '4',
+        pool: const ['2', '3', '4', '6'],
+      ).withStaff(
+        const DrillStaff(
+          clef: 'treble',
+          notes: ['A4', 'C5'],
+          timeSignature: '4/4',
+          bars: 2,
+          doubleBarEnd: true,
+        ),
+      );
+    }
+    final names = set.where((s) => s != 'beats_in_bar_4_4').toList();
+    return choice(
+      kind: DrillPromptKind.staffSymbol,
+      answer: symbol,
+      pool: names,
+      options: names.length,
+    ).withStaff(
+      DrillStaff(
+        clef: 'treble',
+        notes: const ['A4', 'C5'],
+        timeSignature: '4/4',
+        bars: 2,
+        doubleBarEnd: true,
+        highlight: symbol,
       ),
     );
   }

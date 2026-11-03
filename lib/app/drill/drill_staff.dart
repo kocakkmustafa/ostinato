@@ -61,12 +61,80 @@ class DrillStaffPainter extends CustomPainter {
       x += 2.2 * h;
     }
 
+    final mark = Paint()..color = palette.primary.withValues(alpha: 0.18);
+    final markEdge = Paint()
+      ..color = palette.primary
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 0.35 * h;
+    void highlight(Rect r) {
+      canvas.drawRRect(RRect.fromRectAndRadius(r, Radius.circular(h)), mark);
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(r, Radius.circular(h)),
+        markEdge,
+      );
+    }
+
+    if (staff.timeSignature case final ts?) {
+      final [top, bottom] = ts.split('/');
+      final style = TextStyle(
+        fontFamily: 'Hanken Grotesk',
+        color: palette.ink,
+        fontSize: 4.2 * h,
+        fontWeight: FontWeight.w700,
+        height: 1,
+      );
+      final cx = x + 2.5 * h;
+      for (final (digit, step) in [(top, 6), (bottom, 2)]) {
+        final tp = TextPainter(
+          text: TextSpan(text: digit, style: style),
+          textDirection: TextDirection.ltr,
+        )..layout();
+        tp.paint(canvas, Offset(cx - tp.width / 2, y(step) - tp.height / 2));
+      }
+      if (staff.highlight == 'time_signature_4_4') {
+        highlight(Rect.fromLTRB(cx - 2.2 * h, y(9), cx + 2.2 * h, y(-1)));
+      }
+      x += 5 * h;
+    }
+
     final notes = staff.notes;
+    final barEnd = right - 1.5 * h;
+    if (staff.bars > 0) {
+      // Bar lines split the space after the clef evenly; the last one is a
+      // double bar when the piece ends.
+      final barW = (barEnd - x - 2 * h) / staff.bars;
+      for (var b = 1; b <= staff.bars; b++) {
+        final bx = x + 2 * h + barW * b;
+        final last = b == staff.bars;
+        if (last && staff.doubleBarEnd) {
+          canvas.drawLine(
+            Offset(bx - 1.1 * h, y(8)),
+            Offset(bx - 1.1 * h, y(0)),
+            ink,
+          );
+          canvas.drawLine(
+            Offset(bx, y(8)),
+            Offset(bx, y(0)),
+            Paint()
+              ..color = palette.ink
+              ..strokeWidth = 0.8 * h,
+          );
+          if (staff.highlight == 'double_bar_line') {
+            highlight(Rect.fromLTRB(bx - 2.2 * h, y(9), bx + 1.2 * h, y(-1)));
+          }
+        } else {
+          canvas.drawLine(Offset(bx, y(8)), Offset(bx, y(0)), ink);
+          if (staff.highlight == 'bar_line') {
+            highlight(Rect.fromLTRB(bx - 1.2 * h, y(9), bx + 1.2 * h, y(-1)));
+          }
+        }
+      }
+    }
     if (notes.isEmpty) return;
     final start = x + 4 * h;
     final gap = notes.length == 1
         ? 0.0
-        : (right - 4 * h - start) / notes.length;
+        : ((staff.bars > 0 ? barEnd : right - 4 * h) - start) / notes.length;
     for (var i = 0; i < notes.length; i++) {
       final nx = notes.length == 1
           ? (start + right) / 2

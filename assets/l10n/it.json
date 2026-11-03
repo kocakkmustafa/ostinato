@@ -8546,6 +8546,18 @@
     "3ab238f1fd15837e": "{v0} di {v1} movimenti scritti",
     "70292b8579bad88b": "{v0} di {v1} note scritte",
     "7ade8187f831661f": "legatura",
-    "1731eba7c70e32c1": "Il canto non viene misurato in questa versione; controlla tu il tuo canto. La versione sullo schermo qui sotto è misurata: superarla salva la lezione come fatta."
+    "1731eba7c70e32c1": "Il canto non viene misurato in questa versione; controlla tu il tuo canto. La versione sullo schermo qui sotto è misurata: superarla salva la lezione come fatta.",
+    "9209ee996a5ced44": "I due tasti segnati sono vicini nella scala di {v0} maggiore. Tono o semitono?",
+    "5eb274a65175ad90": "Dov’è la nota: su quale linea o in quale spazio? Conta dal basso.",
+    "f766495e2c8ab2f3": "Qual è il segno evidenziato?",
+    "a598227120f9ea79": "Quanti movimenti ci sono in ogni battuta di 4/4?",
+    "ce2123d29949f209": "Tono",
+    "1cc1a1ca7bb3bdd6": "Semitono",
+    "48ea79c9be275512": "Linea {v0}",
+    "74817c5b11a343f1": "Spazio {v0}",
+    "b09059cbf09f42a9": "Stanghetta",
+    "35b0cfca503264c9": "Doppia stanghetta (la fine)",
+    "70275dd6ccec233c": "Indicazione di tempo 4/4",
+    "aed8868722fcb964": "{v0} movimenti"
   }
 }

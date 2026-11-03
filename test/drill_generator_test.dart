@@ -145,12 +145,13 @@ void main() {
       expect(supportsDrill(drill), isFalse, reason: id);
       expect(() => generateDrill(drill, seed: 1), throwsUnsupportedError);
     }
+    // The keyboard opens only for scale steps (ear-s2-m05-01); other
+    // keyboard sets stay closed.
     expect(
       supportsDrill(
         const V1Drill('diagram_match', 4, {
-          'set': 'major_scale_steps',
+          'set': 'chord_shapes',
           'diagram': 'keyboard',
-          'keys': ['C'],
         }),
       ),
       isFalse,
