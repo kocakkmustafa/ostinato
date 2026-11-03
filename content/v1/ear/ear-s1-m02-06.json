@@ -38,6 +38,10 @@
       "tr": "Do'yu dinle, sonra kendi oktavında üç kez do-re-mi-re-do söyle. Söylemek istemiyorsan bunun yerine 'Yukarı, aşağı, aynı' alıştırmasını yap."
     },
     "sequence": "1-2-3-2-1 | 1-2-3-2-1 | 1-2-3-2-1",
+    "alternative": {
+      "drill": { "type": "pitch_direction", "count": 6, "params": { "range": ["C3", "C5"], "minSemitones": 2, "notes": 3, "allowSame": true } },
+      "source": "Görev metni: \"If you'd rather not sing, do the 'Up, down or same' drill instead.\" Ayarlar ear-s1-m02-03'ten."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",

@@ -43,6 +43,10 @@
     },
     "sequence": "1-2-3-4-5-4-3-2-1",
     "tempo": { "open": 60, "target": 60 },
+    "alternative": {
+      "drill": { "type": "melodic_dictation", "count": 4, "params": { "notes": 5, "degrees": [1, 2, 3, 4, 5], "key": ["C", "G", "F"], "range": "C4-D5", "firstNoteGiven": true, "cadenceEachQuestion": true } },
+      "source": "Görev metni: \"choose the on-screen version: you hear the line and mark the degree of each note.\" Dereceler 1–5 (görevdeki do–sol), ayarlar ear-s2-m08-04'ten."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",

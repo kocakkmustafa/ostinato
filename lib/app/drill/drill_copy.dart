@@ -74,6 +74,10 @@ abstract final class DrillCopy {
     'Start the drill ({v0} questions)',
     'Alıştırmayı başlat ({v0} soru)',
   );
+  static const UiCopy bannerSingingAlternative = (
+    'Singing is not measured in this build; check your singing yourself. The on-screen version below is measured: passing it saves the lesson as done.',
+    'Şarkı söyleme bu sürümde ölçülmüyor; şarkını kendin kontrol et. Aşağıdaki ekran sürümü ölçülür: geçince ders yapıldı olarak kaydedilir.',
+  );
   static const UiCopy statusPassed = (
     'DONE · DRILL PASSED',
     'YAPILDI · ALIŞTIRMA GEÇİLDİ',
@@ -235,6 +239,7 @@ abstract final class DrillCopy {
     section,
     start,
     statusPassed,
+    bannerSingingAlternative,
     bannerReady,
     tempoCompare,
     pitchDirection,

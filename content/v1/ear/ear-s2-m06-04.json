@@ -37,6 +37,10 @@
       "en": "Eight tasks: sing the starting note, then the P5 or P8 above it shown on screen. Sing only where it feels easy. Sing in your own octave. If you'd rather not sing, choose the on-screen version: you hear each pair and mark P5 or P8.",
       "tr": "Sekiz görev: başlangıç notasını söyle, sonra ekranda istenen T5 ya da T8 üstünü. Yalnız rahat olduğu yerde söyle. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: her çifti dinler, T5 mi T8 mi olduğunu işaretlersin."
     },
+    "alternative": {
+      "drill": { "type": "interval_name", "count": 8, "params": { "intervals": ["P5", "P8"], "direction": "ascending", "cadence": false, "range": "C3-C5" } },
+      "source": "Görev metni: \"you hear each pair and mark P5 or P8.\" 8 görev; ayarlar ear-s2-m06-02'den."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",
