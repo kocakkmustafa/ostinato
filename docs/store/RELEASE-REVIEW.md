@@ -139,6 +139,14 @@ Bu runtime iPhone-only (`UIDeviceFamily=[1]`); iPad destekleniyor gibi davranmay
    mikrofon/cihaz sınırları açık kalır; GuitarSet train overlap bağımsız
    doğruluk kanıtı sayılmaz.
 5. İlk üç kabul grubu ve açık final yayın kararı kapanmadan store upload yok.
+6. iOS/Android yerel (native) testleri yerelde koşulur; CI bunları koşmaz
+   (Actions dakikası sınırlı, Yönetim 2026-11-03). Aday commit'te:
+   iOS `cd ios && xcodebuild test -workspace Runner.xcworkspace -scheme Runner
+   -destination 'id=<Ostinato simülatörü>' -only-testing:RunnerTests`
+   (önce `flutter build ios --config-only --simulator`); Android
+   `cd android && ./gradlew :app:testDebugUnitTest` (önce
+   `flutter build apk --config-only`). Sonuç ve düşen test varsa nedeni
+   sürüm PR'ına yazılır.
 
 Kaynaklı kapanış yalnız gerçekten çalışan kontrollerle yapılır. Bu belge
 mağaza onayını garanti etmez.
