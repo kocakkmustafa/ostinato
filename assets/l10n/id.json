@@ -8523,6 +8523,20 @@
     "09e193a6c3f5034b": "Ya, tonika",
     "4e27dd67f82d2706": "Bukan, nada lain",
     "75852fd4c89e6618": "Kunci G",
-    "631ff30baaa57577": "Kunci F"
+    "631ff30baaa57577": "Kunci F",
+    "131111ff2ffc483b": "Dengarkan, lalu tulis ritme yang kamu dengar ({v0} birama 4/4).",
+    "467c847b44a6f144": "Dengarkan setelah kadens, lalu tulis {v0} nada dalam {v1} mayor. Nada pertama sudah diberikan.",
+    "1bc6e1dae021cb33": "Dengarkan setelah kadens, lalu tulis {v0} nada dalam {v1} mayor.",
+    "bc723b06a914d413": "not penuh",
+    "c635fe66abc99cd5": "not setengah",
+    "54a4ef3fb890b99b": "not seperempat bertitik",
+    "6dbbc0bd93861e2a": "dua not seperdelapan",
+    "ffab64a1e2985bbc": "tanda diam seperempat",
+    "d8b02b3629266762": "tanda diam setengah",
+    "e8fca36088675be2": "Urungkan",
+    "5b172a0bf0d2651f": "Hapus",
+    "a42907c0af3776de": "Periksa",
+    "3ab238f1fd15837e": "{v0} dari {v1} ketukan ditulis",
+    "70292b8579bad88b": "{v0} dari {v1} nada ditulis"
   }
 }

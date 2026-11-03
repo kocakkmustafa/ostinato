@@ -8530,6 +8530,20 @@
     "09e193a6c3f5034b": "Sí, la tónica",
     "4e27dd67f82d2706": "No, otra nota",
     "75852fd4c89e6618": "Clave de sol",
-    "631ff30baaa57577": "Clave de fa"
+    "631ff30baaa57577": "Clave de fa",
+    "131111ff2ffc483b": "Escucha y luego escribe el ritmo que oíste ({v0} compás/compases de 4/4).",
+    "467c847b44a6f144": "Escucha después de la cadencia y escribe las {v0} notas en {v1} mayor. La primera nota está dada.",
+    "1bc6e1dae021cb33": "Escucha después de la cadencia y escribe las {v0} notas en {v1} mayor.",
+    "bc723b06a914d413": "redonda",
+    "c635fe66abc99cd5": "blanca",
+    "54a4ef3fb890b99b": "negra con puntillo",
+    "6dbbc0bd93861e2a": "dos corcheas",
+    "ffab64a1e2985bbc": "silencio de negra",
+    "d8b02b3629266762": "silencio de blanca",
+    "e8fca36088675be2": "Deshacer",
+    "5b172a0bf0d2651f": "Borrar",
+    "a42907c0af3776de": "Comprobar",
+    "3ab238f1fd15837e": "{v0} de {v1} pulsos escritos",
+    "70292b8579bad88b": "{v0} de {v1} notas escritas"
   }
 }
