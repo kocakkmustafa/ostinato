@@ -8447,6 +8447,13 @@
     "e4308bfcfd9feec7": "Précision ≥ {v0}",
     "7bcc4b2762e4f409": "Entendues ≥ {v0}",
     "1f03be7a9155e8b5": "En place ≥ {v0} (à ±{v1} ms près)",
-    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} de la cible {v2}"
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} de la cible {v2}",
+    "8adb206042f4fe62": "Écouter à ♩={v0}",
+    "8ac8284fb4a3b243": "Arrêter l’écoute",
+    "adc1b21e94b10880": "Préparation du passage…",
+    "57b7409f720e912b": "Lecture à ♩={v0} : une mesure de décompte, puis le passage.",
+    "52074deaa564c086": "Joue les {v0} premières mesures sur {v1}.",
+    "94ee05fe0da186d9": "La référence ne peut pas être lue pour le moment. Arrête les autres sons et réessaie.",
+    "00906f94c93b9ffd": "L’app synthétise le passage sur ton téléphone ; ce n’est pas un enregistrement."
   }
 }

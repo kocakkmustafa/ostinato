@@ -8461,6 +8461,13 @@
     "e4308bfcfd9feec7": "Dokładność ≥ {v0}",
     "7bcc4b2762e4f409": "Usłyszane ≥ {v0}",
     "1f03be7a9155e8b5": "Na czas ≥ {v0} (w granicach ±{v1} ms)",
-    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} tempa docelowego {v2}"
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} tempa docelowego {v2}",
+    "8adb206042f4fe62": "Posłuchaj w tempie ♩={v0}",
+    "8ac8284fb4a3b243": "Zatrzymaj odsłuch",
+    "adc1b21e94b10880": "Przygotowywanie fragmentu…",
+    "57b7409f720e912b": "Odtwarzanie w tempie ♩={v0}: jeden takt odliczania, potem fragment.",
+    "52074deaa564c086": "Odtwarza pierwsze {v0} z {v1} taktów.",
+    "94ee05fe0da186d9": "Nie można teraz odtworzyć wzorca. Zatrzymaj inne dźwięki i spróbuj ponownie.",
+    "00906f94c93b9ffd": "Aplikacja syntezuje fragment na Twoim telefonie; to nie jest nagranie."
   }
 }

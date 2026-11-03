@@ -1,0 +1,40 @@
+{
+  "$about": "FK1 reference (listen first) copy (lib/app/practice/loop/reference_copy.dart). EN+TR source pairs; all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "listenAt",
+      "en": "Listen at ♩={v0}",
+      "tr": "♩={v0} temposunda dinle"
+    },
+    {
+      "id": "stop",
+      "en": "Stop listening",
+      "tr": "Dinlemeyi durdur"
+    },
+    {
+      "id": "preparing",
+      "en": "Preparing the line…",
+      "tr": "Satır hazırlanıyor…"
+    },
+    {
+      "id": "playing",
+      "en": "Playing at ♩={v0}: one count-in bar, then the line.",
+      "tr": "♩={v0} temposunda çalıyor: bir ölçü giriş, sonra satır."
+    },
+    {
+      "id": "truncated",
+      "en": "Plays the first {v0} of {v1} bars.",
+      "tr": "{v1} ölçünün ilk {v0} ölçüsü çalınır."
+    },
+    {
+      "id": "unavailable",
+      "en": "The reference can’t play right now. Stop other audio and try again.",
+      "tr": "Referans şu an çalamıyor. Diğer sesleri durdurup yeniden dene."
+    },
+    {
+      "id": "synthesized",
+      "en": "The app synthesizes the line on your phone; it is not a recording.",
+      "tr": "Satırı uygulama telefonunda sentezler; bu bir kayıt değildir."
+    }
+  ]
+}

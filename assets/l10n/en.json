@@ -8447,6 +8447,13 @@
     "e4308bfcfd9feec7": "Accuracy ≥ {v0}",
     "7bcc4b2762e4f409": "Heard ≥ {v0}",
     "1f03be7a9155e8b5": "On time ≥ {v0} (within ±{v1} ms)",
-    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} of the target {v2}"
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} of the target {v2}",
+    "8adb206042f4fe62": "Listen at ♩={v0}",
+    "8ac8284fb4a3b243": "Stop listening",
+    "adc1b21e94b10880": "Preparing the line…",
+    "57b7409f720e912b": "Playing at ♩={v0}: one count-in bar, then the line.",
+    "52074deaa564c086": "Plays the first {v0} of {v1} bars.",
+    "94ee05fe0da186d9": "The reference can’t play right now. Stop other audio and try again.",
+    "00906f94c93b9ffd": "The app synthesizes the line on your phone; it is not a recording."
   }
 }

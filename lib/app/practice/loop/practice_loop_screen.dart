@@ -31,6 +31,8 @@ import 'practice_tab_strip.dart';
 import 'practice_tempo_ladder.dart';
 import 'practice_transport.dart';
 import 'practice_visual_theme.dart';
+import 'reference_listen.dart';
+import 'reference_listen_bar.dart';
 import 'tempo_ladder_copy.dart';
 import 'v1_practice_catalog.dart';
 
@@ -114,6 +116,9 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   /// The run whose result screen was opened: each run's result opens once,
   /// so a setting changed after it (tempo, loop) never reopens it.
   PracticeRunSummary? _resultShownFor;
+
+  /// FK1 "Listen first"; never sounds while the microphone runs.
+  final ReferenceListenController _listen = ReferenceListenController();
 
   PracticeSessionController _createController() {
     final factory = widget.controllerFactory;
@@ -209,6 +214,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   @override
   void dispose() {
     _c.removeListener(_changed);
+    _listen.dispose();
     _ticker.dispose();
     unawaited(_c.stop());
     _c.dispose();
@@ -287,12 +293,16 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
 
   void _start() {
     _ranOnce = true;
-    unawaited(
-      startPracticeCapture(
+    unawaited(() async {
+      // Output and input never share the session: release the reference
+      // before the capture action reads the native all-clear.
+      if (_listen.busy) await _listen.stop();
+      if (!mounted) return;
+      await startPracticeCapture(
         context,
         (action) => _c.start(captureAction: action),
-      ),
-    );
+      );
+    }());
   }
 
   @override
@@ -856,6 +866,14 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
               style: hankenText(size: 13),
             ),
           ),
+        if (_score.hasPitches || _score.isRhythmOnly) ...[
+          ReferenceListenBar(
+            controller: _listen,
+            score: _score,
+            tempos: [_c.tempo.bpm],
+          ),
+          const SizedBox(height: 10),
+        ],
         FilledButton.icon(
           key: const Key('practice-start'),
           onPressed: _start,

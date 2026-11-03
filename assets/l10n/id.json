@@ -8440,6 +8440,13 @@
     "e4308bfcfd9feec7": "Akurasi ≥ {v0}",
     "7bcc4b2762e4f409": "Terdengar ≥ {v0}",
     "1f03be7a9155e8b5": "Tepat waktu ≥ {v0} (dalam ±{v1} ms)",
-    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} dari sasaran {v2}"
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} dari sasaran {v2}",
+    "8adb206042f4fe62": "Dengarkan pada ♩={v0}",
+    "8ac8284fb4a3b243": "Berhenti mendengarkan",
+    "adc1b21e94b10880": "Menyiapkan bagian…",
+    "57b7409f720e912b": "Diputar pada ♩={v0}: satu birama hitungan masuk, lalu bagiannya.",
+    "52074deaa564c086": "Memutar {v0} birama pertama dari {v1}.",
+    "94ee05fe0da186d9": "Referensi tidak dapat diputar sekarang. Hentikan audio lain lalu coba lagi.",
+    "00906f94c93b9ffd": "Aplikasi menyintesis bagian ini di ponselmu; ini bukan rekaman."
   }
 }

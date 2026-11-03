@@ -8447,6 +8447,13 @@
     "e4308bfcfd9feec7": "Precisión ≥ {v0}",
     "7bcc4b2762e4f409": "Escuchadas ≥ {v0}",
     "1f03be7a9155e8b5": "A tiempo ≥ {v0} (dentro de ±{v1} ms)",
-    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} del objetivo {v2}"
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} del objetivo {v2}",
+    "8adb206042f4fe62": "Escuchar a ♩={v0}",
+    "8ac8284fb4a3b243": "Dejar de escuchar",
+    "adc1b21e94b10880": "Preparando el pasaje…",
+    "57b7409f720e912b": "Sonando a ♩={v0}: un compás de entrada y luego el pasaje.",
+    "52074deaa564c086": "Suenan los primeros {v0} de {v1} compases.",
+    "94ee05fe0da186d9": "La referencia no puede sonar ahora. Detén el otro audio e inténtalo de nuevo.",
+    "00906f94c93b9ffd": "La app sintetiza el pasaje en tu teléfono; no es una grabación."
   }
 }

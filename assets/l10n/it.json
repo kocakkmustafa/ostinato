@@ -8447,6 +8447,13 @@
     "e4308bfcfd9feec7": "Precisione ≥ {v0}",
     "7bcc4b2762e4f409": "Sentite ≥ {v0}",
     "1f03be7a9155e8b5": "A tempo ≥ {v0} (entro ±{v1} ms)",
-    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} del target {v2}"
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} del target {v2}",
+    "8adb206042f4fe62": "Ascolta a ♩={v0}",
+    "8ac8284fb4a3b243": "Interrompi l’ascolto",
+    "adc1b21e94b10880": "Preparazione del passaggio…",
+    "57b7409f720e912b": "In riproduzione a ♩={v0}: una battuta di attacco, poi il passaggio.",
+    "52074deaa564c086": "Suona le prime {v0} battute su {v1}.",
+    "94ee05fe0da186d9": "Il riferimento non può essere riprodotto ora. Interrompi l’altro audio e riprova.",
+    "00906f94c93b9ffd": "L’app sintetizza il passaggio sul tuo telefono; non è una registrazione."
   }
 }
