@@ -87,6 +87,29 @@ class CurriculumLintTest(unittest.TestCase):
             with self.assertRaisesRegex(lint.LintError, pattern):
                 lint.check_content(lessons, content)
 
+    def test_clap_blocks_stay_inside_their_module(self) -> None:
+        lessons = lint.load()
+        content = self.tmp / 'content'
+        shutil.copytree(lint.CONTENT / 'ear', content / 'ear',
+                        ignore=shutil.ignore_patterns('ear-s2-*'))
+        target = content / 'ear' / 'ear-s1-m03-06.json'
+        body = target.read_text('utf-8')
+        self.assertIn('"clap"', body)
+        lint.check_content(lessons, content)
+        for old, new, pattern in [
+            ('"values": ["quarter"', '"values": ["dottedQuarter", "quarter"',
+             r"values \['dottedQuarter'\] do not occur in ear-s1-m03"),
+            ('"tempo": { "open": 60, "target": 70 }',
+             '"tempo": { "open": 70, "target": 70 }',
+             'tempo must open at ear-s1-m03 lowest'),
+            ('"derivedFrom": "Modülden türetildi, kaynak satırlar:',
+             '"derivedFrom": "Elle seçildi:', 'derivedFrom must start'),
+        ]:
+            target.write_text(body.replace(old, new, 1), 'utf-8')
+            with self.assertRaisesRegex(lint.LintError, pattern):
+                lint.check_content(lessons, content)
+        target.write_text(body, 'utf-8')
+
     def test_fallback_classes_follow_contract(self) -> None:
         lessons = {x.id: x for x in lint.load()}
         self.assertEqual(lessons['gtr-s1-m01-04'].gate, 'held')       # M!

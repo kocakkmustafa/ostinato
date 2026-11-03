@@ -238,6 +238,69 @@ def _banned_words(value: object) -> list[str]:
     return []
 
 
+# Rhythm tokens of written lines (lesson guide §3.1) → clap value names.
+_TOKEN_VALUE = {
+    'w': 'whole', 'h': 'half', 'q': 'quarter', 'ee': 'eighthPair',
+    'e': 'eighth', 'qr': 'quarterRest', 'hr': 'halfRest', 'q.': 'dottedQuarter',
+    'h.': 'dottedHalf',
+}
+CLAP_RECORD = 'Modülden türetildi, kaynak satırlar:'
+
+
+def _module_of(lid: str) -> str | None:
+    m = re.match(r'^((?:gtr|voc|pno|ear)-s[1-4]-m\d{2}[ab]?)-\d{2}$', lid)
+    return m.group(1) if m else None
+
+
+def check_clap_blocks(bodies: dict[str, dict]) -> list[str]:
+    """`practice.clap` (generated clapping lines) may only use values that
+    occur in the same module — its written lines or its rhythm-dictation
+    drills — must open at the module's lowest written tempo, and must record
+    the derivation (Yönetim 2026-11-03)."""
+    errors: list[str] = []
+    values: dict[str, set[str]] = {}
+    tempos: dict[str, list[int]] = {}
+    for lid, body in bodies.items():
+        module = _module_of(lid)
+        if module is None:
+            continue
+        practice = body.get('practice') or {}
+        seq = practice.get('sequence')
+        if isinstance(seq, str):
+            for token in re.split(r'[\s|]+', seq.split(':', 1)[-1]):
+                token = token.rstrip('~')
+                if token in _TOKEN_VALUE:
+                    values.setdefault(module, set()).add(_TOKEN_VALUE[token])
+        drill = practice.get('drill') or {}
+        if drill.get('type') == 'rhythm_dictation':
+            params = drill.get('params') or {}
+            values.setdefault(module, set()).update(params.get('values') or ())
+            if isinstance(params.get('bpm'), int):
+                tempos.setdefault(module, []).append(params['bpm'])
+        tempo = practice.get('tempo')
+        if isinstance(tempo, dict) and isinstance(tempo.get('open'), int):
+            tempos.setdefault(module, []).append(tempo['open'])
+    for lid, body in sorted(bodies.items()):
+        clap = (body.get('practice') or {}).get('clap')
+        if clap is None:
+            continue
+        module = _module_of(lid)
+        where = f'{lid}: clap'
+        if module is None:
+            errors.append(f'{where} needs a module lesson')
+            continue
+        extra = sorted(set(clap.get('values') or ()) - values.get(module, set()))
+        if extra:
+            errors.append(f'{where} values {extra} do not occur in {module}')
+        lowest = min(tempos.get(module, []), default=None)
+        opening = (clap.get('tempo') or {}).get('open')
+        if lowest is not None and opening != lowest:
+            errors.append(f'{where} tempo must open at {module} lowest ♩={lowest}')
+        if not str(clap.get('derivedFrom', '')).startswith(CLAP_RECORD):
+            errors.append(f'{where} derivedFrom must start "{CLAP_RECORD}"')
+    return errors
+
+
 def check_content(lessons: list[Lesson], root: Path = CONTENT) -> dict:
     """Tie every content/v1/<course>/<id>.json to its plan row.
 
@@ -248,6 +311,7 @@ def check_content(lessons: list[Lesson], root: Path = CONTENT) -> dict:
     plan = {x.id: x for x in lessons}
     errors: list[str] = []
     written = {c: 0 for c in COURSES}
+    bodies: dict[str, dict] = {}
     for path in sorted(root.glob('*/*.json')) if root.exists() else []:
         where = str(path.relative_to(root))
         try:
@@ -285,6 +349,8 @@ def check_content(lessons: list[Lesson], root: Path = CONTENT) -> dict:
         for word in _banned_words(body):
             errors.append(f'{where}: use "different note", not {word!r} (§5.4)')
         written[row.course] += 1
+        bodies[lid] = body
+    errors.extend(check_clap_blocks(bodies))
     if errors:
         raise LintError('\n'.join(errors))
     written['total'] = sum(written.values())

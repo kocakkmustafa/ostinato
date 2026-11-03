@@ -35,6 +35,14 @@
       "tr": "1. bölüm: bağlı dört iki ölçülük satırı klikle birlikte alkışla. ♩=60'tan başla, 5'er adımla ♩=70'e çık. Kulaklık, mikrofonun yalnız alkışını duymasına yardım eder. 2. bölüm: dört iki ölçülük ritmi dinle ve bağlarıyla birlikte yaz. Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
     },
     "tempo": { "open": 60, "target": 70 },
+    "clap": {
+      "values": ["half", "quarter", "eighthPair", "quarterRest"],
+      "bars": 2,
+      "lines": 4,
+      "tempo": { "open": 60, "target": 70 },
+      "ties": true,
+      "derivedFrom": "Modülden türetildi, kaynak satırlar: modülde yazılı ritim satırı yok; değerler ve bağ bu dersin ritim diktesinden (ear-s2-m07-04: half, quarter, eighthPair, quarterRest, ties). Dört iki ölçülük bağlı satır (görev metni), ♩=60'tan 70'e (modülün en düşük temposu ♩=60)."
+    },
     "pass": { "levelDefault": true, "minCorrect": 4 },
     "drill": {
       "type": "rhythm_dictation",

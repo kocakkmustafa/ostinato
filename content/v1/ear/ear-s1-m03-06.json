@@ -35,6 +35,13 @@
       "tr": "4 yeni iki ölçülük satırı oku ve her birini ♩=70'te klikle birlikte alkışla."
     },
     "tempo": { "open": 70, "target": 70 },
+    "clap": {
+      "values": ["quarter", "half", "whole", "eighthPair", "quarterRest", "halfRest"],
+      "bars": 2,
+      "lines": 4,
+      "tempo": { "open": 60, "target": 70 },
+      "derivedFrom": "Modülden türetildi, kaynak satırlar: ear-s1-m03-01 `4/4: q h q | w`; ear-s1-m03-02 `4/4: q ee q ee | ee ee q q`; ear-s1-m03-03 `4/4: q qr ee q | q q hr`; ear-s1-m03-04 `4/4: q q h | ee q q q | q ee ee q | w` (3/4 satırı ear-s1-m03-05 bu 4/4 dersin dışında). Dört yeni iki ölçülük satır art arda alkışlanır (hedef ♩=70, görev metni). Açılış temposu modülün en düşük yazılı temposu ♩=60 (ear-s1-m03-01)."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "held",
