@@ -8530,6 +8530,20 @@
     "09e193a6c3f5034b": "Sim, a tônica",
     "4e27dd67f82d2706": "Não, outra nota",
     "75852fd4c89e6618": "Clave de sol",
-    "631ff30baaa57577": "Clave de fá"
+    "631ff30baaa57577": "Clave de fá",
+    "131111ff2ffc483b": "Ouça e depois escreva o ritmo que ouviu ({v0} compasso(s) de 4/4).",
+    "467c847b44a6f144": "Ouça depois da cadência e escreva as {v0} notas em {v1} maior. A primeira nota é dada.",
+    "1bc6e1dae021cb33": "Ouça depois da cadência e escreva as {v0} notas em {v1} maior.",
+    "bc723b06a914d413": "semibreve",
+    "c635fe66abc99cd5": "mínima",
+    "54a4ef3fb890b99b": "semínima pontuada",
+    "6dbbc0bd93861e2a": "duas colcheias",
+    "ffab64a1e2985bbc": "pausa de semínima",
+    "d8b02b3629266762": "pausa de mínima",
+    "e8fca36088675be2": "Desfazer",
+    "5b172a0bf0d2651f": "Limpar",
+    "a42907c0af3776de": "Verificar",
+    "3ab238f1fd15837e": "{v0} de {v1} tempos escritos",
+    "70292b8579bad88b": "{v0} de {v1} notas escritas"
   }
 }

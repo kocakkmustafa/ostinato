@@ -8530,6 +8530,20 @@
     "09e193a6c3f5034b": "Ja, der Grundton",
     "4e27dd67f82d2706": "Nein, ein anderer Ton",
     "75852fd4c89e6618": "Violinschlüssel",
-    "631ff30baaa57577": "Bassschlüssel"
+    "631ff30baaa57577": "Bassschlüssel",
+    "131111ff2ffc483b": "Hör zu und schreib dann den Rhythmus auf ({v0} Takt(e), 4/4).",
+    "467c847b44a6f144": "Hör nach der Kadenz zu und schreib die {v0} Töne in {v1}-Dur auf. Der erste Ton ist vorgegeben.",
+    "1bc6e1dae021cb33": "Hör nach der Kadenz zu und schreib die {v0} Töne in {v1}-Dur auf.",
+    "bc723b06a914d413": "Ganze Note",
+    "c635fe66abc99cd5": "Halbe Note",
+    "54a4ef3fb890b99b": "punktierte Viertel",
+    "6dbbc0bd93861e2a": "zwei Achtel",
+    "ffab64a1e2985bbc": "Viertelpause",
+    "d8b02b3629266762": "halbe Pause",
+    "e8fca36088675be2": "Rückgängig",
+    "5b172a0bf0d2651f": "Löschen",
+    "a42907c0af3776de": "Prüfen",
+    "3ab238f1fd15837e": "{v0} von {v1} Schlägen geschrieben",
+    "70292b8579bad88b": "{v0} von {v1} Tönen geschrieben"
   }
 }

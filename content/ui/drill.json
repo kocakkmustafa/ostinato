@@ -390,6 +390,86 @@
       "id": "bassClef",
       "en": "Bass clef",
       "tr": "Fa anahtarı"
+    },
+    {
+      "id": "rhythmDictation",
+      "en": "Listen, then write the rhythm you heard ({v0} bar(s) of 4/4).",
+      "tr": "Dinle, sonra duyduğun ritmi yaz ({v0} ölçü, 4/4)."
+    },
+    {
+      "id": "melodicDictationGiven",
+      "en": "Listen after the cadence, then write the {v0} notes in {v1} major. The first note is given.",
+      "tr": "Kadanstan sonra dinle ve {v1} majördeki {v0} notayı yaz. İlk nota verildi."
+    },
+    {
+      "id": "melodicDictation",
+      "en": "Listen after the cadence, then write the {v0} notes in {v1} major.",
+      "tr": "Kadanstan sonra dinle ve {v1} majördeki {v0} notayı yaz."
+    },
+    {
+      "id": "valueWhole",
+      "en": "whole note",
+      "tr": "birlik"
+    },
+    {
+      "id": "valueHalf",
+      "en": "half note",
+      "tr": "ikilik"
+    },
+    {
+      "id": "valueDottedQuarter",
+      "en": "dotted quarter",
+      "tr": "noktalı dörtlük"
+    },
+    {
+      "id": "valueQuarter",
+      "en": "quarter note",
+      "tr": "dörtlük"
+    },
+    {
+      "id": "valueEighthPair",
+      "en": "two eighths",
+      "tr": "iki sekizlik"
+    },
+    {
+      "id": "valueEighth",
+      "en": "eighth note",
+      "tr": "sekizlik"
+    },
+    {
+      "id": "valueQuarterRest",
+      "en": "quarter rest",
+      "tr": "dörtlük sus"
+    },
+    {
+      "id": "valueHalfRest",
+      "en": "half rest",
+      "tr": "ikilik sus"
+    },
+    {
+      "id": "undo",
+      "en": "Undo",
+      "tr": "Geri al"
+    },
+    {
+      "id": "clear",
+      "en": "Clear",
+      "tr": "Temizle"
+    },
+    {
+      "id": "check",
+      "en": "Check",
+      "tr": "Kontrol et"
+    },
+    {
+      "id": "beatsWritten",
+      "en": "{v0} of {v1} beats written",
+      "tr": "{v1} vuruşun {v0} tanesi yazıldı"
+    },
+    {
+      "id": "notesWritten",
+      "en": "{v0} of {v1} notes written",
+      "tr": "{v1} notanın {v0} tanesi yazıldı"
     }
   ]
 }

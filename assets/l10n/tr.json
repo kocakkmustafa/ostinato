@@ -8530,6 +8530,20 @@
     "09e193a6c3f5034b": "Evet, durak",
     "4e27dd67f82d2706": "Hayır, başka bir nota",
     "75852fd4c89e6618": "Sol anahtarı",
-    "631ff30baaa57577": "Fa anahtarı"
+    "631ff30baaa57577": "Fa anahtarı",
+    "131111ff2ffc483b": "Dinle, sonra duyduğun ritmi yaz ({v0} ölçü, 4/4).",
+    "467c847b44a6f144": "Kadanstan sonra dinle ve {v1} majördeki {v0} notayı yaz. İlk nota verildi.",
+    "1bc6e1dae021cb33": "Kadanstan sonra dinle ve {v1} majördeki {v0} notayı yaz.",
+    "bc723b06a914d413": "birlik",
+    "c635fe66abc99cd5": "ikilik",
+    "54a4ef3fb890b99b": "noktalı dörtlük",
+    "6dbbc0bd93861e2a": "iki sekizlik",
+    "ffab64a1e2985bbc": "dörtlük sus",
+    "d8b02b3629266762": "ikilik sus",
+    "e8fca36088675be2": "Geri al",
+    "5b172a0bf0d2651f": "Temizle",
+    "a42907c0af3776de": "Kontrol et",
+    "3ab238f1fd15837e": "{v1} vuruşun {v0} tanesi yazıldı",
+    "70292b8579bad88b": "{v1} notanın {v0} tanesi yazıldı"
   }
 }

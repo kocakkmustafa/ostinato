@@ -8530,6 +8530,20 @@
     "09e193a6c3f5034b": "Sì, la tonica",
     "4e27dd67f82d2706": "No, un’altra nota",
     "75852fd4c89e6618": "Chiave di violino",
-    "631ff30baaa57577": "Chiave di basso"
+    "631ff30baaa57577": "Chiave di basso",
+    "131111ff2ffc483b": "Ascolta, poi scrivi il ritmo che hai sentito ({v0} battuta/e in 4/4).",
+    "467c847b44a6f144": "Ascolta dopo la cadenza, poi scrivi le {v0} note in {v1} maggiore. La prima nota è data.",
+    "1bc6e1dae021cb33": "Ascolta dopo la cadenza, poi scrivi le {v0} note in {v1} maggiore.",
+    "bc723b06a914d413": "semibreve",
+    "c635fe66abc99cd5": "minima",
+    "54a4ef3fb890b99b": "semiminima puntata",
+    "6dbbc0bd93861e2a": "due crome",
+    "ffab64a1e2985bbc": "pausa di semiminima",
+    "d8b02b3629266762": "pausa di minima",
+    "e8fca36088675be2": "Annulla",
+    "5b172a0bf0d2651f": "Cancella",
+    "a42907c0af3776de": "Verifica",
+    "3ab238f1fd15837e": "{v0} di {v1} movimenti scritti",
+    "70292b8579bad88b": "{v0} di {v1} note scritte"
   }
 }

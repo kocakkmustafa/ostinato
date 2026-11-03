@@ -9,6 +9,8 @@ import '../curriculum/v1_lesson.dart';
 import '../design/ostinato_theme.dart';
 import '../ui_copy.dart';
 import 'drill_copy.dart';
+import 'drill_dictation.dart';
+import 'drill_theory.dart';
 import 'drill_generator.dart';
 import '../practice/loop/reference_copy.dart';
 import '../practice/loop/reference_listen.dart';
@@ -76,10 +78,15 @@ class DrillScreenState extends State<DrillScreen> {
     builder: (context, _) {
       final sounds = q.optionSounds;
       final differs = _s.answered && !_s.matchedCurrent;
-      final DrillSound? mine = sounds != null && differs
-          ? sounds[_s.chosen!]
-          : null;
-      final DrillSound? expected = sounds == null ? null : sounds[q.answer];
+      final entry = q.entry, written = _s.written;
+      final DrillSound? mine = !differs
+          ? null
+          : entry != null && written != null
+          ? entry.kind == DrillEntryKind.rhythm
+                ? rhythmSound(written, bpm: entry.bpm)
+                : melodyAnswerSound(entry, written)
+          : sounds?[_s.chosen!];
+      final DrillSound? expected = entry != null ? q.sound : sounds?[q.answer];
       Widget button(String tag, UiCopy copy, DrillSound sound) =>
           OutlinedButton.icon(
             key: Key('drill-play-$tag'),
@@ -211,11 +218,19 @@ class DrillScreenState extends State<DrillScreen> {
           ),
         ],
         const SizedBox(height: 16),
-        for (var i = 0; i < q.options.length; i++)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: _option(context, q, i),
-          ),
+        if (q.entry case final entry?)
+          DictationInput(
+            key: ValueKey(identityHashCode(q)),
+            entry: entry,
+            enabled: !_s.answered,
+            onSubmit: (entered) => setState(() => _s.submit(entered)),
+          )
+        else
+          for (var i = 0; i < q.options.length; i++)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: _option(context, q, i),
+            ),
         if (_s.answered) ...[
           const SizedBox(height: 4),
           Text(
@@ -225,8 +240,16 @@ class DrillScreenState extends State<DrillScreen> {
                     context,
                     DrillCopy.differs,
                     values: {
-                      'v0': _label(context, q, q.options[_s.chosen!]),
-                      'v1': _label(context, q, q.expected),
+                      'v0': q.entry != null
+                          ? writtenLabel(context, q.entry!, _s.written!)
+                          : _label(context, q, q.options[_s.chosen!]),
+                      'v1': q.entry != null
+                          ? writtenLabel(
+                              context,
+                              q.entry!,
+                              q.expected.split(' '),
+                            )
+                          : _label(context, q, q.expected),
                     },
                   ),
             key: const Key('drill-feedback'),
@@ -363,6 +386,11 @@ class DrillScreenState extends State<DrillScreen> {
     DrillPromptKind.keySignature => DrillCopy.keySignature,
     DrillPromptKind.staffInterval => DrillCopy.staffInterval,
     DrillPromptKind.tonicOrNot => DrillCopy.tonicOrNot,
+    DrillPromptKind.rhythmDictation => DrillCopy.rhythmDictation,
+    DrillPromptKind.melodicDictation =>
+      (_s.current.entry?.given.isNotEmpty ?? false)
+          ? DrillCopy.melodicDictationGiven
+          : DrillCopy.melodicDictation,
   };
 
   /// Note names in values get the local name in Turkish (`C# (Do#)`).
@@ -374,6 +402,7 @@ class DrillScreenState extends State<DrillScreen> {
         (DrillPromptKind.scaleStep, 'v0') ||
         (DrillPromptKind.pentatonicNote, 'v0') ||
         (DrillPromptKind.tonicOrNot, 'v0') ||
+        (DrillPromptKind.melodicDictation, 'v1') ||
         (
           DrillPromptKind.romanNumeral,
           'v0',
@@ -423,6 +452,8 @@ class DrillScreenState extends State<DrillScreen> {
           '7' => DrillCopy.number7,
           _ => DrillCopy.number8,
         }),
+        DrillPromptKind.rhythmDictation ||
+        DrillPromptKind.melodicDictation => option,
         DrillPromptKind.tonicOrNot => uiText(
           context,
           option == 'tonic' ? DrillCopy.tonicYes : DrillCopy.tonicNo,
@@ -573,4 +604,176 @@ class FretboardPainter extends CustomPainter {
       [
         for (var i = 0; i < marks.length; i++) old.marks[i] != marks[i],
       ].any((x) => x);
+}
+
+UiCopy _valueCopy(String v) => switch (v) {
+  'whole' => DrillCopy.valueWhole,
+  'half' => DrillCopy.valueHalf,
+  'dottedQuarter' => DrillCopy.valueDottedQuarter,
+  'quarter' => DrillCopy.valueQuarter,
+  'eighthPair' => DrillCopy.valueEighthPair,
+  'eighth' => DrillCopy.valueEighth,
+  'quarterRest' => DrillCopy.valueQuarterRest,
+  'halfRest' => DrillCopy.valueHalfRest,
+  _ => throw ArgumentError.value(v, 'value'),
+};
+
+/// A degree's button label: `3 · E (Mi)`.
+String _degreeLabel(BuildContext context, DrillEntry e, String degree) {
+  final note = majorScale(e.key!)[int.parse(degree) - 1].name;
+  return '$degree · ${drillNoteName(context, note)}';
+}
+
+/// What a written answer reads as, for "your answer · expected".
+String writtenLabel(BuildContext context, DrillEntry e, List<String> written) =>
+    e.kind == DrillEntryKind.rhythm
+    ? written.map((v) => uiText(context, _valueCopy(v))).join(' · ')
+    : written
+          .map(
+            (d) => drillNoteName(
+              context,
+              majorScale(e.key!)[int.parse(d) - 1].name,
+            ),
+          )
+          .join(' – ');
+
+/// F2.6d entry: rhythm values or melody degrees, with Undo / Clear / Check.
+/// The given first note of a melody cannot be removed.
+class DictationInput extends StatefulWidget {
+  const DictationInput({
+    super.key,
+    required this.entry,
+    required this.enabled,
+    required this.onSubmit,
+  });
+
+  final DrillEntry entry;
+  final bool enabled;
+  final ValueChanged<List<String>> onSubmit;
+
+  @override
+  State<DictationInput> createState() => _DictationInputState();
+}
+
+class _DictationInputState extends State<DictationInput> {
+  late final List<String> _entered = List.of(widget.entry.given);
+
+  DrillEntry get _e => widget.entry;
+  bool get _rhythm => _e.kind == DrillEntryKind.rhythm;
+
+  bool _canAdd(String v) => _rhythm
+      ? rhythmFits(_entered, v, bars: _e.bars)
+      : _entered.length < _e.length;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = OstinatoPalette.of(context);
+    final muted = hankenText(size: 13, color: palette.textMuted);
+    final complete = _e.complete(_entered);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (_rhythm)
+          Wrap(
+            key: const Key('drill-written'),
+            spacing: 6,
+            runSpacing: 6,
+            children: [
+              for (final v in _entered)
+                Chip(label: Text(uiText(context, _valueCopy(v)))),
+            ],
+          )
+        else
+          AspectRatio(
+            aspectRatio: 2.4,
+            child: CustomPaint(
+              key: const Key('drill-written'),
+              painter: DrillStaffPainter(
+                staff: DrillStaff(
+                  clef: 'treble',
+                  notes: [
+                    for (final d in _entered) _e.pitches[int.parse(d) - 1],
+                  ],
+                  keySignature: _e.keySignature,
+                ),
+                palette: palette,
+              ),
+            ),
+          ),
+        const SizedBox(height: 6),
+        Text(
+          _rhythm
+              ? uiText(
+                  context,
+                  DrillCopy.beatsWritten,
+                  values: {
+                    'v0': appDecimal(
+                      context,
+                      rhythmLength(_entered),
+                      rhythmLength(_entered) % 1 == 0 ? 0 : 1,
+                    ),
+                    'v1': _e.bars * 4,
+                  },
+                )
+              : uiText(
+                  context,
+                  DrillCopy.notesWritten,
+                  values: {'v0': _entered.length, 'v1': _e.length},
+                ),
+          key: const Key('drill-written-count'),
+          style: muted,
+        ),
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final v in _e.palette)
+              OutlinedButton(
+                key: Key('drill-add-$v'),
+                onPressed: widget.enabled && _canAdd(v)
+                    ? () => setState(() => _entered.add(v))
+                    : null,
+                child: Text(
+                  _rhythm
+                      ? uiText(context, _valueCopy(v))
+                      : _degreeLabel(context, _e, v),
+                ),
+              ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            TextButton(
+              key: const Key('drill-undo'),
+              onPressed: widget.enabled && _entered.length > _e.given.length
+                  ? () => setState(_entered.removeLast)
+                  : null,
+              child: Text(uiText(context, DrillCopy.undo)),
+            ),
+            TextButton(
+              key: const Key('drill-clear'),
+              onPressed: widget.enabled && _entered.length > _e.given.length
+                  ? () => setState(() {
+                      _entered
+                        ..clear()
+                        ..addAll(_e.given);
+                    })
+                  : null,
+              child: Text(uiText(context, DrillCopy.clear)),
+            ),
+            const Spacer(),
+            FilledButton(
+              key: const Key('drill-check'),
+              onPressed: widget.enabled && complete
+                  ? () => widget.onSubmit(List.of(_entered))
+                  : null,
+              child: Text(uiText(context, DrillCopy.check)),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 }
