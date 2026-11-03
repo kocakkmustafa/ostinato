@@ -41,6 +41,282 @@
       "en": "1 Scale and solfège: sing the major scale up and down at ♩=70 with the click, then 6 degrees from the tonic over a drone. 2 Intervals: name 12 intervals, then sing 6. 3 Rhythm dictation: write 2 two-bar rhythms, then clap one two-bar rhythm back from memory at ♩=70. 4 Melody and chords: 6 major-or-minor questions, 1 three-note dictation and one new four-bar sight-singing line at ♩=60. Sing in your own octave. If you'd rather not sing, choose the on-screen version: the singing tasks then come as screen questions.",
       "tr": "1 Gam ve solfej: majör gamı ♩=70'te klikle çık ve in, sonra dronun üstünde tonikten 6 derece söyle. 2 Aralık: 12 aralığı adlandır, sonra 6 aralık söyle. 3 Ritim diktesi: iki ölçülük 2 ritim yaz, sonra iki ölçülük bir ritmi ♩=70'te hafızadan geri alkışla. 4 Ezgi ve akor: 6 majör-minör sorusu, 1 üç notalık dikte ve ♩=60'ta yeni bir dört ölçülük deşifre satırı. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: söyleme görevleri o zaman ekranda soru olarak gelir."
     },
+    "sections": [
+      {
+        "title": {
+          "en": "Scale and solfège: sing the scale and 6 degrees",
+          "tr": "Dizi ve solfej: diziyi ve 6 dereceyi söyle"
+        },
+        "kind": "selfCheck",
+        "required": false,
+        "items": [
+          {
+            "en": "I sang the major scale up and down at ♩=70 with the click.",
+            "tr": "Majör diziyi klikle ♩=70'te çıkıp indim."
+          },
+          {
+            "en": "I sang 6 degrees from the tonic over the drone.",
+            "tr": "Drone üstünde duraktan 6 dereceyi söyledim."
+          }
+        ],
+        "source": "Görev metni, bölüm 1: \"sing the major scale … then 6 degrees from the tonic over a drone\" (şarkı ölçülmez)."
+      },
+      {
+        "title": {
+          "en": "Scale: where are the half steps? (on-screen version)",
+          "tr": "Dizi: yarım sesler nerede? (ekran sürümü)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "half_step_place",
+          "count": 4,
+          "params": {
+            "key": [
+              "C",
+              "G",
+              "F",
+              "D"
+            ],
+            "notes": 4
+          }
+        },
+        "source": "Görev metni: \"If you'd rather not sing … the singing tasks then come as screen questions\"; ear-s2-m05-03'ün ekran sürümü."
+      },
+      {
+        "title": {
+          "en": "Degrees over the drone (on-screen version)",
+          "tr": "Drone üstünde dereceler (ekran sürümü)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "degree_over_drone",
+          "count": 6,
+          "params": {
+            "key": [
+              "C",
+              "G",
+              "F",
+              "D"
+            ],
+            "degrees": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "source": "Görev metni, bölüm 1'in ekran sürümü (6 derece); ear-s2-m05-06 ile aynı."
+      },
+      {
+        "title": {
+          "en": "Intervals: name 12",
+          "tr": "Aralıklar: 12 aralığı adlandır"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "interval_name",
+          "count": 12,
+          "params": {
+            "intervals": [
+              "M2",
+              "M3",
+              "P5",
+              "P8"
+            ],
+            "direction": "both",
+            "cadence": false,
+            "range": "C3-C5"
+          }
+        },
+        "source": "Görev metni, bölüm 2: \"name 12 intervals\"."
+      },
+      {
+        "title": {
+          "en": "Intervals: sing 6",
+          "tr": "Aralıklar: 6 aralık söyle"
+        },
+        "kind": "selfCheck",
+        "required": false,
+        "items": [
+          {
+            "en": "I sang 6 intervals above a starting note.",
+            "tr": "Bir başlangıç notasının üstüne 6 aralık söyledim."
+          }
+        ],
+        "source": "Görev metni, bölüm 2: \"then sing 6\" (şarkı ölçülmez)."
+      },
+      {
+        "title": {
+          "en": "Intervals: 6 more pairs (on-screen version)",
+          "tr": "Aralıklar: 6 çift daha (ekran sürümü)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "interval_name",
+          "count": 6,
+          "params": {
+            "intervals": [
+              "M2",
+              "M3",
+              "P5",
+              "P8"
+            ],
+            "direction": "both",
+            "cadence": false,
+            "range": "C3-C5"
+          }
+        },
+        "source": "Görev metni: şarkı görevleri ekran sorusu olarak gelir; ear-s2-m06-07'nin ekran sürümüyle aynı."
+      },
+      {
+        "title": {
+          "en": "Rhythm dictation: write 2 two-bar rhythms",
+          "tr": "Ritim diktesi: 2 iki ölçülük ritim yaz"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "rhythm_dictation",
+          "count": 2,
+          "params": {
+            "values": [
+              "whole",
+              "half",
+              "quarter",
+              "eighthPair",
+              "quarterRest"
+            ],
+            "bars": 2,
+            "bpm": 70,
+            "meter": "4/4"
+          }
+        },
+        "source": "Görev metni, bölüm 3: \"write 2 two-bar rhythms\"; değerler ear-s2-m07-02'den."
+      },
+      {
+        "title": {
+          "en": "Rhythm: clap a two-bar rhythm at ♩=70",
+          "tr": "Ritim: ♩=70'te iki ölçülük ritmi alkışla"
+        },
+        "kind": "clap",
+        "clap": {
+          "values": [
+            "whole",
+            "half",
+            "quarter",
+            "eighthPair",
+            "quarterRest"
+          ],
+          "bars": 2,
+          "lines": 1,
+          "tempo": {
+            "open": 60,
+            "target": 70
+          },
+          "derivedFrom": "Modülden türetildi, kaynak satırlar: modülde yazılı ritim satırı yok; değerler ear-s2-m07-01/02 ritim diktelerinden (whole, half, quarter, eighthPair, quarterRest)."
+        },
+        "source": "Görev metni, bölüm 3: \"clap one two-bar rhythm back from memory at ♩=70\" (uygulamada \"Önce dinle\" ile dinlenip alkışlanır)."
+      },
+      {
+        "title": {
+          "en": "Chords: major or minor (6)",
+          "tr": "Akorlar: majör mü minör mü (6)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "triad_quality",
+          "count": 6,
+          "params": {
+            "qualities": [
+              "major",
+              "minor"
+            ],
+            "inversions": false,
+            "arpeggiate": true,
+            "range": "C3-C5"
+          }
+        },
+        "source": "Görev metni, bölüm 4: \"6 major-or-minor questions\"."
+      },
+      {
+        "title": {
+          "en": "Melody: one three-note dictation",
+          "tr": "Ezgi: bir üç notalık dikte"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "melodic_dictation",
+          "count": 1,
+          "params": {
+            "notes": 3,
+            "degrees": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "key": [
+              "C",
+              "G",
+              "F"
+            ],
+            "range": "C4-D5",
+            "firstNoteGiven": true,
+            "cadenceEachQuestion": true
+          }
+        },
+        "source": "Görev metni, bölüm 4: \"1 three-note dictation\"; ayarlar ear-s2-m08-04'ten."
+      },
+      {
+        "title": {
+          "en": "Sight-singing: one four-bar line",
+          "tr": "Deşifre şarkı: bir dört ölçülük satır"
+        },
+        "kind": "selfCheck",
+        "required": false,
+        "items": [
+          {
+            "en": "I sang one new four-bar line with the click at ♩=60.",
+            "tr": "Yeni bir dört ölçülük satırı klikle ♩=60'ta söyledim."
+          }
+        ],
+        "source": "Görev metni, bölüm 4: \"one new four-bar sight-singing line at ♩=60\" (şarkı ölçülmez)."
+      },
+      {
+        "title": {
+          "en": "Sight-singing: which staff matches? (on-screen version)",
+          "tr": "Deşifre: hangi porte uyuyor? (ekran sürümü)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "staff_match",
+          "count": 1,
+          "params": {
+            "key": [
+              "C",
+              "G",
+              "F"
+            ],
+            "notes": 16,
+            "degrees": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "range": "C4-G5"
+          }
+        },
+        "source": "Görev metni: şarkı görevleri ekran sorusu olarak gelir; ear-s2-m08-05'in ekran sürümüyle aynı."
+      }
+    ],
     "pass": {
       "levelDefault": false,
       "text": {

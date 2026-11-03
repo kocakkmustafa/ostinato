@@ -207,7 +207,11 @@ enum V1CheckEvidence {
   /// F2.6: the on-screen drill passed (≥ 80% on the first try). It checks
   /// the lesson's theory part; a playing part stays unmeasured, so gates
   /// treat it like a self-report.
-  drillPass('drill_pass');
+  drillPass('drill_pass'),
+
+  /// A test-flow checkpoint passed: every required section (drills and
+  /// clapping lines) passed. Unmeasured singing parts never decide it.
+  testPass('test_pass');
 
   const V1CheckEvidence(this.json);
   final String json;
@@ -232,7 +236,9 @@ final class V1LessonCheck {
   final V1CheckEvidence evidence;
   final DateTime at;
 
-  bool get measured => evidence == V1CheckEvidence.tunerCheck;
+  bool get measured =>
+      evidence == V1CheckEvidence.tunerCheck ||
+      evidence == V1CheckEvidence.testPass;
 
   Map<String, Object?> toJson() => {
     'lessonId': lessonId,

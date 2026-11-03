@@ -45,6 +45,153 @@
       "en": "Complete four parts. 1 Pulse: 8 claps each at ♩=60, 80 and 100, plus a four-bar rhythm at ♩=70. 2 Pitch: 10 questions on high or low and contour, plus 6 notes sung back in your own octave, or the on-screen 'Same or different?' set instead. 3 Rhythm reading: 4 new two-bar lines at ♩=70. 4 Note reading: 20 notes from both clefs.",
       "tr": "Dört bölümü tamamla. 1 Vuruş: ♩=60, 80 ve 100'de 8'er alkış, ardından ♩=70'te dört ölçülük ritim. 2 Perde: yüksek-alçak ve kontur üzerine 10 soru, ardından kendi oktavında geri söylenen 6 nota ya da onun yerine ekranda 'Aynı mı farklı mı?' seti. 3 Ritim okuma: ♩=70'te 4 yeni iki ölçülük satır. 4 Nota okuma: iki anahtardan 20 nota."
     },
+    "sections": [
+      {
+        "title": {
+          "en": "Pulse: 8 claps at ♩=60, 80 and 100",
+          "tr": "Nabız: ♩=60, 80 ve 100'de 8 alkış"
+        },
+        "kind": "clap",
+        "sequence": "4/4: q q q q | q q q q",
+        "tempo": {
+          "open": 60,
+          "target": 100
+        },
+        "source": "Görev metni, bölüm 1: \"8 claps each at ♩=60, 80 and 100\" (tempo merdiveni 60→100)."
+      },
+      {
+        "title": {
+          "en": "Pulse: a new four-bar rhythm at ♩=70",
+          "tr": "Nabız: ♩=70'te yeni dört ölçülük ritim"
+        },
+        "kind": "clap",
+        "clap": {
+          "values": [
+            "quarter",
+            "eighthPair",
+            "half"
+          ],
+          "bars": 4,
+          "lines": 1,
+          "tempo": {
+            "open": 60,
+            "target": 70
+          },
+          "derivedFrom": "Modülden türetildi, kaynak satırlar: ear-s1-m01-04 `4/4: q q ee q | ee q h`; ear-s1-m01-05 `4/4: q q ee q | ee ee q q | q ee q ee | ee ee ee q`."
+        },
+        "source": "Görev metni, bölüm 1: \"plus a four-bar rhythm at ♩=70\"."
+      },
+      {
+        "title": {
+          "en": "Pitch: high or low and contour",
+          "tr": "Perde: tiz/pes ve kontur"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "pitch_direction",
+          "count": 10,
+          "params": {
+            "notes": [
+              2,
+              3
+            ],
+            "range": "C3-C5",
+            "minSemitones": 2
+          }
+        },
+        "source": "Görev metni, bölüm 2: \"10 questions on high or low and contour\"."
+      },
+      {
+        "title": {
+          "en": "Pitch: same or different (on-screen version)",
+          "tr": "Perde: aynı mı farklı mı (ekran sürümü)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "same_different",
+          "count": 6,
+          "params": {
+            "range": [
+              "C3",
+              "C5"
+            ],
+            "minCents": 50,
+            "maxCents": 200,
+            "varyVolume": true
+          }
+        },
+        "source": "Görev metni, bölüm 2: \"or the on-screen 'Same or different?' set instead\"; ayarlar ear-s1-m02-02'den."
+      },
+      {
+        "title": {
+          "en": "Pitch: sing 6 notes back",
+          "tr": "Perde: 6 notayı geri söyle"
+        },
+        "kind": "selfCheck",
+        "required": false,
+        "items": [
+          {
+            "en": "I sang 6 notes back in my own octave.",
+            "tr": "6 notayı kendi oktavımda geri söyledim."
+          }
+        ],
+        "source": "Görev metni, bölüm 2: \"plus 6 notes sung back in your own octave\" (şarkı ölçülmez)."
+      },
+      {
+        "title": {
+          "en": "Rhythm reading: 4 new two-bar lines at ♩=70",
+          "tr": "Ritim okuma: ♩=70'te 4 yeni iki ölçülük satır"
+        },
+        "kind": "clap",
+        "clap": {
+          "values": [
+            "quarter",
+            "half",
+            "whole",
+            "eighthPair",
+            "quarterRest",
+            "halfRest"
+          ],
+          "bars": 2,
+          "lines": 4,
+          "tempo": {
+            "open": 60,
+            "target": 70
+          },
+          "derivedFrom": "Modülden türetildi, kaynak satırlar: ear-s1-m03-01 `4/4: q h q | w`; ear-s1-m03-02 `4/4: q ee q ee | ee ee q q`; ear-s1-m03-03 `4/4: q qr ee q | q q hr`; ear-s1-m03-04 `4/4: q q h | ee q q q | q ee ee q | w`."
+        },
+        "source": "Görev metni, bölüm 3: \"4 new two-bar lines at ♩=70\"."
+      },
+      {
+        "title": {
+          "en": "Note reading: 20 notes from both clefs",
+          "tr": "Nota okuma: iki anahtardan 20 nota"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "note_name",
+          "count": 20,
+          "params": {
+            "clef": [
+              "treble",
+              "bass"
+            ],
+            "range": {
+              "treble": [
+                "A3",
+                "C6"
+              ],
+              "bass": [
+                "C2",
+                "E4"
+              ]
+            },
+            "ledgerLinesMax": 2
+          }
+        },
+        "source": "Görev metni, bölüm 4: \"20 notes from both clefs\"; ayarlar ear-s1-m04-05'ten."
+      }
+    ],
     "pass": {
       "levelDefault": false,
       "text": {

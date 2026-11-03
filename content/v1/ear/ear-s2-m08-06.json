@@ -42,6 +42,128 @@
       "tr": "1. bölüm: 6 soruyu cevapla (majör mü minör mü üçlü; donanımdan ton). 2. bölüm: üç notalık 2 dikte yaz. Bu 8 maddeden en az 7'si doğru olmalı. 3. bölüm: yeni bir dört ölçülük satırı ♩=60'ta klikle deşifre et. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: bir satır dinler, iki porteden hangisine uyduğunu seçersin."
     },
     "tempo": { "open": 60, "target": 60 },
+    "sections": [
+      {
+        "title": {
+          "en": "Chords: major or minor (3)",
+          "tr": "Akorlar: majör mü minör mü (3)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "triad_quality",
+          "count": 3,
+          "params": {
+            "qualities": [
+              "major",
+              "minor"
+            ],
+            "inversions": false,
+            "arpeggiate": true,
+            "range": "C3-C5"
+          }
+        },
+        "source": "Görev metni, bölüm 1: \"6 questions (major or minor triad; key from the signature)\" — 3 akor sorusu."
+      },
+      {
+        "title": {
+          "en": "Keys from the signature (3)",
+          "tr": "Donanımdan ton (3)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "key_signature",
+          "count": 3,
+          "params": {
+            "keys": [
+              "C",
+              "G",
+              "F"
+            ],
+            "clefs": [
+              "treble",
+              "bass"
+            ]
+          }
+        },
+        "source": "Görev metni, bölüm 1: 3 donanım sorusu. Not: görevdeki \"8 maddeden en az 7\" kuralı burada her bölümde %80 olarak uygulanır."
+      },
+      {
+        "title": {
+          "en": "Melody: two three-note dictations",
+          "tr": "Ezgi: iki üç notalık dikte"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "melodic_dictation",
+          "count": 2,
+          "params": {
+            "notes": 3,
+            "degrees": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "key": [
+              "C",
+              "G",
+              "F"
+            ],
+            "range": "C4-D5",
+            "firstNoteGiven": true,
+            "cadenceEachQuestion": true
+          }
+        },
+        "source": "Görev metni, bölüm 2: \"write 2 three-note dictations\"."
+      },
+      {
+        "title": {
+          "en": "Sight-singing: one four-bar line",
+          "tr": "Deşifre şarkı: bir dört ölçülük satır"
+        },
+        "kind": "selfCheck",
+        "required": false,
+        "items": [
+          {
+            "en": "I sang one new four-bar line with the click at ♩=60.",
+            "tr": "Yeni bir dört ölçülük satırı klikle ♩=60'ta söyledim."
+          }
+        ],
+        "source": "Görev metni, bölüm 3: \"sight-sing one new four-bar line\" (şarkı ölçülmez)."
+      },
+      {
+        "title": {
+          "en": "Sight-singing: which staff matches? (on-screen version)",
+          "tr": "Deşifre: hangi porte uyuyor? (ekran sürümü)"
+        },
+        "kind": "drill",
+        "drill": {
+          "type": "staff_match",
+          "count": 1,
+          "params": {
+            "key": [
+              "C",
+              "G",
+              "F"
+            ],
+            "notes": 16,
+            "degrees": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "range": "C4-G5"
+          }
+        },
+        "source": "Görev metni: \"choose the on-screen version: you hear a line and choose which of two staves it matches\"."
+      }
+    ],
     "pass": { "levelDefault": true, "minCorrect": 7 }
   },
   "fallback": "held",

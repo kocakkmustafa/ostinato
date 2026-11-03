@@ -356,6 +356,9 @@ enum V1LessonStatus {
   /// is not measured).
   drillPassed,
 
+  /// A test-flow checkpoint: every required part passed.
+  testPassed,
+
   /// Measured lesson that only has a self-report from a build that could not
   /// measure it: "repeat with measurement".
   repeatWithMeasurement,
@@ -385,7 +388,8 @@ final class V1CourseState {
     if (records[l.id]?.passed ?? false) return V1GateClear.measured;
     final check = checks[l.id];
     if (check == null) return V1GateClear.none;
-    if (check.evidence == V1CheckEvidence.tunerCheck) {
+    if (check.evidence == V1CheckEvidence.tunerCheck ||
+        check.evidence == V1CheckEvidence.testPass) {
       return V1GateClear.measured;
     }
     return l.selfReportable ? V1GateClear.selfReported : V1GateClear.none;
@@ -438,6 +442,9 @@ final class V1CourseState {
               ? V1LessonStatus.completed
               : V1LessonStatus.passed;
         }
+        if (c?.evidence == V1CheckEvidence.testPass) {
+          return V1LessonStatus.testPassed;
+        }
         if (c?.evidence == V1CheckEvidence.drillPass) {
           return V1LessonStatus.drillPassed;
         }
@@ -468,6 +475,7 @@ final class V1CourseState {
     V1LessonStatus.tuned ||
     V1LessonStatus.selfReported ||
     V1LessonStatus.drillPassed ||
+    V1LessonStatus.testPassed ||
     V1LessonStatus.heldSelfReported => true,
     _ => false,
   };
