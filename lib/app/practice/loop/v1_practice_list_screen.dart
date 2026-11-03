@@ -19,6 +19,7 @@ import 'practice_loop_screen.dart';
 import 'practice_outcome.dart';
 import 'practice_progress_store.dart';
 import 'v1_course_catalog.dart';
+import '../../drill/drill_copy.dart';
 import 'v1_course_copy.dart';
 import 'v1_lesson_reader_screen.dart';
 import 'v1_paywall_copy.dart';
@@ -573,6 +574,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
         context,
         V1CourseCopy.statusSelfReported,
       ),
+      V1LessonStatus.drillPassed => uiText(context, DrillCopy.statusPassed),
       V1LessonStatus.repeatWithMeasurement => uiText(
         context,
         V1CourseCopy.statusRepeat,
@@ -610,6 +612,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
         V1LessonStatus.completed || V1LessonStatus.tuned => Icons.check_circle,
         V1LessonStatus.passed => Icons.check_circle_outline,
         V1LessonStatus.selfReported ||
+        V1LessonStatus.drillPassed ||
         V1LessonStatus.heldSelfReported => Icons.task_alt,
         V1LessonStatus.locked => Icons.lock_outline,
         V1LessonStatus.held => Icons.pause_circle_outline,
