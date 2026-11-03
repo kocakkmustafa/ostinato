@@ -37,6 +37,7 @@
       "en": "Clap 8 beats with the click at ♩=60, then at 80, then at 100. Move to the next tempo once the one before it passes.",
       "tr": "Klikle birlikte ♩=60'ta 8 vuruş alkışla, sonra 80'de, sonra 100'de. Bir tempo geçince sonrakine geç."
     },
+    "sequence": "4/4: q q q q | q q q q",
     "tempo": { "open": 60, "target": 100 },
     "pass": { "levelDefault": true }
   },

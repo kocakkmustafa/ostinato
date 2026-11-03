@@ -49,6 +49,8 @@ void main() {
       }
     }
     expect(practicable, {
+      'ear-s1-m01-01', // 16 pulse beats
+      'ear-s1-m01-02', // 8 pulse beats, tempo ladder 60→100
       'ear-s1-m01-04',
       'ear-s1-m01-05',
       'ear-s1-m03-01',
@@ -68,7 +70,15 @@ void main() {
     }
   });
 
-  test('3/4 clapping lines keep their meter', () {
+  test('pulse lines count the beats the task names', () {
+    expect(
+      V1PracticeCatalog.scoreOf(ear('ear-s1-m01-01'))!.events,
+      hasLength(16),
+    );
+    expect(
+      V1PracticeCatalog.scoreOf(ear('ear-s1-m01-02'))!.events,
+      hasLength(8),
+    );
     expect(V1PracticeCatalog.scoreOf(ear('ear-s1-m03-05'))!.beatsPerBar, 3);
   });
 
