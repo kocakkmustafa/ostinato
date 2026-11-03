@@ -202,7 +202,12 @@ enum V1CheckEvidence {
   selfReport('self_report'),
 
   /// The tuner measured every string in tune (A1 tuning lessons).
-  tunerCheck('tuner_check');
+  tunerCheck('tuner_check'),
+
+  /// F2.6: the on-screen drill passed (≥ 80% on the first try). It checks
+  /// the lesson's theory part; a playing part stays unmeasured, so gates
+  /// treat it like a self-report.
+  drillPass('drill_pass');
 
   const V1CheckEvidence(this.json);
   final String json;
@@ -325,9 +330,14 @@ final class V1LessonCheckStore implements V1LessonChecks {
 }
 
 /// The first completion is kept; a measured tuner check replaces a
-/// self-report.
+/// self-report, and a passed drill replaces a self-report.
 V1LessonCheck mergeLessonCheck(V1LessonCheck? old, V1LessonCheck next) =>
-    old == null || (!old.measured && next.measured) ? next : old;
+    old == null ||
+        (!old.measured && next.measured) ||
+        (old.evidence == V1CheckEvidence.selfReport &&
+            next.evidence == V1CheckEvidence.drillPass)
+    ? next
+    : old;
 
 /// Unlock rule (task F2.5, contract §6.3): the first lesson in course order is
 /// open; each next one opens when the one before it has a measured pass (at

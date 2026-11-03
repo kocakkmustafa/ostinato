@@ -1,0 +1,140 @@
+{
+  "$about": "F2.6 drill copy (lib/app/drill/drill_copy.dart). EN+TR source pairs; all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "noteAtFret",
+      "en": "Which note is at fret {v0} on string {v1}?",
+      "tr": "{v1}. telin {v0}. perdesindeki nota hangisi?"
+    },
+    {
+      "id": "fretOfNote",
+      "en": "On string {v1}, which fret plays {v0}?",
+      "tr": "{v1}. telde {v0} hangi perdede?"
+    },
+    {
+      "id": "enharmonic",
+      "en": "What is the other name of {v0}?",
+      "tr": "{v0} notasının diğer adı nedir?"
+    },
+    {
+      "id": "scaleStep",
+      "en": "Which step of the {v0} major scale is the marked note?",
+      "tr": "İşaretli nota {v0} majör dizisinin kaçıncı derecesi?"
+    },
+    {
+      "id": "pentatonicNote",
+      "en": "Which note of the {v0} minor pentatonic is marked?",
+      "tr": "{v0} minör pentatonikte işaretli nota hangisi?"
+    },
+    {
+      "id": "chordTones",
+      "en": "Which notes make {v0}?",
+      "tr": "{v0} akorunu hangi notalar oluşturur?"
+    },
+    {
+      "id": "romanNumeral",
+      "en": "In {v0} major, which chord is {v1}?",
+      "tr": "{v0} majörde {v1} hangi akordur?"
+    },
+    {
+      "id": "bluesLine",
+      "en": "Which is line {v0} of the 12-bar blues?",
+      "tr": "12 ölçülük blues’un {v0}. satırı hangisi?"
+    },
+    {
+      "id": "bluesBar",
+      "en": "Which chord is in bar {v0} of the 12-bar blues?",
+      "tr": "12 ölçülük blues’ta {v0}. ölçüdeki akor hangisi?"
+    },
+    {
+      "id": "fretOption",
+      "en": "Fret {v0}",
+      "tr": "{v0}. perde"
+    },
+    {
+      "id": "stepOption",
+      "en": "Step {v0}",
+      "tr": "{v0}. derece"
+    },
+    {
+      "id": "progress",
+      "en": "Question {v0} of {v1}",
+      "tr": "Soru {v0} / {v1}"
+    },
+    {
+      "id": "review",
+      "en": "Once more: you mixed this one up earlier.",
+      "tr": "Bir kez daha: bunu az önce karıştırdın."
+    },
+    {
+      "id": "matches",
+      "en": "Matches.",
+      "tr": "Eşleşti."
+    },
+    {
+      "id": "differs",
+      "en": "Your answer: {v0} · Expected: {v1}",
+      "tr": "Senin cevabın: {v0} · Beklenen: {v1}"
+    },
+    {
+      "id": "next",
+      "en": "Next",
+      "tr": "Sonraki"
+    },
+    {
+      "id": "seeResult",
+      "en": "See the result",
+      "tr": "Sonucu gör"
+    },
+    {
+      "id": "resultTitle",
+      "en": "Drill result",
+      "tr": "Alıştırma sonucu"
+    },
+    {
+      "id": "resultScore",
+      "en": "{v0} of {v1} matched on the first try. Passing needs {v2}.",
+      "tr": "İlk denemede {v1} sorudan {v0} tanesi eşleşti. Geçmek için {v2} gerekir."
+    },
+    {
+      "id": "passed",
+      "en": "Passed. The lesson is saved as done; its playing part is not measured.",
+      "tr": "Geçtin. Ders yapıldı olarak kaydedildi; çalma bölümü ölçülmedi."
+    },
+    {
+      "id": "notYet",
+      "en": "Not yet. A new set of questions is ready.",
+      "tr": "Henüz değil. Yeni bir soru seti hazır."
+    },
+    {
+      "id": "newSet",
+      "en": "New set",
+      "tr": "Yeni set"
+    },
+    {
+      "id": "backToLesson",
+      "en": "Back to the lesson",
+      "tr": "Derse dön"
+    },
+    {
+      "id": "section",
+      "en": "On-screen drill",
+      "tr": "Ekran alıştırması"
+    },
+    {
+      "id": "start",
+      "en": "Start the drill ({v0} questions)",
+      "tr": "Alıştırmayı başlat ({v0} soru)"
+    },
+    {
+      "id": "statusPassed",
+      "en": "DONE · DRILL PASSED",
+      "tr": "YAPILDI · ALIŞTIRMA GEÇİLDİ"
+    },
+    {
+      "id": "bannerReady",
+      "en": "This lesson has an on-screen drill. Passing it saves the lesson as done; the playing part is not measured yet.",
+      "tr": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; çalma bölümü henüz ölçülmüyor."
+    }
+  ]
+}

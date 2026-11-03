@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/app_message_ids.dart';
 import 'package:ostinato/app/app_translation_catalog.dart';
 import 'package:ostinato/app/device_accuracy_copy.dart';
+import 'package:ostinato/app/drill/drill_copy.dart';
 import 'package:ostinato/app/membership_copy.dart';
 import 'package:ostinato/app/practice/display/practice_display_copy.dart';
 import 'package:ostinato/app/practice/loop/practice_rhythm_copy.dart';
@@ -37,6 +38,7 @@ void main() {
     'content/ui/settings.json': SettingsCopy.all,
     'content/ui/device-accuracy.json': DeviceAccuracyCopy.all,
     'content/ui/reference.json': ReferenceCopy.all,
+    'content/ui/drill.json': DrillCopy.all,
   };
 
   for (final entry in catalogs.entries) {
@@ -89,6 +91,7 @@ void main() {
         ...DeviceAccuracyCopy.all,
         ...TunerCopy.all,
         ...ReferenceCopy.all,
+        ...DrillCopy.all,
       ]) {
         final id = appMessageIds[pair];
         expect(id, isNotNull, reason: pair.$1);

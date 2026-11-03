@@ -11,6 +11,9 @@ import '../../tuner/tuner_guidance.dart' show kDefaultTunerToleranceCents;
 import '../../tuner/tuner_screen.dart' show openTuner;
 import '../../tuner/tunings.dart';
 import '../../ui_copy.dart';
+import '../../drill/drill_copy.dart';
+import '../../drill/drill_generator.dart';
+import '../../drill/drill_screen.dart';
 import 'practice_progress_store.dart';
 import 'practice_score.dart';
 import 'reference_listen.dart';
@@ -57,6 +60,24 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
 
   V1CourseLesson get _l => widget.lesson;
   bool get _isTuner => _l.availability == V1LessonAvailability.tuner;
+
+  /// F2.6: a `D` lesson whose drill this build can generate.
+  late final bool _hasDrill = switch (_l.lesson.practice.drill) {
+    final drill? =>
+      _l.availability == V1LessonAvailability.drillSoon && supportsDrill(drill),
+    null => false,
+  };
+
+  Future<void> _openDrill() async {
+    final drill = _l.lesson.practice.drill!;
+    final passed = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) =>
+            DrillScreen(drill: drill, title: _l.lesson.title.of(context)),
+      ),
+    );
+    if (passed == true && mounted) await _record(V1CheckEvidence.drillPass);
+  }
 
   /// FK1: only a written single-note line has a reference to synthesize
   /// (chord charts and technique lines would sound misleading).
@@ -144,7 +165,8 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
     V1LessonAvailability.selfCheck => V1CourseCopy.bannerSelfCheck,
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.bannerSelfCheckLesson,
     V1LessonAvailability.camera => V1CourseCopy.bannerCamera,
-    V1LessonAvailability.drillSoon => V1CourseCopy.bannerDrill,
+    V1LessonAvailability.drillSoon =>
+      _hasDrill ? DrillCopy.bannerReady : V1CourseCopy.bannerDrill,
     V1LessonAvailability.held => V1CourseCopy.bannerHeld,
     V1LessonAvailability.tuner ||
     V1LessonAvailability.measured => V1CourseCopy.bannerTuner,
@@ -263,6 +285,21 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
                 ),
               ],
             ]),
+            if (_hasDrill)
+              section(uiText(context, DrillCopy.section), [
+                FilledButton.icon(
+                  key: const Key('v1-reader-drill'),
+                  onPressed: _saving ? null : () => unawaited(_openDrill()),
+                  icon: const Icon(Icons.quiz_outlined),
+                  label: Text(
+                    uiText(
+                      context,
+                      DrillCopy.start,
+                      values: {'v0': lesson.practice.drill!.count},
+                    ),
+                  ),
+                ),
+              ]),
             if (lesson.referenceAudio.kinds.isNotEmpty && !_isTuner)
               section(uiText(context, V1CourseCopy.readerReference), [
                 if (_referenceScore case final score?)
@@ -380,7 +417,11 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
         Text(
           uiText(
             context,
-            held ? V1CourseCopy.readerHeldDone : V1CourseCopy.readerDoneSelf,
+            _check?.evidence == V1CheckEvidence.drillPass
+                ? DrillCopy.passed
+                : held
+                ? V1CourseCopy.readerHeldDone
+                : V1CourseCopy.readerDoneSelf,
           ),
           key: const Key('v1-reader-status'),
           style: hankenText(size: 13, color: palette.textMuted, height: 1.4),

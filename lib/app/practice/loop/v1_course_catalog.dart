@@ -352,6 +352,10 @@ enum V1LessonStatus {
   /// Self-check done (self-reported, not measured).
   selfReported,
 
+  /// F2.6: the on-screen drill passed (theory part checked; a playing part
+  /// is not measured).
+  drillPassed,
+
   /// Measured lesson that only has a self-report from a build that could not
   /// measure it: "repeat with measurement".
   repeatWithMeasurement,
@@ -445,6 +449,9 @@ final class V1CourseState {
               ? V1LessonStatus.completed
               : V1LessonStatus.passed;
         }
+        if (c?.evidence == V1CheckEvidence.drillPass) {
+          return V1LessonStatus.drillPassed;
+        }
         if (c != null) return V1LessonStatus.selfReported;
         return isOpen(l.id) ? V1LessonStatus.open : V1LessonStatus.locked;
     }
@@ -457,6 +464,7 @@ final class V1CourseState {
     V1LessonStatus.completed ||
     V1LessonStatus.tuned ||
     V1LessonStatus.selfReported ||
+    V1LessonStatus.drillPassed ||
     V1LessonStatus.heldSelfReported => true,
     _ => false,
   };
