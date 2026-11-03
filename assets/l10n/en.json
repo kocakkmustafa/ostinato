@@ -8558,6 +8558,12 @@
     "b09059cbf09f42a9": "Bar line",
     "35b0cfca503264c9": "Double bar line (the end)",
     "70275dd6ccec233c": "Time signature 4/4",
-    "aed8868722fcb964": "{v0} beats"
+    "aed8868722fcb964": "{v0} beats",
+    "a66cc24b60efb152": "Listen to four neighbouring notes of the {v0} major scale. Where is the half step?",
+    "8d386a919816032b": "Listen to the note over the drone. Which degree of {v0} major is it?",
+    "6bab74a4b623bca8": "Listen to the line. Which staff matches it?",
+    "2a19ebf639f55a8d": "Between notes {v0} and {v1}",
+    "a51a313c05aafcef": "No half step",
+    "8104611cdd816f4d": "Staff {v0}"
   }
 }

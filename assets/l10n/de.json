@@ -8558,6 +8558,12 @@
     "b09059cbf09f42a9": "Taktstrich",
     "35b0cfca503264c9": "Schlussstrich (das Ende)",
     "70275dd6ccec233c": "Taktart 4/4",
-    "aed8868722fcb964": "{v0} Schläge"
+    "aed8868722fcb964": "{v0} Schläge",
+    "a66cc24b60efb152": "Hör vier benachbarte Töne der {v0}-Dur-Tonleiter. Wo liegt der Halbton?",
+    "8d386a919816032b": "Hör den Ton über dem Bordun. Welche Stufe von {v0}-Dur ist es?",
+    "6bab74a4b623bca8": "Hör die Zeile. Welches Notensystem passt dazu?",
+    "2a19ebf639f55a8d": "Zwischen Ton {v0} und {v1}",
+    "a51a313c05aafcef": "Kein Halbton",
+    "8104611cdd816f4d": "System {v0}"
   }
 }

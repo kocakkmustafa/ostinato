@@ -8558,6 +8558,12 @@
     "b09059cbf09f42a9": "Ölçü çizgisi",
     "35b0cfca503264c9": "Çift ölçü çizgisi (bitiş)",
     "70275dd6ccec233c": "4/4 ölçü sayısı",
-    "aed8868722fcb964": "{v0} vuruş"
+    "aed8868722fcb964": "{v0} vuruş",
+    "a66cc24b60efb152": "{v0} majör dizisinin dört komşu notasını dinle. Yarım ses nerede?",
+    "8d386a919816032b": "Drone üstündeki notayı dinle. {v0} majörün kaçıncı derecesi?",
+    "6bab74a4b623bca8": "Satırı dinle. Hangi porte ona uyuyor?",
+    "2a19ebf639f55a8d": "{v0}. ve {v1}. nota arasında",
+    "a51a313c05aafcef": "Yarım ses yok",
+    "8104611cdd816f4d": "{v0} portesi"
   }
 }

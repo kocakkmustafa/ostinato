@@ -203,6 +203,20 @@ class DrillScreenState extends State<DrillScreen> {
             ),
           ),
         ],
+        for (var i = 0; i < q.staves.length; i++) ...[
+          const SizedBox(height: 12),
+          Text(
+            uiText(context, DrillCopy.staffLabel, values: {'v0': q.options[i]}),
+            style: monoText(size: 11, color: palette.textMono),
+          ),
+          AspectRatio(
+            aspectRatio: 2.8,
+            child: CustomPaint(
+              key: Key('drill-staff-${q.options[i]}'),
+              painter: DrillStaffPainter(staff: q.staves[i], palette: palette),
+            ),
+          ),
+        ],
         if (q.keys.isNotEmpty) ...[
           const SizedBox(height: 14),
           AspectRatio(
@@ -398,6 +412,9 @@ class DrillScreenState extends State<DrillScreen> {
     DrillPromptKind.staffPlace => DrillCopy.staffPlace,
     DrillPromptKind.staffSymbol => DrillCopy.staffSymbol,
     DrillPromptKind.beatsInBar => DrillCopy.beatsInBar,
+    DrillPromptKind.halfStepPlace => DrillCopy.halfStepPlace,
+    DrillPromptKind.degreeOverDrone => DrillCopy.degreeOverDrone,
+    DrillPromptKind.staffMatch => DrillCopy.staffMatch,
     DrillPromptKind.melodicDictation =>
       (_s.current.entry?.given.isNotEmpty ?? false)
           ? DrillCopy.melodicDictationGiven
@@ -415,6 +432,8 @@ class DrillScreenState extends State<DrillScreen> {
         (DrillPromptKind.tonicOrNot, 'v0') ||
         (DrillPromptKind.melodicDictation, 'v1') ||
         (DrillPromptKind.stepSize, 'v0') ||
+        (DrillPromptKind.halfStepPlace, 'v0') ||
+        (DrillPromptKind.degreeOverDrone, 'v0') ||
         (
           DrillPromptKind.romanNumeral,
           'v0',
@@ -480,6 +499,27 @@ class DrillScreenState extends State<DrillScreen> {
           'double_bar_line' => DrillCopy.doubleBarLine,
           _ => DrillCopy.timeSignature44,
         }),
+        DrillPromptKind.halfStepPlace =>
+          option == 'none'
+              ? uiText(context, DrillCopy.noHalfStep)
+              : uiText(
+                  context,
+                  DrillCopy.betweenNotes,
+                  values: {
+                    'v0': option.split('-').first,
+                    'v1': option.split('-').last,
+                  },
+                ),
+        DrillPromptKind.degreeOverDrone => uiText(
+          context,
+          DrillCopy.stepOption,
+          values: {'v0': option},
+        ),
+        DrillPromptKind.staffMatch => uiText(
+          context,
+          DrillCopy.staffLabel,
+          values: {'v0': option},
+        ),
         DrillPromptKind.beatsInBar => uiText(
           context,
           DrillCopy.beatsOption,

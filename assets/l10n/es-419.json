@@ -8558,6 +8558,12 @@
     "b09059cbf09f42a9": "Barra de compás",
     "35b0cfca503264c9": "Doble barra (el final)",
     "70275dd6ccec233c": "Compás de 4/4",
-    "aed8868722fcb964": "{v0} pulsos"
+    "aed8868722fcb964": "{v0} pulsos",
+    "a66cc24b60efb152": "Escucha cuatro notas vecinas de la escala de {v0} mayor. ¿Dónde está el semitono?",
+    "8d386a919816032b": "Escucha la nota sobre el bordón. ¿Qué grado de {v0} mayor es?",
+    "6bab74a4b623bca8": "Escucha la línea. ¿Qué pentagrama coincide?",
+    "2a19ebf639f55a8d": "Entre las notas {v0} y {v1}",
+    "a51a313c05aafcef": "No hay semitono",
+    "8104611cdd816f4d": "Pentagrama {v0}"
   }
 }

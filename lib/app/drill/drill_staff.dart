@@ -135,8 +135,21 @@ class DrillStaffPainter extends CustomPainter {
     final gap = notes.length == 1
         ? 0.0
         : ((staff.bars > 0 ? barEnd : right - 4 * h) - start) / notes.length;
+    final barsStart = x + 2 * h;
+    final barSpan = staff.bars > 0 ? (barEnd - barsStart) / staff.bars : 0.0;
+    final perBar = staff.bars > 0 && notes.length % staff.bars == 0
+        ? notes.length ~/ staff.bars
+        : 0;
+    // Heads shrink to fit many notes (a 16-note line on a phone).
+    final headW = gap == 0 ? 3.2 * h : (gap * 0.8).clamp(1.6 * h, 3.2 * h);
+    final headH = headW * 0.62;
     for (var i = 0; i < notes.length; i++) {
-      final nx = notes.length == 1
+      final nx = perBar > 0
+          // Notes sit inside their own bar, evenly.
+          ? barsStart +
+                barSpan * (i ~/ perBar) +
+                barSpan * ((i % perBar) + 0.5) / perBar
+          : notes.length == 1
           ? (start + right) / 2
           : start + gap * (i + 0.5);
       final step = drillStaffStep(notes[i], staff.clef);
@@ -157,8 +170,8 @@ class DrillStaffPainter extends CustomPainter {
       canvas.drawOval(
         Rect.fromCenter(
           center: Offset(nx, y(step)),
-          width: 3.2 * h,
-          height: 2 * h,
+          width: headW,
+          height: headH,
         ),
         Paint()
           ..color = palette.ink

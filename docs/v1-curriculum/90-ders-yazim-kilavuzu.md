@@ -79,6 +79,9 @@ Sorular çalışma anında `params`'tan üretilir. Dosyada cevap anahtarı yoktu
 | `symbol_match` | Sembol ↔ ad / anlam | `set` |
 | `diagram_match` | Gitar/klavye diyagramı ↔ ad | `set` |
 | `ordering` | Adımları sıraya koy | `items` |
+| `half_step_place` | Duyulan dört komşu dizi notasında yarım ses nerede (1–2, 2–3, 3–4, yok) | `key`, `notes` |
+| `degree_over_drone` | Drone (durak + beşli) üstünde çalınan notanın derecesi | `key`, `degrees` |
+| `staff_match` | Duyulan satır iki porteden hangisi (A/B) | `key`, `notes`, `degrees` |
 
 **Rakip kanıtından gelen kurallar** (`scratch/2026-10-31-rakip-analizi/ostinato/RAPOR.tr.md` (f)):
 - Tonal alıştırmada kadans **her soruda** çalınır (S1 varsayılanı; `cadenceEachQuestion: true`).

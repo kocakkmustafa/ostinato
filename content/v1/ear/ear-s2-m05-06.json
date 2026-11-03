@@ -37,6 +37,10 @@
       "en": "Over the drone, sing the degree shown on screen and hold it for about two seconds. Eight tasks, degrees 1 to 6 in mixed order. Sing in your own octave. Headphones keep the drone out of the microphone. If you'd rather not sing, choose the on-screen version: you hear one note over the drone and mark its degree.",
       "tr": "Dronun üstünde ekranda gösterilen dereceyi söyle ve yaklaşık iki saniye tut. Sekiz görev, 1'den 6'ya karışık sırayla. Kendi oktavında söyle. Kulaklık dronu mikrofondan uzak tutar. Söylemek istemezsen ekrandaki sürümü seç: dronun üstünde bir nota duyar, derecesini işaretlersin."
     },
+    "alternative": {
+      "drill": { "type": "degree_over_drone", "count": 8, "params": { "key": ["C", "G", "F", "D"], "degrees": [1, 2, 3, 4, 5, 6] } },
+      "source": "Görev metni: \"you hear one note over the drone and mark its degree.\" Sekiz görev, dereceler 1–6; tonlar ear-s2-m05-05'ten."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",
