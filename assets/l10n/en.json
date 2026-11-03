@@ -8530,6 +8530,21 @@
     "09e193a6c3f5034b": "Yes, the tonic",
     "4e27dd67f82d2706": "No, another note",
     "75852fd4c89e6618": "Treble clef",
-    "631ff30baaa57577": "Bass clef"
+    "631ff30baaa57577": "Bass clef",
+    "131111ff2ffc483b": "Listen, then write the rhythm you heard ({v0} bar(s) of 4/4).",
+    "467c847b44a6f144": "Listen after the cadence, then write the {v0} notes in {v1} major. The first note is given.",
+    "1bc6e1dae021cb33": "Listen after the cadence, then write the {v0} notes in {v1} major.",
+    "bc723b06a914d413": "whole note",
+    "c635fe66abc99cd5": "half note",
+    "54a4ef3fb890b99b": "dotted quarter",
+    "6dbbc0bd93861e2a": "two eighths",
+    "ffab64a1e2985bbc": "quarter rest",
+    "d8b02b3629266762": "half rest",
+    "e8fca36088675be2": "Undo",
+    "5b172a0bf0d2651f": "Clear",
+    "a42907c0af3776de": "Check",
+    "3ab238f1fd15837e": "{v0} of {v1} beats written",
+    "70292b8579bad88b": "{v0} of {v1} notes written",
+    "7ade8187f831661f": "tie"
   }
 }

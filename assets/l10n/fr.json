@@ -8530,6 +8530,21 @@
     "09e193a6c3f5034b": "Oui, la tonique",
     "4e27dd67f82d2706": "Non, une autre note",
     "75852fd4c89e6618": "Clé de sol",
-    "631ff30baaa57577": "Clé de fa"
+    "631ff30baaa57577": "Clé de fa",
+    "131111ff2ffc483b": "Écoute, puis écris le rythme entendu ({v0} mesure(s) à 4/4).",
+    "467c847b44a6f144": "Écoute après la cadence, puis écris les {v0} notes en {v1} majeur. La première note est donnée.",
+    "1bc6e1dae021cb33": "Écoute après la cadence, puis écris les {v0} notes en {v1} majeur.",
+    "bc723b06a914d413": "ronde",
+    "c635fe66abc99cd5": "blanche",
+    "54a4ef3fb890b99b": "noire pointée",
+    "6dbbc0bd93861e2a": "deux croches",
+    "ffab64a1e2985bbc": "soupir",
+    "d8b02b3629266762": "demi-pause",
+    "e8fca36088675be2": "Annuler",
+    "5b172a0bf0d2651f": "Effacer",
+    "a42907c0af3776de": "Vérifier",
+    "3ab238f1fd15837e": "{v0} temps sur {v1} écrits",
+    "70292b8579bad88b": "{v0} notes sur {v1} écrites",
+    "7ade8187f831661f": "liaison"
   }
 }

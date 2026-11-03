@@ -46,6 +46,22 @@ final class DrillSession {
     if (option < 0 || option >= current.options.length) {
       throw RangeError.index(option, current.options);
     }
+    _answer(option);
+  }
+
+  /// What the learner wrote for a dictation question (null otherwise).
+  List<String>? written;
+
+  /// F2.6d: a written answer. It matches when its canonical key equals the
+  /// expected one; otherwise it counts as a different answer (index −1).
+  void submit(List<String> entered) {
+    final entry = current.entry;
+    if (answered || finished || entry == null) return;
+    written = List.unmodifiable(entered);
+    _answer(entry.keyOf(entered) == current.expected ? current.answer : -1);
+  }
+
+  void _answer(int option) {
     chosen = option;
     if (!isReview) {
       _firstTries++;
@@ -60,6 +76,7 @@ final class DrillSession {
   void next() {
     if (!answered) return;
     chosen = null;
+    written = null;
     _position++;
   }
 

@@ -171,6 +171,43 @@ abstract final class DrillCopy {
   static const UiCopy trebleClef = ('Treble clef', 'Sol anahtarı');
   static const UiCopy bassClef = ('Bass clef', 'Fa anahtarı');
 
+  // ---- F2.6d dictation ----
+  static const UiCopy rhythmDictation = (
+    'Listen, then write the rhythm you heard ({v0} bar(s) of 4/4).',
+    'Dinle, sonra duyduğun ritmi yaz ({v0} ölçü, 4/4).',
+  );
+  static const UiCopy melodicDictationGiven = (
+    'Listen after the cadence, then write the {v0} notes in {v1} major. The first note is given.',
+    'Kadanstan sonra dinle ve {v1} majördeki {v0} notayı yaz. İlk nota verildi.',
+  );
+  static const UiCopy melodicDictation = (
+    'Listen after the cadence, then write the {v0} notes in {v1} major.',
+    'Kadanstan sonra dinle ve {v1} majördeki {v0} notayı yaz.',
+  );
+  static const UiCopy valueWhole = ('whole note', 'birlik');
+  static const UiCopy valueHalf = ('half note', 'ikilik');
+  static const UiCopy valueDottedQuarter = (
+    'dotted quarter',
+    'noktalı dörtlük',
+  );
+  static const UiCopy valueQuarter = ('quarter note', 'dörtlük');
+  static const UiCopy valueEighthPair = ('two eighths', 'iki sekizlik');
+  static const UiCopy valueEighth = ('eighth note', 'sekizlik');
+  static const UiCopy valueQuarterRest = ('quarter rest', 'dörtlük sus');
+  static const UiCopy valueHalfRest = ('half rest', 'ikilik sus');
+  static const UiCopy valueTie = ('tie', 'bağ');
+  static const UiCopy undo = ('Undo', 'Geri al');
+  static const UiCopy clear = ('Clear', 'Temizle');
+  static const UiCopy check = ('Check', 'Kontrol et');
+  static const UiCopy beatsWritten = (
+    '{v0} of {v1} beats written',
+    '{v1} vuruşun {v0} tanesi yazıldı',
+  );
+  static const UiCopy notesWritten = (
+    '{v0} of {v1} notes written',
+    '{v1} notanın {v0} tanesi yazıldı',
+  );
+
   static const List<UiCopy> all = [
     noteAtFret,
     fretOfNote,
@@ -250,5 +287,22 @@ abstract final class DrillCopy {
     tonicNo,
     trebleClef,
     bassClef,
+    rhythmDictation,
+    melodicDictationGiven,
+    melodicDictation,
+    valueWhole,
+    valueHalf,
+    valueDottedQuarter,
+    valueQuarter,
+    valueEighthPair,
+    valueEighth,
+    valueQuarterRest,
+    valueHalfRest,
+    valueTie,
+    undo,
+    clear,
+    check,
+    beatsWritten,
+    notesWritten,
   ];
 }

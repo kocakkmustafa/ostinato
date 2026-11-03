@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import '../curriculum/v1_lesson.dart';
+import 'drill_dictation.dart';
 import 'drill_sound.dart';
 import 'drill_theory.dart';
 
@@ -68,6 +69,79 @@ enum DrillPromptKind {
 
   /// Heard after a cadence: "Was the last note the tonic?"
   tonicOrNot,
+
+  /// F2.6d, written: "Write the rhythm you heard."
+  rhythmDictation,
+
+  /// "Write the melody you heard" (scale degrees; the first is given).
+  melodicDictation,
+}
+
+enum DrillEntryKind { rhythm, melody }
+
+/// What the learner writes instead of choosing an option.
+final class DrillEntry {
+  const DrillEntry.rhythm({
+    required this.palette,
+    required this.bars,
+    required this.bpm,
+    required this.answer,
+    this.ties = false,
+  }) : kind = DrillEntryKind.rhythm,
+       length = 0,
+       given = const [],
+       key = null,
+       midis = const [],
+       pitches = const [],
+       keySignature = 0,
+       cadence = false;
+
+  const DrillEntry.melody({
+    required this.palette,
+    required this.length,
+    required this.given,
+    required SpelledNote this.key,
+    required this.midis,
+    required this.pitches,
+    required this.keySignature,
+    required this.answer,
+    this.cadence = true,
+  }) : kind = DrillEntryKind.melody,
+       bars = 0,
+       bpm = 0,
+       ties = false;
+
+  final DrillEntryKind kind;
+
+  /// Rhythm values, or degrees (`1`…`7`) for a melody.
+  final List<String> palette;
+  final int bars, bpm;
+
+  /// Melody: notes to write in all, of which [given] are prefilled.
+  final int length;
+  final List<String> given;
+  final SpelledNote? key;
+
+  /// Melody: sounding MIDI and written pitch per degree 1–7.
+  final List<int> midis;
+  final List<String> pitches;
+  final int keySignature;
+  final bool cadence;
+
+  /// Rhythm: the palette offers a tie (`~`) between two notes.
+  final bool ties;
+
+  /// The expected answer as written (labels, "play the expected").
+  final List<String> answer;
+
+  /// The canonical answer key of [entered] (see [DrillQuestion.expected]).
+  String keyOf(List<String> entered) =>
+      kind == DrillEntryKind.rhythm ? rhythmKey(entered) : entered.join(' ');
+
+  bool complete(List<String> entered) => kind == DrillEntryKind.rhythm
+      ? (rhythmLength(entered) - bars * 4).abs() < 1e-9 &&
+            (entered.isEmpty || entered.last != kTie)
+      : entered.length == length;
 }
 
 /// A staff to draw: clef, notes (natural pitches, left to right) and the
@@ -111,6 +185,7 @@ final class DrillQuestion {
     this.sound,
     this.optionSounds,
     this.staff,
+    this.entry,
   });
 
   final DrillPromptKind kind;
@@ -140,6 +215,10 @@ final class DrillQuestion {
 
   /// A staff to draw (read kinds), or null.
   final DrillStaff? staff;
+
+  /// Written answers (dictation); [options] then holds only the expected
+  /// canonical key.
+  final DrillEntry? entry;
 
   String get expected => options[answer];
 
@@ -199,6 +278,18 @@ bool supportsDrill(V1Drill drill) {
       return (p['keys'] as List?)?.every(keySignatures.containsKey) == true;
     case 'scale_degree':
       return p['question'] == 'tonic_or_not';
+    case 'rhythm_dictation':
+      // Ties across beats need a tie entry; they come later.
+      return (p['meter'] ?? '4/4') == '4/4' &&
+          (p['values'] as List?)?.every(rhythmBeats.containsKey) == true;
+    case 'melodic_dictation':
+      return (p['degrees'] as List?)?.every(
+                (d) => d is int && d >= 1 && d <= 7,
+              ) ==
+              true &&
+          ((p['key'] as List?) ?? const ['C']).every(
+            (k) => k is String && keySignatures.containsKey(k),
+          );
     case 'triad_quality':
       return p['inversions'] != true &&
           (p['qualities'] as List?)?.every(
@@ -233,7 +324,9 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
     'triad_quality' ||
     'note_name' ||
     'key_signature' ||
-    'scale_degree' => drill.type,
+    'scale_degree' ||
+    'rhythm_dictation' ||
+    'melodic_dictation' => drill.type,
     _ => drill.params['set'] as String,
   }) {
     'tempo_compare' => g.tempoCompare,
@@ -249,6 +342,8 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
     'note_name' => g.staffNote,
     'key_signature' => g.keySignature,
     'scale_degree' => g.tonicOrNot,
+    'rhythm_dictation' => g.rhythmDictation,
+    'melodic_dictation' => g.melodicDictation,
     'triad_quality' => g.chordQuality,
     'fretboard_natural_notes' => () => g.fretNote(naturalOnly: true),
     'fretboard_root_names' => () => g.fretNote(naturalOnly: false),
@@ -277,6 +372,41 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
   }
   return out;
 }
+
+/// I–IV–V–I in [key], root-position block chords around C4.
+List<DrillNote> cadenceNotes(SpelledNote key) {
+  final t = 48 + key.pitchClass;
+  const chords = [
+    [0, 4, 7, 12],
+    [5, 9, 12, 17],
+    [7, 11, 14, 19],
+    [0, 4, 7, 12],
+  ];
+  return [
+    for (var c = 0; c < chords.length; c++)
+      for (final s in chords[c])
+        DrillNote(
+          at: c * 0.7,
+          midi: (t + s).toDouble(),
+          seconds: c == chords.length - 1 ? 1.0 : 0.65,
+          gain: 0.55,
+        ),
+  ];
+}
+
+/// Where the question starts after a cadence (seconds).
+const double kAfterCadence = 3.4;
+
+/// "Play my answer" for a written melody: the cadence, then the degrees.
+DrillSound melodyAnswerSound(DrillEntry e, List<String> degrees) => DrillSound([
+  if (e.cadence) ...cadenceNotes(e.key!),
+  for (var i = 0; i < degrees.length; i++)
+    DrillNote(
+      at: (e.cadence ? kAfterCadence : 0) + i * 0.75,
+      midi: e.midis[int.parse(degrees[i]) - 1].toDouble(),
+      seconds: 0.7,
+    ),
+]);
 
 const Set<String> _staffNumbers = {'2', '3', '4', '5', '6', '7', '8'};
 
@@ -923,29 +1053,6 @@ final class _Gen {
     ).withStaff(DrillStaff(clef: clef, notes: [first, second]));
   }
 
-  /// I–IV–V–I in [key], root-position block chords around C4.
-  List<DrillNote> cadence(SpelledNote key) {
-    final t = 48 + key.pitchClass;
-    const chords = [
-      [0, 4, 7, 12],
-      [5, 9, 12, 17],
-      [7, 11, 14, 19],
-      [0, 4, 7, 12],
-    ];
-    return [
-      for (var c = 0; c < chords.length; c++)
-        for (final s in chords[c])
-          DrillNote(
-            at: c * 0.7,
-            midi: (t + s).toDouble(),
-            seconds: c == chords.length - 1 ? 1.0 : 0.65,
-            gain: 0.55,
-          ),
-    ];
-  }
-
-  static const double _afterCadence = 3.4;
-
   DrillQuestion tonicOrNot() {
     final key = SpelledNote.parse(pick(strings('key')));
     final degrees = ints('degrees', [1, 2, 3, 4, 5, 6, 7]);
@@ -959,8 +1066,8 @@ final class _Gen {
       answer: degree == 1 ? 'tonic' : 'notTonic',
       options: const ['tonic', 'notTonic'],
       sound: DrillSound([
-        ...cadence(key),
-        DrillNote(at: _afterCadence, midi: midi.toDouble(), seconds: 1.0),
+        ...cadenceNotes(key),
+        DrillNote(at: kAfterCadence, midi: midi.toDouble(), seconds: 1.0),
       ]),
       values: {'v0': key.name},
     );
@@ -995,10 +1102,10 @@ final class _Gen {
     DrillSound play(int s) {
       final other = direction == 'ascending' ? start + s : start - s;
       return DrillSound([
-        ...cadence(key),
-        DrillNote(at: _afterCadence, midi: start.toDouble(), seconds: 0.8),
+        ...cadenceNotes(key),
+        DrillNote(at: kAfterCadence, midi: start.toDouble(), seconds: 0.8),
         DrillNote(
-          at: _afterCadence + 0.9,
+          at: kAfterCadence + 0.9,
           midi: other.toDouble(),
           seconds: 0.8,
         ),
@@ -1012,6 +1119,83 @@ final class _Gen {
       sound: play(semis),
       optionSounds: [for (final n in names) play(intervalSemitones[n]!)],
       values: {'v0': direction},
+    );
+  }
+
+  // ---- F2.6d dictation ------------------------------------------------------
+
+  DrillQuestion rhythmDictation() {
+    final values = strings('values');
+    final bars = (p['bars'] as int?) ?? 1;
+    final bpm = (p['bpm'] as int?) ?? 70;
+    final ties = p['ties'] == true;
+    final rhythm = generateRhythm(rng, values, bars: bars, ties: ties);
+    final key = rhythmKey(rhythm);
+    return DrillQuestion(
+      kind: DrillPromptKind.rhythmDictation,
+      values: {'v0': bars},
+      options: [key],
+      answer: 0,
+      sound: rhythmSound(rhythm, bpm: bpm),
+      entry: DrillEntry.rhythm(
+        palette: values,
+        bars: bars,
+        bpm: bpm,
+        ties: ties,
+        answer: rhythm,
+      ),
+    );
+  }
+
+  DrillQuestion melodicDictation() {
+    final degrees = ints('degrees', [1, 2, 3, 4, 5]);
+    final count = (p['notes'] as int?) ?? 3;
+    final key = SpelledNote.parse(
+      p['key'] is List ? pick(strings('key')) : 'C',
+    );
+    final (lo, hi) = range('C4-D5');
+    final midis = degreeMidis(key, lo, hi);
+    final pitches = [
+      for (var d = 1; d <= 7; d++) degreePitch(key, d, midis[d - 1]),
+    ];
+    // Stepwise-leaning melody: neighbours more likely than leaps.
+    final melody = <int>[pick(degrees)];
+    while (melody.length < count) {
+      final near = degrees
+          .where((d) => (d - melody.last).abs() <= 2 && d != melody.last)
+          .toList();
+      melody.add(
+        near.isNotEmpty && rng.nextInt(3) > 0 ? pick(near) : pick(degrees),
+      );
+    }
+    final firstGiven = p['firstNoteGiven'] != false;
+    final cadence = p['cadenceEachQuestion'] != false;
+    final notes = <DrillNote>[
+      if (cadence) ...cadenceNotes(key),
+      for (var i = 0; i < melody.length; i++)
+        DrillNote(
+          at: (cadence ? kAfterCadence : 0) + i * 0.75,
+          midi: midis[melody[i] - 1].toDouble(),
+          seconds: 0.7,
+        ),
+    ];
+    return DrillQuestion(
+      kind: DrillPromptKind.melodicDictation,
+      values: {'v0': count, 'v1': key.name},
+      options: [melody.join(' ')],
+      answer: 0,
+      sound: DrillSound(notes),
+      entry: DrillEntry.melody(
+        palette: [for (final d in degrees) '$d'],
+        length: count,
+        given: firstGiven ? ['${melody.first}'] : const [],
+        key: key,
+        midis: midis,
+        pitches: pitches,
+        keySignature: keySignatures[key.name]!,
+        cadence: cadence,
+        answer: [for (final d in melody) '$d'],
+      ),
     );
   }
 }

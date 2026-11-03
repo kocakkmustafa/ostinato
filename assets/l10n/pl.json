@@ -8544,6 +8544,21 @@
     "09e193a6c3f5034b": "Tak, tonika",
     "4e27dd67f82d2706": "Nie, inny dźwięk",
     "75852fd4c89e6618": "Klucz wiolinowy",
-    "631ff30baaa57577": "Klucz basowy"
+    "631ff30baaa57577": "Klucz basowy",
+    "131111ff2ffc483b": "Posłuchaj, a potem zapisz usłyszany rytm ({v0} takt(y) 4/4).",
+    "467c847b44a6f144": "Posłuchaj po kadencji, a potem zapisz {v0} dźwięki w {v1}-dur. Pierwszy dźwięk jest podany.",
+    "1bc6e1dae021cb33": "Posłuchaj po kadencji, a potem zapisz {v0} dźwięki w {v1}-dur.",
+    "bc723b06a914d413": "cała nuta",
+    "c635fe66abc99cd5": "półnuta",
+    "54a4ef3fb890b99b": "ćwierćnuta z kropką",
+    "6dbbc0bd93861e2a": "dwie ósemki",
+    "ffab64a1e2985bbc": "pauza ćwierćnutowa",
+    "d8b02b3629266762": "pauza półnutowa",
+    "e8fca36088675be2": "Cofnij",
+    "5b172a0bf0d2651f": "Wyczyść",
+    "a42907c0af3776de": "Sprawdź",
+    "3ab238f1fd15837e": "Zapisano {v0} z {v1} miar",
+    "70292b8579bad88b": "Zapisano {v0} z {v1} dźwięków",
+    "7ade8187f831661f": "łuk"
   }
 }
