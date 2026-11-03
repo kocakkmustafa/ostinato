@@ -33,6 +33,7 @@
       "en": "Clap 16 beats along with the accompaniment. Headphones help the microphone hear only your claps.",
       "tr": "Eşlikle birlikte 16 vuruş alkışla. Kulaklık, mikrofonun yalnız alkışını duymasına yardım eder."
     },
+    "sequence": "4/4: q q q q | q q q q | q q q q | q q q q",
     "tempo": { "open": 80, "target": 80 },
     "pass": { "levelDefault": true }
   },
