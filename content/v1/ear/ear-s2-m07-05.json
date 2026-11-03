@@ -38,6 +38,13 @@
       "tr": "Altı ritim: iki ölçüyü dinle, sonraki iki ölçüde geri alkışla. Kulaklık, mikrofonun yalnız alkışını duymasına yardım eder."
     },
     "tempo": { "open": 70, "target": 70 },
+    "clap": {
+      "values": ["whole", "half", "quarter", "dottedQuarter", "eighth", "eighthPair", "quarterRest"],
+      "bars": 2,
+      "lines": 6,
+      "tempo": { "open": 60, "target": 70 },
+      "derivedFrom": "Modülden türetildi, kaynak satırlar: modülde yazılı ritim satırı yok; değerler modülün ritim diktelerinin birleşimi (ear-s2-m07-01/02: whole, half, quarter, eighthPair, quarterRest; ear-s2-m07-03: dottedQuarter, eighth). Altı iki ölçülük ritim (görev metni). Duy-tekrarla düzeni uygulamada \"Önce dinle\" ile satırı dinleyip sonra klikle alkışlamaktır. Açılış temposu modülün en düşük yazılı temposu ♩=60; hedef dersin temposu ♩=70."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",

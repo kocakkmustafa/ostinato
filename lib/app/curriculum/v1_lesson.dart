@@ -179,6 +179,7 @@ final class V1Practice {
     required this.pass,
     required this.drill,
     this.alternative,
+    this.clap,
   });
 
   /// Dominant code first, as in the plan row (`D+M`).
@@ -204,6 +205,13 @@ final class V1Practice {
   /// alternative.
   V1Drill? get anyDrill => drill ?? alternative?.drill;
 
+  /// Clapping lines generated per attempt (ear course, A3); no `sequence`.
+  final V1ClapLines? clap;
+
+  /// The tempo ladder of this lesson's practice: a clap block's own, else
+  /// [tempo].
+  V1Tempo? get practiceTempo => clap?.tempo ?? tempo;
+
   static const Set<String> measurementCodes = {
     'M', 'M!', 'M~', 'MIDI', 'K', 'Ö', 'D', //
   };
@@ -215,7 +223,7 @@ final class V1Practice {
     final m = _object(
       json,
       {'measurement', 'engineSteps', 'task', 'pass'},
-      optional: {'sequence', 'tempo', 'drill', 'alternative'},
+      optional: {'sequence', 'tempo', 'drill', 'clap', 'alternative'},
     );
     final measurement = _strings(m['measurement']);
     final steps = _strings(m['engineSteps']);
@@ -245,8 +253,18 @@ final class V1Practice {
     if (alternative != null && !steps.contains('A5')) {
       throw const FormatException('An alternative replaces singing (A5)');
     }
+    final clap = m['clap'] == null ? null : V1ClapLines.fromJson(m['clap']);
+    if (clap != null &&
+        (m['sequence'] != null ||
+            !steps.every((s) => s == 'A3') ||
+            !(measurement.contains('M') || measurement.contains('M!')))) {
+      throw const FormatException(
+        'A clap block is for A3 microphone lessons without a sequence',
+      );
+    }
     return V1Practice(
       alternative: alternative,
+      clap: clap,
       measurement: measurement,
       engineSteps: steps,
       task: _text(m['task']),
@@ -268,6 +286,59 @@ final class V1Alternative {
   factory V1Alternative.fromJson(Object? json) {
     final m = _object(json, {'drill', 'source'});
     return V1Alternative(V1Drill.fromJson(m['drill']), _string(m['source']));
+  }
+}
+
+/// Clapping lines made at run time (lesson guide §3.1: generated lines carry
+/// no `sequence`). [derivedFrom] records where the values came from.
+final class V1ClapLines {
+  const V1ClapLines({
+    required this.values,
+    required this.bars,
+    required this.lines,
+    required this.tempo,
+    required this.ties,
+    required this.derivedFrom,
+  });
+
+  /// Rhythm value names of the dictation drills (`quarter`, `eighthPair`…).
+  final List<String> values;
+  final int bars, lines;
+  final V1Tempo tempo;
+  final bool ties;
+  final String derivedFrom;
+
+  static const Set<String> valueNames = {
+    'whole', 'half', 'dottedQuarter', 'quarter', 'eighthPair', 'eighth', //
+    'quarterRest', 'halfRest',
+  };
+
+  factory V1ClapLines.fromJson(Object? json) {
+    final m = _object(
+      json,
+      {'values', 'bars', 'lines', 'tempo', 'derivedFrom'},
+      optional: {'ties'},
+    );
+    final values = _strings(m['values']);
+    final bars = m['bars'], lines = m['lines'], ties = m['ties'] ?? false;
+    if (values.isEmpty || !valueNames.containsAll(values)) {
+      throw const FormatException('Unknown clap value');
+    }
+    if (bars is! int || bars < 1 || bars > 4) {
+      throw const FormatException('Clap bars must be 1–4');
+    }
+    if (lines is! int || lines < 1 || lines > 8) {
+      throw const FormatException('Clap lines must be 1–8');
+    }
+    if (ties is! bool) throw const FormatException('ties must be a boolean');
+    return V1ClapLines(
+      values: values,
+      bars: bars,
+      lines: lines,
+      tempo: V1Tempo.fromJson(m['tempo']),
+      ties: ties,
+      derivedFrom: _string(m['derivedFrom']),
+    );
   }
 }
 
