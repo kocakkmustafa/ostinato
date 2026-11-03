@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/audio/audio_capture_channel.dart';
 import 'package:ostinato/app/audio/audio_input_controller.dart';
 import 'package:ostinato/app/curriculum/v1_lesson.dart';
+import 'package:ostinato/app/drill/drill_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_judge.dart';
 import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_outcome.dart';
@@ -167,5 +168,54 @@ void main() {
     expect(find.byType(SessionTuningGateCard), findsNothing);
     expect(find.byKey(const Key('practice-start')), findsOneWidget);
     await audio.dispose();
+  });
+
+  testWidgets('a clapping lesson with a question part opens its drill', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(900, 2400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    Future<void> open(String id) async {
+      final audio = AudioInputController(
+        channel: FakeAudioCaptureChannel(),
+        requestMicrophonePermission: () async => PermissionStatus.granted,
+      );
+      addTearDown(audio.dispose);
+      await tester.pumpWidget(
+        practiceHost(
+          PracticeLoopScreen(
+            key: ValueKey(id),
+            lesson: ear(id),
+            progress: _Memory(),
+            controllerFactory: (score, tempo, c) => PracticeSessionController(
+              score: score,
+              tempo: tempo,
+              audio: audio,
+              criteria: c,
+              analyzer: (r) async => judgeNote(r),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+    }
+
+    // Measured clapping lessons whose task also asks questions.
+    for (final id in ['ear-s1-m03-04', 'ear-s2-m07-03', 'ear-s2-m07-04']) {
+      await open(id);
+      expect(
+        find.byKey(const Key('practice-drill')),
+        findsOneWidget,
+        reason: id,
+      );
+    }
+    await tester.tap(find.byKey(const Key('practice-drill')));
+    await tester.pumpAndSettle();
+    expect(find.byType(DrillScreen), findsOneWidget);
+
+    // A plain clapping lesson has no drill button.
+    await open('ear-s1-m03-01');
+    expect(find.byKey(const Key('practice-drill')), findsNothing);
   });
 }

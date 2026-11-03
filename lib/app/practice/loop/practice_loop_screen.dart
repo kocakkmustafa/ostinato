@@ -9,6 +9,9 @@ import '../../audio/audio_input_controller.dart';
 import '../../curriculum/v1_lesson.dart';
 import '../../design/ostinato_theme.dart';
 import '../../design/widgets.dart';
+import '../../drill/drill_copy.dart';
+import '../../drill/drill_generator.dart';
+import '../../drill/drill_screen.dart';
 import '../../tuner/session_tuning_gate.dart';
 import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
@@ -126,6 +129,12 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
 
   /// FK1 "Listen first"; never sounds while the microphone runs.
   final ReferenceListenController _listen = ReferenceListenController();
+
+  /// The lesson's on-screen drill, when this build can generate it.
+  late final V1Drill? _drill = switch (widget.lesson.practice.anyDrill) {
+    final d? when supportsDrill(d) => d,
+    _ => null,
+  };
 
   PracticeSessionController _createController() {
     final factory = widget.controllerFactory;
@@ -334,6 +343,34 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                     style: hankenText(size: 13.5, height: 1.45),
                   ),
                   const SizedBox(height: 10),
+                  // A clapping lesson whose task also has a question part
+                  // (ear-s1-m03-04, ear-s2-m07-03/04): the drill opens from
+                  // here. Clapping alone decides the pass.
+                  if (_drill case final drill?
+                      when _c.phase == PracticePhase.idle)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: OutlinedButton.icon(
+                        key: const Key('practice-drill'),
+                        icon: const Icon(Icons.quiz_outlined),
+                        label: Text(
+                          uiText(
+                            context,
+                            DrillCopy.start,
+                            values: {'v0': drill.count},
+                          ),
+                        ),
+                        onPressed: () {
+                          final title = lesson.title.of(context);
+                          Navigator.of(context).push<bool>(
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  DrillScreen(drill: drill, title: title),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   // The tuning card is for guitar lines; clapping needs none.
                   if (!_ranOnce &&
                       _c.phase == PracticePhase.idle &&
