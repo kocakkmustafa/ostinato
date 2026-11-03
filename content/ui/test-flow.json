@@ -1,0 +1,75 @@
+{
+  "$about": "Test-flow copy (lib/app/test_flow/test_flow_copy.dart). EN+TR source pairs; all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "title",
+      "en": "Test, part by part",
+      "tr": "Test, bölüm bölüm"
+    },
+    {
+      "id": "intro",
+      "en": "Each part is checked on its own. If a part does not pass, repeat only that part; your progress is kept on this phone.",
+      "tr": "Her bölüm ayrı değerlendirilir. Bir bölüm geçmezse yalnız o bölümü tekrarla; ilerlemen bu telefonda saklanır."
+    },
+    {
+      "id": "banner",
+      "en": "This test runs part by part. Clapping and on-screen parts are measured; singing parts are a self-check and do not decide the result.",
+      "tr": "Bu test bölüm bölüm ilerler. Alkış ve ekran bölümleri ölçülür; şarkı bölümleri öz-kontroldür ve sonucu belirlemez."
+    },
+    {
+      "id": "open",
+      "en": "Take the test part by part",
+      "tr": "Testi bölüm bölüm yap"
+    },
+    {
+      "id": "continueWith",
+      "en": "Continue: {v0}",
+      "tr": "Devam et: {v0}"
+    },
+    {
+      "id": "partPassed",
+      "en": "PASSED",
+      "tr": "GEÇTİ"
+    },
+    {
+      "id": "partNotYet",
+      "en": "NOT YET · REPEAT THIS PART",
+      "tr": "HENÜZ DEĞİL · BU BÖLÜMÜ TEKRARLA"
+    },
+    {
+      "id": "partToDo",
+      "en": "TO DO",
+      "tr": "YAPILACAK"
+    },
+    {
+      "id": "partSelfCheck",
+      "en": "SELF-CHECK · NOT MEASURED",
+      "tr": "ÖZ-KONTROL · ÖLÇÜLMEDİ"
+    },
+    {
+      "id": "partSelfDone",
+      "en": "SELF-CHECK DONE · NOT MEASURED",
+      "tr": "ÖZ-KONTROL YAPILDI · ÖLÇÜLMEDİ"
+    },
+    {
+      "id": "selfCheckDone",
+      "en": "Done: I checked this myself",
+      "tr": "Yaptım: kendim kontrol ettim"
+    },
+    {
+      "id": "resultPassed",
+      "en": "Test passed: every measured part passed.",
+      "tr": "Test geçildi: ölçülen bölümlerin hepsi geçti."
+    },
+    {
+      "id": "resultProgress",
+      "en": "{v0} of {v1} measured parts passed.",
+      "tr": "{v1} ölçülen bölümden {v0} tanesi geçti."
+    },
+    {
+      "id": "statusPassed",
+      "en": "DONE · TEST PASSED",
+      "tr": "YAPILDI · TEST GEÇİLDİ"
+    }
+  ]
+}

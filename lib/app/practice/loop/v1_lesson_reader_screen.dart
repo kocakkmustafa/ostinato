@@ -14,6 +14,10 @@ import '../../ui_copy.dart';
 import '../../drill/drill_copy.dart';
 import '../../drill/drill_generator.dart';
 import '../../drill/drill_screen.dart';
+import '../../account_connection.dart';
+import '../../test_flow/test_flow_copy.dart';
+import '../../test_flow/test_flow_screen.dart';
+import '../../test_flow/test_flow_store.dart';
 import 'practice_progress_store.dart';
 import 'practice_score.dart';
 import 'reference_listen.dart';
@@ -37,6 +41,7 @@ class V1LessonReaderScreen extends StatefulWidget {
     this.existing,
     this.hasNextLesson = false,
     this.tuner,
+    this.testFlow,
   });
 
   final V1CourseLesson lesson;
@@ -46,6 +51,10 @@ class V1LessonReaderScreen extends StatefulWidget {
 
   /// Opens the tuner and returns today's check; defaults to [openTuner].
   final Future<TunerCheck?> Function(BuildContext context)? tuner;
+
+  /// Section progress of test-flow checkpoints; defaults to the account's
+  /// local store.
+  final TestFlowProgress? testFlow;
 
   @override
   State<V1LessonReaderScreen> createState() => _V1LessonReaderScreenState();
@@ -72,6 +81,28 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
           supportsDrill(drill),
     null => false,
   };
+
+  /// A checkpoint run part by part by the test flow.
+  bool get _hasTestFlow => _l.lesson.practice.sections.isNotEmpty;
+
+  Future<void> _openTestFlow() async {
+    final store =
+        widget.testFlow ??
+        TestFlowStore(
+          accountUserId: AccountScope.maybeOf(context)?.currentUserId,
+        );
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute(
+        builder: (_) => TestFlowScreen(
+          lesson: _l.lesson,
+          store: store,
+          checks: widget.checks,
+        ),
+      ),
+    );
+    final checks = await widget.checks.load();
+    if (mounted) setState(() => _check = checks[_l.id] ?? _check);
+  }
 
   /// A singing lesson whose on-screen version is the measured path.
   bool get _singingAlternative =>
@@ -171,7 +202,8 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
   }
 
   UiCopy get _banner => switch (_l.availability) {
-    // Singing with a measured on-screen version, before the generic banners.
+    // Test flow and singing alternatives come before the generic banners.
+    _ when _hasTestFlow => TestFlowCopy.banner,
     _ when _singingAlternative => DrillCopy.bannerSingingAlternative,
     V1LessonAvailability.selfCheck => V1CourseCopy.bannerSelfCheck,
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.bannerSelfCheckLesson,
@@ -296,7 +328,16 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
                 ),
               ],
             ]),
-            if (_hasDrill)
+            if (_hasTestFlow)
+              section(uiText(context, TestFlowCopy.title), [
+                FilledButton.icon(
+                  key: const Key('v1-reader-test-flow'),
+                  onPressed: () => unawaited(_openTestFlow()),
+                  icon: const Icon(Icons.checklist),
+                  label: Text(uiText(context, TestFlowCopy.open)),
+                ),
+              ])
+            else if (_hasDrill)
               section(uiText(context, DrillCopy.section), [
                 FilledButton.icon(
                   key: const Key('v1-reader-drill'),

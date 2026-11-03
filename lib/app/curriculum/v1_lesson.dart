@@ -52,6 +52,43 @@ final class V1Lesson {
   /// Pass thresholds are defaults until a music teacher signs them off.
   final bool expertPending;
 
+  /// A test-flow clapping section as a lesson the practice screen runs:
+  /// same id and texts, the section's title, an A3 checkpoint practice.
+  V1Lesson forSection(V1TestSection section) {
+    if (section.kind != V1SectionKind.clap) {
+      throw ArgumentError('Only clap sections run in the practice loop');
+    }
+    return V1Lesson._(
+      id: id,
+      course: course,
+      level: level,
+      title: section.title,
+      goal: goal,
+      explanation: explanation,
+      referenceAudio: referenceAudio,
+      practice: V1Practice(
+        measurement: const ['M!'],
+        engineSteps: const ['A3'],
+        task: section.title,
+        sequence: section.sequence,
+        tempo: section.tempo,
+        pass: practice.pass,
+        drill: null,
+        clap: section.clap,
+      ),
+      fallback: fallback,
+      safety: safety,
+      prerequisites: prerequisites,
+      selfCheck: selfCheck,
+      commonErrors: commonErrors,
+      adaptation: adaptation,
+      repertoire: repertoire,
+      legacy: legacy,
+      minutes: minutes,
+      expertPending: expertPending,
+    );
+  }
+
   static final RegExp idPattern = RegExp(
     r'^(gtr|voc|pno|ear)-s([1-4])-(?:m\d{2}[ab]?-\d{2}|test(?:-[ab])?)$',
   );
@@ -180,6 +217,7 @@ final class V1Practice {
     required this.drill,
     this.alternative,
     this.clap,
+    this.sections = const [],
   });
 
   /// Dominant code first, as in the plan row (`D+M`).
@@ -200,6 +238,10 @@ final class V1Practice {
   /// The on-screen version a singing (A5) task offers instead of singing.
   /// It is the lesson's measured path; singing stays a self-check.
   final V1Alternative? alternative;
+
+  /// A level test or checkpoint run part by part (test flow); empty for
+  /// ordinary lessons.
+  final List<V1TestSection> sections;
 
   /// The drill this lesson can run: its own (D, M!) or a singing
   /// alternative.
@@ -223,7 +265,14 @@ final class V1Practice {
     final m = _object(
       json,
       {'measurement', 'engineSteps', 'task', 'pass'},
-      optional: {'sequence', 'tempo', 'drill', 'clap', 'alternative'},
+      optional: {
+        'sequence',
+        'tempo',
+        'drill',
+        'clap',
+        'alternative',
+        'sections',
+      },
     );
     final measurement = _strings(m['measurement']);
     final steps = _strings(m['engineSteps']);
@@ -262,7 +311,22 @@ final class V1Practice {
         'A clap block is for A3 microphone lessons without a sequence',
       );
     }
+    final sections = m['sections'] == null
+        ? const <V1TestSection>[]
+        : [
+            for (final x in m['sections'] as List<dynamic>)
+              V1TestSection.fromJson(x),
+          ];
+    if (sections.isNotEmpty) {
+      if (!measurement.contains('M!')) {
+        throw const FormatException('Sections belong to checkpoints (M!)');
+      }
+      if (!sections.any((x) => x.required)) {
+        throw const FormatException('A test needs a required section');
+      }
+    }
     return V1Practice(
+      sections: sections,
       alternative: alternative,
       clap: clap,
       measurement: measurement,
@@ -338,6 +402,83 @@ final class V1ClapLines {
       tempo: V1Tempo.fromJson(m['tempo']),
       ties: ties,
       derivedFrom: _string(m['derivedFrom']),
+    );
+  }
+}
+
+enum V1SectionKind { drill, clap, selfCheck }
+
+/// One part of a test run by the test flow: an on-screen drill, a clapping
+/// line (fixed `sequence` or a generated `clap` block) or an unmeasured
+/// self-check (singing). Only `required` sections decide the test.
+final class V1TestSection {
+  const V1TestSection({
+    required this.title,
+    required this.kind,
+    required this.required,
+    required this.source,
+    this.drill,
+    this.clap,
+    this.sequence,
+    this.tempo,
+    this.items = const [],
+  });
+
+  final GuitarText title;
+  final V1SectionKind kind;
+  final bool required;
+
+  /// Where the part comes from (the task sentence it implements).
+  final String source;
+  final V1Drill? drill;
+  final V1ClapLines? clap;
+  final String? sequence;
+  final V1Tempo? tempo;
+
+  /// Self-check items (singing), ticked by the learner.
+  final List<GuitarText> items;
+
+  factory V1TestSection.fromJson(Object? json) {
+    final m = _object(
+      json,
+      {'title', 'kind', 'source'},
+      optional: {'drill', 'clap', 'sequence', 'tempo', 'items', 'required'},
+    );
+    final kind = switch (m['kind']) {
+      'drill' => V1SectionKind.drill,
+      'clap' => V1SectionKind.clap,
+      'selfCheck' => V1SectionKind.selfCheck,
+      _ => throw const FormatException('Unknown section kind'),
+    };
+    final drill = m['drill'] == null ? null : V1Drill.fromJson(m['drill']);
+    final clap = m['clap'] == null ? null : V1ClapLines.fromJson(m['clap']);
+    final sequence = m['sequence'] == null ? null : _string(m['sequence']);
+    final items = m['items'] == null
+        ? const <GuitarText>[]
+        : [for (final x in m['items'] as List<dynamic>) _text(x)];
+    final ok = switch (kind) {
+      V1SectionKind.drill => drill != null && clap == null && sequence == null,
+      V1SectionKind.clap =>
+        drill == null && (clap != null) != (sequence != null),
+      V1SectionKind.selfCheck =>
+        drill == null && clap == null && items.isNotEmpty,
+    };
+    if (!ok) throw const FormatException('Section fields do not fit its kind');
+    final required = m['required'] ?? kind != V1SectionKind.selfCheck;
+    if (required is! bool) throw const FormatException('required: boolean');
+    if (kind == V1SectionKind.selfCheck && required) {
+      throw const FormatException('A self-check cannot decide a test');
+    }
+    return V1TestSection(
+      title: _text(m['title']),
+      kind: kind,
+      required: required,
+      source: _string(m['source']),
+      drill: drill,
+      clap: clap,
+      sequence: sequence,
+      tempo: m['tempo'] == null ? null : V1Tempo.fromJson(m['tempo']),
+      items: items,
     );
   }
 }
