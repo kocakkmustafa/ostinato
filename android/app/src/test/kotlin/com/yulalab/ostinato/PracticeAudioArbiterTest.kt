@@ -102,7 +102,17 @@ class PracticeAudioArbiterTest {
     override fun event(message: Map<String, Any>) {}
   }
 
-  private class Harness(withOutput: Boolean = true, withVideo: Boolean = false) {
+  private class StagedFactory(val port: OutputPort) : PracticeAudioArbiter.StagedOutputFactory {
+    var stagedId: String? = null
+    val created = mutableListOf<String>()
+    override fun stage(samples: FloatArray, sampleRate: Int): String =
+      "ref-${samples.size}-$sampleRate".also { stagedId = it }
+    override fun isStaged(assetId: String) = stagedId == assetId
+    override fun create(assetId: String) = port.also { created += assetId }
+  }
+
+  private class Harness(withOutput: Boolean = true, withVideo: Boolean = false,
+                        staged: Boolean = false) {
     val work = Work()
     val recorder = Recorder()
     val output = OutputPort()
@@ -110,11 +120,12 @@ class PracticeAudioArbiterTest {
     var videoCloseAccept = true
     var videoCloseThrows = false
     var onVideoClose: (() -> Unit)? = null
+    val stagedFactory = if (staged) StagedFactory(output) else null
     val arbiter = PracticeAudioArbiter(work,
-      if (withOutput) object : PracticeAudioArbiter.OutputFactory {
+      stagedFactory ?: if (withOutput) object : PracticeAudioArbiter.OutputFactory {
         override fun create(assetId: String) = output
       } else null,
-      if (withOutput) setOf("approved_fixture") else emptySet(),
+      if (withOutput && !staged) setOf("approved_fixture") else emptySet(),
       videoReservationEnabled = withVideo,
       videoCloseDispatcher = if (withVideo) work else null)
     val capture = AudioCaptureCoordinator(
@@ -1465,6 +1476,45 @@ class PracticeAudioArbiterTest {
     assertEquals("closing", h.state(owner)["outputPhase"])
     h.work.hardwareOne(); h.work.mainAll()
     assertEquals(listOf("output_setup_failed"), reply.calls)
+    assertEquals(1, h.output.releases)
+    assertEquals(true, h.state(owner)["allClear"])
+  }
+
+  /** FK1: staged PCM plays only through an ordinary output lease. */
+  @Test fun stagedReferencePlaysOnlyThroughOutputLease() {
+    val h = Harness(staged = true); val owner = h.bind()
+    fun stage(samples: FloatArray, rate: Int) =
+      h.arbiter.stageReference(owner, owner.ownerToken, owner.engineGeneration, samples, rate)
+    expectCode("bad_args") { stage(floatArrayOf(0f, .5f), 22_050) }
+    expectCode("bad_args") { stage(floatArrayOf(0f, 1.5f), 48_000) }
+    expectCode("bad_args") { stage(floatArrayOf(Float.NaN), 48_000) }
+    expectCode("bad_args") { stage(FloatArray(0), 48_000) }
+    expectCode("bad_args") { stage(FloatArray(48_000 * 40 + 1), 48_000) }
+    val id = stage(floatArrayOf(0f, .25f, -.25f), 48_000)["assetId"] as String
+    assertEquals("ref-3-48000", id)
+
+    val permit = h.reserve(owner, a, "output")
+    val unknown = OutputReply().also {
+      h.arbiter.startOutput(owner, owner.ownerToken, owner.engineGeneration,
+        h.state(owner)["contextGeneration"] as Long, a,
+        permit["leaseGeneration"] as Long, "ref-other", it)
+    }
+    assertEquals(listOf("output_asset_unavailable"), unknown.calls)
+    assertEquals(true, h.state(owner)["allClear"])
+
+    val again = h.reserve(owner, b, "output")
+    val playing = OutputReply().also {
+      h.arbiter.startOutput(owner, owner.ownerToken, owner.engineGeneration,
+        h.state(owner)["contextGeneration"] as Long, b,
+        again["leaseGeneration"] as Long, id, it)
+    }
+    h.work.hardwareOne(); h.work.mainAll()
+    assertEquals(listOf("playing"), playing.calls)
+    assertEquals(listOf(id), h.stagedFactory!!.created)
+    // A playing buffer cannot be replaced underneath the speaker.
+    expectCode("audio_busy") { stage(floatArrayOf(.1f), 48_000) }
+    assertEquals("pending", h.close(owner, b, again)["status"])
+    h.work.hardwareOne(); h.work.mainAll()
     assertEquals(1, h.output.releases)
     assertEquals(true, h.state(owner)["allClear"])
   }

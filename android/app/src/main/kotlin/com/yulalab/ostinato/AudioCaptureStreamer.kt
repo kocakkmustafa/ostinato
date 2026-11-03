@@ -23,13 +23,16 @@ import java.util.concurrent.TimeUnit
 internal object AudioCaptureRuntime {
   private var coordinator: AudioCaptureCoordinator? = null
   private val work = AndroidArbiterWork()
-  private val arbiter = PracticeAudioArbiter(work, videoCloseDispatcher = work)
+  private val reference = ReferenceOutputFactory()
+  private val arbiter = PracticeAudioArbiter(work, outputFactory = reference,
+    videoCloseDispatcher = work)
 
   @Synchronized fun coordinator(context: Context): AudioCaptureCoordinator =
     coordinator ?: AudioCaptureCoordinator(
       AndroidRecorderFactory(context.applicationContext), AndroidCaptureDispatch(), arbiter = arbiter,
     ).also {
       coordinator = it
+      reference.attach(context)
       arbiter.attachCapture(it)
     }
 

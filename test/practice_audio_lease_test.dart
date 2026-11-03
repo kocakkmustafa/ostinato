@@ -418,6 +418,31 @@ void main() {
     expect(lease.phase, PracticeAudioLeasePhase.idle);
   });
 
+  // Simulator 2026-11-03 (FK1): a reference that ended released its output
+  // lease and the root showed "Audio shutdown could not be confirmed". Native
+  // closeAll stops output on a worker, so its receipt is still "pending".
+  test('a user close waits for an output stop that is still in flight', () async {
+    var closing = false;
+    final port = _Port();
+    port.stop = () async {
+      closing = true;
+      Timer(const Duration(milliseconds: 120), () => closing = false);
+    };
+    port.closingInFlight = () => closing;
+    final lease = PracticeAudioLease(
+      port: port,
+      closeSettle: const Duration(seconds: 1),
+      closeSettlePoll: const Duration(milliseconds: 20),
+    );
+    final opened = await _acquire(lease, PracticeAudioSide.output);
+    expect(opened.status, PracticeAudioAcquireStatus.acquired);
+    expect(
+      await lease.release(opened.ticket!),
+      PracticeAudioReleaseStatus.confirmedClosed,
+    );
+    expect(lease.phase, PracticeAudioLeasePhase.idle);
+  });
+
   test(
     'a close still in flight after the settle budget stays blocked',
     () async {

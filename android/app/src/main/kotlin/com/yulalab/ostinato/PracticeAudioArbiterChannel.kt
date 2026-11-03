@@ -94,6 +94,14 @@ internal class PracticeAudioArbiterChannel(
               override fun error(code: String) { result.error(code, null, null) }
             })
         }
+        "stageReference" -> {
+          exact(args, "ownerToken", "engineGeneration", "samples", "sampleRate")
+          val samples = args["samples"] as? FloatArray
+            ?: throw PracticeAudioArbiter.AudioFault("bad_args")
+          result.success(arbiter.stageReference(binding, token(args),
+            number(args, "engineGeneration"), samples,
+            (args["sampleRate"] as? Int) ?: throw PracticeAudioArbiter.AudioFault("bad_args")))
+        }
         "closeAll" -> {
           exact(args, "ownerToken", "engineGeneration", "contextGeneration", "leaseId",
             "leaseGeneration", "reason")

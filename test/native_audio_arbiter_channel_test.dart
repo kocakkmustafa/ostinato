@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -130,6 +131,71 @@ void main() {
       ]);
     },
   );
+
+  test('FK1: only the last staged reference id may start output', () async {
+    final staged = <Object?>[];
+    var starts = 0;
+    var nextId = 'ref-1';
+    messenger.setMockMethodCallHandler(_method, (call) async {
+      final args = call.arguments as Map<Object?, Object?>;
+      switch (call.method) {
+        case 'bind':
+          return _binding();
+        case 'readAllAudioState':
+          return _snapshot();
+        case 'stageReference':
+          expect(args.keys.toSet(), {
+            'ownerToken',
+            'engineGeneration',
+            'samples',
+            'sampleRate',
+          });
+          expect(args['ownerToken'], _owner);
+          expect(args['samples'], isA<Float32List>());
+          staged.add(args['sampleRate']);
+          return {'assetId': nextId};
+        case 'reserve':
+          return {
+            'status': 'reserved',
+            'leaseId': _leaseId,
+            'leaseGeneration': 1,
+            'stateRevision': 5,
+          };
+        case 'startOutput':
+          ++starts;
+          expect(args['assetId'], 'ref-2');
+          return {
+            'status': 'playing',
+            'leaseId': _leaseId,
+            'leaseGeneration': 1,
+            'stateRevision': 6,
+          };
+      }
+      throw StateError('Unexpected ${call.method}');
+    });
+    final port = NativeAudioArbiterChannel(channel: _method);
+    await port.readAllAudioState();
+    final pcm = Float32List.fromList([0, 0.25, -0.25]);
+    expect(await port.stageReference(pcm, 48000), 'ref-1');
+    nextId = 'ref-2';
+    expect(await port.stageReference(pcm, 44100), 'ref-2');
+    expect(staged, [48000, 44100]);
+    final permit = await port.reserve(PracticeAudioSide.output, _leaseId);
+    // A replaced staging is no longer playable.
+    await expectLater(
+      port.startOutput(permit, 'ref-1'),
+      throwsA(isA<NativeAudioProtocolException>()),
+    );
+    expect(starts, 0);
+    expect((await port.startOutput(permit, 'ref-2')).stateRevision, 6);
+    expect(starts, 1);
+    // A native id outside the reference namespace is refused.
+    nextId = 'lesson.wav';
+    await expectLater(
+      port.stageReference(pcm, 48000),
+      throwsA(isA<NativeAudioProtocolException>()),
+    );
+  });
 
   test('malformed or contradictory snapshot is never an all-clear', () async {
     for (final corrupt in <Map<String, Object?>>[

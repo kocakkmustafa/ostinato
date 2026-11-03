@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -120,6 +121,97 @@ void main() {
       owner.dispose();
       await owner.lastFenceForTest;
       expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
+      user.dispose();
+      phase.dispose();
+    },
+  );
+
+  test(
+    'FK1: a reference-only grant opens only staged reference output',
+    () async {
+      final user = ValueNotifier<String?>('A');
+      final phase = ValueNotifier(MotionIdentityPhase.verified);
+      final owner = PracticeAudioRootOwner(
+        userId: user,
+        phase: phase,
+        lease: PracticeAudioLease(port: _Port()),
+        initialLifecycleState: AppLifecycleState.resumed,
+        allowDetachedRouteEventsForTest: true,
+        allowReferenceOutput: true,
+      );
+      final observer = PracticeAudioRouteObserver(owner);
+      final lesson = _route('lesson');
+      owner.attachNavigator(observer);
+      observer.didPush(lesson, null);
+      await _settleFence();
+      // Production keeps general acquisition closed.
+      expect(owner.grantFor(lesson), isNull);
+      Future<AudioRouteAcquireStatus> open(
+        PracticeAudioSide side, [
+        String? assetId,
+      ]) async => (await owner.acquire(
+        owner.grantFor(lesson, referenceOnly: true)!,
+        side,
+        assetId: assetId,
+      )).status;
+      expect(
+        await open(PracticeAudioSide.input),
+        AudioRouteAcquireStatus.unavailable,
+      );
+      expect(
+        await open(PracticeAudioSide.output, 'lesson.wav'),
+        AudioRouteAcquireStatus.unavailable,
+      );
+      expect(owner.leasePhase, PracticeAudioLeasePhase.idle);
+      final grant = owner.grantFor(lesson, referenceOnly: true)!;
+      final played = await owner.acquire(
+        grant,
+        PracticeAudioSide.output,
+        assetId: 'ref-1',
+      );
+      expect(played.status, AudioRouteAcquireStatus.acquired);
+      expect(owner.leasePhase, PracticeAudioLeasePhase.outputActive);
+      // One grant, one action.
+      expect(
+        (await owner.acquire(
+          grant,
+          PracticeAudioSide.output,
+          assetId: 'ref-1',
+        )).status,
+        AudioRouteAcquireStatus.staleGrant,
+      );
+      expect(
+        await owner.release(played.ticket!),
+        PracticeAudioReleaseStatus.confirmedClosed,
+      );
+      owner.dispose();
+      await owner.lastFenceForTest;
+      user.dispose();
+      phase.dispose();
+    },
+  );
+
+  test(
+    'FK1: without reference output a reference grant is never issued',
+    () async {
+      final user = ValueNotifier<String?>('A');
+      final phase = ValueNotifier(MotionIdentityPhase.verified);
+      final owner = PracticeAudioRootOwner(
+        userId: user,
+        phase: phase,
+        lease: PracticeAudioLease(port: _Port()),
+        initialLifecycleState: AppLifecycleState.resumed,
+        allowDetachedRouteEventsForTest: true,
+      );
+      final observer = PracticeAudioRouteObserver(owner);
+      final lesson = _route('lesson');
+      owner.attachNavigator(observer);
+      observer.didPush(lesson, null);
+      await _settleFence();
+      expect(owner.grantFor(lesson, referenceOnly: true), isNull);
+      expect(await owner.stageReference(Float32List(4), 48000), isNull);
+      owner.dispose();
+      await owner.lastFenceForTest;
       user.dispose();
       phase.dispose();
     },

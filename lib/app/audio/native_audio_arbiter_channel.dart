@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter/services.dart';
 
@@ -20,6 +22,9 @@ final class NativeAudioArbiterChannel
 
   final MethodChannel _channel;
   final Set<String> _allowedAssetIds;
+
+  /// FK1: ids the native side returned for staged reference PCM.
+  final Set<String> _stagedAssetIds = {};
   final TargetPlatform _platform;
   Future<NativeAudioBinding>? _bindingFuture;
   NativeAudioBinding? _boundOwner;
@@ -123,6 +128,26 @@ final class NativeAudioArbiterChannel
     return state;
   }
 
+  /// FK1: stages mono float PCM natively for a later output lease (memory
+  /// only; nothing plays). Returns the native asset id.
+  Future<String> stageReference(Float32List samples, int sampleRate) async {
+    final owner = await _binding();
+    final wire = await _channel.invokeMethod<Object?>('stageReference', {
+      ..._ownerFields(owner),
+      'samples': samples,
+      'sampleRate': sampleRate,
+    });
+    _checkBoundOwner(owner);
+    final id = wire is Map ? wire['assetId'] : null;
+    if (id is! String || !id.startsWith('ref-')) {
+      throw const NativeAudioProtocolException('Bad staged reference id');
+    }
+    _stagedAssetIds
+      ..clear()
+      ..add(id);
+    return id;
+  }
+
   @override
   Future<NativeAllAudioState> readAllAudioState() async {
     final failedFenceAtReadStart = _failedFenceSerial;
@@ -204,7 +229,8 @@ final class NativeAudioArbiterChannel
     String assetId,
   ) async {
     if (permit.side != PracticeAudioSide.output ||
-        !_allowedAssetIds.contains(assetId)) {
+        !(_allowedAssetIds.contains(assetId) ||
+            _stagedAssetIds.contains(assetId))) {
       throw const NativeAudioProtocolException('Output asset unavailable');
     }
     final owner = await _binding();

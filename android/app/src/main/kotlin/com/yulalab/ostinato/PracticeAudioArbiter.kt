@@ -41,9 +41,18 @@ internal class PracticeAudioArbiter(
     fun closeExactPlayer(): Boolean = closeExactPlayer.invoke()
   }
 
-  /** Only a future, educator-approved asset adapter may provide these ports.
-   * create() must leave no focus/player behind if it throws. */
+  /** Lesson media needs a future, educator-approved asset adapter. The one
+   * production factory today is [ReferenceOutputFactory] (FK1), which plays
+   * only PCM that Dart synthesized and staged. create() must leave no
+   * focus/player behind if it throws. */
   interface OutputFactory { fun create(assetId: String): OutputPort }
+
+  /** FK1: one staged mono PCM buffer; staging is memory only and starts nothing. */
+  interface StagedOutputFactory : OutputFactory {
+    /** Replaces any staged buffer and returns its asset id. */
+    fun stage(samples: FloatArray, sampleRate: Int): String
+    fun isStaged(assetId: String): Boolean
+  }
   interface OutputPort {
     fun start()
     fun stop()
@@ -331,7 +340,8 @@ internal class PracticeAudioArbiter(
         val active = currentLeaseLocked(owner, context, id, heldGeneration)
         if (active.side != "output" || active.phase != "reserved") throw AudioFault("stale_audio_lease")
         if (foregroundOwner !== owner.activityOwner) throw AudioFault("not_foreground_or_permitted")
-        if (outputFactory == null || assetId !in allowedOutputAssetIds) {
+        if (outputFactory == null || (assetId !in allowedOutputAssetIds &&
+            (outputFactory as? StagedOutputFactory)?.isStaged(assetId) != true)) {
           lease = null
           ++stateRevision
           throw AudioFault("output_asset_unavailable")
@@ -397,6 +407,21 @@ internal class PracticeAudioArbiter(
         }
       }
     }
+  }
+
+  /** FK1: stages Dart-synthesized PCM for a later reserve/startOutput. Refused
+   * while an output lease is past "reserved", so playing audio is never swapped. */
+  fun stageReference(
+    owner: Binding, token: String, generation: Long, samples: FloatArray, sampleRate: Int,
+  ): Map<String, Any?> = synchronized(gate) {
+    requireOwnerLocked(owner, token, generation)
+    val staged = outputFactory as? StagedOutputFactory ?: throw AudioFault("output_asset_unavailable")
+    val held = lease
+    if (held != null && held.side == "output" && held.phase != "reserved") throw AudioFault("audio_busy")
+    if ((sampleRate != 44_100 && sampleRate != 48_000) || samples.isEmpty() ||
+      samples.size > sampleRate * MAX_REFERENCE_SECONDS ||
+      samples.any { !it.isFinite() || it > 1f || it < -1f }) throw AudioFault("bad_args")
+    mapOf("assetId" to staged.stage(samples, sampleRate))
   }
 
   fun closeAll(
@@ -1113,4 +1138,9 @@ internal class PracticeAudioArbiter(
     value.all { it in '0'..'9' || it in 'a'..'f' }
 
   class AudioFault(val code: String) : RuntimeException(code)
+
+  companion object {
+    /** Dart `kMaxReferenceSeconds`. */
+    const val MAX_REFERENCE_SECONDS = 40
+  }
 }
