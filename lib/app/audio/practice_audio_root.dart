@@ -14,6 +14,9 @@ import 'native_audio_arbiter_channel.dart';
 import 'practice_audio_lease.dart';
 import 'practice_video_session_owner.dart';
 
+/// FK1 staged reference asset ids (`ref-1`, `ref-2`, …), minted natively.
+const String kReferenceAssetPrefix = 'ref-';
+
 /// No production call may infer a native close receipt from this placeholder.
 /// The input, output, and shared session need one native arbiter first.
 final class _NoNativeAudioArbiter implements PracticeAudioLeasePort {
@@ -96,8 +99,9 @@ final class PracticeAudioRouteGrant {
     this._identityEpoch,
     this._routeEpoch,
     this._visibilityEpoch,
-    this._leaseContext,
-  );
+    this._leaseContext, {
+    bool referenceOnly = false,
+  }) : _referenceOnly = referenceOnly;
 
   final PracticeAudioRootOwner _owner;
   final Route<dynamic> _route;
@@ -106,6 +110,9 @@ final class PracticeAudioRouteGrant {
   final int _routeEpoch;
   final int _visibilityEpoch;
   final PracticeAudioContext _leaseContext;
+
+  /// FK1: may open only the output side, and only for a staged reference.
+  final bool _referenceOnly;
   bool _consumed = false;
 
   /// A route action can spend its captured authority once. It cannot mint a
@@ -313,6 +320,7 @@ final class PracticeAudioRootOwner {
     AppLifecycleState? initialLifecycleState,
     @visibleForTesting this.allowDetachedRouteEventsForTest = false,
     this.allowAcquisition = false,
+    this.allowReferenceOutput = false,
     @visibleForTesting this.allowVideoAcquisitionForTest = false,
     this.nativeFenceEnabled = true,
     this.onStatusChanged,
@@ -365,6 +373,10 @@ final class PracticeAudioRootOwner {
 
   /// Test seam only. The production root always keeps this false.
   final bool allowAcquisition;
+
+  /// FK1: the one production acquisition — output of Dart-synthesized,
+  /// natively staged reference audio (`ref-` asset ids). No input, no media.
+  final bool allowReferenceOutput;
 
   /// Test-only admission until the native video plugin validates each permit.
   @visibleForTesting
@@ -528,10 +540,13 @@ final class PracticeAudioRootOwner {
     }
   }
 
-  PracticeAudioRouteGrant? grantFor(Route<dynamic> route) {
+  PracticeAudioRouteGrant? grantFor(
+    Route<dynamic> route, {
+    bool referenceOnly = false,
+  }) {
     final observer = _observer;
     if (_disposed ||
-        !allowAcquisition ||
+        !(allowAcquisition || (referenceOnly && allowReferenceOutput)) ||
         !_identityReady ||
         !_foreground ||
         _barrier ||
@@ -553,7 +568,16 @@ final class PracticeAudioRootOwner {
       _routeEpoch,
       _visibilityEpoch,
       _lease.captureContext(),
+      referenceOnly: referenceOnly,
     );
+  }
+
+  /// FK1: stages Dart-synthesized PCM natively (memory only) and returns its
+  /// asset id for a reference-only grant. Null without the native arbiter.
+  Future<String?> stageReference(Float32List samples, int sampleRate) async {
+    final arbiter = _captureArbiter;
+    if (_disposed || !allowReferenceOutput || arbiter == null) return null;
+    return arbiter.stageReference(samples, sampleRate);
   }
 
   /// This seam proves Dart ordering with a fake player. Shipping lessons never
@@ -677,7 +701,7 @@ final class PracticeAudioRootOwner {
   bool _valid(PracticeAudioRouteGrant grant) =>
       identical(grant._owner, this) &&
       !_disposed &&
-      allowAcquisition &&
+      (allowAcquisition || (grant._referenceOnly && allowReferenceOutput)) &&
       _identityReady &&
       _foreground &&
       !_barrier &&
@@ -694,6 +718,11 @@ final class PracticeAudioRootOwner {
   }) async {
     if (grant._consumed || !_valid(grant)) {
       return const AudioRouteAcquireResult(AudioRouteAcquireStatus.staleGrant);
+    }
+    if (grant._referenceOnly &&
+        (side != PracticeAudioSide.output ||
+            !(assetId?.startsWith(kReferenceAssetPrefix) ?? false))) {
+      return const AudioRouteAcquireResult(AudioRouteAcquireStatus.unavailable);
     }
     // This synchronous assignment precedes the first await, so concurrent
     // continuations cannot spend the same action twice.
@@ -912,6 +941,21 @@ class PracticeAudioCaptureScope extends InheritedWidget {
 
   final PracticeAudioRootOwner owner;
 
+  /// FK1: a reference-only grant for the calling route (output side only).
+  static PracticeAudioRouteGrant? referenceGrantFor(BuildContext context) {
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<PracticeAudioCaptureScope>();
+    final route = ModalRoute.of(context);
+    if (scope == null || route == null) return null;
+    return scope.owner.grantFor(route, referenceOnly: true);
+  }
+
+  /// FK1: see [PracticeAudioRootOwner.stageReference].
+  static PracticeAudioRootOwner? referenceOwnerOf(BuildContext context) =>
+      context
+          .dependOnInheritedWidgetOfExactType<PracticeAudioCaptureScope>()
+          ?.owner;
+
   static PracticeAudioCaptureAction? actionFor(BuildContext context) {
     final scope = context
         .dependOnInheritedWidgetOfExactType<PracticeAudioCaptureScope>();
@@ -1089,6 +1133,7 @@ class _OstinatoAudioRootState extends State<OstinatoAudioRoot>
       captureArbiter: nativeArbiter,
       initialLifecycleState: WidgetsBinding.instance.lifecycleState,
       allowAcquisition: widget.allowTestAcquisition,
+      allowReferenceOutput: mobileNative || widget.allowTestAcquisition,
       nativeFenceEnabled: widget.testLease != null || mobileNative,
       onStatusChanged: _refreshAfterFrame,
     );

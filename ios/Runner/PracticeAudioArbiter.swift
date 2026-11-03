@@ -3,12 +3,24 @@ import Flutter
 import Security
 import UIKit
 
-/// The production output backend is deliberately absent until the lesson WAVs
-/// and the shared session policy have been accepted separately.
+/// Lesson WAV playback remains absent until those assets are accepted. FK1
+/// adds one production backend, [PracticeReferenceOutput], which plays only
+/// PCM that Dart synthesized and staged (`stageReference`); no file, no URL.
 protocol PracticeOutputHardware: AnyObject {
   func start(assetId: String) throws
   func stop() throws
 }
+
+/// FK1: an output backend that plays one staged PCM buffer. Staging is memory
+/// only; the arbiter starts it through the ordinary reserve/startOutput path.
+protocol PracticeStagedOutput: PracticeOutputHardware {
+  /// Replaces any staged buffer and returns its asset id.
+  func stage(samples: [Float], sampleRate: Int) -> String
+  func isStaged(_ assetId: String) -> Bool
+}
+
+/// The longest staged reference (Dart `kMaxReferenceSeconds`).
+let maxReferenceSeconds = 40
 
 /// F2.1: a capture attempt either only records (legacy note observation and
 /// tuner gate) or records while the same engine may play short app cues
@@ -56,10 +68,28 @@ final class PracticeAudioSessionPolicy {
   private let session = AVAudioSession.sharedInstance()
   private let lock = NSLock()
   private var inputActive = false
+  private var outputActive = false
 
   var isReleased: Bool {
     lock.lock(); defer { lock.unlock() }
-    return !inputActive
+    return !inputActive && !outputActive
+  }
+
+  /// FK1 reference playback: output only, no microphone. The arbiter admits
+  /// output only when input is clear, so the two never share the session.
+  func activateOutput() throws {
+    try session.setCategory(.playback, mode: .default, options: [])
+    try session.setActive(true)
+    lock.lock(); outputActive = true; lock.unlock()
+  }
+
+  func deactivateOutput() throws {
+    lock.lock()
+    let active = outputActive
+    lock.unlock()
+    guard active else { return }
+    try session.setActive(false, options: .notifyOthersOnDeactivation)
+    lock.lock(); outputActive = false; lock.unlock()
   }
 
   func activateInput(rate: Int, fence: CaptureFence,
@@ -161,6 +191,7 @@ private final class PracticeAudioReply {
 /// treated as released merely because its Flutter reply has timed out.
 final class PracticeAudioArbiter {
   static let shared = PracticeAudioArbiter(coordinator: .shared,
+                                            outputHardware: PracticeReferenceOutput(policy: .shared),
                                             sessionPolicy: .shared)
 
   let coordinator: AudioCaptureCoordinator
@@ -822,6 +853,26 @@ final class PracticeAudioArbiter {
       result(["schemaVersion": 1, "bridgeReady": true, "handoff": after])
     case "readAllAudioState":
       result(snapshot(candidate))
+    case "stageReference":
+      // Memory only. Refused while a staged buffer may be starting or playing.
+      guard let staged = outputHardware as? PracticeStagedOutput,
+            outputPhase == "clear" || outputPhase == "reserved",
+            !outputOperationInFlight else {
+        result(failure("audio_output_unavailable")); return
+      }
+      guard let rate = args["sampleRate"] as? Int, rate == 44100 || rate == 48000,
+            let data = args["samples"] as? FlutterStandardTypedData,
+            data.type == .float32, data.elementCount > 0,
+            Int(data.elementCount) <= rate * maxReferenceSeconds else {
+        result(failure("bad_args")); return
+      }
+      let samples: [Float] = data.data.withUnsafeBytes {
+        Array($0.bindMemory(to: Float.self).prefix(Int(data.elementCount)))
+      }
+      guard samples.allSatisfy({ $0.isFinite && abs($0) <= 1 }) else {
+        result(failure("bad_args")); return
+      }
+      result(["assetId": staged.stage(samples: samples, sampleRate: rate)])
     case "reserve":
       guard let id = args["leaseId"] as? String, isHex32(id),
             let side = args["side"] as? String,
@@ -836,7 +887,8 @@ final class PracticeAudioArbiter {
       guard canAcquire(), snapshot(candidate)["allClear"] as? Bool == true else {
         result(failure("audio_busy")); return
       }
-      guard side != "output" || (outputHardware != nil && !allowedOutputIds.isEmpty) else {
+      guard side != "output" || (outputHardware != nil &&
+              (!allowedOutputIds.isEmpty || outputHardware is PracticeStagedOutput)) else {
         result(failure("audio_output_unavailable")); return
       }
       guard side != "video" || videoReservationEnabled else {
@@ -865,7 +917,9 @@ final class PracticeAudioArbiter {
       guard currentReservationMatches(args, candidate),
             reservation?.side == "output", outputPhase == "reserved",
             let assetId = args["assetId"] as? String,
-            allowedOutputIds.contains(assetId), outputHardware != nil,
+            allowedOutputIds.contains(assetId) ||
+              (outputHardware as? PracticeStagedOutput)?.isStaged(assetId) == true,
+            outputHardware != nil,
             canAcquire() else { result(failure("audio_output_unavailable")); return }
       outputPhase = "starting"
       outputOperationInFlight = true
@@ -1097,5 +1151,71 @@ final class PracticeAudioArbiterHandler {
 
   func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     arbiter.handle(call, owner: owner, rebindBridge: rebindBridge, result: result)
+  }
+}
+
+/// FK1 production output: one staged mono PCM buffer through AVAudioEngine.
+/// Start and stop run on the arbiter's serial output worker.
+final class PracticeReferenceOutput: PracticeStagedOutput {
+  enum Failure: Error { case notStaged, format }
+
+  private let policy: PracticeAudioSessionPolicy
+  private let lock = NSLock()
+  private var staged: (id: String, samples: [Float], rate: Int)?
+  private var serial = 0
+  private var engine: AVAudioEngine?
+  private var player: AVAudioPlayerNode?
+
+  init(policy: PracticeAudioSessionPolicy) { self.policy = policy }
+
+  func stage(samples: [Float], sampleRate: Int) -> String {
+    lock.lock(); defer { lock.unlock() }
+    serial += 1
+    let id = "ref-\(serial)"
+    staged = (id, samples, sampleRate)
+    return id
+  }
+
+  func isStaged(_ assetId: String) -> Bool {
+    lock.lock(); defer { lock.unlock() }
+    return staged?.id == assetId
+  }
+
+  func start(assetId: String) throws {
+    lock.lock()
+    let buffer = staged
+    lock.unlock()
+    guard let buffer = buffer, buffer.id == assetId else { throw Failure.notStaged }
+    guard let format = AVAudioFormat(standardFormatWithSampleRate: Double(buffer.rate), channels: 1),
+          let pcm = AVAudioPCMBuffer(pcmFormat: format,
+                                     frameCapacity: AVAudioFrameCount(buffer.samples.count)),
+          let channel = pcm.floatChannelData?[0] else { throw Failure.format }
+    pcm.frameLength = AVAudioFrameCount(buffer.samples.count)
+    buffer.samples.withUnsafeBufferPointer {
+      channel.update(from: $0.baseAddress!, count: buffer.samples.count)
+    }
+    try policy.activateOutput()
+    let engine = AVAudioEngine()
+    let player = AVAudioPlayerNode()
+    engine.attach(player)
+    engine.connect(player, to: engine.mainMixerNode, format: format)
+    do {
+      try engine.start()
+    } catch {
+      try? policy.deactivateOutput()
+      throw error
+    }
+    player.scheduleBuffer(pcm, at: nil, options: [], completionHandler: nil)
+    player.play()
+    self.engine = engine
+    self.player = player
+  }
+
+  func stop() throws {
+    player?.stop()
+    engine?.stop()
+    player = nil
+    engine = nil
+    try policy.deactivateOutput()
   }
 }

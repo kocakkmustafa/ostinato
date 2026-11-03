@@ -540,6 +540,23 @@ final class RunnerTests: XCTestCase {
   }
 }
 
+private final class FakeStagedOutput: PracticeStagedOutput {
+  var stagedId: String?
+  var stagedCount = 0
+  var startedIds: [String] = []
+  var stopCalls = 0
+
+  func stage(samples: [Float], sampleRate: Int) -> String {
+    stagedCount = samples.count
+    stagedId = "ref-\(samples.count)-\(sampleRate)"
+    return stagedId!
+  }
+
+  func isStaged(_ assetId: String) -> Bool { stagedId == assetId }
+  func start(assetId: String) throws { startedIds.append(assetId) }
+  func stop() throws { stopCalls += 1 }
+}
+
 private final class FakePracticeOutput: PracticeOutputHardware {
   var startCalls = 0
   var stopCalls = 0
@@ -804,6 +821,67 @@ final class PracticeAudioArbiterTests: XCTestCase {
     XCTAssertEqual((oldStop as? FlutterError)?.code, "stale_audio_owner")
     let nextRead = call(arbiter, nextOwner, "readAllAudioState", ownerFields(nextOwner)) as? [String: Any]
     XCTAssertEqual(nextRead?["ownerToken"] as? String, nextOwner.token)
+  }
+
+  /// FK1: Dart-synthesized PCM is staged in memory, then plays only through
+  /// the ordinary output reservation; nothing else can start it.
+  func testStagedReferencePlaysOnlyThroughOutputReservation() {
+    let coordinator = AudioCaptureCoordinator(hardware: FakeCaptureHardware(), canCapture: { true })
+    let output = FakeStagedOutput()
+    let arbiter = PracticeAudioArbiter(coordinator: coordinator, canAcquire: { true },
+                                       outputHardware: output)
+    let owner = onMain { arbiter.replaceEngine() }
+    let binding = call(arbiter, owner, "bind", ["schemaVersion": 1]) as? [String: Any]
+    let context = binding!["contextGeneration"] as! Int
+    func pcm(_ values: [Float]) -> FlutterStandardTypedData {
+      FlutterStandardTypedData(float32: values.withUnsafeBufferPointer { Data(buffer: $0) })
+    }
+    func stage(_ values: [Float], rate: Int) -> Any? {
+      call(arbiter, owner, "stageReference", ownerFields(owner).merging([
+        "samples": pcm(values), "sampleRate": rate
+      ]) { _, rhs in rhs })
+    }
+    XCTAssertEqual((stage([0, 0.5], rate: 22050) as? FlutterError)?.code, "bad_args")
+    XCTAssertEqual((stage([0, 1.5], rate: 48000) as? FlutterError)?.code, "bad_args")
+    XCTAssertEqual((stage([Float.nan], rate: 48000) as? FlutterError)?.code, "bad_args")
+    XCTAssertEqual((stage([], rate: 48000) as? FlutterError)?.code, "bad_args")
+    XCTAssertNil(output.stagedId)
+    let assetId = (stage([0, 0.25, -0.25], rate: 48000) as? [String: Any])?["assetId"] as? String
+    XCTAssertEqual(assetId, "ref-3-48000")
+
+    let reserved = call(arbiter, owner, "reserve", ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease, "side": "output"
+    ]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertEqual(reserved?["status"] as? String, "reserved")
+    let lease = ownerFields(owner).merging([
+      "contextGeneration": context, "leaseId": outputLease,
+      "leaseGeneration": reserved!["leaseGeneration"]!
+    ]) { _, rhs in rhs }
+    let unknown = call(arbiter, owner, "startOutput",
+                       lease.merging(["assetId": "ref-other"]) { _, rhs in rhs })
+    XCTAssertEqual((unknown as? FlutterError)?.code, "audio_output_unavailable")
+    XCTAssertEqual(output.startedIds, [])
+
+    let playing = expectation(description: "staged reference playing")
+    onMain {
+      arbiter.handle(FlutterMethodCall(methodName: "startOutput",
+        arguments: lease.merging(["assetId": assetId!]) { _, rhs in rhs }), owner: owner) { answer in
+        XCTAssertEqual((answer as? [String: Any])?["status"] as? String, "playing")
+        playing.fulfill()
+      }
+    }
+    wait(for: [playing], timeout: 2)
+    XCTAssertEqual(output.startedIds, [assetId!])
+    // A playing buffer cannot be replaced underneath the speaker.
+    XCTAssertEqual((stage([0.1], rate: 48000) as? FlutterError)?.code, "audio_output_unavailable")
+
+    let closed = call(arbiter, owner, "closeAll",
+                      lease.merging(["reason": "userStop"]) { _, rhs in rhs }) as? [String: Any]
+    XCTAssertNotNil(closed)
+    waitForOutputPhase("clear", arbiter, owner)
+    XCTAssertEqual(output.stopCalls, 1)
+    let clear = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+    XCTAssertEqual(clear?["allClear"] as? Bool, true)
   }
 
   func testOutputSetupAndReleaseFailuresRemainStickyUntilExplicitRetry() {
