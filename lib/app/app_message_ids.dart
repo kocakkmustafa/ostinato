@@ -4199,6 +4199,7 @@ const appMessageIds = <(String, String), String>{
   ("Choose one technique per short trial, play its reference separately and defer bends/vibrato if uncomfortable or instrument-inappropriate.", "Kısa denemeye tek teknik seç, referansı ayrı çal; rahatsız veya çalgıya uygunsuzsa bükme/vibratoyu ertele."): "7acc4416bdd28f06",
   ("Late at bar 9. Plan the bass note during bar 8 and keep the strumming hand moving.", "9. ölçüde geç. Bas notayı 8. ölçüde planla ve sağ eli hareket ettirmeyi sürdür."): "7adc7d4e619a0c79",
   ("Changes between F and B♭, and between G and C, at least 12 times in 60 seconds each, keeping the barre in place.", "F ile B♭ ve G ile C arasında, barre'ı yerinde tutarak her çiftte 60 saniyede en az 12 kez geçer."): "7add73b6ebf4e400",
+  ("tie", "bağ"): "7ade8187f831661f",
   ("Dm7: x-x-0-2-1-1. Finger 2 on string 3, fret 2. Lay finger 1 flat across strings 2 and 1 at fret 1. The C4 on string 2 is the seventh.", "Dm7: x-x-0-2-1-1. 2. parmak 3. telin 2. perdesinde. 1. parmağı 2. ve 1. telin 1. perdesine yatır. 2. teldeki Do4 yedilidir."): "7adfef1676ae8fd5",
   ("Each fret-12 note sounded like its open string, only higher.", "12. perdedeki her nota açık telinin daha tiz hâli gibi duyuldu."): "7ae76390067c034f",
   ("Keep the shape of fingers 3 and 2 during the move, like one block.", "Hareket boyunca 3. ve 2. parmağın biçimini tek bir blok gibi koru."): "7aed99d125e6b713",

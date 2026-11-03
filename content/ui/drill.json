@@ -447,6 +447,11 @@
       "tr": "ikilik sus"
     },
     {
+      "id": "valueTie",
+      "en": "tie",
+      "tr": "bağ"
+    },
+    {
       "id": "undo",
       "en": "Undo",
       "tr": "Geri al"

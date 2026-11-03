@@ -21,19 +21,62 @@ const Map<String, double> rhythmBeats = {
 
 bool isRest(String value) => value.endsWith('Rest');
 
-/// Two eighths and an eighth pair sound the same; compare them as one.
+/// The tie token: the next note continues the previous one (no new attack).
+const String kTie = '~';
+
+/// Sounding events `(start, length, rest)` in beats: an eighth pair is two
+/// eighths and a tied note lengthens the note before it.
+List<({double start, double length, bool rest})> rhythmEvents(
+  List<String> values,
+) {
+  final out = <({double start, double length, bool rest})>[];
+  var at = 0.0;
+  var tied = false;
+  for (final v in values) {
+    if (v == kTie) {
+      tied = true;
+      continue;
+    }
+    final parts = v == 'eighthPair' ? ['eighth', 'eighth'] : [v];
+    for (final part in parts) {
+      final len = rhythmBeats[part]!;
+      if (tied && out.isNotEmpty && !out.last.rest && !isRest(part)) {
+        final last = out.removeLast();
+        out.add((start: last.start, length: last.length + len, rest: false));
+      } else {
+        out.add((start: at, length: len, rest: isRest(part)));
+      }
+      tied = false;
+      at += len;
+    }
+  }
+  return out;
+}
+
+/// Canonical answer key: what is heard. Two eighths equal a pair, and a
+/// quarter tied to a quarter equals a half.
 String rhythmKey(List<String> values) => [
-  for (final v in values) ...(v == 'eighthPair' ? ['eighth', 'eighth'] : [v]),
+  for (final e in rhythmEvents(values))
+    '${e.start}:${e.length}${e.rest ? 'r' : ''}',
 ].join(' ');
 
 double rhythmLength(List<String> values) =>
-    values.fold(0, (sum, v) => sum + rhythmBeats[v]!);
+    values.fold(0, (sum, v) => v == kTie ? sum : sum + rhythmBeats[v]!);
 
 /// Whether [next] may be written after [values] (it fits the bar and keeps
 /// quarter-beat positions on the grid: a lone eighth only completes a
 /// dotted quarter's half beat).
 bool rhythmFits(List<String> values, String next, {required int bars}) {
   final at = rhythmLength(values);
+  final last = values.isEmpty ? null : values.last;
+  if (next == kTie) {
+    // A tie joins two sounding notes, so something must still follow.
+    return last != null &&
+        last != kTie &&
+        !isRest(last) &&
+        at < bars * 4 - 1e-9;
+  }
+  if (last == kTie && isRest(next)) return false;
   final beats = rhythmBeats[next]!;
   final barEnd = (at ~/ 4 + 1) * 4.0;
   if (at + beats > math.min(barEnd, bars * 4.0) + 1e-9) return false;
@@ -48,6 +91,7 @@ List<String> generateRhythm(
   math.Random rng,
   List<String> values, {
   required int bars,
+  bool ties = false,
 }) {
   for (var attempt = 0; attempt < 200; attempt++) {
     final out = <String>[];
@@ -78,7 +122,19 @@ List<String> generateRhythm(
       if (!isRest(v)) sounding[(pos ~/ 4).clamp(0, bars - 1)] = true;
       pos += rhythmBeats[v]!;
     }
-    if (sounding.every((s) => s)) return out;
+    if (!sounding.every((s) => s)) continue;
+    if (!ties) return out;
+    // One tie, mid-bar (beat 3) or across a bar line, between two notes.
+    final spots = <int>[];
+    var at = 0.0;
+    for (var i = 0; i < out.length - 1; i++) {
+      at += rhythmBeats[out[i]]!;
+      final boundary = at % 4 == 0 || at % 4 == 2;
+      if (boundary && !isRest(out[i]) && !isRest(out[i + 1])) spots.add(i);
+    }
+    if (spots.isEmpty) continue;
+    final i = spots[rng.nextInt(spots.length)];
+    return [...out.sublist(0, i + 1), kTie, ...out.sublist(i + 1)];
   }
   throw StateError('No rhythm fits these values');
 }
@@ -96,17 +152,15 @@ DrillSound rhythmSound(List<String> values, {required int bpm}) {
         timbre: DrillTimbre.click,
       ),
   ];
-  var t = 4 * beat;
-  for (final v in values) {
-    final len = rhythmBeats[v]! * beat;
-    if (v == 'eighthPair') {
-      notes
-        ..add(DrillNote(at: t, midi: 57, seconds: beat / 2 * 0.9))
-        ..add(DrillNote(at: t + beat / 2, midi: 57, seconds: beat / 2 * 0.9));
-    } else if (!isRest(v)) {
-      notes.add(DrillNote(at: t, midi: 57, seconds: len * 0.9));
-    }
-    t += len;
+  for (final e in rhythmEvents(values)) {
+    if (e.rest) continue;
+    notes.add(
+      DrillNote(
+        at: (4 + e.start) * beat,
+        midi: 57,
+        seconds: e.length * beat * 0.9,
+      ),
+    );
   }
   return DrillSound(notes);
 }

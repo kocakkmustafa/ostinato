@@ -195,6 +195,7 @@ abstract final class DrillCopy {
   static const UiCopy valueEighth = ('eighth note', 'sekizlik');
   static const UiCopy valueQuarterRest = ('quarter rest', 'dörtlük sus');
   static const UiCopy valueHalfRest = ('half rest', 'ikilik sus');
+  static const UiCopy valueTie = ('tie', 'bağ');
   static const UiCopy undo = ('Undo', 'Geri al');
   static const UiCopy clear = ('Clear', 'Temizle');
   static const UiCopy check = ('Check', 'Kontrol et');
@@ -297,6 +298,7 @@ abstract final class DrillCopy {
     valueEighth,
     valueQuarterRest,
     valueHalfRest,
+    valueTie,
     undo,
     clear,
     check,
