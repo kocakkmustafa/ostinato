@@ -38,6 +38,10 @@
       "en": "Listen to each of 6 notes and sing it back in your own octave for about two seconds. If you'd rather not sing, do the 'Same or different?' drill instead.",
       "tr": "6 notanın her birini dinle ve kendi oktavında yaklaşık iki saniye geri söyle. Söylemek istemiyorsan bunun yerine 'Aynı mı farklı mı?' alıştırmasını yap."
     },
+    "alternative": {
+      "drill": { "type": "same_different", "count": 6, "params": { "range": ["C3", "C5"], "minCents": 50, "maxCents": 200, "varyVolume": true } },
+      "source": "Görev metni: \"If you'd rather not sing, do the 'Same or different?' drill instead.\" 6 soru (6 nota); ayarlar ear-s1-m02-02'den."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",

@@ -8545,6 +8545,7 @@
     "a42907c0af3776de": "Check",
     "3ab238f1fd15837e": "{v0} of {v1} beats written",
     "70292b8579bad88b": "{v0} of {v1} notes written",
-    "7ade8187f831661f": "tie"
+    "7ade8187f831661f": "tie",
+    "1731eba7c70e32c1": "Singing is not measured in this build; check your singing yourself. The on-screen version below is measured: passing it saves the lesson as done."
   }
 }

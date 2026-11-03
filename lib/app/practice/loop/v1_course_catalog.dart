@@ -438,6 +438,9 @@ final class V1CourseState {
               ? V1LessonStatus.completed
               : V1LessonStatus.passed;
         }
+        if (c?.evidence == V1CheckEvidence.drillPass) {
+          return V1LessonStatus.drillPassed;
+        }
         if (c != null) return V1LessonStatus.heldSelfReported;
         return isOpen(l.id) ? V1LessonStatus.held : V1LessonStatus.locked;
       case V1LessonAvailability.selfCheck:

@@ -8545,6 +8545,7 @@
     "a42907c0af3776de": "Vérifier",
     "3ab238f1fd15837e": "{v0} temps sur {v1} écrits",
     "70292b8579bad88b": "{v0} notes sur {v1} écrites",
-    "7ade8187f831661f": "liaison"
+    "7ade8187f831661f": "liaison",
+    "1731eba7c70e32c1": "Le chant n’est pas mesuré dans cette version ; vérifie ton chant toi-même. La version à l’écran ci-dessous est mesurée : la réussir enregistre la leçon comme faite."
   }
 }

@@ -62,14 +62,23 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
   bool get _isTuner => _l.availability == V1LessonAvailability.tuner;
 
   /// F2.6: a `D` lesson whose drill this build can generate.
-  late final bool _hasDrill = switch (_l.lesson.practice.drill) {
+  late final bool _hasDrill = switch (_l.lesson.practice.anyDrill) {
     final drill? =>
-      _l.availability == V1LessonAvailability.drillSoon && supportsDrill(drill),
+      const {
+            V1LessonAvailability.drillSoon,
+            V1LessonAvailability.selfCheck,
+            V1LessonAvailability.held,
+          }.contains(_l.availability) &&
+          supportsDrill(drill),
     null => false,
   };
 
+  /// A singing lesson whose on-screen version is the measured path.
+  bool get _singingAlternative =>
+      _hasDrill && _l.lesson.practice.alternative != null;
+
   Future<void> _openDrill() async {
-    final drill = _l.lesson.practice.drill!;
+    final drill = _l.lesson.practice.anyDrill!;
     final passed = await Navigator.of(context).push<bool>(
       MaterialPageRoute(
         builder: (_) =>
@@ -162,6 +171,8 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
   }
 
   UiCopy get _banner => switch (_l.availability) {
+    // Singing with a measured on-screen version, before the generic banners.
+    _ when _singingAlternative => DrillCopy.bannerSingingAlternative,
     V1LessonAvailability.selfCheck => V1CourseCopy.bannerSelfCheck,
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.bannerSelfCheckLesson,
     V1LessonAvailability.camera => V1CourseCopy.bannerCamera,
@@ -295,7 +306,7 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
                     uiText(
                       context,
                       DrillCopy.start,
-                      values: {'v0': lesson.practice.drill!.count},
+                      values: {'v0': lesson.practice.anyDrill!.count},
                     ),
                   ),
                 ),

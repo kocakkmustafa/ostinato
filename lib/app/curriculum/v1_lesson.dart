@@ -178,6 +178,7 @@ final class V1Practice {
     required this.tempo,
     required this.pass,
     required this.drill,
+    this.alternative,
     this.clap,
   });
 
@@ -195,6 +196,14 @@ final class V1Practice {
 
   /// Generated on-screen questions: required for D, optional for M!.
   final V1Drill? drill;
+
+  /// The on-screen version a singing (A5) task offers instead of singing.
+  /// It is the lesson's measured path; singing stays a self-check.
+  final V1Alternative? alternative;
+
+  /// The drill this lesson can run: its own (D, M!) or a singing
+  /// alternative.
+  V1Drill? get anyDrill => drill ?? alternative?.drill;
 
   /// Clapping lines generated per attempt (ear course, A3); no `sequence`.
   final V1ClapLines? clap;
@@ -214,7 +223,7 @@ final class V1Practice {
     final m = _object(
       json,
       {'measurement', 'engineSteps', 'task', 'pass'},
-      optional: {'sequence', 'tempo', 'drill', 'clap'},
+      optional: {'sequence', 'tempo', 'drill', 'clap', 'alternative'},
     );
     final measurement = _strings(m['measurement']);
     final steps = _strings(m['engineSteps']);
@@ -238,6 +247,12 @@ final class V1Practice {
             !measurement.contains('M!')) {
       throw const FormatException('Drill only on D lessons and checkpoints');
     }
+    final alternative = m['alternative'] == null
+        ? null
+        : V1Alternative.fromJson(m['alternative']);
+    if (alternative != null && !steps.contains('A5')) {
+      throw const FormatException('An alternative replaces singing (A5)');
+    }
     final clap = m['clap'] == null ? null : V1ClapLines.fromJson(m['clap']);
     if (clap != null &&
         (m['sequence'] != null ||
@@ -248,6 +263,7 @@ final class V1Practice {
       );
     }
     return V1Practice(
+      alternative: alternative,
       clap: clap,
       measurement: measurement,
       engineSteps: steps,
@@ -257,6 +273,19 @@ final class V1Practice {
       pass: V1Pass.fromJson(m['pass']),
       drill: drill,
     );
+  }
+}
+
+/// The on-screen version a singing task names ("If you'd rather not sing,
+/// …"). [source] quotes where it comes from.
+final class V1Alternative {
+  const V1Alternative(this.drill, this.source);
+  final V1Drill drill;
+  final String source;
+
+  factory V1Alternative.fromJson(Object? json) {
+    final m = _object(json, {'drill', 'source'});
+    return V1Alternative(V1Drill.fromJson(m['drill']), _string(m['source']));
   }
 }
 

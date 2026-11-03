@@ -127,6 +127,11 @@
       "tr": "Alıştırmayı başlat ({v0} soru)"
     },
     {
+      "id": "bannerSingingAlternative",
+      "en": "Singing is not measured in this build; check your singing yourself. The on-screen version below is measured: passing it saves the lesson as done.",
+      "tr": "Şarkı söyleme bu sürümde ölçülmüyor; şarkını kendin kontrol et. Aşağıdaki ekran sürümü ölçülür: geçince ders yapıldı olarak kaydedilir."
+    },
+    {
       "id": "statusPassed",
       "en": "DONE · DRILL PASSED",
       "tr": "YAPILDI · ALIŞTIRMA GEÇİLDİ"

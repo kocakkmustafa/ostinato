@@ -38,6 +38,10 @@
       "tr": "Dört tur: yeni do'yu dinle, sonra do-mi-sol-do söyle; her notayı yaklaşık bir saniye tut. Kendi oktavında söyle. Söylemek istemezsen ekrandaki sürümü seç: her arpeji dinler, majör mü minör mü olduğunu işaretlersin."
     },
     "sequence": "1-3-5-8 | ×4",
+    "alternative": {
+      "drill": { "type": "triad_quality", "count": 4, "params": { "qualities": ["major", "minor"], "inversions": false, "arpeggiate": true, "range": "C3-C5" } },
+      "source": "Görev metni: \"you hear each arpeggio and mark it major or minor.\" 4 tur; ayarlar ear-s2-m08-01'den."
+    },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",

@@ -37,6 +37,10 @@
       "en": "Listen to 6 contours and sing each one back in your own octave. If you'd rather not sing, do the 'Up, down or same' drill instead.",
       "tr": "6 konturu dinle ve her birini kendi oktavında geri söyle. Söylemek istemiyorsan bunun yerine 'Yukarı, aşağı, aynı' alıştırmasını yap."
     },
+    "alternative": {
+      "drill": { "type": "pitch_direction", "count": 6, "params": { "range": ["C3", "C5"], "minSemitones": 2, "notes": 3, "allowSame": true } },
+      "source": "Görev metni: \"If you'd rather not sing, do the 'Up, down or same' drill instead.\" 6 kontur; ayarlar ear-s1-m02-03'ten."
+    },
     "pass": {
       "levelDefault": false,
       "text": {
