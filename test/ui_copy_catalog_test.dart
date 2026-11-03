@@ -8,6 +8,7 @@ import 'package:ostinato/app/device_accuracy_copy.dart';
 import 'package:ostinato/app/membership_copy.dart';
 import 'package:ostinato/app/practice/display/practice_display_copy.dart';
 import 'package:ostinato/app/practice/loop/practice_rhythm_copy.dart';
+import 'package:ostinato/app/practice/loop/reference_copy.dart';
 import 'package:ostinato/app/practice/loop/v1_course_copy.dart';
 import 'package:ostinato/app/practice/loop/v1_paywall_copy.dart';
 import 'package:ostinato/app/practice/loop/tempo_ladder_copy.dart';
@@ -35,6 +36,7 @@ void main() {
     'content/ui/membership.json': MembershipCopy.all,
     'content/ui/settings.json': SettingsCopy.all,
     'content/ui/device-accuracy.json': DeviceAccuracyCopy.all,
+    'content/ui/reference.json': ReferenceCopy.all,
   };
 
   for (final entry in catalogs.entries) {
@@ -86,6 +88,7 @@ void main() {
         ...SettingsCopy.all,
         ...DeviceAccuracyCopy.all,
         ...TunerCopy.all,
+        ...ReferenceCopy.all,
       ]) {
         final id = appMessageIds[pair];
         expect(id, isNotNull, reason: pair.$1);

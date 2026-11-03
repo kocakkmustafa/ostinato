@@ -8447,6 +8447,13 @@
     "e4308bfcfd9feec7": "Precisão ≥ {v0}",
     "7bcc4b2762e4f409": "Ouvidas ≥ {v0}",
     "1f03be7a9155e8b5": "No tempo ≥ {v0} (dentro de ±{v1} ms)",
-    "5905c9ef79a3ec11": "Andamento ♩={v0} · {v1} do alvo {v2}"
+    "5905c9ef79a3ec11": "Andamento ♩={v0} · {v1} do alvo {v2}",
+    "8adb206042f4fe62": "Ouvir a ♩={v0}",
+    "8ac8284fb4a3b243": "Parar de ouvir",
+    "adc1b21e94b10880": "Preparando o trecho…",
+    "57b7409f720e912b": "Tocando a ♩={v0}: um compasso de contagem e depois o trecho.",
+    "52074deaa564c086": "Toca os primeiros {v0} de {v1} compassos.",
+    "94ee05fe0da186d9": "A referência não pode tocar agora. Pare outros áudios e tente de novo.",
+    "00906f94c93b9ffd": "O app sintetiza o trecho no seu celular; não é uma gravação."
   }
 }

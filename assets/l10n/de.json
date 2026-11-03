@@ -8447,6 +8447,13 @@
     "e4308bfcfd9feec7": "Genauigkeit ≥ {v0}",
     "7bcc4b2762e4f409": "Gehört ≥ {v0}",
     "1f03be7a9155e8b5": "Im Takt ≥ {v0} (innerhalb ±{v1} ms)",
-    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} des Ziels {v2}"
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · {v1} des Ziels {v2}",
+    "8adb206042f4fe62": "Bei ♩={v0} anhören",
+    "8ac8284fb4a3b243": "Anhören beenden",
+    "adc1b21e94b10880": "Die Passage wird vorbereitet…",
+    "57b7409f720e912b": "Spielt bei ♩={v0}: ein Takt Einzähler, dann die Passage.",
+    "52074deaa564c086": "Spielt die ersten {v0} von {v1} Takten.",
+    "94ee05fe0da186d9": "Die Referenz kann gerade nicht abgespielt werden. Beende andere Audiowiedergabe und versuche es erneut.",
+    "00906f94c93b9ffd": "Die App erzeugt die Passage auf deinem Telefon; es ist keine Aufnahme."
   }
 }

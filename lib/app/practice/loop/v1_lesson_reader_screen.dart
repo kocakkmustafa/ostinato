@@ -12,6 +12,10 @@ import '../../tuner/tuner_screen.dart' show openTuner;
 import '../../tuner/tunings.dart';
 import '../../ui_copy.dart';
 import 'practice_progress_store.dart';
+import 'practice_score.dart';
+import 'reference_listen.dart';
+import 'reference_listen_bar.dart';
+import 'v1_practice_catalog.dart';
 import 'v1_course_catalog.dart';
 import 'v1_course_copy.dart';
 
@@ -20,8 +24,8 @@ enum V1ReaderExit { closed, openNextLesson }
 /// A v1 lesson this build cannot run in the measured practice loop: goal,
 /// explanation, task, an honest note on what is not measured yet, and the
 /// self-check (contract §3 Ö, §4.2). Tuner lessons open the tuner instead.
-/// No reference playback: the app cannot synthesize lesson references yet,
-/// and the screen says so.
+/// FK1: a single-note line plays as reference audio (target and open
+/// tempo); other lines keep the honest "not in this build yet" note.
 class V1LessonReaderScreen extends StatefulWidget {
   const V1LessonReaderScreen({
     super.key,
@@ -53,6 +57,26 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
 
   V1CourseLesson get _l => widget.lesson;
   bool get _isTuner => _l.availability == V1LessonAvailability.tuner;
+
+  /// FK1: only a written single-note line has a reference to synthesize
+  /// (chord charts and technique lines would sound misleading).
+  late final PracticeScore? _referenceScore = () {
+    if (_l.lesson.course != 'gtr' || _l.lesson.practice.sequence == null) {
+      return null;
+    }
+    if (V1PracticeCatalog.technique.hasMatch(_l.lesson.practice.sequence!)) {
+      return null;
+    }
+    final score = V1PracticeCatalog.scoreOf(_l.lesson);
+    return score != null && score.hasPitches ? score : null;
+  }();
+  late final ReferenceListenController _listen = ReferenceListenController();
+
+  @override
+  void dispose() {
+    _listen.dispose();
+    super.dispose();
+  }
 
   int get _itemCount => _l.lesson.selfCheck.isNotEmpty
       ? _l.lesson.selfCheck.length
@@ -241,15 +265,26 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
             ]),
             if (lesson.referenceAudio.kinds.isNotEmpty && !_isTuner)
               section(uiText(context, V1CourseCopy.readerReference), [
-                Text(
-                  uiText(context, V1CourseCopy.readerReferenceSoon),
-                  key: const Key('v1-reader-reference'),
-                  style: hankenText(
-                    size: 12.5,
-                    color: palette.textMuted,
-                    height: 1.4,
+                if (_referenceScore case final score?)
+                  ReferenceListenBar(
+                    key: const Key('v1-reader-reference'),
+                    controller: _listen,
+                    score: score,
+                    tempos: [
+                      _l.lesson.practice.tempo?.target ?? 60,
+                      _l.lesson.practice.tempo?.open ?? 60,
+                    ],
+                  )
+                else
+                  Text(
+                    uiText(context, V1CourseCopy.readerReferenceSoon),
+                    key: const Key('v1-reader-reference'),
+                    style: hankenText(
+                      size: 12.5,
+                      color: palette.textMuted,
+                      height: 1.4,
+                    ),
                   ),
-                ),
               ]),
             if (_isTuner)
               ..._tunerPart(context, body)

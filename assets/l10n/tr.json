@@ -8447,6 +8447,13 @@
     "e4308bfcfd9feec7": "Doğruluk ≥ {v0}",
     "7bcc4b2762e4f409": "Duyulma ≥ {v0}",
     "1f03be7a9155e8b5": "Zamanında ≥ {v0} (±{v1} ms içinde)",
-    "5905c9ef79a3ec11": "Tempo ♩={v0} · hedef {v2} temposunun {v1}"
+    "5905c9ef79a3ec11": "Tempo ♩={v0} · hedef {v2} temposunun {v1}",
+    "8adb206042f4fe62": "♩={v0} temposunda dinle",
+    "8ac8284fb4a3b243": "Dinlemeyi durdur",
+    "adc1b21e94b10880": "Satır hazırlanıyor…",
+    "57b7409f720e912b": "♩={v0} temposunda çalıyor: bir ölçü giriş, sonra satır.",
+    "52074deaa564c086": "{v1} ölçünün ilk {v0} ölçüsü çalınır.",
+    "94ee05fe0da186d9": "Referans şu an çalamıyor. Diğer sesleri durdurup yeniden dene.",
+    "00906f94c93b9ffd": "Satırı uygulama telefonunda sentezler; bu bir kayıt değildir."
   }
 }
