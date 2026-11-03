@@ -155,7 +155,6 @@
     "159722b3a50a81b7": "quinta giusta, 7 semitoni",
     "15a4ca4c17f4fb3b": "Su E grave a vuoto confronta un piccolo contatto del palmo vicino al ponte con una nota non smorzata; non premere forte. Prova due brevi giri confortevoli, poi una volta il compito di trasferimento; riposati e ripeti nelle sessioni successive, senza forzarti a fare tutto oggi.",
     "15fd624447c420a1": "So nominare le due note suonate e spostare una coppia fondamentale-quinta mantenendo silenziose le corde escluse.",
-    "1b63ddcfdfec9b1c": "L'accesso al microfono serve ad ascoltare le note che suoni durante la pratica e l'accordatura. L'audio viene elaborato su questo dispositivo e non viene caricato. Se attivi l'ascolto della tua registrazione, resta solo su questo dispositivo e viene eliminata alla fine della sessione.",
     "1640780890f6460e": "Organizza G D Em C in frasi di quattro battute, segnando cambi di accordo, un piano di accenti e un'interruzione finale.\nSuona le 16 battute con una pulsazione comoda, continuando nella battuta successiva dopo un errore locale.\nRipeti con una diversa densità di pennate nella frase 3 senza cambiare armonia o durata.",
     "1654e86c824de4c9": "Domanda e risposta in dodici battute",
     "166d8c112384f70f": "Usa corde a vuoto nell'ordine p i m a, lasciando una battuta di pausa prima di ripetere il gruppo di quattro note.",
@@ -2122,7 +2121,6 @@
     "d35e81e9406238d4": "Serie e obiettivo settimanale — ogni pratica misurata conta.",
     "a4b9ccbb2954ca26": "Lezioni scritte — il percorso precedente di 60 lezioni da leggere e studiare al tuo ritmo.",
     "41fb99cf6ac3bddc": "Microfono",
-    "0d923a411f318b98": "Nella pratica misurata il microfono ascolta le note che suoni. L’audio viene elaborato su questo dispositivo e non viene inviato. Ciò che suoni non viene registrato; se vuoi, puoi attivare l’ascolto della tua registrazione: resta sul tuo dispositivo e viene eliminata alla fine della sessione. Chiediamo il permesso alla tua prima lezione misurata. Senza, puoi comunque leggere le lezioni e usare le autoverifiche.",
     "7131a28589c377fb": "La fotocamera si usa solo in alcune lezioni di impostazione, per osservare la postura della mano e del polso. Chiediamo il permesso in quella lezione. L’immagine viene elaborata su questo dispositivo; non viene registrata né inviata. Tutte le altre lezioni funzionano senza fotocamera.",
     "311bd36458c5a126": "I tuoi progressi",
     "1ba7a84412607102": "I risultati delle lezioni, la serie e l’obiettivo settimanale restano su questo dispositivo. Se accedi a un account Motion e acconsenti, vengono sincronizzati con il tuo account così puoi continuare su un altro dispositivo.",
@@ -8435,7 +8433,6 @@
     "6946560ebac6e08d": "Per superare una lezione, almeno l’80% delle note deve essere corretto; allora si apre la lezione successiva. Le prime lezioni di ogni corso sono gratuite; le successive richiedono un abbonamento Ostinato.",
     "8c35a3bffb5f6829": "Prima accedi o crea un account: l’abbonamento è legato al tuo account, così funziona su ogni dispositivo in cui accedi.",
     "545f6c0a16d5c54c": "I risultati delle lezioni, la serie e l’obiettivo settimanale restano su questo dispositivo; questa versione non li sincronizza con un account. Il tuo account serve per l’abbonamento.",
-    "6afa082a5c331043": "Nella pratica misurata il microfono ascolta le note che suoni. Una lezione è superata quando una quota sufficiente delle sue note viene sentita come corretta; la quota richiesta cresce con il livello. Il permesso viene chiesto alla prima misurazione. L’audio viene elaborato su questo dispositivo e non viene caricato; ciò che suoni non viene registrato, a meno che tu non attivi l’ascolto della tua registrazione. Fermare, uscire dalla schermata, cambiare account o portare l’app in secondo piano chiude il microfono.",
     "2458f83652e85824": "La precisione dipende dal microfono del telefono e dalla stanza; i risultati misurati possono variare.",
     "4360eb5d0a20a482": "{v0} Ogni riferimento posturale deriva da riprese didattiche dalla vita in su: per questo non viene rilevato nulla sotto i fianchi.",
     "a51b8da5ff450285": "Una corda nuova si allunga: controllala di nuovo dopo qualche minuto.",
@@ -8617,6 +8614,9 @@
     "b92f7673beb3377a": "Corso di educazione dell’orecchio",
     "ba989be6d5ba56e9": "Ho svolto tutto il compito dall’inizio alla fine.",
     "c6974974513f8778": "Educazione dell’orecchio aperta · prossima lezione: {v0}",
-    "5f3058d78884fd92": "Questa lezione ha un esercizio sullo schermo. Superarlo salva la lezione come fatta; la parte cantata non viene misurata, quindi controllala tu."
+    "5f3058d78884fd92": "Questa lezione ha un esercizio sullo schermo. Superarlo salva la lezione come fatta; la parte cantata non viene misurata, quindi controllala tu.",
+    "fd926468a8904dc5": "L'accesso al microfono serve ad ascoltare le note che suoni e i ritmi che batti con le mani durante la pratica e l'accordatura. L'audio viene elaborato su questo dispositivo e non viene caricato. Se attivi l'ascolto della tua registrazione, resta solo su questo dispositivo e viene eliminata alla fine della sessione.",
+    "266fa6a1ededa59d": "Nella pratica misurata il microfono ascolta le note che suoni e i ritmi che batti con le mani. L’audio viene elaborato su questo dispositivo e non viene inviato. Ciò che suoni non viene registrato; se vuoi, puoi attivare l’ascolto della tua registrazione: resta sul tuo dispositivo e viene eliminata alla fine della sessione. Chiediamo il permesso alla tua prima lezione misurata. Senza, puoi comunque leggere le lezioni e usare le autoverifiche.",
+    "f5767a8eb5ad7adb": "Nella pratica misurata il microfono ascolta le note che suoni e i ritmi che batti con le mani. Una lezione è superata quando una quota sufficiente delle sue note viene sentita come corretta; la quota richiesta cresce con il livello. Il permesso viene chiesto alla prima misurazione. L’audio viene elaborato su questo dispositivo e non viene caricato; ciò che suoni non viene registrato, a meno che tu non attivi l’ascolto della tua registrazione. Fermare, uscire dalla schermata, cambiare account o portare l’app in secondo piano chiude il microfono."
   }
 }

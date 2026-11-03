@@ -45,8 +45,8 @@ abstract final class V1HomeCopy {
     'Mikrofon',
   );
   static const UiCopy micBody = (
-    'In measured practice the microphone listens to the notes you play. Audio is processed on this device and is not sent. What you play is not recorded; if you like, you can turn on listening back to your own recording — it stays on your device and is deleted at the end of the session. We ask for permission at your first measured lesson. Without it you can still read the lessons and use the self-checks.',
-    'Ölçülü pratikte mikrofon çaldığın notaları dinler. Ses bu cihazda işlenir; gönderilmez. Çaldığın kaydedilmez; istersen kendi kaydını dinleme seçeneğini açabilirsin, kayıt cihazında kalır ve oturum sonunda silinir. İzni ilk ölçülü derste isteriz. Vermezsen dersleri okuyup öz-kontrolle çalışabilirsin.',
+    'In measured practice the microphone listens to the notes you play and the rhythms you clap. Audio is processed on this device and is not sent. What you play is not recorded; if you like, you can turn on listening back to your own recording — it stays on your device and is deleted at the end of the session. We ask for permission at your first measured lesson. Without it you can still read the lessons and use the self-checks.',
+    'Ölçülü pratikte mikrofon çaldığın notaları ve alkışladığın ritimleri dinler. Ses bu cihazda işlenir; gönderilmez. Çaldığın kaydedilmez; istersen kendi kaydını dinleme seçeneğini açabilirsin, kayıt cihazında kalır ve oturum sonunda silinir. İzni ilk ölçülü derste isteriz. Vermezsen dersleri okuyup öz-kontrolle çalışabilirsin.',
   );
   static const UiCopy cameraTitle = (
     'Camera',

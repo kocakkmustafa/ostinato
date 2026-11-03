@@ -155,7 +155,6 @@
     "159722b3a50a81b7": "kwinta czysta, 7 półtonów",
     "15a4ca4c17f4fb3b": "Na otwartym niskim E porównaj lekki kontakt dłoni blisko mostka ze struną bez tłumienia; nie naciskaj mocno. Spróbuj dwóch krótkich, wygodnych rund, a następnie raz wykonaj zadanie przenoszące umiejętność. Odpoczywaj i wracaj do ćwiczenia w kolejnych sesjach, zamiast wymuszać wszystko dzisiaj.",
     "15fd624447c420a1": "Potrafię nazwać dwie brzmiące nuty i przenieść parę pryma–kwinta, utrzymując ciszę na wyłączonych strunach.",
-    "1b63ddcfdfec9b1c": "Dostęp do mikrofonu służy do słuchania nut, które grasz podczas ćwiczeń i strojenia. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. Jeśli włączysz odsłuch własnego nagrania, zostaje ono tylko na tym urządzeniu i jest usuwane po zakończeniu sesji.",
     "1640780890f6460e": "Rozpisz G D Em C jako czterotaktowe frazy, zaznaczając zmiany akordów, jeden plan akcentów i ostateczne uciszenie.\nZagraj 16 taktów w jednym wygodnym pulsie, przechodząc do następnego taktu po lokalnym błędzie.\nPowtórz ze zmienioną gęstością bicia we frazie 3, bez zmiany harmonii ani długości.",
     "1654e86c824de4c9": "Dwunastotaktowe pytanie i odpowiedź",
     "166d8c112384f70f": "Zagraj otwarte struny w kolejności p i m a, robiąc takt przerwy przed powtórzeniem grupy czterech nut.",
@@ -2136,7 +2135,6 @@
     "d35e81e9406238d4": "Seria i cel tygodniowy — liczy się każda mierzona praktyka.",
     "a4b9ccbb2954ca26": "Lekcje pisane — wcześniejsza ścieżka 60 lekcji do czytania i ćwiczenia we własnym tempie.",
     "41fb99cf6ac3bddc": "Mikrofon",
-    "0d923a411f318b98": "W mierzonej praktyce mikrofon słucha dźwięków, które grasz. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. To, co grasz, nie jest nagrywane; jeśli chcesz, możesz włączyć odsłuch własnego nagrania — zostaje ono na urządzeniu i jest usuwane na koniec sesji. O zgodę prosimy w pierwszej mierzonej lekcji. Bez niej nadal możesz czytać lekcje i korzystać z samokontroli.",
     "7131a28589c377fb": "Aparat jest używany tylko w kilku lekcjach przygotowawczych, aby sprawdzić ułożenie dłoni i nadgarstka. O zgodę prosimy w tej lekcji. Obraz jest przetwarzany na tym urządzeniu; nie jest nagrywany ani wysyłany. Wszystkie inne lekcje działają bez aparatu.",
     "311bd36458c5a126": "Twoje postępy",
     "1ba7a84412607102": "Wyniki lekcji, seria i cel tygodniowy są przechowywane na tym urządzeniu. Jeśli zalogujesz się do konta Motion i wyrazisz zgodę, zostaną zsynchronizowane z kontem, więc możesz kontynuować na innym urządzeniu.",
@@ -8449,7 +8447,6 @@
     "6946560ebac6e08d": "Aby zaliczyć lekcję, co najmniej 80% jej dźwięków musi być poprawnych; wtedy otwiera się następna lekcja. Pierwsze lekcje każdego kursu są bezpłatne; kolejne wymagają członkostwa Ostinato.",
     "8c35a3bffb5f6829": "Najpierw zaloguj się lub załóż konto: członkostwo jest powiązane z kontem, więc działa na każdym urządzeniu, na którym się zalogujesz.",
     "545f6c0a16d5c54c": "Wyniki lekcji, seria i cel tygodniowy zostają na tym urządzeniu; ta wersja nie synchronizuje ich z kontem. Konto służy do członkostwa.",
-    "6afa082a5c331043": "W mierzonej praktyce mikrofon słucha granych przez ciebie nut. Lekcja jest zaliczona, gdy wystarczająco duża część jej nut zostanie usłyszana jako poprawna; wymagana część rośnie z poziomem. O zgodę prosimy przy pierwszym pomiarze. Dźwięk jest przetwarzany na tym urządzeniu i nie jest przesyłany; to, co grasz, nie jest nagrywane, chyba że włączysz odsłuch własnego nagrania. Zatrzymanie, opuszczenie ekranu, zmiana konta lub przeniesienie aplikacji w tło zamyka mikrofon.",
     "2458f83652e85824": "Dokładność zależy od mikrofonu telefonu i pomieszczenia; zmierzone wyniki mogą się różnić.",
     "4360eb5d0a20a482": "{v0} Każdy wzorzec postawy powstał z nagrań dydaktycznych od pasa w górę, dlatego nic poniżej bioder nie jest odczytywane.",
     "a51b8da5ff450285": "Nowa struna się rozciąga: sprawdź ją ponownie po kilku minutach.",
@@ -8631,6 +8628,9 @@
     "b92f7673beb3377a": "Kurs kształcenia słuchu",
     "ba989be6d5ba56e9": "Przerobiłem całe zadanie od początku do końca.",
     "c6974974513f8778": "Kształcenie słuchu otwarte · następna lekcja: {v0}",
-    "5f3058d78884fd92": "Ta lekcja ma ćwiczenie na ekranie. Zaliczenie zapisuje lekcję jako ukończoną; część śpiewana nie jest mierzona, więc sprawdź ją sam."
+    "5f3058d78884fd92": "Ta lekcja ma ćwiczenie na ekranie. Zaliczenie zapisuje lekcję jako ukończoną; część śpiewana nie jest mierzona, więc sprawdź ją sam.",
+    "fd926468a8904dc5": "Dostęp do mikrofonu służy do słuchania nut, które grasz, i rytmów, które wyklaskujesz podczas ćwiczeń i strojenia. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. Jeśli włączysz odsłuch własnego nagrania, zostaje ono tylko na tym urządzeniu i jest usuwane po zakończeniu sesji.",
+    "266fa6a1ededa59d": "W mierzonej praktyce mikrofon słucha dźwięków, które grasz, i rytmów, które wyklaskujesz. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. To, co grasz, nie jest nagrywane; jeśli chcesz, możesz włączyć odsłuch własnego nagrania — zostaje ono na urządzeniu i jest usuwane na koniec sesji. O zgodę prosimy w pierwszej mierzonej lekcji. Bez niej nadal możesz czytać lekcje i korzystać z samokontroli.",
+    "f5767a8eb5ad7adb": "W mierzonej praktyce mikrofon słucha granych przez ciebie nut i wyklaskiwanych rytmów. Lekcja jest zaliczona, gdy wystarczająco duża część jej nut zostanie usłyszana jako poprawna; wymagana część rośnie z poziomem. O zgodę prosimy przy pierwszym pomiarze. Dźwięk jest przetwarzany na tym urządzeniu i nie jest przesyłany; to, co grasz, nie jest nagrywane, chyba że włączysz odsłuch własnego nagrania. Zatrzymanie, opuszczenie ekranu, zmiana konta lub przeniesienie aplikacji w tło zamyka mikrofon."
   }
 }
