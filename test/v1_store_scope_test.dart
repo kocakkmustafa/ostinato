@@ -79,7 +79,7 @@ void main() {
     );
     expect(
       File('lib/app/screens/library_screen.dart').readAsStringSync(),
-      contains('if (ostinatoEarTrainingOpen)'),
+      contains('ostinatoEarTrainingOpen) ...<Widget>['),
     );
   });
 

@@ -232,10 +232,12 @@ class LibraryScreen extends StatelessWidget {
                     contract: repo.contractOrNull(d.id),
                   ),
                   const SizedBox(height: 11),
-                ],
-                if (ostinatoEarTrainingOpen) ...<Widget>[
-                  const _EarTrainingCard(),
-                  const SizedBox(height: 11),
+                  // Open courses first: ear training right after guitar,
+                  // before the "Coming soon" instruments.
+                  if (d.id == 'guitar' && ostinatoEarTrainingOpen) ...<Widget>[
+                    const _EarTrainingCard(),
+                    const SizedBox(height: 11),
+                  ],
                 ],
                 // Pre-v1 written courses: hidden in the v1 store build.
                 if (ostinatoLegacyWrittenCoursesVisible) ...<Widget>[
