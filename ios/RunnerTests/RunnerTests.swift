@@ -1479,8 +1479,23 @@ final class PracticeAudioArbiterTests: XCTestCase {
     let bare = call(arbiter, owner, "completeVideoDispose", thirdFields.merging([
       "confirmed": true
     ]) { _, rhs in rhs }) as! [String: Any]
-    XCTAssertEqual(bare["status"] as? String, "blocked")
+    // Since 4b882d0 a dispose ack without the exact native release requests a
+    // close of the claimed player (requestVideoClose) and waits up to 2 s: the
+    // receipt is "pending", never "closed". With no close port nothing can
+    // release player 9, so the deadline leaves an explicit-retry block.
+    XCTAssertEqual(bare["status"] as? String, "pending")
     XCTAssertEqual((bare["snapshot"] as? [String: Any])?["allClear"] as? Bool, false)
+    let blocked = expectation(description: "unreleased video close deadline")
+    func poll() {
+      let state = call(arbiter, owner, "readAllAudioState", ownerFields(owner)) as? [String: Any]
+      if state?["videoPhase"] as? String == "unconfirmedQuiescent" {
+        XCTAssertEqual(state?["requiresExplicitRetry"] as? Bool, true)
+        XCTAssertEqual(state?["allClear"] as? Bool, false)
+        blocked.fulfill()
+      } else { DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: poll) }
+    }
+    onMain(poll)
+    wait(for: [blocked], timeout: 3)
   }
 
   func testLostVideoReserveCancellationFencesLateCallAndStaleRevision() {
