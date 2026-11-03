@@ -10,6 +10,7 @@ import '../design/ostinato_theme.dart';
 import '../ui_copy.dart';
 import 'drill_copy.dart';
 import 'drill_dictation.dart';
+import 'drill_keyboard.dart';
 import 'drill_theory.dart';
 import 'drill_generator.dart';
 import '../practice/loop/reference_copy.dart';
@@ -202,6 +203,16 @@ class DrillScreenState extends State<DrillScreen> {
             ),
           ),
         ],
+        if (q.keys.isNotEmpty) ...[
+          const SizedBox(height: 14),
+          AspectRatio(
+            aspectRatio: 3.4,
+            child: CustomPaint(
+              key: const Key('drill-keyboard'),
+              painter: DrillKeyboardPainter(marked: q.keys, palette: palette),
+            ),
+          ),
+        ],
         if (q.fretWindow case final window?) ...[
           const SizedBox(height: 14),
           AspectRatio(
@@ -383,6 +394,10 @@ class DrillScreenState extends State<DrillScreen> {
     DrillPromptKind.staffInterval => DrillCopy.staffInterval,
     DrillPromptKind.tonicOrNot => DrillCopy.tonicOrNot,
     DrillPromptKind.rhythmDictation => DrillCopy.rhythmDictation,
+    DrillPromptKind.stepSize => DrillCopy.stepSize,
+    DrillPromptKind.staffPlace => DrillCopy.staffPlace,
+    DrillPromptKind.staffSymbol => DrillCopy.staffSymbol,
+    DrillPromptKind.beatsInBar => DrillCopy.beatsInBar,
     DrillPromptKind.melodicDictation =>
       (_s.current.entry?.given.isNotEmpty ?? false)
           ? DrillCopy.melodicDictationGiven
@@ -399,6 +414,7 @@ class DrillScreenState extends State<DrillScreen> {
         (DrillPromptKind.pentatonicNote, 'v0') ||
         (DrillPromptKind.tonicOrNot, 'v0') ||
         (DrillPromptKind.melodicDictation, 'v1') ||
+        (DrillPromptKind.stepSize, 'v0') ||
         (
           DrillPromptKind.romanNumeral,
           'v0',
@@ -450,6 +466,25 @@ class DrillScreenState extends State<DrillScreen> {
         }),
         DrillPromptKind.rhythmDictation ||
         DrillPromptKind.melodicDictation => option,
+        DrillPromptKind.stepSize => uiText(
+          context,
+          option == 'whole' ? DrillCopy.wholeStep : DrillCopy.halfStep,
+        ),
+        DrillPromptKind.staffPlace => uiText(
+          context,
+          option.startsWith('line') ? DrillCopy.lineN : DrillCopy.spaceN,
+          values: {'v0': option.split('_').last},
+        ),
+        DrillPromptKind.staffSymbol => uiText(context, switch (option) {
+          'bar_line' => DrillCopy.barLine,
+          'double_bar_line' => DrillCopy.doubleBarLine,
+          _ => DrillCopy.timeSignature44,
+        }),
+        DrillPromptKind.beatsInBar => uiText(
+          context,
+          DrillCopy.beatsOption,
+          values: {'v0': option},
+        ),
         DrillPromptKind.tonicOrNot => uiText(
           context,
           option == 'tonic' ? DrillCopy.tonicYes : DrillCopy.tonicNo,

@@ -8546,6 +8546,18 @@
     "3ab238f1fd15837e": "{v0} of {v1} beats written",
     "70292b8579bad88b": "{v0} of {v1} notes written",
     "7ade8187f831661f": "tie",
-    "1731eba7c70e32c1": "Singing is not measured in this build; check your singing yourself. The on-screen version below is measured: passing it saves the lesson as done."
+    "1731eba7c70e32c1": "Singing is not measured in this build; check your singing yourself. The on-screen version below is measured: passing it saves the lesson as done.",
+    "9209ee996a5ced44": "The two marked keys are neighbours in the {v0} major scale. Whole step or half step?",
+    "5eb274a65175ad90": "Where is the note: on which line or in which space? Count from the bottom.",
+    "f766495e2c8ab2f3": "What is the highlighted sign?",
+    "a598227120f9ea79": "How many beats are in each bar of 4/4?",
+    "ce2123d29949f209": "Whole step",
+    "1cc1a1ca7bb3bdd6": "Half step",
+    "48ea79c9be275512": "Line {v0}",
+    "74817c5b11a343f1": "Space {v0}",
+    "b09059cbf09f42a9": "Bar line",
+    "35b0cfca503264c9": "Double bar line (the end)",
+    "70275dd6ccec233c": "Time signature 4/4",
+    "aed8868722fcb964": "{v0} beats"
   }
 }

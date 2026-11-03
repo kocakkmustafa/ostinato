@@ -8546,6 +8546,18 @@
     "3ab238f1fd15837e": "{v0} temps sur {v1} écrits",
     "70292b8579bad88b": "{v0} notes sur {v1} écrites",
     "7ade8187f831661f": "liaison",
-    "1731eba7c70e32c1": "Le chant n’est pas mesuré dans cette version ; vérifie ton chant toi-même. La version à l’écran ci-dessous est mesurée : la réussir enregistre la leçon comme faite."
+    "1731eba7c70e32c1": "Le chant n’est pas mesuré dans cette version ; vérifie ton chant toi-même. La version à l’écran ci-dessous est mesurée : la réussir enregistre la leçon comme faite.",
+    "9209ee996a5ced44": "Les deux touches marquées sont voisines dans la gamme de {v0} majeur. Ton ou demi-ton ?",
+    "5eb274a65175ad90": "Où est la note : sur quelle ligne ou dans quel interligne ? Compte depuis le bas.",
+    "f766495e2c8ab2f3": "Quel est le signe surligné ?",
+    "a598227120f9ea79": "Combien de temps y a-t-il dans chaque mesure à 4/4 ?",
+    "ce2123d29949f209": "Ton",
+    "1cc1a1ca7bb3bdd6": "Demi-ton",
+    "48ea79c9be275512": "Ligne {v0}",
+    "74817c5b11a343f1": "Interligne {v0}",
+    "b09059cbf09f42a9": "Barre de mesure",
+    "35b0cfca503264c9": "Double barre (la fin)",
+    "70275dd6ccec233c": "Chiffrage 4/4",
+    "aed8868722fcb964": "{v0} temps"
   }
 }

@@ -212,6 +212,38 @@ abstract final class DrillCopy {
     '{v1} notanın {v0} tanesi yazıldı',
   );
 
+  // ---- remaining drills: keyboard steps, staff places, bar symbols ----
+  static const UiCopy stepSize = (
+    'The two marked keys are neighbours in the {v0} major scale. Whole step or half step?',
+    'İşaretli iki tuş {v0} majör dizisinde komşu. Tam ses mi, yarım ses mi?',
+  );
+  static const UiCopy staffPlace = (
+    'Where is the note: on which line or in which space? Count from the bottom.',
+    'Nota nerede: hangi çizgide ya da hangi aralıkta? Aşağıdan say.',
+  );
+  static const UiCopy staffSymbol = (
+    'What is the highlighted sign?',
+    'İşaretli simge nedir?',
+  );
+  static const UiCopy beatsInBar = (
+    'How many beats are in each bar of 4/4?',
+    '4/4’lük her ölçüde kaç vuruş var?',
+  );
+  static const UiCopy wholeStep = ('Whole step', 'Tam ses');
+  static const UiCopy halfStep = ('Half step', 'Yarım ses');
+  static const UiCopy lineN = ('Line {v0}', '{v0}. çizgi');
+  static const UiCopy spaceN = ('Space {v0}', '{v0}. aralık');
+  static const UiCopy barLine = ('Bar line', 'Ölçü çizgisi');
+  static const UiCopy doubleBarLine = (
+    'Double bar line (the end)',
+    'Çift ölçü çizgisi (bitiş)',
+  );
+  static const UiCopy timeSignature44 = (
+    'Time signature 4/4',
+    '4/4 ölçü sayısı',
+  );
+  static const UiCopy beatsOption = ('{v0} beats', '{v0} vuruş');
+
   static const List<UiCopy> all = [
     noteAtFret,
     fretOfNote,
@@ -241,6 +273,18 @@ abstract final class DrillCopy {
     statusPassed,
     bannerSingingAlternative,
     bannerReady,
+    stepSize,
+    staffPlace,
+    staffSymbol,
+    beatsInBar,
+    wholeStep,
+    halfStep,
+    lineN,
+    spaceN,
+    barLine,
+    doubleBarLine,
+    timeSignature44,
+    beatsOption,
     tempoCompare,
     pitchDirection,
     pitchContour,
