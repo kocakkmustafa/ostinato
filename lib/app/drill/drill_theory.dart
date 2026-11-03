@@ -166,3 +166,9 @@ int noteMidi(String pitch) {
       _letterPc[note.letter] +
       note.accidental;
 }
+
+/// Major keys by signature: +n sharps, −n flats.
+const Map<String, int> keySignatures = {
+  'C': 0, 'G': 1, 'D': 2, 'A': 3, 'E': 4, //
+  'F': -1, 'Bb': -2, 'Eb': -3,
+};
