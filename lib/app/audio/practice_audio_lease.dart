@@ -162,9 +162,9 @@ final class PracticeAudioLease {
   PracticeAudioLeasePort get port => _port;
   final Duration operationTimeout;
 
-  /// Native `fenceContext` stops a running capture or output asynchronously,
-  /// so its receipt can show that close still in flight. A fence re-reads the
-  /// native state for up to [closeSettle] before it calls the close
+  /// Native `fenceContext` and an output `closeAll` stop asynchronously, so
+  /// their receipt can show that close still in flight. The lease re-reads
+  /// the native state for up to [closeSettle] before it calls the close
   /// unconfirmed; a close that needs an explicit retry is never waited on.
   final Duration closeSettle;
   final Duration closeSettlePoll;
@@ -823,7 +823,11 @@ final class PracticeAudioLease {
           _block();
           return false;
         }
-        final receipt = await _native(() => _port.closeAll(permit, reason));
+        // Output stops on a native worker, so its close receipt may still be
+        // in flight ("pending"); settle like a fence before judging it.
+        final receipt = await _settleClosing(
+          await _native(() => _port.closeAll(permit, reason)),
+        );
         _lastNativeState = receipt;
         if (!receipt.allClear ||
             receipt.ownerToken != permit.ownerToken ||
