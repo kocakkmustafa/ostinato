@@ -22,7 +22,22 @@
 | B | Ayrı, yalnız çalan yerel oynatıcı: `playReference` / `stopReference` (iOS `AVAudioPlayerNode`, Android `AudioTrack` MODE_STATIC). Mikrofon yok; sentez Dart'ta | Okuma ekranı, pratik ekranı (koşu dışı) ve kulak drill'i (F2.6) aynı yolu kullanır; cue sözleşmesi değişmez | İki platformda yerel kod; ses oturumu çakışmaları için arbiter'a kayıt |
 | C | Sentezi yerelde yap | Kanaldan az bayt | Sentez iki kez yazılır, test edilemez |
 
-**Seçim: B.** Sentez Dart'ta kalır: `SyntheticString` tel modeli ve gelecekteki basit piyano sentezi, test edilebilir ve belirlenimli. Yerel taraf yalnız hazır PCM'i çalar ve durdurur.
+**Seçim: B, arbiter üzerinden.** Sentez Dart'ta kalır: `SyntheticString` tel modeli ve gelecekteki basit piyano sentezi, test edilebilir ve belirlenimli. Yerel taraf yalnız hazır PCM'i çalar ve durdurur.
+
+**Kod okumasından düzeltme (2026-11-03):**
+- Ses oturumunun tek üretim yazarı paylaşılan arbiter'dır: iOS `PracticeAudioArbiter` / `PracticeAudioSessionPolicy`, Android `PracticeAudioArbiter.kt`, Dart `PracticeAudioLease`. Bağımsız bir `.playback` oynatıcısı bu değişmezi bozar.
+- Arbiter'da çıkış tarafı zaten tasarlı: `reserve` → `startOutput` → `closeAll`, lease fazları `openingOutput` / `outputActive`.
+- Üretim çıkış arka ucu ise bilerek yok: `PracticeOutputHardware`, "ders WAV'ları ve paylaşılan oturum politikası ayrıca kabul edilene kadar". Uygulama kökünde edinme kapalı.
+- FK1 bu çıkış arka ucunu yazar. Varlık kimliği (`assetId`) yerine Dart'ta sentezlenmiş PCM çalar; ders WAV'ı yoktur.
+
+## PR'lar
+
+1. **A — sentez (bu PR):** `reference_passage.dart` + testler. Arayüz ve yerel değişiklik yok.
+2. **B — çıkış arka ucu:**
+   - iOS/Android `PracticeOutputHardware` PCM uygulaması ve arbiter'da çıkış için oturum kategorisi (`.playback`, mikrofon yok).
+   - Dart `PracticeAudioLease` çıkış edinimi ve kökte yalnız referans için edinme izni.
+   - Yerel birim testleri (`RunnerTests`, Android JVM).
+3. **C — arayüz:** okuma ve pratik ekranında Dinle / Durdur, tempo seçimi, metinler 14 katalogda.
 
 ## Kapsam (ilk PR)
 
