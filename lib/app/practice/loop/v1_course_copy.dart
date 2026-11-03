@@ -5,6 +5,11 @@ import '../../ui_copy.dart';
 /// "Measured" and "self-reported" are never the same word.
 abstract final class V1CourseCopy {
   static const UiCopy title = ('Guitar course', 'Gitar kursu');
+  static const UiCopy earTitle = ('Ear training course', 'Kulak eğitimi kursu');
+  static const UiCopy earIntro = (
+    'All {v0} lessons of the ear training course, by level and module. Drills run on the screen and check your answers; clapping lessons listen to your claps. Singing is not measured: you check it yourself and it is saved as self-reported. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order.',
+    'Kulak eğitimi kursunun {v0} dersinin tamamı, seviye ve modüle göre. Alıştırmalar ekranda çalışır ve cevaplarını kontrol eder; alkış dersleri alkışlarını dinler. Şarkı söyleme ölçülmez: kendin kontrol edersin ve kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al.',
+  );
   static const UiCopy intro = (
     'All {v0} lessons of the guitar course, by level and module. Measured lessons listen to every note. The others are self-checks for now: you tick a checklist and the lesson is saved as self-reported, not measured. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order.',
     'Gitar kursunun {v0} dersinin tamamı, seviye ve modüle göre. Ölçülü dersler her notayı dinler. Diğerleri şimdilik öz-kontroldür: kontrol listesini işaretlersin, ders ölçülmüş değil kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al.',
@@ -61,6 +66,9 @@ abstract final class V1CourseCopy {
     'Checklist · camera check coming soon',
     'Kontrol listesi · kamera kontrolü yakında',
   );
+
+  /// [chipDrill] once the lesson's drill runs in this build.
+  static const UiCopy chipDrillReady = ('On-screen drill', 'Ekran alıştırması');
   static const UiCopy chipDrill = (
     'Reading · on-screen exercise coming soon',
     'Okuma · ekran alıştırması yakında',
@@ -221,6 +229,24 @@ abstract final class V1CourseCopy {
     'I worked through the task with the guitar in front of me.',
     'Görevi gitar önümdeyken baştan sona yaptım.',
   );
+
+  /// Ear-course versions of the generic checks (no instrument in hand).
+  static const UiCopy earTaskDone = (
+    'I worked through the whole task.',
+    'Görevi baştan sona yaptım.',
+  );
+  static const UiCopy earExplain = (
+    'I can explain each point of the explanation in my own words.',
+    'Anlatımdaki her maddeyi kendi sözlerimle açıklayabiliyorum.',
+  );
+  static const UiCopy earTempo = (
+    'I kept the target tempo, ♩={v0}.',
+    'Hedef tempoyu, ♩={v0}, korudum.',
+  );
+  static const UiCopy earSteady = (
+    'I kept a steady, comfortable tempo.',
+    'Sabit ve rahat bir tempoda kaldım.',
+  );
   static const UiCopy genericExplain = (
     'I can show each point of the explanation on the guitar.',
     'Anlatımdaki her maddeyi gitar üzerinde gösterebiliyorum.',
@@ -229,6 +255,13 @@ abstract final class V1CourseCopy {
   static const List<UiCopy> all = [
     title,
     intro,
+    earTitle,
+    earIntro,
+    chipDrillReady,
+    earTaskDone,
+    earExplain,
+    earTempo,
+    earSteady,
     levelTitle,
     levelProgress,
     moduleTitle,

@@ -19,6 +19,8 @@ import '../account_connection.dart';
 import '../curriculum/v1_lesson.dart';
 import '../practice/loop/practice_progress_store.dart';
 import '../practice/loop/v1_course_catalog.dart';
+import '../practice/loop/v1_practice_list_screen.dart';
+import '../retention/weekly_goal.dart';
 import '../ui_copy.dart';
 import 'course_screen.dart';
 import 'instrument_screen.dart';
@@ -230,6 +232,12 @@ class LibraryScreen extends StatelessWidget {
                     contract: repo.contractOrNull(d.id),
                   ),
                   const SizedBox(height: 11),
+                  // Open courses first: ear training right after guitar,
+                  // before the "Coming soon" instruments.
+                  if (d.id == 'guitar' && ostinatoEarTrainingOpen) ...<Widget>[
+                    const _EarTrainingCard(),
+                    const SizedBox(height: 11),
+                  ],
                 ],
                 // Pre-v1 written courses: hidden in the v1 store build.
                 if (ostinatoLegacyWrittenCoursesVisible) ...<Widget>[
@@ -465,11 +473,78 @@ class _InstrumentCard extends StatelessWidget {
   }
 }
 
-/// Gitar kartının alt satırı: ölçülü pratikte açılan ilk geçilmemiş ders.
-/// Katalog veya kayıt okunamazsa yalnız "Ölçülü pratik açık" kalır.
+/// Kulak eğitimi kartı (kurucu 2026-11-03): çalgı değil kurs; doğrudan
+/// v1 kulak kursu listesini açar. Ölçülü alkış oturumları haftalık hedefe
+/// `ear` olarak sayılır.
+class _EarTrainingCard extends StatelessWidget {
+  const _EarTrainingCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final accountId = AccountScope.maybeOf(context)?.currentUserId;
+    final palette = OstinatoPalette.of(context);
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        key: const Key('ear-training-entry'),
+        borderRadius: BorderRadius.circular(22),
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => V1PracticeListScreen(
+              course: 'ear',
+              onSessionFinished: (e) =>
+                  WeeklyGoalStore(accountUserId: accountId)
+                      .recordPracticeSession(
+                        MeasuredPracticeSession(
+                          course: PracticeCourse.ear,
+                          activeDuration: e.activeDuration,
+                          heardEvents: e.heardEvents,
+                          lessonId: e.lessonId,
+                        ),
+                      )
+                      .then<void>((_) {}, onError: (_) {}),
+            ),
+          ),
+        ),
+        child: Ink(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            gradient: LinearGradient(
+              colors: [palette.glassStart, palette.glassEnd],
+            ),
+            border: Border.all(color: palette.glassBorder),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      uiText(context, V1HomeCopy.earCardTitle),
+                      style: hankenText(size: 22, weight: FontWeight.w600),
+                    ),
+                  ),
+                  const Icon(Icons.chevron_right),
+                ],
+              ),
+              const SizedBox(height: 10),
+              _MeasuredNextLine(color: palette.ink, course: 'ear'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Gitar (ve kulak eğitimi) kartının alt satırı: açılan ilk geçilmemiş ders.
+/// Katalog veya kayıt okunamazsa yalnız "… açık" satırı kalır.
 class _MeasuredNextLine extends StatefulWidget {
-  const _MeasuredNextLine({required this.color});
+  const _MeasuredNextLine({required this.color, this.course = 'gtr'});
   final Color color;
+  final String course;
 
   @override
   State<_MeasuredNextLine> createState() => _MeasuredNextLineState();
@@ -491,7 +566,7 @@ class _MeasuredNextLineState extends State<_MeasuredNextLine> {
 
   Future<V1Lesson?> _load(String? accountId) async {
     try {
-      final catalog = await V1CourseCatalog.load();
+      final catalog = await V1CourseCatalog.load(course: widget.course);
       final records = await V1PracticeProgressStore(
         accountUserId: accountId,
       ).load();
@@ -509,15 +584,19 @@ class _MeasuredNextLineState extends State<_MeasuredNextLine> {
     future: _next,
     builder: (context, snap) {
       final lesson = snap.data;
+      final ear = widget.course == 'ear';
       return Text(
         lesson == null
-            ? uiText(context, V1HomeCopy.guitarCardOpen)
+            ? uiText(
+                context,
+                ear ? V1HomeCopy.earCardOpen : V1HomeCopy.guitarCardOpen,
+              )
             : uiText(
                 context,
-                V1HomeCopy.guitarCardNext,
+                ear ? V1HomeCopy.earCardNext : V1HomeCopy.guitarCardNext,
                 values: {'v0': lesson.title.of(context)},
               ),
-        key: const Key('guitar-card-measured'),
+        key: Key(ear ? 'ear-card-next' : 'guitar-card-measured'),
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
         style: hankenText(size: 12.5, color: widget.color),

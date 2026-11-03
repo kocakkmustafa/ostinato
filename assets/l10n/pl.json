@@ -2129,7 +2129,6 @@
     "ba4af611303e98c1": "Najpierw nastrój: wytrzymywane dźwięki brzmią ponad 30 centów od najbliższej nuty, więc nazwy nut są ukryte. Nastrój gitarę zewnętrznym tunerem, a potem pozwól wybrzmieć jednej pustej strunie.",
     "c7769c4ab3c03fe1": "Sprawdź strój: wytrzymywane dźwięki brzmią około {v0} centów od najbliższej nuty. Użyj zewnętrznego tunera.",
     "0016fa7101b9f732": "Ucz się gitary, grając.",
-    "180a8f814e1bb4ad": "Graj z klikiem i przewijaną tabulaturą; aplikacja słucha każdego dźwięku i oznacza go jako poprawny, inny dźwięk lub niesłyszany. Program v1 obejmuje 690 lekcji gitary, śpiewu, fortepianu i kształcenia słuchu. W tej wersji dostępna jest gitara; pozostałe kursy pojawią się później.",
     "e17ac651a15448e1": "Aby zaliczyć lekcję, co najmniej 80% jej dźwięków musi być poprawnych; wtedy otwiera się następna lekcja. Pierwsze lekcje każdego kursu są bezpłatne; kolejne wymagają subskrypcji Ostinato lub Motion+.",
     "0b453d0d09f5dd1d": "Co tu jest",
     "f27fdd332417616d": "Mierzona praktyka — klik, przewijana tabulatura, informacja przy każdym dźwięku.",
@@ -2142,7 +2141,6 @@
     "311bd36458c5a126": "Twoje postępy",
     "1ba7a84412607102": "Wyniki lekcji, seria i cel tygodniowy są przechowywane na tym urządzeniu. Jeśli zalogujesz się do konta Motion i wyrazisz zgodę, zostaną zsynchronizowane z kontem, więc możesz kontynuować na innym urządzeniu.",
     "93f893c58bac726c": "Mierzona praktyka. Stroik. Cel tygodniowy.",
-    "ce68d6fd9e983ef0": "Zagraj następną lekcję z klikiem i przewijaną tabulaturą; przy każdym dźwięku pokazujemy, co usłyszeliśmy. Kursy śpiewu i fortepianu będą otwierane po kolei.",
     "1f6e7089408c3c42": "Mierzona praktyka dostępna",
     "dcc90cc2c83fa78e": "Mierzona praktyka dostępna · następna lekcja: {v0}",
     "070a1b3ea7d8199b": "Wkrótce · Ten kurs otworzy się w jednej z kolejnych aktualizacji.",
@@ -8619,6 +8617,20 @@
     "ddf0ffc99533192a": "Czytanie nut: 20 nut z obu kluczy",
     "ea86d7b7dd346f42": "Interwały: nazwij 12",
     "f41a741b42c1d4ed": "Wysokość: zaśpiewaj z powrotem 6 dźwięków",
-    "f87d7265ebf58fb0": "Rytm: wyklaszcz dwutaktowy rytm w tempie ♩=70"
+    "f87d7265ebf58fb0": "Rytm: wyklaszcz dwutaktowy rytm w tempie ♩=70",
+    "10817563d1ea6e55": "Utrzymałem równe, wygodne tempo.",
+    "1781764c396896ca": "Utrzymałem docelowe tempo, ♩={v0}.",
+    "187584ba7a65889e": "Wszystkie {v0} lekcje kursu kształcenia słuchu, według poziomu i modułu. Ćwiczenia odbywają się na ekranie i sprawdzają twoje odpowiedzi; lekcje klaskania słuchają twojego klaskania. Śpiew nie jest mierzony: sprawdzasz go sam i zapisuje się jako samoocena. Moduł otwiera się po zaliczeniu punktu kontrolnego poprzedniego modułu; w module rób lekcje w dowolnej kolejności.",
+    "45926957dd915bc3": "Ćwiczenia, klaskanie i testy otwarte",
+    "45f7ee31d8fcdd8d": "Potrafię wyjaśnić każdy punkt objaśnienia własnymi słowami.",
+    "4cf9d8864205198c": "Ta lekcja to ćwiczenie na ekranie. Zaliczenie zapisuje lekcję jako ukończoną.",
+    "569b2956b052eb05": "Zagraj następną lekcję z klikiem i przewijaną tabulaturą; przy każdym dźwięku pokazujemy, co usłyszeliśmy. Kształcenie słuchu też jest otwarte; kursy śpiewu i fortepianu będą otwierane po kolei.",
+    "945c2a3390f288de": "Kształcenie słuchu",
+    "b234200b75ea59a0": "Graj z klikiem i przewijaną tabulaturą; aplikacja słucha każdego dźwięku i oznacza go jako poprawny, inny dźwięk lub niesłyszany. Program v1 obejmuje 690 lekcji gitary, śpiewu, fortepianu i kształcenia słuchu. W tej wersji dostępne są gitara i kształcenie słuchu; śpiew i fortepian pojawią się później.",
+    "b5b3f089d44db8bc": "Kształcenie słuchu — ćwiczenia na ekranie, klaskanie z klikiem i testy część po części.",
+    "b92f7673beb3377a": "Kurs kształcenia słuchu",
+    "ba989be6d5ba56e9": "Przerobiłem całe zadanie od początku do końca.",
+    "c6974974513f8778": "Kształcenie słuchu otwarte · następna lekcja: {v0}",
+    "5f3058d78884fd92": "Ta lekcja ma ćwiczenie na ekranie. Zaliczenie zapisuje lekcję jako ukończoną; część śpiewana nie jest mierzona, więc sprawdź ją sam."
   }
 }

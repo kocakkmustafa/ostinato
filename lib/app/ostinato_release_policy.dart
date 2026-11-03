@@ -28,6 +28,13 @@ const bool ostinatoLegacyWrittenCoursesVisible = false;
 /// reference "Foundations" courses are not reachable from it.
 const Set<String> ostinatoOpenInstruments = {'guitar'};
 
+/// Founder decision 2026-11-03 ("first microphone measurement, then open"):
+/// the v1 ear training course (50 lessons) opens once its drills, clapping
+/// lines and part-by-part tests are measured. Ear training is a course, not
+/// an instrument: it has its own home card. Free scope: level 1
+/// (`ostinatoV1FreeStages`).
+const bool ostinatoEarTrainingOpen = true;
+
 /// Store review 2026-11-02 (screens 06–08): the instrument page carried long
 /// engineering notes (posture-reference catalogue, teacher agreement, engine
 /// history, "what we do not judge", "not here and why"). They stay in the

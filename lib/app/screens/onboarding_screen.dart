@@ -299,6 +299,12 @@ class _ScopeStep extends StatelessWidget {
         value: '♩',
         label: uiText(context, V1HomeCopy.scopePractice),
       ),
+      if (ostinatoEarTrainingOpen)
+        _FactRow(
+          key: const Key('onboarding-fact-ear'),
+          value: '♪',
+          label: uiText(context, V1HomeCopy.scopeEar),
+        ),
       _FactRow(
         key: const Key('onboarding-fact-setup'),
         value: '◎',

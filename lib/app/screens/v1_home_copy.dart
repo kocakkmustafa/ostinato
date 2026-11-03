@@ -9,8 +9,8 @@ abstract final class V1HomeCopy {
     'Gitarı çalarak öğren.',
   );
   static const UiCopy welcomeBody = (
-    'Play along with a click and a scrolling tab; the app listens to each note and marks it correct, different note or couldn’t hear. The v1 programme has 690 lessons across guitar, voice, piano and ear training. Guitar is open in this release; the other courses follow.',
-    'Klik ve akan tabla çal; uygulama çaldığın her notayı dinler ve doğru, farklı nota ya da duyamadım diye işaretler. v1 programı 690 ders: gitar, ses, piyano ve kulak eğitimi. Bu sürümde gitar açık; diğer kurslar sırayla eklenecek.',
+    'Play along with a click and a scrolling tab; the app listens to each note and marks it correct, different note or couldn’t hear. The v1 programme has 690 lessons across guitar, voice, piano and ear training. Guitar and ear training are open in this release; voice and piano follow.',
+    'Klik ve akan tabla çal; uygulama çaldığın her notayı dinler ve doğru, farklı nota ya da duyamadım diye işaretler. v1 programı 690 ders: gitar, ses, piyano ve kulak eğitimi. Bu sürümde gitar ve kulak eğitimi açık; ses ve piyano sırayla eklenecek.',
   );
   static const UiCopy welcomeNote = (
     'To pass a lesson, at least 80% of its notes need to be correct; then the next lesson opens. The first lessons of each course are free; later lessons need an Ostinato or Motion+ subscription.',
@@ -23,6 +23,10 @@ abstract final class V1HomeCopy {
   static const UiCopy scopePractice = (
     'Measured practice — click, scrolling tab, feedback on every note.',
     'Ölçülü pratik — klik, akan tab, nota başına geri bildirim.',
+  );
+  static const UiCopy scopeEar = (
+    'Ear training — on-screen drills, clapping with the click and part-by-part tests.',
+    'Kulak eğitimi — ekran alıştırmaları, klikle alkış ve bölüm bölüm testler.',
   );
   static const UiCopy scopeSetup = (
     'Setup wizard — latency check, room noise, tuning.',
@@ -72,8 +76,8 @@ abstract final class V1HomeCopy {
     'Ölçülü pratik. Akort. Haftalık hedef.',
   );
   static const UiCopy homeIntro = (
-    'Play your next lesson with a click and a scrolling tab; we show what we heard on every note. Voice and piano courses open in turn.',
-    'Sıradaki dersini klik ve akan tabla çal; her notada ne duyduğumuzu gösteririz. Ses ve piyano kursları sırayla açılacak.',
+    'Play your next lesson with a click and a scrolling tab; we show what we heard on every note. Ear training is open too; voice and piano courses open in turn.',
+    'Sıradaki dersini klik ve akan tabla çal; her notada ne duyduğumuzu gösteririz. Kulak eğitimi de açık; ses ve piyano kursları sırayla açılacak.',
   );
   static const UiCopy guitarCardOpen = (
     'Measured practice open',
@@ -83,10 +87,20 @@ abstract final class V1HomeCopy {
     'Measured practice open · next lesson: {v0}',
     'Ölçülü pratik açık · sıradaki ders: {v0}',
   );
+  static const UiCopy earCardTitle = ('Ear training', 'Kulak eğitimi');
+  static const UiCopy earCardOpen = (
+    'Drills, clapping and tests open',
+    'Alıştırmalar, alkış ve testler açık',
+  );
+  static const UiCopy earCardNext = (
+    'Ear training open · next lesson: {v0}',
+    'Kulak eğitimi açık · sıradaki ders: {v0}',
+  );
   static const UiCopy comingSoon = (
     'Coming soon · This course opens in a later update.',
     'Yakında · Bu kurs sonraki güncellemelerle açılacak.',
   );
+
   /// What the voice course will cover; shown on its "Coming soon" page
   /// while voice is not in `ostinatoOpenInstruments` (docs/v1-curriculum).
   static const UiCopy comingSoonVoice = (
@@ -99,18 +113,12 @@ abstract final class V1HomeCopy {
     'The piano course will cover seating and hand shape, reading both clefs, rhythm, scales and triads, playing with both hands, accompaniment patterns and first pieces.',
     'Piyano kursu oturuş ve el şekli, iki anahtarda okuma, ritim, gamlar ve üçlüler, iki elle çalma, eşlik kalıpları ve ilk eserleri kapsayacak.',
   );
-  static const UiCopy measuredTitle = (
-    'Measured practice',
-    'Ölçülü pratik',
-  );
+  static const UiCopy measuredTitle = ('Measured practice', 'Ölçülü pratik');
   static const UiCopy measuredBody = (
     'Play with a click and a scrolling tab; every note is marked correct, different note or couldn’t hear. With 80% of notes correct, the next lesson opens.',
     'Klik ve akan tabla çal; her nota doğru, farklı nota ya da duyamadım diye işaretlenir. Notaların %80’i doğruysa sıradaki ders açılır.',
   );
-  static const UiCopy startNext = (
-    'Start next lesson',
-    'Sıradaki derse başla',
-  );
+  static const UiCopy startNext = ('Start next lesson', 'Sıradaki derse başla');
   static const UiCopy writtenLabel = (
     'WRITTEN LESSONS · 60 LESSONS',
     'YAZILI DERSLER · 60 DERS',
@@ -134,6 +142,7 @@ abstract final class V1HomeCopy {
     welcomeNote,
     scopeTitle,
     scopePractice,
+    scopeEar,
     scopeSetup,
     scopeStreak,
     scopeWritten,
@@ -148,6 +157,9 @@ abstract final class V1HomeCopy {
     homeIntro,
     guitarCardOpen,
     guitarCardNext,
+    earCardTitle,
+    earCardOpen,
+    earCardNext,
     comingSoon,
     comingSoonVoice,
     comingSoonPiano,

@@ -2115,7 +2115,6 @@
     "ba4af611303e98c1": "Önce akort et: tutulan notalar en yakın notadan 30 centten fazla uzak duyuluyor; bu yüzden nota adları gizlendi. Harici akort cihazıyla akort et, sonra bir açık teli tınlat.",
     "c7769c4ab3c03fe1": "Akordu kontrol et: tutulan notalar en yakın notadan yaklaşık {v0} cent uzak duyuluyor. Harici akort cihazı kullan.",
     "0016fa7101b9f732": "Gitarı çalarak öğren.",
-    "180a8f814e1bb4ad": "Klik ve akan tabla çal; uygulama çaldığın her notayı dinler ve doğru, farklı nota ya da duyamadım diye işaretler. v1 programı 690 ders: gitar, ses, piyano ve kulak eğitimi. Bu sürümde gitar açık; diğer kurslar sırayla eklenecek.",
     "e17ac651a15448e1": "Bir dersi geçmek için notaların en az %80’i doğru olmalı; o zaman sıradaki ders açılır. Her kursun ilk dersleri ücretsizdir; sonraki dersler Ostinato veya Motion+ aboneliği gerektirir.",
     "0b453d0d09f5dd1d": "Neler var?",
     "f27fdd332417616d": "Ölçülü pratik — klik, akan tab, nota başına geri bildirim.",
@@ -2128,7 +2127,6 @@
     "311bd36458c5a126": "İlerlemen",
     "1ba7a84412607102": "Ders sonuçların, serin ve haftalık hedefin bu cihazda tutulur. Motion hesabına giriş yapıp onay verirsen hesabına eşitlenir ve başka cihazda devam edebilirsin.",
     "93f893c58bac726c": "Ölçülü pratik. Akort. Haftalık hedef.",
-    "ce68d6fd9e983ef0": "Sıradaki dersini klik ve akan tabla çal; her notada ne duyduğumuzu gösteririz. Ses ve piyano kursları sırayla açılacak.",
     "1f6e7089408c3c42": "Ölçülü pratik açık",
     "dcc90cc2c83fa78e": "Ölçülü pratik açık · sıradaki ders: {v0}",
     "070a1b3ea7d8199b": "Yakında · Bu kurs sonraki güncellemelerle açılacak.",
@@ -8605,6 +8603,20 @@
     "ddf0ffc99533192a": "Nota okuma: iki anahtardan 20 nota",
     "ea86d7b7dd346f42": "Aralıklar: 12 aralığı adlandır",
     "f41a741b42c1d4ed": "Perde: 6 notayı geri söyle",
-    "f87d7265ebf58fb0": "Ritim: ♩=70'te iki ölçülük ritmi alkışla"
+    "f87d7265ebf58fb0": "Ritim: ♩=70'te iki ölçülük ritmi alkışla",
+    "10817563d1ea6e55": "Sabit ve rahat bir tempoda kaldım.",
+    "1781764c396896ca": "Hedef tempoyu, ♩={v0}, korudum.",
+    "187584ba7a65889e": "Kulak eğitimi kursunun {v0} dersinin tamamı, seviye ve modüle göre. Alıştırmalar ekranda çalışır ve cevaplarını kontrol eder; alkış dersleri alkışlarını dinler. Şarkı söyleme ölçülmez: kendin kontrol edersin ve kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al.",
+    "45926957dd915bc3": "Alıştırmalar, alkış ve testler açık",
+    "45f7ee31d8fcdd8d": "Anlatımdaki her maddeyi kendi sözlerimle açıklayabiliyorum.",
+    "4cf9d8864205198c": "Bu ders bir ekran alıştırmasıdır. Geçince ders yapıldı olarak kaydedilir.",
+    "569b2956b052eb05": "Sıradaki dersini klik ve akan tabla çal; her notada ne duyduğumuzu gösteririz. Kulak eğitimi de açık; ses ve piyano kursları sırayla açılacak.",
+    "945c2a3390f288de": "Kulak eğitimi",
+    "b234200b75ea59a0": "Klik ve akan tabla çal; uygulama çaldığın her notayı dinler ve doğru, farklı nota ya da duyamadım diye işaretler. v1 programı 690 ders: gitar, ses, piyano ve kulak eğitimi. Bu sürümde gitar ve kulak eğitimi açık; ses ve piyano sırayla eklenecek.",
+    "b5b3f089d44db8bc": "Kulak eğitimi — ekran alıştırmaları, klikle alkış ve bölüm bölüm testler.",
+    "b92f7673beb3377a": "Kulak eğitimi kursu",
+    "ba989be6d5ba56e9": "Görevi baştan sona yaptım.",
+    "c6974974513f8778": "Kulak eğitimi açık · sıradaki ders: {v0}",
+    "5f3058d78884fd92": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; şarkı söyleme bölümü ölçülmez, onu kendin kontrol et."
   }
 }

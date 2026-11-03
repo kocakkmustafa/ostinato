@@ -12,7 +12,6 @@ import '../../tuner/tuner_screen.dart' show openTuner;
 import '../../tuner/tunings.dart';
 import '../../ui_copy.dart';
 import '../../drill/drill_copy.dart';
-import '../../drill/drill_generator.dart';
 import '../../drill/drill_screen.dart';
 import '../../account_connection.dart';
 import '../../test_flow/test_flow_copy.dart';
@@ -71,16 +70,12 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
   bool get _isTuner => _l.availability == V1LessonAvailability.tuner;
 
   /// F2.6: a `D` lesson whose drill this build can generate.
-  late final bool _hasDrill = switch (_l.lesson.practice.anyDrill) {
-    final drill? =>
-      const {
-            V1LessonAvailability.drillSoon,
-            V1LessonAvailability.selfCheck,
-            V1LessonAvailability.held,
-          }.contains(_l.availability) &&
-          supportsDrill(drill),
-    null => false,
-  };
+  bool get _hasDrill => _l.drillReady;
+
+  /// An ear lesson that is only a drill: no playing or singing part.
+  bool get _drillOnly =>
+      _l.lesson.course == 'ear' &&
+      _l.lesson.practice.measurement.every((m) => m == 'D');
 
   /// A checkpoint run part by part by the test flow.
   bool get _hasTestFlow => _l.lesson.practice.sections.isNotEmpty;
@@ -144,13 +139,25 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
       : _genericItems.length;
 
   List<(UiCopy, Map<String, Object?>)> get _genericItems {
+    final target = _l.lesson.practice.tempo?.target;
+    // Ear training: no instrument in hand, nothing that rings.
+    if (_l.lesson.course == 'ear') {
+      return [
+        (V1CourseCopy.earTaskDone, const {}),
+        if (_l.availability == V1LessonAvailability.drillSoon)
+          (V1CourseCopy.earExplain, const {})
+        else
+          target == null
+              ? (V1CourseCopy.earSteady, const {})
+              : (V1CourseCopy.earTempo, {'v0': target}),
+      ];
+    }
     if (_l.availability == V1LessonAvailability.drillSoon) {
       return const [
         (V1CourseCopy.genericTaskDone, {}),
         (V1CourseCopy.genericExplain, {}),
       ];
     }
-    final target = _l.lesson.practice.tempo?.target;
     return [
       (V1CourseCopy.genericPlayedThrough, const {}),
       target == null
@@ -209,7 +216,13 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.bannerSelfCheckLesson,
     V1LessonAvailability.camera => V1CourseCopy.bannerCamera,
     V1LessonAvailability.drillSoon =>
-      _hasDrill ? DrillCopy.bannerReady : V1CourseCopy.bannerDrill,
+      !_hasDrill
+          ? V1CourseCopy.bannerDrill
+          : _l.lesson.course != 'ear'
+          ? DrillCopy.bannerReady
+          : _drillOnly
+          ? DrillCopy.bannerReadyDrillOnly
+          : DrillCopy.bannerReadySinging,
     V1LessonAvailability.held => V1CourseCopy.bannerHeld,
     V1LessonAvailability.tuner ||
     V1LessonAvailability.measured => V1CourseCopy.bannerTuner,

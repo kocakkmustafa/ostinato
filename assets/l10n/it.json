@@ -2115,7 +2115,6 @@
     "ba4af611303e98c1": "Prima accorda: le note tenute suonano a più di 30 cent dalla nota più vicina, quindi i nomi delle note sono nascosti. Accorda con un accordatore esterno, poi lascia suonare una corda a vuoto.",
     "c7769c4ab3c03fe1": "Controlla l'accordatura: le note tenute suonano a circa {v0} cent dalla nota più vicina. Usa un accordatore esterno.",
     "0016fa7101b9f732": "Impara la chitarra suonando.",
-    "180a8f814e1bb4ad": "Suona con un clic e una tablatura che scorre; l’app ascolta ogni nota e la segna come corretta, nota diversa o non sentita. Il programma v1 ha 690 lezioni di chitarra, voce, pianoforte ed educazione dell’orecchio. In questa versione è aperta la chitarra; gli altri corsi arriveranno.",
     "e17ac651a15448e1": "Per superare una lezione, almeno l’80% delle note deve essere corretto; allora si apre la lezione successiva. Le prime lezioni di ogni corso sono gratuite; le successive richiedono un abbonamento Ostinato o Motion+.",
     "0b453d0d09f5dd1d": "Cosa c’è",
     "f27fdd332417616d": "Pratica misurata — clic, tablatura che scorre, riscontro su ogni nota.",
@@ -2128,7 +2127,6 @@
     "311bd36458c5a126": "I tuoi progressi",
     "1ba7a84412607102": "I risultati delle lezioni, la serie e l’obiettivo settimanale restano su questo dispositivo. Se accedi a un account Motion e acconsenti, vengono sincronizzati con il tuo account così puoi continuare su un altro dispositivo.",
     "93f893c58bac726c": "Pratica misurata. Accordatore. Obiettivo settimanale.",
-    "ce68d6fd9e983ef0": "Suona la tua prossima lezione con un clic e una tablatura che scorre; mostriamo cosa abbiamo sentito su ogni nota. I corsi di voce e pianoforte apriranno uno dopo l’altro.",
     "1f6e7089408c3c42": "Pratica misurata aperta",
     "dcc90cc2c83fa78e": "Pratica misurata aperta · prossima lezione: {v0}",
     "070a1b3ea7d8199b": "Prossimamente · Questo corso si aprirà con un aggiornamento futuro.",
@@ -8605,6 +8603,20 @@
     "ddf0ffc99533192a": "Lettura delle note: 20 note da entrambe le chiavi",
     "ea86d7b7dd346f42": "Intervalli: nominane 12",
     "f41a741b42c1d4ed": "Altezza: ricanta 6 note",
-    "f87d7265ebf58fb0": "Ritmo: batti un ritmo di due battute a ♩=70"
+    "f87d7265ebf58fb0": "Ritmo: batti un ritmo di due battute a ♩=70",
+    "10817563d1ea6e55": "Ho mantenuto un tempo costante e comodo.",
+    "1781764c396896ca": "Ho mantenuto il tempo obiettivo, ♩={v0}.",
+    "187584ba7a65889e": "Tutte le {v0} lezioni del corso di educazione dell’orecchio, per livello e modulo. Gli esercizi si svolgono sullo schermo e controllano le tue risposte; le lezioni di battito ascoltano i tuoi battiti di mani. Il canto non viene misurato: lo controlli da solo e viene salvato come autovalutazione. Un modulo si apre quando superi il punto di controllo del modulo precedente; dentro un modulo, segui le lezioni nell’ordine che preferisci.",
+    "45926957dd915bc3": "Esercizi, battiti e test aperti",
+    "45f7ee31d8fcdd8d": "So spiegare ogni punto della spiegazione con parole mie.",
+    "4cf9d8864205198c": "Questa lezione è un esercizio sullo schermo. Superarlo salva la lezione come fatta.",
+    "569b2956b052eb05": "Suona la tua prossima lezione con un clic e una tablatura che scorre; mostriamo cosa abbiamo sentito su ogni nota. Anche l’educazione dell’orecchio è aperta; i corsi di voce e pianoforte apriranno uno dopo l’altro.",
+    "945c2a3390f288de": "Educazione dell’orecchio",
+    "b234200b75ea59a0": "Suona con un clic e una tablatura che scorre; l’app ascolta ogni nota e la segna come corretta, nota diversa o non sentita. Il programma v1 ha 690 lezioni di chitarra, voce, pianoforte ed educazione dell’orecchio. In questa versione sono aperte la chitarra e l’educazione dell’orecchio; voce e pianoforte arriveranno.",
+    "b5b3f089d44db8bc": "Educazione dell’orecchio — esercizi sullo schermo, battiti con il clic e test parte per parte.",
+    "b92f7673beb3377a": "Corso di educazione dell’orecchio",
+    "ba989be6d5ba56e9": "Ho svolto tutto il compito dall’inizio alla fine.",
+    "c6974974513f8778": "Educazione dell’orecchio aperta · prossima lezione: {v0}",
+    "5f3058d78884fd92": "Questa lezione ha un esercizio sullo schermo. Superarlo salva la lezione come fatta; la parte cantata non viene misurata, quindi controllala tu."
   }
 }

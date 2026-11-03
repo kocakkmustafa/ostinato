@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../../curriculum/v1_lesson.dart';
+import '../../drill/drill_generator.dart';
 import 'practice_progress_store.dart';
 import 'v1_practice_catalog.dart';
 
@@ -83,6 +84,18 @@ final class V1CourseLesson {
   bool get selfReportable =>
       availability != V1LessonAvailability.measured &&
       availability != V1LessonAvailability.tuner;
+
+  /// F2.6: a lesson whose on-screen drill this build can generate.
+  bool get drillReady => switch (lesson.practice.anyDrill) {
+    final drill? =>
+      const {
+            V1LessonAvailability.drillSoon,
+            V1LessonAvailability.selfCheck,
+            V1LessonAvailability.held,
+          }.contains(availability) &&
+          supportsDrill(drill),
+    null => false,
+  };
 }
 
 /// A module (`gtr-s1-m02`), a track module (`gtr-s4-m19a`) or a level test
@@ -120,11 +133,12 @@ final class V1CourseLevel {
   final List<V1CourseUnit> units;
 }
 
-/// The full v1 guitar course: every `gtr` lesson, grouped into levels and
-/// units, in id order, each with its [V1LessonAvailability] in this build.
+/// One full v1 course (`gtr` guitar, `ear` ear training): every lesson of
+/// [course], grouped into levels and units, in id order, each with its
+/// [V1LessonAvailability] in this build.
 final class V1CourseCatalog {
-  V1CourseCatalog(Iterable<V1Lesson> lessons) {
-    final sorted = lessons.where((l) => l.course == 'gtr').toList()
+  V1CourseCatalog(Iterable<V1Lesson> lessons, {this.course = 'gtr'}) {
+    final sorted = lessons.where((l) => l.course == course).toList()
       ..sort((a, b) => a.id.compareTo(b.id));
     final byUnit = <String, List<V1Lesson>>{};
     for (final l in sorted) {
@@ -166,6 +180,7 @@ final class V1CourseCatalog {
               members.first,
               byUnit,
               i == 0 ? null : ids[i - 1],
+              course,
             ),
           ),
         ),
@@ -178,6 +193,12 @@ final class V1CourseCatalog {
   }
 
   static const String assetPrefix = V1PracticeCatalog.assetPrefix;
+
+  /// Bundled lesson folder of a course (`content/v1/ear/`).
+  static String assetPrefixOf(String course) => 'content/v1/$course/';
+
+  /// The course id every lesson here belongs to.
+  final String course;
 
   late final List<V1CourseUnit> units;
 
@@ -206,7 +227,7 @@ final class V1CourseCatalog {
   }
 
   static final RegExp _unitPattern = RegExp(
-    r'^gtr-s(\d)-(?:m(\d{2})([ab])?|test(?:-([ab]))?)$',
+    r'^[a-z]+-s(\d)-(?:m(\d{2})([ab])?|test(?:-([ab]))?)$',
   );
 
   /// `gtr-s1-m02-03` → `gtr-s1-m02`; `gtr-s1-test` → itself.
@@ -226,18 +247,19 @@ final class V1CourseCatalog {
     V1Lesson first,
     Map<String, List<V1Lesson>> byUnit,
     String? previousUnit,
+    String course,
   ) {
     String? gateOf(String unitId) => byUnit[unitId]?.last.id;
     if (module != null && track != null) {
       if (first.prerequisites.isNotEmpty) return first.prerequisites;
       return [
         for (final m in const [15, 17])
-          ?gateOf('gtr-s$level-m${m.toString().padLeft(2, '0')}'),
+          ?gateOf('$course-s$level-m${m.toString().padLeft(2, '0')}'),
       ];
     }
     if (module == null && track != null) {
       final g = byUnit.keys
-          .where((k) => RegExp('^gtr-s$level-m\\d{2}$track\$').hasMatch(k))
+          .where((k) => RegExp('^$course-s$level-m\\d{2}$track\$').hasMatch(k))
           .map(gateOf)
           .nonNulls
           .toList();
@@ -287,20 +309,24 @@ final class V1CourseCatalog {
     return (V1LessonAvailability.drillSoon, reason);
   }
 
-  static Future<V1CourseCatalog> load({AssetBundle? bundle}) async {
+  static Future<V1CourseCatalog> load({
+    AssetBundle? bundle,
+    String course = 'gtr',
+  }) async {
     final b = bundle ?? rootBundle;
     final manifest = await AssetManifest.loadFromAssetBundle(b);
+    final prefix = assetPrefixOf(course);
     final paths =
         manifest
             .listAssets()
-            .where((p) => p.startsWith(assetPrefix) && p.endsWith('.json'))
+            .where((p) => p.startsWith(prefix) && p.endsWith('.json'))
             .toList()
           ..sort();
     final lessons = <V1Lesson>[];
     for (final path in paths) {
       lessons.add(V1Lesson.fromJson(jsonDecode(await b.loadString(path))));
     }
-    return V1CourseCatalog(lessons);
+    return V1CourseCatalog(lessons, course: course);
   }
 }
 

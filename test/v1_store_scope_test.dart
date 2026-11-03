@@ -1,5 +1,6 @@
 // v1 store scope (founder, 2026-11-02): the v1 guitar course is open; voice
-// and piano say "Coming soon"; the pre-v1 written courses (60-lesson guitar
+// and piano say "Coming soon"; ear training opens after its microphone
+// measurement (founder, 2026-11-03); the pre-v1 written courses (60-lesson guitar
 // journey, ukulele, bass, voice, piano) and the written recall page that
 // links to them are not reachable from home, library or the guitar page.
 import 'dart:io';
@@ -68,21 +69,18 @@ void main() {
     }
   });
 
-  test('ear training is not shipped: not bundled, no screen loads it', () {
-    // Build 9: ear training is "coming soon" like voice and piano. Its
-    // paywall constant exists, but its lessons are not packaged.
+  test('ear training ships: bundled, opened by the release flag', () {
+    // Founder 2026-11-03: "first microphone measurement, then open". The
+    // lessons are packaged and the home card stands behind one flag.
+    expect(ostinatoEarTrainingOpen, isTrue);
     expect(
       File('pubspec.yaml').readAsStringSync(),
-      isNot(contains('content/v1/ear')),
+      contains('    - content/v1/ear/'),
     );
-    for (final f in Directory('lib').listSync(recursive: true)) {
-      if (f is! File || !f.path.endsWith('.dart')) continue;
-      expect(
-        f.readAsStringSync(),
-        isNot(contains('content/v1/ear')),
-        reason: f.path,
-      );
-    }
+    expect(
+      File('lib/app/screens/library_screen.dart').readAsStringSync(),
+      contains('ostinatoEarTrainingOpen) ...<Widget>['),
+    );
   });
 
   group('real screens', () {
@@ -123,6 +121,9 @@ void main() {
       expect(find.byKey(const Key('coming-soon-voice')), findsOneWidget);
       expect(find.byKey(const Key('coming-soon-piano')), findsOneWidget);
       expect(find.byKey(const Key('guitar-card-measured')), findsOneWidget);
+      // Ear training has its own card (a course, not an instrument).
+      expect(find.byKey(const Key('ear-training-entry')), findsOneWidget);
+      expect(find.byKey(const Key('ear-card-next')), findsOneWidget);
     });
 
     testWidgets('guitar page opens the v1 course, not the 60-lesson journey', (

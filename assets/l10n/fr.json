@@ -2115,7 +2115,6 @@
     "ba4af611303e98c1": "Accorde d'abord : les notes tenues sonnent à plus de 30 cents de la note la plus proche, les noms des notes sont donc masqués. Accorde avec un accordeur externe, puis laisse sonner une corde à vide.",
     "c7769c4ab3c03fe1": "Vérifie l'accordage : les notes tenues sonnent à environ {v0} cents de la note la plus proche. Utilise un accordeur externe.",
     "0016fa7101b9f732": "Apprends la guitare en jouant.",
-    "180a8f814e1bb4ad": "Joue avec un clic et une tablature qui défile ; l’appli écoute chaque note et la marque comme juste, autre note ou pas entendue. Le programme v1 compte 690 leçons de guitare, chant, piano et formation de l’oreille. La guitare est ouverte dans cette version ; les autres cours suivront.",
     "e17ac651a15448e1": "Pour réussir une leçon, au moins 80 % de ses notes doivent être justes ; la leçon suivante s’ouvre alors. Les premières leçons de chaque cours sont gratuites ; les suivantes nécessitent un abonnement Ostinato ou Motion+.",
     "0b453d0d09f5dd1d": "Au programme",
     "f27fdd332417616d": "Pratique mesurée — clic, tablature qui défile, retour sur chaque note.",
@@ -2128,7 +2127,6 @@
     "311bd36458c5a126": "Ta progression",
     "1ba7a84412607102": "Tes résultats de leçons, ta série et ton objectif hebdomadaire sont conservés sur cet appareil. Si tu te connectes à un compte Motion et que tu acceptes, ils sont synchronisés avec ton compte pour que tu puisses continuer sur un autre appareil.",
     "93f893c58bac726c": "Pratique mesurée. Accordeur. Objectif hebdomadaire.",
-    "ce68d6fd9e983ef0": "Joue ta prochaine leçon avec un clic et une tablature qui défile ; nous montrons ce que nous avons entendu sur chaque note. Les cours de chant et de piano ouvriront tour à tour.",
     "1f6e7089408c3c42": "Pratique mesurée ouverte",
     "dcc90cc2c83fa78e": "Pratique mesurée ouverte · prochaine leçon : {v0}",
     "070a1b3ea7d8199b": "Bientôt · Ce cours ouvrira dans une prochaine mise à jour.",
@@ -8605,6 +8603,20 @@
     "ddf0ffc99533192a": "Lecture de notes : 20 notes des deux clés",
     "ea86d7b7dd346f42": "Intervalles : nommes-en 12",
     "f41a741b42c1d4ed": "Hauteur : rechante 6 notes",
-    "f87d7265ebf58fb0": "Rythme : frappe un rythme de deux mesures à ♩=70"
+    "f87d7265ebf58fb0": "Rythme : frappe un rythme de deux mesures à ♩=70",
+    "10817563d1ea6e55": "J’ai gardé un tempo régulier et confortable.",
+    "1781764c396896ca": "J’ai tenu le tempo cible, ♩={v0}.",
+    "187584ba7a65889e": "Les {v0} leçons du cours de formation de l’oreille, par niveau et par module. Les exercices se font à l’écran et vérifient tes réponses ; les leçons de frappés écoutent tes frappés. Le chant n’est pas mesuré : tu le vérifies toi-même et il est enregistré comme auto-évalué. Un module s’ouvre quand le point de contrôle du module précédent est validé ; dans un module, fais les leçons dans l’ordre que tu veux.",
+    "45926957dd915bc3": "Exercices, frappés et tests ouverts",
+    "45f7ee31d8fcdd8d": "Je peux expliquer chaque point de l’explication avec mes propres mots.",
+    "4cf9d8864205198c": "Cette leçon est un exercice à l’écran. Le réussir enregistre la leçon comme faite.",
+    "569b2956b052eb05": "Joue ta prochaine leçon avec un clic et une tablature qui défile ; nous montrons ce que nous avons entendu sur chaque note. La formation de l’oreille est aussi ouverte ; les cours de chant et de piano ouvriront tour à tour.",
+    "945c2a3390f288de": "Formation de l’oreille",
+    "b234200b75ea59a0": "Joue avec un clic et une tablature qui défile ; l’appli écoute chaque note et la marque comme juste, autre note ou pas entendue. Le programme v1 compte 690 leçons de guitare, chant, piano et formation de l’oreille. La guitare et la formation de l’oreille sont ouvertes dans cette version ; le chant et le piano suivront.",
+    "b5b3f089d44db8bc": "Formation de l’oreille — exercices à l’écran, frappés avec le clic et tests partie par partie.",
+    "b92f7673beb3377a": "Cours de formation de l’oreille",
+    "ba989be6d5ba56e9": "J’ai fait toute la tâche du début à la fin.",
+    "c6974974513f8778": "Formation de l’oreille ouverte · prochaine leçon : {v0}",
+    "5f3058d78884fd92": "Cette leçon a un exercice à l’écran. Le réussir enregistre la leçon comme faite ; la partie chantée n’est pas mesurée, vérifie-la toi-même."
   }
 }

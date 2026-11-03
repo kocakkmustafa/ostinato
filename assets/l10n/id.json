@@ -2108,7 +2108,6 @@
     "ba4af611303e98c1": "Setel dulu: nada yang ditahan terdengar lebih dari 30 cent dari nada terdekat, jadi nama nada disembunyikan. Setel dengan tuner eksternal, lalu biarkan satu senar lepas berbunyi.",
     "c7769c4ab3c03fe1": "Periksa setelan: nada yang ditahan terdengar sekitar {v0} cent dari nada terdekat. Gunakan tuner eksternal.",
     "0016fa7101b9f732": "Belajar gitar sambil bermain.",
-    "180a8f814e1bb4ad": "Mainkan bersama klik dan tab yang bergulir; aplikasi mendengarkan setiap nada dan menandainya benar, nada lain, atau tidak terdengar. Program v1 berisi 690 pelajaran gitar, vokal, piano, dan latihan pendengaran. Di rilis ini gitar sudah terbuka; kursus lain menyusul.",
     "e17ac651a15448e1": "Untuk lulus satu pelajaran, setidaknya 80% nadanya harus benar; lalu pelajaran berikutnya terbuka. Pelajaran awal setiap kursus gratis; pelajaran selanjutnya memerlukan langganan Ostinato atau Motion+.",
     "0b453d0d09f5dd1d": "Isinya",
     "f27fdd332417616d": "Latihan terukur — klik, tab bergulir, umpan balik di setiap nada.",
@@ -2121,7 +2120,6 @@
     "311bd36458c5a126": "Kemajuanmu",
     "1ba7a84412607102": "Hasil pelajaran, runtutan, dan target mingguanmu disimpan di perangkat ini. Jika kamu masuk ke akun Motion dan setuju, semuanya disinkronkan ke akunmu agar kamu bisa melanjutkan di perangkat lain.",
     "93f893c58bac726c": "Latihan terukur. Penyetem. Target mingguan.",
-    "ce68d6fd9e983ef0": "Mainkan pelajaran berikutnya dengan klik dan tab yang bergulir; kami menunjukkan apa yang kami dengar di setiap nada. Kursus vokal dan piano akan dibuka bergiliran.",
     "1f6e7089408c3c42": "Latihan terukur terbuka",
     "dcc90cc2c83fa78e": "Latihan terukur terbuka · pelajaran berikutnya: {v0}",
     "070a1b3ea7d8199b": "Segera hadir · Kursus ini dibuka di pembaruan mendatang.",
@@ -8598,6 +8596,20 @@
     "ddf0ffc99533192a": "Membaca not: 20 not dari kedua kunci",
     "ea86d7b7dd346f42": "Interval: sebutkan 12",
     "f41a741b42c1d4ed": "Tinggi nada: nyanyikan kembali 6 nada",
-    "f87d7265ebf58fb0": "Ritme: tepukkan ritme dua birama pada ♩=70"
+    "f87d7265ebf58fb0": "Ritme: tepukkan ritme dua birama pada ♩=70",
+    "10817563d1ea6e55": "Aku menjaga tempo yang stabil dan nyaman.",
+    "1781764c396896ca": "Aku menjaga tempo target, ♩={v0}.",
+    "187584ba7a65889e": "Semua {v0} pelajaran kursus latihan pendengaran, per level dan modul. Latihan berjalan di layar dan memeriksa jawabanmu; pelajaran tepuk mendengarkan tepukanmu. Bernyanyi tidak diukur: kamu memeriksanya sendiri dan disimpan sebagai penilaian diri. Modul terbuka saat titik periksa modul sebelumnya lulus; di dalam modul, ambil pelajaran dalam urutan apa pun.",
+    "45926957dd915bc3": "Latihan, tepuk, dan tes terbuka",
+    "45f7ee31d8fcdd8d": "Aku bisa menjelaskan setiap poin penjelasan dengan kata-kataku sendiri.",
+    "4cf9d8864205198c": "Pelajaran ini adalah latihan di layar. Jika lulus, pelajaran disimpan sebagai selesai.",
+    "569b2956b052eb05": "Mainkan pelajaran berikutnya dengan klik dan tab yang bergulir; kami menunjukkan apa yang kami dengar di setiap nada. Latihan pendengaran juga sudah terbuka; kursus vokal dan piano akan dibuka bergiliran.",
+    "945c2a3390f288de": "Latihan pendengaran",
+    "b234200b75ea59a0": "Mainkan bersama klik dan tab yang bergulir; aplikasi mendengarkan setiap nada dan menandainya benar, nada lain, atau tidak terdengar. Program v1 berisi 690 pelajaran gitar, vokal, piano, dan latihan pendengaran. Di rilis ini gitar dan latihan pendengaran sudah terbuka; vokal dan piano menyusul.",
+    "b5b3f089d44db8bc": "Latihan pendengaran — latihan di layar, tepuk mengikuti klik, dan tes per bagian.",
+    "b92f7673beb3377a": "Kursus latihan pendengaran",
+    "ba989be6d5ba56e9": "Aku mengerjakan seluruh tugas dari awal sampai akhir.",
+    "c6974974513f8778": "Latihan pendengaran terbuka · pelajaran berikutnya: {v0}",
+    "5f3058d78884fd92": "Pelajaran ini punya latihan di layar. Jika lulus, pelajaran disimpan sebagai selesai; bagian bernyanyi tidak diukur, jadi periksa sendiri."
   }
 }
