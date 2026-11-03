@@ -83,6 +83,67 @@ abstract final class DrillCopy {
     'Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; çalma bölümü henüz ölçülmüyor.',
   );
 
+  // ---- F2.6b heard drills ----
+  static const UiCopy tempoCompare = (
+    'Listen to both parts. Was the second one faster, slower or the same?',
+    'İki bölümü dinle. İkincisi daha hızlı mı, daha yavaş mı, aynı mı?',
+  );
+  static const UiCopy pitchDirection = (
+    'Listen. Was the second note higher or lower?',
+    'Dinle. İkinci nota daha tiz mi, daha pes mi?',
+  );
+  static const UiCopy pitchContour = (
+    'Listen. How did the three notes move?',
+    'Dinle. Üç nota nasıl hareket etti?',
+  );
+  static const UiCopy sameDifferent = (
+    'Listen. Were the two notes the same or different?',
+    'Dinle. İki nota aynı mıydı, farklı mı?',
+  );
+  static const UiCopy intervalUp = (
+    'Listen. Which rising interval was it?',
+    'Dinle. Hangi yükselen aralıktı?',
+  );
+  static const UiCopy intervalDown = (
+    'Listen. Which falling interval was it?',
+    'Dinle. Hangi inen aralıktı?',
+  );
+  static const UiCopy chordQuality = (
+    'Listen. Which chord quality was it?',
+    'Dinle. Akorun rengi hangisiydi?',
+  );
+  static const UiCopy faster = ('Faster', 'Daha hızlı');
+  static const UiCopy slower = ('Slower', 'Daha yavaş');
+  static const UiCopy same = ('The same', 'Aynı');
+  static const UiCopy higher = ('Higher', 'Daha tiz');
+  static const UiCopy lower = ('Lower', 'Daha pes');
+  static const UiCopy different = ('Different', 'Farklı');
+  static const UiCopy moveUp = ('up', 'yukarı');
+  static const UiCopy moveDown = ('down', 'aşağı');
+  static const UiCopy moveSame = ('same', 'aynı');
+  static const UiCopy minor2 = ('minor 2nd', 'küçük 2’li');
+  static const UiCopy major2 = ('major 2nd', 'büyük 2’li');
+  static const UiCopy minor3 = ('minor 3rd', 'küçük 3’lü');
+  static const UiCopy major3 = ('major 3rd', 'büyük 3’lü');
+  static const UiCopy perfect4 = ('perfect 4th', 'tam 4’lü');
+  static const UiCopy tritone = ('tritone', 'artık 4’lü');
+  static const UiCopy perfect5 = ('perfect 5th', 'tam 5’li');
+  static const UiCopy minor6 = ('minor 6th', 'küçük 6’lı');
+  static const UiCopy major6 = ('major 6th', 'büyük 6’lı');
+  static const UiCopy minor7 = ('minor 7th', 'küçük 7’li');
+  static const UiCopy major7 = ('major 7th', 'büyük 7’li');
+  static const UiCopy octave = ('octave', 'oktav');
+  static const UiCopy qualityMajor = ('major', 'majör');
+  static const UiCopy qualityMinor = ('minor', 'minör');
+  static const UiCopy qualityDominant7 = ('dominant 7th', 'dominant 7’li');
+  static const UiCopy play = ('Play', 'Çal');
+  static const UiCopy playAgain = ('Play again', 'Yeniden çal');
+  static const UiCopy playMine = ('Play my answer', 'Cevabımı çal');
+  static const UiCopy playExpected = (
+    'Play the expected',
+    'Beklenen cevabı çal',
+  );
+
   static const List<UiCopy> all = [
     noteAtFret,
     fretOfNote,
@@ -111,5 +172,40 @@ abstract final class DrillCopy {
     start,
     statusPassed,
     bannerReady,
+    tempoCompare,
+    pitchDirection,
+    pitchContour,
+    sameDifferent,
+    intervalUp,
+    intervalDown,
+    chordQuality,
+    faster,
+    slower,
+    same,
+    higher,
+    lower,
+    different,
+    moveUp,
+    moveDown,
+    moveSame,
+    minor2,
+    major2,
+    minor3,
+    major3,
+    perfect4,
+    tritone,
+    perfect5,
+    minor6,
+    major6,
+    minor7,
+    major7,
+    octave,
+    qualityMajor,
+    qualityMinor,
+    qualityDominant7,
+    play,
+    playAgain,
+    playMine,
+    playExpected,
   ];
 }

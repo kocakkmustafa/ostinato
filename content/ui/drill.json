@@ -135,6 +135,181 @@
       "id": "bannerReady",
       "en": "This lesson has an on-screen drill. Passing it saves the lesson as done; the playing part is not measured yet.",
       "tr": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; çalma bölümü henüz ölçülmüyor."
+    },
+    {
+      "id": "tempoCompare",
+      "en": "Listen to both parts. Was the second one faster, slower or the same?",
+      "tr": "İki bölümü dinle. İkincisi daha hızlı mı, daha yavaş mı, aynı mı?"
+    },
+    {
+      "id": "pitchDirection",
+      "en": "Listen. Was the second note higher or lower?",
+      "tr": "Dinle. İkinci nota daha tiz mi, daha pes mi?"
+    },
+    {
+      "id": "pitchContour",
+      "en": "Listen. How did the three notes move?",
+      "tr": "Dinle. Üç nota nasıl hareket etti?"
+    },
+    {
+      "id": "sameDifferent",
+      "en": "Listen. Were the two notes the same or different?",
+      "tr": "Dinle. İki nota aynı mıydı, farklı mı?"
+    },
+    {
+      "id": "intervalUp",
+      "en": "Listen. Which rising interval was it?",
+      "tr": "Dinle. Hangi yükselen aralıktı?"
+    },
+    {
+      "id": "intervalDown",
+      "en": "Listen. Which falling interval was it?",
+      "tr": "Dinle. Hangi inen aralıktı?"
+    },
+    {
+      "id": "chordQuality",
+      "en": "Listen. Which chord quality was it?",
+      "tr": "Dinle. Akorun rengi hangisiydi?"
+    },
+    {
+      "id": "faster",
+      "en": "Faster",
+      "tr": "Daha hızlı"
+    },
+    {
+      "id": "slower",
+      "en": "Slower",
+      "tr": "Daha yavaş"
+    },
+    {
+      "id": "same",
+      "en": "The same",
+      "tr": "Aynı"
+    },
+    {
+      "id": "higher",
+      "en": "Higher",
+      "tr": "Daha tiz"
+    },
+    {
+      "id": "lower",
+      "en": "Lower",
+      "tr": "Daha pes"
+    },
+    {
+      "id": "different",
+      "en": "Different",
+      "tr": "Farklı"
+    },
+    {
+      "id": "moveUp",
+      "en": "up",
+      "tr": "yukarı"
+    },
+    {
+      "id": "moveDown",
+      "en": "down",
+      "tr": "aşağı"
+    },
+    {
+      "id": "moveSame",
+      "en": "same",
+      "tr": "aynı"
+    },
+    {
+      "id": "minor2",
+      "en": "minor 2nd",
+      "tr": "küçük 2’li"
+    },
+    {
+      "id": "major2",
+      "en": "major 2nd",
+      "tr": "büyük 2’li"
+    },
+    {
+      "id": "minor3",
+      "en": "minor 3rd",
+      "tr": "küçük 3’lü"
+    },
+    {
+      "id": "major3",
+      "en": "major 3rd",
+      "tr": "büyük 3’lü"
+    },
+    {
+      "id": "perfect4",
+      "en": "perfect 4th",
+      "tr": "tam 4’lü"
+    },
+    {
+      "id": "tritone",
+      "en": "tritone",
+      "tr": "artık 4’lü"
+    },
+    {
+      "id": "perfect5",
+      "en": "perfect 5th",
+      "tr": "tam 5’li"
+    },
+    {
+      "id": "minor6",
+      "en": "minor 6th",
+      "tr": "küçük 6’lı"
+    },
+    {
+      "id": "major6",
+      "en": "major 6th",
+      "tr": "büyük 6’lı"
+    },
+    {
+      "id": "minor7",
+      "en": "minor 7th",
+      "tr": "küçük 7’li"
+    },
+    {
+      "id": "major7",
+      "en": "major 7th",
+      "tr": "büyük 7’li"
+    },
+    {
+      "id": "octave",
+      "en": "octave",
+      "tr": "oktav"
+    },
+    {
+      "id": "qualityMajor",
+      "en": "major",
+      "tr": "majör"
+    },
+    {
+      "id": "qualityMinor",
+      "en": "minor",
+      "tr": "minör"
+    },
+    {
+      "id": "qualityDominant7",
+      "en": "dominant 7th",
+      "tr": "dominant 7’li"
+    },
+    {
+      "id": "play",
+      "en": "Play",
+      "tr": "Çal"
+    },
+    {
+      "id": "playAgain",
+      "en": "Play again",
+      "tr": "Yeniden çal"
+    },
+    {
+      "id": "playMine",
+      "en": "Play my answer",
+      "tr": "Cevabımı çal"
+    },
+    {
+      "id": "playExpected",
+      "en": "Play the expected",
+      "tr": "Beklenen cevabı çal"
     }
   ]
 }

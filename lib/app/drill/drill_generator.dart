@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import '../curriculum/v1_lesson.dart';
+import 'drill_sound.dart';
 import 'drill_theory.dart';
 
 /// F2.6 — drill questions generated at run time from `practice.drill.params`
@@ -37,7 +38,36 @@ enum DrillPromptKind {
 
   /// "Which chord is in bar {n} of the 12-bar blues?"
   bluesBar,
+
+  /// F2.6b, heard: "Was the second part faster, slower or the same?"
+  tempoCompare,
+
+  /// "Was the second note higher or lower?"
+  pitchDirection,
+
+  /// "How did the three notes move?" (`up-down` …)
+  pitchContour,
+
+  /// "Were the two notes the same or different?"
+  sameDifferent,
+
+  /// "Which interval was it?" (`M3`, `P5` …)
+  intervalName,
+
+  /// "Which chord quality was it?" (`major`, `minor`, `dominant7`)
+  chordQuality,
 }
+
+/// Prompts that are heard: the screen shows Play and "play my answer".
+bool isHeard(DrillPromptKind k) => switch (k) {
+  DrillPromptKind.tempoCompare ||
+  DrillPromptKind.pitchDirection ||
+  DrillPromptKind.pitchContour ||
+  DrillPromptKind.sameDifferent ||
+  DrillPromptKind.intervalName ||
+  DrillPromptKind.chordQuality => true,
+  _ => false,
+};
 
 /// One marked position on the fretboard diagram.
 typedef FretMark = ({int string, int fret});
@@ -50,6 +80,8 @@ final class DrillQuestion {
     required this.answer,
     this.marks = const [],
     this.fretWindow,
+    this.sound,
+    this.optionSounds,
   });
 
   final DrillPromptKind kind;
@@ -70,7 +102,24 @@ final class DrillQuestion {
   /// Frets the diagram shows, `(first, last)`; null = no diagram.
   final (int, int)? fretWindow;
 
+  /// What the question plays (heard kinds only).
+  final DrillSound? sound;
+
+  /// "Play my answer": per option, what that answer would have sounded like
+  /// (null where it cannot be heard, e.g. "same" in tempo comparison).
+  final List<DrillSound?>? optionSounds;
+
   String get expected => options[answer];
+
+  DrillQuestion withSound(DrillSound sound) => DrillQuestion(
+    kind: kind,
+    values: values,
+    options: options,
+    answer: answer,
+    marks: marks,
+    fretWindow: fretWindow,
+    sound: sound,
+  );
 }
 
 /// Sets this slice can generate, per drill type.
@@ -89,6 +138,26 @@ const Map<String, Set<String>> _supportedSets = {
 /// Whether this build can run [drill] (guitar fretboard sets only for
 /// `major_scale_steps`; keyboard diagrams come with the ear course).
 bool supportsDrill(V1Drill drill) {
+  final p = drill.params;
+  switch (drill.type) {
+    case 'tempo_compare' || 'pitch_direction' || 'same_different':
+      return true;
+    case 'interval_name':
+      // Staff display (piano) and cadence/melody context come with (c).
+      return p['display'] == null &&
+          p['context'] == null &&
+          p['cadence'] != true &&
+          (p['intervals'] as List?)?.every(
+                (i) => intervalSemitones.containsKey(i),
+              ) ==
+              true;
+    case 'triad_quality':
+      return p['inversions'] != true &&
+          (p['qualities'] as List?)?.every(
+                (q) => const {'major', 'minor', 'dominant7'}.contains(q),
+              ) ==
+              true;
+  }
   if (drill.type == 'ordering') {
     return drill.params['form'] == 'twelve_bar_blues';
   }
@@ -107,9 +176,20 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
     throw UnsupportedError('Drill not in this build: ${drill.type}');
   }
   final g = _Gen(drill.params, math.Random(seed));
-  final make = switch (drill.type == 'ordering'
-      ? 'twelve_bar_blues'
-      : drill.params['set'] as String) {
+  final make = switch (switch (drill.type) {
+    'ordering' => 'twelve_bar_blues',
+    'tempo_compare' ||
+    'pitch_direction' ||
+    'same_different' ||
+    'interval_name' ||
+    'triad_quality' => drill.type,
+    _ => drill.params['set'] as String,
+  }) {
+    'tempo_compare' => g.tempoCompare,
+    'pitch_direction' => g.pitchDirection,
+    'same_different' => g.sameDifferent,
+    'interval_name' => g.intervalName,
+    'triad_quality' => g.chordQuality,
     'fretboard_natural_notes' => () => g.fretNote(naturalOnly: true),
     'fretboard_root_names' => () => g.fretNote(naturalOnly: false),
     'enharmonic_names' => g.enharmonic,
@@ -414,5 +494,249 @@ final class _Gen {
       values: {'v0': line + 1},
       options: rows.length,
     );
+  }
+
+  // ---- F2.6b heard drills -------------------------------------------------
+
+  /// `["C3","C5"]` or `"C3-C5"` → MIDI bounds.
+  (int, int) range([String fallback = 'C3-C5']) {
+    final v = p['range'] ?? fallback;
+    final parts = v is List ? v.cast<String>() : (v as String).split('-');
+    if (parts.length != 2) throw const FormatException('range needs two notes');
+    final lo = noteMidi(parts[0]), hi = noteMidi(parts[1]);
+    if (lo >= hi) throw const FormatException('range must rise');
+    return (lo, hi);
+  }
+
+  double volume() =>
+      p['varyVolume'] == true ? 0.55 + rng.nextDouble() * 0.45 : 1;
+
+  DrillNote tone(
+    double at,
+    double midi, {
+    double seconds = 0.7,
+    double? gain,
+  }) => DrillNote(at: at, midi: midi, seconds: seconds, gain: gain ?? volume());
+
+  DrillQuestion heard({
+    required DrillPromptKind kind,
+    required String answer,
+    required List<String> options,
+    required DrillSound sound,
+    List<DrillSound?>? optionSounds,
+    Map<String, Object> values = const {},
+  }) => DrillQuestion(
+    kind: kind,
+    values: values,
+    options: options,
+    answer: options.indexOf(answer),
+    sound: sound,
+    optionSounds: optionSounds,
+  );
+
+  DrillQuestion tempoCompare() {
+    final base = ints('baseBpm', [70, 110]);
+    final delta = ints('deltaPercent', [10, 25]);
+    final bpm = base[0] + rng.nextInt(base[1] - base[0] + 1);
+    final pct = delta[0] + rng.nextInt(delta[1] - delta[0] + 1);
+    final choices = ['faster', 'slower', if (p['allowSame'] == true) 'same'];
+    final answer = pick(choices);
+    final second = switch (answer) {
+      'faster' => bpm * (1 + pct / 100),
+      'slower' => bpm * (1 - pct / 100),
+      _ => bpm.toDouble(),
+    };
+    List<DrillNote> phrase(double start, double tempo) => [
+      for (var b = 0; b < 4; b++)
+        DrillNote(
+          at: start + b * 60 / tempo,
+          midi: 0,
+          seconds: 0.05,
+          gain: b == 0 ? 1 : 0.5,
+          timbre: DrillTimbre.click,
+        ),
+    ];
+    final firstEnd = 4 * 60 / bpm;
+    return heard(
+      kind: DrillPromptKind.tempoCompare,
+      answer: answer,
+      options: choices,
+      sound: DrillSound([
+        ...phrase(0, bpm.toDouble()),
+        ...phrase(firstEnd + 0.8, second),
+      ]),
+    );
+  }
+
+  DrillQuestion pitchDirection() {
+    final (lo, hi) = range();
+    final minStep = (p['minSemitones'] as int?) ?? 2;
+    final notesParam = p['notes'];
+    final count = notesParam is List
+        ? pick(notesParam.cast<int>())
+        : (notesParam as int?) ?? 2;
+    final allowSame = p['allowSame'] == true;
+    int step(int from) {
+      final moves = [
+        for (var d = minStep; d <= 12; d++) ...[
+          if (from + d <= hi) d,
+          if (from - d >= lo) -d,
+        ],
+        if (allowSame) 0,
+      ];
+      return pick(moves);
+    }
+
+    String word(int d) => d > 0
+        ? 'up'
+        : d < 0
+        ? 'down'
+        : 'same';
+    final first = lo + rng.nextInt(hi - lo + 1);
+    final midis = [first];
+    for (var i = 1; i < count; i++) {
+      midis.add(midis.last + step(midis.last));
+    }
+    final sound = DrillSound([
+      for (var i = 0; i < midis.length; i++)
+        tone(i * 0.85, midis[i].toDouble()),
+    ]);
+    if (count == 2) {
+      final d = midis[1] - midis[0];
+      final answer = d > 0
+          ? 'higher'
+          : d < 0
+          ? 'lower'
+          : 'same';
+      return heard(
+        kind: DrillPromptKind.pitchDirection,
+        answer: answer,
+        options: ['higher', 'lower', if (allowSame) 'same'],
+        sound: sound,
+      );
+    }
+    final answer = [
+      for (var i = 1; i < midis.length; i++) word(midis[i] - midis[i - 1]),
+    ].join('-');
+    final words = ['up', 'down', if (allowSame) 'same'];
+    final all = [
+      for (final a in words)
+        for (final b in words) '$a-$b',
+    ];
+    return choice(
+      kind: DrillPromptKind.pitchContour,
+      answer: answer,
+      pool: all,
+    ).withSound(sound);
+  }
+
+  DrillQuestion sameDifferent() {
+    final (lo, hi) = range();
+    final minC = (p['minCents'] as int?) ?? 50;
+    final maxC = (p['maxCents'] as int?) ?? 200;
+    final base = (lo + rng.nextInt(hi - lo + 1)).toDouble();
+    final answer = rng.nextBool() ? 'same' : 'different';
+    final cents = answer == 'same'
+        ? 0.0
+        : (minC + rng.nextInt(maxC - minC + 1)) * (rng.nextBool() ? 1 : -1);
+    return heard(
+      kind: DrillPromptKind.sameDifferent,
+      answer: answer,
+      options: const ['same', 'different'],
+      sound: DrillSound([tone(0, base), tone(0.9, base + cents / 100)]),
+    );
+  }
+
+  DrillQuestion intervalName() {
+    final names = strings('intervals');
+    final (lo, hi) = range();
+    final dir = p['direction'];
+    final dirs = switch (dir) {
+      'both' => ['ascending', 'descending'],
+      final List<Object?> l => l.cast<String>(),
+      final String d => [d],
+      _ => ['ascending'],
+    };
+    final name = pick(names);
+    final direction = pick(dirs);
+    final semis = intervalSemitones[name]!;
+    final widest = names.map((n) => intervalSemitones[n]!).reduce(math.max);
+    final root = direction == 'ascending'
+        ? lo + rng.nextInt(math.max(1, hi - widest - lo + 1))
+        : lo + widest + rng.nextInt(math.max(1, hi - lo - widest + 1));
+    DrillSound play(int s) {
+      final other = direction == 'ascending' ? root + s : root - s;
+      return DrillSound([
+        tone(0, root.toDouble(), seconds: 0.8, gain: 1),
+        tone(0.9, other.toDouble(), seconds: 0.8, gain: 1),
+      ]);
+    }
+
+    return heard(
+      kind: DrillPromptKind.intervalName,
+      answer: name,
+      options: names,
+      sound: play(semis),
+      optionSounds: [for (final n in names) play(intervalSemitones[n]!)],
+      values: {'v0': direction},
+    );
+  }
+
+  DrillQuestion chordQuality() {
+    final qualities = strings('qualities');
+    final guitar = p['voicing'] == 'guitar_open';
+    final roots = p['roots'] is List ? strings('roots') : null;
+    final (lo, hi) = range(guitar ? 'E2-E4' : 'C3-C5');
+    final rootMidi = roots != null
+        ? _guitarRootMidi(pick(roots))
+        : lo + rng.nextInt(math.max(1, hi - lo - 10));
+    final quality = pick(qualities);
+    DrillSound play(String q) {
+      final steps = switch (q) {
+        'major' => [0, 4, 7],
+        'minor' => [0, 3, 7],
+        'dominant7' => [0, 4, 7, 10],
+        _ => throw StateError('unreachable'),
+      };
+      final timbre = guitar ? DrillTimbre.string : DrillTimbre.piano;
+      final arpeggio = p['arpeggiate'] != false;
+      final gap = arpeggio ? 0.42 : 0.0;
+      final chordAt = arpeggio ? steps.length * gap + 0.25 : 0.0;
+      return DrillSound([
+        if (arpeggio)
+          for (var i = 0; i < steps.length; i++)
+            DrillNote(
+              at: i * gap,
+              midi: (rootMidi + steps[i]).toDouble(),
+              seconds: 0.6,
+              timbre: timbre,
+            ),
+        for (final s in steps)
+          DrillNote(
+            at: chordAt,
+            midi: (rootMidi + s).toDouble(),
+            seconds: 1.4,
+            gain: 0.7,
+            timbre: timbre,
+          ),
+      ]);
+    }
+
+    return heard(
+      kind: DrillPromptKind.chordQuality,
+      answer: quality,
+      options: qualities,
+      sound: play(quality),
+      optionSounds: [for (final q in qualities) play(q)],
+    );
+  }
+
+  /// Open-position root on guitar: A2, D3, E2 (the open strings' octave).
+  int _guitarRootMidi(String root) {
+    final pc = SpelledNote.parse(root).pitchClass;
+    for (var m = 40; m < 52; m++) {
+      if (m % 12 == pc) return m;
+    }
+    throw StateError('unreachable');
   }
 }

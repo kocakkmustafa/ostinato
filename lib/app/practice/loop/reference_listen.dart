@@ -42,6 +42,9 @@ final class ReferenceListenController extends ChangeNotifier {
   /// The passage last played; [ReferencePassage.truncated] is shown.
   ReferencePassage? passage;
 
+  /// Which clip [playClip] is preparing or playing (caller-defined).
+  Object? tag;
+
   ReferencePlaybackPort? _port;
   PracticeAudioTicket? _ticket;
   Timer? _ended;
@@ -56,16 +59,35 @@ final class ReferenceListenController extends ChangeNotifier {
     ReferencePlaybackPort? port,
     PracticeScore score,
     int bpm,
-  ) async {
+  ) => playClip(
+    port,
+    () async {
+      final rendered = await _render(score, bpm);
+      passage = rendered;
+      return (samples: rendered.samples, sampleRate: rendered.sampleRate);
+    },
+    bpm: bpm,
+  );
+
+  /// F2.6: plays any synthesized clip through the same staged reference path
+  /// (drill sounds, "play my answer"). [tag] tells listeners which clip is
+  /// sounding.
+  Future<void> playClip(
+    ReferencePlaybackPort? port,
+    Future<({Float32List samples, int sampleRate})> Function() render, {
+    int? bpm,
+    Object? tag,
+  }) async {
     await stop();
     final epoch = ++_epoch;
     this.bpm = bpm;
+    this.tag = tag;
     if (port == null) return _set(ReferenceListenState.unavailable);
     _set(ReferenceListenState.preparing);
     try {
-      final rendered = await _render(score, bpm);
+      final clip = await render();
       if (epoch != _epoch) return;
-      final id = await port.stage(rendered.samples, rendered.sampleRate);
+      final id = await port.stage(clip.samples, clip.sampleRate);
       if (epoch != _epoch) return;
       final ticket = id == null ? null : await port.open(id);
       if (epoch != _epoch) {
@@ -75,10 +97,12 @@ final class ReferenceListenController extends ChangeNotifier {
       if (ticket == null) return _set(ReferenceListenState.unavailable);
       _port = port;
       _ticket = ticket;
-      passage = rendered;
+      final duration = Duration(
+        microseconds: clip.samples.length * 1000000 ~/ clip.sampleRate,
+      );
       // Release a little after the tail so the last note is not cut.
       _ended = Timer(
-        rendered.duration + const Duration(milliseconds: 300),
+        duration + const Duration(milliseconds: 300),
         () => unawaited(stop()),
       );
       _set(ReferenceListenState.playing);
