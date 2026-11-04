@@ -299,12 +299,20 @@ def dart_hand_context(source, json_contexts):
 
 def instructional_promise_word(sentence, label):
     """A present physical instruction or spatial 'nearby' is not a roadmap."""
+    # 2026-11-04: the learner's own state ("not yet" passed / played / in
+    # tune) is a result, not a roadmap. Only these exact shapes; a product
+    # "not … yet" still fails.
     if label == 'yet':
         safe = re.compile(
             r'\bno (?:sustain )?pedal yet\b|'
-            r'\bdo not (?:play|strum|sing|press|pluck)\b[^.!?;]*?\byet\b', re.I)
+            r'\bdo not (?:play|strum|sing|press|pluck)\b[^.!?;]*?\byet\b|'
+            r'^not yet(?=\s*(?:\.|·|$))|\bnot played yet\b|'
+            r'\bnot yet in tune\b|\bin tune yet\b', re.I)
     elif label == 'henüz':
-        safe = re.compile(r'\bhenüz (?:çalma|söyleme|basma|çekme|kullanma)\b', re.I)
+        safe = re.compile(
+            r'\bhenüz (?:çalma|söyleme|basma|çekme|kullanma)\b|'
+            r'^henüz değil(?=\s*(?:\.|·|$))|\bhenüz çalınmadı\b|'
+            r'\bhenüz akortlu\b', re.I)
     elif label == 'yakında':
         safe = re.compile(r'\byakında su (?:olabilir|bulundur)\b', re.I)
     else:
@@ -362,6 +370,25 @@ def _block(source, position):
     return opening, spans[-1][1] + 1 if spans else position
 
 
+_BODY_START = re.compile(r'\s*(\{|=>)')
+
+
+def _word_before(source, position):
+    r"""The identifier right before `position`, skipping whitespace.
+
+    Same answer as `re.search(r'(\w+)\s*$', source[:position])`, without
+    scanning the whole prefix for every parenthesis (that was quadratic: 800 s
+    of the honesty gate on 2026-11-04).
+    """
+    end = position
+    while end and source[end - 1].isspace():
+        end -= 1
+    start = end
+    while start and (source[start - 1].isalnum() or source[start - 1] == '_'):
+        start -= 1
+    return source[start:end] or None
+
+
 def _locale_bindings(source, predicate):
     bindings = []
     for match in re.finditer(
@@ -373,25 +400,24 @@ def _locale_bindings(source, predicate):
     functions = []
     for match in re.finditer(r'\(', source):
         opening = match.start()
-        prefix = re.search(r'(\w+)\s*$', source[:opening])
-        name = prefix[1] if prefix else None
+        name = _word_before(source, opening)
         if name in {'if', 'while', 'switch', 'for', 'catch', 'assert'}:
             continue
         args = arguments(source, opening)
         if not args:
             continue
         closing = source.find(')', args[-1][1])
-        after = re.match(r'\s*(\{|=>)', source[closing + 1:])
+        after = _BODY_START.match(source, closing + 1)
         if not after:
             continue
         if after[1] == '{':
-            body = closing + 1 + after.end() - 1
+            body = after.end() - 1
             contents = arguments(source, body)
             if not contents:
                 continue
             body_end = contents[-1][1] + 1
         else:
-            body = closing + 1 + after.end()
+            body = after.end()
             body_end = _expression_end(source, body)
         parameters = []
         for index, (a, b) in enumerate(args):
@@ -625,8 +651,9 @@ def guarded_dart_contexts(sources):
         _only_at(guitar_source, r'\btr\b', [
             r'this\.tr\b', r'final String tr;', r"json\['tr'\]",
             r'localized\(context, en, tr, values: values\)']) and
-        not any(re.search(r'(?<!this)\.tr\b', code_only(source)) for source in sources.values()))
+        _tr_reads_forwarded(sources))
     guitar_guard = guitar_guard or guitar_forwarded
+    ui_copy_guard = ui_copy_proof(sources, localized_guard)
     result = set()
     for file, source in sources.items():
         imports_locale = file == 'lib/app/app_locale.dart' or bool(re.search(
@@ -643,6 +670,9 @@ def guarded_dart_contexts(sources):
             study_guard=study_guard and file == 'lib/app/study_review_content.dart',
             reviewed_guard=reviewed_guard,
             trusted_dispatcher_definition=file == 'lib/app/app_locale.dart')
+        if ui_copy_guard and (file == UI_COPY_FILE or re.search(
+                r"import ['\"][^'\"]*ui_copy.dart['\"]", source)):
+            ranges += ui_copy_ranges(source)
         if guitar_guard and re.search(
                 r"import ['\"][^'\"]*guitar_journey.dart['\"]", source):
             ranges += pair_ranges(source, 'GuitarText', 1,
@@ -650,6 +680,74 @@ def guarded_dart_contexts(sources):
         result.update((f'{file}:{line}', text, offset)
                       for line, text, offset in literals_in_ranges(source, ranges))
     return [(where, text) for where, text, _ in sorted(result)]
+
+
+def _tr_reads_forwarded(sources):
+    """Every `.tr` read outside a constructor is the TURKISH argument of the
+    proven `localized` dispatcher or of a `GuitarTextLike(en, tr)` pair (a
+    Flutter-free EN/TR pair whose own `.tr` is in turn only read that way).
+
+    2026-11-04: the earlier blanket "no `.tr` read anywhere" switched the
+    GuitarText proof off for the whole app as soon as a lesson pass text was
+    forwarded as `localized(context, text.en, text.tr)` — the very dispatch
+    this proof wants — and every GuitarText Turkish half became a [dil]
+    finding. A read anywhere else still disables the proof.
+    """
+    for source in sources.values():
+        code = code_only(source)
+        allowed = (pair_ranges(source, 'localized', 2, named=LOCALIZED_NAMED) +
+                   pair_ranges(source, 'GuitarTextLike', 1, arity=2))
+        for match in re.finditer(r'(?<!this)\.tr\b', code):
+            if not any(a <= match.start() < b for a, b in allowed):
+                return False
+    return True
+
+
+# ── UiCopy: reviewed (en, tr) records (2026-11-04) ─────────────────────────
+# Most copy since K11 is `static const UiCopy name = ('en', 'tr');` shown only
+# through `uiText`, which forwards both halves to the proven `localized`
+# dispatcher. The Turkish half is a TR-branch argument, exactly like the
+# third argument of `localized(...)`. Accepted only with the typedef, the
+# exact forwarding body, and no direct `.$2` read of a copy record anywhere
+# (that would show Turkish regardless of locale); any of those changing
+# brings every Turkish half back as a [dil] finding.
+UI_COPY_FILE = 'lib/app/ui_copy.dart'
+UI_COPY_TYPEDEF = 'typedef UiCopy = (String en, String tr);'
+UI_TEXT_FORWARD = re.compile(
+    r"String uiText\(\s*BuildContext context,\s*UiCopy copy,\s*\{\s*"
+    r"Map<String, Object\?> values = const \{\},?\s*\}\s*\)\s*=>\s*"
+    r"localized\(context, copy\.\$1, copy\.\$2, values: values\)\s*;")
+
+
+def ui_copy_proof(sources, localized_guard):
+    source = sources.get(UI_COPY_FILE, '')
+    forward = UI_TEXT_FORWARD.search(source)
+    if not (localized_guard and UI_COPY_TYPEDEF in source and forward and
+            not _dispatcher_shadowed(source)):
+        return False
+    names = set()
+    for text in sources.values():
+        names.update(re.findall(r'\bUiCopy\??\s+(\w+)', code_only(text)))
+    member = re.compile(r'\b[A-Z]\w*Copy\.\w+\.\$2\b')
+    for file, text in sources.items():
+        code = code_only(text)
+        if file == UI_COPY_FILE:
+            code = code[:forward.start()] + code[forward.end():]
+        if member.search(code) or any(
+                m.group(1) in names for m in re.finditer(r'\b(\w+)\.\$2\b', code)):
+            return False
+    return True
+
+
+def ui_copy_ranges(source):
+    """The TR half of each `UiCopy name = ('en', 'tr')` record literal."""
+    ranges = []
+    for match in re.finditer(r'\bUiCopy\s+\w+\s*=\s*\(', source):
+        args = arguments(source, match.end() - 1)
+        if len(args) == 2 and not any(
+                _NAMED_ARGUMENT.match(source[a:b]) for a, b in args):
+            ranges.append(args[1])
+    return ranges
 
 
 # ── Preference writers (rule E payload role) ────────────────────────────────
