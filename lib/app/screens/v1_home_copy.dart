@@ -53,8 +53,8 @@ abstract final class V1HomeCopy {
     'Kamera',
   );
   static const UiCopy cameraBody = (
-    'The camera is used only in a few setup lessons, to look at hand and wrist posture. We ask for permission in that lesson. Video is processed on this device; it is not recorded or sent. All other lessons work without the camera.',
-    'Kamera yalnız birkaç kurulum dersinde, el ve bilek duruşuna bakmak için kullanılır. İzni o derste isteriz. Görüntü cihazda işlenir; kaydedilmez, gönderilmez. Diğer dersler kamerasız çalışır.',
+    'The camera is used only in a few setup lessons, to look at posture and hand position. We ask for permission in that lesson. Video is processed on this device; it is not recorded or sent. All other lessons work without the camera.',
+    'Kamera yalnız birkaç kurulum dersinde, duruşa ve el konumuna bakmak için kullanılır. İzni o derste isteriz. Görüntü cihazda işlenir; kaydedilmez, gönderilmez. Diğer dersler kamerasız çalışır.',
   );
   static const UiCopy progressTitle = (
     'Your progress',
