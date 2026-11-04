@@ -8617,6 +8617,19 @@
     "5f3058d78884fd92": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; şarkı söyleme bölümü ölçülmez, onu kendin kontrol et.",
     "fd926468a8904dc5": "Mikrofon erişimi, pratik ve akort sırasında çaldığın notaları ve alkışladığın ritimleri duymak içindir. Ses bu cihazda işlenir; yüklenmez. Kendi kaydını dinlemeyi açarsan kayıt yalnız bu cihazda tutulur ve oturum sonunda silinir.",
     "266fa6a1ededa59d": "Ölçülü pratikte mikrofon çaldığın notaları ve alkışladığın ritimleri dinler. Ses bu cihazda işlenir; gönderilmez. Çaldığın kaydedilmez; istersen kendi kaydını dinleme seçeneğini açabilirsin, kayıt cihazında kalır ve oturum sonunda silinir. İzni ilk ölçülü derste isteriz. Vermezsen dersleri okuyup öz-kontrolle çalışabilirsin.",
-    "f5767a8eb5ad7adb": "Ölçülü pratikte mikrofon çaldığın notaları ve alkışladığın ritimleri dinler. Notalarının yeterli bir kısmı doğru duyulduğunda ders geçilir; gereken oran seviyeyle artar. İzin, ilk ölçümde istenir. Ses bu cihazda işlenir ve yüklenmez; kendi kaydını dinleme seçeneğini açmadıkça çaldığın kaydedilmez. Durdurmak, ekrandan çıkmak, hesap değiştirmek veya uygulamayı arka plana almak mikrofonu kapatır."
+    "f5767a8eb5ad7adb": "Ölçülü pratikte mikrofon çaldığın notaları ve alkışladığın ritimleri dinler. Notalarının yeterli bir kısmı doğru duyulduğunda ders geçilir; gereken oran seviyeyle artar. İzin, ilk ölçümde istenir. Ses bu cihazda işlenir ve yüklenmez; kendi kaydını dinleme seçeneğini açmadıkça çaldığın kaydedilmez. Durdurmak, ekrandan çıkmak, hesap değiştirmek veya uygulamayı arka plana almak mikrofonu kapatır.",
+    "bc30695b79fb0840": "Kamera ipucu",
+    "13ec35aec83c6453": "Konumu korurken kamera, gövdenin ne kadar eğildiğine dair ipucu verebilir. Puan vermez. Görüntü bu cihazda işlenir; kaydedilmez, gönderilmez.",
+    "dd51c85917a02386": "Kamerayla başla",
+    "831a2d08ee12f4e9": "Bu derste gövden için kamera ipucu var. Kamera yalnız ipucu verir: kontrol listesini kendin işaretle; tamamlaman kendi beyanı olarak kaydedilir.",
+    "21f2bf42f0b0bb3f": "Kontrol listesi · kamera ipucu",
+    "4cd08e23fe77341a": "Kamera açılıyor…",
+    "bf625db396d46a47": "Kamera seni göremiyor. İki omzun ve iki kalçan görüntüde olmalı.",
+    "e6eddbb0f2dc90d9": "Kamera açık · şimdilik ipucu yok",
+    "2d286be2a7b9430f": "Kaydettiğimiz {v0} gitar eğitmeninin hiçbiri dik duruştan {v1}°’den fazla eğilmedi. Şu an {v2}°’desin.",
+    "3e634da92fc6a63b": "{v0} sn kaldı",
+    "26dd5b2a787f0bba": "Süre doldu. Derse dönüp kontrol listesini işaretle.",
+    "6c97155e72ce3d9e": "Kamera izni kapalı. Ayarlar’dan açabilir ya da kontrol listesini kamerasız kullanabilirsin.",
+    "641ed9591380c542": "Kamera açılamadı. Kontrol listesini kamerasız kullanabilirsin."
   }
 }

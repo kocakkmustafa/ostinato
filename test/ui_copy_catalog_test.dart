@@ -8,6 +8,7 @@ import 'package:ostinato/app/device_accuracy_copy.dart';
 import 'package:ostinato/app/drill/drill_copy.dart';
 import 'package:ostinato/app/test_flow/test_flow_copy.dart';
 import 'package:ostinato/app/membership_copy.dart';
+import 'package:ostinato/app/practice/camera/camera_lesson_copy.dart';
 import 'package:ostinato/app/practice/display/practice_display_copy.dart';
 import 'package:ostinato/app/practice/loop/practice_rhythm_copy.dart';
 import 'package:ostinato/app/practice/loop/reference_copy.dart';
@@ -41,6 +42,7 @@ void main() {
     'content/ui/reference.json': ReferenceCopy.all,
     'content/ui/drill.json': DrillCopy.all,
     'content/ui/test-flow.json': TestFlowCopy.all,
+    'content/ui/camera-lesson.json': CameraLessonCopy.all,
   };
 
   for (final entry in catalogs.entries) {
@@ -95,6 +97,7 @@ void main() {
         ...ReferenceCopy.all,
         ...DrillCopy.all,
         ...TestFlowCopy.all,
+        ...CameraLessonCopy.all,
       ]) {
         final id = appMessageIds[pair];
         expect(id, isNotNull, reason: pair.$1);

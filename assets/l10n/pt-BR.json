@@ -8617,6 +8617,19 @@
     "5f3058d78884fd92": "Esta lição tem um exercício na tela. Passar nele salva a lição como feita; a parte de canto não é medida, então confira você mesmo.",
     "fd926468a8904dc5": "O acesso ao microfone serve para ouvir as notas que você toca e os ritmos que você marca com palmas durante a prática e a afinação. O áudio é processado neste dispositivo e não é enviado. Se você ativar ouvir a sua própria gravação, ela fica somente neste dispositivo e é apagada ao final da sessão.",
     "266fa6a1ededa59d": "Na prática medida, o microfone escuta as notas que você toca e os ritmos que você marca com palmas. O áudio é processado neste aparelho e não é enviado. O que você toca não é gravado; se quiser, você pode ativar a opção de ouvir sua própria gravação — ela fica no seu aparelho e é apagada no fim da sessão. Pedimos a permissão na sua primeira aula medida. Sem ela, você ainda pode ler as aulas e usar as autoavaliações.",
-    "f5767a8eb5ad7adb": "Na prática medida, o microfone ouve as notas que você toca e os ritmos que você marca com palmas. Uma aula é aprovada quando uma parte suficiente das notas é ouvida como correta; a parte exigida aumenta com o nível. A permissão é pedida na primeira medição. O áudio é processado neste aparelho e não é enviado; o que você toca não é gravado, a menos que você ative ouvir sua própria gravação. Parar, sair da tela, trocar de conta ou levar o app para segundo plano fecha o microfone."
+    "f5767a8eb5ad7adb": "Na prática medida, o microfone ouve as notas que você toca e os ritmos que você marca com palmas. Uma aula é aprovada quando uma parte suficiente das notas é ouvida como correta; a parte exigida aumenta com o nível. A permissão é pedida na primeira medição. O áudio é processado neste aparelho e não é enviado; o que você toca não é gravado, a menos que você ative ouvir sua própria gravação. Parar, sair da tela, trocar de conta ou levar o app para segundo plano fecha o microfone.",
+    "bc30695b79fb0840": "Dica da câmera",
+    "13ec35aec83c6453": "Enquanto você mantém a posição, a câmera pode dar uma dica sobre quanto a parte de cima do seu corpo se inclina. Ela não dá nota. A imagem é processada neste dispositivo; não é gravada nem enviada.",
+    "dd51c85917a02386": "Começar com a câmera",
+    "831a2d08ee12f4e9": "Esta aula tem uma dica da câmera para a parte de cima do seu corpo. A câmera só dá dicas: marque você mesmo a lista de verificação; a aula é salva como declarada por você.",
+    "21f2bf42f0b0bb3f": "Lista de verificação · dica da câmera",
+    "4cd08e23fe77341a": "Abrindo a câmera…",
+    "bf625db396d46a47": "A câmera não está vendo você. Os dois ombros e os dois quadris precisam aparecer.",
+    "e6eddbb0f2dc90d9": "Câmera ligada · nenhuma dica até agora",
+    "2d286be2a7b9430f": "Nenhum dos {v0} professores de violão que gravamos se inclinou mais de {v1}° em relação à posição ereta. Agora você está em {v2}°.",
+    "3e634da92fc6a63b": "Faltam {v0} s",
+    "26dd5b2a787f0bba": "O tempo acabou. Volte e marque a lista de verificação.",
+    "6c97155e72ce3d9e": "O acesso à câmera está desativado. Você pode ativá-lo nos Ajustes ou usar a lista de verificação sem a câmera.",
+    "641ed9591380c542": "Não foi possível iniciar a câmera. Você pode usar a lista de verificação sem a câmera."
   }
 }

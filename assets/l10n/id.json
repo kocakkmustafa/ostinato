@@ -8610,6 +8610,19 @@
     "5f3058d78884fd92": "Pelajaran ini punya latihan di layar. Jika lulus, pelajaran disimpan sebagai selesai; bagian bernyanyi tidak diukur, jadi periksa sendiri.",
     "fd926468a8904dc5": "Akses mikrofon digunakan untuk mendengar nada yang kamu mainkan dan ritme yang kamu tepukkan saat latihan dan menyetem. Audio diproses di perangkat ini dan tidak diunggah. Jika kamu menyalakan fitur mendengarkan rekamanmu sendiri, rekaman hanya disimpan di perangkat ini dan dihapus saat sesi berakhir.",
     "266fa6a1ededa59d": "Dalam latihan terukur, mikrofon mendengarkan nada yang kamu mainkan dan ritme yang kamu tepukkan. Suara diproses di perangkat ini dan tidak dikirim. Permainanmu tidak direkam; jika mau, kamu bisa menyalakan opsi mendengarkan rekamanmu sendiri — rekaman tetap di perangkatmu dan dihapus di akhir sesi. Kami meminta izin di pelajaran terukur pertamamu. Tanpa izin, kamu tetap bisa membaca pelajaran dan memakai cek mandiri.",
-    "f5767a8eb5ad7adb": "Dalam latihan terukur, mikrofon mendengarkan nada yang kamu mainkan dan ritme yang kamu tepukkan. Pelajaran lulus jika cukup banyak nadanya terdengar benar; porsi yang dibutuhkan naik seiring level. Izin diminta saat pengukuran pertama. Audio diproses di perangkat ini dan tidak diunggah; yang kamu mainkan tidak direkam kecuali kamu menyalakan opsi mendengarkan rekamanmu sendiri. Menghentikan, meninggalkan layar, mengganti akun, atau memindahkan aplikasi ke latar belakang menutup mikrofon."
+    "f5767a8eb5ad7adb": "Dalam latihan terukur, mikrofon mendengarkan nada yang kamu mainkan dan ritme yang kamu tepukkan. Pelajaran lulus jika cukup banyak nadanya terdengar benar; porsi yang dibutuhkan naik seiring level. Izin diminta saat pengukuran pertama. Audio diproses di perangkat ini dan tidak diunggah; yang kamu mainkan tidak direkam kecuali kamu menyalakan opsi mendengarkan rekamanmu sendiri. Menghentikan, meninggalkan layar, mengganti akun, atau memindahkan aplikasi ke latar belakang menutup mikrofon.",
+    "bc30695b79fb0840": "Petunjuk kamera",
+    "13ec35aec83c6453": "Selama kamu menahan posisi, kamera bisa memberi petunjuk seberapa jauh tubuh bagian atasmu condong. Kamera tidak memberi nilai. Gambar diproses di perangkat ini; tidak direkam dan tidak dikirim.",
+    "dd51c85917a02386": "Mulai dengan kamera",
+    "831a2d08ee12f4e9": "Pelajaran ini punya petunjuk kamera untuk tubuh bagian atasmu. Kamera hanya memberi petunjuk: centang daftar periksa sendiri; penyelesaianmu disimpan sebagai laporan sendiri.",
+    "21f2bf42f0b0bb3f": "Daftar periksa · petunjuk kamera",
+    "4cd08e23fe77341a": "Membuka kamera…",
+    "bf625db396d46a47": "Kamera tidak bisa melihatmu. Kedua bahu dan kedua pinggulmu perlu terlihat.",
+    "e6eddbb0f2dc90d9": "Kamera aktif · belum ada petunjuk",
+    "2d286be2a7b9430f": "Tidak satu pun dari {v0} guru gitar yang kami rekam condong lebih dari {v1}° dari posisi tegak. Kamu sekarang di {v2}°.",
+    "3e634da92fc6a63b": "Sisa {v0} dtk",
+    "26dd5b2a787f0bba": "Waktu habis. Kembali dan centang daftar periksa.",
+    "6c97155e72ce3d9e": "Akses kamera nonaktif. Kamu bisa mengaktifkannya di Pengaturan, atau memakai daftar periksa tanpa kamera.",
+    "641ed9591380c542": "Kamera tidak bisa dimulai. Kamu bisa memakai daftar periksa tanpa kamera."
   }
 }

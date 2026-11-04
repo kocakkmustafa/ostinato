@@ -12,6 +12,8 @@ import '../../design/widgets.dart';
 import '../../ostinato_release_policy.dart';
 import '../../tuner/tuner_check_memory.dart';
 import '../../ui_copy.dart';
+import '../camera/camera_lesson.dart';
+import '../camera/camera_lesson_copy.dart';
 import '../setup/latency_calibration.dart';
 import '../setup/setup_profile_store.dart';
 import '../setup/setup_wizard_screen.dart';
@@ -46,7 +48,11 @@ class V1PracticeListScreen extends StatefulWidget {
     this.startNext = false,
     this.paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
     this.course = 'gtr',
+    this.cameraLessonsOpen = ostinatoCameraLessonsOpen,
   });
+
+  /// K8: whether camera lessons run their camera part (release policy).
+  final bool cameraLessonsOpen;
 
   /// The v1 course shown: `gtr` (guitar) or `ear` (ear training).
   final String course;
@@ -202,6 +208,7 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
             existing: checks[lesson.id],
             hasNextLesson: next != null,
             tuner: widget.tuner,
+            cameraLessonsOpen: widget.cameraLessonsOpen,
           ),
         ),
       );
@@ -539,6 +546,10 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     V1LessonAvailability.tuner => V1CourseCopy.chipTuner,
     V1LessonAvailability.selfCheck => V1CourseCopy.chipSelfCheck,
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.chipSelfCheckLesson,
+    V1LessonAvailability.camera
+        when widget.cameraLessonsOpen &&
+            v1CameraLessons.containsKey(lesson.id) =>
+      CameraLessonCopy.chipHint,
     V1LessonAvailability.camera => V1CourseCopy.chipCamera,
     V1LessonAvailability.drillSoon =>
       lesson.drillReady ? V1CourseCopy.chipDrillReady : V1CourseCopy.chipDrill,

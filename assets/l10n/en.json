@@ -8617,6 +8617,19 @@
     "5f3058d78884fd92": "This lesson has an on-screen drill. Passing it saves the lesson as done; the singing part is not measured, so check it yourself.",
     "fd926468a8904dc5": "Microphone access is used to hear the notes you play and the rhythms you clap during practice and tuning. Audio is processed on this device and is not uploaded. If you turn on listening to your own recording, it is kept only on this device and deleted when the session ends.",
     "266fa6a1ededa59d": "In measured practice the microphone listens to the notes you play and the rhythms you clap. Audio is processed on this device and is not sent. What you play is not recorded; if you like, you can turn on listening back to your own recording — it stays on your device and is deleted at the end of the session. We ask for permission at your first measured lesson. Without it you can still read the lessons and use the self-checks.",
-    "f5767a8eb5ad7adb": "In measured practice the microphone listens to the notes you play and the rhythms you clap. A lesson is passed when a high enough share of its notes is heard as correct; the share needed rises with the level. Permission is asked the first time something is measured. Audio is processed on this device and is not uploaded; what you play is not recorded unless you turn on listening back to your own recording. Stopping, leaving the screen, changing account or moving the app to the background closes the microphone."
+    "f5767a8eb5ad7adb": "In measured practice the microphone listens to the notes you play and the rhythms you clap. A lesson is passed when a high enough share of its notes is heard as correct; the share needed rises with the level. Permission is asked the first time something is measured. Audio is processed on this device and is not uploaded; what you play is not recorded unless you turn on listening back to your own recording. Stopping, leaving the screen, changing account or moving the app to the background closes the microphone.",
+    "bc30695b79fb0840": "Camera hint",
+    "13ec35aec83c6453": "While you hold the position, the camera can give a hint about how far your upper body leans. It gives no score. The image is processed on this device; it is not recorded or sent.",
+    "dd51c85917a02386": "Start with the camera",
+    "831a2d08ee12f4e9": "This lesson has a camera hint for your upper body. The camera only gives hints: tick the checklist yourself; your completion is saved as self-reported.",
+    "21f2bf42f0b0bb3f": "Checklist · camera hint",
+    "4cd08e23fe77341a": "Opening the camera…",
+    "bf625db396d46a47": "The camera can’t see you. Both shoulders and both hips need to be in view.",
+    "e6eddbb0f2dc90d9": "Camera on · no hint so far",
+    "2d286be2a7b9430f": "None of the {v0} guitar teachers we recorded leaned more than {v1}° from upright. You are at {v2}° right now.",
+    "3e634da92fc6a63b": "{v0} s left",
+    "26dd5b2a787f0bba": "Time is up. Go back and tick the checklist.",
+    "6c97155e72ce3d9e": "Camera access is off. You can turn it on in Settings, or use the checklist without the camera.",
+    "641ed9591380c542": "The camera could not start. You can use the checklist without the camera."
   }
 }

@@ -14,6 +14,11 @@ import '../../ui_copy.dart';
 import '../../drill/drill_copy.dart';
 import '../../drill/drill_screen.dart';
 import '../../account_connection.dart';
+import '../../ostinato_release_policy.dart';
+import '../camera/camera_hold_screen.dart';
+import '../camera/camera_lesson.dart';
+import '../camera/camera_lesson_copy.dart';
+import 'package:ostinato_posture/ostinato_posture.dart' show PoseSource;
 import '../../test_flow/test_flow_copy.dart';
 import '../../test_flow/test_flow_screen.dart';
 import '../../test_flow/test_flow_store.dart';
@@ -41,6 +46,8 @@ class V1LessonReaderScreen extends StatefulWidget {
     this.hasNextLesson = false,
     this.tuner,
     this.testFlow,
+    this.cameraLessonsOpen = ostinatoCameraLessonsOpen,
+    this.cameraSource,
   });
 
   final V1CourseLesson lesson;
@@ -54,6 +61,12 @@ class V1LessonReaderScreen extends StatefulWidget {
   /// Section progress of test-flow checkpoints; defaults to the account's
   /// local store.
   final TestFlowProgress? testFlow;
+
+  /// K8: whether this build runs the camera part of camera lessons.
+  final bool cameraLessonsOpen;
+
+  /// The camera lesson's pose source; defaults to the device camera.
+  final PoseSource Function()? cameraSource;
 
   @override
   State<V1LessonReaderScreen> createState() => _V1LessonReaderScreenState();
@@ -71,6 +84,12 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
 
   /// F2.6: a `D` lesson whose drill this build can generate.
   bool get _hasDrill => _l.drillReady;
+
+  /// K8: the camera part this build runs for this lesson, if any.
+  CameraLesson? get _camera =>
+      widget.cameraLessonsOpen && _l.availability == V1LessonAvailability.camera
+      ? v1CameraLessons[_l.id]
+      : null;
 
   /// An ear lesson that is only a drill: no playing or singing part.
   bool get _drillOnly =>
@@ -214,6 +233,8 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
     _ when _singingAlternative => DrillCopy.bannerSingingAlternative,
     V1LessonAvailability.selfCheck => V1CourseCopy.bannerSelfCheck,
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.bannerSelfCheckLesson,
+    V1LessonAvailability.camera when _camera != null =>
+      CameraLessonCopy.bannerHint,
     V1LessonAvailability.camera => V1CourseCopy.bannerCamera,
     V1LessonAvailability.drillSoon =>
       !_hasDrill
@@ -363,6 +384,24 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
                       values: {'v0': lesson.practice.anyDrill!.count},
                     ),
                   ),
+                ),
+              ]),
+            if (_camera case final camera?)
+              section(uiText(context, CameraLessonCopy.section), [
+                Text(uiText(context, CameraLessonCopy.intro), style: body),
+                const SizedBox(height: 8),
+                FilledButton.icon(
+                  key: const Key('v1-reader-camera'),
+                  onPressed: () => unawaited(
+                    openCameraHold(
+                      context,
+                      title: lesson.title.of(context),
+                      holdSeconds: camera.holdSeconds,
+                      source: widget.cameraSource,
+                    ),
+                  ),
+                  icon: const Icon(Icons.videocam_outlined),
+                  label: Text(uiText(context, CameraLessonCopy.start)),
                 ),
               ]),
             if (lesson.referenceAudio.kinds.isNotEmpty && !_isTuner)

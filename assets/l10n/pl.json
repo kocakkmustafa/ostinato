@@ -8631,6 +8631,19 @@
     "5f3058d78884fd92": "Ta lekcja ma ćwiczenie na ekranie. Zaliczenie zapisuje lekcję jako ukończoną; część śpiewana nie jest mierzona, więc sprawdź ją sam.",
     "fd926468a8904dc5": "Dostęp do mikrofonu służy do słuchania nut, które grasz, i rytmów, które wyklaskujesz podczas ćwiczeń i strojenia. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. Jeśli włączysz odsłuch własnego nagrania, zostaje ono tylko na tym urządzeniu i jest usuwane po zakończeniu sesji.",
     "266fa6a1ededa59d": "W mierzonej praktyce mikrofon słucha dźwięków, które grasz, i rytmów, które wyklaskujesz. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. To, co grasz, nie jest nagrywane; jeśli chcesz, możesz włączyć odsłuch własnego nagrania — zostaje ono na urządzeniu i jest usuwane na koniec sesji. O zgodę prosimy w pierwszej mierzonej lekcji. Bez niej nadal możesz czytać lekcje i korzystać z samokontroli.",
-    "f5767a8eb5ad7adb": "W mierzonej praktyce mikrofon słucha granych przez ciebie nut i wyklaskiwanych rytmów. Lekcja jest zaliczona, gdy wystarczająco duża część jej nut zostanie usłyszana jako poprawna; wymagana część rośnie z poziomem. O zgodę prosimy przy pierwszym pomiarze. Dźwięk jest przetwarzany na tym urządzeniu i nie jest przesyłany; to, co grasz, nie jest nagrywane, chyba że włączysz odsłuch własnego nagrania. Zatrzymanie, opuszczenie ekranu, zmiana konta lub przeniesienie aplikacji w tło zamyka mikrofon."
+    "f5767a8eb5ad7adb": "W mierzonej praktyce mikrofon słucha granych przez ciebie nut i wyklaskiwanych rytmów. Lekcja jest zaliczona, gdy wystarczająco duża część jej nut zostanie usłyszana jako poprawna; wymagana część rośnie z poziomem. O zgodę prosimy przy pierwszym pomiarze. Dźwięk jest przetwarzany na tym urządzeniu i nie jest przesyłany; to, co grasz, nie jest nagrywane, chyba że włączysz odsłuch własnego nagrania. Zatrzymanie, opuszczenie ekranu, zmiana konta lub przeniesienie aplikacji w tło zamyka mikrofon.",
+    "bc30695b79fb0840": "Wskazówka kamery",
+    "13ec35aec83c6453": "Gdy utrzymujesz pozycję, kamera może podpowiedzieć, jak bardzo pochyla się górna część twojego ciała. Nie wystawia ocen. Obraz jest przetwarzany na tym urządzeniu; nie jest nagrywany ani wysyłany.",
+    "dd51c85917a02386": "Zacznij z kamerą",
+    "831a2d08ee12f4e9": "Ta lekcja ma wskazówkę kamery dotyczącą górnej części ciała. Kamera tylko podpowiada: zaznacz listę kontrolną samodzielnie; lekcja zapisuje się jako zgłoszona przez ciebie.",
+    "21f2bf42f0b0bb3f": "Lista kontrolna · wskazówka kamery",
+    "4cd08e23fe77341a": "Otwieranie kamery…",
+    "bf625db396d46a47": "Kamera cię nie widzi. Oba barki i oba biodra muszą być w kadrze.",
+    "e6eddbb0f2dc90d9": "Kamera włączona · na razie bez wskazówek",
+    "2d286be2a7b9430f": "Żaden z {v0} nagranych przez nas nauczycieli gry na gitarze nie pochylił się o więcej niż {v1}° od pionu. Teraz jesteś na {v2}°.",
+    "3e634da92fc6a63b": "Zostało {v0} s",
+    "26dd5b2a787f0bba": "Czas minął. Wróć i zaznacz listę kontrolną.",
+    "6c97155e72ce3d9e": "Dostęp do kamery jest wyłączony. Możesz go włączyć w Ustawieniach albo użyć listy kontrolnej bez kamery.",
+    "641ed9591380c542": "Nie udało się uruchomić kamery. Możesz użyć listy kontrolnej bez kamery."
   }
 }

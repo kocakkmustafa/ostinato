@@ -8617,6 +8617,19 @@
     "5f3058d78884fd92": "Diese Lektion hat eine Übung am Bildschirm. Wer sie besteht, hat die Lektion erledigt; der Gesangsteil wird nicht gemessen, prüfe ihn also selbst.",
     "fd926468a8904dc5": "Der Mikrofonzugriff dient dazu, beim Üben und Stimmen die Töne, die du spielst, und die Rhythmen, die du klatschst, zu hören. Audio wird auf diesem Gerät verarbeitet und nicht hochgeladen. Wenn du das Anhören deiner eigenen Aufnahme einschaltest, bleibt sie nur auf diesem Gerät und wird am Ende der Sitzung gelöscht.",
     "266fa6a1ededa59d": "Beim gemessenen Üben hört das Mikrofon die Töne, die du spielst, und die Rhythmen, die du klatschst. Der Ton wird auf diesem Gerät verarbeitet und nicht gesendet. Was du spielst, wird nicht aufgenommen; wenn du möchtest, kannst du das Anhören deiner eigenen Aufnahme einschalten — sie bleibt auf deinem Gerät und wird am Ende der Sitzung gelöscht. Wir fragen in deiner ersten gemessenen Lektion nach der Erlaubnis. Ohne sie kannst du die Lektionen trotzdem lesen und die Selbstkontrollen nutzen.",
-    "f5767a8eb5ad7adb": "Beim gemessenen Üben hört das Mikrofon die Töne, die du spielst, und die Rhythmen, die du klatschst. Eine Lektion ist bestanden, wenn ein ausreichend großer Anteil ihrer Töne als richtig erkannt wird; der nötige Anteil steigt mit der Stufe. Die Berechtigung wird bei der ersten Messung angefragt. Audio wird auf diesem Gerät verarbeitet und nicht hochgeladen; was du spielst, wird nicht aufgezeichnet, außer du schaltest das Anhören deiner eigenen Aufnahme ein. Stoppen, den Bildschirm verlassen, das Konto wechseln oder die App in den Hintergrund legen schließt das Mikrofon."
+    "f5767a8eb5ad7adb": "Beim gemessenen Üben hört das Mikrofon die Töne, die du spielst, und die Rhythmen, die du klatschst. Eine Lektion ist bestanden, wenn ein ausreichend großer Anteil ihrer Töne als richtig erkannt wird; der nötige Anteil steigt mit der Stufe. Die Berechtigung wird bei der ersten Messung angefragt. Audio wird auf diesem Gerät verarbeitet und nicht hochgeladen; was du spielst, wird nicht aufgezeichnet, außer du schaltest das Anhören deiner eigenen Aufnahme ein. Stoppen, den Bildschirm verlassen, das Konto wechseln oder die App in den Hintergrund legen schließt das Mikrofon.",
+    "bc30695b79fb0840": "Kamera-Hinweis",
+    "13ec35aec83c6453": "Während du die Position hältst, kann die Kamera einen Hinweis geben, wie weit dein Oberkörper sich neigt. Sie vergibt keine Punkte. Das Bild wird auf diesem Gerät verarbeitet; es wird weder aufgezeichnet noch gesendet.",
+    "dd51c85917a02386": "Mit der Kamera starten",
+    "831a2d08ee12f4e9": "Diese Lektion hat einen Kamera-Hinweis für deinen Oberkörper. Die Kamera gibt nur Hinweise: Hake die Checkliste selbst ab; dein Abschluss wird als selbst angegeben gespeichert.",
+    "21f2bf42f0b0bb3f": "Checkliste · Kamera-Hinweis",
+    "4cd08e23fe77341a": "Kamera wird geöffnet …",
+    "bf625db396d46a47": "Die Kamera kann dich nicht sehen. Beide Schultern und beide Hüften müssen im Bild sein.",
+    "e6eddbb0f2dc90d9": "Kamera an · bisher kein Hinweis",
+    "2d286be2a7b9430f": "Keine der {v0} Gitarrenlehrkräfte, die wir aufgenommen haben, hat sich mehr als {v1}° aus der Senkrechten geneigt. Du bist gerade bei {v2}°.",
+    "3e634da92fc6a63b": "Noch {v0} s",
+    "26dd5b2a787f0bba": "Die Zeit ist um. Geh zurück und hake die Checkliste ab.",
+    "6c97155e72ce3d9e": "Der Kamerazugriff ist aus. Du kannst ihn in den Einstellungen einschalten oder die Checkliste ohne Kamera nutzen.",
+    "641ed9591380c542": "Die Kamera konnte nicht starten. Du kannst die Checkliste ohne Kamera nutzen."
   }
 }

@@ -45,6 +45,12 @@ const bool ostinatoEngineeringNotesVisible = false;
 /// Live camera practice stays closed in this release (unchanged).
 const bool ostinatoCameraPracticeAvailable = false;
 
+/// K8 (founder 2026-11-01, scope approved 2026-11-04): the camera part of
+/// the v1 camera lessons (`camera_lesson.dart`). Opens in 1.0.3; false
+/// keeps 1.0.2 exactly as before (checklist only). Independent of Core's
+/// `motionCameraCoachingAvailable` and of the live camera practice above.
+const bool ostinatoCameraLessonsOpen = false;
+
 /// Founder decision 2026-10-25 (OST-K1): a 13–17 account still waiting for
 /// parental consent sees the subscription offers, and the purchase itself is
 /// left to the store's family controls (Ask to Buy / Google Play parental

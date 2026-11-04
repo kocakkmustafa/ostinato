@@ -8617,6 +8617,19 @@
     "5f3058d78884fd92": "Esta lección tiene un ejercicio en pantalla. Aprobarlo guarda la lección como hecha; la parte de canto no se mide, así que revísala tú.",
     "fd926468a8904dc5": "El acceso al micrófono sirve para escuchar las notas que tocas y los ritmos que marcas con palmas durante la práctica y la afinación. El audio se procesa en este dispositivo y no se sube. Si activas escuchar tu propia grabación, se guarda solo en este dispositivo y se borra al terminar la sesión.",
     "266fa6a1ededa59d": "En la práctica medida, el micrófono escucha las notas que tocas y los ritmos que marcas con palmas. El audio se procesa en este dispositivo y no se envía. Lo que tocas no se graba; si quieres, puedes activar la opción de escuchar tu propia grabación: se queda en tu dispositivo y se borra al terminar la sesión. Pedimos el permiso en tu primera lección medida. Sin él, igual puedes leer las lecciones y usar las autoevaluaciones.",
-    "f5767a8eb5ad7adb": "En la práctica medida, el micrófono escucha las notas que tocas y los ritmos que marcas con palmas. Una lección se aprueba cuando una proporción suficiente de sus notas se oye como correcta; la proporción necesaria sube con el nivel. El permiso se pide la primera vez que algo se mide. El audio se procesa en este dispositivo y no se sube; lo que tocas no se graba a menos que actives escuchar tu propia grabación. Detener, salir de la pantalla, cambiar de cuenta o pasar la app a segundo plano cierra el micrófono."
+    "f5767a8eb5ad7adb": "En la práctica medida, el micrófono escucha las notas que tocas y los ritmos que marcas con palmas. Una lección se aprueba cuando una proporción suficiente de sus notas se oye como correcta; la proporción necesaria sube con el nivel. El permiso se pide la primera vez que algo se mide. El audio se procesa en este dispositivo y no se sube; lo que tocas no se graba a menos que actives escuchar tu propia grabación. Detener, salir de la pantalla, cambiar de cuenta o pasar la app a segundo plano cierra el micrófono.",
+    "bc30695b79fb0840": "Pista de la cámara",
+    "13ec35aec83c6453": "Mientras mantienes la posición, la cámara puede darte una pista sobre cuánto se inclina la parte superior de tu cuerpo. No da puntaje. La imagen se procesa en este dispositivo; no se graba ni se envía.",
+    "dd51c85917a02386": "Empezar con la cámara",
+    "831a2d08ee12f4e9": "Esta lección tiene una pista de la cámara para la parte superior de tu cuerpo. La cámara solo da pistas: marca tú la lista de control; tu lección se guarda como declarada por ti.",
+    "21f2bf42f0b0bb3f": "Lista de control · pista de la cámara",
+    "4cd08e23fe77341a": "Abriendo la cámara…",
+    "bf625db396d46a47": "La cámara no te ve. Tus dos hombros y tus dos caderas tienen que estar a la vista.",
+    "e6eddbb0f2dc90d9": "Cámara encendida · sin pistas por ahora",
+    "2d286be2a7b9430f": "Ninguno de los {v0} profesores de guitarra que grabamos se inclinó más de {v1}° respecto a la posición erguida. Ahora estás en {v2}°.",
+    "3e634da92fc6a63b": "Quedan {v0} s",
+    "26dd5b2a787f0bba": "Se acabó el tiempo. Vuelve y marca la lista de control.",
+    "6c97155e72ce3d9e": "El acceso a la cámara está desactivado. Puedes activarlo en Configuración o usar la lista de control sin la cámara.",
+    "641ed9591380c542": "No se pudo iniciar la cámara. Puedes usar la lista de control sin la cámara."
   }
 }
