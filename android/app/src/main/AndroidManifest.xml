@@ -4,10 +4,14 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- K8 mirror: camera_android_camerax declares legacy storage (video
-         saving, API <= 28) and a required camera feature. The mirror saves
-         nothing, and the app runs without a camera (checklist path). -->
+         saving, API <= 28; the merger then implies the read permission) and
+         a required camera feature. The mirror saves nothing, and the app
+         runs without a camera (checklist path). -->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="remove" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         tools:node="remove" />
     <uses-feature
         android:name="android.hardware.camera.any"
