@@ -17,6 +17,7 @@ import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
 import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
+import '../own_recording/own_recording_copy.dart';
 import '../own_recording/own_recording_preference.dart';
 import '../practice_audio_input.dart';
 import '../setup/setup_profile_store.dart';
@@ -178,7 +179,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         await (widget.ownRecordingPreference ??
                 const FileOwnRecordingPreference())
             .read();
-    if (mounted) recorder.enabled = on;
+    if (mounted) setState(() => recorder.enabled = on);
   }
 
   Future<void> _loadProfile() async {
@@ -399,12 +400,17 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                   const SizedBox(height: 12),
                   _primary(context),
                   const SizedBox(height: 10),
+                  // With the own-recording setting on, this run IS kept on
+                  // the device, so the "nothing is recorded" line would be
+                  // false.
                   Text(
-                    localized(
-                      context,
-                      'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',
-                      'Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.',
-                    ),
+                    _c.ownRecorder?.enabled ?? false
+                        ? uiText(context, OwnRecordingCopy.practiceFooterOn)
+                        : localized(
+                            context,
+                            'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',
+                            'Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.',
+                          ),
                     style: hankenText(
                       size: 11.5,
                       color: palette.textMuted,
