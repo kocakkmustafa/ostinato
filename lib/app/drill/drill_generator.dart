@@ -96,6 +96,9 @@ enum DrillPromptKind {
 
   /// Which of two staves (A/B) matches the line heard?
   staffMatch,
+
+  /// K8: "Which finger number is marked?" on the fretting-hand diagram.
+  fingerNumber,
 }
 
 enum DrillEntryKind { rhythm, melody }
@@ -227,6 +230,7 @@ final class DrillQuestion {
     this.entry,
     this.keys = const [],
     this.staves = const [],
+    this.finger,
   });
 
   final DrillPromptKind kind;
@@ -266,6 +270,9 @@ final class DrillQuestion {
 
   /// Staff match: the staves the options name (A, B), in order.
   final List<DrillStaff> staves;
+
+  /// Hand diagram: the marked finger (1 index … 4 little); null = no hand.
+  final int? finger;
 
   String get expected => options[answer];
 
@@ -312,6 +319,7 @@ const Map<String, Set<String>> _supportedSets = {
     'major_scale_steps',
     'pentatonic_roots',
     'triad_tones',
+    'fretting_finger_numbers',
   },
   'symbol_match': {'roman_numeral_chords', 'seventh_chord_spelling'},
 };
@@ -374,6 +382,8 @@ bool supportsDrill(V1Drill drill) {
   }
   final diagram = drill.params['diagram'];
   if (diagram == 'keyboard') return set == 'major_scale_steps';
+  if (diagram == 'hand') return set == 'fretting_finger_numbers';
+  if (set == 'fretting_finger_numbers') return false;
   return diagram == null || diagram == 'fretboard';
 }
 
@@ -434,6 +444,7 @@ List<DrillQuestion> generateDrill(V1Drill drill, {required int seed}) {
     'major_scale_steps' => g.scaleStep,
     'pentatonic_roots' => g.pentatonic,
     'triad_tones' => g.triadTones,
+    'fretting_finger_numbers' => g.fingerNumber,
     'roman_numeral_chords' => g.roman,
     'seventh_chord_spelling' => g.seventh,
     'twelve_bar_blues' => g.blues,
@@ -515,6 +526,23 @@ final class _Gen {
   final math.Random rng;
 
   T pick<T>(List<T> xs) => xs[rng.nextInt(xs.length)];
+
+  /// K8: one finger of the fretting hand is marked; the options are the
+  /// finger numbers the lesson names (`fingers`, default 1–4).
+  DrillQuestion fingerNumber() {
+    final fingers = ints('fingers', const [1, 2, 3, 4]);
+    if (fingers.length < 2 || fingers.any((f) => f < 1 || f > 4)) {
+      throw const FormatException('fingers must be 2–4 of 1…4');
+    }
+    final finger = pick(fingers);
+    return DrillQuestion(
+      kind: DrillPromptKind.fingerNumber,
+      values: const {},
+      options: [for (final f in fingers) '$f'],
+      answer: fingers.indexOf(finger),
+      finger: finger,
+    );
+  }
 
   List<int> ints(String key, List<int> fallback) {
     final v = p[key];

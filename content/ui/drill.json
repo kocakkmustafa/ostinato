@@ -580,6 +580,11 @@
       "id": "staffLabel",
       "en": "Staff {v0}",
       "tr": "{v0} portesi"
+    },
+    {
+      "id": "fingerNumber",
+      "en": "Which finger number is marked on the fretting hand?",
+      "tr": "Sol elde işaretli parmak kaç numara?"
     }
   ]
 }

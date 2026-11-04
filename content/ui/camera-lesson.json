@@ -70,6 +70,11 @@
       "id": "Kembali ke pelajaran",
       "en": "Back to the lesson",
       "tr": "Derse dön"
+    },
+    {
+      "id": "drillFirst",
+      "en": "Pass the questions first; then the lesson can be marked done.",
+      "tr": "Önce soruları geç; sonra ders tamamlandı olarak işaretlenebilir."
     }
   ]
 }

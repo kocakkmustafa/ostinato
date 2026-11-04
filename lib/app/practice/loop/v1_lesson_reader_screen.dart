@@ -12,6 +12,7 @@ import '../../tuner/tuner_screen.dart' show openTuner;
 import '../../tuner/tunings.dart';
 import '../../ui_copy.dart';
 import '../../drill/drill_copy.dart';
+import '../../drill/drill_generator.dart' show supportsDrill;
 import '../../drill/drill_screen.dart';
 import '../../account_connection.dart';
 import '../../ostinato_release_policy.dart';
@@ -79,11 +80,25 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
   bool _saveFailed = false;
   bool _tunerMissed = false;
 
+  /// A camera lesson's question part passed on this screen (K8).
+  bool _drillPassed = false;
+
   V1CourseLesson get _l => widget.lesson;
   bool get _isTuner => _l.availability == V1LessonAvailability.tuner;
 
   /// F2.6: a `D` lesson whose drill this build can generate.
-  bool get _hasDrill => _l.drillReady;
+  bool get _hasDrill => _l.drillReady || _cameraDrill;
+
+  /// K8: the question part of a camera lesson (finger numbers). Passing it
+  /// is one half of the lesson; the checklist is the other, so it does not
+  /// complete the lesson on its own.
+  bool get _cameraDrill =>
+      widget.cameraLessonsOpen &&
+      _l.availability == V1LessonAvailability.camera &&
+      switch (_l.lesson.practice.anyDrill) {
+        final drill? => supportsDrill(drill),
+        null => false,
+      };
 
   /// K8: the camera part this build runs for this lesson, if any.
   CameraLesson? get _camera =>
@@ -130,7 +145,12 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
             DrillScreen(drill: drill, title: _l.lesson.title.of(context)),
       ),
     );
-    if (passed == true && mounted) await _record(V1CheckEvidence.drillPass);
+    if (passed != true || !mounted) return;
+    if (_cameraDrill) {
+      setState(() => _drillPassed = true);
+    } else {
+      await _record(V1CheckEvidence.drillPass);
+    }
   }
 
   /// FK1: only a written single-note line has a reference to synthesize
@@ -536,10 +556,16 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
             uiText(context, V1CourseCopy.readerTickAll),
             style: hankenText(size: 12.5, color: palette.textMuted),
           ),
+        if (_cameraDrill && !_drillPassed)
+          Text(
+            uiText(context, CameraLessonCopy.drillFirst),
+            key: const Key('v1-reader-drill-first'),
+            style: hankenText(size: 12.5, color: palette.textMuted),
+          ),
         const SizedBox(height: 8),
         FilledButton(
           key: const Key('v1-reader-mark-done'),
-          onPressed: allTicked && !_saving
+          onPressed: allTicked && !_saving && (!_cameraDrill || _drillPassed)
               ? () => unawaited(_record(V1CheckEvidence.selfReport))
               : null,
           child: Text(uiText(context, V1CourseCopy.readerMarkDone)),
