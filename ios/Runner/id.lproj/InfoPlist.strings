@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "Akses kamera digunakan untuk memeriksa posisi tangan dan pergelangan tanganmu di pelajaran yang memintanya. Gambar hanya diproses di perangkat ini; tidak disimpan atau diunggah.";
+"NSCameraUsageDescription" = "Akses kamera digunakan untuk memeriksa postur dan posisi tanganmu di pelajaran yang memintanya. Gambar hanya diproses di perangkat ini; tidak disimpan atau diunggah.";
 "NSMicrophoneUsageDescription" = "Akses mikrofon digunakan untuk mendengar nada yang kamu mainkan dan ritme yang kamu tepukkan saat latihan dan menyetem. Audio diproses di perangkat ini dan tidak diunggah. Jika kamu menyalakan fitur mendengarkan rekamanmu sendiri, rekaman hanya disimpan di perangkat ini dan dihapus saat sesi berakhir.";

@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "El acceso a la cámara sirve para revisar la posición de tu mano y tu muñeca en las lecciones que lo piden. Las imágenes se procesan solo en este dispositivo; no se guardan ni se suben.";
+"NSCameraUsageDescription" = "El acceso a la cámara sirve para revisar tu postura y la posición de tu mano en las lecciones que lo piden. Las imágenes se procesan solo en este dispositivo; no se guardan ni se suben.";
 "NSMicrophoneUsageDescription" = "El acceso al micrófono sirve para escuchar las notas que tocas y los ritmos que marcas con palmas durante la práctica y la afinación. El audio se procesa en este dispositivo y no se sube. Si activas escuchar tu propia grabación, se guarda solo en este dispositivo y se borra al terminar la sesión.";

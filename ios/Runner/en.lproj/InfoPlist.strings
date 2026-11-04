@@ -1,2 +1,2 @@
-"NSCameraUsageDescription" = "Camera access is used to check your hand and wrist position in the lessons that ask for it. Images are processed only on this device; they are not saved or uploaded.";
+"NSCameraUsageDescription" = "Camera access is used to check your posture and hand position in the lessons that ask for it. Images are processed only on this device; they are not saved or uploaded.";
 "NSMicrophoneUsageDescription" = "Microphone access is used to hear the notes you play and the rhythms you clap during practice and tuning. Audio is processed on this device and is not uploaded. If you turn on listening to your own recording, it is kept only on this device and deleted when the session ends.";
