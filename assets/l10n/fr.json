@@ -2393,8 +2393,6 @@
     "363204bd71341bb7": "Pose le pouce derrière le manche, à peu près derrière le doigt 2. Arrondis les doigts pour que le bout des doigts rejoigne les cordes. Garde le poignet souple et proche de la ligne droite, avec un petit espace entre le manche et la paume.",
     "3d7a93225a3c9e19": "Si tu joues en gaucher, les mains s'inversent : le médiator va dans ta main gauche et la main droite frette. Les numéros des doigts restent les mêmes.",
     "d9ab63cf70299de0": "Pas d'audio de référence ; des dessins montrent la tenue du médiator et la main qui frette vue de face.",
-    "272d07e32c6a0ae4": "Partie 1 : tiens le médiator et place la main qui frette sur le manche dans le champ de la caméra pendant 30 secondes ; suis tout conseil. Partie 2 : réponds à 6 questions sur les numéros des doigts.",
-    "046fdf80c113fe55": "Garde la position de la main pendant 30 secondes et coche la liste, puis réponds à au moins 5 questions sur 6. La caméra ne donne que des conseils.",
     "6c42b561f1a00bf7": "Seule une petite pointe du médiator dépassait.",
     "aa22e042f0ba73f5": "Mon pouce reposait derrière le manche, pas par-dessus.",
     "60128016c12fd113": "Ce sont le bout de mes doigts, et non la partie plate, qui touchaient les cordes.",
@@ -8638,6 +8636,10 @@
     "03e5a18b5dc29a85": "Ouvrir le miroir",
     "5b66359f28c4bc4e": "Cette leçon a un miroir caméra pour tes mains. Le miroir ne donne pas d’indices : coche toi-même la liste de contrôle ; ta leçon est enregistrée comme déclarée par toi.",
     "f020778e0b288423": "Liste de contrôle · miroir caméra",
-    "ecba641ec2903315": "Miroir actif · compare tes mains avec la liste de contrôle."
+    "ecba641ec2903315": "Miroir actif · compare tes mains avec la liste de contrôle.",
+    "4f0251bc737cb3cd": "Après « Ouvrir le miroir », la caméra demande l'autorisation. La caméra frontale montre tes mains comme un miroir ; l'image reste sur ton téléphone et n'est ni enregistrée ni envoyée.",
+    "890811e0028347fb": "Le miroir ne donne ni score ni conseil. Compare ce que tu vois avec la liste de la leçon.",
+    "03db3a7125512dce": "Partie 1 : tiens le médiator et place la main qui frette sur le manche devant le miroir caméra pendant 30 secondes ; compare-la avec la liste. Partie 2 : réponds à 6 questions sur les numéros des doigts.",
+    "99804cb7ab683368": "Garde la position de la main pendant 30 secondes et coche la liste, puis réponds à au moins 5 questions sur 6. Le miroir ne donne pas de conseils."
   }
 }

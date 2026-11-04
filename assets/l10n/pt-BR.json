@@ -2393,8 +2393,6 @@
     "363204bd71341bb7": "Apoie o polegar atrás do braço, mais ou menos atrás do dedo 2. Curve os dedos para que as pontas toquem as cordas. Mantenha o punho solto e quase reto, com um pequeno espaço entre o braço e a palma da mão.",
     "3d7a93225a3c9e19": "Se você toca como canhoto, as mãos se invertem: a palheta fica na mão esquerda e a mão direita pressiona as cordas. Os números dos dedos continuam os mesmos.",
     "d9ab63cf70299de0": "Sem áudio de referência; desenhos mostram a empunhadura da palheta e a mão que pressiona vista de frente.",
-    "272d07e32c6a0ae4": "Parte 1: segure a palheta e posicione a mão que pressiona no braço, à vista da câmera, por 30 segundos; siga qualquer dica. Parte 2: responda 6 perguntas sobre os números dos dedos.",
-    "046fdf80c113fe55": "Mantenha a posição da mão por 30 segundos e marque a lista de conferência; depois responda pelo menos 5 de 6 perguntas. A câmera só dá dicas.",
     "6c42b561f1a00bf7": "Apareceu só uma pequena ponta da palheta.",
     "aa22e042f0ba73f5": "Meu polegar ficou apoiado atrás do braço, não por cima.",
     "60128016c12fd113": "Minhas pontas dos dedos, e não a parte achatada da polpa, tocaram as cordas.",
@@ -8638,6 +8636,10 @@
     "03e5a18b5dc29a85": "Abrir o espelho",
     "5b66359f28c4bc4e": "Esta aula tem um espelho da câmera para suas mãos. O espelho não dá dicas: marque você mesmo a lista de verificação; a aula é salva como declarada por você.",
     "f020778e0b288423": "Lista de verificação · espelho da câmera",
-    "ecba641ec2903315": "Espelho ligado · compare suas mãos com a lista de verificação."
+    "ecba641ec2903315": "Espelho ligado · compare suas mãos com a lista de verificação.",
+    "4f0251bc737cb3cd": "Depois de “Abrir o espelho”, a câmera pede permissão. A câmera frontal mostra suas mãos como um espelho; a imagem fica no seu celular e não é salva nem enviada.",
+    "890811e0028347fb": "O espelho não dá pontuação nem dicas. Compare o que você vê com a lista de conferência da aula.",
+    "03db3a7125512dce": "Parte 1: segure a palheta e posicione a mão que pressiona no braço, diante do espelho da câmera, por 30 segundos; compare com a lista de conferência. Parte 2: responda 6 perguntas sobre os números dos dedos.",
+    "99804cb7ab683368": "Mantenha a posição da mão por 30 segundos e marque a lista de conferência; depois responda pelo menos 5 de 6 perguntas. O espelho não dá dicas."
   }
 }
