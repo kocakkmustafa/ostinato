@@ -546,10 +546,12 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     V1LessonAvailability.tuner => V1CourseCopy.chipTuner,
     V1LessonAvailability.selfCheck => V1CourseCopy.chipSelfCheck,
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.chipSelfCheckLesson,
-    V1LessonAvailability.camera
-        when widget.cameraLessonsOpen &&
-            v1CameraLessons.containsKey(lesson.id) =>
-      CameraLessonCopy.chipHint,
+    V1LessonAvailability.camera when widget.cameraLessonsOpen =>
+      switch (v1CameraLessons[lesson.id]?.part) {
+        CameraPart.trunkHint => CameraLessonCopy.chipHint,
+        CameraPart.mirror => CameraLessonCopy.mirrorChip,
+        null => V1CourseCopy.chipCamera,
+      },
     V1LessonAvailability.camera => V1CourseCopy.chipCamera,
     V1LessonAvailability.drillSoon =>
       lesson.drillReady ? V1CourseCopy.chipDrillReady : V1CourseCopy.chipDrill,

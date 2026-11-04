@@ -8632,6 +8632,12 @@
     "6c97155e72ce3d9e": "L’accès à la caméra est désactivé. Tu peux l’activer dans Réglages ou utiliser la liste de contrôle sans la caméra.",
     "641ed9591380c542": "La caméra n’a pas pu démarrer. Tu peux utiliser la liste de contrôle sans la caméra.",
     "b3be97005b4d6a12": "Quel numéro porte le doigt marqué de la main qui frette ?",
-    "fc7aed39b6745151": "Réussis d’abord les questions ; ensuite la leçon peut être marquée comme faite."
+    "fc7aed39b6745151": "Réussis d’abord les questions ; ensuite la leçon peut être marquée comme faite.",
+    "0e55fe374ae8b04b": "Miroir caméra",
+    "916f36320a96b3fc": "Pendant que tu gardes la position, la caméra frontale montre tes mains comme un miroir. Elle ne donne ni indice ni note. L’image reste sur cet appareil ; elle n’est ni enregistrée ni envoyée.",
+    "03e5a18b5dc29a85": "Ouvrir le miroir",
+    "5b66359f28c4bc4e": "Cette leçon a un miroir caméra pour tes mains. Le miroir ne donne pas d’indices : coche toi-même la liste de contrôle ; ta leçon est enregistrée comme déclarée par toi.",
+    "f020778e0b288423": "Liste de contrôle · miroir caméra",
+    "ecba641ec2903315": "Miroir actif · compare tes mains avec la liste de contrôle."
   }
 }

@@ -53,6 +53,26 @@ abstract final class CameraLessonCopy {
     'Önce soruları geç; sonra ders tamamlandı olarak işaretlenebilir.',
   );
 
+  // The hand lesson's mirror (no hint).
+  static const UiCopy mirrorSection = ('Camera mirror', 'Kamera aynası');
+  static const UiCopy mirrorIntro = (
+    'While you hold the position, the front camera shows your hands like a mirror. It gives no hint and no score. The image stays on this device; it is not recorded or sent.',
+    'Konumu korurken ön kamera ellerini ayna gibi gösterir. İpucu da puan da vermez. Görüntü bu cihazda kalır; kaydedilmez, gönderilmez.',
+  );
+  static const UiCopy mirrorStart = ('Open the mirror', 'Aynayı aç');
+  static const UiCopy mirrorBanner = (
+    'This lesson has a camera mirror for your hands. The mirror gives no hints: tick the checklist yourself; your completion is saved as self-reported.',
+    'Bu derste ellerin için kamera aynası var. Ayna ipucu vermez: kontrol listesini kendin işaretle; tamamlaman kendi beyanı olarak kaydedilir.',
+  );
+  static const UiCopy mirrorChip = (
+    'Checklist · camera mirror',
+    'Kontrol listesi · kamera aynası',
+  );
+  static const UiCopy mirrorLive = (
+    'Mirror on · compare your hands with the checklist.',
+    'Ayna açık · ellerini kontrol listesiyle karşılaştır.',
+  );
+
   static const List<UiCopy> all = [
     section,
     intro,
@@ -69,5 +89,11 @@ abstract final class CameraLessonCopy {
     unavailable,
     back,
     drillFirst,
+    mirrorSection,
+    mirrorIntro,
+    mirrorStart,
+    mirrorBanner,
+    mirrorChip,
+    mirrorLive,
   ];
 }

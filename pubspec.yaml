@@ -81,6 +81,11 @@ dependencies:
 
   permission_handler: ^12.0.3
 
+  # K8 hand lesson mirror only (founder 2026-11-04): live front-camera
+  # preview, no recording, no image stream, no audio. Exact pin; BSD-3-Clause
+  # (flutter/packages). The sitting lesson keeps using motion_camera.
+  camera: 0.12.2
+
   # QA-only silent lesson player adapter. Shipping lesson media remains empty.
   video_player: 2.11.1
 
@@ -94,6 +99,8 @@ dependencies:
 
 dev_dependencies:
   http: 1.6.0
+  # K8 mirror tests swap the camera platform; same version camera 0.12.2 locks.
+  camera_platform_interface: 2.15.0
   integration_test:
     sdk: flutter
   flutter_test:

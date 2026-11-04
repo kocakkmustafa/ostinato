@@ -75,6 +75,36 @@
       "id": "drillFirst",
       "en": "Pass the questions first; then the lesson can be marked done.",
       "tr": "Önce soruları geç; sonra ders tamamlandı olarak işaretlenebilir."
+    },
+    {
+      "id": "mirrorSection",
+      "en": "Camera mirror",
+      "tr": "Kamera aynası"
+    },
+    {
+      "id": "mirrorIntro",
+      "en": "While you hold the position, the front camera shows your hands like a mirror. It gives no hint and no score. The image stays on this device; it is not recorded or sent.",
+      "tr": "Konumu korurken ön kamera ellerini ayna gibi gösterir. İpucu da puan da vermez. Görüntü bu cihazda kalır; kaydedilmez, gönderilmez."
+    },
+    {
+      "id": "mirrorStart",
+      "en": "Open the mirror",
+      "tr": "Aynayı aç"
+    },
+    {
+      "id": "mirrorBanner",
+      "en": "This lesson has a camera mirror for your hands. The mirror gives no hints: tick the checklist yourself; your completion is saved as self-reported.",
+      "tr": "Bu derste ellerin için kamera aynası var. Ayna ipucu vermez: kontrol listesini kendin işaretle; tamamlaman kendi beyanı olarak kaydedilir."
+    },
+    {
+      "id": "mirrorChip",
+      "en": "Checklist · camera mirror",
+      "tr": "Kontrol listesi · kamera aynası"
+    },
+    {
+      "id": "mirrorLive",
+      "en": "Mirror on · compare your hands with the checklist.",
+      "tr": "Ayna açık · ellerini kontrol listesiyle karşılaştır."
     }
   ]
 }

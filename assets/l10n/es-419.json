@@ -8632,6 +8632,12 @@
     "6c97155e72ce3d9e": "El acceso a la cámara está desactivado. Puedes activarlo en Configuración o usar la lista de control sin la cámara.",
     "641ed9591380c542": "No se pudo iniciar la cámara. Puedes usar la lista de control sin la cámara.",
     "b3be97005b4d6a12": "¿Qué número tiene el dedo marcado en la mano que pisa?",
-    "fc7aed39b6745151": "Primero aprueba las preguntas; después puedes marcar la lección como hecha."
+    "fc7aed39b6745151": "Primero aprueba las preguntas; después puedes marcar la lección como hecha.",
+    "0e55fe374ae8b04b": "Espejo de la cámara",
+    "916f36320a96b3fc": "Mientras mantienes la posición, la cámara frontal muestra tus manos como un espejo. No da pistas ni puntaje. La imagen se queda en este dispositivo; no se graba ni se envía.",
+    "03e5a18b5dc29a85": "Abrir el espejo",
+    "5b66359f28c4bc4e": "Esta lección tiene un espejo de la cámara para tus manos. El espejo no da pistas: marca tú la lista de control; tu lección se guarda como declarada por ti.",
+    "f020778e0b288423": "Lista de control · espejo de la cámara",
+    "ecba641ec2903315": "Espejo encendido · compara tus manos con la lista de control."
   }
 }

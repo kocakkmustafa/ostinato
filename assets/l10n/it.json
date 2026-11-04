@@ -8632,6 +8632,12 @@
     "6c97155e72ce3d9e": "L’accesso alla fotocamera è disattivato. Puoi attivarlo nelle Impostazioni o usare la lista di controllo senza fotocamera.",
     "641ed9591380c542": "Non è stato possibile avviare la fotocamera. Puoi usare la lista di controllo senza fotocamera.",
     "b3be97005b4d6a12": "Che numero ha il dito segnato sulla mano sui tasti?",
-    "fc7aed39b6745151": "Supera prima le domande; poi la lezione si può segnare come fatta."
+    "fc7aed39b6745151": "Supera prima le domande; poi la lezione si può segnare come fatta.",
+    "0e55fe374ae8b04b": "Specchio della fotocamera",
+    "916f36320a96b3fc": "Mentre mantieni la posizione, la fotocamera frontale mostra le tue mani come uno specchio. Non dà suggerimenti né punteggi. L’immagine resta su questo dispositivo; non viene registrata né inviata.",
+    "03e5a18b5dc29a85": "Apri lo specchio",
+    "5b66359f28c4bc4e": "Questa lezione ha uno specchio della fotocamera per le tue mani. Lo specchio non dà suggerimenti: spunta tu la lista di controllo; la lezione viene salvata come dichiarata da te.",
+    "f020778e0b288423": "Lista di controllo · specchio della fotocamera",
+    "ecba641ec2903315": "Specchio attivo · confronta le tue mani con la lista di controllo."
   }
 }

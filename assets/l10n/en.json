@@ -8632,6 +8632,12 @@
     "6c97155e72ce3d9e": "Camera access is off. You can turn it on in Settings, or use the checklist without the camera.",
     "641ed9591380c542": "The camera could not start. You can use the checklist without the camera.",
     "b3be97005b4d6a12": "Which finger number is marked on the fretting hand?",
-    "fc7aed39b6745151": "Pass the questions first; then the lesson can be marked done."
+    "fc7aed39b6745151": "Pass the questions first; then the lesson can be marked done.",
+    "0e55fe374ae8b04b": "Camera mirror",
+    "916f36320a96b3fc": "While you hold the position, the front camera shows your hands like a mirror. It gives no hint and no score. The image stays on this device; it is not recorded or sent.",
+    "03e5a18b5dc29a85": "Open the mirror",
+    "5b66359f28c4bc4e": "This lesson has a camera mirror for your hands. The mirror gives no hints: tick the checklist yourself; your completion is saved as self-reported.",
+    "f020778e0b288423": "Checklist · camera mirror",
+    "ecba641ec2903315": "Mirror on · compare your hands with the checklist."
   }
 }

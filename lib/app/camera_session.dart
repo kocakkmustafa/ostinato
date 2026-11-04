@@ -39,6 +39,40 @@ void retireAllCameraOwners() {
   for (final CameraCaptureOwner owner in _cameraOwners.toList()) {
     owner.retire();
   }
+  for (final VoidCallback release in _foreignHolders.toList()) {
+    release();
+  }
+}
+
+// K8 hand mirror: a second camera stack (the `camera` package) beside
+// motion_camera. It never holds the camera together with motion_camera:
+// it opens only when no capture owner is live and no closure is pending,
+// and while it is open its release Future is installed as a closing barrier,
+// so a motion_camera start ([requestAndStartCamera]) waits until the mirror
+// has let the camera go. A failed release quarantines the process camera
+// exactly like a failed native close.
+final Set<VoidCallback> _foreignHolders = <VoidCallback>{};
+
+/// Whether app resource admission currently allows a camera.
+bool get cameraAdmitted => _resourceAdmission?.value ?? true;
+
+/// Whether a motion_camera owner is live (not yet retired); its closure, once
+/// retired, is covered by [awaitPendingClose].
+bool get cameraOwnedElsewhere =>
+    _cameraOwners.any((CameraCaptureOwner owner) => !owner.isRetired);
+
+/// Whether a camera closure (either stack) is still recorded; it is cleared
+/// by [awaitPendingClose] once drained.
+bool get cameraClosingPending => _closing != null;
+
+/// Installs [released] as a closing barrier for a foreign camera holder and
+/// registers [release], which [retireAllCameraOwners] calls on an app
+/// boundary. Call synchronously after [awaitPendingClose] saw no closure.
+void holdCameraUntil(Future<void> released, VoidCallback release) {
+  _foreignHolders.add(release);
+  _noteClosing(released);
+  unawaited(released.then<void>((_) {}, onError: (Object _, StackTrace _) {})
+      .whenComplete(() => _foreignHolders.remove(release)));
 }
 
 /// Observe errors without replacing the original failing close Future.
@@ -84,6 +118,7 @@ void resetCameraSessionForTesting() {
   }
   ++_cameraTestIsolation;
   _cameraOwners.clear();
+  _foreignHolders.clear();
   _activeCameraOwner = null;
   _resourceAdmission = null;
   _cameraBoundaryRevision = 0;

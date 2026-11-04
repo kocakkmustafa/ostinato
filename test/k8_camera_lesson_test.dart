@@ -111,6 +111,8 @@ List<String> _watchCameraChannels() {
   for (final name in const [
     'motion_camera/control',
     'flutter.baseflow.com/permissions/methods',
+    // The `camera` package's default platform (the hand lesson's mirror).
+    'plugins.flutter.io/camera',
   ]) {
     messenger.setMockMethodCallHandler(MethodChannel(name), (call) async {
       calls.add('$name ${call.method}');
@@ -129,7 +131,8 @@ String _fill(String text, Map<String, Object> values) => values.entries.fold(
 );
 
 /// Camera lessons in the guitar course: the sitting lesson has the hint;
-/// the hand lesson has no teacher data and stays checklist-only here.
+/// the hand lesson has no teacher data, so it gets the mirror (no hint;
+/// test/k8_mirror_test.dart).
 const _sitting = 'gtr-s1-m01-02';
 const _hand = 'gtr-s1-m01-03';
 
@@ -202,6 +205,7 @@ void main() {
 
         expect(find.text(V1CourseCopy.bannerCamera.$1), findsOneWidget);
         expect(find.byKey(const Key('v1-reader-camera')), findsNothing);
+        expect(find.byKey(const Key('v1-reader-mirror')), findsNothing);
         expect(find.byKey(const Key('v1-reader-drill')), findsNothing);
         for (final item in l.lesson.selfCheck) {
           expect(find.text(item.en), findsOneWidget);
@@ -222,13 +226,19 @@ void main() {
   });
 
   group('flag open (1.0.3)', () {
-    test('the camera table: only the sitting lesson, 60 s, trunk hint', () {
-      expect(v1CameraLessons.keys, [_sitting]);
+    test('the camera table: sitting hint 60 s, hand mirror 30 s', () {
+      expect(v1CameraLessons.keys, [_sitting, _hand]);
       expect(v1CameraLessons[_sitting]!.part, CameraPart.trunkHint);
       expect(v1CameraLessons[_sitting]!.holdSeconds, 60);
       expect(
         gtr.lesson(_sitting)!.lesson.practice.task.en,
         contains('60 seconds'),
+      );
+      expect(v1CameraLessons[_hand]!.part, CameraPart.mirror);
+      expect(v1CameraLessons[_hand]!.holdSeconds, 30);
+      expect(
+        gtr.lesson(_hand)!.lesson.practice.task.en,
+        contains('30 seconds'),
       );
     });
 
@@ -252,7 +262,7 @@ void main() {
       });
     });
 
-    testWidgets('course list: the sitting lesson\'s chip says camera hint', (
+    testWidgets('course list: chips say camera hint and camera mirror', (
       tester,
     ) async {
       _tall(tester);
@@ -272,7 +282,7 @@ void main() {
       String chip(String id) =>
           tester.widget<Text>(find.byKey(Key('v1-course-chip-$id'))).data!;
       expect(chip(_sitting), CameraLessonCopy.chipHint.$1);
-      expect(chip(_hand), V1CourseCopy.chipCamera.$1);
+      expect(chip(_hand), CameraLessonCopy.mirrorChip.$1);
     });
 
     testWidgets('reader: entry on the sitting lesson; no permission yet', (
@@ -304,7 +314,7 @@ void main() {
       expect(source.starts, 1);
     });
 
-    testWidgets('reader: the hand lesson and an ear lesson have no camera', (
+    testWidgets('reader: the hand lesson has the mirror, not the hint', (
       tester,
     ) async {
       _tall(tester);
@@ -319,7 +329,9 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('v1-reader-camera')), findsNothing);
-      expect(find.text(V1CourseCopy.bannerCamera.$1), findsOneWidget);
+      expect(find.byKey(const Key('v1-reader-mirror')), findsOneWidget);
+      expect(find.text(CameraLessonCopy.mirrorBanner.$1), findsOneWidget);
+      expect(find.text(CameraLessonCopy.mirrorIntro.$1), findsOneWidget);
     });
 
     testWidgets('in the teachers\' range: quiet, no hint', (tester) async {
