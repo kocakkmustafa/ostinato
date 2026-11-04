@@ -556,6 +556,73 @@ class ForwardedGuitarTextTests(unittest.TestCase):
                                 'localized(context, tr, en, values: values)')
         self.assertNotIn('Ölçü {v0}', self.contexts(self.use, broken))
 
+    def test_tr_read_forwarded_as_the_turkish_argument_keeps_the_guard(self):
+        # 2026-11-04: a lesson text forwarded verbatim to the dispatcher, or
+        # carried in a GuitarTextLike pair, is the dispatch itself.
+        fine = self.use + ("\nString show(BuildContext context, t) => "
+                           "localized(context, t.en, t.tr);"
+                           "\nfinal like = GuitarTextLike(t.en, t.tr);")
+        self.assertIn('Ölçü {v0}', self.contexts(fine))
+        swapped = self.use + ("\nString show(BuildContext context, t) => "
+                              "localized(context, t.tr, t.en);")
+        self.assertNotIn('Ölçü {v0}', self.contexts(swapped))
+
+
+UI_COPY = """import 'package:flutter/widgets.dart';
+import 'app_locale.dart';
+typedef UiCopy = (String en, String tr);
+String uiText(
+  BuildContext context,
+  UiCopy copy, {
+  Map<String, Object?> values = const {},
+}) => localized(context, copy.$1, copy.$2, values: values);
+"""
+
+
+class UiCopyTests(unittest.TestCase):
+    use = ("import '../ui_copy.dart';\n"
+           "abstract final class ExampleCopy {\n"
+           "  static const UiCopy title = ('Read first.', 'Önce oku.');\n"
+           "  static const UiCopy body = (\n"
+           "    'Hold for {v0} s.',\n"
+           "    'Bekle {v0} sn.',\n"
+           "  );\n"
+           "}\n"
+           "final loose = Text('Dağınık Türkçe.');")
+
+    def contexts(self, use=None, ui=UI_COPY, extra=None):
+        return forwarded(use or self.use,
+                         extra={'lib/app/ui_copy.dart': ui, **(extra or {})})
+
+    def test_turkish_half_of_a_copy_record_is_the_tr_branch(self):
+        result = self.contexts()
+        self.assertTrue({'Önce oku.', 'Bekle {v0} sn.'} <= result)
+        self.assertNotIn('Dağınık Türkçe.', result)
+        self.assertNotIn('Read first.', result)
+
+    def test_changed_ui_text_forward_fails_closed(self):
+        for old, new in [('copy.$1, copy.$2', 'copy.$2, copy.$1'),
+                         ('typedef UiCopy = (String en, String tr);',
+                          'typedef UiCopy = (String tr, String en);')]:
+            broken = UI_COPY.replace(old, new)
+            self.assertNotEqual(broken, UI_COPY)
+            self.assertNotIn('Önce oku.', self.contexts(ui=broken), new)
+
+    def test_a_direct_turkish_read_anywhere_fails_closed(self):
+        for leak in ["String leak() => ExampleCopy.title.$2;",
+                     "String leak(UiCopy copy) => copy.$2;"]:
+            self.assertNotIn('Önce oku.', self.contexts(
+                extra={'lib/app/leak.dart': leak}), leak)
+        # A `.$2` on an unrelated record is not a copy read.
+        self.assertIn('Önce oku.', self.contexts(
+            extra={'lib/app/range.dart': "int last((int, int) window) => window.$2;"}))
+
+    def test_without_the_proven_dispatcher_nothing_is_exempt(self):
+        self.assertNotIn('Önce oku.', texts(guarded_dart_contexts({
+            'lib/app/app_locale.dart': '',
+            'lib/app/ui_copy.dart': UI_COPY,
+            FILE: self.use})))
+
 
 class CatalogParityTests(unittest.TestCase):
     def test_en_tr_catalog_values_must_equal_the_key_sides(self):

@@ -1,0 +1,162 @@
+{
+  "$why": "Kural A (vaat dili) için gözden geçirilmiş ürün-durumu satırları. Her satır bugün DOĞRU bir yokluğu söyler (bu sürümde ölçüm/kamera/ekran alıştırması/piyano dinleme yok) ve kullanıcıya ne yapacağını gösterir; App Review notunda da aynı ifadeler var. Yönetim 2026-11-04: 'coming soon' türü doğrulayıcı yanlış pozitifidir, kural daraltılsın. Eşleşme METNİN TAMAMI ile yapılır: cümle değişirse ya da yeni bir vaat cümlesi eklenirse kapı yeniden öter. Burada olup hiçbir yüzeyde geçmeyen kayıt da ihlal sayılır (bayat liste).",
+  "reviewed": "2026-11-04",
+  "lines": [
+    {
+      "file": "lib/app/drill/drill_copy.dart",
+      "text": "This lesson has an on-screen drill. Passing it saves the lesson as done; the playing part is not measured yet."
+    },
+    {
+      "file": "lib/app/drill/drill_copy.dart",
+      "text": "Bu dersin ekran alıştırması var. Geçince ders yapıldı olarak kaydedilir; çalma bölümü henüz ölçülmüyor."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "All {v0} lessons of the guitar course, by level and module. Measured lessons listen to every note. The others are self-checks for now: you tick a checklist and the lesson is saved as self-reported, not measured. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Not measured: this module opened after a checkpoint this build cannot measure yet, which you practised as a self-check."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Ölçülmedi: bu modül, bu sürümün henüz ölçemediği ve senin öz-kontrolle çalıştığın bir geçiş dersinden sonra açıldı."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Self-check · mic feedback coming soon"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Öz-kontrol · mikrofon geri bildirimi yakında"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Checklist · camera check coming soon"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Kontrol listesi · kamera kontrolü yakında"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Reading · on-screen exercise coming soon"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Okuma · ekran alıştırması yakında"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Checkpoint held · measurement coming soon"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Geçiş bekletiliyor · ölçüm yakında"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "HELD · CANNOT BE PASSED YET"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "BEKLETİLİYOR · HENÜZ GEÇİLEMEZ"
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Reference playback to compare with is not in this build yet. Use the task and the checklist."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Karşılaştırma için referans çalma bu sürümde henüz yok. Görevi ve kontrol listesini kullan."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Microphone feedback for this lesson is coming soon. For now, check yourself with the list below; your completion is saved as self-reported, not measured."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Bu derste mikrofon geri bildirimi yakında. Şimdilik aşağıdaki listeyle kendini kontrol et; tamamlaman ölçülmüş değil kendi beyanı olarak kaydedilir."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "The camera check for this lesson is not in this build yet. Use the checklist instead; your completion is saved as self-reported."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Bu dersin kamera kontrolü bu sürümde henüz yok. Yerine kontrol listesini kullan; tamamlaman kendi beyanı olarak kaydedilir."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "The on-screen exercise for this lesson is coming soon. Read the lesson and check yourself; your completion is saved as self-reported."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Bu dersin ekran alıştırması yakında. Dersi oku ve kendini kontrol et; tamamlaman kendi beyanı olarak kaydedilir."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "This checkpoint needs measurement, which is not in this build yet, so it cannot be passed now. Practise it and mark it as a self-check: the next module then opens, labelled not measured."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Bu geçiş dersi ölçüm ister; ölçüm bu sürümde henüz yok, bu yüzden şimdi geçilemez. Çalış ve öz-kontrolle işaretle: sonraki modül \"ölçülmedi\" etiketiyle açılır."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Listening to chords is not in this build yet."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Akor dinleme bu sürümde henüz yok."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Tracking bends and vibrato is not in this build yet."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Bend ve vibrato izleme bu sürümde henüz yok."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Piano listening is not in this build yet."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Piyano dinleme bu sürümde henüz yok."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "The camera posture check is not in this build yet."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Kamerayla duruş kontrolü bu sürümde henüz yok."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Technique notation — double stops, hammer-ons, pull-offs, slides, bends — is not measured yet."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Teknik yazımı — çift ses, çekiç, çekme, kaydırma, bend — henüz ölçülmüyor."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "The practice screen cannot follow this exercise’s line yet."
+    },
+    {
+      "file": "lib/app/practice/loop/v1_course_copy.dart",
+      "text": "Pratik ekranı bu alıştırmanın dizisini henüz izleyemiyor."
+    },
+    {
+      "file": "lib/app/screens/v1_home_copy.dart",
+      "text": "Coming soon · This course opens in a later update."
+    },
+    {
+      "file": "lib/app/screens/v1_home_copy.dart",
+      "text": "Yakında · Bu kurs sonraki güncellemelerle açılacak."
+    }
+  ]
+}

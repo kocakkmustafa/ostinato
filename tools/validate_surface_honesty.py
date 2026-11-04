@@ -38,6 +38,7 @@ proza değildir, atlanır.
 gözlem cümlesinin golden kataloğu dahil) görmüyordu. Her koşumda kapsam
 EKRANA yazılır: bakılmayan bir yer "temiz" sanılamasın diye.
 """
+import functools
 import json
 import plistlib
 import re
@@ -81,6 +82,20 @@ PROMISE_PATTERNS = [
     (r"\bhenüz\b", "henüz"),
     (r"\byakında\b", "yakında"),
 ]
+
+#: Gözden geçirilmiş ürün-durumu satırları (2026-11-04): dosya + TAM metin.
+#: Bkz. dosyanın kendi `$why` alanı. Liste kural A'yı yalnız o tam metin için
+#: susturur; diğer bütün kurallar bu satırlara da uygulanır.
+REVIEWED_STATUS_FILE = "tools/promise_reviewed_status.v1.json"
+
+
+def reviewed_status_lines():
+    path = Path(REVIEWED_STATUS_FILE)
+    if not path.exists():
+        return set()
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    return {(line["file"], line["text"]) for line in doc["lines"]}
+
 
 # ── B: yetenek iddiası ↔ platform izni ──────────────────────────────────────
 # Bir yetenek adı geçtiğinde, cümle ya iznin VARLIĞIYLA desteklenmeli ya da
@@ -336,10 +351,28 @@ RETENTION_EXEMPT_FILES = {"onboarding_store.dart", "pose_model.dart"}
 # tür, kurs kimliği); setup_profile_store.dart cihaz kurulumu (adım durumu,
 # oda dBFS, rota başına gecikme µs). Hiçbiri ses, açı, landmark, nota/kare
 # dizisi, video veya ham geçmiş yazmaz; altı öznenin `False`u değişmedi.
+# 2026-11-04 (yüzey dürüstlüğü turu, alan listeleri okunarak):
+# practice_display_preferences.dart yalnız iki tercih bayrağı (leftHanded,
+# colorBlindSafe); own_recording_preference.dart yalnız `enabled`;
+# test_flow_store.dart ders/bölüm başına index + passed + zaman;
+# tuner_check_memory.dart presetId + akortlu tel sayısı + toplam + zaman.
+# own_recording.dart kullanıcının KENDİ çalışını geçici WAV olarak yazar
+# (yalnız ayar açıkken; sonraki turda ya da dersten çıkınca silinir) — ham
+# SES, altı özneden hiçbiri değil (açı/landmark/ölçüm dizisi/video/görüntü/
+# geçmiş). Altı öznenin `False`u değişmedi. Ama bu yazıcı bir SES yokluk
+# iddiasını yanlışa çevirdi: pratik ekranı alt satırı ("nothing is
+# recorded") ayar açıkken de gösteriliyordu ve docs/store taslakları "Raw
+# audio is not saved" diyordu — ikisi bu turda düzeltildi
+# (OwnRecordingCopy.practiceFooterOn; test/practice_footer_honesty_test).
 RETENTION_WRITERS_RECONCILED = {"session_store.dart", "guitar_journey_progress.dart",
                                 "practice_progress_store.dart",
                                 "weekly_goal_store.dart",
-                                "setup_profile_store.dart"}
+                                "setup_profile_store.dart",
+                                "practice_display_preferences.dart",
+                                "own_recording_preference.dart",
+                                "test_flow_store.dart",
+                                "tuner_check_memory.dart",
+                                "own_recording.dart"}
 
 # ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────
 #
@@ -596,6 +629,20 @@ NETWORK_DEP_HINTS = re.compile(
 #
 # Kapsam: yalnız BUGÜN `pubspec.lock`ta olan paketler.
 NETWORK_DEPS_KNOWN_SAFE = {
+    # 2026-11-04 (K8 ayna, #60): `camera` 0.12.2 ailesi. Paket kaynakları
+    # (lib + android/src + darwin) HttpClient/http/Socket/WebSocket/fetch/
+    # URLSession/OkHttp/HttpURLConnection için tarandı: yalnız cross_file'ın
+    # WEB tipi (html.dart) bir blob: URL'sini yerel XMLHttpRequest ile
+    # yeniden okuyabiliyor — uygulama web'e sevk edilmiyor ve ayna XFile hiç
+    # üretmiyor (fotoğraf/video çekimi yok).
+    "camera": "0.12.2 ön kamera önizleme denetleyicisi; kaynakta ağ istemcisi yok (2026-11-04 tarama)",
+    "camera_android_camerax": "0.7.6+1 CameraX köprüsü; kaynakta ağ istemcisi yok (2026-11-04 tarama)",
+    "camera_avfoundation": "0.11.1 AVFoundation köprüsü; kaynakta ağ istemcisi yok, gizlilik manifesti boş (2026-11-04)",
+    "camera_platform_interface": "2.15.0 kamera platform sözleşmesi; I/O yok",
+    "camera_web": "0.3.5+7 tarayıcı getUserMedia katmanı; uygulama web'e sevk edilmez, ağ istemcisi yok",
+    "cross_file": "0.3.5+5 XFile soyutlaması; yalnız web tipi blob: URL'sini yerel XMLHttpRequest ile okur — web sevki yok, ayna XFile üretmez",
+    "flutter_plugin_android_lifecycle": "2.0.35 Android Lifecycle erişim köprüsü; I/O yok",
+    "stream_transform": "2.1.2 Stream dönüştürücüleri; I/O yok",
     "csslib": "1.0.2 lib/parser.dart CSS metnini ayrıştırır; lib kaynaklarında soket/HTTP/fetch istemcisi yok, URL tokeni ağ isteği değildir (2026-10-16 yerel kaynak incelemesi)",
     "html": "0.15.7 lib/parser.dart ve dom.dart HTML string/byte girdisini DOM'a ayrıştırır; lib kaynaklarında soket/HTTP/fetch istemcisi yok (2026-10-16 yerel kaynak incelemesi)",
     "in_app_purchase_platform_interface": "satın alma eklentisi çağrı sözleşmesi; kendi ağ taşıyıcısı yok",
@@ -968,43 +1015,40 @@ def shipped_json_assets():
     return out
 
 
+_DART_COMMENT_SCAN = re.compile(
+    r"'(?:\\.|[^'\\])*(?:'|\\?\Z)"     # tek tırnaklı dizge (kapanmasa da)
+    r'|"(?:\\.|[^"\\])*(?:"|\\?\Z)'     # çift tırnaklı dizge
+    r"|//[^\n]*"                            # satır yorumu
+    # Blok yorum: kapanış `*/` açılıştaki `*`tan başlayabilir (`/*/`), eski
+    # tarayıcı da öyle sayıyordu; kapanmazsa dosya sonuna kadar.
+    r"|/(?=\*)(?:.*?\*/|.*\Z)",
+    re.DOTALL)
+
+
+def _blank_comment(match: re.Match) -> str:
+    text = match.group()
+    if text[0] in "'\"":
+        return text
+    blank = re.sub(r"[^\n]", " ", text)
+    # Eski karakter tarayıcı kapanmayan blok yorumun sonuna da iki boşluk
+    # ekliyordu; çıktı bayt bayt aynı kalsın.
+    if text.startswith("/*") and not (len(text) >= 3 and text.endswith("*/")):
+        blank += "  "
+    return blank
+
+
+@functools.lru_cache(maxsize=None)
 def strip_dart_comments(src: str) -> str:
-    """Yorumları BOŞLUKLA değiştirir (satır numaraları korunur)."""
-    out = []
-    i, n = 0, len(src)
-    in_s = None  # aktif string tırnağı
-    while i < n:
-        ch = src[i]
-        if in_s:
-            out.append(ch)
-            if ch == "\\" and i + 1 < n:
-                out.append(src[i + 1])
-                i += 2
-                continue
-            if ch == in_s:
-                in_s = None
-            i += 1
-            continue
-        if ch in ("'", '"'):
-            in_s = ch
-            out.append(ch)
-            i += 1
-            continue
-        if ch == "/" and i + 1 < n and src[i + 1] == "/":
-            while i < n and src[i] != "\n":
-                out.append(" ")
-                i += 1
-            continue
-        if ch == "/" and i + 1 < n and src[i + 1] == "*":
-            while i < n and not (src[i] == "*" and i + 1 < n and src[i + 1] == "/"):
-                out.append("\n" if src[i] == "\n" else " ")
-                i += 1
-            out.append("  ")
-            i += 2
-            continue
-        out.append(ch)
-        i += 1
-    return "".join(out)
+    """Yorumları BOŞLUKLA değiştirir (satır numaraları korunur).
+
+    2026-11-04: karakter karakter tarayıcı tek bir düzenli ifade taramasına
+    çevrildi ve sonuç önbelleğe alındı. Eski hâli 2 MB'lık
+    `app_message_ids.dart` için her yüzey dizgesinde yeniden koşuyordu; tam
+    doğrulama 47-57 dakika sürüyordu, CI'a giremiyordu. Çıktı eski
+    tarayıcıyla bayt bayt aynıdır (lib/ altındaki her dosyada ve rastgele
+    girdilerde karşılaştırıldı).
+    """
+    return _DART_COMMENT_SCAN.sub(_blank_comment, src)
 
 
 def strip_shell_comments(src: str) -> str:
@@ -1054,7 +1098,9 @@ STRING_LITERAL = re.compile(r"'((?:[^'\\\n]|\\.)*)'|\"((?:[^\"\\\n]|\\.)*)\"")
 # okumaz. Bu bir kaçamak deliği açmaz: kullanıcıya gösterilen her cümlede
 # boşluk vardır. (Ölçüldü: `Key('onboarding-microphone-card')` yetenek
 # kuralını tetikliyordu — kural haklıydı, hedefi yanlıştı.)
-IDENTIFIER_LIKE = re.compile(r"^[A-Za-z0-9_\-./:]+$")
+#: A widget key with an interpolation (`coming-soon-${id}`) is an identifier
+#: too; the merged literal shows the interpolation as `${...}` (2026-11-04).
+IDENTIFIER_LIKE = re.compile(r"^(?:[A-Za-z0-9_\-./:]|\$\{\.\.\.\})+$")
 
 
 def dart_surface_strings():
@@ -1816,7 +1862,13 @@ def main() -> int:
                   for file in {f for f, _, _ in dart_raw}}
 
     # ── Kural A ──
+    reviewed_status = reviewed_status_lines()
+    reviewed_seen = set()
     for where, text in surfaces:
+        file = where.split(':', 1)[0]
+        if (file, text) in reviewed_status:
+            reviewed_seen.add((file, text))
+            continue
         for pattern, label in PROMISE_PATTERNS:
             matches = [sentence for sentence in sentences(text)
                        if re.search(pattern, sentence, flags=re.IGNORECASE)
@@ -1826,6 +1878,12 @@ def main() -> int:
                     f"[vaat dili] {where}: '{label}' geçiyor — "
                     f"«{text.strip()[:110]}»"
                 )
+
+    for file, text in sorted(reviewed_status - reviewed_seen):
+        violations.append(
+            f"[vaat listesi] {REVIEWED_STATUS_FILE}: {file} artık bu metni "
+            f"göstermiyor — kaydı sil ya da yeni metni yeniden gözden geçir — "
+            f"«{text[:80]}»")
 
     # ── Kural B ──
     for rule in CAPABILITY_RULES:
@@ -2126,15 +2184,18 @@ def main() -> int:
         dart_occurrences = Counter((f'{file}:{line}', text) for file, line, text in dart_raw)
         # Tanı bağlamında duran literalleri ATLA (dosya-satır ile eşlenir).
         diagnostic = set()
+        stripped_lines = {}  # dosya başına bir kez oku ve böl (CI süresi)
         for f, ln, t in dart_raw:
-            src = strip_dart_comments(Path(f).read_text(encoding="utf-8"))
+            if f not in stripped_lines:
+                stripped_lines[f] = strip_dart_comments(
+                    Path(f).read_text(encoding="utf-8")).splitlines()
             # ⚠️ `src.find(t)` KULLANILAMAZ: `t` BİTİŞİK literallerin
             # birleşmiş hâli ve kaynakta o hâliyle geçmiyor (aradaki tırnak
             # ve satır sonları yüzünden). Ölçüldü: `assert` tek satırlık
             # olduğu için yakalanıyordu, çok satırlı `throw StateError(...)`
             # kaçıyordu — muafiyet SESSİZCE yarım çalışıyordu.
             # Konum SATIR NUMARASINDAN kuruluyor (zaten elimizde).
-            lines = src.splitlines()
+            lines = stripped_lines[f]
             window = "\n".join(lines[max(0, ln - 3):ln])
             if DIAGNOSTIC_LINE.search(window):
                 diagnostic.add(f"{f}:{ln}")
