@@ -2393,8 +2393,6 @@
     "363204bd71341bb7": "Apoya el pulgar detrás del mástil, más o menos detrás del dedo 2. Curva los dedos para que las yemas lleguen a las cuerdas. Mantén la muñeca suelta y casi recta, con un pequeño espacio entre el mástil y la palma.",
     "3d7a93225a3c9e19": "Si tocas con la mano izquierda, las manos se intercambian: la púa va en la mano izquierda y la mano derecha pisa. Los números de los dedos siguen siendo los mismos.",
     "d9ab63cf70299de0": "Sin audio de referencia; unos dibujos muestran el agarre de la púa y la mano que pisa de frente.",
-    "272d07e32c6a0ae4": "Parte 1: sostén la púa y coloca la mano que pisa en el mástil a la vista de la cámara durante 30 segundos; sigue cualquier sugerencia. Parte 2: responde 6 preguntas sobre los números de los dedos.",
-    "046fdf80c113fe55": "Mantén la posición de la mano durante 30 segundos y marca la lista; luego responde al menos 5 de 6 preguntas. La cámara solo da sugerencias.",
     "6c42b561f1a00bf7": "Solo se veía una pequeña punta de la púa.",
     "aa22e042f0ba73f5": "Mi pulgar descansó detrás del mástil, no por encima.",
     "60128016c12fd113": "Las puntas de mis dedos, no las yemas planas, tocaron las cuerdas.",
@@ -8638,6 +8636,10 @@
     "03e5a18b5dc29a85": "Abrir el espejo",
     "5b66359f28c4bc4e": "Esta lección tiene un espejo de la cámara para tus manos. El espejo no da pistas: marca tú la lista de control; tu lección se guarda como declarada por ti.",
     "f020778e0b288423": "Lista de control · espejo de la cámara",
-    "ecba641ec2903315": "Espejo encendido · compara tus manos con la lista de control."
+    "ecba641ec2903315": "Espejo encendido · compara tus manos con la lista de control.",
+    "4f0251bc737cb3cd": "Después de «Abrir el espejo», la cámara pide permiso. La cámara frontal muestra tus manos como un espejo; la imagen se queda en tu teléfono y no se guarda ni se envía.",
+    "890811e0028347fb": "El espejo no da puntuación ni sugerencias. Compara lo que ves con la lista de la lección.",
+    "03db3a7125512dce": "Parte 1: sostén la púa y coloca la mano que pisa en el mástil frente al espejo de la cámara durante 30 segundos; compárala con la lista. Parte 2: responde 6 preguntas sobre los números de los dedos.",
+    "99804cb7ab683368": "Mantén la posición de la mano durante 30 segundos y marca la lista; luego responde al menos 5 de 6 preguntas. El espejo no da sugerencias."
   }
 }

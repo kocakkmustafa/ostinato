@@ -2393,8 +2393,6 @@
     "363204bd71341bb7": "Appoggia il pollice dietro il manico, più o meno dietro il dito 2. Curva le dita in modo che i polpastrelli raggiungano le corde. Tieni il polso morbido e quasi dritto, con un piccolo spazio tra il manico e il palmo.",
     "3d7a93225a3c9e19": "Se suoni da mancino, le mani si scambiano: il plettro va nella mano sinistra e la mano destra preme i tasti. I numeri delle dita restano gli stessi.",
     "d9ab63cf70299de0": "Nessun audio di riferimento; i disegni mostrano l'impugnatura del plettro e la mano sui tasti vista di fronte.",
-    "272d07e32c6a0ae4": "Parte 1: tieni il plettro e appoggia la mano sui tasti sul manico davanti alla fotocamera per 30 secondi; segui ogni suggerimento. Parte 2: rispondi a 6 domande sui numeri delle dita.",
-    "046fdf80c113fe55": "Mantieni la posizione della mano per 30 secondi e spunta la lista di controllo, poi rispondi ad almeno 5 domande su 6. La fotocamera dà solo suggerimenti.",
     "6c42b561f1a00bf7": "Del plettro si vedeva solo una piccola punta.",
     "aa22e042f0ba73f5": "Il pollice stava dietro il manico, non sopra.",
     "60128016c12fd113": "Le corde sono state toccate dai polpastrelli, non dalla parte piatta delle dita.",
@@ -8638,6 +8636,10 @@
     "03e5a18b5dc29a85": "Apri lo specchio",
     "5b66359f28c4bc4e": "Questa lezione ha uno specchio della fotocamera per le tue mani. Lo specchio non dà suggerimenti: spunta tu la lista di controllo; la lezione viene salvata come dichiarata da te.",
     "f020778e0b288423": "Lista di controllo · specchio della fotocamera",
-    "ecba641ec2903315": "Specchio attivo · confronta le tue mani con la lista di controllo."
+    "ecba641ec2903315": "Specchio attivo · confronta le tue mani con la lista di controllo.",
+    "4f0251bc737cb3cd": "Dopo \"Apri lo specchio\", la fotocamera chiede l'autorizzazione. La fotocamera frontale mostra le tue mani come uno specchio; l'immagine resta sul tuo telefono e non viene salvata né inviata.",
+    "890811e0028347fb": "Lo specchio non dà punteggi né suggerimenti. Confronta ciò che vedi con la lista di controllo della lezione.",
+    "03db3a7125512dce": "Parte 1: tieni il plettro e appoggia la mano sui tasti sul manico davanti allo specchio della fotocamera per 30 secondi; confrontala con la lista di controllo. Parte 2: rispondi a 6 domande sui numeri delle dita.",
+    "99804cb7ab683368": "Mantieni la posizione della mano per 30 secondi e spunta la lista di controllo, poi rispondi ad almeno 5 domande su 6. Lo specchio non dà suggerimenti."
   }
 }

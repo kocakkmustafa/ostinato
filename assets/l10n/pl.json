@@ -2407,8 +2407,6 @@
     "363204bd71341bb7": "Oprzyj kciuk z tyłu gryfu, mniej więcej za palcem 2. Zaokrąglij palce tak, aby opuszki trafiały w struny. Trzymaj nadgarstek luźno i blisko prostego, z małą szczeliną między gryfem a dłonią.",
     "3d7a93225a3c9e19": "Jeśli grasz leworęcznie, ręce się zamieniają: kostka jest w lewej dłoni, a prawa ręka dociska struny. Numery palców pozostają te same.",
     "d9ab63cf70299de0": "Bez nagrania wzorcowego; rysunki pokazują chwyt kostki i rękę dociskającą struny od przodu.",
-    "272d07e32c6a0ae4": "Część 1: trzymaj kostkę i połóż rękę dociskającą struny na gryfie w polu widzenia kamery na 30 sekund; zastosuj się do wskazówek. Część 2: odpowiedz na 6 pytań o numery palców.",
-    "046fdf80c113fe55": "Utrzymaj ułożenie dłoni przez 30 sekund i odhacz listę, a potem odpowiedz poprawnie na co najmniej 5 z 6 pytań. Kamera daje tylko wskazówki.",
     "6c42b561f1a00bf7": "Wystawała tylko mała końcówka kostki.",
     "aa22e042f0ba73f5": "Kciuk opierał się z tyłu gryfu, a nie nad nim.",
     "60128016c12fd113": "Struny dotykały opuszki palców, a nie płaskie części palców.",
@@ -8652,6 +8650,10 @@
     "03e5a18b5dc29a85": "Otwórz lustro",
     "5b66359f28c4bc4e": "Ta lekcja ma lustro z kamery dla twoich dłoni. Lustro nie podpowiada: zaznacz listę kontrolną samodzielnie; lekcja zapisuje się jako zgłoszona przez ciebie.",
     "f020778e0b288423": "Lista kontrolna · lustro z kamery",
-    "ecba641ec2903315": "Lustro włączone · porównaj dłonie z listą kontrolną."
+    "ecba641ec2903315": "Lustro włączone · porównaj dłonie z listą kontrolną.",
+    "4f0251bc737cb3cd": "Po „Otwórz lustro” kamera poprosi o zgodę. Przednia kamera pokazuje Twoje dłonie jak lustro; obraz zostaje na Twoim telefonie i nie jest zapisywany ani wysyłany.",
+    "890811e0028347fb": "Lustro nie daje oceny ani wskazówek. Porównaj to, co widzisz, z listą kontrolną lekcji.",
+    "03db3a7125512dce": "Część 1: trzymaj kostkę i połóż rękę dociskającą struny na gryfie przed lustrem z kamery na 30 sekund; porównaj ją z listą kontrolną. Część 2: odpowiedz na 6 pytań o numery palców.",
+    "99804cb7ab683368": "Utrzymaj ułożenie dłoni przez 30 sekund i odhacz listę, a potem odpowiedz poprawnie na co najmniej 5 z 6 pytań. Lustro nie daje wskazówek."
   }
 }

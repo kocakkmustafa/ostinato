@@ -2393,8 +2393,6 @@
     "363204bd71341bb7": "Lege den Daumen hinter den Hals, etwa hinter Finger 2. Runde die Finger, sodass die Fingerkuppen auf die Saiten treffen. Halte das Handgelenk locker und fast gerade, mit einer kleinen Lücke zwischen Hals und Handfläche.",
     "3d7a93225a3c9e19": "Wenn du Linkshänder bist, tauschen die Hände: Das Plektrum kommt in die linke Hand und die rechte Hand greift. Die Fingernummern bleiben gleich.",
     "d9ab63cf70299de0": "Kein Referenzton; Zeichnungen zeigen die Plektrumhaltung und die Greifhand von vorn.",
-    "272d07e32c6a0ae4": "Teil 1: Halte das Plektrum und lege die Greifhand 30 Sekunden lang im Blickfeld der Kamera an den Hals; folge jedem Hinweis. Teil 2: Beantworte 6 Fragen zu den Fingernummern.",
-    "046fdf80c113fe55": "Halte die Handposition 30 Sekunden lang und hake die Checkliste ab. Beantworte dann mindestens 5 von 6 Fragen. Die Kamera gibt nur Hinweise.",
     "6c42b561f1a00bf7": "Nur eine kleine Spitze des Plektrums schaute heraus.",
     "aa22e042f0ba73f5": "Mein Daumen ruhte hinter dem Hals, nicht oben darüber.",
     "60128016c12fd113": "Meine Fingerkuppen, nicht die flachen Fingerballen, berührten die Saiten.",
@@ -8638,6 +8636,10 @@
     "03e5a18b5dc29a85": "Spiegel öffnen",
     "5b66359f28c4bc4e": "Diese Lektion hat einen Kameraspiegel für deine Hände. Der Spiegel gibt keine Hinweise: Hake die Checkliste selbst ab; dein Abschluss wird als selbst angegeben gespeichert.",
     "f020778e0b288423": "Checkliste · Kameraspiegel",
-    "ecba641ec2903315": "Spiegel an · vergleiche deine Hände mit der Checkliste."
+    "ecba641ec2903315": "Spiegel an · vergleiche deine Hände mit der Checkliste.",
+    "4f0251bc737cb3cd": "Nach „Spiegel öffnen“ fragt die Kamera nach der Erlaubnis. Die Frontkamera zeigt deine Hände wie ein Spiegel; das Bild bleibt auf deinem Telefon und wird weder gespeichert noch gesendet.",
+    "890811e0028347fb": "Der Spiegel gibt keine Wertung und keinen Hinweis. Vergleiche, was du siehst, mit der Checkliste der Lektion.",
+    "03db3a7125512dce": "Teil 1: Halte das Plektrum und lege die Greifhand 30 Sekunden lang vor dem Kameraspiegel an den Hals; vergleiche sie mit der Checkliste. Teil 2: Beantworte 6 Fragen zu den Fingernummern.",
+    "99804cb7ab683368": "Halte die Handposition 30 Sekunden lang und hake die Checkliste ab. Beantworte dann mindestens 5 von 6 Fragen. Der Spiegel gibt keine Hinweise."
   }
 }

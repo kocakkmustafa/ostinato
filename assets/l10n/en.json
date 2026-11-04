@@ -2393,8 +2393,6 @@
     "363204bd71341bb7": "Rest the thumb behind the neck, roughly behind finger 2. Curve the fingers so the fingertips meet the strings. Keep the wrist loose and close to straight, with a small gap between the neck and your palm.",
     "3d7a93225a3c9e19": "If you play left-handed, the hands swap: the pick goes in your left hand and the right hand frets. The finger numbers stay the same.",
     "d9ab63cf70299de0": "No reference audio; drawings show the pick grip and the fretting hand from the front.",
-    "272d07e32c6a0ae4": "Part 1: hold the pick and place the fretting hand on the neck in view of the camera for 30 seconds; follow any hint. Part 2: answer 6 questions on finger numbers.",
-    "046fdf80c113fe55": "Hold the hand position for 30 seconds and tick the checklist, then answer at least 5 of 6 questions. The camera only gives hints.",
     "6c42b561f1a00bf7": "Only a small tip of the pick showed.",
     "aa22e042f0ba73f5": "My thumb rested behind the neck, not over the top.",
     "60128016c12fd113": "My fingertips, not the flat pads, touched the strings.",
@@ -8638,6 +8636,10 @@
     "03e5a18b5dc29a85": "Open the mirror",
     "5b66359f28c4bc4e": "This lesson has a camera mirror for your hands. The mirror gives no hints: tick the checklist yourself; your completion is saved as self-reported.",
     "f020778e0b288423": "Checklist · camera mirror",
-    "ecba641ec2903315": "Mirror on · compare your hands with the checklist."
+    "ecba641ec2903315": "Mirror on · compare your hands with the checklist.",
+    "4f0251bc737cb3cd": "After \"Open the mirror\", the camera asks for permission. The front camera shows your hands like a mirror; the image stays on your phone and is not saved or sent.",
+    "890811e0028347fb": "The mirror gives no score and no hint. Compare what you see with the lesson's checklist.",
+    "03db3a7125512dce": "Part 1: hold the pick and place the fretting hand on the neck in front of the camera mirror for 30 seconds; compare it with the checklist. Part 2: answer 6 questions on finger numbers.",
+    "99804cb7ab683368": "Hold the hand position for 30 seconds and tick the checklist, then answer at least 5 of 6 questions. The mirror gives no hints."
   }
 }

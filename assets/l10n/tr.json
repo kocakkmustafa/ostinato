@@ -2393,8 +2393,6 @@
     "363204bd71341bb7": "Başparmağı sapın arkasına, kabaca 2. parmağın arkasına koy. Parmakları kıvır; parmak uçları tellere değsin. Bileğin gevşek ve düze yakın olsun; sapla avucun arasında küçük bir boşluk kalsın.",
     "3d7a93225a3c9e19": "Solaksan eller yer değiştirir: pena sol elinde olur, sağ elin perdeye basar. Parmak numaraları aynı kalır.",
     "d9ab63cf70299de0": "Referans ses yok; çizimler pena tutuşunu ve sol eli önden gösterir.",
-    "272d07e32c6a0ae4": "1. bölüm: penayı tut ve sol elini kameranın gördüğü yerde 30 saniye sapa koy; ipucu çıkarsa uygula. 2. bölüm: parmak numaraları üzerine 6 soruyu yanıtla.",
-    "046fdf80c113fe55": "El konumunu 30 saniye koru ve kontrol listesini işaretle, sonra 6 sorunun en az 5'ini doğru yanıtla. Kamera yalnız ipucu verir.",
     "6c42b561f1a00bf7": "Penanın yalnız küçük bir ucu dışarıdaydı.",
     "aa22e042f0ba73f5": "Başparmağım sapın üstünden değil, arkasından duruyordu.",
     "60128016c12fd113": "Tellere parmaklarımın düz yüzü değil, uçları değdi.",
@@ -8638,6 +8636,10 @@
     "03e5a18b5dc29a85": "Aynayı aç",
     "5b66359f28c4bc4e": "Bu derste ellerin için kamera aynası var. Ayna ipucu vermez: kontrol listesini kendin işaretle; tamamlaman kendi beyanı olarak kaydedilir.",
     "f020778e0b288423": "Kontrol listesi · kamera aynası",
-    "ecba641ec2903315": "Ayna açık · ellerini kontrol listesiyle karşılaştır."
+    "ecba641ec2903315": "Ayna açık · ellerini kontrol listesiyle karşılaştır.",
+    "4f0251bc737cb3cd": "\"Aynayı aç\"tan sonra kamera izin ister. Ön kamera ellerini ayna gibi gösterir; görüntü telefonunda kalır, kaydedilmez, gönderilmez.",
+    "890811e0028347fb": "Ayna puan da ipucu da vermez. Gördüğünü dersin kontrol listesiyle karşılaştır.",
+    "03db3a7125512dce": "1. bölüm: penayı tut ve sol elini kamera aynasının önünde 30 saniye sapa koy; kontrol listesiyle karşılaştır. 2. bölüm: parmak numaraları üzerine 6 soruyu yanıtla.",
+    "99804cb7ab683368": "El konumunu 30 saniye koru ve kontrol listesini işaretle, sonra 6 sorunun en az 5'ini doğru yanıtla. Ayna ipucu vermez."
   }
 }

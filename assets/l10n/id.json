@@ -2386,8 +2386,6 @@
     "363204bd71341bb7": "Letakkan ibu jari di belakang leher, kira-kira di belakang jari 2. Lengkungkan jari agar ujung jari menyentuh senar. Jaga pergelangan tetap rileks dan hampir lurus, dengan sedikit celah antara leher dan telapak tanganmu.",
     "3d7a93225a3c9e19": "Jika kamu bermain kidal, kedua tangan bertukar peran: plek dipegang tangan kiri dan tangan kanan menekan fret. Nomor jari tetap sama.",
     "d9ab63cf70299de0": "Tidak ada audio acuan; gambar menunjukkan cara memegang plek dan tangan penekan fret dari depan.",
-    "272d07e32c6a0ae4": "Bagian 1: pegang plek dan letakkan tangan penekan fret pada leher di depan kamera selama 30 detik; ikuti petunjuk apa pun. Bagian 2: jawab 6 pertanyaan tentang nomor jari.",
-    "046fdf80c113fe55": "Tahan posisi tangan selama 30 detik dan centang daftar periksa, lalu jawab minimal 5 dari 6 pertanyaan. Kamera hanya memberi petunjuk.",
     "6c42b561f1a00bf7": "Hanya ujung kecil plek yang terlihat.",
     "aa22e042f0ba73f5": "Ibu jariku bersandar di belakang leher, bukan di atasnya.",
     "60128016c12fd113": "Ujung jariku, bukan bantalan yang datar, yang menyentuh senar.",
@@ -8631,6 +8629,10 @@
     "03e5a18b5dc29a85": "Buka cermin",
     "5b66359f28c4bc4e": "Pelajaran ini punya cermin kamera untuk tanganmu. Cermin tidak memberi petunjuk: centang daftar periksa sendiri; penyelesaianmu disimpan sebagai laporan sendiri.",
     "f020778e0b288423": "Daftar periksa · cermin kamera",
-    "ecba641ec2903315": "Cermin aktif · bandingkan tanganmu dengan daftar periksa."
+    "ecba641ec2903315": "Cermin aktif · bandingkan tanganmu dengan daftar periksa.",
+    "4f0251bc737cb3cd": "Setelah “Buka cermin”, kamera meminta izin. Kamera depan menampilkan tanganmu seperti cermin; gambar tetap di ponselmu, tidak disimpan dan tidak dikirim.",
+    "890811e0028347fb": "Cermin tidak memberi skor maupun petunjuk. Bandingkan yang kamu lihat dengan daftar periksa pelajaran.",
+    "03db3a7125512dce": "Bagian 1: pegang plek dan letakkan tangan penekan fret pada leher di depan cermin kamera selama 30 detik; bandingkan dengan daftar periksa. Bagian 2: jawab 6 pertanyaan tentang nomor jari.",
+    "99804cb7ab683368": "Tahan posisi tangan selama 30 detik dan centang daftar periksa, lalu jawab minimal 5 dari 6 pertanyaan. Cermin tidak memberi petunjuk."
   }
 }
