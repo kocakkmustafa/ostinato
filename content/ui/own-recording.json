@@ -40,6 +40,11 @@
       "id": "playFailed",
       "en": "The recording could not be played.",
       "tr": "Kayıt çalınamadı."
+    },
+    {
+      "id": "practiceFooterOn",
+      "en": "Stop for pain, numbness or tingling. Audio is processed on this device and not sent. \"Listen to my own recording\" is on: this run is kept on this device until the next run or until you leave the lesson.",
+      "tr": "Ağrı, uyuşma ya da karıncalanmada dur. Ses bu cihazda işlenir, gönderilmez. \"Kendi kaydımı dinle\" açık: bu tur, sonraki tura ya da dersten çıkana kadar bu cihazda tutulur."
     }
   ]
 }

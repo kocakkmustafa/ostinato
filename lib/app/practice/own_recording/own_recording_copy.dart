@@ -27,6 +27,13 @@ abstract final class OwnRecordingCopy {
     'Kayıt çalınamadı.',
   );
 
+  /// The practice screen's footer while the setting is on; off, the footer
+  /// says nothing is recorded (practice_loop_screen.dart).
+  static const UiCopy practiceFooterOn = (
+    'Stop for pain, numbness or tingling. Audio is processed on this device and not sent. "Listen to my own recording" is on: this run is kept on this device until the next run or until you leave the lesson.',
+    'Ağrı, uyuşma ya da karıncalanmada dur. Ses bu cihazda işlenir, gönderilmez. "Kendi kaydımı dinle" açık: bu tur, sonraki tura ya da dersten çıkana kadar bu cihazda tutulur.',
+  );
+
   static const List<UiCopy> all = [
     settingTitle,
     settingBody,
@@ -36,5 +43,6 @@ abstract final class OwnRecordingCopy {
     listen,
     pause,
     playFailed,
+    practiceFooterOn,
   ];
 }
