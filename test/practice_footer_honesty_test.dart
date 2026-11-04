@@ -83,17 +83,23 @@ void main() {
           ),
         ),
       );
-      await tester.runAsync(() => Future<void>.delayed(Duration.zero));
-      await tester.pump();
+      // `_prepareOwnRecording` sweeps the temp folder with real file I/O
+      // before it reads the setting; one event-loop turn was enough on macOS
+      // but not on the CI runner. Wait (bounded) until the footer settles.
+      final expected = on ? OwnRecordingCopy.practiceFooterOn.$1 : _off;
+      for (var i = 0; i < 100; i++) {
+        await tester.runAsync(
+          () => Future<void>.delayed(const Duration(milliseconds: 20)),
+        );
+        await tester.pump();
+        if (on && find.text(expected).evaluate().isNotEmpty) break;
+      }
       if (on) {
         expect(find.text(OwnRecordingCopy.practiceFooterOn.$1), findsOneWidget);
         expect(find.text(_off), findsNothing);
       } else {
         expect(find.text(_off), findsOneWidget);
-        expect(
-          find.text(OwnRecordingCopy.practiceFooterOn.$1),
-          findsNothing,
-        );
+        expect(find.text(OwnRecordingCopy.practiceFooterOn.$1), findsNothing);
       }
       await tester.pumpWidget(const SizedBox());
     });
