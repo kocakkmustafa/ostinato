@@ -8646,6 +8646,12 @@
     "6c97155e72ce3d9e": "Dostęp do kamery jest wyłączony. Możesz go włączyć w Ustawieniach albo użyć listy kontrolnej bez kamery.",
     "641ed9591380c542": "Nie udało się uruchomić kamery. Możesz użyć listy kontrolnej bez kamery.",
     "b3be97005b4d6a12": "Który numer ma zaznaczony palec ręki dociskającej struny?",
-    "fc7aed39b6745151": "Najpierw zalicz pytania; potem lekcję można oznaczyć jako zrobioną."
+    "fc7aed39b6745151": "Najpierw zalicz pytania; potem lekcję można oznaczyć jako zrobioną.",
+    "0e55fe374ae8b04b": "Lustro z kamery",
+    "916f36320a96b3fc": "Gdy utrzymujesz pozycję, przednia kamera pokazuje twoje dłonie jak lustro. Nie podpowiada i nie wystawia ocen. Obraz zostaje na tym urządzeniu; nie jest nagrywany ani wysyłany.",
+    "03e5a18b5dc29a85": "Otwórz lustro",
+    "5b66359f28c4bc4e": "Ta lekcja ma lustro z kamery dla twoich dłoni. Lustro nie podpowiada: zaznacz listę kontrolną samodzielnie; lekcja zapisuje się jako zgłoszona przez ciebie.",
+    "f020778e0b288423": "Lista kontrolna · lustro z kamery",
+    "ecba641ec2903315": "Lustro włączone · porównaj dłonie z listą kontrolną."
   }
 }

@@ -19,6 +19,8 @@ import '../../ostinato_release_policy.dart';
 import '../camera/camera_hold_screen.dart';
 import '../camera/camera_lesson.dart';
 import '../camera/camera_lesson_copy.dart';
+import '../camera/mirror_camera.dart';
+import '../camera/mirror_hold_screen.dart';
 import 'package:ostinato_posture/ostinato_posture.dart' show PoseSource;
 import '../../test_flow/test_flow_copy.dart';
 import '../../test_flow/test_flow_screen.dart';
@@ -49,6 +51,7 @@ class V1LessonReaderScreen extends StatefulWidget {
     this.testFlow,
     this.cameraLessonsOpen = ostinatoCameraLessonsOpen,
     this.cameraSource,
+    this.mirrorCamera,
   });
 
   final V1CourseLesson lesson;
@@ -68,6 +71,9 @@ class V1LessonReaderScreen extends StatefulWidget {
 
   /// The camera lesson's pose source; defaults to the device camera.
   final PoseSource Function()? cameraSource;
+
+  /// The hand lesson's mirror camera; defaults to the device front camera.
+  final MirrorCamera Function()? mirrorCamera;
 
   @override
   State<V1LessonReaderScreen> createState() => _V1LessonReaderScreenState();
@@ -253,6 +259,8 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
     _ when _singingAlternative => DrillCopy.bannerSingingAlternative,
     V1LessonAvailability.selfCheck => V1CourseCopy.bannerSelfCheck,
     V1LessonAvailability.selfCheckLesson => V1CourseCopy.bannerSelfCheckLesson,
+    V1LessonAvailability.camera when _camera?.part == CameraPart.mirror =>
+      CameraLessonCopy.mirrorBanner,
     V1LessonAvailability.camera when _camera != null =>
       CameraLessonCopy.bannerHint,
     V1LessonAvailability.camera => V1CourseCopy.bannerCamera,
@@ -407,23 +415,49 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
                 ),
               ]),
             if (_camera case final camera?)
-              section(uiText(context, CameraLessonCopy.section), [
-                Text(uiText(context, CameraLessonCopy.intro), style: body),
-                const SizedBox(height: 8),
-                FilledButton.icon(
-                  key: const Key('v1-reader-camera'),
-                  onPressed: () => unawaited(
-                    openCameraHold(
-                      context,
-                      title: lesson.title.of(context),
-                      holdSeconds: camera.holdSeconds,
-                      source: widget.cameraSource,
+              switch (camera.part) {
+                CameraPart.trunkHint =>
+                  section(uiText(context, CameraLessonCopy.section), [
+                    Text(uiText(context, CameraLessonCopy.intro), style: body),
+                    const SizedBox(height: 8),
+                    FilledButton.icon(
+                      key: const Key('v1-reader-camera'),
+                      onPressed: () => unawaited(
+                        openCameraHold(
+                          context,
+                          title: lesson.title.of(context),
+                          holdSeconds: camera.holdSeconds,
+                          source: widget.cameraSource,
+                        ),
+                      ),
+                      icon: const Icon(Icons.videocam_outlined),
+                      label: Text(uiText(context, CameraLessonCopy.start)),
                     ),
-                  ),
-                  icon: const Icon(Icons.videocam_outlined),
-                  label: Text(uiText(context, CameraLessonCopy.start)),
-                ),
-              ]),
+                  ]),
+                CameraPart.mirror =>
+                  section(uiText(context, CameraLessonCopy.mirrorSection), [
+                    Text(
+                      uiText(context, CameraLessonCopy.mirrorIntro),
+                      style: body,
+                    ),
+                    const SizedBox(height: 8),
+                    FilledButton.icon(
+                      key: const Key('v1-reader-mirror'),
+                      onPressed: () => unawaited(
+                        openMirrorHold(
+                          context,
+                          title: lesson.title.of(context),
+                          holdSeconds: camera.holdSeconds,
+                          camera: widget.mirrorCamera,
+                        ),
+                      ),
+                      icon: const Icon(Icons.videocam_outlined),
+                      label: Text(
+                        uiText(context, CameraLessonCopy.mirrorStart),
+                      ),
+                    ),
+                  ]),
+              },
             if (lesson.referenceAudio.kinds.isNotEmpty && !_isTuner)
               section(uiText(context, V1CourseCopy.readerReference), [
                 if (_referenceScore case final score?)
