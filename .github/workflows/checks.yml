@@ -28,7 +28,9 @@ jobs:
     # kanıtlamak + GitHub'da herkese görünür bir durum üretmek. Bu bilinçli
     # bir sapma — sessizce değil, adıyla.
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    # 12 → 18 (2026-11-04): yüzey dürüstlüğü adımı ~2-3 dk ekler; iş
+    # main'de 8 dk 20 sn sürüyordu.
+    timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
 
