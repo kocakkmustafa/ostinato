@@ -11,6 +11,11 @@
 //  * Dart tarafı gelen parçanın hızını 44.1/48 ile SINIRLAMAZ (yalnız >0);
 //    o denetim native'dedir. Bu dosya o boşluğu kapatmaz, yalnız belgeler.
 //
+// NOT: 44,1/48 kHz reddi bu testte `FakeAudioCaptureChannel.
+// supportedSampleRates` ve controller katmanında sınanır;
+// `MethodChannelAudioCaptureChannel._start` hızı doğrulamaz, native
+// (Kotlin/Swift) doğrular — native davranış TEST_ONLY kapsam dışıdır.
+//
 // TEST_ONLY: sentetik loopback + sahte kanal; gerçek cihazda ölçüm yapılmadı.
 import 'dart:math' as math;
 import 'dart:typed_data';

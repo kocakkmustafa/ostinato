@@ -11,6 +11,13 @@
 // Kendi-kaydım davranışının ayrıntıları `own_recording_test.dart`ta; burada
 // yalnız ağ-yokluğu penceresi altında tekrar koşturulur (kopya değil).
 //
+// SINIRLAR: çalışma zamanı kapısı yalnız `HttpClient` ve
+// `Socket.connect/startConnect` çağrılarını yakalar; `RawSocket`,
+// `RawDatagramSocket`, `InternetAddress.lookup`, `HttpServer`, `Process`
+// yakalanmaz. `Isolate.run` ile açılan izolatlarda override YOKTUR. Statik
+// kapı yalnız doğrudan (package:/dart:) içe aktarmaları görür; göreli
+// içe aktarmaları izlemez.
+//
 // TEST_ONLY: cihaz-üstü ağ yakalama (proxy/pcap) yapılmadı. Bu dosya Dart
 // işlem içi `dart:io` çağrılarını ve kaynak metnini denetler; native
 // (Swift/Kotlin) katmanı ve üçüncü taraf eklentilerin kendi trafiği KAPSAM
@@ -244,13 +251,15 @@ void main() {
       r'package:dio/|package:web_socket_channel/|package:web_socket/|'
       r'package:supabase|package:motion_account/|package:motion_core/|'
       r'package:firebase|package:cronet|package:cupertino_http|'
-      r'package:url_launcher/|package:in_app_purchase|package:purchases_)',
+      r'package:url_launcher/|package:in_app_purchase|package:purchases_|'
+      r'package:webview|package:connectivity|package:grpc|package:sentry)',
       multiLine: true,
     );
     // Forbidden tokens in code (comments stripped).
     final forbiddenToken = RegExp(
       r'\bHttpClient\b|\bHttpOverrides\b|\bSocket\.|\bRawSocket\b|'
       r'\bWebSocket\b|\bServerSocket\b|\bSupabase\b|\bDio\b|'
+      r'\bRawDatagramSocket\b|\bSecureSocket\b|\bHttpServer\b|\bProcess\.|'
       r'''Uri\.parse\(\s*['"]https?:|['"]https?://''',
     );
 
@@ -324,6 +333,27 @@ void main() {
           "final u = 'https://example.com';";
       expect(forbiddenImport.hasMatch(bad), isTrue);
       expect(forbiddenToken.hasMatch(bad), isTrue);
+      for (final pkg in [
+        'webview_flutter',
+        'connectivity_plus',
+        'grpc',
+        'sentry_flutter',
+      ]) {
+        expect(
+          forbiddenImport.hasMatch("import 'package:$pkg/$pkg.dart';"),
+          isTrue,
+          reason: pkg,
+        );
+      }
+      for (final t in [
+        'RawDatagramSocket.bind(a, 1)',
+        'SecureSocket.connect(h, 1)',
+        'RawSocket.connect(h, 1)',
+        'HttpServer.bind(a, 1)',
+        'Process.run(c, [])',
+      ]) {
+        expect(forbiddenToken.hasMatch(t), isTrue, reason: t);
+      }
       expect(
         forbiddenToken.hasMatch('// HttpClient only in a comment'),
         isTrue,
