@@ -2,6 +2,8 @@
 // OST-P0-03: onset/tempo ölçümü — SENTETİK, tohumlu corpus (TEST_ONLY).
 // Üretim DSP'si: OnsetDetector + MetronomeAligner. Hiçbir şey ağdan gelmez.
 // Ölçülen sayılar `[OST-P0-03]` önekiyle stdout'a yazılır; rapor bunlardan.
+import 'dart:math' as math;
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato_audio/ostinato_audio.dart';
 
@@ -208,6 +210,46 @@ void main() {
       expect(m.missed, 0);
       expect(report.matchedBeats, report.totalBeats);
       expect(report.medianMs, lessThan(40));
+    });
+  });
+
+  group('vuruş başına rastgele jitter (seed\'li, ±25 ms düzgün dağılım)', () {
+    test('onset hatası jitter\'dan bağımsız; aligner yayılımı geri bulur', () {
+      final a = _Agg();
+      final spreads = <double>[];
+      for (final bpm in bpms) {
+        for (final seed in [1, 2, 3]) {
+          final rng = math.Random(seed * 1000 + bpm);
+          final jitter = <int, double>{
+            for (var b = 0; b < 8; b++) b: (rng.nextDouble() * 2 - 1) * 25,
+          };
+          final c = buildRhythm(
+              bpm: bpm, render: _render, shiftMsByBeat: jitter);
+          final det =
+              _detector.detect(c.samples, sampleRate: _sr, tStartUs: 0);
+          a.add(c, det.map((o) => o.tUs).toList());
+          final rep = const MetronomeAligner()
+              .align(onsets: det, beatTimesUs: c.gridUs);
+          expect(rep.matchedBeats, rep.totalBeats);
+          // Planlanan işaretli jitter ile aligner'ın işaretli sapması
+          // (yanlılık çıkarılmış) arasındaki fark.
+          final planned = jitter.values.toList()..sort();
+          final got = rep.deviations.map((d) => d.deviationMs).toList()
+            ..sort();
+          for (var i = 0; i < 8; i++) {
+            spreads.add((got[i] - planned[i]).abs());
+          }
+        }
+      }
+      print(a.line('jitter ±25ms (9 koşu)'));
+      final resid = percentile(spreads, 0.95);
+      print('[OST-P0-03] jitter: sıralı sapma − planlanan |fark| p95='
+          '${resid.toStringAsFixed(1)} ms (sabit ~7-8 ms erken yanlılık dahil)');
+      expect(a.missed, 0);
+      expect(a.extra, 0);
+      expect(percentile(a.errs.map((e) => e.abs()).toList(), 0.95),
+          lessThanOrEqualTo(13));
+      expect(resid, lessThanOrEqualTo(13));
     });
   });
 

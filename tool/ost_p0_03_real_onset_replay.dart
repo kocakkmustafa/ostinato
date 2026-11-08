@@ -7,10 +7,13 @@
 // (6 tel birleşik); aynı strum içindeki notalar [clusterMs] içinde tek olaya
 // birleştirilir ve olayın İLK nota zamanı referans alınır.
 // Bu kayıtlar POLİFONİK eşliktir (monofonik değil) ve cihaz mikrofonu değildir.
-// Ham ses yoksa (fetch koşulmadıysa) isimli olarak çıkar.
+//
+// ÖNKOŞUL: `python3 tool/fetch_guitarset_fixtures.py` (SHA-256 pinli indirme).
+// Bu betik her ham dosyanın SHA-256'sını fetch betiğindeki pinlerle (tek
+// kaynak: o dosyanın `"dest"` / `"sha256"` çiftleri) KENDİSİ doğrular; dosya
+// yoksa veya özet uyuşmazsa çıkış kodu != 0 olur ve ölçüm yapılmaz.
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math' as math;
 
 import 'package:ostinato_audio/ostinato_audio.dart';
 
@@ -24,23 +27,59 @@ const tracks = [
   '00_Jazz2-110-Bb_comp',
 ];
 
+/// fetch_guitarset_fixtures.py'deki `dest` -> `sha256` pinleri (tek kaynak).
+Map<String, String> loadPins() {
+  final src = File('tool/fetch_guitarset_fixtures.py').readAsStringSync();
+  final re = RegExp(r'"dest":\s*"([^"]+)",\s*"sha256":\s*"([0-9a-f]{64})"');
+  return {for (final m in re.allMatches(src)) m.group(1)!: m.group(2)!};
+}
+
+/// `shasum -a 256` (macOS) ile ham dosyayı doğrular; sorun varsa false.
+bool verifySha(File f, String expected) {
+  final r = Process.runSync('shasum', ['-a', '256', f.path]);
+  if (r.exitCode != 0) return false;
+  return (r.stdout as String).split(' ').first == expected;
+}
+
 double pct(List<double> v, double p) {
   final s = List<double>.from(v)..sort();
   return s.isEmpty ? double.nan : s[((s.length - 1) * p).round()];
 }
 
+String f1(double v) => v.isNaN ? 'NA' : v.toStringAsFixed(1);
+
+double meanOf(List<double> v) =>
+    v.isEmpty ? double.nan : v.reduce((a, b) => a + b) / v.length;
+
 void main() {
   const detector = OnsetDetector();
+  final pins = loadPins();
+  for (final t in tracks) {
+    for (final name in ['guitarset_${t}_mic.wav', 'guitarset_$t.jams']) {
+      final f = File('fixtures/audio-real/raw/$name');
+      final pin = pins[name];
+      if (!f.existsSync()) {
+        stderr.writeln('[OST-P0-03-real] HATA: $name yok - önce '
+            'python3 tool/fetch_guitarset_fixtures.py koşulmalı.');
+        exitCode = 2;
+        return;
+      }
+      if (pin == null || !verifySha(f, pin)) {
+        stderr.writeln('[OST-P0-03-real] HATA: $name SHA-256 pin '
+            'uyuşmazlığı veya pin yok - ölçüm yapılmadı.');
+        exitCode = 3;
+        return;
+      }
+    }
+  }
+  stdout.writeln('[OST-P0-03-real] ham dosyalar SHA-256 pinleriyle doğrulandı '
+      '(${tracks.length * 2}/${tracks.length * 2}).');
+
   final allErr = <double>[];
   var truthTotal = 0, missedTotal = 0, extraTotal = 0;
   for (final t in tracks) {
     final wav = File('fixtures/audio-real/raw/guitarset_${t}_mic.wav');
     final jams = File('fixtures/audio-real/raw/guitarset_$t.jams');
-    if (!wav.existsSync() || !jams.existsSync()) {
-      stdout.writeln('[OST-P0-03-real] $t atlandı: ham dosya yok '
-          '(python3 tool/fetch_guitarset_fixtures.py koşulmadı)');
-      continue;
-    }
     final pcm = PcmWav.readFile(wav.path);
     final samples = pcm.toMono();
     final ann = jsonDecode(jams.readAsStringSync()) as Map<String, dynamic>;
@@ -57,6 +96,11 @@ void main() {
       if (truthMs.isEmpty || s * 1000 - truthMs.last > clusterMs) {
         truthMs.add(s * 1000);
       }
+    }
+    if (truthMs.isEmpty) {
+      stderr.writeln('[OST-P0-03-real] HATA: $t için referans olay yok.');
+      exitCode = 4;
+      return;
     }
     final det = detector
         .detect(samples, sampleRate: pcm.sampleRate, tStartUs: 0)
@@ -87,10 +131,8 @@ void main() {
     final abs = errs.map((e) => e.abs()).toList();
     stdout.writeln('[OST-P0-03-real] $t süre=${(samples.length / pcm.sampleRate).toStringAsFixed(1)}s '
         'referans=${truthMs.length} tespit=${det.length} '
-        'hata_ms: med=${pct(abs, .5).toStringAsFixed(1)} '
-        'p95=${pct(abs, .95).toStringAsFixed(1)} '
-        'ort=${(abs.reduce((a, b) => a + b) / math.max(1, abs.length)).toStringAsFixed(1)} '
-        'yanlılık(işaretli med)=${pct(errs, .5).toStringAsFixed(1)} '
+        'hata_ms: med=${f1(pct(abs, .5))} p95=${f1(pct(abs, .95))} '
+        'ort=${f1(meanOf(abs))} yanlılık(işaretli med)=${f1(pct(errs, .5))} '
         'kaçan=${(100 * missed / truthMs.length).toStringAsFixed(1)}% '
         'fazla=${(100 * extra / truthMs.length).toStringAsFixed(1)}%');
     allErr.addAll(errs);
@@ -98,13 +140,10 @@ void main() {
     missedTotal += missed;
     extraTotal += extra;
   }
-  if (truthTotal > 0) {
-    final abs = allErr.map((e) => e.abs()).toList();
-    stdout.writeln('[OST-P0-03-real] TOPLAM referans=$truthTotal '
-        'hata_ms: med=${pct(abs, .5).toStringAsFixed(1)} '
-        'p95=${pct(abs, .95).toStringAsFixed(1)} '
-        'yanlılık=${pct(allErr, .5).toStringAsFixed(1)} '
-        'kaçan=${(100 * missedTotal / truthTotal).toStringAsFixed(1)}% '
-        'fazla=${(100 * extraTotal / truthTotal).toStringAsFixed(1)}%');
-  }
+  final abs = allErr.map((e) => e.abs()).toList();
+  stdout.writeln('[OST-P0-03-real] TOPLAM referans=$truthTotal '
+      'hata_ms: med=${f1(pct(abs, .5))} p95=${f1(pct(abs, .95))} '
+      'yanlılık=${f1(pct(allErr, .5))} '
+      'kaçan=${(100 * missedTotal / truthTotal).toStringAsFixed(1)}% '
+      'fazla=${(100 * extraTotal / truthTotal).toStringAsFixed(1)}%');
 }

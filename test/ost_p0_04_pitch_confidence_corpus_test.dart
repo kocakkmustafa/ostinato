@@ -2,11 +2,14 @@
 // OST-P0-04: monofonik pitch + güven + "duyamadım" (hüküm yok) — SENTETİK,
 // tohumlu corpus (TEST_ONLY). Üretim DSP'si: GuitarSingleNoteEvaluator
 // (config/guitar-single-note-gate.v1.json, dosyadan okunur), YinPitchSource ve
-// AudioConfidenceGate. Ölçümler `[OST-P0-04]` önekiyle stdout'a yazılır.
+// AudioConfidenceGate; ÜRÜN YOLU = GuitarPitchObserver + assets/config/
+// guitar-observation.v2.json (controller'ın kurduğu gibi). Ölçümler `[OST-P0-04]` önekiyle stdout'a yazılır.
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/audio/guitar_note_observation_controller.dart'
+    show GuitarObservationConfig;
 import 'package:ostinato_audio/ostinato_audio.dart';
 
 import 'ost_p0_03_04_corpus.dart';
@@ -210,7 +213,7 @@ void main() {
         () {
       const gate = AudioConfidenceGate();
       final yin = YinPitchSource();
-      var judged = 0, total = 0;
+      var judged = 0, total = 0, judgedFixed = 0, periodicRefused = 0;
       for (final kind in NoiseKind.values) {
         for (final seed in [1, 2, 3, 4]) {
           final n = unitNoise(kind, 4096, seed: seed)
@@ -220,11 +223,22 @@ void main() {
           final g = gate.evaluate(rd, roomFloorDb: rmsDbOf(n) - 0.0);
           total++;
           if (g.mayJudge) judged++;
+          // Bağımsız −60 dBFS taban: seviye kapısı geçilir, periyodiklik
+          // yolu sınanır.
+          final g60 = gate.evaluate(rd, roomFloorDb: -60);
+          if (g60.mayJudge) judgedFixed++;
+          if (g60.reason == AudioGateReason.notPeriodic) periodicRefused++;
         }
       }
       print('[OST-P0-04] AudioConfidenceGate gürültü-only: '
-          'mayJudge=$judged/$total');
+          'taban=pencere RMS → mayJudge=$judged/$total; '
+          'taban=-60 dBFS → mayJudge=$judgedFixed/$total, '
+          'notPeriodic ret=$periodicRefused/$total');
       expect(judged, 0);
+      expect(judgedFixed, 0);
+      expect(periodicRefused, total,
+          reason: 'taban -60 iken seviye kapısı geçer; ret nedeni '
+              'periyodiklik olmalı');
     });
 
     test('yankı: nota üzerine seyrek-IR yankı (RT60 0.6 s) — yanlış hüküm',
@@ -268,7 +282,8 @@ void main() {
       expect(t.wrongRate, lessThanOrEqualTo(_b['tailWrong']!));
     });
 
-    test('çok sesli: akor + güç akoru/dyad — tek-nota hükmü ölçümü', () {
+    test('KARAKTERİZASYON (korumasız iç katman davranışı; doğru DEĞİL): '
+        'çok sesli sette GuitarSingleNoteEvaluator tek-nota hükmü', () {
       final t = _Tally();
       final wrongCases = <String>[];
       void run(String label, List<int> notes, double spread) {
@@ -296,27 +311,13 @@ void main() {
       print(t.line('çok sesli (16 akor + 12 dyad)'));
       print('[OST-P0-04] çok sesli yanlış hükümler: '
           '${wrongCases.isEmpty ? 'yok' : wrongCases.join(' | ')}');
-      // Karakterizasyon (BULGU, düzeltme bu PR'da değil): ölçülen yanlış hüküm
-      // sayısını sabitler; artarsa kırılır.
+      // Korumasız iç katman (evaluator) — üründe bu katmanın ÜSTÜNDE
+      // GuitarPitchObserver'ın artık-enerji koruması var (aşağıdaki grup).
+      // Sayı ölçülen değere SABİTLENDİ: katman değişip sayı oynarsa test
+      // kırılır ve bilinçli güncelleme ister.
       expect(t.n, 28);
-      expect(t.wrong, lessThanOrEqualTo(_b['polyWrongMax']!.toInt()));
+      expect(t.wrong, equals(10));
     });
-
-    test('BULGU (ENGEL): D majör akor (D3 A3 D4 F#4) tek-nota hükmü almamalı',
-        () {
-      final x = SyntheticTone.chord(
-          midiNotes: SyntheticTone.openGuitarChords['D']!,
-          sampleRate: _sr,
-          seconds: 1.5,
-          strumSpreadSeconds: 0.0);
-      final r = ev.observe(_slice(x),
-          sampleRate: _sr, tStartUs: 0, roomFloorDb: -60);
-      expect(r.observation, isNull,
-          reason: 'Üretim evaluator\'ı akor için bir nota hükmü veriyor '
-              '(GuitarSingleNoteReason.multipleSources tanımlı ama kullanılmıyor).');
-    },
-        skip: 'ENGEL: üretim boşluğu — çok sesli sinyalde yanlış nota '
-            'hükmü; düzeltme bu PR kapsamı dışı (OST-P0-04 raporu §Bulgu).');
 
     test('atak penceresi ve koç sesi: hüküm yok', () {
       final slice = _slice(_note(40, 0));
@@ -334,6 +335,110 @@ void main() {
     });
   });
 
+  group('ÜRÜN YOLU: GuitarPitchObserver + guitar-observation.v2.json', () {
+    final cfg = GuitarObservationConfig.fromJson(
+        jsonDecode(File('assets/config/guitar-observation.v2.json')
+            .readAsStringSync()) as Map<String, dynamic>);
+    final obs = GuitarPitchObserver(config: cfg.pitch, guard: cfg.guard);
+    // Ürün penceresi: practice.windowSamples (8192). Corpus tepe=1,0'a
+    // normalize edildiği için kırpma korumasını yanlış tetiklemesin diye
+    // 0,5 tepe seviyesine ölçeklenir (gerçek mikrofon tam ölçeğe vurmaz).
+    GuitarNoteObservationResult observe(List<double> x, {double floor = -60}) =>
+        obs.observe(
+            x.take(cfg.windowSamples).map((v) => v * 0.5).toList(),
+            sampleRate: _sr,
+            tStartUs: 0,
+            roomFloorDb: floor);
+
+    test('çok sesli set (16 akor + 12 dyad): yanlış tek-nota hükmü', () {
+      var refused = 0, wrong = 0;
+      final reasons = <String, int>{};
+      final wrongCases = <String>[];
+      void run(String label, List<int> notes, double spread) {
+        final x = SyntheticTone.chord(
+            midiNotes: notes,
+            sampleRate: _sr,
+            seconds: 1.5,
+            strumSpreadSeconds: spread);
+        final r = observe(_slice(x));
+        if (r.observation == null) {
+          refused++;
+          reasons[r.reason.name] = (reasons[r.reason.name] ?? 0) + 1;
+        } else {
+          wrong++;
+          wrongCases.add('$label(spread=$spread)→midi ${r.observation!.midi}');
+        }
+      }
+
+      for (final spread in [0.0, 0.025]) {
+        SyntheticTone.openGuitarChords
+            .forEach((name, notes) => run(name, notes, spread));
+        for (final root in guitarOpenStrings.values) {
+          run('dyad${root}_${root + 7}', [root, root + 7], spread);
+        }
+      }
+      print('[OST-P0-04] ÜRÜN YOLU çok sesli n=28 duyamadım=$refused '
+          'yanlış_hüküm=$wrong nedenler=$reasons '
+          '${wrongCases.isEmpty ? '' : wrongCases.join(' | ')}');
+      expect(refused + wrong, 28);
+      expect(wrong, 0, reason: wrongCases.join(' | '));
+    });
+
+    test('temiz monofonik set ürün yolunda da doğru (koruma aşırı ret yapmıyor)',
+        () {
+      final t = _Tally();
+      guitarOpenStrings.forEach((name, midi) {
+        for (final c in centsSet) {
+          for (final seed in [1, 2]) {
+            final r = observe(_slice(_note(midi, c, seed: seed)));
+            final o = r.observation;
+            if (o == null) {
+              t.add(_Outcome.noVerdict);
+            } else if (o.midi != midi ||
+                (o.centsFromCenter - c).abs() > 10) {
+              t.add(_Outcome.wrong);
+            } else {
+              t.centErr.add(o.centsFromCenter - c);
+              t.add(_Outcome.correct);
+            }
+          }
+        }
+      });
+      print(t.line('ÜRÜN YOLU temiz E2–E4 ±0/10/30¢'));
+      expect(t.wrong, 0);
+      expect(t.correctRate, greaterThanOrEqualTo(_b['obsCleanCorrect']!));
+    });
+
+    test('±40/±50 cent: merkez belirsiz → hüküm yok, yanlış nota hükmü yok',
+        () {
+      // maxCenterErrorCents = 35: en yakın nota merkezine >35¢ uzaklık
+      // ambiguousCenter ile reddedilmeli.
+      final results = <String, _Tally>{};
+      for (final c in [40.0, -40.0, 50.0, -50.0]) {
+        final t = results.putIfAbsent('${c.toInt()}', _Tally.new);
+        guitarOpenStrings.forEach((name, midi) {
+          final o = observe(_slice(_note(midi, c))).observation;
+          if (o == null) {
+            t.add(_Outcome.noVerdict);
+          } else {
+            // Hüküm varsa ölçülen frekans planlanan frekansa uymalı
+            // (komşu nota merkezine göre doğru cent), aksi yanlış.
+            final planned = hzWithCents(midi, c);
+            final observedHz = o.hz;
+            t.add(centsBetween(observedHz, planned).abs() <= 10
+                ? _Outcome.correct
+                : _Outcome.wrong);
+          }
+        });
+        print(t.line('ÜRÜN YOLU sapma ${c.toInt()}¢ (6 tel)'));
+        expect(t.wrong, 0, reason: '${c.toInt()}¢');
+      }
+      // 40¢ sapma 35¢ sınırını aşar → hepsi duyamadım.
+      expect(results['40']!.noVerdict, 6);
+      expect(results['-40']!.noVerdict, 6);
+    });
+  });
+
   test('corpus deterministik', () {
     expect(_note(40, 10, seed: 5), _note(40, 10, seed: 5));
     expect(whiteNoise(100, seed: 1), whiteNoise(100, seed: 1));
@@ -348,7 +453,7 @@ class _NB {
 
 // Eşikler 2026-11-08 ölçümünden türetildi (`[OST-P0-04]` satırları): ölçülen
 // değere yakın, yanlış-hüküm tavanları 0. Regresyon bekçisi; başarı iddiası
-// DEĞİL (sentetik, TEST_ONLY). polyWrongMax = ölçülen 10 (BULGU, rapora bkz.).
+// DEĞİL (sentetik, TEST_ONLY). 
 const _b = <String, double>{
   'cleanCorrect': 0.95,
   'cleanWrong': 0,
@@ -357,7 +462,7 @@ const _b = <String, double>{
   'silenceNoVerdict': 1.0,
   'echoWrong': 0,
   'tailWrong': 0,
-  'polyWrongMax': 10,
+  'obsCleanCorrect': 0.95,
 };
 const _noiseBounds = <String, _NB>{
   'white20': _NB(correct: 0.95, wrong: 0),
