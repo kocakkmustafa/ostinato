@@ -1,10 +1,12 @@
 // OST-P0-05 — the first-three-minutes flow (behind a closed flag): three
 // choices, tapping asks for NO microphone permission, voice path permission
 // outcomes, honest summary, no network, flag-off behaviour unchanged.
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/app_theme.dart';
@@ -13,6 +15,7 @@ import 'package:ostinato/app/audio/practice_audio_lease.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
+import 'package:ostinato/app/first_minutes/first_minutes_controller.dart';
 import 'package:ostinato/app/first_minutes/first_minutes_copy.dart';
 import 'package:ostinato/app/first_minutes/first_three_minutes_screen.dart';
 import 'package:ostinato/app/onboarding_store.dart';
@@ -66,6 +69,7 @@ void main() {
   var clockUs = 0;
   var library = 0;
   var micStatusCalls = 0;
+  var channelCalls = <String>[];
   var micRequestCalls = 0;
   var micStatus = PermissionStatus.denied;
   var micAfterRequest = PermissionStatus.denied;
@@ -80,6 +84,23 @@ void main() {
     clockUs = 0;
     library = 0;
     micStatusCalls = 0;
+    channelCalls = <String>[];
+    // The real platform permission channel: any call to it is recorded.
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+          const MethodChannel('flutter.baseflow.com/permissions/methods'),
+          (call) async {
+            channelCalls.add(call.method);
+            return call.method == 'checkPermissionStatus' ? 0 : <int, int>{};
+          },
+        );
+    addTearDown(
+      () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(
+            const MethodChannel('flutter.baseflow.com/permissions/methods'),
+            null,
+          ),
+    );
     micRequestCalls = 0;
     micStatus = PermissionStatus.denied;
     micAfterRequest = PermissionStatus.denied;
@@ -178,6 +199,7 @@ void main() {
     // The microphone seam was never touched on this path.
     expect(micStatusCalls, 0);
     expect(micRequestCalls, 0);
+    expect(channelCalls, isEmpty, reason: 'no platform permission call');
     // Take playback comes from memory through the same output path.
     await t.ensureVisible(find.byKey(const Key('fm-listen-0')));
     await t.tap(find.byKey(const Key('fm-listen-0')));
@@ -189,6 +211,7 @@ void main() {
     await t.tap(find.byKey(const Key('fm-summary-library')));
     expect(library, 1);
     expect(micStatusCalls + micRequestCalls, 0);
+    expect(channelCalls, isEmpty);
     expect(t.takeException(), isNull);
   });
 
@@ -225,6 +248,20 @@ void main() {
     await t.tap(find.byKey(const Key('fm-unavailable-library')));
     expect(library, 1);
   });
+
+  test(
+    'disposing while the permission answer is pending does not throw',
+    () async {
+      final gate = Completer<PermissionStatus>();
+      MicPermissionGate.status = () => gate.future;
+      final c = FirstMinutesController();
+      final done = c.requestVoice();
+      c.dispose();
+      gate.complete(PermissionStatus.granted);
+      await done;
+      expect(c.voiceBusy, isFalse);
+    },
+  );
 
   testWidgets('Use your voice: granted', (t) async {
     micAfterRequest = PermissionStatus.granted;

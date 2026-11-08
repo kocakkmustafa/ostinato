@@ -76,6 +76,14 @@ final class FirstMinutesController extends ChangeNotifier {
     _listen.addListener(_onListen);
   }
 
+  bool _disposed = false;
+
+  @override
+  void notifyListeners() {
+    if (_disposed) return;
+    super.notifyListeners();
+  }
+
   static final Stopwatch _clock = Stopwatch()..start();
   static int _stopwatchUs() => _clock.elapsedMicroseconds;
 
@@ -237,6 +245,7 @@ final class FirstMinutesController extends ChangeNotifier {
 
   @override
   void dispose() {
+    _disposed = true;
     _listen.removeListener(_onListen);
     _listen.dispose();
     super.dispose();

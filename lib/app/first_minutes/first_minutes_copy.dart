@@ -17,10 +17,13 @@ abstract final class FirstMinutesCopy {
     'Tap along with a beat. It works with touch alone.',
     'Bir ritme eşlik ederek dokun. Yalnızca dokunuşla çalışır.',
   );
-  static const UiCopy voiceTitle = ('Use your voice', 'Sesini kullan');
+  static const UiCopy voiceTitle = (
+    'Clap lessons with the microphone',
+    'Mikrofonla alkış dersleri',
+  );
   static const UiCopy voiceBody = (
-    'Clap or hum so the microphone can hear you. We ask first.',
-    'Mikrofonun seni duyması için alkışla ya da mırılda. Önce sorarız.',
+    'The clapping lessons in Ear training listen through the microphone. We ask first.',
+    'Kulak eğitimindeki alkış dersleri mikrofonla dinler. Önce sorarız.',
   );
   static const UiCopy instrumentTitle = (
     'I have an instrument',
@@ -74,28 +77,28 @@ abstract final class FirstMinutesCopy {
 
   static const UiCopy summaryTitle = ('You made this', 'Bunu sen yaptın');
   static const UiCopy summarySteady = (
-    'Your taps stayed close to the beat.',
-    'Dokunuşların ritme yakın kaldı.',
+    'Your taps were consistent from one beat to the next.',
+    'Dokunuşların vuruştan vuruşa tutarlıydı.',
   );
   static const UiCopy summaryLoose = (
-    'Your taps moved around the beat a little. That is a human feel, not a mistake.',
-    'Dokunuşların ritmin etrafında biraz gezindi. Bu insani bir his; hata değil.',
+    'Your taps varied a little from beat to beat. Every hand does.',
+    'Dokunuşların vuruştan vuruşa biraz değişti. Her elde böyle olur.',
   );
   static const UiCopy summaryNotMeasured = (
     'I could not measure this one. Try again whenever you like.',
     'Bunu ölçemedim. İstediğin zaman tekrar deneyebilirsin.',
   );
   static const UiCopy compareCloser = (
-    'Your second try sat a little closer to the beat.',
-    'İkinci denemen ritme biraz daha yakın oturdu.',
+    'Your second try was a bit more consistent.',
+    'İkinci denemen biraz daha tutarlıydı.',
   );
   static const UiCopy compareSimilar = (
-    'Both tries felt alike. A steady habit is forming.',
-    'İki deneme birbirine benzedi. Düzenli bir alışkanlık oluşuyor.',
+    'Both tries were about equally consistent.',
+    'İki deneme yaklaşık aynı ölçüde tutarlıydı.',
   );
   static const UiCopy compareLooser = (
-    'Your second try moved more, which is natural with a new pattern.',
-    'Yeni bir kalıpta daha çok hareket etmen doğal; ikinci denemen biraz daha serbest.',
+    'Your second try varied more, which is natural with a new pattern.',
+    'İkinci denemen daha çok değişti; yeni bir kalıpta bu doğal.',
   );
   static const UiCopy compareNone = (
     'I could not compare the two tries this time.',
@@ -116,24 +119,24 @@ abstract final class FirstMinutesCopy {
   static const UiCopy openLibrary = ('Open the library', 'Kütüphaneyi aç');
 
   static const UiCopy voiceExplain = (
-    'To hear you, the app asks your device for the microphone. Audio is processed on this device and is not sent.',
-    'Seni duyabilmek için uygulama cihazından mikrofonu ister. Ses bu cihazda işlenir ve gönderilmez.',
+    'The clapping lessons in Ear training listen to your claps through the microphone. The app asks your device for permission first. Audio is processed on this device and is not sent.',
+    'Kulak eğitimindeki alkış dersleri alkışlarını mikrofonla dinler. Uygulama önce cihazından izin ister. Ses bu cihazda işlenir ve gönderilmez.',
   );
   static const UiCopy voiceAllow = (
     'Allow the microphone',
     'Mikrofona izin ver',
   );
   static const UiCopy voiceGranted = (
-    'The microphone is on. The clapping lessons in Ear training use it; open the library to find them.',
-    'Mikrofon açık. Kulak eğitimindeki alkış dersleri onu kullanır; bulmak için kütüphaneyi aç.',
+    'Microphone permission granted. The clapping lessons in Ear training use it; open the library to find them.',
+    'Mikrofon izni verildi. Kulak eğitimindeki alkış dersleri onu kullanır; bulmak için kütüphaneyi aç.',
   );
   static const UiCopy voiceDenied = (
     'No problem. The microphone stays off and you can do all of this by tapping.',
     'Sorun değil. Mikrofon kapalı kalır, bunların hepsini dokunarak yapabilirsin.',
   );
   static const UiCopy voicePermanent = (
-    'The microphone is turned off for this app in your device settings. You can turn it on there later; tapping works without it.',
-    'Mikrofon, cihaz ayarlarında bu uygulama için kapalı. İstersen sonra oradan açabilirsin; dokunmak için mikrofon gerekmez.',
+    'The microphone is off for this app. On some devices a first refusal stays until you change it in your device settings. Tapping works without it.',
+    'Mikrofon bu uygulama için kapalı. Bazı cihazlarda ilk ret, cihaz ayarlarından değiştirene kadar kalır. Dokunmak için mikrofon gerekmez.',
   );
   static const UiCopy continueTapping = (
     'Continue by tapping',

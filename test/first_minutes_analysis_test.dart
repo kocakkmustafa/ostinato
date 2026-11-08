@@ -63,8 +63,13 @@ void main() {
     );
     expect(far.matched, lessThan(2));
     expect(far.measured, isFalse);
-    // Two taps on four expected beats is exactly the coverage floor (2/4).
-    expect(_m([0, 0]).measured, isTrue);
+    // Two taps always look steady, so two matched taps are not enough.
+    final two = _m([0, 0]);
+    expect(two.matched, 2);
+    expect(two.measured, isFalse);
+    expect(summaryFor(two), FirstMinutesCopy.summaryNotMeasured);
+    // Three matched taps are the minimum that can be read.
+    expect(_m([0, 0, 0]).measured, isTrue);
     // One of four is below it.
     expect(_m([0]).deviationsMs, [0.0, null, null, null]);
   });
@@ -101,12 +106,27 @@ void main() {
     expect(comparisonFor(tight, none), FirstMinutesCopy.compareNone);
   });
 
-  test('no user sentence says wrong, in English or Turkish', () {
+  test('no user sentence judges: no wrong/mistake/error/fail words', () {
+    const en = ['wrong', 'incorrect', 'mistake', 'error', 'fail'];
+    const tr = ['yanlış', 'hata', 'başarısız'];
     for (final c in FirstMinutesCopy.all) {
-      expect(c.$1.toLowerCase(), isNot(contains('wrong')), reason: c.$1);
-      expect(c.$2.toLowerCase(), isNot(contains('yanlış')), reason: c.$2);
-      expect(c.$1.toLowerCase(), isNot(contains('incorrect')));
+      for (final w in en) {
+        expect(c.$1.toLowerCase(), isNot(contains(w)), reason: c.$1);
+      }
+      for (final w in tr) {
+        expect(c.$2.toLowerCase(), isNot(contains(w)), reason: c.$2);
+      }
     }
+  });
+
+  test('a steady constant offset is never called "close to the beat"', () {
+    final late = _m([250, 250, 250, 250]);
+    expect(late.steadiness, TapSteadiness.steady);
+    final line = summaryFor(late);
+    expect(line, FirstMinutesCopy.summarySteady);
+    expect(line.$1.toLowerCase(), isNot(contains('close')));
+    expect(line.$1.toLowerCase(), contains('consistent'));
+    expect(line.$2, isNot(contains('yakın')));
   });
 
   test('every sentence has an id and all 14 catalogs carry it', () {

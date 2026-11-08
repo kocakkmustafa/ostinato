@@ -9,11 +9,14 @@ import 'first_minutes_copy.dart';
 /// disk. The grid comes from the clip the app itself played; the exact moment
 /// the speaker sounded is not known (output latency), so a CONSTANT offset is
 /// reported but never judged: only how steady the taps are (their spread) is
-/// used for the summary. There is no single correct way to tap, and nothing
+/// used for the summary, and the summary says exactly that (consistency),
+/// never "close to the beat", because a steady +250 ms (Bluetooth) is not
+/// close to anything the learner can hear. There is no single correct way to tap, and nothing
 /// here produces a "wrong" verdict.
 
-/// Fewer matched taps than this cannot say anything about steadiness.
-const int kMinMatchedTaps = 2;
+/// Fewer matched taps than this cannot say anything about steadiness (two
+/// taps always look steady). The product asks for four.
+const int kMinMatchedTaps = 3;
 
 /// At least this share of the expected beats must have a tap near it.
 const double kMinTapCoverage = 0.5;
