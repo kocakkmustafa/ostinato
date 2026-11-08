@@ -64,3 +64,12 @@ const MotionTeenPurchasePolicy ostinatoTeenPurchasePolicy =
 /// until the schema, identity and store-label changes are approved; nothing
 /// reads `lib/app/sync/` yet and no network call exists for it.
 const bool ostinatoProgressSyncAvailable = false;
+
+/// OST-P0-05 (founder master instruction 2026-11-08, section 7.4): the "first
+/// three minutes" flow, shown once after the welcome pages: tap the rhythm
+/// (no microphone permission), use your voice (permission asked at the moment
+/// of use, with a blameless return to tapping) or go straight to the library.
+/// Closed by default: while false the first launch is exactly the welcome
+/// pages followed by the library. Rollback: set this to false (or revert the
+/// PR); nothing is stored by the flow, so there is nothing to migrate.
+const bool ostinatoFirstThreeMinutesOpen = false;

@@ -18,6 +18,9 @@ import 'app/onboarding_store.dart';
 import 'app/practice/display/practice_display_preferences.dart';
 import 'app/motion_account_bootstrap.dart';
 import 'app/ostinato_identity_gate.dart';
+import 'app/first_minutes/first_three_minutes_screen.dart';
+import 'app/ostinato_release_policy.dart';
+import 'app/practice/loop/reference_listen.dart' show ReferencePlaybackPort;
 import 'app/screens/library_screen.dart';
 import 'app/screens/onboarding_screen.dart';
 
@@ -373,12 +376,18 @@ class OstinatoHome extends StatefulWidget {
     required this.cueText,
     required this.store,
     required this.alreadyOnboarded,
+    this.firstThreeMinutesOpen = ostinatoFirstThreeMinutesOpen,
+    this.firstMinutesPortBuilder,
   });
 
   final ContentRepository repo;
   final CueTextResolver cueText;
   final OnboardingStore store;
   final bool alreadyOnboarded;
+
+  /// OST-P0-05 flag (closed by default); tests pass it explicitly.
+  final bool firstThreeMinutesOpen;
+  final ReferencePlaybackPort? Function(BuildContext)? firstMinutesPortBuilder;
 
   @override
   State<OstinatoHome> createState() => _OstinatoHomeState();
@@ -391,12 +400,23 @@ class _OstinatoHomeState extends State<OstinatoHome> {
   /// görmemeli.
   bool _finishedThisSession = false;
 
+  /// OST-P0-05: set when the first-three-minutes flow hands over to the library.
+  bool _firstMinutesDone = false;
+
   @override
   Widget build(BuildContext context) {
     // Karşılama `home` İÇİNDE değiştirilir, push edilmez: geri yığınında
     // bırakılan bir onboarding'e kullanıcı geri düğmesiyle DÖNEBİLİR, ve
     // bitirdiği bir akışa dönmek "bitmedi mi?" der.
     if (widget.alreadyOnboarded || _finishedThisSession) {
+      if (widget.firstThreeMinutesOpen &&
+          !widget.alreadyOnboarded &&
+          !_firstMinutesDone) {
+        return FirstThreeMinutesScreen(
+          portBuilder: widget.firstMinutesPortBuilder,
+          onOpenLibrary: () => setState(() => _firstMinutesDone = true),
+        );
+      }
       return LibraryScreen(repo: widget.repo, cueText: widget.cueText);
     }
     return OnboardingScreen(
