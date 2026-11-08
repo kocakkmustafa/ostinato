@@ -1,6 +1,6 @@
 # OST-P0-09 — 20 başlangıç performansı, 5 cihaz ortamı: ölçüm protokolü
 
-Tarih: 2026-11-08 · Taban: `origin/main` `22616a8f3e1172ee1e284874873dcf61065dd2e7` · Durum: **BLOCKED_ACCESS** (yalnız belge) · Durum özeti: [`STATUS.md`](STATUS.md) · Karar kayıtları: [`DECISIONS.md`](DECISIONS.md)
+Tarih: 2026-11-08 · Taban: `origin/main` `22616a8f3e1172ee1e284874873dcf61065dd2e7` (`STATUS.md` ölçüm tabanı eskidir; bu belge main `22616a8` üzerinde yazıldı) · Durum: **BLOCKED_ACCESS** (yalnız belge) · Durum özeti: [`STATUS.md`](STATUS.md) · Karar kayıtları: [`DECISIONS.md`](DECISIONS.md)
 Dayanak: Dört Ürün Ana Talimatı (2026-11-08) §7.2 (sinyal sözleşmesi), §7.4 `OST-P0-09`, §7.5 (doğrulama eşiği), G1/G2 kapıları, §12.3–12.4.
 Kod durumu: **CS** = CONFIRMED_SOURCE (main'de kaynakta var) · **DO** = DOCUMENTED_ONLY (yalnız belgede/ana talimatta tanımlı, main'de doğrulanmadı) · **UK** = UNKNOWN. Bir yüzeyin `CS` olması "çalışıyor" demek değildir; yalnız "kaynakta var, ölçülebilir" demektir.
 
@@ -10,7 +10,7 @@ Kod durumu: **CS** = CONFIRMED_SOURCE (main'de kaynakta var) · **DO** = DOCUMEN
 - Bağımlı biletler (`OST-P0-03` … `OST-P0-08`) **merge sonrası dolacak**: ölçülecek yüzeylerin son hâli, ham ölçüm raporları ve kayıt politikasıyla ilgili ayrıntılar o zaman bu belgeye işlenir. Bu belge birleşmemiş hiçbir çalışmaya dayanmaz; yüzey sütunu yalnız `origin/main`'deki kaynağa bakar.
 - Bu PR cihaz/insan kaydı başlatmaz, pilot başlatmaz, ham ses ya da kişisel veri içermez. Uzman kimliği, cihaz modeli ve ölçüm değeri **uydurulmaz**.
 - Bu belge kamera bayraklarına (`ostinatoCameraLessonsOpen`, `ostinatoCameraPracticeAvailable`; `lib/app/ostinato_release_policy.dart`) dokunmaz; kamera P2'dir ve kapsam dışıdır.
-- Kullanıcıya gösterilecek metin önerisi içermez. Ürün kuralı değişmez: düşük güvende hüküm verilmez; kullanıcıya "yanlış/wrong" gösterilmez (aşağıda §4'teki `yanlış-pozitif` gibi etiketler yalnız iç kayıt sınıfıdır).
+- Kullanıcıya gösterilecek metin önerisi içermez; tek istisna, §3'te talimat §7.2'den alıntılanan beklenen davranış metnidir. Ürün kuralı değişmez: düşük güvende hüküm verilmez; kullanıcıya "yanlış/wrong" gösterilmez (aşağıda §4'teki `yanlış-pozitif` gibi etiketler yalnız iç kayıt sınıfıdır).
 
 ## 2. Test matrisi
 
@@ -40,7 +40,7 @@ Yalnız main'de var olan ya da ana talimat §7.3'te tanımlı yüzeyler. `Kod` s
 | P04 | Boş 3. tel (G), tek nota | gitar, mikrofon | aynı | CS |
 | P05 | Boş 2. tel (B), tek nota | gitar, mikrofon | aynı | CS |
 | P06 | Boş 1. tel (ince e), tek nota | gitar, mikrofon | aynı | CS |
-| P07 | Perdeli tek nota (örn. 3. perde) | gitar, mikrofon | aynı | CS |
+| P07 | Perdeli tek nota (örn. 3. perde); çoklu ses sınıfı için akor varyantı (P0 dışı, `duyamadım` beklenir) | gitar, mikrofon | aynı; akor varyantı: `packages/ostinato_audio/lib/src/harmony/chord_detector.dart` | CS (tek nota) / CS kütüphane, ürün yüzeyi UK (akor) |
 | P08 | Sürekli (sustain) nota, akort durumu okuması | gitar, mikrofon | `NoteTuning` (`lib/app/audio/guitar_note_observation_controller.dart`) | CS |
 | P09 | Akort aracıyla tel akordu | gitar, mikrofon | `lib/app/tuner/tuner_screen.dart`, `lib/app/tuner/tuner_controller.dart` | CS |
 | P10 | Aynı notanın hızlı tekrarı (onset ayrımı) | gitar, mikrofon | `packages/ostinato_audio/lib/src/onset/onset_detector.dart` | CS |
@@ -49,20 +49,20 @@ Yalnız main'de var olan ya da ana talimat §7.3'te tanımlı yüzeyler. `Kod` s
 | P13 | Tempo merdiveni (tempo kademeli artar) | gitar + metronom, mikrofon | `lib/app/practice/loop/practice_tempo_ladder.dart` | CS |
 | P14 | Gecikme kalibrasyonu (kurulum) | metronom/ipucu + mikrofon | `lib/app/practice/setup/latency_calibration.dart`, `lib/app/practice/setup/setup_wizard_screen.dart` | CS |
 | P15 | Mikrofon izni reddi; mikrofonsuz içerik sürer mi | izin akışı | `lib/app/audio/mic_permission_gate.dart` (`permissionDenied`, `permissionDeniedPermanent` aşamaları) | CS |
-| P16 | Kulak eğitimi dersi (mikrofon gerekmez) | dokunma/seçim | `content/v1/ear`, `lib/app/screens/library_screen.dart` | CS |
+| P16 | Kulak eğitimi alıştırmaları (ekranda, mikrofonsuz; alkış dersleri mikrofonludur, bkz. P19) | dokunma/seçim | `content/v1/ear`, `lib/app/screens/library_screen.dart` | CS |
 | P17 | Referansı dinle, sonra dene | ses çıkışı + mikrofon | `lib/app/practice/loop/reference_listen.dart`, `lib/app/practice/loop/reference_listen_bar.dart` | CS |
 | P18 | Kendi kaydımı dinle (opt-in, geçici) | mikrofon, çalma | `lib/app/practice/own_recording/own_recording.dart` | CS |
-| P19 | Enstrümansız ritim: dokunma ya da alkış (`Ritme dokun`, §7.3) | dokunma / alkış | main'de doğrulanmadı | DO |
-| P20 | Çoklu ses / akor (P0 dışı; `duyamadım` beklenir) | gitar akoru, mikrofon | `packages/ostinato_audio/lib/src/harmony/chord_detector.dart` (kütüphane var; ürün yüzeyi UK) | CS (kütüphane) / UK (yüzey) |
+| P19 | Alkış dersleri (mikrofonlu; alkış onset olarak dinlenir) | alkış, mikrofon | `lib/app/practice/loop/v1_practice_catalog.dart` (`clapSequence`, `_isClapLine`), `lib/app/practice/loop/v1_course_copy.dart` | CS |
+| P20 | Enstrümansız `Ritme dokun` (mikrofonsuz dokunma, §7.3) | dokunma | main'de doğrulanmadı | DO |
 
 Notlar:
 - P01–P08 aynı gözlem yüzeyini farklı tel/nota koşuluyla çalıştırır; gerçek fark kaynağı tel ve perde olduğundan ayrı satırdır.
-- P19, main'de bir yüzeye bağlanana dek `NOT_TESTED` değil `BLOCKED_ACCESS` (yüzey erişimi yok) kalır; yüzey main'e girince `CS` olarak güncellenir.
-- P20 yalnız "doğru sınıfı bulur" için değil, "bulamadığında dürüstçe `duyamadım` der" için ölçülür; çoklu ses P0'da başarı kriteri değildir (§7.2).
+- P20 (`Ritme dokun`), main'de bir yüzeye bağlanana dek `BLOCKED_ACCESS` kalır; yüzey main'e girince `CS` olarak güncellenir.
+- P07'nin akor varyantı "doğru sınıfı bulur" için değil, "bulamadığında dürüstçe `duyamadım` der" için ölçülür; çoklu ses P0'da başarı kriteri değildir (§7.2). Matris 20 satırda kalır; akor ayrı satır değil P07 varyantıdır.
 
 ### 2.3 Sonuç ızgarası (P × E)
 
-Hücre değeri: `BA` = `BLOCKED_ACCESS` (cihaz erişimi bilinmiyor). Ortam erişimi doğrulanıp koşu yapılana dek her hücre `BA` kalır; koşulmuş ama sonuçlanmamış hücre `NOT_TESTED` yazılır.
+**`BA` = `BLOCKED_ACCESS`** (cihaz erişimi bilinmiyor). Ortam erişimi doğrulanıp koşu yapılana dek her hücre `BA` kalır; koşulmuş ama sonuçlanmamış hücre `NOT_TESTED` yazılır.
 
 | ID | E1 | E2 | E3 | E4 | E5 |
 |---|---|---|---|---|---|
@@ -151,7 +151,7 @@ Sınıf tanımları: `yanlış-pozitif` = olmayan şeyi bulma ya da yanlış hü
 
 ```csv
 id,performans,ortam,giris_turu,urun_ciktisi,beklenen_cikti,hukum_sinifi,guven,pedagojik_etki,kanit_yolu,tarih
-FP-ORNEK-001,P20,E1,akor,"tek nota bulundu: ?","duyamadım",yanlış-pozitif,0.41,yanlış yönlendirici,"(örnek; dosya yok)",0000-00-00
+FP-ORNEK-001,P07,E1,akor,"tek nota bulundu: ?","duyamadım",yanlış-pozitif,0.41,yanlış yönlendirici,"(örnek; dosya yok)",0000-00-00
 FP-ORNEK-002,P01,E2,gurultu,"duyamadım","duyamadım",duyamadım-uygun,gösterilmiyor,yok,"(örnek; dosya yok)",0000-00-00
 ```
 
@@ -206,7 +206,7 @@ Kurallar: rıza yoksa ses hiçbir yere aktarılmaz; yalnız rıza veren katılı
 Bu PR'dan sonra tek satır (STATUS.md'ye eklendi):
 
 ```text
-- [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [PR:: <link>] [SHA:: <baş commit>] [CI:: yok/koşulmadı] [ölçüm-raporu:: yok] [cihaz-ortam:: 0/5 erişimli] [BLOCKED_ACCESS:: 100/100 hücre]
+- [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [PR:: #72] [CI:: yok/koşulmadı] [ölçüm-raporu:: yok (03…08 merge sonrası)] [cihaz-ortam:: 0/5] [BLOCKED_ACCESS:: 100/100]
 ```
 
 Ölçüm başladığında aynı satır güncellenir: `[durum::` `TESTING` ya da hâlâ `BLOCKED_ACCESS`), `[ölçüm-raporu:: <yol>]`, `[cihaz-ortam:: <erişimli>/5]`, `[BLOCKED_ACCESS:: <kalan>/100]`. Sayılar yalnız §2.3 ızgarasından türetilir.

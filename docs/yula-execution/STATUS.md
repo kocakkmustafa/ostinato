@@ -76,4 +76,4 @@ status: IN_REVIEW
 | U7 | `ventures/ostinato/app` ağacı eski (`d787720`) | Açık; bu PR dokunmaz | önerilen sahip: Motion orchestration |
 
 ## Bilet OST-P0-09
-- [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [`OST-P0-09-PROTOKOL.md`](OST-P0-09-PROTOKOL.md)
+- [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [PR:: #72] [CI:: yok/koşulmadı] [ölçüm-raporu:: yok (03…08 merge sonrası)] [cihaz-ortam:: 0/5] [BLOCKED_ACCESS:: 100/100] · [`OST-P0-09-PROTOKOL.md`](OST-P0-09-PROTOKOL.md)
