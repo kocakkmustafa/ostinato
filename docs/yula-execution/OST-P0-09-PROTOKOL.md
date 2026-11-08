@@ -206,7 +206,7 @@ Kurallar: rıza yoksa ses hiçbir yere aktarılmaz; yalnız rıza veren katılı
 Bu PR'dan sonra tek satır (STATUS.md'ye eklendi):
 
 ```text
-- [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [PR:: #72] [CI:: yok/koşulmadı] [ölçüm-raporu:: yok (03…08 merge sonrası)] [cihaz-ortam:: 0/5] [BLOCKED_ACCESS:: 100/100]
+- [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [PR:: #72] [CI:: yok/koşulmadı] [ölçüm-raporu:: yok (03…08 merge sonrası)] [cihaz-ortam:: 0/5] [BLOCKED_ACCESS:: 100/100] · [`OST-P0-09-PROTOKOL.md`](OST-P0-09-PROTOKOL.md)
 ```
 
 Ölçüm başladığında aynı satır güncellenir: `[durum::` `TESTING` ya da hâlâ `BLOCKED_ACCESS`), `[ölçüm-raporu:: <yol>]`, `[cihaz-ortam:: <erişimli>/5]`, `[BLOCKED_ACCESS:: <kalan>/100]`. Sayılar yalnız §2.3 ızgarasından türetilir.
