@@ -59,15 +59,11 @@ final class ReferenceListenController extends ChangeNotifier {
     ReferencePlaybackPort? port,
     PracticeScore score,
     int bpm,
-  ) => playClip(
-    port,
-    () async {
-      final rendered = await _render(score, bpm);
-      passage = rendered;
-      return (samples: rendered.samples, sampleRate: rendered.sampleRate);
-    },
-    bpm: bpm,
-  );
+  ) => playClip(port, () async {
+    final rendered = await _render(score, bpm);
+    passage = rendered;
+    return (samples: rendered.samples, sampleRate: rendered.sampleRate);
+  }, bpm: bpm);
 
   /// F2.6: plays any synthesized clip through the same staged reference path
   /// (drill sounds, "play my answer"). [tag] tells listeners which clip is

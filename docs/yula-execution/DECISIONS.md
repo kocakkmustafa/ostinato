@@ -38,3 +38,14 @@ Karar: main `pubspec.yaml` sürümü `1.0.1+10`'dur. Mağaza sürümü `1.0.2+11
 3. Güvenlik/maliyet: Yanlış build/sürüm numarasıyla gönderim riski azalır; mağaza işleri ayrı kurucu onayında kalır.
 4. Geri dönüş: Akış değişirse yeni ADR; release dalına bu PR ile dokunulmaz.
 5. Kullanıcı: Mağazadaki 1.0.2 kullanıcısı; düzeltmeler main'de kaybolmaz.
+
+## ADR-005 — Kayıt saklama: yalnız ephemeral; kalıcı/şifreli saklama ve export OST-P0-08B'ye ertelendi
+Tarih: 2026-11-08 · Durum: KABUL (kapsam kararı Motion orchestration, OST-P0-08 engel yanıtı)
+Karar: `RecordingRetentionPolicy` yalnız `ephemeral` | `denied` üretir. Kalıcı saklama isteği (onay ve yetişkin olsa da) her yolda `denied`. `RetentionAudience {adult, child, unknown}`: bayrak `ostinatoRecordingRetentionOpen` açıkken yalnız adult için mevcut ephemeral own_recording sürer; child/unknown'da kapalı. Uygulamada yaş sinyali yok; varsayılan `unknown`. Bayrak kapalıyken (varsayılan) FK2 davranışı birebir aynı. Açıkken ek olarak: uygulama arka plana gidince take ve RAM tamponu silinir (`RecorderBackgroundGuard`), "tümünü sil" (`OwnRecorder.deleteAll`) geçici klasörü boşaltır. Export yok.
+Envanter (koddan): ses `OwnRecorder`'da RAM'de (en çok 180 sn, 16-bit PCM); tur özetlenince `getTemporaryDirectory()/own_recording/take-N.wav` olarak ŞİFRESİZ yazılır; sonraki tur, hata/iptal, ders ekranı kapanışı ve ders açılışındaki süpürme (çökme artığı) siler. Ağ API'si yok. Kalıcı dizin yalnız `ostinato.own_recording.v1.json` (açık/kapalı anahtarı, ses yok) için `getApplicationSupportDirectory`.
+Şifreleme neden yapılmadı: doğrudan bağımlılıklarda (`pubspec.yaml`) şifreleme paketi yok; `pointycastle` ve `crypto` yalnız geçişli (doğrudan kullanmak yeni pub girdisi demek, `crypto` yalnız özet üretir) ve `lib/`te Keychain/Keystore anahtar deposu yok; anahtarı kayıtla aynı dizine koymak şifrelemeyi anlamsız kılar, elle şifre yazmak güvensiz. Bu yüzden OST-P0-08B ayrı bilet: bağımlılık/anahtar deposu kararı, şifreli cihaz-içi saklama, açık kullanıcı eylemiyle şifresiz export (child/unknown'da kapalı).
+1. Bilgi: Kullanıcı metni yalnız "kayıt bu oturumda, cihazda kalır, oturum bitince silinir" der; saklama/export vaadi yok. 12 dilin çevirisi anadil kontrolünden geçmedi.
+2. Delil: `test/ost_p0_08_recording_retention_test.dart` (15 test), `test/ost_p0_02_egress_test.dart` (yeni yol 0 istemci/0 soket + statik tarama).
+3. Güvenlik/maliyet: Ham ses cihazdan çıkmaz, kalıcı dosya oluşmaz; yeni ücretli kaynak 0 USD.
+4. Geri dönüş: Bayrak `false` kalır; OST-P0-08B yeni ADR ile bunu genişletir.
+5. Kullanıcı: Yetişkin kullanıcı kendi turunu dinler; çocuk ve yaşı belirsiz kullanıcı kayıt almaz.

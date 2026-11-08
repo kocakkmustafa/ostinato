@@ -99,6 +99,13 @@ final class OwnRecorder extends ChangeNotifier {
     return file;
   }
 
+  /// "Delete all": drops the buffer and the take, then empties the whole
+  /// temporary own_recording folder (leftovers of earlier runs or crashes).
+  Future<void> deleteAll() async {
+    await discard();
+    await sweep();
+  }
+
   /// Drops the RAM buffer and deletes the take.
   Future<void> discard() async {
     ++_generation;

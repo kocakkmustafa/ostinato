@@ -21,7 +21,9 @@ import '../camera/camera_lesson.dart';
 import '../camera/camera_lesson_copy.dart';
 import '../camera/mirror_camera.dart';
 import '../camera/mirror_hold_screen.dart';
+
 import 'package:ostinato_posture/ostinato_posture.dart' show PoseSource;
+
 import '../../test_flow/test_flow_copy.dart';
 import '../../test_flow/test_flow_screen.dart';
 import '../../test_flow/test_flow_store.dart';
@@ -416,8 +418,9 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
               ]),
             if (_camera case final camera?)
               switch (camera.part) {
-                CameraPart.trunkHint =>
-                  section(uiText(context, CameraLessonCopy.section), [
+                CameraPart.trunkHint => section(
+                  uiText(context, CameraLessonCopy.section),
+                  [
                     Text(uiText(context, CameraLessonCopy.intro), style: body),
                     const SizedBox(height: 8),
                     FilledButton.icon(
@@ -433,9 +436,11 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
                       icon: const Icon(Icons.videocam_outlined),
                       label: Text(uiText(context, CameraLessonCopy.start)),
                     ),
-                  ]),
-                CameraPart.mirror =>
-                  section(uiText(context, CameraLessonCopy.mirrorSection), [
+                  ],
+                ),
+                CameraPart.mirror => section(
+                  uiText(context, CameraLessonCopy.mirrorSection),
+                  [
                     Text(
                       uiText(context, CameraLessonCopy.mirrorIntro),
                       style: body,
@@ -456,7 +461,8 @@ class _V1LessonReaderScreenState extends State<V1LessonReaderScreen> {
                         uiText(context, CameraLessonCopy.mirrorStart),
                       ),
                     ),
-                  ]),
+                  ],
+                ),
               },
             if (lesson.referenceAudio.kinds.isNotEmpty && !_isTuner)
               section(uiText(context, V1CourseCopy.readerReference), [

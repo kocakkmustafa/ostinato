@@ -70,11 +70,9 @@ final class PracticeReviewing extends PracticeSessionState {
 /// disipliniyle AYNI ilke: çağıranın UI'ı zaten yalnız ilgili düğmeleri
 /// doğru hâlde gösterecek, ama savunma burada da durur.
 final class PracticeSessionController {
-  PracticeSessionController({
-    required this.modalities,
-    this.countInBeats = 4,
-  }) : assert(modalities.isNotEmpty, 'en az bir modalite gerekir'),
-       assert(countInBeats >= 1);
+  PracticeSessionController({required this.modalities, this.countInBeats = 4})
+    : assert(modalities.isNotEmpty, 'en az bir modalite gerekir'),
+      assert(countInBeats >= 1);
 
   final Set<PracticeModality> modalities;
   final int countInBeats;

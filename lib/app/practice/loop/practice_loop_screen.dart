@@ -19,6 +19,9 @@ import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
 import '../own_recording/own_recording_copy.dart';
 import '../own_recording/own_recording_preference.dart';
+import '../own_recording/recording_retention_copy.dart';
+import '../own_recording/recording_retention_policy.dart';
+import '../../ostinato_release_policy.dart';
 import '../practice_audio_input.dart';
 import '../setup/setup_profile_store.dart';
 import '../setup/setup_wizard_screen.dart';
@@ -57,8 +60,16 @@ class PracticeLoopScreen extends StatefulWidget {
     this.setupStore,
     this.openSetup,
     this.ownRecordingPreference,
+    this.retentionOpen = ostinatoRecordingRetentionOpen,
+    this.audience = RetentionAudience.unknown,
     this.seed,
   });
+
+  /// OST-P0-08 gate (default closed): while false nothing below changes.
+  final bool retentionOpen;
+
+  /// Who is playing; unknown until a verified signal exists.
+  final RetentionAudience audience;
 
   final V1Lesson lesson;
 
@@ -121,6 +132,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   bool _ranOnce = false;
   AudioInputController? _ownedAudio;
   OwnRecorder? _ownedRecorder;
+  RecorderBackgroundGuard? _backgroundGuard;
   late final PracticeSessionController _c = _createController();
   late final Ticker _ticker = createTicker((_) => _c.tick());
 
@@ -168,6 +180,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     _c.addListener(_changed);
     unawaited(_loadProfile());
     unawaited(_prepareOwnRecording());
+    final recorder = _c.ownRecorder;
+    if (widget.retentionOpen && recorder != null) {
+      _backgroundGuard = RecorderBackgroundGuard(recorder)..attach();
+    }
   }
 
   /// FK2: sweep takes a crash may have left, then follow the setting.
@@ -179,7 +195,11 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         await (widget.ownRecordingPreference ??
                 const FileOwnRecordingPreference())
             .read();
-    if (mounted) setState(() => recorder.enabled = on);
+    final allowed = RecordingRetentionPolicy.mayRecordOwnTake(
+      retentionOpen: widget.retentionOpen,
+      audience: widget.audience,
+    );
+    if (mounted) setState(() => recorder.enabled = on && allowed);
   }
 
   Future<void> _loadProfile() async {
@@ -231,6 +251,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   @override
   void dispose() {
     _c.removeListener(_changed);
+    _backgroundGuard?.detach();
     _listen.dispose();
     _ticker.dispose();
     unawaited(_c.stop());
@@ -405,7 +426,13 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                   // false.
                   Text(
                     _c.ownRecorder?.enabled ?? false
-                        ? uiText(context, OwnRecordingCopy.practiceFooterOn)
+                        ? uiText(
+                            context,
+                            widget.retentionOpen
+                                ? RecordingRetentionCopy
+                                      .practiceFooterSessionOnly
+                                : OwnRecordingCopy.practiceFooterOn,
+                          )
                         : localized(
                             context,
                             'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',

@@ -12,8 +12,9 @@ import 'audio_environment.dart';
 import 'latency_calibration.dart';
 import 'setup_profile_store.dart';
 
-typedef LatencyEstimator =
-    Future<LatencyCalibrationResult> Function(CalibrationRecording recording);
+typedef LatencyEstimator = Future<LatencyCalibrationResult> Function(
+  CalibrationRecording recording,
+);
 
 Future<LatencyCalibrationResult> estimateOffMain(CalibrationRecording r) =>
     Isolate.run(() => estimateRouteLatency(r));

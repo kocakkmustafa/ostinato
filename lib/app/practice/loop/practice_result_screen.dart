@@ -200,9 +200,8 @@ class PracticeResultScreen extends StatelessWidget {
               const SizedBox(height: 16),
               _nextStep(context),
               const SizedBox(height: 8),
-              if (ladder case TempoLadderStepped(
-                :final nextBpm,
-              ) when s.nextStep != NextStep.raiseTempo)
+              if (ladder case TempoLadderStepped(:final nextBpm)
+                  when s.nextStep != NextStep.raiseTempo)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: OutlinedButton(
@@ -221,9 +220,9 @@ class PracticeResultScreen extends StatelessWidget {
               if (gate.passed && !gate.completed)
                 OutlinedButton(
                   key: const Key('result-target-run'),
-                  onPressed: () => Navigator.of(
-                    context,
-                  ).pop(const ResultActionPerformance()),
+                  onPressed: () =>
+                      Navigator.of(context)
+                          .pop(const ResultActionPerformance()),
                   child: Text(
                     localized(
                       context,
