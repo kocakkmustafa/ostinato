@@ -12,6 +12,7 @@ import 'package:ostinato/app/practice/loop/listen_try_fix_copy.dart';
 import 'package:ostinato/app/practice/loop/practice_marks.dart';
 import 'package:ostinato/app/practice/loop/practice_outcome.dart';
 import 'package:ostinato/app/practice/loop/practice_score.dart';
+import 'package:ostinato/app/practice/loop/practice_transport.dart';
 import 'package:ostinato/app/practice/loop/v1_practice_catalog.dart';
 
 V1Lesson load(String id) => V1Lesson.fromJson(
@@ -182,6 +183,96 @@ void main() {
     });
   });
 
+  group(
+    'FixClear yalnız ölçülen tutarlılıkta; aksi hâlde hüküm/hızlanma yok',
+    () {
+      test('(a) doğruluk eşiği geçildi → tutarlı (FixClear)', () {
+        final s = rhythmRun([c, c, c, c, c, c, c, c]);
+        expect(s.accuracy, 1);
+        expect(fixOf(s), isA<FixClear>());
+        // Tek erken vuruş: doğruluk %87,5 ≥ %75 → tutarlı.
+        expect(
+          fixOf(rhythmRun([c, d, c, c, c, c, c, c], timing: {1: -150})),
+          isA<FixClear>(),
+        );
+      });
+
+      test(
+        '(b) eşik geçilmedi + baskın tür yok → net fark yok, hızlanma yok',
+        () {
+          // 12 vuruş: 6 doğru, 2 erken, 2 geç, 2 çok sessiz. Her tür %25 altı
+          // (2 < 3), duyulma 10/12; doğruluk 6/10 = %60 < %75.
+          final score12 = PracticeScore.parse(
+            '4/4: q q q q | q q q q | q q q q',
+          );
+          final marks = [c, c, c, c, c, c, d, d, d, d, u, u];
+          final s = PracticeRunSummary.of(
+            score: score12,
+            outcomes: [
+              for (var i = 0; i < 12; i++)
+                NoteOutcome(
+                  eventIndex: i,
+                  bar: score12.events[i].bar,
+                  pass: 0,
+                  mark: marks[i],
+                  reason: marks[i] == u ? HearingReason.tooQuiet : null,
+                  timingMs: i == 6 || i == 7
+                      ? -120
+                      : i == 8 || i == 9
+                      ? 120
+                      : null,
+                ),
+            ],
+            bpm: 60,
+            openBpm: 60,
+            targetBpm: 80,
+            completed: true,
+            loopUsed: false,
+            waitUsed: false,
+            criteria: rhythmCriteria,
+          );
+          expect(s.accuracy, closeTo(.6, 1e-9));
+          final r = ListenTryFix.of(
+            s,
+            lesson: load('gtr-s1-m03-04'),
+            freeTempo: false,
+            anchorBpm: 45,
+          );
+          expect(r, isA<FixNoClearDifference>());
+          expect(r, isNot(isA<FixClear>()));
+          expect(r, isNot(isA<FixCorrection>()));
+        },
+      );
+
+      test('kanıt ve sayımlar yalnız SON turdan (döngü turları karışmaz)', () {
+        // Tur 0: hepsi duyulmadı; tur 1: hepsi doğru → son tur tutarlı.
+        final s = PracticeRunSummary.of(
+          score: rhythmScore,
+          outcomes: [
+            for (var p = 0; p < 2; p++)
+              for (var i = 0; i < 8; i++)
+                NoteOutcome(
+                  eventIndex: i,
+                  bar: rhythmScore.events[i].bar,
+                  pass: p,
+                  mark: p == 0 ? u : c,
+                  reason: p == 0 ? HearingReason.noAttack : null,
+                ),
+          ],
+          bpm: 60,
+          openBpm: 60,
+          targetBpm: 80,
+          completed: true,
+          loopUsed: true,
+          waitUsed: false,
+          criteria: rhythmCriteria,
+        );
+        expect(s.heard, .5, reason: 'özet tüm turları sayar');
+        expect(fixOf(s), isA<FixClear>(), reason: 'kart yalnız son turu sayar');
+      });
+    },
+  );
+
   group('güven kapısı: düşük güvende hüküm yok', () {
     test('duyulma %70 altı → ölçemedim, düzeltme yok', () {
       // 5/8 duyuldu (%62,5), duyulanların hepsi erken olsa bile.
@@ -298,39 +389,48 @@ void main() {
       expect(r.plan.loop, (first: 0, last: 1));
     });
 
-    test('aynı düzeltme boyunca adımlar yükselir (çapa korunur)', () {
-      final s = rhythmRun(
-        [c, d, c, c, c, d, c, c],
-        timing: {1: -130, 5: -120},
-        bpm: 45,
-      );
-      final r = correction(fixOf(s, anchor: 60));
-      expect(r.plan.steps, [45, 60, 80]);
-      expect(r.plan.nextBpm, 60);
-      expect(r.plan.loop, isNull, reason: 'çapa tempodan itibaren tam tur');
-      final atAnchor = correction(
+    test('düzeltme sürerken çapa korunur: aynı tempo tekrar önerilir', () {
+      final erken = [c, d, c, c, c, d, c, c];
+      final slow = correction(
         fixOf(
-          rhythmRun([c, d, c, c, c, d, c, c], timing: {1: -130, 5: -120}),
+          rhythmRun(erken, timing: {1: -130, 5: -120}, bpm: 45),
           anchor: 60,
         ),
       );
-      expect(atAnchor.plan.nextBpm, 80);
+      expect(slow.plan.steps, [45, 60, 80]);
+      expect(slow.plan.nextBpm, 45, reason: 'üst adıma geçilmez');
+      expect(slow.plan.loop, (first: 0, last: 1));
+      final atAnchor = correction(
+        fixOf(rhythmRun(erken, timing: {1: -130, 5: -120}), anchor: 60),
+      );
+      expect(atAnchor.plan.nextBpm, 60);
       expect(atAnchor.plan.loop, isNull);
+      final high = correction(
+        fixOf(
+          rhythmRun(erken, timing: {1: -130, 5: -120}, bpm: 80),
+          anchor: 60,
+        ),
+      );
+      expect(high.plan.nextBpm, 80);
     });
 
-    test('hedefte ya da üstünde sonraki adım yok', () {
-      final r = correction(
-        fixOf(
-          rhythmRun(
-            [c, d, c, c, c, d, c, c],
-            timing: {1: -130, 5: -120},
-            bpm: 80,
-          ),
-          anchor: 60,
-        ),
-      );
-      expect(r.plan.nextBpm, isNull);
-    });
+    test(
+      'düzeltme geçince (FixClear) çapadan itibaren bir üst adıma tırman',
+      () {
+        final clean = List.filled(8, c);
+        final r45 = fixOf(rhythmRun(clean, bpm: 45), anchor: 60);
+        expect(r45, isA<FixClear>());
+        expect((r45 as FixClear).nextBpm, 60);
+        final r60 = fixOf(rhythmRun(clean, bpm: 60), anchor: 60);
+        expect((r60 as FixClear).nextBpm, isNull, reason: 'çapaya ulaşıldı');
+        expect((fixOf(rhythmRun(clean)) as FixClear).nextBpm, isNull);
+        expect(
+          (fixOf(rhythmRun(clean, bpm: 45), anchor: 60, free: true) as FixClear)
+              .nextBpm,
+          isNull,
+        );
+      },
+    );
 
     test('tempo aralığı: adımlar 40%–120% içinde, tekrarsız, artan', () {
       for (final (a, t) in [(20, 20), (24, 60), (200, 60), (60, 60)]) {
@@ -340,7 +440,15 @@ void main() {
           if (i > 0) expect(s[i], greaterThan(s[i - 1]));
         }
         expect(s, isNotEmpty);
+        expect(s.first, greaterThanOrEqualTo(PracticeTempo.minBpm(t)));
+        expect(s.last, lessThanOrEqualTo(PracticeTempo.maxBpm(t)));
       }
+      // Alt sınır: 24 BPM çapa, hedef 60 → %75 = 18 < min 24 → 24'e kenetlenir.
+      expect(ListenTryFix.tempoSteps(anchorBpm: 24, targetBpm: 60).first, 24);
+      expect(PracticeTempo.minBpm(60), 24);
+      // Üst sınır: 200 BPM çapa, hedef 60 → en fazla %120 = 72.
+      expect(ListenTryFix.tempoSteps(anchorBpm: 200, targetBpm: 60).last, 72);
+      expect(PracticeTempo.maxBpm(60), 72);
     });
 
     test('serbest tempo (klik yok): adım yok, yalnız metin', () {
@@ -414,11 +522,67 @@ void main() {
       }
     });
 
+    test('yeni metinler 14 katalogun tamamında yargılayıcı kelime içermez', () {
+      final words = <String, RegExp>{
+        'en': RegExp(
+          r'wrong|incorrect|mistake|error|fail|\bbad\b',
+          caseSensitive: false,
+        ),
+        'tr': RegExp(r'yanlış|hata|başarısız|kötü', caseSensitive: false),
+        'ar': RegExp('خطأ|خاطئ|فشل|سيئ'),
+        'de': RegExp(
+          r'falsch|Fehler|fehlgeschlagen|schlecht|scheiter',
+          caseSensitive: false,
+        ),
+        'es-419': RegExp(
+          r'incorrect|error|equivoc|fall[oó]|fallo|\bmal\b|malo',
+          caseSensitive: false,
+        ),
+        'fr': RegExp(
+          r'\bfaux\b|erreur|incorrect|échec|échou|mauvais|raté',
+          caseSensitive: false,
+        ),
+        'hi': RegExp('गलत|ग़लत|त्रुटि|असफल|विफल|बुरा'),
+        'id': RegExp(r'salah|kesalahan|gagal|buruk', caseSensitive: false),
+        'it': RegExp(
+          r'sbagliat|errore|errat|falliment|fallit|cattiv|\bmale\b',
+          caseSensitive: false,
+        ),
+        'ja': RegExp('間違|誤|失敗|ダメ|悪'),
+        'ko': RegExp('틀렸|틀린|오류|실패|잘못|나쁜'),
+        'pl': RegExp(
+          r'źle|błąd|nieprawidłow|niepoprawn|porażk|zły',
+          caseSensitive: false,
+        ),
+        'pt-BR': RegExp(
+          r'errad|\berro|incorret|falh|ruim|\bmau\b',
+          caseSensitive: false,
+        ),
+        'zh-Hans': RegExp('错|失败|不对|糟|坏'),
+      };
+      expect(words, hasLength(14));
+      for (final entry in words.entries) {
+        final raw =
+            jsonDecode(File('assets/l10n/${entry.key}.json').readAsStringSync())
+                as Map<String, dynamic>;
+        final messages = raw['messages'] as Map<String, dynamic>;
+        for (final pair in ListenTryFixCopy.all) {
+          final text = messages[appMessageIds[pair]] as String?;
+          expect(text, isNotNull, reason: '${entry.key} ${pair.$1}');
+          expect(
+            entry.value.hasMatch(text!),
+            isFalse,
+            reason: '${entry.key}: $text',
+          );
+        }
+      }
+    });
+
     test('her yeni metnin id\'si tabloda ve yer tutucuları tutarlı', () {
       for (final pair in ListenTryFixCopy.all) {
         expect(appMessageIds.containsKey(pair), isTrue, reason: pair.$1);
       }
-      expect(ListenTryFixCopy.all.toSet(), hasLength(10));
+      expect(ListenTryFixCopy.all.toSet(), hasLength(11));
     });
 
     test('bayrak varsayılan KAPALI', () {

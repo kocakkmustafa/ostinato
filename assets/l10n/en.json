@@ -8647,10 +8647,11 @@
     "6ac1a2a248452bf3": "A few beats came a little late (bar {v0}). Try that part again, a bit slower, with the click.",
     "96e8c4f33076ed75": "I did not hear a beat in bar {v0}. Try that part again, a bit slower.",
     "6bea95cd34ab0688": "Some notes sounded different from the written pitch (bar {v0}). Play that part slowly and let each note ring.",
-    "1dd4afb7b95b1835": "I measured no clear difference this time. Your playing was steady; you can try a little faster.",
     "1034d25358f0975b": "I couldn't tell this sound apart with confidence; will you try again?",
     "8aee84f240e1fd83": "Repeat in steps",
     "507698b37306b849": "Try again at ♩={v0}",
-    "8ecf8f029ffde9a3": "Next, a short exercise for this: {v0}"
+    "8ecf8f029ffde9a3": "Next, a short exercise for this: {v0}",
+    "1d83465302a96db1": "Your playing matched the line well this time; you can try a little faster.",
+    "22540e4124cf871e": "I didn't measure a clear difference; will you try once more?"
   }
 }

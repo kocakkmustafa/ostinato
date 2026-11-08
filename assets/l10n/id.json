@@ -8640,10 +8640,11 @@
     "6ac1a2a248452bf3": "Beberapa ketukan datang sedikit terlambat (birama {v0}). Coba bagian itu lagi, sedikit lebih pelan, bersama klik.",
     "96e8c4f33076ed75": "Aku tidak mendengar ketukan di birama {v0}. Coba bagian itu lagi, sedikit lebih pelan.",
     "6bea95cd34ab0688": "Beberapa nada terdengar berbeda dari nada yang tertulis (birama {v0}). Mainkan bagian itu pelan-pelan dan biarkan tiap nada berdenging.",
-    "1dd4afb7b95b1835": "Kali ini aku tidak mengukur perbedaan yang jelas. Permainanmu stabil; kamu bisa mencoba sedikit lebih cepat.",
     "1034d25358f0975b": "Aku tidak bisa membedakan bunyi ini dengan yakin; maukah kamu mencoba lagi?",
     "8aee84f240e1fd83": "Ulangi bertahap",
     "507698b37306b849": "Coba lagi di ♩={v0}",
-    "8ecf8f029ffde9a3": "Berikutnya, latihan singkat untuk ini: {v0}"
+    "8ecf8f029ffde9a3": "Berikutnya, latihan singkat untuk ini: {v0}",
+    "1d83465302a96db1": "Permainanmu cocok dengan baris itu kali ini; kamu bisa mencoba sedikit lebih cepat.",
+    "22540e4124cf871e": "Aku tidak mengukur perbedaan yang jelas; maukah kamu mencoba sekali lagi?"
   }
 }

@@ -27,8 +27,12 @@ abstract final class ListenTryFixCopy {
     'Bazı notalar yazılan perdeden farklı duyuldu (ölçü {v0}). O bölümü yavaş çal ve her notanın tınlamasına izin ver.',
   );
   static const UiCopy clear = (
-    'I measured no clear difference this time. Your playing was steady; you can try a little faster.',
-    'Bu sefer net bir fark ölçmedim. Düzenli çaldın; biraz daha hızlı deneyebilirsin.',
+    'Your playing matched the line well this time; you can try a little faster.',
+    'Bu sefer çaldıkların yazılanla iyi örtüştü; biraz daha hızlı deneyebilirsin.',
+  );
+  static const UiCopy noClearDifference = (
+    "I didn't measure a clear difference; will you try once more?",
+    'Net bir fark ölçmedim; bir kez daha dener misin?',
   );
   static const UiCopy couldNotMeasure = (
     "I couldn't tell this sound apart with confidence; will you try again?",
@@ -51,6 +55,7 @@ abstract final class ListenTryFixCopy {
     missed,
     pitch,
     clear,
+    noClearDifference,
     couldNotMeasure,
     stepsLabel,
     tryAt,

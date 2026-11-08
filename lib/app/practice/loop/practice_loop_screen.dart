@@ -293,8 +293,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       );
       _fixAnchorBpm = switch (fix) {
         FixCorrection() => _fixAnchorBpm ?? summary.bpm,
-        FixClear() => null,
-        FixUnmeasured() => _fixAnchorBpm,
+        FixClear(:final nextBpm) => nextBpm == null ? null : _fixAnchorBpm,
+        FixUnmeasured() || FixNoClearDifference() => _fixAnchorBpm,
       };
     }
     final action = await Navigator.of(context).push<ResultAction>(

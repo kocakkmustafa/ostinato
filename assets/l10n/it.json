@@ -8647,10 +8647,11 @@
     "6ac1a2a248452bf3": "Alcuni battiti sono arrivati un po’ in ritardo (battuta {v0}). Riprova quel passaggio, un po’ più lentamente, con il clic.",
     "96e8c4f33076ed75": "Non ho sentito un battito nella battuta {v0}. Riprova quel passaggio, un po’ più lentamente.",
     "6bea95cd34ab0688": "Alcune note suonavano diverse dall’altezza scritta (battuta {v0}). Suona quel passaggio lentamente e lascia risuonare ogni nota.",
-    "1dd4afb7b95b1835": "Questa volta non ho misurato nessuna differenza evidente. Il tuo suono era regolare; puoi provare un po’ più veloce.",
     "1034d25358f0975b": "Non sono riuscito a distinguere questo suono con sicurezza; vuoi riprovare?",
     "8aee84f240e1fd83": "Ripeti a gradini",
     "507698b37306b849": "Riprova a ♩={v0}",
-    "8ecf8f029ffde9a3": "Poi, un breve esercizio per questo: {v0}"
+    "8ecf8f029ffde9a3": "Poi, un breve esercizio per questo: {v0}",
+    "1d83465302a96db1": "Questa volta il tuo suono corrispondeva bene alla riga; puoi provare un po’ più veloce.",
+    "22540e4124cf871e": "Non ho misurato una differenza evidente; vuoi riprovare ancora una volta?"
   }
 }

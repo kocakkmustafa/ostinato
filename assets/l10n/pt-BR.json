@@ -8647,10 +8647,11 @@
     "6ac1a2a248452bf3": "Algumas batidas vieram um pouco tarde (compasso {v0}). Tente essa parte de novo, um pouco mais devagar, com o clique.",
     "96e8c4f33076ed75": "Não ouvi uma batida no compasso {v0}. Tente essa parte de novo, um pouco mais devagar.",
     "6bea95cd34ab0688": "Algumas notas soaram diferentes da altura escrita (compasso {v0}). Toque essa parte devagar e deixe cada nota soar.",
-    "1dd4afb7b95b1835": "Desta vez não medi nenhuma diferença clara. Seu toque estava constante; você pode tentar um pouco mais rápido.",
     "1034d25358f0975b": "Não consegui distinguir esse som com segurança; você tenta de novo?",
     "8aee84f240e1fd83": "Repetir em etapas",
     "507698b37306b849": "Tente de novo a ♩={v0}",
-    "8ecf8f029ffde9a3": "Em seguida, um exercício curto para isso: {v0}"
+    "8ecf8f029ffde9a3": "Em seguida, um exercício curto para isso: {v0}",
+    "1d83465302a96db1": "Seu toque combinou bem com a linha desta vez; você pode tentar um pouco mais rápido.",
+    "22540e4124cf871e": "Não medi uma diferença clara; você tenta mais uma vez?"
   }
 }

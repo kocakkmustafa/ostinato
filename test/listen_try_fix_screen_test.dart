@@ -216,9 +216,57 @@ void main() {
     testWidgets('net fark yok: olumlu, hüküm yok', (tester) async {
       final s = pitchSummary(List.filled(8, c));
       await pumpResult(tester, s, fix: fixFor(s));
-      expect(find.textContaining('no clear difference'), findsOneWidget);
+      expect(find.textContaining('matched the line well'), findsOneWidget);
       expect(find.byKey(const Key('listen-try-fix-repeat')), findsNothing);
     });
+
+    testWidgets(
+      'eşik altı, baskın tür yok: net fark yok, hızlanma önerisi yok',
+      (tester) async {
+        // 10 nota: 6 doğru, 2 farklı, 2 duyulmadı → doğruluk %75 < %80 ve
+        // farklı notalar payı %20 < %25 → baskın tür yok.
+        final s10 = PracticeScore.parse('E2 F2 G2 F2 | E2 F2 G2 F2 | E2 F2');
+        final marks = [c, c, c, c, c, c, d, d, u, u];
+        final s = PracticeRunSummary.of(
+          score: s10,
+          outcomes: [
+            for (var i = 0; i < 10; i++)
+              NoteOutcome(
+                eventIndex: i,
+                bar: s10.events[i].bar,
+                pass: 0,
+                mark: marks[i],
+                reason: marks[i] == u ? HearingReason.unclear : null,
+                expectedMidi: s10.events[i].midi,
+                observedMidi: marks[i] == d ? 45 : null,
+              ),
+          ],
+          bpm: 60,
+          openBpm: 50,
+          targetBpm: 60,
+          completed: true,
+          loopUsed: false,
+          waitUsed: false,
+        );
+        final fix = fixFor(s);
+        expect(fix, isA<FixNoClearDifference>());
+        await pumpResult(tester, s, fix: fix);
+        expect(
+          find.text(
+            "I didn't measure a clear difference; will you try once more?",
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(const Key('listen-try-fix-card')),
+            matching: find.textContaining('faster'),
+          ),
+          findsNothing,
+        );
+        expect(find.byKey(const Key('listen-try-fix-repeat')), findsNothing);
+      },
+    );
 
     testWidgets('dar ekran (320 px) taşma yok', (tester) async {
       final s = pitchSummary([c, d, c, c, c, d, c, c]);

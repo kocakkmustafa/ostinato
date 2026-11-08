@@ -21,6 +21,10 @@ class ListenTryFixCard extends StatelessWidget {
     final body = switch (result) {
       FixUnmeasured() => uiText(context, ListenTryFixCopy.couldNotMeasure),
       FixClear() => uiText(context, ListenTryFixCopy.clear),
+      FixNoClearDifference() => uiText(
+        context,
+        ListenTryFixCopy.noClearDifference,
+      ),
       FixCorrection(:final kind, :final bar) => uiText(
         context,
         switch (kind) {
@@ -35,7 +39,9 @@ class ListenTryFixCard extends StatelessWidget {
     final title = uiText(context, ListenTryFixCopy.title);
     final correction = result is FixCorrection ? result as FixCorrection : null;
     final plan = correction?.plan;
-    final next = plan?.nextBpm;
+    final next =
+        plan?.nextBpm ??
+        (result is FixClear ? (result as FixClear).nextBpm : null);
     return GlassCard(
       key: const Key('listen-try-fix-card'),
       child: Column(
@@ -81,15 +87,15 @@ class ListenTryFixCard extends StatelessWidget {
               style: hankenText(size: 12.5, color: palette.textMuted),
             ),
           ],
-          if (plan != null && next != null) ...[
+          if (next != null) ...[
             const SizedBox(height: 10),
             OutlinedButton(
               key: const Key('listen-try-fix-repeat'),
               onPressed: () => Navigator.of(context).pop(
                 ResultActionRepeat(
                   next,
-                  first: plan.loop?.first,
-                  last: plan.loop?.last,
+                  first: plan?.loop?.first,
+                  last: plan?.loop?.last,
                 ),
               ),
               child: Text(

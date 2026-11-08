@@ -8647,10 +8647,11 @@
     "6ac1a2a248452bf3": "Ein paar Schläge kamen etwas zu spät (Takt {v0}). Spiel diesen Teil noch einmal, etwas langsamer und mit dem Klick.",
     "96e8c4f33076ed75": "In Takt {v0} habe ich einen Schlag nicht gehört. Spiel diesen Teil noch einmal, etwas langsamer.",
     "6bea95cd34ab0688": "Einige Töne klangen anders als die notierte Tonhöhe (Takt {v0}). Spiel diesen Teil langsam und lass jeden Ton ausklingen.",
-    "1dd4afb7b95b1835": "Diesmal habe ich keinen deutlichen Unterschied gemessen. Dein Spiel war gleichmäßig; du kannst es etwas schneller versuchen.",
     "1034d25358f0975b": "Ich konnte dieses Geräusch nicht sicher unterscheiden; versuchst du es noch einmal?",
     "8aee84f240e1fd83": "In Schritten wiederholen",
     "507698b37306b849": "Noch einmal bei ♩={v0}",
-    "8ecf8f029ffde9a3": "Als Nächstes eine kurze Übung dazu: {v0}"
+    "8ecf8f029ffde9a3": "Als Nächstes eine kurze Übung dazu: {v0}",
+    "1d83465302a96db1": "Dein Spiel passte diesmal gut zur Zeile; du kannst es etwas schneller versuchen.",
+    "22540e4124cf871e": "Ich habe keinen deutlichen Unterschied gemessen; versuchst du es noch einmal?"
   }
 }

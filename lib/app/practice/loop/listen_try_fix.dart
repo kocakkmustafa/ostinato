@@ -65,9 +65,8 @@ final class FixRepeatPlan {
   /// Ascending tempo steps (BPM); empty for a free-tempo lesson (no click).
   final List<int> steps;
 
-  /// The step to play next: a fresh correction starts at the slower step,
-  /// later runs climb to the first step above the last run; null when the
-  /// run already was at the last step or there is no click.
+  /// The tempo to play next: a fresh correction starts at the slower step; a
+  /// persisting one repeats the last tempo; null for a free-tempo lesson.
   final int? nextBpm;
 
   /// Bars to repeat for steps below the anchor tempo; null = the full line.
@@ -87,9 +86,18 @@ final class FixUnmeasured extends ListenTryFixResult {
   final CouldNotMeasure reason;
 }
 
-/// Heard well enough and no kind of difference stands out.
+/// Heard well enough, the accuracy check of the lesson is met (measured) and
+/// no kind of difference stands out. [nextBpm] is set while a correction is
+/// active and the run was below its anchor tempo: the next step up.
 final class FixClear extends ListenTryFixResult {
-  const FixClear();
+  const FixClear({this.nextBpm});
+  final int? nextBpm;
+}
+
+/// Heard well enough, but the accuracy check is not met and no single kind
+/// dominates: nothing is claimed, nothing faster is suggested.
+final class FixNoClearDifference extends ListenTryFixResult {
+  const FixNoClearDifference();
 }
 
 final class FixCorrection extends ListenTryFixResult {
@@ -117,9 +125,12 @@ abstract final class ListenTryFix {
     FixKind.missed,
   ];
 
-  /// The one correction for [summary]. [anchorBpm] is the tempo at which the
-  /// correction started (so the steps keep climbing across repeats); null =
-  /// this run's tempo. [pool] = lessons a next exercise may come from.
+  /// The one correction for [summary]. Every count (heard, decided, kinds,
+  /// accuracy) is taken from the LATEST pass of each note (`lastMarks`), so
+  /// loop passes never mix. [anchorBpm] is the tempo at which the correction
+  /// started: while a correction persists the same step is offered again
+  /// (never a higher one); once the run is clear it climbs to the next step.
+  /// Null = fresh correction. [pool] = lessons a next exercise may come from.
   static ListenTryFixResult of(
     PracticeRunSummary summary, {
     required V1Lesson lesson,
@@ -127,8 +138,23 @@ abstract final class ListenTryFix {
     int? anchorBpm,
     List<V1Lesson> pool = const [],
   }) {
-    final decided = summary.correct + summary.different;
-    if (summary.total == 0 || summary.heard < FixThresholds.minHeard) {
+    var correct = 0, different = 0, unheard = 0;
+    for (final o in summary.lastMarks.values) {
+      switch (o.mark) {
+        case PracticeMark.correct:
+          correct++;
+        case PracticeMark.differentNote:
+          different++;
+        case PracticeMark.couldNotHear:
+          unheard++;
+        case PracticeMark.pending:
+          break;
+      }
+    }
+    final decided = correct + different;
+    final total = decided + unheard;
+    final heard = total == 0 ? 0.0 : decided / total;
+    if (total == 0 || heard < FixThresholds.minHeard) {
       return const FixUnmeasured(CouldNotMeasure.weakSignal);
     }
     if (decided < FixThresholds.minDecided) {
@@ -143,13 +169,30 @@ abstract final class ListenTryFix {
     FixKind? best;
     for (final k in priority) {
       final n = bars[k]?.length ?? 0;
-      if (n < FixThresholds.minEvidence ||
-          n < FixThresholds.minShare * summary.total) {
+      if (n < FixThresholds.minEvidence || n < FixThresholds.minShare * total) {
         continue;
       }
       if (best == null || n > bars[best]!.length) best = k;
     }
-    if (best == null) return const FixClear();
+    if (best == null) {
+      final accuracy = correct / decided;
+      if (accuracy < summary.gate.criteria.minAccuracy - 1e-9) {
+        return const FixNoClearDifference();
+      }
+      int? climb;
+      if (anchorBpm != null && !freeTempo && summary.bpm < anchorBpm) {
+        for (final st in tempoSteps(
+          anchorBpm: anchorBpm,
+          targetBpm: summary.targetBpm,
+        )) {
+          if (st > summary.bpm) {
+            climb = st;
+            break;
+          }
+        }
+      }
+      return FixClear(nextBpm: climb);
+    }
     final list = bars[best]!..sort();
     return FixCorrection(
       kind: best,
@@ -219,23 +262,20 @@ abstract final class ListenTryFix {
     final steps = freeTempo
         ? const <int>[]
         : tempoSteps(anchorBpm: anchor, targetBpm: targetBpm);
+    // A fresh correction starts at the slower step (below this run). While it
+    // persists (anchor set) the same tempo is offered again: no step up until
+    // a run is clear.
     int? next;
-    if (anchorBpm == null) {
-      // A fresh correction starts with the slower step (below this run).
-      for (final s in steps) {
-        if (s < runBpm) {
-          next = s;
-          break;
+    if (steps.isNotEmpty) {
+      if (anchorBpm == null) {
+        for (final s in steps) {
+          if (s < runBpm) {
+            next = s;
+            break;
+          }
         }
       }
-    }
-    if (next == null) {
-      for (final s in steps) {
-        if (s > runBpm) {
-          next = s;
-          break;
-        }
-      }
+      next ??= runBpm;
     }
     // Only steps below the anchor repeat the short part; the steps from the
     // anchor up are full runs (a full run at the target is what the gate
