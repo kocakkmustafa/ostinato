@@ -49,3 +49,10 @@ Envanter (koddan): ses `OwnRecorder`'da RAM'de (en çok 180 sn, 16-bit PCM); tur
 3. Güvenlik/maliyet: Ham ses cihazdan çıkmaz, kalıcı dosya oluşmaz; yeni ücretli kaynak 0 USD.
 4. Geri dönüş: Bayrak `false` kalır; OST-P0-08B yeni ADR ile bunu genişletir.
 5. Kullanıcı: Yetişkin kullanıcı kendi turunu dinler; çocuk ve yaşı belirsiz kullanıcı kayıt almaz.
+
+Bilinen sınırlar (ADR-005):
+- (a) `writeAsBytes` yarıda kesilirse (disk dolu) kısmi `take-N.wav` kalır; sonraki ders açılışındaki süpürme siler.
+- (b) Uygulama öldürülürse artık dosya sonraki ders açılışına kadar kalır.
+- (c) `settings_screen.dart` "Kendi kaydımı dinle" anahtarı bayrak açıkken child/unknown'a görünür ama işlevsizdir; `takeNote`/`settingBody` arka plan silmesini anmaz. Bayrak açılmadan önce düzeltilecek (OST-P0-08B ya da bayrak açma bileti).
+- Arka plan temizliği yalnız `paused`/`hidden`/`detached`'da tetiklenir; `inactive` (izin penceresi, bildirim perdesi) tur ortasını silmez.
+

@@ -16,6 +16,7 @@ import 'package:ostinato/app/practice/loop/practice_outcome.dart';
 import 'package:ostinato/app/practice/loop/practice_progress_store.dart';
 import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
 import 'package:ostinato/app/practice/own_recording/own_recording.dart';
+import 'package:ostinato/app/practice/own_recording/own_recording_copy.dart';
 import 'package:ostinato/app/practice/own_recording/own_recording_preference.dart';
 import 'package:ostinato/app/practice/own_recording/recording_retention_copy.dart';
 import 'package:ostinato/app/practice/own_recording/recording_retention_policy.dart';
@@ -289,10 +290,13 @@ void main() {
   });
 
   group('screen wiring', () {
-    Future<bool> recorderEnabled(
+    /// Pumps the practice screen, seeds a sealed take once it settled, runs [body] while it is mounted, then unmounts it.
+    Future<void> withScreen(
       WidgetTester tester, {
       required bool open,
       required RetentionAudience audience,
+      required Future<void> Function(OwnRecorder rec, File take) body,
+      bool settle = true,
     }) async {
       tester.view.physicalSize = const Size(420, 1800);
       tester.view.devicePixelRatio = 1;
@@ -301,7 +305,7 @@ void main() {
         channel: FakeAudioCaptureChannel(),
         requestMicrophonePermission: () async => PermissionStatus.granted,
       );
-      final rec = recorder();
+      final rec = recorder()..enabled = true;
       await tester.pumpWidget(
         practiceHost(
           PracticeLoopScreen(
@@ -326,25 +330,58 @@ void main() {
           ),
         ),
       );
-      for (var i = 0; i < 25; i++) {
-        await tester.runAsync(
-          () => Future<void>.delayed(const Duration(milliseconds: 20)),
-        );
-        await tester.pump();
+      if (settle) {
+        for (var i = 0; i < 25; i++) {
+          await tester.runAsync(
+            () => Future<void>.delayed(const Duration(milliseconds: 20)),
+          );
+          await tester.pump();
+        }
       }
-      final enabled = rec.enabled;
+      // Seeded after the screen's lesson-open sweep, which deletes leftovers.
+      final decided = rec.enabled;
+      rec.enabled = true;
+      rec.add(_chunk(4800));
+      final take = (await tester.runAsync(rec.seal))!;
+      rec.enabled = decided;
+      await body(rec, take);
       await tester.pumpWidget(const SizedBox());
-      return enabled;
     }
 
-    testWidgets('flag closed: the setting alone decides (unchanged)', (
+    Future<void> lifecycle(WidgetTester tester, AppLifecycleState s) async {
+      tester.binding.handleAppLifecycleStateChanged(s);
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 50)),
+      );
+      await tester.pump();
+    }
+
+    testWidgets('flag closed: setting decides; legacy footer; no observer', (
       tester,
     ) async {
       for (final a in RetentionAudience.values) {
-        expect(
-          await recorderEnabled(tester, open: false, audience: a),
-          isTrue,
-          reason: '$a',
+        await withScreen(
+          tester,
+          open: false,
+          audience: a,
+          body: (rec, take) async {
+            expect(rec.enabled, isTrue, reason: '$a');
+            // (i) footer: the old text, never the new one.
+            expect(
+              find.text(OwnRecordingCopy.practiceFooterOn.$1),
+              findsOneWidget,
+            );
+            expect(
+              find.text(RecordingRetentionCopy.practiceFooterSessionOnly.$1),
+              findsNothing,
+            );
+            // (ii) no lifecycle observer: leaving the app keeps the take.
+            await lifecycle(tester, AppLifecycleState.paused);
+            await lifecycle(tester, AppLifecycleState.hidden);
+            expect(take.existsSync(), isTrue, reason: '$a');
+            expect(rec.take, isNotNull);
+            await lifecycle(tester, AppLifecycleState.resumed);
+          },
         );
       }
     });
@@ -353,13 +390,82 @@ void main() {
       tester,
     ) async {
       for (final a in RetentionAudience.values) {
-        expect(
-          await recorderEnabled(tester, open: true, audience: a),
-          a == RetentionAudience.adult,
-          reason: '$a',
+        await withScreen(
+          tester,
+          open: true,
+          audience: a,
+          body: (rec, take) async {
+            expect(rec.enabled, a == RetentionAudience.adult, reason: '$a');
+          },
         );
       }
     });
+
+    testWidgets('flag open: new footer text, legacy footer absent', (
+      tester,
+    ) async {
+      await withScreen(
+        tester,
+        open: true,
+        audience: RetentionAudience.adult,
+        body: (rec, take) async {
+          expect(
+            find.text(RecordingRetentionCopy.practiceFooterSessionOnly.$1),
+            findsOneWidget,
+          );
+          expect(find.text(OwnRecordingCopy.practiceFooterOn.$1), findsNothing);
+        },
+      );
+    });
+
+    testWidgets('flag open: guard attached (paused deletes), inactive keeps, '
+        'detached on dispose', (tester) async {
+      await withScreen(
+        tester,
+        open: true,
+        audience: RetentionAudience.adult,
+        body: (rec, take) async {
+          await lifecycle(tester, AppLifecycleState.inactive);
+          expect(take.existsSync(), isTrue, reason: 'inactive keeps the take');
+          expect(rec.take, isNotNull);
+          await lifecycle(tester, AppLifecycleState.paused);
+          expect(take.existsSync(), isFalse, reason: 'paused deletes');
+          expect(rec.take, isNull);
+          await lifecycle(tester, AppLifecycleState.resumed);
+        },
+      );
+      // Screen disposed: a new take must survive leaving the app, i.e. the
+      // observer was detached.
+      final rec = recorder()..enabled = true;
+      rec.add(_chunk(4800));
+      final take = (await tester.runAsync(rec.seal))!;
+      await lifecycle(tester, AppLifecycleState.paused);
+      expect(take.existsSync(), isTrue, reason: 'no observer after dispose');
+    });
+  });
+
+  group('guard states', () {
+    for (final (state, deletes) in [
+      (AppLifecycleState.inactive, false),
+      (AppLifecycleState.resumed, false),
+      (AppLifecycleState.paused, true),
+      (AppLifecycleState.hidden, true),
+      (AppLifecycleState.detached, true),
+    ]) {
+      test(
+        '${state.name} ${deletes ? 'discards' : 'keeps'} the take',
+        () async {
+          final r = recorder()..enabled = true;
+          final guard = RecorderBackgroundGuard(r);
+          r.add(_chunk(4800));
+          final f = await r.seal();
+          guard.didChangeAppLifecycleState(state);
+          await pumpEventQueue();
+          expect(f!.existsSync(), !deletes);
+          await r.discard();
+        },
+      );
+    }
   });
 
   test('copy promises no saving or export', () {

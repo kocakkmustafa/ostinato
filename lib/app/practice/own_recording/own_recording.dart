@@ -125,6 +125,9 @@ final class OwnRecorder extends ChangeNotifier {
       if (await f.exists()) await f.delete();
     } on FileSystemException {
       // The temporary directory is the OS's; sweep() retries next lesson.
+    } on Object catch (e) {
+      // Not a file-system failure: never an unhandled async error.
+      debugPrint('OwnRecorder: take delete failed: $e');
     }
   }
 
