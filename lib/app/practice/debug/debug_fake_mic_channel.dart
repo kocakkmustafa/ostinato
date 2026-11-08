@@ -8,7 +8,6 @@ import 'package:ostinato_audio/ostinato_audio.dart';
 
 import '../../audio/audio_capture_channel.dart';
 import '../../audio/audio_input_controller.dart';
-
 import 'package:permission_handler/permission_handler.dart';
 
 import '../loop/practice_score.dart';
