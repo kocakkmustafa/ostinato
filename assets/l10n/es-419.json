@@ -8641,6 +8641,16 @@
     "890811e0028347fb": "El espejo no da puntuación ni sugerencias. Compara lo que ves con la lista de la lección.",
     "03db3a7125512dce": "Parte 1: sostén la púa y coloca la mano que pisa en el mástil frente al espejo de la cámara durante 30 segundos; compárala con la lista. Parte 2: responde 6 preguntas sobre los números de los dedos.",
     "99804cb7ab683368": "Mantén la posición de la mano durante 30 segundos y marca la lista; luego responde al menos 5 de 6 preguntas. El espejo no da sugerencias.",
-    "73fec5fe487774a3": "Detente si sientes dolor, entumecimiento u hormigueo. El audio se procesa en este dispositivo y no se envía. «Escuchar mi propia grabación» está activado: esta ronda se guarda en este dispositivo hasta la siguiente ronda o hasta que salgas de la lección."
+    "73fec5fe487774a3": "Detente si sientes dolor, entumecimiento u hormigueo. El audio se procesa en este dispositivo y no se envía. «Escuchar mi propia grabación» está activado: esta ronda se guarda en este dispositivo hasta la siguiente ronda o hasta que salgas de la lección.",
+    "d14563f88beedf5e": "Una cosa para trabajar",
+    "82a931b1a525ec87": "Algunos pulsos llegaron un poco antes (compás {v0}). Prueba esa parte otra vez, un poco más despacio.",
+    "6ac1a2a248452bf3": "Algunos pulsos llegaron un poco tarde (compás {v0}). Prueba esa parte otra vez, un poco más despacio y con el clic.",
+    "96e8c4f33076ed75": "No escuché un pulso en el compás {v0}. Prueba esa parte otra vez, un poco más despacio.",
+    "6bea95cd34ab0688": "Algunas notas sonaron distintas de la altura escrita (compás {v0}). Toca esa parte despacio y deja sonar cada nota.",
+    "1dd4afb7b95b1835": "Esta vez no medí ninguna diferencia clara. Tu toque fue constante; puedes probar un poco más rápido.",
+    "1034d25358f0975b": "No pude distinguir este sonido con seguridad; ¿lo intentas otra vez?",
+    "8aee84f240e1fd83": "Repetir por pasos",
+    "507698b37306b849": "Intenta otra vez a ♩={v0}",
+    "8ecf8f029ffde9a3": "Después, un ejercicio corto para esto: {v0}"
   }
 }

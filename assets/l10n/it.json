@@ -8641,6 +8641,16 @@
     "890811e0028347fb": "Lo specchio non dà punteggi né suggerimenti. Confronta ciò che vedi con la lista di controllo della lezione.",
     "03db3a7125512dce": "Parte 1: tieni il plettro e appoggia la mano sui tasti sul manico davanti allo specchio della fotocamera per 30 secondi; confrontala con la lista di controllo. Parte 2: rispondi a 6 domande sui numeri delle dita.",
     "99804cb7ab683368": "Mantieni la posizione della mano per 30 secondi e spunta la lista di controllo, poi rispondi ad almeno 5 domande su 6. Lo specchio non dà suggerimenti.",
-    "73fec5fe487774a3": "Fermati se senti dolore, intorpidimento o formicolio. L'audio viene elaborato su questo dispositivo e non viene inviato. \"Ascolta la mia registrazione\" è attivo: questo giro resta su questo dispositivo fino al giro successivo o finché non esci dalla lezione."
+    "73fec5fe487774a3": "Fermati se senti dolore, intorpidimento o formicolio. L'audio viene elaborato su questo dispositivo e non viene inviato. \"Ascolta la mia registrazione\" è attivo: questo giro resta su questo dispositivo fino al giro successivo o finché non esci dalla lezione.",
+    "d14563f88beedf5e": "Una cosa su cui lavorare",
+    "82a931b1a525ec87": "Alcuni battiti sono arrivati un po’ in anticipo (battuta {v0}). Riprova quel passaggio, un po’ più lentamente.",
+    "6ac1a2a248452bf3": "Alcuni battiti sono arrivati un po’ in ritardo (battuta {v0}). Riprova quel passaggio, un po’ più lentamente, con il clic.",
+    "96e8c4f33076ed75": "Non ho sentito un battito nella battuta {v0}. Riprova quel passaggio, un po’ più lentamente.",
+    "6bea95cd34ab0688": "Alcune note suonavano diverse dall’altezza scritta (battuta {v0}). Suona quel passaggio lentamente e lascia risuonare ogni nota.",
+    "1dd4afb7b95b1835": "Questa volta non ho misurato nessuna differenza evidente. Il tuo suono era regolare; puoi provare un po’ più veloce.",
+    "1034d25358f0975b": "Non sono riuscito a distinguere questo suono con sicurezza; vuoi riprovare?",
+    "8aee84f240e1fd83": "Ripeti a gradini",
+    "507698b37306b849": "Riprova a ♩={v0}",
+    "8ecf8f029ffde9a3": "Poi, un breve esercizio per questo: {v0}"
   }
 }

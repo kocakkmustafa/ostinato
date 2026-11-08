@@ -8641,6 +8641,16 @@
     "890811e0028347fb": "The mirror gives no score and no hint. Compare what you see with the lesson's checklist.",
     "03db3a7125512dce": "Part 1: hold the pick and place the fretting hand on the neck in front of the camera mirror for 30 seconds; compare it with the checklist. Part 2: answer 6 questions on finger numbers.",
     "99804cb7ab683368": "Hold the hand position for 30 seconds and tick the checklist, then answer at least 5 of 6 questions. The mirror gives no hints.",
-    "73fec5fe487774a3": "Stop for pain, numbness or tingling. Audio is processed on this device and not sent. \"Listen to my own recording\" is on: this run is kept on this device until the next run or until you leave the lesson."
+    "73fec5fe487774a3": "Stop for pain, numbness or tingling. Audio is processed on this device and not sent. \"Listen to my own recording\" is on: this run is kept on this device until the next run or until you leave the lesson.",
+    "d14563f88beedf5e": "One thing to work on",
+    "82a931b1a525ec87": "A few beats came a little early (bar {v0}). Try that part again, a bit slower.",
+    "6ac1a2a248452bf3": "A few beats came a little late (bar {v0}). Try that part again, a bit slower, with the click.",
+    "96e8c4f33076ed75": "I did not hear a beat in bar {v0}. Try that part again, a bit slower.",
+    "6bea95cd34ab0688": "Some notes sounded different from the written pitch (bar {v0}). Play that part slowly and let each note ring.",
+    "1dd4afb7b95b1835": "I measured no clear difference this time. Your playing was steady; you can try a little faster.",
+    "1034d25358f0975b": "I couldn't tell this sound apart with confidence; will you try again?",
+    "8aee84f240e1fd83": "Repeat in steps",
+    "507698b37306b849": "Try again at ♩={v0}",
+    "8ecf8f029ffde9a3": "Next, a short exercise for this: {v0}"
   }
 }

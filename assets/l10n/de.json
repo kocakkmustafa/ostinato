@@ -8641,6 +8641,16 @@
     "890811e0028347fb": "Der Spiegel gibt keine Wertung und keinen Hinweis. Vergleiche, was du siehst, mit der Checkliste der Lektion.",
     "03db3a7125512dce": "Teil 1: Halte das Plektrum und lege die Greifhand 30 Sekunden lang vor dem Kameraspiegel an den Hals; vergleiche sie mit der Checkliste. Teil 2: Beantworte 6 Fragen zu den Fingernummern.",
     "99804cb7ab683368": "Halte die Handposition 30 Sekunden lang und hake die Checkliste ab. Beantworte dann mindestens 5 von 6 Fragen. Der Spiegel gibt keine Hinweise.",
-    "73fec5fe487774a3": "Höre bei Schmerz, Taubheit oder Kribbeln auf. Der Ton wird auf diesem Gerät verarbeitet und nicht gesendet. „Meine eigene Aufnahme anhören“ ist an: Dieser Durchgang bleibt auf diesem Gerät, bis du den nächsten startest oder die Lektion verlässt."
+    "73fec5fe487774a3": "Höre bei Schmerz, Taubheit oder Kribbeln auf. Der Ton wird auf diesem Gerät verarbeitet und nicht gesendet. „Meine eigene Aufnahme anhören“ ist an: Dieser Durchgang bleibt auf diesem Gerät, bis du den nächsten startest oder die Lektion verlässt.",
+    "d14563f88beedf5e": "Eine Sache zum Üben",
+    "82a931b1a525ec87": "Ein paar Schläge kamen etwas zu früh (Takt {v0}). Spiel diesen Teil noch einmal, etwas langsamer.",
+    "6ac1a2a248452bf3": "Ein paar Schläge kamen etwas zu spät (Takt {v0}). Spiel diesen Teil noch einmal, etwas langsamer und mit dem Klick.",
+    "96e8c4f33076ed75": "In Takt {v0} habe ich einen Schlag nicht gehört. Spiel diesen Teil noch einmal, etwas langsamer.",
+    "6bea95cd34ab0688": "Einige Töne klangen anders als die notierte Tonhöhe (Takt {v0}). Spiel diesen Teil langsam und lass jeden Ton ausklingen.",
+    "1dd4afb7b95b1835": "Diesmal habe ich keinen deutlichen Unterschied gemessen. Dein Spiel war gleichmäßig; du kannst es etwas schneller versuchen.",
+    "1034d25358f0975b": "Ich konnte dieses Geräusch nicht sicher unterscheiden; versuchst du es noch einmal?",
+    "8aee84f240e1fd83": "In Schritten wiederholen",
+    "507698b37306b849": "Noch einmal bei ♩={v0}",
+    "8ecf8f029ffde9a3": "Als Nächstes eine kurze Übung dazu: {v0}"
   }
 }

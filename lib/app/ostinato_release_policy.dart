@@ -51,6 +51,16 @@ const bool ostinatoCameraPracticeAvailable = false;
 /// `motionCameraCoachingAvailable` and of the live camera practice above.
 const bool ostinatoCameraLessonsOpen = false;
 
+/// OST-P0-06 (founder, 2026-11-08, "Dört ürün ana talimatı" §7.1–§7.4):
+/// the "listen → try → fix → repeat" loop inside the existing measured
+/// lessons. When true the practice result shows ONE measured correction (or
+/// "I could not tell this sound apart with confidence" when the signal is
+/// weak), a stepped tempo repeat and a next exercise taken from the kind of
+/// difference. Nothing is judged "wrong"; nothing is recorded or sent.
+/// While false the practice screen and its result are exactly as in 1.0.2.
+/// Rollback: leave this false (or revert the PR); no data depends on it.
+const bool ostinatoListenTryFixRepeatOpen = false;
+
 /// Founder decision 2026-10-25 (OST-K1): a 13–17 account still waiting for
 /// parental consent sees the subscription offers, and the purchase itself is
 /// left to the store's family controls (Ask to Buy / Google Play parental

@@ -8641,6 +8641,16 @@
     "890811e0028347fb": "Le miroir ne donne ni score ni conseil. Compare ce que tu vois avec la liste de la leçon.",
     "03db3a7125512dce": "Partie 1 : tiens le médiator et place la main qui frette sur le manche devant le miroir caméra pendant 30 secondes ; compare-la avec la liste. Partie 2 : réponds à 6 questions sur les numéros des doigts.",
     "99804cb7ab683368": "Garde la position de la main pendant 30 secondes et coche la liste, puis réponds à au moins 5 questions sur 6. Le miroir ne donne pas de conseils.",
-    "73fec5fe487774a3": "Arrête-toi en cas de douleur, d'engourdissement ou de fourmillements. L'audio est traité sur cet appareil et n'est pas envoyé. « Écouter mon propre enregistrement » est activé : cette prise reste sur cet appareil jusqu'à la prochaine ou jusqu'à ce que tu quittes la leçon."
+    "73fec5fe487774a3": "Arrête-toi en cas de douleur, d'engourdissement ou de fourmillements. L'audio est traité sur cet appareil et n'est pas envoyé. « Écouter mon propre enregistrement » est activé : cette prise reste sur cet appareil jusqu'à la prochaine ou jusqu'à ce que tu quittes la leçon.",
+    "d14563f88beedf5e": "Une chose à travailler",
+    "82a931b1a525ec87": "Quelques temps sont arrivés un peu tôt (mesure {v0}). Rejoue ce passage, un peu plus lentement.",
+    "6ac1a2a248452bf3": "Quelques temps sont arrivés un peu tard (mesure {v0}). Rejoue ce passage, un peu plus lentement, avec le clic.",
+    "96e8c4f33076ed75": "Je n’ai pas entendu de temps à la mesure {v0}. Rejoue ce passage, un peu plus lentement.",
+    "6bea95cd34ab0688": "Certaines notes sonnaient différemment de la hauteur écrite (mesure {v0}). Joue ce passage lentement et laisse chaque note résonner.",
+    "1dd4afb7b95b1835": "Je n’ai mesuré aucune différence nette cette fois. Ton jeu était régulier ; tu peux essayer un peu plus vite.",
+    "1034d25358f0975b": "Je n’ai pas pu distinguer ce son avec certitude ; veux-tu réessayer ?",
+    "8aee84f240e1fd83": "Répéter par étapes",
+    "507698b37306b849": "Réessayer à ♩={v0}",
+    "8ecf8f029ffde9a3": "Ensuite, un court exercice pour cela : {v0}"
   }
 }

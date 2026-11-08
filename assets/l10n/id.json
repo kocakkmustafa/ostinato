@@ -8634,6 +8634,16 @@
     "890811e0028347fb": "Cermin tidak memberi skor maupun petunjuk. Bandingkan yang kamu lihat dengan daftar periksa pelajaran.",
     "03db3a7125512dce": "Bagian 1: pegang plek dan letakkan tangan penekan fret pada leher di depan cermin kamera selama 30 detik; bandingkan dengan daftar periksa. Bagian 2: jawab 6 pertanyaan tentang nomor jari.",
     "99804cb7ab683368": "Tahan posisi tangan selama 30 detik dan centang daftar periksa, lalu jawab minimal 5 dari 6 pertanyaan. Cermin tidak memberi petunjuk.",
-    "73fec5fe487774a3": "Berhentilah jika terasa nyeri, mati rasa, atau kesemutan. Audio diproses di perangkat ini dan tidak dikirim. “Dengarkan rekamanku sendiri” aktif: putaran ini disimpan di perangkat ini sampai putaran berikutnya atau sampai kamu keluar dari pelajaran."
+    "73fec5fe487774a3": "Berhentilah jika terasa nyeri, mati rasa, atau kesemutan. Audio diproses di perangkat ini dan tidak dikirim. “Dengarkan rekamanku sendiri” aktif: putaran ini disimpan di perangkat ini sampai putaran berikutnya atau sampai kamu keluar dari pelajaran.",
+    "d14563f88beedf5e": "Satu hal untuk dilatih",
+    "82a931b1a525ec87": "Beberapa ketukan datang sedikit lebih awal (birama {v0}). Coba bagian itu lagi, sedikit lebih pelan.",
+    "6ac1a2a248452bf3": "Beberapa ketukan datang sedikit terlambat (birama {v0}). Coba bagian itu lagi, sedikit lebih pelan, bersama klik.",
+    "96e8c4f33076ed75": "Aku tidak mendengar ketukan di birama {v0}. Coba bagian itu lagi, sedikit lebih pelan.",
+    "6bea95cd34ab0688": "Beberapa nada terdengar berbeda dari nada yang tertulis (birama {v0}). Mainkan bagian itu pelan-pelan dan biarkan tiap nada berdenging.",
+    "1dd4afb7b95b1835": "Kali ini aku tidak mengukur perbedaan yang jelas. Permainanmu stabil; kamu bisa mencoba sedikit lebih cepat.",
+    "1034d25358f0975b": "Aku tidak bisa membedakan bunyi ini dengan yakin; maukah kamu mencoba lagi?",
+    "8aee84f240e1fd83": "Ulangi bertahap",
+    "507698b37306b849": "Coba lagi di ♩={v0}",
+    "8ecf8f029ffde9a3": "Berikutnya, latihan singkat untuk ini: {v0}"
   }
 }

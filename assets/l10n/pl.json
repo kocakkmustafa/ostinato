@@ -8655,6 +8655,16 @@
     "890811e0028347fb": "Lustro nie daje oceny ani wskazówek. Porównaj to, co widzisz, z listą kontrolną lekcji.",
     "03db3a7125512dce": "Część 1: trzymaj kostkę i połóż rękę dociskającą struny na gryfie przed lustrem z kamery na 30 sekund; porównaj ją z listą kontrolną. Część 2: odpowiedz na 6 pytań o numery palców.",
     "99804cb7ab683368": "Utrzymaj ułożenie dłoni przez 30 sekund i odhacz listę, a potem odpowiedz poprawnie na co najmniej 5 z 6 pytań. Lustro nie daje wskazówek.",
-    "73fec5fe487774a3": "Przerwij przy bólu, drętwieniu lub mrowieniu. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. „Odsłuchaj własne nagranie” jest włączone: ta próba zostaje na tym urządzeniu do następnej próby lub do wyjścia z lekcji."
+    "73fec5fe487774a3": "Przerwij przy bólu, drętwieniu lub mrowieniu. Dźwięk jest przetwarzany na tym urządzeniu i nie jest wysyłany. „Odsłuchaj własne nagranie” jest włączone: ta próba zostaje na tym urządzeniu do następnej próby lub do wyjścia z lekcji.",
+    "d14563f88beedf5e": "Jedna rzecz do ćwiczenia",
+    "82a931b1a525ec87": "Kilka uderzeń padło odrobinę za wcześnie (takt {v0}). Spróbuj tego fragmentu jeszcze raz, trochę wolniej.",
+    "6ac1a2a248452bf3": "Kilka uderzeń padło odrobinę za późno (takt {v0}). Spróbuj tego fragmentu jeszcze raz, trochę wolniej, razem z metronomem.",
+    "96e8c4f33076ed75": "W takcie {v0} nie usłyszałem uderzenia. Spróbuj tego fragmentu jeszcze raz, trochę wolniej.",
+    "6bea95cd34ab0688": "Niektóre dźwięki brzmiały inaczej niż zapisana wysokość (takt {v0}). Zagraj ten fragment powoli i pozwól każdemu dźwiękowi wybrzmieć.",
+    "1dd4afb7b95b1835": "Tym razem nie zmierzyłem wyraźnej różnicy. Grałeś równo; możesz spróbować trochę szybciej.",
+    "1034d25358f0975b": "Nie potrafiłem pewnie rozpoznać tego dźwięku; spróbujesz jeszcze raz?",
+    "8aee84f240e1fd83": "Powtarzaj etapami",
+    "507698b37306b849": "Spróbuj jeszcze raz w tempie ♩={v0}",
+    "8ecf8f029ffde9a3": "Następnie krótkie ćwiczenie do tego: {v0}"
   }
 }

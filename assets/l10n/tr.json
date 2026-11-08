@@ -8641,6 +8641,16 @@
     "890811e0028347fb": "Ayna puan da ipucu da vermez. Gördüğünü dersin kontrol listesiyle karşılaştır.",
     "03db3a7125512dce": "1. bölüm: penayı tut ve sol elini kamera aynasının önünde 30 saniye sapa koy; kontrol listesiyle karşılaştır. 2. bölüm: parmak numaraları üzerine 6 soruyu yanıtla.",
     "99804cb7ab683368": "El konumunu 30 saniye koru ve kontrol listesini işaretle, sonra 6 sorunun en az 5'ini doğru yanıtla. Ayna ipucu vermez.",
-    "73fec5fe487774a3": "Ağrı, uyuşma ya da karıncalanmada dur. Ses bu cihazda işlenir, gönderilmez. \"Kendi kaydımı dinle\" açık: bu tur, sonraki tura ya da dersten çıkana kadar bu cihazda tutulur."
+    "73fec5fe487774a3": "Ağrı, uyuşma ya da karıncalanmada dur. Ses bu cihazda işlenir, gönderilmez. \"Kendi kaydımı dinle\" açık: bu tur, sonraki tura ya da dersten çıkana kadar bu cihazda tutulur.",
+    "d14563f88beedf5e": "Üzerinde çalışılacak tek şey",
+    "82a931b1a525ec87": "Birkaç vuruş biraz erken geldi (ölçü {v0}). O bölümü biraz daha yavaş tekrar dene.",
+    "6ac1a2a248452bf3": "Birkaç vuruş biraz geç geldi (ölçü {v0}). O bölümü klikle birlikte, biraz daha yavaş tekrar dene.",
+    "96e8c4f33076ed75": "Ölçü {v0} içinde bir vuruş duymadım. O bölümü biraz daha yavaş tekrar dene.",
+    "6bea95cd34ab0688": "Bazı notalar yazılan perdeden farklı duyuldu (ölçü {v0}). O bölümü yavaş çal ve her notanın tınlamasına izin ver.",
+    "1dd4afb7b95b1835": "Bu sefer net bir fark ölçmedim. Düzenli çaldın; biraz daha hızlı deneyebilirsin.",
+    "1034d25358f0975b": "Bu sesi güvenle ayırt edemedim; tekrar dener misin?",
+    "8aee84f240e1fd83": "Adımlarla tekrar",
+    "507698b37306b849": "♩={v0} temposunda tekrar dene",
+    "8ecf8f029ffde9a3": "Bunun için sıradaki kısa alıştırma: {v0}"
   }
 }
