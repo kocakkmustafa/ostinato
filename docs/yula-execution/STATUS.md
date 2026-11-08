@@ -74,3 +74,6 @@ status: IN_REVIEW
 | U5 | `instruments.v1.json` 42 çalgı vs çalışan 2 kurs | ADR-001 ile kapandı (plan, kapsam değil) | — |
 | U6 | `docs/store/` taslakları (60 ders, Motion+, 12 ücretsiz) eski | Açık iş; kod/`listing-v1` doğru kabul edilir | Ostinato proje oturumu |
 | U7 | `ventures/ostinato/app` ağacı eski (`d787720`) | Açık; bu PR dokunmaz | önerilen sahip: Motion orchestration |
+
+## Bilet OST-P0-09
+- [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [`OST-P0-09-PROTOKOL.md`](OST-P0-09-PROTOKOL.md)
