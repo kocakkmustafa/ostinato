@@ -1,0 +1,10 @@
+{
+  "$about": "OST-P0-08 recording-retention copy (lib/app/practice/own_recording/recording_retention_copy.dart). EN+TR source pairs; all 14 catalogs carry them.",
+  "messages": [
+    {
+      "id": "practiceFooterSessionOnly",
+      "en": "Stop for pain, numbness or tingling. Audio is processed on this device and not sent. Your recording stays only in this session, on this device, and is deleted when the session ends.",
+      "tr": "Ağrı, uyuşma ya da karıncalanmada dur. Ses bu cihazda işlenir, gönderilmez. Kaydın yalnız bu oturumda, cihazında kalır ve oturum bitince silinir."
+    }
+  ]
+}
