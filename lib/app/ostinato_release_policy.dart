@@ -51,6 +51,16 @@ const bool ostinatoCameraPracticeAvailable = false;
 /// `motionCameraCoachingAvailable` and of the live camera practice above.
 const bool ostinatoCameraLessonsOpen = false;
 
+/// OST-P0-06 (founder, 2026-11-08, "Dört ürün ana talimatı" §7.1–§7.4):
+/// the "listen → try → fix → repeat" loop inside the existing measured
+/// lessons. When true the practice result shows ONE measured correction (or
+/// "I could not tell this sound apart with confidence" when the signal is
+/// weak), a stepped tempo repeat and a next exercise taken from the kind of
+/// difference. Nothing is judged "wrong"; nothing is recorded or sent.
+/// While false the practice screen and its result are exactly as in 1.0.2.
+/// Rollback: leave this false (or revert the PR); no data depends on it.
+const bool ostinatoListenTryFixRepeatOpen = false;
+
 /// OST-P0-08: recording-retention surface (audience gate for the own-take
 /// recorder, background discard, "delete all"). False keeps today's FK2
 /// behaviour exactly. Even when true nothing is ever stored persistently:
@@ -70,3 +80,12 @@ const MotionTeenPurchasePolicy ostinatoTeenPurchasePolicy =
 /// until the schema, identity and store-label changes are approved; nothing
 /// reads `lib/app/sync/` yet and no network call exists for it.
 const bool ostinatoProgressSyncAvailable = false;
+
+/// OST-P0-05 (founder master instruction 2026-11-08, section 7.4): the "first
+/// three minutes" flow, shown once after the welcome pages: tap the rhythm
+/// (no microphone permission), use your voice (permission asked at the moment
+/// of use, with a blameless return to tapping) or go straight to the library.
+/// Closed by default: while false the first launch is exactly the welcome
+/// pages followed by the library. Rollback: set this to false (or revert the
+/// PR); nothing is stored by the flow, so there is nothing to migrate.
+const bool ostinatoFirstThreeMinutesOpen = false;

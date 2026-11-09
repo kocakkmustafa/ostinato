@@ -9,6 +9,8 @@ import '../display/practice_display_copy.dart';
 import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
 import '../own_recording/own_take_player.dart';
+import 'listen_try_fix.dart';
+import 'listen_try_fix_card.dart';
 import 'practice_marks.dart';
 import 'practice_outcome.dart';
 import 'practice_rhythm_copy.dart';
@@ -43,6 +45,14 @@ final class ResultActionPerformance extends ResultAction {
   const ResultActionPerformance();
 }
 
+/// OST-P0-06: repeat the same part at [bpm]; [first]/[last] set = only that
+/// bar range, null = the full line.
+final class ResultActionRepeat extends ResultAction {
+  const ResultActionRepeat(this.bpm, {this.first, this.last});
+  final int bpm;
+  final int? first, last;
+}
+
 final class ResultActionLoop extends ResultAction {
   const ResultActionLoop(this.first, this.last, {this.slower = false});
   final int first, last;
@@ -64,6 +74,7 @@ class PracticeResultScreen extends StatelessWidget {
     this.hasNextLesson = false,
     this.ownRecorder,
     this.ladder,
+    this.fix,
   });
 
   final V1Lesson lesson;
@@ -79,6 +90,10 @@ class PracticeResultScreen extends StatelessWidget {
   /// FK6: what the tempo ladder set for the next run; null when it is off
   /// or the lesson has none.
   final TempoLadderOutcome? ladder;
+
+  /// OST-P0-06: the one correction card (flag `ostinatoListenTryFixRepeatOpen`);
+  /// null = the result is exactly as before.
+  final ListenTryFixResult? fix;
 
   /// Rhythm-only line: "different" means early or late (A3 onset timing).
   bool get _rhythm => summary.gate.criteria.rhythm;
@@ -114,6 +129,10 @@ class PracticeResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               _counters(context),
+              if (fix != null) ...[
+                const SizedBox(height: 12),
+                ListenTryFixCard(result: fix!),
+              ],
               const SizedBox(height: 12),
               GlassCard(
                 child: Column(
