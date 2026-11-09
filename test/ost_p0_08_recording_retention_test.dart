@@ -50,6 +50,28 @@ final class _Pref implements OwnRecordingPreference {
   Future<void> write(bool enabled) async {}
 }
 
+/// The guard deletes asynchronously (`unawaited(discard())`): poll real time,
+/// at most 2 s at 10 ms steps, until [f] is gone; a clear failure otherwise.
+Future<void> _waitGone(File f, String what) async {
+  final end = DateTime.now().add(const Duration(seconds: 2));
+  while (f.existsSync()) {
+    if (DateTime.now().isAfter(end)) {
+      fail('$what: ${f.path} still exists after 2 s');
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 10));
+  }
+}
+
+/// Negative proof: [f] must still exist for the whole 300 ms window, long
+/// enough for an (unwanted) async delete to have run.
+Future<void> _staysThere(File f, String what) async {
+  final end = DateTime.now().add(const Duration(milliseconds: 300));
+  while (DateTime.now().isBefore(end)) {
+    if (!f.existsSync()) fail('$what: ${f.path} was deleted');
+    await Future<void>.delayed(const Duration(milliseconds: 10));
+  }
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late Directory tmp;
@@ -244,8 +266,7 @@ void main() {
       TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(
         AppLifecycleState.paused,
       );
-      await pumpEventQueue();
-      expect(f.existsSync(), isFalse);
+      await _waitGone(f, 'background');
       expect(r.take, isNull);
       expect(r.hasPendingAudio, isFalse);
       expect(onDisk(), isEmpty);
@@ -263,8 +284,7 @@ void main() {
       TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(
         AppLifecycleState.resumed,
       );
-      await pumpEventQueue();
-      expect(f!.existsSync(), isTrue);
+      await _staysThere(f!, 'resumed');
       await r.discard();
     });
 
@@ -378,7 +398,7 @@ void main() {
             // (ii) no lifecycle observer: leaving the app keeps the take.
             await lifecycle(tester, AppLifecycleState.paused);
             await lifecycle(tester, AppLifecycleState.hidden);
-            expect(take.existsSync(), isTrue, reason: '$a');
+            await tester.runAsync(() => _staysThere(take, 'flag closed $a'));
             expect(rec.take, isNotNull);
             await lifecycle(tester, AppLifecycleState.resumed);
           },
@@ -426,10 +446,10 @@ void main() {
         audience: RetentionAudience.adult,
         body: (rec, take) async {
           await lifecycle(tester, AppLifecycleState.inactive);
-          expect(take.existsSync(), isTrue, reason: 'inactive keeps the take');
+          await tester.runAsync(() => _staysThere(take, 'inactive'));
           expect(rec.take, isNotNull);
           await lifecycle(tester, AppLifecycleState.paused);
-          expect(take.existsSync(), isFalse, reason: 'paused deletes');
+          await tester.runAsync(() => _waitGone(take, 'paused'));
           expect(rec.take, isNull);
           await lifecycle(tester, AppLifecycleState.resumed);
         },
@@ -440,7 +460,7 @@ void main() {
       rec.add(_chunk(4800));
       final take = (await tester.runAsync(rec.seal))!;
       await lifecycle(tester, AppLifecycleState.paused);
-      expect(take.existsSync(), isTrue, reason: 'no observer after dispose');
+      await tester.runAsync(() => _staysThere(take, 'after dispose'));
     });
   });
 
@@ -460,8 +480,11 @@ void main() {
           r.add(_chunk(4800));
           final f = await r.seal();
           guard.didChangeAppLifecycleState(state);
-          await pumpEventQueue();
-          expect(f!.existsSync(), !deletes);
+          if (deletes) {
+            await _waitGone(f!, state.name);
+          } else {
+            await _staysThere(f!, state.name);
+          }
           await r.discard();
         },
       );
