@@ -61,6 +61,15 @@ const bool ostinatoCameraLessonsOpen = false;
 /// Rollback: leave this false (or revert the PR); no data depends on it.
 const bool ostinatoListenTryFixRepeatOpen = false;
 
+/// OST-P0-07 (founder, 2026-11-08, "Dört ürün ana talimatı" §7.4): the
+/// "ghost screen" on the existing practice screen. When true a small switch
+/// lets the player fade the guides (written line, "Listen first", visual
+/// beat) as measured practice repeats; "Show guides" brings them back at any
+/// time and start/stop stay reachable. Nothing is stored beyond the session
+/// and no skill is claimed. While false the practice screen is exactly as
+/// before. Rollback: leave this false (or revert the PR); no data depends on it.
+const bool ostinatoGhostScreenOpen = false;
+
 /// OST-P0-08: recording-retention surface (audience gate for the own-take
 /// recorder, background discard, "delete all"). False keeps today's FK2
 /// behaviour exactly. Even when true nothing is ever stored persistently:

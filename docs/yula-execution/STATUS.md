@@ -85,3 +85,6 @@ Cihaz-üstü kanıt yok; durum `TEST_ONLY`.
 
 ## Bilet OST-P0-09
 - [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [PR:: #72] [CI:: yok/koşulmadı] [ölçüm-raporu:: yok (03…08 merge sonrası)] [cihaz-ortam:: 0/5] [BLOCKED_ACCESS:: 100/100] · [`OST-P0-09-PROTOKOL.md`](OST-P0-09-PROTOKOL.md)
+
+## Bilet OST-P0-07
+- [bilet:: OST-P0-07] [durum:: TEST_ONLY] Hayalet Ekran: kademeli rehber gizleme, override, rehbersiz tamamlama; bayrak `ostinatoGhostScreenOpen=false` (kapalı) · [CI:: PR üzerinde] [kullanıcı-üstü-doğrulama:: YOK — gerçek kullanıcıyla öğrenme kanıtı yok] [yetkinlik-iddiası:: YOK] · [ADR-006](DECISIONS.md) · bilinen sınırlar: `A,U,A` iki art arda sayılır; durdurulmuş/döngü/bekle koşusu ilerletmez; aşama duyurusu (`liveRegion`) cihazda doğrulanmadı

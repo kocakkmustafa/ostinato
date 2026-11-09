@@ -25,7 +25,10 @@ import '../own_recording/recording_retention_policy.dart';
 import '../practice_audio_input.dart';
 import '../setup/setup_profile_store.dart';
 import '../setup/setup_wizard_screen.dart';
+import 'ghost_screen.dart';
+import 'ghost_screen_copy.dart';
 import 'listen_try_fix.dart';
+import 'listen_try_fix_copy.dart';
 import 'metronome_beat_view.dart';
 import 'practice_judge.dart';
 import 'practice_marks.dart';
@@ -65,6 +68,7 @@ class PracticeLoopScreen extends StatefulWidget {
     this.audience = RetentionAudience.unknown,
     this.seed,
     this.listenTryFixRepeat = ostinatoListenTryFixRepeatOpen,
+    this.ghostScreen = ostinatoGhostScreenOpen,
     this.suggestionPool = const [],
   });
 
@@ -98,6 +102,11 @@ class PracticeLoopScreen extends StatefulWidget {
   /// the result (release policy flag, default closed). False = the result is
   /// exactly as before.
   final bool listenTryFixRepeat;
+
+  /// OST-P0-07: the ghost-screen switch and fading guides (release policy
+  /// flag, default closed). False = no new widget, no new text; every guide
+  /// is drawn as before.
+  final bool ghostScreen;
 
   /// Lessons a "next exercise" may be taken from (the open course).
   final List<V1Lesson> suggestionPool;
@@ -154,6 +163,16 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   /// OST-P0-06: the tempo at which the current correction started, so the
   /// repeat steps keep climbing; in memory only, never stored.
   int? _fixAnchorBpm;
+
+  /// OST-P0-07: the player's switch (off until turned on) and the in-memory
+  /// level; never stored.
+  bool _ghostOn = false;
+  GhostState _ghost = const GhostState();
+
+  /// The guides drawn now: all of them unless the ghost screen is on.
+  Set<Guide> get _guides => widget.ghostScreen && _ghostOn
+      ? GhostScreenPolicy.visible(_ghost)
+      : Set.of(Guide.values);
 
   /// FK1 "Listen first"; never sounds while the microphone runs.
   final ReferenceListenController _listen = ReferenceListenController();
@@ -302,6 +321,20 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     // result screen states exactly what the next run will be.
     final ladder = _ladder.afterRun(summary);
     _c.tempo = TempoLadder.apply(ladder, _c.tempo);
+    if (widget.ghostScreen && _ghostOn) {
+      // A pure read of the run; the anchor and pool are not used here.
+      final read = ListenTryFix.of(
+        summary,
+        lesson: widget.lesson,
+        freeTempo: _freeTempo,
+      );
+      setState(
+        () => _ghost = GhostScreenPolicy.afterAttempt(
+          _ghost,
+          GhostScreenPolicy.classifyRun(summary, read),
+        ),
+      );
+    }
     ListenTryFixResult? fix;
     if (widget.listenTryFixRepeat) {
       fix = ListenTryFix.of(
@@ -451,6 +484,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                   if (_c.canEditSettings) _settings(context),
                   if (_c.hearing.setupCardDue && _c.running)
                     _setupCard(context),
+                  if (widget.ghostScreen) _ghostPanel(context),
                   _stripArea(context),
                   if (_c.heldEvent != null) _waitHelp(context),
                   const SizedBox(height: 10),
@@ -676,7 +710,11 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         children: [
           Row(
             children: [
-              if (_c.plan != null && _c.timeline != null)
+              if (_c.plan != null &&
+                  _c.timeline != null &&
+                  !_guides.contains(Guide.beatVisual))
+                const SizedBox.shrink()
+              else if (_c.plan != null && _c.timeline != null)
                 MetronomeBeatView(
                   state: _c.beat,
                   beatsPerBar: _score.beatsPerBar,
@@ -723,21 +761,138 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
             ],
           ),
           const SizedBox(height: 8),
-          SizedBox(
-            height: 190,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: PracticeTabStrip(
-                score: _score,
-                displayBeat: _c.displayBeat,
-                marks: _c.marks,
-                heldEvent: _c.heldEvent,
-                loop: _c.loopRange,
-                // A rhythm-only line is one lane of strokes, not six strings.
-                guitar: !_score.isRhythmOnly,
+          if (!_guides.contains(Guide.notation))
+            Container(
+              key: const Key('ghost-line-hidden'),
+              height: 190,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                uiText(context, GhostScreenCopy.hiddenLine),
+                textAlign: TextAlign.center,
+                style: hankenText(size: 13, color: palette.textMuted),
+              ),
+            )
+          else
+            SizedBox(
+              height: 190,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: PracticeTabStrip(
+                  score: _score,
+                  displayBeat: _c.displayBeat,
+                  marks: _c.marks,
+                  heldEvent: _c.heldEvent,
+                  loop: _c.loopRange,
+                  // A rhythm-only line is one lane of strokes, not six strings.
+                  guitar: !_score.isRhythmOnly,
+                ),
               ),
             ),
+        ],
+      ),
+    );
+  }
+
+  String _stageName(BuildContext context, GhostStage stage) =>
+      uiText(context, switch (stage) {
+        GhostStage.learn => GhostScreenCopy.learn,
+        GhostStage.reinforce => GhostScreenCopy.reinforce,
+        GhostStage.recall => GhostScreenCopy.recall,
+        GhostStage.independent => GhostScreenCopy.independent,
+      });
+
+  /// OST-P0-07 controls: every one is a labelled button/switch (>= 48 dp,
+  /// focusable); none depends on colour or a gesture. Start/stop are not in
+  /// here and never hidden.
+  Widget _ghostPanel(BuildContext context) {
+    final palette = OstinatoPalette.of(context);
+    final sized = ButtonStyle(
+      minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
+      tapTargetSize: MaterialTapTargetSize.padded,
+    );
+    final status = uiText(
+      context,
+      GhostScreenCopy.status,
+      values: {'v0': _stageName(context, _ghost.stage)},
+    );
+    final done = _ghost.completion;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SwitchListTile(
+            key: const Key('ghost-toggle'),
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              uiText(context, GhostScreenCopy.toggle),
+              style: hankenText(size: 13),
+            ),
+            value: _ghostOn,
+            onChanged: (v) => setState(() => _ghostOn = v),
           ),
+          if (_ghostOn) ...[
+            Semantics(
+              liveRegion: true,
+              label: status,
+              child: ExcludeSemantics(
+                child: Text(
+                  status,
+                  key: const Key('ghost-status'),
+                  style: monoText(size: 11, color: palette.textMuted),
+                ),
+              ),
+            ),
+            Wrap(
+              spacing: 8,
+              children: [
+                TextButton(
+                  key: const Key('ghost-show'),
+                  style: sized,
+                  onPressed: () => setState(
+                    () => _ghost = GhostScreenPolicy.setShowAll(
+                      _ghost,
+                      !_ghost.showAll,
+                    ),
+                  ),
+                  child: Text(
+                    uiText(
+                      context,
+                      _ghost.showAll
+                          ? GhostScreenCopy.hideAgain
+                          : GhostScreenCopy.showGuides,
+                    ),
+                  ),
+                ),
+                if (_ghost.stage != GhostStage.learn)
+                  TextButton(
+                    key: const Key('ghost-back'),
+                    style: sized,
+                    onPressed: () => setState(
+                      () => _ghost = GhostScreenPolicy.stepBack(_ghost),
+                    ),
+                    child: Text(uiText(context, GhostScreenCopy.moreGuides)),
+                  ),
+              ],
+            ),
+            if (done != null)
+              Semantics(
+                liveRegion: true,
+                child: Text(
+                  uiText(context, switch (done) {
+                    GhostCompletion.measuredClear =>
+                      GhostScreenCopy.independentDone,
+                    GhostCompletion.measuredNotClear =>
+                      ListenTryFixCopy.noClearDifference,
+                    GhostCompletion.unmeasured =>
+                      ListenTryFixCopy.couldNotMeasure,
+                  }),
+                  key: const Key('ghost-completion'),
+                  style: hankenText(size: 13),
+                ),
+              ),
+          ],
         ],
       ),
     );
@@ -983,7 +1138,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
               style: hankenText(size: 13),
             ),
           ),
-        if (_score.hasPitches || _score.isRhythmOnly) ...[
+        if ((_score.hasPitches || _score.isRhythmOnly) &&
+            _guides.contains(Guide.referenceAudio)) ...[
           ReferenceListenBar(
             controller: _listen,
             score: _score,
