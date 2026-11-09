@@ -311,7 +311,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       setState(
         () => _ghost = GhostScreenPolicy.afterAttempt(
           _ghost,
-          GhostScreenPolicy.classify(read),
+          GhostScreenPolicy.classifyRun(summary, read),
         ),
       );
     }

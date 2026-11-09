@@ -22,6 +22,7 @@ import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_marks.dart';
 import 'package:ostinato/app/practice/loop/practice_outcome.dart';
 import 'package:ostinato/app/practice/loop/practice_progress_store.dart';
+import 'package:ostinato/app/practice/loop/practice_score.dart';
 import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
 import 'package:ostinato/app/practice/loop/practice_result_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_tab_strip.dart';
@@ -171,6 +172,66 @@ void main() {
       },
     );
 
+    PracticeRunSummary summaryOf({
+      bool completed = true,
+      bool loopUsed = false,
+      bool waitUsed = false,
+      int notes = 8,
+    }) {
+      final sc = PracticeScore.parse('E2 F2 G2 F2 | E2 F2 G2 F2');
+      return PracticeRunSummary.of(
+        score: sc,
+        outcomes: [
+          for (var i = 0; i < notes; i++)
+            NoteOutcome(
+              eventIndex: i,
+              bar: sc.events[i].bar,
+              pass: 0,
+              mark: PracticeMark.correct,
+              expectedMidi: sc.events[i].midi,
+            ),
+        ],
+        bpm: 60,
+        openBpm: 50,
+        targetBpm: 60,
+        completed: completed,
+        loopUsed: loopUsed,
+        waitUsed: waitUsed,
+      );
+    }
+
+    GhostAttempt attemptOf(PracticeRunSummary s) =>
+        GhostScreenPolicy.classifyRun(
+          s,
+          ListenTryFix.of(s, lesson: lesson(), freeTempo: false),
+        );
+
+    test(
+      'tam koşu başarı sayılır; durdurulmuş/döngü/bekle koşusu sayılmaz',
+      () {
+        expect(attemptOf(summaryOf()), A);
+        // Kısmi koşu: doğruluk 1,0 ama "completed:false" → FixClear olsa da
+        // ölçülmemiş koşu.
+        final partial = summaryOf(completed: false, notes: 4);
+        expect(partial.accuracy, 1.0);
+        expect(
+          ListenTryFix.of(partial, lesson: lesson(), freeTempo: false),
+          isA<FixClear>(),
+        );
+        expect(attemptOf(partial), U);
+        expect(attemptOf(summaryOf(completed: false)), U);
+        expect(attemptOf(summaryOf(loopUsed: true)), U);
+        expect(attemptOf(summaryOf(waitUsed: true)), U);
+        // İki kısmi koşu aşamayı ilerletmez ve "tamamlandı" iddiası üretmez.
+        final s = run(const GhostState(), [
+          attemptOf(partial),
+          attemptOf(partial),
+        ]);
+        expect(s.stage, GhostStage.learn);
+        expect(s.clearStreak, 0);
+      },
+    );
+
     test('metinler 14 dil tablosunda; suçlayıcı/yetkinlik dili yok', () {
       for (final c in GhostScreenCopy.all) {
         expect(appMessageIds.containsKey(c), isTrue, reason: c.$1);
@@ -230,8 +291,9 @@ void main() {
     Future<void> oneRun(
       WidgetTester tester,
       PracticeSessionController c,
-      FakeAudioCaptureChannel channel,
-    ) async {
+      FakeAudioCaptureChannel channel, {
+      int? stopAfter,
+    }) async {
       await tester.tap(find.byKey(const Key('practice-start')));
       await tester.pump();
       final rng = math.Random(1);
@@ -252,6 +314,11 @@ void main() {
         c.tick();
         await tester.pump();
         if (c.phase == PracticePhase.finished) break;
+        if (stopAfter != null && i + 1 >= stopAfter) {
+          await c.stop();
+          await tester.pump();
+          break;
+        }
       }
       await tester.pumpAndSettle();
       expect(c.phase, PracticePhase.finished);
@@ -411,6 +478,55 @@ void main() {
         await tester.pump();
         expect(find.byType(PracticeTabStrip), findsOneWidget);
         expect(find.byKey(const Key('ghost-line-hidden')), findsNothing);
+        await tester.pumpWidget(const SizedBox());
+        await tester.runAsync(audio.dispose);
+      },
+    );
+
+    testWidgets('durdurulmuş (kısmi) koşular aşamayı ilerletmez', (
+      tester,
+    ) async {
+      await setView(tester);
+      final channel = FakeAudioCaptureChannel();
+      final audio = newAudio(channel);
+      final c = await pump(tester, ghost: true, audio: audio, analyzer: clear);
+      await tester.tap(find.byKey(const Key('ghost-toggle')));
+      await tester.pump();
+      for (var i = 0; i < 2; i++) {
+        await oneRun(tester, c, channel, stopAfter: 85);
+        expect(c.summary!.gate.eligible, isFalse, reason: 'durduruldu');
+      }
+      expect(find.byType(ReferenceListenBar), findsOneWidget);
+      expect(find.textContaining('Learn: all guides shown'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+      await tester.runAsync(audio.dispose);
+    });
+
+    testWidgets(
+      'rehbersiz aşamada durdurulmuş koşu: "örtüştü" yok, "ölçemedim" var',
+      (tester) async {
+        await setView(tester);
+        final channel = FakeAudioCaptureChannel();
+        final audio = newAudio(channel);
+        final c = await pump(
+          tester,
+          ghost: true,
+          audio: audio,
+          analyzer: clear,
+        );
+        await tester.tap(find.byKey(const Key('ghost-toggle')));
+        await tester.pump();
+        for (var i = 0; i < 6; i++) {
+          await oneRun(tester, c, channel);
+        }
+        expect(find.textContaining('On your own: no guides'), findsOneWidget);
+        await oneRun(tester, c, channel, stopAfter: 85);
+        expect(c.summary!.gate.eligible, isFalse);
+        expect(find.textContaining('matched the line well'), findsNothing);
+        expect(
+          find.textContaining("couldn't tell this sound apart"),
+          findsOneWidget,
+        );
         await tester.pumpWidget(const SizedBox());
         await tester.runAsync(audio.dispose);
       },

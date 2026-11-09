@@ -1,4 +1,5 @@
 import 'listen_try_fix.dart';
+import 'practice_outcome.dart';
 
 /// OST-P0-07 "Ghost screen" (pure Dart, deterministic, in memory only):
 /// as measured, repeated success builds up, the guides that are drawn on the
@@ -117,6 +118,15 @@ abstract final class GhostScreenPolicy {
   /// The guides shown now: the override wins.
   static Set<Guide> visible(GhostState s) =>
       s.showAll ? Set.of(Guide.values) : guidesFor(s.stage);
+
+  /// A finished run → its attempt. Only a run that counts for the lesson gate
+  /// (`PassGate.eligible`: covered every note, no loop, no wait mode) can be
+  /// clear or not-clear; a stopped, looped or wait-mode run is unmeasured for
+  /// the ghost level (`ListenTryFix` reads the marks only and ignores this).
+  static GhostAttempt classifyRun(
+    PracticeRunSummary summary,
+    ListenTryFixResult fix,
+  ) => summary.gate.eligible ? classify(fix) : GhostAttempt.unmeasured;
 
   /// A finished run → one of the three attempts. Anything not clearly
   /// measured is [GhostAttempt.unmeasured] or not-clear, never clear.
