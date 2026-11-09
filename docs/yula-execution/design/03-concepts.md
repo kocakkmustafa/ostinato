@@ -72,7 +72,7 @@ Bunlar konsept değil, bugünkü ürünün sözleşmesidir (01/02'den):
 
 **(a) Tez.** Kullanıcı bir ders seçmez, kısa bir oturum başlatır: uygulama 5–15 dakikalık bir çalışmayı adım adım (ısınma, çalma, duyma, özet) açar ve kullanıcı akışın içinde istediği adımı atlar, uzatır veya tekrar eder.
 
-**(b) İlk 5 saniye.** Açılışta tek bir "Bugünkü oturum" yüzeyi: süre seçimi (5 / 10 / 15 dk), altında oturumun adım şeridi (ör. akort, ısınma, bugünkü bölüm, kulak, özet) ve büyük "Başla". Adımlar önizlemedir, tıklanıp ders listesi açılmaz. "Başla" ilk adıma, çoğu kez çalmaya, geçer; mikrofon izni ilk mikrofonlu adımda sorulur.
+**(b) İlk 5 saniye.** Açılışta tek bir "Bugünkü oturum" yüzeyi: süre seçimi (5 / 10 / 15 dk), altında oturumun adım şeridi (ör. akort, ısınma, bugünkü bölüm, Duy, özet) ve büyük "Başla". Adımlar önizlemedir, tıklanıp ders listesi açılmaz. "Başla" ilk adıma, çoğu kez çalmaya, geçer; mikrofon izni ilk mikrofonlu adımda sorulur.
 
 **(c) §5.2 alanları: nerede yaşar**
 

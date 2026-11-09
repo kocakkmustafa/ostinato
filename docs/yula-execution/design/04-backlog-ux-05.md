@@ -29,7 +29,7 @@ Bu belge talimat §7 Aşama 5 madde 14 "Uygulama backlog'u ve kabul kriterleri"d
 | 8 | Bayrak: yok (bileşen); hiçbir mevcut ekran bileşeni kullanmaz (bayrak KAPALI = davranış değişmez); mevcut `GlassCard` testleri geçer | W | — |
 
 ## UX-05b — Sahne kabuğu ve kök değişimi
-**Kapsam:** `ostinatoStageHomeEnabled` KAPALI; AÇIK iken kök = sahne (devam edilen alıştırma, Çal, tempo, mikrofon durumu, tutamaklar, çalarken gizleme).
+**Kapsam:** `ostinatoStageHomeEnabled` KAPALI; AÇIK iken kök = sahne (devam edilen alıştırma, Çal, tempo, mikrofon durumu, tutamaklar, çalarken gizleme) ve opak araç rafı sarmalayıcısı (Metronom, Referans, Döngü, Yardım satırı yeri; kapalı başlar; mevcut parçaları yeniden kullanır, ekranı bölmez).
 | # | Kabul ölçütü | Test türü | Ekran kanıtı |
 |---|---|---|---|
 | 1 | Bayrak KAPALI: kök `library_screen.dart`, mevcut kök testleri geçer | W | G: eski kök değişmedi |
@@ -37,14 +37,15 @@ Bu belge talimat §7 Aşama 5 madde 14 "Uygulama backlog'u ve kabul kriterleri"d
 | 3 | T1: Çal'a tek dokunuşla pratik başlar; mikrofon izni ilk Çal'da istenir | W | — |
 | 4 | Çalarken üç tutamak gizli, hiçbir katman açılamaz; hatada ekran durmaz | W | G: çalarken |
 | 5 | Mevcut pratik çekirdeği (şerit, ölçüm, geçit) davranışı değişmez: mevcut `practice_*` testleri aynen geçer | W | — |
-| 6 | Geri tuşu/jesti: sahneden çıkış beklenen platform davranışı, kayıt kaybı yok | E | — |
+| 6 | Araç rafı: bayrak KAPALIyken görünmez; AÇIKken kapalı başlar; çalarken kapalıdır/açılamaz; mevcut `practice_*` testleri aynen geçer | W | G: raf kapalı/açık |
+| 7 | Geri: katman açıkken katmanı kapatır, çıkış ekranından sahneye döner (iki test); yarım koşudan çıkış "tamamlanmadı = ölçülmedi" yazar ve geçit kaydı eklemez (kayıt deposu eleman sayısı aynı) | W | — |
 
 ## UX-05c — Katman yöneticisi ve "Başka çalış"
 **Kapsam:** Katman yöneticisi (tek katman kuralı, odak yönetimi), "Başka çalış" (öneri satırı, aynı alıştırma, Gitar/Kulak seçimi, Akort kısayolu, son gelişim). Bayrak KAPALI varsayılan (`ostinatoStageHomeEnabled`).
 | # | Kabul ölçütü | Test türü | Ekran kanıtı |
 |---|---|---|---|
 | 1 | Tek katman açıkken ikincisi açılırsa birincisi kapanır; cam öğe ≤ 2 | W | — |
-| 2 | Katman üstten ~%40 şeridi kapsamaz (ölçülü yerleşim testi, telefon dikey) | W | G: katman açık |
+| 2 | Katman yüksekliği ekran yüksekliğinin ≤ %60'ı; üstte şerit alanı ≥ %40 (360×640 ve 412×915 mantıksal piksel için yerleşim testi) | W | G: katman açık |
 | 3 | Öneri satırı deterministik: aynı girdi (`V1CourseState.next` + son hata türü) → aynı öneri; kayıt yoksa satır gizlenir (birim test, ≥ 5 durum) | U | — |
 | 4 | T2: Kulak (enstrümansız) en çok iki dokunuşta açılır; Akort tam ekran açılır, geri = sahne | W | G: iki durum |
 | 5 | Çalgı seçimi: gitar ve kulak açık; "Yakında" çalgılar mevcut kural gibi (`ostinatoOpenInstruments`) | W | — |
@@ -82,7 +83,7 @@ Bu belge talimat §7 Aşama 5 madde 14 "Uygulama backlog'u ve kabul kriterleri"d
 |---|---|---|---|
 | 1 | T7: Mikrofon reddi: sahne "Dinleme kapalı" kipi; şerit, metronom, "Şu hızda dinle", kulak çalışır; ✓◆◯ yok, sayaç "ölçülmüyor" (mevcut `mic_permission_gate_test.dart` geçer) | W | G: kip (`evidence/ux-05f/`) |
 | 2 | "Ayarlara git" bağlantısı sürekli ama susturulabilir; susturma kaydı yerel | W | — |
-| 3 | T8: Kamera bayrakları KAPALI; hiçbir akış kamera izni istemez (kodda `Permission.camera` isteği çağrılmadığına dair test) | W | — |
+| 3 | T8: Kamera bayrakları KAPALI; hiçbir akış kamera izni istemez (bayrak KAPALIyken hiçbir yol `Permission.camera` çağırmaz; çağrı sayısı = 0 testle sabit) | W | — |
 | 4 | Ayar/Cihaz: mikrofon durumu, gecikme kalibrasyonu (`setup_wizard_screen.dart` aynen), ortam gürültüsü satırı; Ayarlar ve Hesap/Üyelik tam ekran çıkış, davranış değişmez (mevcut testler geçer) | W | G: Cihaz |
 | 5 | Reddedilmiş iznin gerçek cihazda "Başlat" davranışı doğrulanır ve kayda yazılır; yapılamazsa `NOT_TESTED` | C | Ekran yolu |
 | 6 | Ham ses cihazdan çıkmaz: ağ çağrısı ve kalıcı kayıt yok (`ostinatoRecordingRetentionOpen=false` varsayılan korunur; mevcut ephemeral testler geçer) | W | — |
@@ -94,7 +95,7 @@ Bu belge talimat §7 Aşama 5 madde 14 "Uygulama backlog'u ve kabul kriterleri"d
 | 1 | Bayrak KAPALI: Yardım satırı hiç görünmez, pratik aynen | W | — |
 | 2 | Dört basamak yardım matrisi (04-design Ek B) testle sabit: hangi öğe hangi basamakta görünür | W | G: dört basamak (`evidence/ux-05g/`) |
 | 3 | Basamak yalnız elle değişir; hiçbir koşuda otomatik değişmez (birim test: yüksek başarılı koşu sonrası basamak aynı) | U | — |
-| 4 | Öneri yalnız ölçülmüş, tam, döngüsüz, Bekle'siz, geçit geçen koşularla çıkar; `stoppedEarly/loopUsed/waitUsed` ve duyulan < %80 koşular öneri ÜRETMEZ (tablo testi ≥ 8 durum) | U | — |
+| 4 | Öneri yalnız ölçülmüş, tam, döngüsüz, Bekle'siz, geçit geçen koşularla çıkar; `stoppedEarly/loopUsed/waitUsed` ve duyulan < %80 koşular öneri ÜRETMEZ (tablo testi ≥ 8 durum: her basamak geçişi için eşik−1, eşik, eşik+1 koşu sayısı ve dört güvenilmez-koşu türü dahil; geçiş sayıları: 1→2 bir koşu, 2→3 iki, 3→4 üç) | U | — |
 | 5 | Güvenilmez ölçümde "yetkinlik kazanıldı" metni hiçbir yolda yok (metin taraması + durum testi); sonuç "ölçülmedi/değerlendirilemedi" | U | G |
 | 6 | Basamak yeni ayrı yerel anahtarda; `V1PracticeRecord`, kapı ve eşikler değişmez; Hayalet kapıyı AÇMAZ | U | — |
 | 7 | Kulak/ritim alıştırmaları Hayalet basamağını ve enstrüman geçidini ETKİLEMEZ; tersi de (birim test) | U | — |
@@ -110,6 +111,6 @@ Bu belge talimat §7 Aşama 5 madde 14 "Uygulama backlog'u ve kabul kriterleri"d
 | 4 | Hareketi/saydamlığı azalt ile dört ana yüzey kırılmaz ve opak/anlık (T12) | G | G |
 | 5 | Çevrimdışı: pratik, kulak, akort, yerel kayıt çalışır; bulut/hesap yüzeyleri "çevrimdışı" der (uçak modu / ağsız test ortamı) | W+E | G: çevrimdışı |
 | 6 | Hata: veri okuma/yazma hatasında sahne açık kalır, "tekrar dene" sunulur, kayıt sessizce kaybolmaz | W | G |
-| 7 | T1–T14 (04-design bölüm 13) senaryolarından otomatikleştirilebilenler testlenir; kalanlar kayıtlı el kontrol listesi | W+E | `evidence/ux-05h/INDEX.md` |
+| 7 | T1–T14 (04-design bölüm 13): T12 hariç 13 senaryonun her biri için en az bir adlandırılmış test (adlar INDEX'te); T12 için kalem 1–4 ve kayıtlı el kontrolü | W+E | `evidence/ux-05h/INDEX.md` |
 | 8 | Bayrak KAPALI regresyon turu: tüm mevcut test paketi aynen geçer; bayrak AÇIK turu: `flutter analyze` temiz ve yeni testler geçer; sayılar rapora yazılır | E | Test sayısı çıktısı |
 | 9 | Kullanıcı testi (insan) bu bilette yapılmaz; Aşama 6 prototipidir. Bu bilet bunu "yapılmadı" diye yazar | — | — |
