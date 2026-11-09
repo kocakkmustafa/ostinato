@@ -88,7 +88,7 @@ Tüm 450 dersin uzman onayı bekliyor (`expertPending=true`): içerik "doğrulan
 
 ## Ekran görüntüleri
 
-(OST-UX-01 ekran görüntüleri scratch'te; liste PR gövdesinde)
+Görüntü dizini ve üç kaynak (güncel simülatör, test render, tarihsel): [evidence/ux-01/INDEX.md](evidence/ux-01/INDEX.md). Güncel simülatör giriş engelinde kaldı; ana ekranlar yalnız test render (sahte veri) olarak vardır: [evidence/ux-01/render/INDEX.md](evidence/ux-01/render/INDEX.md). Tarihsel `docs/evidence/*.png` güncel build değildir.
 
 ## Kapsam dışı / doğrulanamayan
 
