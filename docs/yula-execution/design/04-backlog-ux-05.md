@@ -37,7 +37,8 @@ Bu belge talimat §7 Aşama 5 madde 14 "Uygulama backlog'u ve kabul kriterleri"d
 | 3 | T1: Çal'a tek dokunuşla pratik başlar; mikrofon izni ilk Çal'da istenir | W | — |
 | 4 | Çalarken üç tutamak gizli, hiçbir katman açılamaz; hatada ekran durmaz | W | G: çalarken |
 | 5 | Mevcut pratik çekirdeği (şerit, ölçüm, geçit) davranışı değişmez: mevcut `practice_*` testleri aynen geçer | W | — |
-| 6 | Araç rafı: bayrak KAPALIyken görünmez; AÇIKken kapalı başlar; çalarken kapalıdır/açılamaz; mevcut `practice_*` testleri aynen geçer | W | G: raf kapalı/açık |
+| 6 | Araç rafı: bayrak KAPALIyken görünmez; AÇIKken kapalı başlar; çalarken kapalıdır/açılamaz (sabitlenen metronom, tamamen opak ve raftan bağımsız, hariç); mevcut `practice_*` testleri aynen geçer | W | G: raf kapalı/açık |
+| 6a | Sabitlenen metronom: çalarken görünür, tamamen opak, cam öğe sayısına girmez; bayrak KAPALIyken yok | W | G: çalarken metronom görünür |
 | 7 | Geri: katman açıkken katmanı kapatır, çıkış ekranından sahneye döner (iki test); yarım koşudan çıkış "tamamlanmadı = ölçülmedi" yazar ve geçit kaydı eklemez (kayıt deposu eleman sayısı aynı) | W | — |
 
 ## UX-05c — Katman yöneticisi ve "Başka çalış"

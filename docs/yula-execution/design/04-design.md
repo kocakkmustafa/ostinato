@@ -276,9 +276,9 @@ Talimat §2.3: cam işlevseldir, ekran aynı kartlarla dolu olmaz. Renkler/marka
 |---|---|
 | Başka çalış, Yolum, Ayar, Sonuç katmanı; karşılaştırma/önizleme benzeri geçici üst yüzeyler | Sahne (şerit, ŞİMDİ çizgisi, tempo, Çal), araç rafı satırları, Yol listesi gövdesi içindeki metin satırları, tüm tam ekran çıkışlar |
 
-**Katman sayısı:** En fazla **iki cam öğe** aynı anda açık ([`03-concepts.md`](03-concepts.md) K2 ve K3 "(d) Glass katman ilişkisi" paragrafları, OST-UX-02 reviewer düzeltmesi). Pratikte: tek katman (Başka çalış / Yolum / Ayar / Sonuç) açıkken ikincisi açılırsa birincisi kapanır (yığılma yok); ikinci cam öğe yalnız katmanın içinde geçici onay/açıklama için kullanılır (ör. bir bilgi balonu). Üçüncü açılamaz.
+**Katman sayısı:** En fazla **iki cam öğe** aynı anda açık ([`03-concepts.md`](03-concepts.md) K2 (d) ve K3 (d) "Glass katman ilişkisi" paragrafları). Pratikte: tek katman (Başka çalış / Yolum / Ayar / Sonuç) açıkken ikincisi açılırsa birincisi kapanır (yığılma yok); ikinci cam öğe yalnız katmanın içinde geçici onay/açıklama için kullanılır (ör. bir bilgi balonu). Üçüncü açılamaz.
 
-**Çalarken:** Cam öğe sayısı 0, istisna yok. Kullanıcının sabitlediği metronom görünümü varsa TAMAMEN OPAK araç rafı ögesidir (cam değil, bulanıklık yok, sahneyi kapsamaz).
+**Çalarken:** Cam öğe sayısı 0, istisna yok. Kullanıcının sabitlediği metronom görünümü, raftan bağımsız TAMAMEN OPAK küçük bir göstergedir: çalarken görünür kalır, cam sayısına girmez, bulanıklık yok, sahneyi kapsamaz; raf ise çalarken kapalı/açılamazdır.
 
 **Bulanıklık bütçesi:**
 | Kural | Değer |
@@ -471,11 +471,11 @@ Tam bölüm: **[`04-backlog-ux-05.md`](04-backlog-ux-05.md)**, başlık **"UX-05
 ## C. Kulak/ritim ölçümü fiziksel pratikten ayrı
 | Ölçüm biçimi | Nasıl ölçülür | Nereye yazılır | Birbirine karışmaz |
 |---|---|---|---|
-| Ekran cevabı (kulak alıştırması) | Ekranda seçim, mikrofon yok | Mevcut depolar: `TestFlowStore` ve `V1LessonCheck` (yalnız geçti/kaldı; yeni kayıt türü yok) | Enstrüman geçidine, Hayalet basamağına, doğruluk/duyulan % değerlerine SAYILMAZ |
+| Ekran cevabı (kulak alıştırması) | Ekranda seçim, mikrofon yok | Mevcut depolar, yeni kayıt türü yok: `TestFlowStore` (bölüm başına geçti/kaldı `passed` + zaman), `V1LessonCheck` (yalnız tamamlandı: kanıt türü + zaman; "kaldı" tutmaz) | Enstrüman geçidine, Hayalet basamağına, doğruluk/duyulan % değerlerine SAYILMAZ |
 | Alkış / ritim dokunma | Mikrofon onset (alkış) ya da dokunma | Ritim satırı etiketli | Aynı |
 | Söyleme | Öz-kontrol (ölçülmez) | "Öz-bildirim" etiketli (`V1CheckEvidence.selfReport`, `practice_progress_store.dart`) | Ölçülmüş sayılmaz |
 | Enstrüman (gitar) | Nota gözlemi (`GuitarPitchObserver`) | `V1PracticeRecord` | Kulak/ritim sonuçları bunu etkilemez |
-Her sonuç ekranı ölçüm biçimini etiketler. Kulak sonuçları Yolum > Geçmiş'te ayrı bölümde (Kulak) görünür ve bu bölüm yalnız geçti/kaldı gösterir (yüzde/puan yok, yeni kayıt kurulmaz); enstrüman ilerlemesine toplanmaz. (`test_flow_screen.dart` yorumundaki kip ayrımı korunur.)
+Her sonuç ekranı ölçüm biçimini etiketler. Kulak sonuçları Yolum > Geçmiş'te ayrı bölümde (Kulak) görünür ve bu bölüm `TestFlowStore`'dan bölüm başına geçti/kaldı + tarih, `V1LessonCheck`'ten tamamlandı + tarih gösterir (yüzde/puan yok, yeni kayıt kurulmaz); enstrüman ilerlemesine toplanmaz. (`test_flow_screen.dart` yorumundaki kip ayrımı korunur.)
 
 ## D. Glass kuralları özeti
 En fazla iki cam öğe · çalarken 0 · aynı anda ≤ 1 bulanık yüzey · sigma ≤ 16 · kontrast 4.5:1/3:1 · saydamlığı/hareketi azalt = opak/anlık · düşük donanımda bulanıklık kapalı. Ayrıntı: teslimat 6.
