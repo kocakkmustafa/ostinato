@@ -285,6 +285,7 @@ const appMessageIds = <(String, String), String>{
   ("I warmed up with the four anchors.", "Dört dayanakla ısındım."): "080fdca5905e555a",
   ("Plays an original four-bar melody around C4 on strings 1–3 at ♩=70.", "1.–3. tellerde Do4 çevresindeki özgün dört ölçülük melodiyi ♩=70'te çalar."): "081c34142b04c8ce",
   ("Speed comes from clean repeats, not from pushing. Raise the tempo only after a clean set.", "Hız itmekle değil, temiz tekrarla gelir. Tempoyu yalnız temiz bir setten sonra artır."): "081e8181198466f2",
+  ("Stop for pain, numbness or tingling. Audio is processed on this device and not sent. Your recording stays only in this session, on this device, and is deleted when the session ends.", "Ağrı, uyuşma ya da karıncalanmada dur. Ses bu cihazda işlenir, gönderilmez. Kaydın yalnız bu oturumda, cihazında kalır ve oturum bitince silinir."): "0824c62a600b786c",
   ("Find the first note's degree before the count-in and sing it against do.", "Giriş sayımından önce ilk notanın derecesini bul ve do'ya göre söyle."): "0825e5f15d6a4986",
   ("Use a specific observation to revise one musical variable and compare successive attempts honestly.", "Tek müzik değişkenini düzeltmek için somut gözlem kullan; ardışık denemeleri dürüstçe karşılaştır."): "085389828a0608de",
   ("Move the three fingers as one block, not one by one. Aim for even changes, not fast ones.", "Üç parmağı tek tek değil, tek blok hâlinde taşı. Hızlı değil düzenli geçişe odaklan."): "0857005961aa1c5e",

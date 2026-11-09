@@ -24,10 +24,13 @@
 // DIŞIDIR. "Kanıtlandı" değil, "test ile korunuyor" iddiasıdır.
 import 'dart:io';
 
+import 'package:flutter/widgets.dart' show AppLifecycleState;
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato_audio/ostinato_audio.dart';
 import 'package:ostinato/app/audio/audio_input_controller.dart';
 import 'package:ostinato/app/practice/debug/debug_fake_mic_channel.dart';
 import 'package:ostinato/app/practice/own_recording/own_recording.dart';
+import 'package:ostinato/app/practice/own_recording/recording_retention_policy.dart';
 import 'package:ostinato/app/practice/setup/audio_environment.dart';
 import 'package:ostinato/app/practice/setup/latency_calibration.dart';
 import 'package:ostinato/app/practice/setup/setup_audio_controller.dart';
@@ -220,6 +223,52 @@ void main() {
         expect(guard.total, 0, reason: '${guard.httpClients} ${guard.sockets}');
       },
     );
+    test('OST-P0-08 retention path (policy, background discard, delete all) '
+        'opens 0 clients and 0 sockets', () async {
+      final tmp = Directory.systemTemp.createTempSync('ost_p0_08_egress');
+      addTearDown(() {
+        if (tmp.existsSync()) tmp.deleteSync(recursive: true);
+      });
+      final guard = await _guarded(() async {
+        for (final a in RetentionAudience.values) {
+          for (final p in RecordingPurpose.values) {
+            RecordingRetentionPolicy.decide(
+              purpose: p,
+              audience: a,
+              explicitStorageConsent: true,
+            );
+          }
+        }
+        final r = OwnRecorder(temporaryRoot: () async => tmp)..enabled = true;
+        final g = RecorderBackgroundGuard(r)..attach();
+        r.add(
+          AudioChunk(
+            samples: List<double>.filled(4800, .5),
+            sampleRate: 48000,
+            tStartUs: 0,
+            clockDomain: AudioClockDomain.monotonic,
+          ),
+        );
+        expect(await r.seal(), isNotNull);
+        TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(
+          AppLifecycleState.paused,
+        );
+        await pumpEventQueue();
+        TestWidgetsFlutterBinding.instance.handleAppLifecycleStateChanged(
+          AppLifecycleState.resumed,
+        );
+        g.detach();
+        await r.deleteAll();
+        r.dispose();
+      });
+      expect(guard.total, 0, reason: '${guard.httpClients} ${guard.sockets}');
+      expect(
+        Directory('${tmp.path}/own_recording').existsSync()
+            ? Directory('${tmp.path}/own_recording').listSync()
+            : const <FileSystemEntity>[],
+        isEmpty,
+      );
+    });
   });
 
   group('2. kaynak kapısı (statik)', () {
@@ -270,6 +319,8 @@ void main() {
         containsAll([
           'lib/app/audio/audio_input_controller.dart',
           'lib/app/practice/own_recording/own_recording.dart',
+          'lib/app/practice/own_recording/recording_retention_policy.dart',
+          'lib/app/practice/own_recording/recording_retention_copy.dart',
           'packages/ostinato_audio/lib/src/rhythm/latency_estimator.dart',
         ]),
       );

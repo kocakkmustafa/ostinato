@@ -408,7 +408,7 @@ void main() {
 
   test('all fourteen packaged catalogs retain every exact source contract', () {
     expect(ostinatoSupportedLocales, hasLength(14));
-    expect(appMessageIds, hasLength(8682));
+    expect(appMessageIds, hasLength(8683));
     final ids = appMessageIds.values.toSet();
     for (final locale in ostinatoSupportedLocales) {
       final tag = canonicalLanguageTag(locale);

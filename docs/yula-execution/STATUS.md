@@ -41,6 +41,14 @@ status: IN_REVIEW
 - Ölçülen (dosya ≠ ders; test dosyası = adında `-test` geçen): main **450 dosya = 440 ders + 10 test** (gtr 240 = 235+5, pno 160 = 157+3, ear 50 = 48+2); mağazada açık **290 dosya = 283 ders + 7 test** (gitar+kulak). "690" bir DOSYA sayısıdır (450 + şan 240); ders olarak 676 (ADR-002).
 - Ücretsiz: v1'de gitar S1 40 + kulak S1 25 (`ostinatoV1FreeStages`, `lib/app/course_access.dart`). 12/8 sayıları yalnız gizli eski kurslarda.
 
+## Bilet OST-P0-08 — kayıt saklama politikası
+| Yetenek | Durum | Kanıt |
+|---|---|---|
+| Politika katmanı (`ephemeral`/`denied`), kalıcı saklama her yolda `denied` | TO | `lib/app/practice/own_recording/recording_retention_policy.dart`; `test/ost_p0_08_recording_retention_test.dart` |
+| Ephemeral temizlik (oturum sonu, iptal, arka plan, çökme artığı, "tümünü sil") | TO | aynı test; yüzey `ostinatoRecordingRetentionOpen=false` (kapalı) |
+| Şifreli kalıcı saklama, export | NI — ERTELENDİ → OST-P0-08B | ADR-005 (şifreleme bağımlılığı/anahtar deposu yok) |
+Cihaz-üstü kanıt yok; durum `TEST_ONLY`.
+
 ## Ses motoru
 | Yetenek | Durum | Kanıt |
 |---|---|---|
@@ -79,4 +87,4 @@ status: IN_REVIEW
 - [bilet:: OST-P0-09] [durum:: BLOCKED_ACCESS] Protokol belgesi (yalnız belge) — ölçüm 03…08 merge sonrası; durum BLOCKED_ACCESS · [PR:: #72] [CI:: yok/koşulmadı] [ölçüm-raporu:: yok (03…08 merge sonrası)] [cihaz-ortam:: 0/5] [BLOCKED_ACCESS:: 100/100] · [`OST-P0-09-PROTOKOL.md`](OST-P0-09-PROTOKOL.md)
 
 ## Bilet OST-P0-07
-- [bilet:: OST-P0-07] [durum:: TEST_ONLY] Hayalet Ekran: kademeli rehber gizleme, override, rehbersiz tamamlama; bayrak `ostinatoGhostScreenOpen=false` (kapalı) · [CI:: PR üzerinde] [kullanıcı-üstü-doğrulama:: YOK — gerçek kullanıcıyla öğrenme kanıtı yok] [yetkinlik-iddiası:: YOK] · [ADR-005](DECISIONS.md) · bilinen sınırlar: `A,U,A` iki art arda sayılır; durdurulmuş/döngü/bekle koşusu ilerletmez; aşama duyurusu (`liveRegion`) cihazda doğrulanmadı
+- [bilet:: OST-P0-07] [durum:: TEST_ONLY] Hayalet Ekran: kademeli rehber gizleme, override, rehbersiz tamamlama; bayrak `ostinatoGhostScreenOpen=false` (kapalı) · [CI:: PR üzerinde] [kullanıcı-üstü-doğrulama:: YOK — gerçek kullanıcıyla öğrenme kanıtı yok] [yetkinlik-iddiası:: YOK] · [ADR-006](DECISIONS.md) · bilinen sınırlar: `A,U,A` iki art arda sayılır; durdurulmuş/döngü/bekle koşusu ilerletmez; aşama duyurusu (`liveRegion`) cihazda doğrulanmadı

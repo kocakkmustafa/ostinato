@@ -16,6 +16,7 @@ import 'package:ostinato/app/practice/loop/v1_course_copy.dart';
 import 'package:ostinato/app/practice/loop/v1_paywall_copy.dart';
 import 'package:ostinato/app/practice/loop/tempo_ladder_copy.dart';
 import 'package:ostinato/app/practice/own_recording/own_recording_copy.dart';
+import 'package:ostinato/app/practice/own_recording/recording_retention_copy.dart';
 import 'package:ostinato/app/retention/retention_copy.dart';
 import 'package:ostinato/app/screens/settings_copy.dart';
 import 'package:ostinato/app/screens/v1_home_copy.dart';
@@ -31,6 +32,7 @@ void main() {
     'content/ui/tuner.json': TunerCopy.all,
     'content/ui/v1-home.json': V1HomeCopy.all,
     'content/ui/own-recording.json': OwnRecordingCopy.all,
+    'content/ui/recording-retention.json': RecordingRetentionCopy.all,
     'content/ui/v1-course.json': V1CourseCopy.all,
     'content/ui/v1-paywall.json': V1PaywallCopy.all,
     'content/ui/practice-display.json': PracticeDisplayCopy.all,

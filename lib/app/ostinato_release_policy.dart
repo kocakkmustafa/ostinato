@@ -70,6 +70,12 @@ const bool ostinatoListenTryFixRepeatOpen = false;
 /// before. Rollback: leave this false (or revert the PR); no data depends on it.
 const bool ostinatoGhostScreenOpen = false;
 
+/// OST-P0-08: recording-retention surface (audience gate for the own-take
+/// recorder, background discard, "delete all"). False keeps today's FK2
+/// behaviour exactly. Even when true nothing is ever stored persistently:
+/// encrypted storage and export are a separate ticket (OST-P0-08B).
+const bool ostinatoRecordingRetentionOpen = false;
+
 /// Founder decision 2026-10-25 (OST-K1): a 13–17 account still waiting for
 /// parental consent sees the subscription offers, and the purchase itself is
 /// left to the store's family controls (Ask to Buy / Google Play parental

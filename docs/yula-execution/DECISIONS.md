@@ -39,8 +39,25 @@ Karar: main `pubspec.yaml` sürümü `1.0.1+10`'dur. Mağaza sürümü `1.0.2+11
 4. Geri dönüş: Akış değişirse yeni ADR; release dalına bu PR ile dokunulmaz.
 5. Kullanıcı: Mağazadaki 1.0.2 kullanıcısı; düzeltmeler main'de kaybolmaz.
 
-## ADR-005 — Hayalet Ekran (OST-P0-07): rehberler ölçülü başarıyla kademeli azalır, bayrak arkasında
-Tarih: 2026-11-09 · Durum: KABUL (bayrak `ostinatoGhostScreenOpen = false`; numara main'e göre seçildi, açık PR #71 aynı numarayı alırsa sonra gelen yeniden numaralanır)
+## ADR-005 — Kayıt saklama: yalnız ephemeral; kalıcı/şifreli saklama ve export OST-P0-08B'ye ertelendi
+Tarih: 2026-11-08 · Durum: KABUL (kapsam kararı Motion orchestration, OST-P0-08 engel yanıtı)
+Karar: `RecordingRetentionPolicy` yalnız `ephemeral` | `denied` üretir. Kalıcı saklama isteği (onay ve yetişkin olsa da) her yolda `denied`. `RetentionAudience {adult, child, unknown}`: bayrak `ostinatoRecordingRetentionOpen` açıkken yalnız adult için mevcut ephemeral own_recording sürer; child/unknown'da kapalı. Uygulamada yaş sinyali yok; varsayılan `unknown`. Bayrak kapalıyken (varsayılan) FK2 davranışı birebir aynı. Açıkken ek olarak: uygulama arka plana gidince take ve RAM tamponu silinir (`RecorderBackgroundGuard`), "tümünü sil" (`OwnRecorder.deleteAll`) geçici klasörü boşaltır. Export yok.
+Envanter (koddan): ses `OwnRecorder`'da RAM'de (en çok 180 sn, 16-bit PCM); tur özetlenince `getTemporaryDirectory()/own_recording/take-N.wav` olarak ŞİFRESİZ yazılır; sonraki tur, hata/iptal, ders ekranı kapanışı ve ders açılışındaki süpürme (çökme artığı) siler. Ağ API'si yok. Kalıcı dizin yalnız `ostinato.own_recording.v1.json` (açık/kapalı anahtarı, ses yok) için `getApplicationSupportDirectory`.
+Şifreleme neden yapılmadı: doğrudan bağımlılıklarda (`pubspec.yaml`) şifreleme paketi yok; `pointycastle` ve `crypto` yalnız geçişli (doğrudan kullanmak yeni pub girdisi demek, `crypto` yalnız özet üretir) ve `lib/`te Keychain/Keystore anahtar deposu yok; anahtarı kayıtla aynı dizine koymak şifrelemeyi anlamsız kılar, elle şifre yazmak güvensiz. Bu yüzden OST-P0-08B ayrı bilet: bağımlılık/anahtar deposu kararı, şifreli cihaz-içi saklama, açık kullanıcı eylemiyle şifresiz export (child/unknown'da kapalı).
+1. Bilgi: Kullanıcı metni yalnız "kayıt bu oturumda, cihazda kalır, oturum bitince silinir" der; saklama/export vaadi yok. 12 dilin çevirisi anadil kontrolünden geçmedi.
+2. Delil: `test/ost_p0_08_recording_retention_test.dart` (15 test), `test/ost_p0_02_egress_test.dart` (yeni yol 0 istemci/0 soket + statik tarama).
+3. Güvenlik/maliyet: Ham ses cihazdan çıkmaz, kalıcı dosya oluşmaz; yeni ücretli kaynak 0 USD.
+4. Geri dönüş: Bayrak `false` kalır; OST-P0-08B yeni ADR ile bunu genişletir.
+5. Kullanıcı: Yetişkin kullanıcı kendi turunu dinler; çocuk ve yaşı belirsiz kullanıcı kayıt almaz.
+
+Bilinen sınırlar (ADR-005):
+- (a) `writeAsBytes` yarıda kesilirse (disk dolu) kısmi `take-N.wav` kalır; sonraki ders açılışındaki süpürme siler.
+- (b) Uygulama öldürülürse artık dosya sonraki ders açılışına kadar kalır.
+- (c) `settings_screen.dart` "Kendi kaydımı dinle" anahtarı bayrak açıkken child/unknown'a görünür ama işlevsizdir; `takeNote`/`settingBody` arka plan silmesini anmaz. Bayrak açılmadan önce düzeltilecek (OST-P0-08B ya da bayrak açma bileti).
+- Arka plan temizliği yalnız `paused`/`hidden`/`detached`'da tetiklenir; `inactive` (izin penceresi, bildirim perdesi) tur ortasını silmez.
+
+## ADR-006 — Hayalet Ekran (OST-P0-07): rehberler ölçülü başarıyla kademeli azalır, bayrak arkasında
+Tarih: 2026-11-09 · Durum: KABUL (bayrak `ostinatoGhostScreenOpen = false`; numara 006: ADR-005 main'de OST-P0-08 (#71) tarafından alındı)
 Karar: Mevcut pratik ekranına küçük bir anahtar ("Öğrendikçe rehberleri azalt", varsayılan kapalı) bağlanır. Açıkken üç gerçek rehber (yazılı dizi/tab şeridi, "Önce dinle" referans sesi, görsel vuruş) 4 aşamada azalır: öğren (3) → pekiştir (2) → hatırla (1: vuruş) → kendi başına (0). İlerleme: yalnız `ListenTryFix`'in `FixClear` sonucunda (duyuldu + dersin kendi doğruluk eşiği; yeni skor yok), art arda 2 koşu. Ölçüm güvenilmezse (`FixUnmeasured`) seviye, seri ve tamamlama sayacı değişmez; "yetkinlik kazanıldı" iddiası hiçbir yolda yoktur. Art arda 3 ölçülü-ama-net-olmayan koşuda bir seviye geri; kullanıcı "Rehberi göster" (oturum boyunca açar, ilerletmez/cezalandırmaz) ve "Daha çok rehbere dön" ile her an döner. Başla/durdur/çıkış hiçbir seviyede gizlenmez. Durum yalnız ekranın belleğinde; yeni depolama yok.
 1. Bilgi: §7.4 OST-P0-07 ve arayüz talimatı §5.2.D rehbersiz tamamlamayı ister; ölçüm güvenilir değilse yetkinlik iddia edilmemelidir.
 2. Delil: `test/ghost_screen_test.dart`. Mutasyon: `classify`'da `FixUnmeasured`'u başarı saymak `classify: yalnız FixClear başarıdır, FixUnmeasured güvenilmezdir` testini; `afterAttempt`'te ölçülemeyeni başarıya çevirmek `ölçülemeyen koşu ASLA ilerletmez…` dahil 3 policy testini kırmızı yapar; `classifyRun`'daki `summary.gate.eligible` koşulunu silmek `tam koşu başarı sayılır; durdurulmuş/döngü/bekle koşusu sayılmaz` ve iki durdurulmuş-koşu ekran testini kırmızı yapar. Gerçek kullanıcıyla öğrenme kanıtı YOK.
