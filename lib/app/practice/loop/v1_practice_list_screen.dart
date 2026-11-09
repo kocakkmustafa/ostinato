@@ -49,7 +49,11 @@ class V1PracticeListScreen extends StatefulWidget {
     this.paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
     this.course = 'gtr',
     this.cameraLessonsOpen = ostinatoCameraLessonsOpen,
+    this.listenTryFixRepeat = ostinatoListenTryFixRepeatOpen,
   });
+
+  /// OST-P0-06: forwarded to every practice screen (release policy flag).
+  final bool listenTryFixRepeat;
 
   /// K8: whether camera lessons run their camera part (release policy).
   final bool cameraLessonsOpen;
@@ -167,6 +171,10 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
     }
   }
 
+  /// OST-P0-06: the course's measured lessons (only filled when the flag is
+  /// on), where a "next exercise" is taken from.
+  List<V1Lesson> _suggestionPool = const [];
+
   Future<void> _openNext() async {
     final state = await _courseState();
     if (!mounted || state == null) return;
@@ -192,6 +200,12 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
       return;
     }
     final next = catalog.nextAfter(lesson.id);
+    if (widget.listenTryFixRepeat) {
+      _suggestionPool = [
+        for (final l in catalog.lessons)
+          if (l.availability == V1LessonAvailability.measured) l.lesson,
+      ];
+    }
     final bool openNext;
     if (lesson.availability == V1LessonAvailability.measured) {
       openNext = await _openPractice(lesson.lesson, next != null);
@@ -244,6 +258,8 @@ class _V1PracticeListScreenState extends State<V1PracticeListScreen> {
               hasNextLesson: hasNext,
               onSessionFinished: widget.onSessionFinished,
               setupStore: _setup,
+              listenTryFixRepeat: widget.listenTryFixRepeat,
+              suggestionPool: _suggestionPool,
             ),
       ),
     );

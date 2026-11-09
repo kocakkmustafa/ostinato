@@ -15,6 +15,7 @@ import '../../drill/drill_screen.dart';
 import '../../tuner/session_tuning_gate.dart';
 import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
+import '../../ostinato_release_policy.dart';
 import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
 import '../own_recording/own_recording_copy.dart';
@@ -22,6 +23,7 @@ import '../own_recording/own_recording_preference.dart';
 import '../practice_audio_input.dart';
 import '../setup/setup_profile_store.dart';
 import '../setup/setup_wizard_screen.dart';
+import 'listen_try_fix.dart';
 import 'metronome_beat_view.dart';
 import 'practice_judge.dart';
 import 'practice_marks.dart';
@@ -58,6 +60,8 @@ class PracticeLoopScreen extends StatefulWidget {
     this.openSetup,
     this.ownRecordingPreference,
     this.seed,
+    this.listenTryFixRepeat = ostinatoListenTryFixRepeatOpen,
+    this.suggestionPool = const [],
   });
 
   final V1Lesson lesson;
@@ -79,6 +83,14 @@ class PracticeLoopScreen extends StatefulWidget {
 
   /// Fixes generated clapping lines (tests); null = a fresh draw.
   final int? seed;
+
+  /// OST-P0-06: the one-correction card, stepped repeat and next exercise on
+  /// the result (release policy flag, default closed). False = the result is
+  /// exactly as before.
+  final bool listenTryFixRepeat;
+
+  /// Lessons a "next exercise" may be taken from (the open course).
+  final List<V1Lesson> suggestionPool;
 
   /// Tests inject a controller on a fake channel.
   final PracticeSessionController Function(
@@ -127,6 +139,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   /// The run whose result screen was opened: each run's result opens once,
   /// so a setting changed after it (tempo, loop) never reopens it.
   PracticeRunSummary? _resultShownFor;
+
+  /// OST-P0-06: the tempo at which the current correction started, so the
+  /// repeat steps keep climbing; in memory only, never stored.
+  int? _fixAnchorBpm;
 
   /// FK1 "Listen first"; never sounds while the microphone runs.
   final ReferenceListenController _listen = ReferenceListenController();
@@ -266,6 +282,21 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     // result screen states exactly what the next run will be.
     final ladder = _ladder.afterRun(summary);
     _c.tempo = TempoLadder.apply(ladder, _c.tempo);
+    ListenTryFixResult? fix;
+    if (widget.listenTryFixRepeat) {
+      fix = ListenTryFix.of(
+        summary,
+        lesson: widget.lesson,
+        freeTempo: _freeTempo,
+        anchorBpm: _fixAnchorBpm,
+        pool: widget.suggestionPool,
+      );
+      _fixAnchorBpm = switch (fix) {
+        FixCorrection() => _fixAnchorBpm ?? summary.bpm,
+        FixClear(:final nextBpm) => nextBpm == null ? null : _fixAnchorBpm,
+        FixUnmeasured() || FixNoClearDifference() => _fixAnchorBpm,
+      };
+    }
     final action = await Navigator.of(context).push<ResultAction>(
       MaterialPageRoute(
         builder: (_) => PracticeResultScreen(
@@ -277,6 +308,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           hasNextLesson: widget.hasNextLesson,
           ownRecorder: _c.ownRecorder,
           ladder: ladder,
+          fix: fix,
         ),
       ),
     );
@@ -294,6 +326,12 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
             ),
           );
         }
+      case ResultActionRepeat(:final bpm, :final first, :final last):
+        _c.loopBars = first == null || last == null
+            ? null
+            : (first: first, last: last);
+        _c.waitMode = false;
+        _c.tempo = _c.tempo.withBpm(bpm);
       case ResultActionRaiseTempo():
         // The ladder already raised it: never two steps for one run.
         if (ladder is! TempoLadderStepped) _c.tempo = _c.tempo.stepped(5);

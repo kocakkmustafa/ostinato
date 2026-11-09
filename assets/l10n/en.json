@@ -8682,6 +8682,17 @@
     "fbe949384fb519fd": "Your taps varied a little from beat to beat. Every hand does.",
     "d83287656f3352c8": "Your second try was a bit more consistent.",
     "c17db7624a729ab0": "Both tries were about equally consistent.",
-    "c8d4d93244d24b85": "Your second try varied more, which is natural with a new pattern."
+    "c8d4d93244d24b85": "Your second try varied more, which is natural with a new pattern.",
+    "d14563f88beedf5e": "One thing to work on",
+    "82a931b1a525ec87": "A few beats came a little early (bar {v0}). Try that part again, a bit slower.",
+    "6ac1a2a248452bf3": "A few beats came a little late (bar {v0}). Try that part again, a bit slower, with the click.",
+    "96e8c4f33076ed75": "I did not hear a beat in bar {v0}. Try that part again, a bit slower.",
+    "6bea95cd34ab0688": "Some notes sounded different from the written pitch (bar {v0}). Play that part slowly and let each note ring.",
+    "1034d25358f0975b": "I couldn't tell this sound apart with confidence; will you try again?",
+    "8aee84f240e1fd83": "Repeat in steps",
+    "507698b37306b849": "Try again at ♩={v0}",
+    "8ecf8f029ffde9a3": "Next, a short exercise for this: {v0}",
+    "1d83465302a96db1": "Your playing matched the line well this time; you can try a little faster.",
+    "22540e4124cf871e": "I didn't measure a clear difference; will you try once more?"
   }
 }

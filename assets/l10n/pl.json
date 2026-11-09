@@ -8696,6 +8696,17 @@
     "fbe949384fb519fd": "Twoje stuknięcia trochę się różniły od uderzenia do uderzenia. Tak jest z każdą dłonią.",
     "d83287656f3352c8": "Twoja druga próba była trochę równiejsza.",
     "c17db7624a729ab0": "Obie próby były mniej więcej tak samo równe.",
-    "c8d4d93244d24b85": "Twoja druga próba bardziej się różniła, co jest naturalne przy nowym wzorze."
+    "c8d4d93244d24b85": "Twoja druga próba bardziej się różniła, co jest naturalne przy nowym wzorze.",
+    "d14563f88beedf5e": "Jedna rzecz do ćwiczenia",
+    "82a931b1a525ec87": "Kilka uderzeń padło odrobinę za wcześnie (takt {v0}). Spróbuj tego fragmentu jeszcze raz, trochę wolniej.",
+    "6ac1a2a248452bf3": "Kilka uderzeń padło odrobinę za późno (takt {v0}). Spróbuj tego fragmentu jeszcze raz, trochę wolniej, razem z metronomem.",
+    "96e8c4f33076ed75": "W takcie {v0} nie usłyszałem uderzenia. Spróbuj tego fragmentu jeszcze raz, trochę wolniej.",
+    "6bea95cd34ab0688": "Niektóre dźwięki brzmiały inaczej niż zapisana wysokość (takt {v0}). Zagraj ten fragment powoli i pozwól każdemu dźwiękowi wybrzmieć.",
+    "1034d25358f0975b": "Nie potrafiłem pewnie rozpoznać tego dźwięku; spróbujesz jeszcze raz?",
+    "8aee84f240e1fd83": "Powtarzaj etapami",
+    "507698b37306b849": "Spróbuj jeszcze raz w tempie ♩={v0}",
+    "8ecf8f029ffde9a3": "Następnie krótkie ćwiczenie do tego: {v0}",
+    "1d83465302a96db1": "Tym razem Twoja gra dobrze pasowała do zapisu; możesz spróbować trochę szybciej.",
+    "22540e4124cf871e": "Nie zmierzyłem wyraźnej różnicy; spróbujesz jeszcze raz?"
   }
 }

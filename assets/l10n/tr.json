@@ -8682,6 +8682,17 @@
     "fbe949384fb519fd": "Dokunuşların vuruştan vuruşa biraz değişti. Her elde böyle olur.",
     "d83287656f3352c8": "İkinci denemen biraz daha tutarlıydı.",
     "c17db7624a729ab0": "İki deneme yaklaşık aynı ölçüde tutarlıydı.",
-    "c8d4d93244d24b85": "İkinci denemen daha çok değişti; yeni bir kalıpta bu doğal."
+    "c8d4d93244d24b85": "İkinci denemen daha çok değişti; yeni bir kalıpta bu doğal.",
+    "d14563f88beedf5e": "Üzerinde çalışılacak tek şey",
+    "82a931b1a525ec87": "Birkaç vuruş biraz erken geldi (ölçü {v0}). O bölümü biraz daha yavaş tekrar dene.",
+    "6ac1a2a248452bf3": "Birkaç vuruş biraz geç geldi (ölçü {v0}). O bölümü klikle birlikte, biraz daha yavaş tekrar dene.",
+    "96e8c4f33076ed75": "Ölçü {v0} içinde bir vuruş duymadım. O bölümü biraz daha yavaş tekrar dene.",
+    "6bea95cd34ab0688": "Bazı notalar yazılan perdeden farklı duyuldu (ölçü {v0}). O bölümü yavaş çal ve her notanın tınlamasına izin ver.",
+    "1034d25358f0975b": "Bu sesi güvenle ayırt edemedim; tekrar dener misin?",
+    "8aee84f240e1fd83": "Adımlarla tekrar",
+    "507698b37306b849": "♩={v0} temposunda tekrar dene",
+    "8ecf8f029ffde9a3": "Bunun için sıradaki kısa alıştırma: {v0}",
+    "1d83465302a96db1": "Bu sefer çaldıkların yazılanla iyi örtüştü; biraz daha hızlı deneyebilirsin.",
+    "22540e4124cf871e": "Net bir fark ölçmedim; bir kez daha dener misin?"
   }
 }
