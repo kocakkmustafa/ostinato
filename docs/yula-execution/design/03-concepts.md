@@ -27,7 +27,7 @@ Bunlar konsept değil, bugünkü ürünün sözleşmesidir (01/02'den):
 
 ### Konsept 1 — "Tek Sahne" (çalmak-önce, katmanlı)
 
-**(a) Tez.** Uygulama tek bir çalma sahnesidir; yapılacak her şey (ne çalacağım, nasıl gidiyorum, nasıl kurulur) sahnenin üstüne geçici cam katmanlar olarak açılır, kullanıcı hiçbir zaman "başka bir ekrana" gitmez.
+**(a) Tez.** Uygulama tek bir çalma sahnesidir; yapılacak her şey (ne çalacağım, nasıl gidiyorum, nasıl kurulur) sahnenin üstüne geçici cam katmanlar olarak açılır; kullanıcı çalma akışı sırasında başka bir ekrana gitmez, araç ve kurulum ekranları (akort, kurulum sihirbazı, alıştırma, kontrol noktası, ayarlar, hesap) yalnız "katman çıkışı" olarak tam ekran açılır ve kapanınca sahneye döner.
 
 **(b) İlk 5 saniye.** Karşılama bittikten sonra açılış, kaldığı alıştırmanın (varsa `V1CourseState.next`; yoksa ilk ölçülü ders) pratik sahnesidir: akan şerit hazır, ŞİMDİ çizgisi, tempo, tek büyük "Çal". Üstte tek satır: "Notalar - yarım yol - ... dersinden devam" (ders adı; liste yok). Kullanıcı dokunur ve çalar; mikrofon izni ilk "Çal"da istenir (bugünkü kapı: `lib/app/audio/mic_permission_gate.dart`, K). Kenarda üç niyet tutamağı: "Başka çalış", "Yolum", "Ayar".
 
@@ -59,7 +59,10 @@ Bunlar konsept değil, bugünkü ürünün sözleşmesidir (01/02'den):
 | `lib/app/screens/library_screen.dart` (kök) | Kalkar; kök = sahne | YENİ kök; kartlar "Başka çalış" katmanına taşınır |
 | `v1_practice_list_screen.dart`, `v1_lesson_reader_screen.dart` | "Yolum" çekmecesi içinde | Yeniden kullanılır (kapı/chip mantığı aynı), kabuk yeni |
 | `instrument_screen.dart`, `coming_soon_instrument_screen.dart` | "Başka çalış" içinde çalgı seçimi | Birleşir; eski duruş akışı (`course_screen`, `lesson_scored_screen`...) çekmecede ikinci düzey |
-| `setup_wizard_screen.dart`, `tuner_screen.dart`, `drill_screen.dart`, `test_flow_screen.dart` | Bağlamsal / katman çıkışı | Aynen yeniden kullanılır |
+| `setup_wizard_screen.dart`, `tuner_screen.dart`, `drill_screen.dart`, `test_flow_screen.dart` | Katman çıkışı: tam ekran açılır, geri = sahne | Aynen yeniden kullanılır |
+| `lib/app/retention/weekly_goal_card.dart` | "Yolum" > Geçmiş sekmesinde düz bilgi satırı (kart içeriği korunur) | Yeniden kullanılır; sahnede yer almaz |
+| `lib/app/screens/settings_screen.dart` | "Ayar" katmanının çıkışı (tam ekran) | Yeniden kullanılır |
+| `lib/app/ostinato_membership_page.dart`, `lib/app/ostinato_paid_access.dart`, `lib/app/account_connection.dart` | "Ayar" > Hesap/Üyelik çıkışı; ücretli ders kapısı "Yolum" içinde aynı koruma | Yeniden kullanılır, davranış değişmez |
 | `lib/app/design/widgets.dart` `GlassCard` | Katman yüzeyi | Yeniden kullanılır; "saydamlığı azalt" yolu YENİ |
 | Yeni | Sahne kabuğu, katman yöneticisi, Hayalet basamak ayarı, geçmiş görünümü (okuma), kural tabanlı öneri | Yeni |
 
@@ -81,10 +84,10 @@ Bunlar konsept değil, bugünkü ürünün sözleşmesidir (01/02'den):
 | D. Hayalet Ekran | Oturum şeridinde "Hatırla" adımı (Yeni) | Bölüm daha önce çalındıysa yardımsız deneme adımı eklenir; geçişi kullanıcı onaylar, ölçüm güvenilmezse adım eklenmez |
 | E. Kişiselleştirilmiş alıştırmalar | Oturumun "Düzelt" adımı | Önceki oturumdaki ◆ bölümü kısa tekrar (bayrak arkasındaki `listen_try_fix.dart` mantığı açılırsa; ilk aşamada deterministik `drill_generator.dart`) |
 | F. Kulak ve ritim | Oturumun "Duy" adımı; kulak oturumu = tamamı kulaktan (enstrümansız oturum) | Ölçüm biçimleri adım başına etiketli |
-| G. İlerleme ve geçmiş | Oturum özeti + "Geçmiş" şeridi (kapı altında takvim benzeri oturum dizisi) | Özet, bu oturumda ne çalındı ve önceki denemeyle fark; seri vurgusu yok (haftalık hedef kartı korunur, baskı dili yok) |
+| G. İlerleme ve geçmiş | Oturum özeti + "Geçmiş" şeridi (kapı altında tamamlanan oturumların tarihli listesi) | Özet, bu oturumda ne çalındı ve önceki denemeyle fark; seri vurgusu yok: "Geçmiş" tamamlanan oturumların tarihli listesidir, ardışık-gün noktası ve kaçırılan gün boşluğu gösterilmez; mevcut haftalık hedef kartı korunur, baskı dili yok |
 | H. Kurulum | Oturumun "Hazırlık" adımı (yalnız gerektiğinde) + kapıda küçük cihaz durumu | Akort ve gecikme kalibrasyonu adım olarak önerilir, atlanabilir; kamera yalnız kamera dersi adımı eklenirse (bayrak açılırsa) |
 
-**(d) Glass katman ilişkisi.** Oturum şeridi ve özet cam katmandır; adım geçişleri ana yüzeyin üstüne kısa süreli açılır ("sonraki adım" önizlemesi), ana yüzey her adımda tek ve opaktır. Çalma adımında katman yoktur. Katman adım ARASINDA çıkar, çalarken çıkmaz; özet katmanı tam ekranı kaplar (oturum sonu tek odaklı an) ve yalnız kullanıcı kapatınca iner. Hareketi azalt: adım geçişi anlık; saydamlığı azalt: şerit opak (Yeni).
+**(d) Glass katman ilişkisi.** Ana yüzey her adımda tek ve opaktır: oturum kapısındaki adım listesi ve oturum özeti opak metin/liste yüzeyleridir, cam DEĞİLDİR; özet tam ekran opak bir sondur (oturum sonu tek odaklı an). Cam yalnız geçici katmandır: adım ARASINDA açılan "sonraki adım" önizlemesi, "Yol" çekmecesi ve özet üstünde istenince açılan "önceki denemeyle karşılaştır" katmanı. Çalma adımında katman yoktur; katman çalarken çıkmaz ve kullanıcı kapatınca iner. Aynı yarı saydam kartın tekrarı yoktur (§2.3). Hareketi azalt: adım geçişi anlık; saydamlığı azalt: şerit opak (Yeni).
 
 **(e) Mikrofon izni reddi.** Oturum, mikrofonsuz adımlarla kurulur: akort (mikrofonsuz alternatif yok; adım atlanır), "Dinle" (sentezlenen referans), enstrümansız kulak ve ritim dokunma, öz-kontrol ile çalma. Kapıda "Mikrofon kapalı: oturum ölçümsüz" yazar; oturum yine başlar. İzin ancak mikrofonlu adımda yeniden önerilir ve her seferinde sorulmaz.
 
@@ -101,6 +104,8 @@ Bunlar konsept değil, bugünkü ürünün sözleşmesidir (01/02'den):
 | `library_screen.dart` | Kalkar; kök = oturum kapısı | Yeni kök |
 | `v1_practice_list_screen.dart`, `v1_lesson_reader_screen.dart` | "Yol" çekmecesi | Yeniden kullanılır |
 | `weekly_goal_card.dart` | Kapıda tek satır | Yeniden kullanılır |
+| `lib/app/screens/settings_screen.dart` | Kapıdaki <Ayar> çıkışı (tam ekran) | Yeniden kullanılır |
+| `lib/app/ostinato_membership_page.dart`, `lib/app/ostinato_paid_access.dart`, `lib/app/account_connection.dart` | Ayar > Hesap/Üyelik; ücretli ders kapısı "Yol" içinde aynı koruma | Yeniden kullanılır, davranış değişmez |
 | `session_store.dart` | Oturum kaydı (geçmiş şeridi) | Yeniden kullanılır, okuma yeni |
 | Yeni | Oturum oluşturucu (deterministik, kural tabanlı; veri modeli: adımlar, süre), adım şeridi, oturum özeti, Hayalet "Hatırla" adımı | Yeni; oturum bileşimi bugün kodda yok (02 §3.A: günün çalışması yok) |
 
@@ -125,7 +130,7 @@ Bunlar konsept değil, bugünkü ürünün sözleşmesidir (01/02'den):
 | G. İlerleme ve geçmiş | Harita üzerinde durum (modül düğümü: dokunulmadı / çalışıldı / geçit geçildi / tamamlandı) + masa çekmecesinde "Geçmiş" | Durumlar `V1PracticeRecord` alanlarından (passedAt/completedAt, K); yeni beceri adı ya da yetkinlik yüzdesi icat edilmez |
 | H. Kurulum | Araç rafı (akort, kalibrasyon) + "Cihaz" katmanı | Mikrofon durumu, gecikme, ortam gürültüsü, kamera ayarı tek "Cihaz" katmanında; kamera yalnız ilgili modülde |
 
-**(d) Glass katman ilişkisi.** Çok katmanlı tek konsept budur: araçlar cam katman olarak pratik yüzeyinin ÜSTÜNDE tutunur. Kurallar: en fazla iki katman aynı anda açık; çalarken yalnız kullanıcı önceden "sabitlediği" katmanlar (ör. metronom görünümü) kalır, diğerleri iner; katman çalma yüzeyini kapsamaz (şeridin üst %40'ı hep açık). Bulanıklık yalnız açık katmanın arkasında, katman sayısı 2 ile sınırlı (performans). Hareketi azalt: katmanlar anlık; saydamlığı azalt: opak (Yeni). Bu konsept ek katman yönetimi gerektirir; kontrast riski daha yüksektir (üst üste cam).
+**(d) Glass katman ilişkisi.** Çok katmanlı tek konsept budur: araçlar cam katman olarak pratik yüzeyinin ÜSTÜNDE tutunur. Kurallar: en fazla iki cam katman aynı anda açık (ör. Metronom + Döngü); "Yardım" gibi kaydırıcı denetimler katman değil, opak araç rafı satırıdır; çalarken yalnız kullanıcı önceden "sabitlediği" katmanlar (ör. metronom görünümü) kalır, diğerleri iner; katman çalma yüzeyini kapsamaz (şeridin üst %40'ı hep açık). Bulanıklık yalnız açık katmanın arkasında, katman sayısı 2 ile sınırlı (performans). Hareketi azalt: katmanlar anlık; saydamlığı azalt: opak (Yeni). Bu konsept ek katman yönetimi gerektirir; kontrast riski daha yüksektir (üst üste cam).
 
 **(e) Mikrofon izni reddi.** Masada "Dinleme kapalı" rozeti; harita ve araç rafı normal çalışır: Metronom, Referans (sentezlenen), Döngü, kulak bölgesi ve ekran alıştırmaları mikrofonsuz kullanılabilir; "Çal" ölçümsüz kipte açılır (öz-kontrol). Mikrofonlu araç (Akort) rafta soluk ve açıklamalıdır ("mikrofon gerekir"), dokunulursa izin açıklanır.
 
@@ -140,11 +145,14 @@ Bunlar konsept değil, bugünkü ürünün sözleşmesidir (01/02'den):
 | `v1_practice_list_screen.dart` (4 seviye × modül) | Harita + modül çekmecesi kaynağı | Veri/kapı mantığı yeniden kullanılır; sunum yeni |
 | `library_screen.dart` | Kalkar; kök = masa | Yeni kök |
 | `practice_result_screen.dart`, `drill_screen.dart`, `test_flow_screen.dart`, `setup_wizard_screen.dart` | Aynı | Yeniden kullanılır |
+| `lib/app/retention/weekly_goal_card.dart` | Masanın "Geçmiş" çekmecesinde düz bilgi satırı | Yeniden kullanılır |
+| `lib/app/screens/settings_screen.dart` | "Cihaz" katmanından "Ayarlar" çıkışı (tam ekran) | Yeniden kullanılır |
+| `lib/app/ostinato_membership_page.dart`, `lib/app/ostinato_paid_access.dart`, `lib/app/account_connection.dart` | Ayarlar > Hesap/Üyelik; ücretli modül kapısı harita düğümünde (·) aynı koruma | Yeniden kullanılır, davranış değişmez |
 | Yeni | Masa kabuğu, katman/araç raf sistemi, konu haritası bileşeni (düğümler, durum), ekran okuyucu için liste eşdeğeri, "Cihaz" katmanı | Yeni, en büyük kalem: harita görünümü bugün yok |
 
 ## 3. Wireframe'ler (kaba; yerleşim ve akış, renk/tipografi/marka içermez)
 
-Gösterim: telefon dikey, genişlik ~34 karakter. `[ ]` düğme, `<...>` tutamak, `░` cam katman, `▒` opak ana yüzey. İşaretler `practice_marks.dart` kısaltmasıdır (✓ doğru, ◆ farklı nota, ◯ duyamadım).
+Gösterim: telefon dikey, genişlik ~34 karakter. `[ ]` düğme, `<...>` tutamak, `░` cam katman, `▒` opak ana yüzey. İşaretler `practice_marks.dart` kısaltmasıdır (✓ doğru, ◆ farklı nota, ◯ duyamadım); `●` = mikrofon durumu göstergesi (nota işareti değil).
 
 ### 3.1 Konsept 1 — Tek Sahne
 
@@ -158,7 +166,7 @@ Kapalı:                            "Başka çalış" açık:
 |  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   | |░ Bugün için bir öneri           ░|
 |  ▒ ─────┃── (ŞİMDİ) ──────── ▒   | |░  "2. ölçüyü yavaş tekrar"  [Çal]░|
 |  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   | |░ [Gitar] [Kulak - enstrümansız] ░|
-|  ♩=50    ◯ mikrofon hazır         | |░ [Akort] [Aynı alıştırma]        ░|
+|  ♩=50    ● mikrofon hazır         | |░ [Akort] [Aynı alıştırma]        ░|
 |                                  | |░ Son gelişim: 6 ✓, 1 ◆, 1 ◯      ░|
 |         [      Çal      ]        | +----------------------------------+
 |                                  |
@@ -202,7 +210,7 @@ Dur -> sonuç katmanı (alttan) -> [Tekrar dene] [Sonraki]
 
 ### 3.2 Konsept 2 — Oturum Akışı
 
-**Stüdyo (oturum kapısı)**
+**Stüdyo (oturum kapısı)** (adım listesi opak; bu ekranda cam yok)
 ```
 +----------------------------------+
 | Ostinato                 <Ayar>  |
@@ -210,16 +218,17 @@ Dur -> sonuç katmanı (alttan) -> [Tekrar dene] [Sonraki]
 | Bugünkü oturum                   |
 | [ 5 dk ] [*10 dk*] [ 15 dk ]     |
 |                                  |
-| ░ 1 Akort        (atlanabilir) ░ |
-| ░ 2 Isınma       2 dk          ░ |
-| ░ 3 Bölüm: altıncı tel 4 dk   ░ |
-| ░ 4 Duy          2 dk          ░ |
-| ░ 5 Özet                       ░ |
+| 1  Akort          (atlanabilir)  |
+| 2  Isınma         2 dk           |
+| 3  Bölüm: altıncı tel   4 dk     |
+| 4  Duy            2 dk           |
+| 5  Özet                          |
 |  Gitar / Kulak (enstrümansız)    |
 |                                  |
 |         [     Başla     ]        |
 | geçmiş: son 5 oturum  <Yol>      |
 +----------------------------------+
+(<Yol> -> sağdan tek geçici ░ katman)
 ```
 
 **Canlı pratik (oturumun 3. adımı)**
@@ -236,18 +245,23 @@ Dur -> sonuç katmanı (alttan) -> [Tekrar dene] [Sonraki]
 +----------------------------------+
 ```
 
-**İlerleme (oturum özeti, tam ekran)**
+**İlerleme (oturum özeti, tam ekran, opak)**
 ```
 +----------------------------------+
 | Oturum özeti      10 dk          |
-| ░ Bölüm: altıncı tel           ░ |
-| ░  ✓6  ◆1  ◯1  (duyulan %88)   ░ |
-| ░  önceki denemeden fark: ...  ░ |
-| ░ Zorlandığın yer: 2. ölçü     ░ |
-| ░ Yarın için: kısa tekrar      ░ |
-| ░ (yetkinlik iddiası yok)      ░ |
+|                                  |
+| Bölüm: altıncı tel               |
+|  ✓6  ◆1  ◯1   (duyulan %88)      |
+| Zorlandığın yer: 2. ölçü         |
+| Yarın için: kısa tekrar          |
+| (yetkinlik iddiası yok)          |
+|                                  |
+| <Önceki denemeyle karşılaştır>   |
+|  -> ░ geçici katman, kapatınca   |
+|     iner ░                       |
 |  [ Bir daha ]  [ Kapat ]         |
-| Geçmiş: o o o o o  (son oturumlar)|
+| Tamamlanan oturumlar:            |
+|  8 Kas · 5 Kas · 2 Kas           |
 +----------------------------------+
 ```
 
@@ -270,7 +284,7 @@ Dur -> sonuç katmanı (alttan) -> [Tekrar dene] [Sonraki]
 +----------------------------------+
 ```
 
-**Canlı pratik (iki araç katmanı tutunmuş)**
+**Canlı pratik (iki cam araç katmanı tutunmuş; Yardım opak raf satırı)**
 ```
 +----------------------------------+
 | ♩=50  mikrofon: dinliyor  [Dur]  |
@@ -278,7 +292,7 @@ Dur -> sonuç katmanı (alttan) -> [Tekrar dene] [Sonraki]
 | ▒  ✓  ✓  ◆  ✓  ◯  ┃           ▒  |
 | ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  |
 | ░ Metronom ♩=50 ░ ░ Döngü 1-2 ░  |
-| ░ Yardım: nota [x] vuruş [x]   ░ |
+| Yardım: nota [x] vuruş [x] (opak)|
 |        [ Çal ]                   |
 | (en fazla 2 katman; çalarken     |
 |  yalnız sabitlenenler kalır)     |
@@ -309,41 +323,46 @@ Dur -> sonuç katmanı (alttan) -> [Tekrar dene] [Sonraki]
 
 | Ölçüt | K1 Tek Sahne | K2 Oturum Akışı | K3 Çalışma Masası |
 |---|---|---|---|
-| Kullanım kolaylığı | **5** · tek dokunuşla çalma, sahne tek ekran; öğrenilecek gezinme yok | **4** · "Başla" yeterli ama adım sırası ve süre seçimi küçük bir karar ekler | **2** · masa, harita ve araç rafı aynı anda sunulur; ilk kullanıcı için seçenek fazla |
+| Kullanım kolaylığı | **4** · tek dokunuşla çalma, sahne tek ekran; ama üç tutamak (Başka çalış, Yolum, Ayar) ve katmanlar küçük bir gezinme öğrenme maliyeti ekler | **4** · "Başla" yeterli ama adım sırası ve süre seçimi küçük bir karar ekler | **2** · masa, harita ve araç rafı aynı anda sunulur; ilk kullanıcı için seçenek fazla |
 | Özgünlük (§2.4) | **3** · sahne-ve-katman düzeni bilinen bir kalıba yakın, özgünlük çalma yüzeyinin kök olmasında | **3** · oturum bileşimi ders listesinden farklı ama zaman çizelgesi benzeri akışlar yaygın | **4** · araçların tutunduğu masa ve modül haritası Ostinato'ya özgü bir çalışma modeli verir |
 | Erişilebilirlik | **3** · tutamak ve çekmece dokunuş/hareket ister, klavye ve ekran okuyucu eşdeğeri ek iş; çalarken katmanın kapalı olması sadeliği artırır | **4** · doğrusal adımlar ekran okuyucu ve klavyeyle en doğal sırayı verir | **2** · harita ve üst üste katmanlar ekran okuyucu ve büyük metin için en zoru, liste eşdeğeri zorunlu |
 | Profesyonel derinlik | **3** · çekmece derinliği var ama araçlar (döngü, referans, tempo) sahne içinde sınırlı | **2** · oturum akışı ileri kullanıcının serbest çalışmasını yavaşlatabilir; derinlik "serbest sahne" çıkışına bağlı | **5** · döngü, referans, metronom, yardım azaltma kullanıcı tarafından kurulur; en çok kontrol |
-| Mühendislik maliyeti | **3** · orta: pratik çekirdeği hazır; kök değişimi, katman yöneticisi, geçmiş okuma yeni | **3** · orta: adım ekranları büyük oranda mevcut; oturum bileşimi ve özet modeli yeni (günün çalışması bugün yok, 02 §3.A) | **1** · yüksek: pratik ekranı tek parça, araçlara bölünmeli; harita bileşeni ve liste eşdeğeri sıfırdan |
+| Mühendislik maliyeti | **4** · orta-düşük: pratik çekirdeği ve tüm çıkış ekranları hazır, yeni veri modeli gerekmez; kök değişimi, katman yöneticisi ve geçmiş okuma yeni (K2'den ucuz: oturum bileşimi modeli yok; K3'ten çok ucuz: pratik ekranı bölünmez) | **3** · orta: adım ekranları büyük oranda mevcut; oturum bileşimi ve özet modeli yeni (günün çalışması bugün yok, 02 §3.A) | **1** · yüksek: pratik ekranı tek parça, araçlara bölünmeli; harita bileşeni ve liste eşdeğeri sıfırdan |
 | Mevcut ürünle uyum | **4** · kök dışında çekirdek ve tüm ekranlar korunur | **4** · tuner, drill, test akışı, kurulum adım olarak oturur; kütüphane kökü kalkar | **3** · modül/kapı verisi birebir kullanılır ama pratik ekranının bölünmesi mevcut davranış riskidir |
-| **Toplam /30** | **21** | **20** | **17** |
+| **Toplam /30** | **21** (4+3+3+3+4+4) | **20** (4+3+4+2+3+4) | **17** (2+4+2+5+1+3) |
 
 Toplamlar seçim değildir; ölçütlerin eşit ağırlıkta toplamıdır (ağırlık kararı OST-UX-03'tedir).
 
 ### 4.1 §5.4 testi: geçer / kalır (tasarım düzeyinde, kullanıcı testi yapılmadı)
 
-| # | Madde | K1 Tek Sahne | K2 Oturum Akışı | K3 Çalışma Masası |
+Talimat §5.4 metni: "Kullanıcı rehber okumadan:" ve aşağıdaki yedi madde (madde metinleri talimattan aynen alınmıştır).
+
+| # | Madde (talimat metni) | K1 Tek Sahne | K2 Oturum Akışı | K3 Çalışma Masası |
 |---|---|---|---|---|
-| 1 | Rehbersiz pratiğe başlama | **Geçer** · açılış zaten pratik sahnesi, tek "Çal" | **Geçer** · tek "Başla"; ilk adımın akort mu çalma mı olacağı açık olmalı | **Kalır** · "Çal" masada var ama harita ve rafla yarışır; kullanıcı rehbersiz neye dokunacağını seçmek zorunda kalabilir |
-| 2 | Enstrümansız uygun çalışma | **Geçer** · "Başka çalış" > Kulak (enstrümansız) iki dokunuş | **Geçer** · kapıdaki "Kulak (enstrümansız)" seçimi tam oturum kurar | **Geçer** · harita kulak bölgesi; gitar filtresiyle birlikte görünürlüğü zayıf, etiket gerekir |
-| 3 | Öğrenme yolculuğunu görme | **Geçer** · "Yolum" çekmecesi, ama bir tutamak ardında | **Geçer** · "Yol" kapıdan ve oturum satırlarından | **Geçer** · harita birincil; en görünür |
-| 4 | Bir hatasını anlama | **Geçer** · sonuç katmanı, hata haritası ("Nerede oldu"), ◆ bilgi | **Geçer** · oturum özeti + adım sonu özet | **Geçer** · aynı sonuç ekranı; hata modül düğümüne bağlanmaz |
-| 5 | Aynı bölümü tekrar deneme | **Geçer** · [Tekrar dene], çubuğa dokun = döngü (bugünkü davranış, `practice_result_screen.dart` "Tap a bar to loop it") | **Geçer** · "Bir daha" ve "Düzelt" adımı; tek bölümü tekrar sonra oturum akışı dışına çıkar | **Geçer** · Döngü aracı en doğrudan |
-| 6 | İlerleme geçmişine ulaşma | **Geçer** · "Yolum" > Geçmiş | **Geçer** · kapıdaki geçmiş şeridi | **Geçer** · harita durumu ve "Geçmiş" |
-| 7 | İzin vermeden alternatif | **Geçer** · "Dinleme kapalı" kipi, kulak ve referans | **Geçer** · oturum mikrofonsuz kurulur | **Geçer** · mikrofonlu araçlar soluk, diğerleri açık |
+| 1 | Pratiğe başlayabilmeli. | **Geçer** · açılış zaten pratik sahnesi, tek "Çal" | **Geçer** · tek "Başla"; ilk adımın akort mu çalma mı olacağı açık olmalı | **Kalır** · "Çal" masada var ama harita ve rafla yarışır; kullanıcı rehbersiz neye dokunacağını seçmek zorunda kalabilir |
+| 2 | Enstrümanı olmadan uygun bir çalışma yapabilmeli. | **Geçer** · "Başka çalış" > Kulak (enstrümansız) iki dokunuş | **Geçer** · kapıdaki "Kulak (enstrümansız)" seçimi tam oturum kurar | **Geçer** · harita kulak bölgesi; gitar filtresiyle birlikte görünürlüğü zayıf, etiket gerekir |
+| 3 | Öğrenme yolculuğunu görebilmeli. | **Geçer** · "Yolum" çekmecesi, ama bir tutamak ardında | **Geçer** · "Yol" kapıdan ve oturum satırlarından | **Geçer** · harita birincil; en görünür |
+| 4 | Bir hatasını anlayabilmeli. | **Geçer** · sonuç katmanı, hata haritası ("Nerede oldu"), ◆ bilgi | **Geçer** · oturum özeti + adım sonu özet | **Geçer** · aynı sonuç ekranı; hata modül düğümüne bağlanmaz |
+| 5 | Aynı bölümü tekrar deneyebilmeli. | **Geçer** · [Tekrar dene], çubuğa dokun = döngü (bugünkü davranış, `practice_result_screen.dart` "Tap a bar to loop it") | **Geçer** · "Bir daha" ve "Düzelt" adımı; tek bölümü tekrar sonra oturum akışı dışına çıkar | **Geçer** · Döngü aracı en doğrudan |
+| 6 | İlerleme geçmişine ulaşabilmeli. | **Geçer** · "Yolum" > Geçmiş | **Geçer** · kapıdaki geçmiş şeridi | **Geçer** · harita durumu ve "Geçmiş" |
+| 7 | Mikrofon veya kamera izni vermediğinde de uygun alternatif deneyimi kullanabilmeli. | **Geçer** · mikrofon: "Dinleme kapalı" kipi, kulak ve referans; kamera: bağımlılık yok | **Geçer** · mikrofon: oturum mikrofonsuz kurulur; kamera: bağımlılık yok | **Geçer** · mikrofon: mikrofonlu araçlar soluk, diğerleri açık; kamera: bağımlılık yok |
+
+Madde 7, kamera boyutu: üç konsept de kameraya bağımlı değildir. Kamera bayrakları kapalıdır (`ostinatoCameraPracticeAvailable=false`, `ostinatoCameraLessonsOpen=false`, 01 §7); bayrak açılırsa kamera yalnız K8 derslerinde (`gtr-s1-m01-02`, `-03`) ve yalnız o ders açılınca istenir, reddedilirse o ders kamerasız atlanır ya da ilerleme öz-bildirimle sürer; hiçbir konseptte açılış, oturum veya masa kamera kurulumu gerektirmez. Kamera izni reddi cihazda doğrulanmadı (U).
 
 Özet: K1 7/7, K2 7/7, K3 6/7 (madde 1). Madde 1 K3'te, masanın açılışında "Çal"ı tek eylem yapan bir sadeleştirmeyle çözülebilir; bu K3'ü K1'e yaklaştırır (bölüm 6, melez).
 
-## 5. §5.3 yasakları ve §5.1 kontrolü (üç konsept)
+## 5. §5.1 ve §5.3 kontrolü (üç konsept)
 
-| §5.3 maddesi | K1 | K2 | K3 |
+| Madde | K1 | K2 | K3 |
 |---|---|---|---|
+| §5.1 "en önemli eylem müzik yapmaktır": açılış müziğe götürüyor mu | Evet: açılış çalma sahnesi | Kısmen: açılış oturum kapısı; "Başla" çoğu kez çalmaya gider ama ilk adım akort/ısınma olabilir | Kısmen: açılış masa; "Çal" var ama harita ve araç rafıyla aynı yüzeyde |
 | Her ekranı ders listesine dönüştürmek | Hayır: liste yalnız "Yolum" içinde | Hayır: liste yalnız "Yol" içinde | Hayır: harita düğümleri modül, ders listesi çekmecede |
 | Fazla animasyon/efekt | Çalarken katman ve hareket yok | Çalarken şerit gizli | Çalarken yalnız sabitlenmiş katmanlar |
 | Sert görsel ceza | ◆ ve ◯ nötr; sayaçta yargı yok | Özette ceza dili yok | Düğümde "ölçülemedi" nötr |
 | Güvenilmeyen ölçümü kesin gösterme | ◯ + neden, doğruluk ayrı | Özet ◯ ayrı yazar | Düğüm durumu yalnız kayıtlı geçitten |
 | Sürekli kamera kurdurma | Kamera yalnız kamera dersi | Aynı | Aynı |
-| Oyun başarısını müzik becerisiyle karıştırma | Puan/rozet/seri baskısı yok | Seri vurgusu yok | Düğüm durumu geçit olgusudur, puan değil |
-| Çalışan kurs/ilerleme sistemini silme | Silinmez; sunum değişir | Silinmez | Silinmez |
+| Oyun başarısını müzik becerisiyle karıştırma | Puan/rozet yok; mevcut haftalık hedef/seri yalnız "Yolum" > Geçmiş içinde düz bilgi, sahnede yok | Puan/rozet yok; geçmiş tarihli oturum listesi, ardışık-gün noktası ve boş gün gösterilmez; haftalık hedef kapıda tek satır (kalan risk: seri sayısı gösterilirse 02 §5 #6 geçerli) | Düğüm durumu geçit olgusudur, puan değil; haftalık hedef "Geçmiş" çekmecesinde düz bilgi |
+| Çalışan kurs/ilerleme sistemini silme | Silinmez; sunum değişir; haftalık hedef kartı, ayarlar, hesap/üyelik yerleri belirli (bölüm 2 g tabloları) | Silinmez; aynı yerler belirli | Silinmez; aynı yerler belirli |
 
 ## 6. Öneri ve gerekçe (SEÇİM YAPILMAZ)
 
@@ -352,7 +371,7 @@ Bu belge konsept seçmez; seçimi OST-UX-03'te ADR ile ilgili ekip yapar (Aşama
 - **K1 Tek Sahne** matriste en yüksek toplamı alır ve §5.1'e en doğrudan cevap verir (uygulama = çalma yüzeyi). Zayıflığı: derinlik katmanlara bağlı ve erişilebilirlikte katmanlar için klavye/ekran okuyucu eşdeğeri gerekir; özgünlük orta.
 - **K2 Oturum Akışı** yeni başlayan ve "ne çalayım" sorusunu taşımak istemeyen kullanıcı için en az karar yükü getirir; erişilebilirliği doğal olarak iyi. Zayıflığı: ileri kullanıcıyı yavaşlatır ve oturum bileşimi (günün çalışması) bugün yok; deterministik kural kümesi ve pedagojik doğrulama (uzman onayı bekliyor) olmadan öneri zayıf kalır.
 - **K3 Çalışma Masası** profesyonel derinlik ve özgünlükte en güçlüsü; en yüksek maliyet ve en zor erişilebilirlik. Pratik ekranını araçlara bölmek mevcut ölçüm yüzeyine regresyon riski taşır (01 §4, §8).
-- **Hangi koşulda hangisi:** ürünün önceliği "ilk gün çalmaya başlayan" ise K1 veya K2; hedef kitle ağırlıkla ileri/rutinli gitaristse K3'ün araç katmanları; mühendislik kapasitesi sınırlı ve hızlı sonuç gerekiyorsa K1 (çekirdek hazır). Erişilebilirlik öncelikliyse K2'nin doğrusal yapısı.
+- **Hangi koşulda hangisi:** ürünün önceliği "ilk gün çalmaya başlayan" ise K1 veya K2; hedef kitle ağırlıkla ileri/rutinli gitaristse K3'ün araç katmanları; mühendislik kapasitesi sınırlı ve hızlı sonuç gerekiyorsa K1 (maliyet 4: çekirdek ve çıkış ekranları hazır, yeni veri modeli yok; K2 maliyet 3: oturum bileşimi modeli yeni). Erişilebilirlik öncelikliyse K2'nin doğrusal yapısı.
 - **Olası melez (öneri değil, seçenek):** K1'in sahnesi kök, K2'nin "Bugünkü oturum" önerisi "Başka çalış" katmanında tek satır, K3'ün araç katmanları (metronom, döngü, referans, yardım) sahnede isteğe bağlı rafa dönüşür; harita (K3) çalışma haritası olarak "Yolum" çekmecesine girer. Bu melez her konseptten yalnız bağımsız parçayı alır; maliyeti ve tutarlılığı OST-UX-03'te değerlendirilmelidir.
 - Karar öncesi eksik girdiler: bölüm 7.
 
