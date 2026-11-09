@@ -12,10 +12,10 @@ Giriş: `lib/main.dart` (`OstinatoHome`, satır ~370–428) kabuğun tek dallanm
 |---|---|---|
 | Karşılama (3 sayfa: karşılama, kapsam, sensör/veri) | `lib/app/screens/onboarding_screen.dart` (464) | İlk açılış; izin BURADA istenmez, açıklanır (dosya yorumu). Mikrofon, kamera, "tıbbi araç değil", ilerleme kartları |
 | İlk üç dakika | `lib/app/first_minutes/first_three_minutes_screen.dart` (618) | Ritim dokunma / ses / "enstrümanım var" üç başlangıç. BAYRAK KAPALI (bölüm 8) |
-| Kütüphane (ana ekran) | `lib/app/screens/library_screen.dart` (606) | Giriş ekranı: tanıtım kartı, "Dersleri incele" şeridi, haftalık hedef kartı, akort aleti, çalgı kartları (gitar; ses ve piyano "Yakında"), kulak eğitimi kartı |
+| Kütüphane (ana ekran) | `lib/app/screens/library_screen.dart` (606) | Giriş ekranı: tanıtım kartı, "Dersleri incele" şeridi, haftalık hedef kartı, akort aleti, "Dersleri incele" şeridinde üç canlı disiplin için üç başlangıç dersi (gitar, ses, piyano duruş/referans dersleri), çalgı kartları (gitar açık; ses ve piyano kartı "Yakında" sayfasına gider), kulak eğitimi kartı |
 | Ayarlar | `lib/app/screens/settings_screen.dart` (577) | Görünüm (açık/koyu), dil, hesap, üyelik, kamera/mikrofon beyanı, kendi kaydım (opt-in), pratik ekranı (solak, renk körü), paylaşım |
 | Çalgı sayfası | `lib/app/screens/instrument_screen.dart` (566) | Açık çalgı için sayfa: `MeasuredPracticeCard`, `NoteObservationCard`, `library.json` kurs listesi |
-| "Yakında" çalgı sayfası | `lib/app/screens/coming_soon_instrument_screen.dart` (101) | Açık olmayan çalgı (ses, piyano); ders açmaz |
+| "Yakında" çalgı sayfası | `lib/app/screens/coming_soon_instrument_screen.dart` (101) | Yalnız ses ve piyano ÇALGI KARTININ sayfası (`ostinatoOpenInstruments`); bu sayfa ders açmaz. Ses ve piyanonun `library.json` duruş başlangıç dersleri ise ana ekrandaki "Dersleri incele" şeridinden açılır (aşağıdaki not) |
 | v1 kurs listesi (gitar, kulak) | `lib/app/practice/loop/v1_practice_list_screen.dart` (827) | Seviye, modül, ders; ölçülü ders pratiği açar, diğerleri okuyucuyu |
 | Ders okuyucu | `lib/app/practice/loop/v1_lesson_reader_screen.dart` (610) | Hedef, anlatım, görev, "ölçülmeyen" notu, öz-kontrol; akort/alıştırma/test akışına çıkış |
 | Pratik ekranı | `lib/app/practice/loop/practice_loop_screen.dart` (1003) | Akan TAB, sabit ŞİMDİ çizgisi, görsel vuruş, her zaman görünür mikrofon şeridi, ✓/◆/◯ sayaçları, başla/durdur |
@@ -32,7 +32,7 @@ Giriş: `lib/main.dart` (`OstinatoHome`, satır ~370–428) kabuğun tek dallanm
 | Hesap ve üyelik | `lib/app/ostinato_membership_page.dart`, `lib/app/ostinato_paid_access.dart`, `lib/app/account_connection.dart` | Aylık ve yıllık plan; Motion+ sunulmaz (`ostinatoMotionPlusOffered=false`) |
 | Yazılı tekrar | `lib/app/study_review.dart` | Yalnız eski yazılı kurs bayrağı açıkken girişi var |
 
-Not (K): Kütüphane'deki "Dersleri incele" şeridinin başlangıç dersi `library.json` içindeki `guitar.foundations.camera_space` olarak çözülür (`assets/content/library.json`, `starterLessonId`); v1 ölçülü gitar kursuna ise çalgı kartı → çalgı sayfası → `MeasuredPracticeCard` üzerinden gidilir (`lib/app/screens/instrument_screen.dart` satır ~142, `lib/app/screens/guitar_journey_screen.dart` `MeasuredPracticeCard`, satır ~1413). Bu iki yolun cihazda nasıl göründüğü doğrulanmadı (U).
+Not (K): Kütüphane'deki "Dersleri incele" şeridi her `status == live` disiplin için bir satır kurar (`lib/app/screens/library_screen.dart:54-57`). `assets/content/library.json` içinde üç disiplinin üçü de `live` (bu işte okundu) ve başlangıç dersleri: gitar `guitar.foundations.camera_space`, ses `voice.foundations.teacher_range`, piyano `piano.foundations.posture`. Yani ses ve piyano duruş/referans dersleri ana ekrandan açılır (üç kart `docs/yula-execution/design/evidence/ux-01/render/04-studyo-kutuphane.png`; satır etiketleri GUIDE/REFERENCE, `library_screen.dart` `_StarterRow`); "Yakında" yalnız bu iki çalgının çalgı kartı sayfasıdır (`coming_soon_instrument_screen.dart`); v1 ölçülü gitar kursuna ise çalgı kartı → çalgı sayfası → `MeasuredPracticeCard` üzerinden gidilir (`lib/app/screens/instrument_screen.dart` satır ~142, `lib/app/screens/guitar_journey_screen.dart` `MeasuredPracticeCard`, satır ~1413). Bu iki yolun cihazda nasıl göründüğü doğrulanmadı (U).
 
 ## 2. Navigasyon haritası (metin diyagramı)
 
@@ -44,7 +44,7 @@ main.dart OstinatoApp -> OstinatoHome
  |- [bayrak ostinatoFirstThreeMinutesOpen=false -> atlanır] FirstThreeMinutesScreen
  `- LibraryScreen  (kök; geri yok)
      |- Ayarlar (SettingsScreen) -> Hesap / Üyelik sayfaları
-     |- "Dersleri incele" şeridi -> lessonScreenFor(guitar.foundations.camera_space)
+     |- "Dersleri incele" şeridi -> her canlı disiplin için lessonScreenFor(starterLesson): gitar camera_space, ses teacher_range, piyano posture
      |      -> LessonScored|Locked|Demo -> (kamera kapısı) SetupCheck -> Live -> Review
      |- Haftalık hedef kartı (alt sayfa: showModalBottomSheet)
      |- Akort aleti (openTuner)
@@ -167,7 +167,7 @@ K8 kamera dersleri (`lib/app/practice/camera/camera_lesson.dart`): yalnız `gtr-
 ## 10. Gerçek yayın durumu (mağaza 1.0.2 (11) ile main farkı)
 
 Yöntem: `git log`, `git diff` (`origin/release/1.0.2` ↔ `origin/main`). Canlı mağaza durumu bu işte okunmadı (U); "mağazada" = `release/1.0.2` kaynağı (ADR-004, STATUS).
-- Mağazada (release/1.0.2): gitar kursu ve kulak eğitimi açık; ses ve piyano "Yakında"; ücretsiz gitar s1 + kulak s1; abonelik aylık ve yıllık; kamera kapalı; eşitleme kapalı. Sürüm `1.0.2+11`.
+- Mağazada (release/1.0.2): gitar kursu ve kulak eğitimi açık; ses ve piyano çalgı kartı "Yakında" sayfası (ses/piyano duruş başlangıç dersleri ana ekran şeridinde ayrıca listelenir); ücretsiz gitar s1 + kulak s1; abonelik aylık ve yıllık; kamera kapalı; eşitleme kapalı. Sürüm `1.0.2+11`.
 - Yalnız main'de, bayrak ARKASINDA (varsayılan kapalı): K8 kamera dersleri ve ayna (`ostinatoCameraLessonsOpen`), ilk üç dakika akışı (`ostinatoFirstThreeMinutesOpen`), dinle-dene-düzelt döngüsü (`ostinatoListenTryFixRepeatOpen`). Bu üçünün main varsayılanıyla kullanıcıya ulaşan davranışı release ile aynıdır (bayrak false); açılırsa yeni ekran görünür.
 - Yalnız main'de, bayraksız: `camera` paketi bağımlılığı (`pubspec.yaml`); ders metni düzeltmeleri (`content/v1/gtr/gtr-s1-m01-03.json`, `lib/app/screens/v1_home_copy.dart` kamera metni "duruşa ve el konumuna" diye değişti); ölçüm külliyatı testleri; belge işleri (STATUS, DECISIONS, ölçüm raporu, protokol). Yalnız main'in içerik/metin farkı release'e ulaşmaz.
 - Yalnız release'te: 4 commit (`c184e24`, `7847c54` alt yazı dürüstlüğü düzeltmesi; `c49654b` sürüm; merge #64). main ondan 40 commit ileride, 4 commit geridedir (`git rev-list --count`). Düzeltmeler önce main'e, sonra release'e alınır (ADR-004).
