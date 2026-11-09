@@ -61,6 +61,15 @@ const bool ostinatoCameraLessonsOpen = false;
 /// Rollback: leave this false (or revert the PR); no data depends on it.
 const bool ostinatoListenTryFixRepeatOpen = false;
 
+/// OST-P0-07 (founder, 2026-11-08, "Dört ürün ana talimatı" §7.4): the
+/// "ghost screen" on the existing practice screen. When true a small switch
+/// lets the player fade the guides (written line, "Listen first", visual
+/// beat) as measured practice repeats; "Show guides" brings them back at any
+/// time and start/stop stay reachable. Nothing is stored beyond the session
+/// and no skill is claimed. While false the practice screen is exactly as
+/// before. Rollback: leave this false (or revert the PR); no data depends on it.
+const bool ostinatoGhostScreenOpen = false;
+
 /// Founder decision 2026-10-25 (OST-K1): a 13–17 account still waiting for
 /// parental consent sees the subscription offers, and the purchase itself is
 /// left to the store's family controls (Ask to Buy / Google Play parental

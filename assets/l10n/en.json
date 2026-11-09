@@ -8693,6 +8693,17 @@
     "507698b37306b849": "Try again at ♩={v0}",
     "8ecf8f029ffde9a3": "Next, a short exercise for this: {v0}",
     "1d83465302a96db1": "Your playing matched the line well this time; you can try a little faster.",
-    "22540e4124cf871e": "I didn't measure a clear difference; will you try once more?"
+    "22540e4124cf871e": "I didn't measure a clear difference; will you try once more?",
+    "63cbcfa231dd730f": "Fade the guides as I learn",
+    "cdf26110e04cb13a": "Guide level: {v0}",
+    "cafe97469f5aa658": "Learn: all guides shown",
+    "05c92d2a0424fe04": "Reinforce: fewer guides",
+    "5d4cc66684202659": "Recall: only the beat is shown",
+    "7337d838ff151067": "On your own: no guides",
+    "41a2766feadd0ba4": "Show guides",
+    "ba4bb960a5cb9d6d": "Hide guides again",
+    "57c7396c2f8ddcb7": "Back to more guides",
+    "43a41af1ad9ea6af": "The written line is hidden at this level. Show the guides to see it again.",
+    "86c01fd7aeb1b35b": "You played this run without guides; it matched the line well."
   }
 }

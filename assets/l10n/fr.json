@@ -8693,6 +8693,17 @@
     "507698b37306b849": "Réessayer à ♩={v0}",
     "8ecf8f029ffde9a3": "Ensuite, un court exercice pour cela : {v0}",
     "1d83465302a96db1": "Ton jeu correspondait bien à la ligne cette fois ; tu peux essayer un peu plus vite.",
-    "22540e4124cf871e": "Je n’ai pas mesuré de différence nette ; veux-tu réessayer une fois ?"
+    "22540e4124cf871e": "Je n’ai pas mesuré de différence nette ; veux-tu réessayer une fois ?",
+    "63cbcfa231dd730f": "Réduire les repères au fil de l'apprentissage",
+    "cdf26110e04cb13a": "Niveau de repères : {v0}",
+    "cafe97469f5aa658": "Apprendre : tous les repères affichés",
+    "05c92d2a0424fe04": "Consolider : moins de repères",
+    "5d4cc66684202659": "Se rappeler : seul le temps est affiché",
+    "7337d838ff151067": "En autonomie : aucun repère",
+    "41a2766feadd0ba4": "Afficher les repères",
+    "ba4bb960a5cb9d6d": "Masquer à nouveau les repères",
+    "57c7396c2f8ddcb7": "Revenir à plus de repères",
+    "43a41af1ad9ea6af": "La ligne écrite est masquée à ce niveau. Affiche les repères pour la revoir.",
+    "86c01fd7aeb1b35b": "Tu as joué ce passage sans repères ; il correspondait bien à la ligne."
   }
 }

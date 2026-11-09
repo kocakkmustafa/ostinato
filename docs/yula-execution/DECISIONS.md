@@ -38,3 +38,12 @@ Karar: main `pubspec.yaml` sürümü `1.0.1+10`'dur. Mağaza sürümü `1.0.2+11
 3. Güvenlik/maliyet: Yanlış build/sürüm numarasıyla gönderim riski azalır; mağaza işleri ayrı kurucu onayında kalır.
 4. Geri dönüş: Akış değişirse yeni ADR; release dalına bu PR ile dokunulmaz.
 5. Kullanıcı: Mağazadaki 1.0.2 kullanıcısı; düzeltmeler main'de kaybolmaz.
+
+## ADR-005 — Hayalet Ekran (OST-P0-07): rehberler ölçülü başarıyla kademeli azalır, bayrak arkasında
+Tarih: 2026-11-09 · Durum: KABUL (bayrak `ostinatoGhostScreenOpen = false`; numara main'e göre seçildi, açık PR #71 aynı numarayı alırsa sonra gelen yeniden numaralanır)
+Karar: Mevcut pratik ekranına küçük bir anahtar ("Öğrendikçe rehberleri azalt", varsayılan kapalı) bağlanır. Açıkken üç gerçek rehber (yazılı dizi/tab şeridi, "Önce dinle" referans sesi, görsel vuruş) 4 aşamada azalır: öğren (3) → pekiştir (2) → hatırla (1: vuruş) → kendi başına (0). İlerleme: yalnız `ListenTryFix`'in `FixClear` sonucunda (duyuldu + dersin kendi doğruluk eşiği; yeni skor yok), art arda 2 koşu. Ölçüm güvenilmezse (`FixUnmeasured`) seviye, seri ve tamamlama sayacı değişmez; "yetkinlik kazanıldı" iddiası hiçbir yolda yoktur. Art arda 3 ölçülü-ama-net-olmayan koşuda bir seviye geri; kullanıcı "Rehberi göster" (oturum boyunca açar, ilerletmez/cezalandırmaz) ve "Daha çok rehbere dön" ile her an döner. Başla/durdur/çıkış hiçbir seviyede gizlenmez. Durum yalnız ekranın belleğinde; yeni depolama yok.
+1. Bilgi: §7.4 OST-P0-07 ve arayüz talimatı §5.2.D rehbersiz tamamlamayı ister; ölçüm güvenilir değilse yetkinlik iddia edilmemelidir.
+2. Delil: `test/ghost_screen_test.dart`; mutasyon (güvenilmezi başarı say) testleri kırmızı yapar. Gerçek kullanıcıyla öğrenme kanıtı YOK.
+3. Güvenlik/maliyet: Ağ, ham ses, yeni bağımlılık, kalıcı depolama yok; maliyet farkı yok.
+4. Geri dönüş: bayrak kapalı bırakılır (varsayılan) ya da PR geri alınır; veri bağımlılığı yok.
+5. Kullanıcı: kademeli öğrenen gitar/kulak kullanıcısı; rehberi her an geri açabilir.

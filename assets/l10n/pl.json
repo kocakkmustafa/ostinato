@@ -8707,6 +8707,17 @@
     "507698b37306b849": "Spróbuj jeszcze raz w tempie ♩={v0}",
     "8ecf8f029ffde9a3": "Następnie krótkie ćwiczenie do tego: {v0}",
     "1d83465302a96db1": "Tym razem Twoja gra dobrze pasowała do zapisu; możesz spróbować trochę szybciej.",
-    "22540e4124cf871e": "Nie zmierzyłem wyraźnej różnicy; spróbujesz jeszcze raz?"
+    "22540e4124cf871e": "Nie zmierzyłem wyraźnej różnicy; spróbujesz jeszcze raz?",
+    "63cbcfa231dd730f": "Zmniejszaj wskazówki w miarę nauki",
+    "cdf26110e04cb13a": "Poziom wskazówek: {v0}",
+    "cafe97469f5aa658": "Nauka: wszystkie wskazówki widoczne",
+    "05c92d2a0424fe04": "Utrwalanie: mniej wskazówek",
+    "5d4cc66684202659": "Przypominanie: widać tylko rytm",
+    "7337d838ff151067": "Samodzielnie: bez wskazówek",
+    "41a2766feadd0ba4": "Pokaż wskazówki",
+    "ba4bb960a5cb9d6d": "Ukryj wskazówki ponownie",
+    "57c7396c2f8ddcb7": "Wróć do większej liczby wskazówek",
+    "43a41af1ad9ea6af": "Zapisana linia jest na tym poziomie ukryta. Pokaż wskazówki, aby ją znów zobaczyć.",
+    "86c01fd7aeb1b35b": "Ten przebieg zagrałeś bez wskazówek; dobrze pasował do linii."
   }
 }
