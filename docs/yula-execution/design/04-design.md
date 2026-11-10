@@ -322,7 +322,7 @@ Talimat §2.3: cam işlevseldir, ekran aynı kartlarla dolu olmaz. Renkler/marka
 | Sahne açılış | `V1CourseState.next` dersi; yoksa ilk ölçülü ders | Kayıt yok: "Başla: ilk alıştırma", devam satırı yerine "Yeni başlıyorsun" nötr metin |
 | Öneri satırı | Son hata türü + `next` (kural tabanlı) | Kayıt yok: satır gizlenir (öneri uydurma yok) |
 | Yolum > Yol | `v1_course_catalog.dart` seviye > modül > ders; kapı/ücretli işaretleri | Tüm dersler "dokunulmadı", sıradaki ders işaretli |
-| Yolum > Geçmiş | `V1PracticeRecord` (`bestAccuracy/bestHeard/bestBpm`, geçit/tamamlama tarihleri), `V1LessonCheck` (ölçülmedi/ölçüldü ayrımı), haftalık hedef | "Henüz koşu yok. Bir kez çal; burada görünür." Puan/seri baskısı yok |
+| Yolum > Geçmiş | `V1PracticeRecord` (`bestAccuracy/bestHeard/bestBpm`, geçit/tamamlama tarihleri), `V1LessonCheck` (ölçülmedi/ölçüldü ayrımı), haftalık hedef | "Bir kez çal; koşun burada görünür." Puan/seri baskısı yok |
 | Sonuç | Koşunun ✓ ◆ ◯, duyulan %, hata haritası, geçit | Koşu yarıda: "Koşu tamamlanmadı", ölçüm yok (unmeasured) |
 | Hayalet | Basamak (yeni yerel anahtar) + son uygun koşular | Kayıt yok: Öğrenme basamağı, öneri yok |
 | Kulak | Ekran alıştırması sonuçları (kendi kaydı) | Boş: "Dinle ve seç ile başla" |

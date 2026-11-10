@@ -112,8 +112,8 @@ abstract final class UxPrototypeCopy {
   static const UiCopy heardPct = ('Heard {v0}%', 'Duyulan %{v0}');
   static const UiCopy notMeasured = ('Not measured', 'Ölçülmedi');
   static const UiCopy historyEmpty = (
-    'No runs yet. Play once; it shows up here.',
-    'Henüz koşu yok. Bir kez çal; burada görünür.',
+    'Play once and your run shows up here.',
+    'Bir kez çal; koşun burada görünür.',
   );
   static const UiCopy earListedApart = (
     'Ear practice is listed separately.',

@@ -60,7 +60,7 @@ Bu belge talimat §7 Aşama 5 madde 14 "Uygulama backlog'u ve kabul kriterleri"d
 | 1 | Yol, `v1_course_catalog.dart` ile birebir (seviye × modül × ders sayıları); kapı/ücretli/kilit işaretleri mevcut `ostinato_paid_access.dart` / kapı mantığıyla aynı (sayı eşleşme testi) | W | G: Yol |
 | 2 | T3: Sıradaki ders ve "neden bu" satırı görünür; neden metni yalnız kayıtlı olgudan (geçit/tamamlama) | W | G |
 | 3 | T6: Geçmiş önceki denemeleri yan yana gösterir; duyulan % doğruluktan AYRI; puan/rozet/seri baskısı yok | W | G: Geçmiş |
-| 4 | Boş veri: "Henüz koşu yok" metni; sayı/yetkinlik uydurulmaz | W | G: boş |
+| 4 | Boş veri: "Bir kez çal; koşun burada görünür." metni; sayı/yetkinlik uydurulmaz | W | G: boş |
 | 5 | Kulak sonuçları ayrı bölümde; enstrüman toplamına katılmaz (birim test) | U | — |
 | 6 | `V1PracticeRecord` / `V1LessonCheck` JSON biçimi ve mevcut testler değişmeden geçer (şema değişmedi kanıtı: diff'te model dosyası yok) | U | — |
 | 7 | Ekran okuyucu: Yol doğrusal listedir, harita bileşeni yok | A | — |
