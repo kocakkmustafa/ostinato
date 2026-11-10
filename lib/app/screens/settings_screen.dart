@@ -18,7 +18,9 @@ import '../practice/display/practice_display_preferences.dart';
 import '../practice/own_recording/own_recording_copy.dart';
 import '../practice/own_recording/own_recording_preference.dart';
 import '../device_accuracy_copy.dart';
+import '../ostinato_release_policy.dart';
 import '../ui_copy.dart';
+import '../ux_prototype/ux_prototype_entry.dart';
 import 'settings_copy.dart';
 import 'v1_home_copy.dart';
 
@@ -60,7 +62,12 @@ class SettingsScreen extends StatelessWidget {
     super.key,
     this.ownRecordingPreference,
     this.practiceDisplay,
+    this.uxPrototypeOpen = ostinatoUxPrototypeOpen,
   });
+
+  /// OST-UX-04 flag (closed by default); tests pass it explicitly. While
+  /// false no entry to the prototype is built.
+  final bool uxPrototypeOpen;
 
   /// FK2 setting store; defaults to the device file.
   final OwnRecordingPreference? ownRecordingPreference;
@@ -99,6 +106,10 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 22),
+              if (uxPrototypeOpen) ...<Widget>[
+                const UxPrototypeEntryButton(),
+                const SizedBox(height: 14),
+              ],
               const AppAppearancePicker(),
               const SizedBox(height: 14),
               if (localeController != null) ...<Widget>[
