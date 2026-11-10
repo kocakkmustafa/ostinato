@@ -115,3 +115,9 @@ Bu belge talimat §7 Aşama 5 madde 14 "Uygulama backlog'u ve kabul kriterleri"d
 | 7 | T1–T14 (04-design bölüm 13): T12 hariç 13 senaryonun her biri için en az bir adlandırılmış test (adlar INDEX'te); T12 için kalem 1–4 ve kayıtlı el kontrolü | W+E | `evidence/ux-05h/INDEX.md` |
 | 8 | Bayrak KAPALI regresyon turu: tüm mevcut test paketi aynen geçer; bayrak AÇIK turu: `flutter analyze` temiz ve yeni testler geçer; sayılar rapora yazılır | E | Test sayısı çıktısı |
 | 9 | Kullanıcı testi (insan) bu bilette yapılmaz; Aşama 6 prototipidir. Bu bilet bunu "yapılmadı" diye yazar | — | — |
+
+## Prototip devir notları (OST-UX-04)
+Kod bu bilette değiştirilmedi; UX-05'te ele alınacak bilinen noktalar:
+1. `_tryAgain` `_loop`'u sıfırlamıyor (`ux_prototype_screen.dart` ~143-146): "Bu ölçüyü döngüle"den sonra "Tekrar dene" hep ölçülmeyen koşu veriyor; döngüyü kapatma yolu yalnız "Sonraki".
+2. `ux-ear-reveal` seçimle karşılaştırmadan hep "İkinci nota daha yüksekti" gösteriyor (~673).
+3. "En fazla 2 cam" testi tek katmanı sınar ve `lessThanOrEqualTo(2)` totolojidir; ayrıca sekme/çip `Semantics(button: true)` çift düğüm riski doğrulanmadı.

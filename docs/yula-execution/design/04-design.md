@@ -292,6 +292,7 @@ Talimat §2.3: cam işlevseldir, ekran aynı kartlarla dolu olmaz. Renkler/marka
 **Kontrast:** Katman üzerinde metin ≥ 4.5:1, büyük metin ve düğme/simge sınırı ≥ 3:1; bu oran EN KÖTÜ arka plan (bulanık sahne altı) için sağlanmalıdır. Sağlanamıyorsa katman opak çizilir. İşaretler (✓ ◆ ◯) yalnız renkle ayırt edilmez; şekil + metin etiketi taşır.
 
 **Azaltılmış hareket ve saydamlık:** Sistem "hareketi azalt" açıksa katman geçişi anlıktır, paralaks/yansıma animasyonu yok; "saydamlığı azalt/kontrastı artır" açıksa tüm cam katmanlar opak. Bugün: yalnız sayfa geçişi `MediaQuery.disableAnimationsOf` ile hareketsiz (K, `lib/app/app_theme.dart`); saydamlık yolu YENİ.
+> **SAPMA NOTU (OST-UX-04):** Flutter iOS "Reduce Transparency"yi ayrı sinyal olarak vermez; prototip yalnız `MediaQuery.highContrastOf`u izler (`lib/app/ux_prototype/ux_glass_layer.dart:30`). Özel "saydamlığı azalt" dalı UX-05'te platform kanalıyla ele alınır.
 
 **Hareket süreleri (öneri):** katman açılış/kapanış 200–300 ms, çıkış hızlıdır; oynatma sırasında katman animasyonu yok; ışık/yansıma efekti yalnız katman kenarında, statik (hareketli ışık yok).
 
@@ -366,6 +367,7 @@ Güvenilmeyen ölçümde: doğruluk %'si gösterilmez ya da "ölçülemedi" yaz�
 | Kontrast | Teslimat 6: 4.5:1 / 3:1; sağlanamayan cam opaklaşır |
 | Hareket | Sistem ayarını izler; çalarken hareket yok; ışık/yansıma statik |
 | Saydamlık | Sistem "saydamlığı azalt" = opak katman (YENİ yol) |
+> **SAPMA NOTU (OST-UX-04):** Flutter iOS "Reduce Transparency"yi ayrı sinyal olarak vermez; prototip yalnız `MediaQuery.highContrastOf`u izler (`lib/app/ux_prototype/ux_glass_layer.dart:30`). Özel "saydamlığı azalt" dalı UX-05'te platform kanalıyla ele alınır.
 | Büyük metin | 2.0 ölçeğe kadar taşma yok; katman kaydırılabilir |
 | Dokunma hedefi | ≥ 48 dp; Çal/Dur ayrı ve büyük |
 | Zaman baskısı yok | Süre sınırı/geri sayım zorunlu değil; "Bekle" mevcut |
