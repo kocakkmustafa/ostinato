@@ -98,3 +98,13 @@ const bool ostinatoProgressSyncAvailable = false;
 /// pages followed by the library. Rollback: set this to false (or revert the
 /// PR); nothing is stored by the flow, so there is nothing to migrate.
 const bool ostinatoFirstThreeMinutesOpen = false;
+
+/// OST-UX-04 (founder master instruction 2026-11-09, "Dört ürün ana
+/// talimatı" §7 stage 6): an interactive PROTOTYPE of the seven core
+/// journeys on the "one stage" design (ADR-UX-001). It lives apart in
+/// `lib/app/ux_prototype/`, uses sample data labelled "Prototype", records
+/// nothing, listens to nothing and never touches the camera. While false
+/// (default) there is no entry to it anywhere and the app is exactly as
+/// before. The single entry is a button in Settings. Rollback: leave this
+/// false (or revert the PR); no data depends on it.
+const bool ostinatoUxPrototypeOpen = false;
