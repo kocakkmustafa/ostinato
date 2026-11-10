@@ -67,8 +67,7 @@ class TimingsFrameBudgetMonitor extends ChangeNotifier
     void Function(ui.TimingsCallback)? register,
     void Function(ui.TimingsCallback)? unregister,
   }) : _attached = attach,
-       _unregister =
-           unregister ?? SchedulerBinding.instance.removeTimingsCallback {
+       _unregister = unregister {
     if (attach) {
       (register ?? SchedulerBinding.instance.addTimingsCallback)(onTimings);
     }
@@ -81,7 +80,7 @@ class TimingsFrameBudgetMonitor extends ChangeNotifier
   final int consecutiveFrames;
   final int warmupFrames;
   final bool _attached;
-  final void Function(ui.TimingsCallback) _unregister;
+  final void Function(ui.TimingsCallback)? _unregister;
   int _seen = 0;
   int _run = 0;
   bool _over = false;
@@ -111,7 +110,11 @@ class TimingsFrameBudgetMonitor extends ChangeNotifier
 
   @override
   void dispose() {
-    if (_attached) _unregister(onTimings);
+    if (_attached) {
+      (_unregister ?? SchedulerBinding.instance.removeTimingsCallback)(
+        onTimings,
+      );
+    }
     super.dispose();
   }
 }
@@ -122,7 +125,7 @@ class TimingsFrameBudgetMonitor extends ChangeNotifier
 ///    is REJECTED (returns false); the first item is never closed for it;
 ///  - only the oldest open item may blur (one blurred surface at most);
 ///  - while [playing] no item is open and none can open. A mounted
-///    [GlassLayer] is a standing request: it is admitted again (tree order)
+///    [GlassLayer] is a standing request: it is admitted again (in listener registration order)
 ///    whenever playing ends or a slot frees up.
 class GlassLayerBudget extends ChangeNotifier {
   GlassLayerBudget({this.monitor});
@@ -277,14 +280,14 @@ class _GlassLayerState extends State<GlassLayer> {
       0.0,
       GlassLayerConfig.maxBlurAreaFraction,
     );
-    return Semantics(
-      container: true,
-      label: widget.semanticLabel,
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: FractionallySizedBox(
-          widthFactor: 1,
-          heightFactor: fraction,
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: FractionallySizedBox(
+        widthFactor: 1,
+        heightFactor: fraction,
+        child: Semantics(
+          container: true,
+          label: widget.semanticLabel,
           child: TweenAnimationBuilder<double>(
             tween: Tween<double>(begin: 0, end: 1),
             duration: instant ? Duration.zero : GlassLayerConfig.transition,

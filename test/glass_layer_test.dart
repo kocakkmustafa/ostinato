@@ -37,7 +37,21 @@ Widget _host(
 );
 
 Widget _layer(GlassLayerBudget b, {String label = 'x', bool reduce = false}) =>
-    GlassLayer(budget: b, reduceTransparency: reduce, child: Text(label));
+    GlassLayer(
+      key: ValueKey<String>(label),
+      budget: b,
+      reduceTransparency: reduce,
+      child: Text(label),
+    );
+
+/// True when the layer keyed [label] is the one drawing the BackdropFilter.
+bool _blurs(String label) => find
+    .descendant(
+      of: find.byKey(ValueKey<String>(label)),
+      matching: find.byType(BackdropFilter),
+    )
+    .evaluate()
+    .isNotEmpty;
 
 Widget _stack(List<Widget> layers) =>
     Stack(children: <Widget>[const SizedBox.expand(), ...layers]);
@@ -64,6 +78,8 @@ void main() {
       await t.pump(const Duration(milliseconds: 300));
       expect(b.openCount, 2);
       expect(find.byType(BackdropFilter), findsOneWidget);
+      expect(_blurs('a'), isTrue, reason: 'oldest layer holds the blur');
+      expect(_blurs('x'), isFalse);
       expect(b.blurAdmittedCount, 1);
     });
 
@@ -122,6 +138,8 @@ void main() {
       expect(find.text('one'), findsOneWidget);
       expect(find.text('two'), findsOneWidget);
       expect(find.text('three'), findsNothing);
+      expect(_blurs('one'), isTrue);
+      expect(_blurs('two'), isFalse);
       expect(b.openCount, 2);
     });
   });
@@ -333,6 +351,7 @@ void main() {
       await t.pump(const Duration(milliseconds: 300));
       expect(find.text('a'), findsOneWidget);
       expect(find.byType(BackdropFilter), findsOneWidget);
+      expect(_blurs('a'), isTrue);
       expect(b.openCount, 1);
     });
 
@@ -355,7 +374,11 @@ void main() {
       await t.pump(); // microtask notify
       await t.pump(const Duration(milliseconds: 300));
       expect(find.text('one'), findsOneWidget);
+      expect(find.text('two'), findsNothing);
       expect(find.text('three'), findsOneWidget);
+      expect(_blurs('one'), isTrue);
+      expect(_blurs('three'), isFalse);
+      expect(find.byType(BackdropFilter), findsOneWidget);
       expect(b.openCount, 2);
     });
 
@@ -399,6 +422,11 @@ void main() {
       await t.pumpWidget(tree());
       await t.pump(const Duration(milliseconds: 300));
       expect(find.bySemanticsLabel('Panel'), findsOneWidget);
+      final node = t.getSemantics(find.bySemanticsLabel('Panel'));
+      expect(node.label, 'Panel');
+      expect(node.rect.height, lessThanOrEqualTo(800 * 0.6 + 0.01));
+      expect(node.rect.height, greaterThan(0));
+      expect(node.rect.width, 400);
       await t.pumpWidget(tree(reduce: true));
       await t.pump(const Duration(milliseconds: 300));
       expect(find.bySemanticsLabel('Panel'), findsOneWidget);
