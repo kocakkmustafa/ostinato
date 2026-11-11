@@ -8793,6 +8793,20 @@
     "d67ef3eff8553313": "C'était trop faible pour que je l'entende.",
     "85ea9fc1b71968ba": "C'était assez fort pour déformer le son.",
     "17b6b0e1afd14e00": "Le son de l'appli elle-même s'entendait ici, donc je n'ai pas tranché pour cette note.",
-    "979084fd4ae01d09": "Tu as passé cette note dans « Attends-moi »."
+    "979084fd4ae01d09": "Tu as passé cette note dans « Attends-moi ».",
+    "7453c319c1bf8ca5": "L'écoute est désactivée",
+    "319b03086a6ef932": "Le micro n'est pas autorisé, donc rien n'est mesuré. Le métronome, la référence et l'accordeur fonctionnent.",
+    "d76c2a76e390b8d1": "Compteur : non mesuré",
+    "bbac55b3b0a022b5": "Aller dans les réglages",
+    "9ad9ec0433d08487": "Masquer",
+    "bd61ef7fa80d6a8f": "Réglage et appareil",
+    "54c027eba296ec2f": "Micro : autorisé",
+    "965aa73751f00426": "Micro : non autorisé",
+    "118ba2f6f3b02eb2": "Micro : refusé définitivement",
+    "a9cff57ea62b8da7": "Calibrage de la latence",
+    "ce0ecc84043c5047": "Bruit de la pièce : non mesuré",
+    "05c233abdf453ebb": "Bruit de la pièce : calme",
+    "ade13ea684ac2219": "Bruit de la pièce : un peu bruyant",
+    "44b42ffae045b975": "Bruit de la pièce : très bruyant"
   }
 }

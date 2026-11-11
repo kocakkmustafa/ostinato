@@ -8793,6 +8793,20 @@
     "d67ef3eff8553313": "This was too quiet for me to hear.",
     "85ea9fc1b71968ba": "This was loud enough to distort the sound.",
     "17b6b0e1afd14e00": "The app's own sound was audible here, so I made no call on this note.",
-    "979084fd4ae01d09": "You skipped this note in \"Wait for me\"."
+    "979084fd4ae01d09": "You skipped this note in \"Wait for me\".",
+    "7453c319c1bf8ca5": "Listening is off",
+    "319b03086a6ef932": "The microphone is not allowed, so nothing is measured. The metronome, the reference and the tuner work.",
+    "d76c2a76e390b8d1": "Counter: not measured",
+    "bbac55b3b0a022b5": "Go to Settings",
+    "9ad9ec0433d08487": "Mute",
+    "bd61ef7fa80d6a8f": "Setup and device",
+    "54c027eba296ec2f": "Microphone: allowed",
+    "965aa73751f00426": "Microphone: not allowed",
+    "118ba2f6f3b02eb2": "Microphone: permanently denied",
+    "a9cff57ea62b8da7": "Latency calibration",
+    "ce0ecc84043c5047": "Room noise: not measured",
+    "05c233abdf453ebb": "Room noise: quiet",
+    "ade13ea684ac2219": "Room noise: a little noisy",
+    "44b42ffae045b975": "Room noise: very noisy"
   }
 }

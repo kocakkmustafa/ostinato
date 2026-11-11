@@ -8793,6 +8793,20 @@
     "d67ef3eff8553313": "Esto sonó demasiado bajo para que yo lo oyera.",
     "85ea9fc1b71968ba": "Esto sonó tan fuerte que distorsionó el sonido.",
     "17b6b0e1afd14e00": "Aquí se oyó el sonido de la propia app, así que no emití juicio sobre esta nota.",
-    "979084fd4ae01d09": "Omitiste esta nota en «Espérame»."
+    "979084fd4ae01d09": "Omitiste esta nota en «Espérame».",
+    "7453c319c1bf8ca5": "La escucha está desactivada",
+    "319b03086a6ef932": "El micrófono no está permitido, así que no se mide nada. El metrónomo, la referencia y el afinador funcionan.",
+    "d76c2a76e390b8d1": "Contador: sin medir",
+    "bbac55b3b0a022b5": "Ir a Ajustes",
+    "9ad9ec0433d08487": "Silenciar",
+    "bd61ef7fa80d6a8f": "Ajuste y dispositivo",
+    "54c027eba296ec2f": "Micrófono: permitido",
+    "965aa73751f00426": "Micrófono: no permitido",
+    "118ba2f6f3b02eb2": "Micrófono: denegado de forma permanente",
+    "a9cff57ea62b8da7": "Calibración de latencia",
+    "ce0ecc84043c5047": "Ruido del cuarto: sin medir",
+    "05c233abdf453ebb": "Ruido del cuarto: silencioso",
+    "ade13ea684ac2219": "Ruido del cuarto: algo ruidoso",
+    "44b42ffae045b975": "Ruido del cuarto: muy ruidoso"
   }
 }

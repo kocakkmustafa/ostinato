@@ -8793,6 +8793,20 @@
     "d67ef3eff8553313": "Das war zu leise, um es zu hören.",
     "85ea9fc1b71968ba": "Das war so laut, dass der Klang verzerrt wurde.",
     "17b6b0e1afd14e00": "Hier war der Ton der App selbst zu hören, deshalb habe ich diese Note nicht bewertet.",
-    "979084fd4ae01d09": "Du hast diese Note bei „Warte auf mich“ übersprungen."
+    "979084fd4ae01d09": "Du hast diese Note bei „Warte auf mich“ übersprungen.",
+    "7453c319c1bf8ca5": "Zuhören ist aus",
+    "319b03086a6ef932": "Das Mikrofon ist nicht erlaubt, deshalb wird nichts gemessen. Metronom, Referenz und Stimmgerät funktionieren.",
+    "d76c2a76e390b8d1": "Zähler: nicht gemessen",
+    "bbac55b3b0a022b5": "Zu den Einstellungen",
+    "9ad9ec0433d08487": "Ausblenden",
+    "bd61ef7fa80d6a8f": "Einrichtung und Gerät",
+    "54c027eba296ec2f": "Mikrofon: erlaubt",
+    "965aa73751f00426": "Mikrofon: nicht erlaubt",
+    "118ba2f6f3b02eb2": "Mikrofon: dauerhaft abgelehnt",
+    "a9cff57ea62b8da7": "Latenzkalibrierung",
+    "ce0ecc84043c5047": "Raumgeräusch: nicht gemessen",
+    "05c233abdf453ebb": "Raumgeräusch: leise",
+    "ade13ea684ac2219": "Raumgeräusch: etwas laut",
+    "44b42ffae045b975": "Raumgeräusch: sehr laut"
   }
 }

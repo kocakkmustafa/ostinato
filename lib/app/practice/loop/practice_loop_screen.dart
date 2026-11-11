@@ -16,6 +16,7 @@ import '../../tuner/session_tuning_gate.dart';
 import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
 import '../../ostinato_release_policy.dart';
+import '../../stage/stage_copy.dart';
 import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
 import '../own_recording/own_recording_copy.dart';
@@ -71,6 +72,7 @@ class PracticeLoopScreen extends StatefulWidget {
     this.ghostScreen = ostinatoGhostScreenOpen,
     this.suggestionPool = const [],
     this.stageMode = false,
+    this.listeningOff = false,
     this.onController,
     this.listenController,
     this.tuningCardSeen = false,
@@ -100,6 +102,11 @@ class PracticeLoopScreen extends StatefulWidget {
   /// "Play", and the reference bar and loop switch are left to the stage's
   /// tool shelf (same controller, same widgets).
   final bool stageMode;
+
+  /// Stage only (OST-UX-05f): the microphone is refused, so the strip says
+  /// nothing is measured instead of showing the check / diamond / circle
+  /// counters. False (the default) leaves the old strip exactly as it is.
+  final bool listeningOff;
 
   /// OST-UX-05b: called once with the session controller (the stage reads
   /// the run state and the beat from it). Default null = nothing happens.
@@ -1126,40 +1133,47 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: Text(
-              label,
-              key: const Key('practice-mic-label'),
-              style: hankenText(size: 12.5),
-            ),
+            child: widget.listeningOff
+                ? Text(
+                    uiText(context, StageCopy.counterOff),
+                    key: const Key('stage-listening-off-counter'),
+                    style: hankenText(size: 12.5),
+                  )
+                : Text(
+                    label,
+                    key: const Key('practice-mic-label'),
+                    style: hankenText(size: 12.5),
+                  ),
           ),
-          const SizedBox(width: 8),
+          if (!widget.listeningOff) const SizedBox(width: 8),
           // Each counter is a glyph and a number. In a right-to-left locale
           // the bidi algorithm put the glyph after the number ("0✓") and
           // mirrored the row; the group reads left to right everywhere.
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: Row(
-              key: const Key('practice-counts'),
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                count(
-                  PracticeMark.correct,
-                  localized(context, 'Correct', 'Doğru'),
-                  first: true,
-                ),
-                count(
-                  PracticeMark.differentNote,
-                  _criteria.rhythm
-                      ? uiText(context, RhythmCopy.earlyOrLate)
-                      : localized(context, 'Different note', 'Farklı nota'),
-                ),
-                count(
-                  PracticeMark.couldNotHear,
-                  localized(context, "Couldn't hear", 'Duyamadım'),
-                ),
-              ],
+          if (!widget.listeningOff)
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: Row(
+                key: const Key('practice-counts'),
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  count(
+                    PracticeMark.correct,
+                    localized(context, 'Correct', 'Doğru'),
+                    first: true,
+                  ),
+                  count(
+                    PracticeMark.differentNote,
+                    _criteria.rhythm
+                        ? uiText(context, RhythmCopy.earlyOrLate)
+                        : localized(context, 'Different note', 'Farklı nota'),
+                  ),
+                  count(
+                    PracticeMark.couldNotHear,
+                    localized(context, "Couldn't hear", 'Duyamadım'),
+                  ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );

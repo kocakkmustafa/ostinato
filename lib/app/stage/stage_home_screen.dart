@@ -24,7 +24,16 @@ import '../retention/weekly_goal_store.dart';
 import '../tuner/tuner_screen.dart' as tuner;
 import '../practice/setup/setup_profile_store.dart';
 import '../ui_copy.dart';
+import '../audio/mic_permission_gate.dart';
+import '../practice/setup/setup_wizard_screen.dart';
+import '../screens/settings_screen.dart';
+import '../tuner/session_tuning_gate.dart';
+import '../tuner/tunings.dart';
+import 'device_layer.dart';
+import 'listening_off_store.dart';
 import 'other_practice_layer.dart';
+import 'package:permission_handler/permission_handler.dart'
+    show PermissionStatus, openAppSettings;
 import 'path_layer.dart';
 import 'path_summary.dart';
 import 'stage_copy.dart';
@@ -75,7 +84,21 @@ class StageHomeScreen extends StatefulWidget {
     this.earScreenBuilder,
     this.tunerOpener,
     this.weeklyGoalLoader,
+    this.micStatus,
+    this.appSettingsOpener,
+    this.listeningOffStore,
+    this.setupOpener,
+    this.settingsOpener,
+    this.accountOpener,
   });
+
+  // 05f seams (null = the real thing).
+  final Future<PermissionStatus> Function()? micStatus;
+  final Future<bool> Function()? appSettingsOpener;
+  final ListeningOffStore? listeningOffStore;
+  final Future<void> Function(BuildContext context)? setupOpener;
+  final Future<void> Function(BuildContext context)? settingsOpener;
+  final Future<void> Function(BuildContext context)? accountOpener;
 
   /// Which layer is open (null = the stage owns one). Tests drive it.
   final StageLayerManager? layerManager;
@@ -155,6 +178,14 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
 
   Future<bool> Function()? _paidCheck;
   bool _tuningSeen = false;
+
+  // 05f: the microphone was refused on the last start -> "Listening is off".
+  bool _micOff = false;
+  // null = not read yet (the link stays hidden until the store answers).
+  bool? _hintMuted;
+  ListeningOffStore? _ownOffStore;
+  ListeningOffStore get _offStore =>
+      widget.listeningOffStore ?? (_ownOffStore ??= FileListeningOffStore());
   String? _accountId;
   bool _inited = false;
   V1PracticeProgress? _progress;
@@ -190,6 +221,35 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   void initState() {
     super.initState();
     _layers.addListener(_onLayers);
+    unawaited(_readMuted());
+  }
+
+  Future<void> _readMuted() async {
+    var muted = false;
+    try {
+      muted = await _offStore.settingsHintMuted();
+    } on Object {
+      muted = false;
+    }
+    if (!mounted) return;
+    setState(() => _hintMuted = muted);
+  }
+
+  Future<void> _muteHint() async {
+    setState(() => _hintMuted = true);
+    try {
+      await _offStore.muteSettingsHint();
+    } on Object {
+      // The mute is for this run of the app at least.
+    }
+  }
+
+  Future<void> _goToSettings() async {
+    try {
+      await (widget.appSettingsOpener ?? openAppSettings)();
+    } on Object {
+      // Nothing to show: the link stays.
+    }
   }
 
   @override
@@ -351,6 +411,8 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
 
   void _onRun() {
     if (!mounted) return;
+    final micOff = _pc?.failure == 'permission';
+    if (micOff != _micOff) setState(() => _micOff = micOff);
     final playing = _pc?.running ?? false;
     if (playing == _playing) return;
     _budget.playing = playing;
@@ -367,17 +429,11 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   void _tapHandle(StageHandle h) {
     if (_playing) return;
     widget.onHandle?.call(context, h);
-    // 05f (setup) brings its own content; until then only "another
-    // practice" and "my path" have a built-in layer.
-    if (widget.layerBuilder != null ||
-        h == StageHandle.another ||
-        h == StageHandle.path) {
-      _layers.openLayer(switch (h) {
-        StageHandle.another => StageLayer.other,
-        StageHandle.path => StageLayer.path,
-        StageHandle.setup => StageLayer.setup,
-      });
-    }
+    _layers.openLayer(switch (h) {
+      StageHandle.another => StageLayer.other,
+      StageHandle.path => StageLayer.path,
+      StageHandle.setup => StageLayer.setup,
+    });
   }
 
   void _closeLayer() => _layers.close();
@@ -422,6 +478,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
         onReady: () => _focusFirst(StageLayer.path),
       );
     }
+    if (l == StageLayer.setup) return _deviceLayer(context);
     return OtherPracticeLayer(
       suggestion: stageSuggestion(
         hasRecords: data.hasRecords || _ranThisSession,
@@ -436,6 +493,117 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
       ),
       openTuner: () =>
           (widget.tunerOpener ?? (c) => tuner.openTuner(c))(context),
+    );
+  }
+
+  /// 05f: the Setup / Device layer. Exits open the existing full screens.
+  Widget _deviceLayer(BuildContext context) {
+    final account = AccountScope.maybeOf(context)?.connection;
+    final accountOpen =
+        widget.accountOpener ??
+        (account == null
+            ? null
+            : (BuildContext c) => Navigator.of(c).push<void>(
+                MaterialPageRoute<void>(builder: account.pageBuilder),
+              ));
+    final membership = account?.membershipPageBuilder;
+    return DeviceLayer(
+      key: const Key('stage-device-layer-host'),
+      micStatus: widget.micStatus ?? () => MicPermissionGate.status(),
+      profile: () => (widget.setupStore ?? FileSetupProfileStore.device).load(),
+      openLatency: () =>
+          (widget.setupOpener ??
+          (c) => openSetupWizard(c, store: widget.setupStore))(context),
+      openSettings: () =>
+          (widget.settingsOpener ??
+          (c) => Navigator.of(c).push<void>(
+            MaterialPageRoute<void>(builder: (_) => const SettingsScreen()),
+          ))(context),
+      openAccount: accountOpen == null ? null : () => accountOpen(context),
+      openMembership: widget.accountOpener != null || membership == null
+          ? null
+          : () => Navigator.of(
+              context,
+            ).push<void>(MaterialPageRoute<void>(builder: membership)),
+    );
+  }
+
+  /// 05f: "Listening is off". Says plainly that nothing is measured and why,
+  /// keeps Go to Settings in view (until muted) and the tuning card in reach.
+  Widget _listeningOff(BuildContext context, _StageData data) {
+    final p = OstinatoPalette.of(context);
+    final height = MediaQuery.sizeOf(context).height;
+    final button = TextButton.styleFrom(minimumSize: const Size(48, 48));
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: height * 0.2),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Semantics(
+                container: true,
+                label: uiText(context, StageCopy.listeningOff),
+                child: Container(
+                  key: const Key('stage-listening-off'),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: p.surface,
+                    border: Border.all(color: p.ink.withValues(alpha: 0.3)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      ExcludeSemantics(
+                        child: Text(
+                          uiText(context, StageCopy.listeningOff),
+                          style: hankenText(size: 14, weight: FontWeight.w600),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        uiText(context, StageCopy.listeningOffWhy),
+                        style: hankenText(size: 13),
+                      ),
+                      const SizedBox(height: 4),
+                      if (_hintMuted == false)
+                        Wrap(
+                          spacing: 8,
+                          children: <Widget>[
+                            TextButton(
+                              key: const Key('stage-open-settings'),
+                              style: button,
+                              onPressed: _goToSettings,
+                              child: Text(
+                                uiText(context, StageCopy.goToSettings),
+                              ),
+                            ),
+                            TextButton(
+                              key: const Key('stage-open-settings-mute'),
+                              style: button,
+                              onPressed: _muteHint,
+                              child: Text(uiText(context, StageCopy.muteHint)),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              if (data.lesson.lesson.course == 'gtr') ...<Widget>[
+                const SizedBox(height: 8),
+                SessionTuningGateCard(
+                  preset: TuningPresets.guitarStandard,
+                  onTune: (c) =>
+                      (widget.tunerOpener ?? (c) => tuner.openTuner(c))(c),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -581,6 +749,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                     style: hankenText(size: 13),
                   ),
                 ),
+                if (_micOff) _listeningOff(context, data),
                 if (_notice)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
@@ -615,6 +784,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                       controllerFactory: widget.controllerFactory,
                       setupStore: widget.setupStore,
                       seed: widget.seed,
+                      listeningOff: _micOff,
                       tuningCardSeen: _tuningSeen,
                       onStarted: () => _tuningSeen = true,
                       onRunRecorded: _afterRun,

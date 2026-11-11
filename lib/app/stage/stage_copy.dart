@@ -95,6 +95,53 @@ abstract final class StageCopy {
     'Zamanlama kaydı. Tempoyu biraz düşür.',
   );
 
+  // shared (05f: the same pairs the settings screens already carry)
+  static const UiCopy settings = ('Settings', 'Ayarlar');
+  static const UiCopy account = ('Account', 'Hesap');
+  static const UiCopy membership = ('Membership', 'Üyelik');
+  static const UiCopy microphone = ('Microphone', 'Mikrofon');
+
+  // new (05f: microphone refusal mode and the setup / device layer). Plain
+  // statements of what is and is not measured; no blame, no future promise.
+  static const UiCopy listeningOff = ('Listening is off', 'Dinleme kapalı');
+  static const UiCopy listeningOffWhy = (
+    'The microphone is not allowed, so nothing is measured. The metronome, the reference and the tuner work.',
+    'Mikrofon izni verilmediği için ölçüm yapılmıyor. Metronom, referans ve akortçu çalışır.',
+  );
+  static const UiCopy counterOff = ('Counter: not measured', 'Sayaç: ölçülmüyor');
+  static const UiCopy goToSettings = ('Go to Settings', 'Ayarlara git');
+  static const UiCopy muteHint = ('Mute', 'Sustur');
+  static const UiCopy deviceTitle = ('Setup and device', 'Ayar ve cihaz');
+  static const UiCopy micAllowed = ('Microphone: allowed', 'Mikrofon: verildi');
+  static const UiCopy micDenied = (
+    'Microphone: not allowed',
+    'Mikrofon: reddedildi',
+  );
+  static const UiCopy micBlocked = (
+    'Microphone: permanently denied',
+    'Mikrofon: kalıcı olarak reddedildi',
+  );
+  static const UiCopy latencyCalibration = (
+    'Latency calibration',
+    'Gecikme kalibrasyonu',
+  );
+  static const UiCopy noiseUnknown = (
+    'Room noise: not measured',
+    'Ortam gürültüsü: ölçülmedi',
+  );
+  static const UiCopy noiseQuiet = (
+    'Room noise: quiet',
+    'Ortam gürültüsü: sessiz',
+  );
+  static const UiCopy noiseSome = (
+    'Room noise: a little noisy',
+    'Ortam gürültüsü: biraz gürültülü',
+  );
+  static const UiCopy noiseLoud = (
+    'Room noise: very noisy',
+    'Ortam gürültüsü: çok gürültülü',
+  );
+
   /// Pairs that need a new message id (not yet in the table).
   static const List<UiCopy> newPairs = <UiCopy>[
     justStarting,
@@ -118,6 +165,20 @@ abstract final class StageCopy {
     earLine,
     bestTempo,
     weeklyLine,
+    listeningOff,
+    listeningOffWhy,
+    counterOff,
+    goToSettings,
+    muteHint,
+    deviceTitle,
+    micAllowed,
+    micDenied,
+    micBlocked,
+    latencyCalibration,
+    noiseUnknown,
+    noiseQuiet,
+    noiseSome,
+    noiseLoud,
   ];
 
   static const List<UiCopy> all = <UiCopy>[
@@ -132,6 +193,10 @@ abstract final class StageCopy {
     historyTitle,
     heardLabel,
     accuracyLabel,
+    settings,
+    account,
+    membership,
+    microphone,
     ...newPairs,
   ];
 }
