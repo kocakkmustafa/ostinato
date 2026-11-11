@@ -8788,6 +8788,11 @@
     "45d8787934415f73": "Pourquoi celle-ci : tu as déjà une progression dans ce module.",
     "456bb0c10501ae9d": "{v0} leçons jouées, {v1} essais",
     "adc25972f051872b": "Meilleur tempo ♩={v0}",
-    "160312991ccc5ace": "Objectif hebdomadaire : {v0} jours sur {v1} cette semaine"
+    "160312991ccc5ace": "Objectif hebdomadaire : {v0} jours sur {v1} cette semaine",
+    "1414e3df16c2a2d6": "Je n'ai pas entendu de début de note ici.",
+    "d67ef3eff8553313": "C'était trop faible pour que je l'entende.",
+    "85ea9fc1b71968ba": "C'était assez fort pour déformer le son.",
+    "17b6b0e1afd14e00": "Le son de l'appli elle-même s'entendait ici, donc je n'ai pas tranché pour cette note.",
+    "979084fd4ae01d09": "Tu as passé cette note dans « Attends-moi »."
   }
 }

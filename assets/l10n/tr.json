@@ -8788,6 +8788,11 @@
     "45d8787934415f73": "Neden bu: bu modülde zaten ilerlemen var.",
     "456bb0c10501ae9d": "{v0} ders çalındı, {v1} koşu",
     "adc25972f051872b": "En iyi tempo ♩={v0}",
-    "160312991ccc5ace": "Haftalık hedef: bu hafta {v1} günden {v0}"
+    "160312991ccc5ace": "Haftalık hedef: bu hafta {v1} günden {v0}",
+    "1414e3df16c2a2d6": "Burada bir notanın başladığını duymadım.",
+    "d67ef3eff8553313": "Bu, duymam için fazla kısıktı.",
+    "85ea9fc1b71968ba": "Bu, sesi bozacak kadar yüksekti.",
+    "17b6b0e1afd14e00": "Burada uygulamanın kendi sesi duyuldu; bu nota için karar vermedim.",
+    "979084fd4ae01d09": "\"Beni bekle\"de bu notayı atladın."
   }
 }

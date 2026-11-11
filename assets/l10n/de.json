@@ -8788,6 +8788,11 @@
     "45d8787934415f73": "Warum diese: Du hast in diesem Modul bereits Fortschritt.",
     "456bb0c10501ae9d": "{v0} Lektionen gespielt, {v1} Durchläufe",
     "adc25972f051872b": "Bestes Tempo ♩={v0}",
-    "160312991ccc5ace": "Wochenziel: {v0} von {v1} Tagen in dieser Woche"
+    "160312991ccc5ace": "Wochenziel: {v0} von {v1} Tagen in dieser Woche",
+    "1414e3df16c2a2d6": "Hier habe ich keinen Tonanfang gehört.",
+    "d67ef3eff8553313": "Das war zu leise, um es zu hören.",
+    "85ea9fc1b71968ba": "Das war so laut, dass der Klang verzerrt wurde.",
+    "17b6b0e1afd14e00": "Hier war der Ton der App selbst zu hören, deshalb habe ich diese Note nicht bewertet.",
+    "979084fd4ae01d09": "Du hast diese Note bei „Warte auf mich“ übersprungen."
   }
 }
