@@ -3,6 +3,8 @@
 // docs/yula-execution/design/04-backlog-ux-05.md (UX-05b).
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math' as math;
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,6 +23,7 @@ import 'package:ostinato/app/practice/loop/practice_judge.dart';
 import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_outcome.dart';
 import 'package:ostinato/app/practice/loop/practice_progress_store.dart';
+import 'package:ostinato/app/practice/loop/practice_result_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_score.dart';
 import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
 import 'package:ostinato/app/practice/loop/practice_transport.dart';
@@ -123,6 +126,41 @@ class _Rig {
     analyzer: (r) async => judgeNote(r),
   );
 }
+
+/// Promise / future wording and "wrong", in en, tr and the 12 other locales
+/// (plain substrings, case-insensitive; the stage values are short).
+final RegExp _promise = RegExp(
+  [
+    r'\b(yet|soon|coming|wrong)\b',
+    'henüz',
+    'yakında',
+    'yanlış',
+    'ainda',
+    'ancora',
+    'noch',
+    'aún',
+    'まだ',
+    '아직',
+    'jeszcze',
+    'belum',
+    'अभी',
+    '还没有',
+    'بعد',
+    "pour l'instant",
+    'encore',
+    'bientôt',
+    'pronto',
+    'presto',
+    'bald',
+    'skoro',
+    'segera',
+    'जल्द',
+    '即将',
+    '곧',
+    'まもなく',
+  ].join('|'),
+  caseSensitive: false,
+);
 
 late V1CourseCatalog catalog;
 
@@ -606,6 +644,50 @@ void main() {
     });
   });
 
+  group('olcut7 half run with outcomes', () {
+    testWidgets('outcomes exist, back leaves: not measured, nothing recorded', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final progress = _Memory();
+      await _boot(t, _stage(rig, progress: progress));
+      final before = (await progress.load()).length;
+      await _play(t);
+      final c = rig.controller!;
+      final rng = math.Random(1);
+      var tn = 0;
+      for (var i = 0; i < 400 && c.outcomes.isEmpty; i++) {
+        final x = Float64List(4800);
+        for (var k = 0; k < x.length; k++) {
+          x[k] = (rng.nextDouble() * 2 - 1) * .002;
+        }
+        rig.channel.pushChunk(x, sampleRate: 48000, tNativeUs: tn);
+        tn += 100000;
+        rig.local = tn;
+        await t.pump();
+        if (rig.channel.metronome != null && c.timeline == null) {
+          rig.channel.pushMetronomeAnchor(tn + 200000);
+          await t.pump();
+        }
+        c.tick();
+        await t.pump();
+      }
+      expect(c.outcomes, isNotEmpty, reason: 'a result was produced');
+      expect(c.phase, PracticePhase.running, reason: 'run is still half-way');
+      await t.binding.handlePopRoute();
+      await t.pump();
+      await t.pump();
+      expect(find.byKey(const Key('stage-run-not-completed')), findsOneWidget);
+      expect(find.text(StageCopy.runNotCompleted.$2), findsOneWidget);
+      await t.pump(const Duration(seconds: 1));
+      expect(progress.recordCalls, 0);
+      expect((await progress.load()).length, before);
+      expect(find.byType(PracticeResultScreen), findsNothing);
+      expect(t.takeException(), isNull);
+      await _dispose(t, rig);
+    });
+  });
+
   group('olcut5 copy and l10n', () {
     test('every stage pair has a message id', () {
       for (final p in StageCopy.all) {
@@ -613,11 +695,46 @@ void main() {
       }
     });
 
+    test('the promise regex really catches the forbidden words', () {
+      for (final w in [
+        'Putaran belum selesai',
+        'अभी शुरुआत है',
+        'Ainda não',
+        'Non ancora',
+        'Noch nicht',
+        'Aún no',
+        'まだ',
+        '아직',
+        'Jeszcze nie',
+        '还没有',
+        'ليس بعد',
+        "Pas pour l'instant",
+        'Encore',
+        'Bientôt',
+        'Pronto',
+        'Presto',
+        'Bald',
+        'Skoro',
+        'Segera',
+        'जल्द',
+        '即将',
+        '곧',
+        'まもなく',
+        'coming soon',
+        'not yet',
+        'henüz',
+        'yakında',
+        'wrong',
+        'yanlış',
+      ]) {
+        expect(_promise.hasMatch(w), isTrue, reason: w);
+      }
+      for (final ok in ['Metronom', 'Araçlar', 'Je débute', 'Tools']) {
+        expect(_promise.hasMatch(ok), isFalse, reason: ok);
+      }
+    });
+
     test('the new pairs are in all 14 catalogs and promise nothing', () {
-      final bad = RegExp(
-        r'\b(yet|soon|coming|wrong)\b|henüz|yakında|yanlış',
-        caseSensitive: false,
-      );
       for (final f in Directory('assets/l10n').listSync()) {
         if (f is! File || !f.path.endsWith('.json')) continue;
         final messages =
@@ -627,7 +744,7 @@ void main() {
           final text = messages[id] as String?;
           expect(text, isNotNull, reason: '${f.path} $id');
           expect(text, isNotEmpty);
-          expect(bad.hasMatch(text!), isFalse, reason: text);
+          expect(_promise.hasMatch(text!), isFalse, reason: '${f.path} $text');
           if (!f.path.endsWith('/en.json') && !f.path.endsWith('/tr.json')) {
             // A real translation: not the English source copied over
             // (short loanwords such as "Metronom" may coincide).

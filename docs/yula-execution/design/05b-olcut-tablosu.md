@@ -27,3 +27,10 @@ Tam suit: `/private/tmp/claude-501/-Users-mustafakaankocak-Developer-YULAlab-AI/
 - Çalarken geri: koşu kaydedilmeden sonlandırılır (uygulamadan çıkmaz), metin gösterilir.
 - Gömülü pratik ekranı kendi kaydırma alanında; küçük ekranda "Çal" kaydırma gerektirebilir (akort kartı + ayar kartı üstte).
 - Yardım satırı yalnız yerini tutar (eylem yok).
+
+## Açık noktalar (bayrak açılmadan önce)
+- (a) Üye/ücretli kullanıcıda `next` dersi s2+ ise sahne ücretli dersi göstermez, ilk açık ücretsiz ölçülü dersi gösterir (`admitV1Lesson`/üyelik sorgusu yok). Ders bitince `_data` yeniden yüklenmez; sonuç ekranına `hasNextLesson` geçilmez.
+- (b) 390x844'te "Çal" ilk ekranda yarı kesik (akort kartı + ayar kartı); raf açıkken pratik alanı ~160 dp ve "Çal" ekranda yok. Akort kartı sahne dışına ya da raf açıkken "Çal" sabit olmalı (ADR-UX-001 "Çal belirgin" niyeti). 360x640 ve büyük yazı ölçeğinde raf açıkken RenderFlex taşma riski doğrulanmadı; raf kaydırılabilir değil.
+- (c) Rafta `ReferenceListenBar`, `hasPitches || isRhythmOnly` ve `Guide.referenceAudio` koşullarına bağlı değil. Döngü anahtarı yalnız 1-2. ölçüyü açar; `RangeSlider` `stageMode`'da yok.
+- (d) Gömülü `PracticeLoopScreen`'deki eski `GlassCard` (`widgets.dart:39`) çalarken de `BackdropFilter` kullanır: 05h.
+- (e) Yarım koşu sonrası sahne yeniden kurulur; akort kartı tekrar çıkar.
