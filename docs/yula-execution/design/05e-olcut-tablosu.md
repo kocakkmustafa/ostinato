@@ -34,3 +34,12 @@ Not: durmuş koşuda `nextStep` yine "Tüm diziyi hedef tempoda çal" önerebili
 - Belge #4: ölçüt 7 ilk testi `loopBars`'ı doğrudan controller'a yazar (rafı sürmez); ölçüt 8'in `.stage isTrue` bağlantısı kırmızıdan ÖNCE iskelete konmuştu (kısmi sapma; `stage:` satırı silinirse test kırılır).
 - Belge #5: yargı sözcüğü taraması testte yalnız tr/en; 12 dil elle okundu, temiz; katalog regex'i alt dize eşler (yanlış pozitif riski var, yanlış negatif yok).
 - Belge #7: durdurulmuş koşuda `NextStep` kısmi veriden öneri üretir (performanceRun/raiseTempo/loopSlower) ve "Ölçülmedi" etiketiyle yan yana görünür: mevcut kural, DEĞİŞTİRİLMEDİ; ayrı bilet notu. Render yalnız tr (14 dilde görsel taşma NOT_TESTED).
+
+## Tur 2 notları (reviewer KABUL, 8c7f31f)
+Tur 1 #1, #2, #6 kapandı; bloklayıcı yok. Açık düşük notlar:
+- #3 notuna ek: sebep satırındaki sayı TÜM turlardaki ◯ sayısıdır (nota sayısı değil); döngülü koşuda aynı nota birkaç tur ◯ ise sayı büyür. Sayaçla tutarlıdır, yanlış değildir.
+- Sebepli ve sebepsiz ◯ karışırsa (yalnız elle kurulan özette; üretimde her ◯ sebep taşır) satırlar toplamı sayaçtan küçük kalır ve sessizce gösterilir; testi yok.
+- `test/ux_05e_result_layer_test.dart` import sırası alfabetik değil (`reference_listen.dart`, `result_layer_copy.dart`'tan önce gelmeli); analyze kırmaz.
+- Test `textContaining(' 2')`/`' 1'` ile sayıyı alt dize olarak eşler (zayıf; `rowSum` testi tamamlar).
+- Takip: durdurulmuş koşuda `NextStep` kısmi veriden öneri üretir (mevcut kural, değiştirilmedi): ayrı bilet notu.
+
