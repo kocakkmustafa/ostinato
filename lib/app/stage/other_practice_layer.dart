@@ -102,25 +102,28 @@ class OtherPracticeLayer extends StatelessWidget {
   }
 
   Widget _row(String key, String label, VoidCallback onTap, {IconData? icon}) =>
-      InkWell(
-        key: Key(key),
-        onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 48),
-          child: Row(
-            children: <Widget>[
-              if (icon != null) ...<Widget>[
-                Icon(icon, size: 20),
-                const SizedBox(width: 8),
-              ],
-              Expanded(
-                child: Text(
-                  label,
-                  style: hankenText(size: 15, weight: FontWeight.w500),
+      Semantics(
+        button: true,
+        child: InkWell(
+          key: Key(key),
+          onTap: onTap,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 48),
+            child: Row(
+              children: <Widget>[
+                if (icon != null) ...<Widget>[
+                  Icon(icon, size: 20),
+                  const SizedBox(width: 8),
+                ],
+                Expanded(
+                  child: Text(
+                    label,
+                    style: hankenText(size: 15, weight: FontWeight.w500),
+                  ),
                 ),
-              ),
-              const Icon(Icons.chevron_right),
-            ],
+                const Icon(Icons.chevron_right),
+              ],
+            ),
           ),
         ),
       );

@@ -167,6 +167,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   final FocusScopeNode _layerScope = FocusScopeNode(debugLabel: 'stage-layer');
   StageLayer? _lastTop;
   StageMissKind? _sessionMiss;
+  bool _ranThisSession = false;
   int _epoch = 0;
 
   static StageHandle _handleOf(StageLayer l) => switch (l) {
@@ -355,7 +356,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
     if (custom != null) return custom(context, h, _closeLayer);
     return OtherPracticeLayer(
       suggestion: stageSuggestion(
-        hasRecords: data.hasRecords,
+        hasRecords: data.hasRecords || _ranThisSession,
         nextLessonId: data.nextId,
         miss: _sessionMiss ?? data.miss,
       ),
@@ -396,6 +397,8 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
       _pc?.removeListener(_onRun);
       _pc = null;
       _budget.playing = false;
+      // The listener is gone, so `_onRun` never reports the end: unlock here.
+      _layers.locked = false;
       setState(() {
         _playing = false;
         _notice = true;
@@ -504,8 +507,10 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                       seed: widget.seed,
                       tuningCardSeen: _tuningSeen,
                       onStarted: () => _tuningSeen = true,
-                      onSessionFinished: (e) =>
-                          _sessionMiss = missFromSummary(e.summary),
+                      onSessionFinished: (e) {
+                        _sessionMiss = missFromSummary(e.summary);
+                        _ranThisSession = true;
+                      },
                       beforeStart:
                           isFreeV1Lesson(
                             data.lesson.id,

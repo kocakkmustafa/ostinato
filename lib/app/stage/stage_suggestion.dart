@@ -47,14 +47,21 @@ V1PracticeRecord? lastRunRecord(Iterable<V1PracticeRecord> records) {
   V1PracticeRecord? last;
   for (final r in records) {
     if (r.runs <= 0) continue;
-    final at = r.lastRunAt;
-    final lastAt = last?.lastRunAt;
-    if (last == null ||
-        (at != null && (lastAt == null || at.isAfter(lastAt)))) {
-      last = r;
-    }
+    if (last == null || _newer(r, last)) last = r;
   }
   return last;
+}
+
+/// A dated run beats an undated one; the later date wins; equal dates go to
+/// the larger lesson id, so the result never depends on iteration order.
+bool _newer(V1PracticeRecord a, V1PracticeRecord b) {
+  final x = a.lastRunAt, y = b.lastRunAt;
+  if (x == null || y == null) {
+    if (x == null && y == null) return a.lessonId.compareTo(b.lessonId) > 0;
+    return x != null;
+  }
+  final c = x.compareTo(y);
+  return c != 0 ? c > 0 : a.lessonId.compareTo(b.lessonId) > 0;
 }
 
 enum StageSuggestionKind { pickUp, moveCloser, listenFirst, slowDown }

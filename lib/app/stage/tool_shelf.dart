@@ -144,6 +144,8 @@ class ToolShelf extends StatelessWidget {
                               min: 0,
                               max: (bars - 1).toDouble(),
                               divisions: bars - 1,
+                              semanticFormatterCallback: (v) =>
+                                  '${v.round() + 1}',
                               values: RangeValues(
                                 loop.first.toDouble(),
                                 loop.last.toDouble(),

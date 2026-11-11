@@ -23,6 +23,7 @@ import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/ostinato_release_policy.dart';
 import 'package:ostinato/app/practice/loop/practice_judge.dart';
 import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
+import 'package:ostinato/app/practice/loop/practice_marks.dart';
 import 'package:ostinato/app/practice/loop/practice_outcome.dart';
 import 'package:ostinato/app/practice/loop/practice_progress_store.dart';
 import 'package:ostinato/app/practice/loop/practice_result_screen.dart';
@@ -1105,6 +1106,29 @@ void main() {
       await _dispose(t, rig);
     });
 
+    testWidgets('two quick taps on Play: one guard, one start', (t) async {
+      final rig = _Rig();
+      var asked = 0;
+      final gate = Completer<bool>();
+      await _boot(
+        t,
+        scoped(rig, level1Done(), (_) {
+          asked++;
+          return gate.future;
+        }),
+      );
+      await t.tap(find.byKey(const Key('practice-start')));
+      await t.tap(find.byKey(const Key('practice-start')), warnIfMissed: false);
+      await t.pump();
+      gate.complete(true);
+      await t.pump();
+      await t.pump();
+      expect(asked, 1);
+      expect(rig.permissionCalls, 1);
+      expect(rig.controller!.running, isTrue);
+      await _dispose(t, rig);
+    });
+
     testWidgets('a free lesson: no extra question, no delay', (t) async {
       final rig = _Rig();
       var asked = 0;
@@ -1186,6 +1210,11 @@ void main() {
       final slider = find.byKey(const Key('stage-loop-range'));
       expect(slider, findsOneWidget);
       expect(t.widget<RangeSlider>(slider).values, const RangeValues(0, 1));
+      // Spoken as bar numbers (1-based), like the loop switch's subtitle.
+      final fmt = t.widget<RangeSlider>(slider).semanticFormatterCallback;
+      expect(fmt, isNotNull);
+      expect(fmt!(0), '1');
+      expect(fmt(2), '3');
       t.widget<RangeSlider>(slider).onChanged!(const RangeValues(1, 2));
       await t.pump();
       expect(rig.controller!.loopBars, (first: 1, last: 2));
@@ -1443,6 +1472,88 @@ void main() {
       await settle(t);
       expect(find.byKey(const Key('first-item')), findsNothing);
       expect(focused('stage-handle-other'), isTrue);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('criterion 7b: play, back, then the layer opens again', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final mgr = StageLayerManager();
+      addTearDown(mgr.dispose);
+      await boot(t, _stage(rig, layerManager: mgr, wrap: withRepo));
+      await _play(t);
+      expect(mgr.locked, isTrue);
+      await t.binding.handlePopRoute();
+      await settle(t);
+      expect(find.byKey(const Key('stage-run-not-completed')), findsOneWidget);
+      expect(mgr.locked, isFalse);
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      expect(find.byType(GlassLayer), findsOneWidget);
+      expect(mgr.isOpen, isTrue);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('criterion 3b: first run of a new user fills the line', (
+      t,
+    ) async {
+      final rig = _Rig();
+      await boot(t, _stage(rig, wrap: withRepo));
+      final score = PracticeScore.parse('E2 F2 G2 F2 | E2 F2 G2 F2');
+      final summary = PracticeRunSummary.of(
+        score: score,
+        outcomes: [
+          for (var i = 0; i < 4; i++)
+            NoteOutcome(
+              eventIndex: i,
+              bar: score.events[i].bar,
+              pass: 0,
+              mark: i < 3 ? PracticeMark.couldNotHear : PracticeMark.correct,
+            ),
+        ],
+        bpm: 60,
+        openBpm: 60,
+        targetBpm: 60,
+        completed: true,
+        loopUsed: false,
+        waitUsed: false,
+      );
+      t
+          .widget<PracticeLoopScreen>(find.byType(PracticeLoopScreen))
+          .onSessionFinished!(
+        PracticeSessionFinished(
+          lessonId: 'x',
+          course: 'guitar',
+          activeDuration: Duration.zero,
+          heardEvents: 1,
+          summary: summary,
+        ),
+      );
+      await t.pump();
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      expect(find.text(StageCopy.suggestMoveCloser.$2), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('criterion 4b: rows are buttons for assistive technology', (
+      t,
+    ) async {
+      final sem = t.ensureSemantics();
+      final rig = _Rig();
+      await boot(t, _stage(rig, wrap: withRepo));
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      for (final k in [
+        'stage-instr-guitar',
+        'stage-instr-ear',
+        'stage-tuner-entry',
+      ]) {
+        final node = t.getSemantics(find.byKey(Key(k)));
+        expect(node.flagsCollection.isButton, isTrue, reason: k);
+      }
+      sem.dispose();
       await _dispose(t, rig);
     });
 

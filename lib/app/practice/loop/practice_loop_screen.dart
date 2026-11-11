@@ -433,12 +433,16 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     }
   }
 
+  bool _starting = false;
+
   void _start() {
     final guard = widget.beforeStart;
     if (guard == null) {
       _begin();
       return;
     }
+    if (_starting) return; // a second tap while the guard is being asked
+    _starting = true;
     unawaited(() async {
       var ok = false;
       try {
@@ -446,6 +450,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       } on Object {
         ok = false;
       }
+      _starting = false;
       if (ok && mounted) _begin();
     }());
   }

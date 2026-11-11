@@ -7,7 +7,7 @@ Test dosyaları: `test/stage_home_test.dart` (gruplar `05c layers`, `05c ek i`, 
 | 1 | İkinci katman birinciyi kapatır; GlassLayer <= 2 | `criterion 1: a second layer closes the first; glass <= 2` (stage_home_test) | Derleme kırmızısı (StageLayerManager yoktu); sabotaj: yöneticideki `_open.clear()` satırı çıkarılınca `Expected: [path] Actual: [other, path]` kırmızı, geri konunca yeşil | yeşil | - |
 | 2 | Katman <= %60, üst şerit >= %40 (360x640, 412x915) | `criterion 2: ...` x2 (stage_home_test); render testi içinde de assert | İlk koşuda ölçüm katmanın dış Align kutusunu aldı (640 > 384), katman gövdesine (FractionallySizedBox) düzeltildi | yeşil | 01-katman-390x844/360x640-acik/koyu |
 | 3 | Öneri satırı deterministik, kayıt yoksa gizli, >= 5 durum | `stage_suggestion_test.dart` (5 test) + `criterion 3: suggestion line shows only with records` | Derleme kırmızısı (dosya yoktu); yeşil 5/5 + widget | yeşil. `missFromSummary` için birim test YOK (PracticeRunSummary kurulumu ağır), yalnız koddan | 01-katman (öneri satırı görünür) |
-| 4 | Kulak <= 2 dokunuş; Akort tam ekran, geri = sahne, koşu/durum bozulmaz | `criterion 4: ear opens in two taps; the tuner ...` | Derleme kırmızısı (`earScreenBuilder/tunerOpener` yoktu) | yeşil (test saplama ekranla; gerçek TunerScreen cihazda NOT_TESTED) | 02-kulak (yükleme anı), 03-akort |
+| 4 | Kulak <= 2 dokunuş; Akort tam ekran, geri = sahne, koşu/durum bozulmaz | `criterion 4: ear opens in two taps; the tuner ...` | Derleme kırmızısı (`earScreenBuilder/tunerOpener` yoktu) | yeşil. `tunerOpener` ve `earScreenBuilder` TAKLİT: gerçek `openTuner` ve `_earScreen` yolu NOT_TESTED (gerçek TunerScreen cihazda) | 02-kulak (yükleme anı), 03-akort |
 | 5 | Gitar ve kulak açık; "Yakında" çalgılar mevcut kural | `criterion 5: guitar and ear are open; ...` | Derleme kırmızısı | yeşil (diğer çalgı -> `ComingSoonInstrumentScreen`) | 01-katman |
 | 6 | Odak: açılınca ilk öğe, kapanınca tutamak | `criterion 6: focus goes into the layer, back to the handle` | Derleme kırmızısı; ilk koşuda odak yardımcısı hatalıydı, düzeltildi | yeşil (`Semantics.focused` değil, birincil odak düğümü) | - |
 | 7 | Çalarken tutamak/katman açılmaz | `criterion 7: while playing nothing opens ...` + 05b `olcut4` testleri | Derleme kırmızısı | yeşil | - |
@@ -18,3 +18,18 @@ Test dosyaları: `test/stage_home_test.dart` (gruplar `05c layers`, `05c ek i`, 
 Cihaz ölçümü (TalkBack/VoiceOver odak, gerçek Akort): NOT_TESTED.
 Eski testte değişiklik: `handles show and call the injected callback` tutamak sırası (katman tutamakları örter), `seen.toSet()` karşılaştırması.
 Worktree notu: `assets/models/pose_landmarker_full.v1.task` testlerin derlenmesi için kopyalandı (gitignored, diff'te yok).
+
+## Reviewer tur 1 düzeltmeleri (hepsinde önce kırmızı, sonra yeşil)
+
+| Bulgu | Test | Kırmızı kanıt | Sonuç |
+|---|---|---|---|
+| #1 çalarken geri -> katman kilidi | `criterion 7b: play, back, then the layer opens again` | `Expected: false Actual: true` (`mgr.locked`) | yeşil (`_onBack`te `locked=false`) |
+| #2 çift dokunuş | `two quick taps on Play: one guard, one start` | `Expected: <1> Actual: <2>` | yeşil (`_starting` bayrağı) |
+| #3 ilk koşu öneri satırını doldurur | `criterion 3b: first run of a new user fills the line` | satır bulunamadı | yeşil (`_ranThisSession`; kayıt yokken satır gizli testi aynen duruyor) |
+| #4 dört eşleme tek tek | `stage_suggestion_test: each miss kind maps ...` | sabotaj (`different -> moveCloser`) kırmızı, geri konunca yeşil | yeşil |
+| #5 `missFromSummary` + `lastRunRecord` tiebreak | `stage_suggestion_test` (3 + 1 test) | tiebreak testi kırmızı (`Expected m01-05 Actual m01-02`) | yeşil (eşit tarihte büyük lessonId; tarihli > tarihsiz) |
+| #6 satırlar düğme | `criterion 4b: rows are buttons ...` | `isButton Expected true Actual false` | yeşil (`Semantics(button: true)`) |
+| #7 RangeSlider semantiği | `loop on: ...` içinde `semanticFormatterCallback` | `Expected: not null` | yeşil: değer 1 tabanlı ölçü numarası, yeni metin yok (eski ekranda etiket yok) |
+| #9 ölçüt 4 taklit notu | bu tablo | - | yazıldı |
+
+Koşu: stage_home + stage_suggestion + practice_screen + glass_layer + app_locale_preferences + ux_05c_render = `+132 All tests passed`; `flutter analyze` (tam) No issues. PNG yeniden üretilmedi (görsel değişiklik yok).
