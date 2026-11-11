@@ -22,6 +22,7 @@ import 'app/first_minutes/first_three_minutes_screen.dart';
 import 'app/ostinato_release_policy.dart';
 import 'app/practice/loop/reference_listen.dart' show ReferencePlaybackPort;
 import 'app/screens/library_screen.dart';
+import 'app/stage/stage_home_screen.dart';
 import 'app/screens/onboarding_screen.dart';
 
 /// Kabuk YALNIZ kablolama (Gravita G-100 deseni). Burada hüküm yok: eşik,
@@ -378,6 +379,8 @@ class OstinatoHome extends StatefulWidget {
     required this.alreadyOnboarded,
     this.firstThreeMinutesOpen = ostinatoFirstThreeMinutesOpen,
     this.firstMinutesPortBuilder,
+    this.stageHomeOpen = ostinatoStageHomeEnabled,
+    this.stageHomeBuilder,
   });
 
   final ContentRepository repo;
@@ -388,6 +391,13 @@ class OstinatoHome extends StatefulWidget {
   /// OST-P0-05 flag (closed by default); tests pass it explicitly.
   final bool firstThreeMinutesOpen;
   final ReferencePlaybackPort? Function(BuildContext)? firstMinutesPortBuilder;
+
+  /// OST-UX-05b flag (closed by default): the root after the welcome pages
+  /// is the stage instead of the library; tests pass it explicitly.
+  final bool stageHomeOpen;
+
+  /// Tests replace the stage (fake catalog, fake audio); null = the real one.
+  final Widget Function(BuildContext)? stageHomeBuilder;
 
   @override
   State<OstinatoHome> createState() => _OstinatoHomeState();
@@ -416,6 +426,10 @@ class _OstinatoHomeState extends State<OstinatoHome> {
           portBuilder: widget.firstMinutesPortBuilder,
           onOpenLibrary: () => setState(() => _firstMinutesDone = true),
         );
+      }
+      if (widget.stageHomeOpen) {
+        return widget.stageHomeBuilder?.call(context) ??
+            const StageHomeScreen();
       }
       return LibraryScreen(repo: widget.repo, cueText: widget.cueText);
     }

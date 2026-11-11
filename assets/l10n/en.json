@@ -8767,6 +8767,13 @@
     "33992ffdc56434de": "Device",
     "6e39ad1efa20f25f": "Prototype: microphone state",
     "45d59969599829ed": "Denied",
-    "f65f50cc4c1885fd": "Unclear"
+    "f65f50cc4c1885fd": "Unclear",
+    "c27c9aaa5b761702": "Just starting",
+    "5928653ae8c400c0": "Tools",
+    "71b263f184407eea": "Metronome",
+    "31a8d45319dcb649": "Loop",
+    "679a1a087e7ca515": "Help",
+    "a12328e996432488": "Keep the metronome in view",
+    "c7729b4a16a26bca": "Run not completed: not measured, no gate recorded."
   }
 }

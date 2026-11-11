@@ -70,7 +70,24 @@ class PracticeLoopScreen extends StatefulWidget {
     this.listenTryFixRepeat = ostinatoListenTryFixRepeatOpen,
     this.ghostScreen = ostinatoGhostScreenOpen,
     this.suggestionPool = const [],
+    this.stageMode = false,
+    this.onController,
+    this.listenController,
   });
+
+  /// OST-UX-05b: embedded in the stage shell (default false = unchanged).
+  /// True: no back button (the stage owns back), the start button reads
+  /// "Play", and the reference bar and loop switch are left to the stage's
+  /// tool shelf (same controller, same widgets).
+  final bool stageMode;
+
+  /// OST-UX-05b: called once with the session controller (the stage reads
+  /// the run state and the beat from it). Default null = nothing happens.
+  final void Function(PracticeSessionController controller)? onController;
+
+  /// OST-UX-05b: a reference-listen controller owned by the caller, shared
+  /// with the stage's shelf; null = the screen owns its own (as before).
+  final ReferenceListenController? listenController;
 
   /// OST-P0-08 gate (default closed): while false nothing below changes.
   final bool retentionOpen;
@@ -175,7 +192,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       : Set.of(Guide.values);
 
   /// FK1 "Listen first"; never sounds while the microphone runs.
-  final ReferenceListenController _listen = ReferenceListenController();
+  late final ReferenceListenController _listen =
+      widget.listenController ?? ReferenceListenController();
 
   /// The lesson's on-screen drill, when this build can generate it.
   late final V1Drill? _drill = switch (widget.lesson.practice.anyDrill) {
@@ -212,6 +230,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   void initState() {
     super.initState();
     _c.addListener(_changed);
+    widget.onController?.call(_c);
     unawaited(_loadProfile());
     unawaited(_prepareOwnRecording());
     final recorder = _c.ownRecorder;
@@ -286,7 +305,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   void dispose() {
     _c.removeListener(_changed);
     _backgroundGuard?.detach();
-    _listen.dispose();
+    if (widget.listenController == null) _listen.dispose();
     _ticker.dispose();
     unawaited(_c.stop());
     _c.dispose();
@@ -528,12 +547,14 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     final t = _c.tempo;
     return Row(
       children: [
-        GlassIconButton(
-          icon: '‹',
-          semanticLabel: localized(context, 'Back', 'Geri'),
-          onTap: () => Navigator.of(context).maybePop(),
-        ),
-        const SizedBox(width: 12),
+        if (!widget.stageMode) ...[
+          GlassIconButton(
+            icon: '‹',
+            semanticLabel: localized(context, 'Back', 'Geri'),
+            onTap: () => Navigator.of(context).maybePop(),
+          ),
+          const SizedBox(width: 12),
+        ],
         Expanded(
           child: Text(
             lesson.title.of(context),
@@ -657,7 +678,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
               value: _c.metronomeSound,
               onChanged: (v) => _c.metronomeSound = v,
             ),
-          if (_score.barCount > 1) _loopControl(context),
+          if (_score.barCount > 1 && !widget.stageMode) _loopControl(context),
         ],
       ),
     );
@@ -1138,7 +1159,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
               style: hankenText(size: 13),
             ),
           ),
-        if ((_score.hasPitches || _score.isRhythmOnly) &&
+        if (!widget.stageMode &&
+            (_score.hasPitches || _score.isRhythmOnly) &&
             _guides.contains(Guide.referenceAudio)) ...[
           ReferenceListenBar(
             controller: _listen,
@@ -1151,7 +1173,11 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           key: const Key('practice-start'),
           onPressed: _start,
           icon: const Icon(Icons.play_arrow),
-          label: Text(localized(context, 'Start', 'Başlat')),
+          label: Text(
+            widget.stageMode
+                ? localized(context, 'Play', 'Çal')
+                : localized(context, 'Start', 'Başlat'),
+          ),
         ),
       ],
     );
