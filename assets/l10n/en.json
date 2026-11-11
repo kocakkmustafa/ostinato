@@ -8778,6 +8778,16 @@
     "dc41214aeb1440d9": "Pick up where you stopped.",
     "5811943f3e136319": "Some notes were not heard. Move closer to the microphone and play again.",
     "61b41dda85ac82ae": "Some notes sounded different. Listen to the reference first, then play.",
-    "fc574f89949c82e9": "The timing drifted. Lower the tempo a little."
+    "fc574f89949c82e9": "The timing drifted. Lower the tempo a little.",
+    "712b09c063e07feb": "The membership could not be checked just now. Tap Play to try again.",
+    "6038007f203c7737": "Play once; your run shows up here.",
+    "9f978090559f3086": "Your path could not be read.",
+    "dc9ecdc27e4bca5e": "Why this one: it is the first module of the course.",
+    "a5c278f82df7aaf0": "Why this one: the checkpoint before it was passed by measurement.",
+    "2482b9079f5adb15": "Why this one: the checkpoint before it was done as a self-check, not measured.",
+    "45d8787934415f73": "Why this one: you already have progress in this module.",
+    "456bb0c10501ae9d": "{v0} lessons played, {v1} runs",
+    "adc25972f051872b": "Best tempo ♩={v0}",
+    "160312991ccc5ace": "Weekly goal: {v0} of {v1} days this week"
   }
 }

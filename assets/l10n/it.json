@@ -8778,6 +8778,16 @@
     "dc41214aeb1440d9": "Riprendi da dove avevi lasciato.",
     "5811943f3e136319": "Alcune note non sono state sentite. Avvicinati al microfono e suona di nuovo.",
     "61b41dda85ac82ae": "Alcune note suonavano diverse. Ascolta prima il riferimento, poi suona.",
-    "fc574f89949c82e9": "Il ritmo si è sfasato. Riduci un po' la velocità."
+    "fc574f89949c82e9": "Il ritmo si è sfasato. Riduci un po' la velocità.",
+    "712b09c063e07feb": "Non è stato possibile verificare l’abbonamento in questo momento. Tocca Ascolta per riprovare.",
+    "6038007f203c7737": "Suona una volta; la tua prova comparirà qui.",
+    "9f978090559f3086": "Non è stato possibile leggere il tuo percorso.",
+    "dc9ecdc27e4bca5e": "Perché questa: è il primo modulo del corso.",
+    "a5c278f82df7aaf0": "Perché questa: la lezione di passaggio precedente è stata superata con la misurazione.",
+    "2482b9079f5adb15": "Perché questa: la lezione di passaggio precedente è stata fatta come autoverifica, non misurata.",
+    "45d8787934415f73": "Perché questa: hai già dei progressi in questo modulo.",
+    "456bb0c10501ae9d": "{v0} lezioni suonate, {v1} prove",
+    "adc25972f051872b": "Miglior tempo ♩={v0}",
+    "160312991ccc5ace": "Obiettivo settimanale: {v0} giorni su {v1} questa settimana"
   }
 }

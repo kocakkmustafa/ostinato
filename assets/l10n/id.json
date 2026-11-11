@@ -8771,6 +8771,16 @@
     "dc41214aeb1440d9": "Lanjutkan dari tempat kamu berhenti.",
     "5811943f3e136319": "Beberapa nada tidak terdengar. Dekati mikrofon lalu mainkan lagi.",
     "61b41dda85ac82ae": "Beberapa nada terdengar berbeda. Dengarkan referensinya dulu, lalu mainkan.",
-    "fc574f89949c82e9": "Ketepatan waktunya bergeser. Turunkan tempo sedikit."
+    "fc574f89949c82e9": "Ketepatan waktunya bergeser. Turunkan tempo sedikit.",
+    "712b09c063e07feb": "Keanggotaan tidak dapat diperiksa saat ini. Ketuk Putar untuk mencoba lagi.",
+    "6038007f203c7737": "Mainkan satu kali; percobaanmu tampil di sini.",
+    "9f978090559f3086": "Jalurmu tidak dapat dibaca.",
+    "dc9ecdc27e4bca5e": "Mengapa ini: ini modul pertama kursus.",
+    "a5c278f82df7aaf0": "Mengapa ini: pelajaran penentu yang mendahuluinya lulus lewat pengukuran.",
+    "2482b9079f5adb15": "Mengapa ini: pelajaran penentu yang mendahuluinya dilakukan sebagai cek mandiri, tidak diukur.",
+    "45d8787934415f73": "Mengapa ini: kamu sudah punya kemajuan di modul ini.",
+    "456bb0c10501ae9d": "{v0} pelajaran dimainkan, {v1} percobaan",
+    "adc25972f051872b": "Tempo terbaik ♩={v0}",
+    "160312991ccc5ace": "Target mingguan: {v0} dari {v1} hari minggu ini"
   }
 }

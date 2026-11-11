@@ -76,7 +76,12 @@ class PracticeLoopScreen extends StatefulWidget {
     this.tuningCardSeen = false,
     this.onStarted,
     this.beforeStart,
+    this.onRunRecorded,
   });
+
+  /// OST-UX-05d: called once the finished run's store write is over (done or
+  /// failed), so a host can re-read the stored records. Null = nothing.
+  final VoidCallback? onRunRecorded;
 
   /// OST-UX-05c: asked when Play is tapped, before anything starts. False (or
   /// an error) = the run does not begin (fail closed); the stage re-verifies
@@ -350,6 +355,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     } on Object {
       record = null;
     }
+    widget.onRunRecorded?.call();
     if (!mounted) return;
     // FK6: the next run's tempo is set before the result opens, so the
     // result screen states exactly what the next run will be.

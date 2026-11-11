@@ -8778,6 +8778,16 @@
     "dc41214aeb1440d9": "Continue de onde você parou.",
     "5811943f3e136319": "Algumas notas não foram ouvidas. Aproxime-se do microfone e toque de novo.",
     "61b41dda85ac82ae": "Algumas notas soaram diferentes. Ouça primeiro a referência e depois toque.",
-    "fc574f89949c82e9": "O tempo saiu do compasso. Diminua um pouco o andamento."
+    "fc574f89949c82e9": "O tempo saiu do compasso. Diminua um pouco o andamento.",
+    "712b09c063e07feb": "Não foi possível verificar a assinatura agora. Toque em Tocar para tentar de novo.",
+    "6038007f203c7737": "Toque uma vez; sua tentativa aparece aqui.",
+    "9f978090559f3086": "Não foi possível ler o seu caminho.",
+    "dc9ecdc27e4bca5e": "Por que esta: é o primeiro módulo do curso.",
+    "a5c278f82df7aaf0": "Por que esta: a aula de passagem anterior foi superada com medição.",
+    "2482b9079f5adb15": "Por que esta: a aula de passagem anterior foi feita como autoavaliação, sem medição.",
+    "45d8787934415f73": "Por que esta: você já tem progresso neste módulo.",
+    "456bb0c10501ae9d": "{v0} aulas tocadas, {v1} tentativas",
+    "adc25972f051872b": "Melhor andamento ♩={v0}",
+    "160312991ccc5ace": "Meta semanal: {v0} de {v1} dias nesta semana"
   }
 }

@@ -8792,6 +8792,16 @@
     "dc41214aeb1440d9": "Kontynuuj od miejsca, w którym przerwano.",
     "5811943f3e136319": "Niektórych nut nie usłyszano. Zbliż się do mikrofonu i zagraj ponownie.",
     "61b41dda85ac82ae": "Niektóre nuty zabrzmiały inaczej. Najpierw posłuchaj wzorca, potem zagraj.",
-    "fc574f89949c82e9": "Rytm się rozjechał. Trochę zwolnij tempo."
+    "fc574f89949c82e9": "Rytm się rozjechał. Trochę zwolnij tempo.",
+    "712b09c063e07feb": "Nie udało się teraz sprawdzić członkostwa. Dotknij Odtwórz, aby spróbować ponownie.",
+    "6038007f203c7737": "Zagraj raz; Twoje podejście pojawi się tutaj.",
+    "9f978090559f3086": "Nie udało się odczytać Twojej ścieżki.",
+    "dc9ecdc27e4bca5e": "Dlaczego ta: to pierwszy moduł kursu.",
+    "a5c278f82df7aaf0": "Dlaczego ta: poprzednia lekcja przejściowa została zaliczona pomiarem.",
+    "2482b9079f5adb15": "Dlaczego ta: poprzednia lekcja przejściowa była samokontrolą, bez pomiaru.",
+    "45d8787934415f73": "Dlaczego ta: masz już postęp w tym module.",
+    "456bb0c10501ae9d": "Zagrane lekcje: {v0}, podejścia: {v1}",
+    "adc25972f051872b": "Najlepsze tempo ♩={v0}",
+    "160312991ccc5ace": "Cel tygodniowy: {v0} z {v1} dni w tym tygodniu"
   }
 }
