@@ -2321,6 +2321,168 @@ void main() {
       await _dispose(t, rig);
     });
 
+    testWidgets('tur1 #3: no records: the weekly line is hidden even when a '
+        'real weekly status exists (no invented "0 of 3")', (t) async {
+      final rig = _Rig();
+      await boot(
+        t,
+        _stage(
+          rig,
+          wrap: withRepo,
+          weeklyGoalLoader: () async => evaluateWeeklyGoal(
+            entries: const <PracticeEntry>[],
+            today: LocalDay(2026, 11, 11),
+          ),
+        ),
+      );
+      await openPath(t);
+      expect(textOf(t, 'stage-history-empty'), StageCopy.historyEmpty.$2);
+      expect(find.byKey(const Key('stage-history-weekly')), findsNothing);
+      await _dispose(t, rig);
+    });
+
+    for (final completed in [false, true]) {
+      testWidgets('tur1 #6: a stored pass without a tempo shows no '
+          '"♩=0" (${completed ? 'completed' : 'passed'})', (t) async {
+        final id = catalog.lessons[0].id;
+        final rig = _Rig();
+        await boot(
+          t,
+          _stage(
+            rig,
+            wrap: withRepo,
+            progress: _Memory({
+              id: V1PracticeRecord(
+                lessonId: id,
+                runs: 1,
+                bestHeard: .9,
+                bestAccuracy: .9,
+                lastRunAt: DateTime.utc(2026, 11, 1),
+                passedAt: DateTime.utc(2026, 11, 1),
+                completedAt: completed ? DateTime.utc(2026, 11, 1) : null,
+              ),
+            }),
+            weeklyGoalLoader: () async => null,
+          ),
+        );
+        await openPath(t);
+        final status = textOf(t, 'stage-path-status-$id');
+        expect(status, isNot(contains('♩=0')));
+        expect(status, isNot(contains('♩')));
+        expect(status, isNotEmpty);
+        await _dispose(t, rig);
+      });
+    }
+
+    testWidgets('tur1 #4: once the content has loaded, focus is on the '
+        'first item of the layer (a real item, not the scope)', (t) async {
+      final rig = _Rig();
+      await boot(
+        t,
+        _stage(rig, wrap: withRepo, weeklyGoalLoader: () async => null),
+      );
+      await openPath(t);
+      await t.pump();
+      final focus = FocusManager.instance.primaryFocus!;
+      expect(focus.debugLabel, isNot('stage-layer'));
+      final tile = focus.context!
+          .findAncestorWidgetOfExactType<ExpansionTile>();
+      expect(tile, isNotNull, reason: 'focus is on a unit header');
+      expect(
+        tile!.key,
+        PageStorageKey<String>('stage-path-unit-${catalog.units.first.id}'),
+      );
+      await _dispose(t, rig);
+    });
+
+    testWidgets('tur1 #4: a failed read: focus goes to the retry button', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final mem = _Memory();
+      mem.failLoadCalls.add(2);
+      await boot(
+        t,
+        _stage(
+          rig,
+          wrap: withRepo,
+          progress: mem,
+          weeklyGoalLoader: () async => null,
+        ),
+      );
+      await openPath(t);
+      await t.pump();
+      final focus = FocusManager.instance.primaryFocus!;
+      expect(
+        focus.context!.findAncestorWidgetOfExactType<TextButton>()?.key,
+        const Key('stage-path-retry'),
+      );
+      await _dispose(t, rig);
+    });
+
+    for (final withRecords in [false, true]) {
+      testWidgets('tur1 #10: text scale 1.3 at 360x640 '
+          '(${withRecords ? 'history' : 'empty'}): no overflow', (t) async {
+        final rig = _Rig();
+        final a = catalog.lessons[0].id;
+        await boot(
+          t,
+          _stage(
+            rig,
+            wrap: (w) => withRepo(
+              Builder(
+                builder: (c) => MediaQuery(
+                  data: MediaQuery.of(
+                    c,
+                  ).copyWith(textScaler: const TextScaler.linear(1.3)),
+                  child: w,
+                ),
+              ),
+            ),
+            progress: _Memory({
+              if (withRecords)
+                a: rec(
+                  a,
+                  runs: 12,
+                  heard: .85,
+                  acc: .75,
+                  bpm: 70,
+                  passed: true,
+                ),
+              if (withRecords)
+                'ear-s1-m01-01': rec('ear-s1-m01-01', runs: 3, heard: 1),
+            }),
+            weeklyGoalLoader: () async => evaluateWeeklyGoal(
+              entries: [
+                PracticeEntry(
+                  day: LocalDay(2026, 11, 10),
+                  kind: PracticeEntryKind.measuredSession,
+                  course: PracticeCourse.guitar,
+                ),
+              ],
+              today: LocalDay(2026, 11, 11),
+            ),
+          ),
+          size: const Size(360, 640),
+        );
+        await openPath(t);
+        expect(find.byKey(const Key('stage-path-layer')), findsOneWidget);
+        expect(t.takeException(), isNull);
+        final scroll = find.descendant(
+          of: find.byKey(const Key('stage-path-scroll')),
+          matching: find.byType(Scrollable),
+        );
+        final target = find.byKey(
+          Key(withRecords ? 'stage-history-ear' : 'stage-history-empty'),
+          skipOffstage: false,
+        );
+        await t.scrollUntilVisible(target, 300, scrollable: scroll);
+        await t.pump();
+        expect(t.takeException(), isNull);
+        await _dispose(t, rig);
+      });
+    }
+
     testWidgets('while playing the path handle is gone and nothing opens', (
       t,
     ) async {

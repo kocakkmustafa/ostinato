@@ -22,3 +22,25 @@ Koşu: stage_home + stage_suggestion + path_summary + ux_05d/05c render + app_lo
 
 NOT_TESTED: cihazda TalkBack/VoiceOver odak ve okuma sırası; gerçek GlassLayer yüksekliği cihazda; gerçek `WeeklyGoalStore` dosya okuması (testlerde `weeklyGoalLoader` enjekte); gerçek üyelik sayfası/ağ gecikmesi (guard testleri enjekte); gerçek koşu sonu `onRunRecorded` (testlerde mağaza yazımı + geri çağrı taklit); kulak sonuçlarının ders adlarıyla listesi (yalnız özet satırı).
 Değişen eski test: `handles show and call the injected callback` (path artık katman açar; sıra setup, path+scrim, other); `criterion 3b` (artık mağazaya kaydedip `onRunRecorded` çağırır). Model dosyası diff'te yok.
+
+## Tur 1 notları (reviewer KOŞULLU, e27f6ea)
+
+**Süreç sapması (açık not):** Yol/Geçmiş (ölçüt 1–5, 7), ek B ve ek E testleri uygulamadan SONRA yazıldı; kırmızı kanıt gerçek önce-kırmızı değil, sabotajla alındı (yukarıdaki satırlarda yazılı). Tur 1 düzeltmelerinde testler önce yazıldı ve kırmızısı görüldü.
+
+### Düzeltilenler (önce kırmızı, sonra yeşil)
+| Bulgu | Test | Kırmızı kanıt | Sonuç |
+|---|---|---|---|
+| #1 `onRunRecorded` korumasız | `practice_screen_test.dart` grup `05d onRunRecorded`: başarılı yazımdan SONRA bir kez; yazım HATASINDA da bir kez; null = sessiz | Mevcut kod yeşil; sabotaj: `widget.onRunRecorded?.call()` satırı silinince 2 test kırmızı, geri konunca yeşil | yeşil |
+| #3 boş durumda haftalık satır ("3 günden 0") | `tur1 #3: no records: the weekly line is hidden...` | `Expected: no matching candidates Actual: Found 1 widget 'stage-history-weekly'` | yeşil: kayıt yokken (gitar+kulak boş) haftalık satır gizli |
+| #4 odak async içerik | `tur1 #4` x2 (içerik yüklenince ilk gerçek öğe = ilk modül başlığı; okuma hatasında `stage-path-retry`) | `Expected: not 'stage-layer' Actual: 'stage-layer'`; ikinci test `Actual: <null>` | yeşil: `PathLayer.onReady` -> sahne `_focusFirst` |
+| #6 `♩=0` | `tur1 #6` x2 (geçti, tamamlandı; bpm kayıtta yok) | `Actual: 'GEÇİLDİ · ♩=0'`, `'TAMAMLANDI · ♩=0'` | yeşil: bpm yoksa mevcut "PASSED/GEÇTİ" çifti (yeni metin yok) |
+| #10 yazı ölçeği 1.3 | `tur1 #10` x2 (360x640; boş ve dolu Geçmiş) | İlk koşuda yeşil (taşma yok); kırmızı kanıtı yok, kapsama testi | yeşil |
+
+### Belgelenenler (kod değişikliği yok)
+- **#2** `_admitPaid` yalnız salt-okunur `hasPaidAccess`'i 4 sn ile sınırlar. Ardından `admitV1Lesson` -> core `requirePaidAccess`/`coreGate` içindeki ağ okumasının zaman aşımı Core paketindedir; Core değişikliği ayrı kurucu onayı ister. Bilinen sınır: üye olmayan kullanıcıda `coreGate` okuması takılırsa `_starting` takılı kalabilir. Üretimde `ostinatoHasPaidAccess` fırlatmaz (hatada false); "okuma fırlatır" testi üretimde olmayan yolu sınar, yalnız takılma gerçekçidir. `catch` her istisnayı "doğrulanamadı" diye etiketler (fail-closed; etiket genel).
+- **#5** ExpansionTile modül başlıkları düğme rolündedir; kapalı modüllerin dersleri ağaçta yoktur (ekran okuyucuda her modülü açmak gerekir). Widget testi yalnız ilk (açık) modülü doğrular.
+- **#7** `statusHeld` kopyası ("HENÜZ GEÇİLEMEZ / CANNOT BE PASSED YET") eski Yol listesinden devralındı, yeni metin değildir.
+- **#8** `_afterRun` store okuma hatasında sessizce eski başlık/öneriyi korur; iki ardışık koşu yarışı testsizdir.
+- **#9** Yükleme durumu zaman aşımsız ve semantik etiketsizdir.
+- **#11** zh-Hans `已通过计量` ve fr `réussie par mesure` ifadeleri doğal değil (anlam doğru); yerel gözden geçirme önerilir.
+- **#12** `StageMissKind.timing` ve `suggestSlowDown` artık üretilmiyor (ölü kod, zararsız).

@@ -209,19 +209,22 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
     _lastTop = top;
     setState(() {});
     if (top != null && top != before) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted || _layers.top != top) return;
-        final first = _layerScope.traversalDescendants
-            .where((n) => n.canRequestFocus && !n.skipTraversal)
-            .firstOrNull;
-        (first ?? _layerScope).requestFocus();
-      });
+      WidgetsBinding.instance.addPostFrameCallback((_) => _focusFirst(top));
     } else if (top == null && before != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted || _layers.isOpen || _playing) return;
         _handleFocus[_handleOf(before)]!.requestFocus();
       });
     }
+  }
+
+  /// Focus the first real item of the open layer (else the layer itself).
+  void _focusFirst(StageLayer layer) {
+    if (!mounted || _layers.top != layer) return;
+    final first = _layerScope.traversalDescendants
+        .where((n) => n.canRequestFocus && !n.skipTraversal)
+        .firstOrNull;
+    (first ?? _layerScope).requestFocus();
   }
 
   @override
@@ -416,6 +419,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
       return PathLayer(
         key: const Key('stage-path-layer'),
         load: () => _loadPath(data),
+        onReady: () => _focusFirst(StageLayer.path),
       );
     }
     return OtherPracticeLayer(

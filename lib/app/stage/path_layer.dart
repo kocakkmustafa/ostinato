@@ -30,20 +30,33 @@ final class PathLayerData {
 /// colour. History is a read of the stored bests: no points, badges or
 /// streaks.
 class PathLayer extends StatefulWidget {
-  const PathLayer({super.key, required this.load});
+  const PathLayer({super.key, required this.load, this.onReady});
 
   /// Reads the records (throws on a read failure: not the same as empty).
   final Future<PathLayerData> Function() load;
+
+  /// Called after the content (or the failure) has been drawn, so the host
+  /// can move focus to the layer's first real item.
+  final VoidCallback? onReady;
 
   @override
   State<PathLayer> createState() => _PathLayerState();
 }
 
 class _PathLayerState extends State<PathLayer> {
-  late Future<PathLayerData> _future = widget.load();
+  late Future<PathLayerData> _future = _start();
+
+  Future<PathLayerData> _start() {
+    final f = widget.load();
+    void ready() => WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) widget.onReady?.call();
+    });
+    f.then((_) => ready(), onError: (Object _) => ready());
+    return f;
+  }
 
   void _retry() {
-    final next = widget.load();
+    final next = _start();
     setState(() {
       _future = next;
     });
@@ -247,18 +260,21 @@ class _PathLayerState extends State<PathLayer> {
 
   String _status(BuildContext context, PathLesson l) {
     return switch (l.status) {
-      V1LessonStatus.completed => localized(
+      // A pass without a stored tempo says no tempo (never "♩=0").
+      V1LessonStatus.completed when l.bpm != null => localized(
         context,
         'COMPLETED · ♩={v0}',
         'TAMAMLANDI · ♩={v0}',
-        values: {'v0': l.bpm ?? 0},
+        values: {'v0': l.bpm},
       ),
-      V1LessonStatus.passed => localized(
+      V1LessonStatus.passed when l.bpm != null => localized(
         context,
         'PASSED · ♩={v0}',
         'GEÇİLDİ · ♩={v0}',
-        values: {'v0': l.bpm ?? 0},
+        values: {'v0': l.bpm},
       ),
+      V1LessonStatus.completed ||
+      V1LessonStatus.passed => localized(context, 'PASSED', 'GEÇTİ'),
       V1LessonStatus.played => localized(
         context,
         'PLAYED ×{v0}',
@@ -346,9 +362,11 @@ class _PathLayerState extends State<PathLayer> {
   List<Widget> _history(BuildContext context, PathLayerData d) {
     final s = d.summary;
     final palette = OstinatoPalette.of(context);
-    final weekly = d.weekly;
+    final empty = s.history.isEmpty && s.ear.lessonsPlayed == 0;
+    // With no stored run there is nothing to count: no weekly row either.
+    final weekly = empty ? null : d.weekly;
     final out = <Widget>[];
-    if (s.history.isEmpty && s.ear.lessonsPlayed == 0) {
+    if (empty) {
       out.add(
         Padding(
           padding: const EdgeInsets.only(top: 8),
