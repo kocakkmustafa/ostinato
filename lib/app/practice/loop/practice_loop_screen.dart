@@ -75,7 +75,13 @@ class PracticeLoopScreen extends StatefulWidget {
     this.listenController,
     this.tuningCardSeen = false,
     this.onStarted,
+    this.beforeStart,
   });
+
+  /// OST-UX-05c: asked when Play is tapped, before anything starts. False (or
+  /// an error) = the run does not begin (fail closed); the stage re-verifies
+  /// the membership here. Null = the screen starts at once, as before.
+  final Future<bool> Function()? beforeStart;
 
   /// OST-UX-05b2: stage only. True when the stage already showed the tuning
   /// card in this session (a rebuilt screen must not show it again).
@@ -427,7 +433,29 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     }
   }
 
+  bool _starting = false;
+
   void _start() {
+    final guard = widget.beforeStart;
+    if (guard == null) {
+      _begin();
+      return;
+    }
+    if (_starting) return; // a second tap while the guard is being asked
+    _starting = true;
+    unawaited(() async {
+      var ok = false;
+      try {
+        ok = await guard();
+      } on Object {
+        ok = false;
+      }
+      _starting = false;
+      if (ok && mounted) _begin();
+    }());
+  }
+
+  void _begin() {
     _ranOnce = true;
     widget.onStarted?.call();
     unawaited(() async {

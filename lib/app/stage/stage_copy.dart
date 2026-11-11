@@ -16,6 +16,7 @@ abstract final class StageCopy {
   );
   static const UiCopy reference = ('Reference', 'Referans');
   static const UiCopy tryAgain = ('Try again', 'Tekrar dene');
+  static const UiCopy guitar = ('Guitar', 'Gitar');
 
   // new
   static const UiCopy justStarting = ('Just starting', 'Yeni başlıyorsun');
@@ -32,6 +33,24 @@ abstract final class StageCopy {
     'Koşu tamamlanmadı: ölçülmedi, geçit kaydı yok.',
   );
 
+  // new (05c: the "Another practice" layer's suggestion line)
+  static const UiCopy suggestPickUp = (
+    'Pick up where you stopped.',
+    'Kaldığın yerden devam et.',
+  );
+  static const UiCopy suggestMoveCloser = (
+    'Some notes were not heard. Move closer to the microphone and play again.',
+    'Bazı notalar duyulmadı. Mikrofona yaklaşıp yeniden çal.',
+  );
+  static const UiCopy suggestListenFirst = (
+    'Some notes sounded different. Listen to the reference first, then play.',
+    'Bazı notalar farklı çıktı. Önce referansı dinle, sonra çal.',
+  );
+  static const UiCopy suggestSlowDown = (
+    'The timing drifted. Lower the tempo a little.',
+    'Zamanlama kaydı. Tempoyu biraz düşür.',
+  );
+
   /// Pairs that need a new message id (not yet in the table).
   static const List<UiCopy> newPairs = <UiCopy>[
     justStarting,
@@ -41,6 +60,10 @@ abstract final class StageCopy {
     help,
     pinMetronome,
     runNotCompleted,
+    suggestPickUp,
+    suggestMoveCloser,
+    suggestListenFirst,
+    suggestSlowDown,
   ];
 
   static const List<UiCopy> all = <UiCopy>[
@@ -51,6 +74,7 @@ abstract final class StageCopy {
     continueLine,
     reference,
     tryAgain,
+    guitar,
     ...newPairs,
   ];
 }

@@ -133,3 +133,9 @@ Kod bu bilette değiştirilmedi; UX-05'te ele alınacak bilinen noktalar:
   - (i) Sahne Çal'da `admitV1Lesson` çağırmaz; üyelik yalnız `_load`'da bir kez sorulur. Oturum ortasında üyelik biterse ücretli ders Çal'da açık kalır: Çal'da yeniden doğrulama ya da bilinçli kabul kararı gerekir.
   - (ii) Güvenlik satırı ("Ağrı, uyuşma…") kaydırılan gövdede, Çal gövdenin dışında: 360x640 + yazı 1.3 + raf açıkken ilk ekranda görünmez, kaydırmayla erişilir.
   - (iii) `onStarted` mikrofon izni reddedilse de akort kartını oturum boyunca gizler; sahnede akortçuya başka yol olmayabilir ('Ayar' tutamağının işlevi doğrulanamadı).
+
+## 05c devir notları
+- COZULDU (05c): Çal'da `admitV1Lesson` yeniden doğrulanır (`beforeStart`, fail-closed; ücretsiz derste çağrılmaz). Raf: ReferenceListenBar yalnız `hasPitches || isRhythmOnly` ve `Guide.referenceAudio` iken; Döngü `RangeSlider` rafta (`stage-loop-range`).
+- Bayrak açılmadan önce (05c reviewer tur 2 düşük notları): ayrıntı `05c-olcut-tablosu.md` "Tur 2" (A: `_starting` sıfırlama testi yok, guard hiç dönmezse ÇAL sessiz; B: oturum içi ve yeniden açılış öneri satırı `passed` farkı; E: başlık oturum içinde güncellenmez).
+- Hâlâ açık (05d–f): (ii) güvenlik satırı 360x640 + yazı 1.3 + raf açıkken ilk ekranda; (iii) mikrofon reddi sonrası akort kartı gizli kalır, "Ayar" tutamağı akortçu yolu 05f'te. Ölçüt 4 testlerinde `tunerOpener`/`earScreenBuilder` taklit: gerçek `openTuner`/`_earScreen` NOT_TESTED.
+
