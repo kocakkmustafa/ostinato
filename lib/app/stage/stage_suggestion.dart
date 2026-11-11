@@ -1,8 +1,7 @@
-import '../practice/loop/practice_outcome.dart';
 import '../practice/loop/practice_progress_store.dart';
 
 /// OST-UX-05c: what the last measured run mostly missed. Derived from fields
-/// that already exist (V1PracticeRecord / PracticeRunSummary); nothing new is
+/// that already exist (V1PracticeRecord); nothing new is
 /// stored. [none] = nothing to say (or nothing derivable).
 enum StageMissKind { none, unheard, different, timing }
 
@@ -10,12 +9,11 @@ enum StageMissKind { none, unheard, different, timing }
 const double stageMissMinHeard = 0.8;
 const double stageMissMinAccuracy = 0.8;
 
-/// Median offset (ms) from which a clean-notes run reads as a timing miss.
-const double stageMissTimingMs = 90;
-
 /// From the record of the lesson played last: not heard enough -> [unheard],
 /// heard but not matching -> [different]; a passed lesson, no run or no
-/// numbers -> [none]. A record carries no timing, so never [timing].
+/// numbers -> [none]. A record carries no timing, so never [timing]. This is
+/// the ONE rule: a fresh open and a run inside the session both read the
+/// stored record through it (05d ek B).
 StageMissKind missFromRecord(V1PracticeRecord? r) {
   if (r == null || r.runs <= 0 || r.passed) return StageMissKind.none;
   final heard = r.bestHeard;
@@ -23,21 +21,6 @@ StageMissKind missFromRecord(V1PracticeRecord? r) {
   final accuracy = r.bestAccuracy;
   if (accuracy != null && accuracy < stageMissMinAccuracy) {
     return StageMissKind.different;
-  }
-  return StageMissKind.none;
-}
-
-/// From one finished run: the larger of unheard / different notes wins (ties
-/// go to unheard); with neither, a calibrated median offset reads as timing.
-StageMissKind missFromSummary(PracticeRunSummary s) {
-  if (s.unheard > 0 || s.different > 0) {
-    return s.unheard >= s.different
-        ? StageMissKind.unheard
-        : StageMissKind.different;
-  }
-  final ms = s.medianTimingMs;
-  if (s.timingCalibrated && ms != null && ms.abs() >= stageMissTimingMs) {
-    return StageMissKind.timing;
   }
   return StageMissKind.none;
 }

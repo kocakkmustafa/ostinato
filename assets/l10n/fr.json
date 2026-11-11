@@ -8778,6 +8778,16 @@
     "dc41214aeb1440d9": "Reprends là où tu en étais.",
     "5811943f3e136319": "Certaines notes n'ont pas été entendues. Rapproche-toi du micro et joue à nouveau.",
     "61b41dda85ac82ae": "Certaines notes sonnaient différemment. Écoute d'abord la référence, puis joue.",
-    "fc574f89949c82e9": "Le rythme a dérapé. Baisse un peu le tempo."
+    "fc574f89949c82e9": "Le rythme a dérapé. Baisse un peu le tempo.",
+    "712b09c063e07feb": "L’abonnement n’a pas pu être vérifié à l’instant. Touche Écouter pour réessayer.",
+    "6038007f203c7737": "Joue une fois ; ton essai s’affichera ici.",
+    "9f978090559f3086": "Ton parcours n’a pas pu être lu.",
+    "dc9ecdc27e4bca5e": "Pourquoi celle-ci : c’est le premier module du cours.",
+    "a5c278f82df7aaf0": "Pourquoi celle-ci : l’étape de passage qui la précède a été réussie par mesure.",
+    "2482b9079f5adb15": "Pourquoi celle-ci : l’étape de passage qui la précède a été faite en auto-vérification, sans mesure.",
+    "45d8787934415f73": "Pourquoi celle-ci : tu as déjà une progression dans ce module.",
+    "456bb0c10501ae9d": "{v0} leçons jouées, {v1} essais",
+    "adc25972f051872b": "Meilleur tempo ♩={v0}",
+    "160312991ccc5ace": "Objectif hebdomadaire : {v0} jours sur {v1} cette semaine"
   }
 }

@@ -25,6 +25,8 @@ import '../tuner/tuner_screen.dart' as tuner;
 import '../practice/setup/setup_profile_store.dart';
 import '../ui_copy.dart';
 import 'other_practice_layer.dart';
+import 'path_layer.dart';
+import 'path_summary.dart';
 import 'stage_copy.dart';
 import 'stage_layers.dart';
 import 'stage_suggestion.dart';
@@ -72,6 +74,7 @@ class StageHomeScreen extends StatefulWidget {
     this.layerManager,
     this.earScreenBuilder,
     this.tunerOpener,
+    this.weeklyGoalLoader,
   });
 
   /// Which layer is open (null = the stage owns one). Tests drive it.
@@ -80,6 +83,10 @@ class StageHomeScreen extends StatefulWidget {
   /// The ear-training course screen (null = the course list, as on the old
   /// root).
   final WidgetBuilder? earScreenBuilder;
+
+  /// Reads the weekly goal for the history (null = the account's own
+  /// `WeeklyGoalStore`). A failure only hides that one line.
+  final Future<WeeklyGoalStatus?> Function()? weeklyGoalLoader;
 
   /// Opens the tuner full screen (null = `openTuner`).
   final Future<void> Function(BuildContext context)? tunerOpener;
@@ -158,6 +165,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   bool _shelfOpen = false;
   bool _pinned = false;
   bool _notice = false;
+  bool _startUnverified = false;
   late final StageLayerManager _ownLayers = StageLayerManager();
   StageLayerManager get _layers => widget.layerManager ?? _ownLayers;
   final Map<StageHandle, FocusNode> _handleFocus = <StageHandle, FocusNode>{
@@ -166,6 +174,8 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   };
   final FocusScopeNode _layerScope = FocusScopeNode(debugLabel: 'stage-layer');
   StageLayer? _lastTop;
+  // What the stored records say after a run of this session (05d ek B/E):
+  // the same `missFromRecord` rule as a fresh open, read from the store.
   StageMissKind? _sessionMiss;
   bool _ranThisSession = false;
   int _epoch = 0;
@@ -199,19 +209,22 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
     _lastTop = top;
     setState(() {});
     if (top != null && top != before) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted || _layers.top != top) return;
-        final first = _layerScope.traversalDescendants
-            .where((n) => n.canRequestFocus && !n.skipTraversal)
-            .firstOrNull;
-        (first ?? _layerScope).requestFocus();
-      });
+      WidgetsBinding.instance.addPostFrameCallback((_) => _focusFirst(top));
     } else if (top == null && before != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted || _layers.isOpen || _playing) return;
         _handleFocus[_handleOf(before)]!.requestFocus();
       });
     }
+  }
+
+  /// Focus the first real item of the open layer (else the layer itself).
+  void _focusFirst(StageLayer layer) {
+    if (!mounted || _layers.top != layer) return;
+    final first = _layerScope.traversalDescendants
+        .where((n) => n.canRequestFocus && !n.skipTraversal)
+        .firstOrNull;
+    (first ?? _layerScope).requestFocus();
   }
 
   @override
@@ -294,6 +307,23 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
     }
   }
 
+  /// A run was written (or failed to be): read the records again and derive
+  /// the suggestion and the headline from them, exactly as `_load` does.
+  Future<void> _afterRun() async {
+    final progress = _progress;
+    if (progress == null) return;
+    try {
+      final records = await progress.load();
+      if (!mounted || !identical(progress, _progress)) return;
+      setState(() {
+        _sessionMiss = missFromRecord(lastRunRecord(records.values));
+        _ranThisSession = records.values.any((r) => r.runs > 0);
+      });
+    } on Object {
+      // Keep what the stage already shows.
+    }
+  }
+
   void _retry() => setState(() => _data = _load(_accountId));
 
   @override
@@ -337,9 +367,11 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   void _tapHandle(StageHandle h) {
     if (_playing) return;
     widget.onHandle?.call(context, h);
-    // 05d (path) and 05f (setup) bring their own content; until then only
-    // the "another practice" handle has a built-in layer.
-    if (widget.layerBuilder != null || h == StageHandle.another) {
+    // 05f (setup) brings its own content; until then only "another
+    // practice" and "my path" have a built-in layer.
+    if (widget.layerBuilder != null ||
+        h == StageHandle.another ||
+        h == StageHandle.path) {
       _layers.openLayer(switch (h) {
         StageHandle.another => StageLayer.other,
         StageHandle.path => StageLayer.path,
@@ -350,10 +382,46 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
 
   void _closeLayer() => _layers.close();
 
+  void _setStartUnverified(bool v) {
+    if (!mounted || _startUnverified == v) return;
+    setState(() => _startUnverified = v);
+  }
+
+  /// Play on a paid lesson (05d ek A). The read-only membership check is
+  /// bounded by [StageHomeScreen.paidCheckTimeout]; a hang or an error means
+  /// "could not verify": fail closed, say so, Play can be tried again. The
+  /// membership page / sign-in that [admitV1Lesson] may open is the learner's
+  /// own step and is NEVER timed out. A plain refusal (false) is silent.
+  Future<bool> _admitPaid(String lessonId) async {
+    _setStartUnverified(false);
+    try {
+      final check = _paidCheck;
+      if (check != null) {
+        await check().timeout(widget.paidCheckTimeout);
+      }
+      if (!mounted) return false;
+      return await admitV1Lesson(
+        context,
+        lessonId,
+        paidFeaturesAvailable: widget.paidFeaturesAvailable,
+      );
+    } on Object {
+      _setStartUnverified(true);
+      return false;
+    }
+  }
+
   Widget _layerContent(BuildContext context, _StageData data, StageLayer l) {
     final h = _handleOf(l);
     final custom = widget.layerBuilder;
     if (custom != null) return custom(context, h, _closeLayer);
+    if (l == StageLayer.path) {
+      return PathLayer(
+        key: const Key('stage-path-layer'),
+        load: () => _loadPath(data),
+        onReady: () => _focusFirst(StageLayer.path),
+      );
+    }
     return OtherPracticeLayer(
       suggestion: stageSuggestion(
         hasRecords: data.hasRecords || _ranThisSession,
@@ -368,6 +436,35 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
       ),
       openTuner: () =>
           (widget.tunerOpener ?? (c) => tuner.openTuner(c))(context),
+    );
+  }
+
+  /// Read only: the stored records, the lesson checks and the weekly goal.
+  /// A failure of records / checks throws (the layer shows an honest error
+  /// and a retry, never the empty text); the weekly line alone may be absent.
+  Future<PathLayerData> _loadPath(_StageData data) async {
+    final records = await _progress!.load();
+    final checks =
+        await (widget.checksFactory?.call(_accountId) ??
+                V1LessonCheckStore(accountUserId: _accountId))
+            .load();
+    WeeklyGoalStatus? weekly;
+    try {
+      weekly =
+          await (widget.weeklyGoalLoader?.call() ??
+              WeeklyGoalStore(accountUserId: _accountId).load());
+    } on Object {
+      weekly = null;
+    }
+    return PathLayerData(
+      data.catalog,
+      pathSummary(
+        data.catalog,
+        records,
+        checks,
+        paidFeaturesAvailable: widget.paidFeaturesAvailable,
+      ),
+      weekly,
     );
   }
 
@@ -458,7 +555,8 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
 
   Widget _stage(BuildContext context, _StageData data) {
     final unit = data.unit;
-    final headline = data.hasRecords && unit?.module != null
+    final headline =
+        (data.hasRecords || _ranThisSession) && unit?.module != null
         ? uiText(
             context,
             StageCopy.continueLine,
@@ -492,7 +590,19 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                       style: hankenText(size: 13),
                     ),
                   ),
+                if (_startUnverified)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+                    child: Text(
+                      uiText(context, StageCopy.startNotVerified),
+                      key: const Key('stage-start-unverified'),
+                      style: hankenText(size: 13),
+                    ),
+                  ),
+                // Keyed: a notice above appears and goes; the practice screen
+                // (and its run) must never be rebuilt because of it.
                 Expanded(
+                  key: const Key('stage-practice-slot'),
                   child: Semantics(
                     sortKey: const OrdinalSortKey(0),
                     child: PracticeLoopScreen(
@@ -507,22 +617,14 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                       seed: widget.seed,
                       tuningCardSeen: _tuningSeen,
                       onStarted: () => _tuningSeen = true,
-                      onSessionFinished: (e) {
-                        _sessionMiss = missFromSummary(e.summary);
-                        _ranThisSession = true;
-                      },
+                      onRunRecorded: _afterRun,
                       beforeStart:
                           isFreeV1Lesson(
                             data.lesson.id,
                             paidFeaturesAvailable: widget.paidFeaturesAvailable,
                           )
                           ? null
-                          : () => admitV1Lesson(
-                              context,
-                              data.lesson.id,
-                              paidFeaturesAvailable:
-                                  widget.paidFeaturesAvailable,
-                            ),
+                          : () => _admitPaid(data.lesson.id),
                     ),
                   ),
                 ),

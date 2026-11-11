@@ -8778,6 +8778,16 @@
     "dc41214aeb1440d9": "Mach dort weiter, wo du aufgehört hast.",
     "5811943f3e136319": "Einige Noten wurden nicht gehört. Geh näher an das Mikrofon und spiele erneut.",
     "61b41dda85ac82ae": "Einige Noten klangen anders. Höre zuerst die Referenz, dann spiele.",
-    "fc574f89949c82e9": "Das Timing ist verrutscht. Senke das Tempo ein wenig."
+    "fc574f89949c82e9": "Das Timing ist verrutscht. Senke das Tempo ein wenig.",
+    "712b09c063e07feb": "Die Mitgliedschaft konnte gerade nicht geprüft werden. Tippe auf Abspielen, um es erneut zu versuchen.",
+    "6038007f203c7737": "Spiele einmal; dein Durchlauf erscheint hier.",
+    "9f978090559f3086": "Dein Weg konnte nicht gelesen werden.",
+    "dc9ecdc27e4bca5e": "Warum diese: Es ist das erste Modul des Kurses.",
+    "a5c278f82df7aaf0": "Warum diese: Der Abschluss davor wurde durch Messung bestanden.",
+    "2482b9079f5adb15": "Warum diese: Der Abschluss davor wurde als Selbstkontrolle gemacht, nicht gemessen.",
+    "45d8787934415f73": "Warum diese: Du hast in diesem Modul bereits Fortschritt.",
+    "456bb0c10501ae9d": "{v0} Lektionen gespielt, {v1} Durchläufe",
+    "adc25972f051872b": "Bestes Tempo ♩={v0}",
+    "160312991ccc5ace": "Wochenziel: {v0} von {v1} Tagen in dieser Woche"
   }
 }

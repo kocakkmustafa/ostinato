@@ -8778,6 +8778,16 @@
     "dc41214aeb1440d9": "Kaldığın yerden devam et.",
     "5811943f3e136319": "Bazı notalar duyulmadı. Mikrofona yaklaşıp yeniden çal.",
     "61b41dda85ac82ae": "Bazı notalar farklı çıktı. Önce referansı dinle, sonra çal.",
-    "fc574f89949c82e9": "Zamanlama kaydı. Tempoyu biraz düşür."
+    "fc574f89949c82e9": "Zamanlama kaydı. Tempoyu biraz düşür.",
+    "712b09c063e07feb": "Üyelik şu an doğrulanamadı. Çal'a dokunup tekrar dene.",
+    "6038007f203c7737": "Bir kez çal; koşun burada görünür.",
+    "9f978090559f3086": "Yolun okunamadı.",
+    "dc9ecdc27e4bca5e": "Neden bu: kursun ilk modülü.",
+    "a5c278f82df7aaf0": "Neden bu: ondan önceki geçiş dersi ölçümle geçildi.",
+    "2482b9079f5adb15": "Neden bu: ondan önceki geçiş dersi öz-kontrolle yapıldı, ölçülmedi.",
+    "45d8787934415f73": "Neden bu: bu modülde zaten ilerlemen var.",
+    "456bb0c10501ae9d": "{v0} ders çalındı, {v1} koşu",
+    "adc25972f051872b": "En iyi tempo ♩={v0}",
+    "160312991ccc5ace": "Haftalık hedef: bu hafta {v1} günden {v0}"
   }
 }

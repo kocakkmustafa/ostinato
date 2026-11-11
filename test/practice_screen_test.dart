@@ -39,8 +39,113 @@ final class _Memory implements V1PracticeProgress {
       .withRun(s, DateTime.utc(2026, 11, 1));
 }
 
+final class _FailingStore implements V1PracticeProgress {
+  @override
+  Future<Map<String, V1PracticeRecord>> load() async => {};
+  @override
+  Future<V1PracticeRecord> recordRun(
+    String id,
+    PracticeRunSummary s, {
+    DateTime? at,
+  }) async => throw StateError('write failed');
+}
+
+/// Plays one silent run to its end on [progress] and returns after the
+/// result screen showed.
+Future<void> _silentRun(
+  WidgetTester tester,
+  V1PracticeProgress progress, {
+  VoidCallback? onRunRecorded,
+}) async {
+  tester.view.physicalSize = const Size(420, 1600);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+  final channel = FakeAudioCaptureChannel();
+  final audio = AudioInputController(
+    channel: channel,
+    requestMicrophonePermission: () async => PermissionStatus.granted,
+    pcmDeliveryTimeout: const Duration(minutes: 5),
+  );
+  var local = 0;
+  PracticeSessionController? controller;
+  await tester.pumpWidget(
+    practiceHost(
+      locale: 'tr',
+      PracticeLoopScreen(
+        lesson: lesson(),
+        progress: progress,
+        onRunRecorded: onRunRecorded,
+        controllerFactory: (score, tempo, criteria) =>
+            controller = PracticeSessionController(
+              score: score,
+              tempo: tempo,
+              audio: audio,
+              criteria: criteria,
+              localClockUs: () => local,
+              analyzer: (r) async => judgeNote(r),
+            ),
+      ),
+    ),
+  );
+  await tester.tap(find.byKey(const Key('practice-start')));
+  await tester.pump();
+  final c = controller!;
+  final rng = math.Random(1);
+  var t = 0;
+  for (var i = 0; i < 300 && c.phase != PracticePhase.finished; i++) {
+    final x = Float64List(4800);
+    for (var k = 0; k < x.length; k++) {
+      x[k] = (rng.nextDouble() * 2 - 1) * .002;
+    }
+    channel.pushChunk(x, sampleRate: 48000, tNativeUs: t);
+    t += 100000;
+    local = t;
+    await tester.pump();
+    if (channel.metronome != null && c.timeline == null) {
+      channel.pushMetronomeAnchor(t + 200000);
+      await tester.pump();
+    }
+    c.tick();
+    await tester.pump();
+  }
+  await tester.pumpAndSettle();
+  expect(c.phase, PracticePhase.finished);
+  await tester.pumpWidget(const SizedBox());
+  await tester.runAsync(audio.dispose);
+}
+
 void main() {
   setUp(resetAudioCaptureCoordinatorForTest);
+
+  group('05d onRunRecorded (stage re-reads the stored run)', () {
+    testWidgets('called once, AFTER the store write succeeded', (tester) async {
+      final progress = _Memory();
+      final seenRuns = <int>[];
+      await _silentRun(
+        tester,
+        progress,
+        onRunRecorded: () =>
+            seenRuns.add(progress.records['gtr-s1-m02-02']?.runs ?? 0),
+      );
+      expect(seenRuns, [1]);
+    });
+
+    testWidgets('called once even when the store write FAILED', (tester) async {
+      var calls = 0;
+      await _silentRun(tester, _FailingStore(), onRunRecorded: () => calls++);
+      expect(calls, 1);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('null (default): nothing is called, nothing breaks', (
+      tester,
+    ) async {
+      final progress = _Memory();
+      await _silentRun(tester, progress);
+      expect(progress.records['gtr-s1-m02-02']!.runs, 1);
+    });
+  });
 
   testWidgets('bundled v1 guitar lessons load as the practice catalog', (
     tester,
