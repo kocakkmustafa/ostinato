@@ -123,9 +123,9 @@ Kod bu bilette değiştirilmedi; UX-05'te ele alınacak bilinen noktalar:
 3. "En fazla 2 cam" testi tek katmanı sınar ve `lessThanOrEqualTo(2)` totolojidir; ayrıca sekme/çip `Semantics(button: true)` çift düğüm riski doğrulanmadı.
 
 ## 05b devir notları
-- Ücretli kullanıcı: sahne `next` s2+ ise ilk açık ücretsiz ölçülü dersi gösterir; üyelik sorgusu yok. Ders bitince veri yeniden yüklenmez, sonuç ekranına `hasNextLesson` geçilmez.
-- 390x844'te "Çal" yarı kesik, raf açıkken pratik alanı ~160 dp: akort kartı sahne dışına / raf açıkken "Çal" sabit (05c-f önünde karar).
-- 360x640 ve büyük yazı ölçeğinde raf taşması doğrulanmadı; raf kaydırılabilir değil.
+- COZULDU (05b2): Ücretli kullanıcı: sahne `next` dersini üye için gösterir (yan etkisiz `hasPaidAccess`), ücretsizde güvenli yedek kalır. Ders bitince veri yeniden yüklenmez, sonuç ekranına `hasNextLesson` geçilmez.
+- COZULDU (05b2): Çal sahnede sabit alan; raf sınırlı yükseklikte kaydırılabilir; 390x844, 360x640 ve yazı 1.3'te raf kapalı/açık görünür. (Eski not: 390x844'te "Çal" yarı kesik, raf açıkken pratik alanı ~160 dp: akort kartı sahne dışına / raf açıkken "Çal" sabit (05c-f önünde karar).)
+- COZULDU (05b2, bkz. yukarı): 360x640 ve büyük yazı ölçeğinde raf taşması doğrulanmadı; raf kaydırılabilir değil.
 - Raf: referans çubuğu `hasPitches || isRhythmOnly` ve `Guide.referenceAudio` koşulsuz; döngü yalnız 1-2. ölçü, `RangeSlider` yok.
 - Eski `GlassCard` (`widgets.dart:39`) çalarken de `BackdropFilter` kullanır: 05h.
-- Yarım koşu sonrası sahne yeniden kurulur, akort kartı tekrar çıkar.
+- COZULDU (05b2): Yarım koşu sonrası sahne yeniden kurulur; akort kartı tekrar çıkmaz (`tuningCardSeen`).
