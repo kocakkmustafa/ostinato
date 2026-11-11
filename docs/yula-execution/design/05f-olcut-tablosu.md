@@ -28,11 +28,11 @@ Testler: `test/ux_05f_listening_off_test.dart` (L), `test/ux_05f_device_layer_te
 | 5 | Gerçek cihazda reddedilmiş izin "Başlat" davranışı | — | — | **NOT_TESTED** (gerçek cihaz; kurucu cihazı) | — | — |
 | 6 | Ham ses çıkmaz, kalıcı kayıt yok | D `05f-6`; mevcut `ost_p0_08_recording_retention_test` | — | yeşil | **ÖNCEDEN YEŞİL**: `ostinato_release_policy.dart:77` (`ostinatoRecordingRetentionOpen=false`); `test/flutter_test_config.dart` sıfır-ağ geçersiz kılması tüm testlerde | — |
 | G1 | Bayrak KAPALI = eski akış birebir | mevcut `stage_home_test` (bayrak KAPALI grubu), `library_fold_test` | — | yeşil (stage_home 87/87) | `PracticeLoopScreen.listeningOff` varsayılan false; eski şerit aynı | — |
-| G2 | 390×844 ve 360×640, yazı 1.3: kip + katman taşma yok | L `05f-ovf` x2, D `05f-ovf` x2; O `05f-ovf2` (kip+raf açık, kip+Çal, katman) | L/D: `Found 0 widgets with key [<'stage-listening-off'>]` / `[<'stage-device-layer'>]`; O: bkz. Bulgu | L/D yeşil; O: 360×640 kip+raf AÇIK **KIRMIZI** | — | tüm PNG'ler |
+| G2 | 390×844 ve 360×640, yazı 1.3: kip + katman taşma yok | L `05f-ovf` x2, D `05f-ovf` x2; O `05f-ovf2` (kip+raf açık, kip+Çal, katman) | L/D: `Found 0 widgets with key [<'stage-listening-off'>]` / `[<'stage-device-layer'>]`; O: bkz. Bulgu | L/D yeşil; O: Faz C'de 360×640 kip+raf AÇIK KIRMIZIYDI, Faz D/E sonrası YEŞİL | — | tüm PNG'ler |
 | G3 | Semantics: kip etiketi, düğmeler ≥48 dp | L `05f-1g`, `05f-2e`; D `05f-a11y` | `05f-a11y`: `Found 0 widgets with key [<'stage-device-latency'>]` (D:167) | yeşil | — | |
 
 ## Bulgu (Faz C; Faz D'de ÇÖZÜLDÜ, R6)
-`05f-ovf2: mode ON + tool shelf OPEN, 360x640, text 1.3` Faz C'de KIRMIZIYDI (şimdi YEŞİL, Faz D/E): `BoxConstraints has a negative minimum height` (practice_loop_screen `LayoutBuilder`) ve `A RenderFlex overflowed by 46 pixels on the bottom`. Kontrol testi (kip YOK, raf açık, aynı boyut) YEŞİL; yani taşmayı kip bandı + açık raf birlikte yaratıyor. 390×844 kip+raf yeşil. 360×640'ta kip bandı en çok ekranın %20'si; alt kenarı kırpılıyor ve akort kartı band içinde kaydırarak görülüyor (02-izin-reddi-360x640-*).
+`05f-ovf2: mode ON + tool shelf OPEN, 360x640, text 1.3` Faz C'de KIRMIZIYDI (şimdi YEŞİL, Faz D/E): `BoxConstraints has a negative minimum height` (practice_loop_screen `LayoutBuilder`) ve `A RenderFlex overflowed by 46 pixels on the bottom`. Kontrol testi (kip YOK, raf açık, aynı boyut) YEŞİL; yani taşmayı kip bandı + açık raf birlikte yaratıyor. 390×844 kip+raf yeşil. 360×640'ta kip bandı kısa ekranda (≤700 dp) en çok ekranın %25'i, uzun ekranda 340 dp; alt kenarı kırpılıyor ve akort kartı band içinde kaydırarak görülüyor (02-izin-reddi-360x640-*).
 
 ## Ekran kanıtı
 `docs/yula-execution/design/evidence/ux-05f/` : `01-sahne`, `02-izin-reddi`, `03-ayar-cihaz` x {390x844, 360x640} x {acik, koyu} = 12 PNG (`UX_RENDER=1 flutter test test/ux_05f_render_evidence_test.dart`). Test fontunda bazı glifler kutu çıkar (05d/05e'deki gibi); yazı düzeni gerçek.
@@ -65,7 +65,7 @@ Süreç: önce test (D1, kırmızı koşu +40 -26), sonra uygulama (D2). Sonuç:
 | R3 | Mikrofon satırı Ayarlara git (susturulmuş kipte de) | D-R3a/b/c | R3a: `Found 0 widgets with text "Ayarlara git"`; R3c: `Expected: <1> Actual: <0>` | KAPANDI |
 | R4 | Resume okuma-only; retry titremesiz; katman tazelenir | D-R4a/b/c/d | R4a: `Found 0 widgets with key [<'stage-listening-off'>]`; R4c: `Found 0 widgets with text "Mikrofon: verildi"`; R4d: kip kesintisiz iddiası | KAPANDI |
 | R5 | Gerçek yollar | D-R5a (gerçek SettingsScreen), D-R5b (gerçek SetupWizardScreen), D-R5c | ilk koşuda test hatası (kapsam sarması, zamanlayıcı) düzeltildi; yeni ürün davranışı yok | KAPANDI; **NOT_TESTED**: bağlı hesapla Hesap/Üyelik varsayılan yolu (hesap bağlantısı test ortamında kurulamıyor; "bağlantı yok -> satır yok" ve hook çağrısı sınandı) |
-| R6 | Taşma: raf açıkken kip tek satır, raf kapalıyken bounded kaydırma | `05f-ovf2` (overflow_test), D-R6a/b/c | `BoxConstraints has a negative minimum height` + `A RenderFlex overflowed by 46 pixels on the bottom` | KAPANDI; band uzun ekranda 340 dp, kısada %32 içinde kayar |
+| R6 | Taşma: raf açıkken kip tek satır, raf kapalıyken bounded kaydırma | `05f-ovf2` (overflow_test), D-R6a/b/c | `BoxConstraints has a negative minimum height` + `A RenderFlex overflowed by 46 pixels on the bottom` | KAPANDI; band uzun ekranda 340 dp, kısada %25 içinde kayar |
 | R7 | Katman satırı tek düğüm; gürültü satırı dönüşte tazelenir | D-R7a, D-R7b | R7b: `Found 0 widgets with text "Ortam gürültüsü: sessiz"`; R7a sabotajla bile yeşil | KAPANDI (R7a koruma) |
 | R8 | Kamera `ostinatoCameraLessonsOpen` da kapalı | 05f-3a | koruma, kırmızı yok | KAPANDI |
 | R9 | Tautoloji kalktı; tuner dokunuşu hook'la; 1e kontrol; şerit/referans/kulak dokunma | 05f-iii2, 05f-1f, 05f-1e-control | iii2: `Expected: <1> Actual: <0>` | KAPANDI |
@@ -100,3 +100,7 @@ Süreç: önce test (`ux_05f_review2_test.dart`), sonra uygulama. Her test tek t
 Faz E'de değişen mevcut test beklentisi: `D-R6a` (Faz D testi): raf AÇIKken "Ayarlara git" bağlantısı artık yok (kompakt kip yalnız başlık; E3'ün taşma ölçütü bunu gerektirdi); test, raf kapanınca bağlantının görünür ve çalışır olduğunu ve raf açıkken kipin başlığının görünür olduğunu iddia eder.
 
 Güncel test sayısı: `flutter test test/ux_05f_*.dart` +104 yeşil (render 20 dahil, 0 skip). Mesaj kimliği sayısı 8786. analyze temiz; `--check` rc=0; bekçi rc=0.
+
+## Reviewer tur 3 (delta cfb13ee → c7577d6): KOŞULLU → düzeltildi
+- Düzeltildi: E6 testi sınırı kodla aynı (`0.2*h + 80`); tablo satırları (G2 YEŞİL, kip bandı %25 / uzun ekranda 340 dp) tutarlı.
+- Bayrak açılmadan önce, DÜŞÜK notlar (kod değişmedi): (a) kompakt kip (raf açık) yalnız "Dinleme kapalı" başlığını gösterir; neden/eylem metni ve "Ayarlara git" ipucu yok, izin yolu Ayar tutamağı → mikrofon satırı (2 dokunuş) ya da rafı kapatınca tam band; (b) reddedilmiş denemeden sonra `starting` iken Geri/Durdur ile kip `failure==null` ile açık kalabilir, sonraki Çal ya da resume düzeltir, testsiz; (c) kompakt dalda `title`/`links` küçük ölü hesap.

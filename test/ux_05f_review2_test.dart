@@ -238,8 +238,8 @@ void main() {
       final shelf = t.getRect(find.byKey(const Key('stage-shelf')));
       expect(shelf.top, greaterThanOrEqualTo(0));
       expect(shelf.bottom, lessThanOrEqualTo(844));
-      // content bound 0.24 * height plus the toggle row
-      expect(shelf.height, lessThanOrEqualTo(844 * 0.24 + 80));
+      // content bound 0.2 * height (kip on) plus the toggle row
+      expect(shelf.height, lessThanOrEqualTo(844 * 0.2 + 80));
       await dispose05f(t, rig);
     });
   });
