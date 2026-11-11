@@ -104,3 +104,5 @@ Güncel test sayısı: `flutter test test/ux_05f_*.dart` +104 yeşil (render 20 
 ## Reviewer tur 3 (delta cfb13ee → c7577d6): KOŞULLU → düzeltildi
 - Düzeltildi: E6 testi sınırı kodla aynı (`0.2*h + 80`); tablo satırları (G2 YEŞİL, kip bandı %25 / uzun ekranda 340 dp) tutarlı.
 - Bayrak açılmadan önce, DÜŞÜK notlar (kod değişmedi): (a) kompakt kip (raf açık) yalnız "Dinleme kapalı" başlığını gösterir; neden/eylem metni ve "Ayarlara git" ipucu yok, izin yolu Ayar tutamağı → mikrofon satırı (2 dokunuş) ya da rafı kapatınca tam band; (b) reddedilmiş denemeden sonra `starting` iken Geri/Durdur ile kip `failure==null` ile açık kalabilir, sonraki Çal ya da resume düzeltir, testsiz; (c) kompakt dalda `title`/`links` küçük ölü hesap.
+
+- CI notu (2026-11-12): koşu `43097319687` GitHub runner kuyruğunda takıldı (cancel/rerun/force-cancel olmadı); yeniden tetikleme için boş commit atıldı, kod değişmedi. Yerel tam süit kanıtı `c7577d6` + test sınırı commit `6af3a2e`: +2407 yeşil.
