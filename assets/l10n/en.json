@@ -8774,6 +8774,10 @@
     "31a8d45319dcb649": "Loop",
     "679a1a087e7ca515": "Help",
     "a12328e996432488": "Keep the metronome in view",
-    "c7729b4a16a26bca": "Run not completed: not measured, no gate recorded."
+    "c7729b4a16a26bca": "Run not completed: not measured, no gate recorded.",
+    "dc41214aeb1440d9": "Pick up where you stopped.",
+    "5811943f3e136319": "Some notes were not heard. Move closer to the microphone and play again.",
+    "61b41dda85ac82ae": "Some notes sounded different. Listen to the reference first, then play.",
+    "fc574f89949c82e9": "The timing drifted. Lower the tempo a little."
   }
 }

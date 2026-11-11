@@ -1,0 +1,94 @@
+import '../practice/loop/practice_outcome.dart';
+import '../practice/loop/practice_progress_store.dart';
+
+/// OST-UX-05c: what the last measured run mostly missed. Derived from fields
+/// that already exist (V1PracticeRecord / PracticeRunSummary); nothing new is
+/// stored. [none] = nothing to say (or nothing derivable).
+enum StageMissKind { none, unheard, different, timing }
+
+/// Records under these thresholds read as a miss (gate default is .8).
+const double stageMissMinHeard = 0.8;
+const double stageMissMinAccuracy = 0.8;
+
+/// Median offset (ms) from which a clean-notes run reads as a timing miss.
+const double stageMissTimingMs = 90;
+
+/// From the record of the lesson played last: not heard enough -> [unheard],
+/// heard but not matching -> [different]; a passed lesson, no run or no
+/// numbers -> [none]. A record carries no timing, so never [timing].
+StageMissKind missFromRecord(V1PracticeRecord? r) {
+  if (r == null || r.runs <= 0 || r.passed) return StageMissKind.none;
+  final heard = r.bestHeard;
+  if (heard != null && heard < stageMissMinHeard) return StageMissKind.unheard;
+  final accuracy = r.bestAccuracy;
+  if (accuracy != null && accuracy < stageMissMinAccuracy) {
+    return StageMissKind.different;
+  }
+  return StageMissKind.none;
+}
+
+/// From one finished run: the larger of unheard / different notes wins (ties
+/// go to unheard); with neither, a calibrated median offset reads as timing.
+StageMissKind missFromSummary(PracticeRunSummary s) {
+  if (s.unheard > 0 || s.different > 0) {
+    return s.unheard >= s.different
+        ? StageMissKind.unheard
+        : StageMissKind.different;
+  }
+  final ms = s.medianTimingMs;
+  if (s.timingCalibrated && ms != null && ms.abs() >= stageMissTimingMs) {
+    return StageMissKind.timing;
+  }
+  return StageMissKind.none;
+}
+
+/// The record of the lesson run most recently (null = no run yet).
+V1PracticeRecord? lastRunRecord(Iterable<V1PracticeRecord> records) {
+  V1PracticeRecord? last;
+  for (final r in records) {
+    if (r.runs <= 0) continue;
+    final at = r.lastRunAt;
+    final lastAt = last?.lastRunAt;
+    if (last == null ||
+        (at != null && (lastAt == null || at.isAfter(lastAt)))) {
+      last = r;
+    }
+  }
+  return last;
+}
+
+enum StageSuggestionKind { pickUp, moveCloser, listenFirst, slowDown }
+
+/// One suggestion line: the same input always gives the same value.
+final class StageSuggestion {
+  const StageSuggestion(this.kind, this.lessonId);
+  final StageSuggestionKind kind;
+
+  /// The lesson the stage continues with (`V1CourseState.next`).
+  final String lessonId;
+
+  @override
+  bool operator ==(Object other) =>
+      other is StageSuggestion &&
+      other.kind == kind &&
+      other.lessonId == lessonId;
+
+  @override
+  int get hashCode => Object.hash(kind, lessonId);
+}
+
+/// Pure and deterministic. No records, or no next lesson -> null (the line is
+/// hidden).
+StageSuggestion? stageSuggestion({
+  required bool hasRecords,
+  required String? nextLessonId,
+  required StageMissKind miss,
+}) {
+  if (!hasRecords || nextLessonId == null) return null;
+  return StageSuggestion(switch (miss) {
+    StageMissKind.none => StageSuggestionKind.pickUp,
+    StageMissKind.unheard => StageSuggestionKind.moveCloser,
+    StageMissKind.different => StageSuggestionKind.listenFirst,
+    StageMissKind.timing => StageSuggestionKind.slowDown,
+  }, nextLessonId);
+}

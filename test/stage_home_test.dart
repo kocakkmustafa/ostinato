@@ -32,7 +32,13 @@ import 'package:ostinato/app/practice/loop/practice_transport.dart';
 import 'package:ostinato/app/practice/loop/v1_course_catalog.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
 import 'package:ostinato/app/course_access.dart';
+import 'package:ostinato/app/practice/loop/reference_listen.dart';
+import 'package:ostinato/app/practice/loop/reference_listen_bar.dart';
 import 'package:ostinato/app/stage/stage_copy.dart';
+import 'package:ostinato/app/stage/stage_layers.dart';
+import 'package:ostinato/app/design/app_scope.dart' as scope;
+import 'package:ostinato/app/screens/coming_soon_instrument_screen.dart';
+import 'package:ostinato/app/stage/tool_shelf.dart';
 import 'package:ostinato/app/tuner/session_tuning_gate.dart';
 import 'package:ostinato/app/stage/stage_home_screen.dart';
 import 'package:ostinato/main.dart';
@@ -177,19 +183,28 @@ Widget _stage(
   String locale = 'tr',
   bool paidFeaturesAvailable = false,
   Future<bool> Function()? paidAccessCheck,
+  StageLayerManager? layerManager,
+  WidgetBuilder? earScreenBuilder,
+  Future<void> Function(BuildContext)? tunerOpener,
+  Widget Function(Widget)? wrap,
 }) => practiceHost(
   locale: locale,
-  StageHomeScreen(
-    catalog: catalog,
-    progressFactory: (_) => progress ?? _Memory(),
-    checksFactory: (_) => _Checks(),
-    controllerFactory: rig.factory,
-    paidFeaturesAvailable: paidFeaturesAvailable,
-    paidAccessCheck: paidAccessCheck,
-    budget: budget,
-    onHandle: onHandle,
-    layerBuilder: layerBuilder,
-    seed: 1,
+  (wrap ?? (w) => w)(
+    StageHomeScreen(
+      layerManager: layerManager,
+      earScreenBuilder: earScreenBuilder,
+      tunerOpener: tunerOpener,
+      catalog: catalog,
+      progressFactory: (_) => progress ?? _Memory(),
+      checksFactory: (_) => _Checks(),
+      controllerFactory: rig.factory,
+      paidFeaturesAvailable: paidFeaturesAvailable,
+      paidAccessCheck: paidAccessCheck,
+      budget: budget,
+      onHandle: onHandle,
+      layerBuilder: layerBuilder,
+      seed: 1,
+    ),
   ),
 );
 
@@ -444,13 +459,15 @@ void main() {
       final rig = _Rig();
       final seen = <StageHandle>[];
       await _boot(t, _stage(rig, onHandle: (c, h) => seen.add(h)));
-      await t.tap(find.byKey(const Key('stage-handle-other')));
-      await t.pump();
+      // The "other" handle opens a layer that covers the handles (05c), so
+      // it is tapped last.
       await t.tap(find.byKey(const Key('stage-handle-path')));
       await t.pump();
       await t.tap(find.byKey(const Key('stage-handle-setup')));
       await t.pump();
-      expect(seen, StageHandle.values);
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await t.pump();
+      expect(seen.toSet(), StageHandle.values.toSet());
       await _dispose(t, rig);
 
       final rig2 = _Rig();
@@ -985,6 +1002,467 @@ void main() {
       expect(find.byKey(const Key('practice-start')), findsOneWidget);
       expect(find.byType(SessionTuningGateCard), findsNothing);
       expect(t.takeException(), isNull);
+      await _dispose(t, rig);
+    });
+  });
+
+  group('05c ek i: Play re-verifies the membership', () {
+    Map<String, V1PracticeRecord> level1Done() {
+      final firstPaid = catalog.lessons.firstWhere(
+        (l) =>
+            l.availability == V1LessonAvailability.measured &&
+            !isFreeV1Lesson(l.id, paidFeaturesAvailable: true),
+      );
+      final upTo = catalog.lessons.indexOf(firstPaid);
+      return {
+        for (final l in catalog.lessons.take(upTo))
+          l.id: V1PracticeRecord(
+            lessonId: l.id,
+            runs: 1,
+            passedAt: DateTime.utc(2026, 11, 1),
+            passedBpm: 50,
+            completedAt: DateTime.utc(2026, 11, 1),
+            completedBpm: 60,
+          ),
+      };
+    }
+
+    Widget scoped(
+      _Rig rig,
+      Map<String, V1PracticeRecord> records,
+      Future<bool> Function(BuildContext) guard,
+    ) => AccountScope(
+      currentUserId: 'u1',
+      connection: AccountConnection(
+        userId: ValueNotifier<String?>('u1'),
+        pageBuilder: (_) => const SizedBox(),
+        hasPaidAccess: () async => true,
+        requirePaidAccess: guard,
+      ),
+      child: _stage(
+        rig,
+        progress: _Memory(records),
+        paidFeaturesAvailable: true,
+      ),
+    );
+
+    testWidgets('membership ended mid-session: Play does not start a paid '
+        'lesson', (t) async {
+      final rig = _Rig();
+      var asked = 0;
+      await _boot(
+        t,
+        scoped(rig, level1Done(), (_) async {
+          asked++;
+          return false;
+        }),
+      );
+      expect(
+        isFreeV1Lesson(
+          t
+              .widget<PracticeLoopScreen>(find.byType(PracticeLoopScreen))
+              .lesson
+              .id,
+          paidFeaturesAvailable: true,
+        ),
+        isFalse,
+      );
+      await _play(t);
+      await t.pump();
+      expect(asked, 1);
+      expect(rig.controller?.running ?? false, isFalse);
+      expect(rig.permissionCalls, 0);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('a member: Play starts', (t) async {
+      final rig = _Rig();
+      var asked = 0;
+      await _boot(
+        t,
+        scoped(rig, level1Done(), (_) async {
+          asked++;
+          return true;
+        }),
+      );
+      await _play(t);
+      await t.pump();
+      expect(asked, 1);
+      expect(rig.controller!.running, isTrue);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('a guard that throws: fail closed', (t) async {
+      final rig = _Rig();
+      await _boot(
+        t,
+        scoped(rig, level1Done(), (_) async => throw StateError('boom')),
+      );
+      await _play(t);
+      await t.pump();
+      expect(rig.controller?.running ?? false, isFalse);
+      expect(t.takeException(), isNull);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('a free lesson: no extra question, no delay', (t) async {
+      final rig = _Rig();
+      var asked = 0;
+      await _boot(
+        t,
+        scoped(rig, const {}, (_) async {
+          asked++;
+          return false;
+        }),
+      );
+      await _play(t);
+      expect(asked, 0);
+      expect(rig.controller!.running, isTrue);
+      await _dispose(t, rig);
+    });
+  });
+
+  group('05c ek c: reference bar and loop range on the shelf', () {
+    Future<void> shelf(WidgetTester t, String sequence, _Rig rig) async {
+      final c = rig.factory(
+        PracticeScore.parse(sequence),
+        PracticeTempo(openBpm: 60, targetBpm: 60),
+        const PassCriteria(minAccuracy: .8),
+      );
+      final listen = ReferenceListenController();
+      addTearDown(listen.dispose);
+      await _boot(
+        t,
+        practiceHost(
+          Scaffold(
+            body: SingleChildScrollView(
+              child: ToolShelf(
+                open: true,
+                onToggle: () {},
+                controller: c,
+                listen: listen,
+                pinned: false,
+                onPinned: (_) {},
+              ),
+            ),
+          ),
+          locale: 'tr',
+        ),
+      );
+    }
+
+    testWidgets('pitched line: the reference bar is shown', (t) async {
+      final rig = _Rig();
+      await shelf(t, 'E2 F2 G2 A2 | B2 C3 D3 E3', rig);
+      expect(find.byType(ReferenceListenBar), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('rhythm-only line: the reference bar is shown', (t) async {
+      final rig = _Rig();
+      await shelf(t, '4/4: q q ee q | h h', rig);
+      expect(find.byType(ReferenceListenBar), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('degree run (no pitches, not rhythm-only): no reference bar '
+        'and no empty "Referans" row', (t) async {
+      final rig = _Rig();
+      await shelf(t, '1-2-3-2-1 | 3-2-1-2-3', rig);
+      expect(find.byType(ReferenceListenBar), findsNothing);
+      expect(find.text('Referans'), findsNothing);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('loop on: default bars 1-2, a range slider picks the bars', (
+      t,
+    ) async {
+      final rig = _Rig();
+      await shelf(t, 'E2 F2 G2 A2 | B2 C3 D3 E3 | E2 F2 G2 A2', rig);
+      expect(find.byKey(const Key('stage-loop-range')), findsNothing);
+      await t.tap(find.byKey(const Key('stage-loop')));
+      await t.pump();
+      expect(rig.controller!.loopBars, (first: 0, last: 1));
+      final slider = find.byKey(const Key('stage-loop-range'));
+      expect(slider, findsOneWidget);
+      expect(t.widget<RangeSlider>(slider).values, const RangeValues(0, 1));
+      t.widget<RangeSlider>(slider).onChanged!(const RangeValues(1, 2));
+      await t.pump();
+      expect(rig.controller!.loopBars, (first: 1, last: 2));
+      await _dispose(t, rig);
+    });
+  });
+
+  group('05c layers', () {
+    late ContentRepository repo;
+    late CueTextResolver cueText;
+    setUpAll(() async {
+      await prepareRootTranslations();
+      repo = await ContentRepository.load();
+      cueText = await CueTextResolver.load();
+    });
+
+    Widget withRepo(Widget w) =>
+        scope.ContentRepositoryScope(repo: repo, cueText: cueText, child: w);
+
+    Future<void> boot(WidgetTester t, Widget w, {Size? size}) async {
+      t.view.physicalSize = size ?? const Size(420, 1800);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      await t.pumpWidget(w);
+      for (var i = 0; i < 4; i++) {
+        await t.pump();
+      }
+    }
+
+    Future<void> settle(WidgetTester t) async {
+      await t.pumpAndSettle();
+    }
+
+    StageLayerBuilder fake() =>
+        (c, h, close) => Text('layer-${h.name}', key: Key('layer-${h.name}'));
+
+    testWidgets('criterion 1: a second layer closes the first; glass <= 2', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final mgr = StageLayerManager();
+      addTearDown(mgr.dispose);
+      final budget = GlassLayerBudget();
+      addTearDown(budget.dispose);
+      await boot(
+        t,
+        _stage(rig, layerManager: mgr, budget: budget, layerBuilder: fake()),
+      );
+      expect(mgr.openLayer(StageLayer.other), isTrue);
+      await settle(t);
+      expect(find.byKey(const Key('layer-another')), findsOneWidget);
+      expect(mgr.openLayer(StageLayer.path), isTrue);
+      await settle(t);
+      expect(mgr.open, [StageLayer.path]);
+      expect(find.byKey(const Key('layer-another')), findsNothing);
+      expect(find.byKey(const Key('layer-path')), findsOneWidget);
+      expect(find.byType(GlassLayer).evaluate().length, lessThanOrEqualTo(2));
+      expect(budget.openCount, lessThanOrEqualTo(2));
+      expect(budget.openCount, 1);
+      expect(mgr.openLayer(StageLayer.setup), isTrue);
+      await settle(t);
+      expect(mgr.open, [StageLayer.setup]);
+      expect(find.byType(GlassLayer).evaluate().length, lessThanOrEqualTo(2));
+      expect(find.byKey(const Key('layer-path')), findsNothing);
+      await _dispose(t, rig);
+    });
+
+    for (final size in const [Size(360, 640), Size(412, 915)]) {
+      testWidgets('criterion 2: layer <= 60%, strip area >= 40% at '
+          '${size.width.toInt()}x${size.height.toInt()}', (t) async {
+        final rig = _Rig();
+        await boot(t, _stage(rig, wrap: withRepo), size: size);
+        await t.tap(find.byKey(const Key('stage-handle-other')));
+        await settle(t);
+        expect(find.byType(GlassLayer), findsOneWidget);
+        final layer = t.getRect(
+          find.descendant(
+            of: find.byType(GlassLayer),
+            matching: find.byType(FractionallySizedBox),
+          ),
+        );
+        expect(layer.height, lessThanOrEqualTo(size.height * 0.6 + 0.5));
+        expect(layer.top, greaterThanOrEqualTo(size.height * 0.4 - 0.5));
+        final scrim = t.getRect(find.byKey(const Key('stage-layer-scrim')));
+        expect(scrim.height, greaterThanOrEqualTo(size.height * 0.4 - 0.5));
+        expect(scrim.top, 0);
+        expect(t.takeException(), isNull);
+        await _dispose(t, rig);
+      });
+    }
+
+    testWidgets('criterion 3: suggestion line shows only with records', (
+      t,
+    ) async {
+      final rig = _Rig();
+      await boot(t, _stage(rig, wrap: withRepo));
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      expect(find.byKey(const Key('stage-suggestion')), findsNothing);
+      await _dispose(t, rig);
+
+      final first = catalog.lessons.firstWhere(
+        (l) => l.availability == V1LessonAvailability.measured,
+      );
+      final rig2 = _Rig();
+      await boot(
+        t,
+        _stage(
+          rig2,
+          wrap: withRepo,
+          progress: _Memory({
+            first.id: V1PracticeRecord(
+              lessonId: first.id,
+              runs: 2,
+              bestHeard: .3,
+              bestAccuracy: .9,
+              lastRunAt: DateTime.utc(2026, 11, 1),
+            ),
+          }),
+        ),
+      );
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      expect(find.byKey(const Key('stage-suggestion')), findsOneWidget);
+      expect(find.text(StageCopy.suggestMoveCloser.$2), findsOneWidget);
+      await _dispose(t, rig2);
+    });
+
+    testWidgets('criterion 4: ear opens in two taps; the tuner opens full '
+        'screen and back returns to the stage', (t) async {
+      final rig = _Rig();
+      await boot(
+        t,
+        _stage(
+          rig,
+          wrap: withRepo,
+          earScreenBuilder: (_) => const Scaffold(body: Text('ear-stub')),
+          tunerOpener: (c) => Navigator.of(c).push<void>(
+            MaterialPageRoute<void>(
+              builder: (_) => const Scaffold(body: Text('tuner-stub')),
+            ),
+          ),
+        ),
+      );
+      final lessonBefore = t
+          .widget<PracticeLoopScreen>(find.byType(PracticeLoopScreen))
+          .lesson
+          .id;
+      await t.tap(find.byKey(const Key('stage-handle-other'))); // 1
+      await settle(t);
+      await t.tap(find.byKey(const Key('stage-instr-ear'))); // 2
+      await settle(t);
+      expect(find.text('ear-stub'), findsOneWidget);
+      await t.binding.handlePopRoute();
+      await settle(t);
+      expect(find.text('ear-stub'), findsNothing);
+      expect(find.byKey(const Key('stage-home')), findsOneWidget);
+
+      await t.tap(find.byKey(const Key('stage-tuner-entry')));
+      await settle(t);
+      expect(find.text('tuner-stub'), findsOneWidget);
+      await t.binding.handlePopRoute();
+      await settle(t);
+      expect(find.byKey(const Key('stage-home')), findsOneWidget);
+      expect(
+        t.widget<PracticeLoopScreen>(find.byType(PracticeLoopScreen)).lesson.id,
+        lessonBefore,
+      );
+      expect(rig.controller!.running, isFalse);
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('criterion 5: guitar and ear are open; other instruments '
+        'follow the existing "coming soon" rule', (t) async {
+      final rig = _Rig();
+      await boot(
+        t,
+        _stage(
+          rig,
+          wrap: withRepo,
+          earScreenBuilder: (_) => const Scaffold(body: Text('ear-stub')),
+        ),
+      );
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      expect(ostinatoOpenInstruments, contains('guitar'));
+      expect(ostinatoEarTrainingOpen, isTrue);
+      expect(find.byKey(const Key('stage-instr-guitar')), findsOneWidget);
+      expect(find.byKey(const Key('stage-instr-ear')), findsOneWidget);
+      final others = repo.disciplines.where(
+        (d) => d.status == 'live' && !ostinatoOpenInstruments.contains(d.id),
+      );
+      expect(others, isNotEmpty);
+      final d = others.first;
+      await t.ensureVisible(find.byKey(Key('stage-instr-${d.id}')));
+      await t.tap(find.byKey(Key('stage-instr-${d.id}')));
+      await settle(t);
+      expect(find.byType(ComingSoonInstrumentScreen), findsOneWidget);
+      await t.binding.handlePopRoute();
+      await settle(t);
+      // Guitar: the stage is already on it; the layer just closes.
+      await t.tap(find.byKey(const Key('stage-instr-guitar')));
+      await settle(t);
+      expect(find.byType(GlassLayer), findsNothing);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('criterion 6: focus goes into the layer, back to the handle', (
+      t,
+    ) async {
+      final rig = _Rig();
+      await boot(
+        t,
+        _stage(
+          rig,
+          layerBuilder: (c, h, close) => Column(
+            children: [
+              TextButton(
+                key: const Key('first-item'),
+                onPressed: close,
+                child: const Text('first'),
+              ),
+              TextButton(
+                key: const Key('second-item'),
+                onPressed: close,
+                child: const Text('second'),
+              ),
+            ],
+          ),
+        ),
+      );
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      bool focused(String k) {
+        final ctx = FocusManager.instance.primaryFocus?.context;
+        if (ctx == null) return false;
+        var inside = false;
+        void visit(Element e) {
+          if (e.widget.key == Key(k)) inside = true;
+        }
+
+        visit(ctx as Element);
+        ctx.visitAncestorElements((e) {
+          visit(e);
+          return !inside;
+        });
+        return inside;
+      }
+
+      expect(focused('first-item'), isTrue);
+      expect(focused('second-item'), isFalse);
+      await t.tap(find.byKey(const Key('first-item')));
+      await settle(t);
+      expect(find.byKey(const Key('first-item')), findsNothing);
+      expect(focused('stage-handle-other'), isTrue);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('criterion 7: while playing nothing opens (manager, handle, '
+        'real layer)', (t) async {
+      final rig = _Rig();
+      final mgr = StageLayerManager();
+      addTearDown(mgr.dispose);
+      await boot(t, _stage(rig, layerManager: mgr, wrap: withRepo));
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      expect(find.byType(GlassLayer), findsOneWidget);
+      await t.tap(find.byKey(const Key('stage-instr-guitar')));
+      await settle(t);
+      await _play(t);
+      expect(rig.controller!.running, isTrue);
+      expect(mgr.openLayer(StageLayer.other), isFalse);
+      expect(mgr.isOpen, isFalse);
+      expect(find.byKey(const Key('stage-handles')), findsNothing);
+      expect(find.byType(GlassLayer), findsNothing);
       await _dispose(t, rig);
     });
   });

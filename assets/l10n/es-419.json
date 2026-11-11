@@ -8774,6 +8774,10 @@
     "31a8d45319dcb649": "Bucle",
     "679a1a087e7ca515": "Ayuda",
     "a12328e996432488": "Mantener el metrónomo a la vista",
-    "c7729b4a16a26bca": "Ejecución incompleta: no se midió y no se registró ningún paso."
+    "c7729b4a16a26bca": "Ejecución incompleta: no se midió y no se registró ningún paso.",
+    "dc41214aeb1440d9": "Retoma donde lo dejaste.",
+    "5811943f3e136319": "Algunas notas no se escucharon. Acércate al micrófono y toca de nuevo.",
+    "61b41dda85ac82ae": "Algunas notas sonaron distintas. Escucha primero la referencia y luego toca.",
+    "fc574f89949c82e9": "El ritmo se desfasó. Baja un poco el tempo."
   }
 }

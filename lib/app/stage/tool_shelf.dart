@@ -100,34 +100,61 @@ class ToolShelf extends StatelessWidget {
                 value: pinned,
                 onChanged: onPinned,
               ),
-              _row(
-                context,
-                StageCopy.reference,
-                ReferenceListenBar(
-                  controller: listen,
-                  score: c.score,
-                  tempos: <int>[c.tempo.bpm],
+              // Same condition as the practice screen's own bar (the stage
+              // never hides guides, so `Guide.referenceAudio` always holds).
+              if (c.score.hasPitches || c.score.isRhythmOnly)
+                _row(
+                  context,
+                  StageCopy.reference,
+                  ReferenceListenBar(
+                    controller: listen,
+                    score: c.score,
+                    tempos: <int>[c.tempo.bpm],
+                  ),
                 ),
-              ),
               if (c.score.barCount > 1)
                 ListenableBuilder(
                   listenable: c,
                   builder: (context, _) {
                     final loop = c.loopBars;
-                    return SwitchListTile(
-                      key: const Key('stage-loop'),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
-                      dense: true,
-                      title: Text(uiText(context, StageCopy.loop)),
-                      subtitle: loop == null
-                          ? null
-                          : Text('${loop.first + 1}–${loop.last + 1}'),
-                      value: loop != null,
-                      onChanged: (v) => c.loopBars = v
-                          ? (first: 0, last: c.score.barCount > 1 ? 1 : 0)
-                          : null,
+                    final bars = c.score.barCount;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        SwitchListTile(
+                          key: const Key('stage-loop'),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                          ),
+                          dense: true,
+                          title: Text(uiText(context, StageCopy.loop)),
+                          subtitle: loop == null
+                              ? null
+                              : Text('${loop.first + 1}–${loop.last + 1}'),
+                          value: loop != null,
+                          onChanged: (v) => c.loopBars = v
+                              ? (first: 0, last: bars > 1 ? 1 : 0)
+                              : null,
+                        ),
+                        if (loop != null)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: RangeSlider(
+                              key: const Key('stage-loop-range'),
+                              min: 0,
+                              max: (bars - 1).toDouble(),
+                              divisions: bars - 1,
+                              values: RangeValues(
+                                loop.first.toDouble(),
+                                loop.last.toDouble(),
+                              ),
+                              onChanged: (v) => c.loopBars = (
+                                first: v.start.round(),
+                                last: v.end.round(),
+                              ),
+                            ),
+                          ),
+                      ],
                     );
                   },
                 ),
