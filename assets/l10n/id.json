@@ -8788,18 +8788,19 @@
     "17b6b0e1afd14e00": "Suara aplikasi sendiri terdengar di sini, jadi aku tidak menilai nada ini.",
     "979084fd4ae01d09": "Kamu melewati nada ini di “Tunggu aku”.",
     "7453c319c1bf8ca5": "Pendengaran dimatikan",
-    "319b03086a6ef932": "Mikrofon tidak diizinkan, jadi tidak ada yang diukur. Metronom, referensi, dan tuner tetap berfungsi.",
     "d76c2a76e390b8d1": "Penghitung: tidak diukur",
     "bbac55b3b0a022b5": "Buka Pengaturan",
-    "9ad9ec0433d08487": "Sembunyikan",
     "bd61ef7fa80d6a8f": "Penyiapan dan perangkat",
     "54c027eba296ec2f": "Mikrofon: diizinkan",
-    "965aa73751f00426": "Mikrofon: tidak diizinkan",
-    "118ba2f6f3b02eb2": "Mikrofon: ditolak permanen",
     "a9cff57ea62b8da7": "Kalibrasi latensi",
     "ce0ecc84043c5047": "Kebisingan ruangan: tidak diukur",
     "05c233abdf453ebb": "Kebisingan ruangan: tenang",
     "ade13ea684ac2219": "Kebisingan ruangan: agak bising",
-    "44b42ffae045b975": "Kebisingan ruangan: sangat bising"
+    "44b42ffae045b975": "Kebisingan ruangan: sangat bising",
+    "3d22624a319dd533": "Mikrofon tidak diizinkan, jadi tidak ada yang diukur. Metronom dan referensi berfungsi; tuner memerlukan mikrofon.",
+    "e2b7e755f1959257": "Sembunyikan",
+    "89e6be2f6a03a557": "Mikrofon: tanpa izin",
+    "7285764d37c8aa5c": "Mikrofon: izin dimatikan",
+    "0bd4a35e06933c8a": "Mikrofon: dibatasi"
   }
 }

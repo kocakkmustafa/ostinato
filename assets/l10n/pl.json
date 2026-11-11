@@ -8809,18 +8809,19 @@
     "17b6b0e1afd14e00": "Tutaj słychać było dźwięk samej aplikacji, więc nie oceniałem tej nuty.",
     "979084fd4ae01d09": "Ta nuta została pominięta w „Poczekaj na mnie”.",
     "7453c319c1bf8ca5": "Słuchanie jest wyłączone",
-    "319b03086a6ef932": "Mikrofon nie jest dozwolony, więc nic nie jest mierzone. Metronom, wzorzec i stroik działają.",
     "d76c2a76e390b8d1": "Licznik: bez pomiaru",
     "bbac55b3b0a022b5": "Przejdź do ustawień",
-    "9ad9ec0433d08487": "Wycisz",
     "bd61ef7fa80d6a8f": "Ustawienia i urządzenie",
     "54c027eba296ec2f": "Mikrofon: dozwolony",
-    "965aa73751f00426": "Mikrofon: niedozwolony",
-    "118ba2f6f3b02eb2": "Mikrofon: trwale odrzucony",
     "a9cff57ea62b8da7": "Kalibracja opóźnienia",
     "ce0ecc84043c5047": "Hałas w pokoju: nie mierzono",
     "05c233abdf453ebb": "Hałas w pokoju: cicho",
     "ade13ea684ac2219": "Hałas w pokoju: trochę głośno",
-    "44b42ffae045b975": "Hałas w pokoju: bardzo głośno"
+    "44b42ffae045b975": "Hałas w pokoju: bardzo głośno",
+    "3d22624a319dd533": "Mikrofon nie jest dozwolony, więc nic nie jest mierzone. Metronom i wzorzec działają; stroik potrzebuje mikrofonu.",
+    "e2b7e755f1959257": "Ukryj",
+    "89e6be2f6a03a557": "Mikrofon: brak zgody",
+    "7285764d37c8aa5c": "Mikrofon: zgoda wyłączona",
+    "0bd4a35e06933c8a": "Mikrofon: ograniczony"
   }
 }

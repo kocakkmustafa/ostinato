@@ -8795,18 +8795,19 @@
     "17b6b0e1afd14e00": "O som do próprio app estava audível aqui, então não julguei esta nota.",
     "979084fd4ae01d09": "Você pulou esta nota em “Esperar por mim”.",
     "7453c319c1bf8ca5": "A escuta está desativada",
-    "319b03086a6ef932": "O microfone não está permitido, por isso nada é medido. O metrônomo, a referência e o afinador funcionam.",
     "d76c2a76e390b8d1": "Contador: não medido",
     "bbac55b3b0a022b5": "Ir para Ajustes",
-    "9ad9ec0433d08487": "Silenciar",
     "bd61ef7fa80d6a8f": "Ajuste e dispositivo",
     "54c027eba296ec2f": "Microfone: permitido",
-    "965aa73751f00426": "Microfone: não permitido",
-    "118ba2f6f3b02eb2": "Microfone: negado permanentemente",
     "a9cff57ea62b8da7": "Calibração de latência",
     "ce0ecc84043c5047": "Ruído do ambiente: não medido",
     "05c233abdf453ebb": "Ruído do ambiente: baixo",
     "ade13ea684ac2219": "Ruído do ambiente: um pouco alto",
-    "44b42ffae045b975": "Ruído do ambiente: muito alto"
+    "44b42ffae045b975": "Ruído do ambiente: muito alto",
+    "3d22624a319dd533": "O microfone não está permitido, por isso nada é medido. O metrônomo e a referência funcionam; o afinador precisa do microfone.",
+    "e2b7e755f1959257": "Ocultar",
+    "89e6be2f6a03a557": "Microfone: sem permissão",
+    "7285764d37c8aa5c": "Microfone: permissão desativada",
+    "0bd4a35e06933c8a": "Microfone: restrito"
   }
 }

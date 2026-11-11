@@ -52,8 +52,9 @@ void main() {
   group('05f-4b mic status row', () {
     for (final e in {
       PermissionStatus.granted: 'Mikrofon: verildi',
-      PermissionStatus.denied: 'Mikrofon: reddedildi',
-      PermissionStatus.permanentlyDenied: 'Mikrofon: kalıcı olarak reddedildi',
+      PermissionStatus.denied: 'Mikrofon: izin yok',
+      PermissionStatus.permanentlyDenied: 'Mikrofon: izin kapalı',
+      PermissionStatus.restricted: 'Mikrofon: kısıtlı',
     }.entries) {
       testWidgets('05f-4b: ${e.key.name} -> ${e.value}', (t) async {
         final rig = await open(t, mic: e.key);

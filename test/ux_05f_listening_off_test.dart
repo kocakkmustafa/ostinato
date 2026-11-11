@@ -86,21 +86,73 @@ void main() {
     );
 
     testWidgets(
+      '05f-1e-control: microphone allowed -> marks and counters show',
+      (t) async {
+        final rig = Rig05f();
+        await boot05f(t, stage05f(rig, catalog));
+        await play05f(t);
+        expect(find.byKey(const Key('stage-listening-off')), findsNothing);
+        expect(find.byKey(const Key('practice-counts')), findsOneWidget);
+        expect(find.byKey(const Key('practice-count-correct')), findsOneWidget);
+        expect(find.textContaining('✓'), findsWidgets);
+        expect(
+          find.byKey(const Key('stage-listening-off-counter')),
+          findsNothing,
+        );
+        await t.pump(const Duration(milliseconds: 100));
+        await dispose05f(t, rig);
+      },
+    );
+
+    testWidgets(
       '05f-1f: strip, metronome, reference and tuner stay reachable',
       (t) async {
-        final rig = await denied(t);
+        final hooks = Hooks05f();
+        final rig = await denied(t, hooks: hooks);
         expect(find.byKey(const Key('stage-listening-off')), findsOneWidget);
         await t.tap(find.byKey(const Key('stage-shelf-toggle')));
         await t.pump();
         expect(find.byKey(const Key('stage-pin-metronome')), findsOneWidget);
         expect(find.byType(ReferenceListenBar), findsOneWidget);
+        // Metronome pin is a working switch; the reference buttons are
+        // enabled and inside the screen.
+        expect(
+          t
+              .widget<SwitchListTile>(
+                find.byKey(const Key('stage-pin-metronome')),
+              )
+              .value,
+          isFalse,
+        );
+        await t.tap(find.byKey(const Key('stage-pin-metronome')));
+        await t.pump();
+        expect(
+          t
+              .widget<SwitchListTile>(
+                find.byKey(const Key('stage-pin-metronome')),
+              )
+              .value,
+          isTrue,
+        );
+        final ref = find.byWidgetPredicate(
+          (w) =>
+              w is OutlinedButton &&
+              w.key.toString().contains('reference-listen-'),
+        );
+        expect(ref, findsWidgets);
+        expect(t.widget<OutlinedButton>(ref.first).onPressed, isNotNull);
         await t.tap(find.byKey(const Key('stage-shelf-toggle')));
         await t.pump();
         await t.tap(find.byKey(const Key('stage-handle-other')));
         await t.pump();
         await t.pump();
-        expect(find.byKey(const Key('stage-instr-ear')), findsOneWidget);
         expect(find.byKey(const Key('stage-tuner-entry')), findsOneWidget);
+        await t.tap(find.byKey(const Key('stage-tuner-entry')));
+        await t.pump();
+        expect(hooks.tunerOpened, 1);
+        await t.tap(find.byKey(const Key('stage-instr-ear')));
+        await t.pumpAndSettle();
+        expect(find.text('ear-screen'), findsOneWidget);
         expect(t.takeException(), isNull);
         await dispose05f(t, rig);
       },
@@ -126,17 +178,19 @@ void main() {
     testWidgets(
       '05f-iii2: refusal shows Go to Settings + a visible tuner path',
       (t) async {
-        final rig = await denied(t);
+        final hooks = Hooks05f();
+        final rig = await denied(t, hooks: hooks);
         expect(find.byKey(const Key('stage-open-settings')), findsOneWidget);
         expect(find.text('Ayarlara git'), findsOneWidget);
-        // tuner: the card's own entry or the layer's entry is reachable
+        // The tuning card stays, and its tune button opens the tuner.
         final card = find.byKey(const Key('session-tuning-gate-tune'));
-        final handle = find.byKey(const Key('stage-handle-other'));
-        expect(
-          card.evaluate().isNotEmpty || handle.evaluate().isNotEmpty,
-          isTrue,
-        );
         expect(card, findsOneWidget);
+        // The mode block scrolls inside its bounded height: bring the card in.
+        await t.ensureVisible(card);
+        await t.pump();
+        await t.tap(card);
+        await t.pump();
+        expect(hooks.tunerOpened, 1);
         await dispose05f(t, rig);
       },
     );
@@ -152,9 +206,9 @@ void main() {
       await dispose05f(t, rig);
     });
 
-    testWidgets('05f-2b: Sustur hides the link; mode stays', (t) async {
+    testWidgets('05f-2b: Gizle hides the link; mode stays', (t) async {
       final rig = await denied(t);
-      expect(find.text('Sustur'), findsOneWidget);
+      expect(find.text('Gizle'), findsOneWidget);
       await t.tap(find.byKey(const Key('stage-open-settings-mute')));
       await t.runAsync(
         () => Future<void>.delayed(const Duration(milliseconds: 50)),

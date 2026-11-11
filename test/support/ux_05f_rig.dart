@@ -59,13 +59,17 @@ class Rig05f {
   Rig05f({this.permission = PermissionStatus.granted}) {
     audio = AudioInputController(
       channel: channel,
-      requestMicrophonePermission: () async => permission,
+      requestMicrophonePermission: () async {
+        permissionCalls++;
+        return permission;
+      },
       pcmDeliveryTimeout: const Duration(minutes: 5),
     );
   }
   final PermissionStatus permission;
   final channel = FakeAudioCaptureChannel();
   late final AudioInputController audio;
+  int permissionCalls = 0;
   PracticeSessionController? controller;
   PracticeSessionController factory(
     PracticeScore score,
@@ -88,6 +92,7 @@ class Hooks05f {
   int appSettingsOpened = 0;
   int accountOpened = 0;
   int tunerOpened = 0;
+  Future<void> Function()? onSetup;
 }
 
 Widget stage05f(
@@ -99,32 +104,44 @@ Widget stage05f(
   SetupProfileStore? setupStore,
   String locale = 'tr',
   double textScale = 1.0,
+  bool realOpeners = false,
+  Widget Function(Widget)? wrap,
 }) {
   final h = hooks ?? Hooks05f();
-  return practiceHost(
-    locale: locale,
-    Builder(
-      builder: (context) => MediaQuery(
-        data: MediaQuery.of(
-          context,
-        ).copyWith(textScaler: TextScaler.linear(textScale)),
-        child: StageHomeScreen(
-          catalog: catalog,
-          progressFactory: (_) => Mem05f(),
-          checksFactory: (_) => Checks05f(),
-          controllerFactory: rig.factory,
-          seed: 1,
-          setupStore: setupStore ?? MemorySetupProfileStore(),
-          micStatus: micStatus,
-          listeningOffStore: store ?? MemoryListeningOffStore(),
-          appSettingsOpener: () async {
-            h.appSettingsOpened++;
-            return true;
-          },
-          setupOpener: (_) async => h.setupOpened++,
-          settingsOpener: (_) async => h.settingsOpened++,
-          accountOpener: (_) async => h.accountOpened++,
-          tunerOpener: (_) async => h.tunerOpened++,
+  return (wrap ?? (w) => w)(
+    practiceHost(
+      locale: locale,
+      Builder(
+        builder: (context) => MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: TextScaler.linear(textScale)),
+          child: StageHomeScreen(
+            catalog: catalog,
+            progressFactory: (_) => Mem05f(),
+            checksFactory: (_) => Checks05f(),
+            controllerFactory: rig.factory,
+            seed: 1,
+            setupStore: setupStore ?? MemorySetupProfileStore(),
+            micStatus: micStatus,
+            listeningOffStore: store ?? MemoryListeningOffStore(),
+            appSettingsOpener: () async {
+              h.appSettingsOpened++;
+              return true;
+            },
+            setupOpener: realOpeners
+                ? null
+                : (_) async {
+                    h.setupOpened++;
+                    await h.onSetup?.call();
+                  },
+            settingsOpener: realOpeners
+                ? null
+                : (_) async => h.settingsOpened++,
+            accountOpener: realOpeners ? null : (_) async => h.accountOpened++,
+            tunerOpener: (_) async => h.tunerOpened++,
+            earScreenBuilder: (_) => const Scaffold(body: Text('ear-screen')),
+          ),
         ),
       ),
     ),

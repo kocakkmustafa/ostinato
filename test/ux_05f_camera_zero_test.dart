@@ -43,6 +43,7 @@ void main() {
 
   test('05f-3a: the camera flags ship closed', () {
     expect(ostinatoCameraPracticeAvailable, isFalse);
+    expect(ostinatoCameraLessonsOpen, isFalse);
   });
 
   testWidgets('05f-3b: stage + refusal asks for the camera 0 times', (t) async {

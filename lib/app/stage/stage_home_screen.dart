@@ -33,7 +33,7 @@ import 'device_layer.dart';
 import 'listening_off_store.dart';
 import 'other_practice_layer.dart';
 import 'package:permission_handler/permission_handler.dart'
-    show PermissionStatus, openAppSettings;
+    show PermissionStatus, PermissionStatusGetters, openAppSettings;
 import 'path_layer.dart';
 import 'path_summary.dart';
 import 'stage_copy.dart';
@@ -171,7 +171,8 @@ class _StageData {
   final String? nextId;
 }
 
-class _StageHomeScreenState extends State<StageHomeScreen> {
+class _StageHomeScreenState extends State<StageHomeScreen>
+    with WidgetsBindingObserver {
   late final GlassLayerBudget _ownBudget = GlassLayerBudget();
   GlassLayerBudget get _budget => widget.budget ?? _ownBudget;
   final ReferenceListenController _listen = ReferenceListenController();
@@ -181,6 +182,10 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
 
   // 05f: the microphone was refused on the last start -> "Listening is off".
   bool _micOff = false;
+  // The failure the last notification carried (the mode is entered on the
+  // TRANSITION to 'permission', so a later unrelated notification does not
+  // bring it back after the learner allowed the microphone).
+  String? _lastFailure;
   // null = not read yet (the link stays hidden until the store answers).
   bool? _hintMuted;
   ListeningOffStore? _ownOffStore;
@@ -221,6 +226,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   void initState() {
     super.initState();
     _layers.addListener(_onLayers);
+    WidgetsBinding.instance.addObserver(this);
     unawaited(_readMuted());
   }
 
@@ -387,7 +393,30 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   void _retry() => setState(() => _data = _load(_accountId));
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _micOff) {
+      unawaited(_recheckMic());
+    }
+  }
+
+  /// Read only (never asks): the learner may have allowed the microphone in
+  /// the system Settings; then the mode closes.
+  Future<void> _recheckMic() async {
+    PermissionStatus? status;
+    try {
+      status = await (widget.micStatus ?? MicPermissionGate.status)();
+    } on Object {
+      return;
+    }
+    if (!mounted || !_micOff) return;
+    if (status.isGranted || status.isLimited || status.isProvisional) {
+      setState(() => _micOff = false);
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _layers.removeListener(_onLayers);
     for (final n in _handleFocus.values) {
       n.dispose();
@@ -411,8 +440,17 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
 
   void _onRun() {
     if (!mounted) return;
-    final micOff = _pc?.failure == 'permission';
-    if (micOff != _micOff) setState(() => _micOff = micOff);
+    final failure = _pc?.failure;
+    final entered = failure == 'permission' && _lastFailure != 'permission';
+    _lastFailure = failure;
+    // Entered on a new refusal; left only when the microphone really runs
+    // (a retry's reset must not flash the counters), or on resume (above).
+    final listening = _pc?.phase == PracticePhase.running;
+    if (entered && !_micOff) {
+      setState(() => _micOff = true);
+    } else if (listening && _micOff) {
+      setState(() => _micOff = false);
+    }
     final playing = _pc?.running ?? false;
     if (playing == _playing) return;
     _budget.playing = playing;
@@ -511,6 +549,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
       key: const Key('stage-device-layer-host'),
       micStatus: widget.micStatus ?? () => MicPermissionGate.status(),
       profile: () => (widget.setupStore ?? FileSetupProfileStore.device).load(),
+      openAppSettings: _goToSettings,
       openLatency: () =>
           (widget.setupOpener ??
           (c) => openSetupWizard(c, store: widget.setupStore))(context),
@@ -529,81 +568,100 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   }
 
   /// 05f: "Listening is off". Says plainly that nothing is measured and why,
-  /// keeps Go to Settings in view (until muted) and the tuning card in reach.
+  /// keeps Go to Settings in view (until hidden) and the tuning card in
+  /// reach. With the tool shelf open it shrinks to one line so the play area
+  /// keeps its room; otherwise the block scrolls inside a bounded height.
   Widget _listeningOff(BuildContext context, _StageData data) {
     final p = OstinatoPalette.of(context);
     final height = MediaQuery.sizeOf(context).height;
-    final button = TextButton.styleFrom(minimumSize: const Size(48, 48));
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: height * 0.2),
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Semantics(
-                container: true,
-                label: uiText(context, StageCopy.listeningOff),
-                child: Container(
-                  key: const Key('stage-listening-off'),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: p.surface,
-                    border: Border.all(color: p.ink.withValues(alpha: 0.3)),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      ExcludeSemantics(
-                        child: Text(
-                          uiText(context, StageCopy.listeningOff),
-                          style: hankenText(size: 14, weight: FontWeight.w600),
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        uiText(context, StageCopy.listeningOffWhy),
-                        style: hankenText(size: 13),
-                      ),
-                      const SizedBox(height: 4),
-                      if (_hintMuted == false)
-                        Wrap(
-                          spacing: 8,
-                          children: <Widget>[
-                            TextButton(
-                              key: const Key('stage-open-settings'),
-                              style: button,
-                              onPressed: _goToSettings,
-                              child: Text(
-                                uiText(context, StageCopy.goToSettings),
-                              ),
-                            ),
-                            TextButton(
-                              key: const Key('stage-open-settings-mute'),
-                              style: button,
-                              onPressed: _muteHint,
-                              child: Text(uiText(context, StageCopy.muteHint)),
-                            ),
-                          ],
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-              if (data.lesson.lesson.course == 'gtr') ...<Widget>[
-                const SizedBox(height: 8),
-                SessionTuningGateCard(
-                  preset: TuningPresets.guitarStandard,
-                  onTune: (c) =>
-                      (widget.tunerOpener ?? (c) => tuner.openTuner(c))(c),
-                ),
-              ],
-            ],
-          ),
+    final compact = _shelfOpen;
+    final button = TextButton.styleFrom(
+      minimumSize: const Size(48, 48),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+    );
+    final title = Text(
+      uiText(context, StageCopy.listeningOff),
+      style: hankenText(size: 14, weight: FontWeight.w600),
+    );
+    final links = <Widget>[
+      if (_hintMuted == false) ...<Widget>[
+        TextButton(
+          key: const Key('stage-open-settings'),
+          style: button,
+          onPressed: _goToSettings,
+          child: Text(uiText(context, StageCopy.goToSettings)),
         ),
+        TextButton(
+          key: const Key('stage-open-settings-mute'),
+          style: button,
+          onPressed: _muteHint,
+          child: Text(uiText(context, StageCopy.muteHint)),
+        ),
+      ],
+    ];
+    final band = Semantics(
+      container: true,
+      label: uiText(context, StageCopy.listeningOff),
+      child: Container(
+        key: const Key('stage-listening-off'),
+        padding: EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: compact ? 2 : 12,
+        ),
+        decoration: BoxDecoration(
+          color: p.surface,
+          border: Border.all(color: p.ink.withValues(alpha: 0.3)),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: compact
+            ? Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                children: <Widget>[
+                  ExcludeSemantics(child: title),
+                  // Only the way to Settings; Hide is in the full band
+                  // (tool shelf closed).
+                  ...links.take(1),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  ExcludeSemantics(child: title),
+                  const SizedBox(height: 4),
+                  Text(
+                    uiText(context, StageCopy.listeningOffWhy),
+                    style: hankenText(size: 13),
+                  ),
+                  if (links.isNotEmpty) Wrap(spacing: 8, children: links),
+                ],
+              ),
       ),
+    );
+    final card = !compact && data.lesson.lesson.course == 'gtr'
+        ? Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: SessionTuningGateCard(
+              preset: TuningPresets.guitarStandard,
+              onTune: (c) =>
+                  (widget.tunerOpener ?? (c) => tuner.openTuner(c))(c),
+            ),
+          )
+        : null;
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[band, ?card],
+    );
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+      child: compact
+          ? content
+          : ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: height > 700 ? 340 : height * 0.32,
+              ),
+              child: SingleChildScrollView(child: content),
+            ),
     );
   }
 
@@ -807,7 +865,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                   Semantics(
                     sortKey: const OrdinalSortKey(2),
                     child: ToolShelf(
-                      maxContentHeight: height * 0.34,
+                      maxContentHeight: height * (_micOff ? 0.24 : 0.34),
                       open: _shelfOpen,
                       onToggle: () => setState(() => _shelfOpen = !_shelfOpen),
                       controller: _pc,

@@ -105,21 +105,28 @@ abstract final class StageCopy {
   // statements of what is and is not measured; no blame, no future promise.
   static const UiCopy listeningOff = ('Listening is off', 'Dinleme kapalı');
   static const UiCopy listeningOffWhy = (
-    'The microphone is not allowed, so nothing is measured. The metronome, the reference and the tuner work.',
-    'Mikrofon izni verilmediği için ölçüm yapılmıyor. Metronom, referans ve akortçu çalışır.',
+    'The microphone is not allowed, so nothing is measured. The metronome and the reference work; the tuner needs the microphone.',
+    'Mikrofon izni verilmediği için ölçüm yapılmıyor. Metronom ve referans çalışır; akortçu mikrofon ister.',
   );
-  static const UiCopy counterOff = ('Counter: not measured', 'Sayaç: ölçülmüyor');
+  static const UiCopy counterOff = (
+    'Counter: not measured',
+    'Sayaç: ölçülmüyor',
+  );
   static const UiCopy goToSettings = ('Go to Settings', 'Ayarlara git');
-  static const UiCopy muteHint = ('Mute', 'Sustur');
+  static const UiCopy muteHint = ('Hide', 'Gizle');
   static const UiCopy deviceTitle = ('Setup and device', 'Ayar ve cihaz');
   static const UiCopy micAllowed = ('Microphone: allowed', 'Mikrofon: verildi');
   static const UiCopy micDenied = (
-    'Microphone: not allowed',
-    'Mikrofon: reddedildi',
+    'Microphone: no permission',
+    'Mikrofon: izin yok',
   );
   static const UiCopy micBlocked = (
-    'Microphone: permanently denied',
-    'Mikrofon: kalıcı olarak reddedildi',
+    'Microphone: permission off',
+    'Mikrofon: izin kapalı',
+  );
+  static const UiCopy micRestricted = (
+    'Microphone: restricted',
+    'Mikrofon: kısıtlı',
   );
   static const UiCopy latencyCalibration = (
     'Latency calibration',
@@ -174,6 +181,7 @@ abstract final class StageCopy {
     micAllowed,
     micDenied,
     micBlocked,
+    micRestricted,
     latencyCalibration,
     noiseUnknown,
     noiseQuiet,
