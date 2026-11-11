@@ -1,6 +1,7 @@
 // OST-UX-05b — stage shell and root change (flag closed by default), opaque
 // tool shelf, pinned metronome, back behaviour. Criteria 1..7 of
 // docs/yula-execution/design/04-backlog-ux-05.md (UX-05b).
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as math;
@@ -8,6 +9,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/account_connection.dart';
 import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/app_message_ids.dart';
 import 'package:ostinato/app/audio/audio_capture_channel.dart';
@@ -29,7 +31,9 @@ import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
 import 'package:ostinato/app/practice/loop/practice_transport.dart';
 import 'package:ostinato/app/practice/loop/v1_course_catalog.dart';
 import 'package:ostinato/app/screens/library_screen.dart';
+import 'package:ostinato/app/course_access.dart';
 import 'package:ostinato/app/stage/stage_copy.dart';
+import 'package:ostinato/app/tuner/session_tuning_gate.dart';
 import 'package:ostinato/app/stage/stage_home_screen.dart';
 import 'package:ostinato/main.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -171,6 +175,8 @@ Widget _stage(
   void Function(BuildContext, StageHandle)? onHandle,
   StageLayerBuilder? layerBuilder,
   String locale = 'tr',
+  bool paidFeaturesAvailable = false,
+  Future<bool> Function()? paidAccessCheck,
 }) => practiceHost(
   locale: locale,
   StageHomeScreen(
@@ -178,7 +184,8 @@ Widget _stage(
     progressFactory: (_) => progress ?? _Memory(),
     checksFactory: (_) => _Checks(),
     controllerFactory: rig.factory,
-    paidFeaturesAvailable: false,
+    paidFeaturesAvailable: paidFeaturesAvailable,
+    paidAccessCheck: paidAccessCheck,
     budget: budget,
     onHandle: onHandle,
     layerBuilder: layerBuilder,
@@ -752,6 +759,233 @@ void main() {
           }
         }
       }
+    });
+  });
+
+  group('05b2 open points (a)(b)(e)', () {
+    // Every lesson before the first measured paid one is passed: `next` is
+    // that paid lesson (level 2 or later).
+    Map<String, V1PracticeRecord> level1Done() {
+      final firstPaid = catalog.lessons.firstWhere(
+        (l) =>
+            l.availability == V1LessonAvailability.measured &&
+            !isFreeV1Lesson(l.id, paidFeaturesAvailable: true),
+      );
+      final upTo = catalog.lessons.indexOf(firstPaid);
+      return {
+        for (final l in catalog.lessons.take(upTo))
+          l.id: V1PracticeRecord(
+            lessonId: l.id,
+            runs: 1,
+            passedAt: DateTime.utc(2026, 11, 1),
+            passedBpm: 50,
+            completedAt: DateTime.utc(2026, 11, 1),
+            completedBpm: 60,
+          ),
+      };
+    }
+
+    String shown(WidgetTester t) =>
+        t.widget<PracticeLoopScreen>(find.byType(PracticeLoopScreen)).lesson.id;
+
+    testWidgets('(a) member: the paid next lesson (s2+) is shown', (t) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      expect(next.id, startsWith('gtr-s2-'));
+      expect(next.availability, V1LessonAvailability.measured);
+      expect(isFreeV1Lesson(next.id, paidFeaturesAvailable: true), isFalse);
+      final rig = _Rig();
+      await _boot(
+        t,
+        _stage(
+          rig,
+          progress: _Memory(records),
+          paidFeaturesAvailable: true,
+          paidAccessCheck: () async => true,
+        ),
+      );
+      expect(shown(t), next.id);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('(a) free user: the paid next lesson is NOT shown', (t) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      final rig = _Rig();
+      await _boot(
+        t,
+        _stage(
+          rig,
+          progress: _Memory(records),
+          paidFeaturesAvailable: true,
+          paidAccessCheck: () async => false,
+        ),
+      );
+      expect(shown(t), isNot(next.id));
+      expect(
+        isFreeV1Lesson(shown(t), paidFeaturesAvailable: true),
+        isTrue,
+        reason: 'safe fallback stays a free measured lesson',
+      );
+      await _dispose(t, rig);
+    });
+
+    testWidgets('(a) a check that throws: not a member, free lesson', (
+      t,
+    ) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      final rig = _Rig();
+      await _boot(
+        t,
+        _stage(
+          rig,
+          progress: _Memory(records),
+          paidFeaturesAvailable: true,
+          paidAccessCheck: () => throw StateError('boom'),
+        ),
+      );
+      expect(shown(t), isNot(next.id));
+      expect(isFreeV1Lesson(shown(t), paidFeaturesAvailable: true), isTrue);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('(a) a check that hangs: after the timeout the free lesson '
+        'shows and Play works', (t) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      final rig = _Rig();
+      final hang = Completer<bool>();
+      t.view.physicalSize = const Size(420, 1800);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      await t.pumpWidget(
+        _stage(
+          rig,
+          progress: _Memory(records),
+          paidFeaturesAvailable: true,
+          paidAccessCheck: () => hang.future,
+        ),
+      );
+      await t.pump();
+      await t.pump();
+      expect(find.byType(PracticeLoopScreen), findsNothing);
+      expect(find.byKey(const Key('stage-play-pending')), findsOneWidget);
+      await t.pump(stagePaidCheckTimeout + const Duration(seconds: 1));
+      await t.pump();
+      await t.pump();
+      expect(shown(t), isNot(next.id));
+      expect(isFreeV1Lesson(shown(t), paidFeaturesAvailable: true), isTrue);
+      await _play(t);
+      expect(rig.controller!.running, isTrue);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('(a) the account connection (AccountScope) is the default '
+        'check', (t) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      for (final member in <bool>[true, false]) {
+        final rig = _Rig();
+        await _boot(
+          t,
+          AccountScope(
+            currentUserId: 'u1',
+            connection: AccountConnection(
+              userId: ValueNotifier<String?>('u1'),
+              pageBuilder: (_) => const SizedBox(),
+              hasPaidAccess: () async => member,
+            ),
+            child: _stage(
+              rig,
+              progress: _Memory(records),
+              paidFeaturesAvailable: true,
+            ),
+          ),
+        );
+        expect(shown(t) == next.id, member);
+        await _dispose(t, rig);
+      }
+    });
+
+    testWidgets('(a) no access check wired: treated as free', (t) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      final rig = _Rig();
+      await _boot(
+        t,
+        _stage(rig, progress: _Memory(records), paidFeaturesAvailable: true),
+      );
+      expect(shown(t), isNot(next.id));
+      await _dispose(t, rig);
+    });
+
+    // (b) Play on the first screen, shelf closed and open.
+    for (final c in <(String, Size, double)>[
+      ('390x844', const Size(390, 844), 1.0),
+      ('360x640', const Size(360, 640), 1.0),
+      ('360x640 text 1.3', const Size(360, 640), 1.3),
+    ]) {
+      for (final open in <bool>[false, true]) {
+        testWidgets(
+          '(b) Play visible and tappable: ${c.$1}, shelf ${open ? 'open' : 'closed'}',
+          (t) async {
+            final rig = _Rig();
+            t.view.physicalSize = c.$2;
+            t.view.devicePixelRatio = 1;
+            t.platformDispatcher.textScaleFactorTestValue = c.$3;
+            addTearDown(t.view.resetPhysicalSize);
+            addTearDown(t.view.resetDevicePixelRatio);
+            addTearDown(t.platformDispatcher.clearTextScaleFactorTestValue);
+            await t.pumpWidget(_stage(rig));
+            await t.pump();
+            await t.pump();
+            await t.pump();
+            if (open) {
+              await t.tap(find.byKey(const Key('stage-shelf-toggle')));
+              await t.pump();
+              await t.pump();
+              expect(find.byKey(const Key('stage-help-row')), findsOneWidget);
+            }
+            final start = find.byKey(const Key('practice-start'));
+            expect(start, findsOneWidget);
+            final r = t.getRect(start);
+            final screen = Offset.zero & c.$2;
+            expect(screen.contains(r.topLeft), isTrue, reason: '$r');
+            expect(screen.contains(r.bottomRight), isTrue, reason: '$r');
+            expect(r.height, greaterThanOrEqualTo(48));
+            expect(start.hitTestable(), findsOneWidget);
+            final ex = t.takeException();
+            expect(
+              ex,
+              isNull,
+              reason: ex is FlutterError ? ex.toStringDeep() : '$ex',
+            );
+            await _play(t);
+            expect(rig.controller!.running, isTrue);
+            expect(t.takeException(), isNull);
+            await _dispose(t, rig);
+          },
+        );
+      }
+    }
+
+    testWidgets('(e) half run, back: the tuning card does not return', (
+      t,
+    ) async {
+      final rig = _Rig();
+      await _boot(t, _stage(rig));
+      expect(find.byType(SessionTuningGateCard), findsOneWidget);
+      await _play(t);
+      await t.binding.handlePopRoute();
+      await t.pump();
+      await t.pump();
+      expect(find.byKey(const Key('stage-run-not-completed')), findsOneWidget);
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      expect(find.byType(SessionTuningGateCard), findsNothing);
+      expect(t.takeException(), isNull);
+      await _dispose(t, rig);
     });
   });
 }

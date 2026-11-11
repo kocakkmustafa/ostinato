@@ -46,3 +46,23 @@ Future<bool> requireOstinatoPaidAccess(
     return false;
   }
 }
+
+/// Side-effect free read of the paid-access fact (no sign-in screen, no
+/// membership page, no snack bar): true only for a signed-in account whose
+/// membership the server reports active, and who is still the same account
+/// when the answer arrives. Any error is false (fail closed). With sales
+/// closed nothing is gated.
+Future<bool> ostinatoHasPaidAccess(
+  MotionAccountClient account, {
+  required bool salesAvailable,
+}) async {
+  if (!salesAvailable) return true;
+  final userId = account.currentUser?.id;
+  if (userId == null) return false;
+  try {
+    return await account.hasActiveMembership() &&
+        account.currentUser?.id == userId;
+  } on Object {
+    return false;
+  }
+}

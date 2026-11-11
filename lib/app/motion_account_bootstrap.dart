@@ -159,6 +159,10 @@ AccountConnection bindMotionAccountRuntime(
         teenPurchasePolicy: ostinatoTeenPurchasePolicy,
       ),
     ),
+    hasPaidAccess: () => ostinatoHasPaidAccess(
+      runtime.account,
+      salesAvailable: ostinatoPaidFeaturesAvailable,
+    ),
     requireCameraAccess: (context) => requireMotionCameraAccess(
       context,
       account: runtime.account,

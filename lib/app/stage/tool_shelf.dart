@@ -24,6 +24,7 @@ class ToolShelf extends StatelessWidget {
     required this.pinned,
     required this.onPinned,
     this.onHelp,
+    this.maxContentHeight,
   });
 
   final bool open;
@@ -37,6 +38,10 @@ class ToolShelf extends StatelessWidget {
 
   /// The help row's action; null = the row only holds its place.
   final VoidCallback? onHelp;
+
+  /// OST-UX-05b2: the open list scrolls inside this height so the Play area
+  /// above keeps its room (null = unbounded, as before).
+  final double? maxContentHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -74,74 +79,93 @@ class ToolShelf extends StatelessWidget {
               ),
             ),
           ),
-          if (open && c != null) ...<Widget>[
-            _row(
-              context,
-              StageCopy.metronome,
-              ListenableBuilder(
-                listenable: c,
-                builder: (context, _) => MetronomeBeatView(
-                  state: c.beat,
-                  beatsPerBar: c.score.beatsPerBar,
+          if (open && c != null)
+            _scrolled(<Widget>[
+              _row(
+                context,
+                StageCopy.metronome,
+                ListenableBuilder(
+                  listenable: c,
+                  builder: (context, _) => MetronomeBeatView(
+                    state: c.beat,
+                    beatsPerBar: c.score.beatsPerBar,
+                  ),
                 ),
               ),
-            ),
-            SwitchListTile(
-              key: const Key('stage-pin-metronome'),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-              dense: true,
-              title: Text(uiText(context, StageCopy.pinMetronome)),
-              value: pinned,
-              onChanged: onPinned,
-            ),
-            _row(
-              context,
-              StageCopy.reference,
-              ReferenceListenBar(
-                controller: listen,
-                score: c.score,
-                tempos: <int>[c.tempo.bpm],
+              SwitchListTile(
+                key: const Key('stage-pin-metronome'),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                dense: true,
+                title: Text(uiText(context, StageCopy.pinMetronome)),
+                value: pinned,
+                onChanged: onPinned,
               ),
-            ),
-            if (c.score.barCount > 1)
-              ListenableBuilder(
-                listenable: c,
-                builder: (context, _) {
-                  final loop = c.loopBars;
-                  return SwitchListTile(
-                    key: const Key('stage-loop'),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                    dense: true,
-                    title: Text(uiText(context, StageCopy.loop)),
-                    subtitle: loop == null
-                        ? null
-                        : Text('${loop.first + 1}–${loop.last + 1}'),
-                    value: loop != null,
-                    onChanged: (v) => c.loopBars = v
-                        ? (first: 0, last: c.score.barCount > 1 ? 1 : 0)
-                        : null,
-                  );
-                },
+              _row(
+                context,
+                StageCopy.reference,
+                ReferenceListenBar(
+                  controller: listen,
+                  score: c.score,
+                  tempos: <int>[c.tempo.bpm],
+                ),
               ),
-            InkWell(
-              key: const Key('stage-help-row'),
-              onTap: onHelp,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(minHeight: 48),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Text(
-                      uiText(context, StageCopy.help),
-                      style: hankenText(size: 14, weight: FontWeight.w500),
+              if (c.score.barCount > 1)
+                ListenableBuilder(
+                  listenable: c,
+                  builder: (context, _) {
+                    final loop = c.loopBars;
+                    return SwitchListTile(
+                      key: const Key('stage-loop'),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      dense: true,
+                      title: Text(uiText(context, StageCopy.loop)),
+                      subtitle: loop == null
+                          ? null
+                          : Text('${loop.first + 1}–${loop.last + 1}'),
+                      value: loop != null,
+                      onChanged: (v) => c.loopBars = v
+                          ? (first: 0, last: c.score.barCount > 1 ? 1 : 0)
+                          : null,
+                    );
+                  },
+                ),
+              InkWell(
+                key: const Key('stage-help-row'),
+                onTap: onHelp,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: 48),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        uiText(context, StageCopy.help),
+                        style: hankenText(size: 14, weight: FontWeight.w500),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ]),
         ],
+      ),
+    );
+  }
+
+  Widget _scrolled(List<Widget> children) {
+    final column = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: children,
+    );
+    final max = maxContentHeight;
+    if (max == null) return column;
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: max),
+      child: SingleChildScrollView(
+        key: const Key('stage-shelf-scroll'),
+        child: column,
       ),
     );
   }

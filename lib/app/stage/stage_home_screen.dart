@@ -23,6 +23,9 @@ import '../ui_copy.dart';
 import 'stage_copy.dart';
 import 'tool_shelf.dart';
 
+/// How long the stage waits for the membership check.
+const Duration stagePaidCheckTimeout = Duration(seconds: 4);
+
 /// The three handles of the stage (04-design.md section 5.1).
 enum StageHandle { another, path, setup }
 
@@ -53,6 +56,8 @@ class StageHomeScreen extends StatefulWidget {
     this.controllerFactory,
     this.setupStore,
     this.paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
+    this.paidAccessCheck,
+    this.paidCheckTimeout = stagePaidCheckTimeout,
     this.onHandle,
     this.layerBuilder,
     this.budget,
@@ -73,6 +78,14 @@ class StageHomeScreen extends StatefulWidget {
   controllerFactory;
   final SetupProfileStore? setupStore;
   final bool paidFeaturesAvailable;
+
+  /// Side-effect free: does the signed-in account hold a membership? Null =
+  /// the account's own check; none wired = treated as not a member.
+  final Future<bool> Function()? paidAccessCheck;
+
+  /// A check that hangs counts as "not a member" (fail closed): the stage
+  /// falls back to the free lesson instead of waiting on the skeleton.
+  final Duration paidCheckTimeout;
   final int? seed;
 
   /// A handle was tapped (default no-op). A host may push an exit screen
@@ -102,6 +115,8 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   GlassLayerBudget get _budget => widget.budget ?? _ownBudget;
   final ReferenceListenController _listen = ReferenceListenController();
 
+  Future<bool> Function()? _paidCheck;
+  bool _tuningSeen = false;
   String? _accountId;
   bool _inited = false;
   V1PracticeProgress? _progress;
@@ -119,6 +134,9 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final id = AccountScope.maybeOf(context)?.currentUserId;
+    _paidCheck =
+        widget.paidAccessCheck ??
+        AccountScope.maybeOf(context)?.connection?.hasPaidAccess;
     if (!_inited || id != _accountId) {
       _inited = true;
       _accountId = id;
@@ -138,20 +156,43 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                   V1LessonCheckStore(accountUserId: id))
               .load();
       final state = V1CourseState(catalog, records, checks);
-      bool usable(V1CourseLesson l) =>
-          l.availability == V1LessonAvailability.measured &&
-          isFreeV1Lesson(
-            l.id,
-            paidFeaturesAvailable: widget.paidFeaturesAvailable,
-          );
-      // The learner's next lesson when it is measured and free; else the
-      // first open measured one not done; else the first measured one.
+      // Same rule as `admitV1Lesson` (free lessons open; a paid one needs a
+      // membership), asked WITHOUT its sign-in / membership-page side effects.
+      var member = false;
+      var memberAsked = false;
+      Future<void> askMember() async {
+        if (memberAsked) return;
+        memberAsked = true;
+        try {
+          member = await (_paidCheck?.call() ?? Future<bool>.value(false))
+              .timeout(widget.paidCheckTimeout, onTimeout: () => false);
+        } on Object {
+          member = false;
+        }
+      }
+
+      bool measured(V1CourseLesson l) =>
+          l.availability == V1LessonAvailability.measured;
+      bool free(V1CourseLesson l) => isFreeV1Lesson(
+        l.id,
+        paidFeaturesAvailable: widget.paidFeaturesAvailable,
+      );
       final next = state.next;
+      if (next != null && measured(next) && !free(next)) await askMember();
+      bool usable(V1CourseLesson l) => measured(l) && (free(l) || member);
+      // The learner's next lesson when it is measured and admitted; else the
+      // first open measured one not done; else the first measured one.
       V1CourseLesson? pick = next != null && usable(next) ? next : null;
       pick ??= catalog.lessons
-          .where((l) => usable(l) && state.isOpen(l.id) && !state.isDone(l))
+          .where(
+            (l) =>
+                measured(l) &&
+                free(l) &&
+                state.isOpen(l.id) &&
+                !state.isDone(l),
+          )
           .firstOrNull;
-      pick ??= catalog.lessons.where(usable).firstOrNull;
+      pick ??= catalog.lessons.where((l) => measured(l) && free(l)).firstOrNull;
       if (pick == null) return null;
       final unit = catalog.units.where((u) => u.id == pick!.unitId).firstOrNull;
       final hasRecords =
@@ -284,6 +325,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
           )
         : uiText(context, StageCopy.justStarting);
     final layer = _layer;
+    final height = MediaQuery.sizeOf(context).height;
     return Stack(
       children: <Widget>[
         Positioned.fill(
@@ -322,6 +364,8 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                       controllerFactory: widget.controllerFactory,
                       setupStore: widget.setupStore,
                       seed: widget.seed,
+                      tuningCardSeen: _tuningSeen,
+                      onStarted: () => _tuningSeen = true,
                     ),
                   ),
                 ),
@@ -334,6 +378,7 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
                   Semantics(
                     sortKey: const OrdinalSortKey(2),
                     child: ToolShelf(
+                      maxContentHeight: height * 0.34,
                       open: _shelfOpen,
                       onToggle: () => setState(() => _shelfOpen = !_shelfOpen),
                       controller: _pc,

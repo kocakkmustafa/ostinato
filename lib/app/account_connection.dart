@@ -39,6 +39,7 @@ class AccountConnection {
     this.resourceAdmission,
     this.disposeBinding,
     this.requirePaidAccess,
+    this.hasPaidAccess,
     this.requireCameraAccess,
     this.membershipPageBuilder,
     this.membershipResume,
@@ -63,6 +64,11 @@ class AccountConnection {
 
   /// Paid lessons and independent practice (Core `requireMotionPaidAccess`).
   final Future<bool> Function(BuildContext)? requirePaidAccess;
+
+  /// Side-effect free read of the same fact: a signed-in account whose
+  /// membership the server reports active. No sign-in screen, no membership
+  /// page, no snack bar. Null = unknown (callers treat it as not a member).
+  final Future<bool> Function()? hasPaidAccess;
 
   /// Camera setup, measurement and scoring (Core `requireMotionCameraAccess`);
   /// closed in this release whatever the membership.

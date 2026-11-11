@@ -73,7 +73,16 @@ class PracticeLoopScreen extends StatefulWidget {
     this.stageMode = false,
     this.onController,
     this.listenController,
+    this.tuningCardSeen = false,
+    this.onStarted,
   });
+
+  /// OST-UX-05b2: stage only. True when the stage already showed the tuning
+  /// card in this session (a rebuilt screen must not show it again).
+  final bool tuningCardSeen;
+
+  /// OST-UX-05b2: called when Play is tapped (the stage remembers it).
+  final VoidCallback? onStarted;
 
   /// OST-UX-05b: embedded in the stage shell (default false = unchanged).
   /// True: no back button (the stage owns back), the start button reads
@@ -166,7 +175,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   late final SetupProfileStore _setup =
       widget.setupStore ?? FileSetupProfileStore.device;
   SetupProfile? _profile;
-  bool _ranOnce = false;
+  late bool _ranOnce = widget.tuningCardSeen;
   AudioInputController? _ownedAudio;
   OwnRecorder? _ownedRecorder;
   RecorderBackgroundGuard? _backgroundGuard;
@@ -420,6 +429,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
 
   void _start() {
     _ranOnce = true;
+    widget.onStarted?.call();
     unawaited(() async {
       // Output and input never share the session: release the reference
       // before the capture action reads the native all-clear.
@@ -436,109 +446,122 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   Widget build(BuildContext context) {
     final palette = OstinatoPalette.of(context);
     final lesson = widget.lesson;
+    final scroll = LayoutBuilder(
+      builder: (context, box) => SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: box.maxHeight - 26),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _topBar(context, lesson),
+              const SizedBox(height: 10),
+              Text(
+                lesson.practice.task.of(context),
+                style: hankenText(size: 13.5, height: 1.45),
+              ),
+              const SizedBox(height: 10),
+              // A clapping lesson whose task also has a question part
+              // (ear-s1-m03-04, ear-s2-m07-03/04): the drill opens from
+              // here. Clapping alone decides the pass.
+              if (_drill case final drill? when _c.phase == PracticePhase.idle)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: OutlinedButton.icon(
+                    key: const Key('practice-drill'),
+                    icon: const Icon(Icons.quiz_outlined),
+                    label: Text(
+                      uiText(
+                        context,
+                        DrillCopy.start,
+                        values: {'v0': drill.count},
+                      ),
+                    ),
+                    onPressed: () {
+                      final title = lesson.title.of(context);
+                      Navigator.of(context).push<bool>(
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              DrillScreen(drill: drill, title: title),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              // The tuning card is for guitar lines; clapping needs none.
+              if (!_ranOnce &&
+                  _c.phase == PracticePhase.idle &&
+                  widget.lesson.course == 'gtr')
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  // Contract §5 rule 2: tuning at session start. The
+                  // card never blocks ([Continue anyway]).
+                  child: SessionTuningGateCard(
+                    preset: TuningPresets.guitarStandard,
+                    onTune: (context) => openTuner(
+                      context,
+                      controller: debugFakeTunerController(
+                        TuningPresets.guitarStandard,
+                      ),
+                    ),
+                  ),
+                ),
+              if (_c.canEditSettings) _settings(context),
+              if (_c.hearing.setupCardDue && _c.running) _setupCard(context),
+              if (widget.ghostScreen) _ghostPanel(context),
+              _stripArea(context),
+              if (_c.heldEvent != null) _waitHelp(context),
+              const SizedBox(height: 10),
+              _micStrip(context),
+              if (!widget.stageMode) ...[
+                const SizedBox(height: 12),
+                _primary(context),
+              ],
+              const SizedBox(height: 10),
+              // With the own-recording setting on, this run IS kept on
+              // the device, so the "nothing is recorded" line would be
+              // false.
+              Text(
+                _c.ownRecorder?.enabled ?? false
+                    ? uiText(
+                        context,
+                        widget.retentionOpen
+                            ? RecordingRetentionCopy.practiceFooterSessionOnly
+                            : OwnRecordingCopy.practiceFooterOn,
+                      )
+                    : localized(
+                        context,
+                        'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',
+                        'Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.',
+                      ),
+                style: hankenText(
+                  size: 11.5,
+                  color: palette.textMuted,
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
     return Scaffold(
       backgroundColor: palette.surface,
       body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, box) => SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: box.maxHeight - 26),
-              child: Column(
+        // OST-UX-05b2: in the stage the Play button is a fixed area under the
+        // scrolling body, so it is on the first screen at every size.
+        child: widget.stageMode
+            ? Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  _topBar(context, lesson),
-                  const SizedBox(height: 10),
-                  Text(
-                    lesson.practice.task.of(context),
-                    style: hankenText(size: 13.5, height: 1.45),
-                  ),
-                  const SizedBox(height: 10),
-                  // A clapping lesson whose task also has a question part
-                  // (ear-s1-m03-04, ear-s2-m07-03/04): the drill opens from
-                  // here. Clapping alone decides the pass.
-                  if (_drill case final drill?
-                      when _c.phase == PracticePhase.idle)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: OutlinedButton.icon(
-                        key: const Key('practice-drill'),
-                        icon: const Icon(Icons.quiz_outlined),
-                        label: Text(
-                          uiText(
-                            context,
-                            DrillCopy.start,
-                            values: {'v0': drill.count},
-                          ),
-                        ),
-                        onPressed: () {
-                          final title = lesson.title.of(context);
-                          Navigator.of(context).push<bool>(
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  DrillScreen(drill: drill, title: title),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  // The tuning card is for guitar lines; clapping needs none.
-                  if (!_ranOnce &&
-                      _c.phase == PracticePhase.idle &&
-                      widget.lesson.course == 'gtr')
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      // Contract §5 rule 2: tuning at session start. The
-                      // card never blocks ([Continue anyway]).
-                      child: SessionTuningGateCard(
-                        preset: TuningPresets.guitarStandard,
-                        onTune: (context) => openTuner(
-                          context,
-                          controller: debugFakeTunerController(
-                            TuningPresets.guitarStandard,
-                          ),
-                        ),
-                      ),
-                    ),
-                  if (_c.canEditSettings) _settings(context),
-                  if (_c.hearing.setupCardDue && _c.running)
-                    _setupCard(context),
-                  if (widget.ghostScreen) _ghostPanel(context),
-                  _stripArea(context),
-                  if (_c.heldEvent != null) _waitHelp(context),
-                  const SizedBox(height: 10),
-                  _micStrip(context),
-                  const SizedBox(height: 12),
-                  _primary(context),
-                  const SizedBox(height: 10),
-                  // With the own-recording setting on, this run IS kept on
-                  // the device, so the "nothing is recorded" line would be
-                  // false.
-                  Text(
-                    _c.ownRecorder?.enabled ?? false
-                        ? uiText(
-                            context,
-                            widget.retentionOpen
-                                ? RecordingRetentionCopy
-                                      .practiceFooterSessionOnly
-                                : OwnRecordingCopy.practiceFooterOn,
-                          )
-                        : localized(
-                            context,
-                            'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',
-                            'Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.',
-                          ),
-                    style: hankenText(
-                      size: 11.5,
-                      color: palette.textMuted,
-                      height: 1.4,
-                    ),
+                  Expanded(child: scroll),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                    child: _primary(context),
                   ),
                 ],
-              ),
-            ),
-          ),
-        ),
+              )
+            : scroll,
       ),
     );
   }
@@ -1119,8 +1142,14 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
           const SizedBox(width: 10),
-          Text(
-            localized(context, 'Opening the microphone…', 'Mikrofon açılıyor…'),
+          Flexible(
+            child: Text(
+              localized(
+                context,
+                'Opening the microphone…',
+                'Mikrofon açılıyor…',
+              ),
+            ),
           ),
         ],
       );
