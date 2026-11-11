@@ -129,3 +129,7 @@ Kod bu bilette değiştirilmedi; UX-05'te ele alınacak bilinen noktalar:
 - Raf: referans çubuğu `hasPitches || isRhythmOnly` ve `Guide.referenceAudio` koşulsuz; döngü yalnız 1-2. ölçü, `RangeSlider` yok.
 - Eski `GlassCard` (`widgets.dart:39`) çalarken de `BackdropFilter` kullanır: 05h.
 - COZULDU (05b2): Yarım koşu sonrası sahne yeniden kurulur; akort kartı tekrar çıkmaz (`tuningCardSeen`).
+- Bayrak açılmadan önce (05b2 reviewer notları):
+  - (i) Sahne Çal'da `admitV1Lesson` çağırmaz; üyelik yalnız `_load`'da bir kez sorulur. Oturum ortasında üyelik biterse ücretli ders Çal'da açık kalır: Çal'da yeniden doğrulama ya da bilinçli kabul kararı gerekir.
+  - (ii) Güvenlik satırı ("Ağrı, uyuşma…") kaydırılan gövdede, Çal gövdenin dışında: 360x640 + yazı 1.3 + raf açıkken ilk ekranda görünmez, kaydırmayla erişilir.
+  - (iii) `onStarted` mikrofon izni reddedilse de akort kartını oturum boyunca gizler; sahnede akortçuya başka yol olmayabilir ('Ayar' tutamağının işlevi doğrulanamadı).

@@ -23,6 +23,9 @@ import '../ui_copy.dart';
 import 'stage_copy.dart';
 import 'tool_shelf.dart';
 
+/// How long the stage waits for the membership check.
+const Duration stagePaidCheckTimeout = Duration(seconds: 4);
+
 /// The three handles of the stage (04-design.md section 5.1).
 enum StageHandle { another, path, setup }
 
@@ -54,6 +57,7 @@ class StageHomeScreen extends StatefulWidget {
     this.setupStore,
     this.paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
     this.paidAccessCheck,
+    this.paidCheckTimeout = stagePaidCheckTimeout,
     this.onHandle,
     this.layerBuilder,
     this.budget,
@@ -78,6 +82,10 @@ class StageHomeScreen extends StatefulWidget {
   /// Side-effect free: does the signed-in account hold a membership? Null =
   /// the account's own check; none wired = treated as not a member.
   final Future<bool> Function()? paidAccessCheck;
+
+  /// A check that hangs counts as "not a member" (fail closed): the stage
+  /// falls back to the free lesson instead of waiting on the skeleton.
+  final Duration paidCheckTimeout;
   final int? seed;
 
   /// A handle was tapped (default no-op). A host may push an exit screen
@@ -156,7 +164,8 @@ class _StageHomeScreenState extends State<StageHomeScreen> {
         if (memberAsked) return;
         memberAsked = true;
         try {
-          member = await (_paidCheck?.call() ?? Future<bool>.value(false));
+          member = await (_paidCheck?.call() ?? Future<bool>.value(false))
+              .timeout(widget.paidCheckTimeout, onTimeout: () => false);
         } on Object {
           member = false;
         }

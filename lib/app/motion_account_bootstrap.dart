@@ -159,17 +159,10 @@ AccountConnection bindMotionAccountRuntime(
         teenPurchasePolicy: ostinatoTeenPurchasePolicy,
       ),
     ),
-    hasPaidAccess: () async {
-      if (!ostinatoPaidFeaturesAvailable) return true;
-      final userId = runtime.account.currentUser?.id;
-      if (userId == null) return false;
-      try {
-        return await runtime.account.hasActiveMembership() &&
-            runtime.account.currentUser?.id == userId;
-      } on Object {
-        return false;
-      }
-    },
+    hasPaidAccess: () => ostinatoHasPaidAccess(
+      runtime.account,
+      salesAvailable: ostinatoPaidFeaturesAvailable,
+    ),
     requireCameraAccess: (context) => requireMotionCameraAccess(
       context,
       account: runtime.account,

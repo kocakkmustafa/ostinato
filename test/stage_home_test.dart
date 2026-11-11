@@ -1,6 +1,7 @@
 // OST-UX-05b — stage shell and root change (flag closed by default), opaque
 // tool shelf, pinned metronome, back behaviour. Criteria 1..7 of
 // docs/yula-execution/design/04-backlog-ux-05.md (UX-05b).
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as math;
@@ -8,6 +9,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/account_connection.dart';
 import 'package:ostinato/app/app_locale.dart';
 import 'package:ostinato/app/app_message_ids.dart';
 import 'package:ostinato/app/audio/audio_capture_channel.dart';
@@ -826,6 +828,85 @@ void main() {
         reason: 'safe fallback stays a free measured lesson',
       );
       await _dispose(t, rig);
+    });
+
+    testWidgets('(a) a check that throws: not a member, free lesson', (
+      t,
+    ) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      final rig = _Rig();
+      await _boot(
+        t,
+        _stage(
+          rig,
+          progress: _Memory(records),
+          paidFeaturesAvailable: true,
+          paidAccessCheck: () => throw StateError('boom'),
+        ),
+      );
+      expect(shown(t), isNot(next.id));
+      expect(isFreeV1Lesson(shown(t), paidFeaturesAvailable: true), isTrue);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('(a) a check that hangs: after the timeout the free lesson '
+        'shows and Play works', (t) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      final rig = _Rig();
+      final hang = Completer<bool>();
+      t.view.physicalSize = const Size(420, 1800);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      await t.pumpWidget(
+        _stage(
+          rig,
+          progress: _Memory(records),
+          paidFeaturesAvailable: true,
+          paidAccessCheck: () => hang.future,
+        ),
+      );
+      await t.pump();
+      await t.pump();
+      expect(find.byType(PracticeLoopScreen), findsNothing);
+      expect(find.byKey(const Key('stage-play-pending')), findsOneWidget);
+      await t.pump(stagePaidCheckTimeout + const Duration(seconds: 1));
+      await t.pump();
+      await t.pump();
+      expect(shown(t), isNot(next.id));
+      expect(isFreeV1Lesson(shown(t), paidFeaturesAvailable: true), isTrue);
+      await _play(t);
+      expect(rig.controller!.running, isTrue);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('(a) the account connection (AccountScope) is the default '
+        'check', (t) async {
+      final records = level1Done();
+      final next = V1CourseState(catalog, records, const {}).next!;
+      for (final member in <bool>[true, false]) {
+        final rig = _Rig();
+        await _boot(
+          t,
+          AccountScope(
+            currentUserId: 'u1',
+            connection: AccountConnection(
+              userId: ValueNotifier<String?>('u1'),
+              pageBuilder: (_) => const SizedBox(),
+              hasPaidAccess: () async => member,
+            ),
+            child: _stage(
+              rig,
+              progress: _Memory(records),
+              paidFeaturesAvailable: true,
+            ),
+          ),
+        );
+        expect(shown(t) == next.id, member);
+        await _dispose(t, rig);
+      }
     });
 
     testWidgets('(a) no access check wired: treated as free', (t) async {
