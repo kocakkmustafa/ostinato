@@ -119,7 +119,7 @@ void main() {
     view.physicalSize = size * 3;
     view.devicePixelRatio = 3;
     final rig = Rig05f(
-      permission: state == 'izin-reddi'
+      permission: state.startsWith('izin-reddi')
           ? PermissionStatus.denied
           : PermissionStatus.granted,
     );
@@ -143,20 +143,36 @@ void main() {
     for (var i = 0; i < 4; i++) {
       await t.pump();
     }
-    if (state == 'izin-reddi') {
+    if (state.startsWith('izin-reddi')) {
       await t.tap(find.byKey(const Key('practice-start')));
       await t.pump();
       await t.pump();
       await t.pump(const Duration(milliseconds: 50));
       expect(find.byKey(const Key('stage-listening-off')), findsOneWidget);
       expect(find.text('Dinleme kapalı'), findsOneWidget);
-      expect(find.byKey(const Key('stage-open-settings')), findsOneWidget);
-      expect(
-        (t.widget(find.byKey(const Key('stage-listening-off-counter'))) as Text)
-            .data,
-        contains('ölçülmüyor'),
-      );
-      expect(find.byKey(const Key('session-tuning-gate')), findsOneWidget);
+      if (state == 'izin-reddi-raf-acik') {
+        // tool shelf open: compact mode (title on the headline line)
+        await t.tap(find.byKey(const Key('stage-shelf-toggle')));
+        await t.pump();
+        await t.pump();
+      } else {
+        expect(find.byKey(const Key('stage-open-settings')), findsOneWidget);
+        expect(find.byKey(const Key('session-tuning-gate')), findsOneWidget);
+      }
+      if (state == 'izin-reddi-sayac') {
+        // the counter line of the microphone strip, scrolled into view
+        final counter = find.byKey(const Key('stage-listening-off-counter'));
+        await t.ensureVisible(counter);
+        await t.pump();
+      }
+      if (state != 'izin-reddi-raf-acik') {
+        expect(
+          (t.widget(find.byKey(const Key('stage-listening-off-counter')))
+                  as Text)
+              .data,
+          contains('ölçülmüyor'),
+        );
+      }
     } else if (state == 'ayar-cihaz') {
       await t.tap(find.byKey(const Key('stage-handle-setup')));
       await t.pump();
@@ -181,6 +197,8 @@ void main() {
     ('sahne', 1),
     ('izin-reddi', 2),
     ('ayar-cihaz', 3),
+    ('izin-reddi-raf-acik', 4),
+    ('izin-reddi-sayac', 5),
   ];
   final sizes = <Size>[const Size(390, 844), const Size(360, 640)];
   for (final (String, int) s in states) {

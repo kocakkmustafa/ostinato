@@ -1,6 +1,7 @@
 // OST-UX-05f shared test rig (stage + fake mic permission). Test only.
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -66,11 +67,18 @@ class Rig05f {
       pcmDeliveryTimeout: const Duration(minutes: 5),
     );
   }
-  final PermissionStatus permission;
-  final channel = FakeAudioCaptureChannel();
+
+  /// Changeable between runs (the learner allows the microphone later).
+  PermissionStatus permission;
+
+  /// Sample rates the fake channel accepts; clear it to make a start fail
+  /// for a reason other than the permission.
+  final Set<int> rates = <int>{44100, 48000};
+  late final channel = FakeAudioCaptureChannel(supportedSampleRates: rates);
   late final AudioInputController audio;
   int permissionCalls = 0;
   PracticeSessionController? controller;
+  int local = 0;
   PracticeSessionController factory(
     PracticeScore score,
     PracticeTempo tempo,
@@ -80,7 +88,7 @@ class Rig05f {
     tempo: tempo,
     audio: audio,
     criteria: criteria,
-    localClockUs: () => 0,
+    localClockUs: () => local,
     analyzer: (r) async => judgeNote(r),
   );
 }
@@ -168,6 +176,26 @@ Future<void> play05f(WidgetTester t) async {
   await t.pump();
   await t.pump();
   await t.pump(const Duration(milliseconds: 50));
+}
+
+/// Feeds the fake channel until the run really listens (the metronome anchor
+/// arrives and the phase is `running`).
+Future<void> listen05f(WidgetTester t, Rig05f rig) async {
+  final c = rig.controller!;
+  var tn = 0;
+  for (var i = 0; i < 60 && c.phase != PracticePhase.running; i++) {
+    final x = Float64List(4800);
+    rig.channel.pushChunk(x, sampleRate: 48000, tNativeUs: tn);
+    tn += 100000;
+    rig.local = tn;
+    await t.pump();
+    if (rig.channel.metronome != null && c.timeline == null) {
+      rig.channel.pushMetronomeAnchor(tn + 200000);
+      await t.pump();
+    }
+    c.tick();
+    await t.pump();
+  }
 }
 
 Future<void> dispose05f(WidgetTester t, Rig05f rig) async {

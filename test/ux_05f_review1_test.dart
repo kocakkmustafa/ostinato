@@ -329,7 +329,7 @@ void main() {
   group('D-R6 layout and reach', () {
     for (final size in _sizes) {
       final tag = '${size.width.toInt()}x${size.height.toInt()}';
-      testWidgets('D-R6a: $tag @1.3 shelf open: link visible and works', (
+      testWidgets('D-R6a: $tag @1.3 shelf open/closed: link reachable', (
         t,
       ) async {
         final hooks = Hooks05f();
@@ -338,14 +338,21 @@ void main() {
         await t.pump();
         await t.pump();
         expect(t.takeException(), isNull);
+        // Shelf open: the mode shows its title only (no extra height); the
+        // way to Settings is in the band (shelf closed) and in the layer.
+        expect(find.byKey(const Key('stage-listening-off')), findsOneWidget);
+        expect(find.byKey(const Key('stage-open-settings')), findsNothing);
+        final start = find.byKey(const Key('practice-start'));
+        expect((Offset.zero & size).contains(t.getRect(start).center), isTrue);
+        await t.tap(find.byKey(const Key('stage-shelf-toggle')));
+        await t.pump();
+        await t.pump();
         final link = find.byKey(const Key('stage-open-settings'));
         expect(link, findsOneWidget);
         expect((Offset.zero & size).contains(t.getRect(link).center), isTrue);
         await t.tap(link);
         await t.pump();
         expect(hooks.appSettingsOpened, 1);
-        final start = find.byKey(const Key('practice-start'));
-        expect((Offset.zero & size).contains(t.getRect(start).center), isTrue);
         await dispose05f(t, rig);
       });
 

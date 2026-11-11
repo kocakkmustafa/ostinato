@@ -1,8 +1,8 @@
 # OST-UX-05f ölçüt tablosu (İzin reddi, kurulum ve Ayar/Cihaz; bayrak KAPALI)
 
-Testler: `test/ux_05f_listening_off_test.dart` (L), `test/ux_05f_device_layer_test.dart` (D), `test/ux_05f_camera_zero_test.dart` (K), `test/ux_05f_overflow_test.dart` (O), `test/ux_05f_render_evidence_test.dart` (R); destek `test/support/ux_05f_rig.dart`. Kırmızı koşu (Faz A, İSKELET ile): 33 test, 28 kırmızı, 5 önceden yeşil; ham satırlar scratchpad `05f-kirmizi-kanit.md`'den birebir. Faz B (6398921) sonrası: 33/33 yeşil. Faz C'de eklenenler: O (taşma) ve R (render kanıtı).
+Testler: `test/ux_05f_listening_off_test.dart` (L), `test/ux_05f_device_layer_test.dart` (D), `test/ux_05f_camera_zero_test.dart` (K), `test/ux_05f_overflow_test.dart` (O), `test/ux_05f_render_evidence_test.dart` (R), `test/ux_05f_review1_test.dart` (D1, Faz D), `test/ux_05f_review2_test.dart` (E, Faz E); destek `test/support/ux_05f_rig.dart`. Kırmızı koşu (Faz A, İSKELET ile): 33 test, 28 kırmızı, 5 önceden yeşil; ham satırlar scratchpad `05f-kirmizi-kanit.md`'den birebir. Faz B (6398921) sonrası: 33/33 yeşil. Faz C'de eklenenler: O (taşma) ve R (render kanıtı).
 
-**Süreç sapması (dürüst not):** Faz C taşma testleri (O) ve render testi (R) üretim kodu yazıldıktan SONRA yazıldı; kırmızı kanıtı yoktur (koruma/kanıt testleridir). O içinde bir test kırmızıdır (bkz. Bulgu).
+**Süreç sapması (dürüst not):** Faz C taşma testleri (O) ve render testi (R) üretim kodu yazıldıktan SONRA yazıldı; kırmızı kanıtı yoktur (koruma/kanıt testleridir). O içindeki kırmızı test (360×640 kip + raf açık) Faz D/E'de çözüldü (bkz. Bulgu ve Faz E). Güncel durum: `flutter test test/ux_05f_*.dart` TAMAMI yeşil (sayı en sonda).
 
 | # | Ölçüt | Test (dosya) | KIRMIZI koşu (ham) | YEŞİL | Önceden karşılanıyor / dosya:satır | Ekran |
 |---|---|---|---|---|---|---|
@@ -12,10 +12,10 @@ Testler: `test/ux_05f_listening_off_test.dart` (L), `test/ux_05f_device_layer_te
 | 1f | Şerit/metronom/referans/kulak/akort erişilir | L `05f-1f` | `Found 0 widgets with key [<'stage-listening-off'>]` (L:92) | yeşil | `mic_permission_gate_test.dart` ve `stage_home_test.dart` "a failed start" yeşil kaldı | |
 | 1g | Kip etiketi Semantics ile okunur | L `05f-1g` | `Expected: at least one matching candidate / Actual: _ElementPredicateWidgetFinder:<Found 0 widgets with a semantics label matching the pattern` (L:112) | yeşil | — | |
 | 2 | "Ayarlara git" sürekli, hook ile çağrılır | L `05f-2a` | `The finder "Found 0 widgets with key [<'stage-open-settings'>]: []" (used in a call to "tap()") could not find any matching widgets.` | yeşil | — | 02-izin-reddi-* |
-| 2b | Sustur bağlantıyı gizler, kip kalır | L `05f-2b` | `Expected: exactly one matching candidate / Actual: _TextWidgetFinder:<Found 0 widgets with text "Sustur": []>` (L:157) | yeşil | — | |
-| 2c | Yeni ağaçta (aynı store) susturma kalır | L `05f-2c` | (2c satırı ham çıktıda ayrı blok vermedi; 2b ile aynı yüzeyden kırmızıydı: iskelette `Sustur` yoktu) | yeşil | — | |
+| 2b | Gizle (eski etiket Sustur) bağlantıyı gizler, kip kalır | L `05f-2b` | `Expected: exactly one matching candidate / Actual: _TextWidgetFinder:<Found 0 widgets with text "Sustur": []>` (L:157; Faz A ham satırı, etiket Faz D'de "Gizle" oldu) | yeşil | — | |
+| 2c | Yeni ağaçta (aynı store) susturma kalır | L `05f-2c` | (2c satırı ham çıktıda ayrı blok vermedi; 2b ile aynı yüzeyden kırmızıydı: iskelette bağlantı/gizle düğmesi yoktu) | yeşil | — | |
 | 2d | Dosya store kalıcı, `shared_preferences` yok | L `05f-2d` | `Expected: true / Actual: <false>` | yeşil | — | |
-| 2e | Bağlantı/Sustur buton, ≥48 dp | L `05f-2e` | `Expected: exactly one matching candidate / Actual: _KeyWidgetFinder:<Found 0 widgets with key [<'stage-open-settings'>]: []>` (L:210) | yeşil | — | |
+| 2e | Bağlantı/Gizle buton, ≥48 dp | L `05f-2e` | `Expected: exactly one matching candidate / Actual: _KeyWidgetFinder:<Found 0 widgets with key [<'stage-open-settings'>]: []>` (L:210) | yeşil | — | |
 | 3 | T8 kamera: bayrak KAPALI, çağrı sayısı 0 | K `05f-3a` (bayrak), `05f-3b` (sahne+red) | — | yeşil | **ÖNCEDEN YEŞİL**: `ostinato_release_policy.dart:46` (`ostinatoCameraPracticeAvailable=false`); sahne/izin yolunda `Permission.camera` yok (permission_handler kanalı sayılır) | — |
 | 3c | Red + Ayar/Cihaz açık: kamera 0, katman ulaşıldı | K `05f-3c` | `Expected: exactly one matching candidate / Actual: _KeyWidgetFinder:<Found 0 widgets with key [<'stage-device-layer'>]: []>` (K:67) | yeşil | — | 03-ayar-cihaz-* |
 | 4 | Ayar katmanı açılır (varsayılan config) | D `05f-4a` | `Found 0 widgets with key [<'stage-device-layer'>]` (D:48) | yeşil | — | 03-ayar-cihaz-* |
@@ -32,7 +32,7 @@ Testler: `test/ux_05f_listening_off_test.dart` (L), `test/ux_05f_device_layer_te
 | G3 | Semantics: kip etiketi, düğmeler ≥48 dp | L `05f-1g`, `05f-2e`; D `05f-a11y` | `05f-a11y`: `Found 0 widgets with key [<'stage-device-latency'>]` (D:167) | yeşil | — | |
 
 ## Bulgu (Faz C; Faz D'de ÇÖZÜLDÜ, R6)
-`05f-ovf2: mode ON + tool shelf OPEN, 360x640, text 1.3` KIRMIZI: `BoxConstraints has a negative minimum height` (practice_loop_screen `LayoutBuilder`) ve `A RenderFlex overflowed by 46 pixels on the bottom`. Kontrol testi (kip YOK, raf açık, aynı boyut) YEŞİL; yani taşmayı kip bandı + açık raf birlikte yaratıyor. 390×844 kip+raf yeşil. 360×640'ta kip bandı en çok ekranın %20'si; alt kenarı kırpılıyor ve akort kartı band içinde kaydırarak görülüyor (02-izin-reddi-360x640-*).
+`05f-ovf2: mode ON + tool shelf OPEN, 360x640, text 1.3` Faz C'de KIRMIZIYDI (şimdi YEŞİL, Faz D/E): `BoxConstraints has a negative minimum height` (practice_loop_screen `LayoutBuilder`) ve `A RenderFlex overflowed by 46 pixels on the bottom`. Kontrol testi (kip YOK, raf açık, aynı boyut) YEŞİL; yani taşmayı kip bandı + açık raf birlikte yaratıyor. 390×844 kip+raf yeşil. 360×640'ta kip bandı en çok ekranın %20'si; alt kenarı kırpılıyor ve akort kartı band içinde kaydırarak görülüyor (02-izin-reddi-360x640-*).
 
 ## Ekran kanıtı
 `docs/yula-execution/design/evidence/ux-05f/` : `01-sahne`, `02-izin-reddi`, `03-ayar-cihaz` x {390x844, 360x640} x {acik, koyu} = 12 PNG (`UX_RENDER=1 flutter test test/ux_05f_render_evidence_test.dart`). Test fontunda bazı glifler kutu çıkar (05d/05e'deki gibi); yazı düzeni gerçek.
@@ -49,7 +49,7 @@ Testler: `test/ux_05f_listening_off_test.dart` (L), `test/ux_05f_device_layer_te
 - Açılışta mikrofon durumu okunmaz; kip yalnız "Çal"dan sonra `failure=='permission'` ile girer (Ayar katmanı durumu kendi okur).
 - 12 yabancı dil çevirisi makine kalitesinde; yerel anlam incelemesi yok.
 - Akort kartı eski akışta `_ranOnce` ile gizli kalır; sahne bandı aynı kartı gösterir.
-- Gerçek cihaz (ölçüt 5) NOT_TESTED. Yukarıdaki 360×640 taşma bulgusu açık.
+- Gerçek cihaz (ölçüt 5) NOT_TESTED. 360×640 taşma bulgusu ÇÖZÜLDÜ (Faz D/E).
 
 ## Faz B'de değiştirilen mevcut test satırları
 - `test/stage_home_test.dart` "handles show and call the injected callback": Ayar artık katman açıp "Yolum" tutamağını örttüğü için setup dokunuşundan sonra scrim ile kapatma iki satırı eklendi (`stage-layer-scrim` dokunuşu + `pumpAndSettle`); beklentiler aynı.
@@ -78,3 +78,25 @@ Değişen mevcut test beklentileri (Faz D): `05f-4b` metinleri (R2), `05f-2b` "S
 Ekran kanıtı Faz D: 12 PNG yeniden üretildi. 360x640 izin-reddi PNG'sinde band, "Ayarlara git" ve "Gizle" kesilmiyor; akort kartı band içinde kısmen görünüyor (kaydırılır).
 
 Bayrak açılmadan önce ek notlar (Faz D): akort kartı 360x640'ta yalnız kısmen görünür, kaydırmayla ulaşılır; raf açıkken kart gizlenir (tek satır kip); bağlı hesapla Hesap/Üyelik varsayılan yolu NOT_TESTED.
+
+## Kapsam notu: erişilebilirlik (04-backlog-ux-05.md:82)
+Backlog kapsam satırı Ayar/Cihaz için "erişilebilirlik" sayar; ölçüt 1-6'da bunun ayrı bir maddesi yok ve Ayar katmanında erişilebilirlik ayarı (yazı boyutu, hareket azaltma vb.) YAPILMADI. Yalnız genel Semantics/≥48 dp/yazı 1.3 ölçütleri karşılandı (G2, G3). Katmanda erişilebilirlik ayarı satırı ve canlı bölge (liveRegion) duyuruları **05h'ye** bırakıldı.
+
+## Faz E (reviewer tur 2; kırmızı satırlar: scratchpad `05f-kirmizi-kanit.md` "## Faz E")
+Süreç: önce test (`ux_05f_review2_test.dart`), sonra uygulama. Her test tek tek koşuldu; art arda koşuda sızıntı gözlendi (Faz D notu geçerli).
+
+| E | Madde | Test | KIRMIZI (tek başına) | Durum |
+|---|---|---|---|---|
+| E1 | Retry başka sebeple düşünce kip kapanır; başarılı başlangıçta kapanır; aynı red kalır | E1a, E1b, E1c | E1a: `Expected: no matching candidates / Actual: _KeyWidgetFinder:<Found 1 widget with key [<'stage-listening-off'>]` (kip eski sebebi söylemeye devam ediyordu). E1b/E1c: koruma (E1b ilk yazımda koşunun `running` evresine varmayan TEST hatasıydı; `listen05f` ile düzeldi) | KAPANDI (`_onRun`: `failure != null && != 'permission'` kipi kapatır) |
+| E2 | Yeni ders ekranı (`_epoch`) kendi başına karar verir | E2 | koruma (kırmızı yok); ürün: kip "failure durduğu sürece" yaşar, ders/ekran değişince taşınmaz; `_lastFailure` yeni denetleyicide sıfırlanır (savunma) | KAPANDI |
+| E3 | Uzun yabancı etiketler, 360×640 + yazı 1.3 + raf açık + kip (de, fr, pt-BR, id, it, pl; gerçek katalog) | E3 x6 (+ E3-control x6 kipsiz) | fr/pt-BR/it: `BoxConstraints has a negative minimum height` (raf kapalı kip bandı); de/id/pl: `A RenderFlex overflowed by 54/36 pixels on the right` (tek satır kompakt ilk tasarım); kontrol (kipsiz) YEŞİL | KAPANDI: raf açıkken kip yalnız başlığı başlık satırına koyar (ek yükseklik 0), band sınırı kısa ekranda %25; bağlantı bandın başlık altına alındı |
+| E4 | Raf açık + Gizle yapılmış: izin yolu Ayar katmanında | E4 | koruma (yeşil) | KAPANDI; **bilinçli**: kompakt kip yalnız başlık gösterir, alternatif Ayar katmanındaki mikrofon satırıdır (hook çağrılır) |
+| E5 | `restricted` ve okuma hatası | — | — | **Tablo notu (kod değişmedi)**: `restricted` (ebeveyn/kurum kısıtı) durumunda mikrofon satırı da "Ayarlara git" gösterir; uygulama ayarı bunu çözmeyebilir, ama kullanıcıyı sistem ayarına götürmek zararsızdır. `micStatus` hata fırlatırsa satır yalın "Mikrofon" gösterir ve dokunulmaz |
+| E6 | Raf sınırı rect iddiası | E6 | koruma (yeşil) | KAPANDI (raf ekranın içinde, `0.2*h + 80` altında). D-R7a "koruma" olarak kalır |
+| E7 | Render kanıtı: raf açık kompakt kip; sayaç görünür | R: `04-izin-reddi-raf-acik-*`, `05-izin-reddi-sayac-*` (390×844 ve 360×640, açık/koyu = 8 PNG) | — | KAPANDI; `02-izin-reddi-*` PNG'lerinde sayaç kıvrımın altında kalır: 1e'nin ekran kanıtı `05-izin-reddi-sayac-*` (Read ile bakıldı: "Sayaç: ölçülmüyor" ve Çal görünür) |
+| E8 | Tablo tutarlılığı | — | — | KAPANDI (bu belge) |
+| E9 | l10n | — | — | Metin DEĞİŞMEDİ: kimlik sayısı 8786, `--check` rc=0 |
+
+Faz E'de değişen mevcut test beklentisi: `D-R6a` (Faz D testi): raf AÇIKken "Ayarlara git" bağlantısı artık yok (kompakt kip yalnız başlık; E3'ün taşma ölçütü bunu gerektirdi); test, raf kapanınca bağlantının görünür ve çalışır olduğunu ve raf açıkken kipin başlığının görünür olduğunu iddia eder.
+
+Güncel test sayısı: `flutter test test/ux_05f_*.dart` +104 yeşil (render 20 dahil, 0 skip). Mesaj kimliği sayısı 8786. analyze temiz; `--check` rc=0; bekçi rc=0.

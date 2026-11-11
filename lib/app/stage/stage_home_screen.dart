@@ -433,6 +433,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       _pc?.removeListener(_onRun);
+      _lastFailure = null; // a new screen's run decides on its own
       _pc = c..addListener(_onRun);
       setState(() {});
     });
@@ -442,13 +443,16 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     if (!mounted) return;
     final failure = _pc?.failure;
     final entered = failure == 'permission' && _lastFailure != 'permission';
+    // Another failure than the refusal now stands (a retry that fails for a
+    // different reason): the mode would say a reason that is no longer true.
+    final other = failure != null && failure != 'permission';
     _lastFailure = failure;
     // Entered on a new refusal; left only when the microphone really runs
     // (a retry's reset must not flash the counters), or on resume (above).
     final listening = _pc?.phase == PracticePhase.running;
     if (entered && !_micOff) {
       setState(() => _micOff = true);
-    } else if (listening && _micOff) {
+    } else if ((listening || other) && _micOff) {
       setState(() => _micOff = false);
     }
     final playing = _pc?.running ?? false;
@@ -604,36 +608,37 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       label: uiText(context, StageCopy.listeningOff),
       child: Container(
         key: const Key('stage-listening-off'),
-        padding: EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: compact ? 2 : 12,
-        ),
-        decoration: BoxDecoration(
-          color: p.surface,
-          border: Border.all(color: p.ink.withValues(alpha: 0.3)),
-          borderRadius: BorderRadius.circular(12),
-        ),
+        padding: compact ? EdgeInsets.zero : const EdgeInsets.all(12),
+        decoration: compact
+            ? null
+            : BoxDecoration(
+                color: p.surface,
+                border: Border.all(color: p.ink.withValues(alpha: 0.3)),
+                borderRadius: BorderRadius.circular(12),
+              ),
         child: compact
-            ? Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: 8,
-                children: <Widget>[
-                  ExcludeSemantics(child: title),
-                  // Only the way to Settings; Hide is in the full band
-                  // (tool shelf closed).
-                  ...links.take(1),
-                ],
+            ? ExcludeSemantics(
+                // Tool shelf open: the title takes the headline's one line
+                // (no extra height); Go to Settings and the tuning card are
+                // in the band (shelf closed) and in the Setup layer.
+                child: Text(
+                  uiText(context, StageCopy.listeningOff),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: hankenText(size: 14, weight: FontWeight.w600),
+                ),
               )
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   ExcludeSemantics(child: title),
-                  const SizedBox(height: 4),
+                  // The way to Settings sits right under the title: it must
+                  // never be the part that scrolls out of the bounded block.
+                  if (links.isNotEmpty) Wrap(spacing: 8, children: links),
                   Text(
                     uiText(context, StageCopy.listeningOffWhy),
                     style: hankenText(size: 13),
                   ),
-                  if (links.isNotEmpty) Wrap(spacing: 8, children: links),
                 ],
               ),
       ),
@@ -653,12 +658,12 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       children: <Widget>[band, ?card],
     );
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+      padding: EdgeInsets.fromLTRB(16, compact ? 10 : 6, 16, 0),
       child: compact
           ? content
           : ConstrainedBox(
               constraints: BoxConstraints(
-                maxHeight: height > 700 ? 340 : height * 0.32,
+                maxHeight: height > 700 ? 340 : height * 0.25,
               ),
               child: SingleChildScrollView(child: content),
             ),
@@ -799,14 +804,15 @@ class _StageHomeScreenState extends State<StageHomeScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-                  child: Text(
-                    headline,
-                    key: const Key('stage-headline'),
-                    style: hankenText(size: 13),
+                if (!(_micOff && _shelfOpen))
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                    child: Text(
+                      headline,
+                      key: const Key('stage-headline'),
+                      style: hankenText(size: 13),
+                    ),
                   ),
-                ),
                 if (_micOff) _listeningOff(context, data),
                 if (_notice)
                   Padding(
@@ -865,7 +871,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                   Semantics(
                     sortKey: const OrdinalSortKey(2),
                     child: ToolShelf(
-                      maxContentHeight: height * (_micOff ? 0.24 : 0.34),
+                      maxContentHeight: height * (_micOff ? 0.2 : 0.34),
                       open: _shelfOpen,
                       onToggle: () => setState(() => _shelfOpen = !_shelfOpen),
                       controller: _pc,
