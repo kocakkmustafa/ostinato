@@ -692,6 +692,10 @@ NETWORK_DEPS_KNOWN_SAFE = {
     "leak_tracker_flutter_testing": "leak_tracker'ın Flutter eklentisi, dev-only",
     "leak_tracker_testing": "leak_tracker'ın test-altyapısı parçası, dev-only",
     "lints": "statik analiz kural paketi, dev-only, ÇALIŞMA ZAMANINDA hiç yok",
+    # 2026-11-12 (Motion orchestration kararı): CI'da sabitsiz Flutter stable
+    # `pub get` ile geçişli geldi (listen 1.0.1); repoda pubspec.lock'ta henüz
+    # yok, bekçi vakum/ölü kayıt saymaz.
+    "listen": "flutter/core-packages, saf Dart durum dinleyicileri, tek bağımlılık `meta`; lib/ içinde HttpClient/package:http/Socket/WebSocket/dart:io yok (2026-11-12 grep); CI'da sabitsiz Flutter stable `pub get` ile geçişli geldi; Motion orchestration kararı",
     "logging": "yerel log FASADI, varsayılan sink yok (uzağa göndermez)",
     "matcher": "test-altyapısı (expect/matcher), I/O yok",
     "material_color_utilities": "Material renk algoritmaları, saf hesaplama",
