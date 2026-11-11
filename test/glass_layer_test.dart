@@ -495,6 +495,9 @@ void main() {
       for (final f in Directory('lib').listSync(recursive: true)) {
         if (f is! File || !f.path.endsWith('.dart')) continue;
         if (f.path.endsWith('lib/app/design/glass_layer.dart')) continue;
+        // OST-UX-05b: the stage shell is the only screen allowed to use it
+        // (tool_shelf.dart and the other stage files must stay glass-free).
+        if (f.path == 'lib/app/stage/stage_home_screen.dart') continue;
         final s = f.readAsStringSync();
         if (s.contains('design/glass_layer.dart') ||
             s.contains("'glass_layer.dart'") ||

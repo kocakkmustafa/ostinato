@@ -1,0 +1,430 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
+
+import '../account_connection.dart';
+import '../app_theme.dart';
+import '../course_access.dart';
+import '../design/glass_layer.dart';
+import '../design/ostinato_theme.dart';
+import '../ostinato_release_policy.dart';
+import '../practice/loop/metronome_beat_view.dart';
+import '../practice/loop/practice_loop_screen.dart';
+import '../practice/loop/practice_outcome.dart';
+import '../practice/loop/practice_progress_store.dart';
+import '../practice/loop/practice_score.dart';
+import '../practice/loop/practice_transport.dart';
+import '../practice/loop/practice_session_controller.dart';
+import '../practice/loop/reference_listen.dart';
+import '../practice/loop/v1_course_catalog.dart';
+import '../practice/setup/setup_profile_store.dart';
+import '../ui_copy.dart';
+import 'stage_copy.dart';
+import 'tool_shelf.dart';
+
+/// The three handles of the stage (04-design.md section 5.1).
+enum StageHandle { another, path, setup }
+
+/// Builds a layer's content. Layer content and the layer manager are
+/// OST-UX-05c; 05b only gives the hook (default null = no layer opens).
+typedef StageLayerBuilder =
+    Widget Function(
+      BuildContext context,
+      StageHandle handle,
+      VoidCallback close,
+    );
+
+/// OST-UX-05b: the stage shell (ADR-UX-001 K1), the root while
+/// `ostinatoStageHomeEnabled` is on. It shows the lesson the learner
+/// continues (`V1CourseState.next`; else the first measured one), embeds the
+/// existing practice screen (one "Play"), three text-labelled handles, an
+/// opaque tool shelf and, while playing, the pinned opaque metronome.
+///
+/// While a run is going the handles are gone, nothing can open (the glass
+/// budget is told `playing`) and the screen never stops on an error: the
+/// practice screen shows its own failure line.
+class StageHomeScreen extends StatefulWidget {
+  const StageHomeScreen({
+    super.key,
+    this.catalog,
+    this.progressFactory,
+    this.checksFactory,
+    this.controllerFactory,
+    this.setupStore,
+    this.paidFeaturesAvailable = ostinatoPaidFeaturesAvailable,
+    this.onHandle,
+    this.layerBuilder,
+    this.budget,
+    this.seed,
+  });
+
+  /// Tests pass a catalog; production loads the bundled lessons.
+  final V1CourseCatalog? catalog;
+  final V1PracticeProgress Function(String? accountUserId)? progressFactory;
+  final V1LessonChecks Function(String? accountUserId)? checksFactory;
+
+  /// Forwarded to the practice screen (tests inject a fake channel).
+  final PracticeSessionController Function(
+    PracticeScore score,
+    PracticeTempo tempo,
+    PassCriteria criteria,
+  )?
+  controllerFactory;
+  final SetupProfileStore? setupStore;
+  final bool paidFeaturesAvailable;
+  final int? seed;
+
+  /// A handle was tapped (default no-op). A host may push an exit screen
+  /// here; back returns to the stage.
+  final void Function(BuildContext context, StageHandle handle)? onHandle;
+
+  /// Layer content for a handle (05c); null = the handle opens no layer.
+  final StageLayerBuilder? layerBuilder;
+
+  /// Glass budget; the stage feeds it `playing`. Null = the stage owns one.
+  final GlassLayerBudget? budget;
+
+  @override
+  State<StageHomeScreen> createState() => _StageHomeScreenState();
+}
+
+class _StageData {
+  const _StageData(this.catalog, this.lesson, this.hasRecords, this.unit);
+  final V1CourseCatalog catalog;
+  final V1CourseLesson lesson;
+  final bool hasRecords;
+  final V1CourseUnit? unit;
+}
+
+class _StageHomeScreenState extends State<StageHomeScreen> {
+  late final GlassLayerBudget _ownBudget = GlassLayerBudget();
+  GlassLayerBudget get _budget => widget.budget ?? _ownBudget;
+  final ReferenceListenController _listen = ReferenceListenController();
+
+  String? _accountId;
+  bool _inited = false;
+  V1PracticeProgress? _progress;
+  Future<_StageData?>? _data;
+
+  PracticeSessionController? _pc;
+  bool _playing = false;
+  bool _shelfOpen = false;
+  bool _pinned = false;
+  bool _notice = false;
+  StageHandle? _layer;
+  int _epoch = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final id = AccountScope.maybeOf(context)?.currentUserId;
+    if (!_inited || id != _accountId) {
+      _inited = true;
+      _accountId = id;
+      _progress =
+          widget.progressFactory?.call(id) ??
+          V1PracticeProgressStore(accountUserId: id);
+      _data = _load(id);
+    }
+  }
+
+  Future<_StageData?> _load(String? id) async {
+    try {
+      final catalog = widget.catalog ?? await V1CourseCatalog.load();
+      final records = await _progress!.load();
+      final checks =
+          await (widget.checksFactory?.call(id) ??
+                  V1LessonCheckStore(accountUserId: id))
+              .load();
+      final state = V1CourseState(catalog, records, checks);
+      bool usable(V1CourseLesson l) =>
+          l.availability == V1LessonAvailability.measured &&
+          isFreeV1Lesson(
+            l.id,
+            paidFeaturesAvailable: widget.paidFeaturesAvailable,
+          );
+      // The learner's next lesson when it is measured and free; else the
+      // first open measured one not done; else the first measured one.
+      final next = state.next;
+      V1CourseLesson? pick = next != null && usable(next) ? next : null;
+      pick ??= catalog.lessons
+          .where((l) => usable(l) && state.isOpen(l.id) && !state.isDone(l))
+          .firstOrNull;
+      pick ??= catalog.lessons.where(usable).firstOrNull;
+      if (pick == null) return null;
+      final unit = catalog.units.where((u) => u.id == pick!.unitId).firstOrNull;
+      final hasRecords =
+          records.values.any((r) => r.runs > 0) || checks.isNotEmpty;
+      return _StageData(catalog, pick, hasRecords, unit);
+    } on Object {
+      return null;
+    }
+  }
+
+  void _retry() => setState(() => _data = _load(_accountId));
+
+  @override
+  void dispose() {
+    _pc?.removeListener(_onRun);
+    _listen.dispose();
+    _ownBudget.dispose();
+    super.dispose();
+  }
+
+  void _gotController(PracticeSessionController c) {
+    // Called from the practice screen's initState (mid build): defer.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _pc?.removeListener(_onRun);
+      _pc = c..addListener(_onRun);
+      setState(() {});
+    });
+  }
+
+  void _onRun() {
+    if (!mounted) return;
+    final playing = _pc?.running ?? false;
+    if (playing == _playing) return;
+    _budget.playing = playing;
+    setState(() {
+      _playing = playing;
+      if (playing) {
+        _shelfOpen = false;
+        _layer = null;
+        _notice = false;
+      }
+    });
+  }
+
+  void _tapHandle(StageHandle h) {
+    if (_playing) return;
+    widget.onHandle?.call(context, h);
+    if (widget.layerBuilder != null) setState(() => _layer = h);
+  }
+
+  void _closeLayer() => setState(() => _layer = null);
+
+  /// Back: a layer closes first; during a run the run ends and is NOT
+  /// recorded (the practice screen is rebuilt, its listener is removed
+  /// before it stops the session, so no result and no store write follow).
+  void _onBack() {
+    if (_layer != null) {
+      _closeLayer();
+      return;
+    }
+    if (_playing) {
+      _pc?.removeListener(_onRun);
+      _pc = null;
+      _budget.playing = false;
+      setState(() {
+        _playing = false;
+        _notice = true;
+        _epoch++;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = OstinatoPalette.of(context);
+    return PopScope(
+      canPop: _layer == null && !_playing,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) _onBack();
+      },
+      child: Scaffold(
+        key: const Key('stage-home'),
+        backgroundColor: palette.surface,
+        body: SafeArea(
+          child: FutureBuilder<_StageData?>(
+            future: _data,
+            builder: (context, snap) {
+              if (snap.connectionState != ConnectionState.done) {
+                return _skeleton(context, failed: false);
+              }
+              final data = snap.data;
+              if (data == null) return _skeleton(context, failed: true);
+              return _stage(context, data);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _skeleton(BuildContext context, {required bool failed}) => Column(
+    children: <Widget>[
+      const Spacer(),
+      if (failed)
+        TextButton(
+          key: const Key('stage-retry'),
+          onPressed: _retry,
+          child: Text(uiText(context, StageCopy.tryAgain)),
+        ),
+      Padding(
+        padding: const EdgeInsets.all(16),
+        child: FilledButton(
+          key: const Key('stage-play-pending'),
+          onPressed: null,
+          child: Text(uiText(context, StageCopy.play)),
+        ),
+      ),
+      _handles(context),
+    ],
+  );
+
+  Widget _stage(BuildContext context, _StageData data) {
+    final unit = data.unit;
+    final headline = data.hasRecords && unit?.module != null
+        ? uiText(
+            context,
+            StageCopy.continueLine,
+            values: {'v0': unit!.level, 'v1': unit.module},
+          )
+        : uiText(context, StageCopy.justStarting);
+    final layer = _layer;
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(
+          child: ExcludeSemantics(
+            excluding: layer != null,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                  child: Text(
+                    headline,
+                    key: const Key('stage-headline'),
+                    style: hankenText(size: 13),
+                  ),
+                ),
+                if (_notice)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+                    child: Text(
+                      uiText(context, StageCopy.runNotCompleted),
+                      key: const Key('stage-run-not-completed'),
+                      style: hankenText(size: 13),
+                    ),
+                  ),
+                Expanded(
+                  child: Semantics(
+                    sortKey: const OrdinalSortKey(0),
+                    child: PracticeLoopScreen(
+                      key: ValueKey<int>(_epoch),
+                      lesson: data.lesson.lesson,
+                      progress: _progress!,
+                      stageMode: true,
+                      onController: _gotController,
+                      listenController: _listen,
+                      controllerFactory: widget.controllerFactory,
+                      setupStore: widget.setupStore,
+                      seed: widget.seed,
+                    ),
+                  ),
+                ),
+                if (_playing && _pinned && _pc != null) _pinnedMetronome(),
+                if (!_playing) ...<Widget>[
+                  Semantics(
+                    sortKey: const OrdinalSortKey(1),
+                    child: _handles(context),
+                  ),
+                  Semantics(
+                    sortKey: const OrdinalSortKey(2),
+                    child: ToolShelf(
+                      open: _shelfOpen,
+                      onToggle: () => setState(() => _shelfOpen = !_shelfOpen),
+                      controller: _pc,
+                      listen: _listen,
+                      pinned: _pinned,
+                      onPinned: (v) => setState(() => _pinned = v),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
+        if (layer != null && widget.layerBuilder != null)
+          Positioned.fill(
+            child: LayoutBuilder(
+              builder: (context, box) => Stack(
+                children: <Widget>[
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    height: box.maxHeight * 0.4,
+                    child: GestureDetector(
+                      key: const Key('stage-layer-scrim'),
+                      behavior: HitTestBehavior.opaque,
+                      onTap: _closeLayer,
+                    ),
+                  ),
+                  GlassLayer(
+                    budget: _budget,
+                    child: widget.layerBuilder!(context, layer, _closeLayer),
+                  ),
+                ],
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  /// Opaque, tiny, outside the glass budget (design section 6).
+  Widget _pinnedMetronome() {
+    final palette = OstinatoPalette.of(context);
+    final c = _pc!;
+    return Material(
+      key: const Key('stage-pinned-metronome'),
+      color: palette.surface,
+      child: ListenableBuilder(
+        listenable: c,
+        builder: (context, _) =>
+            MetronomeBeatView(state: c.beat, beatsPerBar: c.score.beatsPerBar),
+      ),
+    );
+  }
+
+  Widget _handles(BuildContext context) {
+    Widget handle(String key, UiCopy label, StageHandle h) => Expanded(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 48),
+        child: OutlinedButton(
+          key: Key(key),
+          onPressed: _playing ? null : () => _tapHandle(h),
+          child: Text(
+            uiText(context, label),
+            textAlign: TextAlign.center,
+            style: hankenText(size: 14, weight: FontWeight.w500),
+          ),
+        ),
+      ),
+    );
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 6, 16, 8),
+      child: Row(
+        key: const Key('stage-handles'),
+        children: <Widget>[
+          handle(
+            'stage-handle-other',
+            StageCopy.handleOther,
+            StageHandle.another,
+          ),
+          const SizedBox(width: 8),
+          handle('stage-handle-path', StageCopy.handlePath, StageHandle.path),
+          const SizedBox(width: 8),
+          handle(
+            'stage-handle-setup',
+            StageCopy.handleSetup,
+            StageHandle.setup,
+          ),
+        ],
+      ),
+    );
+  }
+}

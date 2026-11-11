@@ -108,3 +108,11 @@ const bool ostinatoFirstThreeMinutesOpen = false;
 /// before. The single entry is a button in Settings. Rollback: leave this
 /// false (or revert the PR); no data depends on it.
 const bool ostinatoUxPrototypeOpen = false;
+
+/// OST-UX-05b (founder master instruction 2026-11-09, ADR-UX-001): the
+/// stage shell. While true the root after the welcome pages is the stage
+/// (the lesson the learner continues, one "Play", three handles, an opaque
+/// tool shelf) instead of the library. Closed by default: while false the
+/// root is the library exactly as before. Nothing is stored by the shell, so
+/// rollback is leaving this false (or reverting the PR).
+const bool ostinatoStageHomeEnabled = false;

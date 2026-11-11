@@ -1,0 +1,757 @@
+// OST-UX-05b — stage shell and root change (flag closed by default), opaque
+// tool shelf, pinned metronome, back behaviour. Criteria 1..7 of
+// docs/yula-execution/design/04-backlog-ux-05.md (UX-05b).
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math' as math;
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/app_locale.dart';
+import 'package:ostinato/app/app_message_ids.dart';
+import 'package:ostinato/app/audio/audio_capture_channel.dart';
+import 'package:ostinato/app/audio/audio_input_controller.dart';
+import 'package:ostinato/app/content.dart';
+import 'package:ostinato/app/cue_text.dart';
+import 'package:ostinato/app/curriculum/v1_lesson.dart';
+import 'package:ostinato/app/design/app_scope.dart';
+import 'package:ostinato/app/design/glass_layer.dart';
+import 'package:ostinato/app/onboarding_store.dart';
+import 'package:ostinato/app/ostinato_release_policy.dart';
+import 'package:ostinato/app/practice/loop/practice_judge.dart';
+import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
+import 'package:ostinato/app/practice/loop/practice_outcome.dart';
+import 'package:ostinato/app/practice/loop/practice_progress_store.dart';
+import 'package:ostinato/app/practice/loop/practice_result_screen.dart';
+import 'package:ostinato/app/practice/loop/practice_score.dart';
+import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
+import 'package:ostinato/app/practice/loop/practice_transport.dart';
+import 'package:ostinato/app/practice/loop/v1_course_catalog.dart';
+import 'package:ostinato/app/screens/library_screen.dart';
+import 'package:ostinato/app/stage/stage_copy.dart';
+import 'package:ostinato/app/stage/stage_home_screen.dart';
+import 'package:ostinato/main.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import 'support/localized_widget_ready.dart';
+import 'support/practice_host.dart';
+
+final class _Memory implements V1PracticeProgress {
+  _Memory([Map<String, V1PracticeRecord>? seed]) : records = {...?seed};
+  final Map<String, V1PracticeRecord> records;
+  int recordCalls = 0;
+  @override
+  Future<Map<String, V1PracticeRecord>> load() async => Map.of(records);
+  @override
+  Future<V1PracticeRecord> recordRun(
+    String id,
+    PracticeRunSummary s, {
+    DateTime? at,
+  }) async {
+    recordCalls++;
+    return records[id] = (records[id] ?? V1PracticeRecord(lessonId: id))
+        .withRun(s, DateTime.utc(2026, 11, 1));
+  }
+}
+
+final class _Checks implements V1LessonChecks {
+  @override
+  Future<Map<String, V1LessonCheck>> load() async => {};
+  @override
+  Future<V1LessonCheck> record(
+    String lessonId,
+    V1CheckEvidence evidence, {
+    DateTime? at,
+  }) => throw UnimplementedError();
+}
+
+V1CourseCatalog _catalog() {
+  final lessons = [
+    for (final f
+        in Directory('content/v1/gtr').listSync().whereType<File>().toList()
+          ..sort((a, b) => a.path.compareTo(b.path)))
+      if (f.path.endsWith('.json'))
+        V1Lesson.fromJson(jsonDecode(f.readAsStringSync())),
+  ];
+  return V1CourseCatalog(lessons);
+}
+
+/// Expected pick of the stage for [records] (same rule, computed here).
+V1CourseLesson _expected(
+  V1CourseCatalog catalog,
+  Map<String, V1PracticeRecord> records,
+) {
+  final state = V1CourseState(catalog, records, const {});
+  final next = state.next;
+  if (next != null && next.availability == V1LessonAvailability.measured) {
+    return next;
+  }
+  return catalog.lessons.firstWhere(
+    (l) =>
+        l.availability == V1LessonAvailability.measured &&
+        state.isOpen(l.id) &&
+        !state.isDone(l),
+  );
+}
+
+class _Rig {
+  _Rig({this.permission = PermissionStatus.granted}) {
+    audio = AudioInputController(
+      channel: channel,
+      requestMicrophonePermission: () async {
+        permissionCalls++;
+        return permission;
+      },
+      pcmDeliveryTimeout: const Duration(minutes: 5),
+    );
+  }
+  final PermissionStatus permission;
+  final channel = FakeAudioCaptureChannel();
+  late final AudioInputController audio;
+  int permissionCalls = 0;
+  PracticeSessionController? controller;
+  var local = 0;
+
+  PracticeSessionController factory(
+    PracticeScore score,
+    PracticeTempo tempo,
+    PassCriteria criteria,
+  ) => controller = PracticeSessionController(
+    score: score,
+    tempo: tempo,
+    audio: audio,
+    criteria: criteria,
+    localClockUs: () => local,
+    analyzer: (r) async => judgeNote(r),
+  );
+}
+
+/// Promise / future wording and "wrong", in en, tr and the 12 other locales
+/// (plain substrings, case-insensitive; the stage values are short).
+final RegExp _promise = RegExp(
+  [
+    r'\b(yet|soon|coming|wrong)\b',
+    'henüz',
+    'yakında',
+    'yanlış',
+    'ainda',
+    'ancora',
+    'noch',
+    'aún',
+    'まだ',
+    '아직',
+    'jeszcze',
+    'belum',
+    'अभी',
+    '还没有',
+    'بعد',
+    "pour l'instant",
+    'encore',
+    'bientôt',
+    'pronto',
+    'presto',
+    'bald',
+    'skoro',
+    'segera',
+    'जल्द',
+    '即将',
+    '곧',
+    'まもなく',
+  ].join('|'),
+  caseSensitive: false,
+);
+
+late V1CourseCatalog catalog;
+
+Widget _stage(
+  _Rig rig, {
+  _Memory? progress,
+  GlassLayerBudget? budget,
+  void Function(BuildContext, StageHandle)? onHandle,
+  StageLayerBuilder? layerBuilder,
+  String locale = 'tr',
+}) => practiceHost(
+  locale: locale,
+  StageHomeScreen(
+    catalog: catalog,
+    progressFactory: (_) => progress ?? _Memory(),
+    checksFactory: (_) => _Checks(),
+    controllerFactory: rig.factory,
+    paidFeaturesAvailable: false,
+    budget: budget,
+    onHandle: onHandle,
+    layerBuilder: layerBuilder,
+    seed: 1,
+  ),
+);
+
+Future<void> _boot(WidgetTester t, Widget w) async {
+  t.view.physicalSize = const Size(420, 1800);
+  t.view.devicePixelRatio = 1;
+  addTearDown(t.view.resetPhysicalSize);
+  addTearDown(t.view.resetDevicePixelRatio);
+  await t.pumpWidget(w);
+  await t.pump();
+  await t.pump();
+  await t.pump();
+}
+
+Future<void> _play(WidgetTester t) async {
+  await t.tap(find.byKey(const Key('practice-start')));
+  await t.pump();
+  await t.pump();
+}
+
+Future<void> _dispose(WidgetTester t, _Rig rig) async {
+  await t.pumpWidget(const SizedBox());
+  await t.runAsync(rig.audio.dispose);
+}
+
+void main() {
+  setUpAll(() {
+    catalog = _catalog();
+  });
+  setUp(resetAudioCaptureCoordinatorForTest);
+
+  group('olcut1 flag closed', () {
+    late ContentRepository repo;
+    late CueTextResolver cueText;
+    setUpAll(() async {
+      await prepareRootTranslations();
+      repo = await ContentRepository.load();
+      cueText = await CueTextResolver.load();
+    });
+
+    Widget home({bool? open, bool onboarded = true}) => ContentRepositoryScope(
+      repo: repo,
+      cueText: cueText,
+      child: MaterialApp(
+        locale: const Locale('en'),
+        supportedLocales: appSupportedLocales,
+        localizationsDelegates: appLocalizationsDelegates,
+        home: open == null
+            ? OstinatoHome(
+                repo: repo,
+                cueText: cueText,
+                store: InMemoryOnboardingStore(),
+                alreadyOnboarded: onboarded,
+              )
+            : OstinatoHome(
+                repo: repo,
+                cueText: cueText,
+                store: InMemoryOnboardingStore(),
+                alreadyOnboarded: onboarded,
+                stageHomeOpen: open,
+                stageHomeBuilder: (_) => const Text('stage-stub'),
+              ),
+      ),
+    );
+
+    Future<void> ready(WidgetTester t, Finder anchor) =>
+        waitForLocalizedFixture(
+          t,
+          languageTag: 'en',
+          anchor: anchor,
+          reason: 'root',
+        );
+
+    testWidgets('the flag ships closed', (t) async {
+      expect(ostinatoStageHomeEnabled, isFalse);
+    });
+
+    testWidgets('default (flag closed): the root is the library', (t) async {
+      await t.pumpWidget(home());
+      await ready(t, find.byType(LibraryScreen));
+      expect(find.byType(LibraryScreen), findsOneWidget);
+      expect(find.byType(StageHomeScreen), findsNothing);
+      expect(find.byKey(const Key('stage-shelf')), findsNothing);
+      expect(find.byKey(const Key('stage-pinned-metronome')), findsNothing);
+    });
+
+    testWidgets('stageHomeOpen:false gives the library, no stage', (t) async {
+      await t.pumpWidget(home(open: false));
+      await ready(t, find.byType(LibraryScreen));
+      expect(find.byType(LibraryScreen), findsOneWidget);
+      expect(find.text('stage-stub'), findsNothing);
+    });
+
+    testWidgets('stageHomeOpen:true after the welcome: the stage', (t) async {
+      await t.pumpWidget(home(open: true));
+      await ready(t, find.text('stage-stub'));
+      expect(find.text('stage-stub'), findsOneWidget);
+      expect(find.byType(LibraryScreen), findsNothing);
+    });
+
+    testWidgets('stageHomeOpen:true before the welcome: still the welcome', (
+      t,
+    ) async {
+      await t.pumpWidget(home(open: true, onboarded: false));
+      await t.pump();
+      expect(find.text('stage-stub'), findsNothing);
+      expect(find.byType(LibraryScreen), findsNothing);
+    });
+  });
+
+  group('olcut2 stage content', () {
+    testWidgets('new user: next lesson, one Play, "just starting" line', (
+      t,
+    ) async {
+      final rig = _Rig();
+      await _boot(t, _stage(rig));
+      final want = _expected(catalog, {});
+      expect(find.byKey(const Key('stage-home')), findsOneWidget);
+      expect(
+        find.text(
+          want.lesson.title.of(t.element(find.byType(StageHomeScreen))),
+        ),
+        findsWidgets,
+      );
+      expect(find.byKey(const Key('stage-headline')), findsOneWidget);
+      expect(find.text(StageCopy.justStarting.$2), findsOneWidget);
+      // One Play: a single start control, labelled "Çal".
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      expect(find.text('Çal'), findsOneWidget);
+      expect(find.text('Başlat'), findsNothing);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('returning user: the continue line, the lesson after records', (
+      t,
+    ) async {
+      final first = _expected(catalog, {});
+      final done = V1PracticeRecord(
+        lessonId: first.id,
+        runs: 3,
+        passedAt: DateTime.utc(2026, 11, 1),
+        passedBpm: 50,
+        completedAt: DateTime.utc(2026, 11, 1),
+        completedBpm: 60,
+      );
+      final records = {first.id: done};
+      final rig = _Rig();
+      await _boot(t, _stage(rig, progress: _Memory(records)));
+      final want = _expected(catalog, records);
+      expect(want.id, isNot(first.id));
+      final unit = catalog.units.firstWhere((u) => u.id == want.unitId);
+      expect(
+        find.text('Devam: ${unit.level}. seviye, ${unit.module}. modül'),
+        findsOneWidget,
+      );
+      expect(find.text(StageCopy.justStarting.$2), findsNothing);
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('no usable next lesson: the first measured lesson', (t) async {
+      // Every lesson done: `next` is null; the first measured lesson shows.
+      final all = {
+        for (final l in catalog.lessons)
+          l.id: V1PracticeRecord(
+            lessonId: l.id,
+            runs: 1,
+            passedAt: DateTime.utc(2026, 11, 1),
+            passedBpm: 50,
+            completedAt: DateTime.utc(2026, 11, 1),
+            completedBpm: 60,
+          ),
+      };
+      final state = V1CourseState(catalog, all, const {});
+      final firstMeasured = catalog.lessons.firstWhere(
+        (l) => l.availability == V1LessonAvailability.measured,
+      );
+      final rig = _Rig();
+      await _boot(t, _stage(rig, progress: _Memory(all)));
+      if (state.next == null) {
+        final shown = t
+            .widget<PracticeLoopScreen>(find.byType(PracticeLoopScreen))
+            .lesson
+            .id;
+        expect(shown, firstMeasured.id);
+      }
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('three text-labelled handles at 48 dp, shared copy', (t) async {
+      final rig = _Rig();
+      await _boot(t, _stage(rig));
+      for (final (key, label) in [
+        ('stage-handle-other', 'Başka çalış'),
+        ('stage-handle-path', 'Yolum'),
+        ('stage-handle-setup', 'Ayar'),
+      ]) {
+        final f = find.byKey(Key(key));
+        expect(f, findsOneWidget);
+        expect(
+          find.descendant(of: f, matching: find.text(label)),
+          findsOneWidget,
+        );
+        expect(t.getSize(f).height, greaterThanOrEqualTo(48));
+      }
+      await _dispose(t, rig);
+    });
+  });
+
+  group('olcut3 one tap to play, permission at the first Play', () {
+    testWidgets('no permission before Play; one request on the first tap', (
+      t,
+    ) async {
+      final rig = _Rig();
+      await _boot(t, _stage(rig));
+      expect(rig.permissionCalls, 0);
+      await _play(t);
+      expect(rig.permissionCalls, 1);
+      expect(rig.controller!.running, isTrue);
+      await _dispose(t, rig);
+    });
+  });
+
+  group('olcut4 while playing', () {
+    testWidgets('handles hidden, no layer can open, budget refuses', (t) async {
+      final rig = _Rig();
+      final budget = GlassLayerBudget();
+      addTearDown(budget.dispose);
+      await _boot(
+        t,
+        _stage(
+          rig,
+          budget: budget,
+          layerBuilder: (c, h, close) => const Text('layer-content'),
+        ),
+      );
+      expect(find.byKey(const Key('stage-handles')), findsOneWidget);
+      await _play(t);
+      expect(budget.playing, isTrue);
+      expect(find.byKey(const Key('stage-handles')), findsNothing);
+      expect(find.byKey(const Key('stage-handle-other')), findsNothing);
+      expect(budget.tryOpen(Object()), isFalse);
+      expect(budget.openCount, 0);
+      expect(find.text('layer-content'), findsNothing);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('handles show and call the injected callback (default no-op)', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final seen = <StageHandle>[];
+      await _boot(t, _stage(rig, onHandle: (c, h) => seen.add(h)));
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await t.pump();
+      await t.tap(find.byKey(const Key('stage-handle-path')));
+      await t.pump();
+      await t.tap(find.byKey(const Key('stage-handle-setup')));
+      await t.pump();
+      expect(seen, StageHandle.values);
+      await _dispose(t, rig);
+
+      final rig2 = _Rig();
+      await _boot(t, _stage(rig2)); // no callback, no layer builder
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await t.pump();
+      expect(t.takeException(), isNull);
+      await _dispose(t, rig2);
+    });
+
+    testWidgets('a failed start: the screen does not stop', (t) async {
+      final rig = _Rig(permission: PermissionStatus.denied);
+      await _boot(t, _stage(rig));
+      await _play(t);
+      await t.pump(const Duration(milliseconds: 50));
+      expect(rig.controller!.phase, PracticePhase.failed);
+      expect(find.byKey(const Key('practice-failure')), findsOneWidget);
+      expect(find.byKey(const Key('stage-home')), findsOneWidget);
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      expect(find.byKey(const Key('stage-handles')), findsOneWidget);
+      expect(t.takeException(), isNull);
+      await _dispose(t, rig);
+    });
+  });
+
+  group('olcut6 tool shelf', () {
+    testWidgets('starts closed; opens opaque with the reused parts', (t) async {
+      final rig = _Rig();
+      await _boot(t, _stage(rig));
+      expect(find.byKey(const Key('stage-shelf')), findsOneWidget);
+      expect(find.byKey(const Key('stage-help-row')), findsNothing);
+      expect(find.byKey(const Key('stage-pin-metronome')), findsNothing);
+      await t.tap(find.byKey(const Key('stage-shelf-toggle')));
+      await t.pump();
+      for (final k in ['stage-pin-metronome', 'stage-help-row']) {
+        expect(find.byKey(Key(k)), findsOneWidget, reason: k);
+      }
+      expect(find.text('Metronom'), findsOneWidget);
+      expect(find.text('Referans'), findsOneWidget);
+      expect(find.text('Yardım'), findsOneWidget);
+      // Fully opaque: no blur, no glass layer, not in the glass budget.
+      final shelf = find.byKey(const Key('stage-shelf'));
+      expect(
+        find.descendant(of: shelf, matching: find.byType(BackdropFilter)),
+        findsNothing,
+      );
+      expect(
+        find.descendant(of: shelf, matching: find.byType(GlassLayer)),
+        findsNothing,
+      );
+      final color = t.widget<Material>(shelf).color!;
+      expect(color.a, 1.0);
+      // The practice screen is not split: still one start control.
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('closed while playing; cannot be opened; closed again after', (
+      t,
+    ) async {
+      final rig = _Rig();
+      await _boot(t, _stage(rig));
+      await t.tap(find.byKey(const Key('stage-shelf-toggle')));
+      await t.pump();
+      await _play(t);
+      expect(find.byKey(const Key('stage-shelf')), findsNothing);
+      expect(find.byKey(const Key('stage-shelf-toggle')), findsNothing);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('the loop switch drives the session controller', (t) async {
+      final rig = _Rig();
+      await _boot(t, _stage(rig));
+      await t.tap(find.byKey(const Key('stage-shelf-toggle')));
+      await t.pump();
+      if (rig.controller!.score.barCount > 1) {
+        expect(rig.controller!.loopBars, isNull);
+        await t.tap(find.byKey(const Key('stage-loop')));
+        await t.pump();
+        expect(rig.controller!.loopBars, isNotNull);
+      }
+      await _dispose(t, rig);
+    });
+  });
+
+  group('olcut6a pinned metronome', () {
+    testWidgets('visible while playing, opaque, outside the glass budget', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final budget = GlassLayerBudget();
+      addTearDown(budget.dispose);
+      await _boot(t, _stage(rig, budget: budget));
+      expect(find.byKey(const Key('stage-pinned-metronome')), findsNothing);
+      await t.tap(find.byKey(const Key('stage-shelf-toggle')));
+      await t.pump();
+      await t.tap(find.byKey(const Key('stage-pin-metronome')));
+      await t.pump();
+      final before = budget.openCount;
+      await _play(t);
+      final pinned = find.byKey(const Key('stage-pinned-metronome'));
+      expect(pinned, findsOneWidget);
+      expect(t.widget<Material>(pinned).color!.a, 1.0);
+      expect(
+        find.descendant(of: pinned, matching: find.byType(BackdropFilter)),
+        findsNothing,
+      );
+      expect(budget.openCount, before);
+      expect(budget.openCount, 0);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('not pinned: no metronome strip while playing', (t) async {
+      final rig = _Rig();
+      await _boot(t, _stage(rig));
+      await _play(t);
+      expect(find.byKey(const Key('stage-pinned-metronome')), findsNothing);
+      await _dispose(t, rig);
+    });
+  });
+
+  group('olcut7 back', () {
+    testWidgets('a layer is open: back closes the layer, stage stays', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final budget = GlassLayerBudget();
+      addTearDown(budget.dispose);
+      await _boot(
+        t,
+        _stage(
+          rig,
+          budget: budget,
+          layerBuilder: (c, h, close) => const Text('layer-content'),
+        ),
+      );
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await t.pump();
+      await t.pump();
+      expect(find.text('layer-content'), findsOneWidget);
+      expect(budget.openCount, 1);
+      await t.binding.handlePopRoute();
+      await t.pump();
+      await t.pump();
+      expect(find.text('layer-content'), findsNothing);
+      expect(budget.openCount, 0);
+      expect(find.byKey(const Key('stage-home')), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('an exit screen: back returns to the stage', (t) async {
+      final rig = _Rig();
+      await _boot(
+        t,
+        _stage(
+          rig,
+          onHandle: (context, h) => Navigator.of(context).push<void>(
+            MaterialPageRoute(
+              builder: (_) => const Scaffold(body: Text('exit-screen')),
+            ),
+          ),
+        ),
+      );
+      await t.tap(find.byKey(const Key('stage-handle-setup')));
+      await t.pumpAndSettle();
+      expect(find.text('exit-screen'), findsOneWidget);
+      await t.binding.handlePopRoute();
+      await t.pumpAndSettle();
+      expect(find.text('exit-screen'), findsNothing);
+      expect(find.byKey(const Key('stage-home')), findsOneWidget);
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      await _dispose(t, rig);
+    });
+
+    testWidgets('leaving a half run: says not measured, records nothing', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final progress = _Memory();
+      await _boot(t, _stage(rig, progress: progress));
+      final before = (await progress.load()).length;
+      await _play(t);
+      expect(rig.controller!.running, isTrue);
+      await t.binding.handlePopRoute();
+      await t.pump();
+      await t.pump();
+      expect(find.byKey(const Key('stage-run-not-completed')), findsOneWidget);
+      expect(find.text(StageCopy.runNotCompleted.$2), findsOneWidget);
+      expect(progress.recordCalls, 0);
+      expect((await progress.load()).length, before);
+      // The stage is idle again: handles and a fresh Play.
+      expect(find.byKey(const Key('stage-handles')), findsOneWidget);
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      await t.pump(const Duration(seconds: 1));
+      expect(progress.recordCalls, 0);
+      expect(t.takeException(), isNull);
+      await _dispose(t, rig);
+    });
+  });
+
+  group('olcut7 half run with outcomes', () {
+    testWidgets('outcomes exist, back leaves: not measured, nothing recorded', (
+      t,
+    ) async {
+      final rig = _Rig();
+      final progress = _Memory();
+      await _boot(t, _stage(rig, progress: progress));
+      final before = (await progress.load()).length;
+      await _play(t);
+      final c = rig.controller!;
+      final rng = math.Random(1);
+      var tn = 0;
+      for (var i = 0; i < 400 && c.outcomes.isEmpty; i++) {
+        final x = Float64List(4800);
+        for (var k = 0; k < x.length; k++) {
+          x[k] = (rng.nextDouble() * 2 - 1) * .002;
+        }
+        rig.channel.pushChunk(x, sampleRate: 48000, tNativeUs: tn);
+        tn += 100000;
+        rig.local = tn;
+        await t.pump();
+        if (rig.channel.metronome != null && c.timeline == null) {
+          rig.channel.pushMetronomeAnchor(tn + 200000);
+          await t.pump();
+        }
+        c.tick();
+        await t.pump();
+      }
+      expect(c.outcomes, isNotEmpty, reason: 'a result was produced');
+      expect(c.phase, PracticePhase.running, reason: 'run is still half-way');
+      await t.binding.handlePopRoute();
+      await t.pump();
+      await t.pump();
+      expect(find.byKey(const Key('stage-run-not-completed')), findsOneWidget);
+      expect(find.text(StageCopy.runNotCompleted.$2), findsOneWidget);
+      await t.pump(const Duration(seconds: 1));
+      expect(progress.recordCalls, 0);
+      expect((await progress.load()).length, before);
+      expect(find.byType(PracticeResultScreen), findsNothing);
+      expect(t.takeException(), isNull);
+      await _dispose(t, rig);
+    });
+  });
+
+  group('olcut5 copy and l10n', () {
+    test('every stage pair has a message id', () {
+      for (final p in StageCopy.all) {
+        expect(appMessageIds.containsKey(p), isTrue, reason: '$p');
+      }
+    });
+
+    test('the promise regex really catches the forbidden words', () {
+      for (final w in [
+        'Putaran belum selesai',
+        'अभी शुरुआत है',
+        'Ainda não',
+        'Non ancora',
+        'Noch nicht',
+        'Aún no',
+        'まだ',
+        '아직',
+        'Jeszcze nie',
+        '还没有',
+        'ليس بعد',
+        "Pas pour l'instant",
+        'Encore',
+        'Bientôt',
+        'Pronto',
+        'Presto',
+        'Bald',
+        'Skoro',
+        'Segera',
+        'जल्द',
+        '即将',
+        '곧',
+        'まもなく',
+        'coming soon',
+        'not yet',
+        'henüz',
+        'yakında',
+        'wrong',
+        'yanlış',
+      ]) {
+        expect(_promise.hasMatch(w), isTrue, reason: w);
+      }
+      for (final ok in ['Metronom', 'Araçlar', 'Je débute', 'Tools']) {
+        expect(_promise.hasMatch(ok), isFalse, reason: ok);
+      }
+    });
+
+    test('the new pairs are in all 14 catalogs and promise nothing', () {
+      for (final f in Directory('assets/l10n').listSync()) {
+        if (f is! File || !f.path.endsWith('.json')) continue;
+        final messages =
+            (jsonDecode(f.readAsStringSync()) as Map)['messages'] as Map;
+        for (final p in StageCopy.newPairs) {
+          final id = appMessageIds[p]!;
+          final text = messages[id] as String?;
+          expect(text, isNotNull, reason: '${f.path} $id');
+          expect(text, isNotEmpty);
+          expect(_promise.hasMatch(text!), isFalse, reason: '${f.path} $text');
+          if (!f.path.endsWith('/en.json') && !f.path.endsWith('/tr.json')) {
+            // A real translation: not the English source copied over
+            // (short loanwords such as "Metronom" may coincide).
+            if (p.$1.length > 12) expect(text, isNot(p.$1), reason: f.path);
+          }
+        }
+      }
+    });
+  });
+}
