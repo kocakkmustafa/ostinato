@@ -6,7 +6,7 @@ Test dosyaları: `test/stage_home_test.dart` (gruplar `05c layers`, `05c ek i`, 
 |---|---|---|---|---|---|
 | 1 | İkinci katman birinciyi kapatır; GlassLayer <= 2 | `criterion 1: a second layer closes the first; glass <= 2` (stage_home_test) | Derleme kırmızısı (StageLayerManager yoktu); sabotaj: yöneticideki `_open.clear()` satırı çıkarılınca `Expected: [path] Actual: [other, path]` kırmızı, geri konunca yeşil | yeşil | - |
 | 2 | Katman <= %60, üst şerit >= %40 (360x640, 412x915) | `criterion 2: ...` x2 (stage_home_test); render testi içinde de assert | İlk koşuda ölçüm katmanın dış Align kutusunu aldı (640 > 384), katman gövdesine (FractionallySizedBox) düzeltildi | yeşil | 01-katman-390x844/360x640-acik/koyu |
-| 3 | Öneri satırı deterministik, kayıt yoksa gizli, >= 5 durum | `stage_suggestion_test.dart` (5 test) + `criterion 3: suggestion line shows only with records` | Derleme kırmızısı (dosya yoktu); yeşil 5/5 + widget | yeşil. `missFromSummary` için birim test YOK (PracticeRunSummary kurulumu ağır), yalnız koddan | 01-katman (öneri satırı görünür) |
+| 3 | Öneri satırı deterministik, kayıt yoksa gizli, >= 5 durum | `stage_suggestion_test.dart` (5 test) + `criterion 3: suggestion line shows only with records` | Derleme kırmızısı (dosya yoktu); yeşil 5/5 + widget | yeşil. `missFromSummary` birim testleri tur 1'de eklendi (bkz. aşağıda #5) | 01-katman (öneri satırı görünür) |
 | 4 | Kulak <= 2 dokunuş; Akort tam ekran, geri = sahne, koşu/durum bozulmaz | `criterion 4: ear opens in two taps; the tuner ...` | Derleme kırmızısı (`earScreenBuilder/tunerOpener` yoktu) | yeşil. `tunerOpener` ve `earScreenBuilder` TAKLİT: gerçek `openTuner` ve `_earScreen` yolu NOT_TESTED (gerçek TunerScreen cihazda) | 02-kulak (yükleme anı), 03-akort |
 | 5 | Gitar ve kulak açık; "Yakında" çalgılar mevcut kural | `criterion 5: guitar and ear are open; ...` | Derleme kırmızısı | yeşil (diğer çalgı -> `ComingSoonInstrumentScreen`) | 01-katman |
 | 6 | Odak: açılınca ilk öğe, kapanınca tutamak | `criterion 6: focus goes into the layer, back to the handle` | Derleme kırmızısı; ilk koşuda odak yardımcısı hatalıydı, düzeltildi | yeşil (`Semantics.focused` değil, birincil odak düğümü) | - |
@@ -33,3 +33,10 @@ Worktree notu: `assets/models/pose_landmarker_full.v1.task` testlerin derlenmesi
 | #9 ölçüt 4 taklit notu | bu tablo | - | yazıldı |
 
 Koşu: stage_home + stage_suggestion + practice_screen + glass_layer + app_locale_preferences + ux_05c_render = `+132 All tests passed`; `flutter analyze` (tam) No issues. PNG yeniden üretilmedi (görsel değişiklik yok).
+
+## Tur 2 (reviewer KABUL, 723b157)
+Reviewer tur 2: tur 1 bulguları #1–#7 ve #9 kapandı, regresyon yok, bayrak KAPALI yolu eski davranışla aynı (`beforeStart == null` iken `_begin()` eşzamanlı). Açık düşük notlar (bayrak AÇILMADAN önce ele alınacak; 05c'yi engellemez):
+- A. `_starting=false` sıfırlaması (practice_loop_screen.dart ~453) sabotajla kırılmıyor: "guard false, ÇAL tekrar, guard ikinci kez sorulur" testi yok; guard hiç dönmezse ÇAL sessiz kalır (zaman aşımı bilinçli yok, üyelik sayfası açabilir).
+- B. `_sessionMiss = missFromSummary(...)` `passed` bakmıyor, `missFromRecord` geçilmiş dersi `none` yapıyor: oturum içi ile yeniden açılış öneri satırı çelişebilir (determinizm bozulmuyor).
+- D. `_starting=false` `_begin()` öncesi atanıyor; `_begin`'in izin penceresinde ek dokunuş ikinci `_begin` başlatabilir (eski ekranda da var, yeni regresyon değil).
+- E. `stage-headline` oturum içi ilk koşudan sonra güncellenmiyor ("Yeni başlıyorsun" kalır).
