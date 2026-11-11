@@ -8802,6 +8802,11 @@
     "45d8787934415f73": "Dlaczego ta: masz już postęp w tym module.",
     "456bb0c10501ae9d": "Zagrane lekcje: {v0}, podejścia: {v1}",
     "adc25972f051872b": "Najlepsze tempo ♩={v0}",
-    "160312991ccc5ace": "Cel tygodniowy: {v0} z {v1} dni w tym tygodniu"
+    "160312991ccc5ace": "Cel tygodniowy: {v0} z {v1} dni w tym tygodniu",
+    "1414e3df16c2a2d6": "Tu nie było słychać początku dźwięku.",
+    "d67ef3eff8553313": "To było za ciche, żeby dało się to usłyszeć.",
+    "85ea9fc1b71968ba": "To było tak głośne, że dźwięk się zniekształcił.",
+    "17b6b0e1afd14e00": "Tutaj słychać było dźwięk samej aplikacji, więc nie oceniałem tej nuty.",
+    "979084fd4ae01d09": "Ta nuta została pominięta w „Poczekaj na mnie”."
   }
 }

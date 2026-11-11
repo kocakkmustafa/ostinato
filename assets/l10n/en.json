@@ -8788,6 +8788,11 @@
     "45d8787934415f73": "Why this one: you already have progress in this module.",
     "456bb0c10501ae9d": "{v0} lessons played, {v1} runs",
     "adc25972f051872b": "Best tempo ♩={v0}",
-    "160312991ccc5ace": "Weekly goal: {v0} of {v1} days this week"
+    "160312991ccc5ace": "Weekly goal: {v0} of {v1} days this week",
+    "1414e3df16c2a2d6": "I didn't hear a note start here.",
+    "d67ef3eff8553313": "This was too quiet for me to hear.",
+    "85ea9fc1b71968ba": "This was loud enough to distort the sound.",
+    "17b6b0e1afd14e00": "The app's own sound was audible here, so I made no call on this note.",
+    "979084fd4ae01d09": "You skipped this note in \"Wait for me\"."
   }
 }

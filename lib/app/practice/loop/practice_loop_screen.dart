@@ -402,6 +402,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           ownRecorder: _c.ownRecorder,
           ladder: ladder,
           fix: fix,
+          stage: widget.stageMode,
         ),
       ),
     );

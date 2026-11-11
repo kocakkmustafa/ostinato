@@ -8788,6 +8788,11 @@
     "45d8787934415f73": "Por qué esta: ya tienes avance en este módulo.",
     "456bb0c10501ae9d": "{v0} lecciones tocadas, {v1} intentos",
     "adc25972f051872b": "Mejor tempo ♩={v0}",
-    "160312991ccc5ace": "Meta semanal: {v0} de {v1} días esta semana"
+    "160312991ccc5ace": "Meta semanal: {v0} de {v1} días esta semana",
+    "1414e3df16c2a2d6": "Aquí no escuché que empezara una nota.",
+    "d67ef3eff8553313": "Esto sonó demasiado bajo para que yo lo oyera.",
+    "85ea9fc1b71968ba": "Esto sonó tan fuerte que distorsionó el sonido.",
+    "17b6b0e1afd14e00": "Aquí se oyó el sonido de la propia app, así que no emití juicio sobre esta nota.",
+    "979084fd4ae01d09": "Omitiste esta nota en «Espérame»."
   }
 }

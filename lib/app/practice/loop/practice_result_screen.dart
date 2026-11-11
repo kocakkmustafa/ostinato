@@ -15,6 +15,7 @@ import 'practice_marks.dart';
 import 'practice_outcome.dart';
 import 'practice_rhythm_copy.dart';
 import 'practice_score.dart';
+import 'result_layer_copy.dart';
 import 'practice_tempo_ladder.dart';
 import 'practice_visual_theme.dart';
 import 'tempo_ladder_copy.dart';
@@ -75,6 +76,7 @@ class PracticeResultScreen extends StatelessWidget {
     this.ownRecorder,
     this.ladder,
     this.fix,
+    this.stage = false,
   });
 
   final V1Lesson lesson;
@@ -94,6 +96,10 @@ class PracticeResultScreen extends StatelessWidget {
   /// OST-P0-06: the one correction card (flag `ostinatoListenTryFixRepeatOpen`);
   /// null = the result is exactly as before.
   final ListenTryFixResult? fix;
+
+  /// OST-UX-05e: the stage's honest result layer (reasons for "could not
+  /// hear", "not measured" label). False = the screen exactly as before.
+  final bool stage;
 
   /// Rhythm-only line: "different" means early or late (A3 onset timing).
   bool get _rhythm => summary.gate.criteria.rhythm;
@@ -209,6 +215,10 @@ class PracticeResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _gate(context, gate),
+              if (stage && s.unheard > 0) ...[
+                const SizedBox(height: 12),
+                _reasons(context),
+              ],
               if (ladder != null) ...[
                 const SizedBox(height: 12),
                 _ladder(context, ladder!),
@@ -399,11 +409,13 @@ class PracticeResultScreen extends StatelessWidget {
             'Açılış temposunda geçtin',
           )
         : !gate.eligible
-        ? localized(
-            context,
-            'Practice round — the gate is measured on a full run',
-            'Pratik turu — geçiş tam bir turda ölçülür',
-          )
+        ? (stage
+              ? uiText(context, ResultLayerCopy.notMeasured)
+              : localized(
+                  context,
+                  'Practice round — the gate is measured on a full run',
+                  'Pratik turu — geçiş tam bir turda ölçülür',
+                ))
         : gate.heardTooLow
         ? localized(
             context,
@@ -418,7 +430,9 @@ class PracticeResultScreen extends StatelessWidget {
         children: [
           Text(
             title,
-            key: const Key('result-gate-title'),
+            key: stage && !gate.passed && !gate.eligible
+                ? const Key('result-not-measured')
+                : const Key('result-gate-title'),
             style: hankenText(size: 15, weight: FontWeight.w600),
           ),
           const SizedBox(height: 6),
@@ -599,6 +613,57 @@ class PracticeResultScreen extends StatelessWidget {
                 style: hankenText(size: 12, color: palette.textMuted),
               ),
             ),
+        ],
+      ),
+    );
+  }
+
+  /// OST-UX-05e (stage): why the "could not hear" notes of the last pass
+  /// were not heard. One neutral line per reason with the note count; never
+  /// a verdict on the playing.
+  Widget _reasons(BuildContext context) {
+    final theme = PracticeVisualThemeScope.of(context);
+    final st = theme.style(PracticeMark.couldNotHear);
+    final counts = <HearingReason, int>{};
+    for (final o in summary.lastMarks.values) {
+      final r = o.reason;
+      if (o.mark == PracticeMark.couldNotHear && r != null) {
+        counts[r] = (counts[r] ?? 0) + 1;
+      }
+    }
+    if (counts.isEmpty) return const SizedBox.shrink();
+    return GlassCard(
+      key: const Key('result-reasons'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (final r in HearingReason.values)
+            if (counts[r] != null)
+              Padding(
+                key: Key('result-reason-${r.name}'),
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${st.symbol} ${counts[r]}',
+                      textDirection: TextDirection.ltr,
+                      style: hankenText(
+                        size: 14,
+                        weight: FontWeight.w600,
+                        color: st.color,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        uiText(context, ResultLayerCopy.forReason(r)),
+                        style: hankenText(size: 13),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
         ],
       ),
     );
