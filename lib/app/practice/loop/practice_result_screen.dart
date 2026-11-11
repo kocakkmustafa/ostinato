@@ -15,9 +15,9 @@ import 'practice_marks.dart';
 import 'practice_outcome.dart';
 import 'practice_rhythm_copy.dart';
 import 'practice_score.dart';
-import 'result_layer_copy.dart';
 import 'practice_tempo_ladder.dart';
 import 'practice_visual_theme.dart';
+import 'result_layer_copy.dart';
 import 'tempo_ladder_copy.dart';
 
 /// What the learner chose on the result screen.
@@ -215,10 +215,7 @@ class PracticeResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _gate(context, gate),
-              if (stage && s.unheard > 0) ...[
-                const SizedBox(height: 12),
-                _reasons(context),
-              ],
+              ..._reasonsSection(context),
               if (ladder != null) ...[
                 const SizedBox(height: 12),
                 _ladder(context, ladder!),
@@ -618,55 +615,68 @@ class PracticeResultScreen extends StatelessWidget {
     );
   }
 
-  /// OST-UX-05e (stage): why the "could not hear" notes of the last pass
-  /// were not heard. One neutral line per reason with the note count; never
-  /// a verdict on the playing.
-  Widget _reasons(BuildContext context) {
-    final theme = PracticeVisualThemeScope.of(context);
-    final st = theme.style(PracticeMark.couldNotHear);
+  /// OST-UX-05e (stage): why the "could not hear" notes were not heard. Same
+  /// scope as the counter above (every pass of the run), so the rows add up
+  /// to it. One neutral line per reason with the note count; never a verdict.
+  /// Empty (no gap) when no reason is known.
+  List<Widget> _reasonsSection(BuildContext context) {
+    if (!stage || summary.unheard == 0) return const [];
     final counts = <HearingReason, int>{};
-    for (final o in summary.lastMarks.values) {
+    for (final o in summary.outcomes) {
       final r = o.reason;
       if (o.mark == PracticeMark.couldNotHear && r != null) {
         counts[r] = (counts[r] ?? 0) + 1;
       }
     }
-    if (counts.isEmpty) return const SizedBox.shrink();
-    return GlassCard(
-      key: const Key('result-reasons'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (final r in HearingReason.values)
-            if (counts[r] != null)
-              Padding(
-                key: Key('result-reason-${r.name}'),
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${st.symbol} ${counts[r]}',
-                      textDirection: TextDirection.ltr,
-                      style: hankenText(
-                        size: 14,
-                        weight: FontWeight.w600,
-                        color: st.color,
+    if (counts.isEmpty) return const [];
+    final theme = PracticeVisualThemeScope.of(context);
+    final st = theme.style(PracticeMark.couldNotHear);
+    final unheardName = localized(context, "Couldn't hear", 'Duyulamadı');
+    return [
+      const SizedBox(height: 12),
+      GlassCard(
+        key: const Key('result-reasons'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (final r in HearingReason.values)
+              if (counts[r] != null)
+                Padding(
+                  key: Key('result-reason-${r.name}'),
+                  padding: const EdgeInsets.symmetric(vertical: 3),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // The glyph alone is unclear to a screen reader: it
+                      // reads the counter's own label.
+                      Semantics(
+                        label: '$unheardName ${counts[r]}',
+                        child: ExcludeSemantics(
+                          child: Text(
+                            '${st.symbol} ${counts[r]}',
+                            textDirection: TextDirection.ltr,
+                            style: hankenText(
+                              size: 14,
+                              weight: FontWeight.w600,
+                              color: st.color,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        uiText(context, ResultLayerCopy.forReason(r)),
-                        style: hankenText(size: 13),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          uiText(context, ResultLayerCopy.forReason(r)),
+                          style: hankenText(size: 13),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-        ],
+          ],
+        ),
       ),
-    );
+    ];
   }
 
   Widget _errorMap(BuildContext context) {

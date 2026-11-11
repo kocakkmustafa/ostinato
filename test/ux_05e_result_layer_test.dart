@@ -70,24 +70,63 @@ Future<void> _showResult(
   PracticeRunSummary s, {
   bool stage = true,
   String locale = 'tr',
+  Size size = const Size(420, 2400),
+  double textScale = 1,
 }) async {
-  t.view.physicalSize = const Size(420, 2400);
+  t.view.physicalSize = size;
   t.view.devicePixelRatio = 1;
   addTearDown(t.view.resetPhysicalSize);
   addTearDown(t.view.resetDevicePixelRatio);
   await t.pumpWidget(
     practiceHost(
       locale: locale,
-      PracticeResultScreen(
-        lesson: _lesson(),
-        score: _score,
-        summary: s,
-        stage: stage,
+      Builder(
+        builder: (context) => MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: TextScaler.linear(textScale)),
+          child: PracticeResultScreen(
+            lesson: _lesson(),
+            score: _score,
+            summary: s,
+            stage: stage,
+          ),
+        ),
       ),
     ),
   );
   await t.pump();
 }
+
+/// A multi-pass run (loop / several passes): [passes] lists the marks of
+/// each pass in order, all on the same eight notes.
+PracticeRunSummary _passes(
+  List<List<PracticeMark>> passes, {
+  HearingReason reason = HearingReason.noAttack,
+  HearingReason? lastReason,
+}) => PracticeRunSummary.of(
+  score: _score,
+  outcomes: [
+    for (var p = 0; p < passes.length; p++)
+      for (var i = 0; i < passes[p].length; i++)
+        NoteOutcome(
+          eventIndex: i,
+          bar: _score.events[i].bar,
+          pass: p,
+          mark: passes[p][i],
+          reason: passes[p][i] == _u
+              ? (p == passes.length - 1 ? (lastReason ?? reason) : reason)
+              : null,
+        ),
+  ],
+  bpm: 60,
+  openBpm: 50,
+  targetBpm: 60,
+  completed: true,
+  loopUsed: false,
+  waitUsed: false,
+  criteria: const PassCriteria(minAccuracy: .8),
+);
 
 List<String> _texts(WidgetTester t) => [
   for (final w in t.widgetList<Text>(find.byType(Text)))
@@ -244,19 +283,65 @@ void main() {
   });
 
   group('olcut2 neutral reason for every unheard note', () {
+    // Independent literals (NOT ResultLayerCopy): swapping two reasons in
+    // the copy mapping must turn these red.
+    const literal = <HearingReason, (String, String)>{
+      HearingReason.noAttack: (
+        "I didn't hear a note start here.",
+        'Burada bir notanın başladığını duymadım.',
+      ),
+      HearingReason.tooQuiet: (
+        'This was too quiet for me to hear.',
+        'Bu, duymam için fazla kısıktı.',
+      ),
+      HearingReason.tooLoud: (
+        'This was loud enough to distort the sound.',
+        'Bu, sesi bozacak kadar yüksekti.',
+      ),
+      HearingReason.unclear: (
+        "I couldn't tell this sound apart with confidence; will you try again?",
+        'Bu sesi güvenle ayırt edemedim; tekrar dener misin?',
+      ),
+      HearingReason.appPlayback: (
+        "The app's own sound was audible here, so I made no call on this note.",
+        'Burada uygulamanın kendi sesi duyuldu; bu nota için karar vermedim.',
+      ),
+      HearingReason.skipped: (
+        'You skipped this note in "Wait for me".',
+        '"Beni bekle"de bu notayı atladın.',
+      ),
+    };
     for (final r in HearingReason.values) {
-      testWidgets('${r.name}: a neutral line, no verdict word (tr + en)', (
+      testWidgets('${r.name}: its own literal line, no other reason (tr+en)', (
         t,
       ) async {
         for (final loc in ['tr', 'en']) {
           await _showResult(
             t,
-            _summary([_c, _c, _c, _c, _c, _c, _c, _u], reasons: {7: r}),
+            _summary([_c, _c, _c, _c, _c, _c, _u, _u], reasons: {6: r, 7: r}),
             locale: loc,
           );
-          final pair = ResultLayerCopy.forReason(r);
+          final want = loc == 'tr' ? literal[r]!.$2 : literal[r]!.$1;
           expect(find.byKey(Key('result-reason-${r.name}')), findsOneWidget);
-          expect(find.text(loc == 'tr' ? pair.$2 : pair.$1), findsOneWidget);
+          expect(find.text(want), findsOneWidget);
+          for (final other in HearingReason.values.where((x) => x != r)) {
+            expect(
+              find.byKey(Key('result-reason-${other.name}')),
+              findsNothing,
+            );
+            expect(
+              find.text(loc == 'tr' ? literal[other]!.$2 : literal[other]!.$1),
+              findsNothing,
+            );
+          }
+          // The row carries the note count (2), same as the counter.
+          expect(
+            find.descendant(
+              of: find.byKey(Key('result-reason-${r.name}')),
+              matching: find.textContaining(' 2'),
+            ),
+            findsOneWidget,
+          );
           _noVerdictWords(t);
         }
       });
@@ -280,11 +365,138 @@ void main() {
       expect(
         find.descendant(
           of: find.byKey(const Key('result-reason-noAttack')),
-          matching: find.textContaining('2'),
+          matching: find.textContaining(' 2'),
         ),
-        findsWidgets,
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(const Key('result-reason-tooQuiet')),
+          matching: find.textContaining(' 1'),
+        ),
+        findsOneWidget,
       );
     });
+
+    testWidgets('Tur 1 #1: reasons use the counter\'s scope (all passes)', (
+      t,
+    ) async {
+      // Pass 0: 3 unheard (noAttack). Pass 1: clean. Counter says 3.
+      final clean = _passes([
+        [_u, _u, _u, _c, _c, _c, _c, _c],
+        [_c, _c, _c, _c, _c, _c, _c, _c],
+      ]);
+      await _showResult(t, clean);
+      expect(_count(t, 'couldNotHear'), 3);
+      expect(find.byKey(const Key('result-reason-noAttack')), findsOneWidget);
+      // Pass 0: 2 noAttack; pass 2 (last): 1 tooQuiet. Rows sum to counter.
+      final mixed = _passes([
+        [_u, _u, _c, _c, _c, _c, _c, _c],
+        [_c, _c, _c, _c, _c, _c, _c, _c],
+        [_c, _c, _u, _c, _c, _c, _c, _c],
+      ], lastReason: HearingReason.tooQuiet);
+      await _showResult(t, mixed);
+      expect(_count(t, 'couldNotHear'), 3);
+      int rowSum() {
+        var n = 0;
+        for (final r in HearingReason.values) {
+          final f = find.byKey(Key('result-reason-${r.name}'));
+          if (f.evaluate().isEmpty) continue;
+          n += int.parse(
+            (t
+                        .widgetList<Text>(
+                          find.descendant(of: f, matching: find.byType(Text)),
+                        )
+                        .first
+                        .data ??
+                    '')
+                .split(' ')
+                .last,
+          );
+        }
+        return n;
+      }
+
+      expect(rowSum(), 3);
+    });
+
+    testWidgets('Tur 1 #1: unheard but no reason known: no empty gap', (
+      t,
+    ) async {
+      final s = PracticeRunSummary.of(
+        score: _score,
+        outcomes: [
+          for (var i = 0; i < 8; i++)
+            NoteOutcome(
+              eventIndex: i,
+              bar: _score.events[i].bar,
+              pass: 0,
+              mark: i < 7 ? _c : _u,
+            ),
+        ],
+        bpm: 60,
+        openBpm: 50,
+        targetBpm: 60,
+        completed: true,
+        loopUsed: false,
+        waitUsed: false,
+      );
+      await _showResult(t, s);
+      expect(find.byKey(const Key('result-reasons')), findsNothing);
+      final gate = t.getRect(find.byKey(const Key('result-gate')));
+      final map = t.getRect(find.byKey(const Key('result-error-map')));
+      expect(map.top - gate.bottom, 12, reason: 'one 12 px gap, not two');
+    });
+
+    testWidgets('Tur 1 #6: a reason row reads "Duyulamadı n" for assistive '
+        'technology', (t) async {
+      final handle = t.ensureSemantics();
+      await _showResult(
+        t,
+        _summary(
+          [_c, _c, _c, _c, _c, _u, _u, _u],
+          reasons: {
+            5: HearingReason.noAttack,
+            6: HearingReason.noAttack,
+            7: HearingReason.tooQuiet,
+          },
+        ),
+      );
+      expect(find.bySemanticsLabel('Duyulamadı 2'), findsWidgets);
+      expect(
+        find.descendant(
+          of: find.byKey(const Key('result-reason-noAttack')),
+          matching: find.bySemanticsLabel('Duyulamadı 2'),
+        ),
+        findsOneWidget,
+      );
+      handle.dispose();
+    });
+
+    for (final size in const [Size(360, 640), Size(390, 844)]) {
+      testWidgets('Tur 1 #6: text x1.3 at ${size.width.toInt()}x'
+          '${size.height.toInt()}: six reasons and the label fit', (t) async {
+        await _showResult(
+          t,
+          _summary(
+            [_u, _u, _u, _u, _u, _u, _c, _c],
+            reasons: {for (var i = 0; i < 6; i++) i: HearingReason.values[i]},
+            completed: false,
+          ),
+          size: size,
+          textScale: 1.3,
+        );
+        for (final k in ['result-reasons', 'result-not-measured']) {
+          await t.ensureVisible(find.byKey(Key(k)));
+          await t.pump();
+          expect(find.byKey(Key(k)), findsOneWidget);
+        }
+        for (final r in HearingReason.values) {
+          expect(find.byKey(Key('result-reason-${r.name}')), findsOneWidget);
+        }
+        expect(t.takeException(), isNull);
+      });
+    }
 
     testWidgets('nothing unheard: no reason section', (t) async {
       await _showResult(t, _summary([_c, _c, _c, _c, _c, _c, _c, _c]));
