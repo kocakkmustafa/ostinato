@@ -7,6 +7,8 @@ import '../practice/loop/practice_session_controller.dart';
 import '../practice/loop/reference_listen.dart';
 import '../practice/loop/reference_listen_bar.dart';
 import '../ui_copy.dart';
+import 'ghost_level_copy.dart';
+import 'ghost_policy.dart';
 import 'stage_copy.dart';
 
 /// OST-UX-05b: the stage's tool shelf. FULLY OPAQUE (no blur, no glass, not
@@ -23,6 +25,9 @@ class ToolShelf extends StatelessWidget {
     required this.listen,
     required this.pinned,
     required this.onPinned,
+    this.ghost,
+    this.onGhostSelect,
+    this.helpOpen = false,
     this.onHelp,
     this.maxContentHeight,
   });
@@ -36,7 +41,13 @@ class ToolShelf extends StatelessWidget {
   final bool pinned;
   final ValueChanged<bool> onPinned;
 
-  /// The help row's action; null = the row only holds its place.
+  /// OST-UX-05g: the Ghost state; null = the flag is closed and the help row
+  /// does not exist at all.
+  final GhostState? ghost;
+  final ValueChanged<GhostLevel>? onGhostSelect;
+  final bool helpOpen;
+
+  /// The help row's action (opens / closes the level surface).
   final VoidCallback? onHelp;
 
   /// OST-UX-05b2: the open list scrolls inside this height so the Play area
@@ -160,24 +171,142 @@ class ToolShelf extends StatelessWidget {
                     );
                   },
                 ),
-              InkWell(
-                key: const Key('stage-help-row'),
-                onTap: onHelp,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(minHeight: 48),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: Text(
-                        uiText(context, StageCopy.help),
-                        style: hankenText(size: 14, weight: FontWeight.w500),
+              if (ghost != null) ...<Widget>[
+                Semantics(
+                  key: const Key('stage-help-row'),
+                  container: true,
+                  button: true,
+                  expanded: helpOpen,
+                  label: uiText(context, StageCopy.help),
+                  onTap: onHelp,
+                  excludeSemantics: true,
+                  child: InkWell(
+                    onTap: onHelp,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 48),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Text(
+                            uiText(context, StageCopy.help),
+                            style: hankenText(
+                              size: 14,
+                              weight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
+                if (helpOpen)
+                  _EnsureVisible(child: _ghostSurface(context, ghost!)),
+              ],
             ]),
+        ],
+      ),
+    );
+  }
+
+  static UiCopy _levelCopy(GhostLevel l) => switch (l) {
+    GhostLevel.learn => GhostLevelCopy.learn,
+    GhostLevel.reinforce => GhostLevelCopy.reinforce,
+    GhostLevel.recall => GhostLevelCopy.recall,
+    GhostLevel.independent => GhostLevelCopy.independent,
+  };
+
+  static UiCopy _itemCopy(GhostItem i) => switch (i) {
+    GhostItem.notation => GhostLevelCopy.notation,
+    GhostItem.tab => GhostLevelCopy.tab,
+    GhostItem.beat => GhostLevelCopy.beat,
+    GhostItem.label => GhostLevelCopy.label,
+    GhostItem.preStartPreview => GhostLevelCopy.preStartPreview,
+    GhostItem.metronome => GhostLevelCopy.metronome,
+    GhostItem.hint => GhostLevelCopy.hint,
+  };
+
+  /// The four manual levels, what each shows, and (only after enough valid
+  /// runs) one thin suggestion line. Opaque; part of the shelf's own scroll.
+  Widget _ghostSurface(BuildContext context, GhostState g) {
+    final palette = OstinatoPalette.of(context);
+    final next = GhostPolicy.suggestion(g);
+    return Padding(
+      key: const Key('ghost-help-surface'),
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text(
+            uiText(context, GhostLevelCopy.title),
+            style: hankenText(size: 13, weight: FontWeight.w600),
+          ),
+          for (final l in GhostLevel.values)
+            Semantics(
+              key: Key('ghost-level-${l.name}'),
+              container: true,
+              button: true,
+              selected: l == g.level,
+              label: uiText(context, _levelCopy(l)),
+              onTap: () => onGhostSelect?.call(l),
+              excludeSemantics: true,
+              child: InkWell(
+                onTap: () => onGhostSelect?.call(l),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: 48),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          uiText(context, _levelCopy(l)),
+                          style: hankenText(
+                            size: 14,
+                            weight: l == g.level
+                                ? FontWeight.w700
+                                : FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      if (l == g.level) const Icon(Icons.check, size: 18),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          const SizedBox(height: 4),
+          Text(
+            uiText(context, GhostLevelCopy.shown),
+            style: hankenText(size: 12, color: palette.textMuted),
+          ),
+          for (final i in GhostItem.values)
+            if (GhostPolicy.itemsFor(g.level).contains(i))
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: Text(
+                  uiText(context, _itemCopy(i)),
+                  key: Key('ghost-item-${i.name}'),
+                  style: hankenText(size: 13),
+                ),
+              ),
+          if (g.lastRun == GhostLastRun.notMeasured)
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Text(
+                uiText(context, GhostLevelCopy.notMeasured),
+                key: const Key('ghost-last-run'),
+                style: hankenText(size: 12.5),
+              ),
+            ),
+          if (next != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Text(
+                '${uiText(context, GhostLevelCopy.suggestion)}: '
+                '${uiText(context, _levelCopy(next))}',
+                key: const Key('ghost-suggestion'),
+                style: hankenText(size: 12.5, weight: FontWeight.w600),
+              ),
+            ),
         ],
       ),
     );
@@ -210,4 +339,29 @@ class ToolShelf extends StatelessWidget {
       ],
     ),
   );
+}
+
+/// OST-UX-05g: when the help surface opens inside the shelf's own scroll, it
+/// is scrolled to the top of the viewport once (no animation), so it is never
+/// left below the fold on a small phone.
+class _EnsureVisible extends StatefulWidget {
+  const _EnsureVisible({required this.child});
+  final Widget child;
+
+  @override
+  State<_EnsureVisible> createState() => _EnsureVisibleState();
+}
+
+class _EnsureVisibleState extends State<_EnsureVisible> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      Scrollable.ensureVisible(context, alignment: 0);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }

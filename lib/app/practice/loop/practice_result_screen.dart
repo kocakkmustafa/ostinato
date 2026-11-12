@@ -821,10 +821,25 @@ class PracticeResultScreen extends StatelessWidget {
     );
   }
 
+  /// OST-UX-05g (stage only): a run that is not measured (stopped early, loop,
+  /// wait) must not produce a tempo / loop / performance suggestion from its
+  /// partial numbers, as that would contradict the "Not measured" label.
+  /// Outside the stage (`stage == false`) `NextStep` is used exactly as before.
+  NextStep get _step =>
+      stage &&
+          !summary.gate.eligible &&
+          const <NextStep>{
+            NextStep.loopSlower,
+            NextStep.raiseTempo,
+            NextStep.performanceRun,
+          }.contains(summary.nextStep)
+      ? NextStep.tryAgain
+      : summary.nextStep;
+
   Widget _nextStep(BuildContext context) {
     final s = summary;
     final loop = s.loopSuggestion;
-    final (String label, ResultAction action) = switch (s.nextStep) {
+    final (String label, ResultAction action) = switch (_step) {
       NextStep.nextLesson when hasNextLesson => (
         localized(context, 'Go to the next lesson', 'Sonraki derse geç'),
         const ResultActionNextLesson(),

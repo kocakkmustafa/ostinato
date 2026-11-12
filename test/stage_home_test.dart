@@ -535,12 +535,13 @@ void main() {
       expect(find.byKey(const Key('stage-pin-metronome')), findsNothing);
       await t.tap(find.byKey(const Key('stage-shelf-toggle')));
       await t.pump();
-      for (final k in ['stage-pin-metronome', 'stage-help-row']) {
-        expect(find.byKey(Key(k)), findsOneWidget, reason: k);
-      }
+      expect(find.byKey(const Key('stage-pin-metronome')), findsOneWidget);
       expect(find.text('Metronom'), findsOneWidget);
       expect(find.text('Referans'), findsOneWidget);
-      expect(find.text('Yardım'), findsOneWidget);
+      // OST-UX-05g: the Help row only exists while the Ghost flag
+      // (`ostinatoGhostScreenOpen`, closed by default) is open.
+      expect(find.byKey(const Key('stage-help-row')), findsNothing);
+      expect(find.text('Yardım'), findsNothing);
       // Fully opaque: no blur, no glass layer, not in the glass budget.
       final shelf = find.byKey(const Key('stage-shelf'));
       expect(
@@ -996,7 +997,8 @@ void main() {
               await t.tap(find.byKey(const Key('stage-shelf-toggle')));
               await t.pump();
               await t.pump();
-              expect(find.byKey(const Key('stage-help-row')), findsOneWidget);
+              // 05g: no Help row while the Ghost flag is closed (default).
+              expect(find.byKey(const Key('stage-help-row')), findsNothing);
             }
             final start = find.byKey(const Key('practice-start'));
             expect(start, findsOneWidget);

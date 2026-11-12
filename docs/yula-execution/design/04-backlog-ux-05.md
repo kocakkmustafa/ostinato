@@ -139,3 +139,6 @@ Kod bu bilette değiştirilmedi; UX-05'te ele alınacak bilinen noktalar:
 - Bayrak açılmadan önce (05c reviewer tur 2 düşük notları): ayrıntı `05c-olcut-tablosu.md` "Tur 2" (A: `_starting` sıfırlama testi yok, guard hiç dönmezse ÇAL sessiz; B: oturum içi ve yeniden açılış öneri satırı `passed` farkı; E: başlık oturum içinde güncellenmez).
 - Hâlâ açık (05d–f): (ii) güvenlik satırı 360x640 + yazı 1.3 + raf açıkken ilk ekranda; (iii) mikrofon reddi sonrası akort kartı gizli kalır, "Ayar" tutamağı akortçu yolu 05f'te. Ölçüt 4 testlerinde `tunerOpener`/`earScreenBuilder` taklit: gerçek `openTuner`/`_earScreen` NOT_TESTED.
 
+
+## 05g devir notları
+- ADR (Motion orchestration, 2026-11-12): Kulak/ritim-only dersler Hayalet'e girmez. Gerekçe: Hayalet görsel nota/tab desteğini kademeli kaldırır; kulak/ritim derslerinde kaldırılacak görsel yoktur. Açık: seçilen basamağın pratik ekranındaki nota/tab/vuruş görünürlüğüne uygulanması OST-UX-05g2'dir (bayrak açılmadan önce zorunlu); eski akışta NextStep'in kısmi veriden öneri üretmesi OST-UX-05e2'dir (eski sonuç ekranında da 'Ölçülmedi' koşusunda öneri yok).

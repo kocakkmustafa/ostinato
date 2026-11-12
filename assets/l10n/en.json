@@ -8808,6 +8808,21 @@
     "e2b7e755f1959257": "Hide",
     "89e6be2f6a03a557": "Microphone: no permission",
     "7285764d37c8aa5c": "Microphone: permission off",
-    "0bd4a35e06933c8a": "Microphone: restricted"
+    "0bd4a35e06933c8a": "Microphone: restricted",
+    "afd601892db282ac": "Help level",
+    "3c1ec2f22a50a81c": "Learning",
+    "597c3ff95ffa3be0": "Reinforcing",
+    "a526d5398bb902ce": "Recalling",
+    "2e95e546323e3c5d": "Independent",
+    "ce452998f1522538": "Notation",
+    "bfd949f032f6fdaa": "Tab",
+    "0b5ab5c5a5449abc": "Beat line",
+    "b9ecc862b4b4cda8": "Label",
+    "4074ad9bbe750206": "Notation for 3 seconds before you start",
+    "565fcc73f3de87ca": "Metronome (optional)",
+    "aee251b6da600be1": "Hint",
+    "e1a10ad8851b0fc6": "You can try one step up",
+    "15517a5be8ed4a9c": "The last run was not measured; it did not count toward the step",
+    "e11d8431742ddc50": "Help items for this level"
   }
 }
