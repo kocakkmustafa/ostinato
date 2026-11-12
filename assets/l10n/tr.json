@@ -8793,6 +8793,21 @@
     "d67ef3eff8553313": "Bu, duymam için fazla kısıktı.",
     "85ea9fc1b71968ba": "Bu, sesi bozacak kadar yüksekti.",
     "17b6b0e1afd14e00": "Burada uygulamanın kendi sesi duyuldu; bu nota için karar vermedim.",
-    "979084fd4ae01d09": "\"Beni bekle\"de bu notayı atladın."
+    "979084fd4ae01d09": "\"Beni bekle\"de bu notayı atladın.",
+    "7453c319c1bf8ca5": "Dinleme kapalı",
+    "d76c2a76e390b8d1": "Sayaç: ölçülmüyor",
+    "bbac55b3b0a022b5": "Ayarlara git",
+    "bd61ef7fa80d6a8f": "Ayar ve cihaz",
+    "54c027eba296ec2f": "Mikrofon: verildi",
+    "a9cff57ea62b8da7": "Gecikme kalibrasyonu",
+    "ce0ecc84043c5047": "Ortam gürültüsü: ölçülmedi",
+    "05c233abdf453ebb": "Ortam gürültüsü: sessiz",
+    "ade13ea684ac2219": "Ortam gürültüsü: biraz gürültülü",
+    "44b42ffae045b975": "Ortam gürültüsü: çok gürültülü",
+    "3d22624a319dd533": "Mikrofon izni verilmediği için ölçüm yapılmıyor. Metronom ve referans çalışır; akortçu mikrofon ister.",
+    "e2b7e755f1959257": "Gizle",
+    "89e6be2f6a03a557": "Mikrofon: izin yok",
+    "7285764d37c8aa5c": "Mikrofon: izin kapalı",
+    "0bd4a35e06933c8a": "Mikrofon: kısıtlı"
   }
 }

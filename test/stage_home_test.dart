@@ -487,10 +487,13 @@ void main() {
       final rig = _Rig();
       final seen = <StageHandle>[];
       await _boot(t, _stage(rig, onHandle: (c, h) => seen.add(h)));
-      // "Other" (05c) and "path" (05d) open layers that cover the handles:
-      // setup first, then path (closed by the scrim), then other.
+      // "Other" (05c), "path" (05d) and "setup" (05f) open layers that cover
+      // the handles: setup first (closed by the scrim), then path (closed by
+      // the scrim), then other.
       await t.tap(find.byKey(const Key('stage-handle-setup')));
       await t.pump();
+      await t.tap(find.byKey(const Key('stage-layer-scrim')));
+      await t.pumpAndSettle();
       await t.tap(find.byKey(const Key('stage-handle-path')));
       await t.pump();
       await t.tap(find.byKey(const Key('stage-layer-scrim')));

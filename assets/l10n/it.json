@@ -8793,6 +8793,21 @@
     "d67ef3eff8553313": "Era troppo piano perché potessi sentirlo.",
     "85ea9fc1b71968ba": "Era così forte da distorcere il suono.",
     "17b6b0e1afd14e00": "Qui si sentiva il suono dell'app stessa, quindi non ho giudicato questa nota.",
-    "979084fd4ae01d09": "Hai saltato questa nota in \"Aspettami\"."
+    "979084fd4ae01d09": "Hai saltato questa nota in \"Aspettami\".",
+    "7453c319c1bf8ca5": "L'ascolto è disattivato",
+    "d76c2a76e390b8d1": "Contatore: non misurato",
+    "bbac55b3b0a022b5": "Vai alle impostazioni",
+    "bd61ef7fa80d6a8f": "Impostazione e dispositivo",
+    "54c027eba296ec2f": "Microfono: consentito",
+    "a9cff57ea62b8da7": "Calibrazione della latenza",
+    "ce0ecc84043c5047": "Rumore della stanza: non misurato",
+    "05c233abdf453ebb": "Rumore della stanza: basso",
+    "ade13ea684ac2219": "Rumore della stanza: un po' alto",
+    "44b42ffae045b975": "Rumore della stanza: molto alto",
+    "3d22624a319dd533": "Il microfono non è consentito, quindi non viene misurato nulla. Metronomo e riferimento funzionano; l'accordatore richiede il microfono.",
+    "e2b7e755f1959257": "Nascondi",
+    "89e6be2f6a03a557": "Microfono: nessun permesso",
+    "7285764d37c8aa5c": "Microfono: permesso disattivato",
+    "0bd4a35e06933c8a": "Microfono: limitato"
   }
 }
