@@ -1,7 +1,8 @@
-// OST-UX-05g: Hayalet Ekran (dort basamak) render kanitlari + layout assertions (fake data, fake mic).
+// OST-UX-05g: Hayalet Ekran (dort basamak) render kanitlari + layout assertions
+// (fake data, fake mic).
 // Always pumps and asserts; writes PNGs ONLY when UX_RENDER=1:
 //
-//   UX_RENDER=1 flutter test test/ux_05f_render_evidence_test.dart
+//   UX_RENDER=1 flutter test test/ux_05g_render_evidence_test.dart
 //
 // Output: docs/yula-execution/design/evidence/ux-05g/NN-<name>-<size>-<acik|koyu>.png
 import 'dart:io';
@@ -112,11 +113,12 @@ void main() {
 
   Future<void> shot(
     WidgetTester t,
-    GhostLevel level,
-    int no,
+    GhostState state,
+    String name,
     Size size,
-    Brightness br,
-  ) async {
+    Brightness br, {
+    Key? focus,
+  }) async {
     final view = binding.platformDispatcher.views.first;
     view.physicalSize = size * 3;
     view.devicePixelRatio = 3;
@@ -131,13 +133,7 @@ void main() {
           controllerFactory: rig.factory,
           seed: 1,
           ghostOpen: true,
-          ghostStore: MemoryGhostStore(
-            GhostState(
-              level: level,
-              validRuns: 1,
-              lastRun: GhostLastRun.counted,
-            ),
-          ),
+          ghostStore: MemoryGhostStore(state),
           tunerOpener: (_) async {},
         ),
       ),
@@ -156,17 +152,20 @@ void main() {
     await t.pump();
     await t.pump();
     expect(find.byKey(const Key('ghost-help-surface')), findsOneWidget);
-    expect(find.byKey(Key('ghost-level-${level.name}')), findsOneWidget);
-    // Scroll the shelf so the surface starts at the top of its viewport.
-    await Scrollable.ensureVisible(
-      t.element(find.byKey(const Key('ghost-help-surface'))),
-      alignment: 0,
-    );
+    expect(find.byKey(Key('ghost-level-${state.level.name}')), findsOneWidget);
+    if (focus != null) {
+      // ASSERT first (red if the line is missing), then scroll it into view.
+      expect(find.byKey(focus), findsOneWidget);
+      await Scrollable.ensureVisible(
+        t.element(find.byKey(focus)),
+        alignment: 1,
+      );
+    }
     await t.pump(const Duration(milliseconds: 300));
     expect(t.takeException(), isNull);
     await save(
       t,
-      '0$no-${level.name}-${size.width.toInt()}x${size.height.toInt()}-'
+      '$name-${size.width.toInt()}x${size.height.toInt()}-'
       '${br == Brightness.light ? 'acik' : 'koyu'}',
     );
     await t.pumpWidget(const SizedBox());
@@ -179,9 +178,52 @@ void main() {
       for (final Brightness br in Brightness.values) {
         testWidgets(
           '05g-2 render ${level.name} ${size.width.toInt()}x${size.height.toInt()} ${br.name}',
-          (t) => shot(t, level, level.index + 1, size, br),
+          (t) => shot(
+            t,
+            GhostState(
+              level: level,
+              validRuns: 1,
+              lastRun: GhostLastRun.counted,
+            ),
+            '0${level.index + 1}-${level.name}',
+            size,
+            br,
+          ),
         );
       }
+    }
+  }
+  // 05g-5 screen evidence: "not measured" after an unreliable run, and the
+  // one-step-up suggestion line.
+  for (final Size size in sizes) {
+    for (final Brightness br in Brightness.values) {
+      final tag = '${size.width.toInt()}x${size.height.toInt()} ${br.name}';
+      testWidgets(
+        '05g-5 render olculmedi $tag',
+        (t) => shot(
+          t,
+          const GhostState(lastRun: GhostLastRun.notMeasured),
+          '05-olculmedi',
+          size,
+          br,
+          focus: const Key('ghost-last-run'),
+        ),
+      );
+      testWidgets(
+        '05g-4 render oneri $tag',
+        (t) => shot(
+          t,
+          const GhostState(
+            level: GhostLevel.reinforce,
+            validRuns: 2,
+            lastRun: GhostLastRun.counted,
+          ),
+          '06-oneri',
+          size,
+          br,
+          focus: const Key('ghost-suggestion'),
+        ),
+      );
     }
   }
 }

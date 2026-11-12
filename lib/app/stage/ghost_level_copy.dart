@@ -32,8 +32,8 @@ abstract final class GhostLevelCopy {
     'Son koşu ölçülmedi; basamağa sayılmadı',
   );
   static const UiCopy shown = (
-    'Shown at this level',
-    'Bu basamakta görünenler',
+    'Help items for this level',
+    'Bu basamağın yardımları',
   );
 
   static const List<UiCopy> all = <UiCopy>[

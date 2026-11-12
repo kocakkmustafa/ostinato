@@ -178,6 +178,7 @@ class ToolShelf extends StatelessWidget {
                   button: true,
                   expanded: helpOpen,
                   label: uiText(context, StageCopy.help),
+                  onTap: onHelp,
                   excludeSemantics: true,
                   child: InkWell(
                     onTap: onHelp,
@@ -199,7 +200,8 @@ class ToolShelf extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (helpOpen) _ghostSurface(context, ghost!),
+                if (helpOpen)
+                  _EnsureVisible(child: _ghostSurface(context, ghost!)),
               ],
             ]),
         ],
@@ -246,6 +248,7 @@ class ToolShelf extends StatelessWidget {
               button: true,
               selected: l == g.level,
               label: uiText(context, _levelCopy(l)),
+              onTap: () => onGhostSelect?.call(l),
               excludeSemantics: true,
               child: InkWell(
                 onTap: () => onGhostSelect?.call(l),
@@ -336,4 +339,29 @@ class ToolShelf extends StatelessWidget {
       ],
     ),
   );
+}
+
+/// OST-UX-05g: when the help surface opens inside the shelf's own scroll, it
+/// is scrolled to the top of the viewport once (no animation), so it is never
+/// left below the fold on a small phone.
+class _EnsureVisible extends StatefulWidget {
+  const _EnsureVisible({required this.child});
+  final Widget child;
+
+  @override
+  State<_EnsureVisible> createState() => _EnsureVisibleState();
+}
+
+class _EnsureVisibleState extends State<_EnsureVisible> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      Scrollable.ensureVisible(context, alignment: 0);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }

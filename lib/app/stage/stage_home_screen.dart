@@ -95,11 +95,14 @@ class StageHomeScreen extends StatefulWidget {
     this.accountOpener,
     this.ghostOpen = ostinatoGhostScreenOpen,
     this.ghostStore,
+    this.ghostStoreFactory,
   });
 
-  // 05g seams (skeleton; behaviour in phase B).
+  // OST-UX-05g: the Ghost (Help) flag and its local store. Null store = the
+  // account's own file; tests inject one (or a per-account factory).
   final bool ghostOpen;
   final GhostStore? ghostStore;
+  final GhostStore Function(String? accountUserId)? ghostStoreFactory;
 
   // 05f seams (null = the real thing).
   final Future<PermissionStatus> Function()? micStatus;
@@ -258,9 +261,13 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     setState(() => _hintMuted = muted);
   }
 
-  Future<void> _readGhost() async {
-    final g = await _ghostStore!.load();
-    if (!mounted) return;
+  /// Bumped on every account change: a read (or a counted run) that finishes
+  /// after the account changed must not touch the new account's state.
+  int _ghostEpoch = 0;
+
+  Future<void> _readGhost(GhostStore store, int epoch) async {
+    final g = await store.load();
+    if (!mounted || epoch != _ghostEpoch) return;
     setState(() => _ghost = g);
   }
 
@@ -283,8 +290,9 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   Future<void> _onSessionFinished(PracticeSessionFinished e) async {
     final store = _ghostStore;
     if (!widget.ghostOpen || store == null) return;
+    final epoch = _ghostEpoch;
     await _ghostReady;
-    if (!mounted) return;
+    if (!mounted || epoch != _ghostEpoch) return;
     final next = GhostPolicy.afterRun(
       _ghost,
       e,
@@ -371,8 +379,15 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       _data = _load(id);
       if (widget.ghostOpen) {
         // The Ghost file sits in the account's own data directory.
-        _ghostStore = widget.ghostStore ?? FileGhostStore(accountUserId: id);
-        _ghostReady = _readGhost();
+        final epoch = ++_ghostEpoch;
+        final store =
+            widget.ghostStore ??
+            widget.ghostStoreFactory?.call(id) ??
+            FileGhostStore(accountUserId: id);
+        _ghostStore = store;
+        _ghost = const GhostState();
+        _helpOpen = false;
+        _ghostReady = _readGhost(store, epoch);
       }
     }
   }
@@ -912,6 +927,9 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                       lesson: data.lesson.lesson,
                       progress: _progress!,
                       stageMode: true,
+                      // OST-UX-05g: the older P0-07 ghost panel never shows on the stage, even
+                      // when `ostinatoGhostScreenOpen` is on (the stage has its own Help).
+                      ghostScreen: false,
                       onController: _gotController,
                       listenController: _listen,
                       controllerFactory: widget.controllerFactory,
