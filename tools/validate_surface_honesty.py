@@ -372,7 +372,9 @@ RETENTION_WRITERS_RECONCILED = {"session_store.dart", "guitar_journey_progress.d
                                 "own_recording_preference.dart",
                                 "test_flow_store.dart",
                                 "tuner_check_memory.dart",
-                                "own_recording.dart"}
+                                "own_recording.dart",
+                                # Hayalet Ekran basamak 1–4 + geçerli koşu sayacı; ölçümden türeyen özet, ham ses/poz/açı/kayıt yok; mevcut ilerleme kayıtlarıyla (bestAccuracy/bestHeard/bestBpm) aynı sınıf; yerel, ağa çıkmaz; OST-UX-05g, Motion orchestration kararı.
+                                "ghost_store.dart"}
 
 # ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────
 #

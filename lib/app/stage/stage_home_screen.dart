@@ -18,6 +18,7 @@ import '../practice/loop/practice_transport.dart';
 import '../practice/loop/practice_session_controller.dart';
 import '../practice/loop/reference_listen.dart';
 import '../practice/loop/v1_course_catalog.dart';
+import '../practice/loop/v1_practice_catalog.dart';
 import '../practice/loop/v1_practice_list_screen.dart';
 import '../retention/weekly_goal.dart';
 import '../retention/weekly_goal_store.dart';
@@ -30,6 +31,8 @@ import '../screens/settings_screen.dart';
 import '../tuner/session_tuning_gate.dart';
 import '../tuner/tunings.dart';
 import 'device_layer.dart';
+import 'ghost_policy.dart';
+import 'ghost_store.dart';
 import 'listening_off_store.dart';
 import 'other_practice_layer.dart';
 import 'package:permission_handler/permission_handler.dart'
@@ -90,7 +93,13 @@ class StageHomeScreen extends StatefulWidget {
     this.setupOpener,
     this.settingsOpener,
     this.accountOpener,
+    this.ghostOpen = ostinatoGhostScreenOpen,
+    this.ghostStore,
   });
+
+  // 05g seams (skeleton; behaviour in phase B).
+  final bool ghostOpen;
+  final GhostStore? ghostStore;
 
   // 05f seams (null = the real thing).
   final Future<PermissionStatus> Function()? micStatus;
@@ -199,6 +208,14 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   PracticeSessionController? _pc;
   bool _playing = false;
   bool _shelfOpen = false;
+
+  // OST-UX-05g: the help (Ghost) level, kept in its own store. Only exists
+  // while the flag is open.
+  bool _helpOpen = false;
+  GhostState _ghost = const GhostState();
+  GhostStore? _ghostStore;
+  Future<void>? _ghostReady;
+  V1CourseCatalog? _ghostCatalog;
   bool _pinned = false;
   bool _notice = false;
   bool _startUnverified = false;
@@ -239,6 +256,51 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     }
     if (!mounted) return;
     setState(() => _hintMuted = muted);
+  }
+
+  Future<void> _readGhost() async {
+    final g = await _ghostStore!.load();
+    if (!mounted) return;
+    setState(() => _ghost = g);
+  }
+
+  bool _isRhythmOnly(String lessonId) {
+    final catalog = _ghostCatalog;
+    if (catalog == null) return false;
+    for (final u in catalog.units) {
+      for (final l in u.lessons) {
+        if (l.lesson.id == lessonId) {
+          return V1PracticeCatalog.scoreOf(l.lesson)?.isRhythmOnly ?? false;
+        }
+      }
+    }
+    return false;
+  }
+
+  /// A run finished on the stage: the Ghost counts it (never changes the
+  /// level) and keeps it in its own store. Ear / rhythm-only runs are left
+  /// out by the policy.
+  Future<void> _onSessionFinished(PracticeSessionFinished e) async {
+    final store = _ghostStore;
+    if (!widget.ghostOpen || store == null) return;
+    await _ghostReady;
+    if (!mounted) return;
+    final next = GhostPolicy.afterRun(
+      _ghost,
+      e,
+      rhythmOnly: _isRhythmOnly(e.lessonId),
+    );
+    if (identical(next, _ghost)) return;
+    setState(() => _ghost = next);
+    await store.save(next);
+  }
+
+  Future<void> _selectGhost(GhostLevel l) async {
+    final store = _ghostStore;
+    if (_playing || store == null) return;
+    final next = GhostPolicy.select(_ghost, l);
+    setState(() => _ghost = next);
+    await store.save(next);
   }
 
   Future<void> _muteHint() async {
@@ -307,12 +369,18 @@ class _StageHomeScreenState extends State<StageHomeScreen>
           widget.progressFactory?.call(id) ??
           V1PracticeProgressStore(accountUserId: id);
       _data = _load(id);
+      if (widget.ghostOpen) {
+        // The Ghost file sits in the account's own data directory.
+        _ghostStore = widget.ghostStore ?? FileGhostStore(accountUserId: id);
+        _ghostReady = _readGhost();
+      }
     }
   }
 
   Future<_StageData?> _load(String? id) async {
     try {
       final catalog = widget.catalog ?? await V1CourseCatalog.load();
+      _ghostCatalog = catalog;
       final records = await _progress!.load();
       final checks =
           await (widget.checksFactory?.call(id) ??
@@ -463,6 +531,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       _playing = playing;
       if (playing) {
         _shelfOpen = false;
+        _helpOpen = false;
         _notice = false;
       }
     });
@@ -852,6 +921,9 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                       tuningCardSeen: _tuningSeen,
                       onStarted: () => _tuningSeen = true,
                       onRunRecorded: _afterRun,
+                      onSessionFinished: widget.ghostOpen
+                          ? _onSessionFinished
+                          : null,
                       beforeStart:
                           isFreeV1Lesson(
                             data.lesson.id,
@@ -878,6 +950,10 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                       listen: _listen,
                       pinned: _pinned,
                       onPinned: (v) => setState(() => _pinned = v),
+                      ghost: widget.ghostOpen ? _ghost : null,
+                      onGhostSelect: _selectGhost,
+                      helpOpen: _helpOpen,
+                      onHelp: () => setState(() => _helpOpen = !_helpOpen),
                     ),
                   ),
                 ],
