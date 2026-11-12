@@ -197,6 +197,20 @@ final class PracticeRunSummary {
   final bool timingCalibrated;
   final NextStep nextStep;
 
+  /// The step shown to the learner. On an unmeasured run (`!gate.eligible`)
+  /// no loop / tempo / performance suggestion is made from partial data (it
+  /// must not contradict "Not measured"); checkSetup / nextLesson / tryAgain
+  /// are unchanged.
+  NextStep get shownStep =>
+      !gate.eligible &&
+          const <NextStep>{
+            NextStep.loopSlower,
+            NextStep.raiseTempo,
+            NextStep.performanceRun,
+          }.contains(nextStep)
+      ? NextStep.tryAgain
+      : nextStep;
+
   int get total => correct + different + unheard;
 
   /// correct / (correct + different); null when nothing was decided.
