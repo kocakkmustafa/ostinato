@@ -36,6 +36,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: 3.47.5
           channel: stable
 
       - name: Poz modeli (pinli SHA-256 doğrulamalı)
@@ -58,7 +59,7 @@ jobs:
         run: |
           git config --global url."https://x-access-token:${MOTION_CORE_RO_TOKEN}@github.com/kocakkmustafa/motion-core.git".insteadOf "https://github.com/kocakkmustafa/motion-core.git"
 
-      - run: flutter pub get
+      - run: flutter pub get --enforce-lockfile
 
       - name: Gitar v2l kaynak kimliği (oynatma kapalı)
         run: |
@@ -115,6 +116,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: 3.47.5
           channel: stable
 
       - name: Poz modeli (pinli SHA-256 doğrulamalı)
@@ -128,7 +130,7 @@ jobs:
         run: |
           git config --global url."https://x-access-token:${MOTION_CORE_RO_TOKEN}@github.com/kocakkmustafa/motion-core.git".insteadOf "https://github.com/kocakkmustafa/motion-core.git"
 
-      - run: flutter pub get
+      - run: flutter pub get --enforce-lockfile
 
       - name: Gitar v2l kaynak kimliği (oynatma kapalı)
         run: |
@@ -155,6 +157,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: 3.47.5
           channel: stable
 
       - name: Poz modeli (pinli SHA-256 doğrulamalı)
@@ -167,7 +170,7 @@ jobs:
         run: |
           git config --global url."https://x-access-token:${MOTION_CORE_RO_TOKEN}@github.com/kocakkmustafa/motion-core.git".insteadOf "https://github.com/kocakkmustafa/motion-core.git"
 
-      - run: flutter pub get
+      - run: flutter pub get --enforce-lockfile
 
       - name: Gitar v2l kaynak kimliği (oynatma kapalı)
         run: |
