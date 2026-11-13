@@ -930,6 +930,12 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                       // OST-UX-05g: the older P0-07 ghost panel never shows on the stage, even
                       // when `ostinatoGhostScreenOpen` is on (the stage has its own Help).
                       ghostScreen: false,
+                      // OST-UX-05g2: the chosen help level shapes the line and
+                      // beat; ear/rhythm-only lessons never enter the Ghost.
+                      ghostLevel:
+                          widget.ghostOpen && !_isRhythmOnly(data.lesson.id)
+                          ? _ghost.level
+                          : null,
                       onController: _gotController,
                       listenController: _listen,
                       controllerFactory: widget.controllerFactory,
