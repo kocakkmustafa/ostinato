@@ -35,6 +35,24 @@ const _notCompleted = 'Koşu tamamlanmadı: ölçülmedi, geçit kaydı yok.';
 const _unverified = 'Üyelik şu an doğrulanamadı. Çal\'a dokunup tekrar dene.';
 const _listeningOff = 'Dinleme kapalı';
 const _safetyStart = 'Ağrı, uyuşma ya da karıncalanmada dur.';
+const _close = 'Kapat';
+const _minBody = 96.0;
+const _minBodyLandscape = 64.0;
+
+/// The safety line: the only Text under the Column that also holds Play
+/// (language independent; the practice copy has no catalog entry in every
+/// language).
+Finder get _safety => find.descendant(
+  of: find
+      .ancestor(
+        of: find.byKey(const Key('practice-start')),
+        matching: find.byType(Column),
+      )
+      .at(1),
+  matching: find.byWidgetPredicate(
+    (w) => w is Text && w.style?.fontSize == 11.5,
+  ),
+);
 
 const _tags = <String>[
   'ar',
@@ -128,6 +146,7 @@ Future<void> _boot(
           ghostOpen: true,
           ghostStore: MemoryGhostStore(),
           micStatus: () async => mic,
+          weeklyGoalLoader: () async => null,
           appSettingsOpener: () async => true,
           setupOpener: (_) async {},
           settingsOpener: (_) async {},
@@ -212,8 +231,18 @@ bool _hidden(SemanticsNode n) => n.flagsCollection.isHidden;
 
 List<SemanticsNode> _withLabel(WidgetTester t, Pattern p) => [
   for (final n in _allNodes(t))
-    if (!_hidden(n) && n.label == p || (p is RegExp && n.label.contains(p))) n,
+    if (!_hidden(n) && (n.label == p || (p is RegExp && n.label.contains(p))))
+      n,
 ];
+
+void _expectPlayAndSafety(WidgetTester t, String why) {
+  final play = t.getRect(find.byKey(const Key('practice-start')));
+  expect(play.bottom, lessThanOrEqualTo(640), reason: '$why: Cal ekran icinde');
+  expect(play.top, greaterThanOrEqualTo(0), reason: why);
+  final line = t.getRect(_safety);
+  expect(line.top, greaterThanOrEqualTo(0), reason: '$why: satir gorunur');
+  expect(line.bottom, lessThanOrEqualTo(play.top), reason: '$why: cakisma');
+}
 
 void main() {
   late final catalog = catalog05f();
@@ -424,27 +453,115 @@ void main() {
       await dispose05f(t, rig);
     });
 
-    testWidgets('C4 scrim etiketsiz tiklanir dugum olmaz', (t) async {
-      final handle = t.ensureSemantics();
-      final rig = Rig05f(permission: PermissionStatus.denied);
-      await _boot(t, rig, catalog);
-      await _openSetup(t);
-      expect(find.byKey(const Key('stage-layer-scrim')), findsOneWidget);
-      // kardes: katman icinde etiketli dugmeler var
-      expect(_withLabel(t, 'Ayarlar'), isNotEmpty);
-      final unlabeledTaps = [
-        for (final n in _allNodes(t))
-          if (!n.flagsCollection.isHidden &&
-              n.getSemanticsData().hasAction(SemanticsAction.tap) &&
-              n.label.isEmpty &&
-              n.value.isEmpty &&
-              n.hint.isEmpty)
-            n,
-      ];
-      expect(unlabeledTaps, isEmpty, reason: 'etiketsiz tap dugumu yok');
-      handle.dispose();
-      await dispose05f(t, rig);
-    });
+    for (final (layer, handle, kardes) in <(String, String, String)>[
+      ('Cihaz', 'stage-handle-setup', 'stage-device-layer'),
+      ('Yol', 'stage-handle-path', 'stage-path-scroll'),
+    ]) {
+      testWidgets('C4 scrim: $layer katmani erisilebilir Kapat dugmesi', (
+        t,
+      ) async {
+        final sem = t.ensureSemantics();
+        final rig = Rig05f(permission: PermissionStatus.denied);
+        await _boot(t, rig, catalog);
+        // katman kapali: Kapat dugumu yok (kardes: Araclar dugmesi var)
+        expect(_withLabel(t, 'Araçlar'), hasLength(1));
+        expect(_withLabel(t, _close), isEmpty, reason: 'katman kapaliyken yok');
+        await t.tap(find.byKey(Key(handle)));
+        await _settle(t);
+        await _settle(t);
+        expect(find.byKey(Key(kardes)), findsOneWidget, reason: layer);
+        final nodes = _withLabel(t, _close);
+        expect(nodes, hasLength(1), reason: '$layer: tek Kapat dugumu');
+        final n = nodes.single;
+        expect(n.flagsCollection.isButton, isTrue);
+        final d = n.getSemanticsData();
+        expect(d.hasAction(SemanticsAction.tap), isTrue);
+        expect(d.hasAction(SemanticsAction.dismiss), isTrue);
+        // etiketsiz tap dugumu yok
+        expect([
+          for (final x in _allNodes(t))
+            if (!x.flagsCollection.isHidden &&
+                x.getSemanticsData().hasAction(SemanticsAction.tap) &&
+                x.label.isEmpty &&
+                x.value.isEmpty &&
+                x.hint.isEmpty)
+              x,
+        ], isEmpty);
+        // eylemle tetikle: katman kapanir, Kapat dugumu gider
+        for (final action in [SemanticsAction.tap, SemanticsAction.dismiss]) {
+          if (find.byKey(Key(kardes)).evaluate().isEmpty) {
+            await t.tap(find.byKey(Key(handle)));
+            await _settle(t);
+          }
+          final cur = _withLabel(t, _close).single;
+          // ignore: deprecated_member_use
+          t.binding.pipelineOwner.semanticsOwner!.performAction(cur.id, action);
+          await _settle(t);
+          expect(
+            find.byKey(Key(kardes)),
+            findsNothing,
+            reason: '$layer $action',
+          );
+          expect(_withLabel(t, _close), isEmpty);
+        }
+        sem.dispose();
+        await dispose05f(t, rig);
+      });
+    }
+  });
+
+  group('E) sikisik duzen: Dinleme kapali + hata iletisi + raf acik', () {
+    const sizes = <(String, Size)>[
+      ('320x568', Size(320, 568)),
+      ('360x640', Size(360, 640)),
+      ('412x915', Size(412, 915)),
+      ('yatay 640x360', Size(640, 360)),
+    ];
+    for (final (name, size) in sizes) {
+      for (final shelf in [false, true]) {
+        testWidgets('E $name raf ${shelf ? 'acik' : 'kapali'}', (t) async {
+          final rig = Rig05f(permission: PermissionStatus.denied);
+          await _boot(t, rig, catalog, size: size);
+          await _play(t);
+          expect(find.byKey(const Key('stage-listening-off')), findsOneWidget);
+          expect(
+            find.textContaining('Mikrofon erişimi kapalı'),
+            findsOneWidget,
+          );
+          if (shelf) await _toggleShelf(t);
+          expect(t.takeException(), isNull, reason: name);
+          final play = t.getRect(find.byKey(const Key('practice-start')));
+          expect(
+            (Offset.zero & size).contains(play.topLeft) &&
+                (Offset.zero & size).contains(play.bottomRight),
+            isTrue,
+            reason: '$name: Cal tamamen ekran icinde $play',
+          );
+          final line = t.getRect(_safety);
+          expect(
+            line.bottom <= play.top || line.top >= play.bottom,
+            isTrue,
+            reason: '$name: guvenlik satiri Cal ile cakismaz',
+          );
+          final body = t.getRect(
+            find
+                .descendant(
+                  of: find.byKey(const Key('stage-practice-slot')),
+                  matching: find.byType(SingleChildScrollView),
+                )
+                .first,
+          );
+          expect(
+            body.height,
+            greaterThanOrEqualTo(
+              size.width > size.height ? _minBodyLandscape : _minBody,
+            ),
+            reason: '$name: govde gorunur yuksekligi',
+          );
+          await dispose05f(t, rig);
+        });
+      }
+    }
   });
 
   group('D) 14 dilde 360x640 + 1.3 sahne ilk ekrani', () {
@@ -454,8 +571,10 @@ void main() {
         await _boot(t, rig, catalog, tag: tag);
         expect(find.byKey(const Key('stage-play-pending')), findsNothing);
         expect(t.takeException(), isNull, reason: '$tag raf kapali');
+        _expectPlayAndSafety(t, '$tag raf kapali');
         await _toggleShelf(t);
         expect(t.takeException(), isNull, reason: '$tag raf acik');
+        _expectPlayAndSafety(t, '$tag raf acik');
         await _openHelp(t);
         expect(find.byKey(const Key('ghost-help-surface')), findsOneWidget);
         expect(t.takeException(), isNull, reason: '$tag Yardim yuzeyi');

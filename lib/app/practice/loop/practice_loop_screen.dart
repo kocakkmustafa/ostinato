@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -677,7 +678,12 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                     // overflowing.
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxHeight: box.maxHeight * 0.7,
+                        // At most 70% and always leave the body 96 px (but
+                        // never less than 72 px: Play must stay whole).
+                        maxHeight: math.min(
+                          box.maxHeight * 0.7,
+                          math.max(box.maxHeight - 96, 72),
+                        ),
                       ),
                       child: SingleChildScrollView(
                         // Reversed: if it ever scrolls, Play stays in view.

@@ -795,6 +795,8 @@ class _StageHomeScreenState extends State<StageHomeScreen>
           ? content
           : ConstrainedBox(
               constraints: BoxConstraints(
+                // Short screens: the band takes at most 17% so the body and Play
+                // keep their room (05h-1; taller screens unchanged).
                 maxHeight: height > 700 ? 340 : height * 0.17,
               ),
               child: SingleChildScrollView(child: content),
@@ -1039,8 +1041,9 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                   Semantics(
                     sortKey: const OrdinalSortKey(2),
                     child: ToolShelf(
-                      // OST-UX-05h1: on a short screen the shelf gives room to the
-                      // safety line and Play; taller screens are unchanged.
+                      // OST-UX-05h1: short screens (<=700): shelf 22% (14% with the
+                      // mic band) so the safety line, Play and >=96 px of
+                      // body fit; taller screens are unchanged.
                       maxContentHeight: height <= 700
                           ? height * (_micOff ? 0.14 : 0.22)
                           : height * (_micOff ? 0.2 : 0.34),
@@ -1071,13 +1074,20 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                     right: 0,
                     top: 0,
                     height: box.maxHeight * 0.4,
-                    child: GestureDetector(
-                      key: const Key('stage-layer-scrim'),
-                      // OST-UX-05h1: unlabeled tap area, not a screen-reader
-                      // target (system back closes the layer).
-                      excludeFromSemantics: true,
-                      behavior: HitTestBehavior.opaque,
+                    // OST-UX-05h1: the one accessible way out of a layer:
+                    // Flutter's own localized "Close" (no new copy); the tap
+                    // area itself stays out of the tree.
+                    child: Semantics(
+                      button: true,
+                      label: MaterialLocalizations.of(context).closeButtonLabel,
                       onTap: _closeLayer,
+                      onDismiss: _closeLayer,
+                      child: GestureDetector(
+                        key: const Key('stage-layer-scrim'),
+                        excludeFromSemantics: true,
+                        behavior: HitTestBehavior.opaque,
+                        onTap: _closeLayer,
+                      ),
                     ),
                   ),
                   for (final l in open)
