@@ -33,6 +33,7 @@ class PracticeTabStrip extends StatelessWidget {
     this.pixelsPerBeat = 88,
     this.nowFraction = .28,
     this.guitar = true,
+    this.showNoteNames = false,
   });
 
   final PracticeScore score;
@@ -46,12 +47,23 @@ class PracticeTabStrip extends StatelessWidget {
   final double nowFraction;
   final bool guitar;
 
+  /// OST-UX-05g3: note-name label above each mark (Learning step only).
+  final bool showNoteNames;
+
   PracticeEvent? _upcoming() {
     for (final e in score.events) {
       if (e.endBeat > displayBeat && !marks.containsKey(e.index)) return e;
     }
     return null;
   }
+
+  /// Localized note names by event index (Learning step label).
+  Map<int, String> _noteNames(BuildContext context) => {
+    for (final e in score.events)
+      if (e.kind == PracticeEventKind.pitch &&
+          (e.pitchName != null || e.midi != null))
+        e.index: musicPitch(context, e.pitchName ?? midiName(e.midi!)),
+  };
 
   String _nowLabel(BuildContext context) {
     final e = _upcoming();
@@ -107,6 +119,8 @@ class PracticeTabStrip extends StatelessWidget {
               pixelsPerBeat: pixelsPerBeat,
               nowFraction: nowFraction,
               guitar: guitar,
+              showNoteNames: showNoteNames,
+              noteNames: showNoteNames ? _noteNames(context) : const {},
               theme: theme,
               ink: palette.notationInk,
               paper: palette.notationPaper,
@@ -167,6 +181,8 @@ class TabStripPainter extends CustomPainter {
     required this.pixelsPerBeat,
     required this.nowFraction,
     required this.guitar,
+    this.showNoteNames = false,
+    this.noteNames = const {},
     required this.theme,
     required this.ink,
     required this.paper,
@@ -181,6 +197,10 @@ class TabStripPainter extends CustomPainter {
   final ({double start, double end})? loop;
   final double pixelsPerBeat, nowFraction;
   final bool guitar;
+  final bool showNoteNames;
+
+  /// Localized names by event index; falls back to the raw pitch name.
+  final Map<int, String> noteNames;
   final PracticeVisualTheme theme;
   final Color ink, paper, muted, now;
 
@@ -251,6 +271,15 @@ class TabStripPainter extends CustomPainter {
           ..strokeWidth = radius * .9
           ..strokeCap = StrokeCap.round,
       );
+      if (showNoteNames && (e.pitchName != null || e.midi != null)) {
+        _text(
+          canvas,
+          Offset(x, y - radius * 1.9),
+          noteNames[e.index] ?? e.pitchName ?? midiName(e.midi!),
+          muted,
+          radius * .85,
+        );
+      }
       final m = marks[e.index];
       final label = tab != null
           ? '${tab.fret}'
@@ -395,6 +424,7 @@ class TabStripPainter extends CustomPainter {
       !identical(old.marks, marks) ||
       old.heldEvent != heldEvent ||
       old.loop != loop ||
+      old.showNoteNames != showNoteNames ||
       old.theme != theme ||
       old.pixelsPerBeat != pixelsPerBeat;
 }

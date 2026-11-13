@@ -94,8 +94,10 @@ Future<Rig05f> _screen(
 Finder get _strip => find.byType(PracticeTabStrip);
 Finder get _beat => find.byType(MetronomeBeatView);
 
-Future<void> _run(WidgetTester t, Rig05f rig) async {
+Future<void> _run(WidgetTester t, Rig05f rig, {bool preview = false}) async {
   await play05f(t);
+  // 05g3: Hatirlama'da Baslat'tan sonra 3 sn on izleme, sonra kosu.
+  if (preview) await t.pump(const Duration(seconds: 3));
   await listen05f(t, rig);
   expect(rig.controller!.timeline, isNotNull, reason: 'run is really on');
 }
@@ -124,7 +126,7 @@ void main() {
 
       testWidgets('${level.name}: calarken vurus gostergesi', (t) async {
         final rig = await _screen(t, level: level);
-        await _run(t, rig);
+        await _run(t, rig, preview: level == GhostLevel.recall);
         expect(
           _beat,
           _beatShown[level]! ? findsOneWidget : findsNothing,
@@ -198,7 +200,7 @@ void main() {
           _stripShown[level]! ? findsOneWidget : findsNothing,
           reason: level.name,
         );
-        await _run(t, rig);
+        await _run(t, rig, preview: level == GhostLevel.recall);
         expect(
           _beat,
           _beatShown[level]! ? findsOneWidget : findsNothing,

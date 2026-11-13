@@ -8819,10 +8819,9 @@
     "0b5ab5c5a5449abc": "Beat line",
     "b9ecc862b4b4cda8": "Label",
     "4074ad9bbe750206": "Notation for 3 seconds before you start",
-    "565fcc73f3de87ca": "Metronome (optional)",
-    "aee251b6da600be1": "Hint",
     "e1a10ad8851b0fc6": "You can try one step up",
     "15517a5be8ed4a9c": "The last run was not measured; it did not count toward the step",
-    "e11d8431742ddc50": "Help items for this level"
+    "e11d8431742ddc50": "Help items for this level",
+    "dd8c01a029448810": "No extra help at this level"
   }
 }

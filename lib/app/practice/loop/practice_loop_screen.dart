@@ -17,6 +17,7 @@ import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
 import '../../ostinato_release_policy.dart';
 import '../../stage/ghost_policy.dart' show GhostItem, GhostLevel, GhostPolicy;
+import '../../stage/ghost_level_copy.dart';
 import '../../stage/stage_copy.dart';
 import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
@@ -245,7 +246,23 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       widget.ghostLevel != null &&
       !_score.isRhythmOnly &&
       !(widget.ghostScreen && _ghostOn) &&
+      !_previewing &&
       !_guides.contains(Guide.notation);
+
+  /// OST-UX-05g3: the Learning step's note-name label above each mark.
+  bool get _showNoteNames =>
+      widget.ghostLevel == GhostLevel.learn &&
+      !_score.isRhythmOnly &&
+      !(widget.ghostScreen && _ghostOn);
+
+  /// OST-UX-05g3: Recalling shows the hidden line for a fixed 3 s after Start.
+  bool get _previewWanted =>
+      widget.ghostLevel == GhostLevel.recall &&
+      !_score.isRhythmOnly &&
+      !(widget.ghostScreen && _ghostOn);
+
+  bool _previewing = false;
+  Timer? _previewTimer;
 
   /// FK1 "Listen first"; never sounds while the microphone runs.
   late final ReferenceListenController _listen =
@@ -359,6 +376,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
 
   @override
   void dispose() {
+    _previewTimer?.cancel();
     _c.removeListener(_changed);
     _backgroundGuard?.detach();
     if (widget.listenController == null) _listen.dispose();
@@ -479,9 +497,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   bool _starting = false;
 
   void _start() {
+    if (_previewing) return; // second tap during the 3 s preview
     final guard = widget.beforeStart;
     if (guard == null) {
-      _begin();
+      _beginOrPreview();
       return;
     }
     if (_starting) return; // a second tap while the guard is being asked
@@ -494,8 +513,22 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         ok = false;
       }
       _starting = false;
-      if (ok && mounted) _begin();
+      if (ok && mounted) _beginOrPreview();
     }());
+  }
+
+  void _beginOrPreview() {
+    if (!_previewWanted) {
+      _begin();
+      return;
+    }
+    setState(() => _previewing = true);
+    _previewTimer = Timer(const Duration(seconds: 3), () {
+      _previewTimer = null;
+      if (!mounted) return;
+      setState(() => _previewing = false);
+      _begin();
+    });
   }
 
   void _begin() {
@@ -876,9 +909,24 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
             ],
           ),
           const SizedBox(height: 8),
+          if (_previewing)
+            Semantics(
+              key: const Key('practice-preview-note'),
+              liveRegion: true,
+              label: uiText(context, GhostLevelCopy.preStartPreview),
+              child: ExcludeSemantics(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Text(
+                    uiText(context, GhostLevelCopy.preStartPreview),
+                    style: hankenText(size: 13, color: palette.textMuted),
+                  ),
+                ),
+              ),
+            ),
           if (_stepHidesLine)
             const SizedBox(key: Key('ghost-step-line-hidden'), height: 190)
-          else if (!_guides.contains(Guide.notation))
+          else if (!_guides.contains(Guide.notation) && !_previewing)
             Container(
               key: const Key('ghost-line-hidden'),
               height: 190,
@@ -903,6 +951,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                   loop: _c.loopRange,
                   // A rhythm-only line is one lane of strokes, not six strings.
                   guitar: !_score.isRhythmOnly,
+                  showNoteNames: _showNoteNames,
                 ),
               ),
             ),

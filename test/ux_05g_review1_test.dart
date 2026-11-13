@@ -200,7 +200,7 @@ void main() {
     test('D6: tum Hayalet cumleleri 14 dilde vaat/yetkinlik/dogru-yanlis '
         'kokunden temiz', () {
       final p = promise();
-      expect(GhostLevelCopy.all, hasLength(15));
+      expect(GhostLevelCopy.all, hasLength(14));
       for (final c in GhostLevelCopy.all) {
         final id = appMessageIds[c];
         expect(id, isNotNull, reason: c.$1);
@@ -275,7 +275,7 @@ void main() {
         find.byKey(const Key('ghost-item-preStartPreview')),
         findsOneWidget,
       );
-      expect(find.byKey(const Key('ghost-item-hint')), findsNothing);
+      expect(find.byKey(const Key('ghost-item-none')), findsNothing);
       await dispose05f(t, rig);
     });
   });
