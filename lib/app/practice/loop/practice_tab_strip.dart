@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart' show mapEquals;
 import 'package:flutter/material.dart';
 
 import '../../app_locale.dart';
@@ -272,12 +273,15 @@ class TabStripPainter extends CustomPainter {
           ..strokeCap = StrokeCap.round,
       );
       if (showNoteNames && (e.pitchName != null || e.midi != null)) {
+        // Kept inside the strip: the top string's label would otherwise
+        // sit above the clip edge.
+        final fs = radius * .85;
         _text(
           canvas,
-          Offset(x, y - radius * 1.9),
+          Offset(x, math.max(y - radius * 1.9, fs * 1.0)),
           noteNames[e.index] ?? e.pitchName ?? midiName(e.midi!),
           muted,
-          radius * .85,
+          fs,
         );
       }
       final m = marks[e.index];
@@ -425,6 +429,7 @@ class TabStripPainter extends CustomPainter {
       old.heldEvent != heldEvent ||
       old.loop != loop ||
       old.showNoteNames != showNoteNames ||
+      !mapEquals(old.noteNames, noteNames) ||
       old.theme != theme ||
       old.pixelsPerBeat != pixelsPerBeat;
 }

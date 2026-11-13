@@ -7,6 +7,7 @@
 //   bagimsiz   {} -> raf yalniz `ghost-item-none`
 // Bayrak `ostinatoGhostScreenOpen` kapaliyken (ghostLevel null) ekran main ile
 // ayni.
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
@@ -16,6 +17,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/audio/audio_input_controller.dart';
 import 'package:ostinato/app/curriculum/v1_lesson.dart';
 import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
+import 'package:ostinato/app/practice/loop/practice_score.dart';
+import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
 import 'package:ostinato/app/practice/loop/practice_tab_strip.dart';
 import 'package:ostinato/app/practice/loop/v1_practice_catalog.dart';
 import 'package:ostinato/app/stage/ghost_policy.dart';
@@ -55,9 +58,15 @@ const _labelsShown = <GhostLevel, bool>{
 /// drawParagraph cagrilarini sayan sahte tuval.
 final class _RecCanvas implements ui.Canvas {
   int paragraphs = 0;
+  final List<Rect> boxes = <Rect>[];
   @override
   dynamic noSuchMethod(Invocation i) {
-    if (i.memberName == #drawParagraph) paragraphs++;
+    if (i.memberName == #drawParagraph) {
+      paragraphs++;
+      final para = i.positionalArguments[0] as ui.Paragraph;
+      final o = i.positionalArguments[1] as Offset;
+      boxes.add(Rect.fromLTWH(o.dx, o.dy, para.width, para.height));
+    }
     return null;
   }
 }
@@ -94,6 +103,7 @@ Future<Rig05f> _screen(
   GhostLevel? level,
   V1Lesson? lesson,
   String locale = 'tr',
+  Future<bool> Function()? beforeStart,
 }) async {
   final rig = Rig05f();
   await boot05f(
@@ -107,6 +117,7 @@ Future<Rig05f> _screen(
         ghostLevel: level,
         controllerFactory: rig.factory,
         onStarted: () => started.n++,
+        beforeStart: beforeStart,
       ),
     ),
     size: const Size(420, 2400),
@@ -464,6 +475,252 @@ void main() {
       await listen05f(t, rig);
       expect(rig.controller!.timeline, isNotNull);
       await dispose05f(t, rig);
+    });
+  });
+
+  group('r2) reviewer tur 1', () {
+    Future<Rig05f> stage(
+      WidgetTester t, {
+      GhostLevel level = GhostLevel.recall,
+      MemoryGhostStore? store,
+    }) async {
+      final rig = Rig05f();
+      await boot05f(
+        t,
+        stage05g(
+          rig,
+          catalog,
+          locale: 'tr',
+          ghostStore: store ?? MemoryGhostStore(GhostState(level: level)),
+        ),
+      );
+      for (var i = 0; i < 4; i++) {
+        await t.pump();
+      }
+      return rig;
+    }
+
+    testWidgets('M1: on izlemede raf/Yardim kilitli, seviye degismez', (
+      t,
+    ) async {
+      final store = MemoryGhostStore(
+        const GhostState(level: GhostLevel.recall),
+      );
+      final rig = await stage(t, store: store);
+      expect(find.byKey(const Key('stage-shelf-toggle')), findsOneWidget);
+      await _tapStart(t);
+      await t.pump(const Duration(milliseconds: 500));
+      expect(_previewText, findsOneWidget, reason: 'on izleme basladi');
+      expect(find.byKey(const Key('stage-shelf-toggle')), findsNothing);
+      expect(find.byKey(const Key('ghost-level-learn')), findsNothing);
+      expect(store.state.level, GhostLevel.recall);
+      await t.pump(const Duration(seconds: 3));
+      await listen05f(t, rig);
+      expect(rig.controller!.timeline, isNotNull);
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('M1: on izlemede geri -> kosu hic baslamaz (3 sn sonra da)', (
+      t,
+    ) async {
+      final rig = await stage(t);
+      await _tapStart(t);
+      await t.pump(const Duration(milliseconds: 500));
+      expect(_previewText, findsOneWidget);
+      await t.binding.handlePopRoute();
+      await t.pump();
+      await t.pump();
+      expect(_previewText, findsNothing);
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      expect(find.byKey(const Key('stage-shelf-toggle')), findsOneWidget);
+      await t.pump(const Duration(seconds: 4));
+      expect(_previewText, findsNothing);
+      expect(rig.controller!.phase, isNot(PracticePhase.running));
+      expect(rig.controller!.timeline, isNull);
+      expect(rig.permissionCalls, 0, reason: 'mikrofon hic istenmedi');
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('M2: arka plana alinirsa on izleme iptal, kosu baslamaz', (
+      t,
+    ) async {
+      final started = _Started();
+      final rig = await _screen(t, started, level: GhostLevel.recall);
+      await _tapStart(t);
+      await t.pump(const Duration(milliseconds: 500));
+      expect(_previewText, findsOneWidget);
+      t.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      await t.pump();
+      await t.pump(const Duration(seconds: 4));
+      t.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await t.pump();
+      expect(started.n, 0, reason: 'kosu baslamadi');
+      expect(_previewText, findsNothing);
+      expect(_hidden, findsOneWidget, reason: 'bosta, serit gizli');
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('M3: reddedilen korumada on izleme yok, kosu yok', (t) async {
+      final started = _Started();
+      final rig = await _screen(
+        t,
+        started,
+        level: GhostLevel.recall,
+        beforeStart: () async => false,
+      );
+      await _tapStart(t);
+      await t.pump(const Duration(seconds: 4));
+      expect(_previewText, findsNothing);
+      expect(_hidden, findsOneWidget);
+      expect(started.n, 0);
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('M3: gecikmeli onayda on izleme onaydan SONRA baslar', (
+      t,
+    ) async {
+      final gate = Completer<bool>();
+      final started = _Started();
+      final rig = await _screen(
+        t,
+        started,
+        level: GhostLevel.recall,
+        beforeStart: () => gate.future,
+      );
+      await _tapStart(t);
+      await t.pump(const Duration(seconds: 2));
+      expect(_previewText, findsNothing, reason: 'onaydan once yok');
+      expect(_hidden, findsOneWidget);
+      gate.complete(true);
+      await t.pump();
+      await t.pump(const Duration(milliseconds: 300));
+      expect(_previewText, findsOneWidget);
+      expect(started.n, 0);
+      await t.pump(const Duration(seconds: 3));
+      expect(started.n, 1);
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('D6: on izleme duzeni kaymaz; Baslat gorsel devre disi', (
+      t,
+    ) async {
+      final rig = await _screen(t, _Started(), level: GhostLevel.recall);
+      final before = t.getTopLeft(find.byKey(const Key('practice-start'))).dy;
+      await _tapStart(t);
+      await t.pump(const Duration(milliseconds: 500));
+      expect(_previewText, findsOneWidget);
+      expect(
+        t.getTopLeft(find.byKey(const Key('practice-start'))).dy,
+        before,
+        reason: 'Baslat dikeyde kaymadi',
+      );
+      expect(
+        t
+            .widget<ButtonStyleButton>(find.byKey(const Key('practice-start')))
+            .onPressed,
+        isNull,
+      );
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('D4: en ust tel notasinda etiket serit icinde kalir', (
+      t,
+    ) async {
+      final rig = await _screen(t, _Started(), level: GhostLevel.learn);
+      final p = _painter(t);
+      // string 1 (en ust tel) notasi olan bir ders ara.
+      PracticeScore? top;
+      PracticeEvent? ev;
+      final files =
+          Directory('content/v1/gtr').listSync().whereType<File>().toList()
+            ..sort((a, b) => a.path.compareTo(b.path));
+      for (final f in files) {
+        if (!f.path.endsWith('.json')) continue;
+        final sc = V1PracticeCatalog.scoreOf(
+          V1Lesson.fromJson(jsonDecode(f.readAsStringSync())),
+          seed: 1,
+        );
+        if (sc == null) continue;
+        for (final e in sc.events) {
+          if (e.midi != null && guitarTabPosition(e.midi!)?.string == 1) {
+            top = sc;
+            ev = e;
+            break;
+          }
+        }
+        if (top != null) break;
+      }
+      expect(top, isNotNull, reason: 'string-1 notali ders bulundu');
+      final painter = TabStripPainter(
+        score: top!,
+        displayBeat: ev!.startBeat,
+        marks: const {},
+        heldEvent: null,
+        loop: null,
+        pixelsPerBeat: p.pixelsPerBeat,
+        nowFraction: p.nowFraction,
+        guitar: true,
+        showNoteNames: true,
+        theme: p.theme,
+        ink: p.ink,
+        paper: p.paper,
+        muted: p.muted,
+        now: p.now,
+      );
+      final c = _RecCanvas();
+      painter.paint(c, const Size(420, 190));
+      expect(c.boxes, isNotEmpty);
+      for (final b in c.boxes) {
+        // 2 px pay: gercek yazi tipinde satir yuksekligi test yazisindan buyuk.
+        expect(b.top, greaterThanOrEqualTo(2), reason: '$b ustten tasti');
+        expect(b.bottom, lessThanOrEqualTo(190), reason: '$b alttan tasti');
+      }
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('D5: etiket yerellestirilir (tr != en); shouldRepaint', (
+      t,
+    ) async {
+      final rigTr = await _screen(t, _Started(), level: GhostLevel.learn);
+      final tr = _painter(t).noteNames.values.toList();
+      await dispose05f(t, rigTr);
+      final rigEn = await _screen(
+        t,
+        _Started(),
+        level: GhostLevel.learn,
+        locale: 'en',
+      );
+      final en = _painter(t).noteNames.values.toList();
+      expect(tr, isNotEmpty);
+      expect(tr, isNot(en), reason: 'musicPitch tr/en farkli');
+      final p = _painter(t);
+      TabStripPainter mk(bool names, Map<int, String> map) => TabStripPainter(
+        score: p.score,
+        displayBeat: p.displayBeat,
+        marks: p.marks,
+        heldEvent: p.heldEvent,
+        loop: p.loop,
+        pixelsPerBeat: p.pixelsPerBeat,
+        nowFraction: p.nowFraction,
+        guitar: p.guitar,
+        showNoteNames: names,
+        noteNames: map,
+        theme: p.theme,
+        ink: p.ink,
+        paper: p.paper,
+        muted: p.muted,
+        now: p.now,
+      );
+      expect(mk(true, const {}).shouldRepaint(mk(false, const {})), isTrue);
+      expect(
+        mk(true, const {1: 'Mi4'}).shouldRepaint(mk(true, const {1: 'E4'})),
+        isTrue,
+      );
+      expect(
+        mk(true, const {1: 'E4'}).shouldRepaint(mk(true, const {1: 'E4'})),
+        isFalse,
+      );
+      await dispose05f(t, rigEn);
     });
   });
 }
