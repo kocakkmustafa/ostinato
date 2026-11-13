@@ -540,6 +540,9 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   }
 
   void _beginOrPreview() {
+    // The guard answered while the app is in the background: nothing starts.
+    final life = WidgetsBinding.instance.lifecycleState;
+    if (life != null && life != AppLifecycleState.resumed) return;
     if (!_previewWanted) {
       _begin();
       return;
@@ -967,8 +970,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           // Fixed height while the Recalling step is on, so the preview text
           // coming and going does not move what is below.
           if (_previewWanted)
-            SizedBox(
-              height: 26,
+            ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 26),
               child: _previewing
                   ? Semantics(
                       key: const Key('practice-preview-note'),

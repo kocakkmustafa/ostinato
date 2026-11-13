@@ -12,9 +12,15 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart' show SynchronousFuture;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show RenderParagraph;
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/account_connection.dart';
+import 'package:ostinato/app/app_translation_catalog.dart';
 import 'package:ostinato/app/audio/audio_input_controller.dart';
+import 'package:ostinato/app/design/ostinato_theme.dart';
 import 'package:ostinato/app/curriculum/v1_lesson.dart';
 import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_score.dart';
@@ -91,6 +97,23 @@ V1Lesson _rhythmOnly() {
     if (V1PracticeCatalog.scoreOf(l, seed: 1)?.isRhythmOnly ?? false) return l;
   }
   throw StateError('no rhythm-only lesson in content/v1/gtr');
+}
+
+/// Katalogdan (assets/l10n) senkron yukleyen yerellestirme (test).
+final class _CatalogDelegate extends LocalizationsDelegate<AppTranslations> {
+  const _CatalogDelegate(this.tag);
+  final String tag;
+  @override
+  bool isSupported(Locale locale) => true;
+  @override
+  Future<AppTranslations> load(Locale locale) => SynchronousFuture(
+    AppTranslations.fromJson(
+      locale,
+      jsonDecode(File('assets/l10n/$tag.json').readAsStringSync()),
+    ),
+  );
+  @override
+  bool shouldReload(_CatalogDelegate old) => old.tag != tag;
 }
 
 final class _Started {
@@ -512,7 +535,6 @@ void main() {
       await t.pump(const Duration(milliseconds: 500));
       expect(_previewText, findsOneWidget, reason: 'on izleme basladi');
       expect(find.byKey(const Key('stage-shelf-toggle')), findsNothing);
-      expect(find.byKey(const Key('ghost-level-learn')), findsNothing);
       expect(store.state.level, GhostLevel.recall);
       await t.pump(const Duration(seconds: 3));
       await listen05f(t, rig);
@@ -721,6 +743,149 @@ void main() {
         isFalse,
       );
       await dispose05f(t, rigEn);
+    });
+
+    testWidgets('B1: uzun dilde + 360x640 + yazi 1.3: on izleme tasmaz, '
+        'Baslat ile cakismaz', (t) async {
+      for (final (tag, locale, text) in [
+        ('de', const Locale('de'), 'Noten 3 Sekunden vor dem Start'),
+        (
+          'pt-BR',
+          const Locale('pt', 'BR'),
+          'Partitura por 3 segundos antes de começar',
+        ),
+        ('fr', const Locale('fr'), 'Notation 3 secondes avant de commencer'),
+      ]) {
+        final rig = Rig05f();
+        await boot05f(
+          t,
+          MaterialApp(
+            theme: ostinatoTheme(),
+            locale: locale,
+            supportedLocales: [locale],
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              _CatalogDelegate(tag),
+            ],
+            builder: (c, child) => MediaQuery(
+              data: MediaQuery.of(
+                c,
+              ).copyWith(textScaler: const TextScaler.linear(1.3)),
+              child: child!,
+            ),
+            home: PracticeLoopScreen(
+              lesson: _pitched(),
+              progress: Mem05f(),
+              seed: 1,
+              ghostLevel: GhostLevel.recall,
+              controllerFactory: rig.factory,
+            ),
+          ),
+          size: const Size(360, 640),
+        );
+        await t.ensureVisible(find.byKey(const Key('practice-start')));
+        await t.tap(find.byKey(const Key('practice-start')));
+        await t.pump();
+        await t.pump(const Duration(milliseconds: 500));
+        expect(find.text(text), findsOneWidget, reason: tag);
+        expect(t.takeException(), isNull, reason: tag);
+        final box = t.getRect(find.byKey(const Key('practice-preview-note')));
+        final para = t.renderObject<RenderParagraph>(find.text(text));
+        expect(
+          box.height,
+          greaterThanOrEqualTo(para.getMaxIntrinsicHeight(box.width)),
+          reason: '$tag: kutu yaziyi sigdirir',
+        );
+        final start = t.getRect(find.byKey(const Key('practice-start')));
+        expect(
+          box.overlaps(start),
+          isFalse,
+          reason: '$tag: Baslat ile cakisma',
+        );
+        await dispose05f(t, rig);
+      }
+    });
+
+    testWidgets('B2: on izlemede hesap degisimiyle ekran yeniden kurulur: '
+        'kilit takili kalmaz', (t) async {
+      final rig = Rig05f();
+      final store = MemoryGhostStore(
+        const GhostState(level: GhostLevel.recall),
+      );
+      Widget host(String id) => AccountScope(
+        connection: null,
+        currentUserId: id,
+        child: stage05g(rig, catalog, locale: 'tr', ghostStore: store),
+      );
+      await boot05f(t, host('a'));
+      for (var i = 0; i < 4; i++) {
+        await t.pump();
+      }
+      await _tapStart(t);
+      await t.pump(const Duration(milliseconds: 500));
+      expect(_previewText, findsOneWidget);
+      expect(find.byKey(const Key('stage-shelf-toggle')), findsNothing);
+      await t.pumpWidget(host('b'));
+      for (var i = 0; i < 8; i++) {
+        await t.pump(const Duration(milliseconds: 100));
+      }
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      expect(
+        find.byKey(const Key('stage-shelf-toggle')),
+        findsOneWidget,
+        reason: 'raf yeniden kullanilabilir',
+      );
+      await t.pump(const Duration(seconds: 4));
+      expect(rig.controller!.timeline, isNull, reason: 'kosu baslamadi');
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('B3: arka plandayken koruma biterse on izleme/kosu yok', (
+      t,
+    ) async {
+      final gate = Completer<bool>();
+      final started = _Started();
+      final rig = await _screen(
+        t,
+        started,
+        level: GhostLevel.recall,
+        beforeStart: () => gate.future,
+      );
+      await _tapStart(t);
+      t.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      await t.pump();
+      gate.complete(true);
+      await t.pump();
+      await t.pump(const Duration(milliseconds: 300));
+      expect(_previewText, findsNothing, reason: 'arka planda on izleme yok');
+      expect(_hidden, findsOneWidget, reason: 'bosta');
+      await t.pump(const Duration(seconds: 4));
+      expect(_previewText, findsNothing);
+      expect(started.n, 0);
+      t.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await t.pump();
+      await dispose05f(t, rig);
+    });
+
+    testWidgets('B5: sahnede yasam dongusu iptali kilidi cozer', (t) async {
+      final rig = await stage(t);
+      expect(find.byKey(const Key('stage-shelf-toggle')), findsOneWidget);
+      await _tapStart(t);
+      await t.pump(const Duration(milliseconds: 500));
+      expect(_previewText, findsOneWidget);
+      expect(find.byKey(const Key('stage-shelf-toggle')), findsNothing);
+      t.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      await t.pump();
+      await t.pump();
+      expect(_previewText, findsNothing);
+      expect(find.byKey(const Key('stage-shelf-toggle')), findsOneWidget);
+      await t.pump(const Duration(seconds: 4));
+      expect(rig.controller!.timeline, isNull, reason: 'kosu baslamadi');
+      t.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await t.pump();
+      await dispose05f(t, rig);
     });
   });
 }

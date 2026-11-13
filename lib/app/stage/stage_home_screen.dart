@@ -400,6 +400,15 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     if (!_inited || id != _accountId) {
       _inited = true;
       _accountId = id;
+      if (_previewLock) {
+        // The practice screen is rebuilt for the new account.
+        _previewLock = false;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted || _previewLock) return;
+          _budget.playing = _playing;
+          _layers.locked = _playing;
+        });
+      }
       _progress =
           widget.progressFactory?.call(id) ??
           V1PracticeProgressStore(accountUserId: id);
@@ -546,8 +555,18 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       _pc?.removeListener(_onRun);
       _lastFailure = null; // a new screen's run decides on its own
       _pc = c..addListener(_onRun);
+      // A new screen starts idle: an old one that was disposed mid-preview
+      // cannot leave the lock behind.
+      _releasePreviewLock();
       setState(() {});
     });
+  }
+
+  void _releasePreviewLock() {
+    if (!_previewLock) return;
+    _previewLock = false;
+    _budget.playing = _playing;
+    _layers.locked = _playing;
   }
 
   void _onRun() {
