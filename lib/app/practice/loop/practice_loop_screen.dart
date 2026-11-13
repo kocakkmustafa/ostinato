@@ -212,6 +212,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   RecorderBackgroundGuard? _backgroundGuard;
   late final PracticeSessionController _c = _createController();
   late final Ticker _ticker = createTicker((_) => _c.tick());
+  // OST-UX-05h1: the stage's failure text sits at the top of the body; a new
+  // failure scrolls the body back to it.
+  final ScrollController _bodyScroll = ScrollController();
+  bool _failureSeen = false;
 
   /// The run whose result screen was opened: each run's result opens once,
   /// so a setting changed after it (tempo, loop) never reopens it.
@@ -398,6 +402,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _bodyScroll.dispose();
     _previewTimer?.cancel();
     _c.removeListener(_changed);
     _backgroundGuard?.detach();
@@ -578,8 +583,16 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   Widget build(BuildContext context) {
     final palette = OstinatoPalette.of(context);
     final lesson = widget.lesson;
+    final failed = _c.phase == PracticePhase.failed;
+    if (widget.stageMode && failed && !_failureSeen) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _bodyScroll.hasClients) _bodyScroll.jumpTo(0);
+      });
+    }
+    _failureSeen = failed;
     final scroll = LayoutBuilder(
       builder: (context, box) => SingleChildScrollView(
+        controller: _bodyScroll,
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -728,24 +741,30 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
 
   /// The microphone failure text. In the stage it sits at the top of the
   /// scrolling body (OST-UX-05h1) so the fixed area stays safety line + Play.
-  Widget _failureText(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: 8),
-    child: Text(
-      _c.failure == 'permission'
-          ? localized(
-              context,
-              'Microphone access is off. You can allow it in Settings.',
-              'Mikrofon erişimi kapalı. Ayarlar’dan izin verebilirsin.',
-            )
-          : localized(
-              context,
-              'The microphone stopped (the input changed or another app took it). Start again.',
-              'Mikrofon durdu (giriş değişti ya da başka bir uygulama aldı). Yeniden başlat.',
-            ),
-      key: const Key('practice-failure'),
-      style: hankenText(size: 13),
-    ),
-  );
+  Widget _failureText(BuildContext context) {
+    final text = Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Text(
+        _c.failure == 'permission'
+            ? localized(
+                context,
+                'Microphone access is off. You can allow it in Settings.',
+                'Mikrofon erişimi kapalı. Ayarlar’dan izin verebilirsin.',
+              )
+            : localized(
+                context,
+                'The microphone stopped (the input changed or another app took it). Start again.',
+                'Mikrofon durdu (giriş değişti ya da başka bir uygulama aldı). Yeniden başlat.',
+              ),
+        key: const Key('practice-failure'),
+        style: hankenText(size: 13),
+      ),
+    );
+    // Stage: one live-region node (the body may have been scrolled away).
+    return widget.stageMode
+        ? Semantics(liveRegion: true, container: true, child: text)
+        : text;
+  }
 
   Widget _topBar(BuildContext context, V1Lesson lesson) {
     final t = _c.tempo;

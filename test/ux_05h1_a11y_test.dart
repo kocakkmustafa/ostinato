@@ -636,6 +636,90 @@ void main() {
     }
   });
 
+  group('F) hata iletisi gövde kaydırılmışken de görünür ve okunur', () {
+    for (final (name, size) in const <(String, Size)>[
+      ('360x640', Size(360, 640)),
+      ('320x568', Size(320, 568)),
+    ]) {
+      for (final permission in [true, false]) {
+        testWidgets(
+          'F $name ${permission ? 'izin hatasi' : 'Mikrofon durdu'}',
+          (t) async {
+            final sem = t.ensureSemantics();
+            final rig = Rig05f(
+              permission: permission
+                  ? PermissionStatus.denied
+                  : PermissionStatus.granted,
+            );
+            if (!permission) rig.rates.clear();
+            await _boot(
+              t,
+              rig,
+              catalog,
+              size: size,
+              mic: permission
+                  ? PermissionStatus.denied
+                  : PermissionStatus.granted,
+            );
+            final body = find
+                .descendant(
+                  of: find.byKey(const Key('stage-practice-slot')),
+                  matching: find.byType(SingleChildScrollView),
+                )
+                .first;
+            final scrollable = t.state<ScrollableState>(
+              find
+                  .descendant(of: body, matching: find.byType(Scrollable))
+                  .first,
+            );
+            // kardes: govde kaydirilabilir, asagi kaydir
+            expect(scrollable.position.maxScrollExtent, greaterThan(0));
+            scrollable.position.jumpTo(scrollable.position.maxScrollExtent);
+            await t.pump();
+            expect(scrollable.position.pixels, greaterThan(0));
+            await _play(t);
+            await _settle(t);
+            final msg = find.byKey(const Key('practice-failure'));
+            expect(msg, findsOneWidget);
+            final r = t.getRect(msg);
+            final vp = t.getRect(body);
+            expect(
+              r.top,
+              greaterThanOrEqualTo(vp.top - 0.5),
+              reason: '$name ust',
+            );
+            if (size.width < 330) {
+              // 320x568: govde ~35 px; iletinin BASLANGICI pencerede, kalani
+              // kaydirilir (belgede yazili sinir)
+              expect(r.top, lessThan(vp.bottom), reason: '$name baslangic');
+            } else {
+              expect(
+                r.bottom,
+                lessThanOrEqualTo(vp.bottom + 0.5),
+                reason: '$name alt',
+              );
+            }
+            expect(scrollable.position.pixels, 0, reason: 'govde basa kaydi');
+            // tek dugumlu canli bolge, etiket bir kez
+            final node = t.getSemantics(msg);
+            expect(node.flagsCollection.isLiveRegion, isTrue);
+            final same = _withLabel(t, node.label);
+            expect(same, hasLength(1), reason: 'tek dugum');
+            expect(
+              node.label.contains(
+                permission ? 'Mikrofon erişimi kapalı' : 'Mikrofon durdu',
+              ),
+              isTrue,
+              reason: node.label,
+            );
+            sem.dispose();
+            await dispose05f(t, rig);
+          },
+        );
+      }
+    }
+  });
+
   group('D) 14 dilde 360x640 + 1.3 sahne ilk ekrani', () {
     for (final tag in _tags) {
       testWidgets('D $tag', (t) async {
