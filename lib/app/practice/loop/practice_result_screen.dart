@@ -228,7 +228,7 @@ class PracticeResultScreen extends StatelessWidget {
               const SizedBox(height: 8),
               if (ladder case TempoLadderStepped(
                 :final nextBpm,
-              ) when s.nextStep != NextStep.raiseTempo)
+              ) when _step != NextStep.raiseTempo)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: OutlinedButton(
@@ -821,20 +821,8 @@ class PracticeResultScreen extends StatelessWidget {
     );
   }
 
-  /// OST-UX-05g (stage only): a run that is not measured (stopped early, loop,
-  /// wait) must not produce a tempo / loop / performance suggestion from its
-  /// partial numbers, as that would contradict the "Not measured" label.
-  /// Outside the stage (`stage == false`) `NextStep` is used exactly as before.
-  NextStep get _step =>
-      stage &&
-          !summary.gate.eligible &&
-          const <NextStep>{
-            NextStep.loopSlower,
-            NextStep.raiseTempo,
-            NextStep.performanceRun,
-          }.contains(summary.nextStep)
-      ? NextStep.tryAgain
-      : summary.nextStep;
+  /// OST-UX-05e2: the shown step (see [PracticeRunSummary.shownStep]).
+  NextStep get _step => summary.shownStep;
 
   Widget _nextStep(BuildContext context) {
     final s = summary;

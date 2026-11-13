@@ -416,9 +416,14 @@ void main() {
       ('loopUsed hedef tempo', sum(List.filled(8, c), loop: true), perf),
     ];
     for (final (name, s, old) in cases) {
-      testWidgets('05g-ek: stage=false BIREBIR: $name -> "$old"', (t) async {
-        expect(await label(t, s, stage: false), old);
-      });
+      testWidgets(
+        '05e2: stage=false da olculmemis kosuda oneri URETILMEZ: $name '
+        '(eskiden "$old")',
+        (t) async {
+          expect(s.nextStep, isNot(NextStep.tryAgain));
+          expect(await label(t, s, stage: false), 'Tekrar dene');
+        },
+      );
       testWidgets('05g-ek: stage=true: $name -> oneri URETILMEZ', (t) async {
         // kontrol (eski akis ayni girdide oneriyi uretir)
         expect(s.nextStep, isNot(NextStep.nextLesson));
