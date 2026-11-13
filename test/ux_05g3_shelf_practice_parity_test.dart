@@ -795,8 +795,8 @@ void main() {
         final para = t.renderObject<RenderParagraph>(find.text(text));
         expect(
           box.height,
-          greaterThanOrEqualTo(para.getMaxIntrinsicHeight(box.width)),
-          reason: '$tag: kutu yaziyi sigdirir',
+          greaterThanOrEqualTo(para.getMaxIntrinsicHeight(box.width) + 6),
+          reason: '$tag: kutu yazi + ust dolgu (6) sigdirir',
         );
         final start = t.getRect(find.byKey(const Key('practice-start')));
         expect(
@@ -887,5 +887,36 @@ void main() {
       await t.pump();
       await dispose05f(t, rig);
     });
+
+    for (final (name, level, lesson) in <(String, GhostLevel?, V1Lesson?)>[
+      ('ghostLevel null', null, null),
+      ('Ogrenme', GhostLevel.learn, null),
+      ('Bagimsiz', GhostLevel.independent, null),
+      ('ritim-only + Hatirlama', GhostLevel.recall, _rhythmOnly()),
+    ]) {
+      testWidgets('R1: $name: koruma biterken inactive olsa da kosu BASLAR '
+          '(main davranisi)', (t) async {
+        final gate = Completer<bool>();
+        final started = _Started();
+        final rig = await _screen(
+          t,
+          started,
+          level: level,
+          lesson: lesson,
+          beforeStart: () => gate.future,
+        );
+        await _tapStart(t);
+        t.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+        await t.pump();
+        gate.complete(true);
+        await t.pump();
+        await t.pump(const Duration(milliseconds: 300));
+        expect(started.n, 1, reason: '$name: Baslat dusmedi');
+        expect(_previewText, findsNothing);
+        t.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+        await t.pump();
+        await dispose05f(t, rig);
+      });
+    }
   });
 }

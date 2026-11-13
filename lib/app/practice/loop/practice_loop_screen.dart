@@ -540,13 +540,14 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   }
 
   void _beginOrPreview() {
-    // The guard answered while the app is in the background: nothing starts.
-    final life = WidgetsBinding.instance.lifecycleState;
-    if (life != null && life != AppLifecycleState.resumed) return;
     if (!_previewWanted) {
-      _begin();
+      _begin(); // exactly main's path
       return;
     }
+    // The guard answered while the app is in the background: no preview and
+    // no run (Recalling only).
+    final life = WidgetsBinding.instance.lifecycleState;
+    if (life != null && life != AppLifecycleState.resumed) return;
     _setPreviewing(true);
     _previewTimer = Timer(const Duration(seconds: 3), () {
       _previewTimer = null;
