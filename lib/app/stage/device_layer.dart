@@ -195,22 +195,29 @@ class _DeviceLayerState extends State<DeviceLayer> with WidgetsBindingObserver {
       onTap: () => _go(onTap),
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 48),
-        child: Row(
-          children: <Widget>[
-            Icon(icon, size: 20),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                label,
-                style: hankenText(size: 15, weight: FontWeight.w500),
-              ),
-            ),
-            if (hint != null) ...<Widget>[
+        // OST-UX-05h1: the label keeps its natural width; only the hint
+        // wraps, and it never takes more than 40% of the row.
+        child: LayoutBuilder(
+          builder: (context, box) => Row(
+            children: <Widget>[
+              Icon(icon, size: 20),
               const SizedBox(width: 8),
-              Text(hint, style: hankenText(size: 13)),
+              Expanded(
+                child: Text(
+                  label,
+                  style: hankenText(size: 15, weight: FontWeight.w500),
+                ),
+              ),
+              if (hint != null) ...<Widget>[
+                const SizedBox(width: 8),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: box.maxWidth * 0.4),
+                  child: Text(hint, style: hankenText(size: 13)),
+                ),
+              ],
+              const Icon(Icons.chevron_right),
             ],
-            const Icon(Icons.chevron_right),
-          ],
+          ),
         ),
       ),
     ),

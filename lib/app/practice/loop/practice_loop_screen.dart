@@ -212,6 +212,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   RecorderBackgroundGuard? _backgroundGuard;
   late final PracticeSessionController _c = _createController();
   late final Ticker _ticker = createTicker((_) => _c.tick());
+  // OST-UX-05h1: the stage's failure text sits at the top of the body; a new
+  // failure scrolls the body back to it.
+  final ScrollController _bodyScroll = ScrollController();
+  bool _failureSeen = false;
 
   /// The run whose result screen was opened: each run's result opens once,
   /// so a setting changed after it (tempo, loop) never reopens it.
@@ -398,6 +402,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _bodyScroll.dispose();
     _previewTimer?.cancel();
     _c.removeListener(_changed);
     _backgroundGuard?.detach();
@@ -578,14 +583,27 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   Widget build(BuildContext context) {
     final palette = OstinatoPalette.of(context);
     final lesson = widget.lesson;
+    final failed = _c.phase == PracticePhase.failed;
+    if (widget.stageMode && failed && !_failureSeen) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _bodyScroll.hasClients) _bodyScroll.jumpTo(0);
+      });
+    }
+    _failureSeen = failed;
     final scroll = LayoutBuilder(
       builder: (context, box) => SingleChildScrollView(
+        // Stage only: the normal screen keeps the default (primary) controller.
+        controller: widget.stageMode ? _bodyScroll : null,
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
         child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: box.maxHeight - 26),
+          constraints: BoxConstraints(
+            minHeight: (box.maxHeight - 26).clamp(0.0, double.infinity),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              if (widget.stageMode && _c.phase == PracticePhase.failed)
+                _failureText(context),
               _topBar(context, lesson),
               const SizedBox(height: 10),
               Text(
@@ -649,29 +667,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                 const SizedBox(height: 12),
                 _primary(context),
               ],
-              const SizedBox(height: 10),
-              // With the own-recording setting on, this run IS kept on
-              // the device, so the "nothing is recorded" line would be
-              // false.
-              Text(
-                _c.ownRecorder?.enabled ?? false
-                    ? uiText(
-                        context,
-                        widget.retentionOpen
-                            ? RecordingRetentionCopy.practiceFooterSessionOnly
-                            : OwnRecordingCopy.practiceFooterOn,
-                      )
-                    : localized(
-                        context,
-                        'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',
-                        'Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.',
-                      ),
-                style: hankenText(
-                  size: 11.5,
-                  color: palette.textMuted,
-                  height: 1.4,
-                ),
-              ),
+              if (!widget.stageMode) ...[
+                const SizedBox(height: 10),
+                _safetyLine(context),
+              ],
             ],
           ),
         ),
@@ -683,19 +682,89 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         // OST-UX-05b2: in the stage the Play button is a fixed area under the
         // scrolling body, so it is on the first screen at every size.
         child: widget.stageMode
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(child: scroll),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-                    child: _primary(context),
-                  ),
-                ],
+            ? LayoutBuilder(
+                builder: (context, box) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(child: scroll),
+                    // OST-UX-05h1: the fixed area is only the safety line and
+                    // Play (the failure text lives in the body). It is whole
+                    // unless even 85% of the height cannot hold it (landscape);
+                    // then it scrolls from the bottom so Play stays in view.
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: box.maxHeight * 0.85,
+                      ),
+                      child: SingleChildScrollView(
+                        // Reversed: if it ever scrolls, Play stays in view.
+                        reverse: true,
+                        padding: const EdgeInsets.fromLTRB(16, 2, 16, 6),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            _safetyLine(context),
+                            const SizedBox(height: 4),
+                            _primary(context),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               )
             : scroll,
       ),
     );
+  }
+
+  /// The safety / privacy line. Scrolling body in the normal screen; fixed
+  /// above Play in the stage (OST-UX-05h1). Text and meaning unchanged.
+  Widget _safetyLine(BuildContext context) {
+    final palette = OstinatoPalette.of(context);
+    // With the own-recording setting on, this run IS kept on the device, so
+    // the "nothing is recorded" line would be false.
+    return Text(
+      _c.ownRecorder?.enabled ?? false
+          ? uiText(
+              context,
+              widget.retentionOpen
+                  ? RecordingRetentionCopy.practiceFooterSessionOnly
+                  : OwnRecordingCopy.practiceFooterOn,
+            )
+          : localized(
+              context,
+              'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',
+              'Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.',
+            ),
+      style: hankenText(size: 11.5, color: palette.textMuted, height: 1.4),
+    );
+  }
+
+  /// The microphone failure text. In the stage it sits at the top of the
+  /// scrolling body (OST-UX-05h1) so the fixed area stays safety line + Play.
+  Widget _failureText(BuildContext context) {
+    final text = Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Text(
+        _c.failure == 'permission'
+            ? localized(
+                context,
+                'Microphone access is off. You can allow it in Settings.',
+                'Mikrofon erişimi kapalı. Ayarlar’dan izin verebilirsin.',
+              )
+            : localized(
+                context,
+                'The microphone stopped (the input changed or another app took it). Start again.',
+                'Mikrofon durdu (giriş değişti ya da başka bir uygulama aldı). Yeniden başlat.',
+              ),
+        key: const Key('practice-failure'),
+        style: hankenText(size: 13),
+      ),
+    );
+    // Stage: one live-region node (the body may have been scrolled away).
+    return widget.stageMode
+        ? Semantics(liveRegion: true, container: true, child: text)
+        : text;
   }
 
   Widget _topBar(BuildContext context, V1Lesson lesson) {
@@ -1336,25 +1405,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (phase == PracticePhase.failed)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              _c.failure == 'permission'
-                  ? localized(
-                      context,
-                      'Microphone access is off. You can allow it in Settings.',
-                      'Mikrofon erişimi kapalı. Ayarlar’dan izin verebilirsin.',
-                    )
-                  : localized(
-                      context,
-                      'The microphone stopped (the input changed or another app took it). Start again.',
-                      'Mikrofon durdu (giriş değişti ya da başka bir uygulama aldı). Yeniden başlat.',
-                    ),
-              key: const Key('practice-failure'),
-              style: hankenText(size: 13),
-            ),
-          ),
+        if (phase == PracticePhase.failed && !widget.stageMode)
+          _failureText(context),
         if (!widget.stageMode &&
             (_score.hasPitches || _score.isRhythmOnly) &&
             _guides.contains(Guide.referenceAudio)) ...[
