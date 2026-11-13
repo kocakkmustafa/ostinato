@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -589,6 +588,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              if (widget.stageMode && _c.phase == PracticePhase.failed)
+                _failureText(context),
               _topBar(context, lesson),
               const SizedBox(height: 10),
               Text(
@@ -672,28 +673,23 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(child: scroll),
-                    // OST-UX-05h1: the fixed area (safety line, a failure
-                    // message, Play) never takes more than 70% of the height;
-                    // in a very crowded stage it scrolls instead of
-                    // overflowing.
+                    // OST-UX-05h1: the fixed area is only the safety line and
+                    // Play (the failure text lives in the body). It is whole
+                    // unless even 85% of the height cannot hold it (landscape);
+                    // then it scrolls from the bottom so Play stays in view.
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        // At most 70% and always leave the body 96 px (but
-                        // never less than 72 px: Play must stay whole).
-                        maxHeight: math.min(
-                          box.maxHeight * 0.7,
-                          math.max(box.maxHeight - 96, 72),
-                        ),
+                        maxHeight: box.maxHeight * 0.85,
                       ),
                       child: SingleChildScrollView(
                         // Reversed: if it ever scrolls, Play stays in view.
                         reverse: true,
-                        padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                        padding: const EdgeInsets.fromLTRB(16, 2, 16, 6),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             _safetyLine(context),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 4),
                             _primary(context),
                           ],
                         ),
@@ -729,6 +725,27 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       style: hankenText(size: 11.5, color: palette.textMuted, height: 1.4),
     );
   }
+
+  /// The microphone failure text. In the stage it sits at the top of the
+  /// scrolling body (OST-UX-05h1) so the fixed area stays safety line + Play.
+  Widget _failureText(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Text(
+      _c.failure == 'permission'
+          ? localized(
+              context,
+              'Microphone access is off. You can allow it in Settings.',
+              'Mikrofon erişimi kapalı. Ayarlar’dan izin verebilirsin.',
+            )
+          : localized(
+              context,
+              'The microphone stopped (the input changed or another app took it). Start again.',
+              'Mikrofon durdu (giriş değişti ya da başka bir uygulama aldı). Yeniden başlat.',
+            ),
+      key: const Key('practice-failure'),
+      style: hankenText(size: 13),
+    ),
+  );
 
   Widget _topBar(BuildContext context, V1Lesson lesson) {
     final t = _c.tempo;
@@ -1368,25 +1385,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (phase == PracticePhase.failed)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              _c.failure == 'permission'
-                  ? localized(
-                      context,
-                      'Microphone access is off. You can allow it in Settings.',
-                      'Mikrofon erişimi kapalı. Ayarlar’dan izin verebilirsin.',
-                    )
-                  : localized(
-                      context,
-                      'The microphone stopped (the input changed or another app took it). Start again.',
-                      'Mikrofon durdu (giriş değişti ya da başka bir uygulama aldı). Yeniden başlat.',
-                    ),
-              key: const Key('practice-failure'),
-              style: hankenText(size: 13),
-            ),
-          ),
+        if (phase == PracticePhase.failed && !widget.stageMode)
+          _failureText(context),
         if (!widget.stageMode &&
             (_score.hasPitches || _score.isRhythmOnly) &&
             _guides.contains(Guide.referenceAudio)) ...[

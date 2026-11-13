@@ -1041,11 +1041,11 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                   Semantics(
                     sortKey: const OrdinalSortKey(2),
                     child: ToolShelf(
-                      // OST-UX-05h1: short screens (<=700): shelf 22% (14% with the
-                      // mic band) so the safety line, Play and >=96 px of
-                      // body fit; taller screens are unchanged.
+                      // OST-UX-05h1: short screens (<=700): shelf 17% (10% with the
+                      // mic band) so the safety line and Play stay whole;
+                      // taller screens are unchanged.
                       maxContentHeight: height <= 700
-                          ? height * (_micOff ? 0.14 : 0.22)
+                          ? height * (_micOff ? 0.1 : 0.17)
                           : height * (_micOff ? 0.2 : 0.34),
                       open: _shelfOpen,
                       onToggle: () => setState(() => _shelfOpen = !_shelfOpen),
@@ -1094,9 +1094,15 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                     GlassLayer(
                       key: ValueKey<StageLayer>(l),
                       budget: _budget,
-                      child: FocusScope(
-                        node: _layerScope,
-                        child: _layerContent(context, data, l),
+                      // OST-UX-05h1: the screen reader's dismiss gesture
+                      // (iOS two-finger Z) reaches the layer from any row.
+                      child: Semantics(
+                        container: true,
+                        onDismiss: _closeLayer,
+                        child: FocusScope(
+                          node: _layerScope,
+                          child: _layerContent(context, data, l),
+                        ),
                       ),
                     ),
                 ],

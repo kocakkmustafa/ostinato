@@ -37,7 +37,7 @@ const _listeningOff = 'Dinleme kapalı';
 const _safetyStart = 'Ağrı, uyuşma ya da karıncalanmada dur.';
 const _close = 'Kapat';
 const _minBody = 96.0;
-const _minBodyLandscape = 64.0;
+const _minBodyTight = 16.0; // yatay ve 320x568 (olculen ~22-36): sinirli
 
 /// The safety line: the only Text under the Column that also holds Play
 /// (language independent; the practice copy has no catalog entry in every
@@ -235,13 +235,40 @@ List<SemanticsNode> _withLabel(WidgetTester t, Pattern p) => [
       n,
 ];
 
+/// The safety line is VISIBLE: inside the screen and inside the viewport of
+/// the fixed area that holds it (not clipped by it), and above Play.
+void _expectSafetyVisible(WidgetTester t, String why, Size size) {
+  final play = t.getRect(find.byKey(const Key('practice-start')));
+  final line = t.getRect(_safety);
+  final viewport = t.getRect(
+    find
+        .ancestor(of: _safety, matching: find.byType(SingleChildScrollView))
+        .first,
+  );
+  expect(line.top, greaterThanOrEqualTo(0), reason: '$why: satir ekran ustu');
+  expect(
+    line.bottom,
+    lessThanOrEqualTo(size.height),
+    reason: '$why: satir ekran alti',
+  );
+  expect(
+    line.top,
+    greaterThanOrEqualTo(viewport.top - 0.5),
+    reason: '$why: satir kirpilmamis (ust)',
+  );
+  expect(
+    line.bottom,
+    lessThanOrEqualTo(viewport.bottom + 0.5),
+    reason: '$why: satir kirpilmamis (alt)',
+  );
+  expect(line.bottom, lessThanOrEqualTo(play.top), reason: '$why: cakisma');
+}
+
 void _expectPlayAndSafety(WidgetTester t, String why) {
   final play = t.getRect(find.byKey(const Key('practice-start')));
   expect(play.bottom, lessThanOrEqualTo(640), reason: '$why: Cal ekran icinde');
   expect(play.top, greaterThanOrEqualTo(0), reason: why);
-  final line = t.getRect(_safety);
-  expect(line.top, greaterThanOrEqualTo(0), reason: '$why: satir gorunur');
-  expect(line.bottom, lessThanOrEqualTo(play.top), reason: '$why: cakisma');
+  _expectSafetyVisible(t, why, const Size(360, 640));
 }
 
 void main() {
@@ -453,10 +480,21 @@ void main() {
       await dispose05f(t, rig);
     });
 
-    for (final (layer, handle, kardes) in <(String, String, String)>[
-      ('Cihaz', 'stage-handle-setup', 'stage-device-layer'),
-      ('Yol', 'stage-handle-path', 'stage-path-scroll'),
-    ]) {
+    for (final (layer, handle, kardes, rowKey)
+        in <(String, String, String, String)>[
+          (
+            'Cihaz',
+            'stage-handle-setup',
+            'stage-device-layer',
+            'stage-device-settings',
+          ),
+          (
+            'Yol',
+            'stage-handle-path',
+            'stage-path-scroll',
+            'stage-path-scroll',
+          ),
+        ]) {
       testWidgets('C4 scrim: $layer katmani erisilebilir Kapat dugmesi', (
         t,
       ) async {
@@ -504,6 +542,36 @@ void main() {
           );
           expect(_withLabel(t, _close), isEmpty);
         }
+        // K1: katman icindeki bir satirin atasi `dismiss` eylemi tasir
+        // (Kapat dugumunden ayri) ve eylem katmani kapatir.
+        if (find.byKey(Key(kardes)).evaluate().isEmpty) {
+          await t.tap(find.byKey(Key(handle)));
+          await _settle(t);
+          await _settle(t);
+        }
+        final row = t.getSemantics(find.byKey(Key(rowKey)));
+        SemanticsNode? up = row;
+        SemanticsNode? dismissNode;
+        while (up != null) {
+          if (up.getSemanticsData().hasAction(SemanticsAction.dismiss)) {
+            dismissNode = up;
+            break;
+          }
+          up = up.parent;
+        }
+        expect(dismissNode, isNotNull, reason: '$layer: atada dismiss');
+        expect(
+          dismissNode!.label,
+          isNot(_close),
+          reason: '$layer: ata Kapat dugumu degil (kardes degil, ata)',
+        );
+        // ignore: deprecated_member_use
+        t.binding.pipelineOwner.semanticsOwner!.performAction(
+          dismissNode.id,
+          SemanticsAction.dismiss,
+        );
+        await _settle(t);
+        expect(find.byKey(Key(kardes)), findsNothing, reason: '$layer ata');
         sem.dispose();
         await dispose05f(t, rig);
       });
@@ -537,12 +605,14 @@ void main() {
             isTrue,
             reason: '$name: Cal tamamen ekran icinde $play',
           );
-          final line = t.getRect(_safety);
-          expect(
-            line.bottom <= play.top || line.top >= play.bottom,
-            isTrue,
-            reason: '$name: guvenlik satiri Cal ile cakismaz',
-          );
+          if (size.width > size.height || size.width < 330) {
+            // yatay ve 320x568: bant+hata+Cal birlikteyken satir tam sigmaz
+            // (kaydirilabilir); Cal tam gorunur, cakisma yok
+            final l = t.getRect(_safety);
+            expect(l.bottom <= play.top, isTrue, reason: '$name: cakisma');
+          } else {
+            _expectSafetyVisible(t, name, size);
+          }
           final body = t.getRect(
             find
                 .descendant(
@@ -554,7 +624,9 @@ void main() {
           expect(
             body.height,
             greaterThanOrEqualTo(
-              size.width > size.height ? _minBodyLandscape : _minBody,
+              size.width > size.height || size.width < 330
+                  ? _minBodyTight
+                  : _minBody,
             ),
             reason: '$name: govde gorunur yuksekligi',
           );
