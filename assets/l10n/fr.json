@@ -8819,10 +8819,9 @@
     "0b5ab5c5a5449abc": "Ligne de pulsation",
     "b9ecc862b4b4cda8": "Étiquette",
     "4074ad9bbe750206": "Notation 3 secondes avant de commencer",
-    "565fcc73f3de87ca": "Métronome (facultatif)",
-    "aee251b6da600be1": "Indice",
     "e1a10ad8851b0fc6": "Tu peux essayer un niveau au-dessus",
     "15517a5be8ed4a9c": "Le dernier passage n'a pas été mesuré et ne compte pas pour le niveau",
-    "e11d8431742ddc50": "Aides de ce niveau"
+    "e11d8431742ddc50": "Aides de ce niveau",
+    "dd8c01a029448810": "Pas d’aide supplémentaire à ce niveau"
   }
 }

@@ -79,7 +79,7 @@ GhostState _reach(GhostLevel level, int valid) {
 void main() {
   group('05g-2 matris (04-design Ek B, 5.6)', () {
     test('05g-2: dort basamak x oge tablosu (literal)', () {
-      expect(GhostItem.values, hasLength(7));
+      expect(GhostItem.values, hasLength(5));
       expect(GhostPolicy.itemsFor(GhostLevel.learn), {
         GhostItem.notation,
         GhostItem.tab,
@@ -95,10 +95,7 @@ void main() {
         GhostItem.preStartPreview,
         GhostItem.beat,
       });
-      expect(GhostPolicy.itemsFor(GhostLevel.independent), {
-        GhostItem.metronome,
-        GhostItem.hint,
-      });
+      expect(GhostPolicy.itemsFor(GhostLevel.independent), <GhostItem>{});
     });
   });
 

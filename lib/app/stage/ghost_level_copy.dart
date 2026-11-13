@@ -17,11 +17,11 @@ abstract final class GhostLevelCopy {
     'Notation for 3 seconds before you start',
     'Başlamadan 3 sn nota',
   );
-  static const UiCopy metronome = (
-    'Metronome (optional)',
-    'Metronom (isteğe bağlı)',
+
+  static const UiCopy noExtraHelp = (
+    'No extra help at this level',
+    'Bu basamakta ek yardım yok',
   );
-  static const UiCopy hint = ('Hint', 'İpucu');
 
   static const UiCopy suggestion = (
     'You can try one step up',
@@ -47,10 +47,9 @@ abstract final class GhostLevelCopy {
     beat,
     label,
     preStartPreview,
-    metronome,
-    hint,
     suggestion,
     notMeasured,
     shown,
+    noExtraHelp,
   ];
 }

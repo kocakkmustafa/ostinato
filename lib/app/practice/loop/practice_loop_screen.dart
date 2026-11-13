@@ -17,6 +17,7 @@ import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
 import '../../ostinato_release_policy.dart';
 import '../../stage/ghost_policy.dart' show GhostItem, GhostLevel, GhostPolicy;
+import '../../stage/ghost_level_copy.dart';
 import '../../stage/stage_copy.dart';
 import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
@@ -79,6 +80,7 @@ class PracticeLoopScreen extends StatefulWidget {
     this.listenController,
     this.tuningCardSeen = false,
     this.onStarted,
+    this.onPreviewChanged,
     this.beforeStart,
     this.onRunRecorded,
   });
@@ -98,6 +100,10 @@ class PracticeLoopScreen extends StatefulWidget {
 
   /// OST-UX-05b2: called when Play is tapped (the stage remembers it).
   final VoidCallback? onStarted;
+
+  /// OST-UX-05g3: the Recalling 3 s preview began (true) or ended / was
+  /// cancelled (false). null = main behaviour (the stage locks on it).
+  final ValueChanged<bool>? onPreviewChanged;
 
   /// OST-UX-05b: embedded in the stage shell (default false = unchanged).
   /// True: no back button (the stage owns back), the start button reads
@@ -175,7 +181,7 @@ class PracticeLoopScreen extends StatefulWidget {
 }
 
 class _PracticeLoopScreenState extends State<PracticeLoopScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   /// Lessons with generated clapping lines draw new lines each time the
   /// screen opens; written lines ignore the seed.
   late final PracticeScore _score = V1PracticeCatalog.scoreOf(
@@ -245,7 +251,38 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       widget.ghostLevel != null &&
       !_score.isRhythmOnly &&
       !(widget.ghostScreen && _ghostOn) &&
+      !_previewing &&
       !_guides.contains(Guide.notation);
+
+  /// OST-UX-05g3: the Learning step's note-name label above each mark.
+  bool get _showNoteNames =>
+      widget.ghostLevel == GhostLevel.learn &&
+      !_score.isRhythmOnly &&
+      !(widget.ghostScreen && _ghostOn);
+
+  /// OST-UX-05g3: Recalling shows the hidden line for a fixed 3 s after Start.
+  bool get _previewWanted =>
+      widget.ghostLevel == GhostLevel.recall &&
+      !_score.isRhythmOnly &&
+      !(widget.ghostScreen && _ghostOn);
+
+  bool _previewing = false;
+  Timer? _previewTimer;
+
+  void _setPreviewing(bool v) {
+    if (_previewing == v) return;
+    setState(() => _previewing = v);
+    widget.onPreviewChanged?.call(v);
+  }
+
+  /// The app left the foreground: the preview is cancelled and no run starts.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed || !_previewing) return;
+    _previewTimer?.cancel();
+    _previewTimer = null;
+    _setPreviewing(false);
+  }
 
   /// FK1 "Listen first"; never sounds while the microphone runs.
   late final ReferenceListenController _listen =
@@ -285,6 +322,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _c.addListener(_changed);
     widget.onController?.call(_c);
     unawaited(_loadProfile());
@@ -359,6 +397,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _previewTimer?.cancel();
     _c.removeListener(_changed);
     _backgroundGuard?.detach();
     if (widget.listenController == null) _listen.dispose();
@@ -479,9 +519,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   bool _starting = false;
 
   void _start() {
+    if (_previewing) return; // second tap during the 3 s preview
     final guard = widget.beforeStart;
     if (guard == null) {
-      _begin();
+      _beginOrPreview();
       return;
     }
     if (_starting) return; // a second tap while the guard is being asked
@@ -494,8 +535,28 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         ok = false;
       }
       _starting = false;
-      if (ok && mounted) _begin();
+      if (ok && mounted) _beginOrPreview();
     }());
+  }
+
+  void _beginOrPreview() {
+    if (!_previewWanted) {
+      _begin(); // exactly main's path
+      return;
+    }
+    // The guard answered while the app is in the background: no preview and
+    // no run (Recalling only).
+    final life = WidgetsBinding.instance.lifecycleState;
+    if (life != null && life != AppLifecycleState.resumed) return;
+    _setPreviewing(true);
+    _previewTimer = Timer(const Duration(seconds: 3), () {
+      _previewTimer = null;
+      if (!mounted) return;
+      final life = WidgetsBinding.instance.lifecycleState;
+      final foreground = life == null || life == AppLifecycleState.resumed;
+      _setPreviewing(false);
+      if (foreground) _begin();
+    });
   }
 
   void _begin() {
@@ -878,7 +939,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           const SizedBox(height: 8),
           if (_stepHidesLine)
             const SizedBox(key: Key('ghost-step-line-hidden'), height: 190)
-          else if (!_guides.contains(Guide.notation))
+          else if (!_guides.contains(Guide.notation) && !_previewing)
             Container(
               key: const Key('ghost-line-hidden'),
               height: 190,
@@ -903,8 +964,34 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                   loop: _c.loopRange,
                   // A rhythm-only line is one lane of strokes, not six strings.
                   guitar: !_score.isRhythmOnly,
+                  showNoteNames: _showNoteNames,
                 ),
               ),
+            ),
+          // Fixed height while the Recalling step is on, so the preview text
+          // coming and going does not move what is below.
+          if (_previewWanted)
+            ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 26),
+              child: _previewing
+                  ? Semantics(
+                      key: const Key('practice-preview-note'),
+                      liveRegion: true,
+                      label: uiText(context, GhostLevelCopy.preStartPreview),
+                      child: ExcludeSemantics(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 6),
+                          child: Text(
+                            uiText(context, GhostLevelCopy.preStartPreview),
+                            style: hankenText(
+                              size: 13,
+                              color: palette.textMuted,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : null,
             ),
         ],
       ),
@@ -1280,7 +1367,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         ],
         FilledButton.icon(
           key: const Key('practice-start'),
-          onPressed: _start,
+          onPressed: _previewing ? null : _start,
           icon: const Icon(Icons.play_arrow),
           label: Text(
             widget.stageMode

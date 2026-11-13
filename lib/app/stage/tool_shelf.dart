@@ -222,8 +222,6 @@ class ToolShelf extends StatelessWidget {
     GhostItem.beat => GhostLevelCopy.beat,
     GhostItem.label => GhostLevelCopy.label,
     GhostItem.preStartPreview => GhostLevelCopy.preStartPreview,
-    GhostItem.metronome => GhostLevelCopy.metronome,
-    GhostItem.hint => GhostLevelCopy.hint,
   };
 
   /// The four manual levels, what each shows, and (only after enough valid
@@ -288,6 +286,15 @@ class ToolShelf extends StatelessWidget {
                   style: hankenText(size: 13),
                 ),
               ),
+          if (GhostPolicy.itemsFor(g.level).isEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Text(
+                uiText(context, GhostLevelCopy.noExtraHelp),
+                key: const Key('ghost-item-none'),
+                style: hankenText(size: 13),
+              ),
+            ),
           if (g.lastRun == GhostLastRun.notMeasured)
             Padding(
               padding: const EdgeInsets.only(top: 6),

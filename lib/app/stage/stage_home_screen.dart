@@ -210,6 +210,26 @@ class _StageHomeScreenState extends State<StageHomeScreen>
 
   PracticeSessionController? _pc;
   bool _playing = false;
+
+  /// OST-UX-05g3: the Recalling 3 s preview is on; it locks the stage like a
+  /// run (shelf, handles, help, lesson change) until it ends or is cancelled.
+  bool _previewLock = false;
+  bool get _busy => _playing || _previewLock;
+
+  void _onPreview(bool v) {
+    if (!mounted || v == _previewLock) return;
+    _budget.playing = v || _playing;
+    _layers.locked = v || _playing;
+    setState(() {
+      _previewLock = v;
+      if (v) {
+        _shelfOpen = false;
+        _helpOpen = false;
+        _notice = false;
+      }
+    });
+  }
+
   bool _shelfOpen = false;
 
   // OST-UX-05g: the help (Ghost) level, kept in its own store. Only exists
@@ -312,7 +332,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
 
   Future<void> _selectGhost(GhostLevel l) async {
     final store = _ghostStore;
-    if (_playing || store == null) return;
+    if (_busy || store == null) return;
     final next = GhostPolicy.select(_ghost, l);
     setState(() => _ghost = next);
     await store.save(next);
@@ -355,7 +375,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       WidgetsBinding.instance.addPostFrameCallback((_) => _focusFirst(top));
     } else if (top == null && before != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted || _layers.isOpen || _playing) return;
+        if (!mounted || _layers.isOpen || _busy) return;
         _handleFocus[_handleOf(before)]!.requestFocus();
       });
     }
@@ -380,6 +400,15 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     if (!_inited || id != _accountId) {
       _inited = true;
       _accountId = id;
+      if (_previewLock) {
+        // The practice screen is rebuilt for the new account.
+        _previewLock = false;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted || _previewLock) return;
+          _budget.playing = _playing;
+          _layers.locked = _playing;
+        });
+      }
       _progress =
           widget.progressFactory?.call(id) ??
           V1PracticeProgressStore(accountUserId: id);
@@ -526,8 +555,18 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       _pc?.removeListener(_onRun);
       _lastFailure = null; // a new screen's run decides on its own
       _pc = c..addListener(_onRun);
+      // A new screen starts idle: an old one that was disposed mid-preview
+      // cannot leave the lock behind.
+      _releasePreviewLock();
       setState(() {});
     });
+  }
+
+  void _releasePreviewLock() {
+    if (!_previewLock) return;
+    _previewLock = false;
+    _budget.playing = _playing;
+    _layers.locked = _playing;
   }
 
   void _onRun() {
@@ -561,7 +600,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   }
 
   void _tapHandle(StageHandle h) {
-    if (_playing) return;
+    if (_busy) return;
     widget.onHandle?.call(context, h);
     _layers.openLayer(switch (h) {
       StageHandle.another => StageLayer.other,
@@ -813,6 +852,17 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       _closeLayer();
       return;
     }
+    if (_previewLock && !_playing) {
+      // Back during the preview: the run never starts (the practice screen is
+      // rebuilt, its timer is cancelled with it).
+      _budget.playing = false;
+      _layers.locked = false;
+      setState(() {
+        _previewLock = false;
+        _epoch++;
+      });
+      return;
+    }
     if (_playing) {
       _pc?.removeListener(_onRun);
       _pc = null;
@@ -831,7 +881,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   Widget build(BuildContext context) {
     final palette = OstinatoPalette.of(context);
     return PopScope(
-      canPop: !_layers.isOpen && !_playing,
+      canPop: !_layers.isOpen && !_busy,
       onPopInvokedWithResult: (didPop, _) {
         if (!didPop) _onBack();
       },
@@ -954,6 +1004,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                       listeningOff: _micOff,
                       tuningCardSeen: _tuningSeen,
                       onStarted: () => _tuningSeen = true,
+                      onPreviewChanged: _onPreview,
                       onRunRecorded: _afterRun,
                       onSessionFinished: widget.ghostOpen
                           ? _onSessionFinished
@@ -969,7 +1020,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                   ),
                 ),
                 if (_playing && _pinned && _pc != null) _pinnedMetronome(),
-                if (!_playing) ...<Widget>[
+                if (!_busy) ...<Widget>[
                   Semantics(
                     sortKey: const OrdinalSortKey(1),
                     child: _handles(context),
@@ -1050,7 +1101,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
         child: OutlinedButton(
           key: Key(key),
           focusNode: _handleFocus[h],
-          onPressed: _playing ? null : () => _tapHandle(h),
+          onPressed: _busy ? null : () => _tapHandle(h),
           child: Text(
             uiText(context, label),
             textAlign: TextAlign.center,

@@ -9,7 +9,7 @@ import '../practice/loop/practice_outcome.dart';
 enum GhostLevel { learn, reinforce, recall, independent }
 
 /// Things the help matrix shows or hides.
-enum GhostItem { notation, tab, beat, label, preStartPreview, metronome, hint }
+enum GhostItem { notation, tab, beat, label, preStartPreview }
 
 /// What the last finished run did to the counter.
 enum GhostLastRun { none, counted, notCounted, notMeasured }
@@ -68,10 +68,7 @@ abstract final class GhostPolicy {
       GhostItem.preStartPreview,
       GhostItem.beat,
     },
-    GhostLevel.independent => const <GhostItem>{
-      GhostItem.metronome,
-      GhostItem.hint,
-    },
+    GhostLevel.independent => const <GhostItem>{},
   };
 
   /// Ear and rhythm-only runs never touch the Ghost (marked decision).

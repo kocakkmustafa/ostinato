@@ -36,10 +36,10 @@ void main() {
     expect(hits('tr', 'Bir basamak yukarı denenebilir'), isFalse);
   });
 
-  test('E: Hayalet yuzey metinleri (15 cift) 14 dilde bolum/ders kapsami '
+  test('E: Hayalet yuzey metinleri (14 cift) 14 dilde bolum/ders kapsami '
       'ima etmez; Yardim satiri da', () {
     final pairs = <(String, String)>[...GhostLevelCopy.all, StageCopy.help];
-    expect(pairs, hasLength(16));
+    expect(pairs, hasLength(15));
     for (final c in pairs) {
       final id = appMessageIds[c];
       expect(id, isNotNull, reason: c.$1);

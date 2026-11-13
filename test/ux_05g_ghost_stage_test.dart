@@ -2,7 +2,7 @@
 // secim, olcum kapili oneri yuzeyi, calarken, NextStep sahne yolu.
 // Anahtarlar (tasarim notu): stage-help-row, ghost-help-surface,
 // ghost-level-<learn|reinforce|recall|independent>,
-// ghost-item-<notation|tab|beat|label|preStartPreview|metronome|hint>,
+// ghost-item-<notation|tab|beat|label|preStartPreview|none>,
 // ghost-suggestion, ghost-last-run.
 import 'dart:convert';
 import 'dart:io';
@@ -33,7 +33,7 @@ const _matrix = <String, Set<String>>{
   'learn': {'notation', 'tab', 'beat', 'label'},
   'reinforce': {'notation', 'tab', 'beat'},
   'recall': {'preStartPreview', 'beat'},
-  'independent': {'metronome', 'hint'},
+  'independent': {'none'},
 };
 const _allItems = [
   'notation',
@@ -41,8 +41,7 @@ const _allItems = [
   'beat',
   'label',
   'preStartPreview',
-  'metronome',
-  'hint',
+  'none',
 ];
 const _trLevel = {
   'learn': 'Öğrenme',
