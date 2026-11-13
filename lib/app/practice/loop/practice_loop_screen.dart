@@ -16,6 +16,7 @@ import '../../tuner/session_tuning_gate.dart';
 import '../../tuner/tuner_screen.dart';
 import '../../tuner/tunings.dart';
 import '../../ostinato_release_policy.dart';
+import '../../stage/ghost_policy.dart' show GhostItem, GhostLevel, GhostPolicy;
 import '../../stage/stage_copy.dart';
 import '../../ui_copy.dart';
 import '../own_recording/own_recording.dart';
@@ -70,6 +71,7 @@ class PracticeLoopScreen extends StatefulWidget {
     this.seed,
     this.listenTryFixRepeat = ostinatoListenTryFixRepeatOpen,
     this.ghostScreen = ostinatoGhostScreenOpen,
+    this.ghostLevel,
     this.suggestionPool = const [],
     this.stageMode = false,
     this.listeningOff = false,
@@ -152,6 +154,11 @@ class PracticeLoopScreen extends StatefulWidget {
   /// is drawn as before.
   final bool ghostScreen;
 
+  /// OST-UX-05g2: the stage's chosen help level (null = off, the screen is
+  /// exactly as before). Applies the help matrix to the written line / tab
+  /// (one strip) and the visual beat only; nothing is stored or counted here.
+  final GhostLevel? ghostLevel;
+
   /// Lessons a "next exercise" may be taken from (the open course).
   final List<V1Lesson> suggestionPool;
 
@@ -214,9 +221,31 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
   GhostState _ghost = const GhostState();
 
   /// The guides drawn now: all of them unless the ghost screen is on.
-  Set<Guide> get _guides => widget.ghostScreen && _ghostOn
-      ? GhostScreenPolicy.visible(_ghost)
-      : Set.of(Guide.values);
+  Set<Guide> get _guides {
+    if (widget.ghostScreen && _ghostOn) {
+      return GhostScreenPolicy.visible(_ghost);
+    }
+    final level = widget.ghostLevel;
+    // Rhythm-only lines never enter the Ghost (ADR 2026-11-12).
+    if (level == null || _score.isRhythmOnly) {
+      return Set.of(Guide.values);
+    }
+    final items = GhostPolicy.itemsFor(level);
+    return <Guide>{
+      Guide.referenceAudio,
+      if (items.contains(GhostItem.notation) || items.contains(GhostItem.tab))
+        Guide.notation,
+      if (items.contains(GhostItem.beat)) Guide.beatVisual,
+    };
+  }
+
+  /// The stage's help level hides the line (no "Show guides" switch exists
+  /// there, so the older hidden-line text would promise something absent).
+  bool get _stepHidesLine =>
+      widget.ghostLevel != null &&
+      !_score.isRhythmOnly &&
+      !(widget.ghostScreen && _ghostOn) &&
+      !_guides.contains(Guide.notation);
 
   /// FK1 "Listen first"; never sounds while the microphone runs.
   late final ReferenceListenController _listen =
@@ -847,7 +876,9 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
             ],
           ),
           const SizedBox(height: 8),
-          if (!_guides.contains(Guide.notation))
+          if (_stepHidesLine)
+            const SizedBox(key: Key('ghost-step-line-hidden'), height: 190)
+          else if (!_guides.contains(Guide.notation))
             Container(
               key: const Key('ghost-line-hidden'),
               height: 190,

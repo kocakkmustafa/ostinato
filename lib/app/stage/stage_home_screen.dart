@@ -216,6 +216,10 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   // while the flag is open.
   bool _helpOpen = false;
   GhostState _ghost = const GhostState();
+
+  /// False until the store's first read ends: until then the practice
+  /// screen gets no level (as without the flag), never a guessed one.
+  bool _ghostLoaded = false;
   GhostStore? _ghostStore;
   Future<void>? _ghostReady;
   V1CourseCatalog? _ghostCatalog;
@@ -268,7 +272,10 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   Future<void> _readGhost(GhostStore store, int epoch) async {
     final g = await store.load();
     if (!mounted || epoch != _ghostEpoch) return;
-    setState(() => _ghost = g);
+    setState(() {
+      _ghost = g;
+      _ghostLoaded = true;
+    });
   }
 
   bool _isRhythmOnly(String lessonId) {
@@ -386,6 +393,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
             FileGhostStore(accountUserId: id);
         _ghostStore = store;
         _ghost = const GhostState();
+        _ghostLoaded = false;
         _helpOpen = false;
         _ghostReady = _readGhost(store, epoch);
       }
@@ -930,6 +938,14 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                       // OST-UX-05g: the older P0-07 ghost panel never shows on the stage, even
                       // when `ostinatoGhostScreenOpen` is on (the stage has its own Help).
                       ghostScreen: false,
+                      // OST-UX-05g2: the chosen help level shapes the line and
+                      // beat; ear/rhythm-only lessons never enter the Ghost.
+                      ghostLevel:
+                          widget.ghostOpen &&
+                              _ghostLoaded &&
+                              !_isRhythmOnly(data.lesson.id)
+                          ? _ghost.level
+                          : null,
                       onController: _gotController,
                       listenController: _listen,
                       controllerFactory: widget.controllerFactory,
