@@ -6,6 +6,7 @@
 //   hatirlama  : serit YOK, vurus VAR
 //   bagimsiz   : serit YOK, vurus YOK
 // Bayrak KAPALI (ghostLevel null / sahne ghostOpen:false): ekran main ile ayni.
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -37,6 +38,20 @@ const _beatShown = <GhostLevel, bool>{
   GhostLevel.recall: true,
   GhostLevel.independent: false,
 };
+
+/// Depo okumasi elle tamamlanan sahte depo (yukleme-oncesi penceresi).
+final class _SlowStore implements GhostStore {
+  _SlowStore(this.stored);
+  final GhostState stored;
+  final Completer<GhostState> gate = Completer<GhostState>();
+  @override
+  Future<GhostState> load() => gate.future;
+  @override
+  Future<void> save(GhostState state) async {}
+}
+
+PracticeLoopScreen _practice(WidgetTester t) =>
+    t.widget<PracticeLoopScreen>(find.byType(PracticeLoopScreen));
 
 V1Lesson _pitched() => V1Lesson.fromJson(
   jsonDecode(File('content/v1/gtr/gtr-s1-m02-02.json').readAsStringSync()),
@@ -208,7 +223,10 @@ void main() {
       'elle secim: Yardim yuzeyinden Bagimsiz secilince serit gider',
       (t) async {
         final rig = Rig05f();
-        await boot05f(t, stage05g(rig, catalog, ghost: true));
+        await boot05f(
+          t,
+          stage05g(rig, catalog, ghost: true, ghostStore: MemoryGhostStore()),
+        );
         for (var i = 0; i < 4; i++) {
           await t.pump();
         }
@@ -233,6 +251,27 @@ void main() {
         await dispose05f(t, rig);
       },
     );
+
+    testWidgets('depo yuklenene kadar ghostLevel null; sonra Bagimsiz gizler', (
+      t,
+    ) async {
+      final store = _SlowStore(const GhostState(level: GhostLevel.independent));
+      final rig = Rig05f();
+      await boot05f(t, stage05g(rig, catalog, ghost: true, ghostStore: store));
+      for (var i = 0; i < 4; i++) {
+        await t.pump();
+      }
+      // yukleme bitmedi: main davranisi (null), serit gorunur
+      expect(_practice(t).ghostLevel, isNull);
+      expect(_strip, findsOneWidget);
+      store.gate.complete(store.stored);
+      for (var i = 0; i < 4; i++) {
+        await t.pump();
+      }
+      expect(_practice(t).ghostLevel, GhostLevel.independent);
+      expect(_strip, findsNothing);
+      await dispose05f(t, rig);
+    });
 
     testWidgets('ritim-only ders sahnede: bagimsiz depoda bile serit durur', (
       t,
