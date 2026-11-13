@@ -582,7 +582,9 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
       builder: (context, box) => SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
         child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: box.maxHeight - 26),
+          constraints: BoxConstraints(
+            minHeight: (box.maxHeight - 26).clamp(0.0, double.infinity),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -649,29 +651,10 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                 const SizedBox(height: 12),
                 _primary(context),
               ],
-              const SizedBox(height: 10),
-              // With the own-recording setting on, this run IS kept on
-              // the device, so the "nothing is recorded" line would be
-              // false.
-              Text(
-                _c.ownRecorder?.enabled ?? false
-                    ? uiText(
-                        context,
-                        widget.retentionOpen
-                            ? RecordingRetentionCopy.practiceFooterSessionOnly
-                            : OwnRecordingCopy.practiceFooterOn,
-                      )
-                    : localized(
-                        context,
-                        'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',
-                        'Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.',
-                      ),
-                style: hankenText(
-                  size: 11.5,
-                  color: palette.textMuted,
-                  height: 1.4,
-                ),
-              ),
+              if (!widget.stageMode) ...[
+                const SizedBox(height: 10),
+                _safetyLine(context),
+              ],
             ],
           ),
         ),
@@ -683,18 +666,61 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
         // OST-UX-05b2: in the stage the Play button is a fixed area under the
         // scrolling body, so it is on the first screen at every size.
         child: widget.stageMode
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(child: scroll),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-                    child: _primary(context),
-                  ),
-                ],
+            ? LayoutBuilder(
+                builder: (context, box) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(child: scroll),
+                    // OST-UX-05h1: the fixed area (safety line, a failure
+                    // message, Play) never takes more than 70% of the height;
+                    // in a very crowded stage it scrolls instead of
+                    // overflowing.
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: box.maxHeight * 0.7,
+                      ),
+                      child: SingleChildScrollView(
+                        // Reversed: if it ever scrolls, Play stays in view.
+                        reverse: true,
+                        padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            _safetyLine(context),
+                            const SizedBox(height: 8),
+                            _primary(context),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               )
             : scroll,
       ),
+    );
+  }
+
+  /// The safety / privacy line. Scrolling body in the normal screen; fixed
+  /// above Play in the stage (OST-UX-05h1). Text and meaning unchanged.
+  Widget _safetyLine(BuildContext context) {
+    final palette = OstinatoPalette.of(context);
+    // With the own-recording setting on, this run IS kept on the device, so
+    // the "nothing is recorded" line would be false.
+    return Text(
+      _c.ownRecorder?.enabled ?? false
+          ? uiText(
+              context,
+              widget.retentionOpen
+                  ? RecordingRetentionCopy.practiceFooterSessionOnly
+                  : OwnRecordingCopy.practiceFooterOn,
+            )
+          : localized(
+              context,
+              'Stop for pain, numbness or tingling. Audio stays in memory on this device; nothing is recorded or sent.',
+              'Ağrı, uyuşma ya da karıncalanmada dur. Ses yalnız bu cihazın belleğinde kalır; kaydedilmez, gönderilmez.',
+            ),
+      style: hankenText(size: 11.5, color: palette.textMuted, height: 1.4),
     );
   }
 

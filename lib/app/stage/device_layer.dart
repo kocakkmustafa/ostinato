@@ -207,7 +207,9 @@ class _DeviceLayerState extends State<DeviceLayer> with WidgetsBindingObserver {
             ),
             if (hint != null) ...<Widget>[
               const SizedBox(width: 8),
-              Text(hint, style: hankenText(size: 13)),
+              // OST-UX-05h1: the hint wraps (long translations) instead of
+              // pushing the row past the edge.
+              Flexible(child: Text(hint, style: hankenText(size: 13))),
             ],
             const Icon(Icons.chevron_right),
           ],

@@ -154,3 +154,10 @@ Kod bu bilette değiştirilmedi; UX-05'te ele alınacak bilinen noktalar:
   - `hint` RAFTAN KALDIRILDI: içeriği ve ölçümdeki anlamı (yardımlı koşu sayılır mı) tanımsız. İpucu ürün kararı: yardımlı koşunun ölçümdeki anlamı tanımlanınca ayrı biletle eklenir.
   - Sonuç: Öğrenme {nota, tab, vuruş, etiket}; Pekiştirme {nota, tab, vuruş}; Hatırlama {ön izleme, vuruş}; Bağımsız boş (raf yalnız "Bu basamakta ek yardım yok" der; bu tek yeni metin 14 kataloğa eklendi, `metronome`/`hint` metinleri kataloglardan düştü, id sayısı 8801 → 8800). Öğrenme/Pekiştirme farkı artık etiket.
   - Düzeltme: B1'deki "kodda yalnız `tool_shelf.dart`'ta geçiyor" ifadesi fazla iddialıydı; `GhostItem.preStartPreview/metronome/hint` `ghost_policy.dart:12,68-73` içinde de geçiyor (pratik ekranında kullanımı yoktu).
+
+## 05h-1 devir notları
+- Kapandı: sahne bildirimleri (`stage-run-not-completed`, `stage-start-unverified`, "Dinleme kapalı" bandı) tek düğümlü canlı bölge; güvenlik satırı sahnede kaydırılan gövdenin dışında, Çal'ın hemen üstünde (raf açık/kapalı 360×640 + yazı 1.3 ilk ekran); `stage-layer-scrim` anlamsal ağaçtan çıkarıldı (kapatma sistem Geri ile); 14 dilde Ayar/Cihaz katmanı taşması (`device_layer.dart` `_row` ipucu `Flexible`).
+- Yan düzeltme: sahnede alt sabit alan (güvenlik satırı + hata iletisi + Çal) yüksekliğin %70'ini aşarsa kendi içinde kaydırır (ters; Çal görünür kalır); yalnız <=700 px yükseklikte Araçlar rafı üst sınırı 0.34→0.22 (mikrofon kapalıyken 0.2→0.14), "Dinleme kapalı" bloğu 0.25→0.17.
+- Doğrulandı ama GERÇEK OLMAYAN riskler: Araçlar düğmesi, Yardım satırı, Hayalet seviye düğmeleri, Cihaz satırları (etiket+ipucu tek düğüm), bant (başlık+içerik) çift okuma. Bunlar tek `isButton`/tek etiket; testle korunuyor.
+- Açık: scrim artık okuyucuya görünmez; iOS "kaçış" hareketi katmanı kapatmaz (PopScope Geri'ye bağlı), ayrı Kapat düğmesi yeni metin ister.
+- Test: `test/ux_05h1_a11y_test.dart` (A canlı bölge, B güvenlik satırı + `stageMode:false` koruması, C tek düğüm/scrim, D 14 dil).

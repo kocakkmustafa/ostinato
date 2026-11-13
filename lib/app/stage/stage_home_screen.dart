@@ -736,6 +736,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     ];
     final band = Semantics(
       container: true,
+      liveRegion: true,
       label: uiText(context, StageCopy.listeningOff),
       child: Container(
         key: const Key('stage-listening-off'),
@@ -794,7 +795,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
           ? content
           : ConstrainedBox(
               constraints: BoxConstraints(
-                maxHeight: height > 700 ? 340 : height * 0.25,
+                maxHeight: height > 700 ? 340 : height * 0.17,
               ),
               child: SingleChildScrollView(child: content),
             ),
@@ -959,19 +960,29 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                 if (_notice)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
-                    child: Text(
-                      uiText(context, StageCopy.runNotCompleted),
-                      key: const Key('stage-run-not-completed'),
-                      style: hankenText(size: 13),
+                    // OST-UX-05h1: one live-region node, read once.
+                    child: Semantics(
+                      liveRegion: true,
+                      container: true,
+                      child: Text(
+                        uiText(context, StageCopy.runNotCompleted),
+                        key: const Key('stage-run-not-completed'),
+                        style: hankenText(size: 13),
+                      ),
                     ),
                   ),
                 if (_startUnverified)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
-                    child: Text(
-                      uiText(context, StageCopy.startNotVerified),
-                      key: const Key('stage-start-unverified'),
-                      style: hankenText(size: 13),
+                    // OST-UX-05h1: one live-region node, read once.
+                    child: Semantics(
+                      liveRegion: true,
+                      container: true,
+                      child: Text(
+                        uiText(context, StageCopy.startNotVerified),
+                        key: const Key('stage-start-unverified'),
+                        style: hankenText(size: 13),
+                      ),
                     ),
                   ),
                 // Keyed: a notice above appears and goes; the practice screen
@@ -1028,7 +1039,11 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                   Semantics(
                     sortKey: const OrdinalSortKey(2),
                     child: ToolShelf(
-                      maxContentHeight: height * (_micOff ? 0.2 : 0.34),
+                      // OST-UX-05h1: on a short screen the shelf gives room to the
+                      // safety line and Play; taller screens are unchanged.
+                      maxContentHeight: height <= 700
+                          ? height * (_micOff ? 0.14 : 0.22)
+                          : height * (_micOff ? 0.2 : 0.34),
                       open: _shelfOpen,
                       onToggle: () => setState(() => _shelfOpen = !_shelfOpen),
                       controller: _pc,
@@ -1058,6 +1073,9 @@ class _StageHomeScreenState extends State<StageHomeScreen>
                     height: box.maxHeight * 0.4,
                     child: GestureDetector(
                       key: const Key('stage-layer-scrim'),
+                      // OST-UX-05h1: unlabeled tap area, not a screen-reader
+                      // target (system back closes the layer).
+                      excludeFromSemantics: true,
                       behavior: HitTestBehavior.opaque,
                       onTap: _closeLayer,
                     ),
