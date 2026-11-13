@@ -592,7 +592,8 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     _failureSeen = failed;
     final scroll = LayoutBuilder(
       builder: (context, box) => SingleChildScrollView(
-        controller: _bodyScroll,
+        // Stage only: the normal screen keeps the default (primary) controller.
+        controller: widget.stageMode ? _bodyScroll : null,
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
         child: ConstrainedBox(
           constraints: BoxConstraints(

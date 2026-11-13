@@ -410,6 +410,8 @@ void main() {
       );
       // satir Cal'in ALTINDA (govde sirasi)
       expect(t.getTopLeft(line).dy, greaterThan(t.getTopLeft(play).dy));
+      // stageMode:false: govde kendi (birincil) denetleyicisini kullanir
+      expect(t.widget<SingleChildScrollView>(lineScroll).controller, isNull);
       await dispose05f(t, rig);
     });
   });
