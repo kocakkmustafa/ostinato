@@ -17,6 +17,7 @@ import '../practice/display/practice_display_copy.dart';
 import '../practice/display/practice_display_preferences.dart';
 import '../practice/own_recording/own_recording_copy.dart';
 import '../practice/own_recording/own_recording_preference.dart';
+import '../practice/own_recording/recording_retention_policy.dart';
 import '../device_accuracy_copy.dart';
 import '../ostinato_release_policy.dart';
 import '../ui_copy.dart';
@@ -63,7 +64,19 @@ class SettingsScreen extends StatelessWidget {
     this.ownRecordingPreference,
     this.practiceDisplay,
     this.uxPrototypeOpen = ostinatoUxPrototypeOpen,
+    this.retentionOpen = ostinatoRecordingRetentionOpen,
+    this.audience = RetentionAudience.unknown,
   });
+
+  /// OST-P0-08 flag (closed by default). While false the own-recording card
+  /// is shown for everyone, as before.
+  final bool retentionOpen;
+
+  /// Who is playing. Nothing in the app establishes an age yet, so the
+  /// default is [RetentionAudience.unknown]; with [retentionOpen] true the
+  /// own-recording card is hidden for child and unknown audiences, matching
+  /// [RecordingRetentionPolicy.mayRecordOwnTake].
+  final RetentionAudience audience;
 
   /// OST-UX-04 flag (closed by default); tests pass it explicitly. While
   /// false no entry to the prototype is built.
@@ -130,9 +143,9 @@ class SettingsScreen extends StatelessWidget {
                     case final WidgetBuilder membership) ...<Widget>[
                   OutlinedButton.icon(
                     key: const Key('settings-membership'),
-                    onPressed: () => Navigator.of(context).push<void>(
-                      MaterialPageRoute<void>(builder: membership),
-                    ),
+                    onPressed: () => Navigator.of(
+                      context,
+                    ).push<void>(MaterialPageRoute<void>(builder: membership)),
                     icon: const Icon(Icons.workspace_premium_outlined),
                     label: Text(
                       MotionAccountLocalizations.of(
@@ -203,12 +216,17 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 14),
-              OwnRecordingSettingCard(
-                preference:
-                    ownRecordingPreference ??
-                    const FileOwnRecordingPreference(),
-              ),
-              const SizedBox(height: 14),
+              if (RecordingRetentionPolicy.mayRecordOwnTake(
+                retentionOpen: retentionOpen,
+                audience: audience,
+              )) ...<Widget>[
+                OwnRecordingSettingCard(
+                  preference:
+                      ownRecordingPreference ??
+                      const FileOwnRecordingPreference(),
+                ),
+                const SizedBox(height: 14),
+              ],
               if (display != null) ...<Widget>[
                 PracticeDisplaySettingCard(controller: display),
                 const SizedBox(height: 14),

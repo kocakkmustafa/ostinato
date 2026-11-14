@@ -462,6 +462,31 @@ void main() {
       await lifecycle(tester, AppLifecycleState.paused);
       await tester.runAsync(() => _staysThere(take, 'after dispose'));
     });
+
+    testWidgets('flag open: after dispose the SAME recorder is no longer '
+        'discarded on paused (observer really removed)', (tester) async {
+      OwnRecorder? screenRec;
+      await withScreen(
+        tester,
+        open: true,
+        audience: RetentionAudience.adult,
+        body: (rec, take) async {
+          screenRec = rec;
+          await lifecycle(tester, AppLifecycleState.paused);
+          await tester.runAsync(() => _waitGone(take, 'paused while mounted'));
+          await lifecycle(tester, AppLifecycleState.resumed);
+        },
+      );
+      final rec = screenRec!;
+      rec.enabled = true;
+      rec.add(_chunk(4800));
+      final take = (await tester.runAsync(rec.seal))!;
+      await lifecycle(tester, AppLifecycleState.paused);
+      await lifecycle(tester, AppLifecycleState.hidden);
+      await tester.runAsync(() => _staysThere(take, 'same recorder, disposed'));
+      expect(rec.take, isNotNull);
+      await lifecycle(tester, AppLifecycleState.resumed);
+    });
   });
 
   group('guard states', () {
