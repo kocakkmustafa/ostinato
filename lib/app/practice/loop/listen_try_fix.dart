@@ -175,6 +175,22 @@ abstract final class ListenTryFix {
       if (best == null || n > bars[best]!.length) best = k;
     }
     if (best == null) {
+      // A pitch line shows no "missed" card, but a quiet attack window that
+      // reaches the evidence bar is still evidence: never "clear" (the ghost
+      // level reads this too).
+      if (!rhythm) {
+        final silent = summary.lastMarks.values
+            .where(
+              (o) =>
+                  o.mark == PracticeMark.couldNotHear &&
+                  o.reason == HearingReason.noAttack,
+            )
+            .length;
+        if (silent >= FixThresholds.minEvidence &&
+            silent >= FixThresholds.minShare * total) {
+          return const FixNoClearDifference();
+        }
+      }
       final accuracy = correct / decided;
       if (accuracy < summary.gate.criteria.minAccuracy - 1e-9) {
         return const FixNoClearDifference();
@@ -222,7 +238,11 @@ abstract final class ListenTryFix {
       case PracticeMark.couldNotHear:
         // Only a quiet attack window is a finding; a weak or loud signal,
         // app sound or a skipped note is the setup's story, not the player's.
-        return o.reason == HearingReason.noAttack ? FixKind.missed : null;
+        // And only on a rhythm line: on a pitch line "no beat heard" would
+        // misname a note that was simply not picked up.
+        return rhythm && o.reason == HearingReason.noAttack
+            ? FixKind.missed
+            : null;
       case PracticeMark.correct || PracticeMark.pending:
         return null;
     }

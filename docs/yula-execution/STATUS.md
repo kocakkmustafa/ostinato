@@ -89,6 +89,20 @@ Cihaz-üstü kanıt yok; durum `TEST_ONLY`.
 ## Bilet OST-P0-07
 - [bilet:: OST-P0-07] [durum:: TEST_ONLY] Hayalet Ekran: kademeli rehber gizleme, override, rehbersiz tamamlama; bayrak `ostinatoGhostScreenOpen=false` (kapalı) · [CI:: PR üzerinde] [kullanıcı-üstü-doğrulama:: YOK — gerçek kullanıcıyla öğrenme kanıtı yok] [yetkinlik-iddiası:: YOK] · [ADR-006](DECISIONS.md) · bilinen sınırlar: `A,U,A` iki art arda sayılır; durdurulmuş/döngü/bekle koşusu ilerletmez; aşama duyurusu (`liveRegion`) cihazda doğrulanmadı
 
+## OST-P0-06 bayrak öncesi — #70
+Tarih: 2026-11-14 · Bayrak `ostinatoListenTryFixRepeatOpen` KAPALI kalır; yeni metin/l10n yok (mesaj kimliği sayısı değişmedi). Motion kararı: beş maddenin hepsi "A".
+
+**Kapanan** (her biri önce kırmızı test, sonra kod; test dosyası `test/ost_p0_06_presimplify_test.dart`):
+1. Kart bilgi kartı kalır; tek eylem `listen-try-fix-repeat`. Kod değişmedi; kart gövdesine dokunmanın pop/ResultAction üretmediğini kilitleyen koruma testi (zaten yeşildi, kırmızı olamaz).
+2. Kart düğmesi görünürken `result-ladder-play` gizli. Dürüst sınır: sonuç ekranında hâlâ üç yüzey tempo söyleyebilir (`_ladder` bilgi kartı, ana/retry düğmesi, kart düğmesi) ve kart düğmesi ile `_ladder` kartı iki ayrı tempo gösterebilir; tek tempo önerisi garantisi yok, yalnız çift eylem düğmesi azaldı. Kart düğmesi yokken `result-ladder-play` eskisi gibi.
+3. Ana düğme "Tekrar dene" iken (`tryAgain` ya da döngü önerisiz `loopSlower`) `result-retry` çıkmaz. Döngü önerisiz `loopSlower` erişilebilir: sayım tüm geçişlerden, `errorBars` yalnız son geçişten gelir; eski geçişte çok hata, son geçişte hepsi doğruysa doğruluk eşiğin altında kalır, döngü önerisi boş olur (testle kanıtlı). Diğer durumlarda `result-retry`/`result-target-run` aynen. Bayrak kapalıyken de geçerli.
+4. `ListenTryFix.kindOf`: `missed` yalnız ritim satırında; perde satırında "vuruş duymadım" kartı yok. Perde satırında sessiz atak (`noAttack`) kanıt eşiğini (en az 2 nota ve payı en az %25) aşıyor ve başka baskın tür yoksa sonuç `FixNoClearDifference` ("net fark ölçmedim", mevcut metin, yeni metin yok); asla `FixClear` değil. Neden: `ListenTryFix.of` Hayalet Ekran'ı da besler (`GhostScreenPolicy.classify`); sessiz atağı "temiz" saymak rehber gizleme ilerlemesine yanlış yazardı. Perde satırı + sessiz atak sınıflaması `notClear` kalır (testle kilitli). Not: sessiz atak "duyamadım" sayısında görünür; kurulum yönlendirmesi (`checkSetup`) yalnız duyulan oranı eşiğin altındaysa çıkar, sessiz atak tek başına onu tetiklemez.
+5. Serbest tempoda eylemsiz düzeltme kartı (`FixCorrection`, `nextBpm == null`) gizli. Ölçülemedi / net fark yok / net kartlar bilgi olarak kalır.
+
+**Ölçülen:** etkilenen mevcut testler (practice_tempo_ladder, practice_result, ux_05e2_nextstep_honesty, listen_try_fix_screen, listen_try_fix, ux_05e_result_layer, practice_screen) değişmeden yeşil; güncellenen mevcut test yok.
+
+**Açık:** bayrağın açılması kurucu/Motion kararı; kart ve ladder'ın canlıda birlikte görünümü cihazda görülmedi.
+
 ## Ayarlar bayrak öncesi — #71
 
 Tarih: 2026-11-14. Bayraklar KAPALI kaldı (`ostinatoRecordingRetentionOpen` dahil); yeni özellik ve yeni metin yok.

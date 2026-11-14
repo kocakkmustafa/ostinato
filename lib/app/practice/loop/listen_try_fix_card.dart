@@ -15,8 +15,22 @@ class ListenTryFixCard extends StatelessWidget {
 
   final ListenTryFixResult result;
 
+  /// The tempo the card's one button repeats at; null = no button.
+  static int? repeatBpm(ListenTryFixResult result) => switch (result) {
+    FixCorrection(:final plan) => plan.nextBpm,
+    FixClear(:final nextBpm) => nextBpm,
+    _ => null,
+  };
+
+  /// A correction with no repeat action (free tempo) says "a bit slower"
+  /// without a way to do it, so it is not shown. The other kinds are plain
+  /// information and stay.
+  static bool shown(ListenTryFixResult result) =>
+      result is! FixCorrection || repeatBpm(result) != null;
+
   @override
   Widget build(BuildContext context) {
+    if (!shown(result)) return const SizedBox.shrink();
     final palette = OstinatoPalette.of(context);
     final body = switch (result) {
       FixUnmeasured() => uiText(context, ListenTryFixCopy.couldNotMeasure),
@@ -39,9 +53,7 @@ class ListenTryFixCard extends StatelessWidget {
     final title = uiText(context, ListenTryFixCopy.title);
     final correction = result is FixCorrection ? result as FixCorrection : null;
     final plan = correction?.plan;
-    final next =
-        plan?.nextBpm ??
-        (result is FixClear ? (result as FixClear).nextBpm : null);
+    final next = repeatBpm(result);
     return GlassCard(
       key: const Key('listen-try-fix-card'),
       child: Column(
