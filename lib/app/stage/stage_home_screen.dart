@@ -47,6 +47,10 @@ import 'tool_shelf.dart';
 /// How long the stage waits for the membership check.
 const Duration stagePaidCheckTimeout = Duration(seconds: 4);
 
+/// How long the stage waits for its data (records, checks, membership) before
+/// it gives up and offers "Try again" (05h2). Local reads take milliseconds.
+const Duration stageLoadTimeout = Duration(seconds: 10);
+
 /// The three handles of the stage (04-design.md section 5.1).
 enum StageHandle { another, path, setup }
 
@@ -412,7 +416,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       _progress =
           widget.progressFactory?.call(id) ??
           V1PracticeProgressStore(accountUserId: id);
-      _data = _load(id);
+      _data = _loadBounded(id);
       if (widget.ghostOpen) {
         // The Ghost file sits in the account's own data directory.
         final epoch = ++_ghostEpoch;
@@ -428,6 +432,12 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       }
     }
   }
+
+  /// [_load] with a deadline: a read that never answers becomes the same
+  /// "could not load" state as a failed one. A late answer of the old future
+  /// is never looked at (the FutureBuilder follows the newest future only).
+  Future<_StageData?> _loadBounded(String? id) =>
+      _load(id).timeout(stageLoadTimeout, onTimeout: () => null);
 
   Future<_StageData?> _load(String? id) async {
     try {
@@ -510,7 +520,12 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     }
   }
 
-  void _retry() => setState(() => _data = _load(_accountId));
+  void _retry() {
+    // A block body: an arrow would hand `setState` the future (it asserts).
+    setState(() {
+      _data = _loadBounded(_accountId);
+    });
+  }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -911,11 +926,39 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   Widget _skeleton(BuildContext context, {required bool failed}) => Column(
     children: <Widget>[
       const Spacer(),
-      if (failed)
+      if (failed) ...<Widget>[
+        // One live-region node: the screen reader says it once, on arrival.
+        Semantics(
+          container: true,
+          liveRegion: true,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              uiText(context, StageCopy.loadFailed),
+              key: const Key('stage-load-error'),
+              textAlign: TextAlign.center,
+              style: hankenText(size: 14),
+            ),
+          ),
+        ),
         TextButton(
           key: const Key('stage-retry'),
           onPressed: _retry,
           child: Text(uiText(context, StageCopy.tryAgain)),
+        ),
+      ] else
+        // The loading state is one node ("Loading…"); Play stays disabled.
+        Semantics(
+          container: true,
+          label: uiText(context, StageCopy.loading),
+          child: const ExcludeSemantics(
+            child: SizedBox(
+              key: Key('stage-loading'),
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
         ),
       Padding(
         padding: const EdgeInsets.all(16),
