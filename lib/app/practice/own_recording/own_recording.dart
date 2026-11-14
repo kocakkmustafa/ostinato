@@ -18,9 +18,12 @@ final class OwnRecorder extends ChangeNotifier {
   OwnRecorder({
     Future<Directory> Function()? temporaryRoot,
     this.maxSeconds = 180,
-  }) : _root = temporaryRoot ?? getTemporaryDirectory;
+    @visibleForTesting Future<void> Function(File file)? deleteFile,
+  }) : _root = temporaryRoot ?? getTemporaryDirectory,
+       _deleteFile = deleteFile ?? _deleteQuietly;
 
   final Future<Directory> Function() _root;
+  final Future<void> Function(File file) _deleteFile;
 
   /// RAM bound: a longer run keeps only its first [maxSeconds].
   final int maxSeconds;
@@ -72,7 +75,13 @@ final class OwnRecorder extends ChangeNotifier {
   }
 
   /// The run finished: writes the buffered audio as the take.
-  Future<File?> seal() async {
+  Future<File?> seal() {
+    final done = Completer<File?>();
+    _track(_seal().then(done.complete, onError: done.completeError));
+    return done.future;
+  }
+
+  Future<File?> _seal() async {
     final generation = ++_generation;
     if (_samples == 0 || _disposed) return null;
     final pcm = _pcm.takeBytes();
@@ -120,7 +129,28 @@ final class OwnRecorder extends ChangeNotifier {
     }
   }
 
-  static Future<void> _delete(File f) async {
+  final Set<Future<void>> _inFlight = <Future<void>>{};
+
+  Future<void> _delete(File f) => _track(_deleteFile(f));
+
+  Future<void> _track(Future<void> work) {
+    late final Future<void> tracked;
+    tracked = work.whenComplete(() => _inFlight.remove(tracked));
+    _inFlight.add(tracked);
+    return tracked;
+  }
+
+  /// Completes when every file write and delete started so far has finished
+  /// (including ones begun by [dispose]). Lets tests wait on the work itself
+  /// instead of on the clock.
+  @visibleForTesting
+  Future<void> get settled async {
+    while (_inFlight.isNotEmpty) {
+      await Future.wait(_inFlight.toList());
+    }
+  }
+
+  static Future<void> _deleteQuietly(File f) async {
     try {
       if (await f.exists()) await f.delete();
     } on FileSystemException {

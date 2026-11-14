@@ -117,10 +117,7 @@ void main() {
       final second = (await r.seal())!;
       expect(filesOnDisk(), [second.path]);
       r.dispose();
-      // dispose() deletes with real file IO; give it a bounded moment.
-      for (var i = 0; i < 100 && second.existsSync(); i++) {
-        await Future<void>.delayed(const Duration(milliseconds: 10));
-      }
+      await r.settled; // dispose() deletes with real file IO
       expect(second.existsSync(), isFalse, reason: 'dispose deletes too');
     });
 
@@ -155,6 +152,24 @@ void main() {
     );
   });
 
+  group('dispose deletes without a real-time wait', () {
+    test('closing the lesson: the take is gone once deletes settle', () async {
+      final r = OwnRecorder(
+        temporaryRoot: () async => tmp,
+        deleteFile: (f) async {
+          // A busy disk: the delete takes a real 80 ms, far past a pump.
+          await Future<void>.delayed(const Duration(milliseconds: 80));
+          if (f.existsSync()) f.deleteSync();
+        },
+      )..enabled = true;
+      r.add(chunkOf(480));
+      final take = (await r.seal())!;
+      r.dispose();
+      await r.settled;
+      expect(take.existsSync(), isFalse);
+    });
+  });
+
   group('wired into the practice run', () {
     setUp(resetAudioCaptureCoordinatorForTest);
 
@@ -164,10 +179,7 @@ void main() {
       await rig.play(
         performance(11, {5000000: 40, 6000000: 41, 7000000: 43, 8000000: 41}),
       );
-      // seal() writes with real file IO after the run finishes.
-      for (var i = 0; i < 100 && enabled && r.take == null; i++) {
-        await Future<void>.delayed(const Duration(milliseconds: 10));
-      }
+      await r.settled; // seal() writes with real file IO after the run
       await pumpEventQueue();
       return (rig, r);
     }
@@ -189,7 +201,7 @@ void main() {
         expect(take, isNotNull);
         expect(take!.existsSync(), isTrue);
         await rig.close(); // the lesson screen closes
-        await pumpEventQueue();
+        await r.settled;
         expect(take.existsSync(), isFalse);
         expect(filesOnDisk(), isEmpty);
       },
