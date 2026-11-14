@@ -3,6 +3,7 @@
 // tempoda eylemsiz kart yok. Yeni metin yok.
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/practice/loop/ghost_screen.dart';
 import 'package:ostinato/app/practice/loop/listen_try_fix.dart';
 import 'package:ostinato/app/practice/loop/practice_marks.dart';
 import 'package:ostinato/app/practice/loop/practice_outcome.dart';
@@ -163,6 +164,41 @@ void main() {
       expect(popped, isA<ResultActionRetry>());
     });
 
+    testWidgets(
+      'erişilebilir: loopSlower + döngü önerisi yok (eski geçişte hata, '
+      'son geçişte hepsi doğru): result-retry yok, etiket tek',
+      (tester) async {
+        final marks0 = [d, d, d, d, d, d, c, c];
+        final s = PracticeRunSummary.of(
+          score: score,
+          outcomes: [
+            for (var pass = 0; pass < 2; pass++)
+              for (var i = 0; i < 8; i++)
+                NoteOutcome(
+                  eventIndex: i,
+                  bar: score.events[i].bar,
+                  pass: pass,
+                  mark: pass == 0 ? marks0[i] : c,
+                  expectedMidi: score.events[i].midi,
+                  observedMidi: pass == 0 && marks0[i] == d ? 45 : null,
+                ),
+          ],
+          bpm: 60,
+          openBpm: 50,
+          targetBpm: 60,
+          completed: true,
+          loopUsed: false,
+          waitUsed: false,
+        );
+        expect(s.nextStep, NextStep.loopSlower);
+        expect(s.loopSuggestion, isNull);
+        expect(s.gate.eligible, isTrue);
+        await pump(tester, s, locale: 'tr');
+        expect(find.text('Tekrar dene'), findsOneWidget);
+        expect(find.byKey(const Key('result-retry')), findsNothing);
+      },
+    );
+
     testWidgets('regresyon: loopSlower(döngülü) iken result-retry aynen', (
       tester,
     ) async {
@@ -224,11 +260,36 @@ void main() {
         waitUsed: false,
       );
       final r = fixFor(s);
-      expect(
-        r is FixCorrection && r.kind == FixKind.missed,
-        isFalse,
-        reason: '$r',
+      // Kanıt var (sessiz atak eşiği aşıldı): asla "temiz" değil, kart da
+      // missed demez; Hayalet Ekran bunu temiz saymaz.
+      expect(r, isA<FixNoClearDifference>(), reason: '$r');
+      expect(GhostScreenPolicy.classify(r), GhostAttempt.notClear);
+      expect(GhostScreenPolicy.classifyRun(s, r), GhostAttempt.notClear);
+    });
+
+    test('perde satırı, tek sessiz nota (eşik altı): hâlâ temiz olabilir', () {
+      final marks = [c, c, c, u, c, c, c, c];
+      final s = PracticeRunSummary.of(
+        score: score,
+        outcomes: [
+          for (var i = 0; i < marks.length; i++)
+            NoteOutcome(
+              eventIndex: i,
+              bar: score.events[i].bar,
+              pass: 0,
+              mark: marks[i],
+              reason: marks[i] == u ? HearingReason.noAttack : null,
+              expectedMidi: score.events[i].midi,
+            ),
+        ],
+        bpm: 60,
+        openBpm: 50,
+        targetBpm: 60,
+        completed: true,
+        loopUsed: false,
+        waitUsed: false,
       );
+      expect(fixFor(s), isA<FixClear>());
     });
   });
 
