@@ -21,7 +21,7 @@ Kaynak senaryolar: `04-design.md` bölüm 13. Her satır, senaryonun kabul sonuc
 
 ## T12 (kalem 1–4 + el kontrolü)
 - Kalem 1 (sıra, canlı bölge, tek düğüm, Kapat/dismiss): `ux_05h1_a11y_test.dart` (A–E).
-- Kalem 2 (büyük metin 2.0): `ux_05h3_hardening_test.dart`: `05h-3 d: yazi 2.0 ve hareketi azalt` (360×640 ve 390×844, setup/path/other katmanı gerçekten açılır, taşma yok; MediaQuery `fromView` ile gerçek boyut). Önceki "30 px taşar" bulgusu SAHTEYDİ (MediaQuery boyutu sıfırdı); geri çekildi.
+- Kalem 2 (büyük metin 2.0): `ux_05h3_hardening_test.dart`: `05h-3 d` (yazı 2.0 uygulandığı testte assert edilir; mutasyon 1.0'da kırmızı: `d-mutation-scale1.txt`). 390×844 üç katman GEÇER. **360×640 üç test BEKLENEN-BAŞARISIZ (`skip`): sahne yazı 2.0'da 30 px sağa taşar** (`d-real-scale2.txt`); kaynak widget bulunamadı. Önceki tur-1 "sahte bulgu" notu geçersiz: asıl hata testin 1.0'da koşmasıydı, taşma gerçek.
 - Kalem 3 (≥ 48 dp): ayrı bu bilette yeniden sınanmadı (05h-1 kapsamı).
 - Kalem 4 (hareketi/saydamlığı azalt): aynı `05h-3 d` testleri `disableAnimations + highContrast` ile: katman tek karede açılır ve ek `BackdropFilter` eklemez. Sahnede eski `GlassCard` zaten 4 `BackdropFilter` çizer (SessionTuningGateCard vb.); ölçüldü, değiştirilmedi.
 - Gizli şerit yer tutucusu: `ux_05h3_hardening_test.dart`: `05h-3 a …`.

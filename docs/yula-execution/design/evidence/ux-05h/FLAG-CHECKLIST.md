@@ -27,7 +27,7 @@ Bayraklar `ostinatoStageHomeEnabled` ve `ostinatoGhostScreenOpen` KAPALI. Bu lis
 | 21 | Gerçek cihaz (kare süresi, bulanık katman; izin reddi "Başlat") | AÇIK (`NOT_TESTED`) | backlog satır 28, 89 |
 | 22 | Ekran okuyucu (VoiceOver/TalkBack) elle doğrulama | AÇIK (yapılmadı) | 05h-1/05h-2 |
 | 23 | T13 "ekran hatada durmaz": çalışırken hata testi yok | AÇIK | `INDEX.md` |
-| 24 | 360×640 yazı 2.0 sahne taşması | KAPALI (yeniden ölçüldü: taşma yok; ilk bulgu sahteydi) | `ux_05h3_hardening_test.dart` |
+| 24 | 360×640 yazı 2.0'da sahne 30 px sağa taşar (gerçek ölçüm, ölçek uygulandığı kanıtlı) | AÇIK (BULGU, 3 test `skip`) | `ux_05h3_hardening_test.dart` |
 | 25 | Eski `GlassCard` sahnede 4 `BackdropFilter` çizer (çalarken dahil) | AÇIK (ölçüldü, kararsız; değişiklik 05h-3 kapsamı dışı) | `INDEX.md` |
 | 26 | Bekçi 14 dil: `assets/l10n/*.json` bekçi tarafından taranmıyor; 12 dilde 795 desen eşleşmesi | KURUCU/Motion: sınıflandır (`scratch/2026-11-14-ostinato-05h3/l10n-promise-hits.tsv`) | 05h-3 |
 | 27 | İnsan kullanıcı testi | YAPILMADI (bilet kapsamı dışı) | kalem 9 |
