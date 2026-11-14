@@ -81,6 +81,23 @@ PROMISE_PATTERNS = [
     (r"\bfor now\b", "for now"),
     (r"\bhenüz\b", "henüz"),
     (r"\byakında\b", "yakında"),
+    # OST-UX-05h-3: 12 yabancı dil deseni. NOT: bekçi assets/l10n/*.json'u
+    # TARAMAZ (yalnız kabuktaki 15 varlık + kaynak metin); bu desenler çeviri
+    # kataloğunda henüz bir şey yakalamaz. Yalnız KAPSAM genişler; en/tr
+    # desenleri ve eşleştirme mantığı aynı. CJK/Arapça/
+    # Hintçe'de \b güvenilmez (kelime karakteri/birleşik işaret): düz alt dize.
+    (r"\b(?:noch nicht|demnächst|bald|vorerst)\b", "de: noch nicht/bald"),
+    (r"\b(?:todavía no|aún no|próximamente|pronto|por ahora)\b", "es: aún no/pronto"),
+    (r"\b(?:pas encore|bientôt|prochainement|pour l['’]instant|pour le moment)\b", "fr: pas encore/bientôt"),
+    (r"\b(?:non ancora|prossimamente|per ora|presto|in arrivo)\b", "it: non ancora/presto"),
+    (r"\b(?:ainda não|em breve|por enquanto)\b", "pt: ainda não/em breve"),
+    (r"\b(?:jeszcze nie|wkrótce|na razie|niebawem)\b", "pl: jeszcze nie/wkrótce"),
+    (r"\b(?:belum|segera|sementara ini|akan datang)\b", "id: belum/segera"),
+    (r"まだ|近日|今後|今のところ|もうすぐ", "ja: まだ/近日"),
+    (r"아직|곧(?!바로)|추후|향후|현재로서는", "ko: 아직/곧"),
+    (r"尚未|暂未|还没|即将|敬请期待|暂时", "zh: 尚未/即将"),
+    (r"قريبا|قريباً|قريبًا|حاليا|حالياً|لاحقا|لاحقاً|لم يتوفر بعد", "ar: قريبا/حاليا"),
+    (r"अभी|जल्द ही|फिलहाल|जल्दी ही", "hi: अभी/जल्द"),
 ]
 
 #: Gözden geçirilmiş ürün-durumu satırları (2026-11-04): dosya + TAM metin.
@@ -1434,9 +1451,26 @@ def sentences(text: str):
 # `[^.]+` · tanı bağlamı geri bakışı) — üçünde de kapsam doluydu.
 #
 # Her örnek KASTEN ihlal: desen onu YAKALAMAZSA desen ölmüştür.
+def _promise(label):
+    """Deseni sırası yerine adıyla bağlar; ad yoksa selftest patlar."""
+    return next(p for p, l in PROMISE_PATTERNS if l == label)
+
+
 SELFTEST_SAMPLES = [
-    ("vaat dili A", PROMISE_PATTERNS[0][0], "we do not grade this yet"),
-    ("vaat dili A/soon", PROMISE_PATTERNS[2][0], "chord grading is coming soon"),
+    ("vaat dili A", _promise("yet"), "we do not grade this yet"),
+    ("vaat dili A/soon", _promise("soon"), "chord grading is coming soon"),
+    ("vaat dili 10 (14 dil)", _promise("de: noch nicht/bald"), "Das gibt es noch nicht"),
+    ("vaat dili 11 (14 dil)", _promise("es: aún no/pronto"), "Aún no disponible"),
+    ("vaat dili 12 (14 dil)", _promise("fr: pas encore/bientôt"), "Bientôt disponible"),
+    ("vaat dili 13 (14 dil)", _promise("it: non ancora/presto"), "Presto disponibile"),
+    ("vaat dili 14 (14 dil)", _promise("pt: ainda não/em breve"), "Em breve disponível"),
+    ("vaat dili 15 (14 dil)", _promise("pl: jeszcze nie/wkrótce"), "Wkrótce dostępne"),
+    ("vaat dili 16 (14 dil)", _promise("id: belum/segera"), "Segera hadir"),
+    ("vaat dili 17 (14 dil)", _promise("ja: まだ/近日"), "近日公開"),
+    ("vaat dili 18 (14 dil)", _promise("ko: 아직/곧"), "아직 지원하지 않습니다"),
+    ("vaat dili 19 (14 dil)", _promise("zh: 尚未/即将"), "即将推出"),
+    ("vaat dili 20 (14 dil)", _promise("ar: قريبا/حاليا"), "قريبا"),
+    ("vaat dili 21 (14 dil)", _promise("hi: अभी/जल्द"), "जल्द ही आ रहा है"),
     ("yetenek B", CAPABILITY_RULES[0]["mention"], "the microphone reads pitch"),
     ("yetenek B muafiyeti", CAPABILITY_RULES[0]["absence"][0],
      "there is no live microphone here"),

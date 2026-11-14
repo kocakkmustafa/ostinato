@@ -8,13 +8,16 @@ import 'package:ostinato/app/retention/weekly_goal_card.dart';
 import 'package:ostinato/app/retention/weekly_goal_store.dart';
 
 /// File I/O completes on the real event loop; each completion then needs a
-/// frame in the test zone. A few rounds cover the read-modify-write chain.
-Future<void> settle(WidgetTester tester) async {
-  for (var i = 0; i < 10; i++) {
+/// frame in the test zone. Condition-driven (05h-3): yield to the real loop and
+/// pump until [done] holds. There is no time budget: the 1 ms yield only lets
+/// real I/O progress and the test timeout bounds a genuine hang.
+Future<void> settle(WidgetTester tester, Finder done) async {
+  for (var i = 0; i < 100000; i++) {
     await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 20)),
+      () => Future<void>.delayed(const Duration(milliseconds: 1)),
     );
     await tester.pump();
+    if (done.evaluate().isNotEmpty) return;
   }
 }
 
@@ -44,8 +47,10 @@ void main() {
     expect(status.credit, 0);
     expect(status.streakActive, isFalse);
     expect(status.freezesLeft, 2);
-    expect(File('${root.path}/${WeeklyGoalStore.fileName}').existsSync(),
-        isFalse);
+    expect(
+      File('${root.path}/${WeeklyGoalStore.fileName}').existsSync(),
+      isFalse,
+    );
   });
 
   test('records survive reload and keep only day, kind and course', () async {
@@ -57,9 +62,13 @@ void main() {
     expect(status.currentWeekMet, isTrue);
     expect((await store().load()).streakWeeks, 1);
 
-    final raw = jsonDecode(
-      File('${root.path}/${WeeklyGoalStore.fileName}').readAsStringSync(),
-    ) as Map<String, dynamic>;
+    final raw =
+        jsonDecode(
+              File(
+                '${root.path}/${WeeklyGoalStore.fileName}',
+              ).readAsStringSync(),
+            )
+            as Map<String, dynamic>;
     expect(raw['schemaVersion'], 1);
     for (final e in raw['entries'] as List<dynamic>) {
       expect((e as Map).keys.toSet(), {'day', 'kind', 'course'});
@@ -111,17 +120,18 @@ void main() {
   });
 
   test('an unknown schema is refused, not reset', () async {
-    File('${root.path}/${WeeklyGoalStore.fileName}')
-        .writeAsStringSync('{"schemaVersion":2,"entries":[],"goalChanges":[]}');
+    File(
+      '${root.path}/${WeeklyGoalStore.fileName}',
+    ).writeAsStringSync('{"schemaVersion":2,"entries":[],"goalChanges":[]}');
     await expectLater(store().load(), throwsFormatException);
   });
 
   testWidgets('home card shows progress and records an off-app entry', (
     tester,
   ) async {
-    await tester.runAsync(() => store().recordLessonPractice(
-          PracticeCourse.guitar,
-        ));
+    await tester.runAsync(
+      () => store().recordLessonPractice(PracticeCourse.guitar),
+    );
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -131,7 +141,7 @@ void main() {
         ),
       ),
     );
-    await settle(tester);
+    await settle(tester, find.text('1 of 3 sessions'));
     expect(find.byKey(const Key('weekly-goal-card')), findsOneWidget);
     expect(find.text('1 of 3 sessions'), findsOneWidget);
     expect(
@@ -143,7 +153,7 @@ void main() {
     await tester.runAsync(
       () => tester.tap(find.byKey(const Key('weekly-goal-off-app'))),
     );
-    await settle(tester);
+    await settle(tester, find.text('Saved for today.'));
     expect(find.text('2 of 3 sessions'), findsOneWidget);
     expect(find.text('Saved for today.'), findsOneWidget);
     expect(find.textContaining('wrong', findRichText: true), findsNothing);

@@ -1,3 +1,4 @@
+import 'dart:async';
 // F2.6b — duyulan drill'ler: soru sesi cevapla tutarlı, "cevabımı çal" sesi
 // şıkla aynı kökten, sentez belirlenimli; ekranda Çal / Cevabımı çal.
 import 'dart:convert';
@@ -30,9 +31,17 @@ final class _Port implements ReferencePlaybackPort {
   _Port(this.lease);
   final PracticeAudioLease lease;
   final staged = <int>[];
+  final _stagedWaiters = <int, Completer<void>>{};
+
+  /// Deterministic completion signals (05h-3): no wall-clock polling.
+  Future<void> stagedCount(int n) => staged.length >= n
+      ? Future<void>.value()
+      : (_stagedWaiters[n] ??= Completer<void>()).future;
+
   @override
   Future<String?> stage(Float32List samples, int sampleRate) async {
     staged.add(samples.length);
+    _stagedWaiters.remove(staged.length)?.complete();
     return 'ref-${staged.length}';
   }
 
@@ -178,9 +187,7 @@ void main() {
     expect(find.byKey(const Key('drill-play-mine')), findsNothing);
     await tester.runAsync(() async {
       await tester.tap(find.byKey(const Key('drill-play-question')));
-      for (var i = 0; i < 100 && port.staged.isEmpty; i++) {
-        await Future<void>.delayed(const Duration(milliseconds: 20));
-      }
+      await port.stagedCount(1);
     });
     expect(port.staged, hasLength(1));
     final other = (qs[0].answer + 1) % qs[0].options.length;
@@ -191,16 +198,19 @@ void main() {
     expect(find.text('Play again'), findsOneWidget);
     await tester.runAsync(() async {
       await tester.tap(find.byKey(const Key('drill-play-mine')));
-      for (var i = 0; i < 100 && port.staged.length < 2; i++) {
-        await Future<void>.delayed(const Duration(milliseconds: 20));
-      }
+      await port.stagedCount(2);
     });
     expect(port.staged, hasLength(2));
     // Leaving the question stops the sound and releases the output.
     await tester.tap(find.byKey(const Key('drill-next')));
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 50)),
-    );
+    // Condition-driven (no wall-clock): yield to the real event loop until the
+    // lease is idle; the iteration cap only prevents a hang.
+    await tester.runAsync(() async {
+      for (var i = 0; i < 100000; i++) {
+        if (lease.phase == PracticeAudioLeasePhase.idle) break;
+        await Future<void>.delayed(Duration.zero);
+      }
+    });
     await tester.pump();
     expect(lease.phase, PracticeAudioLeasePhase.idle);
   });

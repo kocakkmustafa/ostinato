@@ -1007,7 +1007,12 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
           ),
           const SizedBox(height: 8),
           if (_stepHidesLine)
-            const SizedBox(key: Key('ghost-step-line-hidden'), height: 190)
+            // 05h-3: yer tutucu dekoratiftir; ekran okuyucu bos alani hicbir
+            // sey olarak okumaz (gorsel olarak da bos). Basamak durumu ayri
+            // etiketli Hayalet kontrolunden okunur.
+            const ExcludeSemantics(
+              child: SizedBox(key: Key('ghost-step-line-hidden'), height: 190),
+            )
           else if (!_guides.contains(Guide.notation) && !_previewing)
             Container(
               key: const Key('ghost-line-hidden'),
