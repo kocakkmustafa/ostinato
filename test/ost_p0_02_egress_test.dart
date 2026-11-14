@@ -358,6 +358,8 @@ void main() {
         'lib/app/practice/own_recording/own_take_player.dart',
         'lib/app/practice/own_recording/own_recording_preference.dart',
         'lib/app/practice/own_recording/own_recording.dart',
+        // OST-P0-08B: local encrypted files only (File/Directory); no network.
+        'lib/app/practice/own_recording/encrypted_take_store.dart',
         'lib/app/practice/display/practice_display_preferences.dart',
         'lib/app/practice/setup/setup_profile_store.dart',
         'lib/app/practice/loop/practice_progress_store.dart',
