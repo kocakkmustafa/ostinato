@@ -365,12 +365,14 @@ void main() {
   test('android backup rules exclude every real flutter_secure_storage file', () {
     // Names verified in flutter_secure_storage 11.2.0 android sources:
     // data FlutterSecureStorage, wrapped key FlutterSecureKeyStorage
-    // (FlutterSecureStorageConfig.java), config FlutterSecureStorageConfiguration
-    // (NamespacedConfigSource.java).
+    // (FlutterSecureStorageConfig.java), config write path
+    // FlutterSecureStorageConfiguration:<prefsName> (NamespacedConfigSource.java:35;
+    // the plain FlutterSecureStorageConfiguration name is a legacy read only).
     const prefs = [
       'FlutterSecureStorage.xml',
       'FlutterSecureKeyStorage.xml',
       'FlutterSecureStorageConfiguration.xml',
+      'FlutterSecureStorageConfiguration:FlutterSecureStorage.xml',
     ];
     String read(String f) =>
         File('android/app/src/main/res/xml/$f').readAsStringSync();
