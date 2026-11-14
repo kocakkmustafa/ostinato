@@ -509,14 +509,22 @@ void main() {
 
     testWidgets('D3 uyelik sorgusu SocketException iken Baska calis -> kulak '
         'ekrani yerelde acilir', (t) async {
+      final records = _level1Done(catalog);
       final rig = Rig05f();
+      var asked = 0;
       await _boot(
         t,
         rig,
         catalog,
-        _Seeded(const {}),
-        paidCheck: () => throw const SocketException('offline'),
+        _Seeded(records),
+        paid: true,
+        paidCheck: () {
+          asked++;
+          return Future<bool>.error(const SocketException('offline'));
+        },
       );
+      expect(asked, greaterThan(0), reason: 'uyelik sorgusu gercekten sorulur');
+      expect(find.byKey(const Key('stage-load-error')), findsNothing);
       await t.tap(find.byKey(const Key('stage-handle-other')));
       await t.pump();
       await t.pump();
