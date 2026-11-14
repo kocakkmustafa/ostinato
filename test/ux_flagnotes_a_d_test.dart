@@ -22,10 +22,11 @@ V1Lesson _lesson() => V1Lesson.fromJson(
 
 Future<Rig05f> _screen(
   WidgetTester t, {
-  required Future<bool> Function() beforeStart,
+  required Future<bool> Function()? beforeStart,
   required void Function() onStarted,
+  PermissionStatus permission = PermissionStatus.granted,
 }) async {
-  final rig = Rig05f();
+  final rig = Rig05f(permission: permission);
   await boot05f(
     t,
     practiceHost(
@@ -105,6 +106,64 @@ void main() {
     dialog.complete(PermissionStatus.denied);
     await t.pump();
     await t.pump();
+    await dispose05f(t, rig);
+  });
+
+  Future<(Rig05f, Completer<PermissionStatus>, List<int>)> dialogRig(
+    WidgetTester t, {
+    required Future<bool> Function()? beforeStart,
+  }) async {
+    final dialog = Completer<PermissionStatus>();
+    final started = <int>[0];
+    MicPermissionGate.status = () async => PermissionStatus.denied;
+    MicPermissionGate.request = () => dialog.future;
+    MicPermissionGate.knownGranted = false;
+    addTearDown(() {
+      MicPermissionGate.resetForTest();
+      MicPermissionGate.knownGranted = true;
+    });
+    final rig = await _screen(
+      t,
+      beforeStart: beforeStart,
+      onStarted: () => started[0]++,
+      permission: PermissionStatus.denied,
+    );
+    return (rig, dialog, started);
+  }
+
+  testWidgets('D2: izin reddinden SONRA CAL tekrar calisir (kilit kalkar)', (
+    t,
+  ) async {
+    final (rig, dialog, started) = await dialogRig(
+      t,
+      beforeStart: () async => true,
+    );
+    await _tap(t);
+    await _tap(t);
+    expect(started[0], 1);
+    dialog.complete(PermissionStatus.denied);
+    for (var i = 0; i < 6; i++) {
+      await t.pump(const Duration(milliseconds: 100));
+    }
+    expect(find.byKey(const Key('practice-start')), findsOneWidget);
+    await _tap(t);
+    expect(started[0], 2, reason: 'finally kilidi cozdu, ikinci kosu baslar');
+    await dispose05f(t, rig);
+  });
+
+  testWidgets('D3: guard yok (bayrak kapali yol): izin penceresinde ek '
+      'dokunus yutulur, sonra tekrar calisir', (t) async {
+    final (rig, dialog, started) = await dialogRig(t, beforeStart: null);
+    await _tap(t);
+    await _tap(t);
+    await _tap(t);
+    expect(started[0], 1);
+    dialog.complete(PermissionStatus.denied);
+    for (var i = 0; i < 6; i++) {
+      await t.pump(const Duration(milliseconds: 100));
+    }
+    await _tap(t);
+    expect(started[0], 2);
     await dispose05f(t, rig);
   });
 }
