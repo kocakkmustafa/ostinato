@@ -265,9 +265,9 @@ void main() {
       expect(_playPendingDisabled(t), isTrue);
       expect(_labelled(t, _loading), hasLength(1), reason: 'tek dugum');
       expect(find.byKey(const Key('stage-retry')), findsNothing);
-      sem.dispose();
       // Let the deadline pass so no timer outlives the test.
       await t.pump(const Duration(seconds: 11));
+      sem.dispose();
       await dispose05f(t, rig);
     });
   });
@@ -387,11 +387,6 @@ void main() {
       t.view.devicePixelRatio = 1;
       addTearDown(t.view.resetPhysicalSize);
       addTearDown(t.view.resetDevicePixelRatio);
-      final audio = AudioInputController(
-        channel: FakeAudioCaptureChannel(),
-        requestMicrophonePermission: () async => PermissionStatus.granted,
-        pcmDeliveryTimeout: const Duration(minutes: 5),
-      );
       final channel = FakeAudioCaptureChannel();
       final audio2 = AudioInputController(
         channel: channel,
@@ -450,7 +445,6 @@ void main() {
       expect(t.takeException(), isNull);
       await t.pumpWidget(const SizedBox());
       await t.runAsync(audio2.dispose);
-      await t.runAsync(audio.dispose);
     });
   });
 
@@ -466,7 +460,8 @@ void main() {
         catalog,
         _Seeded(records),
         paid: true,
-        paidCheck: () => throw const SocketException('Failed host lookup'),
+        paidCheck: () =>
+            Future<bool>.error(const SocketException('Failed host lookup')),
       );
       expect(find.byKey(const Key('stage-load-error')), findsNothing);
       expect(_shown(t), isNot(next.id));
@@ -524,9 +519,11 @@ void main() {
       );
       await t.tap(find.byKey(const Key('stage-handle-other')));
       await t.pump();
-      await t.pump(const Duration(milliseconds: 500));
-      expect(find.byKey(const Key('stage-handle-other')), findsOneWidget);
-      expect(find.text('Çal'), findsWidgets);
+      await t.pump();
+      expect(find.byKey(const Key('stage-instr-ear')), findsOneWidget);
+      await t.tap(find.byKey(const Key('stage-instr-ear')));
+      await t.pumpAndSettle();
+      expect(find.text('ear-screen'), findsOneWidget);
       expect(t.takeException(), isNull);
       await dispose05f(t, rig);
     });
