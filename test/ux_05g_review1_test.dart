@@ -11,6 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/account_connection.dart';
 import 'package:ostinato/app/app_message_ids.dart';
 import 'package:ostinato/app/audio/audio_input_controller.dart';
+import 'package:ostinato/app/curriculum/v1_lesson.dart';
 import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
 import 'package:ostinato/app/practice/loop/v1_course_catalog.dart';
 import 'package:ostinato/app/stage/ghost_level_copy.dart';
@@ -20,6 +21,10 @@ import 'package:ostinato/app/stage/stage_home_screen.dart';
 
 import 'support/practice_host.dart';
 import 'support/ux_05g_rig.dart';
+
+V1Lesson _lesson05h3() => V1Lesson.fromJson(
+  jsonDecode(File('content/v1/gtr/gtr-s1-m02-02.json').readAsStringSync()),
+);
 
 void _tapSem(WidgetTester t, String label) => t.semantics.performAction(
   find.semantics.byLabel(label),
@@ -82,11 +87,31 @@ void main() {
   });
 
   group('D2 eski panel sahnede yok', () {
-    // NOT: `ostinatoGhostScreenOpen` bir `const` oldugundan testte acilamaz;
-    // sahnenin PracticeLoopScreen'e verdigi `ghostScreen` degeri okunur
-    // (varsayilan sabit bayragi izlerdi). Sabit false tek basina kirmizi
-    // uretmez; acik bayrak yolu `ghostScreen: true` verilen eski ekranla
-    // karsilastirilir (kontrol).
+    // NOT: `ostinatoGhostScreenOpen` bir `const` oldugundan testte acilamaz ve
+    // sahne `ghostScreen: false` degerini sabit verir; o deger tek basina
+    // kirmizi uretmez. Bu yuzden eski panelin VARLIGI ayri kontrolle gosterilir
+    // (asagidaki "kontrol": ayni ekran `ghostScreen: true` ile `ghost-toggle`
+    // cizer) ve sahnede ARANAN sey bu gercek, cizilen anahtardir.
+    testWidgets('D2 kontrol: ghostScreen:true ile eski panel (ghost-toggle) '
+        'cizilir; yani bulucu kirmizi olabilir', (t) async {
+      final rig = Rig05f();
+      await boot05f(
+        t,
+        practiceHost(
+          PracticeLoopScreen(
+            lesson: _lesson05h3(),
+            progress: Mem05f(),
+            seed: 1,
+            ghostScreen: true,
+            controllerFactory: rig.factory,
+          ),
+        ),
+        size: const Size(420, 2400),
+      );
+      expect(find.byKey(const Key('ghost-toggle')), findsOneWidget);
+      await dispose05f(t, rig);
+    });
+
     testWidgets('D2: bayrak ACIK sahnede ghostScreen=false, eski panel yok, '
         'yeni Yardim var', (t) async {
       final rig = Rig05f();
@@ -188,10 +213,10 @@ void main() {
       'hi': ['महारत', 'कुशल', 'सफल', 'सही', 'गलत', 'त्रुटि'],
     };
 
-    test('D6: tarayici calisiyor (kontrol): 10 vaat deseni, bilinen kotu '
+    test('D6: tarayici calisiyor (kontrol): 22 vaat deseni, bilinen kotu '
         'ornekleri yakalar', () {
       final p = promise();
-      expect(p, hasLength(10));
+      expect(p, hasLength(22));
       expect(p.any((r) => r.hasMatch('we do not grade this yet')), isTrue);
       expect(p.any((r) => r.hasMatch('henüz değerlendirmiyoruz')), isTrue);
       expect(stems.keys, hasLength(14));
