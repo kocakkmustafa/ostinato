@@ -16,6 +16,12 @@ abstract final class StageCopy {
   );
   static const UiCopy reference = ('Reference', 'Referans');
   static const UiCopy tryAgain = ('Try again', 'Tekrar dene');
+  static const UiCopy loading = ('Loading…', 'Yükleniyor…');
+  // new (05h2: the stage could not read its data / took too long)
+  static const UiCopy loadFailed = (
+    'Your practice could not be loaded.',
+    'Çalışman yüklenemedi.',
+  );
   static const UiCopy guitar = ('Guitar', 'Gitar');
   static const UiCopy historyTitle = ('History', 'Geçmiş');
 
@@ -187,6 +193,7 @@ abstract final class StageCopy {
     noiseQuiet,
     noiseSome,
     noiseLoud,
+    loadFailed,
   ];
 
   static const List<UiCopy> all = <UiCopy>[
@@ -197,6 +204,7 @@ abstract final class StageCopy {
     continueLine,
     reference,
     tryAgain,
+    loading,
     guitar,
     historyTitle,
     heardLabel,

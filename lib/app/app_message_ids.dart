@@ -6708,6 +6708,7 @@ const appMessageIds = <(String, String), String>{
   ("A2 up to C5 and back in eighth notes, twice, at ♩=70 and ♩=45, string-model synthesis, with click.", "La2'den Do5'e çıkış ve iniş, sekizliklerle, iki kez, ♩=70 ve ♩=45; tel modeli sentezi, klikle."): "c0c316f0e23c0707",
   ("F is 1-3-3-2-1-1 at fret 1 and Gm is 3-5-5-3-3-3 at fret 3. Play two bars of each.", "F 1. perdede 1-3-3-2-1-1, Gm 3. perdede 3-5-5-3-3-3'tür. Her birini iki ölçü çal."): "c0c5109322ea2706",
   ("The move to B7 in bar 9 is the big change. Place finger 2 on string 5 first; it is the root, B2.", "9. ölçüde B7'ye geçiş en büyük değişimdir. Önce 2. parmağı 5. tele koy; kök odur, Si2."): "c0c732433ba67628",
+  ("Your practice could not be loaded.", "Çalışman yüklenemedi."): "c0ca41654e6e1071",
   ("Keep a foot or tap pulse and place both syllables inside one tap interval.", "Ayak veya vuruş akışını koru, iki heceyi bir vuruş aralığına yerleştir."): "c0d0012eaf396d55",
   ("The 12-bar form in A: A7 for bars 1–4, D7 for bars 5–6, A7 for bars 7–8, then E7, D7, A7, E7.", "La'da 12 ölçülük form: 1–4. ölçüler A7, 5–6. ölçüler D7, 7–8. ölçüler A7, sonra E7, D7, A7, E7."): "c0db5f82b692a3fd",
   ("A4 to A6 and back, an empty bar, then A2 to A4 and back, quarter notes with a click, at ♩=60 and at ♩=40, piano synthesis; finger numbers on screen.", "Klikle dörtlüklerle La4'ten La6'ya ve geri, bir boş ölçü, sonra La2'den La4'e ve geri, ♩=60 ve ♩=40, piyano sentezi; parmak numaraları ekranda."): "c0de908f2aac4f30",
