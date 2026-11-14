@@ -72,7 +72,7 @@ Konsept 1 "Tek Sahne" (çalmak-önce, katmanlı) omurgadır. Üç bağımsız pa
 | 6 | Gerçek yetenekler korunur (§2.5) | Kurs, kapı, ücretli koruma, enstrüman desteği, ilerleme kayıtları aynen kalır |
 | 7 | İzin yoksa da deneyim var (§5.4-7) | Mikrofon reddi: "Dinleme kapalı" kipi; kamera hiçbir akışta zorunlu değil |
 
-**Değişmeyenler:** renk paleti, tipografi, marka ("YULA Lab" kullanıcıya dönük metinde), kurs verisi, ölçüm eşikleri (`expertPending`), kamera bayrakları KAPALI.
+**Değişmeyenler:** renk paleti, tipografi, marka ("Yula Lab" kullanıcıya dönük metinde), kurs verisi, ölçüm eşikleri (`expertPending`), kamera bayrakları KAPALI.
 
 ---
 

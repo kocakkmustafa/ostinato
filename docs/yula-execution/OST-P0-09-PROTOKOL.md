@@ -185,13 +185,13 @@ Rubrik (1–5): **ritim doğruluğu** = vuruşların hedef ritme göre oturması
 
 ### 5.2 Bağımsızlık ve çıkar çatışması beyanı (taslak)
 
-> Bu değerlendirmeyi YULA Lab'dan ücret ya da başka bir çıkar beklemeden, Ostinato'nun geliştirilmesine bağımsız olarak yaptığımı beyan ederim. YULA Lab ile ticari, ailevi ya da başka bir bağım var ise aşağıda belirtirim: ______. Değerlendirmeyi ürünün çıktısını görmeden (kör) yaptım. Puanlarımın ürün pazarlamasında kişisel olarak benimle ilişkilendirilmeden kullanılmasına: ☐ izin veriyorum ☐ vermiyorum.
+> Bu değerlendirmeyi Yula Lab'dan ücret ya da başka bir çıkar beklemeden, Ostinato'nun geliştirilmesine bağımsız olarak yaptığımı beyan ederim. Yula Lab ile ticari, ailevi ya da başka bir bağım var ise aşağıda belirtirim: ______. Değerlendirmeyi ürünün çıktısını görmeden (kör) yaptım. Puanlarımın ürün pazarlamasında kişisel olarak benimle ilişkilendirilmeden kullanılmasına: ☐ izin veriyorum ☐ vermiyorum.
 
 Beyan eksik/imzasızsa değerlendirme kanıt sayılmaz.
 
 ### 5.3 Rıza metni (taslak, ses paylaşımı yalnız rıza ile)
 
-> YULA Lab, Ostinato'nun ses analizini değerlendirmek için bir ses kaydı paylaşmamı rica ediyor. Kaydın yalnız bu değerlendirme için kullanılacağını, kimliğimle ilişkilendirilmeden saklanacağını ve istediğim zaman silinmesini isteyebileceğimi anladım. Kaydı vermek zorunda değilim; vermezsem hiçbir şey kaybetmem. Kaydın YULA Lab dışına çıkmasına ☐ izin veriyorum ☐ vermiyorum. İmza/tarih: ______.
+> Yula Lab, Ostinato'nun ses analizini değerlendirmek için bir ses kaydı paylaşmamı rica ediyor. Kaydın yalnız bu değerlendirme için kullanılacağını, kimliğimle ilişkilendirilmeden saklanacağını ve istediğim zaman silinmesini isteyebileceğimi anladım. Kaydı vermek zorunda değilim; vermezsem hiçbir şey kaybetmem. Kaydın Yula Lab dışına çıkmasına ☐ izin veriyorum ☐ vermiyorum. İmza/tarih: ______.
 
 Kurallar: rıza yoksa ses hiçbir yere aktarılmaz; yalnız rıza veren katılımcı kaydı değerlendirilir; reşit olmayanlar için bu şablon kullanılmaz (ayrı veli rızası ve hukuki inceleme gerekir); rıza geri çekilince kayıt ve türev etiketler silinir.
 
