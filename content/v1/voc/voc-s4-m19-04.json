@@ -10,8 +10,8 @@
   },
   "explanation": [
     {
-      "en": "The Water Is Wide is a traditional Scottish and English melody. You sing an older variant of the tune; 20th-century arrangements are not used.",
-      "tr": "The Water Is Wide geleneksel bir İskoç ve İngiliz ezgisidir. Ezginin eski bir varyantını söylersin; 20. yüzyıl düzenlemeleri kullanılmaz."
+      "en": "The Water Is Wide is a traditional English and Scottish song. You sing the tune as Cecil Sharp noted it in Somerset and printed it in 1916 as 'O Waly, Waly', one verse; later 20th-century arrangements are not used.",
+      "tr": "The Water Is Wide geleneksel bir İngiliz ve İskoç şarkısıdır. Ezgiyi Cecil Sharp'ın Somerset'te derleyip 1916'da 'O Waly, Waly' adıyla yayımladığı biçimde, bir kıta söylersin; sonraki 20. yüzyıl düzenlemeleri kullanılmaz."
     },
     {
       "en": "It is a gentle song in four phrases. Each phrase rises, turns, and settles again.",
@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "3/4: 5,:q 1:q 1:e 2:e | 3:h 2:q | 2:q 1:q 6,:q | 5,:h. | 5,:q 1:q 7,:q | 1:h. | 2:q 3:q 4:e 3:e | 2:h. | 1:q 2:q 3:e 4:e | 5:h 4:q | 4:q 3:q 2:e 1:e | 3:h. | 2:q 1:q 6,:q | 5,:h 5,:q | 5,:q 5,:q 6,:e 7,:e | 1:h."
   },
   "fallback": "selfCheck",
   "safety": [
@@ -121,7 +122,7 @@
     "en": "Sing the first two phrases at ♩=50, then add the last two.",
     "tr": "İlk iki cümleyi ♩=50'de söyle, sonra son iki cümleyi ekle."
   },
-  "repertoire": "The Water Is Wide, traditional Scottish/English melody. Source: an older variant from a 19th-century collection (variant to be fixed with the source scan). 20th-century arrangements are not used or referenced. Public domain, legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "The Water Is Wide (O Waly, Waly), traditional English melody. Source: Cecil J. Sharp (collector and arranger), One Hundred English Folksongs, Boston: Oliver Ditson, 1916, No. 39 'O Waly, Waly', pp. 90–91, voice part, first verse (archive.org: https://archive.org/details/onehundredenglis00shar). Chosen over the older Scottish 'Waly, Waly' tune because this Somerset variant is the one closest to the melody now sung as The Water Is Wide. Public domain: published 1916 (US pre-1931) and Sharp died 1924 (life+70). Legal review pending. Melody only, sung on 'la'; Sharp's piano accompaniment and later 20th-century arrangements are not used. Sharp writes the song in 3/2; here each 3/2 bar is shown as two 3/4 bars and the pickup as a full bar (16 bars in all). Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 14,
   "expertPending": true
 }

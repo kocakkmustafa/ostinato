@@ -64,8 +64,8 @@
 
 | Eser | Besteci / söz (yaşam) | Kaynak baskı (öneri) | Ders | Not |
 |---|---|---|---|---|
-| 50 Lezioni, Op. 9 (seçme) | Giuseppe Concone (1801–1861) | 19. yy baskısı | voc-s3-m14-08, voc-s4-m17-12, voc-s4-m19-10/11 | Vokaliz; söz yok |
-| Metodo pratico di canto italiano (seçme ders) | Nicola Vaccai (1790–1848) | Londra, 1832 | voc-s3-m14-09, voc-s4-m17-11, voc-s4-m19-12/13 | Söz Metastasio (1698–1782) |
+| 50 Lezioni, Op. 9 (seçme) | Giuseppe Concone (1801–1861) | Edition Peters No. 980, Leipzig, pl. 6437, ~1880 (editör adı yok) — tarama: archive.org/details/50leconsdechantp00conc | voc-s3-m14-08 (No. 1, ö. 9–24), voc-s4-m17-12 (No. 14, ö. 1–12), voc-s4-m19-10/11 | Vokaliz; söz yok |
+| Metodo pratico di canto italiano (seçme ders) | Nicola Vaccai (1790–1848) | Londra, 1832 (ilk baskı); notalar Russell's New and Improved Edition, rev. V. Vannini, çev. H. Badger, Boston: G. D. Russell, 1878 ile doğrulandı — tarama: archive.org/details/imslp-pratico-de-canto-vaccai-nicola | voc-s3-m14-09 (Ders I), voc-s4-m17-11 (No. 12 L'Acciaccatura), voc-s4-m19-12/13 | Söz Metastasio (1698–1782); baskının İngilizce çevirisi ve eşliği kullanılmaz |
 | Kolay vokaliz (opus ilk baskıdan doğrulanacak) | Heinrich Panofka (1807–1887) | 19. yy baskısı | voc-s4-m19-14 | |
 | Wiegenlied, Op. 49 No. 4 | Johannes Brahms (1833–1897) | Simrock, 1868 | voc-s4-m19-06 | Söz: halk şiiri + Georg Scherer (1824–1909) |
 | Heidenröslein, D 257 | Franz Schubert (1797–1828); söz J. W. von Goethe (1749–1832) | 1821 ilk baskı | voc-s4-m19-07 | |
@@ -78,8 +78,8 @@
 | Hänschen klein | Geleneksel ezgi; söz Franz Wiedemann (1821–1882) | — | voc-s2-m09-09 | |
 | Row, Row, Row Your Boat | Geleneksel ABD (1852 yayımı) | — | voc-s4-m18-11 | |
 | Greensleeves | Geleneksel, İngiliz | — | voc-s3-m12-09 | |
-| Scarborough Fair | Geleneksel, İngiliz | — | voc-s3-m12-10 | Gitar notuyla aynı uyarı |
-| Amazing Grace | bkz. Piyano | — | voc-s4-m16-12 | |
+| God Rest You Merry, Gentlemen | Geleneksel, İngiliz Noel ilahisi | *Christmas Carols New and Old* [1. dizi], söz ed. H. R. Bramley (1833–1917), müzik ed. John Stainer (1840–1901), Londra: Novello, Ewer & Co., [1871], No. 1, s. 2 — tarama: archive.org/details/christmascarolsn00staiiala | voc-s3-m12-10 | Kamu malı: 1930 öncesi yayım; editörler 100 yılı aşkın süre önce öldü; ezgi geleneksel. Yalnız soprano (ezgi) satırı; Stainer armonisi kullanılmaz. Scarborough Fair'in yerine (telif riski). Sandys (1833) aynı söze **farklı, majör** bir ezgi basar; o kullanılmaz |
+| Amazing Grace | bkz. Piyano | W. Walker, *The Southern Harmony*, yeni baskı, Philadelphia: E. W. Miller, 1847, s. 8 "New Britain" (ezgi tenor sesinde) — tarama: archive.org/details/southernharmonym00walk | voc-s4-m16-12 | Walker biçimi; son iki dizenin tekrarı söylenmez (2. bitiş) |
 | Shenandoah | Geleneksel ABD (19. yy) | — | voc-s4-m19-02 | |
 | Londonderry Air | Geleneksel İrlanda (Petrie derlemesi, 1855) | — | voc-s4-m19-03 | "Danny Boy" sözü (F. Weatherly, 1848–1929) kullanılmaz; hece/vokaliz |
 | The Water Is Wide | Geleneksel İskoç/İngiliz | — | voc-s4-m19-04 | 20. yy düzenlemeleri telifli |

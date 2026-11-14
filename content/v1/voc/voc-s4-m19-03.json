@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "4/4: hr er 7,:e 1:e 2:e | 3:q. 2:e 3:e 6:e 5:e 3:e | 2:e 1:e 6,:q er 1:e 3:e 4:e | 5:q. 6:e 5:e 3:e 1:e 3:e | 2:h er 7,:e 1:e 2:e | 3:q. 2:e 3:e 6:e 5:e 3:e | 2:e 1:e 6,:e #5,:e 6,:e 7,:e 1:e 2:e | 3:q. 4:e 3:e 2:e 1:e 2:e | 1:h er 5:e 6:e 7:e | 1':q. 7:e 7:e 6:e 5:e 3:e | 5:e 3:e 1:q er 5:e 6:e 7:e | 1':q. 7:e 7:e 6:e 5:e 3:e | 2:h er 5:e 5:e 5:e | 3':q. 2':e 2':e 1':e 6:e 1':e | 5:e 3:e 1:q er 7,:e 1:e 2:e | 3:e 6:e 5:e 3:e 2:e 1:e 6,:e 7,:e | 1:h~e er qr"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -121,7 +122,7 @@
     "en": "Sing the first half at ♩=45 until it feels easy, then add the second half one phrase at a time.",
     "tr": "İlk yarıyı rahat gelene kadar ♩=45'te söyle, sonra ikinci yarıyı her seferinde bir cümle ekleyerek söyle."
   },
-  "repertoire": "Londonderry Air, traditional Irish melody (Petrie collection, 1855). Public domain, legal review pending. Melody only, sung on 'la'; the \"Danny Boy\" words (F. Weatherly) are not used. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Londonderry Air, traditional Irish melody. Source: George Petrie (ed.), The Petrie Collection of the Ancient Music of Ireland, vol. 1, Dublin: University Press (M. H. Gill) for the Society for the Preservation and Publication of the Melodies of Ireland, 1855, p. 57, air with the heading 'Name unknown', sent to Petrie by Miss J. Ross of Limavady; the melody is the top line of Petrie's piano setting (archive.org: https://archive.org/details/petriecollection01petr). Public domain: published 1855 and Petrie died 1866. Legal review pending. Melody only, sung on 'la'; the \"Danny Boy\" words (F. Weatherly) are not used. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

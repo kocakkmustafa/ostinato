@@ -10,8 +10,8 @@
   },
   "explanation": [
     {
-      "en": "Lesson B has a different character from lesson A. Before you sing, listen to the reference once and name the difference: faster notes, a different mood, or a different shape.",
-      "tr": "B dersinin karakteri A dersinden farklıdır. Söylemeden önce referansı bir kez dinle ve farkı adlandır: daha hızlı notalar, farklı bir duygu ya da farklı bir biçim."
+      "en": "Lesson B, Concone's No. 6, contrasts with lesson A: it is in a minor key and in 3/4, with notes held across several bars. Before you sing, listen to the reference once and name the difference.",
+      "tr": "B dersi, Concone'nin 6 numarası, A dersiyle karşıttır: minör tondadır, 3/4'lüktür ve notaları birkaç ölçü boyunca tutulur. Söylemeden önce referansı bir kez dinle ve farkı adlandır."
     },
     {
       "en": "Map it as you did lesson A: phrases, repeats, breath marks, and the highest and lowest points.",
@@ -49,8 +49,8 @@
       "A5"
     ],
     "task": {
-      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase first, then the whole lesson at ♩=72. Breathe only at the marks. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Ekranın gösterdiği bölümü oku. Eşlikten bir ölçü dinle, sonra onu 'a' ile, önce cümle cümle, sonra bütün dersi ♩=72'de söyle. Yalnız işaretlerde nefes al. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+      "en": "Read the first 16 bars of Concone's Lesson No. 6 on screen: 3/4, A minor, long held notes. Listen to one bar of the accompaniment, then sing them on 'ah', phrase by phrase first, then all 16 bars at ♩=72. Breathe only at the marks. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranda Concone'nin 6 numaralı dersinin ilk 16 ölçüsünü oku: 3/4, la minör, uzun tutulan notalar. Eşlikten bir ölçü dinle, sonra onları 'a' ile, önce cümle cümle, sonra 16 ölçünün tamamını ♩=72'de söyle. Yalnız işaretlerde nefes al. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
     "tempo": {
       "open": 72,
@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "3/4: 5,:h.~h.~q 1:q b3:q | 5:h qr | 2:h.~h.~q 7,:q 6,:q | 5,:h qr | 5,:h.~h.~q 1:q b3:q | 5:h qr | 5,:h. | 7,:h. | 1:h.~q qr qr"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -122,7 +123,7 @@
     "en": "Sing the lesson at one even volume first; add the soft and strong places when the notes are secure.",
     "tr": "Önce dersi tek ve eşit bir ses düzeyinde söyle; notalar oturunca yumuşak ve güçlü yerleri ekle."
   },
-  "repertoire": "Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9: a second selected whole lesson (B), contrasting with lesson A (lesson number to be fixed with the transcription). Source: 19th-century edition. Vocalise, no words. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Giuseppe Concone (1801–1861), 50 Leçons de chant pour le médium de la voix, Op. 9: Lesson No. 6 (Andante sostenuto, A minor, 3/4), bars 1–16, ending on the tonic (Ostinato abridgement; the lesson continues with a major-key section). Source: Leipzig, C. F. Peters, Edition Peters No. 980, plate 6437 (catalogued 1880), p. 7 (https://archive.org/details/50leconsdechantp00conc, PDF p. 9). Public domain: composer died 1861; edition published before 1931; no editorial markings taken. Vocalise, no words. Legal review pending. Degrees, personal key, accompaniment, dynamics and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

@@ -14,8 +14,8 @@
       "tr": "Sakura Sakura, Edo döneminden geleneksel bir Japon ezgisidir. 1888'de bir koto parçaları derlemesinde basıldı. Yalnız ezgiyi 'la' ile söylersin."
     },
     {
-      "en": "It uses a five-note scale with two half steps. In movable do, its notes are la, ti, do, mi and fa.",
-      "tr": "Ezgi iki yarım sesli beş notalık bir dizi kullanır. Hareketli do ile notaları la, si, do, mi ve fa'dır."
+      "en": "It uses a five-note scale with two half steps. In movable do, its notes are la, ti, do, mi and fa; the app writes them as degrees 1, 2, b3, 5 and b6, with la as 1.",
+      "tr": "Ezgi iki yarım sesli beş notalık bir dizi kullanır. Hareketli do ile notaları la, si, do, mi ve fa'dır; uygulama onları la'yı 1 alarak 1, 2, b3, 5 ve b6 dereceleriyle yazar."
     },
     {
       "en": "The half steps are ti–do and mi–fa. Keep them small; these two pairs give the tune its colour.",
@@ -56,6 +56,7 @@
       "en": "The app shows the 14-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=66. Start at ♩=45 if you like; the lesson counts at ♩=66. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
       "tr": "Uygulama 14 ölçülük ezgiyi derecelerle gösterir. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=66'da söyle. İstersen ♩=45'te başla; ders ♩=66'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
+    "sequence": "1-1 2:h | 1-1 2:h | 1-2-b3-2 | 1:q 2:e 1:e b6,:h | 5,-b3,-5,-b6, | 5,:q 5,:e b3,:e 2,:h | 1-2-b3-2 | 1:q 2:e 1:e b6,:h | 5,-b3,-5,-b6, | 5,:q 5,:e b3,:e 2,:h | 1-1 2:h | 1-1 2:h | qr 5,:q b6,:h | 2:e 1:e b6,:q 5,:h",
     "tempo": {
       "open": 66,
       "target": 66
@@ -125,7 +126,7 @@
     "en": "Sing the first half at ♩=45, then add the second half.",
     "tr": "İlk yarıyı ♩=45'te söyle, sonra ikinci yarıyı ekle."
   },
-  "repertoire": "Sakura Sakura, traditional Japanese melody (Edo period; printed in an 1888 koto collection). Public domain, legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Sakura Sakura, traditional Japanese melody (Edo period). Source: Collection of Japanese Koto Music (Sōkyokushū), No. 2 \"Sakura\", compiled by the Ongaku Torishirabe-gakari under Izawa Shūji (1851–1917), Tokyo: Department of Education, 1888; vocal line on pp. 22 and 25 of the scan (https://archive.org/details/collectionjapan00gakkgoog). Public domain: traditional melody; the 1888 edition was published before 1931 and its compiler died in 1917. Legal review pending. Melody only, the 14 sung bars (the koto postlude is left out), sung on 'la'; the 1888 words are not used. Degrees (la = 1), personal key, accompaniment and tempo by Ostinato.",
   "minutes": 12,
   "expertPending": true
 }

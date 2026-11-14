@@ -121,7 +121,7 @@
     "en": "Sing the melody at ♩=65, then raise the tempo by 5 at a time.",
     "tr": "Ezgiyi ♩=65'te söyle, sonra tempoyu her seferinde 5 artır."
   },
-  "repertoire": "De Colores, traditional Spanish/Mexican song. Public domain, legal review pending. Melody only, sung on 'la'; the words are not used (word variants to be confirmed per country). Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "De Colores, traditional Spanish/Mexican song. Public domain as a traditional melody, legal review pending. Melody only, sung on 'la'; the words are not used (word variants to be confirmed per country). No dated pre-1931 printed source with notation has been found yet (archive.org catalogue and full-text search, 2026-11-01: the earliest printed hits are 1950s songbooks), so the measured line is not written until such a public-domain source is fixed. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 12,
   "expertPending": true
 }

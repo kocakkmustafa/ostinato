@@ -5,8 +5,8 @@
     "tr": "Vaccai: süslü bir ders"
   },
   "goal": {
-    "en": "Sings a selected ornamented passage from Vaccai's method in a personal key at ♩=72, landing every ornament on its main note.",
-    "tr": "Vaccai'nin yönteminden seçilmiş süslemeli bir bölümü kişisel tonda ♩=72'de, her süslemeyi asıl notasına indirerek söyler."
+    "en": "Sings Vaccai's acciaccatura lesson (No. 12), 21 bars in 2/4 in a personal key at ♩=72, landing every grace note on its main note.",
+    "tr": "Vaccai'nin akçakatura dersini (No. 12), 2/4'lük 21 ölçüyü kişisel tonda ♩=72'de, her süs notasını asıl notasına indirerek söyler."
   },
   "explanation": [
     {
@@ -14,12 +14,12 @@
       "tr": "Nicola Vaccai, İtalyan şarkı söyleme üzerine pratik yöntemini 1832'de Londra'da yayımladı. Derslerinin birkaçı süslemeleri, her seferinde bir tür olmak üzere öğretir."
     },
     {
-      "en": "The selected passage has ornaments like the ones in this module: short grace notes or small turns on one syllable. The screen marks each one.",
-      "tr": "Seçilen bölümde bu modüldekilere benzer süslemeler vardır: tek hecede kısa süs notaları ya da küçük dönüşler. Ekran her birini işaretler."
+      "en": "You sing No. 12, “L'Acciaccatura”, in E major and 2/4. Most groups of eighths start with an acciaccatura: a tiny grace note, printed small with a stroke through it, always the scale note just above the main note. The screen marks each one.",
+      "tr": "No. 12'yi, “L'Acciaccatura”yı, Mi majör ve 2/4'te söylersin. Sekizlik gruplarının çoğu bir akçakatura ile başlar: küçük basılmış, üstü çizili minik bir süs notası; her zaman asıl notanın hemen üstündeki gam notası. Ekran her birini işaretler."
     },
     {
-      "en": "An ornament decorates a note; it never replaces it. Keep the beat on the main note and touch the ornament lightly.",
-      "tr": "Süsleme bir notayı süsler; asla onun yerini almaz. Vuruşu asıl notada tut ve süslemeye hafifçe dokun."
+      "en": "An ornament decorates a note; it never replaces it. Vaccai's note says the acciaccatura takes neither time nor accent from the main note: flick it in and land on the main note at once. The app measures only the main notes. Bar 19 jumps up to an accented 8, and bar 20 turns the pattern into quick sixteenths, 6-5 four times.",
+      "tr": "Süsleme bir notayı süsler; asla onun yerini almaz. Vaccai'nin notuna göre akçakatura asıl notadan ne süre ne vurgu alır: ona hafifçe dokun ve hemen asıl notaya in. Uygulama yalnız asıl notaları ölçer. 19. ölçü vurgulu 8'e sıçrar; 20. ölçü kalıbı hızlı onaltılıklara çevirir: dört kez 6-5."
     },
     {
       "en": "The words are an Italian verse by Pietro Metastasio. Learn the passage on 'ah' first, then add the words.",
@@ -52,6 +52,7 @@
       "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, sing it once on 'ah', then once with the words. Practise at a slower tempo first if you need to; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
       "tr": "Ekranın gösterdiği bölümü oku. Eşliğin bir ölçüsünü dinle, bir kez 'a' ile, sonra bir kez sözlerle söyle. Gerekirse önce daha yavaş tempoda çalış; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
     },
+    "sequence": "2/4: qr er 5:e | 6:e 5:e 6:e 5:e | 4:e 3:e er 3:e | 3:e 2:e 3:e 2:e | 2:e 1:e er 5:e | 6:e 5:e 6:e 5:e | 4:e 3:e er 6:e | 6:e 5:e 5:e #4:e | 3:q er 5:e | 6:e 5:e 6:e 5:e | 6:e 5:e er 3:e | 4:e 3:e 4:e 3:e | 3:e 6:e er 6:e | 6:e 5:e 6:e 5:e | 6:e 5:e er 4:e | 4:e 3:e 3:e 2:e | 1:q er 1:e | 2:e 1:e 2:e 1:e | 1:e 1':q 6:e | 6:s 5:s 6:s 5:s 6:s 5:s 6:s 5:s | 1:q qr",
     "tempo": {
       "open": 72,
       "target": 72
@@ -64,6 +65,7 @@
   "safety": [
     "Ç",
     "V1",
+    "V2",
     "V5"
   ],
   "prerequisites": [],
@@ -121,7 +123,7 @@
     "en": "Sing the passage on 'ah' without the ornaments first; add them back one at a time.",
     "tr": "Bölümü önce süslemesiz 'a' ile söyle; süslemeleri birer birer geri ekle."
   },
-  "repertoire": "Nicola Vaccai (1790–1848), Metodo pratico di canto italiano per camera: one selected lesson with ornaments (selection; lesson to be chosen and its notes checked against the source edition). Words by Pietro Metastasio (1698–1782). Source: London first edition, 1832. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "repertoire": "Nicola Vaccai (1790–1848), Metodo pratico di canto italiano per camera (first published London, 1832): No. 12, \"L'Acciaccatura\", complete, 21 bars, Andantino, E major, 2/4. Words by Pietro Metastasio (1698–1782). Notes checked against: A Practical Method of Italian Singing, Russell's New and Improved Edition, revised by Vincenzo Vannini, English translation by Henry Badger (Boston: G. D. Russell, 1878), p. 20; scan https://archive.org/details/imslp-pratico-de-canto-vaccai-nicola (IMSLP PMLP85474), scan page 19. The grace notes are described in the text and not measured. Public domain: composer and poet died before 1850; the edition was published in 1878 (before 1930); only Vaccai's vocal line and the Italian words are used, not the edition's translation or accompaniment. Legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

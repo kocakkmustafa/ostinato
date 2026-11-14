@@ -10,8 +10,8 @@
   },
   "explanation": [
     {
-      "en": "Early One Morning is a traditional English melody from the late 18th century. You sing the melody only, on 'la'.",
-      "tr": "Early One Morning 18. yüzyılın sonlarından geleneksel bir İngiliz ezgisidir. Yalnız ezgiyi 'la' ile söylersin."
+      "en": "Early One Morning is a traditional English song. William Chappell printed the tune in the 1830s and again in his Popular Music of the Olden Time. You sing the melody only, on 'la'.",
+      "tr": "Early One Morning geleneksel bir İngiliz şarkısıdır. William Chappell ezgiyi 1830'larda ve yeniden Popular Music of the Olden Time adlı derlemesinde yayımladı. Yalnız ezgiyi 'la' ile söylersin."
     },
     {
       "en": "It is a bright major tune, a little faster than the songs before it. Keep the sound light so the quick notes stay clear.",
@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "2/4: 1:q 1:e 1:e | 1:e 3:e 5:e 5:e | 6:e 4:e 2:e 1:e | 7,:e 2:e 5,:e. 1:s | 1:q 1:e 1:e | 1:e 3:e 5:e 5:e | 6:e 4:e 2:e 7,:e | 1:h | 2:q 3:e 4:e | 5:e 3:e 1:q | 2:q 3:e 4:e | 5:e 3:e 1:q | 1:e 3:e 5:e 1':e | 7:e 6:e 5:e 4:e | 3:e 2:e 1:e 7,:e | 1:h"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -121,7 +122,7 @@
     "en": "Sing the melody at ♩=55, then raise the tempo by 5 at a time.",
     "tr": "Ezgiyi ♩=55'te söyle, sonra tempoyu her seferinde 5 artır."
   },
-  "repertoire": "Early One Morning, traditional English melody (late 18th century). Public domain, legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Early One Morning, traditional English song. Source: William Chappell, Popular Music of the Olden Time, vol. 2, London: Cramer, Beale & Chappell, [1855–59], p. 736, the melody as the top line of Chappell's setting (archive.org: https://archive.org/details/popularmusicofol02chapuoft). Public domain: published 1855–59 and Chappell died 1888. Legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 12,
   "expertPending": true
 }

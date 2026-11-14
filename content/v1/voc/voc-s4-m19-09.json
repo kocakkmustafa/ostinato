@@ -18,8 +18,8 @@
       "tr": "Arya üç bölümlüdür: ilk bölüm, karşıt bir orta bölüm ve yeniden ilk bölüm. İlk bölümü öğrenirsin; \"Caro mio ben, credimi almen\" diye başlar."
     },
     {
-      "en": "It is slow and connected. Keep the line legato and move on the vowels; place each consonant quickly, just before its beat.",
-      "tr": "Yavaş ve bağlıdır. Çizgiyi legato tut ve ünlüler üzerinde ilerle; her ünsüzü vuruşundan hemen önce, çabucak yerleştir."
+      "en": "It is slow and connected. Keep the line legato and move on the vowels; place each consonant quickly, just before its beat. In bar 4 a small grace note leans into the low note on \"languisce\"; touch it lightly, the app counts the main note.",
+      "tr": "Yavaş ve bağlıdır. Çizgiyi legato tut ve ünlüler üzerinde ilerle; her ünsüzü vuruşundan hemen önce, çabucak yerleştir. 4. ölçüde küçük bir süs notası \"languisce\"deki alçak notaya yaslanır; ona hafifçe dokun, uygulama ana notayı sayar."
     },
     {
       "en": "Italian vowels are pure, like the five you practised: 'a', 'e', 'i', 'o', 'u'. Keep every consonant short so the vowels stay long.",
@@ -49,8 +49,8 @@
       "A5"
     ],
     "task": {
-      "en": "The app shows the first section in degrees. Listen to one bar of the accompaniment, then sing it once on 'ah', then once with the words, at ♩=60. Start at ♩=42 if you like; the lesson counts at ♩=60. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Uygulama ilk bölümü derecelerle gösterir. Eşlikten bir ölçü dinle, sonra onu bir kez 'a' ile, sonra bir kez sözlerle ♩=60'ta söyle. İstersen ♩=42'de başla; ders ♩=60'ta sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+      "en": "The app shows the first section in degrees: 9 bars in 4/4, from the voice entry to the end of the first section. Listen to one bar of the accompaniment, then sing it once on 'ah', then once with the words, at ♩=60. Start at ♩=42 if you like; the lesson counts at ♩=60. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ilk bölümü derecelerle gösterir: sesin girişinden ilk bölümün sonuna kadar 4/4'lük 9 ölçü. Eşlikten bir ölçü dinle, sonra onu bir kez 'a' ile, sonra bir kez sözlerle ♩=60'ta söyle. İstersen ♩=42'de başla; ders ♩=60'ta sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
     "tempo": {
       "open": 60,
@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "hr 1':q 7:e. 6:s | 5:h 6:q 5:e. 4:s | 3:h 4:q 3:e 2:e | 5:h 1:q 7,:e 1:e | 3:q 2:q hr | hr 6:q 5:e. 4:s | 3:h 4:q 3:e 2:e | 5:e 1':e 1:e 4:e 3:q 2:e. 1:s | 1:h hr"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -121,7 +122,7 @@
     "en": "Sing the whole section on 'ah' only; add the words on another day.",
     "tr": "Bütün bölümü yalnız 'a' ile söyle; sözleri başka bir gün ekle."
   },
-  "repertoire": "Caro mio ben, aria attributed to Giuseppe or Tommaso Giordani (18th century). Source: Alessandro Parisotti (1853–1913), Arie antiche (1885–1900); country-by-country confirmation pending. Public domain, legal review pending. First section, on 'ah' and with the Italian words. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Caro mio ben, arietta attributed to Giuseppe Giordani (1743–1798; also credited to Tommaso Giordani). Source: Alessandro Parisotti (1853–1913), ed., Anthology of Italian Song of the Seventeenth and Eighteenth Centuries, vol. 1, New York: G. Schirmer, 1894 (plate 11595), p. 131, original key (scan: https://archive.org/details/anthologyofitali00pari, PDF p. 149). Public domain: the aria is 18th-century; Parisotti died 1913; the 1894 Schirmer edition's US copyright (renewed 1922) has expired. Country-by-country confirmation pending; legal review pending. Vocal line of the first section, 9 bars (bars 5–13 of the print; bars 1–4 are the piano introduction). The printed grace note in bar 8 is described in the text, not measured. Th. Baker's English words are not used. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

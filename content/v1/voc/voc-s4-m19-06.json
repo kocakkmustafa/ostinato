@@ -14,16 +14,16 @@
       "tr": "Johannes Brahms bu ninniyi 1868'de yazdı; Simrock aynı yıl yayımladı. İlk kıta eski bir Alman halk şiirinden gelir."
     },
     {
-      "en": "It is a cradle song: soft, even and rocking. The accompaniment rocks under you; let the melody float on top of it.",
-      "tr": "Bir beşik şarkısıdır: yumuşak, dengeli ve sallanan. Eşlik altında sallanır; ezginin onun üstünde süzülmesine izin ver."
+      "en": "It is a cradle song in 3/4: soft, even and rocking, felt in one slow swing per bar. The accompaniment rocks under you; let the melody float on top of it.",
+      "tr": "3/4'lük bir beşik şarkısıdır: yumuşak, dengeli ve sallanan; her ölçüde tek, yavaş bir salınım hissedilir. Eşlik altında sallanır; ezginin onun üstünde süzülmesine izin ver."
     },
     {
       "en": "Soft is not weak. Keep the breath flowing and the sound steady, so the soft notes stay on pitch.",
       "tr": "Yumuşak, zayıf demek değildir. Nefesi akıtmaya ve sesi kararlı tutmaya devam et ki yumuşak notalar perdede kalsın."
     },
     {
-      "en": "Learn it in two steps. Sing the verse on 'la' until the notes are secure, then add the words, which begin \"Guten Abend, gut' Nacht\".",
-      "tr": "İki adımda öğren. Notalar oturana kadar kıtayı 'la' ile söyle, sonra \"Guten Abend, gut' Nacht\" diye başlayan sözleri ekle."
+      "en": "Learn it in two steps. Sing the verse on 'la' until the notes are secure, then add the words, which begin \"Guten Abend, gut' Nacht\". Two small grace notes (before the held note on \"geweckt\" and on \"wieder\" at the end) are only a light touch; the app counts the main notes.",
+      "tr": "İki adımda öğren. Notalar oturana kadar kıtayı 'la' ile söyle, sonra \"Guten Abend, gut' Nacht\" diye başlayan sözleri ekle. İki küçük süs notası (\"geweckt\"teki uzun notadan önce ve sondaki \"wieder\"de) yalnız hafif bir dokunuştur; uygulama ana notaları sayar."
     },
     {
       "en": "The app moves the song into your personal key; the screen shows the words under the notes. If the top notes are not comfortable, sing them an octave lower.",
@@ -36,8 +36,8 @@
       "S"
     ],
     "brief": {
-      "en": "The first verse in your comfortable range, soft synthesized voice, at ♩.=50 and ♩.=35, over an original simple accompaniment. Headphones recommended.",
-      "tr": "İlk kıta rahat menzilinde, yumuşak sentez ses, ♩.=50 ve ♩.=35; özgün basit eşlikle. Kulaklık önerilir."
+      "en": "The first verse in your comfortable range, soft synthesized voice, at ♩=66 and ♩=45, over an original simple accompaniment. Headphones recommended.",
+      "tr": "İlk kıta rahat menzilinde, yumuşak sentez ses, ♩=66 ve ♩=45; özgün basit eşlikle. Kulaklık önerilir."
     }
   },
   "practice": {
@@ -49,16 +49,17 @@
       "A5"
     ],
     "task": {
-      "en": "The app shows the first verse in degrees. Listen to one bar of the accompaniment, then sing it once on 'la', then once with the words, at ♩.=50. Start at ♩.=35 if you like; the lesson counts at ♩.=50. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Uygulama ilk kıtayı derecelerle gösterir. Eşlikten bir ölçü dinle, sonra onu bir kez 'la' ile, sonra bir kez sözlerle ♩.=50'de söyle. İstersen ♩.=35'te başla; ders ♩.=50'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+      "en": "The app shows the first verse in degrees: 17 bars in 3/4, counted in quarter notes. Listen to one bar of the accompaniment, then sing it once on 'la', then once with the words, at ♩=66. Start at ♩=45 if you like; the lesson counts at ♩=66. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ilk kıtayı derecelerle gösterir: 3/4'lük 17 ölçü, dörtlükle sayılır. Eşlikten bir ölçü dinle, sonra onu bir kez 'la' ile, sonra bir kez sözlerle ♩=66'da söyle. İstersen ♩=45'te başla; ders ♩=66'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
     "tempo": {
-      "open": 50,
-      "target": 50
+      "open": 66,
+      "target": 66
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "3/4: qr qr 3:e 3:e | 5:q. 3:e 3:q | 5:q qr 3:e 5:e | 1':q 7:q. 6:e | 6:q 5:q 2:e 3:e | 4:q 2:q 2:e 3:e | 4:q qr 2:e 4:e | 7:e 6:e 5:q 7:q | 1':q qr 1:e 1:e | 1':h 6:e 4:e | 5:h 3:e 1:e | 4:q 5:q 6:q | 5:h 1:e 1:e | 1':h 6:e 4:e | 5:h 3:e 1:e | 4:q 3:q 2:q | 1:h qr"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -121,7 +122,7 @@
     "en": "Sing the whole verse on 'la' only; add the words on another day.",
     "tr": "Bütün kıtayı yalnız 'la' ile söyle; sözleri başka bir gün ekle."
   },
-  "repertoire": "Wiegenlied, Op. 49 No. 4, Johannes Brahms (1833–1897). Words: first verse from a German folk poem (Des Knaben Wunderhorn); second verse Georg Scherer (1824–1909), not used. Source: Simrock first edition, 1868. Public domain, legal review pending. First verse, on 'la' and with the words. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Wiegenlied, Op. 49 No. 4, Johannes Brahms (1833–1897). Words: first verse from a German folk poem (Des Knaben Wunderhorn); second verse Georg Scherer (1824–1909), not used. Source: first edition, Lieder und Gesänge Op. 49, Berlin: N. Simrock, 1868, p. 11 (scan: https://archive.org/details/imslp-lieder-op49-brahms-johannes, PDF p. 11). Public domain: composer died 1897, published 1868 (before 1931 in the US; life + 70 elsewhere). Legal review pending. Vocal line of the first verse, 17 bars from the voice entry (bars 2–18 of the print; the piano pickup and first bar are the accompaniment's lead-in); the two printed grace notes are described in the text, not measured. The 1868 print marks 'Zart bewegt' only; the row's ♩.=50 did not fit 3/4, so the tempo is ♩=66 in quarter notes. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 14,
   "expertPending": true
 }

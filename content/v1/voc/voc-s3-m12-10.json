@@ -1,33 +1,33 @@
 {
   "id": "voc-s3-m12-10",
   "title": {
-    "en": "Scarborough Fair",
-    "tr": "Scarborough Fair"
+    "en": "God Rest You Merry, Gentlemen",
+    "tr": "God Rest You Merry, Gentlemen"
   },
   "goal": {
-    "en": "Sings an older variant of the traditional melody Scarborough Fair, 16 bars at ♩=80, keeping its Dorian colour in tune.",
-    "tr": "Geleneksel Scarborough Fair ezgisinin eski bir varyantını, 16 ölçü ♩=80'de, Dorian rengini doğru perdede koruyarak söyler."
+    "en": "Sings the traditional carol God Rest You Merry, Gentlemen, a pickup and 19 bars in natural minor at ♩=80, keeping ♭3, ♭6 and ♭7 in tune.",
+    "tr": "Geleneksel God Rest You Merry, Gentlemen ilahisini, bir öncü nota ve 19 ölçü, doğal minörde ♩=80'de ♭3, ♭6 ve ♭7'yi doğru perdede tutarak söyler."
   },
   "explanation": [
     {
-      "en": "Scarborough Fair is a traditional English melody. You sing an older printed variant of the tune; later arrangements and recordings are not used.",
-      "tr": "Scarborough Fair geleneksel bir İngiliz ezgisidir. Ezginin eski bir basılı varyantını söylersin; sonraki düzenlemeler ve kayıtlar kullanılmaz."
+      "en": "God Rest You Merry, Gentlemen is a traditional English Christmas carol. You sing the melody as John Stainer printed it in 1871; later arrangements and recordings are not used.",
+      "tr": "God Rest You Merry, Gentlemen geleneksel bir İngiliz Noel ilahisidir. Ezgiyi John Stainer'ın 1871'de bastığı biçimiyle söylersin; sonraki düzenlemeler ve kayıtlar kullanılmaz."
     },
     {
-      "en": "The tune has a Dorian colour: it is natural minor with one note raised. 6 takes the place of ♭6.",
-      "tr": "Ezginin Dorian rengi vardır: bir notası yükseltilmiş doğal minördür. ♭6'nın yerini 6 alır."
+      "en": "The tune is in natural minor: 1-2-♭3-4-5-♭6-♭7-8. It never uses the raised 7, so the note just below 1 is ♭7, a whole step down.",
+      "tr": "Ezgi doğal minördedir: 1-2-♭3-4-5-♭6-♭7-8. Yükseltilmiş 7'yi hiç kullanmaz; bu yüzden 1'in hemen altındaki nota ♭7'dir, bir tam ses aşağıda."
     },
     {
-      "en": "So the scale reads 1-2-♭3-4-5-6-♭7-8. Against the minor triad, 6 sounds brighter.",
-      "tr": "Böylece gam 1-2-♭3-4-5-6-♭7-8 olur. Minör üçlünün üstünde 6 daha parlak duyulur."
+      "en": "It starts with one pickup note, 1, before bar 1. Bars 1–8 are two nearly equal phrases that step down from 5 to low ♭7 and back up.",
+      "tr": "Ezgi 1. ölçüden önce tek bir öncü notayla, 1 ile başlar. 1–8. ölçüler, 5'ten alttaki ♭7'ye inip geri çıkan, neredeyse aynı iki cümledir."
     },
     {
-      "en": "Before you start, sing 5-6-♭7-8 slowly and hear the whole step from 5 to 6.",
-      "tr": "Başlamadan önce 5-6-♭7-8'i yavaşça söyle ve 5'ten 6'ya tam sesi duy."
+      "en": "Bars 9–11 climb through ♭6 and ♭7 to 8. From bar 12 the refrain circles 4, 5 and ♭6, climbs once more to 8 and ends on 1.",
+      "tr": "9–11. ölçüler ♭6 ve ♭7'den geçerek 8'e çıkar. 12. ölçüden itibaren nakarat 4, 5 ve ♭6 çevresinde döner, bir kez daha 8'e çıkar ve 1'de biter."
     },
     {
-      "en": "Sing the melody only, on “la”. If the top notes are not comfortable, sing them an octave lower.",
-      "tr": "Yalnız ezgiyi “la” ile söyle. Üst notalar rahat değilse onları bir oktav aşağıda söyle."
+      "en": "The tune covers more than an octave, from low ♭7 to 8. The app places it in your comfortable range. Sing the melody only, on “la”; if the top notes are not comfortable, sing them an octave lower.",
+      "tr": "Ezgi alttaki ♭7'den 8'e, bir oktavdan geniş bir alan tutar. Uygulama onu rahat menziline yerleştirir. Yalnız ezgiyi “la” ile söyle; üst notalar rahat değilse onları bir oktav aşağıda söyle."
     }
   ],
   "referenceAudio": {
@@ -49,9 +49,10 @@
       "A5"
     ],
     "task": {
-      "en": "The app shows the 16-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on “la” at ♩=80. Start at ♩=55 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Uygulama 16 ölçülük ezgiyi derecelerle gösterir. Eşliğin bir ölçüsünü dinle, sonra ezgiyi “la” ile ♩=80'de söyle. İstersen ♩=55'te başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
+      "en": "The app shows the melody in degrees: a pickup and 19 bars. Listen to one bar of the accompaniment, then sing the melody on “la” at ♩=80, starting with the pickup. The source is in cut time (two half-note beats per bar); the app counts quarters. Start at ♩=55 if you like; the lesson counts at ♩=80. Only the top line of the source's four-part setting is measured; the accompaniment is Ostinato's own. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ezgiyi derecelerle gösterir: bir öncü nota ve 19 ölçü. Eşliğin bir ölçüsünü dinle, sonra öncü notadan başlayarak ezgiyi “la” ile ♩=80'de söyle. Kaynak kesik ölçüdedir (ölçüde iki ikilik vuruş); uygulama dörtlükleri sayar. İstersen ♩=55'te başla; ders ♩=80'de sayılır. Kaynaktaki dört sesli düzenlemenin yalnız üst sesi ölçülür; eşlik Ostinato'nundur. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
     },
+    "sequence": "2/2: hr qr 1:q | 1 5 5 4 | b3 2 1 b7, | 1 2 b3 4 | 5:h. 1:q | 1 5 5 4 | b3 2 1 b7, | 1 2 b3 4 | 5:h qr 5:q | b6 4 5 b6 | b7 1' 5 4 | b3 1 2 b3 | 4:h b3 4 | 5:h b6 5 | 5 4 b3 2 | 1:h b3:e 2:e 1:q | 4:h b3 4 | 5 b6 b7 1' | 5 4 b3 2 | 1:h",
     "tempo": {
       "open": 80,
       "target": 80
@@ -69,8 +70,8 @@
   "prerequisites": [],
   "selfCheck": [
     {
-      "en": "6 sounded brighter than the ♭6 of natural minor.",
-      "tr": "6, doğal minördeki ♭6'dan daha parlak duyuldu."
+      "en": "Low ♭7 stayed a whole step below 1.",
+      "tr": "Alttaki ♭7, 1'in bir tam ses altında kaldı."
     },
     {
       "en": "My line matched the reference at the slow tempo.",
@@ -84,22 +85,22 @@
   "commonErrors": [
     {
       "error": {
-        "en": "Different note, 6 a semitone low.",
-        "tr": "Farklı nota: 6 yarım ses alçak."
+        "en": "Different note, low ♭7 a semitone high.",
+        "tr": "Farklı nota: alttaki ♭7 yarım ses yüksek."
       },
       "fix": {
-        "en": "That is the ♭6 of natural minor. Take a full whole step from 5 to 6.",
-        "tr": "Bu doğal minördeki ♭6 olur. 5'ten 6'ya tam bir tam ses çık."
+        "en": "That is the raised 7 of harmonic minor. This tune keeps ♭7: a whole step below 1.",
+        "tr": "Bu armonik minördeki yükseltilmiş 7 olur. Bu ezgi ♭7'yi korur: 1'in bir tam ses altı."
       }
     },
     {
       "error": {
-        "en": "Correct, but late after a long note.",
-        "tr": "Doğru, ama uzun notadan sonra geç."
+        "en": "Correct, but late after the rest in bar 8.",
+        "tr": "Doğru, ama 8. ölçüdeki susun ardından geç."
       },
       "fix": {
-        "en": "Count the beats of the long note inside and move on the next click.",
-        "tr": "Uzun notanın vuruşlarını içinden say ve bir sonraki klikte geç."
+        "en": "Breathe during the rest and sing 5 on beat 4, ready for bar 9.",
+        "tr": "Sus sırasında nefes al ve 5'i 4. vuruşta, 9. ölçüye hazır söyle."
       }
     },
     {
@@ -114,10 +115,10 @@
     }
   ],
   "adaptation": {
-    "en": "Sing the first 8 bars alone at ♩=55, then the last 8, then all 16.",
-    "tr": "♩=55'te önce yalnız ilk 8 ölçüyü, sonra son 8 ölçüyü, sonra 16'sını birden söyle."
+    "en": "Sing bars 1–8 alone at ♩=55, then bars 9–19, then the whole carol.",
+    "tr": "♩=55'te önce yalnız 1–8. ölçüleri, sonra 9–19. ölçüleri, sonra ilahinin tamamını söyle."
   },
-  "repertoire": "Scarborough Fair, traditional English melody. Source: an older variant from a 19th-century collection (variant to be fixed with the source scan). The 20th-century popular arrangement and recording are not used or referenced. Public domain, legal review pending. Melody only, sung on \"la\"; degrees, key, accompaniment and tempo by Ostinato.",
+  "repertoire": "God Rest You Merry, Gentlemen, traditional English carol. Source: Christmas Carols New and Old [First Series], words edited by Henry Ramsden Bramley, music edited by John Stainer (London: Novello, Ewer and Co., [1871]), No. 1, p. 2; scan https://archive.org/details/christmascarolsn00staiiala (scan page 8). Public domain: published before 1930; Stainer (1840–1901) and Bramley (1833–1917) died more than 100 years ago; the melody is traditional. Melody (soprano line) only; Stainer's harmony is not used. Legal review pending. Sung on \"la\"; degrees, key, accompaniment and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

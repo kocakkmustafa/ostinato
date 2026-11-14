@@ -14,8 +14,8 @@
       "tr": "Gam dersinden sonra Vaccai'nin yöntemi aralıkları her derste bir tane olmak üzere işler: üçlüler, dörtlüler, beşliler ve daha genişleri. Her ders tek bir aralık üzerine kurulu kısa bir şarkıdır."
     },
     {
-      "en": "Before you sing, find the interval of this lesson on screen and sing it slowly on 'ah' a few times, up and down.",
-      "tr": "Söylemeden önce bu dersin aralığını ekranda bul ve onu 'a' ile birkaç kez yavaşça, çıkarak ve inerek söyle."
+      "en": "This lesson is built on the fourth: almost every step is a leap of four notes, such as 5 up to 1 or 3 down to 7. Before you sing, sing 5–1 and 1–5 slowly on 'ah' a few times.",
+      "tr": "Bu ders dörtlü aralık üzerine kuruludur: hemen her geçiş dört notalık bir sıçramadır, örneğin 5'ten 1'e çıkış ya da 3'ten 7'ye iniş. Söylemeden önce 5–1 ve 1–5'i 'a' ile birkaç kez yavaşça söyle."
     },
     {
       "en": "Hear the top note before you leave the lower one. Then move on the vowel and start the new note right on pitch, with no scoop.",
@@ -49,8 +49,8 @@
       "A5"
     ],
     "task": {
-      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it once on 'ah', then once with the words, at ♩=72. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Ekranın gösterdiği bölümü oku. Eşlikten bir ölçü dinle, sonra onu bir kez 'a' ile, sonra bir kez sözlerle ♩=72'de söyle. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+      "en": "Read Vaccai's lesson on fourths on screen: 15 bars in 2/4, eighth notes with a few sixteenths. Listen to one bar of the accompaniment, then sing it once on 'ah', then once with the words, at ♩=72. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranda Vaccai'nin dörtlü aralık dersini oku: 2/4'lük 15 ölçü, sekizlikler ve birkaç onaltılık. Eşlikten bir ölçü dinle, sonra onu bir kez 'a' ile, sonra bir kez sözlerle ♩=72'de söyle. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
     "tempo": {
       "open": 72,
@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "2/4: qr 5,:e 1:e | 5,:e 1:e 6,:e 2:e | 1:e 5,:s sr 2:e 6,:e | 2:e 6,:e 2:e 2:e | 3:e 7,:s sr 5,:e 1:e | 5,:e 1:e 6,:e 2:e | 1:e 5,:s sr 6,:e 2:e | 7,:e 3:e 1:e 4:e | 2:q 5:e 2:e | 3:e 1:e 2:e 6,:s 7,:s | 1:e er 6,:e 2:e | 7,:e 3:e 1:e 4:e | 2:q 5:e 2:e | 3:e 1:e 2:e 6,:s 7,:s | 1:q qr"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -121,7 +122,7 @@
     "en": "Sing the whole lesson on 'ah' only; add the words on another day.",
     "tr": "Bütün dersi yalnız 'a' ile söyle; sözleri başka bir gün ekle."
   },
-  "repertoire": "Nicola Vaccai (1790–1848), Metodo pratico di canto italiano per camera: one selected interval lesson (lesson to be fixed with the transcription). Words by Pietro Metastasio (1698–1782). Source: London first edition, 1832. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Nicola Vaccai (1790–1848), Metodo pratico di canto italiano per camera: Lezione II, Salti di quarta (interval of the fourth; No. 3, Adagio, G major, 2/4), the whole lesson, 15 bars; words by Pietro Metastasio (1698–1782), beginning \"Lascia il lido\". Source: Boston, G. D. Russell & Co., Russell's New and Improved Edition, revised by Vincenzo Vannini, copyright 1878, p. 12 (https://archive.org/details/imslp-pratico-de-canto-vaccai-nicola, PDF p. 11). Public domain: composer died 1848, poet died 1782; edition published 1878 (before 1931); the edition's English translation and markings are not used. Legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

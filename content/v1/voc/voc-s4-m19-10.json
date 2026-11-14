@@ -49,8 +49,8 @@
       "A5"
     ],
     "task": {
-      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase first, then the whole lesson at ♩=72. Breathe only at the marks. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Ekranın gösterdiği bölümü oku. Eşlikten bir ölçü dinle, sonra onu 'a' ile, önce cümle cümle, sonra bütün dersi ♩=72'de söyle. Yalnız işaretlerde nefes al. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+      "en": "Read Concone's Lesson No. 5 on screen: 32 bars in 4/4, mostly half and whole notes. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase first, then the whole lesson at ♩=72. Breathe only at the marks. Start at ♩=50 if you like; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranda Concone'nin 5 numaralı dersini oku: 4/4'lük 32 ölçü, çoğu ikilik ve birlik nota. Eşlikten bir ölçü dinle, sonra onu 'a' ile, önce cümle cümle, sonra bütün dersi ♩=72'de söyle. Yalnız işaretlerde nefes al. İstersen ♩=50'de başla; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
     "tempo": {
       "open": 72,
@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "3:h 5:h | 2:h. qr | 1:h 2:h | 3:h. qr | 3:h 6,:h | 6:h 4:q 2:q | 1:q 3:h 2:q | 1:h hr | 1:w~h 4:q qr | 1:w | 6:h 4:q qr | 6:h 5:h | 4:h 3:h | 2:h 1:h | 7,:h 5,:q qr | 2:w~h 7,:q qr | 7,:h 6,:h | 5,:h 5:q qr | 2:w~h 5:q 7:q | 7:h 6:h | 5:h. 4:q | 3:h 5:h | 2:h. qr | 1:h 2:h | 3:h. qr | 3:h 6,:h | 6:h 4:q 2:q | 1:q 3:h 2:q | 1:h. qr"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -121,7 +122,7 @@
     "en": "Sing the lesson in two halves at ♩=50, resting between them, then join them.",
     "tr": "Dersi ♩=50'de, aralarında dinlenerek iki yarıda söyle, sonra iki yarıyı birleştir."
   },
-  "repertoire": "Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9: one selected whole lesson (A) (lesson number to be fixed with the transcription). Source: 19th-century edition. Vocalise, no words. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Giuseppe Concone (1801–1861), 50 Leçons de chant pour le médium de la voix, Op. 9: Lesson No. 5 (Moderato, F major, 4/4), the whole lesson, 32 bars. Source: Leipzig, C. F. Peters, Edition Peters No. 980, plate 6437 (catalogued 1880; the archive.org record names a Universal Edition revised by Ed. Gärtner, but the scan is the Peters edition), p. 6 (https://archive.org/details/50leconsdechantp00conc, PDF p. 8). Public domain: composer died 1861; edition published before 1931; no editorial markings taken. Vocalise, no words. Legal review pending. Degrees, personal key, accompaniment, dynamics and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

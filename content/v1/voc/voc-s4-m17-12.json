@@ -5,8 +5,8 @@
     "tr": "Concone: akıcı bir ders"
   },
   "goal": {
-    "en": "Sings a selected flowing passage from Concone's Op. 9 on one vowel at ♩=72, keeping its quick notes even and its line connected.",
-    "tr": "Concone'nin Op. 9'undan seçilmiş akıcı bir bölümü tek ünlüyle ♩=72'de, hızlı notalarını eşit ve çizgisini bağlı tutarak söyler."
+    "en": "Sings the first 12 bars of Concone's Op. 9 No. 14 on one vowel at ♩=72, keeping its eighth-note groups even and its line connected.",
+    "tr": "Concone'nin Op. 9 No. 14'ünün ilk 12 ölçüsünü tek ünlüyle ♩=72'de, sekizlik gruplarını eşit ve çizgisini bağlı tutarak söyler."
   },
   "explanation": [
     {
@@ -14,16 +14,16 @@
       "tr": "Giuseppe Concone 19. yüzyılda yaşamış İtalyan bir şan öğretmeniydi. 50 dersi, Op. 9, vokalizdir: sözsüz, bir ünlüyle söylenen ezgiler."
     },
     {
-      "en": "This passage flows: groups of quicker notes sit on one vowel, like the runs in this module.",
-      "tr": "Bu bölüm akar: daha hızlı nota grupları tek bir ünlü üzerindedir, bu modüldeki koşular gibi."
+      "en": "You sing bars 1–12 of No. 14, Allegro giusto, in E minor and 4/4; degrees count from the minor home note, 1. Long notes, some tied across the bar line, flow into groups of three or four eighths that move by step on one vowel, like the runs in this module.",
+      "tr": "No. 14'ün (Allegro giusto) 1–12. ölçülerini Mi minör ve 4/4'te söylersin; dereceler minörün ev notasından, 1'den sayılır. Bazıları ölçü çizgisini aşarak bağlanan uzun notalar, tek ünlü üzerinde basamakla ilerleyen üçlü ya da dörtlü sekizlik gruplarına akar; bu modüldeki koşular gibi."
     },
     {
       "en": "Keep the quick notes even and light, and let the longer notes sing. The line never stops inside a phrase.",
       "tr": "Hızlı notaları eşit ve hafif tut; uzun notalar şarkı söylesin. Çizgi bir cümlenin içinde hiç durmaz."
     },
     {
-      "en": "Breathe only at the marks, and take an easy breath, not a big one. Shape each phrase toward its end and finish it gently.",
-      "tr": "Yalnız işaretlerde nefes al; büyük değil, rahat bir nefes. Her cümleyi sonuna doğru biçimlendir ve yumuşakça bitir."
+      "en": "Breathe only at the marks and in the rests: in bars 2 and 6 the mark comes right after the tied note, before the eighths. Take an easy breath, not a big one. The passage ends on low ♭7, a half close; the lesson continues in the book.",
+      "tr": "Yalnız işaretlerde ve suslarda nefes al: 2. ve 6. ölçülerde işaret bağlı notanın hemen ardından, sekizliklerden önce gelir. Büyük değil, rahat bir nefes al. Bölüm alttaki ♭7'de, yarım bir duruşla biter; ders kitapta devam eder."
     },
     {
       "en": "The app moves the passage into your personal key, and the accompaniment follows. Sing on 'ah'. If the throat tightens or you get tired, end the lesson for today.",
@@ -52,6 +52,7 @@
       "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase at ♩=54 first, then the whole passage at ♩=72. Breathe only at the marks. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
       "tr": "Ekranın gösterdiği bölümü oku. Eşliğin bir ölçüsünü dinle, sonra onu 'a' ile söyle; önce ♩=54'te cümle cümle, sonra bütün bölümü ♩=72'de. Yalnız işaretlerde nefes al. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
     },
+    "sequence": "1:w~h~e 2:e b3:e 4:e | 5:h. 4:q | b3 2 1 qr | b6:w~h~e 4:e 2:e 1:e | b7,:h. b7:q | 5 4 b3 qr | b7:w~e 4:e 2:e 1:e b7,:q qr | b7:w~e 4:e 2:e 1:e b7,:q qr",
     "tempo": {
       "open": 72,
       "target": 72
@@ -64,6 +65,7 @@
   "safety": [
     "Ç",
     "V1",
+    "V2",
     "V5"
   ],
   "prerequisites": [],
@@ -121,7 +123,7 @@
     "en": "Sing only the first phrase at ♩=54 until it feels easy, then add one phrase at a time.",
     "tr": "İlk cümleyi rahat gelene kadar ♩=54'te tek başına söyle, sonra her seferinde bir cümle ekle."
   },
-  "repertoire": "Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9: one selected flowing lesson (selection; lesson to be chosen and its notes checked against the source edition). Source: 19th-century edition. Vocalise, no words. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "repertoire": "Giuseppe Concone (1801–1861), 50 Leçons de chant pour le médium de la voix, Op. 9: No. 14, Allegro giusto, E minor, bars 1–12 (selection). Source: Edition Peters No. 980 (Leipzig: C. F. Peters, plate 6437, c. 1880; printed by permission of Joh. André, Offenbach), p. 18; scan https://archive.org/details/50leconsdechantp00conc (catalogued as Universal, 1880; scan page 20). Public domain: composer died in 1861; edition published before 1930 with no editor named on the music. Vocalise, no words; voice line only, the piano part is not used. Legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

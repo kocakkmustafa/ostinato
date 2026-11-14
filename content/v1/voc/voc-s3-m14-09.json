@@ -2,8 +2,8 @@
   "id": "voc-s3-m14-09",
   "title": { "en": "Vaccai: the scale lesson", "tr": "Vaccai: gam dersi" },
   "goal": {
-    "en": "Sings a selected passage of Vaccai's scale lesson in a personal key at ♩=72, first on 'ah', then on its Italian words.",
-    "tr": "Vaccai'nin gam dersinden seçilmiş bir bölümü kişisel tonda ♩=72'de, önce 'a' ile, sonra İtalyanca sözleriyle söyler."
+    "en": "Sings Vaccai's scale lesson, Lesson 1, all 16 bars in a personal key at ♩=72, first on 'ah', then on its Italian words.",
+    "tr": "Vaccai'nin gam dersini, 1. dersin 16 ölçüsünün tamamını kişisel tonda ♩=72'de, önce 'a' ile, sonra İtalyanca sözleriyle söyler."
   },
   "explanation": [
     {
@@ -17,6 +17,10 @@
     {
       "en": "Most steps are slurred. Keep the line connected and move on the vowel; place each consonant quickly, just before its beat.",
       "tr": "Basamakların çoğu bağlıdır. Çizgiyi bağlı tut ve ünlü üzerinde ilerle; her ünsüzü vuruşundan hemen önce, çabucak yerleştir."
+    },
+    {
+      "en": "The lesson is in 4/4 and moves by step from low 1 up to 3 above 8. Two notes leave the scale: ♯4 in bar 3 leans up to 5, and ♭7 in bars 4–5 leans down to 6. Bars 11 and 15 have a dotted rhythm, 2 held for a beat and a half and then repeated as a short eighth.",
+      "tr": "Ders 4/4'lüktür ve alttaki 1'den 8'in üstündeki 3'e basamakla ilerler. İki nota gamın dışına çıkar: 3. ölçüdeki ♯4 5'e doğru yükselir, 4–5. ölçülerdeki ♭7 6'ya doğru iner. 11. ve 15. ölçülerde noktalı bir ritim vardır: 2 bir buçuk vuruş tutulur, sonra kısa bir sekizlikle tekrarlanır."
     },
     {
       "en": "Learn it in two steps. Sing the passage on 'ah' until the notes are secure, then add the words.",
@@ -41,11 +45,12 @@
       "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, sing it once on 'ah', then once with the words. Practise at a slower tempo first if you need to; the lesson counts at ♩=72. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
       "tr": "Ekranın gösterdiği bölümü oku. Eşliğin bir ölçüsünü dinle, bir kez 'a' ile, sonra bir kez sözlerle söyle. Gerekirse önce daha yavaş tempoda çalış; ders ♩=72'de sayılır. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
     },
+    "sequence": "1:h 2 3 | 4 5 6 qr | 2:h 3 #4 | 5 6 b7 qr | 2':h 1' b7 | 6 5 4 qr | 6:h 5 4 | 3 2 1 qr | 1:h 2 3 | 4 5 6 7 | 1':h 2':q. 2':e | 3':h hr | 3':h 2' 1' | 7 6 5 4 | 3:h 2:q. 2:e | 1:h hr",
     "tempo": { "open": 72, "target": 72 },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",
-  "safety": ["Ç", "V1"],
+  "safety": ["Ç", "V1", "V2"],
   "prerequisites": [],
   "selfCheck": [
     {
@@ -98,7 +103,7 @@
     "en": "Sing the whole passage on 'ah' only; add the words on another day.",
     "tr": "Bütün bölümü yalnız 'a' ile söyle; sözleri başka bir gün ekle."
   },
-  "repertoire": "Nicola Vaccai (1790–1848), Metodo pratico di canto italiano per camera: Lesson 1, the scale (selection). Words by Pietro Metastasio (1698–1782). Source: London first edition, 1832. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "repertoire": "Nicola Vaccai (1790–1848), Metodo pratico di canto italiano per camera (first published London, 1832): Lesson I, \"La Scala\" (No. 1), complete, 16 bars, Adagio, C major. Words by Pietro Metastasio (1698–1782). Notes checked against: A Practical Method of Italian Singing, Russell's New and Improved Edition, revised by Vincenzo Vannini, English translation by Henry Badger (Boston: G. D. Russell, 1878), p. 10; scan https://archive.org/details/imslp-pratico-de-canto-vaccai-nicola (IMSLP PMLP85474), scan page 9. Public domain: composer and poet died before 1850; the edition was published in 1878 (before 1930); only Vaccai's vocal line and Metastasio's Italian words are used, not the edition's translation or accompaniment. Legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }

@@ -18,8 +18,8 @@
       "tr": "Şarkı strofiktir: üç kıtanın hepsi aynı müziği kullanır. İlk kıtayı öğrenirsin; \"Sah ein Knab' ein Röslein stehn\" diye başlar."
     },
     {
-      "en": "The character is light and sweet. Keep the sound small and bright, with clear, short consonants.",
-      "tr": "Karakteri hafif ve tatlıdır. Sesi küçük ve parlak tut; ünsüzler net ve kısa olsun."
+      "en": "The character is light and sweet. Keep the sound small and bright, with clear, short consonants. The quick sixteenth-note groups are light turns around the main notes; sing them on one breath, without pushing.",
+      "tr": "Karakteri hafif ve tatlıdır. Sesi küçük ve parlak tut; ünsüzler net ve kısa olsun. Hızlı onaltılık grupları ana notaların çevresinde hafif dönüşlerdir; onları itmeden, tek nefeste söyle."
     },
     {
       "en": "German vowels are pure, like the five you practised. The 'ö' in Röslein is an 'e' sung with rounded lips; keep it steady.",
@@ -49,8 +49,8 @@
       "A5"
     ],
     "task": {
-      "en": "The app shows the first verse in degrees. Listen to one bar of the accompaniment, then sing it once on 'la', then once with the words, at ♩=76. Start at ♩=52 if you like; the lesson counts at ♩=76. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Uygulama ilk kıtayı derecelerle gösterir. Eşlikten bir ölçü dinle, sonra onu bir kez 'la' ile, sonra bir kez sözlerle ♩=76'da söyle. İstersen ♩=52'de başla; ders ♩=76'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+      "en": "The app shows the first verse in degrees: 14 bars in 2/4, from the voice entry to the end of the verse. Listen to one bar of the accompaniment, then sing it once on 'la', then once with the words, at ♩=76. Start at ♩=52 if you like; the lesson counts at ♩=76. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ilk kıtayı derecelerle gösterir: sesin girişinden kıtanın sonuna kadar 2/4'lük 14 ölçü. Eşlikten bir ölçü dinle, sonra onu bir kez 'la' ile, sonra bir kez sözlerle ♩=76'da söyle. İstersen ♩=52'de başla; ders ♩=76'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
     "tempo": {
       "open": 76,
@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "2/4: 3:e 3:e 3:e 3:e | 5:s 4:s 4:s 3:s 2:q | 2:e 2:e 3:e 4:e | 5:q 1':e er | 3:e 3:e 3:e 3:e | 5:s #4:s #4:s 3:s 2:q | 5:e 5:e 6:e. 5:s | #4:s 5:s 6:s 7:s 5:q | 5:s 7:s 6:s 5:s #4:s 3:s #2:s 3:s | 1':e. #4:s 5:q | 2:e 2:e 3:e 4:e | 5:e 6:s 7:s 1':q | 6:e 1':e 4:e 6:e | 1:e 3:s 2:s 1:q"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -121,7 +122,7 @@
     "en": "Sing the whole verse on 'la' only; add the words on another day.",
     "tr": "Bütün kıtayı yalnız 'la' ile söyle; sözleri başka bir gün ekle."
   },
-  "repertoire": "Heidenröslein, D 257, Franz Schubert (1797–1828); words Johann Wolfgang von Goethe (1749–1832). Source: first edition, 1821. Public domain, legal review pending. First verse, on 'la' and with the words. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Heidenröslein, D 257 (Op. 3 No. 3), Franz Schubert (1797–1828); words Johann Wolfgang von Goethe (1749–1832). Source: Schubert-Album, Band I, ed. Max Friedlaender, Leipzig: C. F. Peters (Edition Peters, plate 9023), c. 1890, p. 182, original key (scan: https://archive.org/details/schubertalbumsam00schu_0, PDF p. 192). The 1821 first edition (Cappi & Diabelli) was not reachable as a scan; this 19th-century Peters print follows it. Public domain: composer and poet died 1828/1832; edition published c. 1890 (before 1931 in the US), editor died 1934 (life + 70 elsewhere). Legal review pending. Vocal line of the first verse, bars 1–14 (voice entry to the end of the verse; the two-bar piano postlude is not sung). The edition's metronome mark is not used. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 14,
   "expertPending": true
 }

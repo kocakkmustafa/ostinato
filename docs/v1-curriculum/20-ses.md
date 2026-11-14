@@ -228,7 +228,7 @@ Ek güvenlik: tüm modül **V2**.
 | voc-s3-m12-07 | Relative major and minor / Paralel majör ve minör | Aynı notalardan majör ve minör tonu bulur | D: 4 soru + iki gamı ardışık söyle | D+M | A5 | — | — |
 | voc-s3-m12-08 | An original minor melody / Özgün minör ezgi | Minör ezgiyi söyler | Özgün 8 ölçü · ♩=70 | M | A3+A5 | SE | — |
 | voc-s3-m12-09 | Greensleeves / Greensleeves | Geleneksel ezgiyi söyler | 16 ölçü · ♩.=50 | M | A3+A5 | SE | — |
-| voc-s3-m12-10 | Scarborough Fair / Scarborough Fair | Dorian renkli geleneksel ezgiyi söyler | 16 ölçü · ♩=80 (yalnız ezgi; modern düzenlemeler değil) | M | A3+A5 | SE | — |
+| voc-s3-m12-10 | God Rest You Merry, Gentlemen / God Rest You Merry, Gentlemen | Doğal minör geleneksel noel ezgisini söyler | Anacrusis + 19 ölçü · ♩=80 (yalnız ezgi; Bramley & Stainer 1871, kamu malı) | M | A3+A5 | SE | — |
 | voc-s3-m12-11 | Interval chains in minor / Minörde aralık zincirleri | Minörde zinciri tempoda söyler | 1-♭3-2-4-♭3-5 · ♩=70 | M | A3+A5 | KL | — |
 | voc-s3-m12-12 | Minor checkpoint / Minör geçişi | Minör gam, arpej ve ezgiyi birleştirir | Gam + arpej + özgün 8 ölçü · ♩=76 · geçiş | M! | A3+A5 | SE | — |
 
@@ -311,7 +311,7 @@ Ek güvenlik: tüm modül **V2**.
 | voc-s4-m16-09 | Swing eighths / Swing sekizlikler | Swing'li sekizlik söyler | 2 ölçü, oran %60–70 · ♩=80 | M | A3 | KL | — |
 | voc-s4-m16-10 | Twelve-bar blues for singers / Şarkıcılar için 12-bar blues | 12 ölçülük formu sayıp girer | D: 3 soru + 12 ölçü özgün ezgi | D+M | A3+A5 | SE | — |
 | voc-s4-m16-11 | An original blues melody / Özgün blues ezgisi | Blues ezgisini söyler | Özgün 12 ölçü · ♩=80 | M | A3+A5 | SE | — |
-| voc-s4-m16-12 | Amazing Grace (pentatonic) / Amazing Grace (pentatonik) | Pentatonik geleneksel ezgiyi söyler | 16 ölçü, kişisel ton · ♩=80 | M | A3+A5 | SE | — |
+| voc-s4-m16-12 | Amazing Grace (pentatonic) / Amazing Grace (pentatonik) | Pentatonik geleneksel ezgiyi söyler | Anacrusis + 14 ölçü, kişisel ton · ♩=80 (Southern Harmony 1847) | M | A3+A5 | SE | — |
 | voc-s4-m16-13 | Improvising over twelve bars / On iki ölçüde doğaçlama | Form boyunca doğaçlar | 12 ölçü, havuz ≥%90 | M | A3+A5 | SE | — |
 | voc-s4-m16-14 | Pentatonic checkpoint / Pentatonik geçişi | Gam, kalıp ve doğaçlamayı birleştirir | 2 gam + 12 ölçü · ♩=80 · geçiş | M! | A3+A5 | SE | — |
 

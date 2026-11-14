@@ -5,8 +5,8 @@
     "tr": "Mozart: Komm, lieber Mai"
   },
   "goal": {
-    "en": "Sings the first verse of Mozart's Komm, lieber Mai, KV 596, in a personal key at ♩.=56, first on 'la', then with the German words.",
-    "tr": "Mozart'ın Komm, lieber Mai'ının (KV 596) ilk kıtasını kişisel tonda ♩.=56'da, önce 'la' ile, sonra Almanca sözleriyle söyler."
+    "en": "Sings the first verse of Mozart's Komm, lieber Mai, KV 596, in a personal key at ♩.=56 (♩=84), first on 'la', then with the German words.",
+    "tr": "Mozart'ın Komm, lieber Mai'ının (KV 596) ilk kıtasını kişisel tonda ♩.=56'da (♩=84), önce 'la' ile, sonra Almanca sözleriyle söyler."
   },
   "explanation": [
     {
@@ -14,8 +14,8 @@
       "tr": "Wolfgang Amadeus Mozart bu bahar şarkısını 1791'de, Christian Adolph Overbeck'in bir şiiri üzerine yazdı. Basit, strofik bir şarkıdır: her kıta aynı müziği kullanır."
     },
     {
-      "en": "It is in 6/8: two big beats per bar, each a dotted quarter. The tempo counts the big beats: ♩.=56.",
-      "tr": "Parça 6/8'liktir: ölçüde iki büyük vuruş, her biri noktalı dörtlük. Tempo büyük vuruşları sayar: ♩.=56."
+      "en": "It is in 6/8: two big beats per bar, each a dotted quarter. The tempo counts the big beats, ♩.=56; the app's click counts quarter notes, so the same speed shows as ♩=84.",
+      "tr": "Parça 6/8'liktir: ölçüde iki büyük vuruş, her biri noktalı dörtlük. Tempo büyük vuruşları sayar, ♩.=56; uygulamanın kliki dörtlük sayar, bu yüzden aynı hız ♩=84 olarak görünür."
     },
     {
       "en": "Let it swing gently. Lean a little on each big beat and keep the small notes between them light.",
@@ -36,8 +36,8 @@
       "S"
     ],
     "brief": {
-      "en": "The first verse in your comfortable range, soft synthesized voice, at ♩.=56 and ♩.=38, over an original simple accompaniment that marks the two big beats. Headphones recommended.",
-      "tr": "İlk kıta rahat menzilinde, yumuşak sentez ses, ♩.=56 ve ♩.=38; iki büyük vuruşu belirten özgün basit eşlikle. Kulaklık önerilir."
+      "en": "The first verse in your comfortable range, soft synthesized voice, at ♩.=56 (♩=84) and ♩.=38 (♩=57), over an original simple accompaniment that marks the two big beats. Headphones recommended.",
+      "tr": "İlk kıta rahat menzilinde, yumuşak sentez ses, ♩.=56 (♩=84) ve ♩.=38 (♩=57); iki büyük vuruşu belirten özgün basit eşlikle. Kulaklık önerilir."
     }
   },
   "practice": {
@@ -49,12 +49,12 @@
       "A5"
     ],
     "task": {
-      "en": "The app shows the first verse in degrees. Listen to one bar of the accompaniment, then sing it once on 'la', then once with the words, at ♩.=56. Start at ♩.=38 if you like; the lesson counts at ♩.=56. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Uygulama ilk kıtayı derecelerle gösterir. Eşlikten bir ölçü dinle, sonra onu bir kez 'la' ile, sonra bir kez sözlerle ♩.=56'da söyle. İstersen ♩.=38'de başla; ders ♩.=56'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+      "en": "The app shows the first verse in degrees. Listen to one bar of the accompaniment, then sing it once on 'la', then once with the words, at ♩.=56 (♩=84). Start at ♩.=38 (♩=57) if you like; the lesson counts at ♩.=56. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ilk kıtayı derecelerle gösterir. Eşlikten bir ölçü dinle, sonra onu bir kez 'la' ile, sonra bir kez sözlerle ♩.=56'da (♩=84) söyle. İstersen ♩.=38'de (♩=57) başla; ders ♩.=56'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
     "tempo": {
-      "open": 56,
-      "target": 56
+      "open": 84,
+      "target": 84
     },
     "pass": {
       "levelDefault": true
@@ -118,10 +118,10 @@
     }
   ],
   "adaptation": {
-    "en": "Sing the verse on 'la' at ♩.=38 first, then raise the tempo and add the words.",
-    "tr": "Önce kıtayı ♩.=38'de 'la' ile söyle, sonra tempoyu artır ve sözleri ekle."
+    "en": "Sing the verse on 'la' at ♩.=38 (♩=57) first, then raise the tempo and add the words.",
+    "tr": "Önce kıtayı ♩.=38'de (♩=57) 'la' ile söyle, sonra tempoyu artır ve sözleri ekle."
   },
-  "repertoire": "Komm, lieber Mai (Sehnsucht nach dem Frühling), KV 596, Wolfgang Amadeus Mozart (1756–1791); words Christian Adolph Overbeck (1755–1821). Source: 1791 edition. Public domain, legal review pending. First verse, on 'la' and with the words. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Komm, lieber Mai (Sehnsucht nach dem Frühlinge), KV 596, Wolfgang Amadeus Mozart (1756–1791); words Christian Adolph Overbeck (1755–1821). Sources compared: Oeuvres de Mozart, Cahier V (XXX Gesänge), Leipzig: Breitkopf & Härtel, c. 1815, No. XV, p. 58 (scan: https://archive.org/details/b2560918x, PDF p. 17); Mozart-Album (32 Lieder, low voice, D major), Braunschweig: H. Litolff, c. 1900, No. 14, p. 26 (scan: https://archive.org/details/mozartalbum32aus00moza, PDF p. 30). Public domain: composer and poet died 1791/1821; both prints published before 1931. Legal review pending. The 1791 first edition was not reachable as a scan, and the two prints differ in bars 10 and 14 (the note on \"ne\" in both \"gerne\" phrases), where the c. 1815 print is also smudged; the degree line is left out until the reading is confirmed against the first edition or the autograph. Tempo: ♩.=56 in 6/8, stored as ♩=84 because the app counts quarter-note beats. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 14,
   "expertPending": true
 }

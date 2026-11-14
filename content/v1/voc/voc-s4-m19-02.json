@@ -5,8 +5,8 @@
     "tr": "Shenandoah"
   },
   "goal": {
-    "en": "Sings the traditional melody Shenandoah, 16 bars, in a personal key at ♩=66, with long, calm phrases.",
-    "tr": "Geleneksel Shenandoah ezgisini, 16 ölçü, kişisel tonda ♩=66'da uzun ve sakin cümlelerle söyler."
+    "en": "Sings the traditional melody Shenandoah, the whole song (a pickup and 10 bars), in a personal key at ♩=66, with long, calm phrases.",
+    "tr": "Geleneksel Shenandoah ezgisinin tamamını (ön vuruş ve 10 ölçü) kişisel tonda ♩=66'da uzun ve sakin cümlelerle söyler."
   },
   "explanation": [
     {
@@ -14,8 +14,8 @@
       "tr": "Shenandoah 19. yüzyıldan geleneksel bir Amerikan şarkısıdır. Önce nehir kayıkçıları, sonra denizciler söyledi. Yalnız ezgiyi 'la' ile söylersin."
     },
     {
-      "en": "The phrases are long and slow, and most of them end on a held note. The whole song is one wide, calm line.",
-      "tr": "Cümleler uzun ve yavaştır; çoğu tutulan bir notayla biter. Bütün şarkı geniş ve sakin tek bir çizgidir."
+      "en": "The phrases are long and slow, and most of them end on a held note. The beat count changes: most bars have 3 beats, two have 4. Count quarter notes and the changes take care of themselves.",
+      "tr": "Cümleler uzun ve yavaştır; çoğu tutulan bir notayla biter. Vuruş sayısı değişir: çoğu ölçü 3, ikisi 4 vuruşludur. Dörtlükleri say; değişimler kendiliğinden yerine oturur."
     },
     {
       "en": "Breathe only at the ends of phrases. Take an easy breath and let it last the phrase; you don't need a big one.",
@@ -36,8 +36,8 @@
       "S"
     ],
     "brief": {
-      "en": "The 16 bars in your comfortable range, soft synthesized voice, at ♩=66 and ♩=45, over an original simple accompaniment. Headphones recommended.",
-      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=66 ve ♩=45; özgün basit eşlikle. Kulaklık önerilir."
+      "en": "The whole song in your comfortable range, soft synthesized voice, at ♩=66 and ♩=45, over an original simple accompaniment. Headphones recommended.",
+      "tr": "Şarkının tamamı rahat menzilinde, yumuşak sentez ses, ♩=66 ve ♩=45; özgün basit eşlikle. Kulaklık önerilir."
     }
   },
   "practice": {
@@ -49,8 +49,8 @@
       "A5"
     ],
     "task": {
-      "en": "The app shows the 16-bar melody in degrees. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=66. Start at ♩=45 if you like; the lesson counts at ♩=66. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
-      "tr": "Uygulama 16 ölçülük ezgiyi derecelerle gösterir. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=66'da söyle. İstersen ♩=45'te başla; ders ♩=66'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+      "en": "The app shows the whole melody in degrees: a pickup and 10 bars. Listen to one bar of the accompaniment, then sing the melody on 'la' at ♩=66. Start at ♩=45 if you like; the lesson counts at ♩=66. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Uygulama ezginin tamamını derecelerle gösterir: bir ön vuruş ve 10 ölçü. Eşlikten bir ölçü dinle, sonra ezgiyi 'la' ile ♩=66'da söyle. İstersen ♩=45'te başla; ders ♩=66'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
     },
     "tempo": {
       "open": 66,
@@ -58,7 +58,8 @@
     },
     "pass": {
       "levelDefault": true
-    }
+    },
+    "sequence": "4/4: hr qr 5,:q | 1:e 1:e 1:q. 2:e 3:e 4:e | 6:e 5:q. 1':e 7:e 6:q. 5:e 6:e 5:e 3:e 5:q. 5:q 6:e 6:e 6:q. 3:e 5:e 3:e 2:e 1:q. 2:q | 3:q. 1:e 3:e. 6:s 5:h. 1:e. 2:s 3:q. 2:e 2:q 1:h"
   },
   "fallback": "selfCheck",
   "safety": [
@@ -122,7 +123,7 @@
     "en": "Sing the first two phrases at ♩=45, resting between them, then add the rest one phrase at a time.",
     "tr": "İlk iki cümleyi aralarında dinlenerek ♩=45'te söyle, sonra kalanını her seferinde bir cümle ekleyerek söyle."
   },
-  "repertoire": "Shenandoah, traditional American song (19th century). Public domain, legal review pending. Melody only, sung on 'la'. Degrees, personal key, accompaniment and tempo by Ostinato. Melody to be transcribed from the source before the line is measured.",
+  "repertoire": "Shenandoah, traditional American song (19th century). Source: Richard Runciman Terry, The Shanty Book, Part I: Sailor Shanties, London: J. Curwen & Sons, 1921, No. 9, pp. 20–21, voice part, verse 1 with the last-verse ending (archive.org: https://archive.org/details/shantybooksailor00terr). Public domain: published 1921 (US pre-1931) and Terry died 1938 (life+70). Legal review pending. Melody only, sung on 'la'; Terry's piano and violin parts are not used. The source changes between 4/4 and 3/4; the sequence keeps that exact timing, with bar lines written only where the running beat total is a multiple of four. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 14,
   "expertPending": true
 }

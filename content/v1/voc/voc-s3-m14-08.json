@@ -2,8 +2,8 @@
   "id": "voc-s3-m14-08",
   "title": { "en": "Concone: a first lesson", "tr": "Concone: ilk ders" },
   "goal": {
-    "en": "Sings a selected passage of 8 to 16 bars from Concone's Op. 9 on one vowel, with its slurs and breath marks, at ♩=72.",
-    "tr": "Concone'nin Op. 9'undan seçilmiş 8–16 ölçülük bir bölümü tek ünlüyle, bağları ve nefes işaretleriyle ♩=72'de söyler."
+    "en": "Sings 16 bars of Concone's Op. 9 No. 1 (bars 9–24) on one vowel, with its slurs and breath mark, at ♩=72.",
+    "tr": "Concone'nin Op. 9 No. 1'inden 16 ölçüyü (9–24. ölçüler) tek ünlüyle, bağları ve nefes işaretiyle ♩=72'de söyler."
   },
   "explanation": [
     {
@@ -15,8 +15,8 @@
       "tr": "Bu dersler bu modülde çalıştığın uzun ve bağlı çizgiyi geliştirir. Notaların çoğu bağlıdır; ses her cümlenin içinde akmaya devam eder."
     },
     {
-      "en": "Read the passage on screen before you sing. Find the slurs, any staccato dots and the breath marks (').",
-      "tr": "Söylemeden önce ekrandaki bölümü oku. Bağları, varsa staccato noktalarını ve nefes işaretlerini (') bul."
+      "en": "You sing the second half of Lesson 1, in C major and 4/4: two short phrases on long notes (bars 9–16), then the opening tune returns and ends on 1 (bars 17–24). Bar 16 holds 2 for three beats; bar 22 has the only breath mark (').",
+      "tr": "1. dersin ikinci yarısını söylersin, Do majör ve 4/4: uzun notalarla iki kısa cümle (9–16. ölçüler), sonra açılış ezgisi geri gelir ve 1'de biter (17–24. ölçüler). 16. ölçü 2'yi üç vuruş tutar; tek nefes işareti (') 22. ölçüdedir."
     },
     {
       "en": "Breathe only at the marks, and take an easy breath, not a big one. Shape each phrase toward its end and finish it gently.",
@@ -41,11 +41,12 @@
       "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase at ♩=54 first, then the whole passage at ♩=72. Breathe only at the marks. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
       "tr": "Ekranın gösterdiği bölümü oku. Eşliğin bir ölçüsünü dinle, sonra onu 'a' ile söyle; önce ♩=54'te cümle cümle, sonra bütün bölümü ♩=72'de. Yalnız işaretlerde nefes al. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
     },
+    "sequence": "5:h 7:h | 1':h 5:q qr | 2':h 5:h | 3':h 1':q qr | 5:h 7:h | 1':h 5:q qr | 4 5 3 5 | 2:h~q qr | 1:h 2:h | 3:q. 4:e 5:q qr | 6:h 7:h | 1':q. 2':e 3':q qr | 3':h. 2':q | 1':h. 6:q | 5:w | 1:q qr hr",
     "tempo": { "open": 72, "target": 72 },
     "pass": { "levelDefault": true }
   },
   "fallback": "selfCheck",
-  "safety": ["Ç", "V1"],
+  "safety": ["Ç", "V1", "V2"],
   "prerequisites": [],
   "selfCheck": [
     {
@@ -98,7 +99,7 @@
     "en": "Sing only the first phrase at ♩=54 until it feels easy, then add one phrase at a time.",
     "tr": "İlk cümleyi rahat gelene kadar ♩=54'te tek başına söyle, sonra her seferinde bir cümle ekle."
   },
-  "repertoire": "Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9: one selected lesson (selection, 8–16 bars). Source: 19th-century edition. Vocalise, no words. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "repertoire": "Giuseppe Concone (1801–1861), 50 Leçons de chant pour le médium de la voix, Op. 9: No. 1, Moderato, C major, bars 9–24 of 24 (selection). Source: Edition Peters No. 980 (Leipzig: C. F. Peters, plate 6437, c. 1880; printed by permission of Joh. André, Offenbach), p. 2; scan https://archive.org/details/50leconsdechantp00conc (catalogued as Universal, 1880; scan page 4). Public domain: composer died in 1861; edition published before 1930 with no editor named on the music. Vocalise, no words; voice line only, the piano part is not used. Legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
   "minutes": 15,
   "expertPending": true
 }
