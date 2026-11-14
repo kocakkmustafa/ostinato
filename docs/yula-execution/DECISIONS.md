@@ -65,3 +65,16 @@ Karar: Mevcut pratik ekranına küçük bir anahtar ("Öğrendikçe rehberleri a
 3. Güvenlik/maliyet: Ağ, ham ses, yeni bağımlılık, kalıcı depolama yok; maliyet farkı yok.
 4. Geri dönüş: bayrak kapalı bırakılır (varsayılan) ya da PR geri alınır; veri bağımlılığı yok.
 5. Kullanıcı: kademeli öğrenen gitar/kulak kullanıcısı; rehberi her an geri açabilir.
+
+## ADR-007 — Şifreli cihaz-içi take deposu (OST-P0-08B): `cryptography` + `flutter_secure_storage`, saklama KAPALI
+Tarih: 2026-11-14 · Durum: KABUL (bileşen kuruldu; politika ve UI dokunulmadı)
+Karar: AES-256-GCM için `cryptography` ^2.9.0 (saf Dart, Apache-2.0), anahtar için `flutter_secure_storage` ^11.2.0 (BSD-3, iOS Keychain / Android Keystore köprüsü; elle native köprü yok). `EncryptedTakeStore` (take id → `<id>.take`: sürüm 1B + nonce 12B + mac 16B + şifreli metin; her yazımda yeni rastgele nonce; id AAD'ye bağlı) ve `KeyStore` soyutlaması (`SecureKeyStore` üretimde; testte bellek içi). "Hepsini sil" önce anahtarı siler. `exportTo` yalnız açık çağrıyla çözülmüş WAV yazar. HİÇBİR akışa/UI'a bağlı değil; `persistentArchive` kararı `denied` kalır (ADR-005 regresyon testi); bayrak eklenmedi/açılmadı.
+Seçim: `cryptography` 2.9.0 ve `flutter_secure_storage` 11.2.0 pub.dev'de güncel; `flutter_secure_storage` Android minSdk 24 = `flutter.minSdkVersion` (Flutter 3.47.5'te 24), iOS Darwin ayağı 13.0 ≤ projenin 15.0. Yeni ücretli servis 0 USD; paketler ağ kullanmaz.
+Reddedilenler: (a) `pointycastle` doğrudan: düşük seviye GCM, mac/nonce/AAD elle yönetilir (hata yüzeyi büyük); zaten geçişli, ama güvenli API değil. (b) `encrypt` paketi: bakımsız/AES-GCM'de kimlik doğrulama ve AAD zayıf. (c) Anahtarı dosyayla aynı dizinde/SharedPreferences'ta tutmak: şifrelemeyi anlamsız kılar. (d) Elle Keychain/Keystore köprüsü: bakım yükü, plugin yeterli. (e) `cryptography_flutter` (native hızlandırma): ek bağımlılık; 180 sn tek take için saf Dart yeterli olacak şekilde ölçülmedi (açık, bkz. devir notu).
+Bekçi sınıflaması: `test/ost_p0_02_egress_test.dart` içe aktarma ve token taraması YENİ importları kırmadı (ağ/hesap değil). Yalnız "dart:io yalnız bilinen yerel-dosya dosyalarında" izin listesi `encrypted_take_store.dart` için kırıldı; listeye tek satır (yerel dosya, ağ yok gerekçesiyle) eklendi, desen gevşetilmedi.
+Android: Auto Backup anahtarı ve şifreli dosyaları ayrı geri yükleyip çözülemez dosya üretmesin diye `FlutterSecureStorage.xml` ve `files/encrypted_takes/` yedekten çıkarıldı (`backup_rules.xml`, `data_extraction_rules.xml`; yalnız bu yollar).
+1. Bilgi: ADR-005 bu bileti ertelemişti; kullanıcıya görünen bir değişiklik yok.
+2. Delil: `test/ost_p0_08b_encrypted_store_test.dart` (gidiş-dönüş, "RIFF" yok, nonce farkı, bayt bozma, yanlış anahtar, silme, hepsini sil+anahtar, export, id güvenliği, politika regresyonu).
+3. Güvenlik/maliyet: Ham ses düz metin olarak kalıcı dizine yazılmaz (geçici dosya da yalnız şifreli metin); 0 USD.
+4. Geri dönüş: PR geri alınır ya da kullanılmaz; çağıran yok.
+5. Kullanıcı: yok (henüz erişilemez).

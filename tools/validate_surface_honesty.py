@@ -374,7 +374,9 @@ RETENTION_WRITERS_RECONCILED = {"session_store.dart", "guitar_journey_progress.d
                                 "tuner_check_memory.dart",
                                 "own_recording.dart",
                                 # Hayalet Ekran basamak 1–4 + geçerli koşu sayacı; ölçümden türeyen özet, ham ses/poz/açı/kayıt yok; mevcut ilerleme kayıtlarıyla (bestAccuracy/bestHeard/bestBpm) aynı sınıf; yerel, ağa çıkmaz; OST-UX-05g, Motion orchestration kararı.
-                                "ghost_store.dart"}
+                                "ghost_store.dart",
+                                # 2026-11-14 yeniden-ölçüm (OST-P0-08B, Motion kararı): yalnız şifreli WAV (ham SES) yazar (put/exportTo); altı öznenin (angle/landmark/measurement/video/your footage/history) hiçbirini yazmaz, altısının False'u değişmez. Uygulamaya BAĞLI DEĞİL (tripwire: test/ost_p0_08b_encrypted_store_test.dart); bağlayan bilet SES yokluk iddialarını, docs/store taslaklarını ve gizlilik metnini yeniden ölçmek zorunda.
+                                "encrypted_take_store.dart"}
 
 # ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────
 #
@@ -735,6 +737,16 @@ NETWORK_DEPS_KNOWN_SAFE = {
     "web": "tarayıcı JS-interop bağlamaları — ÖLÇÜLDÜ: bu depoda `web/` dizini YOK, hedef platformlar yalnız android+ios; kullanılsa bile ÇAĞIRAN kod sorumludur ve kanal ① onu yakalar",
     "xdg_directories": "Linux XDG dizin yolları, dosya sistemi — ağ değil",
     "yaml": "YAML ayrıştırma, kendi başına I/O yapmaz",
+    # OST-P0-08B, Motion kararı (⚖️ Karar — OST-P0-08B bekçi sınıflandırması, 2026-11-14).
+    "cryptography": "ÖLÇÜLDÜ 2026-11-14: 2.9.0 saf Dart şifreleme; kaynakta ağ istemcisi yok",
+    "flutter_secure_storage": "ÖLÇÜLDÜ 2026-11-14: 11.2.0 Keychain/Keystore/yerel depo; kaynakta ağ istemcisi yok",
+    "flutter_secure_storage_darwin": "ÖLÇÜLDÜ 2026-11-14: 0.4.3 Keychain köprüsü; kaynakta ağ istemcisi yok",
+    "flutter_secure_storage_linux": "ÖLÇÜLDÜ 2026-11-14: 3.0.3 yerel depo; kaynakta ağ istemcisi yok",
+    "flutter_secure_storage_platform_interface": "ÖLÇÜLDÜ 2026-11-14: 2.1.1 platform sözleşmesi; kaynakta ağ istemcisi yok",
+    "flutter_secure_storage_web": "ÖLÇÜLDÜ 2026-11-14: 2.1.1 web depo; kaynakta ağ istemcisi yok (web sevki yok)",
+    "flutter_secure_storage_windows": "ÖLÇÜLDÜ 2026-11-14: 4.2.2 yerel depo; kaynakta ağ istemcisi yok",
+    "win32": "ÖLÇÜLDÜ 2026-11-14: 6.4.0 Windows API bağlamaları; Winsock (ws2_32) bağlamaları VAR ama yalnız Windows'ta yüklenir: depoda `windows/` yok, hedef yalnız android+ios, lib/ içinde doğrudan çağrı 0, tek çağıran flutter_secure_storage_windows (emsal: `web`)",
+    "ffi_leak_tracker": "ÖLÇÜLDÜ 2026-11-14: 0.1.2 win32'nin bağımlılığı, FFI ayırma izleyici; ağ istemcisi yok",
 }
 
 
