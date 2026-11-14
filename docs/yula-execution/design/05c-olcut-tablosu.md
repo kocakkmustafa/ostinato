@@ -40,3 +40,11 @@ Reviewer tur 2: tur 1 bulguları #1–#7 ve #9 kapandı, regresyon yok, bayrak K
 - B. `_sessionMiss = missFromSummary(...)` `passed` bakmıyor, `missFromRecord` geçilmiş dersi `none` yapıyor: oturum içi ile yeniden açılış öneri satırı çelişebilir (determinizm bozulmuyor).
 - D. `_starting=false` `_begin()` öncesi atanıyor; `_begin`'in izin penceresinde ek dokunuş ikinci `_begin` başlatabilir (eski ekranda da var, yeni regresyon değil).
 - E. `stage-headline` oturum içi ilk koşudan sonra güncellenmiyor ("Yeni başlıyorsun" kalır).
+
+## Tur 2 notları — kapanış
+Bayraklar (`ostinatoStageHomeEnabled`, `ostinatoGhostScreenOpen`) KAPALI; yeni özellik/metin yok. Testler: `test/ux_flagnotes_a_d_test.dart`, `test/stage_home_test.dart` ("ek B: `passed` decides").
+- A KAPALI: "A: guard false, CAL tekrar basilir, guard ikinci kez sorulur"; `_starting=false` kaldırılınca kırmızı (`Expected 2 Actual 1`, `a_mutation_red.txt`). Devir notu: guard hiç dönmezse ÇAL sessiz kalır; zaman aşımı eklenmedi, bilinçli; kurucu kabul kaydı yok.
+- B KAPALI (kodda zaten tek kural): `missFromSummary` yok; `_afterRun` de `missFromRecord(lastRunRecord(..))` kullanır. Eski "ek B" testleri `passed`'i ayırt etmiyordu (`_afterRun` "passed yok say" mutasyonuyla yeşil kaldı: `b_afterrun_mutation.txt`). Yeni test: `passed` kayıtlı, `bestHeard 0.5` → oturum içi ve yeniden açılış satırı ikisi de pickUp; mutasyonla kırmızı (`b2_passed_mutation_red.txt`).
+- D GERÇEK, DÜZELTİLDİ: izin penceresinde ek dokunuş `_begin` bookkeeping'ini tekrarlıyordu (`onStarted` 3 kez; `Expected 1 Actual 3`, `d_baseline2.txt`). İkinci izin isteği/yakalama yoktu (`MicPermissionGate._pending`, `_c.start` retire). Düzeltme: `_beginning` bayrağı (`finally` ile temizlenir). Testler: "D", "D2" (red sonrası ÇAL tekrar çalışır), "D3" (bayrak kapalı yol, `beforeStart==null`: o yol da artık izin penceresinde ek dokunuşu yutar, bookkeeping tek). `finally` sıfırlaması kaldırılınca D2+D3 kırmızı (`d_finally_mutation_red.txt`).
+- D riski: capture hiç dönmezse `_beginning` takılı, ÇAL sessiz kalır (`MicPermissionGate`: izin SONRASI `settled` bekleyişi zaman aşımlı, `request()` zaman aşımsız; OS diyaloğu döndüğü için risk küçük). Bilinçli; kurucu kabul kaydı yok.
+- E KAPALI (kodda zaten): başlık `data.hasRecords || _ranThisSession`; mevcut "ek E" testi; `_ranThisSession` silinince kırmızı (`e_mutation_red.txt`).

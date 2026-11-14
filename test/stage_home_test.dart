@@ -1782,6 +1782,41 @@ void main() {
       await _dispose(t, rig2);
     });
 
+    testWidgets('ek B: `passed` decides - a passed record with low bestHeard '
+        'reads none (pickUp) in session AND after reopen', (t) async {
+      final rig = _Rig();
+      final mem = _Memory();
+      await boot(t, _stage(rig, wrap: withRepo, progress: mem));
+      final id = lessonId(t);
+      mem.records[id] = V1PracticeRecord(
+        lessonId: id,
+        runs: 1,
+        bestHeard: 0.5,
+        bestAccuracy: 0.5,
+        lastRunAt: DateTime.utc(2026, 11, 1),
+        passedAt: DateTime.utc(2026, 11, 1),
+      );
+      t
+          .widget<PracticeLoopScreen>(find.byType(PracticeLoopScreen))
+          .onRunRecorded!();
+      for (var i = 0; i < 4; i++) {
+        await t.runAsync(() => Future<void>.delayed(Duration.zero));
+        await t.pump();
+      }
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      final inSession = shownSuggestions();
+      await _dispose(t, rig);
+
+      final rig2 = _Rig();
+      await boot(t, _stage(rig2, wrap: withRepo, progress: mem));
+      await t.tap(find.byKey(const Key('stage-handle-other')));
+      await settle(t);
+      expect(inSession, [StageCopy.suggestPickUp]);
+      expect(shownSuggestions(), inSession);
+      await _dispose(t, rig2);
+    });
+
     testWidgets('ek E: the headline updates after the first run', (t) async {
       final rig = _Rig();
       final mem = _Memory();
