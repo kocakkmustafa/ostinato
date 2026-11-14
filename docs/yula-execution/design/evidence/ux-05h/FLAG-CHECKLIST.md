@@ -7,9 +7,9 @@ Bayraklar `ostinatoStageHomeEnabled` ve `ostinatoGhostScreenOpen` KAPALI. Bu lis
 | 1 | 05b2 (i): Çal'da üyelik yeniden doğrulama | KAPALI (05c `beforeStart`, fail-closed) | 05c notu |
 | 2 | 05b2 (ii): güvenlik satırı 360×640 + 1.3 + raf | KISMİ (05h-1 ölçüldü; hata mesajı gövdede, elle doğrulanmadı); 320×568 ve yatayda tam sığmaz, kaydırılır | 05h-1 |
 | 3 | 05b2 (iii): mikrofon reddi sonrası akort kartı / "Ayar" yolu | KAPALI (05f) | 05f |
-| 4 | 05c Tur 2 A: `_starting` sıfırlama testi yok, guard hiç dönmezse ÇAL sessiz | AÇIK | `05c-olcut-tablosu.md` Tur 2 |
-| 5 | 05c Tur 2 B: oturum içi / yeniden açılış öneri satırı `passed` farkı | AÇIK (05d'ye devredilmişti; kapandığı doğrulanmadı) | aynı |
-| 6 | 05c Tur 2 E: başlık oturum içinde güncellenmez | AÇIK | aynı |
+| 4 | 05c Tur 2 A: `_starting` sıfırlama testi yok, guard hiç dönmezse ÇAL sessiz | KAPALI (test `ux_flagnotes_a_d_test.dart` "A:"; sıfırlama kaldırılınca kırmızı `Expected 2 Actual 1`, `scratch/2026-11-14-ostinato-flagnotes/a_mutation_red.txt`). Guard hiç dönmezse ÇAL sessiz: bilinçli, zaman aşımı yok (üyelik sayfası açabilir; kabul edilen davranış) | `05c-olcut-tablosu.md` Tur 2 kapanış |
+| 5 | 05c Tur 2 B: oturum içi / yeniden açılış öneri satırı `passed` farkı | KAPALI (kod zaten tek kural: `_afterRun` de `missFromRecord(lastRunRecord(..))` kullanır, `missFromSummary` yok; mevcut "ek B" testleri; `passed` kontrolü silinince kırmızı: `b_mutation_red.txt`) | aynı |
+| 6 | 05c Tur 2 E: başlık oturum içinde güncellenmez | KAPALI (kod zaten `data.hasRecords \|\| _ranThisSession`; mevcut "ek E" testi; `_ranThisSession` silinince kırmızı: `e_mutation_red.txt`) | aynı |
 | 7 | 05c: gerçek `openTuner` / `_earScreen` taklit | AÇIK (`NOT_TESTED`) | 05c notu |
 | 8 | 05d: Core `requirePaidAccess`/`coreGate` zaman aşımsız (`MOTION-CORE-ZA-01`) | KURUCU | Görev Panosu 2026-11-11 |
 | 9 | 05d: Yol/Geçmiş testleri uygulama sonrası yazıldı (sabotajla kırmızı) | KAPALI (bilinen sapma, kayıtlı) | Görev Panosu |
@@ -23,7 +23,7 @@ Bayraklar `ostinatoStageHomeEnabled` ve `ostinatoGhostScreenOpen` KAPALI. Bu lis
 | 17 | Sahne yükleme hatası ile "ölçülen ders yok" aynı durum | AÇIK (ayrı bilet) | 05h-2 |
 | 18 | Üyelik zaman aşımı yükte sessizce ücretsiz ders gösterir | KURUCU (05b2 kararı) | 05h-2 |
 | 19 | Senkron/hesap yüzeylerinin "çevrimdışı" metni | AÇIK (Core işi) | 05h-2 |
-| 20 | Ayarlar bayrakları (#70 OST-P0-06, #71 OST-P0-08) notları | AÇIK: bu bilette içerikleri okunmadı; Motion orchestration kontrol etmeli | Görev Panosu satır 41, 77–80 |
+| 20 | Ayarlar bayrakları (#70 OST-P0-06, #71 OST-P0-08) notları | #70 → ostinato#98 666acbe, #71 → ostinato#97 e5386ea: KAPALI (kod); bayrak açma kararı Motion/kurucu | Görev Panosu satır 41, 77–80 |
 | 21 | Gerçek cihaz (kare süresi, bulanık katman; izin reddi "Başlat") | AÇIK (`NOT_TESTED`) | backlog satır 28, 89 |
 | 22 | Ekran okuyucu (VoiceOver/TalkBack) elle doğrulama | AÇIK (yapılmadı) | 05h-1/05h-2 |
 | 23 | T13 "ekran hatada durmaz": çalışırken hata testi yok | AÇIK | `INDEX.md` |

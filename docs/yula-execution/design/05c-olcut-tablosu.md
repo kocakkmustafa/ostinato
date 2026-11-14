@@ -40,3 +40,10 @@ Reviewer tur 2: tur 1 bulguları #1–#7 ve #9 kapandı, regresyon yok, bayrak K
 - B. `_sessionMiss = missFromSummary(...)` `passed` bakmıyor, `missFromRecord` geçilmiş dersi `none` yapıyor: oturum içi ile yeniden açılış öneri satırı çelişebilir (determinizm bozulmuyor).
 - D. `_starting=false` `_begin()` öncesi atanıyor; `_begin`'in izin penceresinde ek dokunuş ikinci `_begin` başlatabilir (eski ekranda da var, yeni regresyon değil).
 - E. `stage-headline` oturum içi ilk koşudan sonra güncellenmiyor ("Yeni başlıyorsun" kalır).
+
+## Tur 2 notları — kapanış
+Bayraklar (`ostinatoStageHomeEnabled`, `ostinatoGhostScreenOpen`) KAPALI; yeni özellik/metin yok. Testler: `test/ux_flagnotes_a_d_test.dart`.
+- A KAPALI: "A: guard false, CAL tekrar basilir, guard ikinci kez sorulur"; `_starting=false` kaldırılınca kırmızı (`Expected 2 Actual 1`). Devir notu: guard hiç dönmezse ÇAL sessiz kalır; zaman aşımı eklenmedi, bilinçli (guard üyelik sayfası açabilir).
+- B KAPALI (kodda zaten): `missFromSummary` yok; oturum içi `_afterRun` de yeniden açılış gibi `missFromRecord(lastRunRecord(..))` kullanır, geçilmiş ders `none`. Mevcut "ek B" testleri; `passed` kontrolü silinince `missFromRecord ... passed -> none` kırmızı. Önce-kırmızı yeni test mümkün değil (davranış zaten doğru).
+- D GERÇEK, DÜZELTİLDİ: izin penceresinde ek dokunuş `_begin` bookkeeping'ini tekrarlıyordu (`onStarted` 3 kez; `Expected 1 Actual 3`). İkinci izin isteği ve ikinci yakalama yoktu (`MicPermissionGate._pending`, `_c.start` retire). Düzeltme: `_beginning` bayrağı (`_begin` başına, `finally` ile temizlenir). Test: "D: izin penceresinde ek dokunus ikinci _begin baslatmaz".
+- E KAPALI (kodda zaten): başlık `data.hasRecords || _ranThisSession`; mevcut "ek E" testi; `_ranThisSession` silinince kırmızı ("Yeni başlıyorsun" kalır).

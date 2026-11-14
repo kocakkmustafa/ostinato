@@ -564,18 +564,28 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
     });
   }
 
+  // True from `_begin` until the capture start (permission dialog included)
+  // returns: a tap in that window must not run `_begin` a second time.
+  bool _beginning = false;
+
   void _begin() {
+    if (_beginning) return;
+    _beginning = true;
     _ranOnce = true;
     widget.onStarted?.call();
     unawaited(() async {
-      // Output and input never share the session: release the reference
-      // before the capture action reads the native all-clear.
-      if (_listen.busy) await _listen.stop();
-      if (!mounted) return;
-      await startPracticeCapture(
-        context,
-        (action) => _c.start(captureAction: action),
-      );
+      try {
+        // Output and input never share the session: release the reference
+        // before the capture action reads the native all-clear.
+        if (_listen.busy) await _listen.stop();
+        if (!mounted) return;
+        await startPracticeCapture(
+          context,
+          (action) => _c.start(captureAction: action),
+        );
+      } finally {
+        _beginning = false;
+      }
     }());
   }
 
