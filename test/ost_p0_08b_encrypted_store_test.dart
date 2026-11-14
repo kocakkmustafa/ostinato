@@ -3,9 +3,11 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ostinato/app/practice/own_recording/encrypted_take_store.dart';
 import 'package:ostinato/app/practice/own_recording/recording_retention_policy.dart';
+import 'package:ostinato/app/practice/own_recording/secure_key_store.dart';
 
 /// In-memory stand-in for the Keychain/Keystore bridge.
 final class MemoryKeyStore implements KeyStore {
@@ -27,6 +29,51 @@ final class MemoryKeyStore implements KeyStore {
     deletes++;
     _key = null;
   }
+}
+
+/// Fake secure storage: only read/write/delete are used by SecureKeyStore.
+final class _FakeSecure implements FlutterSecureStorage {
+  final Map<String, String> data = {};
+  @override
+  Future<String?> read({
+    required String key,
+    AppleOptions? iOptions,
+    AndroidOptions? aOptions,
+    LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    AppleOptions? mOptions,
+    WindowsOptions? wOptions,
+  }) async => data[key];
+  @override
+  Future<void> write({
+    required String key,
+    required String? value,
+    AppleOptions? iOptions,
+    AndroidOptions? aOptions,
+    LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    AppleOptions? mOptions,
+    WindowsOptions? wOptions,
+  }) async {
+    if (value == null) {
+      data.remove(key);
+    } else {
+      data[key] = value;
+    }
+  }
+
+  @override
+  Future<void> delete({
+    required String key,
+    AppleOptions? iOptions,
+    AndroidOptions? aOptions,
+    LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    AppleOptions? mOptions,
+    WindowsOptions? wOptions,
+  }) async => data.remove(key);
+  @override
+  dynamic noSuchMethod(Invocation i) => throw UnimplementedError('$i');
 }
 
 Uint8List _wav([int samples = 4000]) {
@@ -264,4 +311,177 @@ void main() {
       expect(hits, allowed);
     },
   );
+
+  test('concurrent first puts share ONE key (no lost-key race)', () async {
+    await Future.wait([
+      for (var n = 0; n < 6; n++) store.put('t$n', _wav(200 + n)),
+    ]);
+    for (var n = 0; n < 6; n++) {
+      expect(await store.read('t$n'), orderedEquals(_wav(200 + n)));
+    }
+  });
+
+  test('concurrent puts of the same id do not clash on a temp file', () async {
+    await Future.wait([
+      for (var n = 0; n < 6; n++) store.put('same', _wav(300 + n)),
+    ]);
+    final back = await store.read('same');
+    expect([
+      for (var n = 0; n < 6; n++) _wav(300 + n).length,
+    ], contains(back.length));
+    expect(await store.ids(), ['same']);
+    expect(root.listSync().length, 1, reason: 'no stray temp files');
+  });
+
+  test('put then deleteAll (concurrent) leaves no orphan take', () async {
+    final p = store.put('a', _wav(500));
+    final d = store.deleteAll();
+    await Future.wait([p, d]);
+    expect(await store.ids(), isEmpty);
+    expect(await keys.read(), isNull);
+  });
+
+  test('deleteAll then put (concurrent) leaves a readable take', () async {
+    await store.put('old', _wav(10));
+    final d = store.deleteAll();
+    final p = store.put('new', _wav(20));
+    await Future.wait([d, p]);
+    expect(await store.ids(), ['new']);
+    expect(await store.read('new'), orderedEquals(_wav(20)));
+  });
+
+  test('delete(id) also removes leftover temp files of that id', () async {
+    await store.put('t', _wav(10));
+    final stray1 = File('${root.path}/t.take.abc123.tmp')
+      ..writeAsStringSync('x');
+    final stray2 = File('${root.path}/t.take.tmp')..writeAsStringSync('x');
+    final other = File('${root.path}/u.take.zzz.tmp')..writeAsStringSync('x');
+    expect(await store.delete('t'), isTrue);
+    expect(stray1.existsSync(), isFalse);
+    expect(stray2.existsSync(), isFalse);
+    expect(other.existsSync(), isTrue, reason: 'other ids are untouched');
+  });
+
+  test('android backup rules exclude every real flutter_secure_storage file', () {
+    // Names verified in flutter_secure_storage 11.2.0 android sources:
+    // data FlutterSecureStorage, wrapped key FlutterSecureKeyStorage
+    // (FlutterSecureStorageConfig.java), config FlutterSecureStorageConfiguration
+    // (NamespacedConfigSource.java).
+    const prefs = [
+      'FlutterSecureStorage.xml',
+      'FlutterSecureKeyStorage.xml',
+      'FlutterSecureStorageConfiguration.xml',
+    ];
+    String read(String f) =>
+        File('android/app/src/main/res/xml/$f').readAsStringSync();
+    bool excludes(String xml, String domain, String path) => RegExp(
+      '<exclude\\s+domain="$domain"\\s+path="${RegExp.escape(path)}"\\s*/>',
+    ).hasMatch(xml);
+
+    final full = read('backup_rules.xml');
+    final ext = read('data_extraction_rules.xml');
+    final cloud = RegExp(
+      r'<cloud-backup>([\s\S]*?)</cloud-backup>',
+    ).firstMatch(ext)!.group(1)!;
+    final transfer = RegExp(
+      r'<device-transfer>([\s\S]*?)</device-transfer>',
+    ).firstMatch(ext)!.group(1)!;
+    for (final p in prefs) {
+      expect(
+        excludes(full, 'sharedpref', p),
+        isTrue,
+        reason: 'backup_rules $p',
+      );
+      expect(excludes(cloud, 'sharedpref', p), isTrue, reason: 'cloud $p');
+      expect(
+        excludes(transfer, 'sharedpref', p),
+        isTrue,
+        reason: 'transfer $p',
+      );
+    }
+    for (final x in [full, cloud, transfer]) {
+      expect(excludes(x, 'file', 'encrypted_takes/'), isTrue);
+    }
+    final manifest = File(
+      'android/app/src/main/AndroidManifest.xml',
+    ).readAsStringSync();
+    expect(manifest, contains('@xml/backup_rules'));
+    expect(manifest, contains('@xml/data_extraction_rules'));
+  });
+
+  group('SecureKeyStore', () {
+    test('create then read returns the same 32-byte key', () async {
+      final fake = _FakeSecure();
+      final ks = SecureKeyStore(storage: fake);
+      expect(await ks.read(), isNull);
+      final k = await ks.create();
+      expect(k.length, 32);
+      expect(await ks.read(), orderedEquals(k));
+      await ks.delete();
+      expect(await ks.read(), isNull);
+    });
+
+    for (final bad in {
+      'wrong length': 'AAAA',
+      'not base64': '%%%not-base64%%%',
+    }.entries) {
+      test(
+        'stored value with ${bad.key} throws corrupt and is not replaced',
+        () async {
+          final fake = _FakeSecure()..data[SecureKeyStore.keyName] = bad.value;
+          final ks = SecureKeyStore(storage: fake);
+          await expectLater(ks.read(), _failsWith(TakeStoreError.corrupt));
+          // put() must NOT silently mint a fresh key over the bad one.
+          final st = EncryptedTakeStore(directory: root, keys: ks);
+          await expectLater(
+            st.put('t', _wav(5)),
+            _failsWith(TakeStoreError.corrupt),
+          );
+          expect(fake.data[SecureKeyStore.keyName], bad.value);
+          expect(root.listSync(), isEmpty);
+          // read() with a bad key is an error too, never keyMissing/data.
+          await expectLater(st.read('t'), throwsA(isA<TakeStoreException>()));
+        },
+      );
+    }
+  });
+
+  group('exportTo', () {
+    test('refuses to overwrite an existing target by default', () async {
+      await store.put('t', _wav(50));
+      final target = File('${root.path}/out.wav')..writeAsStringSync('mine');
+      await expectLater(
+        store.exportTo('t', target),
+        _failsWith(TakeStoreError.targetExists),
+      );
+      expect(target.readAsStringSync(), 'mine');
+    });
+
+    test('overwrite: true replaces it atomically with the WAV', () async {
+      await store.put('t', _wav(50));
+      final target = File('${root.path}/out.wav')..writeAsStringSync('mine');
+      await store.exportTo('t', target, overwrite: true);
+      expect(await target.readAsBytes(), orderedEquals(_wav(50)));
+    });
+
+    test(
+      'leaves no temp file next to the target on success or failure',
+      () async {
+        await store.put('t', _wav(50));
+        final dir = Directory('${root.path}/exp')..createSync();
+        await store.exportTo('t', File('${dir.path}/a.wav'));
+        expect(dir.listSync().map((e) => e.path.split('/').last), ['a.wav']);
+        // failure: target path is a directory, so the final rename fails.
+        final blocker = Directory('${dir.path}/b.wav')..createSync();
+        await expectLater(
+          store.exportTo('t', File(blocker.path), overwrite: true),
+          throwsA(anything),
+        );
+        expect(dir.listSync().map((e) => e.path.split('/').last).toSet(), {
+          'a.wav',
+          'b.wav',
+        });
+      },
+    );
+  });
 }

@@ -19,8 +19,24 @@ final class SecureKeyStore implements KeyStore {
   Future<Uint8List?> read() async {
     final v = await _storage.read(key: keyName);
     if (v == null) return null;
-    final bytes = base64Decode(v);
-    return bytes.length == 32 ? Uint8List.fromList(bytes) : null;
+    // A present-but-unusable key is an error, never "no key": returning null
+    // would let the store mint a new key and orphan every stored take.
+    final Uint8List bytes;
+    try {
+      bytes = base64Decode(v);
+    } on FormatException {
+      throw const TakeStoreException(
+        TakeStoreError.corrupt,
+        'stored encryption key is not valid base64',
+      );
+    }
+    if (bytes.length != 32) {
+      throw const TakeStoreException(
+        TakeStoreError.corrupt,
+        'stored encryption key has the wrong length',
+      );
+    }
+    return bytes;
   }
 
   @override

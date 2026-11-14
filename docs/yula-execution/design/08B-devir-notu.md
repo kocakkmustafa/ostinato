@@ -20,3 +20,6 @@
 4. Anahtar kaybı senaryosu: anahtar silinir/yedekten gelmezse eski takeler kalıcı olarak okunamaz (`keyMissing`/`corrupt`); kullanıcıya "kayıt kurtarılamaz" akışı ve bozuk dosya temizliği tasarlanmalı. Cihaz değişiminde kayıtlar taşınmaz.
 5. Politika kararı (`persistentArchive`) ve bayrak: ayrı kurucu/Motion kararı; politika testleri güncellenir.
 6. Mağaza gizlilik/veri güvenliği beyanları ve egress bekçisinin yeniden gözden geçirilmesi.
+7. iOS iCloud/iTunes yedeği: `encrypted_takes/` uygulama-destek dizini varsayılan olarak yedeğe girer ve Keychain anahtarı erişilebilirlik sınıfına göre yedekle taşınabilir; ya anahtar `this_device` sınıfına çekilip dosyalar `isExcludedFromBackup` ile dışlanmalı ya da kasıtlı karar verilmeli (şu an yapılandırılmadı, ölçülmedi).
+8. Büyük/küçük harf: iOS/macOS dosya sistemi varsayılan büyük-küçük harfe duyarsız; `Take` ve `take` id'leri aynı dosyaya düşer (`<id>.take`). Bağlanmadan önce id'ler tek biçime (küçük harf/UUID) normalize edilmeli ve çakışma testi eklenmeli.
+9. Seri kuyruk yalnız tek süreç içindir; çok-süreçli erişim (uzantı, widget) varsa dosya kilidi gerekir.

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- OST-P0-08B: encrypted takes and their Keystore-wrapped key must not be
-     restored separately (a restored file without its key is undecryptable). -->
+<!-- OST-P0-08B: encrypted takes, the wrapped data key and the plugin config
+     must not be restored separately (a take without its key is undecryptable).
+     File names verified in flutter_secure_storage 11.2.0 android sources. -->
 <full-backup-content>
     <exclude domain="sharedpref" path="FlutterSecureStorage.xml" />
+    <exclude domain="sharedpref" path="FlutterSecureKeyStorage.xml" />
+    <exclude domain="sharedpref" path="FlutterSecureStorageConfiguration.xml" />
     <exclude domain="file" path="encrypted_takes/" />
 </full-backup-content>
