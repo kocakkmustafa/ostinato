@@ -102,3 +102,18 @@ Tarih: 2026-11-14 · Bayrak `ostinatoListenTryFixRepeatOpen` KAPALI kalır; yeni
 **Ölçülen:** etkilenen mevcut testler (practice_tempo_ladder, practice_result, ux_05e2_nextstep_honesty, listen_try_fix_screen, listen_try_fix, ux_05e_result_layer, practice_screen) değişmeden yeşil; güncellenen mevcut test yok.
 
 **Açık:** bayrağın açılması kurucu/Motion kararı; kart ve ladder'ın canlıda birlikte görünümü cihazda görülmedi.
+
+## Ayarlar bayrak öncesi — #71
+
+Tarih: 2026-11-14. Bayraklar KAPALI kaldı (`ostinatoRecordingRetentionOpen` dahil); yeni özellik ve yeni metin yok.
+
+**Kapanan**
+- (A) Ayarlar'daki "Kendi kaydımı dinle" kartı: `SettingsScreen` artık `retentionOpen` (varsayılan `ostinatoRecordingRetentionOpen`) ve `audience` (varsayılan `RetentionAudience.unknown`) alır; kart `RecordingRetentionPolicy.mayRecordOwnTake` ile kapılanır. Bayrak açık + child/unknown: kart ve anahtar yok; adult: var; bayrak kapalı: herkes için var (FK2 aynen). Test: `test/ost_ayar_own_recording_audience_test.dart`.
+- (B) "Detach on dispose" kanıtı: eski testin son adımı başka bir `OwnRecorder` ile bakıyordu (guard'a bağlı olmayan), detach kaldırılsa da yeşil kalıyordu. Yeni testler: guard detach sonrası paused/hidden/detached discard çağırmaz (+ attach'liyken çağırır kontrolü); ekran dispose sonrası AYNI recorder paused'da silinmez (`ost_p0_08_recording_retention_test.dart`).
+
+**Ölçülen**
+- Mutasyon 1 (kapı kaldırıldı) → child/unknown testleri kırmızı. Mutasyon 2 (`detach()` boş) → yeni guard testi kırmızı, eski test yeşil kaldı (zayıflık kanıtı). Mutasyon 3 (ekranda `_backgroundGuard?.detach()` kaldırıldı) → yeni ekran testi kırmızı. Hepsi geri alındı.
+
+**Açık**
+- Yaş sinyali hâlâ yok: gerçek ekranlarda `audience` her zaman `unknown`; bayrak açılırsa kart herkese gizli kalır. Adult sinyali ayrı iş.
+- `SettingsScreen` çağıranları (library_screen, stage_home_screen) kitle geçirmiyor; varsayılan yeterli, sinyal gelince bağlanacak.
