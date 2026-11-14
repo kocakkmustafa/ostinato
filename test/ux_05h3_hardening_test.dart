@@ -88,15 +88,33 @@ void main() {
           final h = t
               .getSize(find.byKey(const Key('stage-shelf-scroll')))
               .height;
-          expect(h, lessThanOrEqualTo(e.$1 * e.$2 + 0.01), reason: 'h=$h');
-          expect(h, greaterThan(40), reason: 'raf bos degil');
+          // Gercek oran: icerik sinirdan uzun oldugu icin yukseklik TAM sinir.
+          expect(h, closeTo(e.$1 * e.$2, 0.5), reason: 'h=$h');
           await dispose05f(t, rig);
         },
       );
     }
   });
 
-  // (d) Kalem 2/4: büyük metin 2.0 ve hareketi azalt, sahne + katmanlar.
+  // (d) Kalem 2/4: büyük metin 2.0 ve hareketi/saydamlığı azalt, sahne + katmanlar.
+  Widget reduced(WidgetTester t, Rig05f rig, {bool reduce = true}) => Builder(
+    builder: (c) => MediaQuery(
+      data: MediaQueryData.fromView(t.view).copyWith(
+        textScaler: const TextScaler.linear(2.0),
+        disableAnimations: reduce,
+        highContrast: reduce,
+      ),
+      child: stage05g(rig, catalog05f()),
+    ),
+  );
+
+  Future<void> settleLayer(WidgetTester t) async {
+    for (var i = 0; i < 6; i++) {
+      await t.runAsync(() => Future<void>.delayed(Duration.zero));
+      await t.pump(const Duration(milliseconds: 100));
+    }
+  }
+
   group('05h-3 d: yazi 2.0 ve hareketi azalt', () {
     for (final size in <Size>[const Size(360, 640), const Size(390, 844)]) {
       for (final handle in const [
@@ -105,58 +123,54 @@ void main() {
         'stage-handle-other',
       ]) {
         testWidgets(
-          'yazi 2.0 + hareketi azalt (360 = BULGU/skip): ${size.width.toInt()}x${size.height.toInt()} '
-          '$handle tasmaz, anlik, cam yok',
-          skip:
-              size.width == 360, // BULGU: 360x640 yazi 2.0 sahnede 30 px tasar
+          'yazi 2.0 + hareketi azalt: ${size.width.toInt()}x${size.height.toInt()} '
+          '$handle katman acilir, tasmaz, ek cam yok',
           (t) async {
             final rig = Rig05f();
-            await boot05f(
-              t,
-              MediaQuery(
-                data: const MediaQueryData(
-                  disableAnimations: true,
-                  highContrast: true,
-                ),
-                child: stage05g(rig, catalog05f(), textScale: 2.0),
-              ),
-              size: size,
-            );
+            await boot05f(t, reduced(t, rig), size: size);
             expect(t.takeException(), isNull, reason: 'sahne 2.0 tasmaz');
-            // Ölçüm (05h-3): sahnede eski GlassCard 4 BackdropFilter çizer
-            // (SessionTuningGateCard vb.); katman açmak EK cam eklememeli.
             final glass = find.byType(BackdropFilter).evaluate().length;
             await t.ensureVisible(find.byKey(const Key('practice-start')));
             await t.pump();
             final start = t.getRect(find.byKey(const Key('practice-start')));
             expect(start.top, greaterThanOrEqualTo(0));
             expect(start.bottom, lessThanOrEqualTo(size.height + 0.5));
+            expect(find.byKey(const Key('stage-layer-scrim')), findsNothing);
             await t.ensureVisible(find.byKey(Key(handle)));
             await t.pump();
             await t.tap(find.byKey(Key(handle)));
-            await t.pump(); // gecis animasyonu yok
-            await t.pump();
-            await t.pump();
+            await settleLayer(t);
+            expect(
+              find.byKey(const Key('stage-layer-scrim')),
+              findsOneWidget,
+              reason: 'katman gercekten acildi',
+            );
             expect(t.takeException(), isNull, reason: 'katman 2.0 tasmaz');
             expect(
               find.byType(BackdropFilter).evaluate().length,
-              lessThanOrEqualTo(glass),
-              reason: 'katman ek cam eklemez',
+              glass,
+              reason: 'saydamligi azalt: katman ek cam eklemez',
             );
-            for (var i = 0; i < 6; i++) {
-              await t.runAsync(() => Future<void>.delayed(Duration.zero));
-              await t.pump(const Duration(milliseconds: 100));
-            }
-            if (handle == 'stage-handle-path') {
-              expect(
-                find.byKey(const Key('stage-path-scroll')),
-                findsOneWidget,
-              );
-            }
             await dispose05f(t, rig);
           },
         );
       }
     }
+
+    // Kontrol: azaltma KAPALIYKEN katman cam ekler; yukaridaki esitlik
+    // kirmizi olabilir (bayraktan bagimsiz olcum).
+    testWidgets('kontrol: azaltma kapali: katman ek cam ekler', (t) async {
+      final rig = Rig05f();
+      await boot05f(
+        t,
+        reduced(t, rig, reduce: false),
+        size: const Size(390, 844),
+      );
+      final glass = find.byType(BackdropFilter).evaluate().length;
+      await t.tap(find.byKey(const Key('stage-handle-setup')));
+      await settleLayer(t);
+      expect(find.byType(BackdropFilter).evaluate().length, greaterThan(glass));
+      await dispose05f(t, rig);
+    });
   });
 }

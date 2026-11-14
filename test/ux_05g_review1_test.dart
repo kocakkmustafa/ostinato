@@ -175,7 +175,8 @@ void main() {
 
   group('D6 14 dil taramasi', () {
     // Bekcinin PROMISE_PATTERNS listesi (tools/validate_surface_honesty.py)
-    // dosyadan okunur; bekci DEGISTIRILMEDI.
+    // dosyadan okunur. 05h-3'te bekci desen KAPSAMI genisledi (10 sayidan 22'ye,
+    // gevsetilmedi); bekci assets/l10n/*.json'u taramaz.
     List<RegExp> promise() {
       final src = File('tools/validate_surface_honesty.py').readAsStringSync();
       final block = RegExp(
