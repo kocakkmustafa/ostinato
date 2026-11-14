@@ -222,7 +222,11 @@ abstract final class ListenTryFix {
       case PracticeMark.couldNotHear:
         // Only a quiet attack window is a finding; a weak or loud signal,
         // app sound or a skipped note is the setup's story, not the player's.
-        return o.reason == HearingReason.noAttack ? FixKind.missed : null;
+        // And only on a rhythm line: on a pitch line "no beat heard" would
+        // misname a note that was simply not picked up.
+        return rhythm && o.reason == HearingReason.noAttack
+            ? FixKind.missed
+            : null;
       case PracticeMark.correct || PracticeMark.pending:
         return null;
     }

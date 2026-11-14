@@ -88,3 +88,17 @@ Cihaz-üstü kanıt yok; durum `TEST_ONLY`.
 
 ## Bilet OST-P0-07
 - [bilet:: OST-P0-07] [durum:: TEST_ONLY] Hayalet Ekran: kademeli rehber gizleme, override, rehbersiz tamamlama; bayrak `ostinatoGhostScreenOpen=false` (kapalı) · [CI:: PR üzerinde] [kullanıcı-üstü-doğrulama:: YOK — gerçek kullanıcıyla öğrenme kanıtı yok] [yetkinlik-iddiası:: YOK] · [ADR-006](DECISIONS.md) · bilinen sınırlar: `A,U,A` iki art arda sayılır; durdurulmuş/döngü/bekle koşusu ilerletmez; aşama duyurusu (`liveRegion`) cihazda doğrulanmadı
+
+## OST-P0-06 bayrak öncesi — #70
+Tarih: 2026-11-14 · Bayrak `ostinatoListenTryFixRepeatOpen` KAPALI kalır; yeni metin/l10n yok (mesaj kimliği sayısı değişmedi). Motion kararı: beş maddenin hepsi "A".
+
+**Kapanan** (her biri önce kırmızı test, sonra kod; test dosyası `test/ost_p0_06_presimplify_test.dart`):
+1. Kart bilgi kartı kalır; tek eylem `listen-try-fix-repeat`. Kod değişmedi; kart gövdesine dokunmanın pop/ResultAction üretmediğini kilitleyen koruma testi (zaten yeşildi, kırmızı olamaz).
+2. Kart düğmesi görünürken `result-ladder-play` gizli (tek tempo önerisi). Kart düğmesi yokken eskisi gibi.
+3. Ana düğme "Tekrar dene" iken (`tryAgain` ya da döngüsüz `loopSlower`) `result-retry` çıkmaz. Diğer durumlarda `result-retry`/`result-target-run` aynen. Bayrak kapalıyken de geçerli: aynı etiketli çift düğme ekrandan kalktı.
+4. `ListenTryFix.kindOf`: `missed` yalnız ritim satırında. Perde satırında "vuruş duymadım" kartı yok. Seçim: kart yok (null) — perde satırındaki sessiz atak zaten "duyamadım" sayısında ve kurulum yönlendirmesinde görünür; yerine perde ya da zamanlama kartı uydurmak ölçülmemiş bir şeyi söylerdi.
+5. Serbest tempoda eylemsiz düzeltme kartı (`FixCorrection`, `nextBpm == null`) gizli. Ölçülemedi / net fark yok / net kartlar bilgi olarak kalır.
+
+**Ölçülen:** etkilenen mevcut testler (practice_tempo_ladder, practice_result, ux_05e2_nextstep_honesty, listen_try_fix_screen, listen_try_fix, ux_05e_result_layer, practice_screen) değişmeden yeşil; güncellenen mevcut test yok.
+
+**Açık:** bayrağın açılması kurucu/Motion kararı; kart ve ladder'ın canlıda birlikte görünümü cihazda görülmedi.
