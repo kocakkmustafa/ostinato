@@ -135,7 +135,7 @@ class PracticeResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               _counters(context),
-              if (fix != null) ...[
+              if (fix != null && ListenTryFixCard.shown(fix!)) ...[
                 const SizedBox(height: 12),
                 ListenTryFixCard(result: fix!),
               ],
@@ -226,9 +226,11 @@ class PracticeResultScreen extends StatelessWidget {
               const SizedBox(height: 16),
               _nextStep(context),
               const SizedBox(height: 8),
+              // The card's own repeat button owns the next tempo; the ladder's
+              // play button would offer a second, different one.
               if (ladder case TempoLadderStepped(
                 :final nextBpm,
-              ) when _step != NextStep.raiseTempo)
+              ) when _step != NextStep.raiseTempo && !_cardRepeatShown)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: OutlinedButton(
@@ -258,7 +260,7 @@ class PracticeResultScreen extends StatelessWidget {
                     ),
                   ),
                 )
-              else
+              else if (!_nextStepIsTryAgain)
                 OutlinedButton(
                   key: const Key('result-retry'),
                   onPressed: () =>
@@ -823,6 +825,18 @@ class PracticeResultScreen extends StatelessWidget {
 
   /// OST-UX-05e2: the shown step (see [PracticeRunSummary.shownStep]).
   NextStep get _step => summary.shownStep;
+
+  /// OST-P0-06: the card shows its repeat button.
+  bool get _cardRepeatShown =>
+      fix != null &&
+      ListenTryFixCard.shown(fix!) &&
+      ListenTryFixCard.repeatBpm(fix!) != null;
+
+  /// The main button already reads "Try again" (and retries): a second
+  /// button with the same label would only repeat it.
+  bool get _nextStepIsTryAgain =>
+      _step == NextStep.tryAgain ||
+      (_step == NextStep.loopSlower && summary.loopSuggestion == null);
 
   Widget _nextStep(BuildContext context) {
     final s = summary;
