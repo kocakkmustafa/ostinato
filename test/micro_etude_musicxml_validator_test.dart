@@ -114,7 +114,7 @@ void main() {
           measure(2, [note('C', 4, 8, type: 'whole'), note('D', 4, 2)]);
       final r = validateMusicXml(doc(measures: m));
       expect(r.hasCode('musicxml.measure_duration'), isTrue);
-      expect(r.issues.single.message, contains('Ölçü 2'));
+      expect(r.issues.single.message, contains('Measure 2'));
     });
 
     test('bilinmeyen step', () {

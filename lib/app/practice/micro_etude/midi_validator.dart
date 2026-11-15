@@ -15,7 +15,7 @@ ValidationReport validateMidi(Uint8List bytes) {
       issues.add(ValidationIssue(code, message));
 
   if (bytes.length < 14) {
-    err('midi.too_short', 'Başlık için en az 14 bayt gerekir: ${bytes.length}');
+    err('midi.too_short', 'Header needs at least 14 bytes: ${bytes.length}');
     return ValidationReport(issues: issues);
   }
   if (!_tagIs(bytes, 0, 'MThd')) {
@@ -24,7 +24,7 @@ ValidationReport validateMidi(Uint8List bytes) {
   }
   final headerLength = _u32(bytes, 4);
   if (headerLength < 6) {
-    err('midi.header_length', 'MThd uzunluğu 6 olmalı: $headerLength');
+    err('midi.header_length', 'MThd length must be at least 6: $headerLength');
     return ValidationReport(issues: issues);
   }
   final format = _u16(bytes, 8);
@@ -34,9 +34,9 @@ ValidationReport validateMidi(Uint8List bytes) {
     err('midi.format', 'Format 0 bekleniyordu: $format');
   }
   if (division & 0x8000 != 0) {
-    err('midi.division_smpte', 'SMPTE zaman tabanı desteklenmiyor');
+    err('midi.division_smpte', 'SMPTE time base is not supported');
   } else if (division == 0) {
-    err('midi.division_zero', 'Çeyrek başına tik sıfır');
+    err('midi.division_zero', 'Ticks per quarter is zero');
   }
 
   var pos = 8 + headerLength;
@@ -46,20 +46,20 @@ ValidationReport validateMidi(Uint8List bytes) {
   double? duration;
   while (pos < bytes.length) {
     if (bytes.length - pos < 8) {
-      err('midi.truncated_chunk_header', 'Parça başlığı kesik (konum $pos)');
+      err('midi.truncated_chunk_header', 'Chunk header truncated (at $pos)');
       break;
     }
     final isTrack = _tagIs(bytes, pos, 'MTrk');
     final length = _u32(bytes, pos + 4);
     final start = pos + 8;
     if (!isTrack && !_isAsciiTag(bytes, pos)) {
-      err('midi.chunk_tag', 'Tanınmayan parça etiketi (konum $pos)');
+      err('midi.chunk_tag', 'Unknown chunk tag (at $pos)');
       break;
     }
     if (start + length > bytes.length) {
       err(
         'midi.truncated_track',
-        'Parça uzunluğu $length ama yalnız ${bytes.length - start} bayt var',
+        'Chunk length $length but only ${bytes.length - start} bytes remain',
       );
       break;
     }
@@ -78,10 +78,10 @@ ValidationReport validateMidi(Uint8List bytes) {
     pos = start + length;
   }
   if (tracks != trackCount) {
-    err('midi.track_count', 'Başlık $trackCount parça diyor, bulunan $tracks');
+    err('midi.track_count', 'Header says $trackCount tracks, found $tracks');
   }
   if (format == 0 && tracks != 1) {
-    err('midi.format0_tracks', 'Format 0 tek parça ister: $tracks');
+    err('midi.format0_tracks', 'Format 0 needs exactly one track: $tracks');
   }
   return ValidationReport(
     issues: issues,
@@ -126,7 +126,7 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
     var value = 0;
     for (var i = 0; i < 4; i++) {
       if (p >= end) {
-        err('midi.vlq_truncated', 'VLQ parça sonunda kesildi');
+        err('midi.vlq_truncated', 'VLQ truncated at end of track');
         return null;
       }
       final byte = b[p++];
@@ -139,7 +139,7 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
 
   while (p < end && ok) {
     if (ended) {
-      err('midi.event_after_end', 'end-of-track sonrası olay var (konum $p)');
+      err('midi.event_after_end', 'Event after end-of-track (at $p)');
       ok = false;
       break;
     }
@@ -150,7 +150,7 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
     }
     tick += delta;
     if (p >= end) {
-      err('midi.truncated_event', 'Delta-time sonrası olay yok');
+      err('midi.truncated_event', 'No event after delta-time');
       ok = false;
       break;
     }
@@ -169,32 +169,32 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
         break;
       }
       if (p + len > end) {
-        err('midi.truncated_event', 'Meta $type verisi kesik');
+        err('midi.truncated_event', 'Meta $type data truncated');
         ok = false;
         break;
       }
       switch (type) {
         case 0x2F:
           if (len != 0) {
-            err('midi.end_of_track_length', 'end-of-track uzunluğu 0 olmalı');
+            err('midi.end_of_track_length', 'end-of-track length must be 0');
           }
           ended = true;
         case 0x51:
           if (len != 3) {
-            err('midi.tempo_length', 'Tempo meta uzunluğu 3 olmalı: $len');
+            err('midi.tempo_length', 'Tempo meta length must be 3: $len');
           } else {
             final micros = (b[p] << 16) | (b[p + 1] << 8) | b[p + 2];
             if (micros == 0) {
-              err('midi.tempo_zero', 'Tempo sıfır');
+              err('midi.tempo_zero', 'Tempo is zero');
             } else {
               tempos.add((tick, micros));
             }
           }
         case 0x58:
           if (len != 4) {
-            err('midi.time_signature_length', 'Zaman imzası 4 bayt ister');
+            err('midi.time_signature_length', 'Time signature needs 4 bytes');
           } else if (b[p] == 0 || b[p + 1] > 6) {
-            err('midi.time_signature_value', 'Zaman imzası değeri geçersiz');
+            err('midi.time_signature_value', 'Time signature value invalid');
           }
       }
       p += len;
@@ -203,7 +203,7 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
       p++;
       final len = vlq();
       if (len == null || p + len > end) {
-        if (len != null) err('midi.truncated_event', 'Sysex verisi kesik');
+        if (len != null) err('midi.truncated_event', 'Sysex data truncated');
         ok = false;
         break;
       }
@@ -213,7 +213,7 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
       int status;
       if (first >= 0x80) {
         if (first >= 0xF0) {
-          err('midi.unsupported_status', 'Desteklenmeyen durum baytı $first');
+          err('midi.unsupported_status', 'Unsupported status byte $first');
           ok = false;
           break;
         }
@@ -222,7 +222,10 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
         running = status;
       } else {
         if (running == null) {
-          err('midi.running_status_missing', 'Önceki durum yokken veri baytı');
+          err(
+            'midi.running_status_missing',
+            'Data byte with no running status',
+          );
           ok = false;
           break;
         }
@@ -232,14 +235,14 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
       final channel = status & 0x0F;
       final need = (kind == 0xC0 || kind == 0xD0) ? 1 : 2;
       if (p + need > end) {
-        err('midi.truncated_event', 'Kanal olayı kesik');
+        err('midi.truncated_event', 'Channel event truncated');
         ok = false;
         break;
       }
       final d1 = b[p];
       final d2 = need == 2 ? b[p + 1] : 0;
       if (d1 > 0x7F || d2 > 0x7F) {
-        err('midi.data_byte_high', 'Veri baytı 0–127 dışında (konum $p)');
+        err('midi.data_byte_high', 'Data byte above 127 (at $p)');
         ok = false;
         break;
       }
@@ -253,7 +256,7 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
       } else if (kind == 0x80 || kind == 0x90) {
         final n = open[key] ?? 0;
         if (n == 0) {
-          err('midi.orphan_note_off', 'Eşi olmayan note-off: nota $d1');
+          err('midi.orphan_note_off', 'Orphan note-off: note $d1');
         } else if (n == 1) {
           open.remove(key);
         } else {
@@ -263,10 +266,10 @@ _TrackResult _parseTrack(Uint8List b, int start, int end, _Err err) {
     }
   }
   if (ok && !ended) {
-    err('midi.missing_end_of_track', 'Parça end-of-track ile bitmiyor');
+    err('midi.missing_end_of_track', 'Track does not end with end-of-track');
   }
   if (ok && open.isNotEmpty) {
-    err('midi.unterminated_note', '${open.length} nota kapanmadı');
+    err('midi.unterminated_note', '${open.length} notes left open');
   }
   return _TrackResult(tick, tempos, noteCount, minNote, maxNote, ok && ended);
 }

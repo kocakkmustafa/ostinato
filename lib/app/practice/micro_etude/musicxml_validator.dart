@@ -22,13 +22,13 @@ ValidationReport validateMusicXml(String xml) {
     return ValidationReport(issues: issues);
   }
   if (root.name != 'score-partwise') {
-    err('musicxml.root', 'Kök score-partwise olmalı: ${root.name}');
+    err('musicxml.root', 'Root must be score-partwise: ${root.name}');
     return ValidationReport(issues: issues);
   }
   const knownVersions = {'3.0', '3.1', '4.0'};
   final version = root.attrs['version'];
   if (version == null) {
-    err('musicxml.version_missing', 'version özniteliği yok');
+    err('musicxml.version_missing', 'version attribute missing');
   } else if (!knownVersions.contains(version)) {
     err('musicxml.version', 'Bilinmeyen sürüm: $version');
   }
@@ -36,19 +36,19 @@ ValidationReport validateMusicXml(String xml) {
   final partList = root.firstChild('part-list');
   final scoreIds = <String>[];
   if (partList == null) {
-    err('musicxml.part_list_missing', 'part-list yok');
+    err('musicxml.part_list_missing', 'part-list missing');
   } else {
     for (final sp in partList.childrenNamed('score-part')) {
       final id = sp.attrs['id'];
       if (id == null || id.isEmpty) {
-        err('musicxml.score_part_id', 'score-part id yok');
+        err('musicxml.score_part_id', 'score-part id missing');
       } else if (scoreIds.contains(id)) {
         err('musicxml.score_part_duplicate', 'Yinelenen score-part: $id');
       } else {
         scoreIds.add(id);
       }
     }
-    if (scoreIds.isEmpty) err('musicxml.part_list_empty', 'score-part yok');
+    if (scoreIds.isEmpty) err('musicxml.part_list_empty', 'no score-part');
   }
   final parts = root.childrenNamed('part').toList();
   final partIds = <String>[];
@@ -64,7 +64,7 @@ ValidationReport validateMusicXml(String xml) {
   }
   for (final id in scoreIds) {
     if (!partIds.contains(id)) {
-      err('musicxml.part_missing', 'score-part $id için part yok');
+      err('musicxml.part_missing', 'no part for score-part $id');
     }
   }
 
@@ -78,14 +78,14 @@ ValidationReport validateMusicXml(String xml) {
     final numbers = <String>{};
     final measures = part.childrenNamed('measure').toList();
     if (measures.isEmpty) {
-      err('musicxml.no_measures', 'part ${part.attrs['id']} ölçüsüz');
+      err('musicxml.no_measures', 'part ${part.attrs['id']} has no measures');
     }
     for (final m in measures) {
       final number = m.attrs['number'];
       if (number == null || number.isEmpty) {
-        err('musicxml.measure_number', 'Ölçü numarası yok');
+        err('musicxml.measure_number', 'Measure number missing');
       } else if (!numbers.add(number)) {
-        err('musicxml.measure_duplicate', 'Yinelenen ölçü: $number');
+        err('musicxml.measure_duplicate', 'Duplicate measure: $number');
       }
       var cursor = 0;
       var maxCursor = 0;
@@ -96,7 +96,10 @@ ValidationReport validateMusicXml(String xml) {
             if (d != null) {
               final v = int.tryParse(d.text.trim());
               if (v == null || v <= 0) {
-                err('musicxml.divisions', 'divisions pozitif tamsayı olmalı');
+                err(
+                  'musicxml.divisions',
+                  'divisions must be a positive integer',
+                );
               } else {
                 divisions = v;
               }
@@ -108,7 +111,7 @@ ValidationReport validateMusicXml(String xml) {
                 t.firstChild('beat-type')?.text.trim() ?? '',
               );
               if (b == null || bt == null || b <= 0 || bt <= 0) {
-                err('musicxml.time', 'time beats/beat-type geçersiz');
+                err('musicxml.time', 'time beats/beat-type invalid');
               } else {
                 beats = b;
                 beatType = bt;
@@ -122,11 +125,14 @@ ValidationReport validateMusicXml(String xml) {
           case 'backup' || 'forward':
             final v = int.tryParse(c.firstChild('duration')?.text.trim() ?? '');
             if (v == null || v <= 0) {
-              err('musicxml.duration', '${c.name} süresi geçersiz');
+              err('musicxml.duration', '${c.name} duration invalid');
             } else {
               cursor += c.name == 'backup' ? -v : v;
               if (cursor < 0) {
-                err('musicxml.cursor_negative', 'backup ölçü başını aştı');
+                err(
+                  'musicxml.cursor_negative',
+                  'backup went past measure start',
+                );
                 cursor = 0;
               }
               if (cursor > maxCursor) maxCursor = cursor;
@@ -137,7 +143,7 @@ ValidationReport validateMusicXml(String xml) {
             final isRest = c.firstChild('rest') != null;
             final pitch = c.firstChild('pitch');
             if (!isRest && pitch == null && c.firstChild('unpitched') == null) {
-              err('musicxml.note_kind', 'Nota pitch/rest/unpitched taşımıyor');
+              err('musicxml.note_kind', 'Note has no pitch/rest/unpitched');
             }
             if (pitch != null) {
               final midi = _midiOf(pitch, err);
@@ -155,7 +161,10 @@ ValidationReport validateMusicXml(String xml) {
             if (isGrace) break;
             final dur = int.tryParse(durNode?.text.trim() ?? '');
             if (dur == null || dur <= 0) {
-              err('musicxml.duration', 'Nota süresi pozitif tamsayı olmalı');
+              err(
+                'musicxml.duration',
+                'Note duration must be a positive integer',
+              );
             } else if (!isChord) {
               cursor += dur;
               if (cursor > maxCursor) maxCursor = cursor;
@@ -165,20 +174,23 @@ ValidationReport validateMusicXml(String xml) {
       if (divisions == null || beats == null || beatType == null) {
         err(
           'musicxml.attributes_missing',
-          'Ölçü ${m.attrs['number']}: divisions/time tanımlanmadan kullanıldı',
+          'Measure ${m.attrs['number']}: used before divisions/time defined',
         );
         continue;
       }
       final expectedTimes = divisions * 4 * beats;
       if (expectedTimes % beatType != 0) {
-        err('musicxml.measure_unfittable', 'divisions zaman imzasına uymuyor');
+        err(
+          'musicxml.measure_unfittable',
+          'divisions does not fit the time signature',
+        );
         continue;
       }
       final expected = expectedTimes ~/ beatType;
       if (maxCursor != expected) {
         err(
           'musicxml.measure_duration',
-          'Ölçü ${m.attrs['number']}: süre toplamı $maxCursor, beklenen $expected',
+          'Measure ${m.attrs['number']}: duration sum $maxCursor, expected $expected',
         );
       }
       seconds += expected / divisions * 60 / tempo;
@@ -206,7 +218,7 @@ double _tempoOf(_XmlNode sound, double current, _ErrFn err) {
   if (raw == null) return current;
   final v = double.tryParse(raw);
   if (v == null || v <= 0) {
-    err('musicxml.tempo', 'sound tempo pozitif sayı olmalı: $raw');
+    err('musicxml.tempo', 'sound tempo must be a positive number: $raw');
     return current;
   }
   return v;
@@ -216,7 +228,7 @@ int? _midiOf(_XmlNode pitch, _ErrFn err) {
   final step = pitch.firstChild('step')?.text.trim();
   final semitone = _stepSemitone[step];
   if (semitone == null) {
-    err('musicxml.step', 'Geçersiz step: $step');
+    err('musicxml.step', 'Invalid step: $step');
     return null;
   }
   var alter = 0;
@@ -224,7 +236,7 @@ int? _midiOf(_XmlNode pitch, _ErrFn err) {
   if (alterNode != null) {
     final a = int.tryParse(alterNode.text.trim());
     if (a == null || a < -2 || a > 2) {
-      err('musicxml.alter', 'Geçersiz alter: ${alterNode.text.trim()}');
+      err('musicxml.alter', 'Invalid alter: ${alterNode.text.trim()}');
       return null;
     }
     alter = a;
@@ -233,13 +245,13 @@ int? _midiOf(_XmlNode pitch, _ErrFn err) {
   if (octave == null || octave < 0 || octave > 9) {
     err(
       'musicxml.octave',
-      'Geçersiz octave: ${pitch.firstChild('octave')?.text}',
+      'Invalid octave: ${pitch.firstChild('octave')?.text}',
     );
     return null;
   }
   final midi = 12 * (octave + 1) + semitone + alter;
   if (midi < 0 || midi > 127) {
-    err('musicxml.pitch_range', 'MIDI aralığı dışında: $midi');
+    err('musicxml.pitch_range', 'Outside MIDI range: $midi');
     return null;
   }
   return midi;

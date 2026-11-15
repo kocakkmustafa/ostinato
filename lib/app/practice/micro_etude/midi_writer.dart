@@ -73,13 +73,13 @@ abstract final class MidiWriter {
   }
 
   static List<int> _vlq(int v) {
-    final out = <int>[v & 0x7F];
+    final groups = <int>[v & 0x7F];
     var rest = v >> 7;
     while (rest > 0) {
-      out.insert(0, (rest & 0x7F) | 0x80);
+      groups.add((rest & 0x7F) | 0x80);
       rest >>= 7;
     }
-    return out;
+    return groups.reversed.toList();
   }
 
   static List<int> _u32(int v) => [

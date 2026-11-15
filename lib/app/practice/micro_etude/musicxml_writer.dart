@@ -14,10 +14,6 @@ abstract final class MusicXmlWriter {
   static String write(MicroEtude etude) {
     final b = StringBuffer()
       ..writeln('<?xml version="1.0" encoding="UTF-8"?>')
-      ..writeln(
-        '<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" '
-        '"http://www.musicxml.org/dtds/partwise.dtd">',
-      )
       ..writeln('<score-partwise version="4.0">')
       ..writeln('  <work><work-title>Micro etude</work-title></work>')
       ..writeln(
