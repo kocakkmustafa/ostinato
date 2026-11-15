@@ -571,7 +571,7 @@
     },
     "6b3cf71abd00a655": {
       "etiket": "kisit",
-      "gerekce": "test/v1_course_screen_test.dart:517 (held durumu etiketi, \"cannot be passed now\" 524); lib/app/practice/loop/v1_course_copy.dart:103; \"yet\" yalnız"
+      "gerekce": "test/v1_course_screen_test.dart:522-526 (held durumu etiketi, \"cannot be passed now\"); lib/app/practice/loop/v1_course_copy.dart:103; \"yet\" yalnız"
     },
     "6c2c63cf5487d260": {
       "etiket": "ders",
@@ -876,10 +876,6 @@
     "a91163b17fce53bb": {
       "etiket": "kisit",
       "gerekce": "unavailable in this release"
-    },
-    "aa5d69dbcf4f9188": {
-      "etiket": "kisit",
-      "gerekce": "packages/ostinato_audio/test/chord_detector_test.dart:131-150 (Bb 28/29 yorumu; \"sözlük dışı → REDDEDİLİR\" F/Bm/Bb/F#m); ChordTemplate.all() 24 sayısı ayrıca doğrulanmadı"
     },
     "ab15dda8f8830061": {
       "etiket": "ders",

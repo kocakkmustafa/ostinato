@@ -81,10 +81,10 @@ PROMISE_PATTERNS = [
     (r"\bfor now\b", "for now"),
     (r"\bhenüz\b", "henüz"),
     (r"\byakında\b", "yakında"),
-    # OST-UX-05h-3: 12 yabancı dil deseni. NOT: bekçi assets/l10n/*.json'u
-    # TARAMAZ (yalnız kabuktaki 15 varlık + kaynak metin); bu desenler çeviri
-    # kataloğunda henüz bir şey yakalamaz. Yalnız KAPSAM genişler; en/tr
-    # desenleri ve eşleştirme mantığı aynı. CJK/Arapça/
+    # OST-UX-05h-3: 12 yabancı dil deseni. OST-L10N (2026-11-15): bu desenler
+    # artık assets/l10n/*.json'u da tarar (kural A2, aşağıda); eşleşme onaylı
+    # listede (hash→ders|kisit) değilse kırmızıdır. Desenler ve eşleştirme
+    # mantığı aynı, gevşetme yok. CJK/Arapça/
     # Hintçe'de \b güvenilmez (kelime karakteri/birleşik işaret): düz alt dize.
     (r"\b(?:noch nicht|demnächst|bald|vorerst)\b", "de: noch nicht/bald"),
     (r"\b(?:todavía no|aún no|próximamente|pronto|por ahora)\b", "es: aún no/pronto"),

@@ -77,7 +77,7 @@ const Map<String, String> _sourceFingerprints = <String, String>{
   'guitar.foundations.strum_timing.lockedReason': '434:44824148:608bf925',
   'guitar.foundations.strum_timing.unblockedBy': '447:3c78e4fa:453d823b',
   'guitar.foundations.chords_beyond_eight.lockedReason':
-      '502:66f9c592:3cd60dc8',
+      '524:33bd8cf4:6a6e3691',
   'guitar.foundations.chords_beyond_eight.unblockedBy': '396:7de0cde9:108ab549',
   'voice.measured.0': '416:151e91c3:663c041c',
   'voice.notMeasured.0': '366:12f2b463:2d33db83',
@@ -160,7 +160,7 @@ const Map<String, String> _turkishCopy = <String, String>{
   'guitar.foundations.strum_timing.lockedReason':
       'İki ayrı engel var. Pena vuruşunun ürettiği altı yakın nota başlangıcını tek akor olayına bağlayan adım yok. Bu adım olsa bile ritimden ne kadar sapmanın hata olduğuna ilişkin eğitmen verisi yok. Karşılaştırma dayanağı olmadan sayı üretip bu dersi açmayız.',
   'guitar.foundations.chords_beyond_eight.lockedReason':
-      'Bu kurs sekiz açık akor öğretir; motor artık diğerlerini adlarıyla reddeder. Önceden çalınan Si bemol, 29 pencerenin 28’inde güvenle Re minör diye raporlanıyordu; çünkü motor yalnız sekiz akor arasından seçim yapıyordu. Artık 24 akoru değerlendirir ve dersin kapsamı dışındaki kazananı reddeder. Diğer 16 akordaki doğruluğu ölçmeden o derslerde puan veremeyiz.',
+      'Bu kurs sekiz açık akor öğretir; motor artık diğerlerini adlarıyla reddeder. Önceden çalınan Si bemol, 29 pencerenin 28’inde güvenle Re minör diye raporlanıyordu; çünkü motor yalnız sekiz akor arasından seçim yapıyordu. Artık alıştırma dışındaki akorları da değerlendirir ve dersin kapsamı dışındaki kazananı reddeder. Diğer akorlardaki doğruluğu ölçmeden o derslerde puan veremeyiz.',
   'guitar.foundations.arms.demoOnlyReason':
       'Yalnız kayıtlı eğitmen referansları; bu sürümde kamera değerlendirmesi kapalıdır. Bant, dirsek ve önkol için statik referans aralığını gösterir. Kendi dirsek açınız gösterilmez; bu sayfa vücudunuzu ölçmez veya duruşunuzu değerlendirmez.',
   'guitar.foundations.arms.blockedBy':

@@ -173,7 +173,7 @@
        "focus": "posture",
        "minutes": 6,
        "status": "locked",
-       "lockedReason": "This course teaches eight open chords, and the engine now refuses anything else by name. It did not always. Until 2026-08-04 a played Bb came back as 'Dm' in 28 of 29 windows — confidently — because the engine was only allowed to consider the eight chords of the drill, so the nearest of the eight always won. It now weighs all 24 and refuses when the winner is not one this lesson teaches. Opening a lesson on the other sixteen would mean grading you against a recogniser we have not measured on them.",
+       "lockedReason": "This course teaches eight open chords, and the engine now refuses anything else by name. It did not always. Until 2026-08-04 a played Bb came back as 'Dm' in 28 of 29 windows — confidently — because the engine was only allowed to consider the eight chords of the drill, so the nearest of the eight always won. It now also weighs chords outside the drill and refuses when the winner is not one this lesson teaches. Opening a lesson on the other chords would mean grading you against a recogniser we have not measured on them.",
        "_why_locked_source": "guitar.honesty.notMeasured (Bb->Dm, 28/29 pencere). Sayilar SATIRDAN alindi, yeniden olculmedi.",
        "promotionPath": {
         "unblockedBy": "Measuring the recogniser on the other sixteen chords the way we measured these eight — per chord, counting false names, not an overall accuracy figure. An average would hide exactly the failure we already fixed once.\n\nThere is no microphone input in these posture lessons, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
