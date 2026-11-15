@@ -15,6 +15,7 @@ import 'package:ostinato/app/practice/loop/practice_marks.dart';
 import 'package:ostinato/app/practice/loop/practice_outcome.dart';
 import 'package:ostinato/app/practice/loop/practice_result_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_score.dart';
+import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
 import 'package:ostinato/app/stage/ghost_policy.dart';
 import 'package:ostinato/app/stage/ghost_store.dart';
 
@@ -278,6 +279,39 @@ void main() {
       }
       expect(store.state.level, GhostLevel.reinforce);
       expect(store.state.validRuns, 1);
+      await dispose05f(t, rig);
+    });
+  });
+
+  group('05h-23 calarken hata', () {
+    testWidgets('05h-23: calarken hata olunca ekran durmaz, tekrar denenir', (
+      t,
+    ) async {
+      final rig = Rig05f();
+      await boot05f(t, stage05g(rig, catalog));
+      await play05f(t);
+      await listen05f(t, rig);
+      expect(rig.controller!.phase, PracticePhase.running);
+      // Kosu SIRASINDA hata: yakalama kesintiye ugrar.
+      rig.channel.pushInterruption('audio_interrupted');
+      for (var i = 0; i < 6; i++) {
+        await t.pump(const Duration(milliseconds: 50));
+      }
+      expect(rig.controller!.phase, PracticePhase.failed);
+      expect(find.byKey(const Key('practice-failure')), findsOneWidget);
+      expect(find.byKey(const Key('stage-home')), findsOneWidget);
+      expect(find.byKey(const Key('practice-start')), findsOneWidget);
+      expect(find.byKey(const Key('stage-handles')), findsOneWidget);
+      expect(t.takeException(), isNull);
+      // Tekrar dene: ekran donmadi, yeni kosu baslar.
+      await t.tap(find.byKey(const Key('practice-start')));
+      await t.pump();
+      await t.pump();
+      await t.pump(const Duration(milliseconds: 50));
+      expect(rig.controller, isNotNull);
+      expect(rig.controller!.phase, isNot(PracticePhase.failed));
+      expect(find.byKey(const Key('practice-failure')), findsNothing);
+      expect(t.takeException(), isNull);
       await dispose05f(t, rig);
     });
   });
