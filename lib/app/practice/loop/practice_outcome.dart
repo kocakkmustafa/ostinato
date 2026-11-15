@@ -313,12 +313,15 @@ final class PracticeRunSummary {
       next = NextStep.nextLesson;
     } else if (total > 0 && heard < criteria.minHeard) {
       next = NextStep.checkSetup;
+    } else if (!gate.eligible) {
+      // OST-UX-16: partial data (stopped early / loop / wait) never yields a
+      // loop / tempo / performance suggestion; it would contradict "Not
+      // measured".
+      next = NextStep.tryAgain;
     } else if (c + d > 0 && accuracy < criteria.minAccuracy) {
       next = NextStep.loopSlower;
     } else if (bpm < gateBpm) {
       next = NextStep.raiseTempo;
-    } else if (!gate.eligible) {
-      next = NextStep.performanceRun;
     } else {
       next = NextStep.tryAgain;
     }
