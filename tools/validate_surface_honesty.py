@@ -114,6 +114,79 @@ def reviewed_status_lines():
     return {(line["file"], line["text"]) for line in doc["lines"]}
 
 
+# ── A2: assets/l10n/*.json çeviri kataloğu (OST-L10N, 2026-11-15) ───────────
+# Kural A, yukarıdaki 12 yabancı dil desenini çeviri kataloğunda da koşar.
+# Desen listesi, eşleştirme mantığı ve eşik DEĞİŞMEDİ; yalnız kapsam genişledi
+# (en/tr kataloğu zaten kaynak çiftle bağlı ve kural A'nın kendi taramasında).
+# Bir eşleşme ancak Motion'ın sınıflandırdığı ONAYLI listedeki hash için
+# susar (karar: «Ostinato l10n bekçi sınıflandırması», 2026-11-15):
+#   ders  = öğretim içeriği (kelime dersin konusu, söz değil)
+#   kisit = bugünkü eksikliği dürüstçe söyleyen metin, gelecek sözü yok
+# Gelecek sözü veren metin (VAAT) listeye GİRMEZ; nötrleştirilir. Hash = JSON
+# anahtarı = sha256(en + NUL + tr)[:16]; kaynak metin değişince hash değişir.
+# Onaylı ama artık hiçbir katalogda eşleşmeyen (ölü) hash de ihlaldir.
+L10N_PROMISE_APPROVED_FILE = "tools/l10n_promise_approved.v1.json"
+L10N_PROMISE_LABELS = ("ders", "kisit")
+L10N_FOREIGN_PATTERNS = [(p, l) for p, l in PROMISE_PATTERNS
+                         if re.match(r"^[a-z]{2}: ", l)]
+
+
+def load_l10n_promise_approved(path=L10N_PROMISE_APPROVED_FILE):
+    f = Path(path)
+    if not f.exists():
+        return {}
+    return json.loads(f.read_text(encoding="utf-8"))["approved"]
+
+
+L10N_PROMISE_APPROVED = load_l10n_promise_approved()
+
+
+def l10n_promise_hits(catalogs):
+    """{hash: [(dil, desen etiketi)]} — `catalogs`: {dil: {hash: metin}}."""
+    hits = {}
+    for locale, messages in sorted(catalogs.items()):
+        if locale in ("en", "tr"):
+            continue
+        for key, value in messages.items():
+            # Çoğul girdileri {zero,one,…} sözlüktür: her biçim metni taranır.
+            forms = value.values() if isinstance(value, dict) else [value]
+            for text in forms:
+                label = next((l for p, l in L10N_FOREIGN_PATTERNS
+                              if re.search(p, text, re.IGNORECASE)), None)
+                if label:
+                    hits.setdefault(key, []).append((locale, label))
+                    break
+    return hits
+
+
+def l10n_promise_violations(catalogs, approved):
+    violations = []
+    hits = l10n_promise_hits(catalogs)
+    for key, where in sorted(hits.items()):
+        if key not in approved:
+            locales = ", ".join(sorted({loc for loc, _ in where}))
+            violations.append(
+                f"[l10n vaat dili] assets/l10n ({locales}) anahtar {key}: "
+                f"«{where[0][1]}» eşleşti ve onaylı listede yok — gelecek sözü "
+                f"veriyorsa metni nötrleştir; ders/kısıt ise {L10N_PROMISE_APPROVED_FILE} "
+                f"içine etiket + gerekçeyle ekle")
+    for key, entry in sorted(approved.items()):
+        if entry.get("etiket") not in L10N_PROMISE_LABELS or not entry.get("gerekce"):
+            violations.append(
+                f"[l10n vaat dili] onaylı liste {key}: etiket "
+                f"{L10N_PROMISE_LABELS} içinde ve gerekçe dolu olmalı")
+        if key not in hits:
+            violations.append(
+                f"[l10n vaat dili] onaylı liste {key}: hiçbir katalogda "
+                f"eşleşmiyor (ölü hash) — listeden çıkar")
+    return violations
+
+
+def load_l10n_catalogs(root="assets/l10n"):
+    return {p.stem: json.loads(p.read_text(encoding="utf-8"))["messages"]
+            for p in sorted(Path(root).glob("*.json"))}
+
+
 # ── B: yetenek iddiası ↔ platform izni ──────────────────────────────────────
 # Bir yetenek adı geçtiğinde, cümle ya iznin VARLIĞIYLA desteklenmeli ya da
 # YOKLUĞUNU söyleyen bir ifade taşımalı. Üçüncü seçenek (sessizce iddia
@@ -2335,6 +2408,14 @@ def main() -> int:
                 f"depodan TÜRETİLEBİLİR. Elle yazılan bir sayı, koleksiyon "
                 f"büyüdüğü gün sessizce yanlış olur ve hiçbir test kırılmaz")
 
+    l10n_catalogs = load_l10n_catalogs()
+    violations += l10n_promise_violations(l10n_catalogs, L10N_PROMISE_APPROVED)
+    l10n_hit_count = len(l10n_promise_hits(l10n_catalogs))
+    if len(l10n_catalogs) < 14:
+        violations.append(
+            f"VAKUM: yalnız {len(l10n_catalogs)} l10n kataloğu tarandı "
+            f"(beklenen 14) — l10n taraması kırılmış olabilir")
+
     if len(surfaces) < 150:
         violations.append(
             f"VAKUM: yalnız {len(surfaces)} kullanıcı-yüzeyi metni tarandı "
@@ -2403,6 +2484,9 @@ def main() -> int:
               f"sayılıyor) · {len(plural_tr)} TR çoğul kaynağı · en/tr katalog değerleri "
               f"kaynakla eş; {len(catalogs) - 2} diğer dil kataloğu EN/TR kelime "
               f"kurallarının kapsamı DIŞINDA (anlam incelemesi ayrı)")
+    print(f"   l10n taraması (AÇIK): {len(l10n_catalogs)} katalog · "
+          f"{l10n_hit_count} vaat-deseni anahtarı · "
+          f"{len(L10N_PROMISE_APPROVED)} onaylı (ders/kısıt) · onaysız 0")
     print(f"   tercih yazıcıları (payload rolü): "
           f"{', '.join(f'{Path(w).name}={r}' for w, r in sorted(preference_writers.items()) if r) or 'yok'}")
     print(f"   iddia↔ölçüm bağı (O-102, iki yönlü): {bound} iddia-özne "
