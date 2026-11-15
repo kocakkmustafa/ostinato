@@ -1,5 +1,8 @@
 import 'micro_etude_validation.dart';
 
+/// En çok bu kadar karakter doğrulanır (ayrıştırıcı bellek/süre sınırı).
+const maxInputChars = 2 * 1024 * 1024;
+
 /// MusicXML score-partwise doğrulayıcısı (el yazısı küçük XML ayrıştırıcıyla;
 /// pubspec'e bağımlılık eklenmez).
 ///
@@ -9,11 +12,24 @@ import 'micro_etude_validation.dart';
 /// imzası, geçerli step/alter/octave/duration/type. Süre: ölçü uzunlukları ve
 /// `sound tempo` (çeyrek başına bpm; yoksa 120) ile; tempo değişimi ölçü
 /// başında beklenir, ölçü sonundaki tempo ile hesaplanır.
+///
+/// Güvenlik: DOCTYPE iç alt kümesi atlanır, `<!ENTITY>` tanımları İŞLENMEZ;
+/// beş hazır varlık ve sayısal karakter başvurusu dışındaki her `&ad;`
+/// `xml.bad_entity` ile reddedilir (XXE / billion-laughs yok). İç içelik 200,
+/// girdi [maxInputChars] ile sınırlıdır.
+///
+/// Bilinen sınırlar (kasıtlı): (1) `backup` sonrası ikinci sesin ölçüyü
+/// tamamlamadan bitmesi yakalanmaz; yalnız en uzun imleç ölçü süresine eşit
+/// olmalıdır (yazıcı backup üretmez). (2) `part-name` zorunlu tutulmaz.
 ValidationReport validateMusicXml(String xml) {
   final issues = <ValidationIssue>[];
   void err(String code, String message) =>
       issues.add(ValidationIssue(code, message));
 
+  if (xml.length > maxInputChars) {
+    err('xml.too_large', 'Input exceeds $maxInputChars characters');
+    return ValidationReport(issues: issues);
+  }
   final _XmlNode root;
   try {
     root = _XmlParser(xml).parseDocument();

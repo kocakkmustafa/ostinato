@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/practice/micro_etude/micro_etude_validation.dart';
 import 'package:ostinato/app/practice/micro_etude/musicxml_validator.dart';
 
 String doc({
@@ -248,6 +249,91 @@ void main() {
 
     test('boş girdi', () {
       expect(code(''), 'xml.no_root');
+    });
+  });
+
+  group('validateMusicXml güvenlik ve sınır dalları', () {
+    ValidationReport v(String x) => validateMusicXml(x);
+
+    test('çok derin iç içelik reddedilir (xml.too_deep)', () {
+      final deep = '${'<a>' * 250}${'</a>' * 250}';
+      expect(v(deep).hasCode('xml.too_deep'), isTrue);
+      final shallow = '${'<a>' * 150}${'</a>' * 150}';
+      expect(v(shallow).hasCode('xml.too_deep'), isFalse);
+    });
+
+    test('DOCTYPE iç alt kümesi okunur ama varlık tanımı işlenmez', () {
+      final d = doc().replaceFirst(
+        RegExp(r'<!DOCTYPE[^>]*>'),
+        '<!DOCTYPE score-partwise [ <!ENTITY a "xx"> <!ELEMENT x ANY> ]>',
+      );
+      expect(v(d).isValid, isTrue, reason: '${v(d)}');
+    });
+
+    test('tanımlı özel varlık kullanımı reddedilir (XXE)', () {
+      final d = doc()
+          .replaceFirst(
+            RegExp(r'<!DOCTYPE[^>]*>'),
+            '<!DOCTYPE score-partwise [ <!ENTITY a "xx"> ]>',
+          )
+          .replaceFirst('<part-name>G', '<part-name>&a;');
+      expect(v(d).issues.first.code, 'xml.bad_entity');
+    });
+
+    test('dış varlık (SYSTEM) reddedilir', () {
+      final d = doc()
+          .replaceFirst(
+            RegExp(r'<!DOCTYPE[^>]*>'),
+            '<!DOCTYPE score-partwise [ <!ENTITY x SYSTEM "file:///etc/hosts"> ]>',
+          )
+          .replaceFirst('<part-name>G', '<part-name>&x;');
+      expect(v(d).issues.first.code, 'xml.bad_entity');
+    });
+
+    test('billion-laughs: iç içe varlık genişlemesi yapılmaz', () {
+      const defs =
+          '<!ENTITY l0 "ha"><!ENTITY l1 "&l0;&l0;&l0;&l0;"><!ENTITY l2 "&l1;&l1;&l1;&l1;">';
+      final d = doc()
+          .replaceFirst(
+            RegExp(r'<!DOCTYPE[^>]*>'),
+            '<!DOCTYPE score-partwise [ $defs ]>',
+          )
+          .replaceFirst('<part-name>G', '<part-name>&l2;');
+      expect(v(d).issues.first.code, 'xml.bad_entity');
+    });
+
+    test('kapanmayan DOCTYPE', () {
+      final d = doc().replaceFirst(
+        RegExp(r'<!DOCTYPE[^>]*>'),
+        '<!DOCTYPE score-partwise [ <!ENTITY a "x">',
+      );
+      expect(v(d).issues.first.code, 'xml.unterminated_doctype');
+    });
+
+    test(
+      'geçersiz karakter başvurusu: &#0;, aşırı kod noktası, sayısal olmayan',
+      () {
+        for (final ref in [
+          '&#0;',
+          '&#x110000;',
+          '&#99999999999;',
+          '&#xZZ;',
+          '&#;',
+        ]) {
+          final d = doc().replaceFirst('<part-name>G', '<part-name>$ref');
+          expect(v(d).issues.first.code, 'xml.bad_entity', reason: ref);
+        }
+        final ok = doc().replaceFirst('<part-name>G', '<part-name>&#65;&#x42;');
+        expect(v(ok).isValid, isTrue);
+      },
+    );
+
+    test('girdi boyutu sınırı (xml.too_large)', () {
+      final big = doc().replaceFirst(
+        '<part-name>G',
+        '<part-name>${'x' * (2 * 1024 * 1024)}',
+      );
+      expect(v(big).issues.first.code, 'xml.too_large');
     });
   });
 }

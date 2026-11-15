@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ostinato/app/practice/micro_etude/micro_etude_validation.dart';
 import 'package:ostinato/app/practice/micro_etude/midi_validator.dart';
 
 // Doğrulayıcıdan bağımsız, elle kurulan SMF yapı taşları.
@@ -199,6 +200,149 @@ void main() {
 
     test('format 1 reddedilir', () {
       expect(code(smf(fourQuarters(), format: 1)), 'midi.format');
+    });
+  });
+
+  group('validateMidi ek dallar', () {
+    ValidationReport run(
+      List<int> body, {
+      int division = 480,
+      int format = 0,
+      int ntrks = 1,
+    }) => validateMidi(
+      smf(body, division: division, format: format, ntrks: ntrks),
+    );
+
+    test('SMPTE zaman tabanı', () {
+      expect(
+        run(fourQuarters(), division: 0xE728).hasCode('midi.division_smpte'),
+        isTrue,
+      );
+    });
+
+    test('division sıfır', () {
+      expect(
+        run(fourQuarters(), division: 0).hasCode('midi.division_zero'),
+        isTrue,
+      );
+    });
+
+    test('tempo sıfır', () {
+      final body = [0, 0xFF, 0x51, 3, 0, 0, 0, ...eot];
+      expect(run(body).hasCode('midi.tempo_zero'), isTrue);
+    });
+
+    test('sysex: geçerli kabul, kesik ret', () {
+      final ok = [...tempo120, 0, 0xF0, 3, 1, 2, 0xF7, ...eot];
+      expect(run(ok).isValid, isTrue, reason: '${run(ok)}');
+      final cut = [...tempo120, 0, 0xF0, 9, 1, 2];
+      final r = run(cut);
+      expect(r.isValid, isFalse);
+      expect(r.hasCode('midi.truncated_event'), isTrue);
+    });
+
+    test('meta olay kesik', () {
+      final r = run([...tempo120, 0, 0xFF, 0x03, 9, 65, 66]);
+      expect(r.hasCode('midi.truncated_event'), isTrue);
+      expect(
+        run([...tempo120, 0, 0xFF]).hasCode('midi.truncated_event'),
+        isTrue,
+      );
+    });
+
+    test('delta-time sonrası olay yok', () {
+      expect(run([...tempo120, 5]).hasCode('midi.truncated_event'), isTrue);
+    });
+
+    test('kanal olayı kesik', () {
+      expect(
+        run([...tempo120, 0, 0x90, 60]).hasCode('midi.truncated_event'),
+        isTrue,
+      );
+    });
+
+    test('end-of-track uzunluğu sıfır değil', () {
+      final r = run([...tempo120, 0, 0xFF, 0x2F, 1, 0]);
+      expect(r.hasCode('midi.end_of_track_length'), isTrue);
+    });
+
+    test('zaman imzası uzunluğu ve değeri', () {
+      expect(
+        run([
+          0,
+          0xFF,
+          0x58,
+          3,
+          4,
+          2,
+          24,
+          ...eot,
+        ]).hasCode('midi.time_signature_length'),
+        isTrue,
+      );
+      expect(
+        run([
+          0,
+          0xFF,
+          0x58,
+          4,
+          0,
+          2,
+          24,
+          8,
+          ...eot,
+        ]).hasCode('midi.time_signature_value'),
+        isTrue,
+      );
+      expect(
+        run([
+          0,
+          0xFF,
+          0x58,
+          4,
+          4,
+          9,
+          24,
+          8,
+          ...eot,
+        ]).hasCode('midi.time_signature_value'),
+        isTrue,
+      );
+      expect(run([0, 0xFF, 0x58, 4, 4, 2, 24, 8, ...eot]).isValid, isTrue);
+    });
+
+    test(
+      'tanınmayan parça etiketi reddedilir, ASCII yabancı parça atlanır',
+      () {
+        final good = smf(fourQuarters());
+        final bad = Uint8List.fromList([...good, 1, 2, 3, 4, 0, 0, 0, 0]);
+        expect(validateMidi(bad).hasCode('midi.chunk_tag'), isTrue);
+        final foreign = Uint8List.fromList([
+          ...good,
+          ...'XFIH'.codeUnits,
+          0,
+          0,
+          0,
+          1,
+          7,
+        ]);
+        expect(
+          validateMidi(foreign).isValid,
+          isTrue,
+          reason: '${validateMidi(foreign)}',
+        );
+      },
+    );
+
+    test('format 0 ama iki parça', () {
+      final one = fourQuarters();
+      final two = Uint8List.fromList([
+        ...smf(one, ntrks: 2),
+        ...'MTrk'.codeUnits,
+        ...u32(one.length),
+        ...one,
+      ]);
+      expect(validateMidi(two).hasCode('midi.format0_tracks'), isTrue);
     });
   });
 }
