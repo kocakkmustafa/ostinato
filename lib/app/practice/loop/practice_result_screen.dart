@@ -344,9 +344,19 @@ class PracticeResultScreen extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 3),
         child: Row(
+          // Deger her zaman satirin sag kenarinda; 2x yazida ikisi de daralir.
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(child: Text(name, style: hankenText(size: 14))),
-            Text(value, key: key, style: monoText(size: 13, letterSpacing: .3)),
+            Flexible(child: Text(name, style: hankenText(size: 14))),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                value,
+                key: key,
+                textAlign: TextAlign.end,
+                style: monoText(size: 13, letterSpacing: .3),
+              ),
+            ),
           ],
         ),
       );
@@ -725,6 +735,11 @@ class PracticeResultScreen extends StatelessWidget {
                       Navigator.of(context).pop(ResultActionLoop(bar, bar)),
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
+                    // Dokunma hedefi en az 48x48 (Android/iOS rehberi).
+                    constraints: const BoxConstraints(
+                      minWidth: 48,
+                      minHeight: 48,
+                    ),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 6,
@@ -733,40 +748,43 @@ class PracticeResultScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: palette.outline),
                     ),
-                    child: Semantics(
-                      label: localized(
-                        context,
-                        'Bar {v0}',
-                        '{v0}. ölçü',
-                        values: {'v0': bar + 1},
-                      ),
-                      // FK4: each note's state in words, in playing order.
-                      value: [
-                        for (final e in byBar[bar]!)
-                          practiceMarkLabel(
-                            context,
-                            summary.lastMarks[e.index]?.mark ??
-                                PracticeMark.pending,
-                          ),
-                      ].join(', '),
-                      button: true,
-                      excludeSemantics: true,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '${bar + 1} ',
-                            style: monoText(size: 11, letterSpacing: .2),
-                          ),
+                    child: Center(
+                      widthFactor: 1,
+                      child: Semantics(
+                        label: localized(
+                          context,
+                          'Bar {v0}',
+                          '{v0}. ölçü',
+                          values: {'v0': bar + 1},
+                        ),
+                        // FK4: each note's state in words, in playing order.
+                        value: [
                           for (final e in byBar[bar]!)
-                            Text(
-                              styleOf(e).symbol,
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: styleOf(e).color,
-                              ),
+                            practiceMarkLabel(
+                              context,
+                              summary.lastMarks[e.index]?.mark ??
+                                  PracticeMark.pending,
                             ),
-                        ],
+                        ].join(', '),
+                        button: true,
+                        excludeSemantics: true,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '${bar + 1} ',
+                              style: monoText(size: 11, letterSpacing: .2),
+                            ),
+                            for (final e in byBar[bar]!)
+                              Text(
+                                styleOf(e).symbol,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: styleOf(e).color,
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
