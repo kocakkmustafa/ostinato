@@ -19,7 +19,7 @@ Bayraklar `ostinatoStageHomeEnabled` ve `ostinatoGhostScreenOpen` KAPALI. Bu lis
 | 13 | 05g2/05g3: raf ↔ pratik uyumu (`preStartPreview`, `label`, `metronome`/`hint` kaldırıldı) | KAPALI (05g3) | 05g notları |
 | 14 | `hint` ürün kararı: yardımlı koşunun ölçümdeki anlamı | KURUCU | 05g ADR |
 | 15 | Kulak/ritim-only Hayalet'e girmez (ADR) | KAPALI (karar) | 05g ADR |
-| 16 | 05e2: NextStep kısmi veriden öneri (eski akış) | AÇIK | 05g notu |
+| 16 | 05e2: NextStep kısmi veriden öneri (eski akış) | KAPALI (2026-11-15: `practice_outcome.dart` üretici kısmi veride yalnız tryAgain/checkSetup; test `test/ux_16_partial_nextstep_test.dart` "16 uretici" / "16 tam kosu" / "16 sonuc ekrani"; düzeltmeden önce kırmızı: `scratch/2026-11-15-ostinato-16/kirmizi_once.txt`; eski `ux_05e2` ham-öneri beklentisi güncellendi) | 05g notu |
 | 17 | Sahne yükleme hatası ile "ölçülen ders yok" aynı durum | AÇIK (ayrı bilet) | 05h-2 |
 | 18 | Üyelik zaman aşımı yükte sessizce ücretsiz ders gösterir | KURUCU (05b2 kararı) | 05h-2 |
 | 19 | Senkron/hesap yüzeylerinin "çevrimdışı" metni | AÇIK (Core işi) | 05h-2 |
