@@ -9,11 +9,11 @@ Tarih: 2026-11-15 · Durum: ÖNERİLDİ (kurucu kararı "b: Veli izni akışı" 
 Bugünkü kural: 13 yaş altı hiçbir yerde Motion hesabı açamaz.
 
 - Yaş kararı Core'dadır. `motion_account` paketi `ventures/motion-core/lib/packages/motion_account/lib/src/motion_age_policy.dart` içinde `MotionAgePolicy.minimumAge = 13`, `bandFor` ve `MotionAgeBand { blocked, parentalConsentRequired, teen, adult }` taşır. `blocked` = "Under 13: no account and no account data collection". Ostinato bu paketi git revizyonuna sabitlenmiş olarak tüketir (`pubspec.yaml`, `motion_account` git bağımlılığı); Core kodunu Ostinato'dan değiştiremeyiz.
-- 13 ile ülkenin dijital rıza yaşı arasındaki hesap için Core'da veli onayı VAR: `MotionParentalConsent { none, pending, approved, denied, expired }` (`motion_account_client.dart`), `motion-parental-consent` edge fonksiyonu ve `motion_parental_consents` tablosu (okuma tarafı gözlendi; sunucu tarafı bu ADR için okunmadı). Reddedilme nedenleri `MotionConsentRequestError` (`invalidParentEmail`, `parentEmailIsTeen`, `tooSoon`, `dailyLimit`, `mailUnavailable` vb.). `docs/store/SALES-OPEN-REVIEW-AND-SANDBOX.md` onaylanmayan genç hesabının Core'da 30 gün sonra silindiğini söyler (Core R4 notuna atıfla; Core kaynağından yeniden doğrulanmadı).
+- 13 ile ülkenin dijital rıza yaşı arasındaki hesap için Core'da veli onayı VAR: `MotionParentalConsent { none, pending, approved, denied, expired }` (`motion_account_client.dart`), `motion-parental-consent` edge fonksiyonu ve `motion_parental_consents` tablosu (Core `docs/compliance/YAS-VELI-VE-SAKLAMA.md` okundu; SQL/edge kaynağı okunmadı). Gerçek akış: genç OTURUM AÇIKKEN veli e-postasını girer; 10 dk yeniden gönderim, günde 5 sınır; bağlantı 7 gün geçerli; veli adresi açık metin saklanmaz, yalnız SHA-256 özeti (belge satır 35); RET hesabı SİLER (satır 39); onaylanmayan hesap 30 gün sonra `motion_purge_unconsented_accounts()` ile silinir (satır 41). 13 altı için sunucu tetikleyicisi kaydı reddeder (`P0013`). İstemci reddedilme nedenleri `MotionConsentRequestError` (`invalidParentEmail`, `parentEmailIsTeen`, `tooSoon`, `dailyLimit`, `mailUnavailable` vb.). `docs/store/SALES-OPEN-REVIEW-AND-SANDBOX.md` onaylanmayan genç hesabının Core'da 30 gün sonra silindiğini söyler (Core R4 notuna atıfla; Core kaynağından yeniden doğrulanmadı).
 - Ostinato tarafı yalnız bir gerçeği saklar. `lib/app/age_gate_store.dart` `AgeGateStore`: `ostinato.age_gate.v1.json` dosyasında sabit `{"schemaVersion":1,"blocked":true}`; doğum ay/yılı, ülke, e-posta, hesap kimliği tutulmaz. `read()`: dosya yoksa engel yok; dosya var ama okunamaz/değişmişse engel sürer. `markBlocked()`: atomik yazım (`.tmp` + rename).
 - Bağlama: `lib/app/motion_account_bootstrap.dart` satır 38-39 `ageGate.read()` ile `ageBlocked` hesaplar; satır 57-58 `ageBlocked`/`onAgeBlocked: ageGate.markBlocked` verir; satır 81-85 `blockUnderAge` sonucu bir kez kalıcılaştırır; satır 106-107 her hesap sayfasına `ageBlocked` olarak geri verir. Sonuç: başka bir yaş girmek aynı cihazda kaydı yeniden açmaz.
 - Testler: `test/age_gate_store_test.dart` (3 test: işaretçi yok = engel yok; yeni örnekte kalıcılık ve yalnız sabit içerik; bozuk/değişmiş işaretçi engelli) ve `test/age_gate_binding_test.dart`.
-- Mağaza yaş sinyali yalnız sıkılaştırır: `lib/app/ostinato_release_policy.dart` ve `ios/Runner/Runner.entitlements` (`com.apple.developer.declared-age-range`); Core `MotionAgePolicy.storeCheck` mağaza `<13` ise aynı kalıcı engeli uygular.
+- Mağaza yaş sinyali yalnız sıkılaştırır ve Core'dadır: `motion_account_page.dart` satır 235 `MotionAgePolicy.storeCheck` mağaza `<13` ise aynı kalıcı engeli uygular; Ostinato tarafında yalnız `ios/Runner/Runner.entitlements` (`com.apple.developer.declared-age-range`) vardır. `lib/app/ostinato_release_policy.dart` yaş sinyali taşımaz (yalnız teen satın alma politikası, satır 85); bayrak yeri olarak önerilmesi §7'de ayrıdır.
 - 13 altı kullanıcı bugün uygulamayı hesapsız (misafir) kullanır: cihaz üstü pratik açık, hesap/satın alma yok (`docs/store/RELEASE-REVIEW.md` satır 59, `SALES-OPEN-REVIEW-AND-SANDBOX.md` S11).
 - Teen satın alma politikası (OST-K1): `ostinatoTeenPurchasePolicy = storeFamilyControls` (`ostinato_release_policy.dart` satır 85); 13 altı satın alamaz.
 
@@ -46,13 +46,13 @@ Bu ADR'nin önerdiği çerçeve:
 Sunucu (Core/Supabase; şema Core işidir):
 - yaş bandı (`under_13_consented` gibi bir bant; doğum günü asla yok, bugünkü ay/yıl kuralı sürer),
 - izin durumu (`pending/approved/denied/expired/withdrawn`), tarihler (istek, karar), doğrulama yöntemi etiketi,
-- veli e-postası: yalnız izin bekleme penceresi ve izin kaydı için; saklama süresi §6-4'te (öneri: karar anında özetlenmiş/anonim kayıt, ham adres silinir; hukuk ister ise izin ispatı için sınırlı süre tutulur).
+- veli e-postası: Core bugün ham adresi saklamaz, yalnız SHA-256 özetini (`YAS-VELI-VE-SAKLAMA.md` satır 35); adres yalnız gönderim anında işlenir. Bu ADR bunu korur. Saklanan özetin amacı ve süresi §6-4'tedir.
 
 Cihaz: bugünkü `ostinato.age_gate.v1.json` korunur; izin durumu için yeni dosya EKLENMEZ (durum Core'dan okunur), böylece cihazda ek kişisel veri oluşmaz.
 
 Saklanmaz: doğum günü, çocuğun adı/e-postası (hesap açılana kadar), ham ses/video, kimlik belgesi görüntüsü, kart numarası, konum, reklam kimliği.
 
-Silinme: hesap silme çocuğun hesabını, izin kaydını ve veli e-postasını birlikte siler (bugünkü `AccountDeletionCoordinator` akışı genişletilir; ayrıntı uygulama biletinde). Yasal ispat saklaması gerekiyorsa süre §6'da kurucu kararıyla.
+Silinme iki taraflıdır. Sunucu: `motion-delete-account` Auth kullanıcısını siler; `motion_profiles`, `motion_entitlements`, `motion_age_declarations`, `motion_parental_consents` FK cascade ile gider, anonim makbuz yazılır (`YAS-VELI-VE-SAKLAMA.md` satır 64); bu Core işidir. Ostinato: `deleteAccountData` / `AccountDeletionCoordinator` YALNIZ yerel dosyaları siler (`lib/app/account_data_directory.dart` satır 40-43: doğrulanmış hesap silmesi sonrası); izin/veli kaydına dokunmaz ve genişletilmesi önerilmez. İki taraf birlikte çalışır: sunucu silmesi makbuz üretir, Ostinato makbuzla yerel veriyi siler. Hesap açılmadan önceki bekleyen kayıt (§6-6) için silme Core tasarımına bağlıdır.
 
 ## 5. Mağaza yaş derecesi etkisi
 
@@ -73,13 +73,14 @@ Hukuki dayanaklar (hukuki tavsiye değil; doğrulanmadı, hukuk gerekir):
 
 Özet etki (kurucuya BİLGİ): (1) Apple yaş derecesi anketi ve Play hedef kitle/Data safety yeniden gözden geçirilir; derece değişmesi beklenmez ama kanıtlanmadı. (2) Kids/Families kategorisi hedeflenmezse kısıtlar (analitik, reklam, satın alma kapısı) zorunlu olmaz; ama 13 altı gerçek kullanıcı olduğu için gizlilik politikası ve mağaza beyanları güncellenmeli. (3) Mağaza metinleri ("Accounts require age 13 or older", `docs/store/RELEASE-REVIEW.md` satır 59) bayrak açılırken değişir; şimdi değiştirilmedi.
 
-## 6. Açık kurucu kararları (en fazla 5)
+## 6. Açık kurucu kararları (6 madde; 6. madde Core tasarım boşluğudur)
 
 1. İzin yöntemi. Seçenekler: (a) e-posta artı doğrulama bağlantısı, (b) mağaza aile mekanizmasını ek kapı olarak kullanmak, (c) daha güçlü doğrulama. Öneri: (a), çocuğa bağlı veri hesap açılana kadar toplanmaz ve hukuk ek doğrulama istiyorsa (c) sonradan eklenir.
 2. Kids/Families kategorisi hedef mi? Seçenekler: (a) hayır, karma kitle, kategoriye girilmez; (b) evet. Öneri: (a); (b) abonelik satın alma ve üçüncü taraf kısıtları nedeniyle ayrı kararla.
 3. 13 altı için ücretli abonelik. Seçenekler: (a) satın alma kapalı (bugünkü kural), (b) mağaza aile onayıyla açık. Öneri: (a).
-4. Veli e-postası saklama. Seçenekler: (a) karar anında sil, yalnız izin durumu ve tarih kalsın, (b) izin ispatı için sınırlı süre sakla (süre hukuk belirler). Öneri: (a); hukuk (b) isterse oradan.
-5. Süre aşımı ve yeniden deneme. Seçenekler: (a) 30 gün sonra sil, çocuk yeniden başlatabilir (günlük sınırlarla), (b) bir kez; sonra kalıcı engel. Öneri: (a), Core'un mevcut sınırlarıyla aynı.
+4. Veli adresi özeti saklama (Core ham adresi saklamıyor, yalnız SHA-256 özet). Seçenekler: (a) karar anında özeti de sil, yalnız izin durumu, tarih ve yöntem kalsın; (b) izin ispatı ve tekrar-istek sınırı için özeti sınırlı süre tut (süreyi hukuk belirler). Öneri: (a); ispat zorunluysa (b). Not: tek yönlü özet kişisel veri sayılmayabilir ya da sayılabilir; kesin değil, hukuk gerekir.
+5. Süre aşımı ve yeniden deneme. Core'da bugün: bekleyen kayıt 30 gün sonra silinir; bağlantı 7 gün geçerli; 10 dk yeniden gönderim, günde 5 istek (kaynak: `YAS-VELI-VE-SAKLAMA.md` satır 33-41, 13+ yolu için). "Yeniden başlatma" için ayrı bir kural belgelenmemiştir; 13 altı için tanımsızdır. Seçenekler: (a) 30 gün sonra sil, yeni istek mümkün ve aynı gönderim sınırları geçerli; (b) bir kez, sonra kalıcı engel. Öneri: (a), gönderim sınırları Core'dakiyle aynı kalsın; yeniden başlatma kuralı Core'da yazılmalı.
+6. Hesapsız bekleyen izin kaydının kimliği. Core'da veli isteği açık oturumlu bir genç hesabı ister, ret hesabı siler ve 13 altı kayıt `P0013` ile reddedilir; §3'teki "çocuk hesabı oluşturulmaz" bununla çelişir. Çocuğun hesabı yokken bekleyen izin hangi kimliğe/cihaza bağlanır? Seçenekler: (a) çocuk için kısıtlı hesap açılır (çocuğun e-postası izinden önce toplanır; "izinsiz veri yok" ilkesine aykırı); (b) cihaz başına rastgele, çocuğa ait olmayan bir bekleme jetonu: kayıt yalnız jeton özeti + veli adres özeti + tarih; çocuk e-postası/hesabı izinden SONRA; (c) veli kendi Motion hesabıyla başlatır ve çocuk profili ona bağlanır (aile modeli; en büyük Core işi). Öneri: (b); kesin değil, Core tasarımı ve hukuk onayı gerekir.
 
 Ek bağımlılık (karar değil): akış Core'da yeni bir yaş bandı ve sunucu değişikliği ister; Ostinato bunu Core'dan bir sürümle tüketir. Core işi Motion orchestration üzerinden ayrı biletle istenir.
 
@@ -96,7 +97,7 @@ Ek bağımlılık (karar değil): akış Core'da yeni bir yaş bandı ve sunucu 
 
 - Core'a bağımlılık: yeni bant Core'dadır; gecikirse akış açılamaz.
 - Veli beyanı sahte olabilir; seçilen yöntem hukuken yeterli olmayabilir (hukuk doğrulaması şart).
-- 13 altı kitle mağaza beyanlarını (Play hedef kitle, Data safety, Apple anket) ve gizlilik politikasını (`https://yulalab.com/privacy/motion`) etkiler; yanlış beyan mağaza riski taşır.
+- 13 altı kitle mağaza beyanlarını (Play hedef kitle, Data safety, Apple anket) ve gizlilik politikasını (`https://yulalab.com/privacy/motion`) etkiler; hatalı beyan mağaza riski taşır.
 - Mikrofon verisi çocuk için "hassas" sayılır (Play Families); ham ses cihazdan çıkmama taahhüdü testle korunmalı.
 
 ## 9. Kapsam dışı
