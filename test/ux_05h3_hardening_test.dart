@@ -124,11 +124,7 @@ void main() {
       ]) {
         testWidgets(
           'yazi 2.0 + hareketi azalt: ${size.width.toInt()}x${size.height.toInt()} '
-          '$handle katman acilir, tasmaz, ek cam yok'
-          '${size.width == 360 ? ' [BEKLENEN-BASARISIZ: BULGU 360x640 yazi 2.0 sahne 30 px saga tasar]' : ''}',
-          // Gercek bulgu (yazi 2.0 gercekten uygulaninca): kaynak widget
-          // bulunamadi; urun duzeltmesi 05h-3 kapsami disi. FLAG-CHECKLIST #24.
-          skip: size.width == 360,
+          '$handle katman acilir, tasmaz, ek cam yok',
           (t) async {
             final rig = Rig05f();
             await boot05f(t, reduced(t, rig), size: size);

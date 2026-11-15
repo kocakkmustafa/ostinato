@@ -975,9 +975,11 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                   beatsPerBar: _score.beatsPerBar,
                 )
               else
-                Text(
-                  localized(context, 'Metronome ready', 'Metronom hazır'),
-                  style: monoText(size: 11, color: palette.textMuted),
+                Flexible(
+                  child: Text(
+                    localized(context, 'Metronome ready', 'Metronom hazır'),
+                    style: monoText(size: 11, color: palette.textMuted),
+                  ),
                 ),
               const SizedBox(width: 8),
               Expanded(
