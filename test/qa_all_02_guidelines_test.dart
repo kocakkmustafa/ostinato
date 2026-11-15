@@ -226,7 +226,9 @@ void main() {
     for (final s in _screens.entries) {
       for (final g in _guidelines.entries) {
         final id = '${s.key}/${g.key}';
-        testWidgets(id, (t) async {
+        testWidgets('$id${_findings.containsKey(id) ? ' [BULGU]' : ''}', (
+          t,
+        ) async {
           final handle = t.ensureSemantics();
           final close = await s.value(t, 1.0);
           await expectLater(t, meetsGuideline(g.value()));
@@ -285,5 +287,41 @@ void main() {
       await clean(t, 'sonuc-sonrasi');
       await close();
     });
+  });
+
+  group('C) sonuc satiri: deger sag kenarda (eski davranis)', () {
+    for (final size in const [Size(390, 844), Size(360, 640)]) {
+      for (final scale in const [1.0, 2.0]) {
+        testWidgets('${size.width.toInt()} x$scale', (t) async {
+          await t.binding.setSurfaceSize(size);
+          addTearDown(() => t.binding.setSurfaceSize(null));
+          await t.pumpWidget(
+            practiceHost(
+              _scaled(
+                scale,
+                PracticeResultScreen(
+                  lesson: _lesson(),
+                  score: _score,
+                  summary: _summary(),
+                  stage: true,
+                ),
+              ),
+            ),
+          );
+          await t.pump();
+          expect(t.takeException(), isNull, reason: 'tasma yok');
+          for (final k in const ['result-accuracy', 'result-heard']) {
+            final v = find.byKey(Key(k));
+            expect(v, findsOneWidget, reason: k);
+            final row = find.ancestor(of: v, matching: find.byType(Row)).first;
+            expect(
+              t.getTopRight(v).dx,
+              closeTo(t.getTopRight(row).dx, 0.5),
+              reason: '$k: deger sag kenari satir sag kenari',
+            );
+          }
+        });
+      }
+    }
   });
 }

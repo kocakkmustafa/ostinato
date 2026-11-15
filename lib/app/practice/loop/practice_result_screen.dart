@@ -344,9 +344,11 @@ class PracticeResultScreen extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 3),
         child: Row(
+          // Deger her zaman satirin sag kenarinda; 2x yazida ikisi de daralir.
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(child: Text(name, style: hankenText(size: 14))),
-            // 2x yazi olceginde deger satiri tasmasin: deger de daralir.
+            Flexible(child: Text(name, style: hankenText(size: 14))),
+            const SizedBox(width: 8),
             Flexible(
               child: Text(
                 value,
