@@ -1,0 +1,119 @@
+{
+  "id": "voc-s4-m16-14",
+  "title": {
+    "en": "Pentatonic checkpoint",
+    "tr": "Pentatonik geçişi"
+  },
+  "goal": {
+    "en": "Sings the major and minor pentatonic scales with the click at ♩=80 and improvises one twelve-bar chorus from the blues scale over a backing.",
+    "tr": "Majör ve minör pentatonik gamları klikle ♩=80'de söyler ve eşlik üstünde blues gamından 12 ölçülük bir tur doğaçlar."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint has three parts. Each part must pass on its own; a passed part is kept.",
+      "tr": "Bu geçişin üç bölümü var. Her bölüm kendi başına geçmeli; geçtiğin bölüm saklanır."
+    },
+    {
+      "en": "Part 1: the major pentatonic, 1-2-3-5-6-8 and back, with the click at ♩=80.",
+      "tr": "1. bölüm: majör pentatonik, 1-2-3-5-6-8 ve geri, klikle ♩=80."
+    },
+    {
+      "en": "Part 2: the minor pentatonic, 1-♭3-4-5-♭7-8 and back, with the click at ♩=80.",
+      "tr": "2. bölüm: minör pentatonik, 1-♭3-4-5-♭7-8 ve geri, klikle ♩=80."
+    },
+    {
+      "en": "Part 3: one 12-bar chorus over the backing at ♩=80, with notes from the blues scale: 1, ♭3, 4, ♭5, 5 and ♭7.",
+      "tr": "3. bölüm: eşlik üstünde ♩=80'de 12 ölçülük bir tur; blues gamının notalarıyla: 1, ♭3, 4, ♭5, 5 ve ♭7."
+    },
+    {
+      "en": "If a note is not comfortable, skip it or sing it an octave lower. That does not count as a different note.",
+      "tr": "Bir nota rahat değilse atla ya da bir oktav aşağıda söyle. Bu farklı nota sayılmaz."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "Click at ♩=80 with a one-bar count-in for parts 1 and 2; an original twelve-bar shuffle backing in your key at ♩=80 for part 3. Headphones recommended.",
+      "tr": "1. ve 2. bölüm için bir ölçü sayma girişiyle ♩=80'de klik; 3. bölüm için kişisel tonunda ♩=80'de özgün 12 ölçülük shuffle eşlik. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Warm up first. Parts 1 and 2: after the count-in sing each scale up and back at ♩=80, one note per click, and hold the last do for two clicks. Part 3: improvise one 12-bar chorus over the backing using only the blues scale. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Önce ısın. 1. ve 2. bölüm: giriş sayımından sonra her gamı ♩=80'de çık ve geri in, her klike bir nota; son do'yu iki klik tut. 3. bölüm: eşlik üstünde yalnız blues gamıyla 12 ölçülük bir tur doğaçla. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "1-2-3-5 | 6-8-6-5 | 3-2-1:h | 1-b3-4-5 | b7-8-b7-5 | 4-b3-1:h",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Scales: Level 4 pitch and timing accuracy. Improvisation: at least 90% of your notes are in the blues scale pool.",
+        "tr": "Her bölüm kendi başına geçer. Gamlar: Seviye 4 perde ve zamanlama ölçütü. Doğaçlama: notalarının en az %90'ı blues gamı havuzundan gelir."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭3 a semitone high.",
+        "tr": "Farklı nota: ♭3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "In part 2 the major mi came back. Hear do, then go up a minor third.",
+        "tr": "2. bölümde majör mi geri gelmiş. Do'yu duy, sonra küçük üçlü çık."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: outside the pool.",
+        "tr": "Farklı nota: havuzun dışında."
+      },
+      "fix": {
+        "en": "In part 3 keep 3 and 7 flat. When unsure, land on 1 or 5.",
+        "tr": "3. bölümde 3'ü ve 7'yi bemol tut. Emin değilsen 1'e ya da 5'e otur."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If a scale part did not pass, practise it at ♩=70 in Major pentatonic or Minor pentatonic, then retake only that part.",
+    "tr": "Bir gam bölümü geçmediyse onu Majör pentatonik ya da Minör pentatonik dersinde ♩=70'te çalış, sonra yalnız o bölümü yeniden dene."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

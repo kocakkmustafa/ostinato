@@ -1,0 +1,129 @@
+{
+  "id": "voc-s4-m17-12",
+  "title": {
+    "en": "Concone: a flowing lesson",
+    "tr": "Concone: akıcı bir ders"
+  },
+  "goal": {
+    "en": "Sings the first 12 bars of Concone's Op. 9 No. 14 on one vowel at ♩=72, keeping its eighth-note groups even and its line connected.",
+    "tr": "Concone'nin Op. 9 No. 14'ünün ilk 12 ölçüsünü tek ünlüyle ♩=72'de, sekizlik gruplarını eşit ve çizgisini bağlı tutarak söyler."
+  },
+  "explanation": [
+    {
+      "en": "Giuseppe Concone was an Italian singing teacher of the 19th century. His 50 lessons, Op. 9, are vocalises: melodies sung on a vowel, with no words.",
+      "tr": "Giuseppe Concone 19. yüzyılda yaşamış İtalyan bir şan öğretmeniydi. 50 dersi, Op. 9, vokalizdir: sözsüz, bir ünlüyle söylenen ezgiler."
+    },
+    {
+      "en": "You sing bars 1–12 of No. 14, Allegro giusto, in E minor and 4/4; degrees count from the minor home note, 1. Long notes, some tied across the bar line, flow into groups of three or four eighths that move by step on one vowel, like the runs in this module.",
+      "tr": "No. 14'ün (Allegro giusto) 1–12. ölçülerini Mi minör ve 4/4'te söylersin; dereceler minörün ev notasından, 1'den sayılır. Bazıları ölçü çizgisini aşarak bağlanan uzun notalar, tek ünlü üzerinde basamakla ilerleyen üçlü ya da dörtlü sekizlik gruplarına akar; bu modüldeki koşular gibi."
+    },
+    {
+      "en": "Keep the quick notes even and light, and let the longer notes sing. The line never stops inside a phrase.",
+      "tr": "Hızlı notaları eşit ve hafif tut; uzun notalar şarkı söylesin. Çizgi bir cümlenin içinde hiç durmaz."
+    },
+    {
+      "en": "Breathe only at the marks and in the rests: in bars 2 and 6 the mark comes right after the tied note, before the eighths. Take an easy breath, not a big one. The passage ends on low ♭7, a half close; the lesson continues in the book.",
+      "tr": "Yalnız işaretlerde ve suslarda nefes al: 2. ve 6. ölçülerde işaret bağlı notanın hemen ardından, sekizliklerden önce gelir. Büyük değil, rahat bir nefes al. Bölüm alttaki ♭7'de, yarım bir duruşla biter; ders kitapta devam eder."
+    },
+    {
+      "en": "The app moves the passage into your personal key, and the accompaniment follows. Sing on 'ah'. If the throat tightens or you get tired, end the lesson for today.",
+      "tr": "Uygulama bölümü kişisel tonuna taşır; eşlik de onu izler. 'a' ile söyle. Boğaz sıkışırsa ya da yorulursan dersi bugünlük bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The selected passage from the Ostinato edition in your comfortable range, soft synthesized voice on 'ah', at ♩=72 and ♩=54, over a soft accompaniment with a click. Headphones recommended.",
+      "tr": "Ostinato baskısından seçilen bölüm rahat menzilinde, 'a' ile yumuşak sentez ses, ♩=72 ve ♩=54; klikli yumuşak eşlikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Read the passage the screen shows. Listen to one bar of the accompaniment, then sing it on 'ah', phrase by phrase at ♩=54 first, then the whole passage at ♩=72. Breathe only at the marks. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Ekranın gösterdiği bölümü oku. Eşliğin bir ölçüsünü dinle, sonra onu 'a' ile söyle; önce ♩=54'te cümle cümle, sonra bütün bölümü ♩=72'de. Yalnız işaretlerde nefes al. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "sequence": "1:w~h~e 2:e b3:e 4:e | 5:h. 4:q | b3 2 1 qr | b6:w~h~e 4:e 2:e 1:e | b7,:h. b7:q | 5 4 b3 qr | b7:w~e 4:e 2:e 1:e b7,:q qr | b7:w~e 4:e 2:e 1:e b7,:q qr",
+    "tempo": {
+      "open": 72,
+      "target": 72
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The quick notes stayed even and light.",
+      "tr": "Hızlı notalar eşit ve hafif kaldı."
+    },
+    {
+      "en": "I breathed only at the breath marks.",
+      "tr": "Yalnız nefes işaretlerinde nefes aldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early in the quick notes.",
+        "tr": "Doğru, ama hızlı notalarda erken."
+      },
+      "fix": {
+        "en": "Feel the first note of each group on its click. Sing that bar at ♩=54, then return to ♩=72.",
+        "tr": "Her grubun ilk notasını kendi klikinde hisset. O ölçüyü ♩=54'te söyle, sonra ♩=72'ye dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the end of a long phrase, a little low.",
+        "tr": "Uzun cümlenin sonunda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Keep the energy to the last note. Sing the phrase at ♩=54 and think 'up' on the final note.",
+        "tr": "Enerjiyi son notaya kadar koru. Cümleyi ♩=54'te söyle ve son notada 'yukarı' diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only the first phrase at ♩=54 until it feels easy, then add one phrase at a time.",
+    "tr": "İlk cümleyi rahat gelene kadar ♩=54'te tek başına söyle, sonra her seferinde bir cümle ekle."
+  },
+  "repertoire": "Giuseppe Concone (1801–1861), 50 Leçons de chant pour le médium de la voix, Op. 9: No. 14, Allegro giusto, E minor, bars 1–12 (selection). Source: Edition Peters No. 980 (Leipzig: C. F. Peters, plate 6437, c. 1880; printed by permission of Joh. André, Offenbach), p. 18; scan https://archive.org/details/50leconsdechantp00conc (catalogued as Universal, 1880; scan page 20). Public domain: composer died in 1861; edition published before 1930 with no editor named on the music. Vocalise, no words; voice line only, the piano part is not used. Legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

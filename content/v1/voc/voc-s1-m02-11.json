@@ -1,0 +1,119 @@
+{
+  "id": "voc-s1-m02-11",
+  "title": {
+    "en": "Match one note (±25 cents)",
+    "tr": "Tek nota eşleştir (±25 cent)"
+  },
+  "goal": {
+    "en": "Matches single notes in their own octave within 25 cents.",
+    "tr": "Tek notaları kendi oktavında 25 cent içinde eşleştirir."
+  },
+  "explanation": [
+    {
+      "en": "Same task, with the tightest target in this module: within 25 cents.",
+      "tr": "Görev aynı; bu modülün en dar hedefiyle: 25 cent içi."
+    },
+    {
+      "en": "25 cents is a quarter of a half step. Matching this closely is a good level for an amateur singer.",
+      "tr": "25 cent yarım sesin dörtte biridir. Bu kadar yakın eşleştirmek amatör bir şarkıcı için iyi bir düzeydir."
+    },
+    {
+      "en": "Sing softly and listen for the moment your note blends with the one in your head.",
+      "tr": "Hafif söyle ve notanın kafandaki notayla kaynaştığı ana kulak ver."
+    },
+    {
+      "en": "If a note keeps landing just off, check the meter after each try and make a very small move.",
+      "tr": "Bir nota hep biraz kenarda kalıyorsa her denemeden sonra göstergeye bak ve çok küçük bir hareket yap."
+    },
+    {
+      "en": "Notes come from your comfortable range. Never push or strain to reach one.",
+      "tr": "Notalar rahat menzilinden seçilir. Bir notaya ulaşmak için asla zorlama."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Eight single notes from your comfortable range, soft synthesized voice, each played twice.",
+      "tr": "Rahat menzilinden sekiz tek nota, yumuşak sentez ses, her biri iki kez."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to each of 8 notes and sing it back in your own octave for about two seconds.",
+      "tr": "8 notanın her birini dinle ve kendi oktavında yaklaşık iki saniye geri söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 6 of 8 notes with a median within 25 cents (octave-folded).",
+        "tr": "8 notanın en az 6'sında medyan sapma 25 cent ya da altında (oktav katlanmış)."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Sung right after the reference, my note felt like the same note.",
+      "tr": "Referansın hemen ardından söylediğim nota aynı nota gibi geldi."
+    },
+    {
+      "en": "I held each note steady for about two seconds.",
+      "tr": "Her notayı yaklaşık iki saniye sabit tuttum."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little high.",
+        "tr": "Farklı nota, biraz yüksek."
+      },
+      "fix": {
+        "en": "Replay the note and let it settle slightly lower. Keep the volume easy; pushing tends to raise the pitch.",
+        "tr": "Notayı yeniden dinle ve biraz daha aşağıda yerleşmesine izin ver. Gürlüğü rahat tut; zorlamak perdeyi yükseltmeye eğilimlidir."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but unsteady: the pitch wobbles.",
+        "tr": "Doğru, ama kararsız: perde dalgalanıyor."
+      },
+      "fix": {
+        "en": "Sing a little softer and keep the jaw loose; let the air flow out evenly.",
+        "tr": "Biraz daha hafif söyle ve çeneni gevşek tut; havayı eşit akıt."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each note twice before you sing and hum it softly first.",
+    "tr": "Söylemeden önce her notayı iki kez dinle ve önce hafifçe mırıldan."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

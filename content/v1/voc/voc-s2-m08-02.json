@@ -1,0 +1,96 @@
+{
+  "id": "voc-s2-m08-02",
+  "title": { "en": "Your soft and your strong", "tr": "Senin hafif ve güçlü sesin" },
+  "goal": {
+    "en": "Hums a comfortable soft (p) and strong (f) tone on the same note, at least 5 dB apart, and keeps them as a personal reference.",
+    "tr": "Aynı notada rahat bir hafif (p) ve güçlü (f) mırıldanma yapar; aradaki fark en az 5 dB olur ve bunları kişisel referans olarak saklar."
+  },
+  "explanation": [
+    {
+      "en": "p (piano) means soft and f (forte) means strong. In this course both are measured against your own voice, not against a number on a meter.",
+      "tr": "p (piyano) hafif, f (forte) güçlü demektir. Bu kursta ikisi de bir sayaçtaki sayıya göre değil, kendi sesine göre ölçülür."
+    },
+    {
+      "en": "Your f is your comfortable strong voice, never a shout.",
+      "tr": "Senin f'in rahat güçlü sesindir, asla bağırma değildir."
+    },
+    {
+      "en": "Your p is soft but still a clear tone, not a whisper. If the meter says “Couldn't hear”, your p is a little too soft.",
+      "tr": "Senin p'in hafiftir ama hâlâ net bir sestir, fısıltı değildir. Gösterge “Duyamadım” derse p'in biraz fazla hafiftir."
+    },
+    {
+      "en": "Loudness and pitch are separate. The f hum stays on the same note as the p hum.",
+      "tr": "Gürlük ve perde ayrıdır. f mırıldanması p mırıldanmasıyla aynı notada kalır."
+    },
+    {
+      "en": "The app keeps the difference between your p and f as a relative reference for the rest of this module. It is not a target to beat.",
+      "tr": "Uygulama p ile f arasındaki farkı bu modülün geri kalanı için göreli bir referans olarak saklar. Aşılacak bir hedef değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "One comfortable note from your range, hummed softly, then the same note a little stronger, about 3 seconds each.",
+      "tr": "Menzilinden rahat bir nota; önce hafifçe, sonra aynı nota biraz daha güçlü, her biri yaklaşık 3 saniye mırıldanır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "On your comfortable 1, hum “mm” softly for about 3 seconds. Rest, then hum the same note strongly for about 3 seconds. Do 3 pairs and breathe normally between them. Sing in your own octave.",
+      "tr": "Rahat 1'inde yaklaşık 3 saniye hafifçe “mm” diye mırıldan. Dinlen, sonra aynı notayı yaklaşık 3 saniye güçlü mırıldan. 3 çift yap ve aralarda normal nefes al. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In at least 2 of the 3 pairs, f is at least 5 dB above p, and both hums stay within 40 cents of the same note.",
+        "tr": "3 çiftin en az 2'sinde f, p'den en az 5 dB yüksek ve iki mırıldanma da aynı notaya 40 cent içinde kalır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My soft hum was still a clear tone.", "tr": "Hafif mırıldanmam hâlâ net bir sesti." },
+    { "en": "My strong hum felt easy, not pushed.", "tr": "Güçlü mırıldanmam itilmiş değil, rahat hissettirdi." },
+    { "en": "Both hums stayed on the same note.", "tr": "İki mırıldanma da aynı notada kaldı." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the f hum goes sharp.",
+        "tr": "Farklı nota: f mırıldanması tizleşiyor."
+      },
+      "fix": {
+        "en": "Start the strong hum from the soft one's note. Think “more sound”, not “higher”.",
+        "tr": "Güçlü mırıldanmayı hafif olanın notasından başlat. “Daha yüksek” değil, “daha çok ses” diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but p and f are less than 5 dB apart.",
+        "tr": "Doğru, ama p ile f arasındaki fark 5 dB'den az."
+      },
+      "fix": {
+        "en": "Make the soft hum softer rather than the strong one stronger.",
+        "tr": "Güçlü olanı güçlendirmek yerine hafif mırıldanmayı daha da hafifleştir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Keep the soft hum a clear tone, not a breath, and hold the phone at arm's length.",
+        "tr": "Hafif mırıldanmayı nefes değil, net bir ses olarak tut ve telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Do one pair only and rest longer before the next try.",
+    "tr": "Yalnız bir çift yap ve sonraki denemeden önce daha uzun dinlen."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

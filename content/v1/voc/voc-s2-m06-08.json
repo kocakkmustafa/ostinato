@@ -1,0 +1,101 @@
+{
+  "id": "voc-s2-m06-08",
+  "title": {
+    "en": "An interval from any note",
+    "tr": "Herhangi bir notadan aralık"
+  },
+  "goal": {
+    "en": "Sings a requested interval above a random starting note.",
+    "tr": "Rastgele bir başlangıç notasının üstüne istenen aralığı söyler."
+  },
+  "explanation": [
+    {
+      "en": "A starting note plays. The screen asks for one interval above it: M2, M3, P4 or P5.",
+      "tr": "Bir başlangıç notası çalar. Ekran onun üstünde bir aralık ister: B2, B3, T4 ya da T5."
+    },
+    {
+      "en": "Call the starting note do, whatever it is. Then M2 is re, M3 is mi, P4 is fa and P5 is sol.",
+      "tr": "Başlangıç notası ne olursa olsun ona do de. O zaman B2 re, B3 mi, T4 fa, T5 sol olur."
+    },
+    {
+      "en": "Sing the starting note first, then the target, and hold the target about two seconds.",
+      "tr": "Önce başlangıç notasını söyle, sonra hedefi; hedefi yaklaşık iki saniye tut."
+    },
+    {
+      "en": "Each task has a new starting note, always inside your comfortable range.",
+      "tr": "Her görevde başlangıç notası değişir; hep rahat menzilinin içinde kalır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Starting note in your range; after each task the target interval plays once for comparison.",
+      "tr": "Rahat menzilinde başlangıç notası; her görevden sonra hedef aralık karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Eight tasks: sing the starting note, then the interval shown on screen above it. Sing in your own octave.",
+      "tr": "Sekiz görev: başlangıç notasını söyle, sonra ekranda istenen aralığı onun üstünde söyle. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I called the starting note do every time.",
+      "tr": "Başlangıç notasına her seferinde do dedim."
+    },
+    {
+      "en": "I sang the starting note before the target.",
+      "tr": "Hedeften önce başlangıç notasını söyledim."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a whole step low.",
+        "tr": "Farklı nota: bir tam ses alçak."
+      },
+      "fix": {
+        "en": "You may have counted from the previous starting note. Hear the new one, call it do, then count again.",
+        "tr": "Önceki başlangıç notasından saymış olabilirsin. Yenisini dinle, ona do de ve yeniden say."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Before you sing, run the scale from do up to the target in your head.",
+    "tr": "Söylemeden önce içinden do'dan hedefe kadar gamı söyle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

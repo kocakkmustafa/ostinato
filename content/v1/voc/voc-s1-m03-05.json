@@ -1,0 +1,123 @@
+{
+  "id": "voc-s1-m03-05",
+  "title": {
+    "en": "Major scale at 70",
+    "tr": "♩=70'te majör gam"
+  },
+  "goal": {
+    "en": "Sings the major scale up and down with the click at ♩=70.",
+    "tr": "Majör gamı klikle ♩=70'te çıkıp iner."
+  },
+  "explanation": [
+    {
+      "en": "At ♩=70 each note is shorter. Move to the next note right on the click.",
+      "tr": "♩=70'te her nota daha kısadır. Sonraki notaya tam klikte geç."
+    },
+    {
+      "en": "One syllable per click. Breathe before you start and, if needed, once more after the top do.",
+      "tr": "Her klike bir hece. Başlamadan nefes al; gerekirse üstteki do'dan sonra bir kez daha."
+    },
+    {
+      "en": "Keep the volume even. Speed often makes the top notes louder; keep them as light as the bottom ones.",
+      "tr": "Gürlüğü eşit tut. Hız üst notaları çoğu zaman gürleştirir; onları alttakiler kadar hafif tut."
+    },
+    {
+      "en": "Coming down, the half steps are do–ti and fa–mi. They tend to drift wide, so keep them small.",
+      "tr": "İnerken yarım sesler do–si ve fa–mi'dir. Açılmaya meyillidirler; küçük tut."
+    },
+    {
+      "en": "The app places the scale inside your comfortable range. If the top notes feel tight, turn back at la.",
+      "tr": "Uygulama gamı rahat menzilinin içine yerleştirir. Üst notalar zorlarsa la'da geri dön."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then the scale 1→8→1 in your range at ♩=70 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 1→8→1 gamı; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in, sing the scale up and down, one syllable per click, and hold the last 1 for two clicks. Start at ♩=60 and move up in steps of 5 to ♩=70. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra gamı çık ve in, her klike bir hece; son 1'i iki klik tut. ♩=60'tan başla, 5'er adımla ♩=70'e çık. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5-6-7-8 | 7-6-5-4 | 3-2-1:h",
+    "tempo": {
+      "open": 60,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I moved to each note on the click.",
+      "tr": "Her notaya klikte geçtim."
+    },
+    {
+      "en": "The top notes were no louder than the bottom ones.",
+      "tr": "Üst notalar alttakilerden gür değildi."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late on the way down.",
+        "tr": "Doğru, ama inerken geç."
+      },
+      "fix": {
+        "en": "Keep the syllables short and move on the click; don't wait for the note to settle.",
+        "tr": "Heceleri kısa tut ve klikte geç; notanın oturmasını bekleme."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but early.",
+        "tr": "Doğru, ama erken."
+      },
+      "fix": {
+        "en": "You are rushing the scale. Wait for each click before you move.",
+        "tr": "Gamı aceleye getiriyorsun. Geçmeden önce her kliği bekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, ti a semitone low.",
+        "tr": "Farklı nota: si yarım ses alçak."
+      },
+      "fix": {
+        "en": "Ti is a half step below do; aim it close to the top do.",
+        "tr": "Si, do'nun yarım ses altındadır; onu üstteki do'ya yakın hedefle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Go back to ♩=60 and sing only 1→5→1, then the full scale.",
+    "tr": "♩=60'a dön ve önce yalnız 1→5→1'i söyle, sonra tam gamı."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

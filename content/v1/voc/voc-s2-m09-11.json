@@ -1,0 +1,101 @@
+{
+  "id": "voc-s2-m09-11",
+  "title": { "en": "Your own warm-up and stop signals", "tr": "Kendi ısınman ve durma sinyallerin" },
+  "goal": {
+    "en": "Builds a five-minute warm-up order from earlier lessons, runs it once with three measured parts, and names their own stop signals.",
+    "tr": "Önceki derslerden beş dakikalık bir ısınma sırası kurar, üç parçası ölçülerek bir kez uygular ve kendi durma sinyallerini sayar."
+  },
+  "explanation": [
+    {
+      "en": "A warm-up prepares, it does not test. It wakes the voice up gently before the real work.",
+      "tr": "Isınma hazırlar, sınamaz. Asıl çalışmadan önce sesi nazikçe uyandırır."
+    },
+    {
+      "en": "Build a short order from what you know: settle and breathe, a gentle hum, lip-trill slides, then a small line such as 1-2-3-2-1 or the arpeggio 1-3-5-3-1. Keep it about five minutes.",
+      "tr": "Bildiklerinden kısa bir sıra kur: yerleş ve nefes al, hafif bir mırıldanma, dudak titreşimiyle kaydırmalar, sonra 1-2-3-2-1 ya da 1-3-5-3-1 arpeji gibi küçük bir dizi. Yaklaşık beş dakika tut."
+    },
+    {
+      "en": "Go from easy to a little more: soft before full, small range before wider, slow before faster.",
+      "tr": "Kolaydan biraz daha fazlasına git: hafiften doluya, dar menzilden genişe, yavaştan hızlıya."
+    },
+    {
+      "en": "Know your stop signals: pain, hoarseness that lasts, a scratchy throat, breathlessness or dizziness. Then stop and rest. If a voice problem lasts, ask a suitable professional; the app does not assess your voice.",
+      "tr": "Durma sinyallerini bil: ağrı, süren kısıklık, gıcıklanan boğaz, nefessizlik ya da baş dönmesi. O zaman dur ve dinlen. Bir ses sorunu sürerse uygun bir uzmana danış; uygulama sesini değerlendirmez."
+    },
+    {
+      "en": "If a warm-up step feels effortful, remove it and keep the breath and the hum. A shorter warm-up is still a warm-up.",
+      "tr": "Bir ısınma adımı zorlu geliyorsa onu çıkar, nefesi ve mırıldanmayı tut. Kısa ısınma da ısınmadır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A slow, soft example of each warm-up step you choose, in your comfortable range: a hum, a lip-trill slide 1→5→1, 1-2-3-2-1 and 1-3-5-3-1.",
+      "tr": "Seçtiğin her ısınma adımının rahat menzilinde yavaş ve yumuşak bir örneği: bir mırıldanma, dudak titreşimiyle 1→5→1 kaydırma, 1-2-3-2-1 ve 1-3-5-3-1."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Choose your warm-up steps and their order on screen, about five minutes in total. Run it once. Three steps are measured: a held hum, a 1-2-3-2-1 and a 1-3-5-3-1. Then tick the checklist.",
+      "tr": "Ekranda ısınma adımlarını ve sırasını seç; toplam yaklaşık beş dakika. Bir kez uygula. Üç adım ölçülür: tutulan bir mırıldanma, bir 1-2-3-2-1 ve bir 1-3-5-3-1. Sonra kontrol listesini işaretle."
+    },
+    "sequence": "1-2-3-2 | 1:w | 1-3-5-3 | 1:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Finish the routine and tick every item on the checklist. The three measured steps meet the Level 2 pitch criteria. The checklist part is marked as self-reported.",
+        "tr": "Rutini bitir ve kontrol listesindeki her maddeyi işaretle. Ölçülen üç adım Seviye 2 perde ölçütünü karşılar. Kontrol listesi bölümü kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My warm-up had a clear order and took about five minutes.",
+      "tr": "Isınmamın net bir sırası vardı ve yaklaşık beş dakika sürdü."
+    },
+    {
+      "en": "Each step started softly and in a comfortable range.",
+      "tr": "Her adım hafif ve rahat menzilde başladı."
+    },
+    {
+      "en": "I can name my stop signals: pain, lasting hoarseness, a scratchy throat, breathlessness, dizziness.",
+      "tr": "Durma sinyallerimi sayabiliyorum: ağrı, süren kısıklık, gıcıklanan boğaz, nefessizlik, baş dönmesi."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, the first measured step a little low.", "tr": "Farklı nota: ölçülen ilk adım biraz alçak." },
+      "fix": {
+        "en": "Your voice is still waking up. Put the hum and the slides before the measured steps, then measure again.",
+        "tr": "Sesin henüz uyanıyor. Mırıldanmayı ve kaydırmaları ölçülen adımlardan önceye al, sonra yeniden ölç."
+      }
+    },
+    {
+      "error": { "en": "Checklist: one step felt effortful.", "tr": "Kontrol listesi: bir adım zorlu geldi." },
+      "fix": {
+        "en": "Remove that step and keep the breath and the hum. A shorter warm-up is still a warm-up.",
+        "tr": "O adımı çıkar, nefesi ve mırıldanmayı tut. Kısa ısınma da ısınmadır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Make a three-minute version: breath, hum and one 1-2-3-2-1.",
+    "tr": "Üç dakikalık bir sürüm yap: nefes, mırıldanma ve bir 1-2-3-2-1."
+  },
+  "legacy": "R: vocal-19",
+  "minutes": 10,
+  "expertPending": true
+}

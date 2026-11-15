@@ -1,0 +1,116 @@
+{
+  "id": "voc-s4-m18-04",
+  "title": {
+    "en": "Parallel thirds below",
+    "tr": "Alttan paralel üçlüler"
+  },
+  "goal": {
+    "en": "Sings an original four-bar part a third below a melody at ♩=70.",
+    "tr": "Bir ezginin bir üçlü altında özgün dört ölçülük bir partiyi ♩=70'te söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "A third is two scale steps apart, like do and mi. Thirds are the most common harmony in songs.",
+      "tr": "Üçlü, dizide iki basamak uzaklıktır; do ile mi gibi. Şarkılarda en sık kullanılan armonidir."
+    },
+    {
+      "en": "The other voice sings the melody: mi-fa-sol-mi, fa-sol-la, sol-fa-mi-re, mi. You sing two steps under every note: do-re-mi-do, re-mi-fa, mi-re-do-ti, do.",
+      "tr": "Diğer ses ezgiyi söyler: mi-fa-sol-mi, fa-sol-la, sol-fa-mi-re, mi. Sen her notanın iki basamak altını söylersin: do-re-mi-do, re-mi-fa, mi-re-do-si, do."
+    },
+    {
+      "en": "Your part moves the same way as the melody, step for step. Learn it alone first, then sing it under the melody.",
+      "tr": "Partin ezgiyle aynı yönde, adım adım ilerler. Önce tek başına öğren, sonra ezginin altında söyle."
+    },
+    {
+      "en": "The melody is above you and easy to follow. Keep your ear on your own line.",
+      "tr": "Ezgi üstündedir ve izlemesi kolaydır. Kulağını kendi partinde tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Your part alone on 'la' in your comfortable range, soft synthesized voice, at ♩=70 and ♩=50. Then the melody (3-4-5-3 | 4-5 6:h | 5-4-3-2 | 3:w) on a second synthesized voice over soft original chords with a click, once with your part and once without. Headphones recommended.",
+      "tr": "Partin tek başına, rahat menzilinde 'la' ile, yumuşak sentez ses, ♩=70 ve ♩=50. Sonra ezgi (3-4-5-3 | 4-5 6:h | 5-4-3-2 | 3:w) ikinci bir sentez seste, yumuşak özgün akorlar ve klikle; bir kez partinle, bir kez partin olmadan. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Learn your part alone with the slow reference. Then listen to one bar of the accompaniment and sing your four bars on 'la' under the melody at ♩=70. Sing in your own octave.",
+      "tr": "Partini önce yavaş referansla tek başına öğren. Sonra eşlikten bir ölçü dinle ve four ölçülük partini ezginin altında 'la' ile ♩=70'te söyle. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-1 | 2-3 4:h | 3-2-1-7, | 1:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept my own part while the other voice sang.",
+      "tr": "Diğer ses söylerken kendi partimde kaldım."
+    },
+    {
+      "en": "On the long notes, our two voices blended.",
+      "tr": "Uzun notalarda iki sesimiz kaynaştı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: you jumped up to the melody.",
+        "tr": "Farklı nota: ezgiye atladın."
+      },
+      "fix": {
+        "en": "Hum your first note, do, before you start. Sing your part alone once, then add the melody again.",
+        "tr": "Başlamadan önce ilk notan do'yu mırıldan. Partini bir kez tek başına söyle, sonra ezgiyi yeniden ekle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "Breathe in the beat before, and start together with the other voice, not after it.",
+        "tr": "Bir önceki vuruşta nefes al ve diğer sesle birlikte başla, ondan sonra değil."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop bars 1–2 at ♩=50 until they feel steady, then sing all four bars.",
+    "tr": "1–2. ölçüleri oturana kadar ♩=50'de döngüle, sonra dört ölçünün hepsini söyle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

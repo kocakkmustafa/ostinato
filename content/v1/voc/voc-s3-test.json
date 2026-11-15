@@ -1,0 +1,90 @@
+{
+  "id": "voc-s3-test",
+  "title": { "en": "Level 3 test", "tr": "Seviye 3 testi" },
+  "goal": {
+    "en": "Shows the Level 3 skills: the minor scale and arpeggio, crossing the break, sight-singing, articulation and a vocalise or Level 3 tune.",
+    "tr": "Seviye 3 becerilerini gösterir: minör gam ve arpej, geçiş bölgesinden geçmek, deşifre, artikülasyon ve bir vokaliz ya da Seviye 3 ezgisi."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, minor: the natural minor scale 1→8→1 and the minor arpeggio 1-♭3-5-♭3-1 at ♩=76. Part 2, register: 1-5-1 four times across your break, then an eight-bar melody that crosses it.",
+      "tr": "1. bölüm, minör: ♩=76'da doğal minör gam 1→8→1 ve minör arpej 1-♭3-5-♭3-1. 2. bölüm, register: geçiş bölgenden dört kez 1-5-1, ardından oradan geçen sekiz ölçülük bir ezgi."
+    },
+    {
+      "en": "Part 3, sight-singing: a new eight-bar line in C, G or F major at ♩=70. You see it for the first time in the test.",
+      "tr": "3. bölüm, deşifre: ♩=70'te Do, Sol ya da Fa majörde yeni bir sekiz ölçülük dizi. Onu testte ilk kez görürsün."
+    },
+    {
+      "en": "Part 4, articulation: a new original eight-bar line with slurs, staccato dots and accents at ♩=80. Part 5, piece: a selection from Vaccai or Concone, or a tune from Level 3.",
+      "tr": "4. bölüm, artikülasyon: ♩=80'de bağlı, staccato noktalı ve vurgulu, yeni bir özgün sekiz ölçülük dizi. 5. bölüm, parça: Vaccai ya da Concone seçmesi ya da Seviye 3'ten bir ezgi."
+    },
+    {
+      "en": "Every task is moved into your personal key and compared in your own octave. No note outside your comfortable range is asked for. If anything feels uncomfortable, stop. The test ends without a result, and you can come back another day.",
+      "tr": "Her görev kişisel tonuna taşınır ve kendi oktavında karşılaştırılır. Rahat menzilinin dışında nota istenmez. Herhangi bir rahatsızlıkta dur. Test sonuç yazılmadan biter; başka bir gün dönebilirsin."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S", "KL"],
+    "brief": {
+      "en": "Click at ♩=76 for the minor scale and arpeggio; a slow click and an original soft accompaniment for the register part; click only for sight-singing, with the line not played before you try it; an original soft chord accompaniment with click for parts 4 and 5. Headphones recommended.",
+      "tr": "Minör gam ve arpej için ♩=76'da klik; register bölümü için yavaş klik ve özgün yumuşak eşlik; deşifre için yalnız klik, dizi sen denemeden önce çalınmaz; 4. ve 5. bölümler için klikli özgün yumuşak akor eşliği. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Complete five parts. 1 Minor: natural minor scale 1→8→1 (or 1→6→1) and the arpeggio 1-♭3-5-♭3-1 with the click at ♩=76. 2 Register: 1-5-1 four times across your break, then an eight-bar melody. 3 Sight-singing: a new eight-bar line in C, G or F at ♩=70. 4 Articulation: a new original eight-bar line with slurs, dots and accents at ♩=80. 5 Piece: a Vaccai or Concone selection, or a Level 3 tune, with the accompaniment. Sing in your own octave.",
+      "tr": "Beş bölümü tamamla. 1 Minör: ♩=76'da klikle doğal minör gam 1→8→1 (ya da 1→6→1) ve 1-♭3-5-♭3-1 arpeji. 2 Register: geçiş bölgenden dört kez 1-5-1, ardından sekiz ölçülük bir ezgi. 3 Deşifre: ♩=70'te Do, Sol ya da Fa'da yeni bir sekiz ölçülük dizi. 4 Artikülasyon: ♩=80'de bağlı, noktalı ve vurgulu, yeni bir özgün sekiz ölçülük dizi. 5 Parça: eşlikle bir Vaccai ya da Concone seçmesi ya da bir Seviye 3 ezgisi. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Minor, sight-singing and piece: Level 3 pitch and timing accuracy. Register: the pitch line stays continuous on all four 1-5-1s, with no jump over a semitone, and the melody meets Level 3 pitch accuracy. Articulation: Level 3 pitch and timing accuracy, with each accent at least 3 dB above the notes around it.",
+        "tr": "Her bölüm kendi başına geçer. Minör, deşifre ve parça: Seviye 3 perde ve zamanlama ölçütü. Register: dört 1-5-1'in hepsinde perde çizgisi yarım sesten büyük sıçrama olmadan sürekli kalır ve ezgi Seviye 3 perde ölçütünü sağlar. Artikülasyon: Seviye 3 perde ve zamanlama ölçütü; her vurgu çevresindeki notalardan en az 3 dB yüksek."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1", "V2", "V3"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a little low.", "tr": "Farklı nota, biraz alçak." },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Take your breath on the beat before and start each note with its click, not after it.",
+        "tr": "Nefesini bir önceki vuruşta al ve her notayı klikinden sonra değil, klikle birlikte başlat."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "repertoire": "Part 5 pool: Nicola Vaccai (1790–1848), Metodo pratico di canto italiano, words by Pietro Metastasio (1698–1782) (London, 1832); Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9 (19th-century edition); or a Level 3 public-domain tune. Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato.",
+  "minutes": 15,
+  "expertPending": true
+}

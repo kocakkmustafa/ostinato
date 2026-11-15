@@ -1,0 +1,91 @@
+{
+  "id": "voc-s2-m05-06",
+  "title": { "en": "Light detached arpeggio", "tr": "Hafif kesik arpej" },
+  "goal": {
+    "en": "Sings 1-3-5-3-1 in short, light notes with the click at ♩=70.",
+    "tr": "♩=70'te klikle 1-3-5-3-1'i kısa ve hafif notalarla söyler."
+  },
+  "explanation": [
+    {
+      "en": "Detached notes are short, with a little silence after each one. Here each note is an eighth followed by an eighth rest.",
+      "tr": "Kesik notalar kısadır; her birinin ardından küçük bir sessizlik gelir. Burada her nota bir sekizlik, ardından bir sekizlik sus."
+    },
+    {
+      "en": "Start each note gently, like a soft 'ha' without much air. No hard push from the throat.",
+      "tr": "Her notayı yumuşak başlat; fazla hava katmadan hafif bir 'ha' gibi. Boğazdan sert itme yok."
+    },
+    {
+      "en": "Short does not mean loud. Keep every note light and at the same easy volume.",
+      "tr": "Kısa, gür demek değildir. Her notayı hafif ve aynı rahat gürlükte tut."
+    },
+    {
+      "en": "A short note still has a pitch. Aim at the centre of each note from the start.",
+      "tr": "Kısa notanın da perdesi vardır. Her notanın ortasını baştan hedefle."
+    },
+    {
+      "en": "Count the rests. The next note comes on the click, not before.",
+      "tr": "Susları say. Sonraki nota klikte gelir, önce değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then 1-3-5-3-1 in short notes in your range at ♩=70 and ♩=55.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde kısa notalarla 1-3-5-3-1; ♩=70 ve ♩=55."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing 1-3-5-3-1 three times on 'ha' or in solfège: a short note on every click, silence in between. Rest for the rest of the bar after the last do. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra 1-3-5-3-1'i üç kez 'ha' ile ya da solfejle söyle: her klikte kısa bir nota, arada sessizlik. Son do'dan sonra ölçünün kalanında dinlen. Kendi oktavında söyle."
+    },
+    "sequence": "1:e er 3:e er 5:e er 3:e er | 1:e er qr hr | ×3",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Every note was short, with a little silence after it.",
+      "tr": "Her nota kısaydı; ardından küçük bir sessizlik vardı."
+    },
+    { "en": "The notes stayed light, not loud.", "tr": "Notalar gür değil, hafif kaldı." },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early.", "tr": "Doğru, ama erken." },
+      "fix": {
+        "en": "You are cutting the rest short. Let the silence last until the next click.",
+        "tr": "Susu kısaltıyorsun. Sessizliği bir sonraki klike kadar sürdür."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a short note lands low.",
+        "tr": "Farklı nota: kısa nota alçak düşüyor."
+      },
+      "fix": {
+        "en": "Think the pitch before you start the note, so it begins in place without a scoop.",
+        "tr": "Notayı başlatmadan önce perdesini düşün; nota alttan kaymadan yerinde başlasın."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the same line in quarter notes first, one note per click, then shorten each one.",
+    "tr": "Aynı diziyi önce dörtlüklerle söyle, her klike bir nota; sonra her notayı kısalt."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,105 @@
+{
+  "id": "voc-s2-m06-07",
+  "title": {
+    "en": "Hearing M2, M3 and P5",
+    "tr": "B2, B3 ve T5'i duymak"
+  },
+  "goal": {
+    "en": "Tells a major second, a major third and a perfect fifth apart by ear.",
+    "tr": "Büyük ikili, büyük üçlü ve tam beşliyi kulaktan ayırt eder."
+  },
+  "explanation": [
+    {
+      "en": "An interval is the distance between two notes. Here the two notes play one after the other, going up.",
+      "tr": "Aralık iki nota arasındaki uzaklıktır. Burada iki nota art arda, yukarı doğru çalar."
+    },
+    {
+      "en": "A major second (M2) is a whole step: do to re.",
+      "tr": "Büyük ikili (B2) bir tam sestir: do'dan re'ye."
+    },
+    {
+      "en": "A major third (M3) is two whole steps: do to mi. It skips one note in between.",
+      "tr": "Büyük üçlü (B3) iki tam sestir: do'dan mi'ye. Arada bir nota atlanır."
+    },
+    {
+      "en": "A perfect fifth (P5) is do to sol, the top of do-mi-sol. It sounds open and wide.",
+      "tr": "Tam beşli (T5) do'dan sol'e, do-mi-sol'ün tepesine uzanır. Açık ve geniş duyulur."
+    },
+    {
+      "en": "To check, sing do-re, do-mi and do-sol in your head and pick the one that matches.",
+      "tr": "Kontrol için içinden do-re, do-mi ve do-sol'ü söyle; uyanı seç."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "Each question plays two notes going up from a random starting note; the drill synthesizes them.",
+      "tr": "Her soruda rastgele bir başlangıçtan yukarı iki nota çalar; alıştırma bunları sentezler."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Hear the two notes and choose: major second, major third or perfect fifth. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
+      "tr": "İki notayı dinle ve seç: büyük ikili mi, büyük üçlü mü, tam beşli mi? Cevabın farklıysa ekranda “senin cevabın” ve “doğrusu” yan yana çıkar; ikisini de dinle."
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 10
+    },
+    "drill": {
+      "type": "interval_name",
+      "count": 12,
+      "params": {
+        "intervals": [
+          "M2",
+          "M3",
+          "P5"
+        ],
+        "direction": "ascending",
+        "cadence": false,
+        "range": "C3-C5"
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: M3 chosen for M2.",
+        "tr": "Farklı cevap: B2 yerine B3 seçildi."
+      },
+      "fix": {
+        "en": "Step through it: do-re is one step. Only if you need a second step is it M3.",
+        "tr": "Basamakla: do-re tek adımdır. İkinci bir adım gerekiyorsa ancak o zaman B3'tür."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: M3 chosen for P5.",
+        "tr": "Farklı cevap: T5 yerine B3 seçildi."
+      },
+      "fix": {
+        "en": "Sing do-mi-sol in your head. If you need sol to reach the top note, it is P5.",
+        "tr": "İçinden do-mi-sol söyle. Üst notaya varmak için sol gerekiyorsa T5'tir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay the pair, then sing do-re, do-mi and do-sol in your head to compare.",
+    "tr": "Çifti yeniden dinle; ardından içinden do-re, do-mi ve do-sol'ü söyleyip karşılaştır."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,130 @@
+{
+  "id": "voc-s4-m15-11",
+  "title": {
+    "en": "Soft dynamics at the edges",
+    "tr": "Kenarlarda hafif dinamik"
+  },
+  "goal": {
+    "en": "Sings three soft notes near the edges of the comfortable range, each softer than a medium middle note and within 35 cents.",
+    "tr": "Rahat menzilinin kenarlarına yakın üç hafif nota söyler; her biri orta gürlükteki bir orta notadan hafif ve 35 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "Near the edges of your range, softer is safer. This lesson trains a light p at the bottom and at the top.",
+      "tr": "Menzilinin kenarlarına yakın, hafif olan daha güvenlidir. Bu ders altta ve üstte hafif bir p çalıştırır."
+    },
+    {
+      "en": "First sing a middle note at your comfortable medium volume. That note sets your own level; there is no fixed loudness target.",
+      "tr": "Önce bir orta notayı rahat orta gürlüğünde söyle. O nota kendi seviyeni belirler; sabit bir gürlük hedefi yoktur."
+    },
+    {
+      "en": "Then sing three soft notes: a whole step above your saved low note, a whole step below your saved high note, and the low one again. The edge itself is never used.",
+      "tr": "Sonra üç hafif nota söyle: sakladığın alt notanın bir tam ses üstü, sakladığın üst notanın bir tam ses altı ve yine alttaki. Kenarın kendisi hiç kullanılmaz."
+    },
+    {
+      "en": "Soft still means a clear, steady tone, not a whisper. Soft notes often sag a little, so hear them slightly higher.",
+      "tr": "Hafif yine de net ve kararlı bir ses demektir, fısıltı değil. Hafif notalar biraz düşmeye meyillidir; bu yüzden onları içinden biraz yüksek duy."
+    },
+    {
+      "en": "Never push to make an edge note fuller. Your strongest sound is only your comfortable strong voice, and it is not used here.",
+      "tr": "Bir kenar notasını doldurmak için asla itme. En güçlü sesin yalnız rahat güçlü sesindir ve burada kullanılmaz."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "A middle note at medium volume, then three soft notes on “mm-oo”: near your low note, near your high note, near your low note again.",
+      "tr": "Orta gürlükte bir orta nota, ardından “mm-u” ile üç hafif nota: alt notana yakın, üst notana yakın, yine alt notana yakın."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Sing the middle note on “ah” at your comfortable medium volume and hold it for about three seconds. Then sing the three edge notes softly, each for about three seconds: start on a short “mm”, then open to “oo”. Rest between notes. Sing in your own octave.",
+      "tr": "Orta notayı “a” ile rahat orta gürlüğünde söyle ve yaklaşık üç saniye tut. Sonra üç kenar notasını hafifçe, her birini yaklaşık üç saniye söyle: kısa bir “mm” ile başla, sonra “u”ya aç. Notalar arasında dinlen. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each of the three soft notes is at least 6 dB softer than your medium middle note and within 35 cents of its target.",
+        "tr": "Üç hafif notanın her biri orta gürlükteki orta notandan en az 6 dB hafif ve hedefinin 35 cent içindedir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2",
+    "V3"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My soft notes were clear, not whispered.",
+      "tr": "Hafif notalarım fısıltı değil, netti."
+    },
+    {
+      "en": "I did not push any edge note.",
+      "tr": "Hiçbir kenar notasını itmedim."
+    },
+    {
+      "en": "My throat stayed relaxed while I sang softly.",
+      "tr": "Hafif söylerken boğazım gevşek kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the soft note sinks.",
+        "tr": "Farklı nota: hafif nota düşüyor."
+      },
+      "fix": {
+        "en": "Think the note a touch higher and keep the “oo” bright, as if smiling slightly.",
+        "tr": "Notayı içinden bir tık yüksek düşün ve “u”yu hafif gülümser gibi parlak tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Too much air and too little tone. Hum the “mm” a little longer before opening the vowel.",
+        "tr": "Hava fazla, ses az. Ünlüyü açmadan önce “mm”yi biraz daha uzun mırıldan."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but not softer: the high note is as loud as the middle note.",
+        "tr": "Doğru, ama hafif değil: üst nota orta nota kadar gür."
+      },
+      "fix": {
+        "en": "Near the top the voice wants to grow. Let it be smaller, as if the note were far away.",
+        "tr": "Tepeye yakın ses büyümek ister. Onu küçült; nota uzaktaymış gibi."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Move the edge notes one more step inside your range until soft feels easy there.",
+    "tr": "Hafif söylemek orada rahat gelene kadar kenar notalarını menzilinin bir basamak daha içine al."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

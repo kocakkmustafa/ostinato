@@ -1,0 +1,108 @@
+{
+  "id": "voc-s1-m01-01",
+  "title": { "en": "Start comfortably and know when to stop", "tr": "Rahat başla ve ne zaman duracağını bil" },
+  "goal": {
+    "en": "Recognises the signals to rest or stop and chooses to sing on, rest or stop in each situation.",
+    "tr": "Dinlenme ve durma sinyallerini tanır; her durumda devam etmeyi, dinlenmeyi ya da durmayı seçer."
+  },
+  "explanation": [
+    {
+      "en": "Before you sing, say a few ordinary words. Notice how your speaking voice feels today.",
+      "tr": "Söylemeden önce birkaç sıradan kelime söyle. Konuşma sesinin bugün nasıl hissettirdiğine bak."
+    },
+    {
+      "en": "If your voice is hoarse, or you are ill or very tired, skip singing today. Read or tap the rhythm instead.",
+      "tr": "Sesin kısıksa, hastaysan ya da çok yorgunsan bugün söylemeyi atla. Onun yerine ritmi oku ya da vur."
+    },
+    {
+      "en": "Stop at once for pain, burning, dizziness or effort that keeps growing. Don't try to fix it with an exercise.",
+      "tr": "Ağrı, yanma, baş dönmesi ya da giderek artan zorlanmada hemen dur. Bunu bir alıştırmayla düzeltmeye çalışma."
+    },
+    {
+      "en": "Never force a high or low note, hold your breath, shout or whisper to finish a task. No counter is worth it.",
+      "tr": "Bir görevi bitirmek için asla yüksek ya da alçak bir notayı zorlama, nefes tutma, bağırma ya da fısıldama. Hiçbir sayaç buna değmez."
+    },
+    {
+      "en": "Choose short, frequent sessions with rest in between over one long session.",
+      "tr": "Tek uzun oturum yerine aralarında dinlenme olan kısa ve sık oturumlar seç."
+    },
+    {
+      "en": "If a voice problem lasts or keeps coming back, ask a suitable professional. The app does not assess your voice.",
+      "tr": "Bir ses sorunu sürerse ya da tekrar ederse uygun bir uzmana danış. Uygulama sesini değerlendirmez."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; each question shows a short practice-day situation.",
+      "tr": "Referans ses yok; her soru kısa bir çalışma günü durumu gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Answer 6 situation questions. For each one, choose: sing on, pause and rest, or stop for today.",
+      "tr": "6 durum sorusunu yanıtla. Her biri için seç: söylemeye devam, ara ver ve dinlen ya da bugünlük dur."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 5 of 6 answers correct.",
+        "tr": "6 cevabın en az 5'i doğru."
+      },
+      "minCorrect": 5
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 6,
+      "params": {
+        "set": "voice_stop_signals",
+        "choices": ["sing_on", "pause_and_rest", "stop_for_today"],
+        "situations": [
+          "speaking_voice_easy",
+          "mouth_a_little_dry",
+          "voice_tired_after_long_talking",
+          "hoarse_or_ill_today",
+          "pain_or_burning",
+          "dizzy",
+          "effort_keeps_growing",
+          "high_note_needs_pushing"
+        ]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: “sing on” chosen for growing effort.",
+        "tr": "Farklı cevap: artan zorlanma için “devam” seçildi."
+      },
+      "fix": {
+        "en": "Effort that keeps growing is a stop signal, even without pain. Stop and rest.",
+        "tr": "Giderek artan zorlanma, ağrı olmasa da durma sinyalidir. Dur ve dinlen."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: “pause and rest” chosen for a hoarse voice.",
+        "tr": "Farklı cevap: kısık ses için “ara ver” seçildi."
+      },
+      "fix": {
+        "en": "A hoarse, ill or very tired voice means no singing today; a short break is not enough.",
+        "tr": "Kısık, hasta ya da çok yorgun bir ses bugün söylememek demektir; kısa bir mola yetmez."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Answer with the explanation points open on screen, then try once more without them.",
+    "tr": "Önce anlatım maddeleri ekranda açıkken yanıtla, sonra onlar olmadan bir kez daha dene."
+  },
+  "legacy": "R: vocal-01",
+  "minutes": 6,
+  "expertPending": true
+}

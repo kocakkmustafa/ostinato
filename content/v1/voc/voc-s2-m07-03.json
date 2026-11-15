@@ -1,0 +1,94 @@
+{
+  "id": "voc-s2-m07-03",
+  "title": { "en": "Dotted quarter notes", "tr": "Noktalı dörtlük" },
+  "goal": {
+    "en": "Sings the dotted-quarter-and-eighth rhythm on time across four bars at ♩=70.",
+    "tr": "♩=70'te dört ölçü boyunca noktalı dörtlük ve sekizlik ritmini zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "A dot adds half of the note's value. A dotted quarter lasts one and a half beats.",
+      "tr": "Nokta, notanın değerinin yarısını ekler. Noktalı dörtlük bir buçuk vuruş sürer."
+    },
+    {
+      "en": "A dotted quarter is almost always followed by an eighth. Together they fill two beats: long-short.",
+      "tr": "Noktalı dörtlüğü neredeyse her zaman bir sekizlik izler. İkisi birlikte iki vuruşu doldurur: uzun-kısa."
+    },
+    {
+      "en": "Count in eighths, “1-and-2-and”. Sing on 1, hold through 2, sing again on the “and” of 2.",
+      "tr": "Sekizlikle say, “1 ve 2 ve”. 1'de söyle, 2'yi tut, 2'nin “ve”sinde yeniden söyle."
+    },
+    {
+      "en": "Keep the long note alive through beat 2. Don't let it fade or stop early.",
+      "tr": "Uzun notayı 2. vuruş boyunca canlı tut. Sönmesin, erken bitmesin."
+    },
+    {
+      "en": "Sing on one comfortable note, your do. The microphone checks your timing here.",
+      "tr": "Tek rahat notada, kendi do'nda söyle. Burada mikrofon zamanlamanı ölçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then the four bars on one note in your range, sung on 'ta', at ♩=70 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde tek notada 'ta' ile söylenen dört ölçü; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "After the count-in, sing the four bars once on your comfortable do on 'ta'. Hold each dotted quarter through the next beat, then sing the short eighth on the 'and'.",
+      "tr": "Giriş sayımından sonra dört ölçüyü rahat do'nda 'ta' ile bir kez söyle. Her noktalı dörtlüğü sonraki vuruş boyunca tut, sonra kısa sekizliği 've'de söyle."
+    },
+    "sequence": "4/4: q. e q q | q. e h | q. e q. e | q q h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each dotted quarter lasted through the next beat.",
+      "tr": "Her noktalı dörtlük sonraki vuruş boyunca sürdü."
+    },
+    {
+      "en": "The eighth after it was short and came on the 'and'.",
+      "tr": "Ardından gelen sekizlik kısaydı ve 've'ye düştü."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early on the eighth.", "tr": "Doğru, ama sekizlikte erken." },
+      "fix": {
+        "en": "The long note is cut short. Count the 'and' silently before you sing the eighth.",
+        "tr": "Uzun nota kısalıyor. Sekizliği söylemeden önce 've'yi içinden say."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late on the beat after the eighth.",
+        "tr": "Doğru, ama sekizlikten sonraki vuruşta geç."
+      },
+      "fix": {
+        "en": "The eighth is too long. Keep it short; it leads straight into the next beat.",
+        "tr": "Sekizlik fazla uzun. Kısa tut; doğrudan sonraki vuruşa bağlanır."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Speak the rhythm on 'ta' at ♩=55 while counting “1-and-2-and”, then sing it on one note.",
+    "tr": "Ritmi ♩=55'te “1 ve 2 ve” diye sayarken 'ta' ile konuş, sonra tek notada söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

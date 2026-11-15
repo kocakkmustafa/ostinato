@@ -1,0 +1,96 @@
+{
+  "id": "voc-s2-m09-12",
+  "title": { "en": "Your own practice cycle", "tr": "Kendi çalışma döngün" },
+  "goal": {
+    "en": "Plans a short weekly practice cycle with a warm-up, one focus, one run of a melody and a short note, and checks the plan against a checklist.",
+    "tr": "Isınma, tek odak, bir ezginin bir kez söylenmesi ve kısa bir nottan oluşan haftalık kısa bir çalışma döngüsü planlar ve planı kontrol listesiyle denetler."
+  },
+  "explanation": [
+    {
+      "en": "A session on your own has four parts: your warm-up, one focus from your melody map, one comfortable run of the whole melody, and a short note.",
+      "tr": "Kendi başına bir oturumun dört parçası vardır: ısınman, ezgi haritandan tek bir odak, ezginin tamamının rahat bir kez söylenmesi ve kısa bir not."
+    },
+    {
+      "en": "One focus means one phrase or one result, for example 'phrase 3, the low notes' or 'the dotted rhythm in bar 4'. Not the whole melody at once.",
+      "tr": "Tek odak bir cümle ya da bir sonuç demektir; örneğin '3. cümle, pes notalar' ya da '4. ölçüdeki noktalı ritim'. Ezginin tamamı birden değil."
+    },
+    {
+      "en": "Short, regular sessions usually help more than long ones. Plan three short sessions in a week rather than one long one.",
+      "tr": "Kısa ve düzenli oturumlar çoğu zaman uzunlardan daha çok yardım eder. Haftada tek uzun oturum yerine üç kısa oturum planla."
+    },
+    {
+      "en": "The note is one line: your focus, and whether it improved, stayed the same or is uncertain. Next session, compare the same phrase.",
+      "tr": "Not tek satırdır: odağın ve iyileşti mi, aynı mı kaldı, yoksa belirsiz mi. Sonraki oturumda aynı cümleyi karşılaştır."
+    },
+    {
+      "en": "Comfort decides the length. Stopping is always a valid result; if a session feels effortful, end it after the warm-up.",
+      "tr": "Süreyi rahatlık belirler. Durmak her zaman geçerli bir sonuçtur; bir oturum zorlu gelirse ısınmadan sonra bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; a one-week planner shows three short sessions with the four parts.",
+      "tr": "Referans ses yok; bir haftalık planlayıcı dört parçalı üç kısa oturum gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["Ö"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Plan this week: pick three days, and for each one choose your warm-up, one focus, the melody to run and a line for your note. Then tick the checklist.",
+      "tr": "Bu haftayı planla: üç gün seç ve her biri için ısınmanı, tek odağını, söyleyeceğin ezgiyi ve notun için bir satır seç. Sonra kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Finish the plan and tick every item on the checklist. Progress is marked as self-reported.",
+        "tr": "Planı bitir ve kontrol listesindeki her maddeyi işaretle. İlerleme kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each session in my plan has all four parts.",
+      "tr": "Planımdaki her oturumda dört parçanın hepsi var."
+    },
+    {
+      "en": "Each session has only one focus.",
+      "tr": "Her oturumun tek bir odağı var."
+    },
+    {
+      "en": "My sessions are short, with rest days between them.",
+      "tr": "Oturumlarım kısa ve aralarında dinlenme günleri var."
+    },
+    {
+      "en": "I know I may stop any session after the warm-up.",
+      "tr": "Herhangi bir oturumu ısınmadan sonra bitirebileceğimi biliyorum."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Checklist: more than one focus in a session.", "tr": "Kontrol listesi: bir oturumda birden çok odak." },
+      "fix": {
+        "en": "Keep the one that matters most this week. Move the others to later sessions.",
+        "tr": "Bu hafta en önemli olanı tut. Diğerlerini sonraki oturumlara taşı."
+      }
+    },
+    {
+      "error": { "en": "Checklist: one long session instead of short ones.", "tr": "Kontrol listesi: kısa oturumlar yerine tek uzun oturum." },
+      "fix": {
+        "en": "Split it into three sessions of about ten to fifteen minutes on different days.",
+        "tr": "Onu farklı günlerde yaklaşık on ile on beş dakikalık üç oturuma böl."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Plan only two short sessions this week: your warm-up plus one run of the first phrase.",
+    "tr": "Bu hafta yalnız iki kısa oturum planla: ısınman artı ilk cümlenin bir kez söylenmesi."
+  },
+  "legacy": "V: vocal-21",
+  "minutes": 6,
+  "expertPending": true
+}

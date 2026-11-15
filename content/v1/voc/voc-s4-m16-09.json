@@ -1,0 +1,125 @@
+{
+  "id": "voc-s4-m16-09",
+  "title": {
+    "en": "Swing eighths",
+    "tr": "Swing sekizlikler"
+  },
+  "goal": {
+    "en": "Sings a two-bar pentatonic line in swung eighths with a swing ratio of 60–70% at ♩=80.",
+    "tr": "İki ölçülük pentatonik bir diziyi %60–70 swing oranıyla, swing'li sekizliklerle ♩=80'de söyler."
+  },
+  "explanation": [
+    {
+      "en": "Straight eighths split each beat into two equal halves: 1-and-2-and.",
+      "tr": "Düz sekizlikler her vuruşu iki eşit yarıya böler: 1-ve-2-ve."
+    },
+    {
+      "en": "Swung eighths are long-short. Think of a triplet, 1-ta-ta, and sing only on 1 and the last ta.",
+      "tr": "Swing'li sekizlikler uzun-kısadır. Bir üçleme düşün, 1-ta-ta, ve yalnız 1'de ve son 'ta'da söyle."
+    },
+    {
+      "en": "The swing ratio is how much of the beat the first eighth takes. Straight is 50%; the triplet feel is about 67%. Aim for 60–70%.",
+      "tr": "Swing oranı, ilk sekizliğin vuruşun ne kadarını aldığıdır. Düz çalış %50, üçleme hissi yaklaşık %67'dir. %60–70'i hedefle."
+    },
+    {
+      "en": "Singers often swing with syllables: 'doo-ba doo-ba', a long 'doo' and a short 'ba'.",
+      "tr": "Şarkıcılar swing'i çoğu zaman hecelerle yapar: 'du-ba du-ba'; 'du' uzun, 'ba' kısa."
+    },
+    {
+      "en": "The line is 1-2-3-5-6-5-3-2, then 1-3-2-1, the la below do, 1 and a longer 1. The app measures your timing and swing here, not your pitch.",
+      "tr": "Dizi 1-2-3-5-6-5-3-2, sonra 1-3-2-1, do'nun altındaki la, 1 ve daha uzun bir 1'dir. Burada uygulama perdeni değil, zamanlamanı ve swing'ini ölçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One bar of the line in straight eighths, then the line swung on 'doo-ba' in your range, with a click on every beat and a soft triplet click, at ♩=80 and ♩=60.",
+      "tr": "Bir ölçü düz sekizlik dizi, sonra rahat menzilinde 'du-ba' ile swing'li dizi; her vuruşta klik ve hafif bir üçleme kliğiyle, ♩=80 ve ♩=60."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3"
+    ],
+    "task": {
+      "en": "After the count-in sing the two-bar line four times in swung eighths on 'doo-ba', at ♩=80: long on the beat, short after it. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra iki ölçülük diziyi 'du-ba' ile swing'li sekizliklerle dört kez söyle, ♩=80: vuruşta uzun, ardından kısa. Kendi oktavında söyle."
+    },
+    "sequence": "1:e 2:e 3:e 5:e 6:e 5:e 3:e 2:e | 1:e 3:e 2:e 1:e 6,:e 1:e 1:q | ×4",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "A swing ratio of 60–70% on at least 80% of the pairs, and Level 4 timing on the beats.",
+        "tr": "Çiftlerin en az %80'inde %60–70 swing oranı ve vuruşlarda Seviye 4 zamanlama ölçütü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each pair sounded long-short, not even.",
+      "tr": "Her çift eşit değil, uzun-kısa duyuldu."
+    },
+    {
+      "en": "I did not speed up or slow down.",
+      "tr": "Hızlanmadım ya da yavaşlamadım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but too straight: swing ratio below 60%.",
+        "tr": "Doğru, ama fazla düz: swing oranı %60'ın altında."
+      },
+      "fix": {
+        "en": "Say 1-ta-ta aloud and sing on 1 and the last ta. Let the long 'doo' last longer.",
+        "tr": "1-ta-ta'yı sesli say; 1'de ve son 'ta'da söyle. Uzun 'du'yu daha uzun tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but too dotted: swing ratio above 70%.",
+        "tr": "Doğru, ama fazla noktalı: swing oranı %70'in üstünde."
+      },
+      "fix": {
+        "en": "The short note comes too late and sounds like a dotted rhythm. Sing it right on the last triplet count.",
+        "tr": "Kısa nota çok geç geliyor ve noktalı ritim gibi duyuluyor. Onu tam son üçleme sayısında söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the line on one comfortable note, your do, until the swing feels easy, then add the pitches.",
+    "tr": "Swing rahatlayana kadar diziyi tek rahat notada, kendi do'nda söyle; sonra perdeleri ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

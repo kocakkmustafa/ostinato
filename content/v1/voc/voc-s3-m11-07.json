@@ -1,0 +1,111 @@
+{
+  "id": "voc-s3-m11-07",
+  "title": {
+    "en": "Smooth 1-5-1",
+    "tr": "Yumuşak 1-5-1"
+  },
+  "goal": {
+    "en": "Sings the leap 1-5-1 four times as one connected line, even when sol lies in another register, with notes within 35 cents.",
+    "tr": "1-5-1 atlamasını, sol başka bir register'da olsa bile dört kez bağlı bir çizgi olarak söyler; notalar 35 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "Sol (5) is a fifth above do (1). The app places the leap so that sol sits near your break, where the voice may want to switch with a bump.",
+      "tr": "Sol (5), do'nun (1) beşli üstüdür. Uygulama atlamayı sol geçiş bölgenin yakınına düşecek biçimde yerleştirir; ses orada bir sarsıntıyla değişmek isteyebilir."
+    },
+    {
+      "en": "Before you leap, hear sol in your head. Then move straight to it and land right on the note, without sliding up into it.",
+      "tr": "Atlamadan önce sol'ü kafanda duy. Sonra doğrudan ona geç ve aşağıdan kaymadan tam notanın üstüne kon."
+    },
+    {
+      "en": "Keep the sound going between the notes, like a short bridge. A wide leap needs space, not force.",
+      "tr": "Notalar arasında sesi kesme; kısa bir köprü gibi. Geniş atlama güç değil, alan ister."
+    },
+    {
+      "en": "Keep sol as light as do. On the way back, land softly on do.",
+      "tr": "Sol'ü do kadar hafif tut. Dönüşte do'ya yumuşakça kon."
+    },
+    {
+      "en": "A crack or a sudden flip is normal while you learn. Make the sound lighter and slower, never louder.",
+      "tr": "Öğrenirken sesin kırılması ya da birden değişmesi normaldir. Sesi daha hafif ve daha yavaş yap, asla daha gür değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "1-5-1 on “oo” in your range, with sol near your break; slow and moderate.",
+      "tr": "Rahat menzilinde, sol geçiş bölgenin yakınında, “u” ile 1-5-1; yavaş ve orta hızda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 1-5-1 on “oo” or “ah” 4 times, holding the last do. Keep the sound going between the notes; rest between rounds.",
+      "tr": "1-5-1'i “u” ya da “a” ile 4 kez söyle, son do'yu tut. Notalar arasında sesi kesme; turlar arasında dinlen."
+    },
+    "sequence": "1-5-1:h | ×4",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The sound kept going from do to sol and back.",
+      "tr": "Ses do'dan sol'e ve geri kesilmedi."
+    },
+    {
+      "en": "Sol felt as easy as do.",
+      "tr": "Sol, do kadar rahat geldi."
+    },
+    {
+      "en": "My last 1 felt like the same note as my first 1.",
+      "tr": "Son 1'im ilk 1'imle aynı nota gibi geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the start, then it slides into place.",
+        "tr": "Başta farklı nota, sonra yerine kayıyor."
+      },
+      "fix": {
+        "en": "Hear the note in your head before you sing, then start softly right on it.",
+        "tr": "Söylemeden önce notayı kafanda duy, sonra yumuşakça tam üstünden başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the pitch jumps at the break.",
+        "tr": "Farklı nota: perde geçiş bölgesinde sıçrıyor."
+      },
+      "fix": {
+        "en": "Slow down just before the break and make the sound lighter there. Let the higher notes get a little quieter.",
+        "tr": "Geçiş bölgesinden hemen önce yavaşla ve sesi orada hafiflet. Üstteki notaların biraz kısılmasına izin ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-3-5-3-1 first, filling in mi, then try the leap again.",
+    "tr": "Önce araya mi'yi koyarak 1-3-5-3-1 söyle, sonra atlamayı yeniden dene."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

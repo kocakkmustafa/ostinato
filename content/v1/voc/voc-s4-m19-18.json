@@ -1,0 +1,115 @@
+{
+  "id": "voc-s4-m19-18",
+  "title": {
+    "en": "Performing: stance, distance, eye line",
+    "tr": "Performans: duruş, mesafe, bakış"
+  },
+  "goal": {
+    "en": "Prepares a short performance routine: stance, distance to the listeners, eye line, a calm start and a calm ending, and checks it against a checklist.",
+    "tr": "Kısa bir performans rutini hazırlar: duruş, dinleyicilere mesafe, bakış, sakin bir başlangıç ve sakin bir bitiş; rutini kontrol listesiyle denetler."
+  },
+  "explanation": [
+    {
+      "en": "Singing for others starts before the first note. A short routine makes the start calm and the same every time.",
+      "tr": "Başkaları için söylemek ilk notadan önce başlar. Kısa bir rutin başlangıcı sakin ve her seferinde aynı yapar."
+    },
+    {
+      "en": "Stance: the one you learned at the start of the course. Feet under the hips, knees soft, chest easy, head level. Find it before the accompaniment starts.",
+      "tr": "Duruş: kursun başında öğrendiğin duruş. Ayaklar kalça hizasında, dizler yumuşak, göğüs rahat, baş düz. Eşlik başlamadan önce onu bul."
+    },
+    {
+      "en": "Distance: stand two to three steps from your listeners, in a spot where you can see them all. In a small room you don't need to sing louder; your comfortable voice is enough.",
+      "tr": "Mesafe: dinleyicilerinden iki üç adım uzakta, hepsini görebileceğin bir yerde dur. Küçük bir odada daha gür söylemen gerekmez; rahat sesin yeter."
+    },
+    {
+      "en": "Eye line: look just above the listeners' heads, or at a point at the back of the room. Keep the head level; don't look down at the floor or up at the ceiling.",
+      "tr": "Bakış: dinleyicilerin başlarının hemen üstüne ya da odanın arkasındaki bir noktaya bak. Başını düz tut; yere ya da tavana bakma."
+    },
+    {
+      "en": "Start and end: take one easy breath, then begin. After the last note, hold still for a moment, then relax. If a note slips, keep going; listeners follow the line, not a single note.",
+      "tr": "Başlangıç ve bitiş: rahat bir nefes al, sonra başla. Son notadan sonra bir an kıpırdamadan dur, sonra gevşe. Bir nota kayarsa devam et; dinleyiciler tek bir notayı değil, çizgiyi izler."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; a checklist guides you through the routine with one piece from this module.",
+      "tr": "Referans ses yok; bir kontrol listesi bu modülden bir parçayla rutin boyunca sana eşlik eder."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "Ö"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Pick one piece from this module. Walk through the routine three times: take your stance and distance, set your eye line, breathe once and sing the first phrase, then hold still at its end. Tick each item on the checklist.",
+      "tr": "Bu modülden bir parça seç. Rutini üç kez uygula: duruşunu ve mesafeni al, bakışını ayarla, bir kez nefes al ve ilk cümleyi söyle, sonra cümlenin sonunda kıpırdamadan dur. Kontrol listesindeki her maddeyi işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Walk through the routine three times and tick every item on the checklist. Progress is marked as self-reported.",
+        "tr": "Rutini üç kez uygula ve kontrol listesindeki her maddeyi işaretle. İlerleme kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I found my stance before the accompaniment started.",
+      "tr": "Eşlik başlamadan önce duruşumu buldum."
+    },
+    {
+      "en": "I stood where I could see every listener.",
+      "tr": "Her dinleyiciyi görebileceğim bir yerde durdum."
+    },
+    {
+      "en": "My eyes stayed just above the listeners, with my head level.",
+      "tr": "Gözlerim başım düz, dinleyicilerin hemen üstünde kaldı."
+    },
+    {
+      "en": "I took one easy breath before the first note.",
+      "tr": "İlk notadan önce rahat bir nefes aldım."
+    },
+    {
+      "en": "I held still for a moment after the last note.",
+      "tr": "Son notadan sonra bir an kıpırdamadan durdum."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Checklist: eyes on the floor during the phrase.",
+        "tr": "Kontrol listesi: cümle boyunca gözler yerde."
+      },
+      "fix": {
+        "en": "Choose your point above the listeners before you breathe, and return to it at each breath mark.",
+        "tr": "Nefes almadan önce dinleyicilerin üstündeki noktanı seç ve her nefes işaretinde ona dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Checklist: started before the breath.",
+        "tr": "Kontrol listesi: nefesten önce başlandı."
+      },
+      "fix": {
+        "en": "Let the accompaniment play its bar. Breathe on its last beat, then sing.",
+        "tr": "Eşliğin kendi ölçüsünü çalmasına izin ver. Son vuruşunda nefes al, sonra söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Walk through the routine once, in front of a mirror instead of listeners.",
+    "tr": "Rutini bir kez, dinleyiciler yerine aynanın karşısında uygula."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

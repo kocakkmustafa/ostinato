@@ -1,0 +1,97 @@
+{
+  "id": "voc-s3-m14-03",
+  "title": { "en": "Mixing legato and staccato", "tr": "Bağlı ve kesiği karıştırmak" },
+  "goal": {
+    "en": "Sings an original four-bar line that switches between legato and staccato bars, with the click at ♩=70.",
+    "tr": "Bağlı ve kesik ölçüler arasında geçiş yapan özgün dört ölçülük diziyi klikle ♩=70'te söyler."
+  },
+  "explanation": [
+    {
+      "en": "Real melodies mix both kinds of notes. The skill is switching cleanly, without a break in the beat.",
+      "tr": "Gerçek ezgiler iki tür notayı karıştırır. Beceri, vuruşu bozmadan temiz geçiş yapmaktır."
+    },
+    {
+      "en": "Bar 1 is legato: do-re-mi-fa, connected. Bar 2 is staccato: sol-mi-sol-mi, short and light.",
+      "tr": "1. ölçü bağlıdır: do-re-mi-fa, birbirine bağlı. 2. ölçü kesiktir: sol-mi-sol-mi, kısa ve hafif."
+    },
+    {
+      "en": "Bar 3 is legato again: fa-mi-re-mi. Bar 4 starts with two short notes, re and ti below, then lands on do for two counts.",
+      "tr": "3. ölçü yine bağlıdır: fa-mi-re-mi. 4. ölçü iki kısa notayla başlar, re ve alttaki si; sonra iki sayım do'ya iner."
+    },
+    {
+      "en": "The staccato notes still start on the click. Only their end comes early.",
+      "tr": "Kesik notalar da klikte başlar. Yalnız sonları erken gelir."
+    },
+    {
+      "en": "Keep the same easy volume in both kinds. Staccato is not louder, just shorter.",
+      "tr": "İki türde de aynı rahat gürlüğü koru. Staccato daha gür değil, yalnız daha kısadır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then the four bars in your comfortable range on 'la' at ♩=70 and ♩=50, soft synthesized voice.",
+      "tr": "Bir ölçülük klik girişi, ardından dört ölçü rahat menzilinde 'la' ile; ♩=70 ve ♩=50, yumuşak sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing the four bars on 'la': connected in bars 1 and 3, short eighth notes with a gap after each in bars 2 and 4, and a held do at the end. Start at ♩=50 if you like; the lesson counts at ♩=70. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra dört ölçüyü 'la' ile söyle: 1. ve 3. ölçüde bağlı, 2. ve 4. ölçüde ardından boşluk gelen kısa sekizlik notalar, sonda tutulan do. İstersen ♩=50'de başla; ders ♩=70'te sayılır. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5:e er 3:e er 5:e er 3:e er | 4-3-2-3 | 2:e er 7,:e er 1:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 3 pitch and timing accuracy. The legato bars have no gap between notes; the staccato notes each end in silence.",
+        "tr": "Seviye 3 perde ve zamanlama ölçütü. Bağlı ölçülerde notalar arasında boşluk yoktur; kesik notaların her biri sessizlikle biter."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear the change from connected to short in every bar.",
+      "tr": "Her ölçüde bağlıdan kısaya geçişi duyabildim."
+    },
+    {
+      "en": "The staccato notes were no louder than the legato ones.",
+      "tr": "Kesik notalar bağlı notalardan daha gür değildi."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late after the staccato bar.",
+        "tr": "Doğru, ama kesik ölçüden sonra geç."
+      },
+      "fix": {
+        "en": "Use the silence after the last short note to get ready, and start bar 3 right on the click.",
+        "tr": "Son kısa notadan sonraki sessizliği hazırlanmak için kullan ve 3. ölçüye tam klikte başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the low ti.",
+        "tr": "Alttaki si'de farklı nota."
+      },
+      "fix": {
+        "en": "Ti sits a half step under do. Think of it as leaning into do, and keep it close.",
+        "tr": "Si, do'nun yarım ses altındadır. Onu do'ya yaslanan bir nota gibi düşün ve yakın tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing all four bars connected first, then make bars 2 and 4 short.",
+    "tr": "Önce dört ölçüyü de bağlı söyle, sonra 2. ve 4. ölçüyü kısalt."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

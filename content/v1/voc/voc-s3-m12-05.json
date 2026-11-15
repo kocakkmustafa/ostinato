@@ -1,0 +1,116 @@
+{
+  "id": "voc-s3-m12-05",
+  "title": {
+    "en": "Perfect fourth in minor",
+    "tr": "Minörde tam dörtlü"
+  },
+  "goal": {
+    "en": "Sings the fourth from low 5 up to 1, and five more perfect fourths, inside a minor key.",
+    "tr": "Alttaki 5'ten 1'e dörtlüyü ve beş tam dörtlü daha minör tonda söyler."
+  },
+  "explanation": [
+    {
+      "en": "A perfect fourth (P4) is two whole steps and a half step: low 5 up to 1.",
+      "tr": "Tam dörtlü (T4) iki tam ses ve bir yarım sestir: alttaki 5'ten yukarı 1'e."
+    },
+    {
+      "en": "Low 5 up to 1 is a common way into a tune: the leap lands on home.",
+      "tr": "Alttaki 5'ten 1'e çıkış bir ezgiye girmenin yaygın bir yoludur: atlama eve konar."
+    },
+    {
+      "en": "The fourth itself sounds the same in major and minor. The key around it sets the colour: here 1 belongs to a minor triad.",
+      "tr": "Dörtlünün kendisi majörde de minörde de aynı duyulur. Rengi çevresindeki ton belirler: burada 1 minör bir üçlüye aittir."
+    },
+    {
+      "en": "You also find it at 1-4 and from low ♭7 up to ♭3.",
+      "tr": "1-4'te ve alttaki ♭7'den ♭3'e de bulursun."
+    },
+    {
+      "en": "Hear home before you leap. Land right on 1, without sliding up into it.",
+      "tr": "Atlamadan önce evi duy. Aşağıdan kaymadan tam 1'in üstüne kon."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The minor triad in your personal key, then each pair, played once before you sing and once after for comparison.",
+      "tr": "Kişisel tonunda minör üçlü, ardından her çift; söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Six intervals: low 5 to 1, 1 to low 5, 1-4, 4-1, low ♭7 to ♭3, ♭3 to low ♭7. Sing the first note short and hold the second. The app picks 1 from your comfortable range. Sing in your own octave.",
+      "tr": "Altı aralık: alttaki 5'ten 1'e, 1'den alttaki 5'e, 1-4, 4-1, alttaki ♭7'den ♭3'e, ♭3'ten alttaki ♭7'ye. İlk notayı kısa söyle, ikinciyi tut. Uygulama 1'i rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "5,:q 1:h qr | 1:q 5,:h qr | 1:q 4:h qr | 4:q 1:h qr | b7,:q b3:h qr | b3:q b7,:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard home before each leap from low 5.",
+      "tr": "Alttaki 5'ten her atlamadan önce evi duydum."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, P4 a semitone high.",
+        "tr": "Farklı nota: T4 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "Hear 1 of the minor triad before you leap, and land right on it.",
+        "tr": "Atlamadan önce minör üçlünün 1'ini duy ve tam onun üstüne kon."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, P4 a whole step low.",
+        "tr": "Farklı nota: T4 bir tam ses alçak."
+      },
+      "fix": {
+        "en": "You stopped a step early. Pass through the notes in between in your head: 5-♭6-♭7-1.",
+        "tr": "Bir basamak erken durmuşsun. İçinden aradaki notalardan geç: 5-♭6-♭7-1."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing low 5-♭6-♭7-1 step by step first, then leave out the middle notes.",
+    "tr": "Önce alttaki 5-♭6-♭7-1'i basamak basamak söyle, sonra ortadaki notaları atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

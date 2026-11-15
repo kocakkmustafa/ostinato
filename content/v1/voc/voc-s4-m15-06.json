@@ -1,0 +1,125 @@
+{
+  "id": "voc-s4-m15-06",
+  "title": {
+    "en": "1-5-8-5-1",
+    "tr": "1-5-8-5-1"
+  },
+  "goal": {
+    "en": "Joins the leap of a fifth and the leap up to the octave in 1-5-8-5-1, in four keys, a half step higher each time.",
+    "tr": "1-5-8-5-1'de beşli atlamasını ve oktava çıkışı bağlar; her seferinde yarım ses yukarıda, dört tonda."
+  },
+  "explanation": [
+    {
+      "en": "This line uses only leaps: do up to sol, sol up to the top do, then back the same way.",
+      "tr": "Bu dizi yalnız atlamalardan oluşur: do'dan sol'e, sol'den üst do'ya, sonra aynı yoldan geri."
+    },
+    {
+      "en": "Do to sol is a fifth. Sol to the top do is a fourth. Together they make the octave.",
+      "tr": "Do'dan sol'e beşlidir. Sol'den üst do'ya dörtlüdür. İkisi birlikte oktavı yapar."
+    },
+    {
+      "en": "Hear each target note in your head before you jump. Land on it lightly instead of sliding up to it.",
+      "tr": "Atlamadan önce her hedef notayı içinden duy. Ona aşağıdan kayarak değil, hafifçe konarak var."
+    },
+    {
+      "en": "Each round starts a half step higher, four rounds in all. In the rest bar, listen to the new do.",
+      "tr": "Her tur yarım ses yukarıda başlar, toplam dört tur. Sus ölçüsündeki yeni do'yu dinle."
+    },
+    {
+      "en": "The screen writes the line from your first do, so the new keys show accidentals. You still think do-sol-do in each new key.",
+      "tr": "Ekran diziyi ilk do'na göre yazar; bu yüzden yeni tonlarda arızalar görünür. Sen her yeni tonda yine do-sol-do diye düşün."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Before each round the new do sounds, then 1-5-8-5-1 on “ah” as a model. Four keys, each a half step higher, inside your saved range.",
+      "tr": "Her turdan önce yeni do çalar, ardından örnek olarak “a” ile 1-5-8-5-1. Sakladığın menzilin içinde dört ton, her biri yarım ses yukarıda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 1-5-8-5-1 on “ah” or in solfège, one note per beat, and hold the last do. Listen to the new do in the rest bar. Four rounds, each a half step higher. Sing in your own octave.",
+      "tr": "1-5-8-5-1'i “a” ile ya da solfejle söyle, her vuruşa bir nota; son do'yu tut. Sus ölçüsünde yeni do'yu dinle. Dört tur, her biri yarım ses yukarıda. Kendi oktavında söyle."
+    },
+    "sequence": "1-5-8-5 | 1:h hr | wr | b2-b6-b2'-b6 | b2:h hr | wr | 2-6-2'-6 | 2:h hr | wr | b3-b7-b3'-b7 | b3:h hr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard each note before I jumped.",
+      "tr": "Atlamadan önce her notayı içimden duydum."
+    },
+    {
+      "en": "I landed on the notes without sliding up to them.",
+      "tr": "Notalara aşağıdan kaymadan kondum."
+    },
+    {
+      "en": "I stayed in a comfortable range.",
+      "tr": "Rahat menzilde kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, sol a little low after the leap.",
+        "tr": "Farklı nota: atlamadan sonra sol biraz alçak."
+      },
+      "fix": {
+        "en": "The fifth is wider than it feels. Hear sol first, then jump to it lightly.",
+        "tr": "Beşli hissettirdiğinden daha geniştir. Önce sol'ü içinden duy, sonra ona hafifçe atla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the top do a little low.",
+        "tr": "Farklı nota: üst do biraz alçak."
+      },
+      "fix": {
+        "en": "The jump from sol is a fourth. Hear the top do first and aim it a touch higher, lightly.",
+        "tr": "Sol'den üst do'ya dörtlüdür. Önce üst do'yu içinden duy ve onu hafifçe, bir tık yüksek hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the round a semitone low: it stayed in the old key.",
+        "tr": "Farklı nota, tur yarım ses alçak: eski tonda kaldı."
+      },
+      "fix": {
+        "en": "Hum the new do before you start the round, and begin from that note.",
+        "tr": "Tura başlamadan yeni do'yu mırıldan ve o notadan başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-5-1 in the four keys first, then add the top do.",
+    "tr": "Önce dört tonda 1-5-1 söyle, sonra üst do'yu ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,115 @@
+{
+  "id": "voc-s4-m15-07",
+  "title": {
+    "en": "Lightness on \"oo\"",
+    "tr": "\"u\" ile hafiflik"
+  },
+  "goal": {
+    "en": "Sings 8-5-3-1 on “oo” four times, starting the top do softly and keeping the sound light all the way down.",
+    "tr": "8-5-3-1'i “u” ile dört kez söyler; üst do'ya yumuşak başlar ve sesi aşağıya kadar hafif tutar."
+  },
+  "explanation": [
+    {
+      "en": "The vowel “oo” rounds the lips and narrows the mouth. Many singers find it keeps high notes light and easy.",
+      "tr": "“u” ünlüsü dudakları yuvarlar ve ağzı daraltır. Birçok şarkıcı, onun tiz notaları hafif ve rahat tuttuğunu fark eder."
+    },
+    {
+      "en": "Start on the top do and hold it for two beats, softly, as if calling to someone far away without raising your voice.",
+      "tr": "Üst do'dan başla ve onu iki vuruş yumuşakça tut; sesini yükseltmeden uzaktaki birine sesleniyormuş gibi."
+    },
+    {
+      "en": "Come down through sol and mi to do. Keep the same “oo” and the same lightness on every note.",
+      "tr": "Sol ve mi üzerinden do'ya in. Her notada aynı “u”yu ve aynı hafifliği koru."
+    },
+    {
+      "en": "The app places the top do in the easy upper part of your range. If it feels tight, start from sol: 5-3-1.",
+      "tr": "Uygulama üst do'yu menzilinin rahat üst bölgesine yerleştirir. Sıkışık gelirse sol'den başla: 5-3-1."
+    },
+    {
+      "en": "A crack or a sudden flip is normal while you learn. Make the sound lighter and slower, never louder.",
+      "tr": "Öğrenirken sesin kırılması ya da birden değişmesi normaldir. Sesi daha hafif ve daha yavaş yap, asla daha gür değil."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "8-5-3-1 on a light “oo” in your range, the top do held for two beats; soft and unhurried.",
+      "tr": "Rahat menzilinde hafif bir “u” ile 8-5-3-1; üst do iki vuruş tutulur; yumuşak ve acelesiz."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 8-5-3-1 on “oo” 4 times: hold the top do for two beats, sing sol and mi one beat each, and hold the last do. Rest between rounds. Sing in your own octave.",
+      "tr": "8-5-3-1'i “u” ile 4 kez söyle: üst do'yu iki vuruş tut, sol ve mi'yi birer vuruş söyle, son do'yu tut. Turlar arasında dinlen. Kendi oktavında söyle."
+    },
+    "sequence": "8:h 5:q 3:q | 1:h hr | ×4",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The top do started softly.",
+      "tr": "Üst do yumuşak başladı."
+    },
+    {
+      "en": "I kept the same “oo” on every note.",
+      "tr": "Her notada aynı “u”yu korudum."
+    },
+    {
+      "en": "My jaw stayed loose.",
+      "tr": "Çenem gevşek kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the top do a little low.",
+        "tr": "Farklı nota: üst do biraz alçak."
+      },
+      "fix": {
+        "en": "Soft high notes tend to sag. Hear the top do clearly before you start, and keep the “oo” small and light.",
+        "tr": "Yumuşak tiz notalar düşmeye meyillidir. Başlamadan üst do'yu net duy ve “u”yu küçük ve hafif tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start from sol: sing 5-3-1 on “oo” until it feels easy, then add the top do.",
+    "tr": "Sol'den başla: rahat gelene kadar “u” ile 5-3-1 söyle, sonra üst do'yu ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,115 @@
+{
+  "id": "voc-s3-m11-06",
+  "title": {
+    "en": "Descending from head to chest",
+    "tr": "Kafadan göğse inmek"
+  },
+  "goal": {
+    "en": "Sings 8-5-3-1 four times from a light top do down into chest voice, with no jump at the break.",
+    "tr": "8-5-3-1'i dört kez, hafif bir üst do'dan göğüs sesine iner; geçiş bölgesinde sıçrama olmaz."
+  },
+  "explanation": [
+    {
+      "en": "Going down, the voice often drops into chest voice with a sudden bump. This lesson makes that change soft.",
+      "tr": "İnerken ses çoğu zaman göğüs sesine birden, bir sarsıntıyla düşer. Bu ders bu değişimi yumuşatır."
+    },
+    {
+      "en": "Start the top do light and easy, in head voice. Sing it softly; it does not need power.",
+      "tr": "Üst do'ya kafa sesinde, hafif ve rahat başla. Onu yumuşak söyle; güç gerektirmez."
+    },
+    {
+      "en": "Carry that lightness down through sol, mi and do. Let the chest quality come in step by step, not all at once.",
+      "tr": "Bu hafifliği sol, mi ve do'ya kadar taşı. Göğüs sesi rengi bir anda değil, adım adım gelsin."
+    },
+    {
+      "en": "Keep the same vowel on every note. A changing mouth shape makes the bump bigger.",
+      "tr": "Her notada aynı ünlüyü koru. Değişen ağız şekli sarsıntıyı büyütür."
+    },
+    {
+      "en": "The app places the top do in the easy upper part of your range. If it feels tight, start from sol: 5-3-1.",
+      "tr": "Uygulama üst do'yu menzilinin rahat üst bölgesine yerleştirir. Sıkışık gelirse sol'den başla: 5-3-1."
+    },
+    {
+      "en": "A crack or a sudden flip is normal while you learn. Make the sound lighter and slower, never louder.",
+      "tr": "Öğrenirken sesin kırılması ya da birden değişmesi normaldir. Sesi daha hafif ve daha yavaş yap, asla daha gür değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "8-5-3-1 on “oo” in your range, light on the top do and smooth on the way down; slow and moderate.",
+      "tr": "Rahat menzilinde “u” ile 8-5-3-1; üst do hafif, iniş yumuşak; yavaş ve orta hızda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 8-5-3-1 on “oo” or “ah” 4 times. Start light on the top do and keep the sound light as you go down; hold the last do. Rest between rounds.",
+      "tr": "8-5-3-1'i “u” ya da “a” ile 4 kez söyle. Üst do'ya hafif başla ve inerken sesi hafif tut; son do'yu tut. Turlar arasında dinlen."
+    },
+    "sequence": "8-5-3-1:h | ×4",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The top do started light, not pushed.",
+      "tr": "Üst do hafif başladı, zorlanmadı."
+    },
+    {
+      "en": "There was no sudden bump on the way down.",
+      "tr": "İnerken ani bir sarsıntı olmadı."
+    },
+    {
+      "en": "I kept the same vowel on every note.",
+      "tr": "Her notada aynı ünlüyü korudum."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the pitch jumps between sol and mi.",
+        "tr": "Farklı nota: perde sol ile mi arasında sıçrıyor."
+      },
+      "fix": {
+        "en": "That is where the bump sits. Sing sol and mi a little softer and let the change happen gradually.",
+        "tr": "Sarsıntı orada. Sol ile mi'yi biraz daha yumuşak söyle ve değişimin yavaş yavaş olmasına izin ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the top do a little low.",
+        "tr": "Farklı nota: üst do biraz alçak."
+      },
+      "fix": {
+        "en": "Replay the reference, hum the top do softly, then sing it lightly right on the note.",
+        "tr": "Referansı yeniden dinle, üst do'yu hafifçe mırıldan, sonra tam notanın üstünden hafifçe söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Start from sol and sing 5-3-1 until the change feels smooth, then add the top do.",
+    "tr": "Değişim yumuşak gelene kadar sol'den başlayıp 5-3-1 söyle, sonra üst do'yu ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

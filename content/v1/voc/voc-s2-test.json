@@ -1,0 +1,90 @@
+{
+  "id": "voc-s2-test",
+  "title": { "en": "Level 2 test", "tr": "Seviye 2 testi" },
+  "goal": {
+    "en": "Shows the Level 2 skills: the arpeggio, intervals, rhythm with dynamics, melodic memory and a first public-domain tune.",
+    "tr": "Seviye 2 becerilerini gösterir: arpej, aralıklar, dinamikli ritim, ezgi hafızası ve ilk kamu malı ezgi."
+  },
+  "explanation": [
+    {
+      "en": "The test has five parts. Each part must pass on its own; passed parts are kept, so you only redo the rest.",
+      "tr": "Test beş bölümden oluşur. Her bölüm kendi başına geçmeli; geçtiğin bölümler saklanır, yalnız kalanı tekrarlarsın."
+    },
+    {
+      "en": "Part 1, arpeggio: 1-3-5-8-5-3-1 at ♩=80, or 1-3-5-3-1 if the top is not comfortable. Part 2, intervals: 8 tasks mixing the major second, major third, perfect fourth, perfect fifth and minor third.",
+      "tr": "1. bölüm, arpej: ♩=80'de 1-3-5-8-5-3-1; tepe rahat değilse 1-3-5-3-1. 2. bölüm, aralıklar: büyük ikili, büyük üçlü, tam dörtlü, tam beşli ve küçük üçlüyü karıştıran 8 görev."
+    },
+    {
+      "en": "Part 3, rhythm and dynamics: a new original eight-bar line with p and f marks at ♩=76. Your f is your comfortable strong voice, never a shout.",
+      "tr": "3. bölüm, ritim ve dinamik: ♩=76'da p ve f işaretli, yeni bir özgün sekiz ölçülük dizi. Senin f'in rahat güçlü sesindir, asla bağırma değildir."
+    },
+    {
+      "en": "Part 4, echo: sing back 3 two-bar melodies with their rhythm. Part 5, piece: a tune from the Level 2 public-domain list, such as Au clair de la lune, the Ode to Joy theme or Hänschen klein.",
+      "tr": "4. bölüm, yankı: 3 iki ölçülük ezgiyi ritmiyle geri söyle. 5. bölüm, parça: Seviye 2 kamu malı listesinden bir ezgi; örneğin Au clair de la lune, Neşeye Övgü teması ya da Hänschen klein."
+    },
+    {
+      "en": "Every task is moved into your personal key and compared in your own octave. No note outside your comfortable range is asked for. If anything feels uncomfortable, stop. The test ends without a result, and you can come back another day.",
+      "tr": "Her görev kişisel tonuna taşınır ve kendi oktavında karşılaştırılır. Rahat menzilinin dışında nota istenmez. Herhangi bir rahatsızlıkta dur. Test sonuç yazılmadan biter; başka bir gün dönebilirsin."
+    },
+    {
+      "en": "Every attempt uses new material, and you can take the parts in separate sessions.",
+      "tr": "Her denemede malzeme yenidir; bölümleri ayrı oturumlarda yapabilirsin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S", "KL"],
+    "brief": {
+      "en": "Click at ♩=80 for the arpeggio; a root note, then the interval, for part 2; an original soft chord accompaniment with click for parts 3 and 5; original two-bar melodies for the echo. Headphones recommended.",
+      "tr": "Arpej için ♩=80'de klik; 2. bölümde önce kök nota, sonra aralık; 3. ve 5. bölümler için klikli özgün yumuşak akor eşliği; yankı için özgün iki ölçülük ezgiler. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Complete five parts. 1 Arpeggio: 1-3-5-8-5-3-1 (or 1-3-5-3-1) with the click at ♩=80. 2 Intervals: 8 tasks from a given root, up or down. 3 Rhythm and dynamics: a new original eight-bar line with p and f marks at ♩=76. 4 Echo: 3 two-bar melodies, sung back with their rhythm. 5 Piece: one tune from the Level 2 public-domain list with the accompaniment. Sing in your own octave.",
+      "tr": "Beş bölümü tamamla. 1 Arpej: ♩=80'de klikle 1-3-5-8-5-3-1 (ya da 1-3-5-3-1). 2 Aralıklar: verilen kökten yukarı ya da aşağı 8 görev. 3 Ritim ve dinamik: ♩=76'da p ve f işaretli, yeni bir özgün sekiz ölçülük dizi. 4 Yankı: 3 iki ölçülük ezgi, ritmiyle geri söylenir. 5 Parça: Seviye 2 kamu malı listesinden bir ezgi, eşlikle. Kendi oktavında söyle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Arpeggio and piece: Level 2 pitch and timing accuracy. Intervals: at least 6 of 8 within 40 cents. Rhythm and dynamics: Level 2 pitch and timing accuracy, with f at least 5 dB above p. Echo: at least 2 of 3 melodies at Level 2 accuracy.",
+        "tr": "Her bölüm kendi başına geçer. Arpej ve parça: Seviye 2 perde ve zamanlama ölçütü. Aralıklar: 8 görevin en az 6'sı 40 cent içinde. Ritim ve dinamik: Seviye 2 perde ve zamanlama ölçütü; f, p'den en az 5 dB yüksek. Yankı: 3 ezginin en az 2'si Seviye 2 ölçütünde."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1", "V2", "V3"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a little low.", "tr": "Farklı nota, biraz alçak." },
+      "fix": {
+        "en": "Replay the note, hum it softly first, then sing it with a little more energy.",
+        "tr": "Notayı yeniden dinle, önce hafifçe mırıldan, sonra biraz daha canlı söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "Take your breath on the beat before and start each note with its click, not after it.",
+        "tr": "Nefesini bir önceki vuruşta al ve her notayı klikinden sonra değil, klikle birlikte başlat."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo its module checkpoint, then retake only that part.",
+    "tr": "Geçmeyen bölüm için ilgili modül geçişini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "legacy": "V: vocal-22",
+  "minutes": 15,
+  "expertPending": true
+}

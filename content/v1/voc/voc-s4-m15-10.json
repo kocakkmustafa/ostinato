@@ -1,0 +1,131 @@
+{
+  "id": "voc-s4-m15-10",
+  "title": {
+    "en": "The nine-note scale",
+    "tr": "Dokuz notalık gam"
+  },
+  "goal": {
+    "en": "Sings the major scale from 1 up to 9 and back with the click at ♩=70.",
+    "tr": "Majör gamı klikle ♩=70'te 1'den 9'a çıkıp iner."
+  },
+  "explanation": [
+    {
+      "en": "Degree 9 is re, one octave above the first re. The scale climbs do re mi fa sol la ti do re, then comes back down.",
+      "tr": "9. derece, ilk re'nin bir oktav üstündeki re'dir. Gam do re mi fa sol la si do re diye çıkar, sonra geri iner."
+    },
+    {
+      "en": "The top do to 9 is a whole step. The line now spans a ninth, one step more than an octave.",
+      "tr": "Üst do'dan 9'a tam sestir. Dizi artık bir dokuzlu kaplar: oktavdan bir basamak fazla."
+    },
+    {
+      "en": "There are two half steps: mi–fa and ti–do. Going up, let ti lean toward the top do.",
+      "tr": "İki yarım ses var: mi–fa ve si–do. Çıkarken si'yi üstteki do'ya doğru yaslandır."
+    },
+    {
+      "en": "One syllable per click. Breathe before you start; the whole line takes about fifteen seconds at ♩=70.",
+      "tr": "Her klike bir hece. Başlamadan nefes al; dizinin tamamı ♩=70'te yaklaşık on beş saniye sürer."
+    },
+    {
+      "en": "The app places the scale inside your comfortable range. If 9 feels tight, skip it and turn back at the top do; that does not count as a different note.",
+      "tr": "Uygulama gamı rahat menzilinin içine yerleştirir. 9 sıkışık gelirse onu atla ve üst do'da geri dön; bu farklı nota sayılmaz."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then the scale 1→9→1 in your range at ♩=70 and ♩=50.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 1→9→1 gamı; ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in, sing the scale up to 9 and back, one syllable per click, and hold the last 1 for two clicks. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra gamı 9'a kadar çık ve geri in, her klike bir hece; son 1'i iki klik tut. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5-6-7-8 | 9-8-7-6 | 5-4-3-2 | 1:h hr",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Ti leaned toward the top do.",
+      "tr": "Si, üstteki do'ya doğru yaslandı."
+    },
+    {
+      "en": "9 felt as easy as the top do.",
+      "tr": "9, üst do kadar rahat geldi."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ti a semitone low.",
+        "tr": "Farklı nota: si yarım ses alçak."
+      },
+      "fix": {
+        "en": "Ti is a half step below do; aim it close to the top do.",
+        "tr": "Si, do'nun yarım ses altındadır; onu üstteki do'ya yakın hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, 9 a little low.",
+        "tr": "Farklı nota: 9 biraz alçak."
+      },
+      "fix": {
+        "en": "The top do to re is a whole step, wider than ti to do. Hear 9 clearly and step up to it lightly.",
+        "tr": "Üst do'dan re'ye tam sestir; si–do'dan geniştir. 9'u net duy ve ona hafifçe çık."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise at ♩=60 first, or turn back at the top do: sing 1 to 8 and back.",
+    "tr": "Önce ♩=60'ta çalış ya da üst do'da geri dön: 1'den 8'e çık ve in."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

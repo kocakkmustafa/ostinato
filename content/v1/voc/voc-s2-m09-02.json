@@ -1,0 +1,90 @@
+{
+  "id": "voc-s2-m09-02",
+  "title": { "en": "Echo three notes", "tr": "Üç notayı yankıla" },
+  "goal": {
+    "en": "Hears a three-note motif on do to sol and sings it back in their own octave.",
+    "tr": "Do ile sol arasındaki üç notalık bir motifi duyar ve kendi oktavında geri söyler."
+  },
+  "explanation": [
+    {
+      "en": "A motif is a short musical idea. Here each one has three notes taken from do, re, mi, fa and sol.",
+      "tr": "Motif kısa bir müzik fikridir. Burada her motifin üç notası do, re, mi, fa ve sol'den seçilir."
+    },
+    {
+      "en": "Before the motifs, the app plays do once. Keep that home note in your ear.",
+      "tr": "Motiflerden önce uygulama do'yu bir kez çalar. Bu ev notasını kulağında tut."
+    },
+    {
+      "en": "Remember the shape first: up, down or turning back. Then the size of each move: a step or a skip.",
+      "tr": "Önce biçimi aklında tut: yukarı, aşağı ya da geri dönen. Sonra her hareketin büyüklüğünü: basamak mı, atlama mı."
+    },
+    {
+      "en": "Listen to the whole motif before you open your mouth. Then sing it back on 'la' or in solfège, at your own pace.",
+      "tr": "Ağzını açmadan önce motifin tamamını dinle. Sonra kendi hızında 'la' ile ya da solfejle geri söyle."
+    },
+    {
+      "en": "Sing in your own octave. The app compares your notes octave-folded.",
+      "tr": "Kendi oktavında söyle. Uygulama notalarını oktav katlanmış olarak karşılaştırır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do, then six generated three-note motifs on degrees 1–5 in your comfortable range, soft synthesized voice. Each motif can be replayed once.",
+      "tr": "Do, ardından rahat menzilinde 1–5. derecelerden üretilmiş altı üç notalık motif, yumuşak sentez ses. Her motif bir kez yeniden dinlenebilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to 6 motifs. After each one, sing its three notes back in your own octave. You may replay a motif once before you answer. The motifs change on every attempt.",
+      "tr": "6 motif dinle. Her birinin ardından üç notasını kendi oktavında geri söyle. Cevaplamadan önce bir motifi bir kez yeniden dinleyebilirsin. Motifler her denemede değişir."
+    },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I knew the shape before I started singing.",
+      "tr": "Söylemeye başlamadan önce biçimi biliyordum."
+    },
+    {
+      "en": "Each note landed without sliding.",
+      "tr": "Her nota kaymadan yerine oturdu."
+    },
+    { "en": "I sang in a comfortable octave.", "tr": "Rahat bir oktavda söyledim." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, the middle note a step off.", "tr": "Farklı nota: ortadaki nota bir basamak kaymış." },
+      "fix": {
+        "en": "You kept the direction but not the size. Replay the motif and ask: step or skip? Then sing it again.",
+        "tr": "Yönü korudun ama büyüklüğü değil. Motifi yeniden dinle ve sor: basamak mı, atlama mı? Sonra yeniden söyle."
+      }
+    },
+    {
+      "error": { "en": "Different note, the whole motif a little low.", "tr": "Farklı nota: motifin tamamı biraz alçak." },
+      "fix": {
+        "en": "The shape is there; the start drifted. Hear do again, hum it softly, then begin the motif from the note it asks for.",
+        "tr": "Biçim yerinde; başlangıç kaymış. Do'yu yeniden dinle, hafifçe mırıldan, sonra motife istediği notadan başla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay each motif twice and hum it on 'mm' before you sing it.",
+    "tr": "Her motifi iki kez dinle ve söylemeden önce 'mm' ile mırıldan."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,129 @@
+{
+  "id": "voc-s4-m16-07",
+  "title": {
+    "en": "Pentatonic call and response",
+    "tr": "Pentatonik soru-cevap"
+  },
+  "goal": {
+    "en": "Answers four two-bar calls over a backing at ♩=70 with two-bar phrases from the major pentatonic.",
+    "tr": "Eşlik üstünde ♩=70'te dört iki ölçülük soruya majör pentatonikten iki ölçülük cümlelerle cevap verir."
+  },
+  "explanation": [
+    {
+      "en": "The app sings a two-bar call. You answer in the next two bars.",
+      "tr": "Uygulama iki ölçülük bir soru söyler. Sen sonraki iki ölçüde cevap verirsin."
+    },
+    {
+      "en": "Your pool is the major pentatonic: do, re, mi, sol and la, in any comfortable octave. Use only these.",
+      "tr": "Havuzun majör pentatoniktir: do, re, mi, sol ve la; herhangi bir rahat oktavda. Yalnız bunları kullan."
+    },
+    {
+      "en": "Start simple: copy the call's rhythm and change the notes. Then keep the notes and change the rhythm.",
+      "tr": "Basit başla: sorunun ritmini kopyala, notaları değiştir. Sonra notaları koru, ritmi değiştir."
+    },
+    {
+      "en": "End on do to close the phrase. End on re or sol to leave it open.",
+      "tr": "Cümleyi kapatmak için do'da bitir. Açık bırakmak için re'de ya da sol'de bitir."
+    },
+    {
+      "en": "Leave a rest at the end of your answer. A rest makes the phrase end clearly.",
+      "tr": "Cevabının sonunda bir sus bırak. Sus cümlenin net bitmesini sağlar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Original two-bar sung calls in your range over an original backing loop on the tonic at ♩=70, each followed by two open bars for your answer. Headphones recommended.",
+      "tr": "♩=70'te tonik üstünde özgün bir eşlik döngüsü ve rahat menzilinde söylenen özgün iki ölçülük sorular; her birinin ardından cevabın için iki boş ölçü. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the backing. The app sings a two-bar call; answer in the next two bars on 'doo' or 'la' with notes from the pool. Do this for 4 calls. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle. Uygulama iki ölçülük bir soru söyler; sonraki iki ölçüde havuzdaki notalarla 'du' ya da 'la' ile cevap ver. Bunu 4 soru için yap. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes are in the pool, and your answers start and end inside their two bars.",
+        "tr": "Notalarının en az %90'ı havuzdan gelir; cevapların kendi iki ölçüsü içinde başlar ve biter."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used only notes from the pool.",
+      "tr": "Yalnız havuzdaki notaları kullandım."
+    },
+    {
+      "en": "My answer kept one thing from the call.",
+      "tr": "Cevabım sorudan bir şeyi korudu."
+    },
+    {
+      "en": "I ended each answer with a rest before the next call.",
+      "tr": "Her cevabı sonraki sorudan önce bir susla bitirdim."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: outside the pool.",
+        "tr": "Farklı nota: havuzun dışında."
+      },
+      "fix": {
+        "en": "Fa or ti slipped in. Skip past them: from mi go to sol, from la go to the top do.",
+        "tr": "Fa ya da si karışmış. Onları atla: mi'den sol'e, la'dan üstteki do'ya geç."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "Start your answer on the first beat after the call. Choose your first note while the call plays.",
+        "tr": "Cevabına sorudan sonraki ilk vuruşta başla. İlk notanı soru çalarken seç."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Answer with only three notes, do, re and mi, then open the full pool.",
+    "tr": "Önce yalnız üç notayla, do, re ve mi ile cevap ver; sonra bütün havuzu aç."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

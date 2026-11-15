@@ -1,0 +1,101 @@
+{
+  "id": "voc-s1-m01-07",
+  "title": { "en": "Water, rest and when not to sing", "tr": "Su, dinlenme ve ne zaman söylememeli" },
+  "goal": {
+    "en": "Applies simple voice-load and rest rules by answering 5 practice-day questions.",
+    "tr": "5 çalışma günü sorusunu yanıtlayarak basit ses yükü ve dinlenme kurallarını uygular."
+  },
+  "explanation": [
+    {
+      "en": "Keep water nearby and take a sip when your mouth feels dry. A sip is a comfort, not a cure.",
+      "tr": "Suyu yakında tut ve ağzın kuruyunca bir yudum al. Bir yudum rahatlatır, tedavi etmez."
+    },
+    {
+      "en": "Your voice also works when you talk. A long day of talking, or talking over loud noise, counts as voice use too.",
+      "tr": "Sesin konuşurken de çalışır. Uzun bir konuşma günü ya da gürültünün üstünden konuşmak da ses kullanımı sayılır."
+    },
+    {
+      "en": "Split practice into short blocks with quiet breaks. The silence between blocks is part of practice.",
+      "tr": "Çalışmayı kısa bloklara böl, aralara sessiz molalar koy. Bloklar arasındaki sessizlik çalışmanın parçasıdır."
+    },
+    {
+      "en": "Rest means quiet. Whispering or hard throat clearing is not rest; swallow or take a sip of water instead.",
+      "tr": "Dinlenme sessizlik demektir. Fısıldamak ya da boğazı sertçe temizlemek dinlenme değildir; onun yerine yutkun ya da bir yudum su iç."
+    },
+    {
+      "en": "Don't sing when you are hoarse, ill or very tired. End the session early when singing starts to take more effort.",
+      "tr": "Kısık, hasta ya da çok yorgunken söyleme. Söylemek daha çok çaba istemeye başlayınca oturumu erken bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; each question shows a short practice-day situation.",
+      "tr": "Referans ses yok; her soru kısa bir çalışma günü durumu gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["D"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Answer 5 questions. Each shows a practice-day situation; choose what to do: sip water and go on, take a quiet break, or end for today.",
+      "tr": "5 soruyu yanıtla. Her biri bir çalışma günü durumu gösterir; ne yapacağını seç: bir yudum su iç ve devam et, sessiz mola ver ya da bugünlük bitir."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 4 of 5 answers correct.",
+        "tr": "5 cevabın en az 4'ü doğru."
+      },
+      "minCorrect": 4
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 5,
+      "params": {
+        "set": "voice_rest_rules",
+        "choices": ["sip_and_go_on", "quiet_break", "end_for_today"],
+        "situations": [
+          "mouth_dry_voice_easy",
+          "urge_to_clear_throat",
+          "long_block_without_a_break",
+          "voice_tired_after_loud_evening",
+          "hoarse_or_ill_today",
+          "effort_keeps_growing"
+        ]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: “quiet break” chosen for a hoarse voice.",
+        "tr": "Farklı cevap: kısık ses için “sessiz mola” seçildi."
+      },
+      "fix": {
+        "en": "A hoarse, ill or very tired voice means no singing today; a short break is not enough.",
+        "tr": "Kısık, hasta ya da çok yorgun bir ses bugün söylememek demektir; kısa bir mola yetmez."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: “sip and go on” chosen after a long block without a break.",
+        "tr": "Farklı cevap: molasız uzun bir bloktan sonra “yudum al ve devam et” seçildi."
+      },
+      "fix": {
+        "en": "Water does not replace rest. After a long block, take a quiet break first.",
+        "tr": "Su dinlenmenin yerini tutmaz. Uzun bir bloktan sonra önce sessiz mola ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Answer with the explanation points open on screen, then try once more without them.",
+    "tr": "Önce anlatım maddeleri ekranda açıkken yanıtla, sonra onlar olmadan bir kez daha dene."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

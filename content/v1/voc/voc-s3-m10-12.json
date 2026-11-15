@@ -1,0 +1,94 @@
+{
+  "id": "voc-s3-m10-12",
+  "title": { "en": "Vowels checkpoint", "tr": "Ünlüler geçişi" },
+  "goal": {
+    "en": "Sings an original eight-bar vocalise over the accompaniment at ♩=60, changing vowels on held notes while every note stays within 35 cents.",
+    "tr": "Özgün sekiz ölçülük bir vokalizi eşlikle ♩=60'ta söyler; tutulan notalarda ünlü değiştirirken her nota 35 cent içinde kalır."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    },
+    {
+      "en": "The vocalise joins the module: pure vowels, vowel changes on one note, the hum and a steady pitch.",
+      "tr": "Vokaliz modülü birleştirir: saf ünlüler, tek notada ünlü değişimi, mırıldanma ve sabit perde."
+    },
+    {
+      "en": "Bars 1–2: do-mi on 'ah', then sol held for four beats, moving from 'ah' to 'eh' halfway. Bars 3–4: fa-mi on 'ee', then re held, moving from 'ee' to 'oh'.",
+      "tr": "1–2. ölçüler: 'a' ile do-mi, sonra dört vuruş tutulan sol; yarısında 'a'dan 'e'ye geç. 3–4. ölçüler: 'i' ile fa-mi, sonra tutulan re; 'i'den 'o'ya geç."
+    },
+    {
+      "en": "Bars 5–6: mi-fa-sol-la on 'oo'. Bars 7–8: sol-mi on 'ah', then do held, closing from 'ah' to 'mm' halfway.",
+      "tr": "5–6. ölçüler: 'u' ile mi-fa-sol-la. 7–8. ölçüler: 'a' ile sol-mi, sonra tutulan do; yarısında 'a'dan 'mm'ye kapan."
+    },
+    {
+      "en": "On the held notes, change only the mouth. The note, the volume and the breath stay the same.",
+      "tr": "Tutulan notalarda yalnız ağzı değiştir. Nota, gürlük ve nefes aynı kalır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The original eight-bar vocalise in your range, vowel-formant voice with the written vowel changes, at ♩=60 and ♩=45, over an original soft chord accompaniment (I, IV, V) with a click. Headphones recommended.",
+      "tr": "Özgün sekiz ölçülük vokaliz rahat menzilinde, yazılı ünlü değişimleriyle ünlü-formantlı sentez ses, ♩=60 ve ♩=45; özgün yumuşak akor eşliği (I, IV, V) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the eight bars at ♩=60 with the vowels as written. Breathe after bars 2, 4 and 6. Practise slower first if you like; the checkpoint counts at ♩=60. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra sekiz ölçüyü ♩=60'ta ünlüleri yazıldığı gibi söyle. 2., 4. ve 6. ölçülerden sonra nefes al. İstersen önce yavaş çalış; geçiş ♩=60'ta sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "1:h 3:h | 5:w | 4:h 3:h | 2:w | 3:h 4:h | 5:h 6:h | 5:h 3:h | 1:w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The vowels changed but the note did not.",
+      "tr": "Ünlüler değişti ama nota değişmedi."
+    },
+    {
+      "en": "Each vowel kept one shape from start to end.",
+      "tr": "Her ünlü baştan sona tek biçimde kaldı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the pitch wobbles at the vowel changes.",
+        "tr": "Doğru, ama ünlü geçişlerinde perde oynuyor."
+      },
+      "fix": {
+        "en": "Slow the change down. Let the mouth move gently from one shape to the next while the breath keeps flowing.",
+        "tr": "Geçişi yavaşlat. Nefes akmaya devam ederken ağız bir biçimden ötekine yumuşakça geçsin."
+      }
+    },
+    {
+      "error": { "en": "Different note, a little low on 'oo'.", "tr": "Farklı nota: 'u'da biraz alçak." },
+      "fix": {
+        "en": "Rounding the lips can pull the note down. Keep the same energy as on 'ah' while the lips round.",
+        "tr": "Dudakları yuvarlamak notayı aşağı çekebilir. Dudaklar yuvarlanırken 'a'daki enerjiyi koru."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing bars 1–4 and bars 5–8 as two separate four-bar vocalises at ♩=45, then join them.",
+    "tr": "1–4. ve 5–8. ölçüleri ♩=45'te iki ayrı dört ölçülük vokaliz olarak söyle, sonra birleştir."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

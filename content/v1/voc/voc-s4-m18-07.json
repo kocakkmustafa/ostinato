@@ -1,0 +1,116 @@
+{
+  "id": "voc-s4-m18-07",
+  "title": {
+    "en": "Fifths and open sound",
+    "tr": "Beşliler ve açık ses"
+  },
+  "goal": {
+    "en": "Sings an original four-bar part a fifth below a melody at ♩=70.",
+    "tr": "Bir ezginin bir beşli altında özgün dört ölçülük bir partiyi ♩=70'te söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "A fifth is four scale steps apart, like do and sol. Two voices a fifth apart sound open and hollow, like old chant.",
+      "tr": "Beşli, dizide dört basamak uzaklıktır; do ile sol gibi. Beşli aralıklı iki ses açık ve boşluklu duyulur; eski ilahiler gibi."
+    },
+    {
+      "en": "Fifths blend strongly. When you are in tune, the two notes almost lock into one; when you are off, the rub is easy to hear.",
+      "tr": "Beşliler güçlü kaynaşır. Akortluysan iki nota neredeyse kilitlenir; kaymışsan sürtünme kolayca duyulur."
+    },
+    {
+      "en": "The melody: sol-la-sol-re, mi-re-sol, la-sol-mi-re, sol. You sing four steps under each note: do-re-do-sol, la-sol-do, re-do-la-sol, do. Your sol and la are below do.",
+      "tr": "Ezgi: sol-la-sol-re, mi-re-sol, la-sol-mi-re, sol. Sen her notanın dört basamak altını söylersin: do-re-do-sol, la-sol-do, re-do-la-sol, do. Senin sol ve la'n do'nun altındadır."
+    },
+    {
+      "en": "In classical part-writing, chains of fifths are avoided. Here they are the exercise: they train your ear for blend.",
+      "tr": "Klasik armoni yazımında art arda beşlilerden kaçınılır. Burada alıştırmanın kendisidir: kulağını kaynaşmaya alıştırır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Your part alone on 'la' in your comfortable range, soft synthesized voice, at ♩=70 and ♩=50. Then the melody (5-6-5-2 | 3-2 5:h | 6-5-3-2 | 5:w) on a second synthesized voice over soft original chords with a click, once with your part and once without. Headphones recommended.",
+      "tr": "Partin tek başına, rahat menzilinde 'la' ile, yumuşak sentez ses, ♩=70 ve ♩=50. Sonra ezgi (5-6-5-2 | 3-2 5:h | 6-5-3-2 | 5:w) ikinci bir sentez seste, yumuşak özgün akorlar ve klikle; bir kez partinle, bir kez partin olmadan. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Learn your part alone with the slow reference. Then listen to one bar of the accompaniment and sing your four bars on 'la' under the melody at ♩=70. Sing in your own octave.",
+      "tr": "Partini önce yavaş referansla tek başına öğren. Sonra eşlikten bir ölçü dinle ve four ölçülük partini ezginin altında 'la' ile ♩=70'te söyle. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-1-5, | 6,-5, 1:h | 2-1-6,-5, | 1:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "On the long notes, the fifth sounded locked and still.",
+      "tr": "Uzun notalarda beşli kilitli ve durgun duyuldu."
+    },
+    {
+      "en": "I kept my own part while the other voice sang.",
+      "tr": "Diğer ses söylerken kendi partimde kaldım."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: you landed on the melody's note.",
+        "tr": "Farklı nota: ezginin notasına kondun."
+      },
+      "fix": {
+        "en": "Fifths blend so well that it is easy to slip onto the melody. Sing your part alone once, then try again.",
+        "tr": "Beşliler o kadar iyi kaynaşır ki ezgiye kaymak kolaydır. Partini bir kez tek başına söyle, sonra yeniden dene."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "Breathe in the beat before, and start together with the other voice, not after it.",
+        "tr": "Bir önceki vuruşta nefes al ve diğer sesle birlikte başla, ondan sonra değil."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop bars 1–2 at ♩=50 until they feel steady, then sing all four bars.",
+    "tr": "1–2. ölçüleri oturana kadar ♩=50'de döngüle, sonra dört ölçünün hepsini söyle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,91 @@
+{
+  "id": "voc-s3-m13-11",
+  "title": { "en": "Sight-singing checkpoint", "tr": "Deşifre geçişi" },
+  "goal": {
+    "en": "Sings a new eight-bar line in C, G or F major from the staff with the click at ♩=70, once and without stopping, in tune and on time.",
+    "tr": "Do, Sol ya da Fa majörde yeni bir sekiz ölçülük satırı porteden ♩=70'te klikle, bir kez ve durmadan, doğru perdede ve zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint gives you a new eight-bar line. It is not played before your try.",
+      "tr": "Bu geçiş sana yeni bir sekiz ölçülük satır verir. Satır denemenden önce çalınmaz."
+    },
+    {
+      "en": "The line is in C, G or F major and spans up to one octave. It uses steps, thirds, fourths and fifths, with quarters, eighths, half and dotted notes, and rests.",
+      "tr": "Satır Do, Sol ya da Fa majördedir ve en çok bir oktav genişliğindedir. Basamaklar, üçlüler, dörtlüler ve beşliler; dörtlükler, sekizlikler, ikilikler, noktalı notalar ve suslar kullanır."
+    },
+    {
+      "en": "Use the strategy: scan for 30 seconds, find do, count one bar in and sing once without stopping.",
+      "tr": "Stratejiyi kullan: 30 saniye göz gezdir, do'yu bul, bir ölçü say ve durmadan bir kez söyle."
+    },
+    {
+      "en": "The app places the line in your comfortable range. If one note is not comfortable, skip it or sing it an octave lower or higher, and keep going.",
+      "tr": "Uygulama satırı rahat menziline yerleştirir. Bir nota rahat değilse onu atla ya da bir oktav aşağıda veya yukarıda söyle ve devam et."
+    },
+    {
+      "en": "Every try uses a new line. Practise new lines in the unseen studies lesson if you need to; the checkpoint passes at ♩=70 and opens the next module.",
+      "tr": "Her deneme yeni bir satır kullanır. Gerekirse görülmemiş etütler dersinde yeni satırlarla çalış; geçiş ♩=70'te geçilir ve sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Do and the tonic chord in your comfortable range, then a one-bar click count-in at ♩=70. The new line plays only after your try.",
+      "tr": "Rahat menzilinde do ve tonik akor, ardından ♩=70'te bir ölçülük klik girişi. Yeni satır yalnız denemenden sonra çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Scan the new line for 30 seconds. Hear do and the count-in, then sing all eight bars once with the click at ♩=70 without stopping, on solfège or numbers. Sing in your own octave.",
+      "tr": "Yeni satırı 30 saniye göz gezdir. Do'yu ve giriş sayımını dinle, sonra sekiz ölçünün hepsini ♩=70'te klikle, solfejle ya da derecelerle, durmadan bir kez söyle. Kendi oktavında söyle."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    { "en": "I kept going when a note slipped.", "tr": "Bir nota kaydığında devam ettim." },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note from the first note on, one step off.",
+        "tr": "Farklı nota: ilk notadan itibaren bir basamak kaymış."
+      },
+      "fix": {
+        "en": "Find the first note's degree before the count-in and sing it against do.",
+        "tr": "Giriş sayımından önce ilk notanın derecesini bul ve do'ya göre söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on a leap of a fourth or fifth.",
+        "tr": "Dörtlü ya da beşli bir atlamada farklı nota."
+      },
+      "fix": {
+        "en": "In your scan, mark the leaps. Line to space is a fourth; a line to the line after next, or a space to the space after next, is a fifth.",
+        "tr": "Göz gezdirirken atlamaları işaretle. Çizgiden aralığa dörtlüdür; bir çizgiden iki üstteki çizgiye ya da bir aralıktan iki üstteki aralığa beşlidir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If it did not pass, sing new lines in the unseen studies lesson at ♩=60, then retake at ♩=70.",
+    "tr": "Geçmediyse görülmemiş etütler dersinde ♩=60'ta yeni satırlar söyle, sonra geçişi ♩=70'te yeniden dene."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

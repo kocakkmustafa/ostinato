@@ -1,0 +1,110 @@
+{
+  "id": "voc-s4-m19-21",
+  "title": {
+    "en": "Repertoire checkpoint",
+    "tr": "Repertuvar geçişi"
+  },
+  "goal": {
+    "en": "Sings one folk song and one vocalise from this module, each at its target tempo, in a personal key.",
+    "tr": "Bu modülden bir halk ezgisi ve bir vokalizi, her birini kendi hedef temposunda, kişisel tonda söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint closes the repertoire module and opens the Level 4 test.",
+      "tr": "Bu geçiş repertuvar modülünü kapatır ve Seviye 4 testini açar."
+    },
+    {
+      "en": "Part 1, folk song: choose one of the folk songs you passed in this module and sing it at its target tempo.",
+      "tr": "1. bölüm, halk ezgisi: bu modülde geçtiğin halk ezgilerinden birini seç ve kendi hedef temposunda söyle."
+    },
+    {
+      "en": "Part 2, vocalise: choose one of the Concone, Vaccai or Panofka lessons you passed and sing it at its target tempo.",
+      "tr": "2. bölüm, vokaliz: geçtiğin Concone, Vaccai ya da Panofka derslerinden birini seç ve kendi hedef temposunda söyle."
+    },
+    {
+      "en": "Use your map and your routine: stance, one easy breath, breaths only at the marks, and a calm ending. Sing from memory if you can; the line on screen is allowed.",
+      "tr": "Haritanı ve rutinini kullan: duruş, rahat bir nefes, yalnız işaretlerde nefes ve sakin bir bitiş. Yapabiliyorsan ezberden söyle; ekrandaki diziye bakmak serbesttir."
+    },
+    {
+      "en": "Each part must pass on its own; a passed part is kept, so you only redo the other one. If the top notes are not comfortable, sing them an octave lower; it counts the same.",
+      "tr": "Her bölüm kendi başına geçmeli; geçen bölüm saklanır, yalnız diğerini tekrarlarsın. Üst notalar rahat değilse onları bir oktav aşağıda söyle; aynı sayılır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Each chosen piece in your comfortable range over its original accompaniment at its target tempo. Headphones recommended.",
+      "tr": "Seçilen her parça rahat menzilinde, kendi özgün eşliğiyle hedef temposunda. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Warm up first. Part 1: listen to one bar of the accompaniment, then sing your folk song on 'la' at its target tempo. Part 2: listen to one bar, then sing your vocalise on 'ah' at its target tempo. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Önce ısın. 1. bölüm: eşlikten bir ölçü dinle, sonra halk ezgini kendi hedef temposunda 'la' ile söyle. 2. bölüm: bir ölçü dinle, sonra vokalizini kendi hedef temposunda 'a' ile söyle. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Each part passes on its own. Folk song and vocalise: each at the Level 4 pitch and timing criteria at its target tempo.",
+        "tr": "Her bölüm kendi başına geçer. Halk ezgisi ve vokaliz: her biri hedef temposunda Seviye 4 perde ve zamanlama ölçütünde."
+      }
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late after a breath.",
+        "tr": "Doğru, ama nefesten sonra geç."
+      },
+      "fix": {
+        "en": "Take the breath from the time of the note before the mark, so the next phrase starts on its beat.",
+        "tr": "Nefesi işaretten önceki notanın süresinden al; böylece sonraki cümle kendi vuruşunda başlar."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the highest notes, a little low.",
+        "tr": "En üst notalarda farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Don't push up to them. Sing that phrase at its slow tempo with the same easy space you use lower down. If a note is still not comfortable, sing it an octave lower.",
+        "tr": "Onlara doğru itme. O cümleyi yavaş temposunda, alt notalardaki rahat açıklıkla söyle. Bir nota yine rahat değilse onu bir oktav aşağıda söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "For a part that did not pass, redo that piece's lesson, then retake only that part.",
+    "tr": "Geçmeyen bölüm için o parçanın dersini tekrarla, sonra yalnız o bölümü yeniden dene."
+  },
+  "repertoire": "Part 1 pool: Shenandoah, Londonderry Air, The Water Is Wide, Early One Morning, De Colores, Sakura Sakura (traditional; see voc-s4-m19-02…05, 16, 17). The Turkish folk melody (voc-s4-m19-15) joins the pool only after legal review. Part 2 pool: Giuseppe Concone (1801–1861), 50 Lezioni, Op. 9; Nicola Vaccai (1790–1848), Metodo pratico di canto italiano, words by Pietro Metastasio (1698–1782) (London, 1832); Heinrich Panofka (1807–1887), an easy vocalise (see voc-s4-m19-10…14). Public domain, legal review pending. Degrees, personal key, accompaniment and tempo by Ostinato. Melodies to be transcribed from the sources before the lines are measured.",
+  "minutes": 20,
+  "expertPending": true
+}

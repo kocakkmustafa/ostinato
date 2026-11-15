@@ -1,0 +1,116 @@
+{
+  "id": "voc-s4-m18-15",
+  "title": {
+    "en": "Tuning to a chord",
+    "tr": "Akora göre akort"
+  },
+  "goal": {
+    "en": "Holds the third of a sounding chord for 4 seconds and fine-tunes it until the chord sounds still.",
+    "tr": "Çalan bir akorun 3'lüsünü 4 saniye tutar ve akor durulana kadar ince ayar yapar."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "Inside a chord, a note in tune makes the chord sound smooth and still. A note slightly off makes the chord shimmer or wobble.",
+      "tr": "Akorun içinde akortlu bir nota akoru pürüzsüz ve durgun duyurur. Biraz kaymış bir nota akoru titreştirir ya da dalgalandırır."
+    },
+    {
+      "en": "The third is the most sensitive note. A tiny change in it changes the colour of the whole chord.",
+      "tr": "3'lü en hassas notadır. Onda çok küçük bir kayma bütün akorun rengini değiştirir."
+    },
+    {
+      "en": "Singers often place a major third a little lower than a keyboard does, because it blends better. The app accepts both.",
+      "tr": "Şarkıcılar majör 3'lüyü çoğu zaman klavyeden biraz daha pes yerleştirir, çünkü daha iyi kaynaşır. Uygulama ikisini de kabul eder."
+    },
+    {
+      "en": "Hold the note, listen, and move it a tiny bit up or down until the wobble stops. Then tick the listening checklist.",
+      "tr": "Notayı tut, dinle ve dalgalanma durana kadar onu çok az yukarı ya da aşağı kaydır. Sonra dinleme kontrol listesini işaretle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The I, IV, V and I chords as soft sustained accompaniment in your personal key. A soft synthesized voice holds each chord's third once over it before you sing. Headphones recommended.",
+      "tr": "I, IV, V ve I akorları kişisel tonunda yumuşak, uzun süren eşlik olarak. Sen söylemeden önce yumuşak bir sentez ses her akorun 3'lüsünü üstünde bir kez tutar. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M",
+      "Ö"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "When a chord sounds, hold its third on 'oo' for about 4 seconds: mi over I, la over IV, ti over V, mi over I. Fine-tune until it blends. Then tick the checklist. Sing in your own octave.",
+      "tr": "Bir akor çalınca 3'lüsünü 'u' ile yaklaşık 4 saniye tut: I üstünde mi, IV üstünde la, V üstünde si, I üstünde mi. Kaynaşana kadar ince ayar yap. Sonra kontrol listesini işaretle. Kendi oktavında söyle."
+    },
+    "sequence": "3:w | wr | 6:w | wr | 7,:w | wr | 3:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All 4 thirds held about 4 seconds with a pitch spread (IQR) of 25 cents or less, each within 30 cents of its note. The listening checklist is marked as self-reported.",
+        "tr": "4 üçlünün dördü de yaklaşık 4 saniye, perde yayılımı (IQR) 25 cent ya da altında ve her biri notasına 30 cent içinde yakın tutulur. Dinleme kontrol listesi kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard the chord wobble when my third was off.",
+      "tr": "3'lüm kaydığında akorun dalgalandığını duydum."
+    },
+    {
+      "en": "I found the spot where the chord went still.",
+      "tr": "Akorun durulduğu yeri buldum."
+    },
+    {
+      "en": "My fine-tuning moves were tiny, not jumps.",
+      "tr": "İnce ayar hareketlerim sıçrama değil, çok küçüktü."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the third is high.",
+        "tr": "Farklı nota: 3'lü tiz."
+      },
+      "fix": {
+        "en": "Let the third relax down a little. Listen for the wobble to slow down and stop.",
+        "tr": "3'lünün biraz aşağı gevşemesine izin ver. Dalgalanmanın yavaşlayıp durmasını dinle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hold for 2 seconds first, and tune only the third over I.",
+    "tr": "Önce 2 saniye tut ve yalnız I üstündeki 3'lüyü ayarla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

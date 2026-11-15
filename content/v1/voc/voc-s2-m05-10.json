@@ -1,0 +1,88 @@
+{
+  "id": "voc-s2-m05-10",
+  "title": { "en": "Arpeggio checkpoint", "tr": "Arpej geçişi" },
+  "goal": {
+    "en": "Sings 1-3-5-8-5-3-1 in tune with the click at ♩=80.",
+    "tr": "♩=80'de klikle 1-3-5-8-5-3-1'i doğru perdede söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint brings the module together: the triad, the leap to the top do and the way back down.",
+      "tr": "Bu geçiş modülü birleştirir: üçlü, üst do'ya atlama ve geri iniş."
+    },
+    {
+      "en": "One syllable per click. Breathe before you start; hold the last do for two clicks.",
+      "tr": "Her klike bir hece. Başlamadan nefes al; son do'yu iki klik tut."
+    },
+    {
+      "en": "If you miss a note, keep going and sing the next one on its click. Do not restart.",
+      "tr": "Bir notayı kaçırırsan devam et ve sonrakini kendi klikinde söyle. Baştan başlama."
+    },
+    {
+      "en": "The app places the arpeggio inside your comfortable range. If the top do feels tight, turn back at sol and sing 1-3-5-3-1.",
+      "tr": "Uygulama arpeji rahat menzilinin içine yerleştirir. Üst do zorlarsa sol'de geri dön ve 1-3-5-3-1 söyle."
+    },
+    { "en": "This checkpoint opens the next module.", "tr": "Bu geçiş sonraki modülü açar." }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then 1-3-5-8-5-3-1 in your range at ♩=80 and ♩=60.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 1-3-5-8-5-3-1; ♩=80 ve ♩=60."
+    }
+  },
+  "practice": {
+    "measurement": ["M!"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Sing the arpeggio up and down twice with the click at ♩=80. Practise at a slower tempo first if you need to; the checkpoint passes at ♩=80. Sing in your own octave.",
+      "tr": "Klikle ♩=80'de arpeji iki kez çık ve in. Gerekirse önce daha yavaş tempoda çalış; geçiş ♩=80'de geçilir. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-8-5-3-1:h | ×2",
+    "tempo": { "open": 80, "target": 80 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "held",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard the top do in my head before I sang it.",
+      "tr": "Üst do'yu söylemeden önce içimden duydum."
+    },
+    { "en": "The last do matched the first one.", "tr": "Son do ilkiyle aynıydı." },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the top do a semitone low.",
+        "tr": "Farklı nota: üst do yarım ses alçak."
+      },
+      "fix": {
+        "en": "Sing sol-la-ti-do slowly once, then leap from sol straight to the top do.",
+        "tr": "Bir kez yavaşça sol-la-si-do söyle, sonra sol'den doğrudan üst do'ya atla."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late on the way down.", "tr": "Doğru, ama inerken geç." },
+      "fix": {
+        "en": "Keep the syllables short and move on the click; don't wait for the note to settle.",
+        "tr": "Heceleri kısa tut ve klikte geç; notanın oturmasını bekleme."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise at ♩=60 and ♩=70 first, then take the checkpoint at ♩=80.",
+    "tr": "Önce ♩=60 ve ♩=70'te çalış, sonra geçişi ♩=80'de dene."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

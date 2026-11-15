@@ -1,0 +1,86 @@
+{
+  "id": "voc-s2-m05-01",
+  "title": { "en": "The major triad: do-mi-sol", "tr": "Majör üçlü: do-mi-sol" },
+  "goal": {
+    "en": "Sings do, mi and sol in tune over a tonic drone.",
+    "tr": "Tonik dronun üstünde do, mi ve sol'ü doğru perdede söyler."
+  },
+  "explanation": [
+    {
+      "en": "Degrees 1, 3 and 5 (do, mi, sol) form the tonic triad, the most settled sound in a key.",
+      "tr": "1, 3 ve 5. dereceler (do, mi, sol) tonik üçlüsünü kurar; tonun en oturaklı sesidir."
+    },
+    {
+      "en": "In a major triad, do to mi is a major third and mi to sol is a minor third. Together they make a perfect fifth.",
+      "tr": "Majör üçlüde do'dan mi'ye büyük üçlü, mi'den sol'e küçük üçlüdür. İkisi birlikte tam beşli eder."
+    },
+    {
+      "en": "The drone holds do underneath. When you land right on mi or sol, the sound turns smooth and calm.",
+      "tr": "Dron altta do'yu tutar. Mi ya da sol'e tam oturunca ses pürüzsüzleşir ve durulur."
+    },
+    {
+      "en": "Mi tends to sit a little low after the leap. Hear it in your head first, then sing it.",
+      "tr": "Mi, atlamadan sonra biraz alçak oturmaya meyillidir. Önce içinden duy, sonra söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["DR", "S"],
+    "brief": {
+      "en": "Tonic drone (do) in your comfortable range; 1-3-5 played once slowly as a model.",
+      "tr": "Rahat menzilinde tonik dron (do); 1-3-5 bir kez yavaşça örnek olarak çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Over the drone, sing do-mi-sol four times. Give do and mi one count each and hold sol for two. Sing in your own octave. Headphones keep the drone out of the microphone.",
+      "tr": "Dronun üstünde do-mi-sol'ü dört kez söyle. Do ve mi'ye birer vuruş ver, sol'ü iki vuruş tut. Kendi oktavında söyle. Kulaklık dronu mikrofondan uzak tutar."
+    },
+    "sequence": "1-3-5:h | ×4",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Mi and sol sounded calm over the drone.",
+      "tr": "Mi ve sol dronun üstünde durgun duyuldu."
+    },
+    { "en": "All four rounds started on the same do.", "tr": "Dört tur da aynı do'dan başladı." },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, mi a semitone low.", "tr": "Farklı nota: mi yarım ses alçak." },
+      "fix": {
+        "en": "That is a minor third. Think do-re-mi upward and land on the third step.",
+        "tr": "Bu küçük üçlü olur. İçinden do-re-mi diye çık ve üçüncü basamağa otur."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, sol a whole step low.",
+        "tr": "Farklı nota: sol bir tam ses alçak."
+      },
+      "fix": {
+        "en": "You stopped at fa. From mi, skip one note: mi-(fa)-sol.",
+        "tr": "Fa'da kalmışsın. Mi'den bir nota atla: mi-(fa)-sol."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Use headphones so the microphone hears only your voice, not the drone.",
+        "tr": "Kulaklık tak; mikrofon dronu değil, yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only do-mi-do over the drone, then add sol.",
+    "tr": "Dronun üstünde yalnız do-mi-do söyle, sonra sol'ü ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,89 @@
+{
+  "id": "voc-s1-m04-04",
+  "title": { "en": "Clear original words", "tr": "Açık özgün sözler" },
+  "goal": {
+    "en": "Sings an original four-bar line with clear words, in time at ♩=60.",
+    "tr": "Özgün dört ölçülük bir diziyi açık sözlerle ♩=60'ta zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "Consonants separate syllables; vowels carry the tone.",
+      "tr": "Ünsüzler heceleri ayırır; ünlüler sesi taşır."
+    },
+    {
+      "en": "Speak the words clearly before you sing them. Do not over-pronounce with a locked jaw.",
+      "tr": "Sözleri söylemeden önce açıkça konuş. Çeneyi kilitleyerek aşırı telaffuz etme."
+    },
+    {
+      "en": "Our practice text is original. In English, 'I am here now' has four one-syllable words; in Turkish, 'Ben bu-ra-da' has four syllables.",
+      "tr": "Çalışma sözümüz özgündür. Türkçe 'Ben bu-ra-da' dört hecedir; İngilizce 'I am here now' dört tek heceli sözcüktür."
+    },
+    {
+      "en": "One syllable sits on each beat. At the end of bars 2 and 4, one syllable is held for two beats.",
+      "tr": "Her vuruşa bir hece oturur. 2. ve 4. ölçülerin sonunda bir hece iki vuruş tutulur."
+    },
+    {
+      "en": "Put the consonant right on the beat and move quickly to the vowel. The vowel holds the note.",
+      "tr": "Ünsüzü tam vuruşa koy ve hızla ünlüye geç. Notayı ünlü tutar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The original four-bar line with its words in your comfortable range, soft synthesized voice, at ♩=60 and ♩=40.",
+      "tr": "Özgün dört ölçülük dizi sözleriyle rahat menzilinde, yumuşak sentez ses, ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "First speak the words in rhythm. Then sing the four bars at ♩=60: 'I am here now, | breathe and sing. | I am here now, | then I rest.' The last word of bars 2 and 4 is held for two beats. Sing in your own octave.",
+      "tr": "Önce sözleri ritimde konuş. Sonra dört ölçüyü ♩=60'ta söyle: 'Ben bu-ra-da, | ne-fes al. | Ben bu-ra-da, | şim-di dur.' 2. ve 4. ölçülerin son hecesi iki vuruş tutulur. Kendi oktavında söyle."
+    },
+    "sequence": "3-3-4-3 | 4-3 2:h | 3-3-5-3 | 2-2 1:h",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each word was clear without pushing the voice.",
+      "tr": "Her söz sesi zorlamadan anlaşıldı."
+    },
+    {
+      "en": "Each syllable started on its beat.",
+      "tr": "Her hece kendi vuruşunda başladı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late.", "tr": "Doğru, ama geç." },
+      "fix": {
+        "en": "The consonant is taking too long. Start it a hair before the beat so the vowel lands on the beat.",
+        "tr": "Ünsüz çok uzun sürüyor. Ünlü vuruşa otursun diye ünsüzü vuruştan bir tık önce başlat."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear the repeated note.", "tr": "Tekrarlanan notayı duyamadım." },
+      "fix": {
+        "en": "Two syllables on the same note need a clear restart. Give each one its consonant and a tiny gap.",
+        "tr": "Aynı notadaki iki hece net bir yeniden başlangıç ister. Her birine ünsüzünü ve küçük bir boşluk ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Speak the words in rhythm on one note at ♩=50, then sing bars 1–2 only.",
+    "tr": "Sözleri ♩=50'de tek notada ritimde konuş, sonra yalnız 1–2. ölçüleri söyle."
+  },
+  "legacy": "R: vocal-11",
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,107 @@
+{
+  "id": "voc-s2-m06-04",
+  "title": {
+    "en": "Perfect fifth",
+    "tr": "Tam beşli"
+  },
+  "goal": {
+    "en": "Sings a perfect fifth up and down over a drone.",
+    "tr": "Tam beşliyi dron üzerinde çıkıcı ve inici söyler."
+  },
+  "explanation": [
+    {
+      "en": "A perfect fifth (P5) is do to sol: three whole steps and a half step.",
+      "tr": "Tam beşli (T5) do'dan sol'e uzanır: üç tam ses ve bir yarım ses."
+    },
+    {
+      "en": "For P5, think of the triad you already know, do-mi-sol, and land on sol.",
+      "tr": "T5 için bildiğin do-mi-sol üçlüsünü düşün ve sol'e kon."
+    },
+    {
+      "en": "A drone holds do underneath. When sol is in tune, it blends with the drone and the sound feels calm.",
+      "tr": "Dron altta do'yu tutar. Sol akortluyken dronla kaynaşır ve ses sakin gelir."
+    },
+    {
+      "en": "Re to la is also a fifth, and so is low sol to re.",
+      "tr": "Re'den la'ya da beşlidir, alttaki sol'den re'ye de."
+    },
+    {
+      "en": "Use headphones for the drone so the microphone hears only your voice.",
+      "tr": "Dronu kulaklıkla dinle; mikrofon yalnız senin sesini duysun."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "DR"
+    ],
+    "brief": {
+      "en": "A drone on do in your personal key; each pair plays once before you sing and once after for comparison.",
+      "tr": "Kişisel tonunda do üzerinde dron; her çift söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Six intervals over the drone: do-sol, sol-do, re-la, la-re, low sol to re, re to low sol. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "Dron üzerinde altı aralık: do-sol, sol-do, re-la, la-re, alttaki sol'den re'ye, re'den alttaki sol'e. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1:q 5:h qr | 5:q 1:h qr | 2:q 6:h qr | 6:q 2:h qr | 5,:q 2:h qr | 2:q 5,:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "For P5 I thought do-mi-sol.",
+      "tr": "T5 için içimden do-mi-sol dedim."
+    },
+    {
+      "en": "Sol blended with the drone.",
+      "tr": "Sol dronla kaynaştı."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, P5 a whole step low.",
+        "tr": "Farklı nota: T5 bir tam ses alçak."
+      },
+      "fix": {
+        "en": "You stopped at fa. Pass through mi in your head: do-mi-sol.",
+        "tr": "Fa'da kalmışsın. İçinden mi'den geç: do-mi-sol."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Use headphones for the drone and keep the phone at arm's length.",
+        "tr": "Dronu kulaklıkla dinle ve telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing do-mi-sol-mi-do first, then leave out mi.",
+    "tr": "Önce do-mi-sol-mi-do'yu söyle, sonra mi'yi atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

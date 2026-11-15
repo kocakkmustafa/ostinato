@@ -1,0 +1,93 @@
+{
+  "id": "voc-s2-m05-03",
+  "title": { "en": "Arpeggio in moving keys", "tr": "Kayan tonlarda arpej" },
+  "goal": {
+    "en": "Sings 1-3-5-3-1 in five keys, moving a half step up and back down inside the comfortable range.",
+    "tr": "1-3-5-3-1'i beş tonda söyler; rahat menzil içinde yarım ses yarım ses çıkıp geri iner."
+  },
+  "explanation": [
+    {
+      "en": "The arpeggio keeps its shape in every key: do, mi, sol, mi, do. Only the starting note moves.",
+      "tr": "Arpej her tonda aynı biçimi korur: do, mi, sol, mi, do. Yalnız başlangıç notası kayar."
+    },
+    {
+      "en": "Each round starts a half step higher than the last, twice. Then the rounds come back down the same way.",
+      "tr": "Her tur bir öncekinden yarım ses yukarıda başlar, iki kez. Sonra turlar aynı yoldan geri iner."
+    },
+    {
+      "en": "The screen writes the line from your first do, so the new keys show accidentals (b2-4-b6). You still think do-mi-sol in each new key.",
+      "tr": "Ekran diziyi ilk do'na göre yazar; bu yüzden yeni tonlarda arızalar görünür (b2-4-b6). Sen her yeni tonda yine do-mi-sol diye düşün."
+    },
+    {
+      "en": "In the rest between rounds, listen to the new do and hum it once.",
+      "tr": "Turlar arasındaki susta yeni do'yu dinle ve bir kez mırıldan."
+    },
+    {
+      "en": "The app keeps all five keys inside your comfortable range. If a round feels high, skip it and sing the next one.",
+      "tr": "Uygulama beş tonu da rahat menzilinin içinde tutar. Bir tur yüksek gelirse atla ve sonrakini söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Before each round the new do sounds, then 1-3-5-3-1 as a model. Five keys: start, a half step up, a whole step up, a half step up, start.",
+      "tr": "Her turdan önce yeni do çalar, ardından örnek olarak 1-3-5-3-1. Beş ton: başlangıç, yarım ses yukarı, bir tam ses yukarı, yarım ses yukarı, başlangıç."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Sing 1-3-5-3-1 on 'la' or in solfège. Before each round, listen to the new do. Five rounds: up a half step twice, then back down twice. Sing in your own octave.",
+      "tr": "1-3-5-3-1'i 'la' ile ya da solfejle söyle. Her turdan önce yeni do'yu dinle. Beş tur: iki kez yarım ses yukarı, sonra iki kez geri aşağı. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-3-1 | b2-4-b6-4-b2 | 2-#4-6-#4-2 | b2-4-b6-4-b2 | 1-3-5-3-1",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each round sounded like the same shape in a new place.",
+      "tr": "Her tur yeni bir yerde aynı biçim gibi duyuldu."
+    },
+    {
+      "en": "The last round ended on the do I started with.",
+      "tr": "Son tur başladığım do'da bitti."
+    },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the round a semitone low: it stayed in the old key.",
+        "tr": "Farklı nota, tur yarım ses alçak: eski tonda kaldı."
+      },
+      "fix": {
+        "en": "Hum the new do before you start the round, and begin from that note.",
+        "tr": "Tura başlamadan yeni do'yu mırıldan ve o notadan başla."
+      }
+    },
+    {
+      "error": { "en": "Different note, mi a semitone low.", "tr": "Farklı nota: mi yarım ses alçak." },
+      "fix": {
+        "en": "After a key change, mi often stays small. Think the new do-mi pair first, then sing the round.",
+        "tr": "Ton değişince mi çoğu zaman dar kalır. Önce yeni do-mi ikilisini içinden duy, sonra turu söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only two keys, your start and a half step up, and move back and forth between them.",
+    "tr": "Yalnız iki ton kullan, başlangıç ve yarım ses yukarısı; ikisi arasında gidip gel."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

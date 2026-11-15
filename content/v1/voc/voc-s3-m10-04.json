@@ -1,0 +1,82 @@
+{
+  "id": "voc-s3-m10-04",
+  "title": { "en": "From hum to vowel", "tr": "Mırıldanmadan ünlüye" },
+  "goal": {
+    "en": "Opens from 'mm' to 'ah' on each note of 5-4-3-2-1 without the pitch moving, every note within 35 cents.",
+    "tr": "5-4-3-2-1'in her notasında 'mm'den 'a'ya perde kaymadan açılır; her nota 35 cent içindedir."
+  },
+  "explanation": [
+    {
+      "en": "The hum finds an easy, forward sound. Opening to the vowel carries that sound into the words.",
+      "tr": "Mırıldanma rahat ve önde bir ses bulur. Ünlüye açılmak bu sesi sözlere taşır."
+    },
+    {
+      "en": "Each note has two halves: one beat on 'mm', then one beat on 'ah'. Open the lips and jaw; the note stays where it is.",
+      "tr": "Her notanın iki yarısı vardır: bir vuruş 'mm', sonra bir vuruş 'a'. Dudakları ve çeneyi aç; nota yerinde kalır."
+    },
+    {
+      "en": "Opening to 'ah' can pull the note down. Hear the note before you open and keep the same energy on the vowel.",
+      "tr": "'A'ya açılmak notayı aşağı çekebilir. Açılmadan önce notayı içinden duy ve ünlüde aynı enerjiyi koru."
+    },
+    {
+      "en": "The line steps down from sol to do. Each step down is small; let the voice stay light as it goes lower.",
+      "tr": "Dizi sol'den do'ya adım adım iner. Her iniş adımı küçüktür; ses aşağı indikçe hafif kalsın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "5-4-3-2-1 in your range, each note hummed for one beat and opened to 'ah' for one beat, with a vowel-formant voice.",
+      "tr": "Rahat menzilinde 5-4-3-2-1; ünlü-formantlı sentez sesle her nota bir vuruş mırıldanır, bir vuruş 'a'ya açılır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Sing 5-4-3-2-1. On each note, hum 'mm' for one beat, then open to 'ah' for one beat without a new start. Rest after the last 1, then do it twice more. Sing in your own octave.",
+      "tr": "5-4-3-2-1'i söyle. Her notada bir vuruş 'mm' mırıldan, sonra yeni başlangıç yapmadan bir vuruş 'a'ya açıl. Son 1'den sonra dinlen, sonra iki kez daha yap. Kendi oktavında söyle."
+    },
+    "sequence": "5:h 4:h | 3:h 2:h | 1:h hr",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The note stayed the same when I opened to 'ah'.",
+      "tr": "'A'ya açıldığımda nota aynı kaldı."
+    },
+    {
+      "en": "I opened from the hum without a new start.",
+      "tr": "Mırıldanmadan yeni başlangıç yapmadan açıldım."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low after the opening.",
+        "tr": "Farklı nota: açılıştan sonra biraz alçak."
+      },
+      "fix": {
+        "en": "Opening to 'ah' can pull the note down. Hear the note first, then open the vowel without changing the note.",
+        "tr": "'A'ya açılmak notayı aşağı çekebilir. Önce notayı duy, sonra notayı değiştirmeden ünlüyü aç."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Open to 'oo' instead of 'ah'; it is closer to the hum. Then try 'ah' again.",
+    "tr": "'A' yerine 'u'ya açıl; mırıldanmaya daha yakındır. Sonra yeniden 'a'yı dene."
+  },
+  "minutes": 7,
+  "expertPending": true
+}

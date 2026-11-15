@@ -1,0 +1,123 @@
+{
+  "id": "voc-s1-m02-06",
+  "title": {
+    "en": "Reading the pitch meter",
+    "tr": "Perde göstergesini okumak"
+  },
+  "goal": {
+    "en": "Uses 'a little higher / a little lower' feedback to bring a note closer on the second try.",
+    "tr": "'Biraz yukarı / biraz aşağı' geri bildirimiyle notayı ikinci denemede hedefe yaklaştırır."
+  },
+  "explanation": [
+    {
+      "en": "While you sing, the meter shows your pitch as a line next to the target. The centre line is the target note.",
+      "tr": "Sen söylerken gösterge perdeni hedefin yanında bir çizgi olarak gösterir. Orta çizgi hedef notadır."
+    },
+    {
+      "en": "Above the centre means a little higher than the target; below means a little lower. The number shows how far, in cents.",
+      "tr": "Ortanın üstü hedeften biraz yüksek, altı biraz alçak demektir. Sayı ne kadar uzak olduğunu cent olarak gösterir."
+    },
+    {
+      "en": "Make small corrections. Think the note a touch higher or lower; do not sing louder to go up.",
+      "tr": "Küçük düzeltmeler yap. Notayı biraz daha yukarıda ya da aşağıda düşün; yukarı çıkmak için sesini gürleştirme."
+    },
+    {
+      "en": "Listen first, then look. Your ear leads; the meter confirms.",
+      "tr": "Önce dinle, sonra bak. Kulağın yol gösterir; gösterge doğrular."
+    },
+    {
+      "en": "Each note gets two tries. On the second, use what the meter showed after the first.",
+      "tr": "Her notaya iki deneme hakkın var. İkincisinde, birincinin ardından göstergenin gösterdiğini kullan."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Six notes from your comfortable range, soft synthesized voice; each note plays before both tries.",
+      "tr": "Rahat menzilinden altı nota, yumuşak sentez ses; her nota iki denemeden önce de çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing each of 6 notes twice in your own octave, about two seconds each. After the first try, read the meter and adjust on the second.",
+      "tr": "6 notanın her birini kendi oktavında ikişer kez, yaklaşık ikişer saniye söyle. İlk denemeden sonra göstergeyi oku ve ikincide düzelt."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Across the 6 notes, your second tries are closer to the target than your first tries. A first try already within 50 cents counts as closer.",
+        "tr": "6 notada ikinci denemelerin birincilerden hedefe daha yakın. İlk denemesi zaten 50 cent içinde olan nota yaklaşmış sayılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I listened before I looked at the meter.",
+      "tr": "Göstergeye bakmadan önce dinledim."
+    },
+    {
+      "en": "My corrections were small steps, not jumps.",
+      "tr": "Düzeltmelerim sıçrama değil, küçük adımlardı."
+    },
+    {
+      "en": "My volume stayed the same when I moved up.",
+      "tr": "Yukarı çıkarken gürlüğüm aynı kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The meter showed below the centre. On the next try, think the note a touch higher at the same volume.",
+        "tr": "Gösterge ortanın altını gösterdi. Sonraki denemede notayı aynı gürlükte biraz daha yukarıda düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little high.",
+        "tr": "Farklı nota, biraz yüksek."
+      },
+      "fix": {
+        "en": "You corrected too far. Aim for half the change you made.",
+        "tr": "Fazla düzelttin. Yaptığın değişikliğin yarısını hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay the note between the two tries and hum it softly before you sing.",
+    "tr": "İki deneme arasında notayı yeniden dinle ve söylemeden önce hafifçe mırıldan."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

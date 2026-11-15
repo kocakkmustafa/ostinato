@@ -1,0 +1,89 @@
+{
+  "id": "voc-s2-m05-05",
+  "title": { "en": "Legato arpeggio", "tr": "Bağlı arpej" },
+  "goal": {
+    "en": "Sings 1-3-5-3-1 smoothly, with no break in the sound between notes.",
+    "tr": "1-3-5-3-1'i notalar arasında ses kesilmeden, bağlı söyler."
+  },
+  "explanation": [
+    {
+      "en": "Legato means connected. The sound keeps going from one note to the next, like a line drawn without lifting the pen.",
+      "tr": "Legato bağlı demektir. Ses bir notadan ötekine kesilmeden sürer; kalemi kaldırmadan çizilen bir çizgi gibi."
+    },
+    {
+      "en": "Keep the airflow steady across each leap. Change the pitch, not the breath.",
+      "tr": "Her atlamada hava akışını sabit tut. Nefesi değil, perdeyi değiştir."
+    },
+    {
+      "en": "Move to the next note quickly and cleanly. A slow slide is not legato, and neither is a gap.",
+      "tr": "Sonraki notaya çabuk ve temiz geç. Yavaş kayma legato değildir, boşluk da değildir."
+    },
+    {
+      "en": "Each note lasts two beats and the last do four. Take one easy breath before you start.",
+      "tr": "Her nota iki vuruş, son do dört vuruş sürer. Başlamadan bir kez rahat nefes al."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "1-3-5-3-1 sung legato on 'la' in your range at ♩=60, two beats per note.",
+      "tr": "Rahat menzilinde ♩=60'ta 'la' ile bağlı söylenen 1-3-5-3-1, notada iki vuruş."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Sing along with the reference at ♩=60 on 'la' or 'a'. Give each note two beats and the last do four. Keep the sound going between notes. Sing in your own octave.",
+      "tr": "Referansla birlikte ♩=60'ta 'la' ya da 'a' ile söyle. Her notaya iki vuruş, son do'ya dört vuruş ver. Notalar arasında sesi sürdür. Kendi oktavında söyle."
+    },
+    "sequence": "1:h 3:h | 5:h 3:h | 1:w",
+    "tempo": { "open": 60, "target": 60 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Pitch and timing at the level default, and no silent gap between notes in the pitch trace.",
+        "tr": "Perde ve zamanlama seviye varsayılanında; perde izinde notalar arasında sessiz boşluk yok."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The sound did not stop between notes.", "tr": "Notalar arasında ses durmadı." },
+    {
+      "en": "I changed notes quickly, without a slow slide.",
+      "tr": "Notaları yavaş kaymadan, çabuk değiştirdim."
+    },
+    { "en": "The last do matched the first one.", "tr": "Son do ilkiyle aynıydı." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear between notes: the sound stopped.",
+        "tr": "Notalar arasında duyamadım: ses kesildi."
+      },
+      "fix": {
+        "en": "Keep the air moving as you change notes. Practise on 'mm' first, then open to 'la'.",
+        "tr": "Nota değiştirirken havayı akıtmayı sürdür. Önce 'mm' ile çalış, sonra 'la'ya aç."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late: a slow slide into the note.",
+        "tr": "Doğru, ama geç: notaya yavaş kayarak girdin."
+      },
+      "fix": {
+        "en": "Move to the new pitch right on the beat; think the next note before you leave this one.",
+        "tr": "Yeni perdeye tam vuruşta geç; bu notadan ayrılmadan sonrakini düşün."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the line on a lip trill first; the trill keeps the air going. Then sing it on 'la'.",
+    "tr": "Diziyi önce dudak titreşimiyle söyle; titreşim havayı akıtır. Sonra 'la' ile söyle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

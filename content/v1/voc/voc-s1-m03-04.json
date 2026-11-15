@@ -1,0 +1,127 @@
+{
+  "id": "voc-s1-m03-04",
+  "title": {
+    "en": "The full major scale, slowly",
+    "tr": "Tam majör gam, yavaş"
+  },
+  "goal": {
+    "en": "Sings one octave of the major scale up and down with the click at ♩=60, or six notes if the range is short.",
+    "tr": "Majör gamı klikle ♩=60'ta bir oktav çıkıp iner; menzil yetmezse altı nota."
+  },
+  "explanation": [
+    {
+      "en": "The full scale is do re mi fa sol la ti do. The top do is the same note one octave higher.",
+      "tr": "Gamın tamamı do re mi fa sol la si do'dur. Üstteki do, aynı notanın bir oktav yukarısıdır."
+    },
+    {
+      "en": "There are two half steps: mi–fa and ti–do. Going up, let ti lean toward the top do.",
+      "tr": "İki yarım ses var: mi–fa ve si–do. Çıkarken si'yi üstteki do'ya doğru yaslandır."
+    },
+    {
+      "en": "In numbers, the half steps are 3–4 and 7–8. All other steps are whole steps.",
+      "tr": "Sayılarla yarım sesler 3–4 ve 7–8 arasındadır. Diğer adımların hepsi tam sestir."
+    },
+    {
+      "en": "One syllable per click. Breathe before you start and, if needed, once more after the top do.",
+      "tr": "Her klike bir hece. Başlamadan nefes al; gerekirse üstteki do'dan sonra bir kez daha."
+    },
+    {
+      "en": "The app places the scale inside your comfortable range. If the top notes feel tight, turn back at la.",
+      "tr": "Uygulama gamı rahat menzilinin içine yerleştirir. Üst notalar zorlarsa la'da geri dön."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then the scale 1→8→1 in your range at ♩=60 and ♩=40.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 1→8→1 gamı; ♩=60 ve ♩=40."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in, sing the scale up and down, one syllable per click, and hold the last 1 for two clicks. Start at ♩=50 and move up in steps of 5 to ♩=60. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra gamı çık ve in, her klike bir hece; son 1'i iki klik tut. ♩=50'den başla, 5'er adımla ♩=60'a çık. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5-6-7-8 | 7-6-5-4 | 3-2-1:h",
+    "tempo": {
+      "open": 50,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Ti leaned toward the top do.",
+      "tr": "Si, üstteki do'ya doğru yaslandı."
+    },
+    {
+      "en": "Fa to mi on the way down stayed small.",
+      "tr": "İnerken fa'dan mi'ye adım küçük kaldı."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ti a semitone low.",
+        "tr": "Farklı nota: si yarım ses alçak."
+      },
+      "fix": {
+        "en": "Ti is a half step below do; aim it close to the top do.",
+        "tr": "Si, do'nun yarım ses altındadır; onu üstteki do'ya yakın hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, fa a semitone high.",
+        "tr": "Farklı nota: fa yarım ses yüksek."
+      },
+      "fix": {
+        "en": "Mi to fa is a half step; keep fa close to mi.",
+        "tr": "Mi–fa yarım sestir; fa'yı mi'ye yakın tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Turn back at la: sing 1 to 6 and back down. Add ti and the top do when they feel easy.",
+    "tr": "La'da geri dön: 1'den 6'ya çık ve in. Si ve üst do kolay gelince ekle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

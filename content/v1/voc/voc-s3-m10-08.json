@@ -1,0 +1,93 @@
+{
+  "id": "voc-s3-m10-08",
+  "title": { "en": "Bright and dark colour", "tr": "Parlak ve koyu renk" },
+  "goal": {
+    "en": "Sings 1-2-3-2-1 once with a bright colour and once with a dark colour, compares both with the reference, and keeps every note within 35 cents.",
+    "tr": "1-2-3-2-1'i bir kez parlak, bir kez koyu renkle söyler, ikisini referansla karşılaştırır ve her notayı 35 cent içinde tutar."
+  },
+  "explanation": [
+    {
+      "en": "The same note can sound bright or dark. Colour comes from the shape of the mouth and the vowel, not from the note.",
+      "tr": "Aynı nota parlak ya da koyu duyulabilir. Renk notadan değil, ağzın ve ünlünün biçiminden gelir."
+    },
+    {
+      "en": "For a bright colour, sing 'eh' with the lips a little wider, as if calling a friend across the room, but softly.",
+      "tr": "Parlak renk için 'e'yi dudaklar biraz daha geniş, odanın öbür ucundaki bir arkadaşına sesleniyormuş gibi ama yumuşakça söyle."
+    },
+    {
+      "en": "For a dark colour, sing 'oh' with more space inside the mouth and the lips a little rounder, like the start of a yawn.",
+      "tr": "Koyu renk için 'o'yu ağzın içinde daha fazla boşlukla ve dudaklar biraz daha yuvarlak, bir esnemenin başlangıcı gibi söyle."
+    },
+    {
+      "en": "The app does not measure colour. It checks the pitch; you judge the colour against the reference.",
+      "tr": "Uygulama rengi ölçmez. Perdeye bakar; rengi sen referansla karşılaştırarak değerlendirirsin."
+    },
+    {
+      "en": "Dark is not lower and bright is not higher. Keep the note in the same place in both rounds.",
+      "tr": "Koyu daha alçak, parlak daha yüksek demek değildir. İki turda da notayı aynı yerde tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "1-2-3-2-1 in your range twice: first a bright 'eh', then a dark 'oh', on the same pitches; vowel-formant voice.",
+      "tr": "Rahat menzilinde iki kez 1-2-3-2-1: önce parlak bir 'e', sonra koyu bir 'o', aynı perdelerde; ünlü-formantlı sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": ["M", "Ö"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to the reference. Sing 1-2-3-2-1 on a bright 'eh', breathe, then sing it again on a dark 'oh'. The microphone checks the pitch. Then play the reference again, compare the colours and tick the checklist. Sing in your own octave.",
+      "tr": "Referansı dinle. 1-2-3-2-1'i parlak bir 'e' ile söyle, nefes al, sonra koyu bir 'o' ile yeniden söyle. Mikrofon perdeye bakar. Sonra referansı yeniden çal, renkleri karşılaştır ve kontrol listesini işaretle. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-2 | 1:h hr | 1-2-3-2 | 1:h hr",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The bright round sounded brighter than the dark round.",
+      "tr": "Parlak tur koyu turdan daha parlak duyuldu."
+    },
+    {
+      "en": "Both colours sounded close to the reference.",
+      "tr": "İki renk de referansa yakın duyuldu."
+    },
+    {
+      "en": "The notes stayed in the same place in both rounds.",
+      "tr": "Notalar iki turda da aynı yerde kaldı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low in the dark round.",
+        "tr": "Farklı nota: koyu turda biraz alçak."
+      },
+      "fix": {
+        "en": "Making the sound darker can pull the note down. Change only the mouth space and keep the note where it was in the bright round.",
+        "tr": "Sesi koyulaştırmak notayı aşağı çekebilir. Yalnız ağız içindeki boşluğu değiştir; notayı parlak turdaki yerinde tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little high in the bright round.",
+        "tr": "Farklı nota: parlak turda biraz yüksek."
+      },
+      "fix": {
+        "en": "Bright is not higher. Keep the volume easy and hear the note before you start.",
+        "tr": "Parlak daha yüksek demek değildir. Gürlüğü rahat tut ve başlamadan notayı içinden duy."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hold a single note instead of the line: four beats bright, then four beats dark.",
+    "tr": "Dizi yerine tek bir nota tut: dört vuruş parlak, sonra dört vuruş koyu."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

@@ -1,0 +1,127 @@
+{
+  "id": "voc-s4-m17-06",
+  "title": {
+    "en": "Runs at 80",
+    "tr": "♩=80'de koşular"
+  },
+  "goal": {
+    "en": "Sings the five-note run in eighth notes on one 'ah' at the target tempo, ♩=80, evenly and in tune.",
+    "tr": "Beş notalık koşuyu tek 'a' ile sekizliklerle hedef tempoda, ♩=80'de, eşit ve doğru perdede söyler."
+  },
+  "explanation": [
+    {
+      "en": "This is the target tempo for runs in this module: ♩=80, two notes per click.",
+      "tr": "Bu, bu modülde koşular için hedef tempodur: ♩=80, her klike iki nota."
+    },
+    {
+      "en": "At this speed, think in pairs. Feel 1-2, 3-4, 5-4 and 3-2 as four pairs, each starting on a click.",
+      "tr": "Bu hızda çiftlerle düşün. 1-2, 3-4, 5-4 ve 3-2'yi her biri bir klikte başlayan dört çift olarak hisset."
+    },
+    {
+      "en": "Keep the sound small, like singing to someone next to you. A big sound makes a fast run heavy and blurred.",
+      "tr": "Sesi küçük tut; yanındaki birine söyler gibi. Büyük ses hızlı koşuyu ağırlaştırır ve bulanıklaştırır."
+    },
+    {
+      "en": "Take an easy breath in the rest before each run. One breath per run is enough; do not squeeze out the last air.",
+      "tr": "Her koşudan önceki susta rahat bir nefes al. Her koşuya bir nefes yeter; son havayı sıkarak çıkarma."
+    },
+    {
+      "en": "If the run blurs, go back to ♩=70. If the throat tightens or you get tired, end the lesson for today.",
+      "tr": "Koşu bulanıklaşırsa ♩=70'e dön. Boğaz sıkışırsa ya da yorulursan dersi bugünlük bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then the run in eighth notes on 'ah' in your range at ♩=80 and ♩=60, light synthesized voice.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 'a' ile sekizlik koşu; ♩=80 ve ♩=60, hafif sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in, sing 1-2-3-4-5-4-3-2 in eighth notes on one 'ah', two notes per click, land on 1 for two clicks, then rest. Do it four times. The lesson counts at ♩=80. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra 1-2-3-4-5-4-3-2'yi tek 'a' ile sekizliklerle, her klike iki nota söyle; 1'e iki klik in, sonra dinlen. Bunu dört kez yap. Ders ♩=80'de sayılır. Kendi oktavında söyle."
+    },
+    "sequence": "1:e 2:e 3:e 4:e 5:e 4:e 3:e 2:e | 1:h hr | ×4",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear every note of the run on its own.",
+      "tr": "Koşunun her notasını tek başına duyabildim."
+    },
+    {
+      "en": "Each pair started on its click.",
+      "tr": "Her çift kendi klikinde başladı."
+    },
+    {
+      "en": "The sound stayed small and light.",
+      "tr": "Ses küçük ve hafif kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early: the run speeds up.",
+        "tr": "Doğru, ama erken: koşu hızlanıyor."
+      },
+      "fix": {
+        "en": "Feel the first note of each click land with the click. Go back to ♩=60 for a few rounds.",
+        "tr": "Her klikin ilk notasının klikle birlikte oturduğunu hisset. Birkaç tur ♩=60'a dön."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the way down, a little low.",
+        "tr": "İnerken farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Fast notes going down tend to sag. Keep the energy up and think of the last notes as bright, not heavy.",
+        "tr": "Hızla inen notalar düşmeye meyillidir. Enerjiyi koru ve son notaları ağır değil, parlak düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear the separate notes.",
+        "tr": "Ayrı notaları duyamadım."
+      },
+      "fix": {
+        "en": "Give each note a tiny pulse of air, like a very soft 'ha', without stopping the sound.",
+        "tr": "Sesi kesmeden her notaya çok yumuşak bir 'ha' gibi küçük bir hava itkisi ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise at ♩=70 and ♩=75 first, then try ♩=80.",
+    "tr": "Önce ♩=70 ve ♩=75'te çalış, sonra ♩=80'i dene."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

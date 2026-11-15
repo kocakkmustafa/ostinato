@@ -1,0 +1,102 @@
+{
+  "id": "voc-s2-m06-10",
+  "title": {
+    "en": "Descending intervals",
+    "tr": "İnici aralıklar"
+  },
+  "goal": {
+    "en": "Sings M2, M3, P4 and P5 downward.",
+    "tr": "B2, B3, T4 ve T5'i aşağı doğru söyler."
+  },
+  "explanation": [
+    {
+      "en": "A descending interval starts on the upper note and moves down. Its size stays the same.",
+      "tr": "İnici aralık üstteki notadan başlar ve aşağı iner. Boyu değişmez."
+    },
+    {
+      "en": "To find the lower note, sing the scale down in your head: sol-fa-mi-re-do is a fifth.",
+      "tr": "Alttaki notayı bulmak için içinden gamı aşağı söyle: sol-fa-mi-re-do bir beşlidir."
+    },
+    {
+      "en": "Downward intervals tend to shrink. Let your voice drop the full distance.",
+      "tr": "İnici aralıklar küçülmeye eğilimlidir. Sesin bütün mesafeyi insin."
+    },
+    {
+      "en": "Keep your air steady as you go down; a low note still needs support.",
+      "tr": "İnerken havanı düzenli tut; alçak nota da destek ister."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Each pair in your personal key, played once before you sing and once after for comparison.",
+      "tr": "Her çift kişisel tonunda; söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Eight intervals going down: re-do, mi-do, fa-do, sol-do, then la-sol, la-fa, sol-re, la-re. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "Aşağı doğru sekiz aralık: re-do, mi-do, fa-do, sol-do, sonra la-sol, la-fa, sol-re, la-re. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "2:q 1:h qr | 3:q 1:h qr | 4:q 1:h qr | 5:q 1:h qr | 6:q 5:h qr | 6:q 4:h qr | 5:q 2:h qr | 6:q 2:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I sang the scale down in my head before each leap.",
+      "tr": "Her atlamadan önce içimden gamı aşağı söyledim."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    },
+    {
+      "en": "Low notes stayed steady, without pressing down.",
+      "tr": "Alçak notalar aşağı bastırmadan kararlı kaldı."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a semitone high on the way down.",
+        "tr": "Farklı nota: inişte yarım ses yüksek."
+      },
+      "fix": {
+        "en": "The interval shrank. Let the lower note drop the full distance.",
+        "tr": "Aralık küçülmüş. Alttaki nota bütün mesafeyi insin."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Keep your air steady on the low note and keep the phone at arm's length.",
+        "tr": "Alçak notada havanı düzenli tut; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the whole scale down to the target first, then leave out the notes in between.",
+    "tr": "Önce gamı hedefe kadar bütün olarak aşağı söyle, sonra aradaki notaları atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,145 @@
+{
+  "id": "voc-s4-m16-10",
+  "title": {
+    "en": "Twelve-bar blues for singers",
+    "tr": "Şarkıcılar için 12-bar blues"
+  },
+  "goal": {
+    "en": "Answers three questions about the twelve-bar form, then sings an original twelve-bar melody with the backing at ♩=70, coming in on bar 1.",
+    "tr": "12 ölçülük biçimle ilgili üç soruyu yanıtlar, sonra eşlikle ♩=70'te 1. ölçüde girerek özgün 12 ölçülük bir ezgi söyler."
+  },
+  "explanation": [
+    {
+      "en": "The 12-bar blues is three lines of four bars. In numbers: I I I I / IV IV I I / V IV I V.",
+      "tr": "12 ölçülük blues, dörder ölçülük üç satırdır. Sayılarla: I I I I / IV IV I I / V IV I V."
+    },
+    {
+      "en": "I is the chord on do, IV the chord on fa, V the chord on sol. The backing plays them; you count and sing.",
+      "tr": "I do üstündeki akor, IV fa üstündeki akor, V sol üstündeki akordur. Onları eşlik çalar; sen sayar ve söylersin."
+    },
+    {
+      "en": "Bars 1, 5 and 9 start the three lines. Listen for the change to IV in bar 5; it tells you where you are.",
+      "tr": "1., 5. ve 9. ölçüler üç satırı başlatır. 5. ölçüdeki IV'e geçişi dinle; nerede olduğunu o söyler."
+    },
+    {
+      "en": "Many blues lyrics follow the lines: line 1 states an idea, line 2 repeats it, line 3 answers it.",
+      "tr": "Pek çok blues sözü satırları izler: 1. satır bir fikir söyler, 2. satır onu tekrarlar, 3. satır ona cevap verir."
+    },
+    {
+      "en": "The melody is original and moves mostly on 1, ♭3, 4 and 5. If the low ♭7 or the low sol is not comfortable, sing it an octave up.",
+      "tr": "Ezgi özgündür ve çoğunlukla 1, ♭3, 4 ve 5 üstünde hareket eder. Alçak ♭7 ya da alçak sol rahat değilse onu bir oktav yukarıda söyle."
+    },
+    {
+      "en": "If you get lost, keep counting and come back in at bar 5 or bar 9.",
+      "tr": "Kaybolursan saymayı sürdür ve 5. ya da 9. ölçüde yeniden gir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "An original twelve-bar backing on I, IV and V in your key at ♩=70 and ♩=55 with a one-bar count-in, and the melody on a soft synthesized voice. Headphones recommended.",
+      "tr": "Kişisel tonunda I, IV ve V üstünde özgün 12 ölçülük eşlik, bir ölçü sayma girişiyle ♩=70 ve ♩=55; ezgi yumuşak sentez sesle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D",
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "First answer 3 on-screen questions about the form: put the three lines in order, or name the chord in a given bar. Then listen to one bar of the backing and sing the 12-bar melody on 'doo' or 'la' at ♩=70, counting the bars in your head. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Önce biçimle ilgili ekrandaki 3 soruyu yanıtla: üç satırı sıraya koy ya da verilen ölçünün akorunu söyle. Sonra eşlikten bir ölçü dinle ve ölçüleri kafanda sayarak 12 ölçülük ezgiyi ♩=70'te 'du' ya da 'la' ile söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "1-b3-1:h | b7,-1:h. | 1-b3-4-5 | 5:w | 4-5-4-b3 | 4:h b3:h | 1-b3-1:h | 1:w | 5:h 4:q 5:q | 4:q b3:q 4:h | b3-1:h. | 5,:h hr",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 3
+    },
+    "drill": {
+      "type": "ordering",
+      "count": 3,
+      "params": {
+        "form": "twelve_bar_blues",
+        "items": [
+          "I I I I",
+          "IV IV I I",
+          "V IV I V"
+        ],
+        "askChordInBar": true
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I came in on bar 1 and ended in bar 12.",
+      "tr": "1. ölçüde girdim ve 12. ölçüde bitirdim."
+    },
+    {
+      "en": "I heard the change to IV in bar 5.",
+      "tr": "5. ölçüde IV'e geçişi duydum."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early in bar 5.",
+        "tr": "Doğru, ama 5. ölçüde erken."
+      },
+      "fix": {
+        "en": "The four I bars at the start are easy to cut short. Count them 1 to 4 in your head.",
+        "tr": "Baştaki dört I ölçüsü kolayca kısalır. Onları kafanda 1'den 4'e say."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, ♭3 a semitone high.",
+        "tr": "Farklı nota: ♭3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "Over the I chord the major mi is close by. Keep 3 flat in this melody, as in the reference.",
+        "tr": "I akorunun üstünde majör mi çok yakındır. Bu ezgide 3'ü referanstaki gibi bemol tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only the first line, bars 1–4, three times with the backing, then the whole form.",
+    "tr": "Önce eşlikle yalnız ilk satırı, 1–4. ölçüleri, üç kez söyle; sonra bütün biçimi."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

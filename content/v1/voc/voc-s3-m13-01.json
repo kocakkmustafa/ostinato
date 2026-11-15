@@ -1,0 +1,112 @@
+{
+  "id": "voc-s3-m13-01",
+  "title": { "en": "Do on the staff in C", "tr": "Do majörde portede do" },
+  "goal": {
+    "en": "Finds do on the treble staff in C major and sings do, mi and sol from the staff in their own octave.",
+    "tr": "Do majörde sol anahtarlı portede do'yu bulur; do, mi ve sol'ü porteden kendi oktavında söyler."
+  },
+  "explanation": [
+    {
+      "en": "Sight-singing means singing a line you have never heard, straight from the staff. Every line starts from one question: where is do?",
+      "tr": "Deşifre, hiç duymadığın bir satırı doğrudan porteden söylemektir. Her satır tek bir soruyla başlar: do nerede?"
+    },
+    {
+      "en": "In C major, do is C. On the treble staff it sits on a short extra line just below the staff (C4), and again in the third space (C5).",
+      "tr": "Do majörde do, Do notasıdır. Sol anahtarlı portede, portenin hemen altındaki kısa ek çizgide (Do4) ve üçüncü aralıkta (Do5) durur."
+    },
+    {
+      "en": "From the low do, mi is on the first line and sol on the second line. Do, mi and sol sit on three neighbouring lines.",
+      "tr": "Alttaki do'dan sonra mi birinci çizgide, sol ikinci çizgidedir. Do, mi ve sol yan yana üç çizgide durur."
+    },
+    {
+      "en": "The app gives you do in your own comfortable range. You read degrees, not fixed notes: the C on the staff is your do, wherever it sits in your voice.",
+      "tr": "Uygulama do'yu senin rahat menzilinden verir. Sabit notaları değil, dereceleri okursun: portedeki Do, sesinde nereye düşerse düşsün senin do'ndur."
+    },
+    {
+      "en": "Before you sing, find do on the staff and hear it in your head. Then sing the note you see.",
+      "tr": "Söylemeden önce portede do'yu bul ve içinden duy. Sonra gördüğün notayı söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do and the tonic chord in your comfortable range before the sung part; the four notes play only after your try, for comparison.",
+      "tr": "Söyleme bölümünden önce rahat menzilinde do ve tonik akor; dört nota yalnız denemenden sonra, karşılaştırma için çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["D", "M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Part 1: 6 questions. A short line in C major appears on the treble staff; tap every do. Part 2: hear do, then sing the four notes on the staff one by one: do, mi, sol, do. Sing in your own octave.",
+      "tr": "1. bölüm: 6 soru. Sol anahtarlı portede Do majörde kısa bir satır çıkar; her do'ya dokun. 2. bölüm: do'yu dinle, sonra portedeki dört notayı tek tek söyle: do, mi, sol, do. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-1",
+    "pass": {
+      "levelDefault": false,
+      "minCorrect": 6,
+      "text": {
+        "en": "All 6 questions, and the four notes at the Level 3 pitch criteria.",
+        "tr": "6 sorunun 6'sı ve dört nota Seviye 3 perde ölçütünde."
+      }
+    },
+    "drill": {
+      "type": "note_name",
+      "count": 6,
+      "params": {
+        "clef": "treble",
+        "key": "C",
+        "range": ["C4", "C5"],
+        "answerAs": "degree",
+        "targets": [1]
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    {
+      "en": "My line matched the comparison afterwards.",
+      "tr": "Satırım sonradan çalınan karşılaştırmayla aynıydı."
+    },
+    { "en": "The last do matched the first one.", "tr": "Son do ilkiyle aynıydı." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: the do in the third space was missed.",
+        "tr": "Farklı cevap: üçüncü aralıktaki do atlandı."
+      },
+      "fix": {
+        "en": "Do appears twice in this range. Check the extra line below the staff and the third space.",
+        "tr": "Bu aralıkta do iki kez görünür. Portenin altındaki ek çizgiye ve üçüncü aralığa bak."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on sol, a step low.",
+        "tr": "Sol'de farklı nota, bir basamak alçak."
+      },
+      "fix": {
+        "en": "Sol is two lines above do, not one. Hear do-mi-sol in your head, then sing sol.",
+        "tr": "Sol, do'nun bir değil iki çizgi üstündedir. İçinden do-mi-sol'ü duy, sonra sol'ü söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Replay do before each note and sing do first, then the note on the staff.",
+    "tr": "Her notadan önce do'yu yeniden dinle ve önce do'yu, sonra portedeki notayı söyle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

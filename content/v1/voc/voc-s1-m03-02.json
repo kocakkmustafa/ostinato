@@ -1,0 +1,118 @@
+{
+  "id": "voc-s1-m03-02",
+  "title": {
+    "en": "Find your comfortable range",
+    "tr": "Rahat menzilini bul"
+  },
+  "goal": {
+    "en": "Finds a comfortable low note and high note by half steps, without pushing.",
+    "tr": "Yarım ses adımlarla rahat bir alt ve üst nota bulur, zorlamadan."
+  },
+  "explanation": [
+    {
+      "en": "Your comfortable range runs from the lowest to the highest note you can sing easily, softly and without strain. It is not the furthest you can reach.",
+      "tr": "Rahat menzilin, kolayca, yumuşakça ve zorlanmadan söyleyebildiğin en pes notadan en tiz notaya kadardır. Ulaşabildiğin en uç nokta değildir."
+    },
+    {
+      "en": "You start from your speaking pitch. The app then moves one half step at a time: first down, then up.",
+      "tr": "Konuşma perdenden başlarsın. Uygulama sonra her seferinde yarım ses kayar: önce aşağı, sonra yukarı."
+    },
+    {
+      "en": "Stop at the first note that feels tight, scratchy or breathy, or that needs a push. The note before it is your limit.",
+      "tr": "Sıkışmış, cızırtılı ya da hışırtılı gelen veya itmeni gerektiren ilk notada dur. Ondan önceki nota sınırındır."
+    },
+    {
+      "en": "The app saves only two note names. Later lessons use them to place every exercise in your range.",
+      "tr": "Uygulama yalnız iki nota adı saklar. Sonraki dersler her alıştırmayı bu aralığa yerleştirmek için bunları kullanır."
+    },
+    {
+      "en": "A wider range is not a better score. Range grows with easy practice, never by forcing.",
+      "tr": "Geniş menzil daha iyi puan değildir. Menzil kolay çalışmayla gelişir, zorlamayla değil."
+    },
+    {
+      "en": "Your range can change from day to day. Redo this lesson whenever you like.",
+      "tr": "Menzilin günden güne değişebilir. Bu dersi istediğin zaman tekrarla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Single notes starting at your speaking pitch, moving by half steps down, then up; soft vocal or sine tone.",
+      "tr": "Konuşma perdenden başlayan tek notalar, yarım ses adımlarla önce aşağı, sonra yukarı; yumuşak vokal ya da sinüs tını."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Hum on 'mm' or sing a soft 'ah' on each note for about two seconds. Go down by half steps until a note stops feeling easy, then stop. Return to the start and go up the same way. Mark the last easy note in each direction as your limit.",
+      "tr": "Her notayı 'mm' ile mırıldan ya da yumuşak bir 'a' ile yaklaşık iki saniye söyle. Bir nota kolay gelmeyene kadar yarım ses adımlarla aşağı in, sonra dur. Başa dön ve aynı şekilde yukarı çık. İki yönde de son kolay notayı sınır olarak işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Complete when a low and a high comfortable note are saved, each held about two seconds within 50 cents of the reference. The width of the range is not scored.",
+        "tr": "Rahat bir alt ve bir üst nota saklanınca tamamlanır; ikisi de yaklaşık iki saniye, referansın 50 cent içinde tutulmuş olmalı. Menzilin genişliği puanlanmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I stopped at the first note that felt tight.",
+      "tr": "Sıkışan ilk notada durdum."
+    },
+    {
+      "en": "I kept the same soft volume on every note.",
+      "tr": "Her notada aynı yumuşak gürlüğü korudum."
+    },
+    {
+      "en": "My neck and jaw stayed loose, even at the limits.",
+      "tr": "Boynum ve çenem sınırlarda da gevşek kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, a little low.",
+        "tr": "Farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Near the bottom, notes tend to sag. That is a sign you are close to your limit; mark the note before it as your limit.",
+        "tr": "Alt uçta notalar düşmeye meyillidir. Bu, sınırına yaklaştığının işaretidir; ondan önceki notayı sınır olarak işaretle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Very low or very soft notes are hard to read. Hum on 'mm' a little closer to the phone; if it still fails, take the note before it as your limit.",
+        "tr": "Çok pes ya da çok yumuşak notalar zor okunur. Telefona biraz daha yakın 'mm' ile mırıldan; yine olmazsa ondan önceki notayı sınırın say."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Find only the low limit today and the high limit in another session.",
+    "tr": "Bugün yalnız alt sınırı, başka bir oturumda üst sınırı bul."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

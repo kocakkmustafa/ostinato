@@ -1,0 +1,127 @@
+{
+  "id": "voc-s3-m11-12",
+  "title": {
+    "en": "Register checkpoint",
+    "tr": "Register geçişi kontrolü"
+  },
+  "goal": {
+    "en": "Sings an original 8-bar melody that crosses the break going up and coming down, in tune and on time at ♩=70.",
+    "tr": "Geçiş bölgesinden çıkarken ve inerken geçen özgün 8 ölçülük bir ezgiyi ♩=70'te doğru perdede ve zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint brings the module together: crossing the break going up and coming down, inside a melody.",
+      "tr": "Bu geçiş modülü birleştirir: bir ezginin içinde geçiş bölgesinden çıkarken ve inerken geçmek."
+    },
+    {
+      "en": "The melody is an original 8-bar line from do up to the top do and back. The app places it so your break falls in the middle of the line.",
+      "tr": "Ezgi, do'dan üst do'ya çıkıp dönen özgün 8 ölçülük bir çizgidir. Uygulama onu geçiş bölgen çizginin ortasına düşecek biçimde yerleştirir."
+    },
+    {
+      "en": "Use what worked for you: a lighter sound and a little less volume as you climb, and a soft change on the way down.",
+      "tr": "Sende işe yarayanı kullan: çıkarken daha hafif ses ve biraz daha az gürlük, inerken yumuşak bir değişim."
+    },
+    {
+      "en": "If you miss a note, keep going and sing the next one on its click. Do not restart.",
+      "tr": "Bir notayı kaçırırsan devam et ve sonrakini kendi klikinde söyle. Baştan başlama."
+    },
+    {
+      "en": "This checkpoint opens the next module.",
+      "tr": "Bu geçiş sonraki modülü açar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The original melody in your comfortable range, soft synthesized voice, at ♩=70 and ♩=50, over an original soft chord accompaniment (I, IV, V) with a click. Headphones recommended.",
+      "tr": "Özgün ezgi rahat menzilinde, yumuşak sentez ses, ♩=70 ve ♩=50; özgün yumuşak akor eşliği (I, IV, V) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the eight bars on “oo” or “ah” at ♩=70. Practise at a slower tempo first if you need to; the checkpoint passes at ♩=70. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşliğin bir ölçüsünü dinle, sonra sekiz ölçüyü “u” ya da “a” ile ♩=70'te söyle. Gerekirse önce daha yavaş tempoda çalış; geçiş ♩=70'te geçilir. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "sequence": "1:q 3:q 5:q 6:q | 5:h 3:h | 2:q 4:q 5:q 7:q | 1':h 5:h | 4:q 6:q 1':q 6:q | 5:h 3:h | 4:q 3:q 2:h | 1:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "The top notes felt easy, without pushing.",
+      "tr": "Üst notalar zorlamadan, rahat geldi."
+    },
+    {
+      "en": "I crossed the break without pushing, going up and coming down.",
+      "tr": "Geçiş bölgesinden çıkarken de inerken de zorlamadan geçtim."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the pitch jumps at the break.",
+        "tr": "Farklı nota: perde geçiş bölgesinde sıçrıyor."
+      },
+      "fix": {
+        "en": "Slow down just before the break and make the sound lighter there. Let the higher notes get a little quieter.",
+        "tr": "Geçiş bölgesinden hemen önce yavaşla ve sesi orada hafiflet. Üstteki notaların biraz kısılmasına izin ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late on the way down.",
+        "tr": "Doğru, ama inerken geç."
+      },
+      "fix": {
+        "en": "Keep the syllables short and move on the click; don't wait for the note to settle.",
+        "tr": "Heceleri kısa tut ve klikte geç; notanın oturmasını bekleme."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Practise at ♩=50 and ♩=60 first, then take the checkpoint at ♩=70.",
+    "tr": "Önce ♩=50 ve ♩=60'ta çalış, sonra geçişi ♩=70'te dene."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

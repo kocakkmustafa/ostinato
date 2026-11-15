@@ -1,0 +1,115 @@
+{
+  "id": "voc-s3-m11-10",
+  "title": {
+    "en": "Register warm-up",
+    "tr": "Register ısınması"
+  },
+  "goal": {
+    "en": "Completes a register warm-up: lip-trill sirens, octave slides on “oo” and five-note scales through the break.",
+    "tr": "Bir register ısınmasını tamamlar: dudak titreşimiyle sirenler, “u” ile oktav kaymaları ve geçiş bölgesinden 5 notalık gamlar."
+  },
+  "explanation": [
+    {
+      "en": "Warm up before each singing session. Keep it short and easy; a warm-up prepares your voice, it does not test it.",
+      "tr": "Her şarkı oturumundan önce ısın. Kısa ve rahat tut; ısınma sesini hazırlar, sınamaz."
+    },
+    {
+      "en": "Step 1, about one minute: two lip-trill sirens across your break. Use “mm” if the trill doesn't come.",
+      "tr": "1. adım, yaklaşık bir dakika: geçiş bölgenin üstünden iki dudak titreşimi sireni. Titreşim gelmezse “mm” kullan."
+    },
+    {
+      "en": "Step 2, about one minute: two octave slides on “oo”, from 1 up to the top do and back.",
+      "tr": "2. adım, yaklaşık bir dakika: “u” ile iki oktav kayması, 1'den üst do'ya ve geri."
+    },
+    {
+      "en": "Step 3, about one minute: the five-note scale 1-2-3-4-5-4-3-2-1 twice, placed so it crosses your break.",
+      "tr": "3. adım, yaklaşık bir dakika: geçiş bölgenden geçecek biçimde yerleştirilmiş 5 notalık 1-2-3-4-5-4-3-2-1 gamı, iki kez."
+    },
+    {
+      "en": "Breathe normally between steps. If a step feels pressed, make it softer or skip it; stop for pain or growing effort.",
+      "tr": "Adımlar arasında normal nefes al. Bir adım baskılı hissettirirse daha hafif yap ya da atla; ağrı ya da artan zorlanmada dur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "A slow, soft example of each step in your range: a lip-trill siren, an octave slide on “oo” and the five-note scale.",
+      "tr": "Rahat menzilinde her adımın yavaş ve yumuşak bir örneği: bir dudak titreşimi sireni, “u” ile bir oktav kayması ve 5 notalık gam."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Follow the on-screen timer through the three steps: 2 lip-trill sirens, 2 octave slides on “oo”, then the five-note scale twice. No click; take your time.",
+      "tr": "Ekrandaki zamanlayıcıyla üç adımı izle: 2 dudak titreşimi sireni, “u” ile 2 oktav kayması, sonra 5 notalık gam iki kez. Klik yok; acele etme."
+    },
+    "sequence": "1-2-3-4 | 5-4-3-2 | 1:h hr | ×2",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Finish all three steps. In steps 1 and 2 the curve has no jump larger than a half step; in step 3 the notes come in order within the level's pitch criteria.",
+        "tr": "Üç adımı da bitir. 1. ve 2. adımda eğri yarım sesten büyük sıçramaz; 3. adımda notalar sırayla ve seviyenin perde ölçütü içinde gelir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I did all three steps in about three minutes.",
+      "tr": "Üç adımı yaklaşık üç dakikada yaptım."
+    },
+    {
+      "en": "Each sound started softly.",
+      "tr": "Her ses yumuşak başladı."
+    },
+    {
+      "en": "The top notes felt easy, without pushing.",
+      "tr": "Üst notalar zorlamadan, rahat geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the pitch jumps at the break.",
+        "tr": "Farklı nota: perde geçiş bölgesinde sıçrıyor."
+      },
+      "fix": {
+        "en": "Slow down just before the break and make the sound lighter there. Let the higher notes get a little quieter.",
+        "tr": "Geçiş bölgesinden hemen önce yavaşla ve sesi orada hafiflet. Üstteki notaların biraz kısılmasına izin ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear: the trill breaks off.",
+        "tr": "Duyamadım: titreşim kesiliyor."
+      },
+      "fix": {
+        "en": "Let a little more gentle breath through, or switch to “mm” for now.",
+        "tr": "Biraz daha hafif nefes ver ya da şimdilik “mm”e geç."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Do only steps 1 and 3 today, with a single scale.",
+    "tr": "Bugün yalnız 1. ve 3. adımı yap; gamı bir kez söyle."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

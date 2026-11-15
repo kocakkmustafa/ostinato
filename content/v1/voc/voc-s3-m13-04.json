@@ -1,0 +1,97 @@
+{
+  "id": "voc-s3-m13-04",
+  "title": { "en": "The key of G", "tr": "Sol majör" },
+  "goal": {
+    "en": "Finds do in G major from the key signature and sings an original four-bar line from the staff, in their own octave.",
+    "tr": "Sol majörde donanımdan do'yu bulur ve özgün dört ölçülük satırı porteden kendi oktavında söyler."
+  },
+  "explanation": [
+    {
+      "en": "G major has one sharp in the key signature, on the top line: F. Every F in the line is F-sharp.",
+      "tr": "Sol majörün donanımında bir diyez vardır, en üst çizgide: Fa. Satırdaki her Fa, Fa diyezdir."
+    },
+    {
+      "en": "In G major do is G, on the second line. Mi is on the third line and sol on the fourth: do-mi-sol are again three neighbouring lines.",
+      "tr": "Sol majörde do, Sol notasıdır; ikinci çizgidedir. Mi üçüncü, sol dördüncü çizgidedir: do-mi-sol yine yan yana üç çizgidir."
+    },
+    {
+      "en": "F-sharp is ti, the note just below do, in the first space. Ti to do is a half step: keep it close and let it lead up to do.",
+      "tr": "Fa diyez si'dir, do'nun hemen altındaki nota; birinci aralıktadır. Si'den do'ya yarım sestir: onu dar tut ve do'ya doğru çeksin."
+    },
+    {
+      "en": "The degrees work just as in C major; only their place on the staff moves. The app still gives you do in your own range.",
+      "tr": "Dereceler Do majördeki gibi çalışır; yalnız portedeki yerleri değişir. Uygulama do'yu yine senin rahat menzilinden verir."
+    },
+    {
+      "en": "Bar 1: do-re-mi-do. Bar 2 steps down from sol to re. Bar 3 dips to ti below do and back: do-ti-do-re. Bar 4: mi, then do.",
+      "tr": "1. ölçü: do-re-mi-do. 2. ölçü sol'den re'ye basamakla iner. 3. ölçü do'nun altındaki si'ye inip döner: do-si-do-re. 4. ölçü: mi, sonra do."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do and the tonic chord in your comfortable range; the line itself plays only after your try, for comparison, at an easy pace and slowly.",
+      "tr": "Rahat menzilinde do ve tonik akor; satırın kendisi yalnız denemenden sonra, karşılaştırma için, rahat hızda ve yavaş çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Find do from the key signature. Hear do, then sing the four bars from the staff on solfège or numbers, at your own pace. Only pitch is measured here. Sing in your own octave.",
+      "tr": "Donanımdan do'yu bul. Do'yu dinle, sonra dört ölçüyü porteden solfejle ya da derecelerle, kendi hızında söyle. Burada yalnız perde ölçülür. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-1 | 5-4-3-2 | 1-7,-1-2 | 3:h 1:h",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    {
+      "en": "Ti stayed close to do.",
+      "tr": "Si, do'ya yakın kaldı."
+    },
+    {
+      "en": "My line matched the comparison afterwards.",
+      "tr": "Satırım sonradan çalınan karşılaştırmayla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note from the first note on: do was read on another line.",
+        "tr": "Farklı nota: ilk notadan itibaren do başka bir çizgide okunmuş."
+      },
+      "fix": {
+        "en": "One sharp means G major: do is the second line, not the low ledger line of C major.",
+        "tr": "Bir diyez Sol majör demektir: do ikinci çizgidir, Do majördeki alt ek çizgi değil."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on ti in bar 3, a little low.",
+        "tr": "3. ölçüdeki si'de farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Ti is only a half step below do. Sing do-ti-do slowly and keep ti leaning up.",
+        "tr": "Si, do'nun yalnızca yarım ses altıdır. Do-si-do'yu yavaş söyle ve si'yi yukarı doğru eğik tut."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing one bar at a time and return to do between bars.",
+    "tr": "Her seferinde bir ölçü söyle ve ölçüler arasında do'ya dön."
+  },
+  "minutes": 10,
+  "expertPending": true
+}
