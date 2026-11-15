@@ -304,12 +304,23 @@ void main() {
       expect(find.byKey(const Key('stage-handles')), findsOneWidget);
       expect(t.takeException(), isNull);
       // Tekrar dene: ekran donmadi, yeni kosu baslar.
+      expect(rig.channel.metronome, isNull, reason: 'hata metronomu kapatti');
       await t.tap(find.byKey(const Key('practice-start')));
       await t.pump();
       await t.pump();
       await t.pump(const Duration(milliseconds: 50));
+      await listen05f(t, rig);
       expect(rig.controller, isNotNull);
-      expect(rig.controller!.phase, isNot(PracticePhase.failed));
+      expect(
+        rig.controller!.phase,
+        PracticePhase.running,
+        reason: 'yeniden baslatma gercekten basladi',
+      );
+      expect(
+        rig.channel.metronome,
+        isNotNull,
+        reason: 'yeni startMetronome cagrisi yapildi',
+      );
       expect(find.byKey(const Key('practice-failure')), findsNothing);
       expect(t.takeException(), isNull);
       await dispose05f(t, rig);

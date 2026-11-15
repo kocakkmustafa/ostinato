@@ -975,7 +975,11 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                   beatsPerBar: _score.beatsPerBar,
                 )
               else
+                // Natural width while it fits (7:5 against the badge, the
+                // widths main gave them at 360 px); wraps instead of
+                // overflowing at large text scales.
                 Flexible(
+                  flex: 7,
                   child: Text(
                     localized(context, 'Metronome ready', 'Metronom hazır'),
                     style: monoText(size: 11, color: palette.textMuted),
@@ -983,6 +987,7 @@ class _PracticeLoopScreenState extends State<PracticeLoopScreen>
                 ),
               const SizedBox(width: 8),
               Expanded(
+                flex: 5,
                 child: Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: _timingReady
