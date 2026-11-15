@@ -118,8 +118,8 @@
     },
     {
       "id": "comingSoon",
-      "en": "Coming soon · This course opens in a later update.",
-      "tr": "Yakında · Bu kurs sonraki güncellemelerle açılacak."
+      "en": "Closed · This course is not open in this build.",
+      "tr": "Kapalı · Bu kurs bu sürümde açık değil."
     },
     {
       "id": "comingSoonVoice",

@@ -48,8 +48,8 @@
     "pass": {
       "levelDefault": false,
       "text": {
-        "en": "Each part passes on its own. Tuning: every string within 5 cents (within 20 cents while precise tuning is not ready). Single notes: Level 1 note and timing rules. Chords: at least 6 of 7 chords with every string heard. Changes and rhythm: Level 1 chord and timing rules. Ear: at least 5 of 6.",
-        "tr": "Her bölüm kendi başına geçer. Akort: her tel 5 cent içinde (hassas akort hazır değilken 20 cent içinde). Tek notalar: Seviye 1 nota ve zamanlama ölçütü. Akorlar: 7 akorun en az 6'sında bütün teller duyulur. Geçiş ve ritim: Seviye 1 akor ve zamanlama ölçütü. Kulak: 6 sorunun en az 5'i."
+        "en": "Each part passes on its own. Tuning: every string within 5 cents. The criteria for the other parts are on each lesson's own screen.",
+        "tr": "Her bölüm kendi başına geçer. Akort: her tel 5 cent içinde. Diğer bölümlerin ölçütleri dersin kendi ekranında yazar."
       },
       "minCorrect": 5
     },

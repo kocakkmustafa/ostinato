@@ -90,13 +90,12 @@ abstract final class ReviewCopyTr {
           'saymak için fazla büyüktür.',
     ),
     'gap.footer': _Reviewed(
-      'This half is not a disclaimer. It is the same size as the half above '
-          'because it carries the same weight — and these are not all the '
-          'same kind of gap: some are missing tools, some are missing data, '
-          'and some are judgements we do not think are ours to make.',
-      'Bu bölüm bir dipnot değildir. Yukarıdaki ölçüm kadar önemlidir. '
-          'Eksiklerin nedenleri de aynı değildir: bazılarında araç, '
-          'bazılarında veri yoktur; bazı konularda hüküm vermek doğru olmaz.',
+      'This half is not a disclaimer. These are not all the same kind of '
+          'gap: some are missing tools, some are missing data, and some are '
+          'judgements we do not think are ours to make.',
+      'Bu bölüm bir dipnot değildir. Eksiklerin nedenleri aynı değildir: '
+          'bazılarında araç, bazılarında veri yoktur; bazı konularda hüküm '
+          'vermek bize düşmez.',
     ),
     'next.space': _Reviewed(
       'Next time, leave enough room between you and the phone to keep both '
