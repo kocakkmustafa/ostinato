@@ -402,18 +402,27 @@ void main() {
     // Module 1 (the next lesson's) is expanded.
     String chip(String id) =>
         tester.widget<Text>(find.byKey(Key('v1-course-chip-$id'))).data!;
-    expect(chip('gtr-s1-m01-01'), 'Reading · on-screen exercise coming soon');
-    expect(chip('gtr-s1-m01-02'), 'Checklist · camera check coming soon');
+    expect(
+      chip('gtr-s1-m01-01'),
+      'Reading · no on-screen exercise in this lesson',
+    );
+    expect(chip('gtr-s1-m01-02'), 'Checklist · no camera check in this lesson');
     expect(chip('gtr-s1-m01-04'), 'Tuner');
-    expect(chip('gtr-s1-m01-06'), 'Self-check · mic feedback coming soon');
+    expect(
+      chip('gtr-s1-m01-06'),
+      'Self-check · no mic feedback in this lesson',
+    );
     expect(chip('gtr-s1-m01-07'), 'Measured');
     expect(find.text('Open · 0 of 8 done'), findsOneWidget);
     // Module 4 is locked; its chord lessons are self-checks and its gate is
     // held.
     await tester.tap(find.byKey(const Key('v1-course-unit-gtr-s1-m04')));
     await tester.pumpAndSettle();
-    expect(chip('gtr-s1-m04-01'), 'Self-check · mic feedback coming soon');
-    expect(chip('gtr-s1-m04-11'), 'Checkpoint held · measurement coming soon');
+    expect(
+      chip('gtr-s1-m04-01'),
+      'Self-check · no mic feedback in this lesson',
+    );
+    expect(chip('gtr-s1-m04-11'), 'Checkpoint held · no measurement');
     expect(
       tester
           .widget<Text>(find.byKey(const Key('v1-course-status-gtr-s1-m04-11')))
@@ -442,7 +451,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(V1LessonReaderScreen), findsOneWidget);
     expect(
-      find.textContaining('Microphone feedback for this lesson is coming soon'),
+      find.textContaining('This lesson gives no feedback from the microphone'),
       findsOneWidget,
     );
     expect(find.byKey(const Key('v1-reader-reference')), findsOneWidget);

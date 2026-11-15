@@ -8,8 +8,8 @@
     },
     {
       "id": "intro",
-      "en": "All {v0} lessons of the guitar course, by level and module. Measured lessons listen to every note. The others are self-checks for now: you tick a checklist and the lesson is saved as self-reported, not measured. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order.",
-      "tr": "Gitar kursunun {v0} dersinin tamamı, seviye ve modüle göre. Ölçülü dersler her notayı dinler. Diğerleri şimdilik öz-kontroldür: kontrol listesini işaretlersin, ders ölçülmüş değil kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al."
+      "en": "All {v0} lessons of the guitar course, by level and module. Measured lessons listen to every note. The others are self-checks: you tick a checklist and the lesson is saved as self-reported, not measured. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order.",
+      "tr": "Gitar kursunun {v0} dersinin tamamı, seviye ve modüle göre. Ölçülü dersler her notayı dinler. Diğerleri öz-kontroldür: kontrol listesini işaretlersin, ders ölçülmüş değil kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al."
     },
     {
       "id": "earTitle",
@@ -118,8 +118,8 @@
     },
     {
       "id": "chipSelfCheck",
-      "en": "Self-check · mic feedback coming soon",
-      "tr": "Öz-kontrol · mikrofon geri bildirimi yakında"
+      "en": "Self-check · no mic feedback in this lesson",
+      "tr": "Öz-kontrol · bu derste mikrofon geri bildirimi yok"
     },
     {
       "id": "chipSelfCheckLesson",
@@ -128,18 +128,18 @@
     },
     {
       "id": "chipCamera",
-      "en": "Checklist · camera check coming soon",
-      "tr": "Kontrol listesi · kamera kontrolü yakında"
+      "en": "Checklist · no camera check in this lesson",
+      "tr": "Kontrol listesi · bu derste kamera kontrolü yok"
     },
     {
       "id": "chipDrill",
-      "en": "Reading · on-screen exercise coming soon",
-      "tr": "Okuma · ekran alıştırması yakında"
+      "en": "Reading · no on-screen exercise in this lesson",
+      "tr": "Okuma · bu derste ekran alıştırması yok"
     },
     {
       "id": "chipHeld",
-      "en": "Checkpoint held · measurement coming soon",
-      "tr": "Geçiş bekletiliyor · ölçüm yakında"
+      "en": "Checkpoint held · no measurement",
+      "tr": "Geçiş bekletiliyor · ölçüm yok"
     },
     {
       "id": "statusLocked",
@@ -248,8 +248,8 @@
     },
     {
       "id": "bannerSelfCheck",
-      "en": "Microphone feedback for this lesson is coming soon. For now, check yourself with the list below; your completion is saved as self-reported, not measured.",
-      "tr": "Bu derste mikrofon geri bildirimi yakında. Şimdilik aşağıdaki listeyle kendini kontrol et; tamamlaman ölçülmüş değil kendi beyanı olarak kaydedilir."
+      "en": "This lesson gives no feedback from the microphone. Check yourself with the list below; your completion is saved as self-reported, not measured.",
+      "tr": "Bu derste mikrofon geri bildirimi yok. Aşağıdaki listeyle kendini kontrol et; tamamlaman ölçülmüş değil kendi beyanı olarak kaydedilir."
     },
     {
       "id": "bannerSelfCheckLesson",
@@ -263,8 +263,8 @@
     },
     {
       "id": "bannerDrill",
-      "en": "The on-screen exercise for this lesson is coming soon. Read the lesson and check yourself; your completion is saved as self-reported.",
-      "tr": "Bu dersin ekran alıştırması yakında. Dersi oku ve kendini kontrol et; tamamlaman kendi beyanı olarak kaydedilir."
+      "en": "This lesson has no on-screen exercise. Read the lesson and check yourself; your completion is saved as self-reported.",
+      "tr": "Bu dersin ekran alıştırması yok. Dersi oku ve kendini kontrol et; tamamlaman kendi beyanı olarak kaydedilir."
     },
     {
       "id": "bannerHeld",

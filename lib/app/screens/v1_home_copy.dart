@@ -97,8 +97,8 @@ abstract final class V1HomeCopy {
     'Kulak eğitimi açık · sıradaki ders: {v0}',
   );
   static const UiCopy comingSoon = (
-    'Coming soon · This course opens in a later update.',
-    'Yakında · Bu kurs sonraki güncellemelerle açılacak.',
+    'Closed · This course is not open in this build.',
+    'Kapalı · Bu kurs bu sürümde açık değil.',
   );
 
   /// What the voice course will cover; shown on its "Coming soon" page

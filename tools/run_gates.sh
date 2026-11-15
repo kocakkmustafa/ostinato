@@ -104,6 +104,7 @@ run "mağaza metni UTF-8 regresyonları" python3 -B -m unittest discover -s tool
 run "MUT-A (kapılar ısırıyor mu)"     python3 tools/gate_mutation_test.py
 run "MUT-A log öz-testi (doluyor mu)" python3 tools/gate_mutation_test.py --selftest-log
 run "pozitif ikiz (kapı desenleri)"   bash -c 'python3 tools/validate_surface_honesty.py --selftest && python3 tools/validate_color_tokens.py --selftest'
+run "l10n vaat taraması öz-testi"     python3 -B -m unittest discover -s tools -p test_l10n_promise_guard.py
 run "yüzey dürüstlüğü (vaat+yetenek)" python3 tools/validate_surface_honesty.py
 run "renk token kapısı"               python3 tools/validate_color_tokens.py
 run "kapsam-dışı listesi (türetim)"   python3 tools/gen_out_of_scope.py --check

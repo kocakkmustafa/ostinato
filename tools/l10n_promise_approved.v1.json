@@ -1,0 +1,1357 @@
+{
+  "$why": "Kural A2 (assets/l10n taraması) onaylı listesi. Hash = katalog anahtarı. Etiket ders|kisit; vaat (gelecek sözü) listeye GİRMEZ, nötrleştirilir. Karar: Motion, Ostinato l10n bekçi sınıflandırması (2026-11-15).",
+  "approved": {
+    "00077e394f74e8ae": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "00222b89b13012c3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "01702ca23313ffd8": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "01dd9f90cf4e3016": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "02473c85c1ad4ec3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "026413b228a9d16d": {
+      "etiket": "kisit",
+      "gerekce": "destek yok; \"kabul bekleniyor\" durum bildirimi, söz değil"
+    },
+    "02bfa399ea5a53d4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "02c2e8feef396eb0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "032ef6620567271d": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "03e871028ab01543": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "042569cd3c5139ed": {
+      "etiket": "ders",
+      "gerekce": "lib/app/study_review_content.dart:127 (çalışma-kartı soru/cevabı; öğretim içeriği)"
+    },
+    "0457eb40f2874e1a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "04ac82f7bce0fdc3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "04e5b0529da6b2aa": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "059149bf35e10a05": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "05bf458d1b509ded": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "08e2f63b74e37866": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "0a7e218dce1c2092": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "0ab44640d26b3d2b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "0b1c0fa351839a7b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "0c7527ee52d80f05": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "0f606689c1a45ecc": {
+      "etiket": "kisit",
+      "gerekce": "koşullu kilit (\"doğrulanana kadar\"), söz değil"
+    },
+    "10df751ce719d23a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "10fbac477ab9d1c3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "13b1680dac660ea2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "14191e634c7c5f45": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1442b994035069b4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "14466232e1238336": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1483ce1670acf5cf": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "15315e63f99d43c3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1611595de7bd6f6f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "16452a6e21689bb4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1972af3356c4d589": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1a1c09d3d2c50159": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1ae8629a39e805b6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1af3698a12f86c73": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1b256756a9023163": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1bbbe7407d177aab": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1c8a7ca1d318fef0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1e52151a6cef6576": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "1f49db38e7904b40": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "207b5c313f6b447a": {
+      "etiket": "kisit",
+      "gerekce": "fixtures/audio/AF-008-five-note-timing.json: perfect.noteTimingMs=8.29, bias \"centred\", deviationsMs hepsi negatif; rushing 49.33 / dragging 31.28; tools/positive_twin_audit.py:103 twin_timing_bias"
+    },
+    "22246f602dd0a33d": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "227cae30fa4953e7": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2327022c3377bff2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "232fe4a287e6a045": {
+      "etiket": "kisit",
+      "gerekce": "engel metni"
+    },
+    "23949b19e0b774f4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "24caad0ab0f11f69": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "267ffd442bfab537": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "268b71bdc7da817a": {
+      "etiket": "kisit",
+      "gerekce": "bugünkü eksiklik (el ölçümü kurulmadı), söz yok"
+    },
+    "2786b47a8655fa33": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "27ab308edb61e587": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "27ae1459bc4ce49a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2802a82f7f9ecd53": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "283ab145f8732c03": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "28d2fa3c28ff2f1c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "29988221a9cb6add": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "29c1ebf32d21a5e1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2a35faa6164e85a2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2b0eb942799f2ef6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2c20630c764c48c1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2d0248ae00b24292": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2d286be2a7b9430f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2dbf4cf511407505": {
+      "etiket": "kisit",
+      "gerekce": "engel metni"
+    },
+    "2df1009721ec13ec": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2e3258a36afc1bf4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2ef9438b4a4757fb": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "2fafee3326c3264d": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3281e437b1198117": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "32b0edcbf92c41e2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "33e2a42d8bcf0735": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "356a221b11220fc4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "35998ed963964f0f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "363204bd71341bb7": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3679aa28937d06d5": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "36c022e05a4672b6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "36eac3ea2c82c512": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "37b64315719ccf4a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "39e46a8da3b6c151": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3a1aae8bf46bc473": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3a599161c9e8a9f7": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3b851cbef7a4343f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3c2ecba0b8eb72e3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3cabf2541f08acc0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3d00f353ad36ce76": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3dbf3afbe56b5181": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3de868d946e39596": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "3f0737902e937ef5": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "3fccba8e9d40edc6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "413103f27c293073": {
+      "etiket": "kisit",
+      "gerekce": "engel metni"
+    },
+    "41da79d0cdafeb1f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "4267e170fdc14824": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "443b5fc48c817564": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "44bd38afcf38a7e1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "4694c796891fc586": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "46c390b402c9ee6c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "4946070c4d71c84c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "49c7ad18918448b2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "4c4754bb3f4ec279": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "4c673d4b780815ba": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "4daa90081d3f5141": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "4dc4ec649a1a9412": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "50379b16cb3e91c2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "503840cca53dc480": {
+      "etiket": "kisit",
+      "gerekce": "not open in this release"
+    },
+    "50b2e954b53ef2f7": {
+      "etiket": "kisit",
+      "gerekce": "test/widget_test.dart:227 testWidgets \"K8: ekranda YÜZDE/PUAN yok\"; lib/app/screens/live_screen.dart:533"
+    },
+    "51db3b66949f99a4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "52c3100b5f21b3ec": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "547c440c1183a583": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "562109d21119d7ec": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "564aa2ba84b7acb6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "565201b1e45ed216": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5661d419f570eee4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5744567fd89e7b32": {
+      "etiket": "kisit",
+      "gerekce": "veri yok, söz yok"
+    },
+    "575d76aa2fd0a403": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "58b6148c0aaac31c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "59cdf7c664198c65": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5b172b8d57ba6f3a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5b1d3648e4f2e700": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5b75f096e0b8ea7f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5d65836fb9271d05": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5f2576692dccb917": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5f7b3c17a141a697": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "5fbd80fb1cc6966b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "6095d2cc7db88037": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "60fc64d0dd95c9e2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "610f87febbc71cc0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "61853c601348f5fd": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "624850a51c3a183a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "629a655d8d148d12": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "62cb7a1c280a2f12": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "62de5b04f98b0dc0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "643e55800b12fc18": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "646fd0f28ad0ff01": {
+      "etiket": "kisit",
+      "gerekce": "koşul beyanı, söz yok"
+    },
+    "6490e391704a3914": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "64b9e9d5afbb8eb7": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "659a319be78bd785": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "65b1965aa434bd3a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "65c3746e35312a92": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "684e437acb57f9f3": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "69129b4a864e3911": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "6aff03eef9113152": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "6b1b2aa47b119ab1": {
+      "etiket": "kisit",
+      "gerekce": "ölçülmez, söz yok"
+    },
+    "6b3cf71abd00a655": {
+      "etiket": "kisit",
+      "gerekce": "test/v1_course_screen_test.dart:522-526 (held durumu etiketi, \"cannot be passed now\"); lib/app/practice/loop/v1_course_copy.dart:103; \"yet\" yalnız"
+    },
+    "6c2c63cf5487d260": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "6f213d593a11c10d": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "6f26aa8efe002244": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "6f6b11e08ff702b2": {
+      "etiket": "kisit",
+      "gerekce": "bugünkü eksiklik, söz yok"
+    },
+    "706dcc6b2c4120e1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "71a52b026ab68650": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "71b27ebf0461ee73": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "72091dc5bff929be": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "723777fef4598e93": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "739a259e9ad65bfd": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "7450bcdfe4040ed2": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "748abd95f5a4442b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "754b48448a7cea71": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "7616111c12c6f8f4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "76310d051711bd90": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "764deed0ea0191c5": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "793c0187a04c5aab": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "7bed12c4ba838275": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "7d38ebe291d3949e": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "7dc1a303a7e566f4": {
+      "etiket": "kisit",
+      "gerekce": "eksiklik nedenleri, söz yok"
+    },
+    "7dd8e5e5d44a575e": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "7f2c46c798a7df32": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "7ff3f9b1266f5723": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "7ff62bfdcce3030e": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8324092e2f2e1b6b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "837326c59ad36b92": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "84e96c1c3f5ad5d3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "855f2b0ba8487c0b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "85c20396f737e520": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "86566168a62566d3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "86baf2a63c96d155": {
+      "etiket": "kisit",
+      "gerekce": "eksiklik"
+    },
+    "86d724fd4325b163": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "88f49cacdba58f7f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8986dec9db2141dd": {
+      "etiket": "kisit",
+      "gerekce": "not wired in this build, söz yok"
+    },
+    "8a03a39dce2b8965": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8a6097dbe8465b73": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8babe1ca76689169": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8cae3a05aa05d083": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8d34c69e0b4bd94a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8d752712c4967547": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8ecb45b4bf554e20": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8ed677a5beafb567": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8ede7010b5b246a9": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8eea93dd03552434": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8f3136be7817a611": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "8fa6984c89f7abe4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9052873694a51e04": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "90e657580e74e233": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "914041b0becf950d": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "9185fe0716531d53": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "93a4771dafb75bba": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "94ee05fe0da186d9": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "961e14cfe77bf4f4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "96325fcc00c08610": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "96720e2fa22f8a0c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "98d56170a2f8113b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9a448ff4fce4e3de": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9aac24c73a42568f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9af7a7330cd67b9d": {
+      "etiket": "kisit",
+      "gerekce": "not been verified, söz yok"
+    },
+    "9b31d7bb6052ea18": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9ba7734a0f9ad351": {
+      "etiket": "kisit",
+      "gerekce": "No measured lessons in this build"
+    },
+    "9ba7e5ab32643e68": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9c05ae5a00b84edf": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9ca2b132f3ca2b3c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9d9689c54e93e916": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "9f6d117a83605f1a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "a0705f9d3515b251": {
+      "etiket": "kisit",
+      "gerekce": "doğrulama eksikliği"
+    },
+    "a0e6cef783f08fcd": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "a2551eef973e96e7": {
+      "etiket": "kisit",
+      "gerekce": "cannot measure yet yalnız yet"
+    },
+    "a2ee86f2a3ee75be": {
+      "etiket": "kisit",
+      "gerekce": "not been verified, söz yok"
+    },
+    "a5b97fed2cccfbf0": {
+      "etiket": "kisit",
+      "gerekce": "eksik ölçüm"
+    },
+    "a63ea61f10537ee6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "a6f529ade30a2cb7": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "a75f74702ed140de": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "a888cb2ab3ea96c4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "a91163b17fce53bb": {
+      "etiket": "kisit",
+      "gerekce": "unavailable in this release"
+    },
+    "ab15dda8f8830061": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ac0cc8955ae163c0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ae04617a36742838": {
+      "etiket": "kisit",
+      "gerekce": "inceleme yaptırılmadı, söz yok"
+    },
+    "aec1da08368c491c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b0920e36f2cdece6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b0b2bffbfa315c21": {
+      "etiket": "kisit",
+      "gerekce": "ölçüm canlı çalışmaz, söz yok"
+    },
+    "b0bbb9adca5744d2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b1282e900a8fc8e4": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "b1482151ee63b73f": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "b17b3f9d211d3738": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b3f1c5def570428b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b61430aee383aa51": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b7c17b4fc6905579": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b7e26b1fc13aead8": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b9246b99fe155f90": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b97cd53b1331ec65": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "b9eea1ae0cb0f76c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ba4fac85ae4e7e4f": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\" (gerçek telefonda doğrulanmadı)"
+    },
+    "bb154a7f4ec12033": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "bbf92a46b7adfd95": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "bda34aee58dc3145": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "be1d053e0ce0053e": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "bf9ccc33805d6037": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c05b9ce5d045685a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c071607afe74beed": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c11ab8d7d3a01c4b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c14822982b37a8aa": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c17db7624a729ab0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c19ce4f1bf3f3be2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c254faf40a81a055": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c275e79acaeb3c02": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c27fa6ca52525337": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c2bd8d1ba814fae4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c2cbc2821803dca0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c304feb9343ab5e5": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c3c713ddd837337c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c3dd0ec7c3f80c16": {
+      "etiket": "kisit",
+      "gerekce": "test/drill_heard_test.dart:86-92 (pitchDirection yalnız higher/lower/same); lib/app/drill/drill_generator.dart:885; \"yet\" yalnız"
+    },
+    "c6007d0ac7a40e16": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c636642fa84f87b3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c6cd8f2e48939be9": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c75cba800e45b811": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c7af2ca3257e63ef": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "c895d4c1d5d8b53d": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ca31d1a7355c28a4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ca40f1fdb6589911": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ca4fa08ca525b13f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "cacf58ba473b4279": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "cbb516c28bfd520e": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "cc0dfa3f55f58706": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "cebdd1905c0acfe3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "cf6b69dfd8e1355a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d0353d6ca2c30d2f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d064cfe8360d4eb1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d0be3c9ce182087c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d1204d747c9b5ad5": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d1248da535251b78": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d32f76eeb1be0175": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d3671006de7d2426": {
+      "etiket": "kisit",
+      "gerekce": "engel metni (\"açmayız\" şimdiki karar)"
+    },
+    "d42849c8f266dbef": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d5896cc53d43cb3e": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d5b7b315db051478": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "d60d05f657793491": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d677b6116d0f71e4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d678e530bf89d88c": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d6c975e9962c4e72": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d74e2ce2c470c1b1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d7e0f446e79b162c": {
+      "etiket": "kisit",
+      "gerekce": "eksik olan ölçüm, söz yok"
+    },
+    "d88218466d848e1e": {
+      "etiket": "kisit",
+      "gerekce": "kilit nedeni"
+    },
+    "d92355c3260e7411": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "d9416194f0ec9289": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "da6a894a295756a1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "db0a204bbd114a6b": {
+      "etiket": "kisit",
+      "gerekce": "lib/app/practice/loop/v1_practice_list_screen.dart:776-791 (latency==null → metin, aksi halde gecikme gösterilir)"
+    },
+    "db9b1ef787e761c2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "dcc80d521759d7d1": {
+      "etiket": "kisit",
+      "gerekce": "lib/app/practice/loop/practice_rhythm_copy.dart:23; test/practice_rhythm_test.dart:286 \"uncalibrated: steady lag is absorbed...\""
+    },
+    "dcd0ea41a6d6a576": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "dcff1d74c6a56442": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "dd0ce2ca7855b224": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "dd9f090b5fd39dad": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "def5721114a6ee53": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "df45843ad00d7609": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "dfd20f5fe3ed7f0b": {
+      "etiket": "kisit",
+      "gerekce": "eksik ölçüm"
+    },
+    "e1e89541ff3f695f": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e1fc96e24d7f7f01": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e223d6255edff8c0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e2a056d2ef960850": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e4732514c13d0fb4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e47fe967faa87c55": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e4fb667ec3298649": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e51dffa27cb4d8f2": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e59cbd5fe6f510a0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e62ab216e3a724bb": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "e6eddbb0f2dc90d9": {
+      "etiket": "ders",
+      "gerekce": "kamera dersi canlı durum satırı (camera-lesson.json; \"ipucu yok\" bugünkü durum, söz değil); Motion kararı 2026-11-15 etiketi ders"
+    },
+    "e72b8c4c16d22a57": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ed54a9eee2ad446b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ef1e1f61c6f35cd4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "efa8463eb6374cc1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f014b4d1ce162bb3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f017bedab5f03ed6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f03623c32af878a1": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f1293ff0aeecfe01": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f1442f5d66ad39fb": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f252b44b9f1d5cd0": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f3f817de716fdef4": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f43f14c9f1e4fb6b": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f443cb7a2c98088d": {
+      "etiket": "kisit",
+      "gerekce": "yalnız \"henüz/yet\""
+    },
+    "f44f21fc17d34567": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f4983b080cc3e7c3": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f4b3fcb7bc25be57": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f4fa5a1fc0d21a5a": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f7524a6170e55577": {
+      "etiket": "kisit",
+      "gerekce": "eksik ölçüm"
+    },
+    "f76208d1d17f7fa6": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f90bafc885751253": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "f93db793791356de": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "fa7656f476ceec35": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "fb19a47d7fa87709": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "fd0b7f05de38deae": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "fe6f49649fa0c23d": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ff62ad67d8b31e96": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    },
+    "ffc5a9d99a6402c9": {
+      "etiket": "ders",
+      "gerekce": "ders içeriği (Motion kararı 2026-11-15)"
+    }
+  }
+}

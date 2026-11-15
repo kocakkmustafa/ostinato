@@ -47,10 +47,10 @@ void main() {
       find.textContaining('Put your phone where it can see you sitting'),
       findsNothing,
     );
-    // v1 (2026-11-01): kartlar ölçülü pratiği ve "Yakında"yı Türkçe söyler.
+    // v1 (2026-11-01): kartlar ölçülü pratiği ve kapalı kursu Türkçe söyler.
     expect(find.text('Ölçülü pratik. Akort. Haftalık hedef.'), findsOneWidget);
     expect(find.textContaining('Ölçülü pratik açık'), findsOneWidget);
-    expect(find.textContaining('Yakında'), findsNWidgets(2));
+    expect(find.textContaining('Kapalı · Bu kurs'), findsNWidgets(2));
     expect(find.text('ÖLÇÜM'), findsNothing);
     expect(find.text('SCORED'), findsNothing);
     expect(find.textContaining('GİTAR · REHBER'), findsOneWidget);
@@ -190,7 +190,10 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Duruş referansı notları'), findsOneWidget);
-    expect(find.textContaining('kamera değerlendirmesi ve duruş puanlaması kapalı'), findsOneWidget);
+    expect(
+      find.textContaining('kamera değerlendirmesi ve duruş puanlaması kapalı'),
+      findsOneWidget,
+    );
     expect(find.text('Gerçekte neyi ölçüyoruz'), findsNothing);
     expect(find.text('KURSLAR'), findsOneWidget);
     expect(find.textContaining('Alanını hazırla'), findsOneWidget);

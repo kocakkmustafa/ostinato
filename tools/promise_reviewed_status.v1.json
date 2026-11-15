@@ -12,47 +12,11 @@
     },
     {
       "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "All {v0} lessons of the guitar course, by level and module. Measured lessons listen to every note. The others are self-checks for now: you tick a checklist and the lesson is saved as self-reported, not measured. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order."
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
       "text": "Not measured: this module opened after a checkpoint this build cannot measure yet, which you practised as a self-check."
     },
     {
       "file": "lib/app/practice/loop/v1_course_copy.dart",
       "text": "Ölçülmedi: bu modül, bu sürümün henüz ölçemediği ve senin öz-kontrolle çalıştığın bir geçiş dersinden sonra açıldı."
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Self-check · mic feedback coming soon"
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Öz-kontrol · mikrofon geri bildirimi yakında"
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Checklist · camera check coming soon"
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Kontrol listesi · kamera kontrolü yakında"
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Reading · on-screen exercise coming soon"
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Okuma · ekran alıştırması yakında"
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Checkpoint held · measurement coming soon"
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Geçiş bekletiliyor · ölçüm yakında"
     },
     {
       "file": "lib/app/practice/loop/v1_course_copy.dart",
@@ -72,27 +36,11 @@
     },
     {
       "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Microphone feedback for this lesson is coming soon. For now, check yourself with the list below; your completion is saved as self-reported, not measured."
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Bu derste mikrofon geri bildirimi yakında. Şimdilik aşağıdaki listeyle kendini kontrol et; tamamlaman ölçülmüş değil kendi beyanı olarak kaydedilir."
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
       "text": "The camera check for this lesson is not in this build yet. Use the checklist instead; your completion is saved as self-reported."
     },
     {
       "file": "lib/app/practice/loop/v1_course_copy.dart",
       "text": "Bu dersin kamera kontrolü bu sürümde henüz yok. Yerine kontrol listesini kullan; tamamlaman kendi beyanı olarak kaydedilir."
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "The on-screen exercise for this lesson is coming soon. Read the lesson and check yourself; your completion is saved as self-reported."
-    },
-    {
-      "file": "lib/app/practice/loop/v1_course_copy.dart",
-      "text": "Bu dersin ekran alıştırması yakında. Dersi oku ve kendini kontrol et; tamamlaman kendi beyanı olarak kaydedilir."
     },
     {
       "file": "lib/app/practice/loop/v1_course_copy.dart",
@@ -149,14 +97,6 @@
     {
       "file": "lib/app/practice/loop/v1_course_copy.dart",
       "text": "Pratik ekranı bu alıştırmanın dizisini henüz izleyemiyor."
-    },
-    {
-      "file": "lib/app/screens/v1_home_copy.dart",
-      "text": "Coming soon · This course opens in a later update."
-    },
-    {
-      "file": "lib/app/screens/v1_home_copy.dart",
-      "text": "Yakında · Bu kurs sonraki güncellemelerle açılacak."
     }
   ]
 }

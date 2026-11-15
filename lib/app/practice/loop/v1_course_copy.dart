@@ -11,8 +11,8 @@ abstract final class V1CourseCopy {
     'Kulak eğitimi kursunun {v0} dersinin tamamı, seviye ve modüle göre. Alıştırmalar ekranda çalışır ve cevaplarını kontrol eder; alkış dersleri alkışlarını dinler. Şarkı söyleme ölçülmez: kendin kontrol edersin ve kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al.',
   );
   static const UiCopy intro = (
-    'All {v0} lessons of the guitar course, by level and module. Measured lessons listen to every note. The others are self-checks for now: you tick a checklist and the lesson is saved as self-reported, not measured. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order.',
-    'Gitar kursunun {v0} dersinin tamamı, seviye ve modüle göre. Ölçülü dersler her notayı dinler. Diğerleri şimdilik öz-kontroldür: kontrol listesini işaretlersin, ders ölçülmüş değil kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al.',
+    'All {v0} lessons of the guitar course, by level and module. Measured lessons listen to every note. The others are self-checks: you tick a checklist and the lesson is saved as self-reported, not measured. A module opens when the checkpoint of the module before is cleared; inside a module, take the lessons in any order.',
+    'Gitar kursunun {v0} dersinin tamamı, seviye ve modüle göre. Ölçülü dersler her notayı dinler. Diğerleri öz-kontroldür: kontrol listesini işaretlersin, ders ölçülmüş değil kendi beyanı olarak kaydedilir. Bir modül, önceki modülün geçiş dersi tamamlanınca açılır; modül içinde dersleri istediğin sırayla al.',
   );
   static const UiCopy levelTitle = ('Level {v0}', 'Seviye {v0}');
   static const UiCopy levelProgress = (
@@ -58,24 +58,24 @@ abstract final class V1CourseCopy {
   static const UiCopy chipMeasured = ('Measured', 'Ölçülü');
   static const UiCopy chipTuner = ('Tuner', 'Akort aleti');
   static const UiCopy chipSelfCheck = (
-    'Self-check · mic feedback coming soon',
-    'Öz-kontrol · mikrofon geri bildirimi yakında',
+    'Self-check · no mic feedback in this lesson',
+    'Öz-kontrol · bu derste mikrofon geri bildirimi yok',
   );
   static const UiCopy chipSelfCheckLesson = ('Self-check', 'Öz-kontrol');
   static const UiCopy chipCamera = (
-    'Checklist · camera check coming soon',
-    'Kontrol listesi · kamera kontrolü yakında',
+    'Checklist · no camera check in this lesson',
+    'Kontrol listesi · bu derste kamera kontrolü yok',
   );
 
   /// [chipDrill] once the lesson's drill runs in this build.
   static const UiCopy chipDrillReady = ('On-screen drill', 'Ekran alıştırması');
   static const UiCopy chipDrill = (
-    'Reading · on-screen exercise coming soon',
-    'Okuma · ekran alıştırması yakında',
+    'Reading · no on-screen exercise in this lesson',
+    'Okuma · bu derste ekran alıştırması yok',
   );
   static const UiCopy chipHeld = (
-    'Checkpoint held · measurement coming soon',
-    'Geçiş bekletiliyor · ölçüm yakında',
+    'Checkpoint held · no measurement',
+    'Geçiş bekletiliyor · ölçüm yok',
   );
 
   // The suggested next lesson ("Start next lesson" rule); nothing is locked
@@ -158,8 +158,8 @@ abstract final class V1CourseCopy {
 
   // Reader banners, one per availability.
   static const UiCopy bannerSelfCheck = (
-    'Microphone feedback for this lesson is coming soon. For now, check yourself with the list below; your completion is saved as self-reported, not measured.',
-    'Bu derste mikrofon geri bildirimi yakında. Şimdilik aşağıdaki listeyle kendini kontrol et; tamamlaman ölçülmüş değil kendi beyanı olarak kaydedilir.',
+    'This lesson gives no feedback from the microphone. Check yourself with the list below; your completion is saved as self-reported, not measured.',
+    'Bu derste mikrofon geri bildirimi yok. Aşağıdaki listeyle kendini kontrol et; tamamlaman ölçülmüş değil kendi beyanı olarak kaydedilir.',
   );
   static const UiCopy bannerSelfCheckLesson = (
     'This lesson is a self-check. Tick the list as you go; your completion is saved as self-reported.',
@@ -170,8 +170,8 @@ abstract final class V1CourseCopy {
     'Bu dersin kamera kontrolü bu sürümde henüz yok. Yerine kontrol listesini kullan; tamamlaman kendi beyanı olarak kaydedilir.',
   );
   static const UiCopy bannerDrill = (
-    'The on-screen exercise for this lesson is coming soon. Read the lesson and check yourself; your completion is saved as self-reported.',
-    'Bu dersin ekran alıştırması yakında. Dersi oku ve kendini kontrol et; tamamlaman kendi beyanı olarak kaydedilir.',
+    'This lesson has no on-screen exercise. Read the lesson and check yourself; your completion is saved as self-reported.',
+    'Bu dersin ekran alıştırması yok. Dersi oku ve kendini kontrol et; tamamlaman kendi beyanı olarak kaydedilir.',
   );
   static const UiCopy bannerHeld = (
     'This checkpoint needs measurement, which is not in this build yet, so it cannot be passed now. Practise it and mark it as a self-check: the next module then opens, labelled not measured.',
