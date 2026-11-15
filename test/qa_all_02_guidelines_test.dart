@@ -34,11 +34,7 @@ import 'support/practice_host.dart';
 import 'support/ux_05f_rig.dart';
 
 /// Bilinen urun bulgulari: 'ekran/guideline' -> aciklama (skip nedeni).
-const Map<String, String> _findings = <String, String>{
-  'stage-durgun/metin-kontrast':
-      'BULGU: "Yine de devam et" dugmesi metin kontrasti 4.45 (< 4.5, 14pt); '
-      'renk/tasarim karari (Motion), lib degistirilmedi.',
-};
+const Map<String, String> _findings = <String, String>{};
 
 V1Lesson _lesson() => V1Lesson.fromJson(
   jsonDecode(File('content/v1/gtr/gtr-s1-m02-02.json').readAsStringSync()),
