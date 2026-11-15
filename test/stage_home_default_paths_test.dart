@@ -19,10 +19,15 @@ import 'package:ostinato/app/practice/loop/practice_session_controller.dart';
 import 'package:ostinato/app/practice/loop/v1_course_catalog.dart';
 import 'package:ostinato/app/practice/loop/v1_practice_list_screen.dart';
 import 'package:ostinato/app/stage/stage_home_screen.dart';
+import 'package:ostinato/app/practice/setup/setup_profile_store.dart';
+import 'package:ostinato/app/stage/listening_off_store.dart';
+import 'package:ostinato/app/tuner/session_tuning_gate.dart';
 import 'package:ostinato/app/tuner/tuner_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'support/localized_widget_ready.dart';
 import 'support/practice_host.dart';
+import 'support/ux_05f_rig.dart';
 
 final class _Memory implements V1PracticeProgress {
   @override
@@ -132,6 +137,37 @@ void main() {
     expect(find.byType(TunerScreen), findsNothing);
     await t.ensureVisible(find.byKey(const Key('stage-tuner-entry')));
     await t.tap(find.byKey(const Key('stage-tuner-entry')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byType(TunerScreen), findsOneWidget);
+  });
+  testWidgets('default path of the session tuning gate card opens the real '
+      'TunerScreen (mic refused, no tunerOpener injected)', (t) async {
+    final rig = Rig05f(permission: PermissionStatus.denied);
+    addTearDown(() => t.runAsync(rig.audio.dispose));
+    await boot05f(
+      t,
+      practiceHost(
+        locale: 'tr',
+        StageHomeScreen(
+          catalog: catalog05f(),
+          progressFactory: (_) => Mem05f(),
+          checksFactory: (_) => Checks05f(),
+          controllerFactory: rig.factory,
+          seed: 1,
+          setupStore: MemorySetupProfileStore(),
+          listeningOffStore: MemoryListeningOffStore(),
+          weeklyGoalLoader: () async => null,
+        ),
+      ),
+    );
+    await play05f(t);
+    expect(find.byType(SessionTuningGateCard), findsOneWidget);
+    expect(find.byType(TunerScreen), findsNothing);
+    final tune = find.byKey(const Key('session-tuning-gate-tune'));
+    await t.ensureVisible(tune);
+    await t.pump();
+    await t.tap(tune);
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
     expect(find.byType(TunerScreen), findsOneWidget);
