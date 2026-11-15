@@ -405,11 +405,10 @@ class ReviewScreenRoute extends StatelessWidget {
                       ReviewCopyTr.text(
                         context,
                         'gap.footer',
-                        'This half is not a disclaimer. It is the same size as '
-                            'the half above because it carries the same weight — '
-                            'and these are not all the same kind of gap: some are '
-                            'missing tools, some are missing data, and some are '
-                            'judgements we do not think are ours to make.',
+                        'This half is not a disclaimer. These are not all the '
+                            'same kind of gap: some are missing tools, some are '
+                            'missing data, and some are judgements we do not '
+                            'think are ours to make.',
                       ),
                       style: hankenText(
                         size: 12.5,

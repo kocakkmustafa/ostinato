@@ -327,7 +327,7 @@
        "focus": "posture",
        "minutes": 6,
        "status": "locked",
-       "lockedReason": "Vibrato is measured and never judged, and the reason is not a missing tool. We have no teacher data on what rate is 'right'. Inventing a number here would be a guess dressed as a measurement — the one thing this app is built not to do. The lesson opens when a reference exists, not when the engine improves.",
+       "lockedReason": "Vibrato is never judged, and the reason is not a missing tool. We have no teacher data on what rate is 'right'. Inventing a number here would be a guess dressed as a measurement.",
        "_why_locked_source": "voice.honesty.notMeasured (vibrato) + comingSoonInThisDiscipline[1]. Ikisi de ayni engeli soyluyor: eksik olan ALET degil REFERANS.",
        "promotionPath": {
         "unblockedBy": "Teacher data on vibrato rate — enough independent singing teachers, measured, agreeing closely enough that a range means something. The engine already measures rate; there is simply nothing to compare it to.\n\nThere is no microphone input in these posture lessons, so this lesson is blocked twice over: the measurement is unconfirmed, and there is no way to listen to you even if it were."
@@ -351,8 +351,8 @@
    ],
    "comingSoonInThisDiscipline": [
     "Named posture coaching (locked knees, lifted chin) — the teachers' own mistake vocabulary needs knee and head landmarks our reference does not carry; new harvest, not a new threshold",
-    "Vibrato as a graded skill — measured today, but no teacher data exists on what rate is correct, so it stays unjudged",
-    "Pitch and sustain grading — engine ready, waiting only on one real vocal recording (see the Sustained note lesson)"
+    "Vibrato is not graded: no teacher data exists on what rate is correct.",
+    "Pitch and sustain are not graded: the engine has not been confirmed on a real vocal recording (see the Sustained note lesson)."
    ],
    "_priorReasonSuperseded": "2026-07-30: onceki gerekce 'take'ler ANLASMIYOR' idi ve M-O-56 teshisiyle GECERSIZ kaldi — anlasmayan, urunun SKORLAMADIGI kol zinciriydi. Kayit birakiliyor cunku o gerekce bir sure kullaniciya gosterildi.",
    "_openedAt": "2026-08-04: coming_soon -> live. Onceki gerekce uc sey istiyordu — 'bu calginin kendi drill'leri, hata koclugu, ve gitarinki gibi dogrulanmis uctan-uca kosum'. Sonuc: uctan-uca DOGRULANDI (3 gercek quality kapisi, POSTURE_CHECK->SUSTAIN zinciri); drill yolu KURULDU (titular drill gitarinki gibi kilitli, ayni gercek-kayit standardi); hata koclugu OLCULDU ve NEGATIF cikti (M-O-64) — eksik olan esik degil, esleseecek kod.",
