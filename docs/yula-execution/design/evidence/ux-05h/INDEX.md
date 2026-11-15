@@ -16,7 +16,7 @@ Kaynak senaryolar: `04-design.md` bölüm 13. Her satır, senaryonun kabul sonuc
 | T10 | Güvenilmez ölçüm | `ux_05e_result_layer_test.dart`: `unclear pitch: ◯ and its reason, nothing marked wrong` · `ux_prototype_test.dart`: `an unreliable run says it could not hear, gives no percent` | |
 | T11 | Kulak ≠ enstrüman | `ux_05g_ghost_policy_test.dart`: `05g-7: kulak kosusu (course ear / ear-s id) Hayaleti etkilemez` · `ux_05g_ghost_run_test.dart`: `05g-int: kulak kosusu (ear) Hayaleti etkilemez` | |
 | T12 | Erişilebilirlik | aşağıya bak | Tek test değil, kayıtlı el kontrolü gerekir |
-| T13 | Çalarken | `ux_05g_ghost_stage_test.dart`: `05g-8: calarken raf/yardim yok; ayar degismez` · `ux_prototype_test.dart`: `one tap on Play; no handle, layer or glass while playing` | **EKSİK:** "ekran hatada durmaz" için çalışırken hata enjekte eden test yok (`stage_home_test.dart`: `a failed start: the screen does not stop` yalnız başlatma hatası). Eklenmedi; FLAG-CHECKLIST'te açık |
+| T13 | Çalarken | `ux_05g_ghost_stage_test.dart`: `05g-8: calarken raf/yardim yok; ayar degismez` · `ux_prototype_test.dart`: `one tap on Play; no handle, layer or glass while playing` | `ux_05g_ghost_stage_test.dart`: `05h-23: calarken hata olunca ekran durmaz, tekrar denenir` (koşu sırasında kesinti enjekte; mutasyon kanıtı: `_fail` bozulunca kırmızı) |
 | T14 | Yarım koşu | `ux_05g_ghost_policy_test.dart`: `05g-5: yarim/dongulu kosu notMeasured; gecmeyen notCounted` · `ux_prototype_test.dart`: `stopping early is not measured` | |
 
 ## T12 (kalem 1–4 + el kontrolü)
