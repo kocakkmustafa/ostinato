@@ -224,4 +224,20 @@ void main() {
       }
     }
   });
+
+  test('katlamadan sonra aynı perdeye inen geçiş reddedilir', () {
+    for (final (a, b) in const [(28, 40), (88, 76), (40, 28), (76, 88)]) {
+      expect(
+        () => MicroEtudeGenerator.generate(
+          MicroEtudeRequest(
+            miss: NoteTransitionMiss(fromMidi: a, toMidi: b),
+            bpm: 80,
+            meter: EtudeMeter.fourFour,
+          ),
+        ),
+        throwsArgumentError,
+        reason: '$a→$b',
+      );
+    }
+  });
 }

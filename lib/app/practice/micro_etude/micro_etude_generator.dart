@@ -114,6 +114,10 @@ abstract final class MicroEtudeGenerator {
     }
     final a = _fold(miss.fromMidi);
     var b = _fold(miss.toMidi);
+    if (a == b) {
+      // Menzil dışı iki nota aynı perdeye katlandı: geçiş kalmaz.
+      throw ArgumentError('Notalar menzile katlanınca aynı perdeye iniyor');
+    }
     while ((b - a).abs() > maxLeap) {
       b += b > a ? -12 : 12;
     }
