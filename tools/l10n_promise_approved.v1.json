@@ -1025,10 +1025,6 @@
       "etiket": "kisit",
       "gerekce": "test/drill_heard_test.dart:86-92 (pitchDirection yalnız higher/lower/same); lib/app/drill/drill_generator.dart:885; \"yet\" yalnız"
     },
-    "c5963961b70d6a9f": {
-      "etiket": "kisit",
-      "gerekce": "engel metni"
-    },
     "c6007d0ac7a40e16": {
       "etiket": "ders",
       "gerekce": "ders içeriği (Motion kararı 2026-11-15)"

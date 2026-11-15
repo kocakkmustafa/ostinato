@@ -60,7 +60,7 @@ const Map<String, String> _sourceFingerprints = <String, String>{
   'guitar.notMeasured.2': '223:3fe0ef81:dbaf7e6',
   'guitar.notMeasured.3': '329:7815cd61:25617ea3',
   'guitar.notMeasured.4': '85:277a2c1:d3fa6e3',
-  'guitar.notMeasured.5': '336:6f3357f2:19224c7f',
+  'guitar.notMeasured.5': '352:4198ff19:1184ba8b',
   'guitar.instrumentSpecificGap': '212:11083d49:9ecae67',
   'guitar.outOfScopeDerived.0': '232:602ee866:a7abc95',
   'guitar.comingSoon.0': '171:5d3069f7:4077bac0',
@@ -78,7 +78,7 @@ const Map<String, String> _sourceFingerprints = <String, String>{
   'guitar.foundations.strum_timing.unblockedBy': '447:3c78e4fa:453d823b',
   'guitar.foundations.chords_beyond_eight.lockedReason':
       '524:33bd8cf4:6a6e3691',
-  'guitar.foundations.chords_beyond_eight.unblockedBy': '396:7de0cde9:108ab549',
+  'guitar.foundations.chords_beyond_eight.unblockedBy': '388:5079ea7b:21eb26f8',
   'voice.measured.0': '416:151e91c3:663c041c',
   'voice.notMeasured.0': '366:12f2b463:2d33db83',
   'voice.notMeasured.1': '214:4e23874b:6a1ce854',
@@ -142,7 +142,7 @@ const Map<String, String> _turkishCopy = <String, String>{
   'guitar.notMeasured.4':
       'Nota nota tam döküm yapılmaz; motor her notayı değil akor sınıfını tanır.',
   'guitar.notMeasured.5':
-      'Bu sekiz akorun dışındakiler adlandırılmaz. Önceden çalınan bir Si bemol 29 pencerenin 28’inde güvenle Re minör diye raporlanıyordu. Motor artık 24 akorun tamamını değerlendirir ve sonuç derste öğretilen sekiz akordan değilse reddeder.',
+      'Bu sekiz akorun dışındakiler adlandırılmaz. Önceden çalınan bir Si bemol 29 pencerenin 28’inde güvenle Re minör diye raporlanıyordu. Motor artık alıştırma dışındaki akorları da değerlendirir ve sonuç derste öğretilen sekiz akordan değilse reddeder.',
   'guitar.instrumentSpecificGap':
       'Gitarın sapındaki parmaklarınız ve kalçalarınızın altı değerlendirilmez. Kalçalarınızı kadrajda tutan mesafede bir parmak ucu yalnızca birkaç piksel genişliğindedir; referansımızın dayandığı eğitim görüntüleri de belden yukarı çekilmiştir.',
   'guitar.comingSoon.0':
@@ -176,7 +176,7 @@ const Map<String, String> _turkishCopy = <String, String>{
   'guitar.foundations.strum_timing.unblockedBy':
       'Altı yakın nota başlangıcını tek akora bağlayan adım ve ritim sapmasını değerlendiren eğitmen verisi birlikte gerekir. İlkini tek başına kurmak, karşılaştırılacak dayanağı olmayan bir sayı üretir. Ayrıca bu duruş derslerinde mikrofon girişi yoktur; ölçüm doğrulanmamıştır ve çalmanızı dinleme yolu bulunmaz.',
   'guitar.foundations.chords_beyond_eight.unblockedBy':
-      'Kalan 16 akorda tanıyıcının her akor için ve yanlış adlandırmaları sayarak ölçülmesi gerekir. Genel ortalama, daha önce düzelttiğimiz kusuru gizler. Ayrıca bu duruş derslerinde mikrofon girişi yoktur; ölçüm doğrulanmamıştır ve çalmanızı dinleme yolu bulunmaz.',
+      'Diğer akorlarda tanıyıcının her akor için ve yanlış adlandırmaları sayarak ölçülmesi gerekir. Genel ortalama, daha önce düzelttiğimiz kusuru gizler. Ayrıca bu duruş derslerinde mikrofon girişi yoktur; ölçüm doğrulanmamıştır ve çalmanızı dinleme yolu bulunmaz.',
   // Voice: the shipped camera path is distinct from recorded audio research.
   'voice.measured.0':
       'Şarkı söylemeye hazırlanırken gövde hizası ölçülür. Bağımsız altı şan eğitmeninin duruşları arasında 1,35° içinde uyum vardır; bu uyum kayıtlı referansla doğrulanmıştır. Referans şarkı söylerken duruşu da kapsar, ancak bu sürüm başlangıç anını algılayamaz: o aşama sesin periyodikliğine dayanır ve bu ses derslerinde mikrofon girişi yoktur.',
