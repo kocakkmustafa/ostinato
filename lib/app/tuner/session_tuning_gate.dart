@@ -121,6 +121,7 @@ class _SessionTuningGateCardState extends State<SessionTuningGateCard> {
                   TextButton(
                     key: const Key('session-tuning-gate-continue'),
                     onPressed: _memory.continueWithoutTuning,
+                    style: TextButton.styleFrom(foregroundColor: p.ink),
                     child: Text(uiText(context, TunerCopy.gateContinue)),
                   ),
               ],
