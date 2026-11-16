@@ -1,0 +1,30 @@
+{
+  "$about": "ADR-008 parent-approval screen copy (lib/app/parental_consent/parental_consent_copy.dart), behind ostinatoParentalConsentEnabled (closed). EN+TR source pairs; all 14 catalogs carry them. Neutral wording: no \"wrong\", no \"soon\", no promise.",
+  "messages": [
+    {
+      "id": "checkApproval",
+      "en": "Check approval",
+      "tr": "Onayı kontrol et"
+    },
+    {
+      "id": "dailyLimit",
+      "en": "Too many requests were sent today. Please try again tomorrow.",
+      "tr": "Bugün çok fazla istek gönderildi. Lütfen yarın tekrar dene."
+    },
+    {
+      "id": "unavailable",
+      "en": "We could not confirm the status just now. If you sent a request, it may have gone through. Please check again later.",
+      "tr": "Şu anda durumu doğrulayamadık. Bir istek gönderdiysen iletilmiş olabilir. Lütfen daha sonra tekrar kontrol et."
+    },
+    {
+      "id": "approved",
+      "en": "Your parent or guardian approved. You can create your account now.",
+      "tr": "Velin onayladı. Artık hesabını oluşturabilirsin."
+    },
+    {
+      "id": "denied",
+      "en": "A decision was recorded for this request. An account can’t be created on this device.",
+      "tr": "Bu istek için bir karar kaydedildi. Bu cihazda hesap oluşturulamıyor."
+    }
+  ]
+}
