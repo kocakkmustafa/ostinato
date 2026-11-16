@@ -57,6 +57,11 @@ void main() {
                 ).hasMatch(e),
           )
           .toList();
+      expect(
+        features.where((e) => e.contains('android.hardware.camera.any')),
+        isNotEmpty,
+        reason: 'camera.any satırı kaynak manifestte durmalı',
+      );
       for (final e in features) {
         final optional = removes(e) || e.contains('android:required="false"');
         expect(optional, isTrue, reason: 'kamera özelliği zorunlu: $e');

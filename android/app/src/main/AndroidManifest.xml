@@ -3,10 +3,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- Camera: no camera permission ships in this build (camera features
-         are flag-off). The camera plugins (camera_android_camerax,
-         motion_camera, ostinato_posture) declare CAMERA and a camera feature
-         in their own manifests, so the merger would bring them back: the
-         `remove` directives below keep them out. When a camera flag opens,
+         are flag-off). Seen in the Gradle plugin manifests under
+         build/<plugin>/intermediates/aapt_friendly_merged_manifests/debug:
+         camera_android_camerax declares CAMERA and the camera.any feature,
+         motion_camera declares CAMERA (ostinato_posture was not checked), so
+         the merger would bring them back: the `remove` directives below keep
+         them out. When a camera flag opens,
          drop the CAMERA remove line and declare the permission again.
          camera_android_camerax also declares legacy storage (video saving,
          API <= 28; the merger then implies the read permission). Nothing is
