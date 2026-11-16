@@ -1,10 +1,11 @@
 import '../ui_copy.dart';
 
 /// ADR-008 parent-approval screen copy that Core's account strings do not
-/// cover. EN and TR source pairs only; the other twelve languages fall back
-/// to English until the reviewed translations are added (the screen sits
-/// behind `ostinatoParentalConsentEnabled`, closed). Everything else on the
-/// screen reuses Core's fourteen-language `MotionAccountString` copy.
+/// cover. EN and TR source pairs, mirrored in
+/// `content/ui/parental-consent.json` (see `test/ui_copy_catalog_test.dart`);
+/// the other twelve languages come from the 14-catalog id table. The screen
+/// sits behind `ostinatoParentalConsentEnabled`, closed. Everything else on
+/// the screen reuses Core's fourteen-language `MotionAccountString` copy.
 /// Neutral wording: no "wrong", no "soon", no blame.
 abstract final class ParentalConsentCopy {
   static const UiCopy checkApproval = ('Check approval', 'Onayı kontrol et');

@@ -12062,6 +12062,11 @@
     "ff810e8a8166fedb": "The original line in your comfortable range, soft synthesized voice with the marked dynamics, at ♩=70 and ♩=45, over an original soft chord accompaniment (I, IV, V) with a click. Headphones recommended.",
     "ff9a74bdb17599fd": "Hear the two notes and choose: major second, major third or perfect fifth. If your answer differs, “your answer” and “correct” appear side by side; listen to both.",
     "ffdd3abb20a36290": "Sings an original four-bar part a sixth below a melody at ♩=70.",
-    "ffde60d6360ed744": "You jumped to 5 early. Take ♭5 as the smallest step above 4."
+    "ffde60d6360ed744": "You jumped to 5 early. Take ♭5 as the smallest step above 4.",
+    "b6464c47036b1033": "Check approval",
+    "55bbed4c515fa63a": "Too many requests were sent today. Please try again tomorrow.",
+    "8df76a80597f7226": "We could not confirm the status just now. If you sent a request, it may have gone through. Please check again later.",
+    "df0cf1db48b815d1": "Your parent or guardian approved. You can create your account now.",
+    "43f870c1b952fe9d": "A decision was recorded for this request. An account can’t be created on this device."
   }
 }
