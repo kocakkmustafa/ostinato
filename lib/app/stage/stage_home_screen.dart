@@ -462,14 +462,24 @@ class _StageHomeScreenState extends State<StageHomeScreen>
       // membership), asked WITHOUT its sign-in / membership-page side effects.
       var member = false;
       var memberAsked = false;
+      // The membership question failed or timed out: `member=false` is then a
+      // guess, so an empty pick must stay a FAILURE (never "no lesson").
+      var memberUnknown = false;
       Future<void> askMember() async {
         if (memberAsked) return;
         memberAsked = true;
         try {
           member = await (_paidCheck?.call() ?? Future<bool>.value(false))
-              .timeout(widget.paidCheckTimeout, onTimeout: () => false);
+              .timeout(
+                widget.paidCheckTimeout,
+                onTimeout: () {
+                  memberUnknown = true;
+                  return false;
+                },
+              );
         } on Object {
           member = false;
+          memberUnknown = true;
         }
       }
 
@@ -495,7 +505,13 @@ class _StageHomeScreenState extends State<StageHomeScreen>
           )
           .firstOrNull;
       pick ??= catalog.lessons.where((l) => measured(l) && free(l)).firstOrNull;
-      if (pick == null) return const _StageLoad(null);
+      if (pick == null) {
+        // "No measured lesson" only when the catalog has none, or the
+        // membership answer was sound (a real "not a member"). A failed
+        // membership question stays the error (null) with its retry.
+        final anyMeasured = catalog.lessons.any(measured);
+        return anyMeasured && memberUnknown ? null : const _StageLoad(null);
+      }
       final unit = catalog.units.where((u) => u.id == pick!.unitId).firstOrNull;
       final hasRecords =
           records.values.any((r) => r.runs > 0) || checks.isNotEmpty;
