@@ -19,7 +19,7 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
 - `4380b2010c6f2e9b`
   - EN: The major triad: do-mi-sol
   - TR: Majör üçlü: do-mi-sol
-  - ja: 長三和音:ド-ミ-ソ
+  - ja: 長三和音：ド-ミ-ソ
   - ko: 장삼화음: 도-미-솔
   - pl: Trójdźwięk durowy: do-mi-sol
   - zh-Hans: 大三和弦：do-mi-sol
@@ -47,28 +47,28 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
 - `5896ac60782d9e0c`
   - EN: Sing do once at your comfortable medium volume and hold it. Then sing 1-2-3 softly on “oo”, holding each note, with 3 the longest. The app places the notes so they climb into your break.
   - TR: Do'yu rahat, orta gürlüğünde bir kez söyle ve tut. Sonra “u” ile 1-2-3'ü yumuşak söyle; her notayı tut, en uzun 3'ü tut. Uygulama notaları geçiş bölgene doğru çıkacak biçimde yerleştirir.
-  - ja: 楽な中くらいの音量でドを一度歌って保ちます。次に“oo”で1-2-3を柔らかく、各音を保って歌い、3を一番長くします。アプリは、音があなたの換声点に向かって上がるように配置します。
+  - ja: 楽な中くらいの音量でドを一度歌って保ちます。次に「ウー」で1-2-3を柔らかく、各音を保って歌い、3を一番長くします。アプリは、音があなたの換声点に向かって上がるように配置します。
   - ko: 편안한 중간 음량으로 도를 한 번 부르고 유지하세요. 그다음 “우”로 1-2-3을 부드럽게, 각 음을 유지하며 부르고 3을 가장 길게 하세요. 앱은 음들이 브레이크(전환 구간)로 올라가도록 배치합니다.
-  - pl: Zaśpiewaj do raz swoją wygodną średnią głośnością i trzymaj. Potem zaśpiewaj cicho 1-2-3 na “u”, trzymając każdy dźwięk, a 3 najdłużej. Aplikacja ustawia dźwięki tak, że wspinają się do Twojego przejścia między rejestrami.
+  - pl: Zaśpiewaj do raz swoją wygodną średnią głośnością i trzymaj. Potem zaśpiewaj cicho 1-2-3 na “u”, trzymając każdy dźwięk, a 3 najdłużej. Aplikacja ustawia dźwięki tak, że wspinają się do twojego przejścia między rejestrami.
   - zh-Hans: 用舒适的中等音量唱一次do并保持。然后用“oo”轻声唱1-2-3，每个音都保持，3最长。应用会安排这些音，使它们爬升进入你的换声点。
 - `6ca8f0a47230a9e0`
   - EN: Different answer: “forcing” chosen for skipping a tight note.
   - TR: Farklı cevap: sıkışan bir notayı atlamaya “zorlama” denildi.
-  - ja: 別の答え:きつい音を飛ばしたのに“力み”を選びました。
+  - ja: 別の答え：きつい音を飛ばしたのに“力み”を選びました。
   - ko: 다른 답: 조이는 음을 건너뛰는 것에 “억지로 밀기”를 골랐습니다.
   - pl: Inna odpowiedź: wybrano “forsowanie” za pominięcie napiętej nuty.
   - zh-Hans: 答案不同：为跳过一个紧绷的音选了“用力”。
 - `7155319242ba0523`
   - EN: Same task as before, with a tighter target: within 35 cents instead of 50.
   - TR: Görev aynı, hedef daha dar: 50 yerine 35 cent içi.
-  - ja: 先ほどと同じ課題で、目標をより厳しくします:50セントではなく35セント以内。
+  - ja: 先ほどと同じ課題で、目標をより厳しくします：50セントではなく35セント以内。
   - ko: 이전과 같은 과제이지만 목표가 더 좁습니다. 50센트 대신 35센트 이내.
   - pl: To samo zadanie co wcześniej, z ciaśniejszym celem: w granicach 35 centów zamiast 50.
   - zh-Hans: 任务与之前相同，目标更严：偏差在35音分以内，而不是50音分。
 - `7808e95c88fd4398`
   - EN: Different note, a little low in the dark round.
   - TR: Farklı nota: koyu turda biraz alçak.
-  - ja: 別の音:暗いラウンドで少し低めでした。
+  - ja: 別の音：暗いラウンドで少し低めでした。
   - ko: 다른 음: 어두운 라운드에서 조금 낮습니다.
   - pl: Inna nuta, nieco za nisko w ciemnym kanonie.
   - zh-Hans: 有一个音不同，暗色轮里有点偏低。
@@ -89,9 +89,9 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
 - `8fe1b470940f95d9`
   - EN: The line is “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Sing it once neutral, then once as if you are sharing good news.
   - TR: Dizi “YENİ bir gün başlıyor” (sol-mi-fa-re, mi-re-do). Bir kez nötr söyle, sonra güzel bir haber paylaşır gibi bir kez daha söyle.
-  - ja: 旋律は “A NEW day is beginning”(ソ-ミ-ファ-レ、ミ-レ-ド)です。まず抑揚をつけずに一度歌い、次に良い知らせを伝えるように一度歌いましょう。
+  - ja: 旋律は “A NEW day is beginning”（ソ-ミ-ファ-レ、ミ-レ-ド）です。まず抑揚をつけずに一度歌い、次に良い知らせを伝えるように一度歌いましょう。
   - ko: 가사는 “A NEW day is beginning”(솔-미-파-레, 미-레-도)입니다. 한 번은 담담하게, 한 번은 좋은 소식을 전하듯 불러 보세요.
-  - pl: Linia brzmi “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Zaśpiewaj ją raz neutralnie, a raz tak, jakbyś dzielił się dobrą wiadomością.
+  - pl: Linia brzmi “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Zaśpiewaj ją raz neutralnie, a raz tak, jakby to była dobra wiadomość.
   - zh-Hans: 旋律是“A NEW day is beginning”（sol-mi-fa-re, mi-re-do）。先用中性的语气唱一遍，再像分享好消息一样唱一遍。
 - `a0a58c17a0ccca4d`
   - EN: Tells pitch from loudness and moves a hum up or down without getting louder.
@@ -112,7 +112,7 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
   - TR: İnerken aynı notalar ters sırayla döner. Alttaki do'yu başladığın perdede tut.
   - ja: 下りでは同じ音が逆の順で戻ってきます。下のドは、始めた高さのままにしましょう。
   - ko: 내려올 때는 같은 음들이 거꾸로 돌아옵니다. 아래 도를 처음 시작한 음높이에 그대로 두세요.
-  - pl: Schodząc w dół, te same dźwięki wracają w odwrotnej kolejności. Dolne do trzymaj na wysokości, od której zacząłeś.
+  - pl: Schodząc w dół, te same dźwięki wracają w odwrotnej kolejności. Dolne do trzymaj na wysokości, od której zaczyna się ćwiczenie.
   - zh-Hans: 下行时，同样的音按相反顺序回来。让最低的do落在你起唱的那个音高上。
 - `a1c160e2aa5be05b`
   - EN: Sings the five-note run in eighth notes on one 'ah', evenly and in tune with the click at ♩=70.
@@ -120,7 +120,7 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
   - ja: 五音の走句を一つの「アー」で八分音符で歌い、♩=70のクリック音に合わせて均等に、音程よく歌います。
   - ko: 클릭에 맞춰 ♩=70에서 다섯 음 진행을 하나의 '아'로 팔분음표로 고르고 음정에 맞게 부릅니다.
   - pl: Śpiewa pięciodźwiękowy bieg ósemkami na jednym 'ah', równo i czysto z klikiem przy ♩=70.
-  - zh-Hans: 在一个'ah'上以八分音符唱五音跑句，均匀、音准，并与♩=70的节拍器的滴答声保持一致。
+  - zh-Hans: 在一个“ah”上以八分音符唱五音跑句，均匀、音准，并与♩=70的节拍器的滴答声保持一致。
 - `a7880268e7d879b8`
   - EN: The notes inside each phrase stayed connected.
   - TR: Her cümlenin içindeki notalar birbirine bağlı kaldı.
@@ -145,10 +145,10 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
 - `b56301687b2fe344`
   - EN: Couldn't hear in the middle of the piece.
   - TR: Parçanın ortasında duyamadım.
-  - ja: 曲の途中で「Couldn't hear」になりました。
+  - ja: 曲の途中で「聴き取れなかった」になりました。
   - ko: 곡 중간에 소리가 들리지 않았습니다.
   - pl: Nie słychać dźwięku w środku utworu.
-  - zh-Hans: 乐曲中段听不到。
+  - zh-Hans: 乐曲中段未听到。
 - `b669c4167a5bf2ac`
   - EN: Different note, ♭2 a semitone high.
   - TR: Farklı nota: ♭2 yarım ses yüksek.
@@ -183,7 +183,7 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
   - ja: 最後の音までエネルギーを保ちましょう。♩=42でフレーズを歌い、最後の音で'上'と思い描いてください。
   - ko: 마지막 음까지 에너지를 유지하세요. ♩=42로 프레이즈를 부르고 마지막 음에서 '위로'를 떠올리세요.
   - pl: Zachowaj energię do ostatniej nuty. Zaśpiewaj frazę w tempie ♩=42 i pomyśl 'w górę' na ostatniej nucie.
-  - zh-Hans: 保持气息的力度直到最后一个音。以 ♩=42 唱这个乐句，最后一个音心里想着 '向上'。
+  - zh-Hans: 保持气息的力度直到最后一个音。以 ♩=42 唱这个乐句，最后一个音心里想着 “向上”。
 - `d0b418830c9e788b`
   - EN: The melodies use do to sol, with quarters, halves and pairs of eighths. Each one ends on a longer note.
   - TR: Ezgiler do ile sol arasını kullanır; dörtlükler, ikilikler ve ikili sekizliklerle. Her biri daha uzun bir notayla biter.
@@ -194,7 +194,7 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
 - `dc5f880fec005d17`
   - EN: This checkpoint brings the module together: thirds, sixths, a held note, contrary motion and fifths, in one sixteen-bar study.
   - TR: Bu geçiş modülü birleştirir: üçlüler, altılılar, tutulan nota, zıt hareket ve beşliler, on altı ölçülük tek bir etütte.
-  - ja: このチェックポイントは、モジュールのまとめです:三度、六度、保持する音、反進行、五度を、十六小節の一つの練習曲で扱います。
+  - ja: このチェックポイントは、モジュールのまとめです：三度、六度、保持する音、反進行、五度を、十六小節の一つの練習曲で扱います。
   - ko: 이 체크포인트는 모듈을 종합합니다: 삼도, 육도, 길게 끄는 음, 반진행, 오도를 열여섯 마디 연습곡 하나에서 다룹니다.
   - pl: Ten punkt kontrolny łączy cały moduł: tercje, seksty, trzymany dźwięk, ruch przeciwny i kwinty w jednej szesnastotaktowej etiudzie.
   - zh-Hans: 这个检查点把本模块的内容汇集在一起：三度、六度、保持音、反向进行和五度，全部在一首十六小节的练习曲中。
@@ -211,4 +211,4 @@ Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭�
   - ja: 早く移りすぎると、音が「イー」や「ウー」で歌われ、言葉の色が失われます。まったく移らないと、言葉が明瞭になりません。
   - ko: 너무 일찍 움직이면 음이 '이'나 '우'로 불려 단어의 색이 사라집니다. 전혀 움직이지 않으면 단어가 또렷하지 않습니다.
   - pl: Jeśli przejdziesz na samogłoskę za wcześnie, dźwięk zostanie zaśpiewany na 'ee' lub 'oo', a słowo straci barwę. Jeśli nigdy nie przejdziesz, słowo nie jest wyraźne.
-  - zh-Hans: 如果动得太早，这个音就会唱成 'ee' 或 'oo'，字就失去了色彩。如果始终不动，字就不清楚。
+  - zh-Hans: 如果动得太早，这个音就会唱成 “ee” 或 “oo”，字就失去了色彩。如果始终不动，字就不清楚。
