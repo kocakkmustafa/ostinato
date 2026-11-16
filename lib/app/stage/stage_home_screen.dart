@@ -168,6 +168,15 @@ class StageHomeScreen extends StatefulWidget {
   State<StageHomeScreen> createState() => _StageHomeScreenState();
 }
 
+/// The result of a stage read. A failed / timed-out read is `null` (the
+/// "could not load" state, with a retry); a read that WORKED but found no
+/// measured, admitted lesson is a [_StageLoad] without [data] (never the
+/// error text, never a retry: nothing failed).
+class _StageLoad {
+  const _StageLoad(this.data);
+  final _StageData? data;
+}
+
 class _StageData {
   const _StageData(
     this.catalog,
@@ -210,7 +219,7 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   String? _accountId;
   bool _inited = false;
   V1PracticeProgress? _progress;
-  Future<_StageData?>? _data;
+  Future<_StageLoad?>? _data;
 
   PracticeSessionController? _pc;
   bool _playing = false;
@@ -436,10 +445,10 @@ class _StageHomeScreenState extends State<StageHomeScreen>
   /// [_load] with a deadline: a read that never answers becomes the same
   /// "could not load" state as a failed one. A late answer of the old future
   /// is never looked at (the FutureBuilder follows the newest future only).
-  Future<_StageData?> _loadBounded(String? id) =>
+  Future<_StageLoad?> _loadBounded(String? id) =>
       _load(id).timeout(stageLoadTimeout, onTimeout: () => null);
 
-  Future<_StageData?> _load(String? id) async {
+  Future<_StageLoad?> _load(String? id) async {
     try {
       final catalog = widget.catalog ?? await V1CourseCatalog.load();
       _ghostCatalog = catalog;
@@ -486,17 +495,19 @@ class _StageHomeScreenState extends State<StageHomeScreen>
           )
           .firstOrNull;
       pick ??= catalog.lessons.where((l) => measured(l) && free(l)).firstOrNull;
-      if (pick == null) return null;
+      if (pick == null) return const _StageLoad(null);
       final unit = catalog.units.where((u) => u.id == pick!.unitId).firstOrNull;
       final hasRecords =
           records.values.any((r) => r.runs > 0) || checks.isNotEmpty;
-      return _StageData(
-        catalog,
-        pick,
-        hasRecords,
-        unit,
-        missFromRecord(lastRunRecord(records.values)),
-        next?.id,
+      return _StageLoad(
+        _StageData(
+          catalog,
+          pick,
+          hasRecords,
+          unit,
+          missFromRecord(lastRunRecord(records.values)),
+          next?.id,
+        ),
       );
     } on Object {
       return null;
@@ -907,14 +918,20 @@ class _StageHomeScreenState extends State<StageHomeScreen>
         key: const Key('stage-home'),
         backgroundColor: palette.surface,
         body: SafeArea(
-          child: FutureBuilder<_StageData?>(
+          child: FutureBuilder<_StageLoad?>(
             future: _data,
             builder: (context, snap) {
               if (snap.connectionState != ConnectionState.done) {
                 return _skeleton(context, failed: false);
               }
-              final data = snap.data;
-              if (data == null) return _skeleton(context, failed: true);
+              final load = snap.data;
+              // Failed or timed out: the honest error and a retry.
+              if (load == null) return _skeleton(context, failed: true);
+              final data = load.data;
+              // The read worked and there is no measured lesson: not an error.
+              if (data == null) {
+                return _skeleton(context, failed: false, empty: true);
+              }
               return _stage(context, data);
             },
           ),
@@ -923,7 +940,11 @@ class _StageHomeScreenState extends State<StageHomeScreen>
     );
   }
 
-  Widget _skeleton(BuildContext context, {required bool failed}) => Column(
+  Widget _skeleton(
+    BuildContext context, {
+    required bool failed,
+    bool empty = false,
+  }) => Column(
     children: <Widget>[
       const Spacer(),
       if (failed) ...<Widget>[
@@ -946,7 +967,21 @@ class _StageHomeScreenState extends State<StageHomeScreen>
           onPressed: _retry,
           child: Text(uiText(context, StageCopy.tryAgain)),
         ),
-      ] else
+      ] else if (empty)
+        Semantics(
+          container: true,
+          liveRegion: true,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              uiText(context, StageCopy.noMeasuredLesson),
+              key: const Key('stage-no-lesson'),
+              textAlign: TextAlign.center,
+              style: hankenText(size: 14),
+            ),
+          ),
+        )
+      else
         // The loading state is one node ("Loading…"); Play stays disabled.
         Semantics(
           container: true,
