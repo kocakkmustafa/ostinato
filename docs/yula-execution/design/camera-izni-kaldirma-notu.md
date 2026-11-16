@@ -21,4 +21,4 @@
 
 **Bekçi:** `tools/validate_surface_honesty.py` kendi-sınamasında izin metni yüzeyi hem `NSCameraUsageDescription` hem `NSMicrophoneUsageDescription` için okunabilir olmalı; `gate_mutation_test` mutasyonları (plist'e saklama iddiası dahil) yakalanır.
 
-**Takip:** CI `checks.yml` release birleşik manifest kontrolünü koşmuyor (Dart testindeki birleşik grup CI'da üretilmiş manifest olmadığından atlanır). `tools/verify_merged_manifest_no_camera.py`yi CI'a bağlamak workflow değişikliği; ayrı emir ister.
+**Takip (KAPATILDI, OST-CI-MANIFEST-01, 2026-11-16):** `checks.yml` `android-release-build` işinde `flutter build appbundle --release` adımından sonra `python3 tools/verify_merged_manifest_no_camera.py` koşar; CAMERA/zorunlu kamera varsa ya da manifest yoksa o mevcut iş kırılır (yeni iş/kontrol adı yok, 3/3 düzeni aynı). Dart testindeki birleşik grup `gates` işinde (derleme yok) atlanmaya devam eder; zorunluluk betik adımındadır, test değişmedi.
