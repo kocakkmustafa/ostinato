@@ -1,0 +1,88 @@
+{
+  "id": "voc-s1-m04-02",
+  "title": { "en": "Read a two-bar contour", "tr": "İki ölçülük çizgiyi oku" },
+  "goal": {
+    "en": "Turns a two-bar contour into degrees 1–5 and sings it.",
+    "tr": "İki ölçülük kontur çizgisini 1–5 derecelerine çevirip söyler."
+  },
+  "explanation": [
+    {
+      "en": "A contour is the shape of a melody: a dot higher on the screen is a higher note.",
+      "tr": "Kontur bir ezginin şeklidir: ekranda daha yukarıdaki nokta daha yüksek bir notadır."
+    },
+    {
+      "en": "Here the screen has five levels, one for each degree from 1 (do) to 5 (sol). Each dot lasts one beat; a gap is a rest.",
+      "tr": "Burada ekranda beş kat vardır; 1'den (do) 5'e (sol) her derece için bir kat. Her nokta bir vuruş sürer; boşluk bir sustur."
+    },
+    {
+      "en": "Read left to right. Say the numbers first, before you sing: '1, 3, 5, rest'.",
+      "tr": "Soldan sağa oku. Söylemeden önce sayıları söyle: '1, 3, 5, sus'."
+    },
+    {
+      "en": "A step moves to the next level; a skip jumps over one. Bar 1 skips up, bar 2 comes back down.",
+      "tr": "Basamak bir sonraki kata gider; atlama bir katı atlar. 1. ölçü atlayarak çıkar, 2. ölçü geri iner."
+    },
+    {
+      "en": "On a rest, release the note and breathe. Each dot is a new start.",
+      "tr": "Suslarda notayı bırak ve nefes al. Her nokta yeni bir başlangıçtır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The two-bar line 1-3-5, 4-2-1 played slowly in your comfortable range, soft synthesized voice; do is played first.",
+      "tr": "İki ölçülük 1-3-5, 4-2-1 dizisi rahat menzilinde yavaşça çalar, yumuşak sentez ses; önce do çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Read the contour and say its numbers. Then listen to do and sing the two bars on numbers or 'la', about one second per dot, twice. Sing in your own octave.",
+      "tr": "Konturu oku ve sayılarını söyle. Sonra do'yu dinle ve iki ölçüyü sayılarla ya da 'la' ile söyle; her nokta yaklaşık bir saniye, iki kez. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5 qr | 4-2-1 qr | ×2",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I said the numbers before I sang.",
+      "tr": "Söylemeden önce sayıları söyledim."
+    },
+    {
+      "en": "My line went up in bar 1 and down in bar 2, like the dots.",
+      "tr": "Dizim noktalar gibi 1. ölçüde çıktı, 2. ölçüde indi."
+    },
+    {
+      "en": "Sung right after the reference, my last note felt like do.",
+      "tr": "Referansın hemen ardından söylediğim son nota do gibi geldi."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, sol a whole step low.", "tr": "Farklı nota: sol bir tam ses alçak." },
+      "fix": {
+        "en": "You stopped at fa. From mi, skip one note: mi-(fa)-sol.",
+        "tr": "Fa'da kalmışsın. Mi'den bir nota atla: mi-(fa)-sol."
+      }
+    },
+    {
+      "error": { "en": "Different note, fa a semitone low.", "tr": "Farklı nota: fa yarım ses alçak." },
+      "fix": {
+        "en": "You landed on mi. Bar 2 starts one step below sol: think sol, then sing fa.",
+        "tr": "Mi'ye inmişsin. 2. ölçü sol'ün bir basamak altından başlar: içinden sol de, sonra fa'yı söyle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only bar 1 (1-3-5) until it settles, then add bar 2.",
+    "tr": "Oturana kadar yalnız 1. ölçüyü (1-3-5) söyle, sonra 2. ölçüyü ekle."
+  },
+  "legacy": "V: vocal-09",
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,85 @@
+{
+  "id": "voc-s1-m01-03",
+  "title": { "en": "Natural breath and short airflow", "tr": "Doğal nefes ve kısa hava akışı" },
+  "goal": {
+    "en": "Takes an easy breath and lets out a short, gentle “sss” without holding the breath.",
+    "tr": "Zorlamadan nefes alır ve nefesi tutmadan kısa, hafif bir “sss” verir."
+  },
+  "explanation": [
+    {
+      "en": "Breathe in the way you normally do. Don't gulp in as much air as you can.",
+      "tr": "Normalde nasıl nefes alıyorsan öyle al. Alabildiğin kadar çok hava yutma."
+    },
+    {
+      "en": "Keep the shoulders and neck quiet while you breathe in. The belly and lower ribs may move a little; let them, don't push.",
+      "tr": "Nefes alırken omuzların ve boynun sakin kalsın. Karnın ve alt kaburgaların biraz hareket edebilir; izin ver, itme."
+    },
+    {
+      "en": "Breathe out on a soft, unvoiced “sss” for about two easy counts. Then let go and breathe normally.",
+      "tr": "Hafif, sessiz bir “sss” ile yaklaşık iki rahat sayım nefes ver. Sonra bırak ve normal nefes al."
+    },
+    {
+      "en": "Don't hold the breath between in and out. Breathing for singing is coordination, not a contest for the longest exhale.",
+      "tr": "Alış ile veriş arasında nefesi tutma. Şarkı için nefes eşgüdümdür; en uzun veriş yarışı değildir."
+    },
+    {
+      "en": "End early whenever you need air. If you feel light-headed, stop and breathe normally.",
+      "tr": "Havaya ihtiyacın olunca erken bitir. Başın dönerse dur ve normal nefes al."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; a drawing shows the shoulders staying level during an easy breath.",
+      "tr": "Referans ses yok; bir çizim rahat bir nefeste omuzların yerinde kaldığını gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["Ö"],
+    "engineSteps": ["A0"],
+    "task": {
+      "en": "Do 2 rounds: one easy breath in, a soft “sss” for about two counts, then normal breathing. Rest between rounds, then tick the checklist.",
+      "tr": "2 tur yap: bir rahat nefes al, yaklaşık iki sayım hafif bir “sss” ver, sonra normal nefes al. Turlar arasında dinlen, sonra kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Finish both rounds and tick every item on the checklist. Progress is marked as self-reported.",
+        "tr": "İki turu da bitir ve kontrol listesindeki her maddeyi işaretle. İlerleme kendi beyanı olarak işaretlenir."
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": ["Ç", "V1", "V4"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My shoulders stayed level as I breathed in.", "tr": "Nefes alırken omuzlarım yükselmedi." },
+    { "en": "My neck and throat stayed loose.", "tr": "Boynum ve boğazım gevşek kaldı." },
+    { "en": "I did not hold my breath between in and out.", "tr": "Alış ile veriş arasında nefesimi tutmadım." },
+    { "en": "The “sss” stayed soft and even, and I ended it before I ran out of air.", "tr": "“sss” hafif ve düzenli kaldı; havam bitmeden bitirdim." },
+    { "en": "I felt no dizziness.", "tr": "Baş dönmesi hissetmedim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Checklist: shoulders rose on the breath in.", "tr": "Kontrol listesi: nefes alırken omuzlar kalktı." },
+      "fix": {
+        "en": "Take a smaller breath and rest one hand on your lower ribs; let the breath arrive there.",
+        "tr": "Daha küçük bir nefes al ve bir elini alt kaburgalarına koy; nefes oraya gelsin."
+      }
+    },
+    {
+      "error": { "en": "Checklist: breath held before the “sss”.", "tr": "Kontrol listesi: “sss”ten önce nefes tutuldu." },
+      "fix": {
+        "en": "Start the “sss” as soon as the breath in ends, with no pause.",
+        "tr": "Nefes alış biter bitmez, duraklamadan “sss”e başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sit down and do one round only, with a single count of “sss”.",
+    "tr": "Otur ve yalnız bir tur yap; “sss” tek sayım sürsün."
+  },
+  "legacy": "R: vocal-03",
+  "minutes": 6,
+  "expertPending": true
+}

@@ -1,0 +1,94 @@
+{
+  "id": "voc-s2-m09-01",
+  "title": { "en": "Echo a two-bar rhythm", "tr": "İki ölçülük ritmi yankıla" },
+  "goal": {
+    "en": "Hears a two-bar rhythm and sings it back on one comfortable note, in time with the click at ♩=70.",
+    "tr": "İki ölçülük bir ritmi duyar ve tek bir rahat notada, ♩=70'te klikle zamanında geri söyler."
+  },
+  "explanation": [
+    {
+      "en": "An echo is listen, then answer. The app plays two bars; you sing the same two bars straight after, with no gap.",
+      "tr": "Yankı önce dinlemek, sonra cevap vermektir. Uygulama iki ölçü çalar; sen aynı iki ölçüyü arada boşluk bırakmadan hemen ardından söylersin."
+    },
+    {
+      "en": "Sing the rhythm on 'ta' on one comfortable note. Only the timing is measured here, not the pitch.",
+      "tr": "Ritmi tek bir rahat notada 'ta' ile söyle. Burada perde değil, yalnız zamanlama ölçülür."
+    },
+    {
+      "en": "The rhythms use the values you already sang: quarters, pairs of eighths, dotted quarters and rests.",
+      "tr": "Ritimler daha önce söylediğin değerleri kullanır: dörtlükler, ikili sekizlikler, noktalı dörtlükler ve suslar."
+    },
+    {
+      "en": "While you listen, don't count every note. Catch the shape: where it runs, where it waits. Your answer starts on the next beat 1.",
+      "tr": "Dinlerken her notayı sayma. Biçimi yakala: nerede koşuyor, nerede bekliyor. Cevabın bir sonraki 1. vuruşta başlar."
+    },
+    {
+      "en": "Rests are part of the rhythm. Stay silent for them, and take your breath there.",
+      "tr": "Suslar ritmin parçasıdır. Onlarda sessiz kal ve nefesini orada al."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Six generated two-bar rhythms at ♩=70, each played on one soft synthesized note over the click, followed by two bars of click for your answer.",
+      "tr": "♩=70'te üretilmiş altı iki ölçülük ritim; her biri klik üzerinde tek bir yumuşak sentez notada çalınır, ardından cevabın için iki ölçü klik gelir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Listen to 6 rhythms. After each one, sing it back on 'ta' on one comfortable note in the next two bars, with the click at ♩=70. The rhythms are new on every attempt.",
+      "tr": "6 ritim dinle. Her birinin ardından, sonraki iki ölçüde ♩=70 klikle, tek bir rahat notada 'ta' ile geri söyle. Ritimler her denemede yenidir."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each answer started on beat 1 of the answer bars.",
+      "tr": "Her cevap, cevap ölçülerinin 1. vuruşunda başladı."
+    },
+    {
+      "en": "I stayed silent for the rests.",
+      "tr": "Suslarda sessiz kaldım."
+    },
+    {
+      "en": "Paired eighths fell two to a beat, evenly.",
+      "tr": "İkili sekizlikler her vuruşa eşit ikişer düştü."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but late at the start of the answer.", "tr": "Doğru, ama cevabın başında geç." },
+      "fix": {
+        "en": "Breathe in on the last beat of the example, so your first 'ta' lands on 1.",
+        "tr": "Örneğin son vuruşunda nefes al; ilk 'ta'n 1'e düşsün."
+      }
+    },
+    {
+      "error": { "en": "Correct, but early after a rest.", "tr": "Doğru, ama bir sustan sonra erken." },
+      "fix": {
+        "en": "Count the rest silently on its beat number, then come in on the next one.",
+        "tr": "Susu içinden vuruş numarasıyla say, sonra bir sonrakinde gir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Echo only the first bar of each rhythm at ♩=55, then go back to two bars.",
+    "tr": "♩=55'te her ritmin yalnız ilk ölçüsünü yankıla, sonra iki ölçüye geri dön."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

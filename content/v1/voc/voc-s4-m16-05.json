@@ -1,0 +1,123 @@
+{
+  "id": "voc-s4-m16-05",
+  "title": {
+    "en": "The blues scale",
+    "tr": "Blues gamı"
+  },
+  "goal": {
+    "en": "Sings the blues scale 1-♭3-4-♭5-5-♭7-8 up and down with the click at ♩=60.",
+    "tr": "Blues gamını (1-♭3-4-♭5-5-♭7-8) klikle ♩=60'ta çıkıp iner."
+  },
+  "explanation": [
+    {
+      "en": "The blues scale is the minor pentatonic plus one note: ♭5, between 4 and 5.",
+      "tr": "Blues gamı, minör pentatoniğe bir nota eklenmiş hâlidir: 4 ile 5 arasındaki ♭5."
+    },
+    {
+      "en": "4, ♭5 and 5 are three notes a half step apart. This is the tightest spot in the scale; sing it slowly and lightly.",
+      "tr": "4, ♭5 ve 5 birbirinden yarım ses uzaktaki üç notadır. Gamın en dar yeri burasıdır; onu yavaş ve hafif söyle."
+    },
+    {
+      "en": "♭5 is a passing note. It sounds tense and wants to move on to 5 or back to 4. Do not stop on it.",
+      "tr": "♭5 bir geçiş notasıdır. Gergin duyulur, 5'e ya da geri 4'e gitmek ister. Onda durma."
+    },
+    {
+      "en": "The tempo is slower here, ♩=60, to give the half steps time.",
+      "tr": "Yarım seslere zaman kalsın diye tempo burada daha yavaştır, ♩=60."
+    },
+    {
+      "en": "If a note is not comfortable, skip it or sing it an octave lower. That does not count as a different note.",
+      "tr": "Bir nota rahat değilse atla ya da bir oktav aşağıda söyle. Bu farklı nota sayılmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then the blues scale up and back in your range at ♩=60 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde blues gamı çıkış ve iniş; ♩=60 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in sing the blues scale up and back down at ♩=60, one note per click, on the numbers or on 'la'. Hold the top do for two clicks and the last do for three. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra blues gamını ♩=60'ta çık ve geri in, her klike bir nota; sayılarla ya da 'la' ile. Üstteki do'yu iki, son do'yu üç klik tut. Kendi oktavında söyle."
+    },
+    "sequence": "1-b3-4-b5 | 5-b7-8:h | b7-5-b5-4 | b3-1:h.",
+    "tempo": {
+      "open": 60,
+      "target": 60
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "4, ♭5 and 5 sounded like three separate notes, a half step apart.",
+      "tr": "4, ♭5 ve 5 yarım ses arayla üç ayrı nota gibi duyuldu."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭5 a semitone high.",
+        "tr": "Farklı nota: ♭5 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "You jumped to 5 early. Take ♭5 as the smallest step above 4.",
+        "tr": "5'e erken geçmişsin. ♭5'i 4'ün üstündeki en küçük adım olarak al."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, ♭5 a semitone low.",
+        "tr": "Farklı nota: ♭5 yarım ses alçak."
+      },
+      "fix": {
+        "en": "♭5 stayed on 4. Lift it a half step; it should feel tense, not settled.",
+        "tr": "♭5, 4'te kalmış. Onu yarım ses kaldır; oturmuş değil, gergin gelmeli."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only 4-♭5-5-♭5-4 slowly until the half steps are clear, then the whole scale.",
+    "tr": "Yarım sesler netleşene kadar yalnız 4-♭5-5-♭5-4'ü yavaşça söyle, sonra bütün gamı."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,112 @@
+{
+  "id": "voc-s2-m06-05",
+  "title": {
+    "en": "Perfect fourth",
+    "tr": "Tam dörtlü"
+  },
+  "goal": {
+    "en": "Sings a perfect fourth up and down.",
+    "tr": "Tam dörtlüyü çıkıcı ve inici söyler."
+  },
+  "explanation": [
+    {
+      "en": "A perfect fourth (P4) is do to fa: two whole steps and a half step.",
+      "tr": "Tam dörtlü (T4) do'dan fa'ya uzanır: iki tam ses ve bir yarım ses."
+    },
+    {
+      "en": "A very common fourth is low sol up to do: from below, into home.",
+      "tr": "Çok sık görülen dörtlü, alttaki sol'den do'ya çıkıştır: aşağıdan eve."
+    },
+    {
+      "en": "A fourth and a fifth fill one octave together: do to fa is a fourth, fa to the top do is a fifth.",
+      "tr": "Dörtlü ve beşli birlikte bir oktavı doldurur: do'dan fa'ya dörtlü, fa'dan üst do'ya beşlidir."
+    },
+    {
+      "en": "For P4, pass through mi in your head: do-mi-fa. Don't overshoot to sol.",
+      "tr": "T4 için içinden mi'den geç: do-mi-fa. Sol'e taşma."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Each pair in your personal key, played once before you sing and once after for comparison.",
+      "tr": "Her çift kişisel tonunda; söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Six intervals: low sol to do, do to low sol, do-fa, fa-do, re-sol, sol-re. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "Altı aralık: alttaki sol'den do'ya, do'dan alttaki sol'e, do-fa, fa-do, re-sol, sol-re. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "5,:q 1:h qr | 1:q 5,:h qr | 1:q 4:h qr | 4:q 1:h qr | 2:q 5:h qr | 5:q 2:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I thought do-mi-fa before landing on fa.",
+      "tr": "Fa'ya konmadan önce içimden do-mi-fa dedim."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, P4 a whole step high.",
+        "tr": "Farklı nota: T4 bir tam ses yüksek."
+      },
+      "fix": {
+        "en": "You went on to sol. Stop one step earlier: do-mi-fa.",
+        "tr": "Sol'e kadar gitmişsin. Bir basamak önce dur: do-mi-fa."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, P4 a semitone low.",
+        "tr": "Farklı nota: T4 yarım ses alçak."
+      },
+      "fix": {
+        "en": "That is a major third. Fa sits just above mi; reach a half step higher.",
+        "tr": "Bu büyük üçlü olur. Fa, mi'nin hemen üstündedir; yarım ses daha uzan."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing do-re-mi-fa slowly first, then leave out re and mi.",
+    "tr": "Önce do-re-mi-fa'yı yavaşça söyle, sonra re ile mi'yi atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

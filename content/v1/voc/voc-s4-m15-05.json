@@ -1,0 +1,115 @@
+{
+  "id": "voc-s4-m15-05",
+  "title": {
+    "en": "Octave arpeggio",
+    "tr": "Oktav arpeji"
+  },
+  "goal": {
+    "en": "Sings the octave arpeggio 1-3-5-8-5-3-1 in four keys, a half step higher each time.",
+    "tr": "Oktav arpejini (1-3-5-8-5-3-1) her seferinde yarım ses yukarıda, dört tonda söyler."
+  },
+  "explanation": [
+    {
+      "en": "The octave arpeggio climbs do, mi and sol to the top do and comes back: 1-3-5-8-5-3-1. The top do is the same note one octave higher.",
+      "tr": "Oktav arpeji do, mi ve sol üzerinden üst do'ya çıkar ve geri döner: 1-3-5-8-5-3-1. Üst do, aynı notanın bir oktav yukarısıdır."
+    },
+    {
+      "en": "Sol to the top do is a fourth, the widest jump here. Hear the top do in your head before you leave sol.",
+      "tr": "Sol'den üst do'ya dörtlüdür; buradaki en geniş atlama budur. Sol'den ayrılmadan üst do'yu içinden duy."
+    },
+    {
+      "en": "Each round starts a half step higher, four rounds in all. In the rest bar, listen to the new do.",
+      "tr": "Her tur yarım ses yukarıda başlar, toplam dört tur. Sus ölçüsündeki yeni do'yu dinle."
+    },
+    {
+      "en": "The screen writes the line from your first do, so the new keys show accidentals. You still think do-mi-sol-do in each new key.",
+      "tr": "Ekran diziyi ilk do'na göre yazar; bu yüzden yeni tonlarda arızalar görünür. Sen her yeni tonda yine do-mi-sol-do diye düşün."
+    },
+    {
+      "en": "Keep the top do light and easy. Higher does not mean louder.",
+      "tr": "Üst do'yu hafif ve rahat tut. Daha tiz, daha gür demek değildir."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Before each round the new do sounds, then 1-3-5-8-5-3-1 on “ah” as a model. Four keys, each a half step higher, inside your saved range.",
+      "tr": "Her turdan önce yeni do çalar, ardından örnek olarak “a” ile 1-3-5-8-5-3-1. Sakladığın menzilin içinde dört ton, her biri yarım ses yukarıda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing the arpeggio on “ah” or in solfège, one note per beat, and hold the last do. Listen to the new do in the rest bar. Four rounds, each a half step higher. Sing in your own octave.",
+      "tr": "Arpeji “a” ile ya da solfejle söyle, her vuruşa bir nota; son do'yu tut. Sus ölçüsünde yeni do'yu dinle. Dört tur, her biri yarım ses yukarıda. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-8 | 5-3-1:h | wr | b2-4-b6-b2' | b6-4-b2:h | wr | 2-#4-6-2' | 6-#4-2:h | wr | b3-5-b7-b3' | b7-5-b3:h",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard the top do before I sang it.",
+      "tr": "Üst do'yu söylemeden önce içimden duydum."
+    },
+    {
+      "en": "Each round sounded like the same shape in a new place.",
+      "tr": "Her tur yeni bir yerde aynı biçim gibi duyuldu."
+    },
+    {
+      "en": "I stayed in a comfortable range.",
+      "tr": "Rahat menzilde kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the top do a little low.",
+        "tr": "Farklı nota: üst do biraz alçak."
+      },
+      "fix": {
+        "en": "The jump from sol is a fourth. Hear the top do first and aim it a touch higher, lightly.",
+        "tr": "Sol'den üst do'ya dörtlüdür. Önce üst do'yu içinden duy ve onu hafifçe, bir tık yüksek hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the round a semitone low: it stayed in the old key.",
+        "tr": "Farklı nota, tur yarım ses alçak: eski tonda kaldı."
+      },
+      "fix": {
+        "en": "Hum the new do before you start the round, and begin from that note.",
+        "tr": "Tura başlamadan yeni do'yu mırıldan ve o notadan başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-3-5-3-1 in the four keys first, then add the top do.",
+    "tr": "Önce dört tonda 1-3-5-3-1 söyle, sonra üst do'yu ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

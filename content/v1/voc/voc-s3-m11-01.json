@@ -1,0 +1,115 @@
+{
+  "id": "voc-s3-m11-01",
+  "title": {
+    "en": "Chest and head voice",
+    "tr": "Göğüs ve kafa sesi"
+  },
+  "goal": {
+    "en": "Tells chest voice, head voice and the break apart, and picks the gentle response to a crack, in 5 questions.",
+    "tr": "5 soruda göğüs sesini, kafa sesini ve geçiş bölgesini ayırır; ses kırılınca yapılacak nazik hareketi seçer."
+  },
+  "explanation": [
+    {
+      "en": "Your voice has registers: ways of making sound that feel different. Chest voice feels like your speaking voice. Head voice feels lighter and higher.",
+      "tr": "Sesinin register'ları vardır: farklı hissettiren ses üretme biçimleri. Göğüs sesi konuşma sesin gibi gelir. Kafa sesi daha hafif ve daha yüksek gelir."
+    },
+    {
+      "en": "The names describe where you feel the buzz, not where the sound is made.",
+      "tr": "Bu adlar titreşimi nerede hissettiğini anlatır, sesin nerede üretildiğini değil."
+    },
+    {
+      "en": "Between them lies the break, or passaggio: a few notes where the voice may flip, crack or change colour. Everyone has one, and its place is personal.",
+      "tr": "İkisinin arasında geçiş bölgesi (passaggio) vardır: sesin birden değişebildiği, kırılabildiği ya da renk değiştirebildiği birkaç nota. Herkesin bir geçiş bölgesi vardır ve yeri kişiseldir."
+    },
+    {
+      "en": "This module teaches you to cross the break smoothly with a light, blended sound, often called mix. It never tests how high you can sing.",
+      "tr": "Bu modül geçiş bölgesinden hafif, karışık bir sesle yumuşakça geçmeyi öğretir; buna çoğu zaman karışım (mix) denir. Ne kadar yükseğe çıkabildiğini asla sınamaz."
+    },
+    {
+      "en": "A crack or a sudden flip is normal while you learn. Make the sound lighter and slower, never louder.",
+      "tr": "Öğrenirken sesin kırılması ya da birden değişmesi normaldir. Sesi daha hafif ve daha yavaş yap, asla daha gür değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; each question shows a short description or a singing situation.",
+      "tr": "Referans ses yok; her soru kısa bir tanım ya da bir söyleme durumu gösterir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Answer 5 questions. Each shows a description or a singing situation; choose the matching name or the best next step.",
+      "tr": "5 soruyu yanıtla. Her biri bir tanım ya da bir söyleme durumu gösterir; uyan adı ya da en iyi sonraki adımı seç."
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 5
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 5,
+      "params": {
+        "set": "voice_registers",
+        "choices": [
+          "chest_voice",
+          "head_voice",
+          "break_area",
+          "lighter_and_slower",
+          "louder_and_harder",
+          "turn_back_or_skip"
+        ],
+        "situations": [
+          "feels_like_speaking_voice",
+          "light_high_sound",
+          "few_notes_where_the_voice_flips",
+          "voice_cracks_on_a_slide",
+          "top_note_feels_tight",
+          "colour_changes_suddenly_on_the_way_up"
+        ]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: “louder and harder” chosen for a crack.",
+        "tr": "Farklı cevap: kırılma için “daha gür ve daha sert” seçildi."
+      },
+      "fix": {
+        "en": "Pushing makes the jump bigger. Make the sound lighter and slower instead.",
+        "tr": "Zorlamak sıçramayı büyütür. Onun yerine sesi hafiflet ve yavaşla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: “head voice” chosen for the few notes where the voice flips.",
+        "tr": "Farklı cevap: sesin birden değiştiği birkaç nota için “kafa sesi” seçildi."
+      },
+      "fix": {
+        "en": "Those notes are the break: the area between chest and head voice.",
+        "tr": "O notalar geçiş bölgesidir: göğüs sesiyle kafa sesi arasındaki alan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Answer with the explanation points open on screen, then try once more without them.",
+    "tr": "Önce anlatım maddeleri ekranda açıkken yanıtla, sonra onlar olmadan bir kez daha dene."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

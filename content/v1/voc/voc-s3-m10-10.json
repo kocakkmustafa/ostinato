@@ -1,0 +1,95 @@
+{
+  "id": "voc-s3-m10-10",
+  "title": { "en": "Vowel scales", "tr": "Ünlü gamları" },
+  "goal": {
+    "en": "Sings the five-note scale 1-2-3-4-5-4-3-2-1 on each of the five vowels with the click at ♩=70.",
+    "tr": "Beş notalık 1-2-3-4-5-4-3-2-1 gamını beş ünlünün her biriyle klikle ♩=70'te söyler."
+  },
+  "explanation": [
+    {
+      "en": "This lesson joins the module so far: pure vowels, a steady note and the click.",
+      "tr": "Bu ders modülün şimdiye kadarki kısmını birleştirir: saf ünlüler, sabit nota ve klik."
+    },
+    {
+      "en": "Five rounds, one vowel per round: 'ah', 'eh', 'ee', 'oh', 'oo'. The vowel stays the same from the first note to the last.",
+      "tr": "Beş tur, her turda bir ünlü: 'a', 'e', 'i', 'o', 'u'. Ünlü ilk notadan son notaya kadar aynı kalır."
+    },
+    {
+      "en": "Move to the next note on the click and keep the line smooth. There is no new start on each note.",
+      "tr": "Sonraki notaya klikte geç ve diziyi akıcı tut. Her notada yeni bir başlangıç yoktur."
+    },
+    {
+      "en": "Breathe in the rest after each round, then set the new vowel shape before you start.",
+      "tr": "Her turdan sonraki susta nefes al, sonra başlamadan yeni ünlünün biçimini kur."
+    },
+    {
+      "en": "Coming down, the half step is fa–mi. It tends to drift wide, so keep it small.",
+      "tr": "İnerken yarım ses fa–mi'dir. Açılmaya meyillidir; küçük tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then 1-2-3-4-5-4-3-2-1 in your range on 'ah', 'eh', 'ee', 'oh', 'oo' at ♩=70 and ♩=50; vowel-formant voice.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 'a', 'e', 'i', 'o', 'u' ile 1-2-3-4-5-4-3-2-1; ♩=70 ve ♩=50; ünlü-formantlı sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing 1-2-3-4-5-4-3-2-1, one note per click, and hold the last 1 for two clicks. Do five rounds: 'ah', 'eh', 'ee', 'oh', 'oo'. Start at ♩=60 if you like; the lesson counts at ♩=70. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra 1-2-3-4-5-4-3-2-1'i her klike bir nota söyle; son 1'i iki klik tut. Beş tur yap: 'a', 'e', 'i', 'o', 'u'. İstersen ♩=60'ta başla; ders ♩=70'te sayılır. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5-4-3-2 | 1:h hr | ×5",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each round kept one vowel from start to end.",
+      "tr": "Her tur baştan sona tek bir ünlüde kaldı."
+    },
+    {
+      "en": "Fa to mi on the way down stayed small.",
+      "tr": "İnerken fa'dan mi'ye adım küçük kaldı."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, a little high on 'ee'.", "tr": "Farklı nota: 'i'de biraz yüksek." },
+      "fix": {
+        "en": "'Ee' feels brighter, so the voice tends to rise. Think of the note staying level and keep 'ee' as soft as 'ah'.",
+        "tr": "'İ' daha parlak gelir, ses yükselmeye eğilimlidir. Notayı aynı katta düşün ve 'i'yi 'a' kadar yumuşak tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late on the way down.",
+        "tr": "Doğru, ama inerken geç."
+      },
+      "fix": {
+        "en": "Keep the vowel flowing and move to the next note right on the click; don't wait for the note to settle.",
+        "tr": "Ünlüyü akıt ve sonraki notaya tam klikte geç; notanın oturmasını bekleme."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing at ♩=60 and do only three rounds: 'ah', 'oh', 'oo'.",
+    "tr": "♩=60'ta söyle ve yalnız üç tur yap: 'a', 'o', 'u'."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

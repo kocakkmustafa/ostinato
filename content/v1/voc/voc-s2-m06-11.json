@@ -1,0 +1,112 @@
+{
+  "id": "voc-s2-m06-11",
+  "title": {
+    "en": "Minor third",
+    "tr": "Küçük üçlü"
+  },
+  "goal": {
+    "en": "Sings a minor third up and down.",
+    "tr": "Küçük üçlüyü çıkıcı ve inici söyler."
+  },
+  "explanation": [
+    {
+      "en": "A minor third (m3) is a whole step plus a half step: a half step smaller than a major third.",
+      "tr": "Küçük üçlü (K3) bir tam ses ve bir yarım sestir: büyük üçlüden yarım ses küçüktür."
+    },
+    {
+      "en": "In the major scale you find it at mi-sol, la-do and re-fa.",
+      "tr": "Majör gamda mi-sol, la-do ve re-fa'da bulursun."
+    },
+    {
+      "en": "Mi-sol passes through fa, only a half step above mi. That half step makes the third minor.",
+      "tr": "Mi-sol fa'dan geçer; fa mi'nin yalnız yarım ses üstündedir. Üçlüyü küçük yapan bu yarım sestir."
+    },
+    {
+      "en": "Compare: do-mi is major, mi-sol is minor. Sing do-mi-sol slowly and hear the two thirds.",
+      "tr": "Karşılaştır: do-mi büyük, mi-sol küçük üçlüdür. Do-mi-sol'ü yavaşça söyle ve iki üçlüyü duy."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Each pair in your personal key, played once before you sing and once after for comparison.",
+      "tr": "Her çift kişisel tonunda; söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Six intervals: mi-sol, sol-mi, low la to do, do to low la, re-fa, fa-re. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "Altı aralık: mi-sol, sol-mi, alttaki la'dan do'ya, do'dan alttaki la'ya, re-fa, fa-re. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "3:q 5:h qr | 5:q 3:h qr | 6,:q 1:h qr | 1:q 6,:h qr | 2:q 4:h qr | 4:q 2:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard mi-sol as smaller than do-mi.",
+      "tr": "Mi-sol'ü do-mi'den küçük duydum."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, m3 a semitone high.",
+        "tr": "Farklı nota: K3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "That is a major third. Keep the top note a little lower: mi-fa-sol has a half step in it.",
+        "tr": "Bu büyük üçlü olur. Üst notayı biraz daha alçak tut: mi-fa-sol'ün içinde bir yarım ses var."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, m3 a semitone low.",
+        "tr": "Farklı nota: K3 yarım ses alçak."
+      },
+      "fix": {
+        "en": "That is only a whole step. Reach a half step further.",
+        "tr": "Bu yalnız bir tam ses. Yarım ses daha uzan."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing mi-fa-sol step by step first, then leave out fa.",
+    "tr": "Önce mi-fa-sol'ü basamak basamak söyle, sonra fa'yı atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

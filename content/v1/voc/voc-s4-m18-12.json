@@ -1,0 +1,115 @@
+{
+  "id": "voc-s4-m18-12",
+  "title": {
+    "en": "Backing \"oohs\"",
+    "tr": "Arka vokal \"u\"ları"
+  },
+  "goal": {
+    "en": "Holds the eight long notes of an original backing part on 'oo' under a melody, each steady within a 25-cent spread.",
+    "tr": "Bir ezginin altında özgün bir arka vokal partisinin sekiz uzun notasını 'u' ile, her birini 25 cent yayılım içinde sabit tutar."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "Backing vocals often hold long, soft notes on 'oo' under the lead melody. They fill in the chords.",
+      "tr": "Arka vokaller çoğu zaman ana ezginin altında 'u' ile uzun ve yumuşak notalar tutar. Akorları doldurur."
+    },
+    {
+      "en": "Your part is eight whole notes: mi, mi, fa, re, mi, fa, re, mi. Each one is a note of the chord in that bar.",
+      "tr": "Partin sekiz birlik notadır: mi, mi, fa, re, mi, fa, re, mi. Her biri o ölçüdeki akorun bir sesidir."
+    },
+    {
+      "en": "The notes move by small steps. Keep 'oo' round and soft, and move to the next note without a scoop.",
+      "tr": "Notalar küçük adımlarla ilerler. 'U'yu yuvarlak ve yumuşak tut, sonraki notaya kaydırmadan geç."
+    },
+    {
+      "en": "Each note lasts four beats. Breathe quickly at the end of the bar, between notes.",
+      "tr": "Her nota dört vuruş sürer. Ölçü sonunda, notalar arasında hızlıca nefes al."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "Your part alone on 'oo' in your comfortable range, soft synthesized voice. Then the melody (5-6-5-1' | 1'-7 6:h | 6-5-4-6 | 5:w | 5-6-7-1' | 6-1'-6-4 | 5:h 7:h | 1':w) on a second synthesized voice over soft original chords I, vi, IV, V, I, IV, V, I at a slow steady tempo, once with your part and once without. Headphones recommended.",
+      "tr": "Partin tek başına, rahat menzilinde 'u' ile, yumuşak sentez ses. Sonra ezgi (5-6-5-1' | 1'-7 6:h | 6-5-4-6 | 5:w | 5-6-7-1' | 6-1'-6-4 | 5:h 7:h | 1':w) ikinci bir sentez seste, yavaş ve sabit tempoda yumuşak özgün I, vi, IV, V, I, IV, V, I akorları üzerinde; bir kez partinle, bir kez partin olmadan. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the accompaniment. Then sing the eight long notes on 'oo', one per bar, while the melody plays. Sing in your own octave.",
+      "tr": "Eşlikten bir ölçü dinle. Sonra ezgi çalarken sekiz uzun notayı 'u' ile, her ölçüye bir nota olmak üzere söyle. Kendi oktavında söyle."
+    },
+    "sequence": "3:w | 3:w | 4:w | 2:w | 3:w | 4:w | 2:w | 3:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Every long note stays steady, with a pitch spread (IQR) of 25 cents or less, and at least 7 of 8 notes are within 30 cents.",
+        "tr": "Her uzun nota sabit kalır, perde yayılımı (IQR) 25 cent ya da altındadır ve 8 notanın en az 7'si 30 cent içindedir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My 'oo' stayed soft and round on every note.",
+      "tr": "'U' her notada yumuşak ve yuvarlak kaldı."
+    },
+    {
+      "en": "I moved to each new note without a scoop.",
+      "tr": "Her yeni notaya kaydırmadan geçtim."
+    },
+    {
+      "en": "I kept my own part while the other voice sang.",
+      "tr": "Diğer ses söylerken kendi partimde kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the long note sank by the end.",
+        "tr": "Farklı nota: uzun nota sonuna doğru pesleşti."
+      },
+      "fix": {
+        "en": "Keep the air moving to the end of the bar. If you run short, end the note a little early.",
+        "tr": "Havayı ölçünün sonuna kadar akıt. Havan yetmezse notayı biraz erken bitir."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hold each note for two beats and rest for two, then go back to four.",
+    "tr": "Her notayı iki vuruş tut, iki vuruş dinlen; sonra yeniden dört vuruşa dön."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

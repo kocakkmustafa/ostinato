@@ -1,0 +1,117 @@
+{
+  "id": "voc-s4-m17-01",
+  "title": {
+    "en": "What is melisma?",
+    "tr": "Melisma nedir?"
+  },
+  "goal": {
+    "en": "Tells melisma, a run, a turn, a scoop, a fall-off and a grace note apart in 5 questions.",
+    "tr": "5 soruda melismayı, koşuyu, dönüşü, scoop'u, düşüşü ve süs notasını birbirinden ayırır."
+  },
+  "explanation": [
+    {
+      "en": "In most songs each syllable gets one note. In a melisma, one syllable carries several notes: the vowel stays and the pitch moves.",
+      "tr": "Çoğu şarkıda her heceye bir nota düşer. Melismada tek bir hece birkaç nota taşır: ünlü aynı kalır, perde hareket eder."
+    },
+    {
+      "en": "A run is a quick melisma that moves by step, like 1-2-3-4-5-4-3-2-1 on one 'ah'. A turn is a short three-note figure around a note.",
+      "tr": "Koşu, basamakla ilerleyen hızlı bir melismadır; tek bir 'a' ile 1-2-3-4-5-4-3-2-1 gibi. Dönüş, bir notanın çevresinde üç notalık kısa bir figürdür."
+    },
+    {
+      "en": "Ornaments colour single notes. A scoop enters a note from just below. A fall-off lets the pitch drop at the end of a note. A grace note is a very short note just before the main one.",
+      "tr": "Süslemeler tek notaları renklendirir. Scoop notaya hemen altından girer. Düşüş, notanın sonunda perdeyi aşağı bırakır. Süs notası, asıl notadan hemen önceki çok kısa notadır."
+    },
+    {
+      "en": "Every figure still arrives on its written note. The pitch meter checks where you land, not only how you get there.",
+      "tr": "Her figür yine de yazılı notasına varır. Perde göstergesi yalnız oraya nasıl gittiğine değil, nereye vardığına da bakar."
+    },
+    {
+      "en": "This module starts light and slow. If the throat tightens or you get tired, end the lesson for today.",
+      "tr": "Bu modül hafif ve yavaş başlar. Boğaz sıkışırsa ya da yorulursan dersi bugünlük bitir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; each question shows a short description of a sung figure.",
+      "tr": "Referans ses yok; her soru söylenen bir figürün kısa tanımını gösterir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "D"
+    ],
+    "engineSteps": [
+      "A0"
+    ],
+    "task": {
+      "en": "Answer 5 questions. Each shows a short description of a sung figure; choose its name.",
+      "tr": "5 soruyu yanıtla. Her biri söylenen bir figürün kısa tanımını gösterir; adını seç."
+    },
+    "pass": {
+      "levelDefault": true,
+      "minCorrect": 5
+    },
+    "drill": {
+      "type": "symbol_match",
+      "count": 5,
+      "params": {
+        "set": "melisma_figures",
+        "choices": [
+          "syllabic",
+          "melisma",
+          "run",
+          "turn",
+          "scoop",
+          "fall_off",
+          "grace_note"
+        ],
+        "situations": [
+          "one_note_per_syllable",
+          "several_notes_on_one_vowel",
+          "quick_stepwise_notes_on_one_syllable",
+          "three_notes_around_one_note",
+          "enters_the_note_from_just_below",
+          "pitch_drops_at_the_end_of_the_note",
+          "very_short_note_before_the_main_note"
+        ]
+      }
+    }
+  },
+  "fallback": "noEngine",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different answer: “scoop” chosen for a pitch that drops at the end.",
+        "tr": "Farklı cevap: sonda düşen perde için “scoop” seçildi."
+      },
+      "fix": {
+        "en": "A scoop comes before the note, from below. A drop at the end of the note is a fall-off.",
+        "tr": "Scoop notadan önce, aşağıdan gelir. Notanın sonundaki iniş bir düşüştür."
+      }
+    },
+    {
+      "error": {
+        "en": "Different answer: “melisma” chosen for one note per syllable.",
+        "tr": "Farklı cevap: her heceye bir nota için “melisma” seçildi."
+      },
+      "fix": {
+        "en": "A melisma needs several notes on one syllable. One note per syllable is called syllabic singing.",
+        "tr": "Melisma tek hecede birkaç nota ister. Her heceye bir nota düşmesine hecesel söyleyiş denir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Answer with the explanation points open on screen, then try once more without them.",
+    "tr": "Önce anlatım maddeleri ekranda açıkken yanıtla, sonra onlar olmadan bir kez daha dene."
+  },
+  "minutes": 6,
+  "expertPending": true
+}

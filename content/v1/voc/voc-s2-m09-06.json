@@ -1,0 +1,96 @@
+{
+  "id": "voc-s2-m09-06",
+  "title": { "en": "Echo in your own key", "tr": "Kendi tonunda yankıla" },
+  "goal": {
+    "en": "Hears a melody played in another key and sings it back from a comfortable start note, keeping every move between notes the same size.",
+    "tr": "Başka bir tonda çalınan ezgiyi duyar ve rahat bir başlangıç notasından, notalar arasındaki her hareketi aynı büyüklükte tutarak geri söyler."
+  },
+  "explanation": [
+    {
+      "en": "A melody stays the same melody in any key. What makes it itself is the distance between its notes, not where it starts.",
+      "tr": "Bir ezgi her tonda aynı ezgidir. Onu kendisi yapan başladığı yer değil, notaları arasındaki mesafedir."
+    },
+    {
+      "en": "In this lesson the app plays each melody in a key that is not yours. Don't follow it up or down; you never have to sing where it played.",
+      "tr": "Bu derste uygulama her ezgiyi senin olmayan bir tonda çalar. Onu yukarı ya da aşağı izleme; çaldığı yerde söylemek zorunda değilsin."
+    },
+    {
+      "en": "Choose any comfortable note as your start, then keep each step and each skip the same size as you heard it.",
+      "tr": "Başlangıç olarak herhangi bir rahat notayı seç, sonra her basamağı ve her atlamayı duyduğun büyüklükte tut."
+    },
+    {
+      "en": "Your start note is not scored. Only the moves from note to note are compared with the melody.",
+      "tr": "Başlangıç notan puanlanmaz. Yalnız notadan notaya hareketler ezgiyle karşılaştırılır."
+    },
+    {
+      "en": "Before you sing, hear the first two notes in your head at your own pitch. That small move carries the rest.",
+      "tr": "Söylemeden önce ilk iki notayı kendi perdende içinden duy. O küçük hareket gerisini taşır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Four generated short melodies on degrees 1–5, soft synthesized voice, each played in a key that differs from your comfortable start note.",
+      "tr": "1–5. derecelerden üretilmiş dört kısa ezgi, yumuşak sentez ses; her biri senin rahat başlangıç notandan farklı bir tonda çalınır."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to 4 melodies. After each one, pick a comfortable start note and sing the melody back on 'la' from there. The melodies change on every attempt.",
+      "tr": "4 ezgi dinle. Her birinin ardından rahat bir başlangıç notası seç ve ezgiyi oradan 'la' ile geri söyle. Ezgiler her denemede değişir."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In each melody, at least 80% of the moves between your notes are within 40 cents of the moves you heard. The start note is free.",
+        "tr": "Her ezgide notaların arasındaki hareketlerin en az %80'i duyduğun hareketlere 40 cent ya da daha yakın. Başlangıç notası serbest."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I started on a note that felt easy, not on the note I heard.",
+      "tr": "Duyduğum notadan değil, rahat gelen bir notadan başladım."
+    },
+    {
+      "en": "My melody had the same shape and the same skips as the example.",
+      "tr": "Ezgim örnekle aynı biçimde ve aynı atlamalardaydı."
+    },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note: a skip a semitone too small.", "tr": "Farklı nota: bir atlama yarım ses küçük." },
+      "fix": {
+        "en": "Moving to a new key often shrinks skips. Fill the skip in your head with its steps, then sing it again.",
+        "tr": "Yeni bir tona geçmek atlamaları çoğu zaman küçültür. Atlamayı içinden basamaklarıyla doldur, sonra yeniden söyle."
+      }
+    },
+    {
+      "error": { "en": "Different note: the line drifts lower note by note.", "tr": "Farklı nota: dizi nota nota alçalıyor." },
+      "fix": {
+        "en": "Your first note sets your new key. Keep it in your head as an anchor and measure each move from the note before, not from memory of the example's pitch.",
+        "tr": "İlk notan yeni tonunu belirler. Onu içinden bir çapa olarak tut; her hareketi örneğin perdesini hatırlayarak değil, bir önceki notadan ölç."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Let the app give you a start note in your range for the first two melodies, then choose your own.",
+    "tr": "İlk iki ezgide başlangıç notasını menzilinden uygulama versin, sonra kendin seç."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

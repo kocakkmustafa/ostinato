@@ -1,0 +1,89 @@
+{
+  "id": "voc-s1-m01-02",
+  "title": { "en": "How you stand before you sing", "tr": "Söylemeden önce duruşun" },
+  "goal": {
+    "en": "Sets up a comfortable, supported posture and keeps it in camera view for 60 seconds.",
+    "tr": "Rahat ve desteklenmiş bir duruş kurar ve kamera önünde 60 saniye korur."
+  },
+  "explanation": [
+    {
+      "en": "Stand or sit with your weight evenly supported. Let your shoulders drop and your head rest easily; don't push it forward or lift the chin.",
+      "tr": "Ağırlığın dengeli taşınacak şekilde ayakta dur ya da otur. Omuzların düşsün, başın rahat dursun; öne itme, çeneni kaldırma."
+    },
+    {
+      "en": "Keep the knees soft, not locked. Let the jaw move freely without pushing it down. Never press or rub the throat to make a sound.",
+      "tr": "Dizlerin yumuşak kalsın, kilitleme. Çeneni aşağı itmeden serbest bırak. Ses çıkarmak için boğazına asla bastırma ya da ovma."
+    },
+    {
+      "en": "There is no single perfect shape. If trying to look right makes you stiff, go back to an ordinary comfortable stance.",
+      "tr": "Tek bir kusursuz biçim yok. Doğru görünmeye çalışmak seni kasıyorsa sıradan, rahat duruşuna dön."
+    },
+    {
+      "en": "Put the phone about two metres away at chest height, with the light in front of you. The camera sees you from the waist up and checks only how upright your upper body is; knees and chin stay on your checklist.",
+      "tr": "Telefonu yaklaşık iki metre öteye, göğüs hizasına koy; ışık önünde olsun. Kamera seni belden yukarı görür ve yalnız üst gövdenin ne kadar dik durduğuna bakar; dizler ve çene kontrol listende kalır."
+    },
+    {
+      "en": "The camera asks for permission when this lesson starts. The image is processed on your phone; it is not saved and not sent.",
+      "tr": "Kamera izni bu ders başlarken istenir. Görüntü telefonunda işlenir; kaydedilmez, gönderilmez."
+    },
+    {
+      "en": "The camera gives no score. It only shows a hint, and says \"I can't see\" when the image is not clear enough.",
+      "tr": "Kamera puan vermez. Yalnız ipucu gösterir; görüntü yeterince net değilse \"göremedim\" der."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [],
+    "brief": {
+      "en": "No reference audio; a drawing shows an easy standing posture from the side.",
+      "tr": "Referans ses yok; bir çizim rahat bir ayakta duruşu yandan gösterir."
+    }
+  },
+  "practice": {
+    "measurement": ["K"],
+    "engineSteps": ["A7"],
+    "task": {
+      "en": "Stand in view of the camera for 60 seconds with an easy posture; follow any hint. Then say “hello” at an easy speaking volume and tick the checklist.",
+      "tr": "Kameranın gördüğü yerde 60 saniye rahat bir duruşla dur; ipucu çıkarsa uygula. Sonra rahat konuşma seviyesinde “merhaba” de ve kontrol listesini işaretle."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Hold the posture in view for 60 seconds and tick the checklist. The camera only gives hints.",
+        "tr": "Duruşu 60 saniye kamera önünde koru ve kontrol listesini işaretle. Kamera yalnız ipucu verir."
+      }
+    }
+  },
+  "fallback": "camera",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "My shoulders stayed low and loose.", "tr": "Omuzlarım aşağıda ve gevşek kaldı." },
+    { "en": "My knees were soft, not locked.", "tr": "Dizlerim kilitli değil, yumuşaktı." },
+    { "en": "My head stayed level; my chin was neither lifted nor pressed down.", "tr": "Başım düz durdu; çenem ne kalktı ne aşağı bastırıldı." },
+    { "en": "I could open and close my jaw freely.", "tr": "Çenemi serbestçe açıp kapatabildim." },
+    { "en": "I could breathe and speak easily in this stance.", "tr": "Bu duruşta rahatça nefes alıp konuşabildim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Hint: upper body leaning.", "tr": "İpucu: üst gövde eğik." },
+      "fix": {
+        "en": "Let your weight settle evenly on both feet and let your head rise gently, without stiffening.",
+        "tr": "Ağırlığını iki ayağına eşit bırak ve başın kasılmadan hafifçe yukarı uzansın."
+      }
+    },
+    {
+      "error": { "en": "I can't see.", "tr": "Göremedim." },
+      "fix": {
+        "en": "Step back until your upper body fills the frame, and put the light in front of you.",
+        "tr": "Üst gövden kadrajı doldurana kadar geri çekil ve ışığı önüne al."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Without a camera, use the checklist with a mirror. If standing is tiring, sit upright on the front of a chair.",
+    "tr": "Kamera yoksa kontrol listesini aynayla kullan. Ayakta durmak yoruyorsa bir sandalyenin ön kısmına dik otur."
+  },
+  "legacy": "V: vocal-02 + voice.foundations.camera_space, voice.foundations.posture, voice.foundations.light_and_frame, voice.foundations.knees_and_chin",
+  "minutes": 8,
+  "expertPending": true
+}

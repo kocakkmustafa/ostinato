@@ -1,0 +1,131 @@
+{
+  "id": "voc-s4-m16-04",
+  "title": {
+    "en": "Minor pentatonic patterns",
+    "tr": "Minör pentatonik kalıplar"
+  },
+  "goal": {
+    "en": "Sings three minor pentatonic patterns one after another with the click at ♩=70.",
+    "tr": "Üç minör pentatonik kalıbı klikle ♩=70'te art arda söyler."
+  },
+  "explanation": [
+    {
+      "en": "A pattern is a short shape moved up or down the scale. Patterns train the ear to find each note from different directions.",
+      "tr": "Kalıp, gam boyunca yukarı ya da aşağı taşınan kısa bir şekildir. Kalıplar kulağı her notayı farklı yönlerden bulmaya alıştırır."
+    },
+    {
+      "en": "Pattern 1, groups of four going up: 1-♭3-4-1, ♭3-4-5-♭3, 4-5-♭7-4, then 5-♭7-8.",
+      "tr": "1. kalıp, yukarı giden dörtlü gruplar: 1-♭3-4-1, ♭3-4-5-♭3, 4-5-♭7-4, sonra 5-♭7-8."
+    },
+    {
+      "en": "Pattern 2, skips: 1-4-♭3-5, 4-♭7-5-8, ♭7-4-5-♭3, then 4-1.",
+      "tr": "2. kalıp, atlamalar: 1-4-♭3-5, 4-♭7-5-8, ♭7-4-5-♭3, sonra 4-1."
+    },
+    {
+      "en": "Pattern 3, groups of four going down: 8-♭7-5-4, ♭7-5-4-♭3, 5-4-♭3-1, then do.",
+      "tr": "3. kalıp, aşağı inen dörtlü gruplar: 8-♭7-5-4, ♭7-5-4-♭3, 5-4-♭3-1, sonra do."
+    },
+    {
+      "en": "Every 3 and every 7 in this lesson is flat. If you hear a major mi or a ti, sing the scale once slowly and start again.",
+      "tr": "Bu dersteki her 3 ve her 7 bemoldür. Majör mi ya da si duyarsan gamı bir kez yavaşça söyle ve yeniden başla."
+    },
+    {
+      "en": "If a note is not comfortable, skip it or sing it an octave lower. That does not count as a different note.",
+      "tr": "Bir nota rahat değilse atla ya da bir oktav aşağıda söyle. Bu farklı nota sayılmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then the three patterns in your range at ♩=70 and ♩=50.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde üç kalıp; ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in sing the three patterns one after another at ♩=70, one note per click. Each pattern is four bars. Breathe on the long note at the end of each pattern. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra üç kalıbı ♩=70'te art arda söyle, her klike bir nota. Her kalıp dört ölçüdür. Her kalıbın sonundaki uzun notada nefes al. Kendi oktavında söyle."
+    },
+    "sequence": "1-b3-4-1 | b3-4-5-b3 | 4-5-b7-4 | 5-b7-8:h | 1-4-b3-5 | 4-b7-5-8 | b7-4-5-b3 | 4-1:h. | 8-b7-5-4 | b7-5-4-b3 | 5-4-b3-1 | 1:h hr",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each pattern kept the same shape as it moved.",
+      "tr": "Her kalıp taşınırken aynı şekli korudu."
+    },
+    {
+      "en": "Every 3 stayed flat.",
+      "tr": "Her 3 bemol kaldı."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭3 a semitone high.",
+        "tr": "Farklı nota: ♭3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "The major mi crept in. Hear do, then go up a minor third, like the first two notes of the reference.",
+        "tr": "Majör mi araya girmiş. Do'yu duy, sonra referanstaki ilk iki nota gibi küçük üçlü çık."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "Keep the syllables short and move on the click; don't wait for the note to settle.",
+        "tr": "Heceleri kısa tut ve klikte geç; notanın oturmasını bekleme."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing one pattern at a time at ♩=60, then join them.",
+    "tr": "Kalıpları ♩=60'ta tek tek söyle, sonra birleştir."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

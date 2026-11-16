@@ -1,0 +1,94 @@
+{
+  "id": "voc-s3-m13-02",
+  "title": { "en": "Steps on the staff", "tr": "Portede basamaklar" },
+  "goal": {
+    "en": "Sings an original four-bar stepwise line in C major from the staff, in their own octave.",
+    "tr": "Do majörde basamakla ilerleyen özgün dört ölçülük satırı porteden kendi oktavında söyler."
+  },
+  "explanation": [
+    {
+      "en": "A step is the next note up or down. On the staff it goes from a line to the next space, or from a space to the next line.",
+      "tr": "Basamak, bir üstteki ya da alttaki notadır. Portede bir çizgiden sonraki aralığa ya da bir aralıktan sonraki çizgiye gider."
+    },
+    {
+      "en": "Higher on the staff means higher in pitch. Before you sing, follow the line with your eyes: up, down or the same.",
+      "tr": "Portede yukarısı perdede de yukarıdır. Söylemeden önce satırı gözünle izle: yukarı mı, aşağı mı, aynı mı."
+    },
+    {
+      "en": "Bar 1 climbs from do to fa. Bar 2 holds sol for two beats, then steps down fa, mi. Bar 3 turns around fa: fa, mi, re, mi. Bar 4 ends re to do.",
+      "tr": "1. ölçü do'dan fa'ya çıkar. 2. ölçü sol'ü iki vuruş tutar, sonra fa, mi diye iner. 3. ölçü fa çevresinde döner: fa, mi, re, mi. 4. ölçü re'den do'ya biter."
+    },
+    {
+      "en": "Mi to fa is the small step (a half step). Keep it close; the other steps here are whole steps.",
+      "tr": "Mi ile fa arası küçük basamaktır (yarım ses). Onu dar tut; buradaki öteki basamaklar tam sestir."
+    },
+    {
+      "en": "Find do first, then sing the line once without hearing it. The line plays after your try so you can compare.",
+      "tr": "Önce do'yu bul, sonra satırı duymadan bir kez söyle. Satır, karşılaştırabilmen için denemenden sonra çalar."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do and the tonic chord in your comfortable range; the line itself plays only after your try, for comparison, at an easy pace and slowly.",
+      "tr": "Rahat menzilinde do ve tonik akor; satırın kendisi yalnız denemenden sonra, karşılaştırma için, rahat hızda ve yavaş çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Hear do, then sing the four bars from the staff on solfège or numbers, at your own pace. Only pitch is measured here. Sing in your own octave.",
+      "tr": "Do'yu dinle, sonra dört ölçüyü porteden solfejle ya da derecelerle, kendi hızında söyle. Burada yalnız perde ölçülür. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5:h 4:q 3:q | 4-3-2-3 | 2:h 1:h",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    { "en": "Fa to mi on the way down stayed small.", "tr": "İnerken fa'dan mi'ye adım küçük kaldı." },
+    {
+      "en": "My line matched the comparison afterwards.",
+      "tr": "Satırım sonradan çalınan karşılaştırmayla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note on fa, a little high.",
+        "tr": "Fa'da farklı nota, biraz yüksek."
+      },
+      "fix": {
+        "en": "Mi to fa is a half step. Sing mi, then lean just a little higher for fa.",
+        "tr": "Mi'den fa'ya yarım sestir. Mi'yi söyle, sonra fa için yalnızca biraz yüksel."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note from bar 3 on, one step off.",
+        "tr": "Farklı nota: 3. ölçüden itibaren bir basamak kaymış."
+      },
+      "fix": {
+        "en": "Before bar 3, check where it starts: fa, one step below the sol you just held.",
+        "tr": "3. ölçüden önce nereden başladığına bak: az önce tuttuğun sol'ün bir basamak altı, fa."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing one bar at a time and return to do between bars.",
+    "tr": "Her seferinde bir ölçü söyle ve ölçüler arasında do'ya dön."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

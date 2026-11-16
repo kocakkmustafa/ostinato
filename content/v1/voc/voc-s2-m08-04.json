@@ -1,0 +1,97 @@
+{
+  "id": "voc-s2-m08-04",
+  "title": { "en": "Volume without pitch drift", "tr": "Perde kaymadan gürlük" },
+  "goal": {
+    "en": "Sings do, mi and sol, each going p→f→p, while every note stays within 40 cents.",
+    "tr": "Do, mi ve sol'ü her birinde p→f→p yaparak söyler; her nota 40 cent içinde kalır."
+  },
+  "explanation": [
+    {
+      "en": "When the voice grows louder, the pitch often creeps up. When it fades, the pitch often sinks. This lesson trains you to keep the note still.",
+      "tr": "Ses gürleştikçe perde çoğu zaman yukarı süzülür. Söndükçe çoğu zaman düşer. Bu ders notayı yerinde tutmayı çalıştırır."
+    },
+    {
+      "en": "Each note is one swell: start p, grow to your easy f by the middle, and return to p. Four counts per note.",
+      "tr": "Her nota tek bir şişirmedir: p başla, ortaya kadar rahat f'ine büyü ve p'ye dön. Her nota dört sayım."
+    },
+    {
+      "en": "Hear the note in your head before you start, and keep hearing it while the volume moves.",
+      "tr": "Başlamadan önce notayı içinden duy ve gürlük değişirken duymaya devam et."
+    },
+    {
+      "en": "The higher notes do not need more volume. Your f on sol is the same easy f as on do.",
+      "tr": "Yüksek notalar daha fazla gürlük istemez. Sol'deki f'in, do'daki gibi aynı rahat f'tir."
+    },
+    {
+      "en": "Breathe in the rest bar after each note. If a note is not comfortable, change octave or skip it.",
+      "tr": "Her notadan sonraki sus ölçüsünde nefes al. Bir nota rahat değilse oktav değiştir ya da atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do, mi and sol from your comfortable range, each a four-count p→f→p swell on “oo” with a steady pitch, then a rest bar.",
+      "tr": "Rahat menzilinden do, mi ve sol; her biri “u” ile dört sayımlık, perdesi sabit bir p→f→p şişirme, ardından bir sus ölçüsü."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "On “oo”, sing do for four counts going p→f→p, then rest a bar. Do the same on mi and on sol. Sing in your own octave.",
+      "tr": "“U” ile do'yu dört sayım p→f→p söyle, sonra bir ölçü dinlen. Aynısını mi ve sol'de yap. Kendi oktavında söyle."
+    },
+    "sequence": "1:w | wr | 3:w | wr | 5:w | wr",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "On all 3 notes, the pitch stays within 40 cents through the whole swell, and the middle is at least 5 dB louder than the ends.",
+        "tr": "3 notanın üçünde de perde şişirme boyunca 40 cent içinde kalır ve orta kısım uçlardan en az 5 dB daha gürdür."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The pitch line stayed flat while the volume moved.", "tr": "Gürlük değişirken perde çizgisi düz kaldı." },
+    { "en": "My f on sol was as easy as on do.", "tr": "Sol'deki f'im do'daki kadar rahattı." },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: sharp at the loudest point.",
+        "tr": "Farklı nota: en gür noktada tiz."
+      },
+      "fix": {
+        "en": "Grow less. Let the swell reach only halfway to your f until the pitch line stays flat.",
+        "tr": "Daha az büyü. Perde çizgisi düz kalana kadar şişirme f'inin yalnız yarısına çıksın."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: flat at the soft end.",
+        "tr": "Farklı nota: hafif bitişte pes."
+      },
+      "fix": {
+        "en": "Keep the vowel bright and the note in your head as you fade. End while the tone is still clear.",
+        "tr": "Söndürürken ünlüyü parlak, notayı aklında tut. Ses hâlâ netken bitir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Your p is too close to a whisper. Start the swell with a clear, soft tone.",
+        "tr": "p'in fısıltıya çok yakın. Şişirmeye net ve hafif bir sesle başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only do and mi, and make the swell smaller.",
+    "tr": "Yalnız do ve mi'yi kullan ve şişirmeyi küçült."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

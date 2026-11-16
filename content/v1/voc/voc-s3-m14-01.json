@@ -1,0 +1,99 @@
+{
+  "id": "voc-s3-m14-01",
+  "title": { "en": "The legato line", "tr": "Bağlı çizgi" },
+  "goal": {
+    "en": "Sings 1-2-3-4-5-4-3-2-1 on one vowel with no gap in the sound between notes.",
+    "tr": "1-2-3-4-5-4-3-2-1'i tek ünlüyle, notalar arasında seste boşluk bırakmadan söyler."
+  },
+  "explanation": [
+    {
+      "en": "Legato means connected. Each note flows into the next, with no silence and no new start in between.",
+      "tr": "Legato bağlı demektir. Her nota bir sonrakine akar; arada sessizlik ya da yeni bir başlangıç yoktur."
+    },
+    {
+      "en": "Keep the air moving the whole time. Change the note, not the breath.",
+      "tr": "Havayı baştan sona akışta tut. Notayı değiştir, nefesi değil."
+    },
+    {
+      "en": "Do not add an 'h' or a small push at each new note. Only the pitch moves; the vowel and the energy stay the same.",
+      "tr": "Her yeni notaya bir 'h' ya da küçük bir itiş ekleme. Yalnız perde hareket eder; ünlü ve enerji aynı kalır."
+    },
+    {
+      "en": "Connected does not mean sliding. Move to the next note quickly and land right on it.",
+      "tr": "Bağlı, kaydırmak demek değildir. Sonraki notaya çabuk geç ve tam üstüne otur."
+    },
+    {
+      "en": "On screen a curved line (slur) over the notes marks legato. The microphone checks that the sound never drops away between notes.",
+      "tr": "Ekranda notaların üstündeki eğri çizgi (bağ) legatoyu gösterir. Mikrofon, notalar arasında sesin hiç düşüp kesilmediğini kontrol eder."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "1-2-3-4-5-4-3-2-1 in your comfortable range on 'ah' and 'oo', soft synthesized voice, two counts per note, fully connected.",
+      "tr": "1-2-3-4-5-4-3-2-1 rahat menzilinde 'a' ve 'u' ile, yumuşak sentez ses, nota başına iki sayım, tamamen bağlı."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Take one easy breath, then sing 1-2-3-4-5-4-3-2-1 on 'ah' or 'oo', two counts per note and four on the last 1, all in one breath. Keep the sound going from the first note to the last. Sing in your own octave.",
+      "tr": "Rahat bir nefes al, sonra 1-2-3-4-5-4-3-2-1'i 'a' ya da 'u' ile, nota başına iki sayım, son 1'de dört sayım, tek nefeste söyle. Sesi ilk notadan son notaya kadar sürdür. Kendi oktavında söyle."
+    },
+    "sequence": "1:h 2:h | 3:h 4:h | 5:h 4:h | 3:h 2:h | 1:w",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "The sound never drops into silence between notes, and Level 3 pitch accuracy on every note.",
+        "tr": "Notalar arasında ses hiç sessizliğe düşmez ve her notada Seviye 3 perde ölçütü sağlanır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V4"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "There was no gap or new start between the notes.",
+      "tr": "Notalar arasında boşluk ya da yeni bir başlangıç yoktu."
+    },
+    {
+      "en": "The vowel stayed the same from the first note to the last.",
+      "tr": "Ünlü ilk notadan son notaya kadar aynı kaldı."
+    },
+    {
+      "en": "I moved to each new note cleanly, without sliding.",
+      "tr": "Her yeni notaya kaydırmadan, temiz geçtim."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the sound drops between notes.",
+        "tr": "Doğru, ama ses notalar arasında düşüyor."
+      },
+      "fix": {
+        "en": "Keep the air flowing as you change note. Sing the line once on a hum, then open to the vowel.",
+        "tr": "Nota değiştirirken havayı akışta tut. Diziyi bir kez mırıldanarak söyle, sonra ünlüye aç."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note at the start, then it slides into place.",
+        "tr": "Başta farklı nota, sonra kayarak yerine oturuyor."
+      },
+      "fix": {
+        "en": "Hear the next note in your head before you move, then change to it quickly.",
+        "tr": "Geçmeden önce sonraki notayı kafanda duy, sonra ona çabuk geç."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-2-3-2-1 first, and take a breath in the middle if you need one.",
+    "tr": "Önce 1-2-3-2-1'i söyle; gerekirse ortada nefes al."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

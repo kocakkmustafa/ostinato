@@ -1,0 +1,126 @@
+{
+  "id": "voc-s3-m12-08",
+  "title": {
+    "en": "An original minor melody",
+    "tr": "Özgün minör ezgi"
+  },
+  "goal": {
+    "en": "Sings an original 8-bar minor melody in tune and on time at ♩=70.",
+    "tr": "Özgün 8 ölçülük minör ezgiyi ♩=70'te doğru perdede ve zamanında söyler."
+  },
+  "explanation": [
+    {
+      "en": "This original melody is in natural minor. It uses 1, 2, ♭3, 4, 5, ♭6 and the low ♭7.",
+      "tr": "Bu özgün ezgi doğal minördedir. 1, 2, ♭3, 4, 5, ♭6 ve alttaki ♭7'yi kullanır."
+    },
+    {
+      "en": "Bars 1–2 outline the minor triad, then step down home with two eighths: ♭3-2, then 1.",
+      "tr": "1–2. ölçüler minör üçlüyü çizer, sonra iki sekizlikle eve iner: ♭3-2, sonra 1."
+    },
+    {
+      "en": "Bars 3–4 climb to ♭6 and hold 5 for three beats. Keep ♭6 close to 5; it leans back down.",
+      "tr": "3–4. ölçüler ♭6'ya çıkar ve 5'i üç vuruş tutar. ♭6'yı 5'e yakın tut; geri aşağıya yaslanır."
+    },
+    {
+      "en": "Bars 5–6 come down to 2 and climb back to 5 with two eighths. Bar 7 steps down to low ♭7, a whole step below 1; the last bar holds 1.",
+      "tr": "5–6. ölçüler 2'ye iner ve iki sekizlikle yeniden 5'e çıkar. 7. ölçü alttaki ♭7'ye, 1'in bir tam ses altına iner; son ölçü 1'i tutar."
+    },
+    {
+      "en": "Breathe at the end of bar 4. The app picks 1 from your comfortable range.",
+      "tr": "4. ölçünün sonunda nefes al. Uygulama 1'i rahat menzilinden seçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The original melody in your comfortable range, soft synthesized voice, at ♩=70 and ♩=50, over an original soft minor chord accompaniment (i, iv, v) with a click. Headphones recommended.",
+      "tr": "Özgün ezgi rahat menzilinde, yumuşak sentez ses, ♩=70 ve ♩=50; özgün yumuşak minör akor eşliği (i, iv, v) ve klikle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the eight bars on “la” at ♩=70. Start at ♩=50 if you like; the lesson counts at ♩=70. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşliğin bir ölçüsünü dinle, sonra sekiz ölçüyü “la” ile ♩=70'te söyle. İstersen ♩=50'de başla; ders ♩=70'te sayılır. Kendi oktavında söyle. Eşlik mikrofona karışmasın diye kulaklık kullan."
+    },
+    "sequence": "1:q b3:q 5:q b3:q | 4:q b3:e 2:e 1:h | b3:q 4:q 5:q b6:q | 5:h. qr | b6:q 5:q 4:q b3:q | 2:q b3:e 4:e 5:h | 4:q b3:q 2:q b7,:q | 1:w",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "♭3 and ♭6 kept their darker colour.",
+      "tr": "♭3 ve ♭6 koyu renklerini korudu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "The eighths in bars 2 and 6 stayed even.",
+      "tr": "2. ve 6. ölçülerdeki sekizlikler eşit kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭6 a semitone high.",
+        "tr": "Farklı nota: ♭6 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "Keep ♭6 just a half step above 5, and let it lean back down.",
+        "tr": "♭6'yı 5'in yalnız yarım ses üstünde tut ve geri aşağıya yaslanmasına izin ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late on the eighths.",
+        "tr": "Doğru, ama sekizliklerde geç."
+      },
+      "fix": {
+        "en": "Two eighths share one click. Sing the first right on the click.",
+        "tr": "İki sekizlik bir kliki paylaşır. İlkini tam klikte söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing bars 1–4 alone at ♩=50, then bars 5–8, then all eight.",
+    "tr": "♩=50'de önce yalnız 1–4. ölçüleri, sonra 5–8. ölçüleri, sonra sekizini birden söyle."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

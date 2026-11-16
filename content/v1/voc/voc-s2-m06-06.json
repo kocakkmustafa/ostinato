@@ -1,0 +1,103 @@
+{
+  "id": "voc-s2-m06-06",
+  "title": {
+    "en": "The octave",
+    "tr": "Oktav"
+  },
+  "goal": {
+    "en": "Sings an octave up and down within a comfortable range.",
+    "tr": "Oktavı rahat menzilde çıkıcı ve inici söyler."
+  },
+  "explanation": [
+    {
+      "en": "An octave (P8) spans eight degrees: do to the top do.",
+      "tr": "Oktav (T8) sekiz dereceye uzanır: do'dan üst do'ya."
+    },
+    {
+      "en": "For P8, the top note is the same note again, higher. Aim for “the same, but higher”.",
+      "tr": "T8'de üstteki nota yine aynı notadır, yalnız daha yüksek. “Aynısı, ama yukarıda” hissini hedefle."
+    },
+    {
+      "en": "The app starts low in your range so the top note stays easy. If it is not comfortable, sing the interval downward or skip the task.",
+      "tr": "Uygulama üst nota rahat kalsın diye menzilinin alt tarafından başlar. Rahat değilse aralığı aşağı doğru söyle ya da görevi atla."
+    },
+    {
+      "en": "Keep the top note light. A wide leap needs space, not force.",
+      "tr": "Üst notayı hafif tut. Geniş atlama güç değil, alan ister."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Starting note low in your range; each pair plays once before you sing and once after for comparison.",
+      "tr": "Rahat menzilinin alt tarafında başlangıç notası; her çift söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Four intervals: do to the top do, top do to do, re to the top re, top re to re. Sing only where it feels easy. If a top note is not comfortable, sing that pair downward or skip it.",
+      "tr": "Dört aralık: do'dan üst do'ya, üst do'dan do'ya, re'den üst re'ye, üst re'den re'ye. Yalnız rahat olduğu yerde söyle. Bir üst nota rahat değilse o çifti aşağı doğru söyle ya da atla."
+    },
+    "sequence": "1:q 1':h qr | 1':q 1:h qr | 2:q 2':h qr | 2':q 2:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The top notes felt easy, without pushing.",
+      "tr": "Üst notalar zorlamadan, rahat geldi."
+    },
+    {
+      "en": "For P8 the top note felt like the same note.",
+      "tr": "T8'de üst nota aynı nota gibi geldi."
+    },
+    {
+      "en": "My top note was clearly higher, not the starting note again.",
+      "tr": "Üst notam başlangıç notasının tekrarı değil, belirgin biçimde yüksekti."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, P8 a semitone low.",
+        "tr": "Farklı nota: T8 yarım ses alçak."
+      },
+      "fix": {
+        "en": "You landed on ti. Go a half step higher, until it feels like the starting note again.",
+        "tr": "Si'ye konmuşsun. Başlangıç notasıyla aynı hissi verene kadar yarım ses daha çık."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Don't push the top note louder; sing it lightly and hold it a little longer.",
+        "tr": "Üst notayı yüksek sesle zorlama; hafifçe söyle ve biraz daha uzun tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the octave downward: start on the top do and drop to the lower one.",
+    "tr": "Oktavı aşağı doğru söyle: üst do'dan başla, alttakine in."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

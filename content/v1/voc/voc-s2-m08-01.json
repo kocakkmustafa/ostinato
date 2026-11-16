@@ -1,0 +1,103 @@
+{
+  "id": "voc-s2-m08-01",
+  "title": { "en": "Expression at a comfortable volume", "tr": "Rahat seviyede ifade" },
+  "goal": {
+    "en": "Sings an original two-bar line twice, the second time giving the stressed word at least 3 dB more than the rest, at a comfortable volume.",
+    "tr": "Özgün iki ölçülük diziyi iki kez söyler; ikincisinde vurgulu sözcüğü rahat seviyede, dizinin kalanından en az 3 dB fazla verir."
+  },
+  "explanation": [
+    {
+      "en": "Expression comes from what you mean and from timing, not only from loudness. A small lift on one word is enough to change the message.",
+      "tr": "İfade yalnız gürlükten değil, ne demek istediğinden ve zamanlamadan da gelir. Tek bir sözcükteki küçük bir kalkış mesajı değiştirmeye yeter."
+    },
+    {
+      "en": "The line is “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Sing it once neutral, then once as if you are sharing good news.",
+      "tr": "Dizi “YENİ bir gün başlıyor” (sol-mi-fa-re, mi-re-do). Bir kez nötr söyle, sonra güzel bir haber paylaşır gibi bir kez daha söyle."
+    },
+    {
+      "en": "The stressed word is not the highest note. Stress comes from meaning, so the lift goes where the meaning is.",
+      "tr": "Vurgulu sözcük en yüksek nota değildir. Vurgu anlamdan gelir; kalkış anlamın olduğu yere gider."
+    },
+    {
+      "en": "Keep the same contour and an easy volume in both rounds. Don't shout or whisper to make the contrast.",
+      "tr": "İki turda da aynı çizgiyi ve rahat bir gürlüğü koru. Karşıtlık için bağırma ya da fısıldama."
+    },
+    {
+      "en": "The microphone compares loudness within the line only. There is no absolute volume target and no score for emotion or voice quality.",
+      "tr": "Mikrofon yalnız dizinin içindeki gürlükleri karşılaştırır. Mutlak bir ses düzeyi hedefi, duygu ya da ses kalitesi puanı yoktur."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The two-bar line in your comfortable range, soft synthesized voice: once even, once with a gentle lift on the stressed word.",
+      "tr": "İki ölçülük dizi rahat menzilinde, yumuşak sentez ses: bir kez düz, bir kez vurgulu sözcükte hafif bir kalkışla."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3"],
+    "task": {
+      "en": "Sing “A new day is beginning” at an easy volume, all words even. Rest one bar. Then sing it again and lift the word “new” a little. Sing in your own octave.",
+      "tr": "“Yeni bir gün başlıyor”u rahat bir gürlükte, bütün sözcükler eşit olarak söyle. Bir ölçü dinlen. Sonra yeniden söyle ve “yeni” sözcüğünü biraz kaldır. Kendi oktavında söyle."
+    },
+    "sequence": "5-3-4-2 | 3-2-1:h | wr | 5-3-4-2 | 3-2-1:h",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In the second round, the stressed word is at least 3 dB louder than the rest of the line. Loudness is compared within your own line only.",
+        "tr": "İkinci turda vurgulu sözcük dizinin kalanından en az 3 dB daha gür. Gürlük yalnız kendi dizin içinde karşılaştırılır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The second round sounded different in meaning, not just louder.",
+      "tr": "İkinci tur yalnız daha gür değil, anlamca farklı duyuldu."
+    },
+    {
+      "en": "I kept the same contour in both rounds.",
+      "tr": "İki turda da aynı çizgiyi korudum."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the stressed word is less than 3 dB above the rest.",
+        "tr": "Doğru, ama vurgulu sözcük kalanından 3 dB'den az yüksek."
+      },
+      "fix": {
+        "en": "Keep the other words easy and a little lighter, and lean into “new” as if you mean it.",
+        "tr": "Diğer sözcükleri rahat ve biraz daha hafif tut; “yeni”ye gerçekten öyle demek istiyormuş gibi yüklen."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but the whole line got louder.",
+        "tr": "Doğru, ama bütün dizi gürleşti."
+      },
+      "fix": {
+        "en": "Only one word changes. Sing the first round again, then copy it exactly except for “new”.",
+        "tr": "Yalnız bir sözcük değişir. İlk turu yeniden söyle, sonra “yeni” dışında onu aynen tekrarla."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone instead of louder; a whispered line is hard to read.",
+        "tr": "Daha gür değil, telefona biraz daha yakın söyle; fısıltılı bir dizi zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Speak the line in rhythm at a normal easy volume first, with the lift on “new”, then sing it.",
+    "tr": "Diziyi önce normal rahat bir sesle ritimli konuş, “yeni”de kalkış yap, sonra söyle."
+  },
+  "legacy": "R: vocal-12",
+  "minutes": 8,
+  "expertPending": true
+}

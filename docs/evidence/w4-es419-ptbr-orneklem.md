@@ -1,0 +1,154 @@
+# W4 ses (voc) es-419 + pt-BR örneklem
+
+Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭♯) taraması 0 gerçek sorun (20 işaretli kayıt elle incelendi: yazıyla yazılmış sayılar "dos/dois", "<"/">" crescendo işareti); yasak sözcük (vaat/tedavi/garanti/hüküm) taraması 0.
+
+- `4a3a298e8e6df531`
+  - EN: Sing the study at ♩=56 with all notes connected first, then add the dots and accents.
+  - TR: Önce etüdü ♩=56'da bütün notalar bağlı söyle, sonra noktaları ve vurguları ekle.
+  - es-419: Canta primero el estudio a ♩=56 con todas las notas ligadas y luego agrega los puntos y los acentos.
+  - pt-BR: Cante primeiro o estudo a ♩=56 com todas as notas ligadas e depois acrescente os pontos e os acentos.
+- `4bb61dc35ac8d826`
+  - EN: Single notes from your comfortable range for parts 1 and 3; click at ♩=70 for the scale; an original soft chord accompaniment with click for the melody. Headphones recommended.
+  - TR: 1. ve 3. bölümler için rahat menzilinden tek notalar; gam için ♩=70'te klik; ezgi için klikli özgün yumuşak akor eşliği. Kulaklık önerilir.
+  - es-419: Notas sueltas de tu registro cómodo para las partes 1 y 3; clic a ♩=70 para la escala; un acompañamiento original suave de acordes con clic para la melodía. Se recomiendan audífonos.
+  - pt-BR: Notas soltas da sua extensão confortável para as partes 1 e 3; clique a ♩=70 para a escala; um acompanhamento original suave de acordes com clique para a melodia. Recomendam-se fones de ouvido.
+- `ccd11b8badc4fb9c`
+  - EN: Keep the energy to the last note. Sing the phrase at ♩=42 and think 'up' on the final note.
+  - TR: Enerjiyi son notaya kadar koru. Cümleyi ♩=42'de söyle ve son notada 'yukarı' diye düşün.
+  - es-419: Mantén la energía hasta la última nota. Canta la frase a ♩=42 y piensa 'arriba' en la nota final.
+  - pt-BR: Mantenha a energia até a última nota. Cante a frase a ♩=42 e pense 'para cima' na nota final.
+- `868a04a6b27a1a4e`
+  - EN: The melody starts with one pickup note, 1, before bar 1. Bars 1–8 are the verse; bars 9–16 are the refrain, which starts high on ♭7.
+  - TR: Ezgi 1. ölçüden önce tek bir öncü notayla, 1 ile başlar. 1–8. ölçüler kıta, 9–16. ölçüler nakarattır; nakarat yukarıda ♭7 ile başlar.
+  - es-419: La melodía empieza con una nota de anacrusa, 1, antes del compás 1. Los compases 1–8 son la estrofa; los compases 9–16 son el estribillo, que empieza agudo en ♭7.
+  - pt-BR: A melodia começa com uma nota de anacruse, 1, antes do compasso 1. Os compassos 1–8 são a estrofe; os compassos 9–16 são o refrão, que começa agudo em ♭7.
+- `7155319242ba0523`
+  - EN: Same task as before, with a tighter target: within 35 cents instead of 50.
+  - TR: Görev aynı, hedef daha dar: 50 yerine 35 cent içi.
+  - es-419: La misma tarea de antes, con un objetivo más estrecho: dentro de 35 cents en lugar de 50.
+  - pt-BR: A mesma tarefa de antes, com um alvo mais estreito: dentro de 35 cents em vez de 50.
+- `a1514a2c24d56990`
+  - EN: Coming down, the same notes return in reverse. Keep the bottom do on the pitch you started on.
+  - TR: İnerken aynı notalar ters sırayla döner. Alttaki do'yu başladığın perdede tut.
+  - es-419: Al bajar, las mismas notas regresan en orden inverso. Mantén el do grave en la altura en que empezaste.
+  - pt-BR: Na descida, as mesmas notas voltam em ordem inversa. Mantenha o dó grave na altura em que você começou.
+- `d0b418830c9e788b`
+  - EN: The melodies use do to sol, with quarters, halves and pairs of eighths. Each one ends on a longer note.
+  - TR: Ezgiler do ile sol arasını kullanır; dörtlükler, ikilikler ve ikili sekizliklerle. Her biri daha uzun bir notayla biter.
+  - es-419: Las melodías usan de do a sol, con negras, blancas y pares de corcheas. Cada una termina en una nota más larga.
+  - pt-BR: As melodias usam de dó a sol, com semínimas, mínimas e pares de colcheias. Cada uma termina em uma nota mais longa.
+- `6ca8f0a47230a9e0`
+  - EN: Different answer: “forcing” chosen for skipping a tight note.
+  - TR: Farklı cevap: sıkışan bir notayı atlamaya “zorlama” denildi.
+  - es-419: Respuesta distinta: se eligió “forzar” para saltarse una nota tensa.
+  - pt-BR: Resposta diferente: “forçar” foi escolhido para pular uma nota tensa.
+- `ba065d1d3b46b9a8`
+  - EN: Some questions play a triad, others the first five notes of a scale. In a scale, listen to the step from 2 to 3: a whole step in major, a half step in minor.
+  - TR: Bazı sorular bir üçlü, bazıları bir gamın ilk beş notasını çalar. Gamda 2'den 3'e adımı dinle: majörde tam ses, minörde yarım ses.
+  - es-419: Algunas preguntas tocan una tríada, otras las primeras cinco notas de una escala. En una escala, escucha el paso de 2 a 3: un tono entero en mayor, un semitono en menor.
+  - pt-BR: Algumas perguntas tocam uma tríade, outras as cinco primeiras notas de uma escala. Em uma escala, ouça o passo de 2 para 3: um tom inteiro no maior, um semitom no menor.
+- `0629b47b0532dfeb`
+  - EN: Six intervals over the drone: do-sol, sol-do, re-la, la-re, low sol to re, re to low sol. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.
+  - TR: Dron üzerinde altı aralık: do-sol, sol-do, re-la, la-re, alttaki sol'den re'ye, re'den alttaki sol'e. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle.
+  - es-419: Seis intervalos sobre el bordón: do-sol, sol-do, re-la, la-re, sol grave a re, re a sol grave. Canta la primera nota corta y sostén la segunda. La app elige do dentro de tu rango vocal cómodo. Canta en tu propia octava.
+  - pt-BR: Seis intervalos sobre o bordão: dó-sol, sol-dó, ré-lá, lá-ré, sol grave até ré, ré até sol grave. Cante a primeira nota curta e sustente a segunda. O app escolhe o dó dentro da sua extensão vocal confortável. Cante na sua própria oitava.
+- `a1c160e2aa5be05b`
+  - EN: Sings the five-note run in eighth notes on one 'ah', evenly and in tune with the click at ♩=70.
+  - TR: Beş notalık koşuyu tek 'a' ile sekizliklerle, klikle ♩=70'te eşit ve doğru perdede söyler.
+  - es-419: Canta la secuencia de cinco notas en corcheas sobre una sola 'a', pareja y afinada con el clic a ♩=70.
+  - pt-BR: Canta a sequência de cinco notas em colcheias em um único 'a', de forma uniforme e afinada com o clique a ♩=70.
+- `4380b2010c6f2e9b`
+  - EN: The major triad: do-mi-sol
+  - TR: Majör üçlü: do-mi-sol
+  - es-419: La tríada mayor: do-mi-sol
+  - pt-BR: A tríade maior: dó-mi-sol
+- `dc5f880fec005d17`
+  - EN: This checkpoint brings the module together: thirds, sixths, a held note, contrary motion and fifths, in one sixteen-bar study.
+  - TR: Bu geçiş modülü birleştirir: üçlüler, altılılar, tutulan nota, zıt hareket ve beşliler, on altı ölçülük tek bir etütte.
+  - es-419: Este punto de control reúne el módulo: terceras, sextas, una nota sostenida, movimiento contrario y quintas, en un solo estudio de dieciséis compases.
+  - pt-BR: Esta verificação reúne o módulo: terças, sextas, uma nota sustentada, movimento contrário e quintas, em um único estudo de dezesseis compassos.
+- `02f578259cca24ac`
+  - EN: One-bar click count-in, then the scale 1→9→1 in your range at ♩=70 and ♩=50.
+  - TR: Bir ölçülük klik girişi, ardından rahat menzilinde 1→9→1 gamı; ♩=70 ve ♩=50.
+  - es-419: Cuenta previa de un compás con clic y luego la escala 1→9→1 en tu rango vocal a ♩=70 y ♩=50.
+  - pt-BR: Contagem inicial de um compasso com clique e depois a escala 1→9→1 na sua extensão vocal a ♩=70 e ♩=50.
+- `f521ec00d055e8d2`
+  - EN: If you move too early, the note is sung on 'ee' or 'oo' and the word loses its colour. If you never move, the word is not clear.
+  - TR: Çok erken geçersen nota 'i' ya da 'u' üstünde söylenir ve kelime rengini kaybeder. Hiç geçmezsen kelime anlaşılmaz.
+  - es-419: Si cambias demasiado pronto, la nota se canta en 'i' o 'u' y la palabra pierde su color. Si nunca cambias, la palabra no se entiende.
+  - pt-BR: Se você mudar cedo demais, a nota é cantada em 'i' ou 'u' e a palavra perde a cor. Se nunca mudar, a palavra não fica clara.
+- `a79e7a6ad1bdce03`
+  - EN: Start your answer on the first beat after the call. Choose your first note while the call plays.
+  - TR: Cevabına sorudan sonraki ilk vuruşta başla. İlk notanı soru çalarken seç.
+  - es-419: Empieza tu respuesta en el primer pulso después de la pregunta. Elige tu primera nota mientras suena la pregunta.
+  - pt-BR: Comece sua resposta no primeiro tempo depois da chamada. Escolha sua primeira nota enquanto a chamada toca.
+- `a0a58c17a0ccca4d`
+  - EN: Tells pitch from loudness and moves a hum up or down without getting louder.
+  - TR: Perdeyi gürlükten ayırır; mırıldanmayı gürleşmeden yukarı ya da aşağı götürür.
+  - es-419: Distingue la altura del volumen y sube o baja un tarareo sin hacerse más fuerte.
+  - pt-BR: Distingue a altura do volume e leva um cantarolar para cima ou para baixo sem ficar mais forte.
+- `caa40b5b412e9849`
+  - EN: Keep the top note light. A wide leap needs space, not force.
+  - TR: Üst notayı hafif tut. Geniş atlama güç değil, alan ister.
+  - es-419: Mantén la nota aguda ligera. Un salto amplio necesita espacio, no fuerza.
+  - pt-BR: Mantenha a nota aguda leve. Um salto largo precisa de espaço, não de força.
+- `b9f10381712ff4bf`
+  - EN: A third is two scale steps apart, like do and mi. Thirds are the most common harmony in songs.
+  - TR: Üçlü, dizide iki basamak uzaklıktır; do ile mi gibi. Şarkılarda en sık kullanılan armonidir.
+  - es-419: Una tercera está a dos pasos de escala, como do y mi. Las terceras son la armonía más común en las canciones.
+  - pt-BR: Uma terça fica a dois passos de escala, como dó e mi. As terças são a harmonia mais comum nas canções.
+- `7a207a47c8c0afda`
+  - EN: Soft notes tend to sink. Hear the note clearly in your head and keep the vowel bright.
+  - TR: Hafif notalar düşmeye meyillidir. Notayı içinden net duy ve ünlüyü parlak tut.
+  - es-419: Las notas suaves tienden a bajar. Escucha bien la nota en tu cabeza y mantén la vocal brillante.
+  - pt-BR: Notas suaves tendem a cair. Ouça bem a nota na cabeça e mantenha a vogal brilhante.
+- `a0a7d2ed2d386c77`
+  - EN: Breathe in the way you normally do. Don't gulp in as much air as you can.
+  - TR: Normalde nasıl nefes alıyorsan öyle al. Alabildiğin kadar çok hava yutma.
+  - es-419: Respira como lo haces normalmente. No tragues todo el aire que puedas.
+  - pt-BR: Respire como normalmente faz. Não engula todo o ar que conseguir.
+- `54b46772e3e06fff`
+  - EN: Start with a lip trill on 1-3-5-3-1. The trill keeps the air steady while the pitch moves.
+  - TR: 1-3-5-3-1 üzerinde dudak titreşimiyle başla. Titreşim perde hareket ederken havayı sabit tutar.
+  - es-419: Empieza con una vibración de labios sobre 1-3-5-3-1. La vibración mantiene el aire estable mientras la altura se mueve.
+  - pt-BR: Comece com uma vibração de lábios sobre 1-3-5-3-1. A vibração mantém o ar estável enquanto a altura se move.
+- `b669c4167a5bf2ac`
+  - EN: Different note, ♭2 a semitone high.
+  - TR: Farklı nota: ♭2 yarım ses yüksek.
+  - es-419: Nota diferente: ♭2 un semitono alto.
+  - pt-BR: Nota diferente: ♭2 um semitom alto.
+- `a7880268e7d879b8`
+  - EN: The notes inside each phrase stayed connected.
+  - TR: Her cümlenin içindeki notalar birbirine bağlı kaldı.
+  - es-419: Las notas dentro de cada frase se mantuvieron conectadas.
+  - pt-BR: As notas dentro de cada frase ficaram conectadas.
+- `8fe1b470940f95d9`
+  - EN: The line is “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Sing it once neutral, then once as if you are sharing good news.
+  - TR: Dizi “YENİ bir gün başlıyor” (sol-mi-fa-re, mi-re-do). Bir kez nötr söyle, sonra güzel bir haber paylaşır gibi bir kez daha söyle.
+  - es-419: La línea es “Un NUEVO día está comenzando” (sol-mi-fa-re, mi-re-do). Cántala una vez en neutro y otra como si compartieras una buena noticia.
+  - pt-BR: A linha é “Um NOVO dia está começando” (sol-mi-fá-ré, mi-ré-dó). Cante-a uma vez de forma neutra e outra como se estivesse compartilhando uma boa notícia.
+- `b56301687b2fe344`
+  - EN: Couldn't hear in the middle of the piece.
+  - TR: Parçanın ortasında duyamadım.
+  - es-419: No se escuchó en medio de la pieza.
+  - pt-BR: Não deu para ouvir no meio da peça.
+- `7808e95c88fd4398`
+  - EN: Different note, a little low in the dark round.
+  - TR: Farklı nota: koyu turda biraz alçak.
+  - es-419: Nota distinta: un poco baja en la ronda oscura.
+  - pt-BR: Nota diferente: um pouco baixa na rodada escura.
+- `b3ffae9d7570d23a`
+  - EN: Bar 1 climbs from do to fa. Bar 2 holds sol for two beats, then steps down fa, mi. Bar 3 turns around fa: fa, mi, re, mi. Bar 4 ends re to do.
+  - TR: 1. ölçü do'dan fa'ya çıkar. 2. ölçü sol'ü iki vuruş tutar, sonra fa, mi diye iner. 3. ölçü fa çevresinde döner: fa, mi, re, mi. 4. ölçü re'den do'ya biter.
+  - es-419: El compás 1 sube de do a fa. El compás 2 sostiene sol durante dos pulsos y luego baja fa, mi. El compás 3 gira alrededor de fa: fa, mi, re, mi. El compás 4 termina de re a do.
+  - pt-BR: O compasso 1 sobe de dó a fá. O compasso 2 sustenta o sol por dois tempos e depois desce fá, mi. O compasso 3 gira em torno do fá: fá, mi, ré, mi. O compasso 4 termina de ré para dó.
+- `5896ac60782d9e0c`
+  - EN: Sing do once at your comfortable medium volume and hold it. Then sing 1-2-3 softly on “oo”, holding each note, with 3 the longest. The app places the notes so they climb into your break.
+  - TR: Do'yu rahat, orta gürlüğünde bir kez söyle ve tut. Sonra “u” ile 1-2-3'ü yumuşak söyle; her notayı tut, en uzun 3'ü tut. Uygulama notaları geçiş bölgene doğru çıkacak biçimde yerleştirir.
+  - es-419: Canta do una vez a tu volumen medio cómodo y sostenlo. Luego canta 1-2-3 con suavidad con “u”, sosteniendo cada nota, con el 3 como la más larga. La app coloca las notas de modo que suban hacia tu quiebre.
+  - pt-BR: Cante dó uma vez no seu volume médio confortável e sustente. Depois cante 1-2-3 suavemente com “u”, sustentando cada nota, com o 3 mais longo. O app posiciona as notas de modo que subam até a sua passagem.
+- `e38abc1e2ebcc2c5`
+  - EN: Finds do on the treble staff in C major and sings do, mi and sol from the staff in their own octave.
+  - TR: Do majörde sol anahtarlı portede do'yu bulur; do, mi ve sol'ü porteden kendi oktavında söyler.
+  - es-419: Encuentra do en el pentagrama en clave de sol en do mayor y canta do, mi y sol desde el pentagrama en su propia octava.
+  - pt-BR: Encontra o dó na pauta em clave de sol, em dó maior, e canta dó, mi e sol a partir da pauta na própria oitava.

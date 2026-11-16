@@ -1,0 +1,115 @@
+{
+  "id": "voc-s3-m11-05",
+  "title": {
+    "en": "A light mix on \"nay\"",
+    "tr": "\"ney\" ile hafif karışım"
+  },
+  "goal": {
+    "en": "Sings 1-3-5-3-1 on a light, bright “nay” through the break, four times, in tune.",
+    "tr": "Hafif ve parlak bir “ney” hecesiyle 1-3-5-3-1'i geçiş bölgesinden dört kez doğru perdede söyler."
+  },
+  "explanation": [
+    {
+      "en": "“Nay” is a bright, forward syllable. The “n” brings the sound to the front; the “ay” keeps it light.",
+      "tr": "“Ney” parlak, önde bir hecedir. “n” sesi öne getirir; “ey” onu hafif tutar."
+    },
+    {
+      "en": "Say it like a playful call, not a shout. Bright does not mean loud.",
+      "tr": "Onu şakacı bir sesleniş gibi söyle, bağırış gibi değil. Parlak, gür demek değildir."
+    },
+    {
+      "en": "Mix is a blend that feels neither as heavy as chest voice nor as airy as a very light head voice. “Nay” is one easy way to find it.",
+      "tr": "Karışım, ne göğüs sesi kadar ağır ne de çok hafif bir kafa sesi kadar havalı gelen bir harmandır. “Ney” onu bulmanın kolay yollarından biridir."
+    },
+    {
+      "en": "The app places the pattern so that sol sits around your break. Keep the same brightness on sol as on do.",
+      "tr": "Uygulama kalıbı sol geçiş bölgenin çevresine düşecek biçimde yerleştirir. Sol'de de do'daki parlaklığı koru."
+    },
+    {
+      "en": "Keep the jaw loose and the mouth only a little open. As you go up, let the sound get lighter, not wider.",
+      "tr": "Çeneni gevşek, ağzını yalnız biraz açık tut. Yükselirken ses genişlemesin, hafiflesin."
+    },
+    {
+      "en": "A crack or a sudden flip is normal while you learn. Make the sound lighter and slower, never louder.",
+      "tr": "Öğrenirken sesin kırılması ya da birden değişmesi normaldir. Sesi daha hafif ve daha yavaş yap, asla daha gür değil."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "1-3-5-3-1 on a bright, light “nay” in your range, with sol around your break; slow and moderate.",
+      "tr": "Rahat menzilinde, sol geçiş bölgenin çevresinde, parlak ve hafif “ney” ile 1-3-5-3-1; yavaş ve orta hızda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 1-3-5-3-1 on “nay” 4 times, one syllable per note, holding the last do. Rest between rounds. If “nay” feels pinched, make it softer or switch to “nee”.",
+      "tr": "1-3-5-3-1'i “ney” ile 4 kez söyle; her notaya bir hece, son do'yu tut. Turlar arasında dinlen. “Ney” sıkışık gelirse daha hafif söyle ya da “ni”ye geç."
+    },
+    "sequence": "1-3-5-3-1:h | ×4",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My “nay” stayed bright but not loud.",
+      "tr": "“Ney”im parlak kaldı ama gür olmadı."
+    },
+    {
+      "en": "Sol felt as easy as do.",
+      "tr": "Sol, do kadar rahat geldi."
+    },
+    {
+      "en": "The top notes felt easy, without pushing.",
+      "tr": "Üst notalar zorlamadan, rahat geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, sol a little low.",
+        "tr": "Farklı nota: sol biraz alçak."
+      },
+      "fix": {
+        "en": "Keep the “nay” bright on sol and hear the note a little higher before you sing it.",
+        "tr": "Sol'de “ney”i parlak tut ve notayı söylemeden önce kafanda biraz daha yüksek duy."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the pitch jumps at the break.",
+        "tr": "Farklı nota: perde geçiş bölgesinde sıçrıyor."
+      },
+      "fix": {
+        "en": "Slow down just before the break and make the sound lighter there. Let the higher notes get a little quieter.",
+        "tr": "Geçiş bölgesinden hemen önce yavaşla ve sesi orada hafiflet. Üstteki notaların biraz kısılmasına izin ver."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-2-3-2-1 on “nay” first, then widen it to 1-3-5-3-1.",
+    "tr": "Önce “ney” ile 1-2-3-2-1 söyle, sonra 1-3-5-3-1'e genişlet."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

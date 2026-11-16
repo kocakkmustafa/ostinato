@@ -1,0 +1,123 @@
+{
+  "id": "voc-s4-m16-01",
+  "title": {
+    "en": "Major pentatonic",
+    "tr": "Majör pentatonik"
+  },
+  "goal": {
+    "en": "Sings the major pentatonic scale 1-2-3-5-6-8 up and down with the click at ♩=70.",
+    "tr": "Majör pentatonik gamı (1-2-3-5-6-8) klikle ♩=70'te çıkıp iner."
+  },
+  "explanation": [
+    {
+      "en": "Pentatonic means five notes. The major pentatonic is the major scale without fa and ti: do, re, mi, sol, la.",
+      "tr": "Pentatonik beş nota demektir. Majör pentatonik, fa ve si'siz majör gamdır: do, re, mi, sol, la."
+    },
+    {
+      "en": "Without fa and ti there are no half steps. Every step is a whole step or a skip of a minor third, so the scale sounds open and easy.",
+      "tr": "Fa ve si çıkınca yarım ses kalmaz. Her adım ya tam ses ya da küçük üçlü atlamadır; gam bu yüzden açık ve rahat duyulur."
+    },
+    {
+      "en": "Two steps are skips: mi to sol and la to the top do. Sing them as clean skips, not slides.",
+      "tr": "İki adım atlamadır: mi'den sol'e ve la'dan üstteki do'ya. Onları kaydırmadan, temiz atla."
+    },
+    {
+      "en": "If a note is not comfortable, skip it or sing it an octave lower. That does not count as a different note.",
+      "tr": "Bir nota rahat değilse atla ya da bir oktav aşağıda söyle. Bu farklı nota sayılmaz."
+    },
+    {
+      "en": "Many folk songs, hymns and blues lines use these five notes. You will meet them all through this module.",
+      "tr": "Pek çok halk ezgisi, ilahi ve blues cümlesi bu beş notayı kullanır. Modül boyunca hep onlarla karşılaşacaksın."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then 1-2-3-5-6-8-6-5-3-2-1 in your range at ♩=70 and ♩=50.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 1-2-3-5-6-8-6-5-3-2-1; ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "After the count-in sing 1-2-3-5-6-8 and back down at ♩=70, one note per click, on the numbers or on 'la'. Hold the last do for two clicks. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra 1-2-3-5-6-8'i çık ve geri in, ♩=70, her klike bir nota; sayılarla ya da 'la' ile. Son do'yu iki klik tut. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-5 | 6-8-6-5 | 3-2-1:h",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Mi to sol sounded like a skip, not a step.",
+      "tr": "Mi'den sol'e geçiş basamak değil, atlama gibi duyuldu."
+    },
+    {
+      "en": "I stayed with the click to the end.",
+      "tr": "Sonuna kadar klikle birlikte kaldım."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, sol a step low.",
+        "tr": "Farklı nota: sol bir basamak alçak."
+      },
+      "fix": {
+        "en": "You stopped on fa. From mi, skip over fa straight to sol.",
+        "tr": "Fa'da durmuşsun. Mi'den fa'yı atlayıp doğrudan sol'e geç."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the top do a little low.",
+        "tr": "Farklı nota: üstteki do biraz alçak."
+      },
+      "fix": {
+        "en": "La to do is a skip of a minor third. Hear the top do before you sing it; it is the same do as in the major scale.",
+        "tr": "La'dan do'ya küçük üçlü atlanır. Söylemeden önce üstteki do'yu duy; majör gamdaki do ile aynıdır."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-2-3-5 and back first, then add la and the top do.",
+    "tr": "Önce 1-2-3-5'i çıkıp in, sonra la'yı ve üstteki do'yu ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

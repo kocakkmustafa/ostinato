@@ -1,0 +1,129 @@
+{
+  "id": "voc-s4-m15-12",
+  "title": {
+    "en": "Long tones in the middle",
+    "tr": "Orta bölgede uzun notalar"
+  },
+  "goal": {
+    "en": "Holds four notes in the middle of the comfortable range for 4 to 6 seconds each, with a pitch spread of 25 cents or less.",
+    "tr": "Rahat menzilinin ortasında dört notayı 4–6 saniye tutar; perde yayılımı 25 cent ya da altındadır."
+  },
+  "explanation": [
+    {
+      "en": "Range work is balanced by steady work in the middle, where the voice is easiest.",
+      "tr": "Menzil çalışması, sesin en rahat olduğu ortada kararlı çalışmayla dengelenir."
+    },
+    {
+      "en": "The app picks four notes from the middle of your saved range. None of them is near an edge.",
+      "tr": "Uygulama sakladığın menzilin ortasından dört nota seçer. Hiçbiri kenara yakın değildir."
+    },
+    {
+      "en": "Steady air makes a steady note. Let the breath flow out evenly, without pushing or holding back.",
+      "tr": "Düzenli hava kararlı nota verir. Nefesini itmeden ve tutmadan eşit akıt."
+    },
+    {
+      "en": "Hold each note for at least four seconds. Six seconds is enough; longer is not better.",
+      "tr": "Her notayı en az dört saniye tut. Altı saniye yeterlidir; daha uzun daha iyi değildir."
+    },
+    {
+      "en": "The meter measures how much your pitch wanders while you hold. 25 cents or less counts as steady at this level.",
+      "tr": "Gösterge, tutarken perdenin ne kadar gezindiğini ölçer. Bu seviyede 25 cent ya da altı kararlı sayılır."
+    },
+    {
+      "en": "Breath length is not a race. If you feel dizzy, stop and rest.",
+      "tr": "Nefes süresi yarış değildir. Başın dönerse dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Four notes from the middle of your comfortable range in a soft, steady synthesized voice, each held for five seconds.",
+      "tr": "Rahat menzilinin ortasından dört nota, yumuşak ve kararlı sentez sesle, her biri beş saniye tutulur."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to each of 4 notes, sing it in your own octave on “ah” or “oo” and hold it steady for 4 to 6 seconds. Rest and breathe between notes.",
+      "tr": "4 notanın her birini dinle, kendi oktavında “a” ya da “u” ile söyle ve 4–6 saniye kararlı tut. Notalar arasında dinlen ve nefes al."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All 4 notes held for at least 4 seconds with a pitch spread (IQR) of 25 cents or less. Holding longer is not scored.",
+        "tr": "4 notanın dördü de en az 4 saniye, perde yayılımı (IQR) 25 cent ya da altında tutulur. Daha uzun tutmak puanlanmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2",
+    "V4"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My note did not drift down at the end.",
+      "tr": "Notam sonunda aşağı kaymadı."
+    },
+    {
+      "en": "I breathed out evenly, without pushing.",
+      "tr": "Nefesimi itmeden, eşit verdim."
+    },
+    {
+      "en": "I rested between notes.",
+      "tr": "Notalar arasında dinlendim."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the end: the pitch drops.",
+        "tr": "Sonda farklı nota: perde düşüyor."
+      },
+      "fix": {
+        "en": "The air ran low. Take a calm breath before each note and stop as soon as four seconds are up.",
+        "tr": "Hava azaldı. Her notadan önce sakin bir nefes al ve dört saniye dolunca hemen bitir."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but unsteady: the pitch wobbles.",
+        "tr": "Doğru, ama kararsız: perde dalgalanıyor."
+      },
+      "fix": {
+        "en": "Sing a little softer and keep the jaw loose; let the air flow out evenly.",
+        "tr": "Biraz daha hafif söyle ve çeneni gevşek tut; havayı eşit akıt."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hold each note for three seconds first, then for four.",
+    "tr": "Her notayı önce üç saniye, sonra dört saniye tut."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

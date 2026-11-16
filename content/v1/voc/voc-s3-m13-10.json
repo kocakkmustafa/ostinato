@@ -1,0 +1,91 @@
+{
+  "id": "voc-s3-m13-10",
+  "title": { "en": "Unseen four-bar studies", "tr": "Görülmemiş dört ölçülük etütler" },
+  "goal": {
+    "en": "Sings six new four-bar lines in C, G or F major from the staff with the click at ♩=70, each one once and without stopping.",
+    "tr": "Do, Sol ya da Fa majörde altı yeni dört ölçülük satırı porteden ♩=70'te klikle, her birini bir kez ve durmadan söyler."
+  },
+  "explanation": [
+    {
+      "en": "Each line here is new and is not played before your try. This is sight-singing in full: everything in this module, together.",
+      "tr": "Buradaki her satır yenidir ve denemenden önce çalınmaz. Bu, tam anlamıyla deşifredir: bu modüldeki her şey bir arada."
+    },
+    {
+      "en": "Scan for 30 seconds: the key signature and do, the time signature, the highest and lowest note, and the hardest bar.",
+      "tr": "30 saniye göz gezdir: donanım ve do, ölçü işareti, en yüksek ve en alçak nota, en zor ölçü."
+    },
+    {
+      "en": "The lines use steps, thirds, fourths and fifths, with quarters, eighths, half notes and rests. They stay between ti below do and la above.",
+      "tr": "Satırlarda basamaklar, üçlüler, dörtlüler ve beşliler; dörtlükler, sekizlikler, ikilikler ve suslar vardır. Satırlar do'nun altındaki si ile üstteki la arasında kalır."
+    },
+    {
+      "en": "Count one bar in and keep going. If a note slips, come in on the next beat with the next note.",
+      "tr": "Bir ölçü say ve devam et. Bir nota kayarsa sonraki vuruşta sonraki notayla gir."
+    },
+    {
+      "en": "After each try the line plays, so you can compare. Then move on to the next new line.",
+      "tr": "Her denemeden sonra satır çalar; böylece karşılaştırabilirsin. Sonra sıradaki yeni satıra geç."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "For each line: do and the tonic chord in your comfortable range, then a one-bar click count-in at ♩=70. The line itself plays only after your try, for comparison.",
+      "tr": "Her satır için: rahat menzilinde do ve tonik akor, ardından ♩=70'te bir ölçülük klik girişi. Satırın kendisi yalnız denemenden sonra, karşılaştırma için çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Six new lines, four bars each, in C, G or F major. For each one: scan for 30 seconds, hear do and the count-in, then sing it once with the click at ♩=70 without stopping, on solfège or numbers. Sing in your own octave.",
+      "tr": "Do, Sol ya da Fa majörde dörder ölçülük altı yeni satır. Her biri için: 30 saniye göz gezdir, do'yu ve giriş sayımını dinle, sonra satırı ♩=70'te klikle, solfejle ya da derecelerle, durmadan bir kez söyle. Kendi oktavında söyle."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    { "en": "I kept going when a note slipped.", "tr": "Bir nota kaydığında devam ettim." },
+    {
+      "en": "My line matched the comparison afterwards.",
+      "tr": "Satırım sonradan çalınan karşılaştırmayla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note from the first note on, one step off.",
+        "tr": "Farklı nota: ilk notadan itibaren bir basamak kaymış."
+      },
+      "fix": {
+        "en": "Find the first note's degree before the count-in and sing it against do.",
+        "tr": "Giriş sayımından önce ilk notanın derecesini bul ve do'ya göre söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late after a long note.", "tr": "Doğru, ama uzun bir notadan sonra geç." },
+      "fix": {
+        "en": "Keep counting through half notes; the next note comes right on the beat.",
+        "tr": "İkiliklerde saymaya devam et; sonraki nota tam vuruşta gelir."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Drop to ♩=55 and speak the rhythm on 'ta' once before you sing each new line.",
+    "tr": "♩=55'e in ve her yeni satırı söylemeden önce ritmi bir kez 'ta' diye konuş."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

@@ -1,0 +1,96 @@
+{
+  "id": "voc-s2-m09-08",
+  "title": { "en": "Ode to Joy theme", "tr": "Neşeye Övgü teması" },
+  "goal": {
+    "en": "Sings the sixteen-bar Ode to Joy theme by Beethoven in a personal key at ♩=90.",
+    "tr": "Beethoven'ın on altı ölçülük Neşeye Övgü temasını kişisel tonda ♩=90'da söyler."
+  },
+  "explanation": [
+    {
+      "en": "This theme comes from Beethoven's Ninth Symphony (1824). You sing the melody only, on 'la', in four phrases of four bars: A, A', B, A'.",
+      "tr": "Bu tema Beethoven'ın Dokuzuncu Senfonisi'nden (1824) gelir. Yalnız ezgiyi 'la' ile söylersin; dört ölçülük dört cümle: A, A', B, A'."
+    },
+    {
+      "en": "Phrase A walks by steps: mi-mi-fa-sol | sol-fa-mi-re | do-do-re-mi, then mi dotted, re, and re held. It stops open, on re.",
+      "tr": "A cümlesi basamakla yürür: mi-mi-fa-sol | sol-fa-mi-re | do-do-re-mi, sonra noktalı mi, re ve tutulan re. Açık biter, re'de."
+    },
+    {
+      "en": "Phrase A' is the same until the last bar: re dotted, do, and do held. Now it closes at home. The dotted quarter is one and a half beats; the eighth after it is quick.",
+      "tr": "A' cümlesi son ölçüye kadar aynıdır: noktalı re, do ve tutulan do. Bu kez evde kapanır. Noktalı dörtlük bir buçuk vuruştur; ardındaki sekizlik hızlıdır."
+    },
+    {
+      "en": "Phrase B moves more: re-re-mi-do | re, mi-fa as two eighths, mi, do | re, mi-fa, mi, re | do-re, then a drop to the sol below do. If that low sol is not comfortable, sing it an octave up; it counts the same.",
+      "tr": "B cümlesi daha hareketlidir: re-re-mi-do | re, iki sekizlik mi-fa, mi, do | re, mi-fa, mi, re | do-re, ardından do'nun altındaki sol'e iniş. Alçak sol rahat değilse bir oktav yukarıda söyle; aynı sayılır."
+    },
+    {
+      "en": "Breathe at the end of each phrase, on the held note. The last phrase is A' again.",
+      "tr": "Her cümlenin sonunda, tutulan notada nefes al. Son cümle yine A' cümlesidir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The sixteen bars in your comfortable range, soft synthesized voice, at ♩=90 and ♩=60, over an original simple chord accompaniment (I, IV, V) with a soft beat. Headphones recommended.",
+      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=90 ve ♩=60; özgün basit akor eşliği (I, IV, V) ve hafif vuruşla. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the sixteen bars on 'la'. Start at ♩=60 if you like; the lesson counts at ♩=90. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra on altı ölçüyü 'la' ile söyle. İstersen ♩=60'ta başla; ders ♩=90'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "3-3-4-5 | 5-4-3-2 | 1-1-2-3 | 3:q. 2:e 2:h | 3-3-4-5 | 5-4-3-2 | 1-1-2-3 | 2:q. 1:e 1:h | 2-2-3-1 | 2:q 3:e 4:e 3:q 1:q | 2:q 3:e 4:e 3:q 2:q | 1:q 2:q 5,:h | 3-3-4-5 | 5-4-3-2 | 1-1-2-3 | 2:q. 1:e 1:h",
+    "tempo": { "open": 90, "target": 90 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The dotted rhythm at the end of A and A' was long-short, not even.",
+      "tr": "A ve A' sonundaki noktalı ritim eşit değil, uzun-kısaydı."
+    },
+    {
+      "en": "Phrase A stopped on re and phrase A' closed on do.",
+      "tr": "A cümlesi re'de durdu, A' cümlesi do'da kapandı."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early on the eighth after the dotted note.", "tr": "Doğru, ama noktalı notadan sonraki sekizlikte erken." },
+      "fix": {
+        "en": "Hold the dotted note through beat 2, then let the eighth slip in just before beat 3. Say 'laa-a la' in rhythm first.",
+        "tr": "Noktalı notayı 2. vuruş boyunca tut, sekizliği 3. vuruştan hemen önce sıkıştır. Önce ritimde 'laa-a la' diye konuş."
+      }
+    },
+    {
+      "error": { "en": "Different note, the low sol is a step high.", "tr": "Farklı nota: alçak sol bir basamak yüksek." },
+      "fix": {
+        "en": "From re, drop a fifth to sol, past do. Sing re-do-ti-la-sol slowly once, then make the leap.",
+        "tr": "Re'den do'yu geçerek beşli aşağı sol'e in. Bir kez yavaşça re-do-si-la-sol söyle, sonra sıçramayı yap."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Learn phrases A and A' at ♩=60 first, then add phrase B.",
+    "tr": "Önce ♩=60'ta A ve A' cümlelerini öğren, sonra B cümlesini ekle."
+  },
+  "repertoire": "Ode to Joy theme, Ludwig van Beethoven (1770–1827), Symphony No. 9 (1824; first edition 1826). Public domain, legal review pending. Theme only, no words, sung on 'la'; Ostinato simplification in even rhythm (the original's syncopated entry before the last phrase is not used). Degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 12,
+  "expertPending": true
+}

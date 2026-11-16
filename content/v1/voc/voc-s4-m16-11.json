@@ -1,0 +1,131 @@
+{
+  "id": "voc-s4-m16-11",
+  "title": {
+    "en": "An original blues melody",
+    "tr": "Özgün blues ezgisi"
+  },
+  "goal": {
+    "en": "Sings an original twelve-bar blues melody with the backing at ♩=80.",
+    "tr": "Özgün 12 ölçülük bir blues ezgisini eşlikle ♩=80'de söyler."
+  },
+  "explanation": [
+    {
+      "en": "This is an original 12-bar blues melody in three lines, built from the blues scale.",
+      "tr": "Bu, blues gamından kurulmuş, üç satırlık özgün 12 ölçülük bir blues ezgisidir."
+    },
+    {
+      "en": "Line 1, bars 1–4: a short call, 5-♭7-5-♭3-1, an answer on ♭3 and 1, then a climb, 1-♭3-4-♭5, to a long 5.",
+      "tr": "1. satır, 1–4. ölçüler: kısa bir soru, 5-♭7-5-♭3-1; ♭3 ve 1 ile bir cevap; sonra uzun bir 5'e varan 1-♭3-4-♭5 tırmanışı."
+    },
+    {
+      "en": "Line 2, bars 5–8: the call moves up over IV, ♭7-8-♭7-5-4, then the first call comes back and ends on a long 1.",
+      "tr": "2. satır, 5–8. ölçüler: soru IV üstünde yukarı taşınır, ♭7-8-♭7-5-4; sonra ilk soru geri gelir ve uzun bir 1'de biter."
+    },
+    {
+      "en": "Line 3, bars 9–12: a walk down, 5-♭5-4-♭3, over V, then home to 1 and a low 5 that leads back to bar 1.",
+      "tr": "3. satır, 9–12. ölçüler: V üstünde 5-♭5-4-♭3 inişi, sonra 1'e dönüş ve 1. ölçüye geri götüren alçak bir 5."
+    },
+    {
+      "en": "Sing the eighths swung, long-short, as in Swing eighths.",
+      "tr": "Sekizlikleri Swing sekizlikler dersindeki gibi uzun-kısa, swing'li söyle."
+    },
+    {
+      "en": "If a note is not comfortable, skip it or sing it an octave lower. That does not count as a different note.",
+      "tr": "Bir nota rahat değilse atla ya da bir oktav aşağıda söyle. Bu farklı nota sayılmaz."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The melody in your range on a soft synthesized voice over an original twelve-bar shuffle backing, at ♩=80 and ♩=60. Headphones recommended.",
+      "tr": "Ezgi rahat menzilinde, yumuşak sentez sesle; özgün 12 ölçülük shuffle eşlik üstünde, ♩=80 ve ♩=60. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to one bar of the backing, then sing the 12 bars on 'doo' or 'la'. Start at ♩=60 if you like; the lesson counts at ♩=80. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra 12 ölçüyü 'du' ya da 'la' ile söyle. İstersen ♩=60'ta başla; ders ♩=80'de sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "5:q b7:q 5:e b3:e 1:q | b3:h 1:h | 1:q b3:q 4:q b5:q | 5:h. qr | b7:q 8:q b7:e 5:e 4:q | b3:h 4:h | 5:q b7:q 5:e b3:e 1:q | 1:h. qr | 5:q b5:q 4:q b3:q | 4:h b3:q 1:q | b3:e 1:e b3:q 1:h | 5,:h hr",
+    "tempo": {
+      "open": 80,
+      "target": 80
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I kept ♭5 short and moved on.",
+      "tr": "♭5'i kısa tutup devam ettim."
+    },
+    {
+      "en": "The eighths sounded long-short.",
+      "tr": "Sekizlikler uzun-kısa duyuldu."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭5 a semitone high.",
+        "tr": "Farklı nota: ♭5 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "In bars 3 and 9, ♭5 sits between 4 and 5. Take the smallest step from 4.",
+        "tr": "3. ve 9. ölçüde ♭5, 4 ile 5 arasındadır. 4'ten en küçük adımı at."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late in bar 5.",
+        "tr": "Doğru, ama 5. ölçüde geç."
+      },
+      "fix": {
+        "en": "The jump to the top do takes time. Breathe at the end of bar 4 and hear ♭7 before bar 5 starts.",
+        "tr": "Üst do'ya sıçrama zaman alır. 4. ölçünün sonunda nefes al ve 5. ölçü başlamadan ♭7'yi kafanda duy."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Loop one line at a time at ♩=60, then sing all three lines.",
+    "tr": "Her satırı ♩=60'ta tek tek döngüle, sonra üç satırı birlikte söyle."
+  },
+  "minutes": 15,
+  "expertPending": true
+}

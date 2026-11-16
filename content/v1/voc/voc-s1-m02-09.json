@@ -1,0 +1,125 @@
+{
+  "id": "voc-s1-m02-09",
+  "title": {
+    "en": "Hold a steady note",
+    "tr": "Kararlı nota tutmak"
+  },
+  "goal": {
+    "en": "Holds a matched note steady for 2 seconds with a pitch spread of 40 cents or less.",
+    "tr": "Eşleştirdiği notayı 2 saniye boyunca, perde yayılımı 40 cent ya da altında, kararlı tutar."
+  },
+  "explanation": [
+    {
+      "en": "A steady note stays at one pitch from start to end. It does not drift down or wobble.",
+      "tr": "Kararlı nota baştan sona tek perdede kalır. Aşağı kaymaz, dalgalanmaz."
+    },
+    {
+      "en": "Steady air makes a steady note. Let the breath flow out evenly, without pushing or holding back.",
+      "tr": "Düzenli hava kararlı nota verir. Nefesini itmeden ve tutmadan eşit akıt."
+    },
+    {
+      "en": "The meter measures how much your pitch wanders across the two seconds. 40 cents or less counts as steady.",
+      "tr": "Gösterge iki saniye boyunca perdenin ne kadar gezindiğini ölçer. 40 cent ya da altı kararlı sayılır."
+    },
+    {
+      "en": "End the note cleanly: stop the air, and do not let the pitch fall away.",
+      "tr": "Notayı temiz bitir: havayı kes, perdenin düşmesine izin verme."
+    },
+    {
+      "en": "Breath length is not a race. If you feel dizzy, stop and rest.",
+      "tr": "Nefes süresi yarış değildir. Başın dönerse dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Four notes from your comfortable range in a soft, steady synthesized voice, each held for two seconds.",
+      "tr": "Rahat menzilinden dört nota, yumuşak ve kararlı sentez sesle, her biri iki saniye tutulur."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to each of 4 notes, sing it in your own octave and hold it steady for about two seconds. Rest between notes.",
+      "tr": "4 notanın her birini dinle, kendi oktavında söyle ve yaklaşık iki saniye kararlı tut. Notalar arasında dinlen."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 3 of 4 notes held for 2 seconds with a pitch spread (IQR) of 40 cents or less.",
+        "tr": "4 notanın en az 3'ü 2 saniye boyunca, perde yayılımı (IQR) 40 cent ya da altında tutulur."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V4"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My note did not drift down at the end.",
+      "tr": "Notam sonunda aşağı kaymadı."
+    },
+    {
+      "en": "I breathed out evenly, without pushing.",
+      "tr": "Nefesimi itmeden, eşit verdim."
+    },
+    {
+      "en": "I rested between notes.",
+      "tr": "Notalar arasında dinlendim."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note at the end: the pitch drops.",
+        "tr": "Sonda farklı nota: perde düşüyor."
+      },
+      "fix": {
+        "en": "The air ran low. Take a calm breath before each note and stop as soon as two seconds are up.",
+        "tr": "Hava azaldı. Her notadan önce sakin bir nefes al ve iki saniye dolunca hemen bitir."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but unsteady: the pitch wobbles.",
+        "tr": "Doğru, ama kararsız: perde dalgalanıyor."
+      },
+      "fix": {
+        "en": "Sing a little softer and keep the jaw loose; let the air flow out evenly.",
+        "tr": "Biraz daha hafif söyle ve çeneni gevşek tut; havayı eşit akıt."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Hold each note on 'mm' for one second first, then for two.",
+    "tr": "Her notayı önce bir saniye 'mm' ile tut, sonra iki saniye."
+  },
+  "legacy": "V: voice.foundations.sustained_note",
+  "minutes": 8,
+  "expertPending": true
+}

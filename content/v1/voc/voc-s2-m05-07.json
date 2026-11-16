@@ -1,0 +1,93 @@
+{
+  "id": "voc-s2-m05-07",
+  "title": { "en": "Arpeggio from the top", "tr": "Tepeden arpej" },
+  "goal": {
+    "en": "Sings the arpeggio downward: 5-3-1 and 8-5-3-1.",
+    "tr": "Arpeji yukarıdan aşağı söyler: 5-3-1 ve 8-5-3-1."
+  },
+  "explanation": [
+    {
+      "en": "Starting at the top is harder: you find sol or the top do without walking up to it.",
+      "tr": "Tepeden başlamak daha zordur: sol'ü ya da üst do'yu oraya basamakla çıkmadan bulursun."
+    },
+    {
+      "en": "Before each round, hear do in your head, then the note you start on. The reference plays do first.",
+      "tr": "Her turdan önce do'yu içinden duy, sonra başlayacağın notayı. Referans önce do'yu çalar."
+    },
+    {
+      "en": "Know each leap on the way down: top do to sol is a perfect fourth, sol to mi a minor third, mi to do a major third.",
+      "tr": "İnerken her atlamayı tanı: üst do'dan sol'e tam dörtlü, sol'den mi'ye küçük üçlü, mi'den do'ya büyük üçlü."
+    },
+    {
+      "en": "The low notes tend to sag at the end. Keep the last do on the same pitch as the reference do.",
+      "tr": "Alçak notalar sonda düşmeye meyillidir. Son do'yu referans do'yla aynı perdede tut."
+    },
+    {
+      "en": "The app places the line inside your comfortable range. If the top do feels tight, sing only 5-3-1.",
+      "tr": "Uygulama diziyi rahat menzilinin içine yerleştirir. Üst do zorlarsa yalnız 5-3-1 söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "Do sounds first, then 5-3-1 and 8-5-3-1 in your range, slow and even.",
+      "tr": "Önce do çalar, ardından rahat menzilinde 5-3-1 ve 8-5-3-1; yavaş ve eşit."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A5"],
+    "task": {
+      "en": "Listen to do, then sing 5-3-1 and 8-5-3-1. Do this four times. Hold the last do of 5-3-1 for two counts. Sing in your own octave.",
+      "tr": "Do'yu dinle, sonra 5-3-1 ve 8-5-3-1 söyle. Bunu dört kez yap. 5-3-1'in son do'sunu iki vuruş tut. Kendi oktavında söyle."
+    },
+    "sequence": "5-3-1:h | 8-5-3-1 | ×4",
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I found the first note without walking up to it.",
+      "tr": "İlk notayı basamakla çıkmadan buldum."
+    },
+    { "en": "The last do matched the reference do.", "tr": "Son do referans do'yla aynıydı." },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the starting sol low.",
+        "tr": "Farklı nota: başlangıçtaki sol alçak."
+      },
+      "fix": {
+        "en": "Sing do-mi-sol in your head, then start from the sol you heard.",
+        "tr": "İçinden do-mi-sol söyle, sonra duyduğun sol'den başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the last do a semitone low.",
+        "tr": "Farklı nota: son do yarım ses alçak."
+      },
+      "fix": {
+        "en": "Keep the energy to the end and aim the last do at the reference do.",
+        "tr": "Enerjiyi sona kadar koru ve son do'yu referans do'ya hedefle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-3-5 up first, then 5-3-1 straight back down; drop the climb once the top feels sure.",
+    "tr": "Önce 1-3-5'i çık, sonra hemen 5-3-1 in; tepe emin gelince çıkışı bırak."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

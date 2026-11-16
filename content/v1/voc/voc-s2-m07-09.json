@@ -1,0 +1,88 @@
+{
+  "id": "voc-s2-m07-09",
+  "title": { "en": "Rhythm and pitch together", "tr": "Ritim ve perde birlikte" },
+  "goal": {
+    "en": "Reads and sings an original four-bar line, rhythm and degrees together, at ♩=70.",
+    "tr": "Özgün dört ölçülük diziyi ritim ve dereceleri birlikte okuyarak ♩=70'te söyler."
+  },
+  "explanation": [
+    {
+      "en": "Now read two things at once: how long each note lasts and which degree it is.",
+      "tr": "Şimdi iki şeyi birden oku: her notanın ne kadar sürdüğünü ve hangi derece olduğunu."
+    },
+    {
+      "en": "Speak the rhythm on 'ta' first. Then sing the degrees in that rhythm.",
+      "tr": "Önce ritmi 'ta' ile konuş. Sonra dereceleri o ritimde söyle."
+    },
+    {
+      "en": "Bar 1 climbs from do to sol, with re-mi as two eighths. Bar 2 holds la as a dotted quarter, steps down to sol and fa, then rests.",
+      "tr": "1. ölçü do'dan sol'e çıkar; re-mi iki sekizliktir. 2. ölçü la'yı noktalı dörtlük tutar, sol ve fa'ya iner, sonra susar."
+    },
+    {
+      "en": "Bar 3 turns around mi: mi, re-mi as eighths, fa, re. Bar 4 ends on do for two beats.",
+      "tr": "3. ölçü mi çevresinde döner: mi, sekizlik olarak re-mi, fa, re. 4. ölçü iki vuruş do'da biter."
+    },
+    {
+      "en": "A short note still has a pitch. Aim at the centre of each note from the start.",
+      "tr": "Kısa notanın da perdesi vardır. Her notanın ortasını baştan hedefle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then the four bars in your range at ♩=70 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde dört ölçü; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing the four bars on 'la' or in solfège. Breathe in the rests. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra dört ölçüyü 'la' ile ya da solfejle söyle. Suslarda nefes al. Kendi oktavında söyle."
+    },
+    "sequence": "1:q 2:e 3:e 4:q 5:q | 6:q. 5:e 4:q qr | 3:q 2:e 3:e 4:q 2:q | 1:h hr",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I spoke the rhythm before I sang it.", "tr": "Ritmi söylemeden önce konuştum." },
+    { "en": "The eighths were even and in tune.", "tr": "Sekizlikler eşit ve perdesindeydi." },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, la in bar 2 a little low.",
+        "tr": "Farklı nota: 2. ölçüdeki la biraz alçak."
+      },
+      "fix": {
+        "en": "Hear la as one step above sol before you sing it.",
+        "tr": "Söylemeden önce la'yı sol'ün bir basamak üstü olarak duy."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late on the eighths.", "tr": "Doğru, ama sekizliklerde geç." },
+      "fix": {
+        "en": "Speak 're-mi' in rhythm on one note first, then sing it.",
+        "tr": "Önce 're-mi'yi tek notada ritimle konuş, sonra söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the degrees in steady quarter notes first, one per click, then add the rhythm.",
+    "tr": "Dereceleri önce düz dörtlüklerle, her klike bir tane söyle; sonra ritmi ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,94 @@
+{
+  "id": "voc-s2-m07-04",
+  "title": { "en": "Ties across the bar", "tr": "Ölçü çizgisinde bağ" },
+  "goal": {
+    "en": "Holds tied notes across the bar line and moves on with the click at ♩=70.",
+    "tr": "♩=70'te bağlı notaları ölçü çizgisinin üstünden tutar ve klikle sonraki notaya geçer."
+  },
+  "explanation": [
+    {
+      "en": "A tie joins two notes of the same pitch into one longer note. Sing it once and hold it.",
+      "tr": "Bağ, aynı perdedeki iki notayı tek uzun notada birleştirir. Bir kez söyle ve tut."
+    },
+    {
+      "en": "Here mi in bar 1 and sol in bar 3 start on beat 3 and are tied over the bar line, so each lasts three beats.",
+      "tr": "Burada 1. ölçüdeki mi ve 3. ölçüdeki sol 3. vuruşta başlar ve ölçü çizgisinin üstünden bağlanır; her biri üç vuruş sürer."
+    },
+    {
+      "en": "Don't sing again on beat 1 of the new bar. Keep the vowel going and count '3, 4, 1' in your head.",
+      "tr": "Yeni ölçünün 1. vuruşunda yeniden söyleme. Ünlüyü sürdür ve içinden '3, 4, 1' diye say."
+    },
+    {
+      "en": "Move to the next note on beat 2 of the new bar. Change the note cleanly, without a slide.",
+      "tr": "Yeni ölçünün 2. vuruşunda sonraki notaya geç. Notayı kaydırmadan temiz değiştir."
+    },
+    {
+      "en": "Keep the held note steady. The pitch should not sag as the air runs low.",
+      "tr": "Tutulan notayı sabit tut. Hava azaldıkça perde düşmesin."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then the four bars in your range: do-re-mi (tied) re-do, mi-fa-sol (tied) mi-do, at ♩=70 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde dört ölçü: do-re-mi (bağlı) re-do, mi-fa-sol (bağlı) mi-do; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing the four bars once on 'la' or in solfège. Hold mi and sol across the bar line and move on with the click. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra dört ölçüyü 'la' ile ya da solfejle bir kez söyle. Mi'yi ve sol'ü ölçü çizgisinin üstünden tut ve klikle devam et. Kendi oktavında söyle."
+    },
+    "sequence": "1-2 3:h~q 2:q 1:h | 3-4 5:h~q 3:q 1:h",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I did not restart the tied note on beat 1.",
+      "tr": "Bağlı notayı 1. vuruşta yeniden başlatmadım."
+    },
+    {
+      "en": "The held notes stayed steady to the end.",
+      "tr": "Tutulan notalar sonuna kadar sabit kaldı."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Correct, but early after the tie.", "tr": "Doğru, ama bağdan sonra erken." },
+      "fix": {
+        "en": "You are cutting the tied note short. Hold it through beat 1 and move on beat 2.",
+        "tr": "Bağlı notayı kısaltıyorsun. 1. vuruş boyunca tut ve 2. vuruşta geç."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the held sol drifts low.",
+        "tr": "Farklı nota: tutulan sol alçağa kayıyor."
+      },
+      "fix": {
+        "en": "Take an easy breath before bar 3 and keep the air flowing steadily through the tie.",
+        "tr": "3. ölçüden önce rahat bir nefes al ve bağ boyunca havayı sabit akıt."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the line without ties first, restarting the note on beat 1; then join the two notes into one.",
+    "tr": "Önce bağsız söyle, notayı 1. vuruşta yeniden başlat; sonra iki notayı tek notada birleştir."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

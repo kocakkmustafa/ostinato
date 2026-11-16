@@ -1,0 +1,118 @@
+{
+  "id": "voc-s4-m15-02",
+  "title": {
+    "en": "Full-range lip-trill sirens",
+    "tr": "Tam menzilde trill sireni"
+  },
+  "goal": {
+    "en": "Glides on a lip trill from near the bottom to near the top of the comfortable range and back, four times, without a break in the sound.",
+    "tr": "Dudak titreşimiyle rahat menzilinin altına yakın bir yerden üstüne yakın bir yere ve geri dört kez kayar; ses kesilmez."
+  },
+  "explanation": [
+    {
+      "en": "A siren is a slow glide from a low note up to a high one and back, like a distant siren. Here it covers your whole comfortable range.",
+      "tr": "Siren, alçak bir notadan yüksek bir notaya ve geri yavaş bir kaymadır; uzaktaki bir siren gibi. Burada rahat menzilinin tamamını kapsar."
+    },
+    {
+      "en": "If a trill doesn't come, hum on “mm” or sing a soft “vvv”. Each one counts the same.",
+      "tr": "Titreşim gelmezse “mm” ile mırıldan ya da hafif bir “vvv” söyle. Hepsi aynı sayılır."
+    },
+    {
+      "en": "The screen shows your saved low and high notes as two lines. Aim near them, never past them.",
+      "tr": "Ekran sakladığın alt ve üst notaları iki çizgi olarak gösterir. Onlara yakın hedefle, asla ötesine geçme."
+    },
+    {
+      "en": "Let the sound get lighter as you go up and quieter as you go down. If the top or the bottom feels tight, turn back earlier.",
+      "tr": "Yukarı çıkarken sesin hafiflemesine, aşağı inerken kısılmasına izin ver. Tepe ya da dip sıkışık gelirse daha erken dön."
+    },
+    {
+      "en": "A crack or a sudden flip is normal while you learn. Make the sound lighter and slower, never louder.",
+      "tr": "Öğrenirken sesin kırılması ya da birden değişmesi normaldir. Sesi daha hafif ve daha yavaş yap, asla daha gür değil."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "A soft lip-trill siren of about five seconds, from near your saved low note up to near your saved high note and back.",
+      "tr": "Sakladığın alt notaya yakın bir yerden üst notaya yakın bir yere ve geri, yaklaşık beş saniyelik yumuşak bir dudak titreşimi sireni."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Do 4 sirens on a lip trill (or “mm”): from near your low limit up to near your high limit and back down. Keep the sound going through each siren; breathe and rest between sirens.",
+      "tr": "Dudak titreşimiyle (ya da “mm” ile) 4 siren yap: alt sınırına yakın bir yerden üst sınırına yakın bir yere çık ve geri in. Her sirende sesi kesme; sirenler arasında nefes al ve dinlen."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In at least 3 of 4 sirens the sound does not stop and the pitch curve moves smoothly up, then down. How high or low you reach is not scored.",
+        "tr": "4 sirenin en az 3'ünde ses kesilmez ve perde eğrisi akıcı biçimde önce yükselir, sonra iner. Ne kadar tize ya da pese ulaştığın puanlanmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The sound kept going from the start to the end of each siren.",
+      "tr": "Ses her sirenin başından sonuna kesilmedi."
+    },
+    {
+      "en": "My lips stayed loose.",
+      "tr": "Dudaklarım gevşek kaldı."
+    },
+    {
+      "en": "The top of each siren felt easy.",
+      "tr": "Her sirenin tepesi rahat geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear: the trill breaks off.",
+        "tr": "Duyamadım: titreşim kesiliyor."
+      },
+      "fix": {
+        "en": "Let a little more gentle breath through, or switch to “mm” for now.",
+        "tr": "Biraz daha hafif nefes ver ya da şimdilik “mm”e geç."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the curve jumps near the top.",
+        "tr": "Farklı nota: eğri tepeye yakın sıçrıyor."
+      },
+      "fix": {
+        "en": "Slow down before the top and make the sound lighter there. Turn back a little earlier in the next siren.",
+        "tr": "Tepeden önce yavaşla ve sesi orada hafiflet. Sonraki sirende biraz daha erken dön."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Make the siren smaller: glide over the middle of your range first, then widen it a little in each siren.",
+    "tr": "Sireni küçült: önce menzilinin ortasında kay, sonra her sirende biraz genişlet."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

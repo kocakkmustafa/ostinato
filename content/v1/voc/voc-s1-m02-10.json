@@ -1,0 +1,117 @@
+{
+  "id": "voc-s1-m02-10",
+  "title": {
+    "en": "Three nearby comfortable tones",
+    "tr": "Yakın üç rahat ses"
+  },
+  "goal": {
+    "en": "Sings degrees 1-2-3 as do-re-mi and returns to do.",
+    "tr": "1-2-3 derecelerini do-re-mi olarak söyler ve do'ya döner."
+  },
+  "explanation": [
+    {
+      "en": "So far you matched one note at a time. Now you sing three nearby notes in a row.",
+      "tr": "Şimdiye kadar notaları tek tek eşleştirdin. Şimdi art arda yakın üç nota söylüyorsun."
+    },
+    {
+      "en": "Do, re and mi are the first three steps of a major scale. Each is a whole step above the one before.",
+      "tr": "Do, re ve mi majör gamın ilk üç basamağıdır. Her biri bir öncekinden bir tam ses yukarıdadır."
+    },
+    {
+      "en": "Here do is simply your starting note. The app picks it in your comfortable range, so it need not be the note C.",
+      "tr": "Burada 'do' senin başlangıç notandır. Uygulama onu rahat menzilinden seçer; piyanodaki Do notası olmak zorunda değildir."
+    },
+    {
+      "en": "Sing 1-2-3-2-1: do, re, mi, re, do. Come back down to the same do you started on.",
+      "tr": "1-2-3-2-1 söyle: do, re, mi, re, do. Başladığın do'ya geri dön."
+    },
+    {
+      "en": "Keep all three close and comfortable. If mi feels high, ask the app for a lower do.",
+      "tr": "Üçünü de yakın ve rahat tut. Mi yüksek geliyorsa uygulamadan daha alçak bir do iste."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Do-re-mi-re-do from a starting note in your comfortable range, soft synthesized voice, at normal and slow speed.",
+      "tr": "Rahat menzilindeki bir başlangıç notasından do-re-mi-re-do, yumuşak sentez ses, normal ve yavaş hızda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to do, then sing do-re-mi-re-do three times in your own octave. Take your time; there is no click.",
+      "tr": "Do'yu dinle, sonra kendi oktavında üç kez do-re-mi-re-do söyle. Acele etme; klik yok."
+    },
+    "sequence": "1-2-3-2-1 | 1-2-3-2-1 | 1-2-3-2-1",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I came back to the same do I started on.",
+      "tr": "Başladığım do'ya geri döndüm."
+    },
+    {
+      "en": "Re and mi sounded like the reference, not squeezed together.",
+      "tr": "Re ve mi referans gibi geldi, birbirine sıkışmadı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, mi is a little low.",
+        "tr": "Farklı nota, mi biraz alçak."
+      },
+      "fix": {
+        "en": "Mi is a whole step above re; replay the reference and aim a touch higher.",
+        "tr": "Mi, re'den bir tam ses yukarıdadır; referansı yeniden dinle ve biraz daha yukarıyı hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the last do is lower than the first.",
+        "tr": "Farklı nota, son do ilkinden alçak."
+      },
+      "fix": {
+        "en": "Replay do before the last round and land on it softly.",
+        "tr": "Son turdan önce do'yu yeniden dinle ve yumuşakça üstüne in."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only do-re-do until it passes, then add mi.",
+    "tr": "Önce yalnız do-re-do söyle; geçince mi'yi ekle."
+  },
+  "legacy": "V: vocal-08",
+  "minutes": 8,
+  "expertPending": true
+}

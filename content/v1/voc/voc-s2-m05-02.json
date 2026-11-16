@@ -1,0 +1,91 @@
+{
+  "id": "voc-s2-m05-02",
+  "title": { "en": "Arpeggio up and down", "tr": "Arpej çıkış ve iniş" },
+  "goal": {
+    "en": "Sings 1-3-5-8-5-3-1 with the click, or 1-3-5-3-1 if the top do is outside your range.",
+    "tr": "1-3-5-8-5-3-1'i klikle söyler; üst do menzilinin dışındaysa 1-3-5-3-1'i söyler."
+  },
+  "explanation": [
+    {
+      "en": "An arpeggio sings the notes of a chord one after another: do, mi, sol and the top do.",
+      "tr": "Arpej bir akorun notalarını art arda söyler: do, mi, sol ve üst do."
+    },
+    {
+      "en": "Sol to the top do is a perfect fourth, the widest leap so far. Hear the top do in your head before you sing it.",
+      "tr": "Sol'den üst do'ya tam dörtlüdür; şimdiye kadarki en geniş atlama. Üst do'yu söylemeden önce içinden duy."
+    },
+    {
+      "en": "Coming down, the same notes return in reverse. Keep the bottom do on the pitch you started on.",
+      "tr": "İnerken aynı notalar ters sırayla döner. Alttaki do'yu başladığın perdede tut."
+    },
+    {
+      "en": "One syllable per click. Breathe before you start; hold the last do for two clicks.",
+      "tr": "Her klike bir hece. Başlamadan nefes al; son do'yu iki klik tut."
+    },
+    {
+      "en": "The app places the arpeggio inside your comfortable range. If the top do feels tight, turn back at sol and sing 1-3-5-3-1.",
+      "tr": "Uygulama arpeji rahat menzilinin içine yerleştirir. Üst do zorlarsa sol'de geri dön ve 1-3-5-3-1 söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then 1-3-5-8-5-3-1 in your range at ♩=70 and ♩=50.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 1-3-5-8-5-3-1; ♩=70 ve ♩=50."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing the arpeggio up and down twice, on 'la' or in solfège, one note per click. Start at ♩=60 and move up in steps of 5 to ♩=70. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra arpeji iki kez çık ve in; 'la' ile ya da solfejle, her klike bir nota. ♩=60'tan başla, 5'er adımla ♩=70'e çık. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-8-5-3-1:h | ×2",
+    "tempo": { "open": 60, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V2"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I heard the top do in my head before I sang it.",
+      "tr": "Üst do'yu söylemeden önce içimden duydum."
+    },
+    { "en": "The last do matched the first one.", "tr": "Son do ilkiyle aynıydı." },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, the top do a semitone low.",
+        "tr": "Farklı nota: üst do yarım ses alçak."
+      },
+      "fix": {
+        "en": "Sing sol-la-ti-do slowly once, then leap from sol straight to the top do.",
+        "tr": "Bir kez yavaşça sol-la-si-do söyle, sonra sol'den doğrudan üst do'ya atla."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late on the way down.", "tr": "Doğru, ama inerken geç." },
+      "fix": {
+        "en": "Keep the syllables short and move on the click; don't wait for the note to settle.",
+        "tr": "Heceleri kısa tut ve klikte geç; notanın oturmasını bekleme."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing 1-3-5-3-1 at ♩=50 until it feels easy, then add the top do.",
+    "tr": "Rahat gelene kadar ♩=50'de 1-3-5-3-1 söyle, sonra üst do'yu ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

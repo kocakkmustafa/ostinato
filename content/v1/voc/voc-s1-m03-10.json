@@ -1,0 +1,110 @@
+{
+  "id": "voc-s1-m03-10",
+  "title": {
+    "en": "Scale checkpoint",
+    "tr": "Gam geçişi"
+  },
+  "goal": {
+    "en": "Sings the major scale up and down with the click at ♩=70.",
+    "tr": "Majör gamı klikle ♩=70'te çıkıp iner."
+  },
+  "explanation": [
+    {
+      "en": "This checkpoint brings the module together: steps, half steps and steady time.",
+      "tr": "Bu geçiş modülü birleştirir: basamaklar, yarım sesler ve düzenli zaman."
+    },
+    {
+      "en": "Sing the scale 1→8→1 at ♩=70, one note per click, and hold the last 1 for two clicks.",
+      "tr": "Gamı ♩=70'te 1→8→1 söyle, her klike bir nota; son 1'i iki klik tut."
+    },
+    {
+      "en": "If a note is not comfortable, skip it or sing it an octave lower. That does not count as a different note.",
+      "tr": "Bir nota rahat değilse atla ya da bir oktav aşağıda söyle. Bu farklı nota sayılmaz."
+    },
+    {
+      "en": "Warm up first with Warm-up routine 2.",
+      "tr": "Önce Isınma rutini 2 ile ısın."
+    },
+    {
+      "en": "Passing opens the next module, Simple melodies and rhythm.",
+      "tr": "Geçince sonraki modül, Basit ezgiler ve ritim, açılır."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "KL",
+      "S"
+    ],
+    "brief": {
+      "en": "One-bar click count-in, then the scale 1→8→1 in your range at ♩=70 and ♩=45.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 1→8→1 gamı; ♩=70 ve ♩=45."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M!"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Warm up, then after the count-in sing the scale up and down at ♩=70, one note per click. Hold the last 1 for two clicks. Sing in your own octave.",
+      "tr": "Isın, sonra giriş sayımından sonra gamı ♩=70'te çık ve in, her klike bir nota. Son 1'i iki klik tut. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-4 | 5-6-7-8 | 7-6-5-4 | 3-2-1:h",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "held",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ti a semitone low.",
+        "tr": "Farklı nota: si yarım ses alçak."
+      },
+      "fix": {
+        "en": "Ti is a half step below do; aim it close to the top do.",
+        "tr": "Si, do'nun yarım ses altındadır; onu üstteki do'ya yakın hedefle."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late on the way down.",
+        "tr": "Doğru, ama inerken geç."
+      },
+      "fix": {
+        "en": "Keep the syllables short and move on the click; don't wait for the note to settle.",
+        "tr": "Heceleri kısa tut ve klikte geç; notanın oturmasını bekleme."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If it does not pass, go back to 'Major scale at 70' at ♩=60, then retake the checkpoint.",
+    "tr": "Geçmezse ♩=60'ta '♩=70'te majör gam' dersine dön, sonra geçişi yeniden dene."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

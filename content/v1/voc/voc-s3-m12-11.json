@@ -1,0 +1,112 @@
+{
+  "id": "voc-s3-m12-11",
+  "title": {
+    "en": "Interval chains in minor",
+    "tr": "Minörde aralık zincirleri"
+  },
+  "goal": {
+    "en": "Sings the minor interval chain 1-♭3-2-4-♭3-5 and back home with the click at ♩=70.",
+    "tr": "Minör aralık zinciri 1-♭3-2-4-♭3-5'i ve eve dönüşü ♩=70'te klikle söyler."
+  },
+  "explanation": [
+    {
+      "en": "An interval chain moves one pattern up the scale. Here: up a third, down a step.",
+      "tr": "Aralık zinciri bir kalıbı gamda yukarı taşır. Burada: üçlü çık, basamak in."
+    },
+    {
+      "en": "In minor the thirds change size the other way round: 1-♭3 and 2-4 are minor, ♭3-5 is major.",
+      "tr": "Minörde üçlülerin boyu tersine döner: 1-♭3 ve 2-4 küçük, ♭3-5 büyüktür."
+    },
+    {
+      "en": "Compare with major, where do-mi is major and re-fa and mi-sol are minor.",
+      "tr": "Majörle karşılaştır: orada do-mi büyük, re-fa ve mi-sol küçüktür."
+    },
+    {
+      "en": "The chain turns at the top: 5 steps down to 4, drops a third to 2, then 2 steps home to 1.",
+      "tr": "Zincir tepede döner: 5 basamakla 4'e iner, üçlüyle 2'ye düşer, sonra 2 basamakla 1'e, eve varır."
+    },
+    {
+      "en": "Each note gets one beat. Move to the next note right on the click.",
+      "tr": "Her nota bir vuruş alır. Bir sonraki notaya tam klikte geç."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S",
+      "KL"
+    ],
+    "brief": {
+      "en": "The chain at ♩=70 and slower in your personal key, with the click and a one-bar count-in.",
+      "tr": "Zincir kişisel tonunda ♩=70'te ve daha yavaş, klikle ve bir ölçü girişli."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 1-♭3-2-4 | ♭3-5-4-2 | 1 on “la” with the click, one note per beat, and hold the last 1 for two beats. The app picks 1 from your comfortable range. Sing in your own octave.",
+      "tr": "Klikle 1-♭3-2-4 | ♭3-5-4-2 | 1'i “la” ile söyle; her vuruşa bir nota, son 1'i iki vuruş tut. Uygulama 1'i rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1-b3-2-4 | b3-5-4-2 | 1:h hr",
+    "tempo": {
+      "open": 70,
+      "target": 70
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I moved on the click, not after it.",
+      "tr": "Klikten sonra değil, klikte geçtim."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    {
+      "en": "♭3-5 sounded wider than 1-♭3.",
+      "tr": "♭3-5, 1-♭3'ten geniş duyuldu."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, ♭3 a semitone high.",
+        "tr": "Farklı nota: ♭3 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "That is the major 3. Keep ♭3 a half step above 2.",
+        "tr": "Bu majördeki 3 olur. ♭3'ü 2'nin yalnız yarım ses üstünde tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late.",
+        "tr": "Doğru, ama geç."
+      },
+      "fix": {
+        "en": "Hear the next note while you still hold the current one, then move on the click.",
+        "tr": "Bir sonraki notayı şimdikini tutarken içinden duy, sonra klikte geç."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Lower the tempo to ♩=55 and sing only the first bar until it feels steady.",
+    "tr": "Tempoyu ♩=55'e düşür ve oturana kadar yalnız ilk ölçüyü söyle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,96 @@
+{
+  "id": "voc-s2-m09-09",
+  "title": { "en": "Hänschen klein (Lightly Row)", "tr": "Hänschen klein" },
+  "goal": {
+    "en": "Sings the sixteen bars of the traditional melody Hänschen klein in a personal key at ♩=90.",
+    "tr": "Geleneksel Hänschen klein ezgisinin on altı ölçüsünü kişisel tonda ♩=90'da söyler."
+  },
+  "explanation": [
+    {
+      "en": "Hänschen klein is a traditional German melody, also sung in English as Lightly Row. It has four phrases of four bars: A, A', B, A'.",
+      "tr": "Hänschen klein geleneksel bir Alman ezgisidir; İngilizcede Lightly Row adıyla da söylenir. Dört ölçülük dört cümlesi vardır: A, A', B, A'."
+    },
+    {
+      "en": "Phrase A: sol-mi-mi | fa-re-re | do-re-mi-fa | sol-sol-sol. In bars 1, 2 and 4 the last note is held for two beats.",
+      "tr": "A cümlesi: sol-mi-mi | fa-re-re | do-re-mi-fa | sol-sol-sol. 1., 2. ve 4. ölçülerde son nota iki vuruş tutulur."
+    },
+    {
+      "en": "Phrase A' starts the same, then closes with the arpeggio do-mi-sol-sol and lands on do for a whole bar.",
+      "tr": "A' cümlesi aynı başlar, sonra do-mi-sol-sol arpejiyle kapanır ve bütün bir ölçü do'ya iner."
+    },
+    {
+      "en": "Phrase B repeats notes: four re's, then re-mi-fa; four mi's, then mi-fa-sol. Keep each repeated note on the same pitch, with a light 'l' to restart it.",
+      "tr": "B cümlesi notaları tekrarlar: dört re, sonra re-mi-fa; dört mi, sonra mi-fa-sol. Tekrarlanan her notayı aynı perdede tut, hafif bir 'l' ile yeniden başlat."
+    },
+    {
+      "en": "The last phrase is A' again. Breathe at the end of every phrase. The app picks the starting note from your comfortable range.",
+      "tr": "Son cümle yine A' cümlesidir. Her cümlenin sonunda nefes al. Uygulama başlangıç notasını rahat menzilinden seçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["SE", "S"],
+    "brief": {
+      "en": "The sixteen bars in your comfortable range, soft synthesized voice, at ♩=90 and ♩=60, over an original simple chord accompaniment (I, V) with a soft beat. Headphones recommended.",
+      "tr": "On altı ölçü rahat menzilinde, yumuşak sentez ses, ♩=90 ve ♩=60; özgün basit akor eşliği (I, V) ve hafif vuruşla. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to one bar of the accompaniment, then sing the sixteen bars on 'la'. Start at ♩=60 if you like; the lesson counts at ♩=90. Sing in your own octave. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşlikten bir ölçü dinle, sonra on altı ölçüyü 'la' ile söyle. İstersen ♩=60'ta başla; ders ♩=90'da sayılır. Kendi oktavında söyle. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "sequence": "5-3 3:h | 4-2 2:h | 1-2-3-4 | 5-5 5:h | 5-3 3:h | 4-2 2:h | 1-3-5-5 | 1:w | 2-2-2-2 | 2-3 4:h | 3-3-3-3 | 3-4 5:h | 5-3 3:h | 4-2 2:h | 1-3-5-5 | 1:w",
+    "tempo": { "open": 90, "target": 90 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The four repeated notes in phrase B stayed on one pitch.",
+      "tr": "B cümlesindeki dört tekrarlanan nota aynı perdede kaldı."
+    },
+    {
+      "en": "Phrase A' landed on the same do I started from.",
+      "tr": "A' cümlesi başladığım do'ya indi."
+    },
+    {
+      "en": "My line matched the reference at the slow tempo.",
+      "tr": "Dizim yavaş tempoda referansla aynıydı."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, the last do a little high.", "tr": "Farklı nota: son do biraz yüksek." },
+      "fix": {
+        "en": "After the arpeggio up to sol, the drop to do is a fifth. Think sol-fa-mi-re-do quietly, then sing the drop.",
+        "tr": "Arpejle sol'e çıktıktan sonra do'ya iniş bir beşlidir. Sessizce sol-fa-mi-re-do diye düşün, sonra inişi söyle."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear the repeated note.", "tr": "Tekrarlanan notayı duyamadım." },
+      "fix": {
+        "en": "Two syllables on the same note need a clear restart. Give each one its consonant and a tiny gap.",
+        "tr": "Aynı notadaki iki hece net bir yeniden başlangıç ister. Her birine ünsüzünü ve küçük bir boşluk ver."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing phrases A and A' at ♩=60, then add phrase B.",
+    "tr": "♩=60'ta A ve A' cümlelerini söyle, sonra B cümlesini ekle."
+  },
+  "repertoire": "Hänschen klein (Lightly Row), traditional German melody; words by Franz Wiedemann (1821–1882), not used. Public domain, legal review pending. Sung on 'la'; degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 12,
+  "expertPending": true
+}

@@ -1,0 +1,114 @@
+{
+  "id": "voc-s4-m16-08",
+  "title": {
+    "en": "Short improvised phrases",
+    "tr": "Kısa doğaçlama cümleler"
+  },
+  "goal": {
+    "en": "Sings four short phrases of their own over a soft backing, using notes from the minor pentatonic.",
+    "tr": "Yumuşak bir eşlik üstünde minör pentatonik notalarıyla kendi kurduğu dört kısa cümleyi söyler."
+  },
+  "explanation": [
+    {
+      "en": "Now you make the phrases yourself. There is no call to answer, only a soft backing on do.",
+      "tr": "Bu kez cümleleri sen kurarsın. Cevaplanacak soru yok, yalnız do üstünde yumuşak bir eşlik var."
+    },
+    {
+      "en": "Your pool is the minor pentatonic: 1, ♭3, 4, 5 and ♭7, in any comfortable octave.",
+      "tr": "Havuzun minör pentatoniktir: 1, ♭3, 4, 5 ve ♭7; herhangi bir rahat oktavda."
+    },
+    {
+      "en": "A phrase is a short idea of three to eight notes, then a breath. Short is good.",
+      "tr": "Cümle, üç ile sekiz nota arası kısa bir fikir ve ardından bir nefestir. Kısa olması iyidir."
+    },
+    {
+      "en": "Try this plan: phrase 1 ends on 5, phrase 2 ends on 1, phrase 3 repeats an idea, phrase 4 ends on 1.",
+      "tr": "Şu planı dene: 1. cümle 5'te biter, 2. cümle 1'de biter, 3. cümle bir fikri tekrarlar, 4. cümle 1'de biter."
+    },
+    {
+      "en": "Time is free here; the app checks only the notes.",
+      "tr": "Burada zaman serbesttir; uygulama yalnız notaları ölçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "An original soft backing on the tonic minor chord in your key, in free time, plus two example phrases on a soft synthesized voice. Headphones recommended.",
+      "tr": "Kişisel tonunda, tonik minör akor üstünde serbest zamanlı özgün yumuşak bir eşlik ve yumuşak sentez sesle iki örnek cümle. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to the backing for a few seconds. Sing four short phrases of your own on 'doo' or 'la', with a breath between them. Use only notes from the pool. Use headphones so the accompaniment stays out of the microphone.",
+      "tr": "Eşliği birkaç saniye dinle. Kendi kurduğun dört kısa cümleyi 'du' ya da 'la' ile, aralarında nefes alarak söyle. Yalnız havuzdaki notaları kullan. Eşlik mikrofona girmesin diye kulaklık kullan."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "At least 90% of your notes are in the pool.",
+        "tr": "Notalarının en az %90'ı havuzdan gelir."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I used only notes from the pool.",
+      "tr": "Yalnız havuzdaki notaları kullandım."
+    },
+    {
+      "en": "Each phrase had a clear end and a breath.",
+      "tr": "Her cümlenin net bir sonu ve bir nefesi vardı."
+    },
+    {
+      "en": "At least one phrase ended on 1.",
+      "tr": "En az bir cümle 1'de bitti."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: outside the pool.",
+        "tr": "Farklı nota: havuzun dışında."
+      },
+      "fix": {
+        "en": "The major mi or ti crept in. Sing the minor pentatonic once over the backing, then start again.",
+        "tr": "Majör mi ya da si karışmış. Eşlik üstünde minör pentatoniği bir kez söyle, sonra yeniden başla."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Use only 1, ♭3 and 4 for your four phrases, then add 5 and ♭7.",
+    "tr": "Dört cümlende önce yalnız 1, ♭3 ve 4'ü kullan, sonra 5'i ve ♭7'yi ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

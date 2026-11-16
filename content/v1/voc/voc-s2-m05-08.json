@@ -1,0 +1,87 @@
+{
+  "id": "voc-s2-m05-08",
+  "title": { "en": "Arpeggio plus scale", "tr": "Arpej ve gam" },
+  "goal": {
+    "en": "Sings the arpeggio up and the scale down in one line, 1-3-5-4-3-2-1, at ♩=70.",
+    "tr": "Arpejle çıkıp gamla inen diziyi tek seferde söyler: ♩=70'te 1-3-5-4-3-2-1."
+  },
+  "explanation": [
+    {
+      "en": "This line joins two shapes: leap up the arpeggio, then step down the scale.",
+      "tr": "Bu dizi iki biçimi birleştirir: arpejle atlayarak çık, sonra gamla basamak basamak in."
+    },
+    {
+      "en": "The turn at sol is the key moment. Sol to fa is a whole step down; keep it full size.",
+      "tr": "Sol'deki dönüş en önemli an. Sol'den fa'ya tam ses inilir; onu tam boyunda tut."
+    },
+    {
+      "en": "Fa to mi is a half step. Keep it small so mi does not land low.",
+      "tr": "Fa'dan mi'ye yarım sestir. Küçük tut; mi alçak düşmesin."
+    },
+    {
+      "en": "One syllable per click; hold the last do for two clicks.",
+      "tr": "Her klike bir hece; son do'yu iki klik tut."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then 1-3-5-4-3-2-1 in your range at ♩=70 and ♩=55.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 1-3-5-4-3-2-1; ♩=70 ve ♩=55."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing the line twice in solfège or on 'la', one note per click. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra diziyi iki kez solfejle ya da 'la' ile söyle, her klike bir nota. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-5-4 | 3-2-1:h | ×2",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "The step from sol to fa sounded like a full step.",
+      "tr": "Sol'den fa'ya adım tam ses gibi duyuldu."
+    },
+    {
+      "en": "Fa to mi on the way down stayed small.",
+      "tr": "İnerken fa'dan mi'ye adım küçük kaldı."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note, mi a semitone low.", "tr": "Farklı nota: mi yarım ses alçak." },
+      "fix": {
+        "en": "The half step fa–mi opened too wide. Keep mi close to fa.",
+        "tr": "Fa–mi yarım sesi fazla açıldı. Mi'yi fa'ya yakın tut."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late at the turn.", "tr": "Doğru, ama dönüşte geç." },
+      "fix": {
+        "en": "Think fa while you are still on sol, then move on the click.",
+        "tr": "Daha sol'deyken fa'yı düşün, sonra klikte geç."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the two halves apart at ♩=55, first 1-3-5, then 5-4-3-2-1. Then join them.",
+    "tr": "İki yarıyı ♩=55'te ayrı söyle, önce 1-3-5, sonra 5-4-3-2-1. Sonra birleştir."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

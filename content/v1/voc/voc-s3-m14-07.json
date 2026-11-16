@@ -1,0 +1,94 @@
+{
+  "id": "voc-s3-m14-07",
+  "title": { "en": "Clear repeated notes", "tr": "Temiz tekrar notaları" },
+  "goal": {
+    "en": "Sings four groups of four repeated notes, each note heard on its own and on the same pitch, with the click at ♩=70.",
+    "tr": "Dört tekrarlanan notadan oluşan dört grubu söyler; her nota tek başına ve aynı perdede duyulur, klikle ♩=70'te."
+  },
+  "explanation": [
+    {
+      "en": "A repeated note is the same pitch sung again. Each one needs its own clear start, or the notes melt into one long sound.",
+      "tr": "Tekrarlanan nota aynı perdenin yeniden söylenmesidir. Her birinin kendi net başlangıcı olmalıdır; yoksa notalar tek bir uzun sese karışır."
+    },
+    {
+      "en": "Use a light consonant to restart each note: 'da' or 'na'. The tongue makes the start, not the throat.",
+      "tr": "Her notayı yeniden başlatmak için hafif bir ünsüz kullan: 'da' ya da 'na'. Başlangıcı boğaz değil, dil yapar."
+    },
+    {
+      "en": "The pitch does not move between repeats. It often creeps down, so keep the fourth note as high as the first.",
+      "tr": "Tekrarlar arasında perde kıpırdamaz. Çoğu zaman yavaşça düşer; dördüncü notayı birincisi kadar yüksek tut."
+    },
+    {
+      "en": "The groups are do, mi, re and do: four of each, one per click.",
+      "tr": "Gruplar do, mi, re ve do'dur: her birinden dört tane, her klike bir."
+    },
+    {
+      "en": "Keep the vowel the same on every repeat and the volume even. No note is pushed.",
+      "tr": "Ünlüyü her tekrarda aynı, gürlüğü eşit tut. Hiçbir nota itilmez."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then four groups of four repeated notes (1, 3, 2, 1) on 'da' in your range at ♩=70 and ♩=50, soft synthesized voice.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 'da' ile dört tekrarlı dört grup (1, 3, 2, 1); ♩=70 ve ♩=50, yumuşak sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing the four groups on 'da', one note per click: four do's, four mi's, four re's, four do's. Start at ♩=50 if you like; the lesson counts at ♩=70. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra dört grubu 'da' ile, her klike bir nota söyle: dört do, dört mi, dört re, dört do. İstersen ♩=50'de başla; ders ♩=70'te sayılır. Kendi oktavında söyle."
+    },
+    "sequence": "1-1-1-1 | 3-3-3-3 | 2-2-2-2 | 1-1-1-1",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Every repeated note is heard as its own onset, with Level 3 pitch and timing accuracy.",
+        "tr": "Her tekrarlanan nota kendi atağıyla duyulur; Seviye 3 perde ve zamanlama ölçütü sağlanır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each repeat had its own clear start.",
+      "tr": "Her tekrarın kendi net başlangıcı vardı."
+    },
+    {
+      "en": "The fourth note of each group was as high as the first.",
+      "tr": "Her grubun dördüncü notası birincisi kadar yüksekti."
+    },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Couldn't hear the repeated note.", "tr": "Tekrarlanan notayı duyamadım." },
+      "fix": {
+        "en": "Two syllables on the same note need a clear restart. Give each one its consonant and a tiny gap.",
+        "tr": "Aynı notadaki iki hece net bir yeniden başlangıç ister. Her birine ünsüzünü ve küçük bir boşluk ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, a little low by the end of the group.",
+        "tr": "Farklı nota, grubun sonunda biraz alçak."
+      },
+      "fix": {
+        "en": "Keep the first note in mind and aim each repeat at it. A brighter vowel such as 'dee' can help.",
+        "tr": "İlk notayı aklında tut ve her tekrarı ona hedefle. 'di' gibi daha parlak bir ünlü yardımcı olabilir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing two repeats per note instead of four, with a short rest between groups.",
+    "tr": "Her notada dört yerine iki tekrar söyle; gruplar arasında kısa bir dinlenme ver."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

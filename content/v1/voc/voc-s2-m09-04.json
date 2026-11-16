@@ -1,0 +1,91 @@
+{
+  "id": "voc-s2-m09-04",
+  "title": { "en": "Echo a two-bar melody", "tr": "İki ölçülük ezgiyi yankıla" },
+  "goal": {
+    "en": "Hears a two-bar melody and sings it back with its notes and its rhythm at ♩=70.",
+    "tr": "İki ölçülük bir ezgiyi duyar ve notası ve ritmiyle ♩=70'te geri söyler."
+  },
+  "explanation": [
+    {
+      "en": "Now you join the two echoes you practised: notes and rhythm together. The app plays two bars, then gives you two bars to answer.",
+      "tr": "Şimdi çalıştığın iki yankıyı birleştiriyorsun: nota ve ritim birlikte. Uygulama iki ölçü çalar, sonra cevap için sana iki ölçü verir."
+    },
+    {
+      "en": "The melodies use do to sol, with quarters, halves and pairs of eighths. Each one ends on a longer note.",
+      "tr": "Ezgiler do ile sol arasını kullanır; dörtlükler, ikilikler ve ikili sekizliklerle. Her biri daha uzun bir notayla biter."
+    },
+    {
+      "en": "Listen for the shape of the line and where it runs fast. Both come back in your answer.",
+      "tr": "Dizinin biçimini ve nerede hızlandığını dinle. İkisi de cevabında geri gelir."
+    },
+    {
+      "en": "If you lose a note, keep the rhythm going and land on the last note. A steady answer with one different note is better than stopping.",
+      "tr": "Bir notayı kaçırırsan ritmi sürdür ve son notaya in. Tek farklı notası olan düzenli bir cevap, durmaktan iyidir."
+    },
+    {
+      "en": "Sing on 'la' or in solfège, in your own octave.",
+      "tr": "'La' ile ya da solfejle, kendi oktavında söyle."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S", "KL"],
+    "brief": {
+      "en": "One bar of click, then four generated two-bar melodies on degrees 1–5 in your comfortable range at ♩=70, soft synthesized voice, each followed by two bars of click for your answer.",
+      "tr": "Bir ölçü klik, ardından rahat menzilinde 1–5. derecelerden üretilmiş dört iki ölçülük ezgi, ♩=70, yumuşak sentez ses; her birinin ardından cevabın için iki ölçü klik."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Listen to 4 melodies. After each one, sing it back on 'la' in the next two bars, with the click at ♩=70, in your own octave. The melodies are new on every attempt.",
+      "tr": "4 ezgi dinle. Her birinin ardından sonraki iki ölçüde, ♩=70 klikle, kendi oktavında 'la' ile geri söyle. Ezgiler her denemede yenidir."
+    },
+    "tempo": { "open": 70, "target": 70 },
+    "pass": { "levelDefault": true }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "My answers kept the rhythm of the example.",
+      "tr": "Cevaplarım örneğin ritmini korudu."
+    },
+    {
+      "en": "I kept going to the last note, even after a slip.",
+      "tr": "Bir kaymadan sonra bile son notaya kadar sürdürdüm."
+    },
+    { "en": "I sang in a comfortable octave.", "tr": "Rahat bir oktavda söyledim." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": { "en": "Different note in bar 2.", "tr": "2. ölçüde farklı nota." },
+      "fix": {
+        "en": "Bar 1 filled your memory. Replay the melody and listen only to bar 2, then sing both bars.",
+        "tr": "1. ölçü belleğini doldurmuş. Ezgiyi yeniden dinle ve yalnız 2. ölçüye kulak ver, sonra iki ölçüyü birden söyle."
+      }
+    },
+    {
+      "error": { "en": "Correct, but late on the eighths.", "tr": "Doğru, ama sekizliklerde geç." },
+      "fix": {
+        "en": "Keep the eighths light and short, two to a click. Don't wait for each note to settle.",
+        "tr": "Sekizlikleri hafif ve kısa tut, her klike iki tane. Her notanın oturmasını bekleme."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Lower the tempo to ♩=55 and replay each melody once before you answer.",
+    "tr": "Tempoyu ♩=55'e indir ve cevaplamadan önce her ezgiyi bir kez daha dinle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

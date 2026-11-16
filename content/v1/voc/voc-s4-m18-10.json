@@ -1,0 +1,132 @@
+{
+  "id": "voc-s4-m18-10",
+  "title": {
+    "en": "Round: Frère Jacques",
+    "tr": "Kanon: Frère Jacques"
+  },
+  "goal": {
+    "en": "Sings the second entry of Frère Jacques in a two-part round at ♩=90.",
+    "tr": "Frère Jacques'ı iki sesli kanonda ikinci giriş olarak ♩=90'da söyler."
+  },
+  "explanation": [
+    {
+      "en": "Wear headphones for every lesson in this module, at a low volume. The accompaniment plays in your ears and the microphone hears only your voice. Without headphones, the app cannot tell your part from the accompaniment, so the lesson falls back to self-check.",
+      "tr": "Bu modülün her dersinde kulaklığı düşük seste tak. Eşlik kulağında çalar, mikrofon yalnız senin sesini duyar. Kulaklık yoksa uygulama partini eşlikten ayıramaz; ders öz-kontrole düşer."
+    },
+    {
+      "en": "A round is one melody sung by voices that start at different times. The lines fit together and make harmony.",
+      "tr": "Kanon, farklı zamanlarda başlayan seslerin söylediği tek bir ezgidir. Partiler üst üste oturur ve armoni oluşturur."
+    },
+    {
+      "en": "You know the melody from Level 1: do-re-mi-do twice, mi-fa-sol twice, sol-la-sol-fa-mi-do twice, do-low sol-do twice.",
+      "tr": "Ezgiyi 1. seviyeden biliyorsun: iki kez do-re-mi-do, iki kez mi-fa-sol, iki kez sol-la-sol-fa-mi-do, iki kez do-alçak sol-do."
+    },
+    {
+      "en": "The other voice starts alone. You come in after two bars, when it reaches mi-fa-sol.",
+      "tr": "Diğer ses tek başına başlar. Sen iki ölçü sonra, o mi-fa-sol'e geldiğinde girersin."
+    },
+    {
+      "en": "While you sing do-re-mi-do, it sings mi-fa-sol above you. Hold your own line; the other voice will sound like a different tune.",
+      "tr": "Sen do-re-mi-do söylerken o üstünde mi-fa-sol söyler. Kendi partini tut; diğer ses başka bir ezgi gibi duyulur."
+    },
+    {
+      "en": "Your bars 5–6 have eighth notes: sol-la-sol-fa, two per beat.",
+      "tr": "Senin 5–6. ölçülerinde sekizlikler var: sol-la-sol-fa, her vuruşa iki nota."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "SE",
+      "S"
+    ],
+    "brief": {
+      "en": "The melody alone in your comfortable range, soft synthesized voice, at ♩=90 and ♩=60. Then the round: a second synthesized voice starts alone and you enter after two bars; when it finishes, it holds do while you sing your last two bars. Soft original tonic-chord accompaniment with a click. Headphones recommended.",
+      "tr": "Ezgi tek başına rahat menzilinde, yumuşak sentez ses, ♩=90 ve ♩=60. Sonra kanon: ikinci bir sentez ses tek başına başlar, sen iki ölçü sonra girersin; o bitirince sen son iki ölçünü söylerken do'yu tutar. Yumuşak özgün tonik akor eşliği ve klik. Kulaklık önerilir."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A3",
+      "A5"
+    ],
+    "task": {
+      "en": "Listen to the count-in. Wait two bars while the other voice starts, then sing the melody on 'la'. Start at ♩=60 if you like; the lesson counts at ♩=90. Sing in your own octave.",
+      "tr": "Sayışı dinle. Diğer ses başlarken iki ölçü bekle, sonra ezgiyi 'la' ile söyle. İstersen ♩=60'ta başla; ders ♩=90'da sayılır. Kendi oktavında söyle."
+    },
+    "sequence": "wr | wr | 1-2-3-1 | 1-2-3-1 | 3-4 5:h | 3-4 5:h | 5:e 6:e 5:e 4:e 3:q 1:q | 5:e 6:e 5:e 4:e 3:q 1:q | 1-5, 1:h | 1-5, 1:h",
+    "tempo": {
+      "open": 90,
+      "target": 90
+    },
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I came in on time after two bars.",
+      "tr": "İki ölçü sonra zamanında girdim."
+    },
+    {
+      "en": "I kept my own part while the other voice sang.",
+      "tr": "Diğer ses söylerken kendi partimde kaldım."
+    },
+    {
+      "en": "Bars 5–6 had two notes per beat, evenly.",
+      "tr": "5–6. ölçülerde her vuruşa eşit iki nota düştü."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but early: you came in with the other voice.",
+        "tr": "Doğru, ama erken: diğer sesle birlikte girdin."
+      },
+      "fix": {
+        "en": "Count the two bars, 1-2-3-4, 2-2-3-4, and come in when the other voice sings mi-fa-sol.",
+        "tr": "İki ölçüyü say, 1-2-3-4, 2-2-3-4; diğer ses mi-fa-sol söylerken gir."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: you switched to the other voice's line.",
+        "tr": "Farklı nota: diğer sesin partisine geçtin."
+      },
+      "fix": {
+        "en": "Sing the round at ♩=60 and think your own syllables: do-re-mi-do while it sings mi-fa-sol.",
+        "tr": "Kanonu ♩=60'ta söyle ve kendi hecelerini içinden düşün: o mi-fa-sol söylerken sen do-re-mi-do."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Find a quieter spot, keep the phone close and use headphones for the accompaniment.",
+        "tr": "Daha sessiz bir yer bul, telefonu yakın tut ve eşlik için kulaklık kullan."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the round at ♩=60 first, then ♩=75, then ♩=90.",
+    "tr": "Kanonu önce ♩=60'ta, sonra ♩=75'te, en son ♩=90'da söyle."
+  },
+  "repertoire": "Frère Jacques, traditional French melody (18th century). Public domain, legal review pending. Sung on 'la' as a two-part round; degrees, key, accompaniment and tempo by Ostinato.",
+  "minutes": 12,
+  "expertPending": true
+}

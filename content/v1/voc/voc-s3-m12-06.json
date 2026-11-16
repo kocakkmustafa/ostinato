@@ -1,0 +1,117 @@
+{
+  "id": "voc-s3-m12-06",
+  "title": {
+    "en": "Major sixth",
+    "tr": "Büyük altılı"
+  },
+  "goal": {
+    "en": "Sings a major sixth up and down in six intervals.",
+    "tr": "Büyük altılıyı altı aralıkta çıkıcı ve inici söyler."
+  },
+  "explanation": [
+    {
+      "en": "A major sixth (M6) is do to la: four whole steps and a half step.",
+      "tr": "Büyük altılı (B6) do'dan la'ya uzanır: dört tam ses ve bir yarım ses."
+    },
+    {
+      "en": "In this lesson 1 is the major do again. You find M6 at do-la, low sol to mi, and re-ti.",
+      "tr": "Bu derste 1 yeniden majördeki do'dur. B6'yı do-la'da, alttaki sol'den mi'ye ve re-si'de bulursun."
+    },
+    {
+      "en": "A sixth is a wide leap. Think of it as an octave minus a minor third: la is a minor third below the top do.",
+      "tr": "Altılı geniş bir atlamadır. Onu oktavdan bir küçük üçlü eksik diye düşün: la, üst do'nun küçük üçlü altındadır."
+    },
+    {
+      "en": "Do up to la joins the major home to the minor home. The next lesson uses this link.",
+      "tr": "Do'dan la'ya çıkış majörün evini minörün evine bağlar. Sonraki ders bu bağı kullanır."
+    },
+    {
+      "en": "If a top note is not comfortable, sing it an octave lower or skip it.",
+      "tr": "Üst nota rahat değilse onu bir oktav aşağıda söyle ya da atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Each pair in your personal key, played once before you sing and once after for comparison.",
+      "tr": "Her çift kişisel tonunda; söylemeden önce bir kez, sonra karşılaştırma için bir kez çalar."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Six intervals: do-la, la-do, low sol to mi, mi to low sol, re-ti, ti-re. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.",
+      "tr": "Altı aralık: do-la, la-do, alttaki sol'den mi'ye, mi'den alttaki sol'e, re-si, si-re. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle."
+    },
+    "sequence": "1:q 6:h qr | 6:q 1:h qr | 5,:q 3:h qr | 3:q 5,:h qr | 2:q 7:h qr | 7:q 2:h qr",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "For M6 I heard the top do and came down a minor third.",
+      "tr": "B6 için üst do'yu duydum ve bir küçük üçlü indim."
+    },
+    {
+      "en": "My target matched the comparison interval.",
+      "tr": "Hedef notam karşılaştırma aralığıyla aynıydı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, M6 a semitone low.",
+        "tr": "Farklı nota: B6 yarım ses alçak."
+      },
+      "fix": {
+        "en": "That is a minor sixth. Aim la brighter: just a minor third below the top do.",
+        "tr": "Bu küçük altılı olur. La'yı daha parlak hedefle: üst do'nun yalnız küçük üçlü altı."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, M6 a whole step low.",
+        "tr": "Farklı nota: B6 bir tam ses alçak."
+      },
+      "fix": {
+        "en": "You stopped at sol, a fifth. Pass through sol in your head and take one more step.",
+        "tr": "Sol'de, beşlide kalmışsın. İçinden sol'den geç ve bir basamak daha çık."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little more clearly on an open vowel and keep the phone at arm's length.",
+        "tr": "Biraz daha net, açık bir ünlüyle söyle; telefonu kol mesafesinde tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing do-mi-sol-la first, then leave out mi and sol.",
+    "tr": "Önce do-mi-sol-la'yı söyle, sonra mi ile sol'ü atla."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

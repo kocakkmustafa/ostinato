@@ -1,0 +1,111 @@
+{
+  "id": "voc-s4-m17-03",
+  "title": {
+    "en": "Three-note turns",
+    "tr": "Üç notalı dönüşler"
+  },
+  "goal": {
+    "en": "Sings 8 three-note turns, 1-2-1 and 3-2-1, each on one 'ah' with every note heard.",
+    "tr": "8 üç notalık dönüşü, 1-2-1 ve 3-2-1'i, her birini tek 'a' ile ve her notası duyularak söyler."
+  },
+  "explanation": [
+    {
+      "en": "A turn is three notes on one syllable: a small melisma that leaves a note and comes back, or steps down to land.",
+      "tr": "Dönüş tek hecede üç notadır: bir notadan ayrılıp geri dönen ya da basamakla inip yerleşen küçük bir melisma."
+    },
+    {
+      "en": "1-2-1 steps up to re and returns to do. 3-2-1 walks down from mi to do.",
+      "tr": "1-2-1 re'ye çıkar ve do'ya döner. 3-2-1 mi'den do'ya iner."
+    },
+    {
+      "en": "Keep one vowel through all three notes. Give the middle note its full length; it is the one that most often disappears.",
+      "tr": "Üç notanın hepsinde tek ünlüyü koru. Ortadaki notaya tam süresini ver; en sık kaybolan odur."
+    },
+    {
+      "en": "The two turns alternate, four times each. Rest after every turn.",
+      "tr": "İki dönüş sırayla gelir, her biri dört kez. Her dönüşten sonra dinlen."
+    },
+    {
+      "en": "Start light and slow. If the throat tightens, stop and rest.",
+      "tr": "Hafif ve yavaş başla. Boğaz sıkışırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "1-2-1 and 3-2-1 in turn on 'ah' in your comfortable range, soft synthesized voice, with a rest after each turn.",
+      "tr": "Rahat menzilinde 'a' ile sırayla 1-2-1 ve 3-2-1, yumuşak sentez ses; her dönüşten sonra sus."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Listen, then sing 1-2-1 on one 'ah' and rest, then 3-2-1 on one 'ah' and rest. Do the pair four times: 8 turns. Sing in your own octave.",
+      "tr": "Dinle, sonra tek 'a' ile 1-2-1 söyle ve dinlen, ardından tek 'a' ile 3-2-1 söyle ve dinlen. Bu çifti dört kez yap: 8 dönüş. Kendi oktavında söyle."
+    },
+    "sequence": "1:q 2:q 1:q qr | 3:q 2:q 1:q qr | ×4",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I could hear the middle note of every turn.",
+      "tr": "Her dönüşün ortadaki notasını duyabildim."
+    },
+    {
+      "en": "Each turn stayed on one vowel.",
+      "tr": "Her dönüş tek ünlüde kaldı."
+    },
+    {
+      "en": "My last 1 felt like the same note as my first 1.",
+      "tr": "Son 1'im ilk 1'imle aynı nota gibi geldi."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear the middle note.",
+        "tr": "Ortadaki notayı duyamadım."
+      },
+      "fix": {
+        "en": "Give re its full length before you move on. Sing the turn once slowly, then again at the same speed.",
+        "tr": "Devam etmeden önce re'ye tam süresini ver. Dönüşü bir kez yavaşça, sonra yine aynı hızda söyle."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the last 1, a little low.",
+        "tr": "Son 1'de farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "Hear do before you start, and land on that same note at the end of each turn.",
+        "tr": "Başlamadan önce do'yu duy ve her dönüşün sonunda aynı notaya in."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing only 1-2-1 four times, then add 3-2-1.",
+    "tr": "Yalnız 1-2-1'i dört kez söyle, sonra 3-2-1'i ekle."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

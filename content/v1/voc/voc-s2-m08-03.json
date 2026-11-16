@@ -1,0 +1,110 @@
+{
+  "id": "voc-s2-m08-03",
+  "title": { "en": "Growing and fading volume", "tr": "Gürlüğü artırmak ve azaltmak" },
+  "goal": {
+    "en": "Hums a four-count swell, growing on 1–2 and fading on 3–4, while the pitch stays within 40 cents.",
+    "tr": "Dört sayımlık bir şişirme mırıldanır; 1–2'de büyür, 3–4'te söner ve perde 40 cent içinde kalır."
+  },
+  "explanation": [
+    {
+      "en": "A crescendo (<) grows gradually louder; a diminuendo (>) fades gradually softer.",
+      "tr": "Kreşendo (<) giderek gürleşir; diminuendo (>) giderek yumuşar."
+    },
+    {
+      "en": "Volume and pitch are separate: a crescendo on one tone stays on the same tone.",
+      "tr": "Gürlük ve perde ayrıdır: tek seste kreşendo aynı seste kalır."
+    },
+    {
+      "en": "Stay inside a comfortable range of loudness. Louder never means pushing the throat; the top of the swell is your easy f.",
+      "tr": "Rahat bir gürlük aralığında kal. Daha gür olmak hiçbir zaman boğazı zorlamak demek değildir; şişirmenin tepesi senin rahat f'indir."
+    },
+    {
+      "en": "Breath for a phrase comes from an easy inhale, not a forced one. Breathe in the rest bar after each swell.",
+      "tr": "Bir cümle için nefes zorlanmış değil, rahat bir nefes alışından gelir. Her şişirmeden sonraki sus ölçüsünde nefes al."
+    },
+    {
+      "en": "The screen shows two lines: loudness should rise and fall like a hill, pitch should stay flat.",
+      "tr": "Ekran iki çizgi gösterir: gürlük bir tepe gibi yükselip inmeli, perde düz kalmalı."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "A four-count hum on your comfortable 1 that grows and fades, then 1-2-3-2-1 growing up the steps and fading down, with a soft count.",
+      "tr": "Rahat 1'inde büyüyüp sönen dört sayımlık bir mırıldanma, ardından basamaklarda büyüyüp inişte sönen 1-2-3-2-1; yumuşak sayımla."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Hum “mm” on your comfortable 1 for four counts: grow a little on 1–2, fade on 3–4, then rest a bar. Do it three times. Then hum 1-2-3-2-1, growing gently as you climb and fading as you come down. Sing in your own octave.",
+      "tr": "Rahat 1'inde dört sayım “mm” diye mırıldan: 1–2'de biraz büyü, 3–4'te sön, sonra bir ölçü dinlen. Bunu üç kez yap. Ardından 1-2-3-2-1'i çıkarken hafifçe büyüyerek, inerken sönerek mırıldan. Kendi oktavında söyle."
+    },
+    "sequence": "1:w | wr | 1:w | wr | 1:w | wr | 1-2-3-2 | 1:h hr",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "On each swell, the middle is at least 5 dB louder than the start and the end, and the pitch stays within 40 cents. On the steps, Level 2 pitch accuracy.",
+        "tr": "Her şişirmede orta kısım başından ve sonundan en az 5 dB daha gür ve perde 40 cent içinde kalır. Basamaklarda Seviye 2 perde ölçütü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I changed loudness gradually while the tone stayed easy.",
+      "tr": "Ses rahat kalırken gürlüğü kademeli değiştirdim."
+    },
+    {
+      "en": "The loudest moment was in the middle, not at the end.",
+      "tr": "En gür an sonda değil, ortadaydı."
+    },
+    {
+      "en": "The top step was no louder than easy speech.",
+      "tr": "Üst basamak rahat konuşmadan daha gür değildi."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note: the pitch rises as the hum grows.",
+        "tr": "Farklı nota: mırıldanma büyüdükçe perde yükseliyor."
+      },
+      "fix": {
+        "en": "Make the swell smaller and picture the flat pitch line while only the loudness moves.",
+        "tr": "Şişirmeyi küçült ve yalnız gürlük hareket ederken düz perde çizgisini gözünün önüne getir."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but the middle is less than 5 dB above the ends.",
+        "tr": "Doğru, ama orta kısım uçlardan 5 dB'den az yüksek."
+      },
+      "fix": {
+        "en": "Start and end softer, close to your p, so the hill has room to grow.",
+        "tr": "Başlangıcı ve bitişi p'ine yakın, daha hafif tut; tepenin büyümeye yeri olsun."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the pitch sinks as the hum fades.",
+        "tr": "Farklı nota: mırıldanma söndükçe perde düşüyor."
+      },
+      "fix": {
+        "en": "Keep the note in mind to the very end. Stop the fade a little earlier while the tone is still clear.",
+        "tr": "Notayı sonuna kadar içinde duy. Ses hâlâ netken sönmeyi biraz daha erken bitir."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "If the throat tightens, return to speaking volume and practise only the fade; a smaller range of loudness is fine.",
+    "tr": "Boğaz sıkışırsa konuşma gürlüğüne dön ve yalnız sönmeyi çalış; daha küçük bir gürlük aralığı uygundur."
+  },
+  "legacy": "R: vocal-18",
+  "minutes": 8,
+  "expertPending": true
+}

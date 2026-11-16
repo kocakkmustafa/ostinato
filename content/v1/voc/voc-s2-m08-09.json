@@ -1,0 +1,100 @@
+{
+  "id": "voc-s2-m08-09",
+  "title": { "en": "Shaping a phrase", "tr": "Cümleye biçim vermek" },
+  "goal": {
+    "en": "Sings an original four-bar phrase that grows toward its peak note and fades after it, with the peak the loudest note.",
+    "tr": "Tepe notasına doğru büyüyen ve sonrasında sönen özgün dört ölçülük bir cümle söyler; en gür nota tepe notasıdır."
+  },
+  "explanation": [
+    {
+      "en": "Most phrases have a high point. Leading the volume toward it and away from it gives the phrase a shape, like a sentence with one important word.",
+      "tr": "Çoğu cümlenin bir doruğu vardır. Gürlüğü ona doğru götürüp sonra ondan uzaklaştırmak cümleye bir biçim verir; tek önemli sözcüğü olan bir cümle gibi."
+    },
+    {
+      "en": "This phrase climbs do-re-mi-re, mi-fa-sol, reaches la, then comes home: sol-fa, mi-re-do. La is the peak.",
+      "tr": "Bu cümle do-re-mi-re, mi-fa-sol diye tırmanır, la'ya ulaşır, sonra eve döner: sol-fa, mi-re-do. Tepe la'dır."
+    },
+    {
+      "en": "Start at your p, grow gently up to la, then fade back to p by the final do. The change is gradual, not a jump.",
+      "tr": "p'inden başla, la'ya kadar yavaşça büyü, sonra son do'ya kadar p'ye sön. Değişim bir sıçrama değil, kademelidir."
+    },
+    {
+      "en": "The peak is your easy f, never a shout. Don't push the top note louder; sing it freely and let the shape do the work.",
+      "tr": "Tepe senin rahat f'indir, asla bağırma değildir. Üst notayı daha gür olsun diye itme; serbestçe söyle ve işi biçime bırak."
+    },
+    {
+      "en": "The app places the phrase in your comfortable range. If la still feels high, change octave or skip it.",
+      "tr": "Uygulama cümleyi rahat menziline yerleştirir. La yine de yüksek gelirse oktav değiştir ya da atla."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["S"],
+    "brief": {
+      "en": "The four-bar phrase on “loo” in your comfortable range, growing to la and fading to the final do, at an easy pace and slowly.",
+      "tr": "Dört ölçülük cümle “lu” ile rahat menzilinde; la'ya büyür ve son do'ya söner, rahat bir hızda ve yavaşça."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Sing the four bars on “loo”: grow toward la in bar 3, then fade to the final do. Breathe before you start and rest after. Do it twice. Sing in your own octave.",
+      "tr": "Dört ölçüyü “lu” ile söyle: 3. ölçüdeki la'ya doğru büyü, sonra son do'ya sön. Başlamadan önce nefes al, sonra dinlen. İki kez yap. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-2 | 3-4-5:h | 6:h 5-4 | 3-2-1:h",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "In at least one of the two tries, la is the loudest note of the phrase and the final do is at least 5 dB softer than la. Pitch: Level 2 accuracy.",
+        "tr": "İki denemeden en az birinde la cümlenin en gür notasıdır ve son do, la'dan en az 5 dB daha hafiftir. Perde: Seviye 2 ölçütü."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1", "V3"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "The phrase had one clear high point.", "tr": "Cümlenin tek bir net doruğu vardı." },
+    { "en": "The volume changed gradually, not in jumps.", "tr": "Gürlük sıçramalarla değil, kademeli değişti." },
+    { "en": "I stayed in a comfortable range.", "tr": "Rahat menzilde kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but sol in bar 2 is louder than la.",
+        "tr": "Doğru, ama 2. ölçüdeki sol, la'dan daha gür."
+      },
+      "fix": {
+        "en": "Save some growth. Keep bar 2 moderate so la still has room above it.",
+        "tr": "Büyümenin bir kısmını sakla. 2. ölçüyü orta düzeyde tut ki la'nın üstünde yer kalsın."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: la is sharp.",
+        "tr": "Farklı nota: la tiz."
+      },
+      "fix": {
+        "en": "Grow less on the climb. Sing la lightly and let it ring rather than pushing it.",
+        "tr": "Tırmanışta daha az büyü. La'yı hafifçe söyle ve itmek yerine çınlamasına izin ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note: the final do is flat.",
+        "tr": "Farklı nota: son do pes."
+      },
+      "fix": {
+        "en": "Fading is not dropping. Hear do clearly before you reach it and keep the tone clear while you fade.",
+        "tr": "Sönmek düşmek değildir. Do'ya varmadan onu net duy ve sönerken sesi net tut."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing bars 1–2 growing and bars 3–4 fading as two separate halves, then join them.",
+    "tr": "1–2. ölçüleri büyüyerek, 3–4. ölçüleri sönerek iki ayrı yarım olarak söyle, sonra birleştir."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

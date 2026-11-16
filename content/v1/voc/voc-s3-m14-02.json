@@ -1,0 +1,110 @@
+{
+  "id": "voc-s3-m14-02",
+  "title": { "en": "Light staccato", "tr": "Hafif staccato" },
+  "goal": {
+    "en": "Sings 1-3-5-3-1 as short, light notes with silence after each, with the click at ♩=70.",
+    "tr": "1-3-5-3-1'i klikle ♩=70'te, her birinin ardından sessizlik gelen kısa ve hafif notalarla söyler."
+  },
+  "explanation": [
+    {
+      "en": "Staccato means short and separated. On screen it is a dot over or under the note.",
+      "tr": "Staccato kısa ve ayrık demektir. Ekranda notanın üstünde ya da altında bir noktadır."
+    },
+    {
+      "en": "Each note lasts half a click; the other half is silence. On screen these are eighth notes, each followed by an eighth rest.",
+      "tr": "Her nota bir klikin yarısı kadar sürer; diğer yarısı sessizliktir. Ekranda bunlar sekizlik notalardır, her birinin ardından sekizlik sus gelir."
+    },
+    {
+      "en": "Make each note with a small puff of air, like a soft, quiet laugh: 'ha, ha'. The throat stays open and easy.",
+      "tr": "Her notayı küçük bir hava itkisiyle yap; yumuşak, sessiz bir gülme gibi: 'ha, ha'. Boğaz açık ve rahat kalır."
+    },
+    {
+      "en": "End the sound by stopping the air, not by squeezing the throat.",
+      "tr": "Sesi boğazı sıkarak değil, havayı durdurarak bitir."
+    },
+    {
+      "en": "Light is the key word. Staccato is small and bouncy, never hard or loud. Short notes still need a clear pitch.",
+      "tr": "Anahtar sözcük hafifliktir. Staccato küçük ve sekerek gelir; asla sert ya da gür değildir. Kısa notaların da perdesi net olmalı."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "One-bar click count-in, then 1-3-5-3-1 staccato on 'ha' in your range at ♩=70 and ♩=50, soft synthesized voice.",
+      "tr": "Bir ölçülük klik girişi, ardından rahat menzilinde 'ha' ile staccato 1-3-5-3-1; ♩=70 ve ♩=50, yumuşak sentez ses."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "After the count-in, sing 1-3-5-3-1 on a light 'ha' or 'hoo', one short note on each click, silent between notes. Rest for the rest of the bar and do it three times. Start at ♩=50 if you like; the lesson counts at ♩=70. Sing in your own octave.",
+      "tr": "Giriş sayımından sonra 1-3-5-3-1'i hafif bir 'ha' ya da 'hu' ile söyle; her klikte bir kısa nota, notalar arasında sessizlik. Ölçünün kalanında dinlen ve bunu üç kez yap. İstersen ♩=50'de başla; ders ♩=70'te sayılır. Kendi oktavında söyle."
+    },
+    "sequence": "1:e er 3:e er 5:e er 3:e er | 1:e er qr hr | ×3",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "The sound drops into silence after every note, with Level 3 pitch and timing accuracy.",
+        "tr": "Her notadan sonra ses sessizliğe düşer; Seviye 3 perde ve zamanlama ölçütü sağlanır."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each note was short, with silence after it.",
+      "tr": "Her nota kısaydı ve ardından sessizlik geldi."
+    },
+    {
+      "en": "I started each note without a hard click in my throat.",
+      "tr": "Her notaya boğazda sert bir vuruş olmadan başladım."
+    },
+    {
+      "en": "Each short note still had a clear pitch.",
+      "tr": "Her kısa notanın perdesi yine netti."
+    },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but the notes run together.",
+        "tr": "Doğru, ama notalar birbirine karışıyor."
+      },
+      "fix": {
+        "en": "Stop the air right after each note so the gap is clear. Think 'ha' and then quiet.",
+        "tr": "Havayı her notadan hemen sonra durdur ki boşluk net olsun. 'Ha' de ve sus diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Very short notes are hard to read. Make each note a little longer and keep the gap after it.",
+        "tr": "Çok kısa notalar zor okunur. Her notayı biraz uzat ve ardındaki boşluğu koru."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on 5, a little low.",
+        "tr": "5'te farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "The skip from 3 to 5 is a third. Hear sol in your head before the click, then aim right at it.",
+        "tr": "3'ten 5'e atlama bir üçlüdür. Klikten önce sol'ü kafanda duy, sonra tam ona hedefle."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the line connected first, then shorten the notes one at a time.",
+    "tr": "Önce diziyi bağlı söyle, sonra notaları teker teker kısalt."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

@@ -1,0 +1,120 @@
+{
+  "id": "voc-s4-m17-09",
+  "title": {
+    "en": "Grace notes",
+    "tr": "Süs notaları"
+  },
+  "goal": {
+    "en": "Sings 6 figures in which a very short grace note leads into a main note, and lands in tune on the main note.",
+    "tr": "Çok kısa bir süs notasının asıl notaya götürdüğü 6 figürü söyler ve asıl notaya doğru perdede iner."
+  },
+  "explanation": [
+    {
+      "en": "A grace note is a very short note just before the main note. It takes almost no time; the main note keeps the beat and the weight.",
+      "tr": "Süs notası, asıl notadan hemen önceki çok kısa bir notadır. Neredeyse hiç zaman almaz; vuruş ve ağırlık asıl notadadır."
+    },
+    {
+      "en": "Here the grace note is always one step away: from above, like re to do, or from below, like ti to do.",
+      "tr": "Burada süs notası hep bir basamak uzaktadır: yukarıdan, re'den do'ya gibi, ya da aşağıdan, si'den do'ya gibi."
+    },
+    {
+      "en": "The six figures: re to do, ti to do, fa to mi, re to mi, la to sol, fa to sol. Sing each on one 'ah'.",
+      "tr": "Altı figür: re'den do'ya, si'den do'ya, fa'dan mi'ye, re'den mi'ye, la'dan sol'e, fa'dan sol'e. Her birini tek 'a' ile söyle."
+    },
+    {
+      "en": "Touch the grace note lightly and move on at once. If it gets as long as the main note, it is no longer a grace note.",
+      "tr": "Süs notasına hafifçe dokun ve hemen geç. Asıl nota kadar uzarsa artık süs notası değildir."
+    },
+    {
+      "en": "The pitch meter scores the main note. Land on it and hold it steady. If the throat tightens, stop and rest.",
+      "tr": "Perde göstergesi asıl notayı puanlar. Ona in ve sabit tut. Boğaz sıkışırsa dur ve dinlen."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "The six figures in your comfortable range on 'ah', soft synthesized voice; each main note is held for about two seconds.",
+      "tr": "Altı figür rahat menzilinde 'a' ile, yumuşak sentez ses; her asıl nota yaklaşık iki saniye tutulur."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "For each of the 6 figures: listen, then sing it on one 'ah' in your own octave. Touch the grace note briefly, land on the main note and hold it for about two seconds.",
+      "tr": "6 figürün her biri için: dinle, sonra kendi oktavında tek 'a' ile söyle. Süs notasına kısaca dokun, asıl notaya in ve onu yaklaşık iki saniye tut."
+    },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Level 4 pitch accuracy on the six main notes; each grace note shows as a short step into its main note.",
+        "tr": "Altı asıl notada 4. seviye perde ölçütü; her süs notası, asıl notasına giden kısa bir basamak olarak görünür."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V5"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "Each grace note was much shorter than its main note.",
+      "tr": "Her süs notası asıl notasından çok daha kısaydı."
+    },
+    {
+      "en": "The main note stayed steady after the grace note.",
+      "tr": "Süs notasından sonra asıl nota sabit kaldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Correct, but late: the grace note is too long.",
+        "tr": "Doğru, ama geç: süs notası çok uzun."
+      },
+      "fix": {
+        "en": "Think of the grace note as a quick flick into the main note. Put the weight on the second sound.",
+        "tr": "Süs notasını asıl notaya çabuk bir dokunuş gibi düşün. Ağırlığı ikinci sese ver."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note on the main note, a little low.",
+        "tr": "Asıl notada farklı nota, biraz alçak."
+      },
+      "fix": {
+        "en": "After a grace note from above, the main note can sag. Replay the figure and hear the main note before you sing.",
+        "tr": "Yukarıdan gelen süs notasından sonra asıl nota düşebilir. Figürü yeniden dinle ve söylemeden önce asıl notayı içinden duy."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing each figure as two even notes first, then shorten the first one step by step.",
+    "tr": "Her figürü önce iki eşit nota olarak söyle, sonra ilkini adım adım kısalt."
+  },
+  "minutes": 8,
+  "expertPending": true
+}

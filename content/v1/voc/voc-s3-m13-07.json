@@ -1,0 +1,98 @@
+{
+  "id": "voc-s3-m13-07",
+  "title": { "en": "Count in and keep going", "tr": "Say ve devam et" },
+  "goal": {
+    "en": "Sings an original eight-bar line in G major from the staff with the click at ♩=70, without stopping.",
+    "tr": "Sol majörde özgün sekiz ölçülük satırı porteden ♩=70'te klikle, durmadan söyler."
+  },
+  "explanation": [
+    {
+      "en": "In sight-singing the beat matters more than one note. If you stop to fix a note, you lose the bars after it.",
+      "tr": "Deşifrede vuruş tek bir notadan daha önemlidir. Bir notayı düzeltmek için durursan ondan sonraki ölçüleri kaybedersin."
+    },
+    {
+      "en": "Count one bar in with the click, in your head or quietly aloud, and keep counting while you sing.",
+      "tr": "Klikle bir ölçü say, içinden ya da sessizce sesli, ve söylerken saymaya devam et."
+    },
+    {
+      "en": "If a note slips, don't go back. Come in on the next beat with the next note; the next beat is a fresh start.",
+      "tr": "Bir nota kayarsa geri dönme. Sonraki vuruşta sonraki notayla gir; sonraki vuruş yeni bir başlangıçtır."
+    },
+    {
+      "en": "Look one beat ahead of the note you are singing. The rests in bars 4 and 8 are your breath points.",
+      "tr": "Söylediğin notanın bir vuruş ilerisine bak. 4. ve 8. ölçülerdeki suslar nefes yerlerindir."
+    },
+    {
+      "en": "The line is in G major: do is the second line, and F-sharp is ti, which appears in bar 7.",
+      "tr": "Satır Sol majördedir: do ikinci çizgidir; Fa diyez si'dir ve 7. ölçüde geçer."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": ["KL", "S"],
+    "brief": {
+      "en": "Do and the tonic chord in your comfortable range, then a one-bar click count-in at ♩=70; the line itself plays only after your try, for comparison, at ♩=70 and ♩=45.",
+      "tr": "Rahat menzilinde do ve tonik akor, ardından ♩=70'te bir ölçülük klik girişi; satırın kendisi yalnız denemenden sonra, karşılaştırma için, ♩=70 ve ♩=45'te çalar."
+    }
+  },
+  "practice": {
+    "measurement": ["M"],
+    "engineSteps": ["A3", "A5"],
+    "task": {
+      "en": "Scan the eight bars for 30 seconds. Hear do and the count-in, then sing all eight bars once with the click at ♩=70 without stopping. Sing in your own octave.",
+      "tr": "Sekiz ölçüyü 30 saniye göz gezdir. Do'yu ve giriş sayımını dinle, sonra sekiz ölçünün hepsini ♩=70'te klikle durmadan bir kez söyle. Kendi oktavında söyle."
+    },
+    "sequence": "1-2-3-1 | 5:h 4:q 3:q | 2:q 3:e 4:e 5:q 3:q | 2:h hr | 3-4-5-6 | 5:q 3:q 4:q 2:q | 3:q 2:e 1:e 2:q 7,:q | 1:h. qr",
+    "tempo": { "open": 70, "target": 70 },
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "All eight bars sung through without stopping, at the Level 3 pitch and timing criteria.",
+        "tr": "Sekiz ölçünün hepsi durmadan söylenir; Seviye 3 perde ve zamanlama ölçütünde."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": ["Ç", "V1"],
+  "prerequisites": [],
+  "selfCheck": [
+    { "en": "I found do before I started.", "tr": "Başlamadan önce do'yu buldum." },
+    { "en": "I kept going when a note slipped.", "tr": "Bir nota kaydığında devam ettim." },
+    { "en": "I stayed with the click to the end.", "tr": "Sonuna kadar klikle birlikte kaldım." },
+    { "en": "I sang without straining.", "tr": "Zorlamadan söyledim." }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear several notes after a slip.",
+        "tr": "Bir kaymadan sonra birkaç notayı duyamadım."
+      },
+      "fix": {
+        "en": "You stopped to fix a note. Let it go and come in on the next beat; keep counting through the slip.",
+        "tr": "Bir notayı düzeltmek için durdun. Onu bırak ve sonraki vuruşta gir; kayma sırasında da saymaya devam et."
+      }
+    },
+    {
+      "error": {
+        "en": "Correct, but late after the rest in bar 4.",
+        "tr": "Doğru, ama 4. ölçüdeki sustan sonra geç."
+      },
+      "fix": {
+        "en": "Count the rest in your head, 'three, four', and breathe on 'three'.",
+        "tr": "Susu içinden net say, 'üç, dört', ve 'üç'te nefes al."
+      }
+    },
+    {
+      "error": { "en": "Couldn't hear.", "tr": "Duyamadım." },
+      "fix": {
+        "en": "Turn the click down or use headphones so the microphone hears only your voice.",
+        "tr": "Kliği kıs ya da kulaklık tak; mikrofon yalnız sesini duysun."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing bars 1–4 without stopping at ♩=55, then bars 5–8, then all eight bars.",
+    "tr": "Önce 1–4. ölçüleri ♩=55'te durmadan söyle, sonra 5–8. ölçüleri, sonra sekiz ölçünün hepsini."
+  },
+  "minutes": 12,
+  "expertPending": true
+}

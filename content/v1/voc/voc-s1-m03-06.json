@@ -1,0 +1,116 @@
+{
+  "id": "voc-s1-m03-06",
+  "title": {
+    "en": "Singing by numbers",
+    "tr": "Derecelerle söylemek"
+  },
+  "goal": {
+    "en": "Sings 1-3-2-4-3-5-4-2-1, saying each degree number.",
+    "tr": "1-3-2-4-3-5-4-2-1'i her derecenin sayısını söyleyerek söyler."
+  },
+  "explanation": [
+    {
+      "en": "Degree numbers name each note by its place in the scale. 1 is home; 5 is four steps above it.",
+      "tr": "Derece sayıları her notayı gamdaki yeriyle adlandırır. 1 evdir; 5 onun dört basamak üstündedir."
+    },
+    {
+      "en": "Sing the numbers as words: 'one, three, two, four…'. Saying the number links the sound to its place.",
+      "tr": "Sayıları kelime olarak söyle: 'bir, üç, iki, dört…'. Sayıyı söylemek sesi yerine bağlar."
+    },
+    {
+      "en": "This line moves in a pattern: up a skip, down a step. 1-3, 2-4, 3-5, then home: 4-2-1.",
+      "tr": "Bu dizi bir kalıpla ilerler: bir atlama yukarı, bir basamak aşağı. 1-3, 2-4, 3-5, sonra eve: 4-2-1."
+    },
+    {
+      "en": "If a skip feels unsure, think the step between: 1-(2)-3.",
+      "tr": "Bir atlama emin gelmezse aradaki basamağı düşün: 1-(2)-3."
+    },
+    {
+      "en": "Look at the next number before you sing it.",
+      "tr": "Söylemeden önce sıradaki sayıya bak."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "1-3-2-4-3-5-4-2-1 in your comfortable range, slow, with the numbers shown on screen.",
+      "tr": "Rahat menzilinde 1-3-2-4-3-5-4-2-1, yavaş; sayılar ekranda görünür."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 1-3-2-4-3-5-4-2-1 twice, saying each number as you sing it, about one second per note. Breathe between rounds. Sing in your own octave.",
+      "tr": "1-3-2-4-3-5-4-2-1'i iki kez söyle; her notada sayısını söyle, her nota yaklaşık bir saniye. Turlar arasında nefes al. Kendi oktavında söyle."
+    },
+    "sequence": "1-3-2-4-3-5-4-2-1 | 1-3-2-4-3-5-4-2-1",
+    "pass": {
+      "levelDefault": true
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I sang the number for each note.",
+      "tr": "Her notanın sayısını söyledim."
+    },
+    {
+      "en": "I heard the step between before each skip.",
+      "tr": "Her atlamadan önce aradaki basamağı duydum."
+    },
+    {
+      "en": "My last 1 felt like the same note as my first 1.",
+      "tr": "Son 1'im ilk 1'imle aynı nota gibi geldi."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Different note, 4 a semitone high.",
+        "tr": "Farklı nota: 4 yarım ses yüksek."
+      },
+      "fix": {
+        "en": "3 to 4 is a half step; keep 4 close to 3.",
+        "tr": "3–4 yarım sestir; 4'ü 3'e yakın tut."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, 2 a whole step high.",
+        "tr": "Farklı nota: 2 bir tam ses yüksek."
+      },
+      "fix": {
+        "en": "From 4 down to 2 skips 3. Think 4-(3)-2.",
+        "tr": "4'ten 2'ye inerken 3 atlanır. İçinden 4-(3)-2 diye düşün."
+      }
+    },
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Sing a little closer to the phone and hold the note longer; a breathy or very short sound is hard to read.",
+        "tr": "Telefona biraz daha yakın söyle ve notayı daha uzun tut; hışırtılı ya da çok kısa ses zor okunur."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing the first half, 1-3-2-4, until it feels sure, then add the rest.",
+    "tr": "Önce ilk yarıyı, 1-3-2-4'ü, emin olana kadar söyle; sonra gerisini ekle."
+  },
+  "minutes": 10,
+  "expertPending": true
+}

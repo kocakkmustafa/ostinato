@@ -1,0 +1,129 @@
+{
+  "id": "voc-s4-m15-04",
+  "title": {
+    "en": "Low notes without pressing",
+    "tr": "Bastırmadan pes notalar"
+  },
+  "goal": {
+    "en": "Sings 5-4-3-2-1 in up to six keys, a half step lower each time, without pressing the low notes, and stops at the first round that feels pressed.",
+    "tr": "5-4-3-2-1'i her seferinde yarım ses aşağıda, en fazla altı tonda, pes notaları bastırmadan söyler; bastırılmış gelen ilk turda durur."
+  },
+  "explanation": [
+    {
+      "en": "This lesson walks down: sol fa mi re do, then the same shape a half step lower, up to six rounds.",
+      "tr": "Bu ders aşağı yürür: sol fa mi re do, sonra aynı biçim yarım ses aşağıda, en fazla altı tur."
+    },
+    {
+      "en": "The app starts high enough that round 6 ends on the low note you saved, never below it.",
+      "tr": "Uygulama öyle yukarıdan başlar ki 6. tur sakladığın alt notada biter, asla onun altında değil."
+    },
+    {
+      "en": "Low notes need less push, not more. Let them get quieter as you go down. Keep your chin level; don't tuck it to reach a note.",
+      "tr": "Pes notalar daha az itme ister, daha fazla değil. Aşağı indikçe kısılmalarına izin ver. Çeneni düz tut; bir notaya ulaşmak için içeri çekme."
+    },
+    {
+      "en": "Stop at the first round where the low do turns creaky, breathy or pressed. Stopping there is the goal of this lesson, not a failure.",
+      "tr": "Alttaki do'nun gıcırtılı, hışırtılı ya da bastırılmış geldiği ilk turda dur. Orada durmak bu dersin hedefidir, başarısızlık değil."
+    },
+    {
+      "en": "The screen writes the line from your first do, so the new keys show accidentals. You still think sol-fa-mi-re-do in each new key.",
+      "tr": "Ekran diziyi ilk do'na göre yazar; bu yüzden yeni tonlarda arızalar görünür. Sen her yeni tonda yine sol-fa-mi-re-do diye düşün."
+    },
+    {
+      "en": "Work only in your comfortable range. If a note is not comfortable, change the octave or skip it. Extending range is never forcing.",
+      "tr": "Yalnız rahat menzilinde çalış. Bir nota rahat değilse oktav değiştir ya da atla. Menzili genişletmek zorlamak değildir."
+    }
+  ],
+  "referenceAudio": {
+    "kinds": [
+      "S"
+    ],
+    "brief": {
+      "en": "Before each round the new do sounds, then 5-4-3-2-1 on “ah” as a model. Six keys, each a half step lower, inside your saved range.",
+      "tr": "Her turdan önce yeni do çalar, ardından örnek olarak “a” ile 5-4-3-2-1. Sakladığın menzilin içinde altı ton, her biri yarım ses aşağıda."
+    }
+  },
+  "practice": {
+    "measurement": [
+      "M"
+    ],
+    "engineSteps": [
+      "A5"
+    ],
+    "task": {
+      "en": "Sing 5-4-3-2-1 on “ah” or in solfège, one note per beat, and hold the last do. Before each round, listen to the new do. Go down a half step each round, up to six rounds. Stop at the first round that feels pressed. Sing in your own octave.",
+      "tr": "5-4-3-2-1'i “a” ile ya da solfejle söyle, her vuruşa bir nota; son do'yu tut. Her turdan önce yeni do'yu dinle. Her turda yarım ses aşağı in, en fazla altı tur. Bastırılmış gelen ilk turda dur. Kendi oktavında söyle."
+    },
+    "sequence": "5-4-3-2 | 1:h hr | b5-3-b3-b2 | 7,:h hr | 4-b3-2-1 | b7,:h hr | 3-2-b2-7, | 6,:h hr | b3-b2-1-b7, | b6,:h hr | 2-1-7,-6, | 5,:h hr",
+    "pass": {
+      "levelDefault": false,
+      "text": {
+        "en": "Sing at least the first 2 rounds. Every round you sing meets the Level 4 pitch criteria. Stopping before round 6 is fine: the number of rounds is not scored.",
+        "tr": "En az ilk 2 turu söyle. Söylediğin her tur Seviye 4 perde ölçütünü karşılar. 6. turdan önce durmak sorun değildir: tur sayısı puanlanmaz."
+      }
+    }
+  },
+  "fallback": "selfCheck",
+  "safety": [
+    "Ç",
+    "V1",
+    "V2"
+  ],
+  "prerequisites": [],
+  "selfCheck": [
+    {
+      "en": "I stopped at the first round that felt pressed.",
+      "tr": "Bastırılmış gelen ilk turda durdum."
+    },
+    {
+      "en": "My chin stayed level on the low notes.",
+      "tr": "Pes notalarda çenem düz kaldı."
+    },
+    {
+      "en": "The low notes got quieter, not pushed.",
+      "tr": "Pes notalar itilmedi, kısıldı."
+    },
+    {
+      "en": "I sang without straining.",
+      "tr": "Zorlamadan söyledim."
+    }
+  ],
+  "commonErrors": [
+    {
+      "error": {
+        "en": "Couldn't hear.",
+        "tr": "Duyamadım."
+      },
+      "fix": {
+        "en": "Very low or very soft notes are hard to read. Hum on 'mm' a little closer to the phone; if it still fails, stop at that round.",
+        "tr": "Çok pes ya da çok yumuşak notalar zor okunur. Telefona biraz daha yakın 'mm' ile mırıldan; yine olmazsa o turda dur."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the low do a little low.",
+        "tr": "Farklı nota: alttaki do biraz alçak."
+      },
+      "fix": {
+        "en": "Notes sag near your edge. Think the note slightly higher and lighter; if it keeps sagging, stop there.",
+        "tr": "Kenarına yakın notalar düşer. Notayı içinden biraz daha yüksek ve hafif düşün; düşmeye devam ederse orada dur."
+      }
+    },
+    {
+      "error": {
+        "en": "Different note, the round a semitone low: it stayed in the old key.",
+        "tr": "Farklı nota, tur yarım ses alçak: eski tonda kaldı."
+      },
+      "fix": {
+        "en": "Hum the new do before you start the round, and begin from that note.",
+        "tr": "Tura başlamadan yeni do'yu mırıldan ve o notadan başla."
+      }
+    }
+  ],
+  "adaptation": {
+    "en": "Sing three rounds only, and use 3-2-1 instead of the full five notes.",
+    "tr": "Yalnız üç tur söyle ve tam beş nota yerine 3-2-1 kullan."
+  },
+  "minutes": 10,
+  "expertPending": true
+}
