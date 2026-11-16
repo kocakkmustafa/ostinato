@@ -1,6 +1,6 @@
 # W4 ar + hi + id + it çeviri örneklemi
 
-30 rastgele dizge (seed 20261116), ses kursu (voc). Kaynak EN; ar = MSA müzekker emir, hi = "आप", id = "kamu", it = "tu". Yer tutucu/sayı paritesi ve yasak sözcük taraması tüm 3.239 dizgede yapıldı.
+30 rastgele dizge (seed 20261116), ses kursu (voc). Kaynak EN; ar = MSA müzekker emir, hi = "आप", id = "kamu", it = "tu". Yer tutucu/sayı paritesi ve yasak sözcük taraması tüm 3.239 dizgede yapıldı. Reviewer düzeltmeleri (terim birliği, şarkı sözü, ah/oo yazımı) sonrası güncellendi.
 
 ## 1. `4a3a298e8e6df531`
 
@@ -69,7 +69,7 @@
 ## 9. `ba065d1d3b46b9a8`
 
 - EN: Some questions play a triad, others the first five notes of a scale. In a scale, listen to the step from 2 to 3: a whole step in major, a half step in minor.
-- ar: بعض الأسئلة يعزف ثلاثياً، وبعضها أول خمس نغمات من سلم. في السلم، أصغِ إلى الخطوة من 2 إلى 3: نغمة كاملة في الكبير، ونصف نغمة في الصغير.
+- ar: بعض الأسئلة يعزف ثلاثياً، وبعضها أول خمس نغمات من سلم. في السلم، أصغِ إلى الخطوة من 2 إلى 3: نغمة كاملة في الكبير، ونصف درجة في الصغير.
 - hi: कुछ प्रश्न एक ट्रायड बजाते हैं, कुछ स्केल के पहले पाँच स्वर। स्केल में 2 से 3 के क़दम को सुनें: मेजर में पूरा स्वर, माइनर में आधा स्वर।
 - id: Beberapa pertanyaan memainkan triad, yang lain lima nada pertama tangga nada. Pada tangga nada, dengarkan langkah dari 2 ke 3: satu nada penuh pada mayor, setengah nada pada minor.
 - it: Alcune domande suonano una triade, altre le prime cinque note di una scala. In una scala, ascolta il passo dal 2 al 3: un tono intero nella maggiore, un semitono nella minore.
@@ -86,7 +86,7 @@
 
 - EN: Sings the five-note run in eighth notes on one 'ah', evenly and in tune with the click at ♩=70.
 - ar: يغني الجملة المؤلفة من خمس نغمات بنغمات الثُّمن على 'آه' واحدة، بانتظام وبضبط مع النقرة عند ♩=70.
-- hi: एक 'ah' पर पाँच स्वरों की दौड़ को आठवें नोट में, बराबर और क्लिक के साथ सुर में, ♩=70 पर गाता है।
+- hi: एक 'आ' पर पाँच स्वरों की दौड़ को आठवें नोट में, बराबर और क्लिक के साथ सुर में, ♩=70 पर गाता है।
 - id: Menyanyikan lari lima nada dalam not delapan pada satu 'ah', rata dan tepat nada mengikuti klik pada ♩=70.
 - it: Canta la volata di cinque note in crome su un'unica 'a', in modo uniforme e intonato con il click a ♩=70.
 
@@ -102,7 +102,7 @@
 
 - EN: This checkpoint brings the module together: thirds, sixths, a held note, contrary motion and fifths, in one sixteen-bar study.
 - ar: تجمع هذه المحطة الوحدة: الثالثات والسادسات ونغمة ممسوكة والحركة المتعاكسة والخامسات، في دراسة واحدة من ست عشرة مازورة.
-- hi: यह चेकपॉइंट मॉड्यूल को एक साथ लाता है: तीसरे, छठे, थामा हुआ स्वर, विपरीत गति और पंचम, एक सोलह माप के अभ्यास में।
+- hi: यह चेकपॉइंट मॉड्यूल को एक साथ लाता है: तृतीय, छठे, थामा हुआ स्वर, विपरीत गति और पंचम, एक सोलह माप के अभ्यास में।
 - id: Titik uji ini merangkum modul: terts, sekst, nada tahan, gerak berlawanan, dan kuint, dalam satu etude enam belas birama.
 - it: Questa verifica riunisce il modulo: terze, seste, una nota tenuta, moto contrario e quinte, in uno studio di sedici battute.
 
@@ -150,7 +150,7 @@
 
 - EN: A third is two scale steps apart, like do and mi. Thirds are the most common harmony in songs.
 - ar: تفصل الثالثةَ درجتان سلميتان، مثل دو ومي. الثالثات هي الأكثر شيوعاً في الهارموني في الأغاني.
-- hi: तीसरा अंतराल स्केल के दो क़दम का होता है, जैसे do और mi। गीतों में तीसरे अंतराल सबसे आम हार्मनी हैं।
+- hi: तृतीय अंतराल स्केल के दो क़दम का होता है, जैसे do और mi। गीतों में तृतीय अंतराल सबसे आम हार्मनी हैं।
 - id: Terts berjarak dua langkah tangga nada, seperti do dan mi. Terts adalah harmoni yang paling umum dalam lagu.
 - it: Una terza dista due gradi della scala, come do e mi. Le terze sono l'armonia più comune nelle canzoni.
 
@@ -181,7 +181,7 @@
 ## 23. `b669c4167a5bf2ac`
 
 - EN: Different note, ♭2 a semitone high.
-- ar: نغمة مختلفة، ♭2 أعلى بنصف نغمة.
+- ar: نغمة مختلفة، ♭2 أعلى بنصف درجة.
 - hi: अलग स्वर, ♭2 एक आधा स्वर ऊँचा।
 - id: Nada berbeda, ♭2 setengah nada terlalu tinggi.
 - it: Nota diversa: il ♭2 è un semitono alto.
@@ -200,7 +200,7 @@
 - ar: السطر هو “A NEW day is beginning” (صول-مي-فا-ري، مي-ري-دو). غنِّه مرة بحياد، ثم مرة كأنك تشارك خبراً سعيداً.
 - hi: पंक्ति है “A NEW day is beginning” (sol-mi-fa-re, mi-re-do)। इसे एक बार सपाट ढंग से गाएँ, फिर एक बार ऐसे जैसे आप कोई अच्छी ख़बर बाँट रहे हों।
 - id: Barisnya adalah “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Nyanyikan sekali secara netral, lalu sekali seolah-olah kamu sedang membagikan kabar baik.
-- it: La frase è “Un NUOVO giorno inizia” (sol-mi-fa-re, mi-re-do). Cantala una volta in modo neutro, poi una volta come se stessi condividendo una bella notizia.
+- it: La frase è “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Cantala una volta in modo neutro, poi una volta come se stessi condividendo una bella notizia.
 
 ## 26. `b56301687b2fe344`
 
@@ -224,13 +224,13 @@
 - ar: المازورة 1 تصعد من دو إلى فا. المازورة 2 تمسك صول لنبضتين، ثم تنزل فا، مي. المازورة 3 تدور حول فا: فا، مي، ري، مي. المازورة 4 تنتهي من ري إلى دو.
 - hi: माप 1 do से fa तक चढ़ता है। माप 2 sol को दो बीट थामता है, फिर fa, mi तक उतरता है। माप 3 fa के चारों ओर घूमता है: fa, mi, re, mi। माप 4 re से do पर समाप्त होता है।
 - id: Birama 1 naik dari do ke fa. Birama 2 menahan sol dua ketukan, lalu turun fa, mi. Birama 3 berputar di sekitar fa: fa, mi, re, mi. Birama 4 berakhir re ke do.
-- it: La battuta 1 sale dal do al fa. La battuta 2 tiene il sol per due tempi, poi scende fa, mi. La battuta 3 gira intorno al fa: fa, mi, re, mi. La battuta 4 termina da re a do.
+- it: La battuta 1 sale dal do al fa. La battuta 2 tiene il sol per due battiti, poi scende fa, mi. La battuta 3 gira intorno al fa: fa, mi, re, mi. La battuta 4 termina da re a do.
 
 ## 29. `5896ac60782d9e0c`
 
 - EN: Sing do once at your comfortable medium volume and hold it. Then sing 1-2-3 softly on “oo”, holding each note, with 3 the longest. The app places the notes so they climb into your break.
 - ar: غنِّ دو مرة واحدة بشدة صوتك المتوسطة المريحة وأمسكها. ثم غنِّ 1-2-3 بهدوء على «أو»، مع إمساك كل نغمة، على أن تكون 3 الأطول. يضع التطبيق النغمات بحيث تصعد نحو منطقة التحوّل في صوتك.
-- hi: अपनी आरामदायक मध्यम आवाज़ पर एक बार do गाएँ और उसे थामें। फिर “oo” पर 1-2-3 धीमे से गाएँ, हर नोट को थामते हुए, 3 सबसे लंबा। ऐप नोट इस तरह रखता है कि वे आपके रजिस्टर परिवर्तन में चढ़ें।
+- hi: अपनी आरामदायक मध्यम आवाज़ पर एक बार do गाएँ और उसे थामें। फिर “ऊ” पर 1-2-3 धीमे से गाएँ, हर नोट को थामते हुए, 3 सबसे लंबा। ऐप नोट इस तरह रखता है कि वे आपके रजिस्टर परिवर्तन में चढ़ें।
 - id: Nyanyikan do sekali dengan volume sedang yang nyaman bagimu dan tahan. Lalu nyanyikan 1-2-3 dengan lembut pada “oo”, menahan setiap nada, dengan 3 yang terpanjang. Aplikasi menempatkan nada-nada itu agar naik ke area peralihan registermu.
 - it: Canta il do una volta al tuo volume medio comodo e tienilo. Poi canta 1-2-3 piano su “oo”, tenendo ogni nota, con il 3 più lungo. L'app colloca le note in modo che salgano verso il tuo passaggio.
 
