@@ -467,7 +467,7 @@ RETENTION_WRITERS_RECONCILED = {"session_store.dart", "guitar_journey_progress.d
                                 "ghost_store.dart",
                                 # 2026-11-14 yeniden-ölçüm (OST-P0-08B, Motion kararı): yalnız şifreli WAV (ham SES) yazar (put/exportTo); altı öznenin (angle/landmark/measurement/video/your footage/history) hiçbirini yazmaz, altısının False'u değişmez. Uygulamaya BAĞLI DEĞİL (tripwire: test/ost_p0_08b_encrypted_store_test.dart); bağlayan bilet SES yokluk iddialarını, docs/store taslaklarını ve gizlilik metnini yeniden ölçmek zorunda.
                                 "encrypted_take_store.dart",
-                                # 2026-11-16 yeniden-ölçüm (ADR-008, veli izni; bayrak ostinatoParentalConsentEnabled KAPALI): yalnız rastgele 43 karakterlik cihaz bekleme jetonunu yazar ({schemaVersion, token}); çocuğa/cihaza/ölçüme ait değildir; altı öznenin (angle/landmark/measurement/video/your footage/history) hiçbirini yazmaz, altısının False'u değişmez. Test: test/parental_consent_test.dart (yalnız iki anahtar).
+                                # 2026-11-16 yeniden-ölçüm (ADR-008, veli izni; bayrak ostinatoParentalConsentEnabled KAPALI): yalnız rastgele 43 karakterlik cihaz bekleme jetonunu yazar ({schemaVersion, token}); cihaz başına rastgeledir, çocuğa ait kişisel veri ya da ölçüm değildir (ADR-008 §6-6); altı öznenin (angle/landmark/measurement/video/your footage/history) hiçbirini yazmaz, altısının False'u değişmez. Test: test/parental_consent_test.dart (yalnız iki anahtar).
                                 "consent_token_store.dart"}
 
 # ── İDDİA ↔ ÖLÇÜM BAĞI (O-102, Gravita `f169ba5`ten doğan kısıt) ─────────

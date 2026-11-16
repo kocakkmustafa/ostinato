@@ -85,7 +85,7 @@ final class ParentalConsentController extends ChangeNotifier {
   });
 
   final ParentalConsentGateway gateway;
-  final ConsentTokenStore tokenStore;
+  final ConsentTokenStorage tokenStore;
 
   /// Persists the permanent block marker (`AgeGateStore.markBlocked`).
   final Future<void> Function() markBlocked;
@@ -94,9 +94,26 @@ final class ParentalConsentController extends ChangeNotifier {
   ConsentPhase _phase = ConsentPhase.loading;
   ConsentNotice _notice = ConsentNotice.none;
   bool _busy = false;
+  bool _disposed = false;
+
+  /// Set once a refusal was read. The server reads it out only once, so from
+  /// here the session stays closed whatever happens to the marker write.
+  bool _blockedInSession = false;
+  bool _markerPending = false;
   ConsentPhase get phase => _phase;
   ConsentNotice get notice => _notice;
   bool get busy => _busy;
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) super.notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
 
   void _set(ConsentPhase phase, [ConsentNotice notice = ConsentNotice.none]) {
     _phase = phase;
@@ -112,6 +129,10 @@ final class ParentalConsentController extends ChangeNotifier {
     _busy = true;
     notifyListeners();
     try {
+      if (_blockedInSession) {
+        await _settleDenied();
+        return;
+      }
       final String token;
       try {
         token = await tokenStore.readOrCreate();
@@ -145,24 +166,38 @@ final class ParentalConsentController extends ChangeNotifier {
         return _set(ConsentPhase.approved);
       case MotionParentalConsent.denied:
         // The server reads a refusal out once and then forgets it, so the
-        // permanent marker is written BEFORE anything else happens.
-        try {
-          await markBlocked();
-        } on Object {
-          // The in-memory result below still closes the flow.
-        }
-        try {
-          await tokenStore.clear();
-        } on Object {
-          // The token is only a wait handle; the marker is what matters.
-        }
-        return _set(ConsentPhase.denied);
+        // permanent marker is written BEFORE anything else happens. If the
+        // write fails the token and the denied result are kept and the write
+        // is retried; the session stays closed in memory meanwhile.
+        _blockedInSession = true;
+        _markerPending = true;
+        await _settleDenied();
+
       case MotionParentalConsent.expired:
         // No marker: the child may start again.
         return _set(ConsentPhase.expired);
       case MotionParentalConsent.withdrawn:
         return _set(ConsentPhase.unavailable);
     }
+  }
+
+  Future<void> _settleDenied() async {
+    if (_markerPending) {
+      try {
+        await markBlocked();
+        _markerPending = false;
+      } on Object {
+        // Keep the token and retry on the next refresh.
+      }
+    }
+    if (!_markerPending) {
+      try {
+        await tokenStore.clear();
+      } on Object {
+        // The token is only a wait handle; the marker is what matters.
+      }
+    }
+    _set(ConsentPhase.denied);
   }
 
   Future<void> sendParentEmail(String parentEmail) async {

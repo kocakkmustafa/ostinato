@@ -57,13 +57,31 @@ final class AccountDeleteTransport {
   final List<String> permanentReceiptQueries = [];
   bool aliceUserMissing = false;
 
+  /// Parental consent edge function (ADR-008): every request body is kept so
+  /// tests can prove a call was or was not made; the answer is configurable.
+  final List<Map<String, dynamic>> consentRequests = [];
+  Object consentAnswer = <String, Object>{'status': 'none'};
+  final List<Map<String, dynamic>> signUpBodies = [];
+
   Future<http.Response> handle(http.Request request) async {
     final response = await _handle(request);
-    return http.Response.bytes(response.bodyBytes, response.statusCode,
-        headers: response.headers, request: request);
+    return http.Response.bytes(
+      response.bodyBytes,
+      response.statusCode,
+      headers: response.headers,
+      request: request,
+    );
   }
 
   Future<http.Response> _handle(http.Request request) async {
+    if (request.url.path.endsWith('/motion-parental-consent')) {
+      consentRequests.add(jsonDecode(request.body) as Map<String, dynamic>);
+      return _json(consentAnswer);
+    }
+    if (request.url.path.endsWith('/signup')) {
+      signUpBodies.add(jsonDecode(request.body) as Map<String, dynamic>);
+      return _json(jsonDecode(_session(aliceUuid, 'A-signup')));
+    }
     if (request.url.path.endsWith('/motion-delete-account')) {
       deleteRequests.add(request);
       deleteAuthorization = request.headers['Authorization'];
@@ -73,17 +91,19 @@ final class AccountDeleteTransport {
       return _json(receipt, status: receiptStatus);
     }
     if (request.url.path.endsWith('/motion_was_account_deleted')) {
-      final id = (jsonDecode(request.body) as Map<String, dynamic>)['p_user_id'] as String;
+      final id =
+          (jsonDecode(request.body) as Map<String, dynamic>)['p_user_id']
+              as String;
       permanentReceiptQueries.add(id);
       return _json(permanentReceiptIds.contains(id));
     }
     if (request.url.path.endsWith('/user')) {
       final token = request.headers['Authorization'] ?? '';
       if (aliceUserMissing && !token.contains('B-session')) {
-        return _json(
-          <String, Object>{'error_code': 'user_not_found', 'msg': 'User not found'},
-          status: 403,
-        );
+        return _json(<String, Object>{
+          'error_code': 'user_not_found',
+          'msg': 'User not found',
+        }, status: 403);
       }
       return _json(_user(token.contains('B-session') ? bobUuid : aliceUuid));
     }
@@ -208,7 +228,8 @@ final class AccountDeleteFixture {
       authOptions: const AuthClientOptions(autoRefreshToken: false),
       httpClient: MockClient(transport.handle),
     );
-    final root = supportRoot ??
+    final root =
+        supportRoot ??
         await Directory.systemTemp.createTemp('ostinato-delete-owner-');
     await client.auth.setInitialSession(_session(initialUserId, initialToken));
     // Establish the same root authority before Core starts its receipt scan.

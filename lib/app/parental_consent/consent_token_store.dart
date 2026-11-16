@@ -8,7 +8,14 @@ import 'package:path_provider/path_provider.dart';
 /// (ADR-008 §6-6) in one small file. The token is random, belongs to no child
 /// and is the ONLY thing stored: no e-mail, birth date, country or account id.
 /// Core never stores it; the server keeps only its SHA-256 digest.
-final class ConsentTokenStore {
+abstract interface class ConsentTokenStorage {
+  Future<String?> read();
+  Future<String> readOrCreate();
+  Future<String> renew();
+  Future<void> clear();
+}
+
+final class ConsentTokenStore implements ConsentTokenStorage {
   const ConsentTokenStore({this.directory, this.generate});
 
   final Directory? directory;
@@ -23,6 +30,7 @@ final class ConsentTokenStore {
 
   /// The stored token, or null when none exists or the file is unreadable or
   /// changed (a damaged token is never trusted).
+  @override
   Future<String?> read() async {
     final file = await _file();
     if (!await file.exists()) return null;
@@ -41,6 +49,7 @@ final class ConsentTokenStore {
   }
 
   /// Returns the stored token, creating and persisting one first if needed.
+  @override
   Future<String> readOrCreate() async {
     final existing = await read();
     if (existing != null) return existing;
@@ -50,6 +59,7 @@ final class ConsentTokenStore {
   }
 
   /// Replaces the token with a fresh one (a refused token cannot be reused).
+  @override
   Future<String> renew() async {
     final token = (generate ?? MotionDeviceConsentToken.generate)();
     await _write(token);
@@ -57,6 +67,7 @@ final class ConsentTokenStore {
   }
 
   /// Removes the token (account bound to the approval, or flow finished).
+  @override
   Future<void> clear() async {
     final file = await _file();
     if (await file.exists()) await file.delete();

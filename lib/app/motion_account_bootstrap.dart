@@ -76,7 +76,7 @@ AccountConnection bindMotionAccountRuntime(
   // ADR-008: closed by default. Only tests pass another value.
   @visibleForTesting
   bool parentalConsentEnabled = ostinatoParentalConsentEnabled,
-  ConsentTokenStore? consentTokenStore,
+  ConsentTokenStorage? consentTokenStore,
   @visibleForTesting Stream<AuthState>? ownerAuthChanges,
 }) {
   final ownership = AccountOwnershipEpoch(

@@ -13,8 +13,8 @@ abstract final class ParentalConsentCopy {
     'Bugün çok fazla istek gönderildi. Lütfen yarın tekrar dene.',
   );
   static const UiCopy unavailable = (
-    'We could not reach Yula Lab just now. Nothing was changed. Please try again later.',
-    'Şu anda Yula Lab’a ulaşılamadı. Hiçbir şey değişmedi. Lütfen daha sonra tekrar dene.',
+    'We could not confirm the status just now. If you sent a request, it may have gone through. Please check again later.',
+    'Şu anda durumu doğrulayamadık. Bir istek gönderdiysen iletilmiş olabilir. Lütfen daha sonra tekrar kontrol et.',
   );
   static const UiCopy approved = (
     'Your parent or guardian approved. You can create your account now.',

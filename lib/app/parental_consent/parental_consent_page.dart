@@ -134,7 +134,8 @@ class _ParentalConsentPageState extends State<ParentalConsentPage> {
               : () => _c.sendParentEmail(_parentEmail.text),
           child: Text(t(MotionAccountString.sendConsentRequest)),
         ),
-        if (phase == ConsentPhase.pending)
+        if (phase == ConsentPhase.pending ||
+            _c.notice == ConsentNotice.unavailable)
           TextButton(
             onPressed: _c.busy ? null : _c.refresh,
             child: Text(uiText(context, ParentalConsentCopy.checkApproval)),
