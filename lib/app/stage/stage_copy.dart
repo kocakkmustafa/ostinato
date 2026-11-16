@@ -22,6 +22,12 @@ abstract final class StageCopy {
     'Your practice could not be loaded.',
     'Çalışman yüklenemedi.',
   );
+  // shared (v1 practice list: same pair, same id; the read worked and there
+  // is no measured lesson, which is not a load failure)
+  static const UiCopy noMeasuredLesson = (
+    'No measured lessons in this build.',
+    'Bu sürümde ölçülü ders yok.',
+  );
   static const UiCopy guitar = ('Guitar', 'Gitar');
   static const UiCopy historyTitle = ('History', 'Geçmiş');
 
@@ -205,6 +211,7 @@ abstract final class StageCopy {
     reference,
     tryAgain,
     loading,
+    noMeasuredLesson,
     guitar,
     historyTitle,
     heardLabel,
