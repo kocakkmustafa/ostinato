@@ -19,7 +19,7 @@ void main() {
   // Yorumları at: yalnız gerçek öğeler sayılır.
   final xml = manifest.replaceAll(RegExp(r'<!--.*?-->', dotAll: true), '');
   final elements = RegExp(
-    r'<uses-(?:permission|feature)\b[^>]*?/>',
+    r'<uses-(?:permission|feature)\b[^>]*?(?:/>|>\s*</uses-(?:permission|feature)\s*>)',
     dotAll: true,
   ).allMatches(xml).map((m) => m.group(0)!).toList();
 
