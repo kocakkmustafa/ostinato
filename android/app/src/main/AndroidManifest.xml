@@ -1,12 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <!-- K8 mirror: camera_android_camerax declares legacy storage (video
-         saving, API <= 28; the merger then implies the read permission) and
-         a required camera feature. The mirror saves nothing, and the app
-         runs without a camera (checklist path). -->
+    <!-- Camera: no camera permission ships in this build (camera features
+         are flag-off). The camera plugins (camera_android_camerax,
+         motion_camera, ostinato_posture) declare CAMERA and a camera feature
+         in their own manifests, so the merger would bring them back: the
+         `remove` directives below keep them out. When a camera flag opens,
+         drop the CAMERA remove line and declare the permission again.
+         camera_android_camerax also declares legacy storage (video saving,
+         API <= 28; the merger then implies the read permission). Nothing is
+         saved, and the app runs without a camera (checklist path). -->
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        tools:node="remove" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:node="remove" />
