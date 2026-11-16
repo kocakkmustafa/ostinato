@@ -1777,16 +1777,21 @@ def selftest() -> int:
                     f"≥20) — bölme boşalmış, tamlık kontrolü anlamsız")
     # O-099: izin metni yolu da sahte-sıfır verebilir — ve tam bu yüzey
     # yıllarca ölçülmedi. Uygulama kamerayı kullanıyor, dolayısıyla
-    # `NSCameraUsageDescription` OKUNABİLİR olmak zorunda. Bu kontrol
-    # "kapsamı ekledim" iddiasını "kapsam gerçekten dolu" ölçümüne çevirir.
+    # `NSCameraUsageDescription` (iOS kamera eklentileri bağlı; bayraklar
+    # kapalıyken istenmez ama bildirim DURUR) ve `NSMicrophoneUsageDescription`
+    # OKUNABİLİR olmak zorunda. Bu kontrol "kapsamı ekledim" iddiasını
+    # "kapsam gerçekten dolu" ölçümüne çevirir.
     perm, _report = claim_bearing_text_surfaces()
     if not perm:
         dead.append("claim_bearing_text_surfaces() BOŞ — platform metni yolu "
                     "ölmüş; kapı 'temiz' derken sıfır tarar (O-099)")
-    elif not any(k.endswith("NSCameraUsageDescription") and t.strip()
-                 for k, t in perm):
-        dead.append("NSCameraUsageDescription METNİ okunamadı — anahtar "
-                    "varlığı ölçülüyordu, METİN yine ölçülmüyor demektir")
+    else:
+        for needed in ("NSCameraUsageDescription",
+                       "NSMicrophoneUsageDescription"):
+            if not any(k.endswith(needed) and t.strip() for k, t in perm):
+                dead.append(f"{needed} METNİ okunamadı — anahtar "
+                            "varlığı ölçülüyordu, METİN yine ölçülmüyor "
+                            "demektir")
     # ⭐ O-100: MAĞAZA yüzeyi Ostinato'da HENÜZ YOK, ama kapının onu
     # yakalayacağı BUGÜN kanıtlanır — yoksa "kapsama aldım" iddiası, dosya
     # ortaya çıktığı gün sınanacak bir VARSAYIM olarak kalır.
