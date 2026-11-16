@@ -1,0 +1,214 @@
+# W4 ses (voc) ja + ko + pl + zh-Hans örneklem
+
+Seed 20261116, 3.239 yeni dizgeden 30. Parite: yer tutucu/etiket/sembol (♩♭♯) taraması: 1 işaretli kayıt (`c3e6e7ed36585899`, "(<)" ve "(>)" crescendo/diminuendo işareti korunmuş), 0 gerçek sorun; yasak sözcük (vaat/tedavi/garanti/hüküm) taraması 0.
+
+- `02f578259cca24ac`
+  - EN: One-bar click count-in, then the scale 1→9→1 in your range at ♩=70 and ♩=50.
+  - TR: Bir ölçülük klik girişi, ardından rahat menzilinde 1→9→1 gamı; ♩=70 ve ♩=50.
+  - ja: 一小節のクリックカウントインの後、音域内で音階 1→9→1 を ♩=70 と ♩=50 で歌います。
+  - ko: 한 마디 클릭 카운트인 뒤, 음역 안에서 음계 1→9→1을 ♩=70과 ♩=50으로 부릅니다.
+  - pl: Jednotaktowe odliczenie z klikiem, potem skala 1→9→1 w swojej skali głosu w tempie ♩=70 i ♩=50.
+  - zh-Hans: 一小节节拍器预备拍，然后在自己的音域内唱音阶 1→9→1，速度为 ♩=70 和 ♩=50。
+- `0629b47b0532dfeb`
+  - EN: Six intervals over the drone: do-sol, sol-do, re-la, la-re, low sol to re, re to low sol. Sing the first note short and hold the second. The app picks do from your comfortable range. Sing in your own octave.
+  - TR: Dron üzerinde altı aralık: do-sol, sol-do, re-la, la-re, alttaki sol'den re'ye, re'den alttaki sol'e. İlk notayı kısa söyle, ikinciyi tut. Uygulama do'yu rahat menzilinden seçer. Kendi oktavında söyle.
+  - ja: ドローン上の六つの音程：ド-ソ、ソ-ド、レ-ラ、ラ-レ、低いソからレ、レから低いソ。最初の音は短く、二つ目は保ちます。ドはアプリが無理のない音域から選びます。自分のオクターブで歌いましょう。
+  - ko: 드론 위의 여섯 음정: 도-솔, 솔-도, 레-라, 라-레, 낮은 솔에서 레, 레에서 낮은 솔. 첫 음은 짧게, 두 번째 음은 길게 부르세요. 앱이 편안한 음역에서 도를 정합니다. 자신의 옥타브로 부르세요.
+  - pl: Sześć interwałów nad burdonem: do-sol, sol-do, re-la, la-re, niskie sol do re, re do niskiego sol. Pierwszy dźwięk zaśpiewaj krótko, drugi przytrzymaj. Aplikacja wybiera do z twojej wygodnej skali głosu. Śpiewaj we własnej oktawie.
+  - zh-Hans: 在持续音上唱六个音程：do-sol，sol-do，re-la，la-re，低音 sol 到 re，re 到低音 sol。第一个音唱短，第二个音保持。应用会根据你的舒适音域选定 do。在自己的八度演唱。
+- `4380b2010c6f2e9b`
+  - EN: The major triad: do-mi-sol
+  - TR: Majör üçlü: do-mi-sol
+  - ja: 長三和音:ド-ミ-ソ
+  - ko: 장삼화음: 도-미-솔
+  - pl: Trójdźwięk durowy: do-mi-sol
+  - zh-Hans: 大三和弦：do-mi-sol
+- `4a3a298e8e6df531`
+  - EN: Sing the study at ♩=56 with all notes connected first, then add the dots and accents.
+  - TR: Önce etüdü ♩=56'da bütün notalar bağlı söyle, sonra noktaları ve vurguları ekle.
+  - ja: ♩=56で、まずすべての音をつなげてスタディを歌い、そのあとスタッカートの点とアクセントを加えましょう。
+  - ko: 먼저 ♩=56에서 모든 음을 이어서 연습곡을 부른 뒤, 점과 악센트를 더하세요.
+  - pl: Najpierw zaśpiewaj etiudę w tempie ♩=56, łącząc wszystkie nuty, a potem dodaj kropki i akcenty.
+  - zh-Hans: 先以♩=56把所有音连起来唱这首练习曲，再加上断奏点和重音。
+- `4bb61dc35ac8d826`
+  - EN: Single notes from your comfortable range for parts 1 and 3; click at ♩=70 for the scale; an original soft chord accompaniment with click for the melody. Headphones recommended.
+  - TR: 1. ve 3. bölümler için rahat menzilinden tek notalar; gam için ♩=70'te klik; ezgi için klikli özgün yumuşak akor eşliği. Kulaklık önerilir.
+  - ja: パート1と3は、楽に出せる音域の単音で。音階は♩=70のクリック音で。メロディにはオリジナルのやわらかいコード伴奏とクリック付きです。ヘッドホンをおすすめします。
+  - ko: 1부와 3부는 편안한 음역의 단일 음, 음계는 ♩=70의 클릭 소리, 선율은 클릭 소리가 있는 부드러운 창작 화음 반주로 들려줍니다. 헤드폰을 권장합니다.
+  - pl: Pojedyncze nuty z twojej wygodnej skali głosu do części 1 i 3; klik w tempie ♩=70 do gamy; oryginalny miękki akompaniament akordowy z klikiem do melodii. Zalecane słuchawki.
+  - zh-Hans: 第1和第3部分使用舒适音域内的单个音；音阶使用♩=70的节拍器滴答声；旋律使用原创的柔和和弦伴奏并配以节拍器的滴答声。建议戴耳机。
+- `54b46772e3e06fff`
+  - EN: Start with a lip trill on 1-3-5-3-1. The trill keeps the air steady while the pitch moves.
+  - TR: 1-3-5-3-1 üzerinde dudak titreşimiyle başla. Titreşim perde hareket ederken havayı sabit tutar.
+  - ja: 1-3-5-3-1でリップトリルから始めましょう。トリルは、音高が動いても息を安定させます。
+  - ko: 1-3-5-3-1에서 립 트릴로 시작하세요. 트릴은 음높이가 움직이는 동안 숨을 안정되게 유지해 줍니다.
+  - pl: Zacznij od tryla wargowego na 1-3-5-3-1. Tryl utrzymuje równe powietrze, gdy zmienia się wysokość dźwięku.
+  - zh-Hans: 先在1-3-5-3-1上做唇颤音。唇颤音能在音高移动时让气息保持稳定。
+- `5896ac60782d9e0c`
+  - EN: Sing do once at your comfortable medium volume and hold it. Then sing 1-2-3 softly on “oo”, holding each note, with 3 the longest. The app places the notes so they climb into your break.
+  - TR: Do'yu rahat, orta gürlüğünde bir kez söyle ve tut. Sonra “u” ile 1-2-3'ü yumuşak söyle; her notayı tut, en uzun 3'ü tut. Uygulama notaları geçiş bölgene doğru çıkacak biçimde yerleştirir.
+  - ja: 楽な中くらいの音量でドを一度歌って保ちます。次に“oo”で1-2-3を柔らかく、各音を保って歌い、3を一番長くします。アプリは、音があなたの換声点に向かって上がるように配置します。
+  - ko: 편안한 중간 음량으로 도를 한 번 부르고 유지하세요. 그다음 “우”로 1-2-3을 부드럽게, 각 음을 유지하며 부르고 3을 가장 길게 하세요. 앱은 음들이 브레이크(전환 구간)로 올라가도록 배치합니다.
+  - pl: Zaśpiewaj do raz swoją wygodną średnią głośnością i trzymaj. Potem zaśpiewaj cicho 1-2-3 na “u”, trzymając każdy dźwięk, a 3 najdłużej. Aplikacja ustawia dźwięki tak, że wspinają się do Twojego przejścia między rejestrami.
+  - zh-Hans: 用舒适的中等音量唱一次do并保持。然后用“oo”轻声唱1-2-3，每个音都保持，3最长。应用会安排这些音，使它们爬升进入你的换声点。
+- `6ca8f0a47230a9e0`
+  - EN: Different answer: “forcing” chosen for skipping a tight note.
+  - TR: Farklı cevap: sıkışan bir notayı atlamaya “zorlama” denildi.
+  - ja: 別の答え:きつい音を飛ばしたのに“力み”を選びました。
+  - ko: 다른 답: 조이는 음을 건너뛰는 것에 “억지로 밀기”를 골랐습니다.
+  - pl: Inna odpowiedź: wybrano “forsowanie” za pominięcie napiętej nuty.
+  - zh-Hans: 答案不同：为跳过一个紧绷的音选了“用力”。
+- `7155319242ba0523`
+  - EN: Same task as before, with a tighter target: within 35 cents instead of 50.
+  - TR: Görev aynı, hedef daha dar: 50 yerine 35 cent içi.
+  - ja: 先ほどと同じ課題で、目標をより厳しくします:50セントではなく35セント以内。
+  - ko: 이전과 같은 과제이지만 목표가 더 좁습니다. 50센트 대신 35센트 이내.
+  - pl: To samo zadanie co wcześniej, z ciaśniejszym celem: w granicach 35 centów zamiast 50.
+  - zh-Hans: 任务与之前相同，目标更严：偏差在35音分以内，而不是50音分。
+- `7808e95c88fd4398`
+  - EN: Different note, a little low in the dark round.
+  - TR: Farklı nota: koyu turda biraz alçak.
+  - ja: 別の音:暗いラウンドで少し低めでした。
+  - ko: 다른 음: 어두운 라운드에서 조금 낮습니다.
+  - pl: Inna nuta, nieco za nisko w ciemnym kanonie.
+  - zh-Hans: 有一个音不同，暗色轮里有点偏低。
+- `7a207a47c8c0afda`
+  - EN: Soft notes tend to sink. Hear the note clearly in your head and keep the vowel bright.
+  - TR: Hafif notalar düşmeye meyillidir. Notayı içinden net duy ve ünlüyü parlak tut.
+  - ja: 小さい音は下がりやすくなります。頭の中で音をはっきり聴き、母音を明るく保ちましょう。
+  - ko: 작은 소리는 가라앉기 쉽습니다. 머릿속에서 음을 또렷이 듣고 모음을 밝게 유지하세요.
+  - pl: Ciche dźwięki mają skłonność opadać. Usłysz dźwięk wyraźnie w głowie i utrzymaj jasną samogłoskę.
+  - zh-Hans: 轻柔的音容易下沉。先在脑中清楚地听到这个音，并保持元音明亮。
+- `868a04a6b27a1a4e`
+  - EN: The melody starts with one pickup note, 1, before bar 1. Bars 1–8 are the verse; bars 9–16 are the refrain, which starts high on ♭7.
+  - TR: Ezgi 1. ölçüden önce tek bir öncü notayla, 1 ile başlar. 1–8. ölçüler kıta, 9–16. ölçüler nakarattır; nakarat yukarıda ♭7 ile başlar.
+  - ja: 旋律は1小節目の前に一つのアウフタクト音、1から始まります。1–8小節目がヴァース、9–16小節目がリフレインで、♭7から高く始まります。
+  - ko: 선율은 1마디 앞의 못갖춘마디 한 음, 1로 시작합니다. 1–8마디는 절이고 9–16마디는 후렴이며, 높은 ♭7에서 시작합니다.
+  - pl: Melodia zaczyna się jednym dźwiękiem przedtaktu, 1, przed taktem 1. Takty 1–8 to zwrotka; takty 9–16 to refren, który zaczyna się wysoko na ♭7.
+  - zh-Hans: 旋律在第1小节之前以一个弱起音 1 开始。第1–8小节是主歌；第9–16小节是副歌，从高音 ♭7 开始。
+- `8fe1b470940f95d9`
+  - EN: The line is “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Sing it once neutral, then once as if you are sharing good news.
+  - TR: Dizi “YENİ bir gün başlıyor” (sol-mi-fa-re, mi-re-do). Bir kez nötr söyle, sonra güzel bir haber paylaşır gibi bir kez daha söyle.
+  - ja: 旋律は “A NEW day is beginning”(ソ-ミ-ファ-レ、ミ-レ-ド)です。まず抑揚をつけずに一度歌い、次に良い知らせを伝えるように一度歌いましょう。
+  - ko: 가사는 “A NEW day is beginning”(솔-미-파-레, 미-레-도)입니다. 한 번은 담담하게, 한 번은 좋은 소식을 전하듯 불러 보세요.
+  - pl: Linia brzmi “A NEW day is beginning” (sol-mi-fa-re, mi-re-do). Zaśpiewaj ją raz neutralnie, a raz tak, jakbyś dzielił się dobrą wiadomością.
+  - zh-Hans: 旋律是“A NEW day is beginning”（sol-mi-fa-re, mi-re-do）。先用中性的语气唱一遍，再像分享好消息一样唱一遍。
+- `a0a58c17a0ccca4d`
+  - EN: Tells pitch from loudness and moves a hum up or down without getting louder.
+  - TR: Perdeyi gürlükten ayırır; mırıldanmayı gürleşmeden yukarı ya da aşağı götürür.
+  - ja: 音高と音量を区別し、ハミングを大きくならずに上げたり下げたりします。
+  - ko: 음높이와 음량을 구별하고, 소리를 키우지 않고 허밍을 위나 아래로 옮깁니다.
+  - pl: Odróżnia wysokość od głośności i przesuwa mruczenie w górę lub w dół, nie głośniejąc.
+  - zh-Hans: 分辨音高和响度，并在不变响的情况下把哼鸣向上或向下移动。
+- `a0a7d2ed2d386c77`
+  - EN: Breathe in the way you normally do. Don't gulp in as much air as you can.
+  - TR: Normalde nasıl nefes alıyorsan öyle al. Alabildiğin kadar çok hava yutma.
+  - ja: ふだんどおりの息の吸い方で吸いましょう。できるだけ多くの空気を飲み込まないでください。
+  - ko: 평소처럼 숨 쉬세요. 들일 수 있는 만큼의 공기를 억지로 삼키지 마세요.
+  - pl: Oddychaj tak, jak zwykle. Nie łykaj tyle powietrza, ile się da.
+  - zh-Hans: 用你平常的方式呼吸。不要尽可能多地猛吸气。
+- `a1514a2c24d56990`
+  - EN: Coming down, the same notes return in reverse. Keep the bottom do on the pitch you started on.
+  - TR: İnerken aynı notalar ters sırayla döner. Alttaki do'yu başladığın perdede tut.
+  - ja: 下りでは同じ音が逆の順で戻ってきます。下のドは、始めた高さのままにしましょう。
+  - ko: 내려올 때는 같은 음들이 거꾸로 돌아옵니다. 아래 도를 처음 시작한 음높이에 그대로 두세요.
+  - pl: Schodząc w dół, te same dźwięki wracają w odwrotnej kolejności. Dolne do trzymaj na wysokości, od której zacząłeś.
+  - zh-Hans: 下行时，同样的音按相反顺序回来。让最低的do落在你起唱的那个音高上。
+- `a1c160e2aa5be05b`
+  - EN: Sings the five-note run in eighth notes on one 'ah', evenly and in tune with the click at ♩=70.
+  - TR: Beş notalık koşuyu tek 'a' ile sekizliklerle, klikle ♩=70'te eşit ve doğru perdede söyler.
+  - ja: 五音の走句を一つの「アー」で八分音符で歌い、♩=70のクリック音に合わせて均等に、音程よく歌います。
+  - ko: 클릭에 맞춰 ♩=70에서 다섯 음 진행을 하나의 '아'로 팔분음표로 고르고 음정에 맞게 부릅니다.
+  - pl: Śpiewa pięciodźwiękowy bieg ósemkami na jednym 'ah', równo i czysto z klikiem przy ♩=70.
+  - zh-Hans: 在一个'ah'上以八分音符唱五音跑句，均匀、音准，并与♩=70的节拍器的滴答声保持一致。
+- `a7880268e7d879b8`
+  - EN: The notes inside each phrase stayed connected.
+  - TR: Her cümlenin içindeki notalar birbirine bağlı kaldı.
+  - ja: 各フレーズの中の音は、つながったままでした。
+  - ko: 각 프레이즈 안의 음들이 이어져 있었습니다.
+  - pl: Dźwięki w obrębie każdej frazy pozostały połączone.
+  - zh-Hans: 每个乐句内部的音保持连贯。
+- `a79e7a6ad1bdce03`
+  - EN: Start your answer on the first beat after the call. Choose your first note while the call plays.
+  - TR: Cevabına sorudan sonraki ilk vuruşta başla. İlk notanı soru çalarken seç.
+  - ja: 答えは、コールの次の拍から始めます。コールが鳴っている間に最初の音を選びましょう。
+  - ko: 콜이 끝난 뒤 첫 박에서 답을 시작하세요. 콜이 재생되는 동안 첫 음을 고르세요.
+  - pl: Zacznij odpowiedź na pierwszej mierze po wołaniu. Wybierz pierwszy dźwięk, gdy wołanie gra.
+  - zh-Hans: 在呼唤之后的第一拍开始你的回应。在呼唤播放时选好你的第一个音。
+- `b3ffae9d7570d23a`
+  - EN: Bar 1 climbs from do to fa. Bar 2 holds sol for two beats, then steps down fa, mi. Bar 3 turns around fa: fa, mi, re, mi. Bar 4 ends re to do.
+  - TR: 1. ölçü do'dan fa'ya çıkar. 2. ölçü sol'ü iki vuruş tutar, sonra fa, mi diye iner. 3. ölçü fa çevresinde döner: fa, mi, re, mi. 4. ölçü re'den do'ya biter.
+  - ja: 1小節目はドからファへ上がります。2小節目はソを二拍保ち、ファ、ミと下ります。3小節目はファを中心に回ります：ファ、ミ、レ、ミ。4小節目はレからドで終わります。
+  - ko: 1마디는 도에서 파로 올라갑니다. 2마디는 솔을 두 박 유지한 뒤 파, 미로 내려옵니다. 3마디는 파를 중심으로 돌아옵니다: 파, 미, 레, 미. 4마디는 레에서 도로 끝납니다.
+  - pl: Takt 1 wznosi się od do do fa. Takt 2 trzyma sol przez dwie miary, potem schodzi fa, mi. Takt 3 obraca się wokół fa: fa, mi, re, mi. Takt 4 kończy się re do.
+  - zh-Hans: 第1小节从do爬到fa。第2小节把sol保持两拍，然后级进下行fa、mi。第3小节围绕fa转：fa、mi、re、mi。第4小节以re到do结束。
+- `b56301687b2fe344`
+  - EN: Couldn't hear in the middle of the piece.
+  - TR: Parçanın ortasında duyamadım.
+  - ja: 曲の途中で「Couldn't hear」になりました。
+  - ko: 곡 중간에 소리가 들리지 않았습니다.
+  - pl: Nie słychać dźwięku w środku utworu.
+  - zh-Hans: 乐曲中段听不到。
+- `b669c4167a5bf2ac`
+  - EN: Different note, ♭2 a semitone high.
+  - TR: Farklı nota: ♭2 yarım ses yüksek.
+  - ja: 別の音でした。♭2が半音高めです。
+  - ko: 다른 음: ♭2가 반음 높았습니다.
+  - pl: Inny dźwięk, ♭2 o półton za wysoko.
+  - zh-Hans: 音高不同：♭2高了一个半音。
+- `b9f10381712ff4bf`
+  - EN: A third is two scale steps apart, like do and mi. Thirds are the most common harmony in songs.
+  - TR: Üçlü, dizide iki basamak uzaklıktır; do ile mi gibi. Şarkılarda en sık kullanılan armonidir.
+  - ja: 三度は音階で二段離れています。ドとミのようにです。三度は、歌の中でいちばんよく使われるハーモニーです。
+  - ko: 삼도 음정은 음계 두 단계 떨어져 있으며, 도와 미처럼입니다. 삼도는 노래에서 가장 흔한 화성입니다.
+  - pl: Tercja to dwa stopnie skali: jak do i mi. Tercje są najczęstszą harmonią w piosenkach.
+  - zh-Hans: 三度相隔两个音阶级，如do和mi。三度是歌曲中最常见的和声。
+- `ba065d1d3b46b9a8`
+  - EN: Some questions play a triad, others the first five notes of a scale. In a scale, listen to the step from 2 to 3: a whole step in major, a half step in minor.
+  - TR: Bazı sorular bir üçlü, bazıları bir gamın ilk beş notasını çalar. Gamda 2'den 3'e adımı dinle: majörde tam ses, minörde yarım ses.
+  - ja: 三和音が鳴る問題と、音階の最初の五音が鳴る問題があります。音階では、2から3への段差を聴きましょう。長調では全音、短調では半音です。
+  - ko: 어떤 문제는 삼화음을 들려주고, 어떤 문제는 음계의 처음 다섯 음을 들려줍니다. 음계에서는 2에서 3으로의 단계를 들으세요: 장조에서는 온음, 단조에서는 반음입니다.
+  - pl: Niektóre pytania grają trójdźwięk, inne pierwsze pięć dźwięków skali. W skali posłuchaj kroku od 2 do 3: cały ton w durze, półton w molu.
+  - zh-Hans: 有些题播放一个三和弦，另一些播放音阶的前五个音。在音阶中，听2到3的那一步：大调是全音，小调是半音。
+- `caa40b5b412e9849`
+  - EN: Keep the top note light. A wide leap needs space, not force.
+  - TR: Üst notayı hafif tut. Geniş atlama güç değil, alan ister.
+  - ja: 上の音は軽く保ちましょう。大きな跳躍に必要なのは力ではなく空間です。
+  - ko: 위쪽 음을 가볍게 유지하세요. 넓은 도약에는 힘이 아니라 공간이 필요합니다.
+  - pl: Utrzymaj górny dźwięk lekki. Szeroki skok potrzebuje przestrzeni, nie siły.
+  - zh-Hans: 高音保持轻盈。大跳需要空间，而不是力量。
+- `ccd11b8badc4fb9c`
+  - EN: Keep the energy to the last note. Sing the phrase at ♩=42 and think 'up' on the final note.
+  - TR: Enerjiyi son notaya kadar koru. Cümleyi ♩=42'de söyle ve son notada 'yukarı' diye düşün.
+  - ja: 最後の音までエネルギーを保ちましょう。♩=42でフレーズを歌い、最後の音で'上'と思い描いてください。
+  - ko: 마지막 음까지 에너지를 유지하세요. ♩=42로 프레이즈를 부르고 마지막 음에서 '위로'를 떠올리세요.
+  - pl: Zachowaj energię do ostatniej nuty. Zaśpiewaj frazę w tempie ♩=42 i pomyśl 'w górę' na ostatniej nucie.
+  - zh-Hans: 保持气息的力度直到最后一个音。以 ♩=42 唱这个乐句，最后一个音心里想着 '向上'。
+- `d0b418830c9e788b`
+  - EN: The melodies use do to sol, with quarters, halves and pairs of eighths. Each one ends on a longer note.
+  - TR: Ezgiler do ile sol arasını kullanır; dörtlükler, ikilikler ve ikili sekizliklerle. Her biri daha uzun bir notayla biter.
+  - ja: 旋律はドからソを使い、四分音符、二分音符、八分音符の組を含みます。どれも長めの音で終わります。
+  - ko: 선율은 도에서 솔까지를 사용하며 사분음표, 이분음표, 팔분음표 쌍이 있습니다. 각 선율은 더 긴 음으로 끝납니다.
+  - pl: Melodie używają dźwięków od do do sol, z ćwierćnutami, półnutami i parami ósemek. Każda kończy się dłuższą nutą.
+  - zh-Hans: 这些旋律使用 do 到 sol，包含四分音符、二分音符和成对的八分音符。每段都以较长的音结束。
+- `dc5f880fec005d17`
+  - EN: This checkpoint brings the module together: thirds, sixths, a held note, contrary motion and fifths, in one sixteen-bar study.
+  - TR: Bu geçiş modülü birleştirir: üçlüler, altılılar, tutulan nota, zıt hareket ve beşliler, on altı ölçülük tek bir etütte.
+  - ja: このチェックポイントは、モジュールのまとめです:三度、六度、保持する音、反進行、五度を、十六小節の一つの練習曲で扱います。
+  - ko: 이 체크포인트는 모듈을 종합합니다: 삼도, 육도, 길게 끄는 음, 반진행, 오도를 열여섯 마디 연습곡 하나에서 다룹니다.
+  - pl: Ten punkt kontrolny łączy cały moduł: tercje, seksty, trzymany dźwięk, ruch przeciwny i kwinty w jednej szesnastotaktowej etiudzie.
+  - zh-Hans: 这个检查点把本模块的内容汇集在一起：三度、六度、保持音、反向进行和五度，全部在一首十六小节的练习曲中。
+- `e38abc1e2ebcc2c5`
+  - EN: Finds do on the treble staff in C major and sings do, mi and sol from the staff in their own octave.
+  - TR: Do majörde sol anahtarlı portede do'yu bulur; do, mi ve sol'ü porteden kendi oktavında söyler.
+  - ja: ハ長調のト音記号の五線でドを見つけ、ド、ミ、ソを五線から自分のオクターブで歌います。
+  - ko: C 장조 높은음자리표에서 도를 찾고, 오선 위의 도, 미, 솔을 자신의 옥타브에서 부릅니다.
+  - pl: Znajduje do na pięciolinii w kluczu wiolinowym w C-dur i śpiewa do, mi i sol z pięciolinii we własnej oktawie.
+  - zh-Hans: 在C大调的高音谱表上找到do，并从谱上在自己的八度里唱do、mi和sol。
+- `f521ec00d055e8d2`
+  - EN: If you move too early, the note is sung on 'ee' or 'oo' and the word loses its colour. If you never move, the word is not clear.
+  - TR: Çok erken geçersen nota 'i' ya da 'u' üstünde söylenir ve kelime rengini kaybeder. Hiç geçmezsen kelime anlaşılmaz.
+  - ja: 早く移りすぎると、音が「イー」や「ウー」で歌われ、言葉の色が失われます。まったく移らないと、言葉が明瞭になりません。
+  - ko: 너무 일찍 움직이면 음이 '이'나 '우'로 불려 단어의 색이 사라집니다. 전혀 움직이지 않으면 단어가 또렷하지 않습니다.
+  - pl: Jeśli przejdziesz na samogłoskę za wcześnie, dźwięk zostanie zaśpiewany na 'ee' lub 'oo', a słowo straci barwę. Jeśli nigdy nie przejdziesz, słowo nie jest wyraźne.
+  - zh-Hans: 如果动得太早，这个音就会唱成 'ee' 或 'oo'，字就失去了色彩。如果始终不动，字就不清楚。
