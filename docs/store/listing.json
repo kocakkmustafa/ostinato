@@ -17,7 +17,7 @@
   "$comingSoonClaimWhy": "settings_screen.dart:_liveSentence() library.json'daki status=='live' disiplinlerden SAYIYI TURETIYOR (elle yazilmiyor, O-068 dersi) — bugun 3 (guitar/voice/piano), gate cikisi bunu dogruluyor ('3 canli: guitar/voice/piano'). Kalan 39 calgi sayfasi PRD'nin kendi W1 tanimindaki 'yakinda' durumunda (sahte kurs listelenmez).",
   "cameraPermissionRationale": {
     "ios": "Camera access is used to check your posture and hand position in the lessons that ask for it. Images are processed only on this device; they are not saved or uploaded.",
-    "$source": "2026-10-21 kaynak uzlaştırması: ios/Runner/Info.plist ve en.lproj/InfoPlist.strings. Kamera pratiği bu sürümde kapalıdır; gelecekteki cihaz üstü izin amacı etkin özellik kabulü değildir."
+    "$source": "2026-10-21 kaynak uzlaştırması: ios/Runner/Info.plist ve en.lproj/InfoPlist.strings. Kamera pratiği bu sürümde kapalıdır; gelecekteki cihaz üstü izin amacı etkin özellik kabulü değildir. 2026-11-16: iOS'ta açıklama VAR (kamera eklentileri bağlı; bayraklar kapalıyken istenmez), Android'de CAMERA izni YOK (tools:node=remove)."
   },
   "$ageRating": {
     "$why": "Bu blok $ ile taşındı (D6/O-157) — ASC/Play'in yaş-derecesi anketi SERBEST METİN almaz (dropdown/toggle seçimleri), yani `expectedTier`/`rationale` hiçbir zaman kelimesi kelimesine gönderilmeyecek; bu, seçimleri gerekçeleyen İÇ notumuz — `appStore`/`playStore`/`description`/`cameraPermissionRationale`den KATEGORİK olarak farklı (onlar gerçekten sevk edilir).",

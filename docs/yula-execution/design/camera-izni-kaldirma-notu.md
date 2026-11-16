@@ -1,20 +1,22 @@
-# Kamera izni kaldırma notu (2026-11-16)
+# Android kamera izni kaldırma notu (2026-11-16)
 
-**Ne:** Android `CAMERA` (manifestte `tools:node="remove"`; eklentiler geri getirmesin) ve iOS `NSCameraUsageDescription` (Info.plist + 14 dil InfoPlist.strings) kaldırıldı. Kamera özellik bayrakları KAPALI, kamera kodu yerinde.
+**Karar (Motion):** Yalnız ANDROID kamera izni kalkar. iOS `NSCameraUsageDescription` (Info.plist + 14 dil InfoPlist.strings) DURUR; metin dürüst ve kamera bayrakları kapalıyken istenmez.
 
-**Neden:** Kullanılmayan izin mağaza incelemesi ve gizlilik beyanı yükü.
+**Ne:** Android `CAMERA` ve `camera.any` zorunluluğu birleşik manifestten çıkar. Kaynak manifestte `CAMERA` için `tools:node="remove"` durur (eklentiler camera_android_camerax / motion_camera / ostinato_posture izni geri getirmesin); `camera.any` `required="false"`. Kamera kodu silinmedi, bayraklar KAPALI.
 
-**Kanıt (kod yolu okundu):** Kamera erişimi iki derleme-zamanı sabitiyle kapalı: `ostinatoCameraPracticeAvailable = false` (`lib/app/ostinato_release_policy.dart:46`; `motion_account_bootstrap.dart` bunu `requireCameraAccess` kapısına verir) ve `ostinatoCameraLessonsOpen = false` (satır 52). Core'daki `motionCameraCoachingAvailable` de `const bool = false` (`motion_release_policy.dart:6`). Üçü de uzaktan değil `const`; açmak kod değişikliği ve yeni derleme ister. `Permission.camera.request` yalnız `camera_session.dart:354` ve `mirror_camera.dart:36` içinde, bu kapıların arkasında.
+**Neden iOS'ta kalıyor:** iOS tarafında kamera eklentileri hâlâ bağlı (`pubspec.lock`: `camera`, `camera_avfoundation`; `Podfile.lock`: `camera_avfoundation`, `motion_camera`; `Podfile`: `PERMISSION_CAMERA=1`). Apple kamera API'si kullanımını görüp `NSCameraUsageDescription` bulamazsa ITMS-90683 verebilir. iOS eklentilerini çıkarmak ayrı bilet: **OST-CAM-IOS-01**.
 
-**UYARI:** Bayrak açılırsa (uzaktan değil, yeni derlemeyle) iOS'ta izin metni olmadan `Permission.camera` isteği uygulamayı çökertir. Bayrak açılmadan önce izin + metin geri eklenmeli.
+**Kanıt (kod yolu okundu):** Kamera erişimi derleme-zamanı sabitleriyle kapalı: `ostinatoCameraPracticeAvailable = false` (`lib/app/ostinato_release_policy.dart:46`; `motion_account_bootstrap.dart` bunu `requireCameraAccess` kapısına verir), `ostinatoCameraLessonsOpen = false` (satır 52), Core `motionCameraCoachingAvailable = false` (`motion_release_policy.dart:6`). Üçü de `const`, uzaktan açılmaz; açmak kod değişikliği ve yeni derleme ister. `Permission.camera.request` yalnız `camera_session.dart:354` ve `mirror_camera.dart:36` içinde, bu kapıların arkasında.
 
-**Kapsam:** 1.0.2 (11) Apple incelemesinde bu izinlerle gitti; kaldırma yalnız sonraki sürümü etkiler.
+**Birleşik manifest kanıtı:** `(cd android && ./gradlew :app:processReleaseMainManifest)` sonra `python3 tools/verify_merged_manifest_no_camera.py` (varsayılan yol release): CAMERA yok, zorunlu kamera özelliği yok, RECORD_AUDIO var. Bekçi: `test/camera_permissions_absent_test.dart`.
+
+**Kapsam:** 1.0.2 (11) Apple incelemesine iOS izin metniyle gitti; iOS tarafı değişmedi. Android kaldırma yalnız sonraki Android sürümünü etkiler.
 
 **Bayrak açılırken yapılacak** (`ostinato_posture` / `motion_camera` / kamera ders bayrağı):
 1. AndroidManifest: `CAMERA` için `tools:node="remove"` satırını kaldır, düz `<uses-permission android:name="android.permission.CAMERA" />` ekle; `test/camera_permissions_absent_test.dart` bu durumda bilerek güncellenir.
-2. iOS: `NSCameraUsageDescription` Info.plist + 14 dil InfoPlist.strings'e geri (metin saklama iddiası bekçisinden geçmeli).
-3. Mağaza gizlilik beyanı (App Privacy) ve Play Data safety güncellenir. Motion'a bilgi: kamera erişimi yeniden beyan edilecek.
+2. iOS metni zaten yerinde; saklama iddiası bekçisinden geçmeye devam etmeli.
+3. Mağaza gizlilik beyanı (App Privacy) ve Play Data safety güncellenir. Motion'a bilgi: Android kamera erişimi yeniden beyan edilecek.
 
-**Bekçi:** `tools/validate_surface_honesty.py` kendi-sınamasında izin metni yüzeyi artık `NSMicrophoneUsageDescription` ile doğrulanır; `gate_mutation_test` mutasyonu (plist'e saklama iddiası) hâlâ yakalanır.
+**UYARI:** iOS'ta izin metni olmadan `Permission.camera` isteği uygulamayı çökertir; bu yüzden iOS metni kaldırılmadı. Android'de bayrak açılmadan önce izin geri eklenmeli.
 
-**iOS ITMS-90683 riski:** iOS tarafında kamera eklentileri hâlâ bağlı: `pubspec.lock`ta `camera`/`camera_avfoundation`, `Podfile.lock`ta `camera_avfoundation` ve `motion_camera`, `Podfile`da `PERMISSION_CAMERA=1`. Apple derlemede kamera API'si kullanımını görüp `NSCameraUsageDescription` bulamazsa ITMS-90683 ile yükleme uyarısı/ret verebilir; sonraki yüklemede çıkarsa ya eklentiler/`PERMISSION_CAMERA` çıkarılmalı ya da anahtar geri konmalı (Motion'a bilgi).
+**Bekçi:** `tools/validate_surface_honesty.py` kendi-sınamasında izin metni yüzeyi hem `NSCameraUsageDescription` hem `NSMicrophoneUsageDescription` için okunabilir olmalı; `gate_mutation_test` mutasyonları (plist'e saklama iddiası dahil) yakalanır.

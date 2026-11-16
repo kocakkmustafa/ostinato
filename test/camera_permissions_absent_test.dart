@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// KAMERA İZNİ YOK (1.0.3 öncesi kaldırma). Kamera özellik bayrakları kapalı;
-/// uygulama hiçbir platformda kamera izni ya da zorunlu kamera özelliği
-/// bildirmez. Mikrofon izni (ses dinleme) yerinde kalır.
+/// ANDROID'DE KAMERA İZNİ YOK. Kamera özellik bayrakları kapalı; Android
+/// kamera izni ve zorunlu kamera özelliği bildirmez. iOS'ta kamera eklentileri
+/// bağlı kaldığı için NSCameraUsageDescription DURUR (ayrı bilet
+/// OST-CAM-IOS-01); bayraklar kapalıyken istenmez. Mikrofon izni yerinde.
 ///
 /// Android'de kamera eklentileri (camera_android_camerax, motion_camera,
 /// ostinato_posture) kendi manifestlerinde CAMERA iznini ve camera özelliğini
@@ -71,14 +72,52 @@ void main() {
     });
   });
 
+  group('Birleşik release manifesti (varsa)', () {
+    // `./gradlew :app:processReleaseMainManifest` çıktısı; yoksa atlanır.
+    // Kanıt betiği: tools/verify_merged_manifest_no_camera.py.
+    final merged = File(
+      'build/app/intermediates/merged_manifest/release/'
+      'processReleaseMainManifest/AndroidManifest.xml',
+    );
+    test('CAMERA yok, zorunlu kamera özelliği yok', () {
+      final x = merged.readAsStringSync().replaceAll(
+        RegExp(r'<!--.*?-->', dotAll: true),
+        '',
+      );
+      expect(x, isNot(contains('android.permission.CAMERA')));
+      for (final m in RegExp(
+        r'<uses-feature\b[^>]*android\.hardware\.camera[^>]*>',
+        dotAll: true,
+      ).allMatches(x)) {
+        expect(m.group(0), contains('android:required="false"'));
+      }
+    }, skip: merged.existsSync() ? false : 'birleşik manifest üretilmemiş');
+  });
+
   group('iOS', () {
-    test('Info.plist: kamera anahtarı yok, mikrofon var', () {
+    // iOS'ta kamera eklentileri bağlı: açıklama metni DURUR, kamera
+    // bayrakları kapalıyken istenmez.
+    final retention = RegExp(
+      r'\b(keeps?|kept|retain|stores?|stored)\b',
+      caseSensitive: false,
+    );
+
+    test('Info.plist: kamera açıklaması VAR ve dürüst, mikrofon var', () {
       final plist = File('ios/Runner/Info.plist').readAsStringSync();
-      expect(plist, isNot(contains('NSCameraUsageDescription')));
+      final m = RegExp(
+        r'<key>NSCameraUsageDescription</key>\s*<string>([^<]+)</string>',
+      ).firstMatch(plist);
+      expect(m, isNotNull);
+      expect(m!.group(1)!.trim(), isNotEmpty);
+      expect(
+        retention.hasMatch(m.group(1)!),
+        isFalse,
+        reason: 'saklama iddiası yok',
+      );
       expect(plist, contains('NSMicrophoneUsageDescription'));
     });
 
-    test('InfoPlist.strings (14 dil): kamera satırı yok, mikrofon var', () {
+    test('InfoPlist.strings (14 dil): kamera + mikrofon satırı var', () {
       final files = Directory('ios/Runner')
           .listSync()
           .whereType<Directory>()
@@ -89,7 +128,11 @@ void main() {
       expect(files.length, greaterThanOrEqualTo(14));
       for (final f in files) {
         final s = f.readAsStringSync();
-        expect(s, isNot(contains('NSCameraUsageDescription')), reason: f.path);
+        expect(
+          RegExp(r'"NSCameraUsageDescription"\s*=\s*"[^"]+";').hasMatch(s),
+          isTrue,
+          reason: f.path,
+        );
         expect(s, contains('"NSMicrophoneUsageDescription"'), reason: f.path);
       }
     });
