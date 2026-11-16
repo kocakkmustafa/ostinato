@@ -630,6 +630,55 @@ void main() {
       },
     );
 
+    test(
+      'marker failure, page closed, new controller/store: still denied',
+      () async {
+        final failing = ParentalConsentController(
+          gateway: gw,
+          tokenStore: store,
+          markBlocked: () async => throw const FileSystemException('disk'),
+          locale: 'en',
+        );
+        gw.onStatus = () => _st(MotionParentalConsent.denied);
+        await failing.load();
+        failing.dispose(); // the child closes the page
+        expect(await AgeGateStore(directory: dir).read(), isFalse);
+        // Process restart: new store instance on the same directory; the server
+        // has already forgotten the refusal.
+        final restarted = ConsentTokenStore(directory: dir);
+        expect(await restarted.deniedSeen(), isTrue);
+        final json =
+            jsonDecode(
+                  File(
+                    '${dir.path}/ostinato.parental_consent_token.v1.json',
+                  ).readAsStringSync(),
+                )
+                as Map<String, dynamic>;
+        expect(json.keys.toSet(), {'schemaVersion', 'token', 'denied'});
+        gw.onStatus = () => _st(MotionParentalConsent.none);
+        gw.calls.clear();
+        final next = ParentalConsentController(
+          gateway: gw,
+          tokenStore: restarted,
+          markBlocked: () async {
+            await AgeGateStore(directory: dir).markBlocked();
+          },
+          locale: 'en',
+        );
+        addTearDown(next.dispose);
+        await next.load();
+        expect(next.phase, ConsentPhase.denied);
+        expect(gw.calls, isEmpty, reason: 'server is not asked');
+        expect(await AgeGateStore(directory: dir).read(), isTrue);
+        expect(
+          await restarted.read(),
+          isNull,
+          reason: 'token cleared after marker',
+        );
+        expect(await restarted.deniedSeen(), isFalse);
+      },
+    );
+
     test('lost reply: neutral notice, never "nothing changed"', () async {
       await c.load();
       gw.requestError = const MotionOperationUnknown(
@@ -862,6 +911,15 @@ final class _MemStore implements ConsentTokenStorage {
       _token ??= MotionDeviceConsentToken.generate();
   @override
   Future<String> renew() async => _token = MotionDeviceConsentToken.generate();
+  bool denied = false;
   @override
-  Future<void> clear() async => _token = null;
+  Future<void> clear() async {
+    _token = null;
+    denied = false;
+  }
+
+  @override
+  Future<void> markDenied() async => denied = true;
+  @override
+  Future<bool> deniedSeen() async => denied;
 }

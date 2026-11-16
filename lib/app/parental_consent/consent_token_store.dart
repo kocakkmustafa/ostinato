@@ -13,6 +13,11 @@ abstract interface class ConsentTokenStorage {
   Future<String> readOrCreate();
   Future<String> renew();
   Future<void> clear();
+
+  /// Durable note that a refusal was read; kept until the permanent marker
+  /// is written (the server reads a refusal out only once).
+  Future<void> markDenied();
+  Future<bool> deniedSeen();
 }
 
 final class ConsentTokenStore implements ConsentTokenStorage {
@@ -37,8 +42,11 @@ final class ConsentTokenStore implements ConsentTokenStorage {
     try {
       final value = jsonDecode(await file.readAsString());
       if (value is Map<String, dynamic> &&
-          value.length == 2 &&
           value['schemaVersion'] == 1 &&
+          value.keys.every(
+            (k) => k == 'schemaVersion' || k == 'token' || k == 'denied',
+          ) &&
+          (!value.containsKey('denied') || value['denied'] == true) &&
           MotionDeviceConsentToken.isWellFormed(value['token'] as String?)) {
         return value['token'] as String;
       }
@@ -73,12 +81,34 @@ final class ConsentTokenStore implements ConsentTokenStorage {
     if (await file.exists()) await file.delete();
   }
 
-  Future<void> _write(String token) async {
+  @override
+  Future<void> markDenied() async {
+    final token = await read() ?? await renew();
+    await _write(token, denied: true);
+  }
+
+  @override
+  Future<bool> deniedSeen() async {
+    final file = await _file();
+    if (!await file.exists()) return false;
+    try {
+      final value = jsonDecode(await file.readAsString());
+      return value is Map<String, dynamic> && value['denied'] == true;
+    } on Object {
+      return false;
+    }
+  }
+
+  Future<void> _write(String token, {bool denied = false}) async {
     final file = await _file();
     await file.parent.create(recursive: true);
     final pending = File('${file.path}.tmp');
     await pending.writeAsString(
-      jsonEncode({'schemaVersion': 1, 'token': token}),
+      jsonEncode({
+        'schemaVersion': 1,
+        'token': token,
+        if (denied) 'denied': true,
+      }),
       flush: true,
     );
     await pending.rename(file.path);

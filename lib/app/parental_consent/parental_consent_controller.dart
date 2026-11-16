@@ -129,6 +129,16 @@ final class ParentalConsentController extends ChangeNotifier {
     _busy = true;
     notifyListeners();
     try {
+      if (!_blockedInSession) {
+        try {
+          if (await tokenStore.deniedSeen()) {
+            _blockedInSession = true;
+            _markerPending = true;
+          }
+        } on Object {
+          // Unreadable note: fall through to the normal fail-closed read.
+        }
+      }
       if (_blockedInSession) {
         await _settleDenied();
         return;
@@ -171,6 +181,11 @@ final class ParentalConsentController extends ChangeNotifier {
         // is retried; the session stays closed in memory meanwhile.
         _blockedInSession = true;
         _markerPending = true;
+        try {
+          await tokenStore.markDenied();
+        } on Object {
+          // Still closed in memory; the marker write below is attempted too.
+        }
         await _settleDenied();
 
       case MotionParentalConsent.expired:
