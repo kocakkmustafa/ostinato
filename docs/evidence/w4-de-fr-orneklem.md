@@ -1,6 +1,6 @@
 # W4 de + fr çeviri örneklemi
 
-30 rastgele dizge (seed 20261116), ses kursu (voc). Kaynak EN; de = du, fr = tu. Yer tutucu/sayı paritesi ve yasak sözcük taraması tüm 3.239 dizgede yapıldı.
+30 rastgele dizge (seed 20261116), ses kursu (voc). Kaynak EN; de = du, fr = tu. Yer tutucu/sayı paritesi ve yasak sözcük taraması tüm 3.239 dizgede yapıldı. Reviewer düzeltmeleri sonrası güncellendi.
 
 ## 1. `e4e11e613090299f`
 
@@ -29,8 +29,8 @@
 ## 5. `2928b96abd6440ea`
 
 - EN: After the count-in, sing 1-3-5-3-1 on a light 'ha' or 'hoo', one short note on each click, silent between notes. Rest for the rest of the bar and do it three times. Start at ♩=50 if you like; the lesson counts at ♩=70. Sing in your own octave.
-- de: Singe nach dem Einzähler 1-3-5-3-1 auf einem leichten 'ha' oder 'hoo', eine kurze Note auf jedem Klick, zwischen den Noten still. Ruhe dich den Rest des Taktes aus und mache es dreimal. Beginne gern bei ♩=50; die Lektion zählt bei ♩=70. Singe in deiner eigenen Oktave.
-- fr: Après le décompte, chante 1-3-5-3-1 sur un 'ha' ou 'hoo' léger, une note courte sur chaque clic, silence entre les notes. Repose-toi pendant le reste de la mesure et fais-le trois fois. Commence à ♩=50 si tu veux ; la leçon compte à ♩=70. Chante dans ton octave.
+- de: Singe nach dem Einzähler 1-3-5-3-1 auf einem leichten 'ha' oder 'hoo', eine kurze Note auf jedem Klick, zwischen den Noten still. Pausiere den Rest des Taktes und mache es dreimal. Beginne gern bei ♩=50; die Lektion zählt bei ♩=70. Singe in deiner eigenen Oktave.
+- fr: Après le décompte, chante 1-3-5-3-1 sur un 'ha' ou 'hoo' léger, une note courte sur chaque clic, silence entre les notes. Reste en silence pendant le reste de la mesure et fais-le trois fois. Commence à ♩=50 si tu veux ; la leçon compte à ♩=70. Chante dans ton octave.
 
 ## 6. `15d81bd4c795dbd8`
 
@@ -66,7 +66,7 @@
 
 - EN: A starting note plays. The screen asks for one interval above it: M2, M3, P4 or P5.
 - de: Eine Startnote erklingt. Der Bildschirm verlangt ein Intervall darüber: gr2, gr3, r4 oder r5.
-- fr: Une note de départ retentit. L'écran demande un intervalle au-dessus : M2, M3, P4 ou P5.
+- fr: Une note de départ retentit. L'écran demande un intervalle au-dessus : 2M, 3M, 4J ou 5J.
 
 ## 12. `e7d8b345917b1c4e`
 
@@ -120,7 +120,7 @@
 
 - EN: Listen, then sing 1-2-1 on one 'ah' and rest, then 3-2-1 on one 'ah' and rest. Do the pair four times: 8 turns. Sing in your own octave.
 - de: Höre zu, dann singe 1-2-1 auf einem 'ah' und pausiere, dann 3-2-1 auf einem 'ah' und pausiere. Mache das Paar viermal: 8 Durchgänge. Singe in deiner eigenen Oktave.
-- fr: Écoute, puis chante 1-2-1 sur un seul 'a' et repose-toi, puis 3-2-1 sur un seul 'a' et repose-toi. Fais la paire quatre fois : 8 tours. Chante dans ton octave.
+- fr: Écoute, puis chante 1-2-1 sur un seul 'a' et fais une pause, puis 3-2-1 sur un seul 'a' et fais une pause. Fais la paire quatre fois : 8 tours. Chante dans ton octave.
 
 ## 21. `ee0c252c6cb4396b`
 
@@ -144,7 +144,7 @@
 
 - EN: Listen to each of 10 notes and sing it back in your own octave for about two seconds. The checkpoint counts all 10 notes.
 - de: Höre jede von 10 Noten und singe sie in deiner eigenen Oktave etwa zwei Sekunden lang nach. Der Checkpoint zählt alle 10 Noten.
-- fr: Écoute chacune des 10 notes et rechante-la dans ta propre octave pendant environ deux secondes. Le point d'étape compte les 10 notes.
+- fr: Écoute chacune des 10 notes et rechante-la dans ta propre octave pendant environ deux secondes. Le point de contrôle compte les 10 notes.
 
 ## 25. `9923ff8210cccd2c`
 
@@ -161,7 +161,7 @@
 ## 27. `c0735559158a102b`
 
 - EN: Warm up, then after the count-in sing the scale up and down at ♩=70, one note per click. Hold the last 1 for two clicks. Sing in your own octave.
-- de: Wärme dich auf, dann singe nach dem Einzählen die Tonleiter auf und ab bei ♩=70, eine Note pro Klick. Halte die letzte 1 für zwei Klicks. Singe in deiner eigenen Oktave.
+- de: Wärme dich auf, dann singe nach dem Einzähler die Tonleiter auf und ab bei ♩=70, eine Note pro Klick. Halte die letzte 1 für zwei Klicks. Singe in deiner eigenen Oktave.
 - fr: Échauffe-toi, puis après le décompte chante la gamme en montant et en descendant à ♩=70, une note par clic. Tiens le dernier 1 pendant deux clics. Chante dans ton octave.
 
 ## 28. `4f57d7d031f74357`
