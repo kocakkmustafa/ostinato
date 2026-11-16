@@ -148,6 +148,12 @@ jobs:
         # ÜRETMEZ.
         run: flutter build appbundle --release -PallowDebugSigning=true
 
+      - name: Birleşik release manifest — CAMERA yok (OST-CI-MANIFEST-01)
+        # Yukarıdaki derleme processReleaseMainManifest'i zaten koşturdu;
+        # ek gradle YOK. Betik yol yoksa 2, CAMERA/zorunlu kamera varsa 1
+        # ile çıkar → bu mevcut iş kırılır (yeni zorunlu kontrol açılmadı).
+        run: python3 tools/verify_merged_manifest_no_camera.py
+
   ios-release-build:
     name: iOS release build, no-codesign (OST-P0-004)
     runs-on: macos-latest
