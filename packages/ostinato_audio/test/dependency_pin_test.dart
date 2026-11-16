@@ -13,7 +13,7 @@ import 'package:test/test.dart';
 /// `pubspec.lock`'un `motion_core` için çözdüğü `resolved-ref` birebir
 /// aynı olmalı.
 /// Public tüketici checkpoint'i: Motion Core
-/// ZA-01 `69a3c81` (motion-core#18; R4.3 `5b15308` üzerine zaman aşımı düzeltmesi). Tüm tüketiciler aynı tam ref'i kullanır.
+/// `b8d861c` (motion_account 0.9.0, veli izni; önceki pin `69a3c81`). Tüm tüketiciler aynı tam ref'i kullanır.
 ///
 /// **REF TAM 40-SHA OLMAK ZORUNDA** (M-F-263 zeyil-2, Choreia+Gravita ölçtü —
 /// ve burada da ÖLÇÜLDÜ): pub, git ref'lerini ÇÖZMEZ, STRING olarak
@@ -23,7 +23,7 @@ import 'package:test/test.dart';
 /// diyor. Kısaltılmış ref TEK BAŞINA çözülür — arıza ancak İKİ TARAFIN
 /// anlaşması gerektiğinde görünür. (Pin testinin kendi dersiyle aynı sınıf:
 /// anlaşma, ancak iki taraf varken sınanabilir.)
-const String _mandatedRef = '69a3c812690136adfbf7dfc5e1550d377591bc60';
+const String _mandatedRef = 'b8d861ce33c2b346d66cc9c555cc1a560a36799b';
 const String _mandatedVersion = '0.13.0';
 
 void main() {

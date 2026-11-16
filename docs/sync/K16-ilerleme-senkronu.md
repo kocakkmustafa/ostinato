@@ -16,7 +16,7 @@ canlı deploy kurucu onayı bekler.
 | Ayarlar | `ostinato.theme.v1.json`, `ostinato.locale.v1.json`, `onboarding-v1.done`, `ostinato.age_gate.v1.json` | Cihaz düzeyi, hesapsız kök dizin. |
 | Diğer çalgılar (piyano, bas, ukulele, vokal) | Kalıcı ilerleme yok | Yazılı pratik. |
 
-Kimlik: Motion Core'un ortak hesabı (`motion_account`, pin `5b15308`). Supabase
+Kimlik: Motion Core'un ortak hesabı (`motion_account`, pin `b8d861c`). Supabase
 Auth, **yalnız e-posta + parola**; Sign in with Apple ve anonim oturum yok.
 Kullanıcı UUID'si `AccountScope.currentUserId` ile gelir ve yerel dosyaları
 `accounts/<uuid>/` altına ayırır (`account_data_directory.dart`). Oturum

@@ -42,7 +42,7 @@ dependencies:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_account
-      ref: 69a3c812690136adfbf7dfc5e1550d377591bc60
+      ref: b8d861ce33c2b346d66cc9c555cc1a560a36799b
   ostinato_posture:
     path: packages/ostinato_posture
   # OST-P0-002 (2026-08-19): şimdiye kadar `ostinato_audio` yalnız KENDİ
@@ -59,25 +59,25 @@ dependencies:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_core
-      ref: 69a3c812690136adfbf7dfc5e1550d377591bc60
+      ref: b8d861ce33c2b346d66cc9c555cc1a560a36799b
   # Flutter bundle bytes are checked by the same pinned Core content contract.
   # Production manifests and media playback remain separate acceptance gates.
   motion_content:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_content
-      ref: 69a3c812690136adfbf7dfc5e1550d377591bc60
+      ref: b8d861ce33c2b346d66cc9c555cc1a560a36799b
   motion_camera:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
-      ref: 69a3c812690136adfbf7dfc5e1550d377591bc60
+      ref: b8d861ce33c2b346d66cc9c555cc1a560a36799b
       path: packages/motion_camera
   # Core R1+ lesson lock (isLessonUnlocked); same pin as motion_account.
   motion_entitlements:
     git:
       url: https://github.com/kocakkmustafa/motion-core.git
       path: packages/motion_entitlements
-      ref: 69a3c812690136adfbf7dfc5e1550d377591bc60
+      ref: b8d861ce33c2b346d66cc9c555cc1a560a36799b
 
   permission_handler: ^12.0.3
 
