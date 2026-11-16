@@ -135,7 +135,7 @@ void main() {
         GateIneligible.loopUsed,
       ]);
       expect(summary(all, wait: true).gate.passed, isFalse);
-      expect(summary(all, wait: true).nextStep, NextStep.performanceRun);
+      expect(summary(all, wait: true).nextStep, NextStep.tryAgain);
       expect(
         summary(all.sublist(0, 5), completed: false).gate.ineligible,
         contains(GateIneligible.stoppedEarly),

@@ -121,7 +121,9 @@ void main() {
     for (final (reason, cand, s, raw) in unmeasured) {
       test('ham oneri kontrolu: $reason/$cand', () {
         expect(s.gate.eligible, isFalse);
-        expect(s.nextStep, raw);
+        // OST-UX-16: producer no longer emits the raw loop/tempo/perf step.
+        expect(raw, isIn(bad));
+        expect(s.nextStep, NextStep.tryAgain);
       });
       for (final loc in ['en', 'tr']) {
         testWidgets('a) $reason/$cand [$loc] -> tryAgain etiketi', (t) async {

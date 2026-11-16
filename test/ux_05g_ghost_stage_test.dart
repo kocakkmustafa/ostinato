@@ -464,7 +464,7 @@ void main() {
         '05e2: stage=false da olculmemis kosuda oneri URETILMEZ: $name '
         '(eskiden "$old")',
         (t) async {
-          expect(s.nextStep, isNot(NextStep.tryAgain));
+          expect(s.nextStep, NextStep.tryAgain); // OST-UX-16: producer itself
           expect(await label(t, s, stage: false), 'Tekrar dene');
         },
       );
