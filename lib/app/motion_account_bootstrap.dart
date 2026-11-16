@@ -19,6 +19,9 @@ import 'membership_resume.dart';
 import 'ostinato_membership_page.dart';
 import 'ostinato_paid_access.dart';
 import 'ostinato_release_policy.dart';
+import 'parental_consent/consent_token_store.dart';
+import 'parental_consent/parental_consent_controller.dart';
+import 'parental_consent/parental_consent_page.dart';
 import 'ownership_guarded_account_client.dart';
 
 const _url = String.fromEnvironment('MOTION_SUPABASE_URL');
@@ -36,6 +39,7 @@ initializeMotionAccount() async {
   // authority already remembers old pending resource closures before that await.
   final coordinator = AccountDeletionCoordinator.forRoot(supportRoot);
   final ageGate = AgeGateStore(directory: supportRoot);
+  final consentTokens = ConsentTokenStore(directory: supportRoot);
   final ageBlocked = await ageGate.read();
   Future<void> clearLocalAccountData(String userId) =>
       deleteAccountData(supportRoot, userId);
@@ -56,6 +60,7 @@ initializeMotionAccount() async {
       clearLocalData: clearLocalAccountData,
       ageBlocked: ageBlocked,
       onAgeBlocked: ageGate.markBlocked,
+      consentTokenStore: consentTokens,
     ),
   );
 }
@@ -68,6 +73,10 @@ AccountConnection bindMotionAccountRuntime(
   required AccountDeletionCoordinator deletionCoordinator,
   bool ageBlocked = false,
   Future<void> Function()? onAgeBlocked,
+  // ADR-008: closed by default. Only tests pass another value.
+  @visibleForTesting
+  bool parentalConsentEnabled = ostinatoParentalConsentEnabled,
+  ConsentTokenStore? consentTokenStore,
   @visibleForTesting Stream<AuthState>? ownerAuthChanges,
 }) {
   final ownership = AccountOwnershipEpoch(
@@ -85,7 +94,26 @@ AccountConnection bindMotionAccountRuntime(
     onAgeBlocked?.call().ignore();
   }
 
-  Widget accountPage(BuildContext _) {
+  Future<void> openParentalConsent(BuildContext context) async {
+    if (!context.mounted) return;
+    final controller = ParentalConsentController(
+      gateway: MotionAccountConsentGateway(runtime.account),
+      tokenStore: consentTokenStore ?? const ConsentTokenStore(),
+      markBlocked: () async {
+        underAgeBlocked = true;
+        await onAgeBlocked?.call();
+      },
+      locale: Localizations.localeOf(context).languageCode,
+    );
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => ParentalConsentPage(controller: controller),
+      ),
+    );
+    controller.dispose();
+  }
+
+  Widget accountPage(BuildContext hostContext) {
     final pageOwnership = ownership.capturePage();
     return MotionAccountPage(
       // Core consults widget.account again after its dialog awaits. An epoch
@@ -105,6 +133,12 @@ AccountConnection bindMotionAccountRuntime(
       onRetryIdentity: runtime.refreshIdentity,
       ageBlocked: underAgeBlocked,
       onAgeBlocked: blockUnderAge,
+      // ADR-008: with the flag closed these stay at Core's defaults, so an
+      // under-13 result is the permanent block exactly as before.
+      underThirteenConsentEnabled: parentalConsentEnabled,
+      onUnderThirteen: parentalConsentEnabled
+          ? () => openParentalConsent(hostContext)
+          : null,
       // Core's account page links only to Core's membership page (with
       // Motion+); while Motion+ is not offered, Settings links to the
       // Ostinato page instead.
@@ -125,6 +159,7 @@ AccountConnection bindMotionAccountRuntime(
           accountPageBuilder: accountPage,
           resume: resume,
           teenPurchasePolicy: ostinatoTeenPurchasePolicy,
+          parentalConsentOpen: parentalConsentEnabled,
         );
 
   return AccountConnection(

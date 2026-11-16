@@ -116,3 +116,13 @@ const bool ostinatoUxPrototypeOpen = false;
 /// root is the library exactly as before. Nothing is stored by the shell, so
 /// rollback is leaving this false (or reverting the PR).
 const bool ostinatoStageHomeEnabled = false;
+
+/// ADR-008 (SEC-OST-02, founder decision "b: parental consent flow",
+/// 2026-11-15/16): under-13 children enter through parental approval instead
+/// of the permanent age block. While false (default) the under-13 result is
+/// exactly today's permanent block: no parent screen is shown, no consent
+/// request or status call is ever made, and the purchase rule is unchanged.
+/// Turning it on needs a separate founder approval, store text/declaration
+/// updates and Core's server side deployed. Rollback: leave this false (or
+/// revert the PR); a device that already holds the permanent block keeps it.
+const bool ostinatoParentalConsentEnabled = false;

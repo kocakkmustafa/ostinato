@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'membership_copy.dart';
 import 'membership_resume.dart';
 import 'ostinato_release_policy.dart';
+import 'parental_consent/purchase_rule.dart';
 import 'ui_copy.dart';
 
 /// The Ostinato plans this build sells: one subscription, monthly and yearly.
@@ -51,6 +52,7 @@ class OstinatoMembershipPage extends StatefulWidget {
     this.purchaseAdapter,
     this.serverAdapter,
     this.teenPurchasePolicy = ostinatoTeenPurchasePolicy,
+    this.parentalConsentOpen = ostinatoParentalConsentEnabled,
   });
 
   final MotionAccountClient account;
@@ -65,6 +67,11 @@ class OstinatoMembershipPage extends StatefulWidget {
   final PurchaseAdapter? purchaseAdapter;
   final ServerAdapter? serverAdapter;
   final MotionTeenPurchasePolicy teenPurchasePolicy;
+
+  /// ADR-008: closed by default (under 13 never buys). When open, an
+  /// under-13 account buys only with parent consent `approved`, and then
+  /// only through the store's family approval.
+  final bool parentalConsentOpen;
 
   @override
   State<OstinatoMembershipPage> createState() => _OstinatoMembershipPageState();
@@ -178,9 +185,14 @@ class _OstinatoMembershipPageState extends State<OstinatoMembershipPage> {
       if (!mounted || !_sameUser) return;
       final today = DateTime.now();
       final policy = widget.teenPurchasePolicy;
-      _storeFamilyControls =
-          age?.storeDecidesPurchaseOn(today, policy) ?? false;
-      if (age?.purchaseRestrictedOn(today, policy) ?? false) {
+      final decision = ostinatoPurchaseDecision(
+        age,
+        today,
+        policy,
+        parentalConsentOpen: widget.parentalConsentOpen,
+      );
+      _storeFamilyControls = decision.storeDecides;
+      if (decision.restricted) {
         setState(() {
           _consentRequired = true;
           _offers = const [];
