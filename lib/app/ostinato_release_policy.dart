@@ -143,3 +143,11 @@ const bool ostinatoMicroEtudeEnabled = false;
 /// screen yet. While false (default) no practice screen or result changes.
 /// Rollback: leave this false (or revert the PR); nothing is stored or sent.
 const bool ostinatoBeforeAfterEnabled = false;
+
+/// OST-P1-02 (founder master instruction 2026-11-08, "Dört ürün ana
+/// talimatı"): adaptive accompaniment, tempo only. Only the pure Dart
+/// decision function (`lib/app/practice/adaptive/`) exists; no audio layer
+/// and nothing reaches the screen yet. While false (default) no practice
+/// screen, result or stage changes and no tempo is adapted. Rollback: leave
+/// this false (or revert the PR); nothing is stored or sent.
+const bool ostinatoAdaptiveTempoEnabled = false;
