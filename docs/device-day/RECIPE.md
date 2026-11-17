@@ -1,3 +1,5 @@
+> GÜNCEL: bkz. [README.md](README.md) (2026-11-18 cihaz günü paketi). Bu belge tarihsel kalır.
+
 # Cihaz günü reçetesi (F5, 2026-08-16, O-160)
 
 > 2026-10-02: Bu belge eski 28-ders/mikrofonsuz sürümün tarihsel reçetesidir.

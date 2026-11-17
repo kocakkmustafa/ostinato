@@ -1,0 +1,30 @@
+# 6 adımlık cihaz turu (QA-OST-02)
+
+Her cihazda aynı tur, sırayla. Sonuçlar [`CIHAZ-TABLOSU.md`](CIHAZ-TABLOSU.md) §2'ye yazılır. Süre ≈15 dk/cihaz (2-3 cihazda gün ≈2,5 saat; 5 cihazda ≈3 saat). Ekran adları ve dosya yolları koddan okunmuştur; koddan doğrulanamayan her yer **doğrulanacak** diye işaretlidir (cihazda ilk gözlemle kapanır).
+
+## Başlamadan önce (kod okumasından çıkan sınırlar)
+
+1. **Bayraklar kapalı.** `lib/app/ostinato_release_policy.dart` içinde `ostinatoFirstThreeMinutesOpen`, `ostinatoStageHomeEnabled`, `ostinatoListenTryFixRepeatOpen`, `ostinatoGhostScreenOpen` `const bool` ve `false`'tur; `--dart-define` ile açılmaz. Kapalı (yayın ayarlı) derlemede kök: karşılama → **Kütüphane**. Hangi derlemeyle koştuğunu tabloda "Bayrak durumu" sütununa yaz (bkz. [`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) §4).
+2. **Eski kamera yüzeyi tur dışıdır.** `lib/app/screens/live_screen.dart` ve `lesson_scored_screen.dart` eski duruş/kamera akışıdır (Kurulum Kontrolü → "Start the lesson" → canlı kamera; `setup_check_screen.dart:641`). Kamera bayrakları kapalıdır (`ostinatoCameraPracticeAvailable`, `ostinatoCameraLessonsOpen`) ve gitar v1 kursunun mikrofon pratiği bu ekranlardan geçmez. Turda açılmaz; görünürse not et (B-bulgusu).
+3. Mikrofon izni ayrı bir ekran değildir: ilk **Başlat** dokunuşunda sistem penceresi çıkar (`MicPermissionGate`, `lib/app/audio/mic_permission_gate.dart`).
+
+## Adımlar
+
+| # | Adım | Ne yapılır | Beklenen (koddan) | Ekran / dosya | Sorun işareti |
+|---|---|---|---|---|---|
+| 1 | **Aç** | Uygulamayı temiz kurulumda (ilk açılış) başlat. Üç karşılama sayfasını "Devam et" ile geç, son sayfada "Kütüphaneyi aç". Sonra uygulamayı tamamen kapatıp yeniden aç. | İlk açılışta 3 sayfalı karşılama (karşılama, kapsam, sensörler: mikrofon/kamera/sağlık/ilerleme kartları). Yeniden açılışta karşılama TEKRAR çıkmaz, doğrudan kök ekran gelir. | `lib/app/screens/onboarding_screen.dart` (`onboarding-primary`); dallanma `lib/main.dart` `OstinatoHome` | Beyaz ekran, çökme, karşılama her açılışta tekrar |
+| 2 | **Yaş kapısı** | Ayarlar → **Hesap** düğmesi → hesap sayfası (kayıt akışındaki yaş denetimi). | Yaş denetimi **karşılama ekranında değildir**. Kayıt sayfası Core paketindendir (`MotionAccountPage`); bu depoda yalnız sonuç saklanır: `lib/app/age_gate_store.dart` (`ostinato.age_gate.v1.json`, yalnız "engellendi" bilgisi). Ekranın alan sırası **doğrulanacak** (Core'da, bu depoda yok). Ayarlar'daki Hesap düğmesi yalnız hesap bağlantısı varsa görünür: görünmüyorsa "YAPILMADI, hesap bağlantısı yok" yaz. | `lib/app/screens/settings_screen.dart:132-140`; `lib/app/motion_account_bootstrap.dart` | 13 yaş altı sonucu kalıcıdır; cihazda başka yaş girmek kayıtı yeniden açmaz. |
+| 3 | **İlk ders** | Kapalı bayrakla: Kütüphane → Gitar → kurs → bir ders aç (uygulama içi dersin okuma ekranı, sonra "pratik"). Bayrak açıksa: ilk üç dakika ekranında üç seçenek (**Ritme dokun**, **Sesini kullan**, **Çalgım var**); "Çalgım var" kütüphaneye geçer. | Gitar kursu açık, ses/piyano "yakında" (`ostinatoOpenInstruments = {'guitar'}`). "Ritme dokun" mikrofon istemez; "Sesini kullan" izni kullanım anında ister (**doğrulanacak**). Ders okuma → pratik yolu: `v1_practice_list_screen.dart` / `v1_lesson_reader_screen.dart` → `practice_loop_screen.dart` (tam rota **doğrulanacak**). | `lib/app/first_minutes/first_three_minutes_screen.dart` (bayrak açıksa); `lib/app/practice/loop/*` | Ders açılmıyor, ders listesi boş, ücretli-ücretsiz ayrımı beklenmedik |
+| 4 | **Mikrofon izni ver / reddet** | Pratik ekranında **Başlat**'a dokun; sistem penceresinde önce **Reddet**, sonra (ayrı denemede, Ayarlar'dan ya da yeniden kurulumla sıfırla) **İzin ver**. | Reddedilince pratik "başarısız" aşamasına geçer ve "mikrofon erişimi kapalı" bildirimi görünür (`practice-failure`; kodda `failure == 'permission'` dalı). **Başlat** yeniden dokunulabilir kalmalıdır. Ayrıntılı beklenti: [`FLAG-21-OLCUM.md`](FLAG-21-OLCUM.md) §4. | `lib/app/practice/loop/practice_loop_screen.dart` (`_begin`, `_failureText`, `practice-start`) | Başlat pasif kalır / dokunuş etkisiz / pencere art arda çıkar / ölçüm izinsiz başlar |
+| 5 | **2 dk pratik** | İzin verilmişken bir ölçülü derste yaklaşık 2 dakika çal. Metronom/tempo kontrolleri, duraklat ve durdur denenir. | Mikrofon seviye çubukları ve sayaçlar akar; giriş değişirse "mikrofon durdu" bildirimi (`practice-failure`, yeniden başlat). Bu sırada kare süresi ölçülür ([`FLAG-21-OLCUM.md`](FLAG-21-OLCUM.md)). | `practice_loop_screen.dart`; `lib/app/practice/practice_audio_input.dart` | Seviye çubukları donar, ses yok, sayaç ilerlemez |
+| 6 | **Sonuç ekranı + kendi kaydını dinle** | Durdur → sonuç ekranı. Kendi kaydını dinlemek için önce Ayarlar'da "kendi kaydım" anahtarının açık olması gerekir (varsayılan kapalı); anahtar açıkken pratik yap, sonuç ekranında **Dinle**'ye dokun. | Sonuç ekranı pratik özetini gösterir. "Kendi kaydın" bölümü yalnız kayıt tutulduysa görünür; oynatma yerel dosyadan yapılır, ağ kullanılmaz (`own-take`, `own-take-toggle`). `ostinatoRecordingRetentionOpen` kapalıyken anahtar kullanıcı ayarına bağlıdır; açık derlemede yalnız yetişkin işaretiyle kayıt yapılır (yaş işareti uygulamada yoktur, `unknown` → kayıt yok). | `lib/app/practice/loop/practice_result_screen.dart:225`; `lib/app/practice/own_recording/own_take_player.dart`; `own_recording_preference.dart`; `settings_screen.dart:219-229` | Anahtar yok / kayıt çıkmıyor / oynatma hata veriyor; uygulama arka plana gidince kaydın silindiği **doğrulanacak** (açık derlemede) |
+
+## Her adımda kaydet
+
+- Geçti / takıldı; takıldıysa ekran görüntüsü yolu (`scratch/<tarih>-devday/<cihaz>/...`, repo dışı).
+- Çökme ve donma anı; cihaz günlüğü (iOS: Xcode Devices günlüğü, Android: `adb logcat` süzülmüş), sır içeren çıktı eklenmez.
+- Kare süresi ve izin reddi gözlemi: [`FLAG-21-OLCUM.md`](FLAG-21-OLCUM.md).
+
+## Tur sonrası temizlik
+
+Test hesabı açıldıysa cihazdan çıkış yap. 2. adımda 13 yaş altı sonucu denendiyse o cihaz kalıcı engelli kalır; bunu yalnız sonradan hesap denemesi gerekmeyen (cihaz 3-5) bir cihazda dene ya da uygulama verisini sil ve tabloya yaz.
