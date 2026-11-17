@@ -392,7 +392,7 @@ Güvenilmeyen ölçümde: doğruluk %'si gösterilmez ya da "ölçülemedi" yaz�
 | `weekly_goal_card.dart` | "Yolum > Geçmiş" düz satır | Yeniden kullanılır |
 | `settings_screen.dart`, `ostinato_membership_page.dart`, `ostinato_paid_access.dart`, `account_connection.dart` | Ayar çıkışları | Aynen |
 | `session_store.dart`, `V1PracticeRecord`, `V1LessonCheck` | Geçmiş (okuma) | Okuma Yeni, veri değişmez |
-| `lib/app/design/widgets.dart` `GlassCard` | Katman yüzeyi | Mevcut `GlassCard` sigma 18 çizer (widgets.dart, 01-audit.md); yeni katman yüzeyi `GlassLayer`'da sigma ≤ 16; `GlassCard`'ın kendisi değişmez. Opak yedek ve saydamlık yolu YENİ |
+| `lib/app/design/widgets.dart` `GlassCard` | Katman yüzeyi | Mevcut `GlassCard` sigma 18 çizer (widgets.dart, 01-audit.md); yeni katman yüzeyi `GlassLayer`'da sigma ≤ 16; `GlassCard`'ın kendisi 2026-11-17'de blur'suz düz dolguya çevrildi (FLAG #25). Opak yedek ve saydamlık yolu YENİ |
 | `listen_try_fix.dart` (bayrak `ostinatoListenTryFixRepeatOpen=false`) | Şunu dene (ileride) | Bayrak KAPALI kalır; ilk aşama `drill_generator.dart` |
 | `first_minutes/first_three_minutes_screen.dart` (bayrak kapalı) | Kapsam dışı | Aynen kapalı |
 | Yeni | Sahne kabuğu, `GlassLayer` + katman yöneticisi, araç rafı sarmalayıcısı, Hayalet basamak ayarı ve ayrı yerel store, geçmiş okuma görünümü, kural tabanlı öneri | Yeni |
