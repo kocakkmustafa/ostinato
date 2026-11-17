@@ -68,7 +68,14 @@ const bool ostinatoListenTryFixRepeatOpen = false;
 /// time and start/stop stay reachable. Nothing is stored beyond the session
 /// and no skill is claimed. While false the practice screen is exactly as
 /// before. Rollback: leave this false (or revert the PR); no data depends on it.
-const bool ostinatoGhostScreenOpen = false;
+///
+/// Device-day define: `bool.fromEnvironment('OSTINATO_DEVDAY_GHOST_SCREEN')`,
+/// default false. Only a device-day profile build may pass
+/// --dart-define=OSTINATO_DEVDAY_GHOST_SCREEN=true;
+/// store/release builds never pass it; main default is false.
+const bool ostinatoGhostScreenOpen = bool.fromEnvironment(
+  'OSTINATO_DEVDAY_GHOST_SCREEN',
+);
 
 /// OST-P0-08: recording-retention surface (audience gate for the own-take
 /// recorder, background discard, "delete all"). False keeps today's FK2
@@ -115,7 +122,14 @@ const bool ostinatoUxPrototypeOpen = false;
 /// tool shelf) instead of the library. Closed by default: while false the
 /// root is the library exactly as before. Nothing is stored by the shell, so
 /// rollback is leaving this false (or reverting the PR).
-const bool ostinatoStageHomeEnabled = false;
+///
+/// Device-day define: `bool.fromEnvironment('OSTINATO_DEVDAY_STAGE_HOME')`,
+/// default false. Only a device-day profile build may pass
+/// --dart-define=OSTINATO_DEVDAY_STAGE_HOME=true;
+/// store/release builds never pass it; main default is false.
+const bool ostinatoStageHomeEnabled = bool.fromEnvironment(
+  'OSTINATO_DEVDAY_STAGE_HOME',
+);
 
 /// ADR-008 (SEC-OST-02, founder decision "b: parental consent flow",
 /// 2026-11-15/16): under-13 children enter through parental approval instead
