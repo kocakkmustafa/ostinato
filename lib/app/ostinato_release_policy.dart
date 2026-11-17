@@ -136,6 +136,14 @@ const bool ostinatoParentalConsentEnabled = false;
 /// is stored or sent.
 const bool ostinatoMicroEtudeEnabled = false;
 
+/// OST-P1-03 (founder master instruction 2026-11-08, "Dört ürün ana
+/// talimatı"): the before/after view comparing the first and the latest
+/// measured run of the same lesson. Only the pure Dart library
+/// (`lib/app/practice/display/before_after.dart`) exists; nothing reaches the
+/// screen yet. While false (default) no practice screen or result changes.
+/// Rollback: leave this false (or revert the PR); nothing is stored or sent.
+const bool ostinatoBeforeAfterEnabled = false;
+
 /// OST-P1-02 (founder master instruction 2026-11-08, "Dört ürün ana
 /// talimatı"): adaptive accompaniment, tempo only. Only the pure Dart
 /// decision function (`lib/app/practice/adaptive/`) exists; no audio layer
