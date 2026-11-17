@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -7,7 +6,8 @@ import 'ostinato_theme.dart';
 import '../app_theme.dart';
 
 /// Camsı/yarı-saydam kart — Ostinato'nun malzeme imzası (Lissom'un mat kili
-/// DEĞİL). `sigma` küçük tutulur: gerçek cihazda blur ucuz değil.
+/// DEĞİL). FLAG #25: kart başına BackdropFilter YOK; kart yarı saydam düz
+/// dolgudur. Ekrandaki tek blur katmanı `glass_layer.dart` yolundan gelir.
 class GlassCard extends StatelessWidget {
   /// Varsayılan cam gradyanı — ADLANDIRILDI ki kontrast kapısı
   /// (`test/contrast_test.dart`) onu ELLE kopyalamak zorunda kalmasın.
@@ -36,33 +36,30 @@ class GlassCard extends StatelessWidget {
     final BorderRadius radius = BorderRadius.circular(borderRadius);
     return ClipRRect(
       borderRadius: radius,
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-        child: Container(
-          padding: padding,
-          decoration: BoxDecoration(
-            borderRadius: radius,
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors:
-                  gradientColors ??
-                  [
-                    OstinatoPalette.of(context).glassStart,
-                    OstinatoPalette.of(context).glassEnd,
-                  ],
-            ),
-            border: Border.all(color: OstinatoPalette.of(context).glassBorder),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: OstinatoPalette.of(context).glassShadow,
-                blurRadius: 30,
-                offset: const Offset(0, 14),
-              ),
-            ],
+      child: Container(
+        padding: padding,
+        decoration: BoxDecoration(
+          borderRadius: radius,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors:
+                gradientColors ??
+                [
+                  OstinatoPalette.of(context).glassStart,
+                  OstinatoPalette.of(context).glassEnd,
+                ],
           ),
-          child: child,
+          border: Border.all(color: OstinatoPalette.of(context).glassBorder),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: OstinatoPalette.of(context).glassShadow,
+              blurRadius: 30,
+              offset: const Offset(0, 14),
+            ),
+          ],
         ),
+        child: child,
       ),
     );
   }
