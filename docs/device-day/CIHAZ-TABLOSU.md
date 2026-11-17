@@ -14,7 +14,7 @@ Hücre değerleri: `GEÇTİ` · `TAKILDI` (not zorunlu) · `YAPILMADI` (neden zo
 | 4 | | | | | | | |
 | 5 | | | | | | | |
 
-Derleme SHA: `git rev-parse --short HEAD` (yalnız belge dalıysa tek başına yeterli değildir; açık bayraklı yerel değişiklik varsa "yerel değişiklik: evet" yaz).
+Derleme SHA: `git rev-parse --short HEAD` (yalnız belge dalıysa tek başına yeterli değildir; derleme türünü `profil-kapali` ya da `profil-acik` yaz; yerel değişiklik varsa "yerel değişiklik: evet" yaz).
 
 ## 2. Tur sonuçları (6 adım)
 

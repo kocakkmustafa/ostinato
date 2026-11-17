@@ -14,10 +14,11 @@ Amaç: yeni ekranları (bayrakları) açmanın ön şartı olan gerçek cihaz ka
 | [`FLAG-22-EKRAN-OKUYUCU.md`](FLAG-22-EKRAN-OKUYUCU.md) | FLAG #22 | VoiceOver / TalkBack kontrol listesi |
 | [`SEC-OST-01-YAKALAMA.md`](SEC-OST-01-YAKALAMA.md) | SEC-OST-01 | mitmproxy ağ yakalama tarifi + rapor şablonu; betik `tools/har_audio_check.py` |
 | [`CORPUS-PROTOKOL.md`](CORPUS-PROTOKOL.md) | QA-OST-01 | Gerçek kayıt corpus'u, adlandırma, rapor şablonu, kuru koşu kanıtı |
-| [`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) | ön hazırlık 4 | iPhone profil kurulumu, Android profil APK, ENGEL listesi |
+| [`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) | ön hazırlık 4 | iPhone profil kurulumu, Android profil APK, ENGEL listesi; §6 cihaz günü iki derleme (bayraklar kapalı/açık), donma notu |
 
 ## Gün akışı (≈2,5 saat; 2-3 cihaz için, 5 cihazda ≈3 saat)
 
+0. Hazırlık: 22 Kas 12:00 main donar; 13:30'a dek iki profil derlemesi hazır ([`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) §6).
 1. Kurulum (20 dk): [`PROFIL-DERLEME.md`](PROFIL-DERLEME.md); yakalama sertifikası telefona kurulur ([`SEC-OST-01-YAKALAMA.md`](SEC-OST-01-YAKALAMA.md)).
 2. Cihaz turu (cihaz başına ≈15 dk): [`TUR-LISTESI.md`](TUR-LISTESI.md); sonuçlar [`CIHAZ-TABLOSU.md`](CIHAZ-TABLOSU.md)'na; kare süresi ve izin reddi [`FLAG-21-OLCUM.md`](FLAG-21-OLCUM.md) yöntemiyle.
 3. Ağ yakalama (20 dk, cihaz 1): SEC-OST-01.
@@ -27,7 +28,7 @@ Amaç: yeni ekranları (bayrakları) açmanın ön şartı olan gerçek cihaz ka
 
 ## Gün öncesi karar gerektirenler (ayrıntı ilgili belgede)
 
-- **K1, bayraklar:** `lib/app/ostinato_release_policy.dart` içindeki yeni yüzey bayrakları (`ostinatoFirstThreeMinutesOpen`, `ostinatoStageHomeEnabled`, `ostinatoListenTryFixRepeatOpen`, `ostinatoGhostScreenOpen`) `const bool` ve **kapalıdır**; `--dart-define` ile açılmaz. Kapalı derlemede tur adımlarının bir kısmı (ör. ilk üç dakika, sahne) görünmez. Açık bayraklı derleme yalnız yerel/geçici yapılır, commit'e girmez; bunun için kurucu/Motion onayı gerekir ([`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) §4).
+- **K1, bayraklar:** `lib/app/ostinato_release_policy.dart` içindeki yeni yüzey bayrakları (`ostinatoFirstThreeMinutesOpen`, `ostinatoStageHomeEnabled`, `ostinatoListenTryFixRepeatOpen`, `ostinatoGhostScreenOpen`) `const bool` ve **kapalıdır**; yalnız `ostinatoStageHomeEnabled` ile `ostinatoGhostScreenOpen` cihaz günü profil derlemesinde `--dart-define` ile açılır, mağaza derlemesinde asla ([`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) §6). Diğer ikisi kapalı kalır; kapalı derlemede tur adımlarının bir kısmı (ör. ilk üç dakika) görünmez.
 - **K2, imza/hesap adımları** [`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) §5'te kimin yapacağıyla işaretlidir.
 
 ## Kapsam dışı

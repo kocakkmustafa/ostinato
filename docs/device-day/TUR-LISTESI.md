@@ -4,7 +4,7 @@ Her cihazda aynı tur, sırayla. Sonuçlar [`CIHAZ-TABLOSU.md`](CIHAZ-TABLOSU.md
 
 ## Başlamadan önce (kod okumasından çıkan sınırlar)
 
-1. **Bayraklar kapalı.** `lib/app/ostinato_release_policy.dart` içinde `ostinatoFirstThreeMinutesOpen`, `ostinatoStageHomeEnabled`, `ostinatoListenTryFixRepeatOpen`, `ostinatoGhostScreenOpen` `const bool` ve `false`'tur; `--dart-define` ile açılmaz. Kapalı (yayın ayarlı) derlemede kök: karşılama → **Kütüphane**. Hangi derlemeyle koştuğunu tabloda "Bayrak durumu" sütununa yaz (bkz. [`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) §4).
+1. **Bayraklar kapalı.** `lib/app/ostinato_release_policy.dart` içinde `ostinatoFirstThreeMinutesOpen`, `ostinatoStageHomeEnabled`, `ostinatoListenTryFixRepeatOpen`, `ostinatoGhostScreenOpen` `const bool` ve `false`'tur; yalnız sahne ve hayalet bayrakları cihaz günü profil derlemesinde `--dart-define` ile açılır ([`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) §6). Kapalı derlemede kök: karşılama → **Kütüphane**; açık derlemede kök **sahne**. Hangi derlemeyle koştuğunu tabloda "Bayrak durumu" sütununa yaz (bkz. [`PROFIL-DERLEME.md`](PROFIL-DERLEME.md) §4).
 2. **Eski kamera yüzeyi tur dışıdır.** `lib/app/screens/live_screen.dart` ve `lesson_scored_screen.dart` eski duruş/kamera akışıdır (Kurulum Kontrolü → "Start the lesson" → canlı kamera; `setup_check_screen.dart:641`). Kamera bayrakları kapalıdır (`ostinatoCameraPracticeAvailable`, `ostinatoCameraLessonsOpen`) ve gitar v1 kursunun mikrofon pratiği bu ekranlardan geçmez. Turda açılmaz; görünürse not et (B-bulgusu).
 3. Mikrofon izni ayrı bir ekran değildir: ilk **Başlat** dokunuşunda sistem penceresi çıkar (`MicPermissionGate`, `lib/app/audio/mic_permission_gate.dart`).
 
