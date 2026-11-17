@@ -126,3 +126,12 @@ const bool ostinatoStageHomeEnabled = false;
 /// updates and Core's server side deployed. Rollback: leave this false (or
 /// revert the PR); a device that already holds the permanent block keeps it.
 const bool ostinatoParentalConsentEnabled = false;
+
+/// OST-P1-01 (founder master instruction 2026-11-08, "Dört ürün ana
+/// talimatı"): the personal micro-etude (rule-based, 15-30 s) built from the
+/// one difference a measured run found. Only the pure Dart library
+/// (`lib/app/practice/micro_etude/`) exists; nothing reaches the screen yet.
+/// While false (default) no practice screen, result or stage changes and no
+/// etude is generated. Rollback: leave this false (or revert the PR); nothing
+/// is stored or sent.
+const bool ostinatoMicroEtudeEnabled = false;
