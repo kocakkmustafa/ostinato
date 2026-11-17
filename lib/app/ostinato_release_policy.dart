@@ -135,3 +135,11 @@ const bool ostinatoParentalConsentEnabled = false;
 /// etude is generated. Rollback: leave this false (or revert the PR); nothing
 /// is stored or sent.
 const bool ostinatoMicroEtudeEnabled = false;
+
+/// OST-P1-04 (founder master instruction 2026-11-08): fallback mode decision
+/// (measured / unmeasured guided / listen only) and accessibility
+/// presentation plan. Only the pure Dart library
+/// (`lib/app/practice/fallback/`) exists; nothing reaches the screen yet.
+/// While false (default) no practice screen changes. Rollback: leave this
+/// false (or revert the PR); nothing is stored or sent.
+const bool ostinatoFallbackModeEnabled = false;
