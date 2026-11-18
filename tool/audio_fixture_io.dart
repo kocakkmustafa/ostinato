@@ -45,7 +45,9 @@ final class PcmWav {
   static PcmWav decode(Uint8List bytes) {
     final ByteData bd = ByteData.sublistView(bytes);
     if (_ascii(bytes, 0, 4) != 'RIFF' || _ascii(bytes, 8, 4) != 'WAVE') {
-      throw FormatException('RIFF/WAVE başlığı yok — geçerli bir PCM WAV değil');
+      throw FormatException(
+        'RIFF/WAVE başlığı yok — geçerli bir PCM WAV değil',
+      );
     }
 
     int offset = 12;
@@ -71,17 +73,27 @@ final class PcmWav {
         dataOffset = bodyStart;
         dataLength = chunkSize;
       }
-      offset = bodyStart + chunkSize + (chunkSize.isOdd ? 1 : 0); // RIFF chunk'ları çift-hizalı
+      offset =
+          bodyStart +
+          chunkSize +
+          (chunkSize.isOdd ? 1 : 0); // RIFF chunk'ları çift-hizalı
     }
 
-    if (sampleRate == null || channels == null || dataOffset == null || dataLength == null) {
+    if (sampleRate == null ||
+        channels == null ||
+        dataOffset == null ||
+        dataLength == null) {
       throw FormatException('fmt / data chunk bulunamadı');
     }
     if (audioFormat != 1) {
-      throw FormatException('yalnız PCM (tag 1) desteklenir, bulunan: $audioFormat');
+      throw FormatException(
+        'yalnız PCM (tag 1) desteklenir, bulunan: $audioFormat',
+      );
     }
     if (bitsPerSample != 16) {
-      throw FormatException('yalnız 16-bit desteklenir, bulunan: $bitsPerSample');
+      throw FormatException(
+        'yalnız 16-bit desteklenir, bulunan: $bitsPerSample',
+      );
     }
 
     final int sampleCount = dataLength ~/ 2;
@@ -95,7 +107,11 @@ final class PcmWav {
 
   /// [samples] `[-1, 1]` aralığında, MONO varsayılır (bu aracın tükettiği
   /// tüm fixture'lar mono — `toMono()` sonrası yazılır).
-  static void writeMonoFile(String path, {required int sampleRate, required List<double> samples}) {
+  static void writeMonoFile(
+    String path, {
+    required int sampleRate,
+    required List<double> samples,
+  }) {
     final int dataLength = samples.length * 2;
     final Uint8List bytes = Uint8List(44 + dataLength);
     final ByteData bd = ByteData.sublistView(bytes);
@@ -114,7 +130,11 @@ final class PcmWav {
     bd.setUint16(20, 1, Endian.little); // PCM
     bd.setUint16(22, 1, Endian.little); // mono
     bd.setUint32(24, sampleRate, Endian.little);
-    bd.setUint32(28, sampleRate * 2, Endian.little); // byteRate = rate * blockAlign
+    bd.setUint32(
+      28,
+      sampleRate * 2,
+      Endian.little,
+    ); // byteRate = rate * blockAlign
     bd.setUint16(32, 2, Endian.little); // blockAlign
     bd.setUint16(34, 16, Endian.little); // bitsPerSample
     ascii4(36, 'data');

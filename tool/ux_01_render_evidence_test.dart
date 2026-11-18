@@ -33,7 +33,8 @@ import 'package:ostinato/app/audio/mic_permission_gate.dart';
 import 'package:ostinato/app/content.dart';
 import 'package:ostinato/app/cue_text.dart';
 import 'package:ostinato/app/design/app_scope.dart';
-import 'package:ostinato/app/design/ostinato_theme.dart' show ostinatoAppBuilder;
+import 'package:ostinato/app/design/ostinato_theme.dart'
+    show ostinatoAppBuilder;
 import 'package:ostinato/app/onboarding_store.dart';
 import 'package:ostinato/app/practice/loop/practice_loop_screen.dart';
 import 'package:ostinato/app/practice/loop/practice_marks.dart';
@@ -75,7 +76,9 @@ Future<void> _loadFonts() async {
     'assets/fonts/HankenGrotesk-Medium.ttf',
     'assets/fonts/HankenGrotesk-SemiBold.ttf',
   ]);
-  await family('IBM Plex Mono', <String>['assets/fonts/IBMPlexMono-Medium.ttf']);
+  await family('IBM Plex Mono', <String>[
+    'assets/fonts/IBMPlexMono-Medium.ttf',
+  ]);
 }
 
 /// Uygulamanın MaterialApp ayarlarını (tema, yerelleştirme, builder) taklit
@@ -113,8 +116,9 @@ Future<void> _settle(WidgetTester t) async {
 Future<void> _snap(WidgetTester t, String name) async {
   await _settle(t);
   await t.runAsync(() async {
-    final RenderRepaintBoundary b =
-        t.renderObject<RenderRepaintBoundary>(find.byKey(_shot));
+    final RenderRepaintBoundary b = t.renderObject<RenderRepaintBoundary>(
+      find.byKey(_shot),
+    );
     final ui.Image img = await b.toImage(pixelRatio: _outScale);
     final ByteData? data = await img.toByteData(format: ui.ImageByteFormat.png);
     Directory(_outDir).createSync(recursive: true);
@@ -129,7 +133,9 @@ Future<void> _tap(WidgetTester t, Finder f) async {
   try {
     await t.ensureVisible(f.first);
     await t.pump();
-  } on Object {/* kaydırılabilir ata yok */}
+  } on Object {
+    /* kaydırılabilir ata yok */
+  }
   await t.tap(f.first);
   await _settle(t);
 }
@@ -282,11 +288,13 @@ void main() {
 
   testWidgets('08-pratik-ekrani', (WidgetTester t) async {
     await t.pumpWidget(
-      _app(PracticeLoopScreen(
-        lesson: _lesson('gtr-s1-m02-02'),
-        progress: _MemoryProgress(),
-        hasNextLesson: true,
-      )),
+      _app(
+        PracticeLoopScreen(
+          lesson: _lesson('gtr-s1-m02-02'),
+          progress: _MemoryProgress(),
+          hasNextLesson: true,
+        ),
+      ),
     );
     await _settle(t);
     await _snap(t, '08-pratik-ekrani');
@@ -303,29 +311,34 @@ void main() {
     MicPermissionGate.status = () async => PermissionStatus.denied;
     MicPermissionGate.request = () async => PermissionStatus.denied;
     await t.pumpWidget(
-      _app(PracticeLoopScreen(
-        lesson: _lesson('gtr-s1-m02-02'),
-        progress: _MemoryProgress(),
-        controllerFactory: (score, tempo, criteria) =>
-            PracticeSessionController(
-              score: score,
-              tempo: tempo,
-              audio: audio,
-              criteria: criteria,
-            ),
-      )),
+      _app(
+        PracticeLoopScreen(
+          lesson: _lesson('gtr-s1-m02-02'),
+          progress: _MemoryProgress(),
+          controllerFactory: (score, tempo, criteria) =>
+              PracticeSessionController(
+                score: score,
+                tempo: tempo,
+                audio: audio,
+                criteria: criteria,
+              ),
+        ),
+      ),
     );
     await _settle(t);
     await _tap(t, find.byKey(const Key('practice-start')));
-    await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 50)));
+    await t.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 50)),
+    );
     await _snap(t, '09-pratik-mikrofon-izni-reddi');
     await t.pumpWidget(const SizedBox());
     await t.runAsync(audio.dispose);
   });
 
   testWidgets('10-sonuc-ekrani', (WidgetTester t) async {
-    final PracticeScore score =
-        PracticeScore.parse('E2 F2 G2 F2 | E2 F2 G2 F2');
+    final PracticeScore score = PracticeScore.parse(
+      'E2 F2 G2 F2 | E2 F2 G2 F2',
+    );
     const List<PracticeMark> marks = <PracticeMark>[
       PracticeMark.correct,
       PracticeMark.correct,
@@ -358,12 +371,14 @@ void main() {
       criteria: const PassCriteria(minAccuracy: .8),
     );
     await t.pumpWidget(
-      _app(PracticeResultScreen(
-        lesson: _lesson('gtr-s1-m02-02'),
-        score: score,
-        summary: s,
-        hasNextLesson: true,
-      )),
+      _app(
+        PracticeResultScreen(
+          lesson: _lesson('gtr-s1-m02-02'),
+          score: score,
+          summary: s,
+          hasNextLesson: true,
+        ),
+      ),
     );
     await _settle(t);
     await _snap(t, '10-sonuc-ekrani');

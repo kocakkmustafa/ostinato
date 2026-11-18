@@ -40,17 +40,26 @@ List<WindowResult> _runWindows(List<double> samples, int sampleRate) {
   final int hopSamples = (sampleRate * _hopMs / 1000).round();
   const ChordDetector detector = ChordDetector();
   final List<WindowResult> results = [];
-  for (int start = 0; start + windowSamples <= samples.length; start += hopSamples) {
+  for (
+    int start = 0;
+    start + windowSamples <= samples.length;
+    start += hopSamples
+  ) {
     final List<double> window = samples.sublist(start, start + windowSamples);
     final Stopwatch sw = Stopwatch()..start();
-    final ChordReading? reading = detector.detect(window, sampleRate: sampleRate);
+    final ChordReading? reading = detector.detect(
+      window,
+      sampleRate: sampleRate,
+    );
     sw.stop();
-    results.add(WindowResult(
-      reading?.chord.name,
-      reading?.score,
-      reading?.runnerUpMargin,
-      sw.elapsedMicroseconds,
-    ));
+    results.add(
+      WindowResult(
+        reading?.chord.name,
+        reading?.score,
+        reading?.runnerUpMargin,
+        sw.elapsedMicroseconds,
+      ),
+    );
   }
   return results;
 }
@@ -58,15 +67,23 @@ List<WindowResult> _runWindows(List<double> samples, int sampleRate) {
 void main() {
   final Directory realDir = Directory('fixtures/audio-real');
   final List<File> jsonFiles = realDir.existsSync()
-      ? (realDir.listSync().whereType<File>()
-          .where((f) => f.uri.pathSegments.last.startsWith('AC-') && f.path.endsWith('.json'))
-          .toList()
-        ..sort((a, b) => a.path.compareTo(b.path)))
+      ? (realDir
+            .listSync()
+            .whereType<File>()
+            .where(
+              (f) =>
+                  f.uri.pathSegments.last.startsWith('AC-') &&
+                  f.path.endsWith('.json'),
+            )
+            .toList()
+          ..sort((a, b) => a.path.compareTo(b.path)))
       : <File>[];
 
   if (jsonFiles.isEmpty) {
-    stderr.writeln('⛔ fixtures/audio-real/AC-*.json yok — önce: '
-        'python3 tool/fetch_guitarset_fixtures.py && dart run tool/prepare_guitarset_fixtures.dart');
+    stderr.writeln(
+      '⛔ fixtures/audio-real/AC-*.json yok — önce: '
+      'python3 tool/fetch_guitarset_fixtures.py && dart run tool/prepare_guitarset_fixtures.dart',
+    );
     exit(1);
   }
 
@@ -77,7 +94,8 @@ void main() {
   final List<int> latenciesUs = [];
 
   for (final File jf in jsonFiles) {
-    final Map<String, Object?> fixture = jsonDecode(jf.readAsStringSync()) as Map<String, Object?>;
+    final Map<String, Object?> fixture =
+        jsonDecode(jf.readAsStringSync()) as Map<String, Object?>;
     final String fixtureId = fixture['fixtureId'] as String;
     final String audioName = fixture['audio'] as String;
     final File audioFile = File('${realDir.path}/$audioName');
@@ -87,14 +105,16 @@ void main() {
         'fixtureId': fixtureId,
         'status': 'skipped',
         'reason': 'audio_not_fetched',
-        'howToFix': 'python3 tool/fetch_guitarset_fixtures.py && dart run tool/prepare_guitarset_fixtures.dart',
+        'howToFix':
+            'python3 tool/fetch_guitarset_fixtures.py && dart run tool/prepare_guitarset_fixtures.dart',
       });
       skip++;
       stdout.writeln('⏭  $fixtureId — SKIP (ses dosyası yok)');
       continue;
     }
 
-    final Map<String, Object?> expected = fixture['expected'] as Map<String, Object?>;
+    final Map<String, Object?> expected =
+        fixture['expected'] as Map<String, Object?>;
     final String expectedName = expected['chordName'] as String;
     final String expectedQuality = expected['quality'] as String;
     qualitiesSeen.add(expectedQuality);
@@ -120,13 +140,19 @@ void main() {
       }
       windowReports.add(<String, Object?>{
         'detected': w.detectedName,
-        'score': w.score == null ? null : double.parse(w.score!.toStringAsFixed(3)),
-        'runnerUpMargin': w.margin == null ? null : double.parse(w.margin!.toStringAsFixed(3)),
+        'score': w.score == null
+            ? null
+            : double.parse(w.score!.toStringAsFixed(3)),
+        'runnerUpMargin': w.margin == null
+            ? null
+            : double.parse(w.margin!.toStringAsFixed(3)),
         'latencyUs': w.latencyUs,
       });
     }
 
-    final double matchFraction = windows.isEmpty ? 0 : fixCorrect / windows.length;
+    final double matchFraction = windows.isEmpty
+        ? 0
+        : fixCorrect / windows.length;
     // Tek fixture'lık geçme kuralı yok — roadmap eşiği AGREGE ("chord
     // accuracy ≥%90"), o yüzden burada fixture-düzeyi "pass/fail" YALNIZ
     // teşhis amaçlı: bu fixture'ın TÜM pencerelerinde doğru mu.
@@ -151,18 +177,24 @@ void main() {
     });
 
     final String icon = fixturePass ? '✅' : '🔴';
-    stdout.writeln('$icon $fixtureId — beklenen $expectedName, $fixCorrect/${windows.length} pencere doğru '
-        '($fixNull null, $fixWrong yanlış)');
+    stdout.writeln(
+      '$icon $fixtureId — beklenen $expectedName, $fixCorrect/${windows.length} pencere doğru '
+      '($fixNull null, $fixWrong yanlış)',
+    );
   }
 
-  final double overallAccuracy = totalWindows == 0 ? 0 : correctWindows / totalWindows;
+  final double overallAccuracy = totalWindows == 0
+      ? 0
+      : correctWindows / totalWindows;
   const double accuracyThreshold = 0.90; // roadmap §11: "chord accuracy ≥%90"
   final bool gateOk = totalWindows > 0 && overallAccuracy >= accuracyThreshold;
 
   final double meanLatencyMs = latenciesUs.isEmpty
       ? 0
       : latenciesUs.reduce((a, b) => a + b) / latenciesUs.length / 1000.0;
-  final int maxLatencyUs = latenciesUs.isEmpty ? 0 : latenciesUs.reduce(math.max);
+  final int maxLatencyUs = latenciesUs.isEmpty
+      ? 0
+      : latenciesUs.reduce(math.max);
 
   // M-L-05 (ölü-metrik yasağı): karşılaştırma mekanizması GERÇEKTEN
   // "yanlış" üretebiliyor mu? İlk fixture'ın GERÇEK sesini KASITLI yanlış
@@ -176,9 +208,11 @@ void main() {
   final Map<String, Object?> report = <String, Object?>{
     'schemaVersion': 'ostinato-audio-chord-gate-1',
     'generatedBy': 'tool/guitarset_chord_replay.dart',
-    'engineVersion': 'ChordDetector (ostinato_audio 0.1.0), default config (24 templates, no acceptedNames restriction)',
+    'engineVersion':
+        'ChordDetector (ostinato_audio 0.1.0), default config (24 templates, no acceptedNames restriction)',
     'roadmapGate': {
-      '\$text': 'Supported major/minor triad chord accuracy ≥%90; üç SNR koşulunda ayrı rapor. (23-OSTINATO-MASTER-ROADMAP.md §11)',
+      '\$text':
+          'Supported major/minor triad chord accuracy ≥%90; üç SNR koşulunda ayrı rapor. (23-OSTINATO-MASTER-ROADMAP.md §11)',
       'threshold': accuracyThreshold,
       'measured': double.parse(overallAccuracy.toStringAsFixed(4)),
       'gateOk': gateOk,
@@ -210,13 +244,21 @@ void main() {
   };
 
   final File reportFile = File('fixtures/audio-real/chord-report.json');
-  reportFile.writeAsStringSync(const JsonEncoder.withIndent(' ').convert(report));
+  reportFile.writeAsStringSync(
+    const JsonEncoder.withIndent(' ').convert(report),
+  );
 
   stdout.writeln('');
-  stdout.writeln('→ agrege doğruluk: ${(overallAccuracy * 100).toStringAsFixed(1)}% '
-      '($correctWindows/$totalWindows pencere) — eşik ${(accuracyThreshold * 100).toStringAsFixed(0)}% → ${gateOk ? "✓ GEÇTİ" : "🔴 KALDI"}');
-  stdout.writeln('→ ortalama gecikme: ${meanLatencyMs.toStringAsFixed(2)}ms, azami ${(maxLatencyUs / 1000).toStringAsFixed(2)}ms');
-  stdout.writeln('→ öz-test (bilinçli uyuşmazlığı yakaladı mı): ${selfTestCaught ? "✓ EVET" : "⛔ HAYIR — kıyas KÖR"}');
+  stdout.writeln(
+    '→ agrege doğruluk: ${(overallAccuracy * 100).toStringAsFixed(1)}% '
+    '($correctWindows/$totalWindows pencere) — eşik ${(accuracyThreshold * 100).toStringAsFixed(0)}% → ${gateOk ? "✓ GEÇTİ" : "🔴 KALDI"}',
+  );
+  stdout.writeln(
+    '→ ortalama gecikme: ${meanLatencyMs.toStringAsFixed(2)}ms, azami ${(maxLatencyUs / 1000).toStringAsFixed(2)}ms',
+  );
+  stdout.writeln(
+    '→ öz-test (bilinçli uyuşmazlığı yakaladı mı): ${selfTestCaught ? "✓ EVET" : "⛔ HAYIR — kıyas KÖR"}',
+  );
   stdout.writeln('→ rapor: ${reportFile.path}');
 
   if (!selfTestCaught) exit(1);
@@ -224,14 +266,20 @@ void main() {
 
 bool _selfTestDetectsMismatch(Directory realDir) {
   final File probe = File('${realDir.path}/AC-R001-guitar-d-sharp-1.wav');
-  if (!probe.existsSync()) return true; // ses yoksa ana koşum zaten skip diyecek, öz-test anlamsız
+  if (!probe.existsSync())
+    return true; // ses yoksa ana koşum zaten skip diyecek, öz-test anlamsız
   final PcmWav wav = PcmWav.readFile(probe.path);
   final List<double> mono = wav.toMono();
   const ChordDetector detector = ChordDetector();
   final int windowSamples = (wav.sampleRate * _windowMs / 1000).round();
-  final ChordReading? reading =
-      detector.detect(mono.sublist(0, windowSamples), sampleRate: wav.sampleRate);
-  if (reading == null) return true; // motor "bilmiyorum" dedi — körlük değil, dürüstlük
-  const String corruptedExpectation = 'A'; // gerçek cevap D# — bilinçli YANLIŞ beklenti
-  return reading.chord.name != corruptedExpectation; // kıyas bunu YAKALAMALI (true = yakaladı)
+  final ChordReading? reading = detector.detect(
+    mono.sublist(0, windowSamples),
+    sampleRate: wav.sampleRate,
+  );
+  if (reading == null)
+    return true; // motor "bilmiyorum" dedi — körlük değil, dürüstlük
+  const String corruptedExpectation =
+      'A'; // gerçek cevap D# — bilinçli YANLIŞ beklenti
+  return reading.chord.name !=
+      corruptedExpectation; // kıyas bunu YAKALAMALI (true = yakaladı)
 }

@@ -59,24 +59,38 @@ class _SnrOutcome {
   int get total => correct + nullCount + wrong;
 }
 
-_SnrOutcome _runAtSnr(List<double> clean, int sampleRate, String expectedName, double targetSnrDb) {
+_SnrOutcome _runAtSnr(
+  List<double> clean,
+  int sampleRate,
+  String expectedName,
+  double targetSnrDb,
+) {
   final signalRmsDbfs = _rmsDbfs(clean);
   final targetNoiseDbfs = signalRmsDbfs - targetSnrDb;
   final targetNoiseRms = math.pow(10, targetNoiseDbfs / 20).toDouble();
-  final noiseAmplitude = targetNoiseRms * math.sqrt(3); // roomNoise() uniform [-a,a] -> rms=a/sqrt(3)
+  final noiseAmplitude =
+      targetNoiseRms *
+      math.sqrt(3); // roomNoise() uniform [-a,a] -> rms=a/sqrt(3)
   final noise = SyntheticTone.roomNoise(
     sampleRate: sampleRate,
     seconds: clean.length / sampleRate,
     amplitude: noiseAmplitude,
     seed: targetSnrDb.round(),
   );
-  final mixed = List<double>.generate(clean.length, (i) => (clean[i] + noise[i]).clamp(-1.0, 1.0));
+  final mixed = List<double>.generate(
+    clean.length,
+    (i) => (clean[i] + noise[i]).clamp(-1.0, 1.0),
+  );
 
   final windowSamples = (sampleRate * _windowMs / 1000).round();
   final hopSamples = (sampleRate * _hopMs / 1000).round();
   const ChordDetector detector = ChordDetector();
   final outcome = _SnrOutcome();
-  for (int start = 0; start + windowSamples <= mixed.length; start += hopSamples) {
+  for (
+    int start = 0;
+    start + windowSamples <= mixed.length;
+    start += hopSamples
+  ) {
     final window = mixed.sublist(start, start + windowSamples);
     final reading = detector.detect(window, sampleRate: sampleRate);
     if (reading == null) {
@@ -101,7 +115,8 @@ void main() {
       stdout.writeln('⏭  $fixtureId — SKIP (fixture bulunamadı)');
       continue;
     }
-    final fixture = jsonDecode(jsonFile.readAsStringSync()) as Map<String, Object?>;
+    final fixture =
+        jsonDecode(jsonFile.readAsStringSync()) as Map<String, Object?>;
     final expected = fixture['expected'] as Map<String, Object?>;
     final expectedName = expected['chordName'] as String;
 
@@ -119,22 +134,32 @@ void main() {
         'correctWindows': outcome.correct,
         'nullWindows': outcome.nullCount,
         'wrongWindows': outcome.wrong,
-        'correctFraction': double.parse((outcome.correct / total).toStringAsFixed(3)),
-        'nullFraction': double.parse((outcome.nullCount / total).toStringAsFixed(3)),
-        'wrongFraction': double.parse((outcome.wrong / total).toStringAsFixed(3)),
+        'correctFraction': double.parse(
+          (outcome.correct / total).toStringAsFixed(3),
+        ),
+        'nullFraction': double.parse(
+          (outcome.nullCount / total).toStringAsFixed(3),
+        ),
+        'wrongFraction': double.parse(
+          (outcome.wrong / total).toStringAsFixed(3),
+        ),
       });
-      stdout.writeln('$fixtureId @ SNR ${targetSnr}dB — doğru ${outcome.correct}/${outcome.total} '
-          '· null ${outcome.nullCount}/${outcome.total} · yanlış ${outcome.wrong}/${outcome.total}');
+      stdout.writeln(
+        '$fixtureId @ SNR ${targetSnr}dB — doğru ${outcome.correct}/${outcome.total} '
+        '· null ${outcome.nullCount}/${outcome.total} · yanlış ${outcome.wrong}/${outcome.total}',
+      );
     }
   }
 
   // Agrege: SNR'a göre TÜM fixture'lar toplanmış
   final Map<double, Map<String, int>> bySnr = {
-    for (final s in _targetSnrDb) s: {'correct': 0, 'null': 0, 'wrong': 0, 'total': 0}
+    for (final s in _targetSnrDb)
+      s: {'correct': 0, 'null': 0, 'wrong': 0, 'total': 0},
   };
   for (final r in results) {
     final snr = r['targetSnrDb'] as double;
-    bySnr[snr]!['correct'] = bySnr[snr]!['correct']! + (r['correctWindows'] as int);
+    bySnr[snr]!['correct'] =
+        bySnr[snr]!['correct']! + (r['correctWindows'] as int);
     bySnr[snr]!['null'] = bySnr[snr]!['null']! + (r['nullWindows'] as int);
     bySnr[snr]!['wrong'] = bySnr[snr]!['wrong']! + (r['wrongWindows'] as int);
     bySnr[snr]!['total'] = bySnr[snr]!['total']! + (r['totalWindows'] as int);
@@ -144,18 +169,24 @@ void main() {
     final t = math.max(bySnr[s]!['total']!, 1);
     aggregateBySnr.add(<String, Object?>{
       'targetSnrDb': s,
-      'correctFraction': double.parse((bySnr[s]!['correct']! / t).toStringAsFixed(3)),
+      'correctFraction': double.parse(
+        (bySnr[s]!['correct']! / t).toStringAsFixed(3),
+      ),
       'nullFraction': double.parse((bySnr[s]!['null']! / t).toStringAsFixed(3)),
-      'wrongFraction': double.parse((bySnr[s]!['wrong']! / t).toStringAsFixed(3)),
+      'wrongFraction': double.parse(
+        (bySnr[s]!['wrong']! / t).toStringAsFixed(3),
+      ),
       'totalWindows': bySnr[s]!['total'],
     });
   }
   stdout.writeln('');
   for (final a in aggregateBySnr) {
-    stdout.writeln('AGREGE @ SNR ${a['targetSnrDb']}dB — doğru %${((a['correctFraction'] as double) * 100).toStringAsFixed(1)} '
-        '· null %${((a['nullFraction'] as double) * 100).toStringAsFixed(1)} '
-        '· yanlış %${((a['wrongFraction'] as double) * 100).toStringAsFixed(1)} '
-        '(${a['totalWindows']} pencere)');
+    stdout.writeln(
+      'AGREGE @ SNR ${a['targetSnrDb']}dB — doğru %${((a['correctFraction'] as double) * 100).toStringAsFixed(1)} '
+      '· null %${((a['nullFraction'] as double) * 100).toStringAsFixed(1)} '
+      '· yanlış %${((a['wrongFraction'] as double) * 100).toStringAsFixed(1)} '
+      '(${a['totalWindows']} pencere)',
+    );
   }
 
   // M-L-05 (ölü-metrik yasağı) — GÖRELİ öz-test: mutlak bir sihirli eşik
@@ -172,33 +203,49 @@ void main() {
   if (probeFile.existsSync()) {
     final wav = PcmWav.readFile(probeFile.path);
     final mono = wav.toMono();
-    final cleanOutcome = _runAtSnr(mono, wav.sampleRate, 'D#', 200); // ~sıfır gürültü, temiz temel
+    final cleanOutcome = _runAtSnr(
+      mono,
+      wav.sampleRate,
+      'D#',
+      200,
+    ); // ~sıfır gürültü, temiz temel
     final extremeOutcome = _runAtSnr(mono, wav.sampleRate, 'D#', -20);
-    final cleanCorrectFrac = cleanOutcome.total == 0 ? 0.0 : cleanOutcome.correct / cleanOutcome.total;
-    final extremeCorrectFrac = extremeOutcome.total == 0 ? 0.0 : extremeOutcome.correct / extremeOutcome.total;
+    final cleanCorrectFrac = cleanOutcome.total == 0
+        ? 0.0
+        : cleanOutcome.correct / cleanOutcome.total;
+    final extremeCorrectFrac = extremeOutcome.total == 0
+        ? 0.0
+        : extremeOutcome.correct / extremeOutcome.total;
     selfTestPassed = extremeCorrectFrac < cleanCorrectFrac;
-    stdout.writeln('\nöz-test (gürültü EKLEMEK ölçülebilir bir fark yaratıyor mu — mutlak eşik DEĞİL, göreli): '
-        'temiz doğruluk %${(cleanCorrectFrac * 100).toStringAsFixed(0)} vs -20dB doğruluk '
-        '%${(extremeCorrectFrac * 100).toStringAsFixed(0)} '
-        '${selfTestPassed ? "✓ (gürültü ölçülebilir şekilde kötüleştirdi)" : "⛔ FARK YOK — karıştırma/ölçüm hattı kör olabilir"}');
+    stdout.writeln(
+      '\nöz-test (gürültü EKLEMEK ölçülebilir bir fark yaratıyor mu — mutlak eşik DEĞİL, göreli): '
+      'temiz doğruluk %${(cleanCorrectFrac * 100).toStringAsFixed(0)} vs -20dB doğruluk '
+      '%${(extremeCorrectFrac * 100).toStringAsFixed(0)} '
+      '${selfTestPassed ? "✓ (gürültü ölçülebilir şekilde kötüleştirdi)" : "⛔ FARK YOK — karıştırma/ölçüm hattı kör olabilir"}',
+    );
   }
 
   final report = <String, Object?>{
     'schemaVersion': 'ostinato-audio-chord-snr-gate-1',
     'generatedBy': 'tool/guitarset_chord_snr_replay.dart',
-    '\$method': 'Real GuitarSet chord fixture (6 seçilmiş, 2/kalite) + SyntheticTone.roomNoise() '
+    '\$method':
+        'Real GuitarSet chord fixture (6 seçilmiş, 2/kalite) + SyntheticTone.roomNoise() '
         'karışımı, gerçek ölçülen klip RMS\'inden türetilen hedef SNR\'da (30/15/3dB). '
         'audio_snr_replay.dart (pitch) ile AYNI teknik, chord\'un 3-yönlü sonucuna (doğru/null/'
         'yanlış) uyarlandı.',
-    'acceptanceReference': 'roadmap §11: "üç SNR koşulunda ayrı rapor" (major/minor triad chord accuracy şartının parçası)',
+    'acceptanceReference':
+        'roadmap §11: "üç SNR koşulunda ayrı rapor" (major/minor triad chord accuracy şartının parçası)',
     'selfTest': <String, Object?>{
-      'method': 'AC-R001 üstünde temiz-temel (~sıfır gürültü) vs -20dB doğruluk KIYASI (mutlak eşik değil, göreli)',
+      'method':
+          'AC-R001 üstünde temiz-temel (~sıfır gürültü) vs -20dB doğruluk KIYASI (mutlak eşik değil, göreli)',
       'passed': selfTestPassed,
-      '\$why': 'M-L-05 — bu script\'in KENDİ karıştırma/ölçüm hattının gürültüyü GERÇEKTEN uyguladığını kanıtlar. '
+      '\$why':
+          'M-L-05 — bu script\'in KENDİ karıştırma/ölçüm hattının gürültüyü GERÇEKTEN uyguladığını kanıtlar. '
           'İlk tasarım (mutlak "null>%80" eşiği) -20dB\'de TAM sınırda (%80,0) düştü — bu bir test kusuru '
           'değil, aşağıdaki \$chordGateNotFullyNoiseRobust bulgusuydu; öz-test bu YÜZDEN göreliye çevrildi.',
     },
-    '\$chordGateNotFullyNoiseRobust': 'ÖNEMLİ YAN BULGU (diagnostik dalışta bulundu, tool/diag_chord_extreme_snr.dart '
+    '\$chordGateNotFullyNoiseRobust':
+        'ÖNEMLİ YAN BULGU (diagnostik dalışta bulundu, tool/diag_chord_extreme_snr.dart '
         '— geçici, commit\'e girmedi): ChordDetector\'ın güven kapısı (minScore/minRunnerUpMargin) pitch\'in '
         'AudioConfidenceGate\'inin AKSİNE aşırı gürültüde (-20dB, gürültü sinyalden 10× güçlü) TAM yakınsamıyor '
         '— AC-R001 üstünde -20dB\'de bile motor ara sıra eşik-üstü skorla ("D#7" skor=0,698, margin=0,065) '
@@ -211,8 +258,9 @@ void main() {
     'aggregateBySnr': aggregateBySnr,
     'perFixture': results,
   };
-  File('fixtures/audio-real/chord-snr-report.json')
-      .writeAsStringSync(const JsonEncoder.withIndent(' ').convert(report));
+  File(
+    'fixtures/audio-real/chord-snr-report.json',
+  ).writeAsStringSync(const JsonEncoder.withIndent(' ').convert(report));
   stdout.writeln('\n→ rapor: fixtures/audio-real/chord-snr-report.json');
   if (!selfTestPassed) exit(1);
 }

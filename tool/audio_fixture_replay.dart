@@ -27,14 +27,22 @@ void main() {
   // null çıkıp cast hatası verdi — kendi kaynağını okumadan varsaydığım
   // BİR TURLUK bir kusur, ikinci koşumda kendi kendini yakaladı).
   final List<File> jsonFiles = realDir.existsSync()
-      ? (realDir.listSync().whereType<File>()
-          .where((f) => f.uri.pathSegments.last.startsWith('AF-') && f.path.endsWith('.json'))
-          .toList()
-        ..sort((a, b) => a.path.compareTo(b.path)))
+      ? (realDir
+            .listSync()
+            .whereType<File>()
+            .where(
+              (f) =>
+                  f.uri.pathSegments.last.startsWith('AF-') &&
+                  f.path.endsWith('.json'),
+            )
+            .toList()
+          ..sort((a, b) => a.path.compareTo(b.path)))
       : <File>[];
 
   if (jsonFiles.isEmpty) {
-    stderr.writeln('⛔ fixtures/audio-real/*.json yok — hiçbir gerçek fixture tanımlı değil.');
+    stderr.writeln(
+      '⛔ fixtures/audio-real/*.json yok — hiçbir gerçek fixture tanımlı değil.',
+    );
     exit(1);
   }
 
@@ -52,7 +60,8 @@ void main() {
   int pass = 0, fail = 0, skip = 0, outOfRange = 0;
 
   for (final File jf in jsonFiles) {
-    final Map<String, Object?> fixture = jsonDecode(jf.readAsStringSync()) as Map<String, Object?>;
+    final Map<String, Object?> fixture =
+        jsonDecode(jf.readAsStringSync()) as Map<String, Object?>;
     final String fixtureId = fixture['fixtureId'] as String;
     final String audioName = fixture['audio'] as String;
     final File audioFile = File('${realDir.path}/$audioName');
@@ -62,14 +71,18 @@ void main() {
         'fixtureId': fixtureId,
         'status': 'skipped',
         'reason': 'audio_not_fetched',
-        'howToFix': 'bash tool/fetch_audio_fixtures.sh && dart run tool/prepare_audio_fixtures.dart',
+        'howToFix':
+            'bash tool/fetch_audio_fixtures.sh && dart run tool/prepare_audio_fixtures.dart',
       });
       skip++;
-      stdout.writeln('⏭  $fixtureId — SKIP (ses dosyası yok, fetch/prepare koşulmadı)');
+      stdout.writeln(
+        '⏭  $fixtureId — SKIP (ses dosyası yok, fetch/prepare koşulmadı)',
+      );
       continue;
     }
 
-    final Map<String, Object?> expected = fixture['expected'] as Map<String, Object?>;
+    final Map<String, Object?> expected =
+        fixture['expected'] as Map<String, Object?>;
     final double expectedHz = (expected['f0Hz'] as num).toDouble();
 
     if (expectedHz < pianoMinHz || expectedHz > pianoMaxHz) {
@@ -77,24 +90,33 @@ void main() {
         'fixtureId': fixtureId,
         'status': 'out_of_range',
         'expectedHz': expectedHz,
-        'supportedRange': <String, Object?>{'minHz': pianoMinHz, 'maxHz': pianoMaxHz},
+        'supportedRange': <String, Object?>{
+          'minHz': pianoMinHz,
+          'maxHz': pianoMaxHz,
+        },
       });
       outOfRange++;
-      stdout.writeln('⚠️  $fixtureId — DESTEKLENMİYOR (${expectedHz}Hz, sınır $pianoMinHz-${pianoMaxHz}Hz dışında)');
+      stdout.writeln(
+        '⚠️  $fixtureId — DESTEKLENMİYOR (${expectedHz}Hz, sınır $pianoMinHz-${pianoMaxHz}Hz dışında)',
+      );
       continue;
     }
 
     final PcmWav wav = PcmWav.readFile(audioFile.path);
     final List<double> mono = wav.toMono();
 
-    final Map<String, Object?> tolerances = fixture['tolerances'] as Map<String, Object?>;
+    final Map<String, Object?> tolerances =
+        fixture['tolerances'] as Map<String, Object?>;
     final double centsMedianTol = (tolerances['centsMedian'] as num).toDouble();
     final double centsP95Tol = (tolerances['centsP95'] as num).toDouble();
 
     // Pencereleme `gate_and_timing_test.dart`ın kendi deseniyle AYNI: 4096
     // örnek pencere, %50 örtüşme (hop=2048).
-    final YinPitchSource source =
-        YinPitchSource(minHz: pianoMinHz, maxHz: pianoMaxHz, expectedHzPrior: expectedHz);
+    final YinPitchSource source = YinPitchSource(
+      minHz: pianoMinHz,
+      maxHz: pianoMaxHz,
+      expectedHzPrior: expectedHz,
+    );
     const int windowSize = 4096;
     const int hop = 2048;
     final List<double> centsErrors = <double>[];
@@ -103,19 +125,29 @@ void main() {
     for (int start = 0; start + windowSize <= mono.length; start += hop) {
       final List<double> window = mono.sublist(start, start + windowSize);
       final int tStartUs = (start / wav.sampleRate * 1000000).round();
-      final PitchReading reading =
-          source.analyze(window, sampleRate: wav.sampleRate, tStartUs: tStartUs);
+      final PitchReading reading = source.analyze(
+        window,
+        sampleRate: wav.sampleRate,
+        tStartUs: tStartUs,
+      );
       windowCount++;
       if (!reading.hasPitch) continue;
       centsErrors.add(absCents(reading.f0Hz!, expectedHz));
     }
 
     centsErrors.sort();
-    final double? medianCents = centsErrors.isEmpty ? null : _percentile(centsErrors, 0.5);
-    final double? p95Cents = centsErrors.isEmpty ? null : _percentile(centsErrors, 0.95);
-    final double judgedFraction = windowCount == 0 ? 0 : centsErrors.length / windowCount;
+    final double? medianCents = centsErrors.isEmpty
+        ? null
+        : _percentile(centsErrors, 0.5);
+    final double? p95Cents = centsErrors.isEmpty
+        ? null
+        : _percentile(centsErrors, 0.95);
+    final double judgedFraction = windowCount == 0
+        ? 0
+        : centsErrors.length / windowCount;
 
-    final bool pitchOk = medianCents != null &&
+    final bool pitchOk =
+        medianCents != null &&
         p95Cents != null &&
         medianCents <= centsMedianTol &&
         p95Cents <= centsP95Tol;
@@ -129,11 +161,16 @@ void main() {
     double? onsetErrorMs;
     bool? onsetOk;
     if (expectedOnsetMs != null) {
-      final List<Onset> onsets =
-          OnsetDetector().detect(mono, sampleRate: wav.sampleRate, tStartUs: 0);
-      final double onsetTolMs = ((tolerances['onsetMs'] as num?) ?? 30).toDouble();
+      final List<Onset> onsets = OnsetDetector().detect(
+        mono,
+        sampleRate: wav.sampleRate,
+        tStartUs: 0,
+      );
+      final double onsetTolMs = ((tolerances['onsetMs'] as num?) ?? 30)
+          .toDouble();
       if (onsets.isEmpty) {
-        onsetOk = false; // roadmap'in kendi eşiği: yanlış-hüküm değil ama HİÇ bulamamak da geçemez
+        onsetOk =
+            false; // roadmap'in kendi eşiği: yanlış-hüküm değil ama HİÇ bulamamak da geçemez
       } else {
         // En yakın algılanan onset'i eşleştir — birden fazla algılanmışsa
         // (gürültü/harmonik artefakt) en yakını gerçek hatayı temsil eder.
@@ -157,13 +194,21 @@ void main() {
       'windowCount': windowCount,
       'judgedWindowCount': centsErrors.length,
       'judgedFraction': double.parse(judgedFraction.toStringAsFixed(3)),
-      'medianCents': medianCents == null ? null : double.parse(medianCents.toStringAsFixed(2)),
-      'p95Cents': p95Cents == null ? null : double.parse(p95Cents.toStringAsFixed(2)),
+      'medianCents': medianCents == null
+          ? null
+          : double.parse(medianCents.toStringAsFixed(2)),
+      'p95Cents': p95Cents == null
+          ? null
+          : double.parse(p95Cents.toStringAsFixed(2)),
       'toleranceCentsMedian': centsMedianTol,
       'toleranceCentsP95': centsP95Tol,
-      'onsetStatus': expectedOnsetMs == null ? 'not_measured' : (onsetOk! ? 'pass' : 'fail'),
+      'onsetStatus': expectedOnsetMs == null
+          ? 'not_measured'
+          : (onsetOk! ? 'pass' : 'fail'),
       'expectedOnsetMs': expectedOnsetMs,
-      'onsetErrorMs': onsetErrorMs == null ? null : double.parse(onsetErrorMs.toStringAsFixed(1)),
+      'onsetErrorMs': onsetErrorMs == null
+          ? null
+          : double.parse(onsetErrorMs.toStringAsFixed(1)),
     });
 
     final String medStr = medianCents?.toStringAsFixed(2) ?? 'N/A';
@@ -173,10 +218,14 @@ void main() {
         : ' · onset ${onsetErrorMs.toStringAsFixed(1)}ms hata${onsetOk! ? "" : " ⚠️"}';
     if (ok) {
       pass++;
-      stdout.writeln('✅ $fixtureId — medyan $medStr¢ / p95 $p95Str¢ (eşik $centsMedianTol¢/$centsP95Tol¢, judged ${(judgedFraction * 100).toStringAsFixed(0)}%)$onsetStr');
+      stdout.writeln(
+        '✅ $fixtureId — medyan $medStr¢ / p95 $p95Str¢ (eşik $centsMedianTol¢/$centsP95Tol¢, judged ${(judgedFraction * 100).toStringAsFixed(0)}%)$onsetStr',
+      );
     } else {
       fail++;
-      stdout.writeln('🔴 $fixtureId — medyan $medStr¢ / p95 $p95Str¢ (eşik $centsMedianTol¢/$centsP95Tol¢, judged ${(judgedFraction * 100).toStringAsFixed(0)}%)$onsetStr');
+      stdout.writeln(
+        '🔴 $fixtureId — medyan $medStr¢ / p95 $p95Str¢ (eşik $centsMedianTol¢/$centsP95Tol¢, judged ${(judgedFraction * 100).toStringAsFixed(0)}%)$onsetStr',
+      );
     }
   }
 
@@ -186,7 +235,11 @@ void main() {
   // TEKRAR koşup raporun GERÇEKTEN "fail" ürettiğini doğrula — kapı hiç
   // kırmızı üretmiyorsa kör kapı, kırmızı üretebiliyor olması "bu turda
   // temiz" iddiasını anlamlı kılar.
-  final bool selfTestCaught = _selfTestDetectsCorruption(realDir, pianoMinHz, pianoMaxHz);
+  final bool selfTestCaught = _selfTestDetectsCorruption(
+    realDir,
+    pianoMinHz,
+    pianoMaxHz,
+  );
 
   final Map<String, Object?> report = <String, Object?>{
     'schemaVersion': 'ostinato-audio-model-gate-1',
@@ -207,14 +260,21 @@ void main() {
   };
 
   final File reportFile = File('fixtures/audio-real/replay-report.json');
-  reportFile.writeAsStringSync(const JsonEncoder.withIndent(' ').convert(report));
+  reportFile.writeAsStringSync(
+    const JsonEncoder.withIndent(' ').convert(report),
+  );
 
   stdout.writeln('');
-  stdout.writeln('→ $pass geçti · $fail kaldı · $outOfRange desteklenmiyor · $skip atlandı (${jsonFiles.length} toplam)');
-  stdout.writeln('→ öz-test (bilinçli bozguna tepki verdi mi): ${selfTestCaught ? "✓ EVET" : "⛔ HAYIR — kapı KÖR"}');
+  stdout.writeln(
+    '→ $pass geçti · $fail kaldı · $outOfRange desteklenmiyor · $skip atlandı (${jsonFiles.length} toplam)',
+  );
+  stdout.writeln(
+    '→ öz-test (bilinçli bozguna tepki verdi mi): ${selfTestCaught ? "✓ EVET" : "⛔ HAYIR — kapı KÖR"}',
+  );
   stdout.writeln('→ rapor: ${reportFile.path}');
 
-  if (!selfTestCaught) exit(1); // kör bir kapı, kendi "temiz" iddiasına güvenilmez
+  if (!selfTestCaught)
+    exit(1); // kör bir kapı, kendi "temiz" iddiasına güvenilmez
 }
 
 double _percentile(List<double> sortedAsc, double p) {
@@ -229,17 +289,27 @@ double _percentile(List<double> sortedAsc, double p) {
 /// karşılaştırmanın kendisi kör demektir.
 bool _selfTestDetectsCorruption(Directory realDir, double minHz, double maxHz) {
   final File probe = File('${realDir.path}/AF-R003-piano-c4.wav');
-  if (!probe.existsSync()) return true; // ses hiç yoksa öz-test anlamsız, ana koşum zaten skip diyecek
+  if (!probe.existsSync())
+    return true; // ses hiç yoksa öz-test anlamsız, ana koşum zaten skip diyecek
   final PcmWav wav = PcmWav.readFile(probe.path);
   final List<double> mono = wav.toMono();
   const double realHz = 261.6256; // C4
-  const double corruptedExpectation = realHz * 2; // bilinçli YANLIŞ (oktav-üstü) beklenti
+  const double corruptedExpectation =
+      realHz * 2; // bilinçli YANLIŞ (oktav-üstü) beklenti
 
-  final YinPitchSource source =
-      YinPitchSource(minHz: minHz, maxHz: maxHz, expectedHzPrior: corruptedExpectation);
+  final YinPitchSource source = YinPitchSource(
+    minHz: minHz,
+    maxHz: maxHz,
+    expectedHzPrior: corruptedExpectation,
+  );
   final List<double> window = mono.sublist(0, 4096);
-  final PitchReading reading = source.analyze(window, sampleRate: wav.sampleRate, tStartUs: 0);
-  if (!reading.hasPitch) return true; // motor "bilmiyorum" dedi — bu da körlük değil, dürüstlük
+  final PitchReading reading = source.analyze(
+    window,
+    sampleRate: wav.sampleRate,
+    tStartUs: 0,
+  );
+  if (!reading.hasPitch)
+    return true; // motor "bilmiyorum" dedi — bu da körlük değil, dürüstlük
   final double cents = absCents(reading.f0Hz!, corruptedExpectation);
   return cents > 20; // ~1200 cent'lik bir oktav hatası kolayca 20¢'i aşar
 }

@@ -59,21 +59,27 @@ void main() {
       final f = File('fixtures/audio-real/raw/$name');
       final pin = pins[name];
       if (!f.existsSync()) {
-        stderr.writeln('[OST-P0-03-real] HATA: $name yok - önce '
-            'python3 tool/fetch_guitarset_fixtures.py koşulmalı.');
+        stderr.writeln(
+          '[OST-P0-03-real] HATA: $name yok - önce '
+          'python3 tool/fetch_guitarset_fixtures.py koşulmalı.',
+        );
         exitCode = 2;
         return;
       }
       if (pin == null || !verifySha(f, pin)) {
-        stderr.writeln('[OST-P0-03-real] HATA: $name SHA-256 pin '
-            'uyuşmazlığı veya pin yok - ölçüm yapılmadı.');
+        stderr.writeln(
+          '[OST-P0-03-real] HATA: $name SHA-256 pin '
+          'uyuşmazlığı veya pin yok - ölçüm yapılmadı.',
+        );
         exitCode = 3;
         return;
       }
     }
   }
-  stdout.writeln('[OST-P0-03-real] ham dosyalar SHA-256 pinleriyle doğrulandı '
-      '(${tracks.length * 2}/${tracks.length * 2}).');
+  stdout.writeln(
+    '[OST-P0-03-real] ham dosyalar SHA-256 pinleriyle doğrulandı '
+    '(${tracks.length * 2}/${tracks.length * 2}).',
+  );
 
   final allErr = <double>[];
   var truthTotal = 0, missedTotal = 0, extraTotal = 0;
@@ -129,21 +135,25 @@ void main() {
     }
     final extra = det.length - used.length;
     final abs = errs.map((e) => e.abs()).toList();
-    stdout.writeln('[OST-P0-03-real] $t süre=${(samples.length / pcm.sampleRate).toStringAsFixed(1)}s '
-        'referans=${truthMs.length} tespit=${det.length} '
-        'hata_ms: med=${f1(pct(abs, .5))} p95=${f1(pct(abs, .95))} '
-        'ort=${f1(meanOf(abs))} yanlılık(işaretli med)=${f1(pct(errs, .5))} '
-        'kaçan=${(100 * missed / truthMs.length).toStringAsFixed(1)}% '
-        'fazla=${(100 * extra / truthMs.length).toStringAsFixed(1)}%');
+    stdout.writeln(
+      '[OST-P0-03-real] $t süre=${(samples.length / pcm.sampleRate).toStringAsFixed(1)}s '
+      'referans=${truthMs.length} tespit=${det.length} '
+      'hata_ms: med=${f1(pct(abs, .5))} p95=${f1(pct(abs, .95))} '
+      'ort=${f1(meanOf(abs))} yanlılık(işaretli med)=${f1(pct(errs, .5))} '
+      'kaçan=${(100 * missed / truthMs.length).toStringAsFixed(1)}% '
+      'fazla=${(100 * extra / truthMs.length).toStringAsFixed(1)}%',
+    );
     allErr.addAll(errs);
     truthTotal += truthMs.length;
     missedTotal += missed;
     extraTotal += extra;
   }
   final abs = allErr.map((e) => e.abs()).toList();
-  stdout.writeln('[OST-P0-03-real] TOPLAM referans=$truthTotal '
-      'hata_ms: med=${f1(pct(abs, .5))} p95=${f1(pct(abs, .95))} '
-      'yanlılık=${f1(pct(allErr, .5))} '
-      'kaçan=${(100 * missedTotal / truthTotal).toStringAsFixed(1)}% '
-      'fazla=${(100 * extraTotal / truthTotal).toStringAsFixed(1)}%');
+  stdout.writeln(
+    '[OST-P0-03-real] TOPLAM referans=$truthTotal '
+    'hata_ms: med=${f1(pct(abs, .5))} p95=${f1(pct(abs, .95))} '
+    'yanlılık=${f1(pct(allErr, .5))} '
+    'kaçan=${(100 * missedTotal / truthTotal).toStringAsFixed(1)}% '
+    'fazla=${(100 * extraTotal / truthTotal).toStringAsFixed(1)}%',
+  );
 }

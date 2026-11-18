@@ -43,10 +43,13 @@ void main() {
     final jsonFile = File('${realDir.path}/$fixtureId.json');
     final wavFile = File('${realDir.path}/$fixtureId.wav');
     if (!jsonFile.existsSync() || !wavFile.existsSync()) {
-      stdout.writeln('⏭  $fixtureId — SKIP (fixture bulunamadı, fetch/prepare koşulmadı)');
+      stdout.writeln(
+        '⏭  $fixtureId — SKIP (fixture bulunamadı, fetch/prepare koşulmadı)',
+      );
       continue;
     }
-    final fixture = jsonDecode(jsonFile.readAsStringSync()) as Map<String, Object?>;
+    final fixture =
+        jsonDecode(jsonFile.readAsStringSync()) as Map<String, Object?>;
     final expected = fixture['expected'] as Map<String, Object?>;
     final expectedHz = (expected['f0Hz'] as num).toDouble();
     final onsetMs = (expected['onsetMs'] as num?)?.toDouble();
@@ -56,7 +59,9 @@ void main() {
 
     // Sinyalin KENDİ RMS'i — yalnız çalınan bölge (onset sonrası +50ms'den
     // itibaren), sessizlik payını dışarıda BIRAKARAK doğru SNR hesabı.
-    final playStart = onsetMs == null ? 0 : ((onsetMs + 50) / 1000 * wav.sampleRate).round();
+    final playStart = onsetMs == null
+        ? 0
+        : ((onsetMs + 50) / 1000 * wav.sampleRate).round();
     final signalOnly = mono.sublist(math.min(playStart, mono.length - 1));
     final signalRmsDbfs = _rmsDbfs(signalOnly);
 
@@ -73,11 +78,16 @@ void main() {
         seed: targetSnr.round(), // her SNR farklı ama TEKRARLANABİLİR gürültü
       );
       final mixed = List<double>.generate(
-        mono.length, (i) => (mono[i] + noise[i]).clamp(-1.0, 1.0));
+        mono.length,
+        (i) => (mono[i] + noise[i]).clamp(-1.0, 1.0),
+      );
       final measuredNoiseDbfs = _rmsDbfs(noise);
 
-      final source =
-          YinPitchSource(minHz: _pianoMinHz, maxHz: _pianoMaxHz, expectedHzPrior: expectedHz);
+      final source = YinPitchSource(
+        minHz: _pianoMinHz,
+        maxHz: _pianoMaxHz,
+        expectedHzPrior: expectedHz,
+      );
       const gate = AudioConfidenceGate();
       const windowSize = 4096, hop = 2048;
       int total = 0, judged = 0, wrongWhileJudged = 0;
@@ -86,10 +96,17 @@ void main() {
       for (int start = 0; start + windowSize <= mixed.length; start += hop) {
         final window = mixed.sublist(start, start + windowSize);
         final tStartUs = (start / wav.sampleRate * 1000000).round();
-        final reading = source.analyze(window, sampleRate: wav.sampleRate, tStartUs: tStartUs);
+        final reading = source.analyze(
+          window,
+          sampleRate: wav.sampleRate,
+          tStartUs: tStartUs,
+        );
         total++;
-        final verdict = gate.evaluate(reading,
-            roomFloorDb: measuredNoiseDbfs, expectedHz: expectedHz);
+        final verdict = gate.evaluate(
+          reading,
+          roomFloorDb: measuredNoiseDbfs,
+          expectedHz: expectedHz,
+        );
         if (verdict.mayJudge) {
           judged++;
           final err = absCents(reading.f0Hz!, expectedHz);
@@ -114,14 +131,20 @@ void main() {
         'signalRmsDbfs': double.parse(signalRmsDbfs.toStringAsFixed(1)),
         'totalWindows': total,
         'judgedWindows': judged,
-        'judgedFraction': double.parse((total == 0 ? 0 : judged / total).toStringAsFixed(3)),
-        'medianCentsWhenJudged': medianCents == null ? null : double.parse(medianCents.toStringAsFixed(2)),
+        'judgedFraction': double.parse(
+          (total == 0 ? 0 : judged / total).toStringAsFixed(3),
+        ),
+        'medianCentsWhenJudged': medianCents == null
+            ? null
+            : double.parse(medianCents.toStringAsFixed(2)),
         'falseVerdictRate': double.parse(falseVerdictRate.toStringAsFixed(3)),
       });
 
-      stdout.writeln('$fixtureId @ SNR ${targetSnr}dB — judged ${(judged / math.max(total,1) * 100).toStringAsFixed(0)}% '
-          '· medyan-hata-judged ${medianCents?.toStringAsFixed(1) ?? "N/A"}¢ '
-          '· YANLIŞ-İKEN-YARGILANDI $wrongWhileJudged/$judged (${(falseVerdictRate * 100).toStringAsFixed(1)}%)');
+      stdout.writeln(
+        '$fixtureId @ SNR ${targetSnr}dB — judged ${(judged / math.max(total, 1) * 100).toStringAsFixed(0)}% '
+        '· medyan-hata-judged ${medianCents?.toStringAsFixed(1) ?? "N/A"}¢ '
+        '· YANLIŞ-İKEN-YARGILANDI $wrongWhileJudged/$judged (${(falseVerdictRate * 100).toStringAsFixed(1)}%)',
+      );
     }
   }
 
@@ -135,43 +158,62 @@ void main() {
     final wav = PcmWav.readFile(probeFile.path);
     final mono = wav.toMono();
     final noise = SyntheticTone.roomNoise(
-        sampleRate: wav.sampleRate, seconds: mono.length / wav.sampleRate, amplitude: 0.9, seed: 99);
-    final mixed = List<double>.generate(mono.length, (i) => (mono[i] + noise[i]).clamp(-1.0, 1.0));
+      sampleRate: wav.sampleRate,
+      seconds: mono.length / wav.sampleRate,
+      amplitude: 0.9,
+      seed: 99,
+    );
+    final mixed = List<double>.generate(
+      mono.length,
+      (i) => (mono[i] + noise[i]).clamp(-1.0, 1.0),
+    );
     final source = YinPitchSource(minHz: _pianoMinHz, maxHz: _pianoMaxHz);
     const gate = AudioConfidenceGate();
     final noiseFloor = _rmsDbfs(noise);
     int judgedUnderExtremeNoise = 0, totalUnderExtremeNoise = 0;
     for (int start = 0; start + 4096 <= mixed.length; start += 2048) {
       totalUnderExtremeNoise++;
-      final reading = source.analyze(mixed.sublist(start, start + 4096),
-          sampleRate: wav.sampleRate, tStartUs: 0);
-      if (gate.evaluate(reading, roomFloorDb: noiseFloor).mayJudge) judgedUnderExtremeNoise++;
+      final reading = source.analyze(
+        mixed.sublist(start, start + 4096),
+        sampleRate: wav.sampleRate,
+        tStartUs: 0,
+      );
+      if (gate.evaluate(reading, roomFloorDb: noiseFloor).mayJudge)
+        judgedUnderExtremeNoise++;
     }
-    final extremeFraction = judgedUnderExtremeNoise / math.max(totalUnderExtremeNoise, 1);
+    final extremeFraction =
+        judgedUnderExtremeNoise / math.max(totalUnderExtremeNoise, 1);
     selfTestPassed = extremeFraction < 0.05;
-    stdout.writeln('\nöz-test (aşırı gürültüde gate GERÇEKTEN reddediyor mu): '
-        '${(extremeFraction * 100).toStringAsFixed(1)}% judged '
-        '${selfTestPassed ? "✓ (beklenen <%5)" : "⛔ ÇOK YÜKSEK — gate kör olabilir"}');
+    stdout.writeln(
+      '\nöz-test (aşırı gürültüde gate GERÇEKTEN reddediyor mu): '
+      '${(extremeFraction * 100).toStringAsFixed(1)}% judged '
+      '${selfTestPassed ? "✓ (beklenen <%5)" : "⛔ ÇOK YÜKSEK — gate kör olabilir"}',
+    );
   }
 
   final report = <String, Object?>{
     'schemaVersion': 'ostinato-audio-snr-gate-1',
     'generatedBy': 'tool/audio_snr_replay.dart',
-    '\$method': 'Real piano fixture + SyntheticTone.roomNoise() mixed at a target SNR (computed '
+    '\$method':
+        'Real piano fixture + SyntheticTone.roomNoise() mixed at a target SNR (computed '
         'from the ACTUAL measured signal RMS during the playing region, not the whole file). '
         'roomFloorDb passed to AudioConfidenceGate is the injected noise\'s own measured dBFS — '
         'not assumed, not the target value (target vs achieved can differ slightly due to '
         'roomNoise()\'s uniform-random amplitude formula).',
-    'acceptanceReference': 'roadmap §11: false verdict rate ≤1% (measured here as wrongWhileJudged/judged)',
+    'acceptanceReference':
+        'roadmap §11: false verdict rate ≤1% (measured here as wrongWhileJudged/judged)',
     'selfTest': <String, Object?>{
-      'method': 'extreme-negative-SNR probe (noise amplitude 0.9, far louder than the real signal)',
+      'method':
+          'extreme-negative-SNR probe (noise amplitude 0.9, far louder than the real signal)',
       'passed': selfTestPassed,
-      '\$why': 'M-L-05 — proves the gate CAN reject under noise, not just happened to on these 6 samples',
+      '\$why':
+          'M-L-05 — proves the gate CAN reject under noise, not just happened to on these 6 samples',
     },
     'results': results,
   };
-  File('fixtures/audio-real/snr-report.json')
-      .writeAsStringSync(const JsonEncoder.withIndent(' ').convert(report));
+  File(
+    'fixtures/audio-real/snr-report.json',
+  ).writeAsStringSync(const JsonEncoder.withIndent(' ').convert(report));
   stdout.writeln('\n→ rapor: fixtures/audio-real/snr-report.json');
   if (!selfTestPassed) exit(1); // öz-test düşerse rapor GÜVENİLMEZ
 }

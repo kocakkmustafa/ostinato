@@ -26,7 +26,18 @@ import 'audio_fixture_io.dart';
 // yerine bir EĞİLİM görmeyi mümkün kılar. SONA eklendi (frekans sırasına
 // göre ARAYA değil) — ilk 6 notanın fixtureId'si (AF-R001..006, DEFTER
 // O-176'dan beri referanslı) DEĞİŞMEDEN kalsın diye.
-const List<String> _notes = ['A1', 'C3', 'C4', 'A4', 'C6', 'C8', 'A6', 'C7', 'A7', 'B7'];
+const List<String> _notes = [
+  'A1',
+  'C3',
+  'C4',
+  'A4',
+  'C6',
+  'C8',
+  'A6',
+  'C7',
+  'A7',
+  'B7',
+];
 
 /// 12-TET, A4=440Hz. `octave+1) * 12 + semitoneInOctave` MIDI-uyumlu mutlak
 /// yarım-ton sayısıdır (C4=60, A4=69) — hangi "C=60 mı C=48 mi" tartışmasına
@@ -42,7 +53,11 @@ const List<String> _notes = ['A1', 'C3', 'C4', 'A4', 'C6', 'C8', 'A6', 'C7', 'A7
 double? measureOnsetMs(List<double> samples, {required int sampleRate}) {
   const int windowSamples = 441; // 10ms @ 44100Hz
   const double thresholdRmsSquared = 0.0001;
-  for (int start = 0; start + windowSamples <= samples.length; start += windowSamples) {
+  for (
+    int start = 0;
+    start + windowSamples <= samples.length;
+    start += windowSamples
+  ) {
     double sumSq = 0;
     for (int i = start; i < start + windowSamples; i++) {
       sumSq += samples[i] * samples[i];
@@ -58,9 +73,16 @@ double frequencyForNote(String name) {
   final RegExpMatch? m = RegExp(r'^([A-G])(#?)(-?\d+)$').firstMatch(name);
   if (m == null) throw FormatException('nota adı çözülemedi: $name');
   const Map<String, int> semitoneFromC = {
-    'C': 0, 'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11,
+    'C': 0,
+    'D': 2,
+    'E': 4,
+    'F': 5,
+    'G': 7,
+    'A': 9,
+    'B': 11,
   };
-  final int semitoneInOctave = semitoneFromC[m.group(1)]! + (m.group(2) == '#' ? 1 : 0);
+  final int semitoneInOctave =
+      semitoneFromC[m.group(1)]! + (m.group(2) == '#' ? 1 : 0);
   final int octave = int.parse(m.group(3)!);
   final int absoluteSemitone = (octave + 1) * 12 + semitoneInOctave;
   const int a4Semitone = 69;
@@ -70,7 +92,9 @@ double frequencyForNote(String name) {
 void main() {
   final Directory rawDir = Directory('fixtures/audio-real/raw');
   if (!rawDir.existsSync()) {
-    stderr.writeln('⛔ ${rawDir.path} yok — önce: bash tool/fetch_audio_fixtures.sh');
+    stderr.writeln(
+      '⛔ ${rawDir.path} yok — önce: bash tool/fetch_audio_fixtures.sh',
+    );
     exit(1);
   }
 
@@ -82,15 +106,20 @@ void main() {
   for (final String note in _notes) {
     final String aiffPath = '${rawDir.path}/Piano.mf.$note.aiff';
     if (!File(aiffPath).existsSync()) {
-      stderr.writeln('⛔ $aiffPath yok — atlanıyor (fetch script tam koşmadı mı?)');
+      stderr.writeln(
+        '⛔ $aiffPath yok — atlanıyor (fetch script tam koşmadı mı?)',
+      );
       continue;
     }
 
     final String monoWavPath = '${rawDir.path}/Piano.mf.$note.mono.wav';
     final ProcessResult conv = Process.runSync('afconvert', [
-      '-f', 'WAVE',
-      '-d', 'LEI16@$sampleRate',
-      '-c', '1',
+      '-f',
+      'WAVE',
+      '-d',
+      'LEI16@$sampleRate',
+      '-c',
+      '1',
       aiffPath,
       monoWavPath,
     ]);
@@ -101,7 +130,9 @@ void main() {
 
     final PcmWav full = PcmWav.readFile(monoWavPath);
     if (full.sampleRate != sampleRate) {
-      throw StateError('$note: beklenmeyen sample rate ${full.sampleRate} (afconvert $sampleRate istendi)');
+      throw StateError(
+        '$note: beklenmeyen sample rate ${full.sampleRate} (afconvert $sampleRate istendi)',
+      );
     }
     // M-C-07 (audio-fixture-library-design.md §4.1): sonda ≥0,5sn sönüş
     // payı — piyano notası saldırı ANINDAN itibaren sürekli söner, 3sn'lik
@@ -109,9 +140,14 @@ void main() {
     final int take = math.min(trimSamples, full.samples.length);
     final List<double> trimmed = full.samples.sublist(0, take);
 
-    final String fixtureId = 'AF-R${(_notes.indexOf(note) + 1).toString().padLeft(3, '0')}-piano-${note.toLowerCase()}';
+    final String fixtureId =
+        'AF-R${(_notes.indexOf(note) + 1).toString().padLeft(3, '0')}-piano-${note.toLowerCase()}';
     final String wavName = '$fixtureId.wav';
-    PcmWav.writeMonoFile('fixtures/audio-real/$wavName', sampleRate: sampleRate, samples: trimmed);
+    PcmWav.writeMonoFile(
+      'fixtures/audio-real/$wavName',
+      sampleRate: sampleRate,
+      samples: trimmed,
+    );
 
     final double f0 = frequencyForNote(note);
     final double? onsetMs = measureOnsetMs(trimmed, sampleRate: sampleRate);
@@ -120,7 +156,8 @@ void main() {
       'fixtureId': fixtureId,
       'kind': 'real-clean',
       'audio': wavName,
-      '\$what': 'Real Iowa MIS piano note ($note, mf dynamic), trimmed to ${trimSeconds}s from onset.',
+      '\$what':
+          'Real Iowa MIS piano note ($note, mf dynamic), trimmed to ${trimSeconds}s from onset.',
       'recordingMeta': {
         'source': 'iowa-mis-piano',
         'device': 'Steinway (Iowa Electronic Music Studios recording rig)',
@@ -128,7 +165,8 @@ void main() {
         'micDistanceM': null,
         'sampleRate': sampleRate,
         'license': 'Iowa-without-restriction',
-        '\$licenseNote': 'University of Iowa Electronic Music Studios — "without restriction" per '
+        '\$licenseNote':
+            'University of Iowa Electronic Music Studios — "without restriction" per '
             'the institution\'s own page, verified 2026-08-18 (docs/research/'
             '2026-08-18-w1-audio-golden-fixture-kaynaklari.md). Source AIFF SHA-256 pinned in '
             'tool/fetch_audio_fixtures.sh.',
@@ -136,11 +174,15 @@ void main() {
       },
       'expected': {
         'f0Hz': double.parse(f0.toStringAsFixed(4)),
-        '\$f0Derivation': '12-TET, A4=440Hz, derived from note name "$note" — not hand-typed '
+        '\$f0Derivation':
+            '12-TET, A4=440Hz, derived from note name "$note" — not hand-typed '
             '(see frequencyForNote() in tool/prepare_audio_fixtures.dart).',
         'shouldJudge': true,
-        'onsetMs': onsetMs == null ? null : double.parse(onsetMs.toStringAsFixed(1)),
-        '\$onsetDerivation': 'Measured, not assumed: first 10ms RMS-power window exceeding '
+        'onsetMs': onsetMs == null
+            ? null
+            : double.parse(onsetMs.toStringAsFixed(1)),
+        '\$onsetDerivation':
+            'Measured, not assumed: first 10ms RMS-power window exceeding '
             '-40dBFS in this recording (measureOnsetMs() in this file). Iowa MIS recordings do '
             'NOT start at the note attack — every one of these 6 fixtures has 167-560ms of '
             'leading silence, found by direct measurement, not documented anywhere upstream.',
@@ -153,13 +195,21 @@ void main() {
       // BİLİNMİYOR (bu yüzden bu fixture var), o yüzden burada roadmap'in
       // KENDİ kabul eşiği kullanılıyor, sahte-sıkı bir sayı İCAT edilmiyor.
       'tolerances': {'centsMedian': 10, 'centsP95': 20, 'onsetMs': 30},
-      'labels': {'annotator': 'derived-from-note-name+measured-envelope', 'confidence': 'high'},
+      'labels': {
+        'annotator': 'derived-from-note-name+measured-envelope',
+        'confidence': 'high',
+      },
     };
-    File('fixtures/audio-real/$fixtureId.json')
-        .writeAsStringSync(const JsonEncoder.withIndent(' ').convert(fixture));
-    stdout.writeln('✓ $fixtureId  ($note → ${f0.toStringAsFixed(2)}Hz, ${trimmed.length} örnek)');
+    File(
+      'fixtures/audio-real/$fixtureId.json',
+    ).writeAsStringSync(const JsonEncoder.withIndent(' ').convert(fixture));
+    stdout.writeln(
+      '✓ $fixtureId  ($note → ${f0.toStringAsFixed(2)}Hz, ${trimmed.length} örnek)',
+    );
     prepared++;
   }
 
-  stdout.writeln('→ $prepared/${_notes.length} gerçek fixture hazır: fixtures/audio-real/');
+  stdout.writeln(
+    '→ $prepared/${_notes.length} gerçek fixture hazır: fixtures/audio-real/',
+  );
 }
